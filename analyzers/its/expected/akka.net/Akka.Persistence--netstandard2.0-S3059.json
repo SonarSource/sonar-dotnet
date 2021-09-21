@@ -166,30 +166,6 @@
 {
 "uri":  "sources\akka.net\src\core\Akka.Persistence\Journal\EventAdapters.cs",
 "region":  {
-"startLine":  264,
-"startColumn":  20,
-"endLine":  264,
-"endColumn":  41
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka.Persistence\Journal\EventAdapters.cs",
-"region":  {
-"startLine":  269,
-"startColumn":  9,
-"endLine":  269,
-"endColumn":  15
-}
-}
-]
-},
-{
-"id":  "S3059",
-"message":  "Types should not have members with visibility set higher than the type's visibility",
-"location":  [
-{
-"uri":  "sources\akka.net\src\core\Akka.Persistence\Journal\EventAdapters.cs",
-"region":  {
 "startLine":  125,
 "startColumn":  20,
 "endLine":  125,
@@ -202,33 +178,6 @@
 "startLine":  129,
 "startColumn":  9,
 "endLine":  129,
-"endColumn":  15
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka.Persistence\Journal\EventAdapters.cs",
-"region":  {
-"startLine":  134,
-"startColumn":  9,
-"endLine":  134,
-"endColumn":  15
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka.Persistence\Journal\EventAdapters.cs",
-"region":  {
-"startLine":  139,
-"startColumn":  9,
-"endLine":  139,
-"endColumn":  15
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka.Persistence\Journal\EventAdapters.cs",
-"region":  {
-"startLine":  144,
-"startColumn":  9,
-"endLine":  144,
 "endColumn":  15
 }
 }
@@ -255,33 +204,6 @@
 "endLine":  155,
 "endColumn":  15
 }
-},
-{
-"uri":  "sources\akka.net\src\core\Akka.Persistence\Journal\EventAdapters.cs",
-"region":  {
-"startLine":  160,
-"startColumn":  9,
-"endLine":  160,
-"endColumn":  15
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka.Persistence\Journal\EventAdapters.cs",
-"region":  {
-"startLine":  165,
-"startColumn":  9,
-"endLine":  165,
-"endColumn":  15
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka.Persistence\Journal\EventAdapters.cs",
-"region":  {
-"startLine":  170,
-"startColumn":  9,
-"endLine":  170,
-"endColumn":  15
-}
 }
 ]
 },
@@ -306,31 +228,28 @@
 "endLine":  239,
 "endColumn":  15
 }
+}
+]
 },
+{
+"id":  "S3059",
+"message":  "Types should not have members with visibility set higher than the type's visibility",
+"location":  [
 {
 "uri":  "sources\akka.net\src\core\Akka.Persistence\Journal\EventAdapters.cs",
 "region":  {
-"startLine":  245,
-"startColumn":  9,
-"endLine":  245,
-"endColumn":  15
+"startLine":  264,
+"startColumn":  20,
+"endLine":  264,
+"endColumn":  41
 }
 },
 {
 "uri":  "sources\akka.net\src\core\Akka.Persistence\Journal\EventAdapters.cs",
 "region":  {
-"startLine":  250,
+"startLine":  269,
 "startColumn":  9,
-"endLine":  250,
-"endColumn":  15
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka.Persistence\Journal\EventAdapters.cs",
-"region":  {
-"startLine":  255,
-"startColumn":  9,
-"endLine":  255,
+"endLine":  269,
 "endColumn":  15
 }
 }
@@ -406,33 +325,6 @@
 "startLine":  73,
 "startColumn":  9,
 "endLine":  73,
-"endColumn":  15
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka.Persistence\Persistent.cs",
-"region":  {
-"startLine":  80,
-"startColumn":  9,
-"endLine":  80,
-"endColumn":  15
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka.Persistence\Persistent.cs",
-"region":  {
-"startLine":  82,
-"startColumn":  9,
-"endLine":  82,
-"endColumn":  15
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka.Persistence\Persistent.cs",
-"region":  {
-"startLine":  84,
-"startColumn":  9,
-"endLine":  84,
 "endColumn":  15
 }
 }

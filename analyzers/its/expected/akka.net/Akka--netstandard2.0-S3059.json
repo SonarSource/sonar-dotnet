@@ -100,15 +100,6 @@
 {
 "uri":  "sources\akka.net\src\core\Akka\Actor\ActorRef.cs",
 "region":  {
-"startLine":  588,
-"startColumn":  13,
-"endLine":  588,
-"endColumn":  19
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka\Actor\ActorRef.cs",
-"region":  {
 "startLine":  601,
 "startColumn":  9,
 "endLine":  601,
@@ -228,15 +219,6 @@
 "endLine":  910,
 "endColumn":  19
 }
-},
-{
-"uri":  "sources\akka.net\src\core\Akka\Actor\ActorRef.cs",
-"region":  {
-"startLine":  916,
-"startColumn":  13,
-"endLine":  916,
-"endColumn":  19
-}
 }
 ]
 },
@@ -256,36 +238,9 @@
 {
 "uri":  "sources\akka.net\src\core\Akka\Actor\Cancellation\AlreadyCanceledCancelable.cs",
 "region":  {
-"startLine":  23,
-"startColumn":  9,
-"endLine":  23,
-"endColumn":  15
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka\Actor\Cancellation\AlreadyCanceledCancelable.cs",
-"region":  {
-"startLine":  29,
-"startColumn":  9,
-"endLine":  29,
-"endColumn":  15
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka\Actor\Cancellation\AlreadyCanceledCancelable.cs",
-"region":  {
 "startLine":  34,
 "startColumn":  9,
 "endLine":  34,
-"endColumn":  15
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka\Actor\Cancellation\AlreadyCanceledCancelable.cs",
-"region":  {
-"startLine":  37,
-"startColumn":  9,
-"endLine":  37,
 "endColumn":  15
 }
 }
@@ -363,51 +318,6 @@
 "endLine":  29,
 "endColumn":  15
 }
-},
-{
-"uri":  "sources\akka.net\src\core\Akka\Actor\DeadLetterMailbox.cs",
-"region":  {
-"startLine":  37,
-"startColumn":  9,
-"endLine":  37,
-"endColumn":  15
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka\Actor\DeadLetterMailbox.cs",
-"region":  {
-"startLine":  41,
-"startColumn":  9,
-"endLine":  41,
-"endColumn":  15
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka\Actor\DeadLetterMailbox.cs",
-"region":  {
-"startLine":  47,
-"startColumn":  9,
-"endLine":  47,
-"endColumn":  15
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka\Actor\DeadLetterMailbox.cs",
-"region":  {
-"startLine":  63,
-"startColumn":  9,
-"endLine":  63,
-"endColumn":  15
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka\Actor\DeadLetterMailbox.cs",
-"region":  {
-"startLine":  74,
-"startColumn":  9,
-"endLine":  74,
-"endColumn":  15
-}
 }
 ]
 },
@@ -466,15 +376,6 @@
 "startLine":  303,
 "startColumn":  13,
 "endLine":  303,
-"endColumn":  19
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka\Actor\Futures.cs",
-"region":  {
-"startLine":  308,
-"startColumn":  13,
-"endLine":  308,
 "endColumn":  19
 }
 },
@@ -553,6 +454,54 @@
 {
 "uri":  "sources\akka.net\src\core\Akka\Actor\Inbox.cs",
 "region":  {
+"startLine":  317,
+"startColumn":  20,
+"endLine":  317,
+"endColumn":  36
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka\Actor\Inbox.cs",
+"region":  {
+"startLine":  324,
+"startColumn":  9,
+"endLine":  324,
+"endColumn":  15
+}
+}
+]
+},
+{
+"id":  "S3059",
+"message":  "Types should not have members with visibility set higher than the type's visibility",
+"location":  [
+{
+"uri":  "sources\akka.net\src\core\Akka\Actor\Inbox.cs",
+"region":  {
+"startLine":  43,
+"startColumn":  21,
+"endLine":  43,
+"endColumn":  24
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka\Actor\Inbox.cs",
+"region":  {
+"startLine":  50,
+"startColumn":  9,
+"endLine":  50,
+"endColumn":  15
+}
+}
+]
+},
+{
+"id":  "S3059",
+"message":  "Types should not have members with visibility set higher than the type's visibility",
+"location":  [
+{
+"uri":  "sources\akka.net\src\core\Akka\Actor\Inbox.cs",
+"region":  {
 "startLine":  149,
 "startColumn":  21,
 "endLine":  149,
@@ -586,27 +535,27 @@
 {
 "uri":  "sources\akka.net\src\core\Akka\Actor\Inbox.cs",
 "region":  {
-"startLine":  317,
-"startColumn":  20,
-"endLine":  317,
-"endColumn":  36
+"startLine":  79,
+"startColumn":  21,
+"endLine":  79,
+"endColumn":  27
 }
 },
 {
 "uri":  "sources\akka.net\src\core\Akka\Actor\Inbox.cs",
 "region":  {
-"startLine":  324,
+"startLine":  87,
 "startColumn":  9,
-"endLine":  324,
+"endLine":  87,
 "endColumn":  15
 }
 },
 {
 "uri":  "sources\akka.net\src\core\Akka\Actor\Inbox.cs",
 "region":  {
-"startLine":  331,
+"startLine":  102,
 "startColumn":  9,
-"endLine":  331,
+"endLine":  102,
 "endColumn":  15
 }
 }
@@ -661,175 +610,10 @@
 {
 "uri":  "sources\akka.net\src\core\Akka\Actor\Inbox.cs",
 "region":  {
-"startLine":  43,
-"startColumn":  21,
-"endLine":  43,
-"endColumn":  24
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka\Actor\Inbox.cs",
-"region":  {
-"startLine":  50,
-"startColumn":  9,
-"endLine":  50,
-"endColumn":  15
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka\Actor\Inbox.cs",
-"region":  {
-"startLine":  60,
-"startColumn":  9,
-"endLine":  60,
-"endColumn":  15
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka\Actor\Inbox.cs",
-"region":  {
-"startLine":  64,
-"startColumn":  9,
-"endLine":  64,
-"endColumn":  15
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka\Actor\Inbox.cs",
-"region":  {
-"startLine":  70,
-"startColumn":  9,
-"endLine":  70,
-"endColumn":  15
-}
-}
-]
-},
-{
-"id":  "S3059",
-"message":  "Types should not have members with visibility set higher than the type's visibility",
-"location":  [
-{
-"uri":  "sources\akka.net\src\core\Akka\Actor\Inbox.cs",
-"region":  {
-"startLine":  79,
-"startColumn":  21,
-"endLine":  79,
-"endColumn":  27
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka\Actor\Inbox.cs",
-"region":  {
-"startLine":  87,
-"startColumn":  9,
-"endLine":  87,
-"endColumn":  15
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka\Actor\Inbox.cs",
-"region":  {
-"startLine":  98,
-"startColumn":  9,
-"endLine":  98,
-"endColumn":  15
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka\Actor\Inbox.cs",
-"region":  {
-"startLine":  102,
-"startColumn":  9,
-"endLine":  102,
-"endColumn":  15
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka\Actor\Inbox.cs",
-"region":  {
-"startLine":  106,
-"startColumn":  9,
-"endLine":  106,
-"endColumn":  15
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka\Actor\Inbox.cs",
-"region":  {
-"startLine":  112,
-"startColumn":  9,
-"endLine":  112,
-"endColumn":  15
-}
-}
-]
-},
-{
-"id":  "S3059",
-"message":  "Types should not have members with visibility set higher than the type's visibility",
-"location":  [
-{
-"uri":  "sources\akka.net\src\core\Akka\Actor\Inbox.cs",
-"region":  {
 "startLine":  174,
 "startColumn":  20,
 "endLine":  174,
 "endColumn":  30
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka\Actor\Inbox.cs",
-"region":  {
-"startLine":  184,
-"startColumn":  9,
-"endLine":  184,
-"endColumn":  15
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka\Actor\Inbox.cs",
-"region":  {
-"startLine":  198,
-"startColumn":  9,
-"endLine":  198,
-"endColumn":  15
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka\Actor\Inbox.cs",
-"region":  {
-"startLine":  206,
-"startColumn":  9,
-"endLine":  206,
-"endColumn":  15
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka\Actor\Inbox.cs",
-"region":  {
-"startLine":  216,
-"startColumn":  9,
-"endLine":  216,
-"endColumn":  15
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka\Actor\Inbox.cs",
-"region":  {
-"startLine":  226,
-"startColumn":  9,
-"endLine":  226,
-"endColumn":  15
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka\Actor\Inbox.cs",
-"region":  {
-"startLine":  236,
-"startColumn":  9,
-"endLine":  236,
-"endColumn":  15
 }
 },
 {
@@ -865,24 +649,6 @@
 "startLine":  286,
 "startColumn":  9,
 "endLine":  286,
-"endColumn":  15
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka\Actor\Inbox.cs",
-"region":  {
-"startLine":  307,
-"startColumn":  9,
-"endLine":  307,
-"endColumn":  15
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka\Actor\Inbox.cs",
-"region":  {
-"startLine":  311,
-"startColumn":  9,
-"endLine":  311,
 "endColumn":  15
 }
 }
@@ -1057,33 +823,6 @@
 {
 "uri":  "sources\akka.net\src\core\Akka\Actor\Scheduler\TimerScheduler.cs",
 "region":  {
-"startLine":  53,
-"startColumn":  13,
-"endLine":  53,
-"endColumn":  19
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka\Actor\Scheduler\TimerScheduler.cs",
-"region":  {
-"startLine":  54,
-"startColumn":  13,
-"endLine":  54,
-"endColumn":  19
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka\Actor\Scheduler\TimerScheduler.cs",
-"region":  {
-"startLine":  55,
-"startColumn":  13,
-"endLine":  55,
-"endColumn":  19
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka\Actor\Scheduler\TimerScheduler.cs",
-"region":  {
 "startLine":  57,
 "startColumn":  13,
 "endLine":  57,
@@ -1105,60 +844,6 @@
 "startLine":  83,
 "startColumn":  9,
 "endLine":  83,
-"endColumn":  15
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka\Actor\Scheduler\TimerScheduler.cs",
-"region":  {
-"startLine":  100,
-"startColumn":  9,
-"endLine":  100,
-"endColumn":  15
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka\Actor\Scheduler\TimerScheduler.cs",
-"region":  {
-"startLine":  118,
-"startColumn":  9,
-"endLine":  118,
-"endColumn":  15
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka\Actor\Scheduler\TimerScheduler.cs",
-"region":  {
-"startLine":  135,
-"startColumn":  9,
-"endLine":  135,
-"endColumn":  15
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka\Actor\Scheduler\TimerScheduler.cs",
-"region":  {
-"startLine":  145,
-"startColumn":  9,
-"endLine":  145,
-"endColumn":  15
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka\Actor\Scheduler\TimerScheduler.cs",
-"region":  {
-"startLine":  160,
-"startColumn":  9,
-"endLine":  160,
-"endColumn":  15
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka\Actor\Scheduler\TimerScheduler.cs",
-"region":  {
-"startLine":  169,
-"startColumn":  9,
-"endLine":  169,
 "endColumn":  15
 }
 },
@@ -1192,414 +877,6 @@
 "startLine":  62,
 "startColumn":  9,
 "endLine":  62,
-"endColumn":  15
-}
-}
-]
-},
-{
-"id":  "S3059",
-"message":  "Types should not have members with visibility set higher than the type's visibility",
-"location":  [
-{
-"uri":  "sources\akka.net\src\core\Akka\ActorState.cs",
-"region":  {
-"startLine":  150,
-"startColumn":  20,
-"endLine":  150,
-"endColumn":  37
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka\ActorState.cs",
-"region":  {
-"startLine":  160,
-"startColumn":  9,
-"endLine":  160,
-"endColumn":  15
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka\ActorState.cs",
-"region":  {
-"startLine":  170,
-"startColumn":  9,
-"endLine":  170,
-"endColumn":  15
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka\ActorState.cs",
-"region":  {
-"startLine":  180,
-"startColumn":  9,
-"endLine":  180,
-"endColumn":  15
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka\ActorState.cs",
-"region":  {
-"startLine":  191,
-"startColumn":  9,
-"endLine":  191,
-"endColumn":  15
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka\ActorState.cs",
-"region":  {
-"startLine":  201,
-"startColumn":  9,
-"endLine":  201,
-"endColumn":  15
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka\ActorState.cs",
-"region":  {
-"startLine":  234,
-"startColumn":  9,
-"endLine":  234,
-"endColumn":  15
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka\ActorState.cs",
-"region":  {
-"startLine":  244,
-"startColumn":  9,
-"endLine":  244,
-"endColumn":  15
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka\ActorState.cs",
-"region":  {
-"startLine":  255,
-"startColumn":  9,
-"endLine":  255,
-"endColumn":  15
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka\ActorState.cs",
-"region":  {
-"startLine":  265,
-"startColumn":  9,
-"endLine":  265,
-"endColumn":  15
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka\ActorState.cs",
-"region":  {
-"startLine":  278,
-"startColumn":  9,
-"endLine":  278,
-"endColumn":  15
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka\ActorState.cs",
-"region":  {
-"startLine":  287,
-"startColumn":  9,
-"endLine":  287,
-"endColumn":  15
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka\ActorState.cs",
-"region":  {
-"startLine":  296,
-"startColumn":  9,
-"endLine":  296,
-"endColumn":  15
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka\ActorState.cs",
-"region":  {
-"startLine":  306,
-"startColumn":  9,
-"endLine":  306,
-"endColumn":  15
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka\ActorState.cs",
-"region":  {
-"startLine":  315,
-"startColumn":  9,
-"endLine":  315,
-"endColumn":  15
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka\ActorState.cs",
-"region":  {
-"startLine":  324,
-"startColumn":  9,
-"endLine":  324,
-"endColumn":  15
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka\ActorState.cs",
-"region":  {
-"startLine":  334,
-"startColumn":  9,
-"endLine":  334,
-"endColumn":  15
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka\ActorState.cs",
-"region":  {
-"startLine":  344,
-"startColumn":  9,
-"endLine":  344,
-"endColumn":  15
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka\ActorState.cs",
-"region":  {
-"startLine":  359,
-"startColumn":  9,
-"endLine":  359,
-"endColumn":  15
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka\ActorState.cs",
-"region":  {
-"startLine":  373,
-"startColumn":  9,
-"endLine":  373,
-"endColumn":  15
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka\ActorState.cs",
-"region":  {
-"startLine":  383,
-"startColumn":  9,
-"endLine":  383,
-"endColumn":  15
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka\ActorState.cs",
-"region":  {
-"startLine":  394,
-"startColumn":  9,
-"endLine":  394,
-"endColumn":  15
-}
-}
-]
-},
-{
-"id":  "S3059",
-"message":  "Types should not have members with visibility set higher than the type's visibility",
-"location":  [
-{
-"uri":  "sources\akka.net\src\core\Akka\ActorState.cs",
-"region":  {
-"startLine":  404,
-"startColumn":  20,
-"endLine":  404,
-"endColumn":  34
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka\ActorState.cs",
-"region":  {
-"startLine":  415,
-"startColumn":  9,
-"endLine":  415,
-"endColumn":  15
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka\ActorState.cs",
-"region":  {
-"startLine":  426,
-"startColumn":  9,
-"endLine":  426,
-"endColumn":  15
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka\ActorState.cs",
-"region":  {
-"startLine":  437,
-"startColumn":  9,
-"endLine":  437,
-"endColumn":  15
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka\ActorState.cs",
-"region":  {
-"startLine":  453,
-"startColumn":  9,
-"endLine":  453,
-"endColumn":  15
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka\ActorState.cs",
-"region":  {
-"startLine":  464,
-"startColumn":  9,
-"endLine":  464,
-"endColumn":  15
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka\ActorState.cs",
-"region":  {
-"startLine":  476,
-"startColumn":  9,
-"endLine":  476,
-"endColumn":  15
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka\ActorState.cs",
-"region":  {
-"startLine":  490,
-"startColumn":  9,
-"endLine":  490,
-"endColumn":  15
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka\ActorState.cs",
-"region":  {
-"startLine":  501,
-"startColumn":  9,
-"endLine":  501,
-"endColumn":  15
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka\ActorState.cs",
-"region":  {
-"startLine":  511,
-"startColumn":  9,
-"endLine":  511,
-"endColumn":  15
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka\ActorState.cs",
-"region":  {
-"startLine":  521,
-"startColumn":  9,
-"endLine":  521,
-"endColumn":  15
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka\ActorState.cs",
-"region":  {
-"startLine":  530,
-"startColumn":  9,
-"endLine":  530,
-"endColumn":  15
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka\ActorState.cs",
-"region":  {
-"startLine":  539,
-"startColumn":  9,
-"endLine":  539,
-"endColumn":  15
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka\ActorState.cs",
-"region":  {
-"startLine":  548,
-"startColumn":  9,
-"endLine":  548,
-"endColumn":  15
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka\ActorState.cs",
-"region":  {
-"startLine":  558,
-"startColumn":  9,
-"endLine":  558,
-"endColumn":  15
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka\ActorState.cs",
-"region":  {
-"startLine":  569,
-"startColumn":  9,
-"endLine":  569,
-"endColumn":  15
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka\ActorState.cs",
-"region":  {
-"startLine":  580,
-"startColumn":  9,
-"endLine":  580,
-"endColumn":  15
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka\ActorState.cs",
-"region":  {
-"startLine":  592,
-"startColumn":  9,
-"endLine":  592,
-"endColumn":  15
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka\ActorState.cs",
-"region":  {
-"startLine":  605,
-"startColumn":  9,
-"endLine":  605,
-"endColumn":  15
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka\ActorState.cs",
-"region":  {
-"startLine":  615,
-"startColumn":  9,
-"endLine":  615,
-"endColumn":  15
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka\ActorState.cs",
-"region":  {
-"startLine":  627,
-"startColumn":  9,
-"endLine":  627,
-"endColumn":  15
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka\ActorState.cs",
-"region":  {
-"startLine":  638,
-"startColumn":  9,
-"endLine":  638,
 "endColumn":  15
 }
 }
@@ -2440,15 +1717,6 @@
 {
 "uri":  "sources\akka.net\src\core\Akka\Helios.Concurrency.DedicatedThreadPool.cs",
 "region":  {
-"startLine":  313,
-"startColumn":  9,
-"endLine":  313,
-"endColumn":  15
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka\Helios.Concurrency.DedicatedThreadPool.cs",
-"region":  {
 "startLine":  321,
 "startColumn":  9,
 "endLine":  321,
@@ -2649,42 +1917,6 @@
 "endLine":  115,
 "endColumn":  15
 }
-},
-{
-"uri":  "sources\akka.net\src\core\Akka\IO\Buffers\DirectBufferPool.cs",
-"region":  {
-"startLine":  151,
-"startColumn":  9,
-"endLine":  151,
-"endColumn":  15
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka\IO\Buffers\DirectBufferPool.cs",
-"region":  {
-"startLine":  164,
-"startColumn":  9,
-"endLine":  164,
-"endColumn":  15
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka\IO\Buffers\DirectBufferPool.cs",
-"region":  {
-"startLine":  195,
-"startColumn":  9,
-"endLine":  195,
-"endColumn":  15
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka\IO\Buffers\DirectBufferPool.cs",
-"region":  {
-"startLine":  202,
-"startColumn":  9,
-"endLine":  202,
-"endColumn":  15
-}
 }
 ]
 },
@@ -2716,42 +1948,6 @@
 "startLine":  26,
 "startColumn":  9,
 "endLine":  26,
-"endColumn":  15
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka\IO\Buffers\DisabledBufferPool.cs",
-"region":  {
-"startLine":  33,
-"startColumn":  9,
-"endLine":  33,
-"endColumn":  15
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka\IO\Buffers\DisabledBufferPool.cs",
-"region":  {
-"startLine":  35,
-"startColumn":  9,
-"endLine":  35,
-"endColumn":  15
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka\IO\Buffers\DisabledBufferPool.cs",
-"region":  {
-"startLine":  41,
-"startColumn":  9,
-"endLine":  41,
-"endColumn":  15
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka\IO\Buffers\DisabledBufferPool.cs",
-"region":  {
-"startLine":  46,
-"startColumn":  9,
-"endLine":  46,
 "endColumn":  15
 }
 }
@@ -2797,6 +1993,30 @@
 {
 "uri":  "sources\akka.net\src\core\Akka\IO\SocketEventArgsPool.cs",
 "region":  {
+"startLine":  26,
+"startColumn":  20,
+"endLine":  26,
+"endColumn":  51
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka\IO\SocketEventArgsPool.cs",
+"region":  {
+"startLine":  31,
+"startColumn":  9,
+"endLine":  31,
+"endColumn":  15
+}
+}
+]
+},
+{
+"id":  "S3059",
+"message":  "Types should not have members with visibility set higher than the type's visibility",
+"location":  [
+{
+"uri":  "sources\akka.net\src\core\Akka\IO\SocketEventArgsPool.cs",
+"region":  {
 "startLine":  87,
 "startColumn":  27,
 "endLine":  87,
@@ -2818,48 +2038,6 @@
 "startLine":  120,
 "startColumn":  9,
 "endLine":  120,
-"endColumn":  15
-}
-}
-]
-},
-{
-"id":  "S3059",
-"message":  "Types should not have members with visibility set higher than the type's visibility",
-"location":  [
-{
-"uri":  "sources\akka.net\src\core\Akka\IO\SocketEventArgsPool.cs",
-"region":  {
-"startLine":  26,
-"startColumn":  20,
-"endLine":  26,
-"endColumn":  51
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka\IO\SocketEventArgsPool.cs",
-"region":  {
-"startLine":  31,
-"startColumn":  9,
-"endLine":  31,
-"endColumn":  15
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka\IO\SocketEventArgsPool.cs",
-"region":  {
-"startLine":  41,
-"startColumn":  9,
-"endLine":  41,
-"endColumn":  15
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka\IO\SocketEventArgsPool.cs",
-"region":  {
-"startLine":  50,
-"startColumn":  9,
-"endLine":  50,
 "endColumn":  15
 }
 }
@@ -3772,30 +2950,6 @@
 {
 "uri":  "sources\akka.net\src\core\Akka\Util\ContinuousEnumerator.cs",
 "region":  {
-"startLine":  68,
-"startColumn":  27,
-"endLine":  68,
-"endColumn":  57
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka\Util\ContinuousEnumerator.cs",
-"region":  {
-"startLine":  77,
-"startColumn":  9,
-"endLine":  77,
-"endColumn":  15
-}
-}
-]
-},
-{
-"id":  "S3059",
-"message":  "Types should not have members with visibility set higher than the type's visibility",
-"location":  [
-{
-"uri":  "sources\akka.net\src\core\Akka\Util\ContinuousEnumerator.cs",
-"region":  {
 "startLine":  19,
 "startColumn":  27,
 "endLine":  19,
@@ -3810,40 +2964,28 @@
 "endLine":  27,
 "endColumn":  15
 }
+}
+]
 },
+{
+"id":  "S3059",
+"message":  "Types should not have members with visibility set higher than the type's visibility",
+"location":  [
 {
 "uri":  "sources\akka.net\src\core\Akka\Util\ContinuousEnumerator.cs",
 "region":  {
-"startLine":  33,
-"startColumn":  9,
-"endLine":  33,
-"endColumn":  15
+"startLine":  68,
+"startColumn":  27,
+"endLine":  68,
+"endColumn":  57
 }
 },
 {
 "uri":  "sources\akka.net\src\core\Akka\Util\ContinuousEnumerator.cs",
 "region":  {
-"startLine":  39,
+"startLine":  77,
 "startColumn":  9,
-"endLine":  39,
-"endColumn":  15
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka\Util\ContinuousEnumerator.cs",
-"region":  {
-"startLine":  50,
-"startColumn":  9,
-"endLine":  50,
-"endColumn":  15
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka\Util\ContinuousEnumerator.cs",
-"region":  {
-"startLine":  56,
-"startColumn":  9,
-"endLine":  56,
+"endLine":  77,
 "endColumn":  15
 }
 }
@@ -3916,24 +3058,6 @@
 {
 "uri":  "sources\akka.net\src\core\Akka\Util\Internal\AtomicState.cs",
 "region":  {
-"startLine":  39,
-"startColumn":  9,
-"endLine":  39,
-"endColumn":  15
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka\Util\Internal\AtomicState.cs",
-"region":  {
-"startLine":  47,
-"startColumn":  9,
-"endLine":  47,
-"endColumn":  15
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka\Util\Internal\AtomicState.cs",
-"region":  {
 "startLine":  85,
 "startColumn":  9,
 "endLine":  85,
@@ -3952,27 +3076,9 @@
 {
 "uri":  "sources\akka.net\src\core\Akka\Util\Internal\AtomicState.cs",
 "region":  {
-"startLine":  167,
-"startColumn":  9,
-"endLine":  167,
-"endColumn":  15
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka\Util\Internal\AtomicState.cs",
-"region":  {
 "startLine":  174,
 "startColumn":  9,
 "endLine":  174,
-"endColumn":  15
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka\Util\Internal\AtomicState.cs",
-"region":  {
-"startLine":  195,
-"startColumn":  9,
-"endLine":  195,
 "endColumn":  15
 }
 }
@@ -4234,15 +3340,6 @@
 {
 "uri":  "sources\akka.net\src\core\Akka\Util\Internal\SynchronizationContextManager.cs",
 "region":  {
-"startLine":  47,
-"startColumn":  9,
-"endLine":  47,
-"endColumn":  15
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka\Util\Internal\SynchronizationContextManager.cs",
-"region":  {
 "startLine":  62,
 "startColumn":  9,
 "endLine":  62,
@@ -4434,15 +3531,6 @@
 "endLine":  38,
 "endColumn":  15
 }
-},
-{
-"uri":  "sources\akka.net\src\core\Akka\Util\MatchHandler\CachedMatchCompiler.cs",
-"region":  {
-"startLine":  52,
-"startColumn":  9,
-"endLine":  52,
-"endColumn":  15
-}
 }
 ]
 },
@@ -4483,30 +3571,6 @@
 "startLine":  39,
 "startColumn":  9,
 "endLine":  39,
-"endColumn":  15
-}
-}
-]
-},
-{
-"id":  "S3059",
-"message":  "Types should not have members with visibility set higher than the type's visibility",
-"location":  [
-{
-"uri":  "sources\akka.net\src\core\Akka\Util\MatchHandler\LambdaExpressionCompiler.cs",
-"region":  {
-"startLine":  17,
-"startColumn":  20,
-"endLine":  17,
-"endColumn":  44
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka\Util\MatchHandler\LambdaExpressionCompiler.cs",
-"region":  {
-"startLine":  24,
-"startColumn":  9,
-"endLine":  24,
 "endColumn":  15
 }
 }
@@ -4635,48 +3699,6 @@
 "endLine":  28,
 "endColumn":  15
 }
-},
-{
-"uri":  "sources\akka.net\src\core\Akka\Util\MatchHandler\MatchBuilderSignature.cs",
-"region":  {
-"startLine":  34,
-"startColumn":  9,
-"endLine":  34,
-"endColumn":  15
-}
-}
-]
-},
-{
-"id":  "S3059",
-"message":  "Types should not have members with visibility set higher than the type's visibility",
-"location":  [
-{
-"uri":  "sources\akka.net\src\core\Akka\Util\MatchHandler\MatchExpressionBuilder.cs",
-"region":  {
-"startLine":  20,
-"startColumn":  20,
-"endLine":  20,
-"endColumn":  42
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka\Util\MatchHandler\MatchExpressionBuilder.cs",
-"region":  {
-"startLine":  38,
-"startColumn":  9,
-"endLine":  38,
-"endColumn":  15
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka\Util\MatchHandler\MatchExpressionBuilder.cs",
-"region":  {
-"startLine":  215,
-"startColumn":  9,
-"endLine":  215,
-"endColumn":  15
-}
 }
 ]
 },
@@ -4741,543 +3763,6 @@
 "startLine":  21,
 "startColumn":  9,
 "endLine":  21,
-"endColumn":  15
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka\Util\MatchHandler\PartialActionBuilder.cs",
-"region":  {
-"startLine":  57,
-"startColumn":  9,
-"endLine":  57,
-"endColumn":  15
-}
-}
-]
-},
-{
-"id":  "S3059",
-"message":  "Types should not have members with visibility set higher than the type's visibility",
-"location":  [
-{
-"uri":  "sources\akka.net\src\core\Akka\Util\MatchHandler\PartialHandlerArgumentsCapture.cs",
-"region":  {
-"startLine":  120,
-"startColumn":  27,
-"endLine":  120,
-"endColumn":  57
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka\Util\MatchHandler\PartialHandlerArgumentsCapture.cs",
-"region":  {
-"startLine":  127,
-"startColumn":  9,
-"endLine":  127,
-"endColumn":  15
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka\Util\MatchHandler\PartialHandlerArgumentsCapture.cs",
-"region":  {
-"startLine":  143,
-"startColumn":  9,
-"endLine":  143,
-"endColumn":  15
-}
-}
-]
-},
-{
-"id":  "S3059",
-"message":  "Types should not have members with visibility set higher than the type's visibility",
-"location":  [
-{
-"uri":  "sources\akka.net\src\core\Akka\Util\MatchHandler\PartialHandlerArgumentsCapture.cs",
-"region":  {
-"startLine":  153,
-"startColumn":  27,
-"endLine":  153,
-"endColumn":  57
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka\Util\MatchHandler\PartialHandlerArgumentsCapture.cs",
-"region":  {
-"startLine":  160,
-"startColumn":  9,
-"endLine":  160,
-"endColumn":  15
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka\Util\MatchHandler\PartialHandlerArgumentsCapture.cs",
-"region":  {
-"startLine":  178,
-"startColumn":  9,
-"endLine":  178,
-"endColumn":  15
-}
-}
-]
-},
-{
-"id":  "S3059",
-"message":  "Types should not have members with visibility set higher than the type's visibility",
-"location":  [
-{
-"uri":  "sources\akka.net\src\core\Akka\Util\MatchHandler\PartialHandlerArgumentsCapture.cs",
-"region":  {
-"startLine":  189,
-"startColumn":  27,
-"endLine":  189,
-"endColumn":  57
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka\Util\MatchHandler\PartialHandlerArgumentsCapture.cs",
-"region":  {
-"startLine":  196,
-"startColumn":  9,
-"endLine":  196,
-"endColumn":  15
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka\Util\MatchHandler\PartialHandlerArgumentsCapture.cs",
-"region":  {
-"startLine":  216,
-"startColumn":  9,
-"endLine":  216,
-"endColumn":  15
-}
-}
-]
-},
-{
-"id":  "S3059",
-"message":  "Types should not have members with visibility set higher than the type's visibility",
-"location":  [
-{
-"uri":  "sources\akka.net\src\core\Akka\Util\MatchHandler\PartialHandlerArgumentsCapture.cs",
-"region":  {
-"startLine":  228,
-"startColumn":  27,
-"endLine":  228,
-"endColumn":  57
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka\Util\MatchHandler\PartialHandlerArgumentsCapture.cs",
-"region":  {
-"startLine":  235,
-"startColumn":  9,
-"endLine":  235,
-"endColumn":  15
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka\Util\MatchHandler\PartialHandlerArgumentsCapture.cs",
-"region":  {
-"startLine":  257,
-"startColumn":  9,
-"endLine":  257,
-"endColumn":  15
-}
-}
-]
-},
-{
-"id":  "S3059",
-"message":  "Types should not have members with visibility set higher than the type's visibility",
-"location":  [
-{
-"uri":  "sources\akka.net\src\core\Akka\Util\MatchHandler\PartialHandlerArgumentsCapture.cs",
-"region":  {
-"startLine":  270,
-"startColumn":  27,
-"endLine":  270,
-"endColumn":  57
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka\Util\MatchHandler\PartialHandlerArgumentsCapture.cs",
-"region":  {
-"startLine":  277,
-"startColumn":  9,
-"endLine":  277,
-"endColumn":  15
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka\Util\MatchHandler\PartialHandlerArgumentsCapture.cs",
-"region":  {
-"startLine":  301,
-"startColumn":  9,
-"endLine":  301,
-"endColumn":  15
-}
-}
-]
-},
-{
-"id":  "S3059",
-"message":  "Types should not have members with visibility set higher than the type's visibility",
-"location":  [
-{
-"uri":  "sources\akka.net\src\core\Akka\Util\MatchHandler\PartialHandlerArgumentsCapture.cs",
-"region":  {
-"startLine":  315,
-"startColumn":  27,
-"endLine":  315,
-"endColumn":  57
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka\Util\MatchHandler\PartialHandlerArgumentsCapture.cs",
-"region":  {
-"startLine":  322,
-"startColumn":  9,
-"endLine":  322,
-"endColumn":  15
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka\Util\MatchHandler\PartialHandlerArgumentsCapture.cs",
-"region":  {
-"startLine":  348,
-"startColumn":  9,
-"endLine":  348,
-"endColumn":  15
-}
-}
-]
-},
-{
-"id":  "S3059",
-"message":  "Types should not have members with visibility set higher than the type's visibility",
-"location":  [
-{
-"uri":  "sources\akka.net\src\core\Akka\Util\MatchHandler\PartialHandlerArgumentsCapture.cs",
-"region":  {
-"startLine":  363,
-"startColumn":  27,
-"endLine":  363,
-"endColumn":  57
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka\Util\MatchHandler\PartialHandlerArgumentsCapture.cs",
-"region":  {
-"startLine":  370,
-"startColumn":  9,
-"endLine":  370,
-"endColumn":  15
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka\Util\MatchHandler\PartialHandlerArgumentsCapture.cs",
-"region":  {
-"startLine":  398,
-"startColumn":  9,
-"endLine":  398,
-"endColumn":  15
-}
-}
-]
-},
-{
-"id":  "S3059",
-"message":  "Types should not have members with visibility set higher than the type's visibility",
-"location":  [
-{
-"uri":  "sources\akka.net\src\core\Akka\Util\MatchHandler\PartialHandlerArgumentsCapture.cs",
-"region":  {
-"startLine":  38,
-"startColumn":  27,
-"endLine":  38,
-"endColumn":  57
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka\Util\MatchHandler\PartialHandlerArgumentsCapture.cs",
-"region":  {
-"startLine":  45,
-"startColumn":  9,
-"endLine":  45,
-"endColumn":  15
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka\Util\MatchHandler\PartialHandlerArgumentsCapture.cs",
-"region":  {
-"startLine":  56,
-"startColumn":  9,
-"endLine":  56,
-"endColumn":  15
-}
-}
-]
-},
-{
-"id":  "S3059",
-"message":  "Types should not have members with visibility set higher than the type's visibility",
-"location":  [
-{
-"uri":  "sources\akka.net\src\core\Akka\Util\MatchHandler\PartialHandlerArgumentsCapture.cs",
-"region":  {
-"startLine":  414,
-"startColumn":  27,
-"endLine":  414,
-"endColumn":  57
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka\Util\MatchHandler\PartialHandlerArgumentsCapture.cs",
-"region":  {
-"startLine":  421,
-"startColumn":  9,
-"endLine":  421,
-"endColumn":  15
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka\Util\MatchHandler\PartialHandlerArgumentsCapture.cs",
-"region":  {
-"startLine":  451,
-"startColumn":  9,
-"endLine":  451,
-"endColumn":  15
-}
-}
-]
-},
-{
-"id":  "S3059",
-"message":  "Types should not have members with visibility set higher than the type's visibility",
-"location":  [
-{
-"uri":  "sources\akka.net\src\core\Akka\Util\MatchHandler\PartialHandlerArgumentsCapture.cs",
-"region":  {
-"startLine":  468,
-"startColumn":  27,
-"endLine":  468,
-"endColumn":  57
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka\Util\MatchHandler\PartialHandlerArgumentsCapture.cs",
-"region":  {
-"startLine":  475,
-"startColumn":  9,
-"endLine":  475,
-"endColumn":  15
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka\Util\MatchHandler\PartialHandlerArgumentsCapture.cs",
-"region":  {
-"startLine":  507,
-"startColumn":  9,
-"endLine":  507,
-"endColumn":  15
-}
-}
-]
-},
-{
-"id":  "S3059",
-"message":  "Types should not have members with visibility set higher than the type's visibility",
-"location":  [
-{
-"uri":  "sources\akka.net\src\core\Akka\Util\MatchHandler\PartialHandlerArgumentsCapture.cs",
-"region":  {
-"startLine":  525,
-"startColumn":  27,
-"endLine":  525,
-"endColumn":  57
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka\Util\MatchHandler\PartialHandlerArgumentsCapture.cs",
-"region":  {
-"startLine":  532,
-"startColumn":  9,
-"endLine":  532,
-"endColumn":  15
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka\Util\MatchHandler\PartialHandlerArgumentsCapture.cs",
-"region":  {
-"startLine":  566,
-"startColumn":  9,
-"endLine":  566,
-"endColumn":  15
-}
-}
-]
-},
-{
-"id":  "S3059",
-"message":  "Types should not have members with visibility set higher than the type's visibility",
-"location":  [
-{
-"uri":  "sources\akka.net\src\core\Akka\Util\MatchHandler\PartialHandlerArgumentsCapture.cs",
-"region":  {
-"startLine":  585,
-"startColumn":  27,
-"endLine":  585,
-"endColumn":  57
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka\Util\MatchHandler\PartialHandlerArgumentsCapture.cs",
-"region":  {
-"startLine":  592,
-"startColumn":  9,
-"endLine":  592,
-"endColumn":  15
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka\Util\MatchHandler\PartialHandlerArgumentsCapture.cs",
-"region":  {
-"startLine":  628,
-"startColumn":  9,
-"endLine":  628,
-"endColumn":  15
-}
-}
-]
-},
-{
-"id":  "S3059",
-"message":  "Types should not have members with visibility set higher than the type's visibility",
-"location":  [
-{
-"uri":  "sources\akka.net\src\core\Akka\Util\MatchHandler\PartialHandlerArgumentsCapture.cs",
-"region":  {
-"startLine":  63,
-"startColumn":  27,
-"endLine":  63,
-"endColumn":  57
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka\Util\MatchHandler\PartialHandlerArgumentsCapture.cs",
-"region":  {
-"startLine":  70,
-"startColumn":  9,
-"endLine":  70,
-"endColumn":  15
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka\Util\MatchHandler\PartialHandlerArgumentsCapture.cs",
-"region":  {
-"startLine":  82,
-"startColumn":  9,
-"endLine":  82,
-"endColumn":  15
-}
-}
-]
-},
-{
-"id":  "S3059",
-"message":  "Types should not have members with visibility set higher than the type's visibility",
-"location":  [
-{
-"uri":  "sources\akka.net\src\core\Akka\Util\MatchHandler\PartialHandlerArgumentsCapture.cs",
-"region":  {
-"startLine":  648,
-"startColumn":  27,
-"endLine":  648,
-"endColumn":  57
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka\Util\MatchHandler\PartialHandlerArgumentsCapture.cs",
-"region":  {
-"startLine":  655,
-"startColumn":  9,
-"endLine":  655,
-"endColumn":  15
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka\Util\MatchHandler\PartialHandlerArgumentsCapture.cs",
-"region":  {
-"startLine":  693,
-"startColumn":  9,
-"endLine":  693,
-"endColumn":  15
-}
-}
-]
-},
-{
-"id":  "S3059",
-"message":  "Types should not have members with visibility set higher than the type's visibility",
-"location":  [
-{
-"uri":  "sources\akka.net\src\core\Akka\Util\MatchHandler\PartialHandlerArgumentsCapture.cs",
-"region":  {
-"startLine":  714,
-"startColumn":  27,
-"endLine":  714,
-"endColumn":  57
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka\Util\MatchHandler\PartialHandlerArgumentsCapture.cs",
-"region":  {
-"startLine":  721,
-"startColumn":  9,
-"endLine":  721,
-"endColumn":  15
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka\Util\MatchHandler\PartialHandlerArgumentsCapture.cs",
-"region":  {
-"startLine":  761,
-"startColumn":  9,
-"endLine":  761,
-"endColumn":  15
-}
-}
-]
-},
-{
-"id":  "S3059",
-"message":  "Types should not have members with visibility set higher than the type's visibility",
-"location":  [
-{
-"uri":  "sources\akka.net\src\core\Akka\Util\MatchHandler\PartialHandlerArgumentsCapture.cs",
-"region":  {
-"startLine":  90,
-"startColumn":  27,
-"endLine":  90,
-"endColumn":  57
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka\Util\MatchHandler\PartialHandlerArgumentsCapture.cs",
-"region":  {
-"startLine":  97,
-"startColumn":  9,
-"endLine":  97,
-"endColumn":  15
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka\Util\MatchHandler\PartialHandlerArgumentsCapture.cs",
-"region":  {
-"startLine":  111,
-"startColumn":  9,
-"endLine":  111,
 "endColumn":  15
 }
 }
@@ -5542,15 +4027,6 @@
 "startLine":  47,
 "startColumn":  9,
 "endLine":  47,
-"endColumn":  15
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka\Util\WildcardIndex.cs",
-"region":  {
-"startLine":  62,
-"startColumn":  9,
-"endLine":  62,
 "endColumn":  15
 }
 }

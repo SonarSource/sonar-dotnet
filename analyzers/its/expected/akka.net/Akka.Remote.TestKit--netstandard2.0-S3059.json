@@ -538,15 +538,6 @@
 {
 "uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\Controller.cs",
 "region":  {
-"startLine":  162,
-"startColumn":  13,
-"endLine":  162,
-"endColumn":  19
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\Controller.cs",
-"region":  {
 "startLine":  203,
 "startColumn":  9,
 "endLine":  203,

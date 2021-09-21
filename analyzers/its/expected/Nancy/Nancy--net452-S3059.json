@@ -21,15 +21,6 @@
 "endLine":  14,
 "endColumn":  15
 }
-},
-{
-"uri":  "sources\Nancy\src\Nancy\Diagnostics\DiagnosticsModuleBuilder.cs",
-"region":  {
-"startLine":  28,
-"startColumn":  9,
-"endLine":  28,
-"endColumn":  15
-}
 }
 ]
 },
@@ -54,24 +45,6 @@
 "endLine":  17,
 "endColumn":  15
 }
-},
-{
-"uri":  "sources\Nancy\src\Nancy\Diagnostics\DiagnosticsModuleCatalog.cs",
-"region":  {
-"startLine":  27,
-"startColumn":  9,
-"endLine":  27,
-"endColumn":  15
-}
-},
-{
-"uri":  "sources\Nancy\src\Nancy\Diagnostics\DiagnosticsModuleCatalog.cs",
-"region":  {
-"startLine":  38,
-"startColumn":  9,
-"endLine":  38,
-"endColumn":  15
-}
 }
 ]
 },
@@ -94,15 +67,6 @@
 "startLine":  11,
 "startColumn":  9,
 "endLine":  11,
-"endColumn":  15
-}
-},
-{
-"uri":  "sources\Nancy\src\Nancy\Diagnostics\DiagnosticsSerializerFactory.cs",
-"region":  {
-"startLine":  21,
-"startColumn":  9,
-"endLine":  21,
 "endColumn":  15
 }
 }

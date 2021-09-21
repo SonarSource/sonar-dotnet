@@ -115,15 +115,6 @@
 {
 "uri":  "sources\akka.net\src\contrib\persistence\Akka.Persistence.Query.Sql\AllPersistenceIdsPublisher.cs",
 "region":  {
-"startLine":  26,
-"startColumn":  9,
-"endLine":  26,
-"endColumn":  15
-}
-},
-{
-"uri":  "sources\akka.net\src\contrib\persistence\Akka.Persistence.Query.Sql\AllPersistenceIdsPublisher.cs",
-"region":  {
 "startLine":  28,
 "startColumn":  9,
 "endLine":  28,
@@ -160,15 +151,6 @@
 "startLine":  103,
 "startColumn":  9,
 "endLine":  103,
-"endColumn":  15
-}
-},
-{
-"uri":  "sources\akka.net\src\contrib\persistence\Akka.Persistence.Query.Sql\AllPersistenceIdsPublisher.cs",
-"region":  {
-"startLine":  113,
-"startColumn":  9,
-"endLine":  113,
 "endColumn":  15
 }
 },

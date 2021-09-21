@@ -1398,15 +1398,6 @@
 "endLine":  754,
 "endColumn":  19
 }
-},
-{
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterHeartbeat.cs",
-"region":  {
-"startLine":  758,
-"startColumn":  13,
-"endLine":  758,
-"endColumn":  19
-}
 }
 ]
 },
@@ -1471,15 +1462,6 @@
 {
 "uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterHeartbeat.cs",
 "region":  {
-"startLine":  298,
-"startColumn":  13,
-"endLine":  298,
-"endColumn":  19
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterHeartbeat.cs",
-"region":  {
 "startLine":  327,
 "startColumn":  13,
 "endLine":  327,
@@ -1510,15 +1492,6 @@
 "startLine":  338,
 "startColumn":  13,
 "endLine":  338,
-"endColumn":  19
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterHeartbeat.cs",
-"region":  {
-"startLine":  340,
-"startColumn":  13,
-"endLine":  340,
 "endColumn":  19
 }
 },
@@ -1810,15 +1783,6 @@
 "startLine":  256,
 "startColumn":  9,
 "endLine":  256,
-"endColumn":  15
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterReadView.cs",
-"region":  {
-"startLine":  281,
-"startColumn":  9,
-"endLine":  281,
 "endColumn":  15
 }
 }
@@ -2452,15 +2416,6 @@
 {
 "uri":  "sources\akka.net\src\core\Akka.Cluster\MembershipState.cs",
 "region":  {
-"startLine":  176,
-"startColumn":  9,
-"endLine":  176,
-"endColumn":  15
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka.Cluster\MembershipState.cs",
-"region":  {
 "startLine":  204,
 "startColumn":  9,
 "endLine":  204,
@@ -2986,18 +2941,18 @@
 {
 "uri":  "sources\akka.net\src\core\Akka.Cluster\SBR\DowningStrategy.cs",
 "region":  {
-"startLine":  495,
+"startLine":  100,
 "startColumn":  20,
-"endLine":  495,
-"endColumn":  32
+"endLine":  100,
+"endColumn":  58
 }
 },
 {
 "uri":  "sources\akka.net\src\core\Akka.Cluster\SBR\DowningStrategy.cs",
 "region":  {
-"startLine":  497,
+"startLine":  103,
 "startColumn":  9,
-"endLine":  497,
+"endLine":  103,
 "endColumn":  15
 }
 }
@@ -3024,15 +2979,6 @@
 "endLine":  132,
 "endColumn":  15
 }
-},
-{
-"uri":  "sources\akka.net\src\core\Akka.Cluster\SBR\DowningStrategy.cs",
-"region":  {
-"startLine":  134,
-"startColumn":  9,
-"endLine":  134,
-"endColumn":  15
-}
 }
 ]
 },
@@ -3055,15 +3001,6 @@
 "startLine":  24,
 "startColumn":  9,
 "endLine":  24,
-"endColumn":  15
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka.Cluster\SBR\DowningStrategy.cs",
-"region":  {
-"startLine":  30,
-"startColumn":  9,
-"endLine":  30,
 "endColumn":  15
 }
 }
@@ -3090,15 +3027,6 @@
 "endLine":  35,
 "endColumn":  15
 }
-},
-{
-"uri":  "sources\akka.net\src\core\Akka.Cluster\SBR\DowningStrategy.cs",
-"region":  {
-"startLine":  41,
-"startColumn":  9,
-"endLine":  41,
-"endColumn":  15
-}
 }
 ]
 },
@@ -3123,13 +3051,28 @@
 "endLine":  46,
 "endColumn":  15
 }
+}
+]
+},
+{
+"id":  "S3059",
+"message":  "Types should not have members with visibility set higher than the type's visibility",
+"location":  [
+{
+"uri":  "sources\akka.net\src\core\Akka.Cluster\SBR\DowningStrategy.cs",
+"region":  {
+"startLine":  495,
+"startColumn":  20,
+"endLine":  495,
+"endColumn":  32
+}
 },
 {
 "uri":  "sources\akka.net\src\core\Akka.Cluster\SBR\DowningStrategy.cs",
 "region":  {
-"startLine":  52,
+"startLine":  497,
 "startColumn":  9,
-"endLine":  52,
+"endLine":  497,
 "endColumn":  15
 }
 }
@@ -3156,13 +3099,28 @@
 "endLine":  57,
 "endColumn":  15
 }
+}
+]
+},
+{
+"id":  "S3059",
+"message":  "Types should not have members with visibility set higher than the type's visibility",
+"location":  [
+{
+"uri":  "sources\akka.net\src\core\Akka.Cluster\SBR\DowningStrategy.cs",
+"region":  {
+"startLine":  71,
+"startColumn":  20,
+"endLine":  71,
+"endColumn":  50
+}
 },
 {
 "uri":  "sources\akka.net\src\core\Akka.Cluster\SBR\DowningStrategy.cs",
 "region":  {
-"startLine":  63,
+"startLine":  73,
 "startColumn":  9,
-"endLine":  63,
+"endLine":  73,
 "endColumn":  15
 }
 }
@@ -3271,108 +3229,6 @@
 "startLine":  471,
 "startColumn":  9,
 "endLine":  471,
-"endColumn":  15
-}
-}
-]
-},
-{
-"id":  "S3059",
-"message":  "Types should not have members with visibility set higher than the type's visibility",
-"location":  [
-{
-"uri":  "sources\akka.net\src\core\Akka.Cluster\SBR\DowningStrategy.cs",
-"region":  {
-"startLine":  100,
-"startColumn":  20,
-"endLine":  100,
-"endColumn":  58
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka.Cluster\SBR\DowningStrategy.cs",
-"region":  {
-"startLine":  103,
-"startColumn":  9,
-"endLine":  103,
-"endColumn":  15
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka.Cluster\SBR\DowningStrategy.cs",
-"region":  {
-"startLine":  108,
-"startColumn":  9,
-"endLine":  108,
-"endColumn":  15
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka.Cluster\SBR\DowningStrategy.cs",
-"region":  {
-"startLine":  110,
-"startColumn":  9,
-"endLine":  110,
-"endColumn":  15
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka.Cluster\SBR\DowningStrategy.cs",
-"region":  {
-"startLine":  112,
-"startColumn":  9,
-"endLine":  112,
-"endColumn":  15
-}
-}
-]
-},
-{
-"id":  "S3059",
-"message":  "Types should not have members with visibility set higher than the type's visibility",
-"location":  [
-{
-"uri":  "sources\akka.net\src\core\Akka.Cluster\SBR\DowningStrategy.cs",
-"region":  {
-"startLine":  71,
-"startColumn":  20,
-"endLine":  71,
-"endColumn":  50
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka.Cluster\SBR\DowningStrategy.cs",
-"region":  {
-"startLine":  73,
-"startColumn":  9,
-"endLine":  73,
-"endColumn":  15
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka.Cluster\SBR\DowningStrategy.cs",
-"region":  {
-"startLine":  78,
-"startColumn":  9,
-"endLine":  78,
-"endColumn":  15
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka.Cluster\SBR\DowningStrategy.cs",
-"region":  {
-"startLine":  80,
-"startColumn":  9,
-"endLine":  80,
-"endColumn":  15
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka.Cluster\SBR\DowningStrategy.cs",
-"region":  {
-"startLine":  82,
-"startColumn":  9,
-"endLine":  82,
 "endColumn":  15
 }
 }
@@ -3802,24 +3658,6 @@
 {
 "uri":  "sources\akka.net\src\core\Akka.Cluster\SBR\SplitBrainResolver.cs",
 "region":  {
-"startLine":  122,
-"startColumn":  9,
-"endLine":  122,
-"endColumn":  15
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka.Cluster\SBR\SplitBrainResolver.cs",
-"region":  {
-"startLine":  124,
-"startColumn":  9,
-"endLine":  124,
-"endColumn":  15
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka.Cluster\SBR\SplitBrainResolver.cs",
-"region":  {
 "startLine":  126,
 "startColumn":  9,
 "endLine":  126,
@@ -4141,6 +3979,81 @@
 {
 "uri":  "sources\akka.net\src\core\Akka.Cluster\SplitBrainResolver.cs",
 "region":  {
+"startLine":  120,
+"startColumn":  27,
+"endLine":  120,
+"endColumn":  39
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Cluster\SplitBrainResolver.cs",
+"region":  {
+"startLine":  122,
+"startColumn":  9,
+"endLine":  122,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Cluster\SplitBrainResolver.cs",
+"region":  {
+"startLine":  126,
+"startColumn":  9,
+"endLine":  126,
+"endColumn":  15
+}
+}
+]
+},
+{
+"id":  "S3059",
+"message":  "Types should not have members with visibility set higher than the type's visibility",
+"location":  [
+{
+"uri":  "sources\akka.net\src\core\Akka.Cluster\SplitBrainResolver.cs",
+"region":  {
+"startLine":  156,
+"startColumn":  27,
+"endLine":  156,
+"endColumn":  37
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Cluster\SplitBrainResolver.cs",
+"region":  {
+"startLine":  158,
+"startColumn":  9,
+"endLine":  158,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Cluster\SplitBrainResolver.cs",
+"region":  {
+"startLine":  163,
+"startColumn":  9,
+"endLine":  163,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Cluster\SplitBrainResolver.cs",
+"region":  {
+"startLine":  170,
+"startColumn":  9,
+"endLine":  170,
+"endColumn":  15
+}
+}
+]
+},
+{
+"id":  "S3059",
+"message":  "Types should not have members with visibility set higher than the type's visibility",
+"location":  [
+{
+"uri":  "sources\akka.net\src\core\Akka.Cluster\SplitBrainResolver.cs",
+"region":  {
 "startLine":  53,
 "startColumn":  27,
 "endLine":  53,
@@ -4183,168 +4096,6 @@
 {
 "uri":  "sources\akka.net\src\core\Akka.Cluster\SplitBrainResolver.cs",
 "region":  {
-"startLine":  120,
-"startColumn":  27,
-"endLine":  120,
-"endColumn":  39
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka.Cluster\SplitBrainResolver.cs",
-"region":  {
-"startLine":  122,
-"startColumn":  9,
-"endLine":  122,
-"endColumn":  15
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka.Cluster\SplitBrainResolver.cs",
-"region":  {
-"startLine":  126,
-"startColumn":  9,
-"endLine":  126,
-"endColumn":  15
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka.Cluster\SplitBrainResolver.cs",
-"region":  {
-"startLine":  131,
-"startColumn":  9,
-"endLine":  131,
-"endColumn":  15
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka.Cluster\SplitBrainResolver.cs",
-"region":  {
-"startLine":  133,
-"startColumn":  9,
-"endLine":  133,
-"endColumn":  15
-}
-}
-]
-},
-{
-"id":  "S3059",
-"message":  "Types should not have members with visibility set higher than the type's visibility",
-"location":  [
-{
-"uri":  "sources\akka.net\src\core\Akka.Cluster\SplitBrainResolver.cs",
-"region":  {
-"startLine":  232,
-"startColumn":  27,
-"endLine":  232,
-"endColumn":  44
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka.Cluster\SplitBrainResolver.cs",
-"region":  {
-"startLine":  238,
-"startColumn":  13,
-"endLine":  238,
-"endColumn":  19
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka.Cluster\SplitBrainResolver.cs",
-"region":  {
-"startLine":  244,
-"startColumn":  9,
-"endLine":  244,
-"endColumn":  15
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka.Cluster\SplitBrainResolver.cs",
-"region":  {
-"startLine":  256,
-"startColumn":  9,
-"endLine":  256,
-"endColumn":  15
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka.Cluster\SplitBrainResolver.cs",
-"region":  {
-"startLine":  265,
-"startColumn":  9,
-"endLine":  265,
-"endColumn":  15
-}
-}
-]
-},
-{
-"id":  "S3059",
-"message":  "Types should not have members with visibility set higher than the type's visibility",
-"location":  [
-{
-"uri":  "sources\akka.net\src\core\Akka.Cluster\SplitBrainResolver.cs",
-"region":  {
-"startLine":  156,
-"startColumn":  27,
-"endLine":  156,
-"endColumn":  37
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka.Cluster\SplitBrainResolver.cs",
-"region":  {
-"startLine":  158,
-"startColumn":  9,
-"endLine":  158,
-"endColumn":  15
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka.Cluster\SplitBrainResolver.cs",
-"region":  {
-"startLine":  163,
-"startColumn":  9,
-"endLine":  163,
-"endColumn":  15
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka.Cluster\SplitBrainResolver.cs",
-"region":  {
-"startLine":  169,
-"startColumn":  9,
-"endLine":  169,
-"endColumn":  15
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka.Cluster\SplitBrainResolver.cs",
-"region":  {
-"startLine":  170,
-"startColumn":  9,
-"endLine":  170,
-"endColumn":  15
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka.Cluster\SplitBrainResolver.cs",
-"region":  {
-"startLine":  172,
-"startColumn":  9,
-"endLine":  172,
-"endColumn":  15
-}
-}
-]
-},
-{
-"id":  "S3059",
-"message":  "Types should not have members with visibility set higher than the type's visibility",
-"location":  [
-{
-"uri":  "sources\akka.net\src\core\Akka.Cluster\SplitBrainResolver.cs",
-"region":  {
 "startLine":  91,
 "startColumn":  27,
 "endLine":  91,
@@ -4375,24 +4126,6 @@
 "startLine":  104,
 "startColumn":  9,
 "endLine":  104,
-"endColumn":  15
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka.Cluster\SplitBrainResolver.cs",
-"region":  {
-"startLine":  105,
-"startColumn":  9,
-"endLine":  105,
-"endColumn":  15
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka.Cluster\SplitBrainResolver.cs",
-"region":  {
-"startLine":  107,
-"startColumn":  9,
-"endLine":  107,
 "endColumn":  15
 }
 }
@@ -4446,22 +4179,55 @@
 "endLine":  217,
 "endColumn":  15
 }
+}
+]
+},
+{
+"id":  "S3059",
+"message":  "Types should not have members with visibility set higher than the type's visibility",
+"location":  [
+{
+"uri":  "sources\akka.net\src\core\Akka.Cluster\SplitBrainResolver.cs",
+"region":  {
+"startLine":  232,
+"startColumn":  27,
+"endLine":  232,
+"endColumn":  44
+}
 },
 {
 "uri":  "sources\akka.net\src\core\Akka.Cluster\SplitBrainResolver.cs",
 "region":  {
-"startLine":  218,
+"startLine":  238,
+"startColumn":  13,
+"endLine":  238,
+"endColumn":  19
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Cluster\SplitBrainResolver.cs",
+"region":  {
+"startLine":  244,
 "startColumn":  9,
-"endLine":  218,
+"endLine":  244,
 "endColumn":  15
 }
 },
 {
 "uri":  "sources\akka.net\src\core\Akka.Cluster\SplitBrainResolver.cs",
 "region":  {
-"startLine":  220,
+"startLine":  256,
 "startColumn":  9,
-"endLine":  220,
+"endLine":  256,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Cluster\SplitBrainResolver.cs",
+"region":  {
+"startLine":  265,
+"startColumn":  9,
+"endLine":  265,
 "endColumn":  15
 }
 }

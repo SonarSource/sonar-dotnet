@@ -115,6 +115,102 @@
 {
 "uri":  "sources\akka.net\src\core\Akka.Remote\AckedDelivery.cs",
 "region":  {
+"startLine":  21,
+"startColumn":  27,
+"endLine":  21,
+"endColumn":  32
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Remote\AckedDelivery.cs",
+"region":  {
+"startLine":  27,
+"startColumn":  9,
+"endLine":  27,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Remote\AckedDelivery.cs",
+"region":  {
+"startLine":  35,
+"startColumn":  9,
+"endLine":  35,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Remote\AckedDelivery.cs",
+"region":  {
+"startLine":  42,
+"startColumn":  9,
+"endLine":  42,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Remote\AckedDelivery.cs",
+"region":  {
+"startLine":  52,
+"startColumn":  9,
+"endLine":  52,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Remote\AckedDelivery.cs",
+"region":  {
+"startLine":  198,
+"startColumn":  9,
+"endLine":  198,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Remote\AckedDelivery.cs",
+"region":  {
+"startLine":  210,
+"startColumn":  9,
+"endLine":  210,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Remote\AckedDelivery.cs",
+"region":  {
+"startLine":  238,
+"startColumn":  9,
+"endLine":  238,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Remote\AckedDelivery.cs",
+"region":  {
+"startLine":  245,
+"startColumn":  9,
+"endLine":  245,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Remote\AckedDelivery.cs",
+"region":  {
+"startLine":  256,
+"startColumn":  9,
+"endLine":  256,
+"endColumn":  15
+}
+}
+]
+},
+{
+"id":  "S3059",
+"message":  "Types should not have members with visibility set higher than the type's visibility",
+"location":  [
+{
+"uri":  "sources\akka.net\src\core\Akka.Remote\AckedDelivery.cs",
+"region":  {
 "startLine":  386,
 "startColumn":  27,
 "endLine":  386,
@@ -315,165 +411,6 @@
 "endLine":  635,
 "endColumn":  15
 }
-},
-{
-"uri":  "sources\akka.net\src\core\Akka.Remote\AckedDelivery.cs",
-"region":  {
-"startLine":  640,
-"startColumn":  9,
-"endLine":  640,
-"endColumn":  15
-}
-}
-]
-},
-{
-"id":  "S3059",
-"message":  "Types should not have members with visibility set higher than the type's visibility",
-"location":  [
-{
-"uri":  "sources\akka.net\src\core\Akka.Remote\AckedDelivery.cs",
-"region":  {
-"startLine":  21,
-"startColumn":  27,
-"endLine":  21,
-"endColumn":  32
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka.Remote\AckedDelivery.cs",
-"region":  {
-"startLine":  27,
-"startColumn":  9,
-"endLine":  27,
-"endColumn":  15
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka.Remote\AckedDelivery.cs",
-"region":  {
-"startLine":  35,
-"startColumn":  9,
-"endLine":  35,
-"endColumn":  15
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka.Remote\AckedDelivery.cs",
-"region":  {
-"startLine":  42,
-"startColumn":  9,
-"endLine":  42,
-"endColumn":  15
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka.Remote\AckedDelivery.cs",
-"region":  {
-"startLine":  52,
-"startColumn":  9,
-"endLine":  52,
-"endColumn":  15
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka.Remote\AckedDelivery.cs",
-"region":  {
-"startLine":  65,
-"startColumn":  9,
-"endLine":  65,
-"endColumn":  15
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka.Remote\AckedDelivery.cs",
-"region":  {
-"startLine":  98,
-"startColumn":  9,
-"endLine":  98,
-"endColumn":  15
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka.Remote\AckedDelivery.cs",
-"region":  {
-"startLine":  198,
-"startColumn":  9,
-"endLine":  198,
-"endColumn":  15
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka.Remote\AckedDelivery.cs",
-"region":  {
-"startLine":  201,
-"startColumn":  13,
-"endLine":  201,
-"endColumn":  19
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka.Remote\AckedDelivery.cs",
-"region":  {
-"startLine":  210,
-"startColumn":  9,
-"endLine":  210,
-"endColumn":  15
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka.Remote\AckedDelivery.cs",
-"region":  {
-"startLine":  213,
-"startColumn":  13,
-"endLine":  213,
-"endColumn":  19
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka.Remote\AckedDelivery.cs",
-"region":  {
-"startLine":  223,
-"startColumn":  13,
-"endLine":  223,
-"endColumn":  19
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka.Remote\AckedDelivery.cs",
-"region":  {
-"startLine":  229,
-"startColumn":  13,
-"endLine":  229,
-"endColumn":  19
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka.Remote\AckedDelivery.cs",
-"region":  {
-"startLine":  238,
-"startColumn":  9,
-"endLine":  238,
-"endColumn":  15
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka.Remote\AckedDelivery.cs",
-"region":  {
-"startLine":  245,
-"startColumn":  9,
-"endLine":  245,
-"endColumn":  15
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka.Remote\AckedDelivery.cs",
-"region":  {
-"startLine":  256,
-"startColumn":  9,
-"endLine":  256,
-"endColumn":  15
-}
 }
 ]
 },
@@ -580,6 +517,30 @@
 {
 "uri":  "sources\akka.net\src\core\Akka.Remote\Endpoint.cs",
 "region":  {
+"startLine":  51,
+"startColumn":  20,
+"endLine":  51,
+"endColumn":  44
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Remote\Endpoint.cs",
+"region":  {
+"startLine":  65,
+"startColumn":  9,
+"endLine":  65,
+"endColumn":  15
+}
+}
+]
+},
+{
+"id":  "S3059",
+"message":  "Types should not have members with visibility set higher than the type's visibility",
+"location":  [
+{
+"uri":  "sources\akka.net\src\core\Akka.Remote\Endpoint.cs",
+"region":  {
 "startLine":  1848,
 "startColumn":  20,
 "endLine":  1848,
@@ -634,39 +595,6 @@
 "startLine":  357,
 "startColumn":  9,
 "endLine":  357,
-"endColumn":  15
-}
-}
-]
-},
-{
-"id":  "S3059",
-"message":  "Types should not have members with visibility set higher than the type's visibility",
-"location":  [
-{
-"uri":  "sources\akka.net\src\core\Akka.Remote\Endpoint.cs",
-"region":  {
-"startLine":  51,
-"startColumn":  20,
-"endLine":  51,
-"endColumn":  44
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka.Remote\Endpoint.cs",
-"region":  {
-"startLine":  65,
-"startColumn":  9,
-"endLine":  65,
-"endColumn":  15
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka.Remote\Endpoint.cs",
-"region":  {
-"startLine":  81,
-"startColumn":  9,
-"endLine":  81,
 "endColumn":  15
 }
 }
@@ -1492,15 +1420,6 @@
 {
 "uri":  "sources\akka.net\src\core\Akka.Remote\EndpointManager.cs",
 "region":  {
-"startLine":  196,
-"startColumn":  13,
-"endLine":  196,
-"endColumn":  19
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka.Remote\EndpointManager.cs",
-"region":  {
 "startLine":  209,
 "startColumn":  13,
 "endLine":  209,
@@ -1747,15 +1666,6 @@
 "startLine":  421,
 "startColumn":  13,
 "endLine":  421,
-"endColumn":  19
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka.Remote\EndpointManager.cs",
-"region":  {
-"startLine":  423,
-"startColumn":  13,
-"endLine":  423,
 "endColumn":  19
 }
 },
@@ -2164,30 +2074,6 @@
 {
 "uri":  "sources\akka.net\src\core\Akka.Remote\RemoteMetricsExtension.cs",
 "region":  {
-"startLine":  127,
-"startColumn":  20,
-"endLine":  127,
-"endColumn":  36
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka.Remote\RemoteMetricsExtension.cs",
-"region":  {
-"startLine":  134,
-"startColumn":  9,
-"endLine":  134,
-"endColumn":  15
-}
-}
-]
-},
-{
-"id":  "S3059",
-"message":  "Types should not have members with visibility set higher than the type's visibility",
-"location":  [
-{
-"uri":  "sources\akka.net\src\core\Akka.Remote\RemoteMetricsExtension.cs",
-"region":  {
 "startLine":  21,
 "startColumn":  20,
 "endLine":  21,
@@ -2224,15 +2110,6 @@
 "startLine":  67,
 "startColumn":  9,
 "endLine":  67,
-"endColumn":  15
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka.Remote\RemoteMetricsExtension.cs",
-"region":  {
-"startLine":  79,
-"startColumn":  9,
-"endLine":  79,
 "endColumn":  15
 }
 }
@@ -3253,15 +3130,6 @@
 "startLine":  162,
 "startColumn":  9,
 "endLine":  162,
-"endColumn":  15
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\AkkaPduCodec.cs",
-"region":  {
-"startLine":  167,
-"startColumn":  9,
-"endLine":  167,
 "endColumn":  15
 }
 }
@@ -4761,15 +4629,6 @@
 "endLine":  415,
 "endColumn":  15
 }
-},
-{
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\FailureInjectorTransportAdapter.cs",
-"region":  {
-"startLine":  452,
-"startColumn":  9,
-"endLine":  452,
-"endColumn":  15
-}
 }
 ]
 },
@@ -4945,15 +4804,6 @@
 "startLine":  193,
 "startColumn":  9,
 "endLine":  193,
-"endColumn":  15
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\FailureInjectorTransportAdapter.cs",
-"region":  {
-"startLine":  307,
-"startColumn":  9,
-"endLine":  307,
 "endColumn":  15
 }
 },

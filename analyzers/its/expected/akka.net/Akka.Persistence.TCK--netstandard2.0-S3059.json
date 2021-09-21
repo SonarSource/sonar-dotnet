@@ -273,24 +273,6 @@
 "endLine":  219,
 "endColumn":  15
 }
-},
-{
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Serialization\JournalSerializationSpec.cs",
-"region":  {
-"startLine":  221,
-"startColumn":  13,
-"endLine":  221,
-"endColumn":  19
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Serialization\JournalSerializationSpec.cs",
-"region":  {
-"startLine":  232,
-"startColumn":  13,
-"endLine":  232,
-"endColumn":  19
-}
 }
 ]
 },

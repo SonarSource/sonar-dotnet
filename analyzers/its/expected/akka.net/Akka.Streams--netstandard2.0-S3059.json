@@ -117,51 +117,6 @@
 "endLine":  527,
 "endColumn":  15
 }
-},
-{
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Flow.cs",
-"region":  {
-"startLine":  537,
-"startColumn":  9,
-"endLine":  537,
-"endColumn":  15
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Flow.cs",
-"region":  {
-"startLine":  543,
-"startColumn":  9,
-"endLine":  543,
-"endColumn":  15
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Flow.cs",
-"region":  {
-"startLine":  548,
-"startColumn":  9,
-"endLine":  548,
-"endColumn":  15
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Flow.cs",
-"region":  {
-"startLine":  554,
-"startColumn":  9,
-"endLine":  554,
-"endColumn":  15
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Flow.cs",
-"region":  {
-"startLine":  560,
-"startColumn":  9,
-"endLine":  560,
-"endColumn":  15
-}
 }
 ]
 },
@@ -190,15 +145,6 @@
 {
 "uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Hub.cs",
 "region":  {
-"startLine":  107,
-"startColumn":  13,
-"endLine":  107,
-"endColumn":  19
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Hub.cs",
-"region":  {
 "startLine":  109,
 "startColumn":  13,
 "endLine":  109,
@@ -217,15 +163,6 @@
 {
 "uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Hub.cs",
 "region":  {
-"startLine":  120,
-"startColumn":  13,
-"endLine":  120,
-"endColumn":  19
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Hub.cs",
-"region":  {
 "startLine":  122,
 "startColumn":  13,
 "endLine":  122,
@@ -238,15 +175,6 @@
 "startLine":  127,
 "startColumn":  13,
 "endLine":  127,
-"endColumn":  19
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Hub.cs",
-"region":  {
-"startLine":  132,
-"startColumn":  13,
-"endLine":  132,
 "endColumn":  19
 }
 },
@@ -715,78 +643,6 @@
 {
 "uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Hub.cs",
 "region":  {
-"startLine":  1344,
-"startColumn":  13,
-"endLine":  1344,
-"endColumn":  19
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Hub.cs",
-"region":  {
-"startLine":  1346,
-"startColumn":  13,
-"endLine":  1346,
-"endColumn":  19
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Hub.cs",
-"region":  {
-"startLine":  1348,
-"startColumn":  13,
-"endLine":  1348,
-"endColumn":  19
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Hub.cs",
-"region":  {
-"startLine":  1356,
-"startColumn":  13,
-"endLine":  1356,
-"endColumn":  19
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Hub.cs",
-"region":  {
-"startLine":  1364,
-"startColumn":  13,
-"endLine":  1364,
-"endColumn":  19
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Hub.cs",
-"region":  {
-"startLine":  1366,
-"startColumn":  13,
-"endLine":  1366,
-"endColumn":  19
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Hub.cs",
-"region":  {
-"startLine":  1379,
-"startColumn":  13,
-"endLine":  1379,
-"endColumn":  19
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Hub.cs",
-"region":  {
-"startLine":  1394,
-"startColumn":  13,
-"endLine":  1394,
-"endColumn":  19
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Hub.cs",
-"region":  {
 "startLine":  1409,
 "startColumn":  13,
 "endLine":  1409,
@@ -961,42 +817,6 @@
 "startLine":  1521,
 "startColumn":  17,
 "endLine":  1521,
-"endColumn":  23
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Hub.cs",
-"region":  {
-"startLine":  1529,
-"startColumn":  17,
-"endLine":  1529,
-"endColumn":  23
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Hub.cs",
-"region":  {
-"startLine":  1531,
-"startColumn":  17,
-"endLine":  1531,
-"endColumn":  23
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Hub.cs",
-"region":  {
-"startLine":  1533,
-"startColumn":  17,
-"endLine":  1533,
-"endColumn":  23
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Hub.cs",
-"region":  {
-"startLine":  1535,
-"startColumn":  17,
-"endLine":  1535,
 "endColumn":  23
 }
 },
@@ -1468,15 +1288,6 @@
 {
 "uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Internal\InternalFlowOperations.cs",
 "region":  {
-"startLine":  1328,
-"startColumn":  13,
-"endLine":  1328,
-"endColumn":  19
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Internal\InternalFlowOperations.cs",
-"region":  {
 "startLine":  1397,
 "startColumn":  9,
 "endLine":  1397,
@@ -1495,15 +1306,6 @@
 {
 "uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Internal\InternalFlowOperations.cs",
 "region":  {
-"startLine":  1443,
-"startColumn":  13,
-"endLine":  1443,
-"endColumn":  19
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Internal\InternalFlowOperations.cs",
-"region":  {
 "startLine":  1502,
 "startColumn":  9,
 "endLine":  1502,
@@ -1516,15 +1318,6 @@
 "startLine":  1534,
 "startColumn":  13,
 "endLine":  1534,
-"endColumn":  19
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Internal\InternalFlowOperations.cs",
-"region":  {
-"startLine":  1548,
-"startColumn":  13,
-"endLine":  1548,
 "endColumn":  19
 }
 },
@@ -2201,39 +1994,6 @@
 "message":  "Types should not have members with visibility set higher than the type's visibility",
 "location":  [
 {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\UnfoldFlow.cs",
-"region":  {
-"startLine":  15,
-"startColumn":  29,
-"endLine":  15,
-"endColumn":  54
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\UnfoldFlow.cs",
-"region":  {
-"startLine":  50,
-"startColumn":  9,
-"endLine":  50,
-"endColumn":  15
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\UnfoldFlow.cs",
-"region":  {
-"startLine":  60,
-"startColumn":  9,
-"endLine":  60,
-"endColumn":  15
-}
-}
-]
-},
-{
-"id":  "S3059",
-"message":  "Types should not have members with visibility set higher than the type's visibility",
-"location":  [
-{
 "uri":  "sources\akka.net\src\core\Akka.Streams\Extra\Timed.cs",
 "region":  {
 "startLine":  81,
@@ -2422,45 +2182,9 @@
 {
 "uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\ActorProcessor.cs",
 "region":  {
-"startLine":  58,
-"startColumn":  9,
-"endLine":  58,
-"endColumn":  15
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\ActorProcessor.cs",
-"region":  {
-"startLine":  64,
-"startColumn":  9,
-"endLine":  64,
-"endColumn":  15
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\ActorProcessor.cs",
-"region":  {
 "startLine":  74,
 "startColumn":  9,
 "endLine":  74,
-"endColumn":  15
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\ActorProcessor.cs",
-"region":  {
-"startLine":  84,
-"startColumn":  9,
-"endLine":  84,
-"endColumn":  15
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\ActorProcessor.cs",
-"region":  {
-"startLine":  93,
-"startColumn":  9,
-"endLine":  93,
 "endColumn":  15
 }
 }
@@ -2503,96 +2227,6 @@
 "startLine":  592,
 "startColumn":  9,
 "endLine":  592,
-"endColumn":  15
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\ActorProcessor.cs",
-"region":  {
-"startLine":  628,
-"startColumn":  9,
-"endLine":  628,
-"endColumn":  15
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\ActorProcessor.cs",
-"region":  {
-"startLine":  632,
-"startColumn":  9,
-"endLine":  632,
-"endColumn":  15
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\ActorProcessor.cs",
-"region":  {
-"startLine":  636,
-"startColumn":  9,
-"endLine":  636,
-"endColumn":  15
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\ActorProcessor.cs",
-"region":  {
-"startLine":  660,
-"startColumn":  9,
-"endLine":  660,
-"endColumn":  15
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\ActorProcessor.cs",
-"region":  {
-"startLine":  667,
-"startColumn":  9,
-"endLine":  667,
-"endColumn":  15
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\ActorProcessor.cs",
-"region":  {
-"startLine":  672,
-"startColumn":  9,
-"endLine":  672,
-"endColumn":  15
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\ActorProcessor.cs",
-"region":  {
-"startLine":  678,
-"startColumn":  9,
-"endLine":  678,
-"endColumn":  15
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\ActorProcessor.cs",
-"region":  {
-"startLine":  683,
-"startColumn":  9,
-"endLine":  683,
-"endColumn":  15
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\ActorProcessor.cs",
-"region":  {
-"startLine":  689,
-"startColumn":  9,
-"endLine":  689,
-"endColumn":  15
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\ActorProcessor.cs",
-"region":  {
-"startLine":  694,
-"startColumn":  9,
-"endLine":  694,
 "endColumn":  15
 }
 }
@@ -2902,6 +2536,90 @@
 {
 "uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Buffers.cs",
 "region":  {
+"startLine":  153,
+"startColumn":  29,
+"endLine":  153,
+"endColumn":  44
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Buffers.cs",
+"region":  {
+"startLine":  197,
+"startColumn":  9,
+"endLine":  197,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Buffers.cs",
+"region":  {
+"startLine":  225,
+"startColumn":  9,
+"endLine":  225,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Buffers.cs",
+"region":  {
+"startLine":  232,
+"startColumn":  9,
+"endLine":  232,
+"endColumn":  15
+}
+}
+]
+},
+{
+"id":  "S3059",
+"message":  "Types should not have members with visibility set higher than the type's visibility",
+"location":  [
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Buffers.cs",
+"region":  {
+"startLine":  348,
+"startColumn":  27,
+"endLine":  348,
+"endColumn":  40
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Buffers.cs",
+"region":  {
+"startLine":  362,
+"startColumn":  13,
+"endLine":  362,
+"endColumn":  19
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Buffers.cs",
+"region":  {
+"startLine":  419,
+"startColumn":  13,
+"endLine":  419,
+"endColumn":  19
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Buffers.cs",
+"region":  {
+"startLine":  454,
+"startColumn":  9,
+"endLine":  454,
+"endColumn":  15
+}
+}
+]
+},
+{
+"id":  "S3059",
+"message":  "Types should not have members with visibility set higher than the type's visibility",
+"location":  [
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Buffers.cs",
+"region":  {
 "startLine":  75,
 "startColumn":  27,
 "endLine":  75,
@@ -2942,137 +2660,20 @@
 "message":  "Types should not have members with visibility set higher than the type's visibility",
 "location":  [
 {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Buffers.cs",
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\CompletedPublishers.cs",
 "region":  {
-"startLine":  153,
-"startColumn":  29,
-"endLine":  153,
-"endColumn":  44
+"startLine":  196,
+"startColumn":  27,
+"endLine":  196,
+"endColumn":  48
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Buffers.cs",
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\CompletedPublishers.cs",
 "region":  {
-"startLine":  179,
+"startLine":  201,
 "startColumn":  9,
-"endLine":  179,
-"endColumn":  15
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Buffers.cs",
-"region":  {
-"startLine":  183,
-"startColumn":  9,
-"endLine":  183,
-"endColumn":  15
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Buffers.cs",
-"region":  {
-"startLine":  187,
-"startColumn":  9,
-"endLine":  187,
-"endColumn":  15
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Buffers.cs",
-"region":  {
-"startLine":  191,
-"startColumn":  9,
-"endLine":  191,
-"endColumn":  15
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Buffers.cs",
-"region":  {
-"startLine":  195,
-"startColumn":  9,
-"endLine":  195,
-"endColumn":  15
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Buffers.cs",
-"region":  {
-"startLine":  197,
-"startColumn":  9,
-"endLine":  197,
-"endColumn":  15
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Buffers.cs",
-"region":  {
-"startLine":  212,
-"startColumn":  9,
-"endLine":  212,
-"endColumn":  15
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Buffers.cs",
-"region":  {
-"startLine":  225,
-"startColumn":  9,
-"endLine":  225,
-"endColumn":  15
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Buffers.cs",
-"region":  {
-"startLine":  232,
-"startColumn":  9,
-"endLine":  232,
-"endColumn":  15
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Buffers.cs",
-"region":  {
-"startLine":  238,
-"startColumn":  9,
-"endLine":  238,
-"endColumn":  15
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Buffers.cs",
-"region":  {
-"startLine":  244,
-"startColumn":  9,
-"endLine":  244,
-"endColumn":  15
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Buffers.cs",
-"region":  {
-"startLine":  254,
-"startColumn":  9,
-"endLine":  254,
-"endColumn":  15
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Buffers.cs",
-"region":  {
-"startLine":  264,
-"startColumn":  9,
-"endLine":  264,
-"endColumn":  15
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Buffers.cs",
-"region":  {
-"startLine":  275,
-"startColumn":  9,
-"endLine":  275,
+"endLine":  201,
 "endColumn":  15
 }
 }
@@ -3083,326 +2684,20 @@
 "message":  "Types should not have members with visibility set higher than the type's visibility",
 "location":  [
 {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Buffers.cs",
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\CompletedPublishers.cs",
 "region":  {
-"startLine":  348,
+"startLine":  221,
 "startColumn":  27,
-"endLine":  348,
-"endColumn":  40
+"endLine":  221,
+"endColumn":  47
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Buffers.cs",
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\CompletedPublishers.cs",
 "region":  {
-"startLine":  362,
-"startColumn":  13,
-"endLine":  362,
-"endColumn":  19
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Buffers.cs",
-"region":  {
-"startLine":  368,
-"startColumn":  13,
-"endLine":  368,
-"endColumn":  19
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Buffers.cs",
-"region":  {
-"startLine":  369,
-"startColumn":  13,
-"endLine":  369,
-"endColumn":  19
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Buffers.cs",
-"region":  {
-"startLine":  370,
-"startColumn":  13,
-"endLine":  370,
-"endColumn":  19
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Buffers.cs",
-"region":  {
-"startLine":  371,
-"startColumn":  13,
-"endLine":  371,
-"endColumn":  19
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Buffers.cs",
-"region":  {
-"startLine":  372,
-"startColumn":  13,
-"endLine":  372,
-"endColumn":  19
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Buffers.cs",
-"region":  {
-"startLine":  374,
-"startColumn":  13,
-"endLine":  374,
-"endColumn":  19
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Buffers.cs",
-"region":  {
-"startLine":  391,
-"startColumn":  13,
-"endLine":  391,
-"endColumn":  19
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Buffers.cs",
-"region":  {
-"startLine":  400,
-"startColumn":  13,
-"endLine":  400,
-"endColumn":  19
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Buffers.cs",
-"region":  {
-"startLine":  402,
-"startColumn":  13,
-"endLine":  402,
-"endColumn":  19
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Buffers.cs",
-"region":  {
-"startLine":  408,
-"startColumn":  13,
-"endLine":  408,
-"endColumn":  19
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Buffers.cs",
-"region":  {
-"startLine":  410,
-"startColumn":  13,
-"endLine":  410,
-"endColumn":  19
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Buffers.cs",
-"region":  {
-"startLine":  419,
-"startColumn":  13,
-"endLine":  419,
-"endColumn":  19
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Buffers.cs",
-"region":  {
-"startLine":  424,
-"startColumn":  13,
-"endLine":  424,
-"endColumn":  19
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Buffers.cs",
-"region":  {
-"startLine":  425,
-"startColumn":  13,
-"endLine":  425,
-"endColumn":  19
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Buffers.cs",
-"region":  {
-"startLine":  426,
-"startColumn":  13,
-"endLine":  426,
-"endColumn":  19
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Buffers.cs",
-"region":  {
-"startLine":  427,
-"startColumn":  13,
-"endLine":  427,
-"endColumn":  19
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Buffers.cs",
-"region":  {
-"startLine":  428,
-"startColumn":  13,
-"endLine":  428,
-"endColumn":  19
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Buffers.cs",
-"region":  {
-"startLine":  430,
-"startColumn":  13,
-"endLine":  430,
-"endColumn":  19
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Buffers.cs",
-"region":  {
-"startLine":  432,
-"startColumn":  13,
-"endLine":  432,
-"endColumn":  19
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Buffers.cs",
-"region":  {
-"startLine":  439,
-"startColumn":  13,
-"endLine":  439,
-"endColumn":  19
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Buffers.cs",
-"region":  {
-"startLine":  441,
-"startColumn":  13,
-"endLine":  441,
-"endColumn":  19
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Buffers.cs",
-"region":  {
-"startLine":  443,
-"startColumn":  13,
-"endLine":  443,
-"endColumn":  19
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Buffers.cs",
-"region":  {
-"startLine":  454,
+"startLine":  237,
 "startColumn":  9,
-"endLine":  454,
-"endColumn":  15
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Buffers.cs",
-"region":  {
-"startLine":  463,
-"startColumn":  9,
-"endLine":  463,
-"endColumn":  15
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Buffers.cs",
-"region":  {
-"startLine":  468,
-"startColumn":  9,
-"endLine":  468,
-"endColumn":  15
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Buffers.cs",
-"region":  {
-"startLine":  473,
-"startColumn":  9,
-"endLine":  473,
-"endColumn":  15
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Buffers.cs",
-"region":  {
-"startLine":  478,
-"startColumn":  9,
-"endLine":  478,
-"endColumn":  15
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Buffers.cs",
-"region":  {
-"startLine":  483,
-"startColumn":  9,
-"endLine":  483,
-"endColumn":  15
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Buffers.cs",
-"region":  {
-"startLine":  489,
-"startColumn":  9,
-"endLine":  489,
-"endColumn":  15
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Buffers.cs",
-"region":  {
-"startLine":  495,
-"startColumn":  9,
-"endLine":  495,
-"endColumn":  15
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Buffers.cs",
-"region":  {
-"startLine":  501,
-"startColumn":  9,
-"endLine":  501,
-"endColumn":  15
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Buffers.cs",
-"region":  {
-"startLine":  506,
-"startColumn":  9,
-"endLine":  506,
-"endColumn":  15
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Buffers.cs",
-"region":  {
-"startLine":  511,
-"startColumn":  9,
-"endLine":  511,
-"endColumn":  15
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Buffers.cs",
-"region":  {
-"startLine":  516,
-"startColumn":  9,
-"endLine":  516,
+"endLine":  237,
 "endColumn":  15
 }
 }
@@ -3427,57 +2722,6 @@
 "startLine":  258,
 "startColumn":  9,
 "endLine":  258,
-"endColumn":  15
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\CompletedPublishers.cs",
-"region":  {
-"startLine":  266,
-"startColumn":  9,
-"endLine":  266,
-"endColumn":  15
-}
-}
-]
-},
-{
-"id":  "S3059",
-"message":  "Types should not have members with visibility set higher than the type's visibility",
-"location":  [
-{
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\CompletedPublishers.cs",
-"region":  {
-"startLine":  196,
-"startColumn":  27,
-"endLine":  196,
-"endColumn":  48
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\CompletedPublishers.cs",
-"region":  {
-"startLine":  201,
-"startColumn":  9,
-"endLine":  201,
-"endColumn":  15
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\CompletedPublishers.cs",
-"region":  {
-"startLine":  209,
-"startColumn":  9,
-"endLine":  209,
-"endColumn":  15
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\CompletedPublishers.cs",
-"region":  {
-"startLine":  214,
-"startColumn":  9,
-"endLine":  214,
 "endColumn":  15
 }
 }
@@ -3522,75 +2766,6 @@
 "endLine":  74,
 "endColumn":  15
 }
-},
-{
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\CompletedPublishers.cs",
-"region":  {
-"startLine":  85,
-"startColumn":  9,
-"endLine":  85,
-"endColumn":  15
-}
-}
-]
-},
-{
-"id":  "S3059",
-"message":  "Types should not have members with visibility set higher than the type's visibility",
-"location":  [
-{
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\CompletedPublishers.cs",
-"region":  {
-"startLine":  221,
-"startColumn":  27,
-"endLine":  221,
-"endColumn":  47
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\CompletedPublishers.cs",
-"region":  {
-"startLine":  227,
-"startColumn":  9,
-"endLine":  227,
-"endColumn":  15
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\CompletedPublishers.cs",
-"region":  {
-"startLine":  232,
-"startColumn":  9,
-"endLine":  232,
-"endColumn":  15
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\CompletedPublishers.cs",
-"region":  {
-"startLine":  237,
-"startColumn":  9,
-"endLine":  237,
-"endColumn":  15
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\CompletedPublishers.cs",
-"region":  {
-"startLine":  242,
-"startColumn":  9,
-"endLine":  242,
-"endColumn":  15
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\CompletedPublishers.cs",
-"region":  {
-"startLine":  246,
-"startColumn":  9,
-"endLine":  246,
-"endColumn":  15
-}
 }
 ]
 },
@@ -3619,24 +2794,6 @@
 {
 "uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\CompletedPublishers.cs",
 "region":  {
-"startLine":  125,
-"startColumn":  13,
-"endLine":  125,
-"endColumn":  19
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\CompletedPublishers.cs",
-"region":  {
-"startLine":  145,
-"startColumn":  13,
-"endLine":  145,
-"endColumn":  19
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\CompletedPublishers.cs",
-"region":  {
 "startLine":  155,
 "startColumn":  9,
 "endLine":  155,
@@ -3658,15 +2815,6 @@
 "startLine":  166,
 "startColumn":  9,
 "endLine":  166,
-"endColumn":  15
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\CompletedPublishers.cs",
-"region":  {
-"startLine":  176,
-"startColumn":  9,
-"endLine":  176,
 "endColumn":  15
 }
 }
@@ -3784,6 +2932,30 @@
 {
 "uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\FanoutProcessorImpl.cs",
 "region":  {
+"startLine":  21,
+"startColumn":  20,
+"endLine":  21,
+"endColumn":  33
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\FanoutProcessorImpl.cs",
+"region":  {
+"startLine":  80,
+"startColumn":  9,
+"endLine":  80,
+"endColumn":  15
+}
+}
+]
+},
+{
+"id":  "S3059",
+"message":  "Types should not have members with visibility set higher than the type's visibility",
+"location":  [
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\FanoutProcessorImpl.cs",
+"region":  {
 "startLine":  219,
 "startColumn":  27,
 "endLine":  219,
@@ -3815,129 +2987,6 @@
 "message":  "Types should not have members with visibility set higher than the type's visibility",
 "location":  [
 {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\FanoutProcessorImpl.cs",
-"region":  {
-"startLine":  21,
-"startColumn":  20,
-"endLine":  21,
-"endColumn":  33
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\FanoutProcessorImpl.cs",
-"region":  {
-"startLine":  37,
-"startColumn":  9,
-"endLine":  37,
-"endColumn":  15
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\FanoutProcessorImpl.cs",
-"region":  {
-"startLine":  42,
-"startColumn":  9,
-"endLine":  42,
-"endColumn":  15
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\FanoutProcessorImpl.cs",
-"region":  {
-"startLine":  47,
-"startColumn":  9,
-"endLine":  47,
-"endColumn":  15
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\FanoutProcessorImpl.cs",
-"region":  {
-"startLine":  52,
-"startColumn":  9,
-"endLine":  52,
-"endColumn":  15
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\FanoutProcessorImpl.cs",
-"region":  {
-"startLine":  57,
-"startColumn":  9,
-"endLine":  57,
-"endColumn":  15
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\FanoutProcessorImpl.cs",
-"region":  {
-"startLine":  80,
-"startColumn":  9,
-"endLine":  80,
-"endColumn":  15
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\FanoutProcessorImpl.cs",
-"region":  {
-"startLine":  164,
-"startColumn":  9,
-"endLine":  164,
-"endColumn":  15
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\FanoutProcessorImpl.cs",
-"region":  {
-"startLine":  174,
-"startColumn":  9,
-"endLine":  174,
-"endColumn":  15
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\FanoutProcessorImpl.cs",
-"region":  {
-"startLine":  186,
-"startColumn":  9,
-"endLine":  186,
-"endColumn":  15
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\FanoutProcessorImpl.cs",
-"region":  {
-"startLine":  192,
-"startColumn":  9,
-"endLine":  192,
-"endColumn":  15
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\FanoutProcessorImpl.cs",
-"region":  {
-"startLine":  206,
-"startColumn":  9,
-"endLine":  206,
-"endColumn":  15
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\FanoutProcessorImpl.cs",
-"region":  {
-"startLine":  211,
-"startColumn":  9,
-"endLine":  211,
-"endColumn":  15
-}
-}
-]
-},
-{
-"id":  "S3059",
-"message":  "Types should not have members with visibility set higher than the type's visibility",
-"location":  [
-{
 "uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\EnumeratorInterpreter.cs",
 "region":  {
 "startLine":  192,
@@ -3952,15 +3001,6 @@
 "startLine":  202,
 "startColumn":  9,
 "endLine":  202,
-"endColumn":  15
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\EnumeratorInterpreter.cs",
-"region":  {
-"startLine":  264,
-"startColumn":  9,
-"endLine":  264,
 "endColumn":  15
 }
 }
@@ -4027,45 +3067,9 @@
 {
 "uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\EnumeratorInterpreter.cs",
 "region":  {
-"startLine":  125,
-"startColumn":  13,
-"endLine":  125,
-"endColumn":  19
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\EnumeratorInterpreter.cs",
-"region":  {
-"startLine":  131,
-"startColumn":  13,
-"endLine":  131,
-"endColumn":  19
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\EnumeratorInterpreter.cs",
-"region":  {
-"startLine":  149,
-"startColumn":  13,
-"endLine":  149,
-"endColumn":  19
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\EnumeratorInterpreter.cs",
-"region":  {
 "startLine":  161,
 "startColumn":  13,
 "endLine":  161,
-"endColumn":  19
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\EnumeratorInterpreter.cs",
-"region":  {
-"startLine":  172,
-"startColumn":  13,
-"endLine":  172,
 "endColumn":  19
 }
 }
@@ -4351,6 +3355,30 @@
 {
 "uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\GraphStages.cs",
 "region":  {
+"startLine":  390,
+"startColumn":  27,
+"endLine":  390,
+"endColumn":  42
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\GraphStages.cs",
+"region":  {
+"startLine":  395,
+"startColumn":  9,
+"endLine":  395,
+"endColumn":  15
+}
+}
+]
+},
+{
+"id":  "S3059",
+"message":  "Types should not have members with visibility set higher than the type's visibility",
+"location":  [
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\GraphStages.cs",
+"region":  {
 "startLine":  292,
 "startColumn":  27,
 "endLine":  292,
@@ -4373,39 +3401,6 @@
 "startColumn":  13,
 "endLine":  307,
 "endColumn":  19
-}
-}
-]
-},
-{
-"id":  "S3059",
-"message":  "Types should not have members with visibility set higher than the type's visibility",
-"location":  [
-{
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\GraphStages.cs",
-"region":  {
-"startLine":  390,
-"startColumn":  27,
-"endLine":  390,
-"endColumn":  42
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\GraphStages.cs",
-"region":  {
-"startLine":  395,
-"startColumn":  9,
-"endLine":  395,
-"endColumn":  15
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\GraphStages.cs",
-"region":  {
-"startLine":  403,
-"startColumn":  9,
-"endLine":  403,
-"endColumn":  15
 }
 }
 ]
@@ -4480,6 +3475,39 @@
 "startLine":  1212,
 "startColumn":  9,
 "endLine":  1212,
+"endColumn":  15
+}
+}
+]
+},
+{
+"id":  "S3059",
+"message":  "Types should not have members with visibility set higher than the type's visibility",
+"location":  [
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\StreamOfStreams.cs",
+"region":  {
+"startLine":  181,
+"startColumn":  27,
+"endLine":  181,
+"endColumn":  40
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\StreamOfStreams.cs",
+"region":  {
+"startLine":  195,
+"startColumn":  13,
+"endLine":  195,
+"endColumn":  19
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\StreamOfStreams.cs",
+"region":  {
+"startLine":  325,
+"startColumn":  9,
+"endLine":  325,
 "endColumn":  15
 }
 }
@@ -4597,6 +3625,117 @@
 "startLine":  1160,
 "startColumn":  9,
 "endLine":  1160,
+"endColumn":  15
+}
+}
+]
+},
+{
+"id":  "S3059",
+"message":  "Types should not have members with visibility set higher than the type's visibility",
+"location":  [
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\StreamOfStreams.cs",
+"region":  {
+"startLine":  361,
+"startColumn":  27,
+"endLine":  361,
+"endColumn":  34
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\StreamOfStreams.cs",
+"region":  {
+"startLine":  379,
+"startColumn":  13,
+"endLine":  379,
+"endColumn":  19
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\StreamOfStreams.cs",
+"region":  {
+"startLine":  548,
+"startColumn":  17,
+"endLine":  548,
+"endColumn":  23
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\StreamOfStreams.cs",
+"region":  {
+"startLine":  561,
+"startColumn":  17,
+"endLine":  561,
+"endColumn":  23
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\StreamOfStreams.cs",
+"region":  {
+"startLine":  627,
+"startColumn":  9,
+"endLine":  627,
+"endColumn":  15
+}
+}
+]
+},
+{
+"id":  "S3059",
+"message":  "Types should not have members with visibility set higher than the type's visibility",
+"location":  [
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\StreamOfStreams.cs",
+"region":  {
+"startLine":  708,
+"startColumn":  27,
+"endLine":  708,
+"endColumn":  32
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\StreamOfStreams.cs",
+"region":  {
+"startLine":  723,
+"startColumn":  17,
+"endLine":  723,
+"endColumn":  23
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\StreamOfStreams.cs",
+"region":  {
+"startLine":  730,
+"startColumn":  17,
+"endLine":  730,
+"endColumn":  23
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\StreamOfStreams.cs",
+"region":  {
+"startLine":  732,
+"startColumn":  17,
+"endLine":  732,
+"endColumn":  23
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\StreamOfStreams.cs",
+"region":  {
+"startLine":  845,
+"startColumn":  13,
+"endLine":  845,
+"endColumn":  19
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\StreamOfStreams.cs",
+"region":  {
+"startLine":  945,
+"startColumn":  9,
+"endLine":  945,
 "endColumn":  15
 }
 }
@@ -4736,303 +3875,6 @@
 "startColumn":  13,
 "endLine":  1052,
 "endColumn":  19
-}
-}
-]
-},
-{
-"id":  "S3059",
-"message":  "Types should not have members with visibility set higher than the type's visibility",
-"location":  [
-{
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\StreamOfStreams.cs",
-"region":  {
-"startLine":  181,
-"startColumn":  27,
-"endLine":  181,
-"endColumn":  40
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\StreamOfStreams.cs",
-"region":  {
-"startLine":  195,
-"startColumn":  13,
-"endLine":  195,
-"endColumn":  19
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\StreamOfStreams.cs",
-"region":  {
-"startLine":  251,
-"startColumn":  13,
-"endLine":  251,
-"endColumn":  19
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\StreamOfStreams.cs",
-"region":  {
-"startLine":  269,
-"startColumn":  13,
-"endLine":  269,
-"endColumn":  19
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\StreamOfStreams.cs",
-"region":  {
-"startLine":  280,
-"startColumn":  13,
-"endLine":  280,
-"endColumn":  19
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\StreamOfStreams.cs",
-"region":  {
-"startLine":  295,
-"startColumn":  13,
-"endLine":  295,
-"endColumn":  19
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\StreamOfStreams.cs",
-"region":  {
-"startLine":  307,
-"startColumn":  13,
-"endLine":  307,
-"endColumn":  19
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\StreamOfStreams.cs",
-"region":  {
-"startLine":  325,
-"startColumn":  9,
-"endLine":  325,
-"endColumn":  15
-}
-}
-]
-},
-{
-"id":  "S3059",
-"message":  "Types should not have members with visibility set higher than the type's visibility",
-"location":  [
-{
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\StreamOfStreams.cs",
-"region":  {
-"startLine":  708,
-"startColumn":  27,
-"endLine":  708,
-"endColumn":  32
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\StreamOfStreams.cs",
-"region":  {
-"startLine":  723,
-"startColumn":  17,
-"endLine":  723,
-"endColumn":  23
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\StreamOfStreams.cs",
-"region":  {
-"startLine":  730,
-"startColumn":  17,
-"endLine":  730,
-"endColumn":  23
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\StreamOfStreams.cs",
-"region":  {
-"startLine":  732,
-"startColumn":  17,
-"endLine":  732,
-"endColumn":  23
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\StreamOfStreams.cs",
-"region":  {
-"startLine":  845,
-"startColumn":  13,
-"endLine":  845,
-"endColumn":  19
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\StreamOfStreams.cs",
-"region":  {
-"startLine":  853,
-"startColumn":  13,
-"endLine":  853,
-"endColumn":  19
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\StreamOfStreams.cs",
-"region":  {
-"startLine":  867,
-"startColumn":  13,
-"endLine":  867,
-"endColumn":  19
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\StreamOfStreams.cs",
-"region":  {
-"startLine":  869,
-"startColumn":  13,
-"endLine":  869,
-"endColumn":  19
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\StreamOfStreams.cs",
-"region":  {
-"startLine":  871,
-"startColumn":  13,
-"endLine":  871,
-"endColumn":  19
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\StreamOfStreams.cs",
-"region":  {
-"startLine":  883,
-"startColumn":  13,
-"endLine":  883,
-"endColumn":  19
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\StreamOfStreams.cs",
-"region":  {
-"startLine":  945,
-"startColumn":  9,
-"endLine":  945,
-"endColumn":  15
-}
-}
-]
-},
-{
-"id":  "S3059",
-"message":  "Types should not have members with visibility set higher than the type's visibility",
-"location":  [
-{
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\StreamOfStreams.cs",
-"region":  {
-"startLine":  361,
-"startColumn":  27,
-"endLine":  361,
-"endColumn":  34
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\StreamOfStreams.cs",
-"region":  {
-"startLine":  379,
-"startColumn":  13,
-"endLine":  379,
-"endColumn":  19
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\StreamOfStreams.cs",
-"region":  {
-"startLine":  393,
-"startColumn":  13,
-"endLine":  393,
-"endColumn":  19
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\StreamOfStreams.cs",
-"region":  {
-"startLine":  432,
-"startColumn":  13,
-"endLine":  432,
-"endColumn":  19
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\StreamOfStreams.cs",
-"region":  {
-"startLine":  456,
-"startColumn":  13,
-"endLine":  456,
-"endColumn":  19
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\StreamOfStreams.cs",
-"region":  {
-"startLine":  462,
-"startColumn":  13,
-"endLine":  462,
-"endColumn":  19
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\StreamOfStreams.cs",
-"region":  {
-"startLine":  464,
-"startColumn":  13,
-"endLine":  464,
-"endColumn":  19
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\StreamOfStreams.cs",
-"region":  {
-"startLine":  548,
-"startColumn":  17,
-"endLine":  548,
-"endColumn":  23
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\StreamOfStreams.cs",
-"region":  {
-"startLine":  561,
-"startColumn":  17,
-"endLine":  561,
-"endColumn":  23
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\StreamOfStreams.cs",
-"region":  {
-"startLine":  579,
-"startColumn":  17,
-"endLine":  579,
-"endColumn":  23
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\StreamOfStreams.cs",
-"region":  {
-"startLine":  602,
-"startColumn":  17,
-"endLine":  602,
-"endColumn":  23
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\StreamOfStreams.cs",
-"region":  {
-"startLine":  627,
-"startColumn":  9,
-"endLine":  627,
-"endColumn":  15
 }
 }
 ]
@@ -5317,15 +4159,6 @@
 {
 "uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\IO\InputStreamSinkStage.cs",
 "region":  {
-"startLine":  213,
-"startColumn":  13,
-"endLine":  213,
-"endColumn":  19
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\IO\InputStreamSinkStage.cs",
-"region":  {
 "startLine":  232,
 "startColumn":  9,
 "endLine":  232,
@@ -5524,24 +4357,6 @@
 {
 "uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\IO\OutputStreamSourceStage.cs",
 "region":  {
-"startLine":  180,
-"startColumn":  17,
-"endLine":  180,
-"endColumn":  23
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\IO\OutputStreamSourceStage.cs",
-"region":  {
-"startLine":  208,
-"startColumn":  13,
-"endLine":  208,
-"endColumn":  19
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\IO\OutputStreamSourceStage.cs",
-"region":  {
 "startLine":  263,
 "startColumn":  9,
 "endLine":  263,
@@ -5656,24 +4471,6 @@
 {
 "uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\IO\TcpStages.cs",
 "region":  {
-"startLine":  53,
-"startColumn":  13,
-"endLine":  53,
-"endColumn":  19
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\IO\TcpStages.cs",
-"region":  {
-"startLine":  59,
-"startColumn":  13,
-"endLine":  59,
-"endColumn":  19
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\IO\TcpStages.cs",
-"region":  {
 "startLine":  193,
 "startColumn":  9,
 "endLine":  193,
@@ -5743,15 +4540,6 @@
 {
 "uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\IO\TcpStages.cs",
 "region":  {
-"startLine":  355,
-"startColumn":  13,
-"endLine":  355,
-"endColumn":  19
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\IO\TcpStages.cs",
-"region":  {
 "startLine":  368,
 "startColumn":  13,
 "endLine":  368,
@@ -5764,15 +4552,6 @@
 "startLine":  377,
 "startColumn":  13,
 "endLine":  377,
-"endColumn":  19
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\IO\TcpStages.cs",
-"region":  {
-"startLine":  382,
-"startColumn":  13,
-"endLine":  382,
 "endColumn":  19
 }
 },
@@ -5911,15 +4690,6 @@
 {
 "uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Sinks.cs",
 "region":  {
-"startLine":  1160,
-"startColumn":  13,
-"endLine":  1160,
-"endColumn":  19
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Sinks.cs",
-"region":  {
 "startLine":  1162,
 "startColumn":  13,
 "endLine":  1162,
@@ -5941,15 +4711,6 @@
 "startLine":  1211,
 "startColumn":  13,
 "endLine":  1211,
-"endColumn":  19
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Sinks.cs",
-"region":  {
-"startLine":  1216,
-"startColumn":  13,
-"endLine":  1216,
 "endColumn":  19
 }
 },
@@ -5998,27 +4759,9 @@
 {
 "uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Sources.cs",
 "region":  {
-"startLine":  967,
-"startColumn":  13,
-"endLine":  967,
-"endColumn":  19
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Sources.cs",
-"region":  {
 "startLine":  985,
 "startColumn":  9,
 "endLine":  985,
-"endColumn":  15
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Sources.cs",
-"region":  {
-"startLine":  992,
-"startColumn":  9,
-"endLine":  992,
 "endColumn":  15
 }
 }
@@ -6043,33 +4786,6 @@
 "startLine":  1019,
 "startColumn":  13,
 "endLine":  1019,
-"endColumn":  19
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Sources.cs",
-"region":  {
-"startLine":  1050,
-"startColumn":  13,
-"endLine":  1050,
-"endColumn":  19
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Sources.cs",
-"region":  {
-"startLine":  1051,
-"startColumn":  13,
-"endLine":  1051,
-"endColumn":  19
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Sources.cs",
-"region":  {
-"startLine":  1052,
-"startColumn":  13,
-"endLine":  1052,
 "endColumn":  19
 }
 },
@@ -6127,24 +4843,6 @@
 {
 "uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\StreamLayout.cs",
 "region":  {
-"startLine":  2052,
-"startColumn":  9,
-"endLine":  2052,
-"endColumn":  15
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\StreamLayout.cs",
-"region":  {
-"startLine":  2088,
-"startColumn":  9,
-"endLine":  2088,
-"endColumn":  15
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\StreamLayout.cs",
-"region":  {
 "startLine":  2096,
 "startColumn":  9,
 "endLine":  2096,
@@ -6172,15 +4870,6 @@
 "startLine":  48,
 "startColumn":  9,
 "endLine":  48,
-"endColumn":  15
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\StreamRef\SinkRefImpl.cs",
-"region":  {
-"startLine":  52,
-"startColumn":  9,
-"endLine":  52,
 "endColumn":  15
 }
 }
@@ -6223,15 +4912,6 @@
 "startLine":  40,
 "startColumn":  9,
 "endLine":  40,
-"endColumn":  15
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\StreamRef\SinkRefImpl.cs",
-"region":  {
-"startLine":  42,
-"startColumn":  9,
-"endLine":  42,
 "endColumn":  15
 }
 }
@@ -6280,33 +4960,6 @@
 {
 "uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\StreamRef\SinkRefImpl.cs",
 "region":  {
-"startLine":  175,
-"startColumn":  13,
-"endLine":  175,
-"endColumn":  19
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\StreamRef\SinkRefImpl.cs",
-"region":  {
-"startLine":  210,
-"startColumn":  13,
-"endLine":  210,
-"endColumn":  19
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\StreamRef\SinkRefImpl.cs",
-"region":  {
-"startLine":  227,
-"startColumn":  13,
-"endLine":  227,
-"endColumn":  19
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\StreamRef\SinkRefImpl.cs",
-"region":  {
 "startLine":  283,
 "startColumn":  9,
 "endLine":  283,
@@ -6343,15 +4996,6 @@
 "startLine":  52,
 "startColumn":  9,
 "endLine":  52,
-"endColumn":  15
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\StreamRef\SourceRefImpl.cs",
-"region":  {
-"startLine":  54,
-"startColumn":  9,
-"endLine":  54,
 "endColumn":  15
 }
 }
@@ -6396,15 +5040,6 @@
 "endLine":  42,
 "endColumn":  15
 }
-},
-{
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\StreamRef\SourceRefImpl.cs",
-"region":  {
-"startLine":  43,
-"startColumn":  9,
-"endLine":  43,
-"endColumn":  15
-}
 }
 ]
 },
@@ -6445,24 +5080,6 @@
 "startLine":  116,
 "startColumn":  13,
 "endLine":  116,
-"endColumn":  19
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\StreamRef\SourceRefImpl.cs",
-"region":  {
-"startLine":  146,
-"startColumn":  13,
-"endLine":  146,
-"endColumn":  19
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\StreamRef\SourceRefImpl.cs",
-"region":  {
-"startLine":  152,
-"startColumn":  13,
-"endLine":  152,
 "endColumn":  19
 }
 },
@@ -6741,15 +5358,6 @@
 "endLine":  177,
 "endColumn":  15
 }
-},
-{
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\SubscriberManagement.cs",
-"region":  {
-"startLine":  182,
-"startColumn":  9,
-"endLine":  182,
-"endColumn":  15
-}
 }
 ]
 },
@@ -6796,15 +5404,6 @@
 {
 "uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\SubscriberManagement.cs",
 "region":  {
-"startLine":  82,
-"startColumn":  13,
-"endLine":  82,
-"endColumn":  19
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\SubscriberManagement.cs",
-"region":  {
 "startLine":  91,
 "startColumn":  9,
 "endLine":  91,
@@ -6817,15 +5416,6 @@
 "startLine":  96,
 "startColumn":  13,
 "endLine":  96,
-"endColumn":  19
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\SubscriberManagement.cs",
-"region":  {
-"startLine":  104,
-"startColumn":  13,
-"endLine":  104,
 "endColumn":  19
 }
 },
@@ -6853,15 +5443,6 @@
 "startLine":  121,
 "startColumn":  13,
 "endLine":  121,
-"endColumn":  19
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\SubscriberManagement.cs",
-"region":  {
-"startLine":  131,
-"startColumn":  13,
-"endLine":  131,
 "endColumn":  19
 }
 },
@@ -7172,111 +5753,6 @@
 "message":  "Types should not have members with visibility set higher than the type's visibility",
 "location":  [
 {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Transfer.cs",
-"region":  {
-"startLine":  447,
-"startColumn":  29,
-"endLine":  447,
-"endColumn":  37
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Transfer.cs",
-"region":  {
-"startLine":  464,
-"startColumn":  9,
-"endLine":  464,
-"endColumn":  15
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Transfer.cs",
-"region":  {
-"startLine":  469,
-"startColumn":  9,
-"endLine":  469,
-"endColumn":  15
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Transfer.cs",
-"region":  {
-"startLine":  474,
-"startColumn":  9,
-"endLine":  474,
-"endColumn":  15
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Transfer.cs",
-"region":  {
-"startLine":  481,
-"startColumn":  9,
-"endLine":  481,
-"endColumn":  15
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Transfer.cs",
-"region":  {
-"startLine":  488,
-"startColumn":  9,
-"endLine":  488,
-"endColumn":  15
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Transfer.cs",
-"region":  {
-"startLine":  493,
-"startColumn":  9,
-"endLine":  493,
-"endColumn":  15
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Transfer.cs",
-"region":  {
-"startLine":  499,
-"startColumn":  9,
-"endLine":  499,
-"endColumn":  15
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Transfer.cs",
-"region":  {
-"startLine":  504,
-"startColumn":  9,
-"endLine":  504,
-"endColumn":  15
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Transfer.cs",
-"region":  {
-"startLine":  510,
-"startColumn":  9,
-"endLine":  510,
-"endColumn":  15
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Transfer.cs",
-"region":  {
-"startLine":  515,
-"startColumn":  9,
-"endLine":  515,
-"endColumn":  15
-}
-}
-]
-},
-{
-"id":  "S3059",
-"message":  "Types should not have members with visibility set higher than the type's visibility",
-"location":  [
-{
 "uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\UntypedPublisher.cs",
 "region":  {
 "startLine":  92,
@@ -7307,15 +5783,6 @@
 "startColumn":  29,
 "endLine":  28,
 "endColumn":  45
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\UntypedPublisher.cs",
-"region":  {
-"startLine":  34,
-"startColumn":  9,
-"endLine":  34,
-"endColumn":  15
 }
 },
 {
@@ -7405,42 +5872,6 @@
 {
 "uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\UntypedSubscriber.cs",
 "region":  {
-"startLine":  49,
-"startColumn":  9,
-"endLine":  49,
-"endColumn":  15
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\UntypedSubscriber.cs",
-"region":  {
-"startLine":  55,
-"startColumn":  9,
-"endLine":  55,
-"endColumn":  15
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\UntypedSubscriber.cs",
-"region":  {
-"startLine":  61,
-"startColumn":  9,
-"endLine":  61,
-"endColumn":  15
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\UntypedSubscriber.cs",
-"region":  {
-"startLine":  66,
-"startColumn":  9,
-"endLine":  66,
-"endColumn":  15
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\UntypedSubscriber.cs",
-"region":  {
 "startLine":  72,
 "startColumn":  9,
 "endLine":  72,
@@ -7520,24 +5951,6 @@
 "startColumn":  29,
 "endLine":  33,
 "endColumn":  52
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\UntypedVirtualPublisher.cs",
-"region":  {
-"startLine":  39,
-"startColumn":  9,
-"endLine":  39,
-"endColumn":  15
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\UntypedVirtualPublisher.cs",
-"region":  {
-"startLine":  44,
-"startColumn":  9,
-"endLine":  44,
-"endColumn":  15
 }
 },
 {
@@ -7722,15 +6135,6 @@
 "endLine":  27,
 "endColumn":  15
 }
-},
-{
-"uri":  "sources\akka.net\src\core\Akka.Streams\Serialization\SourceRefSurrogate.cs",
-"region":  {
-"startLine":  29,
-"startColumn":  9,
-"endLine":  29,
-"endColumn":  15
-}
 }
 ]
 },
@@ -7773,15 +6177,6 @@
 "endLine":  47,
 "endColumn":  15
 }
-},
-{
-"uri":  "sources\akka.net\src\core\Akka.Streams\Serialization\SourceRefSurrogate.cs",
-"region":  {
-"startLine":  49,
-"startColumn":  9,
-"endLine":  49,
-"endColumn":  15
-}
 }
 ]
 },
@@ -7819,189 +6214,9 @@
 {
 "uri":  "sources\akka.net\src\core\Akka.Streams\Stage\AbstractStage.cs",
 "region":  {
-"startLine":  68,
-"startColumn":  9,
-"endLine":  68,
-"endColumn":  15
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka.Streams\Stage\AbstractStage.cs",
-"region":  {
 "startLine":  73,
 "startColumn":  9,
 "endLine":  73,
-"endColumn":  15
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka.Streams\Stage\AbstractStage.cs",
-"region":  {
-"startLine":  90,
-"startColumn":  9,
-"endLine":  90,
-"endColumn":  15
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka.Streams\Stage\AbstractStage.cs",
-"region":  {
-"startLine":  97,
-"startColumn":  9,
-"endLine":  97,
-"endColumn":  15
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka.Streams\Stage\AbstractStage.cs",
-"region":  {
-"startLine":  107,
-"startColumn":  9,
-"endLine":  107,
-"endColumn":  15
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka.Streams\Stage\AbstractStage.cs",
-"region":  {
-"startLine":  117,
-"startColumn":  9,
-"endLine":  117,
-"endColumn":  15
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka.Streams\Stage\AbstractStage.cs",
-"region":  {
-"startLine":  128,
-"startColumn":  9,
-"endLine":  128,
-"endColumn":  15
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka.Streams\Stage\AbstractStage.cs",
-"region":  {
-"startLine":  135,
-"startColumn":  9,
-"endLine":  135,
-"endColumn":  15
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka.Streams\Stage\AbstractStage.cs",
-"region":  {
-"startLine":  147,
-"startColumn":  9,
-"endLine":  147,
-"endColumn":  15
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka.Streams\Stage\AbstractStage.cs",
-"region":  {
-"startLine":  156,
-"startColumn":  9,
-"endLine":  156,
-"endColumn":  15
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka.Streams\Stage\AbstractStage.cs",
-"region":  {
-"startLine":  165,
-"startColumn":  9,
-"endLine":  165,
-"endColumn":  15
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka.Streams\Stage\AbstractStage.cs",
-"region":  {
-"startLine":  187,
-"startColumn":  9,
-"endLine":  187,
-"endColumn":  15
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka.Streams\Stage\AbstractStage.cs",
-"region":  {
-"startLine":  194,
-"startColumn":  9,
-"endLine":  194,
-"endColumn":  15
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka.Streams\Stage\AbstractStage.cs",
-"region":  {
-"startLine":  206,
-"startColumn":  9,
-"endLine":  206,
-"endColumn":  15
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka.Streams\Stage\AbstractStage.cs",
-"region":  {
-"startLine":  213,
-"startColumn":  9,
-"endLine":  213,
-"endColumn":  15
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka.Streams\Stage\AbstractStage.cs",
-"region":  {
-"startLine":  223,
-"startColumn":  9,
-"endLine":  223,
-"endColumn":  15
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka.Streams\Stage\AbstractStage.cs",
-"region":  {
-"startLine":  232,
-"startColumn":  9,
-"endLine":  232,
-"endColumn":  15
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka.Streams\Stage\AbstractStage.cs",
-"region":  {
-"startLine":  237,
-"startColumn":  9,
-"endLine":  237,
-"endColumn":  15
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka.Streams\Stage\AbstractStage.cs",
-"region":  {
-"startLine":  242,
-"startColumn":  9,
-"endLine":  242,
-"endColumn":  15
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka.Streams\Stage\AbstractStage.cs",
-"region":  {
-"startLine":  248,
-"startColumn":  9,
-"endLine":  248,
-"endColumn":  15
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka.Streams\Stage\AbstractStage.cs",
-"region":  {
-"startLine":  254,
-"startColumn":  9,
-"endLine":  254,
 "endColumn":  15
 }
 }
@@ -8383,24 +6598,6 @@
 "startLine":  47,
 "startColumn":  9,
 "endLine":  47,
-"endColumn":  15
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka.Streams\Util\IteratorAdapter.cs",
-"region":  {
-"startLine":  56,
-"startColumn":  9,
-"endLine":  56,
-"endColumn":  15
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka.Streams\Util\IteratorAdapter.cs",
-"region":  {
-"startLine":  81,
-"startColumn":  9,
-"endLine":  81,
 "endColumn":  15
 }
 }

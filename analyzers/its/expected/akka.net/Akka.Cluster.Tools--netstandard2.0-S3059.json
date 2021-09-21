@@ -223,6 +223,39 @@
 {
 "uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\PublishSubscribe\Internal\TopicMessages.cs",
 "region":  {
+"startLine":  254,
+"startColumn":  27,
+"endLine":  254,
+"endColumn":  32
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\PublishSubscribe\Internal\TopicMessages.cs",
+"region":  {
+"startLine":  259,
+"startColumn":  9,
+"endLine":  259,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\PublishSubscribe\Internal\TopicMessages.cs",
+"region":  {
+"startLine":  265,
+"startColumn":  9,
+"endLine":  265,
+"endColumn":  15
+}
+}
+]
+},
+{
+"id":  "S3059",
+"message":  "Types should not have members with visibility set higher than the type's visibility",
+"location":  [
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\PublishSubscribe\Internal\TopicMessages.cs",
+"region":  {
 "startLine":  325,
 "startColumn":  27,
 "endLine":  325,
@@ -364,48 +397,6 @@
 {
 "uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\PublishSubscribe\Internal\TopicMessages.cs",
 "region":  {
-"startLine":  254,
-"startColumn":  27,
-"endLine":  254,
-"endColumn":  32
-}
-},
-{
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\PublishSubscribe\Internal\TopicMessages.cs",
-"region":  {
-"startLine":  259,
-"startColumn":  9,
-"endLine":  259,
-"endColumn":  15
-}
-},
-{
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\PublishSubscribe\Internal\TopicMessages.cs",
-"region":  {
-"startLine":  265,
-"startColumn":  9,
-"endLine":  265,
-"endColumn":  15
-}
-},
-{
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\PublishSubscribe\Internal\TopicMessages.cs",
-"region":  {
-"startLine":  271,
-"startColumn":  9,
-"endLine":  271,
-"endColumn":  15
-}
-}
-]
-},
-{
-"id":  "S3059",
-"message":  "Types should not have members with visibility set higher than the type's visibility",
-"location":  [
-{
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\PublishSubscribe\Internal\TopicMessages.cs",
-"region":  {
 "startLine":  346,
 "startColumn":  27,
 "endLine":  346,
@@ -531,15 +522,6 @@
 "endLine":  162,
 "endColumn":  15
 }
-},
-{
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\PublishSubscribe\Internal\TopicMessages.cs",
-"region":  {
-"startLine":  165,
-"startColumn":  9,
-"endLine":  165,
-"endColumn":  15
-}
 }
 ]
 },
@@ -598,15 +580,6 @@
 "startLine":  92,
 "startColumn":  9,
 "endLine":  92,
-"endColumn":  15
-}
-},
-{
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\PublishSubscribe\Internal\TopicMessages.cs",
-"region":  {
-"startLine":  100,
-"startColumn":  9,
-"endLine":  100,
 "endColumn":  15
 }
 }
@@ -1535,15 +1508,6 @@
 "startColumn":  27,
 "endLine":  15,
 "endColumn":  44
-}
-},
-{
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\Singleton\MemberAgeOrdering.cs",
-"region":  {
-"startLine":  25,
-"startColumn":  9,
-"endLine":  25,
-"endColumn":  15
 }
 },
 {

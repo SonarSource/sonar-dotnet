@@ -112,54 +112,6 @@
 {
 "uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Internal\Internal.cs",
 "region":  {
-"startLine":  159,
-"startColumn":  27,
-"endLine":  159,
-"endColumn":  35
-}
-},
-{
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Internal\Internal.cs",
-"region":  {
-"startLine":  168,
-"startColumn":  9,
-"endLine":  168,
-"endColumn":  15
-}
-}
-]
-},
-{
-"id":  "S3059",
-"message":  "Types should not have members with visibility set higher than the type's visibility",
-"location":  [
-{
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Internal\Internal.cs",
-"region":  {
-"startLine":  182,
-"startColumn":  27,
-"endLine":  182,
-"endColumn":  36
-}
-},
-{
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Internal\Internal.cs",
-"region":  {
-"startLine":  195,
-"startColumn":  9,
-"endLine":  195,
-"endColumn":  15
-}
-}
-]
-},
-{
-"id":  "S3059",
-"message":  "Types should not have members with visibility set higher than the type's visibility",
-"location":  [
-{
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Internal\Internal.cs",
-"region":  {
 "startLine":  351,
 "startColumn":  27,
 "endLine":  351,
@@ -208,36 +160,18 @@
 {
 "uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Internal\Internal.cs",
 "region":  {
-"startLine":  261,
+"startLine":  636,
 "startColumn":  27,
-"endLine":  261,
-"endColumn":  37
+"endLine":  636,
+"endColumn":  38
 }
 },
 {
 "uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Internal\Internal.cs",
 "region":  {
-"startLine":  266,
+"startLine":  638,
 "startColumn":  9,
-"endLine":  266,
-"endColumn":  15
-}
-},
-{
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Internal\Internal.cs",
-"region":  {
-"startLine":  272,
-"startColumn":  9,
-"endLine":  272,
-"endColumn":  15
-}
-},
-{
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Internal\Internal.cs",
-"region":  {
-"startLine":  278,
-"startColumn":  9,
-"endLine":  278,
+"endLine":  638,
 "endColumn":  15
 }
 }
@@ -268,27 +202,84 @@
 {
 "uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Internal\Internal.cs",
 "region":  {
-"startLine":  228,
-"startColumn":  9,
-"endLine":  228,
-"endColumn":  15
-}
-},
-{
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Internal\Internal.cs",
-"region":  {
 "startLine":  235,
 "startColumn":  9,
 "endLine":  235,
 "endColumn":  15
 }
+}
+]
+},
+{
+"id":  "S3059",
+"message":  "Types should not have members with visibility set higher than the type's visibility",
+"location":  [
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Internal\Internal.cs",
+"region":  {
+"startLine":  261,
+"startColumn":  27,
+"endLine":  261,
+"endColumn":  37
+}
 },
 {
 "uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Internal\Internal.cs",
 "region":  {
-"startLine":  242,
+"startLine":  266,
 "startColumn":  9,
-"endLine":  242,
+"endLine":  266,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Internal\Internal.cs",
+"region":  {
+"startLine":  272,
+"startColumn":  9,
+"endLine":  272,
+"endColumn":  15
+}
+}
+]
+},
+{
+"id":  "S3059",
+"message":  "Types should not have members with visibility set higher than the type's visibility",
+"location":  [
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Internal\Internal.cs",
+"region":  {
+"startLine":  102,
+"startColumn":  27,
+"endLine":  102,
+"endColumn":  32
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Internal\Internal.cs",
+"region":  {
+"startLine":  107,
+"startColumn":  9,
+"endLine":  107,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Internal\Internal.cs",
+"region":  {
+"startLine":  111,
+"startColumn":  9,
+"endLine":  111,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Internal\Internal.cs",
+"region":  {
+"startLine":  123,
+"startColumn":  9,
+"endLine":  123,
 "endColumn":  15
 }
 }
@@ -333,126 +324,6 @@
 "endLine":  316,
 "endColumn":  15
 }
-},
-{
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Internal\Internal.cs",
-"region":  {
-"startLine":  323,
-"startColumn":  9,
-"endLine":  323,
-"endColumn":  15
-}
-}
-]
-},
-{
-"id":  "S3059",
-"message":  "Types should not have members with visibility set higher than the type's visibility",
-"location":  [
-{
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Internal\Internal.cs",
-"region":  {
-"startLine":  636,
-"startColumn":  27,
-"endLine":  636,
-"endColumn":  38
-}
-},
-{
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Internal\Internal.cs",
-"region":  {
-"startLine":  638,
-"startColumn":  9,
-"endLine":  638,
-"endColumn":  15
-}
-},
-{
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Internal\Internal.cs",
-"region":  {
-"startLine":  643,
-"startColumn":  9,
-"endLine":  643,
-"endColumn":  15
-}
-},
-{
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Internal\Internal.cs",
-"region":  {
-"startLine":  646,
-"startColumn":  9,
-"endLine":  646,
-"endColumn":  15
-}
-},
-{
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Internal\Internal.cs",
-"region":  {
-"startLine":  648,
-"startColumn":  9,
-"endLine":  648,
-"endColumn":  15
-}
-}
-]
-},
-{
-"id":  "S3059",
-"message":  "Types should not have members with visibility set higher than the type's visibility",
-"location":  [
-{
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Internal\Internal.cs",
-"region":  {
-"startLine":  102,
-"startColumn":  27,
-"endLine":  102,
-"endColumn":  32
-}
-},
-{
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Internal\Internal.cs",
-"region":  {
-"startLine":  107,
-"startColumn":  9,
-"endLine":  107,
-"endColumn":  15
-}
-},
-{
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Internal\Internal.cs",
-"region":  {
-"startLine":  111,
-"startColumn":  9,
-"endLine":  111,
-"endColumn":  15
-}
-},
-{
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Internal\Internal.cs",
-"region":  {
-"startLine":  115,
-"startColumn":  9,
-"endLine":  115,
-"endColumn":  15
-}
-},
-{
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Internal\Internal.cs",
-"region":  {
-"startLine":  123,
-"startColumn":  9,
-"endLine":  123,
-"endColumn":  15
-}
-},
-{
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Internal\Internal.cs",
-"region":  {
-"startLine":  131,
-"startColumn":  9,
-"endLine":  131,
-"endColumn":  15
-}
 }
 ]
 },
@@ -490,15 +361,6 @@
 {
 "uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Internal\Internal.cs",
 "region":  {
-"startLine":  764,
-"startColumn":  9,
-"endLine":  764,
-"endColumn":  15
-}
-},
-{
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Internal\Internal.cs",
-"region":  {
 "startLine":  768,
 "startColumn":  9,
 "endLine":  768,
@@ -511,15 +373,6 @@
 "startLine":  777,
 "startColumn":  9,
 "endLine":  777,
-"endColumn":  15
-}
-},
-{
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Internal\Internal.cs",
-"region":  {
-"startLine":  786,
-"startColumn":  9,
-"endLine":  786,
 "endColumn":  15
 }
 }
@@ -568,15 +421,6 @@
 {
 "uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Internal\Internal.cs",
 "region":  {
-"startLine":  681,
-"startColumn":  9,
-"endLine":  681,
-"endColumn":  15
-}
-},
-{
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Internal\Internal.cs",
-"region":  {
 "startLine":  685,
 "startColumn":  9,
 "endLine":  685,
@@ -589,15 +433,6 @@
 "startLine":  695,
 "startColumn":  9,
 "endLine":  695,
-"endColumn":  15
-}
-},
-{
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Internal\Internal.cs",
-"region":  {
-"startLine":  705,
-"startColumn":  9,
-"endLine":  705,
 "endColumn":  15
 }
 }
@@ -640,33 +475,6 @@
 "startLine":  86,
 "startColumn":  9,
 "endLine":  86,
-"endColumn":  15
-}
-},
-{
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\PruningState.cs",
-"region":  {
-"startLine":  87,
-"startColumn":  9,
-"endLine":  87,
-"endColumn":  15
-}
-},
-{
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\PruningState.cs",
-"region":  {
-"startLine":  89,
-"startColumn":  9,
-"endLine":  89,
-"endColumn":  15
-}
-},
-{
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\PruningState.cs",
-"region":  {
-"startLine":  99,
-"startColumn":  9,
-"endLine":  99,
 "endColumn":  15
 }
 }
@@ -718,33 +526,6 @@
 "startLine":  23,
 "startColumn":  9,
 "endLine":  23,
-"endColumn":  15
-}
-},
-{
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\PruningState.cs",
-"region":  {
-"startLine":  29,
-"startColumn":  9,
-"endLine":  29,
-"endColumn":  15
-}
-},
-{
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\PruningState.cs",
-"region":  {
-"startLine":  35,
-"startColumn":  9,
-"endLine":  35,
-"endColumn":  15
-}
-},
-{
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\PruningState.cs",
-"region":  {
-"startLine":  45,
-"startColumn":  9,
-"endLine":  45,
 "endColumn":  15
 }
 }
@@ -845,15 +626,6 @@
 "startColumn":  13,
 "endLine":  1487,
 "endColumn":  19
-}
-},
-{
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Replicator.cs",
-"region":  {
-"startLine":  1532,
-"startColumn":  9,
-"endLine":  1532,
-"endColumn":  15
 }
 }
 ]

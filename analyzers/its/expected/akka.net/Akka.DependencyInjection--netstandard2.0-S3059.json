@@ -21,33 +21,6 @@
 "endLine":  97,
 "endColumn":  15
 }
-},
-{
-"uri":  "sources\akka.net\src\contrib\dependencyinjection\Akka.DependencyInjection\ServiceProvider.cs",
-"region":  {
-"startLine":  104,
-"startColumn":  9,
-"endLine":  104,
-"endColumn":  15
-}
-},
-{
-"uri":  "sources\akka.net\src\contrib\dependencyinjection\Akka.DependencyInjection\ServiceProvider.cs",
-"region":  {
-"startLine":  109,
-"startColumn":  9,
-"endLine":  109,
-"endColumn":  15
-}
-},
-{
-"uri":  "sources\akka.net\src\contrib\dependencyinjection\Akka.DependencyInjection\ServiceProvider.cs",
-"region":  {
-"startLine":  111,
-"startColumn":  9,
-"endLine":  111,
-"endColumn":  15
-}
 }
 ]
 }
