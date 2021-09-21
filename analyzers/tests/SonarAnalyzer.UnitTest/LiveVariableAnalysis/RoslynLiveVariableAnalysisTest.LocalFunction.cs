@@ -189,8 +189,8 @@ int LocalFunction()
     Func<int> f = () => nested;
 }";
             var context = new Context(code);
-            context.ValidateEntry(/*FIXME: Remove*/new Captured("nested"));
-            context.Validate("LocalFunction();",/*FIXME: Remove*/ new Captured("nested"));
+            context.ValidateEntry();
+            context.Validate("LocalFunction();");
         }
 
         [TestMethod]

@@ -207,20 +207,19 @@ namespace SonarAnalyzer.CFG.LiveVariableAnalysis
 
             private void ProcessFlowAnonymousFunction(ControlFlowGraph cfg, IFlowAnonymousFunctionOperationWrapper anonymousFunction)
             {
-                var anonymousFunctionCfg = cfg.GetAnonymousFunctionControlFlowGraph(anonymousFunction);
-                foreach (var operation in anonymousFunctionCfg.Blocks.SelectMany(x => x.OperationsAndBranchValue).SelectMany(x => x.DescendantsAndSelf()))
+                if (!anonymousFunction.Symbol.IsStatic) // Performance: No need to descent into static
                 {
-                    switch (operation.Kind)
+                    var anonymousFunctionCfg = cfg.GetAnonymousFunctionControlFlowGraph(anonymousFunction);
+                    foreach (var operation in anonymousFunctionCfg.Blocks.SelectMany(x => x.OperationsAndBranchValue).SelectMany(x => x.DescendantsAndSelf()))
                     {
-                        case OperationKindEx.LocalReference:
-                            Captured.Add(ILocalReferenceOperationWrapper.FromOperation(operation).Local);
-                            break;
-                        case OperationKindEx.ParameterReference:
-                            Captured.Add(IParameterReferenceOperationWrapper.FromOperation(operation).Parameter);
-                            break;
-                        case OperationKindEx.FlowAnonymousFunction:
+                        if (ParameterOrLocalSymbol(operation) is { } symbol)
+                        {
+                            Captured.Add(symbol);
+                        }
+                        else if (operation.Kind == OperationKindEx.FlowAnonymousFunction)
+                        {
                             ProcessFlowAnonymousFunction(anonymousFunctionCfg, IFlowAnonymousFunctionOperationWrapper.FromOperation(operation));
-                            break;
+                        }
                     }
                 }
             }

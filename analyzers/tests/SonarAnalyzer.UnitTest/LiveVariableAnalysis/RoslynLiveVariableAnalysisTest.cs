@@ -128,13 +128,25 @@ if (boolParameter)
 Method(field, variable, intParameter);";
             capturingStatement.Should().Contain("field + variable + intParameter");
             var context = new Context(code);
-            var expectedCaptured = capturingStatement.Contains("xxx")
-                ? new Captured("variable", "intParameter", "xxx")
-                : new Captured("variable", "intParameter");
+            var expectedCaptured = new Captured("variable", "intParameter");
             context.ValidateEntry(expectedCaptured, new LiveIn("boolParameter"), new LiveOut("boolParameter"));
             context.Validate("boolParameter", expectedCaptured, new LiveIn("boolParameter"));
             context.Validate("Method(field, variable, intParameter);", expectedCaptured);
             context.ValidateExit(expectedCaptured);
+        }
+
+        [TestMethod]
+        public void Captured_StaticLambda_NotLiveIn_NotLiveOut()
+        {
+            var code = @"
+Capturing(static x => x + 2);
+if (boolParameter)
+    return;
+Method(0);";
+            var context = new Context(code);
+            context.ValidateEntry(new LiveIn("boolParameter"), new LiveOut("boolParameter"));
+            context.Validate("boolParameter", new LiveIn("boolParameter"));
+            context.Validate("Method(0);");
         }
 
         [TestMethod]
