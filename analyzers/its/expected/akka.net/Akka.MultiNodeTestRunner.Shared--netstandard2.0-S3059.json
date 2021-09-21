@@ -1,0 +1,130 @@
+{
+"issues":  [
+{
+"id":  "S3059",
+"message":  "Types should not have members with visibility set higher than the type's visibility",
+"location":  [
+{
+"uri":  "sources\akka.net\src\core\Akka.MultiNodeTestRunner.Shared\Extensions\DateTimeExtension.cs",
+"region":  {
+"startLine":  17,
+"startColumn":  27,
+"endLine":  17,
+"endColumn":  44
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.MultiNodeTestRunner.Shared\Extensions\DateTimeExtension.cs",
+"region":  {
+"startLine":  19,
+"startColumn":  9,
+"endLine":  19,
+"endColumn":  15
+}
+}
+]
+},
+{
+"id":  "S3059",
+"message":  "Types should not have members with visibility set higher than the type's visibility",
+"location":  [
+{
+"uri":  "sources\akka.net\src\core\Akka.MultiNodeTestRunner.Shared\Extensions\TypeExtension.cs",
+"region":  {
+"startLine":  17,
+"startColumn":  27,
+"endLine":  17,
+"endColumn":  40
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.MultiNodeTestRunner.Shared\Extensions\TypeExtension.cs",
+"region":  {
+"startLine":  19,
+"startColumn":  9,
+"endLine":  19,
+"endColumn":  15
+}
+}
+]
+},
+{
+"id":  "S3059",
+"message":  "Types should not have members with visibility set higher than the type's visibility",
+"location":  [
+{
+"uri":  "sources\akka.net\src\core\Akka.MultiNodeTestRunner.Shared\TrxReporter\Models\XmlHelper.cs",
+"region":  {
+"startLine":  14,
+"startColumn":  27,
+"endLine":  14,
+"endColumn":  36
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.MultiNodeTestRunner.Shared\TrxReporter\Models\XmlHelper.cs",
+"region":  {
+"startLine":  16,
+"startColumn":  9,
+"endLine":  16,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.MultiNodeTestRunner.Shared\TrxReporter\Models\XmlHelper.cs",
+"region":  {
+"startLine":  43,
+"startColumn":  9,
+"endLine":  43,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.MultiNodeTestRunner.Shared\TrxReporter\Models\XmlHelper.cs",
+"region":  {
+"startLine":  45,
+"startColumn":  9,
+"endLine":  45,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.MultiNodeTestRunner.Shared\TrxReporter\Models\XmlHelper.cs",
+"region":  {
+"startLine":  47,
+"startColumn":  9,
+"endLine":  47,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.MultiNodeTestRunner.Shared\TrxReporter\Models\XmlHelper.cs",
+"region":  {
+"startLine":  49,
+"startColumn":  9,
+"endLine":  49,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.MultiNodeTestRunner.Shared\TrxReporter\Models\XmlHelper.cs",
+"region":  {
+"startLine":  63,
+"startColumn":  9,
+"endLine":  63,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.MultiNodeTestRunner.Shared\TrxReporter\Models\XmlHelper.cs",
+"region":  {
+"startLine":  65,
+"startColumn":  9,
+"endLine":  65,
+"endColumn":  15
+}
+}
+]
+}
+]
+}

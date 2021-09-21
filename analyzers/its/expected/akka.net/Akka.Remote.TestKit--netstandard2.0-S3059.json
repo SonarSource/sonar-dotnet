@@ -1,0 +1,748 @@
+{
+"issues":  [
+{
+"id":  "S3059",
+"message":  "Types should not have members with visibility set higher than the type's visibility",
+"location":  [
+{
+"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\BarrierCoordinator.cs",
+"region":  {
+"startLine":  31,
+"startColumn":  20,
+"endLine":  31,
+"endColumn":  38
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\BarrierCoordinator.cs",
+"region":  {
+"startLine":  35,
+"startColumn":  9,
+"endLine":  35,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\BarrierCoordinator.cs",
+"region":  {
+"startLine":  41,
+"startColumn":  9,
+"endLine":  41,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\BarrierCoordinator.cs",
+"region":  {
+"startLine":  43,
+"startColumn":  13,
+"endLine":  43,
+"endColumn":  19
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\BarrierCoordinator.cs",
+"region":  {
+"startLine":  48,
+"startColumn":  13,
+"endLine":  48,
+"endColumn":  19
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\BarrierCoordinator.cs",
+"region":  {
+"startLine":  51,
+"startColumn":  9,
+"endLine":  51,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\BarrierCoordinator.cs",
+"region":  {
+"startLine":  53,
+"startColumn":  13,
+"endLine":  53,
+"endColumn":  19
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\BarrierCoordinator.cs",
+"region":  {
+"startLine":  61,
+"startColumn":  13,
+"endLine":  61,
+"endColumn":  19
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\BarrierCoordinator.cs",
+"region":  {
+"startLine":  69,
+"startColumn":  13,
+"endLine":  69,
+"endColumn":  19
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\BarrierCoordinator.cs",
+"region":  {
+"startLine":  71,
+"startColumn":  13,
+"endLine":  71,
+"endColumn":  19
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\BarrierCoordinator.cs",
+"region":  {
+"startLine":  73,
+"startColumn":  13,
+"endLine":  73,
+"endColumn":  19
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\BarrierCoordinator.cs",
+"region":  {
+"startLine":  75,
+"startColumn":  13,
+"endLine":  75,
+"endColumn":  19
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\BarrierCoordinator.cs",
+"region":  {
+"startLine":  77,
+"startColumn":  13,
+"endLine":  77,
+"endColumn":  19
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\BarrierCoordinator.cs",
+"region":  {
+"startLine":  138,
+"startColumn":  9,
+"endLine":  138,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\BarrierCoordinator.cs",
+"region":  {
+"startLine":  140,
+"startColumn":  13,
+"endLine":  140,
+"endColumn":  19
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\BarrierCoordinator.cs",
+"region":  {
+"startLine":  146,
+"startColumn":  13,
+"endLine":  146,
+"endColumn":  19
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\BarrierCoordinator.cs",
+"region":  {
+"startLine":  190,
+"startColumn":  9,
+"endLine":  190,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\BarrierCoordinator.cs",
+"region":  {
+"startLine":  192,
+"startColumn":  13,
+"endLine":  192,
+"endColumn":  19
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\BarrierCoordinator.cs",
+"region":  {
+"startLine":  198,
+"startColumn":  13,
+"endLine":  198,
+"endColumn":  19
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\BarrierCoordinator.cs",
+"region":  {
+"startLine":  242,
+"startColumn":  9,
+"endLine":  242,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\BarrierCoordinator.cs",
+"region":  {
+"startLine":  244,
+"startColumn":  13,
+"endLine":  244,
+"endColumn":  19
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\BarrierCoordinator.cs",
+"region":  {
+"startLine":  251,
+"startColumn":  13,
+"endLine":  251,
+"endColumn":  19
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\BarrierCoordinator.cs",
+"region":  {
+"startLine":  253,
+"startColumn":  13,
+"endLine":  253,
+"endColumn":  19
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\BarrierCoordinator.cs",
+"region":  {
+"startLine":  300,
+"startColumn":  9,
+"endLine":  300,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\BarrierCoordinator.cs",
+"region":  {
+"startLine":  302,
+"startColumn":  13,
+"endLine":  302,
+"endColumn":  19
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\BarrierCoordinator.cs",
+"region":  {
+"startLine":  310,
+"startColumn":  13,
+"endLine":  310,
+"endColumn":  19
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\BarrierCoordinator.cs",
+"region":  {
+"startLine":  312,
+"startColumn":  13,
+"endLine":  312,
+"endColumn":  19
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\BarrierCoordinator.cs",
+"region":  {
+"startLine":  314,
+"startColumn":  13,
+"endLine":  314,
+"endColumn":  19
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\BarrierCoordinator.cs",
+"region":  {
+"startLine":  364,
+"startColumn":  9,
+"endLine":  364,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\BarrierCoordinator.cs",
+"region":  {
+"startLine":  366,
+"startColumn":  13,
+"endLine":  366,
+"endColumn":  19
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\BarrierCoordinator.cs",
+"region":  {
+"startLine":  372,
+"startColumn":  13,
+"endLine":  372,
+"endColumn":  19
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\BarrierCoordinator.cs",
+"region":  {
+"startLine":  416,
+"startColumn":  9,
+"endLine":  416,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\BarrierCoordinator.cs",
+"region":  {
+"startLine":  418,
+"startColumn":  13,
+"endLine":  418,
+"endColumn":  19
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\BarrierCoordinator.cs",
+"region":  {
+"startLine":  425,
+"startColumn":  13,
+"endLine":  425,
+"endColumn":  19
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\BarrierCoordinator.cs",
+"region":  {
+"startLine":  427,
+"startColumn":  13,
+"endLine":  427,
+"endColumn":  19
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\BarrierCoordinator.cs",
+"region":  {
+"startLine":  480,
+"startColumn":  9,
+"endLine":  480,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\BarrierCoordinator.cs",
+"region":  {
+"startLine":  626,
+"startColumn":  9,
+"endLine":  626,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\BarrierCoordinator.cs",
+"region":  {
+"startLine":  649,
+"startColumn":  9,
+"endLine":  649,
+"endColumn":  15
+}
+}
+]
+},
+{
+"id":  "S3059",
+"message":  "Types should not have members with visibility set higher than the type's visibility",
+"location":  [
+{
+"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\Conductor.cs",
+"region":  {
+"startLine":  241,
+"startColumn":  20,
+"endLine":  241,
+"endColumn":  36
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\Conductor.cs",
+"region":  {
+"startLine":  253,
+"startColumn":  9,
+"endLine":  253,
+"endColumn":  15
+}
+}
+]
+},
+{
+"id":  "S3059",
+"message":  "Types should not have members with visibility set higher than the type's visibility",
+"location":  [
+{
+"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\Conductor.cs",
+"region":  {
+"startLine":  334,
+"startColumn":  20,
+"endLine":  334,
+"endColumn":  29
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\Conductor.cs",
+"region":  {
+"startLine":  341,
+"startColumn":  9,
+"endLine":  341,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\Conductor.cs",
+"region":  {
+"startLine":  347,
+"startColumn":  9,
+"endLine":  347,
+"endColumn":  15
+}
+}
+]
+},
+{
+"id":  "S3059",
+"message":  "Types should not have members with visibility set higher than the type's visibility",
+"location":  [
+{
+"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\Controller.cs",
+"region":  {
+"startLine":  26,
+"startColumn":  20,
+"endLine":  26,
+"endColumn":  30
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\Controller.cs",
+"region":  {
+"startLine":  28,
+"startColumn":  9,
+"endLine":  28,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\Controller.cs",
+"region":  {
+"startLine":  32,
+"startColumn":  13,
+"endLine":  32,
+"endColumn":  19
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\Controller.cs",
+"region":  {
+"startLine":  37,
+"startColumn":  13,
+"endLine":  37,
+"endColumn":  19
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\Controller.cs",
+"region":  {
+"startLine":  93,
+"startColumn":  9,
+"endLine":  93,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\Controller.cs",
+"region":  {
+"startLine":  99,
+"startColumn":  13,
+"endLine":  99,
+"endColumn":  19
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\Controller.cs",
+"region":  {
+"startLine":  111,
+"startColumn":  9,
+"endLine":  111,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\Controller.cs",
+"region":  {
+"startLine":  116,
+"startColumn":  13,
+"endLine":  116,
+"endColumn":  19
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\Controller.cs",
+"region":  {
+"startLine":  125,
+"startColumn":  9,
+"endLine":  125,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\Controller.cs",
+"region":  {
+"startLine":  130,
+"startColumn":  13,
+"endLine":  130,
+"endColumn":  19
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\Controller.cs",
+"region":  {
+"startLine":  149,
+"startColumn":  13,
+"endLine":  149,
+"endColumn":  19
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\Controller.cs",
+"region":  {
+"startLine":  156,
+"startColumn":  13,
+"endLine":  156,
+"endColumn":  19
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\Controller.cs",
+"region":  {
+"startLine":  158,
+"startColumn":  13,
+"endLine":  158,
+"endColumn":  19
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\Controller.cs",
+"region":  {
+"startLine":  160,
+"startColumn":  13,
+"endLine":  160,
+"endColumn":  19
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\Controller.cs",
+"region":  {
+"startLine":  203,
+"startColumn":  9,
+"endLine":  203,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\Controller.cs",
+"region":  {
+"startLine":  205,
+"startColumn":  13,
+"endLine":  205,
+"endColumn":  19
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\Controller.cs",
+"region":  {
+"startLine":  210,
+"startColumn":  13,
+"endLine":  210,
+"endColumn":  19
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\Controller.cs",
+"region":  {
+"startLine":  229,
+"startColumn":  9,
+"endLine":  229,
+"endColumn":  15
+}
+}
+]
+},
+{
+"id":  "S3059",
+"message":  "Types should not have members with visibility set higher than the type's visibility",
+"location":  [
+{
+"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\Internals\TestConductorConfigFactory.cs",
+"region":  {
+"startLine":  21,
+"startColumn":  27,
+"endLine":  21,
+"endColumn":  53
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\Internals\TestConductorConfigFactory.cs",
+"region":  {
+"startLine":  27,
+"startColumn":  9,
+"endLine":  27,
+"endColumn":  15
+}
+}
+]
+},
+{
+"id":  "S3059",
+"message":  "Types should not have members with visibility set higher than the type's visibility",
+"location":  [
+{
+"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\MsgDecoder.cs",
+"region":  {
+"startLine":  20,
+"startColumn":  20,
+"endLine":  20,
+"endColumn":  30
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\MsgDecoder.cs",
+"region":  {
+"startLine":  24,
+"startColumn":  9,
+"endLine":  24,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\MsgDecoder.cs",
+"region":  {
+"startLine":  29,
+"startColumn":  9,
+"endLine":  29,
+"endColumn":  15
+}
+}
+]
+},
+{
+"id":  "S3059",
+"message":  "Types should not have members with visibility set higher than the type's visibility",
+"location":  [
+{
+"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\MsgEncoder.cs",
+"region":  {
+"startLine":  20,
+"startColumn":  20,
+"endLine":  20,
+"endColumn":  30
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\MsgEncoder.cs",
+"region":  {
+"startLine":  34,
+"startColumn":  9,
+"endLine":  34,
+"endColumn":  15
+}
+}
+]
+},
+{
+"id":  "S3059",
+"message":  "Types should not have members with visibility set higher than the type's visibility",
+"location":  [
+{
+"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\Player.cs",
+"region":  {
+"startLine":  567,
+"startColumn":  20,
+"endLine":  567,
+"endColumn":  33
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\Player.cs",
+"region":  {
+"startLine":  585,
+"startColumn":  9,
+"endLine":  585,
+"endColumn":  15
+}
+}
+]
+},
+{
+"id":  "S3059",
+"message":  "Types should not have members with visibility set higher than the type's visibility",
+"location":  [
+{
+"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\Proto\ProtobufDecoder.cs",
+"region":  {
+"startLine":  23,
+"startColumn":  27,
+"endLine":  23,
+"endColumn":  42
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\Proto\ProtobufDecoder.cs",
+"region":  {
+"startLine":  28,
+"startColumn":  9,
+"endLine":  28,
+"endColumn":  15
+}
+}
+]
+},
+{
+"id":  "S3059",
+"message":  "Types should not have members with visibility set higher than the type's visibility",
+"location":  [
+{
+"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\RemoteConnection.cs",
+"region":  {
+"startLine":  40,
+"startColumn":  20,
+"endLine":  40,
+"endColumn":  36
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\RemoteConnection.cs",
+"region":  {
+"startLine":  88,
+"startColumn":  9,
+"endLine":  88,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\RemoteConnection.cs",
+"region":  {
+"startLine":  117,
+"startColumn":  9,
+"endLine":  117,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\RemoteConnection.cs",
+"region":  {
+"startLine":  127,
+"startColumn":  9,
+"endLine":  127,
+"endColumn":  15
+}
+}
+]
+}
+]
+}

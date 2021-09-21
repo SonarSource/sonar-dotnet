@@ -1,0 +1,46 @@
+{
+"issues":  [
+{
+"id":  "S3059",
+"message":  "Types should not have members with visibility set higher than the type's visibility",
+"location":  [
+{
+"uri":  "sources\akka.net\src\contrib\persistence\Akka.Persistence.Sql.Common\Journal\MultiValueDictionaryExtensions.cs",
+"region":  {
+"startLine":  15,
+"startColumn":  27,
+"endLine":  15,
+"endColumn":  57
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\persistence\Akka.Persistence.Sql.Common\Journal\MultiValueDictionaryExtensions.cs",
+"region":  {
+"startLine":  26,
+"startColumn":  9,
+"endLine":  26,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\persistence\Akka.Persistence.Sql.Common\Journal\MultiValueDictionaryExtensions.cs",
+"region":  {
+"startLine":  46,
+"startColumn":  9,
+"endLine":  46,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\persistence\Akka.Persistence.Sql.Common\Journal\MultiValueDictionaryExtensions.cs",
+"region":  {
+"startLine":  61,
+"startColumn":  9,
+"endLine":  61,
+"endColumn":  15
+}
+}
+]
+}
+]
+}

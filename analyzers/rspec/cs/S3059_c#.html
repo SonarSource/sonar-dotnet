@@ -1,0 +1,67 @@
+<p>There’s no point in having a <code>public</code> member in a non-<code>public</code> type because objects that can’t access the type will never
+have the chance to access the member.</p>
+<p>This rule raises an issue when a type has methods, fields, or inner types with higher visibility than the type itself has.</p>
+<h2>Noncompliant Code Example</h2>
+<pre>
+internal class MyClass
+{
+    public static decimal PI = 3.14m;  // Noncompliant
+
+    public int GetOne() // Noncompliant
+    {
+        return 1;
+    }
+
+    protected record NestedType // Noncompliant: outer class is internal
+    {
+        public bool FlipCoin() // Noncompliant: outer class is internal
+        {
+            return false;
+        }
+        // ...
+    }
+}
+</pre>
+<h2>Compliant Solution</h2>
+<pre>
+public class MyClass // Class visibility upgrade makes members compliant
+{
+    public static decimal PI = 3.14m;
+
+    public int GetOne()
+    {
+        return 1;
+    }
+
+    protected record NestedType
+    {
+        public bool FlipCoin() // Outer type is public
+        {
+            return false;
+        }
+        // ...
+    }
+}
+</pre>
+<h2>Exceptions</h2>
+<p>User defined operators need to be public:</p>
+<pre>
+public static implicit operator byte(MyClass a) =&gt; 1; // Compliant
+public static explicit operator MyClass(byte a) =&gt; new MyClass(a); // Compliant
+</pre>
+<p>Nested types, even if private, can be used and inherited in the parent type. In this case, the visibility of the outer type is considered.</p>
+<pre>
+internal class MyClass
+{
+    private class NestedClass
+    {
+        public int PublicProperty { get; } // Noncompliant: should be internal
+        protected internal int ProtectedInternalProperty { get; } // Compliant: can be used in `InternalsVisibleTo` assemblies
+        internal int InternalProperty { get; } // Compliant: can be used in `InternalsVisibleTo` assemblies
+        protected int ProtectedProperty { get; } // Compliant: can be used in derived type
+        private protected int PrivateProtectedProperty { get; } // Compliant: can be used in derived type
+        private int PrivateProperty { get; }
+    }
+}
+</pre>
+

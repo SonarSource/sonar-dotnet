@@ -1,0 +1,64 @@
+{
+"issues":  [
+{
+"id":  "S3059",
+"message":  "Types should not have members with visibility set higher than the type's visibility",
+"location":  [
+{
+"uri":  "sources\akka.net\src\benchmark\RemotePingPong\Program.cs",
+"region":  {
+"startLine":  29,
+"startColumn":  20,
+"endLine":  29,
+"endColumn":  27
+}
+},
+{
+"uri":  "sources\akka.net\src\benchmark\RemotePingPong\Program.cs",
+"region":  {
+"startLine":  31,
+"startColumn":  9,
+"endLine":  31,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\akka.net\src\benchmark\RemotePingPong\Program.cs",
+"region":  {
+"startLine":  44,
+"startColumn":  9,
+"endLine":  44,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\akka.net\src\benchmark\RemotePingPong\Program.cs",
+"region":  {
+"startLine":  129,
+"startColumn":  9,
+"endLine":  129,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\akka.net\src\benchmark\RemotePingPong\Program.cs",
+"region":  {
+"startLine":  226,
+"startColumn":  13,
+"endLine":  226,
+"endColumn":  19
+}
+},
+{
+"uri":  "sources\akka.net\src\benchmark\RemotePingPong\Program.cs",
+"region":  {
+"startLine":  269,
+"startColumn":  13,
+"endLine":  269,
+"endColumn":  19
+}
+}
+]
+}
+]
+}

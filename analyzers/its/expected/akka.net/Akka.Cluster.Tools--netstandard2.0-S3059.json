@@ -1,0 +1,1639 @@
+{
+"issues":  [
+{
+"id":  "S3059",
+"message":  "Types should not have members with visibility set higher than the type's visibility",
+"location":  [
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\Client\ClusterReceptionist.cs",
+"region":  {
+"startLine":  584,
+"startColumn":  20,
+"endLine":  584,
+"endColumn":  40
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\Client\ClusterReceptionist.cs",
+"region":  {
+"startLine":  594,
+"startColumn":  9,
+"endLine":  594,
+"endColumn":  15
+}
+}
+]
+},
+{
+"id":  "S3059",
+"message":  "Types should not have members with visibility set higher than the type's visibility",
+"location":  [
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\PublishSubscribe\Internal\TopicMessages.cs",
+"region":  {
+"startLine":  22,
+"startColumn":  27,
+"endLine":  22,
+"endColumn":  32
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\PublishSubscribe\Internal\TopicMessages.cs",
+"region":  {
+"startLine":  27,
+"startColumn":  9,
+"endLine":  27,
+"endColumn":  15
+}
+}
+]
+},
+{
+"id":  "S3059",
+"message":  "Types should not have members with visibility set higher than the type's visibility",
+"location":  [
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\PublishSubscribe\Internal\TopicMessages.cs",
+"region":  {
+"startLine":  297,
+"startColumn":  27,
+"endLine":  297,
+"endColumn":  37
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\PublishSubscribe\Internal\TopicMessages.cs",
+"region":  {
+"startLine":  302,
+"startColumn":  9,
+"endLine":  302,
+"endColumn":  15
+}
+}
+]
+},
+{
+"id":  "S3059",
+"message":  "Types should not have members with visibility set higher than the type's visibility",
+"location":  [
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\PublishSubscribe\Internal\TopicMessages.cs",
+"region":  {
+"startLine":  311,
+"startColumn":  27,
+"endLine":  311,
+"endColumn":  37
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\PublishSubscribe\Internal\TopicMessages.cs",
+"region":  {
+"startLine":  316,
+"startColumn":  9,
+"endLine":  316,
+"endColumn":  15
+}
+}
+]
+},
+{
+"id":  "S3059",
+"message":  "Types should not have members with visibility set higher than the type's visibility",
+"location":  [
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\PublishSubscribe\Internal\TopicMessages.cs",
+"region":  {
+"startLine":  35,
+"startColumn":  27,
+"endLine":  35,
+"endColumn":  32
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\PublishSubscribe\Internal\TopicMessages.cs",
+"region":  {
+"startLine":  40,
+"startColumn":  9,
+"endLine":  40,
+"endColumn":  15
+}
+}
+]
+},
+{
+"id":  "S3059",
+"message":  "Types should not have members with visibility set higher than the type's visibility",
+"location":  [
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\PublishSubscribe\Internal\TopicMessages.cs",
+"region":  {
+"startLine":  456,
+"startColumn":  27,
+"endLine":  456,
+"endColumn":  44
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\PublishSubscribe\Internal\TopicMessages.cs",
+"region":  {
+"startLine":  461,
+"startColumn":  9,
+"endLine":  461,
+"endColumn":  15
+}
+}
+]
+},
+{
+"id":  "S3059",
+"message":  "Types should not have members with visibility set higher than the type's visibility",
+"location":  [
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\PublishSubscribe\Internal\TopicMessages.cs",
+"region":  {
+"startLine":  469,
+"startColumn":  27,
+"endLine":  469,
+"endColumn":  43
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\PublishSubscribe\Internal\TopicMessages.cs",
+"region":  {
+"startLine":  474,
+"startColumn":  9,
+"endLine":  474,
+"endColumn":  15
+}
+}
+]
+},
+{
+"id":  "S3059",
+"message":  "Types should not have members with visibility set higher than the type's visibility",
+"location":  [
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\PublishSubscribe\Internal\TopicMessages.cs",
+"region":  {
+"startLine":  483,
+"startColumn":  27,
+"endLine":  483,
+"endColumn":  47
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\PublishSubscribe\Internal\TopicMessages.cs",
+"region":  {
+"startLine":  488,
+"startColumn":  9,
+"endLine":  488,
+"endColumn":  15
+}
+}
+]
+},
+{
+"id":  "S3059",
+"message":  "Types should not have members with visibility set higher than the type's visibility",
+"location":  [
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\PublishSubscribe\Internal\TopicMessages.cs",
+"region":  {
+"startLine":  496,
+"startColumn":  27,
+"endLine":  496,
+"endColumn":  49
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\PublishSubscribe\Internal\TopicMessages.cs",
+"region":  {
+"startLine":  502,
+"startColumn":  9,
+"endLine":  502,
+"endColumn":  15
+}
+}
+]
+},
+{
+"id":  "S3059",
+"message":  "Types should not have members with visibility set higher than the type's visibility",
+"location":  [
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\PublishSubscribe\Internal\TopicMessages.cs",
+"region":  {
+"startLine":  254,
+"startColumn":  27,
+"endLine":  254,
+"endColumn":  32
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\PublishSubscribe\Internal\TopicMessages.cs",
+"region":  {
+"startLine":  259,
+"startColumn":  9,
+"endLine":  259,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\PublishSubscribe\Internal\TopicMessages.cs",
+"region":  {
+"startLine":  265,
+"startColumn":  9,
+"endLine":  265,
+"endColumn":  15
+}
+}
+]
+},
+{
+"id":  "S3059",
+"message":  "Types should not have members with visibility set higher than the type's visibility",
+"location":  [
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\PublishSubscribe\Internal\TopicMessages.cs",
+"region":  {
+"startLine":  325,
+"startColumn":  27,
+"endLine":  325,
+"endColumn":  40
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\PublishSubscribe\Internal\TopicMessages.cs",
+"region":  {
+"startLine":  330,
+"startColumn":  9,
+"endLine":  330,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\PublishSubscribe\Internal\TopicMessages.cs",
+"region":  {
+"startLine":  336,
+"startColumn":  9,
+"endLine":  336,
+"endColumn":  15
+}
+}
+]
+},
+{
+"id":  "S3059",
+"message":  "Types should not have members with visibility set higher than the type's visibility",
+"location":  [
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\PublishSubscribe\Internal\TopicMessages.cs",
+"region":  {
+"startLine":  402,
+"startColumn":  27,
+"endLine":  402,
+"endColumn":  46
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\PublishSubscribe\Internal\TopicMessages.cs",
+"region":  {
+"startLine":  407,
+"startColumn":  9,
+"endLine":  407,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\PublishSubscribe\Internal\TopicMessages.cs",
+"region":  {
+"startLine":  413,
+"startColumn":  9,
+"endLine":  413,
+"endColumn":  15
+}
+}
+]
+},
+{
+"id":  "S3059",
+"message":  "Types should not have members with visibility set higher than the type's visibility",
+"location":  [
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\PublishSubscribe\Internal\TopicMessages.cs",
+"region":  {
+"startLine":  47,
+"startColumn":  27,
+"endLine":  47,
+"endColumn":  43
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\PublishSubscribe\Internal\TopicMessages.cs",
+"region":  {
+"startLine":  49,
+"startColumn":  9,
+"endLine":  49,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\PublishSubscribe\Internal\TopicMessages.cs",
+"region":  {
+"startLine":  51,
+"startColumn":  9,
+"endLine":  51,
+"endColumn":  15
+}
+}
+]
+},
+{
+"id":  "S3059",
+"message":  "Types should not have members with visibility set higher than the type's visibility",
+"location":  [
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\PublishSubscribe\Internal\TopicMessages.cs",
+"region":  {
+"startLine":  195,
+"startColumn":  27,
+"endLine":  195,
+"endColumn":  33
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\PublishSubscribe\Internal\TopicMessages.cs",
+"region":  {
+"startLine":  202,
+"startColumn":  9,
+"endLine":  202,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\PublishSubscribe\Internal\TopicMessages.cs",
+"region":  {
+"startLine":  211,
+"startColumn":  9,
+"endLine":  211,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\PublishSubscribe\Internal\TopicMessages.cs",
+"region":  {
+"startLine":  216,
+"startColumn":  9,
+"endLine":  216,
+"endColumn":  15
+}
+}
+]
+},
+{
+"id":  "S3059",
+"message":  "Types should not have members with visibility set higher than the type's visibility",
+"location":  [
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\PublishSubscribe\Internal\TopicMessages.cs",
+"region":  {
+"startLine":  346,
+"startColumn":  27,
+"endLine":  346,
+"endColumn":  37
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\PublishSubscribe\Internal\TopicMessages.cs",
+"region":  {
+"startLine":  351,
+"startColumn":  9,
+"endLine":  351,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\PublishSubscribe\Internal\TopicMessages.cs",
+"region":  {
+"startLine":  356,
+"startColumn":  9,
+"endLine":  356,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\PublishSubscribe\Internal\TopicMessages.cs",
+"region":  {
+"startLine":  363,
+"startColumn":  9,
+"endLine":  363,
+"endColumn":  15
+}
+}
+]
+},
+{
+"id":  "S3059",
+"message":  "Types should not have members with visibility set higher than the type's visibility",
+"location":  [
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\PublishSubscribe\Internal\TopicMessages.cs",
+"region":  {
+"startLine":  374,
+"startColumn":  27,
+"endLine":  374,
+"endColumn":  39
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\PublishSubscribe\Internal\TopicMessages.cs",
+"region":  {
+"startLine":  379,
+"startColumn":  9,
+"endLine":  379,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\PublishSubscribe\Internal\TopicMessages.cs",
+"region":  {
+"startLine":  384,
+"startColumn":  9,
+"endLine":  384,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\PublishSubscribe\Internal\TopicMessages.cs",
+"region":  {
+"startLine":  391,
+"startColumn":  9,
+"endLine":  391,
+"endColumn":  15
+}
+}
+]
+},
+{
+"id":  "S3059",
+"message":  "Types should not have members with visibility set higher than the type's visibility",
+"location":  [
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\PublishSubscribe\Internal\TopicMessages.cs",
+"region":  {
+"startLine":  133,
+"startColumn":  27,
+"endLine":  133,
+"endColumn":  38
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\PublishSubscribe\Internal\TopicMessages.cs",
+"region":  {
+"startLine":  138,
+"startColumn":  9,
+"endLine":  138,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\PublishSubscribe\Internal\TopicMessages.cs",
+"region":  {
+"startLine":  143,
+"startColumn":  9,
+"endLine":  143,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\PublishSubscribe\Internal\TopicMessages.cs",
+"region":  {
+"startLine":  153,
+"startColumn":  9,
+"endLine":  153,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\PublishSubscribe\Internal\TopicMessages.cs",
+"region":  {
+"startLine":  162,
+"startColumn":  9,
+"endLine":  162,
+"endColumn":  15
+}
+}
+]
+},
+{
+"id":  "S3059",
+"message":  "Types should not have members with visibility set higher than the type's visibility",
+"location":  [
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\PublishSubscribe\Internal\TopicMessages.cs",
+"region":  {
+"startLine":  61,
+"startColumn":  20,
+"endLine":  61,
+"endColumn":  26
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\PublishSubscribe\Internal\TopicMessages.cs",
+"region":  {
+"startLine":  66,
+"startColumn":  9,
+"endLine":  66,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\PublishSubscribe\Internal\TopicMessages.cs",
+"region":  {
+"startLine":  71,
+"startColumn":  9,
+"endLine":  71,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\PublishSubscribe\Internal\TopicMessages.cs",
+"region":  {
+"startLine":  76,
+"startColumn":  9,
+"endLine":  76,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\PublishSubscribe\Internal\TopicMessages.cs",
+"region":  {
+"startLine":  82,
+"startColumn":  9,
+"endLine":  82,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\PublishSubscribe\Internal\TopicMessages.cs",
+"region":  {
+"startLine":  92,
+"startColumn":  9,
+"endLine":  92,
+"endColumn":  15
+}
+}
+]
+},
+{
+"id":  "S3059",
+"message":  "Types should not have members with visibility set higher than the type's visibility",
+"location":  [
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\PublishSubscribe\Internal\Topics.cs",
+"region":  {
+"startLine":  154,
+"startColumn":  20,
+"endLine":  154,
+"endColumn":  25
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\PublishSubscribe\Internal\Topics.cs",
+"region":  {
+"startLine":  164,
+"startColumn":  9,
+"endLine":  164,
+"endColumn":  15
+}
+}
+]
+},
+{
+"id":  "S3059",
+"message":  "Types should not have members with visibility set higher than the type's visibility",
+"location":  [
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\PublishSubscribe\Internal\Topics.cs",
+"region":  {
+"startLine":  252,
+"startColumn":  20,
+"endLine":  252,
+"endColumn":  25
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\PublishSubscribe\Internal\Topics.cs",
+"region":  {
+"startLine":  261,
+"startColumn":  9,
+"endLine":  261,
+"endColumn":  15
+}
+}
+]
+},
+{
+"id":  "S3059",
+"message":  "Types should not have members with visibility set higher than the type's visibility",
+"location":  [
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\PublishSubscribe\Internal\Topics.cs",
+"region":  {
+"startLine":  289,
+"startColumn":  27,
+"endLine":  289,
+"endColumn":  32
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\PublishSubscribe\Internal\Topics.cs",
+"region":  {
+"startLine":  307,
+"startColumn":  9,
+"endLine":  307,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\PublishSubscribe\Internal\Topics.cs",
+"region":  {
+"startLine":  317,
+"startColumn":  9,
+"endLine":  317,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\PublishSubscribe\Internal\Topics.cs",
+"region":  {
+"startLine":  327,
+"startColumn":  9,
+"endLine":  327,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\PublishSubscribe\Internal\Topics.cs",
+"region":  {
+"startLine":  337,
+"startColumn":  9,
+"endLine":  337,
+"endColumn":  15
+}
+}
+]
+},
+{
+"id":  "S3059",
+"message":  "Types should not have members with visibility set higher than the type's visibility",
+"location":  [
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\PublishSubscribe\PerGroupingBuffer.cs",
+"region":  {
+"startLine":  18,
+"startColumn":  20,
+"endLine":  18,
+"endColumn":  37
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\PublishSubscribe\PerGroupingBuffer.cs",
+"region":  {
+"startLine":  30,
+"startColumn":  9,
+"endLine":  30,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\PublishSubscribe\PerGroupingBuffer.cs",
+"region":  {
+"startLine":  46,
+"startColumn":  9,
+"endLine":  46,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\PublishSubscribe\PerGroupingBuffer.cs",
+"region":  {
+"startLine":  61,
+"startColumn":  9,
+"endLine":  61,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\PublishSubscribe\PerGroupingBuffer.cs",
+"region":  {
+"startLine":  75,
+"startColumn":  9,
+"endLine":  75,
+"endColumn":  15
+}
+}
+]
+},
+{
+"id":  "S3059",
+"message":  "Types should not have members with visibility set higher than the type's visibility",
+"location":  [
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\Singleton\ClusterSingletonManager.cs",
+"region":  {
+"startLine":  111,
+"startColumn":  27,
+"endLine":  111,
+"endColumn":  51
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\Singleton\ClusterSingletonManager.cs",
+"region":  {
+"startLine":  116,
+"startColumn":  9,
+"endLine":  116,
+"endColumn":  15
+}
+}
+]
+},
+{
+"id":  "S3059",
+"message":  "Types should not have members with visibility set higher than the type's visibility",
+"location":  [
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\Singleton\ClusterSingletonManager.cs",
+"region":  {
+"startLine":  166,
+"startColumn":  27,
+"endLine":  166,
+"endColumn":  37
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\Singleton\ClusterSingletonManager.cs",
+"region":  {
+"startLine":  171,
+"startColumn":  9,
+"endLine":  171,
+"endColumn":  15
+}
+}
+]
+},
+{
+"id":  "S3059",
+"message":  "Types should not have members with visibility set higher than the type's visibility",
+"location":  [
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\Singleton\ClusterSingletonManager.cs",
+"region":  {
+"startLine":  184,
+"startColumn":  27,
+"endLine":  184,
+"endColumn":  40
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\Singleton\ClusterSingletonManager.cs",
+"region":  {
+"startLine":  189,
+"startColumn":  9,
+"endLine":  189,
+"endColumn":  15
+}
+}
+]
+},
+{
+"id":  "S3059",
+"message":  "Types should not have members with visibility set higher than the type's visibility",
+"location":  [
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\Singleton\ClusterSingletonManager.cs",
+"region":  {
+"startLine":  338,
+"startColumn":  27,
+"endLine":  338,
+"endColumn":  34
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\Singleton\ClusterSingletonManager.cs",
+"region":  {
+"startLine":  343,
+"startColumn":  9,
+"endLine":  343,
+"endColumn":  15
+}
+}
+]
+},
+{
+"id":  "S3059",
+"message":  "Types should not have members with visibility set higher than the type's visibility",
+"location":  [
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\Singleton\ClusterSingletonManager.cs",
+"region":  {
+"startLine":  37,
+"startColumn":  27,
+"endLine":  37,
+"endColumn":  39
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\Singleton\ClusterSingletonManager.cs",
+"region":  {
+"startLine":  42,
+"startColumn":  9,
+"endLine":  42,
+"endColumn":  15
+}
+}
+]
+},
+{
+"id":  "S3059",
+"message":  "Types should not have members with visibility set higher than the type's visibility",
+"location":  [
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\Singleton\ClusterSingletonManager.cs",
+"region":  {
+"startLine":  457,
+"startColumn":  27,
+"endLine":  457,
+"endColumn":  38
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\Singleton\ClusterSingletonManager.cs",
+"region":  {
+"startLine":  464,
+"startColumn":  9,
+"endLine":  464,
+"endColumn":  15
+}
+}
+]
+},
+{
+"id":  "S3059",
+"message":  "Types should not have members with visibility set higher than the type's visibility",
+"location":  [
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\Singleton\ClusterSingletonManager.cs",
+"region":  {
+"startLine":  52,
+"startColumn":  27,
+"endLine":  52,
+"endColumn":  45
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\Singleton\ClusterSingletonManager.cs",
+"region":  {
+"startLine":  57,
+"startColumn":  9,
+"endLine":  57,
+"endColumn":  15
+}
+}
+]
+},
+{
+"id":  "S3059",
+"message":  "Types should not have members with visibility set higher than the type's visibility",
+"location":  [
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\Singleton\ClusterSingletonManager.cs",
+"region":  {
+"startLine":  67,
+"startColumn":  27,
+"endLine":  67,
+"endColumn":  39
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\Singleton\ClusterSingletonManager.cs",
+"region":  {
+"startLine":  72,
+"startColumn":  9,
+"endLine":  72,
+"endColumn":  15
+}
+}
+]
+},
+{
+"id":  "S3059",
+"message":  "Types should not have members with visibility set higher than the type's visibility",
+"location":  [
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\Singleton\ClusterSingletonManager.cs",
+"region":  {
+"startLine":  85,
+"startColumn":  27,
+"endLine":  85,
+"endColumn":  41
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\Singleton\ClusterSingletonManager.cs",
+"region":  {
+"startLine":  90,
+"startColumn":  9,
+"endLine":  90,
+"endColumn":  15
+}
+}
+]
+},
+{
+"id":  "S3059",
+"message":  "Types should not have members with visibility set higher than the type's visibility",
+"location":  [
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\Singleton\ClusterSingletonManager.cs",
+"region":  {
+"startLine":  98,
+"startColumn":  27,
+"endLine":  98,
+"endColumn":  34
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\Singleton\ClusterSingletonManager.cs",
+"region":  {
+"startLine":  103,
+"startColumn":  9,
+"endLine":  103,
+"endColumn":  15
+}
+}
+]
+},
+{
+"id":  "S3059",
+"message":  "Types should not have members with visibility set higher than the type's visibility",
+"location":  [
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\Singleton\ClusterSingletonManager.cs",
+"region":  {
+"startLine":  124,
+"startColumn":  27,
+"endLine":  124,
+"endColumn":  40
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\Singleton\ClusterSingletonManager.cs",
+"region":  {
+"startLine":  129,
+"startColumn":  9,
+"endLine":  129,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\Singleton\ClusterSingletonManager.cs",
+"region":  {
+"startLine":  135,
+"startColumn":  9,
+"endLine":  135,
+"endColumn":  15
+}
+}
+]
+},
+{
+"id":  "S3059",
+"message":  "Types should not have members with visibility set higher than the type's visibility",
+"location":  [
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\Singleton\ClusterSingletonManager.cs",
+"region":  {
+"startLine":  145,
+"startColumn":  27,
+"endLine":  145,
+"endColumn":  40
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\Singleton\ClusterSingletonManager.cs",
+"region":  {
+"startLine":  150,
+"startColumn":  9,
+"endLine":  150,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\Singleton\ClusterSingletonManager.cs",
+"region":  {
+"startLine":  156,
+"startColumn":  9,
+"endLine":  156,
+"endColumn":  15
+}
+}
+]
+},
+{
+"id":  "S3059",
+"message":  "Types should not have members with visibility set higher than the type's visibility",
+"location":  [
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\Singleton\ClusterSingletonManager.cs",
+"region":  {
+"startLine":  197,
+"startColumn":  27,
+"endLine":  197,
+"endColumn":  38
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\Singleton\ClusterSingletonManager.cs",
+"region":  {
+"startLine":  202,
+"startColumn":  9,
+"endLine":  202,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\Singleton\ClusterSingletonManager.cs",
+"region":  {
+"startLine":  208,
+"startColumn":  9,
+"endLine":  208,
+"endColumn":  15
+}
+}
+]
+},
+{
+"id":  "S3059",
+"message":  "Types should not have members with visibility set higher than the type's visibility",
+"location":  [
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\Singleton\ClusterSingletonManager.cs",
+"region":  {
+"startLine":  218,
+"startColumn":  27,
+"endLine":  218,
+"endColumn":  45
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\Singleton\ClusterSingletonManager.cs",
+"region":  {
+"startLine":  223,
+"startColumn":  9,
+"endLine":  223,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\Singleton\ClusterSingletonManager.cs",
+"region":  {
+"startLine":  229,
+"startColumn":  9,
+"endLine":  229,
+"endColumn":  15
+}
+}
+]
+},
+{
+"id":  "S3059",
+"message":  "Types should not have members with visibility set higher than the type's visibility",
+"location":  [
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\Singleton\ClusterSingletonManager.cs",
+"region":  {
+"startLine":  239,
+"startColumn":  27,
+"endLine":  239,
+"endColumn":  37
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\Singleton\ClusterSingletonManager.cs",
+"region":  {
+"startLine":  244,
+"startColumn":  9,
+"endLine":  244,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\Singleton\ClusterSingletonManager.cs",
+"region":  {
+"startLine":  250,
+"startColumn":  9,
+"endLine":  250,
+"endColumn":  15
+}
+}
+]
+},
+{
+"id":  "S3059",
+"message":  "Types should not have members with visibility set higher than the type's visibility",
+"location":  [
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\Singleton\ClusterSingletonManager.cs",
+"region":  {
+"startLine":  317,
+"startColumn":  27,
+"endLine":  317,
+"endColumn":  39
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\Singleton\ClusterSingletonManager.cs",
+"region":  {
+"startLine":  322,
+"startColumn":  9,
+"endLine":  322,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\Singleton\ClusterSingletonManager.cs",
+"region":  {
+"startLine":  328,
+"startColumn":  9,
+"endLine":  328,
+"endColumn":  15
+}
+}
+]
+},
+{
+"id":  "S3059",
+"message":  "Types should not have members with visibility set higher than the type's visibility",
+"location":  [
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\Singleton\ClusterSingletonManager.cs",
+"region":  {
+"startLine":  377,
+"startColumn":  27,
+"endLine":  377,
+"endColumn":  45
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\Singleton\ClusterSingletonManager.cs",
+"region":  {
+"startLine":  379,
+"startColumn":  9,
+"endLine":  379,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\Singleton\ClusterSingletonManager.cs",
+"region":  {
+"startLine":  381,
+"startColumn":  9,
+"endLine":  381,
+"endColumn":  15
+}
+}
+]
+},
+{
+"id":  "S3059",
+"message":  "Types should not have members with visibility set higher than the type's visibility",
+"location":  [
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\Singleton\ClusterSingletonManager.cs",
+"region":  {
+"startLine":  388,
+"startColumn":  27,
+"endLine":  388,
+"endColumn":  45
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\Singleton\ClusterSingletonManager.cs",
+"region":  {
+"startLine":  390,
+"startColumn":  9,
+"endLine":  390,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\Singleton\ClusterSingletonManager.cs",
+"region":  {
+"startLine":  392,
+"startColumn":  9,
+"endLine":  392,
+"endColumn":  15
+}
+}
+]
+},
+{
+"id":  "S3059",
+"message":  "Types should not have members with visibility set higher than the type's visibility",
+"location":  [
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\Singleton\ClusterSingletonManager.cs",
+"region":  {
+"startLine":  399,
+"startColumn":  27,
+"endLine":  399,
+"endColumn":  46
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\Singleton\ClusterSingletonManager.cs",
+"region":  {
+"startLine":  401,
+"startColumn":  9,
+"endLine":  401,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\Singleton\ClusterSingletonManager.cs",
+"region":  {
+"startLine":  403,
+"startColumn":  9,
+"endLine":  403,
+"endColumn":  15
+}
+}
+]
+},
+{
+"id":  "S3059",
+"message":  "Types should not have members with visibility set higher than the type's visibility",
+"location":  [
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\Singleton\ClusterSingletonManager.cs",
+"region":  {
+"startLine":  410,
+"startColumn":  27,
+"endLine":  410,
+"endColumn":  46
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\Singleton\ClusterSingletonManager.cs",
+"region":  {
+"startLine":  412,
+"startColumn":  9,
+"endLine":  412,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\Singleton\ClusterSingletonManager.cs",
+"region":  {
+"startLine":  414,
+"startColumn":  9,
+"endLine":  414,
+"endColumn":  15
+}
+}
+]
+},
+{
+"id":  "S3059",
+"message":  "Types should not have members with visibility set higher than the type's visibility",
+"location":  [
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\Singleton\ClusterSingletonManager.cs",
+"region":  {
+"startLine":  421,
+"startColumn":  27,
+"endLine":  421,
+"endColumn":  36
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\Singleton\ClusterSingletonManager.cs",
+"region":  {
+"startLine":  423,
+"startColumn":  9,
+"endLine":  423,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\Singleton\ClusterSingletonManager.cs",
+"region":  {
+"startLine":  425,
+"startColumn":  9,
+"endLine":  425,
+"endColumn":  15
+}
+}
+]
+},
+{
+"id":  "S3059",
+"message":  "Types should not have members with visibility set higher than the type's visibility",
+"location":  [
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\Singleton\ClusterSingletonManager.cs",
+"region":  {
+"startLine":  435,
+"startColumn":  27,
+"endLine":  435,
+"endColumn":  47
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\Singleton\ClusterSingletonManager.cs",
+"region":  {
+"startLine":  440,
+"startColumn":  9,
+"endLine":  440,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\Singleton\ClusterSingletonManager.cs",
+"region":  {
+"startLine":  446,
+"startColumn":  9,
+"endLine":  446,
+"endColumn":  15
+}
+}
+]
+},
+{
+"id":  "S3059",
+"message":  "Types should not have members with visibility set higher than the type's visibility",
+"location":  [
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\Singleton\ClusterSingletonManager.cs",
+"region":  {
+"startLine":  260,
+"startColumn":  27,
+"endLine":  260,
+"endColumn":  40
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\Singleton\ClusterSingletonManager.cs",
+"region":  {
+"startLine":  265,
+"startColumn":  9,
+"endLine":  265,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\Singleton\ClusterSingletonManager.cs",
+"region":  {
+"startLine":  270,
+"startColumn":  9,
+"endLine":  270,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\Singleton\ClusterSingletonManager.cs",
+"region":  {
+"startLine":  277,
+"startColumn":  9,
+"endLine":  277,
+"endColumn":  15
+}
+}
+]
+},
+{
+"id":  "S3059",
+"message":  "Types should not have members with visibility set higher than the type's visibility",
+"location":  [
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\Singleton\ClusterSingletonManager.cs",
+"region":  {
+"startLine":  288,
+"startColumn":  27,
+"endLine":  288,
+"endColumn":  42
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\Singleton\ClusterSingletonManager.cs",
+"region":  {
+"startLine":  294,
+"startColumn":  9,
+"endLine":  294,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\Singleton\ClusterSingletonManager.cs",
+"region":  {
+"startLine":  299,
+"startColumn":  9,
+"endLine":  299,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\Singleton\ClusterSingletonManager.cs",
+"region":  {
+"startLine":  306,
+"startColumn":  9,
+"endLine":  306,
+"endColumn":  15
+}
+}
+]
+},
+{
+"id":  "S3059",
+"message":  "Types should not have members with visibility set higher than the type's visibility",
+"location":  [
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\Singleton\ClusterSingletonManager.cs",
+"region":  {
+"startLine":  351,
+"startColumn":  27,
+"endLine":  351,
+"endColumn":  45
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\Singleton\ClusterSingletonManager.cs",
+"region":  {
+"startLine":  356,
+"startColumn":  9,
+"endLine":  356,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\Singleton\ClusterSingletonManager.cs",
+"region":  {
+"startLine":  361,
+"startColumn":  9,
+"endLine":  361,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\Singleton\ClusterSingletonManager.cs",
+"region":  {
+"startLine":  368,
+"startColumn":  9,
+"endLine":  368,
+"endColumn":  15
+}
+}
+]
+},
+{
+"id":  "S3059",
+"message":  "Types should not have members with visibility set higher than the type's visibility",
+"location":  [
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\Singleton\MemberAgeOrdering.cs",
+"region":  {
+"startLine":  15,
+"startColumn":  27,
+"endLine":  15,
+"endColumn":  44
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\Singleton\MemberAgeOrdering.cs",
+"region":  {
+"startLine":  36,
+"startColumn":  9,
+"endLine":  36,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\Singleton\MemberAgeOrdering.cs",
+"region":  {
+"startLine":  41,
+"startColumn":  9,
+"endLine":  41,
+"endColumn":  15
+}
+}
+]
+},
+{
+"id":  "S3059",
+"message":  "Types should not have members with visibility set higher than the type's visibility",
+"location":  [
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\Singleton\OldestChangedBuffer.cs",
+"region":  {
+"startLine":  27,
+"startColumn":  27,
+"endLine":  27,
+"endColumn":  46
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\Singleton\OldestChangedBuffer.cs",
+"region":  {
+"startLine":  35,
+"startColumn":  9,
+"endLine":  35,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\Singleton\OldestChangedBuffer.cs",
+"region":  {
+"startLine":  40,
+"startColumn":  13,
+"endLine":  40,
+"endColumn":  19
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\Singleton\OldestChangedBuffer.cs",
+"region":  {
+"startLine":  48,
+"startColumn":  9,
+"endLine":  48,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\Singleton\OldestChangedBuffer.cs",
+"region":  {
+"startLine":  53,
+"startColumn":  13,
+"endLine":  53,
+"endColumn":  19
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\Singleton\OldestChangedBuffer.cs",
+"region":  {
+"startLine":  58,
+"startColumn":  13,
+"endLine":  58,
+"endColumn":  19
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\Singleton\OldestChangedBuffer.cs",
+"region":  {
+"startLine":  65,
+"startColumn":  13,
+"endLine":  65,
+"endColumn":  19
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\Singleton\OldestChangedBuffer.cs",
+"region":  {
+"startLine":  76,
+"startColumn":  9,
+"endLine":  76,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\Singleton\OldestChangedBuffer.cs",
+"region":  {
+"startLine":  81,
+"startColumn":  13,
+"endLine":  81,
+"endColumn":  19
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\Singleton\OldestChangedBuffer.cs",
+"region":  {
+"startLine":  87,
+"startColumn":  13,
+"endLine":  87,
+"endColumn":  19
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\Singleton\OldestChangedBuffer.cs",
+"region":  {
+"startLine":  101,
+"startColumn":  9,
+"endLine":  101,
+"endColumn":  15
+}
+}
+]
+}
+]
+}

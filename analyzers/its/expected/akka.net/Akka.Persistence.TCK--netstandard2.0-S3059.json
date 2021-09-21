@@ -1,0 +1,385 @@
+{
+"issues":  [
+{
+"id":  "S3059",
+"message":  "Types should not have members with visibility set higher than the type's visibility",
+"location":  [
+{
+"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Performance\JournalPerfSpec.cs",
+"region":  {
+"startLine":  343,
+"startColumn":  20,
+"endLine":  343,
+"endColumn":  32
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Performance\JournalPerfSpec.cs",
+"region":  {
+"startLine":  345,
+"startColumn":  9,
+"endLine":  345,
+"endColumn":  15
+}
+}
+]
+},
+{
+"id":  "S3059",
+"message":  "Types should not have members with visibility set higher than the type's visibility",
+"location":  [
+{
+"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Performance\JournalPerfSpec.cs",
+"region":  {
+"startLine":  362,
+"startColumn":  20,
+"endLine":  362,
+"endColumn":  30
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Performance\JournalPerfSpec.cs",
+"region":  {
+"startLine":  368,
+"startColumn":  9,
+"endLine":  368,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Performance\JournalPerfSpec.cs",
+"region":  {
+"startLine":  382,
+"startColumn":  9,
+"endLine":  382,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Performance\JournalPerfSpec.cs",
+"region":  {
+"startLine":  383,
+"startColumn":  9,
+"endLine":  383,
+"endColumn":  15
+}
+}
+]
+},
+{
+"id":  "S3059",
+"message":  "Types should not have members with visibility set higher than the type's visibility",
+"location":  [
+{
+"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Query\TestActor.cs",
+"region":  {
+"startLine":  15,
+"startColumn":  20,
+"endLine":  15,
+"endColumn":  29
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Query\TestActor.cs",
+"region":  {
+"startLine":  17,
+"startColumn":  9,
+"endLine":  17,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Query\TestActor.cs",
+"region":  {
+"startLine":  19,
+"startColumn":  9,
+"endLine":  19,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Query\TestActor.cs",
+"region":  {
+"startLine":  21,
+"startColumn":  13,
+"endLine":  21,
+"endColumn":  19
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Query\TestActor.cs",
+"region":  {
+"startLine":  26,
+"startColumn":  13,
+"endLine":  26,
+"endColumn":  19
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Query\TestActor.cs",
+"region":  {
+"startLine":  29,
+"startColumn":  9,
+"endLine":  29,
+"endColumn":  15
+}
+}
+]
+},
+{
+"id":  "S3059",
+"message":  "Types should not have members with visibility set higher than the type's visibility",
+"location":  [
+{
+"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Serialization\JournalSerializationSpec.cs",
+"region":  {
+"startLine":  133,
+"startColumn":  27,
+"endLine":  133,
+"endColumn":  38
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Serialization\JournalSerializationSpec.cs",
+"region":  {
+"startLine":  135,
+"startColumn":  9,
+"endLine":  135,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Serialization\JournalSerializationSpec.cs",
+"region":  {
+"startLine":  137,
+"startColumn":  13,
+"endLine":  137,
+"endColumn":  19
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Serialization\JournalSerializationSpec.cs",
+"region":  {
+"startLine":  139,
+"startColumn":  13,
+"endLine":  139,
+"endColumn":  19
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Serialization\JournalSerializationSpec.cs",
+"region":  {
+"startLine":  142,
+"startColumn":  9,
+"endLine":  142,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Serialization\JournalSerializationSpec.cs",
+"region":  {
+"startLine":  144,
+"startColumn":  13,
+"endLine":  144,
+"endColumn":  19
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Serialization\JournalSerializationSpec.cs",
+"region":  {
+"startLine":  150,
+"startColumn":  13,
+"endLine":  150,
+"endColumn":  19
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Serialization\JournalSerializationSpec.cs",
+"region":  {
+"startLine":  151,
+"startColumn":  13,
+"endLine":  151,
+"endColumn":  19
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Serialization\JournalSerializationSpec.cs",
+"region":  {
+"startLine":  154,
+"startColumn":  9,
+"endLine":  154,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Serialization\JournalSerializationSpec.cs",
+"region":  {
+"startLine":  156,
+"startColumn":  13,
+"endLine":  156,
+"endColumn":  19
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Serialization\JournalSerializationSpec.cs",
+"region":  {
+"startLine":  158,
+"startColumn":  13,
+"endLine":  158,
+"endColumn":  19
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Serialization\JournalSerializationSpec.cs",
+"region":  {
+"startLine":  161,
+"startColumn":  9,
+"endLine":  161,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Serialization\JournalSerializationSpec.cs",
+"region":  {
+"startLine":  163,
+"startColumn":  13,
+"endLine":  163,
+"endColumn":  19
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Serialization\JournalSerializationSpec.cs",
+"region":  {
+"startLine":  183,
+"startColumn":  9,
+"endLine":  183,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Serialization\JournalSerializationSpec.cs",
+"region":  {
+"startLine":  188,
+"startColumn":  13,
+"endLine":  188,
+"endColumn":  19
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Serialization\JournalSerializationSpec.cs",
+"region":  {
+"startLine":  219,
+"startColumn":  9,
+"endLine":  219,
+"endColumn":  15
+}
+}
+]
+},
+{
+"id":  "S3059",
+"message":  "Types should not have members with visibility set higher than the type's visibility",
+"location":  [
+{
+"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Serialization\SnapshotStoreSerializationSpec.cs",
+"region":  {
+"startLine":  125,
+"startColumn":  27,
+"endLine":  125,
+"endColumn":  31
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Serialization\SnapshotStoreSerializationSpec.cs",
+"region":  {
+"startLine":  127,
+"startColumn":  9,
+"endLine":  127,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Serialization\SnapshotStoreSerializationSpec.cs",
+"region":  {
+"startLine":  129,
+"startColumn":  13,
+"endLine":  129,
+"endColumn":  19
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Serialization\SnapshotStoreSerializationSpec.cs",
+"region":  {
+"startLine":  134,
+"startColumn":  13,
+"endLine":  134,
+"endColumn":  19
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Serialization\SnapshotStoreSerializationSpec.cs",
+"region":  {
+"startLine":  137,
+"startColumn":  9,
+"endLine":  137,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Serialization\SnapshotStoreSerializationSpec.cs",
+"region":  {
+"startLine":  139,
+"startColumn":  13,
+"endLine":  139,
+"endColumn":  19
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Serialization\SnapshotStoreSerializationSpec.cs",
+"region":  {
+"startLine":  144,
+"startColumn":  13,
+"endLine":  144,
+"endColumn":  19
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Serialization\SnapshotStoreSerializationSpec.cs",
+"region":  {
+"startLine":  147,
+"startColumn":  9,
+"endLine":  147,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Serialization\SnapshotStoreSerializationSpec.cs",
+"region":  {
+"startLine":  149,
+"startColumn":  13,
+"endLine":  149,
+"endColumn":  19
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Serialization\SnapshotStoreSerializationSpec.cs",
+"region":  {
+"startLine":  166,
+"startColumn":  9,
+"endLine":  166,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Serialization\SnapshotStoreSerializationSpec.cs",
+"region":  {
+"startLine":  170,
+"startColumn":  13,
+"endLine":  170,
+"endColumn":  19
+}
+}
+]
+}
+]
+}

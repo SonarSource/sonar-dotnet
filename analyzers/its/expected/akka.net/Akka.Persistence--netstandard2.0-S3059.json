@@ -1,0 +1,448 @@
+{
+"issues":  [
+{
+"id":  "S3059",
+"message":  "Types should not have members with visibility set higher than the type's visibility",
+"location":  [
+{
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Eventsourced.Recovery.cs",
+"region":  {
+"startLine":  18,
+"startColumn":  20,
+"endLine":  18,
+"endColumn":  37
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Eventsourced.Recovery.cs",
+"region":  {
+"startLine":  20,
+"startColumn":  9,
+"endLine":  20,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Eventsourced.Recovery.cs",
+"region":  {
+"startLine":  27,
+"startColumn":  9,
+"endLine":  27,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Eventsourced.Recovery.cs",
+"region":  {
+"startLine":  28,
+"startColumn":  9,
+"endLine":  28,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Eventsourced.Recovery.cs",
+"region":  {
+"startLine":  29,
+"startColumn":  9,
+"endLine":  29,
+"endColumn":  15
+}
+}
+]
+},
+{
+"id":  "S3059",
+"message":  "Types should not have members with visibility set higher than the type's visibility",
+"location":  [
+{
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Fsm\PersistentFSM.cs",
+"region":  {
+"startLine":  455,
+"startColumn":  20,
+"endLine":  455,
+"endColumn":  42
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Fsm\PersistentFSM.cs",
+"region":  {
+"startLine":  459,
+"startColumn":  9,
+"endLine":  459,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Fsm\PersistentFSM.cs",
+"region":  {
+"startLine":  474,
+"startColumn":  9,
+"endLine":  474,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Fsm\PersistentFSM.cs",
+"region":  {
+"startLine":  476,
+"startColumn":  9,
+"endLine":  476,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Fsm\PersistentFSM.cs",
+"region":  {
+"startLine":  488,
+"startColumn":  9,
+"endLine":  488,
+"endColumn":  15
+}
+}
+]
+},
+{
+"id":  "S3059",
+"message":  "Types should not have members with visibility set higher than the type's visibility",
+"location":  [
+{
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Internal\CollectionsExtensions.cs",
+"region":  {
+"startLine":  13,
+"startColumn":  27,
+"endLine":  13,
+"endColumn":  48
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Internal\CollectionsExtensions.cs",
+"region":  {
+"startLine":  15,
+"startColumn":  9,
+"endLine":  15,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Internal\CollectionsExtensions.cs",
+"region":  {
+"startLine":  29,
+"startColumn":  9,
+"endLine":  29,
+"endColumn":  15
+}
+}
+]
+},
+{
+"id":  "S3059",
+"message":  "Types should not have members with visibility set higher than the type's visibility",
+"location":  [
+{
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Journal\AsyncWriteProxy.cs",
+"region":  {
+"startLine":  437,
+"startColumn":  20,
+"endLine":  437,
+"endColumn":  34
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Journal\AsyncWriteProxy.cs",
+"region":  {
+"startLine":  449,
+"startColumn":  9,
+"endLine":  449,
+"endColumn":  15
+}
+}
+]
+},
+{
+"id":  "S3059",
+"message":  "Types should not have members with visibility set higher than the type's visibility",
+"location":  [
+{
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Journal\EventAdapters.cs",
+"region":  {
+"startLine":  125,
+"startColumn":  20,
+"endLine":  125,
+"endColumn":  41
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Journal\EventAdapters.cs",
+"region":  {
+"startLine":  129,
+"startColumn":  9,
+"endLine":  129,
+"endColumn":  15
+}
+}
+]
+},
+{
+"id":  "S3059",
+"message":  "Types should not have members with visibility set higher than the type's visibility",
+"location":  [
+{
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Journal\EventAdapters.cs",
+"region":  {
+"startLine":  151,
+"startColumn":  20,
+"endLine":  151,
+"endColumn":  40
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Journal\EventAdapters.cs",
+"region":  {
+"startLine":  155,
+"startColumn":  9,
+"endLine":  155,
+"endColumn":  15
+}
+}
+]
+},
+{
+"id":  "S3059",
+"message":  "Types should not have members with visibility set higher than the type's visibility",
+"location":  [
+{
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Journal\EventAdapters.cs",
+"region":  {
+"startLine":  234,
+"startColumn":  20,
+"endLine":  234,
+"endColumn":  41
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Journal\EventAdapters.cs",
+"region":  {
+"startLine":  239,
+"startColumn":  9,
+"endLine":  239,
+"endColumn":  15
+}
+}
+]
+},
+{
+"id":  "S3059",
+"message":  "Types should not have members with visibility set higher than the type's visibility",
+"location":  [
+{
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Journal\EventAdapters.cs",
+"region":  {
+"startLine":  264,
+"startColumn":  20,
+"endLine":  264,
+"endColumn":  41
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Journal\EventAdapters.cs",
+"region":  {
+"startLine":  269,
+"startColumn":  9,
+"endLine":  269,
+"endColumn":  15
+}
+}
+]
+},
+{
+"id":  "S3059",
+"message":  "Types should not have members with visibility set higher than the type's visibility",
+"location":  [
+{
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Persistence.cs",
+"region":  {
+"startLine":  21,
+"startColumn":  21,
+"endLine":  21,
+"endColumn":  33
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Persistence.cs",
+"region":  {
+"startLine":  23,
+"startColumn":  9,
+"endLine":  23,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Persistence.cs",
+"region":  {
+"startLine":  30,
+"startColumn":  9,
+"endLine":  30,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Persistence.cs",
+"region":  {
+"startLine":  32,
+"startColumn":  9,
+"endLine":  32,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Persistence.cs",
+"region":  {
+"startLine":  34,
+"startColumn":  9,
+"endLine":  34,
+"endColumn":  15
+}
+}
+]
+},
+{
+"id":  "S3059",
+"message":  "Types should not have members with visibility set higher than the type's visibility",
+"location":  [
+{
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Persistent.cs",
+"region":  {
+"startLine":  71,
+"startColumn":  27,
+"endLine":  71,
+"endColumn":  47
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Persistent.cs",
+"region":  {
+"startLine":  73,
+"startColumn":  9,
+"endLine":  73,
+"endColumn":  15
+}
+}
+]
+},
+{
+"id":  "S3059",
+"message":  "Types should not have members with visibility set higher than the type's visibility",
+"location":  [
+{
+"uri":  "sources\akka.net\src\core\Akka.Persistence\RecoveryPermitter.cs",
+"region":  {
+"startLine":  17,
+"startColumn":  27,
+"endLine":  17,
+"endColumn":  48
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Persistence\RecoveryPermitter.cs",
+"region":  {
+"startLine":  19,
+"startColumn":  9,
+"endLine":  19,
+"endColumn":  15
+}
+}
+]
+},
+{
+"id":  "S3059",
+"message":  "Types should not have members with visibility set higher than the type's visibility",
+"location":  [
+{
+"uri":  "sources\akka.net\src\core\Akka.Persistence\RecoveryPermitter.cs",
+"region":  {
+"startLine":  23,
+"startColumn":  27,
+"endLine":  23,
+"endColumn":  48
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Persistence\RecoveryPermitter.cs",
+"region":  {
+"startLine":  25,
+"startColumn":  9,
+"endLine":  25,
+"endColumn":  15
+}
+}
+]
+},
+{
+"id":  "S3059",
+"message":  "Types should not have members with visibility set higher than the type's visibility",
+"location":  [
+{
+"uri":  "sources\akka.net\src\core\Akka.Persistence\RecoveryPermitter.cs",
+"region":  {
+"startLine":  29,
+"startColumn":  27,
+"endLine":  29,
+"endColumn":  47
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Persistence\RecoveryPermitter.cs",
+"region":  {
+"startLine":  31,
+"startColumn":  9,
+"endLine":  31,
+"endColumn":  15
+}
+}
+]
+},
+{
+"id":  "S3059",
+"message":  "Types should not have members with visibility set higher than the type's visibility",
+"location":  [
+{
+"uri":  "sources\akka.net\src\core\Akka.Persistence\RecoveryPermitter.cs",
+"region":  {
+"startLine":  39,
+"startColumn":  20,
+"endLine":  39,
+"endColumn":  37
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Persistence\RecoveryPermitter.cs",
+"region":  {
+"startLine":  46,
+"startColumn":  9,
+"endLine":  46,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Persistence\RecoveryPermitter.cs",
+"region":  {
+"startLine":  49,
+"startColumn":  9,
+"endLine":  49,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Persistence\RecoveryPermitter.cs",
+"region":  {
+"startLine":  51,
+"startColumn":  9,
+"endLine":  51,
+"endColumn":  15
+}
+}
+]
+}
+]
+}

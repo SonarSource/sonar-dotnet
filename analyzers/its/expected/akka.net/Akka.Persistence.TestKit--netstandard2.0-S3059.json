@@ -1,0 +1,142 @@
+{
+"issues":  [
+{
+"id":  "S3059",
+"message":  "Types should not have members with visibility set higher than the type's visibility",
+"location":  [
+{
+"uri":  "sources\akka.net\src\core\Akka.Persistence.TestKit\Journal\JournalInterceptors.cs",
+"region":  {
+"startLine":  13,
+"startColumn":  27,
+"endLine":  13,
+"endColumn":  46
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Persistence.TestKit\Journal\JournalInterceptors.cs",
+"region":  {
+"startLine":  17,
+"startColumn":  13,
+"endLine":  17,
+"endColumn":  19
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Persistence.TestKit\Journal\JournalInterceptors.cs",
+"region":  {
+"startLine":  24,
+"startColumn":  13,
+"endLine":  24,
+"endColumn":  19
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Persistence.TestKit\Journal\JournalInterceptors.cs",
+"region":  {
+"startLine":  31,
+"startColumn":  13,
+"endLine":  31,
+"endColumn":  19
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Persistence.TestKit\Journal\JournalInterceptors.cs",
+"region":  {
+"startLine":  38,
+"startColumn":  13,
+"endLine":  38,
+"endColumn":  19
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Persistence.TestKit\Journal\JournalInterceptors.cs",
+"region":  {
+"startLine":  56,
+"startColumn":  13,
+"endLine":  56,
+"endColumn":  19
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Persistence.TestKit\Journal\JournalInterceptors.cs",
+"region":  {
+"startLine":  63,
+"startColumn":  13,
+"endLine":  63,
+"endColumn":  19
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Persistence.TestKit\Journal\JournalInterceptors.cs",
+"region":  {
+"startLine":  86,
+"startColumn":  13,
+"endLine":  86,
+"endColumn":  19
+}
+}
+]
+},
+{
+"id":  "S3059",
+"message":  "Types should not have members with visibility set higher than the type's visibility",
+"location":  [
+{
+"uri":  "sources\akka.net\src\core\Akka.Persistence.TestKit\SnapshotStore\SnapshotStoreInterceptors.cs",
+"region":  {
+"startLine":  13,
+"startColumn":  27,
+"endLine":  13,
+"endColumn":  52
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Persistence.TestKit\SnapshotStore\SnapshotStoreInterceptors.cs",
+"region":  {
+"startLine":  17,
+"startColumn":  13,
+"endLine":  17,
+"endColumn":  19
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Persistence.TestKit\SnapshotStore\SnapshotStoreInterceptors.cs",
+"region":  {
+"startLine":  24,
+"startColumn":  13,
+"endLine":  24,
+"endColumn":  19
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Persistence.TestKit\SnapshotStore\SnapshotStoreInterceptors.cs",
+"region":  {
+"startLine":  31,
+"startColumn":  13,
+"endLine":  31,
+"endColumn":  19
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Persistence.TestKit\SnapshotStore\SnapshotStoreInterceptors.cs",
+"region":  {
+"startLine":  49,
+"startColumn":  13,
+"endLine":  49,
+"endColumn":  19
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Persistence.TestKit\SnapshotStore\SnapshotStoreInterceptors.cs",
+"region":  {
+"startLine":  56,
+"startColumn":  13,
+"endLine":  56,
+"endColumn":  19
+}
+}
+]
+}
+]
+}

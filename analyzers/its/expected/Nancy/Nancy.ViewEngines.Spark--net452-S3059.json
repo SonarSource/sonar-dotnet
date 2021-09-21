@@ -1,0 +1,28 @@
+{
+"issues":  [
+{
+"id":  "S3059",
+"message":  "Types should not have members with visibility set higher than the type's visibility",
+"location":  [
+{
+"uri":  "sources\Nancy\src\Nancy.ViewEngines.Spark\SparkRenderContextWrapper.cs",
+"region":  {
+"startLine":  12,
+"startColumn":  20,
+"endLine":  12,
+"endColumn":  45
+}
+},
+{
+"uri":  "sources\Nancy\src\Nancy.ViewEngines.Spark\SparkRenderContextWrapper.cs",
+"region":  {
+"startLine":  17,
+"startColumn":  9,
+"endLine":  17,
+"endColumn":  15
+}
+}
+]
+}
+]
+}

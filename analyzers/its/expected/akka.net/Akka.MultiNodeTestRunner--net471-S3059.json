@@ -1,0 +1,46 @@
+{
+"issues":  [
+{
+"id":  "S3059",
+"message":  "Types should not have members with visibility set higher than the type's visibility",
+"location":  [
+{
+"uri":  "sources\akka.net\src\core\Akka.MultiNodeTestRunner\Program.cs",
+"region":  {
+"startLine":  585,
+"startColumn":  20,
+"endLine":  585,
+"endColumn":  36
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.MultiNodeTestRunner\Program.cs",
+"region":  {
+"startLine":  591,
+"startColumn":  9,
+"endLine":  591,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.MultiNodeTestRunner\Program.cs",
+"region":  {
+"startLine":  617,
+"startColumn":  9,
+"endLine":  617,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.MultiNodeTestRunner\Program.cs",
+"region":  {
+"startLine":  618,
+"startColumn":  9,
+"endLine":  618,
+"endColumn":  15
+}
+}
+]
+}
+]
+}
