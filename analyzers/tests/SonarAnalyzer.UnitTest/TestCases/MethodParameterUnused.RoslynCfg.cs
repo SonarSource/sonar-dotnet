@@ -427,20 +427,20 @@ namespace Tests.TestCases
     // https://github.com/SonarSource/sonar-dotnet/issues/3134
     public class Repro_3134
     {
-        private static Predicate<DateTime> LocalFunctionReturned(DateTime dateTime) // Noncompliant FP from Roslyn LVA
+        private static Predicate<DateTime> LocalFunctionReturned(DateTime dateTime)
         {
             bool Filter(DateTime time) => time.Year == dateTime.Year;
             return Filter;
         }
 
-        private void LocalFunctionReferencedArrow(bool condition)        // Noncompliant FP from Roslyn LVA
+        private void LocalFunctionReferencedArrow(bool condition)
         {
             Enumerable.Empty<object>().Where(IsTrue);
 
             bool IsTrue(object x) => condition;
         }
 
-        private void LocalFunctionReferencedBody(bool condition)         // Noncompliant FP from Roslyn LVA
+        private void LocalFunctionReferencedBody(bool condition)
         {
             Enumerable.Empty<object>().Where(IsTrue);
 
@@ -449,26 +449,26 @@ namespace Tests.TestCases
                 return condition;
             };
         }
+        //FIXME: Something went wrong around here
+        //private void LocalFunctionCrossReferenced(bool condition)
+        //{
+        //    Enumerable.Empty<object>().Where(IsTrueOuter);
 
-        private void LocalFunctionCrossReferenced(bool condition)        // Noncompliant FP from Roslyn LVA
-        {
-            Enumerable.Empty<object>().Where(IsTrueOuter);
+        //    bool IsTrueOuter(object x) => new[] { x }.Any(IsTrueMiddle);
+        //    bool IsTrueMiddle(object x) => IsTrueInner();
+        //    bool IsTrueInner() => condition;
+        //}
 
-            bool IsTrueOuter(object x) => new[] { x }.Any(IsTrueMiddle);
-            bool IsTrueMiddle(object x) => IsTrueInner();
-            bool IsTrueInner() => condition;
-        }
+        //private void LocalFunctionRecursive(int arg)
+        //{
+        //    Enumerable.Empty<object>().Where(IsTrue);
 
-        private void LocalFunctionRecursive(int arg)                    // Noncompliant FP from Roslyn LVA
-        {
-            Enumerable.Empty<object>().Where(IsTrue);
-
-            bool IsTrue(object x)
-            {
-                arg--;
-                return arg <= 0 || new[] { x }.Any(IsTrue);
-            }
-        }
+        //    bool IsTrue(object x)
+        //    {
+        //        arg--;
+        //        return arg <= 0 || new[] { x }.Any(IsTrue);
+        //    }
+        //}
 
         private void LocalFunctionUnused(bool condition)    // Noncompliant
         {

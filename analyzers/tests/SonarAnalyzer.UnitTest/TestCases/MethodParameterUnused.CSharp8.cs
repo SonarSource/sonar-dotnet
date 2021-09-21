@@ -145,7 +145,7 @@ namespace Tests.TestCases
             }
         }
 
-        private static void UsedByReferenceWithStruct(this int someNumber, string someString)    // Noncompliant FP from Roslyn LVA
+        private static void UsedByReferenceWithStruct(this int someNumber, string someString)
         {
             Action x = PrintSomeSum<int>;
 
@@ -157,7 +157,7 @@ namespace Tests.TestCases
             }
         }
 
-        private static void UsedByReferenceAsArgument(int[] list, string arg)                    // Noncompliant FP from Roslyn LVA
+        private static void UsedByReferenceAsArgument(int[] list, string arg)
         {
             list.Where(LocalFunction<int>);
 
