@@ -287,5 +287,22 @@ int LocalFunction()
             context.Validate("boolParameter", new LiveIn("boolParameter"), new LiveOut("usedInTry", "usedInCatch", "usedInFinally", "usedInUnreachable"));
             context.Validate("LocalFunction();", new LiveIn("usedInTry", "usedInCatch", "usedInFinally", "usedInUnreachable"));
         }
+
+        [TestMethod]
+        public void LocalFunctionReference_LiveIn()
+        {
+            var code = @"
+var variable = 42;
+if (boolParameter)
+    return;
+Capturing(LocalFunction);
+
+int LocalFunction(int arg) => arg + variable;";
+
+            var context = new Context(code);
+            context.ValidateEntry(new LiveIn("boolParameter"), new LiveOut("boolParameter"));
+            context.Validate("boolParameter", new LiveIn("boolParameter"), new LiveOut("variable"));
+            context.Validate("Capturing(LocalFunction);", new LiveIn("variable"));
+        }
     }
 }

@@ -169,7 +169,10 @@ namespace SonarAnalyzer.CFG.LiveVariableAnalysis
                             ProcessFlowAnonymousFunction(cfg, IFlowAnonymousFunctionOperationWrapper.FromOperation(operation.Instance));
                             break;
                         case OperationKindEx.Invocation:
-                            ProcessInvocation(cfg, IInvocationOperationWrapper.FromOperation(operation.Instance));
+                            ProcessLocalFunction(cfg, IInvocationOperationWrapper.FromOperation(operation.Instance).TargetMethod);
+                            break;
+                        case OperationKindEx.MethodReference:
+                            ProcessLocalFunction(cfg, IMethodReferenceOperationWrapper.FromOperation(operation.Instance).Method);
                             break;
                     }
                 }
@@ -224,10 +227,10 @@ namespace SonarAnalyzer.CFG.LiveVariableAnalysis
                 }
             }
 
-            private void ProcessInvocation(ControlFlowGraph cfg, IInvocationOperationWrapper invocation)
+            private void ProcessLocalFunction(ControlFlowGraph cfg, IMethodSymbol method)
             {
                 // We need ConstructedFrom because TargetMethod of a generic local function invocation is not the correct symbol (has IsDefinition=False and wrong ContainingSymbol)
-                if (invocation.TargetMethod.ConstructedFrom is { MethodKind: MethodKindEx.LocalFunction, IsStatic: false } localFunction
+                if (method.ConstructedFrom is { MethodKind: MethodKindEx.LocalFunction, IsStatic: false } localFunction
                     && !ProcessedLocalFunctions.Contains(localFunction))
                 {
                     ProcessedLocalFunctions.Add(localFunction);
