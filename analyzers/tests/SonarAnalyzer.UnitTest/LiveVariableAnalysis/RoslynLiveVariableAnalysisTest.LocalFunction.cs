@@ -109,8 +109,8 @@ LocalFunction();
 int LocalFunction() => variable;";
             var context = new Context(code);
             context.ValidateEntry(new LiveIn("boolParameter"), new LiveOut("boolParameter"));
-            context.Validate("boolParameter", new LiveIn("boolParameter") /* ToDo: "variable" should LiveIn and LiveOut("variable")*/);
-            context.Validate("LocalFunction();" /* ToDo: Should be new LiveIn("variable") */);
+            context.Validate("boolParameter", new LiveIn("boolParameter"/*FIXME: "variable"*/), new LiveOut("variable"));
+            context.Validate("LocalFunction();", new LiveIn("variable"));
         }
 
         [TestMethod]
@@ -125,8 +125,8 @@ if (boolParameter)
 LocalFunction();";
             var context = new Context(code);
             context.ValidateEntry(new LiveIn("boolParameter"), new LiveOut("boolParameter"));
-            context.Validate("boolParameter", new LiveIn("boolParameter") /* ToDo: "variable" should LiveIn and LiveOut("variable")*/);
-            context.Validate("LocalFunction();" /* ToDo: Should be new LiveIn("variable") */);
+            context.Validate("boolParameter", new LiveIn("boolParameter"/*FIXME:, "variable"*/), new LiveOut("variable"));
+            context.Validate("LocalFunction();", new LiveIn("variable"));
         }
 
         [TestMethod]
@@ -138,11 +138,11 @@ if (boolParameter)
     return;
 LocalFunction<int>();
 
-T LocalFunction<T>() => variable;";
+int LocalFunction<T>() => variable;";
             var context = new Context(code);
             context.ValidateEntry(new LiveIn("boolParameter"), new LiveOut("boolParameter"));
-            context.Validate("boolParameter", new LiveIn("boolParameter") /* ToDo: "variable" should LiveIn and LiveOut("variable")*/);
-            context.Validate("LocalFunction<int>();" /* ToDo: Should be new LiveIn("variable") */);
+            context.Validate("boolParameter", new LiveIn("boolParameter"/*FIXME:, "variable"*/), new LiveOut("variable"));
+            context.Validate("LocalFunction<int>();", new LiveIn("variable"));
         }
 
         [TestMethod]
@@ -161,8 +161,57 @@ void LocalFunction()
 }";
             var context = new Context(code);
             context.ValidateEntry(new LiveIn("boolParameter"), new LiveOut("boolParameter"));
-            context.Validate("boolParameter", new LiveIn("boolParameter"), /*ToDo: Should not LiveOut, because it's overriden in LocalFunction */ new LiveOut("variable"));
-            context.Validate("LocalFunction();", /* ToDo: Should not LiveIn, because it's overriden in LocalFunction*/ new LiveIn("variable"));
+            context.Validate("boolParameter", new LiveIn("boolParameter"));
+            context.Validate("LocalFunction();");
+        }
+
+        [TestMethod]
+        public void LocalFunctionInvocation_NestedArgument_NotLiveIn()
+        {
+            var code = @"
+LocalFunction(40);
+
+int LocalFunction(int cnt) => cnt + 2;";
+            var context = new Context(code);
+            context.ValidateEntry(new LiveIn(/*FIXME: cnt should not be here, it's out of scope*/"cnt"), new LiveOut(/*FIXME: remove cnt*/"cnt"));
+            context.Validate("LocalFunction(40);", new LiveIn(/*FIXME: remove cnt*/"cnt"));
+        }
+
+        [TestMethod]
+        public void LocalFunctionInvocation_Recursive_LiveIn()
+        {
+            var code = @"
+var variable = 42;
+if (boolParameter)
+    return;
+LocalFunction(10);
+
+int LocalFunction(int cnt) => variable + (cnt == 0 ? 0 : LocalFunction(cnt - 1));";
+            var context = new Context(code);
+            context.ValidateEntry(new LiveIn("boolParameter"/*FIXME: cnt should not be here, it's out of scope*/, "cnt"), new LiveOut("boolParameter"/*FIXME: remove cnt*/, "cnt"));
+            context.Validate("boolParameter", new LiveIn("boolParameter"/*FIXME: remove cnt*/, "cnt" /*FIXME: , "variable"*/), new LiveOut("variable"/*FIXME: remove cnt*/, "cnt"));
+            context.Validate("LocalFunction(10);", new LiveIn("variable"/*FIXME: remove cnt*/, "cnt"));
+        }
+
+        [TestMethod]
+        public void LocalFunctionInvocation_Nested_LiveIn()
+        {
+            var code = @"
+var variable = 42;
+if (boolParameter)
+    return;
+LocalFunction();
+
+int LocalFunction()
+{
+    return Nested();
+
+    int Nested() => variable;
+}";
+            var context = new Context(code);
+            context.ValidateEntry(new LiveIn("boolParameter"), new LiveOut("boolParameter"));
+            context.Validate("boolParameter", new LiveIn("boolParameter"/*FIXME:,"variable"*/), new LiveOut("variable"));
+            context.Validate("LocalFunction();", new LiveIn("variable"));
         }
     }
 }
