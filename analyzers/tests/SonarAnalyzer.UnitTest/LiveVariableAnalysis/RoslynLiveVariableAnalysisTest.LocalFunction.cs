@@ -304,5 +304,30 @@ int LocalFunction(int arg) => arg + variable;";
             context.Validate("boolParameter", new LiveIn("boolParameter"), new LiveOut("variable"));
             context.Validate("Capturing(LocalFunction);", new LiveIn("variable"));
         }
+
+        [TestMethod]
+        public void LocalFunctionReference_Recursive_LiveIn()
+        {
+            var code = @"
+var variable = 42;
+if (boolParameter)
+    return;
+LocalFunction(42);
+
+void LocalFunction(int arg)
+{
+    Enumerable.Empty<object>().Where(IsTrue);
+
+    bool IsTrue(object x)
+    {
+        arg--;
+        return arg <= variable || new[] { x }.Any(IsTrue);
+    }
+}";
+            var context = new Context(code);
+            context.ValidateEntry(new LiveIn("boolParameter"), new LiveOut("boolParameter"));
+            context.Validate("boolParameter", new LiveIn("boolParameter"), new LiveOut("variable"));
+            context.Validate("LocalFunction(42);", new LiveIn("variable"));
+        }
     }
 }
