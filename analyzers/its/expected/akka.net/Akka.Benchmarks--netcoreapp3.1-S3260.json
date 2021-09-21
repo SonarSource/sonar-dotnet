@@ -1,0 +1,56 @@
+{
+"issues":  [
+{
+"id":  "S3260",
+"message":  "Private classes or records which are not derived in the current assembly should be marked as 'sealed'.",
+"location":  {
+"uri":  "sources\akka.net\src\benchmark\Akka.Benchmarks\IO\TcpOperationsBenchmarks.cs",
+"region":  {
+"startLine":  79,
+"startColumn":  23,
+"endLine":  79,
+"endColumn":  33
+}
+}
+},
+{
+"id":  "S3260",
+"message":  "Private classes or records which are not derived in the current assembly should be marked as 'sealed'.",
+"location":  {
+"uri":  "sources\akka.net\src\benchmark\Akka.Benchmarks\IO\TcpOperationsBenchmarks.cs",
+"region":  {
+"startLine":  94,
+"startColumn":  23,
+"endLine":  94,
+"endColumn":  37
+}
+}
+},
+{
+"id":  "S3260",
+"message":  "Private classes or records which are not derived in the current assembly should be marked as 'sealed'.",
+"location":  {
+"uri":  "sources\akka.net\src\benchmark\Akka.Benchmarks\IO\TcpOperationsBenchmarks.cs",
+"region":  {
+"startLine":  105,
+"startColumn":  23,
+"endLine":  105,
+"endColumn":  40
+}
+}
+},
+{
+"id":  "S3260",
+"message":  "Private classes or records which are not derived in the current assembly should be marked as 'sealed'.",
+"location":  {
+"uri":  "sources\akka.net\src\benchmark\Akka.Benchmarks\IO\TcpOperationsBenchmarks.cs",
+"region":  {
+"startLine":  135,
+"startColumn":  23,
+"endLine":  135,
+"endColumn":  29
+}
+}
+}
+]
+}

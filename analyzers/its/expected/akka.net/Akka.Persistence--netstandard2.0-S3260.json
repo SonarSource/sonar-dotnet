@@ -1,0 +1,43 @@
+{
+"issues":  [
+{
+"id":  "S3260",
+"message":  "Private classes or records which are not derived in the current assembly should be marked as 'sealed'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Eventsourced.cs",
+"region":  {
+"startLine":  654,
+"startColumn":  23,
+"endLine":  654,
+"endColumn":  46
+}
+}
+},
+{
+"id":  "S3260",
+"message":  "Private classes or records which are not derived in the current assembly should be marked as 'sealed'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Journal\PersistencePluginProxy.cs",
+"region":  {
+"startLine":  79,
+"startColumn":  23,
+"endLine":  79,
+"endColumn":  30
+}
+}
+},
+{
+"id":  "S3260",
+"message":  "Private classes or records which are not derived in the current assembly should be marked as 'sealed'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Journal\PersistencePluginProxy.cs",
+"region":  {
+"startLine":  84,
+"startColumn":  23,
+"endLine":  84,
+"endColumn":  36
+}
+}
+}
+]
+}

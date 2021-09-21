@@ -1,0 +1,160 @@
+{
+"issues":  [
+{
+"id":  "S3260",
+"message":  "Private classes or records which are not derived in the current assembly should be marked as 'sealed'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\ArrayCache.cs",
+"region":  {
+"startLine":  17,
+"startColumn":  30,
+"endLine":  17,
+"endColumn":  40
+}
+}
+},
+{
+"id":  "S3260",
+"message":  "Private classes or records which are not derived in the current assembly should be marked as 'sealed'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Conventions\StaticContentConventionBuilder.cs",
+"region":  {
+"startLine":  255,
+"startColumn":  23,
+"endLine":  255,
+"endColumn":  46
+}
+}
+},
+{
+"id":  "S3260",
+"message":  "Private classes or records which are not derived in the current assembly should be marked as 'sealed'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\HttpLink.cs",
+"region":  {
+"startLine":  283,
+"startColumn":  23,
+"endLine":  283,
+"endColumn":  48
+}
+}
+},
+{
+"id":  "S3260",
+"message":  "Private classes or records which are not derived in the current assembly should be marked as 'sealed'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Responses\Negotiation\DefaultResponseNegotiator.cs",
+"region":  {
+"startLine":  453,
+"startColumn":  23,
+"endLine":  453,
+"endColumn":  39
+}
+}
+},
+{
+"id":  "S3260",
+"message":  "Private classes or records which are not derived in the current assembly should be marked as 'sealed'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Routing\DefaultRouteCacheProvider.cs",
+"region":  {
+"startLine":  66,
+"startColumn":  23,
+"endLine":  66,
+"endColumn":  44
+}
+}
+},
+{
+"id":  "S3260",
+"message":  "Private classes or records which are not derived in the current assembly should be marked as 'sealed'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
+"region":  {
+"startLine":  2693,
+"startColumn":  23,
+"endLine":  2693,
+"endColumn":  43
+}
+}
+},
+{
+"id":  "S3260",
+"message":  "Private classes or records which are not derived in the current assembly should be marked as 'sealed'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
+"region":  {
+"startLine":  2752,
+"startColumn":  23,
+"endLine":  2752,
+"endColumn":  38
+}
+}
+},
+{
+"id":  "S3260",
+"message":  "Private classes or records which are not derived in the current assembly should be marked as 'sealed'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
+"region":  {
+"startLine":  2810,
+"startColumn":  23,
+"endLine":  2810,
+"endColumn":  42
+}
+}
+},
+{
+"id":  "S3260",
+"message":  "Private classes or records which are not derived in the current assembly should be marked as 'sealed'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
+"region":  {
+"startLine":  2877,
+"startColumn":  23,
+"endLine":  2877,
+"endColumn":  38
+}
+}
+},
+{
+"id":  "S3260",
+"message":  "Private classes or records which are not derived in the current assembly should be marked as 'sealed'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
+"region":  {
+"startLine":  2945,
+"startColumn":  23,
+"endLine":  2945,
+"endColumn":  42
+}
+}
+},
+{
+"id":  "S3260",
+"message":  "Private classes or records which are not derived in the current assembly should be marked as 'sealed'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
+"region":  {
+"startLine":  3022,
+"startColumn":  23,
+"endLine":  3022,
+"endColumn":  39
+}
+}
+},
+{
+"id":  "S3260",
+"message":  "Private classes or records which are not derived in the current assembly should be marked as 'sealed'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
+"region":  {
+"startLine":  3107,
+"startColumn":  23,
+"endLine":  3107,
+"endColumn":  50
+}
+}
+}
+]
+}

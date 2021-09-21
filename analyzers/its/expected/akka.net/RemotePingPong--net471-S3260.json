@@ -1,0 +1,43 @@
+{
+"issues":  [
+{
+"id":  "S3260",
+"message":  "Private classes or records which are not derived in the current assembly should be marked as 'sealed'.",
+"location":  {
+"uri":  "sources\akka.net\src\benchmark\RemotePingPong\Program.cs",
+"region":  {
+"startLine":  224,
+"startColumn":  23,
+"endLine":  224,
+"endColumn":  38
+}
+}
+},
+{
+"id":  "S3260",
+"message":  "Private classes or records which are not derived in the current assembly should be marked as 'sealed'.",
+"location":  {
+"uri":  "sources\akka.net\src\benchmark\RemotePingPong\Program.cs",
+"region":  {
+"startLine":  254,
+"startColumn":  23,
+"endLine":  254,
+"endColumn":  32
+}
+}
+},
+{
+"id":  "S3260",
+"message":  "Private classes or records which are not derived in the current assembly should be marked as 'sealed'.",
+"location":  {
+"uri":  "sources\akka.net\src\benchmark\RemotePingPong\Program.cs",
+"region":  {
+"startLine":  262,
+"startColumn":  23,
+"endLine":  262,
+"endColumn":  37
+}
+}
+}
+]
+}

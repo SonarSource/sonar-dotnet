@@ -1,0 +1,14 @@
+{
+  "title": "Non-derived \"private\" classes and records should be \"sealed\"",
+  "type": "CODE_SMELL",
+  "status": "ready",
+  "remediation": {
+    "func": "Constant\/Issue",
+    "constantCost": "5min"
+  },
+  "tags": [],
+  "defaultSeverity": "Minor",
+  "ruleSpecification": "RSPEC-3260",
+  "sqKey": "S3260",
+  "scope": "Main"
+}
