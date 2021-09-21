@@ -109,7 +109,7 @@ LocalFunction();
 int LocalFunction() => variable;";
             var context = new Context(code);
             context.ValidateEntry(new LiveIn("boolParameter"), new LiveOut("boolParameter"));
-            context.Validate("boolParameter", new LiveIn("boolParameter"/*FIXME: "variable"*/), new LiveOut("variable"));
+            context.Validate("boolParameter", new LiveIn("boolParameter"), new LiveOut("variable"));
             context.Validate("LocalFunction();", new LiveIn("variable"));
         }
 
@@ -125,7 +125,7 @@ if (boolParameter)
 LocalFunction();";
             var context = new Context(code);
             context.ValidateEntry(new LiveIn("boolParameter"), new LiveOut("boolParameter"));
-            context.Validate("boolParameter", new LiveIn("boolParameter"/*FIXME:, "variable"*/), new LiveOut("variable"));
+            context.Validate("boolParameter", new LiveIn("boolParameter"), new LiveOut("variable"));
             context.Validate("LocalFunction();", new LiveIn("variable"));
         }
 
@@ -141,7 +141,7 @@ LocalFunction<int>();
 int LocalFunction<T>() => variable;";
             var context = new Context(code);
             context.ValidateEntry(new LiveIn("boolParameter"), new LiveOut("boolParameter"));
-            context.Validate("boolParameter", new LiveIn("boolParameter"/*FIXME:, "variable"*/), new LiveOut("variable"));
+            context.Validate("boolParameter", new LiveIn("boolParameter"), new LiveOut("variable"));
             context.Validate("LocalFunction<int>();", new LiveIn("variable"));
         }
 
@@ -189,7 +189,7 @@ LocalFunction(10);
 int LocalFunction(int cnt) => variable + (cnt == 0 ? 0 : LocalFunction(cnt - 1));";
             var context = new Context(code);
             context.ValidateEntry(new LiveIn("boolParameter"/*FIXME: cnt should not be here, it's out of scope*/, "cnt"), new LiveOut("boolParameter"/*FIXME: remove cnt*/, "cnt"));
-            context.Validate("boolParameter", new LiveIn("boolParameter"/*FIXME: remove cnt*/, "cnt" /*FIXME: , "variable"*/), new LiveOut("variable"/*FIXME: remove cnt*/, "cnt"));
+            context.Validate("boolParameter", new LiveIn("boolParameter"/*FIXME: remove cnt*/, "cnt"), new LiveOut("variable"/*FIXME: remove cnt*/, "cnt"));
             context.Validate("LocalFunction(10);", new LiveIn("variable"/*FIXME: remove cnt*/, "cnt"));
         }
 
@@ -210,7 +210,7 @@ int LocalFunction()
 }";
             var context = new Context(code);
             context.ValidateEntry(new LiveIn("boolParameter"), new LiveOut("boolParameter"));
-            context.Validate("boolParameter", new LiveIn("boolParameter"/*FIXME:,"variable"*/), new LiveOut("variable"));
+            context.Validate("boolParameter", new LiveIn("boolParameter"), new LiveOut("variable"));
             context.Validate("LocalFunction();", new LiveIn("variable"));
         }
     }
