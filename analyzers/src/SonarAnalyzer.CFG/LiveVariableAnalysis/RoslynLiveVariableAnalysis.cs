@@ -35,6 +35,11 @@ namespace SonarAnalyzer.CFG.LiveVariableAnalysis
         public RoslynLiveVariableAnalysis(ControlFlowGraph cfg) : base(cfg) =>
             Analyze();
 
+        internal static bool IsOutArgument(IOperation operation) =>
+            new IOperationWrapperSonar(operation) is var wrapped
+            && IArgumentOperationWrapper.IsInstance(wrapped.Parent)
+            && IArgumentOperationWrapper.FromOperation(wrapped.Parent).Parameter.RefKind == RefKind.Out;
+
         protected override IEnumerable<BasicBlock> ReversedBlocks() =>
             cfg.Blocks.Reverse();
 
@@ -59,6 +64,13 @@ namespace SonarAnalyzer.CFG.LiveVariableAnalysis
                     {
                         yield return trySuccessor.Destination;
                     }
+                }
+            }
+            if (block.EnclosingRegion.Kind == ControlFlowRegionKind.Try)
+            {
+                foreach (var catchOrFilterRegion in block.Successors.SelectMany(CatchOrFilterRegions))
+                {
+                    yield return cfg.Blocks[catchOrFilterRegion.FirstBlockOrdinal];
                 }
             }
         }
@@ -97,11 +109,6 @@ namespace SonarAnalyzer.CFG.LiveVariableAnalysis
                     .Where(x => x != null);
         }
 
-        internal static bool IsOutArgument(IOperation operation) =>
-            new IOperationWrapperSonar(operation) is var wrapped
-            && IArgumentOperationWrapper.IsInstance(wrapped.Parent)
-            && IArgumentOperationWrapper.FromOperation(wrapped.Parent).Parameter.RefKind == RefKind.Out;
-
         protected override State ProcessBlock(BasicBlock block)
         {
             var ret = new RoslynState();
@@ -113,6 +120,26 @@ namespace SonarAnalyzer.CFG.LiveVariableAnalysis
         {
             var tryRegion = finallyRegion.EnclosingRegion.NestedRegions.Single(x => x.Kind == ControlFlowRegionKind.Try);
             return tryRegion.Blocks(cfg).SelectMany(x => x.Successors).Where(x => x.FinallyRegions.Contains(finallyRegion));
+        }
+
+        private static IEnumerable<ControlFlowRegion> CatchOrFilterRegions(ControlFlowBranch trySuccessor) =>
+            trySuccessor.Semantics == ControlFlowBranchSemantics.Throw
+                ? CatchOrFilterRegions(trySuccessor.Source.EnclosingRegion.EnclosingRegion)
+                : trySuccessor.LeavingRegions.Where(x => x.Kind == ControlFlowRegionKind.TryAndCatch).SelectMany(CatchOrFilterRegions);
+
+        private static IEnumerable<ControlFlowRegion> CatchOrFilterRegions(ControlFlowRegion tryAndCatchRegion)
+        {
+            foreach (var region in tryAndCatchRegion.NestedRegions)
+            {
+                if (region.Kind == ControlFlowRegionKind.Catch)
+                {
+                    yield return region;
+                }
+                else if (region.Kind == ControlFlowRegionKind.FilterAndHandler)
+                {
+                    yield return region.NestedRegions.Single(x => x.Kind == ControlFlowRegionKind.Filter);
+                }
+            }
         }
 
         private class RoslynState : State
