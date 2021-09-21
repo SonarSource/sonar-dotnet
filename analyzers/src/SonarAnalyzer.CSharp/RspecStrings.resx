@@ -1,17 +1,17 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <root>
-  <!-- 
-    Microsoft ResX Schema 
-    
+  <!--
+    Microsoft ResX Schema
+
     Version 2.0
-    
-    The primary goals of this format is to allow a simple XML format 
-    that is mostly human readable. The generation and parsing of the 
-    various data types are done through the TypeConverter classes 
+
+    The primary goals of this format is to allow a simple XML format
+    that is mostly human readable. The generation and parsing of the
+    various data types are done through the TypeConverter classes
     associated with the data types.
-    
+
     Example:
-    
+
     ... ado.net/XML headers & schema ...
     <resheader name="resmimetype">text/microsoft-resx</resheader>
     <resheader name="version">2.0</resheader>
@@ -26,36 +26,36 @@
         <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
         <comment>This is a comment</comment>
     </data>
-                
-    There are any number of "resheader" rows that contain simple 
+
+    There are any number of "resheader" rows that contain simple
     name/value pairs.
-    
-    Each data row contains a name, and value. The row also contains a 
-    type or mimetype. Type corresponds to a .NET class that support 
-    text/value conversion through the TypeConverter architecture. 
-    Classes that don't support this are serialized and stored with the 
+
+    Each data row contains a name, and value. The row also contains a
+    type or mimetype. Type corresponds to a .NET class that support
+    text/value conversion through the TypeConverter architecture.
+    Classes that don't support this are serialized and stored with the
     mimetype set.
-    
-    The mimetype is used for serialized objects, and tells the 
-    ResXResourceReader how to depersist the object. This is currently not 
+
+    The mimetype is used for serialized objects, and tells the
+    ResXResourceReader how to depersist the object. This is currently not
     extensible. For a given mimetype the value must be set accordingly:
-    
-    Note - application/x-microsoft.net.object.binary.base64 is the format 
-    that the ResXResourceWriter will generate, however the reader can 
+
+    Note - application/x-microsoft.net.object.binary.base64 is the format
+    that the ResXResourceWriter will generate, however the reader can
     read any of the formats listed below.
-    
+
     mimetype: application/x-microsoft.net.object.binary.base64
-    value   : The object must be serialized with 
+    value   : The object must be serialized with
             : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
             : and then encoded with base64 encoding.
-    
+
     mimetype: application/x-microsoft.net.object.soap.base64
-    value   : The object must be serialized with 
+    value   : The object must be serialized with
             : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
             : and then encoded with base64 encoding.
 
     mimetype: application/x-microsoft.net.object.bytearray.base64
-    value   : The object must be serialized into a byte array 
+    value   : The object must be serialized into a byte array
             : using a System.ComponentModel.TypeConverter
             : and then encoded with base64 encoding.
     -->
@@ -4774,7 +4774,7 @@
     <value>Critical Code Smell</value>
   </data>
   <data name="S2479_Description" xml:space="preserve">
-    <value>Non-encoded control characters and whitespace characters are often injected in the source code because of a bad manipulation. They are either invisible or difficult to recognize, which can result in bugs when the string is not what the developer expects. If you actually need to use a control character use their encoded version (ex: ASCII 
+    <value>Non-encoded control characters and whitespace characters are often injected in the source code because of a bad manipulation. They are either invisible or difficult to recognize, which can result in bugs when the string is not what the developer expects. If you actually need to use a control character use their encoded version (ex: ASCII
 ,	,…​ or Unicode U+000D, U+0009,…​).</value>
   </data>
   <data name="S2479_IsActivatedByDefault" xml:space="preserve">
@@ -6749,39 +6749,6 @@
     <value>Declarations and initializations should be as concise as possible</value>
   </data>
   <data name="S3257_Type" xml:space="preserve">
-    <value>CODE_SMELL</value>
-  </data>
-  <data name="S3260_Category" xml:space="preserve">
-    <value>Minor Code Smell</value>
-  </data>
-  <data name="S3260_Description" xml:space="preserve">
-    <value>private classes and records aren’t visible outside of their assemblies anyway, so if they’re not extended inside the assemblies, they should be made explicitly non-extensible with the addition of the sealed keyword.</value>
-  </data>
-  <data name="S3260_IsActivatedByDefault" xml:space="preserve">
-    <value>True</value>
-  </data>
-  <data name="S3260_Remediation" xml:space="preserve">
-    <value>Constant/Issue</value>
-  </data>
-  <data name="S3260_RemediationCost" xml:space="preserve">
-    <value>5min</value>
-  </data>
-  <data name="S3260_Scope" xml:space="preserve">
-    <value>Main</value>
-  </data>
-  <data name="S3260_Severity" xml:space="preserve">
-    <value>Minor</value>
-  </data>
-  <data name="S3260_Status" xml:space="preserve">
-    <value>ready</value>
-  </data>
-  <data name="S3260_Tags" xml:space="preserve">
-    <value />
-  </data>
-  <data name="S3260_Title" xml:space="preserve">
-    <value>Non-derived "private" classes and records should be "sealed"</value>
-  </data>
-  <data name="S3260_Type" xml:space="preserve">
     <value>CODE_SMELL</value>
   </data>
   <data name="S3261_Category" xml:space="preserve">
