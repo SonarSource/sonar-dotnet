@@ -41,48 +41,29 @@ namespace SonarAnalyzer.Rules.CSharp
 
             // Returns true if the block contains assignment before access
             protected override bool IsValid(BasicBlock block) =>
-                Match(block, checkReadBeforeWrite: false);
+                ProcessBlock(block, cfg, false);
 
             // Returns true if the block contains access before assignment
             protected override bool IsInvalid(BasicBlock block) =>
-                Match(block, checkReadBeforeWrite: true);
+                ProcessBlock(block, cfg, true);
 
-            private bool Match(BasicBlock block, bool checkReadBeforeWrite)
+            private bool ProcessBlock(BasicBlock block, ControlFlowGraph controlFlowGraph, bool checkReadBeforeWrite)
             {
-                foreach (var operation in block.OperationsAndBranchValue)
+                foreach (var operation in block.OperationsAndBranchValue.Reverse().ToReversedExecutionOrder())
                 {
-                    if (ProcessOperation(operation, cfg, checkReadBeforeWrite, out var result))
+                    if (checkReadBeforeWrite && operation.Instance.Kind == OperationKindEx.FlowAnonymousFunction)
                     {
-                        return result;
-                    }
-                }
-
-                return false;
-            }
-
-            private bool ProcessOperation(IOperation operation, ControlFlowGraph controlFlowGraph, bool checkReadBeforeWrite, out bool result)
-            {
-                foreach (var child in new[] { operation }.ToReversedExecutionOrder())
-                {
-                    if (checkReadBeforeWrite && child.Instance.Kind == OperationKindEx.FlowAnonymousFunction)
-                    {
-                        var anonymousFunctionCfg = controlFlowGraph.GetAnonymousFunctionControlFlowGraph(IFlowAnonymousFunctionOperationWrapper.FromOperation(child.Instance));
-                        foreach (var subOperation in anonymousFunctionCfg.Blocks.SelectMany(x => x.OperationsAndBranchValue))
+                        var anonymousFunctionCfg = controlFlowGraph.GetAnonymousFunctionControlFlowGraph(IFlowAnonymousFunctionOperationWrapper.FromOperation(operation.Instance));
+                        if (anonymousFunctionCfg.Blocks.Any(x => ProcessBlock(x, anonymousFunctionCfg, checkReadBeforeWrite)))
                         {
-                            if (ProcessOperation(subOperation, anonymousFunctionCfg, checkReadBeforeWrite, out result))
-                            {
-                                return true;
-                            }
+                            return true;
                         }
                     }
-                    else if (memberToCheck.Equals(MemberSymbol(child.Instance)))
+                    else if (memberToCheck.Equals(MemberSymbol(operation.Instance)))
                     {
-                        result = IsReadOrWrite(child, checkReadBeforeWrite);
-                        return true;
+                        return IsReadOrWrite(operation, checkReadBeforeWrite);
                     }
                 }
-
-                result = false;
                 return false;
             }
 
