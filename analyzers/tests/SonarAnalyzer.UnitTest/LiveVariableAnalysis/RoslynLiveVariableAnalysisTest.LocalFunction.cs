@@ -178,6 +178,22 @@ int LocalFunction(int cnt) => cnt + 2;";
         }
 
         [TestMethod]
+        public void LocalFunctionInvocation_NestedVariable_NotLiveIn_NotCaptured()
+        {
+            var code = @"
+LocalFunction();
+
+int LocalFunction()
+{
+    var nested = 42;
+    Func<int> f = () => nested;
+}";
+            var context = new Context(code);
+            context.ValidateEntry(/*FIXME: Remove*/new Captured("nested"));
+            context.Validate("LocalFunction();",/*FIXME: Remove*/ new Captured("nested"));
+        }
+
+        [TestMethod]
         public void LocalFunctionInvocation_Recursive_LiveIn()
         {
             var code = @"
