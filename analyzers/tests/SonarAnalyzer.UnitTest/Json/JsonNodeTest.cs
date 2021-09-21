@@ -45,6 +45,8 @@ namespace SonarAnalyzer.UnitTest.Common
             sut.Invoking(x => x.Add("Key", sut)).Should().Throw<InvalidOperationException>();
             sut.Invoking(x => x.ContainsKey("Key")).Should().Throw<InvalidOperationException>();
             sut.Invoking(x => ((IEnumerable)x).GetEnumerator()).Should().Throw<InvalidOperationException>();
+            Action action = () => new JsonNode(LinePosition.Zero, Kind.Value);
+            action.Invoking(_ => action.Invoke()).Should().Throw<InvalidOperationException>();
         }
 
         [TestMethod]
@@ -108,6 +110,18 @@ namespace SonarAnalyzer.UnitTest.Common
             sut.End.Should().Be(end);
 
             sut.Invoking(x => x.UpdateEnd(end)).Should().Throw<InvalidOperationException>();
+        }
+
+        [TestMethod]
+        public void ParsedFromString()
+        {
+            var sut = JsonNode.FromString(@"[""a"",""b""]");
+            sut.Kind.Should().Be(Kind.List);
+            sut.Count.Should().Be(2);
+            sut[0].Kind.Should().Be(Kind.Value);
+            sut[1].Kind.Should().Be(Kind.Value);
+            sut[0].Value.Should().Be("a");
+            sut[1].Value.Should().Be("b");
         }
     }
 }

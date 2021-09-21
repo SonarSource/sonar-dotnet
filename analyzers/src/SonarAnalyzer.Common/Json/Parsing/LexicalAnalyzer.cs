@@ -252,7 +252,7 @@ namespace SonarAnalyzer.Json.Parsing
                         current.Append(CurrentChar);
                         break;
                     case '.':
-                        if (current == integer && @decimal == null && current.ToString().TrimStart('-').Any())
+                        if (current == integer && current.ToString().TrimStart('-').Any())
                         {
                             @decimal = new StringBuilder();
                             current = @decimal;
@@ -274,16 +274,8 @@ namespace SonarAnalyzer.Json.Parsing
                         current = exponent;
                         break;
                     default:
-                        // Remain on the last digit
-                        if (position > 0)
-                        {
-                            position--;
-                        }
-                        else
-                        {
-                            line--;
-                            position = lines[line].Length - 1;
-                        }
+                        // Remain on the last digit, position cannot be zero here, since we at least read one digit character
+                        position--;
                         return BuildResult();
                 }
                 NextPosition(false);

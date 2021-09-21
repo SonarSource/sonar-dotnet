@@ -126,6 +126,7 @@ namespace SonarAnalyzer.UnitTest.Common
         [DataRow(" \"Slash\\/ Backslash\\\\\" ", "Slash/ Backslash\\")]
         [DataRow(" \"Special B\\b F\\f N\\n R\\r T\\t\" ", "Special B\b F\f N\n R\r T\t")]
         [DataRow(" \"Unicode\u0158\u0159\" ", "UnicodeŘř")]
+        [DataRow(@"""\u0159""", "ř")]
         public void ReadString(string source, string expected)
         {
             var sut = new LexicalAnalyzer(source);
