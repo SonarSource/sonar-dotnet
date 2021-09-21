@@ -1,5 +1,5 @@
 {
-  "title": "Non-derived \"private\" classes should be \"sealed\"",
+  "title": "Non-derived \"private\" classes and records should be \"sealed\"",
   "type": "CODE_SMELL",
   "status": "ready",
   "remediation": {
