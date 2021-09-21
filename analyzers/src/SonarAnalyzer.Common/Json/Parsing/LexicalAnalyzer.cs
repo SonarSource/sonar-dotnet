@@ -126,25 +126,75 @@ namespace SonarAnalyzer.Json.Parsing
             }
             else
             {
-                do
-                {
-                    line++;
-                }
-                while (line < lines.Count && lines[line].Length == 0);
-                column = 0;
-                if (throwIfReachedEndOfInput && ReachedEndOfInput)
-                {
-                    throw new JsonException("Unexpected EOI", LastStart);
-                }
+                SeekToNextLine(throwIfReachedEndOfInput);
+            }
+        }
+
+        private void NthPosition(int n, bool throwIfReachedEndOfInput = true)
+        {
+            for (var i = 0; i < n; i++)
+            {
+                NextPosition(throwIfReachedEndOfInput);
+            }
+        }
+
+        private void SeekToNextLine(bool throwIfReachedEndOfInput)
+        {
+            do
+            {
+                line++;
+            }
+            while (line < lines.Count && lines[line].Length == 0);
+            column = 0;
+            if (throwIfReachedEndOfInput && ReachedEndOfInput)
+            {
+                throw new JsonException("Unexpected EOI", LastStart);
             }
         }
 
         private void SkipWhiteSpace()
         {
-            while (!ReachedEndOfInput && char.IsWhiteSpace(CurrentChar))
+            while (!ReachedEndOfInput)
             {
-                NextPosition(false);
+                if (IsWhitespace())
+                {
+                    while (!ReachedEndOfInput && IsWhitespace())
+                    {
+                        NextPosition(false);
+                    }
+                }
+                else if (IsSingleLineComment())
+                {
+                    // We just need to read starting from the next line
+                    SeekToNextLine(false);
+                }
+                else if (IsOpenMultiLineComment())
+                {
+                    // need to skip /* part of the comment
+                    NthPosition(2, false);
+                    while (!ReachedEndOfInput && !IsCloseMultiLineComment())
+                    {
+                        NextPosition(); // we still want to fail on non-closed comments
+                    }
+                    // need to skip */ part of the comment
+                    NthPosition(2, false);
+                }
+                else
+                {
+                    break;
+                }
             }
+
+            char? NextCharSameLine() =>
+                (column + 1 < lines[line].Length) ? lines[line][position + 1] : (char?)null;
+            bool IsWhitespace() =>
+                char.IsWhiteSpace(CurrentChar);
+            bool IsSingleLineComment() =>
+                CurrentChar == '/' && NextCharSameLine() == '/';
+            bool IsOpenMultiLineComment() =>
+                CurrentChar == '/' && NextCharSameLine() == '*';
+            bool IsCloseMultiLineComment() =>
+                CurrentChar == '*' && NextCharSameLine() == '/';
         }
 
         private void ReadKeyword(string keyword)

@@ -39,6 +39,24 @@ namespace SonarAnalyzer.UnitTest.Common
         }
 
         [TestMethod]
+        public void SupportsSingleLineComments()
+        {
+            var sut = new LexicalAnalyzer("   // [ ]\t\n\r [ //{}\n \r ] //{{}}\r\n");
+            sut.NextSymbol().Should().Be(Symbol.OpenSquareBracket);
+            sut.NextSymbol().Should().Be(Symbol.CloseSquareBracket);
+            sut.NextSymbol().Should().Be(Symbol.EOI);
+        }
+
+        [TestMethod]
+        public void SupportsMultiLineComments()
+        {
+            var sut = new LexicalAnalyzer("   /* [ ]\t\n\r */ [ /* foo bar \n baz [] */ \n \r ] /*{{}}*/\r\n");
+            sut.NextSymbol().Should().Be(Symbol.OpenSquareBracket);
+            sut.NextSymbol().Should().Be(Symbol.CloseSquareBracket);
+            sut.NextSymbol().Should().Be(Symbol.EOI);
+        }
+
+        [TestMethod]
         public void ReadSpecialCharacters()
         {
             var sut = new LexicalAnalyzer("{{[[,,]]}}::");
@@ -122,6 +140,9 @@ namespace SonarAnalyzer.UnitTest.Common
         [DataTestMethod]
         [DataRow(" \"\" ", "")]
         [DataRow(" \"Lorem Ipsum\" ", "Lorem Ipsum")]
+        [DataRow(" /*\"Lorem Ipsum\"*/ \"dolor sit amet\" ", "dolor sit amet")]
+        [DataRow(" \"Lorem /**/ Ipsum\" ", "Lorem /**/ Ipsum")]
+        [DataRow(" \"Lorem // Ipsum\" ", "Lorem // Ipsum")]
         [DataRow(" \"Quote\\\"Quote\" ", "Quote\"Quote")]
         [DataRow(" \"Slash\\/ Backslash\\\\\" ", "Slash/ Backslash\\")]
         [DataRow(" \"Special B\\b F\\f N\\n R\\r T\\t\" ", "Special B\b F\f N\n R\r T\t")]
