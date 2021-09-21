@@ -53,8 +53,9 @@ namespace SonarAnalyzer.Rules.CSharp
                         c.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, baseTypeDeclarationSyntax.Identifier.GetLocation()));
                     }
                 }
-            }, SyntaxKind.ClassDeclaration,
-               SyntaxKindEx.RecordDeclaration);
+            },
+            SyntaxKind.ClassDeclaration,
+            SyntaxKindEx.RecordDeclaration);
 
         private static bool IsPrivateButNotSealedType(BaseTypeDeclarationSyntax typeDeclaration) =>
            typeDeclaration.Modifiers.Any(SyntaxKind.PrivateKeyword)
@@ -65,7 +66,8 @@ namespace SonarAnalyzer.Rules.CSharp
             privateTypeInfo.ContainingType
                            .GetMembers()
                            .OfType<INamedTypeSymbol>()
-                           .Where(symbol => !symbol.Name.Equals(privateTypeInfo.Name))
-                           .Any(symbol => symbol.BaseType != null && symbol.BaseType.Equals(privateTypeInfo));
+                           .Any(symbol => !symbol.Name.Equals(privateTypeInfo.Name)
+                                          && symbol.BaseType != null
+                                          && symbol.BaseType.Equals(privateTypeInfo));
     }
 }
