@@ -32,7 +32,8 @@ namespace SonarAnalyzer.CFG.LiveVariableAnalysis
     {
         protected override BasicBlock ExitBlock => cfg.ExitBlock;
 
-        public RoslynLiveVariableAnalysis(ControlFlowGraph cfg) : base(cfg) =>
+        public RoslynLiveVariableAnalysis(ControlFlowGraph cfg)
+            : base(cfg, new IOperationWrapperSonar(cfg.OriginalOperation).SemanticModel.GetDeclaredSymbol(cfg.OriginalOperation.Syntax)) =>
             Analyze();
 
         internal static bool IsOutArgument(IOperation operation) =>
@@ -111,7 +112,7 @@ namespace SonarAnalyzer.CFG.LiveVariableAnalysis
 
         protected override State ProcessBlock(BasicBlock block)
         {
-            var ret = new RoslynState();
+            var ret = new RoslynState(originalDeclaration);
             ret.ProcessBlock(cfg, block);
             return ret;
         }
@@ -144,6 +145,11 @@ namespace SonarAnalyzer.CFG.LiveVariableAnalysis
 
         private class RoslynState : State
         {
+            private readonly ISymbol originalDeclaration;
+
+            public RoslynState(ISymbol originalDeclaration) =>
+                this.originalDeclaration = originalDeclaration;
+
             public void ProcessBlock(ControlFlowGraph cfg, BasicBlock block)
             {
                 foreach (var operation in block.OperationsAndBranchValue.ToReversedExecutionOrder())
@@ -165,23 +171,23 @@ namespace SonarAnalyzer.CFG.LiveVariableAnalysis
                         case OperationKindEx.Invocation:
                             ProcessInvocation(cfg, IInvocationOperationWrapper.FromOperation(operation.Instance));
                             break;
-
                     }
                 }
             }
 
             private void ProcessParameterOrLocalReference(IOperationWrapper reference)
             {
-                var symbol = ParameterOrLocalSymbol(reference.WrappedOperation);
-                Debug.Assert(symbol != null, "ProcessParameterOrLocalReference should resolve parametr or local symbol.");
-                if (IsOutArgument(reference.WrappedOperation))
+                if (ParameterOrLocalSymbol(reference.WrappedOperation) is { } symbol)
                 {
-                    Assigned.Add(symbol);
-                    UsedBeforeAssigned.Remove(symbol);
-                }
-                else if (!IsAssignmentTarget())
-                {
-                    UsedBeforeAssigned.Add(symbol);
+                    if (IsOutArgument(reference.WrappedOperation))
+                    {
+                        Assigned.Add(symbol);
+                        UsedBeforeAssigned.Remove(symbol);
+                    }
+                    else if (!IsAssignmentTarget())
+                    {
+                        UsedBeforeAssigned.Add(symbol);
+                    }
                 }
 
                 bool IsAssignmentTarget() =>
@@ -234,13 +240,16 @@ namespace SonarAnalyzer.CFG.LiveVariableAnalysis
                 }
             }
 
-            private static ISymbol ParameterOrLocalSymbol(IOperation operation) =>
-                operation switch
+            private ISymbol ParameterOrLocalSymbol(IOperation operation)
+            {
+                ISymbol candidate = operation switch
                 {
                     var _ when IParameterReferenceOperationWrapper.IsInstance(operation) => IParameterReferenceOperationWrapper.FromOperation(operation).Parameter,
                     var _ when ILocalReferenceOperationWrapper.IsInstance(operation) => ILocalReferenceOperationWrapper.FromOperation(operation).Local,
                     _ => null
                 };
+                return originalDeclaration.Equals(candidate?.ContainingSymbol) ? candidate : null;
+            }
         }
     }
 }

@@ -173,8 +173,8 @@ LocalFunction(40);
 
 int LocalFunction(int cnt) => cnt + 2;";
             var context = new Context(code);
-            context.ValidateEntry(new LiveIn(/*FIXME: cnt should not be here, it's out of scope*/"cnt"), new LiveOut(/*FIXME: remove cnt*/"cnt"));
-            context.Validate("LocalFunction(40);", new LiveIn(/*FIXME: remove cnt*/"cnt"));
+            context.ValidateEntry();
+            context.Validate("LocalFunction(40);");
         }
 
         [TestMethod]
@@ -204,9 +204,9 @@ LocalFunction(10);
 
 int LocalFunction(int cnt) => variable + (cnt == 0 ? 0 : LocalFunction(cnt - 1));";
             var context = new Context(code);
-            context.ValidateEntry(new LiveIn("boolParameter"/*FIXME: cnt should not be here, it's out of scope*/, "cnt"), new LiveOut("boolParameter"/*FIXME: remove cnt*/, "cnt"));
-            context.Validate("boolParameter", new LiveIn("boolParameter"/*FIXME: remove cnt*/, "cnt"), new LiveOut("variable"/*FIXME: remove cnt*/, "cnt"));
-            context.Validate("LocalFunction(10);", new LiveIn("variable"/*FIXME: remove cnt*/, "cnt"));
+            context.ValidateEntry(new LiveIn("boolParameter"), new LiveOut("boolParameter"));
+            context.Validate("boolParameter", new LiveIn("boolParameter"), new LiveOut("variable"));
+            context.Validate("LocalFunction(10);", new LiveIn("variable"));
         }
 
         [TestMethod]

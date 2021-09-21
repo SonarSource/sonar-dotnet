@@ -736,7 +736,8 @@ End Class";
                 Cfg = TestHelper.CompileCfg(code, isCSharp);
                 if (localFunctionName != null)
                 {
-                    Cfg = Cfg.GetLocalFunctionControlFlowGraph(Cfg.LocalFunctions.Single(x => x.Name == localFunctionName));
+                    var originalDeclaration = Cfg.LocalFunctions.Single(x => x.Name == localFunctionName);
+                    Cfg = Cfg.GetLocalFunctionControlFlowGraph(originalDeclaration);
                 }
                 Console.WriteLine(CfgSerializer.Serialize(Cfg));
                 Lva = new RoslynLiveVariableAnalysis(Cfg);
