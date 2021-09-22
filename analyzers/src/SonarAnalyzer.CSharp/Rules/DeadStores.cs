@@ -88,7 +88,7 @@ namespace SonarAnalyzer.Rules.CSharp
         {
             if (symbol != null && node != null)
             {
-                //if (useSonarCfg)
+                if (useSonarCfg)
                 {
                     // Tuple expressions are not supported. See https://github.com/SonarSource/sonar-dotnet/issues/3094
                     if (!node.DescendantNodes().AnyOfKind(SyntaxKindEx.TupleExpression) && CSharpControlFlowGraph.TryGet(node, context.SemanticModel, out var cfg))
@@ -98,14 +98,14 @@ namespace SonarAnalyzer.Rules.CSharp
                         checker.Analyze();
                     }
                 }
-                //else
-                //{
-                //    throw new System.NotImplementedException();
-                //    //var cfg = node.CreateCfg(context.SemanticModel, symbol as IMethodSymbol);   //FIXME: Will that work for lambdas?
-                //    //var lva = new RoslynLiveVariableAnalysis(cfg);
-                //    // var checker = new RoslynChecker(context, cfg, lva);
-                //    // checker.Analyze();
-                //}
+                else
+                {
+                    throw new System.NotImplementedException();
+                    //var cfg = node.CreateCfg(context.SemanticModel, symbol as IMethodSymbol);   //FIXME: Will that work for lambdas?
+                    //var lva = new RoslynLiveVariableAnalysis(cfg);
+                    // var checker = new RoslynChecker(context, cfg, lva);
+                    // checker.Analyze();
+                }
             }
         }
 
