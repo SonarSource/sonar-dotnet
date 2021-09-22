@@ -28,7 +28,6 @@ using Microsoft.CodeAnalysis.Text;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using SonarAnalyzer.Common;
-using static Microsoft.VisualStudio.TestTools.UnitTesting.Assert;
 using static SonarAnalyzer.Common.AnalyzerConfiguration;
 
 namespace SonarAnalyzer.UnitTest.Common
@@ -53,19 +52,22 @@ namespace SonarAnalyzer.UnitTest.Common
         }
 
         [TestMethod]
-        public void AlwaysEnabled_WhenNotInitialized_ReturnsTrue()
-        {
-            var sut = AlwaysEnabled;
-            IsTrue(sut.IsEnabled("S101"));
-        }
+        public void AlwaysEnabled_WhenNotInitialized_ReturnsTrue() =>
+            AlwaysEnabled.IsEnabled("S101").Should().BeTrue();
 
         [TestMethod]
         public void AlwaysEnabled_AnyValue_ReturnsTrue()
         {
-            var sut = AlwaysEnabled;
-            IsTrue(sut.IsEnabled(null));
-            IsTrue(sut.IsEnabled(""));
-            IsTrue(sut.IsEnabled("foo"));
+            AlwaysEnabled.IsEnabled(null).Should().BeTrue();
+            AlwaysEnabled.IsEnabled(string.Empty).Should().BeTrue();
+            AlwaysEnabled.IsEnabled("foo").Should().BeTrue();
+        }
+
+        [TestMethod]
+        public void ForceSonarCfg_DisabledByDefault()
+        {
+            AlwaysEnabled.ForceSonarCfg.Should().BeFalse();
+            new HotspotConfiguration(ruleLoaderMock.Object).ForceSonarCfg.Should().BeFalse();
         }
 
         [TestMethod]
@@ -74,8 +76,7 @@ namespace SonarAnalyzer.UnitTest.Common
             var sut = AlwaysEnabled;
 
             sut.Initialize(null);
-
-            IsTrue(sut.IsEnabled(FirstRuleId));
+            sut.IsEnabled(FirstRuleId).Should().BeTrue();
         }
 
         [TestMethod]
@@ -87,15 +88,15 @@ namespace SonarAnalyzer.UnitTest.Common
             Initialize(sut, FirstSonarLintFilePath, FirstSonarLintFileContent);
 
             // assert
-            IsTrue(sut.IsEnabled(FirstRuleId));
-            IsFalse(sut.IsEnabled(SecondRuleId));
+            sut.IsEnabled(FirstRuleId).Should().BeTrue();
+            sut.IsEnabled(SecondRuleId).Should().BeFalse();
 
             // act
             Initialize(sut, SecondSonarLintFilePath, SecondSonarLintFileContent);
 
             // assert
-            IsFalse(sut.IsEnabled(FirstRuleId));
-            IsTrue(sut.IsEnabled(SecondRuleId));
+            sut.IsEnabled(FirstRuleId).Should().BeFalse();
+            sut.IsEnabled(SecondRuleId).Should().BeTrue();
 
             ruleLoaderMock.Verify(r => r.GetEnabledRules(FirstSonarLintFileContent), Times.Once);
             ruleLoaderMock.Verify(r => r.GetEnabledRules(SecondSonarLintFileContent), Times.Once);

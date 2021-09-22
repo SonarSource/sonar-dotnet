@@ -37,14 +37,19 @@ namespace SonarAnalyzer.Common
         /// - SonarLint only uses it to pass parameters to rules
         /// - SonarScanner uses it to pass parameters and to enable security hotspots (which should only run in batch mode)
         /// </summary>
-        public static IAnalyzerConfiguration Hotspot { get; } =
-            new HotspotConfiguration(new RuleLoader());
+        public static IAnalyzerConfiguration Hotspot { get; } = new HotspotConfiguration(new RuleLoader());
 
-        public static IAnalyzerConfiguration AlwaysEnabled { get; } =
-            new AlwaysEnabledConfiguration();
+        public static IAnalyzerConfiguration AlwaysEnabled { get; } = new AlwaysEnabledConfiguration(false);
+
+        public static IAnalyzerConfiguration AlwaysEnabledWithSonarCfg { get; } = new AlwaysEnabledConfiguration(true);
 
         private class AlwaysEnabledConfiguration : IAnalyzerConfiguration
         {
+            public bool ForceSonarCfg { get; }
+
+            public AlwaysEnabledConfiguration(bool forceSonarCfg) =>
+                ForceSonarCfg = forceSonarCfg;
+
             public void Initialize(AnalyzerOptions options)
             {
                 // Ignore options because we always return true for IsEnabled
@@ -73,6 +78,8 @@ namespace SonarAnalyzer.Common
             /// rules from wrongly deciding that they are disabled while the XML is loaded.
             /// </summary>
             private static readonly object IsInitializedGate = new object();
+
+            public bool ForceSonarCfg => false;
 
             public HotspotConfiguration(IRuleLoader ruleLoader) => this.ruleLoader = ruleLoader;
 
