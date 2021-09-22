@@ -5,6 +5,11 @@
     <Rule Id="AD0001" Action="Error" />
   </Rules>
 
+  <!-- CS8032 An instance of analyzer ... cannot be created from ... -->
+  <Rules AnalyzerId="Microsoft.CodeAnalysis.CSharp" RuleNamespace="Microsoft.CodeAnalysis.CSharp">
+    <Rule Id="CS8032" Action="Error" />
+  </Rules>
+
   <!-- This list is just hardcoded for now with plausible existing & upcoming rule IDs -->
   <!-- It would be better to generate the actual list from the analyzer assemblies -->
   <Rules AnalyzerId="SonarAnalyzer.CSharp" RuleNamespace="SonarAnalyzer.CSharp">
