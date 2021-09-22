@@ -234,7 +234,7 @@ namespace SonarAnalyzer.CFG.LiveVariableAnalysis
                     && !ProcessedLocalFunctions.Contains(localFunction))
                 {
                     ProcessedLocalFunctions.Add(localFunction);
-                    var localFunctionCfg = cfg.GetLocalFunctionControlFlowGraph(localFunction);
+                    var localFunctionCfg = cfg.FindLocalFunctionCfgInScope(localFunction);
                     foreach (var block in localFunctionCfg.Blocks.Reverse())    // Simplified approach, ignoring branching and try/catch/finally flows
                     {
                         ProcessBlock(localFunctionCfg, block);

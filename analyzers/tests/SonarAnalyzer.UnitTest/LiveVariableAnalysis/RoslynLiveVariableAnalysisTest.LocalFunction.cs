@@ -231,6 +231,63 @@ int LocalFunction(int cnt) => variable + (cnt == 0 ? 0 : LocalFunction(cnt - 1))
         }
 
         [TestMethod]
+        public void LocalFunctionInvocation_Recursive_WhenAnalyzingLocalFunctionItself_LiveIn()
+        {
+            var code = @"
+var variable = 42;
+
+int LocalFunction(int arg)
+{
+    return variable + (arg == 0 ? 0 : LocalFunction(arg - 1));
+}";
+            // variable is not local, it's defined above the LocalFunction scope
+            var context = new Context(code, "LocalFunction");
+            context.ValidateEntry(new LiveIn("arg"), new LiveOut("arg"));
+            context.Validate("variable", new LiveIn("arg"), new LiveOut("arg"));
+            context.Validate("LocalFunction(arg - 1)", new LiveIn("arg"));
+            context.Validate("0");
+        }
+
+        [TestMethod]
+        public void LocalFunctionInvocation_CrossReference_LiveIn()
+        {
+            var code = @"
+var variable = 42;
+if (boolParameter)
+    return;
+LocalFunction();
+
+int LocalFunction()
+{
+    int First() => Second();
+    int Second() => variable;
+    return First();
+}";
+            var context = new Context(code);
+            context.ValidateEntry(new LiveIn("boolParameter"), new LiveOut("boolParameter"));
+            context.Validate("LocalFunction();", new LiveIn("variable"));
+        }
+
+        [TestMethod]
+        public void LocalFunctionInvocation_CrossReference_WhenAnalyzingLocalFunctionItself_LiveIn()
+        {
+            var code = @"
+int LocalFunction()
+{
+    var variable = 42;
+    if (boolCondition)
+        return 0;
+    int First() => Second();
+    int Second() => variable;
+    return First();
+}";
+            var context = new Context(code, "LocalFunction");
+            context.ValidateEntry();
+            context.Validate("boolCondition", new LiveOut("variable"));
+            context.Validate("First()", new LiveIn("variable"));
+        }
+
+        [TestMethod]
         public void LocalFunctionInvocation_Nested_LiveIn()
         {
             var code = @"
@@ -328,6 +385,23 @@ void LocalFunction(int arg)
             context.ValidateEntry(new LiveIn("boolParameter"), new LiveOut("boolParameter"));
             context.Validate("boolParameter", new LiveIn("boolParameter"), new LiveOut("variable"));
             context.Validate("LocalFunction(42);", new LiveIn("variable"));
+        }
+
+        [TestMethod]
+        public void LocalFunctionReference_Recursive_WhenAnalyzingLocalFunctionItself_LiveIn()
+        {
+            var code = @"
+var variable = 42;
+
+int LocalFunction(int arg)
+{
+    Capturing(LocalFunction);
+    return variable + arg;
+}";
+            // variable is not local, it's defined above the LocalFunction scope
+            var context = new Context(code, "LocalFunction");
+            context.ValidateEntry(new LiveIn("arg"), new LiveOut("arg"));
+            context.Validate("Capturing(LocalFunction);", new LiveIn("arg"));
         }
     }
 }

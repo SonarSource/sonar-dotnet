@@ -18,8 +18,10 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using Microsoft.CodeAnalysis;
 using SonarAnalyzer.CFG.Roslyn;
 using StyleCop.Analyzers.Lightup;
 
@@ -33,5 +35,20 @@ namespace SonarAnalyzer.Extensions
                .SelectMany(x => x.DescendantsAndSelf())
                .Where(IFlowAnonymousFunctionOperationWrapper.IsInstance)
                .Select(IFlowAnonymousFunctionOperationWrapper.FromOperation);
+
+        // Similar to ControlFlowGraphExtensions.GetLocalFunctionControlFlowGraphInScope from Roslyn
+        public static ControlFlowGraph FindLocalFunctionCfgInScope(this ControlFlowGraph cfg, IMethodSymbol localFunction)
+        {
+            var current = cfg;
+            while (current != null)
+            {
+                if (current.LocalFunctions.Contains(localFunction))
+                {
+                    return current.GetLocalFunctionControlFlowGraph(localFunction);
+                }
+                current = current.Parent;
+            }
+            throw new ArgumentOutOfRangeException(nameof(localFunction));
+        }
     }
 }
