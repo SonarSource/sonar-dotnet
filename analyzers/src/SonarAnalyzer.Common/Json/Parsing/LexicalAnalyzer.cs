@@ -190,7 +190,7 @@ namespace SonarAnalyzer.Json.Parsing
             }
 
             char? NextCharSameLine() =>
-                (column + 1 < lines[line].Length) ? lines[line][position + 1] : (char?)null;
+                (column + 1 < lines[line].Length) ? lines[line][column + 1] : (char?)null;
             bool IsWhitespace() =>
                 char.IsWhiteSpace(CurrentChar);
             bool IsSingleLineComment() =>
