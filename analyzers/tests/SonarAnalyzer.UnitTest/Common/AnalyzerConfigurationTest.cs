@@ -73,9 +73,9 @@ namespace SonarAnalyzer.UnitTest.Common
         [TestMethod]
         public void ForceSonarCfg_DisabledByDefault_ExistExceptionalConfig()
         {
-            IsFalse(AlwaysEnabled.ForceSonarCfg);
-            IsFalse(new HotspotConfiguration(ruleLoaderMock.Object).ForceSonarCfg);
-            IsTrue(AlwaysEnabledWithSonarCfg.ForceSonarCfg);
+            AlwaysEnabled.ForceSonarCfg.Should().BeFalse();
+            new HotspotConfiguration(ruleLoaderMock.Object).ForceSonarCfg.Should().BeFalse();
+            AlwaysEnabledWithSonarCfg.ForceSonarCfg.Should().BeTrue();
         }
 
         [TestMethod]

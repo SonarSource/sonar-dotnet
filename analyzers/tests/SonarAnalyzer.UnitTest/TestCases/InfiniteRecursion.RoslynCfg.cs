@@ -265,18 +265,39 @@ namespace Tests.Diagnostics
             return Add(a, b);
         }
 
-        void MethodWithNestedLocalFunctions()  // FN
+        void MethodWithNestedLocalFunctions()
         {
-            LocalFunction();
-            void LocalFunction()               // FN
+            void LocalFunction()
             {
-                NestedLocalFunction();
-
                 void NestedLocalFunction()     // Noncompliant
                 {
-                    MethodWithNestedLocalFunctions();
-                    LocalFunction();
                     NestedLocalFunction();
+                }
+            }
+        }
+
+        void MethodWithNestedLocalFunctions2()          // FN
+        {
+            LocalFunction();
+            void LocalFunction()
+            {
+                InvokingEnclosingMethod();
+                void InvokingEnclosingMethod()
+                {
+                    MethodWithNestedLocalFunctions2();  // gets invoked here
+                }
+            }
+        }
+
+        void MethodWithNestedLocalFunctions3()
+        {
+            LocalFunction();
+            void LocalFunction()                       // FN
+            {
+                InvokingParentLocalFunction();
+                void InvokingParentLocalFunction()
+                {
+                    LocalFunction();                   // gets invoked here
                 }
             }
         }

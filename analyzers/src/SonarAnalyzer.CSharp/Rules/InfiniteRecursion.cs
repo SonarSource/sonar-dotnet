@@ -24,6 +24,7 @@ using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.Common;
+using SonarAnalyzer.Extensions;
 using SonarAnalyzer.Helpers;
 using StyleCop.Analyzers.Lightup;
 
@@ -45,9 +46,7 @@ namespace SonarAnalyzer.Rules.CSharp
         public InfiniteRecursion() : this(AnalyzerConfiguration.AlwaysEnabled) { }
 
         internal /* for testing */ InfiniteRecursion(IAnalyzerConfiguration configuration) =>
-            checker = (CFG.Roslyn.ControlFlowGraph.IsAvailable && !configuration.ForceSonarCfg)
-                ? (IChecker)new RoslynChecker()
-                : new SonarChecker();
+            checker = configuration.UseSonarCfg() ? new SonarChecker() : new RoslynChecker();
 
         protected override void Initialize(SonarAnalysisContext context)
         {
