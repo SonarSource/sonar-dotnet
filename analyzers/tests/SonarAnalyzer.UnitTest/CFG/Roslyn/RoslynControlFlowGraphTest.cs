@@ -80,8 +80,13 @@ public class Sample
             cfg.Root.Should().NotBeNull();
             cfg.Blocks.Should().NotBeNull().And.HaveCount(3); // Enter, Instructions, Exit
             cfg.OriginalOperation.Should().NotBeNull().And.BeAssignableTo<IMethodBodyOperation>();
+            cfg.Parent.Should().BeNull();
             cfg.LocalFunctions.Should().HaveCount(1);
-            cfg.GetLocalFunctionControlFlowGraph(cfg.LocalFunctions.Single()).Should().NotBeNull();
+
+            var localFunctionCfg = cfg.GetLocalFunctionControlFlowGraph(cfg.LocalFunctions.Single());
+            localFunctionCfg.Should().NotBeNull();
+            localFunctionCfg.Parent.Should().Be(cfg);
+
             var anonymousFunction = cfg.Blocks.SelectMany(x => x.Operations).SelectMany(x => x.DescendantsAndSelf()).OfType<FlowAnalysis.IFlowAnonymousFunctionOperation>().Single();
             cfg.GetAnonymousFunctionControlFlowGraph(IFlowAnonymousFunctionOperationWrapper.FromOperation(anonymousFunction)).Should().NotBeNull();
         }

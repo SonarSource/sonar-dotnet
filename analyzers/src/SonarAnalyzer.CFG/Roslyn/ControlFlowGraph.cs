@@ -22,6 +22,7 @@ using System;
 using System.Collections.Immutable;
 using System.Diagnostics;
 using System.Reflection;
+using System.Runtime.CompilerServices;
 using System.Threading;
 using Microsoft.CodeAnalysis;
 using SonarAnalyzer.CFG.Helpers;
@@ -31,9 +32,11 @@ namespace SonarAnalyzer.CFG.Roslyn
 {
     public class ControlFlowGraph
     {
+        private static readonly ConditionalWeakTable<object, ControlFlowGraph> InstanceCache = new ConditionalWeakTable<object, ControlFlowGraph>();
         private static readonly PropertyInfo BlocksProperty;
         private static readonly PropertyInfo LocalFunctionsProperty;
         private static readonly PropertyInfo OriginalOperationProperty;
+        private static readonly PropertyInfo ParentProperty;
         private static readonly PropertyInfo RootProperty;
         private static readonly MethodInfo CreateMethod;
         private static readonly MethodInfo GetAnonymousFunctionControlFlowGraphMethod;
@@ -42,6 +45,7 @@ namespace SonarAnalyzer.CFG.Roslyn
         private readonly object instance;
         private readonly Lazy<ImmutableArray<BasicBlock>> blocks;
         private readonly Lazy<ImmutableArray<IMethodSymbol>> localFunctions;
+        private readonly Lazy<ControlFlowGraph> parent;
         private readonly Lazy<IOperation> originalOperation;
         private readonly Lazy<ControlFlowRegion> root;
 
@@ -49,6 +53,7 @@ namespace SonarAnalyzer.CFG.Roslyn
         public ImmutableArray<BasicBlock> Blocks => blocks.Value;
         public ImmutableArray<IMethodSymbol> LocalFunctions => localFunctions.Value;
         public IOperation OriginalOperation => originalOperation.Value;
+        public ControlFlowGraph Parent => parent.Value;
         public ControlFlowRegion Root => root.Value;
         public BasicBlock EntryBlock => Blocks[Root.FirstBlockOrdinal];
         public BasicBlock ExitBlock => Blocks[Root.LastBlockOrdinal];
@@ -61,6 +66,7 @@ namespace SonarAnalyzer.CFG.Roslyn
                 BlocksProperty = type.GetProperty(nameof(Blocks));
                 LocalFunctionsProperty = type.GetProperty(nameof(LocalFunctions));
                 OriginalOperationProperty = type.GetProperty(nameof(OriginalOperation));
+                ParentProperty = type.GetProperty(nameof(Parent));
                 RootProperty = type.GetProperty(nameof(Root));
                 CreateMethod = type.GetMethod(nameof(Create), new[] { typeof(SyntaxNode), typeof(SemanticModel), typeof(CancellationToken) });
                 GetAnonymousFunctionControlFlowGraphMethod = type.GetMethod(nameof(GetAnonymousFunctionControlFlowGraph));
@@ -74,6 +80,7 @@ namespace SonarAnalyzer.CFG.Roslyn
             blocks = BlocksProperty.ReadImmutableArray(instance, BasicBlock.Wrap);
             localFunctions = LocalFunctionsProperty.ReadImmutableArray<IMethodSymbol>(instance);
             originalOperation = OriginalOperationProperty.ReadValue<IOperation>(instance);
+            parent = ParentProperty.ReadValue(instance, Wrap);
             root = RootProperty.ReadValue(instance, ControlFlowRegion.Wrap);
             Debug.Assert(EntryBlock.Kind == BasicBlockKind.Entry, "Roslyn CFG Entry block is not the first one");
             Debug.Assert(ExitBlock.Kind == BasicBlockKind.Exit, "Roslyn CFG Exit block is not the last one");
@@ -81,17 +88,20 @@ namespace SonarAnalyzer.CFG.Roslyn
 
         public static ControlFlowGraph Create(SyntaxNode node, SemanticModel semanticModel) =>
             IsAvailable
-                ? new ControlFlowGraph(CreateMethod.Invoke(null, new object[] { node, semanticModel, CancellationToken.None }))
+                ? Wrap(CreateMethod.Invoke(null, new object[] { node, semanticModel, CancellationToken.None }))
                 : throw new InvalidOperationException("CFG is not available under this version of Roslyn compiler.");
 
         public ControlFlowGraph GetAnonymousFunctionControlFlowGraph(IFlowAnonymousFunctionOperationWrapper anonymousFunction) =>
             GetAnonymousFunctionControlFlowGraphMethod.Invoke(instance, new object[] { anonymousFunction.WrappedOperation, CancellationToken.None }) is { } anonymousFunctionCfg
-                ? new ControlFlowGraph(anonymousFunctionCfg)
+                ? Wrap(anonymousFunctionCfg)
                 : null;
 
         public ControlFlowGraph GetLocalFunctionControlFlowGraph(IMethodSymbol localFunction) =>
             GetLocalFunctionControlFlowGraphMethod.Invoke(instance, new object[] { localFunction, CancellationToken.None }) is { } localFunctionCfg
-                ? new ControlFlowGraph(localFunctionCfg)
+                ? Wrap(localFunctionCfg)
                 : null;
+
+        public static ControlFlowGraph Wrap(object instance) =>
+            instance == null ? null : InstanceCache.GetValue(instance, x => new ControlFlowGraph(x));
     }
 }
