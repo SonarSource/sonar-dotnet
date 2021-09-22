@@ -49,9 +49,6 @@ namespace SonarAnalyzer.Extensions
         public static OperationExecutionOrder ToExecutionOrder(this IEnumerable<IOperation> operations) =>
             new OperationExecutionOrder(operations, false);
 
-        public static OperationExecutionOrder ToReversedExecutionOrder(this IOperation operation) =>
-            new[] { operation }.ToReversedExecutionOrder();
-
         public static OperationExecutionOrder ToReversedExecutionOrder(this IEnumerable<IOperation> operations) =>
             new OperationExecutionOrder(operations, true);
 
