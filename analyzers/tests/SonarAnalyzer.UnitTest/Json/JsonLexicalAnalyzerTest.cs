@@ -188,6 +188,7 @@ namespace SonarAnalyzer.UnitTest.Common
         [DataRow("/*", "Unexpected EOI at line 1 position 1")]
         [DataRow(" /* * /", "Unexpected EOI at line 1 position 1")]
         [DataRow(" /* *", "Unexpected EOI at line 1 position 1")]
+        [DataRow("/*/", "Unexpected EOI at line 1 position 1")]
         [DataRow(" */", "Unexpected character '*' at line 1 position 2")]
         [DataRow(" /0", "Unexpected character '*' at line 1 position 2")]
         [DataRow(" /", "Unexpected character '*' at line 1 position 2")]

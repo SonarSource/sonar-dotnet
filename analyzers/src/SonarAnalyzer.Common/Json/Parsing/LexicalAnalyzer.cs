@@ -29,7 +29,6 @@ namespace SonarAnalyzer.Json.Parsing
 {
     internal class LexicalAnalyzer
     {
-        private const int MultiLineCommentTokenLength = 2;
         private readonly List<string> lines = new List<string>();
         private int line;
         private int column = -1;
@@ -131,14 +130,6 @@ namespace SonarAnalyzer.Json.Parsing
             }
         }
 
-        private void NthPosition(int n, bool throwIfReachedEndOfInput = true)
-        {
-            for (var i = 0; i < n; i++)
-            {
-                NextPosition(throwIfReachedEndOfInput);
-            }
-        }
-
         private void SeekToNextLine(bool throwIfReachedEndOfInput)
         {
             do
@@ -158,7 +149,7 @@ namespace SonarAnalyzer.Json.Parsing
             var isInMultiLineComment = false;
             while (!ReachedEndOfInput)
             {
-                if (IsWhitespace())
+                if (char.IsWhiteSpace(CurrentChar))
                 {
                     NextPosition(false);
                 }
@@ -167,18 +158,19 @@ namespace SonarAnalyzer.Json.Parsing
                     // We just need to read starting from the next line
                     SeekToNextLine(false);
                 }
-                else if (IsCloseMultiLineComment())
+                else if (IsEndOfMultiLineComment())
                 {
                     isInMultiLineComment = false;
-                    // need to skip */ part of the comment
-                    NthPosition(MultiLineCommentTokenLength, false);
+                    NextPosition(false); // Skip *
+                    NextPosition(false); // Skip /
                 }
-                else if (IsInMultiLineComment())
+                else if (IsMultiLineComment())
                 {
                     if (!isInMultiLineComment)
                     {
                         // need to skip /* part of the comment
-                        NthPosition(MultiLineCommentTokenLength, false);
+                        NextPosition(false); // Skip /
+                        NextPosition(false); // Skip *
                     }
                     isInMultiLineComment = true;
                     NextPosition(); // we still want to fail on non-closed comments
@@ -191,13 +183,14 @@ namespace SonarAnalyzer.Json.Parsing
 
             char? NextCharSameLine() =>
                 (column + 1 < lines[line].Length) ? lines[line][column + 1] : (char?)null;
-            bool IsWhitespace() =>
-                char.IsWhiteSpace(CurrentChar);
+
             bool IsSingleLineComment() =>
                 CurrentChar == '/' && NextCharSameLine() == '/';
-            bool IsInMultiLineComment() =>
+
+            bool IsMultiLineComment() =>
                 isInMultiLineComment || (CurrentChar == '/' && NextCharSameLine() == '*');
-            bool IsCloseMultiLineComment() =>
+
+            bool IsEndOfMultiLineComment() =>
                 isInMultiLineComment && CurrentChar == '*' && NextCharSameLine() == '/';
         }
 
