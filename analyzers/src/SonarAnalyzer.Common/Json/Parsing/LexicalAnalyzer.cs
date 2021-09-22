@@ -29,6 +29,7 @@ namespace SonarAnalyzer.Json.Parsing
 {
     internal class LexicalAnalyzer
     {
+        private const int MultiLineCommentTokenLength = 2;
         private readonly List<string> lines = new List<string>();
         private int line;
         private int column = -1;
@@ -154,34 +155,37 @@ namespace SonarAnalyzer.Json.Parsing
 
         private void SkipWhiteSpace()
         {
+            var isInMultiLineComment = false;
             while (!ReachedEndOfInput)
             {
                 if (IsWhitespace())
                 {
-                    while (!ReachedEndOfInput && IsWhitespace())
-                    {
-                        NextPosition(false);
-                    }
+                    NextPosition(false);
                 }
                 else if (IsSingleLineComment())
                 {
                     // We just need to read starting from the next line
                     SeekToNextLine(false);
                 }
-                else if (IsOpenMultiLineComment())
+                else if (IsCloseMultiLineComment())
                 {
-                    // need to skip /* part of the comment
-                    NthPosition(2, false);
-                    while (!ReachedEndOfInput && !IsCloseMultiLineComment())
-                    {
-                        NextPosition(); // we still want to fail on non-closed comments
-                    }
+                    isInMultiLineComment = false;
                     // need to skip */ part of the comment
-                    NthPosition(2, false);
+                    NthPosition(MultiLineCommentTokenLength, false);
+                }
+                else if (IsInMultiLineComment())
+                {
+                    if (!isInMultiLineComment)
+                    {
+                        // need to skip /* part of the comment
+                        NthPosition(MultiLineCommentTokenLength, false);
+                    }
+                    isInMultiLineComment = true;
+                    NextPosition(); // we still want to fail on non-closed comments
                 }
                 else
                 {
-                    break;
+                    return;
                 }
             }
 
@@ -191,10 +195,10 @@ namespace SonarAnalyzer.Json.Parsing
                 char.IsWhiteSpace(CurrentChar);
             bool IsSingleLineComment() =>
                 CurrentChar == '/' && NextCharSameLine() == '/';
-            bool IsOpenMultiLineComment() =>
-                CurrentChar == '/' && NextCharSameLine() == '*';
+            bool IsInMultiLineComment() =>
+                isInMultiLineComment || (CurrentChar == '/' && NextCharSameLine() == '*');
             bool IsCloseMultiLineComment() =>
-                CurrentChar == '*' && NextCharSameLine() == '/';
+                isInMultiLineComment && CurrentChar == '*' && NextCharSameLine() == '/';
         }
 
         private void ReadKeyword(string keyword)
