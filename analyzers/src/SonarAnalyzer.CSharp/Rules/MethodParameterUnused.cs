@@ -50,11 +50,10 @@ namespace SonarAnalyzer.Rules.CSharp
 
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
 
-        public MethodParameterUnused() : this(false) { }
+        public MethodParameterUnused() : this(AnalyzerConfiguration.AlwaysEnabled) { }
 
-        // FIXME: Rework after rebase
-        internal /* for testing */ MethodParameterUnused(bool useSonarCfg) =>
-            this.useSonarCfg = useSonarCfg;
+        internal /* for testing */ MethodParameterUnused(IAnalyzerConfiguration configuration) =>
+            useSonarCfg = configuration.UseSonarCfg();
 
         protected override void Initialize(SonarAnalysisContext context) =>
             context.RegisterSyntaxNodeActionInNonGenerated(c =>

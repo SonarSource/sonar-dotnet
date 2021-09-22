@@ -19,6 +19,7 @@
  */
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using SonarAnalyzer.Common;
 using SonarAnalyzer.UnitTest.MetadataReferences;
 using SonarAnalyzer.UnitTest.TestFramework;
 using CS = SonarAnalyzer.Rules.CSharp;
@@ -31,30 +32,30 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         public void MethodParameterUnused_CS_SonarCfg() =>
-            Verifier.VerifyAnalyzer(@"TestCases\MethodParameterUnused.SonarCfg.cs", new CS.MethodParameterUnused(true));
+            Verifier.VerifyAnalyzer(@"TestCases\MethodParameterUnused.SonarCfg.cs", new CS.MethodParameterUnused(AnalyzerConfiguration.AlwaysEnabledWithSonarCfg));
 
         [TestMethod]
         public void MethodParameterUnused_CS_RoslynCfg() =>
-            Verifier.VerifyAnalyzer(@"TestCases\MethodParameterUnused.RoslynCfg.cs", new CS.MethodParameterUnused(false));
+            Verifier.VerifyAnalyzer(@"TestCases\MethodParameterUnused.RoslynCfg.cs", new CS.MethodParameterUnused(AnalyzerConfiguration.AlwaysEnabled));
 
         [TestMethod]
         public void MethodParameterUnused_CodeFix_CS() =>
             Verifier.VerifyCodeFix(@"TestCases\MethodParameterUnused.RoslynCfg.cs",
                                    @"TestCases\MethodParameterUnused.RoslynCfg.Fixed.cs",
-                                   new CS.MethodParameterUnused(true),
+                                   new CS.MethodParameterUnused(AnalyzerConfiguration.AlwaysEnabled),
                                    new CS.MethodParameterUnusedCodeFixProvider());
 
         [TestMethod]
         public void MethodParameterUnused_CSharp7_CS() =>
             Verifier.VerifyNoIssueReported(@"TestCases\MethodParameterUnused.CSharp7.cs",
-                                           new CS.MethodParameterUnused(false),
+                                           new CS.MethodParameterUnused(AnalyzerConfiguration.AlwaysEnabled),
                                            ParseOptionsHelper.FromCSharp7,
                                            NuGetMetadataReference.SystemValueTuple("4.5.0"));
 
         [TestMethod]
         public void MethodParameterUnused_CSharp8_CS() =>
             Verifier.VerifyAnalyzer(@"TestCases\MethodParameterUnused.CSharp8.cs",
-                                    new CS.MethodParameterUnused(false),
+                                    new CS.MethodParameterUnused(AnalyzerConfiguration.AlwaysEnabled),
 #if NETFRAMEWORK
                                     ParseOptionsHelper.FromCSharp8,
                                     NuGetMetadataReference.NETStandardV2_1_0);
