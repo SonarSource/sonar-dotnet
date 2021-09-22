@@ -42,6 +42,8 @@ namespace SonarAnalyzer.Rules.CSharp
         private const string MessageFormat = "Remove this useless assignment to local variable '{0}'.";
 
         private static readonly DiagnosticDescriptor Rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
+        private static readonly ISet<string> AllowedNumericValues = new HashSet<string> { "-1", "0", "1" };
+        private static readonly ISet<string> AllowedStringValues = new HashSet<string> { string.Empty };
         private readonly bool useSonarCfg;
 
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);

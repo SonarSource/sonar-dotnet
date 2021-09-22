@@ -39,9 +39,6 @@ namespace SonarAnalyzer.Rules.CSharp
         {
             private readonly SyntaxNode node;
 
-            private static readonly ISet<string> AllowedNumericValues = new HashSet<string> { "-1", "0", "1" };
-            private static readonly ISet<string> AllowedStringValues = new HashSet<string> { string.Empty };
-
             public SonarChecker(SyntaxNodeAnalysisContext context, SonarCSharpLiveVariableAnalysis lva, SyntaxNode node) : base(context, lva) =>
                 this.node = node;
 
