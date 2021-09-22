@@ -43,19 +43,19 @@ namespace SonarAnalyzer.LiveVariableAnalysis.CSharp
             Analyze();
         }
 
-        internal static bool IsOutArgument(IdentifierNameSyntax identifier) =>
-            identifier.GetFirstNonParenthesizedParent() is ArgumentSyntax argument && argument.RefOrOutKeyword.IsKind(SyntaxKind.OutKeyword);
-
-        internal static bool IsLocalScoped(ISymbol symbol, ISymbol declaration)
+        public override bool IsLocal(ISymbol symbol)
         {
             return IsLocalOrParameterSymbol()
                 && symbol.ContainingSymbol != null
-                && symbol.ContainingSymbol.Equals(declaration);
+                && symbol.ContainingSymbol.Equals(originalDeclaration);
 
             bool IsLocalOrParameterSymbol() =>
                 (symbol is ILocalSymbol local && local.RefKind() == RefKind.None)
                 || (symbol is IParameterSymbol parameter && parameter.RefKind == RefKind.None);
         }
+
+        internal static bool IsOutArgument(IdentifierNameSyntax identifier) =>
+            identifier.GetFirstNonParenthesizedParent() is ArgumentSyntax argument && argument.RefOrOutKeyword.IsKind(SyntaxKind.OutKeyword);
 
         protected override IEnumerable<Block> ReversedBlocks() =>
             cfg.Blocks.Reverse();
@@ -68,21 +68,21 @@ namespace SonarAnalyzer.LiveVariableAnalysis.CSharp
 
         protected override State ProcessBlock(Block block)
         {
-            var ret = new SonarState(originalDeclaration, semanticModel);
+            var ret = new SonarState(this, semanticModel);
             ret.ProcessBlock(block);
             return ret;
         }
 
         private class SonarState : State
         {
-            private readonly ISymbol originalDeclaration;
+            private readonly SonarCSharpLiveVariableAnalysis owner;
             private readonly SemanticModel semanticModel;
 
             public ISet<SyntaxNode> AssignmentLhs { get; } = new HashSet<SyntaxNode>();
 
-            public SonarState(ISymbol originalDeclaration, SemanticModel semanticModel)
+            public SonarState(SonarCSharpLiveVariableAnalysis owner, SemanticModel semanticModel)
             {
-                this.originalDeclaration = originalDeclaration;
+                this.owner = owner;
                 this.semanticModel = semanticModel;
             }
 
@@ -165,7 +165,7 @@ namespace SonarAnalyzer.LiveVariableAnalysis.CSharp
                 var left = assignment.Left.RemoveParentheses();
                 if (left.IsKind(SyntaxKind.IdentifierName)
                     && semanticModel.GetSymbolInfo(left).Symbol is { } symbol
-                    && IsLocal(symbol))
+                    && owner.IsLocal(symbol))
                 {
                     AssignmentLhs.Add(left);
                     Assigned.Add(symbol);
@@ -178,7 +178,7 @@ namespace SonarAnalyzer.LiveVariableAnalysis.CSharp
                 if (!identifier.GetSelfOrTopParenthesizedExpression().IsInNameOfArgument(semanticModel)
                     && semanticModel.GetSymbolInfo(identifier).Symbol is { } symbol)
                 {
-                    if (IsLocal(symbol))
+                    if (owner.IsLocal(symbol))
                     {
                         if (IsOutArgument(identifier))
                         {
@@ -228,15 +228,12 @@ namespace SonarAnalyzer.LiveVariableAnalysis.CSharp
                 var allCapturedSymbols = instruction.DescendantNodes()
                     .OfType<IdentifierNameSyntax>()
                     .Select(i => semanticModel.GetSymbolInfo(i).Symbol)
-                    .Where(s => s != null && IsLocal(s));
+                    .Where(s => s != null && owner.IsLocal(s));
 
                 // Collect captured locals
                 // Read and write both affects liveness
                 Captured.UnionWith(allCapturedSymbols);
             }
-
-            private bool IsLocal(ISymbol symbol) =>
-                IsLocalScoped(symbol, originalDeclaration);
         }
     }
 }

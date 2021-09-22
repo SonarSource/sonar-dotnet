@@ -35,13 +35,14 @@ namespace SonarAnalyzer.CFG.LiveVariableAnalysis
         private readonly IDictionary<TBlock, HashSet<ISymbol>> blockLiveIn = new Dictionary<TBlock, HashSet<ISymbol>>();
         private readonly ISet<ISymbol> captured = new HashSet<ISymbol>();
 
+        public abstract bool IsLocal(ISymbol symbol);
         protected abstract TBlock ExitBlock { get; }
         protected abstract State ProcessBlock(TBlock block);
         protected abstract IEnumerable<TBlock> ReversedBlocks();
         protected abstract IEnumerable<TBlock> Successors(TBlock block);
         protected abstract IEnumerable<TBlock> Predecessors(TBlock block);
 
-        public IReadOnlyList<ISymbol> CapturedVariables => captured.ToImmutableArray();
+        public IReadOnlyCollection<ISymbol> CapturedVariables => captured.ToImmutableArray();
 
         protected LiveVariableAnalysisBase(TCfg cfg, ISymbol originalDeclaration)
         {
@@ -52,13 +53,13 @@ namespace SonarAnalyzer.CFG.LiveVariableAnalysis
         /// <summary>
         /// LiveIn variables are alive when entering block. They are read inside the block or any of it's successors.
         /// </summary>
-        public IReadOnlyList<ISymbol> LiveIn(TBlock block) =>
+        public IReadOnlyCollection<ISymbol> LiveIn(TBlock block) =>
             blockLiveIn[block].Except(captured).ToImmutableArray();
 
         /// <summary>
         /// LiveOut variables are alive when exiting block. They are read in any of it's successors.
         /// </summary>
-        public IReadOnlyList<ISymbol> LiveOut(TBlock block) =>
+        public IReadOnlyCollection<ISymbol> LiveOut(TBlock block) =>
             blockLiveOut[block].Except(captured).ToImmutableArray();
 
         protected void Analyze()

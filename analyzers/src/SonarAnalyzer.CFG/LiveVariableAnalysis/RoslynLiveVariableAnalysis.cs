@@ -19,7 +19,6 @@
  */
 
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
 using Microsoft.CodeAnalysis;
 using SonarAnalyzer.CFG.Roslyn;
@@ -112,10 +111,13 @@ namespace SonarAnalyzer.CFG.LiveVariableAnalysis
 
         protected override State ProcessBlock(BasicBlock block)
         {
-            var ret = new RoslynState(originalDeclaration);
+            var ret = new RoslynState(this);
             ret.ProcessBlock(cfg, block);
             return ret;
         }
+
+        public override bool IsLocal(ISymbol symbol) =>
+            originalDeclaration.Equals(symbol?.ContainingSymbol);
 
         private IEnumerable<ControlFlowBranch> TryRegionSuccessors(ControlFlowRegion finallyRegion)
         {
@@ -145,11 +147,11 @@ namespace SonarAnalyzer.CFG.LiveVariableAnalysis
 
         private class RoslynState : State
         {
-            private readonly ISymbol originalDeclaration;
+            private readonly RoslynLiveVariableAnalysis owner;
             private readonly ISet<ISymbol> capturedLocalFunctions = new HashSet<ISymbol>();
 
-            public RoslynState(ISymbol originalDeclaration) =>
-                this.originalDeclaration = originalDeclaration;
+            public RoslynState(RoslynLiveVariableAnalysis owner) =>
+                this.owner = owner;
 
             public void ProcessBlock(ControlFlowGraph cfg, BasicBlock block)
             {
@@ -289,7 +291,7 @@ namespace SonarAnalyzer.CFG.LiveVariableAnalysis
                     var _ when ILocalReferenceOperationWrapper.IsInstance(operation) => ILocalReferenceOperationWrapper.FromOperation(operation).Local,
                     _ => null
                 };
-                return originalDeclaration.Equals(candidate?.ContainingSymbol) ? candidate : null;
+                return owner.IsLocal(candidate) ? candidate : null;
             }
         }
     }
