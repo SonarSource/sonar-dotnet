@@ -42,11 +42,8 @@ namespace SonarAnalyzer.Rules.CSharp
             private static readonly ISet<string> AllowedNumericValues = new HashSet<string> { "-1", "0", "1" };
             private static readonly ISet<string> AllowedStringValues = new HashSet<string> { string.Empty };
 
-            public SonarChecker(SyntaxNodeAnalysisContext context, IControlFlowGraph cfg, SonarCSharpLiveVariableAnalysis lva, SyntaxNode node) : base(context, cfg, lva) =>
+            public SonarChecker(SyntaxNodeAnalysisContext context, SonarCSharpLiveVariableAnalysis lva, SyntaxNode node) : base(context, lva) =>
                 this.node = node;
-
-            protected override IEnumerable<Block> Blocks() =>
-                cfg.Blocks;
 
             protected override State CreateState(Block block) =>
                 new SonarState(this, block, node);

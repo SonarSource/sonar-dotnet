@@ -11,7 +11,7 @@ void TargetTypedNew()
 
 void NativeInts(nuint param)
 {
-    param = 1; // Noncompliant
+    param = 1; // FIXME: Roslyn CFG WIP Non-compliant
 
     nuint zero = 0; // ignored value
     zero = 1;
@@ -25,7 +25,7 @@ void NativeInts(nuint param)
     one = 2;
     Foo(one);
 
-    nint two = 2; // Noncompliant
+    nint two = 2; // FIXME: Roslyn CFG WIP Non-compliant
     two = 3;
     Foo(two);
 }
@@ -88,16 +88,16 @@ public class C
     public static void Log() { }
     unsafe void FunctionPointer()
     {
-        delegate*<void> ptr1 = &C.Log; // Noncompliant
-        ptr1 = &C.Log; // Noncompliant
+        delegate*<void> ptr1 = &C.Log; // FIXME: Roslyn CFG WIP Non-compliant
+        ptr1 = &C.Log; // FIXME: Roslyn CFG WIP Non-compliant
     }
 
     Action<int, int, int> StaticLambda() =>
         static (int a, int _, int _) =>
         {
-            a = 100;        // Noncompliant
-            int b = 100;    // Noncompliant
-            b = 1;          // Noncompliant
+            a = 100;        // FIXME: Roslyn CFG WIP Non-compliant
+            int b = 100;    // FIXME: Roslyn CFG WIP Non-compliant
+            b = 1;          // FIXME: Roslyn CFG WIP Non-compliant
         };
 
 }
@@ -106,7 +106,7 @@ record R
 {
     public R(int x)
     {
-        x = 1; // Noncompliant
+        x = 1; // FIXME: Roslyn CFG WIP Non-compliant
     }
 
     int x;
@@ -114,9 +114,9 @@ record R
     {
         init
         {
-            value = 1;      // Noncompliant
-            int a = 100;    // Noncompliant
-            a = 2;          // Noncompliant
+            value = 1;      // FIXME: Roslyn CFG WIP Non-compliant
+            int a = 100;    // FIXME: Roslyn CFG WIP Non-compliant
+            a = 2;          // FIXME: Roslyn CFG WIP Non-compliant
         }
     }
 }

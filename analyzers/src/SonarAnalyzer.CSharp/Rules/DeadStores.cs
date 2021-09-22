@@ -18,15 +18,12 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-//FIXME: Cleanup
 using System.Collections.Generic;
 using System.Collections.Immutable;
-using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
-using Microsoft.CodeAnalysis.Text;
 using SonarAnalyzer.CFG.LiveVariableAnalysis;
 using SonarAnalyzer.CFG.Sonar;
 using SonarAnalyzer.Common;
@@ -94,42 +91,38 @@ namespace SonarAnalyzer.Rules.CSharp
                     if (!node.DescendantNodes().AnyOfKind(SyntaxKindEx.TupleExpression) && CSharpControlFlowGraph.TryGet(node, context.SemanticModel, out var cfg))
                     {
                         var lva = new SonarCSharpLiveVariableAnalysis(cfg, symbol, context.SemanticModel);
-                        var checker = new SonarChecker(context, cfg, lva, node);
-                        checker.Analyze();
+                        var checker = new SonarChecker(context, lva, node);
+                        checker.Analyze(cfg.Blocks);
                     }
                 }
                 else
                 {
-                    throw new System.NotImplementedException();
-                    //var cfg = node.CreateCfg(context.SemanticModel, symbol as IMethodSymbol);   //FIXME: Will that work for lambdas?
-                    //var lva = new RoslynLiveVariableAnalysis(cfg);
-                    // var checker = new RoslynChecker(context, cfg, lva);
-                    // checker.Analyze();
+                    var cfg = node.CreateCfg(context.SemanticModel, symbol as IMethodSymbol);
+                    var lva = new RoslynLiveVariableAnalysis(cfg);
+                    var checker = new RoslynChecker(context, lva);
+                    checker.Analyze(cfg.Blocks);
                 }
             }
         }
 
         private abstract class CheckerBase<TCfg, TBlock>
         {
-            protected readonly TCfg cfg;
             protected readonly LiveVariableAnalysisBase<TCfg, TBlock> lva;
             private readonly SyntaxNodeAnalysisContext context;
             private readonly ISet<ISymbol> capturedVariables;
 
-            protected abstract IEnumerable<TBlock> Blocks();
             protected abstract State CreateState(TBlock block);
 
-            protected CheckerBase(SyntaxNodeAnalysisContext context, TCfg cfg, LiveVariableAnalysisBase<TCfg, TBlock> lva)
+            protected CheckerBase(SyntaxNodeAnalysisContext context, LiveVariableAnalysisBase<TCfg, TBlock> lva)
             {
                 this.context = context;
-                this.cfg = cfg;
                 this.lva = lva;
                 capturedVariables = lva.CapturedVariables.ToHashSet();
             }
 
-            public void Analyze()
+            public void Analyze(IEnumerable<TBlock> blocks)
             {
-                foreach (var block in Blocks())
+                foreach (var block in blocks)
                 {
                     var state = CreateState(block);
                     state.AnalyzeBlock();

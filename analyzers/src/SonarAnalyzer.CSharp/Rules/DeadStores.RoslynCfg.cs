@@ -20,27 +20,35 @@
 
 //FIXME: Cleanup
 using System.Collections.Generic;
-using System.Collections.Immutable;
 using System.Linq;
 using Microsoft.CodeAnalysis;
-using Microsoft.CodeAnalysis.CSharp;
-using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
 using Microsoft.CodeAnalysis.Text;
-using SonarAnalyzer.CFG.Sonar;
-using SonarAnalyzer.Common;
+using SonarAnalyzer.CFG.LiveVariableAnalysis;
+using SonarAnalyzer.CFG.Roslyn;
 using SonarAnalyzer.Extensions;
 using SonarAnalyzer.Helpers;
-using SonarAnalyzer.LiveVariableAnalysis.CSharp;
-using StyleCop.Analyzers.Lightup;
 
 namespace SonarAnalyzer.Rules.CSharp
 {
     public partial class DeadStores : SonarDiagnosticAnalyzer
     {
-        private class RoslynChecker //: CheckerBase
+        private class RoslynChecker : CheckerBase<ControlFlowGraph, BasicBlock>
         {
+            public RoslynChecker(SyntaxNodeAnalysisContext context, RoslynLiveVariableAnalysis lva) : base(context, lva) { }
 
+            protected override State CreateState(BasicBlock block) =>
+                new RoslynState(this, block);
+
+            private class RoslynState : State
+            {
+                public RoslynState(RoslynChecker owner, BasicBlock block) : base(owner, block) { }
+
+                public override void AnalyzeBlock()
+                {
+                    // FIXME: Few lines are missing around here
+                }
+            }
         }
     }
 }

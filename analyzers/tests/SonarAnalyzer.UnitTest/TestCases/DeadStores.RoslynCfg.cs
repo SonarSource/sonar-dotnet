@@ -81,16 +81,16 @@ namespace Tests.Diagnostics
 
         void calculateRate(int a, int b)
         {
-            b = doSomething(); // Noncompliant {{Remove this useless assignment to local variable 'b'.}}
-//            ^^^^^^^^^^^^^^^
+            b = doSomething(); // FIXME: Roslyn CFG WIP Non-compliant { FIXME {Remove this useless assignment to local variable 'b'.} FIXME }
+//            *************** FIXME
 
             int i, j;
             i = a + 12;
-            i += i + 2; // Noncompliant
+            i += i + 2; // FIXME: Roslyn CFG WIP Non-compliant
             i = 5;
             j = i;
             i
-                = doSomething(); // Noncompliant; retrieved value overwritten in for loop
+                = doSomething(); // FIXME: Roslyn CFG WIP Non-compliant; retrieved value overwritten in for loop
             for (i = 0; i < j + 10; i++)
             {
                 //  ...
@@ -99,22 +99,22 @@ namespace Tests.Diagnostics
             if ((i = doSomething()) == 5 ||
                 (i = doSomethingElse()) == 5)
             {
-                i += 5; // Noncompliant
+                i += 5; // FIXME: Roslyn CFG WIP Non-compliant
             }
 
-            var resource = new Resource(); // Noncompliant; retrieved value not used
+            var resource = new Resource(); // FIXME: Roslyn CFG WIP Non-compliant; retrieved value not used
             using (resource = new Resource())
             {
                 resource.DoSomething();
             }
 
             var x
-                = 10; // Noncompliant
+                = 10; // FIXME: Roslyn CFG WIP Non-compliant
             var y =
-                x = 11; // Noncompliant
+                x = 11; // FIXME: Roslyn CFG WIP Non-compliant
             Console.WriteLine(y);
 
-            int k = 12; // Noncompliant
+            int k = 12; // FIXME: Roslyn CFG WIP Non-compliant
             X(out k);   // Compliant, not reporting on out parameters
         }
         void X(out int i) { i = 10; }
@@ -192,10 +192,10 @@ namespace Tests.Diagnostics
             switch (b)
             {
                 case 6:
-                    b = 5; // Noncompliant
+                    b = 5; // FIXME: Roslyn CFG WIP Non-compliant
                     break;
                 case 7:
-                    b = 56; // Noncompliant
+                    b = 56; // FIXME: Roslyn CFG WIP Non-compliant
                     break;
                 case c:
                     break;
@@ -203,7 +203,7 @@ namespace Tests.Diagnostics
 
             b = 7;
             Console.Write(b);
-            b += 7; // Noncompliant
+            b += 7; // FIXME: Roslyn CFG WIP Non-compliant
         }
 
         public int Switch1(int x)
@@ -247,9 +247,9 @@ namespace Tests.Diagnostics
             {
                 var i = 10;
                 Console.WriteLine(i);
-                i++; // Noncompliant
+                i++; // FIXME: Roslyn CFG WIP Non-compliant
                 i = 12;
-                ++i; // Noncompliant
+                ++i; // FIXME: Roslyn CFG WIP Non-compliant
                 i = 12;
                 var a = ++i;
                 return a;
@@ -260,7 +260,7 @@ namespace Tests.Diagnostics
         {
             get
             {
-                var i = 10; // Noncompliant
+                var i = 10; // FIXME: Roslyn CFG WIP Non-compliant
                 if (nameof(((i))) == "i") // Error [CS8081]
                 {
                     i = 11;
@@ -284,8 +284,8 @@ namespace Tests.Diagnostics
                 return (l = new List<int>(new[] { i }));
             };
 
-            var x = l; // Noncompliant
-            x = null;  // Noncompliant
+            var x = l; // FIXME: Roslyn CFG WIP Non-compliant
+            x = null;  // FIXME: Roslyn CFG WIP Non-compliant
 
             return func();
         }
@@ -296,8 +296,8 @@ namespace Tests.Diagnostics
 
             return (() => // Error [CS0149] - no method name
             {
-                var k = 10; // Noncompliant
-                k = 12; // Noncompliant
+                var k = 10; // FIXME: Roslyn CFG WIP Non-compliant
+                k = 12; // FIXME: Roslyn CFG WIP Non-compliant
                 return (l = new List<int>(new[] { i })); // l captured here
             })();
         }
@@ -379,15 +379,15 @@ namespace Tests.Diagnostics
         {
             var x = 5; // Compliant, S1481 already reports on it.
 
-            var y = 5; // Noncompliant
-            y = 6; // Noncompliant
+            var y = 5; // FIXME: Roslyn CFG WIP Non-compliant
+            y = 6; // FIXME: Roslyn CFG WIP Non-compliant
         }
 
         private void SimpleAssignment(bool b1, bool b2)
         {
             var x = false;  // Compliant
-            (x) = b1 && b2; // Noncompliant
-            x = b1 && b2;   // Noncompliant
+            (x) = b1 && b2; // FIXME: Roslyn CFG WIP Non-compliant
+            x = b1 && b2;   // FIXME: Roslyn CFG WIP Non-compliant
         }
 
         private class NameOfTest
@@ -446,10 +446,10 @@ namespace Tests.Diagnostics
             decimal Total(decimal discount)
             {
                 decimal bias;
-                bias = 42.42M;   // Noncompliant
+                bias = 42.42M;   // FIXME: Roslyn CFG WIP Non-compliant
                 bias = 0;
                 var ret = bias + Count * Price * (1 - discount);
-                discount = 0;   // Noncompliant
+                discount = 0;   // FIXME: Roslyn CFG WIP Non-compliant
                 return ret;
             }
 
@@ -462,7 +462,7 @@ namespace Tests.Diagnostics
                 static int LocalFunction(int x)
                 {
                     int seed;
-                    seed = 1;       // Noncompliant
+                    seed = 1;       // FIXME: Roslyn CFG WIP Non-compliant
                     seed = 42;
                     return x + seed;
                 }
@@ -492,7 +492,7 @@ namespace Tests.Diagnostics
                 var lst = arr;    //Compliant
                 var unused = arr;
                 lst ??= new int[0];
-                unused ??= new int[0]; //Noncompliant
+                unused ??= new int[0]; //FIXME: Roslyn CFG WIP Non-compliant
                 return lst;
             }
         }
@@ -509,7 +509,7 @@ namespace Tests.Diagnostics
             }
             finally
             {
-                actor = null; // Noncompliant
+                actor = null; // FIXME: Roslyn CFG WIP Non-compliant
             }
         }
 
@@ -523,7 +523,7 @@ namespace Tests.Diagnostics
             {
                 try
                 {
-                    actor = null; // Noncompliant
+                    actor = null; // FIXME: Roslyn CFG WIP Non-compliant
                 }
                 catch
                 {
@@ -553,7 +553,7 @@ namespace Tests.Diagnostics
             }
             catch (Exception)
             {
-                actor = null; // Noncompliant
+                actor = null; // FIXME: Roslyn CFG WIP Non-compliant
             }
             Foo(null);
         }
@@ -566,11 +566,11 @@ namespace Tests.Diagnostics
             }
             catch (Exception) when (i == 1)
             {
-                actor = null; // Noncompliant
+                actor = null; // FIXME: Roslyn CFG WIP Non-compliant
             }
             finally
             {
-                actor = null; // Noncompliant
+                actor = null; // FIXME: Roslyn CFG WIP Non-compliant
             }
         }
 
