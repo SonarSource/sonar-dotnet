@@ -18,6 +18,7 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Linq;
@@ -25,9 +26,9 @@ using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
-using Microsoft.CodeAnalysis.Text;
-using SonarAnalyzer.Common;
+using SonarAnalyzer.CFG.LiveVariableAnalysis;
 using SonarAnalyzer.CFG.Sonar;
+using SonarAnalyzer.Common;
 using SonarAnalyzer.Extensions;
 using SonarAnalyzer.Helpers;
 using SonarAnalyzer.LiveVariableAnalysis.CSharp;
@@ -37,20 +38,28 @@ namespace SonarAnalyzer.Rules.CSharp
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
     [Rule(DiagnosticId)]
-    public sealed class DeadStores : SonarDiagnosticAnalyzer
+    public sealed partial class DeadStores : SonarDiagnosticAnalyzer
     {
         private const string DiagnosticId = "S1854";
         private const string MessageFormat = "Remove this useless assignment to local variable '{0}'.";
 
         private static readonly DiagnosticDescriptor Rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
+        private static readonly string[] AllowedNumericValues = new[] { "-1", "0", "1" };
+        private static readonly string[] AllowedStringValues = new[] { string.Empty };
+        private readonly bool useSonarCfg;
 
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
+
+        public DeadStores() : this(AnalyzerConfiguration.AlwaysEnabled) { }
+
+        internal /* for testing */ DeadStores(IAnalyzerConfiguration configuration) =>
+            useSonarCfg = configuration.UseSonarCfg();
 
         protected override void Initialize(SonarAnalysisContext context)
         {
             // No need to check for ExpressionBody as it can't contain variable assignment
             context.RegisterSyntaxNodeActionInNonGenerated(
-                c => CheckForDeadStores(c, c.SemanticModel.GetDeclaredSymbol(c.Node), ((BaseMethodDeclarationSyntax)c.Node).Body),
+                c => CheckForDeadStores<BaseMethodDeclarationSyntax>(c, c.SemanticModel.GetDeclaredSymbol(c.Node), x => (CSharpSyntaxNode)x.Body ?? x.ExpressionBody()),
                 SyntaxKind.MethodDeclaration,
                 SyntaxKind.ConstructorDeclaration,
                 SyntaxKind.DestructorDeclaration,
@@ -58,7 +67,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 SyntaxKind.OperatorDeclaration);
 
             context.RegisterSyntaxNodeActionInNonGenerated(
-                c => CheckForDeadStores(c, c.SemanticModel.GetDeclaredSymbol(c.Node), ((AccessorDeclarationSyntax)c.Node).Body),
+                c => CheckForDeadStores<AccessorDeclarationSyntax>(c, c.SemanticModel.GetDeclaredSymbol(c.Node), x => (CSharpSyntaxNode)x.Body ?? x.ExpressionBody()),
                 SyntaxKind.GetAccessorDeclaration,
                 SyntaxKind.SetAccessorDeclaration,
                 SyntaxKindEx.InitAccessorDeclaration,
@@ -66,7 +75,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 SyntaxKind.RemoveAccessorDeclaration);
 
             context.RegisterSyntaxNodeActionInNonGenerated(
-                c => CheckForDeadStores(c, c.SemanticModel.GetSymbolInfo(c.Node).Symbol, ((AnonymousFunctionExpressionSyntax)c.Node).Body),
+                c => CheckForDeadStores<AnonymousFunctionExpressionSyntax>(c, c.SemanticModel.GetSymbolInfo(c.Node).Symbol, x => x.Body),
                 SyntaxKind.AnonymousMethodExpression,
                 SyntaxKind.SimpleLambdaExpression,
                 SyntaxKind.ParenthesizedLambdaExpression);
@@ -76,246 +85,114 @@ namespace SonarAnalyzer.Rules.CSharp
                 SyntaxKindEx.LocalFunctionStatement);
         }
 
-        private static void CheckForDeadStores(SyntaxNodeAnalysisContext context, ISymbol symbol, CSharpSyntaxNode node)
+        private void CheckForDeadStores<T>(SyntaxNodeAnalysisContext context, ISymbol symbol, Func<T, CSharpSyntaxNode> bodyOrExpressionBody) where T : SyntaxNode =>
+            CheckForDeadStores(context, symbol, bodyOrExpressionBody((T)context.Node));
+
+        private void CheckForDeadStores(SyntaxNodeAnalysisContext context, ISymbol symbol, CSharpSyntaxNode node)
         {
-            if (symbol != null
-                && node != null
-                // Currently the tuple expressions are not supported and this is known to cause false positives.
-                // Please check:
-                // - community feedback: https://github.com/SonarSource/sonar-dotnet/issues/3094
-                // - implementation ticket: https://github.com/SonarSource/sonar-dotnet/issues/2933
-                && !node.DescendantNodes().AnyOfKind(SyntaxKindEx.TupleExpression)
-                && CSharpControlFlowGraph.TryGet(node, context.SemanticModel, out var cfg))
+            if (symbol != null && node != null)
             {
-                var lva = new SonarCSharpLiveVariableAnalysis(cfg, symbol, context.SemanticModel);
-                foreach (var block in cfg.Blocks)
+                if (useSonarCfg)
                 {
-                    var blockLva = new InBlockLivenessAnalysis(context, symbol, node, block, lva.LiveOut(block), lva.CapturedVariables);
-                    blockLva.Analyze();
+                    // Tuple expressions are not supported. See https://github.com/SonarSource/sonar-dotnet/issues/3094
+                    if (!node.DescendantNodes().AnyOfKind(SyntaxKindEx.TupleExpression) && CSharpControlFlowGraph.TryGet(node, context.SemanticModel, out var cfg))
+                    {
+                        var lva = new SonarCSharpLiveVariableAnalysis(cfg, symbol, context.SemanticModel);
+                        var checker = new SonarChecker(context, lva, node);
+                        checker.Analyze(cfg.Blocks);
+                    }
+                }
+                else
+                {
+                    var cfg = node.CreateCfg(context.SemanticModel);
+                    var lva = new RoslynLiveVariableAnalysis(cfg, symbol);
+                    var checker = new RoslynChecker(context, lva);
+                    checker.Analyze(cfg.Blocks);
                 }
             }
         }
 
-        private class InBlockLivenessAnalysis
+        private abstract class CheckerBase<TCfg, TBlock>
         {
+            private readonly LiveVariableAnalysisBase<TCfg, TBlock> lva;
             private readonly SyntaxNodeAnalysisContext context;
-            private readonly ISymbol nodeSymbol;
-            private readonly SyntaxNode node;
-            private readonly Block block;
-            private readonly IEnumerable<ISymbol> blockLiveOut;
-            private readonly IEnumerable<ISymbol> excludedLocals;
+            private readonly ISet<ISymbol> capturedVariables;
 
-            private static readonly ISet<string> AllowedNumericValues = new HashSet<string> { "-1", "0", "1" };
-            private static readonly ISet<string> AllowedStringValues = new HashSet<string> { string.Empty };
+            protected abstract State CreateState(TBlock block);
 
-            public InBlockLivenessAnalysis(SyntaxNodeAnalysisContext context, ISymbol nodeSymbol, SyntaxNode node, Block block, IEnumerable<ISymbol> blockLiveOut, IEnumerable<ISymbol> excludedLocals)
+            protected CheckerBase(SyntaxNodeAnalysisContext context, LiveVariableAnalysisBase<TCfg, TBlock> lva)
             {
                 this.context = context;
-                this.nodeSymbol = nodeSymbol;
-                this.node = node;
-                this.block = block;
-                this.blockLiveOut = blockLiveOut;
-                this.excludedLocals = excludedLocals;
+                this.lva = lva;
+                capturedVariables = lva.CapturedVariables.ToHashSet();
             }
 
-            public void Analyze()
+            public void Analyze(IEnumerable<TBlock> blocks)
             {
-                var assignmentLhs = new HashSet<SyntaxNode>();
-                var liveOut = new HashSet<ISymbol>(blockLiveOut);
-
-                foreach (var instruction in block.Instructions.Reverse())
+                foreach (var block in blocks)
                 {
-                    switch (instruction.Kind())
-                    {
-                        case SyntaxKind.IdentifierName:
-                            ProcessIdentifier(instruction, assignmentLhs, liveOut);
-                            break;
-
-                        case SyntaxKind.AddAssignmentExpression:
-                        case SyntaxKind.SubtractAssignmentExpression:
-                        case SyntaxKind.MultiplyAssignmentExpression:
-                        case SyntaxKind.DivideAssignmentExpression:
-                        case SyntaxKind.ModuloAssignmentExpression:
-                        case SyntaxKind.AndAssignmentExpression:
-                        case SyntaxKind.ExclusiveOrAssignmentExpression:
-                        case SyntaxKind.OrAssignmentExpression:
-                        case SyntaxKind.LeftShiftAssignmentExpression:
-                        case SyntaxKind.RightShiftAssignmentExpression:
-                        case SyntaxKindEx.CoalesceAssignmentExpression:
-                            ProcessOpAssignment(instruction, assignmentLhs, liveOut);
-                            break;
-
-                        case SyntaxKind.SimpleAssignmentExpression:
-                            ProcessSimpleAssignment(instruction, assignmentLhs, liveOut);
-                            break;
-
-                        case SyntaxKind.VariableDeclarator:
-                            ProcessVariableDeclarator(instruction, liveOut);
-                            break;
-
-                        case SyntaxKind.PreIncrementExpression:
-                        case SyntaxKind.PreDecrementExpression:
-                            ProcessPrefixExpression(instruction, liveOut);
-                            break;
-
-                        case SyntaxKind.PostIncrementExpression:
-                        case SyntaxKind.PostDecrementExpression:
-                            ProcessPostfixExpression(instruction, liveOut);
-                            break;
-                    }
+                    var state = CreateState(block);
+                    state.AnalyzeBlock();
                 }
             }
 
-            private void ProcessIdentifier(SyntaxNode instruction, HashSet<SyntaxNode> assignmentLhs, HashSet<ISymbol> liveOut)
+            protected bool IsLocal(ISymbol symbol) =>
+                lva.IsLocal(symbol);
+
+            protected abstract class State
             {
-                var identifier = (IdentifierNameSyntax)instruction;
-                var symbol = context.SemanticModel.GetSymbolInfo(identifier).Symbol;
-                if (IsSymbolRelevant(symbol)
-                    && !identifier.GetSelfOrTopParenthesizedExpression().IsInNameOfArgument(context.SemanticModel)
-                    && SonarCSharpLiveVariableAnalysis.IsLocalScoped(symbol, nodeSymbol))
+                protected readonly TBlock block;
+                protected readonly ISet<ISymbol> liveOut;
+                private readonly CheckerBase<TCfg, TBlock> owner;
+
+                public abstract void AnalyzeBlock();
+
+                protected SemanticModel SemanticModel => owner.context.SemanticModel;
+
+                protected State(CheckerBase<TCfg, TBlock> owner, TBlock block)
                 {
-                    if (SonarCSharpLiveVariableAnalysis.IsOutArgument(identifier))
-                    {
-                        liveOut.Remove(symbol);
-                    }
-                    else if (!assignmentLhs.Contains(identifier))
-                    {
-                        liveOut.Add(symbol);
-                    }
-                }
-            }
-
-            private void ProcessOpAssignment(SyntaxNode instruction, HashSet<SyntaxNode> assignmentLhs, HashSet<ISymbol> liveOut)
-            {
-                var assignment = (AssignmentExpressionSyntax)instruction;
-                var left = assignment.Left.RemoveParentheses();
-                if (IdentifierRelevantSymbol(left) is { } symbol)
-                {
-                    ReportOnAssignment(assignment, left, symbol, assignmentLhs, liveOut);
-                }
-            }
-
-            private void ProcessSimpleAssignment(SyntaxNode instruction, HashSet<SyntaxNode> assignmentLhs, HashSet<ISymbol> liveOut)
-            {
-                var assignment = (AssignmentExpressionSyntax)instruction;
-                var left = assignment.Left.RemoveParentheses();
-                if (IdentifierRelevantSymbol(left) is { } symbol)
-                {
-                    ReportOnAssignment(assignment, left, symbol, assignmentLhs, liveOut);
-                    liveOut.Remove(symbol);
-                }
-            }
-
-            private void ProcessVariableDeclarator(SyntaxNode instruction, HashSet<ISymbol> liveOut)
-            {
-                var declarator = (VariableDeclaratorSyntax)instruction;
-                if (context.SemanticModel.GetDeclaredSymbol(declarator) is ILocalSymbol symbol && IsSymbolRelevant(symbol))
-                {
-                    if (declarator.Initializer != null
-                        && !IsAllowedInitialization(declarator.Initializer)
-                        && !symbol.IsConst
-                        && symbol.RefKind() == RefKind.None
-                        && !liveOut.Contains(symbol)
-                        && !IsUnusedLocal(symbol)
-                        && !new MutedSyntaxWalker(context.SemanticModel, declarator, symbol).IsMuted())
-                    {
-                        var location = GetFirstLineLocationFromToken(declarator.Initializer.EqualsToken, declarator.Initializer);
-                        context.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, location, symbol.Name));
-                    }
-                    liveOut.Remove(symbol);
-                }
-            }
-
-            private bool IsAllowedInitialization(EqualsValueClauseSyntax initializer) =>
-                initializer.Value.IsKind(SyntaxKind.DefaultExpression)
-                || IsAllowedObjectInitialization(initializer.Value)
-                || IsAllowedBooleanInitialization(initializer.Value)
-                || IsAllowedNumericInitialization(initializer.Value)
-                || IsAllowedUnaryNumericInitialization(initializer.Value)
-                || IsAllowedStringInitialization(initializer.Value);
-
-            private static bool IsAllowedObjectInitialization(ExpressionSyntax expression) =>
-                expression.IsNullLiteral();
-
-            private static bool IsAllowedBooleanInitialization(ExpressionSyntax expression) =>
-                expression.IsAnyKind(SyntaxKind.TrueLiteralExpression, SyntaxKind.FalseLiteralExpression);
-
-            private static bool IsAllowedNumericInitialization(ExpressionSyntax expression) =>
-                expression.IsKind(SyntaxKind.NumericLiteralExpression) && AllowedNumericValues.Contains(((LiteralExpressionSyntax)expression).Token.ValueText);  // -1, 0 or 1
-
-            private static bool IsAllowedUnaryNumericInitialization(ExpressionSyntax expression) =>
-                expression.IsAnyKind(SyntaxKind.UnaryPlusExpression, SyntaxKind.UnaryMinusExpression) && IsAllowedNumericInitialization(((PrefixUnaryExpressionSyntax)expression).Operand);
-
-            private bool IsAllowedStringInitialization(ExpressionSyntax expression) =>
-                (expression.IsKind(SyntaxKind.StringLiteralExpression) && AllowedStringValues.Contains(((LiteralExpressionSyntax)expression).Token.ValueText))
-                || expression.IsStringEmpty(context.SemanticModel);
-
-            private bool IsUnusedLocal(ISymbol declaredSymbol) =>
-                node.DescendantNodes()
-                    .OfType<IdentifierNameSyntax>()
-                    .SelectMany(x => VariableUnusedBase.GetUsedSymbols(x, context.SemanticModel))
-                    .All(x => !x.Equals(declaredSymbol));
-
-            private void ProcessPrefixExpression(SyntaxNode instruction, HashSet<ISymbol> liveOut)
-            {
-                var prefixExpression = (PrefixUnaryExpressionSyntax)instruction;
-                var parent = prefixExpression.GetSelfOrTopParenthesizedExpression();
-                var operand = prefixExpression.Operand.RemoveParentheses();
-                if (parent.Parent is ExpressionStatementSyntax
-                    && IdentifierRelevantSymbol(operand) is { } symbol
-                    && SonarCSharpLiveVariableAnalysis.IsLocalScoped(symbol, nodeSymbol)
-                    && !liveOut.Contains(symbol)
-                    && !IsMuted(operand))
-                {
-                    context.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, prefixExpression.GetLocation(), symbol.Name));
-                }
-            }
-
-            private void ProcessPostfixExpression(SyntaxNode instruction, HashSet<ISymbol> liveOut)
-            {
-                var postfixExpression = (PostfixUnaryExpressionSyntax)instruction;
-                var operand = postfixExpression.Operand.RemoveParentheses();
-                if (IdentifierRelevantSymbol(operand) is { } symbol
-                    && SonarCSharpLiveVariableAnalysis.IsLocalScoped(symbol, nodeSymbol)
-                    && !liveOut.Contains(symbol)
-                    && !IsMuted(operand))
-                {
-                    context.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, postfixExpression.GetLocation(), symbol.Name));
-                }
-            }
-
-            private void ReportOnAssignment(AssignmentExpressionSyntax assignment, ExpressionSyntax left, ISymbol symbol, HashSet<SyntaxNode> assignmentLhs, HashSet<ISymbol> outState)
-            {
-                if (SonarCSharpLiveVariableAnalysis.IsLocalScoped(symbol, nodeSymbol)
-                    && !outState.Contains(symbol)
-                    && !IsMuted(left))
-                {
-                    var location = GetFirstLineLocationFromToken(assignment.OperatorToken, assignment.Right);
-                    context.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, location, symbol.Name));
+                    this.owner = owner;
+                    this.block = block;
+                    liveOut = new HashSet<ISymbol>(owner.lva.LiveOut(block));
                 }
 
-                assignmentLhs.Add(left);
+                protected void ReportIssue(Location location, ISymbol symbol) =>
+                    owner.context.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, location, symbol.Name));
+
+                protected bool IsSymbolRelevant(ISymbol symbol) =>
+                    symbol != null && !owner.capturedVariables.Contains(symbol);
+
+                protected bool IsLocal(ISymbol symbol) =>
+                    owner.IsLocal(symbol);
+
+                protected bool IsAllowedInitializationValue(ExpressionSyntax value, Optional<object> constantValue = default) =>
+                    (constantValue.HasValue && IsAllowedInitializationConstant(constantValue.Value, value.IsKind(SyntaxKind.IdentifierName)))
+                    || value.IsAnyKind(SyntaxKind.DefaultExpression, SyntaxKind.TrueLiteralExpression, SyntaxKind.FalseLiteralExpression)
+                    || value.IsNullLiteral()
+                    || IsAllowedNumericInitialization(value)
+                    || IsAllowedUnaryNumericInitialization(value)
+                    || IsAllowedStringInitialization(value);
+
+                protected bool IsMuted(SyntaxNode node, ISymbol symbol) =>
+                    new MutedSyntaxWalker(SemanticModel, node, symbol).IsMuted();
+
+                private static bool IsAllowedInitializationConstant(object constant, bool isIdentifier) =>
+                    constant == null
+                    || (isIdentifier && IsAllowedInitializationConstantIdentifier(constant));
+
+                private static bool IsAllowedInitializationConstantIdentifier(object constant) =>
+                    constant is string str ? AllowedStringValues.Contains(str) : AllowedNumericValues.Contains(constant.ToString());
+
+                private static bool IsAllowedNumericInitialization(ExpressionSyntax expression) =>
+                    expression.IsKind(SyntaxKind.NumericLiteralExpression) && AllowedNumericValues.Contains(((LiteralExpressionSyntax)expression).Token.ValueText);  // -1, 0 or 1
+
+                private static bool IsAllowedUnaryNumericInitialization(ExpressionSyntax expression) =>
+                    expression.IsAnyKind(SyntaxKind.UnaryPlusExpression, SyntaxKind.UnaryMinusExpression) && IsAllowedNumericInitialization(((PrefixUnaryExpressionSyntax)expression).Operand);
+
+                private bool IsAllowedStringInitialization(ExpressionSyntax expression) =>
+                    (expression.IsKind(SyntaxKind.StringLiteralExpression) && AllowedStringValues.Contains(((LiteralExpressionSyntax)expression).Token.ValueText))
+                    || expression.IsStringEmpty(SemanticModel);
             }
-
-            private bool IsMuted(SyntaxNode node) =>
-                new MutedSyntaxWalker(context.SemanticModel, node).IsMuted();
-
-            private static Location GetFirstLineLocationFromToken(SyntaxToken issueStartToken, SyntaxNode wholeIssue)
-            {
-                var line = wholeIssue.SyntaxTree.GetText().Lines[issueStartToken.GetLocation().GetLineSpan().StartLinePosition.Line];
-                var rightSingleLine = line.Span.Intersection(TextSpan.FromBounds(issueStartToken.SpanStart, wholeIssue.Span.End));
-                return Location.Create(wholeIssue.SyntaxTree, TextSpan.FromBounds(issueStartToken.SpanStart, rightSingleLine.HasValue ? rightSingleLine.Value.End : issueStartToken.Span.End));
-            }
-
-            private ISymbol IdentifierRelevantSymbol(SyntaxNode node) =>
-                node.IsKind(SyntaxKind.IdentifierName)
-                && context.SemanticModel.GetSymbolInfo(node).Symbol is { } symbol
-                && IsSymbolRelevant(symbol)
-                ? symbol
-                : null;
-
-            private bool IsSymbolRelevant(ISymbol symbol) =>
-                symbol != null && !excludedLocals.Contains(symbol);
         }
     }
 }

@@ -7,7 +7,7 @@
 "uri":  "sources\akka.net\src\core\Akka.Remote\Transport\DotNetty\DotNettyTransportSettings.cs",
 "region":  {
 "startLine":  68,
-"startColumn":  23,
+"startColumn":  17,
 "endLine":  68,
 "endColumn":  47
 }

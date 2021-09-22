@@ -154,7 +154,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework
         {
             DumpActualDiagnostics(languageVersion, diagnostics);
 
-            foreach (var diagnostic in diagnostics)
+            foreach (var diagnostic in diagnostics.OrderBy(x => x.Location.SourceSpan.Start))
             {
                 var expectedIssues = ExpectedIssues(expectedIssuesPerFile, diagnostic.Location);
                 var issueId = VerifyPrimaryIssue(languageVersion,
@@ -186,7 +186,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework
             if (expectedIssuesPerFile.Any(x => x.IssueLocations.Any()))
             {
                 var issuesString = new StringBuilder();
-                foreach (var fileWithIssues in expectedIssuesPerFile.Where(x => x.IssueLocations.Any()))
+                foreach (var fileWithIssues in expectedIssuesPerFile.Where(x => x.IssueLocations.Any()).OrderBy(x => x.IssueLocations.First().Start))
                 {
                     issuesString.Append($"{Environment.NewLine}File: {fileWithIssues.FileName}");
                     var expectedIssuesDescription = fileWithIssues.IssueLocations.Select(i => $"{Environment.NewLine}Line: {i.LineNumber}, Type: {IssueType(i.IsPrimary)}, Id: '{i.IssueId}'");
@@ -244,6 +244,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework
             var lineNumber = location.GetLineNumberToReport();
             var expectedIssue = expectedIssues
                 .Where(issueFilter)
+                .OrderBy(x => x.Start == null ? 0 : Math.Abs(location.GetLineSpan().StartLinePosition.Character - x.Start.Value))
                 .FirstOrDefault(issue => issue.LineNumber == lineNumber);
             var issueType = IssueType(isPrimary);
 

@@ -24,6 +24,8 @@ using System.Linq;
 using FluentAssertions;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
+using Microsoft.CodeAnalysis.Operations;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using static csharp::SonarAnalyzer.Extensions.SyntaxTokenExtensions;
 using SyntaxNodeExtensions = csharp::SonarAnalyzer.Extensions.SyntaxNodeExtensions;
@@ -95,6 +97,138 @@ namespace SonarAnalyzer.UnitTest.Extensions
 #else
             SyntaxNodeExtensions.GetDeclarationTypeName(SyntaxFactory.Block()).Should().Be("type");
 #endif
+
+        [TestMethod]
+        public void CreateCfg_MethodBody_ReturnsCfg()
+        {
+            var code = @"
+using System.Linq;
+public class Sample
+{
+    public void Main()
+    {
+        var x = 42;
+    }
+}";
+            var (tree, semanticModel) = TestHelper.Compile(code);
+            var node = tree.GetRoot().DescendantNodes().OfType<MethodDeclarationSyntax>().Single();
+
+            SyntaxNodeExtensions.CreateCfg(node.Body, semanticModel).Should().NotBeNull();
+        }
+
+        [TestMethod]
+        public void CreateCfg_AnyNode_ReturnsCfg()
+        {
+            var code = @"
+using System.Linq;
+public class Sample
+{
+    public void Main()
+    {
+        Main();
+    }
+}";
+            var (tree, semanticModel) = TestHelper.Compile(code);
+            var node = tree.GetRoot().DescendantNodes().OfType<InvocationExpressionSyntax>().Single();
+
+            SyntaxNodeExtensions.CreateCfg(node, semanticModel).Should().NotBeNull();
+        }
+
+        [TestMethod]
+        public void CreateCfg_LambdaInsideQuery()
+        {
+            var code = @"
+using System;
+using System.Linq;
+public class Sample
+{
+    public void Main(int[] values)
+    {
+        var result = from value in values select new Lazy<int>(() => value);
+    }
+}";
+            var (tree, semanticModel) = TestHelper.Compile(code);
+            var lambda = tree.GetRoot().DescendantNodes().OfType<ParenthesizedLambdaExpressionSyntax>().Single();
+
+            SyntaxNodeExtensions.CreateCfg(lambda.Body, semanticModel).Should().NotBeNull();
+        }
+
+        [TestMethod]
+        public void CreateCfg_NestingChain()
+        {
+            var code = @"
+using System;
+public class Sample
+{
+    public void Main(int[] values)
+    {
+        void OuterLocalFunction()
+        {
+            Action<int, int> outerParenthesizedLambda = (a, b) =>
+            {
+                void MiddleLocalFunction(int c)
+                {
+                    var queryExpressionInTheWay = from value in values select new Lazy<int>(() =>
+                        {
+                            return InnerLocalFunction(value);
+
+                            static int InnerLocalFunction(int arg)
+                            {
+                                Func<int, int> innerLambda = xxx => xxx;
+
+                                return innerLambda(arg);
+                            }
+                        });
+                }
+            };
+        }
+    }
+}";
+            var (tree, semanticModel) = TestHelper.Compile(code);
+            var innerLambda = tree.GetRoot().DescendantNodes().OfType<SimpleLambdaExpressionSyntax>().Single();
+            innerLambda.Parent.Parent.Should().BeOfType<VariableDeclaratorSyntax>().Subject.Identifier.ValueText.Should().Be("innerLambda");
+
+            var cfg = SyntaxNodeExtensions.CreateCfg(innerLambda.Body, semanticModel);
+            cfg.Should().NotBeNull("It's innerLambda");
+            cfg.Parent.Should().NotBeNull("It's InnerLocalFunction");
+            cfg.Parent.Parent.Should().NotBeNull("Lambda iniside Lazy<int> constructor");
+            cfg.Parent.Parent.Parent.Should().NotBeNull("It's MiddleLocalFunction");
+            cfg.Parent.Parent.Parent.Parent.Should().NotBeNull("It's outerParenthesizedLambda");
+            cfg.Parent.Parent.Parent.Parent.Parent.Should().NotBeNull("It's OuterLocalFunction");
+            cfg.Parent.Parent.Parent.Parent.Parent.Parent.Should().NotBeNull("It's the root CFG");
+            cfg.Parent.Parent.Parent.Parent.Parent.Parent.Parent.Should().BeNull("Root CFG should not have Parent");
+            cfg.OriginalOperation.Should().BeAssignableTo<IAnonymousFunctionOperation>().Subject.Symbol.Parameters.Should().HaveCount(1).And.Contain(x => x.Name == "xxx");
+        }
+
+        [TestMethod]
+        public void CreateCfg_UndefinedSymbol_ReturnsCfg()
+        {
+            var code = @"
+public class Sample
+{
+    public void Main()
+    {
+        Undefined(() => 45);
+    }
+}";
+            var (tree, semanticModel) = TestHelper.Compile(code);
+            var lambda = tree.GetRoot().DescendantNodes().OfType<ParenthesizedLambdaExpressionSyntax>().Single();
+
+            SyntaxNodeExtensions.CreateCfg(lambda.Body, semanticModel).Should().NotBeNull();
+        }
+
+        [DataTestMethod]
+        [DataRow(@"() =>")]
+        [DataRow(@"} () => }")]
+        [DataRow(@"{ () => .")]
+        [DataRow(@"{ () => => =>")]
+        public void CreateCfg_InvalidSyntax_ReturnsCfg(string code)
+        {
+            var (tree, semanticModel) = TestHelper.Compile(code);
+            var lambda = tree.GetRoot().DescendantNodes().OfType<ParenthesizedLambdaExpressionSyntax>().Single();
+
+            SyntaxNodeExtensions.CreateCfg(lambda.Body, semanticModel).Should().NotBeNull();
+        }
 
         private static SyntaxToken GetFirstTokenOfKind(SyntaxTree syntaxTree, SyntaxKind kind) =>
             syntaxTree.GetRoot().DescendantTokens().First(token => token.IsKind(kind));

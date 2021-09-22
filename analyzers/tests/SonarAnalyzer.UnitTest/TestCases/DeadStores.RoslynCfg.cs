@@ -7,6 +7,8 @@ namespace Tests.Diagnostics
 {
     public class Resource : IDisposable
     {
+        private const int constZero = 0;
+
         public void Dispose()
         {
         }
@@ -24,47 +26,103 @@ namespace Tests.Diagnostics
             var stringEmpty = string.Empty; // Compliant
             stringEmpty = "other";
 
-            string stringNull = null; // Compliant
+            string stringNull = null;   // Compliant
             stringNull = "other";
 
-            var boolFalse = false; // Compliant
+            var boolFalse = false;      // Compliant
             boolFalse = true;
 
-            var boolTrue = true; // Compliant
+            var boolTrue = true;        // Compliant
             boolTrue = false;
 
-            object objectNull = null; // Compliant
+            object objectNull = null;   // Compliant
             objectNull = new object();
 
-            var intZero = 0; // Compliant
+            var intZero = 0;            // Compliant
             intZero = 42;
 
-            var intOne = 1; // Compliant
+            var intOne = 1;             // Compliant
             intOne = 42;
 
-            var intMinusOne = -1; // Compliant
+            var intMinusOne = -1;       // Compliant
             intMinusOne = 42;
 
-            var intPlusOne = +1; // Compliant
+            var intPlusOne = +1;        // Compliant
             intPlusOne = 42;
 
+            const int constMinusOne = -1;
+            int fromLocalConstant = constMinusOne;  // Compliant
+            fromLocalConstant = 42;
+
+            int fromClassConstant = constZero;      // Compliant
+            fromClassConstant = 42;
+
+            const string constEmpty = "";
+            string fromConstantEmpty = constEmpty;  // Compliant
+            fromConstantEmpty = "other";
+
+            var fromCast = (string)null;            // Compliant
+            fromCast = "other";
+
             // Variables should be used in order the rule to trigger
-            Console.WriteLine("", stringEmpty, stringNull, boolFalse, boolTrue,
-                objectNull, intZero, intOne, intMinusOne, intPlusOne);
+            Console.WriteLine("", stringEmpty, stringNull, boolFalse, boolTrue, objectNull, intZero, intOne, intMinusOne, intPlusOne, fromLocalConstant, fromClassConstant, fromConstantEmpty, fromCast);
+        }
+
+        private void NonignoredValues()
+        {
+            var stringZero = "0";       // Noncompliant, this is not ignored
+            stringZero = "other";
+            var stringOne = "1";        // Noncompliant, this is not ignored
+            stringOne = "other";
+            var stringMinusOne = "-1";  // Noncompliant, this is not ignored
+            stringMinusOne = "other";
+
+            var isZero = 1 - 1;         // Noncompliant, this is not ignored
+            isZero = 42;
+
+            var isEmpty = "" + "";      // Noncompliant, this is not ignored
+            isEmpty = "other";
+
+            const string constNotEmpty = "Something";
+            string fromConstantNotEmpty = constNotEmpty;  // Noncompliant, this is not ignored
+            fromConstantNotEmpty = "other";
+
+            Console.WriteLine("", stringZero, stringOne, stringMinusOne, isZero, isEmpty, fromConstantNotEmpty);
+        }
+
+        public void ExpressionResultsInConstantIgnoredValue()
+        {
+            var boolFalse = 0 != 0;     // Noncompliant, only explicit 'false' is ignored by the rule
+            boolFalse = true;
+
+            var boolTrue = 0 == 0;      // Noncompliant
+            boolTrue = false;
+
+            var intZero = 1 - 1;        // Noncompliant
+            intZero = 42;
+
+            var intOne = 0 + 1;         // Noncompliant
+            intOne = 42;
+
+            var intMinusOne = 0 - 1;    // Noncompliant
+            intMinusOne = 42;
+
+            // Variables should be used in order the rule to trigger
+            Console.WriteLine("", boolFalse, boolTrue, intZero, intOne, intMinusOne);
         }
 
         public void Defaults()
         {
-            var s = default(string); // Compliant
+            var s = default(string);    // Compliant
             s = "";
 
-            var b = default(bool); // Compliant
+            var b = default(bool);      // Compliant
             b = true;
 
-            var o = default(object); // Compliant
+            var o = default(object);    // Compliant
             o = new object();
 
-            var i = default(int); // Compliant
+            var i = default(int);       // Compliant
             i = 42;
 
             // Variables should be used in order the rule to trigger
@@ -81,16 +139,16 @@ namespace Tests.Diagnostics
 
         void calculateRate(int a, int b)
         {
-            b = doSomething(); // Noncompliant {{Remove this useless assignment to local variable 'b'.}}
-//            ^^^^^^^^^^^^^^^
+            b = doSomething(); // {{Remove this useless assignment to local variable 'b'.}}
+//          ^^^^^^^^^^^^^^^^^
 
             int i, j;
             i = a + 12;
             i += i + 2; // Noncompliant
             i = 5;
             j = i;
-            i
-                = doSomething(); // Noncompliant; retrieved value overwritten in for loop
+            i                           // Noncompliant; retrieved value overwritten in for loop
+                = doSomething();
             for (i = 0; i < j + 10; i++)
             {
                 //  ...
@@ -108,8 +166,8 @@ namespace Tests.Diagnostics
                 resource.DoSomething();
             }
 
-            var x
-                = 10; // Noncompliant
+            var x       // Noncompliant
+                = 10;
             var y =
                 x = 11; // Noncompliant
             Console.WriteLine(y);
@@ -117,12 +175,12 @@ namespace Tests.Diagnostics
             int k = 12; // Noncompliant
             X(out k);   // Compliant, not reporting on out parameters
         }
-        void X(out int i) { i = 10; }
+        void X(out int i) { i = 10; }   // Compliant out parameter
 
         void calculateRate2(int a, int b)
         {
-            var x = 0;
-            x = 1; // FN, muted due to try/catch
+            var x = 0;  // Compliant, ignored value
+            x = 1;      // FN, muted due to try/catch
             try
             {
                 x = 11; // FN, muted due to try/catch
@@ -183,7 +241,120 @@ namespace Tests.Diagnostics
             var captured = 10;
             Action a = () => { Console.WriteLine(captured); };
             captured += 11;     // Not reporting on captured local variables
+            a();
+
+            var add = 40;
+            add += 2;
+            Use(add);
+            add += 100;     // Noncompliant
+
+            var sub = 40;
+            sub -= 2;
+            Use(sub);
+            sub -= 100;     // Noncompliant
+
+            var mul = 40;
+            mul *= 2;
+            Use(mul);
+            mul *= 100;     // Noncompliant
+
+            var div = 40;
+            div /= 2;
+            Use(div);
+            div /= 100;     // Noncompliant
+
+            var mod = 40;
+            mod += 2;
+            Use(mod);
+            mod %= 100;     // Noncompliant
+
+            var and = false;
+            and &= true;
+            Use(and);
+            and &= false;   // Noncompliant
+
+            var or = false;
+            or |= false;
+            Use(or);
+            or |= true;     // Noncompliant
+
+            var xor = 40;
+            xor ^= 2;
+            Use(xor);
+            xor ^= 100;     // Noncompliant
+
+            var left = 40;
+            left <<= 2;
+            Use(left);
+            left <<= 100;   // Noncompliant
+
+            var right = 40;
+            right >>= 2;
+            Use(right);
+            right >>= 100;  // Noncompliant
+
+            string coa = SomeString();
+            coa ??= SomeString();
+            Use(coa);
+            coa ??= SomeString();  // Roslyn CFG FN: Branching with FlowCaptureOperation
         }
+
+        public void Unary()
+        {
+            var value = 41;
+            value++;
+            Use(value);
+            value++;      // Noncompliant
+            value = 41;
+
+            ++value;
+            Use(value);
+            ++value;      // Noncompliant
+            value = 41;
+
+            value--;
+            Use(value);
+            value--;      // Noncompliant
+            value = 41;
+
+            --value;
+            Use(value);
+            --value;      // Noncompliant
+            value = 41;
+
+            Use(value);
+        }
+
+        public void LoopControlVariable()
+        {
+            foreach (var unused in Enumerable.Range(1, 10))  // Compliant, this rule should not raise on unused variables
+            {
+                Console.Write("-");
+            }
+            foreach (var used in Enumerable.Range(1, 10))
+            {
+                Use(used);
+            }
+            for(var i = 0; i < 10; i++)
+            {
+                Console.Write("-");
+            }
+            for(var i = 0; i < 10; i++)
+            {
+                Use(i);
+            }
+        }
+
+        public void Discard(int arg)
+        {
+            _ = arg;
+            _ = 42;
+        }
+
+        private void Use(int arg) { }
+        private void Use(bool arg) { }
+        private void Use(string arg) { }
+        private string SomeString() => null;
 
         public void Switch()
         {
@@ -208,7 +379,7 @@ namespace Tests.Diagnostics
 
         public int Switch1(int x)
         {
-            var b = 0; // Compliant
+            var b = 0; // Compliant, ignored value
             switch (x)
             {
                 case 6:
@@ -251,7 +422,7 @@ namespace Tests.Diagnostics
                 i = 12;
                 ++i; // Noncompliant
                 i = 12;
-                var a = ++i;
+                var a = ++i;    // Noncompliant {{Remove this useless assignment to local variable 'i'.}}
                 return a;
             }
         }
@@ -292,12 +463,11 @@ namespace Tests.Diagnostics
 
         public List<int> Method2(int i)
         {
-            var l = new List<int>(); // Compliant, not reporting on captured variables
-
-            return (() => // Error [CS0149] - no method name
+            var l = new List<int>();
+            return (() =>       // Error [CS0149] - no method name
             {
-                var k = 10; // Noncompliant
-                k = 12; // Noncompliant
+                var k = 10;     // Noncompliant
+                k = 12;         // Noncompliant
                 return (l = new List<int>(new[] { i })); // l captured here
             })();
         }
@@ -366,8 +536,8 @@ namespace Tests.Diagnostics
                 Console.WriteLine(item);
             }
 
-            foreach (var
-                item // A new value is assigned here, which is not used. But we are not reporting on it.
+            foreach (var    // Compliant, this rule should not raise on unused variables
+                item
                 in new int[0])
             {
             }
@@ -377,17 +547,41 @@ namespace Tests.Diagnostics
 
         public void Unused()
         {
-            var x = 5; // Compliant, S1481 already reports on it.
+            var x = 5;  // Compliant, S1481 already reports on unused.
 
-            var y = 5; // Noncompliant
-            y = 6; // Noncompliant
+            var y = 5;  // Noncompliant
+            y = 6;      // Noncompliant
         }
 
-        private void SimpleAssignment(bool b1, bool b2)
+        // https://github.com/SonarSource/sonar-dotnet/issues/4937
+        private void ConditionalEvaluation(bool b1, bool b2, object coalesce, object coalesceAssignment)
         {
-            var x = false;  // Compliant
-            (x) = b1 && b2; // Noncompliant
-            x = b1 && b2;   // Noncompliant
+            var x = false;  // Compliant ignored value
+            x = true;       // Roslyn CFG FN: Consequence of inaccurate LVA state below
+            x = b1 && b2;   // Roslyn CFG FN: Branching with FlowCaptureOperation
+            x = b1 || b2;   // Roslyn CFG FN: Branching with FlowCaptureOperation
+            coalesce = coalesce ?? "Value";   // Roslyn CFG FN: Branching with FlowCaptureOperation
+            coalesceAssignment ??= "Value";   // Roslyn CFG FN: Branching with FlowCaptureOperation
+        }
+
+        private void SimpleAssignment()
+        {
+            var x = 42; // Noncompliant
+            (x) = 42;   // Noncompliant
+            x = 42;     // Noncompliant
+
+            var y = 0;  // Compliant, ignored value
+            (y) = 42;   // Noncompliant
+            y = 42;     // Noncompliant
+        }
+
+        private void Arrow(int arg) =>
+            arg = 42; // Noncompliant
+
+        public int ArrowProperty
+        {
+            get => 42;
+            set => value = 42;  // Noncompliant
         }
 
         private class NameOfTest
@@ -452,7 +646,6 @@ namespace Tests.Diagnostics
                 discount = 0;   // Noncompliant
                 return ret;
             }
-
         }
 
         public class StaticLocalFunctions
@@ -492,7 +685,7 @@ namespace Tests.Diagnostics
                 var lst = arr;    //Compliant
                 var unused = arr;
                 lst ??= new int[0];
-                unused ??= new int[0]; //Noncompliant
+                unused ??= new int[0];  // Roslyn CFG FN: Branching with FlowCaptureOperation
                 return lst;
             }
         }
@@ -636,7 +829,7 @@ namespace Tests.Diagnostics
 
         public void Foo()
         {
-            bool shouldCatch = false;
+            bool shouldCatch = false;   // Compliant, ignored value
             try
             {
                 shouldCatch = true; // ok, is read in catch filter
@@ -650,7 +843,7 @@ namespace Tests.Diagnostics
 
         public void Bar(bool cond)
         {
-            bool shouldCatch = false;
+            bool shouldCatch = false;   // Compliant, ignored value
             try
             {
                 DoStuff();
@@ -681,7 +874,7 @@ namespace Tests.Diagnostics
                     DoNothing();
                     break;
                 }
-                catch (Exception ex)
+                catch (Exception ex)    // Compliant, this rule should not raise on unused variables
                 {
                     if (attempts > retries)
                         throw;
@@ -705,7 +898,7 @@ namespace Tests.Diagnostics
                             DoNothing();
                             break;
                         }
-                        catch (ArgumentException ex)
+                        catch (ArgumentException ex)    // Compliant, this rule should not raise on unused variables
                         {
                             DoNothing();
                         }
@@ -714,16 +907,17 @@ namespace Tests.Diagnostics
             }
             catch (Exception ex)
             {
+                ex = null;              // Noncompliant
                 if (attempts > retries)
                     throw;
                 DoNothing();
             }
         }
 
-        public void Bar()
+        public void LoopWithFinally()
         {
             bool isFirst = true;
-            foreach (var i in System.Linq.Enumerable.Range(1, 10))
+            foreach (var i in Enumerable.Range(1, 10))  // Compliant, this rule should not raise on unused variables
             {
                 try
                 {
@@ -742,11 +936,41 @@ namespace Tests.Diagnostics
 
     public static class ReproIssues
     {
+        // https://github.com/SonarSource/sonar-dotnet/issues/2760
+        public static long WithNonIgnored_Declaration(string path)
+        {
+            long length = 42; // Muted FP, FileInfo can throw and function can return this value
+            try
+            {
+                length = new System.IO.FileInfo(path).Length;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+            }
+            return length;
+        }
+
+        public static long WithNonIgnored_Assignment(string path)
+        {
+            long length;
+            length = 42; // Muted FP, FileInfo can throw and function can return this value
+            try
+            {
+                length = new System.IO.FileInfo(path).Length;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+            }
+            return length;
+        }
+
         // https://github.com/SonarSource/sonar-dotnet/issues/2596
         public static long WithConstantValue(string path)
         {
             const int unknownfilelength = -1;
-            long length = unknownfilelength; // Compliant
+            long length = unknownfilelength; // Compliant, ignored value
             try
             {
                 length = new System.IO.FileInfo(path).Length;
@@ -760,7 +984,7 @@ namespace Tests.Diagnostics
 
         public static long WithMinus1(string path)
         {
-            long length = -1;
+            long length = -1;   // Compliant, ignored value
             try
             {
                 length = new System.IO.FileInfo(path).Length;
@@ -775,7 +999,7 @@ namespace Tests.Diagnostics
         const int UNKNOWN = -1;
         public static long WithClassConstant(string path)
         {
-            long length = UNKNOWN; // Compliant
+            long length = UNKNOWN; // Compliant, ignored value
             try
             {
                 length = new System.IO.FileInfo(path).Length;
@@ -790,7 +1014,7 @@ namespace Tests.Diagnostics
         // https://github.com/SonarSource/sonar-dotnet/issues/2598
         public static string WithCastedNull(string path)
         {
-            var length = (string)null; // Compliant
+            var length = (string)null; // Compliant, ignored value
             try
             {
                 length = new System.IO.FileInfo(path).Length.ToString();
@@ -804,7 +1028,7 @@ namespace Tests.Diagnostics
 
         public static string WithDefault(string path)
         {
-            string length = default(string);
+            string length = default(string);    // Compliant, ignored value
             try
             {
                 length = new System.IO.FileInfo(path).Length.ToString();
@@ -823,8 +1047,8 @@ namespace Tests.Diagnostics
         public int Start()
         {
             const int x = -1;
-            int exitCode = x; // Compliant
-            Exception exception = null;
+            int exitCode = x;           // Compliant, ignored value
+            Exception exception = null; // Compliant, ignored value
 
             try
             {
@@ -864,27 +1088,27 @@ namespace Tests.Diagnostics
     {
         public static void DeadStore(int[] array)
         {
-            var x = 0;
-            x = array[^1]; // FN, muted due to try/catch
+            var x = 0;      // Compliant, ignored value
+            x = array[^1];  // FN, muted due to try/catch
             try
             {
-                x = 11; // FN, muted due to try/catch
+                x = 11;     // FN, muted due to try/catch
                 x = 12;
                 Console.Write(x);
-                x = 13; // Compliant, Console.Write can throw
+                x = 13;     // Compliant, Console.Write can throw
             }
             catch (Exception)
             {
-                x = 21; // FN, muted due to try/catch
+                x = 21;     // FN, muted due to try/catch
                 x = 22;
                 Console.Write(x);
-                x = 23; // FN, muted due to try/catch
+                x = 23;     // FN, muted due to try/catch
             }
-            x = 31; // FN, muted due to try/catch
+            x = 31;         // FN, muted due to try/catch
         }
     }
 
-    // issue https://github.com/SonarSource/sonar-dotnet/issues/3094
+    // https://github.com/SonarSource/sonar-dotnet/issues/3094
     public class TupleReturn
     {
         public static (int foo, int bar) M(string text)
@@ -893,10 +1117,19 @@ namespace Tests.Diagnostics
             return (1, b);
         }
 
-        public void UnusedTuple_FalseNegative()
+        public void UnusedTuple()
         {
-            (int x, int y) t = (1, 2); // Compliant - FN, tuples are not yet covered: https://github.com/SonarSource/sonar-dotnet/issues/2933
+            (int x, int y) t = (1, 2); // Compliant, rule shouldn't raise on unused because S1481 does.
         }
+
+        public void UsedTuple()
+        {
+            (int x, int y) t = (1, 2); // Noncompliant
+            t = (0, 0);
+            Use(t);
+        }
+
+        private void Use((int, int) t) { }
     }
 
     // https://github.com/SonarSource/sonar-dotnet/issues/3126
@@ -1018,7 +1251,7 @@ namespace Tests.Diagnostics
     {
         public int WithTryCatch()
         {
-            var name = string.Empty;
+            var name = string.Empty;    // Compliant, ignored value
             try
             {
                 var values = GetValues();
@@ -1045,7 +1278,7 @@ namespace Tests.Diagnostics
         public static void CreateDirectory(string directory)
         {
             const int CopyWaitInterval = 250;
-            bool created = false;
+            bool created = false;               // Compliant, ignored value
             int attempts = 10;
 
             do

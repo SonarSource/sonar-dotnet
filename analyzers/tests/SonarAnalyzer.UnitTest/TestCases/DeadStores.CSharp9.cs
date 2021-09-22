@@ -1,31 +1,34 @@
 ﻿using System;
 
-var x = 100; // FN
-x = 1;
+// TopLevelStatements:
+// This should do the trick: CheckForDeadStores(c, c.SemanticModel.GetDeclaredSymbol(c.Node), firstGlobalStatement)
+// but registering for CompilationUnit triggers the analysis twice, causing duplicates.
+var x = 100; // FN, we don't register for CompilationUnit yet.
+x = 1;       // FN
 
 void TargetTypedNew()
 {
-    Decimal d = new(100f); // FN
-    d = new(2f);
+    Decimal d = new(100f);  // Noncompliant
+    d = new(2f);            // Noncompliant
 }
 
 void NativeInts(nuint param)
 {
-    param = 1; // Noncompliant
+    param = 1;      // Noncompliant
 
-    nuint zero = 0; // ignored value
+    nuint zero = 0; // Compliant, ignored value
     zero = 1;
     Foo(zero);
 
-    nint minusOne = -1; // ignored value
+    nint minusOne = -1; // Compliant, ignored value
     minusOne = 1;
     Foo(minusOne);
 
-    nint one = 1; // ignored value
+    nint one = 1;       // Compliant, ignored value
     one = 2;
     Foo(one);
 
-    nint two = 2; // Noncompliant
+    nint two = 2;       // Noncompliant
     two = 3;
     Foo(two);
 }
@@ -51,33 +54,31 @@ void PatternMatchFalseNegative(int a, int b)
 {
     if (b is not 5)
     {
-        a = 1;
+        a = 1;  // Noncompliant
     }
     else if (b is 5)
     {
-        a = 2; // Compliant - FN, the parameter value is overwritten on all possible paths
+        a = 2;  // Noncompliant
     }
 
     var c = 5;
     switch (c)
     {
         case < 5:
-            c = 6; // Compliant, FN
+            c = 6; // Noncompliant
             break;
         case >= 5:
-            c = 7; // Compliant, FN
+            c = 7; // Noncompliant
             break;
     }
 }
 
-
-
 Action<int, int, int> StaticLambda() =>
     static (int a, int _, int _) =>
     {
-        a = 100;        // FN, the outer statement is a local function and that is muted
-        int b = 100;    // FN, the outer statement is a local function and that is muted
-        b = 1;          // FN, the outer statement is a local function and that is muted
+        a = 100;        // FN, muted
+        int b = 100;    // FN, muted
+        b = 1;          // FN, muted
     };
 
 void Foo(object o) { }
@@ -88,8 +89,8 @@ public class C
     public static void Log() { }
     unsafe void FunctionPointer()
     {
-        delegate*<void> ptr1 = &C.Log; // Noncompliant
-        ptr1 = &C.Log; // Noncompliant
+        delegate*<void> ptr1 = &C.Log;  // Noncompliant
+        ptr1 = &C.Log;                  // Noncompliant
     }
 
     Action<int, int, int> StaticLambda() =>

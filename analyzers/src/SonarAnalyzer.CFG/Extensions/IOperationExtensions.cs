@@ -33,6 +33,16 @@ namespace SonarAnalyzer.Extensions
             && IArgumentOperationWrapper.IsInstance(wrapped.Parent)
             && IArgumentOperationWrapper.FromOperation(wrapped.Parent).Parameter.RefKind == RefKind.Out;
 
+        public static bool IsAssignmentTarget(this IOperationWrapper operation) =>
+            new IOperationWrapperSonar(operation.WrappedOperation).Parent is { } parent
+            && parent.Kind == OperationKindEx.SimpleAssignment
+            && ISimpleAssignmentOperationWrapper.FromOperation(parent).Target == operation.WrappedOperation;
+
+        public static bool IsCompoundAssignmentTarget(this IOperationWrapper operation) =>
+            new IOperationWrapperSonar(operation.WrappedOperation).Parent is { } parent
+            && parent.Kind == OperationKindEx.CompoundAssignment
+            && ICompoundAssignmentOperationWrapper.FromOperation(parent).Target == operation.WrappedOperation;
+
         public static bool IsAnyKind(this IOperation operation, params OperationKind[] kinds) =>
             kinds.Contains(operation.Kind);
 
@@ -48,9 +58,6 @@ namespace SonarAnalyzer.Extensions
 
         public static OperationExecutionOrder ToExecutionOrder(this IEnumerable<IOperation> operations) =>
             new OperationExecutionOrder(operations, false);
-
-        public static OperationExecutionOrder ToReversedExecutionOrder(this IOperation operation) =>
-            new[] { operation }.ToReversedExecutionOrder();
 
         public static OperationExecutionOrder ToReversedExecutionOrder(this IEnumerable<IOperation> operations) =>
             new OperationExecutionOrder(operations, true);
