@@ -71,6 +71,14 @@ namespace SonarAnalyzer.UnitTest.Common
         }
 
         [TestMethod]
+        public void ForceSonarCfg_DisabledByDefault_ExistExceptionalConfig()
+        {
+            AlwaysEnabled.ForceSonarCfg.Should().BeFalse();
+            new HotspotConfiguration(ruleLoaderMock.Object).ForceSonarCfg.Should().BeFalse();
+            AlwaysEnabledWithSonarCfg.ForceSonarCfg.Should().BeTrue();
+        }
+
+        [TestMethod]
         public void AlwaysEnabled_IgnoresInitialize()
         {
             var sut = AlwaysEnabled;
