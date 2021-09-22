@@ -449,26 +449,26 @@ namespace Tests.TestCases
                 return condition;
             };
         }
-        //FIXME: Something went wrong around here
-        //private void LocalFunctionCrossReferenced(bool condition)
-        //{
-        //    Enumerable.Empty<object>().Where(IsTrueOuter);
 
-        //    bool IsTrueOuter(object x) => new[] { x }.Any(IsTrueMiddle);
-        //    bool IsTrueMiddle(object x) => IsTrueInner();
-        //    bool IsTrueInner() => condition;
-        //}
+        private void LocalFunctionCrossReferenced(bool condition)
+        {
+            Enumerable.Empty<object>().Where(IsTrueOuter);
 
-        //private void LocalFunctionRecursive(int arg)
-        //{
-        //    Enumerable.Empty<object>().Where(IsTrue);
+            bool IsTrueOuter(object x) => new[] { x }.Any(IsTrueMiddle);
+            bool IsTrueMiddle(object x) => IsTrueInner();
+            bool IsTrueInner() => condition;
+        }
 
-        //    bool IsTrue(object x)
-        //    {
-        //        arg--;
-        //        return arg <= 0 || new[] { x }.Any(IsTrue);
-        //    }
-        //}
+        private void LocalFunctionRecursive(int arg)
+        {
+            Enumerable.Empty<object>().Where(IsTrue);
+
+            bool IsTrue(object x)
+            {
+                arg--;
+                return arg <= 0 || new[] { x }.Any(IsTrue);
+            }
+        }
 
         private void LocalFunctionUnused(bool condition)    // Noncompliant
         {
