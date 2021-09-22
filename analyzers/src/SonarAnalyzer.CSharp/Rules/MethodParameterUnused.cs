@@ -158,52 +158,17 @@ namespace SonarAnalyzer.Rules.CSharp
             }
         }
 
-        private LvaResult ComputeLva(MethodContext declaration, CSharpSyntaxNode bodyNode)
+        private LvaResult ComputeLva(MethodContext declaration, CSharpSyntaxNode body)
         {
             if (useSonarCfg)
             {
-                return CSharpControlFlowGraph.TryGet(bodyNode, declaration.Context.SemanticModel, out var cfg)
+                return CSharpControlFlowGraph.TryGet(body, declaration.Context.SemanticModel, out var cfg)
                     ? new LvaResult(declaration, cfg)
                     : null;
             }
             else
             {
-                //FIXME: Rework after rebase
-                static IOperation RootOperation(IOperation operation)
-                {
-                    var wrapper = new IOperationWrapperSonar(operation);
-                    while (wrapper.Parent != null)
-                    {
-                        wrapper = new IOperationWrapperSonar(wrapper.Parent);
-                    }
-                    return wrapper.Instance;
-                }
-                var operation = declaration.Context.SemanticModel.GetOperation(bodyNode.Parent);
-                var cfg = ControlFlowGraph.Create(RootOperation(operation).Syntax, declaration.Context.SemanticModel);
-                var enclosingKinds = new HashSet<SyntaxKind>
-                {
-                    SyntaxKindEx.LocalFunctionStatement, SyntaxKind.SimpleLambdaExpression, SyntaxKind.AnonymousMethodExpression, SyntaxKind.ParenthesizedLambdaExpression
-                };
-                if (declaration.Context.Node.IsKind(SyntaxKindEx.LocalFunctionStatement))
-                {
-                    // we need to go up and track all possible enclosing local function statements
-                    foreach (var enclosingFunction in declaration.Context.Node.Ancestors().Where(x => enclosingKinds.Contains(x.Kind())).Reverse())
-                    {
-                        if (enclosingFunction.IsKind(SyntaxKindEx.LocalFunctionStatement))
-                        {
-                            cfg = cfg.GetLocalFunctionControlFlowGraph(declaration.Context.SemanticModel.GetDeclaredSymbol(enclosingFunction) as IMethodSymbol);
-                        }
-                        else
-                        {
-                            var operationWrapper = cfg.FlowAnonymousFunctionOperations().Single(x => x.WrappedOperation.Syntax == enclosingFunction);
-                            cfg = cfg.GetAnonymousFunctionControlFlowGraph(operationWrapper);
-                        }
-                    }
-
-                    cfg = cfg.GetLocalFunctionControlFlowGraph(declaration.Symbol);
-                }
-
-                return new LvaResult(cfg);
+                return new LvaResult(body.CreateCfg(declaration.Context.SemanticModel, declaration.Symbol));
             }
         }
 

@@ -18,10 +18,12 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System.Collections.Generic;
 using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
+using SonarAnalyzer.CFG.Roslyn;
 using SonarAnalyzer.Helpers;
 using StyleCop.Analyzers.Lightup;
 
@@ -29,6 +31,12 @@ namespace SonarAnalyzer.Extensions
 {
     internal static partial class SyntaxNodeExtensions
     {
+        private static ISet<SyntaxKind> NestedCfgEnclosingKinds = new HashSet<SyntaxKind> {
+            SyntaxKindEx.LocalFunctionStatement,
+            SyntaxKind.SimpleLambdaExpression,
+            SyntaxKind.AnonymousMethodExpression,
+            SyntaxKind.ParenthesizedLambdaExpression};
+
         public static bool ContainsConditionalConstructs(this SyntaxNode node) =>
             node != null &&
             node.DescendantNodes()
@@ -115,6 +123,30 @@ namespace SonarAnalyzer.Extensions
                 }
             }
             return currentExpression;
+        }
+
+        public static ControlFlowGraph CreateCfg(this SyntaxNode body, SemanticModel semanticModel, IMethodSymbol symbol)
+        {
+            var operation = semanticModel.GetOperation(body.Parent);
+            var cfg = ControlFlowGraph.Create(operation.RootOperation().Syntax, semanticModel);
+            if (body.Parent.IsKind(SyntaxKindEx.LocalFunctionStatement))
+            {
+                // we need to go up and track all possible enclosing local function statements
+                foreach (var enclosingFunction in body.Parent.Ancestors().Where(x => NestedCfgEnclosingKinds.Contains(x.Kind())).Reverse())
+                {
+                    if (enclosingFunction.IsKind(SyntaxKindEx.LocalFunctionStatement))
+                    {
+                        cfg = cfg.GetLocalFunctionControlFlowGraph(semanticModel.GetDeclaredSymbol(enclosingFunction) as IMethodSymbol);
+                    }
+                    else
+                    {
+                        var operationWrapper = cfg.FlowAnonymousFunctionOperations().Single(x => x.WrappedOperation.Syntax == enclosingFunction);
+                        cfg = cfg.GetAnonymousFunctionControlFlowGraph(operationWrapper);
+                    }
+                }
+                cfg = cfg.GetLocalFunctionControlFlowGraph(symbol);
+            }
+            return cfg;
         }
 
         private static string GetUnknownType(SyntaxKind kind)
