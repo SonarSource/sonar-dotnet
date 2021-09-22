@@ -33,14 +33,12 @@ namespace SonarAnalyzer.LiveVariableAnalysis.CSharp
 {
     public sealed class SonarCSharpLiveVariableAnalysis : LiveVariableAnalysisBase<IControlFlowGraph, Block>
     {
-        private readonly ISymbol declaration;
         private readonly SemanticModel semanticModel;
 
         protected override Block ExitBlock => cfg.ExitBlock;
 
-        public SonarCSharpLiveVariableAnalysis(IControlFlowGraph controlFlowGraph, ISymbol declaration, SemanticModel semanticModel) : base(controlFlowGraph)
+        public SonarCSharpLiveVariableAnalysis(IControlFlowGraph controlFlowGraph, ISymbol originalDeclaration, SemanticModel semanticModel) : base(controlFlowGraph, originalDeclaration)
         {
-            this.declaration = declaration;
             this.semanticModel = semanticModel;
             Analyze();
         }
@@ -70,21 +68,21 @@ namespace SonarAnalyzer.LiveVariableAnalysis.CSharp
 
         protected override State ProcessBlock(Block block)
         {
-            var ret = new SonarState(declaration, semanticModel);
+            var ret = new SonarState(originalDeclaration, semanticModel);
             ret.ProcessBlock(block);
             return ret;
         }
 
         private class SonarState : State
         {
-            private readonly ISymbol declaration;
+            private readonly ISymbol originalDeclaration;
             private readonly SemanticModel semanticModel;
 
             public ISet<SyntaxNode> AssignmentLhs { get; } = new HashSet<SyntaxNode>();
 
-            public SonarState(ISymbol declaration, SemanticModel semanticModel)
+            public SonarState(ISymbol originalDeclaration, SemanticModel semanticModel)
             {
-                this.declaration = declaration;
+                this.originalDeclaration = originalDeclaration;
                 this.semanticModel = semanticModel;
             }
 
@@ -238,7 +236,7 @@ namespace SonarAnalyzer.LiveVariableAnalysis.CSharp
             }
 
             private bool IsLocal(ISymbol symbol) =>
-                IsLocalScoped(symbol, declaration);
+                IsLocalScoped(symbol, originalDeclaration);
         }
     }
 }

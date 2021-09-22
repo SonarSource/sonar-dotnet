@@ -32,7 +32,8 @@ namespace SonarAnalyzer.CFG.LiveVariableAnalysis
     {
         protected override BasicBlock ExitBlock => cfg.ExitBlock;
 
-        public RoslynLiveVariableAnalysis(ControlFlowGraph cfg) : base(cfg) =>
+        public RoslynLiveVariableAnalysis(ControlFlowGraph cfg)
+            : base(cfg, new IOperationWrapperSonar(cfg.OriginalOperation).SemanticModel.GetDeclaredSymbol(cfg.OriginalOperation.Syntax)) =>
             Analyze();
 
         internal static bool IsOutArgument(IOperation operation) =>
@@ -111,7 +112,7 @@ namespace SonarAnalyzer.CFG.LiveVariableAnalysis
 
         protected override State ProcessBlock(BasicBlock block)
         {
-            var ret = new RoslynState();
+            var ret = new RoslynState(originalDeclaration);
             ret.ProcessBlock(cfg, block);
             return ret;
         }
@@ -144,6 +145,11 @@ namespace SonarAnalyzer.CFG.LiveVariableAnalysis
 
         private class RoslynState : State
         {
+            private readonly ISymbol originalDeclaration;
+
+            public RoslynState(ISymbol originalDeclaration) =>
+                this.originalDeclaration = originalDeclaration;
+
             public void ProcessBlock(ControlFlowGraph cfg, BasicBlock block)
             {
                 foreach (var operation in block.OperationsAndBranchValue.ToReversedExecutionOrder())
@@ -162,22 +168,26 @@ namespace SonarAnalyzer.CFG.LiveVariableAnalysis
                         case OperationKindEx.FlowAnonymousFunction:
                             ProcessFlowAnonymousFunction(cfg, IFlowAnonymousFunctionOperationWrapper.FromOperation(operation.Instance));
                             break;
+                        case OperationKindEx.Invocation:
+                            ProcessInvocation(cfg, IInvocationOperationWrapper.FromOperation(operation.Instance));
+                            break;
                     }
                 }
             }
 
             private void ProcessParameterOrLocalReference(IOperationWrapper reference)
             {
-                var symbol = ParameterOrLocalSymbol(reference.WrappedOperation);
-                Debug.Assert(symbol != null, "ProcessParameterOrLocalReference should resolve parametr or local symbol.");
-                if (IsOutArgument(reference.WrappedOperation))
+                if (ParameterOrLocalSymbol(reference.WrappedOperation) is { } symbol)
                 {
-                    Assigned.Add(symbol);
-                    UsedBeforeAssigned.Remove(symbol);
-                }
-                else if (!IsAssignmentTarget())
-                {
-                    UsedBeforeAssigned.Add(symbol);
+                    if (IsOutArgument(reference.WrappedOperation))
+                    {
+                        Assigned.Add(symbol);
+                        UsedBeforeAssigned.Remove(symbol);
+                    }
+                    else if (!IsAssignmentTarget())
+                    {
+                        UsedBeforeAssigned.Add(symbol);
+                    }
                 }
 
                 bool IsAssignmentTarget() =>
@@ -197,31 +207,48 @@ namespace SonarAnalyzer.CFG.LiveVariableAnalysis
 
             private void ProcessFlowAnonymousFunction(ControlFlowGraph cfg, IFlowAnonymousFunctionOperationWrapper anonymousFunction)
             {
-                var anonymousFunctionCfg = cfg.GetAnonymousFunctionControlFlowGraph(anonymousFunction);
-                foreach (var operation in anonymousFunctionCfg.Blocks.SelectMany(x => x.OperationsAndBranchValue).SelectMany(x => x.DescendantsAndSelf()))
+                if (!anonymousFunction.Symbol.IsStatic) // Performance: No need to descent into static
                 {
-                    switch (operation.Kind)
+                    var anonymousFunctionCfg = cfg.GetAnonymousFunctionControlFlowGraph(anonymousFunction);
+                    foreach (var operation in anonymousFunctionCfg.Blocks.SelectMany(x => x.OperationsAndBranchValue).SelectMany(x => x.DescendantsAndSelf()))
                     {
-                        case OperationKindEx.LocalReference:
-                            Captured.Add(ILocalReferenceOperationWrapper.FromOperation(operation).Local);
-                            break;
-                        case OperationKindEx.ParameterReference:
-                            Captured.Add(IParameterReferenceOperationWrapper.FromOperation(operation).Parameter);
-                            break;
-                        case OperationKindEx.FlowAnonymousFunction:
+                        if (ParameterOrLocalSymbol(operation) is { } symbol)
+                        {
+                            Captured.Add(symbol);
+                        }
+                        else if (operation.Kind == OperationKindEx.FlowAnonymousFunction)
+                        {
                             ProcessFlowAnonymousFunction(anonymousFunctionCfg, IFlowAnonymousFunctionOperationWrapper.FromOperation(operation));
-                            break;
+                        }
                     }
                 }
             }
 
-            private static ISymbol ParameterOrLocalSymbol(IOperation operation) =>
-                operation switch
+            private void ProcessInvocation(ControlFlowGraph cfg, IInvocationOperationWrapper invocation)
+            {
+                // We need ConstructedFrom because TargetMethod of a generic local function invocation is not the correct symbol (has IsDefinition=False and wrong ContainingSymbol)
+                if (invocation.TargetMethod.ConstructedFrom is { MethodKind: MethodKindEx.LocalFunction, IsStatic: false } localFunction
+                    && !ProcessedLocalFunctions.Contains(localFunction))
+                {
+                    ProcessedLocalFunctions.Add(localFunction);
+                    var localFunctionCfg = cfg.GetLocalFunctionControlFlowGraph(localFunction);
+                    foreach (var block in localFunctionCfg.Blocks.Reverse())    // Simplified approach, ignoring branching and try/catch/finally flows
+                    {
+                        ProcessBlock(localFunctionCfg, block);
+                    }
+                }
+            }
+
+            private ISymbol ParameterOrLocalSymbol(IOperation operation)
+            {
+                ISymbol candidate = operation switch
                 {
                     var _ when IParameterReferenceOperationWrapper.IsInstance(operation) => IParameterReferenceOperationWrapper.FromOperation(operation).Parameter,
                     var _ when ILocalReferenceOperationWrapper.IsInstance(operation) => ILocalReferenceOperationWrapper.FromOperation(operation).Local,
                     _ => null
                 };
+                return originalDeclaration.Equals(candidate?.ContainingSymbol) ? candidate : null;
+            }
         }
     }
 }

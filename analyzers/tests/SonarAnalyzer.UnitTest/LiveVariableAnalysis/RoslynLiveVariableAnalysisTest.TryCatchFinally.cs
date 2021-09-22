@@ -243,7 +243,6 @@ Method(intParameter);";
             context.ValidateExit();
         }
 
-
         [TestMethod]
         public void Catch_NotLiveIn_NotLiveOut()
         {

@@ -30,6 +30,7 @@ namespace SonarAnalyzer.CFG.LiveVariableAnalysis
     public abstract class LiveVariableAnalysisBase<TCfg, TBlock>
     {
         protected readonly TCfg cfg;
+        protected readonly ISymbol originalDeclaration;
         private readonly IDictionary<TBlock, HashSet<ISymbol>> blockLiveOut = new Dictionary<TBlock, HashSet<ISymbol>>();
         private readonly IDictionary<TBlock, HashSet<ISymbol>> blockLiveIn = new Dictionary<TBlock, HashSet<ISymbol>>();
         private readonly ISet<ISymbol> captured = new HashSet<ISymbol>();
@@ -42,8 +43,11 @@ namespace SonarAnalyzer.CFG.LiveVariableAnalysis
 
         public IReadOnlyList<ISymbol> CapturedVariables => captured.ToImmutableArray();
 
-        protected LiveVariableAnalysisBase(TCfg cfg) =>
+        protected LiveVariableAnalysisBase(TCfg cfg, ISymbol originalDeclaration)
+        {
             this.cfg = cfg;
+            this.originalDeclaration = originalDeclaration;
+        }
 
         /// <summary>
         /// LiveIn variables are alive when entering block. They are read inside the block or any of it's successors.
