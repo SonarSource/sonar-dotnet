@@ -484,7 +484,7 @@ namespace Tests.TestCases
     // https://github.com/SonarSource/sonar-dotnet/issues/4096
     public class Repro_4096
     {
-        private int TryCatchWithUsing(int errorCode) // Fixed
+        private int TryCatchWithUsing(int errorCode)
         {
             try
             {
