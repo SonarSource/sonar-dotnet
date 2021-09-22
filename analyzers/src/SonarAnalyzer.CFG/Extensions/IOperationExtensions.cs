@@ -36,8 +36,21 @@ namespace SonarAnalyzer.Extensions
         public static bool IsAnyKind(this IOperation operation, params OperationKind[] kinds) =>
             kinds.Contains(operation.Kind);
 
+        public static IOperation RootOperation(this IOperation operation)
+        {
+            var wrapper = new IOperationWrapperSonar(operation);
+            while (wrapper.Parent != null)
+            {
+                wrapper = new IOperationWrapperSonar(wrapper.Parent);
+            }
+            return wrapper.Instance;
+        }
+
         public static OperationExecutionOrder ToExecutionOrder(this IEnumerable<IOperation> operations) =>
             new OperationExecutionOrder(operations, false);
+
+        public static OperationExecutionOrder ToReversedExecutionOrder(this IOperation operation) =>
+            new[] { operation }.ToReversedExecutionOrder();
 
         public static OperationExecutionOrder ToReversedExecutionOrder(this IEnumerable<IOperation> operations) =>
             new OperationExecutionOrder(operations, true);
