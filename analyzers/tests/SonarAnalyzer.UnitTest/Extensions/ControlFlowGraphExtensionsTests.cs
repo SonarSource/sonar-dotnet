@@ -44,7 +44,7 @@ public class Sample
             var cfg = ControlFlowGraph.Create(method, semanticModel);
 
             Action a = () => cfg.FindLocalFunctionCfgInScope(symbol);
-            a.Should().Throw<ArgumentOutOfRangeException>().WithMessage("Specified argument was out of the range of valid values. (Parameter 'localFunction')");
+            a.Should().Throw<ArgumentOutOfRangeException>().WithMessage("Specified argument was out of the range of valid values.\r\nParameter name: localFunction");
         }
 
         [TestMethod]
@@ -57,7 +57,7 @@ public class Sample
 }";
             var cfg = TestHelper.CompileCfg(code);
             Action a = () => cfg.FindLocalFunctionCfgInScope(null);
-            a.Should().Throw<ArgumentOutOfRangeException>().WithMessage("Specified argument was out of the range of valid values. (Parameter 'localFunction')");
+            a.Should().Throw<ArgumentOutOfRangeException>().WithMessage("Specified argument was out of the range of valid values.\r\nParameter name: localFunction");
         }
     }
 }
