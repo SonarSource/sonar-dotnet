@@ -186,7 +186,11 @@ namespace SonarAnalyzer.UnitTest.Common
         [DataRow("0e", "Unexpected number exponent format:  at line 1 position 1")]
         [DataRow("0e-", "Unexpected number exponent format: - at line 1 position 1")]
         [DataRow("/*", "Unexpected EOI at line 1 position 1")]
+        [DataRow(" /* * /", "Unexpected EOI at line 1 position 1")]
+        [DataRow(" /* *", "Unexpected EOI at line 1 position 1")]
         [DataRow(" */", "Unexpected character '*' at line 1 position 2")]
+        [DataRow(" /0", "Unexpected character '*' at line 1 position 2")]
+        [DataRow(" /", "Unexpected character '*' at line 1 position 2")]
         public void InvalidInput_ThrowsJsonException(string source, string expectedMessage)
         {
             var sut = new LexicalAnalyzer(source);
