@@ -579,7 +579,7 @@ var outVariable = 42;
 if (boolParameter)
     return;
 Main(true, 0, out outVariable, ref refVariable);";
-            var context = CreateContextCS(code);
+            var context = CreateContextCS(code, additionalParameters: "out int outParameter, ref int refParameter");
             context.ValidateEntry(new LiveIn("boolParameter"), new LiveOut("boolParameter"));
             context.Validate("Main(true, 0, out outVariable, ref refVariable);", new LiveIn("refVariable"));
         }
@@ -793,10 +793,10 @@ public class Sample
         };
     }
 
-    private void RunTask(Task t) { }
+    private void RunTask(Func<Task> f) { }
 }";
             var context = new Context(code, true);
-            context.ValidateEntry(/*FIXME: new Captured("asyncHandler")*/);
+            context.ValidateEntry(new Captured("asyncHandler"));
         }
 
         [TestMethod]

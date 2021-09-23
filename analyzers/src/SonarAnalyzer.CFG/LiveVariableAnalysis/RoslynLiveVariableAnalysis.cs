@@ -155,6 +155,7 @@ namespace SonarAnalyzer.CFG.LiveVariableAnalysis
             {
                 foreach (var operation in block.OperationsAndBranchValue.ToReversedExecutionOrder())
                 {
+                    // Everything that is added to this switch needs to be considered inside ProcessCaptured as well
                     switch (operation.Instance.Kind)
                     {
                         case OperationKindEx.LocalReference:
@@ -225,27 +226,36 @@ namespace SonarAnalyzer.CFG.LiveVariableAnalysis
                     {
                         Captured.Add(symbol);
                     }
-                    else if (operation.Kind == OperationKindEx.Invocation)
+                    else
                     {
-                        if (IInvocationOperationWrapper.FromOperation(operation).TargetMethod.ConstructedFrom is { MethodKind: MethodKindEx.LocalFunction, IsStatic: false } localFunction
-                            && !capturedLocalFunctions.Contains(localFunction))
+                        switch (operation.Kind)
                         {
-                            capturedLocalFunctions.Add(localFunction);
-                            ProcessCaptured(cfg.FindLocalFunctionCfgInScope(localFunction));
+                            case OperationKindEx.FlowAnonymousFunction:
+                                ProcessFlowAnonymousFunction(cfg, IFlowAnonymousFunctionOperationWrapper.FromOperation(operation));
+                                break;
+                            case OperationKindEx.Invocation:
+                                ProcessCapturedLocalFunction(cfg, IInvocationOperationWrapper.FromOperation(operation).TargetMethod);
+                                break;
+                            case OperationKindEx.MethodReference:
+                                ProcessCapturedLocalFunction(cfg, IMethodReferenceOperationWrapper.FromOperation(operation).Method);
+                                break;
                         }
                     }
-                    else if (operation.Kind == OperationKindEx.FlowAnonymousFunction)
-                    {
-                        ProcessFlowAnonymousFunction(cfg, IFlowAnonymousFunctionOperationWrapper.FromOperation(operation));
-                    }
+                }
+            }
+
+            private void ProcessCapturedLocalFunction(ControlFlowGraph cfg, IMethodSymbol method)
+            {
+                if (HandleLocalFunction(capturedLocalFunctions, method) is { } localFunction)
+                {
+                    capturedLocalFunctions.Add(localFunction);
+                    ProcessCaptured(cfg.FindLocalFunctionCfgInScope(localFunction));
                 }
             }
 
             private void ProcessLocalFunction(ControlFlowGraph cfg, IMethodSymbol method)
             {
-                // We need ConstructedFrom because TargetMethod of a generic local function invocation is not the correct symbol (has IsDefinition=False and wrong ContainingSymbol)
-                if (method.ConstructedFrom is { MethodKind: MethodKindEx.LocalFunction, IsStatic: false } localFunction
-                    && !ProcessedLocalFunctions.Contains(localFunction))
+                if (HandleLocalFunction(ProcessedLocalFunctions, method) is { } localFunction)
                 {
                     ProcessedLocalFunctions.Add(localFunction);
                     var localFunctionCfg = cfg.FindLocalFunctionCfgInScope(localFunction);
@@ -253,6 +263,21 @@ namespace SonarAnalyzer.CFG.LiveVariableAnalysis
                     {
                         ProcessBlock(localFunctionCfg, block);
                     }
+                }
+            }
+
+            private static IMethodSymbol HandleLocalFunction(ISet<ISymbol> processed, IMethodSymbol method)
+            {
+                // We need ConstructedFrom because TargetMethod of a generic local function invocation is not the correct symbol (has IsDefinition=False and wrong ContainingSymbol)
+                if (method.ConstructedFrom is { MethodKind: MethodKindEx.LocalFunction, IsStatic: false } localFunction
+                    && !processed.Contains(localFunction))
+                {
+                    processed.Add(localFunction);
+                    return localFunction;
+                }
+                else
+                {
+                    return null;
                 }
             }
 
