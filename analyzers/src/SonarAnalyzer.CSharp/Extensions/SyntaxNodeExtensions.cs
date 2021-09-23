@@ -31,11 +31,13 @@ namespace SonarAnalyzer.Extensions
 {
     internal static partial class SyntaxNodeExtensions
     {
-        private static ISet<SyntaxKind> NestedCfgEnclosingKinds = new HashSet<SyntaxKind> {
+        private static readonly ISet<SyntaxKind> NestedCfgEnclosingKinds = new HashSet<SyntaxKind>
+        {
             SyntaxKindEx.LocalFunctionStatement,
             SyntaxKind.SimpleLambdaExpression,
             SyntaxKind.AnonymousMethodExpression,
-            SyntaxKind.ParenthesizedLambdaExpression};
+            SyntaxKind.ParenthesizedLambdaExpression
+        };
 
         public static bool ContainsConditionalConstructs(this SyntaxNode node) =>
             node != null &&
