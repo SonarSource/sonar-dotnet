@@ -818,7 +818,7 @@ public class Sample
             context.ValidateEntry(new Captured("intParameter"));
         }
 
-        private Context CreateContextCS(string methodBody, string localFunctionName = null, string additionalParameters = null)
+        private static Context CreateContextCS(string methodBody, string localFunctionName = null, string additionalParameters = null)
         {
             additionalParameters = additionalParameters == null ? null : ", " + additionalParameters;
             var code = @$"
@@ -845,7 +845,7 @@ public class Sample
             return new Context(code, true, localFunctionName);
         }
 
-        private Context CreateContextVB(string methodBody)
+        private static Context CreateContextVB(string methodBody)
         {
             var code = @$"
 Public Class Sample
