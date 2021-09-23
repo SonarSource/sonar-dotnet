@@ -57,7 +57,7 @@ IsMethod(boolParameter);";
         public void ProcessParameterReference_UsedAsOutArgument_NotLiveIn_NotLiveOut()
         {
             var code = @"Main(true, 0, out outParameter, ref refParameter);";
-            var context = new Context(code);
+            var context = new Context(code, additionalParameters: "out int outParameter, ref int refParameter");
             context.ValidateEntry(new LiveIn("refParameter"), new LiveOut("refParameter"));
             context.Validate(code, new LiveIn("refParameter"));
         }
@@ -691,13 +691,23 @@ Method(1);";
             context.Validate("Method(1);");
         }
 
+        [TestMethod]
+        public void InvokedDelegate_LiveIn()
+        {
+            var code = @"action();";
+            var context = new Context(code, additionalParameters: "Action action");
+            context.ValidateEntry(/*FIXME: new LiveIn("action"), new LiveOut("action")*/);
+            context.Validate("action();"/*FIXME:, new LiveIn("action"), new LiveOut("action")*/);
+        }
+
         private class Context
         {
             public readonly RoslynLiveVariableAnalysis Lva;
             public readonly ControlFlowGraph Cfg;
 
-            public Context(string methodBody, string localFunctionName = null, bool isCSharp = true)
+            public Context(string methodBody, string localFunctionName = null, bool isCSharp = true, string additionalParameters = null)
             {
+                additionalParameters = additionalParameters == null ? null : ", " + additionalParameters;
                 var code = isCSharp
                     ? @$"
 using System;
@@ -710,7 +720,7 @@ public class Sample
     private int field;
     public int Property {{ get; set; }}
 
-    public void Main(bool boolParameter, int intParameter, out int outParameter, ref int refParameter)
+    public void Main(bool boolParameter, int intParameter{additionalParameters})
     {{
         {methodBody}
     }}
@@ -728,7 +738,7 @@ Public Class Sample
     Private Field As Integer
     Private Property Prop As Integer
 
-    Public Sub Main(BoolParameter As Boolean, IntParameter As Integer, ByRef RefParameter As Integer)
+    Public Sub Main(BoolParameter As Boolean, IntParameter As Integer{additionalParameters})
         {methodBody}
     End Sub
 

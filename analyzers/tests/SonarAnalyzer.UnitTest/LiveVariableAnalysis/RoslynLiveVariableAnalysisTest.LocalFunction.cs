@@ -30,7 +30,7 @@ namespace SonarAnalyzer.UnitTest.LiveVariableAnalysis
             var code = @"
 outParameter = LocalFunction(intParameter);
 static int LocalFunction(int a) => a + 1;";
-            var context = new Context(code, "LocalFunction");
+            var context = new Context(code, "LocalFunction", additionalParameters: "out int outParameter");
             context.ValidateEntry(new LiveIn("a"), new LiveOut("a"));
             context.Validate("a + 1", new LiveIn("a"));
             context.ValidateExit();
@@ -42,7 +42,7 @@ static int LocalFunction(int a) => a + 1;";
             var code = @"
 outParameter = LocalFunction(0);
 static int LocalFunction(int a) => 42;";
-            var context = new Context(code, "LocalFunction");
+            var context = new Context(code, "LocalFunction", additionalParameters: "out int outParameter");
             context.ValidateEntry();
             context.Validate("42");
             context.ValidateExit();
@@ -57,7 +57,7 @@ static int LocalFunction(int a)
 {
     return a + 1;
 }";
-            var context = new Context(code, "LocalFunction");
+            var context = new Context(code, "LocalFunction", additionalParameters: "out int outParameter");
             context.ValidateEntry(new LiveIn("a"), new LiveOut("a"));
             context.Validate("a + 1", new LiveIn("a"));
             context.ValidateExit();
@@ -72,7 +72,7 @@ static int LocalFunction(int a)
 {
     return 42;
 }";
-            var context = new Context(code, "LocalFunction");
+            var context = new Context(code, "LocalFunction", additionalParameters: "out int outParameter");
             context.ValidateEntry();
             context.Validate("42");
             context.ValidateExit();
@@ -90,7 +90,7 @@ static int LocalFunction(int a)
     else
         return LocalFunction(a - 1);
 };";
-            var context = new Context(code, "LocalFunction");
+            var context = new Context(code, "LocalFunction", additionalParameters: "out int outParameter");
             context.ValidateEntry(new LiveIn("a"), new LiveOut("a"));
             context.Validate("0");
             context.Validate("LocalFunction(a - 1)", new LiveIn("a"));
