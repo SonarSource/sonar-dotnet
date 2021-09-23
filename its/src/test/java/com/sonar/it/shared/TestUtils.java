@@ -152,7 +152,7 @@ public class TestUtils {
     Path msBuildPath = getMsBuildPath(orch);
 
     List<String> argumentList = new ArrayList<>(Arrays.asList(arguments));
-    argumentList.add("/warnaserror:AD0001");
+    argumentList.add("/warnaserror:AD0001;CS8032");
 
     Command command = Command.create(msBuildPath.toString())
       .addArguments(argumentList)
