@@ -815,7 +815,7 @@ public class Sample
         };
 }";
             var context = new Context(code, true);
-            context.ValidateEntry(/*FIXME: new Captured("intParameter")*/);
+            context.ValidateEntry(new Captured("intParameter"));
         }
 
         private Context CreateContextCS(string methodBody, string localFunctionName = null, string additionalParameters = null)

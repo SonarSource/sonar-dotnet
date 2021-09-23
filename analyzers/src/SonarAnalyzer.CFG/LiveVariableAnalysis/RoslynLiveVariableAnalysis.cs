@@ -146,6 +146,7 @@ namespace SonarAnalyzer.CFG.LiveVariableAnalysis
         private class RoslynState : State
         {
             private readonly ISymbol originalDeclaration;
+            private readonly ISet<ISymbol> capturedLocalFunctions = new HashSet<ISymbol>();
 
             public RoslynState(ISymbol originalDeclaration) =>
                 this.originalDeclaration = originalDeclaration;
@@ -212,17 +213,30 @@ namespace SonarAnalyzer.CFG.LiveVariableAnalysis
             {
                 if (!anonymousFunction.Symbol.IsStatic) // Performance: No need to descent into static
                 {
-                    var anonymousFunctionCfg = cfg.GetAnonymousFunctionControlFlowGraph(anonymousFunction);
-                    foreach (var operation in anonymousFunctionCfg.Blocks.SelectMany(x => x.OperationsAndBranchValue).SelectMany(x => x.DescendantsAndSelf()))
+                    ProcessCaptured(cfg.GetAnonymousFunctionControlFlowGraph(anonymousFunction));
+                }
+            }
+
+            private void ProcessCaptured(ControlFlowGraph cfg)
+            {
+                foreach (var operation in cfg.Blocks.SelectMany(x => x.OperationsAndBranchValue).SelectMany(x => x.DescendantsAndSelf()))
+                {
+                    if (ParameterOrLocalSymbol(operation) is { } symbol)
                     {
-                        if (ParameterOrLocalSymbol(operation) is { } symbol)
+                        Captured.Add(symbol);
+                    }
+                    else if (operation.Kind == OperationKindEx.Invocation)
+                    {
+                        if (IInvocationOperationWrapper.FromOperation(operation).TargetMethod.ConstructedFrom is { MethodKind: MethodKindEx.LocalFunction, IsStatic: false } localFunction
+                            && !capturedLocalFunctions.Contains(localFunction))
                         {
-                            Captured.Add(symbol);
+                            capturedLocalFunctions.Add(localFunction);
+                            ProcessCaptured(cfg.FindLocalFunctionCfgInScope(localFunction));
                         }
-                        else if (operation.Kind == OperationKindEx.FlowAnonymousFunction)
-                        {
-                            ProcessFlowAnonymousFunction(anonymousFunctionCfg, IFlowAnonymousFunctionOperationWrapper.FromOperation(operation));
-                        }
+                    }
+                    else if (operation.Kind == OperationKindEx.FlowAnonymousFunction)
+                    {
+                        ProcessFlowAnonymousFunction(cfg, IFlowAnonymousFunctionOperationWrapper.FromOperation(operation));
                     }
                 }
             }
