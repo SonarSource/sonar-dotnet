@@ -502,9 +502,10 @@ namespace Tests.TestCases
         }
     }
 
+    // https://github.com/SonarSource/sonar-dotnet/issues/4199
     public class Repro_4199
     {
-        private Task DoSomethingAsync(string text) // Fixed
+        private Task DoSomethingAsync(string text)
         {
             return Task.Run(async () => await UseAsync());
 

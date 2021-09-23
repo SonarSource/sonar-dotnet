@@ -53,7 +53,7 @@ namespace Tests.TestCases
         }
 
         // https://github.com/SonarSource/sonar-dotnet/issues/4377
-        private static bool Foo(IEnumerable<int> a, int b) // Noncompliant FP
+        private static bool Foo(IEnumerable<int> a, int b)
         {
             bool InsideFoo(int x) => x.Equals(b);
             bool CallInsideFoo(IEnumerable<int> numbers) => numbers.Any(x => false | InsideFoo(x));
