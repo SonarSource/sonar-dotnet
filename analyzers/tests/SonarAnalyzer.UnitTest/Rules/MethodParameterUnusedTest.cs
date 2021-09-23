@@ -38,6 +38,14 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void MethodParameterUnused_CS_RoslynCfg() =>
             Verifier.VerifyAnalyzer(@"TestCases\MethodParameterUnused.RoslynCfg.cs", new CS.MethodParameterUnused(AnalyzerConfiguration.AlwaysEnabled));
 
+#if NETFRAMEWORK
+
+        [TestMethod]
+        public void MethodParameterUnused_CS_RoslynCfg_NetFx() =>
+            Verifier.VerifyAnalyzer(@"TestCases\MethodParameterUnused.RoslynCfg.NetFx.cs", new CS.MethodParameterUnused(AnalyzerConfiguration.AlwaysEnabled));
+
+#endif
+
         [TestMethod]
         public void MethodParameterUnused_CodeFix_CS() =>
             Verifier.VerifyCodeFix(@"TestCases\MethodParameterUnused.RoslynCfg.cs",
