@@ -202,4 +202,23 @@ namespace Tests.Diagnostics
         public void DoSomethingElse() { }
 //      ^^^^^^ Secondary
     }
+
+    public class Base
+    {
+        public Base() { }
+
+        public Base(string x) { }
+
+        public Base(string x, string y) { }
+    }
+
+    internal class Derived : Base // Noncompliant
+    {
+        public Derived() { }
+//      ^^^^^^ Secondary
+
+        public Derived(string x) : base(x) { } // The constructor visibility can be different from the base
+//      ^^^^^^ Secondary
+        internal Derived(string x, string y) : base(x, y) { }
+    }
 }
