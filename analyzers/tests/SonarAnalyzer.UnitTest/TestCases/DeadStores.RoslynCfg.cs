@@ -99,7 +99,7 @@ namespace Tests.Diagnostics
             if ((i = doSomething()) == 5 ||
                 (i = doSomethingElse()) == 5)
             {
-                i += 5; // FIXME: Roslyn CFG WIP Non-compliant
+                i += 5; // Noncompliant
             }
 
             var resource = new Resource(); // Noncompliant; retrieved value not used
@@ -184,57 +184,69 @@ namespace Tests.Diagnostics
                                 // Noncompliant@-1 WIP Roslyn FP duplicate
             Action a = () => { Console.WriteLine(captured); };
             captured += 11;     // Not reporting on captured local variables
+                                // Noncompliant@-1 WIP Roslyn FP
+                                // Noncompliant@-2 WIP Roslyn duplicate due to lambda CFG
             a();
 
             var add = 40;
             add += 2;
             Use(add);
-            add += 100;     // FIXME: Roslyn CFG WIP Non-compliant
+            add += 100;     // Noncompliant
+                            // Noncompliant@-1 WIP Roslyn duplicate due to lambda CFG
 
             var sub = 40;
             sub -= 2;
             Use(sub);
-            sub -= 100;     // FIXME: Roslyn CFG WIP Non-compliant
+            sub -= 100;     // Noncompliant
+                            // Noncompliant@-1 WIP Roslyn duplicate due to lambda CFG
 
             var mul = 40;
             mul *= 2;
             Use(mul);
-            mul *= 100;     // FIXME: Roslyn CFG WIP Non-compliant
+            mul *= 100;     // Noncompliant
+                            // Noncompliant@-1 WIP Roslyn duplicate due to lambda CFG
 
             var div = 40;
             div /= 2;
             Use(div);
-            div /= 100;     // FIXME: Roslyn CFG WIP Non-compliant
+            div /= 100;     // Noncompliant
+                            // Noncompliant@-1 WIP Roslyn duplicate due to lambda CFG
 
             var mod = 40;
             mod += 2;
             Use(mod);
-            mod %= 100;     // FIXME: Roslyn CFG WIP Non-compliant
+            mod %= 100;     // Noncompliant
+                            // Noncompliant@-1 WIP Roslyn duplicate due to lambda CFG
 
             var and = false;
             and &= true;
             Use(and);
-            and &= false;   // FIXME: Roslyn CFG WIP Non-compliant
+            and &= false;   // Noncompliant
+                            // Noncompliant@-1 WIP Roslyn duplicate due to lambda CFG
 
             var or = false;
             or |= false;
             Use(or);
-            or |= true;     // FIXME: Roslyn CFG WIP Non-compliant
+            or |= true;     // Noncompliant
+                            // Noncompliant@-1 WIP Roslyn duplicate due to lambda CFG
 
             var xor = 40;
             xor ^= 2;
             Use(xor);
-            xor ^= 100;     // FIXME: Roslyn CFG WIP Non-compliant
+            xor ^= 100;     // Noncompliant
+                            // Noncompliant@-1 WIP Roslyn duplicate due to lambda CFG
 
             var left = 40;
             left <<= 2;
             Use(left);
-            left <<= 100;   // FIXME: Roslyn CFG WIP Non-compliant
+            left <<= 100;   // Noncompliant
+                            // Noncompliant@-1 WIP Roslyn duplicate due to lambda CFG
 
             var right = 40;
             right >>= 2;
             Use(right);
-            right >>= 100;  // FIXME: Roslyn CFG WIP Non-compliant
+            right >>= 100;  // Noncompliant
+                            // Noncompliant@-1 WIP Roslyn duplicate due to lambda CFG
 
             string coa = SomeString();
             coa ??= SomeString();
@@ -265,7 +277,7 @@ namespace Tests.Diagnostics
 
             b = 7;
             Console.Write(b);
-            b += 7; // FIXME: Roslyn CFG WIP Non-compliant
+            b += 7; // Noncompliant
         }
 
         public int Switch1(int x)

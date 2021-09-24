@@ -38,6 +38,11 @@ namespace SonarAnalyzer.Extensions
             && parent.Kind == OperationKindEx.SimpleAssignment
             && ISimpleAssignmentOperationWrapper.FromOperation(parent).Target == operation.WrappedOperation;
 
+        public static bool IsCompoundAssignmentTarget(this IOperationWrapper operation) =>
+            new IOperationWrapperSonar(operation.WrappedOperation).Parent is { } parent
+            && parent.Kind == OperationKindEx.CompoundAssignment
+            && ICompoundAssignmentOperationWrapper.FromOperation(parent).Target == operation.WrappedOperation;
+
         public static bool IsAnyKind(this IOperation operation, params OperationKind[] kinds) =>
             kinds.Contains(operation.Kind);
 

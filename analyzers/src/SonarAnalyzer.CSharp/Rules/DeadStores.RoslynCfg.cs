@@ -65,6 +65,9 @@ namespace SonarAnalyzer.Rules.CSharp
                             case OperationKindEx.SimpleAssignment:
                                 ProcessSimpleAssignment(ISimpleAssignmentOperationWrapper.FromOperation(operation.Instance));
                                 break;
+                            case OperationKindEx.CompoundAssignment:
+                                ProcessCompoundAssignment(ICompoundAssignmentOperationWrapper.FromOperation(operation.Instance));
+                                break;
                         }
                     }
                 }
@@ -77,7 +80,7 @@ namespace SonarAnalyzer.Rules.CSharp
                         {
                             liveOut.Remove(symbol);
                         }
-                        else if (!reference.IsAssignmentTarget())
+                        else if (!reference.IsAssignmentTarget() && !reference.IsCompoundAssignmentTarget())
                         {
                             liveOut.Add(symbol);
                         }
@@ -86,13 +89,33 @@ namespace SonarAnalyzer.Rules.CSharp
 
                 private void ProcessSimpleAssignment(ISimpleAssignmentOperationWrapper assignment)
                 {
-                    if (owner.lva.ParameterOrLocalSymbol(assignment.Target) is { } localTarget) //FIXME: && IsSymbolRelevant(localTarget))
+                    if (ProcessAssignment(assignment, assignment.Target) is { } localTarget)
                     {
-                        if (!liveOut.Contains(localTarget) && !IsMuted(assignment.Target.Syntax))   // FIXME: Unmute?
-                        {
-                            ReportIssue(assignment.WrappedOperation.Syntax.GetLocation(), localTarget);  // FIXME: Better overload?
-                        }
                         liveOut.Remove(localTarget);
+                    }
+                }
+
+                private void ProcessCompoundAssignment(ICompoundAssignmentOperationWrapper assignment) =>
+                    ProcessAssignment(assignment, assignment.Target);
+
+                private ISymbol ProcessAssignment(IOperationWrapper operation, IOperation target)
+                {
+                    if (owner.lva.ParameterOrLocalSymbol(target) is { } localTarget) //FIXME: && IsSymbolRelevant(localTarget))
+                    {
+                        if (!liveOut.Contains(localTarget) && !IsMuted(target.Syntax))   // FIXME: Unmute?
+                        {
+                            if (operation.WrappedOperation.Syntax.GetLocation().GetLineSpan().StartLinePosition.Line == 192)
+                            {
+                                System.Diagnostics.Debugger.Break();
+                            }
+
+                            ReportIssue(operation.WrappedOperation.Syntax.GetLocation(), localTarget);  // FIXME: Better overload?
+                        }
+                        return localTarget;
+                    }
+                    else
+                    {
+                        return null;
                     }
                 }
 
