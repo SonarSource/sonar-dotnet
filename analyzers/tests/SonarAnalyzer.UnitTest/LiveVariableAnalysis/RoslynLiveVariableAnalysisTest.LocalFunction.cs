@@ -30,7 +30,7 @@ namespace SonarAnalyzer.UnitTest.LiveVariableAnalysis
             var code = @"
 outParameter = LocalFunction(intParameter);
 static int LocalFunction(int a) => a + 1;";
-            var context = new Context(code, "LocalFunction");
+            var context = CreateContextCS(code, "LocalFunction", "out int outParameter");
             context.ValidateEntry(new LiveIn("a"), new LiveOut("a"));
             context.Validate("a + 1", new LiveIn("a"));
             context.ValidateExit();
@@ -42,7 +42,7 @@ static int LocalFunction(int a) => a + 1;";
             var code = @"
 outParameter = LocalFunction(0);
 static int LocalFunction(int a) => 42;";
-            var context = new Context(code, "LocalFunction");
+            var context = CreateContextCS(code, "LocalFunction", "out int outParameter");
             context.ValidateEntry();
             context.Validate("42");
             context.ValidateExit();
@@ -57,7 +57,7 @@ static int LocalFunction(int a)
 {
     return a + 1;
 }";
-            var context = new Context(code, "LocalFunction");
+            var context = CreateContextCS(code, "LocalFunction", "out int outParameter");
             context.ValidateEntry(new LiveIn("a"), new LiveOut("a"));
             context.Validate("a + 1", new LiveIn("a"));
             context.ValidateExit();
@@ -72,7 +72,7 @@ static int LocalFunction(int a)
 {
     return 42;
 }";
-            var context = new Context(code, "LocalFunction");
+            var context = CreateContextCS(code, "LocalFunction", "out int outParameter");
             context.ValidateEntry();
             context.Validate("42");
             context.ValidateExit();
@@ -90,7 +90,7 @@ static int LocalFunction(int a)
     else
         return LocalFunction(a - 1);
 };";
-            var context = new Context(code, "LocalFunction");
+            var context = CreateContextCS(code, "LocalFunction", "out int outParameter");
             context.ValidateEntry(new LiveIn("a"), new LiveOut("a"));
             context.Validate("0");
             context.Validate("LocalFunction(a - 1)", new LiveIn("a"));
@@ -107,7 +107,7 @@ if (boolParameter)
 LocalFunction();
 
 int LocalFunction() => variable;";
-            var context = new Context(code);
+            var context = CreateContextCS(code);
             context.ValidateEntry(new LiveIn("boolParameter"), new LiveOut("boolParameter"));
             context.Validate("boolParameter", new LiveIn("boolParameter"), new LiveOut("variable"));
             context.Validate("LocalFunction();", new LiveIn("variable"));
@@ -123,7 +123,7 @@ var variable = 42;
 if (boolParameter)
     return;
 LocalFunction();";
-            var context = new Context(code);
+            var context = CreateContextCS(code);
             context.ValidateEntry(new LiveIn("boolParameter"), new LiveOut("boolParameter"));
             context.Validate("boolParameter", new LiveIn("boolParameter"), new LiveOut("variable"));
             context.Validate("LocalFunction();", new LiveIn("variable"));
@@ -139,7 +139,7 @@ if (boolParameter)
 LocalFunction<int>();
 
 int LocalFunction<T>() => variable;";
-            var context = new Context(code);
+            var context = CreateContextCS(code);
             context.ValidateEntry(new LiveIn("boolParameter"), new LiveOut("boolParameter"));
             context.Validate("boolParameter", new LiveIn("boolParameter"), new LiveOut("variable"));
             context.Validate("LocalFunction<int>();", new LiveIn("variable"));
@@ -160,7 +160,7 @@ int LocalFunction<T>()
 
     int Nested<TT>() => variable;
 }";
-            var context = new Context(code);
+            var context = CreateContextCS(code);
             context.ValidateEntry(new LiveIn("boolParameter"), new LiveOut("boolParameter"));
             context.Validate("boolParameter", new LiveIn("boolParameter"), new LiveOut("variable"));
             context.Validate("LocalFunction<int>();", new LiveIn("variable"));
@@ -180,7 +180,7 @@ void LocalFunction()
 {
     variable = 0;
 }";
-            var context = new Context(code);
+            var context = CreateContextCS(code);
             context.ValidateEntry(new LiveIn("boolParameter"), new LiveOut("boolParameter"));
             context.Validate("boolParameter", new LiveIn("boolParameter"));
             context.Validate("LocalFunction();");
@@ -193,7 +193,7 @@ void LocalFunction()
 LocalFunction(40);
 
 int LocalFunction(int cnt) => cnt + 2;";
-            var context = new Context(code);
+            var context = CreateContextCS(code);
             context.ValidateEntry();
             context.Validate("LocalFunction(40);");
         }
@@ -209,7 +209,7 @@ int LocalFunction()
     var nested = 42;
     Func<int> f = () => nested;
 }";
-            var context = new Context(code);
+            var context = CreateContextCS(code);
             context.ValidateEntry();
             context.Validate("LocalFunction();");
         }
@@ -224,7 +224,7 @@ if (boolParameter)
 LocalFunction(10);
 
 int LocalFunction(int cnt) => variable + (cnt == 0 ? 0 : LocalFunction(cnt - 1));";
-            var context = new Context(code);
+            var context = CreateContextCS(code);
             context.ValidateEntry(new LiveIn("boolParameter"), new LiveOut("boolParameter"));
             context.Validate("boolParameter", new LiveIn("boolParameter"), new LiveOut("variable"));
             context.Validate("LocalFunction(10);", new LiveIn("variable"));
@@ -241,7 +241,7 @@ int LocalFunction(int arg)
     return variable + (arg == 0 ? 0 : LocalFunction(arg - 1));
 }";
             // variable is not local, it's defined above the LocalFunction scope
-            var context = new Context(code, "LocalFunction");
+            var context = CreateContextCS(code, "LocalFunction");
             context.ValidateEntry(new LiveIn("arg"), new LiveOut("arg"));
             context.Validate("variable", new LiveIn("arg"), new LiveOut("arg"));
             context.Validate("LocalFunction(arg - 1)", new LiveIn("arg"));
@@ -263,7 +263,7 @@ int LocalFunction()
     int Second() => variable;
     return First();
 }";
-            var context = new Context(code);
+            var context = CreateContextCS(code);
             context.ValidateEntry(new LiveIn("boolParameter"), new LiveOut("boolParameter"));
             context.Validate("LocalFunction();", new LiveIn("variable"));
         }
@@ -281,7 +281,7 @@ int LocalFunction()
     int Second() => variable;
     return First();
 }";
-            var context = new Context(code, "LocalFunction");
+            var context = CreateContextCS(code, "LocalFunction");
             context.ValidateEntry();
             context.Validate("boolCondition", new LiveOut("variable"));
             context.Validate("First()", new LiveIn("variable"));
@@ -302,7 +302,7 @@ int LocalFunction()
 
     int Nested() => variable;
 }";
-            var context = new Context(code);
+            var context = CreateContextCS(code);
             context.ValidateEntry(new LiveIn("boolParameter"), new LiveOut("boolParameter"));
             context.Validate("boolParameter", new LiveIn("boolParameter"), new LiveOut("variable"));
             context.Validate("LocalFunction();", new LiveIn("variable"));
@@ -338,7 +338,7 @@ int LocalFunction()
     Method(usedInUnreachable);
 }";
 
-            var context = new Context(code);
+            var context = CreateContextCS(code);
             context.ValidateEntry(new LiveIn("boolParameter"), new LiveOut("boolParameter"));
             // usedInUnreachable is here only because of simplified processing inside local functions
             context.Validate("boolParameter", new LiveIn("boolParameter"), new LiveOut("usedInTry", "usedInCatch", "usedInFinally", "usedInUnreachable"));
@@ -356,7 +356,7 @@ Capturing(LocalFunction);
 
 int LocalFunction(int arg) => arg + variable;";
 
-            var context = new Context(code);
+            var context = CreateContextCS(code);
             context.ValidateEntry(new LiveIn("boolParameter"), new LiveOut("boolParameter"));
             context.Validate("boolParameter", new LiveIn("boolParameter"), new LiveOut("variable"));
             context.Validate("Capturing(LocalFunction);", new LiveIn("variable"));
@@ -381,7 +381,7 @@ void LocalFunction(int arg)
         return arg <= variable || new[] { x }.Any(IsTrue);
     }
 }";
-            var context = new Context(code);
+            var context = CreateContextCS(code);
             context.ValidateEntry(new LiveIn("boolParameter"), new LiveOut("boolParameter"));
             context.Validate("boolParameter", new LiveIn("boolParameter"), new LiveOut("variable"));
             context.Validate("LocalFunction(42);", new LiveIn("variable"));
@@ -399,7 +399,7 @@ int LocalFunction(int arg)
     return variable + arg;
 }";
             // variable is not local, it's defined above the LocalFunction scope
-            var context = new Context(code, "LocalFunction");
+            var context = CreateContextCS(code, "LocalFunction");
             context.ValidateEntry(new LiveIn("arg"), new LiveOut("arg"));
             context.Validate("Capturing(LocalFunction);", new LiveIn("arg"));
         }

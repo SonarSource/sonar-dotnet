@@ -146,6 +146,7 @@ namespace SonarAnalyzer.CFG.LiveVariableAnalysis
         private class RoslynState : State
         {
             private readonly ISymbol originalDeclaration;
+            private readonly ISet<ISymbol> capturedLocalFunctions = new HashSet<ISymbol>();
 
             public RoslynState(ISymbol originalDeclaration) =>
                 this.originalDeclaration = originalDeclaration;
@@ -154,6 +155,7 @@ namespace SonarAnalyzer.CFG.LiveVariableAnalysis
             {
                 foreach (var operation in block.OperationsAndBranchValue.ToReversedExecutionOrder())
                 {
+                    // Everything that is added to this switch needs to be considered inside ProcessCaptured as well
                     switch (operation.Instance.Kind)
                     {
                         case OperationKindEx.LocalReference:
@@ -212,26 +214,48 @@ namespace SonarAnalyzer.CFG.LiveVariableAnalysis
             {
                 if (!anonymousFunction.Symbol.IsStatic) // Performance: No need to descent into static
                 {
-                    var anonymousFunctionCfg = cfg.GetAnonymousFunctionControlFlowGraph(anonymousFunction);
-                    foreach (var operation in anonymousFunctionCfg.Blocks.SelectMany(x => x.OperationsAndBranchValue).SelectMany(x => x.DescendantsAndSelf()))
+                    ProcessCaptured(cfg.GetAnonymousFunctionControlFlowGraph(anonymousFunction));
+                }
+            }
+
+            private void ProcessCaptured(ControlFlowGraph cfg)
+            {
+                foreach (var operation in cfg.Blocks.SelectMany(x => x.OperationsAndBranchValue).SelectMany(x => x.DescendantsAndSelf()))
+                {
+                    if (ParameterOrLocalSymbol(operation) is { } symbol)
                     {
-                        if (ParameterOrLocalSymbol(operation) is { } symbol)
+                        Captured.Add(symbol);
+                    }
+                    else
+                    {
+                        switch (operation.Kind)
                         {
-                            Captured.Add(symbol);
-                        }
-                        else if (operation.Kind == OperationKindEx.FlowAnonymousFunction)
-                        {
-                            ProcessFlowAnonymousFunction(anonymousFunctionCfg, IFlowAnonymousFunctionOperationWrapper.FromOperation(operation));
+                            case OperationKindEx.FlowAnonymousFunction:
+                                ProcessFlowAnonymousFunction(cfg, IFlowAnonymousFunctionOperationWrapper.FromOperation(operation));
+                                break;
+                            case OperationKindEx.Invocation:
+                                ProcessCapturedLocalFunction(cfg, IInvocationOperationWrapper.FromOperation(operation).TargetMethod);
+                                break;
+                            case OperationKindEx.MethodReference:
+                                ProcessCapturedLocalFunction(cfg, IMethodReferenceOperationWrapper.FromOperation(operation).Method);
+                                break;
                         }
                     }
                 }
             }
 
+            private void ProcessCapturedLocalFunction(ControlFlowGraph cfg, IMethodSymbol method)
+            {
+                if (HandleLocalFunction(capturedLocalFunctions, method) is { } localFunction)
+                {
+                    capturedLocalFunctions.Add(localFunction);
+                    ProcessCaptured(cfg.FindLocalFunctionCfgInScope(localFunction));
+                }
+            }
+
             private void ProcessLocalFunction(ControlFlowGraph cfg, IMethodSymbol method)
             {
-                // We need ConstructedFrom because TargetMethod of a generic local function invocation is not the correct symbol (has IsDefinition=False and wrong ContainingSymbol)
-                if (method.ConstructedFrom is { MethodKind: MethodKindEx.LocalFunction, IsStatic: false } localFunction
-                    && !ProcessedLocalFunctions.Contains(localFunction))
+                if (HandleLocalFunction(ProcessedLocalFunctions, method) is { } localFunction)
                 {
                     ProcessedLocalFunctions.Add(localFunction);
                     var localFunctionCfg = cfg.FindLocalFunctionCfgInScope(localFunction);
@@ -239,6 +263,21 @@ namespace SonarAnalyzer.CFG.LiveVariableAnalysis
                     {
                         ProcessBlock(localFunctionCfg, block);
                     }
+                }
+            }
+
+            private static IMethodSymbol HandleLocalFunction(ISet<ISymbol> processed, IMethodSymbol method)
+            {
+                // We need ConstructedFrom because TargetMethod of a generic local function invocation is not the correct symbol (has IsDefinition=False and wrong ContainingSymbol)
+                if (method.ConstructedFrom is { MethodKind: MethodKindEx.LocalFunction, IsStatic: false } localFunction
+                    && !processed.Contains(localFunction))
+                {
+                    processed.Add(localFunction);
+                    return localFunction;
+                }
+                else
+                {
+                    return null;
                 }
             }
 
