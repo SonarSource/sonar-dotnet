@@ -60,9 +60,10 @@ namespace SonarAnalyzer.CFG.Roslyn
 
         static ControlFlowGraph()
         {
-            if (RoslynHelper.FlowAnalysisType("ControlFlowGraph") is { } type)
+            if (RoslynHelper.IsRoslynCfgSupported())
             {
                 IsAvailable = true;
+                var type = RoslynHelper.FlowAnalysisType("ControlFlowGraph");
                 BlocksProperty = type.GetProperty(nameof(Blocks));
                 LocalFunctionsProperty = type.GetProperty(nameof(LocalFunctions));
                 OriginalOperationProperty = type.GetProperty(nameof(OriginalOperation));
