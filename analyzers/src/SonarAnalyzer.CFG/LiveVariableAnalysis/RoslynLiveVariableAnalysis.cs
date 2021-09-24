@@ -230,7 +230,7 @@ namespace SonarAnalyzer.CFG.LiveVariableAnalysis
             {
                 foreach (var operation in cfg.Blocks.SelectMany(x => x.OperationsAndBranchValue).SelectMany(x => x.DescendantsAndSelf()))
                 {
-                    if (ParameterOrLocalSymbol(operation) is { } symbol)
+                    if (owner.ParameterOrLocalSymbol(operation) is { } symbol)
                     {
                         Captured.Add(symbol);
                     }
