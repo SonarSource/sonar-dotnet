@@ -109,7 +109,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private abstract class CheckerBase<TCfg, TBlock>
         {
-            protected readonly LiveVariableAnalysisBase<TCfg, TBlock> lva;
+            private readonly LiveVariableAnalysisBase<TCfg, TBlock> lva;
             private readonly SyntaxNodeAnalysisContext context;
             private readonly ISet<ISymbol> capturedVariables;
 
@@ -136,9 +136,9 @@ namespace SonarAnalyzer.Rules.CSharp
 
             protected abstract class State
             {
-                protected readonly CheckerBase<TCfg, TBlock> owner;
                 protected readonly TBlock block;
                 protected readonly ISet<ISymbol> liveOut;
+                private readonly CheckerBase<TCfg, TBlock> owner;
 
                 public abstract void AnalyzeBlock();
 

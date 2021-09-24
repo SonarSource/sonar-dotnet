@@ -23,11 +23,11 @@ using System.Collections.Generic;
 using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Diagnostics;
-using Microsoft.CodeAnalysis.Text;
 using SonarAnalyzer.CFG.LiveVariableAnalysis;
 using SonarAnalyzer.CFG.Roslyn;
 using SonarAnalyzer.Extensions;
 using SonarAnalyzer.Helpers;
+using StyleCop.Analyzers.Lightup;
 
 namespace SonarAnalyzer.Rules.CSharp
 {
@@ -35,19 +35,70 @@ namespace SonarAnalyzer.Rules.CSharp
     {
         private class RoslynChecker : CheckerBase<ControlFlowGraph, BasicBlock>
         {
-            public RoslynChecker(SyntaxNodeAnalysisContext context, RoslynLiveVariableAnalysis lva) : base(context, lva) { }
+            private readonly RoslynLiveVariableAnalysis lva;
+
+            public RoslynChecker(SyntaxNodeAnalysisContext context, RoslynLiveVariableAnalysis lva) : base(context, lva) =>
+                this.lva = lva;
 
             protected override State CreateState(BasicBlock block) =>
                 new RoslynState(this, block);
 
             private class RoslynState : State
             {
-                public RoslynState(RoslynChecker owner, BasicBlock block) : base(owner, block) { }
+                private readonly RoslynChecker owner;
+
+                public RoslynState(RoslynChecker owner, BasicBlock block) : base(owner, block) =>
+                    this.owner = owner;
 
                 public override void AnalyzeBlock()
                 {
-                    // FIXME: Few lines are missing around here
+                    foreach (var operation in block.OperationsAndBranchValue.ToReversedExecutionOrder())
+                    {
+                        switch (operation.Instance.Kind)
+                        {
+                            case OperationKindEx.LocalReference:
+                                ProcessParameterOrLocalReference(ILocalReferenceOperationWrapper.FromOperation(operation.Instance));
+                                break;
+                            case OperationKindEx.ParameterReference:
+                                ProcessParameterOrLocalReference(IParameterReferenceOperationWrapper.FromOperation(operation.Instance));
+                                break;
+                            case OperationKindEx.SimpleAssignment:
+                                ProcessSimpleAssignment(ISimpleAssignmentOperationWrapper.FromOperation(operation.Instance));
+                                break;
+                        }
+                    }
                 }
+
+                private void ProcessParameterOrLocalReference(IOperationWrapper reference)
+                {
+                    if (owner.lva.ParameterOrLocalSymbol(reference.WrappedOperation) is { } symbol && IsSymbolRelevant(symbol))
+                    {
+                        if (RoslynLiveVariableAnalysis.IsOutArgument(reference.WrappedOperation))
+                        {
+                            liveOut.Remove(symbol);
+                        }
+                        else if (!reference.IsAssignmentTarget())
+                        {
+                            liveOut.Add(symbol);
+                        }
+                    }
+                }
+
+                private void ProcessSimpleAssignment(ISimpleAssignmentOperationWrapper assignment)
+                {
+                    if (owner.lva.ParameterOrLocalSymbol(assignment.Target) is { } localTarget) //FIXME: && IsSymbolRelevant(localTarget))
+                    {
+                        if (!liveOut.Contains(localTarget) && !IsMuted(assignment.Target.Syntax))   // FIXME: Unmute?
+                        {
+                            ReportIssue(assignment.WrappedOperation.Syntax.GetLocation(), localTarget);  // FIXME: Better overload?
+                        }
+                        liveOut.Remove(localTarget);
+                    }
+                }
+
+                // FIXME: Temporary duplicate
+                private bool IsMuted(SyntaxNode node) =>
+                    new MutedSyntaxWalker(SemanticModel, node).IsMuted();
             }
         }
     }

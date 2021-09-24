@@ -35,7 +35,18 @@ namespace SonarAnalyzer.CFG.LiveVariableAnalysis
             : base(cfg, new IOperationWrapperSonar(cfg.OriginalOperation).SemanticModel.GetDeclaredSymbol(cfg.OriginalOperation.Syntax)) =>
             Analyze();
 
-        internal static bool IsOutArgument(IOperation operation) =>
+        public ISymbol ParameterOrLocalSymbol(IOperation operation)
+        {
+            ISymbol candidate = operation switch
+            {
+                var _ when IParameterReferenceOperationWrapper.IsInstance(operation) => IParameterReferenceOperationWrapper.FromOperation(operation).Parameter,
+                var _ when ILocalReferenceOperationWrapper.IsInstance(operation) => ILocalReferenceOperationWrapper.FromOperation(operation).Local,
+                _ => null
+            };
+            return IsLocal(candidate) ? candidate : null;
+        }
+
+        public static bool IsOutArgument(IOperation operation) =>
             new IOperationWrapperSonar(operation) is var wrapped
             && IArgumentOperationWrapper.IsInstance(wrapped.Parent)
             && IArgumentOperationWrapper.FromOperation(wrapped.Parent).Parameter.RefKind == RefKind.Out;
@@ -184,28 +195,23 @@ namespace SonarAnalyzer.CFG.LiveVariableAnalysis
 
             private void ProcessParameterOrLocalReference(IOperationWrapper reference)
             {
-                if (ParameterOrLocalSymbol(reference.WrappedOperation) is { } symbol)
+                if (owner.ParameterOrLocalSymbol(reference.WrappedOperation) is { } symbol)
                 {
                     if (IsOutArgument(reference.WrappedOperation))
                     {
                         Assigned.Add(symbol);
                         UsedBeforeAssigned.Remove(symbol);
                     }
-                    else if (!IsAssignmentTarget())
+                    else if (!reference.IsAssignmentTarget())
                     {
                         UsedBeforeAssigned.Add(symbol);
                     }
                 }
-
-                bool IsAssignmentTarget() =>
-                    new IOperationWrapperSonar(reference.WrappedOperation).Parent is { } parent
-                    && parent.Kind == OperationKindEx.SimpleAssignment
-                    && ISimpleAssignmentOperationWrapper.FromOperation(parent).Target == reference.WrappedOperation;
             }
 
             private void ProcessSimpleAssignment(ISimpleAssignmentOperationWrapper assignment)
             {
-                if (ParameterOrLocalSymbol(assignment.Target) is { } localTarget)
+                if (owner.ParameterOrLocalSymbol(assignment.Target) is { } localTarget)
                 {
                     Assigned.Add(localTarget);
                     UsedBeforeAssigned.Remove(localTarget);
@@ -281,17 +287,6 @@ namespace SonarAnalyzer.CFG.LiveVariableAnalysis
                 {
                     return null;
                 }
-            }
-
-            private ISymbol ParameterOrLocalSymbol(IOperation operation)
-            {
-                ISymbol candidate = operation switch
-                {
-                    var _ when IParameterReferenceOperationWrapper.IsInstance(operation) => IParameterReferenceOperationWrapper.FromOperation(operation).Parameter,
-                    var _ when ILocalReferenceOperationWrapper.IsInstance(operation) => ILocalReferenceOperationWrapper.FromOperation(operation).Local,
-                    _ => null
-                };
-                return owner.IsLocal(candidate) ? candidate : null;
             }
         }
     }

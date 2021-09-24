@@ -21,31 +21,31 @@ namespace Tests.Diagnostics
 
         public void IgnoredValues()
         {
-            var stringEmpty = string.Empty; // Compliant
+            var stringEmpty = string.Empty; // Noncompliant WIP Roslyn FP: Compliant
             stringEmpty = "other";
 
-            string stringNull = null; // Compliant
+            string stringNull = null;   // Noncompliant WIP Roslyn FP: Compliant
             stringNull = "other";
 
-            var boolFalse = false; // Compliant
+            var boolFalse = false;      // Noncompliant WIP Roslyn FP: Compliant
             boolFalse = true;
 
-            var boolTrue = true; // Compliant
+            var boolTrue = true;        // Noncompliant WIP Roslyn FP: Compliant
             boolTrue = false;
 
-            object objectNull = null; // Compliant
+            object objectNull = null;   // Noncompliant WIP Roslyn FP: Compliant
             objectNull = new object();
 
-            var intZero = 0; // Compliant
+            var intZero = 0;            // Noncompliant WIP Roslyn FP: Compliant
             intZero = 42;
 
-            var intOne = 1; // Compliant
+            var intOne = 1;             // Noncompliant WIP Roslyn FP: Compliant
             intOne = 42;
 
-            var intMinusOne = -1; // Compliant
+            var intMinusOne = -1;       // Noncompliant WIP Roslyn FP: Compliant
             intMinusOne = 42;
 
-            var intPlusOne = +1; // Compliant
+            var intPlusOne = +1;        // Noncompliant WIP Roslyn FP: Compliant
             intPlusOne = 42;
 
             // Variables should be used in order the rule to trigger
@@ -55,16 +55,16 @@ namespace Tests.Diagnostics
 
         public void Defaults()
         {
-            var s = default(string); // Compliant
+            var s = default(string);    // Noncompliant WIP Roslyn FP: Compliant
             s = "";
 
-            var b = default(bool); // Compliant
+            var b = default(bool);      // Noncompliant WIP Roslyn FP: Compliant
             b = true;
 
-            var o = default(object); // Compliant
+            var o = default(object);    // Noncompliant WIP Roslyn FP: Compliant
             o = new object();
 
-            var i = default(int); // Compliant
+            var i = default(int);       // Noncompliant WIP Roslyn FP: Compliant
             i = 42;
 
             // Variables should be used in order the rule to trigger
@@ -81,16 +81,16 @@ namespace Tests.Diagnostics
 
         void calculateRate(int a, int b)
         {
-            b = doSomething(); // FIXME: Roslyn CFG WIP Non-compliant { FIXME {Remove this useless assignment to local variable 'b'.} FIXME }
-//            *************** FIXME
+            b = doSomething(); // {{Remove this useless assignment to local variable 'b'.}}
+//          ^^^^^^^^^^^^^^^^^
 
             int i, j;
             i = a + 12;
             i += i + 2; // FIXME: Roslyn CFG WIP Non-compliant
             i = 5;
             j = i;
-            i
-                = doSomething(); // FIXME: Roslyn CFG WIP Non-compliant; retrieved value overwritten in for loop
+            i                           // Noncompliant; retrieved value overwritten in for loop
+                = doSomething();
             for (i = 0; i < j + 10; i++)
             {
                 //  ...
@@ -102,27 +102,27 @@ namespace Tests.Diagnostics
                 i += 5; // FIXME: Roslyn CFG WIP Non-compliant
             }
 
-            var resource = new Resource(); // FIXME: Roslyn CFG WIP Non-compliant; retrieved value not used
+            var resource = new Resource(); // Noncompliant; retrieved value not used
             using (resource = new Resource())
             {
                 resource.DoSomething();
             }
 
-            var x
-                = 10; // FIXME: Roslyn CFG WIP Non-compliant
+            var x       // Noncompliant
+                = 10;
             var y =
-                x = 11; // FIXME: Roslyn CFG WIP Non-compliant
+                x = 11; // Noncompliant
             Console.WriteLine(y);
 
-            int k = 12; // FIXME: Roslyn CFG WIP Non-compliant
+            int k = 12; // Noncompliant
             X(out k);   // Compliant, not reporting on out parameters
         }
-        void X(out int i) { i = 10; }
+        void X(out int i) { i = 10; }   // Noncompliant WIP Roslyn FP: Compliant out parameter
 
         void calculateRate2(int a, int b)
         {
-            var x = 0;
-            x = 1; // FN, muted due to try/catch
+            var x = 0;  // Noncompliant WIP Roslyn FP: Compliant, ignored value
+            x = 1;      // FN, muted due to try/catch
             try
             {
                 x = 11; // FN, muted due to try/catch
@@ -162,7 +162,7 @@ namespace Tests.Diagnostics
             {
                 return 0;
             }
-            int x = a;
+            int x = a;      // Noncompliant WIP Roslyn FP
             for (int i = 1; i < b; i++)
             {
                 x = x * a;  //Not detected yet, we are in a loop, Dead store because the last return statement should return x instead of returning a
@@ -180,9 +180,11 @@ namespace Tests.Diagnostics
             undefined += 42;    // Error [CS0103]: The name 'undefined' does not exist in the current context
             undefined = 42;     // Error [CS0103]: The name 'undefined' does not exist in the current context
 
-            var captured = 10;
+            var captured = 10;  // Noncompliant WIP Roslyn FP
+                                // Noncompliant@-1 WIP Roslyn FP duplicate
             Action a = () => { Console.WriteLine(captured); };
             captured += 11;     // Not reporting on captured local variables
+            a();
         }
 
         public void Switch()
@@ -192,10 +194,10 @@ namespace Tests.Diagnostics
             switch (b)
             {
                 case 6:
-                    b = 5; // FIXME: Roslyn CFG WIP Non-compliant
+                    b = 5; // Noncompliant
                     break;
                 case 7:
-                    b = 56; // FIXME: Roslyn CFG WIP Non-compliant
+                    b = 56; // Noncompliant
                     break;
                 case c:
                     break;
@@ -208,7 +210,7 @@ namespace Tests.Diagnostics
 
         public int Switch1(int x)
         {
-            var b = 0; // Compliant
+            var b = 0; // Noncompliant WIP Roslyn FP: Compliant
             switch (x)
             {
                 case 6:
@@ -260,7 +262,7 @@ namespace Tests.Diagnostics
         {
             get
             {
-                var i = 10; // FIXME: Roslyn CFG WIP Non-compliant
+                var i = 10; // Noncompliant
                 if (nameof(((i))) == "i") // Error [CS8081]
                 {
                     i = 11;
@@ -277,27 +279,31 @@ namespace Tests.Diagnostics
 
         public List<int> Method(int i)
         {
-            var l = new List<int>();
+            var l = new List<int>();    // Noncompliant WIP Roslyn FP
+                                        // Noncompliant@-1 WIP Roslyn FP
 
             Func<List<int>> func = () =>
             {
                 return (l = new List<int>(new[] { i }));
             };
 
-            var x = l; // FIXME: Roslyn CFG WIP Non-compliant
-            x = null;  // FIXME: Roslyn CFG WIP Non-compliant
+            var x = l; // Noncompliant
+                       // Noncompliant@-1    WIP Roslyn FP duplicate
+            x = null;  // Noncompliant
+                       // Noncompliant@-1    WIP Roslyn FP duplicate
 
             return func();
         }
 
         public List<int> Method2(int i)
         {
-            var l = new List<int>(); // Compliant, not reporting on captured variables
+            var l = new List<int>();    // Noncompliant WIP Roslyn FP: Compliant, not reporting on captured variables
+                                        // Noncompliant@-1    WIP Roslyn FP duplicate
 
-            return (() => // Error [CS0149] - no method name
+            return (() =>       // Error [CS0149] - no method name
             {
-                var k = 10; // FIXME: Roslyn CFG WIP Non-compliant
-                k = 12; // FIXME: Roslyn CFG WIP Non-compliant
+                var k = 10;     // FIXME: Roslyn CFG WIP Non-compliant
+                k = 12;         // FIXME: Roslyn CFG WIP Non-compliant
                 return (l = new List<int>(new[] { i })); // l captured here
             })();
         }
@@ -327,12 +333,12 @@ namespace Tests.Diagnostics
 
         public List<int> Method5(out int i, ref int j)
         {
-            i = 10; // Compliant, out parameter
+            i = 10; // Noncompliant WIP Roslyn FP: Compliant, out parameter
 
             j = 11;
             if (j == 11)
             {
-                j = 12; // Compliant, ref parameter
+                j = 12; // Noncompliant WIP Roslyn FP: Compliant, ref parameter
             }
 
             return null;
@@ -351,9 +357,11 @@ namespace Tests.Diagnostics
 
         public List<int> Method6()
         {
-            var i = 10;
+            var i = 10; // Noncompliant WIP Roslyn FP:
+                        // Noncompliant@-1    WIP Roslyn FP duplicate
             Action a = () => { Console.WriteLine(i); };
-            i = 11;     // Not reporting on captured local variables
+            i = 11;     // Noncompliant WIP Roslyn FP: Not reporting on captured local variables
+                        // Noncompliant@-1    WIP Roslyn FP duplicate
             a();
 
             return null;
@@ -366,8 +374,8 @@ namespace Tests.Diagnostics
                 Console.WriteLine(item);
             }
 
-            foreach (var
-                item // A new value is assigned here, which is not used. But we are not reporting on it.
+            foreach (var    // Noncompliant a new value is assigned here, which is not used
+                item
                 in new int[0])
             {
             }
@@ -377,10 +385,10 @@ namespace Tests.Diagnostics
 
         public void Unused()
         {
-            var x = 5; // Compliant, S1481 already reports on it.
+            var x = 5;  // Noncompliant WIP Roslyn FP: Compliant, S1481 already reports on it.
 
-            var y = 5; // FIXME: Roslyn CFG WIP Non-compliant
-            y = 6; // FIXME: Roslyn CFG WIP Non-compliant
+            var y = 5;  // Noncompliant
+            y = 6;      // Noncompliant
         }
 
         private void SimpleAssignment(bool b1, bool b2)
@@ -446,13 +454,12 @@ namespace Tests.Diagnostics
             decimal Total(decimal discount)
             {
                 decimal bias;
-                bias = 42.42M;   // FIXME: Roslyn CFG WIP Non-compliant
+                bias = 42.42M;   // Noncompliant
                 bias = 0;
                 var ret = bias + Count * Price * (1 - discount);
-                discount = 0;   // FIXME: Roslyn CFG WIP Non-compliant
+                discount = 0;   // Noncompliant
                 return ret;
             }
-
         }
 
         public class StaticLocalFunctions
@@ -462,7 +469,7 @@ namespace Tests.Diagnostics
                 static int LocalFunction(int x)
                 {
                     int seed;
-                    seed = 1;       // FIXME: Roslyn CFG WIP Non-compliant
+                    seed = 1;       // Noncompliant
                     seed = 42;
                     return x + seed;
                 }
@@ -509,7 +516,7 @@ namespace Tests.Diagnostics
             }
             finally
             {
-                actor = null; // FIXME: Roslyn CFG WIP Non-compliant
+                actor = null; // Noncompliant
             }
         }
 
@@ -523,7 +530,7 @@ namespace Tests.Diagnostics
             {
                 try
                 {
-                    actor = null; // FIXME: Roslyn CFG WIP Non-compliant
+                    actor = null; // Noncompliant
                 }
                 catch
                 {
@@ -553,7 +560,7 @@ namespace Tests.Diagnostics
             }
             catch (Exception)
             {
-                actor = null; // FIXME: Roslyn CFG WIP Non-compliant
+                actor = null; // Noncompliant
             }
             Foo(null);
         }
@@ -566,11 +573,11 @@ namespace Tests.Diagnostics
             }
             catch (Exception) when (i == 1)
             {
-                actor = null; // FIXME: Roslyn CFG WIP Non-compliant
+                actor = null; // Noncompliant
             }
             finally
             {
-                actor = null; // FIXME: Roslyn CFG WIP Non-compliant
+                actor = null; // Noncompliant
             }
         }
 
@@ -636,7 +643,7 @@ namespace Tests.Diagnostics
 
         public void Foo()
         {
-            bool shouldCatch = false;
+            bool shouldCatch = false;   // Noncompliant WIP Roslyn FP
             try
             {
                 shouldCatch = true; // ok, is read in catch filter
@@ -650,7 +657,7 @@ namespace Tests.Diagnostics
 
         public void Bar(bool cond)
         {
-            bool shouldCatch = false;
+            bool shouldCatch = false;   // Noncompliant WIP Roslyn FP
             try
             {
                 DoStuff();
@@ -681,7 +688,7 @@ namespace Tests.Diagnostics
                     DoNothing();
                     break;
                 }
-                catch (Exception ex)
+                catch (Exception ex)    // Noncompliant WIP Roslyn FP?
                 {
                     if (attempts > retries)
                         throw;
@@ -705,14 +712,14 @@ namespace Tests.Diagnostics
                             DoNothing();
                             break;
                         }
-                        catch (ArgumentException ex)
+                        catch (ArgumentException ex)    // Noncompliant WIP Roslyn FP?
                         {
                             DoNothing();
                         }
                     }
                 } while (true);
             }
-            catch (Exception ex)
+            catch (Exception ex)    // Noncompliant WIP Roslyn FP?
             {
                 if (attempts > retries)
                     throw;
@@ -723,7 +730,7 @@ namespace Tests.Diagnostics
         public void Bar()
         {
             bool isFirst = true;
-            foreach (var i in System.Linq.Enumerable.Range(1, 10))
+            foreach (var i in System.Linq.Enumerable.Range(1, 10))  // Noncompliant, i is not used in the loop. FIXME: Roslyn, should we raise?
             {
                 try
                 {
@@ -746,7 +753,7 @@ namespace Tests.Diagnostics
         public static long WithConstantValue(string path)
         {
             const int unknownfilelength = -1;
-            long length = unknownfilelength; // Compliant
+            long length = unknownfilelength; // Noncompliant WIP Roslyn FP: Compliant
             try
             {
                 length = new System.IO.FileInfo(path).Length;
@@ -760,7 +767,7 @@ namespace Tests.Diagnostics
 
         public static long WithMinus1(string path)
         {
-            long length = -1;
+            long length = -1;   // Noncompliant WIP Roslyn FP:
             try
             {
                 length = new System.IO.FileInfo(path).Length;
@@ -775,7 +782,7 @@ namespace Tests.Diagnostics
         const int UNKNOWN = -1;
         public static long WithClassConstant(string path)
         {
-            long length = UNKNOWN; // Compliant
+            long length = UNKNOWN; // Noncompliant WIP Roslyn FP: Compliant
             try
             {
                 length = new System.IO.FileInfo(path).Length;
@@ -790,7 +797,7 @@ namespace Tests.Diagnostics
         // https://github.com/SonarSource/sonar-dotnet/issues/2598
         public static string WithCastedNull(string path)
         {
-            var length = (string)null; // Compliant
+            var length = (string)null; // Noncompliant WIP Roslyn FP: Compliant
             try
             {
                 length = new System.IO.FileInfo(path).Length.ToString();
@@ -804,7 +811,7 @@ namespace Tests.Diagnostics
 
         public static string WithDefault(string path)
         {
-            string length = default(string);
+            string length = default(string);    // Noncompliant WIP Roslyn FP:
             try
             {
                 length = new System.IO.FileInfo(path).Length.ToString();
@@ -823,8 +830,8 @@ namespace Tests.Diagnostics
         public int Start()
         {
             const int x = -1;
-            int exitCode = x; // Compliant
-            Exception exception = null;
+            int exitCode = x; // Noncompliant WIP Roslyn FP: Compliant
+            Exception exception = null; //Noncompliant WIP Roslyn FP:
 
             try
             {
@@ -864,23 +871,23 @@ namespace Tests.Diagnostics
     {
         public static void DeadStore(int[] array)
         {
-            var x = 0;
-            x = array[^1]; // FN, muted due to try/catch
+            var x = 0;      // Noncompliant WIP Roslyn FP:
+            x = array[^1];  // FN, muted due to try/catch
             try
             {
-                x = 11; // FN, muted due to try/catch
+                x = 11;     // FN, muted due to try/catch
                 x = 12;
                 Console.Write(x);
-                x = 13; // Compliant, Console.Write can throw
+                x = 13;     // Compliant, Console.Write can throw
             }
             catch (Exception)
             {
-                x = 21; // FN, muted due to try/catch
+                x = 21;     // FN, muted due to try/catch
                 x = 22;
                 Console.Write(x);
-                x = 23; // FN, muted due to try/catch
+                x = 23;     // FN, muted due to try/catch
             }
-            x = 31; // FN, muted due to try/catch
+            x = 31;         // FN, muted due to try/catch
         }
     }
 
@@ -895,7 +902,7 @@ namespace Tests.Diagnostics
 
         public void UnusedTuple_FalseNegative()
         {
-            (int x, int y) t = (1, 2); // Compliant - FN, tuples are not yet covered: https://github.com/SonarSource/sonar-dotnet/issues/2933
+            (int x, int y) t = (1, 2); // Noncompliant
         }
     }
 
@@ -904,7 +911,7 @@ namespace Tests.Diagnostics
     {
         public string VariableDeclarator_WithLocalFunction()
         {
-            string buffer = "Value"; // Compliant
+            string buffer = "Value"; // Noncompliant WIP Roslyn FP: Compliant
             return Local();
 
             string Local()
@@ -955,8 +962,8 @@ namespace Tests.Diagnostics
     {
         public void WithRefKeyword(int[] values)
         {
-            ref int value = ref values[0];  // Compliant, because `value` keeps the reference to `values[0]`, and below `default` is actually assigned to `values[0]`
-            value = default;                // Compliant, because it's ref variable and value is propagated somewhere
+            ref int value = ref values[0];  // Noncompliant WIP Roslyn FP: Compliant, because `value` keeps the reference to `values[0]`, and below `default` is actually assigned to `values[0]`
+            value = default;                // Noncompliant WIP Roslyn FP: Compliant, because it's ref variable and value is propagated somewhere
         }
     }
 
@@ -982,7 +989,7 @@ namespace Tests.Diagnostics
     {
         public void UseVariableInLocalPredicate()
         {
-            bool usedBool = BoolInitializer(true); // Compliant, value is used in local predicate function
+            bool usedBool = BoolInitializer(true); // Noncompliant WIP Roslyn FP: Compliant, value is used in local predicate function
             var list = new List<bool>();
             list.Where(LocalPredicate);
 
@@ -1006,9 +1013,9 @@ namespace Tests.Diagnostics
             Span<int> span = new[] { 42 };
             int j = 0;
 
-            foreach (ref var e in span)
+            foreach (ref var e in span) // Noncompliant WIP Roslyn FP:
             {
-                e = j--; // Compliant because of ref keyword
+                e = j--; // Noncompliant WIP Roslyn FP: Compliant because of ref keyword
             }
         }
     }
@@ -1018,7 +1025,7 @@ namespace Tests.Diagnostics
     {
         public int WithTryCatch()
         {
-            var name = string.Empty;
+            var name = string.Empty;    // Noncompliant WIP Roslyn FP:
             try
             {
                 var values = GetValues();
@@ -1044,8 +1051,8 @@ namespace Tests.Diagnostics
     {
         public static void CreateDirectory(string directory)
         {
-            const int CopyWaitInterval = 250;
-            bool created = false;
+            const int CopyWaitInterval = 250;   // Noncompliant WIP Roslyn FP:
+            bool created = false;               // Noncompliant WIP Roslyn FP:
             int attempts = 10;
 
             do

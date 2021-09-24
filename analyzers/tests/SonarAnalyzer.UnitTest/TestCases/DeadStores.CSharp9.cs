@@ -1,31 +1,31 @@
 ﻿using System;
 
-var x = 100; // FN
-x = 1;
+var x = 100; // Noncompliant
+x = 1;       // Noncompliant
 
 void TargetTypedNew()
 {
-    Decimal d = new(100f); // FN
-    d = new(2f);
+    Decimal d = new(100f);  // Noncompliant
+    d = new(2f);            // Noncompliant
 }
 
 void NativeInts(nuint param)
 {
-    param = 1; // FIXME: Roslyn CFG WIP Non-compliant
+    param = 1;      // Noncompliant
 
-    nuint zero = 0; // ignored value
+    nuint zero = 0; // Noncompliant WIP Roslyn FP: ignored value
     zero = 1;
     Foo(zero);
 
-    nint minusOne = -1; // ignored value
+    nint minusOne = -1; // Noncompliant WIP Roslyn FP: ignored value
     minusOne = 1;
     Foo(minusOne);
 
-    nint one = 1; // ignored value
+    nint one = 1;       // Noncompliant WIP Roslyn FP: ignored value
     one = 2;
     Foo(one);
 
-    nint two = 2; // FIXME: Roslyn CFG WIP Non-compliant
+    nint two = 2;       // Noncompliant
     two = 3;
     Foo(two);
 }
@@ -51,21 +51,21 @@ void PatternMatchFalseNegative(int a, int b)
 {
     if (b is not 5)
     {
-        a = 1;
+        a = 1;  // Noncompliant
     }
     else if (b is 5)
     {
-        a = 2; // Compliant - FN, the parameter value is overwritten on all possible paths
+        a = 2;  // Noncompliant
     }
 
     var c = 5;
     switch (c)
     {
         case < 5:
-            c = 6; // Compliant, FN
+            c = 6; // Noncompliant
             break;
         case >= 5:
-            c = 7; // Compliant, FN
+            c = 7; // Noncompliant
             break;
     }
 }
@@ -88,8 +88,8 @@ public class C
     public static void Log() { }
     unsafe void FunctionPointer()
     {
-        delegate*<void> ptr1 = &C.Log; // FIXME: Roslyn CFG WIP Non-compliant
-        ptr1 = &C.Log; // FIXME: Roslyn CFG WIP Non-compliant
+        delegate*<void> ptr1 = &C.Log;  // Noncompliant
+        ptr1 = &C.Log;                  // Noncompliant
     }
 
     Action<int, int, int> StaticLambda() =>
@@ -106,7 +106,7 @@ record R
 {
     public R(int x)
     {
-        x = 1; // FIXME: Roslyn CFG WIP Non-compliant
+        x = 1; // Noncompliant
     }
 
     int x;
@@ -114,9 +114,9 @@ record R
     {
         init
         {
-            value = 1;      // FIXME: Roslyn CFG WIP Non-compliant
-            int a = 100;    // FIXME: Roslyn CFG WIP Non-compliant
-            a = 2;          // FIXME: Roslyn CFG WIP Non-compliant
+            value = 1;      // Noncompliant
+            int a = 100;    // Noncompliant
+            a = 2;          // Noncompliant
         }
     }
 }
