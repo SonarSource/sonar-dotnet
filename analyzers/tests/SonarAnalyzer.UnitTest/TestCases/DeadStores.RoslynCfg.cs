@@ -185,7 +185,67 @@ namespace Tests.Diagnostics
             Action a = () => { Console.WriteLine(captured); };
             captured += 11;     // Not reporting on captured local variables
             a();
+
+            var add = 40;
+            add += 2;
+            Use(add);
+            add += 100;     // FIXME: Roslyn CFG WIP Non-compliant
+
+            var sub = 40;
+            sub -= 2;
+            Use(sub);
+            sub -= 100;     // FIXME: Roslyn CFG WIP Non-compliant
+
+            var mul = 40;
+            mul *= 2;
+            Use(mul);
+            mul *= 100;     // FIXME: Roslyn CFG WIP Non-compliant
+
+            var div = 40;
+            div /= 2;
+            Use(div);
+            div /= 100;     // FIXME: Roslyn CFG WIP Non-compliant
+
+            var mod = 40;
+            mod += 2;
+            Use(mod);
+            mod %= 100;     // FIXME: Roslyn CFG WIP Non-compliant
+
+            var and = false;
+            and &= true;
+            Use(and);
+            and &= false;   // FIXME: Roslyn CFG WIP Non-compliant
+
+            var or = false;
+            or |= false;
+            Use(or);
+            or |= true;     // FIXME: Roslyn CFG WIP Non-compliant
+
+            var xor = 40;
+            xor ^= 2;
+            Use(xor);
+            xor ^= 100;     // FIXME: Roslyn CFG WIP Non-compliant
+
+            var left = 40;
+            left <<= 2;
+            Use(left);
+            left <<= 100;   // FIXME: Roslyn CFG WIP Non-compliant
+
+            var right = 40;
+            right >>= 2;
+            Use(right);
+            right >>= 100;  // FIXME: Roslyn CFG WIP Non-compliant
+
+            string coa = SomeString();
+            coa ??= SomeString();
+            Use(coa);
+            coa ??= SomeString();  // FIXME: Roslyn CFG WIP Non-compliant
         }
+
+        private void Use(int arg) { }
+        private void Use(bool arg) { }
+        private void Use(string arg) { }
+        private string SomeString() => null;
 
         public void Switch()
         {
