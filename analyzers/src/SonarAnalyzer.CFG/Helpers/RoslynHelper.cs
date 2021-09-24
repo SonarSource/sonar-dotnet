@@ -31,7 +31,7 @@ namespace SonarAnalyzer.CFG.Helpers
     {
         private const int MinimalSupportedMajorVersion = 3;
 
-        public static bool RoslynVersionIsSupported(int minimalVersion = MinimalSupportedMajorVersion) =>
+        public static bool IsRoslynCfgSupported(int minimalVersion = MinimalSupportedMajorVersion) =>
             typeof(SemanticModel).Assembly.GetName().Version.Major >= minimalVersion;
 
         public static Type FlowAnalysisType(string typeName) =>

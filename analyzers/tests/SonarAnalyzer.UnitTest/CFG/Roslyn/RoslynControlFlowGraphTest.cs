@@ -115,14 +115,14 @@ public class Sample {
         }
 
         [TestMethod]
-        public void RoslynSupportedVersions()
+        public void RoslynCfgSupportedVersions()
         {
             // We are running on 3 rd major version - it is the minimum requirement
-            RoslynHelper.RoslynVersionIsSupported().Should().BeTrue();
+            RoslynHelper.IsRoslynCfgSupported().Should().BeTrue();
             // If we set minimum requirement to 2 - we will able to pass the check even with old MsBuild
-            RoslynHelper.RoslynVersionIsSupported(2).Should().BeTrue();
+            RoslynHelper.IsRoslynCfgSupported(2).Should().BeTrue();
             // If we set minimum requirement to 100 - we won't be able to pass the check
-            RoslynHelper.RoslynVersionIsSupported(100).Should().BeFalse();
+            RoslynHelper.IsRoslynCfgSupported(100).Should().BeFalse();
         }
     }
 }
