@@ -180,12 +180,9 @@ namespace Tests.Diagnostics
             undefined += 42;    // Error [CS0103]: The name 'undefined' does not exist in the current context
             undefined = 42;     // Error [CS0103]: The name 'undefined' does not exist in the current context
 
-            var captured = 10;  // Noncompliant WIP Roslyn FP
-                                // Noncompliant@-1 WIP Roslyn FP duplicate
+            var captured = 10;
             Action a = () => { Console.WriteLine(captured); };
             captured += 11;     // Not reporting on captured local variables
-                                // Noncompliant@-1 WIP Roslyn FP
-                                // Noncompliant@-2 WIP Roslyn duplicate due to lambda CFG
             a();
 
             var add = 40;
@@ -351,8 +348,7 @@ namespace Tests.Diagnostics
 
         public List<int> Method(int i)
         {
-            var l = new List<int>();    // Noncompliant WIP Roslyn FP
-                                        // Noncompliant@-1 WIP Roslyn FP
+            var l = new List<int>();
 
             Func<List<int>> func = () =>
             {
@@ -360,18 +356,16 @@ namespace Tests.Diagnostics
             };
 
             var x = l; // Noncompliant
-                       // Noncompliant@-1    WIP Roslyn FP duplicate
+                       // Noncompliant@-1    WIP Roslyn FP duplicate due to lambda CFG
             x = null;  // Noncompliant
-                       // Noncompliant@-1    WIP Roslyn FP duplicate
+                       // Noncompliant@-1    WIP Roslyn FP duplicate due to lambda CFG
 
             return func();
         }
 
         public List<int> Method2(int i)
         {
-            var l = new List<int>();    // Noncompliant WIP Roslyn FP: Compliant, not reporting on captured variables
-                                        // Noncompliant@-1    WIP Roslyn FP duplicate
-
+            var l = new List<int>();
             return (() =>       // Error [CS0149] - no method name
             {
                 var k = 10;     // FIXME: Roslyn CFG WIP Non-compliant
@@ -429,11 +423,9 @@ namespace Tests.Diagnostics
 
         public List<int> Method6()
         {
-            var i = 10; // Noncompliant WIP Roslyn FP:
-                        // Noncompliant@-1    WIP Roslyn FP duplicate
+            var i = 10;
             Action a = () => { Console.WriteLine(i); };
-            i = 11;     // Noncompliant WIP Roslyn FP: Not reporting on captured local variables
-                        // Noncompliant@-1    WIP Roslyn FP duplicate
+            i = 11;     // Not reporting on captured local variables
             a();
 
             return null;

@@ -100,7 +100,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
                 private ISymbol ProcessAssignment(IOperationWrapper operation, IOperation target)
                 {
-                    if (owner.lva.ParameterOrLocalSymbol(target) is { } localTarget) //FIXME: && IsSymbolRelevant(localTarget))
+                    if (owner.lva.ParameterOrLocalSymbol(target) is { } localTarget && IsSymbolRelevant(localTarget))
                     {
                         if (!liveOut.Contains(localTarget) && !IsMuted(target.Syntax))   // FIXME: Unmute?
                         {

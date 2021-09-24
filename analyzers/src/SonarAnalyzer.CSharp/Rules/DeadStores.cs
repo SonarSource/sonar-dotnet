@@ -100,6 +100,17 @@ namespace SonarAnalyzer.Rules.CSharp
                 else
                 {
                     var cfg = node.CreateCfg(context.SemanticModel, symbol as IMethodSymbol);
+
+                    // FIXME: REMOVE DEBUG
+                    if(symbol.Name == "Assignment")
+                    {
+                        //System.Console.WriteLine(CFG.CfgSerializer.Serialize(cfg));
+                    }
+                    else
+                    {
+                        //return;
+                    }
+
                     var lva = new RoslynLiveVariableAnalysis(cfg);
                     var checker = new RoslynChecker(context, lva);
                     checker.Analyze(cfg.Blocks);
