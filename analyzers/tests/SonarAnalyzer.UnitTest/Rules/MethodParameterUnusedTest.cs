@@ -19,6 +19,7 @@
  */
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using SonarAnalyzer.Common;
 using SonarAnalyzer.UnitTest.MetadataReferences;
 using SonarAnalyzer.UnitTest.TestFramework;
 using CS = SonarAnalyzer.Rules.CSharp;
@@ -30,13 +31,25 @@ namespace SonarAnalyzer.UnitTest.Rules
     public class MethodParameterUnusedTest
     {
         [TestMethod]
-        public void MethodParameterUnused_CS() =>
-            Verifier.VerifyAnalyzer(@"TestCases\MethodParameterUnused.cs", new CS.MethodParameterUnused());
+        public void MethodParameterUnused_CS_SonarCfg() =>
+            Verifier.VerifyAnalyzer(@"TestCases\MethodParameterUnused.SonarCfg.cs", new CS.MethodParameterUnused(AnalyzerConfiguration.AlwaysEnabledWithSonarCfg));
+
+        [TestMethod]
+        public void MethodParameterUnused_CS_RoslynCfg() =>
+            Verifier.VerifyAnalyzer(@"TestCases\MethodParameterUnused.RoslynCfg.cs", new CS.MethodParameterUnused());   // Default constructor uses Roslyn CFG
+
+#if NETFRAMEWORK
+
+        [TestMethod]
+        public void MethodParameterUnused_CS_RoslynCfg_NetFx() =>
+            Verifier.VerifyAnalyzer(@"TestCases\MethodParameterUnused.RoslynCfg.NetFx.cs", new CS.MethodParameterUnused());
+
+#endif
 
         [TestMethod]
         public void MethodParameterUnused_CodeFix_CS() =>
-            Verifier.VerifyCodeFix(@"TestCases\MethodParameterUnused.cs",
-                                   @"TestCases\MethodParameterUnused.Fixed.cs",
+            Verifier.VerifyCodeFix(@"TestCases\MethodParameterUnused.RoslynCfg.cs",
+                                   @"TestCases\MethodParameterUnused.RoslynCfg.Fixed.cs",
                                    new CS.MethodParameterUnused(),
                                    new CS.MethodParameterUnusedCodeFixProvider());
 

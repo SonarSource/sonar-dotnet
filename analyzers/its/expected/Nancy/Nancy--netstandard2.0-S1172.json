@@ -41,6 +41,19 @@
 },
 {
 "id":  "S1172",
+"message":  "Remove this parameter 'viewName', whose value is ignored in the method.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\ViewEngines\DefaultViewLocator.cs",
+"region":  {
+"startLine":  243,
+"startColumn":  38,
+"endLine":  243,
+"endColumn":  53
+}
+}
+},
+{
+"id":  "S1172",
 "message":  "Remove this unused method parameter 'model'.",
 "location":  {
 "uri":  "sources\Nancy\src\Nancy\ViewEngines\SuperSimpleViewEngine\SuperSimpleViewEngine.cs",
