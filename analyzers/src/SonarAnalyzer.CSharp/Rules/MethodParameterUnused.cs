@@ -25,8 +25,11 @@ using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
-using SonarAnalyzer.Common;
+using SonarAnalyzer.CFG.LiveVariableAnalysis;
+using SonarAnalyzer.CFG.Roslyn;
 using SonarAnalyzer.CFG.Sonar;
+using SonarAnalyzer.Common;
+using SonarAnalyzer.Extensions;
 using SonarAnalyzer.Helpers;
 using SonarAnalyzer.LiveVariableAnalysis.CSharp;
 using StyleCop.Analyzers.Lightup;
@@ -43,21 +46,22 @@ namespace SonarAnalyzer.Rules.CSharp
         private const string MessageFormat = "Remove this {0}.";
 
         private static readonly DiagnosticDescriptor Rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
+        private readonly bool useSonarCfg;
+
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
 
+        public MethodParameterUnused() : this(AnalyzerConfiguration.AlwaysEnabled) { }
+
+        internal /* for testing */ MethodParameterUnused(IAnalyzerConfiguration configuration) =>
+            useSonarCfg = configuration.UseSonarCfg();
+
         protected override void Initialize(SonarAnalysisContext context) =>
-            context.RegisterSyntaxNodeActionInNonGenerated(
-                c =>
+            context.RegisterSyntaxNodeActionInNonGenerated(c =>
                 {
                     var declaration = CreateContext(c);
-
-                    // Don't report on empty methods
-                    if ((declaration.Body == null && declaration.ExpressionBody == null) ||  declaration.Body?.Statements.Count == 0)
-                    {
-                        return;
-                    }
-
-                    if (declaration.Symbol == null
+                    if ((declaration.Body == null && declaration.ExpressionBody == null)
+                        || declaration.Body?.Statements.Count == 0  // Don't report on empty methods
+                        || declaration.Symbol == null
                         || !declaration.Symbol.ContainingType.IsClassOrStruct()
                         || declaration.Symbol.IsMainMethod()
                         || OnlyThrowsNotImplementedException(declaration))
@@ -95,7 +99,6 @@ namespace SonarAnalyzer.Rules.CSharp
             }
 
             var throwExpressions = Enumerable.Empty<ExpressionSyntax>();
-
             if (declaration.ExpressionBody != null)
             {
                 if (ThrowExpressionSyntaxWrapper.IsInstance(declaration.ExpressionBody.Expression))
@@ -115,7 +118,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 .Any(x => x != null && x.ContainingType.Is(KnownType.System_NotImplementedException));
         }
 
-        private static void ReportUnusedParametersOnMethod(MethodContext declaration)
+        private void ReportUnusedParametersOnMethod(MethodContext declaration)
         {
             if (!MethodCanBeSafelyChanged(declaration.Symbol))
             {
@@ -133,7 +136,7 @@ namespace SonarAnalyzer.Rules.CSharp
             ReportOnDeadParametersAtEntry(declaration, unusedParameters);
         }
 
-        private static void ReportOnDeadParametersAtEntry(MethodContext declaration, IImmutableList<IParameterSymbol> noReportOnParameters)
+        private void ReportOnDeadParametersAtEntry(MethodContext declaration, IImmutableList<IParameterSymbol> noReportOnParameters)
         {
             var bodyNode = (CSharpSyntaxNode)declaration.Body ?? declaration.ExpressionBody;
             if (bodyNode == null || declaration.Context.Node.IsKind(SyntaxKind.ConstructorDeclaration))
@@ -149,15 +152,23 @@ namespace SonarAnalyzer.Rules.CSharp
             excludedParameters = excludedParameters.AddRange(declaration.Symbol.Parameters.Where(p => p.RefKind != RefKind.None));
 
             var candidateParameters = declaration.Symbol.Parameters.Except(excludedParameters);
-            if (!candidateParameters.Any())
+            if (candidateParameters.Any() && ComputeLva(declaration, bodyNode) is { } lva)
             {
-                return;
+                ReportOnUnusedParameters(declaration, candidateParameters.Except(lva.LiveInEntryBlock).Except(lva.CapturedVariables), MessageDead, isRemovable: false);
             }
-            if (CSharpControlFlowGraph.TryGet(bodyNode, declaration.Context.SemanticModel, out var cfg))
+        }
+
+        private LvaResult ComputeLva(MethodContext declaration, CSharpSyntaxNode body)
+        {
+            if (useSonarCfg)
             {
-                var lva = new SonarCSharpLiveVariableAnalysis(cfg, declaration.Symbol, declaration.Context.SemanticModel);
-                var liveParameters = lva.LiveIn(cfg.EntryBlock).OfType<IParameterSymbol>();
-                ReportOnUnusedParameters(declaration, candidateParameters.Except(liveParameters).Except(lva.CapturedVariables), MessageDead, isRemovable: false);
+                return CSharpControlFlowGraph.TryGet(body, declaration.Context.SemanticModel, out var cfg)
+                    ? new LvaResult(declaration, cfg)
+                    : null;
+            }
+            else
+            {
+                return new LvaResult(body.CreateCfg(declaration.Context.SemanticModel, declaration.Symbol));
             }
         }
 
@@ -169,19 +180,15 @@ namespace SonarAnalyzer.Rules.CSharp
             }
 
             var parameters = declaration.ParameterList.Parameters
-                .Select(p => new
-                {
-                    Syntax = p,
-                    Symbol = declaration.Context.SemanticModel.GetDeclaredSymbol(p)
-                })
-                .Where(p => p.Symbol != null);
+                .Select(x => new NodeAndSymbol(x, declaration.Context.SemanticModel.GetDeclaredSymbol(x)))
+                .Where(x => x.Symbol != null);
 
             foreach (var parameter in parameters)
             {
                 if (parametersToReportOn.Contains(parameter.Symbol))
                 {
                     declaration.Context.ReportDiagnosticWhenActive(
-                        Diagnostic.Create(Rule, parameter.Syntax.GetLocation(),
+                        Diagnostic.Create(Rule, parameter.Node.GetLocation(),
                         ImmutableDictionary<string, string>.Empty.Add(IsRemovableKey, isRemovable.ToString()),
                         string.Format(messagePattern, parameter.Symbol.Name)));
                 }
@@ -190,9 +197,9 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private static bool MethodCanBeSafelyChanged(IMethodSymbol methodSymbol) =>
             methodSymbol.GetEffectiveAccessibility() == Accessibility.Private
-                && !methodSymbol.GetAttributes().Any()
-                && methodSymbol.IsChangeable()
-                && !methodSymbol.IsEventHandler();
+            && !methodSymbol.GetAttributes().Any()
+            && methodSymbol.IsChangeable()
+            && !methodSymbol.IsEventHandler();
 
         private static IImmutableList<IParameterSymbol> GetUnusedParameters(MethodContext declaration)
         {
@@ -217,20 +224,19 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private static ISet<IParameterSymbol> GetUsedParameters(ImmutableArray<IParameterSymbol> parameters, SyntaxNode body, SemanticModel semanticModel) =>
             body.DescendantNodes()
-            .Where(n => n.IsKind(SyntaxKind.IdentifierName))
-            .Select(identierName => semanticModel.GetSymbolInfo(identierName).Symbol as IParameterSymbol)
-            .Where(symbol => symbol != null && parameters.Contains(symbol))
-            .ToHashSet();
+                .Where(x => x.IsKind(SyntaxKind.IdentifierName))
+                .Select(x => semanticModel.GetSymbolInfo(x).Symbol as IParameterSymbol)
+                .Where(x => x != null && parameters.Contains(x))
+                .ToHashSet();
 
         private static bool IsUsedAsEventHandlerFunctionOrAction(MethodContext declaration) =>
-            declaration.Symbol.ContainingType.DeclaringSyntaxReferences
-            .Select(r => r.GetSyntax())
-            .Any(n => IsMethodUsedAsEventHandlerFunctionOrActionWithinNode(declaration.Symbol, n, n.EnsureCorrectSemanticModelOrDefault(declaration.Context.SemanticModel)));
+            declaration.Symbol.ContainingType.DeclaringSyntaxReferences.Select(x => x.GetSyntax())
+                .Any(x => IsMethodUsedAsEventHandlerFunctionOrActionWithinNode(declaration.Symbol, x, x.EnsureCorrectSemanticModelOrDefault(declaration.Context.SemanticModel)));
 
         private static bool IsMethodUsedAsEventHandlerFunctionOrActionWithinNode(IMethodSymbol methodSymbol, SyntaxNode typeDeclaration, SemanticModel semanticModel) =>
             typeDeclaration.DescendantNodes()
-            .OfType<ExpressionSyntax>()
-            .Any(n => IsMethodUsedAsEventHandlerFunctionOrActionInExpression(methodSymbol, n, semanticModel));
+                .OfType<ExpressionSyntax>()
+                .Any(x => IsMethodUsedAsEventHandlerFunctionOrActionInExpression(methodSymbol, x, semanticModel));
 
         private static bool IsMethodUsedAsEventHandlerFunctionOrActionInExpression(IMethodSymbol methodSymbol, ExpressionSyntax expression, SemanticModel semanticModel) =>
             !expression.IsKind(SyntaxKind.InvocationExpression)
@@ -243,7 +249,7 @@ namespace SonarAnalyzer.Rules.CSharp
             var parentAsAssignment = expression.Parent as AssignmentExpressionSyntax;
 
             return !(expression.Parent is ExpressionSyntax)
-                || (parentAsAssignment != null && object.ReferenceEquals(expression, parentAsAssignment.Right));
+                || (parentAsAssignment != null && ReferenceEquals(expression, parentAsAssignment.Right));
         }
 
         private static bool IsCandidateSerializableConstructor(IImmutableList<IParameterSymbol> unusedParameters, IMethodSymbol methodSymbol) =>
@@ -277,6 +283,26 @@ namespace SonarAnalyzer.Rules.CSharp
                 ParameterList = parameterList;
                 Body = body;
                 ExpressionBody = expressionBody;
+            }
+        }
+
+        private class LvaResult
+        {
+            public readonly IReadOnlyCollection<ISymbol> LiveInEntryBlock;
+            public readonly IReadOnlyCollection<ISymbol> CapturedVariables;
+
+            public LvaResult(MethodContext declaration, IControlFlowGraph cfg)
+            {
+                var lva = new SonarCSharpLiveVariableAnalysis(cfg, declaration.Symbol, declaration.Context.SemanticModel);
+                LiveInEntryBlock = lva.LiveIn(cfg.EntryBlock).OfType<IParameterSymbol>().ToImmutableArray();
+                CapturedVariables = lva.CapturedVariables;
+            }
+
+            public LvaResult(ControlFlowGraph cfg)
+            {
+                var lva = new RoslynLiveVariableAnalysis(cfg);
+                LiveInEntryBlock = lva.LiveIn(cfg.EntryBlock).OfType<IParameterSymbol>().ToImmutableArray();
+                CapturedVariables = lva.CapturedVariables;
             }
         }
     }

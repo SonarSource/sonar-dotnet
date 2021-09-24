@@ -56,33 +56,9 @@ namespace SonarAnalyzer.Rules.CSharp
                 }
             }
 
-            public void CheckForNoExitMethod(SyntaxNodeAnalysisContext c, CSharpSyntaxNode body, SyntaxToken identifier, ISymbol symbol)
+            public void CheckForNoExitMethod(SyntaxNodeAnalysisContext c, CSharpSyntaxNode body, SyntaxToken identifier, IMethodSymbol symbol)
             {
-                var operation = c.SemanticModel.GetOperation(body.Parent);
-                var cfg = ControlFlowGraph.Create(operation.RootOperation().Syntax, c.SemanticModel);
-                var enclosingKinds = new HashSet<SyntaxKind>
-                {
-                    SyntaxKindEx.LocalFunctionStatement, SyntaxKind.SimpleLambdaExpression, SyntaxKind.AnonymousMethodExpression, SyntaxKind.ParenthesizedLambdaExpression
-                };
-                if (c.Node.IsKind(SyntaxKindEx.LocalFunctionStatement))
-                {
-                    // we need to go up and track all possible enclosing local function statements
-                    foreach (var enclosingFunction in c.Node.Ancestors().Where(x => enclosingKinds.Contains(x.Kind())).Reverse())
-                    {
-                        if (enclosingFunction.IsKind(SyntaxKindEx.LocalFunctionStatement))
-                        {
-                            cfg = cfg.GetLocalFunctionControlFlowGraph(c.SemanticModel.GetDeclaredSymbol(enclosingFunction) as IMethodSymbol);
-                        }
-                        else
-                        {
-                            var operationWrapper = cfg.FlowAnonymousFunctionOperations().Single(x => x.WrappedOperation.Syntax == enclosingFunction);
-                            cfg = cfg.GetAnonymousFunctionControlFlowGraph(operationWrapper);
-                        }
-                    }
-
-                    cfg = cfg.GetLocalFunctionControlFlowGraph(symbol as IMethodSymbol);
-                }
-
+                var cfg = body.CreateCfg(c.SemanticModel, symbol);
                 var context = new RecursionContext<ControlFlowGraph>(cfg, symbol, identifier.GetLocation(), c, "method's recursion");
                 var walker = new RecursionSearcher(context);
                 walker.CheckPaths();

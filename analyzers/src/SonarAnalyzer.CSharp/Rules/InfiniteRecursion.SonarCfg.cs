@@ -70,7 +70,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 }
             }
 
-            public void CheckForNoExitMethod(SyntaxNodeAnalysisContext c, CSharpSyntaxNode body, SyntaxToken identifier, ISymbol symbol)
+            public void CheckForNoExitMethod(SyntaxNodeAnalysisContext c, CSharpSyntaxNode body, SyntaxToken identifier, IMethodSymbol symbol)
             {
                 if (CSharpControlFlowGraph.TryGet(body, c.SemanticModel, out var cfg))
                 {
