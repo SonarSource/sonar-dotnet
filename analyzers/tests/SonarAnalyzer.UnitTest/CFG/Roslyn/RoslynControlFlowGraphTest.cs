@@ -22,6 +22,7 @@ using System.Linq;
 using FluentAssertions;
 using Microsoft.CodeAnalysis.Operations;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using SonarAnalyzer.CFG.Helpers;
 using SonarAnalyzer.CFG.Roslyn;
 using StyleCop.Analyzers.Lightup;
 using FlowAnalysis = Microsoft.CodeAnalysis.FlowAnalysis;
@@ -111,6 +112,17 @@ public class Sample {
             anonymousFunctionOperations.Should().HaveCount(2);
             cfg.GetAnonymousFunctionControlFlowGraph(anonymousFunctionOperations[0]).Should().NotBeNull();
             cfg.GetAnonymousFunctionControlFlowGraph(anonymousFunctionOperations[1]).Should().NotBeNull();
+        }
+
+        [TestMethod]
+        public void RoslynCfgSupportedVersions()
+        {
+            // We are running on 3 rd major version - it is the minimum requirement
+            RoslynHelper.IsRoslynCfgSupported().Should().BeTrue();
+            // If we set minimum requirement to 2 - we will able to pass the check even with old MsBuild
+            RoslynHelper.IsRoslynCfgSupported(2).Should().BeTrue();
+            // If we set minimum requirement to 100 - we won't be able to pass the check
+            RoslynHelper.IsRoslynCfgSupported(100).Should().BeFalse();
         }
     }
 }
