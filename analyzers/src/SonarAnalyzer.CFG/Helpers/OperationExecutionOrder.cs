@@ -81,7 +81,7 @@ namespace SonarAnalyzer.Helpers
                         Current = current.DisposeEnumeratorAndReturnOperation();
                         return true;
                     }
-                    else if (!owner.reverseOrder && stack.Peek().NextChild() is { } child)
+                    else if (stack.Peek().NextChild() is { } child)
                     {
                         stack.Push(new StackItem(child));
                     }
