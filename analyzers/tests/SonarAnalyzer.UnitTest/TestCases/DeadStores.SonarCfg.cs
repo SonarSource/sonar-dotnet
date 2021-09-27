@@ -53,6 +53,27 @@ namespace Tests.Diagnostics
                 objectNull, intZero, intOne, intMinusOne, intPlusOne);
         }
 
+        public void ExpressionResultsInConstantIgnoredValue()
+        {
+            var boolFalse = 0 != 0;     // Noncompliant, only explicit 'false' is ignored by the rule
+            boolFalse = true;
+
+            var boolTrue = 0 == 0;      // Noncompliant
+            boolTrue = false;
+
+            var intZero = 1 - 1;        // Noncompliant
+            intZero = 42;
+
+            var intOne = 0 + 1;         // Noncompliant
+            intOne = 42;
+
+            var intMinusOne = 0 - 1;    // Noncompliant
+            intMinusOne = 42;
+
+            // Variables should be used in order the rule to trigger
+            Console.WriteLine("", boolFalse, boolTrue, intZero, intOne, intMinusOne);
+        }
+
         public void Defaults()
         {
             var s = default(string); // Compliant

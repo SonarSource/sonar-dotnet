@@ -22,6 +22,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using Microsoft.CodeAnalysis;
+using Microsoft.CodeAnalysis.CSharp;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.CFG.LiveVariableAnalysis;
 using SonarAnalyzer.CFG.Roslyn;
@@ -102,13 +104,10 @@ namespace SonarAnalyzer.Rules.CSharp
                 {
                     if (owner.lva.ParameterOrLocalSymbol(target) is { } localTarget && IsSymbolRelevant(localTarget))
                     {
-                        if (!liveOut.Contains(localTarget) && !IsMuted(target.Syntax))   // FIXME: Unmute?
+                        if (!liveOut.Contains(localTarget)
+                            && !IsAllowedInitialization()
+                            && !IsMuted(target.Syntax))   // FIXME: Unmute?
                         {
-                            if (operation.WrappedOperation.Syntax.GetLocation().GetLineSpan().StartLinePosition.Line == 192)
-                            {
-                                System.Diagnostics.Debugger.Break();
-                            }
-
                             ReportIssue(operation.WrappedOperation.Syntax.GetLocation(), localTarget);  // FIXME: Better overload?
                         }
                         return localTarget;
@@ -117,11 +116,17 @@ namespace SonarAnalyzer.Rules.CSharp
                     {
                         return null;
                     }
+
+                    bool IsAllowedInitialization() =>
+                        operation.WrappedOperation.Syntax is VariableDeclaratorSyntax variableDeclarator
+                        && variableDeclarator.Initializer != null
+                        && IsAllowedInitializationValue(variableDeclarator.Initializer.Value);
                 }
 
                 // FIXME: Temporary duplicate
                 private bool IsMuted(SyntaxNode node) =>
                     new MutedSyntaxWalker(SemanticModel, node).IsMuted();
+
             }
         }
     }

@@ -144,7 +144,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     if (SemanticModel.GetDeclaredSymbol(declarator) is ILocalSymbol symbol && IsSymbolRelevant(symbol))
                     {
                         if (declarator.Initializer != null
-                            && !IsAllowedInitialization(declarator.Initializer)
+                            && !IsAllowedInitializationValue(declarator.Initializer.Value)
                             && !symbol.IsConst
                             && symbol.RefKind() == RefKind.None
                             && !liveOut.Contains(symbol)
@@ -157,30 +157,6 @@ namespace SonarAnalyzer.Rules.CSharp
                         liveOut.Remove(symbol);
                     }
                 }
-
-                private bool IsAllowedInitialization(EqualsValueClauseSyntax initializer) =>
-                    initializer.Value.IsKind(SyntaxKind.DefaultExpression)
-                    || IsAllowedObjectInitialization(initializer.Value)
-                    || IsAllowedBooleanInitialization(initializer.Value)
-                    || IsAllowedNumericInitialization(initializer.Value)
-                    || IsAllowedUnaryNumericInitialization(initializer.Value)
-                    || IsAllowedStringInitialization(initializer.Value);
-
-                private static bool IsAllowedObjectInitialization(ExpressionSyntax expression) =>
-                    expression.IsNullLiteral();
-
-                private static bool IsAllowedBooleanInitialization(ExpressionSyntax expression) =>
-                    expression.IsAnyKind(SyntaxKind.TrueLiteralExpression, SyntaxKind.FalseLiteralExpression);
-
-                private static bool IsAllowedNumericInitialization(ExpressionSyntax expression) =>
-                    expression.IsKind(SyntaxKind.NumericLiteralExpression) && AllowedNumericValues.Contains(((LiteralExpressionSyntax)expression).Token.ValueText);  // -1, 0 or 1
-
-                private static bool IsAllowedUnaryNumericInitialization(ExpressionSyntax expression) =>
-                    expression.IsAnyKind(SyntaxKind.UnaryPlusExpression, SyntaxKind.UnaryMinusExpression) && IsAllowedNumericInitialization(((PrefixUnaryExpressionSyntax)expression).Operand);
-
-                private bool IsAllowedStringInitialization(ExpressionSyntax expression) =>
-                    (expression.IsKind(SyntaxKind.StringLiteralExpression) && AllowedStringValues.Contains(((LiteralExpressionSyntax)expression).Token.ValueText))
-                    || expression.IsStringEmpty(SemanticModel);
 
                 private bool IsUnusedLocal(ISymbol declaredSymbol) =>
                     node.DescendantNodes()

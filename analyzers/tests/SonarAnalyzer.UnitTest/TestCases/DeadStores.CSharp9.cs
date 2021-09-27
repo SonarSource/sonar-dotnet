@@ -13,15 +13,15 @@ void NativeInts(nuint param)
 {
     param = 1;      // Noncompliant
 
-    nuint zero = 0; // Noncompliant WIP Roslyn FP: ignored value
+    nuint zero = 0; // Compliant, ignored value
     zero = 1;
     Foo(zero);
 
-    nint minusOne = -1; // Noncompliant WIP Roslyn FP: ignored value
+    nint minusOne = -1; // Compliant, ignored value
     minusOne = 1;
     Foo(minusOne);
 
-    nint one = 1;       // Noncompliant WIP Roslyn FP: ignored value
+    nint one = 1;       // Compliant, ignored value
     one = 2;
     Foo(one);
 

@@ -20,6 +20,7 @@
 
 using System.Collections.Generic;
 using System.Collections.Immutable;
+using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
@@ -42,8 +43,8 @@ namespace SonarAnalyzer.Rules.CSharp
         private const string MessageFormat = "Remove this useless assignment to local variable '{0}'.";
 
         private static readonly DiagnosticDescriptor Rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
-        private static readonly ISet<string> AllowedNumericValues = new HashSet<string> { "-1", "0", "1" };
-        private static readonly ISet<string> AllowedStringValues = new HashSet<string> { string.Empty };
+        private static readonly string[] AllowedNumericValues = new[] { "-1", "0", "1" };
+        private static readonly string[] AllowedStringValues = new[] { string.Empty };
         private readonly bool useSonarCfg;
 
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
@@ -102,7 +103,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     var cfg = node.CreateCfg(context.SemanticModel, symbol as IMethodSymbol);
 
                     // FIXME: REMOVE DEBUG
-                    if(symbol.Name == "Assignment")
+                    if (symbol.Name == "IgnoredValues")
                     {
                         //System.Console.WriteLine(CFG.CfgSerializer.Serialize(cfg));
                     }
@@ -170,6 +171,24 @@ namespace SonarAnalyzer.Rules.CSharp
 
                 protected bool IsLocal(ISymbol symbol) =>
                     owner.IsLocal(symbol);
+
+                protected bool IsAllowedInitializationValue(ExpressionSyntax value) =>
+                    value.IsKind(SyntaxKind.DefaultExpression)
+                    || value.IsNullLiteral()
+                    || value.IsAnyKind(SyntaxKind.TrueLiteralExpression, SyntaxKind.FalseLiteralExpression)
+                    || IsAllowedNumericInitialization(value)
+                    || IsAllowedUnaryNumericInitialization(value)
+                    || IsAllowedStringInitialization(value);
+
+                private static bool IsAllowedNumericInitialization(ExpressionSyntax expression) =>
+                    expression.IsKind(SyntaxKind.NumericLiteralExpression) && AllowedNumericValues.Contains(((LiteralExpressionSyntax)expression).Token.ValueText);  // -1, 0 or 1
+
+                private static bool IsAllowedUnaryNumericInitialization(ExpressionSyntax expression) =>
+                    expression.IsAnyKind(SyntaxKind.UnaryPlusExpression, SyntaxKind.UnaryMinusExpression) && IsAllowedNumericInitialization(((PrefixUnaryExpressionSyntax)expression).Operand);
+
+                private bool IsAllowedStringInitialization(ExpressionSyntax expression) =>
+                    (expression.IsKind(SyntaxKind.StringLiteralExpression) && AllowedStringValues.Contains(((LiteralExpressionSyntax)expression).Token.ValueText))
+                    || expression.IsStringEmpty(SemanticModel);
             }
         }
     }

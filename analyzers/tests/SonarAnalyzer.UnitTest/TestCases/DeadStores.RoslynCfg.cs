@@ -21,50 +21,70 @@ namespace Tests.Diagnostics
 
         public void IgnoredValues()
         {
-            var stringEmpty = string.Empty; // Noncompliant WIP Roslyn FP: Compliant
+            var stringEmpty = string.Empty; // Compliant
             stringEmpty = "other";
 
-            string stringNull = null;   // Noncompliant WIP Roslyn FP: Compliant
+            string stringNull = null;   // Compliant
             stringNull = "other";
 
-            var boolFalse = false;      // Noncompliant WIP Roslyn FP: Compliant
+            var boolFalse = false;      // Compliant
             boolFalse = true;
 
-            var boolTrue = true;        // Noncompliant WIP Roslyn FP: Compliant
+            var boolTrue = true;        // Compliant
             boolTrue = false;
 
-            object objectNull = null;   // Noncompliant WIP Roslyn FP: Compliant
+            object objectNull = null;   // Compliant
             objectNull = new object();
 
-            var intZero = 0;            // Noncompliant WIP Roslyn FP: Compliant
+            var intZero = 0;            // Compliant
             intZero = 42;
 
-            var intOne = 1;             // Noncompliant WIP Roslyn FP: Compliant
+            var intOne = 1;             // Compliant
             intOne = 42;
 
-            var intMinusOne = -1;       // Noncompliant WIP Roslyn FP: Compliant
+            var intMinusOne = -1;       // Compliant
             intMinusOne = 42;
 
-            var intPlusOne = +1;        // Noncompliant WIP Roslyn FP: Compliant
+            var intPlusOne = +1;        // Compliant
             intPlusOne = 42;
 
             // Variables should be used in order the rule to trigger
-            Console.WriteLine("", stringEmpty, stringNull, boolFalse, boolTrue,
-                objectNull, intZero, intOne, intMinusOne, intPlusOne);
+            Console.WriteLine("", stringEmpty, stringNull, boolFalse, boolTrue, objectNull, intZero, intOne, intMinusOne, intPlusOne);
+        }
+
+        public void ExpressionResultsInConstantIgnoredValue()
+        {
+            var boolFalse = 0 != 0;     // Noncompliant, only explicit 'false' is ignored by the rule
+            boolFalse = true;
+
+            var boolTrue = 0 == 0;      // Noncompliant
+            boolTrue = false;
+
+            var intZero = 1 - 1;        // Noncompliant
+            intZero = 42;
+
+            var intOne = 0 + 1;         // Noncompliant
+            intOne = 42;
+
+            var intMinusOne = 0 - 1;    // Noncompliant
+            intMinusOne = 42;
+
+            // Variables should be used in order the rule to trigger
+            Console.WriteLine("", boolFalse, boolTrue, intZero, intOne, intMinusOne);
         }
 
         public void Defaults()
         {
-            var s = default(string);    // Noncompliant WIP Roslyn FP: Compliant
+            var s = default(string);    // Compliant
             s = "";
 
-            var b = default(bool);      // Noncompliant WIP Roslyn FP: Compliant
+            var b = default(bool);      // Compliant
             b = true;
 
-            var o = default(object);    // Noncompliant WIP Roslyn FP: Compliant
+            var o = default(object);    // Compliant
             o = new object();
 
-            var i = default(int);       // Noncompliant WIP Roslyn FP: Compliant
+            var i = default(int);       // Compliant
             i = 42;
 
             // Variables should be used in order the rule to trigger
@@ -121,7 +141,7 @@ namespace Tests.Diagnostics
 
         void calculateRate2(int a, int b)
         {
-            var x = 0;  // Noncompliant WIP Roslyn FP: Compliant, ignored value
+            var x = 0;  // Compliant, ignored value
             x = 1;      // FN, muted due to try/catch
             try
             {
@@ -279,7 +299,7 @@ namespace Tests.Diagnostics
 
         public int Switch1(int x)
         {
-            var b = 0; // Noncompliant WIP Roslyn FP: Compliant
+            var b = 0; // Compliant, ignored value
             switch (x)
             {
                 case 6:
@@ -707,7 +727,7 @@ namespace Tests.Diagnostics
 
         public void Foo()
         {
-            bool shouldCatch = false;   // Noncompliant WIP Roslyn FP
+            bool shouldCatch = false;   // Compliant, ignored value
             try
             {
                 shouldCatch = true; // ok, is read in catch filter
@@ -721,7 +741,7 @@ namespace Tests.Diagnostics
 
         public void Bar(bool cond)
         {
-            bool shouldCatch = false;   // Noncompliant WIP Roslyn FP
+            bool shouldCatch = false;   // Compliant, ignored value
             try
             {
                 DoStuff();
@@ -831,7 +851,7 @@ namespace Tests.Diagnostics
 
         public static long WithMinus1(string path)
         {
-            long length = -1;   // Noncompliant WIP Roslyn FP:
+            long length = -1;   // Compliant, ignored value
             try
             {
                 length = new System.IO.FileInfo(path).Length;
@@ -875,7 +895,7 @@ namespace Tests.Diagnostics
 
         public static string WithDefault(string path)
         {
-            string length = default(string);    // Noncompliant WIP Roslyn FP:
+            string length = default(string);    // Compliant, ignored value
             try
             {
                 length = new System.IO.FileInfo(path).Length.ToString();
@@ -894,8 +914,8 @@ namespace Tests.Diagnostics
         public int Start()
         {
             const int x = -1;
-            int exitCode = x; // Noncompliant WIP Roslyn FP: Compliant
-            Exception exception = null; //Noncompliant WIP Roslyn FP:
+            int exitCode = x;           // Noncompliant WIP Roslyn FP: Compliant
+            Exception exception = null; // Compliant, ignored value
 
             try
             {
@@ -935,7 +955,7 @@ namespace Tests.Diagnostics
     {
         public static void DeadStore(int[] array)
         {
-            var x = 0;      // Noncompliant WIP Roslyn FP:
+            var x = 0;      // Compliant, ignored value
             x = array[^1];  // FN, muted due to try/catch
             try
             {
@@ -1089,7 +1109,7 @@ namespace Tests.Diagnostics
     {
         public int WithTryCatch()
         {
-            var name = string.Empty;    // Noncompliant WIP Roslyn FP:
+            var name = string.Empty;    // Compliant, ignored value
             try
             {
                 var values = GetValues();
@@ -1116,7 +1136,7 @@ namespace Tests.Diagnostics
         public static void CreateDirectory(string directory)
         {
             const int CopyWaitInterval = 250;   // Noncompliant WIP Roslyn FP:
-            bool created = false;               // Noncompliant WIP Roslyn FP:
+            bool created = false;               // Compliant, ignored value
             int attempts = 10;
 
             do
