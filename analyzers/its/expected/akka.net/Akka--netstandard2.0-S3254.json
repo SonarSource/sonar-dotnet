@@ -45,19 +45,6 @@
 "location":  {
 "uri":  "sources\akka.net\src\core\Akka\Actor\CoordinatedShutdown.cs",
 "region":  {
-"startLine":  573,
-"startColumn":  57,
-"endLine":  573,
-"endColumn":  61
-}
-}
-},
-{
-"id":  "S3254",
-"message":  "Remove this default value assigned to parameter 'default'.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\CoordinatedShutdown.cs",
-"region":  {
 "startLine":  574,
 "startColumn":  56,
 "endLine":  574,

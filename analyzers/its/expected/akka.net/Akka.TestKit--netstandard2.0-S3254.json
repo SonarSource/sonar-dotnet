@@ -84,45 +84,6 @@
 "location":  {
 "uri":  "sources\akka.net\src\core\Akka.TestKit\TestKitSettings.cs",
 "region":  {
-"startLine":  37,
-"startColumn":  79,
-"endLine":  37,
-"endColumn":  83
-}
-}
-},
-{
-"id":  "S3254",
-"message":  "Remove this default value assigned to parameter 'default'.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka.TestKit\TestKitSettings.cs",
-"region":  {
-"startLine":  38,
-"startColumn":  90,
-"endLine":  38,
-"endColumn":  94
-}
-}
-},
-{
-"id":  "S3254",
-"message":  "Remove this default value assigned to parameter 'default'.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka.TestKit\TestKitSettings.cs",
-"region":  {
-"startLine":  39,
-"startColumn":  84,
-"endLine":  39,
-"endColumn":  88
-}
-}
-},
-{
-"id":  "S3254",
-"message":  "Remove this default value assigned to parameter 'default'.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka.TestKit\TestKitSettings.cs",
-"region":  {
 "startLine":  41,
 "startColumn":  77,
 "endLine":  41,
