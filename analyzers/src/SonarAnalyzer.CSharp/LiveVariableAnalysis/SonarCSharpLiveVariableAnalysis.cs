@@ -35,7 +35,7 @@ namespace SonarAnalyzer.LiveVariableAnalysis.CSharp
     {
         private readonly SemanticModel semanticModel;
 
-        protected override Block ExitBlock => cfg.ExitBlock;
+        protected override Block ExitBlock => Cfg.ExitBlock;
 
         public SonarCSharpLiveVariableAnalysis(IControlFlowGraph controlFlowGraph, ISymbol originalDeclaration, SemanticModel semanticModel) : base(controlFlowGraph, originalDeclaration)
         {
@@ -58,7 +58,7 @@ namespace SonarAnalyzer.LiveVariableAnalysis.CSharp
             identifier.GetFirstNonParenthesizedParent() is ArgumentSyntax argument && argument.RefOrOutKeyword.IsKind(SyntaxKind.OutKeyword);
 
         protected override IEnumerable<Block> ReversedBlocks() =>
-            cfg.Blocks.Reverse();
+            Cfg.Blocks.Reverse();
 
         protected override IEnumerable<Block> Successors(Block block) =>
             block.SuccessorBlocks;
