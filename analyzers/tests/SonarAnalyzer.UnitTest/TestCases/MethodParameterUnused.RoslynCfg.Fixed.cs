@@ -115,19 +115,19 @@ namespace Tests.TestCases
             arg.ToString(); // Use
         }
 
-        private void SelfAssigned(int arg)  // Fixed
+        private void SelfAssigned(int arg)
         {
             arg = arg;
             arg.ToString(); // Use
         }
 
-        private void UpdatedFromSelf(int arg)     // Fixed
+        private void UpdatedFromSelf(int arg)
         {
             arg = arg + 1;
             arg.ToString(); // Use
         }
 
-        private void UpdatedFromSelf(string arg)      // Fixed
+        private void UpdatedFromSelf(string arg)
         {
             arg = arg.Replace("'", "''");
             arg.ToString(); // Use

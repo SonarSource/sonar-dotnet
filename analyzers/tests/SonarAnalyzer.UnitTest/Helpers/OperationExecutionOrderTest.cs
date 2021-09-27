@@ -32,23 +32,18 @@ namespace SonarAnalyzer.UnitTest.Helpers
     [TestClass]
     public class OperationExecutionOrderTest
     {
-        [TestMethod]
-        public void LinearExecutionOrder()
+        [DataTestMethod]
+        [DataRow(false, DisplayName = "Execution order")]
+        [DataRow(true, DisplayName = "Reversed execution order")]
+        public void Linear(bool reverseOrder)
         {
             const string code = @"
 var a = 1;
 var b = 2;
+a = b + 1;
 Method();";
-            var sut = Compile(code, false);
-            var list = new List<string>();
-            foreach (var operation in sut)   // Act
+            var expected = new[]
             {
-                if (!operation.IsImplicit)
-                {
-                    list.Add(operation.Instance.Kind + ": " + operation.Instance.Syntax);
-                }
-            }
-            list.Should().OnlyContainInOrder(
                 "Literal: 1",
                 "VariableInitializer: = 1",
                 "VariableDeclarator: a = 1",
@@ -59,59 +54,29 @@ Method();";
                 "VariableDeclarator: b = 2",
                 "VariableDeclaration: var b = 2",
                 "VariableDeclarationGroup: var b = 2;",
-                "Invocation: Method()",
-                "ExpressionStatement: Method();");
-        }
-
-        [TestMethod]
-        public void LinearExecutionOrder_Reversed()
-        {
-            const string code = @"
-var a = 1;
-var b = 2;
-Method();";
-            var sut = Compile(code, true);
-            var list = new List<string>();
-            foreach (var operation in sut)   // Act
-            {
-                if (!operation.IsImplicit)
-                {
-                    list.Add(operation.Instance.Kind + ": " + operation.Instance.Syntax);
-                }
-            }
-
-            list.Should().OnlyContainInOrder(
-                "Invocation: Method()",
-                "ExpressionStatement: Method();",
-                "Literal: 2",
-                "VariableInitializer: = 2",
-                "VariableDeclarator: b = 2",
-                "VariableDeclaration: var b = 2",
-                "VariableDeclarationGroup: var b = 2;",
+                "LocalReference: a",
+                "LocalReference: b",
                 "Literal: 1",
-                "VariableInitializer: = 1",
-                "VariableDeclarator: a = 1",
-                "VariableDeclaration: var a = 1",
-                "VariableDeclarationGroup: var a = 1;");
+                "BinaryOperator: b + 1",
+                "SimpleAssignment: a = b + 1",
+                "ExpressionStatement: a = b + 1;",
+                "Invocation: Method()",
+                "ExpressionStatement: Method();"
+            };
+            ValidateOrder(code, expected, reverseOrder);
         }
 
-        [TestMethod]
-        public void NestedExecutionOrder()
+        [DataTestMethod]
+        [DataRow(false, DisplayName = "Execution order")]
+        [DataRow(true, DisplayName = "Reversed execution order")]
+        public void Nested(bool reverseOrder)
         {
             const string code = @"
 Method(0);
 Method(1, Nested(40 + 2), 3);
 Method(4);";
-            var sut = Compile(code, false);
-            var list = new List<string>();
-            foreach (var operation in sut)   // Act
+            var expected = new[]
             {
-                if (!operation.IsImplicit)
-                {
-                    list.Add(operation.Instance.Kind + ": " + operation.Instance.Syntax);
-                }
-            }
-            list.Should().OnlyContainInOrder(
                 "Literal: 0",
                 "Invocation: Method(0)",
                 "ExpressionStatement: Method(0);",
@@ -125,40 +90,9 @@ Method(4);";
                 "ExpressionStatement: Method(1, Nested(40 + 2), 3);",
                 "Literal: 4",
                 "Invocation: Method(4)",
-                "ExpressionStatement: Method(4);");
-        }
-
-        [TestMethod]
-        public void NestedExecutionOrder_Reversed()
-        {
-            const string code = @"
-Method(0);
-Method(1, Nested(40 + 2), 3);
-Method(4);";
-            var sut = Compile(code, true);
-            var list = new List<string>();
-            foreach (var operation in sut)   // Act
-            {
-                if (!operation.IsImplicit)
-                {
-                    list.Add(operation.Instance.Kind + ": " + operation.Instance.Syntax);
-                }
-            }
-            list.Should().OnlyContainInOrder(
-                "Literal: 4",
-                "Invocation: Method(4)",
-                "ExpressionStatement: Method(4);",
-                "Literal: 3",
-                "Literal: 2",
-                "Literal: 40",
-                "BinaryOperator: 40 + 2",
-                "Invocation: Nested(40 + 2)",
-                "Literal: 1",
-                "Invocation: Method(1, Nested(40 + 2), 3)",
-                "ExpressionStatement: Method(1, Nested(40 + 2), 3);",
-                "Literal: 0",
-                "Invocation: Method(0)",
-                "ExpressionStatement: Method(0);");
+                "ExpressionStatement: Method(4);"
+            };
+            ValidateOrder(code, expected, reverseOrder);
         }
 
         [TestMethod]
@@ -183,6 +117,24 @@ Method(4);";
             var enumerator = ((IEnumerable)Compile("Method(0);", false)).GetEnumerator();
             enumerator.MoveNext().Should().BeTrue();
             enumerator.Current.Should().NotBeNull();
+        }
+
+        private static void ValidateOrder(string code, string[] expected, bool reverseOrder)
+        {
+            var sut = Compile(code, reverseOrder);
+            var list = new List<string>();
+            if (reverseOrder)
+            {
+                expected = expected.Reverse().ToArray();
+            }
+            foreach (var operation in sut)   // Act
+            {
+                if (!operation.IsImplicit)
+                {
+                    list.Add(operation.Instance.Kind + ": " + operation.Instance.Syntax);
+                }
+            }
+            list.Should().OnlyContainInOrder(expected);
         }
 
         private static OperationExecutionOrder Compile(string methodBody, bool reverseOrder)

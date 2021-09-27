@@ -130,8 +130,8 @@ Method(intParameter);
 Method(stringParameter);";
             var context = CreateContextCS(code, additionalParameters: "string stringParameter");
 
-            context.ValidateEntry(/*FIXME: new LiveIn("intParameter", "stringParameter"), new LiveOut("intParameter", "stringParameter")*/);
-            context.Validate("Method(intParameter);"/*FIXME: , new LiveIn("intParameter", "stringParameter")*/);
+            context.ValidateEntry(new LiveIn("intParameter", "stringParameter"), new LiveOut("intParameter", "stringParameter"));
+            context.Validate("Method(intParameter);", new LiveIn("intParameter", "stringParameter"));
         }
 
         [TestMethod]
@@ -142,8 +142,8 @@ intParameter = intParameter;
 Method(intParameter);";
             var context = CreateContextCS(code);
 
-            context.ValidateEntry(/*FIXME: new LiveIn("intParameter"), new LiveOut("intParameter")*/);
-            context.Validate("Method(intParameter);"/*FIXME: , new LiveIn("intParameter")*/);
+            context.ValidateEntry(new LiveIn("intParameter"), new LiveOut("intParameter"));
+            context.Validate("Method(intParameter);", new LiveIn("intParameter"));
         }
 
         [TestMethod]
@@ -676,8 +676,8 @@ Method(intVariable);
 Method(stringVariable);";
             var context = CreateContextCS(code);
             context.ValidateEntry(new LiveIn("boolParameter"), new LiveOut("boolParameter"));
-            context.Validate("boolParameter", new LiveIn("boolParameter")/*FIXME: , new LiveOut("intVariable", "stringVariable")*/);
-            context.Validate("Method(intVariable);"/*FIXME:, new LiveIn("intVariable", "stringVariable")*/);
+            context.Validate("boolParameter", new LiveIn("boolParameter"), new LiveOut("intVariable", "stringVariable"));
+            context.Validate("Method(intVariable);", new LiveIn("intVariable", "stringVariable"));
         }
 
         [TestMethod]
@@ -691,8 +691,8 @@ intVariable = intVariable;
 Method(intVariable);";
             var context = CreateContextCS(code);
             context.ValidateEntry(new LiveIn("boolParameter"), new LiveOut("boolParameter"));
-            context.Validate("boolParameter", new LiveIn("boolParameter")/*FIXME: , new LiveOut("intVariable")*/);
-            context.Validate("Method(intVariable);"/*FIXME:, new LiveIn("intVariable")*/);
+            context.Validate("boolParameter", new LiveIn("boolParameter"), new LiveOut("intVariable"));
+            context.Validate("Method(intVariable);", new LiveIn("intVariable"));
         }
 
         [TestMethod]

@@ -116,19 +116,19 @@ namespace Tests.TestCases
             arg.ToString(); // Use
         }
 
-        private void SelfAssigned(int arg)  // Noncompliant FP
+        private void SelfAssigned(int arg)
         {
             arg = arg;
             arg.ToString(); // Use
         }
 
-        private void UpdatedFromSelf(int arg)     // Noncompliant FP
+        private void UpdatedFromSelf(int arg)
         {
             arg = arg + 1;
             arg.ToString(); // Use
         }
 
-        private void UpdatedFromSelf(string arg)      // Noncompliant FP
+        private void UpdatedFromSelf(string arg)
         {
             arg = arg.Replace("'", "''");
             arg.ToString(); // Use

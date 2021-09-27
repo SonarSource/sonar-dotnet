@@ -71,7 +71,18 @@ namespace SonarAnalyzer.Helpers
             {
                 while (stack.Any())
                 {
-                    if (stack.Peek().NextChild() is { } child)
+                    if (owner.reverseOrder)
+                    {
+                        var current = stack.Pop();
+                        while (current.NextChild() is { } child)
+                        {
+                            stack.Push(new StackItem(child, owner.reverseOrder));
+                        }
+
+                        Current = current.DisposeEnumeratorAndReturnOperation();
+                        return true;
+                    }
+                    else if (!owner.reverseOrder && stack.Peek().NextChild() is { } child)
                     {
                         stack.Push(new StackItem(child, owner.reverseOrder));
                     }
@@ -108,9 +119,10 @@ namespace SonarAnalyzer.Helpers
             public StackItem(IOperation operation, bool reversedOrder)
             {
                 this.operation = new IOperationWrapperSonar(operation);
-                children = reversedOrder
-                    ? this.operation.Children.Reverse().GetEnumerator()
-                    : this.operation.Children.GetEnumerator();
+                children = //reversedOrder
+                    //? this.operation.Children.Reverse().GetEnumerator()
+                    //:
+                    this.operation.Children.GetEnumerator();
             }
 
             public IOperation NextChild() =>
