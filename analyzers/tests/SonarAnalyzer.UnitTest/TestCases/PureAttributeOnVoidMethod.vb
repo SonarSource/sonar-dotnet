@@ -49,10 +49,10 @@ Namespace Tests.TestCases
         <Pure>
         Function TaskOfTReturns(input as Integer) As Task(of Integer)
             Return Task.FromResult(input * 42)
-        Function
+        End Function
         
         <Pure>
-        Function TaskWithOutParameter(input as Integer, <Out> ByRef ret as Integer)
+        Function TaskWithOutParameter(input as Integer, <Out> ByRef ret As Integer) As Task
             ret = input
             Return Task.FromResult(input)
         End Function

@@ -52,16 +52,18 @@ namespace SonarAnalyzer.Rules
                 SymbolKind.Method);
 
         protected static AttributeData InvalidPureDataAttributeUsage(ISymbol symbol) =>
-            symbol is IMethodSymbol methodSymbol
-                   && (ReturnsVoid(methodSymbol) || ReturnsTask(methodSymbol))
-                   && methodSymbol.GetAttributes().FirstOrDefault(a => a.AttributeClass.Is(KnownType.System_Diagnostics_Contracts_PureAttribute)) is { } pureAttribute
-                ? pureAttribute
-                : null;
+            symbol is IMethodSymbol method
+                && NoOutParameters(method)
+                && (method.ReturnsVoid || ReturnsTask(method))
+                && GetPureAttribute(method) is { } pureAttribute
+            ? pureAttribute
+            : null;
 
-        private static bool ReturnsVoid(IMethodSymbol methodSymbol) =>
-            methodSymbol.ReturnsVoid && !methodSymbol.Parameters.Any(p => p.RefKind != RefKind.None);
+        private static bool NoOutParameters(IMethodSymbol method) => method.Parameters.All(p => p.RefKind == RefKind.None);
 
-        private static bool ReturnsTask(IMethodSymbol methodSymbol) =>
-             methodSymbol.ReturnType.Is(KnownType.System_Threading_Tasks_Task);
+        private static bool ReturnsTask(IMethodSymbol method) => method.ReturnType.Is(KnownType.System_Threading_Tasks_Task);
+
+        private static AttributeData GetPureAttribute(IMethodSymbol method) =>
+            method.GetAttributes().FirstOrDefault(a => a.AttributeClass.Is(KnownType.System_Diagnostics_Contracts_PureAttribute));
     }
 }
