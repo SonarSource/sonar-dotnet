@@ -22,7 +22,7 @@ namespace Tests.Diagnostics
         }
 
         [Fact]
-        public async void AsyncTestMethod()  // Noncompliant
+        public async void AsyncTestMethod()  // Compliant
         {
         }
 
@@ -52,7 +52,7 @@ namespace Tests.Diagnostics
 
         [Theory]
         [InlineData(42)]
-        public async void AsyncTestMethod_Theory(int arg)  // Noncompliant
+        public async void AsyncTestMethod_Theory(int arg)  // Compliant
         {
         }
 
