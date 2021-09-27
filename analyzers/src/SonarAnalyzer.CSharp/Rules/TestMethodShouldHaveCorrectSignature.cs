@@ -88,15 +88,15 @@ namespace SonarAnalyzer.Rules.CSharp
             // XUnit - note that local functions can be test methods, thus we skip checking the syntax node
             {
                 KnownType.Xunit_FactAttribute,
-                (_, symbol) => GetFaultMessage(symbol, publicOnly: false, allowGenerics: false)
+                (_, symbol) => GetFaultMessage(symbol, publicOnly: false, allowGenerics: false, allowAsyncVoid: true)
             },
             {
                 KnownType.Xunit_TheoryAttribute,
-                (_, symbol) => GetFaultMessage(symbol, publicOnly: false, allowGenerics: true)
+                (_, symbol) => GetFaultMessage(symbol, publicOnly: false, allowGenerics: true, allowAsyncVoid: true)
             },
             {
                 KnownType.LegacyXunit_TheoryAttribute,
-                (_, symbol) => GetFaultMessage(symbol, publicOnly: false, allowGenerics: true)
+                (_, symbol) => GetFaultMessage(symbol, publicOnly: false, allowGenerics: true, allowAsyncVoid: true)
             }
         };
 
@@ -138,15 +138,15 @@ namespace SonarAnalyzer.Rules.CSharp
             return AttributeToConstraintsMap.GetValueOrDefault(attributeKnownType);
         }
 
-        private static string GetFaultMessage(SyntaxNode methodNode, IMethodSymbol methodSymbol, bool publicOnly, bool allowGenerics) =>
+        private static string GetFaultMessage(SyntaxNode methodNode, IMethodSymbol methodSymbol, bool publicOnly, bool allowGenerics, bool allowAsyncVoid = false) =>
             LocalFunctionStatementSyntaxWrapper.IsInstance(methodNode)
             ? MakeMethodNotLocalFunction
-            : GetFaultMessage(methodSymbol, publicOnly, allowGenerics);
+            : GetFaultMessage(methodSymbol, publicOnly, allowGenerics, allowAsyncVoid);
 
-        private static string GetFaultMessage(IMethodSymbol methodSymbol, bool publicOnly, bool allowGenerics) =>
-            GetFaultMessageParts(methodSymbol, publicOnly, allowGenerics).ToSentence();
+        private static string GetFaultMessage(IMethodSymbol methodSymbol, bool publicOnly, bool allowGenerics, bool allowAsyncVoid) =>
+            GetFaultMessageParts(methodSymbol, publicOnly, allowGenerics, allowAsyncVoid).ToSentence();
 
-        private static IEnumerable<string> GetFaultMessageParts(IMethodSymbol methodSymbol, bool publicOnly, bool allowGenerics)
+        private static IEnumerable<string> GetFaultMessageParts(IMethodSymbol methodSymbol, bool publicOnly, bool allowGenerics, bool allowAsyncVoid)
         {
             if (methodSymbol.DeclaredAccessibility != Accessibility.Public && publicOnly)
             {
@@ -159,7 +159,7 @@ namespace SonarAnalyzer.Rules.CSharp
             }
 
             // Invariant - applies to all test methods
-            if (methodSymbol.IsAsync && methodSymbol.ReturnsVoid)
+            if (methodSymbol.IsAsync && methodSymbol.ReturnsVoid && !allowAsyncVoid)
             {
                 yield return MakeNonAsyncOrTaskMessage;
             }
