@@ -103,7 +103,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     var cfg = node.CreateCfg(context.SemanticModel, symbol as IMethodSymbol);
 
                     // FIXME: REMOVE DEBUG
-                    if (symbol.Name == "IgnoredValues")
+                    if (symbol.Name == "CreateDirectory")
                     {
                         //System.Console.WriteLine(CFG.CfgSerializer.Serialize(cfg));
                     }

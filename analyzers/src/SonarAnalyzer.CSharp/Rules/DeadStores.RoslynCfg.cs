@@ -104,7 +104,9 @@ namespace SonarAnalyzer.Rules.CSharp
                 {
                     if (owner.lva.ParameterOrLocalSymbol(target) is { } localTarget && IsSymbolRelevant(localTarget))
                     {
-                        if (!liveOut.Contains(localTarget)
+                        if (TargetRefKind() == RefKind.None
+                            && !IsConst()
+                            && !liveOut.Contains(localTarget)
                             && !IsAllowedInitialization()
                             && !IsMuted(target.Syntax))   // FIXME: Unmute?
                         {
@@ -116,6 +118,17 @@ namespace SonarAnalyzer.Rules.CSharp
                     {
                         return null;
                     }
+
+                    bool IsConst() =>
+                        localTarget is ILocalSymbol local && local.IsConst;
+
+                    RefKind TargetRefKind() =>
+                        localTarget switch
+                        {
+                            ILocalSymbol local => local.RefKind(),
+                            IParameterSymbol param => param.RefKind,
+                            _ => default
+                        };
 
                     bool IsAllowedInitialization() =>
                         operation.WrappedOperation.Syntax is VariableDeclaratorSyntax variableDeclarator

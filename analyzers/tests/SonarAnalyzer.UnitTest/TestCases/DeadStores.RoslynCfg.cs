@@ -137,7 +137,7 @@ namespace Tests.Diagnostics
             int k = 12; // Noncompliant
             X(out k);   // Compliant, not reporting on out parameters
         }
-        void X(out int i) { i = 10; }   // Noncompliant WIP Roslyn FP: Compliant out parameter
+        void X(out int i) { i = 10; }   // Compliant out parameter
 
         void calculateRate2(int a, int b)
         {
@@ -419,12 +419,12 @@ namespace Tests.Diagnostics
 
         public List<int> Method5(out int i, ref int j)
         {
-            i = 10; // Noncompliant WIP Roslyn FP: Compliant, out parameter
+            i = 10; // Compliant, out parameter
 
             j = 11;
             if (j == 11)
             {
-                j = 12; // Noncompliant WIP Roslyn FP: Compliant, ref parameter
+                j = 12; // Compliant, ref parameter
             }
 
             return null;
@@ -1046,8 +1046,8 @@ namespace Tests.Diagnostics
     {
         public void WithRefKeyword(int[] values)
         {
-            ref int value = ref values[0];  // Noncompliant WIP Roslyn FP: Compliant, because `value` keeps the reference to `values[0]`, and below `default` is actually assigned to `values[0]`
-            value = default;                // Noncompliant WIP Roslyn FP: Compliant, because it's ref variable and value is propagated somewhere
+            ref int value = ref values[0];  // Compliant, because `value` keeps the reference to `values[0]`, and below `default` is actually assigned to `values[0]`
+            value = default;                // Compliant, because it's ref variable and value is propagated somewhere
         }
     }
 
@@ -1097,9 +1097,9 @@ namespace Tests.Diagnostics
             Span<int> span = new[] { 42 };
             int j = 0;
 
-            foreach (ref var e in span) // Noncompliant WIP Roslyn FP:
+            foreach (ref var e in span)
             {
-                e = j--; // Noncompliant WIP Roslyn FP: Compliant because of ref keyword
+                e = j--; // Compliant because of ref keyword
             }
         }
     }
@@ -1135,7 +1135,7 @@ namespace Tests.Diagnostics
     {
         public static void CreateDirectory(string directory)
         {
-            const int CopyWaitInterval = 250;   // Noncompliant WIP Roslyn FP:
+            const int CopyWaitInterval = 250;
             bool created = false;               // Compliant, ignored value
             int attempts = 10;
 
