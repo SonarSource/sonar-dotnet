@@ -133,7 +133,18 @@ namespace SonarAnalyzer.Rules.CSharp
                     bool IsAllowedInitialization() =>
                         operation.WrappedOperation.Syntax is VariableDeclaratorSyntax variableDeclarator
                         && variableDeclarator.Initializer != null
-                        && IsAllowedInitializationValue(variableDeclarator.Initializer.Value);
+                        // Avoid collision with S1481: Unused is allowed. Used only in local function is also unused in current CFG.
+                        && (IsAllowedInitializationValue(variableDeclarator.Initializer.Value) || IsUnusedInCurrentCfg(localTarget, target));
+                }
+
+                private bool IsUnusedInCurrentCfg(ISymbol symbol, IOperation exceptTarget)
+                {
+                    return !owner.lva.Cfg.Blocks.SelectMany(x => x.OperationsAndBranchValue).ToExecutionOrder().Any(IsUsed);
+
+                    bool IsUsed(IOperationWrapperSonar wrapper) =>
+                        wrapper.Instance != exceptTarget
+                        && wrapper.Instance.Kind == OperationKindEx.LocalReference
+                        && ILocalReferenceOperationWrapper.FromOperation(wrapper.Instance).Local.Equals(symbol);
                 }
 
                 // FIXME: Temporary duplicate

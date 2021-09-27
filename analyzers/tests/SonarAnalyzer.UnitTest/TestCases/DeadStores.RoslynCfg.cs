@@ -469,7 +469,7 @@ namespace Tests.Diagnostics
 
         public void Unused()
         {
-            var x = 5;  // Noncompliant WIP Roslyn FP: Compliant, S1481 already reports on it.
+            var x = 5;  // Compliant, S1481 already reports on unused.
 
             var y = 5;  // Noncompliant
             y = 6;      // Noncompliant
@@ -975,7 +975,7 @@ namespace Tests.Diagnostics
         }
     }
 
-    // issue https://github.com/SonarSource/sonar-dotnet/issues/3094
+    // https://github.com/SonarSource/sonar-dotnet/issues/3094
     public class TupleReturn
     {
         public static (int foo, int bar) M(string text)
@@ -984,10 +984,19 @@ namespace Tests.Diagnostics
             return (1, b);
         }
 
-        public void UnusedTuple_FalseNegative()
+        public void UnusedTuple()
+        {
+            (int x, int y) t = (1, 2); // Compliant, rule shouldn't raise on unused because S1481 does.
+        }
+
+        public void UsedTuple()
         {
             (int x, int y) t = (1, 2); // Noncompliant
+            t = (0, 0);
+            Use(t);
         }
+
+        private void Use((int, int) t) { }
     }
 
     // https://github.com/SonarSource/sonar-dotnet/issues/3126
@@ -995,7 +1004,7 @@ namespace Tests.Diagnostics
     {
         public string VariableDeclarator_WithLocalFunction()
         {
-            string buffer = "Value"; // Noncompliant WIP Roslyn FP: Compliant
+            string buffer = "Value"; // Compliant
             return Local();
 
             string Local()
@@ -1073,7 +1082,7 @@ namespace Tests.Diagnostics
     {
         public void UseVariableInLocalPredicate()
         {
-            bool usedBool = BoolInitializer(true); // Noncompliant WIP Roslyn FP: Compliant, value is used in local predicate function
+            bool usedBool = BoolInitializer(true); // Compliant, value is used in local predicate function
             var list = new List<bool>();
             list.Where(LocalPredicate);
 
