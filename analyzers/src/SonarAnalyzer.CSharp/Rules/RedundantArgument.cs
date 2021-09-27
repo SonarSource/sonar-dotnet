@@ -18,6 +18,7 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Linq;
 using Microsoft.CodeAnalysis;
@@ -58,8 +59,12 @@ namespace SonarAnalyzer.Rules.CSharp
 
                     if (methodParameterLookup.MethodSymbol != null)
                     {
-                        foreach (var argumentMapping in methodParameterLookup.GetAllArgumentParameterMappings().Where(x => ArgumentHasDefaultValue(x, c.SemanticModel)))
+                        foreach (var argumentMapping in methodParameterLookup.GetAllArgumentParameterMappings().Reverse().Where(x => x.Symbol.HasExplicitDefaultValue))
                         {
+                            if (!ArgumentHasDefaultValue(argumentMapping, c.SemanticModel))
+                            {
+                                return;
+                            }
                             c.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, argumentMapping.Node.GetLocation(), argumentMapping.Symbol.Name));
                         }
                     }

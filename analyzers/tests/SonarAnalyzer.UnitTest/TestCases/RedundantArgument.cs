@@ -36,11 +36,10 @@ namespace Tests.Diagnostics
                 y: 5,//Noncompliant
                 z: 7);//Noncompliant
 
-            M3(1, y: 4); //Noncompliant
-            M3(x: 1, y: 4); //Noncompliant
-
-            M3(1, 4, //Noncompliant
-                7); //Noncompliant
+            M3(1, y: 4);
+            M3(x: 1, y: 4);
+            M3(1, 4,
+                7);//Noncompliant
         }
     }
 
