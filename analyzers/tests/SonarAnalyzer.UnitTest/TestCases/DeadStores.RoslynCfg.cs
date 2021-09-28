@@ -106,7 +106,7 @@ namespace Tests.Diagnostics
 
             int i, j;
             i = a + 12;
-            i += i + 2; // FIXME: Roslyn CFG WIP Non-compliant
+            i += i + 2; // Noncompliant
             i = 5;
             j = i;
             i                           // Noncompliant; retrieved value overwritten in for loop
@@ -182,7 +182,7 @@ namespace Tests.Diagnostics
             {
                 return 0;
             }
-            int x = a;      // Noncompliant WIP Roslyn FP
+            int x = a;
             for (int i = 1; i < b; i++)
             {
                 x = x * a;  //Not detected yet, we are in a loop, Dead store because the last return statement should return x instead of returning a
