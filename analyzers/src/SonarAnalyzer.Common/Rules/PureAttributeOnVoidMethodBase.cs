@@ -44,24 +44,25 @@ namespace SonarAnalyzer.Rules
             context.RegisterSymbolAction(
                 c =>
                 {
-                    if (InvalidPureDataAttributeUsage(c.Symbol) is { } pureAttribute)
+                    if (InvalidPureDataAttributeUsage((IMethodSymbol)c.Symbol) is { } pureAttribute)
                     {
                         c.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, pureAttribute.ApplicationSyntaxReference.GetSyntax().GetLocation()));
                     }
                 },
                 SymbolKind.Method);
 
-        protected static AttributeData InvalidPureDataAttributeUsage(ISymbol symbol) =>
-            symbol is IMethodSymbol method
-                && NoOutParameters(method)
-                && (method.ReturnsVoid || ReturnsTask(method))
-                && GetPureAttribute(method) is { } pureAttribute
+        protected static AttributeData InvalidPureDataAttributeUsage(IMethodSymbol method) =>
+            NoOutParameters(method)
+            && (method.ReturnsVoid || ReturnsTask(method))
+            && GetPureAttribute(method) is { } pureAttribute
             ? pureAttribute
             : null;
 
-        private static bool NoOutParameters(IMethodSymbol method) => method.Parameters.All(p => p.RefKind == RefKind.None);
+        private static bool NoOutParameters(IMethodSymbol method) =>
+            method.Parameters.All(p => p.RefKind == RefKind.None);
 
-        private static bool ReturnsTask(IMethodSymbol method) => method.ReturnType.Is(KnownType.System_Threading_Tasks_Task);
+        private static bool ReturnsTask(IMethodSymbol method) =>
+            method.ReturnType.Is(KnownType.System_Threading_Tasks_Task);
 
         private static AttributeData GetPureAttribute(IMethodSymbol method) =>
             method.GetAttributes().FirstOrDefault(a => a.AttributeClass.Is(KnownType.System_Diagnostics_Contracts_PureAttribute));
