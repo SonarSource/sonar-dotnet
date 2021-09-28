@@ -18,6 +18,7 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using Microsoft.CodeAnalysis;
@@ -29,10 +30,15 @@ namespace SonarAnalyzer.CFG.LiveVariableAnalysis
 {
     public sealed class RoslynLiveVariableAnalysis : LiveVariableAnalysisBase<ControlFlowGraph, BasicBlock>
     {
+        private readonly Lazy<FlowCaptureMap> flowCaptures;
+
         protected override BasicBlock ExitBlock => Cfg.ExitBlock;
 
         public RoslynLiveVariableAnalysis(ControlFlowGraph cfg, ISymbol originalDeclaration) : base(cfg, originalDeclaration) =>
+        {
+            flowCaptures = new Lazy<FlowCaptureMap>(() => new FlowCaptureMap(cfg));
             Analyze();
+        }
 
         public ISymbol ParameterOrLocalSymbol(IOperation operation)
         {
@@ -155,6 +161,41 @@ namespace SonarAnalyzer.CFG.LiveVariableAnalysis
             }
         }
 
+        private static ISymbol ParameterReferenceOrLocalReferenceSymbol(IOperation operation) =>
+            operation switch
+            {
+                var _ when IParameterReferenceOperationWrapper.IsInstance(operation) => IParameterReferenceOperationWrapper.FromOperation(operation).Parameter,
+                var _ when ILocalReferenceOperationWrapper.IsInstance(operation) => ILocalReferenceOperationWrapper.FromOperation(operation).Local,
+                _ => null
+            };
+
+        private class FlowCaptureMap
+        {
+            private readonly IDictionary<object, ISymbol> map = new Dictionary<object, ISymbol>();
+
+            public FlowCaptureMap(ControlFlowGraph cfg)
+            {
+                foreach (var block in cfg.Blocks)
+                {
+                    foreach (var operation in block.OperationsAndBranchValue.ToReversedExecutionOrder().Where(x => x.Instance.Kind == OperationKindEx.FlowCapture))
+                    {
+                        if (ParameterReferenceOrLocalReferenceSymbol(IFlowCaptureOperationWrapper.FromOperation(operation.Instance).Value) is { } symbol)
+                        {
+                            map[IFlowCaptureOperationWrapper.FromOperation(operation.Instance).Id] = symbol;
+                        }
+                    }
+                }
+            }
+
+            public ISymbol this[object captureId]
+            {
+                get
+                {
+                    return map[captureId];
+                }
+            }
+        }
+
         private class RoslynState : State
         {
             private readonly RoslynLiveVariableAnalysis owner;
@@ -201,7 +242,7 @@ namespace SonarAnalyzer.CFG.LiveVariableAnalysis
                         Assigned.Add(symbol);
                         UsedBeforeAssigned.Remove(symbol);
                     }
-                    else if (!reference.IsAssignmentTarget())
+                    else if (!reference.IsAssignmentTarget() && !reference.IsInFlowCaptureOperation())
                     {
                         UsedBeforeAssigned.Add(symbol);
                     }

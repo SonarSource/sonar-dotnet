@@ -94,8 +94,9 @@ boolParameter = boolParameter && false;
 Method(2);
 IsMethod(boolParameter);";
             var context = CreateContextCS(code);
-            context.ValidateEntry(new LiveIn("boolParameter"), new LiveOut("boolParameter"));           // FIXME: Should be empty
-            context.Validate("Method(0);", new LiveIn("boolParameter"), new LiveOut("boolParameter"));  // FIXME: Should be empty
+            context.ValidateEntry();
+            context.Validate("Method(0);");
+            context.Validate("boolParameter = true && false;", new LiveOut("boolParameter"));
             context.Validate("Method(1);", new LiveIn("boolParameter"), new LiveOut("boolParameter"));
             context.Validate("Method(2);", new LiveIn("boolParameter"));
         }

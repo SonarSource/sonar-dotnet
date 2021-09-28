@@ -43,6 +43,10 @@ namespace SonarAnalyzer.Extensions
             && parent.Kind == OperationKindEx.CompoundAssignment
             && ICompoundAssignmentOperationWrapper.FromOperation(parent).Target == operation.WrappedOperation;
 
+        public static bool IsInFlowCaptureOperation(this IOperationWrapper operation) =>
+            new IOperationWrapperSonar(operation.WrappedOperation).Parent is { } parent
+            && parent.Kind == OperationKindEx.FlowCapture;
+
         public static bool IsAnyKind(this IOperation operation, params OperationKind[] kinds) =>
             kinds.Contains(operation.Kind);
 
