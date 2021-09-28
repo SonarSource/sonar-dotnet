@@ -107,6 +107,33 @@ namespace Tests.TestCases
         }
     }
 
+    public class Reassigned
+    {
+        private void DeadOnEntry(int arg)    // Fixed
+        {
+            arg = 42;
+            arg.ToString(); // Use
+        }
+
+        private void SelfAssigned(int arg)
+        {
+            arg = arg;
+            arg.ToString(); // Use
+        }
+
+        private void UpdatedFromSelf(int arg)
+        {
+            arg = arg + 1;
+            arg.ToString(); // Use
+        }
+
+        private void UpdatedFromSelf(string arg)
+        {
+            arg = arg.Replace("'", "''");
+            arg.ToString(); // Use
+        }
+    }
+
     public class FooBar
     {
         public FooBar(string a) // Compliant

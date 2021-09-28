@@ -63,7 +63,7 @@ namespace SonarAnalyzer.Helpers
                 // We need to push them to the stack in reversed order compared to reverseOrder argument
                 foreach (var operation in owner.reverseOrder ? owner.operations : owner.operations.Reverse())
                 {
-                    stack.Push(new StackItem(operation, owner.reverseOrder));
+                    stack.Push(new StackItem(operation));
                 }
             }
 
@@ -71,9 +71,19 @@ namespace SonarAnalyzer.Helpers
             {
                 while (stack.Any())
                 {
-                    if (stack.Peek().NextChild() is { } child)
+                    if (owner.reverseOrder)
                     {
-                        stack.Push(new StackItem(child, owner.reverseOrder));
+                        var current = stack.Pop();
+                        while (current.NextChild() is { } child)
+                        {
+                            stack.Push(new StackItem(child));
+                        }
+                        Current = current.DisposeEnumeratorAndReturnOperation();
+                        return true;
+                    }
+                    else if (stack.Peek().NextChild() is { } child)
+                    {
+                        stack.Push(new StackItem(child));
                     }
                     else
                     {
@@ -105,12 +115,10 @@ namespace SonarAnalyzer.Helpers
             private readonly IOperationWrapperSonar operation;
             private readonly IEnumerator<IOperation> children;
 
-            public StackItem(IOperation operation, bool reversedOrder)
+            public StackItem(IOperation operation)
             {
                 this.operation = new IOperationWrapperSonar(operation);
-                children = reversedOrder
-                    ? this.operation.Children.Reverse().GetEnumerator()
-                    : this.operation.Children.GetEnumerator();
+                children = this.operation.Children.GetEnumerator();
             }
 
             public IOperation NextChild() =>

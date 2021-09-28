@@ -121,6 +121,32 @@ if (boolParameter)
         }
 
         [TestMethod]
+        public void ProcessParameterReference_Reassigned_LiveIn()
+        {
+            var code = @"
+intParameter = intParameter + 42;
+stringParameter = stringParameter.Replace('a', 'b');
+Method(intParameter);
+Method(stringParameter);";
+            var context = CreateContextCS(code, additionalParameters: "string stringParameter");
+
+            context.ValidateEntry(new LiveIn("intParameter", "stringParameter"), new LiveOut("intParameter", "stringParameter"));
+            context.Validate("Method(intParameter);", new LiveIn("intParameter", "stringParameter"));
+        }
+
+        [TestMethod]
+        public void ProcessParameterReference_SelfAssigned_LiveIn()
+        {
+            var code = @"
+intParameter = intParameter;
+Method(intParameter);";
+            var context = CreateContextCS(code);
+
+            context.ValidateEntry(new LiveIn("intParameter"), new LiveOut("intParameter"));
+            context.Validate("Method(intParameter);", new LiveIn("intParameter"));
+        }
+
+        [TestMethod]
         public void UsedAfterBranch_LiveOut()
         {
             /*       Binary
@@ -634,6 +660,39 @@ if (boolParameter)
             var context = CreateContextCS(code);
             context.ValidateEntry(new LiveIn("boolParameter"), new LiveOut("boolParameter"));
             context.Validate("Capuring(variable.CompareTo);", new LiveIn("variable"));
+        }
+
+        [TestMethod]
+        public void ProcessLocalReference_Reassigned_LiveIn()
+        {
+            var code = @"
+var intVariable = 40;
+var stringVariable = ""Lorem Ipsum"";
+if (boolParameter)
+    return;
+intVariable = intVariable + 2;
+stringVariable = stringVariable.Replace('a', 'b');
+Method(intVariable);
+Method(stringVariable);";
+            var context = CreateContextCS(code);
+            context.ValidateEntry(new LiveIn("boolParameter"), new LiveOut("boolParameter"));
+            context.Validate("boolParameter", new LiveIn("boolParameter"), new LiveOut("intVariable", "stringVariable"));
+            context.Validate("Method(intVariable);", new LiveIn("intVariable", "stringVariable"));
+        }
+
+        [TestMethod]
+        public void ProcessLocalReference_SelfAssigned_LiveIn()
+        {
+            var code = @"
+var intVariable = 42;
+if (boolParameter)
+    return;
+intVariable = intVariable;
+Method(intVariable);";
+            var context = CreateContextCS(code);
+            context.ValidateEntry(new LiveIn("boolParameter"), new LiveOut("boolParameter"));
+            context.Validate("boolParameter", new LiveIn("boolParameter"), new LiveOut("intVariable"));
+            context.Validate("Method(intVariable);", new LiveIn("intVariable"));
         }
 
         [TestMethod]
