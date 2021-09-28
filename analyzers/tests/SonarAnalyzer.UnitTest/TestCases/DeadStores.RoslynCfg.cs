@@ -276,22 +276,22 @@ namespace Tests.Diagnostics
             var value = 41;
             value++;
             Use(value);
-            value++;      // FIXME: Roslyn CFG WIP Non-compliant
+            value++;      // Noncompliant
             value = 41;
 
             ++value;
             Use(value);
-            ++value;      // FIXME: Roslyn CFG WIP Non-compliant
+            ++value;      // Noncompliant
             value = 41;
 
             value--;
             Use(value);
-            value--;      // FIXME: Roslyn CFG WIP Non-compliant
+            value--;      // Noncompliant
             value = 41;
 
             --value;
             Use(value);
-            --value;      // FIXME: Roslyn CFG WIP Non-compliant
+            --value;      // Noncompliant
             value = 41;
 
             Use(value);
@@ -364,11 +364,11 @@ namespace Tests.Diagnostics
             {
                 var i = 10;
                 Console.WriteLine(i);
-                i++; // FIXME: Roslyn CFG WIP Non-compliant
+                i++; // Noncompliant
                 i = 12;
-                ++i; // FIXME: Roslyn CFG WIP Non-compliant
+                ++i; // Noncompliant
                 i = 12;
-                var a = ++i;
+                var a = ++i;    // Noncompliant {{Remove this useless assignment to local variable 'i'.}}
                 return a;
             }
         }

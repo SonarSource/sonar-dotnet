@@ -70,6 +70,10 @@ namespace SonarAnalyzer.Rules.CSharp
                             case OperationKindEx.CompoundAssignment:
                                 ProcessCompoundAssignment(ICompoundAssignmentOperationWrapper.FromOperation(operation.Instance));
                                 break;
+                            case OperationKindEx.Increment:
+                            case OperationKindEx.Decrement:
+                                ProcessIncrementOrDecrement(IIncrementOrDecrementOperationWrapper.FromOperation(operation.Instance));
+                                break;
                         }
                     }
                 }
@@ -99,6 +103,9 @@ namespace SonarAnalyzer.Rules.CSharp
 
                 private void ProcessCompoundAssignment(ICompoundAssignmentOperationWrapper assignment) =>
                     ProcessAssignment(assignment, assignment.Target);
+
+                private void ProcessIncrementOrDecrement(IIncrementOrDecrementOperationWrapper incrementOrDecrement) =>
+                    ProcessAssignment(incrementOrDecrement, incrementOrDecrement.Target);
 
                 private ISymbol ProcessAssignment(IOperationWrapper operation, IOperation target)
                 {
