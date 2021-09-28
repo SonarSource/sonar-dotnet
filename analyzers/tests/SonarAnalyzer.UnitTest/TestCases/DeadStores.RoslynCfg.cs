@@ -491,9 +491,11 @@ namespace Tests.Diagnostics
 
         private void SimpleAssignment(bool b1, bool b2)
         {
-            var x = false;  // Compliant
-            (x) = b1 && b2; // FIXME: Roslyn CFG WIP Non-compliant
-            x = b1 && b2;   // FIXME: Roslyn CFG WIP Non-compliant
+            var x = false;  // Compliant ignored value
+            (x) = true;     // Noncompliant
+            (x) = b1 && b2; // FIXME: Roslyn CFG WIP Non-compliant, Roslyn CFG produces branched blocks to evaluate &&
+            //x = b1 && b2;   // FIXME: Roslyn CFG WIP Non-compliant, Roslyn CFG produces branched blocks to evaluate &&
+            //x = b1 || b2;   // FIXME: Roslyn CFG WIP Non-compliant, Roslyn CFG produces branched blocks to evaluate ||
         }
 
         private class NameOfTest
