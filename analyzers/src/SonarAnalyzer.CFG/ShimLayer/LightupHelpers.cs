@@ -157,22 +157,35 @@ namespace StyleCop.Analyzers.Lightup
                 return FallbackAccessor;
             }
 
-            if (!typeof(TProperty).GetTypeInfo().IsAssignableFrom(property.PropertyType.GetTypeInfo()))
-            {
-                throw new InvalidOperationException();
-            }
-
             var operationParameter = Expression.Parameter(typeof(TOperation), "operation");
             Expression instance =
                 type.GetTypeInfo().IsAssignableFrom(typeof(TOperation).GetTypeInfo())
                 ? (Expression)operationParameter
                 : Expression.Convert(operationParameter, type);
 
-            Expression<Func<TOperation, TProperty>> expression =
-                Expression.Lambda<Func<TOperation, TProperty>>(
-                    Expression.Call(instance, property.GetMethod),
-                    operationParameter);
-            return expression.Compile();
+            if (property.PropertyType.FullName == "Microsoft.CodeAnalysis.FlowAnalysis.CaptureId")
+            {
+                var constructor = typeof(CaptureId).GetConstructors().Single();
+
+                Expression<Func<TOperation, TProperty>> expression =
+                    Expression.Lambda<Func<TOperation, TProperty>>(
+                        Expression.New(constructor, Expression.Convert(Expression.Call(instance, property.GetMethod), typeof(object))),
+                        operationParameter);
+                return expression.Compile();
+
+            }
+            else if (!typeof(TProperty).GetTypeInfo().IsAssignableFrom(property.PropertyType.GetTypeInfo()))
+            {
+                throw new InvalidOperationException();
+            }
+            else
+            {
+                Expression<Func<TOperation, TProperty>> expression =
+                    Expression.Lambda<Func<TOperation, TProperty>>(
+                        Expression.Call(instance, property.GetMethod),
+                        operationParameter);
+                return expression.Compile();
+            }
         }
 
         internal static Func<TOperation, ImmutableArray<IOperation>> CreateOperationListPropertyAccessor<TOperation>(Type type, string propertyName)

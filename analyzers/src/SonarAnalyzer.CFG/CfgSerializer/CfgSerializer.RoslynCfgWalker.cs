@@ -117,7 +117,13 @@ namespace SonarAnalyzer.CFG
                 .Concat(new IOperationWrapperSonar(operation).Children.SelectMany(x => SerializeOperation(level + 1, x)));
 
             private static string OperationSuffix(IOperation op) =>
-                IInvocationOperationWrapper.IsInstance(op) ? ": " + IInvocationOperationWrapper.FromOperation(op).TargetMethod.Name : null;
+                op switch
+                {
+                    var _ when IInvocationOperationWrapper.IsInstance(op) => ": " + IInvocationOperationWrapper.FromOperation(op).TargetMethod.Name,
+                    var _ when IFlowCaptureOperationWrapper.IsInstance(op) => ": #" + IFlowCaptureOperationWrapper.FromOperation(op).Id.GetHashCode(),
+                    var _ when IFlowCaptureReferenceOperationWrapper.IsInstance(op) => ": #" + IFlowCaptureReferenceOperationWrapper.FromOperation(op).Id.GetHashCode(),
+                    _ => null
+                };
 
             private void WriteEdges(BasicBlock block)
             {
