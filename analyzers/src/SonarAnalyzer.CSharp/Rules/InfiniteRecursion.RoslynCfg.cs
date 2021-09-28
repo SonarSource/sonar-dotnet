@@ -100,10 +100,17 @@ namespace SonarAnalyzer.Rules.CSharp
                     static ISymbol MemberSymbol(IOperation operation) =>
                         operation.Kind switch
                         {
-                            OperationKindEx.PropertyReference => IPropertyReferenceOperationWrapper.FromOperation(operation).Property,
-                            OperationKindEx.Invocation => IInvocationOperationWrapper.FromOperation(operation).TargetMethod,
+                            OperationKindEx.PropertyReference when IPropertyReferenceOperationWrapper.FromOperation(operation) is var propertyReference
+                                                                   && InstanceReferencesThis(propertyReference.Instance) =>
+                                propertyReference.Property,
+                            OperationKindEx.Invocation when IInvocationOperationWrapper.FromOperation(operation) is var invocation
+                                                            && (!invocation.IsVirtual || InstanceReferencesThis(invocation.Instance)) =>
+                                invocation.TargetMethod,
                             _ => null
                         };
+
+                    static bool InstanceReferencesThis(IOperation instance) =>
+                        instance == null || instance.IsAnyKind(OperationKindEx.FlowCaptureReference, OperationKindEx.InstanceReference);
                 }
 
                 protected override bool IsInvalid(BasicBlock block) => false;

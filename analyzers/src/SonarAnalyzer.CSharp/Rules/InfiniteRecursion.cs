@@ -104,8 +104,8 @@ namespace SonarAnalyzer.Rules.CSharp
 
             public TControlFlowGraph ControlFlowGraph { get; }
             public ISymbol AnalyzedSymbol { get; }
-            public Location IssueLocation { get; }
             public SemanticModel SemanticModel => analysisContext.SemanticModel;
+            private Location IssueLocation { get; }
 
             public RecursionContext(TControlFlowGraph controlFlowGraph,
                                     ISymbol analyzedSymbol,
@@ -121,10 +121,7 @@ namespace SonarAnalyzer.Rules.CSharp
             }
 
             public void ReportIssue() =>
-                ReportIssue(IssueLocation);
-
-            public void ReportIssue(Location location) =>
-                analysisContext.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, location, messageArg));
+                analysisContext.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, IssueLocation, messageArg));
         }
 
         private interface IChecker
