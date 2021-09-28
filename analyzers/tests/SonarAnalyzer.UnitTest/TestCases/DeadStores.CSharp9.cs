@@ -1,7 +1,7 @@
 ﻿using System;
 
-var x = 100; // Noncompliant
-x = 1;       // Noncompliant
+var x = 100; // FIXME: Parent symbol defining local scope is not correct here. Non-compliant
+x = 1;       // FIXME: Parent symbol defining local scope is not correct here. Non-compliant
 
 void TargetTypedNew()
 {
@@ -75,9 +75,9 @@ void PatternMatchFalseNegative(int a, int b)
 Action<int, int, int> StaticLambda() =>
     static (int a, int _, int _) =>
     {
-        a = 100;        // FN, the outer statement is a local function and that is muted
-        int b = 100;    // FN, the outer statement is a local function and that is muted
-        b = 1;          // FN, the outer statement is a local function and that is muted
+        a = 100;        // FN
+        int b = 100;    // Noncompliant
+        b = 1;          // FN
     };
 
 void Foo(object o) { }
@@ -95,9 +95,9 @@ public class C
     Action<int, int, int> StaticLambda() =>
         static (int a, int _, int _) =>
         {
-            a = 100;        // FIXME: Roslyn CFG WIP Non-compliant
-            int b = 100;    // FIXME: Roslyn CFG WIP Non-compliant
-            b = 1;          // FIXME: Roslyn CFG WIP Non-compliant
+            a = 100;        // Noncompliant
+            int b = 100;    // Noncompliant
+            b = 1;          // Noncompliant
         };
 
 }

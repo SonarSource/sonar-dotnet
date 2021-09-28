@@ -127,26 +127,19 @@ namespace SonarAnalyzer.Extensions
             return currentExpression;
         }
 
-        public static ControlFlowGraph CreateCfg(this SyntaxNode body, SemanticModel semanticModel, IMethodSymbol symbol)
+        public static ControlFlowGraph CreateCfg(this SyntaxNode body, SemanticModel semanticModel)
         {
             var operation = semanticModel.GetOperation(body.Parent);
             var cfg = ControlFlowGraph.Create(operation.RootOperation().Syntax, semanticModel);
-            if (body.Parent.IsKind(SyntaxKindEx.LocalFunctionStatement))
+            if (body.Parent.IsAnyKind(NestedCfgEnclosingKinds))
             {
-                // we need to go up and track all possible enclosing local function statements
-                foreach (var enclosingFunction in body.Parent.Ancestors().Where(x => NestedCfgEnclosingKinds.Contains(x.Kind())).Reverse())
+                // We need to go up and track all possible enclosing lambdas and local functions
+                foreach (var enclosingFunction in body.Parent.AncestorsAndSelf().Where(x => x.IsAnyKind(NestedCfgEnclosingKinds)).Reverse())
                 {
-                    if (enclosingFunction.IsKind(SyntaxKindEx.LocalFunctionStatement))
-                    {
-                        cfg = cfg.GetLocalFunctionControlFlowGraph(semanticModel.GetDeclaredSymbol(enclosingFunction) as IMethodSymbol);
-                    }
-                    else
-                    {
-                        var operationWrapper = cfg.FlowAnonymousFunctionOperations().Single(x => x.WrappedOperation.Syntax == enclosingFunction);
-                        cfg = cfg.GetAnonymousFunctionControlFlowGraph(operationWrapper);
-                    }
+                    cfg = enclosingFunction.IsKind(SyntaxKindEx.LocalFunctionStatement)
+                        ? cfg.GetLocalFunctionControlFlowGraph(enclosingFunction)
+                        : cfg.GetAnonymousFunctionControlFlowGraph(enclosingFunction);
                 }
-                cfg = cfg.GetLocalFunctionControlFlowGraph(symbol);
             }
             return cfg;
         }

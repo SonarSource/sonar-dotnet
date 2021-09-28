@@ -209,61 +209,51 @@ namespace Tests.Diagnostics
             add += 2;
             Use(add);
             add += 100;     // Noncompliant
-                            // Noncompliant@-1 WIP Roslyn duplicate due to lambda CFG
 
             var sub = 40;
             sub -= 2;
             Use(sub);
             sub -= 100;     // Noncompliant
-                            // Noncompliant@-1 WIP Roslyn duplicate due to lambda CFG
 
             var mul = 40;
             mul *= 2;
             Use(mul);
             mul *= 100;     // Noncompliant
-                            // Noncompliant@-1 WIP Roslyn duplicate due to lambda CFG
 
             var div = 40;
             div /= 2;
             Use(div);
             div /= 100;     // Noncompliant
-                            // Noncompliant@-1 WIP Roslyn duplicate due to lambda CFG
 
             var mod = 40;
             mod += 2;
             Use(mod);
             mod %= 100;     // Noncompliant
-                            // Noncompliant@-1 WIP Roslyn duplicate due to lambda CFG
 
             var and = false;
             and &= true;
             Use(and);
             and &= false;   // Noncompliant
-                            // Noncompliant@-1 WIP Roslyn duplicate due to lambda CFG
 
             var or = false;
             or |= false;
             Use(or);
             or |= true;     // Noncompliant
-                            // Noncompliant@-1 WIP Roslyn duplicate due to lambda CFG
 
             var xor = 40;
             xor ^= 2;
             Use(xor);
             xor ^= 100;     // Noncompliant
-                            // Noncompliant@-1 WIP Roslyn duplicate due to lambda CFG
 
             var left = 40;
             left <<= 2;
             Use(left);
             left <<= 100;   // Noncompliant
-                            // Noncompliant@-1 WIP Roslyn duplicate due to lambda CFG
 
             var right = 40;
             right >>= 2;
             Use(right);
             right >>= 100;  // Noncompliant
-                            // Noncompliant@-1 WIP Roslyn duplicate due to lambda CFG
 
             string coa = SomeString();
             coa ??= SomeString();
@@ -402,9 +392,7 @@ namespace Tests.Diagnostics
             };
 
             var x = l; // Noncompliant
-                       // Noncompliant@-1    WIP Roslyn FP duplicate due to lambda CFG
             x = null;  // Noncompliant
-                       // Noncompliant@-1    WIP Roslyn FP duplicate due to lambda CFG
 
             return func();
         }
@@ -414,8 +402,8 @@ namespace Tests.Diagnostics
             var l = new List<int>();
             return (() =>       // Error [CS0149] - no method name
             {
-                var k = 10;     // FIXME: Roslyn CFG WIP Non-compliant
-                k = 12;         // FIXME: Roslyn CFG WIP Non-compliant
+                var k = 10;     // Noncompliant
+                k = 12;         // Noncompliant
                 return (l = new List<int>(new[] { i })); // l captured here
             })();
         }

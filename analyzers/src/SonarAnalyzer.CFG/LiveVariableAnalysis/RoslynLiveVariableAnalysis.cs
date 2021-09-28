@@ -31,8 +31,7 @@ namespace SonarAnalyzer.CFG.LiveVariableAnalysis
     {
         protected override BasicBlock ExitBlock => Cfg.ExitBlock;
 
-        public RoslynLiveVariableAnalysis(ControlFlowGraph cfg)
-            : base(cfg, new IOperationWrapperSonar(cfg.OriginalOperation).SemanticModel.GetDeclaredSymbol(cfg.OriginalOperation.Syntax)) =>
+        public RoslynLiveVariableAnalysis(ControlFlowGraph cfg, ISymbol originalDeclaration) : base(cfg, originalDeclaration) =>
             Analyze();
 
         public ISymbol ParameterOrLocalSymbol(IOperation operation)
