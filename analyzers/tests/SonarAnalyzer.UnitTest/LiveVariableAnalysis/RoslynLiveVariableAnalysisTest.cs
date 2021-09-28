@@ -83,6 +83,24 @@ Method(intParameter);";
         }
 
         [TestMethod]
+        public void ProcessParameterReference_FlowCapture_Assigned_NotLiveIn_LiveOut()
+        {
+            var code = @"
+Method(0);
+boolParameter = true && false;
+Method(1);
+IsMethod(boolParameter);
+boolParameter = boolParameter && false;
+Method(2);
+IsMethod(boolParameter);";
+            var context = CreateContextCS(code);
+            context.ValidateEntry(new LiveIn("boolParameter"), new LiveOut("boolParameter"));           // FIXME: Should be empty
+            context.Validate("Method(0);", new LiveIn("boolParameter"), new LiveOut("boolParameter"));  // FIXME: Should be empty
+            context.Validate("Method(1);", new LiveIn("boolParameter"), new LiveOut("boolParameter"));
+            context.Validate("Method(2);", new LiveIn("boolParameter"));
+        }
+
+        [TestMethod]
         public void ProcessParameterReference_MemberBinding_LiveIn()
         {
             var code = @"Method(intParameter.ToString());";
