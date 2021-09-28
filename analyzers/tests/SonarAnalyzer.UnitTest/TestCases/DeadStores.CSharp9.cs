@@ -1,7 +1,10 @@
 ﻿using System;
 
-var x = 100; // FIXME: Parent symbol defining local scope is not correct here. Non-compliant
-x = 1;       // FIXME: Parent symbol defining local scope is not correct here. Non-compliant
+// TopLevelStatements:
+// This should do the trick: CheckForDeadStores(c, c.SemanticModel.GetDeclaredSymbol(c.Node), firstGlobalStatement)
+// but registering for CompilationUnit triggers the analysis twice, causing duplicates.
+var x = 100; // FN, we don't register for CompilationUnit yet.
+x = 1;       // FN
 
 void TargetTypedNew()
 {
