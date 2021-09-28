@@ -59,7 +59,7 @@ namespace SonarAnalyzer.Rules
             : null;
 
         private static bool NoOutParameters(IMethodSymbol method) =>
-            method.Parameters.All(p => p.RefKind == RefKind.None);
+            method.Parameters.All(p => p.RefKind == RefKind.None || p.RefKind == RefKindEx.In);
 
         private static bool ReturnsTask(IMethodSymbol method) =>
             method.ReturnType.Is(KnownType.System_Threading_Tasks_Task);

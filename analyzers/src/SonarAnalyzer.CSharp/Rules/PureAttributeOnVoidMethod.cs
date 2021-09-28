@@ -42,7 +42,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 {
                 if ((LocalFunctionStatementSyntaxWrapper)c.Node is var localFunction
                     && localFunction.AttributeLists.SelectMany(x => x.Attributes).Any(attribute => IsPureAttribute(attribute.Name.GetIdentifier().Identifier.ValueText))
-                    && InvalidPureDataAttributeUsage(c.SemanticModel.GetDeclaredSymbol(c.Node)) is { } pureAttribute)
+                    && InvalidPureDataAttributeUsage((IMethodSymbol)c.SemanticModel.GetDeclaredSymbol(c.Node)) is { } pureAttribute)
                     {
                         c.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, pureAttribute.ApplicationSyntaxReference.GetSyntax().GetLocation()));
                     }

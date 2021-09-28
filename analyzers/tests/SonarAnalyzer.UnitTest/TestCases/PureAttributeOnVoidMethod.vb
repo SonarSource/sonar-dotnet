@@ -22,10 +22,15 @@ Namespace Tests.TestCases
         End Sub
 
         <Pure> 'Noncompliant
+        Sub WithExplicitInParameter(<[In]> ByVal age As Integer)
+            Me.age = age
+        End Sub
+
+        <Pure> 'Noncompliant
         Function TaskDoesNotRetrun(input As Integer) As Task
             Return Task.FromResult(input)
         End Function
-        
+
         <Pure> 'Noncompliant
         Async Function AsyncTaskDoesNotRetrun(input As Integer) As Task
             Me.age = input
@@ -45,14 +50,19 @@ Namespace Tests.TestCases
         Private Sub ConfigureAge4(ByVal age As Integer, <Out> ByRef ret As Integer)
             ret = age
         End Sub
-        
+
         <Pure>
-        Function TaskOfTReturns(input as Integer) As Task(of Integer)
+        Private Sub SubWithByref(ByRef age As Integer)
+            age += 1
+        End Sub
+
+        <Pure>
+        Function TaskOfTReturns(input As Integer) As Task(Of Integer)
             Return Task.FromResult(input * 42)
         End Function
-        
+
         <Pure>
-        Function TaskWithOutParameter(input as Integer, <Out> ByRef ret As Integer) As Task
+        Function TaskWithOutParameter(input As Integer, <Out> ByRef ret As Integer) As Task
             ret = input
             Return Task.FromResult(input)
         End Function
