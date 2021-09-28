@@ -20,7 +20,7 @@
 
 using System;
 
-namespace SonarAnalyzer.CFG.Roslyn
+namespace StyleCop.Analyzers.Lightup
 {
     public struct CaptureId : IEquatable<CaptureId>
     {
