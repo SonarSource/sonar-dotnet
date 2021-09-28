@@ -73,14 +73,12 @@ void PatternMatchFalseNegative(int a, int b)
     }
 }
 
-
-
 Action<int, int, int> StaticLambda() =>
     static (int a, int _, int _) =>
     {
-        a = 100;        // FN
+        a = 100;        // FN, muted
         int b = 100;    // Noncompliant
-        b = 1;          // FN
+        b = 1;          // FN, muted
     };
 
 void Foo(object o) { }
