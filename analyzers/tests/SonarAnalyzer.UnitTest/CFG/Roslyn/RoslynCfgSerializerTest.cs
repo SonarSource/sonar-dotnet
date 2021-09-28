@@ -604,5 +604,54 @@ cfg3_block1 -> cfg3_block2 [label=""Return""]
 }
 ");
         }
+
+        [TestMethod]
+        public void Serialize_CaptureId()
+        {
+            var code = @"
+class Sample
+{
+    void Method(bool arg)
+    {
+        int b = arg && false;
+        b = arg || true;
+    }
+}";
+            var dot = CfgSerializer.Serialize(TestHelper.CompileCfg(code));
+            dot.Should().BeIgnoringLineEndings(
+@"digraph ""RoslynCfg"" {
+subgraph ""cluster_LocalLifetime region"" {
+label = ""LocalLifetime region""
+subgraph ""cluster_LocalLifetime region"" {
+label = ""LocalLifetime region""
+cfg0_block1 [shape=record label=""{BLOCK #1|## BranchValue ##|0# ParameterReferenceOperation / IdentifierNameSyntax: arg|##########}""]
+cfg0_block2 [shape=record label=""{BLOCK #2|0# FlowCaptureOperation: #0 / LiteralExpressionSyntax: false|1# LiteralOperation / LiteralExpressionSyntax: false|##########}""]
+cfg0_block3 [shape=record label=""{BLOCK #3|0# FlowCaptureOperation: #0 / IdentifierNameSyntax: arg|1# LiteralOperation / IdentifierNameSyntax: arg|##########}""]
+cfg0_block4 [shape=record label=""{BLOCK #4|0# SimpleAssignmentOperation / VariableDeclaratorSyntax: b = arg && false|1# LocalReferenceOperation / VariableDeclaratorSyntax: b = arg && false|1# ConversionOperation / BinaryExpressionSyntax: arg && false|2# FlowCaptureReferenceOperation: #0 / BinaryExpressionSyntax: arg && false|##########}""]
+}
+subgraph ""cluster_LocalLifetime region"" {
+label = ""LocalLifetime region""
+cfg0_block5 [shape=record label=""{BLOCK #5|0# FlowCaptureOperation: #1 / IdentifierNameSyntax: b|1# LocalReferenceOperation / IdentifierNameSyntax: b|##########|## BranchValue ##|0# ParameterReferenceOperation / IdentifierNameSyntax: arg|##########}""]
+cfg0_block6 [shape=record label=""{BLOCK #6|0# FlowCaptureOperation: #2 / LiteralExpressionSyntax: true|1# LiteralOperation / LiteralExpressionSyntax: true|##########}""]
+cfg0_block7 [shape=record label=""{BLOCK #7|0# FlowCaptureOperation: #2 / IdentifierNameSyntax: arg|1# LiteralOperation / IdentifierNameSyntax: arg|##########}""]
+cfg0_block8 [shape=record label=""{BLOCK #8|0# ExpressionStatementOperation / ExpressionStatementSyntax: b = arg \|\| true;|1# SimpleAssignmentOperation / AssignmentExpressionSyntax: b = arg \|\| true|2# FlowCaptureReferenceOperation: #1 / IdentifierNameSyntax: b|2# ConversionOperation / BinaryExpressionSyntax: arg \|\| true|3# FlowCaptureReferenceOperation: #2 / BinaryExpressionSyntax: arg \|\| true|##########}""]
+}
+}
+cfg0_block0 [shape=record label=""{ENTRY #0}""]
+cfg0_block9 [shape=record label=""{EXIT #9}""]
+cfg0_block0 -> cfg0_block1
+cfg0_block1 -> cfg0_block2 [label=""Else""]
+cfg0_block1 -> cfg0_block3 [label=""WhenFalse""]
+cfg0_block2 -> cfg0_block4
+cfg0_block3 -> cfg0_block4
+cfg0_block4 -> cfg0_block5
+cfg0_block5 -> cfg0_block6 [label=""Else""]
+cfg0_block5 -> cfg0_block7 [label=""WhenTrue""]
+cfg0_block6 -> cfg0_block8
+cfg0_block7 -> cfg0_block8
+cfg0_block8 -> cfg0_block9
+}
+");
+        }
     }
 }
