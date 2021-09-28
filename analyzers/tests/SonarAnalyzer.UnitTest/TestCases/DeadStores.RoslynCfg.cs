@@ -271,6 +271,32 @@ namespace Tests.Diagnostics
             coa ??= SomeString();  // FIXME: Roslyn CFG WIP Non-compliant
         }
 
+        public void Unary()
+        {
+            var value = 41;
+            value++;
+            Use(value);
+            value++;      // FIXME: Roslyn CFG WIP Non-compliant
+            value = 41;
+
+            ++value;
+            Use(value);
+            ++value;      // FIXME: Roslyn CFG WIP Non-compliant
+            value = 41;
+
+            value--;
+            Use(value);
+            value--;      // FIXME: Roslyn CFG WIP Non-compliant
+            value = 41;
+
+            --value;
+            Use(value);
+            --value;      // FIXME: Roslyn CFG WIP Non-compliant
+            value = 41;
+
+            Use(value);
+        }
+
         private void Use(int arg) { }
         private void Use(bool arg) { }
         private void Use(string arg) { }
