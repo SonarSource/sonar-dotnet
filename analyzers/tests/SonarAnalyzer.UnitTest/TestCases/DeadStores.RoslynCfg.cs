@@ -798,7 +798,7 @@ namespace Tests.Diagnostics
                     DoNothing();
                     break;
                 }
-                catch (Exception ex)    // Noncompliant Roslyn CFG WIP FP?
+                catch (Exception ex)    // Compliant, this rule should not raise on unused variables
                 {
                     if (attempts > retries)
                         throw;
@@ -822,15 +822,16 @@ namespace Tests.Diagnostics
                             DoNothing();
                             break;
                         }
-                        catch (ArgumentException ex)    // Noncompliant Roslyn CFG WIP FP?
+                        catch (ArgumentException ex)    // Compliant, this rule should not raise on unused variables
                         {
                             DoNothing();
                         }
                     }
                 } while (true);
             }
-            catch (Exception ex)    // Noncompliant Roslyn CFG WIP FP?
+            catch (Exception ex)
             {
+                ex = null;              // Noncompliant
                 if (attempts > retries)
                     throw;
                 DoNothing();

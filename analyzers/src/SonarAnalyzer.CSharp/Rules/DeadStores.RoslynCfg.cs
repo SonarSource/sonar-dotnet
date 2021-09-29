@@ -18,11 +18,8 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-//FIXME: Cleanup
-using System.Collections.Generic;
 using System.Linq;
 using Microsoft.CodeAnalysis;
-using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.CFG.LiveVariableAnalysis;
@@ -92,7 +89,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
                 private void ProcessSimpleAssignment(ISimpleAssignmentOperationWrapper assignment)
                 {
-                    if (ProcessAssignment(assignment, assignment.Target) is { } localTarget)
+                    if (ProcessAssignment(assignment, assignment.Target, assignment.Value) is { } localTarget)
                     {
                         liveOut.Remove(localTarget);
                     }
@@ -104,7 +101,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 private void ProcessIncrementOrDecrement(IIncrementOrDecrementOperationWrapper incrementOrDecrement) =>
                     ProcessAssignment(incrementOrDecrement, incrementOrDecrement.Target);
 
-                private ISymbol ProcessAssignment(IOperationWrapper operation, IOperation target)
+                private ISymbol ProcessAssignment(IOperationWrapper operation, IOperation target, IOperation value = null)
                 {
                     if (owner.lva.ParameterOrLocalSymbol(target) is { } localTarget && IsSymbolRelevant(localTarget))
                     {
@@ -112,9 +109,10 @@ namespace SonarAnalyzer.Rules.CSharp
                             && !IsConst()
                             && !liveOut.Contains(localTarget)
                             && !IsAllowedInitialization()
+                            && !ICaughtExceptionOperationWrapper.IsInstance(value)
                             && !IsMuted(target.Syntax))   // FIXME: Unmute?
                         {
-                            ReportIssue(operation.WrappedOperation.Syntax.GetLocation(), localTarget);  // FIXME: Better overload?
+                            ReportIssue(operation.WrappedOperation.Syntax.GetLocation(), localTarget);
                         }
                         return localTarget;
                     }
