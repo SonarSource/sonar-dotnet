@@ -536,6 +536,11 @@ namespace Tests.Diagnostics
             return 42;
         }
     }
+
+    class StaticPropertyCase
+    {
+        private static int Prop { get => Prop; }
+    }
 }
 
 // https://github.com/SonarSource/sonar-dotnet/issues/3624
