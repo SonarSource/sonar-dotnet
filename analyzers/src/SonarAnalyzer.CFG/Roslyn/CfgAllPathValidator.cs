@@ -58,7 +58,7 @@ namespace SonarAnalyzer.CFG.Roslyn
             {
                 foreach (var successorBlock in block.SuccessorBlocks)
                 {
-                    if (lattice[successorBlock] == BlockResult.FALSE
+                    if ((lattice.ContainsKey(successorBlock) && lattice[successorBlock] == BlockResult.FALSE)
                         || (!lattice.ContainsKey(successorBlock) && !IsBlockOrAllSuccessorsValid(successorBlock)))
                     {
                         return false;
