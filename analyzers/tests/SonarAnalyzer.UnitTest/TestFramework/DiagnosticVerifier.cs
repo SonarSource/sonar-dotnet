@@ -244,6 +244,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework
             var lineNumber = location.GetLineNumberToReport();
             var expectedIssue = expectedIssues
                 .Where(issueFilter)
+                .OrderBy(x => x.Start == null ? 0 : Math.Abs(location.GetLineSpan().StartLinePosition.Character - x.Start.Value))
                 .FirstOrDefault(issue => issue.LineNumber == lineNumber);
             var issueType = IssueType(isPrimary);
 

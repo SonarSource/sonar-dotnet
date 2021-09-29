@@ -178,14 +178,12 @@ public class UnexpectedSecondary
         {
             Action action =
                 () => Verifier.VerifyCSharpAnalyzer(@"
-public class UnexpectedSecondaryWithBuildError
-
-        public void Test(bool a, bool b) { }
-}",
+public class UnexpectedBuildError
+{",
                     new BinaryOperationWithIdenticalExpressions());
 
             action.Should().Throw<UnexpectedDiagnosticException>()
-                  .WithMessage("CSharp*: Unexpected build error [CS1514]: { * on line 2");
+                  .WithMessage("CSharp*: Unexpected build error [CS1513]: } expected on line 3");
         }
 
         [TestMethod]
