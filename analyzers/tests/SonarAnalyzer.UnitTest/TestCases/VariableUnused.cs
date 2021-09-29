@@ -118,7 +118,7 @@ namespace Tests.Diagnostics
         }
     }
 
-    public class UnusedTuple
+    public class Tuples
     {
         public static (int foo, int bar) M(string text)
         {
