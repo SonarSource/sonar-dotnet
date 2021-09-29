@@ -20,6 +20,7 @@
 
 using System.Linq;
 using Microsoft.CodeAnalysis;
+using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.CFG.LiveVariableAnalysis;
@@ -110,6 +111,7 @@ namespace SonarAnalyzer.Rules.CSharp
                             && !liveOut.Contains(localTarget)
                             && !IsAllowedInitialization()
                             && !ICaughtExceptionOperationWrapper.IsInstance(value)
+                            && !target.Syntax.Parent.IsKind(SyntaxKind.ForEachStatement)
                             && !IsMuted(target.Syntax))   // FIXME: Unmute?
                         {
                             ReportIssue(operation.WrappedOperation.Syntax.GetLocation(), localTarget);

@@ -289,7 +289,7 @@ namespace Tests.Diagnostics
 
         public void LoopControlVariable()
         {
-            foreach (var unused in Enumerable.Range(1, 10))  // Noncompliant. FIXME: Roslyn CFG WIP, should we raise?
+            foreach (var unused in Enumerable.Range(1, 10))  // Compliant, this rule should not raise on unused variables
             {
                 Console.Write("-");
             }
@@ -310,6 +310,7 @@ namespace Tests.Diagnostics
         public void Discard(int arg)
         {
             _ = arg;
+            _ = 42;
         }
 
         private void Use(int arg) { }
@@ -497,7 +498,7 @@ namespace Tests.Diagnostics
                 Console.WriteLine(item);
             }
 
-            foreach (var    // Noncompliant a new value is assigned here, which is not used
+            foreach (var    // // Compliant, this rule should not raise on unused variables
                 item
                 in new int[0])
             {
@@ -866,7 +867,7 @@ namespace Tests.Diagnostics
         public void LoopWithFinally()
         {
             bool isFirst = true;
-            foreach (var i in Enumerable.Range(1, 10))  // Noncompliant, i is not used in the loop. FIXME: Roslyn CFG WIP, should we raise?
+            foreach (var i in Enumerable.Range(1, 10))  // Compliant, this rule should not raise on unused variables
             {
                 try
                 {
