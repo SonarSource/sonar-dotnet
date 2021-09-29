@@ -23,6 +23,7 @@ using System.Linq;
 using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.CFG.Roslyn;
+using StyleCop.Analyzers.Lightup;
 using IFlowCaptureReferenceOperation = Microsoft.CodeAnalysis.FlowAnalysis.IFlowCaptureReferenceOperation;
 
 namespace SonarAnalyzer.UnitTest.CFG.Roslyn

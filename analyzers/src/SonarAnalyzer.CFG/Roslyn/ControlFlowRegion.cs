@@ -24,6 +24,7 @@ using System.Reflection;
 using System.Runtime.CompilerServices;
 using Microsoft.CodeAnalysis;
 using SonarAnalyzer.CFG.Helpers;
+using StyleCop.Analyzers.Lightup;
 
 namespace SonarAnalyzer.CFG.Roslyn
 {

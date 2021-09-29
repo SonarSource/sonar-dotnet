@@ -1042,7 +1042,6 @@ namespace StyleCop.Analyzers.CodeGeneration
                     "ArgumentKind" => true,
                     "BinaryOperatorKind" => true,
                     "BranchKind" => true,
-                    "CaptureId" => true,
                     "CaseKind" => true,
                     "CommonConversion" => true,
                     "ForEachLoopOperationInfo" => true,
