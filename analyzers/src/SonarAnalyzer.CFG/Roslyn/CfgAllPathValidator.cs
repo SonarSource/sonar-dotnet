@@ -25,8 +25,15 @@ namespace SonarAnalyzer.CFG.Roslyn
 {
     public abstract class CfgAllPathValidator
     {
+        enum BlockResult
+        {
+            INCONCLUSIVE,
+            TRUE,
+            FALSE,
+        }
+
         private readonly ControlFlowGraph cfg;
-        private readonly Dictionary<BasicBlock, bool> visited = new Dictionary<BasicBlock, bool>();
+        private readonly Dictionary<BasicBlock, BlockResult> lattice = new Dictionary<BasicBlock, BlockResult>();
 
         protected abstract bool IsValid(BasicBlock block);
         protected abstract bool IsInvalid(BasicBlock block);
@@ -40,19 +47,19 @@ namespace SonarAnalyzer.CFG.Roslyn
         private bool IsBlockOrAllSuccessorsValid(BasicBlock block)
         {
             var isValid = !IsInvalid(block) && (IsValid(block) || AreAllSuccessorsValid(block));
-            visited[block] = isValid;
+            lattice[block] = isValid ? BlockResult.TRUE : BlockResult.FALSE;
             return isValid;
         }
 
         private bool AreAllSuccessorsValid(BasicBlock block)
         {
-            visited[block] = default;
+            lattice[block] = BlockResult.INCONCLUSIVE;
             if (!block.SuccessorBlocks.Contains(cfg.ExitBlock) && block.SuccessorBlocks.Any())
             {
                 foreach (var successorBlock in block.SuccessorBlocks)
                 {
-                    if ((visited.ContainsKey(successorBlock) && !visited[successorBlock])
-                        || (!visited.ContainsKey(successorBlock) && !IsBlockOrAllSuccessorsValid(successorBlock)))
+                    if ((lattice.ContainsKey(successorBlock) && lattice[successorBlock] == BlockResult.FALSE)
+                        || (!lattice.ContainsKey(successorBlock) && !IsBlockOrAllSuccessorsValid(successorBlock)))
                     {
                         return false;
                     }
