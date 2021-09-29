@@ -154,7 +154,6 @@ namespace SonarAnalyzer.Rules.CSharp
                 // FIXME: Temporary duplicate
                 private bool IsMuted(SyntaxNode node) =>
                     new MutedSyntaxWalker(SemanticModel, node).IsMuted();
-
             }
         }
     }

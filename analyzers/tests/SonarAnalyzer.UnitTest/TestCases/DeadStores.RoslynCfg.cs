@@ -916,7 +916,7 @@ namespace Tests.Diagnostics
 
     public static class ReproIssues
     {
-        // https://github.com/SonarSource/sonar-dotnet/issues/2596
+        // https://github.com/SonarSource/sonar-dotnet/issues/2760
         public static long WithNonIgnored_Declaration(string path)
         {
             long length = 42; // Noncompliant FP, FileInfo can throw and function can return this value
@@ -946,6 +946,7 @@ namespace Tests.Diagnostics
             return length;
         }
 
+        // https://github.com/SonarSource/sonar-dotnet/issues/2596
         public static long WithConstantValue(string path)
         {
             const int unknownfilelength = -1;
