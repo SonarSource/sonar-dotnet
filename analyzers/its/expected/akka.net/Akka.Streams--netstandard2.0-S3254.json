@@ -25,19 +25,6 @@
 "endColumn":  77
 }
 }
-},
-{
-"id":  "S3254",
-"message":  "Remove this default value assigned to parameter 'fieldOffset'.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Framing.cs",
-"region":  {
-"startLine":  101,
-"startColumn":  61,
-"endLine":  101,
-"endColumn":  62
-}
-}
 }
 ]
 }

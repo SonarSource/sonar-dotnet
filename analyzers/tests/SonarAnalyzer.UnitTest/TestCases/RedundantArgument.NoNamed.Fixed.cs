@@ -30,10 +30,11 @@ namespace Tests.Diagnostics
 
             M3();//Fixed
 
-            M3(y: 4); //Fixed
-            M3(y: 4); //Fixed
+            M3(y: 4);
+            M3(y: 4);
+            M3(1, 4);//Fixed
 
-            M3(1, 4); //Fixed
+            M3(1, 4);
         }
     }
 
