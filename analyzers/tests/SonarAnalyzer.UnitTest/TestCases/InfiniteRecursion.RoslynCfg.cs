@@ -539,7 +539,7 @@ namespace Tests.Diagnostics
 
     class StaticPropertyCase
     {
-        private static int Prop { get => Prop; }
+        private static int Prop { get => Prop; }  // Noncompliant
     }
 }
 
