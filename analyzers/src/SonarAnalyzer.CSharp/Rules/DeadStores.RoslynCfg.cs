@@ -112,7 +112,7 @@ namespace SonarAnalyzer.Rules.CSharp
                             && !IsAllowedInitialization()
                             && !ICaughtExceptionOperationWrapper.IsInstance(value)
                             && !target.Syntax.Parent.IsKind(SyntaxKind.ForEachStatement)
-                            && !IsMuted(target.Syntax))   // FIXME: Unmute?
+                            && !new MutedSyntaxWalker(SemanticModel, target.Syntax, localTarget).IsMuted())
                         {
                             ReportIssue(operation.WrappedOperation.Syntax.GetLocation(), localTarget);
                         }
@@ -150,10 +150,6 @@ namespace SonarAnalyzer.Rules.CSharp
                         && wrapper.Instance.Kind == OperationKindEx.LocalReference
                         && ILocalReferenceOperationWrapper.FromOperation(wrapper.Instance).Local.Equals(symbol);
                 }
-
-                // FIXME: Temporary duplicate
-                private bool IsMuted(SyntaxNode node) =>
-                    new MutedSyntaxWalker(SemanticModel, node).IsMuted();
             }
         }
     }

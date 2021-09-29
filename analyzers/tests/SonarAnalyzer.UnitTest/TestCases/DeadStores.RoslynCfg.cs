@@ -919,7 +919,7 @@ namespace Tests.Diagnostics
         // https://github.com/SonarSource/sonar-dotnet/issues/2760
         public static long WithNonIgnored_Declaration(string path)
         {
-            long length = 42; // Noncompliant FP, FileInfo can throw and function can return this value
+            long length = 42; // Muted FP, FileInfo can throw and function can return this value
             try
             {
                 length = new System.IO.FileInfo(path).Length;

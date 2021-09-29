@@ -77,7 +77,7 @@ Action<int, int, int> StaticLambda() =>
     static (int a, int _, int _) =>
     {
         a = 100;        // FN, muted
-        int b = 100;    // Noncompliant
+        int b = 100;    // FN, muted
         b = 1;          // FN, muted
     };
 
