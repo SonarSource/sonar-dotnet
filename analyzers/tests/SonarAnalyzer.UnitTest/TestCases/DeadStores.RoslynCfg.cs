@@ -258,7 +258,7 @@ namespace Tests.Diagnostics
             string coa = SomeString();
             coa ??= SomeString();
             Use(coa);
-            coa ??= SomeString();  // FIXME: Roslyn CFG WIP Non-compliant
+            coa ??= SomeString();  // Roslyn CFG FN: Branching with FlowCaptureOperation
         }
 
         public void Unary()
@@ -489,13 +489,23 @@ namespace Tests.Diagnostics
             y = 6;      // Noncompliant
         }
 
-        private void SimpleAssignment(bool b1, bool b2)
+        private void ConditionalEvaluation(bool b1, bool b2)
         {
             var x = false;  // Compliant ignored value
-            (x) = true;     // Noncompliant
-            (x) = b1 && b2; // FIXME: Roslyn CFG WIP Non-compliant, Roslyn CFG produces branched blocks to evaluate &&
-            //x = b1 && b2;   // FIXME: Roslyn CFG WIP Non-compliant, Roslyn CFG produces branched blocks to evaluate &&
-            //x = b1 || b2;   // FIXME: Roslyn CFG WIP Non-compliant, Roslyn CFG produces branched blocks to evaluate ||
+            x = true;       // Roslyn CFG FN: Consequence of inaccurate LVA state below
+            x = b1 && b2;   // Roslyn CFG FN: Branching with FlowCaptureOperation
+            x = b1 || b2;   // Roslyn CFG FN: Branching with FlowCaptureOperation
+        }
+
+        private void SimpleAssignment()
+        {
+            var x = 42; // Noncompliant
+            (x) = 42;   // Noncompliant
+            x = 42;     // Noncompliant
+
+            var y = 0;  // Compliant, ignored value
+            (y) = 42;   // Noncompliant
+            y = 42;     // Noncompliant
         }
 
         private class NameOfTest
@@ -599,7 +609,7 @@ namespace Tests.Diagnostics
                 var lst = arr;    //Compliant
                 var unused = arr;
                 lst ??= new int[0];
-                unused ??= new int[0]; //FIXME: Roslyn CFG WIP Non-compliant
+                unused ??= new int[0];  // Roslyn CFG FN: Branching with FlowCaptureOperation
                 return lst;
             }
         }
@@ -788,7 +798,7 @@ namespace Tests.Diagnostics
                     DoNothing();
                     break;
                 }
-                catch (Exception ex)    // Noncompliant WIP Roslyn FP?
+                catch (Exception ex)    // Noncompliant Roslyn CFG WIP FP?
                 {
                     if (attempts > retries)
                         throw;
@@ -812,14 +822,14 @@ namespace Tests.Diagnostics
                             DoNothing();
                             break;
                         }
-                        catch (ArgumentException ex)    // Noncompliant WIP Roslyn FP?
+                        catch (ArgumentException ex)    // Noncompliant Roslyn CFG WIP FP?
                         {
                             DoNothing();
                         }
                     }
                 } while (true);
             }
-            catch (Exception ex)    // Noncompliant WIP Roslyn FP?
+            catch (Exception ex)    // Noncompliant Roslyn CFG WIP FP?
             {
                 if (attempts > retries)
                     throw;
@@ -830,7 +840,7 @@ namespace Tests.Diagnostics
         public void Bar()
         {
             bool isFirst = true;
-            foreach (var i in System.Linq.Enumerable.Range(1, 10))  // Noncompliant, i is not used in the loop. FIXME: Roslyn, should we raise?
+            foreach (var i in System.Linq.Enumerable.Range(1, 10))  // Noncompliant, i is not used in the loop. FIXME: Roslyn CFG WIP, should we raise?
             {
                 try
                 {
@@ -853,7 +863,7 @@ namespace Tests.Diagnostics
         public static long WithConstantValue(string path)
         {
             const int unknownfilelength = -1;
-            long length = unknownfilelength; // Noncompliant WIP Roslyn FP: Compliant
+            long length = unknownfilelength; // Noncompliant Roslyn CFG WIP FP: Compliant
             try
             {
                 length = new System.IO.FileInfo(path).Length;
@@ -882,7 +892,7 @@ namespace Tests.Diagnostics
         const int UNKNOWN = -1;
         public static long WithClassConstant(string path)
         {
-            long length = UNKNOWN; // Noncompliant WIP Roslyn FP: Compliant
+            long length = UNKNOWN; // Noncompliant Roslyn CFG WIP FP: Compliant
             try
             {
                 length = new System.IO.FileInfo(path).Length;
@@ -897,7 +907,7 @@ namespace Tests.Diagnostics
         // https://github.com/SonarSource/sonar-dotnet/issues/2598
         public static string WithCastedNull(string path)
         {
-            var length = (string)null; // Noncompliant WIP Roslyn FP: Compliant
+            var length = (string)null; // Noncompliant Roslyn CFG WIP FP: Compliant
             try
             {
                 length = new System.IO.FileInfo(path).Length.ToString();
@@ -930,7 +940,7 @@ namespace Tests.Diagnostics
         public int Start()
         {
             const int x = -1;
-            int exitCode = x;           // Noncompliant WIP Roslyn FP: Compliant
+            int exitCode = x;           // Noncompliant Roslyn CFG WIP FP: Compliant
             Exception exception = null; // Compliant, ignored value
 
             try
