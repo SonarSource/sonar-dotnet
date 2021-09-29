@@ -7,6 +7,8 @@ namespace Tests.Diagnostics
 {
     public class Resource : IDisposable
     {
+        private const int constZero = 0;
+
         public void Dispose()
         {
         }
@@ -48,8 +50,19 @@ namespace Tests.Diagnostics
             var intPlusOne = +1;        // Compliant
             intPlusOne = 42;
 
+            const int constMinusOne = -1;
+            int fromLocalConstant = constMinusOne;  // Noncompliant Roslyn CFG WIP FP: Compliant
+            fromLocalConstant = 42;
+
+            int fromClassConstant = constZero;      // Noncompliant Roslyn CFG WIP FP: Compliant
+            fromClassConstant = 42;
+
+            var fromCast = (string)null;            // Noncompliant Roslyn CFG WIP FP: Compliant
+            fromCast = "other";
+
+
             // Variables should be used in order the rule to trigger
-            Console.WriteLine("", stringEmpty, stringNull, boolFalse, boolTrue, objectNull, intZero, intOne, intMinusOne, intPlusOne);
+            Console.WriteLine("", stringEmpty, stringNull, boolFalse, boolTrue, objectNull, intZero, intOne, intMinusOne, intPlusOne, fromLocalConstant, fromClassConstant, fromCast);
         }
 
         public void ExpressionResultsInConstantIgnoredValue()
@@ -887,6 +900,35 @@ namespace Tests.Diagnostics
     public static class ReproIssues
     {
         // https://github.com/SonarSource/sonar-dotnet/issues/2596
+        public static long WithNonIgnored_Declaration(string path)
+        {
+            long length = 42; // Noncompliant FP, FileInfo can throw and function can return this value
+            try
+            {
+                length = new System.IO.FileInfo(path).Length;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+            }
+            return length;
+        }
+
+        public static long WithNonIgnored_Assignment(string path)
+        {
+            long length;
+            length = 42; // Muted FP, FileInfo can throw and function can return this value
+            try
+            {
+                length = new System.IO.FileInfo(path).Length;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+            }
+            return length;
+        }
+
         public static long WithConstantValue(string path)
         {
             const int unknownfilelength = -1;
