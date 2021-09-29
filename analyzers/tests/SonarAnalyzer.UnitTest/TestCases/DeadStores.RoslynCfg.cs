@@ -287,6 +287,31 @@ namespace Tests.Diagnostics
             Use(value);
         }
 
+        public void LoopControlVariable()
+        {
+            foreach (var unused in Enumerable.Range(1, 10))  // Noncompliant. FIXME: Roslyn CFG WIP, should we raise?
+            {
+                Console.Write("-");
+            }
+            foreach (var used in Enumerable.Range(1, 10))
+            {
+                Use(used);
+            }
+            for(var i = 0; i < 10; i++)
+            {
+                Console.Write("-");
+            }
+            for(var i = 0; i < 10; i++)
+            {
+                Use(i);
+            }
+        }
+
+        public void Discard(int arg)
+        {
+            _ = arg;
+        }
+
         private void Use(int arg) { }
         private void Use(bool arg) { }
         private void Use(string arg) { }
@@ -838,10 +863,10 @@ namespace Tests.Diagnostics
             }
         }
 
-        public void Bar()
+        public void LoopWithFinally()
         {
             bool isFirst = true;
-            foreach (var i in System.Linq.Enumerable.Range(1, 10))  // Noncompliant, i is not used in the loop. FIXME: Roslyn CFG WIP, should we raise?
+            foreach (var i in Enumerable.Range(1, 10))  // Noncompliant, i is not used in the loop. FIXME: Roslyn CFG WIP, should we raise?
             {
                 try
                 {
