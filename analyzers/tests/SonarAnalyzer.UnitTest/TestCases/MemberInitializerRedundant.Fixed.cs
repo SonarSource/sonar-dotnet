@@ -249,6 +249,17 @@ namespace Tests.Diagnostics
         }
     }
 
+    internal class Person17
+    {
+        internal string Special;  // Fixed
+
+        internal Person17(string foo)
+        {
+            var x = true && true;
+            Special = foo;
+        }
+    }
+
     class CSharp8_PersonA
     {
         int age = 42;

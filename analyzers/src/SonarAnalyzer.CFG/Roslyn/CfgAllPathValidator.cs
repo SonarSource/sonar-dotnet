@@ -26,7 +26,7 @@ namespace SonarAnalyzer.CFG.Roslyn
     public abstract class CfgAllPathValidator
     {
         private readonly ControlFlowGraph cfg;
-        private readonly HashSet<BasicBlock> visited = new HashSet<BasicBlock>();
+        private readonly Dictionary<BasicBlock, bool> visited = new Dictionary<BasicBlock, bool>();
 
         protected abstract bool IsValid(BasicBlock block);
         protected abstract bool IsInvalid(BasicBlock block);
@@ -37,16 +37,32 @@ namespace SonarAnalyzer.CFG.Roslyn
         public bool CheckAllPaths() =>
             IsBlockOrAllSuccessorsValid(this.cfg.EntryBlock);
 
-        private bool IsBlockOrAllSuccessorsValid(BasicBlock block) =>
-            !IsInvalid(block) && (IsValid(block) || AreAllSuccessorsValid(block));
+        private bool IsBlockOrAllSuccessorsValid(BasicBlock block)
+        {
+            var isValid = !IsInvalid(block) && (IsValid(block) || AreAllSuccessorsValid(block));
+            visited[block] = isValid;
+            return isValid;
+        }
 
         private bool AreAllSuccessorsValid(BasicBlock block)
         {
-            this.visited.Add(block);
-
-            return !block.SuccessorBlocks.Contains(cfg.ExitBlock)
-                   && block.SuccessorBlocks.Except(visited).Any()
-                   && block.SuccessorBlocks.Except(visited).All(IsBlockOrAllSuccessorsValid);
+            visited[block] = default;
+            if (!block.SuccessorBlocks.Contains(cfg.ExitBlock) && block.SuccessorBlocks.Any())
+            {
+                foreach (var successorBlock in block.SuccessorBlocks)
+                {
+                    if ((visited.ContainsKey(successorBlock) && !visited[successorBlock])
+                        || (!visited.ContainsKey(successorBlock) && !IsBlockOrAllSuccessorsValid(successorBlock)))
+                    {
+                        return false;
+                    }
+                }
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
     }
 }
