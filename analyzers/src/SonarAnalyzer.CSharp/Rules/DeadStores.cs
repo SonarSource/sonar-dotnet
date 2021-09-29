@@ -101,17 +101,6 @@ namespace SonarAnalyzer.Rules.CSharp
                 else
                 {
                     var cfg = node.CreateCfg(context.SemanticModel);
-
-                    // FIXME: REMOVE DEBUG
-                    if (symbol.Name == "Fixme")
-                    {
-                        //System.Console.WriteLine(CFG.CfgSerializer.Serialize(cfg));
-                    }
-                    else
-                    {
-                        //return;
-                    }
-
                     var lva = new RoslynLiveVariableAnalysis(cfg, symbol);
                     var checker = new RoslynChecker(context, lva);
                     checker.Analyze(cfg.Blocks);
@@ -172,13 +161,21 @@ namespace SonarAnalyzer.Rules.CSharp
                 protected bool IsLocal(ISymbol symbol) =>
                     owner.IsLocal(symbol);
 
-                protected bool IsAllowedInitializationValue(ExpressionSyntax value) =>
-                    value.IsKind(SyntaxKind.DefaultExpression)
+                protected bool IsAllowedInitializationValue(ExpressionSyntax value, Optional<object> constantValue = default) =>
+                    (constantValue.HasValue && IsAllowedInitializationConstant(constantValue.Value, value.IsKind(SyntaxKind.IdentifierName)))
+                    || value.IsKind(SyntaxKind.DefaultExpression)
                     || value.IsNullLiteral()
                     || value.IsAnyKind(SyntaxKind.TrueLiteralExpression, SyntaxKind.FalseLiteralExpression)
                     || IsAllowedNumericInitialization(value)
                     || IsAllowedUnaryNumericInitialization(value)
                     || IsAllowedStringInitialization(value);
+
+                private static bool IsAllowedInitializationConstant(object constant, bool isIdentifier) =>
+                    constant == null
+                    || (isIdentifier && IsAllowedInitializationConstantIdentifier(constant));
+
+                private static bool IsAllowedInitializationConstantIdentifier(object constant) =>
+                    constant is string str ? AllowedStringValues.Contains(str) : AllowedNumericValues.Contains(constant.ToString());
 
                 private static bool IsAllowedNumericInitialization(ExpressionSyntax expression) =>
                     expression.IsKind(SyntaxKind.NumericLiteralExpression) && AllowedNumericValues.Contains(((LiteralExpressionSyntax)expression).Token.ValueText);  // -1, 0 or 1

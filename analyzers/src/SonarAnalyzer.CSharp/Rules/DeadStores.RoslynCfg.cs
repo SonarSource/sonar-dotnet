@@ -138,7 +138,7 @@ namespace SonarAnalyzer.Rules.CSharp
                         operation.WrappedOperation.Syntax is VariableDeclaratorSyntax variableDeclarator
                         && variableDeclarator.Initializer != null
                         // Avoid collision with S1481: Unused is allowed. Used only in local function is also unused in current CFG.
-                        && (IsAllowedInitializationValue(variableDeclarator.Initializer.Value) || IsUnusedInCurrentCfg(localTarget, target));
+                        && (IsAllowedInitializationValue(variableDeclarator.Initializer.Value, value == null ? default : value.ConstantValue) || IsUnusedInCurrentCfg(localTarget, target));
                 }
 
                 private bool IsUnusedInCurrentCfg(ISymbol symbol, IOperation exceptTarget)

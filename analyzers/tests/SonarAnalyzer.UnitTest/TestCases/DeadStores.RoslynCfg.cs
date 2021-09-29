@@ -51,18 +51,35 @@ namespace Tests.Diagnostics
             intPlusOne = 42;
 
             const int constMinusOne = -1;
-            int fromLocalConstant = constMinusOne;  // Noncompliant Roslyn CFG WIP FP: Compliant
+            int fromLocalConstant = constMinusOne;  // Compliant
             fromLocalConstant = 42;
 
-            int fromClassConstant = constZero;      // Noncompliant Roslyn CFG WIP FP: Compliant
+            int fromClassConstant = constZero;      // Compliant
             fromClassConstant = 42;
 
-            var fromCast = (string)null;            // Noncompliant Roslyn CFG WIP FP: Compliant
+            var fromCast = (string)null;            // Compliant
             fromCast = "other";
-
 
             // Variables should be used in order the rule to trigger
             Console.WriteLine("", stringEmpty, stringNull, boolFalse, boolTrue, objectNull, intZero, intOne, intMinusOne, intPlusOne, fromLocalConstant, fromClassConstant, fromCast);
+        }
+
+        private void NonignoredValues()
+        {
+            var stringZero = "0";       // Noncompliant, this is not ignored
+            stringZero = "other";
+            var stringOne = "1";        // Noncompliant, this is not ignored
+            stringOne = "other";
+            var stringMinusOne = "-1";  // Noncompliant, this is not ignored
+            stringMinusOne = "other";
+
+            var isZero = 1 - 1;         // Noncompliant, this is not ignored
+            isZero = 42;
+
+            var isEmpty = "" + "";      // Noncompliant, this is not ignored
+            isEmpty = "other";
+
+            Console.WriteLine("", stringZero, stringOne, stringMinusOne, isZero, isEmpty);
         }
 
         public void ExpressionResultsInConstantIgnoredValue()
@@ -932,7 +949,7 @@ namespace Tests.Diagnostics
         public static long WithConstantValue(string path)
         {
             const int unknownfilelength = -1;
-            long length = unknownfilelength; // Noncompliant Roslyn CFG WIP FP: Compliant
+            long length = unknownfilelength; // Compliant, ignored value
             try
             {
                 length = new System.IO.FileInfo(path).Length;
@@ -961,7 +978,7 @@ namespace Tests.Diagnostics
         const int UNKNOWN = -1;
         public static long WithClassConstant(string path)
         {
-            long length = UNKNOWN; // Noncompliant Roslyn CFG WIP FP: Compliant
+            long length = UNKNOWN; // Compliant, ignored value
             try
             {
                 length = new System.IO.FileInfo(path).Length;
@@ -976,7 +993,7 @@ namespace Tests.Diagnostics
         // https://github.com/SonarSource/sonar-dotnet/issues/2598
         public static string WithCastedNull(string path)
         {
-            var length = (string)null; // Noncompliant Roslyn CFG WIP FP: Compliant
+            var length = (string)null; // Compliant, ignored value
             try
             {
                 length = new System.IO.FileInfo(path).Length.ToString();
@@ -1009,7 +1026,7 @@ namespace Tests.Diagnostics
         public int Start()
         {
             const int x = -1;
-            int exitCode = x;           // Noncompliant Roslyn CFG WIP FP: Compliant
+            int exitCode = x;           // Compliant, ignored value
             Exception exception = null; // Compliant, ignored value
 
             try
