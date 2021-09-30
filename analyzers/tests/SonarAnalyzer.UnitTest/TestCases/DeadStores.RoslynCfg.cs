@@ -545,12 +545,14 @@ namespace Tests.Diagnostics
             y = 6;      // Noncompliant
         }
 
-        private void ConditionalEvaluation(bool b1, bool b2)
+        private void ConditionalEvaluation(bool b1, bool b2, object coalesce, object coalesceAssignment)
         {
             var x = false;  // Compliant ignored value
             x = true;       // Roslyn CFG FN: Consequence of inaccurate LVA state below
             x = b1 && b2;   // Roslyn CFG FN: Branching with FlowCaptureOperation
             x = b1 || b2;   // Roslyn CFG FN: Branching with FlowCaptureOperation
+            coalesce = coalesce ?? "Value";   // Roslyn CFG FN: Branching with FlowCaptureOperation
+            coalesceAssignment ??= "Value";   // Roslyn CFG FN: Branching with FlowCaptureOperation
         }
 
         private void SimpleAssignment()
