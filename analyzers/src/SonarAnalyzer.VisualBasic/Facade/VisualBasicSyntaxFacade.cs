@@ -79,5 +79,15 @@ namespace SonarAnalyzer.Helpers.Facade
                 LiteralExpressionSyntax literalExpression => literalExpression.Token.ValueText,
                 _ => string.Empty
             };
+
+        public override SyntaxNode RemoveParentheses(SyntaxNode expression)
+        {
+            var current = expression;
+            while (current?.IsKind(SyntaxKind.ParenthesizedExpression) ?? false)
+            {
+                current = Cast<ParenthesizedExpressionSyntax>(current).Expression;
+            }
+            return current;
+        }
     }
 }

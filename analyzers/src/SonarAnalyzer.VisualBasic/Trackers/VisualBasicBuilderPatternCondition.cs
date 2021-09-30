@@ -29,8 +29,7 @@ namespace SonarAnalyzer.Helpers
         public VisualBasicBuilderPatternCondition(bool constructorIsSafe, params BuilderPatternDescriptor<SyntaxKind, InvocationExpressionSyntax>[] descriptors)
             : base(constructorIsSafe, descriptors, new VisualBasicAssignmentFinder()) { }
 
-        protected override SyntaxNode RemoveParentheses(SyntaxNode node) =>
-            node.RemoveParentheses();
+        protected override ILanguageFacade<SyntaxKind> Language => VisualBasicFacade.Instance;
 
         protected override SyntaxNode GetExpression(InvocationExpressionSyntax node) =>
             node.Expression;

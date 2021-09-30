@@ -24,8 +24,9 @@ using SonarAnalyzer.Helpers;
 
 namespace SonarAnalyzer.Rules
 {
-    public abstract class BooleanLiteralUnnecessaryBase<TBinaryExpression> : SonarDiagnosticAnalyzer
+    public abstract class BooleanLiteralUnnecessaryBase<TBinaryExpression, TSyntaxKind> : SonarDiagnosticAnalyzer
         where TBinaryExpression : SyntaxNode
+        where TSyntaxKind : struct
     {
         internal const string DiagnosticId = "S1125";
         protected const string MessageFormat = "Remove the unnecessary Boolean literal(s).";
@@ -33,6 +34,8 @@ namespace SonarAnalyzer.Rules
         protected delegate bool IsBooleanLiteralKind(SyntaxNode node);
 
         protected abstract bool IsBooleanLiteral(SyntaxNode node);
+
+        protected abstract ILanguageFacade<TSyntaxKind> Language { get; }
 
         protected abstract SyntaxNode GetLeftNode(TBinaryExpression binaryExpression);
 
@@ -43,8 +46,6 @@ namespace SonarAnalyzer.Rules
         protected abstract bool IsTrueLiteralKind(SyntaxNode syntaxNode);
 
         protected abstract bool IsFalseLiteralKind(SyntaxNode syntaxNode);
-
-        protected abstract SyntaxNode RemoveParentheses(SyntaxNode syntaxNode);
 
         // LogicalAnd (C#) / AndAlso (VB)
         protected void CheckAndExpression(SyntaxNodeAnalysisContext context)
@@ -131,8 +132,8 @@ namespace SonarAnalyzer.Rules
         protected void CheckTernaryExpressionBranches(SyntaxNodeAnalysisContext context,
             SyntaxTree ternaryTree, SyntaxNode thenBranch, SyntaxNode elseBranch)
         {
-            var thenNoParantheses = RemoveParentheses(thenBranch);
-            var elseNoParantheses = RemoveParentheses(elseBranch);
+            var thenNoParantheses = Language.Syntax.RemoveParentheses(thenBranch);
+            var elseNoParantheses = Language.Syntax.RemoveParentheses(elseBranch);
 
             var thenIsBooleanLiteral = IsBooleanLiteral(thenNoParantheses);
             var elseIsBooleanLiteral = IsBooleanLiteral(elseNoParantheses);
@@ -157,8 +158,8 @@ namespace SonarAnalyzer.Rules
         protected bool CheckForNullabilityAndBooleanConstantsReport(TBinaryExpression binaryExpression,
             SyntaxNodeAnalysisContext context, bool reportOnTrue)
         {
-            var binaryExpressionLeft = RemoveParentheses(GetLeftNode(binaryExpression));
-            var binaryExpressionRight = RemoveParentheses(GetRightNode(binaryExpression));
+            var binaryExpressionLeft = Language.Syntax.RemoveParentheses(GetLeftNode(binaryExpression));
+            var binaryExpressionRight = Language.Syntax.RemoveParentheses(GetRightNode(binaryExpression));
 
             var typeLeft = context.SemanticModel.GetTypeInfo(binaryExpressionLeft).Type;
             var typeRight = context.SemanticModel.GetTypeInfo(binaryExpressionRight).Type;
@@ -200,8 +201,8 @@ namespace SonarAnalyzer.Rules
             ErrorLocation errorLocation, SyntaxNodeAnalysisContext context, bool isLeftSide)
         {
             var expression = isLeftSide
-                ? RemoveParentheses(GetLeftNode(binaryExpression))
-                : RemoveParentheses(GetRightNode(binaryExpression));
+                ? Language.Syntax.RemoveParentheses(GetLeftNode(binaryExpression))
+                : Language.Syntax.RemoveParentheses(GetRightNode(binaryExpression));
 
             if (!isBooleanLiteralKind(expression))
             {

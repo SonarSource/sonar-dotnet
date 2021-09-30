@@ -24,6 +24,7 @@ using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using SonarAnalyzer.Extensions;
+using StyleCop.Analyzers.Lightup;
 
 namespace SonarAnalyzer.Helpers.Facade
 {
@@ -81,5 +82,17 @@ namespace SonarAnalyzer.Helpers.Facade
                 LiteralExpressionSyntax literalExpression => literalExpression.Token.ValueText,
                 _ => string.Empty
             };
+
+        public override SyntaxNode RemoveParentheses(SyntaxNode expression)
+        {
+            var current = expression;
+            while (current?.IsAnyKind(SyntaxKind.ParenthesizedExpression, SyntaxKindEx.ParenthesizedPattern) ?? false)
+            {
+                current = current.IsKind(SyntaxKindEx.ParenthesizedPattern)
+                    ? ((ParenthesizedPatternSyntaxWrapper)current).Pattern
+                    : ((ParenthesizedExpressionSyntax)current).Expression;
+            }
+            return current;
+        }
     }
 }
