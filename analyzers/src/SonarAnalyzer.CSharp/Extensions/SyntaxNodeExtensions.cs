@@ -36,7 +36,7 @@ namespace SonarAnalyzer.Extensions
             SyntaxKindEx.LocalFunctionStatement,
             SyntaxKind.SimpleLambdaExpression,
             SyntaxKind.AnonymousMethodExpression,
-            SyntaxKind.ParenthesizedLambdaExpression
+            SyntaxKind.ParenthesizedLambdaExpression,
         };
 
         public static bool ContainsConditionalConstructs(this SyntaxNode node) =>
@@ -130,15 +130,26 @@ namespace SonarAnalyzer.Extensions
         public static ControlFlowGraph CreateCfg(this SyntaxNode body, SemanticModel semanticModel)
         {
             var operation = semanticModel.GetOperation(body.Parent);
-            var cfg = ControlFlowGraph.Create(operation.RootOperation().Syntax, semanticModel);
+            var rootSyntax = operation.RootOperation().Syntax;
+            var cfg = ControlFlowGraph.Create(rootSyntax, semanticModel);
             if (body.Parent.IsAnyKind(NestedCfgEnclosingKinds))
             {
-                // We need to go up and track all possible enclosing lambdas and local functions
-                foreach (var enclosingFunction in body.Parent.AncestorsAndSelf().Where(x => x.IsAnyKind(NestedCfgEnclosingKinds)).Reverse())
+                // We need to go up and track all possible enclosing lambdas, local functions and other FlowAnonymousFunctionOperations
+                foreach (var node in body.Parent.AncestorsAndSelf().TakeWhile(x => x != rootSyntax).Reverse())
                 {
-                    cfg = enclosingFunction.IsKind(SyntaxKindEx.LocalFunctionStatement)
-                        ? cfg.GetLocalFunctionControlFlowGraph(enclosingFunction)
-                        : cfg.GetAnonymousFunctionControlFlowGraph(enclosingFunction);
+                    if (node.IsKind(SyntaxKindEx.LocalFunctionStatement))
+                    {
+                        cfg = cfg.GetLocalFunctionControlFlowGraph(node);
+                    }
+                    //FIXME: Performance - Avoid duplicate computing FlowAnonymousFunctionOperations
+                    else if (cfg.FlowAnonymousFunctionOperations().SingleOrDefault(x => x.WrappedOperation.Syntax == node) is var flowOperation && flowOperation.WrappedOperation != null)
+                    {
+                        cfg = cfg.GetAnonymousFunctionControlFlowGraph(flowOperation);
+                    }
+                    else if (node == body)
+                    {
+                        return null;
+                    }
                 }
             }
             return cfg;

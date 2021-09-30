@@ -51,9 +51,6 @@ namespace SonarAnalyzer.Extensions
             throw new ArgumentOutOfRangeException(nameof(localFunction));
         }
 
-        public static ControlFlowGraph GetAnonymousFunctionControlFlowGraph(this ControlFlowGraph cfg, SyntaxNode anonymousFunction) =>
-            cfg.GetAnonymousFunctionControlFlowGraph(cfg.FlowAnonymousFunctionOperations().Single(x => x.WrappedOperation.Syntax == anonymousFunction));
-
         public static ControlFlowGraph GetLocalFunctionControlFlowGraph(this ControlFlowGraph cfg, SyntaxNode localFunction) =>
             cfg.GetLocalFunctionControlFlowGraph(cfg.LocalFunctions.Single(x => x.DeclaringSyntaxReferences.Single().GetSyntax() == localFunction));
     }

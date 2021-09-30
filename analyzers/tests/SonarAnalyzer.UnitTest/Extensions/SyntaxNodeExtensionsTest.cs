@@ -137,6 +137,7 @@ public class Sample
         public void CreateCfg_LambdaInsideQuery()
         {
             var code = @"
+using System;
 using System.Linq;
 public class Sample
 {
@@ -148,9 +149,24 @@ public class Sample
             var (tree, semanticModel) = TestHelper.Compile(code);
             var lambda = tree.GetRoot().DescendantNodes().OfType<ParenthesizedLambdaExpressionSyntax>().Single();
 
-            //FIXME: Not good
-            Action a = () => SyntaxNodeExtensions.CreateCfg(lambda, semanticModel);
-            a.Should().Throw<ArgumentNullException>();
+            SyntaxNodeExtensions.CreateCfg(lambda.Body, semanticModel).Should().NotBeNull();
+        }
+
+        [TestMethod]
+        public void CreateCfg_InvalidSyntax_ReturnsCfg()
+        {
+            var code = @"
+public class Sample
+{
+    public void Main()
+    {
+        Undefined(() => 45);
+    }
+}";
+            var (tree, semanticModel) = TestHelper.Compile(code);
+            var lambda = tree.GetRoot().DescendantNodes().OfType<ParenthesizedLambdaExpressionSyntax>().Single();
+
+            SyntaxNodeExtensions.CreateCfg(lambda.Body, semanticModel).Should().NotBeNull();
         }
 
         private static SyntaxToken GetFirstTokenOfKind(SyntaxTree syntaxTree, SyntaxKind kind) =>
