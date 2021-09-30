@@ -201,7 +201,7 @@ public class Sample
         }
 
         [TestMethod]
-        public void CreateCfg_InvalidSyntax_ReturnsCfg()
+        public void CreateCfg_UndefinedSymbol_ReturnsCfg()
         {
             var code = @"
 public class Sample
@@ -211,6 +211,19 @@ public class Sample
         Undefined(() => 45);
     }
 }";
+            var (tree, semanticModel) = TestHelper.Compile(code);
+            var lambda = tree.GetRoot().DescendantNodes().OfType<ParenthesizedLambdaExpressionSyntax>().Single();
+
+            SyntaxNodeExtensions.CreateCfg(lambda.Body, semanticModel).Should().NotBeNull();
+        }
+
+        [DataTestMethod]
+        [DataRow(@"() =>")]
+        [DataRow(@"} () => }")]
+        [DataRow(@"{ () => .")]
+        [DataRow(@"{ () => => =>")]
+        public void CreateCfg_InvalidSyntax_ReturnsCfg(string code)
+        {
             var (tree, semanticModel) = TestHelper.Compile(code);
             var lambda = tree.GetRoot().DescendantNodes().OfType<ParenthesizedLambdaExpressionSyntax>().Single();
 
