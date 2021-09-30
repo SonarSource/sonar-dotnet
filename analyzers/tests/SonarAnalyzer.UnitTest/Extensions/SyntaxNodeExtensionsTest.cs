@@ -152,30 +152,7 @@ public class Sample
 
             SyntaxNodeExtensions.CreateCfg(lambda.Body, semanticModel).Should().NotBeNull();
         }
-        public void Main(int[] values)
-        {
-            void OuterLocalFunction()
-            {
-                Action<int, int> outerParenthesizedLambda = (a, b) =>
-                {
-                    void MiddleLocalFunction(int c)
-                    {
-                        var queryExpressionInTheWay = from value in values
-                                                      select new Lazy<int>(() =>
-                                                      {
-                                                          return InnerLocalFunction(value);
 
-                                                          static int InnerLocalFunction(int arg)
-                                                          {
-                                                              Func<int, int> innerLambda = d => d;
-
-                                                              return innerLambda(arg);
-                                                          }
-                                                      });
-                    }
-                };
-            }
-        }
         [TestMethod]
         public void CreateCfg_NestingChain()
         {
