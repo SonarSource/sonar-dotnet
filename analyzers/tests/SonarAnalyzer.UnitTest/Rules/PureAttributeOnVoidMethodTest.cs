@@ -30,10 +30,11 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         public void PureAttributeOnVoidMethod_CS() =>
-            Verifier.VerifyAnalyzer(
-                @"TestCases\PureAttributeOnVoidMethod.cs",
-                new CS.PureAttributeOnVoidMethod(),
-                ParseOptionsHelper.FromCSharp8);
+            Verifier.VerifyAnalyzer(@"TestCases\PureAttributeOnVoidMethod.cs", new CS.PureAttributeOnVoidMethod());
+
+        [TestMethod]
+        public void PureAttributeOnVoidMethod_CSharp8() =>
+            Verifier.VerifyAnalyzer(@"TestCases\PureAttributeOnVoidMethod.CSharp8.cs", new CS.PureAttributeOnVoidMethod(), ParseOptionsHelper.FromCSharp8);
 
 #if NET
         [TestMethod]
@@ -43,6 +44,6 @@ namespace SonarAnalyzer.UnitTest.Rules
 
         [TestMethod]
         public void PureAttributeOnVoidMethod_VB() =>
-            Verifier.VerifyAnalyzer( @"TestCases\PureAttributeOnVoidMethod.vb", new VB.PureAttributeOnVoidMethod());
+            Verifier.VerifyAnalyzer(@"TestCases\PureAttributeOnVoidMethod.vb", new VB.PureAttributeOnVoidMethod());
     }
 }
