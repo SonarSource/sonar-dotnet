@@ -1135,7 +1135,9 @@ namespace SonarAnalyzer.CFG.Sonar
             // The nameof arguments are not evaluated at runtime and should not be added
             // to the block as instructions
             if (isNameof)
+            {
                 return currentBlock;
+            }
 
             // ref arguments should be added at the end since they remove
             // the constraints on the arguments after all the other arguments are evaluated

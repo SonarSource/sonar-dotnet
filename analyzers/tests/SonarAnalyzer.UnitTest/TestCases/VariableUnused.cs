@@ -117,4 +117,26 @@ namespace Tests.Diagnostics
             }
         }
     }
+
+    public class Tuples
+    {
+        public static (int foo, int bar) M(string text)
+        {
+            int b = int.Parse(text);
+            return (1, b);
+        }
+
+        public void UnusedTuple()
+        {
+            (int x, int y) t = (1, 2); // Noncompliant
+        }
+
+        public void UsedTuple()
+        {
+            (int x, int y) t = (1, 2);
+            Use(t);
+        }
+
+        private void Use((int, int) t) { }
+    }
 }

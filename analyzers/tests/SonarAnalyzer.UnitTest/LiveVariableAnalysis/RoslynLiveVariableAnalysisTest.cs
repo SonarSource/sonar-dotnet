@@ -941,14 +941,19 @@ End Class";
 
             public Context(string code, bool isCSharp, string localFunctionName = null)
             {
+                IMethodSymbol originalDeclaration;
                 Cfg = TestHelper.CompileCfg(code, isCSharp);
-                if (localFunctionName != null)
+                if (localFunctionName == null)
                 {
-                    var originalDeclaration = Cfg.LocalFunctions.Single(x => x.Name == localFunctionName);
+                    originalDeclaration = (IMethodSymbol)Cfg.OriginalOperation.SemanticModel.GetDeclaredSymbol(Cfg.OriginalOperation.Syntax);
+                }
+                else
+                {
+                    originalDeclaration = Cfg.LocalFunctions.Single(x => x.Name == localFunctionName);
                     Cfg = Cfg.GetLocalFunctionControlFlowGraph(originalDeclaration);
                 }
                 Console.WriteLine(CfgSerializer.Serialize(Cfg));
-                Lva = new RoslynLiveVariableAnalysis(Cfg);
+                Lva = new RoslynLiveVariableAnalysis(Cfg, originalDeclaration);
             }
 
             public void ValidateAllEmpty()

@@ -19,7 +19,6 @@
  */
 
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
 using Microsoft.CodeAnalysis;
 using SonarAnalyzer.CFG.Roslyn;
@@ -30,19 +29,29 @@ namespace SonarAnalyzer.CFG.LiveVariableAnalysis
 {
     public sealed class RoslynLiveVariableAnalysis : LiveVariableAnalysisBase<ControlFlowGraph, BasicBlock>
     {
-        protected override BasicBlock ExitBlock => cfg.ExitBlock;
+        protected override BasicBlock ExitBlock => Cfg.ExitBlock;
 
-        public RoslynLiveVariableAnalysis(ControlFlowGraph cfg)
-            : base(cfg, new IOperationWrapperSonar(cfg.OriginalOperation).SemanticModel.GetDeclaredSymbol(cfg.OriginalOperation.Syntax)) =>
+        public RoslynLiveVariableAnalysis(ControlFlowGraph cfg, ISymbol originalDeclaration) : base(cfg, originalDeclaration) =>
             Analyze();
 
-        internal static bool IsOutArgument(IOperation operation) =>
+        public ISymbol ParameterOrLocalSymbol(IOperation operation)
+        {
+            ISymbol candidate = operation switch
+            {
+                var _ when IParameterReferenceOperationWrapper.IsInstance(operation) => IParameterReferenceOperationWrapper.FromOperation(operation).Parameter,
+                var _ when ILocalReferenceOperationWrapper.IsInstance(operation) => ILocalReferenceOperationWrapper.FromOperation(operation).Local,
+                _ => null
+            };
+            return IsLocal(candidate) ? candidate : null;
+        }
+
+        public static bool IsOutArgument(IOperation operation) =>
             new IOperationWrapperSonar(operation) is var wrapped
             && IArgumentOperationWrapper.IsInstance(wrapped.Parent)
             && IArgumentOperationWrapper.FromOperation(wrapped.Parent).Parameter.RefKind == RefKind.Out;
 
         protected override IEnumerable<BasicBlock> ReversedBlocks() =>
-            cfg.Blocks.Reverse();
+            Cfg.Blocks.Reverse();
 
         protected override IEnumerable<BasicBlock> Successors(BasicBlock block)
         {
@@ -52,7 +61,7 @@ namespace SonarAnalyzer.CFG.LiveVariableAnalysis
                 {   // When exiting finally region, redirect to finally instead of the normal destination
                     foreach (var finallyRegion in successor.FinallyRegions)
                     {
-                        yield return cfg.Blocks[finallyRegion.FirstBlockOrdinal];
+                        yield return Cfg.Blocks[finallyRegion.FirstBlockOrdinal];
                     }
                 }
                 else if (successor.Destination != null)
@@ -71,7 +80,7 @@ namespace SonarAnalyzer.CFG.LiveVariableAnalysis
             {
                 foreach (var catchOrFilterRegion in block.Successors.SelectMany(CatchOrFilterRegions))
                 {
-                    yield return cfg.Blocks[catchOrFilterRegion.FirstBlockOrdinal];
+                    yield return Cfg.Blocks[catchOrFilterRegion.FirstBlockOrdinal];
                 }
             }
         }
@@ -106,21 +115,24 @@ namespace SonarAnalyzer.CFG.LiveVariableAnalysis
             }
 
             IEnumerable<ControlFlowBranch> StructuredExceptionHandlinBranches(IEnumerable<ControlFlowRegion> finallyRegions) =>
-                finallyRegions.Select(x => cfg.Blocks[x.LastBlockOrdinal].Successors.SingleOrDefault(x => x.Semantics == ControlFlowBranchSemantics.StructuredExceptionHandling))
+                finallyRegions.Select(x => Cfg.Blocks[x.LastBlockOrdinal].Successors.SingleOrDefault(x => x.Semantics == ControlFlowBranchSemantics.StructuredExceptionHandling))
                     .Where(x => x != null);
         }
 
         protected override State ProcessBlock(BasicBlock block)
         {
-            var ret = new RoslynState(originalDeclaration);
-            ret.ProcessBlock(cfg, block);
+            var ret = new RoslynState(this);
+            ret.ProcessBlock(Cfg, block);
             return ret;
         }
+
+        public override bool IsLocal(ISymbol symbol) =>
+            originalDeclaration.Equals(symbol?.ContainingSymbol);
 
         private IEnumerable<ControlFlowBranch> TryRegionSuccessors(ControlFlowRegion finallyRegion)
         {
             var tryRegion = finallyRegion.EnclosingRegion.NestedRegions.Single(x => x.Kind == ControlFlowRegionKind.Try);
-            return tryRegion.Blocks(cfg).SelectMany(x => x.Successors).Where(x => x.FinallyRegions.Contains(finallyRegion));
+            return tryRegion.Blocks(Cfg).SelectMany(x => x.Successors).Where(x => x.FinallyRegions.Contains(finallyRegion));
         }
 
         private static IEnumerable<ControlFlowRegion> CatchOrFilterRegions(ControlFlowBranch trySuccessor) =>
@@ -145,11 +157,11 @@ namespace SonarAnalyzer.CFG.LiveVariableAnalysis
 
         private class RoslynState : State
         {
-            private readonly ISymbol originalDeclaration;
+            private readonly RoslynLiveVariableAnalysis owner;
             private readonly ISet<ISymbol> capturedLocalFunctions = new HashSet<ISymbol>();
 
-            public RoslynState(ISymbol originalDeclaration) =>
-                this.originalDeclaration = originalDeclaration;
+            public RoslynState(RoslynLiveVariableAnalysis owner) =>
+                this.owner = owner;
 
             public void ProcessBlock(ControlFlowGraph cfg, BasicBlock block)
             {
@@ -182,28 +194,23 @@ namespace SonarAnalyzer.CFG.LiveVariableAnalysis
 
             private void ProcessParameterOrLocalReference(IOperationWrapper reference)
             {
-                if (ParameterOrLocalSymbol(reference.WrappedOperation) is { } symbol)
+                if (owner.ParameterOrLocalSymbol(reference.WrappedOperation) is { } symbol)
                 {
                     if (IsOutArgument(reference.WrappedOperation))
                     {
                         Assigned.Add(symbol);
                         UsedBeforeAssigned.Remove(symbol);
                     }
-                    else if (!IsAssignmentTarget())
+                    else if (!reference.IsAssignmentTarget())
                     {
                         UsedBeforeAssigned.Add(symbol);
                     }
                 }
-
-                bool IsAssignmentTarget() =>
-                    new IOperationWrapperSonar(reference.WrappedOperation).Parent is { } parent
-                    && parent.Kind == OperationKindEx.SimpleAssignment
-                    && ISimpleAssignmentOperationWrapper.FromOperation(parent).Target == reference.WrappedOperation;
             }
 
             private void ProcessSimpleAssignment(ISimpleAssignmentOperationWrapper assignment)
             {
-                if (ParameterOrLocalSymbol(assignment.Target) is { } localTarget)
+                if (owner.ParameterOrLocalSymbol(assignment.Target) is { } localTarget)
                 {
                     Assigned.Add(localTarget);
                     UsedBeforeAssigned.Remove(localTarget);
@@ -222,7 +229,7 @@ namespace SonarAnalyzer.CFG.LiveVariableAnalysis
             {
                 foreach (var operation in cfg.Blocks.SelectMany(x => x.OperationsAndBranchValue).SelectMany(x => x.DescendantsAndSelf()))
                 {
-                    if (ParameterOrLocalSymbol(operation) is { } symbol)
+                    if (owner.ParameterOrLocalSymbol(operation) is { } symbol)
                     {
                         Captured.Add(symbol);
                     }
@@ -279,17 +286,6 @@ namespace SonarAnalyzer.CFG.LiveVariableAnalysis
                 {
                     return null;
                 }
-            }
-
-            private ISymbol ParameterOrLocalSymbol(IOperation operation)
-            {
-                ISymbol candidate = operation switch
-                {
-                    var _ when IParameterReferenceOperationWrapper.IsInstance(operation) => IParameterReferenceOperationWrapper.FromOperation(operation).Parameter,
-                    var _ when ILocalReferenceOperationWrapper.IsInstance(operation) => ILocalReferenceOperationWrapper.FromOperation(operation).Local,
-                    _ => null
-                };
-                return originalDeclaration.Equals(candidate?.ContainingSymbol) ? candidate : null;
             }
         }
     }

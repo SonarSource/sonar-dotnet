@@ -18,7 +18,7 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System.Collections.Generic;
+using System;
 using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
@@ -31,14 +31,6 @@ namespace SonarAnalyzer.Extensions
 {
     internal static partial class SyntaxNodeExtensions
     {
-        private static readonly ISet<SyntaxKind> NestedCfgEnclosingKinds = new HashSet<SyntaxKind>
-        {
-            SyntaxKindEx.LocalFunctionStatement,
-            SyntaxKind.SimpleLambdaExpression,
-            SyntaxKind.AnonymousMethodExpression,
-            SyntaxKind.ParenthesizedLambdaExpression
-        };
-
         public static bool ContainsConditionalConstructs(this SyntaxNode node) =>
             node != null &&
             node.DescendantNodes()
@@ -127,26 +119,32 @@ namespace SonarAnalyzer.Extensions
             return currentExpression;
         }
 
-        public static ControlFlowGraph CreateCfg(this SyntaxNode body, SemanticModel semanticModel, IMethodSymbol symbol)
+        public static ControlFlowGraph CreateCfg(this SyntaxNode body, SemanticModel semanticModel)
         {
             var operation = semanticModel.GetOperation(body.Parent);
-            var cfg = ControlFlowGraph.Create(operation.RootOperation().Syntax, semanticModel);
-            if (body.Parent.IsKind(SyntaxKindEx.LocalFunctionStatement))
+            var rootSyntax = operation.RootOperation().Syntax;
+            var cfg = ControlFlowGraph.Create(rootSyntax, semanticModel);
+            if (body.Parent.IsAnyKind(SyntaxKindEx.LocalFunctionStatement, SyntaxKind.SimpleLambdaExpression, SyntaxKind.AnonymousMethodExpression, SyntaxKind.ParenthesizedLambdaExpression))
             {
-                // we need to go up and track all possible enclosing local function statements
-                foreach (var enclosingFunction in body.Parent.Ancestors().Where(x => NestedCfgEnclosingKinds.Contains(x.Kind())).Reverse())
+                // We need to go up and track all possible enclosing lambdas, local functions and other FlowAnonymousFunctionOperations
+                var cfgFlowOperations = cfg.FlowAnonymousFunctionOperations();  // Avoid recomputing for ancestors that do not produce FlowAnonymousFunction
+                foreach (var node in body.Parent.AncestorsAndSelf().TakeWhile(x => x != rootSyntax).Reverse())
                 {
-                    if (enclosingFunction.IsKind(SyntaxKindEx.LocalFunctionStatement))
+                    if (node.IsKind(SyntaxKindEx.LocalFunctionStatement))
                     {
-                        cfg = cfg.GetLocalFunctionControlFlowGraph(semanticModel.GetDeclaredSymbol(enclosingFunction) as IMethodSymbol);
+                        cfg = cfg.GetLocalFunctionControlFlowGraph(node);
+                        cfgFlowOperations = cfg.FlowAnonymousFunctionOperations();
                     }
-                    else
+                    else if (cfgFlowOperations.SingleOrDefault(x => x.WrappedOperation.Syntax == node) is var flowOperation && flowOperation.WrappedOperation != null)
                     {
-                        var operationWrapper = cfg.FlowAnonymousFunctionOperations().Single(x => x.WrappedOperation.Syntax == enclosingFunction);
-                        cfg = cfg.GetAnonymousFunctionControlFlowGraph(operationWrapper);
+                        cfg = cfg.GetAnonymousFunctionControlFlowGraph(flowOperation);
+                        cfgFlowOperations = cfg.FlowAnonymousFunctionOperations();
+                    }
+                    else if (node == body)  // 'body' should always reach  LocalFunction CFG or AnonymousFunction CFG above
+                    {
+                        throw new InvalidOperationException($"Could not find CFG for {body.Parent.Kind()} in {body.SyntaxTree.FilePath}:{body.GetLocation().GetLineNumberToReport()}");
                     }
                 }
-                cfg = cfg.GetLocalFunctionControlFlowGraph(symbol);
             }
             return cfg;
         }
@@ -154,7 +152,7 @@ namespace SonarAnalyzer.Extensions
         private static string GetUnknownType(SyntaxKind kind)
         {
 #if DEBUG
-            throw new System.ArgumentException($"Unexpected type {kind}", nameof(kind));
+            throw new ArgumentException($"Unexpected type {kind}", nameof(kind));
 #else
             return "type";
 #endif
