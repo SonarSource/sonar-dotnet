@@ -31,14 +31,6 @@ namespace SonarAnalyzer.Extensions
 {
     internal static partial class SyntaxNodeExtensions
     {
-        private static readonly ISet<SyntaxKind> NestedCfgEnclosingKinds = new HashSet<SyntaxKind>
-        {
-            SyntaxKindEx.LocalFunctionStatement,
-            SyntaxKind.SimpleLambdaExpression,
-            SyntaxKind.AnonymousMethodExpression,
-            SyntaxKind.ParenthesizedLambdaExpression,
-        };
-
         public static bool ContainsConditionalConstructs(this SyntaxNode node) =>
             node != null &&
             node.DescendantNodes()
@@ -132,7 +124,7 @@ namespace SonarAnalyzer.Extensions
             var operation = semanticModel.GetOperation(body.Parent);
             var rootSyntax = operation.RootOperation().Syntax;
             var cfg = ControlFlowGraph.Create(rootSyntax, semanticModel);
-            if (body.Parent.IsAnyKind(NestedCfgEnclosingKinds))
+            if (body.Parent.IsAnyKind(SyntaxKindEx.LocalFunctionStatement, SyntaxKind.SimpleLambdaExpression, SyntaxKind.AnonymousMethodExpression, SyntaxKind.ParenthesizedLambdaExpression))
             {
                 // We need to go up and track all possible enclosing lambdas, local functions and other FlowAnonymousFunctionOperations
                 var cfgFlowOperations = cfg.FlowAnonymousFunctionOperations();  // Avoid recomputing for ancestors that do not produce FlowAnonymousFunction
