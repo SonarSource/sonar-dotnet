@@ -127,12 +127,8 @@ namespace SonarAnalyzer.Rules.CSharp
                         localTarget is ILocalSymbol local && local.IsConst;
 
                     RefKind TargetRefKind() =>
-                        localTarget switch
-                        {
-                            ILocalSymbol local => local.RefKind(),
-                            IParameterSymbol param => param.RefKind,
-                            _ => default
-                        };
+                        // Only ILocalSymbol and IParameterSymbol can be returned by ParameterOrLocalSymbol
+                        localTarget is ILocalSymbol local ? local.RefKind() : ((IParameterSymbol)localTarget).RefKind;
 
                     bool IsAllowedInitialization() =>
                         operation.WrappedOperation.Syntax is VariableDeclaratorSyntax variableDeclarator

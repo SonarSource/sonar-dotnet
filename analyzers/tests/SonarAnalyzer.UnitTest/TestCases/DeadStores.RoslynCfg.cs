@@ -57,11 +57,15 @@ namespace Tests.Diagnostics
             int fromClassConstant = constZero;      // Compliant
             fromClassConstant = 42;
 
+            const string constEmpty = "";
+            string fromConstantEmpty = constEmpty;  // Compliant
+            fromConstantEmpty = "other";
+
             var fromCast = (string)null;            // Compliant
             fromCast = "other";
 
             // Variables should be used in order the rule to trigger
-            Console.WriteLine("", stringEmpty, stringNull, boolFalse, boolTrue, objectNull, intZero, intOne, intMinusOne, intPlusOne, fromLocalConstant, fromClassConstant, fromCast);
+            Console.WriteLine("", stringEmpty, stringNull, boolFalse, boolTrue, objectNull, intZero, intOne, intMinusOne, intPlusOne, fromLocalConstant, fromClassConstant, fromConstantEmpty, fromCast);
         }
 
         private void NonignoredValues()
@@ -79,7 +83,11 @@ namespace Tests.Diagnostics
             var isEmpty = "" + "";      // Noncompliant, this is not ignored
             isEmpty = "other";
 
-            Console.WriteLine("", stringZero, stringOne, stringMinusOne, isZero, isEmpty);
+            const string constNotEmpty = "Something";
+            string fromConstantNotEmpty = constNotEmpty;  // Noncompliant, this is not ignored
+            fromConstantNotEmpty = "other";
+
+            Console.WriteLine("", stringZero, stringOne, stringMinusOne, isZero, isEmpty, fromConstantNotEmpty);
         }
 
         public void ExpressionResultsInConstantIgnoredValue()
@@ -565,6 +573,15 @@ namespace Tests.Diagnostics
             var y = 0;  // Compliant, ignored value
             (y) = 42;   // Noncompliant
             y = 42;     // Noncompliant
+        }
+
+        private void Arrow(int arg) =>
+            arg = 42; // FN
+
+        public int ArrowProperty
+        {
+            get => 42;
+            set => value = 42;  // FN
         }
 
         private class NameOfTest

@@ -228,7 +228,7 @@ namespace SonarAnalyzer.LiveVariableAnalysis.CSharp
                 var allCapturedSymbols = instruction.DescendantNodes()
                     .OfType<IdentifierNameSyntax>()
                     .Select(i => semanticModel.GetSymbolInfo(i).Symbol)
-                    .Where(s => s != null && owner.IsLocal(s));
+                    .Where(owner.IsLocal);
 
                 // Collect captured locals
                 // Read and write both affects liveness
