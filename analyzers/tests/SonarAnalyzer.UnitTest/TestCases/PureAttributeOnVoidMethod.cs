@@ -12,15 +12,10 @@ namespace Tests.TestCases
     class Person
     {
         private int age;
+
         [Pure] // Noncompliant {{Remove the 'Pure' attribute or change the method to return a value.}}
 //       ^^^^
         void ConfigureAge(int age)
-        {
-            this.age = age;
-        }
-
-        [Pure] // Noncompliant
-        void WithExplicitInParamater(in int age)
         {
             this.age = age;
         }
@@ -66,7 +61,7 @@ namespace Tests.TestCases
         {
             return Task.FromResult(input * 42);
         }
-        
+
         [Pure]
         Task TaskWithOutParameter(int input, out int ret)
         {

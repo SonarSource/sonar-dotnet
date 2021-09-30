@@ -35,7 +35,7 @@ namespace SonarAnalyzer.Rules
 
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(Rule);
 
-        public DiagnosticDescriptor Rule { get; }
+        protected DiagnosticDescriptor Rule { get; }
 
         protected PureAttributeOnVoidMethodBase() =>
             Rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, Language.RspecResources);
