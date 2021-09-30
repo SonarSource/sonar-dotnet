@@ -18,6 +18,7 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Linq;
@@ -58,7 +59,7 @@ namespace SonarAnalyzer.Rules.CSharp
         {
             // No need to check for ExpressionBody as it can't contain variable assignment
             context.RegisterSyntaxNodeActionInNonGenerated(
-                c => CheckForDeadStores(c, c.SemanticModel.GetDeclaredSymbol(c.Node), ((BaseMethodDeclarationSyntax)c.Node).Body),
+                c => CheckForDeadStores<BaseMethodDeclarationSyntax>(c, c.SemanticModel.GetDeclaredSymbol(c.Node), x => (CSharpSyntaxNode)x.Body ?? x.ExpressionBody()),
                 SyntaxKind.MethodDeclaration,
                 SyntaxKind.ConstructorDeclaration,
                 SyntaxKind.DestructorDeclaration,
@@ -66,7 +67,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 SyntaxKind.OperatorDeclaration);
 
             context.RegisterSyntaxNodeActionInNonGenerated(
-                c => CheckForDeadStores(c, c.SemanticModel.GetDeclaredSymbol(c.Node), ((AccessorDeclarationSyntax)c.Node).Body),
+                c => CheckForDeadStores<AccessorDeclarationSyntax>(c, c.SemanticModel.GetDeclaredSymbol(c.Node), x => (CSharpSyntaxNode)x.Body ?? x.ExpressionBody()),
                 SyntaxKind.GetAccessorDeclaration,
                 SyntaxKind.SetAccessorDeclaration,
                 SyntaxKindEx.InitAccessorDeclaration,
@@ -74,7 +75,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 SyntaxKind.RemoveAccessorDeclaration);
 
             context.RegisterSyntaxNodeActionInNonGenerated(
-                c => CheckForDeadStores(c, c.SemanticModel.GetSymbolInfo(c.Node).Symbol, ((AnonymousFunctionExpressionSyntax)c.Node).Body),
+                c => CheckForDeadStores<AnonymousFunctionExpressionSyntax>(c, c.SemanticModel.GetSymbolInfo(c.Node).Symbol, x => x.Body),
                 SyntaxKind.AnonymousMethodExpression,
                 SyntaxKind.SimpleLambdaExpression,
                 SyntaxKind.ParenthesizedLambdaExpression);
@@ -83,6 +84,9 @@ namespace SonarAnalyzer.Rules.CSharp
                 c => CheckForDeadStores(c, c.SemanticModel.GetDeclaredSymbol(c.Node), ((LocalFunctionStatementSyntaxWrapper)c.Node).Body),
                 SyntaxKindEx.LocalFunctionStatement);
         }
+
+        private void CheckForDeadStores<T>(SyntaxNodeAnalysisContext context, ISymbol symbol, Func<T, CSharpSyntaxNode> bodyOrExpressionBody) where T : SyntaxNode =>
+            CheckForDeadStores(context, symbol, bodyOrExpressionBody((T)context.Node));
 
         private void CheckForDeadStores(SyntaxNodeAnalysisContext context, ISymbol symbol, CSharpSyntaxNode node)
         {

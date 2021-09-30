@@ -576,12 +576,12 @@ namespace Tests.Diagnostics
         }
 
         private void Arrow(int arg) =>
-            arg = 42; // FN
+            arg = 42; // Noncompliant
 
         public int ArrowProperty
         {
             get => 42;
-            set => value = 42;  // FN
+            set => value = 42;  // Noncompliant
         }
 
         private class NameOfTest
