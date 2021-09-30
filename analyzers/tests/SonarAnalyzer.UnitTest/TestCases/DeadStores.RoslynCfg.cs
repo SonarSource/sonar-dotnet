@@ -545,6 +545,7 @@ namespace Tests.Diagnostics
             y = 6;      // Noncompliant
         }
 
+        // https://github.com/SonarSource/sonar-dotnet/issues/4937
         private void ConditionalEvaluation(bool b1, bool b2, object coalesce, object coalesceAssignment)
         {
             var x = false;  // Compliant ignored value
