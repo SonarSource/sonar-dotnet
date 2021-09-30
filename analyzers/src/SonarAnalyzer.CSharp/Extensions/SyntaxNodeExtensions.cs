@@ -135,18 +135,20 @@ namespace SonarAnalyzer.Extensions
             if (body.Parent.IsAnyKind(NestedCfgEnclosingKinds))
             {
                 // We need to go up and track all possible enclosing lambdas, local functions and other FlowAnonymousFunctionOperations
+                var cfgFlowOperations = cfg.FlowAnonymousFunctionOperations();  // Avoid recomputing for ancestors that do not produce FlowAnonymousFunction
                 foreach (var node in body.Parent.AncestorsAndSelf().TakeWhile(x => x != rootSyntax).Reverse())
                 {
                     if (node.IsKind(SyntaxKindEx.LocalFunctionStatement))
                     {
                         cfg = cfg.GetLocalFunctionControlFlowGraph(node);
+                        cfgFlowOperations = cfg.FlowAnonymousFunctionOperations();
                     }
-                    //FIXME: Performance - Avoid duplicate computing FlowAnonymousFunctionOperations
-                    else if (cfg.FlowAnonymousFunctionOperations().SingleOrDefault(x => x.WrappedOperation.Syntax == node) is var flowOperation && flowOperation.WrappedOperation != null)
+                    else if (cfgFlowOperations.SingleOrDefault(x => x.WrappedOperation.Syntax == node) is var flowOperation && flowOperation.WrappedOperation != null)
                     {
                         cfg = cfg.GetAnonymousFunctionControlFlowGraph(flowOperation);
+                        cfgFlowOperations = cfg.FlowAnonymousFunctionOperations();
                     }
-                    else if (node == body)
+                    else if (node == body)  // Defensive: Couldn't find the correct CFG. 'body' should always reach  LocalFunction CFG or AnonymousFunction CFG
                     {
                         return null;
                     }
