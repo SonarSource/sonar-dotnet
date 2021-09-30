@@ -149,7 +149,7 @@ namespace SonarAnalyzer.Rules.CSharp
                             && symbol.RefKind() == RefKind.None
                             && !liveOut.Contains(symbol)
                             && !IsUnusedLocal(symbol)
-                            && !new MutedSyntaxWalker(SemanticModel, declarator, symbol).IsMuted())
+                            && !IsMuted(declarator, symbol))
                         {
                             var location = GetFirstLineLocationFromToken(declarator.Initializer.EqualsToken, declarator.Initializer);
                             ReportIssue(location, symbol);

@@ -162,12 +162,14 @@ namespace SonarAnalyzer.Rules.CSharp
 
                 protected bool IsAllowedInitializationValue(ExpressionSyntax value, Optional<object> constantValue = default) =>
                     (constantValue.HasValue && IsAllowedInitializationConstant(constantValue.Value, value.IsKind(SyntaxKind.IdentifierName)))
-                    || value.IsKind(SyntaxKind.DefaultExpression)
+                    || value.IsAnyKind(SyntaxKind.DefaultExpression, SyntaxKind.TrueLiteralExpression, SyntaxKind.FalseLiteralExpression)
                     || value.IsNullLiteral()
-                    || value.IsAnyKind(SyntaxKind.TrueLiteralExpression, SyntaxKind.FalseLiteralExpression)
                     || IsAllowedNumericInitialization(value)
                     || IsAllowedUnaryNumericInitialization(value)
                     || IsAllowedStringInitialization(value);
+
+                protected bool IsMuted(SyntaxNode node, ISymbol symbol) =>
+                    new MutedSyntaxWalker(SemanticModel, node, symbol).IsMuted();
 
                 private static bool IsAllowedInitializationConstant(object constant, bool isIdentifier) =>
                     constant == null

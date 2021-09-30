@@ -528,7 +528,7 @@ namespace Tests.Diagnostics
                 Console.WriteLine(item);
             }
 
-            foreach (var    // // Compliant, this rule should not raise on unused variables
+            foreach (var    // Compliant, this rule should not raise on unused variables
                 item
                 in new int[0])
             {

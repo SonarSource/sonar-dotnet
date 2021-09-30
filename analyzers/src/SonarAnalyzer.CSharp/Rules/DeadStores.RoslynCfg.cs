@@ -112,7 +112,7 @@ namespace SonarAnalyzer.Rules.CSharp
                             && !IsAllowedInitialization()
                             && !ICaughtExceptionOperationWrapper.IsInstance(value)
                             && !target.Syntax.Parent.IsKind(SyntaxKind.ForEachStatement)
-                            && !new MutedSyntaxWalker(SemanticModel, target.Syntax, localTarget).IsMuted())
+                            && !IsMuted(target.Syntax, localTarget))
                         {
                             ReportIssue(operation.WrappedOperation.Syntax.GetLocation(), localTarget);
                         }
