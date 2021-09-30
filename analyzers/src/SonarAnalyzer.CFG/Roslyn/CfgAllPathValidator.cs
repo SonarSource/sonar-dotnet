@@ -25,15 +25,8 @@ namespace SonarAnalyzer.CFG.Roslyn
 {
     public abstract class CfgAllPathValidator
     {
-        private enum BlockResult
-        {
-            INCONCLUSIVE,
-            TRUE,
-            FALSE,
-        }
-
         private readonly ControlFlowGraph cfg;
-        private readonly Dictionary<BasicBlock, BlockResult> lattice = new Dictionary<BasicBlock, BlockResult>();
+        private readonly Dictionary<BasicBlock, bool> visitedStatus = new Dictionary<BasicBlock, bool>();
 
         protected abstract bool IsValid(BasicBlock block);
         protected abstract bool IsInvalid(BasicBlock block);
@@ -42,24 +35,24 @@ namespace SonarAnalyzer.CFG.Roslyn
             this.cfg = cfg;
 
         public bool CheckAllPaths() =>
-            IsBlockOrAllSuccessorsValid(this.cfg.EntryBlock);
+            IsBlockOrAllSuccessorsValid(cfg.EntryBlock);
 
         private bool IsBlockOrAllSuccessorsValid(BasicBlock block)
         {
             var isValid = !IsInvalid(block) && (IsValid(block) || AreAllSuccessorsValid(block));
-            lattice[block] = isValid ? BlockResult.TRUE : BlockResult.FALSE;
+            visitedStatus[block] = !isValid;
             return isValid;
         }
 
         private bool AreAllSuccessorsValid(BasicBlock block)
         {
-            lattice[block] = BlockResult.INCONCLUSIVE;
-            if (!block.SuccessorBlocks.Contains(cfg.ExitBlock) && block.SuccessorBlocks.Any())
+            visitedStatus[block] = true; // protects from loops, don't fail the computation if hits itself
+            if (block.SuccessorBlocks.Any() && !block.SuccessorBlocks.Contains(cfg.ExitBlock))
             {
                 foreach (var successorBlock in block.SuccessorBlocks)
                 {
-                    if ((lattice.ContainsKey(successorBlock) && lattice[successorBlock] == BlockResult.FALSE)
-                        || (!lattice.ContainsKey(successorBlock) && !IsBlockOrAllSuccessorsValid(successorBlock)))
+                    if ((visitedStatus.ContainsKey(successorBlock) && visitedStatus[successorBlock])
+                        || (!visitedStatus.ContainsKey(successorBlock) && IsBlockOrAllSuccessorsValid(successorBlock)))
                     {
                         return false;
                     }
