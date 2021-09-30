@@ -162,13 +162,11 @@ namespace SonarAnalyzer.Rules.CSharp
         {
             if (useSonarCfg)
             {
-                return CSharpControlFlowGraph.TryGet(body, declaration.Context.SemanticModel, out var cfg)
-                    ? new LvaResult(declaration, cfg)
-                    : null;
+                return CSharpControlFlowGraph.TryGet(body, declaration.Context.SemanticModel, out var cfg) ? new LvaResult(declaration, cfg) : null;
             }
             else
             {
-                return new LvaResult(declaration, body.CreateCfg(declaration.Context.SemanticModel));
+                return body.CreateCfg(declaration.Context.SemanticModel) is { } cfg ? new LvaResult(declaration, cfg) : null;
             }
         }
 

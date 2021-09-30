@@ -58,10 +58,12 @@ namespace SonarAnalyzer.Rules.CSharp
 
             public void CheckForNoExitMethod(SyntaxNodeAnalysisContext c, CSharpSyntaxNode body, SyntaxToken identifier, IMethodSymbol symbol)
             {
-                var cfg = body.CreateCfg(c.SemanticModel);
-                var context = new RecursionContext<ControlFlowGraph>(cfg, symbol, identifier.GetLocation(), c, "method's recursion");
-                var walker = new RecursionSearcher(context);
-                walker.CheckPaths();
+                if (body.CreateCfg(c.SemanticModel) is { } cfg)
+                {
+                    var context = new RecursionContext<ControlFlowGraph>(cfg, symbol, identifier.GetLocation(), c, "method's recursion");
+                    var walker = new RecursionSearcher(context);
+                    walker.CheckPaths();
+                }
             }
 
             private class RecursionSearcher : CfgAllPathValidator
