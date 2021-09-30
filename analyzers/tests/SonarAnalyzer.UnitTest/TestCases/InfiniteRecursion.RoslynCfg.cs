@@ -514,6 +514,11 @@ namespace Tests.Diagnostics
         {
             return Parent.Method();
         }
+
+        public virtual int? NullableMethod()
+        {
+            return Parent?.NullableMethod();
+        }
     }
 
     class Two : One
@@ -532,6 +537,11 @@ namespace Tests.Diagnostics
         }
 
         public override int Method()
+        {
+            return 42;
+        }
+
+        public override int? NullableMethod()
         {
             return 42;
         }
