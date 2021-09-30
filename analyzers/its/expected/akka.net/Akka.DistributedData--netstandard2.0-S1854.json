@@ -7,7 +7,7 @@
 "uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\PruningState.cs",
 "region":  {
 "startLine":  69,
-"startColumn":  33,
+"startColumn":  28,
 "endLine":  69,
 "endColumn":  61
 }
