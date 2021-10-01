@@ -58,7 +58,7 @@ namespace Tests.TestCases
 
         void DoSomething(int a, int b) => throw new NotImplementedException();
 
-        private void UsedInCatch(int arg, int argLocalLifetime, int usedInLocalFunctionArg) // Noncompliant {{Remove this parameter 'argLocalLifetime', whose value is ignored in the method.}} FP
+        private void UsedInCatch(int arg, int argLocalLifetime, int usedInLocalFunctionArg)
         {
             try
             {
@@ -91,7 +91,7 @@ namespace Tests.TestCases
                 }
             }
 
-            void LocalFunctionLocalLifetime(int localArgLocalLifetime)  // Noncompliant
+            void LocalFunctionLocalLifetime(int localArgLocalLifetime)
             {
                 try
                 {

@@ -66,7 +66,7 @@ namespace SonarAnalyzer.CFG.LiveVariableAnalysis
                     }
                 }
             }
-            if (block.EnclosingRegion.Kind == ControlFlowRegionKind.Try)    // FIXME
+            if (block.IsEnclosedIn(ControlFlowRegionKind.Try))
             {
                 foreach (var catchOrFilterRegion in block.Successors.SelectMany(CatchOrFilterRegions))
                 {

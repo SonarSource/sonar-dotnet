@@ -57,7 +57,7 @@ namespace Tests.TestCases
 
         void DoSomething(int a, int b) => throw new NotImplementedException();
 
-        private void UsedInCatch(int arg, int argLocalLifetime, int usedInLocalFunctionArg) // Fixed
+        private void UsedInCatch(int arg, int argLocalLifetime, int usedInLocalFunctionArg)
         {
             try
             {
@@ -90,7 +90,7 @@ namespace Tests.TestCases
                 }
             }
 
-            void LocalFunctionLocalLifetime(int localArgLocalLifetime)  // Fixed
+            void LocalFunctionLocalLifetime(int localArgLocalLifetime)
             {
                 try
                 {

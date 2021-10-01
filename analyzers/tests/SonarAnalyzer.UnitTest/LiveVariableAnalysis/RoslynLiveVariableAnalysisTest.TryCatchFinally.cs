@@ -155,8 +155,8 @@ catch
 }
 Method(1);";
             var context = CreateContextCS(code);
-            context.ValidateEntry(/*FIXME: new LiveIn("intParameter"), new LiveOut("intParameter")*/);
-            context.Validate("t = true || true"/*FIXME:, new LiveIn("intParameter"), new LiveOut("intParameter")*/);
+            context.ValidateEntry(new LiveIn("intParameter"), new LiveOut("intParameter"));
+            context.Validate("t = true || true", new LiveIn("intParameter"), new LiveOut("intParameter"));
             context.Validate("Method(intParameter);", new LiveIn("intParameter"));
             context.Validate("Method(1);");
             context.ValidateExit();
