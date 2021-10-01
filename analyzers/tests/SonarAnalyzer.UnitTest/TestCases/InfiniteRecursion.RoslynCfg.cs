@@ -368,7 +368,7 @@ namespace Tests.Diagnostics
             x.CallsOnObject();
         }
 
-        public virtual void CallsOnObjectVirtual(MoreCases arg)  // Noncompliant
+        public virtual void CallsOnObjectVirtual(MoreCases arg)  // Compliant
         {
             arg.CallsOnObjectVirtual(arg);
         }
@@ -496,6 +496,60 @@ namespace Tests.Diagnostics
         {
             return Count * Price + Total();
         }
+    }
+
+    abstract class One
+    {
+        protected One Parent;
+
+        public virtual int Prop
+        {
+            get
+            {
+                return Parent.Prop;
+            }
+        }
+
+        public virtual int Method()
+        {
+            return Parent.Method();
+        }
+
+        public virtual int? NullableMethod()
+        {
+            return Parent?.NullableMethod();
+        }
+    }
+
+    class Two : One
+    {
+        public Two(One parent)
+        {
+            Parent = parent;
+        }
+    }
+
+    class Three : One
+    {
+        public override int Prop
+        {
+            get => 42;
+        }
+
+        public override int Method()
+        {
+            return 42;
+        }
+
+        public override int? NullableMethod()
+        {
+            return 42;
+        }
+    }
+
+    class StaticPropertyCase
+    {
+        private static int Prop { get => Prop; }  // Noncompliant
     }
 }
 
