@@ -91,17 +91,21 @@ namespace Tests.TestCases
         {
             try
             {
-                StaticLocalFunction(42);
+                StaticLocalFunction(42, 42, 42);
             }
             catch
             {
                 arg.ToString();
             }
 
-            static async void StaticLocalFunction(int staticLocalArg)
+            static async void StaticLocalFunction(int staticLocalArg, int staticLocalArgWithWhen, int staticLocalArgInWhen)
             {
                 try
                 {
+                }
+                catch when (staticLocalArgInWhen == 0)
+                {
+                    staticLocalArgWithWhen.ToString();
                 }
                 catch
                 {
