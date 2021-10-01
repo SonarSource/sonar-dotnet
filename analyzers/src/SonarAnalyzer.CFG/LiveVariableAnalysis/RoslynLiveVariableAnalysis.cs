@@ -19,7 +19,6 @@
  */
 
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
 using Microsoft.CodeAnalysis;
 using SonarAnalyzer.CFG.Roslyn;
@@ -67,7 +66,7 @@ namespace SonarAnalyzer.CFG.LiveVariableAnalysis
                     }
                 }
             }
-            if (block.EnclosingRegion.Kind == ControlFlowRegionKind.Try)
+            if (block.EnclosingRegion.Kind == ControlFlowRegionKind.Try)    // FIXME
             {
                 foreach (var catchOrFilterRegion in block.Successors.SelectMany(CatchOrFilterRegions))
                 {
@@ -96,7 +95,7 @@ namespace SonarAnalyzer.CFG.LiveVariableAnalysis
                     }
                 }
             }
-            else if (block.EnclosingRegion.Kind == ControlFlowRegionKind.Finally && block.Ordinal == block.EnclosingRegion.FirstBlockOrdinal)
+            else if (block.EnclosingRegion.Kind == ControlFlowRegionKind.Finally && block.Ordinal == block.EnclosingRegion.FirstBlockOrdinal)   // FIXME
             {
                 // Link first block of FinallyRegion to the source of all branches exiting that FinallyRegion
                 foreach (var trySuccessor in TryRegionSuccessors(block.EnclosingRegion))

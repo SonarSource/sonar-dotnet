@@ -86,6 +86,29 @@ namespace Tests.TestCases
             var x = new Dictionary<(uint, uint), string>();
             x[(id1, id2)] = value;
         }
+
+        public void UsedInCatch(int arg, int usedInLocalFunctionArg)
+        {
+            try
+            {
+                StaticLocalFunction(42);
+            }
+            catch
+            {
+                arg.ToString();
+            }
+
+            static async void StaticLocalFunction(int staticLocalArg)
+            {
+                try
+                {
+                }
+                catch
+                {
+                    staticLocalArg.ToString();
+                }
+            }
+        }
     }
 
     public class SwitchExpressions
@@ -122,7 +145,7 @@ namespace Tests.TestCases
     }
 
     // https://github.com/SonarSource/sonar-dotnet/issues/4704
-    public static  class Repro_4704
+    public static class Repro_4704
     {
         private static void ConfigureAndValidateSettings(this int someNumber, string someString)    // Compliant, captured in generic local method
         {
