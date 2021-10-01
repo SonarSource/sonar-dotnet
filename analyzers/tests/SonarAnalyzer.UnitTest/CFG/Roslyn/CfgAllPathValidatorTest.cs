@@ -72,6 +72,46 @@ public class Sample
             nonEntryBlockValid.CheckAllPaths().Should().BeTrue();
         }
 
+        // This test fails on the Sonar version of CfgAllPathValidator
+        [TestMethod]
+        public void ValidAfterBranching()
+        {
+            const string code = @"
+public class Sample
+{
+    internal string Prop;
+    public void Method(string input)
+    {
+        var x = true && true;
+        Prop = input;
+    }
+}
+";
+            var cfg = TestHelper.CompileCfg(code);
+            /*
+             *           Entry 0
+             *             |
+             *             |
+             *           Block 1
+             *           /   \
+             *     Else /     \ WhenFalse
+             *         /       \
+             *     Block 2    Block 3
+             *        \        /
+             *         \      /
+             *          \    /
+             *          Block 4
+             *             |
+             *             |
+             *          Block 5
+             *             |
+             *             |
+             *          Exit 6
+             */
+            var validator = new OnlyOneBlockIsValid(cfg, 5);
+            validator.CheckAllPaths().Should().BeTrue();
+        }
+
         private class TestNonEntryBlockValidator : CfgAllPathValidator
         {
             public TestNonEntryBlockValidator(ControlFlowGraph cfg) : base(cfg) { }
@@ -93,6 +133,19 @@ public class Sample
 
             protected override bool IsInvalid(BasicBlock block) =>
                 !validBlocks.Contains(block.Ordinal);
+        }
+
+        private class OnlyOneBlockIsValid : CfgAllPathValidator
+        {
+            private readonly int validBlock;
+
+            public OnlyOneBlockIsValid(ControlFlowGraph cfg, int validBlock) : base(cfg) =>
+                this.validBlock = validBlock;
+
+            protected override bool IsValid(BasicBlock block) =>
+                validBlock == block.Ordinal;
+
+            protected override bool IsInvalid(BasicBlock block) => false;
         }
     }
 }
