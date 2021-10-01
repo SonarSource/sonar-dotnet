@@ -26,7 +26,7 @@ namespace SonarAnalyzer.CFG.Roslyn
     public abstract class CfgAllPathValidator
     {
         private readonly ControlFlowGraph cfg;
-        private readonly HashSet<BasicBlock> visited = new HashSet<BasicBlock>();
+        private readonly Dictionary<BasicBlock, bool> visitedStatus = new Dictionary<BasicBlock, bool>();
 
         protected abstract bool IsValid(BasicBlock block);
         protected abstract bool IsInvalid(BasicBlock block);
@@ -35,18 +35,20 @@ namespace SonarAnalyzer.CFG.Roslyn
             this.cfg = cfg;
 
         public bool CheckAllPaths() =>
-            IsBlockOrAllSuccessorsValid(this.cfg.EntryBlock);
+            IsBlockOrAllSuccessorsValid(cfg.EntryBlock);
 
-        private bool IsBlockOrAllSuccessorsValid(BasicBlock block) =>
-            !IsInvalid(block) && (IsValid(block) || AreAllSuccessorsValid(block));
+        private bool IsBlockOrAllSuccessorsValid(BasicBlock block)
+        {
+            var isValid = !IsInvalid(block) && (IsValid(block) || AreAllSuccessorsValid(block));
+            visitedStatus[block] = isValid;
+            return isValid;
+        }
 
         private bool AreAllSuccessorsValid(BasicBlock block)
         {
-            this.visited.Add(block);
-
-            return !block.SuccessorBlocks.Contains(cfg.ExitBlock)
-                   && block.SuccessorBlocks.Except(visited).Any()
-                   && block.SuccessorBlocks.Except(visited).All(IsBlockOrAllSuccessorsValid);
+            visitedStatus[block] = true; // protects from loops, don't fail the computation if hits itself
+            return block.SuccessorBlocks.Any()
+                   && block.SuccessorBlocks.All(x => x != cfg.ExitBlock && (visitedStatus.ContainsKey(x) ? visitedStatus[x] : IsBlockOrAllSuccessorsValid(x)));
         }
     }
 }
