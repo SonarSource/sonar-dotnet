@@ -95,10 +95,12 @@ namespace SonarAnalyzer.CFG.LiveVariableAnalysis
                     }
                 }
             }
-            else if (block.EnclosingRegion.Kind == ControlFlowRegionKind.Finally && block.Ordinal == block.EnclosingRegion.FirstBlockOrdinal)   // FIXME
+            else if (block.EnclosingNonLocalLifetimeRegion() is var enclosingRegion
+                && enclosingRegion.Kind == ControlFlowRegionKind.Finally
+                && block.Ordinal == block.EnclosingRegion.FirstBlockOrdinal)
             {
                 // Link first block of FinallyRegion to the source of all branches exiting that FinallyRegion
-                foreach (var trySuccessor in TryRegionSuccessors(block.EnclosingRegion))
+                foreach (var trySuccessor in TryRegionSuccessors(enclosingRegion))
                 {
                     yield return trySuccessor.Source;
                 }

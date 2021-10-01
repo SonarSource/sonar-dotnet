@@ -26,12 +26,18 @@ namespace SonarAnalyzer.Extensions
     {
         public static bool IsEnclosedIn(this BasicBlock block, ControlFlowRegionKind kind)
         {
+            var enclosing = kind == ControlFlowRegionKind.LocalLifetime ? block.EnclosingRegion : block.EnclosingNonLocalLifetimeRegion();
+            return enclosing.Kind == kind;
+        }
+
+        public static ControlFlowRegion EnclosingNonLocalLifetimeRegion(this BasicBlock block)
+        {
             var region = block.EnclosingRegion;
-            while (kind != ControlFlowRegionKind.LocalLifetime && region.EnclosingRegion != null && region.Kind == ControlFlowRegionKind.LocalLifetime)
+            while (region.EnclosingRegion != null && region.Kind == ControlFlowRegionKind.LocalLifetime)
             {
                 region = region.EnclosingRegion;
             }
-            return region.Kind == kind;
+            return region;
         }
     }
 }

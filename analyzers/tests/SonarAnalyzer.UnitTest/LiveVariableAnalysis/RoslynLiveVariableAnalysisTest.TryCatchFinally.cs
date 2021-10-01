@@ -789,8 +789,8 @@ B:
 Method(2);";
             var context = CreateContextCS(code);
             context.ValidateEntry(new LiveIn("boolParameter", "intParameter"), new LiveOut("boolParameter", "intParameter"));
-            context.Validate("Method(intParameter);", new LiveIn("boolParameter", "intParameter")/*FIXME:, new LiveOut("boolParameter", "intParameter")*/);
-            context.Validate("Method(0);"/*FIXME:, new LiveIn("boolParameter", "intParameter"), new LiveOut("boolParameter", "intParameter")*/);
+            context.Validate("Method(intParameter);", new LiveIn("boolParameter", "intParameter"), new LiveOut("boolParameter", "intParameter"));
+            context.Validate("Method(0);", new LiveIn("boolParameter", "intParameter"), new LiveOut("boolParameter", "intParameter"));
             context.Validate("Method(1);", new LiveIn("boolParameter", "intParameter"), new LiveOut("boolParameter", "intParameter"));
             context.Validate("Method(2);");
         }
