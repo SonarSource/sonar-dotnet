@@ -141,6 +141,28 @@ Method(1);";
         }
 
         [TestMethod]
+        public void Catch_TryHasLocalLifetimeRegion_LiveIn()
+        {
+            var code = @"
+try
+{
+    Method(0);
+    var t = true || true; // This causes LocalLivetimeRegion to be generated
+}
+catch
+{
+    Method(intParameter);
+}
+Method(1);";
+            var context = CreateContextCS(code);
+            context.ValidateEntry(new LiveIn("intParameter"), new LiveOut("intParameter"));
+            context.Validate("t = true || true", new LiveIn("intParameter"), new LiveOut("intParameter"));
+            context.Validate("Method(intParameter);", new LiveIn("intParameter"));
+            context.Validate("Method(1);");
+            context.ValidateExit();
+        }
+
+        [TestMethod]
         public void Catch_VariableUsedAfter_LiveIn_LiveOut()
         {
             var code = @"
@@ -531,6 +553,28 @@ Method(intParameter);";
         }
 
         [TestMethod]
+        public void Finally_VariableUsedAfter_FinallyHasLocalLifetimeRegion_LiveIn_LiveOut()
+        {
+            var code = @"
+try
+{
+    Method(0);
+}
+finally
+{
+    Method(1);
+    var t = true || true; // This causes LocalLivetimeRegion to be generated, but there's also one empty block outside if before the exit branch
+}
+Method(intParameter);";
+            var context = CreateContextCS(code);
+            context.ValidateEntry(new LiveIn("intParameter"), new LiveOut("intParameter"));
+            context.Validate("Method(0);", new LiveIn("intParameter"), new LiveOut("intParameter"));
+            context.Validate("Method(1);", new LiveIn("intParameter"), new LiveOut("intParameter"));
+            context.Validate("Method(intParameter);", new LiveIn("intParameter"));
+            context.ValidateExit();
+        }
+
+        [TestMethod]
         public void Finally_WithThrowStatement_LiveIn()
         {
             var code = @"
@@ -710,6 +754,34 @@ try
 }
 finally
 {
+    Method(1);
+}
+goto A;
+B:
+Method(2);";
+            var context = CreateContextCS(code);
+            context.ValidateEntry(new LiveIn("boolParameter", "intParameter"), new LiveOut("boolParameter", "intParameter"));
+            context.Validate("Method(intParameter);", new LiveIn("boolParameter", "intParameter"), new LiveOut("boolParameter", "intParameter"));
+            context.Validate("Method(0);", new LiveIn("boolParameter", "intParameter"), new LiveOut("boolParameter", "intParameter"));
+            context.Validate("Method(1);", new LiveIn("boolParameter", "intParameter"), new LiveOut("boolParameter", "intParameter"));
+            context.Validate("Method(2);");
+        }
+
+        [TestMethod]
+        public void Finally_Loop_Propagates_FinallyHasLocalLifetimeRegion_LiveIn_LiveOut()
+        {
+            var code = @"
+A:
+Method(intParameter);
+if (boolParameter)
+    goto B;
+try
+{
+    Method(0);
+}
+finally
+{
+    var t = true || true; // This causes LocalLivetimeRegion to be generated
     Method(1);
 }
 goto A;

@@ -56,6 +56,56 @@ namespace Tests.TestCases
         }
 
         void DoSomething(int a, int b) => throw new NotImplementedException();
+
+        private void UsedInCatch(int arg, int argLocalLifetime, int usedInLocalFunctionArg)
+        {
+            try
+            {
+                LocalFunction(42);
+            }
+            catch
+            {
+                arg.ToString();
+            }
+
+            try
+            {
+                LocalFunctionLocalLifetime(42);
+                var t = true || true; // This causes LocalLivetimeRegion to be generated
+            }
+            catch
+            {
+                argLocalLifetime.ToString();
+            }
+
+            void LocalFunction(int localArg)
+            {
+                try
+                {
+                }
+                catch
+                {
+                    localArg.ToString();
+                    usedInLocalFunctionArg.ToString();
+                }
+            }
+
+            void LocalFunctionLocalLifetime(int localArgLocalLifetime)
+            {
+                try
+                {
+                    DoSomething();
+                    var t = true || true; // This causes LocalLivetimeRegion to be generated
+                }
+                catch
+                {
+                    localArgLocalLifetime.ToString();
+                    usedInLocalFunctionArg.ToString();
+                }
+            }
+
+            void DoSomething() { }
+        }
     }
 
     class MainEntryPoints1
