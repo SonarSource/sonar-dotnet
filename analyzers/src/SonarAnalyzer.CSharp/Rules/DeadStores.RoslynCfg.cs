@@ -78,13 +78,16 @@ namespace SonarAnalyzer.Rules.CSharp
 
                 private void ProcessParameterOrLocalReference(IOperationWrapper reference)
                 {
-                    if (owner.lva.ParameterOrLocalSymbol(reference.WrappedOperation) is { } symbol
-                        && IsSymbolRelevant(symbol)
-                        && !RoslynLiveVariableAnalysis.IsOutArgument(reference.WrappedOperation)
-                        && !reference.IsAssignmentTarget()
-                        && !reference.IsCompoundAssignmentTarget())
+                    if (owner.lva.ParameterOrLocalSymbol(reference.WrappedOperation) is { } symbol && IsSymbolRelevant(symbol))
                     {
-                        liveOut.Add(symbol);
+                        if (reference.IsOutArgument())
+                        {
+                            liveOut.Remove(symbol);
+                        }
+                        else if (!reference.IsAssignmentTarget() && !reference.IsCompoundAssignmentTarget())
+                        {
+                            liveOut.Add(symbol);
+                        }
                     }
                 }
 

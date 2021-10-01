@@ -45,11 +45,6 @@ namespace SonarAnalyzer.CFG.LiveVariableAnalysis
             return IsLocal(candidate) ? candidate : null;
         }
 
-        public static bool IsOutArgument(IOperation operation) =>
-            new IOperationWrapperSonar(operation) is var wrapped
-            && IArgumentOperationWrapper.IsInstance(wrapped.Parent)
-            && IArgumentOperationWrapper.FromOperation(wrapped.Parent).Parameter.RefKind == RefKind.Out;
-
         protected override IEnumerable<BasicBlock> ReversedBlocks() =>
             Cfg.Blocks.Reverse();
 
@@ -198,7 +193,7 @@ namespace SonarAnalyzer.CFG.LiveVariableAnalysis
             {
                 if (owner.ParameterOrLocalSymbol(reference.WrappedOperation) is { } symbol)
                 {
-                    if (IsOutArgument(reference.WrappedOperation))
+                    if (reference.IsOutArgument())
                     {
                         Assigned.Add(symbol);
                         UsedBeforeAssigned.Remove(symbol);

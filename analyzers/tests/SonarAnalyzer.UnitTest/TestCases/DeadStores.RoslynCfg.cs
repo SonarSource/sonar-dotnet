@@ -519,6 +519,26 @@ namespace Tests.Diagnostics
             Method5Call1(out x); // Compliant, reporting on this can be considered false positive, although it's not.
         }
 
+        public int UsedAsOutInstance()
+        {
+            var list = new List<int>(); // Noncompliant
+            if(InvokeOut(out list))
+            {
+                return list.Count;
+            }
+            else
+            {
+                return 0;
+            }
+
+            bool InvokeOut(out List<int> list)
+            {
+                list = null;
+                return true;
+            }
+        }
+
+
         public List<int> Method6()
         {
             var i = 10;
