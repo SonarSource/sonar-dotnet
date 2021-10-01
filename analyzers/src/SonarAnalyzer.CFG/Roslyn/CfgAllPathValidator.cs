@@ -48,7 +48,6 @@ namespace SonarAnalyzer.CFG.Roslyn
         {
             visitedStatus[block] = true; // protects from loops, don't fail the computation if hits itself
             return block.SuccessorBlocks.Any()
-                   && !block.SuccessorBlocks.Contains(cfg.ExitBlock)
                    && block.SuccessorBlocks.All(x => x != cfg.ExitBlock && (visitedStatus.ContainsKey(x) ? visitedStatus[x] : IsBlockOrAllSuccessorsValid(x)));
         }
     }
