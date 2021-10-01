@@ -46,13 +46,13 @@ namespace SonarAnalyzer.CFG.Roslyn
 
         private bool AreAllSuccessorsValid(BasicBlock block)
         {
-            visitedStatus[block] = true; // protects from loops, don't fail the computation if hits itself
+            visitedStatus[block] = false; // protects from loops, don't fail the computation if hits itself
             if (block.SuccessorBlocks.Any() && !block.SuccessorBlocks.Contains(cfg.ExitBlock))
             {
                 foreach (var successorBlock in block.SuccessorBlocks)
                 {
                     if ((visitedStatus.ContainsKey(successorBlock) && visitedStatus[successorBlock])
-                        || (!visitedStatus.ContainsKey(successorBlock) && IsBlockOrAllSuccessorsValid(successorBlock)))
+                        || (!visitedStatus.ContainsKey(successorBlock) && !IsBlockOrAllSuccessorsValid(successorBlock)))
                     {
                         return false;
                     }
