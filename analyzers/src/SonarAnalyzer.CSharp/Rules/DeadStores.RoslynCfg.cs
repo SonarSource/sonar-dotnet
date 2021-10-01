@@ -80,7 +80,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 {
                     if (owner.lva.ParameterOrLocalSymbol(reference.WrappedOperation) is { } symbol && IsSymbolRelevant(symbol))
                     {
-                        if (RoslynLiveVariableAnalysis.IsOutArgument(reference.WrappedOperation))
+                        if (reference.IsOutArgument())
                         {
                             liveOut.Remove(symbol);
                         }
