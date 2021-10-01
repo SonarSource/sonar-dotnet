@@ -521,7 +521,7 @@ namespace Tests.Diagnostics
 
         public int UsedAsOutInstance()
         {
-            var list = new List<int>(); // FN
+            var list = new List<int>(); // Noncompliant
             if(InvokeOut(out list))
             {
                 return list.Count;
