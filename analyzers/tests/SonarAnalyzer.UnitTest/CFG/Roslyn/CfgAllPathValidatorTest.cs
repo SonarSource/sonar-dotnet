@@ -112,6 +112,44 @@ public class Sample
             validator.CheckAllPaths().Should().BeTrue();
         }
 
+        [TestMethod]
+        public void LoopInCfg()
+        {
+            const string code = @"
+public class Sample
+{
+    public void Method(string input)
+    {
+        var a = input;
+    A:
+        if (input != "")
+            goto C;
+        else
+            goto B;
+    C:
+        input = String.Empty;
+        goto A;
+    B:
+        input = input;
+    }
+}
+";
+            var cfg = TestHelper.CompileCfg(code);
+            /*
+             *           Entry 0
+             *             |
+             *           Block 1
+             *             |
+             *           Block 2 <----> Block 3
+             *             |
+             *          Block 4
+             *             |
+             *           Exit 5
+             */
+            var validator = new OnlyOneBlockIsValid(cfg, 4);
+            validator.CheckAllPaths().Should().BeTrue();
+        }
+
         private class TestNonEntryBlockValidator : CfgAllPathValidator
         {
             public TestNonEntryBlockValidator(ControlFlowGraph cfg) : base(cfg) { }
