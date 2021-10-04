@@ -11,6 +11,6 @@
   ],
   "defaultSeverity": "Minor",
   "ruleSpecification": "RSPEC-2348",
-  "sqKey": "EventName",
+  "sqKey": "S2348",
   "scope": "Main"
 }

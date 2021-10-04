@@ -11,6 +11,6 @@
   ],
   "defaultSeverity": "Major",
   "ruleSpecification": "RSPEC-2352",
-  "sqKey": "IndexedPropertyWithMultipleParameters",
+  "sqKey": "S2352",
   "scope": "Main"
 }
