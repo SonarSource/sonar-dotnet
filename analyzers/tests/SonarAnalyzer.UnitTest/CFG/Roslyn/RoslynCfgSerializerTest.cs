@@ -653,5 +653,28 @@ cfg0_block8 -> cfg0_block9
 }
 ");
         }
+
+        [TestMethod]
+        public void Serialize_InvalidOperation()
+        {
+            var code = @"
+class Sample
+{
+    void Method()
+    {
+        undefined;
+    }
+}";
+            var dot = CfgSerializer.Serialize(TestHelper.CompileCfg(code));
+            dot.Should().BeIgnoringLineEndings(
+@"digraph ""RoslynCfg"" {
+cfg0_block0 [shape=record label=""{ENTRY #0}""]
+cfg0_block1 [shape=record label=""{BLOCK #1|0# ExpressionStatementOperation / ExpressionStatementSyntax: undefined();|1# InvalidOperation / InvocationExpressionSyntax: undefined()|2# InvalidOperation / IdentifierNameSyntax: undefined|##########}""]
+cfg0_block2 [shape=record label=""{EXIT #2}""]
+cfg0_block0 -> cfg0_block1
+cfg0_block1 -> cfg0_block2
+}
+");
+        }
     }
 }
