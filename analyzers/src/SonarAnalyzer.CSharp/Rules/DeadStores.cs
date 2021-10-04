@@ -105,12 +105,6 @@ namespace SonarAnalyzer.Rules.CSharp
                 else
                 {
                     var cfg = node.CreateCfg(context.SemanticModel);
-
-                    if (symbol.Name == "UsedInFinally")
-                    {
-                        var x = 10;
-                    }
-
                     var lva = new RoslynLiveVariableAnalysis(cfg, symbol);
                     var checker = new RoslynChecker(context, lva);
                     checker.Analyze(cfg.Blocks);

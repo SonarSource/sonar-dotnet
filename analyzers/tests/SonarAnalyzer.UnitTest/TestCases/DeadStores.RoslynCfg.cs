@@ -1329,6 +1329,20 @@ namespace Tests.Diagnostics
     {
         public void UsedInFinally()
         {
+            int value = 42; // Compliant, Muted
+            try
+            {
+                SomethingThatCanThrow();
+                value = 0;
+            }
+            finally
+            {
+                Use(value);
+            }
+        }
+
+        public void UsedInFinally_NestedInLambda()
+        {
             try
             {
                 Action a = () =>
