@@ -22,12 +22,13 @@ foreach (var element in collection2) // Noncompliant
 <h2>Compliant Solution</h2>
 <pre>
 var result = new List&lt;string&gt;();
-foreach (var element in collection.Where(x=&gt;condition(x))
+
+foreach (var element in collection.Where(x =&gt; condition(x)))
 {
   result.Add(element);
 }
 
-foreach (var someValue in collection2.Select(x=&gt;x.Property).Where(y=&gt; y != null)
+foreach (var someValue in collection2.Select(x =&gt; x.Property).Where(y =&gt; y != null))
 {
   result.Add(someValue);
 }

@@ -11,6 +11,6 @@
   ],
   "defaultSeverity": "Minor",
   "ruleSpecification": "RSPEC-2355",
-  "sqKey": "LongArrayCreationSyntaxUsage",
+  "sqKey": "S2355",
   "scope": "Main"
 }

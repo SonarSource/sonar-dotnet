@@ -11,6 +11,6 @@
   ],
   "defaultSeverity": "Blocker",
   "ruleSpecification": "RSPEC-2306",
-  "sqKey": "AsyncAwaitIdentifier",
+  "sqKey": "S2306",
   "scope": "All"
 }
