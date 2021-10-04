@@ -27,8 +27,8 @@ using Microsoft.CodeAnalysis.CodeActions;
 using Microsoft.CodeAnalysis.CodeFixes;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
+using DocumentBasedFixAllProvider = SonarAnalyzer.Common.DocumentBasedFixAllProvider;
 
 namespace SonarAnalyzer.UnitTest.TestFramework
 {
