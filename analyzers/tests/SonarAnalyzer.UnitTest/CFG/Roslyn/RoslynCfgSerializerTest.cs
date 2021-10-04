@@ -521,8 +521,8 @@ class Sample
 
         int Local() => fourty + LocalStatic();
 
-        static int LocalStatic() => LocalStatic(1);
-        static int LocalStatic(int one) => one + 1; // Overloaded
+        static int LocalStatic() => LocalStaticArg(1);
+        static int LocalStaticArg(int one) => one + 1; // Overloaded
     }
 }";
             var dot = CfgSerializer.Serialize(TestHelper.CompileCfg(code));
@@ -543,11 +543,11 @@ cfg1_block2 [shape=record label=""{EXIT #2}""]
 subgraph ""cluster_RoslynCfg.LocalStatic.4"" {
 label = ""RoslynCfg.LocalStatic.4""
 cfg3_block0 [shape=record label=""{ENTRY #0}""]
-cfg3_block1 [shape=record label=""{BLOCK #1|## BranchValue ##|0# InvalidOperation / InvocationExpressionSyntax: LocalStatic(1)|1# LiteralOperation / LiteralExpressionSyntax: 1|##########}""]
+cfg3_block1 [shape=record label=""{BLOCK #1|## BranchValue ##|0# InvocationOperation: LocalStaticArg / InvocationExpressionSyntax: LocalStaticArg(1)|1# ArgumentOperation / ArgumentSyntax: 1|2# LiteralOperation / LiteralExpressionSyntax: 1|##########}""]
 cfg3_block2 [shape=record label=""{EXIT #2}""]
 }
-subgraph ""cluster_RoslynCfg.LocalStatic.6"" {
-label = ""RoslynCfg.LocalStatic.6""
+subgraph ""cluster_RoslynCfg.LocalStaticArg.6"" {
+label = ""RoslynCfg.LocalStaticArg.6""
 cfg5_block0 [shape=record label=""{ENTRY #0}""]
 cfg5_block1 [shape=record label=""{BLOCK #1|## BranchValue ##|0# BinaryOperation / BinaryExpressionSyntax: one + 1|1# ParameterReferenceOperation / IdentifierNameSyntax: one|1# LiteralOperation / LiteralExpressionSyntax: 1|##########}""]
 cfg5_block2 [shape=record label=""{EXIT #2}""]
