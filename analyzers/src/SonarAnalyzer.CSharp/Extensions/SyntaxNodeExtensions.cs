@@ -112,19 +112,14 @@ namespace SonarAnalyzer.Extensions
 
         public static SyntaxNode RemoveParentheses(this SyntaxNode expression)
         {
-            var currentExpression = expression;
-            while (currentExpression?.IsAnyKind(SyntaxKind.ParenthesizedExpression, SyntaxKindEx.ParenthesizedPattern) ?? false)
+            var current = expression;
+            while (current is { } && current.IsAnyKind(SyntaxKind.ParenthesizedExpression, SyntaxKindEx.ParenthesizedPattern))
             {
-                if (currentExpression.IsKind(SyntaxKind.ParenthesizedExpression))
-                {
-                    currentExpression = ((ParenthesizedExpressionSyntax)currentExpression).Expression;
-                }
-                else
-                {
-                    currentExpression = ((ParenthesizedPatternSyntaxWrapper)currentExpression).Pattern;
-                }
+                current = current.IsKind(SyntaxKindEx.ParenthesizedPattern)
+                    ? ((ParenthesizedPatternSyntaxWrapper)current).Pattern
+                    : ((ParenthesizedExpressionSyntax)current).Expression;
             }
-            return currentExpression;
+            return current;
         }
 
         public static ControlFlowGraph CreateCfg(this SyntaxNode body, SemanticModel semanticModel, IMethodSymbol symbol)

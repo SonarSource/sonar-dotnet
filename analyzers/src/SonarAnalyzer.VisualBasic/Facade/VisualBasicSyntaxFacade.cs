@@ -80,14 +80,7 @@ namespace SonarAnalyzer.Helpers.Facade
                 _ => string.Empty
             };
 
-        public override SyntaxNode RemoveParentheses(SyntaxNode expression)
-        {
-            var current = expression;
-            while (current?.IsKind(SyntaxKind.ParenthesizedExpression) ?? false)
-            {
-                current = Cast<ParenthesizedExpressionSyntax>(current).Expression;
-            }
-            return current;
-        }
+        public override SyntaxNode RemoveParentheses(SyntaxNode node) =>
+            node.RemoveParentheses();
     }
 }
