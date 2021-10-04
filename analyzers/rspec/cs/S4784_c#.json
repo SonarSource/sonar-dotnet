@@ -1,8 +1,8 @@
 {
   "title": "Using regular expressions is security-sensitive",
   "type": "SECURITY_HOTSPOT",
-  "tags": [],
   "status": "deprecated",
+  "tags": [],
   "defaultSeverity": "Critical",
   "ruleSpecification": "RSPEC-4784",
   "sqKey": "S4784",
