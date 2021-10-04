@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Net;
 
 namespace Tests.Diagnostics
 {
@@ -182,12 +183,14 @@ public class Repro_4399
     class LocalFields
     {
         private int start = 0;
+        public int End { get; set; } = 0;
 
         public void UpdateStart(int val) => start = val;
 
         public override int GetHashCode()
         {
-            return Method(); // Fixed
+            var endValue = Method() ^ End;
+            return Method() ^ start;
 
             int Method() => 42;
         }

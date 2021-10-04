@@ -56,7 +56,7 @@ namespace SonarAnalyzer.Rules.CSharp
         }
 
         protected override object FindConstant(SemanticModel semanticModel, SyntaxNode node) =>
-            node.FindConstantValue(semanticModel);
+            semanticModel.GetSymbolInfo(node).Symbol is { Kind: SymbolKind.Field or SymbolKind.Property } ? null : node.FindConstantValue(semanticModel);
 
         private void CheckAssignment(SyntaxNodeAnalysisContext context, int constValueToLookFor)
         {
