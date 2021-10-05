@@ -56,7 +56,7 @@ namespace SonarAnalyzer.Rules.CSharp
         }
 
         protected override object FindConstant(SemanticModel semanticModel, SyntaxNode node) =>
-            IsFieldOrProperty(semanticModel, node, out var symbol) && !FieldOrPropertyBelongToSystemNamespace(symbol)
+            IsFieldOrProperty(semanticModel, node, out var symbol) && !IsInSystemNamespace(symbol)
                 ? null
                 : node.FindConstantValue(semanticModel);
 
@@ -85,7 +85,7 @@ namespace SonarAnalyzer.Rules.CSharp
             return symbol is {Kind: SymbolKind.Field or SymbolKind.Property};
         }
 
-        private static bool FieldOrPropertyBelongToSystemNamespace(ISymbol symbol) =>
+        private static bool IsInSystemNamespace(ISymbol symbol) =>
             symbol.ContainingNamespace.Name == "System";
     }
 }
