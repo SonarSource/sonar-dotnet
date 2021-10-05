@@ -113,8 +113,11 @@ namespace SonarAnalyzer.CFG
                 SerializeOperation(0, operation).Concat(new[] { "##########" });
 
             private static IEnumerable<string> SerializeOperation(int level, IOperation operation) =>
-                new[] { $"{level}# {operation.GetType().Name}{OperationSuffix(operation)} / {operation.Syntax.GetType().Name}: {operation.Syntax}" }
+                new[] { $"{level}# {OperationPrefix(operation)}{OperationSuffix(operation)} / {operation.Syntax.GetType().Name}: {operation.Syntax}" }
                 .Concat(new IOperationWrapperSonar(operation).Children.SelectMany(x => SerializeOperation(level + 1, x)));
+
+            private static string OperationPrefix(IOperation op) =>
+                op.Kind == OperationKindEx.Invalid ? "INVALID" : op.GetType().Name;
 
             private static string OperationSuffix(IOperation op) =>
                 op switch
