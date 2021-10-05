@@ -1323,4 +1323,85 @@ namespace Tests.Diagnostics
             } while (!created); // Compliant
         }
     }
+
+    // https://github.com/SonarSource/sonar-dotnet/issues/4948
+    public class Repro_4948
+    {
+        public void UsedInFinally()
+        {
+            int value = 42; // Compliant, Muted
+            try
+            {
+                SomethingThatCanThrow();
+                value = 0;
+            }
+            finally
+            {
+                Use(value);
+            }
+        }
+
+        public void UsedInFinally_NestedInLambda()
+        {
+            try
+            {
+                Action a = () =>
+                {
+                    int value = 42; // Noncompliant FP
+                    try
+                    {
+                        SomethingThatCanThrow();
+                        value = 0;
+                    }
+                    finally
+                    {
+                        Use(value);
+                    }
+                };
+            }
+            finally
+            {
+            }
+        }
+
+        public void UsedInFinally_Throw()
+        {
+            var value = 42; // Noncompliant FP related to LVA
+            try
+            {
+                throw new Exception();
+            }
+            finally
+            {
+                Use(value);
+            }
+        }
+
+        private void SomethingThatCanThrow() { }
+        private void Use(int arg) { }
+    }
+
+    // https://github.com/SonarSource/sonar-dotnet/issues/4949
+    public class Repro_4949
+    {
+        public void TryReturns_Loop()
+        {
+            var counter = 0;
+            while (counter < 5)
+            {
+                counter++;  // Noncompliant FP related to LVA
+                try
+                {
+                    SomethingThatCanThrow();
+                    return;
+                }
+                catch (TimeoutException)
+                {
+                    // Continue loop to the next try
+                }
+            }
+        }
+
+        private void SomethingThatCanThrow() { }
+    }
 }
