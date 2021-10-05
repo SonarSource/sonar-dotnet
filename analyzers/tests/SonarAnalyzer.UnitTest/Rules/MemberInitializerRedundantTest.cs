@@ -33,6 +33,10 @@ namespace SonarAnalyzer.UnitTest.Rules
             Verifier.VerifyAnalyzer(@"TestCases\MemberInitializerRedundant.cs", new MemberInitializerRedundant(), ParseOptionsHelper.FromCSharp8);
 
         [TestMethod]
+        public void MemberInitializerRedundant_RoslynCfg_FlowCaptureOperationNotSupported() =>
+            Verifier.VerifyNoIssueReported(@"TestCases\MemberInitializerRedundant.RoslynCfg.FlowCaptureBug.cs", new MemberInitializerRedundant(), ParseOptionsHelper.FromCSharp8);
+
+        [TestMethod]
         public void MemberInitializerRedundant_SonarCfg() =>
             Verifier.VerifyAnalyzer(@"TestCases\MemberInitializerRedundant.cs", new MemberInitializerRedundant(AnalyzerConfiguration.AlwaysEnabledWithSonarCfg), ParseOptionsHelper.FromCSharp8);
 
