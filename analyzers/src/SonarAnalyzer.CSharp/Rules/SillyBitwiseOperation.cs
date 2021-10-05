@@ -78,8 +78,10 @@ namespace SonarAnalyzer.Rules.CSharp
         }
 
         private static bool IsFieldOrProperty(SemanticModel semanticModel, SyntaxNode node) =>
-            semanticModel.GetSymbolInfo(node).Symbol is { } symbol
-            && symbol.ContainingNamespace.Name != "System"  // Excluding built-in constants
-            && symbol.Kind is SymbolKind.Field or SymbolKind.Property;
+            semanticModel.GetSymbolInfo(node).Symbol is { Kind: SymbolKind.Field or SymbolKind.Property } symbol
+            && !FieldOrPropertyBelongToSystemNamespace(symbol);
+
+        private static bool FieldOrPropertyBelongToSystemNamespace(ISymbol symbol) =>
+            symbol.ContainingNamespace.Name == "System";
     }
 }
