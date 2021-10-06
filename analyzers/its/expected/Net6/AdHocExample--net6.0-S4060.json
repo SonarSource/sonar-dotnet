@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S4060",
+"message":  "Seal this attribute or make it abstract.",
+"location":  {
+"uri":  "sources\Net6\AdHocExample\Class1.cs",
+"region":  {
+"startLine":  82,
+"startColumn":  14,
+"endLine":  82,
+"endColumn":  25
+}
+}
+}
+]
+}

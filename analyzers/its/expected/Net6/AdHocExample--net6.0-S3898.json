@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S3898",
+"message":  "Implement 'IEquatable<T>' in value type 'Struct'.",
+"location":  {
+"uri":  "sources\Net6\AdHocExample\Class1.cs",
+"region":  {
+"startLine":  16,
+"startColumn":  15,
+"endLine":  16,
+"endColumn":  21
+}
+}
+}
+]
+}

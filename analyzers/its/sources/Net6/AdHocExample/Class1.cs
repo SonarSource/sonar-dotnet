@@ -36,10 +36,23 @@ public record class RecordClass(int Property)
         RecordStruct rs2 = rs with { Property = null };
 
         // Extended property patterns
-        if (rs is RecordStruct { Property.Count: 5 })
-        {
+//        error AD0001: Analyzer 'SonarAnalyzer.Rules.CSharp.DoNotCheckZeroSizeCollection' threw an exception of type
+//        'System.NullReferenceException' with message 'Object reference not set to an instance of an object.'.
+//        [C:\SonarSource\sonar - dotnet\analyzers\its\sources\Net6\AdHocExample\AdHocExample.csproj]
+//        Exception occurred with following context:
+//    Compilation:
+//        AdHocExample
+//        SyntaxTree: C:\SonarSource\sonar - dotnet\analyzers\its\sources\Net6\AdHocExample\Class1.cs
+//        SyntaxNode: { Property.Count: 5 }
+//        [PropertyPatternClauseSyntax]@[1107..1128) (38, 31) - (38, 52)
+//        System.NullReferenceException: Object reference not set to an instance of an object.
+//        at SonarAnalyzer.Rules.CSharp.DoNotCheckZeroSizeCollection.AnalyzePropertyPatternClause(SyntaxNodeAnalysisContext c)
 
-        }
+
+        //if (rs is RecordStruct { Property.Count: 5 }) 
+        //{
+
+        //}
 
         int a = 5;
 

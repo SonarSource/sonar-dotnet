@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S125",
+"message":  "Remove this commented out code.",
+"location":  {
+"uri":  "sources\Net6\AdHocExample\Class1.cs",
+"region":  {
+"startLine":  53,
+"startColumn":  9,
+"endLine":  53,
+"endColumn":  12
+}
+}
+}
+]
+}

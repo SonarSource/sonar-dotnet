@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S3168",
+"message":  "Return 'Task' instead.",
+"location":  {
+"uri":  "sources\Net6\AdHocExample\Class1.cs",
+"region":  {
+"startLine":  72,
+"startColumn":  18,
+"endLine":  72,
+"endColumn":  22
+}
+}
+}
+]
+}

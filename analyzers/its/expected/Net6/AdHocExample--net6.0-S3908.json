@@ -1,0 +1,43 @@
+{
+"issues":  [
+{
+"id":  "S3908",
+"message":  "Refactor this delegate to use 'System.EventHandler<TEventArgs>'.",
+"location":  {
+"uri":  "sources\Net6\AdHocExample\Class1.cs",
+"region":  {
+"startLine":  96,
+"startColumn":  27,
+"endLine":  96,
+"endColumn":  33
+}
+}
+},
+{
+"id":  "S3908",
+"message":  "Refactor this delegate to use 'System.EventHandler<TEventArgs>'.",
+"location":  {
+"uri":  "sources\Net6\AdHocExample\Class1.cs",
+"region":  {
+"startLine":  113,
+"startColumn":  25,
+"endLine":  113,
+"endColumn":  31
+}
+}
+},
+{
+"id":  "S3908",
+"message":  "Refactor this delegate to use 'System.EventHandler<TEventArgs>'.",
+"location":  {
+"uri":  "sources\Net6\AdHocExample\Class1.cs",
+"region":  {
+"startLine":  114,
+"startColumn":  25,
+"endLine":  114,
+"endColumn":  31
+}
+}
+}
+]
+}

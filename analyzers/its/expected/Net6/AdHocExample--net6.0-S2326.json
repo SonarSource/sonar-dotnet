@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S2326",
+"message":  "'T' is not used in the class.",
+"location":  {
+"uri":  "sources\Net6\AdHocExample\Class1.cs",
+"region":  {
+"startLine":  82,
+"startColumn":  26,
+"endLine":  82,
+"endColumn":  27
+}
+}
+}
+]
+}

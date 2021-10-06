@@ -1,0 +1,56 @@
+{
+"issues":  [
+{
+"id":  "S1481",
+"message":  "Remove the unused local variable 'rs2'.",
+"location":  {
+"uri":  "sources\Net6\AdHocExample\Class1.cs",
+"region":  {
+"startLine":  36,
+"startColumn":  22,
+"endLine":  36,
+"endColumn":  25
+}
+}
+},
+{
+"id":  "S1481",
+"message":  "Remove the unused local variable 'otherPerson'.",
+"location":  {
+"uri":  "sources\Net6\AdHocExample\Class1.cs",
+"region":  {
+"startLine":  65,
+"startColumn":  13,
+"endLine":  65,
+"endColumn":  24
+}
+}
+},
+{
+"id":  "S1481",
+"message":  "Remove the unused local variable 'a'.",
+"location":  {
+"uri":  "sources\Net6\AdHocExample\Class1.cs",
+"region":  {
+"startLine":  75,
+"startColumn":  16,
+"endLine":  75,
+"endColumn":  17
+}
+}
+},
+{
+"id":  "S1481",
+"message":  "Remove the unused local variable 'f'.",
+"location":  {
+"uri":  "sources\Net6\AdHocExample\Class1.cs",
+"region":  {
+"startLine":  77,
+"startColumn":  13,
+"endLine":  77,
+"endColumn":  14
+}
+}
+}
+]
+}

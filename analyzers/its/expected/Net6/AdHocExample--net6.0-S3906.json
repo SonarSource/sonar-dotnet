@@ -1,0 +1,56 @@
+{
+"issues":  [
+{
+"id":  "S3906",
+"message":  "Change the signature of that event handler to match the specified signature.",
+"location":  {
+"uri":  "sources\Net6\AdHocExample\Class1.cs",
+"region":  {
+"startLine":  96,
+"startColumn":  27,
+"endLine":  96,
+"endColumn":  33
+}
+}
+},
+{
+"id":  "S3906",
+"message":  "Change the signature of that event handler to match the specified signature.",
+"location":  {
+"uri":  "sources\Net6\AdHocExample\Class1.cs",
+"region":  {
+"startLine":  104,
+"startColumn":  18,
+"endLine":  104,
+"endColumn":  24
+}
+}
+},
+{
+"id":  "S3906",
+"message":  "Change the signature of that event handler to match the specified signature.",
+"location":  {
+"uri":  "sources\Net6\AdHocExample\Class1.cs",
+"region":  {
+"startLine":  113,
+"startColumn":  25,
+"endLine":  113,
+"endColumn":  31
+}
+}
+},
+{
+"id":  "S3906",
+"message":  "Change the signature of that event handler to match the specified signature.",
+"location":  {
+"uri":  "sources\Net6\AdHocExample\Class1.cs",
+"region":  {
+"startLine":  114,
+"startColumn":  25,
+"endLine":  114,
+"endColumn":  31
+}
+}
+}
+]
+}

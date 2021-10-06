@@ -1,0 +1,28 @@
+{
+"issues":  [
+{
+"id":  "S3059",
+"message":  "Types should not have members with visibility set higher than the type's visibility",
+"location":  [
+{
+"uri":  "sources\Net6\AdHocExample\Class2.cs",
+"region":  {
+"startLine":  3,
+"startColumn":  20,
+"endLine":  3,
+"endColumn":  26
+}
+},
+{
+"uri":  "sources\Net6\AdHocExample\Class2.cs",
+"region":  {
+"startLine":  6,
+"startColumn":  9,
+"endLine":  6,
+"endColumn":  15
+}
+}
+]
+}
+]
+}

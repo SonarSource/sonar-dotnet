@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S108",
+"message":  "Either remove or fill this block of code.",
+"location":  {
+"uri":  "sources\Net6\AdHocExample\Class1.cs",
+"region":  {
+"startLine":  104,
+"startColumn":  38,
+"endLine":  104,
+"endColumn":  41
+}
+}
+},
+{
+"id":  "S108",
+"message":  "Either remove or fill this block of code.",
+"location":  {
+"uri":  "sources\Net6\AdHocExample\Class1.cs",
+"region":  {
+"startLine":  104,
+"startColumn":  49,
+"endLine":  104,
+"endColumn":  52
+}
+}
+}
+]
+}

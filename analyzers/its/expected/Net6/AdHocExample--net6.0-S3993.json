@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S3993",
+"message":  "Specify AttributeUsage on 'MyAttribute'.",
+"location":  {
+"uri":  "sources\Net6\AdHocExample\Class1.cs",
+"region":  {
+"startLine":  82,
+"startColumn":  14,
+"endLine":  82,
+"endColumn":  25
+}
+}
+}
+]
+}

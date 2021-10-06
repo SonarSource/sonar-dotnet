@@ -1,0 +1,43 @@
+{
+"issues":  [
+{
+"id":  "S109",
+"message":  "Assign this magic number '16' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\Net6\AdHocExample\Class1.cs",
+"region":  {
+"startLine":  60,
+"startColumn":  23,
+"endLine":  60,
+"endColumn":  25
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '23' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\Net6\AdHocExample\Class1.cs",
+"region":  {
+"startLine":  60,
+"startColumn":  27,
+"endLine":  60,
+"endColumn":  29
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '42' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\Net6\AdHocExample\Program.cs",
+"region":  {
+"startLine":  5,
+"startColumn":  17,
+"endLine":  5,
+"endColumn":  19
+}
+}
+}
+]
+}
