@@ -126,8 +126,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework
         private static void RunFixAllProvider(DiagnosticAnalyzer diagnosticAnalyzer, CodeFixProvider codeFixProvider,
             string codeFixTitle, FixAllProvider fixAllProvider, Document document, ParseOptions parseOption, string pathToExpected)
         {
-            var currentDocument = document;
-            var state = new DocumentState(diagnosticAnalyzer, currentDocument, parseOption);
+            var state = new DocumentState(diagnosticAnalyzer, document, parseOption);
 
             state.Diagnostics.Should().NotBeEmpty();
 
@@ -136,14 +135,13 @@ namespace SonarAnalyzer.UnitTest.TestFramework
                 (doc, ids, ct) => Task.FromResult(state.Diagnostics.AsEnumerable()),
                 null);
 
-            var fixAllContext = new FixAllContext(currentDocument, codeFixProvider, FixAllScope.Document,
+            var fixAllContext = new FixAllContext(state.Document, codeFixProvider, FixAllScope.Document,
                 codeFixTitle, codeFixProvider.FixableDiagnosticIds, fixAllDiagnosticProvider, CancellationToken.None);
             var codeActionToExecute = fixAllProvider.GetFixAsync(fixAllContext).Result;
 
             codeActionToExecute.Should().NotBeNull();
 
-            currentDocument = ApplyCodeFix(currentDocument, codeActionToExecute);
-            state = new DocumentState(diagnosticAnalyzer, currentDocument, parseOption);
+            state = new DocumentState(diagnosticAnalyzer, ApplyCodeFix(state.Document, codeActionToExecute), parseOption);
             AreEqualIgnoringLineEnding(pathToExpected, state);
         }
 
@@ -171,6 +169,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework
         private class DocumentState
         {
             public readonly Compilation Compilation;
+            public readonly Document Document;
             public readonly ImmutableArray<Diagnostic> Diagnostics;
             public readonly string ActualCode;
 
@@ -180,9 +179,11 @@ namespace SonarAnalyzer.UnitTest.TestFramework
                 if (parseOption != null)
                 {
                     project = project.WithParseOptions(parseOption);
+                    document = project.GetDocument(document.Id);    // There's a new instance with the same ID
                 }
 
                 Compilation = project.GetCompilationAsync().Result;
+                Document = document;
                 Diagnostics = DiagnosticVerifier.GetDiagnostics(Compilation, diagnosticAnalyzer, CompilationErrorBehavior.Ignore).ToImmutableArray();
                 ActualCode = document.GetSyntaxRootAsync().Result.GetText().ToString();
             }
