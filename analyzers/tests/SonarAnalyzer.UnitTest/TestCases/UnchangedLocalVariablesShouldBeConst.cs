@@ -169,48 +169,48 @@ namespace Tests.Diagnostics
 
         public void Test_MultipleTypes(int arg)
         {
-            char cc = 'c'; // Noncompliant
-            int intVar = 1; // Noncompliant
+            char cc = 'c';              // Noncompliant
+            int intVar = 1;             // Noncompliant
             const int constIntVar = 1;
-            int intVar2 = 1 + constIntVar; // Noncompliant
-            long longVal = 1; // Noncompliant
-            short shortVal = 1; // Noncompliant
-            double doubleVal = 1; // Noncompliant
-            System.Int16 int16Val = 1; // Noncompliant
-            ulong ulongVal = 1; // Noncompliant
-            int bufferSize = 512 * 1024; // Noncompliant
-            decimal val = 123.456m; // Noncompliant
-            double val2 = .1d; // Noncompliant
+            int intVar2 = 1 + constIntVar;  // Noncompliant
+            long longVal = 1;           // Noncompliant
+            short shortVal = 1;         // Noncompliant
+            double doubleVal = 1;       // Noncompliant
+            System.Int16 int16Val = 1;  // Noncompliant
+            ulong ulongVal = 1;         // Noncompliant
+            int bufferSize = 512 * 1024;    // Noncompliant
+            decimal val = 123.456m;     // Noncompliant
+            double val2 = .1d;          // Noncompliant
 
-            Colors c1 = Colors.Nice; // Noncompliant
-            Colors c2 = (Colors)1; // Noncompliant
-            Colors c3 = 0.0; // Noncompliant
+            Colors c1 = Colors.Nice;    // Noncompliant
+            Colors c2 = (Colors)1;      // Noncompliant
+            Colors c3 = 0.0;            // Noncompliant
 
-            string str1 = ""; // Noncompliant
-            string str2 = null; // Noncompliant
-            string str3 = nameof(arg); // Noncompliant
+            string str1 = "";           // Noncompliant
+            string str2 = null;         // Noncompliant
+            string str3 = nameof(arg);  // Noncompliant
             string str4 = typeof(int).Name;
-            string str5 = "a" + "b"; // Noncompliant
-            string str6 = @"a" + $"b";
+            string str5 = "a" + "b";    // Noncompliant
+            string str6 = @"a" + $"b";  // Noncompliant since we reference Roslyn 3.11.0 in UTs
             string str7 = System.Environment.NewLine;
             string str8 = String.Empty;
 
-            object obj1 = null; // Noncompliant
+            object obj1 = null;         // Noncompliant
             object obj2 = new object();
             object obj3 = TestUtils.GetObj();
             object obj4 = 1;
 
             IEnumerable<string> enumerable = null; // Noncompliant
 
-            long? nullable = 100; // Compliant. Nullables cannot be const.
+            long? nullable = 100;   // Compliant. Nullables cannot be const.
             long? nullable2 = null; // Compliant. Nullables cannot be const.
 
             dynamic value = 42; // Compliant. Const only works with null.
-            TestUtils x = 2; // Compliant (type with implicit conversion). Const only works with null.
+            TestUtils x = 2;    // Compliant (type with implicit conversion). Const only works with null.
 
-            int[] xx = { 1, 2, 3 }; // Compliant (expression on the right is not constant).
-            int[] y = new int[] { 1, 2, 3 }; // Compliant (expression on the right is not constant).
-            Exception[] z = { }; // Compliant (expression on the right is not constant).
+            int[] xx = { 1, 2, 3 };             // Compliant (expression on the right is not constant).
+            int[] y = new int[] { 1, 2, 3 };    // Compliant (expression on the right is not constant).
+            Exception[] z = { };                // Compliant (expression on the right is not constant).
         }
 
         public int Test_Property

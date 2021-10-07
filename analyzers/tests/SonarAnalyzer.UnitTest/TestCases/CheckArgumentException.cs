@@ -225,11 +225,11 @@ namespace Tests.Diagnostics
         {
             var str = "xxx";
             // The below FP got fixed in VS 16.10.1
-            throw new ArgumentNullException(nameof(argument)); // Noncompliant {{The parameter name '' is not declared in the argument list.}}
-            throw new ArgumentNullException(nameof(str)); // Noncompliant {{The parameter name 'str' is not declared in the argument list.}}
-            throw new ArgumentNullException(nameof(field)); // Noncompliant {{The parameter name 'field' is not declared in the argument list.}}
+            throw new ArgumentNullException(nameof(argument));  // Fixed since UT references Roslyn 3.11.0
+            throw new ArgumentNullException(nameof(str));       // Noncompliant {{The parameter name 'str' is not declared in the argument list.}}
+            throw new ArgumentNullException(nameof(field));     // Noncompliant {{The parameter name 'field' is not declared in the argument list.}}
             throw new ArgumentNullException(nameof(argument.argument)); // Compliant
-            throw new ArgumentNullException(nameof(str.argument)); // Error [CS1061] Compliant, argument is missing member without a symbol
+            throw new ArgumentNullException(nameof(str.argument));      // Error [CS1061] Compliant, argument is missing member without a symbol
         }
     }
 
