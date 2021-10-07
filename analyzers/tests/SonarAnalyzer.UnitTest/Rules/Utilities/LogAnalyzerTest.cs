@@ -117,7 +117,7 @@ namespace SonarAnalyzer.UnitTest.Rules
             var versionMessage = messages.SingleOrDefault(x => x.Text.Contains("Roslyn version"));
             versionMessage.Should().NotBeNull();
             versionMessage.Severity.Should().Be(LogSeverity.Info);
-            versionMessage.Text.Should().MatchRegex(@"^Roslyn version: \d(\.\d){3}");
+            versionMessage.Text.Should().MatchRegex(@"^Roslyn version: \d+(\.\d+){3}");
             var version = new Version(versionMessage.Text.Substring(16));
             version.Should().BeGreaterThan(new Version(3, 0));  // Avoid 1.0.0.0
         }
