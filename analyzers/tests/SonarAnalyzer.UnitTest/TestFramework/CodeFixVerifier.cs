@@ -36,31 +36,28 @@ namespace SonarAnalyzer.UnitTest.TestFramework
 {
     internal static class CodeFixVerifier
     {
-        public static void VerifyCodeFix(string path, string pathToExpected, string pathToBatchExpected,
-            SonarDiagnosticAnalyzer diagnosticAnalyzer, SonarCodeFixProvider codeFixProvider, string codeFixTitle,
+        public static void VerifyCodeFix(string path,
+            string pathToExpected,
+            string pathToBatchExpected,
+            SonarDiagnosticAnalyzer diagnosticAnalyzer,
+            SonarCodeFixProvider codeFixProvider,
+            string codeFixTitle,
             IEnumerable<ParseOptions> options = null,
             OutputKind outputKind = OutputKind.DynamicallyLinkedLibrary,
             IEnumerable<MetadataReference> additionalReferences = null)
         {
             var document = CreateDocument(path, outputKind, additionalReferences);
-            var parseOptions = ParseOptionsHelper.GetParseOptionsOrDefault(options)
-                .Where(ParseOptionsHelper.GetFilterByLanguage(document.Project.Language))
-                .ToArray();
-
+            var parseOptions = ParseOptionsHelper.GetParseOptionsOrDefault(options).Where(ParseOptionsHelper.GetFilterByLanguage(document.Project.Language)).ToArray();
             foreach (var parseOption in parseOptions)
             {
                 RunCodeFixWhileDocumentChanges(diagnosticAnalyzer, codeFixProvider, codeFixTitle, document, parseOption, pathToExpected);
             }
-
-            var fixAllProvider = codeFixProvider.GetFixAllProvider();
-            if (fixAllProvider == null)
+            if (codeFixProvider.GetFixAllProvider() is { } fixAllProvider)
             {
-                return;
-            }
-
-            foreach (var parseOption in parseOptions)
-            {
-                RunFixAllProvider(diagnosticAnalyzer, codeFixProvider, codeFixTitle, fixAllProvider, document, parseOption, pathToBatchExpected);
+                foreach (var parseOption in parseOptions)
+                {
+                    RunFixAllProvider(diagnosticAnalyzer, codeFixProvider, codeFixTitle, fixAllProvider, document, parseOption, pathToBatchExpected);
+                }
             }
         }
 
@@ -95,12 +92,10 @@ namespace SonarAnalyzer.UnitTest.TestFramework
                         continue;
                     }
                     var codeActionsForDiagnostic = GetCodeActionsForDiagnostic(codeFixProvider, currentDocument, diagnostic);
-
                     if (CodeActionToApply(codeFixTitle, codeActionsForDiagnostic) is { } codeActionToApply)
                     {
                         currentDocument = ApplyCodeFix(currentDocument, codeActionToApply);
                         state = new DocumentState(diagnosticAnalyzer, currentDocument, parseOption);
-
                         codeFixExecutedAtLeastOnce = true;
                         codeFixExecuted = true;
                     }
@@ -109,7 +104,6 @@ namespace SonarAnalyzer.UnitTest.TestFramework
             while (codeBeforeFix != state.ActualCode);
 
             codeFixExecutedAtLeastOnce.Should().BeTrue();
-
             AreEqualIgnoringLineEnding(pathToExpected, state);
         }
 
@@ -127,18 +121,11 @@ namespace SonarAnalyzer.UnitTest.TestFramework
             string codeFixTitle, FixAllProvider fixAllProvider, Document document, ParseOptions parseOption, string pathToExpected)
         {
             var state = new DocumentState(diagnosticAnalyzer, document, parseOption);
-
             state.Diagnostics.Should().NotBeEmpty();
 
-            var fixAllDiagnosticProvider = new FixAllDiagnosticProvider(
-                codeFixProvider.FixableDiagnosticIds.ToHashSet(),
-                (doc, ids, ct) => Task.FromResult(state.Diagnostics.AsEnumerable()),
-                null);
-
-            var fixAllContext = new FixAllContext(state.Document, codeFixProvider, FixAllScope.Document,
-                codeFixTitle, codeFixProvider.FixableDiagnosticIds, fixAllDiagnosticProvider, CancellationToken.None);
+            var fixAllDiagnosticProvider = new FixAllDiagnosticProvider(state.Diagnostics);
+            var fixAllContext = new FixAllContext(state.Document, codeFixProvider, FixAllScope.Document, codeFixTitle, codeFixProvider.FixableDiagnosticIds, fixAllDiagnosticProvider, default);
             var codeActionToExecute = fixAllProvider.GetFixAsync(fixAllContext).Result;
-
             codeActionToExecute.Should().NotBeNull();
 
             state = new DocumentState(diagnosticAnalyzer, ApplyCodeFix(state.Document, codeActionToExecute), parseOption);
