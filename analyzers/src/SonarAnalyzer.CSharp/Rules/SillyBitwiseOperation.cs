@@ -56,7 +56,9 @@ namespace SonarAnalyzer.Rules.CSharp
         }
 
         protected override object FindConstant(SemanticModel semanticModel, SyntaxNode node) =>
-            node.FindConstantValue(semanticModel);
+            IsFieldOrProperty(semanticModel, node, out var symbol) && !IsInSystemNamespace(symbol)
+                ? null
+                : node.FindConstantValue(semanticModel);
 
         private void CheckAssignment(SyntaxNodeAnalysisContext context, int constValueToLookFor)
         {
@@ -76,5 +78,14 @@ namespace SonarAnalyzer.Rules.CSharp
             var binary = (BinaryExpressionSyntax)context.Node;
             CheckBinary(context, binary.Left, binary.OperatorToken, binary.Right, constValueToLookFor);
         }
+
+        private static bool IsFieldOrProperty(SemanticModel semanticModel, SyntaxNode node, out ISymbol symbol)
+        {
+            symbol = semanticModel.GetSymbolInfo(node).Symbol;
+            return symbol is {Kind: SymbolKind.Field or SymbolKind.Property};
+        }
+
+        private static bool IsInSystemNamespace(ISymbol symbol) =>
+            symbol.ContainingNamespace.Name == "System";
     }
 }

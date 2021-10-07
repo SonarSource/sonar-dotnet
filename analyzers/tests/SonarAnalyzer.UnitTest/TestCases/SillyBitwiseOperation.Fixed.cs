@@ -183,11 +183,16 @@ public class Repro_4399
     {
         private int start = 0;
 
+        public int End { get; set; } = 0;
+
         public void UpdateStart(int val) => start = val;
 
         public override int GetHashCode()
         {
-            return Method(); // Fixed
+            var value1 = Method() ^ End;
+            var value2 = start ^ End;
+            var value3 = End ^ start;
+            return Method() ^ start;
 
             int Method() => 42;
         }
