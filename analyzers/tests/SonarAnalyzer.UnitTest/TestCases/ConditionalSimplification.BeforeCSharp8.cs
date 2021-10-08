@@ -1,4 +1,5 @@
-﻿
+﻿using System.Collections.Generic;
+
 namespace Tests.TestCases
 {
     class ConditionalSimplification
@@ -19,6 +20,22 @@ namespace Tests.TestCases
             if (value == null)  // Noncompliant {{Use the '??' operator here.}}
                 value = false;
 
+        }
+    }
+
+    // https://github.com/SonarSource/sonar-dotnet/issues/4962
+    class FPRepro_4962
+    {
+        public static string TestFunction(string key1, string key2)
+        {
+            var dictionary1 = new Dictionary<string, string>();
+            var dictionary2 = new Dictionary<string, string>();
+
+            string value;
+            if (string.IsNullOrEmpty(key1)) dictionary2.TryGetValue(key2, out value); // Noncompliant FP
+            else dictionary1.TryGetValue(key1, out value);
+
+            return value;
         }
     }
 }
