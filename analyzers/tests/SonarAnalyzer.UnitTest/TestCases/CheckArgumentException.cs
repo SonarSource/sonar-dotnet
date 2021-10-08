@@ -224,8 +224,7 @@ namespace Tests.Diagnostics
         public void Method(MissingType argument) // Error [CS0246]
         {
             var str = "xxx";
-            // The below FP got fixed in VS 16.10.1
-            throw new ArgumentNullException(nameof(argument));  // Fixed since UT references Roslyn 3.11.0
+            throw new ArgumentNullException(nameof(argument));  // Compliant. Was FP until Roslyn 3.11.0 / VS 16.10.1.
             throw new ArgumentNullException(nameof(str));       // Noncompliant {{The parameter name 'str' is not declared in the argument list.}}
             throw new ArgumentNullException(nameof(field));     // Noncompliant {{The parameter name 'field' is not declared in the argument list.}}
             throw new ArgumentNullException(nameof(argument.argument)); // Compliant

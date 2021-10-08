@@ -191,7 +191,7 @@ namespace Tests.Diagnostics
             string str3 = nameof(arg);  // Noncompliant
             string str4 = typeof(int).Name;
             string str5 = "a" + "b";    // Noncompliant
-            string str6 = @"a" + $"b";  // Noncompliant since we reference Roslyn 3.11.0 in UTs
+            string str6 = @"a" + $"b";  // Noncompliant. Was FN until Roslyn 3.11.0.
             string str7 = System.Environment.NewLine;
             string str8 = String.Empty;
 
