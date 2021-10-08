@@ -158,14 +158,19 @@ public class Sample
         {
             var code = @"
 using System;
+using System.Linq;
 public class Sample
 {
     public void Main(int[] values)
     {
+        OuterLocalFunction();
+
         void OuterLocalFunction()
         {
             Action<int, int> outerParenthesizedLambda = (a, b) =>
             {
+                MiddleLocalFunction();
+
                 void MiddleLocalFunction(int c)
                 {
                     var queryExpressionInTheWay = from value in values select new Lazy<int>(() =>
@@ -192,11 +197,12 @@ public class Sample
             cfg.Should().NotBeNull("It's innerLambda");
             cfg.Parent.Should().NotBeNull("It's InnerLocalFunction");
             cfg.Parent.Parent.Should().NotBeNull("Lambda iniside Lazy<int> constructor");
-            cfg.Parent.Parent.Parent.Should().NotBeNull("It's MiddleLocalFunction");
-            cfg.Parent.Parent.Parent.Parent.Should().NotBeNull("It's outerParenthesizedLambda");
-            cfg.Parent.Parent.Parent.Parent.Parent.Should().NotBeNull("It's OuterLocalFunction");
-            cfg.Parent.Parent.Parent.Parent.Parent.Parent.Should().NotBeNull("It's the root CFG");
-            cfg.Parent.Parent.Parent.Parent.Parent.Parent.Parent.Should().BeNull("Root CFG should not have Parent");
+            cfg.Parent.Parent.Parent.Should().NotBeNull("Anonymous function for query expression");
+            cfg.Parent.Parent.Parent.Parent.Should().NotBeNull("It's MiddleLocalFunction");
+            cfg.Parent.Parent.Parent.Parent.Parent.Should().NotBeNull("It's outerParenthesizedLambda");
+            cfg.Parent.Parent.Parent.Parent.Parent.Parent.Should().NotBeNull("It's OuterLocalFunction");
+            cfg.Parent.Parent.Parent.Parent.Parent.Parent.Parent.Should().NotBeNull("It's the root CFG");
+            cfg.Parent.Parent.Parent.Parent.Parent.Parent.Parent.Parent.Should().BeNull("Root CFG should not have Parent");
             cfg.OriginalOperation.Should().BeAssignableTo<IAnonymousFunctionOperation>().Subject.Symbol.Parameters.Should().HaveCount(1).And.Contain(x => x.Name == "xxx");
         }
 
