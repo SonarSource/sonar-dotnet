@@ -5,7 +5,7 @@ using System.Runtime.Serialization;
 
 var x = 1;
 
-public record Program
+public record TestRecord
 {
     private List<string> list;
 

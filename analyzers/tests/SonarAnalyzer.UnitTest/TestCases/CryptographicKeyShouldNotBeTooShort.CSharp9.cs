@@ -12,7 +12,7 @@ using System.Security.Cryptography;
 var x = new RSACryptoServiceProvider(); // Noncompliant {{Use a key length of at least 2048 bits for RSA cipher algorithm.}}
 RSACryptoServiceProvider y = new(); // Noncompliant
 
-record Program
+record TestRecord
 {
     private const int validKeySizeConst = 2048;
     private const int invalidKeySizeConst = 1024;

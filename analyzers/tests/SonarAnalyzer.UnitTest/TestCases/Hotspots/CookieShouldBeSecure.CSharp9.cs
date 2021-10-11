@@ -6,7 +6,7 @@ CookieOptions topLevelStatement1 = new();                // Noncompliant
 CookieOptions topLevelStatement2 = new CookieOptions();  // Noncompliant
 NancyCookie topLevelStatement3 = new ("name", "secure"); // Noncompliant
 
-class Program
+class TestProgram
 {
     CookieOptions field1 = new(); // Noncompliant
     CookieOptions field2;
@@ -15,7 +15,7 @@ class Program
     CookieOptions Property1 { get; init; } = new (); // Noncompliant
     CookieOptions Property2 { get; init; }
 
-    Program()
+    TestProgram()
     {
         Property2.Secure = false; // Noncompliant
     }
