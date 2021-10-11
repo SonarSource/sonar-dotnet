@@ -18,13 +18,12 @@ languages in [SonarQube](http://www.sonarqube.org/), [SonarCloud](https://sonarc
 * Import of third party Roslyn Analyzers results
 * Support for [custom rules](https://github.com/SonarSource/sonarqube-roslyn-sdk)
 
-## Useful links
+## Useful public resources
 
 * [Project homepage](https://redirect.sonarsource.com/plugins/csharp.html)
 * [Issue tracking](./docs/issues.md)
 * [C# rules](https://rules.sonarsource.com/csharp)
 * [VB.Net rules](https://rules.sonarsource.com/vbnet)
-* [CI pipeline scripts and docs](https://github.com/SonarSource/dotnet-infra)
 
 ### Nuget.org packages
 
@@ -117,6 +116,14 @@ You can see how we do it in our own repository for SonarLint Connected mode (and
 * We reference in each production-code project this [Directory.Build.props](analyzers/src/Directory.Build.props).
 * This file points to the following ruleset: [sonaranalyzer-dotnetCSharp.ruleset](analyzers/.sonarlint/sonaranalyzer-dotnetCSharp.ruleset).
 * And the following [SonarLint.xml](analyzers/.sonarlint/sonaranalyzer-dotnet/CSharp/SonarLint.xml).
+
+## Internal resources
+
+### Build configuration
+
+* [CI pipeline scripts and docs](https://github.com/SonarSource/dotnet-infra)
+* [Azure Pipelines](https://sonarsource.visualstudio.com/DotNetTeam%20Project/_build?definitionId=77&_a=summary)
+* [Peachee configuration](https://github.com/SonarSource/peachee-languages/tree/dotnet)
 
 ## License
 
