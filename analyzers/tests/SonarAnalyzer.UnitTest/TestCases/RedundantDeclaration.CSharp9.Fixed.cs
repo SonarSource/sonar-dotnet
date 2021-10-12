@@ -38,7 +38,14 @@ public class RedundantDeclaration
         MyEvent += new((_, _) => { });
 
         object o = new() { }; // Fixed
+
+        _ = new Point[] // Fixed
+            {
+                new(1, 2)
+            };
     }
 
     private event EventHandler MyEvent;
+
+    public record Point(int x, int y);
 }
