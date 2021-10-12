@@ -15,6 +15,8 @@ pool: '.Net Bubble - GCP'
 variables:
   - group: sonar-dotnet-variables-tmp
   - group: sonarsource-build-variables
+  - name: MsBuildPath
+    value: C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\MSBuild\Current\Bin\msbuild.exe
 
 resources:
   repositories:
@@ -39,7 +41,7 @@ stages:
       - task: NuGetToolInstaller@1
         displayName: "Install NuGet"
 
-      - script: nuget restore -LockedMode -ConfigFile "analyzers\NuGet.Config" $(solution)
+      - script: ${{ variables.MsBuildPath }} restore -LockedMode -ConfigFile "analyzers\NuGet.Config" $(solution)
         displayName: "NuGet Restore"
 
       - powershell: .\scripts\build\store-azp-variables.ps1
@@ -259,7 +261,7 @@ stages:
           solution: scripts/version/ChangeVersion.proj
           msbuildArgs: '/p:Sha1=$(Build.SourceVersion) /p:BranchName=$(Build.SourceBranchName) /p:BuildNumber=$(Build.BuildId) /p:BuildConfiguration=$(BuildConfiguration)'
 
-      - script: nuget restore -LockedMode -ConfigFile "analyzers\NuGet.Config" $(solution)
+      - script: ${{ variables.MsBuildPath }} restore -LockedMode -ConfigFile "analyzers\NuGet.Config" $(solution)
         displayName: "NuGet Restore"
 
       - task: VSBuild@1
