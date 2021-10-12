@@ -262,7 +262,7 @@ stages:
           solution: scripts/version/ChangeVersion.proj
           msbuildArgs: '/p:Sha1=$(Build.SourceVersion) /p:BranchName=$(Build.SourceBranchName) /p:BuildNumber=$(Build.BuildId) /p:BuildConfiguration=$(BuildConfiguration)'
 
-      - script: '"${{ variables.MsBuildPath }}" t:restore /p:RestoreLockedMode=true /p:RestoreConfigFile="analyzers\NuGet.Config" $(solution)'
+      - script: '"${{ variables.MsBuildPath }}" /t:restore /p:RestoreLockedMode=true /p:RestoreConfigFile="analyzers\NuGet.Config" $(solution)'
         displayName: "NuGet Restore"
 
       - task: VSBuild@1
