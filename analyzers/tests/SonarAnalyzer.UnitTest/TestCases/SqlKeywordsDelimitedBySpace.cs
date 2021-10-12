@@ -4,7 +4,7 @@ using Linq = System.Linq;
 
 namespace Tests.Diagnostics
 {
-    // we don't look for objects from the SqlClient namespace, we just look at the namespace
+    // we don't look for objects from the SqlClient namespace, we just look at the usings
 
     class NonCompliantExamples
     {

@@ -50,6 +50,26 @@ namespace SonarAnalyzer.UnitTest.Rules
                                                  new SqlKeywordsDelimitedBySpace(),
                                                  GetAdditionalReferences());
 
+#if NET
+
+        [TestMethod]
+        public void SqlKeywordsDelimitedBySpace_CSharp10_GlobalUsings() =>
+            Verifier.VerifyAnalyzerFromCSharp10Library(new[]
+                                                       {
+                                                        @"TestCases\SqlKeywordsDelimitedBySpace.CSharp10.GlobalUsing.cs",
+                                                        @"TestCases\SqlKeywordsDelimitedBySpace.CSharp10.GlobalUsingConsumer.cs"
+                                                       },
+                                                       new SqlKeywordsDelimitedBySpace(),
+                                                       GetAdditionalReferences());
+
+        [TestMethod]
+        public void SqlKeywordsDelimitedBySpace_CSharp10_FileScopesNamespace() =>
+            Verifier.VerifyAnalyzerFromCSharp10Library(new[] { @"TestCases\SqlKeywordsDelimitedBySpace.CSharp10.FileScopedNamespaceDeclaration.cs", },
+                                                       new SqlKeywordsDelimitedBySpace(),
+                                                       GetAdditionalReferences());
+
+#endif
+
         [DataRow("System.Data")]
         [DataRow("System.Data.SqlClient")]
         [DataRow("System.Data.SQLite")]
