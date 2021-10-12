@@ -43,11 +43,14 @@ namespace SonarAnalyzer.UnitTest.TestFramework
         public static ImmutableArray<ParseOptions> BeforeCSharp7 { get; }
         public static ImmutableArray<ParseOptions> BeforeCSharp8 { get; }
         public static ImmutableArray<ParseOptions> BeforeCSharp9 { get; }
+        public static ImmutableArray<ParseOptions> BeforeCSharp10 { get; }
+
 
         public static ImmutableArray<ParseOptions> FromCSharp6 { get; }
         public static ImmutableArray<ParseOptions> FromCSharp7 { get; }
         public static ImmutableArray<ParseOptions> FromCSharp8 { get; }
         public static ImmutableArray<ParseOptions> FromCSharp9 { get; }
+        public static ImmutableArray<ParseOptions> FromCSharp10 { get; }
 
         public static ImmutableArray<ParseOptions> OnlyCSharp7 { get; }
 
@@ -61,6 +64,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework
 
         static ParseOptionsHelper()
         {
+            var cs9 = CreateOptions(CSharp9);
             var cs8 = CreateOptions(CSharp8);
             var cs7 = CreateOptions(CSharp7, CSharp7_1, CSharp7_2, CSharp7_3);
             var vb15 = CreateOptions(VisualBasic15, VisualBasic15_3, VisualBasic15_5);
@@ -68,8 +72,10 @@ namespace SonarAnalyzer.UnitTest.TestFramework
             BeforeCSharp7 = CreateOptions(CSharp5).Concat(CreateOptions(CSharp6)).FilterByEnvironment();
             BeforeCSharp8 = BeforeCSharp7.Concat(cs7).FilterByEnvironment();
             BeforeCSharp9 = BeforeCSharp8.Concat(cs8).FilterByEnvironment();
+            BeforeCSharp10 = BeforeCSharp9.Concat(cs9).FilterByEnvironment();
 
-            FromCSharp9 = CreateOptions(CSharp9).FilterByEnvironment();
+            FromCSharp10 = CreateOptions(CSharp10).FilterByEnvironment();
+            FromCSharp9 = cs9.Concat(FromCSharp10).FilterByEnvironment();
             FromCSharp8 = cs8.Concat(FromCSharp9).FilterByEnvironment();
             FromCSharp7 = cs7.Concat(FromCSharp8).FilterByEnvironment();
             FromCSharp6 = CreateOptions(CSharp6).Concat(FromCSharp7).FilterByEnvironment();
