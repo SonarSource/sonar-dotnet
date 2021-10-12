@@ -42,6 +42,11 @@ namespace SonarAnalyzer.UnitTest.Rules
 #if NET
 
         [TestMethod]
+        public void UnnecessaryUsings_CSharp10_GlobalUsings() =>
+            Verifier.VerifyAnalyzerFromCSharp10Console(new[] { @"TestCases\UnnecessaryUsings.CSharp10.Global.cs", @"TestCases\UnnecessaryUsings.CSharp10.Consumer.cs" },
+                                                       new UnnecessaryUsings());
+
+        [TestMethod]
         public void UnnecessaryUsings_CSharp9() =>
             Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\UnnecessaryUsings.CSharp9.cs", new UnnecessaryUsings());
 
