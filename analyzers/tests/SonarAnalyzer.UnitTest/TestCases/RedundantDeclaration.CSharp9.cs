@@ -49,7 +49,14 @@ public class RedundantDeclaration
 
         object o = new() { }; // Noncompliant {{Remove the initializer; it is redundant.}}
 //                       ^^^
+
+        _ = new Point[] // Noncompliant - FP
+            {
+                new(1, 2)
+            };
     }
 
     private event EventHandler MyEvent;
+
+    public record Point(int x, int y);
 }
