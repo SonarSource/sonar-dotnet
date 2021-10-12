@@ -16,7 +16,7 @@ variables:
   - group: sonar-dotnet-variables-tmp
   - group: sonarsource-build-variables
   - name: MsBuildPath
-    value: C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\MSBuild\Current\Bin\msbuild.exe
+    value: 'C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\MSBuild\Current\Bin\msbuild.exe'
 
 resources:
   repositories:
