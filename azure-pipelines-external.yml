@@ -61,6 +61,7 @@ stages:
         inputs:
           solution: scripts/version/ChangeVersion.proj
           msbuildArgs: '/p:Sha1=$(Build.SourceVersion) /p:BranchName=$(Build.SourceBranchName) /p:BuildNumber=$(Build.BuildId) /p:BuildConfiguration=$(BuildConfiguration)'
+          vsVersion: '16.0'
 
       - task: VSBuild@1
         displayName: 'Build SonarAnalyzer solution'
@@ -69,6 +70,7 @@ stages:
           platform: '$(buildPlatform)'
           configuration: '$(buildConfiguration)'
           msbuildArgs: '/p:DeployExtension=false /p:Sha1=$(Build.SourceVersion) /p:BuildNumber=$(Build.BuildId)'
+          vsVersion: '16.0'
 
       - task: VSTest@2
         displayName: ".NET UTs"

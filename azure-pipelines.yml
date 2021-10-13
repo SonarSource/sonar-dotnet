@@ -15,6 +15,9 @@ pool: '.Net Bubble - GCP'
 variables:
   - group: sonar-dotnet-variables-tmp
   - group: sonarsource-build-variables
+  # To make sure we don`t use MsBuild 17.
+  - name: MsBuildPath
+    value: 'C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\MSBuild\Current\Bin\msbuild.exe'
 
 resources:
   repositories:
@@ -39,7 +42,7 @@ stages:
       - task: NuGetToolInstaller@1
         displayName: "Install NuGet"
 
-      - script: nuget restore -LockedMode -ConfigFile "analyzers\NuGet.Config" $(solution)
+      - script: '"${{ variables.MsBuildPath }}" /t:restore /p:RestoreLockedMode=true /p:RestoreConfigFile="analyzers\NuGet.Config" $(solution)'
         displayName: "NuGet Restore"
 
       - powershell: .\scripts\build\store-azp-variables.ps1
@@ -56,6 +59,7 @@ stages:
         inputs:
           solution: scripts/version/ChangeVersion.proj
           msbuildArgs: '/p:Sha1=$(Build.SourceVersion) /p:BranchName=$(Build.SourceBranchName) /p:BuildNumber=$(Build.BuildId) /p:BuildConfiguration=$(BuildConfiguration)'
+          vsVersion: '16.0'
 
       - task: DownloadSecureFile@1
         displayName: 'Download snk file'
@@ -80,6 +84,7 @@ stages:
           platform: '$(buildPlatform)'
           configuration: '$(buildConfiguration)'
           msbuildArgs: '/p:DeployExtension=false /p:SignAssembly=true /p:AssemblyOriginatorKeyFile="$(snk.secureFilePath)" /p:Sha1=$(Build.SourceVersion) /p:BuildNumber=$(Build.BuildId) /p:WarningLevel=0'
+          vsVersion: '16.0'
 
       - task: NuGetCommand@2
         displayName: "Build NuGet packages"
@@ -258,8 +263,9 @@ stages:
         inputs:
           solution: scripts/version/ChangeVersion.proj
           msbuildArgs: '/p:Sha1=$(Build.SourceVersion) /p:BranchName=$(Build.SourceBranchName) /p:BuildNumber=$(Build.BuildId) /p:BuildConfiguration=$(BuildConfiguration)'
+          vsVersion: '16.0'
 
-      - script: nuget restore -LockedMode -ConfigFile "analyzers\NuGet.Config" $(solution)
+      - script: '"${{ variables.MsBuildPath }}" /t:restore /p:RestoreLockedMode=true /p:RestoreConfigFile="analyzers\NuGet.Config" $(solution)'
         displayName: "NuGet Restore"
 
       - task: VSBuild@1
@@ -269,6 +275,7 @@ stages:
           platform: '$(buildPlatform)'
           configuration: '$(buildConfiguration)'
           msbuildArgs: '/p:DeployExtension=false /p:RunAnalyzers=true'
+          vsVersion: '16.0'
 
       - task: DownloadPipelineArtifact@2
         displayName: 'Download coverage reports'
