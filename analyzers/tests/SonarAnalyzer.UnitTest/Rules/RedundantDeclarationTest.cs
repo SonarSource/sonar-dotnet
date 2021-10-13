@@ -29,7 +29,7 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         public void RedundantDeclaration() =>
-            Verifier.VerifyAnalyzer(@"TestCases\RedundantDeclaration.cs", new RedundantDeclaration());
+            Verifier.VerifyAnalyzer(@"TestCases\RedundantDeclaration.cs", new RedundantDeclaration(), ParseOptionsHelper.BeforeCSharp10);
 
         [TestMethod]
         public void RedundantDeclaration_UnusedLambdaParameters_BeforeCSharp9() =>
@@ -83,7 +83,8 @@ namespace SonarAnalyzer.UnitTest.Rules
                                    @"TestCases\RedundantDeclaration.ExplicitDelegate.Fixed.cs",
                                    new RedundantDeclaration(),
                                    new RedundantDeclarationCodeFixProvider(),
-                                   RedundantDeclarationCodeFixProvider.TitleRedundantExplicitDelegate);
+                                   RedundantDeclarationCodeFixProvider.TitleRedundantExplicitDelegate,
+                                   ParseOptionsHelper.BeforeCSharp10);
 
         [TestMethod]
         public void RedundantDeclaration_CodeFix_ExplicitNullable() =>

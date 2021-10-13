@@ -42,6 +42,10 @@ namespace SonarAnalyzer.UnitTest.Rules
             Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\DisposableNotDisposed.CSharp9.cs",
                                                       new DisposableNotDisposed(),
                                                       MetadataReferenceFacade.SystemNetHttp);
+
+        [TestMethod]
+        public void DisposableNotDisposed_CSharp10() =>
+            Verifier.VerifyAnalyzerFromCSharp10Library(@"TestCases\DisposableNotDisposed.CSharp10.cs", new DisposableNotDisposed());
 #endif
     }
 }
