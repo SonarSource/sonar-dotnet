@@ -110,11 +110,22 @@ namespace SonarAnalyzer.UnitTest.TestFramework
                                         OutputKind.ConsoleApplication,
                                         additionalReferences);
 
+        public static void VerifyAnalyzerFromCSharp10Console(string path, DiagnosticAnalyzer diagnosticAnalyzer, IEnumerable<MetadataReference> additionalReferences = null) =>
+            VerifyNonConcurrentAnalyzer(new[] { path },
+                                new[] { diagnosticAnalyzer },
+                                ParseOptionsHelper.FromCSharp10,
+                                CompilationErrorBehavior.Default,
+                                OutputKind.ConsoleApplication,
+                                additionalReferences);
+
         /// <summary>
         /// Verify analyzer from C# 9 with top level statements in non-concurrent execution mode.
         /// </summary>
         public static void VerifyAnalyzerFromCSharp9Console(string[] paths, DiagnosticAnalyzer diagnosticAnalyzer, IEnumerable<MetadataReference> additionalReferences = null) =>
             VerifyNonConcurrentAnalyzer(paths, new[] { diagnosticAnalyzer }, ParseOptionsHelper.FromCSharp9, CompilationErrorBehavior.Default, OutputKind.ConsoleApplication, additionalReferences);
+
+        public static void VerifyAnalyzerFromCSharp10Console(string[] paths, DiagnosticAnalyzer diagnosticAnalyzer, IEnumerable<MetadataReference> additionalReferences = null) =>
+            VerifyNonConcurrentAnalyzer(paths, new[] { diagnosticAnalyzer }, ParseOptionsHelper.FromCSharp10, CompilationErrorBehavior.Default, OutputKind.ConsoleApplication, additionalReferences);
 
         /// <summary>
         /// Verify analyzer from C# 9 with top level statements in non-concurrent execution mode.
@@ -145,6 +156,14 @@ namespace SonarAnalyzer.UnitTest.TestFramework
                                         OutputKind.DynamicallyLinkedLibrary,
                                         additionalReferences);
 
+        public static void VerifyAnalyzerFromCSharp10Library(string path, DiagnosticAnalyzer diagnosticAnalyzer, IEnumerable<MetadataReference> additionalReferences = null) =>
+            VerifyNonConcurrentAnalyzer(new[] { path },
+                                new[] { diagnosticAnalyzer },
+                                ParseOptionsHelper.FromCSharp10,
+                                CompilationErrorBehavior.Default,
+                                OutputKind.DynamicallyLinkedLibrary,
+                                additionalReferences);
+
         /// <summary>
         /// Verify analyzer from C# 9 without top level statements in non-concurrent execution mode.
         /// </summary>
@@ -155,6 +174,14 @@ namespace SonarAnalyzer.UnitTest.TestFramework
                                         CompilationErrorBehavior.Default,
                                         OutputKind.DynamicallyLinkedLibrary,
                                         additionalReferences);
+
+        public static void VerifyAnalyzerFromCSharp10Library(string[] paths, DiagnosticAnalyzer diagnosticAnalyzer, IEnumerable<MetadataReference> additionalReferences = null) =>
+            VerifyNonConcurrentAnalyzer(paths,
+                                new[] { diagnosticAnalyzer },
+                                ParseOptionsHelper.FromCSharp10,
+                                CompilationErrorBehavior.Default,
+                                OutputKind.DynamicallyLinkedLibrary,
+                                additionalReferences);
 
         public static void VerifyNonConcurrentAnalyzer(string path,
                                                        DiagnosticAnalyzer diagnosticAnalyzer,

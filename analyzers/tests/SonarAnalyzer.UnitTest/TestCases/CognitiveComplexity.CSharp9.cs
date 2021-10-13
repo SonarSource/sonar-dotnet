@@ -113,7 +113,7 @@ abstract class Fruit { }
 class Apple : Fruit { }
 class Orange : Fruit { }
 
-class Program
+class TestProgram
 {
     static void TargetTypedConditional(bool isTrue, Apple[] apples, Fruit[] givenFruits) // Noncompliant {{Refactor this method to reduce its Cognitive Complexity from 1 to the 0 allowed.}}
     {

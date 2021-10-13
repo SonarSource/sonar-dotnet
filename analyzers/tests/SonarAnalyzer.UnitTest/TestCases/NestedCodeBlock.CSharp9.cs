@@ -6,7 +6,7 @@
     }
 }
 
-record Program
+record TestRecord
 {
     public int MeaningOfLife
     {
