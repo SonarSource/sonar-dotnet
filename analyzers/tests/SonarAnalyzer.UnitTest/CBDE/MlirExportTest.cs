@@ -728,6 +728,23 @@ namespace Tests
 }";
             ValidateCodeGeneration(code);
         }
+
+#if NET
+        [TestMethod]
+        public void CSharp10_FileScopedNamespace()
+        {
+            const string code = @"
+namespace Tests;
+
+public static void f()
+{
+    Tests.g();
+}
+";
+            ValidateCodeGeneration(code);
+        }
+#endif
+
         [TestMethod]
         public void Overloads()
         {
