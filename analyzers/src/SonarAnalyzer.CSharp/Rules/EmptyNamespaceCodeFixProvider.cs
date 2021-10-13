@@ -44,7 +44,7 @@ namespace SonarAnalyzer.Rules.CSharp
             var diagnostic = context.Diagnostics.First();
             var diagnosticSpan = diagnostic.Location.SourceSpan;
 
-            if (!(root.FindNode(diagnosticSpan) is NamespaceDeclarationSyntax syntaxNode))
+            if (root.FindNode(diagnosticSpan) is not NamespaceDeclarationSyntax syntaxNode)
             {
                 return Task.CompletedTask;
             }
