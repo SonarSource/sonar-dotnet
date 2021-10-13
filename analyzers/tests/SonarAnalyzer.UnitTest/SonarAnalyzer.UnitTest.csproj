@@ -6,7 +6,7 @@
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <GenerateBindingRedirectsOutputType>true</GenerateBindingRedirectsOutputType>
     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
-    <TargetFrameworks>net48;net5.0;net6.0</TargetFrameworks>
+    <TargetFrameworks>net48;net5.0</TargetFrameworks>
     <!--
       This allows, on AzureDevops builds, to restore the NuGet packages which are not targeting .Net Standard or a compatible version by
       usign as fallbacks .Net Framwework 4.0 client profile (net40-client) and Portable profile (portable-net45+win8+wp8+wpa81).
