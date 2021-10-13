@@ -36,6 +36,8 @@ namespace SonarAnalyzer.Rules.CSharp
     public sealed class ForeachLoopExplicitConversionCodeFixProvider : SonarCodeFixProvider
     {
         internal const string Title = "Filter collection for the expected type";
+        private const string OfTypeExtensionClass = "System.Linq.Enumerable";
+
         public override ImmutableArray<string> FixableDiagnosticIds { get; } =
             ImmutableArray.Create(ForeachLoopExplicitConversion.DiagnosticId);
 
@@ -52,7 +54,7 @@ namespace SonarAnalyzer.Rules.CSharp
             }
 
             var semanticModel = context.Document.GetSemanticModelAsync(context.CancellationToken).ConfigureAwait(false).GetAwaiter().GetResult();
-            var enumerableHelperType = semanticModel.Compilation.GetTypeByMetadataName(ofTypeExtensionClass);
+            var enumerableHelperType = semanticModel.Compilation.GetTypeByMetadataName(OfTypeExtensionClass);
 
             if (enumerableHelperType != null)
             {
@@ -70,15 +72,13 @@ namespace SonarAnalyzer.Rules.CSharp
             return Task.CompletedTask;
         }
 
-        private const string ofTypeExtensionClass = "System.Linq.Enumerable";
-
         private static SyntaxNode CalculateNewRoot(SyntaxNode root, ForEachStatementSyntax foreachSyntax, SemanticModel semanticModel)
         {
             var collection = foreachSyntax.Expression;
             var typeName = foreachSyntax.Type.ToString();
             var invocationToAdd = GetOfTypeInvocation(typeName, collection);
             var namedTypes = semanticModel.LookupNamespacesAndTypes(foreachSyntax.SpanStart).OfType<INamedTypeSymbol>();
-            var isUsingAlreadyThere = namedTypes.Any(nt => nt.ToDisplayString() == ofTypeExtensionClass);
+            var isUsingAlreadyThere = namedTypes.Any(nt => nt.ToDisplayString() == OfTypeExtensionClass);
 
             if (isUsingAlreadyThere)
             {

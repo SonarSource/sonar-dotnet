@@ -35,20 +35,19 @@ namespace SonarAnalyzer.Rules.CSharp
         internal const string DiagnosticId = "S3217";
         private const string MessageFormat = "Either change the type of '{0}' to '{1}' or iterate on a generic collection of type '{2}'.";
 
-        private static readonly DiagnosticDescriptor rule =
+        private static readonly DiagnosticDescriptor Rule =
             DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
 
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(rule);
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
 
-        protected override void Initialize(SonarAnalysisContext context)
-        {
+        protected override void Initialize(SonarAnalysisContext context) =>
             context.RegisterSyntaxNodeActionInNonGenerated(
                 c =>
                 {
                     var foreachStatement = (ForEachStatementSyntax)c.Node;
                     var foreachInfo = c.SemanticModel.GetForEachStatementInfo(foreachStatement);
 
-                    if (foreachInfo.Equals(default(ForEachStatementInfo)) ||
+                    if (foreachInfo.Equals(default) ||
                         foreachInfo.ElementConversion.IsImplicit ||
                         foreachInfo.ElementConversion.IsUserDefined ||
                         !foreachInfo.ElementConversion.Exists ||
@@ -57,12 +56,11 @@ namespace SonarAnalyzer.Rules.CSharp
                         return;
                     }
 
-                    c.ReportIssue(Diagnostic.Create(rule, foreachStatement.Type.GetLocation(),
+                    c.ReportIssue(Diagnostic.Create(Rule, foreachStatement.Type.GetLocation(),
                         foreachStatement.Identifier.ValueText,
                         foreachInfo.ElementType.ToMinimalDisplayString(c.SemanticModel, foreachStatement.Type.SpanStart),
                         foreachStatement.Type.ToString()));
                 },
                 SyntaxKind.ForEachStatement);
-        }
     }
 }
