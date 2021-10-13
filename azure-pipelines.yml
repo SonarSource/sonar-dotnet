@@ -65,7 +65,7 @@ stages:
         displayName: 'Download snk file'
         name: snk
         inputs:
-          secureFile: SonarSource-2021-2023.snk
+          secureFile: SonarSourceSecret.snk
 
       - task: DownloadSecureFile@1
         displayName: 'Download pfx file'
