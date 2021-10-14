@@ -45,6 +45,19 @@ namespace SonarAnalyzer.UnitTest.Rules
                                    new GetTypeWithIsAssignableFromCodeFixProvider(),
                                    ParseOptionsHelper.FromCSharp9,
                                    OutputKind.ConsoleApplication);
+
+        [TestMethod]
+        public void GetTypeWithIsAssignableFrom_CSharp10() =>
+            Verifier.VerifyAnalyzerFromCSharp10Console(@"TestCases\GetTypeWithIsAssignableFrom.CSharp10.cs", new GetTypeWithIsAssignableFrom());
+
+        [TestMethod]
+        public void GetTypeWithIsAssignableFrom_CSharp10_CodeFix() =>
+            Verifier.VerifyCodeFix(@"TestCases\GetTypeWithIsAssignableFrom.CSharp10.cs",
+                                   @"TestCases\GetTypeWithIsAssignableFrom.CSharp10.Fixed.cs",
+                                   new GetTypeWithIsAssignableFrom(),
+                                   new GetTypeWithIsAssignableFromCodeFixProvider(),
+                                   ParseOptionsHelper.FromCSharp10,
+                                   OutputKind.ConsoleApplication);
 #endif
 
         [TestMethod]

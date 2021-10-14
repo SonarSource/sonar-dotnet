@@ -37,6 +37,10 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         public void CognitiveComplexity_CS_CSharp9() =>
             Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\CognitiveComplexity.CSharp9.cs", new CS.CognitiveComplexity { Threshold = 0, PropertyThreshold = 0 });
+
+        [TestMethod]
+        public void CognitiveComplexity_CS_CSharp10() =>
+            Verifier.VerifyAnalyzerFromCSharp10Library(@"TestCases\CognitiveComplexity.CSharp10.cs", new CS.CognitiveComplexity { Threshold = 0, PropertyThreshold = 0 });
 #endif
 
         [TestMethod]

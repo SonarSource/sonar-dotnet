@@ -61,6 +61,11 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void ConditionalSimplification_FromCSharp9() =>
             Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\ConditionalSimplification.FromCSharp9.cs",
                                                       new ConditionalSimplification());
+
+        [TestMethod]
+        public void ConditionalSimplification_FromCSharp10() =>
+            Verifier.VerifyAnalyzerFromCSharp10Console(@"TestCases\ConditionalSimplification.FromCSharp10.cs",
+                                                       new ConditionalSimplification());
 #endif
 
         [TestMethod]
@@ -87,6 +92,15 @@ namespace SonarAnalyzer.UnitTest.Rules
                                    new ConditionalSimplification(),
                                    new ConditionalSimplificationCodeFixProvider(),
                                    ParseOptionsHelper.FromCSharp9,
+                                   OutputKind.ConsoleApplication);
+
+        [TestMethod]
+        public void ConditionalSimplification_FromCSharp10_CodeFix() =>
+            Verifier.VerifyCodeFix(@"TestCases\ConditionalSimplification.FromCSharp10.cs",
+                                   @"TestCases\ConditionalSimplification.FromCSharp10.Fixed.cs",
+                                   new ConditionalSimplification(),
+                                   new ConditionalSimplificationCodeFixProvider(),
+                                   ParseOptionsHelper.FromCSharp10,
                                    OutputKind.ConsoleApplication);
 #endif
     }

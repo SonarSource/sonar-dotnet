@@ -76,7 +76,14 @@ namespace SonarAnalyzer.Rules.CSharp
 
             foreach (var subPattern in propertyPatternClause.Subpatterns)
             {
-                CheckPatternCondition(c, subPattern.NameColon.Name, subPattern.Pattern.SyntaxNode.RemoveParentheses());
+                if (subPattern.NameColon != null)
+                {
+                    CheckPatternCondition(c, subPattern.NameColon.Name, subPattern.Pattern.SyntaxNode.RemoveParentheses());
+                }
+                else
+                {
+                    // Handle C#10 ExpressionColon
+                }
             }
         }
 

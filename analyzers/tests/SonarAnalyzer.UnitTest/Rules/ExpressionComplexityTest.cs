@@ -39,6 +39,11 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void ExpressionComplexity_CSharp9() =>
             Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\ExpressionComplexity.CSharp9.cs",
                 new CS.ExpressionComplexity { Maximum = 3});
+
+        [TestMethod]
+        public void ExpressionComplexity_CSharp10() =>
+            Verifier.VerifyAnalyzerFromCSharp10Console(@"TestCases\ExpressionComplexity.CSharp10.cs",
+                new CS.ExpressionComplexity { Maximum = 3});
 #endif
 
         [TestMethod]
