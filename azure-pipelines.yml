@@ -71,13 +71,13 @@ stages:
         displayName: 'Download pfx file'
         name: pfx
         inputs:
-          secureFile: 'sonarsource-2019-2021.pfx'
+          secureFile: 'SonarSource-2021-2023.pfx'
 
       - task: VSBuild@1
         displayName: "Build and sign SonarAnalyzer solution"
         env:
           SIGNTOOL_PATH: 'C:\\Program Files (x86)\\Windows Kits\\10\\bin\\10.0.17763.0\\x64\\signtool.exe'
-          PFX_PASSWORD: $(pfxPassword)
+          PFX_PASSWORD: $(pfxPassword2021-2023)
           PFX_PATH: $(pfx.secureFilePath)
         inputs:
           solution: '$(solution)'
@@ -100,7 +100,7 @@ stages:
         displayName: "Sign NuGet packages"
         inputs:
           command: 'custom'
-          arguments: 'sign $(Build.ArtifactStagingDirectory)\packages\*.nupkg -CertificatePath $(pfx.secureFilePath) -CertificatePassword $(pfxPassword) -Timestamper http://sha256timestamp.ws.symantec.com/sha256/timestamp'
+          arguments: 'sign $(Build.ArtifactStagingDirectory)\packages\*.nupkg -CertificatePath $(pfx.secureFilePath) -CertificatePassword $(pfxPassword2021-2023) -Timestamper http://sha256timestamp.ws.symantec.com/sha256/timestamp'
 
       - task: PublishBuildArtifacts@1
         displayName: 'Publish NuGet packages as build artifacts'
