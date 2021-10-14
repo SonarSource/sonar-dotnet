@@ -39,7 +39,7 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.verifyZeroInteractions;
+import static org.mockito.Mockito.verifyNoInteractions;
 import static org.mockito.Mockito.when;
 
 public class FileTypeSensorTest {
@@ -93,7 +93,7 @@ public class FileTypeSensorTest {
     assertThat(logTester.logs()).isEmpty();
     // make sure that the method is called
     verify(settingsMock, times(1)).getStringArray("sonar.LANG_KEY.analyzer.projectOutPaths");
-    verifyZeroInteractions(projectTypeCollectorMock);
+    verifyNoInteractions(projectTypeCollectorMock);
     // the following should be called ONLY IF the `projectOutPaths` is called
     verify(settingsMock, never()).getString("sonar.projectName");
     verify(settingsMock, never()).getString("sonar.projectKey");
@@ -113,7 +113,7 @@ public class FileTypeSensorTest {
     sensor.execute(tester);
 
     assertThat(logTester.logs()).isEmpty();
-    verifyZeroInteractions(projectTypeCollectorMock);
+    verifyNoInteractions(projectTypeCollectorMock);
   }
 
   @Test
@@ -124,7 +124,7 @@ public class FileTypeSensorTest {
     sensor.execute(tester);
 
     assertThat(logTester.logs()).isEmpty();
-    verifyZeroInteractions(projectTypeCollectorMock);
+    verifyNoInteractions(projectTypeCollectorMock);
   }
 
   @Test
