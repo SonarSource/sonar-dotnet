@@ -28,6 +28,8 @@ namespace Tests.Diagnostics
         private abstract class InnerPrivateClass { } // Compliant
 
         private struct AStruct { } // Compliant, structs cannot be inherited.
+
+        private static class InnerPrivateStaticClass { } // Compliant, static classes cannot be inherited.
     }
 
     public partial class Bar
