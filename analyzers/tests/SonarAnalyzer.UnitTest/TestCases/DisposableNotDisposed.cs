@@ -26,11 +26,6 @@ namespace Tests.Diagnostics
             private FileStream inner_field_fs1 = new FileStream(@"c:\foo.txt", FileMode.Open); // Noncompliant - should be reported on once
         }
 
-        private struct InnerStruct
-        {
-            private FileStream inner_field_fs1 = new FileStream(@"c:\foo.txt", FileMode.Open); // Noncompliant - should be reported on once // Error [CS0573] - cannot have field init in struct
-        }
-
         private FileStream Return()
         {
             var fs = new FileStream(@"c:\foo.txt", FileMode.Open); // Compliant - returned
