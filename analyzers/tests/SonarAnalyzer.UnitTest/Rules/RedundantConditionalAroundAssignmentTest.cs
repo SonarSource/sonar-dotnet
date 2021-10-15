@@ -45,6 +45,19 @@ namespace SonarAnalyzer.UnitTest.Rules
                                    new RedundantConditionalAroundAssignmentCodeFixProvider(),
                                    ParseOptionsHelper.FromCSharp9,
                                    OutputKind.ConsoleApplication);
+
+        [TestMethod]
+        public void RedundantConditionalAroundAssignment_CSharp10() =>
+            Verifier.VerifyAnalyzerFromCSharp10Console(@"TestCases\RedundantConditionalAroundAssignment.CSharp10.cs", new RedundantConditionalAroundAssignment());
+
+        [TestMethod]
+        public void RedundantConditionalAroundAssignment_CSharp10_CodeFix() =>
+            Verifier.VerifyCodeFix(@"TestCases\RedundantConditionalAroundAssignment.CSharp10.cs",
+                                   @"TestCases\RedundantConditionalAroundAssignment.CSharp10.Fixed.cs",
+                                   new RedundantConditionalAroundAssignment(),
+                                   new RedundantConditionalAroundAssignmentCodeFixProvider(),
+                                   ParseOptionsHelper.FromCSharp10,
+                                   OutputKind.ConsoleApplication);
 #endif
 
         [TestMethod]

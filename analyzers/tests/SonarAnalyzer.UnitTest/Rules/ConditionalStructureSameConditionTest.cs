@@ -38,6 +38,11 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void ConditionalStructureSameCondition_CS_CSharp9() =>
             Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\ConditionalStructureSameCondition.CSharp9.cs",
                 new CS.ConditionalStructureSameCondition());
+
+        [TestMethod]
+        public void ConditionalStructureSameCondition_CS_CSharp10() =>
+            Verifier.VerifyAnalyzerFromCSharp10Console(@"TestCases\ConditionalStructureSameCondition.CSharp10.cs",
+                new CS.ConditionalStructureSameCondition());
 #endif
 
         [TestMethod]

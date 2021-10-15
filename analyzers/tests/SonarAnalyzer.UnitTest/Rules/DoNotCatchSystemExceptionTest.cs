@@ -35,6 +35,10 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         public void DoNotCatchSystemException_CSharp9() =>
             Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\DoNotCatchSystemException.CSharp9.cs", new DoNotCatchSystemException());
+
+        [TestMethod]
+        public void DoNotCatchSystemException_CSharp10() =>
+            Verifier.VerifyAnalyzerFromCSharp10Console(@"TestCases\DoNotCatchSystemException.CSharp10.cs", new DoNotCatchSystemException());
 #endif
     }
 }

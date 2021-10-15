@@ -37,6 +37,10 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         public void RedundantNullCheck_CSharp9() =>
             Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\RedundantNullCheck.CSharp9.cs", new CS.RedundantNullCheck());
+
+        [TestMethod]
+        public void RedundantNullCheck_CSharp10() =>
+            Verifier.VerifyAnalyzerFromCSharp10Console(@"TestCases\RedundantNullCheck.CSharp10.cs", new CS.RedundantNullCheck());
 #endif
 
         [TestMethod]
@@ -55,6 +59,15 @@ namespace SonarAnalyzer.UnitTest.Rules
                                    new CS.RedundantNullCheck(),
                                    new CS.RedundantNullCheckCodeFixProvider(),
                                    ParseOptionsHelper.FromCSharp9,
+                                   OutputKind.ConsoleApplication);
+
+        [TestMethod]
+        public void RedundantNullCheck_CSharp10_CodeFix() =>
+            Verifier.VerifyCodeFix(@"TestCases\RedundantNullCheck.CSharp10.cs",
+                                   @"TestCases\RedundantNullCheck.CSharp10.Fixed.cs",
+                                   new CS.RedundantNullCheck(),
+                                   new CS.RedundantNullCheckCodeFixProvider(),
+                                   ParseOptionsHelper.FromCSharp10,
                                    OutputKind.ConsoleApplication);
 #endif
 

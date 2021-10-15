@@ -1,4 +1,6 @@
-﻿object o;
+﻿using System.Collections.Generic;
+
+object o;
 int i;
 
 void SimpleTest()
@@ -8,7 +10,7 @@ void SimpleTest()
     {
         // foo
     }
-    else if (o is not null) // Noncompliant [flow1] {{This branch duplicates the one on line 6.}}
+    else if (o is not null) // Noncompliant [flow1] {{This branch duplicates the one on line 8.}}
     {
         var x = 1;
     }
@@ -44,6 +46,20 @@ void Test(Apple a, Orange b, bool cond)
     else if ((f = cond ? a : b) is Orange) // Noncompliant [flow5]
     {
     }
+
+    if (f is { Sweetness: 42 }) // Secondary [flow6]
+    {
+    }
+    else if (f is { Sweetness: 42 }) // Noncompliant [flow6]
+    {
+    }
+
+    if (f is { Checks: { Count: 42 } }) // Secondary [flow7]
+    {
+    }
+    else if (f is { Checks: { Count: 42 } }) // Noncompliant [flow7]
+    {
+    }
 }
 
 void AnotherTest(object o)
@@ -55,6 +71,10 @@ void AnotherTest(object o)
     else if (o == null) { } // Noncompliant
 }
 
-abstract class Fruit { }
+abstract class Fruit
+{
+    public int Sweetness;
+    public List<int> Checks;
+}
 class Apple : Fruit { }
 class Orange : Fruit { }
