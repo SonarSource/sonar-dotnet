@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S3459",
+"message":  "Remove unassigned auto-property 'NullableReferenceType', or set its value.",
+"location":  {
+"uri":  "sources\Net6\NullableReferenceTypesExample\NullableReferenceTypesExample.cs",
+"region":  {
+"startLine":  5,
+"startColumn":  28,
+"endLine":  5,
+"endColumn":  49
+}
+}
+}
+]
+}

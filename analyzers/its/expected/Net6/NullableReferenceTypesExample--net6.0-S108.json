@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S108",
+"message":  "Either remove or fill this block of code.",
+"location":  {
+"uri":  "sources\Net6\NullableReferenceTypesExample\NullableReferenceTypesExample.cs",
+"region":  {
+"startLine":  17,
+"startColumn":  13,
+"endLine":  18,
+"endColumn":  14
+}
+}
+}
+]
+}

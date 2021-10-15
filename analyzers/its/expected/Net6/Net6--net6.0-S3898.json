@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S3898",
+"message":  "Implement 'IEquatable<T>' in value type 'Struct'.",
+"location":  {
+"uri":  "sources\Net6\Net6\ParameterlessConstructorsAndFieldInitializersInStructs.cs",
+"region":  {
+"startLine":  3,
+"startColumn":  19,
+"endLine":  3,
+"endColumn":  25
+}
+}
+}
+]
+}

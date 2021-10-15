@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S2228",
+"message":  "Remove this logging statement.",
+"location":  {
+"uri":  "sources\Net6\NullableReferenceTypesExample\NullableReferenceTypesExample.cs",
+"region":  {
+"startLine":  20,
+"startColumn":  13,
+"endLine":  20,
+"endColumn":  30
+}
+}
+}
+]
+}

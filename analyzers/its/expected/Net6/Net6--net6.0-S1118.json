@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S1118",
+"message":  "Add a 'protected' constructor or the 'static' keyword to the class declaration.",
+"location":  {
+"uri":  "sources\Net6\Net6\CallerArgumentExpression.cs",
+"region":  {
+"startLine":  6,
+"startColumn":  20,
+"endLine":  6,
+"endColumn":  44
+}
+}
+},
+{
+"id":  "S1118",
+"message":  "Add a 'protected' constructor or the 'static' keyword to the class declaration.",
+"location":  {
+"uri":  "sources\Net6\Net6\ConstantInterpolatedStrings.cs",
+"region":  {
+"startLine":  3,
+"startColumn":  20,
+"endLine":  3,
+"endColumn":  47
+}
+}
+}
+]
+}

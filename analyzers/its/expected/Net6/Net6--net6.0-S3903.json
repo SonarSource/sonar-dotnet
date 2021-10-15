@@ -1,0 +1,43 @@
+{
+"issues":  [
+{
+"id":  "S3903",
+"message":  "Move 'ExtendedPropertyPatterns' into a named namespace.",
+"location":  {
+"uri":  "sources\Net6\Net6\ExtendedPropertyPatterns.cs",
+"region":  {
+"startLine":  3,
+"startColumn":  16,
+"endLine":  3,
+"endColumn":  40
+}
+}
+},
+{
+"id":  "S3903",
+"message":  "Move 'FileScopedNamespaceDeclaration' into a named namespace.",
+"location":  {
+"uri":  "sources\Net6\Net6\FileScopedNamespaceDeclaration.cs",
+"region":  {
+"startLine":  3,
+"startColumn":  16,
+"endLine":  3,
+"endColumn":  46
+}
+}
+},
+{
+"id":  "S3903",
+"message":  "Move 'ClassThatDoesNotUseAnythingFromCompilerServicesNamespace' into a named namespace.",
+"location":  {
+"uri":  "sources\Net6\Net6\GlobalUsingDirectives.cs",
+"region":  {
+"startLine":  5,
+"startColumn":  14,
+"endLine":  5,
+"endColumn":  70
+}
+}
+}
+]
+}

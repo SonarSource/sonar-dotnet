@@ -4,11 +4,11 @@
 "id":  "S3353",
 "message":  "Add the 'const' modifier to 'a'.",
 "location":  {
-"uri":  "sources\Net6\AdHocExample\Program.cs",
+"uri":  "sources\Net6\Net6\Program.cs",
 "region":  {
-"startLine":  4,
+"startLine":  3,
 "startColumn":  5,
-"endLine":  4,
+"endLine":  3,
 "endColumn":  6
 }
 }

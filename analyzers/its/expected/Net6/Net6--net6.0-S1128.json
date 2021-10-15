@@ -1,0 +1,43 @@
+{
+"issues":  [
+{
+"id":  "S1128",
+"message":  "Remove this unnecessary 'using'.",
+"location":  {
+"uri":  "sources\Net6\Net6\CallerArgumentExpression.cs",
+"region":  {
+"startLine":  2,
+"startColumn":  1,
+"endLine":  2,
+"endColumn":  34
+}
+}
+},
+{
+"id":  "S1128",
+"message":  "Remove this unnecessary 'using'.",
+"location":  {
+"uri":  "sources\Net6\Net6\CallerArgumentExpression.cs",
+"region":  {
+"startLine":  3,
+"startColumn":  1,
+"endLine":  3,
+"endColumn":  19
+}
+}
+},
+{
+"id":  "S1128",
+"message":  "Remove this unnecessary 'using'.",
+"location":  {
+"uri":  "sources\Net6\Net6\GlobalUsingDirectives.cs",
+"region":  {
+"startLine":  1,
+"startColumn":  1,
+"endLine":  1,
+"endColumn":  46
+}
+}
+}
+]
+}

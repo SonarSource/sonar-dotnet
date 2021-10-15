@@ -4,12 +4,12 @@
 "id":  "S4060",
 "message":  "Seal this attribute or make it abstract.",
 "location":  {
-"uri":  "sources\Net6\AdHocExample\Class1.cs",
+"uri":  "sources\Net6\Net6\GenericAttributes.cs",
 "region":  {
-"startLine":  82,
-"startColumn":  14,
-"endLine":  82,
-"endColumn":  25
+"startLine":  4,
+"startColumn":  18,
+"endLine":  4,
+"endColumn":  29
 }
 }
 }

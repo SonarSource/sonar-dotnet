@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S108",
+"message":  "Either remove or fill this block of code.",
+"location":  {
+"uri":  "sources\Net6\Net6\StaticAbstractMembersInInterfaces.cs",
+"region":  {
+"startLine":  17,
+"startColumn":  42,
+"endLine":  17,
+"endColumn":  45
+}
+}
+},
+{
+"id":  "S108",
+"message":  "Either remove or fill this block of code.",
+"location":  {
+"uri":  "sources\Net6\Net6\StaticAbstractMembersInInterfaces.cs",
+"region":  {
+"startLine":  17,
+"startColumn":  53,
+"endLine":  17,
+"endColumn":  56
+}
+}
+}
+]
+}
