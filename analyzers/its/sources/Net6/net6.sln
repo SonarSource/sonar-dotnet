@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.0.31717.71
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AdHocExample", "AdHocExample\AdHocExample.csproj", "{D079BA56-CCD4-4F75-AA4F-6FDB4AFE470C}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Net6", "Net6\Net6.csproj", "{D079BA56-CCD4-4F75-AA4F-6FDB4AFE470C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
