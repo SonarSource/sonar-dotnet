@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-namespace Net6
+﻿namespace Net6
 {
     internal class CallerArgumentExpression
     {
