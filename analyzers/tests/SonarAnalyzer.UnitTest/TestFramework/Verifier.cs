@@ -165,10 +165,10 @@ namespace SonarAnalyzer.UnitTest.TestFramework
                                 OutputKind.DynamicallyLinkedLibrary,
                                 additionalReferences);
 
-        public static void VerifyAnalyzerFromCSharp10PreviewLibrary(string path, DiagnosticAnalyzer diagnosticAnalyzer, IEnumerable<MetadataReference> additionalReferences = null) =>
+        public static void VerifyAnalyzerFromPreviewLibrary(string path, DiagnosticAnalyzer diagnosticAnalyzer, IEnumerable<MetadataReference> additionalReferences = null) =>
             VerifyNonConcurrentAnalyzer(new[] { path },
                                 new[] { diagnosticAnalyzer },
-                                ParseOptionsHelper.FromCSharp10Preview,
+                                ParseOptionsHelper.FromPreview,
                                 CompilationErrorBehavior.Default,
                                 OutputKind.DynamicallyLinkedLibrary,
                                 additionalReferences);

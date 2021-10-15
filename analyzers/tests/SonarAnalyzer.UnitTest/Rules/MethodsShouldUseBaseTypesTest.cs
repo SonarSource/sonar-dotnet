@@ -70,10 +70,6 @@ internal class Bar
         [TestMethod]
         public void MethodsShouldUseBaseTypes_CSharp9() =>
             Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\MethodsShouldUseBaseTypes.CSharp9.cs", new MethodsShouldUseBaseTypes());
-
-        [TestMethod]
-        public void MethodsShouldUseBaseTypes_CSharp10() =>
-            Verifier.VerifyAnalyzerFromCSharp10PreviewLibrary(@"TestCases\MethodsShouldUseBaseTypes.CSharp10.cs", new MethodsShouldUseBaseTypes());
 #endif
 
         [TestMethod]

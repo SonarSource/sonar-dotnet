@@ -42,7 +42,7 @@ namespace SonarAnalyzer.UnitTest.Rules
 #if NET
         [TestMethod]
         public void TrackNotImplementedException_CSharp10() =>
-            Verifier.VerifyAnalyzerFromCSharp10PreviewLibrary(@"TestCases\TrackNotImplementedException.CSharp10.cs",
+            Verifier.VerifyAnalyzerFromPreviewLibrary(@"TestCases\TrackNotImplementedException.CSharp10.cs",
                 new TrackNotImplementedException());
 #endif
     }
