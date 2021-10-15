@@ -9,7 +9,7 @@ namespace Tests.Diagnostics
 
     public class SomeClass : IInterface
     {
-        static void FooBar()
+        public static void FooBar()
         {
             throw new NotImplementedException(); // Noncompliant
 //          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
