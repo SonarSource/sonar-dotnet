@@ -3,7 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.0.31717.71
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Net6", "Net6\Net6.csproj", "{D079BA56-CCD4-4F75-AA4F-6FDB4AFE470C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Net6", "Net6\Net6.csproj", "{D079BA56-CCD4-4F75-AA4F-6FDB4AFE470C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NullableReferenceTypesExample", "NonNullable\NullableReferenceTypesExample.csproj", "{492B628F-E66B-44D5-A17E-4A3D5911F8A9}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{D079BA56-CCD4-4F75-AA4F-6FDB4AFE470C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D079BA56-CCD4-4F75-AA4F-6FDB4AFE470C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D079BA56-CCD4-4F75-AA4F-6FDB4AFE470C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{492B628F-E66B-44D5-A17E-4A3D5911F8A9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{492B628F-E66B-44D5-A17E-4A3D5911F8A9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{492B628F-E66B-44D5-A17E-4A3D5911F8A9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{492B628F-E66B-44D5-A17E-4A3D5911F8A9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
