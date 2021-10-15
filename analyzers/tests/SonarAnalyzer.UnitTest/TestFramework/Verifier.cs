@@ -20,6 +20,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Collections.Immutable;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -160,6 +161,14 @@ namespace SonarAnalyzer.UnitTest.TestFramework
             VerifyNonConcurrentAnalyzer(new[] { path },
                                 new[] { diagnosticAnalyzer },
                                 ParseOptionsHelper.FromCSharp10,
+                                CompilationErrorBehavior.Default,
+                                OutputKind.DynamicallyLinkedLibrary,
+                                additionalReferences);
+
+        public static void VerifyAnalyzerFromCSharp10PreviewLibrary(string path, DiagnosticAnalyzer diagnosticAnalyzer, IEnumerable<MetadataReference> additionalReferences = null) =>
+            VerifyNonConcurrentAnalyzer(new[] { path },
+                                new[] { diagnosticAnalyzer },
+                                ParseOptionsHelper.FromCSharp10Preview,
                                 CompilationErrorBehavior.Default,
                                 OutputKind.DynamicallyLinkedLibrary,
                                 additionalReferences);
