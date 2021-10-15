@@ -38,5 +38,12 @@ namespace SonarAnalyzer.UnitTest.Rules
 #else
                 ParseOptionsHelper.FromCSharp8);
 #endif
+
+#if NET
+        [TestMethod]
+        public void TrackNotImplementedException_CSharp10() =>
+            Verifier.VerifyAnalyzerFromCSharp10Console(@"TestCases\TrackNotImplementedException.CSharp10.cs",
+                new TrackNotImplementedException());
+#endif
     }
 }
