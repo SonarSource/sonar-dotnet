@@ -50,7 +50,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework
         public static ImmutableArray<ParseOptions> FromCSharp8 { get; }
         public static ImmutableArray<ParseOptions> FromCSharp9 { get; }
         public static ImmutableArray<ParseOptions> FromCSharp10 { get; }
-        public static ImmutableArray<ParseOptions> FromCSharp10Preview { get; }
+        public static ImmutableArray<ParseOptions> FromPreview { get; }
 
         public static ImmutableArray<ParseOptions> OnlyCSharp7 { get; }
 
@@ -75,7 +75,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework
             BeforeCSharp10 = BeforeCSharp9.Concat(cs9).FilterByEnvironment();
 
             FromCSharp10 = CreateOptions(CSharp10).FilterByEnvironment();
-            FromCSharp10Preview = CreateOptions(CSharp10, Preview).FilterByEnvironment();
+            FromPreview = CreateOptions(Preview).FilterByEnvironment();
 
             FromCSharp9 = cs9.Concat(FromCSharp10).FilterByEnvironment();
             FromCSharp8 = cs8.Concat(FromCSharp9).FilterByEnvironment();
