@@ -19,6 +19,7 @@
  */
 
 using System.Collections.Immutable;
+using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
@@ -40,25 +41,24 @@ namespace SonarAnalyzer.Rules.CSharp
             DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(rule);
 
-        protected override void Initialize(SonarAnalysisContext context)
-        {
+        protected override void Initialize(SonarAnalysisContext context) =>
             context.RegisterSyntaxNodeActionInNonGenerated(
                 c =>
                 {
                     var methodDeclaration = (MethodDeclarationSyntax)c.Node;
-                    var methodSymbol = c.SemanticModel.GetDeclaredSymbol(methodDeclaration);
 
-                    if (methodSymbol != null &&
-                        methodSymbol.IsExtensionMethod &&
-                        methodSymbol.Parameters.Length > 0 &&
-                        methodSymbol.Parameters[0].Type.Kind != SymbolKind.ErrorType &&
-                        methodSymbol.Parameters[0].Type.IsClass() &&
-                        methodSymbol.ContainingNamespace == methodSymbol.Parameters[0].Type.ContainingNamespace)
+                    if (methodDeclaration.ParameterList.Parameters.Count > 0
+                        && methodDeclaration.ParameterList.Parameters[0].Modifiers.Any(s => s.ValueText == "this")
+                        && c.SemanticModel.GetDeclaredSymbol(methodDeclaration) is { } methodSymbol
+                        && methodSymbol.IsExtensionMethod
+                        && methodSymbol.Parameters.Length > 0
+                        && methodSymbol.Parameters[0].Type.Kind != SymbolKind.ErrorType
+                        && methodSymbol.Parameters[0].Type.IsClass()
+                        && methodSymbol.ContainingNamespace == methodSymbol.Parameters[0].Type.ContainingNamespace)
                     {
                         c.ReportIssue(Diagnostic.Create(rule, methodDeclaration.Identifier.GetLocation()));
                     }
                 },
                 SyntaxKind.MethodDeclaration);
-        }
     }
 }
