@@ -48,8 +48,18 @@ namespace SonarAnalyzer.UnitTest.Rules
 #if NET
         [TestMethod]
         public void DeclareTypesInNamespaces_CS_AfterCSharp9() =>
-            Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\DeclareTypesInNamespaces.AfterCSharp9.cs",
+            Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\DeclareTypesInNamespaces.AfterCSharp9.cs", new CS.DeclareTypesInNamespaces());
+
+        [TestMethod]
+        public void DeclareTypesInNamespaces_CS_AfterCSharp10() =>
+            Verifier.VerifyAnalyzerFromCSharp10Library(
+                new[]
+                {
+                    @"TestCases\DeclareTypesInNamespaces.AfterCSharp10.FileScopedNamespace.cs",
+                    @"TestCases\DeclareTypesInNamespaces.AfterCSharp10.RecordStruct.cs"
+                },
                 new CS.DeclareTypesInNamespaces());
+
 #endif
 
         [TestMethod]
