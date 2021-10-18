@@ -52,6 +52,12 @@ namespace SonarAnalyzer.UnitTest.Rules
             Verifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\Hotspots\RequestsWithExcessiveLength.CSharp9.cs",
                                                       new CS.RequestsWithExcessiveLength(AnalyzerConfiguration.AlwaysEnabled),
                                                       GetAdditionalReferences());
+
+        [TestMethod]
+        public void RequestsWithExcessiveLength_Csharp10() =>
+            Verifier.VerifyAnalyzerFromCSharp10Library(@"TestCases\Hotspots\RequestsWithExcessiveLength.CSharp10.cs",
+                                                       new CS.RequestsWithExcessiveLength(AnalyzerConfiguration.AlwaysEnabled),
+                                                       GetAdditionalReferences());
 #endif
 
         [TestMethod]
