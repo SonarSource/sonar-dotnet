@@ -21,6 +21,8 @@
 using System;
 using System.Linq;
 using FluentAssertions;
+using Microsoft.CodeAnalysis;
+using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.Diagnostics;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.Common;
@@ -156,6 +158,40 @@ End Module";
             VerifyEmpty("test.vb", sourceVb, new VB.ArrayDesignatorOnVariable());
         }
 
+        [TestMethod]
+        public void No_Issue_On_Generated_Lambda_With_ExcludedAttribute()
+        {
+            const string sourceCs =
+                @"using System;
+using System.Diagnostics;
+using System.Runtime.CompilerServices;
+
+namespace Net6Poc.GeneratedCodeRecognizer
+{
+    internal class TestCases
+    {
+        public void Bar()
+        {
+            [DebuggerNonUserCodeAttribute()] int Do() => 1;
+
+            Action a = [CompilerGenerated] () => { ;;; };
+
+            Action x = true
+                           ? ([DebuggerNonUserCodeAttribute] () => { ;;; })
+                           : [GenericAttribute<int>] () => { ;;; }; // FN? Empty statement in lambda
+
+            Call([DebuggerNonUserCodeAttribute] (x) => { ;;; });
+        }
+
+        private void Call(Action<int> action) => action(1);
+    }
+
+    public class GenericAttribute<T> : Attribute { }
+}
+";
+            VerifyEmpty("test.cs", sourceCs, new CS.EmptyStatement(), parseOptions: new CSharpParseOptions(LanguageVersion.Preview));
+        }
+
         // until https://github.com/SonarSource/sonar-dotnet/issues/2228, we were considering a file as generated
         // if the word "generated" was contained inside a region.
         [DataTestMethod]
@@ -263,7 +299,11 @@ $@"namespace PartiallyGenerated
             return tree.IsGenerated(generatedCodeRecognizer, compilation);
         }
 
-        private static void VerifyEmpty(string name, string content, DiagnosticAnalyzer diagnosticAnalyzer, CompilationErrorBehavior checkMode = CompilationErrorBehavior.Default)
+        private static void VerifyEmpty(string name,
+                                        string content,
+                                        DiagnosticAnalyzer diagnosticAnalyzer,
+                                        CompilationErrorBehavior checkMode = CompilationErrorBehavior.Default,
+                                        ParseOptions parseOptions = default)
         {
             AnalyzerLanguage language;
             if (name.EndsWith(".cs"))
@@ -283,7 +323,7 @@ $@"namespace PartiallyGenerated
                .Create()
                .AddProject(language, createExtraEmptyFile: false)
                .AddSnippet(content, name)
-               .GetCompilation();
+               .GetCompilation(parseOptions);
 
             DiagnosticVerifier.VerifyNoIssueReported(compilation, diagnosticAnalyzer, checkMode);
         }
