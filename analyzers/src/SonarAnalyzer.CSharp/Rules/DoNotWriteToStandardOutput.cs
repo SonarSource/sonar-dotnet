@@ -34,8 +34,7 @@ namespace SonarAnalyzer.Rules.CSharp
     {
         private static readonly ISet<string> BannedConsoleMembers = new HashSet<string> { "WriteLine", "Write" };
 
-        protected sealed override void Initialize(SonarAnalysisContext context)
-        {
+        protected sealed override void Initialize(SonarAnalysisContext context) =>
             context.RegisterSyntaxNodeActionInNonGenerated(
                 c =>
                 {
@@ -50,16 +49,13 @@ namespace SonarAnalyzer.Rules.CSharp
                     if (methodSymbol != null &&
                         methodSymbol.IsInType(KnownType.System_Console) &&
                         BannedConsoleMembers.Contains(methodSymbol.Name) &&
-                        !CSharpDebugOnlyCodeHelper.IsInDebugBlock(c.Node) &&
+                        !c.Node.IsInDebugBlock() &&
                         !CSharpDebugOnlyCodeHelper.IsCallerInConditionalDebug(methodCall, c.SemanticModel))
-
                     {
-                        c.ReportIssue(Diagnostic.Create(SupportedDiagnostics[0],
-                            methodCall.Expression.GetLocation()));
+                        c.ReportIssue(Diagnostic.Create(SupportedDiagnostics[0], methodCall.Expression.GetLocation()));
                     }
                 },
                 SyntaxKind.InvocationExpression);
-        }
     }
 
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
@@ -69,8 +65,7 @@ namespace SonarAnalyzer.Rules.CSharp
         private const string DiagnosticId = "S106";
         private const string MessageFormat = "Remove this logging statement.";
 
-        private static readonly DiagnosticDescriptor rule =
-            DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
+        private static readonly DiagnosticDescriptor Rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(Rule);
     }
 }
