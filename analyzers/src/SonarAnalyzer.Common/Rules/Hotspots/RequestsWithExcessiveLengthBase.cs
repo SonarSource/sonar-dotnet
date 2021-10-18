@@ -79,8 +79,8 @@ namespace SonarAnalyzer.Rules
                     var attributesOverTheLimit = new ConcurrentDictionary<SyntaxNode, Attributes>();
 
                     c.RegisterSyntaxNodeActionInNonGenerated(Language.GeneratedCodeRecognizer,
-                        cc => CollectAttributesOverTheLimit(cc, attributesOverTheLimit),
-                        Language.SyntaxKind.Attribute);
+                                                             cc => CollectAttributesOverTheLimit(cc, attributesOverTheLimit),
+                                                             Language.SyntaxKind.Attribute);
 
                     c.RegisterCompilationEndAction(cc => ReportOnCollectedAttributes(cc, attributesOverTheLimit));
                 });
