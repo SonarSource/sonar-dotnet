@@ -17,14 +17,20 @@ namespace Net6Poc.DisablingCSRFProtection
 
             Action x = true
                            ? ([IgnoreAntiforgeryToken]() => { }) // Noncompliant
-                           : [GenericAttribute<int>]() => { };
+                           :[GenericAttribute<int>]() => { };
 
             Call([IgnoreAntiforgeryToken] (x) => { }); // Noncompliant
+            Call([GenericIgnoreAntiforgeryToken<int>] (x) => { }); // FN
         }
+
+        [GenericIgnoreAntiforgeryToken<int>] // FN
+        public void M() { }
 
         private void Call(Action<int> action) => action(1);
     }
     public class NonGenericAttribute : Attribute { }
 
     public class GenericAttribute<T> : Attribute { }
+
+    public class GenericIgnoreAntiforgeryToken<T> : IgnoreAntiforgeryTokenAttribute { }
 }
