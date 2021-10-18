@@ -21,4 +21,76 @@ namespace Net6Poc
             Func<Task> e = async () => await Task.Delay(0);
         }
     }
+
+    public class Foo : EventArgs { }
+
+    public record struct EventHandlerCasesInRecordStruct
+    {
+        async void MyMethod() // Noncompliant {{Return 'Task' instead.}}
+//            ^^^^
+        {
+            await Task.Run(() => Console.WriteLine("test"));
+        }
+
+        async void MyMethod(object sender, EventArgs args)
+        {
+            await Task.Run(() => Console.WriteLine("test"));
+        }
+
+        async void MyMethod1(object o, EventArgs e)
+        {
+            await Task.Run(() => Console.WriteLine("test"));
+        }
+
+        async void MyMethod2(object o, Foo e)
+        {
+            await Task.Run(() => Console.WriteLine("test"));
+        }
+
+        public event EventHandler<bool> MyEvent;
+
+        public void SomeMethod()
+        {
+            MyEvent += EventHandlerCases_MyEvent;
+        }
+
+        private async void EventHandlerCases_MyEvent(object sender, bool e) // Noncompliant FP
+        {
+            await Task.Run(() => Console.WriteLine("test"));
+        }
+
+        private async void NotAHandler(object sender) // Noncompliant
+//                    ^^^^
+        {
+            await Task.Run(() => Console.WriteLine("test"));
+        }
+    }
+
+    public record struct EventHandlerCasesInPositionalRecordStruct(string Param)
+    {
+        async void MyMethod() // Noncompliant
+        {
+            await Task.Run(() => Console.WriteLine("test"));
+        }
+
+        async void MyMethod(object sender, EventArgs args)
+        {
+            await Task.Run(() => Console.WriteLine("test"));
+        }
+
+        async void MyMethod1(object o, EventArgs e)
+        {
+            await Task.Run(() => Console.WriteLine("test"));
+        }
+
+        async void MyMethod2(object o, Foo e)
+        {
+            await Task.Run(() => Console.WriteLine("test"));
+        }
+
+        private async void NotAHandler(object sender) // Noncompliant
+        {
+            await Task.Run(() => Console.WriteLine("test"));
+        }
+    }
 }

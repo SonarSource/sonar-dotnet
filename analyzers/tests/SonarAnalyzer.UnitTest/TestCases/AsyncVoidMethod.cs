@@ -126,4 +126,19 @@ namespace Tests.Diagnostics
             await Task.Run(() => Console.WriteLine("test"));
         }
     }
+
+    public struct StructExample
+    {
+        event EventHandler<bool> MyEvent;
+
+        public void SomeMethod()
+        {
+            MyEvent += EventHandlerCases_MyEvent;
+        }
+
+        private async void EventHandlerCases_MyEvent(object sender, bool e) // Noncompliant FP
+        {
+            await Task.Run(() => Console.WriteLine("test"));
+        }
+    }
 }

@@ -436,6 +436,10 @@ public class Types // Compliant, pointers are not counted
         object o1) { }
 }
 ", new AvoidExcessiveClassCoupling { Threshold = 0 }, ParseOptionsHelper.FromCSharp9);
+
+        [TestMethod]
+        public void AvoidExcessiveClassCoupling_CSharp10() =>
+            Verifier.VerifyAnalyzerFromCSharp10Library(@"TestCases\AvoidExcessiveClassCoupling.CSharp10.cs", new AvoidExcessiveClassCoupling { Threshold = 1 });
 #endif
     }
 }
