@@ -1,0 +1,319 @@
+{
+"issues":  [
+{
+"id":  "S3059",
+"message":  "Types should not have members with visibility set higher than the type's visibility",
+"location":  [
+{
+"uri":  "sources\Net6\Net6\AllowAsyncMethodBuilderAttributeOnMethods.cs",
+"region":  {
+"startLine":  3,
+"startColumn":  20,
+"endLine":  3,
+"endColumn":  61
+}
+},
+{
+"uri":  "sources\Net6\Net6\AllowAsyncMethodBuilderAttributeOnMethods.cs",
+"region":  {
+"startLine":  6,
+"startColumn":  9,
+"endLine":  6,
+"endColumn":  15
+}
+}
+]
+},
+{
+"id":  "S3059",
+"message":  "Types should not have members with visibility set higher than the type's visibility",
+"location":  [
+{
+"uri":  "sources\Net6\Net6\AnonymousTypesInWithExpressions.cs",
+"region":  {
+"startLine":  3,
+"startColumn":  20,
+"endLine":  3,
+"endColumn":  51
+}
+},
+{
+"uri":  "sources\Net6\Net6\AnonymousTypesInWithExpressions.cs",
+"region":  {
+"startLine":  5,
+"startColumn":  9,
+"endLine":  5,
+"endColumn":  15
+}
+}
+]
+},
+{
+"id":  "S3059",
+"message":  "Types should not have members with visibility set higher than the type's visibility",
+"location":  [
+{
+"uri":  "sources\Net6\Net6\AssignmentAndDeclarationInSameDeconstruction.cs",
+"region":  {
+"startLine":  3,
+"startColumn":  20,
+"endLine":  3,
+"endColumn":  64
+}
+},
+{
+"uri":  "sources\Net6\Net6\AssignmentAndDeclarationInSameDeconstruction.cs",
+"region":  {
+"startLine":  5,
+"startColumn":  9,
+"endLine":  5,
+"endColumn":  15
+}
+}
+]
+},
+{
+"id":  "S3059",
+"message":  "Types should not have members with visibility set higher than the type's visibility",
+"location":  [
+{
+"uri":  "sources\Net6\Net6\CallerArgumentExpression.cs",
+"region":  {
+"startLine":  3,
+"startColumn":  20,
+"endLine":  3,
+"endColumn":  44
+}
+},
+{
+"uri":  "sources\Net6\Net6\CallerArgumentExpression.cs",
+"region":  {
+"startLine":  6,
+"startColumn":  9,
+"endLine":  6,
+"endColumn":  15
+}
+}
+]
+},
+{
+"id":  "S3059",
+"message":  "Types should not have members with visibility set higher than the type's visibility",
+"location":  [
+{
+"uri":  "sources\Net6\Net6\ConstantInterpolatedStrings.cs",
+"region":  {
+"startLine":  3,
+"startColumn":  20,
+"endLine":  3,
+"endColumn":  47
+}
+},
+{
+"uri":  "sources\Net6\Net6\ConstantInterpolatedStrings.cs",
+"region":  {
+"startLine":  5,
+"startColumn":  9,
+"endLine":  5,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\Net6\Net6\ConstantInterpolatedStrings.cs",
+"region":  {
+"startLine":  6,
+"startColumn":  9,
+"endLine":  6,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\Net6\Net6\ConstantInterpolatedStrings.cs",
+"region":  {
+"startLine":  7,
+"startColumn":  9,
+"endLine":  7,
+"endColumn":  15
+}
+}
+]
+},
+{
+"id":  "S3059",
+"message":  "Types should not have members with visibility set higher than the type's visibility",
+"location":  [
+{
+"uri":  "sources\Net6\Net6\ExtendedPropertyPatterns.cs",
+"region":  {
+"startLine":  3,
+"startColumn":  16,
+"endLine":  3,
+"endColumn":  40
+}
+},
+{
+"uri":  "sources\Net6\Net6\ExtendedPropertyPatterns.cs",
+"region":  {
+"startLine":  5,
+"startColumn":  5,
+"endLine":  5,
+"endColumn":  11
+}
+},
+{
+"uri":  "sources\Net6\Net6\ExtendedPropertyPatterns.cs",
+"region":  {
+"startLine":  7,
+"startColumn":  5,
+"endLine":  7,
+"endColumn":  11
+}
+}
+]
+},
+{
+"id":  "S3059",
+"message":  "Types should not have members with visibility set higher than the type's visibility",
+"location":  [
+{
+"uri":  "sources\Net6\Net6\FileScopedNamespaceDeclaration.cs",
+"region":  {
+"startLine":  3,
+"startColumn":  16,
+"endLine":  3,
+"endColumn":  46
+}
+},
+{
+"uri":  "sources\Net6\Net6\FileScopedNamespaceDeclaration.cs",
+"region":  {
+"startLine":  5,
+"startColumn":  5,
+"endLine":  5,
+"endColumn":  11
+}
+}
+]
+},
+{
+"id":  "S3059",
+"message":  "Types should not have members with visibility set higher than the type's visibility",
+"location":  [
+{
+"uri":  "sources\Net6\Net6\GenericAttributes.cs",
+"region":  {
+"startLine":  11,
+"startColumn":  20,
+"endLine":  11,
+"endColumn":  41
+}
+},
+{
+"uri":  "sources\Net6\Net6\GenericAttributes.cs",
+"region":  {
+"startLine":  14,
+"startColumn":  9,
+"endLine":  14,
+"endColumn":  15
+}
+}
+]
+},
+{
+"id":  "S3059",
+"message":  "Types should not have members with visibility set higher than the type's visibility",
+"location":  [
+{
+"uri":  "sources\Net6\Net6\ImplicitUsingOfNamespaces.cs",
+"region":  {
+"startLine":  3,
+"startColumn":  20,
+"endLine":  3,
+"endColumn":  45
+}
+},
+{
+"uri":  "sources\Net6\Net6\ImplicitUsingOfNamespaces.cs",
+"region":  {
+"startLine":  6,
+"startColumn":  9,
+"endLine":  6,
+"endColumn":  15
+}
+}
+]
+},
+{
+"id":  "S3059",
+"message":  "Types should not have members with visibility set higher than the type's visibility",
+"location":  [
+{
+"uri":  "sources\Net6\Net6\LambdaAttributes.cs",
+"region":  {
+"startLine":  3,
+"startColumn":  20,
+"endLine":  3,
+"endColumn":  36
+}
+},
+{
+"uri":  "sources\Net6\Net6\LambdaAttributes.cs",
+"region":  {
+"startLine":  5,
+"startColumn":  9,
+"endLine":  5,
+"endColumn":  15
+}
+}
+]
+},
+{
+"id":  "S3059",
+"message":  "Types should not have members with visibility set higher than the type's visibility",
+"location":  [
+{
+"uri":  "sources\Net6\Net6\LambdasWithExplicitReturnType.cs",
+"region":  {
+"startLine":  3,
+"startColumn":  20,
+"endLine":  3,
+"endColumn":  49
+}
+},
+{
+"uri":  "sources\Net6\Net6\LambdasWithExplicitReturnType.cs",
+"region":  {
+"startLine":  5,
+"startColumn":  9,
+"endLine":  5,
+"endColumn":  15
+}
+}
+]
+},
+{
+"id":  "S3059",
+"message":  "Types should not have members with visibility set higher than the type's visibility",
+"location":  [
+{
+"uri":  "sources\Net6\Net6\StructuresAsLeftHandOperandsInWithExpressions.cs",
+"region":  {
+"startLine":  3,
+"startColumn":  20,
+"endLine":  3,
+"endColumn":  65
+}
+},
+{
+"uri":  "sources\Net6\Net6\StructuresAsLeftHandOperandsInWithExpressions.cs",
+"region":  {
+"startLine":  5,
+"startColumn":  9,
+"endLine":  5,
+"endColumn":  15
+}
+}
+]
+}
+]
+}

@@ -1,0 +1,56 @@
+{
+"issues":  [
+{
+"id":  "S109",
+"message":  "Assign this magic number '16' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\Net6\Net6\AssignmentAndDeclarationInSameDeconstruction.cs",
+"region":  {
+"startLine":  8,
+"startColumn":  27,
+"endLine":  8,
+"endColumn":  29
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '23' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\Net6\Net6\AssignmentAndDeclarationInSameDeconstruction.cs",
+"region":  {
+"startLine":  8,
+"startColumn":  31,
+"endLine":  8,
+"endColumn":  33
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '42' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\Net6\Net6\ExtendedPropertyPatterns.cs",
+"region":  {
+"startLine":  9,
+"startColumn":  65,
+"endLine":  9,
+"endColumn":  67
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '42' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\Net6\Net6\Program.cs",
+"region":  {
+"startLine":  4,
+"startColumn":  42,
+"endLine":  4,
+"endColumn":  44
+}
+}
+}
+]
+}

@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S4060",
+"message":  "Seal this attribute or make it abstract.",
+"location":  {
+"uri":  "sources\Net6\Net6\GenericAttributes.cs",
+"region":  {
+"startLine":  4,
+"startColumn":  18,
+"endLine":  4,
+"endColumn":  29
+}
+}
+}
+]
+}

@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S3353",
+"message":  "Add the 'const' modifier to 'a'.",
+"location":  {
+"uri":  "sources\Net6\Net6\Program.cs",
+"region":  {
+"startLine":  3,
+"startColumn":  5,
+"endLine":  3,
+"endColumn":  6
+}
+}
+}
+]
+}

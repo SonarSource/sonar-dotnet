@@ -1,0 +1,56 @@
+{
+"issues":  [
+{
+"id":  "S3906",
+"message":  "Change the signature of that event handler to match the specified signature.",
+"location":  {
+"uri":  "sources\Net6\Net6\StaticAbstractMembersInInterfaces.cs",
+"region":  {
+"startLine":  9,
+"startColumn":  31,
+"endLine":  9,
+"endColumn":  37
+}
+}
+},
+{
+"id":  "S3906",
+"message":  "Change the signature of that event handler to match the specified signature.",
+"location":  {
+"uri":  "sources\Net6\Net6\StaticAbstractMembersInInterfaces.cs",
+"region":  {
+"startLine":  17,
+"startColumn":  22,
+"endLine":  17,
+"endColumn":  28
+}
+}
+},
+{
+"id":  "S3906",
+"message":  "Change the signature of that event handler to match the specified signature.",
+"location":  {
+"uri":  "sources\Net6\Net6\StaticAbstractMembersInInterfaces.cs",
+"region":  {
+"startLine":  26,
+"startColumn":  29,
+"endLine":  26,
+"endColumn":  35
+}
+}
+},
+{
+"id":  "S3906",
+"message":  "Change the signature of that event handler to match the specified signature.",
+"location":  {
+"uri":  "sources\Net6\Net6\StaticAbstractMembersInInterfaces.cs",
+"region":  {
+"startLine":  27,
+"startColumn":  29,
+"endLine":  27,
+"endColumn":  35
+}
+}
+}
+]
+}

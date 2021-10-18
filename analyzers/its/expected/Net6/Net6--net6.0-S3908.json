@@ -1,0 +1,43 @@
+{
+"issues":  [
+{
+"id":  "S3908",
+"message":  "Refactor this delegate to use 'System.EventHandler<TEventArgs>'.",
+"location":  {
+"uri":  "sources\Net6\Net6\StaticAbstractMembersInInterfaces.cs",
+"region":  {
+"startLine":  9,
+"startColumn":  31,
+"endLine":  9,
+"endColumn":  37
+}
+}
+},
+{
+"id":  "S3908",
+"message":  "Refactor this delegate to use 'System.EventHandler<TEventArgs>'.",
+"location":  {
+"uri":  "sources\Net6\Net6\StaticAbstractMembersInInterfaces.cs",
+"region":  {
+"startLine":  26,
+"startColumn":  29,
+"endLine":  26,
+"endColumn":  35
+}
+}
+},
+{
+"id":  "S3908",
+"message":  "Refactor this delegate to use 'System.EventHandler<TEventArgs>'.",
+"location":  {
+"uri":  "sources\Net6\Net6\StaticAbstractMembersInInterfaces.cs",
+"region":  {
+"startLine":  27,
+"startColumn":  29,
+"endLine":  27,
+"endColumn":  35
+}
+}
+}
+]
+}

@@ -1,0 +1,56 @@
+{
+"issues":  [
+{
+"id":  "S2325",
+"message":  "Make 'Example' a static method.",
+"location":  {
+"uri":  "sources\Net6\Net6\AssignmentAndDeclarationInSameDeconstruction.cs",
+"region":  {
+"startLine":  5,
+"startColumn":  21,
+"endLine":  5,
+"endColumn":  28
+}
+}
+},
+{
+"id":  "S2325",
+"message":  "Make 'DoSomething' a static method.",
+"location":  {
+"uri":  "sources\Net6\Net6\FileScopedNamespaceDeclaration.cs",
+"region":  {
+"startLine":  5,
+"startColumn":  17,
+"endLine":  5,
+"endColumn":  28
+}
+}
+},
+{
+"id":  "S2325",
+"message":  "Make 'Example' a static method.",
+"location":  {
+"uri":  "sources\Net6\Net6\GlobalUsingDirectives.cs",
+"region":  {
+"startLine":  7,
+"startColumn":  17,
+"endLine":  7,
+"endColumn":  24
+}
+}
+},
+{
+"id":  "S2325",
+"message":  "Make 'Example' a static method.",
+"location":  {
+"uri":  "sources\Net6\Net6\LambdasWithExplicitReturnType.cs",
+"region":  {
+"startLine":  5,
+"startColumn":  21,
+"endLine":  5,
+"endColumn":  28
+}
+}
+}
+]
+}

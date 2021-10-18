@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S2326",
+"message":  "'T' is not used in the class.",
+"location":  {
+"uri":  "sources\Net6\Net6\GenericAttributes.cs",
+"region":  {
+"startLine":  4,
+"startColumn":  30,
+"endLine":  4,
+"endColumn":  31
+}
+}
+}
+]
+}

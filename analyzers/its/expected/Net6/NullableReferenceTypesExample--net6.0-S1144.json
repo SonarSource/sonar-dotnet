@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S1144",
+"message":  "Remove the unused private set accessor in property 'NullableReferenceType'.",
+"location":  {
+"uri":  "sources\Net6\NullableReferenceTypesExample\NullableReferenceTypesExample.cs",
+"region":  {
+"startLine":  5,
+"startColumn":  57,
+"endLine":  5,
+"endColumn":  61
+}
+}
+}
+]
+}
