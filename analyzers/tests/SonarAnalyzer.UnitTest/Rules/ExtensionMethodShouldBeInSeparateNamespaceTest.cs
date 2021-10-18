@@ -35,6 +35,11 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         public void ExtensionMethodShouldBeInSeparateNamespace_CSharp9() =>
             Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\ExtensionMethodShouldBeInSeparateNamespace.CSharp9.cs", new ExtensionMethodShouldBeInSeparateNamespace());
+
+        [TestMethod]
+        public void ExtensionMethodShouldBeInSeparateNamespace_CSharp10() =>
+            Verifier.VerifyAnalyzerFromCSharp10Library(@"TestCases\ExtensionMethodShouldBeInSeparateNamespace.CSharp10.cs", new ExtensionMethodShouldBeInSeparateNamespace());
+
 #endif
     }
 }
