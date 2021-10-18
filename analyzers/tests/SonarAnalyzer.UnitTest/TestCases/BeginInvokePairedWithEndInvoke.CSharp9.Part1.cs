@@ -106,4 +106,29 @@ namespace Tests.Diagnostics
 
         public partial void DoNothing(IAsyncResult result);
     }
+
+    public record FooRecord
+    {
+        private AsyncMethodCaller caller = null;
+        public string field;
+
+        public FooRecord(string field)
+        {
+            this.field = field;
+            caller.BeginInvoke("FooStruct", 42, null, null); // Noncompliant
+        }
+    }
+
+    public record PositionalRecord(string Property)
+    {
+        private AsyncMethodCaller caller = null;
+        public string field;
+
+        public PositionalRecord(string field, string property) : this(property)
+        {
+            this.field = field;
+            this.Property = property;
+            caller.BeginInvoke("FooStruct", 42, null, null); // Noncompliant
+        }
+    }
 }
