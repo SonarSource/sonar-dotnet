@@ -99,6 +99,14 @@ namespace SonarAnalyzer.UnitTest.TestFramework
             CompileAndVerifyAnalyzer(solution, new[] { diagnosticAnalyzer }, null, checkMode);
         }
 
+        public static void VerifyAnalyzerFromPreviewLibrary(string path, DiagnosticAnalyzer diagnosticAnalyzer, IEnumerable<MetadataReference> additionalReferences = null) =>
+            VerifyNonConcurrentAnalyzer(new[] { path },
+                                        new[] { diagnosticAnalyzer },
+                                        ParseOptionsHelper.FromPreview,
+                                        CompilationErrorBehavior.Default,
+                                        OutputKind.DynamicallyLinkedLibrary,
+                                        additionalReferences);
+
         /// <summary>
         /// Verify analyzer from C# 9 with top level statements in non-concurrent execution mode.
         /// </summary>
