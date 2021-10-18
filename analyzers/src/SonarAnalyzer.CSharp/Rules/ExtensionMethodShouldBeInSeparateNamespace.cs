@@ -25,6 +25,7 @@ using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.Common;
+using SonarAnalyzer.Extensions;
 using SonarAnalyzer.Helpers;
 
 namespace SonarAnalyzer.Rules.CSharp
@@ -47,8 +48,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 {
                     var methodDeclaration = (MethodDeclarationSyntax)c.Node;
 
-                    if (methodDeclaration.ParameterList.Parameters.Count > 0
-                        && methodDeclaration.ParameterList.Parameters[0].Modifiers.Any(s => s.ValueText == "this")
+                    if (methodDeclaration.IsExtensionMethod()
                         && c.SemanticModel.GetDeclaredSymbol(methodDeclaration) is { } methodSymbol
                         && methodSymbol.IsExtensionMethod
                         && methodSymbol.Parameters.Length > 0
