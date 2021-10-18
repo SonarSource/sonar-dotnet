@@ -47,6 +47,11 @@ namespace SonarAnalyzer.UnitTest.Rules
                                                        new UnnecessaryUsings());
 
         [TestMethod]
+        public void UnnecessaryUsings_CSharp10_FileScopedNamespace() =>
+            Verifier.VerifyAnalyzerFromCSharp10Library(new[] { @"TestCases\UnnecessaryUsings.CSharp10.FileScopedNamespace.cs" },
+                                                       new UnnecessaryUsings());
+
+        [TestMethod]
         public void UnnecessaryUsings_CSharp9() =>
             Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\UnnecessaryUsings.CSharp9.cs", new UnnecessaryUsings());
 
