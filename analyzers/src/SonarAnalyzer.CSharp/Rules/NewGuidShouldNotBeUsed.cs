@@ -50,7 +50,7 @@ namespace SonarAnalyzer.Rules.CSharp
                         c.SemanticModel.GetSymbolInfo(objectCreationSyntax).Symbol is IMethodSymbol methodSymbol &&
                         methodSymbol.ContainingType.Is(KnownType.System_Guid))
                     {
-                        c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, objectCreationSyntax.GetLocation()));
+                        c.ReportIssue(Diagnostic.Create(rule, objectCreationSyntax.GetLocation()));
                     }
                 },
                 SyntaxKind.ObjectCreationExpression);

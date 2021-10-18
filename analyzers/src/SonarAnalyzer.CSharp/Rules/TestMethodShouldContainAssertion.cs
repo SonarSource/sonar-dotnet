@@ -83,7 +83,7 @@ namespace SonarAnalyzer.Rules.CSharp
                         && !IsTestIgnored(methodSymbol)
                         && !ContainsAssertion(c.Node, c.SemanticModel, new HashSet<IMethodSymbol>(), 0))
                     {
-                        c.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, methodDeclaration.Identifier.GetLocation()));
+                        c.ReportIssue(Diagnostic.Create(Rule, methodDeclaration.Identifier.GetLocation()));
                     }
                 },
                 SyntaxKind.MethodDeclaration,

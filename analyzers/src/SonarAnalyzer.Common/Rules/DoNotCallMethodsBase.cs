@@ -65,7 +65,7 @@ namespace SonarAnalyzer.Rules
 
             if (ShouldReportOnMethodCall(invocation, analysisContext.SemanticModel, disallowedMethodSignature))
             {
-                analysisContext.ReportDiagnosticWhenActive(Diagnostic.Create(SupportedDiagnostics[0], identifier.Value.GetLocation(),
+                analysisContext.ReportIssue(Diagnostic.Create(SupportedDiagnostics[0], identifier.Value.GetLocation(),
                     disallowedMethodSignature.ToString()));
             }
         }

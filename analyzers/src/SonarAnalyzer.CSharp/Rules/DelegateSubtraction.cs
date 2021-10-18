@@ -53,7 +53,7 @@ namespace SonarAnalyzer.Rules.CSharp
                         return;
                     }
 
-                    c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, assignment.GetLocation()));
+                    c.ReportIssue(Diagnostic.Create(rule, assignment.GetLocation()));
                 },
                 SyntaxKind.SubtractAssignmentExpression);
 
@@ -69,7 +69,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
                     if (!BinaryIsValidSubstraction(binary))
                     {
-                        c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, binary.GetLocation()));
+                        c.ReportIssue(Diagnostic.Create(rule, binary.GetLocation()));
                     }
                 },
                 SyntaxKind.SubtractExpression);

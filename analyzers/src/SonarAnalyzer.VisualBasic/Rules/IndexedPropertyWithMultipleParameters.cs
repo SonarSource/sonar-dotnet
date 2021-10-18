@@ -49,7 +49,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
                     if (property.ParameterList != null &&
                         property.ParameterList.Parameters.Count > 1)
                     {
-                        c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, property.Identifier.GetLocation(), property.ParameterList.Parameters.Count));
+                        c.ReportIssue(Diagnostic.Create(rule, property.Identifier.GetLocation(), property.ParameterList.Parameters.Count));
                     }
                 },
                 SyntaxKind.PropertyStatement);

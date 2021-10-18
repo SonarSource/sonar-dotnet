@@ -104,7 +104,7 @@ namespace SonarAnalyzer.Helpers
         {
             if (ShouldAnalyze(context, generatedCodeRecognizer, diagnostic.Location.SourceTree, context.Compilation, context.Options))
             {
-                context.ReportDiagnosticWhenActive(diagnostic);
+                context.ReportIssue(diagnostic);
             }
         }
 
@@ -112,7 +112,7 @@ namespace SonarAnalyzer.Helpers
         {
             if (ShouldAnalyze(generatedCodeRecognizer, diagnostic.Location.SourceTree, context.Compilation, context.Options))
             {
-                context.ReportDiagnosticWhenActive(diagnostic);
+                context.ReportIssue(diagnostic);
             }
         }
 

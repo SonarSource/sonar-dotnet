@@ -121,7 +121,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
 
             var lastStatement = statementsToReport.Last();
 
-            context.ReportDiagnosticWhenActive(Diagnostic.Create(rule, firstStatement.CreateLocation(lastStatement),
+            context.ReportIssue(Diagnostic.Create(rule, firstStatement.CreateLocation(lastStatement),
                 locationProvider.First().GetLineNumberToReport(), constructType));
         }
 

@@ -53,7 +53,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     if (parentIfStatment != null &&
                         parentIfStatment.Else == null)
                     {
-                        c.ReportDiagnosticWhenActive(Diagnostic.Create(
+                        c.ReportIssue(Diagnostic.Create(
                             rule,
                             ifStatement.IfKeyword.GetLocation(),
                             additionalLocations: new[] { parentIfStatment.IfKeyword.GetLocation() }));

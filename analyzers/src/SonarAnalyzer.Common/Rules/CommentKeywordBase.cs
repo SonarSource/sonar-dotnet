@@ -62,12 +62,12 @@ namespace SonarAnalyzer.Rules
                     {
                         foreach (var location in GetKeywordLocations(c.Tree, comment, TodoKeyword))
                         {
-                            c.ReportDiagnosticWhenActive(Diagnostic.Create(TodoDiagnostic, location));
+                            c.ReportIssue(Diagnostic.Create(TodoDiagnostic, location));
                         }
 
                         foreach (var location in GetKeywordLocations(c.Tree, comment, FixMeKeyword))
                         {
-                            c.ReportDiagnosticWhenActive(Diagnostic.Create(FixMeDiagnostic, location));
+                            c.ReportIssue(Diagnostic.Create(FixMeDiagnostic, location));
                         }
                     }
                 });

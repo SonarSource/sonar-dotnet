@@ -169,7 +169,7 @@ namespace SonarAnalyzer.Rules.CSharp
                         IsAlphaNumericOrAt(secondStringText[0]))
                     {
                         var word = secondStringText.Split(' ').FirstOrDefault();
-                        this.context.ReportDiagnosticWhenActive(Diagnostic.Create(rule, secondString.Node.GetLocation(), word));
+                        this.context.ReportIssue(Diagnostic.Create(rule, secondString.Node.GetLocation(), word));
                     }
                 }
             }

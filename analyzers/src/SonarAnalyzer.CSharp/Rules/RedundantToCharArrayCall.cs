@@ -55,7 +55,7 @@ namespace SonarAnalyzer.Rules.CSharp
                         && methodSymbol.IsInType(KnownType.System_String)
                         && methodSymbol.Parameters.Length == 0)
                     {
-                        c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, memberAccess.Name.GetLocation()));
+                        c.ReportIssue(Diagnostic.Create(rule, memberAccess.Name.GetLocation()));
                     }
                 },
                 SyntaxKind.InvocationExpression);

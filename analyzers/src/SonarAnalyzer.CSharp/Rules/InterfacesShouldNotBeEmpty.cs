@@ -56,7 +56,7 @@ namespace SonarAnalyzer.Rules.CSharp
                         interfaceSymbol.DeclaredAccessibility == Accessibility.Public &&
                         !IsAggregatingOtherInterfaces(interfaceSymbol))
                     {
-                        c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, interfaceDeclaration.Identifier.GetLocation()));
+                        c.ReportIssue(Diagnostic.Create(rule, interfaceDeclaration.Identifier.GetLocation()));
                     }
                 },
                 SyntaxKind.InterfaceDeclaration);

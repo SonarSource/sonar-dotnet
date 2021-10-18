@@ -97,7 +97,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
             if (otherMethod != null)
             {
-                context.ReportDiagnosticWhenActive(Diagnostic.Create(
+                context.ReportIssue(Diagnostic.Create(
                     rule,
                     node.GetLocation(),
                     otherMethod.ToMinimalDisplayString(context.SemanticModel, node.SpanStart)));

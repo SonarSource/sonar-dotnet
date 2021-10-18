@@ -61,7 +61,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     var switchNode = (SwitchStatementSyntax)c.Node;
                     if (!HasAtLeastThreeLabels(switchNode))
                     {
-                        c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, switchNode.SwitchKeyword.GetLocation(), SwitchStatementMessage));
+                        c.ReportIssue(Diagnostic.Create(rule, switchNode.SwitchKeyword.GetLocation(), SwitchStatementMessage));
                     }
                 },
                 SyntaxKind.SwitchStatement);
@@ -78,7 +78,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     };
                     if (message != string.Empty)
                     {
-                        c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, switchNode.SwitchKeyword.GetLocation(), message));
+                        c.ReportIssue(Diagnostic.Create(rule, switchNode.SwitchKeyword.GetLocation(), message));
                     }
                 },
                 SyntaxKindEx.SwitchExpression);

@@ -52,7 +52,7 @@ namespace SonarAnalyzer.Rules.CSharp
                         !HasComments(catchClause) &&
                         IsGenericCatch(catchClause, c.SemanticModel))
                     {
-                        c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, c.Node.GetLocation()));
+                        c.ReportIssue(Diagnostic.Create(rule, c.Node.GetLocation()));
                     }
                 },
                 SyntaxKind.CatchClause);

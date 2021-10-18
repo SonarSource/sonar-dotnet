@@ -71,7 +71,7 @@ namespace SonarAnalyzer.Rules
                     && CollectInvalidFieldVariables(fieldDeclaration, assignmentsImmutability, analysisContext.SemanticModel).ToList() is {Count: > 0} incorrectFieldVariables)
                 {
                     var pluralizeSuffix = incorrectFieldVariables.Count > 1 ? "s" : string.Empty;
-                    analysisContext.ReportDiagnosticWhenActive(
+                    analysisContext.ReportIssue(
                         Diagnostic.Create(SupportedDiagnostics[0],
                         fieldDeclaration.Declaration.Type.GetLocation(),
                         pluralizeSuffix,

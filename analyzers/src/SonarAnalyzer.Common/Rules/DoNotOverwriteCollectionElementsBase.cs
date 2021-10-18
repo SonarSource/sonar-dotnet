@@ -84,7 +84,7 @@ namespace SonarAnalyzer.Rules
 
             if (previousSet != null)
             {
-                context.ReportDiagnosticWhenActive(Diagnostic.Create(rule, context.Node.GetLocation(), additionalLocations: new[] { previousSet.GetLocation() }));
+                context.ReportIssue(Diagnostic.Create(rule, context.Node.GetLocation(), additionalLocations: new[] { previousSet.GetLocation() }));
             }
         }
 

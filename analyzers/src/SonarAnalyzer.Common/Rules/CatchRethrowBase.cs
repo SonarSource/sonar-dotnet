@@ -85,7 +85,7 @@ namespace SonarAnalyzer.Rules
 
             foreach (var redundantCatch in redundantCatches)
             {
-                context.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, redundantCatch.GetLocation()));
+                context.ReportIssue(Diagnostic.Create(Rule, redundantCatch.GetLocation()));
             }
         }
 

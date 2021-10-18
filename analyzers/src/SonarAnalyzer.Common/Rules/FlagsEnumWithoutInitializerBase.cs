@@ -47,7 +47,7 @@ namespace SonarAnalyzer.Rules.Common
                 {
                     if (c.Node.HasFlagsAttribute(c.SemanticModel) && !AreAllRequiredMembersInitialized(c.Node) && Language.Syntax.NodeIdentifier(c.Node) is { } identifier)
                     {
-                        c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, identifier.GetLocation()));
+                        c.ReportIssue(Diagnostic.Create(rule, identifier.GetLocation()));
                     }
                 },
                 Language.SyntaxKind.EnumDeclaration);

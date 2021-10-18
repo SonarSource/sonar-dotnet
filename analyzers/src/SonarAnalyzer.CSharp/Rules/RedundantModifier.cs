@@ -207,7 +207,7 @@ namespace SonarAnalyzer.Rules.CSharp
         }
 
         private static void ReportOnUnsafeBlock(SyntaxNodeAnalysisContext context, Location issueLocation) =>
-            context.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, issueLocation, "unsafe", "redundant"));
+            context.ReportIssue(Diagnostic.Create(Rule, issueLocation, "unsafe", "redundant"));
 
         private static bool TryGetUnsafeKeyword(MemberDeclarationSyntax memberDeclaration, out SyntaxToken unsafeKeyword)
         {
@@ -257,7 +257,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 && typeSymbol.DeclaringSyntaxReferences.Length <= 1)
             {
                 var keyword = typeDeclaration.Modifiers.First(m => m.IsKind(SyntaxKind.PartialKeyword));
-                context.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, keyword.GetLocation(), "partial", "gratuitous"));
+                context.ReportIssue(Diagnostic.Create(Rule, keyword.GetLocation(), "partial", "gratuitous"));
             }
         }
 
@@ -280,7 +280,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 && context.ContainingSymbol is {IsSealed: true, ContainingType: {IsSealed: true}})
             {
                 var keyword = modifiers.First(m => m.IsKind(SyntaxKind.SealedKeyword));
-                context.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, keyword.GetLocation(), "sealed", "redundant"));
+                context.ReportIssue(Diagnostic.Create(Rule, keyword.GetLocation(), "sealed", "redundant"));
             }
         }
 
@@ -396,7 +396,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 if (isSimplyRedundant || !currentContextHasIntegralOperation)
                 {
                     var keywordToReport = isThisNodeChecked ? "checked" : "unchecked";
-                    context.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, tokenToReport.GetLocation(), keywordToReport, "redundant"));
+                    context.ReportIssue(Diagnostic.Create(Rule, tokenToReport.GetLocation(), keywordToReport, "redundant"));
                 }
 
                 isCurrentContextChecked = originalIsCurrentContextChecked;

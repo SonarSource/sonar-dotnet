@@ -101,7 +101,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 // itself is marked as 'SecurityCritical'.
                 foreach (var item in nodesWithSecuritySafeCritical)
                 {
-                    compilationContext.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, item.Value.GetLocation(),
+                    compilationContext.ReportIssue(Diagnostic.Create(Rule, item.Value.GetLocation(),
                         additionalLocations: new[] { assemblySecurityLocation }));
                 }
             }
@@ -114,7 +114,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     {
                         if (nodesWithSecurityCritical.ContainsKey(current))
                         {
-                            compilationContext.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, item.Value.GetLocation(),
+                            compilationContext.ReportIssue(Diagnostic.Create(Rule, item.Value.GetLocation(),
                                 additionalLocations: new[] { nodesWithSecurityCritical[current].GetLocation() }));
                             break;
                         }

@@ -65,7 +65,7 @@ namespace SonarAnalyzer.Rules
                     ? ChangeMtaThreadToStaThreadMessage
                     : AddStaThreadMessage;
 
-                c.ReportDiagnosticWhenActive(Diagnostic.Create(SupportedDiagnostics[0], GetLocation(methodDeclaration), message));
+                c.ReportIssue(Diagnostic.Create(SupportedDiagnostics[0], GetLocation(methodDeclaration), message));
             }
         }
 

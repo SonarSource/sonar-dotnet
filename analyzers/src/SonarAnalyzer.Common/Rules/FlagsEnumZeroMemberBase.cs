@@ -47,7 +47,7 @@ namespace SonarAnalyzer.Rules.Common
                         && Language.Syntax.NodeIdentifier(zeroMember) is { } identifier
                         && identifier.ValueText != "None")
                     {
-                        c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, zeroMember.GetLocation(), identifier.ValueText));
+                        c.ReportIssue(Diagnostic.Create(rule, zeroMember.GetLocation(), identifier.ValueText));
                     }
                 },
                 Language.SyntaxKind.EnumDeclaration);

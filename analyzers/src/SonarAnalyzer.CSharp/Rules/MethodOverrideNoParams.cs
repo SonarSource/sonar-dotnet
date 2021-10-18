@@ -58,7 +58,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
                     if (!method.ParameterList.Parameters.Last().Modifiers.Any(SyntaxKind.ParamsKeyword))
                     {
-                        c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, method.ParameterList.Parameters.Last().GetLocation()));
+                        c.ReportIssue(Diagnostic.Create(rule, method.ParameterList.Parameters.Last().GetLocation()));
                     }
                 },
                 SyntaxKind.MethodDeclaration);

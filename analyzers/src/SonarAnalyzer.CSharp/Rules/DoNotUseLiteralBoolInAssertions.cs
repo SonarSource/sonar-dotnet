@@ -87,7 +87,7 @@ namespace SonarAnalyzer.Rules.CSharp
                         && IsTrackedMethod(methodSymbol)
                         && !IsWorkingWithNullableType(methodSymbol, invocation.ArgumentList.Arguments, c.SemanticModel))
                     {
-                        c.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, invocation.GetLocation()));
+                        c.ReportIssue(Diagnostic.Create(Rule, invocation.GetLocation()));
                     }
                 },
                 SyntaxKind.InvocationExpression);

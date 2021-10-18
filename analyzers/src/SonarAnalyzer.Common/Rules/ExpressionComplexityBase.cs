@@ -61,7 +61,7 @@ namespace SonarAnalyzer.Rules
                         var complexity = expression.DescendantNodesAndSelf(x => !IsCompoundExpression(x)).Count(IsComplexityIncreasingKind);
                         if (complexity > Maximum)
                         {
-                            c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, expression.GetLocation(), Maximum, complexity));
+                            c.ReportIssue(Diagnostic.Create(rule, expression.GetLocation(), Maximum, complexity));
                         }
                     }
                 });

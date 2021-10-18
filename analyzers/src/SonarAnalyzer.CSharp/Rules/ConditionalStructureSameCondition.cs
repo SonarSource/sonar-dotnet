@@ -41,7 +41,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     var currentCondition = ifStatement.Condition;
                     if (ifStatement.GetPrecedingConditionsInConditionChain().FirstOrDefault(x => CSharpEquivalenceChecker.AreEquivalent(currentCondition, x)) is { } precedingCondition)
                     {
-                        c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, currentCondition.GetLocation(), new[] { precedingCondition.GetLocation() }, precedingCondition.GetLineNumberToReport()));
+                        c.ReportIssue(Diagnostic.Create(rule, currentCondition.GetLocation(), new[] { precedingCondition.GetLocation() }, precedingCondition.GetLineNumberToReport()));
                     }
                 },
                 SyntaxKind.IfStatement);

@@ -59,7 +59,7 @@ namespace SonarAnalyzer.Rules.CSharp
                         .Select(issueFinder.FindIssue)
                         .WhereNotNull()
                         .ToList()
-                        .ForEach(d => c.ReportDiagnosticWhenActive(d));
+                        .ForEach(d => c.ReportIssue(d));
                 },
                 SyntaxKind.ClassDeclaration,
                 SyntaxKindEx.RecordDeclaration);

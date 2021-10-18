@@ -112,7 +112,7 @@ namespace SonarAnalyzer.Rules.CSharp
                         return IsSymbolFirstSetInCfg(memberSymbol, constructor.Node, constructor.SemanticModel);
                     }))
                 {
-                    c.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, initializedMembers[memberSymbol].GetLocation(), InstanceMemberMessage));
+                    c.ReportIssue(Diagnostic.Create(Rule, initializedMembers[memberSymbol].GetLocation(), InstanceMemberMessage));
                 }
             }
         }
@@ -139,7 +139,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 // all module initializers are executed when the type is created, so it is enough if ANY initializes the member
                 if (initializerDeclarations.Any(x => IsSymbolFirstSetInCfg(memberSymbol, x.Node, x.SemanticModel)))
                 {
-                    c.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, initializedMembers[memberSymbol].GetLocation(), StaticMemberMessage));
+                    c.ReportIssue(Diagnostic.Create(Rule, initializedMembers[memberSymbol].GetLocation(), StaticMemberMessage));
                 }
             }
         }

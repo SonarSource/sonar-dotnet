@@ -59,7 +59,7 @@ namespace SonarAnalyzer.Rules.CSharp
                         IsDisposableClassOrStruct(invocationTarget.ContainingType, languageVersion) &&
                         !IsCalledInsideDispose(invocation, c.SemanticModel))
                     {
-                        c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, GetLocation(invocation)));
+                        c.ReportIssue(Diagnostic.Create(rule, GetLocation(invocation)));
                     }
                 },
                 SyntaxKind.InvocationExpression);

@@ -60,7 +60,7 @@ namespace SonarAnalyzer.Rules
 
                         var secondaryLocation = GetCloseParenToken(innermostExpression).CreateLocation(GetCloseParenToken(expression));
 
-                        c.ReportDiagnosticWhenActive(Diagnostic.Create(SupportedDiagnostics[0],
+                        c.ReportIssue(Diagnostic.Create(SupportedDiagnostics[0],
                             location, additionalLocations: new[] { secondaryLocation }));
                     }
                 },

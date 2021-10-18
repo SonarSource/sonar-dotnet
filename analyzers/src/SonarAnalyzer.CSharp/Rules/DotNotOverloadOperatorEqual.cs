@@ -89,7 +89,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 return;
             }
 
-            analysisContext.ReportDiagnosticWhenActive(Diagnostic.Create(rule, declaration.OperatorToken.GetLocation()));
+            analysisContext.ReportIssue(Diagnostic.Create(rule, declaration.OperatorToken.GetLocation()));
         }
     }
 }

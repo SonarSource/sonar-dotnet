@@ -138,7 +138,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 }
             }
 
-            context.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, simpleMemberAccess.GetLocation(), MemberNameToMessageArguments[memberAccessNameName]));
+            context.ReportIssue(Diagnostic.Create(Rule, simpleMemberAccess.GetLocation(), MemberNameToMessageArguments[memberAccessNameName]));
         }
 
         private static bool IsAwaited(SyntaxNodeAnalysisContext context, MemberAccessExpressionSyntax simpleMemberAccess)

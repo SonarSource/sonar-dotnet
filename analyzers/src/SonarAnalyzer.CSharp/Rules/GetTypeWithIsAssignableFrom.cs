@@ -161,7 +161,7 @@ namespace SonarAnalyzer.Rules.CSharp
             var properties = ImmutableDictionary<string, string>.Empty
                 .Add(UseIsOperatorKey, useIsOperator.ToString())
                 .Add(ShouldRemoveGetTypeKey, shouldRemoveGetType.ToString());
-            context.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, context.Node.GetLocation(), properties, messageArg));
+            context.ReportIssue(Diagnostic.Create(Rule, context.Node.GetLocation(), properties, messageArg));
         }
     }
 }

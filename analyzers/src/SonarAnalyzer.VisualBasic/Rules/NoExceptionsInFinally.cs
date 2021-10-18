@@ -55,7 +55,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
             }
 
             public override void VisitThrowStatement(ThrowStatementSyntax node) =>
-                context.ReportDiagnosticWhenActive(Diagnostic.Create(rule, node.GetLocation()));
+                context.ReportIssue(Diagnostic.Create(rule, node.GetLocation()));
 
             public override void VisitFinallyBlock(FinallyBlockSyntax node)
             {

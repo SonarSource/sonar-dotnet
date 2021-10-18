@@ -69,7 +69,7 @@ namespace SonarAnalyzer.Rules.Common
             }
             foreach (var variable in variables.Skip(1))
             {
-                context.ReportDiagnosticWhenActive(Diagnostic.Create(rule, variable.GetLocation(), variable.ValueText));
+                context.ReportIssue(Diagnostic.Create(rule, variable.GetLocation(), variable.ValueText));
             }
         }
 

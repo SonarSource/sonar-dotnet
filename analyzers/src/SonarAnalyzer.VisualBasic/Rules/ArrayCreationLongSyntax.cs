@@ -63,7 +63,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
                     if (arrayType.ElementType.Is(KnownType.System_Object) &&
                         !arrayCreation.Initializer.Initializers.Any())
                     {
-                        c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, arrayCreation.GetLocation()));
+                        c.ReportIssue(Diagnostic.Create(rule, arrayCreation.GetLocation()));
                         return;
                     }
 
@@ -75,7 +75,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
                     if (AtLeastOneExactTypeMatch(c.SemanticModel, arrayCreation, arrayType) &&
                         AllTypesAreConvertible(c.SemanticModel, arrayCreation, arrayType))
                     {
-                        c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, arrayCreation.GetLocation()));
+                        c.ReportIssue(Diagnostic.Create(rule, arrayCreation.GetLocation()));
                     }
                 },
                 SyntaxKind.ArrayCreationExpression);

@@ -96,7 +96,7 @@ namespace SonarAnalyzer.Rules.CSharp
             {
                 foreach (var ctorInfo in walker.GetConstructorsInfo().Where(info => info.HasConditionalConstructs))
                 {
-                    context.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, ctorInfo.GetReportLocation()));
+                    context.ReportIssue(Diagnostic.Create(Rule, ctorInfo.GetReportLocation()));
                 }
             }
 
@@ -105,7 +105,7 @@ namespace SonarAnalyzer.Rules.CSharp
             {
                 foreach (var ctorInfo in walker.GetConstructorsInfo().Where(info => !info.IsDeserializationConstructor && info.HasConditionalConstructs))
                 {
-                    context.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, ctorInfo.GetReportLocation()));
+                    context.ReportIssue(Diagnostic.Create(Rule, ctorInfo.GetReportLocation()));
                 }
             }
 
@@ -114,7 +114,7 @@ namespace SonarAnalyzer.Rules.CSharp
             {
                 foreach (var ctorInfo in walker.GetConstructorsInfo().Where(info => info.HasConditionalConstructs))
                 {
-                    context.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, ctorInfo.GetReportLocation()));
+                    context.ReportIssue(Diagnostic.Create(Rule, ctorInfo.GetReportLocation()));
                 }
             }
         }

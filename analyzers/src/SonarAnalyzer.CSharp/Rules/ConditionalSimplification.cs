@@ -78,7 +78,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 && GetNegationRoot(context.Node) is var negationRoot
                 && negationRoot == context.Node)
             {
-                context.ReportDiagnosticWhenActive(Diagnostic.Create(RuleMultipleNegation, negationRoot.GetLocation()));
+                context.ReportIssue(Diagnostic.Create(RuleMultipleNegation, negationRoot.GetLocation()));
             }
 
             static SyntaxNode GetNegationRoot(SyntaxNode node)
@@ -100,7 +100,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 var left = ((BinaryExpressionSyntax)context.Node).Left.RemoveParentheses();
                 if (CSharpEquivalenceChecker.AreEquivalent(assignment.Left.RemoveParentheses(), left))
                 {
-                    context.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, assignment.GetLocation(), BuildCodeFixProperties(context), CoalesceAssignmentOp));
+                    context.ReportIssue(Diagnostic.Create(Rule, assignment.GetLocation(), BuildCodeFixProperties(context), CoalesceAssignmentOp));
                 }
             }
         }
@@ -128,7 +128,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
             if (CanBeSimplified(context, whenTrue, whenFalse, possiblyCoalescing ? comparedToNull : null, context.SemanticModel, comparedIsNullInTrue, out var simplifiedOperator))
             {
-                context.ReportDiagnosticWhenActive(Diagnostic.Create(Rule,
+                context.ReportIssue(Diagnostic.Create(Rule,
                                                                      ifStatement.IfKeyword.GetLocation(),
                                                                      BuildCodeFixProperties(context, simplifiedOperator),
                                                                      simplifiedOperator));
@@ -156,7 +156,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     ? Diagnostic.Create(Rule, conditional.GetFirstNonParenthesizedParent().GetLocation(), BuildCodeFixProperties(context), CoalesceAssignmentOp)
                     : Diagnostic.Create(Rule, conditional.GetLocation(), BuildCodeFixProperties(context), CoalesceOp);
 
-                context.ReportDiagnosticWhenActive(diagnostic);
+                context.ReportIssue(diagnostic);
             }
         }
 

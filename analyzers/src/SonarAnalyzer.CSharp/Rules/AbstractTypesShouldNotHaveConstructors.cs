@@ -51,7 +51,7 @@ namespace SonarAnalyzer.Rules.CSharp
                         var invalidAccessModifier = GetModifiers(c.Node).FirstOrDefault(IsPublicOrInternal);
                         if (invalidAccessModifier != default)
                         {
-                            c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, invalidAccessModifier.GetLocation()));
+                            c.ReportIssue(Diagnostic.Create(rule, invalidAccessModifier.GetLocation()));
                         }
                     }
                 }, SyntaxKind.ConstructorDeclaration);

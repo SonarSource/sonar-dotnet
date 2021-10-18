@@ -93,7 +93,7 @@ namespace SonarAnalyzer.Rules.CSharp
         {
             foreach (var pair in GetPossibleTypes(node, context.SemanticModel).Where(pair => AreCovariantArrayTypes(pair.Symbol, baseType)))
             {
-                context.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, pair.Node.GetLocation()));
+                context.ReportIssue(Diagnostic.Create(Rule, pair.Node.GetLocation()));
             }
         }
 

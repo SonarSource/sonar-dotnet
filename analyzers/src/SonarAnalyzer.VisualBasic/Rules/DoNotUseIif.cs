@@ -51,7 +51,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
 
                 if (IsIIf(invokedMethod))
                 {
-                    c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, invocationExpression.GetLocation()));
+                    c.ReportIssue(Diagnostic.Create(rule, invocationExpression.GetLocation()));
                 }
             },
             SyntaxKind.InvocationExpression);

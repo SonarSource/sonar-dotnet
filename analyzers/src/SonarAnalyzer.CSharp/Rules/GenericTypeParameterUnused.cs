@@ -88,7 +88,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
             foreach (var typeParameter in typeParameterNames.Where(typeParameter => !usedTypeParameters.Contains(typeParameter)))
             {
-                c.ReportDiagnosticWhenActive(Diagnostic.Create(Rule,
+                c.ReportIssue(Diagnostic.Create(Rule,
                                                                helper.Parameters.Parameters.First(tp => tp.Identifier.Text == typeParameter).GetLocation(),
                                                                typeParameter,
                                                                helper.ContainerName));

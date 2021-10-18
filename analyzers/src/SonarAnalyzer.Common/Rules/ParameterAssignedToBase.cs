@@ -69,7 +69,7 @@ namespace SonarAnalyzer.Rules
                         && (IsAssignmentToParameter(symbol) || IsAssignmentToCatchVariable(symbol, left))
                         && (!IsReadBefore(c.SemanticModel, symbol, assignment)))
                     {
-                        c.ReportDiagnosticWhenActive(Diagnostic.Create(SupportedDiagnostics[0], left.GetLocation(), left.ToString()));
+                        c.ReportIssue(Diagnostic.Create(SupportedDiagnostics[0], left.GetLocation(), left.ToString()));
                     }
                 },
                 SyntaxKindOfInterest);

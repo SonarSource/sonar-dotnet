@@ -84,7 +84,7 @@ namespace SonarAnalyzer.Rules
                 && GetSymbol(context, expressionValueNode) is { } symbol
                 && GetDeclaringTypeName(symbol) is { } symbolType)
             {
-                context.ReportDiagnosticWhenActive(Diagnostic.Create(SupportedDiagnostics[0], issueLocation.GetLocation(), symbol.Name, symbolType));
+                context.ReportIssue(Diagnostic.Create(SupportedDiagnostics[0], issueLocation.GetLocation(), symbol.Name, symbolType));
             }
         }
 

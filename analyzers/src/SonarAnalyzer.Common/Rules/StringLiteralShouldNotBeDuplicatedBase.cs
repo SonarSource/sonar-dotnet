@@ -97,7 +97,7 @@ namespace SonarAnalyzer.Rules
             {
                 if (item.Value.Count > Threshold)
                 {
-                    context.ReportDiagnosticWhenActive(Diagnostic.Create(rule, item.Value[0].GetLocation(),
+                    context.ReportIssue(Diagnostic.Create(rule, item.Value[0].GetLocation(),
                         item.Value.Skip(1).Select(x => x.GetLocation()),
                         item.Key, item.Value.Count ));
                 }

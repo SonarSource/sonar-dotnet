@@ -134,7 +134,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 ? $"implements both '{expressionTypeName}' and '{interfaceTypeName}'"
                 : $"extends '{expressionTypeName}' and implements '{interfaceTypeName}'";
 
-            context.ReportDiagnosticWhenActive(Diagnostic.Create(InvalidCastToInterfaceRuleConstants.Rule, issueLocation,
+            context.ReportIssue(Diagnostic.Create(InvalidCastToInterfaceRuleConstants.Rule, issueLocation,
                 string.Format(MessageReviewFormat, messageReasoning)));
         }
     }

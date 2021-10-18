@@ -50,7 +50,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     var forEachStatementSyntax = (ForEachStatementSyntax)c.Node;
                     if (CanBeSimplifiedUsingWhere(forEachStatementSyntax.Statement, out var ifConditionLocation))
                     {
-                        c.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, forEachStatementSyntax.Expression.GetLocation(), new[] {ifConditionLocation}, WhereMessageFormat));
+                        c.ReportIssue(Diagnostic.Create(Rule, forEachStatementSyntax.Expression.GetLocation(), new[] {ifConditionLocation}, WhereMessageFormat));
                     }
                     else
                     {
@@ -125,7 +125,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 var diagnostic = Diagnostic.Create(Rule,
                                                    forEachStatementSyntax.Expression.GetLocation(),
                                                    string.Format(SelectMessageFormat, forEachStatementSyntax.Identifier.ValueText, accessedProperties.Single().Key.Name));
-                c.ReportDiagnosticWhenActive(diagnostic);
+                c.ReportIssue(diagnostic);
             }
 
             static IEnumerable<IdentifierNameSyntax> GetStatementIdentifiers(ForEachStatementSyntax forEachStatementSyntax) =>

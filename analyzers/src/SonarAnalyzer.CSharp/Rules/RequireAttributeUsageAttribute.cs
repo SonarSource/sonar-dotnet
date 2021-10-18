@@ -59,7 +59,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     ? " to improve readability, even though it inherits it from its base type"
                     : string.Empty;
 
-                c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, classDeclaration.Identifier.GetLocation(),
+                c.ReportIssue(Diagnostic.Create(rule, classDeclaration.Identifier.GetLocation(),
                     classSymbol.Name, additionalText));
             },
             SyntaxKind.ClassDeclaration);

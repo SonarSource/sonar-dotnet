@@ -107,7 +107,7 @@ namespace SonarAnalyzer.Rules
             if (IsDisableRequestSizeLimit(AttributeName(attribute))
                 && attribute.IsKnownType(KnownType.Microsoft_AspNetCore_Mvc_DisableRequestSizeLimitAttribute, context.SemanticModel))
             {
-                context.ReportDiagnosticWhenActive(Diagnostic.Create(rule, attribute.GetLocation()));
+                context.ReportIssue(Diagnostic.Create(rule, attribute.GetLocation()));
                 return;
             }
 
@@ -128,7 +128,7 @@ namespace SonarAnalyzer.Rules
         {
             foreach (var invalidAttributes in attributesOverTheLimit.Values)
             {
-                context.ReportDiagnosticWhenActive(
+                context.ReportIssue(
                     invalidAttributes.SecondaryAttribute != null
                         ? Diagnostic.Create(rule, invalidAttributes.MainAttribute.GetLocation(), new List<Location> { invalidAttributes.SecondaryAttribute.GetLocation() })
                         : Diagnostic.Create(rule, invalidAttributes.MainAttribute.GetLocation()));
@@ -165,7 +165,7 @@ namespace SonarAnalyzer.Rules
                     && IsVulnerable(maxRequestLength.Value, MaxAllowedRequestLength)
                     && maxRequestLength.CreateLocation(webConfigPath) is { } location)
                 {
-                    c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, location));
+                    c.ReportIssue(Diagnostic.Create(rule, location));
                 }
             }
             foreach (var requestLimit in doc.XPathSelectElements("configuration/system.webServer/security/requestFiltering/requestLimits"))
@@ -174,7 +174,7 @@ namespace SonarAnalyzer.Rules
                     && IsVulnerable(maxAllowedContentLength.Value, MaxAllowedContentLength)
                     && maxAllowedContentLength.CreateLocation(webConfigPath) is { } location)
                 {
-                    c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, location));
+                    c.ReportIssue(Diagnostic.Create(rule, location));
                 }
             }
         }

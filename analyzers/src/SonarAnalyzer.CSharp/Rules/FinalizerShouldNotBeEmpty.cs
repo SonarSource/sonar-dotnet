@@ -49,7 +49,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     if (destructorDeclaration.Body?.Statements.Count == 0 &&
                         destructorDeclaration.ExpressionBody() == null)
                     {
-                        c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, destructorDeclaration.GetLocation()));
+                        c.ReportIssue(Diagnostic.Create(rule, destructorDeclaration.GetLocation()));
                     }
                 },
                 SyntaxKind.DestructorDeclaration);

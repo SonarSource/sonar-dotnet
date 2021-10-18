@@ -156,7 +156,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 var lineSpan = context.Node.SyntaxTree.GetText().Lines[nextStatementPosition.Line].Span;
                 var location = Location.Create(context.Node.SyntaxTree, TextSpan.FromBounds(nextStatement.SpanStart, lineSpan.End));
 
-                context.ReportDiagnosticWhenActive(Diagnostic.Create(rule, location,
+                context.ReportIssue(Diagnostic.Create(rule, location,
                     additionalLocations: new[] { statement.GetLocation() },
                     messageArgs: new object[] { executed, execute, nextStatementPosition.Line - statementPosition.Line + 1 }));
             }

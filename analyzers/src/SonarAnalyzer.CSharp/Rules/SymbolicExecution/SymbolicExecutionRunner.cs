@@ -88,7 +88,7 @@ namespace SonarAnalyzer.Rules.SymbolicExecution
             {
                 foreach (var diagnostic in analyzerContext.GetDiagnostics())
                 {
-                    context.ReportDiagnosticWhenActive(diagnostic);
+                    context.ReportIssue(diagnostic);
                 }
 
                 analyzerContext.Dispose();

@@ -54,7 +54,7 @@ namespace SonarAnalyzer.Rules
 
                     if (linesCount > Maximum)
                     {
-                        stac.ReportDiagnosticWhenActive(Diagnostic.Create(SupportedDiagnostics[0], Location.Create(stac.Tree,
+                        stac.ReportIssue(Diagnostic.Create(SupportedDiagnostics[0], Location.Create(stac.Tree,
                             TextSpan.FromBounds(0, 0)), Maximum, linesCount));
                     }
                 });

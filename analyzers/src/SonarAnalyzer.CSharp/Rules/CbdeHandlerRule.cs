@@ -75,7 +75,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 throw new InvalidOperationException($"CBDE should not raise issues on key {key}");
             }
 
-            context.ReportDiagnosticWhenActive(Diagnostic.Create(ruleIdToDiagDescriptor[key], loc, message));
+            context.ReportIssue(Diagnostic.Create(ruleIdToDiagDescriptor[key], loc, message));
         }
     }
 }

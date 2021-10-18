@@ -45,7 +45,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 {
                     if (c.Node.Ancestors().OfType<ConditionalExpressionSyntax>().Any())
                     {
-                        c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, c.Node.GetLocation()));
+                        c.ReportIssue(Diagnostic.Create(rule, c.Node.GetLocation()));
                     }
                 },
                 SyntaxKind.ConditionalExpression);

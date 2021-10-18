@@ -54,7 +54,7 @@ namespace SonarAnalyzer.Rules
                 {
                     foreach (var unused in declaredLocals.Except(usedLocals))
                     {
-                        c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, unused.Locations.First(), unused.Name));
+                        c.ReportIssue(Diagnostic.Create(rule, unused.Locations.First(), unused.Name));
                     }
                 };
         }

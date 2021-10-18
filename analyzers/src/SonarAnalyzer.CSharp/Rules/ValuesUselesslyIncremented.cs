@@ -71,7 +71,7 @@ namespace SonarAnalyzer.Rules.CSharp
                         ? "increment"
                         : "decrement";
 
-                    context.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, increment.GetLocation(), operatorText));
+                    context.ReportIssue(Diagnostic.Create(Rule, increment.GetLocation(), operatorText));
                     return;
                 default:
                     return;

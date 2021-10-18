@@ -64,7 +64,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     && CSharpFacade.Instance.Syntax.NodeIdentifier(c.Node) is { } identifier
                     && FrameworkNamespaces.Contains(identifier.ValueText))
                 {
-                    c.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, identifier.GetLocation(), identifier.ValueText));
+                    c.ReportIssue(Diagnostic.Create(Rule, identifier.GetLocation(), identifier.ValueText));
                 }
             },
             SyntaxKind.ClassDeclaration,

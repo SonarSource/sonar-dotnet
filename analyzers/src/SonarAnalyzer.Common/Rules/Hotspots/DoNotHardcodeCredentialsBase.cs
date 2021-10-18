@@ -141,11 +141,11 @@ namespace SonarAnalyzer.Rules
                         var bannedWords = FindCredentialWords(GetVariableName(declarator), variableValue);
                         if (bannedWords.Any())
                         {
-                            context.ReportDiagnosticWhenActive(Diagnostic.Create(analyzer.rule, declarator.GetLocation(), string.Format(MessageFormatCredential, bannedWords.JoinStr(", "))));
+                            context.ReportIssue(Diagnostic.Create(analyzer.rule, declarator.GetLocation(), string.Format(MessageFormatCredential, bannedWords.JoinStr(", "))));
                         }
                         else if (ContainsUriUserInfo(variableValue))
                         {
-                            context.ReportDiagnosticWhenActive(Diagnostic.Create(analyzer.rule, declarator.GetLocation(), MessageUriUserInfo));
+                            context.ReportIssue(Diagnostic.Create(analyzer.rule, declarator.GetLocation(), MessageUriUserInfo));
                         }
                     }
                 };

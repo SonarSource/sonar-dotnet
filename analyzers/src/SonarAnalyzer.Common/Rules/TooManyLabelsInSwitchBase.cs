@@ -68,7 +68,7 @@ namespace SonarAnalyzer.Rules
                     var sectionsCount = GetSectionsCount(switchNode);
                     if (sectionsCount > Maximum)
                     {
-                        c.ReportDiagnosticWhenActive(
+                        c.ReportIssue(
                             Diagnostic.Create(Rule, GetKeywordLocation(switchNode), Maximum, sectionsCount));
                     }
                 },

@@ -51,7 +51,7 @@ namespace SonarAnalyzer.Rules.CSharp
                         IsMethodOrderByExtension(outerInvocation, c.SemanticModel) &&
                         IsOrderByOrThenBy(innerInvocation, c.SemanticModel))
                     {
-                        c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, memberAccess.Name.GetLocation()));
+                        c.ReportIssue(Diagnostic.Create(rule, memberAccess.Name.GetLocation()));
                     }
 
                     static bool IsOrderByOrThenBy(InvocationExpressionSyntax invocation, SemanticModel semanticModel) =>

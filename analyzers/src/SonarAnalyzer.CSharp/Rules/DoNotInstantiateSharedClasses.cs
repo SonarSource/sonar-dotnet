@@ -49,7 +49,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     if (createdType != null &&
                         createdType.GetAttributes(KnownType.System_ComponentModel_Composition_PartCreationPolicyAttribute).Any(IsShared))
                     {
-                        c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, creationSyntax.GetLocation()));
+                        c.ReportIssue(Diagnostic.Create(rule, creationSyntax.GetLocation()));
                     }
                 },
                 SyntaxKind.ObjectCreationExpression);

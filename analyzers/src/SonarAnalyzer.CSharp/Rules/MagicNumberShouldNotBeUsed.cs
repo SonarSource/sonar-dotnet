@@ -52,7 +52,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
                     if (!IsExceptionToTheRule(literalExpression))
                     {
-                        c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, literalExpression.GetLocation(),
+                        c.ReportIssue(Diagnostic.Create(rule, literalExpression.GetLocation(),
                             literalExpression.Token.ValueText));
                     }
                 },

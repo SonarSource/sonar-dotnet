@@ -54,7 +54,7 @@ namespace SonarAnalyzer.Rules.CSharp
                         IsInvalidCall(invocation.Expression, c.SemanticModel) &&
                         CSharpOverloadHelper.HasOverloadWithType(invocation, c.SemanticModel, stringComparisonType))
                     {
-                        c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, invocation.GetLocation(), invocation.Expression));
+                        c.ReportIssue(Diagnostic.Create(rule, invocation.GetLocation(), invocation.Expression));
                     }
                 }, SyntaxKind.InvocationExpression);
         }

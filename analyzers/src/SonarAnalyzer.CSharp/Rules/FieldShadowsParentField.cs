@@ -43,7 +43,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     {
                         foreach (var diagnostics in fieldDeclaration.Declaration.Variables.SelectMany(x => CheckFields(c.SemanticModel, x)))
                         {
-                            c.ReportDiagnosticWhenActive(diagnostics, context);
+                            c.ReportIssue(diagnostics, context);
                         }
                     }
                 },

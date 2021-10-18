@@ -110,7 +110,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 return;
             }
 
-            context.ReportDiagnosticWhenActive(Diagnostic.Create(rule, expression.GetLocation(), fieldSymbol.Name, propertySymbol.Name));
+            context.ReportIssue(Diagnostic.Create(rule, expression.GetLocation(), fieldSymbol.Name, propertySymbol.Name));
         }
 
         private static bool IsFieldReadonlyAndPossiblyValueType(IFieldSymbol fieldSymbol)

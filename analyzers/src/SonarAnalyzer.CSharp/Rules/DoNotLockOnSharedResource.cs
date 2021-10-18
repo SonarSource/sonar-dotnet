@@ -47,7 +47,7 @@ namespace SonarAnalyzer.Rules.CSharp
                         IsLockOnStringLiteral(lockStatement.Expression) ||
                         IsLockOnForbiddenKnownType(lockStatement.Expression, c.SemanticModel))
                     {
-                        c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, lockStatement.Expression.GetLocation()));
+                        c.ReportIssue(Diagnostic.Create(rule, lockStatement.Expression.GetLocation()));
                     }
                 },
                 SyntaxKind.LockStatement);

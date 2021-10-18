@@ -48,7 +48,7 @@ namespace SonarAnalyzer.Rules
                GeneratedCodeRecognizer,
                 c =>
                 {
-                    c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, c.Node.GetFirstToken().GetLocation()));
+                    c.ReportIssue(Diagnostic.Create(rule, c.Node.GetFirstToken().GetLocation()));
                 },
                 GotoSyntaxKinds);
         }

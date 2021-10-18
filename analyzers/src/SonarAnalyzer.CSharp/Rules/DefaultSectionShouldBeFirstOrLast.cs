@@ -55,7 +55,7 @@ namespace SonarAnalyzer.Rules.CSharp
                             .Labels
                             .First(label => label.IsKind(SyntaxKind.DefaultSwitchLabel))
                             .GetLocation();
-                        c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, defaultLabelLocation));
+                        c.ReportIssue(Diagnostic.Create(rule, defaultLabelLocation));
                     }
                 },
                 SyntaxKind.SwitchStatement);

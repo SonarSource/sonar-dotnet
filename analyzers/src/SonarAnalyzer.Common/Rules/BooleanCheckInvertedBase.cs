@@ -51,7 +51,7 @@ namespace SonarAnalyzer.Rules
 
                 if (IsLogicalNot(expression, out var logicalNot))
                 {
-                    c.ReportDiagnosticWhenActive(
+                    c.ReportIssue(
                         Diagnostic.Create(rule, logicalNot.GetLocation(), GetSuggestedReplacement(expression)));
                 }
             };

@@ -121,7 +121,7 @@ namespace SonarAnalyzer.Rules.CSharp
             }
 
             public void ReportIssue() =>
-                analysisContext.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, issueLocation, messageArg));
+                analysisContext.ReportIssue(Diagnostic.Create(Rule, issueLocation, messageArg));
         }
 
         private interface IChecker

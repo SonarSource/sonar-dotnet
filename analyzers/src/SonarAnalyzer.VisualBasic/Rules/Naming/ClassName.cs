@@ -52,7 +52,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
                     var declaration = (ClassStatementSyntax)c.Node;
                     if (!NamingHelper.IsRegexMatch(declaration.Identifier.ValueText, Pattern))
                     {
-                        c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, declaration.Identifier.GetLocation(), Pattern));
+                        c.ReportIssue(Diagnostic.Create(rule, declaration.Identifier.GetLocation(), Pattern));
                     }
                 },
                 SyntaxKind.ClassStatement);

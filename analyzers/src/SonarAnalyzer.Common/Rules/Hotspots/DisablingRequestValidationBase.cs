@@ -74,7 +74,7 @@ namespace SonarAnalyzer.Rules
                 && a.AttributeClass.Is(KnownType.System_Web_Mvc_ValidateInputAttribute));
             if (attributeWithFalseParameter != null)
             {
-                c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, attributeWithFalseParameter.ApplicationSyntaxReference.GetSyntax().GetLocation()));
+                c.ReportIssue(Diagnostic.Create(rule, attributeWithFalseParameter.ApplicationSyntaxReference.GetSyntax().GetLocation()));
             }
         }
 
@@ -103,7 +103,7 @@ namespace SonarAnalyzer.Rules
                 if (pages.GetAttributeIfBoolValueIs("validateRequest", false) is { } validateRequest
                     && validateRequest.CreateLocation(webConfigPath) is { } location)
                 {
-                    c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, location));
+                    c.ReportIssue(Diagnostic.Create(rule, location));
                 }
             }
         }
@@ -117,7 +117,7 @@ namespace SonarAnalyzer.Rules
                     && value < MinimumAcceptedRequestValidationModeValue
                     && requestValidationMode.CreateLocation(webConfigPath) is { } location)
                 {
-                    c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, location));
+                    c.ReportIssue(Diagnostic.Create(rule, location));
                 }
             }
         }

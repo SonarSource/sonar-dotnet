@@ -121,7 +121,7 @@ namespace SonarAnalyzer.Rules.CSharp
             }
 
             var identifier = getIdentifier(declaration);
-            context.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, identifier.GetLocation(), identifier.Text, memberKind));
+            context.ReportIssue(Diagnostic.Create(Rule, identifier.GetLocation(), identifier.Text, memberKind));
 
             bool IsStaticVirtualAbstractOrOverride() =>
                 methodOrPropertySymbol.IsStatic || methodOrPropertySymbol.IsVirtual || methodOrPropertySymbol.IsAbstract || methodOrPropertySymbol.IsOverride;

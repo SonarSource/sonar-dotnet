@@ -56,7 +56,7 @@ namespace SonarAnalyzer.Helpers
                     && trackingContext.PrimaryLocation != null
                     && trackingContext.PrimaryLocation != Location.None)
                 {
-                    c.ReportDiagnosticWhenActive(
+                    c.ReportIssue(
                         Diagnostic.Create(input.Rule,
                                           trackingContext.PrimaryLocation,
                                           trackingContext.SecondaryLocations.ToAdditionalLocations(),

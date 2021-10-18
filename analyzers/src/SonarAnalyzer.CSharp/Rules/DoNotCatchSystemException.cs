@@ -50,7 +50,7 @@ namespace SonarAnalyzer.Rules.CSharp
                         && IsCatchClauseEmptyOrNotPattern(catchClause)
                         && !IsThrowTheLastStatementInTheBlock(catchClause?.Block))
                     {
-                        c.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, GetLocation(catchClause)));
+                        c.ReportIssue(Diagnostic.Create(Rule, GetLocation(catchClause)));
                     }
                 },
                 SyntaxKind.CatchClause);

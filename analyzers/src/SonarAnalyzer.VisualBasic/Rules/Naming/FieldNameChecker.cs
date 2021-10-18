@@ -44,7 +44,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
                             IsCandidateSymbol(symbol) &&
                             !NamingHelper.IsRegexMatch(symbol.Name, Pattern))
                         {
-                            c.ReportDiagnosticWhenActive(Diagnostic.Create(SupportedDiagnostics[0], name.GetLocation(),
+                            c.ReportIssue(Diagnostic.Create(SupportedDiagnostics[0], name.GetLocation(),
                                 symbol.Name, Pattern));
                         }
                     }
