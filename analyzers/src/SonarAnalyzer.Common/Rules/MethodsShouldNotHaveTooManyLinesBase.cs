@@ -72,7 +72,7 @@ namespace SonarAnalyzer.Rules
 
                         if (!string.IsNullOrEmpty(identifierToken?.ValueText))
                         {
-                            c.ReportDiagnosticWhenActive(Diagnostic.Create(SupportedDiagnostics[0], identifierToken.Value.GetLocation(),
+                            c.ReportIssue(Diagnostic.Create(SupportedDiagnostics[0], identifierToken.Value.GetLocation(),
                                 GetMethodKindAndName(identifierToken.Value), linesCount, Max, MethodKeyword));
                         }
                     }

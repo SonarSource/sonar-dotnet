@@ -53,7 +53,7 @@ namespace SonarAnalyzer.Rules.CSharp
                         methodSymbol.IsPubliclyAccessible() &&
                         methodSymbol.HasAttribute(KnownType.System_Runtime_InteropServices_DllImportAttribute))
                     {
-                        c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, methodDeclaration.Identifier.GetLocation()));
+                        c.ReportIssue(Diagnostic.Create(rule, methodDeclaration.Identifier.GetLocation()));
                     }
                 },
                 SyntaxKind.MethodDeclaration);

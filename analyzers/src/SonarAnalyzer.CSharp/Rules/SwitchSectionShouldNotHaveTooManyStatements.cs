@@ -55,7 +55,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     var statementsCount = switchSection.Statements.SelectMany(GetSubStatements).Count();
                     if (statementsCount > Threshold)
                     {
-                        c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, switchSection.Labels.First().GetLocation(),
+                        c.ReportIssue(Diagnostic.Create(rule, switchSection.Labels.First().GetLocation(),
                             "switch section", statementsCount, Threshold, "method"));
                     }
                 },

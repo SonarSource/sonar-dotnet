@@ -122,7 +122,7 @@ namespace SonarAnalyzer.Rules.CSharp
             {
                 if (EscapedControlCharacters.TryGetValue(text[charPos], out var escapeSequence))
                 {
-                    c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, c.Node.GetLocation(), displayPosIncrement + charPos,
+                    c.ReportIssue(Diagnostic.Create(rule, c.Node.GetLocation(), displayPosIncrement + charPos,
                         escapeSequence));
                     return;
                 }

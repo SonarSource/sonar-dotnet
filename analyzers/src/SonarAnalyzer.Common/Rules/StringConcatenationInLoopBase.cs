@@ -81,7 +81,7 @@ namespace SonarAnalyzer.Rules.Common
                 return;
             }
 
-            context.ReportDiagnosticWhenActive(Diagnostic.Create(SupportedDiagnostics[0], assignment.GetLocation()));
+            context.ReportIssue(Diagnostic.Create(SupportedDiagnostics[0], assignment.GetLocation()));
         }
 
         protected abstract bool IsAddExpression(TBinaryExpression rightExpression);
@@ -122,7 +122,7 @@ namespace SonarAnalyzer.Rules.Common
                 return;
             }
 
-            context.ReportDiagnosticWhenActive(Diagnostic.Create(SupportedDiagnostics[0], addAssignment.GetLocation()));
+            context.ReportIssue(Diagnostic.Create(SupportedDiagnostics[0], addAssignment.GetLocation()));
         }
 
         protected abstract bool IsExpressionConcatenation(TBinaryExpression addExpression);

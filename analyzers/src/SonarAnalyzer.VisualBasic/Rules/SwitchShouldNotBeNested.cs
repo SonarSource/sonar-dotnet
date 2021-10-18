@@ -46,7 +46,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
                     var selectBlock = (SelectBlockSyntax)c.Node;
                     if (selectBlock.Parent?.FirstAncestorOrSelf<SelectBlockSyntax>() != null)
                     {
-                        c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, selectBlock.SelectStatement.GetLocation()));
+                        c.ReportIssue(Diagnostic.Create(rule, selectBlock.SelectStatement.GetLocation()));
                     }
                 },
                 SyntaxKind.SelectBlock);

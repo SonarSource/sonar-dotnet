@@ -61,7 +61,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     {
                         var memberAccess = (MemberAccessExpressionSyntax)invocationExpression.Expression;
 
-                        analysisContext.ReportDiagnosticWhenActive(Diagnostic.Create(rule, invocationExpression.GetLocation(), memberAccess.Name));
+                        analysisContext.ReportIssue(Diagnostic.Create(rule, invocationExpression.GetLocation(), memberAccess.Name));
                     }
                 },
                 SyntaxKind.InvocationExpression);

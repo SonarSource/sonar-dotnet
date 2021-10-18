@@ -61,8 +61,8 @@ namespace SonarAnalyzer.UnitTest.Helpers
             }
         }
 
-        // Various classes that invoke all the `ReportDiagnosticWhenActive` methods in AnalysisContextExtensions
-        // We mention in comments the type of Context that is used to invoke (directly or indirectly) the `ReportDiagnosticWhenActive` method
+        // Various classes that invoke all the `ReportIssue` methods in AnalysisContextExtensions
+        // We mention in comments the type of Context that is used to invoke (directly or indirectly) the `ReportIssue` method
         private readonly List<TestSetup> testCases = new (new[]
         {
             // SyntaxNodeAnalysisContext

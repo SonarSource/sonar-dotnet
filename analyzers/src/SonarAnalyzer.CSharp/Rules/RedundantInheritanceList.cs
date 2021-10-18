@@ -75,7 +75,7 @@ namespace SonarAnalyzer.Rules.CSharp
             if (baseTypeSymbol.Is(KnownType.System_Object))
             {
                 var location = GetLocationWithToken(baseTypeSyntax, typeDeclaration.BaseList.Types);
-                context.ReportDiagnosticWhenActive(
+                context.ReportIssue(
                     Diagnostic.Create(Rule, location,
                                       ImmutableDictionary<string, string>.Empty.Add(RedundantIndexKey, "0"),
                                       MessageObjectBase));
@@ -110,7 +110,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 return;
             }
 
-            context.ReportDiagnosticWhenActive(
+            context.ReportIssue(
                 Diagnostic.Create(Rule, enumDeclaration.BaseList.GetLocation(),
                                   ImmutableDictionary<string, string>.Empty.Add(RedundantIndexKey, "0"),
                                   MessageEnum));
@@ -146,7 +146,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     collidingDeclaration.ToMinimalDisplayString(context.SemanticModel, baseType.Type.SpanStart),
                     interfaceType.ToMinimalDisplayString(context.SemanticModel, baseType.Type.SpanStart));
 
-                context.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, location,
+                context.ReportIssue(Diagnostic.Create(Rule, location,
                     ImmutableDictionary<string, string>.Empty.Add(RedundantIndexKey, i.ToString(CultureInfo.InvariantCulture)),
                     message));
             }

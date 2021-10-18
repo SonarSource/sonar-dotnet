@@ -102,7 +102,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
             foreach (var jumpBlock in removableJumps)
             {
-                context.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, jumpBlock.JumpNode.GetLocation()));
+                context.ReportIssue(Diagnostic.Create(Rule, jumpBlock.JumpNode.GetLocation()));
             }
         }
 

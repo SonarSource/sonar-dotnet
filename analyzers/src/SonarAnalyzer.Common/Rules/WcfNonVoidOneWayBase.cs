@@ -69,7 +69,7 @@ namespace SonarAnalyzer.Rules.Common
                     if (isOneWay.HasValue &&
                         isOneWay.Value)
                     {
-                        c.ReportDiagnosticWhenActive(Diagnostic.Create(SupportedDiagnostics[0], GetReturnTypeLocation(methodDeclaration)));
+                        c.ReportIssue(Diagnostic.Create(SupportedDiagnostics[0], GetReturnTypeLocation(methodDeclaration)));
                     }
                 },
                 MethodDeclarationKind);

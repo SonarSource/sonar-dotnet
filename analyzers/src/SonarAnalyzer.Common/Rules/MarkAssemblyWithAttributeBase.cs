@@ -43,7 +43,7 @@ namespace SonarAnalyzer.Rules
                     {
                         if (!cc.Compilation.Assembly.HasAttribute(AttributeToFind) && !cc.Compilation.Assembly.HasAttribute(KnownType.Microsoft_AspNetCore_Razor_Hosting_RazorCompiledItemAttribute))
                         {
-                            cc.ReportDiagnosticWhenActive(Diagnostic.Create(rule, null, cc.Compilation.AssemblyName));
+                            cc.ReportIssue(Diagnostic.Create(rule, null, cc.Compilation.AssemblyName));
                         }
                     })
                 );

@@ -74,7 +74,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     if (attributes.Any(IsTestOrTestClassAttribute) &&
                         !attributes.Any(IsWorkItemAttribute))
                     {
-                        c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, attribute.GetLocation()));
+                        c.ReportIssue(Diagnostic.Create(rule, attribute.GetLocation()));
                     }
                 },
                 SyntaxKind.Attribute);

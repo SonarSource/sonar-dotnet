@@ -71,7 +71,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
                 if (location.GetLineSpan().StartLinePosition.Line == tokenLine &&
                     !Regex.IsMatch(comment.ToString(), LegalCommentPattern))
                 {
-                    context.ReportDiagnosticWhenActive(Diagnostic.Create(rule, location));
+                    context.ReportIssue(Diagnostic.Create(rule, location));
                 }
             }
         }

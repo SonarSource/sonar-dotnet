@@ -67,7 +67,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     {
                         var expressionToReportOn = leftIsNull ? equalsExpression.Left : equalsExpression.Right;
 
-                        c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, expressionToReportOn.GetLocation(),
+                        c.ReportIssue(Diagnostic.Create(rule, expressionToReportOn.GetLocation(),
                             typeInfo.Name));
                     }
                 },

@@ -54,26 +54,26 @@ namespace SonarAnalyzer.Helpers
             context.CodeBlock.SyntaxTree;
 
         /// <param name="verifyScopeContext">Provide value for this argument only if the class has more than one SupportedDiagnostics.</param>
-        public static void ReportDiagnosticWhenActive(this SyntaxNodeAnalysisContext context, Diagnostic diagnostic, SonarAnalysisContext verifyScopeContext = null) =>
-            ReportDiagnostic(new ReportingContext(context, diagnostic), verifyScopeContext?.IsTestProject(context.Compilation, context.Options), verifyScopeContext?.IsScannerRun(context.Options));
+        public static void ReportIssue(this SyntaxNodeAnalysisContext context, Diagnostic diagnostic, SonarAnalysisContext verifyScopeContext = null) =>
+            ReportIssue(new ReportingContext(context, diagnostic), verifyScopeContext?.IsTestProject(context.Compilation, context.Options), verifyScopeContext?.IsScannerRun(context.Options));
 
         // SyntaxTreeAnalysisContext doesn't have a Compilation => verifyScopeContext is never needed, because IsAnalysisScopeMatching returns always true.
-        public static void ReportDiagnosticWhenActive(this SyntaxTreeAnalysisContext context, Diagnostic diagnostic) =>
-            ReportDiagnostic(new ReportingContext(context, diagnostic), null, null);
+        public static void ReportIssue(this SyntaxTreeAnalysisContext context, Diagnostic diagnostic) =>
+            ReportIssue(new ReportingContext(context, diagnostic), null, null);
 
-        public static void ReportDiagnosticWhenActive(this CompilationAnalysisContext context, Diagnostic diagnostic) =>
-            ReportDiagnostic(new ReportingContext(context, diagnostic), SonarAnalysisContext.IsTestProject(context), SonarAnalysisContext.IsScannerRun(context));
-
-        /// <param name="verifyScopeContext">Provide value for this argument only if the class has more than one SupportedDiagnostics.</param>
-        public static void ReportDiagnosticWhenActive(this SymbolAnalysisContext context, Diagnostic diagnostic, SonarAnalysisContext verifyScopeContext = null) =>
-            ReportDiagnostic(new ReportingContext(context, diagnostic), verifyScopeContext?.IsTestProject(context.Compilation, context.Options), verifyScopeContext?.IsScannerRun(context.Options));
+        public static void ReportIssue(this CompilationAnalysisContext context, Diagnostic diagnostic) =>
+            ReportIssue(new ReportingContext(context, diagnostic), SonarAnalysisContext.IsTestProject(context), SonarAnalysisContext.IsScannerRun(context));
 
         /// <param name="verifyScopeContext">Provide value for this argument only if the class has more than one SupportedDiagnostics.</param>
-        public static void ReportDiagnosticWhenActive(this CodeBlockAnalysisContext context, Diagnostic diagnostic, SonarAnalysisContext verifyScopeContext = null) =>
-            ReportDiagnostic(new ReportingContext(context, diagnostic), verifyScopeContext?.IsTestProject(context.SemanticModel.Compilation, context.Options),
+        public static void ReportIssue(this SymbolAnalysisContext context, Diagnostic diagnostic, SonarAnalysisContext verifyScopeContext = null) =>
+            ReportIssue(new ReportingContext(context, diagnostic), verifyScopeContext?.IsTestProject(context.Compilation, context.Options), verifyScopeContext?.IsScannerRun(context.Options));
+
+        /// <param name="verifyScopeContext">Provide value for this argument only if the class has more than one SupportedDiagnostics.</param>
+        public static void ReportIssue(this CodeBlockAnalysisContext context, Diagnostic diagnostic, SonarAnalysisContext verifyScopeContext = null) =>
+            ReportIssue(new ReportingContext(context, diagnostic), verifyScopeContext?.IsTestProject(context.SemanticModel.Compilation, context.Options),
                 verifyScopeContext?.IsScannerRun(context.Options));
 
-        private static void ReportDiagnostic(ReportingContext reportingContext, bool? isTestProject, bool? isScannerRun)
+        private static void ReportIssue(ReportingContext reportingContext, bool? isTestProject, bool? isScannerRun)
         {
             if (isTestProject.HasValue
                 && !SonarAnalysisContext.IsAnalysisScopeMatching(reportingContext.Compilation, isTestProject.Value, isScannerRun ?? true, new[] { reportingContext.Diagnostic.Descriptor }))

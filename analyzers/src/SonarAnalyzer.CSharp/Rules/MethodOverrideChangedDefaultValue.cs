@@ -82,7 +82,7 @@ namespace SonarAnalyzer.Rules.CSharp
             {
                 if (overridingParameter.HasExplicitDefaultValue)
                 {
-                    context.ReportDiagnosticWhenActive(Diagnostic.Create(rule, parameterSyntax.Default.GetLocation(), "Remove", MessageRemoveExplicit));
+                    context.ReportIssue(Diagnostic.Create(rule, parameterSyntax.Default.GetLocation(), "Remove", MessageRemoveExplicit));
                 }
 
                 return;
@@ -91,14 +91,14 @@ namespace SonarAnalyzer.Rules.CSharp
             if (overridingParameter.HasExplicitDefaultValue &&
                 !overriddenParameter.HasExplicitDefaultValue)
             {
-                context.ReportDiagnosticWhenActive(Diagnostic.Create(rule, parameterSyntax.Default.GetLocation(), "Remove", MessageRemove));
+                context.ReportIssue(Diagnostic.Create(rule, parameterSyntax.Default.GetLocation(), "Remove", MessageRemove));
                 return;
             }
 
             if (!overridingParameter.HasExplicitDefaultValue &&
                 overriddenParameter.HasExplicitDefaultValue)
             {
-                context.ReportDiagnosticWhenActive(Diagnostic.Create(rule, parameterSyntax.Identifier.GetLocation(), "Add", MessageAdd));
+                context.ReportIssue(Diagnostic.Create(rule, parameterSyntax.Identifier.GetLocation(), "Add", MessageAdd));
                 return;
             }
 
@@ -106,7 +106,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 overriddenParameter.HasExplicitDefaultValue &&
                 !Equals(overridingParameter.ExplicitDefaultValue, overriddenParameter.ExplicitDefaultValue))
             {
-                context.ReportDiagnosticWhenActive(Diagnostic.Create(rule, parameterSyntax.Default.Value.GetLocation(), "Use", MessageUseSame));
+                context.ReportIssue(Diagnostic.Create(rule, parameterSyntax.Default.Value.GetLocation(), "Use", MessageUseSame));
             }
         }
     }

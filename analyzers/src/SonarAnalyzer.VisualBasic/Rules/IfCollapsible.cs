@@ -59,7 +59,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
                         return;
                     }
 
-                    c.ReportDiagnosticWhenActive(Diagnostic.Create(
+                    c.ReportIssue(Diagnostic.Create(
                         rule,
                         multilineIfBlock.IfStatement.IfKeyword.GetLocation(),
                         additionalLocations: new[] { parentMultilineIfBlock.IfStatement.IfKeyword.GetLocation() }));

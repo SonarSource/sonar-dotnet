@@ -86,7 +86,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
                 if (!context.Equals(default(SyntaxNodeAnalysisContext)))
                 {
-                    context.ReportDiagnosticWhenActive(Diagnostic.Create(InvalidCastToInterfaceRuleConstants.Rule, castExpression.GetLocation(), MessageDefinite));
+                    context.ReportIssue(Diagnostic.Create(InvalidCastToInterfaceRuleConstants.Rule, castExpression.GetLocation(), MessageDefinite));
                 }
 
                 return null;

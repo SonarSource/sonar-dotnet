@@ -75,7 +75,7 @@ namespace SonarAnalyzer.Rules.Common
                             ? ActionForInterface
                             : ActionForClass;
 
-                        c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, attributeSyntax.GetLocation(), action,
+                        c.ReportIssue(Diagnostic.Create(rule, attributeSyntax.GetLocation(), action,
                             exportedType.ToDisplayString(SymbolDisplayFormat.MinimallyQualifiedFormat),
                             attributeTargetType.ToDisplayString(SymbolDisplayFormat.MinimallyQualifiedFormat)));
                     }

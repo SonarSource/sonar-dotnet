@@ -53,7 +53,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 IsEmpty(methodNode.Body) &&
                 !ShouldMethodBeExcluded(methodNode, context.SemanticModel, isTestProject))
             {
-                context.ReportDiagnosticWhenActive(Diagnostic.Create(rule, methodNode.Identifier.GetLocation()));
+                context.ReportIssue(Diagnostic.Create(rule, methodNode.Identifier.GetLocation()));
             }
         }
 

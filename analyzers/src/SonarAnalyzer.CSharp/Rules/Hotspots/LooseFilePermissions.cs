@@ -47,7 +47,7 @@ namespace SonarAnalyzer.Rules.CSharp
             var node = context.Node;
             if (IsFileAccessPermissions(node, context.SemanticModel) && !node.IsPartOfBinaryNegationOrCondition())
             {
-                context.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, node.GetLocation()));
+                context.ReportIssue(Diagnostic.Create(Rule, node.GetLocation()));
             }
         }
 
@@ -64,7 +64,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     ? Diagnostic.Create(Rule, invocationLocation)
                     : Diagnostic.Create(Rule, invocationLocation, additionalLocations: new[] {secondaryLocation});
 
-                context.ReportDiagnosticWhenActive(diagnostic);
+                context.ReportIssue(diagnostic);
             }
         }
 

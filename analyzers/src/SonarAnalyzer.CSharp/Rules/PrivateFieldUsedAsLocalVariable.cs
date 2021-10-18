@@ -77,7 +77,7 @@ namespace SonarAnalyzer.Rules.CSharp
                         .Where(collector.IsRemovableField)
                         .Select(CreateDiagnostic)
                         .ToList()
-                        .ForEach(d => c.ReportDiagnosticWhenActive(d));
+                        .ForEach(d => c.ReportIssue(d));
 
                     Diagnostic CreateDiagnostic(IFieldSymbol fieldSymbol) =>
                         Diagnostic.Create(Rule, privateFields[fieldSymbol].GetLocation(), fieldSymbol.Name);

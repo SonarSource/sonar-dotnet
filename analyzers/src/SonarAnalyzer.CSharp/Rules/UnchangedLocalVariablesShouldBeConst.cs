@@ -196,7 +196,7 @@ namespace SonarAnalyzer.Rules.CSharp
         }
 
         private static void Report(VariableDeclaratorSyntax declaratorSyntax, SyntaxNodeAnalysisContext c) =>
-            c.ReportDiagnosticWhenActive(Diagnostic.Create(Rule,
+            c.ReportIssue(Diagnostic.Create(Rule,
                 declaratorSyntax.Identifier.GetLocation(),
                 declaratorSyntax.Identifier.ValueText));
     }

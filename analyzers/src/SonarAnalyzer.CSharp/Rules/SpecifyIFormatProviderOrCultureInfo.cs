@@ -78,7 +78,7 @@ namespace SonarAnalyzer.Rules.CSharp
                         CanPotentiallyRaise(methodSymbol) &&
                         CSharpOverloadHelper.HasOverloadWithType(invocation, c.SemanticModel, formatAndCultureType))
                     {
-                        c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, invocation.GetLocation(), invocation.Expression));
+                        c.ReportIssue(Diagnostic.Create(rule, invocation.GetLocation(), invocation.Expression));
                     }
                 }, SyntaxKind.InvocationExpression);
         }

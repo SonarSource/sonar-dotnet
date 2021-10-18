@@ -46,7 +46,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
                 c =>
                 {
                     var node = (OnErrorGoToStatementSyntax)c.Node;
-                    c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, node.OnKeyword.CreateLocation(node.ErrorKeyword)));
+                    c.ReportIssue(Diagnostic.Create(rule, node.OnKeyword.CreateLocation(node.ErrorKeyword)));
                 },
                 SyntaxKind.OnErrorGoToLabelStatement,
                 SyntaxKind.OnErrorGoToZeroStatement,
@@ -56,7 +56,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
                 c =>
                 {
                     var node = (OnErrorResumeNextStatementSyntax)c.Node;
-                    c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, node.OnKeyword.CreateLocation(node.ErrorKeyword)));
+                    c.ReportIssue(Diagnostic.Create(rule, node.OnKeyword.CreateLocation(node.ErrorKeyword)));
                 },
                 SyntaxKind.OnErrorResumeNextStatement);
         }

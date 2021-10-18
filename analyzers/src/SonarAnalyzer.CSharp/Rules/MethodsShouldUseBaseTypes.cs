@@ -44,7 +44,7 @@ namespace SonarAnalyzer.Rules.CSharp
         protected override void Initialize(SonarAnalysisContext context) =>
             context.RegisterSyntaxNodeActionInNonGenerated(
                 c => FindViolations((BaseMethodDeclarationSyntax)c.Node, c.SemanticModel)
-                        .ForEach(d => c.ReportDiagnosticWhenActive(d)),
+                        .ForEach(d => c.ReportIssue(d)),
                 SyntaxKind.MethodDeclaration);
 
         private static List<Diagnostic> FindViolations(BaseMethodDeclarationSyntax methodDeclaration, SemanticModel semanticModel)

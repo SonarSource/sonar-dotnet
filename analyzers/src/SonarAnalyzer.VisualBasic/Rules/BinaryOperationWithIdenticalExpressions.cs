@@ -80,7 +80,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
             if (VisualBasicEquivalenceChecker.AreEquivalent(left.RemoveParentheses(), right.RemoveParentheses()))
             {
                 var message = string.Format(OperatorMessageFormat, operatorToken);
-                context.ReportDiagnosticWhenActive(Diagnostic.Create(rule, context.Node.GetLocation(), message));
+                context.ReportIssue(Diagnostic.Create(rule, context.Node.GetLocation(), message));
             }
         }
     }

@@ -73,7 +73,7 @@ namespace SonarAnalyzer.Rules.CSharp
                         .IsNullLiteral();
                     if (isSecondParameterNull)
                     {
-                        c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, invocation.GetLocation(), NullEventArgsMessage));
+                        c.ReportIssue(Diagnostic.Create(rule, invocation.GetLocation(), NullEventArgsMessage));
                     }
 
                     var eventSymbol = GetEventSymbol(invocation.Expression, c.SemanticModel);
@@ -87,11 +87,11 @@ namespace SonarAnalyzer.Rules.CSharp
                         .IsNullLiteral();
                     if (isFirstParameterNull && !eventSymbol.IsStatic)
                     {
-                        c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, invocation.GetLocation(), NullSenderMessage));
+                        c.ReportIssue(Diagnostic.Create(rule, invocation.GetLocation(), NullSenderMessage));
                     }
                     else if (!isFirstParameterNull && eventSymbol.IsStatic)
                     {
-                        c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, invocation.GetLocation(), NonNullSenderMessage));
+                        c.ReportIssue(Diagnostic.Create(rule, invocation.GetLocation(), NonNullSenderMessage));
                     }
                 },
                 SyntaxKind.InvocationExpression);

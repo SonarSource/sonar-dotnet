@@ -74,7 +74,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
                     if (!hasFinalizer)
                     {
-                        c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, invocation.GetLocation()));
+                        c.ReportIssue(Diagnostic.Create(rule, invocation.GetLocation()));
                     }
                 },
                 SyntaxKind.InvocationExpression);

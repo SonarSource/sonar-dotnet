@@ -67,7 +67,7 @@ namespace SonarAnalyzer.Rules
 
                     if (ifBlocksStatements.All(ifStatements => AreEquivalent(ifStatements, elseStatements)))
                     {
-                        context.ReportDiagnosticWhenActive(Diagnostic.Create(rule, GetLocation(topLevelIf), StatementsMessage));
+                        context.ReportIssue(Diagnostic.Create(rule, GetLocation(topLevelIf), StatementsMessage));
                     }
                 };
 

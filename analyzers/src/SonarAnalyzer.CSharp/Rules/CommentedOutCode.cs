@@ -73,7 +73,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     && !trivia.ToFullString().TrimStart().StartsWith("///", StringComparison.Ordinal)
                     && IsCode(trivia.ToString().Substring(CommentMarkLength)))
                 {
-                    context.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, trivia.GetLocation()));
+                    context.ReportIssue(Diagnostic.Create(Rule, trivia.GetLocation()));
                     shouldReport = false;
                 }
             }
@@ -92,7 +92,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     var lineSpan = context.Tree.GetText().Lines[lineNumber].Span;
                     var commentLineSpan = lineSpan.Intersection(trivia.GetLocation().SourceSpan);
                     var location = Location.Create(context.Tree, commentLineSpan ?? lineSpan);
-                    context.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, location));
+                    context.ReportIssue(Diagnostic.Create(Rule, location));
                     return;
                 }
             }

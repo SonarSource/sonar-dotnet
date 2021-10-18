@@ -59,7 +59,7 @@ namespace SonarAnalyzer.Rules.CSharp
                         && accessibility != Accessibility.Internal
                         && !variableSymbol.IsReadOnly)
                     {
-                        c.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, variable.GetLocation(), variableSymbol.Name));
+                        c.ReportIssue(Diagnostic.Create(Rule, variable.GetLocation(), variableSymbol.Name));
                     }
                 }
             },

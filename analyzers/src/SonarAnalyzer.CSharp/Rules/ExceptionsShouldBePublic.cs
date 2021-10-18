@@ -59,7 +59,7 @@ namespace SonarAnalyzer.Rules.CSharp
                         classSymbol.GetEffectiveAccessibility() != Accessibility.Public &&
                         classSymbol.BaseType.IsAny(baseExceptions))
                     {
-                        c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, classDeclaration.Identifier.GetLocation()));
+                        c.ReportIssue(Diagnostic.Create(rule, classDeclaration.Identifier.GetLocation()));
                     }
                 },
                 SyntaxKind.ClassDeclaration);

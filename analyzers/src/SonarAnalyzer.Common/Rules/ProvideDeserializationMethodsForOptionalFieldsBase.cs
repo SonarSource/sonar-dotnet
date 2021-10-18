@@ -71,7 +71,7 @@ namespace SonarAnalyzer.Rules.Common
                         return;
                     }
 
-                    c.ReportDiagnosticWhenActive(Diagnostic.Create(SupportedDiagnostics[0], GetNamedTypeIdentifierLocation(declaringSyntax), errorMessage));
+                    c.ReportIssue(Diagnostic.Create(SupportedDiagnostics[0], GetNamedTypeIdentifierLocation(declaringSyntax), errorMessage));
                 },
                 SymbolKind.NamedType);
 

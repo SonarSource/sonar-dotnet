@@ -64,7 +64,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
             {
                 if (IsImplicitReturnValue(node))
                 {
-                    context.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, node.GetLocation(),
+                    context.ReportIssue(Diagnostic.Create(Rule, node.GetLocation(),
                         IsAssignmentStatement(node)
                         ? UseReturnStatementMessage
                         : DontUseImplicitMessage));

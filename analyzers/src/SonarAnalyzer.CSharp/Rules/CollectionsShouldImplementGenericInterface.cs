@@ -86,7 +86,7 @@ namespace SonarAnalyzer.Rules.CSharp
                         }
                     }
 
-                    issues.ForEach(d => c.ReportDiagnosticWhenActive(d));
+                    issues.ForEach(d => c.ReportIssue(d));
                 },
                 SyntaxKind.ClassDeclaration);
         }

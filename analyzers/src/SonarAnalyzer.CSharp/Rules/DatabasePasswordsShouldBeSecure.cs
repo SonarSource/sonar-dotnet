@@ -125,7 +125,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     && !HasSanitizers(connectionString.Value)
                     && connectionString.CreateLocation(webConfigPath) is { } location)
                 {
-                    c.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, location));
+                    c.ReportIssue(Diagnostic.Create(Rule, location));
                 }
             }
         }
@@ -136,7 +136,7 @@ namespace SonarAnalyzer.Rules.CSharp
             {
                 if (connectionStringToken is JProperty connectionStringProperty && IsVulnerable(connectionStringProperty.Value.ToString()))
                 {
-                    c.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, CreateLocation(connectionStringProperty.Value, connectionStringProperty.Value.ToString().Length, appSettingsPath)));
+                    c.ReportIssue(Diagnostic.Create(Rule, CreateLocation(connectionStringProperty.Value, connectionStringProperty.Value.ToString().Length, appSettingsPath)));
                 }
             }
         }

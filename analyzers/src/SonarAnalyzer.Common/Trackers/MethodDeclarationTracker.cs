@@ -50,7 +50,7 @@ namespace SonarAnalyzer.Helpers.Trackers
                         var methodIdentifier = GetMethodIdentifier(declaration.GetSyntax());
                         if (methodIdentifier.HasValue)
                         {
-                            c.ReportDiagnosticWhenActive(Diagnostic.Create(input.Rule, methodIdentifier.Value.GetLocation()));
+                            c.ReportIssue(Diagnostic.Create(input.Rule, methodIdentifier.Value.GetLocation()));
                         }
                     }
                 }

@@ -66,7 +66,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     {
                         if (syntaxNodes.Count > 1)
                         {
-                            c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, syntaxNodes.First().GetLocation(),
+                            c.ReportIssue(Diagnostic.Create(rule, syntaxNodes.First().GetLocation(),
                                 additionalLocations: syntaxNodes.Skip(1).Select(node => node.GetLocation()).ToArray(),
                                 messageArgs: ConsumeOnlyOnceMessage));
                         }
@@ -74,7 +74,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
                     foreach (var node in walker.ConsumedButNotCompleted)
                     {
-                        c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, node.GetLocation(), messageArgs: ConsumeOnlyIfCompletedMessage   ));
+                        c.ReportIssue(Diagnostic.Create(rule, node.GetLocation(), messageArgs: ConsumeOnlyIfCompletedMessage   ));
                     }
                 },
                 // when visiting a method or another member with logic inside, lambdas and local functions will be visited as well

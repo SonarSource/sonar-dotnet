@@ -57,7 +57,7 @@ namespace SonarAnalyzer.Rules.CSharp
                         .FirstOrDefault();
                     if (threadStaticAttribute != null)
                     {
-                        c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, threadStaticAttribute.Name.GetLocation()));
+                        c.ReportIssue(Diagnostic.Create(rule, threadStaticAttribute.Name.GetLocation()));
                     }
                 },
                 SyntaxKind.FieldDeclaration);

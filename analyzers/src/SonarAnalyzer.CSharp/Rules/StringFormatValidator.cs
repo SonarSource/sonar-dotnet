@@ -123,12 +123,12 @@ namespace SonarAnalyzer.Rules.CSharp
 
             if (BugRelatedFailures.Contains(failure.Failure))
             {
-                analysisContext.ReportDiagnosticWhenActive(Diagnostic.Create(BugRule, invocation.Expression.GetLocation(), failure.ToString()));
+                analysisContext.ReportIssue(Diagnostic.Create(BugRule, invocation.Expression.GetLocation(), failure.ToString()));
             }
 
             if (CodeSmellRelatedFailures.Contains(failure.Failure))
             {
-                analysisContext.ReportDiagnosticWhenActive(Diagnostic.Create(CodeSmellRule, invocation.Expression.GetLocation(), failure.ToString()));
+                analysisContext.ReportIssue(Diagnostic.Create(CodeSmellRule, invocation.Expression.GetLocation(), failure.ToString()));
             }
         }
 

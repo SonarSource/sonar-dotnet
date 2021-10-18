@@ -89,7 +89,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
                         return;
                     }
 
-                    c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, declaration.GetLocation()));
+                    c.ReportIssue(Diagnostic.Create(rule, declaration.GetLocation()));
                 },
                 SyntaxKind.LocalDeclarationStatement);
         }

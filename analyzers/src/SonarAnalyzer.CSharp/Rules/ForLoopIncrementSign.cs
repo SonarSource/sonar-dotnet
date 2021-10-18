@@ -101,7 +101,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     if (incrementorData.Operation == ArithmeticOperation.Addition &&
                         condition == Condition.Greater)
                     {
-                        c.ReportDiagnosticWhenActive(Diagnostic.Create(rule,
+                        c.ReportIssue(Diagnostic.Create(rule,
                             forNode.Incrementors.First().GetLocation(),
                             new[] { forNode.Condition.GetLocation() },
                             incrementorData.IdentifierName, "inc"));
@@ -109,7 +109,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     else if (incrementorData.Operation == ArithmeticOperation.Substraction &&
                              condition == Condition.Less)
                     {
-                        c.ReportDiagnosticWhenActive(Diagnostic.Create(rule,
+                        c.ReportIssue(Diagnostic.Create(rule,
                             forNode.Incrementors.First().GetLocation(),
                             new[] { forNode.Condition.GetLocation() },
                             incrementorData.IdentifierName, "dec"));

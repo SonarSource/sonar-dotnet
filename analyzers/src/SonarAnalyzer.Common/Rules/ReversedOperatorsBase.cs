@@ -62,7 +62,7 @@ namespace SonarAnalyzer.Rules
                 if (TiedTogether(equalsSignSpan, operatorSpan) &&
                     !(IsMinusToken(operatorToken) && TiedTogether(operatorSpan, operandSpan)))
                 {
-                    c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, operatorLocation, $"{operatorToken.Text}="));
+                    c.ReportIssue(Diagnostic.Create(rule, operatorLocation, $"{operatorToken.Text}="));
                 }
             };
     }

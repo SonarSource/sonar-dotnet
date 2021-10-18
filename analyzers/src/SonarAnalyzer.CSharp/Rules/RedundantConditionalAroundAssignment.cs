@@ -74,7 +74,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
             if (!(c.SemanticModel.GetSymbolInfo(assignment.Left).Symbol is IPropertySymbol))
             {
-                c.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, condition.GetLocation()));
+                c.ReportIssue(Diagnostic.Create(Rule, condition.GetLocation()));
             }
         }
 
@@ -97,7 +97,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     && CSharpEquivalenceChecker.AreEquivalent(expression, ((ConstantPatternSyntaxWrapper)constantPattern).Expression))
                     || (condition.IsKind(SyntaxKindEx.DiscardPattern) && switchExpression.Arms.Count == 1))
                 {
-                    c.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, condition.GetLocation()));
+                    c.ReportIssue(Diagnostic.Create(Rule, condition.GetLocation()));
                 }
             }
         }

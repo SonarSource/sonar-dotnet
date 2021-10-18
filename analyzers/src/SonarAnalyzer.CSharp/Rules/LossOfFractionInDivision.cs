@@ -57,7 +57,7 @@ namespace SonarAnalyzer.Rules.CSharp
                         || TryGetTypeFromReturnMappedToFloatType(division, c.SemanticModel, out assignedToType))
                     {
                         var diagnostic = Diagnostic.Create(Rule, division.GetLocation(), assignedToType.ToMinimalDisplayString(c.SemanticModel, division.SpanStart));
-                        c.ReportDiagnosticWhenActive(diagnostic);
+                        c.ReportIssue(diagnostic);
                     }
                 },
                 SyntaxKind.DivideExpression);

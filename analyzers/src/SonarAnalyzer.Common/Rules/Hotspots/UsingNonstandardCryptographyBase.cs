@@ -85,7 +85,7 @@ namespace SonarAnalyzer.Rules
             var classSymbol = GetDeclaredSymbol(declaration, analysisContext.SemanticModel);
             if (classSymbol.DerivesOrImplementsAny(nonInheritableClassesAndInterfaces))
             {
-                analysisContext.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, GetLocation(declaration)));
+                analysisContext.ReportIssue(Diagnostic.Create(Rule, GetLocation(declaration)));
             }
         }
     }

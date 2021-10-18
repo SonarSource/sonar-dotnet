@@ -88,7 +88,7 @@ namespace SonarAnalyzer.Rules
                 return;
             }
 
-            context.ReportDiagnosticWhenActive(Diagnostic.Create(rule, stringLiteral.GetLocation(), literalValue));
+            context.ReportIssue(Diagnostic.Create(rule, stringLiteral.GetLocation(), literalValue));
         }
     }
 }

@@ -73,7 +73,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     if (noCallerInfoParameter != null &&
                         HasIdentifier(parameter))
                     {
-                        context.ReportDiagnosticWhenActive(Diagnostic.Create(rule, parameter.GetLocation(),
+                        context.ReportIssue(Diagnostic.Create(rule, parameter.GetLocation(),
                             parameter.Identifier.Text));
                     }
                 }

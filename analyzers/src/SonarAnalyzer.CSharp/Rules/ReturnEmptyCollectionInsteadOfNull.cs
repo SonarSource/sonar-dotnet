@@ -66,7 +66,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 if (arrowedNullLiteral != null &&
                     IsReturningCollection(context))
                 {
-                    context.ReportDiagnosticWhenActive(Diagnostic.Create(rule, arrowedNullLiteral.GetLocation()));
+                    context.ReportIssue(Diagnostic.Create(rule, arrowedNullLiteral.GetLocation()));
                 }
 
                 return;
@@ -81,7 +81,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 if (returnNullStatements.Count > 0 &&
                     IsReturningCollection(context))
                 {
-                    context.ReportDiagnosticWhenActive(Diagnostic.Create(rule, returnNullStatements[0],
+                    context.ReportIssue(Diagnostic.Create(rule, returnNullStatements[0],
                         additionalLocations: returnNullStatements.Skip(1)));
                 }
             }

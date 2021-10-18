@@ -54,7 +54,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 var isFileEndingWithNewLine = lastToken.TrailingTrivia.LastOrDefault().IsKind(SyntaxKind.EndOfLineTrivia);
                 if (!isFileEndingWithNewLine)
                 {
-                    stac.ReportDiagnosticWhenActive(Diagnostic.Create(rule, lastToken.GetLocation(),
+                    stac.ReportIssue(Diagnostic.Create(rule, lastToken.GetLocation(),
                         Path.GetFileName(stac.Tree.FilePath)));
                 }
             });

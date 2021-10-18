@@ -58,7 +58,7 @@ namespace SonarAnalyzer.Rules
                 return;
             }
 
-            context.ReportDiagnosticWhenActive(Diagnostic.Create(Rule,
+            context.ReportIssue(Diagnostic.Create(Rule,
                                                                  location,
                                                                  ImmutableDictionary<string, string>.Empty.Add(IsReportingOnLeftKey, isReportingOnLeftKey.ToString())));
         }

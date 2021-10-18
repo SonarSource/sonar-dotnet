@@ -104,7 +104,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 {
                     if (invalidCreation.Symbol.GetSymbolType()?.Name is { }  typeName)
                     {
-                        c.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, invalidCreation.Node.GetLocation(), typeName));
+                        c.ReportIssue(Diagnostic.Create(Rule, invalidCreation.Node.GetLocation(), typeName));
                     }
                 }
             };

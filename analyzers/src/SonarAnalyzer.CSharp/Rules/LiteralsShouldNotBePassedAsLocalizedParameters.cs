@@ -77,7 +77,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 var firstArgument = invocationSyntax.ArgumentList.Arguments.FirstOrDefault();
                 if (IsStringLiteral(firstArgument?.Expression, context.SemanticModel))
                 {
-                    context.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, firstArgument.GetLocation()));
+                    context.ReportIssue(Diagnostic.Create(Rule, firstArgument.GetLocation()));
                 }
                 return;
             }
@@ -88,7 +88,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
             foreach (var nonCompliantParameter in nonCompliantParameters)
             {
-                context.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, nonCompliantParameter.syntax.GetLocation()));
+                context.ReportIssue(Diagnostic.Create(Rule, nonCompliantParameter.syntax.GetLocation()));
             }
         }
 
@@ -100,7 +100,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 && IsStringLiteral(assignmentSyntax.Right, context.SemanticModel)
                 && !CSharpDebugOnlyCodeHelper.IsCallerInConditionalDebug(assignmentSyntax, context.SemanticModel))
             {
-                context.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, assignmentSyntax.GetLocation()));
+                context.ReportIssue(Diagnostic.Create(Rule, assignmentSyntax.GetLocation()));
             }
         }
 

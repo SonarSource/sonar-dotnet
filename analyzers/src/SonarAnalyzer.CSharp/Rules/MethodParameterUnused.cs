@@ -187,7 +187,7 @@ namespace SonarAnalyzer.Rules.CSharp
             {
                 if (parametersToReportOn.Contains(parameter.Symbol))
                 {
-                    declaration.Context.ReportDiagnosticWhenActive(
+                    declaration.Context.ReportIssue(
                         Diagnostic.Create(Rule, parameter.Node.GetLocation(),
                         ImmutableDictionary<string, string>.Empty.Add(IsRemovableKey, isRemovable.ToString()),
                         string.Format(messagePattern, parameter.Symbol.Name)));

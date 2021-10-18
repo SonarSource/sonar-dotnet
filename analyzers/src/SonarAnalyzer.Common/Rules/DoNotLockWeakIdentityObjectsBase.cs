@@ -58,7 +58,7 @@ namespace SonarAnalyzer.Rules
                 var lockExpression = Language.Syntax.NodeExpression(c.Node);
                 if (c.SemanticModel.GetSymbolInfo(lockExpression).Symbol?.GetSymbolType() is { } lockExpressionType && lockExpressionType.DerivesFromAny(weakIdentityTypes))
                 {
-                    c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, lockExpression.GetLocation(), lockExpressionType.Name));
+                    c.ReportIssue(Diagnostic.Create(rule, lockExpression.GetLocation(), lockExpressionType.Name));
                 }
             }, SyntaxKind);
     }

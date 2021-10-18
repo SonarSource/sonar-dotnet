@@ -50,7 +50,7 @@ namespace SonarAnalyzer.Rules.Common
                     var prop = (TPropertyDeclaration)c.Node;
                     if (IsWriteOnlyProperty(prop) && Language.Syntax.NodeIdentifier(prop) is { }  identifier)
                     {
-                        c.ReportDiagnosticWhenActive(Diagnostic.Create(SupportedDiagnostics[0], identifier.GetLocation(), identifier.ValueText));
+                        c.ReportIssue(Diagnostic.Create(SupportedDiagnostics[0], identifier.GetLocation(), identifier.ValueText));
                     }
                 },
                 SyntaxKind);

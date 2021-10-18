@@ -48,7 +48,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     var fieldDeclaration = (FieldDeclarationSyntax)c.Node;
                     foreach (var diagnostic in GetDiagnostics(fieldDeclaration.Declaration, c.SemanticModel))
                     {
-                        c.ReportDiagnosticWhenActive(diagnostic);
+                        c.ReportIssue(diagnostic);
                     }
                 },
                 SyntaxKind.FieldDeclaration);

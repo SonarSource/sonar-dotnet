@@ -78,7 +78,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework
                 // method.
                 if (diagnostics.Any())
                 {
-                    SuppressionHandler.ExtensionMethodsCalledForAllDiagnostics(diagnosticAnalyzers).Should().BeTrue("The ReportDiagnosticWhenActive should be used instead of ReportDiagnostic");
+                    SuppressionHandler.ExtensionMethodsCalledForAllDiagnostics(diagnosticAnalyzers).Should().BeTrue("The ReportIssue should be used instead of ReportDiagnostic");
                 }
             }
             finally

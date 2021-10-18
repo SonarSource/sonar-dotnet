@@ -106,7 +106,7 @@ namespace SonarAnalyzer.Rules
 
             foreach (var stringTokenAndParam in stringTokenAndParameterPairs)
             {
-                context.ReportDiagnosticWhenActive(Diagnostic.Create(
+                context.ReportIssue(Diagnostic.Create(
                     descriptor: rule,
                     location: stringTokenAndParam.Key.GetLocation(),
                     messageArgs: stringTokenAndParam.Value));

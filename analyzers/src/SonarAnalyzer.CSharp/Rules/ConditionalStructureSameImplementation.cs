@@ -117,7 +117,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private static void ReportSyntaxNode(SyntaxNodeAnalysisContext context, SyntaxNode node, SyntaxNode precedingNode, string errorMessageDiscriminator)
         {
-            context.ReportDiagnosticWhenActive(Diagnostic.Create(
+            context.ReportIssue(Diagnostic.Create(
                 rule,
                 node.GetLocation(),
                 additionalLocations: new[] { precedingNode.GetLocation() },

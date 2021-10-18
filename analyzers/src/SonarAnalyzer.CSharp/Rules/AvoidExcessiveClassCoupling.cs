@@ -107,7 +107,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
                     if (dependentTypes.Count > Threshold)
                     {
-                        c.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, typeDeclaration.Identifier.GetLocation(),
+                        c.ReportIssue(Diagnostic.Create(Rule, typeDeclaration.Identifier.GetLocation(),
                             typeDeclaration.Keyword.ValueText, dependentTypes.Count, Threshold));
                     }
                 },

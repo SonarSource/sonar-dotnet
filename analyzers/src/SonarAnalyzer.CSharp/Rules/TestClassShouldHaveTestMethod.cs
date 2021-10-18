@@ -72,7 +72,7 @@ namespace SonarAnalyzer.Rules.CSharp
                         && IsViolatingRule(typeSymbol)
                         && !IsExceptionToTheRule(typeSymbol))
                     {
-                        c.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, typeDeclaration.Identifier.GetLocation(), typeDeclaration.GetDeclarationTypeName()));
+                        c.ReportIssue(Diagnostic.Create(Rule, typeDeclaration.Identifier.GetLocation(), typeDeclaration.GetDeclarationTypeName()));
                     }
                 },
                 SyntaxKind.ClassDeclaration,

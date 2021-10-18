@@ -55,7 +55,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
                     var typeSymbol = c.SemanticModel.GetSymbolInfo(typeSyntax).Symbol as ITypeSymbol;
                     if (typeSymbol.IsAny(KnownType.UnsignedIntegers))
                     {
-                        c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, typeSyntax.GetLocation(),
+                        c.ReportIssue(Diagnostic.Create(rule, typeSyntax.GetLocation(),
                             SignedPairs[typeSymbol.SpecialType]));
                     }
                 },

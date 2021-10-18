@@ -50,7 +50,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
                     if (text[text.Length - 1] == 'l' && !ShouldIgnore(text))
                     {
-                        c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, Location.Create(literal.SyntaxTree,
+                        c.ReportIssue(Diagnostic.Create(rule, Location.Create(literal.SyntaxTree,
                             new TextSpan(literal.Span.End - 1, 1))));
                     }
                 },

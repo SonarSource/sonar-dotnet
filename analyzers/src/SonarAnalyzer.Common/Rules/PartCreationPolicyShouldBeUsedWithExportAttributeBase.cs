@@ -58,7 +58,7 @@ namespace SonarAnalyzer.Rules
                 return;
             }
 
-            c.ReportDiagnosticWhenActive(Diagnostic.Create(SupportedDiagnostics[0], attribute.GetLocation()));
+            c.ReportIssue(Diagnostic.Create(SupportedDiagnostics[0], attribute.GetLocation()));
 
             bool IsPartCreationPolicyAttribute(TAttributeSyntax attributeSyntax) =>
                 c.SemanticModel.GetSymbolInfo(attributeSyntax).Symbol is IMethodSymbol attributeSymbol

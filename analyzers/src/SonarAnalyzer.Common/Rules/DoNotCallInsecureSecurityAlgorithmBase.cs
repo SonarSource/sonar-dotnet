@@ -114,7 +114,7 @@ namespace SonarAnalyzer.Rules
         {
             foreach (var supportedDiagnostic in SupportedDiagnostics)
             {
-                context.ReportDiagnosticWhenActive(Diagnostic.Create(supportedDiagnostic, location));
+                context.ReportIssue(Diagnostic.Create(supportedDiagnostic, location));
             }
         }
     }

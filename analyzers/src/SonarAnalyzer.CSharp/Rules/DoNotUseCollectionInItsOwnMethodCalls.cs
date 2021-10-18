@@ -70,7 +70,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     if (operands != null &&
                         CSharpEquivalenceChecker.AreEquivalent(operands.Left, operands.Right))
                     {
-                        c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, operands.Left.GetLocation(),
+                        c.ReportIssue(Diagnostic.Create(rule, operands.Left.GetLocation(),
                             additionalLocations: new[] { operands.Right.GetLocation() },
                             messageArgs: new[] { operands.Right.ToString(), operands.ErrorMessage }));
                     }

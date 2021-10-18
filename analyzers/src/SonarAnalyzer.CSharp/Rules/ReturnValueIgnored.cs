@@ -85,7 +85,7 @@ namespace SonarAnalyzer.Rules.CSharp
             if (invokedMethodSymbol.Parameters.All(p => p.RefKind == RefKind.None) &&
                 IsSideEffectFreeOrPure(invokedMethodSymbol))
             {
-                context.ReportDiagnosticWhenActive(Diagnostic.Create(rule, expression.GetLocation(), invokedMethodSymbol.Name));
+                context.ReportIssue(Diagnostic.Create(rule, expression.GetLocation(), invokedMethodSymbol.Name));
             }
         }
 

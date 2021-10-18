@@ -105,7 +105,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
                     if (membersToOverride.Any())
                     {
-                        c.ReportDiagnosticWhenActive(Diagnostic.Create(
+                        c.ReportIssue(Diagnostic.Create(
                             rule,
                             classDeclaration.Identifier.GetLocation(),
                             string.Join(" or ", implementedComparableInterfaces),

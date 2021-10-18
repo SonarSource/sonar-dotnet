@@ -51,7 +51,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     if (c.SemanticModel.GetSymbolInfo(assignment.Left).Symbol is IEventSymbol @event &&
                         assignment.Right is AnonymousFunctionExpressionSyntax)
                     {
-                        c.ReportDiagnosticWhenActive(Diagnostic.Create(rule,
+                        c.ReportIssue(Diagnostic.Create(rule,
                             assignment.OperatorToken.CreateLocation(assignment)));
                     }
                 },

@@ -50,7 +50,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
                     if (!IsPrivateTypeInherited(nestedPrivateTypeInfo))
                     {
-                        c.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, baseTypeDeclarationSyntax.Identifier.GetLocation()));
+                        c.ReportIssue(Diagnostic.Create(Rule, baseTypeDeclarationSyntax.Identifier.GetLocation()));
                     }
                 }
             },

@@ -57,7 +57,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 methodSymbol.IsPubliclyAccessible() &&
                 methodSymbol.DeclaringSyntaxReferences.FirstOrDefault()?.GetSyntax() is MethodDeclarationSyntax methodDeclaration)
             {
-                c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, methodDeclaration.Identifier.GetLocation(),
+                c.ReportIssue(Diagnostic.Create(rule, methodDeclaration.Identifier.GetLocation(),
                     MakeThisMethodPrivateMessage));
             }
         }
@@ -97,7 +97,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 .ForEach(Report);
 
             void Report(IMethodSymbol externMethod) =>
-                c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, methodDeclaration.Identifier.GetLocation(),
+                c.ReportIssue(Diagnostic.Create(rule, methodDeclaration.Identifier.GetLocation(),
                   string.Format(MakeThisWrapperLessTrivialMessage, externMethod.Name)));
 
             bool ParametersMatchContainingMethodDeclaration(InvocationExpressionSyntax invocation) =>

@@ -154,7 +154,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private static void ReportIssue(SyntaxNodeAnalysisContext context, Location primaryLocation,
             SyntaxNode secondaryLocationNode, string conditionLabelText) =>
-               context.ReportDiagnosticWhenActive(
+               context.ReportIssue(
                     Diagnostic.Create(
                         rule,
                         primaryLocation,

@@ -143,14 +143,14 @@ namespace SonarAnalyzer.Rules
 
             if (bothSideBool && !bothSideFalse && !bothSideTrue)
             {
-                context.ReportDiagnosticWhenActive(Diagnostic.Create(SupportedDiagnostics[0], thenBranch.CreateLocation(elseBranch)));
+                context.ReportIssue(Diagnostic.Create(SupportedDiagnostics[0], thenBranch.CreateLocation(elseBranch)));
             }
             if (thenIsBooleanLiteral ^ elseIsBooleanLiteral)
             {
                 // one side is boolean literal, the other is NOT boolean literal
                 var booleanLiteralSide = thenIsBooleanLiteral ? thenBranch : elseBranch;
 
-                context.ReportDiagnosticWhenActive(Diagnostic.Create(SupportedDiagnostics[0], booleanLiteralSide.GetLocation()));
+                context.ReportIssue(Diagnostic.Create(SupportedDiagnostics[0], booleanLiteralSide.GetLocation()));
             }
         }
 
@@ -182,7 +182,7 @@ namespace SonarAnalyzer.Rules
                     ? CalculateExtendedLocation(binaryExpression, false)
                     : CalculateExtendedLocation(binaryExpression, reportOnTrue == leftIsTrue);
 
-                context.ReportDiagnosticWhenActive(Diagnostic.Create(SupportedDiagnostics[0], errorLocation));
+                context.ReportIssue(Diagnostic.Create(SupportedDiagnostics[0], errorLocation));
                 return true;
             }
             return false;
@@ -208,7 +208,7 @@ namespace SonarAnalyzer.Rules
                 return;
             }
 
-            context.ReportDiagnosticWhenActive(Diagnostic.Create(SupportedDiagnostics[0], GetLocation()));
+            context.ReportIssue(Diagnostic.Create(SupportedDiagnostics[0], GetLocation()));
 
             Location GetLocation()
             {
