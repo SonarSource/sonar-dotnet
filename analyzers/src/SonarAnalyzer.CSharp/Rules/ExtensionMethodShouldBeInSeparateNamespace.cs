@@ -19,7 +19,6 @@
  */
 
 using System.Collections.Immutable;
-using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
@@ -38,9 +37,9 @@ namespace SonarAnalyzer.Rules.CSharp
         private const string MessageFormat = "Either move this extension to another namespace or move the method " +
             "inside the class itself.";
 
-        private static readonly DiagnosticDescriptor rule =
+        private static readonly DiagnosticDescriptor Rule =
             DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(rule);
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
 
         protected override void Initialize(SonarAnalysisContext context) =>
             context.RegisterSyntaxNodeActionInNonGenerated(
@@ -54,9 +53,9 @@ namespace SonarAnalyzer.Rules.CSharp
                         && methodSymbol.Parameters.Length > 0
                         && methodSymbol.Parameters[0].Type.Kind != SymbolKind.ErrorType
                         && methodSymbol.Parameters[0].Type.IsClass()
-                        && methodSymbol.ContainingNamespace == methodSymbol.Parameters[0].Type.ContainingNamespace)
+                        && methodSymbol.ContainingNamespace.Equals(methodSymbol.Parameters[0].Type.ContainingNamespace))
                     {
-                        c.ReportIssue(Diagnostic.Create(rule, methodDeclaration.Identifier.GetLocation()));
+                        c.ReportIssue(Diagnostic.Create(Rule, methodDeclaration.Identifier.GetLocation()));
                     }
                 },
                 SyntaxKind.MethodDeclaration);

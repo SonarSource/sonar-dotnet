@@ -1,10 +1,12 @@
 ﻿var isTopLevelFile = true;
 
 public record GlobalRecord { }
+public struct GlobalStruct { }
 
 public static class GlobalExtensions
 {
     public static void Bar(this GlobalRecord r) { } // Noncompliant
+    public static void Bar(this GlobalStruct r) { } // compliant
 }
 
 namespace MyLibrary

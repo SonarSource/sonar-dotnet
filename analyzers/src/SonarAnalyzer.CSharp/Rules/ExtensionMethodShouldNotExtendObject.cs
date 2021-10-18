@@ -19,7 +19,6 @@
  */
 
 using System.Collections.Immutable;
-using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
@@ -37,9 +36,9 @@ namespace SonarAnalyzer.Rules.CSharp
         internal const string DiagnosticId = "S4225";
         private const string MessageFormat = "Refactor this extension to extend a more concrete type.";
 
-        private static readonly DiagnosticDescriptor rule =
+        private static readonly DiagnosticDescriptor Rule =
             DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(rule);
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
 
         protected override void Initialize(SonarAnalysisContext context) =>
             context.RegisterSyntaxNodeActionInNonGenerated(
@@ -50,10 +49,10 @@ namespace SonarAnalyzer.Rules.CSharp
                     if (methodDeclaration.IsExtensionMethod()
                         && c.SemanticModel.GetDeclaredSymbol(methodDeclaration) is { } methodSymbol
                         && methodSymbol.IsExtensionMethod
-                        && methodSymbol.Parameters.Length >= 1
+                        && methodSymbol.Parameters.Length > 0
                         && methodSymbol.Parameters[0].Type.Is(KnownType.System_Object))
                     {
-                        c.ReportIssue(Diagnostic.Create(rule, methodDeclaration.Identifier.GetLocation()));
+                        c.ReportIssue(Diagnostic.Create(Rule, methodDeclaration.Identifier.GetLocation()));
                     }
                 },
                 SyntaxKind.MethodDeclaration);
