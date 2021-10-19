@@ -45,8 +45,6 @@ namespace SonarAnalyzer.UnitTest.Common
             sut.Invoking(x => x.Add("Key", sut)).Should().Throw<InvalidOperationException>();
             sut.Invoking(x => x.ContainsKey("Key")).Should().Throw<InvalidOperationException>();
             sut.Invoking(x => ((IEnumerable)x).GetEnumerator()).Should().Throw<InvalidOperationException>();
-            Action action = () => new JsonNode(LinePosition.Zero, Kind.Value);
-            action.Invoking(_ => action.Invoke()).Should().Throw<InvalidOperationException>();
         }
 
         [TestMethod]
