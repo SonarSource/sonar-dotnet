@@ -44,6 +44,12 @@ namespace SonarAnalyzer.UnitTest.Rules
             Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\UseUriInsteadOfString.CSharp9.cs",
                                                       new UseUriInsteadOfString(),
                                                       MetadataReferenceFacade.SystemDrawing);
+
+        [TestMethod]
+        public void UseUriInsteadOfString_CSharp10() =>
+            Verifier.VerifyAnalyzerFromCSharp10Library(@"TestCases\UseUriInsteadOfString.CSharp10.cs",
+                                                      new UseUriInsteadOfString(),
+                                                      MetadataReferenceFacade.SystemDrawing);
 #endif
 
         [TestMethod]
