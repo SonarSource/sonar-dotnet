@@ -63,6 +63,10 @@ namespace SonarAnalyzer.Json.Parsing
                     ReadNext();
                     ObjectKeyValue(ret);
                 }
+                if (symbol != Symbol.CloseCurlyBracket)
+                {
+                    throw Unexpected("}");
+                }
             }
             ret.UpdateEnd(new LinePosition(lexer.LastStart.Line, lexer.LastStart.Character + 1)); // FIXME: Verify that Roslyn needs to be one character behind the end, otherwise, we may use LastStart
             return ret;

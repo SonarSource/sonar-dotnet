@@ -151,6 +151,7 @@ namespace SonarAnalyzer.UnitTest.Common
         [DataRow("{,", "String Value expected, but Comma found.")]
         [DataRow("[0 0", "] expected, but Value found.")]
         [DataRow("[ ,", "{, [ or Value (true, false, null, String, Number) expected, but Comma found.")]
+        [DataRow(@"{ ""key"" : ""value"" ", "} expected, but EndOfInput found.")]
         public void InvalidSyntax_Throws(string source, string expectedMessage)
         {
             var sut = new SyntaxAnalyzer(source);
