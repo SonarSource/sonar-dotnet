@@ -39,10 +39,10 @@ namespace SonarAnalyzer.Rules.CSharp
         internal const string DiagnosticId = "S2857";
         private const string MessageFormat = "Add a space before '{0}'.";
 
-        private static readonly DiagnosticDescriptor Rule =
+        private static readonly DiagnosticDescriptor rule =
             DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
 
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(rule);
 
         private static readonly IList<NameSyntax> SqlNamespaces = new List<NameSyntax>()
         {
@@ -87,7 +87,8 @@ namespace SonarAnalyzer.Rules.CSharp
             .OrderBy(i => i)
             .First();
 
-        protected override void Initialize(SonarAnalysisContext context) =>
+        protected override void Initialize(SonarAnalysisContext context)
+        {
             context.RegisterSyntaxNodeActionInNonGenerated(
                 c =>
                 {
@@ -104,8 +105,9 @@ namespace SonarAnalyzer.Rules.CSharp
                     {
                         visitor.SafeVisit(member);
                     }
-                },
-                SyntaxKind.NamespaceDeclaration);
+            },
+            SyntaxKind.NamespaceDeclaration);
+        }
 
         private bool HasSqlNamespace(SyntaxList<UsingDirectiveSyntax> usings) =>
             usings.Select(usingDirective => usingDirective.Name)
@@ -167,7 +169,7 @@ namespace SonarAnalyzer.Rules.CSharp
                         IsAlphaNumericOrAt(secondStringText[0]))
                     {
                         var word = secondStringText.Split(' ').FirstOrDefault();
-                        this.context.ReportIssue(Diagnostic.Create(Rule, secondString.Node.GetLocation(), word));
+                        this.context.ReportIssue(Diagnostic.Create(rule, secondString.Node.GetLocation(), word));
                     }
                 }
             }
