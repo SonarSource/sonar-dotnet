@@ -44,6 +44,18 @@ namespace SonarAnalyzer.UnitTest.Rules
                                    new RedundantInheritanceListCodeFixProvider(),
                                    ParseOptionsHelper.FromCSharp9);
 
+        [TestMethod]
+        public void RedundantInheritanceList_CSharp10() =>
+            Verifier.VerifyAnalyzerFromCSharp10Library(@"TestCases\RedundantInheritanceList.CSharp10.cs", new RedundantInheritanceList());
+
+        [TestMethod]
+        public void RedundantInheritanceList_CSharp10_CodeFix() =>
+            Verifier.VerifyCodeFix(@"TestCases\RedundantInheritanceList.CSharp10.cs",
+                                   @"TestCases\RedundantInheritanceList.CSharp10.Fixed.cs",
+                                   new RedundantInheritanceList(),
+                                   new RedundantInheritanceListCodeFixProvider(),
+                                   ParseOptionsHelper.FromCSharp10);
+
 #endif
 
         [TestMethod]

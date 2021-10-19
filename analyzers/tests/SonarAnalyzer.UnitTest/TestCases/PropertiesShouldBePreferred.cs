@@ -60,6 +60,11 @@ namespace MyLibrary
         string GetStuff(); // Noncompliant
     }
 
+    public struct SomeStruct
+    {
+        string GetStuff() { return ""; } // FN
+    }
+
     public interface IFoo
     {
         // See https://github.com/SonarSource/sonar-dotnet/issues/1593

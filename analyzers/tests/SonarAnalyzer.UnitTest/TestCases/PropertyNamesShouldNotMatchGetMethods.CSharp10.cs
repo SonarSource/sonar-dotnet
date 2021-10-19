@@ -2,18 +2,11 @@
 
 namespace Tests.Diagnostics
 {
-    public class Base
+    public record struct RecordStruct
     {
-        public virtual int MyProperty { get; set; }
-    }
-
-    public class Program : Base
-    {
-        public int Foo // Noncompliant {{Change either the name of property 'Foo' or the name of method 'GetFoo' to make them distinguishable.}}
-//                 ^^^
+        public int Foo // FN
         { get; set; }
         public int GetFoo()
-//                 ^^^^^^ Secondary
         { return 1; }
 
         public DateTime Date { get; }
@@ -22,11 +15,9 @@ namespace Tests.Diagnostics
             return Date.ToString();
         }
 
-        public string Bar // Noncompliant {{Change either the name of property 'Bar' or the name of method 'Bar' to make them distinguishable.}}
-//                    ^^^
+        public string Bar // FN
         { get; }
         public int Bar() // Error [CS0102]
-//                 ^^^ Secondary
         {
             return 42;
         }
@@ -37,27 +28,23 @@ namespace Tests.Diagnostics
         public string Day { get; } // Compliant - method is private
         private string GetDay() { return ""; }
 
-        protected string Whatever // Noncompliant
-        { get; }
-
-        public string GetWhatever() // Secondary
+        public string GetWhatever() // FN
         {
             return "";
         }
 
-        public string SomeWeirdCase // Noncompliant
+        public string SomeWeirdCase // FN
         { get; }
 
-        public string SOMEWEIRDCASE() // Secondary
+        public string SOMEWEIRDCASE() // FN
         {
             return "";
         }
 
-        public override int MyProperty { get; set; } // Compliant - override
         public int GetMyProperty() => 42;
     }
 
-    public struct SomeStruct
+    public record struct PositionalRecordStruct
     {
         public int Foo // FN
         { get; set; }

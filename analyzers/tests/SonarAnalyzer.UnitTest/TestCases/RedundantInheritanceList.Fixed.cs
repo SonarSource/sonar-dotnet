@@ -145,4 +145,6 @@ namespace Tests.Diagnostics
     class X3 : X2, IMyInt // Compliant
     {
     }
+
+    struct RedunantInterfaceImpl : IA, IBase { } // FN
 }
