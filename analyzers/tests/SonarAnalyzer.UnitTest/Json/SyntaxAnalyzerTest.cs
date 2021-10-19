@@ -29,7 +29,7 @@ using SonarAnalyzer.Json.Parsing;
 namespace SonarAnalyzer.UnitTest.Common
 {
     [TestClass]
-    public class JsonSyntaxAnalyzerTest
+    public class SyntaxAnalyzerTest
     {
         [DataTestMethod]
         [DataRow("[null]", null)]
@@ -198,7 +198,7 @@ namespace SonarAnalyzer.UnitTest.Common
         public void Location_EndOfLines()
         {
             const string json = "[0,\n1,\r2,\r\n3,\u20284,\u20295]";
-            var sut = new SyntaxAnalyzer(json.Replace('\'', '"'));  // Avoid "" escaping to preserve correct indexes in this editor
+            var sut = new SyntaxAnalyzer(json);
             var root = sut.Parse();
             AssertLocation(() => root, 0, 0, 5, 2);
             AssertLocation(() => root[0], 0, 1, 0, 2);

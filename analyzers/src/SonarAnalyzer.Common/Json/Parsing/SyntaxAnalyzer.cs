@@ -18,6 +18,8 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using Microsoft.CodeAnalysis.Text;
+
 namespace SonarAnalyzer.Json.Parsing
 {
     internal class SyntaxAnalyzer
@@ -31,13 +33,13 @@ namespace SonarAnalyzer.Json.Parsing
         // ParseList -> ] | ParseValue ArrayRest
         // ArrayRest -> , ParseValue ] | ]
 
-        // ParseValue -> { ParseObject | [ ParseList | eSymbol.Value (tzn .Value je true | false | null | String | Number)
+        // ParseValue -> { ParseObject | [ ParseList | Symbol.Value (Where .Value is true | false | null | String | Number)
 
-        private readonly LexicalAnalyzer la;
+        private readonly LexicalAnalyzer lexer;
         private Symbol symbol;
 
         public SyntaxAnalyzer(string source) =>
-            la = new LexicalAnalyzer(source);
+            lexer = new LexicalAnalyzer(source);
 
         public JsonNode Parse() =>
             ReadNext() switch
@@ -48,11 +50,11 @@ namespace SonarAnalyzer.Json.Parsing
             };
 
         private Symbol ReadNext() =>
-            symbol = la.NextSymbol();
+            symbol = lexer.NextSymbol();
 
         private JsonNode ParseObject()
         {
-            var ret = new JsonNode(la.LastStart, Kind.Object);
+            var ret = new JsonNode(lexer.LastStart, Kind.Object);
             if (ReadNext() != Symbol.CloseCurlyBracket)  // Could be empty object {}
             {
                 ObjectKeyValue(ret);
@@ -62,13 +64,13 @@ namespace SonarAnalyzer.Json.Parsing
                     ObjectKeyValue(ret);
                 }
             }
-            ret.UpdateEnd(la.LastEnd);
+            ret.UpdateEnd(new LinePosition(lexer.LastStart.Line, lexer.LastStart.Character + 1)); // FIXME: Verify that Roslyn needs to be one character behind the end, otherwise, we may use LastStart
             return ret;
         }
 
         private void ObjectKeyValue(JsonNode target)
         {
-            if (symbol == Symbol.Value && la.Value is string key)
+            if (symbol == Symbol.Value && lexer.Value is string key)
             {
                 if (ReadNext() != Symbol.Colon)
                 {
@@ -85,7 +87,7 @@ namespace SonarAnalyzer.Json.Parsing
 
         private JsonNode ParseList()
         {
-            var ret = new JsonNode(la.LastStart, Kind.List);
+            var ret = new JsonNode(lexer.LastStart, Kind.List);
             if (ReadNext() != Symbol.CloseSquareBracket)    // Could be empty array []
             {
                 ret.Add(ParseValue());
@@ -99,7 +101,7 @@ namespace SonarAnalyzer.Json.Parsing
                     throw Unexpected("]");
                 }
             }
-            ret.UpdateEnd(la.LastEnd);
+            ret.UpdateEnd(new LinePosition(lexer.LastStart.Line, lexer.LastStart.Character + 1)); // FIXME: Verify that Roslyn needs to be one character behind the end, otherwise, we may use LastStart
             return ret;
         }
 
@@ -109,7 +111,7 @@ namespace SonarAnalyzer.Json.Parsing
             {
                 Symbol.OpenCurlyBracket => ParseObject(),
                 Symbol.OpenSquareBracket => ParseList(),
-                Symbol.Value => new JsonNode(la.LastStart, la.CurrentPosition(1), la.Value),
+                Symbol.Value => new JsonNode(lexer.LastStart, lexer.CurrentPosition(1), lexer.Value),
                 _ => throw Unexpected("{, [ or Value (true, false, null, String, Number)")
             };
 

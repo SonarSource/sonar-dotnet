@@ -31,13 +31,12 @@ namespace SonarAnalyzer.Json.Parsing
     {
         private readonly List<string> lines = new List<string>();
         private int line;
-        private int position = -1;
+        private int column = -1;
 
         public object Value { get; private set; }
         public LinePosition LastStart { get; private set; }
-        public LinePosition LastEnd { get; private set; }
-        private char CurrentChar => lines[line][position];
-        private bool CanReadCurrentChar => line < lines.Count - 1 || (line == lines.Count - 1 && position < lines[line].Length);
+        private char CurrentChar => lines[line][column];
+        private bool ReachedEndOfInput => line > lines.Count - 1 || (line == lines.Count - 1 && column >= lines[line].Length);
         private string AtLocationSuffix => $" at line {LastStart.Line + 1} position {LastStart.Character + 1}";
 
         public LexicalAnalyzer(string source)
@@ -61,19 +60,18 @@ namespace SonarAnalyzer.Json.Parsing
         }
 
         public LinePosition CurrentPosition(int increment) =>
-            new LinePosition(line, position + increment);
+            new LinePosition(line, column + increment);
 
         public Symbol NextSymbol()
         {
             Value = null;
             NextPosition(false);
             SkipWhiteSpace();               // FIXME: This should be SkipWhitespaceAndComments(), current implementation will throw on comments
-            if (!CanReadCurrentChar)
+            if (ReachedEndOfInput)
             {
-                return Symbol.EOI;
+                return Symbol.EndOfInput;
             }
             LastStart = CurrentPosition(0);
-            LastEnd = CurrentPosition(1);   // FIXME: Verify that Roslyn needs to be one character behind the end, otherwise, we don't need LastEnd and we don't need int increment in CurrentPosition
             switch (CurrentChar)
             {
                 case '{':
@@ -121,11 +119,11 @@ namespace SonarAnalyzer.Json.Parsing
             }
         }
 
-        private void NextPosition(bool checkEOI = true)
+        private void NextPosition(bool throwIfReachedEndOfInput = true)
         {
-            if (line < lines.Count && position < lines[line].Length - 1)
+            if (line < lines.Count && column < lines[line].Length - 1)
             {
-                position++;
+                column++;
             }
             else
             {
@@ -134,17 +132,17 @@ namespace SonarAnalyzer.Json.Parsing
                     line++;
                 }
                 while (line < lines.Count && lines[line].Length == 0);
-                position = 0;
-                if (checkEOI && !CanReadCurrentChar)
+                column = 0;
+                if (throwIfReachedEndOfInput && ReachedEndOfInput)
                 {
-                    throw new JsonException("Unexpected EOI" + AtLocationSuffix);
+                    throw new JsonException($"Unexpected EOI{AtLocationSuffix}");
                 }
             }
         }
 
         private void SkipWhiteSpace()
         {
-            while (CanReadCurrentChar && char.IsWhiteSpace(CurrentChar))
+            while (!ReachedEndOfInput && char.IsWhiteSpace(CurrentChar))
             {
                 NextPosition(false);
             }
@@ -154,12 +152,12 @@ namespace SonarAnalyzer.Json.Parsing
         {
             for (var i = 0; i < keyword.Length; i++)
             {
-                if (lines[line][position + i] != keyword[i])
+                if (lines[line][column + i] != keyword[i])
                 {
-                    throw new JsonException($"Unexpected character '{lines[line][position + i]}'{AtLocationSuffix}. Keyword '{keyword}' was expected.");
+                    throw new JsonException($"Unexpected character '{lines[line][column + i]}'{AtLocationSuffix}. Keyword '{keyword}' was expected.");
                 }
             }
-            position += keyword.Length - 1;
+            column += keyword.Length - 1;
         }
 
         private string ReadStringValue()
@@ -199,15 +197,15 @@ namespace SonarAnalyzer.Json.Parsing
                             sb.Append('\t');
                             break;
                         case 'u':
-                            if (position + UnicodeEscapeLength >= lines[line].Length)
+                            if (column + UnicodeEscapeLength >= lines[line].Length)
                             {
-                                throw new JsonException(@"Unexpected EOI, \uXXXX escape expected.");
+                                throw new JsonException($@"Unexpected EOI, \uXXXX escape expected{AtLocationSuffix}");
                             }
-                            sb.Append(char.ConvertFromUtf32(int.Parse(lines[line].Substring(position + 1, UnicodeEscapeLength), NumberStyles.HexNumber)));
-                            position += UnicodeEscapeLength;
+                            sb.Append(char.ConvertFromUtf32(int.Parse(lines[line].Substring(column + 1, UnicodeEscapeLength), NumberStyles.HexNumber)));
+                            column += UnicodeEscapeLength;
                             break;
                         default:
-                            throw new JsonException(@"Unexpected escape sequence \" + CurrentChar);
+                            throw new JsonException($@"Unexpected escape sequence \{CurrentChar}{AtLocationSuffix}");
                     }
                 }
                 else
@@ -225,7 +223,7 @@ namespace SonarAnalyzer.Json.Parsing
             StringBuilder exponent = null;
             var integer = new StringBuilder();
             var current = integer;
-            while (CanReadCurrentChar)
+            while (!ReachedEndOfInput)
             {
                 switch (CurrentChar)
                 {
@@ -236,7 +234,7 @@ namespace SonarAnalyzer.Json.Parsing
                         }
                         else
                         {
-                            throw new JsonException("Unexpected number format: Unexpected '-'" + AtLocationSuffix);
+                            throw new JsonException($"Unexpected number format: Unexpected '-'{AtLocationSuffix}");
                         }
                         break;
                     case '0':
@@ -259,13 +257,13 @@ namespace SonarAnalyzer.Json.Parsing
                         }
                         else
                         {
-                            throw new JsonException("Unexpected number format: Unexpected '.'" + AtLocationSuffix);
+                            throw new JsonException($"Unexpected number format: Unexpected '.'{AtLocationSuffix}");
                         }
                         break;
                     case '+':
                         if (current != exponent || current.Length != 0)
                         {
-                            throw new JsonException("Unexpected number format" + AtLocationSuffix);
+                            throw new JsonException($"Unexpected number format{AtLocationSuffix}");
                         }
                         break;
                     case 'e':
@@ -275,7 +273,7 @@ namespace SonarAnalyzer.Json.Parsing
                         break;
                     default:
                         // Remain on the last digit, position cannot be zero here, since we at least read one digit character
-                        position--;
+                        column--;
                         return BuildResult();
                 }
                 NextPosition(false);

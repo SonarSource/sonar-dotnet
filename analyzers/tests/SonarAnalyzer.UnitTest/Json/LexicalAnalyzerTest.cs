@@ -27,7 +27,7 @@ using SonarAnalyzer.Json.Parsing;
 namespace SonarAnalyzer.UnitTest.Common
 {
     [TestClass]
-    public class JsonLexicalAnalyzerTest
+    public class LexicalAnalyzerTest
     {
         [TestMethod]
         public void IgnoresWhiteSpace()
@@ -35,7 +35,7 @@ namespace SonarAnalyzer.UnitTest.Common
             var sut = new LexicalAnalyzer("   \t\n\r [ \n \r ] \r\n");
             sut.NextSymbol().Should().Be(Symbol.OpenSquareBracket);
             sut.NextSymbol().Should().Be(Symbol.CloseSquareBracket);
-            sut.NextSymbol().Should().Be(Symbol.EOI);
+            sut.NextSymbol().Should().Be(Symbol.EndOfInput);
         }
 
         [TestMethod]
@@ -54,7 +54,7 @@ namespace SonarAnalyzer.UnitTest.Common
             sut.NextSymbol().Should().Be(Symbol.CloseCurlyBracket);
             sut.NextSymbol().Should().Be(Symbol.Colon);
             sut.NextSymbol().Should().Be(Symbol.Colon);
-            sut.NextSymbol().Should().Be(Symbol.EOI);
+            sut.NextSymbol().Should().Be(Symbol.EndOfInput);
         }
 
         [DataTestMethod]
@@ -74,12 +74,13 @@ namespace SonarAnalyzer.UnitTest.Common
         [DataRow("8")]
         [DataRow("42")]
         [DataRow("42424242")]
+        [DataRow("1234567890")]
         public void ReadNumber_Integer(string source)
         {
             var sut = new LexicalAnalyzer(source);
             sut.NextSymbol().Should().Be(Symbol.Value);
             sut.Value.Should().BeOfType<int>().And.Be(int.Parse(source));
-            sut.NextSymbol().Should().Be(Symbol.EOI);
+            sut.NextSymbol().Should().Be(Symbol.EndOfInput);
         }
 
         [DataTestMethod]
@@ -93,7 +94,7 @@ namespace SonarAnalyzer.UnitTest.Common
             var sut = new LexicalAnalyzer(source);
             sut.NextSymbol().Should().Be(Symbol.Value);
             sut.Value.Should().BeOfType<decimal>().And.Be(expected);
-            sut.NextSymbol().Should().Be(Symbol.EOI);
+            sut.NextSymbol().Should().Be(Symbol.EndOfInput);
         }
 
         [DataTestMethod]
@@ -105,7 +106,7 @@ namespace SonarAnalyzer.UnitTest.Common
         [DataRow("42e1", 420.0)]
         [DataRow("42e+1", 420.0)]
         [DataRow("42E+1", 420.0)]
-        [DataRow("8e8", 800000000)]
+        [DataRow("8e8", 800_000_000)]
         [DataRow("-42e1", -420.0)]
         [DataRow("-42e-1", -4.2)]
         [DataRow("-42e+1", -420.0)]
@@ -116,7 +117,7 @@ namespace SonarAnalyzer.UnitTest.Common
             var sut = new LexicalAnalyzer(source);
             sut.NextSymbol().Should().Be(Symbol.Value);
             sut.Value.Should().BeOfType<double>().And.Be(expected);
-            sut.NextSymbol().Should().Be(Symbol.EOI);
+            sut.NextSymbol().Should().Be(Symbol.EndOfInput);
         }
 
         [DataTestMethod]
@@ -132,7 +133,7 @@ namespace SonarAnalyzer.UnitTest.Common
             var sut = new LexicalAnalyzer(source);
             sut.NextSymbol().Should().Be(Symbol.Value);
             sut.Value.Should().BeOfType<string>().And.Be(expected);
-            sut.NextSymbol().Should().Be(Symbol.EOI);
+            sut.NextSymbol().Should().Be(Symbol.EndOfInput);
         }
 
         [DataTestMethod]
@@ -144,15 +145,16 @@ namespace SonarAnalyzer.UnitTest.Common
             var sut = new LexicalAnalyzer(source);
             sut.NextSymbol().Should().Be(Symbol.Value);
             sut.Value.Should().Be(expected);
-            sut.NextSymbol().Should().Be(Symbol.EOI);
+            sut.NextSymbol().Should().Be(Symbol.EndOfInput);
         }
 
         [DataTestMethod]
         [DataRow(".", "Unexpected character '.' at line 1 position 1")]
         [DataRow("tx", "Unexpected character 'x' at line 1 position 1. Keyword 'true' was expected.")]
-        [DataRow(@"""\u", @"Unexpected EOI, \uXXXX escape expected.")]
-        [DataRow(@"""\u12", @"Unexpected EOI, \uXXXX escape expected.")]
-        [DataRow(@"""\x", @"Unexpected escape sequence \x")]
+        [DataRow(@"""\u", @"Unexpected EOI, \uXXXX escape expected at line 1 position 1")]
+        [DataRow(@"""\u12", @"Unexpected EOI, \uXXXX escape expected at line 1 position 1")]
+        [DataRow(@"""\u12345", @"Unexpected EOI at line 1 position 1")]
+        [DataRow(@"""\x", @"Unexpected escape sequence \x at line 1 position 1")]
         [DataRow(@"""\", @"Unexpected EOI at line 1 position 1")]
         [DataRow("0-", "Unexpected number format: Unexpected '-' at line 1 position 1")]
         [DataRow("-.", "Unexpected number format: Unexpected '.' at line 1 position 1")]

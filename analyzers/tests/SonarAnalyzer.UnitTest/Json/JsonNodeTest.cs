@@ -50,6 +50,15 @@ namespace SonarAnalyzer.UnitTest.Common
         }
 
         [TestMethod]
+        public void UnsupportedKinds()
+        {
+            Action action = () => new JsonNode(LinePosition.Zero, Kind.Value);
+            action.Invoking(_ => action.Invoke()).Should().Throw<InvalidOperationException>();
+            action = () => new JsonNode(LinePosition.Zero, Kind.Unknown);
+            action.Invoking(_ => action.Invoke()).Should().Throw<InvalidOperationException>();
+        }
+
+        [TestMethod]
         public void BehavesAsList()
         {
             var a = new JsonNode(LinePosition.Zero, LinePosition.Zero, "a");
@@ -112,6 +121,7 @@ namespace SonarAnalyzer.UnitTest.Common
             sut.Invoking(x => x.UpdateEnd(end)).Should().Throw<InvalidOperationException>();
         }
 
+        // Light-weight way to test that string could be parsed. Precise tests could be found in JsonSyntaxAnalyzerTest.cs
         [TestMethod]
         public void ParsedFromString()
         {

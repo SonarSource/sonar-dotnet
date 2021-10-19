@@ -22,22 +22,9 @@ namespace SonarAnalyzer.Json.Parsing
 {
     public enum Kind
     {
+        Unknown,
         Object,
         List,
         Value
-    }
-
-    internal enum Symbol
-    {
-        EOI,
-        // Special
-        OpenCurlyBracket,
-        CloseCurlyBracket,
-        OpenSquareBracket,
-        CloseSquareBracket,
-        Comma,
-        Colon,
-        // Terms
-        Value   // String, Number (Integer, Decimal, Double), Null, True, False
     }
 }

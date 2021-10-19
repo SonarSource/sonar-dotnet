@@ -76,7 +76,7 @@ namespace SonarAnalyzer.Json
             new SyntaxAnalyzer(json).Parse();
 
         public void UpdateEnd(LinePosition end) =>
-            End = End == LinePosition.Zero
+            End = NotInitializedEnd()
                 ? end
                 : throw new InvalidOperationException("End position is already set");
 
@@ -105,6 +105,9 @@ namespace SonarAnalyzer.Json
             GetEnumerator();
 
         private InvalidOperationException InvalidKind() =>
-            new InvalidOperationException("Operation is not valid. Json kind is " + Kind);
+            new InvalidOperationException($"Operation is not valid. Json kind is {Kind}");
+
+        private bool NotInitializedEnd() =>
+            End == LinePosition.Zero;
     }
 }
