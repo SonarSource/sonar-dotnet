@@ -41,6 +41,12 @@ namespace Tests.Diagnostics
         public static explicit operator Noncompliant(byte b) => new Noncompliant(b); // Compliant: user defined operators need to be public
     }
 
+    internal record NoncompliantPositionalRecord(string Property) // Noncompliant {{Types should not have members with visibility set higher than the type's visibility}}
+    {
+        public static decimal A = 3.14m;
+//      ^^^^^^ Secondary
+    }
+
     internal class Class // Noncompliant
     {
         public record MyRecord { }

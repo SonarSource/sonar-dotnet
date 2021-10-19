@@ -36,6 +36,10 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         public void StringLiteralShouldNotBeDuplicated_CSharp9() =>
             Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\StringLiteralShouldNotBeDuplicated.CSharp9.cs", new CS.StringLiteralShouldNotBeDuplicated());
+
+        [TestMethod]
+        public void StringLiteralShouldNotBeDuplicated_CSharp10() =>
+            Verifier.VerifyAnalyzerFromCSharp10Console(@"TestCases\StringLiteralShouldNotBeDuplicated.CSharp10.cs", new CS.StringLiteralShouldNotBeDuplicated());
 #endif
 
         [TestMethod]

@@ -62,4 +62,12 @@ namespace Tests.TestCases
 
         private static void InitColumns() { }
     }
+
+    struct StaticFieldInGenericStruct<T, U>
+    where T : class
+    {
+        private static Dictionary<string, T[]> Dict2;
+
+        public static string sProp1 { get; set; } // FN
+    }
 }
