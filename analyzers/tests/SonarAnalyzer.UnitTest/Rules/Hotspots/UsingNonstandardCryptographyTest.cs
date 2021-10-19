@@ -36,6 +36,20 @@ namespace SonarAnalyzer.UnitTest.Rules
                                     new CS.UsingNonstandardCryptography(AnalyzerConfiguration.AlwaysEnabled),
                                     MetadataReferenceFacade.SystemSecurityCryptography);
 
+#if NET
+        [TestMethod]
+        public void UsingNonstandardCryptography_CSharp9() =>
+            Verifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\Hotspots\UsingNonstandardCryptography.CSharp9.cs",
+                                                      new CS.UsingNonstandardCryptography(AnalyzerConfiguration.AlwaysEnabled),
+                                                      MetadataReferenceFacade.SystemSecurityCryptography);
+
+        [TestMethod]
+        public void UsingNonstandardCryptography_CSharp10() =>
+            Verifier.VerifyAnalyzerFromCSharp10Library(@"TestCases\Hotspots\UsingNonstandardCryptography.CSharp10.cs",
+                                                       new CS.UsingNonstandardCryptography(AnalyzerConfiguration.AlwaysEnabled),
+                                                       MetadataReferenceFacade.SystemSecurityCryptography);
+#endif
+
         [TestMethod]
         public void UsingNonstandardCryptography_VB() =>
             Verifier.VerifyAnalyzer(@"TestCases\Hotspots\UsingNonstandardCryptography.vb",

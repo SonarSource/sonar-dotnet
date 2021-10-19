@@ -38,6 +38,10 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         public void InsecureDeserialization_CSharp9() =>
             Verifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\Hotspots\InsecureDeserialization.CSharp9.cs", new InsecureDeserialization(AnalyzerConfiguration.AlwaysEnabled));
+
+        [TestMethod]
+        public void InsecureDeserialization_CSharp10() =>
+            Verifier.VerifyAnalyzerFromCSharp10Library(@"TestCases\Hotspots\InsecureDeserialization.CSharp10.cs", new InsecureDeserialization(AnalyzerConfiguration.AlwaysEnabled));
 #endif
     }
 }
