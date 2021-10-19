@@ -71,9 +71,5 @@ namespace SonarAnalyzer.Rules
 
         private static bool IsEnum(SemanticModel semanticModel, SyntaxNode node) =>
             semanticModel.GetSymbolInfo(node).Symbol.GetSymbolType() is INamedTypeSymbol {EnumUnderlyingType: { }};
-
-        private static bool IsFieldOrProperty(SemanticModel semanticModel, SyntaxNode node) =>
-            semanticModel.GetSymbolInfo(node).Symbol?.Kind is { } kind
-            && (kind == SymbolKind.Field || kind == SymbolKind.Property);
     }
 }
