@@ -72,3 +72,18 @@ public record SamplePositional(string Value)
         Console.WriteLine("Result: {0}", s);
     }
 }
+
+interface SomeInterface
+{
+    void Foo1() // FN
+    {
+        string s = "test";
+        Console.WriteLine("Result: {0}", s);
+    }
+
+    void Foo2() // FN
+    {
+        string s = "test";
+        Console.WriteLine("Result: {0}", s);
+    }
+}

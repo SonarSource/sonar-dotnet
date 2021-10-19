@@ -170,4 +170,19 @@ namespace Tests.Diagnostics
             return x.ToString();
         }
     }
+
+    struct SomeStruct
+    {
+        void Foo1() // FN
+        {
+            string s = "test";
+            Console.WriteLine("Result: {0}", s);
+        }
+
+        void Foo2() // FN
+        {
+            string s = "test";
+            Console.WriteLine("Result: {0}", s);
+        }
+    }
 }

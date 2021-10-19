@@ -33,5 +33,19 @@ namespace SonarAnalyzer.UnitTest.Rules
             Verifier.VerifyAnalyzer(@"TestCases\MutableFieldsShouldNotBePublicReadonly.cs",
                                     new MutableFieldsShouldNotBePublicReadonly(),
                                     NuGetMetadataReference.SystemCollectionsImmutable("1.3.0"));
+
+#if NET
+        [TestMethod]
+        public void PublicMutableFieldsShouldNotBeReadonly_CSharp9() =>
+            Verifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\MutableFieldsShouldNotBePublicReadonly.CSharp9.cs",
+                                                      new MutableFieldsShouldNotBePublicReadonly(),
+                                                      NuGetMetadataReference.SystemCollectionsImmutable("1.3.0"));
+
+        [TestMethod]
+        public void PublicMutableFieldsShouldNotBeReadonly_CSharp10() =>
+            Verifier.VerifyAnalyzerFromCSharp10Library(new[] { @"TestCases\MutableFieldsShouldNotBePublicReadonly.CSharp10.cs" },
+                                                       new MutableFieldsShouldNotBePublicReadonly(),
+                                                       NuGetMetadataReference.SystemCollectionsImmutable("1.3.0"));
+#endif
     }
 }

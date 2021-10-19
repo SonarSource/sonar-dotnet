@@ -37,6 +37,10 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         public void GenericTypeParameterUnused_CSharp9() =>
             Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\GenericTypeParameterUnused.CSharp9.cs", new GenericTypeParameterUnused());
+
+        [TestMethod]
+        public void GenericTypeParameterUnused_CSharp10() =>
+            Verifier.VerifyAnalyzerFromCSharp10Library(@"TestCases\GenericTypeParameterUnused.CSharp10.cs", new GenericTypeParameterUnused());
 #endif
     }
 }
