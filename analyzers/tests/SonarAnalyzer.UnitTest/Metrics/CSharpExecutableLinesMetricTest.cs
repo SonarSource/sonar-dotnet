@@ -408,6 +408,20 @@ namespace SonarAnalyzer.UnitTest.Common
                 }");
 
         [TestMethod]
+        public void ExcludeRecordStructFromTestCoverage() =>
+            AssertLinesOfCode(
+              @"
+                using System;
+                [ExcludeFromCodeCoverage]
+                record struct Program
+                {
+                    static void Main(string[] args)
+                    {
+                        Main(null);
+                    }
+                }", 8); // Not correct should be 0
+
+        [TestMethod]
         public void ExcludeStructFromTestCoverage() =>
             AssertLinesOfCode(
               @"namespace project_1

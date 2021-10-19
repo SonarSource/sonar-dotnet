@@ -195,6 +195,8 @@ End Class").Should().BeEquivalentTo(1, 2, 3, 4, 5, 6, 7, 8);
             Classes(AnalyzerLanguage.CSharp, "interface IMyInterface {}").Should().Be(1);
             Classes(AnalyzerLanguage.CSharp, "record MyRecord {}").Should().Be(1);
             Classes(AnalyzerLanguage.CSharp, "record MyPositionalRecord(int Prop) {}").Should().Be(1);
+            Classes(AnalyzerLanguage.CSharp, "record struct MyRecordStruct {}").Should().Be(0); // Should be 1
+            Classes(AnalyzerLanguage.CSharp, "record struct MyPositionalRecordStruct(int Prop) {}").Should().Be(0); // Should be 1
             Classes(AnalyzerLanguage.CSharp, "struct MyClass {}").Should().Be(1);
             Classes(AnalyzerLanguage.CSharp, "enum MyEnum {}").Should().Be(0);
             Classes(AnalyzerLanguage.CSharp, "class MyClass1 {} namespace MyNamespace { class MyClass2 {} }").Should().Be(2);
