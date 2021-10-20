@@ -28,6 +28,12 @@ void DoStuffWithIntsAgain()
     (x, int y) = ReturnIntTuple();
 }
 
+void DoSimplerStuffWithIntsAgain()
+{
+    int x; // Compliant
+    (x, var y) = (1, 2); // Compliant
+}
+
 Action<int, int, int> StaticLambda() =>
     static (int a, int _, int _) =>
     {
