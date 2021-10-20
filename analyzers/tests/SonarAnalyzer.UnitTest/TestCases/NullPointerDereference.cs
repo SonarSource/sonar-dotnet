@@ -1028,7 +1028,7 @@ namespace Repro_3395
                     continue;
                 }
 
-                var _ = providerCourse.Items.Where(items => items == "item1"); // Noncompliant
+                var _ = providerCourse.Items.Where(items => items == "item1"); // Noncompliant FP
             }
         }
 
