@@ -30,5 +30,11 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         public void RequireAttributeUsageAttribute() =>
             Verifier.VerifyAnalyzer(@"TestCases\RequireAttributeUsageAttribute.cs", new RequireAttributeUsageAttribute());
+
+#if NET
+        [TestMethod]
+        public void RequireAttributeUsageAttribute_CSharp10() =>
+            Verifier.VerifyAnalyzerFromCSharp10Library(@"TestCases\RequireAttributeUsageAttribute.CSharp10.cs", new RequireAttributeUsageAttribute());
+#endif
     }
 }
