@@ -33,7 +33,7 @@ namespace SonarAnalyzer.Rules.CSharp
     [Rule(DiagnosticId)]
     public sealed class ExtensionMethodShouldNotExtendObject : SonarDiagnosticAnalyzer
     {
-        internal const string DiagnosticId = "S4225";
+        private const string DiagnosticId = "S4225";
         private const string MessageFormat = "Refactor this extension to extend a more concrete type.";
 
         private static readonly DiagnosticDescriptor Rule =

@@ -33,7 +33,7 @@ namespace SonarAnalyzer.Rules.CSharp
     [Rule(DiagnosticId)]
     public sealed class ExtensionMethodShouldBeInSeparateNamespace : SonarDiagnosticAnalyzer
     {
-        internal const string DiagnosticId = "S4226";
+        private const string DiagnosticId = "S4226";
         private const string MessageFormat = "Either move this extension to another namespace or move the method " +
             "inside the class itself.";
 
