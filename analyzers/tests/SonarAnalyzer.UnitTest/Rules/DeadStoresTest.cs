@@ -55,6 +55,10 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         public void DeadStores_CSharp9() =>
             Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\DeadStores.CSharp9.cs", new DeadStores());
+
+        [TestMethod]
+        public void DeadStores_CSharp10() =>
+            Verifier.VerifyAnalyzerFromCSharp10Console(@"TestCases\DeadStores.CSharp10.cs", new DeadStores());
 #endif
     }
 }
