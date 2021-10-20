@@ -128,7 +128,7 @@ namespace SonarAnalyzer.UnitTest.Rules
             var versionMessage = messages.SingleOrDefault(x => x.Text.Contains("Language version"));
             versionMessage.Should().NotBeNull();
             versionMessage.Severity.Should().Be(LogSeverity.Info);
-            versionMessage.Text.Should().MatchRegex(@"^Language version: (CSharp|VisualBasic)\d");
+            versionMessage.Text.Should().MatchRegex(@"^Language version: (Preview|(CSharp|VisualBasic)\d+)");
         }
 
         private static void VerifyConcurrentExecution(IEnumerable<LogInfo> messages, string expectedConcurrencyMessage)
