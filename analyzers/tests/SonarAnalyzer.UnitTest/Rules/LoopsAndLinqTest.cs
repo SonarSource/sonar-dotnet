@@ -20,6 +20,7 @@
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.Rules.CSharp;
+using SonarAnalyzer.UnitTest.MetadataReferences;
 using SonarAnalyzer.UnitTest.TestFramework;
 
 namespace SonarAnalyzer.UnitTest.Rules
@@ -30,7 +31,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void LoopsAndLinq_CS() =>
-            Verifier.VerifyAnalyzer(@"TestCases\LoopsAndLinq.cs", new LoopsAndLinq());
+            Verifier.VerifyAnalyzer(@"TestCases\LoopsAndLinq.cs", new LoopsAndLinq(), MetadataReferenceFacade.SystemData);
 
         [TestMethod]
         [TestCategory("Rule")]
