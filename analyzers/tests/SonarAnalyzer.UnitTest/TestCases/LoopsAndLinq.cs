@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 
@@ -277,6 +278,18 @@ namespace Tests.Diagnostics
             foreach (var someValue in collection2.Select(x => x.Property).Where(y => y != null))
             {
                 result.Add(someValue);
+            }
+        }
+
+        public void M(DataTable rawSheetData)
+        {
+            var row = rawSheetData.Rows[0];
+            var data = new Dictionary<string, string>();
+            foreach (DataColumn column in rawSheetData.Columns) // Noncompliant - FP DataColumnCollection does not implement IEnumerable<T>
+                                                                // See https://github.com/SonarSource/sonar-dotnet/issues/4996
+            {
+                var datum = Convert.ToString(row[column.ColumnName]);
+                data.Add(column.ColumnName, datum);
             }
         }
 
