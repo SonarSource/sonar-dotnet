@@ -37,15 +37,16 @@ namespace SonarAnalyzer.UnitTest.Rules
             Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\RedundantParenthesesObjectCreation.CSharp9.cs", new RedundantParenthesesObjectsCreation());
 
         [TestMethod]
-        public void RedundantParenthesesObjectCreation_CSharp10() =>
-            Verifier.VerifyAnalyzerFromCSharp10Library(@"TestCases\RedundantParenthesesObjectCreation.CSharp10.cs", new RedundantParenthesesObjectsCreation());
+        public void RedundantParenthesesObjectCreation_CSharpPreview() =>
+            Verifier.VerifyAnalyzerCSharpPreviewLibrary(@"TestCases\RedundantParenthesesObjectCreation.CSharp.Preview.cs", new RedundantParenthesesObjectsCreation());
 #endif
 
         [TestMethod]
         public void RedundantParenthesesObjectCreation_CodeFix() =>
-            Verifier.VerifyCodeFix(@"TestCases\RedundantParenthesesObjectCreation.cs",
-                                   @"TestCases\RedundantParenthesesObjectCreation.Fixed.cs",
-                                   new RedundantParenthesesObjectsCreation(),
-                                   new RedundantParenthesesCodeFixProvider());
+            Verifier.VerifyCodeFix(
+                @"TestCases\RedundantParenthesesObjectCreation.cs",
+                @"TestCases\RedundantParenthesesObjectCreation.Fixed.cs",
+                new RedundantParenthesesObjectsCreation(),
+                new RedundantParenthesesCodeFixProvider());
     }
 }

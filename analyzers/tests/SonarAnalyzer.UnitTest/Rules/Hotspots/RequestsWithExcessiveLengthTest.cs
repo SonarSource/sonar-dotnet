@@ -57,22 +57,24 @@ namespace SonarAnalyzer.UnitTest.Rules
                 GetAdditionalReferences());
 
         [TestMethod]
-        public void RequestsWithExcessiveLength_Csharp10() =>
-            Verifier.VerifyAnalyzerFromCSharp10Library(
-                @"TestCases\Hotspots\RequestsWithExcessiveLength.CSharp10.cs",
+        public void RequestsWithExcessiveLength_CsharpPreview() =>
+            Verifier.VerifyAnalyzerCSharpPreviewLibrary(
+                @"TestCases\Hotspots\RequestsWithExcessiveLength.CSharp.Preview.cs",
                 new CS.RequestsWithExcessiveLength(AnalyzerConfiguration.AlwaysEnabled),
                 GetAdditionalReferences());
 #endif
 
         [TestMethod]
         public void RequestsWithExcessiveLength_VB() =>
-            Verifier.VerifyAnalyzer(@"TestCases\Hotspots\RequestsWithExcessiveLength.vb",
+            Verifier.VerifyAnalyzer(
+                @"TestCases\Hotspots\RequestsWithExcessiveLength.vb",
                 new VB.RequestsWithExcessiveLength(AnalyzerConfiguration.AlwaysEnabled),
                 GetAdditionalReferences());
 
         [TestMethod]
         public void RequestsWithExcessiveLength_VB_CustomValues() =>
-            Verifier.VerifyAnalyzer(@"TestCases\Hotspots\RequestsWithExcessiveLength_CustomValues.vb",
+            Verifier.VerifyAnalyzer(
+                @"TestCases\Hotspots\RequestsWithExcessiveLength_CustomValues.vb",
                 new VB.RequestsWithExcessiveLength(AnalyzerConfiguration.AlwaysEnabled) { FileUploadSizeLimit = 42 },
                 GetAdditionalReferences());
 

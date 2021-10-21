@@ -38,24 +38,27 @@ namespace SonarAnalyzer.UnitTest.Rules
             Verifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\AsyncVoidMethod.CSharp9.cs", new AsyncVoidMethod());
 
         [TestMethod]
-        public void AsyncVoidMethod_CSharp10() =>
-            Verifier.VerifyAnalyzerFromCSharp10Library(@"TestCases\AsyncVoidMethod.CSharp10.cs",
-                                                       new AsyncVoidMethod(),
-                                                       NuGetMetadataReference.MicrosoftVisualStudioQualityToolsUnitTestFramework);
+        public void AsyncVoidMethod_CSharpPreview() =>
+            Verifier.VerifyAnalyzerCSharpPreviewLibrary(
+                @"TestCases\AsyncVoidMethod.CSharp.Preview.cs",
+                new AsyncVoidMethod(),
+                NuGetMetadataReference.MicrosoftVisualStudioQualityToolsUnitTestFramework);
 #endif
 
         [DataTestMethod]
         [DataRow("1.1.11")]
         [DataRow(Constants.NuGetLatestVersion)]
         public void AsyncVoidMethod_MsTestV2(string testFwkVersion) =>
-            Verifier.VerifyAnalyzer(@"TestCases\AsyncVoidMethod_MsTestV2.cs",
-                                    new AsyncVoidMethod(),
-                                    NuGetMetadataReference.MSTestTestFramework(testFwkVersion));
+            Verifier.VerifyAnalyzer(
+                @"TestCases\AsyncVoidMethod_MsTestV2.cs",
+                new AsyncVoidMethod(),
+                NuGetMetadataReference.MSTestTestFramework(testFwkVersion));
 
         [TestMethod]
         public void AsyncVoidMethod_MsTestV1() =>
-            Verifier.VerifyAnalyzer(@"TestCases\AsyncVoidMethod_MsTestV1.cs",
-                                    new AsyncVoidMethod(),
-                                    NuGetMetadataReference.MicrosoftVisualStudioQualityToolsUnitTestFramework);
+            Verifier.VerifyAnalyzer(
+                @"TestCases\AsyncVoidMethod_MsTestV1.cs",
+                new AsyncVoidMethod(),
+                NuGetMetadataReference.MicrosoftVisualStudioQualityToolsUnitTestFramework);
     }
 }
