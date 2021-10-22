@@ -9,6 +9,7 @@ namespace SonarAnalyzer.UnitTest.TestCases;
 struct MyStruct
 {
     public bool x;
+    public bool y = false;
 
     public MyStruct()
     {
@@ -22,5 +23,6 @@ class AClass
     {
         MyStruct myStruct = new();
         if (myStruct.x) { } // FN
+        else if (myStruct.y) { } // FN
     }
 }
