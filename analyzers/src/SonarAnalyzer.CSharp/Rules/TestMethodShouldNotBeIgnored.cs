@@ -34,13 +34,11 @@ namespace SonarAnalyzer.Rules.CSharp
     [Rule(DiagnosticId)]
     public sealed class TestMethodShouldNotBeIgnored : SonarDiagnosticAnalyzer
     {
-        internal const string DiagnosticId = "S1607";
-        private const string MessageFormat = "Either remove this 'Ignore' attribute or add an explanation about why " +
-            "this test is ignored.";
+        private const string DiagnosticId = "S1607";
+        private const string MessageFormat = "Either remove this 'Ignore' attribute or add an explanation about why this test is ignored.";
 
-        private static readonly DiagnosticDescriptor rule =
-            DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(rule);
+        private static readonly DiagnosticDescriptor Rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
 
         private static readonly ImmutableArray<KnownType> TrackedTestIdentifierAttributes =
             // xUnit has it's own "ignore" mechanism (by providing a (Skip = "reason") string in
@@ -50,15 +48,14 @@ namespace SonarAnalyzer.Rules.CSharp
             .Concat(UnitTestHelper.KnownTestMethodAttributesOfNUnit)
             .ToImmutableArray();
 
-        protected override void Initialize(SonarAnalysisContext context)
-        {
+        protected override void Initialize(SonarAnalysisContext context) =>
             context.RegisterSyntaxNodeActionInNonGenerated(
                 c =>
                 {
                     var attribute = (AttributeSyntax)c.Node;
-                    if (HasReasonPhrase(attribute) ||
-                        HasTrailingComment(attribute) ||
-                        !IsKnownIgnoreAttribute(attribute, c.SemanticModel))
+                    if (HasReasonPhrase(attribute)
+                        || HasTrailingComment(attribute)
+                        || !IsKnownIgnoreAttribute(attribute, c.SemanticModel))
                     {
                         return;
                     }
@@ -71,16 +68,15 @@ namespace SonarAnalyzer.Rules.CSharp
 
                     var attributes = GetAllAttributes(attributeTarget, c.SemanticModel);
 
-                    if (attributes.Any(IsTestOrTestClassAttribute) &&
-                        !attributes.Any(IsWorkItemAttribute))
+                    if (attributes.Any(IsTestOrTestClassAttribute)
+                        && !attributes.Any(IsWorkItemAttribute))
                     {
-                        c.ReportIssue(Diagnostic.Create(rule, attribute.GetLocation()));
+                        c.ReportIssue(Diagnostic.Create(Rule, attribute.GetLocation()));
                     }
                 },
                 SyntaxKind.Attribute);
-        }
 
-        private IEnumerable<AttributeData> GetAllAttributes(SyntaxNode syntaxNode, SemanticModel semanticModel)
+        private static IEnumerable<AttributeData> GetAllAttributes(SyntaxNode syntaxNode, SemanticModel semanticModel)
         {
             var testMethodOrClass = semanticModel.GetDeclaredSymbol(syntaxNode);
 
@@ -89,12 +85,13 @@ namespace SonarAnalyzer.Rules.CSharp
                 : testMethodOrClass.GetAttributes();
         }
 
-        private bool HasReasonPhrase(AttributeSyntax ignoreAttributeSyntax) =>
+        private static bool HasReasonPhrase(AttributeSyntax ignoreAttributeSyntax) =>
             ignoreAttributeSyntax.ArgumentList?.Arguments.Count > 0; // Any ctor argument counts are reason phrase
 
         private static bool HasTrailingComment(SyntaxNode ignoreAttributeSyntax) =>
-            ignoreAttributeSyntax.Parent.GetTrailingTrivia()
-                .Any(SyntaxKind.SingleLineCommentTrivia);
+            ignoreAttributeSyntax.Parent
+                                 .GetTrailingTrivia()
+                                 .Any(SyntaxKind.SingleLineCommentTrivia);
 
         private static bool IsWorkItemAttribute(AttributeData a) =>
             a.AttributeClass.Is(KnownType.Microsoft_VisualStudio_TestTools_UnitTesting_WorkItemAttribute);
@@ -105,9 +102,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
             var attributeConstructor = symbolInfo.Symbol ?? symbolInfo.CandidateSymbols.FirstOrDefault();
 
-            return attributeConstructor != null
-                && (attributeConstructor.ContainingType
-                        .IsAny(UnitTestHelper.KnownIgnoreAttributes));
+            return attributeConstructor != null && attributeConstructor.ContainingType.IsAny(UnitTestHelper.KnownIgnoreAttributes);
         }
 
         private static bool IsTestOrTestClassAttribute(AttributeData a) =>
