@@ -44,6 +44,13 @@ namespace SonarAnalyzer.UnitTest.Rules
                 AdditionalReferences);
 
         [TestMethod]
+        public void PermissiveCors_CSharp10() =>
+            Verifier.VerifyAnalyzerFromCSharp10Library(
+                @"TestCases\Hotspots\PermissiveCors.CSharp10.cs",
+                new PermissiveCors(AnalyzerConfiguration.AlwaysEnabled),
+                AdditionalReferences);
+
+        [TestMethod]
         public void PermissiveCors_CSharpPreview() =>
             Verifier.VerifyAnalyzerCSharpPreviewLibrary(
                 @"TestCases\Hotspots\PermissiveCors.CSharp.Preview.cs",

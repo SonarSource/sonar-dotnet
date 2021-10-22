@@ -7,23 +7,23 @@ namespace Net6Poc.PermissiveCors
 {
     internal class TestCases
     {
-        public void Bar(IEnumerable<int> collection)
-        {
-            [EnableCors()] int Get() => 1; // Compliant - we don't know what default policy is
+        [GenericAttribute<int>("*")] // Compliant - "*" is the policy name in this case
+        public void A() { }
 
-            _ = collection.Select([EnableCors("policyName")] (x) => x + 1);
+        [GenericAttribute<int>]
+        public void B() { }
 
-            Action a = [EnableCors("*")] () => { }; // Compliant - `*`, in this case, is the name of the policy
+        [EnableCors()]
+        public void C() { }
 
-            Action x = true
-                           ? ([EnableCors] () => { })
-                           :[GenericAttribute<int>] () => { };
-
-            Call([EnableCors] (x) => { });
-        }
-
-        private void Call(Action<int> action) => action(1);
+        [EnableCors("*")]
+        public void D() { }
     }
 
-    public class GenericAttribute<T> : Attribute { }
+    public class GenericAttribute<T> : EnableCorsAttribute
+    {
+        public GenericAttribute() : base() { }
+
+        public GenericAttribute(string policyName) : base(policyName) { }
+    }
 }

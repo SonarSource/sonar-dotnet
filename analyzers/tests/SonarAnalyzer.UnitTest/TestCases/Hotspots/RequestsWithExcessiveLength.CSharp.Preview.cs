@@ -3,28 +3,18 @@ using System.Collections.Generic;
 using System.Linq;
 using Microsoft.AspNetCore.Mvc;
 
-namespace Net6Poc.RequestsWithExcessiveLength
-{
+namespace Net6Poc.RequestsWithExcessiveLength.GenericAttributes;
+
 internal class TestCases
 {
-    public void Bar(IEnumerable<int> collection)
-    {
-        [RequestSizeLimit(8_000_001)] int Get() => 1; // Noncompliant [flow1] - FP not a security problem since the local methods and lambdas are not reachable
-        [RequestSizeLimit(1)] int GetSmall() => 1;
+    [RequestSizeLimit(8_000_001)] // Noncompliant
+    public void Foo() { }
 
-        _ = collection.Select([DisableRequestSizeLimitAttribute()] (x) => x + 1); // Noncompliant [flow2] - FP
+    [GenericAttribute<int>(8_000_001)]
+    public void Bar() { }
+}
 
-        Action a = [RequestSizeLimit(8_000_001)] () => { }; // Secondary [flow3]
-
-        Action x = true
-                       ? ([RequestFormLimits(MultipartBodyLengthLimit = 8_000_001)] () => { })
-                       :[GenericAttribute<int>] () => { };
-
-        Call([RequestFormLimits(MultipartBodyLengthLimit = 8_000_001)] (x) => { }); // Noncompliant [flow3] {{Make sure the content length limit is safe here.}} - FP
-    }
-
-        private void Call(Action<int> action) => action(1);
-    }
-
-    public class GenericAttribute<T> : Attribute { }
+public class GenericAttribute<T> : RequestSizeLimitAttribute
+{
+    public GenericAttribute(long bytes) : base(bytes) { }
 }

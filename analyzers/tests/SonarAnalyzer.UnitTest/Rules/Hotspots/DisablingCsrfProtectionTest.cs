@@ -41,6 +41,13 @@ namespace SonarAnalyzer.UnitTest.Rules
                 AdditionalReferences());
 
         [TestMethod]
+        public void DisablingCSRFProtection_CSharp10() =>
+            Verifier.VerifyAnalyzerFromCSharp10Library(
+                @"TestCases\Hotspots\DisablingCSRFProtection.CSharp10.cs",
+                new DisablingCsrfProtection(AnalyzerConfiguration.AlwaysEnabled),
+                AdditionalReferences());
+
+        [TestMethod]
         public void DisablingCSRFProtection_CSharpPreview() =>
             Verifier.VerifyAnalyzerCSharpPreviewLibrary(
                 @"TestCases\Hotspots\DisablingCSRFProtection.CSharp.Preview.cs",

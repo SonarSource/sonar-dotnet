@@ -38,11 +38,21 @@ namespace SonarAnalyzer.UnitTest.Rules
             Verifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\AsyncVoidMethod.CSharp9.cs", new AsyncVoidMethod());
 
         [TestMethod]
-        public void AsyncVoidMethod_CSharpPreview() =>
-            Verifier.VerifyAnalyzerCSharpPreviewLibrary(
-                @"TestCases\AsyncVoidMethod.CSharp.Preview.cs",
+        public void AsyncVoidMethod_CSharp10() =>
+            Verifier.VerifyAnalyzerFromCSharp10Library(
+                @"TestCases\AsyncVoidMethod.CSharp10.cs",
                 new AsyncVoidMethod(),
                 NuGetMetadataReference.MicrosoftVisualStudioQualityToolsUnitTestFramework);
+
+        [DataTestMethod]
+        [DataRow("1.1.11")]
+        [DataRow(Constants.NuGetLatestVersion)]
+        public void AsyncVoidMethod_MsTestV2_CSharpPreview(string testFwkVersion) =>
+            Verifier.VerifyAnalyzerCSharpPreviewLibrary(
+                // The first version of the framework is not compatible with Net 6 so we need to test only v2 with preview features
+                @"TestCases\AsyncVoidMethod_MsTestV2_CSharp.Preview.cs",
+                new AsyncVoidMethod(),
+                NuGetMetadataReference.MSTestTestFramework(testFwkVersion));
 #endif
 
         [DataTestMethod]
