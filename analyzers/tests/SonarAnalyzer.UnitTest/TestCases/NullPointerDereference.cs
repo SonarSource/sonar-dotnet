@@ -994,4 +994,47 @@ namespace Repro_3395
             public int SomeProperty { get; set; }
         }
     }
+
+    // https://github.com/SonarSource/sonar-dotnet/issues/4989
+    class Repro_4989
+    {
+        static void Main(string[] args)
+        {
+            var providerCourses = new List<ProviderCourse>
+            {
+                new ProviderCourse
+                {
+                    Items = new List<string>
+                    {
+                        "item1",
+                        "item2"
+                    }
+                },
+                new ProviderCourse
+                {
+                    Items = new List<string>
+                    {
+                        "item1",
+                        "item2"
+                    }
+                }
+            };
+
+            foreach (var providerCourse in providerCourses)
+            {
+                if (!providerCourse?.Items?.Any() ?? true)
+                {
+                    Console.WriteLine("FAIL");
+                    continue;
+                }
+
+                var _ = providerCourse.Items.Where(items => items == "item1"); // Noncompliant FP
+            }
+        }
+
+        class ProviderCourse
+        {
+            public IEnumerable<string> Items { get; set; }
+        }
+    }
 }
