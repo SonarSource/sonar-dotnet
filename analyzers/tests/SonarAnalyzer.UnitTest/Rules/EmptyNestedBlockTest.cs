@@ -32,6 +32,12 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void EmptyNestedBlock_CS() =>
             Verifier.VerifyAnalyzer(new[] { @"TestCases\EmptyNestedBlock.cs", @"TestCases\EmptyNestedBlock2.cs" }, new CS.EmptyNestedBlock());
 
+#if NET
+        [TestMethod]
+        public void EmptyNestedBlock_CSharp10() =>
+            Verifier.VerifyAnalyzerFromCSharp10Library(@"TestCases\EmptyNestedBlock.CSharp10.cs", new CS.EmptyNestedBlock());
+#endif
+
         [TestMethod]
         public void EmptyNestedBlock_VB() =>
             Verifier.VerifyAnalyzer(@"TestCases\EmptyNestedBlock.vb", new VB.EmptyNestedBlock());
