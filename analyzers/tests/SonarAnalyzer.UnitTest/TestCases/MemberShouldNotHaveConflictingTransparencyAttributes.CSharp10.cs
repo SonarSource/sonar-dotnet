@@ -11,7 +11,6 @@ namespace Net6Poc.MemberShouldNotHaveConflictingTransparencyAttributes;
 // Secondary@-3 [flow3]
 // Secondary@-4 [flow4]
 // Secondary@-5 [flow5]
-// Secondary@-6 [flow6]
 internal class TestCases
 {
     public void Bar(IEnumerable<int> collection)
@@ -26,7 +25,7 @@ internal class TestCases
                        ? ([SecuritySafeCritical] () => { }) // Noncompliant [flow4]
                        :[SecuritySafeCritical] () => { }; // Noncompliant [flow5]
 
-        Call([SecuritySafeCritical] (x) => { }); // Noncompliant [flow6]
+        Call([Obsolete] (x) => { });
     }
 
     private void Call(Action<int> action) => action(1);

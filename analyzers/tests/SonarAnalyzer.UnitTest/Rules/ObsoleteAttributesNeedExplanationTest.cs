@@ -35,6 +35,11 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         public void ObsoleteAttributesNeedExplanation_CSharp9() =>
             Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\ObsoleteAttributesNeedExplanation.CSharp9.cs", new ObsoleteAttributesNeedExplanation());
+
+        [TestMethod]
+        public void ObsoleteAttributesNeedExplanation_CSharp10() =>
+            Verifier.VerifyAnalyzerFromCSharp10Library(@"TestCases\ObsoleteAttributesNeedExplanation.CSharp10.cs", new ObsoleteAttributesNeedExplanation());
+
 #endif
     }
 }
