@@ -34,5 +34,11 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         public void MemberShouldNotHaveConflictingTransparencyAttributes_AssemblyLevel() =>
             Verifier.VerifyNonConcurrentAnalyzer(@"TestCases\MemberShouldNotHaveConflictingTransparencyAttributes_AssemblyLevel.cs", new MemberShouldNotHaveConflictingTransparencyAttributes());
+
+#if NET
+        [TestMethod]
+        public void MemberShouldNotHaveConflictingTransparencyAttributes_CSharp10() =>
+            Verifier.VerifyAnalyzerFromCSharp10Library(@"TestCases\MemberShouldNotHaveConflictingTransparencyAttributes.CSharp10.cs", new MemberShouldNotHaveConflictingTransparencyAttributes());
+#endif
     }
 }

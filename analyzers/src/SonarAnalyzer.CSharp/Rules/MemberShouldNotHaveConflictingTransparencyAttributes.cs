@@ -42,27 +42,21 @@ namespace SonarAnalyzer.Rules.CSharp
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
         protected override bool EnableConcurrentExecution => false;
 
-        protected override void Initialize(SonarAnalysisContext context)
-        {
+        protected override void Initialize(SonarAnalysisContext context) =>
             context.RegisterCompilationStartAction(
                 csac =>
                 {
                     var nodesWithSecuritySafeCritical = new Dictionary<SyntaxNode, AttributeSyntax>();
                     var nodesWithSecurityCritical = new Dictionary<SyntaxNode, AttributeSyntax>();
 
-                    csac.RegisterSyntaxNodeActionInNonGenerated(
-                        snac => CollectSecurityAttributes(snac, nodesWithSecuritySafeCritical, nodesWithSecurityCritical),
-                        SyntaxKind.Attribute);
+                    csac.RegisterSyntaxNodeActionInNonGenerated(snac => CollectSecurityAttributes(snac, nodesWithSecuritySafeCritical, nodesWithSecurityCritical), SyntaxKind.Attribute);
 
-                    csac.RegisterCompilationEndAction(
-                        cac => ReportOnConflictingTransparencyAttributes(cac, nodesWithSecuritySafeCritical,
-                            nodesWithSecurityCritical));
+                    csac.RegisterCompilationEndAction(cac => ReportOnConflictingTransparencyAttributes(cac, nodesWithSecuritySafeCritical, nodesWithSecurityCritical));
                 });
-        }
 
-        private void CollectSecurityAttributes(SyntaxNodeAnalysisContext syntaxNodeAnalysisContext,
-            Dictionary<SyntaxNode, AttributeSyntax> nodesWithSecuritySafeCritical,
-            Dictionary<SyntaxNode, AttributeSyntax> nodesWithSecurityCritical)
+        private static void CollectSecurityAttributes(SyntaxNodeAnalysisContext syntaxNodeAnalysisContext,
+                                                      Dictionary<SyntaxNode, AttributeSyntax> nodesWithSecuritySafeCritical,
+                                                      Dictionary<SyntaxNode, AttributeSyntax> nodesWithSecurityCritical)
         {
             var attribute = (AttributeSyntax)syntaxNodeAnalysisContext.Node;
             if (!(syntaxNodeAnalysisContext.SemanticModel.GetSymbolInfo(attribute).Symbol is IMethodSymbol attributeConstructor))
