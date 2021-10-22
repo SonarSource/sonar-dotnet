@@ -1,5 +1,4 @@
-﻿
-[assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("", "")] // Noncompliant
+﻿[assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("", "")] // Noncompliant
 
 #pragma warning disable XXX // Noncompliant
 
