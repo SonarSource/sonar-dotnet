@@ -39,6 +39,11 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         public void GenericReadonlyFieldPropertyAssignment_CSharp9() =>
             Verifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\GenericReadonlyFieldPropertyAssignment.CSharp9.cs", new CS.GenericReadonlyFieldPropertyAssignment());
+
+        [TestMethod]
+        public void GenericReadonlyFieldPropertyAssignment_CSharp10() =>
+            Verifier.VerifyAnalyzerFromCSharp10Library(@"TestCases\GenericReadonlyFieldPropertyAssignment.CSharp10.cs", new CS.GenericReadonlyFieldPropertyAssignment());
+
 #endif
 
         [TestMethod]
