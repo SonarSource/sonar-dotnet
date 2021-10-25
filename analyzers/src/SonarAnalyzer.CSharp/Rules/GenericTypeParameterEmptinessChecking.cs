@@ -34,20 +34,17 @@ namespace SonarAnalyzer.Rules.CSharp
     public sealed class GenericTypeParameterEmptinessChecking : SonarDiagnosticAnalyzer
     {
         internal const string DiagnosticId = "S2955";
-        private const string MessageFormat =
-            "Use a comparison to 'default({0})' instead or add a constraint to '{0}' so that it can't be a value type.";
+        private const string MessageFormat = "Use a comparison to 'default({0})' instead or add a constraint to '{0}' so that it can't be a value type.";
 
-        private static readonly DiagnosticDescriptor rule =
-            DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
+        private static readonly DiagnosticDescriptor Rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
 
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(rule);
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
 
-        protected override void Initialize(SonarAnalysisContext context)
-        {
+        protected override void Initialize(SonarAnalysisContext context) =>
             context.RegisterSyntaxNodeActionInNonGenerated(
                 c =>
                 {
-                    var equalsExpression = (BinaryExpressionSyntax) c.Node;
+                    var equalsExpression = (BinaryExpressionSyntax)c.Node;
 
                     var leftIsNull = CSharpEquivalenceChecker.AreEquivalent(equalsExpression.Left, CSharpSyntaxHelper.NullLiteralExpression);
                     var rightIsNull = CSharpEquivalenceChecker.AreEquivalent(equalsExpression.Right, CSharpSyntaxHelper.NullLiteralExpression);
@@ -58,21 +55,16 @@ namespace SonarAnalyzer.Rules.CSharp
                     }
 
                     var expressionToTypeCheck = leftIsNull ? equalsExpression.Right : equalsExpression.Left;
-                    if (c.SemanticModel.GetTypeInfo(expressionToTypeCheck).Type is ITypeParameterSymbol typeInfo &&
-                        !typeInfo.HasReferenceTypeConstraint &&
-                        !typeInfo.ConstraintTypes.OfType<IErrorTypeSymbol>().Any() &&
-                        !typeInfo.ConstraintTypes.Any(typeSymbol =>
-                            typeSymbol.IsReferenceType &&
-                            typeSymbol.IsClass()))
+                    if (c.SemanticModel.GetTypeInfo(expressionToTypeCheck).Type is ITypeParameterSymbol { HasReferenceTypeConstraint: false } typeInfo
+                        && !typeInfo.ConstraintTypes.OfType<IErrorTypeSymbol>().Any()
+                        && !typeInfo.ConstraintTypes.Any(typeSymbol => typeSymbol.IsReferenceType && typeSymbol.IsClass()))
                     {
                         var expressionToReportOn = leftIsNull ? equalsExpression.Left : equalsExpression.Right;
 
-                        c.ReportIssue(Diagnostic.Create(rule, expressionToReportOn.GetLocation(),
-                            typeInfo.Name));
+                        c.ReportIssue(Diagnostic.Create(Rule, expressionToReportOn.GetLocation(), typeInfo.Name));
                     }
                 },
                 SyntaxKind.EqualsExpression,
                 SyntaxKind.NotEqualsExpression);
-        }
     }
 }

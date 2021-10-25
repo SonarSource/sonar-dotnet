@@ -30,24 +30,27 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         public void GenericTypeParameterEmptinessChecking() =>
-            Verifier.VerifyAnalyzer(@"TestCases\GenericTypeParameterEmptinessChecking.cs",
-                                    new GenericTypeParameterEmptinessChecking(),
-                                    CompilationErrorBehavior.Ignore,
-                                    MetadataReferenceFacade.SystemCollections);
+            Verifier.VerifyAnalyzer(
+                @"TestCases\GenericTypeParameterEmptinessChecking.cs",
+                new GenericTypeParameterEmptinessChecking(),
+                CompilationErrorBehavior.Ignore,
+                MetadataReferenceFacade.SystemCollections);
 
 #if NET
         [TestMethod]
         public void GenericTypeParameterEmptinessChecking_CSharp9() =>
-            Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\GenericTypeParameterEmptinessChecking.CSharp9.cs",
-                                                      new GenericTypeParameterEmptinessChecking(),
-                                                      MetadataReferenceFacade.SystemCollections);
+            Verifier.VerifyAnalyzerFromCSharp9Console(
+                @"TestCases\GenericTypeParameterEmptinessChecking.CSharp9.cs",
+                new GenericTypeParameterEmptinessChecking(),
+                MetadataReferenceFacade.SystemCollections);
 #endif
 
         [TestMethod]
         public void GenericTypeParameterEmptinessChecking_CodeFix() =>
-            Verifier.VerifyCodeFix(@"TestCases\GenericTypeParameterEmptinessChecking.cs",
-                                   @"TestCases\GenericTypeParameterEmptinessChecking.Fixed.cs",
-                                   new GenericTypeParameterEmptinessChecking(),
-                                   new GenericTypeParameterEmptinessCheckingCodeFixProvider());
+            Verifier.VerifyCodeFix(
+                @"TestCases\GenericTypeParameterEmptinessChecking.cs",
+                @"TestCases\GenericTypeParameterEmptinessChecking.Fixed.cs",
+                new GenericTypeParameterEmptinessChecking(),
+                new GenericTypeParameterEmptinessCheckingCodeFixProvider());
     }
 }
