@@ -29,3 +29,11 @@ namespace Tests.Diagnostics
   namespace X { } // Noncompliant
 //^^^^^^^^^^^^^^^
 
+namespace Y
+{
+    namespace Z // Noncompliant
+    {
+
+    }
+}
+

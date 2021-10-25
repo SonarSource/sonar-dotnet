@@ -16,3 +16,7 @@ namespace Tests.Diagnostics
     using M = Math;
 }
 
+namespace Y
+{
+}
+
