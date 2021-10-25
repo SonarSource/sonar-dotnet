@@ -34,12 +34,12 @@ namespace SonarAnalyzer.Rules.CSharp
     [Rule(DiagnosticId)]
     public sealed class FieldsShouldBeEncapsulatedInProperties : SonarDiagnosticAnalyzer
     {
-        internal const string DiagnosticId = "S1104";
+        private const string DiagnosticId = "S1104";
         private const string MessageFormat = "Make this field 'private' and encapsulate it in a 'public' property.";
 
-        private static readonly DiagnosticDescriptor rule =
-            DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(rule);
+        private static readonly DiagnosticDescriptor Rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
+
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
 
         private static readonly ISet<SyntaxKind> ValidModifiers = new HashSet<SyntaxKind>
         {
@@ -50,8 +50,7 @@ namespace SonarAnalyzer.Rules.CSharp
             SyntaxKind.ConstKeyword
         };
 
-        protected override void Initialize(SonarAnalysisContext context)
-        {
+        protected override void Initialize(SonarAnalysisContext context) =>
             context.RegisterSyntaxNodeActionInNonGenerated(
                 c =>
                 {
@@ -72,10 +71,9 @@ namespace SonarAnalyzer.Rules.CSharp
 
                     if (symbol.GetEffectiveAccessibility() == Accessibility.Public)
                     {
-                        c.ReportIssue(Diagnostic.Create(rule, firstVariable.GetLocation()));
+                        c.ReportIssue(Diagnostic.Create(Rule, firstVariable.GetLocation()));
                     }
                 },
                 SyntaxKind.FieldDeclaration);
-        }
     }
 }
