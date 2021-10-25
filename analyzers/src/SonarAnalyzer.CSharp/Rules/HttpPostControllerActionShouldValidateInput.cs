@@ -33,63 +33,55 @@ namespace SonarAnalyzer.Rules.CSharp
     [Rule(DiagnosticId)]
     public sealed class HttpPostControllerActionShouldValidateInput : SonarDiagnosticAnalyzer
     {
-        internal const string DiagnosticId = "S4564";
+        private const string DiagnosticId = "S4564";
         private const string MessageFormat = "Enable input validation for this HttpPost method.";
 
-        private static readonly DiagnosticDescriptor rule =
-            DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(rule);
+        private static readonly DiagnosticDescriptor Rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
 
-        protected override void Initialize(SonarAnalysisContext context)
-        {
+        protected override void Initialize(SonarAnalysisContext context) =>
             context.RegisterSyntaxNodeActionInNonGenerated(
                 c =>
                 {
                     var methodDeclaration = (MethodDeclarationSyntax)c.Node;
 
-                    if (methodDeclaration.ParameterList == null ||
-                        methodDeclaration.ParameterList.Parameters.Count == 0)
+                    if (methodDeclaration.ParameterList == null
+                        || methodDeclaration.ParameterList.Parameters.Count == 0)
                     {
                         // When HttpPost method doesn't have input there is no need to validate them
                         return;
                     }
 
                     var attributeSymbols = methodDeclaration.AttributeLists
-                        .SelectMany(list => list.Attributes)
-                        .Select(a => new NodeAndSymbol<AttributeSyntax, IMethodSymbol>(a, c.SemanticModel.GetSymbolInfo(a).Symbol as IMethodSymbol))
-                        .Where(tuple => tuple.Symbol != null)
-                        .ToList();
+                                                            .SelectMany(list => list.Attributes)
+                                                            .Select(x => new NodeAndSymbol<AttributeSyntax, IMethodSymbol>(x, c.SemanticModel.GetSymbolInfo(x).Symbol as IMethodSymbol))
+                                                            .Where(tuple => tuple.Symbol != null)
+                                                            .ToList();
 
-                    var httpPostAttribute = attributeSymbols.FirstOrDefault(tuple =>
-                        tuple.Symbol.ContainingType.Is(KnownType.System_Web_Mvc_HttpPostAttribute));
+                    var httpPostAttribute = attributeSymbols.FirstOrDefault(x => x.Symbol.ContainingType.Is(KnownType.System_Web_Mvc_HttpPostAttribute));
                     if (httpPostAttribute == null)
                     {
                         // There is no HttpPost attribute
                         return;
                     }
 
-                    var validateInputAttribute = attributeSymbols.FirstOrDefault(a =>
-                        a.Symbol.ContainingType.Is(KnownType.System_Web_Mvc_ValidateInputAttribute));
+                    var validateInputAttribute = attributeSymbols.FirstOrDefault(x => x.Symbol.ContainingType.Is(KnownType.System_Web_Mvc_ValidateInputAttribute));
 
-                    if (validateInputAttribute == null ||
-                        validateInputAttribute.Node.ArgumentList == null ||
-                        validateInputAttribute.Node.ArgumentList.Arguments.Count != 1)
+                    if (validateInputAttribute?.Node.ArgumentList == null
+                        || validateInputAttribute.Node.ArgumentList.Arguments.Count != 1)
                     {
                         // ValidateInputAttribute not set or has incorrect number of args
-                        c.ReportIssue(Diagnostic.Create(rule, httpPostAttribute.Node.GetLocation()));
+                        c.ReportIssue(Diagnostic.Create(Rule, httpPostAttribute.Node.GetLocation()));
                         return;
                     }
 
-                    var constantValue = c.SemanticModel.GetConstantValue(
-                        validateInputAttribute.Node.ArgumentList.Arguments[0].Expression);
-                    if (!constantValue.HasValue ||
-                        (constantValue.Value as bool?) != true)
+                    var constantValue = c.SemanticModel.GetConstantValue(validateInputAttribute.Node.ArgumentList.Arguments[0].Expression);
+                    if (!constantValue.HasValue || (constantValue.Value as bool?) != true)
                     {
                         // ValidateInputAttribute is set but with incorrect value
-                        c.ReportIssue(Diagnostic.Create(rule, httpPostAttribute.Node.GetLocation()));
+                        c.ReportIssue(Diagnostic.Create(Rule, httpPostAttribute.Node.GetLocation()));
                     }
                 },
                 SyntaxKind.MethodDeclaration);
-        }
     }
 }
