@@ -35,32 +35,20 @@ namespace SonarAnalyzer.Rules.CSharp
     [Rule(DiagnosticId)]
     public sealed class IndentSingleLineFollowingConditional : SonarDiagnosticAnalyzer
     {
-        internal const string DiagnosticId = "S3973";
+        private const string DiagnosticId = "S3973";
         private const string MessageFormat = "Use curly braces or indentation to denote the code conditionally executed by this '{0}'";
 
-        private static readonly DiagnosticDescriptor rule =
-            DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(rule);
+        private static readonly DiagnosticDescriptor Rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
 
         protected override void Initialize(SonarAnalysisContext context)
         {
-            context.RegisterSyntaxNodeActionInNonGenerated(
-                CheckWhile, SyntaxKind.WhileStatement);
-
-            context.RegisterSyntaxNodeActionInNonGenerated(
-                CheckDo, SyntaxKind.DoStatement);
-
-            context.RegisterSyntaxNodeActionInNonGenerated(
-                CheckFor, SyntaxKind.ForStatement);
-
-            context.RegisterSyntaxNodeActionInNonGenerated(
-                CheckForEach, SyntaxKind.ForEachStatement);
-
-            context.RegisterSyntaxNodeActionInNonGenerated(
-                CheckIf, SyntaxKind.IfStatement);
-
-            context.RegisterSyntaxNodeActionInNonGenerated(
-                CheckElse, SyntaxKind.ElseClause);
+            context.RegisterSyntaxNodeActionInNonGenerated(CheckWhile, SyntaxKind.WhileStatement);
+            context.RegisterSyntaxNodeActionInNonGenerated(CheckDo, SyntaxKind.DoStatement);
+            context.RegisterSyntaxNodeActionInNonGenerated(CheckFor, SyntaxKind.ForStatement);
+            context.RegisterSyntaxNodeActionInNonGenerated(CheckForEach, SyntaxKind.ForEachStatement);
+            context.RegisterSyntaxNodeActionInNonGenerated(CheckIf, SyntaxKind.IfStatement);
+            context.RegisterSyntaxNodeActionInNonGenerated(CheckElse, SyntaxKind.ElseClause);
         }
 
         private static void CheckWhile(SyntaxNodeAnalysisContext context)
@@ -108,12 +96,11 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private static void CheckIf(SyntaxNodeAnalysisContext context)
         {
-            IfStatementSyntax ifStatement = (IfStatementSyntax)context.Node;
+            var ifStatement = (IfStatementSyntax)context.Node;
 
             // Special case for "else if" on the same line.
             // In that case, we'll check that the statement is more indented then the "else", not the "if".
             // Highlighting: "if (...)", or  "else if (...)" as appropriate
-
             SyntaxNode controlNode;
             SyntaxToken startToken;
             string conditionLabelText;
@@ -154,12 +141,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private static void ReportIssue(SyntaxNodeAnalysisContext context, Location primaryLocation,
             SyntaxNode secondaryLocationNode, string conditionLabelText) =>
-               context.ReportIssue(
-                    Diagnostic.Create(
-                        rule,
-                        primaryLocation,
-                        new Location[] { GetFirstLineOfNode(secondaryLocationNode) },
-                        conditionLabelText));
+               context.ReportIssue(Diagnostic.Create(Rule, primaryLocation, new[] { GetFirstLineOfNode(secondaryLocationNode) }, conditionLabelText));
 
         private static Location GetFirstLineOfNode(SyntaxNode node)
         {
@@ -167,8 +149,7 @@ namespace SonarAnalyzer.Rules.CSharp
             var wholeLineSpan = node.SyntaxTree.GetText().Lines[lineNumber].Span;
             var secondaryLocationSpan = wholeLineSpan.Intersection(node.GetLocation().SourceSpan);
 
-            var location = Location.Create(node.SyntaxTree, secondaryLocationSpan ?? wholeLineSpan);
-            return location;
+            return Location.Create(node.SyntaxTree, secondaryLocationSpan ?? wholeLineSpan);
         }
     }
 }
