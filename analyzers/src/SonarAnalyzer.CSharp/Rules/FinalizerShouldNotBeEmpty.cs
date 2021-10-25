@@ -33,26 +33,24 @@ namespace SonarAnalyzer.Rules.CSharp
     [Rule(DiagnosticId)]
     public sealed class FinalizerShouldNotBeEmpty : SonarDiagnosticAnalyzer
     {
-        internal const string DiagnosticId = "S3880";
+        private const string DiagnosticId = "S3880";
         private const string MessageFormat = "Remove this empty finalizer.";
 
-        private static readonly DiagnosticDescriptor rule =
-            DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(rule);
+        private static readonly DiagnosticDescriptor Rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
 
-        protected override void Initialize(SonarAnalysisContext context)
-        {
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
+
+        protected override void Initialize(SonarAnalysisContext context) =>
             context.RegisterSyntaxNodeActionInNonGenerated(
                 c =>
                 {
                     var destructorDeclaration = (DestructorDeclarationSyntax)c.Node;
-                    if (destructorDeclaration.Body?.Statements.Count == 0 &&
-                        destructorDeclaration.ExpressionBody() == null)
+                    if (destructorDeclaration.Body?.Statements.Count == 0
+                        && destructorDeclaration.ExpressionBody() == null)
                     {
-                        c.ReportIssue(Diagnostic.Create(rule, destructorDeclaration.GetLocation()));
+                        c.ReportIssue(Diagnostic.Create(Rule, destructorDeclaration.GetLocation()));
                     }
                 },
                 SyntaxKind.DestructorDeclaration);
-        }
     }
 }
