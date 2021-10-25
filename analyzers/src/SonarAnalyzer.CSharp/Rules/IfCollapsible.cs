@@ -32,35 +32,28 @@ namespace SonarAnalyzer.Rules.CSharp
     [Rule(DiagnosticId)]
     public sealed class IfCollapsible : IfCollapsibleBase
     {
-        private static readonly DiagnosticDescriptor rule =
-            DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(rule);
+        private static readonly DiagnosticDescriptor Rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
 
-        protected override void Initialize(SonarAnalysisContext context)
-        {
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
+
+        protected override void Initialize(SonarAnalysisContext context) =>
             context.RegisterSyntaxNodeActionInNonGenerated(
                 c =>
                 {
-                    var ifStatement = (IfStatementSyntax) c.Node;
+                    var ifStatement = (IfStatementSyntax)c.Node;
 
                     if (ifStatement.Else != null)
                     {
                         return;
                     }
 
-                    var parentIfStatment = GetParentIfStatement(ifStatement);
-
-                    if (parentIfStatment != null &&
-                        parentIfStatment.Else == null)
+                    var parentIfStatement = GetParentIfStatement(ifStatement);
+                    if (parentIfStatement is { Else: null })
                     {
-                        c.ReportIssue(Diagnostic.Create(
-                            rule,
-                            ifStatement.IfKeyword.GetLocation(),
-                            additionalLocations: new[] { parentIfStatment.IfKeyword.GetLocation() }));
+                        c.ReportIssue(Diagnostic.Create(Rule, ifStatement.IfKeyword.GetLocation(), additionalLocations: new[] { parentIfStatement.IfKeyword.GetLocation() }));
                     }
                 },
                 SyntaxKind.IfStatement);
-        }
 
         private static IfStatementSyntax GetParentIfStatement(IfStatementSyntax ifStatement)
         {
@@ -68,7 +61,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
             while (parent.IsKind(SyntaxKind.Block))
             {
-                var block = (BlockSyntax) parent;
+                var block = (BlockSyntax)parent;
 
                 if (block.Statements.Count != 1)
                 {
