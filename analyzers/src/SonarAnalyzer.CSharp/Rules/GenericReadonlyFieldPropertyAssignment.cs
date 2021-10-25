@@ -35,14 +35,11 @@ namespace SonarAnalyzer.Rules.CSharp
     public sealed class GenericReadonlyFieldPropertyAssignment : SonarDiagnosticAnalyzer
     {
         internal const string DiagnosticId = "S2934";
-        private const string MessageFormat =
-            "Restrict '{0}' to be a reference type or remove this assignment of '{1}'; it is useless if '{0}' " +
-            "is a value type.";
+        private const string MessageFormat = "Restrict '{0}' to be a reference type or remove this assignment of '{1}'; it is useless if '{0}' is a value type.";
 
-        private static readonly DiagnosticDescriptor rule =
-            DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
+        private static readonly DiagnosticDescriptor Rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
 
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(rule);
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
 
         protected override void Initialize(SonarAnalysisContext context)
         {
@@ -90,8 +87,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 SyntaxKind.PostIncrementExpression);
         }
 
-        private static void ProcessPropertyChange(ExpressionSyntax expression, SemanticModel semanticModel,
-            SyntaxNodeAnalysisContext context)
+        private static void ProcessPropertyChange(ExpressionSyntax expression, SemanticModel semanticModel, SyntaxNodeAnalysisContext context)
         {
             if (!(expression is MemberAccessExpressionSyntax memberAccess))
             {
@@ -110,43 +106,34 @@ namespace SonarAnalyzer.Rules.CSharp
                 return;
             }
 
-            context.ReportIssue(Diagnostic.Create(rule, expression.GetLocation(), fieldSymbol.Name, propertySymbol.Name));
+            context.ReportIssue(Diagnostic.Create(Rule, expression.GetLocation(), fieldSymbol.Name, propertySymbol.Name));
         }
 
-        private static bool IsFieldReadonlyAndPossiblyValueType(IFieldSymbol fieldSymbol)
-        {
-            return fieldSymbol != null &&
-                fieldSymbol.IsReadOnly &&
-                GenericParameterMightBeValueType(fieldSymbol.Type as ITypeParameterSymbol);
-        }
+        private static bool IsFieldReadonlyAndPossiblyValueType(IFieldSymbol fieldSymbol) =>
+            fieldSymbol is { IsReadOnly: true }
+            && GenericParameterMightBeValueType(fieldSymbol.Type as ITypeParameterSymbol);
 
-        private static bool IsInsideConstructorDeclaration(ExpressionSyntax expression, INamedTypeSymbol currentType,
-            SemanticModel semanticModel)
-        {
-            return semanticModel.GetEnclosingSymbol(expression.SpanStart) is IMethodSymbol constructorSymbol &&
-                constructorSymbol.MethodKind == MethodKind.Constructor &&
-                constructorSymbol.ContainingType.Equals(currentType);
-        }
+        private static bool IsInsideConstructorDeclaration(ExpressionSyntax expression, INamedTypeSymbol currentType, SemanticModel semanticModel) =>
+            semanticModel.GetEnclosingSymbol(expression.SpanStart) is IMethodSymbol { MethodKind: MethodKind.Constructor } constructorSymbol
+            && constructorSymbol.ContainingType.Equals(currentType);
 
         private static bool GenericParameterMightBeValueType(ITypeParameterSymbol typeParameterSymbol)
         {
-            if (typeParameterSymbol == null ||
-                typeParameterSymbol.HasReferenceTypeConstraint ||
-                typeParameterSymbol.HasValueTypeConstraint ||
-                typeParameterSymbol.ConstraintTypes.OfType<IErrorTypeSymbol>().Any())
+            if (typeParameterSymbol == null
+                || typeParameterSymbol.HasReferenceTypeConstraint
+                || typeParameterSymbol.HasValueTypeConstraint
+                || typeParameterSymbol.ConstraintTypes.OfType<IErrorTypeSymbol>().Any())
             {
                 return false;
             }
 
             return typeParameterSymbol.ConstraintTypes
-                .Select(constraintType => MightBeValueType(constraintType))
-                .All(basedOnPossiblyValueType => basedOnPossiblyValueType);
+                                      .Select(MightBeValueType)
+                                      .All(basedOnPossiblyValueType => basedOnPossiblyValueType);
         }
 
-        private static bool MightBeValueType(ITypeSymbol type)
-        {
-            return type.IsInterface() ||
-                GenericParameterMightBeValueType(type as ITypeParameterSymbol);
-        }
+        private static bool MightBeValueType(ITypeSymbol type) =>
+            type.IsInterface()
+            || GenericParameterMightBeValueType(type as ITypeParameterSymbol);
     }
 }
