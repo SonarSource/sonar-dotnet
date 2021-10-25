@@ -47,12 +47,13 @@ namespace SonarAnalyzer.UnitTest.Rules
 #if NET
         [TestMethod]
         public void ForeachLoopExplicitConversion_CSharp10_CodeFix() =>
-            Verifier.VerifyCodeFix(@"TestCases\ForeachLoopExplicitConversion.CSharp10.cs",
-                                   @"TestCases\ForeachLoopExplicitConversion.CSharp10.Fixed.cs",
-                                   new ForeachLoopExplicitConversion(),
-                                   new ForeachLoopExplicitConversionCodeFixProvider(),
-                                   ParseOptionsHelper.FromCSharp10,
-                                   OutputKind.DynamicallyLinkedLibrary);
+            Verifier.VerifyCodeFix(
+                @"TestCases\ForeachLoopExplicitConversion.CSharp10.cs",
+                @"TestCases\ForeachLoopExplicitConversion.CSharp10.Fixed.cs",
+                new ForeachLoopExplicitConversion(),
+                new ForeachLoopExplicitConversionCodeFixProvider(),
+                ParseOptionsHelper.FromCSharp10,
+                OutputKind.DynamicallyLinkedLibrary);
 #endif
 
     }

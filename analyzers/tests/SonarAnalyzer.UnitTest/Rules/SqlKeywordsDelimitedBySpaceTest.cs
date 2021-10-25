@@ -33,40 +33,45 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         public void SqlKeywordsDelimitedBySpace() =>
-            Verifier.VerifyAnalyzer(@"TestCases\SqlKeywordsDelimitedBySpace.cs",
-                                    new SqlKeywordsDelimitedBySpace(),
-                                    ParseOptionsHelper.FromCSharp8,
-                                    GetAdditionalReferences());
+            Verifier.VerifyAnalyzer(
+                @"TestCases\SqlKeywordsDelimitedBySpace.cs",
+                new SqlKeywordsDelimitedBySpace(),
+                ParseOptionsHelper.FromCSharp8,
+                GetAdditionalReferences());
 
         [TestMethod]
         public void SqlKeywordsDelimitedBySpace_UsingInsideNamespace() =>
-            Verifier.VerifyNonConcurrentAnalyzer(@"TestCases\SqlKeywordsDelimitedBySpace_InsideNamespace.cs",
-                                    new SqlKeywordsDelimitedBySpace(),
-                                    GetAdditionalReferences());
+            Verifier.VerifyNonConcurrentAnalyzer(
+                @"TestCases\SqlKeywordsDelimitedBySpace_InsideNamespace.cs",
+                new SqlKeywordsDelimitedBySpace(),
+                GetAdditionalReferences());
 
         [TestMethod]
         public void SqlKeywordsDelimitedBySpace_DefaultNamespace() =>
-            Verifier.VerifyNoIssueReportedInTest(@"TestCases\SqlKeywordsDelimitedBySpace_DefaultNamespace.cs",
-                                                 new SqlKeywordsDelimitedBySpace(),
-                                                 GetAdditionalReferences());
+            Verifier.VerifyNoIssueReportedInTest(
+                @"TestCases\SqlKeywordsDelimitedBySpace_DefaultNamespace.cs",
+                new SqlKeywordsDelimitedBySpace(),
+                GetAdditionalReferences());
 
 #if NET
 
         [TestMethod]
         public void SqlKeywordsDelimitedBySpace_CSharp10_GlobalUsings() =>
-            Verifier.VerifyAnalyzerFromCSharp10Library(new[]
-                                                       {
-                                                        @"TestCases\SqlKeywordsDelimitedBySpace.CSharp10.GlobalUsing.cs",
-                                                        @"TestCases\SqlKeywordsDelimitedBySpace.CSharp10.GlobalUsingConsumer.cs"
-                                                       },
-                                                       new SqlKeywordsDelimitedBySpace(),
-                                                       GetAdditionalReferences());
+            Verifier.VerifyAnalyzerFromCSharp10Library(
+                new[]
+                {
+                    @"TestCases\SqlKeywordsDelimitedBySpace.CSharp10.GlobalUsing.cs",
+                    @"TestCases\SqlKeywordsDelimitedBySpace.CSharp10.GlobalUsingConsumer.cs"
+                },
+                new SqlKeywordsDelimitedBySpace(),
+                GetAdditionalReferences());
 
         [TestMethod]
         public void SqlKeywordsDelimitedBySpace_CSharp10_FileScopesNamespace() =>
-            Verifier.VerifyAnalyzerFromCSharp10Library(new[] { @"TestCases\SqlKeywordsDelimitedBySpace.CSharp10.FileScopedNamespaceDeclaration.cs", },
-                                                       new SqlKeywordsDelimitedBySpace(),
-                                                       GetAdditionalReferences());
+            Verifier.VerifyAnalyzerFromCSharp10Library(
+                new[] { @"TestCases\SqlKeywordsDelimitedBySpace.CSharp10.FileScopedNamespaceDeclaration.cs", },
+                new SqlKeywordsDelimitedBySpace(),
+                GetAdditionalReferences());
 
 #endif
 

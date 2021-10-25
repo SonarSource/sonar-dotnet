@@ -35,21 +35,24 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         public void UnnecessaryUsings() =>
-            Verifier.VerifyAnalyzer(new[] { @"TestCases\UnnecessaryUsings.cs", @"TestCases\UnnecessaryUsings2.cs", @"TestCases\UnnecessaryUsingsFNRepro.cs" },
-                                    new UnnecessaryUsings(),
-                                    GetAdditionalReferences());
+            Verifier.VerifyAnalyzer(
+                new[] { @"TestCases\UnnecessaryUsings.cs", @"TestCases\UnnecessaryUsings2.cs", @"TestCases\UnnecessaryUsingsFNRepro.cs" },
+                new UnnecessaryUsings(),
+                GetAdditionalReferences());
 
 #if NET
 
         [TestMethod]
         public void UnnecessaryUsings_CSharp10_GlobalUsings() =>
-            Verifier.VerifyAnalyzerFromCSharp10Console(new[] { @"TestCases\UnnecessaryUsings.CSharp10.Global.cs", @"TestCases\UnnecessaryUsings.CSharp10.Consumer.cs" },
-                                                       new UnnecessaryUsings());
+            Verifier.VerifyAnalyzerFromCSharp10Console(
+                new[] { @"TestCases\UnnecessaryUsings.CSharp10.Global.cs", @"TestCases\UnnecessaryUsings.CSharp10.Consumer.cs" },
+                new UnnecessaryUsings());
 
         [TestMethod]
         public void UnnecessaryUsings_CSharp10_FileScopedNamespace() =>
-            Verifier.VerifyAnalyzerFromCSharp10Library(new[] { @"TestCases\UnnecessaryUsings.CSharp10.FileScopedNamespace.cs" },
-                                                       new UnnecessaryUsings());
+            Verifier.VerifyAnalyzerFromCSharp10Library(
+                new[] { @"TestCases\UnnecessaryUsings.CSharp10.FileScopedNamespace.cs" },
+                new UnnecessaryUsings());
 
         [TestMethod]
         public void UnnecessaryUsings_CSharp9() =>
@@ -69,12 +72,13 @@ namespace SonarAnalyzer.UnitTest.Rules
 
         [TestMethod]
         public void UnnecessaryUsings_CodeFix() =>
-            Verifier.VerifyCodeFix(@"TestCases\UnnecessaryUsings.cs",
-                                   @"TestCases\UnnecessaryUsings.Fixed.cs",
-                                   @"TestCases\UnnecessaryUsings.Fixed.Batch.cs",
-                                   new UnnecessaryUsings(),
-                                   new UnnecessaryUsingsCodeFixProvider(),
-                                   additionalReferences: GetAdditionalReferences());
+            Verifier.VerifyCodeFix(
+                @"TestCases\UnnecessaryUsings.cs",
+                @"TestCases\UnnecessaryUsings.Fixed.cs",
+                @"TestCases\UnnecessaryUsings.Fixed.Batch.cs",
+                new UnnecessaryUsings(),
+                new UnnecessaryUsingsCodeFixProvider(),
+                additionalReferences: GetAdditionalReferences());
 
         [TestMethod]
         public void EquivalentNameSyntax_Equals_Object()

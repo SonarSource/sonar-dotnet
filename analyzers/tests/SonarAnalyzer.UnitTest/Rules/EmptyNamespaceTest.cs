@@ -34,8 +34,9 @@ namespace SonarAnalyzer.UnitTest.Rules
 #if NET
         [TestMethod]
         public void EmptyNamespace_CSharp10() =>
-            Verifier.VerifyAnalyzerFromCSharp10Library(new[] { @"TestCases\EmptyNamespace.CSharp10.Empty.cs", @"TestCases\EmptyNamespace.CSharp10.NotEmpty.cs" },
-                                                       new EmptyNamespace());
+            Verifier.VerifyAnalyzerFromCSharp10Library(
+                new[] { @"TestCases\EmptyNamespace.CSharp10.Empty.cs", @"TestCases\EmptyNamespace.CSharp10.NotEmpty.cs" },
+                new EmptyNamespace());
 #endif
 
         [TestMethod]

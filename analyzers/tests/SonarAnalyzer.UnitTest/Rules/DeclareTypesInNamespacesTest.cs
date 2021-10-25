@@ -30,18 +30,21 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         public void DeclareTypesInNamespaces_CS() =>
-            Verifier.VerifyAnalyzer(new[] { @"TestCases\DeclareTypesInNamespaces.cs", @"TestCases\DeclareTypesInNamespaces2.cs", },
+            Verifier.VerifyAnalyzer(
+                new[] { @"TestCases\DeclareTypesInNamespaces.cs", @"TestCases\DeclareTypesInNamespaces2.cs", },
                 new CS.DeclareTypesInNamespaces());
 
         [TestMethod]
         public void DeclareTypesInNamespaces_CS_Before8() =>
-            Verifier.VerifyNonConcurrentAnalyzer(@"TestCases\DeclareTypesInNamespaces.BeforeCSharp8.cs",
+            Verifier.VerifyNonConcurrentAnalyzer(
+                @"TestCases\DeclareTypesInNamespaces.BeforeCSharp8.cs",
                 new CS.DeclareTypesInNamespaces(),
                 ParseOptionsHelper.BeforeCSharp8);
 
         [TestMethod]
         public void DeclareTypesInNamespaces_CS_After8() =>
-            Verifier.VerifyNonConcurrentAnalyzer(@"TestCases\DeclareTypesInNamespaces.AfterCSharp8.cs",
+            Verifier.VerifyNonConcurrentAnalyzer(
+                @"TestCases\DeclareTypesInNamespaces.AfterCSharp8.cs",
                 new CS.DeclareTypesInNamespaces(),
                 ParseOptionsHelper.FromCSharp8);
 
@@ -64,7 +67,8 @@ namespace SonarAnalyzer.UnitTest.Rules
 
         [TestMethod]
         public void DeclareTypesInNamespaces_VB() =>
-            Verifier.VerifyAnalyzer(new[] { @"TestCases\DeclareTypesInNamespaces.vb", @"TestCases\DeclareTypesInNamespaces2.vb", },
+            Verifier.VerifyAnalyzer(
+                new[] { @"TestCases\DeclareTypesInNamespaces.vb", @"TestCases\DeclareTypesInNamespaces2.vb", },
                 new VB.DeclareTypesInNamespaces());
     }
 }
