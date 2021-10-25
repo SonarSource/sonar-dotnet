@@ -36,6 +36,7 @@ namespace SonarAnalyzer.Rules.CSharp
     {
         private const string DiagnosticId = "S3376";
         private const string MessageFormat = "Make this class name end with '{0}'.";
+        private const int SelfAndBaseTypesCount = 2;
 
         private static readonly DiagnosticDescriptor Rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
 
@@ -53,13 +54,13 @@ namespace SonarAnalyzer.Rules.CSharp
                     }
 
                     var baseTypes = symbol.BaseType.GetSelfAndBaseTypes().ToList();
-                    if (baseTypes.Count < 2 || !baseTypes.Last().Is(KnownType.System_Object))
+                    if (baseTypes.Count < SelfAndBaseTypesCount || !baseTypes.Last().Is(KnownType.System_Object))
                     {
                         return;
                     }
 
                     var baseTypeKey = FrameworkTypesWithEnding.Keys
-                                                              .FirstOrDefault(ft => baseTypes[baseTypes.Count-2].ToDisplayString().Equals(ft, System.StringComparison.Ordinal));
+                                                              .FirstOrDefault(ft => baseTypes[baseTypes.Count - SelfAndBaseTypesCount].ToDisplayString().Equals(ft, System.StringComparison.Ordinal));
 
                     if (baseTypeKey == null)
                     {
