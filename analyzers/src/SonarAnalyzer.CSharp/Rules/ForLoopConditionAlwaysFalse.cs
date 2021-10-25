@@ -35,7 +35,7 @@ namespace SonarAnalyzer.Rules.CSharp
     [Rule(DiagnosticId)]
     public sealed class ForLoopConditionAlwaysFalse : SonarDiagnosticAnalyzer
     {
-        internal const string DiagnosticId = "S2252";
+        private const string DiagnosticId = "S2252";
         private const string MessageFormat = "This loop will never execute.";
 
         private static readonly CSharpExpressionNumericConverter ExpressionNumericConverter = new CSharpExpressionNumericConverter();
@@ -50,40 +50,33 @@ namespace SonarAnalyzer.Rules.CSharp
             SyntaxKind.NotEqualsExpression
         };
 
-        private static readonly DiagnosticDescriptor rule =
-            DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
+        private static readonly DiagnosticDescriptor Rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
 
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(rule);
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
 
-        protected override void Initialize(SonarAnalysisContext context)
-        {
+        protected override void Initialize(SonarAnalysisContext context) =>
             context.RegisterSyntaxNodeActionInNonGenerated(
                 c =>
                 {
                     var forNode = (ForStatementSyntax)c.Node;
                     if (forNode.Condition != null && (IsAlwaysFalseCondition(forNode.Condition) || IsConditionFalseAtInitialization(forNode)))
                     {
-                        c.ReportIssue(Diagnostic.Create(rule, forNode.Condition.GetLocation()));
+                        c.ReportIssue(Diagnostic.Create(Rule, forNode.Condition.GetLocation()));
                     }
                 },
                 SyntaxKind.ForStatement);
-        }
 
         private bool IsAlwaysFalseCondition(ExpressionSyntax condition) =>
-            condition.IsKind(SyntaxKind.FalseLiteralExpression) ||
-                (
-                    IsLogicalNot(condition, out var logicalNode) &&
-                    IsAlwaysTrueCondition(logicalNode.Operand.RemoveParentheses()
-                 ));
+            condition.IsKind(SyntaxKind.FalseLiteralExpression)
+            || (IsLogicalNot(condition, out var logicalNode)
+                && IsAlwaysTrueCondition(logicalNode.Operand.RemoveParentheses()));
 
         private bool IsAlwaysTrueCondition(ExpressionSyntax condition) =>
-            condition.IsKind(SyntaxKind.TrueLiteralExpression) ||
-                (
-                    IsLogicalNot(condition, out var logicalNode) &&
-                    IsAlwaysFalseCondition(logicalNode.Operand.RemoveParentheses())
-                );
+            condition.IsKind(SyntaxKind.TrueLiteralExpression)
+            || (IsLogicalNot(condition, out var logicalNode)
+                && IsAlwaysFalseCondition(logicalNode.Operand.RemoveParentheses()));
 
-        private bool IsConditionFalseAtInitialization(ForStatementSyntax forNode)
+        private static bool IsConditionFalseAtInitialization(ForStatementSyntax forNode)
         {
             var condition = forNode.Condition;
             if (!ConditionsToCheck.Contains(condition.Kind()))
@@ -107,32 +100,17 @@ namespace SonarAnalyzer.Rules.CSharp
             return false;
         }
 
-        private bool ConditionIsTrue(SyntaxKind syntaxKind, int leftValue, int rightValue)
-        {
-            var conditionValue = true;
-            switch (syntaxKind)
+        private static bool ConditionIsTrue(SyntaxKind syntaxKind, int leftValue, int rightValue) =>
+            syntaxKind switch
             {
-                case SyntaxKind.GreaterThanExpression:
-                    conditionValue = leftValue > rightValue;
-                    break;
-                case SyntaxKind.GreaterThanOrEqualExpression:
-                    conditionValue = leftValue >= rightValue;
-                    break;
-                case SyntaxKind.LessThanExpression:
-                    conditionValue = leftValue < rightValue;
-                    break;
-                case SyntaxKind.LessThanOrEqualExpression:
-                    conditionValue = leftValue <= rightValue;
-                    break;
-                case SyntaxKind.EqualsExpression:
-                    conditionValue = leftValue == rightValue;
-                    break;
-                case SyntaxKind.NotEqualsExpression:
-                    conditionValue = leftValue != rightValue;
-                    break;
-            }
-            return conditionValue;
-        }
+                SyntaxKind.GreaterThanExpression => leftValue > rightValue,
+                SyntaxKind.GreaterThanOrEqualExpression => leftValue >= rightValue,
+                SyntaxKind.LessThanExpression => leftValue < rightValue,
+                SyntaxKind.LessThanOrEqualExpression => leftValue <= rightValue,
+                SyntaxKind.EqualsExpression => leftValue == rightValue,
+                SyntaxKind.NotEqualsExpression => leftValue != rightValue,
+                _ => true
+            };
 
         private static bool IsLogicalNot(ExpressionSyntax expression, out PrefixUnaryExpressionSyntax logicalNot)
         {
@@ -154,11 +132,9 @@ namespace SonarAnalyzer.Rules.CSharp
         /// <returns>true if an integer value was found for the expression, false otherwise</returns>
         private static bool GetIntValue(IDictionary<string, int> variableNameToIntegerValue, ExpressionSyntax expression, out int intValue)
         {
-            if (ExpressionNumericConverter.TryGetConstantIntValue(expression, out intValue) ||
-                    (
-                        expression is SimpleNameSyntax simpleName &&
-                        variableNameToIntegerValue.TryGetValue(simpleName.Identifier.ValueText, out intValue)
-                    ))
+            if (ExpressionNumericConverter.TryGetConstantIntValue(expression, out intValue)
+                || (expression is SimpleNameSyntax simpleName
+                    && variableNameToIntegerValue.TryGetValue(simpleName.Identifier.ValueText, out intValue)))
             {
                 return true;
             }
