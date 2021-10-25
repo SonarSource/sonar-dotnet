@@ -34,18 +34,16 @@ namespace SonarAnalyzer.Rules.CSharp
     [Rule(DiagnosticId)]
     public sealed class GenericTypeParametersRequired : SonarDiagnosticAnalyzer
     {
-        internal const string DiagnosticId = "S4018";
+        private const string DiagnosticId = "S4018";
         private const string MessageFormat = "Refactor this method to have parameters matching all the type parameters.";
 
-        private static readonly DiagnosticDescriptor rule =
-            DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(rule);
+        private static readonly DiagnosticDescriptor Rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
 
-        protected override void Initialize(SonarAnalysisContext context)
-        {
+        protected override void Initialize(SonarAnalysisContext context) =>
             context.RegisterSyntaxNodeActionInNonGenerated(c =>
                 {
-                    var methodDeclaration = c.Node as MethodDeclarationSyntax;
+                    var methodDeclaration = (MethodDeclarationSyntax)c.Node;
 
                     var typeParameters = methodDeclaration
                             .TypeParameterList
@@ -70,13 +68,12 @@ namespace SonarAnalyzer.Rules.CSharp
 
                     if (typeParameters.Except(typeParametersInArguments).Any())
                     {
-                        c.ReportIssue(Diagnostic.Create(rule, methodDeclaration.Identifier.GetLocation()));
+                        c.ReportIssue(Diagnostic.Create(Rule, methodDeclaration.Identifier.GetLocation()));
                     }
                 },
                 SyntaxKind.MethodDeclaration);
-        }
 
-        private void AddTypeParameters(ITypeSymbol argumentSymbol, ISet<ITypeParameterSymbol> set)
+        private static void AddTypeParameters(ITypeSymbol argumentSymbol, ISet<ITypeParameterSymbol> set)
         {
             var localArgumentSymbol = argumentSymbol;
 
