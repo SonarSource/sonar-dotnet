@@ -89,19 +89,15 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private static void ProcessPropertyChange(ExpressionSyntax expression, SemanticModel semanticModel, SyntaxNodeAnalysisContext context)
         {
-            if (!(expression is MemberAccessExpressionSyntax memberAccess))
-            {
-                return;
-            }
-
-            if (!(semanticModel.GetSymbolInfo(expression).Symbol is IPropertySymbol propertySymbol))
+            if (!(expression is MemberAccessExpressionSyntax memberAccess)
+                || !(semanticModel.GetSymbolInfo(expression).Symbol is IPropertySymbol propertySymbol))
             {
                 return;
             }
 
             var fieldSymbol = semanticModel.GetSymbolInfo(memberAccess.Expression).Symbol as IFieldSymbol;
-            if (!IsFieldReadonlyAndPossiblyValueType(fieldSymbol) ||
-                IsInsideConstructorDeclaration(expression, fieldSymbol.ContainingType, semanticModel))
+            if (!IsFieldReadonlyAndPossiblyValueType(fieldSymbol)
+                || IsInsideConstructorDeclaration(expression, fieldSymbol.ContainingType, semanticModel))
             {
                 return;
             }
