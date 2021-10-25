@@ -35,13 +35,12 @@ namespace SonarAnalyzer.Rules.CSharp
     [Rule(DiagnosticId)]
     public sealed class ForLoopCounterChanged : SonarDiagnosticAnalyzer
     {
-        internal const string DiagnosticId = "S127";
+        private const string DiagnosticId = "S127";
         private const string MessageFormat = "Do not update the loop counter '{0}' within the loop body.";
 
-        private static readonly DiagnosticDescriptor rule =
-            DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
+        private static readonly DiagnosticDescriptor Rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
 
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(rule);
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
 
         private sealed class SideEffectExpression
         {
@@ -77,8 +76,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 AffectedExpression = node => ((AssignmentExpressionSyntax)node).Left
             });
 
-        protected override void Initialize(SonarAnalysisContext context)
-        {
+        protected override void Initialize(SonarAnalysisContext context) =>
             context.RegisterSyntaxNodeActionInNonGenerated(
                 c =>
                 {
@@ -90,12 +88,11 @@ namespace SonarAnalyzer.Rules.CSharp
                         var symbol = c.SemanticModel.GetSymbolInfo(affectedExpression).Symbol;
                         if (symbol != null && loopCounters.Contains(symbol))
                         {
-                            c.ReportIssue(Diagnostic.Create(rule, affectedExpression.GetLocation(), affectedExpression.ToString()/*symbol.OriginalDefinition.Name*/));
+                            c.ReportIssue(Diagnostic.Create(Rule, affectedExpression.GetLocation(), affectedExpression.ToString()/*symbol.OriginalDefinition.Name*/));
                         }
                     }
                 },
                 SyntaxKind.ForStatement);
-        }
 
         private static IEnumerable<ISymbol> LoopCounters(ForStatementSyntax node, SemanticModel semanticModel)
         {
@@ -112,12 +109,9 @@ namespace SonarAnalyzer.Rules.CSharp
             return declaredVariables.Union(initializedVariables);
         }
 
-        private static IEnumerable<SyntaxNode> AffectedExpressions(SyntaxNode node)
-        {
-            return node
-                .DescendantNodesAndSelf()
+        private static IEnumerable<SyntaxNode> AffectedExpressions(SyntaxNode node) =>
+            node.DescendantNodesAndSelf()
                 .Where(n => SideEffectExpressions.Any(s => s.Kinds.Any(n.IsKind)))
                 .Select(n => SideEffectExpressions.Single(s => s.Kinds.Any(n.IsKind)).AffectedExpression(n));
-        }
     }
 }
