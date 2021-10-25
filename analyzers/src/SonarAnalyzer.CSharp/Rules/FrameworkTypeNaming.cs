@@ -34,16 +34,14 @@ namespace SonarAnalyzer.Rules.CSharp
     [Rule(DiagnosticId)]
     public sealed class FrameworkTypeNaming : SonarDiagnosticAnalyzer
     {
-        internal const string DiagnosticId = "S3376";
+        private const string DiagnosticId = "S3376";
         private const string MessageFormat = "Make this class name end with '{0}'.";
 
-        private static readonly DiagnosticDescriptor rule =
-            DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
+        private static readonly DiagnosticDescriptor Rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
 
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(rule);
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
 
-        protected override void Initialize(SonarAnalysisContext context)
-        {
+        protected override void Initialize(SonarAnalysisContext context) =>
             context.RegisterSyntaxNodeActionInNonGenerated(
                 c =>
                 {
@@ -55,15 +53,13 @@ namespace SonarAnalyzer.Rules.CSharp
                     }
 
                     var baseTypes = symbol.BaseType.GetSelfAndBaseTypes().ToList();
-
-                    if (baseTypes.Count < 2 ||
-                        !baseTypes.Last().Is(KnownType.System_Object))
+                    if (baseTypes.Count < 2 || !baseTypes.Last().Is(KnownType.System_Object))
                     {
                         return;
                     }
 
                     var baseTypeKey = FrameworkTypesWithEnding.Keys
-                        .FirstOrDefault(ft => baseTypes[baseTypes.Count-2].ToDisplayString().Equals(ft, System.StringComparison.Ordinal));
+                                                              .FirstOrDefault(ft => baseTypes[baseTypes.Count-2].ToDisplayString().Equals(ft, System.StringComparison.Ordinal));
 
                     if (baseTypeKey == null)
                     {
@@ -72,16 +68,15 @@ namespace SonarAnalyzer.Rules.CSharp
 
                     var baseTypeName = FrameworkTypesWithEnding[baseTypeKey];
 
-                    if (symbol.Name.EndsWith(baseTypeName, System.StringComparison.Ordinal) ||
-                        !baseTypes[0].Name.EndsWith(baseTypeName, System.StringComparison.Ordinal))
+                    if (symbol.Name.EndsWith(baseTypeName, System.StringComparison.Ordinal)
+                        || !baseTypes[0].Name.EndsWith(baseTypeName, System.StringComparison.Ordinal))
                     {
                         return;
                     }
 
-                    c.ReportIssue(Diagnostic.Create(rule, classDeclaration.Identifier.GetLocation(), baseTypeName));
+                    c.ReportIssue(Diagnostic.Create(Rule, classDeclaration.Identifier.GetLocation(), baseTypeName));
                 },
                 SyntaxKind.ClassDeclaration);
-        }
 
         private static readonly Dictionary<string, string> FrameworkTypesWithEnding = new Dictionary<string, string>
         {
