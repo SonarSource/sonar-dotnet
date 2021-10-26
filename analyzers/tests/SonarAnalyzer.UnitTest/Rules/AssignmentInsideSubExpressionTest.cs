@@ -31,8 +31,14 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void AssignmentInsideSubExpression() =>
             Verifier.VerifyAnalyzer(@"TestCases\AssignmentInsideSubExpression.cs", new AssignmentInsideSubExpression(), ParseOptionsHelper.FromCSharp8);
 
+#if NET
         [TestMethod]
         public void AssignmentInsideSubExpression_CSharp9() =>
             Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\AssignmentInsideSubExpression.CSharp9.cs", new AssignmentInsideSubExpression());
+
+        [TestMethod]
+        public void AssignmentInsideSubExpression_CSharp10() =>
+            Verifier.VerifyAnalyzerFromCSharp10Console(@"TestCases\AssignmentInsideSubExpression.CSharp10.cs", new AssignmentInsideSubExpression());
+#endif
     }
 }
