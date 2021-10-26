@@ -32,37 +32,33 @@ namespace SonarAnalyzer.Rules.CSharp
     [Rule(DiagnosticId)]
     public sealed class InterfacesShouldNotBeEmpty : SonarDiagnosticAnalyzer
     {
-        internal const string DiagnosticId = "S4023";
+        private const string DiagnosticId = "S4023";
         private const string MessageFormat = "Remove this interface or add members to it.";
 
-        private static readonly DiagnosticDescriptor rule =
-            DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(rule);
+        private static readonly DiagnosticDescriptor Rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
 
-        protected override void Initialize(SonarAnalysisContext context)
-        {
+        protected override void Initialize(SonarAnalysisContext context) =>
             context.RegisterSyntaxNodeActionInNonGenerated(
                 c =>
                 {
                     var interfaceDeclaration = (InterfaceDeclarationSyntax)c.Node;
-                    if (interfaceDeclaration.Identifier.IsMissing ||
-                        interfaceDeclaration.Members.Count > 0)
+                    if (interfaceDeclaration.Identifier.IsMissing
+                        || interfaceDeclaration.Members.Count > 0)
                     {
                         return;
                     }
 
                     var interfaceSymbol = c.SemanticModel.GetDeclaredSymbol(interfaceDeclaration);
-                    if (interfaceSymbol != null &&
-                        interfaceSymbol.DeclaredAccessibility == Accessibility.Public &&
-                        !IsAggregatingOtherInterfaces(interfaceSymbol))
+                    if (interfaceSymbol is { DeclaredAccessibility: Accessibility.Public }
+                        && !IsAggregatingOtherInterfaces(interfaceSymbol))
                     {
-                        c.ReportIssue(Diagnostic.Create(rule, interfaceDeclaration.Identifier.GetLocation()));
+                        c.ReportIssue(Diagnostic.Create(Rule, interfaceDeclaration.Identifier.GetLocation()));
                     }
                 },
                 SyntaxKind.InterfaceDeclaration);
-        }
 
-        private static bool IsAggregatingOtherInterfaces(INamedTypeSymbol interfaceSymbol) =>
+        private static bool IsAggregatingOtherInterfaces(ITypeSymbol interfaceSymbol) =>
             interfaceSymbol.AllInterfaces.Length > 1;
     }
 }
