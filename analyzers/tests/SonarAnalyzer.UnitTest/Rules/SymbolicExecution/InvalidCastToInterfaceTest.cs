@@ -49,6 +49,10 @@ namespace SonarAnalyzer.UnitTest.Rules.SymbolicExecution
         [TestMethod]
         public void InvalidCastToInterface_CSharp9() =>
             Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\InvalidCastToInterface.CSharp9.cs", GetAnalyzers());
+
+        [TestMethod]
+        public void InvalidCastToInterface_CSharp10() =>
+            Verifier.VerifyAnalyzerFromCSharp10Library(@"TestCases\InvalidCastToInterface.CSharp10.cs", GetAnalyzers());
 #endif
 
         private static DiagnosticAnalyzer[] GetAnalyzers() =>
