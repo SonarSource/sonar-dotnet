@@ -36,12 +36,10 @@ namespace SonarAnalyzer.Rules.CSharp
         internal const string DiagnosticId = "S818";
         private const string MessageFormat = "Upper case this literal suffix.";
 
-        private static readonly DiagnosticDescriptor rule =
-            DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(rule);
+        private static readonly DiagnosticDescriptor Rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
 
-        protected override void Initialize(SonarAnalysisContext context)
-        {
+        protected override void Initialize(SonarAnalysisContext context) =>
             context.RegisterSyntaxNodeActionInNonGenerated(
                 c =>
                 {
@@ -50,12 +48,10 @@ namespace SonarAnalyzer.Rules.CSharp
 
                     if (text[text.Length - 1] == 'l' && !ShouldIgnore(text))
                     {
-                        c.ReportIssue(Diagnostic.Create(rule, Location.Create(literal.SyntaxTree,
-                            new TextSpan(literal.Span.End - 1, 1))));
+                        c.ReportIssue(Diagnostic.Create(Rule, Location.Create(literal.SyntaxTree, new TextSpan(literal.Span.End - 1, 1))));
                     }
                 },
                 SyntaxKind.NumericLiteralExpression);
-        }
 
         // We know that @text is a number that ends with 'l'. Being a number, it has at least one digit (thus 2 characters).
         // If it has 3 characters or more, it could be `2ul` or `2Ul` and we ignore this, because 'l' is easier to read.
