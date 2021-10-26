@@ -33,18 +33,15 @@ namespace SonarAnalyzer.Rules.CSharp
     [Rule(DiagnosticId)]
     public sealed class MagicNumberShouldNotBeUsed : SonarDiagnosticAnalyzer
     {
-        internal const string DiagnosticId = "S109";
-        private const string MessageFormat = "Assign this magic number '{0}' to a well-named (variable|constant), " +
-            "and use the (variable|constant) instead.";
+        private const string DiagnosticId = "S109";
+        private const string MessageFormat = "Assign this magic number '{0}' to a well-named (variable|constant), and use the (variable|constant) instead.";
 
-        private static readonly DiagnosticDescriptor rule =
-            DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(rule);
+        private static readonly DiagnosticDescriptor Rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
 
         private static readonly ISet<string> NotConsideredAsMagicNumbers = new HashSet<string> { "-1", "0", "1" };
 
-        protected override void Initialize(SonarAnalysisContext context)
-        {
+        protected override void Initialize(SonarAnalysisContext context) =>
             context.RegisterSyntaxNodeActionInNonGenerated(
                 c =>
                 {
@@ -52,39 +49,37 @@ namespace SonarAnalyzer.Rules.CSharp
 
                     if (!IsExceptionToTheRule(literalExpression))
                     {
-                        c.ReportIssue(Diagnostic.Create(rule, literalExpression.GetLocation(),
+                        c.ReportIssue(Diagnostic.Create(Rule, literalExpression.GetLocation(),
                             literalExpression.Token.ValueText));
                     }
                 },
                 SyntaxKind.NumericLiteralExpression);
-        }
 
-        private bool IsExceptionToTheRule(LiteralExpressionSyntax literalExpression) =>
-            NotConsideredAsMagicNumbers.Contains(literalExpression.Token.ValueText) ||
+        private static bool IsExceptionToTheRule(LiteralExpressionSyntax literalExpression) =>
+            NotConsideredAsMagicNumbers.Contains(literalExpression.Token.ValueText)
             // It's ok to use magic numbers as part of a variable declaration
-            literalExpression.FirstAncestorOrSelf<VariableDeclarationSyntax>() != null ||
+            || literalExpression.FirstAncestorOrSelf<VariableDeclarationSyntax>() != null
             // It's ok to use magic numbers as part of a parameter declaration
-            literalExpression.FirstAncestorOrSelf<ParameterSyntax>() != null ||
+            || literalExpression.FirstAncestorOrSelf<ParameterSyntax>() != null
             // It's ok to use magic numbers as part of an enum declaration
-            literalExpression.FirstAncestorOrSelf<EnumMemberDeclarationSyntax>() != null ||
+            || literalExpression.FirstAncestorOrSelf<EnumMemberDeclarationSyntax>() != null
             // It's ok to use magic numbers in the GetHashCode method. Note that I am only checking the method name of the sake of simplicity
-            literalExpression.FirstAncestorOrSelf<MethodDeclarationSyntax>()?.Identifier.ValueText == nameof(object.GetHashCode) ||
+            || literalExpression.FirstAncestorOrSelf<MethodDeclarationSyntax>()?.Identifier.ValueText == nameof(object.GetHashCode)
             // It's ok to use magic numbers in pragma directives
-            literalExpression.FirstAncestorOrSelf<PragmaWarningDirectiveTriviaSyntax>() != null ||
+            || literalExpression.FirstAncestorOrSelf<PragmaWarningDirectiveTriviaSyntax>() != null
             // It's ok to use magic numbers in property declaration
-            IsInsideProperty(literalExpression)
-            ;
+            || IsInsideProperty(literalExpression);
 
         // Inside property we consider magic numbers as exceptions in the following cases:
         //   - A {get; set;} = MAGIC_NUMBER
         //   - A { get { return MAGIC_NUMBER; } }
-        private static bool IsInsideProperty(LiteralExpressionSyntax literalExpression)
+        private static bool IsInsideProperty(SyntaxNode node)
         {
-            if (literalExpression.FirstAncestorOrSelf<PropertyDeclarationSyntax>() == null)
+            if (node.FirstAncestorOrSelf<PropertyDeclarationSyntax>() == null)
             {
                 return false;
             }
-            var parent = literalExpression.Parent;
+            var parent = node.Parent;
             return parent is ReturnStatementSyntax || parent is EqualsValueClauseSyntax;
         }
     }
