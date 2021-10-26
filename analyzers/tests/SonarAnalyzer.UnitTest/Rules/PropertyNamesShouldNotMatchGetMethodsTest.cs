@@ -37,5 +37,15 @@ namespace SonarAnalyzer.UnitTest.Rules
     public int { get; } // Missing identifier on purpose
     public int () { return 42; } // Missing identifier on purpose
 ", new PropertyNamesShouldNotMatchGetMethods(), CompilationErrorBehavior.Ignore);
+
+#if NET
+        [TestMethod]
+        public void PropertyNamesShouldNotMatchGetMethods_CSharp9() =>
+            Verifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\PropertyNamesShouldNotMatchGetMethods.CSharp9.cs", new PropertyNamesShouldNotMatchGetMethods());
+
+        [TestMethod]
+        public void PropertyNamesShouldNotMatchGetMethods_CSharp10() =>
+            Verifier.VerifyAnalyzerFromCSharp10Library(@"TestCases\PropertyNamesShouldNotMatchGetMethods.CSharp10.cs", new PropertyNamesShouldNotMatchGetMethods());
+#endif
     }
 }

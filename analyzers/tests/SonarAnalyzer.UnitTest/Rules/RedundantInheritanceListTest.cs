@@ -38,19 +38,34 @@ namespace SonarAnalyzer.UnitTest.Rules
 
         [TestMethod]
         public void RedundantInheritanceList_CSharp9_CodeFix() =>
-            Verifier.VerifyCodeFix(@"TestCases\RedundantInheritanceList.CSharp9.cs",
-                                   @"TestCases\RedundantInheritanceList.CSharp9.Fixed.cs",
-                                   new RedundantInheritanceList(),
-                                   new RedundantInheritanceListCodeFixProvider(),
-                                   ParseOptionsHelper.FromCSharp9);
+            Verifier.VerifyCodeFix(
+                @"TestCases\RedundantInheritanceList.CSharp9.cs",
+                @"TestCases\RedundantInheritanceList.CSharp9.Fixed.cs",
+                new RedundantInheritanceList(),
+                new RedundantInheritanceListCodeFixProvider(),
+                ParseOptionsHelper.FromCSharp9);
+
+        [TestMethod]
+        public void RedundantInheritanceList_CSharp10() =>
+            Verifier.VerifyAnalyzerFromCSharp10Library(@"TestCases\RedundantInheritanceList.CSharp10.cs", new RedundantInheritanceList());
+
+        [TestMethod]
+        public void RedundantInheritanceList_CSharp10_CodeFix() =>
+            Verifier.VerifyCodeFix(
+                @"TestCases\RedundantInheritanceList.CSharp10.cs",
+                @"TestCases\RedundantInheritanceList.CSharp10.Fixed.cs",
+                new RedundantInheritanceList(),
+                new RedundantInheritanceListCodeFixProvider(),
+                ParseOptionsHelper.FromCSharp10);
 
 #endif
 
         [TestMethod]
         public void RedundantInheritanceList_CodeFix() =>
-            Verifier.VerifyCodeFix(@"TestCases\RedundantInheritanceList.cs",
-                                   @"TestCases\RedundantInheritanceList.Fixed.cs",
-                                   new RedundantInheritanceList(),
-                                   new RedundantInheritanceListCodeFixProvider());
+            Verifier.VerifyCodeFix(
+                @"TestCases\RedundantInheritanceList.cs",
+                @"TestCases\RedundantInheritanceList.Fixed.cs",
+                new RedundantInheritanceList(),
+                new RedundantInheritanceListCodeFixProvider());
     }
 }

@@ -49,4 +49,35 @@ namespace Tests.TestCases
             }
         }
     }
+
+    struct OuterStruct
+    {
+        private delegate void SomeName();
+        private static int F;
+        public static int MyProperty { get; set; }
+
+        class InnerClass
+        {
+            class SomeName      // FN
+            {
+                private int F;  // FN
+                private int InnerOnlyField;
+            }
+
+            public static int MyProperty { get; set; }  // FN
+            public static int InnerOnlyProperty { get; set; }
+        }
+
+        struct InnerStruct
+        {
+            class SomeName      // FN
+            {
+                private int F;  // FN
+                private int InnerOnlyField;
+            }
+
+            public static int MyProperty { get; set; }  // FN
+            public static int InnerOnlyProperty { get; set; }
+        }
+    }
 }

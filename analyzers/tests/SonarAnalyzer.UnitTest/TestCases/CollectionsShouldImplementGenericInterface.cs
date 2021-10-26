@@ -33,4 +33,8 @@ namespace Tests.Diagnostics
     class TestClass_15 : IEqualityComparer { }
 
     class TestClass_16 : IList, InvalidType { } // Noncompliant
+
+    struct TestStruct_01 : IList { } // FN
+
+    struct TestStruct_02 : IEnumerable { } // FN
 }

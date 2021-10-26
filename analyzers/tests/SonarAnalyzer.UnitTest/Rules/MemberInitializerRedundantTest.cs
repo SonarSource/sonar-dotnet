@@ -62,6 +62,20 @@ namespace SonarAnalyzer.UnitTest.Rules
                 new MemberInitializerRedundant(),
                 new MemberInitializedToDefaultCodeFixProvider(),
                 ParseOptionsHelper.FromCSharp9);
+
+        [TestMethod]
+        public void MemberInitializerRedundant_CSharp10() =>
+            Verifier.VerifyAnalyzerFromCSharp10Library(@"TestCases\MemberInitializerRedundant.CSharp10.cs", new MemberInitializerRedundant());
+
+        [TestMethod]
+        public void MemberInitializerRedundant_CSharp10_CodeFix() =>
+            Verifier.VerifyCodeFix(
+                @"TestCases\MemberInitializerRedundant.CSharp10.cs",
+                @"TestCases\MemberInitializerRedundant.CSharp10.Fixed.cs",
+                new MemberInitializerRedundant(),
+                new MemberInitializedToDefaultCodeFixProvider(),
+                ParseOptionsHelper.FromCSharp10);
+
 #endif
     }
 }

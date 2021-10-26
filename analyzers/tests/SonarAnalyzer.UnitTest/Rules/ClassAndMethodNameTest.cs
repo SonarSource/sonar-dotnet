@@ -66,6 +66,14 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         public void RecordName_InTestProject_CS() =>
             Verifier.VerifyAnalyzerFromCSharp9LibraryInTest(@"TestCases\RecordName.cs", new CS.ClassAndMethodName());
+
+        [TestMethod]
+        public void RecordStructName_CS() =>
+            Verifier.VerifyAnalyzerFromCSharp10Library(@"TestCases\RecordStructName.cs", new CS.ClassAndMethodName());
+
+        [TestMethod]
+        public void RecordStructName_InTestProject_CS() =>
+            Verifier.VerifyAnalyzerFromCSharp10LibraryInTest(@"TestCases\RecordStructName.cs", new CS.ClassAndMethodName());
 #endif
 
         [DataTestMethod]

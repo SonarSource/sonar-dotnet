@@ -64,7 +64,8 @@ namespace SonarAnalyzer.Rules.CSharp
                 {
                     var typeDeclaration = (BaseTypeDeclarationSyntax)c.Node;
                     var secondaryLocations = GetInvalidMemberLocations(typeDeclaration, c.SemanticModel);
-                    if (secondaryLocations.Any())
+                    if (c.ContainingSymbol.Kind == SymbolKind.NamedType
+                        && secondaryLocations.Any())
                     {
                         c.ReportIssue(Diagnostic.Create(Rule, typeDeclaration.Identifier.GetLocation(), secondaryLocations));
                     }

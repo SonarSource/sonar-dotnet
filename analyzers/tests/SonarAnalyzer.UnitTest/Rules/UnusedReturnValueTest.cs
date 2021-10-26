@@ -43,6 +43,10 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         public void UnusedReturnValue_CSharp9() =>
             Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\UnusedReturnValue.CSharp9.cs", new UnusedReturnValue());
+
+        [TestMethod]
+        public void UnusedReturnValue_CSharp10() =>
+            Verifier.VerifyAnalyzerFromCSharp10Console(@"TestCases\UnusedReturnValue.CSharp10.cs", new UnusedReturnValue());
 #endif
     }
 }

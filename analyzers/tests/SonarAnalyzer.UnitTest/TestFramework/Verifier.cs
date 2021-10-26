@@ -140,29 +140,58 @@ namespace SonarAnalyzer.UnitTest.TestFramework
             VerifyNonConcurrentAnalyzerFromCSharp9InTest(path, diagnosticAnalyzer, OutputKind.DynamicallyLinkedLibrary, additionalReferences);
 
         /// <summary>
+        /// Verify analyzer from C# 10 on a test library project in non-concurrent execution mode.
+        /// </summary>
+        public static void VerifyAnalyzerFromCSharp10LibraryInTest(string path, DiagnosticAnalyzer diagnosticAnalyzer, IEnumerable<MetadataReference> additionalReferences = null) =>
+            VerifyNonConcurrentAnalyzerFromCSharp10InTest(path, diagnosticAnalyzer, OutputKind.DynamicallyLinkedLibrary, additionalReferences);
+
+        /// <summary>
         /// Verify analyzer from C# 9 on a test console project in non-concurrent execution mode.
         /// </summary>
         public static void VerifyAnalyzerFromCSharp9ConsoleInTest(string path, DiagnosticAnalyzer diagnosticAnalyzer, IEnumerable<MetadataReference> additionalReferences = null) =>
             VerifyNonConcurrentAnalyzerFromCSharp9InTest(path, diagnosticAnalyzer, OutputKind.ConsoleApplication, additionalReferences);
 
         /// <summary>
+        /// Verify analyzer from C# 10 on a test console project in non-concurrent execution mode.
+        /// </summary>
+        public static void VerifyAnalyzerFromCSharp10ConsoleInTest(string path, DiagnosticAnalyzer diagnosticAnalyzer, IEnumerable<MetadataReference> additionalReferences = null) =>
+            VerifyNonConcurrentAnalyzerFromCSharp10InTest(path, diagnosticAnalyzer, OutputKind.ConsoleApplication, additionalReferences);
+
+        /// <summary>
         /// Verify analyzer from C# 9 without top level statements in non-concurrent execution mode.
         /// </summary>
-        public static void VerifyAnalyzerFromCSharp9Library(string path, DiagnosticAnalyzer diagnosticAnalyzer, IEnumerable<MetadataReference> additionalReferences = null) =>
+        public static void VerifyAnalyzerFromCSharp9Library(string path,
+                                                            DiagnosticAnalyzer diagnosticAnalyzer,
+                                                            IEnumerable<MetadataReference> additionalReferences = null) =>
+            VerifyAnalyzerFromCSharp9Library(path, diagnosticAnalyzer, CompilationErrorBehavior.Default, additionalReferences);
+
+        /// <summary>
+        /// Verify analyzer from C# 9 without top level statements in non-concurrent execution mode.
+        /// </summary>
+        public static void VerifyAnalyzerFromCSharp9Library(string path,
+                                                            DiagnosticAnalyzer diagnosticAnalyzer,
+                                                            CompilationErrorBehavior behaviour,
+                                                            IEnumerable<MetadataReference> additionalReferences = null) =>
             VerifyNonConcurrentAnalyzer(new[] { path },
                                         new[] { diagnosticAnalyzer },
                                         ParseOptionsHelper.FromCSharp9,
-                                        CompilationErrorBehavior.Default,
+                                        behaviour,
                                         OutputKind.DynamicallyLinkedLibrary,
                                         additionalReferences);
 
         public static void VerifyAnalyzerFromCSharp10Library(string path, DiagnosticAnalyzer diagnosticAnalyzer, IEnumerable<MetadataReference> additionalReferences = null) =>
+            VerifyAnalyzerFromCSharp10Library(path, diagnosticAnalyzer, CompilationErrorBehavior.Default, additionalReferences);
+
+        public static void VerifyAnalyzerFromCSharp10Library(string path,
+                                                             DiagnosticAnalyzer diagnosticAnalyzer,
+                                                             CompilationErrorBehavior behavior,
+                                                             IEnumerable<MetadataReference> additionalReferences = null) =>
             VerifyNonConcurrentAnalyzer(new[] { path },
-                                        new[] { diagnosticAnalyzer },
-                                        ParseOptionsHelper.FromCSharp10,
-                                        CompilationErrorBehavior.Default,
-                                        OutputKind.DynamicallyLinkedLibrary,
-                                        additionalReferences);
+                        new[] { diagnosticAnalyzer },
+                        ParseOptionsHelper.FromCSharp10,
+                        behavior,
+                        OutputKind.DynamicallyLinkedLibrary,
+                        additionalReferences);
 
         public static void VerifyAnalyzerCSharpPreviewLibrary(string path, DiagnosticAnalyzer diagnosticAnalyzer, IEnumerable<MetadataReference> additionalReferences = null) =>
             VerifyNonConcurrentAnalyzer(new[] { path },
@@ -417,6 +446,17 @@ namespace SonarAnalyzer.UnitTest.TestFramework
             VerifyNonConcurrentAnalyzer(new[] { path },
                                         new[] { diagnosticAnalyzer },
                                         ParseOptionsHelper.FromCSharp9,
+                                        CompilationErrorBehavior.Default,
+                                        outputKind,
+                                        AddTestReference(additionalReferences));
+
+        private static void VerifyNonConcurrentAnalyzerFromCSharp10InTest(string path,
+                                                                 DiagnosticAnalyzer diagnosticAnalyzer,
+                                                                 OutputKind outputKind,
+                                                                 IEnumerable<MetadataReference> additionalReferences = null) =>
+            VerifyNonConcurrentAnalyzer(new[] { path },
+                                        new[] { diagnosticAnalyzer },
+                                        ParseOptionsHelper.FromCSharp10,
                                         CompilationErrorBehavior.Default,
                                         outputKind,
                                         AddTestReference(additionalReferences));

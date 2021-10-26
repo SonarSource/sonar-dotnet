@@ -34,16 +34,25 @@ namespace SonarAnalyzer.UnitTest.Rules
         [DataRow(ProjectType.Product)]
         [DataRow(ProjectType.Test)]
         public void UseUriInsteadOfString(ProjectType projectType) =>
-            Verifier.VerifyAnalyzer(@"TestCases\UseUriInsteadOfString.cs",
-                                    new UseUriInsteadOfString(),
-                                    MetadataReferenceFacade.SystemDrawing.Concat(TestHelper.ProjectTypeReference(projectType)));
+            Verifier.VerifyAnalyzer(
+                @"TestCases\UseUriInsteadOfString.cs",
+                new UseUriInsteadOfString(),
+                MetadataReferenceFacade.SystemDrawing.Concat(TestHelper.ProjectTypeReference(projectType)));
 
 #if NET
         [TestMethod]
         public void UseUriInsteadOfString_CSharp9() =>
-            Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\UseUriInsteadOfString.CSharp9.cs",
-                                                      new UseUriInsteadOfString(),
-                                                      MetadataReferenceFacade.SystemDrawing);
+            Verifier.VerifyAnalyzerFromCSharp9Console(
+                @"TestCases\UseUriInsteadOfString.CSharp9.cs",
+                new UseUriInsteadOfString(),
+                MetadataReferenceFacade.SystemDrawing);
+
+        [TestMethod]
+        public void UseUriInsteadOfString_CSharp10() =>
+            Verifier.VerifyAnalyzerFromCSharp10Library(
+                @"TestCases\UseUriInsteadOfString.CSharp10.cs",
+                new UseUriInsteadOfString(),
+                MetadataReferenceFacade.SystemDrawing);
 #endif
 
         [TestMethod]

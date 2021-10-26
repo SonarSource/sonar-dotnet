@@ -40,6 +40,10 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         public void TooManyGenericParameters_CSharp9() =>
             Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\TooManyGenericParameters.CSharp9.cs", new TooManyGenericParameters());
+
+        [TestMethod]
+        public void TooManyGenericParameters_CSharp10() =>
+            Verifier.VerifyAnalyzerFromCSharp10Console(@"TestCases\TooManyGenericParameters.CSharp10.cs", new TooManyGenericParameters());
 #endif
     }
 }

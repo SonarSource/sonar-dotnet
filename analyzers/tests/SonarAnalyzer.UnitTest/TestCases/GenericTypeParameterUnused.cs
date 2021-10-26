@@ -179,4 +179,12 @@ namespace Tests.Diagnostics
             x.Method();
         }
     }
+
+    public struct SomeStruct<T> // FN
+    {
+        public int Add<T>(int a, int b) // Noncompliant; <T> is ignored
+        {
+            return a + b;
+        }
+    }
 }
