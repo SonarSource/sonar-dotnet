@@ -18,6 +18,7 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using Microsoft.CodeAnalysis;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.Rules.CSharp;
 using SonarAnalyzer.UnitTest.TestFramework;
@@ -32,11 +33,28 @@ namespace SonarAnalyzer.UnitTest.Rules
             Verifier.VerifyAnalyzer(@"TestCases\ForeachLoopExplicitConversion.cs", new ForeachLoopExplicitConversion());
 
         [TestMethod]
+        public void ForeachLoopExplicitConversion_CSharp10() =>
+            Verifier.VerifyAnalyzerFromCSharp10Library(@"TestCases\ForeachLoopExplicitConversion.CSharp10.cs", new ForeachLoopExplicitConversion());
+
+        [TestMethod]
         public void ForeachLoopExplicitConversion_CodeFix() =>
             Verifier.VerifyCodeFix(
                 @"TestCases\ForeachLoopExplicitConversion.cs",
                 @"TestCases\ForeachLoopExplicitConversion.Fixed.cs",
                 new ForeachLoopExplicitConversion(),
                 new ForeachLoopExplicitConversionCodeFixProvider());
+
+#if NET
+        [TestMethod]
+        public void ForeachLoopExplicitConversion_CSharp10_CodeFix() =>
+            Verifier.VerifyCodeFix(
+                @"TestCases\ForeachLoopExplicitConversion.CSharp10.cs",
+                @"TestCases\ForeachLoopExplicitConversion.CSharp10.Fixed.cs",
+                new ForeachLoopExplicitConversion(),
+                new ForeachLoopExplicitConversionCodeFixProvider(),
+                ParseOptionsHelper.FromCSharp10,
+                OutputKind.DynamicallyLinkedLibrary);
+#endif
+
     }
 }

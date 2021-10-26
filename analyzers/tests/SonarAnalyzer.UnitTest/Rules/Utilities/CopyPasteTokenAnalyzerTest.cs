@@ -68,6 +68,27 @@ namespace SonarAnalyzer.UnitTest.Rules
             });
 
         [TestMethod]
+        public void Verify_Duplicated_CS_GlobalUsings()
+        {
+            var testRoot = Root + TestContext.TestName;
+            var fileName = "Duplicated.CSharp10.cs";
+            Verifier.VerifyNonConcurrentUtilityAnalyzer<CopyPasteTokenInfo>(
+                new[] { Root + fileName },
+                new TestCopyPasteTokenAnalyzer_CS(testRoot, false),
+                @$"{testRoot}\token-cpd.pb",
+                TestHelper.CreateSonarProjectConfig(testRoot, ProjectType.Product),
+                messages =>
+                {
+                    messages.Should().HaveCount(1);
+                    var info = messages.Single();
+                    info.FilePath.Should().Be(fileName);
+                    info.TokenInfo.Should().HaveCount(39);
+                    info.TokenInfo.Where(x => x.TokenValue == "$num").Should().HaveCount(2);
+                },
+                options: ParseOptionsHelper.FromCSharp10);
+        }
+
+        [TestMethod]
         public void Verify_DuplicatedDifferentLiterals_CS() =>
             Verify("DuplicatedDifferentLiterals.cs", info =>
             {

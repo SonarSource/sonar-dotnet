@@ -1,5 +1,5 @@
-﻿using System;
-using System.IO;
+﻿global using System;
+global using System.IO;
 
 public class Sample
 {

@@ -4,6 +4,10 @@ class GlobalClass
 {
 }
 
+struct GlobalStruct
+{
+}
+
 static class GlobalNamespaceClass
 {
     static void Qux(this GlobalClass i) // Noncompliant
@@ -13,6 +17,8 @@ static class GlobalNamespaceClass
     static void Quux(this SomeNonExistingClass snec) // ErrorType is considered as part of global namespace but we don't want to report on it
     {
     }
+
+    static void Strux(this GlobalStruct s) { } // Compliant
 }
 
 namespace SomeNamespace

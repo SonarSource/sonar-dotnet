@@ -630,11 +630,16 @@ namespace SonarAnalyzer.CBDE
             if (decl == null ||                    // Not sure if we can be in this situation...
                 decl is MethodDeclarationSyntax || // We will fetch the function only when looking at the function call itself
                 decl is ClassDeclarationSyntax || // In "Class.member", we are not interested in the "Class" part
-                decl is NamespaceDeclarationSyntax
-                )
+                decl is NamespaceDeclarationSyntax)
             {
                 // We will fetch the function only when looking at the function call itself, we just skip the identifier
                 writer.WriteLine($"// Skipped because MethodDeclarationSyntax or ClassDeclarationSyntax or NamespaceDeclarationSyntax: {id.Identifier.ValueText}");
+                return;
+            }
+
+            if (declSymbol is INamespaceSymbol) // FileScopedNamespaceDeclaration will not be caught by the above `if`
+            {
+                writer.WriteLine($"// Skipped because FileScopedNamespaceDeclaration : {id.Identifier.ValueText}");
                 return;
             }
 
