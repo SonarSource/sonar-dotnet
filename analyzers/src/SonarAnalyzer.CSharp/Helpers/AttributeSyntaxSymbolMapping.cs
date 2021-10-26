@@ -37,14 +37,10 @@ namespace SonarAnalyzer.Helpers
             Symbol = symbol;
         }
 
-        public static IEnumerable<AttributeSyntaxSymbolMapping> GetAttributesForParameter(ParameterSyntax parameter,
-            SemanticModel semanticModel)
-        {
-            return parameter.AttributeLists
-                .SelectMany(al => al.Attributes)
-                .Select(attr => new AttributeSyntaxSymbolMapping(attr,
-                    semanticModel.GetSymbolInfo(attr).Symbol as IMethodSymbol))
-                .Where(attr => attr.Symbol != null);
-        }
+        public static IEnumerable<AttributeSyntaxSymbolMapping> GetAttributesForParameter(ParameterSyntax parameter, SemanticModel semanticModel) =>
+            parameter.AttributeLists
+                     .SelectMany(al => al.Attributes)
+                     .Select(attr => new AttributeSyntaxSymbolMapping(attr, semanticModel.GetSymbolInfo(attr).Symbol as IMethodSymbol))
+                     .Where(attr => attr.Symbol != null);
     }
 }

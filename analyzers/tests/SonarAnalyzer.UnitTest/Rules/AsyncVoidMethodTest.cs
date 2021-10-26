@@ -39,23 +39,36 @@ namespace SonarAnalyzer.UnitTest.Rules
 
         [TestMethod]
         public void AsyncVoidMethod_CSharp10() =>
-            Verifier.VerifyAnalyzerFromCSharp10Library(@"TestCases\AsyncVoidMethod.CSharp10.cs",
-                                                       new AsyncVoidMethod(),
-                                                       NuGetMetadataReference.MicrosoftVisualStudioQualityToolsUnitTestFramework);
+            Verifier.VerifyAnalyzerFromCSharp10Library(
+                @"TestCases\AsyncVoidMethod.CSharp10.cs",
+                new AsyncVoidMethod(),
+                NuGetMetadataReference.MicrosoftVisualStudioQualityToolsUnitTestFramework);
+
+        [DataTestMethod]
+        [DataRow("1.1.11")]
+        [DataRow(Constants.NuGetLatestVersion)]
+        public void AsyncVoidMethod_MsTestV2_CSharpPreview(string testFwkVersion) =>
+            Verifier.VerifyAnalyzerCSharpPreviewLibrary(
+                // The first version of the framework is not compatible with Net 6 so we need to test only v2 with preview features
+                @"TestCases\AsyncVoidMethod_MsTestV2_CSharp.Preview.cs",
+                new AsyncVoidMethod(),
+                NuGetMetadataReference.MSTestTestFramework(testFwkVersion));
 #endif
 
         [DataTestMethod]
         [DataRow("1.1.11")]
         [DataRow(Constants.NuGetLatestVersion)]
         public void AsyncVoidMethod_MsTestV2(string testFwkVersion) =>
-            Verifier.VerifyAnalyzer(@"TestCases\AsyncVoidMethod_MsTestV2.cs",
-                                    new AsyncVoidMethod(),
-                                    NuGetMetadataReference.MSTestTestFramework(testFwkVersion));
+            Verifier.VerifyAnalyzer(
+                @"TestCases\AsyncVoidMethod_MsTestV2.cs",
+                new AsyncVoidMethod(),
+                NuGetMetadataReference.MSTestTestFramework(testFwkVersion));
 
         [TestMethod]
         public void AsyncVoidMethod_MsTestV1() =>
-            Verifier.VerifyAnalyzer(@"TestCases\AsyncVoidMethod_MsTestV1.cs",
-                                    new AsyncVoidMethod(),
-                                    NuGetMetadataReference.MicrosoftVisualStudioQualityToolsUnitTestFramework);
+            Verifier.VerifyAnalyzer(
+                @"TestCases\AsyncVoidMethod_MsTestV1.cs",
+                new AsyncVoidMethod(),
+                NuGetMetadataReference.MicrosoftVisualStudioQualityToolsUnitTestFramework);
     }
 }

@@ -34,16 +34,11 @@ namespace SonarAnalyzer.Rules.CSharp
         internal const string DiagnosticId = "S1116";
         private const string MessageFormat = "Remove this empty statement.";
 
-        private static readonly DiagnosticDescriptor rule =
-            DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
+        private static readonly DiagnosticDescriptor Rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
 
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(rule);
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
 
-        protected override void Initialize(SonarAnalysisContext context)
-        {
-            context.RegisterSyntaxNodeActionInNonGenerated(
-                c => c.ReportIssue(Diagnostic.Create(rule, c.Node.GetLocation())),
-                SyntaxKind.EmptyStatement);
-        }
+        protected override void Initialize(SonarAnalysisContext context) =>
+            context.RegisterSyntaxNodeActionInNonGenerated(c => c.ReportIssue(Diagnostic.Create(Rule, c.Node.GetLocation())), SyntaxKind.EmptyStatement);
     }
 }

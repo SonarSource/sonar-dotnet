@@ -33,28 +33,25 @@ namespace SonarAnalyzer.Rules.CSharp
     [Rule(DiagnosticId)]
     public sealed class ObsoleteAttributesNeedExplanation : SonarDiagnosticAnalyzer
     {
-        internal const string DiagnosticId = "S1123";
+        private const string DiagnosticId = "S1123";
         private const string MessageFormat = "Add an explanation.";
 
-        private static readonly DiagnosticDescriptor rule =
-            DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(rule);
+        private static readonly DiagnosticDescriptor Rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
 
-        protected override void Initialize(SonarAnalysisContext context)
-        {
+        protected override void Initialize(SonarAnalysisContext context) =>
             context.RegisterSyntaxNodeActionInNonGenerated(
                 c =>
                 {
-                    var attributeSyntax = c.Node as AttributeSyntax;
+                    var attributeSyntax = (AttributeSyntax)c.Node;
                     var attributeConstructorSymbol = c.SemanticModel.GetSymbolInfo(attributeSyntax).Symbol;
 
-                    if (attributeConstructorSymbol.IsInType(KnownType.System_ObsoleteAttribute) &&
-                        !attributeConstructorSymbol.GetParameters().Any())
+                    if (attributeConstructorSymbol.IsInType(KnownType.System_ObsoleteAttribute)
+                        && !attributeConstructorSymbol.GetParameters().Any())
                     {
-                        c.ReportIssue(Diagnostic.Create(rule, attributeSyntax.GetLocation()));
+                        c.ReportIssue(Diagnostic.Create(Rule, attributeSyntax.GetLocation()));
                     }
                 },
                 SyntaxKind.Attribute);
-        }
     }
 }

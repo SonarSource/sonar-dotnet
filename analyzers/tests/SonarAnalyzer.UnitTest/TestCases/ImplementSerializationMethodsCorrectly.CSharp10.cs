@@ -17,14 +17,11 @@ namespace Net6Poc.ImplementSerializationMethodsCorrectly
 
             Action x = true
                            ? ([OnDeserialized] () => { }) // Compliant - FN
-                           :[GenericAttribute<int>] () => { };
+                           : [OnDeserialized] () => { };  // Compliant - FN
 
-            Call([GenericAttribute<int>] (x) => { });
+            Call([OnDeserialized] (x) => { });
         }
 
         private void Call(Action<int> action) => action(1);
     }
-    public class NonGenericAttribute : Attribute { }
-
-    public class GenericAttribute<T> : Attribute { }
 }

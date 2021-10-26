@@ -13,24 +13,15 @@ namespace Net6Poc.DisablingCSRFProtection
 
             _ = collection.Select([IgnoreAntiforgeryToken] (x) => x + 1); // Noncompliant
 
-            Action a =[IgnoreAntiforgeryToken] () => { }; // Noncompliant
+            Action a = [IgnoreAntiforgeryToken] () => { }; // Noncompliant
 
             Action x = true
                            ? ([IgnoreAntiforgeryToken]() => { }) // Noncompliant
-                           :[GenericAttribute<int>]() => { };
+                           : [IgnoreAntiforgeryToken]() => { }; // Noncompliant
 
             Call([IgnoreAntiforgeryToken] (x) => { }); // Noncompliant
-            Call([GenericIgnoreAntiforgeryToken<int>] (x) => { }); // FN
         }
-
-        [GenericIgnoreAntiforgeryToken<int>] // FN
-        public void M() { }
 
         private void Call(Action<int> action) => action(1);
     }
-    public class NonGenericAttribute : Attribute { }
-
-    public class GenericAttribute<T> : Attribute { }
-
-    public class GenericIgnoreAntiforgeryToken<T> : IgnoreAntiforgeryTokenAttribute { }
 }

@@ -38,15 +38,24 @@ namespace SonarAnalyzer.UnitTest.Rules
 #if NET
         [TestMethod]
         public void PermissiveCors_CS() =>
-            Verifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\Hotspots\PermissiveCors.Net.cs",
-                                                      new PermissiveCors(AnalyzerConfiguration.AlwaysEnabled),
-                                                      AdditionalReferences);
+            Verifier.VerifyAnalyzerFromCSharp9Library(
+                @"TestCases\Hotspots\PermissiveCors.Net.cs",
+                new PermissiveCors(AnalyzerConfiguration.AlwaysEnabled),
+                AdditionalReferences);
 
         [TestMethod]
         public void PermissiveCors_CSharp10() =>
-            Verifier.VerifyAnalyzerFromCSharp10Library(@"TestCases\Hotspots\PermissiveCors.CSharp10.cs",
-                                                       new PermissiveCors(AnalyzerConfiguration.AlwaysEnabled),
-                                                       AdditionalReferences);
+            Verifier.VerifyAnalyzerFromCSharp10Library(
+                @"TestCases\Hotspots\PermissiveCors.CSharp10.cs",
+                new PermissiveCors(AnalyzerConfiguration.AlwaysEnabled),
+                AdditionalReferences);
+
+        [TestMethod]
+        public void PermissiveCors_CSharpPreview() =>
+            Verifier.VerifyAnalyzerCSharpPreviewLibrary(
+                @"TestCases\Hotspots\PermissiveCors.CSharp.Preview.cs",
+                new PermissiveCors(AnalyzerConfiguration.AlwaysEnabled),
+                AdditionalReferences);
 
         internal static IEnumerable<MetadataReference> AdditionalReferences =>
             new[]

@@ -36,33 +36,52 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         public void RequestsWithExcessiveLength_CS() =>
-            Verifier.VerifyAnalyzer(@"TestCases\Hotspots\RequestsWithExcessiveLength.cs",
+            Verifier.VerifyAnalyzer(
+                @"TestCases\Hotspots\RequestsWithExcessiveLength.cs",
                 new CS.RequestsWithExcessiveLength(AnalyzerConfiguration.AlwaysEnabled),
                 GetAdditionalReferences());
 
         [TestMethod]
         public void RequestsWithExcessiveLength_CS_CustomValues() =>
-            Verifier.VerifyAnalyzer(@"TestCases\Hotspots\RequestsWithExcessiveLength_CustomValues.cs",
+            Verifier.VerifyAnalyzer(
+                @"TestCases\Hotspots\RequestsWithExcessiveLength_CustomValues.cs",
                 new CS.RequestsWithExcessiveLength(AnalyzerConfiguration.AlwaysEnabled) { FileUploadSizeLimit = 42 },
                 GetAdditionalReferences());
 
 #if NET
         [TestMethod]
         public void RequestsWithExcessiveLength_Csharp9() =>
-            Verifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\Hotspots\RequestsWithExcessiveLength.CSharp9.cs",
+            Verifier.VerifyAnalyzerFromCSharp9Library(
+                @"TestCases\Hotspots\RequestsWithExcessiveLength.CSharp9.cs",
+                new CS.RequestsWithExcessiveLength(AnalyzerConfiguration.AlwaysEnabled),
+                GetAdditionalReferences());
+
+        [TestMethod]
+        public void RequestsWithExcessiveLength_Csharp10() =>
+            Verifier.VerifyAnalyzerFromCSharp10Library(
+                @"TestCases\Hotspots\RequestsWithExcessiveLength.CSharp10.cs",
+                new CS.RequestsWithExcessiveLength(AnalyzerConfiguration.AlwaysEnabled),
+                GetAdditionalReferences());
+
+        [TestMethod]
+        public void RequestsWithExcessiveLength_CsharpPreview() =>
+            Verifier.VerifyAnalyzerCSharpPreviewLibrary(
+                @"TestCases\Hotspots\RequestsWithExcessiveLength.CSharp.Preview.cs",
                 new CS.RequestsWithExcessiveLength(AnalyzerConfiguration.AlwaysEnabled),
                 GetAdditionalReferences());
 #endif
 
         [TestMethod]
         public void RequestsWithExcessiveLength_VB() =>
-            Verifier.VerifyAnalyzer(@"TestCases\Hotspots\RequestsWithExcessiveLength.vb",
+            Verifier.VerifyAnalyzer(
+                @"TestCases\Hotspots\RequestsWithExcessiveLength.vb",
                 new VB.RequestsWithExcessiveLength(AnalyzerConfiguration.AlwaysEnabled),
                 GetAdditionalReferences());
 
         [TestMethod]
         public void RequestsWithExcessiveLength_VB_CustomValues() =>
-            Verifier.VerifyAnalyzer(@"TestCases\Hotspots\RequestsWithExcessiveLength_CustomValues.vb",
+            Verifier.VerifyAnalyzer(
+                @"TestCases\Hotspots\RequestsWithExcessiveLength_CustomValues.vb",
                 new VB.RequestsWithExcessiveLength(AnalyzerConfiguration.AlwaysEnabled) { FileUploadSizeLimit = 42 },
                 GetAdditionalReferences());
 

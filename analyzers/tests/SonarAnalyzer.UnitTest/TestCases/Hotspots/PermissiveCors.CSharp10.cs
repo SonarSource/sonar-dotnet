@@ -17,13 +17,11 @@ namespace Net6Poc.PermissiveCors
 
             Action x = true
                            ? ([EnableCors] () => { })
-                           :[GenericAttribute<int>] () => { };
+                           : [EnableCors("*")] () => { };
 
             Call([EnableCors] (x) => { });
         }
 
         private void Call(Action<int> action) => action(1);
     }
-
-    public class GenericAttribute<T> : Attribute { }
 }

@@ -33,13 +33,12 @@ namespace SonarAnalyzer.Rules.CSharp
     [Rule(DiagnosticId)]
     public sealed class IssueSuppression : SonarDiagnosticAnalyzer
     {
-        internal const string DiagnosticId = "S1309";
+        private const string DiagnosticId = "S1309";
         private const string MessageFormat = "Do not suppress issues.";
 
-        private static readonly DiagnosticDescriptor rule =
-            DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
+        private static readonly DiagnosticDescriptor Rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
 
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(rule);
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
 
         protected override void Initialize(SonarAnalysisContext context)
         {
@@ -61,7 +60,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
                     if (identifier != null)
                     {
-                        c.ReportIssue(Diagnostic.Create(rule, identifier.GetLocation()));
+                        c.ReportIssue(Diagnostic.Create(Rule, identifier.GetLocation()));
                     }
                 },
                 SyntaxKind.Attribute);
@@ -87,8 +86,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
             foreach (var pragmaWarning in pragmaWarnings)
             {
-                c.ReportIssue(Diagnostic.Create(rule,
-                    pragmaWarning.CreateLocation(pragmaWarning.DisableOrRestoreKeyword)));
+                c.ReportIssue(Diagnostic.Create(Rule, pragmaWarning.CreateLocation(pragmaWarning.DisableOrRestoreKeyword)));
             }
         }
     }

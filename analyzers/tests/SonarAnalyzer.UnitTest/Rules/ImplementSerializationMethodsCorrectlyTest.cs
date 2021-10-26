@@ -38,8 +38,12 @@ namespace SonarAnalyzer.UnitTest.Rules
             Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\ImplementSerializationMethodsCorrectly.CSharp9.cs", new CS.ImplementSerializationMethodsCorrectly());
 
         [TestMethod]
-        public void ImplementSerializationMethodsCorrectly_CS_FromCSharp10() =>
+        public void ImplementSerializationMethodsCorrectly_CS_CSharp10() =>
             Verifier.VerifyAnalyzerFromCSharp10Library(@"TestCases\ImplementSerializationMethodsCorrectly.CSharp10.cs", new CS.ImplementSerializationMethodsCorrectly());
+
+        [TestMethod]
+        public void ImplementSerializationMethodsCorrectly_CS_CSharpPreview() =>
+            Verifier.VerifyAnalyzerCSharpPreviewLibrary(@"TestCases\ImplementSerializationMethodsCorrectly.CSharp.Preview.cs", new CS.ImplementSerializationMethodsCorrectly());
 
 #endif
 

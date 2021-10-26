@@ -42,27 +42,21 @@ namespace SonarAnalyzer.Rules.CSharp
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
         protected override bool EnableConcurrentExecution => false;
 
-        protected override void Initialize(SonarAnalysisContext context)
-        {
+        protected override void Initialize(SonarAnalysisContext context) =>
             context.RegisterCompilationStartAction(
                 csac =>
                 {
                     var nodesWithSecuritySafeCritical = new Dictionary<SyntaxNode, AttributeSyntax>();
                     var nodesWithSecurityCritical = new Dictionary<SyntaxNode, AttributeSyntax>();
 
-                    csac.RegisterSyntaxNodeActionInNonGenerated(
-                        snac => CollectSecurityAttributes(snac, nodesWithSecuritySafeCritical, nodesWithSecurityCritical),
-                        SyntaxKind.Attribute);
+                    csac.RegisterSyntaxNodeActionInNonGenerated(snac => CollectSecurityAttributes(snac, nodesWithSecuritySafeCritical, nodesWithSecurityCritical), SyntaxKind.Attribute);
 
-                    csac.RegisterCompilationEndAction(
-                        cac => ReportOnConflictingTransparencyAttributes(cac, nodesWithSecuritySafeCritical,
-                            nodesWithSecurityCritical));
+                    csac.RegisterCompilationEndAction(cac => ReportOnConflictingTransparencyAttributes(cac, nodesWithSecuritySafeCritical, nodesWithSecurityCritical));
                 });
-        }
 
-        private void CollectSecurityAttributes(SyntaxNodeAnalysisContext syntaxNodeAnalysisContext,
-            Dictionary<SyntaxNode, AttributeSyntax> nodesWithSecuritySafeCritical,
-            Dictionary<SyntaxNode, AttributeSyntax> nodesWithSecurityCritical)
+        private static void CollectSecurityAttributes(SyntaxNodeAnalysisContext syntaxNodeAnalysisContext,
+                                                      Dictionary<SyntaxNode, AttributeSyntax> nodesWithSecuritySafeCritical,
+                                                      Dictionary<SyntaxNode, AttributeSyntax> nodesWithSecurityCritical)
         {
             var attribute = (AttributeSyntax)syntaxNodeAnalysisContext.Node;
             if (!(syntaxNodeAnalysisContext.SemanticModel.GetSymbolInfo(attribute).Symbol is IMethodSymbol attributeConstructor))
@@ -84,25 +78,23 @@ namespace SonarAnalyzer.Rules.CSharp
             }
         }
 
-        private void ReportOnConflictingTransparencyAttributes(CompilationAnalysisContext compilationContext,
-            Dictionary<SyntaxNode, AttributeSyntax> nodesWithSecuritySafeCritical,
-            Dictionary<SyntaxNode, AttributeSyntax> nodesWithSecurityCritical)
+        private static void ReportOnConflictingTransparencyAttributes(CompilationAnalysisContext compilationContext,
+                                                                      Dictionary<SyntaxNode, AttributeSyntax> nodesWithSecuritySafeCritical,
+                                                                      Dictionary<SyntaxNode, AttributeSyntax> nodesWithSecurityCritical)
         {
             var assemblySecurityCriticalAttribute = compilationContext.Compilation.Assembly
-                .GetAttributes(KnownType.System_Security_SecurityCriticalAttribute)
-                .FirstOrDefault();
+                                                                      .GetAttributes(KnownType.System_Security_SecurityCriticalAttribute)
+                                                                      .FirstOrDefault();
 
             if (assemblySecurityCriticalAttribute != null)
             {
-                var assemblySecurityLocation = assemblySecurityCriticalAttribute.ApplicationSyntaxReference
-                    .GetSyntax().GetLocation();
+                var assemblySecurityLocation = assemblySecurityCriticalAttribute.ApplicationSyntaxReference.GetSyntax().GetLocation();
 
                 // All parts declaring the 'SecuritySafeCriticalAttribute' are incorrect since the assembly
                 // itself is marked as 'SecurityCritical'.
                 foreach (var item in nodesWithSecuritySafeCritical)
                 {
-                    compilationContext.ReportIssue(Diagnostic.Create(Rule, item.Value.GetLocation(),
-                        additionalLocations: new[] { assemblySecurityLocation }));
+                    compilationContext.ReportIssue(Diagnostic.Create(Rule, item.Value.GetLocation(), additionalLocations: new[] { assemblySecurityLocation }));
                 }
             }
             else
@@ -114,8 +106,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     {
                         if (nodesWithSecurityCritical.ContainsKey(current))
                         {
-                            compilationContext.ReportIssue(Diagnostic.Create(Rule, item.Value.GetLocation(),
-                                additionalLocations: new[] { nodesWithSecurityCritical[current].GetLocation() }));
+                            compilationContext.ReportIssue(Diagnostic.Create(Rule, item.Value.GetLocation(), additionalLocations: new[] { nodesWithSecurityCritical[current].GetLocation() }));
                             break;
                         }
 
