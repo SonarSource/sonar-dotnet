@@ -38,11 +38,12 @@ namespace SonarAnalyzer.UnitTest.Rules
 
         [TestMethod]
         public void RedundantModifier_CodeFix_CSharp9() =>
-            Verifier.VerifyCodeFix(@"TestCases\RedundantModifier.CSharp9.cs",
-                                   @"TestCases\RedundantModifier.CSharp9.Fixed.cs",
-                                   new RedundantModifier(),
-                                   new RedundantModifierCodeFixProvider(),
-                                   options: ParseOptionsHelper.FromCSharp9);
+            Verifier.VerifyCodeFix(
+                @"TestCases\RedundantModifier.CSharp9.cs",
+                @"TestCases\RedundantModifier.CSharp9.Fixed.cs",
+                new RedundantModifier(),
+                new RedundantModifierCodeFixProvider(),
+                options: ParseOptionsHelper.FromCSharp9);
 
         [TestMethod]
         public void RedundantModifier_CSharp10() =>
@@ -50,18 +51,20 @@ namespace SonarAnalyzer.UnitTest.Rules
 
         [TestMethod]
         public void RedundantModifier_CodeFix_CSharp10() =>
-            Verifier.VerifyCodeFix(@"TestCases\RedundantModifier.CSharp10.cs",
-                                   @"TestCases\RedundantModifier.CSharp10.Fixed.cs",
-                                   new RedundantModifier(),
-                                   new RedundantModifierCodeFixProvider(),
-                                   options: ParseOptionsHelper.FromCSharp10);
+            Verifier.VerifyCodeFix(
+                @"TestCases\RedundantModifier.CSharp10.cs",
+                @"TestCases\RedundantModifier.CSharp10.Fixed.cs",
+                new RedundantModifier(),
+                new RedundantModifierCodeFixProvider(),
+                options: ParseOptionsHelper.FromCSharp10);
 #endif
 
         [TestMethod]
         public void RedundantModifier_CodeFix() =>
-            Verifier.VerifyCodeFix(@"TestCases\RedundantModifier.cs",
-                                   @"TestCases\RedundantModifier.Fixed.cs",
-                                   new RedundantModifier(),
-                                   new RedundantModifierCodeFixProvider());
+            Verifier.VerifyCodeFix(
+                @"TestCases\RedundantModifier.cs",
+                @"TestCases\RedundantModifier.Fixed.cs",
+                new RedundantModifier(),
+                new RedundantModifierCodeFixProvider());
     }
 }

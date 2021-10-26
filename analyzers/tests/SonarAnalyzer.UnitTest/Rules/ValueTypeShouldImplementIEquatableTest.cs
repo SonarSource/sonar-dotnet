@@ -34,8 +34,9 @@ namespace SonarAnalyzer.UnitTest.Rules
 #if NET
         [TestMethod]
         public void ValueTypeShouldImplementIEquatable_CSharp10() =>
-            Verifier.VerifyAnalyzerFromCSharp10Library(@"TestCases\ValueTypeShouldImplementIEquatable.CSharp10.cs",
-                                                      new ValueTypeShouldImplementIEquatable());
+            Verifier.VerifyAnalyzerFromCSharp10Library(
+                @"TestCases\ValueTypeShouldImplementIEquatable.CSharp10.cs",
+                new ValueTypeShouldImplementIEquatable());
 #endif
     }
 }

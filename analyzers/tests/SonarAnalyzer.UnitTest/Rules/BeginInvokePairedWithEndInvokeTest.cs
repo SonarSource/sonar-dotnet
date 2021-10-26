@@ -35,12 +35,14 @@ namespace SonarAnalyzer.UnitTest.Rules
 #if NET
         [TestMethod]
         public void BeginInvokePairedWithEndInvoke_CSharp9() =>
-            Verifier.VerifyAnalyzerFromCSharp9Library(new[] { @"TestCases\BeginInvokePairedWithEndInvoke.CSharp9.Part1.cs", @"TestCases\BeginInvokePairedWithEndInvoke.CSharp9.Part2.cs" },
+            Verifier.VerifyAnalyzerFromCSharp9Library(
+                new[] { @"TestCases\BeginInvokePairedWithEndInvoke.CSharp9.Part1.cs", @"TestCases\BeginInvokePairedWithEndInvoke.CSharp9.Part2.cs" },
                 new CS.BeginInvokePairedWithEndInvoke());
 
         [TestMethod]
         public void BeginInvokePairedWithEndInvoke_CSharp10() =>
-            Verifier.VerifyAnalyzerFromCSharp10Library(new[] { @"TestCases\BeginInvokePairedWithEndInvoke.CSharp10.cs" },
+            Verifier.VerifyAnalyzerFromCSharp10Library(
+                new[] { @"TestCases\BeginInvokePairedWithEndInvoke.CSharp10.cs" },
                 new CS.BeginInvokePairedWithEndInvoke());
 #endif
 

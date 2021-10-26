@@ -30,25 +30,28 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         public void CollectionsShouldImplementGenericInterface() =>
-            Verifier.VerifyAnalyzer(@"TestCases\CollectionsShouldImplementGenericInterface.cs",
-                                    new CollectionsShouldImplementGenericInterface(),
-                                    CompilationErrorBehavior.Ignore,     // It would be too tedious to implement all those interfaces
-                                    MetadataReferenceFacade.SystemCollections);
+            Verifier.VerifyAnalyzer(
+                @"TestCases\CollectionsShouldImplementGenericInterface.cs",
+                new CollectionsShouldImplementGenericInterface(),
+                CompilationErrorBehavior.Ignore,     // It would be too tedious to implement all those interfaces
+                MetadataReferenceFacade.SystemCollections);
 
 #if NET
         [TestMethod]
         public void CollectionsShouldImplementGenericInterface_Csharp9() =>
-            Verifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\CollectionsShouldImplementGenericInterface.CSharp9.cs",
-                                                      new CollectionsShouldImplementGenericInterface(),
-                                                      CompilationErrorBehavior.Ignore,     // It would be too tedious to implement all those interfaces
-                                                      MetadataReferenceFacade.SystemCollections);
+            Verifier.VerifyAnalyzerFromCSharp9Library(
+                @"TestCases\CollectionsShouldImplementGenericInterface.CSharp9.cs",
+                new CollectionsShouldImplementGenericInterface(),
+                CompilationErrorBehavior.Ignore,     // It would be too tedious to implement all those interfaces
+                MetadataReferenceFacade.SystemCollections);
 
         [TestMethod]
         public void CollectionsShouldImplementGenericInterface_Csharp10() =>
-            Verifier.VerifyAnalyzerFromCSharp10Library(@"TestCases\CollectionsShouldImplementGenericInterface.CSharp10.cs",
-                                                      new CollectionsShouldImplementGenericInterface(),
-                                                      CompilationErrorBehavior.Ignore,     // It would be too tedious to implement all those interfaces
-                                                      MetadataReferenceFacade.SystemCollections);
+            Verifier.VerifyAnalyzerFromCSharp10Library(
+                @"TestCases\CollectionsShouldImplementGenericInterface.CSharp10.cs",
+                new CollectionsShouldImplementGenericInterface(),
+                CompilationErrorBehavior.Ignore,     // It would be too tedious to implement all those interfaces
+                MetadataReferenceFacade.SystemCollections);
 #endif
     }
 }

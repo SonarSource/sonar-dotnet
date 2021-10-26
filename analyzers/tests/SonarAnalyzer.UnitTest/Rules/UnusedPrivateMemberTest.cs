@@ -92,12 +92,13 @@ public static class Foo
 
         [TestMethod]
         public void UnusedPrivateMemberWithPartialClasses() =>
-            Verifier.VerifyAnalyzer(new[]
-                                    {
-                                        @"TestCases\UnusedPrivateMember.part1.cs",
-                                        @"TestCases\UnusedPrivateMember.part2.cs"
-                                    },
-                                    new UnusedPrivateMember());
+            Verifier.VerifyAnalyzer(
+                new[]
+                {
+                    @"TestCases\UnusedPrivateMember.part1.cs",
+                    @"TestCases\UnusedPrivateMember.part2.cs"
+                },
+                new UnusedPrivateMember());
 
         [TestMethod]
         public void UnusedPrivateMember_Methods_EventHandler() =>
@@ -174,60 +175,68 @@ namespace EntityFrameworkMigrations
         [DataRow(ProjectType.Product)]
         [DataRow(ProjectType.Test)]
         public void UnusedPrivateMember(ProjectType projectType) =>
-            Verifier.VerifyAnalyzer(@"TestCases\UnusedPrivateMember.cs",
-                                    new UnusedPrivateMember(),
-                                    TestHelper.ProjectTypeReference(projectType));
+            Verifier.VerifyAnalyzer(
+                @"TestCases\UnusedPrivateMember.cs",
+                new UnusedPrivateMember(),
+                TestHelper.ProjectTypeReference(projectType));
 
         [TestMethod]
         public void UnusedPrivateMember_FromCSharp7() =>
-            Verifier.VerifyAnalyzer(@"TestCases\UnusedPrivateMember.CSharp7.cs",
-                                    new UnusedPrivateMember(),
-                                    ParseOptionsHelper.FromCSharp7);
+            Verifier.VerifyAnalyzer(
+                @"TestCases\UnusedPrivateMember.CSharp7.cs",
+                new UnusedPrivateMember(),
+                ParseOptionsHelper.FromCSharp7);
 
         [TestMethod]
         public void UnusedPrivateMember_FromCSharp8() =>
-            Verifier.VerifyAnalyzer(@"TestCases\UnusedPrivateMember.CSharp8.cs",
-                                    new UnusedPrivateMember(),
-                                    ParseOptionsHelper.FromCSharp8,
+            Verifier.VerifyAnalyzer(
+                @"TestCases\UnusedPrivateMember.CSharp8.cs",
+                new UnusedPrivateMember(),
+                ParseOptionsHelper.FromCSharp8,
 #if NETFRAMEWORK
-                                    NuGetMetadataReference.NETStandardV2_1_0.Concat(NuGetMetadataReference.MicrosoftExtensionsDependencyInjectionAbstractions(Constants.DotNetCore220Version)));
+                NuGetMetadataReference.NETStandardV2_1_0.Concat(NuGetMetadataReference.MicrosoftExtensionsDependencyInjectionAbstractions(Constants.DotNetCore220Version)));
 #else
-                                    new[] {CoreMetadataReference.MicrosoftExtensionsDependencyInjectionAbstractions});
+                new[] {CoreMetadataReference.MicrosoftExtensionsDependencyInjectionAbstractions});
 #endif
 
 #if NET
         [TestMethod]
         public void UnusedPrivateMember_FromCSharp9() =>
-            Verifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\UnusedPrivateMember.CSharp9.cs",
-                                                      new UnusedPrivateMember());
+            Verifier.VerifyAnalyzerFromCSharp9Library(
+                @"TestCases\UnusedPrivateMember.CSharp9.cs",
+                new UnusedPrivateMember());
 
         [TestMethod]
         public void UnusedPrivateMember_FromCSharp9_TopLevelStatements() =>
-            Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\UnusedPrivateMember.CSharp9.TopLevelStatements.cs",
-                                                      new UnusedPrivateMember());
+            Verifier.VerifyAnalyzerFromCSharp9Console(
+                @"TestCases\UnusedPrivateMember.CSharp9.TopLevelStatements.cs",
+                new UnusedPrivateMember());
 
         [TestMethod]
         public void UnusedPrivateMember_FromCSharp10() =>
-            Verifier.VerifyAnalyzerFromCSharp10Library(@"TestCases\UnusedPrivateMember.CSharp10.cs",
-                                                      new UnusedPrivateMember());
+            Verifier.VerifyAnalyzerFromCSharp10Library(
+                @"TestCases\UnusedPrivateMember.CSharp10.cs",
+                new UnusedPrivateMember());
 #endif
 
         [TestMethod]
         public void UnusedPrivateMember_CodeFix() =>
-            Verifier.VerifyCodeFix(@"TestCases\UnusedPrivateMember.cs",
-                                   @"TestCases\UnusedPrivateMember.Fixed.cs",
-                                   @"TestCases\UnusedPrivateMember.Fixed.Batch.cs",
-                                   new UnusedPrivateMember(),
-                                   new UnusedPrivateMemberCodeFixProvider());
+            Verifier.VerifyCodeFix(
+                @"TestCases\UnusedPrivateMember.cs",
+                @"TestCases\UnusedPrivateMember.Fixed.cs",
+                @"TestCases\UnusedPrivateMember.Fixed.Batch.cs",
+                new UnusedPrivateMember(),
+                new UnusedPrivateMemberCodeFixProvider());
 
         [TestMethod]
         public void UnusedPrivateMember_UsedInGeneratedFile() =>
-            Verifier.VerifyAnalyzer(new[]
-                                    {
-                                        @"TestCases\UnusedPrivateMember.CalledFromGenerated.cs",
-                                        @"TestCases\UnusedPrivateMember.Generated.cs"
-                                    },
-                                    new UnusedPrivateMember());
+            Verifier.VerifyAnalyzer(
+                new[]
+                {
+                    @"TestCases\UnusedPrivateMember.CalledFromGenerated.cs",
+                    @"TestCases\UnusedPrivateMember.Generated.cs"
+                },
+                new UnusedPrivateMember());
 
         [TestMethod]
         public void UnusedPrivateMember_Performance()
