@@ -342,4 +342,13 @@ namespace Tests.Diagnostics
         }
         public override int GetHashCode() => 0;
     }
+
+    public struct S
+    {
+        static S()
+        {
+            throw new Exception(); // Noncompliant
+        }
+    }
+
 }

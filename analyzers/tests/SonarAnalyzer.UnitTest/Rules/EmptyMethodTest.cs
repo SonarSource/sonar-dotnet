@@ -45,6 +45,10 @@ namespace SonarAnalyzer.UnitTest.Rules
 
 #if NET
         [TestMethod]
+        public void EmptyMethod_CSharp10() =>
+            Verifier.VerifyAnalyzerFromCSharp10Library(@"TestCases\EmptyMethod.CSharp10.cs", new CS.EmptyMethod());
+
+        [TestMethod]
         public void EmptyMethod_CSharp9() =>
             Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\EmptyMethod.CSharp9.cs", new CS.EmptyMethod());
 #endif

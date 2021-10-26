@@ -33,14 +33,16 @@ namespace SonarAnalyzer.Rules.CSharp
     [Rule(DiagnosticId)]
     public sealed class FieldShouldNotBePublic : FieldShouldNotBePublicBase<SyntaxKind, FieldDeclarationSyntax, VariableDeclaratorSyntax>
     {
-        private static readonly DiagnosticDescriptor rule =
-            DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(rule);
+        private static readonly DiagnosticDescriptor Rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
+        private static readonly ImmutableArray<SyntaxKind> KindsOfInterest = ImmutableArray.Create(SyntaxKind.FieldDeclaration);
 
-        private static readonly ImmutableArray<SyntaxKind> kindsOfInterest = ImmutableArray.Create(SyntaxKind.FieldDeclaration);
-        public override ImmutableArray<SyntaxKind> SyntaxKindsOfInterest => kindsOfInterest;
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
+
+        public override ImmutableArray<SyntaxKind> SyntaxKindsOfInterest => KindsOfInterest;
+
         protected override SyntaxToken GetIdentifier(VariableDeclaratorSyntax variable) =>
             variable.Identifier;
+
         protected override IEnumerable<VariableDeclaratorSyntax> GetVariables(FieldDeclarationSyntax fieldDeclaration) =>
             fieldDeclaration.Declaration.Variables;
 

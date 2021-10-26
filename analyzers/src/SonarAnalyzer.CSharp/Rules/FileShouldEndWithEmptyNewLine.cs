@@ -33,31 +33,28 @@ namespace SonarAnalyzer.Rules.CSharp
     [Rule(DiagnosticId)]
     public sealed class FileShouldEndWithEmptyNewLine : SonarDiagnosticAnalyzer
     {
-        internal const string DiagnosticId = "S113";
+        private const string DiagnosticId = "S113";
         private const string MessageFormat = "Add a new line at the end of the file '{0}'.";
 
-        private static readonly DiagnosticDescriptor rule =
-            DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(rule);
+        private static readonly DiagnosticDescriptor Rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
 
-        protected override void Initialize(SonarAnalysisContext context)
-        {
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
+
+        protected override void Initialize(SonarAnalysisContext context) =>
             context.RegisterSyntaxTreeActionInNonGenerated(stac =>
-            {
-                var lastToken = stac.Tree.GetRoot().GetLastToken();
-
-                if (lastToken == default(SyntaxToken))
                 {
-                    return;
-                }
+                    var lastToken = stac.Tree.GetRoot().GetLastToken();
 
-                var isFileEndingWithNewLine = lastToken.TrailingTrivia.LastOrDefault().IsKind(SyntaxKind.EndOfLineTrivia);
-                if (!isFileEndingWithNewLine)
-                {
-                    stac.ReportIssue(Diagnostic.Create(rule, lastToken.GetLocation(),
-                        Path.GetFileName(stac.Tree.FilePath)));
-                }
-            });
-        }
+                    if (lastToken == default(SyntaxToken))
+                    {
+                        return;
+                    }
+
+                    var isFileEndingWithNewLine = lastToken.TrailingTrivia.LastOrDefault().IsKind(SyntaxKind.EndOfLineTrivia);
+                    if (!isFileEndingWithNewLine)
+                    {
+                        stac.ReportIssue(Diagnostic.Create(Rule, lastToken.GetLocation(), Path.GetFileName(stac.Tree.FilePath)));
+                    }
+                });
     }
 }
