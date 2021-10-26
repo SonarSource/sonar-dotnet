@@ -78,25 +78,23 @@ namespace SonarAnalyzer.Rules.CSharp
             }
         }
 
-        private void ReportOnConflictingTransparencyAttributes(CompilationAnalysisContext compilationContext,
-            Dictionary<SyntaxNode, AttributeSyntax> nodesWithSecuritySafeCritical,
-            Dictionary<SyntaxNode, AttributeSyntax> nodesWithSecurityCritical)
+        private static void ReportOnConflictingTransparencyAttributes(CompilationAnalysisContext compilationContext,
+                                                                      Dictionary<SyntaxNode, AttributeSyntax> nodesWithSecuritySafeCritical,
+                                                                      Dictionary<SyntaxNode, AttributeSyntax> nodesWithSecurityCritical)
         {
             var assemblySecurityCriticalAttribute = compilationContext.Compilation.Assembly
-                .GetAttributes(KnownType.System_Security_SecurityCriticalAttribute)
-                .FirstOrDefault();
+                                                                      .GetAttributes(KnownType.System_Security_SecurityCriticalAttribute)
+                                                                      .FirstOrDefault();
 
             if (assemblySecurityCriticalAttribute != null)
             {
-                var assemblySecurityLocation = assemblySecurityCriticalAttribute.ApplicationSyntaxReference
-                    .GetSyntax().GetLocation();
+                var assemblySecurityLocation = assemblySecurityCriticalAttribute.ApplicationSyntaxReference.GetSyntax().GetLocation();
 
                 // All parts declaring the 'SecuritySafeCriticalAttribute' are incorrect since the assembly
                 // itself is marked as 'SecurityCritical'.
                 foreach (var item in nodesWithSecuritySafeCritical)
                 {
-                    compilationContext.ReportIssue(Diagnostic.Create(Rule, item.Value.GetLocation(),
-                        additionalLocations: new[] { assemblySecurityLocation }));
+                    compilationContext.ReportIssue(Diagnostic.Create(Rule, item.Value.GetLocation(), additionalLocations: new[] { assemblySecurityLocation }));
                 }
             }
             else
@@ -108,8 +106,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     {
                         if (nodesWithSecurityCritical.ContainsKey(current))
                         {
-                            compilationContext.ReportIssue(Diagnostic.Create(Rule, item.Value.GetLocation(),
-                                additionalLocations: new[] { nodesWithSecurityCritical[current].GetLocation() }));
+                            compilationContext.ReportIssue(Diagnostic.Create(Rule, item.Value.GetLocation(), additionalLocations: new[] { nodesWithSecurityCritical[current].GetLocation() }));
                             break;
                         }
 
