@@ -14,6 +14,17 @@ namespace Tests.Diagnostics
             this.field = field;
             caller.BeginInvoke("FooStruct", 42, null, null); // Noncompliant
         }
+
+        private void BeginInvokeAndEndInvokeOnDelegateWithLambdaCallback1()
+        {
+            var caller = new AsyncMethodCaller(AsyncMethod);
+            caller.BeginInvoke(name: "delegate", 42, @object: null, callback: result => caller.EndInvoke(result)); // Compliant
+        }
+
+        private static void AsyncMethod(string msg, int i)
+        {
+            Console.WriteLine($"AsyncMethod: {msg}");
+        }
     }
 
     public record struct PositionalRecordStruct(string Property)
@@ -25,6 +36,17 @@ namespace Tests.Diagnostics
         {
             this.field = field;
             caller.BeginInvoke("FooStruct", 42, null, null); // Noncompliant
+        }
+
+        private static void BeginInvokeAndEndInvokeOnDelegateWithLambdaCallback1()
+        {
+            var caller = new AsyncMethodCaller(AsyncMethod);
+            caller.BeginInvoke(name: "delegate", 42, @object: null, callback: result => caller.EndInvoke(result)); // Compliant
+        }
+
+        private static void AsyncMethod(string msg, int i)
+        {
+            Console.WriteLine($"AsyncMethod: {msg}");
         }
     }
 }
