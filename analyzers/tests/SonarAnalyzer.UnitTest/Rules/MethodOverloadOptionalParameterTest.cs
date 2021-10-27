@@ -43,6 +43,10 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         public void MethodOverloadOptionalParameter_CSharp9() =>
             Verifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\MethodOverloadOptionalParameter.CSharp9.cs", new MethodOverloadOptionalParameter());
+
+        [TestMethod]
+        public void MethodOverloadOptionalParameter_CSharp10() =>
+            Verifier.VerifyAnalyzerFromCSharp10Library(@"TestCases\MethodOverloadOptionalParameter.CSharp10.cs", new MethodOverloadOptionalParameter());
 #endif
     }
 }

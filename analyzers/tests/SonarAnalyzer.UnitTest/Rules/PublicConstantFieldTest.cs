@@ -36,6 +36,10 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         public void PublicConstantField_CSharp9() =>
             Verifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\PublicConstantField.CSharp9.cs", new CS.PublicConstantField());
+
+            [TestMethod]
+        public void PublicConstantField_CSharp10() =>
+            Verifier.VerifyAnalyzerFromCSharp10Library(@"TestCases\PublicConstantField.CSharp10.cs", new CS.PublicConstantField());
 #endif
 
         [TestMethod]
