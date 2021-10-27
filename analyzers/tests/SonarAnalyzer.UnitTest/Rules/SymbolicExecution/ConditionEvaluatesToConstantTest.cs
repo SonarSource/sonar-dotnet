@@ -67,6 +67,10 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         public void ConditionEvaluatesToConstant_FromCSharp9_TopLevelStatements() =>
             Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\ConditionEvaluatesToConstant.CSharp9.TopLevelStatements.cs", GetAnalyzer());
+
+        [TestMethod]
+        public void ConditionEvaluatesToConstant_FromCSharp10() =>
+            Verifier.VerifyAnalyzerFromCSharp10Library(@"TestCases\ConditionEvaluatesToConstant.CSharp10.cs", GetAnalyzer());
 #endif
 
         private static SonarDiagnosticAnalyzer GetAnalyzer() =>

@@ -35,6 +35,10 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         public void DoNotShiftByZeroOrIntSize_CSharp9() =>
             Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\DoNotShiftByZeroOrIntSize.CSharp9.cs", new DoNotShiftByZeroOrIntSize());
+
+        [TestMethod]
+        public void DoNotShiftByZeroOrIntSize_CSharp10() =>
+            Verifier.VerifyAnalyzerFromCSharp10Library(@"TestCases\DoNotShiftByZeroOrIntSize.CSharp10.cs", new DoNotShiftByZeroOrIntSize());
 #endif
     }
 }

@@ -34,8 +34,13 @@ namespace SonarAnalyzer.UnitTest.Rules
 #if NET
         [TestMethod]
         public void DisposeNotImplementingDispose_CSharp9() =>
-            Verifier.VerifyAnalyzerFromCSharp9Console(new[] { @"TestCases\DisposeNotImplementingDispose.CSharp9.Part1.cs", @"TestCases\DisposeNotImplementingDispose.CSharp9.Part2.cs", },
+            Verifier.VerifyAnalyzerFromCSharp9Console(
+                new[] { @"TestCases\DisposeNotImplementingDispose.CSharp9.Part1.cs", @"TestCases\DisposeNotImplementingDispose.CSharp9.Part2.cs", },
                 new DisposeNotImplementingDispose());
+
+        [TestMethod]
+        public void DisposeNotImplementingDispose_CSharp10() =>
+            Verifier.VerifyAnalyzerFromCSharp10Library(@"TestCases\DisposeNotImplementingDispose.CSharp10.cs", new DisposeNotImplementingDispose());
 #endif
     }
 }

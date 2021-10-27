@@ -35,6 +35,11 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         public void DontMixIncrementOrDecrementWithOtherOperators_CSharp9() =>
             Verifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\DontMixIncrementOrDecrementWithOtherOperators.CSharp9.cs", new DontMixIncrementOrDecrementWithOtherOperators());
+
+        [TestMethod]
+        public void DontMixIncrementOrDecrementWithOtherOperators_CSharp10() =>
+            Verifier.VerifyAnalyzerFromCSharp10Library(@"TestCases\DontMixIncrementOrDecrementWithOtherOperators.CSharp10.cs", new DontMixIncrementOrDecrementWithOtherOperators());
 #endif
+
     }
 }
