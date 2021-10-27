@@ -35,25 +35,28 @@ namespace SonarAnalyzer.UnitTest.Rules
         [DataRow("2.5.7.10213")]
         [DataRow(Constants.NuGetLatestVersion)]
         public void TestClassShouldHaveTestMethod_NUnit(string testFwkVersion) =>
-            Verifier.VerifyAnalyzer(@"TestCases\TestClassShouldHaveTestMethod.NUnit.cs",
-                                    new TestClassShouldHaveTestMethod(),
-                                    NuGetMetadataReference.NUnit(testFwkVersion));
+            Verifier.VerifyAnalyzer(
+                @"TestCases\TestClassShouldHaveTestMethod.NUnit.cs",
+                new TestClassShouldHaveTestMethod(),
+                NuGetMetadataReference.NUnit(testFwkVersion));
 
         [DataTestMethod]
         [DataRow("1.1.11")]
         [DataRow(Constants.NuGetLatestVersion)]
         public void TestClassShouldHaveTestMethod_MSTest(string testFwkVersion) =>
-            Verifier.VerifyAnalyzer(@"TestCases\TestClassShouldHaveTestMethod.MsTest.cs",
-                                    new TestClassShouldHaveTestMethod(),
-                                    NuGetMetadataReference.MSTestTestFramework(testFwkVersion));
+            Verifier.VerifyAnalyzer(
+                @"TestCases\TestClassShouldHaveTestMethod.MsTest.cs",
+                new TestClassShouldHaveTestMethod(),
+                NuGetMetadataReference.MSTestTestFramework(testFwkVersion));
 
 #if NET
         [DataTestMethod]
         public void TestClassShouldHaveTestMethod_CSharp9() =>
-            Verifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\TestClassShouldHaveTestMethod.CSharp9.cs",
-                            new TestClassShouldHaveTestMethod(),
-                            NuGetMetadataReference.MSTestTestFramework(Constants.NuGetLatestVersion)
-                                .Concat(NuGetMetadataReference.NUnit(Constants.NuGetLatestVersion)));
+            Verifier.VerifyAnalyzerFromCSharp9Library(
+                @"TestCases\TestClassShouldHaveTestMethod.CSharp9.cs",
+                new TestClassShouldHaveTestMethod(),
+                NuGetMetadataReference.MSTestTestFramework(Constants.NuGetLatestVersion)
+                    .Concat(NuGetMetadataReference.NUnit(Constants.NuGetLatestVersion)));
 #endif
     }
 }
