@@ -35,6 +35,10 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         public void ValuesUselesslyIncremented_CSharp9() =>
             Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\ValuesUselesslyIncremented.CSharp9.cs", new ValuesUselesslyIncremented());
+
+        [TestMethod]
+        public void ValuesUselesslyIncremented_CSharp10() =>
+            Verifier.VerifyAnalyzerFromCSharp10Library(@"TestCases\ValuesUselesslyIncremented.CSharp10.cs", new ValuesUselesslyIncremented());
 #endif
     }
 }
