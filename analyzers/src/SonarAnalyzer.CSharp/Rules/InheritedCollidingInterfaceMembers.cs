@@ -37,6 +37,7 @@ namespace SonarAnalyzer.Rules.CSharp
         private const string DiagnosticId = "S3444";
         private const string MessageFormat = "Rename or add member{1} {0} to this interface to resolve ambiguities.";
         private const int MaxMemberDisplayCount = 2;
+        private const int MinBaseListTypes = 2;
 
         private static readonly DiagnosticDescriptor Rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
 
@@ -47,7 +48,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 c =>
                 {
                     var interfaceDeclaration = (InterfaceDeclarationSyntax)c.Node;
-                    if (interfaceDeclaration.BaseList == null || interfaceDeclaration.BaseList.Types.Count < 2)
+                    if (interfaceDeclaration.BaseList == null || interfaceDeclaration.BaseList.Types.Count < MinBaseListTypes)
                     {
                         return;
                     }
