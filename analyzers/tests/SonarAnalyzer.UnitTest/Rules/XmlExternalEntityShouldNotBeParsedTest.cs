@@ -75,6 +75,13 @@ namespace SonarAnalyzer.UnitTest.Rules
             Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\XmlExternalEntityShouldNotBeParsed_XmlTextReader_CSharp9.cs",
                 new XmlExternalEntityShouldNotBeParsed(GetVersionProviderMock(NetFrameworkVersion.After452)),
                 MetadataReferenceFacade.SystemXml.ToArray());
+
+        [TestMethod]
+        public void XmlExternalEntityShouldNotBeParsed_XmlTextReader_CSharp10() =>
+            Verifier.VerifyAnalyzerFromCSharp10Library(
+                @"TestCases\XmlExternalEntityShouldNotBeParsed_XmlTextReader_CSharp10.cs",
+                new XmlExternalEntityShouldNotBeParsed(GetVersionProviderMock(NetFrameworkVersion.After452)),
+                MetadataReferenceFacade.SystemXml.ToArray());
 #endif
 
         [DataRow(NetFrameworkVersion.After452, @"TestCases\XmlExternalEntityShouldNotBeParsed_AlwaysSafe.cs")]
