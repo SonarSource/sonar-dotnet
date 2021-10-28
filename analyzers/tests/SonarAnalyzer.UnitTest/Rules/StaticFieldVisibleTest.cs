@@ -35,6 +35,10 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         public void StaticFieldVisible_CSharp9() =>
             Verifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\StaticFieldVisible.CSharp9.cs", new StaticFieldVisible());
+
+        [TestMethod]
+        public void StaticFieldVisible_CSharp10() =>
+            Verifier.VerifyAnalyzerFromCSharp10Library(@"TestCases\StaticFieldVisible.CSharp10.cs", new StaticFieldVisible());
 #endif
     }
 }

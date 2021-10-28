@@ -35,13 +35,18 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         public void RedundantToStringCall_CSharp9() =>
             Verifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\RedundantToStringCall.CSharp9.cs", new RedundantToStringCall());
+
+        [TestMethod]
+        public void RedundantToStringCall_CSharp10() =>
+            Verifier.VerifyAnalyzerFromCSharp10Library(@"TestCases\RedundantToStringCall.CSharp10.cs", new RedundantToStringCall());
 #endif
 
         [TestMethod]
         public void RedundantToStringCall_CodeFix() =>
-            Verifier.VerifyCodeFix(@"TestCases\RedundantToStringCall.cs",
-                                   @"TestCases\RedundantToStringCall.Fixed.cs",
-                                   new RedundantToStringCall(),
-                                   new RedundantToStringCallCodeFixProvider());
+            Verifier.VerifyCodeFix(
+                @"TestCases\RedundantToStringCall.cs",
+                @"TestCases\RedundantToStringCall.Fixed.cs",
+                new RedundantToStringCall(),
+                new RedundantToStringCallCodeFixProvider());
     }
 }

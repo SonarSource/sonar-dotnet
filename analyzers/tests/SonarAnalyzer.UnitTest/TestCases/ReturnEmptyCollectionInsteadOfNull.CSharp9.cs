@@ -21,5 +21,10 @@ record Record
         return str.ToCharArray();
     }
 
+    static (IEnumerable<char>, IEnumerable<char>) SomeMethod()
+    {
+        return (null, null); // FN
+    }
+
     IEnumerable<int> Compliant() => Enumerable.Empty<int>();
 }

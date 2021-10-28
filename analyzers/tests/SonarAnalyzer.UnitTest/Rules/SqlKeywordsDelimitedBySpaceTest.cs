@@ -73,6 +73,12 @@ namespace SonarAnalyzer.UnitTest.Rules
                 new SqlKeywordsDelimitedBySpace(),
                 GetAdditionalReferences());
 
+        [TestMethod]
+        public void SqlKeywordsDelimitedBySpace_CSharp10() =>
+            Verifier.VerifyAnalyzerFromCSharp10Library(
+                new[] { @"TestCases\SqlKeywordsDelimitedBySpace.CSharp10.cs", },
+                new SqlKeywordsDelimitedBySpace(),
+                GetAdditionalReferences());
 #endif
 
         [DataRow("System.Data")]
