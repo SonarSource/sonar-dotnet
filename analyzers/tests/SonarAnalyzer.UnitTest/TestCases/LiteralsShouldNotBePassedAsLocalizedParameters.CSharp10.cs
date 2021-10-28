@@ -4,6 +4,6 @@
 
     public void M()
     {
-        (Property, var b) = ("a", "B"); // Noncompliant
+        (Property, var b) = ("a", "B"); // FN
     }
 }
