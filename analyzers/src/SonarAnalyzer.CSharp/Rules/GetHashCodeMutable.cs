@@ -73,18 +73,22 @@ namespace SonarAnalyzer.Rules.CSharp
 
                     var identifiers = methodSyntax.DescendantNodes().OfType<IdentifierNameSyntax>();
 
-                    var secondaryLocations = GetAllFirstMutableFieldsUsed(c, fieldsOfClass, identifiers)
-                                             .Select(identifierSyntax => new SecondaryLocation(identifierSyntax.GetLocation(),
-                                                         string.Format(SecondaryMessageFormat, identifierSyntax.Identifier.Text)))
-                                             .ToList();
+                    var secondaryLocations = GetAllFirstMutableFieldsUsed(c, fieldsOfClass, identifiers).Select(CreateSecondaryLocation).ToList();
                     if (secondaryLocations.Count == 0)
                     {
                         return;
                     }
 
-                    c.ReportIssue(Diagnostic.Create(Rule, methodSyntax.Identifier.GetLocation(), secondaryLocations.ToAdditionalLocations(), secondaryLocations.ToProperties()));
+                    c.ReportIssue(Diagnostic.Create(
+                        Rule,
+                        methodSyntax.Identifier.GetLocation(),
+                        secondaryLocations.ToAdditionalLocations(),
+                        secondaryLocations.ToProperties()));
                 },
                 SyntaxKind.MethodDeclaration);
+
+        private static SecondaryLocation CreateSecondaryLocation(SimpleNameSyntax identifierSyntax) =>
+            new SecondaryLocation(identifierSyntax.GetLocation(), string.Format(SecondaryMessageFormat, identifierSyntax.Identifier.Text));
 
         private static IEnumerable<IdentifierNameSyntax> GetAllFirstMutableFieldsUsed(SyntaxNodeAnalysisContext context,
                                                                                       ICollection<IFieldSymbol> fieldsOfClass,
