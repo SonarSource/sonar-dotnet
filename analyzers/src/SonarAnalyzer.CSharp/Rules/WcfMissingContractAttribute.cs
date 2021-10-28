@@ -32,18 +32,16 @@ namespace SonarAnalyzer.Rules.CSharp
     [Rule(DiagnosticId)]
     public sealed class WcfMissingContractAttribute : SonarDiagnosticAnalyzer
     {
-        internal const string DiagnosticId = "S3597";
+        private const string DiagnosticId = "S3597";
         private const string MessageFormat = "Add the '{0}' attribute to {1}.";
-        internal const string MessageOperation = "the methods of this {0}";
-        internal const string MessageService = " this {0}";
+        private const string MessageOperation = "the methods of this {0}";
+        private const string MessageService = " this {0}";
 
-        private static readonly DiagnosticDescriptor rule =
-            DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
+        private static readonly DiagnosticDescriptor Rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
 
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(rule);
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
 
-        protected override void Initialize(SonarAnalysisContext context)
-        {
+        protected override void Initialize(SonarAnalysisContext context) =>
             context.RegisterSymbolAction(
                 c =>
                 {
@@ -54,7 +52,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     }
 
                     var hasServiceContract = namedType.HasAttribute(KnownType.System_ServiceModel_ServiceContractAttribute);
-                    var hasAnyMethodWithOperationContract = HasAnyMethodWithoperationContract(namedType);
+                    var hasAnyMethodWithOperationContract = HasAnyMethodWithOperationContract(namedType);
 
                     if (!(hasServiceContract ^ hasAnyMethodWithOperationContract))
                     {
@@ -84,26 +82,19 @@ namespace SonarAnalyzer.Rules.CSharp
                     var classOrInterface = namedType.IsClass() ? "class" : "interface";
                     message = string.Format(message, classOrInterface);
 
-                    c.ReportDiagnosticIfNonGenerated(Diagnostic.Create(rule,
-                        declarationSyntax.Identifier.GetLocation(), attributeToAdd, message));
+                    c.ReportDiagnosticIfNonGenerated(Diagnostic.Create(Rule, declarationSyntax.Identifier.GetLocation(), attributeToAdd, message));
                 },
                 SymbolKind.NamedType);
-        }
 
-        private static bool HasAnyMethodWithoperationContract(INamedTypeSymbol namedType)
-        {
-            return namedType.GetMembers()
-                .OfType<IMethodSymbol>()
-                .Any(m => m.HasAttribute(KnownType.System_ServiceModel_OperationContractAttribute));
-        }
+        private static bool HasAnyMethodWithOperationContract(INamespaceOrTypeSymbol namedType) =>
+            namedType.GetMembers()
+                     .OfType<IMethodSymbol>()
+                     .Any(m => m.HasAttribute(KnownType.System_ServiceModel_OperationContractAttribute));
 
-        private static TypeDeclarationSyntax GetTypeDeclaration(INamedTypeSymbol namedType, Compilation compilation,
-            AnalyzerOptions options)
-        {
-            return namedType.DeclaringSyntaxReferences
-                .Where(sr => sr.SyntaxTree.ShouldAnalyze(options, compilation))
-                .Select(sr => sr.GetSyntax() as TypeDeclarationSyntax)
-                .FirstOrDefault(s => s != null);
-        }
+        private static TypeDeclarationSyntax GetTypeDeclaration(ISymbol namedType, Compilation compilation, AnalyzerOptions options) =>
+            namedType.DeclaringSyntaxReferences
+                     .Where(sr => sr.SyntaxTree.ShouldAnalyze(options, compilation))
+                     .Select(sr => sr.GetSyntax() as TypeDeclarationSyntax)
+                     .FirstOrDefault(s => s != null);
     }
 }
