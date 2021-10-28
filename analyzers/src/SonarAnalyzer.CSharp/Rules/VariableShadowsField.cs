@@ -35,13 +35,12 @@ namespace SonarAnalyzer.Rules.CSharp
     [Rule(DiagnosticId)]
     public sealed class VariableShadowsField : SonarDiagnosticAnalyzer
     {
-        internal const string DiagnosticId = "S1117";
+        private const string DiagnosticId = "S1117";
         private const string MessageFormat = "Rename '{0}' which hides the {1} with the same name.";
 
-        private static readonly DiagnosticDescriptor rule =
-            DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
+        private static readonly DiagnosticDescriptor Rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
 
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(rule);
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
 
         protected override void Initialize(SonarAnalysisContext context)
         {
@@ -63,24 +62,19 @@ namespace SonarAnalyzer.Rules.CSharp
                 SyntaxKind.ForEachStatement);
 
             context.RegisterSyntaxNodeActionInNonGenerated(
-                c => ProcessStatementWithVariableDeclaration((LocalDeclarationStatementSyntax)c.Node, s => s.Declaration, c),
-                SyntaxKind.LocalDeclarationStatement);
+                c => ProcessStatementWithVariableDeclaration((LocalDeclarationStatementSyntax)c.Node, s => s.Declaration, c), SyntaxKind.LocalDeclarationStatement);
 
             context.RegisterSyntaxNodeActionInNonGenerated(
-                c => ProcessStatementWithVariableDeclaration((ForStatementSyntax)c.Node, s => s.Declaration, c),
-                SyntaxKind.ForStatement);
+                c => ProcessStatementWithVariableDeclaration((ForStatementSyntax)c.Node, s => s.Declaration, c), SyntaxKind.ForStatement);
 
             context.RegisterSyntaxNodeActionInNonGenerated(
-                c => ProcessStatementWithVariableDeclaration((UsingStatementSyntax)c.Node, s => s.Declaration, c),
-                SyntaxKind.UsingStatement);
+                c => ProcessStatementWithVariableDeclaration((UsingStatementSyntax)c.Node, s => s.Declaration, c), SyntaxKind.UsingStatement);
 
             context.RegisterSyntaxNodeActionInNonGenerated(
-                c => ProcessStatementWithVariableDeclaration((FixedStatementSyntax)c.Node, s => s.Declaration, c),
-                SyntaxKind.FixedStatement);
+                c => ProcessStatementWithVariableDeclaration((FixedStatementSyntax)c.Node, s => s.Declaration, c), SyntaxKind.FixedStatement);
         }
 
-        private static void ProcessStatementWithVariableDeclaration<T>(T declaration, Func<T, VariableDeclarationSyntax> variableSelector,
-            SyntaxNodeAnalysisContext context)
+        private static void ProcessStatementWithVariableDeclaration<T>(T declaration, Func<T, VariableDeclarationSyntax> variableSelector, SyntaxNodeAnalysisContext context)
         {
             var variableDeclaration = variableSelector(declaration);
             if (variableDeclaration == null)
@@ -116,16 +110,12 @@ namespace SonarAnalyzer.Rules.CSharp
                 return;
             }
 
-            context.ReportIssue(Diagnostic.Create(rule, identifier.GetLocation(),
-                identifier.Text,
-                (matchingMember is IFieldSymbol) ? "field" : "property"));
+            context.ReportIssue(Diagnostic.Create(Rule, identifier.GetLocation(), identifier.Text, (matchingMember is IFieldSymbol) ? "field" : "property"));
         }
 
-        private static List<ISymbol> GetMembers(INamedTypeSymbol classSymbol)
-        {
-            return classSymbol.GetMembers()
-                .Where(member => member is IFieldSymbol || member is IPropertySymbol)
-                .ToList();
-        }
+        private static List<ISymbol> GetMembers(INamespaceOrTypeSymbol classSymbol) =>
+            classSymbol.GetMembers()
+                       .Where(member => member is IFieldSymbol || member is IPropertySymbol)
+                       .ToList();
     }
 }
