@@ -36,6 +36,10 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         public void VariableUnused_CSharp9() =>
             Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\VariableUnused.CSharp9.cs", new CS.VariableUnused());
+
+        [TestMethod]
+        public void VariableUnused_CSharp10() =>
+            Verifier.VerifyAnalyzerFromCSharp10Library(@"TestCases\VariableUnused.CSharp10.cs", new CS.VariableUnused());
 #endif
 
         [TestMethod]
