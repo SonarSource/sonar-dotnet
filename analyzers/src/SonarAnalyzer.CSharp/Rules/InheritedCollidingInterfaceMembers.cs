@@ -34,24 +34,21 @@ namespace SonarAnalyzer.Rules.CSharp
     [Rule(DiagnosticId)]
     public sealed class InheritedCollidingInterfaceMembers : SonarDiagnosticAnalyzer
     {
-        internal const string DiagnosticId = "S3444";
+        private const string DiagnosticId = "S3444";
         private const string MessageFormat = "Rename or add member{1} {0} to this interface to resolve ambiguities.";
-
-        private static readonly DiagnosticDescriptor rule =
-            DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
-
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(rule);
-
         private const int MaxMemberDisplayCount = 2;
+        private const int MinBaseListTypes = 2;
 
-        protected override void Initialize(SonarAnalysisContext context)
-        {
+        private static readonly DiagnosticDescriptor Rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
+
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
+
+        protected override void Initialize(SonarAnalysisContext context) =>
             context.RegisterSyntaxNodeActionInNonGenerated(
                 c =>
                 {
                     var interfaceDeclaration = (InterfaceDeclarationSyntax)c.Node;
-                    if (interfaceDeclaration.BaseList == null ||
-                        interfaceDeclaration.BaseList.Types.Count < 2)
+                    if (interfaceDeclaration.BaseList == null || interfaceDeclaration.BaseList.Types.Count < MinBaseListTypes)
                     {
                         return;
                     }
@@ -62,10 +59,7 @@ namespace SonarAnalyzer.Rules.CSharp
                         return;
                     }
 
-                    var collidingMembers = GetCollidingMembers(interfaceSymbol)
-                        .Take(MaxMemberDisplayCount + 1)
-                        .ToList();
-
+                    var collidingMembers = GetCollidingMembers(interfaceSymbol).Take(MaxMemberDisplayCount + 1).ToList();
                     if (collidingMembers.Any())
                     {
                         var membersText = GetIssueMessageText(collidingMembers, c.SemanticModel, interfaceDeclaration.SpanStart);
@@ -74,21 +68,16 @@ namespace SonarAnalyzer.Rules.CSharp
                         var secondaryLocations = collidingMembers.SelectMany(x => x.Locations)
                                                                  .Where(x => x.IsInSource);
 
-                        c.ReportIssue(Diagnostic.Create(rule, interfaceDeclaration.Identifier.GetLocation(),
-                            additionalLocations: secondaryLocations,
-                            messageArgs: new object[] { membersText, pluralize }));
+                        c.ReportIssue(Diagnostic.Create(Rule, interfaceDeclaration.Identifier.GetLocation(), secondaryLocations, membersText, pluralize));
                     }
                 },
                 SyntaxKind.InterfaceDeclaration);
-        }
 
-        private static IEnumerable<IMethodSymbol> GetCollidingMembers(INamedTypeSymbol interfaceSymbol)
+        private static IEnumerable<IMethodSymbol> GetCollidingMembers(ITypeSymbol interfaceSymbol)
         {
             var interfacesToCheck = interfaceSymbol.Interfaces;
 
-            var membersFromDerivedInterface = interfaceSymbol.GetMembers()
-                .OfType<IMethodSymbol>()
-                .ToList();
+            var membersFromDerivedInterface = interfaceSymbol.GetMembers().OfType<IMethodSymbol>().ToList();
 
             for (var i = 0; i < interfacesToCheck.Length; i++)
             {
@@ -106,7 +95,7 @@ namespace SonarAnalyzer.Rules.CSharp
                         var collidingMembersFromInterface2 = interfacesToCheck[j]
                             .GetMembers(notRedefinedMemberFromInterface1.Name)
                             .OfType<IMethodSymbol>()
-                            .Where(methodSymbol2 => IsNotEventRemoveAccessor(methodSymbol2))
+                            .Where(IsNotEventRemoveAccessor)
                             .Where(methodSymbol2 => AreCollidingMethods(notRedefinedMemberFromInterface1, methodSymbol2));
 
                         foreach (var collidingMember in collidingMembersFromInterface2)
@@ -118,21 +107,18 @@ namespace SonarAnalyzer.Rules.CSharp
             }
         }
 
-        private static bool IsNotEventRemoveAccessor(IMethodSymbol methodSymbol2)
-        {
-            /// we only want to report on events once, so we are not collecting the "remove" accessors,
-            /// and handle the "add" accessor reporting separately in <see cref="GetMemberDisplayName"/>
-            return methodSymbol2.MethodKind != MethodKind.EventRemove;
-        }
+        private static bool IsNotEventRemoveAccessor(IMethodSymbol methodSymbol2) =>
+            // we only want to report on events once, so we are not collecting the "remove" accessors,
+            // and handle the "add" accessor reporting separately in <see cref="GetMemberDisplayName"/>
+            methodSymbol2.MethodKind != MethodKind.EventRemove;
 
-        private static string GetIssueMessageText(IEnumerable<IMethodSymbol> collidingMembers, SemanticModel semanticModel,
-            int spanStart)
+        private static string GetIssueMessageText(IEnumerable<IMethodSymbol> collidingMembers, SemanticModel semanticModel, int spanStart)
         {
-            var names = collidingMembers
-                .Take(MaxMemberDisplayCount)
-                .Select(member => GetMemberDisplayName(member, spanStart, semanticModel))
-                .Distinct()
-                .ToList();
+            var names = collidingMembers.Take(MaxMemberDisplayCount)
+                                        .Select(member => GetMemberDisplayName(member, spanStart, semanticModel))
+                                        .Distinct()
+                                        .ToList();
+
             return names.Count switch
             {
                 1 => names[0],
@@ -150,7 +136,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private static string GetMemberDisplayName(IMethodSymbol method, int spanStart, SemanticModel semanticModel)
         {
-            if (method.AssociatedSymbol is IPropertySymbol property && property.IsIndexer)
+            if (method.AssociatedSymbol is IPropertySymbol { IsIndexer: true } property)
             {
                 var text = property.ToMinimalDisplayString(semanticModel, spanStart, SymbolDisplayFormat.CSharpShortErrorMessageFormat);
                 return $"'{text}'";

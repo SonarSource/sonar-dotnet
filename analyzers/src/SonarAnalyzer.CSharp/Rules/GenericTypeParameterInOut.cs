@@ -35,23 +35,17 @@ namespace SonarAnalyzer.Rules.CSharp
     [Rule(DiagnosticId)]
     public sealed class GenericTypeParameterInOut : SonarDiagnosticAnalyzer
     {
-        internal const string DiagnosticId = "S3246";
+        private const string DiagnosticId = "S3246";
         private const string MessageFormat = "Add the '{0}' keyword to parameter '{1}' to make it '{2}'.";
 
-        private static readonly DiagnosticDescriptor rule =
-            DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
+        private static readonly DiagnosticDescriptor Rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
 
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(rule);
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
 
         protected override void Initialize(SonarAnalysisContext context)
         {
-            context.RegisterSyntaxNodeActionInNonGenerated(
-                c => CheckInterfaceVariance((InterfaceDeclarationSyntax)c.Node, c),
-                SyntaxKind.InterfaceDeclaration);
-
-            context.RegisterSyntaxNodeActionInNonGenerated(
-                c => CheckDelegateVariance((DelegateDeclarationSyntax)c.Node, c),
-                SyntaxKind.DelegateDeclaration);
+            context.RegisterSyntaxNodeActionInNonGenerated(c => CheckInterfaceVariance((InterfaceDeclarationSyntax)c.Node, c), SyntaxKind.InterfaceDeclaration);
+            context.RegisterSyntaxNodeActionInNonGenerated(c => CheckDelegateVariance((DelegateDeclarationSyntax)c.Node, c), SyntaxKind.DelegateDeclaration);
         }
 
         #region Top level
@@ -117,10 +111,12 @@ namespace SonarAnalyzer.Rules.CSharp
 
         #region Top level per type parameter
 
-        private static bool CheckTypeParameter(ITypeParameterSymbol typeParameter, VarianceKind variance,
-            ITypeSymbol returnType, ImmutableArray<IParameterSymbol> parameters)
+        private static bool CheckTypeParameter(ITypeParameterSymbol typeParameter,
+                                               VarianceKind variance,
+                                               ITypeSymbol returnType,
+                                               ImmutableArray<IParameterSymbol> parameters)
         {
-            var canBe = CheckTypeParameterContraintsInSymbol(typeParameter, variance);
+            var canBe = CheckTypeParameterConstraintsInSymbol(typeParameter, variance);
             if (!canBe)
             {
                 return false;
@@ -137,8 +133,8 @@ namespace SonarAnalyzer.Rules.CSharp
             canBe = CheckTypeParameterInParameters(typeParameter, variance, parameters);
             return canBe;
         }
-        private static bool CheckTypeParameter(ITypeParameterSymbol typeParameter, VarianceKind variance,
-            INamedTypeSymbol interfaceType)
+
+        private static bool CheckTypeParameter(ITypeParameterSymbol typeParameter, VarianceKind variance, ITypeSymbol interfaceType)
         {
             if (typeParameter.Variance != VarianceKind.None)
             {
@@ -197,22 +193,21 @@ namespace SonarAnalyzer.Rules.CSharp
 
             if (variance == VarianceKind.In)
             {
-                context.ReportIssue(Diagnostic.Create(rule, location, "in", typeParameter.Name, "contravariant"));
+                context.ReportIssue(Diagnostic.Create(Rule, location, "in", typeParameter.Name, "contravariant"));
                 return;
             }
 
             if (variance == VarianceKind.Out)
             {
-                context.ReportIssue(Diagnostic.Create(rule, location, "out", typeParameter.Name, "covariant"));
+                context.ReportIssue(Diagnostic.Create(Rule, location, "out", typeParameter.Name, "covariant"));
             }
         }
 
         #region Check type parameters method/event/parameters
 
-        private static bool CheckTypeParameterInMethod(ITypeParameterSymbol typeParameter, VarianceKind variance,
-            IMethodSymbol method)
+        private static bool CheckTypeParameterInMethod(ITypeParameterSymbol typeParameter, VarianceKind variance, IMethodSymbol method)
         {
-            var canBe = CheckTypeParameterContraintsInSymbol(typeParameter, variance);
+            var canBe = CheckTypeParameterConstraintsInSymbol(typeParameter, variance);
             if (!canBe)
             {
                 return false;
@@ -233,27 +228,14 @@ namespace SonarAnalyzer.Rules.CSharp
             return CheckTypeParameterInParameters(typeParameter, variance, method.Parameters);
         }
 
-        private static bool CheckTypeParameterInEvent(ITypeParameterSymbol typeParameter, VarianceKind variance,
-            IEventSymbol @event)
-        {
-            return CanTypeParameterBeVariant(
-                typeParameter, variance,
-                @event.Type,
-                false,
-                true);
-        }
+        private static bool CheckTypeParameterInEvent(ITypeParameterSymbol typeParameter, VarianceKind variance, IEventSymbol @event) =>
+            CanTypeParameterBeVariant(typeParameter, variance, @event.Type, false, true);
 
-        private static bool CheckTypeParameterInParameters(ITypeParameterSymbol typeParameter, VarianceKind variance,
-            ImmutableArray<IParameterSymbol> parameters)
+        private static bool CheckTypeParameterInParameters(ITypeParameterSymbol typeParameter, VarianceKind variance, ImmutableArray<IParameterSymbol> parameters)
         {
             foreach (var param in parameters)
             {
-                var canBe = CanTypeParameterBeVariant(
-                    typeParameter, variance,
-                    param.Type,
-                    param.RefKind != RefKind.None,
-                    true);
-
+                var canBe = CanTypeParameterBeVariant(typeParameter, variance, param.Type, param.RefKind != RefKind.None, true);
                 if (!canBe)
                 {
                     return false;
@@ -262,17 +244,11 @@ namespace SonarAnalyzer.Rules.CSharp
             return true;
         }
 
-        private static bool CheckTypeParameterContraintsInSymbol(ITypeParameterSymbol typeParameter, VarianceKind variance)
+        private static bool CheckTypeParameterConstraintsInSymbol(ITypeParameterSymbol typeParameter, VarianceKind variance)
         {
             foreach (var constraintType in typeParameter.ConstraintTypes)
             {
-                var canBe = CanTypeParameterBeVariant(
-                    typeParameter,
-                    variance,
-                    constraintType,
-                    false,
-                    true);
-
+                var canBe = CanTypeParameterBeVariant(typeParameter, variance, constraintType, false, true);
                 if (!canBe)
                 {
                     return false;
@@ -285,12 +261,11 @@ namespace SonarAnalyzer.Rules.CSharp
 
         #region Check type parameter variance low level
 
-        private static bool CanTypeParameterBeVariant(
-            ITypeParameterSymbol parameter,
-            VarianceKind variance,
-            ITypeSymbol type,
-            bool requireOutputSafety,
-            bool requireInputSafety)
+        private static bool CanTypeParameterBeVariant(ITypeParameterSymbol parameter,
+                                                      VarianceKind variance,
+                                                      ITypeSymbol type,
+                                                      bool requireOutputSafety,
+                                                      bool requireInputSafety)
         {
             switch (type.Kind)
             {
@@ -314,14 +289,12 @@ namespace SonarAnalyzer.Rules.CSharp
             }
         }
 
-        private static bool CanTypeParameterBeVariant(
-            ITypeParameterSymbol parameter,
-            VarianceKind variance,
-            INamedTypeSymbol namedType,
-            bool requireOutputSafety,
-            bool requireInputSafety)
+        private static bool CanTypeParameterBeVariant(ITypeParameterSymbol parameter,
+                                                      VarianceKind variance,
+                                                      INamedTypeSymbol namedType,
+                                                      bool requireOutputSafety,
+                                                      bool requireInputSafety)
         {
-
             switch (namedType.TypeKind)
             {
                 case TypeKind.Class:

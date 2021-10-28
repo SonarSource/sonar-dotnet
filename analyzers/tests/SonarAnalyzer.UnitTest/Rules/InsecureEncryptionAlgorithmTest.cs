@@ -43,9 +43,11 @@ namespace SonarAnalyzer.UnitTest.Rules
 #if NET
         [TestMethod]
         public void InsecureEncryptionAlgorithm_CSharp9() =>
-            Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\InsecureEncryptionAlgorithm.CSharp9.cs",
-                                                      new CS.InsecureEncryptionAlgorithm(),
-                                                      GetAdditionalReferences());
+            Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\InsecureEncryptionAlgorithm.CSharp9.cs", new CS.InsecureEncryptionAlgorithm(), GetAdditionalReferences());
+
+        [TestMethod]
+        public void InsecureEncryptionAlgorithm_CSharp10() =>
+            Verifier.VerifyAnalyzerFromCSharp10Library(@"TestCases\InsecureEncryptionAlgorithm.CSharp10.cs", new CS.InsecureEncryptionAlgorithm(), GetAdditionalReferences());
 #endif
 
         [TestMethod]

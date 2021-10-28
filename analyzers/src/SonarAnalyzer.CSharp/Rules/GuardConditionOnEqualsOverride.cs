@@ -53,12 +53,7 @@ namespace SonarAnalyzer.Rules.CSharp
                         return;
                     }
 
-                    cb.RegisterSyntaxNodeAction(
-                        c =>
-                        {
-                            CheckInvocationInsideMethod(c, methodSymbol);
-                        },
-                        SyntaxKind.InvocationExpression);
+                    cb.RegisterSyntaxNodeAction(c => { CheckInvocationInsideMethod(c, methodSymbol); }, SyntaxKind.InvocationExpression);
                 });
 
         private static void CheckInvocationInsideMethod(SyntaxNodeAnalysisContext context, ISymbol symbol)

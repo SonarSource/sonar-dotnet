@@ -182,6 +182,14 @@ namespace SonarAnalyzer.UnitTest.TestFramework
         public static void VerifyAnalyzerFromCSharp10Library(string path, DiagnosticAnalyzer diagnosticAnalyzer, IEnumerable<MetadataReference> additionalReferences = null) =>
             VerifyAnalyzerFromCSharp10Library(path, diagnosticAnalyzer, CompilationErrorBehavior.Default, additionalReferences);
 
+        public static void VerifyAnalyzerFromCSharp10Library(string path, DiagnosticAnalyzer[] diagnosticAnalyzers, IEnumerable<MetadataReference> additionalReferences = null) =>
+            VerifyNonConcurrentAnalyzer(new[] { path },
+                diagnosticAnalyzers,
+                ParseOptionsHelper.FromCSharp10,
+                CompilationErrorBehavior.Default,
+                OutputKind.DynamicallyLinkedLibrary,
+                additionalReferences);
+
         public static void VerifyAnalyzerFromCSharp10Library(string path,
                                                              DiagnosticAnalyzer diagnosticAnalyzer,
                                                              CompilationErrorBehavior behavior,

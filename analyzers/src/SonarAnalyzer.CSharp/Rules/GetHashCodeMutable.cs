@@ -38,13 +38,11 @@ namespace SonarAnalyzer.Rules.CSharp
         private const string IssueMessage = "Refactor 'GetHashCode' to not reference mutable fields.";
         private const string SecondaryMessageFormat = "Remove this use of '{0}' or make it 'readonly'.";
 
-        private static readonly DiagnosticDescriptor rule =
-            DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, IssueMessage, RspecStrings.ResourceManager);
+        private static readonly DiagnosticDescriptor Rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, IssueMessage, RspecStrings.ResourceManager);
 
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(rule);
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
 
-        protected override void Initialize(SonarAnalysisContext context)
-        {
+        protected override void Initialize(SonarAnalysisContext context) =>
             context.RegisterSyntaxNodeActionInNonGenerated(
                 c =>
                 {
@@ -68,31 +66,33 @@ namespace SonarAnalyzer.Rules.CSharp
                     }
 
                     var fieldsOfClass = baseMembers
-                        .Concat(methodSymbol.ContainingType.GetMembers())
-                        .Select(symbol => symbol as IFieldSymbol)
-                        .WhereNotNull()
-                        .ToHashSet();
+                                        .Concat(methodSymbol.ContainingType.GetMembers())
+                                        .Select(symbol => symbol as IFieldSymbol)
+                                        .WhereNotNull()
+                                        .ToHashSet();
 
                     var identifiers = methodSyntax.DescendantNodes().OfType<IdentifierNameSyntax>();
 
-                    var secondaryLocations = GetAllFirstMutableFieldsUsed(c, fieldsOfClass, identifiers)
-                        .Select(identifierSyntax => new SecondaryLocation(identifierSyntax.GetLocation(),
-                            string.Format(SecondaryMessageFormat, identifierSyntax.Identifier.Text)))
-                        .ToList();
+                    var secondaryLocations = GetAllFirstMutableFieldsUsed(c, fieldsOfClass, identifiers).Select(CreateSecondaryLocation).ToList();
                     if (secondaryLocations.Count == 0)
                     {
                         return;
                     }
 
-                    c.ReportIssue(Diagnostic.Create(rule, methodSyntax.Identifier.GetLocation(),
-                        additionalLocations: secondaryLocations.ToAdditionalLocations(),
-                        properties: secondaryLocations.ToProperties()));
+                    c.ReportIssue(Diagnostic.Create(
+                        Rule,
+                        methodSyntax.Identifier.GetLocation(),
+                        secondaryLocations.ToAdditionalLocations(),
+                        secondaryLocations.ToProperties()));
                 },
                 SyntaxKind.MethodDeclaration);
-        }
+
+        private static SecondaryLocation CreateSecondaryLocation(SimpleNameSyntax identifierSyntax) =>
+            new SecondaryLocation(identifierSyntax.GetLocation(), string.Format(SecondaryMessageFormat, identifierSyntax.Identifier.Text));
 
         private static IEnumerable<IdentifierNameSyntax> GetAllFirstMutableFieldsUsed(SyntaxNodeAnalysisContext context,
-            ISet<IFieldSymbol> fieldsOfClass, IEnumerable<IdentifierNameSyntax> identifiers)
+                                                                                      ICollection<IFieldSymbol> fieldsOfClass,
+                                                                                      IEnumerable<IdentifierNameSyntax> identifiers)
         {
             var syntaxNodes = new Dictionary<IFieldSymbol, List<IdentifierNameSyntax>>();
 
@@ -121,12 +121,8 @@ namespace SonarAnalyzer.Rules.CSharp
                 .WhereNotNull();
         }
 
-        private static bool IsFieldRelevant(IFieldSymbol fieldSymbol, ISet<IFieldSymbol> fieldsOfClass)
-        {
-            return fieldSymbol != null &&
-                !fieldSymbol.IsConst &&
-                !fieldSymbol.IsReadOnly &&
-                fieldsOfClass.Contains(fieldSymbol);
-        }
+        private static bool IsFieldRelevant(IFieldSymbol fieldSymbol, ICollection<IFieldSymbol> fieldsOfClass) =>
+            fieldSymbol is { IsConst: false, IsReadOnly: false }
+            && fieldsOfClass.Contains(fieldSymbol);
     }
 }
