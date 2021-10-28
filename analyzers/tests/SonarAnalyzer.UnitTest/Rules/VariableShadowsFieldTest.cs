@@ -35,6 +35,11 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         public void VariableShadowsField_CSharp9() =>
             Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\VariableShadowsField.CSharp9.cs", new VariableShadowsField());
+
+        [TestMethod]
+        public void VariableShadowsField_CSharp10() =>
+            Verifier.VerifyAnalyzerFromCSharp10Library(@"TestCases\VariableShadowsField.CSharp10.cs", new VariableShadowsField());
+
 #endif
     }
 }
