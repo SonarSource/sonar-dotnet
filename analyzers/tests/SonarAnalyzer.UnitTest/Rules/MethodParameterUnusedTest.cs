@@ -74,5 +74,11 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         public void MethodParameterUnused_VB() =>
             Verifier.VerifyAnalyzer(@"TestCases\MethodParameterUnused.vb", new VB.MethodParameterUnused());
+
+#if NET
+        [TestMethod]
+        public void MethodParameterUnused_CSharp10_RoslynCfg() =>
+            Verifier.VerifyAnalyzerFromCSharp10Library(@"TestCases\MethodParameterUnused.CSharp10.cs", new CS.MethodParameterUnused());
+#endif
     }
 }
