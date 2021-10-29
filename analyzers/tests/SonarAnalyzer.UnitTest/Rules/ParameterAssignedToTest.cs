@@ -36,6 +36,10 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         public void ParameterAssignedTo_CSharp9() =>
             Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\ParameterAssignedTo.CSharp9.cs", new CS.ParameterAssignedTo());
+
+        [TestMethod]
+        public void ParameterAssignedTo_CSharp10() =>
+            Verifier.VerifyAnalyzerFromCSharp10Library(@"TestCases\ParameterAssignedTo.CSharp10.cs", new CS.ParameterAssignedTo());
 #endif
 
         [TestMethod]
