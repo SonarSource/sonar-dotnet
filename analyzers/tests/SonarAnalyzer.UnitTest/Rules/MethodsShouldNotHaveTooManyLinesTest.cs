@@ -40,8 +40,12 @@ namespace SonarAnalyzer.UnitTest.Rules
 
 #if NET
         [TestMethod]
-        public void MethodsShouldNotHaveTooManyLines_CustomValues_CS_CSharp9() =>
+        public void MethodsShouldNotHaveTooManyLines_CustomValues_CSharp9() =>
             Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\MethodsShouldNotHaveTooManyLines_CustomValues.CSharp9.cs", new CS.MethodsShouldNotHaveTooManyLines { Max = 2 });
+
+        [TestMethod]
+        public void MethodsShouldNotHaveTooManyLines_CustomValues_CSharp10() =>
+            Verifier.VerifyAnalyzerFromCSharp10Library(@"TestCases\MethodsShouldNotHaveTooManyLines_CustomValues.CSharp10.cs", new CS.MethodsShouldNotHaveTooManyLines { Max = 2 });
 #endif
 
         [TestMethod]

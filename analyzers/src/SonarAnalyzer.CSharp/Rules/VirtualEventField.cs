@@ -33,31 +33,29 @@ namespace SonarAnalyzer.Rules.CSharp
     [Rule(DiagnosticId)]
     public sealed class VirtualEventField : SonarDiagnosticAnalyzer
     {
-        internal const string DiagnosticId = "S2290";
         private const string MessageFormat = "Remove this 'virtual' modifier of {0}.";
 
-        private static readonly DiagnosticDescriptor rule =
-            DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
+        internal const string DiagnosticId = "S2290";
 
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(rule);
+        private static readonly DiagnosticDescriptor Rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
 
-        protected override void Initialize(SonarAnalysisContext context)
-        {
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
+
+        protected override void Initialize(SonarAnalysisContext context) =>
             context.RegisterSyntaxNodeActionInNonGenerated(
                 c =>
                 {
-                    var eventField = (EventFieldDeclarationSyntax) c.Node;
+                    var eventField = (EventFieldDeclarationSyntax)c.Node;
 
                     if (eventField.Modifiers.Any(SyntaxKind.VirtualKeyword))
                     {
                         var virt = eventField.Modifiers.First(modifier => modifier.IsKind(SyntaxKind.VirtualKeyword));
                         var names = string.Join(", ", eventField.Declaration.Variables
-                            .Select(syntax => $"'{syntax.Identifier.ValueText}'")
-                            .OrderBy(s => s));
-                        c.ReportIssue(Diagnostic.Create(rule, virt.GetLocation(), names));
+                                                                .Select(syntax => $"'{syntax.Identifier.ValueText}'")
+                                                                .OrderBy(s => s));
+                        c.ReportIssue(Diagnostic.Create(Rule, virt.GetLocation(), names));
                     }
                 },
                 SyntaxKind.EventFieldDeclaration);
-        }
     }
 }
