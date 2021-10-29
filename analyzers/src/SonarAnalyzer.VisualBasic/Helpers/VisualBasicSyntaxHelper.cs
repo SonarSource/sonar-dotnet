@@ -48,7 +48,7 @@ namespace SonarAnalyzer.Helpers
         public static SyntaxNode RemoveParentheses(this SyntaxNode expression)
         {
             var current = expression;
-            while (current is ParenthesizedExpressionSyntax parenthesized && current.IsKind(SyntaxKind.ParenthesizedExpression))
+            while (current is ParenthesizedExpressionSyntax parenthesized)
             {
                 current = parenthesized.Expression;
             }
