@@ -32,14 +32,25 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         public void UsingRegularExpressions_CS() =>
-            Verifier.VerifyAnalyzer(@"TestCases\Hotspots\UsingRegularExpressions.cs",
-                                    new CS.UsingRegularExpressions(AnalyzerConfiguration.AlwaysEnabled),
-                                    MetadataReferenceFacade.RegularExpressions);
+            Verifier.VerifyAnalyzer(
+                @"TestCases\Hotspots\UsingRegularExpressions.cs",
+                new CS.UsingRegularExpressions(AnalyzerConfiguration.AlwaysEnabled),
+                MetadataReferenceFacade.RegularExpressions);
+
+#if NET
+        [TestMethod]
+        public void UsingRegularExpressions_CSharp10() =>
+        Verifier.VerifyAnalyzerFromCSharp10Library(
+            @"TestCases\Hotspots\UsingRegularExpressions.CSharp10.cs",
+            new CS.UsingRegularExpressions(AnalyzerConfiguration.AlwaysEnabled),
+            MetadataReferenceFacade.RegularExpressions);
+#endif
 
         [TestMethod]
         public void UsingRegularExpressions_VB() =>
-            Verifier.VerifyAnalyzer(@"TestCases\Hotspots\UsingRegularExpressions.vb",
-                                    new VB.UsingRegularExpressions(AnalyzerConfiguration.AlwaysEnabled),
-                                    MetadataReferenceFacade.RegularExpressions);
+            Verifier.VerifyAnalyzer(
+                @"TestCases\Hotspots\UsingRegularExpressions.vb",
+                new VB.UsingRegularExpressions(AnalyzerConfiguration.AlwaysEnabled),
+                MetadataReferenceFacade.RegularExpressions);
     }
 }

@@ -42,15 +42,17 @@ namespace SonarAnalyzer.UnitTest.Rules
 
         [TestMethod]
         public void ControllingPermissions_CS() =>
-            Verifier.VerifyAnalyzer(@"TestCases\Hotspots\ControllingPermissions.cs",
-                                    new CS.ControllingPermissions(AnalyzerConfiguration.AlwaysEnabled),
-                                    AdditionalReferences);
+            Verifier.VerifyAnalyzer(
+                @"TestCases\Hotspots\ControllingPermissions.cs",
+                new CS.ControllingPermissions(AnalyzerConfiguration.AlwaysEnabled),
+                AdditionalReferences);
 
         [TestMethod]
         public void ControllingPermissions_VB() =>
-            Verifier.VerifyAnalyzer(@"TestCases\Hotspots\ControllingPermissions.vb",
-                                    new VB.ControllingPermissions(AnalyzerConfiguration.AlwaysEnabled),
-                                    AdditionalReferences);
+            Verifier.VerifyAnalyzer(
+                @"TestCases\Hotspots\ControllingPermissions.vb",
+                new VB.ControllingPermissions(AnalyzerConfiguration.AlwaysEnabled),
+                AdditionalReferences);
     }
 }
 

@@ -47,16 +47,22 @@ namespace SonarAnalyzer.UnitTest.Rules.Hotspots
             Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\Hotspots\LooseFilePermissions.Windows.CSharp9.cs", new LooseFilePermissions(AnalyzerConfiguration.AlwaysEnabled));
 
         [TestMethod]
+        public void LooseFilePermissions_Windows_CSharp10() =>
+            Verifier.VerifyAnalyzerFromCSharp10Console(@"TestCases\Hotspots\LooseFilePermissions.Windows.CSharp10.cs", new LooseFilePermissions(AnalyzerConfiguration.AlwaysEnabled));
+
+        [TestMethod]
         public void LooseFilePermissions_Unix_CS() =>
-            Verifier.VerifyAnalyzer(@"TestCases\Hotspots\LooseFilePermissions.Unix.cs",
-                                    new LooseFilePermissions(AnalyzerConfiguration.AlwaysEnabled),
-                                    NuGetMetadataReference.MonoPosixNetStandard());
+            Verifier.VerifyAnalyzer(
+                @"TestCases\Hotspots\LooseFilePermissions.Unix.cs",
+                new LooseFilePermissions(AnalyzerConfiguration.AlwaysEnabled),
+                NuGetMetadataReference.MonoPosixNetStandard());
 
         [TestMethod]
         public void LooseFilePermissions_Unix_VB() =>
-            Verifier.VerifyAnalyzer(@"TestCases\Hotspots\LooseFilePermissions.Unix.vb",
-                                    new VB.LooseFilePermissions(AnalyzerConfiguration.AlwaysEnabled),
-                                    NuGetMetadataReference.MonoPosixNetStandard());
+            Verifier.VerifyAnalyzer(
+                @"TestCases\Hotspots\LooseFilePermissions.Unix.vb",
+                new VB.LooseFilePermissions(AnalyzerConfiguration.AlwaysEnabled),
+                NuGetMetadataReference.MonoPosixNetStandard());
 #endif
     }
 }

@@ -39,13 +39,15 @@ namespace SonarAnalyzer.UnitTest.Rules
 #if NETFRAMEWORK // HttpCookie is available only when targeting .Net Framework
         [TestMethod]
         public void UsingCookies_CS_Net46() =>
-            Verifier.VerifyAnalyzer(@"TestCases\Hotspots\UsingCookies_Net46.cs",
+            Verifier.VerifyAnalyzer(
+                @"TestCases\Hotspots\UsingCookies_Net46.cs",
                 new CS.UsingCookies(AnalyzerConfiguration.AlwaysEnabled),
                 GetAdditionalReferencesForNet46());
 
         [TestMethod]
         public void UsingCookies_VB_Net46() =>
-            Verifier.VerifyAnalyzer(@"TestCases\Hotspots\UsingCookies_Net46.vb",
+            Verifier.VerifyAnalyzer(
+                @"TestCases\Hotspots\UsingCookies_Net46.vb",
                 new VB.UsingCookies(AnalyzerConfiguration.AlwaysEnabled),
                 GetAdditionalReferencesForNet46());
 
@@ -55,13 +57,22 @@ namespace SonarAnalyzer.UnitTest.Rules
 #else
         [TestMethod]
         public void UsingCookies_CS_NetCore() =>
-            Verifier.VerifyAnalyzer(@"TestCases\Hotspots\UsingCookies_NetCore.cs",
+            Verifier.VerifyAnalyzer(
+                @"TestCases\Hotspots\UsingCookies_NetCore.cs",
+                new CS.UsingCookies(AnalyzerConfiguration.AlwaysEnabled),
+                GetAdditionalReferencesForNetCore(Constants.DotNetCore220Version));
+
+        [TestMethod]
+        public void UsingCookies_CSharp10() =>
+            Verifier.VerifyAnalyzerFromCSharp10Library(
+                @"TestCases\Hotspots\UsingCookies_NetCore.CSharp10.cs",
                 new CS.UsingCookies(AnalyzerConfiguration.AlwaysEnabled),
                 GetAdditionalReferencesForNetCore(Constants.DotNetCore220Version));
 
         [TestMethod]
         public void UsingCookies_VB_NetCore() =>
-            Verifier.VerifyAnalyzer(@"TestCases\Hotspots\UsingCookies_NetCore.vb",
+            Verifier.VerifyAnalyzer(
+                @"TestCases\Hotspots\UsingCookies_NetCore.vb",
                 new VB.UsingCookies(AnalyzerConfiguration.AlwaysEnabled),
                 GetAdditionalReferencesForNetCore(Constants.DotNetCore220Version));
 
