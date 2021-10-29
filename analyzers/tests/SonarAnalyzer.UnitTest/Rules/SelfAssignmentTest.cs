@@ -34,6 +34,12 @@ namespace SonarAnalyzer.UnitTest.Rules
                 new CS.SelfAssignment(),
                 ParseOptionsHelper.FromCSharp8);
 
+#if NET
+        [TestMethod]
+        public void SelfAssignment_CSharp10() =>
+            Verifier.VerifyAnalyzerFromCSharp10Console(@"TestCases\SelfAssignment.CSharp10.cs", new CS.SelfAssignment());
+#endif
+
         [TestMethod]
         public void SelfAssignment_VisualBasic() =>
             Verifier.VerifyAnalyzer(@"TestCases\SelfAssignment.vb", new VB.SelfAssignment());

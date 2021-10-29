@@ -37,6 +37,10 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         public void StaticFieldWrittenFromInstanceConstructor_CSharp9() =>
             Verifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\StaticFieldWrittenFromInstanceConstructor.CSharp9.cs", new StaticFieldWrittenFromInstanceConstructor());
+
+        [TestMethod]
+        public void StaticFieldWrittenFromInstanceConstructor_CSharp10() =>
+            Verifier.VerifyAnalyzerFromCSharp10Library(@"TestCases\StaticFieldWrittenFromInstanceConstructor.CSharp10.cs", new StaticFieldWrittenFromInstanceConstructor());
 #endif
     }
 }
