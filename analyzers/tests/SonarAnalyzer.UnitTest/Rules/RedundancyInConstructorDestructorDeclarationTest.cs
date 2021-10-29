@@ -57,7 +57,7 @@ namespace SonarAnalyzer.UnitTest.Rules
                 @"TestCases\RedundancyInConstructorDestructorDeclaration.CSharp10.Fixed.cs",
                 new RedundancyInConstructorDestructorDeclaration(),
                 new RedundancyInConstructorDestructorDeclarationCodeFixProvider(),
-                RedundancyInConstructorDestructorDeclarationCodeFixProvider.TitleRemoveBaseCall,
+                RedundancyInConstructorDestructorDeclarationCodeFixProvider.TitleRemoveConstructor,
                 ParseOptionsHelper.FromCSharp10);
 #endif
 

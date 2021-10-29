@@ -30,16 +30,25 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         public void SetLocaleForDataTypes() =>
-            Verifier.VerifyAnalyzer(@"TestCases\SetLocaleForDataTypes.cs",
-                                    new SetLocaleForDataTypes(),
-                                    MetadataReferenceFacade.SystemData);
+            Verifier.VerifyAnalyzer(
+                @"TestCases\SetLocaleForDataTypes.cs",
+                new SetLocaleForDataTypes(),
+                MetadataReferenceFacade.SystemData);
 
 #if NET
         [TestMethod]
         public void SetLocaleForDataTypes_CSharp9() =>
-            Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\SetLocaleForDataTypes.CSharp9.cs",
-                                    new SetLocaleForDataTypes(),
-                                    MetadataReferenceFacade.SystemData);
+            Verifier.VerifyAnalyzerFromCSharp9Console(
+                @"TestCases\SetLocaleForDataTypes.CSharp9.cs",
+                new SetLocaleForDataTypes(),
+                MetadataReferenceFacade.SystemData);
+
+        [TestMethod]
+        public void SetLocaleForDataTypes_CSharp10() =>
+            Verifier.VerifyAnalyzerFromCSharp10Console(
+                @"TestCases\SetLocaleForDataTypes.CSharp10.cs",
+                new SetLocaleForDataTypes(),
+                MetadataReferenceFacade.SystemData);
 #endif
     }
 }

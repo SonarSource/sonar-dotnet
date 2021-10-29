@@ -1,6 +1,7 @@
 ﻿using System;
 
 Structure.count++; // Compliant - static field set from static method
+RecordStructure.count++; // Compliant - static field set from static method
 
 struct Structure
 {
@@ -20,6 +21,39 @@ struct Structure
     public Action<int> Foo() => static x =>
     {
         count += x; // Noncompliant {{Make the enclosing instance method 'static' or remove this set on the 'static' field.}}
+    };
+
+    public Action<int> Foo2() => static x =>
+    {
+        (count, var y) = (42, "42"); // FN
+    };
+
+    public void CallFoo() => Foo()(1); // 'count' gets incremented from an instance member
+}
+
+record struct RecordStructure
+{
+    internal static int count = 0;
+//                      ^^^^^^^^^ Secondary
+//                      ^^^^^^^^^ Secondary@-1
+
+    public void Method() => count++; // Noncompliant
+
+    public static void DoSomethingStatic() => count++; // Compliant
+
+    public static Action<int> StaticFoo() => static x =>
+    {
+        count += x; // compliant because it can only be used in a static context
+    };
+
+    public Action<int> Foo() => static x =>
+    {
+        count += x; // Noncompliant {{Make the enclosing instance method 'static' or remove this set on the 'static' field.}}
+    };
+
+    public Action<int> Foo2() => static x =>
+    {
+        (count, var y) = (42, "42"); // FN
     };
 
     public void CallFoo() => Foo()(1); // 'count' gets incremented from an instance member

@@ -19,17 +19,3 @@ struct Struct
 {
     public Struct() { } // Noncompliant
 }
-
-record RecordBase
-{
-    public RecordBase() { }
-    public RecordBase(int i) { }
-}
-
-record Record : RecordBase
-{
-    public Record()
-        : base() { } // Noncompliant
-
-    public Record(string s) { }
-}

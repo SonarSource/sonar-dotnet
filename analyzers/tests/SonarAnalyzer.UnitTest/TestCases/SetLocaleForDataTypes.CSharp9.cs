@@ -7,6 +7,10 @@ table1 = new(); // Compliant - FN
 
 var table2 = new DataTable(); // Noncompliant
 
+DataTable x, y;
+
+(x, y) = (new DataTable(), new DataTable()); // FN
+
 DataTable table3 = new() { Locale = CultureInfo.InvariantCulture };
 DataTable table4 = new(); // Noncompliant
 
