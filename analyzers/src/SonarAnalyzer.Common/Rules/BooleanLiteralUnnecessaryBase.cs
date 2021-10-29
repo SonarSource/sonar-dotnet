@@ -33,18 +33,13 @@ namespace SonarAnalyzer.Rules
 
         protected delegate bool IsBooleanLiteralKind(SyntaxNode node);
 
-        protected abstract bool IsBooleanLiteral(SyntaxNode node);
-
         protected abstract ILanguageFacade<TSyntaxKind> Language { get; }
 
+        protected abstract bool IsBooleanLiteral(SyntaxNode node);
         protected abstract SyntaxNode GetLeftNode(TBinaryExpression binaryExpression);
-
         protected abstract SyntaxNode GetRightNode(TBinaryExpression binaryExpression);
-
         protected abstract SyntaxToken GetOperatorToken(TBinaryExpression binaryExpression);
-
         protected abstract bool IsTrueLiteralKind(SyntaxNode syntaxNode);
-
         protected abstract bool IsFalseLiteralKind(SyntaxNode syntaxNode);
 
         // LogicalAnd (C#) / AndAlso (VB)
