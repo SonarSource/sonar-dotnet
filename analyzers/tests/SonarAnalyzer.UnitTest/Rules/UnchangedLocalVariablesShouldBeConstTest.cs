@@ -38,7 +38,7 @@ namespace SonarAnalyzer.UnitTest.Rules
 
         [TestMethod]
         public void UnchangedLocalVariablesShouldBeConst_CSharp10() =>
-            Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\UnchangedLocalVariablesShouldBeConst.CSharp10.cs", new UnchangedLocalVariablesShouldBeConst());
+            Verifier.VerifyAnalyzerFromCSharp10Console(@"TestCases\UnchangedLocalVariablesShouldBeConst.CSharp10.cs", new UnchangedLocalVariablesShouldBeConst());
 
 #endif
 
