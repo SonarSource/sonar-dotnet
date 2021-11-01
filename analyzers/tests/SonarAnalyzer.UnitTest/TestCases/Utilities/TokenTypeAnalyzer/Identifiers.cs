@@ -13,6 +13,9 @@ public class Sample
         var alias = new AliasName();
         dynamic d = g;
         value = 42;
+
+        var y = string.Empty;
+        (y, var z) = ("a", 'x');
     }
 
     public void ValueAsVariableForCoverage()
