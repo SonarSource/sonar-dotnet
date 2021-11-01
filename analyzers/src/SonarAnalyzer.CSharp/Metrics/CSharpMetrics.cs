@@ -58,8 +58,9 @@ namespace SonarAnalyzer.Metrics.CSharp
             switch (node.Kind())
             {
                 case SyntaxKind.ClassDeclaration:
-                case SyntaxKindEx.RecordDeclaration:
+                case SyntaxKindEx.RecordClassDeclaration:
                 case SyntaxKind.StructDeclaration:
+                case SyntaxKindEx.RecordStructDeclaration:
                 case SyntaxKind.InterfaceDeclaration:
                     return true;
 
@@ -161,7 +162,14 @@ namespace SonarAnalyzer.Metrics.CSharp
                 case SyntaxKind.YieldReturnStatement:
                     return true;
 
+                case SyntaxKind.Block:
+                    return false;
+
                 default:
+                    if (node is StatementSyntax)
+                    {
+                        throw new InvalidOperationException($"{node.Kind()} is statement and it isn't handled.");
+                    }
                     return false;
             }
         }

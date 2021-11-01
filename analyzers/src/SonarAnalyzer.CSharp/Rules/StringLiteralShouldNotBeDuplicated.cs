@@ -40,7 +40,7 @@ namespace SonarAnalyzer.Rules.CSharp
         {
             SyntaxKind.ClassDeclaration,
             SyntaxKind.StructDeclaration,
-            SyntaxKindEx.RecordDeclaration
+            SyntaxKindEx.RecordClassDeclaration
         };
 
         protected override bool IsMatchingMethodParameterName(LiteralExpressionSyntax literalExpression) =>

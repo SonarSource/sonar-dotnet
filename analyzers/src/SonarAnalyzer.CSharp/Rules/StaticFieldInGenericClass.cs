@@ -73,7 +73,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     properties.ForEach(property => CheckMember(property, property.Identifier.GetLocation(), typeParameterNames, c));
                 },
                 SyntaxKind.ClassDeclaration,
-                SyntaxKindEx.RecordDeclaration);
+                SyntaxKindEx.RecordClassDeclaration);
 
         private static void CheckMember(SyntaxNode root, Location location, IEnumerable<string> typeParameterNames, SyntaxNodeAnalysisContext context)
         {

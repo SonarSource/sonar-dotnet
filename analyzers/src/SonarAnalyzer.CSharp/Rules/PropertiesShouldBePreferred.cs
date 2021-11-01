@@ -69,7 +69,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 },
                 SyntaxKind.ClassDeclaration,
                 SyntaxKind.InterfaceDeclaration,
-                SyntaxKindEx.RecordDeclaration);
+                SyntaxKindEx.RecordClassDeclaration);
 
         private static bool HasCandidateSignature(IMethodSymbol method) =>
             method.IsPubliclyAccessible()

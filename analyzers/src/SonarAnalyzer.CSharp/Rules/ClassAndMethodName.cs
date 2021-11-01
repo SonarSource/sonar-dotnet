@@ -60,7 +60,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 { SyntaxKind.StructDeclaration, "struct" },
                 { SyntaxKind.ClassDeclaration, "class" },
                 { SyntaxKind.InterfaceDeclaration, "interface" },
-                { SyntaxKindEx.RecordDeclaration, "record" },
+                { SyntaxKindEx.RecordClassDeclaration, "record" },
                 { SyntaxKind.MethodDeclaration, "method" },
                 { SyntaxKind.PropertyDeclaration, "property" },
                 { SyntaxKindEx.LocalFunctionStatement, "local function" },
@@ -131,7 +131,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 SyntaxKind.ClassDeclaration,
                 SyntaxKind.InterfaceDeclaration,
                 SyntaxKind.StructDeclaration,
-                SyntaxKindEx.RecordDeclaration);
+                SyntaxKindEx.RecordClassDeclaration);
 
             context.RegisterSyntaxNodeActionInNonGenerated(
                 c =>

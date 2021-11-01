@@ -40,7 +40,7 @@ namespace SonarAnalyzer.Rules.CSharp
             SyntaxKind.StructDeclaration,
             SyntaxKind.EnumDeclaration,
             SyntaxKind.InterfaceDeclaration,
-            SyntaxKindEx.RecordDeclaration,
+            SyntaxKindEx.RecordClassDeclaration,
         };
 
         protected override SyntaxToken GetTypeIdentifier(SyntaxNode declaration) =>
@@ -54,7 +54,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 case SyntaxKind.StructDeclaration:
                 case SyntaxKind.NamespaceDeclaration:
                 case SyntaxKind.InterfaceDeclaration:
-                case SyntaxKindEx.RecordDeclaration:
+                case SyntaxKindEx.RecordClassDeclaration:
                     return true;
                 default:
                     return false;

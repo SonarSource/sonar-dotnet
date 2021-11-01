@@ -68,7 +68,7 @@ namespace SonarAnalyzer.Rules.CSharp
                          CheckGenericTypeParameters(c.ContainingSymbol, c);
                      },
                      SyntaxKind.ClassDeclaration,
-                     SyntaxKindEx.RecordDeclaration);
+                     SyntaxKindEx.RecordClassDeclaration);
             });
 
         private static void CheckGenericTypeParameters(ISymbol symbol, SyntaxNodeAnalysisContext c)

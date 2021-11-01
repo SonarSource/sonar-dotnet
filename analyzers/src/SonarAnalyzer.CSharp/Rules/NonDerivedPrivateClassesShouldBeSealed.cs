@@ -55,7 +55,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 }
             },
             SyntaxKind.ClassDeclaration,
-            SyntaxKindEx.RecordDeclaration);
+            SyntaxKindEx.RecordClassDeclaration);
 
         private static bool IsPrivateButNotSealedType(BaseTypeDeclarationSyntax typeDeclaration) =>
             typeDeclaration.Modifiers.Any(SyntaxKind.PrivateKeyword)

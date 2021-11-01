@@ -42,7 +42,7 @@ namespace SonarAnalyzer.Rules.CSharp
             attributeSyntax.Name;
 
         protected override bool IsClassOrRecordSyntax(SyntaxNode syntaxNode) =>
-            syntaxNode.IsAnyKind(SyntaxKind.ClassDeclaration, SyntaxKindEx.RecordDeclaration);
+            syntaxNode.IsAnyKind(SyntaxKind.ClassDeclaration, SyntaxKindEx.RecordClassDeclaration);
 
         protected override SyntaxNode GetTypeOfOrGetTypeExpression(SyntaxNode expressionSyntax) =>
             (expressionSyntax as TypeOfExpressionSyntax)?.Type;

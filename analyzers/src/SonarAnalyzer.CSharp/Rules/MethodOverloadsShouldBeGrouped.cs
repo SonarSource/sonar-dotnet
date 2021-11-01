@@ -41,7 +41,7 @@ namespace SonarAnalyzer.Rules.CSharp
             SyntaxKind.ClassDeclaration,
             SyntaxKind.InterfaceDeclaration,
             SyntaxKind.StructDeclaration,
-            SyntaxKindEx.RecordDeclaration
+            SyntaxKindEx.RecordClassDeclaration
         };
 
         protected override MemberInfo CreateMemberInfo(SyntaxNodeAnalysisContext c, MemberDeclarationSyntax member)

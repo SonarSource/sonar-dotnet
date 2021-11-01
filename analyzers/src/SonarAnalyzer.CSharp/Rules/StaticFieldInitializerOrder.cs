@@ -62,7 +62,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     var containingType = c.SemanticModel.GetDeclaredSymbol(variables[0]).ContainingType;
 
                     var typeDeclaration = fieldDeclaration.FirstAncestorOrSelf<TypeDeclarationSyntax>(
-                        sn => sn.IsAnyKind(SyntaxKind.ClassDeclaration, SyntaxKind.InterfaceDeclaration, SyntaxKind.StructDeclaration, SyntaxKindEx.RecordDeclaration));
+                        sn => sn.IsAnyKind(SyntaxKind.ClassDeclaration, SyntaxKind.InterfaceDeclaration, SyntaxKind.StructDeclaration, SyntaxKindEx.RecordClassDeclaration));
 
                     foreach (var variable in variables)
                     {

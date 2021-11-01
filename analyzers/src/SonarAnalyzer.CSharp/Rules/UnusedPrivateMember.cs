@@ -313,7 +313,7 @@ namespace SonarAnalyzer.Rules.CSharp
             // This override is needed because VisitRecordDeclaration is not available due to the Roslyn version.
             public override void Visit(SyntaxNode node)
             {
-                if (node.IsKind(SyntaxKindEx.RecordDeclaration))
+                if (node.IsKind(SyntaxKindEx.RecordClassDeclaration))
                 {
                     ConditionalStore(GetDeclaredSymbol(node), IsRemovableType);
                 }

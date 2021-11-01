@@ -54,6 +54,6 @@ namespace SonarAnalyzer.Helpers
             IsNodeStructOrClassOrRecordDeclaration(node) || node.IsKind(SyntaxKind.InterfaceDeclaration);
 
         private static bool IsNodeStructOrClassOrRecordDeclaration(SyntaxNode node) =>
-            node.IsAnyKind(SyntaxKind.ClassDeclaration, SyntaxKind.StructDeclaration, SyntaxKindEx.RecordDeclaration);
+            node.IsAnyKind(SyntaxKind.ClassDeclaration, SyntaxKind.StructDeclaration, SyntaxKindEx.RecordClassDeclaration);
     }
 }
