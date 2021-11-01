@@ -34,6 +34,15 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void CommandPath_CS() =>
             Verifier.VerifyAnalyzer(@"TestCases\Hotspots\CommandPath.cs", new CS.CommandPath(AnalyzerConfiguration.AlwaysEnabled), MetadataReferenceFacade.SystemDiagnosticsProcess);
 
+#if NET
+        [TestMethod]
+        public void CommandPath_CSharp10() =>
+            Verifier.VerifyAnalyzerFromCSharp10Library(
+                @"TestCases\Hotspots\CommandPath.CSharp10.cs",
+                new CS.CommandPath(AnalyzerConfiguration.AlwaysEnabled),
+                MetadataReferenceFacade.SystemDiagnosticsProcess);
+#endif
+
         [TestMethod]
         public void CommandPath_VB() =>
             Verifier.VerifyAnalyzer(@"TestCases\Hotspots\CommandPath.vb", new VB.CommandPath(AnalyzerConfiguration.AlwaysEnabled), MetadataReferenceFacade.SystemDiagnosticsProcess);

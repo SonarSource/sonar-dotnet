@@ -34,17 +34,26 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         public void ClearTextProtocolsAreSensitive() =>
-            Verifier.VerifyAnalyzer(@"TestCases\Hotspots\ClearTextProtocolsAreSensitive.cs",
-                                    new ClearTextProtocolsAreSensitive(AnalyzerConfiguration.AlwaysEnabled),
-                                    ParseOptionsHelper.FromCSharp8,
-                                    AdditionalReferences);
+            Verifier.VerifyAnalyzer(
+                @"TestCases\Hotspots\ClearTextProtocolsAreSensitive.cs",
+                new ClearTextProtocolsAreSensitive(AnalyzerConfiguration.AlwaysEnabled),
+                ParseOptionsHelper.FromCSharp8,
+                AdditionalReferences);
 
-#if NET5_0
+#if NET
         [TestMethod]
         public void ClearTextProtocolsAreSensitive_CSharp9() =>
-            Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\Hotspots\ClearTextProtocolsAreSensitive.CSharp9.cs",
-                                                      new ClearTextProtocolsAreSensitive(AnalyzerConfiguration.AlwaysEnabled),
-                                                      AdditionalReferences);
+            Verifier.VerifyAnalyzerFromCSharp9Console(
+                @"TestCases\Hotspots\ClearTextProtocolsAreSensitive.CSharp9.cs",
+                new ClearTextProtocolsAreSensitive(AnalyzerConfiguration.AlwaysEnabled),
+                AdditionalReferences);
+
+        [TestMethod]
+        public void ClearTextProtocolsAreSensitive_CSharp10() =>
+            Verifier.VerifyAnalyzerFromCSharp10Console(
+                @"TestCases\Hotspots\ClearTextProtocolsAreSensitive.CSharp10.cs",
+                new ClearTextProtocolsAreSensitive(AnalyzerConfiguration.AlwaysEnabled),
+                AdditionalReferences);
 #endif
 
         internal static IEnumerable<MetadataReference> AdditionalReferences =>

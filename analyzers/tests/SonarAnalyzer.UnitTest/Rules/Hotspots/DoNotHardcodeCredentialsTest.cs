@@ -36,56 +36,77 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         public void DoNotHardcodeCredentials_CS_DefaultValues() =>
-            Verifier.VerifyAnalyzer(@"TestCases\Hotspots\DoNotHardcodeCredentials_DefaultValues.cs",
+            Verifier.VerifyAnalyzer(
+                @"TestCases\Hotspots\DoNotHardcodeCredentials_DefaultValues.cs",
                 new CS.DoNotHardcodeCredentials(AnalyzerConfiguration.AlwaysEnabled),
                 AdditionalReferences);
 
         [TestMethod]
         public void DoNotHardcodeCredentials_CSharp8_DefaultValues() =>
-            Verifier.VerifyAnalyzer(@"TestCases\Hotspots\DoNotHardcodeCredentials_DefaultValues.CSharp8.cs",
+            Verifier.VerifyAnalyzer(
+                @"TestCases\Hotspots\DoNotHardcodeCredentials_DefaultValues.CSharp8.cs",
                 new CS.DoNotHardcodeCredentials(AnalyzerConfiguration.AlwaysEnabled),
                 ParseOptionsHelper.FromCSharp8,
                 AdditionalReferences);
 
+#if NET
+        [TestMethod]
+        public void DoNotHardcodeCredentials_CSharp10_DefaultValues() =>
+            Verifier.VerifyAnalyzerFromCSharp10Library(
+                @"TestCases\Hotspots\DoNotHardcodeCredentials_DefaultValues.CSharp10.cs",
+                new CS.DoNotHardcodeCredentials(AnalyzerConfiguration.AlwaysEnabled),
+                AdditionalReferences);
+
+#endif
+
         [TestMethod]
         public void DoNotHardcodeCredentials_CS_CustomValues() =>
-            Verifier.VerifyAnalyzer(@"TestCases\Hotspots\DoNotHardcodeCredentials_CustomValues.cs",
+            Verifier.VerifyAnalyzer(
+                @"TestCases\Hotspots\DoNotHardcodeCredentials_CustomValues.cs",
                 new CS.DoNotHardcodeCredentials(AnalyzerConfiguration.AlwaysEnabled) { CredentialWords = @"kode,facal-faire,*,x\*+?|}{][)(^$.# " },
                 AdditionalReferences);
 
         [TestMethod]
         public void DoNotHardcodeCredentials_CS_CustomValues_CaseInsensitive() =>
-            Verifier.VerifyAnalyzer(@"TestCases\Hotspots\DoNotHardcodeCredentials_CustomValues.cs",
+            Verifier.VerifyAnalyzer(
+                @"TestCases\Hotspots\DoNotHardcodeCredentials_CustomValues.cs",
                 new CS.DoNotHardcodeCredentials(AnalyzerConfiguration.AlwaysEnabled) { CredentialWords = @"KODE ,,,, FaCaL-FaIrE, x\*+?|}{][)(^$.# " },
                 AdditionalReferences);
 
         [TestMethod]
         public void DoNotHardcodeCredentials_VB_DefaultValues() =>
-            Verifier.VerifyAnalyzer(@"TestCases\Hotspots\DoNotHardcodeCredentials_DefaultValues.vb",
+            Verifier.VerifyAnalyzer(
+                @"TestCases\Hotspots\DoNotHardcodeCredentials_DefaultValues.vb",
                 new VB.DoNotHardcodeCredentials(AnalyzerConfiguration.AlwaysEnabled),
                 AdditionalReferences);
 
         [TestMethod]
         public void DoNotHardcodeCredentials_VB_CustomValues() =>
-            Verifier.VerifyAnalyzer(@"TestCases\Hotspots\DoNotHardcodeCredentials_CustomValues.vb",
+            Verifier.VerifyAnalyzer(
+                @"TestCases\Hotspots\DoNotHardcodeCredentials_CustomValues.vb",
                 new VB.DoNotHardcodeCredentials(AnalyzerConfiguration.AlwaysEnabled) { CredentialWords = @"kode,facal-faire,*,x\*+?|}{][)(^$.# " },
                 AdditionalReferences);
 
         [TestMethod]
         public void DoNotHardcodeCredentials_VB_CustomValues_CaseInsensitive() =>
-            Verifier.VerifyAnalyzer(@"TestCases\Hotspots\DoNotHardcodeCredentials_CustomValues.vb",
+            Verifier.VerifyAnalyzer(
+                @"TestCases\Hotspots\DoNotHardcodeCredentials_CustomValues.vb",
                 new VB.DoNotHardcodeCredentials(AnalyzerConfiguration.AlwaysEnabled) { CredentialWords = @"KODE ,,,, FaCaL-FaIrE,x\*+?|}{][)(^$.# " },
                 AdditionalReferences);
 
         [TestMethod]
         public void DoNotHardcodeCredentials_ConfiguredCredentialsAreRead()
         {
-            var cs = new CS.DoNotHardcodeCredentials();
-            cs.CredentialWords = "Lorem, ipsum";
+            var cs = new CS.DoNotHardcodeCredentials
+            {
+                CredentialWords = "Lorem, ipsum"
+            };
             cs.CredentialWords.Should().Be("Lorem, ipsum");
 
-            var vb = new CS.DoNotHardcodeCredentials();
-            vb.CredentialWords = "Lorem, ipsum";
+            var vb = new CS.DoNotHardcodeCredentials
+            {
+                CredentialWords = "Lorem, ipsum"
+            };
             vb.CredentialWords.Should().Be("Lorem, ipsum");
         }
 

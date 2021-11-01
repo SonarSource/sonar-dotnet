@@ -37,9 +37,10 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         public void CookiesShouldBeHttpOnly_Nancy() =>
-            Verifier.VerifyAnalyzer(@"TestCases\Hotspots\CookieShouldBeHttpOnly_Nancy.cs",
-                                    new CookieShouldBeHttpOnly(AnalyzerConfiguration.AlwaysEnabled),
-                                    AdditionalReferences);
+            Verifier.VerifyAnalyzer(
+                @"TestCases\Hotspots\CookieShouldBeHttpOnly_Nancy.cs",
+                new CookieShouldBeHttpOnly(AnalyzerConfiguration.AlwaysEnabled),
+                AdditionalReferences);
 
 #if NETFRAMEWORK // The analyzed code is valid only for .Net Framework
 
@@ -47,9 +48,10 @@ namespace SonarAnalyzer.UnitTest.Rules
 
         [TestMethod]
         public void CookiesShouldBeHttpOnly() =>
-            Verifier.VerifyAnalyzer(@"TestCases\Hotspots\CookieShouldBeHttpOnly.cs",
-                                    new CookieShouldBeHttpOnly(AnalyzerConfiguration.AlwaysEnabled),
-                                    MetadataReferenceFacade.SystemWeb);
+            Verifier.VerifyAnalyzer(
+                @"TestCases\Hotspots\CookieShouldBeHttpOnly.cs",
+                new CookieShouldBeHttpOnly(AnalyzerConfiguration.AlwaysEnabled),
+                MetadataReferenceFacade.SystemWeb);
 
         [DataTestMethod]
         [DataRow(@"TestCases\WebConfig\CookieShouldBeHttpOnly\HttpOnlyCookiesConfig")]
@@ -57,10 +59,11 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void CookiesShouldBeHttpOnly_WithWebConfigValueSetToTrue(string root)
         {
             var webConfigPath = Path.Combine(root, WebConfig);
-            Verifier.VerifyAnalyzer(@"TestCases\Hotspots\CookieShouldBeHttpOnly_WithWebConfig.cs",
-                                    new CookieShouldBeHttpOnly(AnalyzerConfiguration.AlwaysEnabled),
-                                    MetadataReferenceFacade.SystemWeb,
-                                    TestHelper.CreateSonarProjectConfig(root, TestHelper.CreateFilesToAnalyze(root, webConfigPath)));
+            Verifier.VerifyAnalyzer(
+                @"TestCases\Hotspots\CookieShouldBeHttpOnly_WithWebConfig.cs",
+                new CookieShouldBeHttpOnly(AnalyzerConfiguration.AlwaysEnabled),
+                MetadataReferenceFacade.SystemWeb,
+                TestHelper.CreateSonarProjectConfig(root, TestHelper.CreateFilesToAnalyze(root, webConfigPath)));
         }
 
         [DataTestMethod]
@@ -70,22 +73,32 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void CookiesShouldBeHttpOnly_WithWebConfigValueSetToFalse(string root)
         {
             var webConfigPath = Path.Combine(root, WebConfig);
-            Verifier.VerifyAnalyzer(@"TestCases\Hotspots\CookieShouldBeHttpOnly.cs",
-                                    new CookieShouldBeHttpOnly(AnalyzerConfiguration.AlwaysEnabled),
-                                    MetadataReferenceFacade.SystemWeb,
-                                    TestHelper.CreateSonarProjectConfig(root, TestHelper.CreateFilesToAnalyze(root, webConfigPath)));
+            Verifier.VerifyAnalyzer(
+                @"TestCases\Hotspots\CookieShouldBeHttpOnly.cs",
+                new CookieShouldBeHttpOnly(AnalyzerConfiguration.AlwaysEnabled),
+                MetadataReferenceFacade.SystemWeb,
+                TestHelper.CreateSonarProjectConfig(root, TestHelper.CreateFilesToAnalyze(root, webConfigPath)));
         }
 
 #else
         [TestMethod]
         public void CookiesShouldBeHttpOnly_NetCore() =>
-            Verifier.VerifyAnalyzer(@"TestCases\Hotspots\CookieShouldBeHttpOnly_NetCore.cs",
-                                    new CookieShouldBeHttpOnly(AnalyzerConfiguration.AlwaysEnabled),
-                                    GetAdditionalReferences_NetCore());
+            Verifier.VerifyAnalyzer(
+                @"TestCases\Hotspots\CookieShouldBeHttpOnly_NetCore.cs",
+                new CookieShouldBeHttpOnly(AnalyzerConfiguration.AlwaysEnabled),
+                GetAdditionalReferences_NetCore());
 
         [TestMethod]
         public void CookiesShouldBeHttpOnly_CSharp9() =>
-            Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\Hotspots\CookieShouldBeHttpOnly.CSharp9.cs",
+            Verifier.VerifyAnalyzerFromCSharp9Console(
+                @"TestCases\Hotspots\CookieShouldBeHttpOnly.CSharp9.cs",
+                new CookieShouldBeHttpOnly(AnalyzerConfiguration.AlwaysEnabled),
+                GetAdditionalReferences_NetCore().Concat(NuGetMetadataReference.Nancy()));
+
+        [TestMethod]
+        public void CookiesShouldBeHttpOnly_CSharp10() =>
+            Verifier.VerifyAnalyzerFromCSharp10Console(
+                @"TestCases\Hotspots\CookieShouldBeHttpOnly.CSharp10.cs",
                 new CookieShouldBeHttpOnly(AnalyzerConfiguration.AlwaysEnabled),
                 GetAdditionalReferences_NetCore().Concat(NuGetMetadataReference.Nancy()));
 

@@ -17,6 +17,14 @@ namespace Tests.Diagnostics
             public bool IsAuthenticated => throw new NotImplementedException();
         }
 
+        struct MyStructIdentity : IIdentity // Noncompliant {{Make sure controlling this permission is safe here.}}
+//                                ^^^^^^^^^
+        {
+            public string Name => throw new NotImplementedException();
+            public string AuthenticationType => throw new NotImplementedException();
+            public bool IsAuthenticated => throw new NotImplementedException();
+        }
+
         class MyPrincipal : IPrincipal // Noncompliant
         {
             public IIdentity Identity => throw new NotImplementedException();

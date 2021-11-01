@@ -10,6 +10,8 @@ code = Console.Read(); // Noncompliant
 key = Console.ReadKey(); // Noncompliant
 key = Console.ReadKey(true); // Noncompliant
 
+(key, code) = (Console.ReadKey(), 42); // Noncompliant
+
 Console.OpenStandardInput(); // Noncompliant
 Console.OpenStandardInput(100); // Noncompliant
 
