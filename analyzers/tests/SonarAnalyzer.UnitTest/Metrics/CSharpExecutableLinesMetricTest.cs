@@ -717,6 +717,21 @@ namespace SonarAnalyzer.UnitTest.Common
               5);
 
         [TestMethod]
+        public void MultiLineInterpolatedConstString() =>
+            AssertLinesOfCode(
+              @"
+                        void Foo()
+                        {
+                            const string a = ""Hello"";
+                            const string b = ""Hello again"";
+                            const string c = @$""This is a Multi
+                                                  Line
+                                                  interpolated
+                                                  const string {a} {b}"";
+                        }
+                "); // Not correct should be 6
+
+        [TestMethod]
         public void MultiLineInterpolatedStringWithMultipleLineExpressions() =>
             AssertLinesOfCode(
               @"
@@ -798,7 +813,7 @@ namespace SonarAnalyzer.UnitTest.Common
                 7, 18, 19);
 
         [TestMethod]
-        public void NullCoalescingAsignment() =>
+        public void NullCoalescingAssignment() =>
             AssertLinesOfCode(
                 @"
                 using System;
@@ -810,6 +825,23 @@ namespace SonarAnalyzer.UnitTest.Common
                                 int? i = null;
 
                                 numbers ??= new List<int>();
+                            }
+                        ",
+                10);
+
+        [TestMethod]
+        public void AssignmentAndDeclarationInTheSameDeconstruction() =>
+            AssertLinesOfCode(
+                @"
+                using System;
+                using System.Collections.Generic;
+
+                            int M()
+                            {
+                                List<int> numbers = null;
+                                int? i = null;
+
+                                (i, int k) = (42, 42);
                             }
                         ",
                 10);
