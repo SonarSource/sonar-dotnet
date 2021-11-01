@@ -46,10 +46,10 @@ namespace SonarAnalyzer.Metrics.CSharp
             lazyExecutableLines = new Lazy<ImmutableArray<int>>(() => CSharpExecutableLinesMetric.GetLineNumbers(tree, semanticModel));
         }
 
-        protected override int GetCognitiveComplexity(SyntaxNode node) =>
+        protected override int ComputeCognitiveComplexity(SyntaxNode node) =>
             CSharpCognitiveComplexityMetric.GetComplexity(node).Complexity;
 
-        public override int GetCyclomaticComplexity(SyntaxNode node) =>
+        public override int ComputeCyclomaticComplexity(SyntaxNode node) =>
             CSharpCyclomaticComplexityMetric.GetComplexity(node).Complexity;
 
         protected override bool IsClass(SyntaxNode node)

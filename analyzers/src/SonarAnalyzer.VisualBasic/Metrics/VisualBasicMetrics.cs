@@ -77,10 +77,10 @@ namespace SonarAnalyzer.Metrics.VisualBasic
             lazyExecutableLines = new Lazy<ImmutableArray<int>>(() => VisualBasicExecutableLinesMetric.GetLineNumbers(tree, semanticModel));
         }
 
-        protected override int GetCognitiveComplexity(SyntaxNode node) =>
+        protected override int ComputeCognitiveComplexity(SyntaxNode node) =>
             VisualBasicCognitiveComplexityMetric.GetComplexity(node).Complexity;
 
-        public override int GetCyclomaticComplexity(SyntaxNode node) =>
+        public override int ComputeCyclomaticComplexity(SyntaxNode node) =>
             node.DescendantNodesAndSelf().Count(n => IsComplexityIncreasingKind(n) || IsFunction(n));
 
         protected override bool IsClass(SyntaxNode node)

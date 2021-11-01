@@ -88,11 +88,11 @@ namespace SonarAnalyzer.Common
             return new FileComments(noSonar.ToHashSet(), nonBlank.ToHashSet());
         }
 
-        public abstract int GetCyclomaticComplexity(SyntaxNode node);
+        public abstract int ComputeCyclomaticComplexity(SyntaxNode node);
 
         protected abstract bool IsEndOfFile(SyntaxToken token);
 
-        protected abstract int GetCognitiveComplexity(SyntaxNode node);
+        protected abstract int ComputeCognitiveComplexity(SyntaxNode node);
 
         protected abstract bool IsNoneToken(SyntaxToken token);
 
@@ -114,10 +114,10 @@ namespace SonarAnalyzer.Common
             FunctionNodes.Count();
 
         public int Complexity =>
-            GetCyclomaticComplexity(tree.GetRoot());
+            ComputeCyclomaticComplexity(tree.GetRoot());
 
         public int CognitiveComplexity =>
-            GetCognitiveComplexity(tree.GetRoot());
+            ComputeCognitiveComplexity(tree.GetRoot());
 
         private IEnumerable<SyntaxNode> ClassNodes =>
             tree.GetRoot().DescendantNodes().Where(IsClass);
