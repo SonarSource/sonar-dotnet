@@ -21,7 +21,6 @@
 using System;
 using System.Collections.Generic;
 using FluentAssertions;
-using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.VisualBasic;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.Common;
@@ -570,10 +569,10 @@ End Class").Should().BeEquivalentTo(1, 2, 3, 4, 5, 6, 7, 8);
                 throw new ArgumentException("Supplied language is not C# neither VB.Net", nameof(language));
             }
 
-            (var syntaxTree, var semanticModel) = TestHelper.Compile(text);
+            var (syntaxTree, semanticModel) = TestHelper.Compile(text);
 
             return language == AnalyzerLanguage.CSharp
-                ? (MetricsBase)new Metrics.CSharp.CSharpMetrics(syntaxTree, semanticModel)
+                ? new Metrics.CSharp.CSharpMetrics(syntaxTree, semanticModel)
                 : new Metrics.VisualBasic.VisualBasicMetrics(VisualBasicSyntaxTree.ParseText(text), semanticModel);
         }
     }

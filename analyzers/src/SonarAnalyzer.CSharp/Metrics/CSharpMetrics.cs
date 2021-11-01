@@ -38,8 +38,7 @@ namespace SonarAnalyzer.Metrics.CSharp
 
         public CSharpMetrics(SyntaxTree tree, SemanticModel semanticModel) : base(tree)
         {
-            var root = tree.GetRoot();
-            if (root.Language != LanguageNames.CSharp)
+            if (tree.GetRoot().Language != LanguageNames.CSharp)
             {
                 throw new ArgumentException(InitalizationErrorTextPattern, nameof(tree));
             }
@@ -69,7 +68,8 @@ namespace SonarAnalyzer.Metrics.CSharp
             }
         }
 
-        protected override bool IsCommentTrivia(SyntaxTrivia trivia) => trivia.IsComment();
+        protected override bool IsCommentTrivia(SyntaxTrivia trivia) =>
+            trivia.IsComment();
 
         protected override bool IsEndOfFile(SyntaxToken token) =>
             token.IsKind(SyntaxKind.EndOfFileToken);
@@ -166,11 +166,9 @@ namespace SonarAnalyzer.Metrics.CSharp
                     return false;
 
                 default:
-                    if (node is StatementSyntax)
-                    {
-                        throw new InvalidOperationException($"{node.Kind()} is statement and it isn't handled.");
-                    }
-                    return false;
+                    return node is StatementSyntax
+                               ? throw new InvalidOperationException($"{node.Kind()} is statement and it isn't handled.")
+                               : false;
             }
         }
     }
