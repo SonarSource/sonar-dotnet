@@ -54,7 +54,7 @@ namespace SonarAnalyzer.UnitTest.Rules
             using var scope = new EnvironmentVariableScope(false) { InternalLogCBDE = true };
             Verifier.VerifyAnalyzerFromCSharp10Library(@"TestCases\CbdeHandler.CSharp10.cs", CbdeHandlerRule.MakeUnitTestInstance(null, null));
         }
-        #endif
+#endif
 
         [TestMethod]
         public void CbdeHandlerWait()
