@@ -81,6 +81,12 @@ namespace SonarAnalyzer.UnitTest.Rules
         [DataTestMethod]
         [DataRow(ProjectType.Product)]
         [DataRow(ProjectType.Test)]
+        public void Verify_Tuples_CS(ProjectType projectType) =>
+            Verify("Tuples.cs", projectType, 4, 7, 8);
+
+        [DataTestMethod]
+        [DataRow(ProjectType.Product)]
+        [DataRow(ProjectType.Test)]
         public void Verify_LocalFunction_CS(ProjectType projectType) =>
             Verify("LocalFunction.cs", projectType, 4, 7, 5);
 
@@ -165,7 +171,8 @@ namespace SonarAnalyzer.UnitTest.Rules
                         info.FilePath.Should().Be(fileName);
                         verifyReference(info.Reference);
                     }
-                });
+                },
+                ParseOptionsHelper.CSharpLatest);
         }
 
         // We need to set protected properties and this class exists just to enable the analyzer without bothering with additional files with parameters
