@@ -50,7 +50,7 @@ namespace Tests.Diagnostics
         {
             WindowsIdentity.GetCurrent(); // Noncompliant
 //          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-            
+
             // All instantiations of PrincipalPermission
             PrincipalPermission principalPermission;
             principalPermission = new PrincipalPermission(PermissionState.None); // Noncompliant

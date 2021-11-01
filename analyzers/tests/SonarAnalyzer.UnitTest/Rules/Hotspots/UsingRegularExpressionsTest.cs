@@ -40,10 +40,10 @@ namespace SonarAnalyzer.UnitTest.Rules
 #if NET
         [TestMethod]
         public void UsingRegularExpressions_CSharp10() =>
-        Verifier.VerifyAnalyzerFromCSharp10Library(
-            @"TestCases\Hotspots\UsingRegularExpressions.CSharp10.cs",
-            new CS.UsingRegularExpressions(AnalyzerConfiguration.AlwaysEnabled),
-            MetadataReferenceFacade.RegularExpressions);
+            Verifier.VerifyAnalyzerFromCSharp10Library(
+                @"TestCases\Hotspots\UsingRegularExpressions.CSharp10.cs",
+                new CS.UsingRegularExpressions(AnalyzerConfiguration.AlwaysEnabled),
+                MetadataReferenceFacade.RegularExpressions);
 #endif
 
         [TestMethod]

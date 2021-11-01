@@ -40,7 +40,7 @@ namespace SonarAnalyzer.UnitTest.Rules
                 ParseOptionsHelper.FromCSharp8,
                 AdditionalReferences);
 
-#if NET5_0
+#if NET
         [TestMethod]
         public void ClearTextProtocolsAreSensitive_CSharp9() =>
             Verifier.VerifyAnalyzerFromCSharp9Console(
