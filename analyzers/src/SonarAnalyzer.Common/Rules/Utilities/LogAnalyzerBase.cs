@@ -29,7 +29,7 @@ namespace SonarAnalyzer.Rules
     public abstract class LogAnalyzerBase<TSyntaxKind> : UtilityAnalyzerBase<TSyntaxKind, LogInfo>
         where TSyntaxKind : struct
     {
-        protected const string DiagnosticId = "S9999-log";
+        private const string DiagnosticId = "S9999-log";
         private const string Title = "Log generator";
 
         protected abstract string LanguageVersion(Compilation compilation);
@@ -48,7 +48,7 @@ namespace SonarAnalyzer.Rules
             };
 
         protected sealed override LogInfo CreateMessage(SyntaxTree syntaxTree, SemanticModel semanticModel) =>
-            DiagnosticAnalyzerContextHelper.IsGenerated(syntaxTree, Language.GeneratedCodeRecognizer, semanticModel.Compilation)
+            syntaxTree.IsGenerated(Language.GeneratedCodeRecognizer, semanticModel.Compilation)
             ? new LogInfo { Severity = LogSeverity.Debug, Text = $"File '{syntaxTree.FilePath}' was recognized as generated" }
             : null;
     }
