@@ -40,13 +40,13 @@ namespace SonarAnalyzer.Metrics.CSharp
         {
             if (tree.GetRoot().Language != LanguageNames.CSharp)
             {
-                throw new ArgumentException(InitalizationErrorTextPattern, nameof(tree));
+                throw new ArgumentException(InitializationErrorTextPattern, nameof(tree));
             }
 
             lazyExecutableLines = new Lazy<ImmutableArray<int>>(() => CSharpExecutableLinesMetric.GetLineNumbers(tree, semanticModel));
         }
 
-        public override int GetCognitiveComplexity(SyntaxNode node) =>
+        protected override int GetCognitiveComplexity(SyntaxNode node) =>
             CSharpCognitiveComplexityMetric.GetComplexity(node).Complexity;
 
         public override int GetCyclomaticComplexity(SyntaxNode node) =>
