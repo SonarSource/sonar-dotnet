@@ -79,5 +79,8 @@ namespace SonarAnalyzer.Helpers.Facade
                 LiteralExpressionSyntax literalExpression => literalExpression.Token.ValueText,
                 _ => string.Empty
             };
+
+        public override SyntaxNode RemoveParentheses(SyntaxNode node) =>
+            node.RemoveParentheses();
     }
 }

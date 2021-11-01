@@ -31,7 +31,7 @@ namespace SonarAnalyzer.Helpers
         private readonly BuilderPatternDescriptor<TSyntaxKind, TInvocationSyntax>[] descriptors;
         private readonly AssignmentFinder assignmentFinder;
 
-        protected abstract SyntaxNode RemoveParentheses(SyntaxNode node);
+        protected abstract ILanguageFacade<TSyntaxKind> Language { get; }
         protected abstract SyntaxNode GetExpression(TInvocationSyntax node);
         protected abstract string GetIdentifierName(TInvocationSyntax node);
         protected abstract bool IsMemberAccess(SyntaxNode node, out SyntaxNode memberAccessExpression);
@@ -50,7 +50,7 @@ namespace SonarAnalyzer.Helpers
             var current = context.Node;
             while (current != null)
             {
-                current = RemoveParentheses(current);
+                current = Language.Syntax.RemoveParentheses(current);
                 if (current is TInvocationSyntax invocation)
                 {
                     var invocationContext = new InvocationContext(invocation, GetIdentifierName(invocation), context.SemanticModel);

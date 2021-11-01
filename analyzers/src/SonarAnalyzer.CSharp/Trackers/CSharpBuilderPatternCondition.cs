@@ -21,7 +21,6 @@
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
-using SonarAnalyzer.Extensions;
 using StyleCop.Analyzers.Lightup;
 
 namespace SonarAnalyzer.Helpers
@@ -31,8 +30,7 @@ namespace SonarAnalyzer.Helpers
         public CSharpBuilderPatternCondition(bool constructorIsSafe, params BuilderPatternDescriptor<SyntaxKind, InvocationExpressionSyntax>[] descriptors)
             : base(constructorIsSafe, descriptors, new CSharpAssignmentFinder()) { }
 
-        protected override SyntaxNode RemoveParentheses(SyntaxNode node) =>
-            node.RemoveParentheses();
+        protected override ILanguageFacade<SyntaxKind> Language => CSharpFacade.Instance;
 
         protected override SyntaxNode GetExpression(InvocationExpressionSyntax node) =>
             node.Expression;
