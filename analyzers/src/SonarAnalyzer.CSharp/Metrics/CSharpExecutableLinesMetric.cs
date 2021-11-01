@@ -137,7 +137,8 @@ namespace SonarAnalyzer.Metrics.CSharp
                     case SyntaxKind.GetAccessorDeclaration:
                     case SyntaxKindEx.InitAccessorDeclaration:
                         return !HasExcludedCodeAttribute(
-                            (AccessorDeclarationSyntax)node, ads => ads.AttributeLists);
+                            (AccessorDeclarationSyntax)node,
+                            ads => ads.AttributeLists);
 
                     default:
                         return true;
