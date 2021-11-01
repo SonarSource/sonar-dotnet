@@ -49,7 +49,7 @@ namespace SonarAnalyzer.Rules
         protected UtilityAnalyzerBase(string diagnosticId, string title) =>
             rule = DiagnosticDescriptorBuilder.GetUtilityDescriptor(diagnosticId, title);
 
-        internal /* for testing */ static TextRange GetTextRange(FileLinePositionSpan lineSpan) =>
+        internal static TextRange GetTextRange(FileLinePositionSpan lineSpan) =>
             new TextRange
             {
                 StartLine = lineSpan.StartLinePosition.GetLineNumberToReport(),
@@ -60,7 +60,7 @@ namespace SonarAnalyzer.Rules
 
         protected void ReadParameters(SonarAnalysisContext context, CompilationAnalysisContext c)
         {
-            var settings = PropertiesHelper.GetSettings(c.Options);
+            var settings = PropertiesHelper.GetSettings(c.Options).ToList();
             var outPath = context.ProjectConfiguration(c.Options).OutPath;
             // For backward compatibility with S4MSB <= 5.0
             if (outPath == null && c.Options.AdditionalFiles.FirstOrDefault(IsProjectOutFolderPath) is { } projectOutFolderAdditionalFile)
