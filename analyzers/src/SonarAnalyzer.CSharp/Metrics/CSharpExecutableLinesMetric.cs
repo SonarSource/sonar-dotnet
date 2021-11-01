@@ -33,6 +33,8 @@ namespace SonarAnalyzer.Metrics.CSharp
 {
     public static class CSharpExecutableLinesMetric
     {
+        private const int AttributeSuffixIndex = 9;
+
         public static ImmutableArray<int> GetLineNumbers(SyntaxTree syntaxTree, SemanticModel semanticModel)
         {
             var walker = new ExecutableLinesWalker(semanticModel);
@@ -112,13 +114,11 @@ namespace SonarAnalyzer.Metrics.CSharp
                     case SyntaxKind.StructDeclaration:
                     case SyntaxKind.ClassDeclaration:
                     case SyntaxKindEx.RecordDeclaration:
-                        return !HasExcludedCodeAttribute((BaseTypeDeclarationSyntax)node, btdc => btdc.AttributeLists,
-                            canBePartial: true);
+                        return !HasExcludedCodeAttribute((BaseTypeDeclarationSyntax)node, btdc => btdc.AttributeLists, canBePartial: true);
 
                     case SyntaxKind.MethodDeclaration:
                     case SyntaxKind.ConstructorDeclaration:
-                        return !HasExcludedCodeAttribute((BaseMethodDeclarationSyntax)node, bmds => bmds.AttributeLists,
-                            canBePartial: true);
+                        return !HasExcludedCodeAttribute((BaseMethodDeclarationSyntax)node, bmds => bmds.AttributeLists, canBePartial: true);
 
                     case SyntaxKind.PropertyDeclaration:
                     case SyntaxKind.EventDeclaration:
@@ -136,8 +136,9 @@ namespace SonarAnalyzer.Metrics.CSharp
                 }
             }
 
-            private bool HasExcludedCodeAttribute<T>(T node, Func<T, SyntaxList<AttributeListSyntax>> getAttributeLists,
-                bool canBePartial = false)
+            private bool HasExcludedCodeAttribute<T>(T node,
+                                                     Func<T, SyntaxList<AttributeListSyntax>> getAttributeLists,
+                                                     bool canBePartial = false)
                 where T : SyntaxNode
             {
                 var hasExcludeFromCodeCoverageAttribute = getAttributeLists(node)
@@ -154,8 +155,8 @@ namespace SonarAnalyzer.Metrics.CSharp
                 {
                     case SymbolKind.Method:
                     case SymbolKind.NamedType:
-                        return hasExcludeFromCodeCoverageAttribute ||
-                            nodeSymbol.HasAttribute(KnownType.System_Diagnostics_CodeAnalysis_ExcludeFromCodeCoverageAttribute);
+                        return hasExcludeFromCodeCoverageAttribute
+                            || nodeSymbol.HasAttribute(KnownType.System_Diagnostics_CodeAnalysis_ExcludeFromCodeCoverageAttribute);
 
                     default:
                         return hasExcludeFromCodeCoverageAttribute;
@@ -167,10 +168,10 @@ namespace SonarAnalyzer.Metrics.CSharp
                 var attributeName = attribute?.Name?.ToString() ?? string.Empty;
 
                 // Check the attribute name without the attribute suffix OR the full name of the attribute
+                var excludedFromCoverageAttribute = KnownType.System_Diagnostics_CodeAnalysis_ExcludeFromCodeCoverageAttribute.ShortName;
                 return attributeName.EndsWith(
-                        KnownType.System_Diagnostics_CodeAnalysis_ExcludeFromCodeCoverageAttribute.ShortName.Substring(0,
-                            KnownType.System_Diagnostics_CodeAnalysis_ExcludeFromCodeCoverageAttribute.ShortName.Length - 9), StringComparison.Ordinal) ||
-                    attributeName.EndsWith(KnownType.System_Diagnostics_CodeAnalysis_ExcludeFromCodeCoverageAttribute.ShortName, StringComparison.Ordinal);
+                        excludedFromCoverageAttribute.Substring(0, excludedFromCoverageAttribute.Length - AttributeSuffixIndex), StringComparison.Ordinal)
+                    || attributeName.EndsWith(excludedFromCoverageAttribute, StringComparison.Ordinal);
             }
         }
     }
