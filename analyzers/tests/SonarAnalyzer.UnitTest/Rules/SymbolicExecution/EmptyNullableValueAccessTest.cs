@@ -48,6 +48,10 @@ namespace SonarAnalyzer.UnitTest.Rules.SymbolicExecution
         [TestMethod]
         public void EmptyNullableValueAccess_CSharp9() =>
             Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\EmptyNullableValueAccess.CSharp9.cs", new SymbolicExecutionRunner(new EmptyNullableValueAccess()));
+
+        [TestMethod]
+        public void EmptyNullableValueAccess_CSharp10() =>
+            Verifier.VerifyAnalyzerFromCSharp10Library(@"TestCases\EmptyNullableValueAccess.CSharp10.cs", new SymbolicExecutionRunner(new EmptyNullableValueAccess()));
 #endif
     }
 }
