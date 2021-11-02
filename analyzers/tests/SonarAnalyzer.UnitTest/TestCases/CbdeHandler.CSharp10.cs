@@ -21,7 +21,6 @@ namespace Tests.Diagnostics
     {
         int i;
         int f = 2147483600;
-        int k = 2147483600;
         public int Id { get; set; } = -2147483600;
 
         public ParameterlessConstructorAndFieldInitializer()
@@ -39,6 +38,5 @@ namespace Tests.Diagnostics
         {
             Id -= 100; // FN
         }
-
     }
 }
