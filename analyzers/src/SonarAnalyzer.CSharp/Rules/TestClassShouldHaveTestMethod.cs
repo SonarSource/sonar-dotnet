@@ -76,7 +76,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     }
                 },
                 SyntaxKind.ClassDeclaration,
-                SyntaxKindEx.RecordDeclaration);
+                SyntaxKindEx.RecordClassDeclaration);
 
         private static bool HasAnyTestMethod(INamedTypeSymbol classSymbol) =>
             classSymbol.GetMembers().OfType<IMethodSymbol>().Any(m => m.IsTestMethod());

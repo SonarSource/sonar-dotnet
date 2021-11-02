@@ -15,7 +15,19 @@ namespace Tests
             {
                 return 42;
             }
+
+            var y = string.Empty;
+            (y, var z) = ("a", 'x');
+
             throw new NotImplementedException();
         }
     }
+
+    public record class RecordClass();
+
+    public struct Struct
+    {
+    }
+
+    public record struct RecordStruct();
 }

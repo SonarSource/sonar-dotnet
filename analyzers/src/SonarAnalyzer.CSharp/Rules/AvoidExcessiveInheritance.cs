@@ -99,7 +99,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     }
                 },
                 SyntaxKind.ClassDeclaration,
-                SyntaxKindEx.RecordDeclaration);
+                SyntaxKindEx.RecordClassDeclaration);
 
         private static string GetRootNamespace(ISymbol symbol)
         {

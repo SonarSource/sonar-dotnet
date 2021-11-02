@@ -72,7 +72,7 @@ namespace SonarAnalyzer.Rules.CSharp
             SyntaxKind.InterfaceDeclaration,
             SyntaxKind.EnumDeclaration,
             SyntaxKind.DelegateDeclaration,
-            SyntaxKindEx.RecordDeclaration);
+            SyntaxKindEx.RecordClassDeclaration);
 
         private static bool IsDeclaredPublic(SyntaxNode declaration, SemanticModel semanticModel) =>
             semanticModel.GetDeclaredSymbol(declaration)?.DeclaredAccessibility == Accessibility.Public;

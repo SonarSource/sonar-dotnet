@@ -113,7 +113,7 @@ namespace SonarAnalyzer.Metrics.CSharp
 
                     case SyntaxKind.StructDeclaration:
                     case SyntaxKind.ClassDeclaration:
-                    case SyntaxKindEx.RecordDeclaration:
+                    case SyntaxKindEx.RecordClassDeclaration:
                         return !HasExcludedCodeAttribute((BaseTypeDeclarationSyntax)node, btdc => btdc.AttributeLists, canBePartial: true);
 
                     case SyntaxKind.MethodDeclaration:

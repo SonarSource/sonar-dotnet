@@ -38,19 +38,18 @@ namespace SonarAnalyzer.Metrics.CSharp
 
         public CSharpMetrics(SyntaxTree tree, SemanticModel semanticModel) : base(tree)
         {
-            var root = tree.GetRoot();
-            if (root.Language != LanguageNames.CSharp)
+            if (tree.GetRoot().Language != LanguageNames.CSharp)
             {
-                throw new ArgumentException(InitalizationErrorTextPattern, nameof(tree));
+                throw new ArgumentException(InitializationErrorTextPattern, nameof(tree));
             }
 
             lazyExecutableLines = new Lazy<ImmutableArray<int>>(() => CSharpExecutableLinesMetric.GetLineNumbers(tree, semanticModel));
         }
 
-        public override int GetCognitiveComplexity(SyntaxNode node) =>
+        protected override int ComputeCognitiveComplexity(SyntaxNode node) =>
             CSharpCognitiveComplexityMetric.GetComplexity(node).Complexity;
 
-        public override int GetCyclomaticComplexity(SyntaxNode node) =>
+        public override int ComputeCyclomaticComplexity(SyntaxNode node) =>
             CSharpCyclomaticComplexityMetric.GetComplexity(node).Complexity;
 
         protected override bool IsClass(SyntaxNode node)
@@ -58,8 +57,9 @@ namespace SonarAnalyzer.Metrics.CSharp
             switch (node.Kind())
             {
                 case SyntaxKind.ClassDeclaration:
-                case SyntaxKindEx.RecordDeclaration:
+                case SyntaxKindEx.RecordClassDeclaration:
                 case SyntaxKind.StructDeclaration:
+                case SyntaxKindEx.RecordStructDeclaration:
                 case SyntaxKind.InterfaceDeclaration:
                     return true;
 
@@ -68,7 +68,8 @@ namespace SonarAnalyzer.Metrics.CSharp
             }
         }
 
-        protected override bool IsCommentTrivia(SyntaxTrivia trivia) => trivia.IsComment();
+        protected override bool IsCommentTrivia(SyntaxTrivia trivia) =>
+            trivia.IsComment();
 
         protected override bool IsEndOfFile(SyntaxToken token) =>
             token.IsKind(SyntaxKind.EndOfFileToken);
@@ -161,8 +162,13 @@ namespace SonarAnalyzer.Metrics.CSharp
                 case SyntaxKind.YieldReturnStatement:
                     return true;
 
-                default:
+                case SyntaxKind.Block:
                     return false;
+
+                default:
+                    return node is StatementSyntax
+                               ? throw new InvalidOperationException($"{node.Kind()} is statement and it isn't handled.")
+                               : false;
             }
         }
     }

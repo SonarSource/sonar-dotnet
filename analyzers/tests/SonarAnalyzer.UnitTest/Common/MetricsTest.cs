@@ -21,7 +21,6 @@
 using System;
 using System.Collections.Generic;
 using FluentAssertions;
-using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.VisualBasic;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.Common;
@@ -195,8 +194,8 @@ End Class").Should().BeEquivalentTo(1, 2, 3, 4, 5, 6, 7, 8);
             Classes(AnalyzerLanguage.CSharp, "interface IMyInterface {}").Should().Be(1);
             Classes(AnalyzerLanguage.CSharp, "record MyRecord {}").Should().Be(1);
             Classes(AnalyzerLanguage.CSharp, "record MyPositionalRecord(int Prop) {}").Should().Be(1);
-            Classes(AnalyzerLanguage.CSharp, "record struct MyRecordStruct {}").Should().Be(0); // Should be 1
-            Classes(AnalyzerLanguage.CSharp, "record struct MyPositionalRecordStruct(int Prop) {}").Should().Be(0); // Should be 1
+            Classes(AnalyzerLanguage.CSharp, "record struct MyRecordStruct {}").Should().Be(1);
+            Classes(AnalyzerLanguage.CSharp, "record struct MyPositionalRecordStruct(int Prop) {}").Should().Be(1);
             Classes(AnalyzerLanguage.CSharp, "struct MyClass {}").Should().Be(1);
             Classes(AnalyzerLanguage.CSharp, "enum MyEnum {}").Should().Be(0);
             Classes(AnalyzerLanguage.CSharp, "class MyClass1 {} namespace MyNamespace { class MyClass2 {} }").Should().Be(2);
@@ -570,10 +569,10 @@ End Class").Should().BeEquivalentTo(1, 2, 3, 4, 5, 6, 7, 8);
                 throw new ArgumentException("Supplied language is not C# neither VB.Net", nameof(language));
             }
 
-            (var syntaxTree, var semanticModel) = TestHelper.Compile(text);
+            var (syntaxTree, semanticModel) = TestHelper.Compile(text);
 
             return language == AnalyzerLanguage.CSharp
-                ? (MetricsBase)new Metrics.CSharp.CSharpMetrics(syntaxTree, semanticModel)
+                ? new Metrics.CSharp.CSharpMetrics(syntaxTree, semanticModel)
                 : new Metrics.VisualBasic.VisualBasicMetrics(VisualBasicSyntaxTree.ParseText(text), semanticModel);
         }
     }

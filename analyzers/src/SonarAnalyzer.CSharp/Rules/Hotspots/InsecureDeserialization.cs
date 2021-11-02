@@ -57,7 +57,7 @@ namespace SonarAnalyzer.Rules.CSharp
         }
 
         protected override void Initialize(SonarAnalysisContext context) =>
-            context.RegisterSyntaxNodeActionInNonGenerated(VisitDeclaration, SyntaxKind.ClassDeclaration, SyntaxKindEx.RecordDeclaration);
+            context.RegisterSyntaxNodeActionInNonGenerated(VisitDeclaration, SyntaxKind.ClassDeclaration, SyntaxKindEx.RecordClassDeclaration);
 
         private void VisitDeclaration(SyntaxNodeAnalysisContext context)
         {
@@ -194,7 +194,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
             public override void Visit(SyntaxNode node)
             {
-                if (node.Kind() == SyntaxKindEx.RecordDeclaration)
+                if (node.Kind() == SyntaxKindEx.RecordClassDeclaration)
                 {
                     if (visitedFirstLevel)
                     {

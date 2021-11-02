@@ -71,10 +71,11 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void Verify_Identifiers_CS(ProjectType projectType) =>
             Verify("Identifiers.cs", projectType, info =>
             {
-                info.Should().HaveCount(34);
-                info.Where(x => x.TokenType == TokenType.Keyword).Should().HaveCount(26);
-                info.Where(x => x.TokenType == TokenType.TypeName).Should().HaveCount(7);
-                info.Should().ContainSingle(x => x.TokenType == TokenType.NumericLiteral);
+                info.Should().HaveCount(39);
+                info.Count(x => x.TokenType == TokenType.Keyword).Should().Be(29);
+                info.Count(x => x.TokenType == TokenType.TypeName).Should().Be(7);
+                info.Count(x => x.TokenType == TokenType.NumericLiteral).Should().Be(1);
+                info.Count(x => x.TokenType == TokenType.StringLiteral).Should().Be(2);
             });
 
         [DataTestMethod]
@@ -136,7 +137,8 @@ namespace SonarAnalyzer.UnitTest.Rules
                     var info = messages.Single();
                     info.FilePath.Should().Be(fileName);
                     verifyTokenInfo(info.TokenInfo);
-                });
+                },
+                ParseOptionsHelper.CSharpLatest);
         }
 
         // We need to set protected properties and this class exists just to enable the analyzer without bothering with additional files with parameters

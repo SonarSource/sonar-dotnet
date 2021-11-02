@@ -36,7 +36,8 @@ namespace SonarAnalyzer.UnitTest.Rules
         [DataTestMethod]
         public void VerifyMetrics()
         {
-            var testRoot = Root + nameof(VerifyMetrics);
+            const string testRoot = Root + nameof(VerifyMetrics);
+
             Verifier.VerifyNonConcurrentUtilityAnalyzer<MetricsInfo>(
                 new[] { Root + "AllMetrics.cs" },
                 new TestMetricsAnalyzer(testRoot, false),
@@ -47,25 +48,28 @@ namespace SonarAnalyzer.UnitTest.Rules
                     messages.Should().HaveCount(1);
                     var metrics = messages.Single();
                     metrics.FilePath.Should().Be("AllMetrics.cs");
-                    metrics.ClassCount.Should().Be(1);
-                    metrics.CodeLine.Should().HaveCount(17);
+                    metrics.ClassCount.Should().Be(4);
+                    metrics.CodeLine.Should().HaveCount(24);
                     metrics.CognitiveComplexity.Should().Be(1);
                     metrics.Complexity.Should().Be(2);
-                    metrics.ExecutableLines.Should().HaveCount(3);
+                    metrics.ExecutableLines.Should().HaveCount(5);
                     metrics.FunctionCount.Should().Be(1);
                     metrics.NoSonarComment.Should().HaveCount(1);
                     metrics.NonBlankComment.Should().HaveCount(1);
-                    metrics.StatementCount.Should().Be(3);
-                });
+                    metrics.StatementCount.Should().Be(5);
+                },
+                ParseOptionsHelper.CSharpLatest);
         }
 
         [TestMethod]
         public void Verify_NotRunForTestProject()
         {
-            var testRoot = Root + nameof(Verify_NotRunForTestProject);
-            Verifier.VerifyUtilityAnalyzerIsNotRun(new[] { Root + "AllMetrics.cs" },
-                                                   new TestMetricsAnalyzer(testRoot, true),
-                                                   @$"{testRoot}\metrics.pb");
+            const string testRoot = Root + nameof(Verify_NotRunForTestProject);
+            Verifier.VerifyUtilityAnalyzerIsNotRun(
+                new[] { Root + "AllMetrics.cs" },
+                new TestMetricsAnalyzer(testRoot, true),
+                @$"{testRoot}\metrics.pb",
+                ParseOptionsHelper.CSharpLatest);
         }
 
         // We need to set protected properties and this class exists just to enable the analyzer without bothering with additional files with parameters

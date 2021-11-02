@@ -43,10 +43,10 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void Verify_Unique_CS() =>
             Verify("Unique.cs", info =>
             {
-                info.Should().HaveCount(60);
-                info.Where(x => x.TokenValue == "$str").Should().HaveCount(5);
-                info.Should().ContainSingle(x => x.TokenValue == "$num");
-                info.Should().ContainSingle(x => x.TokenValue == "$char");
+                info.Should().HaveCount(102);
+                info.Count(x => x.TokenValue == "$str").Should().Be(9);
+                info.Count(x => x.TokenValue == "$num").Should().Be(1);
+                info.Count(x => x.TokenValue == "$char").Should().Be(2);
             });
 
         [TestMethod]
@@ -123,7 +123,8 @@ namespace SonarAnalyzer.UnitTest.Rules
                     var info = messages.Single();
                     info.FilePath.Should().Be(fileName);
                     verifyTokenInfo(info.TokenInfo);
-                });
+                },
+                ParseOptionsHelper.FromCSharp10);
         }
 
         // We need to set protected properties and this class exists just to enable the analyzer without bothering with additional files with parameters

@@ -40,7 +40,7 @@ namespace SonarAnalyzer.Rules.CSharp
             IsValuePropertyParameter(valuePropertySymbol)
             && valuePropertySymbol.ContainingSymbol is IMethodSymbol methodSymbol
             && methodSymbol.DeclaringSyntaxReferences.FirstOrDefault()?.GetSyntax() is AccessorDeclarationSyntax accessor
-                ? accessor?.Keyword
+                ? accessor.Keyword
                 : null;
     }
 }

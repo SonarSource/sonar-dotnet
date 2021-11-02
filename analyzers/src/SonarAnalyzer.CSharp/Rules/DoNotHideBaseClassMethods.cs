@@ -62,7 +62,7 @@ namespace SonarAnalyzer.Rules.CSharp
                         .ForEach(d => c.ReportIssue(d));
                 },
                 SyntaxKind.ClassDeclaration,
-                SyntaxKindEx.RecordDeclaration);
+                SyntaxKindEx.RecordClassDeclaration);
 
         private class IssueFinder
         {

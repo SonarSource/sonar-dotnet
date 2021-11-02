@@ -86,7 +86,7 @@ namespace SonarAnalyzer.Extensions
                 SyntaxKind.ClassDeclaration => "class",
                 SyntaxKind.StructDeclaration => "struct",
                 SyntaxKind.InterfaceDeclaration => "interface",
-                SyntaxKindEx.RecordDeclaration => "record",
+                SyntaxKindEx.RecordClassDeclaration => "record",
                 _ => GetUnknownType(node.Kind())
             };
 

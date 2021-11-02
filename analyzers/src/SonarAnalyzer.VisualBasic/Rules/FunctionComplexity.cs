@@ -64,7 +64,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
         }
 
         protected override int GetComplexity(SyntaxNode node, SemanticModel semanticModel) =>
-            new Metrics.VisualBasic.VisualBasicMetrics(node.SyntaxTree, semanticModel).GetCyclomaticComplexity(node);
+            new Metrics.VisualBasic.VisualBasicMetrics(node.SyntaxTree, semanticModel).ComputeCyclomaticComplexity(node);
 
         protected sealed override GeneratedCodeRecognizer GeneratedCodeRecognizer => VisualBasicGeneratedCodeRecognizer.Instance;
     }

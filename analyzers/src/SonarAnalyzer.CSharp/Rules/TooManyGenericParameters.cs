@@ -69,7 +69,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 SyntaxKind.ClassDeclaration,
                 SyntaxKind.StructDeclaration,
                 SyntaxKind.InterfaceDeclaration,
-                SyntaxKindEx.RecordDeclaration);
+                SyntaxKindEx.RecordClassDeclaration);
 
             context.RegisterSyntaxNodeActionInNonGenerated(
                 c =>
@@ -106,7 +106,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     case SyntaxKind.InterfaceDeclaration:
                         return ((InterfaceDeclarationSyntax)parent).Identifier.ValueText;
 
-                    case SyntaxKindEx.RecordDeclaration:
+                    case SyntaxKindEx.RecordClassDeclaration:
                         return ((RecordDeclarationSyntaxWrapper)parent).Identifier.ValueText;
 
                     default:

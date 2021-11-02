@@ -39,7 +39,7 @@ namespace SonarAnalyzer.Rules.CSharp
         private const string MessageFormat = "Types should not have members with visibility set higher than the type's visibility";
 
         private static readonly DiagnosticDescriptor Rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
-        private static readonly SyntaxKind[] TypeKinds = { SyntaxKind.ClassDeclaration, SyntaxKind.StructDeclaration, SyntaxKind.EnumDeclaration, SyntaxKindEx.RecordDeclaration };
+        private static readonly SyntaxKind[] TypeKinds = { SyntaxKind.ClassDeclaration, SyntaxKind.StructDeclaration, SyntaxKind.EnumDeclaration, SyntaxKindEx.RecordClassDeclaration };
         private static readonly SyntaxKind[] MemberDeclarationKinds =
         {
             SyntaxKind.ClassDeclaration,
@@ -53,7 +53,7 @@ namespace SonarAnalyzer.Rules.CSharp
             SyntaxKind.InterfaceDeclaration,
             SyntaxKind.MethodDeclaration,
             SyntaxKind.PropertyDeclaration,
-            SyntaxKindEx.RecordDeclaration,
+            SyntaxKindEx.RecordClassDeclaration,
             SyntaxKind.StructDeclaration
         };
 

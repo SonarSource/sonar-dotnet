@@ -54,7 +54,7 @@ namespace SonarAnalyzer.Rules.CSharp
         {
             context.RegisterSyntaxNodeActionInNonGenerated(CheckEnum, SyntaxKind.EnumDeclaration);
             context.RegisterSyntaxNodeActionInNonGenerated(CheckInterface, SyntaxKind.InterfaceDeclaration);
-            context.RegisterSyntaxNodeActionInNonGenerated(CheckClassAndRecord, SyntaxKind.ClassDeclaration, SyntaxKindEx.RecordDeclaration);
+            context.RegisterSyntaxNodeActionInNonGenerated(CheckClassAndRecord, SyntaxKind.ClassDeclaration, SyntaxKindEx.RecordClassDeclaration);
         }
 
         private static void CheckClassAndRecord(SyntaxNodeAnalysisContext context)

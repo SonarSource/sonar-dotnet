@@ -71,7 +71,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 SyntaxKind.ObjectCreationExpression,
                 SyntaxKindEx.ImplicitObjectCreationExpression);
 
-            context.RegisterSyntaxNodeActionInNonGenerated(VerifyRecordDeclaration, SyntaxKindEx.RecordDeclaration);
+            context.RegisterSyntaxNodeActionInNonGenerated(VerifyRecordDeclaration, SyntaxKindEx.RecordClassDeclaration);
         }
 
         private static void VerifyMethodDeclaration(SyntaxNodeAnalysisContext context)

@@ -70,14 +70,14 @@ namespace SonarAnalyzer.Rules.CSharp
                 SyntaxKind.ClassDeclaration,
                 SyntaxKind.InterfaceDeclaration,
                 SyntaxKind.StructDeclaration,
-                SyntaxKindEx.RecordDeclaration);
+                SyntaxKindEx.RecordClassDeclaration);
 
             context.RegisterSyntaxNodeActionInNonGenerated(
                 CheckForUnnecessaryUnsafeBlocks,
                 SyntaxKind.ClassDeclaration,
                 SyntaxKind.StructDeclaration,
                 SyntaxKind.InterfaceDeclaration,
-                SyntaxKindEx.RecordDeclaration);
+                SyntaxKindEx.RecordClassDeclaration);
 
             context.RegisterSyntaxNodeActionInNonGenerated(
                 c =>
