@@ -51,6 +51,19 @@ namespace SonarAnalyzer.UnitTest.Rules
                                    new RedundantDeclarationCodeFixProvider(),
                                    RedundantDeclarationCodeFixProvider.TitleRedundantParameterName,
                                    ParseOptionsHelper.FromCSharp9);
+
+        [TestMethod]
+        public void RedundantDeclaration_CSharp10() =>
+            Verifier.VerifyAnalyzerFromCSharp10Library(@"TestCases\RedundantDeclaration.CSharp10.cs", new RedundantDeclaration());
+
+        [TestMethod]
+        public void RedundantDeclaration_CSharp10_CodeFix_ExplicitDelegate() =>
+            Verifier.VerifyCodeFix(@"TestCases\RedundantDeclaration.CSharp10.cs",
+                                   @"TestCases\RedundantDeclaration.CSharp10.Fixed.cs",
+                                   new RedundantDeclaration(),
+                                   new RedundantDeclarationCodeFixProvider(),
+                                   RedundantDeclarationCodeFixProvider.TitleRedundantExplicitDelegate,
+                                   ParseOptionsHelper.FromCSharp10);
 #endif
 
         [TestMethod]
