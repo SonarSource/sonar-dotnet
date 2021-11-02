@@ -23,7 +23,11 @@ namespace Tests
         }
     }
 
-    public record struct RecordStruct();
-
     public record class RecordClass();
+
+    public struct Struct
+    {
+    }
+
+    public record struct RecordStruct();
 }

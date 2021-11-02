@@ -48,8 +48,8 @@ namespace SonarAnalyzer.UnitTest.Rules
                     messages.Should().HaveCount(1);
                     var metrics = messages.Single();
                     metrics.FilePath.Should().Be("AllMetrics.cs");
-                    metrics.ClassCount.Should().Be(3);
-                    metrics.CodeLine.Should().HaveCount(21);
+                    metrics.ClassCount.Should().Be(4);
+                    metrics.CodeLine.Should().HaveCount(24);
                     metrics.CognitiveComplexity.Should().Be(1);
                     metrics.Complexity.Should().Be(2);
                     metrics.ExecutableLines.Should().HaveCount(5);
