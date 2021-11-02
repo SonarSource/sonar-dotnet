@@ -125,17 +125,13 @@ namespace SonarAnalyzer.UnitTest.Rules
                                                            SonarDiagnosticAnalyzer diagnosticAnalyzer,
                                                            IEnumerable<MetadataReference> additionalReferences = null)
         {
-            var compilation = SolutionBuilder
-                .Create()
-                .AddProject(AnalyzerLanguage.FromPath(path))
-                .AddTestReferences()
-                .AddReferences(additionalReferences)
-                .AddDocument(path)
-                .GetCompilation();
-            DiagnosticVerifier.GetDiagnostics(
-                compilation, diagnosticAnalyzer,
-                CompilationErrorBehavior.FailTest,
-                verifyNoExceptionIsThrown: false);
+            var compilation = SolutionBuilder.Create()
+                                             .AddProject(AnalyzerLanguage.FromPath(path))
+                                             .AddTestReferences()
+                                             .AddReferences(additionalReferences)
+                                             .AddDocument(path)
+                                             .GetCompilation();
+            DiagnosticVerifier.GetDiagnostics(compilation, diagnosticAnalyzer, CompilationErrorBehavior.FailTest, verifyNoExceptionIsThrown: false);
         }
 
         private static string CreateMockPath(string mockName)
