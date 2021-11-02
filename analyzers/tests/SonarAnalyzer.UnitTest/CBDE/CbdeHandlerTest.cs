@@ -42,13 +42,20 @@ namespace SonarAnalyzer.UnitTest.Rules
         }
 #if NET
         [TestMethod]
-        public void CbdeHandler_CS_FromCSharp9()
+        public void CbdeHandler_CSharp9()
         {
             using var scope = new EnvironmentVariableScope(false) { InternalLogCBDE = true };
-            Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\CbdeHandler.CSharp9.cs",
-                                                      CbdeHandlerRule.MakeUnitTestInstance(null, null));
+            Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\CbdeHandler.CSharp9.cs", CbdeHandlerRule.MakeUnitTestInstance(null, null));
+        }
+
+        [TestMethod]
+        public void CbdeHandler_CSharp10()
+        {
+            using var scope = new EnvironmentVariableScope(false) { InternalLogCBDE = true };
+            Verifier.VerifyAnalyzerFromCSharp10Library(@"TestCases\CbdeHandler.CSharp10.cs", CbdeHandlerRule.MakeUnitTestInstance(null, null));
         }
 #endif
+
         [TestMethod]
         public void CbdeHandlerWait()
         {
@@ -114,18 +121,17 @@ namespace SonarAnalyzer.UnitTest.Rules
             Assert.IsTrue(cbdeExecuted);
         }
 
-        private static void RunAnalysisWithoutVerification(string path, SonarDiagnosticAnalyzer diagnosticAnalyzer,
-            IEnumerable<MetadataReference> additionalReferences = null)
+        private static void RunAnalysisWithoutVerification(string path,
+                                                           SonarDiagnosticAnalyzer diagnosticAnalyzer,
+                                                           IEnumerable<MetadataReference> additionalReferences = null)
         {
             var compilation = SolutionBuilder.Create()
-                .AddProject(AnalyzerLanguage.FromPath(path))
-                .AddTestReferences()
-                .AddReferences(additionalReferences)
-                .AddDocument(path)
-                .GetCompilation();
-            DiagnosticVerifier.GetDiagnostics(compilation, diagnosticAnalyzer,
-                CompilationErrorBehavior.FailTest,
-                verifyNoExceptionIsThrown: false);
+                                             .AddProject(AnalyzerLanguage.FromPath(path))
+                                             .AddTestReferences()
+                                             .AddReferences(additionalReferences)
+                                             .AddDocument(path)
+                                             .GetCompilation();
+            DiagnosticVerifier.GetDiagnostics(compilation, diagnosticAnalyzer, CompilationErrorBehavior.FailTest, verifyNoExceptionIsThrown: false);
         }
 
         private static string CreateMockPath(string mockName)
