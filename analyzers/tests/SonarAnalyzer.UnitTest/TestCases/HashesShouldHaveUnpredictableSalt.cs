@@ -20,7 +20,7 @@ namespace Tests.Diagnostics
             var pdb4 = new PasswordDeriveBytes(passwordString, shortSalt, cspParams); // Noncompliant {{Make this salt unpredictable.}}
             var pdb5 = new PasswordDeriveBytes(passwordBytes, shortSalt, HashAlgorithmName.SHA512.Name, 1000); // Noncompliant {{Make this salt unpredictable.}}
 //                                                            ^^^^^^^^^
-        var pdb6 = new PasswordDeriveBytes(passwordString, shortSalt, HashAlgorithmName.SHA512.Name, 1000); // Noncompliant {{Make this salt unpredictable.}}
+            var pdb6 = new PasswordDeriveBytes(passwordString, shortSalt, HashAlgorithmName.SHA512.Name, 1000); // Noncompliant {{Make this salt unpredictable.}}
             var pdb7 = new PasswordDeriveBytes(passwordBytes, shortSalt, HashAlgorithmName.SHA512.Name, 1000, cspParams); // Noncompliant {{Make this salt unpredictable.}}
             var pdb8 = new PasswordDeriveBytes(passwordString, shortSalt, HashAlgorithmName.SHA512.Name, 1000, cspParams); // Noncompliant {{Make this salt unpredictable.}}
 
@@ -97,7 +97,7 @@ namespace Tests.Diagnostics
         public void SaltWithEncodingGetBytes(string value)
         {
             var salt = Encoding.UTF8.GetBytes(value);
-            var pdb = new PasswordDeriveBytes(passwordString, salt); // Compliant, we don't know how to salt was created
+            var pdb = new PasswordDeriveBytes(passwordString, salt); // Compliant, we don't know how the salt was created
             var rfcPdb = new Rfc2898DeriveBytes(passwordString, salt); // Compliant
         }
 

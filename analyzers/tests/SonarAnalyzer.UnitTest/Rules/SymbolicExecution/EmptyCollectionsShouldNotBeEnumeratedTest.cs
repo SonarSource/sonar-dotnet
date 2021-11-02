@@ -51,6 +51,10 @@ namespace SonarAnalyzer.UnitTest.Rules.SymbolicExecution
         [TestMethod]
         public void EmptyCollectionsShouldNotBeEnumerated_CSharp9() =>
             Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\EmptyCollectionsShouldNotBeEnumerated.CSharp9.cs", new SymbolicExecutionRunner(new EmptyCollectionsShouldNotBeEnumerated()));
+
+        [TestMethod]
+        public void EmptyCollectionsShouldNotBeEnumerated_CSharp10() =>
+            Verifier.VerifyAnalyzerFromCSharp10Library(@"TestCases\EmptyCollectionsShouldNotBeEnumerated.CSharp10.cs", new SymbolicExecutionRunner(new EmptyCollectionsShouldNotBeEnumerated()));
 #endif
     }
 }

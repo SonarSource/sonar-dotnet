@@ -95,6 +95,10 @@ public static class Utils
         [TestMethod]
         public void NullPointerDereference_CSharp9() =>
             Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\NullPointerDereference.CSharp9.cs", GetAnalyzer());
+
+        [TestMethod]
+        public void NullPointerDereference_CSharp10() =>
+            Verifier.VerifyAnalyzerFromCSharp10Library(@"TestCases\NullPointerDereference.CSharp10.cs", GetAnalyzer());
 #endif
 
         private static SonarDiagnosticAnalyzer GetAnalyzer() =>
