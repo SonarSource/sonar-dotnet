@@ -213,7 +213,6 @@ namespace Tests.Diagnostics
                 var y = point.Y;
             }
 
-
             foreach (var point in points) // Compliant: we ignore method invocations.
             {
                 var someValue = point.GetX();
@@ -285,11 +284,18 @@ namespace Tests.Diagnostics
         {
             var row = rawSheetData.Rows[0];
             var data = new Dictionary<string, string>();
-            foreach (DataColumn column in rawSheetData.Columns) // Noncompliant - FP DataColumnCollection does not implement IEnumerable<T>
-                                                                // See https://github.com/SonarSource/sonar-dotnet/issues/4996
+            foreach (DataColumn column in rawSheetData.Columns) // Compliant, it does not implement IEnumerable<T>
             {
                 var datum = Convert.ToString(row[column.ColumnName]);
                 data.Add(column.ColumnName, datum);
+            }
+        }
+
+        public void Print(IEnumerable<Point> points)
+        {
+            foreach (var point in points) // Noncompliant
+            {
+                Console.WriteLine(point.X + " " + point.X);
             }
         }
 

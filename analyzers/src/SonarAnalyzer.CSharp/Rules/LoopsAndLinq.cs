@@ -98,19 +98,33 @@ namespace SonarAnalyzer.Rules.CSharp
         private static void CheckIfCanBeSimplifiedUsingSelect(ForEachStatementSyntax forEachStatementSyntax, SyntaxNodeAnalysisContext c)
         {
             var declaredSymbol = new Lazy<ILocalSymbol>(() => c.SemanticModel.GetDeclaredSymbol(forEachStatementSyntax));
+            var expressionTypeIsOrImplementsIEnumerable = new Lazy<bool>(
+                () =>
+                {
+                    var expressionType = c.SemanticModel.GetTypeInfo(forEachStatementSyntax.Expression).Type;
+                    return expressionType.Is(KnownType.System_Collections_Generic_IEnumerable_T)
+                           || expressionType.Implements(KnownType.System_Collections_Generic_IEnumerable_T);
+                });
+
             var accessedProperties = new Dictionary<ISymbol, UsageStats>();
 
             foreach (var identifierSyntax in GetStatementIdentifiers(forEachStatementSyntax))
             {
                 if (identifierSyntax.Parent is MemberAccessExpressionSyntax { Parent: not InvocationExpressionSyntax } memberAccessExpressionSyntax
-                    && IsNotLeftSideOfAssignment(memberAccessExpressionSyntax)
-                    && c.SemanticModel.GetSymbolInfo(identifierSyntax).Symbol.Equals(declaredSymbol.Value)
-                    && c.SemanticModel.GetSymbolInfo(memberAccessExpressionSyntax.Name).Symbol is { } symbol)
+                    && IsNotLeftSideOfAssignment(memberAccessExpressionSyntax))
                 {
-                    var usageStats = accessedProperties.GetOrAdd(symbol, _ => new UsageStats());
+                    if (!expressionTypeIsOrImplementsIEnumerable.Value)
+                    {
+                        return;
+                    }
+                    else if (c.SemanticModel.GetSymbolInfo(identifierSyntax).Symbol.Equals(declaredSymbol.Value)
+                             && c.SemanticModel.GetSymbolInfo(memberAccessExpressionSyntax.Name).Symbol is { } symbol)
+                    {
+                        var usageStats = accessedProperties.GetOrAdd(symbol, _ => new UsageStats());
 
-                    usageStats.IsInVarDeclarator = memberAccessExpressionSyntax.Parent is EqualsValueClauseSyntax { Parent: VariableDeclaratorSyntax };
-                    usageStats.Count++;
+                        usageStats.IsInVarDeclarator = memberAccessExpressionSyntax.Parent is EqualsValueClauseSyntax { Parent: VariableDeclaratorSyntax };
+                        usageStats.Count++;
+                    }
                 }
                 else
                 {
