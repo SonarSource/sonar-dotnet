@@ -44,7 +44,7 @@ namespace SonarAnalyzer.Rules.CSharp
             context.RegisterSyntaxNodeActionInNonGenerated(c =>
             {
                 var baseTypeDeclarationSyntax = (BaseTypeDeclarationSyntax)c.Node;
-                if (IsPrivateButNotSealedType(baseTypeDeclarationSyntax))
+                if (IsPrivateButNotSealedType(baseTypeDeclarationSyntax) && !HasVirtualMethods(baseTypeDeclarationSyntax))
                 {
                     var nestedPrivateTypeInfo = (INamedTypeSymbol)c.SemanticModel.GetDeclaredSymbol(c.Node);
 
@@ -56,6 +56,11 @@ namespace SonarAnalyzer.Rules.CSharp
             },
             SyntaxKind.ClassDeclaration,
             SyntaxKindEx.RecordClassDeclaration);
+
+        private static bool HasVirtualMethods(BaseTypeDeclarationSyntax typeDeclaration) =>
+            ((TypeDeclarationSyntax)typeDeclaration).Members
+                                                    .OfType<MethodDeclarationSyntax>()
+                                                    .Any(method => method.Modifiers.Any(SyntaxKind.VirtualKeyword));
 
         private static bool IsPrivateButNotSealedType(BaseTypeDeclarationSyntax typeDeclaration) =>
             typeDeclaration.Modifiers.Any(SyntaxKind.PrivateKeyword)
