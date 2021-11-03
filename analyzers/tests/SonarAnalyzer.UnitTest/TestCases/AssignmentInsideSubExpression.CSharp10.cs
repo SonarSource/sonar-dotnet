@@ -29,4 +29,10 @@ record struct PositionalRecordStruct(int Input)
         var i = 0;
         Method(i = 42); // Noncompliant
     }
+
+    private void Method2()
+    {
+        int y, z;
+        var x = (y, z) = (16, 23);
+    }
 }

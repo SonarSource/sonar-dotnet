@@ -29,8 +29,18 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         public void ControlCharacterInString() =>
-            Verifier.VerifyAnalyzer(@"TestCases\ControlCharacterInString.cs",
-                                    new ControlCharacterInString(),
-                                    ParseOptionsHelper.FromCSharp8);
+            Verifier.VerifyAnalyzer(
+                @"TestCases\ControlCharacterInString.cs",
+                new ControlCharacterInString(),
+                ParseOptionsHelper.FromCSharp8);
+
+#if NET
+        [TestMethod]
+        public void ControlCharacterInString_CSharp10() =>
+            Verifier.VerifyAnalyzerFromCSharp10Library(
+                @"TestCases\ControlCharacterInString.CSharp10.cs",
+                new ControlCharacterInString());
+#endif
+
     }
 }
