@@ -111,20 +111,15 @@ namespace SonarAnalyzer.Rules.CSharp
             foreach (var identifierSyntax in GetStatementIdentifiers(forEachStatementSyntax))
             {
                 if (identifierSyntax.Parent is MemberAccessExpressionSyntax { Parent: not InvocationExpressionSyntax } memberAccessExpressionSyntax
-                    && IsNotLeftSideOfAssignment(memberAccessExpressionSyntax))
+                    && IsNotLeftSideOfAssignment(memberAccessExpressionSyntax)
+                    && expressionTypeIsOrImplementsIEnumerable.Value
+                    && c.SemanticModel.GetSymbolInfo(identifierSyntax).Symbol.Equals(declaredSymbol.Value)
+                    && c.SemanticModel.GetSymbolInfo(memberAccessExpressionSyntax.Name).Symbol is { } symbol)
                 {
-                    if (!expressionTypeIsOrImplementsIEnumerable.Value)
-                    {
-                        return;
-                    }
-                    else if (c.SemanticModel.GetSymbolInfo(identifierSyntax).Symbol.Equals(declaredSymbol.Value)
-                             && c.SemanticModel.GetSymbolInfo(memberAccessExpressionSyntax.Name).Symbol is { } symbol)
-                    {
-                        var usageStats = accessedProperties.GetOrAdd(symbol, _ => new UsageStats());
+                    var usageStats = accessedProperties.GetOrAdd(symbol, _ => new UsageStats());
 
-                        usageStats.IsInVarDeclarator = memberAccessExpressionSyntax.Parent is EqualsValueClauseSyntax { Parent: VariableDeclaratorSyntax };
-                        usageStats.Count++;
-                    }
+                    usageStats.IsInVarDeclarator = memberAccessExpressionSyntax.Parent is EqualsValueClauseSyntax { Parent: VariableDeclaratorSyntax };
+                    usageStats.Count++;
                 }
                 else
                 {
