@@ -99,19 +99,6 @@
 }
 }
 ]
-},
-{
-"id":  "S3267",
-"message":  "Loop should be simplified by calling Select(configurationProperty => configurationProperty.Name))",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka\Configuration\Hocon\CDataConfigurationElement.cs",
-"region":  {
-"startLine":  48,
-"startColumn":  69,
-"endLine":  48,
-"endColumn":  79
-}
-}
 }
 ]
 }
