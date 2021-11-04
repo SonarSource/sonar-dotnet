@@ -13,7 +13,7 @@ namespace Tests.Diagnostics
 
         private class PrivateClassVirtualProperty // Compliant, the class has a virtual member.
         {
-            public virtual int Number { get;  set; }
+            public virtual int Number { get; set; }
         }
 
         private class PrivateClassVirtualIndexer // Compliant, the class has a virtual member.
@@ -50,16 +50,34 @@ namespace Tests.Diagnostics
 
         private class TheThirdExtension : PrivateDerivedClassSecondExtension { } // Noncompliant
 
-        private class PrivateClass // Noncompliant
+        private class PrivateExternalA { } // Compliant, it's extended in 'ExtendsExternalPrivateClass'
+        private class PrivateExternalB { } // Compliant, it's extended in 'ExtendsExternalPrivateClass'
+
+        private class PrivateClass
         {
             private class NestedPrivateClass { } // Noncompliant
+
+            private sealed class ExtendsOuterPrivateClass : PrivateClass { }
+
+            private sealed class ExtendsExternalPrivateClass : PrivateExternalA { }
 
             private class NestedPrivateClassWillBeExtended { }
 
             private class NestedExtension : NestedPrivateClassWillBeExtended { } // Noncompliant
+
+            private sealed class SeriouslyNestedClass
+            {
+                private sealed class ClassA
+                {
+                    private sealed class ClassB
+                    {
+                        private sealed class ClassC : PrivateExternalB { }
+                    }
+                }
+            }
         }
 
-        private abstract class InnerPrivateClass { } // Compliant
+        private abstract class PrivateAbstractClass { } // Compliant
 
         private struct AStruct { } // Compliant, structs cannot be inherited.
 

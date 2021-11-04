@@ -47,7 +47,6 @@ namespace SonarAnalyzer.Rules.CSharp
                 if (IsPrivateButNotSealedType(typeDeclarationSyntax) && !HasVirtualMembers(typeDeclarationSyntax))
                 {
                     var nestedPrivateTypeInfo = (INamedTypeSymbol)c.SemanticModel.GetDeclaredSymbol(c.Node);
-
                     if (!IsPrivateTypeInherited(nestedPrivateTypeInfo))
                     {
                         c.ReportIssue(Diagnostic.Create(Rule, typeDeclarationSyntax.Identifier.GetLocation()));
@@ -73,11 +72,8 @@ namespace SonarAnalyzer.Rules.CSharp
             && !typeDeclaration.Modifiers.Any(SyntaxKind.AbstractKeyword);
 
         private static bool IsPrivateTypeInherited(INamedTypeSymbol privateTypeInfo) =>
-            privateTypeInfo.ContainingType
-                           .GetMembers()
-                           .OfType<INamedTypeSymbol>()
-                           .Any(symbol => !symbol.Name.Equals(privateTypeInfo.Name)
-                                          && symbol.BaseType != null
-                                          && symbol.BaseType.Equals(privateTypeInfo));
+            privateTypeInfo.ContainingType.GetAllNamedTypes()
+                                          .Any(symbol => !symbol.Name.Equals(privateTypeInfo.Name)
+                                                         && symbol.DerivesFrom(privateTypeInfo));
     }
 }
