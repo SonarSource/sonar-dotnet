@@ -217,6 +217,12 @@ namespace EntityFrameworkMigrations
             Verifier.VerifyAnalyzerFromCSharp10Library(
                 @"TestCases\UnusedPrivateMember.CSharp10.cs",
                 new UnusedPrivateMember());
+
+        [TestMethod]
+        public void UnusedPrivateMember_FromCSharpPreview() =>
+            Verifier.VerifyAnalyzerCSharpPreviewLibrary(
+                @"TestCases\UnusedPrivateMember.CSharpPreview.cs",
+                new UnusedPrivateMember());
 #endif
 
         [TestMethod]

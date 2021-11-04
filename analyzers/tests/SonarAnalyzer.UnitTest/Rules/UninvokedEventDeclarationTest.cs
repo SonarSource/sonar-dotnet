@@ -35,6 +35,10 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         public void UninvokedEventDeclaration_CSharp9() =>
             Verifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\UninvokedEventDeclaration.CSharp9.cs", new UninvokedEventDeclaration());
+
+        [TestMethod]
+        public void UninvokedEventDeclaration_CSharpPreview() =>
+            Verifier.VerifyAnalyzerCSharpPreviewLibrary(@"TestCases\UninvokedEventDeclaration.CSharpPreview.cs", new UninvokedEventDeclaration());
 #endif
     }
 }

@@ -34,5 +34,11 @@ namespace SonarAnalyzer.UnitTest.Rules
             Verifier.VerifyAnalyzer(@"TestCases\OptionalParameter.cs", new CS.OptionalParameter());
             Verifier.VerifyAnalyzer(@"TestCases\OptionalParameter.vb", new VB.OptionalParameter());
         }
+
+#if NET
+        [TestMethod]
+        public void OptionalParameter_CSharpPreview() =>
+            Verifier.VerifyAnalyzerCSharpPreviewLibrary(@"TestCases\OptionalParameter.CSharpPreview.cs", new CS.OptionalParameter());
+#endif
     }
 }

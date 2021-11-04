@@ -30,5 +30,11 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         public void UseParamsForVariableArguments() =>
             Verifier.VerifyAnalyzer(@"TestCases\UseParamsForVariableArguments.cs", new UseParamsForVariableArguments());
+
+#if NET
+        [TestMethod]
+        public void UseParamsForVariableArguments_CSharpPreview() =>
+            Verifier.VerifyAnalyzerCSharpPreviewLibrary(@"TestCases\UseParamsForVariableArguments.CSharpPreview.cs", new UseParamsForVariableArguments());
+#endif
     }
 }

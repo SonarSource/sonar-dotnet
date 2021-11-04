@@ -35,6 +35,10 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         public void UseValueParameter_CSharp9() =>
             Verifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\UseValueParameter.CSharp9.cs", new UseValueParameter());
+
+        [TestMethod]
+        public void UseValueParameter_CSharpPreview() =>
+            Verifier.VerifyAnalyzerCSharpPreviewLibrary(@"TestCases\UseValueParameter.CSharpPreview.cs", new UseValueParameter());
 #endif
 
         [TestMethod]

@@ -42,6 +42,10 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         public void PropertiesShouldBePreferred_CSharp10() =>
             Verifier.VerifyAnalyzerFromCSharp10Library(@"TestCases\PropertiesShouldBePreferred.CSharp10.cs", new PropertiesShouldBePreferred());
+
+        [TestMethod]
+        public void PropertiesShouldBePreferred_CSharpPreview() =>
+            Verifier.VerifyAnalyzerCSharpPreviewLibrary(@"TestCases\PropertiesShouldBePreferred.CSharpPreview.cs", new PropertiesShouldBePreferred());
 #endif
     }
 }

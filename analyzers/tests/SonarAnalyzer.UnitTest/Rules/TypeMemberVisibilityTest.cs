@@ -42,6 +42,11 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestCategory("Rule")]
         public void TypeMemberVisibility_CSharp10() =>
             Verifier.VerifyAnalyzerFromCSharp10Library(@"TestCases\TypeMemberVisibility.CSharp10.cs", new TypeMemberVisibility());
+
+        [TestMethod]
+        [TestCategory("Rule")]
+        public void TypeMemberVisibility_CSharpPreview() =>
+            Verifier.VerifyAnalyzerCSharpPreviewLibrary(@"TestCases\TypeMemberVisibility.CSharpPreview.cs", new TypeMemberVisibility());
 #endif
     }
 }
