@@ -26,6 +26,7 @@ using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
 using StyleCop.Analyzers.Lightup;
+using System.Collections.Generic;
 
 namespace SonarAnalyzer.Rules.CSharp
 {
