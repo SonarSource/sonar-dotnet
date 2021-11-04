@@ -26,6 +26,7 @@ using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
 using StyleCop.Analyzers.Lightup;
+using System.Collections.Generic;
 
 namespace SonarAnalyzer.Rules.CSharp
 {
@@ -44,7 +45,7 @@ namespace SonarAnalyzer.Rules.CSharp
             context.RegisterSyntaxNodeActionInNonGenerated(c =>
             {
                 var baseTypeDeclarationSyntax = (BaseTypeDeclarationSyntax)c.Node;
-                if (IsPrivateButNotSealedType(baseTypeDeclarationSyntax) && !HasVirtualMethods(baseTypeDeclarationSyntax))
+                if (IsPrivateButNotSealedType(baseTypeDeclarationSyntax) && !HasVirtualMembers(baseTypeDeclarationSyntax))
                 {
                     var nestedPrivateTypeInfo = (INamedTypeSymbol)c.SemanticModel.GetDeclaredSymbol(c.Node);
 
@@ -57,10 +58,14 @@ namespace SonarAnalyzer.Rules.CSharp
             SyntaxKind.ClassDeclaration,
             SyntaxKindEx.RecordClassDeclaration);
 
-        private static bool HasVirtualMethods(BaseTypeDeclarationSyntax typeDeclaration) =>
-            ((TypeDeclarationSyntax)typeDeclaration).Members
-                                                    .OfType<MethodDeclarationSyntax>()
-                                                    .Any(method => method.Modifiers.Any(SyntaxKind.VirtualKeyword));
+        private static bool HasVirtualMembers(BaseTypeDeclarationSyntax typeDeclaration)
+        {
+            var classMembers = ((TypeDeclarationSyntax)typeDeclaration).Members;
+            return classMembers.OfType<MethodDeclarationSyntax>().Any(member => member.Modifiers.Any(SyntaxKind.VirtualKeyword))
+            || classMembers.OfType<PropertyDeclarationSyntax>().Any(member => member.Modifiers.Any(SyntaxKind.VirtualKeyword))
+            || classMembers.OfType<IndexerDeclarationSyntax>().Any(member => member.Modifiers.Any(SyntaxKind.VirtualKeyword))
+            || classMembers.OfType<EventDeclarationSyntax>().Any(member => member.Modifiers.Any(SyntaxKind.VirtualKeyword));
+        }
 
         private static bool IsPrivateButNotSealedType(BaseTypeDeclarationSyntax typeDeclaration) =>
             typeDeclaration.Modifiers.Any(SyntaxKind.PrivateKeyword)
