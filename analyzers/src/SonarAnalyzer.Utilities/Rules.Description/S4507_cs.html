@@ -8,7 +8,7 @@
 detailed information on both the system running the application and users.</p>
 <h2>Ask Yourself Whether</h2>
 <ul>
-  <li> the code or configuration enabling the application debug features is deployed on production servers. </li>
+  <li> the code or configuration enabling the application debug features is deployed on production servers or distributed to end users. </li>
   <li> the application runs by default with debug features activated. </li>
 </ul>
 <p>There is a risk if you answered yes to any of those questions.</p>
@@ -65,9 +65,10 @@ namespace mvcApp
 <p>This rule does not analyze configuration files. Make sure that debug mode is not enabled by default in those files.</p>
 <h2>See</h2>
 <ul>
+  <li> <a href="https://owasp.org/Top10/A05_2021-Security_Misconfiguration/">OWASP Top 10 2021 Category A5</a> - Security Misconfiguration </li>
   <li> <a href="https://www.owasp.org/index.php/Top_10-2017_A3-Sensitive_Data_Exposure">OWASP Top 10 2017 Category A3</a> - Sensitive Data Exposure
   </li>
-  <li> <a href="http://cwe.mitre.org/data/definitions/489.html">MITRE, CWE-489</a> - Leftover Debug Code </li>
-  <li> <a href="http://cwe.mitre.org/data/definitions/215.html">MITRE, CWE-215</a> - Information Exposure Through Debug Information </li>
+  <li> <a href="https://cwe.mitre.org/data/definitions/489.html">MITRE, CWE-489</a> - Active Debug Code </li>
+  <li> <a href="https://cwe.mitre.org/data/definitions/215.html">MITRE, CWE-215</a> - Information Exposure Through Debug Information </li>
 </ul>
 

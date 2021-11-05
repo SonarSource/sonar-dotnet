@@ -4036,7 +4036,7 @@
     <value>ready</value>
   </data>
   <data name="S2302_Tags" xml:space="preserve">
-    <value>c#6</value>
+    <value>bad-practice</value>
   </data>
   <data name="S2302_Title" xml:space="preserve">
     <value>"nameof" should be used</value>
@@ -6983,7 +6983,7 @@
     <value>CODE_SMELL</value>
   </data>
   <data name="S3267_Category" xml:space="preserve">
-    <value>Major Code Smell</value>
+    <value>Minor Code Smell</value>
   </data>
   <data name="S3267_Description" xml:space="preserve">
     <value>When a loop is filtering, selecting or aggregating, those functions can be handled with a clearer, more concise LINQ expression instead.</value>
@@ -7001,13 +7001,13 @@
     <value>Main</value>
   </data>
   <data name="S3267_Severity" xml:space="preserve">
-    <value>Major</value>
+    <value>Minor</value>
   </data>
   <data name="S3267_Status" xml:space="preserve">
     <value>ready</value>
   </data>
   <data name="S3267_Tags" xml:space="preserve">
-    <value>clumsy</value>
+    <value />
   </data>
   <data name="S3267_Title" xml:space="preserve">
     <value>Loops should be simplified with "LINQ" expressions</value>
@@ -12476,7 +12476,7 @@
     <value>Critical Security Hotspot</value>
   </data>
   <data name="S5332_Description" xml:space="preserve">
-    <value>Clear-text protocols as ftp, telnet or non secure http are lacking encryption of transported data. They are also missing the capability to build an authenticated connection. This mean that any attacker who can sniff traffic from the network can read, modify or corrupt the transported content. These protocol are not secure as they expose applications to a large range of risk:</value>
+    <value>Clear-text protocols such as ftp, telnet or non-secure http lack encryption of transported data, as well as the capability to build an authenticated connection. It means that an attacker able to sniff traffic from the network can read, modify or corrupt the transported content. These protocols are not secure as they expose applications to an extensive range of risks:</value>
   </data>
   <data name="S5332_IsActivatedByDefault" xml:space="preserve">
     <value>True</value>
