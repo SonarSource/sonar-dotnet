@@ -37,6 +37,10 @@ namespace SonarAnalyzer.UnitTest.Rules
             Verifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\CheckArgumentException.CSharp9.cs", new CheckArgumentException());
 
         [TestMethod]
+        public void CheckArgumentException_CSharp10() =>
+            Verifier.VerifyAnalyzerFromCSharp10Library(@"TestCases\CheckArgumentException.CSharp10.cs", new CheckArgumentException());
+
+        [TestMethod]
         public void CheckArgumentException_TopLevelStatements() =>
             Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\CheckArgumentException.TopLevelStatements.cs", new CheckArgumentException());
 #endif

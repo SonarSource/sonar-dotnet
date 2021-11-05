@@ -64,6 +64,12 @@ record PositionalRecord(int Input)
         var i = 0;
         Method(i = 42); // Noncompliant
     }
+
+    private void Method2()
+    {
+        int y, z;
+        var x = (y, z) = (16, 23);
+    }
 }
 
 // See https://github.com/SonarSource/sonar-dotnet/issues/4446
