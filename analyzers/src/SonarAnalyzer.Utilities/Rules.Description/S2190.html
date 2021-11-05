@@ -9,6 +9,15 @@ int Pow(int num, int exponent)   // Noncompliant; no condition under which pow i
   return num;  // this is never reached
 }
 
+void WhileLoop()   // Noncompliant; no condition under which while loop would exit
+{
+  while (true)
+  {
+    var line = Console.ReadLine();
+    Console.WriteLine(line);
+  }
+}
+
 void InternalRecursion(int i)
 {
   start:
@@ -26,6 +35,15 @@ int Pow(int num, int exponent)
     num = num * Pow(num, exponent-1);
   }
   return num;
+}
+
+void WhileLoop()
+{
+  string line;
+  while ((line = Console.ReadLine()) != null) // loop has clear exit condition
+  {
+    Console.WriteLine(line);
+  }
 }
 </pre>
 

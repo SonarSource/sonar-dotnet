@@ -6,10 +6,8 @@
     "func": "Constant\/Issue",
     "constantCost": "5min"
   },
-  "tags": [
-    "clumsy"
-  ],
-  "defaultSeverity": "Major",
+  "tags": [],
+  "defaultSeverity": "Minor",
   "ruleSpecification": "RSPEC-3267",
   "sqKey": "S3267",
   "scope": "Main"

@@ -7,7 +7,7 @@
     "constantCost": "5min"
   },
   "tags": [
-    "c#6"
+    "bad-practice"
   ],
   "defaultSeverity": "Critical",
   "ruleSpecification": "RSPEC-2302",

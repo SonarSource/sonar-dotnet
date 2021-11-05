@@ -18,10 +18,13 @@
   "scope": "Main",
   "securityStandards": {
     "CWE": [
-      391
+      390
     ],
     "OWASP": [
       "A10"
+    ],
+    "OWASP Top 10 2021": [
+      "A9"
     ]
   }
 }
