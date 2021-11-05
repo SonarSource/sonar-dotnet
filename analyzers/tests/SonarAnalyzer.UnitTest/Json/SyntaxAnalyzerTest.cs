@@ -43,7 +43,7 @@ namespace SonarAnalyzer.UnitTest.Common
             var sut = new SyntaxAnalyzer(source);
             var ret = sut.Parse();
             ret.Kind.Should().Be(Kind.List);
-            ret.Should().HaveCount(1);
+            ret.Should().ContainSingle();
             var value = ret.Single();
             value.Kind.Should().Be(Kind.Value);
             value.Value.Should().Be(expected);
