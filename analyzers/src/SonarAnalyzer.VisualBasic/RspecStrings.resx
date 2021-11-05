@@ -1957,7 +1957,7 @@
     <value>ready</value>
   </data>
   <data name="S2302_Tags" xml:space="preserve">
-    <value>c#6</value>
+    <value>bad-practice</value>
   </data>
   <data name="S2302_Title" xml:space="preserve">
     <value>"NameOf" should be used</value>

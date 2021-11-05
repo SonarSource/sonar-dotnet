@@ -14,8 +14,14 @@
   "sqKey": "S3884",
   "scope": "All",
   "securityStandards": {
+    "CWE": [
+      648
+    ],
     "OWASP": [
       "A6"
+    ],
+    "OWASP Top 10 2021": [
+      "A1"
     ]
   }
 }
