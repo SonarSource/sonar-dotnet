@@ -43,7 +43,7 @@ namespace SonarAnalyzer.UnitTest.Common
             var sut = new SyntaxAnalyzer(source);
             var ret = sut.Parse();
             ret.Kind.Should().Be(Kind.List);
-            ret.Count.Should().Be(1);
+            ret.Should().HaveCount(1);
             var value = ret.Single();
             value.Kind.Should().Be(Kind.Value);
             value.Value.Should().Be(expected);
@@ -70,7 +70,7 @@ namespace SonarAnalyzer.UnitTest.Common
             var sut = new SyntaxAnalyzer(source);
             var ret = sut.Parse();
             ret.Kind.Should().Be(Kind.List);
-            ret.Count.Should().Be(0);
+            ret.Should().BeEmpty();
         }
 
         [TestMethod]
@@ -146,12 +146,12 @@ namespace SonarAnalyzer.UnitTest.Common
         }
 
         [DataTestMethod]
-        [DataRow("true", "{ or [ expected, but Value found.")]
-        [DataRow(@"{ ""key"",", ": expected, but Comma found.")]
-        [DataRow("{,", "String Value expected, but Comma found.")]
-        [DataRow("[0 0", "] expected, but Value found.")]
-        [DataRow("[ ,", "{, [ or Value (true, false, null, String, Number) expected, but Comma found.")]
-        [DataRow(@"{ ""key"" : ""value"" ", "} expected, but EndOfInput found.")]
+        [DataRow("true", "{ or [ expected, but Value found at line 1 position 1")]
+        [DataRow(@"{ ""key"",", ": expected, but Comma found at line 1 position 8")]
+        [DataRow("{,", "String Value expected, but Comma found at line 1 position 2")]
+        [DataRow("[0 0", "] expected, but Value found at line 1 position 4")]
+        [DataRow("[ ,", "{, [ or Value (true, false, null, String, Number) expected, but Comma found at line 1 position 3")]
+        [DataRow(@"{ ""key"" : ""value"" ", "} expected, but EndOfInput found at line 1 position 11")]
         public void InvalidSyntax_Throws(string source, string expectedMessage)
         {
             var sut = new SyntaxAnalyzer(source);

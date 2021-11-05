@@ -50,10 +50,10 @@ namespace SonarAnalyzer.UnitTest.Common
         [TestMethod]
         public void UnsupportedKinds()
         {
-            Action action = () => new JsonNode(LinePosition.Zero, Kind.Value);
-            action.Invoking(_ => action.Invoke()).Should().Throw<InvalidOperationException>();
+            Func<JsonNode> action = () => new JsonNode(LinePosition.Zero, Kind.Value);
+            action.Should().Throw<InvalidOperationException>();
             action = () => new JsonNode(LinePosition.Zero, Kind.Unknown);
-            action.Invoking(_ => action.Invoke()).Should().Throw<InvalidOperationException>();
+            action.Should().Throw<InvalidOperationException>();
         }
 
         [TestMethod]
@@ -65,7 +65,7 @@ namespace SonarAnalyzer.UnitTest.Common
             sut.Add(a);
             sut.Add(b);
             sut.Kind.Should().Be(Kind.List);
-            sut.Count.Should().Be(2);
+            sut.Should().HaveCount(2);
             ((object)sut[0]).Should().Be(a);
             ((object)sut[1]).Should().Be(b);
             var cnt = 0;
@@ -119,13 +119,13 @@ namespace SonarAnalyzer.UnitTest.Common
             sut.Invoking(x => x.UpdateEnd(end)).Should().Throw<InvalidOperationException>();
         }
 
-        // Light-weight way to test that string could be parsed. Precise tests could be found in JsonSyntaxAnalyzerTest.cs
+        // Light-weight way to test that string could be parsed. Precise tests could be found in SyntaxAnalyzerTest.cs
         [TestMethod]
         public void ParsedFromString()
         {
             var sut = JsonNode.FromString(@"[""a"",""b""]");
             sut.Kind.Should().Be(Kind.List);
-            sut.Count.Should().Be(2);
+            sut.Should().HaveCount(2);
             sut[0].Kind.Should().Be(Kind.Value);
             sut[1].Kind.Should().Be(Kind.Value);
             sut[0].Value.Should().Be("a");

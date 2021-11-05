@@ -37,7 +37,6 @@ namespace SonarAnalyzer.Json.Parsing
         public LinePosition LastStart { get; private set; }
         private char CurrentChar => lines[line][column];
         private bool ReachedEndOfInput => line > lines.Count - 1 || (line == lines.Count - 1 && column >= lines[line].Length);
-        private string AtLocationSuffix => $" at line {LastStart.Line + 1} position {LastStart.Character + 1}";
 
         public LexicalAnalyzer(string source)
         {
@@ -66,7 +65,8 @@ namespace SonarAnalyzer.Json.Parsing
         {
             Value = null;
             NextPosition(false);
-            SkipWhiteSpace();               // FIXME: This should be SkipWhitespaceAndComments(), current implementation will throw on comments
+            // FIXME: This should be SkipWhitespaceAndComments(), current implementation will throw on comments
+            SkipWhiteSpace();
             if (ReachedEndOfInput)
             {
                 return Symbol.EndOfInput;
@@ -115,7 +115,7 @@ namespace SonarAnalyzer.Json.Parsing
                     Value = false;
                     return Symbol.Value;
                 default:
-                    throw new JsonException($"Unexpected character '{CurrentChar}'{AtLocationSuffix}");
+                    throw new JsonException($"Unexpected character '{CurrentChar}'", LastStart);
             }
         }
 
@@ -135,7 +135,7 @@ namespace SonarAnalyzer.Json.Parsing
                 column = 0;
                 if (throwIfReachedEndOfInput && ReachedEndOfInput)
                 {
-                    throw new JsonException($"Unexpected EOI{AtLocationSuffix}");
+                    throw new JsonException("Unexpected EOI", LastStart);
                 }
             }
         }
@@ -154,7 +154,7 @@ namespace SonarAnalyzer.Json.Parsing
             {
                 if (lines[line][column + i] != keyword[i])
                 {
-                    throw new JsonException($"Unexpected character '{lines[line][column + i]}'{AtLocationSuffix}. Keyword '{keyword}' was expected.");
+                    throw new JsonException($"Unexpected character '{lines[line][column + i]}'. Keyword '{keyword}' was expected", LastStart);
                 }
             }
             column += keyword.Length - 1;
@@ -199,13 +199,13 @@ namespace SonarAnalyzer.Json.Parsing
                         case 'u':
                             if (column + UnicodeEscapeLength >= lines[line].Length)
                             {
-                                throw new JsonException($@"Unexpected EOI, \uXXXX escape expected{AtLocationSuffix}");
+                                throw new JsonException(@"Unexpected EOI, \uXXXX escape expected", LastStart);
                             }
                             sb.Append(char.ConvertFromUtf32(int.Parse(lines[line].Substring(column + 1, UnicodeEscapeLength), NumberStyles.HexNumber)));
                             column += UnicodeEscapeLength;
                             break;
                         default:
-                            throw new JsonException($@"Unexpected escape sequence \{CurrentChar}{AtLocationSuffix}");
+                            throw new JsonException($@"Unexpected escape sequence \{CurrentChar}", LastStart);
                     }
                 }
                 else
@@ -234,7 +234,7 @@ namespace SonarAnalyzer.Json.Parsing
                         }
                         else
                         {
-                            throw new JsonException($"Unexpected number format: Unexpected '-'{AtLocationSuffix}");
+                            throw new JsonException("Unexpected number format: Unexpected '-'", LastStart);
                         }
                         break;
                     case '0':
@@ -257,13 +257,13 @@ namespace SonarAnalyzer.Json.Parsing
                         }
                         else
                         {
-                            throw new JsonException($"Unexpected number format: Unexpected '.'{AtLocationSuffix}");
+                            throw new JsonException("Unexpected number format: Unexpected '.'", LastStart);
                         }
                         break;
                     case '+':
                         if (current != exponent || current.Length != 0)
                         {
-                            throw new JsonException($"Unexpected number format{AtLocationSuffix}");
+                            throw new JsonException("Unexpected number format", LastStart);
                         }
                         break;
                     case 'e':
@@ -291,7 +291,7 @@ namespace SonarAnalyzer.Json.Parsing
                 }
                 else if (exponent.Length == 0 || exponent.ToString() == "-")
                 {
-                    throw new JsonException($"Unexpected number exponent format: {exponent}{AtLocationSuffix}");
+                    throw new JsonException($"Unexpected number exponent format: {exponent}", LastStart);
                 }
                 else
                 {

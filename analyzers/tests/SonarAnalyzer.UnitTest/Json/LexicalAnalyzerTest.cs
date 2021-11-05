@@ -150,7 +150,7 @@ namespace SonarAnalyzer.UnitTest.Common
 
         [DataTestMethod]
         [DataRow(".", "Unexpected character '.' at line 1 position 1")]
-        [DataRow("tx", "Unexpected character 'x' at line 1 position 1. Keyword 'true' was expected.")]
+        [DataRow("tx", "Unexpected character 'x'. Keyword 'true' was expected at line 1 position 1")]
         [DataRow(@"""\u", @"Unexpected EOI, \uXXXX escape expected at line 1 position 1")]
         [DataRow(@"""\u12", @"Unexpected EOI, \uXXXX escape expected at line 1 position 1")]
         [DataRow(@"""\u12345", @"Unexpected EOI at line 1 position 1")]

@@ -34,7 +34,6 @@ namespace SonarAnalyzer.Json.Parsing
         // ArrayRest -> , ParseValue ] | ]
 
         // ParseValue -> { ParseObject | [ ParseList | Symbol.Value (Where .Value is true | false | null | String | Number)
-
         private readonly LexicalAnalyzer lexer;
         private Symbol symbol;
 
@@ -68,7 +67,8 @@ namespace SonarAnalyzer.Json.Parsing
                     throw Unexpected("}");
                 }
             }
-            ret.UpdateEnd(new LinePosition(lexer.LastStart.Line, lexer.LastStart.Character + 1)); // FIXME: Verify that Roslyn needs to be one character behind the end, otherwise, we may use LastStart
+            // FIXME: Verify that Roslyn needs to be one character behind the end, otherwise, we may use LastStart
+            ret.UpdateEnd(new LinePosition(lexer.LastStart.Line, lexer.LastStart.Character + 1));
             return ret;
         }
 
@@ -105,7 +105,8 @@ namespace SonarAnalyzer.Json.Parsing
                     throw Unexpected("]");
                 }
             }
-            ret.UpdateEnd(new LinePosition(lexer.LastStart.Line, lexer.LastStart.Character + 1)); // FIXME: Verify that Roslyn needs to be one character behind the end, otherwise, we may use LastStart
+            // FIXME: Verify that Roslyn needs to be one character behind the end, otherwise, we may use LastStart
+            ret.UpdateEnd(new LinePosition(lexer.LastStart.Line, lexer.LastStart.Character + 1));
             return ret;
         }
 
@@ -120,6 +121,6 @@ namespace SonarAnalyzer.Json.Parsing
             };
 
         private JsonException Unexpected(string expected) =>
-            new JsonException($"{expected} expected, but {symbol} found.");
+            new JsonException($"{expected} expected, but {symbol} found", lexer.LastStart);
     }
 }

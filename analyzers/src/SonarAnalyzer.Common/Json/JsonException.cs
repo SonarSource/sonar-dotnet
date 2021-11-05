@@ -21,13 +21,14 @@
 using System;
 using System.Diagnostics.CodeAnalysis;
 using System.Runtime.Serialization;
+using Microsoft.CodeAnalysis.Text;
 
 namespace SonarAnalyzer.Json
 {
     [Serializable]
     public sealed class JsonException : Exception
     {
-        public JsonException(string message) : base(message) { }
+        public JsonException(string message, LinePosition position) : base(message + $" at line {position.Line + 1} position {position.Character + 1}") { }
 
         [ExcludeFromCodeCoverage]
         private JsonException(SerializationInfo info, StreamingContext context) : base(info, context) { }
