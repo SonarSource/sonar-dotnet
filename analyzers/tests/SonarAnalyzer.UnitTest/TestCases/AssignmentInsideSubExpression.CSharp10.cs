@@ -32,7 +32,7 @@ record struct PositionalRecordStruct(int Input)
 
     private void Method2()
     {
-        int y, z;
-        var x = (y, z) = (16, 23);
+        int y;
+        (y, var x) = (16, 23);
     }
 }
