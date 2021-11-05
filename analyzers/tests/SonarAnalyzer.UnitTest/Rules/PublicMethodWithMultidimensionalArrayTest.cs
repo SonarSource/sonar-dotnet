@@ -32,6 +32,12 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void PublicMethodWithMultidimensionalArray_CS() =>
             Verifier.VerifyAnalyzer(@"TestCases\PublicMethodWithMultidimensionalArray.cs", new CS.PublicMethodWithMultidimensionalArray());
 
+#if NET
+        [TestMethod]
+        public void PublicMethodWithMultidimensionalArray_CSharpPreview() =>
+            Verifier.VerifyAnalyzerCSharpPreviewLibrary(@"TestCases\PublicMethodWithMultidimensionalArray.CSharpPreview.cs", new CS.PublicMethodWithMultidimensionalArray());
+#endif
+
         [TestMethod]
         public void PublicMethodWithMultidimensionalArray_VB() =>
             Verifier.VerifyAnalyzer(@"TestCases\PublicMethodWithMultidimensionalArray.vb", new VB.PublicMethodWithMultidimensionalArray());

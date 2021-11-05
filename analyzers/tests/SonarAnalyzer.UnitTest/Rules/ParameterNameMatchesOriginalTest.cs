@@ -31,19 +31,24 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         public void ParameterNameMatchesOriginal_CS() =>
-            Verifier.VerifyAnalyzer(@"TestCases\ParameterNameMatchesOriginal.cs",
-                                    new CS.ParameterNameMatchesOriginal(),
+            Verifier.VerifyAnalyzer(
+                @"TestCases\ParameterNameMatchesOriginal.cs",
+                new CS.ParameterNameMatchesOriginal(),
 #if NETFRAMEWORK
-                                    ParseOptionsHelper.FromCSharp8,
-                                    NuGetMetadataReference.NETStandardV2_1_0);
+                ParseOptionsHelper.FromCSharp8,
+                NuGetMetadataReference.NETStandardV2_1_0);
 #else
-                                    ParseOptionsHelper.FromCSharp8);
+                ParseOptionsHelper.FromCSharp8);
 #endif
 
 #if NET
         [TestMethod]
         public void ParameterNameMatchesOriginal_CSharp9() =>
             Verifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\ParameterNameMatchesOriginal.CSharp9.cs", new CS.ParameterNameMatchesOriginal());
+
+        [TestMethod]
+        public void ParameterNameMatchesOriginal_CSharpPreview() =>
+            Verifier.VerifyAnalyzerCSharpPreviewLibrary(@"TestCases\ParameterNameMatchesOriginal.CSharpPreview.cs", new CS.ParameterNameMatchesOriginal());
 #endif
 
         [TestMethod]

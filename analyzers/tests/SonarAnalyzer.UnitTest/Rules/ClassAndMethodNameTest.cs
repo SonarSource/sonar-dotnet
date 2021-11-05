@@ -105,6 +105,9 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void MethodName_InTestProject_CSharp9() =>
             Verifier.VerifyAnalyzerFromCSharp9LibraryInTest(@"TestCases\MethodName.CSharp9.cs", new CS.ClassAndMethodName());
 
+        [TestMethod]
+        public void MethodName_CSharpPreview() =>
+            Verifier.VerifyAnalyzerCSharpPreviewLibrary(@"TestCases\MethodName.CSharpPreview.cs", new CS.ClassAndMethodName());
 #endif
 
         [TestMethod]

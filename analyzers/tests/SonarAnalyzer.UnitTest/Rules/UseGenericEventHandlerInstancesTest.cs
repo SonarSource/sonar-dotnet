@@ -35,6 +35,10 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         public void UseGenericEventHandlerInstances_CSharp9() =>
             Verifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\UseGenericEventHandlerInstances.CSharp9.cs", new UseGenericEventHandlerInstances());
+
+        [TestMethod]
+        public void UseGenericEventHandlerInstances_CSharpPreview() =>
+            Verifier.VerifyAnalyzerCSharpPreviewLibrary(@"TestCases\UseGenericEventHandlerInstances.CSharpPreview.cs", new UseGenericEventHandlerInstances());
 #endif
     }
 }

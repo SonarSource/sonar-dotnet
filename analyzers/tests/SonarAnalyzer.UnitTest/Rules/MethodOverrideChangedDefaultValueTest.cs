@@ -43,6 +43,19 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         public void MethodOverrideChangedDefaultValue_CSharp9() =>
             Verifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\MethodOverrideChangedDefaultValue.CSharp9.cs", new MethodOverrideChangedDefaultValue());
+
+        [TestMethod]
+        public void MethodOverrideChangedDefaultValue_CSharpPreview() =>
+            Verifier.VerifyAnalyzerCSharpPreviewLibrary(@"TestCases\MethodOverrideChangedDefaultValue.CSharpPreview.cs", new MethodOverrideChangedDefaultValue());
+
+        [TestMethod]
+        public void MethodOverrideChangedDefaultValue_CSharpPreview_CodeFix() =>
+            Verifier.VerifyCodeFix(
+                @"TestCases\MethodOverrideChangedDefaultValue.CSharpPreview.cs",
+                @"TestCases\MethodOverrideChangedDefaultValue.CSharpPreview.Fixed.cs",
+                new MethodOverrideChangedDefaultValue(),
+                new MethodOverrideChangedDefaultValueCodeFixProvider(),
+                ParseOptionsHelper.CSharpPreview);
 #endif
 
         [TestMethod]

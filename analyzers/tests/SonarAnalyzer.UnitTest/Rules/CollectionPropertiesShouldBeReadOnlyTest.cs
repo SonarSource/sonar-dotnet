@@ -30,16 +30,25 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         public void CollectionPropertiesShouldBeReadOnly() =>
-            Verifier.VerifyAnalyzer(@"TestCases\CollectionPropertiesShouldBeReadOnly.cs",
-                                    new CollectionPropertiesShouldBeReadOnly(),
-                                    MetadataReferenceFacade.SystemRuntimeSerialization);
+            Verifier.VerifyAnalyzer(
+                @"TestCases\CollectionPropertiesShouldBeReadOnly.cs",
+                new CollectionPropertiesShouldBeReadOnly(),
+                MetadataReferenceFacade.SystemRuntimeSerialization);
 
 #if NET
         [TestMethod]
         public void CollectionPropertiesShouldBeReadOnly_CSharp9() =>
-            Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\CollectionPropertiesShouldBeReadOnly.CSharp9.cs",
-                                                      new CollectionPropertiesShouldBeReadOnly(),
-                                                      MetadataReferenceFacade.SystemRuntimeSerialization);
+            Verifier.VerifyAnalyzerFromCSharp9Console(
+                @"TestCases\CollectionPropertiesShouldBeReadOnly.CSharp9.cs",
+                new CollectionPropertiesShouldBeReadOnly(),
+                MetadataReferenceFacade.SystemRuntimeSerialization);
+
+        [TestMethod]
+        public void CollectionPropertiesShouldBeReadOnly_CSharpPreview() =>
+            Verifier.VerifyAnalyzerCSharpPreviewLibrary(
+                @"TestCases\CollectionPropertiesShouldBeReadOnly.CSharpPreview.cs",
+                new CollectionPropertiesShouldBeReadOnly(),
+                MetadataReferenceFacade.SystemRuntimeSerialization);
 #endif
     }
 }

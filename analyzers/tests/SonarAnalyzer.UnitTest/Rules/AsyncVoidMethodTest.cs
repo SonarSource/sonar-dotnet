@@ -38,6 +38,10 @@ namespace SonarAnalyzer.UnitTest.Rules
             Verifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\AsyncVoidMethod.CSharp9.cs", new AsyncVoidMethod());
 
         [TestMethod]
+        public void AsyncVoidMethod_CSharpPreview() =>
+            Verifier.VerifyAnalyzerCSharpPreviewLibrary(@"TestCases\AsyncVoidMethod.CSharpPreview.cs", new AsyncVoidMethod());
+
+        [TestMethod]
         public void AsyncVoidMethod_CSharp10() =>
             Verifier.VerifyAnalyzerFromCSharp10Library(
                 @"TestCases\AsyncVoidMethod.CSharp10.cs",

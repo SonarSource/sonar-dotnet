@@ -40,6 +40,10 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         public void MethodOverloadsShouldBeGrouped_CS_CSharp10() =>
             Verifier.VerifyAnalyzerFromCSharp10Library(@"TestCases\MethodOverloadsShouldBeGrouped.CSharp10.cs", new CS.MethodOverloadsShouldBeGrouped());
+
+        [TestMethod]
+        public void MethodOverloadsShouldBeGrouped_CS_CSharpPreview() =>
+            Verifier.VerifyAnalyzerCSharpPreviewLibrary(@"TestCases\MethodOverloadsShouldBeGrouped.CSharpPreview.cs", new CS.MethodOverloadsShouldBeGrouped());
 #endif
 
         [TestMethod]

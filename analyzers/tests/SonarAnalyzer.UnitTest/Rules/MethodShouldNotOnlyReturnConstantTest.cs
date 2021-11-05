@@ -29,7 +29,16 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         public void MethodShouldNotOnlyReturnConstant() =>
-            Verifier.VerifyAnalyzer(@"TestCases\MethodShouldNotOnlyReturnConstant.cs",
+            Verifier.VerifyAnalyzer(
+                @"TestCases\MethodShouldNotOnlyReturnConstant.cs",
                 new MethodShouldNotOnlyReturnConstant());
+
+#if NET
+        [TestMethod]
+        public void MethodShouldNotOnlyReturnConstant_CSharpPreview() =>
+            Verifier.VerifyAnalyzerCSharpPreviewLibrary(
+                @"TestCases\MethodShouldNotOnlyReturnConstant.CSharpPreview.cs",
+                new MethodShouldNotOnlyReturnConstant());
+#endif
     }
 }

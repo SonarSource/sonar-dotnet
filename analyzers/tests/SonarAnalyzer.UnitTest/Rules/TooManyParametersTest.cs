@@ -38,6 +38,10 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void TooManyParameters_CS_CustomValues_CSharp9() =>
             Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\TooManyParameters_CustomValues.CSharp9.cs", new CS.TooManyParameters { Maximum = 3 });
 
+        [TestMethod]
+        public void TooManyParameters_CS_CustomValues_CSharpPreview() =>
+            Verifier.VerifyAnalyzerCSharpPreviewLibrary(@"TestCases\TooManyParameters_CustomValues.CSharpPreview.cs", new CS.TooManyParameters { Maximum = 3 });
+
 #endif
 
         [TestMethod]
