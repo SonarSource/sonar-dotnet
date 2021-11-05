@@ -36,7 +36,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void CallerInformationParametersShouldBeLast_CSharp9() =>
             Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\CallerInformationParametersShouldBeLast.CSharp9.cs", new CallerInformationParametersShouldBeLast());
 
-                [TestMethod]
+        [TestMethod]
         public void CallerInformationParametersShouldBeLast_CSharpPreview() =>
             Verifier.VerifyAnalyzerCSharpPreviewLibrary(@"TestCases\CallerInformationParametersShouldBeLast.CSharpPreview.cs", new CallerInformationParametersShouldBeLast());
 #endif
