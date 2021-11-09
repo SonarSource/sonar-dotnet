@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Text;
 
 namespace Tests.Diagnostics
 {
@@ -12,6 +14,9 @@ namespace Tests.Diagnostics
             result = Guid.Empty;
             result = Guid.NewGuid();
             result = new Guid(new byte[0]);
+
+            var test = new List<int>(); // Checking that the rule raises issue only for the Guid new Object instatiation.
+            var anotherTest = new StringBuilder();
         }
     }
 }

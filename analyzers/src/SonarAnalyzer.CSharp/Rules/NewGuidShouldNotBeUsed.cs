@@ -25,6 +25,8 @@ using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
+using SonarAnalyzer.Wrappers;
+using StyleCop.Analyzers.Lightup;
 
 namespace SonarAnalyzer.Rules.CSharp
 {
@@ -35,25 +37,23 @@ namespace SonarAnalyzer.Rules.CSharp
         internal const string DiagnosticId = "S4581";
         private const string MessageFormat = "Use 'Guid.NewGuid()' or 'Guid.Empty' or add arguments to this Guid instantiation.";
 
-        private static readonly DiagnosticDescriptor rule =
-            DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(rule);
+        private static readonly DiagnosticDescriptor Rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
 
-        protected override void Initialize(SonarAnalysisContext context)
-        {
-            context.RegisterSyntaxNodeActionInNonGenerated(
-                c =>
+        protected override void Initialize(SonarAnalysisContext context) =>
+            context.RegisterSyntaxNodeActionInNonGenerated(c =>
+            {
+                var objectCreationSyntax = ObjectCreationFactory.Create(c.Node);
+                if (objectCreationSyntax != null)
                 {
-                    var objectCreationSyntax = (ObjectCreationExpressionSyntax)c.Node;
-
-                    if (objectCreationSyntax.ArgumentList?.Arguments.Count == 0 &&
-                        c.SemanticModel.GetSymbolInfo(objectCreationSyntax).Symbol is IMethodSymbol methodSymbol &&
-                        methodSymbol.ContainingType.Is(KnownType.System_Guid))
+                    if (objectCreationSyntax.ArgumentList?.Arguments.Count == 0
+                        && objectCreationSyntax.MethodSymbol(c.SemanticModel).ContainingType.Is(KnownType.System_Guid))
                     {
-                        c.ReportIssue(Diagnostic.Create(rule, objectCreationSyntax.GetLocation()));
+                        c.ReportIssue(Diagnostic.Create(Rule, objectCreationSyntax.Expression.GetLocation()));
                     }
-                },
-                SyntaxKind.ObjectCreationExpression);
-        }
+                }
+            },
+            SyntaxKind.ObjectCreationExpression,
+            SyntaxKindEx.ImplicitObjectCreationExpression);
     }
 }
