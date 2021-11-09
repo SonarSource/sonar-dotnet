@@ -249,7 +249,7 @@ namespace EntityFrameworkMigrations
         {
             Action verifyAnalyzer = () => Verifier.VerifyAnalyzer(new[] {@"TestCases\UnusedPrivateMember.Performance.cs"},
                                                                   new UnusedPrivateMember(),
-                                                                  GetEntityFrameworkCoreReferences(Constants.NuGetLatestVersion));
+                                                                  GetEntityFrameworkCoreReferences("5.0.12")); // Latest before 6.0.0 for .NET 6 that has Linq versioning collision issue
 
             // Once the NuGet packages are downloaded, the time to execute the analyzer on the given file is
             // about ~1 sec. It was reduced from ~11 min by skipping Guids when processing ObjectCreationExpression.
