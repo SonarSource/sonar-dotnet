@@ -43,21 +43,30 @@ namespace SonarAnalyzer.Rules.CSharp
         protected override void Initialize(SonarAnalysisContext context) =>
             context.RegisterSyntaxNodeActionInNonGenerated(c =>
             {
-                var baseTypeDeclarationSyntax = (BaseTypeDeclarationSyntax)c.Node;
-                if (IsPrivateButNotSealedType(baseTypeDeclarationSyntax))
+                var typeDeclarationSyntax = (TypeDeclarationSyntax)c.Node;
+                if (IsPrivateButNotSealedType(typeDeclarationSyntax) && !HasVirtualMembers(typeDeclarationSyntax))
                 {
                     var nestedPrivateTypeInfo = (INamedTypeSymbol)c.SemanticModel.GetDeclaredSymbol(c.Node);
 
                     if (!IsPrivateTypeInherited(nestedPrivateTypeInfo))
                     {
-                        c.ReportIssue(Diagnostic.Create(Rule, baseTypeDeclarationSyntax.Identifier.GetLocation()));
+                        c.ReportIssue(Diagnostic.Create(Rule, typeDeclarationSyntax.Identifier.GetLocation()));
                     }
                 }
             },
             SyntaxKind.ClassDeclaration,
             SyntaxKindEx.RecordClassDeclaration);
 
-        private static bool IsPrivateButNotSealedType(BaseTypeDeclarationSyntax typeDeclaration) =>
+        private static bool HasVirtualMembers(TypeDeclarationSyntax typeDeclaration)
+        {
+            var classMembers = typeDeclaration.Members;
+            return classMembers.OfType<MethodDeclarationSyntax>().Any(member => member.Modifiers.Any(SyntaxKind.VirtualKeyword))
+            || classMembers.OfType<PropertyDeclarationSyntax>().Any(member => member.Modifiers.Any(SyntaxKind.VirtualKeyword))
+            || classMembers.OfType<IndexerDeclarationSyntax>().Any(member => member.Modifiers.Any(SyntaxKind.VirtualKeyword))
+            || classMembers.OfType<EventDeclarationSyntax>().Any(member => member.Modifiers.Any(SyntaxKind.VirtualKeyword));
+        }
+
+        private static bool IsPrivateButNotSealedType(TypeDeclarationSyntax typeDeclaration) =>
             typeDeclaration.Modifiers.Any(SyntaxKind.PrivateKeyword)
             && !typeDeclaration.Modifiers.Any(SyntaxKind.StaticKeyword)
             && !typeDeclaration.Modifiers.Any(SyntaxKind.SealedKeyword)

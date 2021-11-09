@@ -6,6 +6,40 @@ namespace Tests.Diagnostics
     {
         private class ClassWontBeExtended { } // Noncompliant {{Private classes or records which are not derived in the current assembly should be marked as 'sealed'.}}
 //                    ^^^^^^^^^^^^^^^^^^^
+        private class PrivateClassVirtualMethod // Compliant, the class has a virtual member.
+        {
+            public virtual void AMethod() { }
+        }
+
+        private class PrivateClassVirtualProperty // Compliant, the class has a virtual member.
+        {
+            public virtual int Number { get;  set; }
+        }
+
+        private class PrivateClassVirtualIndexer // Compliant, the class has a virtual member.
+        {
+            public virtual int this[int key]
+            {
+                get { return 1; }
+                set { key += 1; }
+            }
+        }
+
+        private class PrivateClassVirtualEvent // Compliant, the class has a virtual member.
+        {
+            public virtual event EventHandler Foo
+            {
+                add
+                {
+                    Console.WriteLine("Base Foo.add called");
+                }
+                remove
+                {
+                    Console.WriteLine("Base Foo.remove called");
+                }
+            }
+        }
+
         private sealed class ClassWontBeExtendedButSealed { }
 
         private class PrivateDerivedClass { }
