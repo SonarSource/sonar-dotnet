@@ -37,10 +37,13 @@ import org.junit.rules.TemporaryFolder;
 import org.mockito.InOrder;
 import org.mockito.Mockito;
 import org.sonar.api.utils.log.LogTester;
+import org.sonar.api.utils.log.LoggerLevel;
 
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.ArgumentMatchers.isNull;
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.inOrder;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.times;
@@ -128,6 +131,19 @@ public class SarifParser10Test {
       "Add a 'protected' constructor or the 'static' keyword to the class declaration.", 9, 10, 9, 17);
     inOrder.verify(callback).onIssue("S1118", "warning", location, Collections.emptyList());
     verifyNoMoreInteractions(callback);
+  }
+
+  @Test
+  public void sarif_version_1_0_no_message() throws IOException {
+    SarifParserCallback callback = mock(SarifParserCallback.class);
+    new SarifParser10(null, getRoot("v1_0_no_message.json"), String::toString).accept(callback);
+
+    verify(callback).onRule(anyString(), anyString(), anyString(), anyString(), anyString());
+    verify(callback, times(2)).onIssue(eq("S1234"), eq("warning"), any(), any());
+    verifyNoMoreInteractions(callback);
+
+    assertThat(logTester.logs(LoggerLevel.WARN)).hasSize(1);
+    assertThat(logTester.logs(LoggerLevel.WARN).get(0)).startsWith("Issue raise without a message for rule S1234. Content: {\"ruleId\":\"S1234\",\"level\":\"warning\",\"locations\":[{\"resultFile\":{\"uri\":\"file:");
   }
 
   @Test
