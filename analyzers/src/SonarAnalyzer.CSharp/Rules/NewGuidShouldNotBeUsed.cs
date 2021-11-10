@@ -42,6 +42,11 @@ namespace SonarAnalyzer.Rules.CSharp
 
         protected override void Initialize(SonarAnalysisContext context)
         {
+            DetectIssueInConstructors(context);
+            DetectIssueInDefaultExpressions(context);
+        }
+        private void DetectIssueInConstructors(SonarAnalysisContext context)
+        {
             context.RegisterSyntaxNodeActionInNonGenerated(c =>
             {
                 var objectCreationSyntax = ObjectCreationFactory.Create(c.Node);
@@ -56,19 +61,23 @@ namespace SonarAnalyzer.Rules.CSharp
             },
             SyntaxKind.ObjectCreationExpression,
             SyntaxKindEx.ImplicitObjectCreationExpression);
+        }
 
+        private void DetectIssueInDefaultExpressions(SonarAnalysisContext context)
+        {
             context.RegisterSyntaxNodeActionInNonGenerated(c =>
             {
                 var equalsValueClauseSyntax = (ExpressionSyntax)c.Node;
-                if (equalsValueClauseSyntax.IsKind(SyntaxKind.DefaultExpression)
-                    && c.SemanticModel.GetSymbolInfo(equalsValueClauseSyntax).Symbol is INamedTypeSymbol methodSymbol
-                    && methodSymbol.ContainingType.Is(KnownType.System_Guid))
-                 {
+                var symbol = c.SemanticModel.GetTypeInfo(equalsValueClauseSyntax).ConvertedType;
+                if ((equalsValueClauseSyntax.IsKind(SyntaxKind.DefaultExpression) || equalsValueClauseSyntax.IsKind(SyntaxKindEx.DefaultLiteralExpression))
+                    && c.SemanticModel.GetTypeInfo(equalsValueClauseSyntax).ConvertedType.Is(KnownType.System_Guid))
+                {
                     c.ReportIssue(Diagnostic.Create(Rule, equalsValueClauseSyntax.GetLocation()));
-                 }
+                }
             },
-          SyntaxKind.DefaultExpression,
-          SyntaxKindEx.DefaultLiteralExpression);
+            SyntaxKind.DefaultExpression,
+            SyntaxKindEx.DefaultLiteralExpression);
         }
+
     }
 }
