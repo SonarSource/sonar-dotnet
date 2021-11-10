@@ -45,8 +45,8 @@ namespace SonarAnalyzer.Rules.CSharp
             DetectIssueInConstructors(context);
             DetectIssueInDefaultExpressions(context);
         }
-        private void DetectIssueInConstructors(SonarAnalysisContext context)
-        {
+
+        private void DetectIssueInConstructors(SonarAnalysisContext context) =>
             context.RegisterSyntaxNodeActionInNonGenerated(c =>
             {
                 var objectCreationSyntax = ObjectCreationFactory.Create(c.Node);
@@ -61,23 +61,34 @@ namespace SonarAnalyzer.Rules.CSharp
             },
             SyntaxKind.ObjectCreationExpression,
             SyntaxKindEx.ImplicitObjectCreationExpression);
-        }
 
-        private void DetectIssueInDefaultExpressions(SonarAnalysisContext context)
-        {
+        private void DetectIssueInDefaultExpressions(SonarAnalysisContext context) =>
             context.RegisterSyntaxNodeActionInNonGenerated(c =>
             {
-                var equalsValueClauseSyntax = (ExpressionSyntax)c.Node;
-                var symbol = c.SemanticModel.GetTypeInfo(equalsValueClauseSyntax).ConvertedType;
-                if ((equalsValueClauseSyntax.IsKind(SyntaxKind.DefaultExpression) || equalsValueClauseSyntax.IsKind(SyntaxKindEx.DefaultLiteralExpression))
-                    && c.SemanticModel.GetTypeInfo(equalsValueClauseSyntax).ConvertedType.Is(KnownType.System_Guid))
+                var expressionSyntax = (ExpressionSyntax)c.Node;
+                var symbol = c.SemanticModel.GetTypeInfo(expressionSyntax).ConvertedType;
+                if (expressionSyntax.IsKind(SyntaxKindEx.DefaultLiteralExpression)
+                    && c.SemanticModel.GetTypeInfo(expressionSyntax).ConvertedType.Is(KnownType.System_Guid))
                 {
-                    c.ReportIssue(Diagnostic.Create(Rule, equalsValueClauseSyntax.GetLocation()));
+                    c.ReportIssue(Diagnostic.Create(Rule, expressionSyntax.GetLocation()));
+                }
+                else if (expressionSyntax.IsKind(SyntaxKind.DefaultExpression))
+                {
+                    if (DefaultExpressionIdentifierIsGuid((DefaultExpressionSyntax)expressionSyntax))
+                    {
+                        c.ReportIssue(Diagnostic.Create(Rule, expressionSyntax.GetLocation()));
+                    }
                 }
             },
             SyntaxKind.DefaultExpression,
             SyntaxKindEx.DefaultLiteralExpression);
-        }
 
+        private bool DefaultExpressionIdentifierIsGuid(DefaultExpressionSyntax defaultExpression)
+        {
+            var expressionIdentifier = defaultExpression.Type.GetIdentifier();
+            return expressionIdentifier != null
+                ? expressionIdentifier.Identifier.Text.Equals("Guid")
+                : defaultExpression.Type.ToString().Equals("System.Guid");
+        }
     }
 }

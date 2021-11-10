@@ -16,9 +16,12 @@ namespace Tests.Diagnostics
             result = new Guid(new byte[0]);
 
             var testytest = default(Guid); // Noncompliant
+//                          ^^^^^^^^^^^^^
+            var testytestQualifiedName = default(System.Guid); // Noncompliant
 
-            var test = new List<int>(); // Checking that the rule raises issue only for the Guid new Object instatiation.
-            var anotherTest = new StringBuilder();
+            var anotherTest = new StringBuilder(); // Checking that the rule raises issue only for the Guid new Object instatiation.
+            var anotherTestDefault = default(string);
+            var anotherTestDefaultQualifiedName = default(System.String);
         }
     }
 }

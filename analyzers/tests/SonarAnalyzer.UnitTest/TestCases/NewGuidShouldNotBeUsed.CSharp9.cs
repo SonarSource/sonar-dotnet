@@ -10,8 +10,10 @@ namespace Tests.Diagnostics
             Guid result = new(); // Noncompliant
 
             result = default; // Noncompliant
+//                   ^^^^^^^
 
             StringBuilder st = new(); // Checking that the rules raises issue only for the Guid class.
+            string test = default;
         }
     }
 }
