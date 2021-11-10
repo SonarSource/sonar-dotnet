@@ -35,8 +35,11 @@ import java.util.function.UnaryOperator;
 import javax.annotation.CheckForNull;
 import javax.annotation.Nullable;
 import org.sonar.api.scanner.fs.InputProject;
+import org.sonar.api.utils.log.Logger;
+import org.sonar.api.utils.log.Loggers;
 
 class SarifParser10 implements SarifParser {
+  private static final Logger LOG = Loggers.get(SarifParser10.class);
   private static final String PROPERTIES_PROP = "properties";
   private static final String LEVEL_PROP = "level";
   private final InputProject inputProject;
@@ -102,14 +105,17 @@ class SarifParser10 implements SarifParser {
     }
 
     String ruleId = resultObj.get("ruleId").getAsString();
-    String message = resultObj.get("message").getAsString();
+    String message = resultObj.has("message") ? resultObj.get("message").getAsString() : null;
+    if (message == null){
+      LOG.warn("Issue raised without a message for rule {}. Content: {}.", ruleId, resultObj.toString());
+    }
     String level = resultObj.has(LEVEL_PROP) ? resultObj.get(LEVEL_PROP).getAsString() : null;
     if (!handleLocationsElement(resultObj, ruleId, message, callback)) {
       callback.onProjectIssue(ruleId, level, inputProject, message);
     }
   }
 
-  private boolean handleLocationsElement(JsonObject resultObj, String ruleId, String message, SarifParserCallback callback) {
+  private boolean handleLocationsElement(JsonObject resultObj, String ruleId, @Nullable String message, SarifParserCallback callback) {
     if (!resultObj.has("locations")) {
       return false;
     }
@@ -138,7 +144,7 @@ class SarifParser10 implements SarifParser {
     return handleResultFileElement(ruleId, level, message, firstIssueLocation, relatedLocations, messageMap, callback);
   }
 
-  private boolean handleResultFileElement(String ruleId, @Nullable String level, String message, JsonObject resultFileObj, JsonArray relatedLocations,
+  private boolean handleResultFileElement(String ruleId, @Nullable String level, @Nullable String message, JsonObject resultFileObj, JsonArray relatedLocations,
     Map<String, String> messageMap, SarifParserCallback callback) {
     if (!resultFileObj.has("uri") || !resultFileObj.has("region")) {
       return false;
@@ -229,5 +235,4 @@ class SarifParser10 implements SarifParser {
       ? file.getAbsolutePath()
       : file.getPath();
   }
-
 }
