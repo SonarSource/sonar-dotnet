@@ -115,7 +115,7 @@ class SarifParser10 implements SarifParser {
     }
   }
 
-  private boolean handleLocationsElement(JsonObject resultObj, String ruleId, String message, SarifParserCallback callback) {
+  private boolean handleLocationsElement(JsonObject resultObj, String ruleId, @Nullable String message, SarifParserCallback callback) {
     if (!resultObj.has("locations")) {
       return false;
     }
@@ -144,7 +144,7 @@ class SarifParser10 implements SarifParser {
     return handleResultFileElement(ruleId, level, message, firstIssueLocation, relatedLocations, messageMap, callback);
   }
 
-  private boolean handleResultFileElement(String ruleId, @Nullable String level, String message, JsonObject resultFileObj, JsonArray relatedLocations,
+  private boolean handleResultFileElement(String ruleId, @Nullable String level, @Nullable String message, JsonObject resultFileObj, JsonArray relatedLocations,
     Map<String, String> messageMap, SarifParserCallback callback) {
     if (!resultFileObj.has("uri") || !resultFileObj.has("region")) {
       return false;
