@@ -40,7 +40,8 @@ namespace SonarAnalyzer.Rules.CSharp
         private static readonly DiagnosticDescriptor Rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
 
-        protected override void Initialize(SonarAnalysisContext context) =>
+        protected override void Initialize(SonarAnalysisContext context)
+        {
             context.RegisterSyntaxNodeActionInNonGenerated(c =>
             {
                 var objectCreationSyntax = ObjectCreationFactory.Create(c.Node);
@@ -55,5 +56,19 @@ namespace SonarAnalyzer.Rules.CSharp
             },
             SyntaxKind.ObjectCreationExpression,
             SyntaxKindEx.ImplicitObjectCreationExpression);
+
+            context.RegisterSyntaxNodeActionInNonGenerated(c =>
+            {
+                var equalsValueClauseSyntax = (ExpressionSyntax)c.Node;
+                if (equalsValueClauseSyntax.IsKind(SyntaxKind.DefaultExpression)
+                    && c.SemanticModel.GetSymbolInfo(equalsValueClauseSyntax).Symbol is INamedTypeSymbol methodSymbol
+                    && methodSymbol.ContainingType.Is(KnownType.System_Guid))
+                 {
+                    c.ReportIssue(Diagnostic.Create(Rule, equalsValueClauseSyntax.GetLocation()));
+                 }
+            },
+          SyntaxKind.DefaultExpression,
+          SyntaxKindEx.DefaultLiteralExpression);
+        }
     }
 }
