@@ -143,7 +143,7 @@ public class SarifParser10Test {
     verifyNoMoreInteractions(callback);
 
     assertThat(logTester.logs(LoggerLevel.WARN)).hasSize(1);
-    assertThat(logTester.logs(LoggerLevel.WARN).get(0)).startsWith("Issue raise without a message for rule S1234. Content: {\"ruleId\":\"S1234\",\"level\":\"warning\",\"locations\":[{\"resultFile\":{\"uri\":\"file:");
+    assertThat(logTester.logs(LoggerLevel.WARN).get(0)).startsWith("Issue raised without a message for rule S1234. Content: {\"ruleId\":\"S1234\",\"level\":\"warning\",\"locations\":[{\"resultFile\":{\"uri\":\"file:");
   }
 
   @Test

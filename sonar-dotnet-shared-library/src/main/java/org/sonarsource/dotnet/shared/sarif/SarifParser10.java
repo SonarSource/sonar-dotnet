@@ -107,7 +107,7 @@ class SarifParser10 implements SarifParser {
     String ruleId = resultObj.get("ruleId").getAsString();
     String message = resultObj.has("message") ? resultObj.get("message").getAsString() : null;
     if (message == null){
-      LOG.warn("Issue raise without a message for rule {}. Content: {}.", ruleId, resultObj.toString());
+      LOG.warn("Issue raised without a message for rule {}. Content: {}.", ruleId, resultObj.toString());
     }
     String level = resultObj.has(LEVEL_PROP) ? resultObj.get(LEVEL_PROP).getAsString() : null;
     if (!handleLocationsElement(resultObj, ruleId, message, callback)) {
