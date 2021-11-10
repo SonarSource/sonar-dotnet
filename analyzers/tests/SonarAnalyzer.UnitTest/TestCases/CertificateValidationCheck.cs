@@ -1,5 +1,6 @@
 ﻿
 using System;
+using System.Collections.Generic;
 using System.Net;
 using System.Net.Http;
 using System.Net.Security;
@@ -588,6 +589,77 @@ namespace Tests.Diagnostics
         public static void RestoreCertificateValidation(RemoteCertificateValidationCallback prevValidator)
         {
             ServicePointManager.ServerCertificateValidationCallback = prevValidator;
+        }
+    }
+
+    public class SomeClass
+    {
+        void MultipleHandlers()
+        {
+            var httpHandler = new HttpClientHandler();
+
+            httpHandler.ServerCertificateCustomValidationCallback = ChainValidator(SomeClass.SomeMethod);
+        }
+
+        private static Func<HttpRequestMessage, X509Certificate2, X509Chain, SslPolicyErrors, bool> ChainValidator(Func<HttpRequestMessage, X509Certificate2, X509Chain, SslPolicyErrors, bool> previousValidator)
+        {
+            if (previousValidator == null)
+            {
+                return OnValidateServerCertificate;
+            }
+
+            Func<HttpRequestMessage, X509Certificate2, X509Chain, SslPolicyErrors, bool> chained =
+                (request, certificate, chain, sslPolicyErrors) =>
+                {
+                    bool valid = OnValidateServerCertificate(request, certificate, chain, sslPolicyErrors);
+                    if (valid)
+                    {
+                        return previousValidator(request, certificate, chain, sslPolicyErrors);
+                    }
+                    return false;
+                };
+            return chained;
+        }
+
+        private static Dictionary<HttpRequestMessage, string> s_serverCertMap = new Dictionary<HttpRequestMessage, string>();
+
+        private static bool OnValidateServerCertificate(HttpRequestMessage request, X509Certificate2 certificate, X509Chain chain, SslPolicyErrors sslPolicyErrors)
+        {
+            if (request != null)
+            {
+                string thumbprint;
+                lock (s_serverCertMap)
+                {
+                    s_serverCertMap.TryGetValue(request, out thumbprint);
+                }
+                if (thumbprint != null)
+                {
+                    try
+                    {
+                        ValidateServerCertificate(certificate, thumbprint);
+                    }
+                    catch (ArgumentException)
+                    {
+                        return false;
+                    }
+                }
+            }
+
+            return (sslPolicyErrors == SslPolicyErrors.None);
+        }
+
+        private static void ValidateServerCertificate(X509Certificate2 certificate, string thumbprint)
+        {
+            string certHashString = certificate.Thumbprint;
+            if (!thumbprint.Equals(certHashString))
+            {
+                throw new ArgumentException();
+            }
+        }
+
+        private static bool SomeMethod(HttpRequestMessage h, X509Certificate2 x1, X509Chain x2, SslPolicyErrors s)
+        {
+            return true;
         }
     }
 }
