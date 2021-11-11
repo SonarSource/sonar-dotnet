@@ -218,6 +218,11 @@ namespace SonarAnalyzer.Rules
         {
             var invSymbol = (IMethodSymbol)c.Context.SemanticModel.GetSymbolInfo(invocation).Symbol;
             var references = invSymbol.PartialImplementationPart?.DeclaringSyntaxReferences ?? invSymbol.DeclaringSyntaxReferences;
+            if (references.Length == 0)
+            {
+                return ImmutableArray<Location>.Empty;
+            }
+
             var syntax = SyntaxFromReference(references.Single());
 
             c.VisitedMethods.Add(syntax);
@@ -265,15 +270,10 @@ namespace SonarAnalyzer.Rules
             return MultiExpressionSublocations(c, returnExpressionSublocationsList);
         }
 
-        private bool IsVisited(InspectionContext c, SyntaxNode expression)
-        {
-            if (expression is TInvocationExpressionSyntax invocation)
-            {
-                var symbol = c.Context.SemanticModel.GetSymbolInfo(invocation).Symbol;
-                return symbol.DeclaringSyntaxReferences.Select(SyntaxFromReference).Any(x => c.VisitedMethods.Contains(x));
-            }
-            return false;
-        }
+        private bool IsVisited(InspectionContext c, SyntaxNode expression) =>
+            expression is TInvocationExpressionSyntax invocation
+            && c.Context.SemanticModel.GetSymbolInfo(invocation).Symbol is { } symbol
+            && symbol.DeclaringSyntaxReferences.Select(SyntaxFromReference).Any(x => c.VisitedMethods.Contains(x));
 
         private ImmutableArray<Location> MultiExpressionSublocations(InspectionContext c, IEnumerable<TExpressionSyntax> expressions)
         {

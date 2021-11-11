@@ -1,5 +1,6 @@
 ﻿
 using System;
+using System.Collections.Generic;
 using System.Net;
 using System.Net.Http;
 using System.Net.Security;
@@ -588,6 +589,31 @@ namespace Tests.Diagnostics
         public static void RestoreCertificateValidation(RemoteCertificateValidationCallback prevValidator)
         {
             ServicePointManager.ServerCertificateValidationCallback = prevValidator;
+        }
+    }
+
+    public class SomeClass
+    {
+        void MultipleHandlers()
+        {
+            var httpHandler = new HttpClientHandler();
+
+            httpHandler.ServerCertificateCustomValidationCallback = ChainValidator(httpHandler.ServerCertificateCustomValidationCallback);
+        }
+
+        private static Func<HttpRequestMessage, X509Certificate2, X509Chain, SslPolicyErrors, bool> ChainValidator(Func<HttpRequestMessage, X509Certificate2, X509Chain, SslPolicyErrors, bool> previousValidator)
+        {
+
+            Func<HttpRequestMessage, X509Certificate2, X509Chain, SslPolicyErrors, bool> chained =
+                (request, certificate, chain, sslPolicyErrors) =>
+                {
+                    if (sslPolicyErrors == SslPolicyErrors.None)
+                    {
+                        return previousValidator(request, certificate, chain, sslPolicyErrors);
+                    }
+                    return false;
+                };
+            return chained;
         }
     }
 }
