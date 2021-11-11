@@ -51,7 +51,7 @@ namespace Tests.Diagnostics
         private class TheThirdExtension : PrivateDerivedClassSecondExtension { } // Noncompliant
 
         private class PrivateExternalA { } // Compliant, it's extended in 'ExtendsExternalPrivateClass'
-        private class PrivateExternalB { } // Compliant, it's extended in 'ExtendsExternalPrivateClass'
+        private class PrivateExternalB { } // Compliant, it's extended in 'SeriouslyNestedClass'
 
         private class PrivateClass
         {
