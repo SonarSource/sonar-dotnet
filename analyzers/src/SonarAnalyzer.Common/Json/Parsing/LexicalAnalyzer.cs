@@ -65,7 +65,7 @@ namespace SonarAnalyzer.Json.Parsing
         {
             Value = null;
             NextPosition(false);
-            SkipWhiteSpace();
+            SkipWhitespaceAndComments();
             if (ReachedEndOfInput)
             {
                 return Symbol.EndOfInput;
@@ -144,7 +144,7 @@ namespace SonarAnalyzer.Json.Parsing
             }
         }
 
-        private void SkipWhiteSpace()
+        private void SkipWhitespaceAndComments()
         {
             var isInMultiLineComment = false;
             while (!ReachedEndOfInput)
