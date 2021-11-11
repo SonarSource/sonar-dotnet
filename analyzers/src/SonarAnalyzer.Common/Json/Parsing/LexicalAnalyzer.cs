@@ -65,8 +65,7 @@ namespace SonarAnalyzer.Json.Parsing
         {
             Value = null;
             NextPosition(false);
-            // FIXME: This should be SkipWhitespaceAndComments(), current implementation will throw on comments
-            SkipWhiteSpace();
+            SkipWhitespaceAndComments();
             if (ReachedEndOfInput)
             {
                 return Symbol.EndOfInput;
@@ -127,25 +126,72 @@ namespace SonarAnalyzer.Json.Parsing
             }
             else
             {
-                do
-                {
-                    line++;
-                }
-                while (line < lines.Count && lines[line].Length == 0);
-                column = 0;
-                if (throwIfReachedEndOfInput && ReachedEndOfInput)
-                {
-                    throw new JsonException("Unexpected EOI", LastStart);
-                }
+                SeekToNextLine(throwIfReachedEndOfInput);
             }
         }
 
-        private void SkipWhiteSpace()
+        private void SeekToNextLine(bool throwIfReachedEndOfInput)
         {
-            while (!ReachedEndOfInput && char.IsWhiteSpace(CurrentChar))
+            do
             {
-                NextPosition(false);
+                line++;
             }
+            while (line < lines.Count && lines[line].Length == 0);
+            column = 0;
+            if (throwIfReachedEndOfInput && ReachedEndOfInput)
+            {
+                throw new JsonException("Unexpected EOI", LastStart);
+            }
+        }
+
+        private void SkipWhitespaceAndComments()
+        {
+            var isInMultiLineComment = false;
+            while (!ReachedEndOfInput)
+            {
+                if (char.IsWhiteSpace(CurrentChar))
+                {
+                    NextPosition(false);
+                }
+                else if (IsSingleLineComment())
+                {
+                    // We just need to read starting from the next line
+                    SeekToNextLine(false);
+                }
+                else if (IsEndOfMultiLineComment())
+                {
+                    isInMultiLineComment = false;
+                    NextPosition(false); // Skip *
+                    NextPosition(false); // Skip /
+                }
+                else if (IsMultiLineComment())
+                {
+                    if (!isInMultiLineComment)
+                    {
+                        // need to skip /* part of the comment
+                        NextPosition(false); // Skip /
+                        NextPosition(false); // Skip *
+                    }
+                    isInMultiLineComment = true;
+                    NextPosition(); // we still want to fail on non-closed comments
+                }
+                else
+                {
+                    return;
+                }
+            }
+
+            char? NextCharSameLine() =>
+                (column + 1 < lines[line].Length) ? lines[line][column + 1] : (char?)null;
+
+            bool IsSingleLineComment() =>
+                CurrentChar == '/' && NextCharSameLine() == '/';
+
+            bool IsMultiLineComment() =>
+                isInMultiLineComment || (CurrentChar == '/' && NextCharSameLine() == '*');
+
+            bool IsEndOfMultiLineComment() =>
+                isInMultiLineComment && CurrentChar == '*' && NextCharSameLine() == '/';
         }
 
         private void ReadKeyword(string keyword)

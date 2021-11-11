@@ -39,6 +39,24 @@ namespace SonarAnalyzer.UnitTest.Common
         }
 
         [TestMethod]
+        public void SupportsSingleLineComments()
+        {
+            var sut = new LexicalAnalyzer("   // [ ]\t\n\r [ //{}\n \r ] //{{}}\r\n");
+            sut.NextSymbol().Should().Be(Symbol.OpenSquareBracket);
+            sut.NextSymbol().Should().Be(Symbol.CloseSquareBracket);
+            sut.NextSymbol().Should().Be(Symbol.EndOfInput);
+        }
+
+        [TestMethod]
+        public void SupportsMultiLineComments()
+        {
+            var sut = new LexicalAnalyzer("   /* [ ]\t\n\r */ [ /* foo bar \n baz [] */ \n \r ] /*{{}}*/\r\n");
+            sut.NextSymbol().Should().Be(Symbol.OpenSquareBracket);
+            sut.NextSymbol().Should().Be(Symbol.CloseSquareBracket);
+            sut.NextSymbol().Should().Be(Symbol.EndOfInput);
+        }
+
+        [TestMethod]
         public void ReadSpecialCharacters()
         {
             var sut = new LexicalAnalyzer("{{[[,,]]}}::");
@@ -123,6 +141,9 @@ namespace SonarAnalyzer.UnitTest.Common
         [DataTestMethod]
         [DataRow(" \"\" ", "")]
         [DataRow(" \"Lorem Ipsum\" ", "Lorem Ipsum")]
+        [DataRow(" /*\"Lorem Ipsum\"*/ \"dolor sit amet\" ", "dolor sit amet")]
+        [DataRow(" \"Lorem /**/ Ipsum\" ", "Lorem /**/ Ipsum")]
+        [DataRow(" \"Lorem // Ipsum\" ", "Lorem // Ipsum")]
         [DataRow(" \"Quote\\\"Quote\" ", "Quote\"Quote")]
         [DataRow(" \"Slash\\/ Backslash\\\\\" ", "Slash/ Backslash\\")]
         [DataRow(" \"Special B\\b F\\f N\\n R\\r T\\t\" ", "Special B\b F\f N\n R\r T\t")]
@@ -166,6 +187,13 @@ namespace SonarAnalyzer.UnitTest.Common
         [DataRow("0e0+0", "Unexpected number format at line 1 position 1")]
         [DataRow("0e", "Unexpected number exponent format:  at line 1 position 1")]
         [DataRow("0e-", "Unexpected number exponent format: - at line 1 position 1")]
+        [DataRow("/*", "Unexpected EOI at line 1 position 1")]
+        [DataRow(" /* * /", "Unexpected EOI at line 1 position 1")]
+        [DataRow(" /* *", "Unexpected EOI at line 1 position 1")]
+        [DataRow("/*/", "Unexpected EOI at line 1 position 1")]
+        [DataRow(" */", "Unexpected character '*' at line 1 position 2")]
+        [DataRow(" /0", "Unexpected character '*' at line 1 position 2")]
+        [DataRow(" /", "Unexpected character '*' at line 1 position 2")]
         public void InvalidInput_ThrowsJsonException(string source, string expectedMessage)
         {
             var sut = new LexicalAnalyzer(source);
