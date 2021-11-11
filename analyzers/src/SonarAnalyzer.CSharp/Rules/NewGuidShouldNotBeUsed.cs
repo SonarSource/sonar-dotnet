@@ -66,7 +66,6 @@ namespace SonarAnalyzer.Rules.CSharp
             context.RegisterSyntaxNodeActionInNonGenerated(c =>
             {
                 var expressionSyntax = (ExpressionSyntax)c.Node;
-                var symbol = c.SemanticModel.GetTypeInfo(expressionSyntax).ConvertedType;
                 if (expressionSyntax.IsKind(SyntaxKindEx.DefaultLiteralExpression)
                     && c.SemanticModel.GetTypeInfo(expressionSyntax).ConvertedType.Is(KnownType.System_Guid))
                 {
