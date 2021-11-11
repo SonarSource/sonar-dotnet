@@ -46,23 +46,20 @@ namespace SonarAnalyzer.Rules.CSharp
             DetectIssueInDefaultExpressions(context);
         }
 
-        private void DetectIssueInConstructors(SonarAnalysisContext context) =>
+        private static void DetectIssueInConstructors(SonarAnalysisContext context) =>
             context.RegisterSyntaxNodeActionInNonGenerated(c =>
             {
                 var objectCreationSyntax = ObjectCreationFactory.Create(c.Node);
-                if (objectCreationSyntax != null)
+                if (objectCreationSyntax.ArgumentList?.Arguments.Count == 0
+                    && objectCreationSyntax.MethodSymbol(c.SemanticModel).ContainingType.Is(KnownType.System_Guid))
                 {
-                    if (objectCreationSyntax.ArgumentList?.Arguments.Count == 0
-                        && objectCreationSyntax.MethodSymbol(c.SemanticModel).ContainingType.Is(KnownType.System_Guid))
-                    {
-                        c.ReportIssue(Diagnostic.Create(Rule, objectCreationSyntax.Expression.GetLocation()));
-                    }
+                    c.ReportIssue(Diagnostic.Create(Rule, objectCreationSyntax.Expression.GetLocation()));
                 }
             },
             SyntaxKind.ObjectCreationExpression,
             SyntaxKindEx.ImplicitObjectCreationExpression);
 
-        private void DetectIssueInDefaultExpressions(SonarAnalysisContext context) =>
+        private static void DetectIssueInDefaultExpressions(SonarAnalysisContext context) =>
             context.RegisterSyntaxNodeActionInNonGenerated(c =>
             {
                 var expressionSyntax = (ExpressionSyntax)c.Node;
@@ -71,18 +68,16 @@ namespace SonarAnalyzer.Rules.CSharp
                 {
                     c.ReportIssue(Diagnostic.Create(Rule, expressionSyntax.GetLocation()));
                 }
-                else if (expressionSyntax.IsKind(SyntaxKind.DefaultExpression))
+                else if (expressionSyntax.IsKind(SyntaxKind.DefaultExpression)
+                         && DefaultExpressionIdentifierIsGuid((DefaultExpressionSyntax)expressionSyntax))
                 {
-                    if (DefaultExpressionIdentifierIsGuid((DefaultExpressionSyntax)expressionSyntax))
-                    {
-                        c.ReportIssue(Diagnostic.Create(Rule, expressionSyntax.GetLocation()));
-                    }
+                    c.ReportIssue(Diagnostic.Create(Rule, expressionSyntax.GetLocation()));
                 }
             },
             SyntaxKind.DefaultExpression,
             SyntaxKindEx.DefaultLiteralExpression);
 
-        private bool DefaultExpressionIdentifierIsGuid(DefaultExpressionSyntax defaultExpression)
+        private static bool DefaultExpressionIdentifierIsGuid(DefaultExpressionSyntax defaultExpression)
         {
             var expressionIdentifier = defaultExpression.Type.GetIdentifier();
             return expressionIdentifier != null
