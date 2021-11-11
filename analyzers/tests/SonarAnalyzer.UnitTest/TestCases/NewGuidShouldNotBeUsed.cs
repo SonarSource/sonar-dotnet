@@ -8,8 +8,8 @@ namespace Tests.Diagnostics
     {
         public void Foo()
         {
-            var result = new Guid(); // Noncompliant {{Use 'Guid.NewGuid()' or 'Guid.Empty' or add arguments to this Guid instantiation.}}
-//                       ^^^^^^^^^^
+            var result = new Guid(); // Noncompliant {{Use 'Guid.NewGuid()' or 'Guid.Empty' or use Guid instantiation with arguments.}}
+                                     //                       ^^^^^^^^^^
 
             result = Guid.Empty;
             result = Guid.NewGuid();
