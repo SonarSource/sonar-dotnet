@@ -20,7 +20,6 @@
 package org.sonarsource.dotnet.shared.sarif;
 
 import javax.annotation.CheckForNull;
-import javax.annotation.Nullable;
 
 public class Location {
   private String absolutePath;
