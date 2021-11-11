@@ -19,5 +19,6 @@
     "OWASP": [
       "A10"
     ]
-  }
+  },
+  "quickfix": "unknown"
 }

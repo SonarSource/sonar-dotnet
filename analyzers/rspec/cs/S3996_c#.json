@@ -10,5 +10,6 @@
   "defaultSeverity": "Major",
   "ruleSpecification": "RSPEC-3996",
   "sqKey": "S3996",
-  "scope": "All"
+  "scope": "All",
+  "quickfix": "unknown"
 }
