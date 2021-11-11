@@ -26,6 +26,7 @@ namespace StyleCop.Analyzers.Lightup
         public const SyntaxKind DefaultLiteralExpression = (SyntaxKind)8755;
         public const SyntaxKind LocalFunctionStatement = (SyntaxKind)8830;
         public const SyntaxKind GlobalStatement = (SyntaxKind)8841;
+        public const SyntaxKind FileScopedNamespaceDeclaration = (SyntaxKind)8845;
         public const SyntaxKind TupleType = (SyntaxKind)8924;
         public const SyntaxKind TupleElement = (SyntaxKind)8925;
         public const SyntaxKind TupleExpression = (SyntaxKind)8926;

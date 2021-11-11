@@ -47,18 +47,15 @@ namespace SonarAnalyzer.Rules.CSharp
             ((BaseTypeDeclarationSyntax)declaration).Identifier;
 
         protected override bool IsInnerTypeOrWithinNamespace(SyntaxNode declaration, SemanticModel semanticModel)
-        {
-            switch (declaration.Parent.Kind())
+            => declaration.Parent.Kind() switch
             {
-                case SyntaxKind.ClassDeclaration:
-                case SyntaxKind.StructDeclaration:
-                case SyntaxKind.NamespaceDeclaration:
-                case SyntaxKind.InterfaceDeclaration:
-                case SyntaxKindEx.RecordClassDeclaration:
-                    return true;
-                default:
-                    return false;
-            }
-        }
+                SyntaxKind.ClassDeclaration or
+                SyntaxKind.StructDeclaration or
+                SyntaxKind.NamespaceDeclaration or
+                SyntaxKind.InterfaceDeclaration or
+                SyntaxKindEx.RecordClassDeclaration or
+                SyntaxKindEx.FileScopedNamespaceDeclaration => true,
+                _ => false,
+            };
     }
 }
