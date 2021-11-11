@@ -43,14 +43,17 @@ namespace SonarAnalyzer.Rules.CSharp
         protected override void Initialize(SonarAnalysisContext context)
         {
             DetectIssueInConstructors(context);
+            DetectIssueInDefaultExpressions(context);
         }
 
         private static void DetectIssueInConstructors(SonarAnalysisContext context) =>
             context.RegisterSyntaxNodeActionInNonGenerated(c =>
             {
                 var objectCreationSyntax = ObjectCreationFactory.Create(c.Node);
+                var type = objectCreationSyntax.MethodSymbol(c.SemanticModel);
                 if (objectCreationSyntax.ArgumentList?.Arguments.Count == 0
-                    && objectCreationSyntax.MethodSymbol(c.SemanticModel).ContainingType.Is(KnownType.System_Guid))
+                    && type != null
+                    && type.ContainingType.Is(KnownType.System_Guid))
                 {
                     c.ReportIssue(Diagnostic.Create(Rule, objectCreationSyntax.Expression.GetLocation()));
                 }

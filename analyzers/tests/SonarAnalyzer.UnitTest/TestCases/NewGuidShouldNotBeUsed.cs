@@ -20,8 +20,14 @@ namespace Tests.Diagnostics
             var testytestQualifiedName = default(System.Guid); // Noncompliant
 
             var anotherTest = new StringBuilder(); // Checking that the rule raises issue only for the Guid new Object instatiation.
-            var anotherTestDefault = default(string);
+            var anotherTestDefault = default(long);
             var anotherTestDefaultQualifiedName = default(System.String);
         }
+
+        private T Test<T>() where T : new()
+        {
+            return new T(); // Covering the case where the MethodSymbol has not Type
+        }
     }
+
 }
