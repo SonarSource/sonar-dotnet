@@ -43,7 +43,6 @@ namespace SonarAnalyzer.Rules.CSharp
         protected override void Initialize(SonarAnalysisContext context)
         {
             DetectIssueInConstructors(context);
-            DetectIssueInDefaultExpressions(context);
         }
 
         private static void DetectIssueInConstructors(SonarAnalysisContext context) =>
