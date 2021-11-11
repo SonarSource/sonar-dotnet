@@ -139,7 +139,9 @@ public class SarifParser10Test {
     new SarifParser10(null, getRoot("v1_0_no_message.json"), String::toString).accept(callback);
 
     verify(callback).onRule(anyString(), anyString(), anyString(), anyString(), anyString());
-    verify(callback, times(2)).onIssue(eq("S1234"), eq("warning"), any(), any());
+    // In this report we have 2 issues, one without a message and another one with message.
+    // We will push to SQ/SC only the occurrence with message. For the other, a warning is logged.
+    verify(callback, times(1)).onIssue(eq("S1234"), eq("warning"), any(), any());
     verifyNoMoreInteractions(callback);
 
     assertThat(logTester.logs(LoggerLevel.WARN)).hasSize(1);

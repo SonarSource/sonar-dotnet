@@ -108,14 +108,16 @@ class SarifParser10 implements SarifParser {
     String message = resultObj.has("message") ? resultObj.get("message").getAsString() : null;
     if (message == null){
       LOG.warn("Issue raised without a message for rule {}. Content: {}.", ruleId, resultObj.toString());
+      return;
     }
+
     String level = resultObj.has(LEVEL_PROP) ? resultObj.get(LEVEL_PROP).getAsString() : null;
     if (!handleLocationsElement(resultObj, ruleId, message, callback)) {
       callback.onProjectIssue(ruleId, level, inputProject, message);
     }
   }
 
-  private boolean handleLocationsElement(JsonObject resultObj, String ruleId, @Nullable String message, SarifParserCallback callback) {
+  private boolean handleLocationsElement(JsonObject resultObj, String ruleId, String message, SarifParserCallback callback) {
     if (!resultObj.has("locations")) {
       return false;
     }
@@ -144,7 +146,7 @@ class SarifParser10 implements SarifParser {
     return handleResultFileElement(ruleId, level, message, firstIssueLocation, relatedLocations, messageMap, callback);
   }
 
-  private boolean handleResultFileElement(String ruleId, @Nullable String level, @Nullable String message, JsonObject resultFileObj, JsonArray relatedLocations,
+  private boolean handleResultFileElement(String ruleId, @Nullable String level, String message, JsonObject resultFileObj, JsonArray relatedLocations,
     Map<String, String> messageMap, SarifParserCallback callback) {
     if (!resultFileObj.has("uri") || !resultFileObj.has("region")) {
       return false;
@@ -176,7 +178,7 @@ class SarifParser10 implements SarifParser {
   }
 
   @CheckForNull
-  private Location handleLocation(JsonObject locationObj, @Nullable String message) {
+  private Location handleLocation(JsonObject locationObj, String message) {
     String uri = locationObj.get("uri").getAsString();
     String path = toRealPath.apply(uriToPath(uri));
     JsonObject region = locationObj.get("region").getAsJsonObject();

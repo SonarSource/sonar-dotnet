@@ -30,7 +30,7 @@ public class Location {
   private int endLine;
   private int endColumn;
 
-  Location(String absolutePath, @Nullable String message, int startLine, int startColumn, int endLine, int endColumn) {
+  Location(String absolutePath, String message, int startLine, int startColumn, int endLine, int endColumn) {
     this.absolutePath = absolutePath;
     this.message = message;
     this.startLine = startLine;
