@@ -133,14 +133,11 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private void ReportEmptyPassword(JsonNode doc, string appSettingsPath, CompilationAnalysisContext c)
         {
-            if (doc.ContainsKey("ConnectionStrings"))
+            foreach (var key in doc["ConnectionStrings"].Keys)
             {
-                foreach (var key in doc["ConnectionStrings"].Keys)
+                if (doc["ConnectionStrings"][key] is var connectionStringNode && IsVulnerable(connectionStringNode.Value.ToString()))
                 {
-                    if (doc["ConnectionStrings"][key] is var connectionStringNode && IsVulnerable(connectionStringNode.Value.ToString()))
-                    {
-                        c.ReportIssue(Diagnostic.Create(Rule, CreateLocation(connectionStringNode, appSettingsPath)));
-                    }
+                    c.ReportIssue(Diagnostic.Create(Rule, CreateLocation(connectionStringNode, appSettingsPath)));
                 }
             }
         }
