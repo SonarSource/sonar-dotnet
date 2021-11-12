@@ -148,7 +148,8 @@ namespace SonarAnalyzer.Rules.CSharp
         private static Location CreateLocation(JsonNode node, string path) =>
             Location.Create(
                 path,
-                TextSpan.FromBounds(0, node.Value.ToString().Length), // Is not used in Sarif reports
+                // Exact start position does not show up in Sarif reports, but we still need a valid length
+                TextSpan.FromBounds(0, 0),
                 new LinePositionSpan(
                     new LinePosition(node.Start.Line, node.Start.Character + 1),
                     new LinePosition(node.End.Line, node.End.Character + 1)));
