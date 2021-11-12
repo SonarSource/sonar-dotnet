@@ -2,7 +2,7 @@
 "issues":  [
 {
 "id":  "S4581",
-"message":  "Use 'Guid.NewGuid()' or 'Guid.Empty' or use Guid instantiation with arguments.",
+"message":  "Use 'Guid.NewGuid()', 'Guid.Empty' or the constructor with arguments.",
 "location":  {
 "uri":  "sources\Nancy\src\Nancy\DynamicDictionaryValue.cs",
 "region":  {
