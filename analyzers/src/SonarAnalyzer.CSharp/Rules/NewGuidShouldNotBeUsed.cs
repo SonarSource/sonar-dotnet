@@ -51,7 +51,7 @@ namespace SonarAnalyzer.Rules.CSharp
             {
                 var objectCreationSyntax = ObjectCreationFactory.Create(c.Node);
                 if (objectCreationSyntax.ArgumentList?.Arguments.Count == 0
-                    && objectCreationSyntax.MethodSymbol(c.SemanticModel) is IMethodSymbol methodSymbol
+                    && objectCreationSyntax.MethodSymbol(c.SemanticModel) is { } methodSymbol
                     && methodSymbol.ContainingType.Is(KnownType.System_Guid))
                 {
                     c.ReportIssue(Diagnostic.Create(Rule, objectCreationSyntax.Expression.GetLocation()));
@@ -78,10 +78,8 @@ namespace SonarAnalyzer.Rules.CSharp
             SyntaxKind.DefaultExpression,
             SyntaxKindEx.DefaultLiteralExpression);
 
-        private static bool DefaultExpressionIdentifierIsGuid(DefaultExpressionSyntax defaultExpression)
-        {
-            var typeName = defaultExpression.Type.ToString();
-            return typeName == "Guid" || typeName == "System.Guid";
-        }
+        private static bool DefaultExpressionIdentifierIsGuid(DefaultExpressionSyntax defaultExpression) =>
+            defaultExpression.Type.ToString() is var typeName
+            && (typeName == "Guid" || typeName == "System.Guid");
     }
 }
