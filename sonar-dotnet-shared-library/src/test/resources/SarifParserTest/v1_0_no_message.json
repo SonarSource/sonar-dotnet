@@ -34,7 +34,7 @@
         {
           "ruleId": "S1234",
           "level": "warning",
-          "message": "",
+          "message": "message",
           "locations": [
             {
               "resultFile": {
