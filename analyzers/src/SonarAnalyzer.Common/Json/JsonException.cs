@@ -28,7 +28,7 @@ namespace SonarAnalyzer.Json
     [Serializable]
     public sealed class JsonException : Exception
     {
-        public JsonException(string message, LinePosition position) : base(message + $" at line {position.Line + 1} position {position.Character + 1}") { }
+        public JsonException(string message, LinePosition position) : base($"{message} at line {position.Line + 1} position {position.Character + 1}") { }
 
         [ExcludeFromCodeCoverage]
         private JsonException(SerializationInfo info, StreamingContext context) : base(info, context) { }
