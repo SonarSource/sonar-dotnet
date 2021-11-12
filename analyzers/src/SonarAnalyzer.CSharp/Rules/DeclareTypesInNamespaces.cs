@@ -46,16 +46,13 @@ namespace SonarAnalyzer.Rules.CSharp
         protected override SyntaxToken GetTypeIdentifier(SyntaxNode declaration) =>
             ((BaseTypeDeclarationSyntax)declaration).Identifier;
 
-        protected override bool IsInnerTypeOrWithinNamespace(SyntaxNode declaration, SemanticModel semanticModel)
-            => declaration.Parent.Kind() switch
-            {
-                SyntaxKind.ClassDeclaration or
-                SyntaxKind.StructDeclaration or
-                SyntaxKind.NamespaceDeclaration or
-                SyntaxKind.InterfaceDeclaration or
-                SyntaxKindEx.RecordClassDeclaration or
-                SyntaxKindEx.FileScopedNamespaceDeclaration => true,
-                _ => false,
-            };
+        protected override bool IsInnerTypeOrWithinNamespace(SyntaxNode declaration, SemanticModel semanticModel) =>
+            declaration.Parent.IsAnyKind(
+                SyntaxKind.ClassDeclaration,
+                SyntaxKind.StructDeclaration,
+                SyntaxKind.NamespaceDeclaration,
+                SyntaxKind.InterfaceDeclaration,
+                SyntaxKindEx.RecordClassDeclaration,
+                SyntaxKindEx.FileScopedNamespaceDeclaration);
     }
 }
