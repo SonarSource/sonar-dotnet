@@ -149,7 +149,7 @@ namespace SonarAnalyzer.Rules.CSharp
             Location.Create(
                 path,
                 // Exact start position does not show up in Sarif reports, but we still need a valid length
-                TextSpan.FromBounds(0, 0),
+                TextSpan.FromBounds(0, node.Value.ToString().Length),
                 new LinePositionSpan(
                     new LinePosition(node.Start.Line, node.Start.Character + 1),
                     new LinePosition(node.End.Line, node.End.Character + 1)));
