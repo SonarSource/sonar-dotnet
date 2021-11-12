@@ -32,7 +32,6 @@ using Microsoft.CodeAnalysis.Text;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
 using SonarAnalyzer.Json;
-using SonarAnalyzer.Json.Parsing;
 
 namespace SonarAnalyzer.Rules.CSharp
 {
@@ -106,9 +105,7 @@ namespace SonarAnalyzer.Rules.CSharp
             {
                 try
                 {
-                    var analyzer = new SyntaxAnalyzer(appSettings);
-                    var json = analyzer.Parse();
-                    ReportEmptyPassword(json, fullPath, c);
+                    ReportEmptyPassword(JsonNode.FromString(appSettings), fullPath, c);
                 }
                 catch (Exception ex) when (ex is JsonException or InvalidOperationException)
                 {
