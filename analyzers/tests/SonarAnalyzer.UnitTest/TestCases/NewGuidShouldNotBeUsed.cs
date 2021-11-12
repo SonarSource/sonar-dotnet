@@ -31,5 +31,4 @@ namespace Tests.Diagnostics
             return new T(); // Covering the case where the MethodSymbol has not Type
         }
     }
-
 }
