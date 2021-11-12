@@ -12,5 +12,6 @@
   "defaultSeverity": "Minor",
   "ruleSpecification": "RSPEC-4060",
   "sqKey": "S4060",
-  "scope": "Main"
+  "scope": "Main",
+  "quickfix": "unknown"
 }
