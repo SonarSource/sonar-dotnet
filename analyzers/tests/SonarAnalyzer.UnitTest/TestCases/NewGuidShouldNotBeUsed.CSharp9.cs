@@ -16,6 +16,6 @@ namespace Tests.Diagnostics
             string test = default;
         }
 
-        public Guid Get() => default // Noncompliant
+        public Guid Get() => default; // Noncompliant
     }
 }
