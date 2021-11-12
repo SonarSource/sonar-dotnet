@@ -18,6 +18,7 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System;
 using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
@@ -28,10 +29,9 @@ using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
 using Microsoft.CodeAnalysis.Text;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
+using SonarAnalyzer.Json;
 
 namespace SonarAnalyzer.Rules.CSharp
 {
@@ -103,13 +103,11 @@ namespace SonarAnalyzer.Rules.CSharp
             var appSettings = File.ReadAllText(fullPath);
             if (appSettings.Contains("\"ConnectionStrings\""))
             {
-                using var jsonReader = new JsonTextReader(new StringReader(appSettings));
                 try
                 {
-                    var json = JObject.Load(jsonReader, new JsonLoadSettings {LineInfoHandling = LineInfoHandling.Load, CommentHandling = CommentHandling.Ignore});
-                    ReportEmptyPassword(json, fullPath, c);
+                    ReportEmptyPassword(JsonNode.FromString(appSettings), fullPath, c);
                 }
-                catch (JsonReaderException)
+                catch (Exception ex) when (ex is JsonException or InvalidOperationException)
                 {
                     // Happens when JSON file is malformed
                 }
@@ -130,21 +128,22 @@ namespace SonarAnalyzer.Rules.CSharp
             }
         }
 
-        private void ReportEmptyPassword(JObject doc, string appSettingsPath, CompilationAnalysisContext c)
+        private void ReportEmptyPassword(JsonNode doc, string appSettingsPath, CompilationAnalysisContext c)
         {
-            foreach (var connectionStringToken in doc.SelectToken("ConnectionStrings").Children())
+            foreach (var key in doc["ConnectionStrings"].Keys)
             {
-                if (connectionStringToken is JProperty connectionStringProperty && IsVulnerable(connectionStringProperty.Value.ToString()))
+                if (doc["ConnectionStrings"][key] is var connectionStringNode && IsVulnerable(connectionStringNode.Value.ToString()))
                 {
-                    c.ReportIssue(Diagnostic.Create(Rule, CreateLocation(connectionStringProperty.Value, connectionStringProperty.Value.ToString().Length, appSettingsPath)));
+                    c.ReportIssue(Diagnostic.Create(Rule, CreateLocation(connectionStringNode, appSettingsPath)));
                 }
             }
         }
 
-        private static Location CreateLocation(IJsonLineInfo lineInfo, int length, string path)
+        private static Location CreateLocation(JsonNode node, string path)
         {
-            var start = new LinePosition(lineInfo.LineNumber - 1, lineInfo.LinePosition - 1 - length);
-            var end = new LinePosition(lineInfo.LineNumber - 1, lineInfo.LinePosition - 1);
+            var length = node.Value.ToString().Length;
+            var start = new LinePosition(node.Start.Line, node.Start.Character + 1);
+            var end = new LinePosition(node.End.Line, node.End.Character - 1);
             return Location.Create(path, new TextSpan(start.Line, length), new LinePositionSpan(start, end));
         }
 
