@@ -7,13 +7,15 @@ namespace Tests.Diagnostics
     {
         public void Foo()
         {
-            Guid result = new(); // Noncompliant
+            Guid g1 = new(); // Noncompliant
 
-            result = default; // Noncompliant
-//                   ^^^^^^^
+            g1 = default; // Noncompliant
+//               ^^^^^^^
 
             StringBuilder st = new(); // Checking that the rules raises issue only for the Guid class.
             string test = default;
         }
+
+        public Guid Get() => default // Noncompliant
     }
 }

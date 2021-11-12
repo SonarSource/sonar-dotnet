@@ -34,7 +34,7 @@ namespace SonarAnalyzer.Rules.CSharp
     [Rule(DiagnosticId)]
     public sealed class NewGuidShouldNotBeUsed : SonarDiagnosticAnalyzer
     {
-        internal const string DiagnosticId = "S4581";
+        private const string DiagnosticId = "S4581";
         private const string MessageFormat = "Use 'Guid.NewGuid()', 'Guid.Empty' or the constructor with arguments.";
 
         private static readonly DiagnosticDescriptor Rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
@@ -50,10 +50,9 @@ namespace SonarAnalyzer.Rules.CSharp
             context.RegisterSyntaxNodeActionInNonGenerated(c =>
             {
                 var objectCreationSyntax = ObjectCreationFactory.Create(c.Node);
-                var type = objectCreationSyntax.MethodSymbol(c.SemanticModel);
                 if (objectCreationSyntax.ArgumentList?.Arguments.Count == 0
-                    && type != null
-                    && type.ContainingType.Is(KnownType.System_Guid))
+                    && objectCreationSyntax.MethodSymbol(c.SemanticModel) is IMethodSymbol methodSymbol
+                    && methodSymbol.ContainingType.Is(KnownType.System_Guid))
                 {
                     c.ReportIssue(Diagnostic.Create(Rule, objectCreationSyntax.Expression.GetLocation()));
                 }
@@ -81,10 +80,8 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private static bool DefaultExpressionIdentifierIsGuid(DefaultExpressionSyntax defaultExpression)
         {
-            var expressionIdentifier = defaultExpression.Type.GetIdentifier();
-            return expressionIdentifier != null
-                ? expressionIdentifier.Identifier.Text.Equals("Guid")
-                : defaultExpression.Type.ToString().Equals("System.Guid");
+            var typeName = defaultExpression.Type.ToString();
+            return typeName == "Guid" || typeName == "System.Guid";
         }
     }
 }
