@@ -41,11 +41,12 @@ void WithPositionalRecord()
 async void IsNotNull(StreamReader reader)
 {
     string line;
-    while ((line = await reader.ReadLineAsync()) is not null) // Noncompliant - FP, see: https://github.com/SonarSource/sonar-dotnet/issues/4264
+    // See: https://github.com/SonarSource/sonar-dotnet/issues/4264
+    while ((line = await reader.ReadLineAsync()) is not null)
     {
     }
 
-    while ((line = await reader.ReadLineAsync()) is null) // Noncompliant - FP, see: https://github.com/SonarSource/sonar-dotnet/issues/4264
+    while ((line = await reader.ReadLineAsync()) is null)
     {
     }
 }
@@ -83,9 +84,12 @@ class MessageQueueUseCase
     void Process(ICustomMsgQueue queue)
     {
         string msg;
-        while ((msg = queue.Pop()) is not null)  // Noncompliant FP
+        while ((msg = queue.Pop()) is not null)
         {
-            // do processing
         }
+
+        do
+        {
+        } while ((msg = queue.Pop()) is null);
     }
 }
