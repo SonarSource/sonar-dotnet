@@ -39,7 +39,7 @@ Variable name `sut` (System Under Test) is recommended in unit tests that really
 
 ## Multi-line statements
 
-* Operators (&&, ||, +, :, ?, ?? and others) are placed at the beginning of a line.
+* Operators (&&, ||, +, :, ?, ?? and others like `and` and `or` in pattern matching) are placed at the beginning of a line.
 * Dot before an invocation `.Method()` is placed at the beginning of a line.
 * The comma separating arguments is placed at the end of a line.
 * Method declaration parameters should be on the same line. If S103 is violated, parameters should be placed each on a separate line; the first parameter should be on the same line with the declaration; the other parameters should be aligned with the first parameter.
