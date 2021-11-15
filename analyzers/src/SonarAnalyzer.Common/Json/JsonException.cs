@@ -35,5 +35,7 @@ namespace SonarAnalyzer.Json
 
         [ExcludeFromCodeCoverage]
         public void Foo() { }
+
+        public void Bar() { }
     }
 }
