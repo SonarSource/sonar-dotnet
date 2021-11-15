@@ -90,6 +90,7 @@ namespace SonarAnalyzer.UnitTest.Common
         [DataRow("6")]
         [DataRow("7")]
         [DataRow("8")]
+        [DataRow("9")]
         [DataRow("42")]
         [DataRow("42424242")]
         [DataRow("1234567890")]
@@ -194,6 +195,17 @@ namespace SonarAnalyzer.UnitTest.Common
         [DataRow(" */", "Unexpected character '*' at line 1 position 2")]
         [DataRow(" /0", "Unexpected character '*' at line 1 position 2")]
         [DataRow(" /", "Unexpected character '*' at line 1 position 2")]
+        [DataRow("#", "Unexpected character '*' at line 1 position 1")]
+        [DataRow("$", "Unexpected character '*' at line 1 position 1")]
+        [DataRow("%", "Unexpected character '*' at line 1 position 1")]
+        [DataRow("&", "Unexpected character '*' at line 1 position 1")]
+        [DataRow("'", "Unexpected character '*' at line 1 position 1")]
+        [DataRow("(", "Unexpected character '*' at line 1 position 1")]
+        [DataRow(")", "Unexpected character '*' at line 1 position 1")]
+        [DataRow("*", "Unexpected character '*' at line 1 position 1")]
+        [DataRow("+", "Unexpected character '*' at line 1 position 1")]
+        [DataRow(".", "Unexpected character '*' at line 1 position 1")]
+        [DataRow("/", "Unexpected character '*' at line 1 position 1")]
         public void InvalidInput_ThrowsJsonException(string source, string expectedMessage)
         {
             var sut = new LexicalAnalyzer(source);
