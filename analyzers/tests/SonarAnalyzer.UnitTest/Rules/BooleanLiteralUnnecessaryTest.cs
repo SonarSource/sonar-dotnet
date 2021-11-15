@@ -40,6 +40,18 @@ namespace SonarAnalyzer.UnitTest.Rules
                                    new CS.BooleanLiteralUnnecessaryCodeFixProvider());
 
         [TestMethod]
+        public void BooleanLiteralUnnecessary_CSharp8() =>
+            Verifier.VerifyAnalyzer(@"TestCases\BooleanLiteralUnnecessary.CSharp8.cs", new CS.BooleanLiteralUnnecessary(), ParseOptionsHelper.FromCSharp8);
+
+        [TestMethod]
+        public void BooleanLiteralUnnecessary_CodeFix_CSharp8() =>
+            Verifier.VerifyCodeFix(@"TestCases\BooleanLiteralUnnecessary.CSharp8.cs",
+                                   @"TestCases\BooleanLiteralUnnecessary.CSharp8.Fixed.cs",
+                                   new CS.BooleanLiteralUnnecessary(),
+                                   new CS.BooleanLiteralUnnecessaryCodeFixProvider(),
+                                   ParseOptionsHelper.FromCSharp8);
+
+        [TestMethod]
         public void BooleanLiteralUnnecessary_VB() =>
             Verifier.VerifyAnalyzer(@"TestCases\BooleanLiteralUnnecessary.vb", new VB.BooleanLiteralUnnecessary());
     }
