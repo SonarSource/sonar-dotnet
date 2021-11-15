@@ -32,5 +32,8 @@ namespace SonarAnalyzer.Json
 
         [ExcludeFromCodeCoverage]
         private JsonException(SerializationInfo info, StreamingContext context) : base(info, context) { }
+
+        [ExcludeFromCodeCoverage]
+        public void Foo() { }
     }
 }
