@@ -65,6 +65,81 @@ namespace SonarAnalyzer.Rules.CSharp
                         visitor.SafeVisit(attribute);
                     }
 
+                    if (false)
+                    {
+                        for (int i = 0; i < 1000; i++)
+                        {
+                            Console.WriteLine("");
+                            Console.WriteLine("");
+                            Console.WriteLine("");
+                            Console.WriteLine("");
+                            Console.WriteLine("");
+                            Console.WriteLine("");
+                            Console.WriteLine("");
+                            Console.WriteLine("");
+                            Console.WriteLine("");
+                            Console.WriteLine("");
+                            Console.WriteLine("");
+                            Console.WriteLine("");
+                            Console.WriteLine("");
+                            Console.WriteLine("");
+                            Console.WriteLine("");
+                            Console.WriteLine("");
+                            Console.WriteLine("");
+                            Console.WriteLine("");
+                            Console.WriteLine("");
+                            Console.WriteLine("");
+                            Console.WriteLine("");
+                            Console.WriteLine("");
+                            Console.WriteLine("");
+                            Console.WriteLine("");
+                            Console.WriteLine("");
+                            Console.WriteLine("");
+                            Console.WriteLine("");
+                            Console.WriteLine("");
+                            Console.WriteLine("");
+                            Console.WriteLine("");
+                            Console.WriteLine("");
+                            Console.WriteLine("");
+                            Console.WriteLine("");
+                            Console.WriteLine("");
+                            Console.WriteLine("");
+                            Console.WriteLine("");
+                            Console.WriteLine("");
+                            Console.WriteLine("");
+                            Console.WriteLine("");
+                            Console.WriteLine("");
+                            Console.WriteLine("");
+                            Console.WriteLine("");
+                            Console.WriteLine("");
+                            Console.WriteLine("");
+                            Console.WriteLine("");
+                            Console.WriteLine("");
+                            Console.WriteLine("");
+                            Console.WriteLine("");
+                            Console.WriteLine("");
+                            Console.WriteLine("");
+                            Console.WriteLine("");
+                            Console.WriteLine("");
+                            Console.WriteLine("");
+                            Console.WriteLine("");
+                            Console.WriteLine("");
+                            Console.WriteLine("");
+                            Console.WriteLine("");
+                            Console.WriteLine("");
+                            Console.WriteLine("");
+                            Console.WriteLine("");
+                            Console.WriteLine("");
+                            Console.WriteLine("");
+                            Console.WriteLine("");
+                            Console.WriteLine("");
+                            Console.WriteLine("");
+                            Console.WriteLine("");
+                            Console.WriteLine("");
+                            Console.WriteLine("");
+                        }
+                    }
+
                     CheckUnnecessaryUsings(c, simpleNamespaces, visitor.NecessaryNamespaces);
                 },
                 SyntaxKind.CompilationUnit);
