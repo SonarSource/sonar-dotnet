@@ -110,10 +110,11 @@ namespace SonarAnalyzer.Rules.CSharp
         {
             var node = creationSyntax.AncestorsAndSelf().FirstOrDefault(ancestor =>
                 ancestor is SimpleLambdaExpressionSyntax
-                || ancestor is ParenthesizedLambdaExpressionSyntax
-                || ancestor is AccessorDeclarationSyntax
-                || ancestor is BaseMethodDeclarationSyntax
-                || ancestor is IndexerDeclarationSyntax
+                    or ParenthesizedLambdaExpressionSyntax
+                    or AccessorDeclarationSyntax
+                    or BaseMethodDeclarationSyntax
+                    or IndexerDeclarationSyntax
+                    or CompilationUnitSyntax
                 || LocalFunctionStatementSyntaxWrapper.IsInstance(ancestor));
 
             return node switch
@@ -123,6 +124,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 ParenthesizedLambdaExpressionSyntax lambda => IdentifierNames(lambda.ParameterList),
                 AccessorDeclarationSyntax accessor => AccessorIdentifierNames(accessor),
                 IndexerDeclarationSyntax indexerDeclaration => IdentifierNames(indexerDeclaration.ParameterList),
+                CompilationUnitSyntax => new[] { "args" },
                 { } when LocalFunctionStatementSyntaxWrapper.IsInstance(node) => IdentifierNames(((LocalFunctionStatementSyntaxWrapper)node).ParameterList),
                 _ => Enumerable.Empty<string>()
             };

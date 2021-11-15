@@ -5,9 +5,9 @@ if (args == null)
 {
     throw new ArgumentException(); // Noncompliant {{Use a constructor overloads that allows a more meaningful exception message to be provided.}}
     throw new ArgumentNullException("foo"); // Noncompliant {{The parameter name 'foo' is not declared in the argument list.}}
-    throw new ArgumentException("args", "message"); // Noncompliant {{The parameter name 'message' is not declared in the argument list.}}
-    throw new ArgumentException("message", "args"); // Noncompliant FP
-    throw new ArgumentNullException("args"); // Noncompliant FP
+    throw new ArgumentException("args", "message"); // Noncompliant {{ArgumentException constructor arguments have been inverted.}}
+    throw new ArgumentException("message", "args");
+    throw new ArgumentNullException("args");
 }
 
 if (args.Length > 0)
