@@ -65,7 +65,9 @@ namespace SonarAnalyzer.Rules.CSharp
                         visitor.SafeVisit(attribute);
                     }
 
-                    if (false)
+                    var x = 0;
+                    var y = 1;
+                    if (x == y)
                     {
                         for (int i = 0; i < 1000; i++)
                         {
@@ -148,22 +150,22 @@ namespace SonarAnalyzer.Rules.CSharp
         {
             var comments = trivias.Where(trivia => trivia.IsAnyKind(SyntaxKind.SingleLineDocumentationCommentTrivia, SyntaxKind.MultiLineDocumentationCommentTrivia));
 
-            foreach (var member in members)
+            foreach (var member in members) // x
             {
-                visitor.SafeVisit(member);
+                visitor.SafeVisit(member); // x
             }
-            foreach (var comment in comments.Where(x => x.HasStructure))
+            foreach (var comment in comments.Where(x => x.HasStructure)) // x
             {
-                visitor.SafeVisit(comment.GetStructure());
+                visitor.SafeVisit(comment.GetStructure()); // x
             }
         }
 
         private static void CheckUnnecessaryUsings(SyntaxNodeAnalysisContext context, IEnumerable<UsingDirectiveSyntax> usingDirectives, ISet<INamespaceSymbol> necessaryNamespaces)
         {
-            foreach (var usingDirective in usingDirectives)
+            foreach (var usingDirective in usingDirectives) // x
             {
-                if (context.SemanticModel.GetSymbolInfo(usingDirective.Name).Symbol is INamespaceSymbol namespaceSymbol
-                    && !necessaryNamespaces.Any(usedNamespace => usedNamespace.IsSameNamespace(namespaceSymbol)))
+                if (context.SemanticModel.GetSymbolInfo(usingDirective.Name).Symbol is INamespaceSymbol namespaceSymbol &&
+                    !necessaryNamespaces.Any(usedNamespace => usedNamespace.IsSameNamespace(namespaceSymbol)))
                 {
                     context.ReportIssue(Diagnostic.Create(Rule, usingDirective.GetLocation()));
                 }
@@ -205,7 +207,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
             public override void VisitInitializerExpression(InitializerExpressionSyntax node)
             {
-                if (node.IsKind(SyntaxKind.CollectionInitializerExpression))
+                if (node.IsKind(SyntaxKind.CollectionInitializerExpression)) // x
                 {
                     foreach (var addExpression in node.Expressions)
                     {
@@ -257,7 +259,7 @@ namespace SonarAnalyzer.Rules.CSharp
             {
                 foreach (var usingDirective in usingDirectivesFromParent)
                 {
-                    if (context.SemanticModel.GetSymbolInfo(usingDirective.Name).Symbol is INamespaceSymbol namespaceSymbol
+                    if (context.SemanticModel.GetSymbolInfo(usingDirective.Name).Symbol is INamespaceSymbol namespaceSymbol // x
                         && namespaceSymbol.ToDisplayString() == "System.Linq")
                     {
                         systemLinqNamespace = namespaceSymbol;
