@@ -67,7 +67,6 @@ namespace SonarAnalyzer.Json.Parsing
                     throw Unexpected("}");
                 }
             }
-            // FIXME: Verify that Roslyn needs to be one character behind the end, otherwise, we may use LastStart
             ret.UpdateEnd(new LinePosition(lexer.LastStart.Line, lexer.LastStart.Character + 1));
             return ret;
         }
@@ -105,7 +104,6 @@ namespace SonarAnalyzer.Json.Parsing
                     throw Unexpected("]");
                 }
             }
-            // FIXME: Verify that Roslyn needs to be one character behind the end, otherwise, we may use LastStart
             ret.UpdateEnd(new LinePosition(lexer.LastStart.Line, lexer.LastStart.Character + 1));
             return ret;
         }
