@@ -90,6 +90,7 @@ namespace SonarAnalyzer.UnitTest.Common
         [DataRow("6")]
         [DataRow("7")]
         [DataRow("8")]
+        [DataRow("9")]
         [DataRow("42")]
         [DataRow("42424242")]
         [DataRow("1234567890")]
