@@ -44,7 +44,6 @@ namespace SonarAnalyzer.Helpers.Facade
         public abstract SyntaxToken? NodeIdentifier(SyntaxNode node);
         public abstract SyntaxNode RemoveParentheses(SyntaxNode node);
         public abstract string NodeStringTextValue(SyntaxNode node);
-        public abstract SyntaxNode RemoveParentheses(SyntaxNode node);
 
         protected static T Cast<T>(SyntaxNode node) where T : SyntaxNode =>
             node as T ?? throw Unexpected(node);

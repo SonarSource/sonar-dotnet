@@ -26,7 +26,11 @@ namespace SonarAnalyzer.Helpers.Facade
     internal sealed class CSharpSyntaxKindFacade : ISyntaxKindFacade<SyntaxKind>
     {
         public SyntaxKind Attribute => SyntaxKind.Attribute;
-        public SyntaxKind[] ClassAndRecordDeclaration => new[] { SyntaxKind.ClassDeclaration, SyntaxKindEx.RecordDeclaration };
+        public SyntaxKind[] ClassAndRecordDeclaration => new[]
+        {
+            SyntaxKind.ClassDeclaration,
+            SyntaxKindEx.RecordClassDeclaration,
+        };
         public SyntaxKind[] ComparisonKinds => new[]
         {
             SyntaxKind.GreaterThanExpression,
@@ -53,7 +57,8 @@ namespace SonarAnalyzer.Helpers.Facade
             SyntaxKind.StructDeclaration,
             SyntaxKind.InterfaceDeclaration,
             SyntaxKind.EnumDeclaration,
-            SyntaxKindEx.RecordDeclaration,
+            SyntaxKindEx.RecordClassDeclaration,
+            SyntaxKindEx.RecordStructDeclaration,
         };
     }
 }
