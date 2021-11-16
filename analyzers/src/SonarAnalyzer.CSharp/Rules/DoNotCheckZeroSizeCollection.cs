@@ -28,6 +28,7 @@ using SonarAnalyzer.Common;
 using SonarAnalyzer.Extensions;
 using SonarAnalyzer.Helpers;
 using StyleCop.Analyzers.Lightup;
+using Comparison = SonarAnalyzer.Helpers.ComparisonKind;
 
 namespace SonarAnalyzer.Rules.CSharp
 {
@@ -103,19 +104,34 @@ namespace SonarAnalyzer.Rules.CSharp
             }
         }
 
-        private void CheckPatternCondition(SyntaxNodeAnalysisContext context, ExpressionSyntax expression, SyntaxNode pattern)
+        private void CheckPatternCondition(SyntaxNodeAnalysisContext context, SyntaxNode expression, SyntaxNode pattern)
         {
-            var relationalOrSubPattern = pattern.DescendantNodesAndSelf().FirstOrDefault(x => x.IsAnyKind(SyntaxKindEx.RelationalPattern, SyntaxKindEx.Subpattern));
-            if (RelationalPatternSyntaxWrapper.IsInstance(relationalOrSubPattern)
-                && ((RelationalPatternSyntaxWrapper)relationalOrSubPattern) is var relationalPattern
-                && IsOperatorOfInterest(relationalPattern.OperatorToken))
+            if (pattern.DescendantNodesAndSelf().FirstOrDefault(x => x.IsAnyKind(SyntaxKindEx.RelationalPattern, SyntaxKindEx.Subpattern)) is { } relationalOrSubPattern
+                && RelationalPatternSyntaxWrapper.IsInstance(relationalOrSubPattern)
+                && ((RelationalPatternSyntaxWrapper)relationalOrSubPattern) is { } relationalPattern
+                && ComparisonKind(relationalPattern.OperatorToken) is { } comparison
+                && comparison != Comparison.None
+                && Language.ExpressionNumericConverter.TryGetConstantIntValue(context.SemanticModel, relationalPattern.Expression, out var constant))
             {
-                // TODO: re-enable.
-                // CheckExpression(context, relationalPattern, expression, relationalPattern.Expression);
+                CheckExpression(
+                    context,
+                    relationalPattern.SyntaxNode,
+                    expression,
+                    constant,
+                    comparison);
             }
-        }
 
-        private static bool IsOperatorOfInterest(SyntaxToken syntaxToken) =>
-            syntaxToken.ValueText.Equals(">=") || syntaxToken.ValueText.Equals("<");
+            static ComparisonKind ComparisonKind(SyntaxToken syntaxToken) =>
+                syntaxToken.ValueText switch
+                {
+                    "==" => Comparison.Equals,
+                    "!=" => Comparison.NotEquals,
+                    "<" => Comparison.LessThan,
+                    "<=" => Comparison.LessThanOrEqual,
+                    ">" => Comparison.GreaterThan,
+                    ">=" => Comparison.GreaterThanOrEqual,
+                    _ => Comparison.None,
+                };
+        }
     }
 }

@@ -35,14 +35,15 @@ var x = args.Length switch
 {
     >= 0 => 1, // Noncompliant
 //  ^^^^
-    < 0 => 2 // Noncompliant
+    < 0 => 2, // Noncompliant
 };
 
 x = (args.Length, variable) switch
 {
     (>= 0, 4) => 1, // Noncompliant
 //   ^^^^
-    (>= 0, 2) => 2 // Noncompliant
+    (>= 0, 2) => 2, // Noncompliant
+	_ => 3,
 };
 
 var y = someEnumerable.Count() switch
@@ -50,7 +51,8 @@ var y = someEnumerable.Count() switch
     1 => 1,
     2 => 2,
     >= 0 => 3, // Noncompliant
-    < -2 => 4 // Noncompliant
+    < -2 => 4, // Noncompliant
+	_ => 5,
 };
 
 List<string> list = new();
