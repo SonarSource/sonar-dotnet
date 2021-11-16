@@ -92,12 +92,19 @@ namespace SonarAnalyzer.Rules.CSharp
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
 
         protected override void Initialize(SonarAnalysisContext context) =>
-            context.RegisterSyntaxNodeActionInNonGenerated(ReportOnViolation, SyntaxKind.SimpleMemberAccessExpression);
+            context.RegisterSyntaxNodeActionInNonGenerated(ReportOnViolation,
+                SyntaxKind.SimpleMemberAccessExpression);
 
         private static void ReportOnViolation(SyntaxNodeAnalysisContext context)
         {
             var simpleMemberAccess = (MemberAccessExpressionSyntax)context.Node;
             var memberAccessNameName = simpleMemberAccess.GetName();
+
+            // if the exression is in toplevel statement its as it's being in a main function
+            if (context.ContainingSymbol.Name.Equals("<Main>$") && !simpleMemberAccess.Ancestors().OfType<BaseMethodDeclarationSyntax>().Any())
+            {
+                return;
+            }
 
             if (memberAccessNameName == null
                 || !InvalidMemberAccess.ContainsKey(memberAccessNameName)

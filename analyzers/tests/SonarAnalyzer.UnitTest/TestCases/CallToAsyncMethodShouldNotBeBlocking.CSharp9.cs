@@ -3,16 +3,16 @@ using System.Threading;
 using System.Threading.Tasks;
 
 // All of the calls from Main methods are allowed
-var x = GetFooAsync().Result; // Noncompliant FP
-GetFooAsync().Wait(); // Noncompliant FP
-GetFooAsync().GetAwaiter().GetResult(); // Noncompliant FP
-Task.Delay(0).GetAwaiter().GetResult(); // Noncompliant FP
-Task.WaitAny(GetFooAsync()); // Noncompliant FP
-Task.WaitAll(GetFooAsync()); // Noncompliant FP
-Thread.Sleep(10); // Noncompliant FP
+var x = GetFooAsync().Result;
+GetFooAsync().Wait();
+GetFooAsync().GetAwaiter().GetResult();
+Task.Delay(0).GetAwaiter().GetResult();
+Task.WaitAny(GetFooAsync());
+Task.WaitAll(GetFooAsync());
+Thread.Sleep(10);
 
 Task<int> anotherTask = null;
-var b = anotherTask.Result; // Noncompliant FP
+var b = anotherTask.Result;
 
 Task Foo(Task<string> task)
 {
