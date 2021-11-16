@@ -73,7 +73,7 @@ namespace SonarAnalyzer.Rules
                 && CollectionSizeSymbol(expression, context.SemanticModel) is { } symbol
                 && GetDeclaringTypeName(symbol) is { } symbolType)
             {
-                context.ReportIssue(Diagnostic.Create(SupportedDiagnostics[0], issue.GetLocation(), symbol.Name, symbolType));
+                context.ReportIssue(Diagnostic.Create(rule, issue.GetLocation(), symbol.Name, symbolType, result == CountComparisonResult.AlwaysTrue));
             }
         }
 
