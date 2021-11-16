@@ -36,12 +36,15 @@ namespace SonarAnalyzer.Helpers.Facade
         public abstract bool IsAnyKind(SyntaxNode node, ISet<TSyntaxKind> syntaxKinds);
         public abstract bool IsAnyKind(SyntaxNode node, params TSyntaxKind[] syntaxKinds);
 
+        public abstract SyntaxNode BinaryExpressionLeft(SyntaxNode binaryExpression);
+        public abstract SyntaxNode BinaryExpressionRight(SyntaxNode binaryExpression);
         public abstract IEnumerable<SyntaxNode> EnumMembers(SyntaxNode @enum);
         public abstract SyntaxToken? InvocationIdentifier(SyntaxNode invocation);
         public abstract SyntaxNode NodeExpression(SyntaxNode node);
         public abstract SyntaxToken? NodeIdentifier(SyntaxNode node);
         public abstract SyntaxNode RemoveParentheses(SyntaxNode node);
         public abstract string NodeStringTextValue(SyntaxNode node);
+        public abstract SyntaxNode RemoveParentheses(SyntaxNode node);
 
         protected static T Cast<T>(SyntaxNode node) where T : SyntaxNode =>
             node as T ?? throw Unexpected(node);

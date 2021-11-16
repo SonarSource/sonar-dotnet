@@ -6,9 +6,9 @@ const int localConst_Zero = 0;
 var someEnumerable = new List<string>();
 var anotherEnumerable = new List<string>();
 
-var result = someEnumerable.Count() >= 0; // Noncompliant {{The 'Count' of 'IEnumerable<T>' is always '>=0', so fix this test to get the real expected behavior.}}
+var result = someEnumerable.Count() >= 0; // Noncompliant {{The 'Count' of 'IEnumerable<T>' always evaluates as 'True' regardless the size.}}
 
-if (someEnumerable.Count() is >= 0) // Noncompliant {{The 'Count' of 'IEnumerable<T>' is always '>=0', so fix this test to get the real expected behavior.}}
+if (someEnumerable.Count() is >= 0) // Noncompliant {{The 'Count' of 'IEnumerable<T>' always evaluates as 'True' regardless the size.}}
 //                            ^^^^
 {
 }
@@ -122,7 +122,7 @@ record R
             if (value.Count < -1) { } // Noncompliant
             if (0 > value.Count) { } // Noncompliant
             if (-42 > value.Count) { } // Noncompliant
-            if (value.Count >= 0) { } // Noncompliant {{The 'Count' of 'ICollection' is always '>=0', so fix this test to get the real expected behavior.}}
+            if (value.Count >= 0) { } // Noncompliant {{The 'Count' of 'ICollection' always evaluates as 'True' regardless the size.}}
             if (value.Count == 0) { }
             if (value.Count == 1) { }
         }

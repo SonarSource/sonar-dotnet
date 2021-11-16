@@ -19,124 +19,135 @@
  */
 
 using System;
+using System.Collections.Generic;
 using System.Collections.Immutable;
+using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.Helpers;
 
 namespace SonarAnalyzer.Rules
 {
-    public abstract class DoNotCheckZeroSizeCollectionBase<TSyntaxKind, TBinaryExpressionSyntax, TExpressionSyntax> : SonarDiagnosticAnalyzer
+    public abstract class DoNotCheckZeroSizeCollectionBase<TExpression, TSyntaxKind> : SonarDiagnosticAnalyzer
+        where TExpression : SyntaxNode
         where TSyntaxKind : struct
-        where TBinaryExpressionSyntax : SyntaxNode
-        where TExpressionSyntax : SyntaxNode
     {
         protected const string DiagnosticId = "S3981";
-        private const string MessageFormat = "The '{0}' of '{1}' is always '>=0', so fix this test to get the real expected behavior.";
-
+        private const string MessageFormat = "The '{0}' of '{1}' always evaluates as '{2}' regardless the size.";
+        private const string CountName = nameof(Enumerable.Count);
+        private const string LengthName = nameof(Array.Length);
+        private const string LongLengthName = nameof(Array.LongLength);
         private readonly DiagnosticDescriptor rule;
-
-        protected abstract TSyntaxKind GreaterThanOrEqualExpression { get; }
-        protected abstract TSyntaxKind LessThanOrEqualExpression { get; }
-        protected abstract TSyntaxKind GreaterThanExpression { get; }
-        protected abstract TSyntaxKind LessThanExpression { get; }
 
         protected abstract ILanguageFacade<TSyntaxKind> Language { get; }
         protected abstract string IEnumerableTString { get; }
 
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
-
         protected DoNotCheckZeroSizeCollectionBase() =>
             rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, Language.RspecResources);
 
-        protected abstract TExpressionSyntax GetLeftNode(TBinaryExpressionSyntax binaryExpression);
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
 
-        protected abstract TExpressionSyntax GetRightNode(TBinaryExpressionSyntax binaryExpression);
-
-        protected abstract ISymbol GetSymbol(SyntaxNodeAnalysisContext context, TExpressionSyntax expression);
-
-        protected abstract TExpressionSyntax RemoveParentheses(TExpressionSyntax expression);
-
-        protected override void Initialize(SonarAnalysisContext context)
-        {
+        protected override void Initialize(SonarAnalysisContext context) =>
             context.RegisterSyntaxNodeActionInNonGenerated(Language.GeneratedCodeRecognizer,
                 c =>
                 {
-                    var binaryExpression = (TBinaryExpressionSyntax)c.Node;
-                    CheckCondition(c, c.Node, GetLeftNode(binaryExpression), GetRightNode(binaryExpression));
-                },
-                GreaterThanOrEqualExpression,
-                LessThanExpression);
+                    var binary = c.Node;
+                    var binaryLeft = (TExpression)Language.Syntax.BinaryExpressionLeft(binary);
+                    var binaryRight = (TExpression)Language.Syntax.BinaryExpressionRight(binary);
 
-            context.RegisterSyntaxNodeActionInNonGenerated(Language.GeneratedCodeRecognizer,
-                c =>
-                {
-                    var binaryExpression = (TBinaryExpressionSyntax)c.Node;
-                    CheckCondition(c, c.Node, GetRightNode(binaryExpression), GetLeftNode(binaryExpression));
+                    if (Language.ExpressionNumericConverter.TryGetConstantIntValue(c.SemanticModel, binaryLeft, out var left))
+                    {
+                        CheckExpression(c, binary, binaryRight, left, Language.Syntax.ComparisonKind(binary).Mirror());
+                    }
+                    else if (Language.ExpressionNumericConverter.TryGetConstantIntValue(c.SemanticModel, binaryRight, out var right))
+                    {
+                        CheckExpression(c, binary, binaryLeft, right, Language.Syntax.ComparisonKind(binary));
+                    }
                 },
-                LessThanOrEqualExpression,
-                GreaterThanExpression);
-        }
+                Language.SyntaxKind.ComparisonKinds);
 
-        protected void CheckCondition(SyntaxNodeAnalysisContext context, SyntaxNode issueLocation, TExpressionSyntax expressionValueNode, TExpressionSyntax constantValueNode)
+        protected void CheckExpression(SyntaxNodeAnalysisContext context, SyntaxNode issue, TExpression expression, int constant, ComparisonKind comparison)
         {
-            if (IsZeroOrNegativeConstantValue(context, constantValueNode)
-                && GetSymbol(context, expressionValueNode) is { } symbol
+            var result = comparison.Compare(constant);
+            if (result.IsInvalid()
+                && CollectionSizeSymbol(expression, context.SemanticModel) is { } symbol
                 && GetDeclaringTypeName(symbol) is { } symbolType)
             {
                 context.ReportIssue(Diagnostic.Create(SupportedDiagnostics[0], issueLocation.GetLocation(), symbol.Name, symbolType));
             }
         }
 
+        private ISymbol CollectionSizeSymbol(TExpression expression, SemanticModel semanticModel) =>
+            HasCandidateName(Language.Syntax.NodeIdentifier(expression)?.ValueText)
+            && semanticModel.GetSymbolInfo(expression).Symbol is ISymbol symbol
+            && IsCollecionSizeCheck(symbol)
+            ? symbol : null;
+
+        private bool HasCandidateName(string name) =>
+            CountName.Equals(name, Language.NameComparison)
+            || LengthName.Equals(name, Language.NameComparison)
+            || LongLengthName.Equals(name, Language.NameComparison);
+
+        private bool IsCollecionSizeCheck(ISymbol symbol) =>
+            IsEnumerableCountMethod(symbol)
+            || IsArrayLengthProperty(symbol)
+            || IsStringLengthProperty(symbol)
+            || IsCollectionProperty(symbol)
+            || IsReadonlyCollectionProperty(symbol);
+
+        private bool IsEnumerableCountMethod(ISymbol symbol) =>
+            CountName.Equals(symbol.Name, Language.NameComparison)
+            && symbol is IMethodSymbol methodSymbol
+            && methodSymbol.IsExtensionMethod
+            && methodSymbol.ReceiverType != null
+            && methodSymbol.IsExtensionOn(KnownType.System_Collections_Generic_IEnumerable_T);
+
+        private bool IsArrayLengthProperty(ISymbol symbol) =>
+            (LengthName.Equals(symbol.Name, Language.NameComparison) || LongLengthName.Equals(symbol.Name, Language.NameComparison))
+            && symbol is IPropertySymbol propertySymbol
+            && propertySymbol.ContainingType.Is(KnownType.System_Array);
+
+        private bool IsStringLengthProperty(ISymbol symbol) =>
+            LengthName.Equals(symbol.Name, Language.NameComparison)
+            && symbol is IPropertySymbol propertySymbol
+            && propertySymbol.ContainingType.Is(KnownType.System_String);
+
+        private bool IsCollectionProperty(ISymbol symbol) =>
+            CountName.Equals(symbol.Name, Language.NameComparison)
+            && symbol is IPropertySymbol propertySymbol
+            && propertySymbol.ContainingType.DerivesOrImplements(KnownType.System_Collections_Generic_ICollection_T);
+
+        private bool IsReadonlyCollectionProperty(ISymbol symbol) =>
+            CountName.Equals(symbol.Name, Language.NameComparison)
+            && symbol is IPropertySymbol propertySymbol
+            && propertySymbol.ContainingType.DerivesOrImplements(KnownType.System_Collections_Generic_IReadOnlyCollection_T);
+
         private string GetDeclaringTypeName(ISymbol symbol)
         {
             if (IsArrayLengthProperty(symbol))
             {
-                return "Array";
+                return nameof(Array);
             }
-
-            if (IsEnumerableCountMethod(symbol))
+            else if (IsStringLengthProperty(symbol))
+            {
+                return nameof(String);
+            }
+            else if (IsEnumerableCountMethod(symbol))
             {
                 return IEnumerableTString;
             }
-
-            if (IsCollectionProperty(symbol))
+            else if (IsCollectionProperty(symbol))
             {
-                return "ICollection";
+                return nameof(ICollection<object>);
             }
-
-            if (IsReadonlyCollectionProperty(symbol))
+            else if (IsReadonlyCollectionProperty(symbol))
             {
-                return "IReadonlyCollection";
+                return nameof(IReadOnlyCollection<object>);
             }
-
-            return null;
+            else
+            {
+                return null;
+            }
         }
-
-        private bool IsZeroOrNegativeConstantValue(SyntaxNodeAnalysisContext context, TExpressionSyntax expression)
-        {
-            var constantExpressionNode = RemoveParentheses(expression);
-            var constant = context.SemanticModel.GetConstantValue(constantExpressionNode);
-            return constant.HasValue && (constant.Value is int intValue) && intValue <= 0;
-        }
-
-        private static bool IsEnumerableCountMethod(ISymbol symbol) =>
-            symbol is IMethodSymbol methodSymbol
-            && methodSymbol.IsEnumerableCount();
-
-        private static bool IsArrayLengthProperty(ISymbol symbol) =>
-            symbol is IPropertySymbol propertySymbol
-            && propertySymbol.ContainingType.Is(KnownType.System_Array)
-            && (propertySymbol.Name == nameof(Array.Length) || propertySymbol.Name == "LongLength");
-
-        private static bool IsCollectionProperty(ISymbol symbol) =>
-            symbol is IPropertySymbol propertySymbol
-            && propertySymbol.ContainingType.DerivesOrImplements(KnownType.System_Collections_Generic_ICollection_T)
-            && propertySymbol.Name == nameof(System.Collections.Generic.ICollection<object>.Count);
-
-        private static bool IsReadonlyCollectionProperty(ISymbol symbol) =>
-            symbol is IPropertySymbol propertySymbol
-            && propertySymbol.ContainingType.DerivesOrImplements(KnownType.System_Collections_Generic_IReadOnlyCollection_T)
-            && propertySymbol.Name == nameof(System.Collections.Generic.IReadOnlyCollection<object>.Count);
     }
 }

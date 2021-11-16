@@ -53,6 +53,12 @@ namespace SonarAnalyzer.Helpers.Facade
 
         public override bool IsAnyKind(SyntaxNode node, params SyntaxKind[] syntaxKinds) => node.IsAnyKind(syntaxKinds);
 
+        public override SyntaxNode BinaryExpressionLeft(SyntaxNode binaryExpression) =>
+            Cast<BinaryExpressionSyntax>(binaryExpression).Left;
+
+        public override SyntaxNode BinaryExpressionRight(SyntaxNode binaryExpression) =>
+            Cast<BinaryExpressionSyntax>(binaryExpression).Right;
+
         public override IEnumerable<SyntaxNode> EnumMembers(SyntaxNode @enum) =>
             @enum == null ? Enumerable.Empty<SyntaxNode>() : Cast<EnumStatementSyntax>(@enum).Parent.ChildNodes().OfType<EnumMemberDeclarationSyntax>();
 
@@ -70,16 +76,18 @@ namespace SonarAnalyzer.Helpers.Facade
             };
 
         public override SyntaxToken? NodeIdentifier(SyntaxNode node) =>
-            node switch
+            RemoveParentheses(node) switch
             {
                 EnumStatementSyntax enumStatement => enumStatement.Identifier,
                 EnumMemberDeclarationSyntax enumMember => enumMember.Identifier,
-                SimpleArgumentSyntax simpleArgument => simpleArgument.NameColonEquals?.Name.Identifier,
-                SimpleNameSyntax simpleName => simpleName.Identifier,
+                ConditionalAccessExpressionSyntax conditionalAccess => NodeIdentifier(conditionalAccess.WhenNotNull),
+                InvocationExpressionSyntax invocation => NodeIdentifier(invocation.Expression),
                 MemberAccessExpressionSyntax memberAccess => memberAccess.Name.Identifier,
+                ModifiedIdentifierSyntax variable => variable.Identifier,
                 ParameterSyntax parameter => parameter.Identifier.Identifier,
                 PropertyStatementSyntax property => property.Identifier,
-                ModifiedIdentifierSyntax variable => variable.Identifier,
+                SimpleArgumentSyntax simpleArgument => simpleArgument.NameColonEquals?.Name.Identifier,
+                SimpleNameSyntax simpleName => simpleName.Identifier,
                 null => null,
                 _ => throw Unexpected(node)
             };

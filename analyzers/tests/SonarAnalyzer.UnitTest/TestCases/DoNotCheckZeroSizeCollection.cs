@@ -44,16 +44,16 @@ namespace Tests.Diagnostics
 
             var someEnumerable = new List<string>();
 
-            result = someEnumerable.Count() >= 0; // Noncompliant {{The 'Count' of 'IEnumerable<T>' is always '>=0', so fix this test to get the real expected behavior.}}
-//                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+            result = someEnumerable.Count() >= 0; // Noncompliant {{The 'Count' of 'IEnumerable<T>' always evaluates as 'True' regardless the size.}}
+            //       ^^^^^^^^^^^^^^^^^^^^^^^^^^^
             result = someEnumerable.Count(foo => true) >= 0; // Noncompliant
             result = someEnumerable?.Count() >= 0; // Noncompliant
 
             result = someEnumerable.Count() >= 1;
             result = someEnumerable.Count() >= localVariable;
-            result = someEnumerable.Count() >= -1; // Noncompliant {{The 'Count' of 'IEnumerable<T>' is always '>=0', so fix this test to get the real expected behavior.}}
+            result = someEnumerable.Count() >= -1; // Noncompliant {{The 'Count' of 'IEnumerable<T>' always evaluates as 'True' regardless the size.}}
             result = someEnumerable.Count() <= 0;
-            result = someEnumerable.Count() < 0; // Noncompliant
+            result = someEnumerable.Count() < 0; // Noncompliant {{The 'Count' of 'IEnumerable<T>' always evaluates as 'False' regardless the size.}}
             result = 0 >= someEnumerable.Count();
 
             result = someEnumerable.Count() >= localConst_Zero; // Noncompliant
@@ -63,9 +63,9 @@ namespace Tests.Diagnostics
 
             result = (someEnumerable.Count()) >= (0); // Noncompliant
             result = ((((someEnumerable).Count())) >= ((0))); // Noncompliant
-//                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+            //        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
             result = 0 <= someEnumerable.Count(); // Noncompliant
-//                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+            //       ^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
             var nonEnumerable = new FooMethod();
             result = nonEnumerable.Count() >= 0;
@@ -88,8 +88,8 @@ namespace Tests.Diagnostics
         public void TestCountProperty()
         {
             var someCollection = new List<string>();
-            bool result = someCollection.Count >= 0; // Noncompliant {{The 'Count' of 'ICollection' is always '>=0', so fix this test to get the real expected behavior.}}
-//                        ^^^^^^^^^^^^^^^^^^^^^^^^^
+            bool result = someCollection.Count >= 0; // Noncompliant {{The 'Count' of 'ICollection' always evaluates as 'True' regardless the size.}}
+            //            ^^^^^^^^^^^^^^^^^^^^^^^^^
 
             var nonCollection = new FooProperty();
             result = nonCollection.Count >= 0;
@@ -100,11 +100,11 @@ namespace Tests.Diagnostics
             var someArray = new string[0];
             bool result;
 
-            result = someArray.Length >= 0; // Noncompliant {{The 'Length' of 'Array' is always '>=0', so fix this test to get the real expected behavior.}}
-//                   ^^^^^^^^^^^^^^^^^^^^^
+            result = someArray.Length >= 0; // Noncompliant {{The 'Length' of 'Array' always evaluates as 'True' regardless the size.}}
+            //       ^^^^^^^^^^^^^^^^^^^^^
 
-            result = someArray.LongLength >= 0; // Noncompliant {{The 'LongLength' of 'Array' is always '>=0', so fix this test to get the real expected behavior.}}
-//                   ^^^^^^^^^^^^^^^^^^^^^^^^^
+            result = someArray.LongLength >= 0; // Noncompliant {{The 'LongLength' of 'Array' always evaluates as 'True' regardless the size.}}
+            //       ^^^^^^^^^^^^^^^^^^^^^^^^^
 
             var nonArray = new FooProperty();
             result = nonArray.Length >= 0;
@@ -126,6 +126,14 @@ namespace Tests.Diagnostics
             result = readonlyList.Count >= 0; // Noncompliant
 
             result = sortedSet.Count >= 0; // Noncompliant
+        }
+    }
+
+    class OnString
+    {
+        static bool LengthWithoutMeaning(string str)
+        {
+            return str.Length < -3; // Noncompliant {{The 'Length' of 'String' always evaluates as 'False' regardless the size.}}
         }
     }
 }

@@ -26,6 +26,15 @@ namespace SonarAnalyzer.Helpers.Facade
     {
         public SyntaxKind Attribute => SyntaxKind.Attribute;
         public SyntaxKind[] ClassAndRecordDeclaration => new[] { SyntaxKind.ClassBlock };
+        public SyntaxKind[] ComparisonKinds => new[]
+        {
+            SyntaxKind.GreaterThanExpression,
+            SyntaxKind.GreaterThanOrEqualExpression,
+            SyntaxKind.LessThanExpression,
+            SyntaxKind.LessThanOrEqualExpression,
+            SyntaxKind.EqualsExpression,
+            SyntaxKind.NotEqualsExpression,
+        };
         public SyntaxKind ConstructorDeclaration => SyntaxKind.ConstructorBlock;
         public SyntaxKind EnumDeclaration => SyntaxKind.EnumStatement;
         public SyntaxKind IdentifierName => SyntaxKind.IdentifierName;
