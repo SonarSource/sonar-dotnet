@@ -28,8 +28,7 @@ using SonarAnalyzer.Helpers;
 
 namespace SonarAnalyzer.Rules
 {
-    public abstract class DoNotCheckZeroSizeCollectionBase<TExpression, TSyntaxKind> : SonarDiagnosticAnalyzer
-        where TExpression : SyntaxNode
+    public abstract class DoNotCheckZeroSizeCollectionBase<TSyntaxKind> : SonarDiagnosticAnalyzer
         where TSyntaxKind : struct
     {
         protected const string DiagnosticId = "S3981";
@@ -52,8 +51,8 @@ namespace SonarAnalyzer.Rules
                 c =>
                 {
                     var binary = c.Node;
-                    var binaryLeft = (TExpression)Language.Syntax.BinaryExpressionLeft(binary);
-                    var binaryRight = (TExpression)Language.Syntax.BinaryExpressionRight(binary);
+                    var binaryLeft = Language.Syntax.BinaryExpressionLeft(binary);
+                    var binaryRight = Language.Syntax.BinaryExpressionRight(binary);
 
                     if (Language.ExpressionNumericConverter.TryGetConstantIntValue(c.SemanticModel, binaryLeft, out var left))
                     {
@@ -66,18 +65,18 @@ namespace SonarAnalyzer.Rules
                 },
                 Language.SyntaxKind.ComparisonKinds);
 
-        protected void CheckExpression(SyntaxNodeAnalysisContext context, SyntaxNode issue, TExpression expression, int constant, ComparisonKind comparison)
+        protected void CheckExpression(SyntaxNodeAnalysisContext context, SyntaxNode issue, SyntaxNode expression, int constant, ComparisonKind comparison)
         {
             var result = comparison.Compare(constant);
             if (result.IsInvalid()
-                && CollectionSizeSymbol(expression, context.SemanticModel) is { } symbol
+                && CollectionSizeSymbol(Language.Syntax.RemoveConditionalAcesss(expression), context.SemanticModel) is { } symbol
                 && GetDeclaringTypeName(symbol) is { } symbolType)
             {
                 context.ReportIssue(Diagnostic.Create(rule, issue.GetLocation(), symbol.Name, symbolType, result == CountComparisonResult.AlwaysTrue));
             }
         }
 
-        private ISymbol CollectionSizeSymbol(TExpression expression, SemanticModel semanticModel) =>
+        private ISymbol CollectionSizeSymbol(SyntaxNode expression, SemanticModel semanticModel) =>
             HasCandidateName(Language.Syntax.NodeIdentifier(expression)?.ValueText)
             && semanticModel.GetSymbolInfo(expression).Symbol is ISymbol symbol
             && IsCollecionSizeCheck(symbol)

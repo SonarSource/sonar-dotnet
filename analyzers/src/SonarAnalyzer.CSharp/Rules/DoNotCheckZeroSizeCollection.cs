@@ -33,7 +33,7 @@ namespace SonarAnalyzer.Rules.CSharp
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
     [Rule(DiagnosticId)]
-    public sealed class DoNotCheckZeroSizeCollection : DoNotCheckZeroSizeCollectionBase<ExpressionSyntax, SyntaxKind>
+    public sealed class DoNotCheckZeroSizeCollection : DoNotCheckZeroSizeCollectionBase<SyntaxKind>
     {
         protected override ILanguageFacade<SyntaxKind> Language => CSharpFacade.Instance;
         protected override string IEnumerableTString => "IEnumerable<T>";
