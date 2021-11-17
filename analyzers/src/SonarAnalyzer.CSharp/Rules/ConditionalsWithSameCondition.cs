@@ -44,23 +44,39 @@ namespace SonarAnalyzer.Rules.CSharp
 
         protected override void Initialize(SonarAnalysisContext context)
         {
-            context.RegisterSyntaxNodeActionInNonGenerated(
-                c => CheckMatchingExpressionsInSucceedingStatements<IfStatementSyntax>(c, x => x.Condition),
+            context.RegisterSyntaxNodeActionInNonGenerated(c =>
+                CheckMatchingExpressionsInSucceedingStatements<IfStatementSyntax>(c, x => x.Condition),
                 SyntaxKind.IfStatement);
 
-            context.RegisterSyntaxNodeActionInNonGenerated(
-                c => CheckMatchingExpressionsInSucceedingStatements<SwitchStatementSyntax>(c, x => x.Expression),
+            context.RegisterSyntaxNodeActionInNonGenerated(c =>
+                CheckMatchingExpressionsInSucceedingStatements<SwitchStatementSyntax>(c, x => x.Expression),
                 SyntaxKind.SwitchStatement);
+
+            context.RegisterSyntaxNodeActionInNonGenerated(c =>
+                CheckMatchingExpressionsInSucceedingStatements<SwitchStatementSyntax>(c, x => x.Expression),
+                SyntaxKind.GlobalStatement);
         }
 
         private static void CheckMatchingExpressionsInSucceedingStatements<T>(SyntaxNodeAnalysisContext context, Func<T, ExpressionSyntax> expression) where T : StatementSyntax
         {
-            var currentStatement = (T)context.Node;
+            var node = context.Node;
+
+            if (node.IsKind(SyntaxKind.GlobalStatement) && !IsSwitchOrIfStatement((GlobalStatementSyntax)node))
+            {
+                return;
+            }
+            else
+            {
+                node = context.Node.ChildNodes().FirstOrDefault();
+            }
+
+            var currentStatement = (T)node;
             if (currentStatement.GetPrecedingStatement() is T previousStatement)
             {
                 var currentExpression = expression(currentStatement);
                 var previousExpression = expression(previousStatement);
-                if (CSharpEquivalenceChecker.AreEquivalent(currentExpression, previousExpression) && !ContainsPossibleUpdate(previousStatement, currentExpression, context.SemanticModel))
+                if (CSharpEquivalenceChecker.AreEquivalent(currentExpression, previousExpression)
+                    && !ContainsPossibleUpdate(previousStatement, currentExpression, context.SemanticModel))
                 {
                     context.ReportIssue(Diagnostic.Create(Rule, currentExpression.GetLocation(), previousExpression.GetLineNumberToReport()));
                 }
@@ -81,5 +97,9 @@ namespace SonarAnalyzer.Rules.CSharp
                 && semanticModel.GetSymbolInfo(node).Symbol is { } symbol
                 && checkedSymbols.Contains(symbol);
         }
+
+        private static bool IsSwitchOrIfStatement(GlobalStatementSyntax globalStatement) =>
+            globalStatement.ChildNodes().FirstOrDefault().IsKind(SyntaxKind.IfStatement)
+            || globalStatement.ChildNodes().FirstOrDefault().IsKind(SyntaxKind.SwitchStatement);
     }
 }
