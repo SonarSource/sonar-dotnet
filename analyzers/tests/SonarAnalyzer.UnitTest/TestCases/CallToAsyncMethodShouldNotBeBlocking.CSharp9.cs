@@ -31,7 +31,6 @@ static async Task<int> GetFooAsync()
     return 42;
 }
 
-
 public class Test
 {
     Task FooInClass(Task<string> task)
@@ -43,5 +42,4 @@ public class Test
             var b = anotherTask.Result; // Noncompliant, this task is not safe inside ContinueWith
         });
     }
-
 }
