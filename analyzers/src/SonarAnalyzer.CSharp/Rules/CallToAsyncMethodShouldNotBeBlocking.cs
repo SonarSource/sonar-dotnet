@@ -122,8 +122,7 @@ namespace SonarAnalyzer.Rules.CSharp
             var enclosingMethod = simpleMemberAccess.FirstAncestorOrSelf<BaseMethodDeclarationSyntax>();
             if (enclosingMethod != null)
             {
-                if (memberAccessNameName == SleepName &&
-                    !enclosingMethod.Modifiers.Any(SyntaxKind.AsyncKeyword))
+                if (memberAccessNameName == SleepName && !enclosingMethod.Modifiers.Any(SyntaxKind.AsyncKeyword))
                 {
                     return; // Thread.Sleep should not be used only in async methods
                 }
@@ -140,8 +139,10 @@ namespace SonarAnalyzer.Rules.CSharp
                 }
             }
 
-            // if the exression is in toplevel statement its in fact a main function
-            if (context.ContainingSymbol.Name.Equals("<Main>$") && !simpleMemberAccess.Ancestors().Any(x => x.IsKind(SyntaxKindEx.LocalFunctionStatement)))
+            // if the exression is in toplevel statement its in a main function with name "<Main>$"
+            if (context.ContainingSymbol is IMethodSymbol containingMethodSymbol
+                && containingMethodSymbol.IsMainMethod()
+                && !simpleMemberAccess.Ancestors().Any(x => x.IsKind(SyntaxKindEx.LocalFunctionStatement)))
             {
                 return; // Main methods are not subject to deadlock issue so no need to report an issue
             }
