@@ -111,6 +111,7 @@ namespace SonarAnalyzer.Helpers.Facade
             return whenNotNull;
         }
 
-        public override SyntaxNode RemoveParentheses(SyntaxNode node) => node.RemoveParentheses();
+        public override SyntaxNode RemoveParentheses(SyntaxNode node) => 
+            node.RemoveParentheses();
     }
 }
