@@ -46,7 +46,7 @@ namespace SonarAnalyzer.Rules.CSharp
             DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
 
         private static readonly Dictionary<string, ImmutableArray<KnownType>> InvalidMemberAccess =
-            new Dictionary<string, ImmutableArray<KnownType>>
+            new()
             {
                 ["GetResult"] = ImmutableArray.Create(
                     KnownType.System_Runtime_CompilerServices_TaskAwaiter,
@@ -59,7 +59,7 @@ namespace SonarAnalyzer.Rules.CSharp
             };
 
         private static readonly Dictionary<string, string[]> MemberNameToMessageArguments =
-            new Dictionary<string, string[]>
+            new()
             {
                 ["GetResult"] = new[] { "Task.GetAwaiter.GetResult", "await" },
                 [ResultName] = new[] { "Task.Result", "await" },
@@ -70,21 +70,21 @@ namespace SonarAnalyzer.Rules.CSharp
             };
 
         private static readonly Dictionary<string, KnownType> TaskThreadPoolCalls =
-            new Dictionary<string, KnownType>
+            new()
             {
                 ["StartNew"] = KnownType.System_Threading_Tasks_TaskFactory,
                 ["Run"] = KnownType.System_Threading_Tasks_Task,
             };
 
         private static readonly Dictionary<string, KnownType> WaitForMultipleTasksExecutionCalls =
-            new Dictionary<string, KnownType>
+            new()
             {
                 ["WhenAll"] = KnownType.System_Threading_Tasks_Task,
                 ["WaitAll"] = KnownType.System_Threading_Tasks_Task,
             };
 
         private static readonly Dictionary<string, KnownType> WaitForSingleExecutionCalls =
-            new Dictionary<string, KnownType>
+            new()
             {
                 ["Wait"] = KnownType.System_Threading_Tasks_Task,
                 ["RunSynchronously"] = KnownType.System_Threading_Tasks_Task,
@@ -93,8 +93,7 @@ namespace SonarAnalyzer.Rules.CSharp
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
 
         protected override void Initialize(SonarAnalysisContext context) =>
-            context.RegisterSyntaxNodeActionInNonGenerated(ReportOnViolation,
-                SyntaxKind.SimpleMemberAccessExpression);
+            context.RegisterSyntaxNodeActionInNonGenerated(ReportOnViolation, SyntaxKind.SimpleMemberAccessExpression);
 
         private static void ReportOnViolation(SyntaxNodeAnalysisContext context)
         {
