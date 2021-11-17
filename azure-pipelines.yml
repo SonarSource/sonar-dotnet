@@ -309,6 +309,13 @@ stages:
         inputs:
           pollingTimeoutSec: '300'
 
+      - powershell: .\scripts\whitesource\WhiteSource-Scan.ps1 -configPath .\scripts\whitesource\wss-unified-agent.config
+        condition: eq(variables['Build.SourceBranch'], 'refs/heads/master')
+        env:
+          WS_PRODUCTNAME: '$(WHITESOURCE_PRODUCTNAME)'
+          WS_APIKEY: '$(WHITESOURCE_APIKEY)'
+        displayName: "WhiteSource scan"
+
     - job: runIntegrationTestsJob
       displayName: '.NET ITs'
       workspace:
