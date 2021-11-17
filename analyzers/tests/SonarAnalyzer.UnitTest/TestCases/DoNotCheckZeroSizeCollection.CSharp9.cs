@@ -28,6 +28,11 @@ if (someEnumerable.Count() is < 0) { } // Noncompliant
 if (someEnumerable.Count() is < localConst_Zero) { } // Noncompliant
 if (someEnumerable.Count() is >= 0 or 1) { } // Noncompliant
 if (someEnumerable.Count() is not >= 0) { } // Noncompliant
+if (someEnumerable.Count() is <= -1) { } // Noncompliant - AlwaysFalse
+if (someEnumerable.Count() is > -17) { } // Noncompliant - AlwaysTrue
+if (someEnumerable.Count() is == 0) { } // Error[CS1525]
+if (someEnumerable.Count() is != 0) { } // Error[CS1525]
+if (someEnumerable.Count() is { } _) { } // Compliant - Not a comparision
 
 int variable = 42;
 

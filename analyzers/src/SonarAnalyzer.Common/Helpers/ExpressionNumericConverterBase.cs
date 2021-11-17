@@ -55,7 +55,8 @@ namespace SonarAnalyzer.Helpers
                 return true;
             }
             else if (semanticModel is { }
-                && semanticModel.GetConstantValue(expression) is { HasValue: true } optional)
+                && semanticModel.GetConstantValue(expression) is { HasValue: true } optional
+                && optional.Value is T)
             {
                 value = (T)optional.Value;
                 return true;
