@@ -106,9 +106,8 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private void CheckPatternCondition(SyntaxNodeAnalysisContext context, SyntaxNode expression, SyntaxNode pattern)
         {
-            if (pattern.DescendantNodesAndSelf().FirstOrDefault(x => x.IsAnyKind(SyntaxKindEx.RelationalPattern, SyntaxKindEx.Subpattern)) is { } relationalOrSubPattern
-                && RelationalPatternSyntaxWrapper.IsInstance(relationalOrSubPattern)
-                && ((RelationalPatternSyntaxWrapper)relationalOrSubPattern) is { } relationalPattern
+            if (pattern.DescendantNodesAndSelf().FirstOrDefault(x => x.IsKind(SyntaxKindEx.RelationalPattern)) is { } relationalPatternNode
+                && ((RelationalPatternSyntaxWrapper)relationalPatternNode) is var relationalPattern
                 && ComparisonKind(relationalPattern.OperatorToken) is { } comparison
                 && comparison != Comparison.None
                 && Language.ExpressionNumericConverter.TryGetConstantIntValue(context.SemanticModel, relationalPattern.Expression, out var constant))
