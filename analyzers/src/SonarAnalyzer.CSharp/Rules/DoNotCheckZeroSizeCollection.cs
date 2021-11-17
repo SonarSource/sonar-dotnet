@@ -112,12 +112,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 && comparison != Comparison.None
                 && Language.ExpressionNumericConverter.TryGetConstantIntValue(context.SemanticModel, relationalPattern.Expression, out var constant))
             {
-                CheckExpression(
-                    context,
-                    relationalPattern.SyntaxNode,
-                    expression,
-                    constant,
-                    comparison);
+                CheckExpression(context, relationalPattern.SyntaxNode, expression, constant, comparison);
             }
 
             static ComparisonKind ComparisonKind(SyntaxToken syntaxToken) =>

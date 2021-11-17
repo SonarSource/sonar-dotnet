@@ -67,32 +67,21 @@ namespace SonarAnalyzer.Rules
 
         protected void CheckExpression(SyntaxNodeAnalysisContext context, SyntaxNode issue, SyntaxNode expression, int constant, ComparisonKind comparison)
         {
+            expression = Language.Syntax.RemoveConditionalAcesss(expression);
             var result = comparison.Compare(constant);
             if (result.IsInvalid()
-                && CollectionSizeSymbol(Language.Syntax.RemoveConditionalAcesss(expression), context.SemanticModel) is { } symbol
-                && GetDeclaringTypeName(symbol) is { } symbolType)
+                && HasCandidateName(Language.Syntax.NodeIdentifier(expression)?.ValueText)
+                && context.SemanticModel.GetSymbolInfo(expression).Symbol is ISymbol symbol
+                && CollecionSizeTypeName(symbol) is { } symbolType)
             {
                 context.ReportIssue(Diagnostic.Create(rule, issue.GetLocation(), symbol.Name, symbolType, result == CountComparisonResult.AlwaysTrue));
             }
         }
 
-        private ISymbol CollectionSizeSymbol(SyntaxNode expression, SemanticModel semanticModel) =>
-            HasCandidateName(Language.Syntax.NodeIdentifier(expression)?.ValueText)
-            && semanticModel.GetSymbolInfo(expression).Symbol is ISymbol symbol
-            && IsCollecionSizeCheck(symbol)
-            ? symbol : null;
-
         private bool HasCandidateName(string name) =>
             CountName.Equals(name, Language.NameComparison)
             || LengthName.Equals(name, Language.NameComparison)
             || LongLengthName.Equals(name, Language.NameComparison);
-
-        private bool IsCollecionSizeCheck(ISymbol symbol) =>
-            IsEnumerableCountMethod(symbol)
-            || IsArrayLengthProperty(symbol)
-            || IsStringLengthProperty(symbol)
-            || IsCollectionProperty(symbol)
-            || IsReadonlyCollectionProperty(symbol);
 
         private bool IsEnumerableCountMethod(ISymbol symbol) =>
             CountName.Equals(symbol.Name, Language.NameComparison)
@@ -121,7 +110,7 @@ namespace SonarAnalyzer.Rules
             && symbol is IPropertySymbol propertySymbol
             && propertySymbol.ContainingType.DerivesOrImplements(KnownType.System_Collections_Generic_IReadOnlyCollection_T);
 
-        private string GetDeclaringTypeName(ISymbol symbol)
+        private string CollecionSizeTypeName(ISymbol symbol)
         {
             if (IsArrayLengthProperty(symbol))
             {
@@ -135,11 +124,11 @@ namespace SonarAnalyzer.Rules
             {
                 return IEnumerableTString;
             }
-            else if (IsCollectionProperty(symbol))
+            else if (IsCollectionCountProperty(symbol))
             {
                 return nameof(ICollection<object>);
             }
-            else if (IsReadonlyCollectionProperty(symbol))
+            else if (IsReadonlyCollectionCountProperty(symbol))
             {
                 return nameof(IReadOnlyCollection<object>);
             }
