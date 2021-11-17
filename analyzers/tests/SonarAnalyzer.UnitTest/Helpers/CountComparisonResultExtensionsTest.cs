@@ -51,7 +51,7 @@ namespace SonarAnalyzer.UnitTest.Helpers
         [DataRow(ComparisonKind.LessThanOrEqual, -1, CountComparisonResult.AlwaysFalse)]
         [DataRow(ComparisonKind.LessThanOrEqual, +0, CountComparisonResult.Empty)]
         [DataRow(ComparisonKind.LessThanOrEqual, +1, CountComparisonResult.SizeDepedendent)]
-        public void Compare(ComparisonKind comparison, int count, CountComparisonResult result) =>
+        public void Compare(ComparisonKind comparison, int count, CountComparisonResult expected) =>
             Assert.AreEqual(result, comparison.Compare(count));
     }
 }
