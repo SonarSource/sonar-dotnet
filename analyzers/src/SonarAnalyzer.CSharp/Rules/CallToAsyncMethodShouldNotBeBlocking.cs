@@ -141,6 +141,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
             // if the exression is in toplevel statement its in a main function with name "<Main>$"
             if (context.ContainingSymbol is IMethodSymbol containingMethodSymbol
+                && containingMethodSymbol != null
                 && containingMethodSymbol.IsMainMethod()
                 && !simpleMemberAccess.Ancestors().Any(x => x.IsKind(SyntaxKindEx.LocalFunctionStatement)))
             {
