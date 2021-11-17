@@ -104,7 +104,8 @@ namespace SonarAnalyzer.Rules.CSharp
                 || !InvalidMemberAccess.ContainsKey(memberAccessNameName)
                 || IsResultInContinueWithCall(memberAccessNameName, simpleMemberAccess)
                 || IsChainedAfterThreadPoolCall(simpleMemberAccess, context.SemanticModel)
-                || simpleMemberAccess.IsInNameOfArgument(context.SemanticModel))
+                || simpleMemberAccess.IsInNameOfArgument(context.SemanticModel)
+                || IsInTopLevelStatement(context, simpleMemberAccess))
             {
                 return;
             }
@@ -136,14 +137,6 @@ namespace SonarAnalyzer.Rules.CSharp
                 {
                     return;  // No need to report an issue on a waited object
                 }
-            }
-
-            // if the exression is in toplevel statement its in a main function with name "<Main>$"
-            if (context.ContainingSymbol is IMethodSymbol containingMethodSymbol
-                && containingMethodSymbol.IsMainMethod()
-                && !simpleMemberAccess.Ancestors().Any(x => x.IsKind(SyntaxKindEx.LocalFunctionStatement)))
-            {
-                return; // Main methods are not subject to deadlock issue so no need to report an issue
             }
 
             context.ReportIssue(Diagnostic.Create(Rule, simpleMemberAccess.GetLocation(), MemberNameToMessageArguments[memberAccessNameName]));
@@ -199,5 +192,10 @@ namespace SonarAnalyzer.Rules.CSharp
             expectedTypes.Keys.Any(memberAccess.NameIs)
             && semanticModel.GetSymbolInfo(memberAccess).Symbol?.ContainingType?.ConstructedFrom is { } memberAccessSymbol
             && memberAccessSymbol.Is(expectedTypes[memberAccess.Name.Identifier.ValueText]);
+
+        private static bool IsInTopLevelStatement(SyntaxNodeAnalysisContext context, MemberAccessExpressionSyntax memberAccess) =>
+            context.ContainingSymbol is IMethodSymbol containingMethodSymbol
+            && containingMethodSymbol.IsMainMethod()
+            && !memberAccess.Ancestors().Any(x => x.IsKind(SyntaxKindEx.LocalFunctionStatement));
     }
 }
