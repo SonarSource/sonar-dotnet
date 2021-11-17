@@ -28,6 +28,7 @@ using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Extensions;
 using SonarAnalyzer.Helpers;
+using StyleCop.Analyzers.Lightup;
 
 namespace SonarAnalyzer.Rules.CSharp
 {
@@ -100,12 +101,6 @@ namespace SonarAnalyzer.Rules.CSharp
             var simpleMemberAccess = (MemberAccessExpressionSyntax)context.Node;
             var memberAccessNameName = simpleMemberAccess.GetName();
 
-            // if the exression is in toplevel statement its as it's being in a main function
-            if (context.ContainingSymbol.Name.Equals("<Main>$") && !simpleMemberAccess.Ancestors().OfType<BaseMethodDeclarationSyntax>().Any())
-            {
-                return;
-            }
-
             if (memberAccessNameName == null
                 || !InvalidMemberAccess.ContainsKey(memberAccessNameName)
                 || IsResultInContinueWithCall(memberAccessNameName, simpleMemberAccess)
@@ -145,6 +140,12 @@ namespace SonarAnalyzer.Rules.CSharp
                 }
             }
 
+            // if the exression is in toplevel statement its in fact a main function
+            if (context.ContainingSymbol.Name.Equals("<Main>$") && !simpleMemberAccess.Ancestors().Any(x => x.IsKind(SyntaxKindEx.LocalFunctionStatement)))
+            {
+                return; // Main methods are not subject to deadlock issue so no need to report an issue
+            }
+
             context.ReportIssue(Diagnostic.Create(Rule, simpleMemberAccess.GetLocation(), MemberNameToMessageArguments[memberAccessNameName]));
         }
 
@@ -152,11 +153,10 @@ namespace SonarAnalyzer.Rules.CSharp
         {
             return context.SemanticModel.GetSymbolInfo(simpleMemberAccess.Expression).Symbol is { } accessedSymbol
                    && simpleMemberAccess.FirstAncestorOrSelf<StatementSyntax>() is { } currentStatement
-                   && currentStatement.GetPreviousStatements().Any(statement =>
-                       statement.DescendantNodes()
-                           .OfType<InvocationExpressionSyntax>()
-                           .Where(x => x.Expression.IsKind(SyntaxKind.SimpleMemberAccessExpression))
-                           .Any(IsTaskAwaited));
+                   && currentStatement.GetPreviousStatements().Any(statement => statement.DescendantNodes()
+                                                                                          .OfType<InvocationExpressionSyntax>()
+                                                                                          .Where(x => x.Expression.IsKind(SyntaxKind.SimpleMemberAccessExpression))
+                                                                                          .Any(IsTaskAwaited));
 
             bool IsTaskAwaited(InvocationExpressionSyntax invocation) =>
                 IsAwaitForMultipleTasksExecutionCall(invocation, context.SemanticModel, accessedSymbol)
@@ -172,14 +172,14 @@ namespace SonarAnalyzer.Rules.CSharp
             && Equals(accessedSymbol, semanticModel.GetSymbolInfo(((MemberAccessExpressionSyntax)invocation.Expression).Expression).Symbol);
 
         private static bool IsResultInContinueWithCall(string memberAccessName, MemberAccessExpressionSyntax memberAccess) =>
-            memberAccessName == ResultName &&
-            memberAccess.Expression is IdentifierNameSyntax identifierNameSyntax &&
-            identifierNameSyntax.GetName() is { } identifierName &&
-            memberAccess.FirstAncestorOrSelf<InvocationExpressionSyntax>(invocation => IsContinueWithCallWithArgumentName(invocation, identifierName)) != null;
+            memberAccessName == ResultName
+            && memberAccess.Expression is IdentifierNameSyntax identifierNameSyntax
+            && identifierNameSyntax.GetName() is { } identifierName
+            && memberAccess.FirstAncestorOrSelf<InvocationExpressionSyntax>(invocation => IsContinueWithCallWithArgumentName(invocation, identifierName)) != null;
 
         private static bool IsContinueWithCallWithArgumentName(InvocationExpressionSyntax invocation, string argumentName) =>
-            invocation.Expression.NameIs(ContinueWithName) &&
-            invocation.ArgumentList.Arguments.Any(argument => IsLambdaExpressionWithArgumentName(argument.Expression, argumentName));
+            invocation.Expression.NameIs(ContinueWithName)
+            && invocation.ArgumentList.Arguments.Any(argument => IsLambdaExpressionWithArgumentName(argument.Expression, argumentName));
 
         private static bool IsLambdaExpressionWithArgumentName(ExpressionSyntax expression, string argumentName) =>
             expression switch
@@ -192,8 +192,8 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private static bool IsChainedAfterThreadPoolCall(MemberAccessExpressionSyntax memberAccess, SemanticModel semanticModel) =>
             memberAccess.Expression.DescendantNodes()
-                .OfType<MemberAccessExpressionSyntax>()
-                .Any(subMemberAccess => IsNamedSymbolOfExpectedType(subMemberAccess, semanticModel, TaskThreadPoolCalls));
+                                   .OfType<MemberAccessExpressionSyntax>()
+                                   .Any(subMemberAccess => IsNamedSymbolOfExpectedType(subMemberAccess, semanticModel, TaskThreadPoolCalls));
 
         private static bool IsNamedSymbolOfExpectedType(MemberAccessExpressionSyntax memberAccess, SemanticModel semanticModel, Dictionary<string, KnownType> expectedTypes) =>
             expectedTypes.Keys.Any(memberAccess.NameIs)

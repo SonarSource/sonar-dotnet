@@ -30,3 +30,18 @@ static async Task<int> GetFooAsync()
 
     return 42;
 }
+
+
+public class Test
+{
+    Task FooInClass(Task<string> task)
+    {
+        Action<Task<string>, object> continuation;
+        return task.ContinueWith(state: null, continuationAction: (Task<string> _, object _) =>
+        {
+            Task<int> anotherTask = null; // Pretend to compute something
+            var b = anotherTask.Result; // Noncompliant, this task is not safe inside ContinueWith
+        });
+    }
+
+}
