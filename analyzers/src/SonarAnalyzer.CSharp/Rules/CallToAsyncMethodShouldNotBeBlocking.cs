@@ -46,7 +46,7 @@ namespace SonarAnalyzer.Rules.CSharp
             DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
 
         private static readonly Dictionary<string, ImmutableArray<KnownType>> InvalidMemberAccess =
-            new()
+            new ()
             {
                 ["GetResult"] = ImmutableArray.Create(
                     KnownType.System_Runtime_CompilerServices_TaskAwaiter,
@@ -59,7 +59,7 @@ namespace SonarAnalyzer.Rules.CSharp
             };
 
         private static readonly Dictionary<string, string[]> MemberNameToMessageArguments =
-            new()
+            new ()
             {
                 ["GetResult"] = new[] { "Task.GetAwaiter.GetResult", "await" },
                 [ResultName] = new[] { "Task.Result", "await" },
@@ -70,21 +70,21 @@ namespace SonarAnalyzer.Rules.CSharp
             };
 
         private static readonly Dictionary<string, KnownType> TaskThreadPoolCalls =
-            new()
+            new ()
             {
                 ["StartNew"] = KnownType.System_Threading_Tasks_TaskFactory,
                 ["Run"] = KnownType.System_Threading_Tasks_Task,
             };
 
         private static readonly Dictionary<string, KnownType> WaitForMultipleTasksExecutionCalls =
-            new()
+            new ()
             {
                 ["WhenAll"] = KnownType.System_Threading_Tasks_Task,
                 ["WaitAll"] = KnownType.System_Threading_Tasks_Task,
             };
 
         private static readonly Dictionary<string, KnownType> WaitForSingleExecutionCalls =
-            new()
+            new ()
             {
                 ["Wait"] = KnownType.System_Threading_Tasks_Task,
                 ["RunSynchronously"] = KnownType.System_Threading_Tasks_Task,
@@ -140,7 +140,6 @@ namespace SonarAnalyzer.Rules.CSharp
 
             // if the exression is in toplevel statement its in a main function with name "<Main>$"
             if (context.ContainingSymbol is IMethodSymbol containingMethodSymbol
-                && containingMethodSymbol != null
                 && containingMethodSymbol.IsMainMethod()
                 && !simpleMemberAccess.Ancestors().Any(x => x.IsKind(SyntaxKindEx.LocalFunctionStatement)))
             {
