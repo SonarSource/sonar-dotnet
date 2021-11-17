@@ -80,7 +80,6 @@ namespace SonarAnalyzer.Helpers.Facade
             {
                 AttributeArgumentSyntax attribute => attribute.NameColon?.Name.Identifier,
                 BaseTypeDeclarationSyntax baseType => baseType.Identifier,
-                ConditionalAccessExpressionSyntax conditionalAccess => NodeIdentifier(conditionalAccess.WhenNotNull),
                 DelegateDeclarationSyntax delegateDeclaration => delegateDeclaration.Identifier,
                 EnumMemberDeclarationSyntax enumMember => enumMember.Identifier,
                 InvocationExpressionSyntax invocation => NodeIdentifier(invocation.Expression),
