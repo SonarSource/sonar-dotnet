@@ -147,9 +147,9 @@ namespace SonarAnalyzer.Rules.CSharp
             return context.SemanticModel.GetSymbolInfo(simpleMemberAccess.Expression).Symbol is { } accessedSymbol
                    && simpleMemberAccess.FirstAncestorOrSelf<StatementSyntax>() is { } currentStatement
                    && currentStatement.GetPreviousStatements().Any(statement => statement.DescendantNodes()
-                                                                                          .OfType<InvocationExpressionSyntax>()
-                                                                                          .Where(x => x.Expression.IsKind(SyntaxKind.SimpleMemberAccessExpression))
-                                                                                          .Any(IsTaskAwaited));
+                                                                                         .OfType<InvocationExpressionSyntax>()
+                                                                                         .Where(x => x.Expression.IsKind(SyntaxKind.SimpleMemberAccessExpression))
+                                                                                         .Any(IsTaskAwaited));
 
             bool IsTaskAwaited(InvocationExpressionSyntax invocation) =>
                 IsAwaitForMultipleTasksExecutionCall(invocation, context.SemanticModel, accessedSymbol)
