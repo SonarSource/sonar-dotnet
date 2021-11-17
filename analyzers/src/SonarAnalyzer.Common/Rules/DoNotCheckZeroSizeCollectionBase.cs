@@ -116,7 +116,7 @@ namespace SonarAnalyzer.Rules
             && symbol is IPropertySymbol propertySymbol
             && propertySymbol.ContainingType.DerivesOrImplements(KnownType.System_Collections_Generic_ICollection_T);
 
-        private bool IsReadonlyCollectionProperty(ISymbol symbol) =>
+        private bool IsReadonlyCollectionCountProperty(ISymbol symbol) =>
             CountName.Equals(symbol.Name, Language.NameComparison)
             && symbol is IPropertySymbol propertySymbol
             && propertySymbol.ContainingType.DerivesOrImplements(KnownType.System_Collections_Generic_IReadOnlyCollection_T);
