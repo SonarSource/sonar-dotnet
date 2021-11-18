@@ -51,23 +51,15 @@ namespace SonarAnalyzer.Rules.CSharp
             context.RegisterSyntaxNodeActionInNonGenerated(c =>
                 CheckMatchingExpressionsInSucceedingStatements<SwitchStatementSyntax>(c, x => x.Expression),
                 SyntaxKind.SwitchStatement);
-
-            context.RegisterSyntaxNodeActionInNonGenerated(c =>
-                CheckMatchingExpressionsInSucceedingStatements<SwitchStatementSyntax>(c, x => x.Expression),
-                SyntaxKind.GlobalStatement);
         }
 
         private static void CheckMatchingExpressionsInSucceedingStatements<T>(SyntaxNodeAnalysisContext context, Func<T, ExpressionSyntax> expression) where T : StatementSyntax
         {
             var node = context.Node;
 
-            if (node.IsKind(SyntaxKind.GlobalStatement) && !IsSwitchOrIfStatement((GlobalStatementSyntax)node))
+            if (context.ContainingSymbol is IMethodSymbol && node.IsKind(SyntaxKind.GlobalStatement) && !IsSwitchOrIfStatement((GlobalStatementSyntax)node))
             {
                 return;
-            }
-            else
-            {
-                node = context.Node.ChildNodes().FirstOrDefault();
             }
 
             var currentStatement = (T)node;
