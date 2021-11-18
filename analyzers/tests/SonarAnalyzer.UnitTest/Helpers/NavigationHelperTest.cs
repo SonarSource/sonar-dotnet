@@ -20,6 +20,7 @@
 
 using System.Linq;
 using FluentAssertions;
+using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -65,16 +66,46 @@ namespace Test
     }
 }";
 
+        private const string SourceTPL = @"
+var i = 5;
+var b = 1;
+if (i == 2) { b++;}
+if (i == 2) {}
+
+switch(i)
+{
+    case 3:
+        DoSomething();
+        break;
+    case 5:
+        DoSomething();
+        break;
+    default:
+        DoSomething();
+        break;
+}
+";
+
         private MethodDeclarationSyntax ifMethod;
         private MethodDeclarationSyntax switchMethod;
+
+        private SyntaxTree syntaxTreeTPL;
 
         [TestInitialize]
         public void TestSetup()
         {
             var syntaxTree = CSharpSyntaxTree.ParseText(Source);
+            ifMethod = syntaxTree.GetRoot()
+                                 .DescendantNodes()
+                                 .OfType<MethodDeclarationSyntax>()
+                                 .First(m => m.Identifier.ValueText == "IfMethod");
 
-            ifMethod = syntaxTree.GetRoot().DescendantNodes().OfType<MethodDeclarationSyntax>().First(m => m.Identifier.ValueText == "IfMethod");
-            switchMethod = syntaxTree.GetRoot().DescendantNodes().OfType<MethodDeclarationSyntax>().First(m => m.Identifier.ValueText == "SwitchMethod");
+            switchMethod = syntaxTree.GetRoot()
+                                     .DescendantNodes()
+                                     .OfType<MethodDeclarationSyntax>()
+                                     .First(m => m.Identifier.ValueText == "SwitchMethod");
+
+            syntaxTreeTPL = CSharpSyntaxTree.ParseText(SourceTPL);
         }
 
         [TestMethod]
@@ -144,6 +175,19 @@ namespace Test
 
             statements[1].GetPrecedingStatement().Should().BeEquivalentTo(statements[0]);
             statements[0].GetPrecedingStatement().Should().Be(null);
+        }
+
+        [TestMethod]
+        public void GetPrecedingStatementInTopLevelStatements()
+        {
+            var globalStatements = syntaxTreeTPL.GetRoot()
+                                                .ChildNodes()
+                                                .Select(x => x.ChildNodes().FirstOrDefault())
+                                                .OfType<StatementSyntax>()
+                                                .ToArray();
+
+            globalStatements[3].GetPrecedingStatement().Should().BeEquivalentTo(globalStatements[2]);
+            globalStatements[0].GetPrecedingStatement().Should().Be(null);
         }
     }
 }

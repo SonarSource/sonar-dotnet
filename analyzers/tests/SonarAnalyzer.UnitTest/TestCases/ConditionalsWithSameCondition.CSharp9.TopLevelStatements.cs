@@ -18,12 +18,23 @@ if (args[0] == args[1]) // Noncompliant
 void Foo() { }
 void Bar() { }
 
+switch (b)
+{
+    case > 2:
+        break;
+}
+switch (b) // Noncompliant
+{
+    case > 2:
+        break;
+}
+
 string c = null;
 if (c is null)
 {
     DoTheThing(c);
 }
-if (c is null) // Noncompliant {{This condition was just checked on line 22.}}
+if (c is null) // Noncompliant {{This condition was just checked on line 33.}}
 {
     DoTheThing(c);
 }
@@ -50,7 +61,7 @@ if (i is > 0 and < 100)
 {
     DoTheThing(i);
 }
-if (i is > 0 and < 100) // Noncompliant {{This condition was just checked on line 49.}}
+if (i is > 0 and < 100) // Noncompliant {{This condition was just checked on line 60.}}
 {
     DoTheThing(i);
 }
@@ -136,4 +147,3 @@ class Apple : Fruit
 }
 
 class Orange : Fruit { }
-
