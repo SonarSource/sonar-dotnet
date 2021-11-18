@@ -1,11 +1,3 @@
-param (
-    [Parameter(Mandatory = $true,
-               HelpMessage = "Config file path",
-               Position = 0)]
-    [System.IO.FileInfo]
-    $configPath
-)
-
 function Get-Version {
     $versionPropsXml = [xml](Get-Content -Path scripts/version/Version.props)
     return $versionPropsXml.Project.PropertyGroup.MilestoneVersion
@@ -38,4 +30,4 @@ if (-Not (& "$env:JAVA\bin\jarsigner.exe" -verify -strict -verbose $whiteSourceA
 $env:WS_PROJECTNAME = "$env:WS_PRODUCTNAME $(Get-Version)"
 
 Write-Host "Running the WhiteSource unified agent for $env:WS_PROJECTNAME..."
-& "$env:JAVA\bin\java.exe" -jar $env:WHITESOURCE_AGENT_PATH -c $configPath
+& "$env:JAVA\bin\java.exe" -jar $env:WHITESOURCE_AGENT_PATH -c "$PSScriptRoot\wss-unified-agent.config"
