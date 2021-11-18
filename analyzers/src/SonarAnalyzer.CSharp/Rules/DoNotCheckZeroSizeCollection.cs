@@ -118,8 +118,6 @@ namespace SonarAnalyzer.Rules.CSharp
             static ComparisonKind ComparisonKind(SyntaxToken syntaxToken) =>
                 syntaxToken.ValueText switch
                 {
-                    "==" => Comparison.Equals,
-                    "!=" => Comparison.NotEquals,
                     "<" => Comparison.LessThan,
                     "<=" => Comparison.LessThanOrEqual,
                     ">" => Comparison.GreaterThan,
