@@ -79,19 +79,22 @@ namespace SonarAnalyzer.Helpers
 
         public static StatementSyntax GetPrecedingStatement(this StatementSyntax currentStatement)
         {
-            var previousStatement = currentStatement.Parent.ChildNodes().OfType<StatementSyntax>().TakeWhile(x => x != currentStatement).LastOrDefault();
+            var previousStatement = currentStatement.Parent
+                                                    .ChildNodes()
+                                                    .OfType<StatementSyntax>()
+                                                    .TakeWhile(x => x != currentStatement)
+                                                    .LastOrDefault();
             if (previousStatement == null) // this means that we might be in a top-level-statement
             {
                 // All the statements are siblings under one parent - the Compiation Unit.
                 var compilationUnitNode = currentStatement.Ancestors().FirstOrDefault(x => x.IsKind(SyntaxKind.CompilationUnit));
-                previousStatement = (StatementSyntax)compilationUnitNode.ChildNodes()
-                                                                        .Select(x => x.ChildNodes().FirstOrDefault(y =>
-                                                                                          y.IsAnyKind(
-                                                                                              SyntaxKind.IfStatement,
-                                                                                              SyntaxKind.SwitchStatement)))
-                                                                        .Where(x => x != null)
-                                                                        .TakeWhile(x => x != currentStatement)
-                                                                        .LastOrDefault();
+                previousStatement = compilationUnitNode.ChildNodes()
+                                                       .Select(x => x.ChildNodes()
+                                                                     .FirstOrDefault())
+                                                       .Where(x => x != null)
+                                                       .OfType<StatementSyntax>()
+                                                       .TakeWhile(x => x != currentStatement)
+                                                       .LastOrDefault();
             }
             return previousStatement;
         }
