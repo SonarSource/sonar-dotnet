@@ -36,7 +36,7 @@ namespace SonarAnalyzer.Helpers
             return methodSymbol != null
                 && methodSymbol.IsStatic
                 && (methodSymbol.Name.Equals("Main", StringComparison.OrdinalIgnoreCase) // VB.NET is case insensitive
-                    || methodSymbol.Name.Equals("<Main>$", StringComparison.OrdinalIgnoreCase))
+                    || methodSymbol.Name.Equals("<Main>$", StringComparison.Ordinal))
                 && HasMainParameters()
                 && HasMainReturnType();
 
