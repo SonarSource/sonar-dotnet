@@ -47,18 +47,16 @@ namespace SonarAnalyzer.UnitTest
     <OutPath>{2}</OutPath>
 </SonarProjectConfig>";
 
-        public static (SyntaxTree, SemanticModel) Compile(string classDeclaration, bool isCSharp = true, params MetadataReference[] additionalReferences)
-        {
-            var language = isCSharp ? AnalyzerLanguage.CSharp : AnalyzerLanguage.VisualBasic;
+        public static (SyntaxTree, SemanticModel) CompileIgnoreErrors(string snippet, bool isCSharp = true, params MetadataReference[] additionalReferences) =>
+            Compile(snippet, true, isCSharp, additionalReferences);
 
-            var compilation = SolutionBuilder
-                .Create()
-                .AddProject(language, createExtraEmptyFile: false)
-                .AddSnippet(classDeclaration)
-                .AddReferences(additionalReferences)
-                .GetCompilation();
-            var tree = compilation.SyntaxTrees.First();
-            return (tree, compilation.GetSemanticModel(tree));
+        public static (SyntaxTree, SemanticModel) Compile(string snippet, bool isCSharp = true, params MetadataReference[] additionalReferences) =>
+            Compile(snippet, false, isCSharp, additionalReferences);
+
+        public static (SyntaxTree, SemanticModel) Compile(string snippet, bool ignoreErrors, bool isCSharp, params MetadataReference[] additionalReferences)
+        {
+            var compiled = new SnippetCompiler(snippet, ignoreErrors, isCSharp ? AnalyzerLanguage.CSharp : AnalyzerLanguage.VisualBasic, additionalReferences);
+            return (compiled.SyntaxTree, compiled.SemanticModel);
         }
 
         public static ControlFlowGraph CompileCfg(string snippet, bool isCSharp = true)

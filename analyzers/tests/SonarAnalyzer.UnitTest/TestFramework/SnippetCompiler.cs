@@ -154,7 +154,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework
             new SyntaxNodeAnalysisContext(node, SemanticModel, null, null, null, CancellationToken.None);
 
         private static bool HasCompilationErrors(Compilation compilation) =>
-            compilation.GetDiagnostics().Any(d => d.Id.StartsWith("CS") || d.Id.StartsWith("BC"));
+            compilation.GetDiagnostics().Any(x => x.Severity == DiagnosticSeverity.Error && (x.Id.StartsWith("CS") || x.Id.StartsWith("BC")));
 
         private static void DumpCompilationErrors(Compilation compilation)
         {
