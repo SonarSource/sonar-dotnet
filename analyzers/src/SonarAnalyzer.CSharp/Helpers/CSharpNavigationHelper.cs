@@ -86,7 +86,7 @@ namespace SonarAnalyzer.Helpers
                                                     .LastOrDefault();
             if (previousStatement == null) // this means that we might be in a top-level-statement
             {
-                // All the statements are siblings under one parent - the Compiation Unit.
+                // In TPL global statements are siblings under one parent; the compilation Unit.
                 var compilationUnitNode = currentStatement.Ancestors().FirstOrDefault(x => x.IsKind(SyntaxKind.CompilationUnit));
                 previousStatement = compilationUnitNode.ChildNodes()
                                                        .Select(x => x.ChildNodes()

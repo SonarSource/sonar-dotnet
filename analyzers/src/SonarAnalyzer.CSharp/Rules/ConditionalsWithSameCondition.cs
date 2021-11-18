@@ -55,14 +55,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private static void CheckMatchingExpressionsInSucceedingStatements<T>(SyntaxNodeAnalysisContext context, Func<T, ExpressionSyntax> expression) where T : StatementSyntax
         {
-            var node = context.Node;
-
-            if (context.ContainingSymbol is IMethodSymbol && node.IsKind(SyntaxKind.GlobalStatement) && !IsSwitchOrIfStatement((GlobalStatementSyntax)node))
-            {
-                return;
-            }
-
-            var currentStatement = (T)node;
+            var currentStatement = (T)context.Node;
             if (currentStatement.GetPrecedingStatement() is T previousStatement)
             {
                 var currentExpression = expression(currentStatement);
@@ -89,9 +82,5 @@ namespace SonarAnalyzer.Rules.CSharp
                 && semanticModel.GetSymbolInfo(node).Symbol is { } symbol
                 && checkedSymbols.Contains(symbol);
         }
-
-        private static bool IsSwitchOrIfStatement(GlobalStatementSyntax globalStatement) =>
-            globalStatement.ChildNodes().FirstOrDefault().IsKind(SyntaxKind.IfStatement)
-            || globalStatement.ChildNodes().FirstOrDefault().IsKind(SyntaxKind.SwitchStatement);
     }
 }
