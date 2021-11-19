@@ -22,8 +22,6 @@
       <NoWarn>NU1605, NU1701</NoWarn>
     </PackageReference>
     <!--  Manually upgrade since the version transitively linked (4.0.1) is marked as vulnerable by WhiteSource. -->
-    <PackageReference Include="System.IO.FileSystem" Version="4.3.0" />
-    <!--  Manually upgrade since the version transitively linked (4.0.1) is marked as vulnerable by WhiteSource. -->
     <PackageReference Include="System.Text.RegularExpressions" Version="4.3.1" />
   </ItemGroup>
 
