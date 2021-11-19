@@ -310,11 +310,11 @@ stages:
           pollingTimeoutSec: '300'
 
       - powershell: .\scripts\whitesource\WhiteSource-Scan.ps1
+        displayName: "WhiteSource scan"
         condition: eq(variables['Build.SourceBranch'], 'refs/heads/master')
         env:
           WS_PRODUCTNAME: '$(WHITESOURCE_PRODUCTNAME)'
           WS_APIKEY: '$(WHITESOURCE_APIKEY)'
-        displayName: "WhiteSource scan"
 
     - job: runIntegrationTestsJob
       displayName: '.NET ITs'

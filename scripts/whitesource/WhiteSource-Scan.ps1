@@ -6,8 +6,8 @@ function Get-Version {
 # Delete this step after the new image is finished and can be used
 Write-host "Create tools directory"
 $toolsPath = "C:\tools"
-if (-Not [System.IO.Directory]::Exists($toolsPath)){
-  New-Item -Path "C:\" -Name "tools" -ItemType "directory"
+if (-Not (Test-Path $toolsPath)){
+  New-Item -Path $toolsPath -ItemType "directory"
 }
 
 # Delete this step after the new image is finished and can be used
