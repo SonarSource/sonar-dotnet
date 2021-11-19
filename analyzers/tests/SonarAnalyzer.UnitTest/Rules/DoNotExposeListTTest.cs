@@ -43,9 +43,9 @@ namespace SonarAnalyzer.UnitTest.Rules
 #endif
 
         [TestMethod]
-        public void DoNotExposeListT_InvalidCode()
-        {
-            Verifier.VerifyCSharpAnalyzer(@"
+        public void DoNotExposeListT_InvalidCode() =>
+            Verifier.VerifyCSharpAnalyzer(
+                @"
 public class InvalidCode
 {
     public List<int> () => null;
@@ -55,7 +55,8 @@ public class InvalidCode
     public List<InvalidType> Method() => null;
 
     public InvalidType Method2() => null;
-}", new DoNotExposeListT(), CompilationErrorBehavior.Ignore);
-        }
+}",
+                new DoNotExposeListT(),
+                CompilationErrorBehavior.Ignore);
     }
 }
