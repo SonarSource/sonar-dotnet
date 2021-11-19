@@ -68,6 +68,8 @@ namespace Tests.Diagnostics
             //        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
             result = 0 <= someEnumerable.Count(); // Noncompliant
             //       ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+            
+            result = result.ToString() == "Not integer";            
 
             var nonEnumerable = new FooMethod();
             result = nonEnumerable.Count() >= 0;
