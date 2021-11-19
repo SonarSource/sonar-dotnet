@@ -58,7 +58,6 @@
     <None Include="app.config" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="packages.lock.json" />
     <None Include="SonarAnalyzer.CSharp.nuspec">
       <SubType>Designer</SubType>
     </None>
