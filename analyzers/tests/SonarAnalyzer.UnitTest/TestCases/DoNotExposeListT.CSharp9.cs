@@ -3,6 +3,8 @@ using System.Collections.Generic;
 
 var x = 1;
 
+List<int> Foo() => new();
+
 public class Bar<T>
 {
     public List<T> Method1<T>(T arg) => null; // Noncompliant
