@@ -173,12 +173,12 @@
       },
       "System.Collections": {
         "type": "Transitive",
-        "resolved": "4.3.0",
-        "contentHash": "3Dcj85/TBdVpL5Zr+gEEBUuFe2icOnLalmEh9hfck1PTYbbyWuZgh4fmm2ysCLTrqLQw6t3TgTyJ+VLp+Qb+Lw==",
+        "resolved": "4.0.11",
+        "contentHash": "YUJGz6eFKqS0V//mLt25vFGrrCvOnsXjlvFQs+KimpwNxug9x0Pzy4PlFMU3Q2IzqAa9G2L4LsK3+9vCBK7oTg==",
         "dependencies": {
-          "Microsoft.NETCore.Platforms": "1.1.0",
-          "Microsoft.NETCore.Targets": "1.1.0",
-          "System.Runtime": "4.3.0"
+          "Microsoft.NETCore.Platforms": "1.0.1",
+          "Microsoft.NETCore.Targets": "1.0.1",
+          "System.Runtime": "4.1.0"
         }
       },
       "System.Collections.Concurrent": {
@@ -897,7 +897,6 @@
           "Google.Protobuf.Tools": "3.6.1",
           "Microsoft.CodeAnalysis.Workspaces.Common": "1.3.2",
           "Microsoft.Composition": "1.0.27",
-          "System.Collections": "4.3.0",
           "System.Collections.Immutable": "1.1.37",
           "System.IO.FileSystem": "4.3.0",
           "System.IO.FileSystem.Primitives": "4.3.0",
@@ -909,7 +908,6 @@
         "dependencies": {
           "Microsoft.CodeAnalysis.CSharp.Workspaces": "1.3.2",
           "Microsoft.Composition": "1.0.27",
-          "System.Collections": "4.3.0",
           "System.Collections.Immutable": "1.1.37",
           "System.IO.FileSystem": "4.3.0",
           "System.IO.FileSystem.Primitives": "4.3.0",
@@ -1671,8 +1669,8 @@
       },
       "System.Collections": {
         "type": "Transitive",
-        "resolved": "4.3.0",
-        "contentHash": "3Dcj85/TBdVpL5Zr+gEEBUuFe2icOnLalmEh9hfck1PTYbbyWuZgh4fmm2ysCLTrqLQw6t3TgTyJ+VLp+Qb+Lw=="
+        "resolved": "4.0.11",
+        "contentHash": "YUJGz6eFKqS0V//mLt25vFGrrCvOnsXjlvFQs+KimpwNxug9x0Pzy4PlFMU3Q2IzqAa9G2L4LsK3+9vCBK7oTg=="
       },
       "System.Collections.Concurrent": {
         "type": "Transitive",
@@ -1887,7 +1885,6 @@
           "Google.Protobuf.Tools": "3.6.1",
           "Microsoft.CodeAnalysis.Workspaces.Common": "1.3.2",
           "Microsoft.Composition": "1.0.27",
-          "System.Collections": "4.3.0",
           "System.Collections.Immutable": "1.1.37",
           "System.IO.FileSystem": "4.3.0",
           "System.IO.FileSystem.Primitives": "4.3.0",
@@ -1899,7 +1896,6 @@
         "dependencies": {
           "Microsoft.CodeAnalysis.CSharp.Workspaces": "1.3.2",
           "Microsoft.Composition": "1.0.27",
-          "System.Collections": "4.3.0",
           "System.Collections.Immutable": "1.1.37",
           "System.IO.FileSystem": "4.3.0",
           "System.IO.FileSystem.Primitives": "4.3.0",
