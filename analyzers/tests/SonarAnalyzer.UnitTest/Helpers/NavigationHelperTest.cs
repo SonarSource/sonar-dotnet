@@ -66,7 +66,7 @@ namespace Test
     }
 }";
 
-        private const string SourceTPL = @"
+private const string SourceTPL = @"
 var i = 5;
 var b = 1;
 if (i == 2) { b++;}
@@ -167,7 +167,7 @@ switch(i)
 
             sections.FirstOrDefault().GetPrecedingSections().Should().BeEmpty();
         }
-
+#if CS
         [TestMethod]
         public void GetPrecedingStatement()
         {
@@ -189,5 +189,6 @@ switch(i)
             globalStatements[3].GetPrecedingStatement().Should().BeEquivalentTo(globalStatements[2]);
             globalStatements[0].GetPrecedingStatement().Should().Be(null);
         }
+#endif
     }
 }

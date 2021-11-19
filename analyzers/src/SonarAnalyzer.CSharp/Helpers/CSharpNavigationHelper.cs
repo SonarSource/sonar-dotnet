@@ -76,27 +76,5 @@ namespace SonarAnalyzer.Helpers
         }
 
         #endregion Switch
-
-        public static StatementSyntax GetPrecedingStatement(this StatementSyntax currentStatement)
-        {
-            var previousStatement = currentStatement.Parent
-                                                    .ChildNodes()
-                                                    .OfType<StatementSyntax>()
-                                                    .TakeWhile(x => x != currentStatement)
-                                                    .LastOrDefault();
-            if (previousStatement == null) // this means that we might be in a top-level-statement
-            {
-                // In TPL global statements are siblings under one parent; the compilation Unit.
-                var compilationUnitNode = currentStatement.Ancestors().FirstOrDefault(x => x.IsKind(SyntaxKind.CompilationUnit));
-                previousStatement = compilationUnitNode.ChildNodes()
-                                                       .Select(x => x.ChildNodes()
-                                                                     .FirstOrDefault())
-                                                       .Where(x => x != null)
-                                                       .OfType<StatementSyntax>()
-                                                       .TakeWhile(x => x != currentStatement)
-                                                       .LastOrDefault();
-            }
-            return previousStatement;
-        }
     }
 }
