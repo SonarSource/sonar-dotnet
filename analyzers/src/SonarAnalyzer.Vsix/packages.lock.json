@@ -317,6 +317,11 @@
         "resolved": "4.0.11",
         "contentHash": "jtbiTDtvfLYgXn8PTfWI+SiBs51rrmO4AAckx4KR6vFK9Wzf6tI8kcRdsYQNwriUeQ1+CtQbM1W4cMbLXnj/OQ=="
       },
+      "System.Text.RegularExpressions": {
+        "type": "Transitive",
+        "resolved": "4.3.1",
+        "contentHash": "N0kNRrWe4+nXOWlpLT4LAY5brb8caNFlUuIRpraCVMDLYutKkol1aV079rQjLuSxKMJT2SpBQsYX9xbcTMmzwg=="
+      },
       "System.Threading": {
         "type": "Transitive",
         "resolved": "4.0.11",
@@ -372,7 +377,8 @@
           "Google.Protobuf.Tools": "3.6.1",
           "Microsoft.CodeAnalysis.Workspaces.Common": "1.3.2",
           "Microsoft.Composition": "1.0.27",
-          "System.Collections.Immutable": "1.1.37"
+          "System.Collections.Immutable": "1.1.37",
+          "System.Text.RegularExpressions": "4.3.1"
         }
       },
       "sonaranalyzer.cfg": {
@@ -380,7 +386,8 @@
         "dependencies": {
           "Microsoft.CodeAnalysis.CSharp.Workspaces": "1.3.2",
           "Microsoft.Composition": "1.0.27",
-          "System.Collections.Immutable": "1.1.37"
+          "System.Collections.Immutable": "1.1.37",
+          "System.Text.RegularExpressions": "4.3.1"
         }
       },
       "sonaranalyzer.csharp": {
@@ -389,7 +396,8 @@
           "Microsoft.CodeAnalysis.CSharp.Workspaces": "1.3.2",
           "SonarAnalyzer": "1.0.0",
           "SonarAnalyzer.CFG": "1.0.0",
-          "System.Collections.Immutable": "1.1.37"
+          "System.Collections.Immutable": "1.1.37",
+          "System.Text.RegularExpressions": "4.3.1"
         }
       },
       "sonaranalyzer.visualbasic": {
@@ -397,7 +405,8 @@
         "dependencies": {
           "Microsoft.CodeAnalysis.VisualBasic.Workspaces": "1.3.2",
           "SonarAnalyzer": "1.0.0",
-          "System.Collections.Immutable": "1.1.37"
+          "System.Collections.Immutable": "1.1.37",
+          "System.Text.RegularExpressions": "4.3.1"
         }
       }
     },
