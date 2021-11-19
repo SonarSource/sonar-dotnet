@@ -343,7 +343,6 @@
           "Microsoft.Composition": "1.0.27",
           "System.Collections.Immutable": "1.1.37",
           "System.IO.FileSystem": "4.3.0",
-          "System.IO.FileSystem.Primitives": "4.3.0",
           "System.Text.RegularExpressions": "4.3.1"
         }
       }
@@ -1245,7 +1244,6 @@
           "Microsoft.Composition": "1.0.27",
           "System.Collections.Immutable": "1.1.37",
           "System.IO.FileSystem": "4.3.0",
-          "System.IO.FileSystem.Primitives": "4.3.0",
           "System.Text.RegularExpressions": "4.3.1"
         }
       }
