@@ -78,7 +78,6 @@ namespace SonarAnalyzer.Helpers.Facade
         public override SyntaxToken? NodeIdentifier(SyntaxNode node) =>
             RemoveParentheses(node) switch
             {
-                AssignmentStatementSyntax assignment => NodeIdentifier(assignment.Left),
                 EnumStatementSyntax enumStatement => enumStatement.Identifier,
                 EnumMemberDeclarationSyntax enumMember => enumMember.Identifier,
                 InvocationExpressionSyntax invocation => NodeIdentifier(invocation.Expression),

@@ -78,7 +78,6 @@ namespace SonarAnalyzer.Helpers.Facade
         public override SyntaxToken? NodeIdentifier(SyntaxNode node) =>
             RemoveParentheses(node) switch
             {
-                AssignmentExpressionSyntax assignment => NodeIdentifier(assignment.Left),
                 AttributeArgumentSyntax attribute => attribute.NameColon?.Name.Identifier,
                 BaseTypeDeclarationSyntax baseType => baseType.Identifier,
                 DelegateDeclarationSyntax delegateDeclaration => delegateDeclaration.Identifier,
