@@ -75,7 +75,6 @@ namespace SonarAnalyzer.Rules.CSharp
                             if (namedType.ContainingType != null
                                 // We skip top level statements since they cannot have fields. Other declared types are analyzed separately.
                                 || IsTopLevelProgram(namedType)
-                                || !IsType(namedType)
                                 || namedType.DerivesFromAny(IgnoredTypes))
                             {
                                 return;
@@ -138,13 +137,6 @@ namespace SonarAnalyzer.Rules.CSharp
             // a program class in the global namespace.
             symbol.Name == "Program"
             && symbol.ContainingNamespace.IsGlobalNamespace;
-
-        private static bool IsType(ITypeSymbol namedType) =>
-            namedType.TypeKind == TypeKind.Struct
-            || namedType.TypeKind == TypeKind.Class
-            || namedType.TypeKind == TypeKind.Delegate
-            || namedType.TypeKind == TypeKind.Enum
-            || namedType.TypeKind == TypeKind.Interface;
 
         private static IEnumerable<Diagnostic> GetDiagnosticsForUnusedPrivateMembers(CSharpSymbolUsageCollector usageCollector,
                                                                                      ISet<ISymbol> removableSymbols,
