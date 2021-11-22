@@ -13,19 +13,16 @@ public record Product(string Name, int CategoryId);
 public record Record
 {
     private int a; // Noncompliant {{Remove the unused private field 'a'.}}
-                   // Noncompliant@-1 - duplicate issue reported
 
     private int b;
     public int B() => b;
 
     private nint Value { get; init; }
     private nint UnusedValue { get; init; } // Noncompliant
-                                            // Noncompliant@-1 - duplicate issue reported
 
     public Record Create() => new() { Value = 1 };
 
     private interface IFoo // Noncompliant
-                           // Noncompliant@-1 - duplicate issue reported
     {
         public void Bar() { }
     }
@@ -45,7 +42,6 @@ public record Record
     }
 
     private record UnusedNested1(string Name, int CategoryId);   // Noncompliant
-                                                                 // Noncompliant@-1 - duplicate issue reported
     internal record UnusedNested2(string Name, int CategoryId);  // Noncompliant
     public record UnusedNested3(string Name, int CategoryId);
 
@@ -76,7 +72,6 @@ public class TargetTypedNew
     }
 
     private TargetTypedNew(string arg) // Noncompliant - FP
-                                       // Noncompliant@-1 - duplicate issue reported
     {
         var x = arg;
     }

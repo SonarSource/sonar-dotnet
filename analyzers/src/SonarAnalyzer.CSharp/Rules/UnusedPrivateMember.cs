@@ -72,16 +72,11 @@ namespace SonarAnalyzer.Rules.CSharp
                         {
                             var namedType = (INamedTypeSymbol)cc.Symbol;
 
-                            if (namedType.TypeKind != TypeKind.Struct
-                                && namedType.TypeKind != TypeKind.Class
-                                && namedType.TypeKind != TypeKind.Delegate
-                                && namedType.TypeKind != TypeKind.Enum
-                                && namedType.TypeKind != TypeKind.Interface)
-                            {
-                                return;
-                            }
-
-                            if (namedType.ContainingType != null || namedType.DerivesFromAny(IgnoredTypes))
+                            if (namedType.ContainingType != null
+                                // We skip top level statements since they cannot have fields. Other declared types are analyzed separately.
+                                || IsTopLevelProgram(namedType)
+                                || !IsType(namedType)
+                                || namedType.DerivesFromAny(IgnoredTypes))
                             {
                                 return;
                             }
@@ -137,8 +132,24 @@ namespace SonarAnalyzer.Rules.CSharp
                         });
                 });
 
-        private static IEnumerable<Diagnostic> GetDiagnosticsForUnusedPrivateMembers(CSharpSymbolUsageCollector usageCollector, ISet<ISymbol> removableSymbols, string accessibility,
-            BidirectionalDictionary<ISymbol, SyntaxNode> fieldLikeSymbols)
+        private static bool IsTopLevelProgram(ISymbol symbol) =>
+            // If the symbol is named `Program` and the containing namespace is the global one, we will assume that we are analyzing a top level file.
+            // We cannot tell for sure, but in this case we prefer to have FNs instead of FPs, considering that there is a low chance to have
+            // a program class in the global namespace.
+            symbol.Name == "Program"
+            && symbol.ContainingNamespace.IsGlobalNamespace;
+
+        private static bool IsType(ITypeSymbol namedType) =>
+            namedType.TypeKind == TypeKind.Struct
+            || namedType.TypeKind == TypeKind.Class
+            || namedType.TypeKind == TypeKind.Delegate
+            || namedType.TypeKind == TypeKind.Enum
+            || namedType.TypeKind == TypeKind.Interface;
+
+        private static IEnumerable<Diagnostic> GetDiagnosticsForUnusedPrivateMembers(CSharpSymbolUsageCollector usageCollector,
+                                                                                     ISet<ISymbol> removableSymbols,
+                                                                                     string accessibility,
+                                                                                     BidirectionalDictionary<ISymbol, SyntaxNode> fieldLikeSymbols)
         {
             var unusedSymbols = GetUnusedSymbols(usageCollector, removableSymbols);
 
@@ -181,7 +192,9 @@ namespace SonarAnalyzer.Rules.CSharp
         private static string GetFieldAccessibilityForMessage(ISymbol symbol) =>
             symbol.DeclaredAccessibility == Accessibility.Private ? "private" : "private class";
 
-        private static IEnumerable<Diagnostic> GetDiagnosticsForMembers(ICollection<ISymbol> unusedSymbols, string accessibility, BidirectionalDictionary<ISymbol, SyntaxNode> fieldLikeSymbols)
+        private static IEnumerable<Diagnostic> GetDiagnosticsForMembers(ICollection<ISymbol> unusedSymbols,
+                                                                        string accessibility,
+                                                                        BidirectionalDictionary<ISymbol, SyntaxNode> fieldLikeSymbols)
         {
             var diagnostics = new List<Diagnostic>();
             var alreadyReportedFieldLikeSymbols = new HashSet<ISymbol>();

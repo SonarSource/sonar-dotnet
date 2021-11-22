@@ -203,7 +203,11 @@ namespace EntityFrameworkMigrations
         [TestMethod]
         public void UnusedPrivateMember_FromCSharp9() =>
             Verifier.VerifyAnalyzerFromCSharp9Library(
-                @"TestCases\UnusedPrivateMember.CSharp9.cs",
+                new[]
+                {
+                    @"TestCases\UnusedPrivateMember.CSharp9.cs",
+                    @"TestCases\UnusedPrivateMember.CSharp9.Second.cs"
+                },
                 new UnusedPrivateMember());
 
         [TestMethod]
