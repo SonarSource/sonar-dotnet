@@ -73,6 +73,9 @@ namespace Tests.Diagnostics
             result = localVariable = 42 == 0;
             result = 0 == localVariable = 42;
 
+            result = localVariable = 42 == 0;
+            result = 0 == localVariable = 42;
+
 
             var nonEnumerable = new FooMethod();
             result = nonEnumerable.Count() >= 0;
