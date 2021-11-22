@@ -47,9 +47,9 @@ namespace SonarAnalyzer.Helpers.Facade
         public abstract string NodeStringTextValue(SyntaxNode node);
 
         protected static T Cast<T>(SyntaxNode node) where T : SyntaxNode =>
-            node as T ?? throw Unexpected(node);
+            node as T ?? throw new InvalidCastException($"A {node.GetType().Name} node can not be cast to a {typeof(T).Name} node.");
 
-        protected static Exception Unexpected(SyntaxNode node) =>
-            new InvalidOperationException($"Unexpected node: {node.GetType().Name}");
+        protected static Exception InvalidOperation(SyntaxNode node, string method) =>
+            new InvalidOperationException($"{method} can not be performed on a {node.GetType().Name} node.");
     }
 }

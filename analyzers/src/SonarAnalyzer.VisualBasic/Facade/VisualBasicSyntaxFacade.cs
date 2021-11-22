@@ -72,12 +72,13 @@ namespace SonarAnalyzer.Helpers.Facade
                 InvocationExpressionSyntax invocation => invocation.Expression,
                 SyncLockStatementSyntax syncLock => syncLock.Expression,
                 null => null,
-                _ => throw Unexpected(node)
+                _ => throw InvalidOperation(node, nameof(NodeExpression)),
             };
 
         public override SyntaxToken? NodeIdentifier(SyntaxNode node) =>
             RemoveParentheses(node) switch
             {
+                AssignmentStatementSyntax assignment => NodeIdentifier(assignment.Left),
                 EnumStatementSyntax enumStatement => enumStatement.Identifier,
                 EnumMemberDeclarationSyntax enumMember => enumMember.Identifier,
                 InvocationExpressionSyntax invocation => NodeIdentifier(invocation.Expression),
@@ -88,7 +89,7 @@ namespace SonarAnalyzer.Helpers.Facade
                 SimpleArgumentSyntax simpleArgument => simpleArgument.NameColonEquals?.Name.Identifier,
                 SimpleNameSyntax simpleName => simpleName.Identifier,
                 null => null,
-                _ => throw Unexpected(node)
+                _ => throw InvalidOperation(node, nameof(NodeIdentifier)),
             };
 
         public override string NodeStringTextValue(SyntaxNode node) =>
