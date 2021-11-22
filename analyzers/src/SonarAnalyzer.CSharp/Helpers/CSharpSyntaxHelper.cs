@@ -25,6 +25,7 @@ using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
+using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.Extensions;
 using StyleCop.Analyzers.Lightup;
 
@@ -384,5 +385,12 @@ namespace SonarAnalyzer.Helpers
                 ? expressions
                 : ImmutableArray<SyntaxNode>.Empty;
         }
+
+        /// <summary>
+        /// Checks if the SyntaxNode node is a top level statement.
+        /// </summary>
+        public static bool IsInTopLevelStatement(this SyntaxNode node, SyntaxNodeAnalysisContext context) =>
+            context.SemanticModel.GetSymbolInfo(node).Symbol.ContainingSymbol is IMethodSymbol methodSymbol
+            && methodSymbol.Name.Equals("<Main>$", StringComparison.Ordinal);
     }
 }

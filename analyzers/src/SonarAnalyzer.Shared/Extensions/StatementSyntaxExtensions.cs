@@ -25,6 +25,8 @@ using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
+using Microsoft.CodeAnalysis.Diagnostics;
+using SonarAnalyzer.Helpers;
 #else
 using Microsoft.CodeAnalysis.VisualBasic.Syntax;
 #endif
@@ -50,35 +52,28 @@ namespace SonarAnalyzer.Extensions
         /// <summary>
         /// Returns the statement before the statement given as input.
         /// </summary>
-        public static StatementSyntax GetPrecedingStatement(this StatementSyntax currentStatement)
+        public static StatementSyntax GetPrecedingStatement(this StatementSyntax currentStatement, SyntaxNodeAnalysisContext context)
         {
-            var previousStatement = currentStatement.GetPreviousStatement();
-            if (previousStatement == null && currentStatement.SyntaxTree.HasCompilationUnitRoot) // this means that we might be in a top-level-statement
+            if (currentStatement.IsInTopLevelStatement(context))
             {
-                previousStatement = currentStatement.GetPreviousStatement(currentStatement.SyntaxTree.GetCompilationUnitRoot());
+                var childrenOfParentNode = currentStatement.SyntaxTree.GetCompilationUnitRoot()
+                                                                   .ChildNodes()
+                                                                   .Select(x => x.ChildNodes()
+                                                                                 .FirstOrDefault())
+                                                                   .Where(x => x != null);
+                return currentStatement.GetPrecedingStatement(childrenOfParentNode);
             }
-            return previousStatement;
+            else
+            {
+                var childrenOfParentNode = currentStatement.Parent.ChildNodes();
+                return currentStatement.GetPrecedingStatement(childrenOfParentNode);
+            }
         }
 
-        private static StatementSyntax GetPreviousStatement(this StatementSyntax currentStatement) =>
-            currentStatement.Parent
-                            .ChildNodes()
-                            .OfType<StatementSyntax>()
-                            .TakeWhile(x => x != currentStatement)
-                            .LastOrDefault();
-
-        /// <summary>
-        /// Returns the statement before the statement given as input, in top level statements.
-        /// </summary>
-        private static StatementSyntax GetPreviousStatement(this StatementSyntax currentStatement, CompilationUnitSyntax rootNode) =>
-            // The global statements, included in the top-level-statements, are siblings under one parent; the compilation Unit.
-            rootNode.ChildNodes()
-                    .Select(x => x.ChildNodes()
-                                  .FirstOrDefault())
-                    .Where(x => x != null)
-                    .OfType<StatementSyntax>()
-                    .TakeWhile(x => x != currentStatement)
-                    .LastOrDefault();
+        private static StatementSyntax GetPrecedingStatement(this StatementSyntax currentStatement, IEnumerable<SyntaxNode> parentNodeChildren) =>
+            parentNodeChildren.OfType<StatementSyntax>()
+                              .TakeWhile(x => x != currentStatement)
+                              .LastOrDefault();
 #endif
     }
 }
