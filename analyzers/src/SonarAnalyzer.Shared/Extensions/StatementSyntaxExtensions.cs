@@ -61,7 +61,7 @@ namespace SonarAnalyzer.Extensions
                 var childrenOfParentNode = currentStatement.SyntaxTree.GetCompilationUnitRoot()
                                                                       .ChildNodes()
                                                                       .Select(x => x.ChildNodes()
-                                                                                     .FirstOrDefault())
+                                                                                    .FirstOrDefault())
                                                                       .Where(x => x != null);
                 return currentStatement.GetPrecedingStatement(childrenOfParentNode);
             }
