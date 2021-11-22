@@ -24,6 +24,7 @@ using Microsoft.CodeAnalysis.VisualBasic;
 using Microsoft.CodeAnalysis.VisualBasic.Syntax;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.Helpers;
+using SonarAnalyzer.UnitTest.MetadataReferences;
 using CodeAnalysisAccessibility = Microsoft.CodeAnalysis.Accessibility; // This is needed because there is an Accessibility namespace in the windows forms binaries.
 
 namespace SonarAnalyzer.UnitTest.Helpers
@@ -121,7 +122,7 @@ End Class";
 
         private static VisualBasicRemovableDeclarationCollector CreateCollector(string code)
         {
-            var (tree, semanticModel) = TestHelper.Compile(code, false);
+            var (tree, semanticModel) = TestHelper.Compile(code, false, MetadataReferenceFacade.SystemComponentModelPrimitives.ToArray());
             var type = tree.GetRoot().DescendantNodes().OfType<ClassBlockSyntax>().Single(x => x.ClassStatement.Identifier.ValueText == "Sample");
             return new VisualBasicRemovableDeclarationCollector(semanticModel.GetDeclaredSymbol(type), semanticModel.Compilation);
         }

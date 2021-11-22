@@ -56,6 +56,8 @@ public class Sample
             const string code = @"
 public class Sample
 {
+    int field;
+
     public void Method(bool condition)
     {
         field = 0;

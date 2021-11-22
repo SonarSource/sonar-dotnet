@@ -51,7 +51,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework
         {
             CompilationOptions compilationOptions = language == AnalyzerLanguage.CSharp
                 ? new CSharpCompilationOptions(OutputKind.DynamicallyLinkedLibrary)
-                : new VisualBasicCompilationOptions(OutputKind.DynamicallyLinkedLibrary);
+                : new VisualBasicCompilationOptions(OutputKind.DynamicallyLinkedLibrary).WithGlobalImports(SolutionBuilder.DefaultGlobalImportsVisualBasic);
 
             compilation = SolutionBuilder
                 .Create()
