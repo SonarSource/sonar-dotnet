@@ -26,6 +26,7 @@ using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
+using StyleCop.Analyzers.Lightup;
 
 namespace SonarAnalyzer.Rules.CSharp
 {
@@ -38,25 +39,37 @@ namespace SonarAnalyzer.Rules.CSharp
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
         protected override GeneratedCodeRecognizer GeneratedCodeRecognizer { get; } = CSharpGeneratedCodeRecognizer.Instance;
 
-        protected override SyntaxKind[] SyntaxKinds { get; } = new []
-        {
-            SyntaxKind.MethodDeclaration
-        };
+        protected override SyntaxKind[] SyntaxKinds { get; } =
+            {
+                SyntaxKind.MethodDeclaration,
+                SyntaxKindEx.LocalFunctionStatement
+            };
 
         protected override void CheckMethod(SyntaxNodeAnalysisContext context, bool isTestProject)
         {
-            var methodNode = (MethodDeclarationSyntax)context.Node;
-
-            // No need to check for ExpressionBody as arrowed methods can't be empty
-            if (methodNode.Body != null
-                && IsEmpty(methodNode.Body)
-                && !ShouldMethodBeExcluded(methodNode, context.SemanticModel, isTestProject))
+            if (LocalFunctionStatementSyntaxWrapper.IsInstance(context.Node))
             {
-                context.ReportIssue(Diagnostic.Create(Rule, methodNode.Identifier.GetLocation()));
+                var wrapper = (LocalFunctionStatementSyntaxWrapper)context.Node;
+                if (wrapper.Body != null && IsEmpty(wrapper.Body))
+                {
+                    context.ReportIssue(Diagnostic.Create(Rule, wrapper.Identifier.GetLocation()));
+                }
+            }
+            else
+            {
+                var methodDeclaration = (MethodDeclarationSyntax)context.Node;
+
+                // No need to check for ExpressionBody as arrowed methods can't be empty
+                if (methodDeclaration.Body != null
+                    && IsEmpty(methodDeclaration.Body)
+                    && !ShouldMethodBeExcluded(methodDeclaration, context.SemanticModel, isTestProject))
+                {
+                    context.ReportIssue(Diagnostic.Create(Rule, methodDeclaration.Identifier.GetLocation()));
+                }
             }
         }
 
-        private static bool ShouldMethodBeExcluded(MethodDeclarationSyntax methodNode, SemanticModel semanticModel, bool isTestProject)
+        private static bool ShouldMethodBeExcluded(BaseMethodDeclarationSyntax methodNode, SemanticModel semanticModel, bool isTestProject)
         {
             if (methodNode.Modifiers.Any(SyntaxKind.VirtualKeyword))
             {
