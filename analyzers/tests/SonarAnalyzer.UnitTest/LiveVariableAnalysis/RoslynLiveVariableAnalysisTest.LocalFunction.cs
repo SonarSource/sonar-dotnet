@@ -117,9 +117,9 @@ int LocalFunction() => variable;";
         public void LocalFunctionInvocation_FunctionDeclaredBeforeCode_LiveIn()
         {
             var code = @"
+var variable = 42;
 int LocalFunction() => variable;
 
-var variable = 42;
 if (boolParameter)
     return;
 LocalFunction();";
@@ -204,7 +204,7 @@ int LocalFunction(int cnt) => cnt + 2;";
             var code = @"
 LocalFunction();
 
-int LocalFunction()
+void LocalFunction()
 {
     var nested = 42;
     Func<int> f = () => nested;
@@ -275,7 +275,7 @@ int LocalFunction()
 int LocalFunction()
 {
     var variable = 42;
-    if (boolCondition)
+    if (boolParameter)
         return 0;
     int First() => Second();
     int Second() => variable;
@@ -283,7 +283,7 @@ int LocalFunction()
 }";
             var context = CreateContextCS(code, "LocalFunction");
             context.ValidateEntry();
-            context.Validate("boolCondition", new LiveOut("variable"));
+            context.Validate("boolParameter", new LiveOut("variable"));
             context.Validate("First()", new LiveIn("variable"));
         }
 
@@ -334,7 +334,7 @@ int LocalFunction()
     {
         Method(usedInFinally);
     }
-    return;
+    return 42;
     Method(usedInUnreachable);
 }";
 
