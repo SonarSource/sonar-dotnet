@@ -50,7 +50,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework
         public SnippetCompiler(string code, bool ignoreErrors, AnalyzerLanguage language, IEnumerable<MetadataReference> additionalReferences = null)
         {
             CompilationOptions compilationOptions = language == AnalyzerLanguage.CSharp
-                ? new CSharpCompilationOptions(OutputKind.DynamicallyLinkedLibrary)
+                ? new CSharpCompilationOptions(OutputKind.DynamicallyLinkedLibrary).WithAllowUnsafe(true)
                 : new VisualBasicCompilationOptions(OutputKind.DynamicallyLinkedLibrary).WithGlobalImports(SolutionBuilder.DefaultGlobalImportsVisualBasic);
 
             compilation = SolutionBuilder
