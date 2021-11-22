@@ -40,7 +40,10 @@ namespace Test
         public void DoSomething(){}
         public void IfMethod(int j)
         {
-            if (j == 5){
+            if (j == 4){
+                DoSomething();
+            }
+            else if (j == 5){
                 DoSomething();
             }
             else{
@@ -151,7 +154,7 @@ namespace Test
             var statements = switchMethod.Body.Statements.ToList();
 
             var snippet = new TestFramework.SnippetCompiler(Source);
-            var statementContainingSymbol = snippet.SemanticModel.GetSymbolInfo(statements[1].Parent).Symbol;
+            var statementContainingSymbol = snippet.SemanticModel.GetSymbolInfo(statements[1].Parent.Parent).Symbol;
 
             statements[1].GetPrecedingStatement(statementContainingSymbol).Should().BeEquivalentTo(statements[0]);
             statements[0].GetPrecedingStatement(statementContainingSymbol).Should().Be(null);
