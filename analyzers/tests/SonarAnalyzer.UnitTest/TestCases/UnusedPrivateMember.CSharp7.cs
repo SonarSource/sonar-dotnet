@@ -159,4 +159,23 @@ namespace Tests.Diagnostics
         // That's invalid syntax, but it is still empty ctor and we should not raise for it, even if it is not used
         public EmptyCtor() => // Error [CS1525,CS1002]
     }
+
+    public class WithEnums
+    {
+        private enum X // Noncompliant
+        {
+            A
+        }
+
+        public void UseEnum()
+        {
+            var b = Y.B;
+        }
+
+        private enum Y
+        {
+            A,
+            B
+        }
+    }
 }
