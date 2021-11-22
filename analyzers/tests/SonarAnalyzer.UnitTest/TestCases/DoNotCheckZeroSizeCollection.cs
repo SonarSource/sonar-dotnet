@@ -70,8 +70,9 @@ namespace Tests.Diagnostics
             //       ^^^^^^^^^^^^^^^^^^^^^^^^^^^
             
             result = result.ToString() == "Not integer";            
-            result = (localVariable = 42) == 0;
-            result = 0 == (localVariable = 42);
+            result = (localVariable = 42) != -1);
+
+            if ((localVariable = 42) != -1) { }
 
             var nonEnumerable = new FooMethod();
             result = nonEnumerable.Count() >= 0;
