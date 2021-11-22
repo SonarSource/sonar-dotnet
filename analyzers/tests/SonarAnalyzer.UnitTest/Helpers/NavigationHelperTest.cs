@@ -70,8 +70,6 @@ namespace Test
         private MethodDeclarationSyntax ifMethod;
         private MethodDeclarationSyntax switchMethod;
 
-        private SyntaxTree syntaxTreeTopLevelStatement;
-
         [TestInitialize]
         public void TestSetup()
         {
