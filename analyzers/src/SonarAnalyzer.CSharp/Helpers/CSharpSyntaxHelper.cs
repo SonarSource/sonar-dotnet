@@ -385,12 +385,5 @@ namespace SonarAnalyzer.Helpers
                 ? expressions
                 : ImmutableArray<SyntaxNode>.Empty;
         }
-
-        /// <summary>
-        /// Checks if the SyntaxNode node is a top level statement.
-        /// </summary>
-        public static bool IsInTopLevelStatement(this SyntaxNode node, SyntaxNodeAnalysisContext context) =>
-            context.ContainingSymbol is IMethodSymbol methodSymbol
-            && methodSymbol.Name.Equals("<Main>$", StringComparison.Ordinal);
     }
 }

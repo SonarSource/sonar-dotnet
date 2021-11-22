@@ -18,6 +18,7 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System;
 using System.Linq;
 using Microsoft.CodeAnalysis;
 
@@ -33,5 +34,9 @@ namespace SonarAnalyzer.Helpers
 
         public static bool IsAutoProperty(this ISymbol symbol) =>
             symbol.Kind == SymbolKind.Property && symbol.ContainingType.GetMembers().OfType<IFieldSymbol>().Any(x => symbol.Equals(x.AssociatedSymbol));
+
+        public static bool IsTopLevelStatementEntryPoint(this ISymbol containingSymbol) =>
+            containingSymbol is IMethodSymbol methodSymbol
+            && methodSymbol.Name.Equals("<Main>$", StringComparison.Ordinal);
     }
 }

@@ -144,6 +144,16 @@ class Apple : Fruit
     public string Taste;
     public string Color;
     public void Deconstruct(out string x, out string y) => (x, y) = (Taste, Color);
+
+    void FunctionInClassAndTopLevelStatement(Apple a)
+    {
+        if (a is ("Sweet", "Red"))
+        {
+        }
+        if (a is ("Sweet", "Red")) // Noncompliant
+        {
+        }
+    }
 }
 
 class Orange : Fruit { }

@@ -27,6 +27,7 @@ using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.Helpers;
+using StyleCop.Analyzers.Lightup;
 #else
 using Microsoft.CodeAnalysis.VisualBasic.Syntax;
 #endif
@@ -52,14 +53,15 @@ namespace SonarAnalyzer.Extensions
         /// <summary>
         /// Returns the statement before the statement given as input.
         /// </summary>
-        public static StatementSyntax GetPrecedingStatement(this StatementSyntax currentStatement, SyntaxNodeAnalysisContext context)
+        public static StatementSyntax GetPrecedingStatement(this StatementSyntax currentStatement, ISymbol statementContainingSymbol)
         {
-            if (currentStatement.IsInTopLevelStatement(context))
+            if (statementContainingSymbol.IsTopLevelStatementEntryPoint()
+                && !currentStatement.Ancestors().Any(x => x.IsKind(SyntaxKindEx.LocalFunctionStatement)))
             {
                 var childrenOfParentNode = currentStatement.SyntaxTree.GetCompilationUnitRoot()
                                                                       .ChildNodes()
                                                                       .Select(x => x.ChildNodes()
-                                                                                    .FirstOrDefault())
+                                                                                     .FirstOrDefault())
                                                                       .Where(x => x != null);
                 return currentStatement.GetPrecedingStatement(childrenOfParentNode);
             }
