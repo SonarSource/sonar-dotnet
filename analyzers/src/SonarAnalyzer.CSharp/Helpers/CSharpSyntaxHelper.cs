@@ -390,7 +390,7 @@ namespace SonarAnalyzer.Helpers
         /// Checks if the SyntaxNode node is a top level statement.
         /// </summary>
         public static bool IsInTopLevelStatement(this SyntaxNode node, SyntaxNodeAnalysisContext context) =>
-            context.SemanticModel.GetSymbolInfo(node).Symbol.ContainingSymbol is IMethodSymbol methodSymbol
+            context.ContainingSymbol is IMethodSymbol methodSymbol
             && methodSymbol.Name.Equals("<Main>$", StringComparison.Ordinal);
     }
 }

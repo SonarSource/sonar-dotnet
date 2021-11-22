@@ -39,7 +39,7 @@ namespace SonarAnalyzer.UnitTest.Rules
 #if NET
         [TestMethod]
         public void DisposableNotDisposed_CSharp9() =>
-            Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\DisposableNotDisposed.CSharp9.cs",
+            Verifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\DisposableNotDisposed.CSharp9.cs",
                                                       new DisposableNotDisposed(),
                                                       MetadataReferenceFacade.SystemNetHttp);
 

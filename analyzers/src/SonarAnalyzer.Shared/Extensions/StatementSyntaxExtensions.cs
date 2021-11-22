@@ -57,10 +57,10 @@ namespace SonarAnalyzer.Extensions
             if (currentStatement.IsInTopLevelStatement(context))
             {
                 var childrenOfParentNode = currentStatement.SyntaxTree.GetCompilationUnitRoot()
-                                                                   .ChildNodes()
-                                                                   .Select(x => x.ChildNodes()
-                                                                                 .FirstOrDefault())
-                                                                   .Where(x => x != null);
+                                                                      .ChildNodes()
+                                                                      .Select(x => x.ChildNodes()
+                                                                                    .FirstOrDefault())
+                                                                      .Where(x => x != null);
                 return currentStatement.GetPrecedingStatement(childrenOfParentNode);
             }
             else
