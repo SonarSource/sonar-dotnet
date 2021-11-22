@@ -27,22 +27,23 @@ namespace SonarAnalyzer.Rules
     public abstract class EmptyMethodBase : SonarDiagnosticAnalyzer
     {
         internal const string DiagnosticId = "S1186";
-        protected const string MessageFormat = "Add a nested comment explaining why this method is empty, throw a " +
-            "'NotSupportedException' or complete the implementation.";
+        protected const string MessageFormat = "Add a nested comment explaining why this method is empty, throw a 'NotSupportedException' or complete the implementation.";
     }
 
     public abstract class EmptyMethodBase<TLanguageKindEnum> : EmptyMethodBase
         where TLanguageKindEnum : struct
     {
         protected override void Initialize(SonarAnalysisContext context) =>
-            context.RegisterSyntaxNodeAction(c =>
-            {
-                if (DiagnosticAnalyzerContextHelper.ShouldAnalyze(context, GeneratedCodeRecognizer, c.GetSyntaxTree(), c.Compilation, c.Options))
+            context.RegisterSyntaxNodeAction(
+                c =>
                 {
-                    var isTestProject = context.IsTestProject(c.Compilation, c.Options);
-                    CheckMethod(c, isTestProject);
-                }
-            }, SyntaxKinds.ToArray());
+                    if (DiagnosticAnalyzerContextHelper.ShouldAnalyze(context, GeneratedCodeRecognizer, c.GetSyntaxTree(), c.Compilation, c.Options))
+                    {
+                        var isTestProject = context.IsTestProject(c.Compilation, c.Options);
+                        CheckMethod(c, isTestProject);
+                    }
+                },
+                SyntaxKinds.ToArray());
 
         protected abstract GeneratedCodeRecognizer GeneratedCodeRecognizer { get; }
         protected abstract TLanguageKindEnum[] SyntaxKinds { get; }

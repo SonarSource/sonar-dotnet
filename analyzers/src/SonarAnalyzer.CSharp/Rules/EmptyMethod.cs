@@ -33,11 +33,10 @@ namespace SonarAnalyzer.Rules.CSharp
     [Rule(DiagnosticId)]
     public sealed class EmptyMethod : EmptyMethodBase<SyntaxKind>
     {
-        private static readonly DiagnosticDescriptor rule =
-            DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(rule);
-        protected override GeneratedCodeRecognizer GeneratedCodeRecognizer { get; } =
-            CSharpGeneratedCodeRecognizer.Instance;
+        private static readonly DiagnosticDescriptor Rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
+
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
+        protected override GeneratedCodeRecognizer GeneratedCodeRecognizer { get; } = CSharpGeneratedCodeRecognizer.Instance;
 
         protected override SyntaxKind[] SyntaxKinds { get; } = new []
         {
@@ -49,11 +48,11 @@ namespace SonarAnalyzer.Rules.CSharp
             var methodNode = (MethodDeclarationSyntax)context.Node;
 
             // No need to check for ExpressionBody as arrowed methods can't be empty
-            if (methodNode.Body != null &&
-                IsEmpty(methodNode.Body) &&
-                !ShouldMethodBeExcluded(methodNode, context.SemanticModel, isTestProject))
+            if (methodNode.Body != null
+                && IsEmpty(methodNode.Body)
+                && !ShouldMethodBeExcluded(methodNode, context.SemanticModel, isTestProject))
             {
-                context.ReportIssue(Diagnostic.Create(rule, methodNode.Identifier.GetLocation()));
+                context.ReportIssue(Diagnostic.Create(Rule, methodNode.Identifier.GetLocation()));
             }
         }
 
@@ -65,10 +64,7 @@ namespace SonarAnalyzer.Rules.CSharp
             }
 
             var methodSymbol = semanticModel.GetDeclaredSymbol(methodNode);
-            if (methodSymbol != null &&
-                methodSymbol.IsOverride &&
-                methodSymbol.OverriddenMethod != null &&
-                methodSymbol.OverriddenMethod.IsAbstract)
+            if (methodSymbol is { IsOverride: true, OverriddenMethod: { IsAbstract: true } })
             {
                 return true;
             }
@@ -76,21 +72,15 @@ namespace SonarAnalyzer.Rules.CSharp
             return methodNode.Modifiers.Any(SyntaxKind.OverrideKeyword) && isTestProject;
         }
 
-        private static bool IsEmpty(BlockSyntax node)
-        {
-            return !node.Statements.Any() && !ContainsComment(node);
-        }
+        private static bool IsEmpty(BlockSyntax node) =>
+            !node.Statements.Any() && !ContainsComment(node);
 
-        private static bool ContainsComment(BlockSyntax node)
-        {
-            return ContainsComment(node.OpenBraceToken.TrailingTrivia) ||
-                ContainsComment(node.CloseBraceToken.LeadingTrivia);
-        }
+        private static bool ContainsComment(BlockSyntax node) =>
+            ContainsComment(node.OpenBraceToken.TrailingTrivia)
+            || ContainsComment(node.CloseBraceToken.LeadingTrivia);
 
-        private static bool ContainsComment(SyntaxTriviaList trivias)
-        {
-            return trivias.Any(trivia => trivia.IsKind(SyntaxKind.SingleLineCommentTrivia) ||
-                trivia.IsKind(SyntaxKind.MultiLineCommentTrivia));
-        }
+        private static bool ContainsComment(SyntaxTriviaList triviaList) =>
+            triviaList.Any(trivia => trivia.IsKind(SyntaxKind.SingleLineCommentTrivia)
+                                     || trivia.IsKind(SyntaxKind.MultiLineCommentTrivia));
     }
 }
