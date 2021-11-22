@@ -24,6 +24,7 @@ using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using SonarAnalyzer.Extensions;
 using SonarAnalyzer.Helpers;
 
 namespace SonarAnalyzer.UnitTest.Helpers
@@ -37,14 +38,14 @@ namespace Test
     class TestClass
     {
         public void DoSomething(){}
-        public void IfMethod()
+        public void IfMethod(int j)
         {
-            if (true)
+            if (j == 5){
                 DoSomething();
-            else if (true)
+            }
+            else{
                 DoSomething();
-            else
-                DoSomething();
+            }
         }
 
         public void SwitchMethod()
@@ -66,30 +67,10 @@ namespace Test
     }
 }";
 
-private const string SourceTPL = @"
-var i = 5;
-var b = 1;
-if (i == 2) { b++;}
-if (i == 2) {}
-
-switch(i)
-{
-    case 3:
-        DoSomething();
-        break;
-    case 5:
-        DoSomething();
-        break;
-    default:
-        DoSomething();
-        break;
-}
-";
-
         private MethodDeclarationSyntax ifMethod;
         private MethodDeclarationSyntax switchMethod;
 
-        private SyntaxTree syntaxTreeTPL;
+        private SyntaxTree syntaxTreeTopLevelStatement;
 
         [TestInitialize]
         public void TestSetup()
@@ -104,8 +85,6 @@ switch(i)
                                      .DescendantNodes()
                                      .OfType<MethodDeclarationSyntax>()
                                      .First(m => m.Identifier.ValueText == "SwitchMethod");
-
-            syntaxTreeTPL = CSharpSyntaxTree.ParseText(SourceTPL);
         }
 
         [TestMethod]
@@ -167,28 +146,17 @@ switch(i)
 
             sections.FirstOrDefault().GetPrecedingSections().Should().BeEmpty();
         }
-#if CS
+
         [TestMethod]
         public void GetPrecedingStatement()
         {
             var statements = switchMethod.Body.Statements.ToList();
 
-            statements[1].GetPrecedingStatement().Should().BeEquivalentTo(statements[0]);
-            statements[0].GetPrecedingStatement().Should().Be(null);
-        }
+            var snippet = new TestFramework.SnippetCompiler(Source);
+            var statementContainingSymbol = snippet.SemanticModel.GetSymbolInfo(statements[1].Parent).Symbol;
 
-        [TestMethod]
-        public void GetPrecedingStatementInTopLevelStatements()
-        {
-            var globalStatements = syntaxTreeTPL.GetRoot()
-                                                .ChildNodes()
-                                                .Select(x => x.ChildNodes().FirstOrDefault())
-                                                .OfType<StatementSyntax>()
-                                                .ToArray();
-
-            globalStatements[3].GetPrecedingStatement().Should().BeEquivalentTo(globalStatements[2]);
-            globalStatements[0].GetPrecedingStatement().Should().Be(null);
+            statements[1].GetPrecedingStatement(statementContainingSymbol).Should().BeEquivalentTo(statements[0]);
+            statements[0].GetPrecedingStatement(statementContainingSymbol).Should().Be(null);
         }
-#endif
     }
 }
