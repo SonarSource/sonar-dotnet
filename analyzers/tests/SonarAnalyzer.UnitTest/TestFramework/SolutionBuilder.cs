@@ -33,7 +33,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework
     internal struct SolutionBuilder
     {
         // See https://github.com/dotnet/roslyn/issues/45510
-        public const string InitSnippet = @"namespace System.Runtime.CompilerServices { public class IsExternalInit { } }";
+        private const string InitSnippet = @"namespace System.Runtime.CompilerServices { public class IsExternalInit { } }";
         private const string GeneratedAssemblyName = "project";
 
         public static readonly IEnumerable<GlobalImport> DefaultGlobalImportsVisualBasic = GlobalImport.Parse(

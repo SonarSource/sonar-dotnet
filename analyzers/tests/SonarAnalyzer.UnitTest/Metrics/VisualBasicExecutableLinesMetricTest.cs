@@ -321,7 +321,7 @@ End Sub",
 
         private static void AssertLinesOfCode(string code, params int[] expectedExecutableLines)
         {
-            (var syntaxTree, var semanticModel) = TestHelper.CompileIgnoreErrors(code, false);
+            (var syntaxTree, var semanticModel) = TestHelper.Compile(code, false);
             Metrics.VisualBasic.VisualBasicExecutableLinesMetric.GetLineNumbers(syntaxTree, semanticModel).Should().BeEquivalentTo(expectedExecutableLines);
         }
     }
