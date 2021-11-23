@@ -36,8 +36,8 @@ namespace SonarAnalyzer.Rules.CSharp
     [Rule(DiagnosticId)]
     public sealed class MemberShouldBeStatic : SonarDiagnosticAnalyzer
     {
-        internal const string DiagnosticId = "S2325";
-        internal const string MessageFormat = "Make '{0}' a static {1}.";
+        private const string DiagnosticId = "S2325";
+        private const string MessageFormat = "Make '{0}' a static {1}.";
 
         private static readonly DiagnosticDescriptor Rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
@@ -82,20 +82,20 @@ namespace SonarAnalyzer.Rules.CSharp
                 SyntaxKind.MethodDeclaration);
         }
 
-        private IEnumerable<SyntaxNode> GetPropertyDescendants(PropertyDeclarationSyntax propertyDeclaration) =>
-            propertyDeclaration.ExpressionBody != null
-                ? propertyDeclaration.ExpressionBody.DescendantNodes()
-                : propertyDeclaration.AccessorList.Accessors.SelectMany(a => a.DescendantNodes());
+        private static IEnumerable<SyntaxNode> GetPropertyDescendants(PropertyDeclarationSyntax propertyDeclaration) =>
+            propertyDeclaration.ExpressionBody == null
+                ? propertyDeclaration.AccessorList.Accessors.SelectMany(a => a.DescendantNodes())
+                : propertyDeclaration.ExpressionBody.DescendantNodes();
 
-        private IEnumerable<SyntaxNode> GetMethodDescendants(MethodDeclarationSyntax methodDeclaration) =>
-            methodDeclaration.ExpressionBody != null
-                ? methodDeclaration.ExpressionBody.DescendantNodes()
-                : methodDeclaration.Body?.DescendantNodes();
+        private static IEnumerable<SyntaxNode> GetMethodDescendants(MethodDeclarationSyntax methodDeclaration) =>
+            methodDeclaration.ExpressionBody == null
+                ? methodDeclaration.Body?.DescendantNodes()
+                : methodDeclaration.ExpressionBody.DescendantNodes();
 
         private static void CheckIssue<TDeclarationSyntax>(SyntaxNodeAnalysisContext context,
-            Func<TDeclarationSyntax, IEnumerable<SyntaxNode>> getDescendants,
-            Func<TDeclarationSyntax, SyntaxToken> getIdentifier,
-            string memberKind)
+                                                           Func<TDeclarationSyntax, IEnumerable<SyntaxNode>> getDescendants,
+                                                           Func<TDeclarationSyntax, SyntaxToken> getIdentifier,
+                                                           string memberKind)
             where TDeclarationSyntax : MemberDeclarationSyntax
         {
             var declaration = (TDeclarationSyntax)context.Node;
@@ -143,27 +143,25 @@ namespace SonarAnalyzer.Rules.CSharp
             !attribute.AttributeClass.Is(KnownType.System_Diagnostics_CodeAnalysis_SuppressMessageAttribute);
 
         private static bool IsEmptyMethod(MemberDeclarationSyntax node) =>
-            node is MethodDeclarationSyntax methodDeclarationSyntax
-            && methodDeclarationSyntax.Body?.Statements.Count == 0
-            && methodDeclarationSyntax.ExpressionBody == null;
+            node is MethodDeclarationSyntax { Body: { Statements: { Count: 0 } }, ExpressionBody: null };
 
         private static bool IsNewMethod(ISymbol symbol) =>
             symbol.DeclaringSyntaxReferences
-                .Select(r => r.GetSyntax())
-                .OfType<MethodDeclarationSyntax>()
-                .Any(s => s.Modifiers.Any(SyntaxKind.NewKeyword));
+                  .Select(r => r.GetSyntax())
+                  .OfType<MethodDeclarationSyntax>()
+                  .Any(s => s.Modifiers.Any(SyntaxKind.NewKeyword));
 
         private static bool IsNewProperty(ISymbol symbol) =>
             symbol.DeclaringSyntaxReferences
-                .Select(r => r.GetSyntax())
-                .OfType<PropertyDeclarationSyntax>()
-                .Any(s => s.Modifiers.Any(SyntaxKind.NewKeyword));
+                  .Select(r => r.GetSyntax())
+                  .OfType<PropertyDeclarationSyntax>()
+                  .Any(s => s.Modifiers.Any(SyntaxKind.NewKeyword));
 
         private static bool IsAutoProperty(ISymbol symbol) =>
             symbol.DeclaringSyntaxReferences
-                .Select(r => r.GetSyntax())
-                .OfType<PropertyDeclarationSyntax>()
-                .Any(s => s.AccessorList != null && s.AccessorList.Accessors.All(a => a.Body == null && a.ExpressionBody() == null));
+                  .Select(r => r.GetSyntax())
+                  .OfType<PropertyDeclarationSyntax>()
+                  .Any(s => s.AccessorList != null && s.AccessorList.Accessors.All(a => a.Body == null && a.ExpressionBody() == null));
 
         private static bool IsPublicControllerMethod(ISymbol symbol) =>
             symbol is IMethodSymbol methodSymbol
@@ -172,9 +170,9 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private static bool HasInstanceReferences(IEnumerable<SyntaxNode> nodes, SemanticModel semanticModel) =>
             nodes.OfType<ExpressionSyntax>()
-                .Where(IsLeftmostIdentifierName)
-                .Where(n => !CSharpSyntaxHelper.IsInNameOfArgument(n, semanticModel))
-                .Any(n => IsInstanceMember(n, semanticModel));
+                 .Where(IsLeftmostIdentifierName)
+                 .Where(n => !n.IsInNameOfArgument(semanticModel))
+                 .Any(n => IsInstanceMember(n, semanticModel));
 
         private static bool IsLeftmostIdentifierName(ExpressionSyntax node)
         {
@@ -203,9 +201,9 @@ namespace SonarAnalyzer.Rules.CSharp
             {
                 return true;
             }
-            return semanticModel.GetSymbolInfo(node).Symbol is { } symbol
-                && !symbol.IsStatic
-                && InstanceSymbolKinds.Contains(symbol.Kind);
+
+            return semanticModel.GetSymbolInfo(node).Symbol is { IsStatic: false } symbol
+                   && InstanceSymbolKinds.Contains(symbol.Kind);
         }
     }
 }
