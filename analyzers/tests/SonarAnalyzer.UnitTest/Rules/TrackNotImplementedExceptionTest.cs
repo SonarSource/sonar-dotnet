@@ -33,12 +33,8 @@ namespace SonarAnalyzer.UnitTest.Rules
             Verifier.VerifyAnalyzer(
                 @"TestCases\TrackNotImplementedException.cs",
                 new TrackNotImplementedException(),
-#if NETFRAMEWORK
                 ParseOptionsHelper.FromCSharp8,
-                NuGetMetadataReference.NETStandardV2_1_0);
-#else
-                ParseOptionsHelper.FromCSharp8);
-#endif
+                NuGetMetadataReference.NETStandard21);
 
 #if NET
         [TestMethod]

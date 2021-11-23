@@ -38,11 +38,7 @@ namespace SonarAnalyzer.UnitTest.Rules
             Verifier.VerifyAnalyzer(@"TestCases\SymbolicExecution\Sonar\PublicMethodArgumentsShouldBeCheckedForNull.cs",
                 new SymbolicExecutionRunner(new PublicMethodArgumentsShouldBeCheckedForNull()),
                 ParseOptionsHelper.FromCSharp8,
-#if NETFRAMEWORK
-                TestHelper.ProjectTypeReference(projectType).Concat(NuGetMetadataReference.NETStandardV2_1_0));
-#else
-                TestHelper.ProjectTypeReference(projectType));
-#endif
+                TestHelper.ProjectTypeReference(projectType).Concat(MetadataReferenceFacade.NETStandard21));
 
 #if NET
         [TestMethod]

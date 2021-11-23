@@ -193,11 +193,7 @@ namespace EntityFrameworkMigrations
                 @"TestCases\UnusedPrivateMember.CSharp8.cs",
                 new UnusedPrivateMember(),
                 ParseOptionsHelper.FromCSharp8,
-#if NETFRAMEWORK
-                NuGetMetadataReference.NETStandardV2_1_0.Concat(NuGetMetadataReference.MicrosoftExtensionsDependencyInjectionAbstractions(Constants.DotNetCore220Version)));
-#else
-                new[] {CoreMetadataReference.MicrosoftExtensionsDependencyInjectionAbstractions});
-#endif
+                MetadataReferenceFacade.NETStandard21.Concat(MetadataReferenceFacade.MicrosoftExtensionsDependencyInjectionAbstractions));
 
 #if NET
         [TestMethod]

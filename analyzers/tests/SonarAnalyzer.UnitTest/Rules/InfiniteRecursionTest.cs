@@ -34,23 +34,15 @@ namespace SonarAnalyzer.UnitTest.Rules
             Verifier.VerifyAnalyzer(
                 @"TestCases\InfiniteRecursion.SonarCfg.cs",
                 new InfiniteRecursion(AnalyzerConfiguration.AlwaysEnabledWithSonarCfg),
-#if NETFRAMEWORK
                 ParseOptionsHelper.OnlyCSharp7,
-                NuGetMetadataReference.NETStandardV2_1_0);
-#else
-                ParseOptionsHelper.OnlyCSharp7);
-#endif
+                MetadataReferenceFacade.NETStandard21);
 
         [TestMethod]
         public void InfiniteRecursion_RoslynCfg() =>
             Verifier.VerifyAnalyzer(
                 @"TestCases\InfiniteRecursion.RoslynCfg.cs",
                 new InfiniteRecursion(),
-#if NETFRAMEWORK
                 ParseOptionsHelper.FromCSharp8,
-                NuGetMetadataReference.NETStandardV2_1_0);
-#else
-                ParseOptionsHelper.FromCSharp8);
-#endif
+                MetadataReferenceFacade.NETStandard21);
     }
 }

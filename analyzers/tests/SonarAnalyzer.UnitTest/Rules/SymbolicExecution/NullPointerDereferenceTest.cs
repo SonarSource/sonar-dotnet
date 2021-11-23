@@ -84,12 +84,8 @@ public static class Utils
         public void NullPointerDereference_CSharp8() =>
             Verifier.VerifyAnalyzer(@"TestCases\SymbolicExecution\Sonar\NullPointerDereference.CSharp8.cs",
                 GetAnalyzer(),
-#if NETFRAMEWORK
                 ParseOptionsHelper.FromCSharp8,
-                NuGetMetadataReference.NETStandardV2_1_0);
-#else
-                ParseOptionsHelper.FromCSharp8);
-#endif
+                MetadataReferenceFacade.NETStandard21);
 
 #if NET
         [TestMethod]

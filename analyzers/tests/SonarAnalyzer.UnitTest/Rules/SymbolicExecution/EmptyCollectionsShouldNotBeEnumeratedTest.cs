@@ -23,9 +23,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.Helpers;
 using SonarAnalyzer.Rules.CSharp;
 using SonarAnalyzer.Rules.SymbolicExecution;
-#if NETFRAMEWORK
 using SonarAnalyzer.UnitTest.MetadataReferences;
-#endif
 using SonarAnalyzer.UnitTest.TestFramework;
 
 namespace SonarAnalyzer.UnitTest.Rules.SymbolicExecution
@@ -41,11 +39,7 @@ namespace SonarAnalyzer.UnitTest.Rules.SymbolicExecution
                 @"TestCases\SymbolicExecution\Sonar\EmptyCollectionsShouldNotBeEnumerated.cs",
                 new SymbolicExecutionRunner(new EmptyCollectionsShouldNotBeEnumerated()),
                 ParseOptionsHelper.FromCSharp8,
-#if NETFRAMEWORK
-                TestHelper.ProjectTypeReference(projectType).Concat(NuGetMetadataReference.NETStandardV2_1_0));
-#else
-                TestHelper.ProjectTypeReference(projectType));
-#endif
+                TestHelper.ProjectTypeReference(projectType).Concat(MetadataReferenceFacade.NETStandard21));
 
 #if NET
         [TestMethod]

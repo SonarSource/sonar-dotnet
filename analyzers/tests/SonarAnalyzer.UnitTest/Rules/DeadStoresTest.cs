@@ -33,23 +33,15 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void DeadStores_SonarCfg() =>
             Verifier.VerifyAnalyzer(@"TestCases\DeadStores.SonarCfg.cs",
                                     new DeadStores(AnalyzerConfiguration.AlwaysEnabledWithSonarCfg),
-#if NETFRAMEWORK
                                     ParseOptionsHelper.FromCSharp8,
-                                    NuGetMetadataReference.NETStandardV2_1_0);
-#else
-                                    ParseOptionsHelper.FromCSharp8);
-#endif
+                                    MetadataReferenceFacade.NETStandard21);
 
         [TestMethod]
         public void DeadStores_RoslynCfg() =>
             Verifier.VerifyAnalyzer(@"TestCases\DeadStores.RoslynCfg.cs",
                                     new DeadStores(),
-#if NETFRAMEWORK
                                     ParseOptionsHelper.FromCSharp8,
-                                    NuGetMetadataReference.NETStandardV2_1_0);
-#else
-                                    ParseOptionsHelper.FromCSharp8);
-#endif
+                                    MetadataReferenceFacade.NETStandard21);
 
 #if NET
         [TestMethod]

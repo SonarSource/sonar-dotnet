@@ -64,12 +64,8 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void MethodParameterUnused_CSharp8_CS() =>
             Verifier.VerifyAnalyzer(@"TestCases\MethodParameterUnused.CSharp8.cs",
                                     new CS.MethodParameterUnused(),
-#if NETFRAMEWORK
                                     ParseOptionsHelper.FromCSharp8,
-                                    NuGetMetadataReference.NETStandardV2_1_0);
-#else
-                                    ParseOptionsHelper.FromCSharp8);
-#endif
+                                    MetadataReferenceFacade.NETStandard21);
 
         [TestMethod]
         public void MethodParameterUnused_VB() =>

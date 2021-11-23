@@ -38,11 +38,7 @@ namespace SonarAnalyzer.UnitTest.Rules
             Verifier.VerifyAnalyzer(@"TestCases\SymbolicExecution\Sonar\ObjectsShouldNotBeDisposedMoreThanOnce.cs",
                 new SymbolicExecutionRunner(new ObjectsShouldNotBeDisposedMoreThanOnce()),
                 ParseOptionsHelper.FromCSharp8,
-#if NETFRAMEWORK
-                TestHelper.ProjectTypeReference(projectType).Concat(NuGetMetadataReference.NETStandardV2_1_0));
-#else
-                TestHelper.ProjectTypeReference(projectType));
-#endif
+                TestHelper.ProjectTypeReference(projectType).Concat(MetadataReferenceFacade.NETStandard21));
 
 #if NET
         [TestMethod]
