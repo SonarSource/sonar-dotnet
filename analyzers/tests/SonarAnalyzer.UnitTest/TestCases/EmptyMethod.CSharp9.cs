@@ -10,10 +10,17 @@ void WithComment()
     // because
 }
 
+void WithTrailingComment()
+{// because
+
+}
+
 void NotEmpty()
 {
     Console.WriteLine();
 }
+
+int Lambda(int x) => x;
 
 record EmptyMethod
 {
