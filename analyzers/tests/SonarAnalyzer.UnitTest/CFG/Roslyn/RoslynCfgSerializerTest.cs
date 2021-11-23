@@ -665,7 +665,7 @@ class Sample
         undefined();
     }
 }";
-            var dot = CfgSerializer.Serialize(TestHelper.CompileCfg(code));
+            var dot = CfgSerializer.Serialize(TestHelper.CompileCfg(code, ignoreErrors: true));
             dot.Should().BeIgnoringLineEndings(
 @"digraph ""RoslynCfg"" {
 cfg0_block0 [shape=record label=""{ENTRY #0}""]

@@ -59,9 +59,9 @@ namespace SonarAnalyzer.UnitTest
             return (compiled.SyntaxTree, compiled.SemanticModel);
         }
 
-        public static ControlFlowGraph CompileCfg(string snippet, bool isCSharp = true)
+        public static ControlFlowGraph CompileCfg(string snippet, bool isCSharp = true, bool ignoreErrors = false)
         {
-            var (tree, semanticModel) = Compile(snippet, isCSharp);
+            var (tree, semanticModel) = Compile(snippet, ignoreErrors, isCSharp);
             var method = tree.GetRoot().DescendantNodes().First(IsMethod);
             return ControlFlowGraph.Create(method, semanticModel);
 

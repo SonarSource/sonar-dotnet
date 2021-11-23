@@ -593,7 +593,7 @@ Method(field, s.Property);";
         [TestMethod]
         public void ProcessLocalReference_UndefinedSymbol_NotLiveIn_NotLiveOut()
         {
-            var code = @"Method(undefined);";
+            var code = @"Method(undefined); // Error CS0103 The name 'undefined' does not exist in the current context";
             CreateContextCS(code).ValidateAllEmpty();
         }
 
@@ -710,9 +710,9 @@ Method(intVariable);";
         public void ProcessSimpleAssignment_UndefinedSymbol_NotLiveIn_NotLiveOut()
         {
             var code = @"
-undefined = intParameter;
-if (undefined == 0)
-    Method(undefined);";
+undefined = intParameter;   // Error CS0103 The name 'undefined' does not exist in the current context
+if (undefined == 0)         // Error CS0103 The name 'undefined' does not exist in the current context
+    Method(undefined);      // Error CS0103 The name 'undefined' does not exist in the current context";
             var context = CreateContextCS(code);
             context.ValidateEntry(new LiveIn("intParameter"), new LiveOut("intParameter"));
             context.Validate("Method(undefined);");
@@ -928,7 +928,7 @@ End Class";
             public Context(string code, bool isCSharp, string localFunctionName = null)
             {
                 IMethodSymbol originalDeclaration;
-                Cfg = TestHelper.CompileCfg(code, isCSharp);
+                Cfg = TestHelper.CompileCfg(code, isCSharp, code.Contains("// Error CS"));
                 if (localFunctionName == null)
                 {
                     originalDeclaration = (IMethodSymbol)Cfg.OriginalOperation.SemanticModel.GetDeclaredSymbol(Cfg.OriginalOperation.Syntax);
