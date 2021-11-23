@@ -65,19 +65,6 @@ namespace Test
     }
 }";
 
-        private const string SourceTopLevelStatement = @"
-var a = 1;
-var b = 2;
-if (a == b)
-{
-    DoSomething();
-}
-if (a == 2)
-{
-    DoSomething();
-}
-void DoSomething() { }";
-
         private MethodDeclarationSyntax ifMethod;
         private MethodDeclarationSyntax switchMethod;
 
