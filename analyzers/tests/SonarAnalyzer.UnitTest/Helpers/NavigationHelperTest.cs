@@ -155,7 +155,6 @@ namespace Test
 
             var snippet = new TestFramework.SnippetCompiler(Source);
             var containingSymbol = snippet.GetMethodSymbol("TestClass.SwitchMethod");
-            var statementContainingSymbol = snippet.SemanticModel.GetSymbolInfo(statements[1].Parent.Parent).Symbol;
 
             statements[1].GetPrecedingStatement(containingSymbol).Should().BeEquivalentTo(statements[0]);
             statements[0].GetPrecedingStatement(containingSymbol).Should().Be(null);
