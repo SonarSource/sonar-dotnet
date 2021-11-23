@@ -38,19 +38,15 @@ namespace Test
     class TestClass
     {
         public void DoSomething(){}
-        public void IfMethod(int j)
+        public void IfMethod()
         {
-            if (j == 4){
+            if (true)
                 DoSomething();
-            }
-            else if (j == 5){
+            else if (true)
                 DoSomething();
-            }
-            else{
+            else
                 DoSomething();
-            }
         }
-
         public void SwitchMethod()
         {
             var i = 5;
@@ -92,7 +88,6 @@ void DoSomething() { }";
         public void TestSetup()
         {
             var syntaxTree = CSharpSyntaxTree.ParseText(Source);
-            syntaxTreeTopLevelStatement = CSharpSyntaxTree.ParseText(SourceTopLevelStatement);
 
             ifMethod = syntaxTree.GetRoot()
                                  .DescendantNodes()
@@ -177,14 +172,15 @@ void DoSomething() { }";
         [TestMethod]
         public void GetPrecedingStatementTopLevelStatements()
         {
-            var globalStatements = syntaxTreeTopLevelStatement.GetRoot()
-                                                              .ChildNodes()
-                                                              .Select(x => x.ChildNodes().FirstOrDefault())
-                                                              .OfType<StatementSyntax>()
-                                                              .ToArray();
-
-            globalStatements[1].GetPrecedingStatement().Should().BeEquivalentTo(globalStatements[0]);
-            globalStatements[0].GetPrecedingStatement().Should().Be(null);
+            syntaxTreeTopLevelStatement = CSharpSyntaxTree.ParseText(SourceTopLevelStatement);
+            var variableDeclarators = syntaxTreeTopLevelStatement.GetRoot()
+                                                                 .DescendantNodes()
+                                                                 .OfType<LocalDeclarationStatementSyntax>()
+                                                                 .ToArray();
+            var aDeclaration = variableDeclarators[0];
+            var bDeclaration = variableDeclarators[1];
+            aDeclaration.GetPrecedingStatement().Should().Be(null);
+            bDeclaration.GetPrecedingStatement().Should().BeEquivalentTo(aDeclaration);
         }
     }
 }
