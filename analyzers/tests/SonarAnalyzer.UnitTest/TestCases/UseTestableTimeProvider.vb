@@ -7,7 +7,7 @@ Public Class DateTimeAsProvider
         '                 ^^^^^^^^^^^^
         Dim utc As Date = DateTime.UtcNow ' Noncompliant
         Dim today As Date = DateTime.Today ' Noncompliant
-        Dim date As Date = Date.Now ' Noncompliant
+        Dim [date] As Date = Date.Now ' Noncompliant
     End Sub
 
     Public Sub CompliantAre()
@@ -25,7 +25,7 @@ Namespace NotSystem
             End Get
         End Property
     End Class
-    Public Class Date
+    Public Class [Date]
         Public Shared ReadOnly Property Now As NotSystem.Date
             Get
                 Return New NotSystem.Date()

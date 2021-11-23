@@ -25,7 +25,7 @@ using SonarAnalyzer.Helpers;
 
 namespace SonarAnalyzer.Rules
 {
-    public abstract class UseTestableTimeProviderBase<TIdentifierNameSyntax, TSyntaxKind> : SonarDiagnosticAnalyzer
+    public abstract class UseTestableTimeProviderBase<TSyntaxKind> : SonarDiagnosticAnalyzer
          where TSyntaxKind : struct
     {
         protected const string DiagnosticId = "S6354";
@@ -42,17 +42,14 @@ namespace SonarAnalyzer.Rules
         protected sealed override void Initialize(SonarAnalysisContext context) =>
             context.RegisterSyntaxNodeActionInNonGenerated(Language.GeneratedCodeRecognizer, c =>
             {
-                if (c.Node is TIdentifierNameSyntax identifier
-                    && IsDateTimeProviderProperty(NameOf(identifier))
+                if (IsDateTimeProviderProperty(Language.Syntax.NodeIdentifier(c.Node).Value.Text)
                     && c.SemanticModel.GetSymbolInfo(c.Node).Symbol is IPropertySymbol property
                     && property.IsInType(KnownType.System_DateTime))
                 {
-                    c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, c.Node.Parent.GetLocation()));
+                    c.ReportIssue(Diagnostic.Create(rule, c.Node.Parent.GetLocation()));
                 }
             },
             Language.SyntaxKind.IdentifierName);
-
-        protected abstract string NameOf(TIdentifierNameSyntax identifier);
 
         private bool IsDateTimeProviderProperty(string name)
             => nameof(DateTime.Now).Equals(name, Language.NameComparison)
