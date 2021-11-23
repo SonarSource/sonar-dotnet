@@ -22,7 +22,7 @@ using System;
 using System.Collections.Generic;
 using SonarAnalyzer.Helpers;
 
-namespace SonarAnalyzer.SymbolicExecution.Constraints
+namespace SonarAnalyzer.SymbolicExecution.Sonar.Constraints
 {
     public class SymbolicValueConstraints
     {

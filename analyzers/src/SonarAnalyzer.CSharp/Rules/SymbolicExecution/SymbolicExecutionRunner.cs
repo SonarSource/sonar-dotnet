@@ -26,7 +26,7 @@ using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.Extensions;
 using SonarAnalyzer.Helpers;
-using SonarAnalyzer.SymbolicExecution;
+using SonarAnalyzer.SymbolicExecution.Sonar;
 
 namespace SonarAnalyzer.Rules.SymbolicExecution
 {

@@ -21,9 +21,9 @@
 using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.CFG.Sonar;
-using SonarAnalyzer.SymbolicExecution;
+using SonarAnalyzer.SymbolicExecution.Sonar;
 
-namespace SonarAnalyzer.UnitTest.SymbolicExecution
+namespace SonarAnalyzer.UnitTest.SymbolicExecution.Sonar
 {
     [TestClass]
     public class ProgramPointTest

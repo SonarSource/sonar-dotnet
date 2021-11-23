@@ -26,9 +26,9 @@ using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.Extensions;
 using SonarAnalyzer.Helpers;
-using SonarAnalyzer.SymbolicExecution;
-using SonarAnalyzer.SymbolicExecution.Checks;
-using SonarAnalyzer.SymbolicExecution.Constraints;
+using SonarAnalyzer.SymbolicExecution.Sonar;
+using SonarAnalyzer.SymbolicExecution.Sonar.Checks;
+using SonarAnalyzer.SymbolicExecution.Sonar.Constraints;
 
 namespace SonarAnalyzer.Rules.SymbolicExecution
 {

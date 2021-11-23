@@ -24,7 +24,7 @@ using SonarAnalyzer.Helpers;
 using SonarAnalyzer.SymbolicExecution.Constraints;
 using SonarAnalyzer.SymbolicExecution.Relationships;
 
-namespace SonarAnalyzer.SymbolicExecution.SymbolicValues
+namespace SonarAnalyzer.SymbolicExecution.Sonar.SymbolicValues
 {
     public class ComparisonSymbolicValue : BoolBinarySymbolicValue
     {

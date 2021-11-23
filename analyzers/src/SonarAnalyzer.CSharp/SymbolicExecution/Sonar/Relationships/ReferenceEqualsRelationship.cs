@@ -22,7 +22,7 @@ using System.Collections.Generic;
 using System.Linq;
 using SonarAnalyzer.Helpers;
 
-namespace SonarAnalyzer.SymbolicExecution.Relationships
+namespace SonarAnalyzer.SymbolicExecution.Sonar.Relationships
 {
     public sealed class ReferenceEqualsRelationship : EqualsRelationship
     {

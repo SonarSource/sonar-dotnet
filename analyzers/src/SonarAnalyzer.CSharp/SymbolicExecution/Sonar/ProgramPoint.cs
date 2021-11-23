@@ -22,7 +22,7 @@ using System;
 using Microsoft.CodeAnalysis;
 using SonarAnalyzer.CFG.Sonar;
 
-namespace SonarAnalyzer.SymbolicExecution
+namespace SonarAnalyzer.SymbolicExecution.Sonar
 {
     public sealed class ProgramPoint : IEquatable<ProgramPoint>
     {

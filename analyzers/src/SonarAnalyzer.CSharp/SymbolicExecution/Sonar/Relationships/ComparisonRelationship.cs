@@ -21,9 +21,9 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using SonarAnalyzer.SymbolicExecution.SymbolicValues;
+using SonarAnalyzer.SymbolicExecution.Sonar.SymbolicValues;
 
-namespace SonarAnalyzer.SymbolicExecution.Relationships
+namespace SonarAnalyzer.SymbolicExecution.Sonar.Relationships
 {
     public sealed class ComparisonRelationship : BinaryRelationship, IEquatable<ComparisonRelationship>
     {

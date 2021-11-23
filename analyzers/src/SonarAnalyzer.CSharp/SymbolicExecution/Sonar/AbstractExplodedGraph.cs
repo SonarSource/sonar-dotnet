@@ -25,9 +25,9 @@ using Microsoft.CodeAnalysis;
 using SonarAnalyzer.CFG.Sonar;
 using SonarAnalyzer.Helpers;
 using SonarAnalyzer.LiveVariableAnalysis.CSharp;
-using SonarAnalyzer.SymbolicExecution.Constraints;
+using SonarAnalyzer.SymbolicExecution.Sonar.Constraints;
 
-namespace SonarAnalyzer.SymbolicExecution
+namespace SonarAnalyzer.SymbolicExecution.Sonar
 {
     internal abstract class AbstractExplodedGraph
     {

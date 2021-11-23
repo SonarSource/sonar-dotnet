@@ -22,7 +22,7 @@ using System;
 using System.Diagnostics.CodeAnalysis;
 using System.Runtime.Serialization;
 
-namespace SonarAnalyzer.SymbolicExecution
+namespace SonarAnalyzer.SymbolicExecution.Sonar
 {
     [Serializable]
     public class TooManyInternalStatesException : Exception

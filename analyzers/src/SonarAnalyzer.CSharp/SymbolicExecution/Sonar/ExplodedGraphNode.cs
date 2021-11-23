@@ -20,7 +20,7 @@
 
 using System;
 
-namespace SonarAnalyzer.SymbolicExecution
+namespace SonarAnalyzer.SymbolicExecution.Sonar
 {
     internal class ExplodedGraphNode : IEquatable<ExplodedGraphNode>
     {

@@ -31,14 +31,13 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.CFG.Helpers;
 using SonarAnalyzer.CFG.Sonar;
 using SonarAnalyzer.Extensions;
-using SonarAnalyzer.LiveVariableAnalysis;
 using SonarAnalyzer.LiveVariableAnalysis.CSharp;
-using SonarAnalyzer.SymbolicExecution;
-using SonarAnalyzer.SymbolicExecution.Constraints;
+using SonarAnalyzer.SymbolicExecution.Sonar;
+using SonarAnalyzer.SymbolicExecution.Sonar.Constraints;
 using SonarAnalyzer.UnitTest.CFG.Sonar;
 using SonarAnalyzer.UnitTest.Helpers;
 
-namespace SonarAnalyzer.UnitTest.SymbolicExecution
+namespace SonarAnalyzer.UnitTest.SymbolicExecution.Sonar
 {
     [TestClass]
     public class ExplodedGraphTest

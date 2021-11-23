@@ -20,7 +20,7 @@
 
 using Microsoft.CodeAnalysis;
 
-namespace SonarAnalyzer.SymbolicExecution
+namespace SonarAnalyzer.SymbolicExecution.Sonar
 {
     internal class ExplodedGraphCheck
     {

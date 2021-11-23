@@ -19,9 +19,9 @@
  */
 
 using System.Collections.Generic;
-using SonarAnalyzer.SymbolicExecution.Constraints;
+using SonarAnalyzer.SymbolicExecution.Sonar.Constraints;
 
-namespace SonarAnalyzer.SymbolicExecution.SymbolicValues
+namespace SonarAnalyzer.SymbolicExecution.Sonar.SymbolicValues
 {
     public class LogicalNotSymbolicValue : UnarySymbolicValue
     {

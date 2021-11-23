@@ -21,9 +21,9 @@
 using System.Collections.Immutable;
 using System.Linq;
 using SonarAnalyzer.Helpers;
-using SonarAnalyzer.SymbolicExecution.Relationships;
+using SonarAnalyzer.SymbolicExecution.Sonar.Relationships;
 
-namespace SonarAnalyzer.SymbolicExecution.Constraints
+namespace SonarAnalyzer.SymbolicExecution.Sonar.Constraints
 {
     public static class CollectionConstraintExtensions
     {
