@@ -35,7 +35,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [DataRow(ProjectType.Product)]
         [DataRow(ProjectType.Test)]
         public void PublicMethodArgumentsShouldBeCheckedForNull(ProjectType projectType) =>
-            Verifier.VerifyAnalyzer(@"TestCases\PublicMethodArgumentsShouldBeCheckedForNull.cs",
+            Verifier.VerifyAnalyzer(@"TestCases\SymbolicExecution\PublicMethodArgumentsShouldBeCheckedForNull.cs",
                 new SymbolicExecutionRunner(new PublicMethodArgumentsShouldBeCheckedForNull()),
                 ParseOptionsHelper.FromCSharp8,
 #if NETFRAMEWORK
@@ -47,7 +47,7 @@ namespace SonarAnalyzer.UnitTest.Rules
 #if NET
         [TestMethod]
         public void PublicMethodArgumentsShouldBeCheckedForNull_CSharp9() =>
-            Verifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\PublicMethodArgumentsShouldBeCheckedForNull.CSharp9.cs",
+            Verifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\SymbolicExecution\PublicMethodArgumentsShouldBeCheckedForNull.CSharp9.cs",
                                                       new SymbolicExecutionRunner(new PublicMethodArgumentsShouldBeCheckedForNull()),
                                                       NuGetMetadataReference.MicrosoftAspNetCoreMvcCore(Constants.NuGetLatestVersion));
 #endif
