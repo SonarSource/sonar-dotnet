@@ -320,6 +320,8 @@ End Class")
                 .Should().Be(3);
         }
 
+#if NET
+
         [TestMethod]
         public void Functions()
         {
@@ -351,6 +353,8 @@ End Class")
             Functions(AnalyzerLanguage.VisualBasic, "Class Sample \n Sub MyMethod2() \n End Sub \n End Class").Should().Be(1);
             Functions(AnalyzerLanguage.VisualBasic, "Class Sample \n Public Shared Operator +(a As Sample) As Sample \n Return a \n End Operator \n End Class").Should().Be(1);
         }
+
+#endif
 
         [TestMethod]
         public void Complexity()

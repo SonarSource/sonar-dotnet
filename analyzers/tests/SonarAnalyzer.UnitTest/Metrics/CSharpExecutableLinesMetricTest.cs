@@ -63,7 +63,7 @@ namespace Test
             }
         }
     }
-}", 6, 8);
+}", 5, 7);
 
         [TestMethod]
         public void Blocks() =>
@@ -75,7 +75,7 @@ namespace Test
         lock (obj) { } // +1
         fixed (int* p = arr) { } // +1
         unsafe { } // +1
-        using ((IDisposable)obj) { } // +1
+        using ((System.IDisposable)obj) { } // +1
     }
 }", 5, 6, 7, 8);
 
@@ -133,27 +133,25 @@ namespace Test
             AssertLinesOfCode(
 @"class Program
 {
-    void Foo(Exception ex)
+    void Foo(System.Exception ex)
     {
-        goto home; // +1
-        throw ex; // +1
-        home: // +1
+        goto home;  // +1
+        throw ex;   // +1
+        home:       // +1
 
-        while (true) // +1
+        while (true)    // +1
         {
-            continue; // +1
-            break; // +1
+            continue;   // +1
+            break;      // +1
         }
-        return; // +1
+        return;     // +1
     }
 }", 5, 6, 7, 9, 11, 12, 14);
 
         [TestMethod]
         public void Yields() =>
             AssertLinesOfCode(
-@"using System;
-using System.Collections.Generic;
-using System.Linq;
+@"using System.Collections.Generic;
 
 namespace Test
 {
@@ -161,11 +159,11 @@ namespace Test
     {
         IEnumerable<string> Foo()
         {
-            yield return ""; // +1
-            yield break; // +1
+            yield return """";  // +1
+            yield break;        // +1
         }
     }
-}", 11, 12);
+}", 9, 10);
 
         [TestMethod]
         public void AccessAndInvocation() =>
@@ -184,17 +182,17 @@ namespace Test
             AssertLinesOfCode(
 @"class Program
 {
-    static string GetString() => "";
+    static string GetString() => """";
 
     static void Main()
     {
         var arr = new object();
         var arr2 = new int[] { 1 }; // +1
 
-        var ex = new Exception()
+        var ex = new System.Exception()
         {
             Source = GetString(), // +1
-            HelpLink = ""
+            HelpLink = """"
         };
     }
 }", 8, 12);
@@ -325,7 +323,9 @@ public class ComplicatedCode
             return s.ToLower(); // +1
         }
     }
-}", 19, 22);
+}
+
+public class SomeAttribute : System.Attribute { }", 19, 22);
 
         [TestMethod]
         public void ExcludeFromTestCoverage_AttributeOnLocalFunction() =>
@@ -346,7 +346,9 @@ public class ComplicatedCode
             return text.ToLower(); // +1 , FP
         }
     }
-}", 8, 14);
+}
+
+public class SomeAttribute : System.Attribute { }", 8, 14);
 
         [DataTestMethod]
         [DataRow("ExcludeFromCodeCoverage")]
@@ -367,10 +369,11 @@ public class ComplicatedCode
     }}
 }}");
 
-        [TestMethod]
+         [TestMethod]
         public void ExcludeClassFromTestCoverage() =>
             AssertLinesOfCode(
 @"using System;
+using System.Diagnostics.CodeAnalysis;
 [ExcludeFromCodeCoverage]
 class Program
 {
@@ -383,7 +386,7 @@ class Program
         [TestMethod]
         public void ExcludeRecordFromTestCoverage() =>
             AssertLinesOfCode(
-@"using System;
+@"using System.Diagnostics.CodeAnalysis;
 [ExcludeFromCodeCoverage]
 record Program
 {
@@ -396,7 +399,7 @@ record Program
         [TestMethod]
         public void ExcludeRecordStructFromTestCoverage() =>
             AssertLinesOfCode(
-@"using System;
+@"using System.Diagnostics.CodeAnalysis;
 [ExcludeFromCodeCoverage]
 record struct Program
 {
@@ -409,7 +412,8 @@ record struct Program
         [TestMethod]
         public void ExcludeStructFromTestCoverage() =>
             AssertLinesOfCode(
-@"namespace project_1
+@"using System.Diagnostics.CodeAnalysis;
+namespace project_1
 {
     [ExcludeFromCodeCoverage]
     struct Program
@@ -424,7 +428,8 @@ record struct Program
         [TestMethod]
         public void ExcludePropertyFromTestCoverage() =>
             AssertLinesOfCode(
-@"[ExcludeFromCodeCoverage]
+@"using System.Diagnostics.CodeAnalysis;
+[ExcludeFromCodeCoverage]
 class Program
 {
     int FooProperty
@@ -455,6 +460,8 @@ class Program
         count = initialCount;   // +1
     }
 }", 14);
+
+#if NET
 
         [TestMethod]
         public void Property_ExcludeFromCodeCoverage() =>
@@ -497,6 +504,8 @@ class EventClass
         init { _value = value; }     // Excluded
     }
 }", 15, 22, 23, 28, 29, 34);
+
+#endif
 
         [TestMethod]
         public void Event_ExcludeFromCodeCoverage() =>
@@ -603,7 +612,9 @@ public class Foo
     {
         System.Console.WriteLine(); // +1
     }
-}", 7);
+}
+
+public class AnAttribute : System.Attribute { }", 7);
 
         [TestMethod]
         public void ExpressionsAreCounted() =>
@@ -647,10 +658,10 @@ public class Foo
         switch (i) // +1
         {
             case 1:
-                Console.WriteLine(4); // +1
+                System.Console.WriteLine(4); // +1
                 break; // +1
             case 2:
-                Console.WriteLine(4); // +1
+                System.Console.WriteLine(4); // +1
                 break; // +1
             default:
                 break; // +1
@@ -764,12 +775,15 @@ public class Foo
     }
 }", 6, 7, 16);
 
+#if NET
+
         [TestMethod]
         public void IndicesAndRanges() =>
             AssertLinesOfCode(
-@"class Program
+@"using System;
+class Program
 {
-    int M()
+    void M()
     {
         string s = null;
         string[] subArray;
@@ -786,9 +800,11 @@ public class Foo
                 ""dog""
             };
         s = words[^1];
-        subArray = words[1..4]
+        subArray = words[1..4];
     }
-}", 8, 19, 20);
+}", 9, 20, 21);
+
+#endif
 
         [TestMethod]
         public void NullCoalescingAssignment() =>
@@ -797,7 +813,7 @@ public class Foo
 using System.Collections.Generic;
 class Program
 {
-    int M()
+    void M()
     {
         List<int> numbers = null;
         int? i = null;
@@ -827,6 +843,7 @@ class Program
             AssertLinesOfCode(
 @"using System;
 using System.Collections.Generic;
+using System.Linq;
 class Program
 {
     double SumNumbers(List<double[]> setsOfNumbers, int indexOfSetToSum)
@@ -834,14 +851,12 @@ class Program
         return setsOfNumbers?[indexOfSetToSum]?.Sum() // +1
                 ?? double.NaN; // +1
     }
-}", 7, 8);
+}", 8, 9);
 
         [TestMethod]
         public void SingleLinePatternMatching() =>
             AssertLinesOfCode(
-@"using System;
-using System.Collections.Generic;
-class Program
+@"static class Program
 {
     public static bool IsLetter(this char c) =>
         c is >= 'a' and <= 'z' or >= 'A' and <= 'Z';
