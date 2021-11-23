@@ -18,7 +18,6 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System.Collections.Generic;
 using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -53,43 +52,50 @@ namespace Test
         [TestMethod]
         public void Checked_Unchecked() =>
             AssertLinesOfCode(
-@"
-static void Main(string[] args)
+@"class Program
 {
-    checked // +1
+    static void Main(string[] args)
     {
-        unchecked // +1
+        checked // +1
         {
+            unchecked // +1
+            {
+            }
         }
     }
-}", 4, 6);
+}", 6, 8);
 
         [TestMethod]
         public void Blocks() =>
             AssertLinesOfCode(
-@"
-unsafe static void Main(int[] arr, object obj)
+@"class Program
 {
-    lock (obj) { } // +1
-    fixed (int* p = arr) { } // +1
-    unsafe { } // +1
-    using ((IDisposable)obj) { } // +1
-}", 4, 5, 6, 7);
+    unsafe static void Main(int[] arr, object obj)
+    {
+        lock (obj) { } // +1
+        fixed (int* p = arr) { } // +1
+        unsafe { } // +1
+        using ((IDisposable)obj) { } // +1
+    }
+}", 5, 6, 7, 8);
 
         [TestMethod]
         public void Statements() =>
             AssertLinesOfCode(
-@"
-void Foo(int i)
+@"class Program
 {
-    ; // +1
-    i++; // +1
-}", 4, 5);
+    void Foo(int i)
+    {
+        ; // +1
+        i++; // +1
+    }
+}", 5, 6);
 
         [TestMethod]
         public void Loops() =>
             AssertLinesOfCode(
-@"
+@"class Program
+{
     void Foo(int[] arr)
     {
         do {} // +1
@@ -98,12 +104,14 @@ void Foo(int i)
         for (;;) { } // +1
         while // +1
             (true) { }
-    }", 4, 6, 7, 8);
+    }
+}", 5, 7, 8, 9);
 
         [TestMethod]
         public void Conditionals() =>
             AssertLinesOfCode(
-@"
+@"class Program
+{
     void Foo(int? i, string s)
     {
         if (true) { } // +1
@@ -117,12 +125,14 @@ void Foo(int i)
         }
         var x = s?.Length; // +1
         var xx = i == 1 ? 1 : 1; // +1
-    }", 4, 5, 6, 11, 13, 14);
+    }
+}", 5, 6, 7, 12, 14, 15);
 
         [TestMethod]
         public void Conditionals2() =>
             AssertLinesOfCode(
-@"
+@"class Program
+{
     void Foo(Exception ex)
     {
         goto home; // +1
@@ -135,7 +145,8 @@ void Foo(int i)
             break; // +1
         }
         return; // +1
-    }", 4, 5, 6, 8, 10, 11, 13);
+    }
+}", 5, 6, 7, 9, 11, 12, 14);
 
         [TestMethod]
         public void Yields() =>
@@ -159,36 +170,39 @@ namespace Test
         [TestMethod]
         public void AccessAndInvocation() =>
             AssertLinesOfCode(
-@"
-static void Main(string[] args)
+@"class Program
 {
-    var x = args.Length; // +1
-    args.ToString(); // +1
-}", 4, 5);
+    static void Main(string[] args)
+    {
+        var x = args.Length; // +1
+        args.ToString(); // +1
+    }
+}", 5, 6);
 
         [TestMethod]
         public void Initialization() =>
             AssertLinesOfCode(
-@"
-static string GetString() => "";
-
-static void Main()
+@"class Program
 {
-    var arr = new object();
-    var arr2 = new int[] { 1 }; // +1
+    static string GetString() => "";
 
-    var ex = new Exception()
+    static void Main()
     {
-        Source = GetString(), // +1
-        HelpLink = ""
-    };
-}", 7, 11);
+        var arr = new object();
+        var arr2 = new int[] { 1 }; // +1
+
+        var ex = new Exception()
+        {
+            Source = GetString(), // +1
+            HelpLink = ""
+        };
+    }
+}", 8, 12);
 
         [TestMethod]
         public void Property_Set() =>
             AssertLinesOfCode(
-@"
-class Program
+@"class Program
 {
     int Prop { get; set; }
 
@@ -196,13 +210,12 @@ class Program
     {
         Prop = 1; // + 1
     }
-}", 8);
+}", 7);
 
         [TestMethod]
         public void Property_Get() =>
             AssertLinesOfCode(
-@"
-class Program
+@"class Program
 {
     int Prop { get; set; }
 
@@ -215,8 +228,7 @@ class Program
         [TestMethod]
         public void Lambdas() =>
             AssertLinesOfCode(
-@"
-using System;
+@"using System;
 using System.Linq;
 using System.Collections.Generic;
 class Program
@@ -228,13 +240,12 @@ class Program
             .OrderBy(s => s) // +1
             .ToList();
     }
-}", 9, 10, 11);
+}", 8, 9, 10);
 
         [TestMethod]
         public void TryCatch() =>
             AssertLinesOfCode(
-@"
-using System;
+@"using System;
 class Program
 {
     static void Main(string[] args)
@@ -253,21 +264,25 @@ class Program
         {
         }
     }
-}", 9, 14);
+}", 8, 13);
 
         [TestMethod]
         public void Test_16() =>
             AssertLinesOfCode(
 @"using System;
-public void Foo(int x) {
-int i = 0; if (i == 0) {i++;i--;} else // +1
-{ while(true){i--;} } // +1
-}", 3, 4);
+class Program
+{
+    public void Foo(int x) {
+        int i = 0; if (i == 0) {i++;i--;} else // +1
+        { while(true){i--;} } // +1
+    }
+}", 5, 6);
 
         [TestMethod]
         public void Test_17() =>
             AssertLinesOfCode(
-    @"
+@"class Program
+{
     static void Main(string[] args)
     {
         do // +1
@@ -280,7 +295,8 @@ int i = 0; if (i == 0) {i++;i--;} else // +1
         true
         )
         ;
-    }", 4);
+    }
+}", 5);
 
         [TestMethod]
         public void ExcludeFromTestCoverage() =>
@@ -572,17 +588,14 @@ partial class AnotherClass
         [TestMethod]
         public void AttributeAreIgnored() =>
             AssertLinesOfCode(
-@"
-using System.Reflection;
+@"using System.Reflection;
 using System.Runtime.CompilerServices;
-[assembly: InternalsVisibleTo(""FOO"" + Signing.InternalsVisibleToPublicKey)]
-");
+[assembly: InternalsVisibleTo(""FOO"")]");
 
         [TestMethod]
         public void OnlyAttributeAreIgnored() =>
             AssertLinesOfCode(
-@"
-[AnAttribute]
+@"[AnAttribute]
 public class Foo
 {
     [AnAttribute]
@@ -590,24 +603,27 @@ public class Foo
     {
         System.Console.WriteLine(); // +1
     }
-}", 8);
+}", 7);
 
         [TestMethod]
         public void ExpressionsAreCounted() =>
             AssertLinesOfCode(
-@"
-public void Foo(bool flag)
+@"class Program
+{
+    public void Foo(bool flag)
     {
         if (flag) // +1
         {
             flag = true; flag = false; flag = true; // +1
         }
-    }", 4, 6);
+    }
+}", 5, 7);
 
         [TestMethod]
         public void MultiLineLoop() =>
             AssertLinesOfCode(
-@"
+@"class Program
+{
     void Foo(int[] arr)
     {
         for         // +1
@@ -618,12 +634,14 @@ public void Foo(bool flag)
             )         // +0
         {           // +0
         }
-    }", 4);
+    }
+}", 5);
 
         [TestMethod]
         public void SwitchStatementWithMultipleCases() =>
             AssertLinesOfCode(
-@"
+@"class Program
+{
     void Foo(int? i)
     {
         switch (i) // +1
@@ -637,12 +655,14 @@ public void Foo(bool flag)
             default:
                 break; // +1
         }
-    }", 4, 7, 8, 10, 11, 13);
+    }
+}", 5, 8, 9, 11, 12, 14);
 
         [TestMethod]
         public void SwitchExpressionWithMultipleCases() =>
             AssertLinesOfCode(
-@"
+@"class Program
+{
     void Foo(int? i, string s)
     {
         var x = s switch
@@ -659,12 +679,13 @@ public void Foo(bool flag)
         };
     }
     bool Foo(string s) => true;
-", 12, 13);
+}", 13, 14);
 
         [TestMethod]
         public void MultiLineInterpolatedString() =>
             AssertLinesOfCode(
-@"
+@"class Program
+{
     void Foo(int? i, string s)
     {
         string x = ""someString"";
@@ -673,12 +694,13 @@ public void Foo(bool flag)
                                 interpolated
                                 string {i} {s}"";
     }
-", 5);
+}", 6);
 
         [TestMethod]
         public void MultiLineInterpolatedConstString() =>
             AssertLinesOfCode(
-@"
+@"class Program
+{
     void Foo()
     {
         const string a = ""Hello"";
@@ -688,7 +710,7 @@ public void Foo(bool flag)
                                 interpolated
                                 const string {a} {b}"";
     }
-"); // Not correct should be 6
+}"); // Not correct should be 6
 
         [TestMethod]
         public void MultiLineInterpolatedStringWithMultipleLineExpressions() =>
@@ -710,17 +732,19 @@ public void Foo(bool flag)
         [TestMethod]
         public void UsingDeclaration() =>
             AssertLinesOfCode(
-@"
+@"class Program
+{
     void Foo(int? i, string s)
     {
         using var file = new System.IO.StreamWriter(""WriteLines2.txt"");
     }
-");
+}");
 
         [TestMethod]
         public void LocalFunctions() =>
             AssertLinesOfCode(
-@"
+@"class Program
+{
     int M1()
     {
         int y;
@@ -738,12 +762,13 @@ public void Foo(bool flag)
 
         static int Add(int left, int right) => left + right;
     }
-", 5, 6, 15);
+}", 6, 7, 16);
 
         [TestMethod]
         public void IndicesAndRanges() =>
             AssertLinesOfCode(
-@"
+@"class Program
+{
     int M()
     {
         string s = null;
@@ -763,14 +788,15 @@ public void Foo(bool flag)
         s = words[^1];
         subArray = words[1..4]
     }
-", 7, 18, 19);
+}", 8, 19, 20);
 
         [TestMethod]
         public void NullCoalescingAssignment() =>
             AssertLinesOfCode(
 @"using System;
 using System.Collections.Generic;
-
+class Program
+{
     int M()
     {
         List<int> numbers = null;
@@ -778,52 +804,56 @@ using System.Collections.Generic;
 
         numbers ??= new List<int>();
     }
-", 9);
+}", 10);
 
         [TestMethod]
         public void AssignmentAndDeclarationInTheSameDeconstruction() =>
             AssertLinesOfCode(
 @"using System;
 using System.Collections.Generic;
-
-    int M()
+class Program
+{
+    void M()
     {
         List<int> numbers = null;
         int? i = null;
 
         (i, int k) = (42, 42);
     }
-", 9);
+}", 10);
 
         [TestMethod]
         public void NullCoalescingOperator() =>
             AssertLinesOfCode(
 @"using System;
 using System.Collections.Generic;
-
+class Program
+{
     double SumNumbers(List<double[]> setsOfNumbers, int indexOfSetToSum)
     {
         return setsOfNumbers?[indexOfSetToSum]?.Sum() // +1
                 ?? double.NaN; // +1
     }
-", 6, 7);
+}", 7, 8);
 
         [TestMethod]
         public void SingleLinePatternMatching() =>
             AssertLinesOfCode(
 @"using System;
 using System.Collections.Generic;
-
+class Program
+{
     public static bool IsLetter(this char c) =>
         c is >= 'a' and <= 'z' or >= 'A' and <= 'Z';
-");
+}");
 
         [TestMethod]
         public void MultiLinePatternMatching() =>
             AssertLinesOfCode(
 @"using System;
 using System.Collections.Generic;
-
+class Program
+{
     public static bool IsLetter(char c)
     {
         if (c is >= 'a'
@@ -835,14 +865,15 @@ using System.Collections.Generic;
         }
         return false;
     }
-", 6, 11, 13);
+}", 7, 12, 14);
 
         [TestMethod]
         public void MultiLineInvocation() =>
             AssertLinesOfCode(
 @"using System;
 using System.Collections.Generic;
-
+class Program
+{
     public static bool Foo(int a, int b)
     {
         return Foo(1,
@@ -850,7 +881,7 @@ using System.Collections.Generic;
     }
 
     public static int Bar() => 42;
-", 6, 7);
+}", 7, 8);
 
         private static void AssertLinesOfCode(string code, params int[] expectedExecutableLines)
         {
