@@ -4,8 +4,17 @@
     {
         while (true)
         {
-            if (true) { } // FN {{Refactor this code to not nest more than 3 control flow statements.}}
+            if (true) { } // Noncompliant {{Refactor this code to not nest more than 3 control flow statements.}}
         }
+    }
+    catch { }
+} while (true);
+
+do
+{
+    try
+    {
+        if (true) { }
     }
     catch { }
 } while (true);
@@ -18,7 +27,7 @@ void TopLevelLocalFunction()
         {
             while (true)
             {
-                if (true) { } // FN {{Refactor this code to not nest more than 3 control flow statements.}}
+                if (true) { } // Noncompliant {{Refactor this code to not nest more than 3 control flow statements.}}
             }
         }
         catch { }
