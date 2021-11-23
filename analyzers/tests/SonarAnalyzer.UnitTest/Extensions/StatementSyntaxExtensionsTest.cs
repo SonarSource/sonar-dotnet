@@ -61,7 +61,6 @@ void DoSomething() { }";
         public void GetPrecedingStatement()
         {
             var syntaxTree = CSharpSyntaxTree.ParseText(Source);
-
             var ifMethod = syntaxTree.GetRoot()
                                      .DescendantNodes()
                                      .OfType<MethodDeclarationSyntax>()
