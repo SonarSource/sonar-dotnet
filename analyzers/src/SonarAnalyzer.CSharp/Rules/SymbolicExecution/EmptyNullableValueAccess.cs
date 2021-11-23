@@ -46,7 +46,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
         public IEnumerable<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
 
-        public ISymbolicExecutionAnalysisContext AddChecks(CSharpExplodedGraph explodedGraph, SyntaxNodeAnalysisContext context) =>
+        public ISymbolicExecutionAnalysisContext AddChecks(SonarExplodedGraph explodedGraph, SyntaxNodeAnalysisContext context) =>
             new AnalysisContext(explodedGraph);
 
         private sealed class AnalysisContext : ISymbolicExecutionAnalysisContext
@@ -56,7 +56,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
             public bool SupportsPartialResults => true;
 
-            public AnalysisContext(CSharpExplodedGraph explodedGraph)
+            public AnalysisContext(SonarExplodedGraph explodedGraph)
             {
                 nullableValueCheck = explodedGraph.NullableValueAccessedCheck;
                 nullableValueCheck.ValuePropertyAccessed += AddIdentifier;
@@ -76,7 +76,7 @@ namespace SonarAnalyzer.Rules.CSharp
         {
             public event EventHandler<MemberAccessedEventArgs> ValuePropertyAccessed;
 
-            public NullableValueAccessedCheck(CSharpExplodedGraph explodedGraph) : base(explodedGraph) { }
+            public NullableValueAccessedCheck(SonarExplodedGraph explodedGraph) : base(explodedGraph) { }
 
             private void OnValuePropertyAccessed(IdentifierNameSyntax identifier) =>
                 ValuePropertyAccessed?.Invoke(this, new MemberAccessedEventArgs(identifier));

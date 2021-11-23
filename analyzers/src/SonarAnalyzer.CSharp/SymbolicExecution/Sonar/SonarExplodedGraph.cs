@@ -34,12 +34,12 @@ using StyleCop.Analyzers.Lightup;
 
 namespace SonarAnalyzer.SymbolicExecution.Sonar
 {
-    internal class CSharpExplodedGraph : AbstractExplodedGraph
+    internal class SonarExplodedGraph : AbstractExplodedGraph
     {
         private const string isNullOrEmpty = "IsNullOrEmpty";
         private const string isNullOrWhiteSpace = "IsNullOrWhiteSpace";
 
-        public CSharpExplodedGraph(IControlFlowGraph cfg, ISymbol declaration, SemanticModel semanticModel, SonarCSharpLiveVariableAnalysis lva)
+        public SonarExplodedGraph(IControlFlowGraph cfg, ISymbol declaration, SemanticModel semanticModel, SonarCSharpLiveVariableAnalysis lva)
             : base(cfg, declaration, semanticModel, lva)
         {
             NullPointerCheck = new NullPointerDereference.NullPointerCheck(this);
@@ -52,7 +52,7 @@ namespace SonarAnalyzer.SymbolicExecution.Sonar
         }
 
         /// <summary>
-        /// NullPointerCheck is added by default by the CSharpExplodedGraph to allow an early stop of the visit
+        /// NullPointerCheck is added by default by the SonarExplodedGraph to allow an early stop of the visit
         /// when a null pointer dereference is found.
         ///
         /// In order to be able to run all the rules within one single symbolic execution pass, we have to reuse,

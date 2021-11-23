@@ -34,7 +34,7 @@ namespace SonarAnalyzer.Extensions
 {
     internal static class SonarAnalysisContextExtensions
     {
-        public static void RegisterExplodedGraphBasedAnalysis(this SonarAnalysisContext context, Action<CSharpExplodedGraph, SyntaxNodeAnalysisContext> analyze)
+        public static void RegisterExplodedGraphBasedAnalysis(this SonarAnalysisContext context, Action<SonarExplodedGraph, SyntaxNodeAnalysisContext> analyze)
         {
             context.RegisterSyntaxNodeActionInNonGenerated(
                 c =>
@@ -105,7 +105,7 @@ namespace SonarAnalyzer.Extensions
                 SyntaxKind.ParenthesizedLambdaExpression);
         }
 
-        private static void Analyze(CSharpSyntaxNode declarationBody, ISymbol symbol, Action<CSharpExplodedGraph, SyntaxNodeAnalysisContext> runAnalysis, SyntaxNodeAnalysisContext context)
+        private static void Analyze(CSharpSyntaxNode declarationBody, ISymbol symbol, Action<SonarExplodedGraph, SyntaxNodeAnalysisContext> runAnalysis, SyntaxNodeAnalysisContext context)
         {
             if (declarationBody == null
                 || declarationBody.ContainsDiagnostics
@@ -117,7 +117,7 @@ namespace SonarAnalyzer.Extensions
             var lva = new SonarCSharpLiveVariableAnalysis(cfg, symbol, context.SemanticModel);
             try
             {
-                var explodedGraph = new CSharpExplodedGraph(cfg, symbol, context.SemanticModel, lva);
+                var explodedGraph = new SonarExplodedGraph(cfg, symbol, context.SemanticModel, lva);
                 runAnalysis(explodedGraph, context);
             }
             catch (Exception e)

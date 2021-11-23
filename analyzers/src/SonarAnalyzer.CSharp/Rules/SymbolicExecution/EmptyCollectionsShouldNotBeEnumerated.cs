@@ -89,7 +89,7 @@ namespace SonarAnalyzer.Rules.CSharp
             nameof(Dictionary<object, object>.TryGetValue),
         };
 
-        public ISymbolicExecutionAnalysisContext AddChecks(CSharpExplodedGraph explodedGraph, SyntaxNodeAnalysisContext context) =>
+        public ISymbolicExecutionAnalysisContext AddChecks(SonarExplodedGraph explodedGraph, SyntaxNodeAnalysisContext context) =>
             new AnalysisContext(explodedGraph);
 
         private sealed class AnalysisContext : ISymbolicExecutionAnalysisContext
@@ -97,7 +97,7 @@ namespace SonarAnalyzer.Rules.CSharp
             private readonly HashSet<SyntaxNode> emptyCollections = new HashSet<SyntaxNode>();
             private readonly HashSet<SyntaxNode> nonEmptyCollections = new HashSet<SyntaxNode>();
 
-            public AnalysisContext(CSharpExplodedGraph explodedGraph) =>
+            public AnalysisContext(SonarExplodedGraph explodedGraph) =>
                 explodedGraph.AddExplodedGraphCheck(new EmptyCollectionAccessedCheck(explodedGraph, this));
 
             public bool SupportsPartialResults => false;
@@ -118,7 +118,7 @@ namespace SonarAnalyzer.Rules.CSharp
         {
             private readonly AnalysisContext context;
 
-            public EmptyCollectionAccessedCheck(CSharpExplodedGraph explodedGraph, AnalysisContext context) : base(explodedGraph) =>
+            public EmptyCollectionAccessedCheck(SonarExplodedGraph explodedGraph, AnalysisContext context) : base(explodedGraph) =>
                 this.context = context;
 
             public override ProgramState PreProcessInstruction(ProgramPoint programPoint, ProgramState programState)

@@ -1277,7 +1277,7 @@ namespace SonarAnalyzer.CFG.Sonar
             {
                 // Do nothing, this is just variable assignment and the Pattern itself contains
                 // only the new variable(s), which are not enough to evaluate the assignment.
-                // The handling should be done in CSharpExplodedGraph and UcfgInstructionFactory.
+                // The handling should be done in SonarExplodedGraph and UcfgInstructionFactory.
 
                 return currentBlock;
             }
@@ -1287,7 +1287,7 @@ namespace SonarAnalyzer.CFG.Sonar
             }
             else if (RecursivePatternSyntaxWrapper.IsInstance(patternSyntaxWrapper))
             {
-                // The recursive pattern will be handled in CSharpExplodedGraph and UcfgInstructionFactory.
+                // The recursive pattern will be handled in SonarExplodedGraph and UcfgInstructionFactory.
                 currentBlock.ReversedInstructions.Add(patternSyntaxWrapper);
                 return currentBlock;
             }
