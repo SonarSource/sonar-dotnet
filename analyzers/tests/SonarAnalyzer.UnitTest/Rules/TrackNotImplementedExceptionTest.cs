@@ -34,7 +34,7 @@ namespace SonarAnalyzer.UnitTest.Rules
                 @"TestCases\TrackNotImplementedException.cs",
                 new TrackNotImplementedException(),
                 ParseOptionsHelper.FromCSharp8,
-                NuGetMetadataReference.NETStandard21);
+                MetadataReferenceFacade.NETStandard21);
 
 #if NET
         [TestMethod]

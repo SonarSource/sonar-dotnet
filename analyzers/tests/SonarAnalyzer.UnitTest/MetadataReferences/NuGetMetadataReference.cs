@@ -30,9 +30,11 @@ namespace SonarAnalyzer.UnitTest.MetadataReferences
         public static References MicrosoftVisualStudioQualityToolsUnitTestFramework =>
             Create("VS.QualityTools.UnitTestFramework", "15.0.27323.2", null, "Microsoft.VisualStudio.QualityTools.UnitTestFramework.dll");
         public static References MSTestTestFrameworkV1 => Create("MSTest.TestFramework", "1.1.11");
-        public static References XunitFrameworkV1 =>
-            Create("xunit", "1.9.1")
-            .Concat(Create("xunit.extensions", "1.9.1"));
+        public static References XunitFrameworkV1 => Create("xunit", "1.9.1").Concat(Create("xunit.extensions", "1.9.1"));
+
+        /// <summary>
+        /// Use MetadataReferenceFacade.NETStandard21 instead to avoid #if directives.
+        /// </summary>
         public static References NETStandard21 => Create("NETStandard.Library.Ref", "2.1.0", "netstandard2.1");
 
         // Passed version
