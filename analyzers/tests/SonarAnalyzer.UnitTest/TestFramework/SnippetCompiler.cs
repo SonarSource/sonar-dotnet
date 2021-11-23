@@ -53,12 +53,11 @@ namespace SonarAnalyzer.UnitTest.TestFramework
                 ? new CSharpCompilationOptions(OutputKind.DynamicallyLinkedLibrary)
                 : new VisualBasicCompilationOptions(OutputKind.DynamicallyLinkedLibrary);
 
-            compilation = SolutionBuilder
-                .Create()
-                .AddProject(language, createExtraEmptyFile: false)
-                .AddSnippet(code)
-                .AddReferences(additionalReferences ?? Enumerable.Empty<MetadataReference>())
-                .GetCompilation(compilationOptions: compilationOptions);
+            compilation = SolutionBuilder.Create()
+                                         .AddProject(language, createExtraEmptyFile: false)
+                                         .AddSnippet(code)
+                                         .AddReferences(additionalReferences ?? Enumerable.Empty<MetadataReference>())
+                                         .GetCompilation(compilationOptions: compilationOptions);
 
             if (!ignoreErrors && HasCompilationErrors(compilation))
             {
