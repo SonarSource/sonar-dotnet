@@ -23,6 +23,7 @@ using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using SonarAnalyzer.SymbolicExecution;
+using SonarAnalyzer.SymbolicExecution.Constraints;
 using StyleCop.Analyzers.Lightup;
 
 namespace SonarAnalyzer.Extensions

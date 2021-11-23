@@ -22,9 +22,9 @@ using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using SonarAnalyzer.Helpers;
-using SonarAnalyzer.SymbolicExecution.Common.Constraints;
+using SonarAnalyzer.SymbolicExecution.Constraints;
 
-namespace SonarAnalyzer.SymbolicExecution.Common.Checks
+namespace SonarAnalyzer.SymbolicExecution.Checks
 {
     internal sealed class ByteArrayCheck : ExplodedGraphCheck
     {

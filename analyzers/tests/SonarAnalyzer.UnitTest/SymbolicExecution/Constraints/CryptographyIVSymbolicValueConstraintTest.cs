@@ -20,7 +20,7 @@
 
 using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using SonarAnalyzer.SymbolicExecution.Common.Constraints;
+using SonarAnalyzer.SymbolicExecution.Constraints;
 
 namespace SonarAnalyzer.UnitTest.SymbolicExecution.Constraints
 {

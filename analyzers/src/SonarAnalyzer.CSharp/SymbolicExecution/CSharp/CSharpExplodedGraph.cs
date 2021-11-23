@@ -26,7 +26,6 @@ using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using SonarAnalyzer.CFG.Sonar;
 using SonarAnalyzer.Helpers;
-using SonarAnalyzer.Helpers.SymbolicExecution;
 using SonarAnalyzer.LiveVariableAnalysis.CSharp;
 using SonarAnalyzer.Rules.CSharp;
 using SonarAnalyzer.SymbolicExecution.Constraints;

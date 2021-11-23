@@ -25,7 +25,7 @@ using SonarAnalyzer.SymbolicExecution;
 using SonarAnalyzer.SymbolicExecution.Constraints;
 using SonarAnalyzer.SymbolicExecution.SymbolicValues;
 
-namespace SonarAnalyzer.UnitTest.Helpers.FlowAnalysis
+namespace SonarAnalyzer.UnitTest.SymbolicExecution.SymbolicValues
 {
     [TestClass]
     public class NullableSymbolicValue_TrySetOppositeConstraint
