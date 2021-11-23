@@ -31,7 +31,7 @@ namespace SonarAnalyzer.UnitTest.Rules.SymbolicExecution
         // This test is meant to run all the symbolic execution rules together and verify different scenarios.
         [TestMethod]
         public void VerifySymbolicExecutionRules() =>
-            Verifier.VerifyAnalyzer(@"TestCases\SymbolicExecution\SymbolicExecutionRules.cs",
+            Verifier.VerifyAnalyzer(@"TestCases\SymbolicExecution\Sonar\SymbolicExecutionRules.cs",
                 new SymbolicExecutionRunner(),
 #if NETFRAMEWORK
                 ParseOptionsHelper.FromCSharp8,

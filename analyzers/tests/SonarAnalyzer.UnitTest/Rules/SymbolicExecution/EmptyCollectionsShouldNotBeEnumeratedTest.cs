@@ -38,7 +38,7 @@ namespace SonarAnalyzer.UnitTest.Rules.SymbolicExecution
         [DataRow(ProjectType.Test)]
         public void EmptyCollectionsShouldNotBeEnumerated(ProjectType projectType) =>
             Verifier.VerifyAnalyzer(
-                @"TestCases\SymbolicExecution\EmptyCollectionsShouldNotBeEnumerated.cs",
+                @"TestCases\SymbolicExecution\Sonar\EmptyCollectionsShouldNotBeEnumerated.cs",
                 new SymbolicExecutionRunner(new EmptyCollectionsShouldNotBeEnumerated()),
                 ParseOptionsHelper.FromCSharp8,
 #if NETFRAMEWORK
@@ -51,13 +51,13 @@ namespace SonarAnalyzer.UnitTest.Rules.SymbolicExecution
         [TestMethod]
         public void EmptyCollectionsShouldNotBeEnumerated_CSharp9() =>
             Verifier.VerifyAnalyzerFromCSharp9Console(
-                @"TestCases\SymbolicExecution\EmptyCollectionsShouldNotBeEnumerated.CSharp9.cs",
+                @"TestCases\SymbolicExecution\Sonar\EmptyCollectionsShouldNotBeEnumerated.CSharp9.cs",
                 new SymbolicExecutionRunner(new EmptyCollectionsShouldNotBeEnumerated()));
 
         [TestMethod]
         public void EmptyCollectionsShouldNotBeEnumerated_CSharp10() =>
             Verifier.VerifyAnalyzerFromCSharp10Library(
-                @"TestCases\SymbolicExecution\EmptyCollectionsShouldNotBeEnumerated.CSharp10.cs",
+                @"TestCases\SymbolicExecution\Sonar\EmptyCollectionsShouldNotBeEnumerated.CSharp10.cs",
                 new SymbolicExecutionRunner(new EmptyCollectionsShouldNotBeEnumerated()));
 #endif
     }
