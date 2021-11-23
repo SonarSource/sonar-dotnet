@@ -82,8 +82,6 @@ void DoSomething() { }";
         private MethodDeclarationSyntax ifMethod;
         private MethodDeclarationSyntax switchMethod;
 
-        private SyntaxTree syntaxTreeTopLevelStatement;
-
         [TestInitialize]
         public void TestSetup()
         {
@@ -158,29 +156,6 @@ void DoSomething() { }";
             var sections = ifMethod.DescendantNodes().OfType<SwitchSectionSyntax>().ToList();
 
             sections.FirstOrDefault().GetPrecedingSections().Should().BeEmpty();
-        }
-
-        [TestMethod]
-        public void GetPrecedingStatement()
-        {
-            var statements = switchMethod.Body.Statements.ToList();
-
-            statements[1].GetPrecedingStatement().Should().BeEquivalentTo(statements[0]);
-            statements[0].GetPrecedingStatement().Should().Be(null);
-        }
-
-        [TestMethod]
-        public void GetPrecedingStatementTopLevelStatements()
-        {
-            syntaxTreeTopLevelStatement = CSharpSyntaxTree.ParseText(SourceTopLevelStatement);
-            var variableDeclarators = syntaxTreeTopLevelStatement.GetRoot()
-                                                                 .DescendantNodes()
-                                                                 .OfType<LocalDeclarationStatementSyntax>()
-                                                                 .ToArray();
-            var aDeclaration = variableDeclarators[0];
-            var bDeclaration = variableDeclarators[1];
-            aDeclaration.GetPrecedingStatement().Should().Be(null);
-            bDeclaration.GetPrecedingStatement().Should().BeEquivalentTo(aDeclaration);
         }
     }
 }
