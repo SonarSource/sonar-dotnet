@@ -1001,7 +1001,7 @@ namespace SonarAnalyzer.SymbolicExecution
                     sv = newProgramState.GetSymbolValue(symbol);
                     if (sv == null)
                     {
-                        sv = fieldSymbol.CreateFieldSymbolicValue();
+                        sv = CreateFieldSymbolicValue(fieldSymbol);
                         newProgramState = newProgramState.StoreSymbolicValue(symbol, sv);
                     }
                 }
@@ -1166,7 +1166,7 @@ namespace SonarAnalyzer.SymbolicExecution
             {
                 if (symbol is IFieldSymbol fieldSymbol)
                 {
-                    sv = fieldSymbol.CreateFieldSymbolicValue();
+                    sv = CreateFieldSymbolicValue(fieldSymbol);
                     newProgramState = newProgramState.StoreSymbolicValue(symbol, sv);
                 }
                 else
@@ -1356,5 +1356,25 @@ namespace SonarAnalyzer.SymbolicExecution
             block is BinaryBranchBlock branchBlock && branchBlock.BranchingNode.Kind() is SyntaxKind.ForEachStatement
             ? branchBlock.FalseSuccessorBlock
             : null;
+
+        private static SymbolicValue CreateFieldSymbolicValue(IFieldSymbol fieldSymbol)
+        {
+            if (!fieldSymbol.IsConst || !fieldSymbol.HasConstantValue)
+            {
+                return new SymbolicValue();
+            }
+
+            var boolValue = fieldSymbol.ConstantValue as bool?;
+            if (boolValue.HasValue)
+            {
+                return boolValue.Value
+                    ? SymbolicValue.True
+                    : SymbolicValue.False;
+            }
+
+            return fieldSymbol.ConstantValue == null
+                ? SymbolicValue.Null
+                : new SymbolicValue();
+        }
     }
 }
