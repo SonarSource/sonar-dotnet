@@ -101,10 +101,9 @@ namespace SonarAnalyzer.UnitTest.TestFramework
 
         public INamespaceSymbol GetNamespaceSymbol(string name)
         {
-            var symbol = (GetNodes<CSharpSyntax.NamespaceDeclarationSyntax>()
-                .Concat<SyntaxNode>(GetNodes<VBSyntax.NamespaceStatementSyntax>()))
-                .Select(s => SemanticModel.GetDeclaredSymbol(s))
-                .First(s => s.Name == name) as INamespaceSymbol;
+            var symbol = GetNodes<CSharpSyntax.NamespaceDeclarationSyntax>().Concat<SyntaxNode>(GetNodes<VBSyntax.NamespaceStatementSyntax>())
+                                                                            .Select(s => SemanticModel.GetDeclaredSymbol(s))
+                                                                            .First(s => s.Name == name) as INamespaceSymbol;
 
             symbol.Should().NotBeNull($"Test setup error: could not find namespace in code snippet: {name}");
             return symbol;
