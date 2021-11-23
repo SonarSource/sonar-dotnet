@@ -25,8 +25,6 @@ using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
-using SonarAnalyzer.Helpers;
-using StyleCop.Analyzers.Lightup;
 #else
 using Microsoft.CodeAnalysis.VisualBasic.Syntax;
 #endif
