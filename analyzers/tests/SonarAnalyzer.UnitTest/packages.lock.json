@@ -10,9 +10,9 @@
       },
       "FluentAssertions.Analyzers": {
         "type": "Direct",
-        "requested": "[0.11.4, )",
-        "resolved": "0.11.4",
-        "contentHash": "zSCkwOgc5OyfMfEeMr9x0K7WCDf8i6VdF2RtCLN/4m6iebTtJQdeoJ9IS4/RyYHuLUYjrm0sd+siWbaSvSzRYQ=="
+        "requested": "[0.13.0, )",
+        "resolved": "0.13.0",
+        "contentHash": "KXUw4o+1I/pH9FS3olKgg6cvYX+wuOBupG/SH9dSAK4H693W9fKLeEJBXqDkSyqag88+FkrqeQfNy4m3F57AQw=="
       },
       "Microsoft.CodeAnalysis.CSharp.Workspaces": {
         "type": "Direct",
@@ -463,9 +463,9 @@
       },
       "FluentAssertions.Analyzers": {
         "type": "Direct",
-        "requested": "[0.11.4, )",
-        "resolved": "0.11.4",
-        "contentHash": "zSCkwOgc5OyfMfEeMr9x0K7WCDf8i6VdF2RtCLN/4m6iebTtJQdeoJ9IS4/RyYHuLUYjrm0sd+siWbaSvSzRYQ=="
+        "requested": "[0.13.0, )",
+        "resolved": "0.13.0",
+        "contentHash": "KXUw4o+1I/pH9FS3olKgg6cvYX+wuOBupG/SH9dSAK4H693W9fKLeEJBXqDkSyqag88+FkrqeQfNy4m3F57AQw=="
       },
       "Microsoft.CodeAnalysis.CSharp.Workspaces": {
         "type": "Direct",
