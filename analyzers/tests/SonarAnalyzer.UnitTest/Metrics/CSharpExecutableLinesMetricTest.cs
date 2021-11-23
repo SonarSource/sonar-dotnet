@@ -332,36 +332,24 @@ public class ComplicatedCode
     }
 }", 8, 14);
 
-        [TestMethod]
-        public void ExcludeFromTestCoverage_Variants()
-        {
-            // FIXME: Rewrite
-            var attributeVariants = new List<string>
-            {
-                "ExcludeFromCodeCoverage",
-                "ExcludeFromCodeCoverage()",
-                "ExcludeFromCodeCoverageAttribute",
-                "ExcludeFromCodeCoverageAttribute()",
-                "System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverageAttribute()"
-            };
-
-            attributeVariants.ForEach(attr => AssertLinesOfCode(GenerateTest(attr)));
-
-            string GenerateTest(string attribute)
-            {
-                return @"
-                    using System.Diagnostics.CodeAnalysis;
-                    public class ComplicatedCode
-                    {
-                        [" + attribute + @"]
-                        public string ComplexFoo()
-                        {
-                            string text = null;
-                            return text.ToLower();
-                        }
-                    }";
-            }
-        }
+        [DataTestMethod]
+        [DataRow("ExcludeFromCodeCoverage")]
+        [DataRow("ExcludeFromCodeCoverage()")]
+        [DataRow("ExcludeFromCodeCoverageAttribute")]
+        [DataRow("ExcludeFromCodeCoverageAttribute()")]
+        [DataRow("System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverageAttribute()")]
+        public void ExcludeFromTestCoverage_Variants(string attribute) =>
+            AssertLinesOfCode(
+@$"using System.Diagnostics.CodeAnalysis;
+public class ComplicatedCode
+{{
+    [{attribute}]
+    public string ComplexFoo()
+    {{
+        string text = null;
+        return text.ToLower();
+    }}
+}}");
 
         [TestMethod]
         public void ExcludeClassFromTestCoverage() =>
