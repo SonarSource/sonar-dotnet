@@ -70,13 +70,30 @@ namespace Test
     }
 }";
 
+        private const string SourceTopLevelStatement = @"
+var a = 1;
+var b = 2;
+if (a == b)
+{
+    DoSomething();
+}
+if (a == 2)
+{
+    DoSomething();
+}
+void DoSomething() { }";
+
         private MethodDeclarationSyntax ifMethod;
         private MethodDeclarationSyntax switchMethod;
+
+        private SyntaxTree syntaxTreeTopLevelStatement;
 
         [TestInitialize]
         public void TestSetup()
         {
             var syntaxTree = CSharpSyntaxTree.ParseText(Source);
+            syntaxTreeTopLevelStatement = CSharpSyntaxTree.ParseText(SourceTopLevelStatement);
+
             ifMethod = syntaxTree.GetRoot()
                                  .DescendantNodes()
                                  .OfType<MethodDeclarationSyntax>()
@@ -153,11 +170,21 @@ namespace Test
         {
             var statements = switchMethod.Body.Statements.ToList();
 
-            var snippet = new TestFramework.SnippetCompiler(Source);
-            var containingSymbol = snippet.GetMethodSymbol("TestClass.SwitchMethod");
+            statements[1].GetPrecedingStatement().Should().BeEquivalentTo(statements[0]);
+            statements[0].GetPrecedingStatement().Should().Be(null);
+        }
 
-            statements[1].GetPrecedingStatement(containingSymbol).Should().BeEquivalentTo(statements[0]);
-            statements[0].GetPrecedingStatement(containingSymbol).Should().Be(null);
+        [TestMethod]
+        public void GetPrecedingStatementTopLevelStatements()
+        {
+            var globalStatements = syntaxTreeTopLevelStatement.GetRoot()
+                                                              .ChildNodes()
+                                                              .Select(x => x.ChildNodes().FirstOrDefault())
+                                                              .OfType<StatementSyntax>()
+                                                              .ToArray();
+
+            globalStatements[1].GetPrecedingStatement().Should().BeEquivalentTo(globalStatements[0]);
+            globalStatements[0].GetPrecedingStatement().Should().Be(null);
         }
     }
 }
