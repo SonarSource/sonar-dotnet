@@ -36,9 +36,6 @@ namespace SonarAnalyzer.Rules
         protected virtual bool ShouldReportOnMethodCall(TInvocationExpressionSyntax invocation,
             SemanticModel semanticModel, MemberDescriptor memberDescriptor) => true;
 
-        protected virtual bool IsExemptedFromRaisingIssue(TInvocationExpressionSyntax invocation) =>
-            false;
-
         protected void AnalyzeInvocation(SyntaxNodeAnalysisContext analysisContext)
         {
             var invocation = (TInvocationExpressionSyntax)analysisContext.Node;
