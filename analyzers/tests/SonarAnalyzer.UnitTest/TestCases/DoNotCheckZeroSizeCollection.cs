@@ -68,8 +68,8 @@ namespace Tests.Diagnostics
             //        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
             result = 0 <= someEnumerable.Count(); // Noncompliant
             //       ^^^^^^^^^^^^^^^^^^^^^^^^^^^
-            
-            result = result.ToString() == "Not integer";            
+
+            result = result.ToString() == "Not integer";
             result = (localVariable = 42) != -1;
 
             if ((localVariable = 42) != -1) { }
