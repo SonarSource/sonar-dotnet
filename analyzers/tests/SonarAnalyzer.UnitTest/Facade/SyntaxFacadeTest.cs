@@ -82,12 +82,12 @@ namespace SonarAnalyzer.UnitTest.Helpers
             vb.NodeIdentifier(null).Should().BeNull();
 
         [TestMethod]
-        public void NodeIdentifier_UnexpectedTypeThrows_CS() =>
-            cs.Invoking(x => x.NodeIdentifier(CS.SyntaxFactory.ThrowStatement())).Should().Throw<InvalidOperationException>();
+        public void NodeIdentifier_Unexpected_Returns_Null_CS() =>
+           cs.NodeIdentifier(CS.SyntaxFactory.AttributeList()).Should().BeNull();
 
         [TestMethod]
-        public void NodeIdentifier_UnexpectedTypeThrows_VB() =>
-            vb.Invoking(x => x.NodeIdentifier(VB.SyntaxFactory.ThrowStatement())).Should().Throw<InvalidOperationException>();
+        public void NodeIdentifier_Unexpected_Returns_Null_VB() =>
+            vb.NodeIdentifier(VB.SyntaxFactory.AttributeList()).Should().BeNull();
 
         [TestMethod]
         public void NodeStringTextValue_UnexpectedType_CS() =>
