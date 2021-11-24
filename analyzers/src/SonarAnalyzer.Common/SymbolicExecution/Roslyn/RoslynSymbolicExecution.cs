@@ -20,10 +20,11 @@
 
 using System;
 using SonarAnalyzer.CFG.Roslyn;
+using SonarAnalyzer.Extensions;
 
 namespace SonarAnalyzer.SymbolicExecution.Roslyn
 {
-    public class RoslynSymbolicExecution
+    internal class RoslynSymbolicExecution
     {
         private readonly ControlFlowGraph cfg;
 
@@ -32,7 +33,14 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
 
         public void Execute()
         {
-            // ToDo: Something is missing here
+            foreach (var block in cfg.Blocks)    // ToDo: This is a temporary simplification until we support proper branching
+            {
+                foreach(var operation in block.OperationsAndBranchValue.ToExecutionOrder()) // ToDo: This is a temporary oversimplification to scaffold the engine
+                {
+
+                    // ToDo: Something is still missing around here
+                }
+            }
         }
     }
 }

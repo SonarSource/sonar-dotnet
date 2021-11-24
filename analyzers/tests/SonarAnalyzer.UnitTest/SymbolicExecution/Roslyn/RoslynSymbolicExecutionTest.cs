@@ -23,7 +23,7 @@ using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.SymbolicExecution.Roslyn;
 
-namespace SonarAnalyzer.UnitTest.SymbolicExecution.Sonar
+namespace SonarAnalyzer.UnitTest.SymbolicExecution.Roslyn
 {
     [TestClass]
     public class RoslynSymbolicExecutionTest
@@ -33,6 +33,67 @@ namespace SonarAnalyzer.UnitTest.SymbolicExecution.Sonar
         {
             Action a = () => new RoslynSymbolicExecution(null);
             a.Should().Throw<ArgumentNullException>().And.ParamName.Should().Be("cfg");
+        }
+
+        [TestMethod]
+        public void SequentialInput_CS()
+        {
+            var context = CreateContextCS("var a = true; var b = false; b = !b; a = (b);");
+            //FIXME: Assert
+        }
+
+        [TestMethod]
+        public void SequentialInput_VB()
+        {
+            var context = CreateContextVB("Dim A As Boolean = True, B As Boolean = False : B = Not B : A = (B)");
+            //FIXME: Assert
+        }
+
+        private Context CreateContextCS(string methodBody, string additionalParameters = null)
+        {
+            var code = $@"
+public class Sample
+{{
+    public void Main(bool boolParameter{additionalParameters})
+    {{
+        {methodBody}
+    }}
+
+    private string Method(params string[] args) => null;
+    private bool IsMethod(params bool[] args) => true;
+}}";
+            return new Context(code, true);
+        }
+
+        private Context CreateContextVB(string methodBody, string additionalParameters = null)
+        {
+            var code = $@"
+Public Class Sample
+
+    Public Sub Main(BoolParameter As Boolean{additionalParameters})
+        {methodBody}
+    End Sub
+
+    Private Function Method(ParamArray Args() As String) As String
+    End Function
+
+    Private Function IsMethod(ParamArray Args() As Boolean) As Boolean
+    End Function
+
+End Class";
+            return new Context(code, false);
+        }
+
+        private class Context
+        {
+            private readonly RoslynSymbolicExecution se;
+
+            public Context(string code, bool isCSharp)
+            {
+                var cfg = TestHelper.CompileCfg(code, isCSharp);
+                se = new RoslynSymbolicExecution(cfg);
+                se.Execute();
+            }
         }
     }
 }
