@@ -57,18 +57,7 @@ namespace SonarAnalyzer.Rules.SymbolicExecution
         protected override void Initialize(SonarAnalysisContext context)
         {
             context.RegisterSyntaxNodeActionInNonGenerated(
-                c =>
-                {
-                    var declaration = (BaseMethodDeclarationSyntax)c.Node;
-                    var symbol = c.SemanticModel.GetDeclaredSymbol(declaration);
-                    if (symbol == null)
-                    {
-                        return;
-                    }
-
-                    Analyze(declaration.Body, symbol, c);
-                    Analyze(declaration.ExpressionBody(), symbol, c);
-                },
+                c => Analyze<BaseMethodDeclarationSyntax>(c, x => (CSharpSyntaxNode)x.Body ?? x.ExpressionBody()),
                 SyntaxKind.ConstructorDeclaration,
                 SyntaxKind.DestructorDeclaration,
                 SyntaxKind.ConversionOperatorDeclaration,
@@ -76,32 +65,11 @@ namespace SonarAnalyzer.Rules.SymbolicExecution
                 SyntaxKind.MethodDeclaration);
 
             context.RegisterSyntaxNodeActionInNonGenerated(
-                c =>
-                {
-                    var declaration = (PropertyDeclarationSyntax)c.Node;
-                    var symbol = c.SemanticModel.GetDeclaredSymbol(declaration);
-                    if (symbol == null)
-                    {
-                        return;
-                    }
-
-                    Analyze(declaration.ExpressionBody, symbol, c);
-                },
+                c => Analyze<PropertyDeclarationSyntax>(c, x => x.ExpressionBody),
                 SyntaxKind.PropertyDeclaration);
 
             context.RegisterSyntaxNodeActionInNonGenerated(
-                c =>
-                {
-                    var declaration = (AccessorDeclarationSyntax)c.Node;
-                    var symbol = c.SemanticModel.GetDeclaredSymbol(declaration);
-                    if (symbol == null)
-                    {
-                        return;
-                    }
-
-                    Analyze(declaration.Body, symbol, c);
-                    Analyze(declaration.ExpressionBody(), symbol, c);
-                },
+                c => Analyze<AccessorDeclarationSyntax>(c, x => (CSharpSyntaxNode)x.Body ?? x.ExpressionBody()),
                 SyntaxKind.GetAccessorDeclaration,
                 SyntaxKind.SetAccessorDeclaration,
                 SyntaxKindEx.InitAccessorDeclaration,
@@ -112,24 +80,29 @@ namespace SonarAnalyzer.Rules.SymbolicExecution
                 c =>
                 {
                     var declaration = (AnonymousFunctionExpressionSyntax)c.Node;
-                    var symbol = c.SemanticModel.GetSymbolInfo(declaration).Symbol;
-                    if (symbol == null)
+                    if (c.SemanticModel.GetSymbolInfo(declaration).Symbol is { } symbol)
                     {
-                        return;
+                        Analyze(c, declaration.Body, symbol);
                     }
-
-                    Analyze(declaration.Body, symbol, c);
                 },
                 SyntaxKind.AnonymousMethodExpression,
                 SyntaxKind.SimpleLambdaExpression,
                 SyntaxKind.ParenthesizedLambdaExpression);
         }
 
-        private void Analyze(CSharpSyntaxNode declarationBody, ISymbol symbol, SyntaxNodeAnalysisContext context)
+        private void Analyze<TNode>(SyntaxNodeAnalysisContext context, Func<TNode, CSharpSyntaxNode> getBody) where TNode : SyntaxNode
         {
-            if (declarationBody == null
-                || declarationBody.ContainsDiagnostics
-                || !CSharpControlFlowGraph.TryGet(declarationBody, context.SemanticModel, out var cfg))
+            if (getBody((TNode)context.Node) is { } body && context.SemanticModel.GetDeclaredSymbol(context.Node) is { } symbol)
+            {
+                Analyze(context, body, symbol);
+            }
+        }
+
+        private void Analyze(SyntaxNodeAnalysisContext context, CSharpSyntaxNode body, ISymbol symbol)
+        {
+            if (body == null
+                || body.ContainsDiagnostics
+                || !CSharpControlFlowGraph.TryGet(body, context.SemanticModel, out var cfg))
             {
                 return;
             }
@@ -158,10 +131,8 @@ namespace SonarAnalyzer.Rules.SymbolicExecution
                 // reached or if an exception was thrown during analysis.
                 ReportDiagnostics(analyzerContexts, context, true);
 
-                void ExplorationEndedHandler(object sender, EventArgs args)
-                {
+                void ExplorationEndedHandler(object sender, EventArgs args) =>
                     ReportDiagnostics(analyzerContexts, context, false);
-                }
             }
             catch (Exception e)
             {
@@ -170,8 +141,8 @@ namespace SonarAnalyzer.Rules.SymbolicExecution
                 // See https://github.com/dotnet/roslyn/issues/1455 and https://github.com/dotnet/roslyn/issues/24346
                 var sb = new StringBuilder();
                 sb.AppendLine($"Error processing method: {symbol?.Name ?? "{unknown}"}");
-                sb.AppendLine($"Method file: {declarationBody.GetLocation()?.GetLineSpan().Path ?? "{unknown}"}");
-                sb.AppendLine($"Method line: {declarationBody.GetLocation()?.GetLineSpan().StartLinePosition.ToString() ?? "{unknown}"}");
+                sb.AppendLine($"Method file: {body.GetLocation()?.GetLineSpan().Path ?? "{unknown}"}");
+                sb.AppendLine($"Method line: {body.GetLocation()?.GetLineSpan().StartLinePosition.ToString() ?? "{unknown}"}");
                 sb.AppendLine($"Inner exception: {e}");
 
                 throw new SymbolicExecutionException(sb.ToString().Replace(Environment.NewLine, " ## "), e);
@@ -180,13 +151,12 @@ namespace SonarAnalyzer.Rules.SymbolicExecution
 
         private static void ReportDiagnostics(IEnumerable<ISymbolicExecutionAnalysisContext> analyzerContexts, SyntaxNodeAnalysisContext context, bool supportsPartialResults)
         {
-            foreach (var analyzerContext in analyzerContexts.Where(analyzerContext => analyzerContext.SupportsPartialResults == supportsPartialResults))
+            foreach (var analyzerContext in analyzerContexts.Where(x => x.SupportsPartialResults == supportsPartialResults))
             {
                 foreach (var diagnostic in analyzerContext.GetDiagnostics())
                 {
                     context.ReportIssue(diagnostic);
                 }
-
                 analyzerContext.Dispose();
             }
         }
