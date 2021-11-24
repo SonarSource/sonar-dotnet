@@ -111,7 +111,7 @@ namespace SonarAnalyzer.Rules.SymbolicExecution
             try
             {
                 var explodedGraph = new SonarExplodedGraph(cfg, symbol, context.SemanticModel, lva);
-                var analyzerContexts = InitializeAnalyzers(explodedGraph, context).ToList();
+                var analyzerContexts = symbolicExecutionAnalyzerFactory.GetEnabledAnalyzers(context).Select(x => x.CreateContext(explodedGraph, context)).ToList();
                 try
                 {
                     explodedGraph.ExplorationEnded += ExplorationEndedHandler;
@@ -160,10 +160,5 @@ namespace SonarAnalyzer.Rules.SymbolicExecution
                 analyzerContext.Dispose();
             }
         }
-
-        private IEnumerable<ISymbolicExecutionAnalysisContext> InitializeAnalyzers(SonarExplodedGraph explodedGraph, SyntaxNodeAnalysisContext context) =>
-            symbolicExecutionAnalyzerFactory
-                .GetEnabledAnalyzers(context)
-                .Select(analyzer => analyzer.AddChecks(explodedGraph, context));
     }
 }
