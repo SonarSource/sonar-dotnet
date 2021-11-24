@@ -36,11 +36,15 @@ namespace SonarAnalyzer.Rules
         protected virtual bool ShouldReportOnMethodCall(TInvocationExpressionSyntax invocation,
             SemanticModel semanticModel, MemberDescriptor memberDescriptor) => true;
 
+        protected virtual bool IsExemptedFromRaisingIssue(TInvocationExpressionSyntax invocation) =>
+            false;
+
         protected void AnalyzeInvocation(SyntaxNodeAnalysisContext analysisContext)
         {
             var invocation = (TInvocationExpressionSyntax)analysisContext.Node;
 
-            if (!IsInValidContext(invocation, analysisContext.SemanticModel))
+            if (!IsInValidContext(invocation, analysisContext.SemanticModel)
+                || IsExemptedFromRaisingIssue(invocation))
             {
                 return;
             }
@@ -73,11 +77,9 @@ namespace SonarAnalyzer.Rules
         protected virtual bool IsInValidContext(TInvocationExpressionSyntax invocationSyntax,
             SemanticModel semanticModel) => true;
 
-        private MemberDescriptor FindDisallowedMethodSignature(SyntaxToken identifier, ISymbol methodCallSymbol)
-        {
-            return CheckedMethods
-                .Where(method => method.Name.Equals(identifier.ValueText))
-                .FirstOrDefault(m => methodCallSymbol.ContainingType.ConstructedFrom.Is(m.ContainingType));
-        }
+        private MemberDescriptor FindDisallowedMethodSignature(SyntaxToken identifier, ISymbol methodCallSymbol) =>
+            CheckedMethods.Where(method => method.Name.Equals(identifier.ValueText))
+                          .FirstOrDefault(m => methodCallSymbol.ContainingType.ConstructedFrom.Is(m.ContainingType));
+
     }
 }
