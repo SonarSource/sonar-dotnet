@@ -20,9 +20,7 @@
 
 using System.Collections.Generic;
 using System.Collections.Immutable;
-using System.Linq;
 using Microsoft.CodeAnalysis;
-using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
@@ -36,19 +34,15 @@ namespace SonarAnalyzer.Rules.CSharp
         internal const string DiagnosticId = "S3902";
         private const string MessageFormat = "Replace this call to 'Assembly.GetExecutingAssembly()' with 'Type.Assembly'.";
 
-        private static readonly DiagnosticDescriptor rule =
-            DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
+        private static readonly DiagnosticDescriptor Rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
 
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(rule);
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
 
-        protected sealed override bool IsExemptedFromRaisingIssue(InvocationExpressionSyntax invocation) =>
-            invocation.Ancestors().Any(x => x is GlobalStatementSyntax);
-
-        private static readonly IEnumerable<MemberDescriptor> checkedMethods = new List<MemberDescriptor>
+        private static readonly IEnumerable<MemberDescriptor> CheckedMethodsList = new List<MemberDescriptor>
         {
             new MemberDescriptor(KnownType.System_Reflection_Assembly, "GetExecutingAssembly")
         };
 
-        internal override IEnumerable<MemberDescriptor> CheckedMethods => checkedMethods;
+        internal override IEnumerable<MemberDescriptor> CheckedMethods => CheckedMethodsList;
     }
 }

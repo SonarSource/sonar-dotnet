@@ -43,8 +43,7 @@ namespace SonarAnalyzer.Rules
         {
             var invocation = (TInvocationExpressionSyntax)analysisContext.Node;
 
-            if (!IsInValidContext(invocation, analysisContext.SemanticModel)
-                || IsExemptedFromRaisingIssue(invocation))
+            if (!IsInValidContext(invocation, analysisContext.SemanticModel))
             {
                 return;
             }
@@ -77,9 +76,11 @@ namespace SonarAnalyzer.Rules
         protected virtual bool IsInValidContext(TInvocationExpressionSyntax invocationSyntax,
             SemanticModel semanticModel) => true;
 
-        private MemberDescriptor FindDisallowedMethodSignature(SyntaxToken identifier, ISymbol methodCallSymbol) =>
-            CheckedMethods.Where(method => method.Name.Equals(identifier.ValueText))
-                          .FirstOrDefault(m => methodCallSymbol.ContainingType.ConstructedFrom.Is(m.ContainingType));
-
+        private MemberDescriptor FindDisallowedMethodSignature(SyntaxToken identifier, ISymbol methodCallSymbol)
+        {
+            return CheckedMethods
+                .Where(method => method.Name.Equals(identifier.ValueText))
+                .FirstOrDefault(m => methodCallSymbol.ContainingType.ConstructedFrom.Is(m.ContainingType));
+        }
     }
 }
