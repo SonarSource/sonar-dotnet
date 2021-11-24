@@ -42,8 +42,7 @@ namespace SonarAnalyzer.Rules.CSharp
         private const string ContinueWithName = "ContinueWith";
         private const string SleepName = "Sleep";
 
-        private static readonly DiagnosticDescriptor Rule =
-            DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
+        private static readonly DiagnosticDescriptor Rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
 
         private static readonly Dictionary<string, ImmutableArray<KnownType>> InvalidMemberAccess =
             new ()
@@ -105,7 +104,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 || IsResultInContinueWithCall(memberAccessNameName, simpleMemberAccess)
                 || IsChainedAfterThreadPoolCall(simpleMemberAccess, context.SemanticModel)
                 || simpleMemberAccess.IsInNameOfArgument(context.SemanticModel)
-                || IsInTopLevelStatement(context, simpleMemberAccess))
+                || simpleMemberAccess.Ancestors().Any(x => x is GlobalStatementSyntax))
             {
                 return;
             }
@@ -192,10 +191,5 @@ namespace SonarAnalyzer.Rules.CSharp
             expectedTypes.Keys.Any(memberAccess.NameIs)
             && semanticModel.GetSymbolInfo(memberAccess).Symbol?.ContainingType?.ConstructedFrom is { } memberAccessSymbol
             && memberAccessSymbol.Is(expectedTypes[memberAccess.Name.Identifier.ValueText]);
-
-        private static bool IsInTopLevelStatement(SyntaxNodeAnalysisContext context, MemberAccessExpressionSyntax memberAccess) =>
-            context.ContainingSymbol is IMethodSymbol containingMethodSymbol
-            && containingMethodSymbol.IsMainMethod()
-            && !memberAccess.Ancestors().Any(x => x.IsKind(SyntaxKindEx.LocalFunctionStatement));
     }
 }

@@ -2,7 +2,7 @@
 using System.Threading;
 using System.Threading.Tasks;
 
-// All of the calls from Main methods are allowed
+// All the calls from top level statements are allowed.
 var x = GetFooAsync().Result;
 GetFooAsync().Wait();
 GetFooAsync().GetAwaiter().GetResult();
@@ -19,8 +19,8 @@ Task Foo(Task<string> task)
     Action<Task<string>, object> continuation;
     return task.ContinueWith(state: null, continuationAction: (Task<string> _, object _) =>
     {
-        Task<int> anotherTask = null; // Pretend to compute something
-        var b = anotherTask.Result; // Noncompliant, this task is not safe inside ContinueWith
+        Task<int> anotherTask = null;
+        var b = anotherTask.Result;
     });
 }
 
