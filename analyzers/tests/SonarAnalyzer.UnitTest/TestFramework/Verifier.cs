@@ -112,11 +112,11 @@ namespace SonarAnalyzer.UnitTest.TestFramework
 
         public static void VerifyAnalyzerFromCSharp10Console(string path, DiagnosticAnalyzer diagnosticAnalyzer, IEnumerable<MetadataReference> additionalReferences = null) =>
             VerifyNonConcurrentAnalyzer(new[] { path },
-                                new[] { diagnosticAnalyzer },
-                                ParseOptionsHelper.FromCSharp10,
-                                CompilationErrorBehavior.Default,
-                                OutputKind.ConsoleApplication,
-                                additionalReferences);
+                                        new[] { diagnosticAnalyzer },
+                                        ParseOptionsHelper.FromCSharp10,
+                                        CompilationErrorBehavior.Default,
+                                        OutputKind.ConsoleApplication,
+                                        additionalReferences);
 
         /// <summary>
         /// Verify analyzer from C# 9 with top level statements in non-concurrent execution mode.

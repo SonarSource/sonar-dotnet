@@ -100,4 +100,8 @@ namespace Tests.Diagnostics
             PositionalRecord @record = new PositionalRecord("");
         }
     }
+
+    public partial class PartialMethods
+    {
+    }
 }

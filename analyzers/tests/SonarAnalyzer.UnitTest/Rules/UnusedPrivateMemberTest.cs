@@ -203,26 +203,24 @@ namespace EntityFrameworkMigrations
         [TestMethod]
         public void UnusedPrivateMember_FromCSharp9() =>
             Verifier.VerifyAnalyzerFromCSharp9Library(
-                @"TestCases\UnusedPrivateMember.CSharp9.cs",
+                new[]
+                {
+                    @"TestCases\UnusedPrivateMember.CSharp9.cs",
+                    @"TestCases\UnusedPrivateMember.CSharp9.Second.cs"
+                },
                 new UnusedPrivateMember());
 
         [TestMethod]
         public void UnusedPrivateMember_FromCSharp9_TopLevelStatements() =>
-            Verifier.VerifyAnalyzerFromCSharp9Console(
-                @"TestCases\UnusedPrivateMember.CSharp9.TopLevelStatements.cs",
-                new UnusedPrivateMember());
+            Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\UnusedPrivateMember.CSharp9.TopLevelStatements.cs", new UnusedPrivateMember());
 
         [TestMethod]
         public void UnusedPrivateMember_FromCSharp10() =>
-            Verifier.VerifyAnalyzerFromCSharp10Library(
-                @"TestCases\UnusedPrivateMember.CSharp10.cs",
-                new UnusedPrivateMember());
+            Verifier.VerifyAnalyzerFromCSharp10Library(@"TestCases\UnusedPrivateMember.CSharp10.cs", new UnusedPrivateMember());
 
         [TestMethod]
         public void UnusedPrivateMember_FromCSharpPreview() =>
-            Verifier.VerifyAnalyzerCSharpPreviewLibrary(
-                @"TestCases\UnusedPrivateMember.CSharpPreview.cs",
-                new UnusedPrivateMember());
+            Verifier.VerifyAnalyzerCSharpPreviewLibrary(@"TestCases\UnusedPrivateMember.CSharpPreview.cs", new UnusedPrivateMember());
 #endif
 
         [TestMethod]

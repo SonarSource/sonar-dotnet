@@ -72,16 +72,10 @@ namespace SonarAnalyzer.Rules.CSharp
                         {
                             var namedType = (INamedTypeSymbol)cc.Symbol;
 
-                            if (namedType.TypeKind != TypeKind.Struct
-                                && namedType.TypeKind != TypeKind.Class
-                                && namedType.TypeKind != TypeKind.Delegate
-                                && namedType.TypeKind != TypeKind.Enum
-                                && namedType.TypeKind != TypeKind.Interface)
-                            {
-                                return;
-                            }
-
-                            if (namedType.ContainingType != null || namedType.DerivesFromAny(IgnoredTypes))
+                            if (namedType.ContainingType != null
+                                // We skip top level statements since they cannot have fields. Other declared types are analyzed separately.
+                                || namedType.IsTopLevelProgram()
+                                || namedType.DerivesFromAny(IgnoredTypes))
                             {
                                 return;
                             }
@@ -137,8 +131,10 @@ namespace SonarAnalyzer.Rules.CSharp
                         });
                 });
 
-        private static IEnumerable<Diagnostic> GetDiagnosticsForUnusedPrivateMembers(CSharpSymbolUsageCollector usageCollector, ISet<ISymbol> removableSymbols, string accessibility,
-            BidirectionalDictionary<ISymbol, SyntaxNode> fieldLikeSymbols)
+        private static IEnumerable<Diagnostic> GetDiagnosticsForUnusedPrivateMembers(CSharpSymbolUsageCollector usageCollector,
+                                                                                     ISet<ISymbol> removableSymbols,
+                                                                                     string accessibility,
+                                                                                     BidirectionalDictionary<ISymbol, SyntaxNode> fieldLikeSymbols)
         {
             var unusedSymbols = GetUnusedSymbols(usageCollector, removableSymbols);
 
@@ -181,7 +177,9 @@ namespace SonarAnalyzer.Rules.CSharp
         private static string GetFieldAccessibilityForMessage(ISymbol symbol) =>
             symbol.DeclaredAccessibility == Accessibility.Private ? "private" : "private class";
 
-        private static IEnumerable<Diagnostic> GetDiagnosticsForMembers(ICollection<ISymbol> unusedSymbols, string accessibility, BidirectionalDictionary<ISymbol, SyntaxNode> fieldLikeSymbols)
+        private static IEnumerable<Diagnostic> GetDiagnosticsForMembers(ICollection<ISymbol> unusedSymbols,
+                                                                        string accessibility,
+                                                                        BidirectionalDictionary<ISymbol, SyntaxNode> fieldLikeSymbols)
         {
             var diagnostics = new List<Diagnostic>();
             var alreadyReportedFieldLikeSymbols = new HashSet<ISymbol>();
