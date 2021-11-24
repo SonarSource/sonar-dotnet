@@ -45,7 +45,6 @@ namespace Test
             else
                 DoSomething();
         }
-
         public void SwitchMethod()
         {
             var i = 5;
@@ -73,8 +72,15 @@ namespace Test
         {
             var syntaxTree = CSharpSyntaxTree.ParseText(Source);
 
-            ifMethod = syntaxTree.GetRoot().DescendantNodes().OfType<MethodDeclarationSyntax>().First(m => m.Identifier.ValueText == "IfMethod");
-            switchMethod = syntaxTree.GetRoot().DescendantNodes().OfType<MethodDeclarationSyntax>().First(m => m.Identifier.ValueText == "SwitchMethod");
+            ifMethod = syntaxTree.GetRoot()
+                                 .DescendantNodes()
+                                 .OfType<MethodDeclarationSyntax>()
+                                 .First(m => m.Identifier.ValueText == "IfMethod");
+
+            switchMethod = syntaxTree.GetRoot()
+                                     .DescendantNodes()
+                                     .OfType<MethodDeclarationSyntax>()
+                                     .First(m => m.Identifier.ValueText == "SwitchMethod");
         }
 
         [TestMethod]
@@ -135,15 +141,6 @@ namespace Test
             var sections = ifMethod.DescendantNodes().OfType<SwitchSectionSyntax>().ToList();
 
             sections.FirstOrDefault().GetPrecedingSections().Should().BeEmpty();
-        }
-
-        [TestMethod]
-        public void GetPrecedingStatement()
-        {
-            var statements = switchMethod.Body.Statements.ToList();
-
-            statements[1].GetPrecedingStatement().Should().BeEquivalentTo(statements[0]);
-            statements[0].GetPrecedingStatement().Should().Be(null);
         }
     }
 }

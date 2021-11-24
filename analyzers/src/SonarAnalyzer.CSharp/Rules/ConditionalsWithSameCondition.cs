@@ -19,7 +19,6 @@
  */
 
 using System;
-using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Linq;
 using Microsoft.CodeAnalysis;
@@ -27,6 +26,7 @@ using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.Common;
+using SonarAnalyzer.Extensions;
 using SonarAnalyzer.Helpers;
 
 namespace SonarAnalyzer.Rules.CSharp
@@ -60,7 +60,8 @@ namespace SonarAnalyzer.Rules.CSharp
             {
                 var currentExpression = expression(currentStatement);
                 var previousExpression = expression(previousStatement);
-                if (CSharpEquivalenceChecker.AreEquivalent(currentExpression, previousExpression) && !ContainsPossibleUpdate(previousStatement, currentExpression, context.SemanticModel))
+                if (CSharpEquivalenceChecker.AreEquivalent(currentExpression, previousExpression)
+                    && !ContainsPossibleUpdate(previousStatement, currentExpression, context.SemanticModel))
                 {
                     context.ReportIssue(Diagnostic.Create(Rule, currentExpression.GetLocation(), previousExpression.GetLineNumberToReport()));
                 }

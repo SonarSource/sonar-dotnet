@@ -76,8 +76,5 @@ namespace SonarAnalyzer.Helpers
         }
 
         #endregion Switch
-
-        public static StatementSyntax GetPrecedingStatement(this StatementSyntax currentStatement) =>
-            currentStatement.Parent.ChildNodes().OfType<StatementSyntax>().TakeWhile(x => x != currentStatement).LastOrDefault();
     }
 }
