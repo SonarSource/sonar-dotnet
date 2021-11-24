@@ -9,6 +9,12 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="NewFolder\**" />
+    <EmbeddedResource Remove="NewFolder\**" />
+    <None Remove="NewFolder\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Google.Protobuf" Version="3.6.1" />
     <!-- When changing this reference update ProtocExe property too! -->
     <PackageReference Include="Google.Protobuf.Tools" Version="3.6.1" />
@@ -31,6 +37,10 @@
       <SonarQubeExclude>true</SonarQubeExclude>
     </Compile>
     <Compile Include="..\Signing.cs" Link="Properties\Signing.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\SonarAnalyzer.CFG\SonarAnalyzer.CFG.csproj" />
   </ItemGroup>
 
   <!-- Generate protobuf classes, supports windows and linux execution -->
