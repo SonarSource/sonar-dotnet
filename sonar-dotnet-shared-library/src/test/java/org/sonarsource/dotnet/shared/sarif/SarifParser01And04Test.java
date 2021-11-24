@@ -109,12 +109,12 @@ public class SarifParser01And04Test {
     new SarifParser01And04(null, getRoot("v0_4_file_level_issue.json"), String::toString).accept(callback);
 
     InOrder inOrder = inOrder(callback);
-    inOrder.verify(callback).onFileIssue(eq("S104"), Mockito.isNull(), Mockito.anyString(), emptyList(), eq("Dummy"));
-    inOrder.verify(callback).onFileIssue(eq("S105"), Mockito.isNull(), Mockito.anyString(), emptyList(), eq("Dummy"));
+    inOrder.verify(callback).onFileIssue(eq("S104"), Mockito.isNull(), Mockito.anyString(), eq(emptyList()), eq("Dummy"));
+    inOrder.verify(callback).onFileIssue(eq("S105"), Mockito.isNull(), Mockito.anyString(), eq(emptyList()), eq("Dummy"));
     Location location = new Location("C:\\Program.cs", "Dummy", 1, 0, 1, 1);
     inOrder.verify(callback).onIssue("S105", null, location, emptyList());
 
-    inOrder.verify(callback).onFileIssue(eq("S106"), Mockito.isNull(), Mockito.anyString(), emptyList(), eq("Dummy"));
+    inOrder.verify(callback).onFileIssue(eq("S106"), Mockito.isNull(), Mockito.anyString(), eq(emptyList()), eq("Dummy"));
 
     verifyNoMoreInteractions(callback);
   }
