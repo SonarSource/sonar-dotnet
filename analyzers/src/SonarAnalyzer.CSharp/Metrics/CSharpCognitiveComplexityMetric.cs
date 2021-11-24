@@ -80,10 +80,6 @@ namespace SonarAnalyzer.Metrics.CSharp
 
                     base.Visit(node);
                 }
-                else if (node.IsKind(SyntaxKindEx.GlobalStatement))
-                {
-                    base.Visit(((GlobalStatementSyntax) node).Statement);
-                }
                 else
                 {
                     base.Visit(node);
