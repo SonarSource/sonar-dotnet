@@ -26,20 +26,19 @@ using SonarAnalyzer.Helpers;
 
 namespace SonarAnalyzer.Rules
 {
-    public abstract class MethodsShouldNotHaveIdenticalImplementationsBase<TMethodDeclarationSyntax, TLanguageKindEnum>
-        : SonarDiagnosticAnalyzer
+    public abstract class MethodsShouldNotHaveIdenticalImplementationsBase<TMethodDeclarationSyntax, TLanguageKindEnum> : SonarDiagnosticAnalyzer
         where TLanguageKindEnum : struct
     {
         protected const string DiagnosticId = "S4144";
         private const string MessageFormat = "Update this method so that its implementation is not identical to '{0}'.";
 
         private readonly DiagnosticDescriptor rule;
-
         protected abstract ILanguageFacade<TLanguageKindEnum> Language { get; }
         protected abstract IEnumerable<TMethodDeclarationSyntax> GetMethodDeclarations(SyntaxNode node);
         protected abstract SyntaxToken GetMethodIdentifier(TMethodDeclarationSyntax method);
         protected abstract bool AreDuplicates(TMethodDeclarationSyntax firstMethod, TMethodDeclarationSyntax secondMethod);
 
+        internal abstract TLanguageKindEnum[] RegisteredSyntax { get; }
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
 
         protected MethodsShouldNotHaveIdenticalImplementationsBase() =>
@@ -80,7 +79,8 @@ namespace SonarAnalyzer.Rules
                                 messageArgs: GetMethodIdentifier(method).ValueText));
                         }
                     }
-                }, Language.SyntaxKind.ClassAndRecordDeclaration);
+                },
+                RegisteredSyntax);
 
         protected static bool HaveSameParameters<TSyntax>(SeparatedSyntaxList<TSyntax>? leftParameters, SeparatedSyntaxList<TSyntax>? rightParameters)
             where TSyntax : SyntaxNode

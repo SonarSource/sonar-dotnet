@@ -19,6 +19,7 @@
  */
 
 using System.Collections.Generic;
+using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
@@ -27,6 +28,7 @@ using SonarAnalyzer.Common;
 using SonarAnalyzer.Extensions;
 using SonarAnalyzer.Helpers;
 using SonarAnalyzer.Wrappers;
+using StyleCop.Analyzers.Lightup;
 
 namespace SonarAnalyzer.Rules.CSharp
 {
@@ -36,8 +38,22 @@ namespace SonarAnalyzer.Rules.CSharp
     {
         protected override ILanguageFacade<SyntaxKind> Language => CSharpFacade.Instance;
 
-        protected override IEnumerable<IMethodDeclaration> GetMethodDeclarations(SyntaxNode node) =>
-            ((TypeDeclarationSyntax)node).GetMethodDeclarations();
+        internal override SyntaxKind[] RegisteredSyntax => new SyntaxKind[] {   SyntaxKind.ClassDeclaration,
+                                                                                SyntaxKindEx.RecordClassDeclaration,
+                                                                                SyntaxKind.CompilationUnit
+                                                                             };
+
+        protected override IEnumerable<IMethodDeclaration> GetMethodDeclarations(SyntaxNode node)
+        {
+            if (node is TypeDeclarationSyntax)
+            {
+                return ((TypeDeclarationSyntax)node).GetMethodDeclarations();
+            }
+            else
+            {
+                return  ((CompilationUnitSyntax)node).GetMethodDeclarations();
+            }
+        }
 
         protected override bool AreDuplicates(IMethodDeclaration firstMethod, IMethodDeclaration secondMethod) =>
             firstMethod.Body != null

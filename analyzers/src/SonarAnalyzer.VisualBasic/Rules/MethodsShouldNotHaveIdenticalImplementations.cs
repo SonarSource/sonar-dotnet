@@ -35,6 +35,8 @@ namespace SonarAnalyzer.Rules.VisualBasic
     {
         protected override ILanguageFacade<SyntaxKind> Language => VisualBasicFacade.Instance;
 
+        internal override SyntaxKind[] RegisteredSyntax => new SyntaxKind[] { SyntaxKind.ClassBlock };
+
         protected override IEnumerable<MethodBlockSyntax> GetMethodDeclarations(SyntaxNode node)
         {
             var classDeclaration = (ClassBlockSyntax)node;
