@@ -50,7 +50,6 @@ namespace Test
         }
     }
 }";
-            var syntaxTree = CSharpSyntaxTree.ParseText(source);
             var ifMethodStatements = CSharpSyntaxTree.ParseText(source)
                                              .GetRoot()
                                              .DescendantNodes()
