@@ -61,7 +61,7 @@ namespace Tests.Diagnostics
             result = someEnumerable.Count() >= ConstField_NonZero;
             result = someEnumerable.Count() >= ConstField_Zero; // Noncompliant
             result = someEnumerable.Count() >= localConst_NonZero;
-            result = someEnumerable.Count() >= ConstField_Double_Zero; // Compliant, double is ignored
+            result = someEnumerable.Count() >= ConstField_Double_Zero; // Compliant, double is ignored, arguably FN
 
             result = (someEnumerable.Count()) >= (0); // Noncompliant
             result = ((((someEnumerable).Count())) >= ((0))); // Noncompliant
