@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-﻿namespace Tests.Diagnostics
+namespace Tests.Diagnostics
 {
     record Program
     {
@@ -92,4 +92,10 @@ public class Repro_4423
             throw new ArgumentNullException(nameof(methodArg));  // Noncompliant, this method even doesn't see methodArg value
         }
     }
+}
+
+// https://github.com/SonarSource/sonar-dotnet/issues/5094
+public record Data(string Code)
+{
+    public string Code { get; } = Code ?? throw new ArgumentNullException(nameof(Code)); // Noncompliant, FP - Code is a record parameter
 }
