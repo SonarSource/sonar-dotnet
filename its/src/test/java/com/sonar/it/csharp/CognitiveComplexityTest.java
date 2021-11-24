@@ -59,6 +59,9 @@ public class CognitiveComplexityTest {
 
     assertThat(issues.size()).isEqualTo(1);
     assertThat(issues.get(0).getFlowsCount()).isEqualTo(3);
+    assertThat(issues.get(0).getFlows(0).getLocations(0).getTextRange().getStartLine()).isEqualTo(3);
+    assertThat(issues.get(0).getFlows(1).getLocations(0).getTextRange().getStartLine()).isEqualTo(7);
+    assertThat(issues.get(0).getFlows(2).getLocations(0).getTextRange().getStartLine()).isEqualTo(11);
   }
 
   private void provisionProject() {
