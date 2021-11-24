@@ -22,11 +22,16 @@ using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Linq;
+using System.Text;
 using Microsoft.CodeAnalysis;
+using Microsoft.CodeAnalysis.CSharp;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
-using SonarAnalyzer.Extensions;
+using SonarAnalyzer.CFG.Sonar;
 using SonarAnalyzer.Helpers;
+using SonarAnalyzer.LiveVariableAnalysis.CSharp;
 using SonarAnalyzer.SymbolicExecution.Sonar;
+using StyleCop.Analyzers.Lightup;
 
 namespace SonarAnalyzer.Rules.SymbolicExecution
 {
@@ -49,36 +54,127 @@ namespace SonarAnalyzer.Rules.SymbolicExecution
             SupportedDiagnostics = symbolicExecutionAnalyzerFactory.SupportedDiagnostics;
         }
 
-        protected override void Initialize(SonarAnalysisContext context) =>
-            context.RegisterExplodedGraphBasedAnalysis(Analyze);
-
-        private void Analyze(SonarExplodedGraph explodedGraph, SyntaxNodeAnalysisContext context)
+        protected override void Initialize(SonarAnalysisContext context)
         {
-            var analyzerContexts = InitializeAnalyzers(explodedGraph, context).ToList();
+            context.RegisterSyntaxNodeActionInNonGenerated(
+                c =>
+                {
+                    var declaration = (BaseMethodDeclarationSyntax)c.Node;
+                    var symbol = c.SemanticModel.GetDeclaredSymbol(declaration);
+                    if (symbol == null)
+                    {
+                        return;
+                    }
 
+                    Analyze(declaration.Body, symbol, c);
+                    Analyze(declaration.ExpressionBody(), symbol, c);
+                },
+                SyntaxKind.ConstructorDeclaration,
+                SyntaxKind.DestructorDeclaration,
+                SyntaxKind.ConversionOperatorDeclaration,
+                SyntaxKind.OperatorDeclaration,
+                SyntaxKind.MethodDeclaration);
+
+            context.RegisterSyntaxNodeActionInNonGenerated(
+                c =>
+                {
+                    var declaration = (PropertyDeclarationSyntax)c.Node;
+                    var symbol = c.SemanticModel.GetDeclaredSymbol(declaration);
+                    if (symbol == null)
+                    {
+                        return;
+                    }
+
+                    Analyze(declaration.ExpressionBody, symbol, c);
+                },
+                SyntaxKind.PropertyDeclaration);
+
+            context.RegisterSyntaxNodeActionInNonGenerated(
+                c =>
+                {
+                    var declaration = (AccessorDeclarationSyntax)c.Node;
+                    var symbol = c.SemanticModel.GetDeclaredSymbol(declaration);
+                    if (symbol == null)
+                    {
+                        return;
+                    }
+
+                    Analyze(declaration.Body, symbol, c);
+                    Analyze(declaration.ExpressionBody(), symbol, c);
+                },
+                SyntaxKind.GetAccessorDeclaration,
+                SyntaxKind.SetAccessorDeclaration,
+                SyntaxKindEx.InitAccessorDeclaration,
+                SyntaxKind.AddAccessorDeclaration,
+                SyntaxKind.RemoveAccessorDeclaration);
+
+            context.RegisterSyntaxNodeActionInNonGenerated(
+                c =>
+                {
+                    var declaration = (AnonymousFunctionExpressionSyntax)c.Node;
+                    var symbol = c.SemanticModel.GetSymbolInfo(declaration).Symbol;
+                    if (symbol == null)
+                    {
+                        return;
+                    }
+
+                    Analyze(declaration.Body, symbol, c);
+                },
+                SyntaxKind.AnonymousMethodExpression,
+                SyntaxKind.SimpleLambdaExpression,
+                SyntaxKind.ParenthesizedLambdaExpression);
+        }
+
+        private void Analyze(CSharpSyntaxNode declarationBody, ISymbol symbol, SyntaxNodeAnalysisContext context)
+        {
+            if (declarationBody == null
+                || declarationBody.ContainsDiagnostics
+                || !CSharpControlFlowGraph.TryGet(declarationBody, context.SemanticModel, out var cfg))
+            {
+                return;
+            }
+
+            var lva = new SonarCSharpLiveVariableAnalysis(cfg, symbol, context.SemanticModel);
             try
             {
-                explodedGraph.ExplorationEnded += ExplorationEndedHandler;
+                var explodedGraph = new SonarExplodedGraph(cfg, symbol, context.SemanticModel, lva);
+                var analyzerContexts = InitializeAnalyzers(explodedGraph, context).ToList();
+                try
+                {
+                    explodedGraph.ExplorationEnded += ExplorationEndedHandler;
+                    explodedGraph.Walk();
+                }
+                finally
+                {
+                    explodedGraph.ExplorationEnded -= ExplorationEndedHandler;
+                }
 
-                explodedGraph.Walk();
+                // Some of the rules can return good results if the tree was only partially visited; others need to completely
+                // walk the tree in order to avoid false positives.
+                //
+                // Due to this we split the rules in two sets and report the diagnostics in steps:
+                // - When the tree is successfully visited and ExplorationEnded event is raised.
+                // - When the tree visit ends (explodedGraph.Walk() returns). This will happen even if the maximum number of steps was
+                // reached or if an exception was thrown during analysis.
+                ReportDiagnostics(analyzerContexts, context, true);
+
+                void ExplorationEndedHandler(object sender, EventArgs args)
+                {
+                    ReportDiagnostics(analyzerContexts, context, false);
+                }
             }
-            finally
+            catch (Exception e)
             {
-                explodedGraph.ExplorationEnded -= ExplorationEndedHandler;
-            }
+                // Roslyn/MSBuild is currently cutting exception message at the end of the line instead
+                // of displaying the full message. As a workaround, we replace the line ending with ' ## '.
+                // See https://github.com/dotnet/roslyn/issues/1455 and https://github.com/dotnet/roslyn/issues/24346
+                var sb = new StringBuilder();
+                sb.AppendLine($"Error processing method: {symbol?.Name ?? "{unknown}"}");
+                sb.AppendLine($"Method file: {declarationBody.GetLocation()?.GetLineSpan().Path ?? "{unknown}"}");
+                sb.AppendLine($"Method line: {declarationBody.GetLocation()?.GetLineSpan().StartLinePosition.ToString() ?? "{unknown}"}");
+                sb.AppendLine($"Inner exception: {e}");
 
-            // Some of the rules can return good results if the tree was only partially visited; others need to completely
-            // walk the tree in order to avoid false positives.
-            //
-            // Due to this we split the rules in two sets and report the diagnostics in steps:
-            // - When the tree is successfully visited and ExplorationEnded event is raised.
-            // - When the tree visit ends (explodedGraph.Walk() returns). This will happen even if the maximum number of steps was
-            // reached or if an exception was thrown during analysis.
-            ReportDiagnostics(analyzerContexts, context, true);
-
-            void ExplorationEndedHandler(object sender, EventArgs args)
-            {
-                ReportDiagnostics(analyzerContexts, context, false);
+                throw new SymbolicExecutionException(sb.ToString().Replace(Environment.NewLine, " ## "), e);
             }
         }
 
