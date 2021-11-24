@@ -4,6 +4,19 @@
 "id":  "S1186",
 "message":  "Add a nested comment explaining why this method is empty, throw a 'NotSupportedException' or complete the implementation.",
 "location":  {
+"uri":  "sources\Net5\Net5\AttributesOnLocalFunctions.cs",
+"region":  {
+"startLine":  12,
+"startColumn":  18,
+"endLine":  12,
+"endColumn":  31
+}
+}
+},
+{
+"id":  "S1186",
+"message":  "Add a nested comment explaining why this method is empty, throw a 'NotSupportedException' or complete the implementation.",
+"location":  {
 "uri":  "sources\Net5\Net5\ExtendingPartial.cs",
 "region":  {
 "startLine":  14,
@@ -23,6 +36,19 @@
 "startColumn":  28,
 "endLine":  5,
 "endColumn":  31
+}
+}
+},
+{
+"id":  "S1186",
+"message":  "Add a nested comment explaining why this method is empty, throw a 'NotSupportedException' or complete the implementation.",
+"location":  {
+"uri":  "sources\Net5\Net5\Main.cs",
+"region":  {
+"startLine":  18,
+"startColumn":  6,
+"endLine":  18,
+"endColumn":  23
 }
 }
 },
@@ -75,6 +101,19 @@
 "startColumn":  29,
 "endLine":  17,
 "endColumn":  32
+}
+}
+},
+{
+"id":  "S1186",
+"message":  "Add a nested comment explaining why this method is empty, throw a 'NotSupportedException' or complete the implementation.",
+"location":  {
+"uri":  "sources\Net5\Net5\S3603.cs",
+"region":  {
+"startLine":  13,
+"startColumn":  22,
+"endLine":  13,
+"endColumn":  41
 }
 }
 },

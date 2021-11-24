@@ -3,17 +3,24 @@ using System.Diagnostics;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 
-void Empty() { } // FN
+void Empty() { } // Noncompliant
 
 void WithComment()
 {
     // because
 }
 
+void WithTrailingComment()
+{// because
+
+}
+
 void NotEmpty()
 {
     Console.WriteLine();
 }
+
+int Lambda(int x) => x;
 
 record EmptyMethod
 {
