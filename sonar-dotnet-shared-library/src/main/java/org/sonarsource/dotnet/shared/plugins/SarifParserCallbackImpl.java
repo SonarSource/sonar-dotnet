@@ -102,7 +102,7 @@ public class SarifParserCallbackImpl implements SarifParserCallback {
   }
 
   @Override
-  public void onFileIssue(String ruleId, @Nullable String level, String absolutePath, String message) {
+  public void onFileIssue(String ruleId, @Nullable String level, String absolutePath, Collection<Location> secondaryLocations, String message) {
     // De-duplicate issues
     Issue issue = new Issue(ruleId, absolutePath, false);
     if (!savedIssues.add(issue)) {
@@ -118,30 +118,32 @@ public class SarifParserCallbackImpl implements SarifParserCallback {
 
     String repositoryKey = repositoryKeyByRoslynRuleKey.get(ruleId);
     if (repositoryKey != null) {
-      createFileLevelIssue(ruleId, message, repositoryKey, inputFile);
+      createFileLevelIssue(ruleId, message, repositoryKey, inputFile, secondaryLocations);
     } else if (shouldCreateExternalIssue(ruleId)) {
-      createFileLevelExternalIssue(ruleId, level, message, inputFile);
+      createFileLevelExternalIssue(ruleId, level, message, inputFile, secondaryLocations);
     }
   }
 
-  private void createFileLevelIssue(String ruleId, String message, String repositoryKey, InputFile inputFile) {
+  private void createFileLevelIssue(String ruleId, String message, String repositoryKey, InputFile inputFile, Collection<Location> secondaryLocations) {
     logIssue("file level", ruleId, inputFile.toString());
     NewIssue newIssue = context.newIssue();
     newIssue
       .forRule(RuleKey.of(repositoryKey, ruleId))
       .at(newIssue.newLocation()
         .on(inputFile)
-        .message(message))
-      .save();
+        .message(message));
+    populateSecondaryLocations(secondaryLocations, newIssue::newLocation, newIssue::addLocation, isSonarSourceRepository(repositoryKey));
+    newIssue.save();
   }
 
-  private void createFileLevelExternalIssue(String ruleId, @Nullable String level, String message, InputFile inputFile) {
+  private void createFileLevelExternalIssue(String ruleId, @Nullable String level, String message, InputFile inputFile, Collection<Location> secondaryLocations) {
     logIssue("file level external", ruleId, inputFile.toString());
     NewExternalIssue newIssue = newExternalIssue(ruleId);
     newIssue.at(newIssue.newLocation()
       .on(inputFile)
       .message(message));
     setExternalIssueSeverityAndType(ruleId, level, newIssue);
+    populateSecondaryLocations(secondaryLocations, newIssue::newLocation, newIssue::addLocation, true);
     newIssue.save();
   }
 

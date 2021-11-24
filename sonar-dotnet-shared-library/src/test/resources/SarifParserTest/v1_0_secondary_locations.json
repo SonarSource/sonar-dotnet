@@ -44,6 +44,77 @@
           "properties": {
             "warningLevel": 1
           }
+        },
+        {
+          "ruleId": "CS9999",
+          "level": "warning",
+          "message": "External file level issue",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "%BASEDIR%Foo.cs",
+                "region": {
+                  "startLine": 1,
+                  "startColumn": 1,
+                  "endLine": 1,
+                  "endColumn": 1
+                }
+              }
+            }
+          ],
+          "relatedLocations": [
+            {
+              "physicalLocation": {
+                "uri": "%BASEDIR%Foo.cs",
+                "region": {
+                  "startLine": 28,
+                  "startColumn": 14,
+                  "endLine": 28,
+                  "endColumn": 31
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 3
+          }
+        },
+        {
+          "ruleId": "S3776",
+          "level": "warning",
+          "message": "Refactor this top-level file to reduce its Cognitive Complexity from 1 to the 0 allowed.",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "%BASEDIR%Foo.cs",
+                "region": {
+                  "startLine": 1,
+                  "startColumn": 1,
+                  "endLine": 1,
+                  "endColumn": 1
+                }
+              }
+            }
+          ],
+          "relatedLocations": [
+            {
+              "physicalLocation": {
+                "uri": "%BASEDIR%Foo.cs",
+                "region": {
+                  "startLine": 28,
+                  "startColumn": 14,
+                  "endLine": 28,
+                  "endColumn": 31
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1,
+            "customProperties": {
+              "0": "+1"
+            }
+          }
         }
       ],
       "rules": {
@@ -56,6 +127,33 @@
           "properties": {
             "category": "Sonar Bug",
             "isEnabledByDefault": true
+          }
+        },
+        "CS9999": {
+          "id": "CS9999",
+          "shortDescription": "External analyzer's file level rule",
+          "fullDescription": "External analyzer's file level rule",
+          "defaultLevel": "warning",
+          "properties": {
+            "category": "External Issue",
+            "isEnabledByDefault": true
+          }
+        },
+        "S3776": {
+          "id": "S3776",
+          "shortDescription": "Cognitive Complexity of methods should not be too high",
+          "fullDescription": "Cognitive Complexity is a measure of how hard the control flow of a method is to understand. Methods with high Cognitive Complexity will be difficult to maintain.",
+          "defaultLevel": "warning",
+          "helpUri": "https://rules.sonarsource.com/csharp/RSPEC-3776",
+          "properties": {
+            "category": "Critical Code Smell",
+            "isEnabledByDefault": false,
+            "tags": [
+              "C#",
+              "SonarWay",
+              "MainSourceScope",
+              "TestSourceScope"
+            ]
           }
         }
       }

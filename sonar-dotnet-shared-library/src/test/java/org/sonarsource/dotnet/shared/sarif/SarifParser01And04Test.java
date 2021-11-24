@@ -36,6 +36,7 @@ import org.mockito.Mockito;
 import org.sonar.api.scanner.fs.InputProject;
 import org.sonar.api.utils.log.LogTester;
 
+import static java.util.Collections.emptyList;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.inOrder;
 import static org.mockito.Mockito.mock;
@@ -77,9 +78,9 @@ public class SarifParser01And04Test {
     new SarifParser01And04(null, getRoot("v0_1.json"), String::toString).accept(callback);
 
     Location location = new Location("C:\\Foo.cs", "Remove this unused method parameter \"args\".", 43, 55, 44, 57);
-    verify(callback).onIssue("S1172", null, location, Collections.emptyList());
+    verify(callback).onIssue("S1172", null, location, emptyList());
     location = new Location("C:\\Bar.cs", "There is just a full message.", 2, 2, 4, 4);
-    verify(callback).onIssue("CA1000", null, location, Collections.emptyList());
+    verify(callback).onIssue("CA1000", null, location, emptyList());
     verify(callback, times(2)).onIssue(Mockito.anyString(), Mockito.isNull(), Mockito.any(Location.class), Mockito.anyCollection());
 
     verify(callback).onProjectIssue("AssemblyLevelRule", null, null, "This is an assembly level Roslyn issue with no location.");
@@ -96,7 +97,7 @@ public class SarifParser01And04Test {
     InOrder inOrder = inOrder(callback);
 
     Location location = new Location("C:\\Foo`1.cs", "Remove this commented out code.", 58, 12, 58, 50);
-    inOrder.verify(callback).onIssue("S125", null, location, Collections.emptyList());
+    inOrder.verify(callback).onIssue("S125", null, location, emptyList());
     verify(callback, only()).onIssue(Mockito.anyString(), Mockito.isNull(), Mockito.any(Location.class), Mockito.anyCollection());
 
     verify(callback, never()).onProjectIssue(Mockito.anyString(), Mockito.isNull(), Mockito.any(InputProject.class), Mockito.anyString());
@@ -108,12 +109,12 @@ public class SarifParser01And04Test {
     new SarifParser01And04(null, getRoot("v0_4_file_level_issue.json"), String::toString).accept(callback);
 
     InOrder inOrder = inOrder(callback);
-    inOrder.verify(callback).onFileIssue(eq("S104"), Mockito.isNull(), Mockito.anyString(), eq("Dummy"));
-    inOrder.verify(callback).onFileIssue(eq("S105"), Mockito.isNull(), Mockito.anyString(), eq("Dummy"));
+    inOrder.verify(callback).onFileIssue(eq("S104"), Mockito.isNull(), Mockito.anyString(), emptyList(), eq("Dummy"));
+    inOrder.verify(callback).onFileIssue(eq("S105"), Mockito.isNull(), Mockito.anyString(), emptyList(), eq("Dummy"));
     Location location = new Location("C:\\Program.cs", "Dummy", 1, 0, 1, 1);
-    inOrder.verify(callback).onIssue("S105", null, location, Collections.emptyList());
+    inOrder.verify(callback).onIssue("S105", null, location, emptyList());
 
-    inOrder.verify(callback).onFileIssue(eq("S106"), Mockito.isNull(), Mockito.anyString(), eq("Dummy"));
+    inOrder.verify(callback).onFileIssue(eq("S106"), Mockito.isNull(), Mockito.anyString(), emptyList(), eq("Dummy"));
 
     verifyNoMoreInteractions(callback);
   }

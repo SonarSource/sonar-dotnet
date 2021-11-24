@@ -24,6 +24,7 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.function.UnaryOperator;
 import javax.annotation.CheckForNull;
 import javax.annotation.Nullable;
@@ -88,7 +89,7 @@ class SarifParser01And04 implements SarifParser {
     String primaryLocationPath = toRealPath.apply(uriToAbsolutePath(primaryLocationObject.get("uri").getAsString()));
     Location primaryLocation = getLocation(offsetStartAtZero, primaryLocationObject, primaryLocationPath, message);
     if (primaryLocation == null) {
-      callback.onFileIssue(ruleId, null, primaryLocationPath, message);
+      callback.onFileIssue(ruleId, null, primaryLocationPath, Collections.emptyList(), message);
       return;
     }
 
