@@ -32,9 +32,11 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void InsecureTemporaryFilesCreation_CS() =>
             Verifier.VerifyAnalyzer(@"TestCases\InsecureTemporaryFilesCreation.cs", new CS.InsecureTemporaryFilesCreation());
 
+#if NET
         [TestMethod]
         public void InsecureTemporaryFilesCreation_CSharp9() =>
             Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\InsecureTemporaryFilesCreation.CSharp9.cs", new CS.InsecureTemporaryFilesCreation());
+#endif
 
         [TestMethod]
         public void InsecureTemporaryFilesCreation_VB() =>

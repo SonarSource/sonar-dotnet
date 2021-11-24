@@ -92,9 +92,16 @@ namespace SonarAnalyzer.Metrics.CSharp
 
             public override void VisitCompilationUnit(CompilationUnitSyntax node)
             {
-                foreach (var globalStatement in node.Members.Where(x => x.IsKind(SyntaxKind.GlobalStatement)))
+                if (node.Members.Any(x => x.IsKind(SyntaxKind.GlobalStatement)))
                 {
-                    base.Visit(globalStatement);
+                    foreach (var globalStatement in node.Members.Where(x => x.IsKind(SyntaxKind.GlobalStatement)))
+                    {
+                        base.Visit(globalStatement);
+                    }
+                }
+                else
+                {
+                    base.VisitCompilationUnit(node);
                 }
             }
 
