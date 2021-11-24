@@ -1,21 +1,21 @@
-﻿using System;
+﻿// Noncompliant {{Refactor this top-level file to reduce its Cognitive Complexity from 9 to the 0 allowed.}}
+using System;
 
-// FN for top-level statements
-if (1 == 2)
+if (1 == 2) // Secondary  {{+1}}
 {
 
 }
-else if (1 == 3)
+else if (1 == 3) // Secondary  {{+1}}
 {
 
 }
-else
+else // Secondary  {{+1}}
 {
 }
 
-void LocalFunction() // FN
+void LocalFunction()
 {
-    if (true) // +1
+    if (true) // Secondary  {{+2 (incl 1 for nesting)}}
     {
         return;
     }
@@ -23,11 +23,12 @@ void LocalFunction() // FN
 
 string SwitchExpressionPatterns(object o) =>
     o switch // we should propertly count the complexity of the inner patterns
+             // Secondary@-1  {{+2 (incl 1 for nesting)}}
     {
         string s => s.ToString(),
         float => "float",
-        < 400 and > 30 => "between 30 and 400",
-        0 or 1 => "0 or 1",
+        < 400 and > 30 => "between 30 and 400",  // Secondary  {{+1}}
+        0 or 1 => "0 or 1",  // Secondary  {{+1}}
         null => "null",
         not null => "not null",
     };

@@ -20,6 +20,7 @@
 
 using System;
 using System.Collections.Immutable;
+using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
@@ -79,9 +80,21 @@ namespace SonarAnalyzer.Metrics.CSharp
 
                     base.Visit(node);
                 }
+                else if (node.IsKind(SyntaxKindEx.GlobalStatement))
+                {
+                    base.Visit(((GlobalStatementSyntax) node).Statement);
+                }
                 else
                 {
                     base.Visit(node);
+                }
+            }
+
+            public override void VisitCompilationUnit(CompilationUnitSyntax node)
+            {
+                foreach (var globalStatement in node.Members.Where(x => x.IsKind(SyntaxKind.GlobalStatement)))
+                {
+                    base.Visit(globalStatement);
                 }
             }
 

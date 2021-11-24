@@ -22,6 +22,7 @@ using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
+using Microsoft.CodeAnalysis.Text;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
 using SonarAnalyzer.Metrics.CSharp;
@@ -37,6 +38,21 @@ namespace SonarAnalyzer.Rules.CSharp
 
         protected override void Initialize(ParameterLoadingAnalysisContext context)
         {
+            context.RegisterSyntaxNodeActionInNonGenerated(c =>
+                {
+                    if (c.ContainingSymbol is IMethodSymbol)
+                    {
+                        CheckComplexity<CompilationUnitSyntax>(
+                            c,
+                            cu => cu,
+                            cu => cu.Members[0].GetLocation(),
+                            CSharpCognitiveComplexityMetric.GetComplexity,
+                            "top-level file",
+                            Threshold);
+                    }
+                },
+                SyntaxKind.CompilationUnit);
+
             context.RegisterSyntaxNodeActionInNonGenerated(
                 c => CheckComplexity<MethodDeclarationSyntax>(c, m => m, m => m.Identifier.GetLocation(),
                     CSharpCognitiveComplexityMetric.GetComplexity, "method", Threshold),
