@@ -41,11 +41,10 @@ namespace SonarAnalyzer.Rules.CSharp
         private const string ContinueWithName = "ContinueWith";
         private const string SleepName = "Sleep";
 
-        private static readonly DiagnosticDescriptor Rule =
-            DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
+        private static readonly DiagnosticDescriptor Rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
 
         private static readonly Dictionary<string, ImmutableArray<KnownType>> InvalidMemberAccess =
-            new Dictionary<string, ImmutableArray<KnownType>>
+            new ()
             {
                 ["GetResult"] = ImmutableArray.Create(
                     KnownType.System_Runtime_CompilerServices_TaskAwaiter,
@@ -58,7 +57,7 @@ namespace SonarAnalyzer.Rules.CSharp
             };
 
         private static readonly Dictionary<string, string[]> MemberNameToMessageArguments =
-            new Dictionary<string, string[]>
+            new ()
             {
                 ["GetResult"] = new[] { "Task.GetAwaiter.GetResult", "await" },
                 [ResultName] = new[] { "Task.Result", "await" },
@@ -69,21 +68,21 @@ namespace SonarAnalyzer.Rules.CSharp
             };
 
         private static readonly Dictionary<string, KnownType> TaskThreadPoolCalls =
-            new Dictionary<string, KnownType>
+            new ()
             {
                 ["StartNew"] = KnownType.System_Threading_Tasks_TaskFactory,
                 ["Run"] = KnownType.System_Threading_Tasks_Task,
             };
 
         private static readonly Dictionary<string, KnownType> WaitForMultipleTasksExecutionCalls =
-            new Dictionary<string, KnownType>
+            new ()
             {
                 ["WhenAll"] = KnownType.System_Threading_Tasks_Task,
                 ["WaitAll"] = KnownType.System_Threading_Tasks_Task,
             };
 
         private static readonly Dictionary<string, KnownType> WaitForSingleExecutionCalls =
-            new Dictionary<string, KnownType>
+            new ()
             {
                 ["Wait"] = KnownType.System_Threading_Tasks_Task,
                 ["RunSynchronously"] = KnownType.System_Threading_Tasks_Task,
@@ -103,7 +102,8 @@ namespace SonarAnalyzer.Rules.CSharp
                 || !InvalidMemberAccess.ContainsKey(memberAccessNameName)
                 || IsResultInContinueWithCall(memberAccessNameName, simpleMemberAccess)
                 || IsChainedAfterThreadPoolCall(simpleMemberAccess, context.SemanticModel)
-                || simpleMemberAccess.IsInNameOfArgument(context.SemanticModel))
+                || simpleMemberAccess.IsInNameOfArgument(context.SemanticModel)
+                || simpleMemberAccess.Ancestors().Any(x => x is GlobalStatementSyntax))
             {
                 return;
             }
@@ -120,8 +120,7 @@ namespace SonarAnalyzer.Rules.CSharp
             var enclosingMethod = simpleMemberAccess.FirstAncestorOrSelf<BaseMethodDeclarationSyntax>();
             if (enclosingMethod != null)
             {
-                if (memberAccessNameName == SleepName &&
-                    !enclosingMethod.Modifiers.Any(SyntaxKind.AsyncKeyword))
+                if (memberAccessNameName == SleepName && !enclosingMethod.Modifiers.Any(SyntaxKind.AsyncKeyword))
                 {
                     return; // Thread.Sleep should not be used only in async methods
                 }
@@ -145,11 +144,10 @@ namespace SonarAnalyzer.Rules.CSharp
         {
             return context.SemanticModel.GetSymbolInfo(simpleMemberAccess.Expression).Symbol is { } accessedSymbol
                    && simpleMemberAccess.FirstAncestorOrSelf<StatementSyntax>() is { } currentStatement
-                   && currentStatement.GetPreviousStatements().Any(statement =>
-                       statement.DescendantNodes()
-                           .OfType<InvocationExpressionSyntax>()
-                           .Where(x => x.Expression.IsKind(SyntaxKind.SimpleMemberAccessExpression))
-                           .Any(IsTaskAwaited));
+                   && currentStatement.GetPreviousStatements().Any(statement => statement.DescendantNodes()
+                                                                                         .OfType<InvocationExpressionSyntax>()
+                                                                                         .Where(x => x.Expression.IsKind(SyntaxKind.SimpleMemberAccessExpression))
+                                                                                         .Any(IsTaskAwaited));
 
             bool IsTaskAwaited(InvocationExpressionSyntax invocation) =>
                 IsAwaitForMultipleTasksExecutionCall(invocation, context.SemanticModel, accessedSymbol)
@@ -165,14 +163,14 @@ namespace SonarAnalyzer.Rules.CSharp
             && Equals(accessedSymbol, semanticModel.GetSymbolInfo(((MemberAccessExpressionSyntax)invocation.Expression).Expression).Symbol);
 
         private static bool IsResultInContinueWithCall(string memberAccessName, MemberAccessExpressionSyntax memberAccess) =>
-            memberAccessName == ResultName &&
-            memberAccess.Expression is IdentifierNameSyntax identifierNameSyntax &&
-            identifierNameSyntax.GetName() is { } identifierName &&
-            memberAccess.FirstAncestorOrSelf<InvocationExpressionSyntax>(invocation => IsContinueWithCallWithArgumentName(invocation, identifierName)) != null;
+            memberAccessName == ResultName
+            && memberAccess.Expression is IdentifierNameSyntax identifierNameSyntax
+            && identifierNameSyntax.GetName() is { } identifierName
+            && memberAccess.FirstAncestorOrSelf<InvocationExpressionSyntax>(invocation => IsContinueWithCallWithArgumentName(invocation, identifierName)) != null;
 
         private static bool IsContinueWithCallWithArgumentName(InvocationExpressionSyntax invocation, string argumentName) =>
-            invocation.Expression.NameIs(ContinueWithName) &&
-            invocation.ArgumentList.Arguments.Any(argument => IsLambdaExpressionWithArgumentName(argument.Expression, argumentName));
+            invocation.Expression.NameIs(ContinueWithName)
+            && invocation.ArgumentList.Arguments.Any(argument => IsLambdaExpressionWithArgumentName(argument.Expression, argumentName));
 
         private static bool IsLambdaExpressionWithArgumentName(ExpressionSyntax expression, string argumentName) =>
             expression switch
@@ -185,8 +183,8 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private static bool IsChainedAfterThreadPoolCall(MemberAccessExpressionSyntax memberAccess, SemanticModel semanticModel) =>
             memberAccess.Expression.DescendantNodes()
-                .OfType<MemberAccessExpressionSyntax>()
-                .Any(subMemberAccess => IsNamedSymbolOfExpectedType(subMemberAccess, semanticModel, TaskThreadPoolCalls));
+                                   .OfType<MemberAccessExpressionSyntax>()
+                                   .Any(subMemberAccess => IsNamedSymbolOfExpectedType(subMemberAccess, semanticModel, TaskThreadPoolCalls));
 
         private static bool IsNamedSymbolOfExpectedType(MemberAccessExpressionSyntax memberAccess, SemanticModel semanticModel, Dictionary<string, KnownType> expectedTypes) =>
             expectedTypes.Keys.Any(memberAccess.NameIs)
