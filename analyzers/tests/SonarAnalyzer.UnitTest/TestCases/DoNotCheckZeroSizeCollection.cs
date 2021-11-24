@@ -70,7 +70,7 @@ namespace Tests.Diagnostics
             //       ^^^^^^^^^^^^^^^^^^^^^^^^^^^
             
             result = result.ToString() == "Not integer";            
-            result = (localVariable = 42) != -1);
+            result = (localVariable = 42) != -1;
 
             if ((localVariable = 42) != -1) { }
 

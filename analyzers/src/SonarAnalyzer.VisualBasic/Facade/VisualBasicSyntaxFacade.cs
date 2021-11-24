@@ -87,8 +87,7 @@ namespace SonarAnalyzer.Helpers.Facade
                 PropertyStatementSyntax property => property.Identifier,
                 SimpleArgumentSyntax simpleArgument => simpleArgument.NameColonEquals?.Name.Identifier,
                 SimpleNameSyntax simpleName => simpleName.Identifier,
-                null => null,
-                _ => throw InvalidOperation(node, nameof(NodeIdentifier)),
+                _ => null,
             };
 
         public override string NodeStringTextValue(SyntaxNode node) =>
