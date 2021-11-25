@@ -90,7 +90,7 @@ public class SarifParserCallbackImplTest {
     assertThat(ctx.allIssues().iterator().next().primaryLocation().inputComponent().key()).isEqualTo("module1:file1");
     assertThat(ctx.allIssues().iterator().next().ruleKey().rule()).isEqualTo("rule1");
     assertThat(logTester.logs(LoggerLevel.DEBUG)).containsOnly("Adding file level issue rule1: file1");
-    assertThat(ctx.allIssues().iterator().next().flows()).hasSize(0);
+    assertThat(ctx.allIssues().iterator().next().flows()).isEmpty();
   }
 
   @Test
