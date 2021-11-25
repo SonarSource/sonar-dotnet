@@ -27,7 +27,7 @@ public interface SarifParserCallback {
 
   void onProjectIssue(String ruleId, @Nullable String level, InputProject inputProject, String message);
 
-  void onFileIssue(String ruleId, @Nullable String level, String absolutePath, String message);
+  void onFileIssue(String ruleId, @Nullable String level, String absolutePath, Collection<Location> secondaryLocations, String message);
 
   void onIssue(String ruleId, @Nullable String level, Location primaryLocation, Collection<Location> secondaryLocations);
 

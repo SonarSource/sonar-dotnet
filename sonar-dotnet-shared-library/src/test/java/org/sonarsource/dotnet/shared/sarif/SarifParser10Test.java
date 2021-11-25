@@ -39,6 +39,7 @@ import org.mockito.Mockito;
 import org.sonar.api.utils.log.LogTester;
 import org.sonar.api.utils.log.LoggerLevel;
 
+import static java.util.Collections.emptyList;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.ArgumentMatchers.eq;
@@ -93,14 +94,14 @@ public class SarifParser10Test {
 
     InOrder inOrder = inOrder(callback);
     String filePath = new File(baseDir, "Program.cs").getAbsolutePath();
-    inOrder.verify(callback).onFileIssue(eq("S104"), eq("warning"), eq(filePath), eq("Some dummy message"));
-    inOrder.verify(callback).onFileIssue(eq("S105"), isNull(), eq(filePath), eq("Some dummy message"));
+    inOrder.verify(callback).onFileIssue(eq("S104"), eq("warning"), eq(filePath), eq(emptyList()), eq("Some dummy message"));
+    inOrder.verify(callback).onFileIssue(eq("S105"), isNull(), eq(filePath), eq(emptyList()), eq("Some dummy message"));
     Location location = new Location(filePath, "Some dummy message", 1, 0, 1, 1);
     inOrder.verify(callback).onIssue("S105", "warning", location, Collections.emptyList());
     location = new Location(filePath, "Some dummy message", 1, 0, 2, 0);
     inOrder.verify(callback).onIssue("S105", "warning", location, Collections.emptyList());
 
-    inOrder.verify(callback).onFileIssue(eq("S106"), eq("warning"), eq(filePath), eq("Some dummy message"));
+    inOrder.verify(callback).onFileIssue(eq("S106"), eq("warning"), eq(filePath), eq(emptyList()), eq("Some dummy message"));
 
     verifyNoMoreInteractions(callback);
   }
@@ -113,7 +114,7 @@ public class SarifParser10Test {
     InOrder inOrder = inOrder(callback);
     Location location = new Location(new File(baseDir, "Bar.cs").getAbsolutePath(), "One issue per line", 2, 0, 2, 33);
     inOrder.verify(callback).onRule("S1234", "One issue per line", "This rule will create an issue for every source code line", "warning", "Test");
-    inOrder.verify(callback).onIssue("S1234", "warning", location, Collections.emptyList());
+    inOrder.verify(callback).onIssue("S1234", "warning", location, emptyList());
     verifyNoMoreInteractions(callback);
   }
 
@@ -129,7 +130,7 @@ public class SarifParser10Test {
       "warning", "Sonar Code Smell");
     Location location = new Location(new File(baseDir, "ConsoleApplication1/P@!$#&+-=r^{}og_r()a m[1].cs").getAbsolutePath(),
       "Add a 'protected' constructor or the 'static' keyword to the class declaration.", 9, 10, 9, 17);
-    inOrder.verify(callback).onIssue("S1118", "warning", location, Collections.emptyList());
+    inOrder.verify(callback).onIssue("S1118", "warning", location, emptyList());
     verifyNoMoreInteractions(callback);
   }
 
@@ -181,12 +182,12 @@ public class SarifParser10Test {
     Location location = new Location(filePath,
       "Add a nested comment explaining why this method is empty, throw a \"NotSupportedException\" or complete the implementation.",
       26, 20, 26, 24);
-    inOrder.verify(callback).onIssue("S1186", "warning", location, Collections.emptyList());
+    inOrder.verify(callback).onIssue("S1186", "warning", location, emptyList());
     location = new Location(filePath, "Remove this unused method parameter \"args\".", 26, 25, 26, 38);
-    inOrder.verify(callback).onIssue("S1172", "warning", location, Collections.emptyList());
+    inOrder.verify(callback).onIssue("S1172", "warning", location, emptyList());
     location = new Location(filePath, "Add a \"protected\" constructor or the \"static\" keyword to the class declaration.",
       9, 17, 9, 24);
-    inOrder.verify(callback).onIssue("S1118", "warning", location, Collections.emptyList());
+    inOrder.verify(callback).onIssue("S1118", "warning", location, emptyList());
     verifyNoMoreInteractions(callback);
   }
 
@@ -199,7 +200,7 @@ public class SarifParser10Test {
     inOrder.verify(callback).onRule(anyString(), anyString(), anyString(), anyString(), anyString());
     Location location = new Location(new File(baseDir, "git/Temp Folder SomeRandom!@#$%^&()/csharp/ConsoleApplication1/Program.cs").getAbsolutePath(),
       "Method has 3 parameters, which is greater than the 2 authorized.", 52, 23, 52, 47);
-    inOrder.verify(callback).onIssue("S107", "warning", location, Collections.emptyList());
+    inOrder.verify(callback).onIssue("S107", "warning", location, emptyList());
     verifyNoMoreInteractions(callback);
   }
 
@@ -216,13 +217,19 @@ public class SarifParser10Test {
     new SarifParser10(null, getRoot("v1_0_secondary_locations.json"), String::toString).accept(callback);
 
     InOrder inOrder = inOrder(callback);
-    inOrder.verify(callback).onRule(anyString(), anyString(), anyString(), anyString(), anyString());
+    inOrder.verify(callback).onRule(eq("S1764"), anyString(), anyString(), anyString(), anyString());
+    inOrder.verify(callback).onRule(eq("CS9999"), anyString(), anyString(), anyString(), anyString());
+    inOrder.verify(callback).onRule(eq("S3776"), anyString(), anyString(), anyString(), anyString());
     String filePath = new File(baseDir, "Foo.cs").getAbsolutePath();
     Location primaryLocation = new Location(filePath, "Identical sub-expressions on both sides of operator \"==\".",
       28, 34, 28, 51);
     Collection<Location> secondaryLocations = new ArrayList<>();
     secondaryLocations.add(new Location(filePath, null, 28, 13, 28, 30));
     inOrder.verify(callback).onIssue("S1764", "warning", primaryLocation, secondaryLocations);
+    inOrder.verify(callback).onFileIssue(eq("CS9999"), eq("warning"), eq(filePath), eq(secondaryLocations), anyString());
+    Collection<Location> secondaryLocationsWithMessage = new ArrayList<>();
+    secondaryLocationsWithMessage.add(new Location(filePath, "+1", 28, 13, 28, 30));
+    inOrder.verify(callback).onFileIssue(eq("S3776"), eq("warning"), eq(filePath), eq(secondaryLocationsWithMessage), anyString());
     verifyNoMoreInteractions(callback);
   }
 

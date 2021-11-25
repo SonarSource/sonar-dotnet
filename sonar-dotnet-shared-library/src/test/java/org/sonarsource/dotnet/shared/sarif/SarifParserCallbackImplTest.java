@@ -42,6 +42,7 @@ import org.sonar.api.utils.log.LoggerLevel;
 import org.sonarsource.dotnet.shared.plugins.SarifParserCallbackImpl;
 
 import static java.util.Arrays.asList;
+import static java.util.Collections.emptyList;
 import static java.util.Collections.emptySet;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.groups.Tuple.tuple;
@@ -82,25 +83,47 @@ public class SarifParserCallbackImplTest {
   }
 
   @Test
-  public void should_add_file_issues() {
+  public void should_add_file_issues_no_secondary_location() {
     String absoluteFilePath = temp.getRoot().toPath().resolve("file1").toString();
-    callback.onFileIssue("rule1", "warning", absoluteFilePath, "msg");
+    callback.onFileIssue("rule1", "warning", absoluteFilePath, emptyList(), "msg");
     assertThat(ctx.allIssues()).hasSize(1);
     assertThat(ctx.allIssues().iterator().next().primaryLocation().inputComponent().key()).isEqualTo("module1:file1");
     assertThat(ctx.allIssues().iterator().next().ruleKey().rule()).isEqualTo("rule1");
     assertThat(logTester.logs(LoggerLevel.DEBUG)).containsOnly("Adding file level issue rule1: file1");
+    assertThat(ctx.allIssues().iterator().next().flows()).isEmpty();
+  }
+
+  @Test
+  public void should_add_file_issues_with_secondary_location() {
+    String absoluteFilePath = temp.getRoot().toPath().resolve("file1").toString();
+    callback.onFileIssue("rule1", "warning", absoluteFilePath, Collections.singletonList(createLocation("file1", 4, 5)), "msg");
+    assertThat(ctx.allIssues()).hasSize(1);
+    assertThat(ctx.allIssues().iterator().next().primaryLocation().inputComponent().key()).isEqualTo("module1:file1");
+    assertThat(ctx.allIssues().iterator().next().ruleKey().rule()).isEqualTo("rule1");
+    assertThat(logTester.logs(LoggerLevel.DEBUG)).containsOnly("Adding file level issue rule1: file1");
+
+    List<Flow> flows = ctx.allIssues().iterator().next().flows();
+    assertThat(flows).hasSize(1);
+    List<IssueLocation> locations = flows.get(0).locations();
+    assertThat(locations).hasSize(1);
+    assertThat(locations.get(0).inputComponent().key()).isEqualTo("module1:file1");
+    TextRange textRange = locations.get(0).textRange();
+    assertThat(textRange.start().lineOffset()).isEqualTo(5);
+    assertThat(textRange.start().line()).isEqualTo(4);
+    assertThat(textRange.end().lineOffset()).isEqualTo(6);
+    assertThat(textRange.end().line()).isEqualTo(4);
   }
 
   @Test
   public void should_create_external_file_issue_for_unknown_rule_key() {
     String absoluteFilePath = temp.getRoot().toPath().resolve("file1").toString();
-    callback.onFileIssue("rule45", "warning", absoluteFilePath, "msg");
+    callback.onFileIssue("rule45", "warning", absoluteFilePath, emptyList(), "msg");
     assertThat(ctx.allIssues()).isEmpty();
     assertThat(ctx.allExternalIssues()).isEmpty();
 
     callback = new SarifParserCallbackImpl(ctx, repositoryKeyByRoslynRuleKey, false, emptySet(), emptySet(), emptySet());
-    callback.onFileIssue("rule45", "warning", absoluteFilePath, "msg");
-    callback.onFileIssue("S1234", "warning", absoluteFilePath, "msg"); // sonar rule, ignored
+    callback.onFileIssue("rule45", "warning", absoluteFilePath, emptyList(), "msg");
+    callback.onFileIssue("S1234", "warning", absoluteFilePath, emptyList(), "msg"); // sonar rule, ignored
 
     assertThat(ctx.allIssues()).isEmpty();
     assertThat(ctx.allExternalIssues())
@@ -112,8 +135,31 @@ public class SarifParserCallbackImplTest {
   }
 
   @Test
+  public void should_create_external_file_issue_with_secondary_location() {
+    String absoluteFilePath = temp.getRoot().toPath().resolve("file1").toString();
+    callback = new SarifParserCallbackImpl(ctx, repositoryKeyByRoslynRuleKey, false, emptySet(), emptySet(), emptySet());
+    callback.onFileIssue("rule45", "warning", absoluteFilePath, Collections.singletonList(createLocation("file1", 4, 5)), "msg");
+
+    assertThat(ctx.allIssues()).isEmpty();
+    assertThat(ctx.allExternalIssues())
+      .extracting(ExternalIssue::ruleId, ExternalIssue::type, ExternalIssue::severity)
+      .containsExactlyInAnyOrder(
+        tuple("rule45", RuleType.CODE_SMELL, Severity.MAJOR));
+    List<Flow> flows = ctx.allExternalIssues().iterator().next().flows();
+    assertThat(flows).hasSize(1);
+    List<IssueLocation> locations = flows.get(0).locations();
+    assertThat(locations).hasSize(1);
+    assertThat(locations.get(0).inputComponent().key()).isEqualTo("module1:file1");
+    TextRange textRange = locations.get(0).textRange();
+    assertThat(textRange.start().lineOffset()).isEqualTo(5);
+    assertThat(textRange.start().line()).isEqualTo(4);
+    assertThat(textRange.end().lineOffset()).isEqualTo(6);
+    assertThat(textRange.end().line()).isEqualTo(4);
+  }
+
+  @Test
   public void should_ignore_file_issue_with_unknown_file() {
-    callback.onFileIssue("rule1", "warning", "file-unknown", "msg");
+    callback.onFileIssue("rule1", "warning", "file-unknown", emptyList(), "msg");
     assertThat(ctx.allIssues()).isEmpty();
     assertThat(logTester.logs(LoggerLevel.DEBUG)).containsOnly("Skipping issue rule1, input file not found or excluded: file-unknown");
   }
@@ -254,8 +300,8 @@ public class SarifParserCallbackImplTest {
 
   @Test
   public void should_ignore_repeated_file_issues() {
-    callback.onFileIssue("rule1", "warning", createAbsolutePath("file1"), "message");
-    callback.onFileIssue("rule1", "warning", createAbsolutePath("file1"), "message");
+    callback.onFileIssue("rule1", "warning", createAbsolutePath("file1"), emptyList(), "message");
+    callback.onFileIssue("rule1", "warning", createAbsolutePath("file1"), emptyList(), "message");
 
     assertThat(ctx.allIssues()).hasSize(1);
     assertThat(ctx.allIssues()).extracting("ruleKey").extracting("rule")

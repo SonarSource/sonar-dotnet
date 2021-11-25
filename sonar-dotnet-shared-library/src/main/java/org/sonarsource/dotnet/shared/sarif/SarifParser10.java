@@ -151,26 +151,27 @@ class SarifParser10 implements SarifParser {
     if (!resultFileObj.has("uri") || !resultFileObj.has("region")) {
       return false;
     }
-    Location primaryLocation = handleLocation(resultFileObj, message);
 
+    Collection<Location> secondaryLocations = new ArrayList<>();
+    for (JsonElement relatedLocationEl : relatedLocations) {
+      JsonObject relatedLocationObj = relatedLocationEl.getAsJsonObject().getAsJsonObject("physicalLocation");
+      if (!relatedLocationObj.has("uri")) {
+        return false;
+      }
+      String secondaryMessage = messageMap.getOrDefault(String.valueOf(secondaryLocations.size()), null);
+      Location secondaryLocation = handleLocation(relatedLocationObj, secondaryMessage);
+      if (secondaryLocation == null) {
+        return false;
+      }
+      secondaryLocations.add(secondaryLocation);
+    }
+
+    Location primaryLocation = handleLocation(resultFileObj, message);
     if (primaryLocation == null) {
       String uri = resultFileObj.get("uri").getAsString();
       String path = toRealPath.apply(uriToPath(uri));
-      callback.onFileIssue(ruleId, level, path, message);
+      callback.onFileIssue(ruleId, level, path, secondaryLocations, message);
     } else {
-      Collection<Location> secondaryLocations = new ArrayList<>();
-      for (JsonElement relatedLocationEl : relatedLocations) {
-        JsonObject relatedLocationObj = relatedLocationEl.getAsJsonObject().getAsJsonObject("physicalLocation");
-        if (!relatedLocationObj.has("uri")) {
-          return false;
-        }
-        String secondaryMessage = messageMap.getOrDefault(String.valueOf(secondaryLocations.size()), null);
-        Location secondaryLocation = handleLocation(relatedLocationObj, secondaryMessage);
-        if (secondaryLocation == null) {
-          return false;
-        }
-        secondaryLocations.add(secondaryLocation);
-      }
       callback.onIssue(ruleId, level, primaryLocation, secondaryLocations);
     }
 
