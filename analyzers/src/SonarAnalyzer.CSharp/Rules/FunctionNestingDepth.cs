@@ -50,7 +50,8 @@ namespace SonarAnalyzer.Rules.CSharp
             SyntaxKind.SetAccessorDeclaration,
             SyntaxKindEx.InitAccessorDeclaration,
             SyntaxKind.AddAccessorDeclaration,
-            SyntaxKind.RemoveAccessorDeclaration);
+            SyntaxKind.RemoveAccessorDeclaration,
+            SyntaxKind.GlobalStatement);
 
         private class NestingDepthWalker : CSharpSyntaxWalker
         {
