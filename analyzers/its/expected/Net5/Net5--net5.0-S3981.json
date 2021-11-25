@@ -2,7 +2,7 @@
 "issues":  [
 {
 "id":  "S3981",
-"message":  "The 'Count' of 'IEnumerable<T>' is always 'True', so fix this test to get the real expected behavior.",
+"message":  "The 'Count' of 'IEnumerable<T>' always evaluates as 'True' regardless the size.",
 "location":  {
 "uri":  "sources\Net5\Net5\S3981.cs",
 "region":  {
