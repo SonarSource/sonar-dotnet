@@ -19,6 +19,7 @@
  */
 
 using System;
+using System.Linq;
 using SonarAnalyzer.CFG.Roslyn;
 using SonarAnalyzer.Extensions;
 
@@ -27,20 +28,47 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
     internal class RoslynSymbolicExecution
     {
         private readonly ControlFlowGraph cfg;
+        private readonly SymbolicExecutionCheck[] checks;
 
-        public RoslynSymbolicExecution(ControlFlowGraph cfg) =>
+        public RoslynSymbolicExecution(ControlFlowGraph cfg, SymbolicExecutionCheck[] checks)
+        {
             this.cfg = cfg ?? throw new ArgumentNullException(nameof(cfg));
+            this.checks = checks ?? throw new ArgumentNullException(nameof(checks));
+            if (!checks.Any())
+            {
+                throw new ArgumentException("At least one check is expected", nameof(checks));
+            }
+        }
 
         public void Execute()
         {
-            foreach (var block in cfg.Blocks)    // ToDo: This is a temporary simplification until we support proper branching
+            foreach (var block in cfg.Blocks)   // ToDo: This is a temporary simplification until we support proper branching
             {
-                foreach(var operation in block.OperationsAndBranchValue.ToExecutionOrder()) // ToDo: This is a temporary oversimplification to scaffold the engine
+                var state = new ProgramState(); // ToDo: This is a temporary oversimplification to scaffold the enginge
+                foreach (var operation in block.OperationsAndBranchValue.ToExecutionOrder()) // ToDo: This is a temporary oversimplification to scaffold the engine
                 {
+                    state = InvokeChecks(state, (check, ps) => check.PreProcess(ps, operation));
+                    // ToDo: Check state == null
 
                     // ToDo: Something is still missing around here
+
+                    state = InvokeChecks(state, (check, ps) => check.PostProcess(ps, operation));
+                    // ToDo: Check state == null
                 }
             }
+        }
+
+        private ProgramState InvokeChecks(ProgramState state, Func<SymbolicExecutionCheck, ProgramState, ProgramState> invoke)
+        {
+            foreach (var check in checks)
+            {
+                state = invoke(check, state);
+                if (state == null)
+                {
+                    return null;
+                }
+            }
+            return state;
         }
     }
 }

@@ -19,9 +19,14 @@
  */
 
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Moq;
 using SonarAnalyzer.SymbolicExecution.Roslyn;
+using SonarAnalyzer.UnitTest.Helpers;
+using StyleCop.Analyzers.Lightup;
 
 namespace SonarAnalyzer.UnitTest.SymbolicExecution.Roslyn
 {
@@ -29,24 +34,48 @@ namespace SonarAnalyzer.UnitTest.SymbolicExecution.Roslyn
     public class RoslynSymbolicExecutionTest
     {
         [TestMethod]
-        public void Constructor_Null_Throws()
+        public void Constructor_Throws()
         {
-            Action a = () => new RoslynSymbolicExecution(null);
-            a.Should().Throw<ArgumentNullException>().And.ParamName.Should().Be("cfg");
+            var cfg = TestHelper.CompileCfg("public class Sample { public void Main() { } }");
+            var check = new Mock<SymbolicExecutionCheck>().Object;
+            ((Action)(() => new RoslynSymbolicExecution(null, new[] { check }))).Should().Throw<ArgumentNullException>().And.ParamName.Should().Be("cfg");
+            ((Action)(() => new RoslynSymbolicExecution(cfg, null))).Should().Throw<ArgumentNullException>().And.ParamName.Should().Be("checks");
+            ((Action)(() => new RoslynSymbolicExecution(cfg, Array.Empty<SymbolicExecutionCheck>()))).Should().Throw<ArgumentException>().WithMessage("At least one check is expected*");
         }
 
         [TestMethod]
         public void SequentialInput_CS()
         {
             var context = CreateContextCS("var a = true; var b = false; b = !b; a = (b);");
-            //FIXME: Assert
+            context.Collector.ValidateOrder(
+                "Literal: true",
+                "Literal: false",
+                "LocalReference: b",
+                "LocalReference: b",
+                "UnaryOperator: !b",
+                "SimpleAssignment: b = !b",
+                "ExpressionStatement: b = !b;",
+                "LocalReference: a",
+                "LocalReference: b",
+                "SimpleAssignment: a = (b)",
+                "ExpressionStatement: a = (b);");
         }
 
         [TestMethod]
         public void SequentialInput_VB()
         {
             var context = CreateContextVB("Dim A As Boolean = True, B As Boolean = False : B = Not B : A = (B)");
-            //FIXME: Assert
+            context.Collector.ValidateOrder(
+                "Literal: True",
+                "Literal: False",
+                "LocalReference: B",
+                "LocalReference: B",
+                "UnaryOperator: Not B",
+                "ExpressionStatement: B = Not B",
+                "LocalReference: A",
+                "LocalReference: B",
+                "Parenthesized: (B)",
+                "ExpressionStatement: A = (B)");
         }
 
         private Context CreateContextCS(string methodBody, string additionalParameters = null)
@@ -86,14 +115,30 @@ End Class";
 
         private class Context
         {
+            public readonly CollectorCheck Collector = new();
             private readonly RoslynSymbolicExecution se;
 
             public Context(string code, bool isCSharp)
             {
                 var cfg = TestHelper.CompileCfg(code, isCSharp);
-                se = new RoslynSymbolicExecution(cfg);
+                se = new RoslynSymbolicExecution(cfg, new[] { Collector });
                 se.Execute();
             }
+        }
+
+        private class CollectorCheck : SymbolicExecutionCheck
+        {
+            // ToDo: Simplified version for now, we'll need ProgramState & Operation. Or even better, the whole exploded Node
+            private readonly List<IOperationWrapperSonar> preProcessedOperations = new();
+
+            public override ProgramState PreProcess(ProgramState state, IOperationWrapperSonar operation)
+            {
+                preProcessedOperations.Add(operation);
+                return state;
+            }
+
+            public void ValidateOrder(params string[] expected) =>
+                preProcessedOperations.Where(x => !x.IsImplicit).Select(x => x.Instance.Kind + ": " + x.Instance.Syntax).Should().OnlyContainInOrder(expected);
         }
     }
 }
