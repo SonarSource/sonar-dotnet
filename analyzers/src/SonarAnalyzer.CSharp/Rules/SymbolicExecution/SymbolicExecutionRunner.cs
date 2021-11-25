@@ -100,8 +100,10 @@ namespace SonarAnalyzer.Rules.SymbolicExecution
 
         private void Analyze(SyntaxNodeAnalysisContext context, CSharpSyntaxNode body, ISymbol symbol)
         {
+            var enabledAnalyzers = symbolicExecutionAnalyzerFactory.GetEnabledAnalyzers(context);
             if (body == null
                 || body.ContainsDiagnostics
+                || !enabledAnalyzers.Any()
                 || !CSharpControlFlowGraph.TryGet(body, context.SemanticModel, out var cfg))
             {
                 return;
@@ -111,7 +113,7 @@ namespace SonarAnalyzer.Rules.SymbolicExecution
             try
             {
                 var explodedGraph = new SonarExplodedGraph(cfg, symbol, context.SemanticModel, lva);
-                var analyzerContexts = symbolicExecutionAnalyzerFactory.GetEnabledAnalyzers(context).Select(x => x.CreateContext(explodedGraph, context)).ToList();
+                var analyzerContexts = enabledAnalyzers.Select(x => x.CreateContext(explodedGraph, context)).ToList();
                 try
                 {
                     explodedGraph.ExplorationEnded += ExplorationEndedHandler;
