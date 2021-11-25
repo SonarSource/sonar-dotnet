@@ -1,5 +1,5 @@
-﻿// Top-level statements are also in a method
-int i = 1; i++; // FN
+﻿// Noncompliant {{This top level function body has 11 lines, which is greater than the 2 lines authorized.}}
+int i = 1; i++;
 i++;
 i++;
 i++;

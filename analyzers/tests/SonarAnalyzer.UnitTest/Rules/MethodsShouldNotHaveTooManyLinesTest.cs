@@ -20,6 +20,7 @@
 
 using System;
 using FluentAssertions;
+using Microsoft.CodeAnalysis;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.UnitTest.TestFramework;
 using CS = SonarAnalyzer.Rules.CSharp;
@@ -46,6 +47,29 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         public void MethodsShouldNotHaveTooManyLines_CustomValues_CSharp10() =>
             Verifier.VerifyAnalyzerFromCSharp10Library(@"TestCases\MethodsShouldNotHaveTooManyLines_CustomValues.CSharp10.cs", new CS.MethodsShouldNotHaveTooManyLines { Max = 2 });
+
+        [TestMethod]
+        public void MethodsShouldNotHaveTooManyLines_CSharp9_NoUsing() =>
+            Verifier.VerifyCSharpAnalyzer(
+                @"// Noncompliant {{This top level function body has 4 lines, which is greater than the 2 lines authorized.}}
+int i = 1; i++;
+i++;
+i++;
+i++;",
+                new CS.MethodsShouldNotHaveTooManyLines { Max = 2 },
+                ParseOptionsHelper.FromCSharp9,
+                outputKind: OutputKind.ConsoleApplication);
+
+        [TestMethod]
+        public void MethodsShouldNotHaveTooManyLines_CSharp9_Valid() =>
+            Verifier.VerifyCSharpAnalyzer(@"
+int i = 1; i++;
+i++;
+i++;
+i++;",
+                new CS.MethodsShouldNotHaveTooManyLines { Max = 4 },
+                ParseOptionsHelper.FromCSharp9,
+                outputKind: OutputKind.ConsoleApplication);
 #endif
 
         [TestMethod]

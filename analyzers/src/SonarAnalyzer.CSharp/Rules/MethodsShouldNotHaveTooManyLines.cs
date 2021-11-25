@@ -26,6 +26,7 @@ using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.Common;
+using SonarAnalyzer.Extensions;
 using SonarAnalyzer.Helpers;
 using StyleCop.Analyzers.Lightup;
 
@@ -36,9 +37,12 @@ namespace SonarAnalyzer.Rules.CSharp
     public sealed class MethodsShouldNotHaveTooManyLines
         : MethodsShouldNotHaveTooManyLinesBase<SyntaxKind, BaseMethodDeclarationSyntax>
     {
-        private static readonly DiagnosticDescriptor Rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager, false);
+        private const string TopLevelFunctionMessageFormat = "This top level function body has {0} lines, which is greater than the {1} lines authorized.";
 
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
+        private static readonly DiagnosticDescriptor DefaultRule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager, false);
+        private static readonly DiagnosticDescriptor TopLevelRule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, TopLevelFunctionMessageFormat, RspecStrings.ResourceManager, false);
+
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(DefaultRule, TopLevelRule);
 
         protected override GeneratedCodeRecognizer GeneratedCodeRecognizer =>
             CSharpGeneratedCodeRecognizer.Instance;
@@ -51,6 +55,26 @@ namespace SonarAnalyzer.Rules.CSharp
             };
 
         protected override string MethodKeyword => "methods";
+
+        protected override void Initialize(ParameterLoadingAnalysisContext context)
+        {
+            context.RegisterSyntaxNodeActionInNonGenerated(c =>
+                {
+                    if (c.ContainingSymbol.IsTopLevelMain())
+                    {
+                        var compilationUnit = (CompilationUnitSyntax)c.Node;
+                        var linesCount = CountLines(compilationUnit.GetTopLevelMainBody());
+
+                        if (linesCount > Max)
+                        {
+                            c.ReportIssue(Diagnostic.Create(TopLevelRule, null, linesCount, Max, MethodKeyword));
+                        }
+                    }
+                },
+                SyntaxKind.CompilationUnit);
+
+            base.Initialize(context);
+        }
 
         protected override IEnumerable<SyntaxToken> GetMethodTokens(BaseMethodDeclarationSyntax baseMethodDeclaration) =>
             baseMethodDeclaration.ExpressionBody()?.Expression?.DescendantTokens()
@@ -86,5 +110,11 @@ namespace SonarAnalyzer.Rules.CSharp
 
             return "method";
         }
+
+        private static long CountLines(IEnumerable<SyntaxNode> nodes) =>
+            nodes.SelectMany(x => x.DescendantTokens())
+                 .SelectMany(x => x.GetLineNumbers())
+                 .Distinct()
+                 .LongCount();
     }
 }

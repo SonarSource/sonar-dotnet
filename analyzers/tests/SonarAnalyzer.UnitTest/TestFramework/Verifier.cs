@@ -81,9 +81,14 @@ namespace SonarAnalyzer.UnitTest.TestFramework
                                                 SonarDiagnosticAnalyzer diagnosticAnalyzer,
                                                 IEnumerable<ParseOptions> options = null,
                                                 CompilationErrorBehavior checkMode = CompilationErrorBehavior.Default,
-                                                IEnumerable<MetadataReference> additionalReferences = null)
+                                                IEnumerable<MetadataReference> additionalReferences = null,
+                                                OutputKind outputKind = OutputKind.DynamicallyLinkedLibrary)
         {
-            var solution = SolutionBuilder.Create().AddProject(AnalyzerLanguage.CSharp).AddSnippet(snippet).AddReferences(additionalReferences).GetSolution();
+            var solution = SolutionBuilder.Create()
+                                          .AddProject(AnalyzerLanguage.CSharp, outputKind: outputKind)
+                                          .AddSnippet(snippet)
+                                          .AddReferences(additionalReferences)
+                                          .GetSolution();
             CompileAndVerifyAnalyzer(solution, new DiagnosticAnalyzer[] { diagnosticAnalyzer }, options, checkMode);
         }
 

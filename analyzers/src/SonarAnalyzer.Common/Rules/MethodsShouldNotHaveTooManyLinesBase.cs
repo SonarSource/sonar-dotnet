@@ -18,12 +18,12 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using Microsoft.CodeAnalysis;
-using SonarAnalyzer.Common;
-using SonarAnalyzer.Helpers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Microsoft.CodeAnalysis;
+using SonarAnalyzer.Common;
+using SonarAnalyzer.Helpers;
 
 namespace SonarAnalyzer.Rules
 {
@@ -47,7 +47,7 @@ namespace SonarAnalyzer.Rules
         protected abstract SyntaxToken? GetMethodIdentifierToken(TBaseMethodSyntax baseMethodDeclaration);
         protected abstract string GetMethodKindAndName(SyntaxToken identifierToken);
 
-        protected sealed override void Initialize(ParameterLoadingAnalysisContext context) =>
+        protected override void Initialize(ParameterLoadingAnalysisContext context) =>
             context.RegisterSyntaxNodeActionInNonGenerated(
                 GeneratedCodeRecognizer,
                 c =>
