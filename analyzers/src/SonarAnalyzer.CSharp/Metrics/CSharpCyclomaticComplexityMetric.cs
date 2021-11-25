@@ -20,6 +20,7 @@
 
 using System.Collections.Generic;
 using System.Collections.Immutable;
+using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
@@ -55,6 +56,14 @@ namespace SonarAnalyzer.Metrics.CSharp
         {
             public List<SecondaryLocation> IncrementLocations { get; }
                 = new List<SecondaryLocation>();
+
+            public override void VisitCompilationUnit(CompilationUnitSyntax node)
+            {
+                foreach (var globalStatement in node.Members.Where(x => x.IsKind(SyntaxKind.GlobalStatement)))
+                {
+                    base.Visit(globalStatement);
+                }
+            }
 
             public override void VisitMethodDeclaration(MethodDeclarationSyntax node)
             {

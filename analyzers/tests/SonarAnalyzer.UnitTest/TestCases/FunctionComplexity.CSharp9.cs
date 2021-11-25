@@ -1,13 +1,13 @@
-﻿//FN
-if (false) { }
-if (false) { }
-if (false) { }
+﻿// Noncompliant [0]
+if (false) { }  // Secondary [0] {{+1}}
+if (false) { }  // Secondary [0] {{+1}}
+if (false) { }  // Secondary [0] {{+1}}
 
-void TopLevelLocalFunction()    // FN
+void TopLevelLocalFunction()
 {
-    if (false) { }
-    if (false) { }
-    if (false) { }
+    if (false) { }  // Secondary [0] {{+1}}
+    if (false) { }  // Secondary [0] {{+1}}
+    if (false) { }  // Secondary [0] {{+1}}
 }
 
 public record FunctionComplexity
