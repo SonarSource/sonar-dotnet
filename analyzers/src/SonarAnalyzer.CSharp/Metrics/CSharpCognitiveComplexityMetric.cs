@@ -45,12 +45,12 @@ namespace SonarAnalyzer.Metrics.CSharp
 
         private class CognitiveWalker : CSharpSyntaxWalker
         {
-            private readonly bool onlyGlobalStatements = false;
+            private readonly bool onlyGlobalStatements;
 
             public CognitiveComplexityWalkerState<MethodDeclarationSyntax> State { get; }
                 = new CognitiveComplexityWalkerState<MethodDeclarationSyntax>();
 
-            public CognitiveWalker(bool onlyGlobalStatements) : base() =>
+            public CognitiveWalker(bool onlyGlobalStatements) =>
                 this.onlyGlobalStatements = onlyGlobalStatements;
 
             public override void Visit(SyntaxNode node)
