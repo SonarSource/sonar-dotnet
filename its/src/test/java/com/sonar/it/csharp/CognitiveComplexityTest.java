@@ -49,7 +49,7 @@ public class CognitiveComplexityTest {
   }
 
   @Test
-  public void doNotHardcodeCredentials_defaultParameters_canBeCustomized() throws Exception {
+  public void cognitiveComplexity_hasSecondaryLocations() throws Exception {
     Tests.analyzeProject(temp, PROJECT_NAME, null);
 
     final String componentKey = "CognitiveComplexity.CS:CognitiveComplexity.cs";
