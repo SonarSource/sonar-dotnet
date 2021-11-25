@@ -83,6 +83,17 @@ public class SarifParserCallbackImplTest {
   }
 
   @Test
+  public void should_add_file_issues_no_secondary_location() {
+    String absoluteFilePath = temp.getRoot().toPath().resolve("file1").toString();
+    callback.onFileIssue("rule1", "warning", absoluteFilePath, emptyList(), "msg");
+    assertThat(ctx.allIssues()).hasSize(1);
+    assertThat(ctx.allIssues().iterator().next().primaryLocation().inputComponent().key()).isEqualTo("module1:file1");
+    assertThat(ctx.allIssues().iterator().next().ruleKey().rule()).isEqualTo("rule1");
+    assertThat(logTester.logs(LoggerLevel.DEBUG)).containsOnly("Adding file level issue rule1: file1");
+    assertThat(ctx.allIssues().iterator().next().flows()).hasSize(0);
+  }
+
+  @Test
   public void should_add_file_issues_with_secondary_location() {
     String absoluteFilePath = temp.getRoot().toPath().resolve("file1").toString();
     callback.onFileIssue("rule1", "warning", absoluteFilePath, Collections.singletonList(createLocation("file1", 4, 5)), "msg");
@@ -121,6 +132,29 @@ public class SarifParserCallbackImplTest {
         tuple("rule45", RuleType.CODE_SMELL, Severity.MAJOR));
 
     assertThat(logTester.logs(LoggerLevel.DEBUG)).containsOnly("Adding file level external issue rule45: file1");
+  }
+
+  @Test
+  public void should_create_external_file_issue_with_secondary_location() {
+    String absoluteFilePath = temp.getRoot().toPath().resolve("file1").toString();
+    callback = new SarifParserCallbackImpl(ctx, repositoryKeyByRoslynRuleKey, false, emptySet(), emptySet(), emptySet());
+    callback.onFileIssue("rule45", "warning", absoluteFilePath, Collections.singletonList(createLocation("file1", 4, 5)), "msg");
+
+    assertThat(ctx.allIssues()).isEmpty();
+    assertThat(ctx.allExternalIssues())
+      .extracting(ExternalIssue::ruleId, ExternalIssue::type, ExternalIssue::severity)
+      .containsExactlyInAnyOrder(
+        tuple("rule45", RuleType.CODE_SMELL, Severity.MAJOR));
+    List<Flow> flows = ctx.allExternalIssues().iterator().next().flows();
+    assertThat(flows).hasSize(1);
+    List<IssueLocation> locations = flows.get(0).locations();
+    assertThat(locations).hasSize(1);
+    assertThat(locations.get(0).inputComponent().key()).isEqualTo("module1:file1");
+    TextRange textRange = locations.get(0).textRange();
+    assertThat(textRange.start().lineOffset()).isEqualTo(5);
+    assertThat(textRange.start().line()).isEqualTo(4);
+    assertThat(textRange.end().lineOffset()).isEqualTo(6);
+    assertThat(textRange.end().line()).isEqualTo(4);
   }
 
   @Test
