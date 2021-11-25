@@ -1,6 +1,7 @@
 ﻿using System.Reflection;
 
-Assembly assem = Assembly.GetExecutingAssembly(); // Noncompliant - FP, there is not alternative for top-level statements
+Assembly assem = Assembly.GetExecutingAssembly(); // Noncompliant - If there are other types defined in the program, calling
+                                                  // 'typeof(CustomClass).Assembly' will achieve the same result.
 
 assem = typeof(Assembly).Assembly; // Compliant
 
