@@ -53,7 +53,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 {
                     if (c.ContainingSymbol is IMethodSymbol)
                     {
-                        CheckComplexity<CompilationUnitSyntax>(c, m => Location.Create(c.Node.SyntaxTree, TextSpan.FromBounds(0, 0)), "top-level file");
+                        CheckComplexity<CompilationUnitSyntax>(c, m => Location.Create(c.Node.SyntaxTree, TextSpan.FromBounds(0, 0)), "top-level file", true);
                     }
                 },
                 SyntaxKind.CompilationUnit);
@@ -87,11 +87,16 @@ namespace SonarAnalyzer.Rules.CSharp
                 SyntaxKindEx.InitAccessorDeclaration);
         }
 
-        private void CheckComplexity<TSyntax>(SyntaxNodeAnalysisContext context, Func<TSyntax, Location> getLocation, string declarationType)
+        private void CheckComplexity<TSyntax>(SyntaxNodeAnalysisContext context, Func<TSyntax, Location> getLocation, string declarationType, bool onlyGlobalStatements = false)
             where TSyntax : SyntaxNode =>
-            CheckComplexity(context, getLocation, n => n, declarationType);
+            CheckComplexity(context, getLocation, n => n, declarationType, onlyGlobalStatements);
 
-        private void CheckComplexity<TSyntax>(SyntaxNodeAnalysisContext context, Func<TSyntax, Location> getLocation, Func<TSyntax, SyntaxNode> getNodeToCheck, string declarationType)
+        private void CheckComplexity<TSyntax>(
+            SyntaxNodeAnalysisContext context,
+            Func<TSyntax, Location> getLocation,
+            Func<TSyntax, SyntaxNode> getNodeToCheck,
+            string declarationType,
+            bool onlyGlobalStatements = false)
             where TSyntax : SyntaxNode
         {
             var node = (TSyntax)context.Node;
@@ -102,7 +107,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 return;
             }
 
-            var complexityMetric = CSharpCyclomaticComplexityMetric.GetComplexity(nodeToCheck);
+            var complexityMetric = CSharpCyclomaticComplexityMetric.GetComplexity(nodeToCheck, onlyGlobalStatements);
             if (complexityMetric.Complexity > Maximum)
             {
                 context.ReportIssue(
