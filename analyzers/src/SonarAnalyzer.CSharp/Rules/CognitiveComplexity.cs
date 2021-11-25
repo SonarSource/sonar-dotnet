@@ -46,7 +46,7 @@ namespace SonarAnalyzer.Rules.CSharp
                             c,
                             cu => cu,
                             _ => Location.Create(c.Node.SyntaxTree, TextSpan.FromBounds(0, 0)),
-                            CSharpCognitiveComplexityMetric.GetComplexity,
+                            node => CSharpCognitiveComplexityMetric.GetComplexity(node, true),
                             "top-level file",
                             Threshold);
                     }
