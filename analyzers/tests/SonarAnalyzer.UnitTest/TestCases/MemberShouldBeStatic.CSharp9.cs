@@ -1,6 +1,6 @@
 ﻿using System;
 
-int TopLevelLocalfunction() => 0;       // FN
+int TopLevelLocalfunction() => 0;       // Compliant, local functions are not class members
 
 var localVariable = 42;
 int LocalFunction() => localVariable;   // Compliant
