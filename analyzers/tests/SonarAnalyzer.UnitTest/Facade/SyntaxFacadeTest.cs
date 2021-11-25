@@ -51,11 +51,11 @@ namespace SonarAnalyzer.UnitTest.Helpers
 
         [TestMethod]
         public void InvocationIdentifier_UnexpectedTypeThrows_CS() =>
-            cs.Invoking(x => x.InvocationIdentifier(CS.SyntaxFactory.IdentifierName("ThisIsNotInvocation"))).Should().Throw<InvalidOperationException>();
+            cs.Invoking(x => x.InvocationIdentifier(CS.SyntaxFactory.IdentifierName("ThisIsNotInvocation"))).Should().Throw<InvalidCastException>();
 
         [TestMethod]
         public void InvocationIdentifier_UnexpectedTypeThrows_VB() =>
-            vb.Invoking(x => x.InvocationIdentifier(VB.SyntaxFactory.IdentifierName("ThisIsNotInvocation"))).Should().Throw<InvalidOperationException>();
+            vb.Invoking(x => x.InvocationIdentifier(VB.SyntaxFactory.IdentifierName("ThisIsNotInvocation"))).Should().Throw<InvalidCastException>();
 
         [TestMethod]
         public void NodeExpression_Null_CS() =>
