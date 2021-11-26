@@ -23,6 +23,7 @@ using System.Collections.Immutable;
 using System.Linq;
 using Microsoft.CodeAnalysis;
 using SonarAnalyzer.Helpers;
+using StyleCop.Analyzers.Lightup;
 
 namespace SonarAnalyzer.Rules
 {
@@ -48,7 +49,11 @@ namespace SonarAnalyzer.Rules
             context.RegisterSyntaxNodeActionInNonGenerated(Language.GeneratedCodeRecognizer,
                 c =>
                 {
-                    if (c.ContainingSymbol.Kind != SymbolKind.NamedType || (c.ContainingSymbol is INamespaceSymbol namespaceSymbol && namespaceSymbol.IsGlobalNamespace))
+                    if (c.ContainingSymbol.Kind != SymbolKind.NamedType && !(c.ContainingSymbol is INamespaceSymbol namespaceSymbol
+                                                                             && namespaceSymbol.IsGlobalNamespace
+                                                                             && namespaceSymbol.GetMembers()
+                                                                                               .OfType<INamedTypeSymbol>()
+                                                                                               .Any(x => x.IsTopLevelProgram())))
                     {
                         return;
                     }

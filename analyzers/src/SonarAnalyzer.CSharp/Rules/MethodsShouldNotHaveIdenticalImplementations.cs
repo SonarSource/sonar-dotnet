@@ -45,13 +45,13 @@ namespace SonarAnalyzer.Rules.CSharp
 
         protected override IEnumerable<IMethodDeclaration> GetMethodDeclarations(SyntaxNode node)
         {
-            if (node is TypeDeclarationSyntax)
+            if (node.IsKind(SyntaxKind.CompilationUnit))
             {
-                return ((TypeDeclarationSyntax)node).GetMethodDeclarations();
+                return ((CompilationUnitSyntax)node).GetMethodDeclarations();
             }
             else
             {
-                return  ((CompilationUnitSyntax)node).GetMethodDeclarations();
+                return ((TypeDeclarationSyntax)node).GetMethodDeclarations();
             }
         }
 
