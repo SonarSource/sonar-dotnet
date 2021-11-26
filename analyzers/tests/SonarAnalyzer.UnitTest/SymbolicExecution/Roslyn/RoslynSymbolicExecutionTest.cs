@@ -138,7 +138,7 @@ End Class";
             }
 
             public void ValidateOrder(params string[] expected) =>
-                preProcessedOperations.Where(x => !x.IsImplicit).Select(x => x.Instance.Kind + ": " + x.Instance.Syntax).Should().OnlyContainInOrder(expected);
+                preProcessedOperations.Where(x => !x.IsImplicit).Select(TestHelper.Serialize).Should().OnlyContainInOrder(expected);
         }
     }
 }

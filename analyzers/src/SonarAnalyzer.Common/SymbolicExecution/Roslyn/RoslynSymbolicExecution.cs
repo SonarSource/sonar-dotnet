@@ -19,9 +19,9 @@
  */
 
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using SonarAnalyzer.CFG.Roslyn;
-using SonarAnalyzer.Extensions;
 
 namespace SonarAnalyzer.SymbolicExecution.Roslyn
 {
@@ -29,6 +29,7 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
     {
         private readonly ControlFlowGraph cfg;
         private readonly SymbolicExecutionCheck[] checks;
+        private readonly Queue<ExplodedNode> queue = new Queue<ExplodedNode>();
 
         public RoslynSymbolicExecution(ControlFlowGraph cfg, SymbolicExecutionCheck[] checks)
         {
@@ -42,20 +43,46 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
 
         public void Execute()
         {
+            // ToDo: Forbid running twice
             foreach (var block in cfg.Blocks)   // ToDo: This is a temporary simplification until we support proper branching
             {
-                var state = new ProgramState(); // ToDo: This is a temporary oversimplification to scaffold the enginge
-                foreach (var operation in block.OperationsAndBranchValue.ToExecutionOrder()) // ToDo: This is a temporary oversimplification to scaffold the engine
+                queue.Enqueue(new ExplodedNode(block, ProgramState.Empty));
+                while (queue.Any())
                 {
-                    state = InvokeChecks(state, (check, ps) => check.PreProcess(ps, operation));
-                    // ToDo: Check state == null
-
-                    // ToDo: Something is still missing around here
-
-                    state = InvokeChecks(state, (check, ps) => check.PostProcess(ps, operation));
-                    // ToDo: Check state == null
+                    var current = queue.Dequeue();
+                    var successors = current.Operation == null ? ProcessBranching(current) : ProcessOperation(current);
+                    foreach (var node in successors)
+                    {
+                        queue.Enqueue(node);
+                    }
                 }
             }
+        }
+
+        private IEnumerable<ExplodedNode> ProcessBranching(ExplodedNode node)
+        {
+            // ToDo: Something is still missing around here - process branching
+            yield break;
+        }
+
+        private IEnumerable<ExplodedNode> ProcessOperation(ExplodedNode node)
+        {
+            var state = node.State;
+            state = InvokeChecks(state, (check, ps) => check.PreProcess(ps, node.Operation));
+            if (state == null)
+            {
+                yield break;
+            }
+
+            // ToDo: Something is still missing around here - process well known instructions
+
+            state = InvokeChecks(state, (check, ps) => check.PostProcess(ps, node.Operation));
+            if (state == null)
+            {
+                yield break;
+            }
+
+            yield return new ExplodedNode(node, state);
         }
 
         private ProgramState InvokeChecks(ProgramState state, Func<SymbolicExecutionCheck, ProgramState, ProgramState> invoke)
