@@ -20,11 +20,12 @@
 
 namespace SonarAnalyzer.Helpers.Facade
 {
-    public interface ISyntaxKindFacade<TSyntaxKind>
+    public interface ISyntaxKindFacade<out TSyntaxKind>
         where TSyntaxKind : struct
     {
         abstract TSyntaxKind Attribute { get; }
         abstract TSyntaxKind[] ClassAndRecordDeclaration { get; }
+        abstract TSyntaxKind[] ComparisonKinds { get; }
         abstract TSyntaxKind ConstructorDeclaration { get; }
         abstract TSyntaxKind EnumDeclaration { get; }
         abstract TSyntaxKind IdentifierName { get; }

@@ -22,6 +22,7 @@ using System.Collections.Generic;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
+using SonarAnalyzer.Extensions;
 
 namespace SonarAnalyzer.Helpers
 {
@@ -44,5 +45,8 @@ namespace SonarAnalyzer.Helpers
 
         protected override bool IsMinusOperator(PrefixUnaryExpressionSyntax unaryExpression) =>
             unaryExpression.OperatorToken.IsKind(SyntaxKind.MinusToken);
+
+        protected override SyntaxNode RemoveParentheses(SyntaxNode expression) =>
+            expression.RemoveParentheses();
     }
 }

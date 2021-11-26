@@ -26,7 +26,20 @@ namespace SonarAnalyzer.Helpers.Facade
     internal sealed class CSharpSyntaxKindFacade : ISyntaxKindFacade<SyntaxKind>
     {
         public SyntaxKind Attribute => SyntaxKind.Attribute;
-        public SyntaxKind[] ClassAndRecordDeclaration => new[] {SyntaxKind.ClassDeclaration, SyntaxKindEx.RecordClassDeclaration};
+        public SyntaxKind[] ClassAndRecordDeclaration => new[]
+        {
+            SyntaxKind.ClassDeclaration,
+            SyntaxKindEx.RecordClassDeclaration,
+        };
+        public SyntaxKind[] ComparisonKinds => new[]
+        {
+            SyntaxKind.GreaterThanExpression,
+            SyntaxKind.GreaterThanOrEqualExpression,
+            SyntaxKind.LessThanExpression,
+            SyntaxKind.LessThanOrEqualExpression,
+            SyntaxKind.EqualsExpression,
+            SyntaxKind.NotEqualsExpression,
+        };
         public SyntaxKind ConstructorDeclaration => SyntaxKind.ConstructorDeclaration;
         public SyntaxKind EnumDeclaration => SyntaxKind.EnumDeclaration;
         public SyntaxKind IdentifierName => SyntaxKind.IdentifierName;
@@ -34,7 +47,7 @@ namespace SonarAnalyzer.Helpers.Facade
         public SyntaxKind InvocationExpression => SyntaxKind.InvocationExpression;
         public SyntaxKind InterpolatedStringExpression => SyntaxKind.InterpolatedStringExpression;
         public SyntaxKind[] MethodDeclarations => new[] { SyntaxKind.MethodDeclaration };
-        public SyntaxKind[] ObjectCreationExpressions => new[] {SyntaxKind.ObjectCreationExpression, SyntaxKindEx.ImplicitObjectCreationExpression};
+        public SyntaxKind[] ObjectCreationExpressions => new[] { SyntaxKind.ObjectCreationExpression, SyntaxKindEx.ImplicitObjectCreationExpression };
         public SyntaxKind ReturnStatement => SyntaxKind.ReturnStatement;
         public SyntaxKind SimpleMemberAccessExpression => SyntaxKind.SimpleMemberAccessExpression;
         public SyntaxKind StringLiteralExpression => SyntaxKind.StringLiteralExpression;
@@ -44,7 +57,8 @@ namespace SonarAnalyzer.Helpers.Facade
             SyntaxKind.StructDeclaration,
             SyntaxKind.InterfaceDeclaration,
             SyntaxKind.EnumDeclaration,
-            SyntaxKindEx.RecordClassDeclaration
+            SyntaxKindEx.RecordClassDeclaration,
+            SyntaxKindEx.RecordStructDeclaration,
         };
     }
 }

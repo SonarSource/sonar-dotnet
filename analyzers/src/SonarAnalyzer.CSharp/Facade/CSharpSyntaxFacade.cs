@@ -53,6 +53,12 @@ namespace SonarAnalyzer.Helpers.Facade
 
         public override bool IsNullLiteral(SyntaxNode node) => node.IsNullLiteral();
 
+        public override SyntaxNode BinaryExpressionLeft(SyntaxNode binaryExpression) =>
+            Cast<BinaryExpressionSyntax>(binaryExpression).Left;
+
+        public override SyntaxNode BinaryExpressionRight(SyntaxNode binaryExpression) =>
+            Cast<BinaryExpressionSyntax>(binaryExpression).Right;
+
         public override IEnumerable<SyntaxNode> EnumMembers(SyntaxNode @enum) =>
             @enum == null ? Enumerable.Empty<SyntaxNode>() : Cast<EnumDeclarationSyntax>(@enum).Members;
 
@@ -66,24 +72,24 @@ namespace SonarAnalyzer.Helpers.Facade
                 InvocationExpressionSyntax invocation => invocation.Expression,
                 LockStatementSyntax @lock => @lock.Expression,
                 null => null,
-                _ => throw Unexpected(node)
+                _ => throw InvalidOperation(node, nameof(NodeExpression))
             };
 
         public override SyntaxToken? NodeIdentifier(SyntaxNode node) =>
-            node switch
+            RemoveParentheses(node) switch
             {
                 AttributeArgumentSyntax attribute => attribute.NameColon?.Name.Identifier,
                 BaseTypeDeclarationSyntax baseType => baseType.Identifier,
                 DelegateDeclarationSyntax delegateDeclaration => delegateDeclaration.Identifier,
                 EnumMemberDeclarationSyntax enumMember => enumMember.Identifier,
-                SimpleNameSyntax simpleName => simpleName.Identifier,
+                InvocationExpressionSyntax invocation => NodeIdentifier(invocation.Expression),
                 MemberAccessExpressionSyntax memberAccess => memberAccess.Name.Identifier,
                 MemberBindingExpressionSyntax memberBinding => memberBinding.Name.Identifier,
                 ParameterSyntax parameter => parameter.Identifier,
                 PropertyDeclarationSyntax property => property.Identifier,
+                SimpleNameSyntax simpleName => simpleName.Identifier,
                 VariableDeclaratorSyntax variable => variable.Identifier,
-                null => null,
-                _ => throw Unexpected(node)
+                _ => null,
             };
 
         public override string NodeStringTextValue(SyntaxNode node) =>
@@ -93,6 +99,16 @@ namespace SonarAnalyzer.Helpers.Facade
                 LiteralExpressionSyntax literalExpression => literalExpression.Token.ValueText,
                 _ => string.Empty
             };
+
+        public override SyntaxNode RemoveConditionalAcesss(SyntaxNode node)
+        {
+            var whenNotNull = node.RemoveParentheses();
+            while (whenNotNull is ConditionalAccessExpressionSyntax conditionalAccess)
+            {
+                whenNotNull = conditionalAccess.WhenNotNull.RemoveParentheses();
+            }
+            return whenNotNull;
+        }
 
         public override SyntaxNode RemoveParentheses(SyntaxNode node) =>
             node.RemoveParentheses();

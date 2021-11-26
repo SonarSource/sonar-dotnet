@@ -6,9 +6,9 @@ const int localConst_Zero = 0;
 var someEnumerable = new List<string>();
 var anotherEnumerable = new List<string>();
 
-var result = someEnumerable.Count() >= 0; // Noncompliant {{The 'Count' of 'IEnumerable<T>' is always '>=0', so fix this test to get the real expected behavior.}}
+var result = someEnumerable.Count() >= 0; // Noncompliant {{The 'Count' of 'IEnumerable<T>' always evaluates as 'True' regardless the size.}}
 
-if (someEnumerable.Count() is >= 0) // Noncompliant {{The 'Count' of 'IEnumerable<T>' is always '>=0', so fix this test to get the real expected behavior.}}
+if (someEnumerable.Count() is >= 0) // Noncompliant {{The 'Count' of 'IEnumerable<T>' always evaluates as 'True' regardless the size.}}
 //                            ^^^^
 {
 }
@@ -28,6 +28,9 @@ if (someEnumerable.Count() is < 0) { } // Noncompliant
 if (someEnumerable.Count() is < localConst_Zero) { } // Noncompliant
 if (someEnumerable.Count() is >= 0 or 1) { } // Noncompliant
 if (someEnumerable.Count() is not >= 0) { } // Noncompliant
+if (someEnumerable.Count() is <= -1) { } // Noncompliant - AlwaysFalse
+if (someEnumerable.Count() is > -17) { } // Noncompliant - AlwaysTrue
+if (someEnumerable.Count() is { } _) { } // Compliant - Not a comparision
 
 int variable = 42;
 
@@ -35,14 +38,15 @@ var x = args.Length switch
 {
     >= 0 => 1, // Noncompliant
 //  ^^^^
-    < 0 => 2 // Noncompliant
+    < 0 => 2, // Noncompliant
 };
 
 x = (args.Length, variable) switch
 {
     (>= 0, 4) => 1, // Noncompliant
 //   ^^^^
-    (>= 0, 2) => 2 // Noncompliant
+    (>= 0, 2) => 2, // Noncompliant
+	_ => 3,
 };
 
 var y = someEnumerable.Count() switch
@@ -50,7 +54,8 @@ var y = someEnumerable.Count() switch
     1 => 1,
     2 => 2,
     >= 0 => 3, // Noncompliant
-    < -2 => 4 // Noncompliant
+    < -2 => 4, // Noncompliant
+	_ => 5,
 };
 
 List<string> list = new();
@@ -122,7 +127,7 @@ record R
             if (value.Count < -1) { } // Noncompliant
             if (0 > value.Count) { } // Noncompliant
             if (-42 > value.Count) { } // Noncompliant
-            if (value.Count >= 0) { } // Noncompliant {{The 'Count' of 'ICollection' is always '>=0', so fix this test to get the real expected behavior.}}
+            if (value.Count >= 0) { } // Noncompliant {{The 'Count' of 'ICollection' always evaluates as 'True' regardless the size.}}
             if (value.Count == 0) { }
             if (value.Count == 1) { }
         }
