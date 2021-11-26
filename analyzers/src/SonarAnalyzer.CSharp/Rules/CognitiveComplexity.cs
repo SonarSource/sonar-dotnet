@@ -24,6 +24,7 @@ using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
 using Microsoft.CodeAnalysis.Text;
 using SonarAnalyzer.Common;
+using SonarAnalyzer.Extensions;
 using SonarAnalyzer.Helpers;
 using SonarAnalyzer.Metrics.CSharp;
 using StyleCop.Analyzers.Lightup;
@@ -40,11 +41,11 @@ namespace SonarAnalyzer.Rules.CSharp
         {
             context.RegisterSyntaxNodeActionInNonGenerated(c =>
                 {
-                    if (c.ContainingSymbol is IMethodSymbol)
+                    if (c.IsTopLevelStatementsFile())
                     {
                         CheckComplexity<CompilationUnitSyntax>(
                             c,
-                            cu => cu,
+                            compilationUnit => compilationUnit,
                             _ => Location.Create(c.Node.SyntaxTree, TextSpan.FromBounds(0, 0)),
                             node => CSharpCognitiveComplexityMetric.GetComplexity(node, true),
                             "top-level file",
