@@ -48,7 +48,7 @@ namespace SonarAnalyzer.Rules
             context.RegisterSyntaxNodeActionInNonGenerated(Language.GeneratedCodeRecognizer,
                 c =>
                 {
-                    if (c.ContainingSymbol.Kind != SymbolKind.NamedType)
+                    if (c.ContainingSymbol.Kind != SymbolKind.NamedType || (c.ContainingSymbol is INamespaceSymbol namespaceSymbol && namespaceSymbol.IsGlobalNamespace))
                     {
                         return;
                     }
