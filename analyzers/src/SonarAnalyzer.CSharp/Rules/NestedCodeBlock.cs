@@ -35,19 +35,18 @@ namespace SonarAnalyzer.Rules.CSharp
         internal const string DiagnosticId = "S1199";
         private const string MessageFormat = "Extract this nested code block into a separate method.";
 
-        private static readonly DiagnosticDescriptor rule =
-            DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
+        private static readonly DiagnosticDescriptor Rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
 
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(Rule);
 
         protected override void Initialize(SonarAnalysisContext context)
         {
             context.RegisterSyntaxNodeActionInNonGenerated(c =>
                 {
                     var block = (BlockSyntax)c.Node;
-                    if (block.Parent.IsKind(SyntaxKind.Block))
+                    if (block.Parent.IsAnyKind(SyntaxKind.Block, SyntaxKind.GlobalStatement))
                     {
-                        c.ReportIssue(Diagnostic.Create(rule, block.OpenBraceToken.GetLocation()));
+                        c.ReportIssue(Diagnostic.Create(Rule, block.OpenBraceToken.GetLocation()));
                     }
                 },
                 SyntaxKind.Block);

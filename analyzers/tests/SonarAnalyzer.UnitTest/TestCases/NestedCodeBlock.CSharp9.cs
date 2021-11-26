@@ -1,10 +1,11 @@
 ﻿using System;
 
-{ // FN
-    if (1 < 2)
-    {
+    { // Noncompliant
+//  ^
+        if (1 < 2)
+        {
+        }
     }
-}
 
 record TestRecord
 {
