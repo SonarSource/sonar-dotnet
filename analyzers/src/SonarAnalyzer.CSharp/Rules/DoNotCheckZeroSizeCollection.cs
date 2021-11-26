@@ -28,19 +28,16 @@ using SonarAnalyzer.Common;
 using SonarAnalyzer.Extensions;
 using SonarAnalyzer.Helpers;
 using StyleCop.Analyzers.Lightup;
+using Comparison = SonarAnalyzer.Helpers.ComparisonKind;
 
 namespace SonarAnalyzer.Rules.CSharp
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
     [Rule(DiagnosticId)]
-    public sealed class DoNotCheckZeroSizeCollection : DoNotCheckZeroSizeCollectionBase<SyntaxKind, BinaryExpressionSyntax, ExpressionSyntax>
+    public sealed class DoNotCheckZeroSizeCollection : DoNotCheckZeroSizeCollectionBase<SyntaxKind>
     {
         protected override ILanguageFacade<SyntaxKind> Language => CSharpFacade.Instance;
-        protected override SyntaxKind GreaterThanOrEqualExpression => SyntaxKind.GreaterThanOrEqualExpression;
-        protected override SyntaxKind LessThanOrEqualExpression => SyntaxKind.LessThanOrEqualExpression;
-        protected override SyntaxKind GreaterThanExpression => SyntaxKind.GreaterThanExpression;
-        protected override SyntaxKind LessThanExpression => SyntaxKind.LessThanExpression;
-        protected override string IEnumerableTString { get; } = "IEnumerable<T>";
+        protected override string IEnumerableTString => "IEnumerable<T>";
 
         protected override void Initialize(SonarAnalysisContext context)
         {
@@ -49,25 +46,6 @@ namespace SonarAnalyzer.Rules.CSharp
             context.RegisterSyntaxNodeActionInNonGenerated(AnalyzeSwitchExpression, SyntaxKindEx.SwitchExpression);
             context.RegisterSyntaxNodeActionInNonGenerated(AnalyzeSwitchStatement, SyntaxKind.SwitchStatement);
             context.RegisterSyntaxNodeActionInNonGenerated(AnalyzePropertyPatternClause, SyntaxKindEx.PropertyPatternClause);
-        }
-
-        protected override ExpressionSyntax GetLeftNode(BinaryExpressionSyntax binaryExpression) =>
-            binaryExpression.Left;
-
-        protected override ExpressionSyntax GetRightNode(BinaryExpressionSyntax binaryExpression) =>
-            binaryExpression.Right;
-
-        protected override ExpressionSyntax RemoveParentheses(ExpressionSyntax expression) =>
-            expression.RemoveParentheses();
-
-        protected override ISymbol GetSymbol(SyntaxNodeAnalysisContext context, ExpressionSyntax expression)
-        {
-            while (expression is ConditionalAccessExpressionSyntax conditionalAccess)
-            {
-                expression = conditionalAccess.WhenNotNull;
-            }
-
-            return context.SemanticModel.GetSymbolInfo(expression).Symbol;
         }
 
         private void AnalyzePropertyPatternClause(SyntaxNodeAnalysisContext c)
@@ -126,18 +104,26 @@ namespace SonarAnalyzer.Rules.CSharp
             }
         }
 
-        private void CheckPatternCondition(SyntaxNodeAnalysisContext context, ExpressionSyntax expression, SyntaxNode pattern)
+        private void CheckPatternCondition(SyntaxNodeAnalysisContext context, SyntaxNode expression, SyntaxNode pattern)
         {
-            var relationalOrSubPattern = pattern.DescendantNodesAndSelf().FirstOrDefault(x => x.IsAnyKind(SyntaxKindEx.RelationalPattern, SyntaxKindEx.Subpattern));
-            if (RelationalPatternSyntaxWrapper.IsInstance(relationalOrSubPattern)
-                && ((RelationalPatternSyntaxWrapper)relationalOrSubPattern) is var relationalPattern
-                && IsOperatorOfInterest(relationalPattern.OperatorToken))
+            if (pattern.DescendantNodesAndSelf().FirstOrDefault(x => x.IsKind(SyntaxKindEx.RelationalPattern)) is { } relationalPatternNode
+                && ((RelationalPatternSyntaxWrapper)relationalPatternNode) is var relationalPattern
+                && ComparisonKind(relationalPattern.OperatorToken) is { } comparison
+                && comparison != Comparison.None
+                && Language.ExpressionNumericConverter.TryGetConstantIntValue(context.SemanticModel, relationalPattern.Expression, out var constant))
             {
-                CheckCondition(context, relationalPattern, expression, relationalPattern.Expression);
+                CheckExpression(context, relationalPattern.SyntaxNode, expression, constant, comparison);
             }
-        }
 
-        private static bool IsOperatorOfInterest(SyntaxToken syntaxToken) =>
-            syntaxToken.ValueText.Equals(">=") || syntaxToken.ValueText.Equals("<");
+            static ComparisonKind ComparisonKind(SyntaxToken syntaxToken) =>
+                syntaxToken.ValueText switch
+                {
+                    "<" => Comparison.LessThan,
+                    "<=" => Comparison.LessThanOrEqual,
+                    ">" => Comparison.GreaterThan,
+                    ">=" => Comparison.GreaterThanOrEqual,
+                    _ => Comparison.None,
+                };
+        }
     }
 }

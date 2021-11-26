@@ -24,6 +24,7 @@ namespace SonarAnalyzer.Helpers
 {
     public interface IExpressionNumericConverter
     {
+        bool TryGetConstantIntValue(SemanticModel semanticModel, SyntaxNode expression, out int value);
         bool TryGetConstantIntValue(SyntaxNode expression, out int value);
         bool TryGetConstantDoubleValue(SyntaxNode expression, out double value);
     }

@@ -53,6 +53,12 @@ namespace SonarAnalyzer.Helpers.Facade
 
         public override bool IsAnyKind(SyntaxNode node, params SyntaxKind[] syntaxKinds) => node.IsAnyKind(syntaxKinds);
 
+        public override SyntaxNode BinaryExpressionLeft(SyntaxNode binaryExpression) =>
+            Cast<BinaryExpressionSyntax>(binaryExpression).Left;
+
+        public override SyntaxNode BinaryExpressionRight(SyntaxNode binaryExpression) =>
+            Cast<BinaryExpressionSyntax>(binaryExpression).Right;
+
         public override IEnumerable<SyntaxNode> EnumMembers(SyntaxNode @enum) =>
             @enum == null ? Enumerable.Empty<SyntaxNode>() : Cast<EnumStatementSyntax>(@enum).Parent.ChildNodes().OfType<EnumMemberDeclarationSyntax>();
 
@@ -66,22 +72,22 @@ namespace SonarAnalyzer.Helpers.Facade
                 InvocationExpressionSyntax invocation => invocation.Expression,
                 SyncLockStatementSyntax syncLock => syncLock.Expression,
                 null => null,
-                _ => throw Unexpected(node)
+                _ => throw InvalidOperation(node, nameof(NodeExpression)),
             };
 
         public override SyntaxToken? NodeIdentifier(SyntaxNode node) =>
-            node switch
+            RemoveParentheses(node) switch
             {
                 EnumStatementSyntax enumStatement => enumStatement.Identifier,
                 EnumMemberDeclarationSyntax enumMember => enumMember.Identifier,
-                SimpleArgumentSyntax simpleArgument => simpleArgument.NameColonEquals?.Name.Identifier,
-                SimpleNameSyntax simpleName => simpleName.Identifier,
+                InvocationExpressionSyntax invocation => NodeIdentifier(invocation.Expression),
                 MemberAccessExpressionSyntax memberAccess => memberAccess.Name.Identifier,
+                ModifiedIdentifierSyntax variable => variable.Identifier,
                 ParameterSyntax parameter => parameter.Identifier.Identifier,
                 PropertyStatementSyntax property => property.Identifier,
-                ModifiedIdentifierSyntax variable => variable.Identifier,
-                null => null,
-                _ => throw Unexpected(node)
+                SimpleArgumentSyntax simpleArgument => simpleArgument.NameColonEquals?.Name.Identifier,
+                SimpleNameSyntax simpleName => simpleName.Identifier,
+                _ => null,
             };
 
         public override string NodeStringTextValue(SyntaxNode node) =>
@@ -91,6 +97,15 @@ namespace SonarAnalyzer.Helpers.Facade
                 LiteralExpressionSyntax literalExpression => literalExpression.Token.ValueText,
                 _ => string.Empty
             };
+        public override SyntaxNode RemoveConditionalAcesss(SyntaxNode node)
+        {
+            var whenNotNull = node.RemoveParentheses();
+            while (whenNotNull is ConditionalAccessExpressionSyntax conditionalAccess)
+            {
+                whenNotNull = conditionalAccess.WhenNotNull.RemoveParentheses();
+            }
+            return whenNotNull;
+        }
 
         public override SyntaxNode RemoveParentheses(SyntaxNode node) =>
             node.RemoveParentheses();

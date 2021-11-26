@@ -21,7 +21,6 @@
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Diagnostics;
 using Microsoft.CodeAnalysis.VisualBasic;
-using Microsoft.CodeAnalysis.VisualBasic.Syntax;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
 
@@ -29,32 +28,9 @@ namespace SonarAnalyzer.Rules.VisualBasic
 {
     [DiagnosticAnalyzer(LanguageNames.VisualBasic)]
     [Rule(DiagnosticId)]
-    public sealed class DoNotCheckZeroSizeCollection : DoNotCheckZeroSizeCollectionBase<SyntaxKind, BinaryExpressionSyntax, ExpressionSyntax>
+    public sealed class DoNotCheckZeroSizeCollection : DoNotCheckZeroSizeCollectionBase<SyntaxKind>
     {
         protected override ILanguageFacade<SyntaxKind> Language => VisualBasicFacade.Instance;
-        protected override SyntaxKind GreaterThanOrEqualExpression => SyntaxKind.GreaterThanOrEqualExpression;
-        protected override SyntaxKind LessThanOrEqualExpression => SyntaxKind.LessThanOrEqualExpression;
-        protected override SyntaxKind GreaterThanExpression => SyntaxKind.GreaterThanExpression;
-        protected override SyntaxKind LessThanExpression => SyntaxKind.LessThanExpression;
-        protected override string IEnumerableTString { get; } = "IEnumerable(Of T)";
-
-        protected override ExpressionSyntax GetLeftNode(BinaryExpressionSyntax binaryExpression) =>
-            binaryExpression.Left;
-
-        protected override ExpressionSyntax GetRightNode(BinaryExpressionSyntax binaryExpression) =>
-            binaryExpression.Right;
-
-        protected override ExpressionSyntax RemoveParentheses(ExpressionSyntax expression) =>
-            expression.RemoveParentheses();
-
-        protected override ISymbol GetSymbol(SyntaxNodeAnalysisContext context, ExpressionSyntax expression)
-        {
-            while (RemoveParentheses(expression) is ConditionalAccessExpressionSyntax conditionalAccess)
-            {
-                expression = conditionalAccess.WhenNotNull;
-            }
-
-            return context.SemanticModel.GetSymbolInfo(RemoveParentheses(expression)).Symbol;
-        }
+        protected override string IEnumerableTString => "IEnumerable(Of T)";
     }
 }

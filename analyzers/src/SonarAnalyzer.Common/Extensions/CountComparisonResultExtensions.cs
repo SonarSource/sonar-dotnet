@@ -25,6 +25,9 @@ namespace SonarAnalyzer.Helpers
         public static bool IsEmptyOrNotEmpty(this CountComparisonResult comparison) =>
             comparison == CountComparisonResult.Empty || comparison == CountComparisonResult.NotEmpty;
 
+        public static bool IsInvalid(this CountComparisonResult comparison) =>
+            comparison == CountComparisonResult.AlwaysFalse || comparison == CountComparisonResult.AlwaysTrue;
+
         public static CountComparisonResult Compare(this ComparisonKind comparison, int count) =>
             comparison switch
             {
@@ -38,54 +41,32 @@ namespace SonarAnalyzer.Helpers
             };
 
         private static CountComparisonResult Equals(int count) =>
-            Check(count, 0,
-                CountComparisonResult.SizeDepedendent,
-                CountComparisonResult.Empty,
-                CountComparisonResult.AlwaysFalse);
+            Check(count, 0, CountComparisonResult.AlwaysFalse, CountComparisonResult.Empty);
 
         private static CountComparisonResult NotEquals(int count) =>
-            Check(count, 0,
-                CountComparisonResult.SizeDepedendent,
-                CountComparisonResult.NotEmpty,
-                CountComparisonResult.AlwaysTrue);
+            Check(count, 0, CountComparisonResult.AlwaysTrue, CountComparisonResult.NotEmpty);
 
         private static CountComparisonResult GreaterThan(int count) =>
-            Check(count, 0,
-                CountComparisonResult.SizeDepedendent,
-                CountComparisonResult.NotEmpty,
-                CountComparisonResult.AlwaysTrue);
+            Check(count, 0, CountComparisonResult.AlwaysTrue, CountComparisonResult.NotEmpty);
 
         private static CountComparisonResult GreaterThanOrEqual(int count) =>
-            Check(count, 1,
-                CountComparisonResult.SizeDepedendent,
-                CountComparisonResult.NotEmpty,
-                CountComparisonResult.AlwaysTrue);
+            Check(count, 1, CountComparisonResult.AlwaysTrue, CountComparisonResult.NotEmpty);
 
         private static CountComparisonResult LessThan(int count) =>
-            Check(count, 1,
-                CountComparisonResult.SizeDepedendent,
-                CountComparisonResult.Empty,
-                CountComparisonResult.AlwaysFalse);
+            Check(count, 1, CountComparisonResult.AlwaysFalse, CountComparisonResult.Empty);
 
         private static CountComparisonResult LessThanOrEqual(int count) =>
-            Check(count, 0,
-                CountComparisonResult.SizeDepedendent,
-                CountComparisonResult.Empty,
-                CountComparisonResult.AlwaysFalse);
+            Check(count, 0, CountComparisonResult.AlwaysFalse, CountComparisonResult.Empty);
 
-        private static CountComparisonResult Check(int count, int limit, CountComparisonResult smallerThanLimit, CountComparisonResult sameAsLimit, CountComparisonResult higherThanLimit)
+        private static CountComparisonResult Check(int count, int threshold, CountComparisonResult belowThreshold, CountComparisonResult onThreshold)
         {
-            if (count < limit)
+            if (count == threshold)
             {
-                return smallerThanLimit;
-            }
-            else if (count > limit)
-            {
-                return higherThanLimit;
+                return onThreshold;
             }
             else
             {
-                return sameAsLimit;
+                return count < threshold ? belowThreshold : CountComparisonResult.SizeDepedendent;
             }
         }
     }

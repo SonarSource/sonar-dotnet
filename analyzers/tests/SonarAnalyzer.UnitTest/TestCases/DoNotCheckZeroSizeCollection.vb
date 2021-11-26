@@ -57,15 +57,15 @@ Namespace Tests.Diagnostics
 
             Dim SomeEnumerable As IEnumerable(Of String) = New List(Of String)()
 
-            Result = Enumerable.Count(SomeEnumerable) >= 0 ' Noncompliant {{The 'Count' of 'IEnumerable(Of T)' is always '>=0', so fix this test to get the real expected behavior.}}
-'                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-            Result = SomeEnumerable.CoUnT(Function(foo) True) >= 0 ' Noncompliant {{The 'Count' of 'IEnumerable(Of T)' is always '>=0', so fix this test to get the real expected behavior.}}
+            Result = Enumerable.Count(SomeEnumerable) >= 0 ' Noncompliant {{The 'Count' of 'IEnumerable(Of T)' always evaluates as 'True' regardless the size.}}
+            '        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+            Result = SomeEnumerable.Count(Function(foo) True) >= 0 ' Noncompliant {{The 'Count' of 'IEnumerable(Of T)' always evaluates as 'True' regardless the size.}}
             Result = SomeEnumerable?.Count() >= 0 ' Noncompliant
             Result = SomeEnumerable.Count() >= 1
-            Result = SomeEnumerable.Count() >= localVariable
-            Result = SomeEnumerable.Count() >= -1 ' Noncompliant {{The 'Count' of 'IEnumerable(Of T)' is always '>=0', so fix this test to get the real expected behavior.}}
+            Result = SomeEnumerable.Count() >= LocalVariable
+            Result = SomeEnumerable.Count() >= -1 ' Noncompliant {{The 'Count' of 'IEnumerable(Of T)' always evaluates as 'True' regardless the size.}}
             Result = SomeEnumerable.Count() <= 0
-            Result = SomeEnumerable.Count() < 0 ' Noncompliant
+            Result = SomeEnumerable.Count() < 0 ' Noncompliant {{The 'Count' of 'IEnumerable(Of T)' always evaluates as 'False' regardless the size.}}
             Result = 0 >= SomeEnumerable.Count()
 
             Result = SomeEnumerable.Count() >= LocalConst_Zero ' Noncompliant
@@ -75,9 +75,9 @@ Namespace Tests.Diagnostics
 
             Result = (SomeEnumerable.Count()) >= (0) ' Noncompliant
             Result = ((((SomeEnumerable).Count())) >= ((0))) ' Noncompliant
-'                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+            '         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
             Result = 0 <= SomeEnumerable.Count() ' Noncompliant
-'                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+            '        ^^^^^^^^^^^^^^^^^^^^^^^^^^^
             Dim NonEnumerable = New FooMethod()
             Result = NonEnumerable.Count() >= 0
         End Sub
@@ -97,8 +97,8 @@ Namespace Tests.Diagnostics
 
         Public Sub TestCountProperty()
             Dim SomeCollection = New List(Of String)()
-            Dim Result As Boolean = SomeCollection.Count >= 0 ' Noncompliant {{The 'Count' of 'ICollection' is always '>=0', so fix this test to get the real expected behavior.}}
-'                                   ^^^^^^^^^^^^^^^^^^^^^^^^^
+            Dim Result As Boolean = SomeCollection.Count >= 0 ' Noncompliant {{The 'Count' of 'ICollection' always evaluates as 'True' regardless the size.}}
+            '                       ^^^^^^^^^^^^^^^^^^^^^^^^^
             Dim NonCollection = New FooProperty()
             Result = NonCollection.Count >= 0
         End Sub
@@ -107,10 +107,10 @@ Namespace Tests.Diagnostics
             Dim SomeArray = New String(-1) {}
             Dim Result As Boolean
 
-            Result = SomeArray.Length >= 0 ' Noncompliant {{The 'Length' of 'Array' is always '>=0', so fix this test to get the real expected behavior.}}
-'                    ^^^^^^^^^^^^^^^^^^^^^
-            Result = SomeArray.LongLength >= 0 ' Noncompliant {{The 'LongLength' of 'Array' is always '>=0', so fix this test to get the real expected behavior.}}
-'                    ^^^^^^^^^^^^^^^^^^^^^^^^^
+            Result = SomeArray.Length >= 0 ' Noncompliant {{The 'Length' of 'Array' always evaluates as 'True' regardless the size.}}
+            '        ^^^^^^^^^^^^^^^^^^^^^
+            Result = SomeArray.LongLength >= 0 ' Noncompliant {{The 'LongLength' of 'Array' always evaluates as 'True' regardless the size.}}
+            '        ^^^^^^^^^^^^^^^^^^^^^^^^^
             Dim NonArray = New FooProperty()
             Result = NonArray.Length >= 0
             Result = NonArray.LongLength >= 0
@@ -132,4 +132,11 @@ Namespace Tests.Diagnostics
         End Sub
 
     End Class
+
+    Class OnString
+        Shared Function LengthWithoutMeaning(str As String) As Boolean
+            Return str.Length < -3 ' Noncompliant {{The 'Length' of 'String' always evaluates as 'False' regardless the size.}}
+        End Function
+    End Class
+
 End Namespace

@@ -44,5 +44,8 @@ namespace SonarAnalyzer.Helpers
 
         protected override bool IsMinusOperator(UnaryExpressionSyntax unaryExpression) =>
             unaryExpression.OperatorToken.Kind() == SyntaxKind.MinusToken;
+
+        protected override SyntaxNode RemoveParentheses(SyntaxNode expression) =>
+            expression.RemoveParentheses();
     }
 }
