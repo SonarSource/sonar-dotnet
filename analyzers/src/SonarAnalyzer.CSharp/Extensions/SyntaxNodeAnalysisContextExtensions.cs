@@ -20,12 +20,13 @@
 
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Diagnostics;
+using StyleCop.Analyzers.Lightup;
 
 namespace SonarAnalyzer.Extensions
 {
     public static class SyntaxNodeAnalysisContextExtensions
     {
-        public static bool IsTopLevelStatementsFile(this SyntaxNodeAnalysisContext context) =>
-            context.ContainingSymbol is IMethodSymbol;
+        public static bool IsTopLevelCompilationUnit(this SyntaxNodeAnalysisContext context) =>
+           context.ContainingSymbol is IMethodSymbol { Name: INamedTypeSymbolExtensions.MainMethodImplicitName };
     }
 }

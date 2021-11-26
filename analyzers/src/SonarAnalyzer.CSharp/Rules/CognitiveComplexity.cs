@@ -41,7 +41,7 @@ namespace SonarAnalyzer.Rules.CSharp
         {
             context.RegisterSyntaxNodeActionInNonGenerated(c =>
                 {
-                    if (c.IsTopLevelStatementsFile())
+                    if (c.IsTopLevelCompilationUnit())
                     {
                         CheckComplexity<CompilationUnitSyntax>(
                             c,
