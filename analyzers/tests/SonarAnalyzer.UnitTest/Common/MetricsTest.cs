@@ -517,6 +517,7 @@ End Class")
                 .Should().Be(2);
         }
 
+#if NET
         [TestMethod]
         public void CognitiveComplexity()
         {
@@ -529,6 +530,7 @@ End Class")
             var visualBasicCode = System.IO.File.ReadAllText(@"TestCases\CognitiveComplexity.vb");
             CognitiveComplexity(AnalyzerLanguage.VisualBasic, visualBasicCode).Should().Be(122);
         }
+#endif
 
         [TestMethod]
         public void WrongMetrics_CSharp()
