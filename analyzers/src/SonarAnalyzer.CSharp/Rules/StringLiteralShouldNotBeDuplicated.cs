@@ -25,6 +25,7 @@ using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.Common;
+using SonarAnalyzer.Extensions;
 using SonarAnalyzer.Helpers;
 using StyleCop.Analyzers.Lightup;
 
@@ -40,6 +41,14 @@ namespace SonarAnalyzer.Rules.CSharp
         {
             SyntaxKind.ClassDeclaration,
             SyntaxKind.StructDeclaration,
+            SyntaxKindEx.RecordClassDeclaration,
+            SyntaxKind.CompilationUnit
+        };
+
+        private SyntaxKind[] TypeDeclarationSyntaxKinds { get; } =
+        {
+            SyntaxKind.ClassDeclaration,
+            SyntaxKind.StructDeclaration,
             SyntaxKindEx.RecordClassDeclaration
         };
 
@@ -48,10 +57,12 @@ namespace SonarAnalyzer.Rules.CSharp
                 ?.ParameterList
                 ?.Parameters
                 .Any(p => p.Identifier.ValueText == literalExpression.Token.ValueText)
-                ?? false;
+            ?? false;
 
         protected override bool IsInnerInstance(SyntaxNodeAnalysisContext context) =>
-            context.Node.Ancestors().Any(x => x.IsAnyKind(SyntaxKinds));
+            context.Node.Ancestors().Any(x =>
+                x.IsAnyKind(TypeDeclarationSyntaxKinds)
+                || (x.IsKind(SyntaxKind.CompilationUnit) && x.ChildNodes().Any(y => y.IsKind(SyntaxKind.GlobalStatement))));
 
         protected override IEnumerable<LiteralExpressionSyntax> RetrieveLiteralExpressions(SyntaxNode node) =>
             node.DescendantNodes(n => !n.IsKind(SyntaxKind.AttributeList))
@@ -60,5 +71,8 @@ namespace SonarAnalyzer.Rules.CSharp
 
         protected override string GetLiteralValue(LiteralExpressionSyntax literal) =>
             literal.Token.Text;
+
+        protected override bool IsNotNamedTypeOrTopLevelMain(SyntaxNodeAnalysisContext context) =>
+            base.IsNotNamedTypeOrTopLevelMain(context) && !context.ContainingSymbol.IsTopLevelMain();
     }
 }

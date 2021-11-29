@@ -1,13 +1,20 @@
 ﻿using System.Diagnostics;
 
 string compliant = "compliant";
-string noncompliant = "foobar";
+// equivalent to args argument of the top level file
+string compliant1 = "args";
+string compliant2 = "args";
+string compliant3 = "args";
 
-var x = "foobar"; // Compliant - FN
+string noncompliant = "foobar"; // Noncompliant
+
+var x = "foobar";
+//      ^^^^^^^^ Secondary
 
 record Record
 {
-    private string name = "foobar"; // Noncompliant
+    private string name = "foobar";
+//                        ^^^^^^^^ Secondary
 
     public static readonly string NameReadonly = "foobar";
 //                                               ^^^^^^^^ Secondary

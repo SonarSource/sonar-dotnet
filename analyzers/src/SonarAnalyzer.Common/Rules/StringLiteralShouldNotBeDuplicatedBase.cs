@@ -62,9 +62,12 @@ namespace SonarAnalyzer.Rules
             // Hence the decision to do like other languages, at class-level
             context.RegisterSyntaxNodeActionInNonGenerated(Language.GeneratedCodeRecognizer, ReportOnViolation, SyntaxKinds);
 
+        protected virtual bool IsNotNamedTypeOrTopLevelMain(SyntaxNodeAnalysisContext context) =>
+            context.ContainingSymbol.Kind != SymbolKind.NamedType;
+
         private void ReportOnViolation(SyntaxNodeAnalysisContext context)
         {
-            if (context.ContainingSymbol.Kind != SymbolKind.NamedType || IsInnerInstance(context))
+            if (IsNotNamedTypeOrTopLevelMain(context) || IsInnerInstance(context))
             {
                 // Don't report on inner instances
                 return;
