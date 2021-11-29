@@ -62,27 +62,27 @@ public static class Utils
 
         [TestMethod]
         public void NullPointerDereference() =>
-            Verifier.VerifyNonConcurrentAnalyzer(@"TestCases\NullPointerDereference.cs", GetAnalyzer());
+            Verifier.VerifyNonConcurrentAnalyzer(@"TestCases\SymbolicExecution\NullPointerDereference.cs", GetAnalyzer());
 
         [TestMethod]
         public void NullPointerDereference_DoesNotRaiseIssuesForTestProject() =>
-            Verifier.VerifyNoIssueReportedInTest(@"TestCases\NullPointerDereference.cs", GetAnalyzer());
+            Verifier.VerifyNoIssueReportedInTest(@"TestCases\SymbolicExecution\NullPointerDereference.cs", GetAnalyzer());
 
         [TestMethod]
         public void NullPointerDereference_CSharp6() =>
-            Verifier.VerifyAnalyzer(@"TestCases\NullPointerDereference.CSharp6.cs",
+            Verifier.VerifyAnalyzer(@"TestCases\SymbolicExecution\NullPointerDereference.CSharp6.cs",
                 GetAnalyzer(),
                 ParseOptionsHelper.FromCSharp6);
 
         [TestMethod]
         public void NullPointerDereference_CSharp7() =>
-            Verifier.VerifyAnalyzer(@"TestCases\NullPointerDereference.CSharp7.cs",
+            Verifier.VerifyAnalyzer(@"TestCases\SymbolicExecution\NullPointerDereference.CSharp7.cs",
                 GetAnalyzer(),
                 ParseOptionsHelper.FromCSharp7);
 
         [TestMethod]
         public void NullPointerDereference_CSharp8() =>
-            Verifier.VerifyAnalyzer(@"TestCases\NullPointerDereference.CSharp8.cs",
+            Verifier.VerifyAnalyzer(@"TestCases\SymbolicExecution\NullPointerDereference.CSharp8.cs",
                 GetAnalyzer(),
 #if NETFRAMEWORK
                 ParseOptionsHelper.FromCSharp8,
@@ -94,11 +94,11 @@ public static class Utils
 #if NET
         [TestMethod]
         public void NullPointerDereference_CSharp9() =>
-            Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\NullPointerDereference.CSharp9.cs", GetAnalyzer());
+            Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\SymbolicExecution\NullPointerDereference.CSharp9.cs", GetAnalyzer());
 
         [TestMethod]
         public void NullPointerDereference_CSharp10() =>
-            Verifier.VerifyAnalyzerFromCSharp10Library(@"TestCases\NullPointerDereference.CSharp10.cs", GetAnalyzer());
+            Verifier.VerifyAnalyzerFromCSharp10Library(@"TestCases\SymbolicExecution\NullPointerDereference.CSharp10.cs", GetAnalyzer());
 #endif
 
         private static SonarDiagnosticAnalyzer GetAnalyzer() =>

@@ -35,7 +35,7 @@ namespace SonarAnalyzer.UnitTest.Rules.SymbolicExecution
         [DataRow(ProjectType.Product)]
         [DataRow(ProjectType.Test)]
         public void EmptyNullableValueAccess(ProjectType projectType) =>
-            Verifier.VerifyAnalyzer(@"TestCases\EmptyNullableValueAccess.cs",
+            Verifier.VerifyAnalyzer(@"TestCases\SymbolicExecution\EmptyNullableValueAccess.cs",
                 new SymbolicExecutionRunner(new EmptyNullableValueAccess()),
                 ParseOptionsHelper.FromCSharp8,
 #if NETFRAMEWORK
@@ -47,11 +47,11 @@ namespace SonarAnalyzer.UnitTest.Rules.SymbolicExecution
 #if NET
         [TestMethod]
         public void EmptyNullableValueAccess_CSharp9() =>
-            Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\EmptyNullableValueAccess.CSharp9.cs", new SymbolicExecutionRunner(new EmptyNullableValueAccess()));
+            Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\SymbolicExecution\EmptyNullableValueAccess.CSharp9.cs", new SymbolicExecutionRunner(new EmptyNullableValueAccess()));
 
         [TestMethod]
         public void EmptyNullableValueAccess_CSharp10() =>
-            Verifier.VerifyAnalyzerFromCSharp10Library(@"TestCases\EmptyNullableValueAccess.CSharp10.cs", new SymbolicExecutionRunner(new EmptyNullableValueAccess()));
+            Verifier.VerifyAnalyzerFromCSharp10Library(@"TestCases\SymbolicExecution\EmptyNullableValueAccess.CSharp10.cs", new SymbolicExecutionRunner(new EmptyNullableValueAccess()));
 #endif
     }
 }
