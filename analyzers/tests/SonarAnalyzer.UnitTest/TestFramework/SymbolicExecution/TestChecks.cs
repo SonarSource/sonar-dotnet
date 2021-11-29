@@ -30,16 +30,35 @@ namespace SonarAnalyzer.UnitTest.TestFramework.SymbolicExecution
 {
     internal class CollectorTestCheck : SymbolicExecutionCheck
     {
-        // ToDo: Simplified version for now, we'll need ProgramState & Operation. Or even better, the whole exploded Node
-        private readonly List<IOperationWrapperSonar> preProcessedOperations = new();
+        private readonly List<IOperationWrapperSonar> postProcessedOperations = new();
 
-        public override ProgramState PreProcess(ProgramState state, IOperationWrapperSonar operation)
+        public override ProgramState PostProcess(ProgramState state, IOperationWrapperSonar operation)
         {
-            preProcessedOperations.Add(operation);
+            postProcessedOperations.Add(operation);
             return state;
         }
 
         public void ValidateOrder(params string[] expected) =>
-            preProcessedOperations.Where(x => !x.IsImplicit).Select(TestHelper.Serialize).Should().OnlyContainInOrder(expected);
+            postProcessedOperations.Select(TestHelper.Serialize).Should().OnlyContainInOrder(expected);
+    }
+
+    internal class PreProcessTestCheck : SymbolicExecutionCheck
+    {
+        private readonly ProcessFunc preProcess;
+
+        public PreProcessTestCheck(ProcessFunc preProcess) =>
+            this.preProcess = preProcess;
+
+        public override ProgramState PreProcess(ProgramState state, IOperationWrapperSonar operation) => preProcess(state, operation);
+    }
+
+    internal class PostProcessTestCheck : SymbolicExecutionCheck
+    {
+        private readonly ProcessFunc postProcess;
+
+        public PostProcessTestCheck(ProcessFunc postProcess) =>
+            this.postProcess = postProcess;
+
+        public override ProgramState PostProcess(ProgramState state, IOperationWrapperSonar operation) => postProcess(state, operation);
     }
 }

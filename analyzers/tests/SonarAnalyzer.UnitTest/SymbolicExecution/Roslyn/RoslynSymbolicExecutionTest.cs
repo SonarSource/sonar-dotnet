@@ -45,8 +45,12 @@ namespace SonarAnalyzer.UnitTest.SymbolicExecution.Roslyn
         {
             var context = SETestContext.CreateCS("var a = true; var b = false; b = !b; a = (b);");
             context.Collector.ValidateOrder(
+                "LocalReference: a = true (Implicit)",
                 "Literal: true",
+                "SimpleAssignment: a = true (Implicit)",
+                "LocalReference: b = false (Implicit)",
                 "Literal: false",
+                "SimpleAssignment: b = false (Implicit)",
                 "LocalReference: b",
                 "LocalReference: b",
                 "UnaryOperator: !b",
@@ -63,16 +67,55 @@ namespace SonarAnalyzer.UnitTest.SymbolicExecution.Roslyn
         {
             var context = SETestContext.CreateVB("Dim A As Boolean = True, B As Boolean = False : B = Not B : A = (B)");
             context.Collector.ValidateOrder(
+                "LocalReference: A (Implicit)",
                 "Literal: True",
+                "SimpleAssignment: A As Boolean = True (Implicit)",
+                "LocalReference: B (Implicit)",
                 "Literal: False",
+                "SimpleAssignment: B As Boolean = False (Implicit)",
                 "LocalReference: B",
                 "LocalReference: B",
                 "UnaryOperator: Not B",
+                "SimpleAssignment: B = Not B (Implicit)",
                 "ExpressionStatement: B = Not B",
                 "LocalReference: A",
                 "LocalReference: B",
                 "Parenthesized: (B)",
+                "SimpleAssignment: A = (B) (Implicit)",
                 "ExpressionStatement: A = (B)");
         }
+
+        [TestMethod]
+        public void PreProcess_Null_StopsExecution()
+        {
+            var stopper = new PreProcessTestCheck((state, operation) => operation.Instance.Kind == Microsoft.CodeAnalysis.OperationKind.Unary ? null : state);
+            var context = SETestContext.CreateCS("var a = true; var b = false; b = !b; a = (b);", stopper);
+            context.Collector.ValidateOrder(
+                "LocalReference: a = true (Implicit)",
+                "Literal: true",
+                "SimpleAssignment: a = true (Implicit)",
+                "LocalReference: b = false (Implicit)",
+                "Literal: false",
+                "SimpleAssignment: b = false (Implicit)",
+                "LocalReference: b",
+                "LocalReference: b");
+        }
+
+        [TestMethod]
+        public void PostProcess_Null_StopsExecution()
+        {
+            var stopper = new PostProcessTestCheck((state, operation) => operation.Instance.Kind == Microsoft.CodeAnalysis.OperationKind.Unary ? null : state);
+            var context = SETestContext.CreateCS("var a = true; var b = false; b = !b; a = (b);", stopper);
+            context.Collector.ValidateOrder(
+                "LocalReference: a = true (Implicit)",
+                "Literal: true",
+                "SimpleAssignment: a = true (Implicit)",
+                "LocalReference: b = false (Implicit)",
+                "Literal: false",
+                "SimpleAssignment: b = false (Implicit)",
+                "LocalReference: b",
+                "LocalReference: b");
+        }
+
     }
 }
