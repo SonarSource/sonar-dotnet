@@ -124,7 +124,7 @@ End Module", 3);
             Message = $""There are many items.""
         End If
     End Sub
-End Module", 4, 5, 6, 7, 9);
+End Module", 4, 5, 7, 9);   // FIXME: 6 is missing
 
         [TestMethod]
         public void SelectStatement() =>

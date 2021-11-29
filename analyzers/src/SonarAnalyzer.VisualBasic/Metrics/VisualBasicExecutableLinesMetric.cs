@@ -97,7 +97,6 @@ namespace SonarAnalyzer.Metrics.VisualBasic
                     case SyntaxKind.WhileStatement:
 
                     case SyntaxKind.IfStatement:
-                    case SyntaxKind.ElseIfStatement:
                     case SyntaxKind.LabelStatement:
                     case SyntaxKind.SelectStatement:
                     case SyntaxKind.ConditionalAccessExpression:
