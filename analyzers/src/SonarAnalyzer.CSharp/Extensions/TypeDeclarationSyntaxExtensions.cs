@@ -39,9 +39,9 @@ namespace SonarAnalyzer.Extensions
 
         public static IEnumerable<IMethodDeclaration> GetMethodDeclarations(this CompilationUnitSyntax compilationUnitSyntax) =>
             compilationUnitSyntax.Members.OfType<GlobalStatementSyntax>()
-                                         .Select(x => MethodDeclarationFactory.Create(
-                                                                                      x.ChildNodes()
-                                                                                       .FirstOrDefault(y => y.IsKind(SyntaxKindEx.LocalFunctionStatement))));
+                                         .Select(x => x.ChildNodes().FirstOrDefault(y => y.IsKind(SyntaxKindEx.LocalFunctionStatement)))
+                                         .Where(x => x != null)
+                                         .Select(x => MethodDeclarationFactory.Create(x));
 
         private static IEnumerable<IMethodDeclaration> GetLocalFunctions(MethodDeclarationSyntax methodDeclaration) =>
             methodDeclaration.DescendantNodes()

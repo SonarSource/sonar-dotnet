@@ -1,6 +1,7 @@
 ﻿using System;
 
-void Method1()
+void Method1()// Secondary
+              // Secondary@-1
 {
     string s = "test";
     Console.WriteLine("Result: {0}", s);
@@ -21,4 +22,69 @@ void Method3() // Noncompliant {{Update this method so that its implementation i
 void Method4()
 {
     Console.WriteLine("Result: 0");
+}
+
+public record Sample
+{
+    public void Method1() // Secondary
+                          // Secondary@-1
+    {
+        string s = "test";
+        Console.WriteLine("Result: {0}", s);
+    }
+
+    public void Method2() // Noncompliant {{Update this method so that its implementation is not identical to 'Method1'.}}
+    {
+        string s = "test";
+        Console.WriteLine("Result: {0}", s);
+    }
+
+    public void Method3() // Noncompliant {{Update this method so that its implementation is not identical to 'Method1'.}}
+    {
+        string s = "test";
+        Console.WriteLine("Result: {0}", s);
+    }
+
+    public void Method4()
+    {
+        Console.WriteLine("Result: 0");
+    }
+
+    public string Method5()
+    {
+        return "foo";
+    }
+
+    public string Method6() =>
+        "foo";
+}
+
+public record SamplePositional(string Value)
+{
+    public void Method1() // Secondary
+    {
+        string s = "test";
+        Console.WriteLine("Result: {0}", s);
+    }
+
+    public void Method2() // Noncompliant {{Update this method so that its implementation is not identical to 'Method1'.}}
+    {
+        string s = "test";
+        Console.WriteLine("Result: {0}", s);
+    }
+}
+
+interface SomeInterface
+{
+    void Foo1() // FN
+    {
+        string s = "test";
+        Console.WriteLine("Result: {0}", s);
+    }
+
+    void Foo2() // FN
+    {
+        string s = "test";
+        Console.WriteLine("Result: {0}", s);
+    }
 }
