@@ -1,6 +1,6 @@
 ﻿using System;
 
-int MyMethod() { return 42; } // Compliant FN
+int MyMethod() { return 42; } // Noncompliant {{Change return type to 'void'; not a single caller uses the returned value.}}
 int MyMethod2() { return 42; }
 
 MyMethod();
@@ -18,7 +18,7 @@ i = new RecordStruct().MyMethod2();
 new PositionalRecordStruct(42).MyMethod();
 i = new PositionalRecordStruct(42).MyMethod2();
 
-int NeverUsed(int neverUsedVal) // FN - the returned value is not used
+int NeverUsed(int neverUsedVal) // There should be at least an invocation in order to raise the issue.
 {
     return neverUsedVal;
 }
