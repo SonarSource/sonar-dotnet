@@ -20,6 +20,7 @@
 
 using System.Collections.Generic;
 using System.Collections.Immutable;
+using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
@@ -43,9 +44,12 @@ namespace SonarAnalyzer.Metrics.CSharp
             public int Complexity => Locations.Length;
         }
 
-        public static CyclomaticComplexity GetComplexity(SyntaxNode syntaxNode)
+        public static CyclomaticComplexity GetComplexity(SyntaxNode syntaxNode) =>
+            GetComplexity(syntaxNode, false);
+
+        public static CyclomaticComplexity GetComplexity(SyntaxNode syntaxNode, bool onlyGlobalStatements)
         {
-            var walker = new CyclomaticWalker();
+            var walker = new CyclomaticWalker(onlyGlobalStatements);
             walker.SafeVisit(syntaxNode);
 
             return new CyclomaticComplexity(walker.IncrementLocations.ToImmutableArray());
@@ -53,8 +57,26 @@ namespace SonarAnalyzer.Metrics.CSharp
 
         private class CyclomaticWalker : CSharpSyntaxWalker
         {
+            private readonly bool onlyGlobalStatements;
+
             public List<SecondaryLocation> IncrementLocations { get; }
                 = new List<SecondaryLocation>();
+
+            public CyclomaticWalker(bool onlyGlobalStatements) =>
+                this.onlyGlobalStatements = onlyGlobalStatements;
+
+            public override void VisitCompilationUnit(CompilationUnitSyntax node)
+            {
+                foreach (var globalStatement in node.Members.Where(x => x.IsKind(SyntaxKind.GlobalStatement)))
+                {
+                    base.Visit(globalStatement);
+                }
+
+                if (!onlyGlobalStatements)
+                {
+                    base.VisitCompilationUnit(node);
+                }
+            }
 
             public override void VisitMethodDeclaration(MethodDeclarationSyntax node)
             {

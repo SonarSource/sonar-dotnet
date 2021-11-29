@@ -24,7 +24,9 @@ using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
+using Microsoft.CodeAnalysis.Text;
 using SonarAnalyzer.Common;
+using SonarAnalyzer.Extensions;
 using SonarAnalyzer.Helpers;
 using SonarAnalyzer.Metrics.CSharp;
 using StyleCop.Analyzers.Lightup;
@@ -48,6 +50,15 @@ namespace SonarAnalyzer.Rules.CSharp
 
         protected override void Initialize(ParameterLoadingAnalysisContext context)
         {
+            context.RegisterSyntaxNodeActionInNonGenerated(c =>
+                {
+                    if (c.ContainingSymbol.IsTopLevelMain())
+                    {
+                        CheckComplexity<CompilationUnitSyntax>(c, m => Location.Create(c.Node.SyntaxTree, TextSpan.FromBounds(0, 0)), "top-level file", true);
+                    }
+                },
+                SyntaxKind.CompilationUnit);
+
             context.RegisterSyntaxNodeActionInNonGenerated(
                 c => CheckComplexity<MethodDeclarationSyntax>(c, m => m.Identifier.GetLocation(), "method"),
                 SyntaxKind.MethodDeclaration);
@@ -77,11 +88,16 @@ namespace SonarAnalyzer.Rules.CSharp
                 SyntaxKindEx.InitAccessorDeclaration);
         }
 
-        private void CheckComplexity<TSyntax>(SyntaxNodeAnalysisContext context, Func<TSyntax, Location> getLocation, string declarationType)
+        private void CheckComplexity<TSyntax>(SyntaxNodeAnalysisContext context, Func<TSyntax, Location> getLocation, string declarationType, bool onlyGlobalStatements = false)
             where TSyntax : SyntaxNode =>
-            CheckComplexity(context, getLocation, n => n, declarationType);
+            CheckComplexity(context, getLocation, n => n, declarationType, onlyGlobalStatements);
 
-        private void CheckComplexity<TSyntax>(SyntaxNodeAnalysisContext context, Func<TSyntax, Location> getLocation, Func<TSyntax, SyntaxNode> getNodeToCheck, string declarationType)
+        private void CheckComplexity<TSyntax>(
+            SyntaxNodeAnalysisContext context,
+            Func<TSyntax, Location> getLocation,
+            Func<TSyntax, SyntaxNode> getNodeToCheck,
+            string declarationType,
+            bool onlyGlobalStatements = false)
             where TSyntax : SyntaxNode
         {
             var node = (TSyntax)context.Node;
@@ -92,7 +108,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 return;
             }
 
-            var complexityMetric = CSharpCyclomaticComplexityMetric.GetComplexity(nodeToCheck);
+            var complexityMetric = CSharpCyclomaticComplexityMetric.GetComplexity(nodeToCheck, onlyGlobalStatements);
             if (complexityMetric.Complexity > Maximum)
             {
                 context.ReportIssue(
