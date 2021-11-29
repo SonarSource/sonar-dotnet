@@ -18,7 +18,7 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-namespace SonarAnalyzer.SymbolicExecution.Common.Constraints
+namespace SonarAnalyzer.SymbolicExecution.Constraints
 {
     public class SaltSizeSymbolicValueConstraint : SymbolicValueConstraint
     {

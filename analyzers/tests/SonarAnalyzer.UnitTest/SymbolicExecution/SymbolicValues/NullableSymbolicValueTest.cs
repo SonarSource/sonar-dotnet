@@ -20,8 +20,9 @@
 
 using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using SonarAnalyzer.SymbolicExecution.SymbolicValues;
 
-namespace SonarAnalyzer.SymbolicExecution.SymbolicValues
+namespace SonarAnalyzer.UnitTest.SymbolicExecution.SymbolicValues
 {
     [TestClass]
     public class NullableSymbolicValueTest
