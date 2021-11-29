@@ -36,7 +36,7 @@ namespace SonarAnalyzer.UnitTest.Rules.SymbolicExecution
         [DataRow(ProjectType.Product)]
         [DataRow(ProjectType.Test)]
         public void InvalidCastToInterface(ProjectType projectType) =>
-            Verifier.VerifyAnalyzer(@"TestCases\SymbolicExecution\InvalidCastToInterface.cs",
+            Verifier.VerifyAnalyzer(@"TestCases\SymbolicExecution\Sonar\InvalidCastToInterface.cs",
                 GetAnalyzers(),
 #if NETFRAMEWORK
                 additionalReferences: TestHelper.ProjectTypeReference(projectType).Concat(NuGetMetadataReference.NETStandardV2_1_0),
@@ -48,11 +48,11 @@ namespace SonarAnalyzer.UnitTest.Rules.SymbolicExecution
 #if NET
         [TestMethod]
         public void InvalidCastToInterface_CSharp9() =>
-            Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\SymbolicExecution\InvalidCastToInterface.CSharp9.cs", GetAnalyzers());
+            Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\SymbolicExecution\Sonar\InvalidCastToInterface.CSharp9.cs", GetAnalyzers());
 
         [TestMethod]
         public void InvalidCastToInterface_CSharp10() =>
-            Verifier.VerifyAnalyzerFromCSharp10Library(@"TestCases\SymbolicExecution\InvalidCastToInterface.CSharp10.cs", GetAnalyzers());
+            Verifier.VerifyAnalyzerFromCSharp10Library(@"TestCases\SymbolicExecution\Sonar\InvalidCastToInterface.CSharp10.cs", GetAnalyzers());
 #endif
 
         private static DiagnosticAnalyzer[] GetAnalyzers() =>

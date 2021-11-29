@@ -32,7 +32,7 @@ namespace SonarAnalyzer.UnitTest.Rules.SymbolicExecution
         [TestMethod]
         public void InitializationVectorShouldBeRandom() =>
             Verifier.VerifyAnalyzer(
-                @"TestCases\SymbolicExecution\InitializationVectorShouldBeRandom.cs",
+                @"TestCases\SymbolicExecution\Sonar\InitializationVectorShouldBeRandom.cs",
                 GetAnalyzer(),
                 ParseOptionsHelper.FromCSharp8,
                 MetadataReferenceFacade.SystemSecurityCryptography);
@@ -40,7 +40,7 @@ namespace SonarAnalyzer.UnitTest.Rules.SymbolicExecution
         [TestMethod]
         public void InitializationVectorShouldBeRandom_DoesNotRaiseIssuesForTestProject() =>
             Verifier.VerifyNoIssueReportedInTest(
-                @"TestCases\SymbolicExecution\InitializationVectorShouldBeRandom.cs",
+                @"TestCases\SymbolicExecution\Sonar\InitializationVectorShouldBeRandom.cs",
                 GetAnalyzer(),
                 ParseOptionsHelper.FromCSharp8,
                 MetadataReferenceFacade.SystemSecurityCryptography);
@@ -50,14 +50,14 @@ namespace SonarAnalyzer.UnitTest.Rules.SymbolicExecution
         [TestMethod]
         public void InitializationVectorShouldBeRandom_CSharp9() =>
             Verifier.VerifyAnalyzerFromCSharp9Console(
-                @"TestCases\SymbolicExecution\InitializationVectorShouldBeRandom.CSharp9.cs",
+                @"TestCases\SymbolicExecution\Sonar\InitializationVectorShouldBeRandom.CSharp9.cs",
                 GetAnalyzer(),
                 MetadataReferenceFacade.SystemSecurityCryptography);
 
         [TestMethod]
         public void InitializationVectorShouldBeRandom_CSharp10() =>
             Verifier.VerifyAnalyzerFromCSharp10Library(
-                @"TestCases\SymbolicExecution\InitializationVectorShouldBeRandom.CSharp10.cs",
+                @"TestCases\SymbolicExecution\Sonar\InitializationVectorShouldBeRandom.CSharp10.cs",
                 GetAnalyzer(),
                 MetadataReferenceFacade.SystemSecurityCryptography);
 

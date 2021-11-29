@@ -18,26 +18,11 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using SonarAnalyzer.Rules.SymbolicExecution;
-using SonarAnalyzer.UnitTest.MetadataReferences;
-using SonarAnalyzer.UnitTest.TestFramework;
-
-namespace SonarAnalyzer.UnitTest.Rules.SymbolicExecution
+namespace SonarAnalyzer.SymbolicExecution.SymbolicValues
 {
-    [TestClass]
-    public class SymbolicExecutionRulesTest
+    public enum ComparisonKind
     {
-        // This test is meant to run all the symbolic execution rules together and verify different scenarios.
-        [TestMethod]
-        public void VerifySymbolicExecutionRules() =>
-            Verifier.VerifyAnalyzer(@"TestCases\SymbolicExecution\Sonar\SymbolicExecutionRules.cs",
-                new SymbolicExecutionRunner(),
-#if NETFRAMEWORK
-                ParseOptionsHelper.FromCSharp8,
-                NuGetMetadataReference.NETStandardV2_1_0);
-#else
-                ParseOptionsHelper.FromCSharp8);
-#endif
+        Less,
+        LessOrEqual
     }
 }

@@ -36,7 +36,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         public void HashesShouldHaveUnpredictableSalt() =>
             Verifier.VerifyAnalyzer(
-                @"TestCases\SymbolicExecution\HashesShouldHaveUnpredictableSalt.cs",
+                @"TestCases\SymbolicExecution\Sonar\HashesShouldHaveUnpredictableSalt.cs",
                 GetAnalyzer(),
                 ParseOptionsHelper.FromCSharp8,
                 MetadataReferenceFacade.SystemSecurityCryptography);
@@ -44,7 +44,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         public void HashesShouldHaveUnpredictableSalt_DoesNotRaiseIssuesForTestProject() =>
             Verifier.VerifyNoIssueReportedInTest(
-                @"TestCases\SymbolicExecution\HashesShouldHaveUnpredictableSalt.cs",
+                @"TestCases\SymbolicExecution\Sonar\HashesShouldHaveUnpredictableSalt.cs",
                 GetAnalyzer(),
                 ParseOptionsHelper.FromCSharp8,
                 MetadataReferenceFacade.SystemSecurityCryptography);
@@ -54,14 +54,14 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         public void HashesShouldHaveUnpredictableSalt_CSharp9() =>
             Verifier.VerifyAnalyzerFromCSharp9Console(
-                @"TestCases\SymbolicExecution\HashesShouldHaveUnpredictableSalt.CSharp9.cs",
+                @"TestCases\SymbolicExecution\Sonar\HashesShouldHaveUnpredictableSalt.CSharp9.cs",
                 GetAnalyzer(),
                 MetadataReferenceFacade.SystemSecurityCryptography);
 
         [TestMethod]
         public void HashesShouldHaveUnpredictableSalt_CSharp10() =>
             Verifier.VerifyAnalyzerFromCSharp10Library(
-                @"TestCases\SymbolicExecution\HashesShouldHaveUnpredictableSalt.CSharp10.cs",
+                @"TestCases\SymbolicExecution\Sonar\HashesShouldHaveUnpredictableSalt.CSharp10.cs",
                 GetAnalyzer(),
                 MetadataReferenceFacade.SystemSecurityCryptography);
 
