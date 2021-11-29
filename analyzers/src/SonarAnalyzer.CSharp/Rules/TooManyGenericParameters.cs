@@ -26,6 +26,7 @@ using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Extensions;
 using SonarAnalyzer.Helpers;
+using SonarAnalyzer.Wrappers;
 using StyleCop.Analyzers.Lightup;
 
 namespace SonarAnalyzer.Rules.CSharp
@@ -74,24 +75,27 @@ namespace SonarAnalyzer.Rules.CSharp
             context.RegisterSyntaxNodeActionInNonGenerated(
                 c =>
                 {
-                    var methodDeclaration = (MethodDeclarationSyntax)c.Node;
-
+                    var methodDeclaration = MethodDeclarationFactory.Create(c.Node);
                     if (methodDeclaration.TypeParameterList == null
                         || methodDeclaration.TypeParameterList.Parameters.Count <= MaxNumberOfGenericParametersInMethod)
                     {
                         return;
                     }
 
-                    c.ReportIssue(Diagnostic.Create(Rule, methodDeclaration.Identifier.GetLocation(),
-                        $"{GetEnclosingTypeName(methodDeclaration)}.{methodDeclaration.Identifier.ValueText}", "method",
+                    c.ReportIssue(Diagnostic.Create(
+                        Rule,
+                        methodDeclaration.Identifier.GetLocation(),
+                        $"{GetEnclosingTypeName(c.Node)}.{methodDeclaration.Identifier.ValueText}",
+                        "method",
                         MaxNumberOfGenericParametersInMethod));
                 },
-                SyntaxKind.MethodDeclaration);
+                SyntaxKind.MethodDeclaration,
+                SyntaxKindEx.LocalFunctionStatement);
         }
 
-        private static string GetEnclosingTypeName(MethodDeclarationSyntax methodDeclaration)
+        private static string GetEnclosingTypeName(SyntaxNode node)
         {
-            var parent = methodDeclaration.Parent;
+            var parent = node.Parent;
 
             while (parent != null)
             {
