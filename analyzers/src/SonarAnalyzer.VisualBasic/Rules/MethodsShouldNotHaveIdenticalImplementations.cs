@@ -35,7 +35,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
     {
         protected override ILanguageFacade<SyntaxKind> Language => VisualBasicFacade.Instance;
 
-        internal override SyntaxKind[] RegisteredSyntax => new SyntaxKind[] { SyntaxKind.ClassBlock };
+        protected override SyntaxKind[] RegisteredSyntax => new SyntaxKind[] { SyntaxKind.ClassBlock };
 
         protected override IEnumerable<MethodBlockSyntax> GetMethodDeclarations(SyntaxNode node)
         {
@@ -51,5 +51,8 @@ namespace SonarAnalyzer.Rules.VisualBasic
 
         protected override SyntaxToken GetMethodIdentifier(MethodBlockSyntax method) =>
             method.SubOrFunctionStatement.Identifier;
+        protected override bool ExcludeNode(ISymbol symbol) => symbol.Kind != SymbolKind.NamedType;
+
+
     }
 }

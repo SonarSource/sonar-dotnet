@@ -38,7 +38,7 @@ namespace SonarAnalyzer.Rules.CSharp
     {
         protected override ILanguageFacade<SyntaxKind> Language => CSharpFacade.Instance;
 
-        internal override SyntaxKind[] RegisteredSyntax => new SyntaxKind[] {   SyntaxKind.ClassDeclaration,
+        protected override SyntaxKind[] RegisteredSyntax => new SyntaxKind[] {   SyntaxKind.ClassDeclaration,
                                                                                 SyntaxKindEx.RecordClassDeclaration,
                                                                                 SyntaxKind.CompilationUnit
                                                                              };
@@ -63,5 +63,11 @@ namespace SonarAnalyzer.Rules.CSharp
             && firstMethod.Body.IsEquivalentTo(secondMethod.Body, false);
 
         protected override SyntaxToken GetMethodIdentifier(IMethodDeclaration method) => method.Identifier;
+        protected override bool ExcludeNode(ISymbol symbol) =>
+            symbol.Kind != SymbolKind.NamedType && !(symbol is INamespaceSymbol namespaceSymbol
+                                                     && namespaceSymbol.IsGlobalNamespace
+                                                     && namespaceSymbol.GetMembers()
+                                                                       .OfType<INamedTypeSymbol>()
+                                                                       .Any(x => x.IsTopLevelProgram()));
     }
 }

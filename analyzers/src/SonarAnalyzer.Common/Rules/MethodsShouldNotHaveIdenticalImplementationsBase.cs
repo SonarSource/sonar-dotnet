@@ -23,7 +23,6 @@ using System.Collections.Immutable;
 using System.Linq;
 using Microsoft.CodeAnalysis;
 using SonarAnalyzer.Helpers;
-using StyleCop.Analyzers.Lightup;
 
 namespace SonarAnalyzer.Rules
 {
@@ -35,11 +34,11 @@ namespace SonarAnalyzer.Rules
 
         private readonly DiagnosticDescriptor rule;
         protected abstract ILanguageFacade<TLanguageKindEnum> Language { get; }
+        protected abstract TLanguageKindEnum[] RegisteredSyntax { get; }
         protected abstract IEnumerable<TMethodDeclarationSyntax> GetMethodDeclarations(SyntaxNode node);
         protected abstract SyntaxToken GetMethodIdentifier(TMethodDeclarationSyntax method);
         protected abstract bool AreDuplicates(TMethodDeclarationSyntax firstMethod, TMethodDeclarationSyntax secondMethod);
-
-        internal abstract TLanguageKindEnum[] RegisteredSyntax { get; }
+        protected abstract bool ExcludeNode(ISymbol symbol);
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
 
         protected MethodsShouldNotHaveIdenticalImplementationsBase() =>
@@ -49,11 +48,7 @@ namespace SonarAnalyzer.Rules
             context.RegisterSyntaxNodeActionInNonGenerated(Language.GeneratedCodeRecognizer,
                 c =>
                 {
-                    if (c.ContainingSymbol.Kind != SymbolKind.NamedType && !(c.ContainingSymbol is INamespaceSymbol namespaceSymbol
-                                                                             && namespaceSymbol.IsGlobalNamespace
-                                                                             && namespaceSymbol.GetMembers()
-                                                                                               .OfType<INamedTypeSymbol>()
-                                                                                               .Any(x => x.IsTopLevelProgram())))
+                    if (ExcludeNode(c.ContainingSymbol))
                     {
                         return;
                     }
