@@ -369,7 +369,7 @@ public class ComplicatedCode
     }}
 }}");
 
-         [TestMethod]
+        [TestMethod]
         public void ExcludeClassFromTestCoverage() =>
             AssertLinesOfCode(
 @"using System;

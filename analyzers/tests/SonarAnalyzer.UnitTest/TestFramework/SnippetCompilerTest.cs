@@ -121,8 +121,8 @@ public class Sample
 // Error CS1513 } expected
 {";
             using var log = new LogTester();
-            Action a = () => new SnippetCompiler(code);
-            a.Should().Throw<InvalidOperationException>();
+            Func<SnippetCompiler> f = () => new SnippetCompiler(code);
+            f.Should().Throw<InvalidOperationException>();
             log.AssertContain("CS1519 Line: 5: Invalid token '{' in class, record, struct, or interface member declaration");
             log.AssertContain("CS1513 Line: 5: } expected");
         }
