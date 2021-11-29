@@ -38,10 +38,10 @@ namespace SonarAnalyzer.Extensions
                            .SelectMany(method => GetLocalFunctions(method).Union(new List<IMethodDeclaration> { MethodDeclarationFactory.Create(method) }));
 
         public static IEnumerable<IMethodDeclaration> GetMethodDeclarations(this CompilationUnitSyntax compilationUnitSyntax) =>
-            compilationUnitSyntax.ChildNodes().OfType<GlobalStatementSyntax>()
-                                              .Select(x => MethodDeclarationFactory.Create(
-                                                                                        x.ChildNodes()
-                                                                                         .FirstOrDefault(y => y.IsKind(SyntaxKindEx.LocalFunctionStatement))));
+            compilationUnitSyntax.Members.OfType<GlobalStatementSyntax>()
+                                         .Select(x => MethodDeclarationFactory.Create(
+                                                                                      x.ChildNodes()
+                                                                                       .FirstOrDefault(y => y.IsKind(SyntaxKindEx.LocalFunctionStatement))));
 
         private static IEnumerable<IMethodDeclaration> GetLocalFunctions(MethodDeclarationSyntax methodDeclaration) =>
             methodDeclaration.DescendantNodes()
