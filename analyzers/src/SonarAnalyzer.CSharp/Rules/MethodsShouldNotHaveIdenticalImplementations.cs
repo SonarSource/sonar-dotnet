@@ -38,10 +38,12 @@ namespace SonarAnalyzer.Rules.CSharp
     {
         protected override ILanguageFacade<SyntaxKind> Language => CSharpFacade.Instance;
 
-        protected override SyntaxKind[] RegisteredSyntax => new SyntaxKind[] {   SyntaxKind.ClassDeclaration,
-                                                                                SyntaxKindEx.RecordClassDeclaration,
-                                                                                SyntaxKind.CompilationUnit
-                                                                             };
+        protected override SyntaxKind[] RegisteredSyntax => new SyntaxKind[]
+        {
+            SyntaxKind.ClassDeclaration,
+            SyntaxKindEx.RecordClassDeclaration,
+            SyntaxKind.CompilationUnit
+        };
 
         protected override IEnumerable<IMethodDeclaration> GetMethodDeclarations(SyntaxNode node)
         {
@@ -63,11 +65,11 @@ namespace SonarAnalyzer.Rules.CSharp
             && firstMethod.Body.IsEquivalentTo(secondMethod.Body, false);
 
         protected override SyntaxToken GetMethodIdentifier(IMethodDeclaration method) => method.Identifier;
-        protected override bool ExcludeNode(ISymbol symbol) =>
-            symbol.Kind != SymbolKind.NamedType && !(symbol is INamespaceSymbol namespaceSymbol
-                                                     && namespaceSymbol.IsGlobalNamespace
-                                                     && namespaceSymbol.GetMembers()
-                                                                       .OfType<INamedTypeSymbol>()
-                                                                       .Any(x => x.IsTopLevelProgram()));
+        protected override bool IsExcludedFromBeingExamined(ISymbol nodeContainingSymbol) =>
+            nodeContainingSymbol.Kind != SymbolKind.NamedType && !(nodeContainingSymbol is INamespaceSymbol namespaceSymbol
+                                                                   && namespaceSymbol.IsGlobalNamespace
+                                                                   && namespaceSymbol.GetMembers()
+                                                                                     .OfType<INamedTypeSymbol>()
+                                                                                     .Any(x => x.IsTopLevelProgram()));
     }
 }

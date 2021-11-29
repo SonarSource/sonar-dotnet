@@ -51,8 +51,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
 
         protected override SyntaxToken GetMethodIdentifier(MethodBlockSyntax method) =>
             method.SubOrFunctionStatement.Identifier;
-        protected override bool ExcludeNode(ISymbol symbol) => symbol.Kind != SymbolKind.NamedType;
 
-
+        protected override bool IsExcludedFromBeingExamined(ISymbol nodeContainingSymbol) => nodeContainingSymbol.Kind != SymbolKind.NamedType;
     }
 }
