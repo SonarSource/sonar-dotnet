@@ -38,24 +38,17 @@ namespace SonarAnalyzer.Rules.CSharp
     {
         protected override ILanguageFacade<SyntaxKind> Language => CSharpFacade.Instance;
 
-        protected override SyntaxKind[] RegisteredSyntax => new SyntaxKind[]
+        protected override SyntaxKind[] RegisteredSyntax => new[]
         {
             SyntaxKind.ClassDeclaration,
             SyntaxKindEx.RecordClassDeclaration,
             SyntaxKind.CompilationUnit
         };
 
-        protected override IEnumerable<IMethodDeclaration> GetMethodDeclarations(SyntaxNode node)
-        {
-            if (node.IsKind(SyntaxKind.CompilationUnit))
-            {
-                return ((CompilationUnitSyntax)node).GetMethodDeclarations();
-            }
-            else
-            {
-                return ((TypeDeclarationSyntax)node).GetMethodDeclarations();
-            }
-        }
+        protected override IEnumerable<IMethodDeclaration> GetMethodDeclarations(SyntaxNode node) =>
+            node.IsKind(SyntaxKind.CompilationUnit)
+            ? ((CompilationUnitSyntax)node).GetMethodDeclarations()
+            : ((TypeDeclarationSyntax)node).GetMethodDeclarations();
 
         protected override bool AreDuplicates(IMethodDeclaration firstMethod, IMethodDeclaration secondMethod) =>
             firstMethod.Body != null
