@@ -20,10 +20,12 @@
 
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using FluentAssertions;
 using Microsoft.CodeAnalysis.VisualBasic;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.Common;
+using SonarAnalyzer.UnitTest.TestFramework;
 
 namespace SonarAnalyzer.UnitTest.Common
 {
@@ -517,20 +519,15 @@ End Class")
                 .Should().Be(2);
         }
 
-#if NET
         [TestMethod]
         public void CognitiveComplexity()
         {
             var csharpText = System.IO.File.ReadAllText(@"TestCases\CognitiveComplexity.cs");
             CognitiveComplexity(AnalyzerLanguage.CSharp, csharpText).Should().Be(109);
 
-            var csharp9Text = System.IO.File.ReadAllText(@"TestCases\CognitiveComplexity.CSharp9.cs");
-            CognitiveComplexity(AnalyzerLanguage.CSharp, csharp9Text).Should().Be(38);
-
             var visualBasicCode = System.IO.File.ReadAllText(@"TestCases\CognitiveComplexity.vb");
             CognitiveComplexity(AnalyzerLanguage.VisualBasic, visualBasicCode).Should().Be(122);
         }
-#endif
 
         [TestMethod]
         public void WrongMetrics_CSharp()
