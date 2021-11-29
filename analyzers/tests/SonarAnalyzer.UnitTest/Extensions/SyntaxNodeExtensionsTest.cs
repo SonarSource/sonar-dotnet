@@ -169,7 +169,7 @@ public class Sample
         {
             Action<int, int> outerParenthesizedLambda = (a, b) =>
             {
-                MiddleLocalFunction();
+                MiddleLocalFunction(42);
 
                 void MiddleLocalFunction(int c)
                 {
@@ -217,7 +217,7 @@ public class Sample
         Undefined(() => 45);
     }
 }";
-            var (tree, semanticModel) = TestHelper.Compile(code);
+            var (tree, semanticModel) = TestHelper.CompileIgnoreErrors(code);
             var lambda = tree.GetRoot().DescendantNodes().OfType<ParenthesizedLambdaExpressionSyntax>().Single();
 
             SyntaxNodeExtensions.CreateCfg(lambda.Body, semanticModel).Should().NotBeNull();
@@ -230,7 +230,7 @@ public class Sample
         [DataRow(@"{ () => => =>")]
         public void CreateCfg_InvalidSyntax_ReturnsCfg(string code)
         {
-            var (tree, semanticModel) = TestHelper.Compile(code);
+            var (tree, semanticModel) = TestHelper.CompileIgnoreErrors(code);
             var lambda = tree.GetRoot().DescendantNodes().OfType<ParenthesizedLambdaExpressionSyntax>().Single();
 
             SyntaxNodeExtensions.CreateCfg(lambda.Body, semanticModel).Should().NotBeNull();

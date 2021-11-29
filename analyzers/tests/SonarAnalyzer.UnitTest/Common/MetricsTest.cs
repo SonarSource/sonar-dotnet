@@ -33,7 +33,7 @@ namespace SonarAnalyzer.UnitTest.Common
         [TestMethod]
         public void Lines()
         {
-            Lines(AnalyzerLanguage.CSharp, "").Should().Be(1);
+            Lines(AnalyzerLanguage.CSharp, string.Empty).Should().Be(1);
             Lines(AnalyzerLanguage.CSharp, "\n").Should().Be(2);
             Lines(AnalyzerLanguage.CSharp, "\r").Should().Be(2);
             Lines(AnalyzerLanguage.CSharp, "\r\n").Should().Be(2);
@@ -41,27 +41,27 @@ namespace SonarAnalyzer.UnitTest.Common
             Lines(AnalyzerLanguage.CSharp, "\n\r").Should().Be(3);
             Lines(AnalyzerLanguage.CSharp, "using System;\r\n/*hello\r\nworld*/").Should().Be(3);
 
-            Lines(AnalyzerLanguage.VisualBasic, "").Should().Be(1);
+            Lines(AnalyzerLanguage.VisualBasic, string.Empty).Should().Be(1);
             Lines(AnalyzerLanguage.VisualBasic, "\n").Should().Be(2);
             Lines(AnalyzerLanguage.VisualBasic, "\r").Should().Be(2);
             Lines(AnalyzerLanguage.VisualBasic, "\r\n").Should().Be(2);
             Lines(AnalyzerLanguage.VisualBasic, "\n").Should().Be(2);
             Lines(AnalyzerLanguage.VisualBasic, "\n\r").Should().Be(3);
-            Lines(AnalyzerLanguage.VisualBasic, "Imports System;\r\n/*hello\r\nworld*/").Should().Be(3);
+            Lines(AnalyzerLanguage.VisualBasic, "Imports System\r\n'hello\r\n'world").Should().Be(3);
         }
 
         [TestMethod]
         public void LinesOfCode()
         {
-            LinesOfCode(AnalyzerLanguage.CSharp, "").Should().BeEquivalentTo();
+            LinesOfCode(AnalyzerLanguage.CSharp, string.Empty).Should().BeEquivalentTo();
             LinesOfCode(AnalyzerLanguage.CSharp, "/* ... */\n").Should().BeEquivalentTo();
             LinesOfCode(AnalyzerLanguage.CSharp, "namespace X { }").Should().BeEquivalentTo(1);
             LinesOfCode(AnalyzerLanguage.CSharp, "namespace X \n { \n }").Should().BeEquivalentTo(1, 2, 3);
-            LinesOfCode(AnalyzerLanguage.CSharp, "public class MyClass { public MyClass() { Console.WriteLine(@\"line1 \n line2 \n line3 \n line 4\"); } }").Should().BeEquivalentTo(1, 2, 3, 4);
+            LinesOfCode(AnalyzerLanguage.CSharp, "public class Sample { public Sample() { System.Console.WriteLine(@\"line1 \n line2 \n line3 \n line 4\"); } }").Should().BeEquivalentTo(1, 2, 3, 4);
 
-            LinesOfCode(AnalyzerLanguage.VisualBasic, "").Should().BeEquivalentTo();
+            LinesOfCode(AnalyzerLanguage.VisualBasic, string.Empty).Should().BeEquivalentTo();
             LinesOfCode(AnalyzerLanguage.VisualBasic, "'\n").Should().BeEquivalentTo();
-            LinesOfCode(AnalyzerLanguage.VisualBasic, "Module Module1 End Module").Should().BeEquivalentTo(1);
+            LinesOfCode(AnalyzerLanguage.VisualBasic, "Module Module1 : End Module").Should().BeEquivalentTo(1);
             LinesOfCode(AnalyzerLanguage.VisualBasic, "Module Module1 \n  \n End Module").Should().BeEquivalentTo(1, 3);
             LinesOfCode(AnalyzerLanguage.VisualBasic,
 @"Public Class SomeClass
@@ -77,11 +77,11 @@ End Class").Should().BeEquivalentTo(1, 2, 3, 4, 5, 6, 7, 8);
         [TestMethod]
         public void CommentsWithoutHeaders()
         {
-            CommentsWithoutHeaders(AnalyzerLanguage.CSharp, "").NonBlank.Should().BeEquivalentTo();
-            CommentsWithoutHeaders(AnalyzerLanguage.CSharp, "").NoSonar.Should().BeEquivalentTo();
+            CommentsWithoutHeaders(AnalyzerLanguage.CSharp, string.Empty).NonBlank.Should().BeEquivalentTo();
+            CommentsWithoutHeaders(AnalyzerLanguage.CSharp, string.Empty).NoSonar.Should().BeEquivalentTo();
 
-            CommentsWithoutHeaders(AnalyzerLanguage.CSharp, "#ifdef DEBUG\nfoo\n#endif").NonBlank.Should().BeEquivalentTo();
-            CommentsWithoutHeaders(AnalyzerLanguage.CSharp, "using System; #ifdef DEBUG\nfoo\n#endif").NonBlank.Should().BeEquivalentTo();
+            CommentsWithoutHeaders(AnalyzerLanguage.CSharp, "#if DEBUG\nfoo\n#endif").NonBlank.Should().BeEquivalentTo();
+            CommentsWithoutHeaders(AnalyzerLanguage.CSharp, "using System; \n#if DEBUG\nfoo\n#endif").NonBlank.Should().BeEquivalentTo();
 
             CommentsWithoutHeaders(AnalyzerLanguage.CSharp, "// foo").NonBlank.Should().BeEquivalentTo();
             CommentsWithoutHeaders(AnalyzerLanguage.CSharp, "#if DEBUG\nfoo\n#endif\n// foo").NonBlank.Should().BeEquivalentTo();
@@ -109,11 +109,11 @@ End Class").Should().BeEquivalentTo(1, 2, 3, 4, 5, 6, 7, 8);
             CommentsWithoutHeaders(AnalyzerLanguage.CSharp, "using System; /* foo*/ /* NOSONAR */").NoSonar.Should().BeEquivalentTo(1);
             CommentsWithoutHeaders(AnalyzerLanguage.CSharp, "using System; /* foo*/ /* NOSONAR */").NonBlank.Should().BeEquivalentTo();
 
-            CommentsWithoutHeaders(AnalyzerLanguage.VisualBasic, "").NonBlank.Should().BeEquivalentTo();
-            CommentsWithoutHeaders(AnalyzerLanguage.VisualBasic, "").NoSonar.Should().BeEquivalentTo();
+            CommentsWithoutHeaders(AnalyzerLanguage.VisualBasic, string.Empty).NonBlank.Should().BeEquivalentTo();
+            CommentsWithoutHeaders(AnalyzerLanguage.VisualBasic, string.Empty).NoSonar.Should().BeEquivalentTo();
 
             CommentsWithoutHeaders(AnalyzerLanguage.VisualBasic, "#If DEBUG Then\nfoo\n#End If").NonBlank.Should().BeEquivalentTo();
-            CommentsWithoutHeaders(AnalyzerLanguage.VisualBasic, "Imports System #If DEBUG Then\nfoo\n#End If").NonBlank.Should().BeEquivalentTo();
+            CommentsWithoutHeaders(AnalyzerLanguage.VisualBasic, "Imports System \n#If DEBUG Then\nfoo\n#End If").NonBlank.Should().BeEquivalentTo();
 
             CommentsWithoutHeaders(AnalyzerLanguage.VisualBasic, "' foo").NonBlank.Should().BeEquivalentTo();
             CommentsWithoutHeaders(AnalyzerLanguage.VisualBasic, "#If DEBUG Then\nfoo\n#End If\n' foo").NonBlank.Should().BeEquivalentTo();
@@ -133,11 +133,11 @@ End Class").Should().BeEquivalentTo(1, 2, 3, 4, 5, 6, 7, 8);
         [TestMethod]
         public void CommentsWithHeaders()
         {
-            CommentsWithHeaders(AnalyzerLanguage.CSharp, "").NonBlank.Should().BeEquivalentTo();
-            CommentsWithHeaders(AnalyzerLanguage.CSharp, "").NoSonar.Should().BeEquivalentTo();
+            CommentsWithHeaders(AnalyzerLanguage.CSharp, string.Empty).NonBlank.Should().BeEquivalentTo();
+            CommentsWithHeaders(AnalyzerLanguage.CSharp, string.Empty).NoSonar.Should().BeEquivalentTo();
 
-            CommentsWithHeaders(AnalyzerLanguage.CSharp, "#ifdef DEBUG\nfoo\n#endif").NonBlank.Should().BeEquivalentTo();
-            CommentsWithHeaders(AnalyzerLanguage.CSharp, "using System; #ifdef DEBUG\nfoo\n#endif").NonBlank.Should().BeEquivalentTo();
+            CommentsWithHeaders(AnalyzerLanguage.CSharp, "#if DEBUG\nfoo\n#endif").NonBlank.Should().BeEquivalentTo();
+            CommentsWithHeaders(AnalyzerLanguage.CSharp, "using System; \n#if DEBUG\nfoo\n#endif").NonBlank.Should().BeEquivalentTo();
 
             CommentsWithHeaders(AnalyzerLanguage.CSharp, "// foo").NonBlank.Should().BeEquivalentTo(1);
             CommentsWithHeaders(AnalyzerLanguage.CSharp, "#if DEBUG\nfoo\n#endif\n// foo").NonBlank.Should().BeEquivalentTo(4);
@@ -165,11 +165,11 @@ End Class").Should().BeEquivalentTo(1, 2, 3, 4, 5, 6, 7, 8);
             CommentsWithHeaders(AnalyzerLanguage.CSharp, "using System; /* foo*/ /* NOSONAR */").NoSonar.Should().BeEquivalentTo(1);
             CommentsWithHeaders(AnalyzerLanguage.CSharp, "using System; /* foo*/ /* NOSONAR */").NonBlank.Should().BeEquivalentTo();
 
-            CommentsWithHeaders(AnalyzerLanguage.VisualBasic, "").NonBlank.Should().BeEquivalentTo();
-            CommentsWithHeaders(AnalyzerLanguage.VisualBasic, "").NoSonar.Should().BeEquivalentTo();
+            CommentsWithHeaders(AnalyzerLanguage.VisualBasic, string.Empty).NonBlank.Should().BeEquivalentTo();
+            CommentsWithHeaders(AnalyzerLanguage.VisualBasic, string.Empty).NoSonar.Should().BeEquivalentTo();
 
             CommentsWithHeaders(AnalyzerLanguage.VisualBasic, "#If DEBUG Then\nfoo\n#End If").NonBlank.Should().BeEquivalentTo();
-            CommentsWithHeaders(AnalyzerLanguage.VisualBasic, "Imports System #If DEBUG Then\nfoo\n#End If").NonBlank.Should().BeEquivalentTo();
+            CommentsWithHeaders(AnalyzerLanguage.VisualBasic, "Imports System \n#If DEBUG Then\nfoo\n#End If").NonBlank.Should().BeEquivalentTo();
 
             CommentsWithHeaders(AnalyzerLanguage.VisualBasic, "' foo").NonBlank.Should().BeEquivalentTo(1);
             CommentsWithHeaders(AnalyzerLanguage.VisualBasic, "#If DEBUG Then\nfoo\n#End If\n' foo").NonBlank.Should().BeEquivalentTo(4);
@@ -189,306 +189,331 @@ End Class").Should().BeEquivalentTo(1, 2, 3, 4, 5, 6, 7, 8);
         [TestMethod]
         public void Classes()
         {
-            Classes(AnalyzerLanguage.CSharp, "").Should().Be(0);
-            Classes(AnalyzerLanguage.CSharp, "class MyClass {}").Should().Be(1);
+            Classes(AnalyzerLanguage.CSharp, string.Empty).Should().Be(0);
+            Classes(AnalyzerLanguage.CSharp, "class Sample {}").Should().Be(1);
             Classes(AnalyzerLanguage.CSharp, "interface IMyInterface {}").Should().Be(1);
+#if NET
             Classes(AnalyzerLanguage.CSharp, "record MyRecord {}").Should().Be(1);
             Classes(AnalyzerLanguage.CSharp, "record MyPositionalRecord(int Prop) {}").Should().Be(1);
             Classes(AnalyzerLanguage.CSharp, "record struct MyRecordStruct {}").Should().Be(1);
             Classes(AnalyzerLanguage.CSharp, "record struct MyPositionalRecordStruct(int Prop) {}").Should().Be(1);
-            Classes(AnalyzerLanguage.CSharp, "struct MyClass {}").Should().Be(1);
+#endif
+            Classes(AnalyzerLanguage.CSharp, "struct Sample {}").Should().Be(1);
             Classes(AnalyzerLanguage.CSharp, "enum MyEnum {}").Should().Be(0);
-            Classes(AnalyzerLanguage.CSharp, "class MyClass1 {} namespace MyNamespace { class MyClass2 {} }").Should().Be(2);
+            Classes(AnalyzerLanguage.CSharp, "class Sample1 {} namespace MyNamespace { class Sample2 {} }").Should().Be(2);
 
-            Classes(AnalyzerLanguage.VisualBasic, "").Should().Be(0);
+            Classes(AnalyzerLanguage.VisualBasic, string.Empty).Should().Be(0);
             Classes(AnalyzerLanguage.VisualBasic, "Class M \n End Class").Should().Be(1);
             Classes(AnalyzerLanguage.VisualBasic, "Structure M \n End Structure").Should().Be(1);
-            Classes(AnalyzerLanguage.VisualBasic, "Enum M \n End Enum").Should().Be(0);
+            Classes(AnalyzerLanguage.VisualBasic, "Enum M \n None \n End Enum").Should().Be(0);
             Classes(AnalyzerLanguage.VisualBasic, "Interface M \n End Interface").Should().Be(1);
             Classes(AnalyzerLanguage.VisualBasic, "Module M \n End Module").Should().Be(1);
-            Classes(AnalyzerLanguage.VisualBasic, "Class M \n End Class \n Namespace MyNamespace \n Class MyClass2 \n End Class \n End Namespace").Should().Be(2);
+            Classes(AnalyzerLanguage.VisualBasic, "Class M \n End Class \n Namespace MyNamespace \n Class Sample2 \n End Class \n End Namespace").Should().Be(2);
         }
 
         [TestMethod]
         public void Accessors()
         {
-            Functions(AnalyzerLanguage.CSharp, "").Should().Be(0);
-            Functions(AnalyzerLanguage.CSharp, "class MyClass { public int MyProperty { get; } }").Should().Be(1);
-            Functions(AnalyzerLanguage.CSharp, "interface MyClass { int MyProperty { get; } }").Should().Be(0);
-            Functions(AnalyzerLanguage.CSharp, "abstract class MyClass { abstract int MyProperty { get; } }").Should().Be(0);
-            Functions(AnalyzerLanguage.CSharp, "class MyClass { public int MyProperty => 42; }").Should().Be(1);
-            Functions(AnalyzerLanguage.CSharp, "class MyClass { public int MyProperty { get; set; } }").Should().Be(2);
-            Functions(AnalyzerLanguage.CSharp, "class MyClass { public int MyProperty { get { return 0; } set { } } }").Should().Be(2);
-            Functions(AnalyzerLanguage.CSharp, "class MyClass { public event EventHandler OnSomething { add { } remove {} }").Should().Be(2);
-            Functions(AnalyzerLanguage.CSharp, "class MyClass { public int MyMethod() { return 1; } }").Should().Be(1);
-            Functions(AnalyzerLanguage.CSharp, "class MyClass { public int MyMethod() => 1; }").Should().Be(1);
-            Functions(AnalyzerLanguage.CSharp, "class MyClass { public int MyMethod() }").Should().Be(0);
+            Functions(AnalyzerLanguage.CSharp, string.Empty).Should().Be(0);
+            Functions(AnalyzerLanguage.CSharp, "class Sample { public int MyProperty { get; } }").Should().Be(1);
+            Functions(AnalyzerLanguage.CSharp, "interface Sample { int MyProperty { get; } }").Should().Be(0);
+            Functions(AnalyzerLanguage.CSharp, "abstract class Sample { public abstract int MyProperty { get; } }").Should().Be(0);
+            Functions(AnalyzerLanguage.CSharp, "class Sample { public int MyProperty => 42; }").Should().Be(1);
+            Functions(AnalyzerLanguage.CSharp, "class Sample { public int MyProperty { get; set; } }").Should().Be(2);
+            Functions(AnalyzerLanguage.CSharp, "class Sample { public int MyProperty { get { return 0; } set { } } }").Should().Be(2);
+            Functions(AnalyzerLanguage.CSharp, "class Sample { public event System.EventHandler OnSomething { add { } remove {} } }").Should().Be(2);
+            Functions(AnalyzerLanguage.CSharp, "class Sample { public int MyMethod() { return 1; } }").Should().Be(1);
+            Functions(AnalyzerLanguage.CSharp, "class Sample { public int MyMethod() => 1; }").Should().Be(1);
+            Functions(AnalyzerLanguage.CSharp, "abstract class Sample { public abstract int MyMethod(); }").Should().Be(0);
 
-            Functions(AnalyzerLanguage.VisualBasic, "").Should().Be(0);
+            Functions(AnalyzerLanguage.VisualBasic, string.Empty).Should().Be(0);
             Functions(AnalyzerLanguage.VisualBasic,
-                "Class MyClass \n Public ReadOnly Property MyProperty As Integer \n End Class").Should().Be(0); // Is this the expected?
+                "Class Sample \n Public ReadOnly Property MyProperty As Integer \n End Class").Should().Be(0); // Is this the expected?
             Functions(AnalyzerLanguage.VisualBasic,
-                "Class MyClass \n Public Property MyProperty As Integer \n End Class")
+                "Class Sample \n Public Property MyProperty As Integer \n End Class")
                 .Should().Be(0); // Is this the expected?
             Functions(AnalyzerLanguage.VisualBasic,
-                "Class MyClass \n Public Property MyProperty As Integer \n Get \n Return 0 \n End Get \n" +
-                "Set(value As Integer) \n End Set \n End Property \n End Class")
+@"Class Sample
+    Public Property MyProperty As Integer
+        Get
+            Return 0
+        End Get
+        Set(value As Integer)
+        End Set
+    End Property
+End Class")
                 .Should().Be(2);
             Functions(AnalyzerLanguage.VisualBasic,
-                "Class MyClass \n Public Custom Event Click As EventHandler \n " +
-                "AddHandler(ByVal value As EventHandler) \n EventHandlerList.Add(value) \n End AddHandler \n " +
-                "RemoveHandler(ByVal value As EventHandler) \n EventHandlerList.Remove(value) \n End RemoveHandler \n " +
-                "RaiseEvent(ByVal sender As Object, ByVal e As EventArgs) \n End RaiseEvent \n End Event \n End Class")
+@"Class Sample
+    Public Custom Event Click As EventHandler
+        AddHandler(ByVal value As EventHandler)
+        End AddHandler
+        RemoveHandler(ByVal value As EventHandler)
+        End RemoveHandler
+        RaiseEvent(ByVal sender As Object, ByVal e As EventArgs)
+        End RaiseEvent
+    End Event
+End Class")
                 .Should().Be(3);
         }
 
         [TestMethod]
         public void Statements()
         {
-            Statements(AnalyzerLanguage.CSharp, "").Should().Be(0);
-            Statements(AnalyzerLanguage.CSharp, "class MyClass {}").Should().Be(0);
-            Statements(AnalyzerLanguage.CSharp, "class MyClass { void MyMethod() {} }").Should().Be(0);
-            Statements(AnalyzerLanguage.CSharp, "class MyClass { void MyMethod() { {} } }").Should().Be(0);
-            Statements(AnalyzerLanguage.CSharp, "class MyClass { int MyMethod() { return 0; } }").Should().Be(1);
-            Statements(AnalyzerLanguage.CSharp, "class MyClass { void MyMethod() { int l = 42; } }").Should().Be(1);
-            Statements(AnalyzerLanguage.CSharp, "class MyClass { void MyMethod() { Console.WriteLine(); } }").Should().Be(1);
-            Statements(AnalyzerLanguage.CSharp, "class MyClass { void MyMethod() { ; } }").Should().Be(1);
-            Statements(AnalyzerLanguage.CSharp, "class MyClass { void MyMethod() { foo: ; } }").Should().Be(2);
-            Statements(AnalyzerLanguage.CSharp, "class MyClass { void MyMethod() { goto foo; } }").Should().Be(1);
-            Statements(AnalyzerLanguage.CSharp, "class MyClass { void MyMethod() { break; } }").Should().Be(1);
-            Statements(AnalyzerLanguage.CSharp, "class MyClass { void MyMethod() { continue; } }").Should().Be(1);
-            Statements(AnalyzerLanguage.CSharp, "class MyClass { void MyMethod() { throw; } }").Should().Be(1);
-            Statements(AnalyzerLanguage.CSharp, "class MyClass { void MyMethod() { yield return 42; } }").Should().Be(1);
-            Statements(AnalyzerLanguage.CSharp, "class MyClass { void MyMethod() { yield break; } }").Should().Be(1);
-            Statements(AnalyzerLanguage.CSharp, "class MyClass { void MyMethod() { while (false) {} } }").Should().Be(1);
-            Statements(AnalyzerLanguage.CSharp, "class MyClass { void MyMethod() { do {} while (false); } }").Should().Be(1);
-            Statements(AnalyzerLanguage.CSharp, "class MyClass { void MyMethod() { for (;;) {} } }").Should().Be(1);
-            Statements(AnalyzerLanguage.CSharp, "class MyClass { void MyMethod() { foreach (var e in c) {} } }").Should().Be(1);
-            Statements(AnalyzerLanguage.CSharp, "class MyClass { void MyMethod() { using (var e = new MyClass()) {} } }").Should().Be(1);
-            Statements(AnalyzerLanguage.CSharp, "class MyClass { void MyMethod() { fixed (int* p = &pt.x) {} } }").Should().Be(1);
-            Statements(AnalyzerLanguage.CSharp, "class MyClass { void MyMethod() { checked {} } }").Should().Be(1);
-            Statements(AnalyzerLanguage.CSharp, "class MyClass { void MyMethod() { unchecked {} } }").Should().Be(1);
-            Statements(AnalyzerLanguage.CSharp, "class MyClass { void MyMethod() { unsafe {} } }").Should().Be(1);
-            Statements(AnalyzerLanguage.CSharp, "class MyClass { void MyMethod() { if (false) {} } }").Should().Be(1);
-            Statements(AnalyzerLanguage.CSharp, "class MyClass { void MyMethod() { switch (v) { case 0: ; } } }").Should().Be(2);
-            Statements(AnalyzerLanguage.CSharp, "class MyClass { void MyMethod() { try {} catch {} } }").Should().Be(1);
-            Statements(AnalyzerLanguage.CSharp, "class MyClass { void MyMethod() { try {} finally {} } }").Should().Be(1);
-            Statements(AnalyzerLanguage.CSharp, "class MyClass { void MyMethod() { try {} catch {} finally {} } }").Should().Be(1);
-            Statements(AnalyzerLanguage.CSharp, "class MyClass { int MyMethod() { int a = 42; Console.WriteLine(a); return a; } }").Should().Be(3);
-            Statements(AnalyzerLanguage.CSharp, "class Foo { void Bar() { void LocalFunction() { } } }").Should().Be(1);
-            Statements(AnalyzerLanguage.CSharp, "class Foo { void Bar(List<(int, int)> names) { foreach ((int x, int y) in names){} } }").Should().Be(1); // ForEachVariableStatement
+            Statements(AnalyzerLanguage.CSharp, string.Empty).Should().Be(0);
+            Statements(AnalyzerLanguage.CSharp, "class Sample {}").Should().Be(0);
+            Statements(AnalyzerLanguage.CSharp, "class Sample { void MyMethod() {} }").Should().Be(0);
+            Statements(AnalyzerLanguage.CSharp, "class Sample { void MyMethod() { {} } }").Should().Be(0);
+            Statements(AnalyzerLanguage.CSharp, "class Sample { int MyMethod() { return 0; } }").Should().Be(1);
+            Statements(AnalyzerLanguage.CSharp, "class Sample { void MyMethod() { int l = 42; } }").Should().Be(1);
+            Statements(AnalyzerLanguage.CSharp, "class Sample { void MyMethod() { System.Console.WriteLine(); } }").Should().Be(1);
+            Statements(AnalyzerLanguage.CSharp, "class Sample { void MyMethod() { ; } }").Should().Be(1);
+            Statements(AnalyzerLanguage.CSharp, "class Sample { void MyMethod() { foo: ; } }").Should().Be(2);
+            Statements(AnalyzerLanguage.CSharp, "class Sample { void MyMethod() { goto foo; foo: ;} }").Should().Be(3);
+            Statements(AnalyzerLanguage.CSharp, "class Sample { void MyMethod() { while(true) break; } }").Should().Be(2);
+            Statements(AnalyzerLanguage.CSharp, "class Sample { void MyMethod() { while(false) continue; } }").Should().Be(2);
+            Statements(AnalyzerLanguage.CSharp, "class Sample { void MyMethod() { throw new System.Exception(); } }").Should().Be(1);
+            Statements(AnalyzerLanguage.CSharp, "class Sample { System.Collections.Generic.IEnumerable<int> MyMethod() { yield return 42; } }").Should().Be(1);
+            Statements(AnalyzerLanguage.CSharp, "class Sample { System.Collections.Generic.IEnumerable<int> MyMethod() { yield break; } }").Should().Be(1);
+            Statements(AnalyzerLanguage.CSharp, "class Sample { void MyMethod() { while (false) {} } }").Should().Be(1);
+            Statements(AnalyzerLanguage.CSharp, "class Sample { void MyMethod() { do {} while (false); } }").Should().Be(1);
+            Statements(AnalyzerLanguage.CSharp, "class Sample { void MyMethod() { for (;;) {} } }").Should().Be(1);
+            Statements(AnalyzerLanguage.CSharp, "class Sample { void MyMethod() { foreach (var e in new [] {1, 2, 3}) {} } }").Should().Be(1);
+            Statements(AnalyzerLanguage.CSharp, "class Sample { void MyMethod() { using (var e = new System.IO.MemoryStream()) {} } }").Should().Be(1);
+            Statements(AnalyzerLanguage.CSharp, "class Sample { void MyMethod() { unsafe { fixed (int* p = &this.x) {} } } int x; }").Should().Be(2);
+            Statements(AnalyzerLanguage.CSharp, "class Sample { void MyMethod() { checked {} } }").Should().Be(1);
+            Statements(AnalyzerLanguage.CSharp, "class Sample { void MyMethod() { unchecked {} } }").Should().Be(1);
+            Statements(AnalyzerLanguage.CSharp, "class Sample { void MyMethod() { unsafe {} } }").Should().Be(1);
+            Statements(AnalyzerLanguage.CSharp, "class Sample { void MyMethod() { if (false) {} } }").Should().Be(1);
+            Statements(AnalyzerLanguage.CSharp, "class Sample { void MyMethod(int v) { switch (v) { case 0: break; } } }").Should().Be(2);
+            Statements(AnalyzerLanguage.CSharp, "class Sample { void MyMethod() { try {} catch {} } }").Should().Be(1);
+            Statements(AnalyzerLanguage.CSharp, "class Sample { void MyMethod() { try {} finally {} } }").Should().Be(1);
+            Statements(AnalyzerLanguage.CSharp, "class Sample { void MyMethod() { try {} catch {} finally {} } }").Should().Be(1);
+            Statements(AnalyzerLanguage.CSharp, "class Sample { int MyMethod() { int a = 42; System.Console.WriteLine(a); return a; } }").Should().Be(3);
+            Statements(AnalyzerLanguage.CSharp, "class Sample { void Bar() { void LocalFunction() { } } }").Should().Be(1);
+            Statements(AnalyzerLanguage.CSharp, "class Sample { void Bar(System.Collections.Generic.List<(int, int)> names) { foreach ((int x, int y) in names){} } }").Should().Be(1);
 
-            Statements(AnalyzerLanguage.VisualBasic, "").Should().Be(0);
-            Statements(AnalyzerLanguage.VisualBasic, "Class MyClass \n \n End Class").Should().Be(0);
-            Statements(AnalyzerLanguage.VisualBasic, "Class MyClass \n Sub MyMethod() \n End Sub \n End Class").Should().Be(0);
-            Statements(AnalyzerLanguage.VisualBasic, "Class MyClass \n Sub MyMethod() \n {} \n End Sub \n End Class").Should().Be(0);
-            Statements(AnalyzerLanguage.VisualBasic, "Class MyClass \n Function MyFunc() As Integer \n Return 0 \n End Function \n End Class").Should().Be(1);
-            Statements(AnalyzerLanguage.VisualBasic, "Class MyClass \n Sub MyMethod() \n Dim a As Integer = 42 \n \n End Sub \n End Class").Should().Be(1);
-            Statements(AnalyzerLanguage.VisualBasic, "Class MyClass \n Sub MyMethod() \n Console.WriteLine() \n End Sub \n End Class").Should().Be(1);
-            Statements(AnalyzerLanguage.VisualBasic, "Class MyClass \n Sub MyMethod() \n Foo:  \n End Sub \n End Class").Should().Be(1);
-            Statements(AnalyzerLanguage.VisualBasic, "Class MyClass \n Sub MyMethod() \n GoTo Foo \n End Sub \n End Class").Should().Be(1);
-            Statements(AnalyzerLanguage.VisualBasic, "Class MyClass \n Sub MyMethod() \n Break \n End Sub \n End Class").Should().Be(1);
-            Statements(AnalyzerLanguage.VisualBasic, "Class MyClass \n Sub MyMethod() \n Continue \n End Sub \n End Class").Should().Be(1);
-            Statements(AnalyzerLanguage.VisualBasic, "Class MyClass \n Sub MyMethod() \n Throw \n End Sub \n End Class").Should().Be(1);
-            Statements(AnalyzerLanguage.VisualBasic, "Class MyClass \n Sub MyMethod() \n Yield 42 \n End Sub \n End Class").Should().Be(1);
-            Statements(AnalyzerLanguage.VisualBasic, "Class MyClass \n Sub MyMethod() \n yield Exit While \n End Sub \n End Class").Should().Be(1);
-            Statements(AnalyzerLanguage.VisualBasic, "Class MyClass \n Sub MyMethod() \n While False \n End While \n End Sub \n End Class").Should().Be(1);
-            Statements(AnalyzerLanguage.VisualBasic, "Class MyClass \n Sub MyMethod() \n Do \n Loop While True \n End Sub \n End Class").Should().Be(1);
-            Statements(AnalyzerLanguage.VisualBasic, "Class MyClass \n Sub MyMethod() \n For i As Integer = 0 To -1 \n Next \n End Sub \n End Class").Should().Be(1);
-            Statements(AnalyzerLanguage.VisualBasic, "Class MyClass \n Sub MyMethod() \n For Each e As var In c \n Next\n End Sub \n End Class").Should().Be(1);
-            Statements(AnalyzerLanguage.VisualBasic, "Class MyClass \n Sub MyMethod() \n Using e = New MyClass() \n End Using \n End Sub \n End Class").Should().Be(1);
-            Statements(AnalyzerLanguage.VisualBasic, "Class MyClass \n Sub MyMethod() \n If False \n End If \n End Sub \n End Class").Should().Be(1);
-            Statements(AnalyzerLanguage.VisualBasic, "Class MyClass \n Sub MyMethod() \n Select Case v \n Case 0 \n End Select \n End Sub \n End Class").Should().Be(1);
-            Statements(AnalyzerLanguage.VisualBasic, "Class MyClass \n Sub MyMethod() \n Try \n Catch \n End Try \n End Sub \n End Class").Should().Be(1);
-            Statements(AnalyzerLanguage.VisualBasic, "Class MyClass \n Sub MyMethod() \n Try \n Finally \n End Try \n End Sub \n End Class").Should().Be(1);
-            Statements(AnalyzerLanguage.VisualBasic, "Class MyClass \n Sub MyMethod() \n Try \n Catch \n Finally \n End Try \n End Sub \n End Class").Should().Be(1);
+            Statements(AnalyzerLanguage.VisualBasic, string.Empty).Should().Be(0);
+            Statements(AnalyzerLanguage.VisualBasic, "Class Sample \n \n End Class").Should().Be(0);
+            Statements(AnalyzerLanguage.VisualBasic, "Class Sample \n Sub MyMethod() \n End Sub \n End Class").Should().Be(0);
+            Statements(AnalyzerLanguage.VisualBasic, "Class Sample \n Function MyFunc() As Integer \n Return 0 \n End Function \n End Class").Should().Be(1);
+            Statements(AnalyzerLanguage.VisualBasic, "Class Sample \n Sub MyMethod() \n Dim a As Integer = 42 \n \n End Sub \n End Class").Should().Be(1);
+            Statements(AnalyzerLanguage.VisualBasic, "Class Sample \n Sub MyMethod() \n Console.WriteLine() \n End Sub \n End Class").Should().Be(1);
+            Statements(AnalyzerLanguage.VisualBasic, "Class Sample \n Sub MyMethod() \n Foo:  \n End Sub \n End Class").Should().Be(1);
+            Statements(AnalyzerLanguage.VisualBasic, "Class Sample \n Sub MyMethod() \n GoTo Foo \n Foo: \n End Sub \n End Class").Should().Be(2);
+            Statements(AnalyzerLanguage.VisualBasic, "Class Sample \n Sub MyMethod() \n Exit Sub \n End Sub \n End Class").Should().Be(1);
+            Statements(AnalyzerLanguage.VisualBasic, "Class Sample \n Sub MyMethod() \n Do : Continue Do : Loop\n End Sub \n End Class").Should().Be(2);
+            Statements(AnalyzerLanguage.VisualBasic, "Class Sample \n Sub MyMethod() \n Throw New Exception \n End Sub \n End Class").Should().Be(1);
+            Statements(AnalyzerLanguage.VisualBasic, "Class Sample \n Sub MyMethod() \n While False \n End While \n End Sub \n End Class").Should().Be(1);
+            Statements(AnalyzerLanguage.VisualBasic, "Class Sample \n Sub MyMethod() \n Do \n Loop While True \n End Sub \n End Class").Should().Be(1);
+            Statements(AnalyzerLanguage.VisualBasic, "Class Sample \n Sub MyMethod() \n For i As Integer = 0 To -1 \n Next \n End Sub \n End Class").Should().Be(1);
+            Statements(AnalyzerLanguage.VisualBasic, "Class Sample \n Sub MyMethod() \n For Each e As Integer In {1, 2, 3} \n Next\n End Sub \n End Class").Should().Be(1);
+            Statements(AnalyzerLanguage.VisualBasic, "Class Sample \n Sub MyMethod() \n Using e As New System.IO.MemoryStream() \n End Using \n End Sub \n End Class").Should().Be(1);
+            Statements(AnalyzerLanguage.VisualBasic, "Class Sample \n Sub MyMethod() \n If False Then \n End If \n End Sub \n End Class").Should().Be(1);
+            Statements(AnalyzerLanguage.VisualBasic, "Class Sample \n Sub MyMethod(v As Integer) \n Select Case v \n Case 0 \n End Select \n End Sub \n End Class").Should().Be(1);
+            Statements(AnalyzerLanguage.VisualBasic, "Class Sample \n Sub MyMethod() \n Try \n Catch \n End Try \n End Sub \n End Class").Should().Be(1);
+            Statements(AnalyzerLanguage.VisualBasic, "Class Sample \n Sub MyMethod() \n Try \n Finally \n End Try \n End Sub \n End Class").Should().Be(1);
+            Statements(AnalyzerLanguage.VisualBasic, "Class Sample \n Sub MyMethod() \n Try \n Catch \n Finally \n End Try \n End Sub \n End Class").Should().Be(1);
             Statements(AnalyzerLanguage.VisualBasic,
-                "Class MyClass \n Function MyFunc() As Integer \n Dim a As Integer = 42 \n Console.WriteLine(a) \n Return a \n End " +
+                "Class Sample \n Function MyFunc() As Integer \n Dim a As Integer = 42 \n Console.WriteLine(a) \n Return a \n End " +
                 "Function \n End Class")
                 .Should().Be(3);
         }
 
+#if NET
+
         [TestMethod]
         public void Functions()
         {
-            Functions(AnalyzerLanguage.CSharp, "").Should().Be(0);
-            Functions(AnalyzerLanguage.CSharp, "class MyClass { }").Should().Be(0);
-            Functions(AnalyzerLanguage.CSharp, "abstract class MyClass { public abstract void MyMethod1(); }").Should().Be(0);
-            Functions(AnalyzerLanguage.CSharp, "abstract interface Interface { void MyMethod1(); }").Should().Be(0);
-            Functions(AnalyzerLanguage.CSharp, "class MyClass { static MyClass() { } }").Should().Be(1);
-            Functions(AnalyzerLanguage.CSharp, "class MyClass { public MyClass() { } }").Should().Be(1);
-            Functions(AnalyzerLanguage.CSharp, "class MyClass { ~MyClass() { } }").Should().Be(1);
-            Functions(AnalyzerLanguage.CSharp, "class MyClass { public void MyMethod2() { } }").Should().Be(1);
-            Functions(AnalyzerLanguage.CSharp, "class MyClass { public static MyClass operator +(MyClass a) { return a; } }").Should().Be(1);
-            Functions(AnalyzerLanguage.CSharp, "class MyClass { public int MyProperty2 { get { return 0; } } }").Should().Be(1);
-            Functions(AnalyzerLanguage.CSharp, "class MyClass { public int MyProperty3 { set { } } }").Should().Be(1);
-            Functions(AnalyzerLanguage.CSharp, "class MyClass { public int MyProperty4 { init { } } }").Should().Be(1);
-            Functions(AnalyzerLanguage.CSharp, "class MyClass { public int MyProperty5 { get => 42; } }").Should().Be(1);
-            Functions(AnalyzerLanguage.CSharp, "class MyClass { public int MyProperty6 { get { return 0; } set { } } }").Should().Be(2);
-            Functions(AnalyzerLanguage.CSharp, "class MyClass { public event EventHandler OnSomething { add { } remove {} } }").Should().Be(2);
-            Functions(AnalyzerLanguage.CSharp, "class Foo { void Bar() { void LocalFunction() { } } }").Should().Be(2);
+            Functions(AnalyzerLanguage.CSharp, string.Empty).Should().Be(0);
+            Functions(AnalyzerLanguage.CSharp, "class Sample { }").Should().Be(0);
+            Functions(AnalyzerLanguage.CSharp, "abstract class Sample { public abstract void MyMethod1(); }").Should().Be(0);
+            Functions(AnalyzerLanguage.CSharp, "interface Interface { void MyMethod1(); }").Should().Be(0);
+            Functions(AnalyzerLanguage.CSharp, "class Sample { static Sample() { } }").Should().Be(1);
+            Functions(AnalyzerLanguage.CSharp, "class Sample { public Sample() { } }").Should().Be(1);
+            Functions(AnalyzerLanguage.CSharp, "class Sample { ~Sample() { } }").Should().Be(1);
+            Functions(AnalyzerLanguage.CSharp, "class Sample { public void MyMethod2() { } }").Should().Be(1);
+            Functions(AnalyzerLanguage.CSharp, "class Sample { public static Sample operator +(Sample a) { return a; } }").Should().Be(1);
+            Functions(AnalyzerLanguage.CSharp, "class Sample { public int MyProperty2 { get { return 0; } } }").Should().Be(1);
+            Functions(AnalyzerLanguage.CSharp, "class Sample { public int MyProperty3 { set { } } }").Should().Be(1);
+            Functions(AnalyzerLanguage.CSharp, "class Sample { public int MyProperty4 { init { } } }").Should().Be(1);
+            Functions(AnalyzerLanguage.CSharp, "class Sample { public int MyProperty5 { get => 42; } }").Should().Be(1);
+            Functions(AnalyzerLanguage.CSharp, "class Sample { public int MyProperty6 { get { return 0; } set { } } }").Should().Be(2);
+            Functions(AnalyzerLanguage.CSharp, "class Sample { public event System.EventHandler OnSomething { add { } remove {} } }").Should().Be(2);
+            Functions(AnalyzerLanguage.CSharp, "class Sample { void Bar() { void LocalFunction() { } } }").Should().Be(2);
 
-            Functions(AnalyzerLanguage.VisualBasic, "").Should().Be(0);
-            Functions(AnalyzerLanguage.VisualBasic, "Class MyClass \n \n End Class").Should().Be(0);
-            Functions(AnalyzerLanguage.VisualBasic, "MustInherit Class MyClass \n MustOverride Sub MyMethod() \n End Class").Should().Be(0);
+            Functions(AnalyzerLanguage.VisualBasic, string.Empty).Should().Be(0);
+            Functions(AnalyzerLanguage.VisualBasic, "Class Sample \n \n End Class").Should().Be(0);
+            Functions(AnalyzerLanguage.VisualBasic, "MustInherit Class Sample \n MustOverride Sub MyMethod() \n End Class").Should().Be(0);
             Functions(AnalyzerLanguage.VisualBasic, "Interface MyInterface \n Sub MyMethod() \n End Interface").Should().Be(0);
-            Functions(AnalyzerLanguage.VisualBasic, "Class MyClass \n Public Property MyProperty As Integer \n End Class").Should().Be(0);
-            Functions(AnalyzerLanguage.VisualBasic, "Class MyClass \n Shared Sub New() \n End Sub \n End Class").Should().Be(1);
-            Functions(AnalyzerLanguage.VisualBasic, "Class MyClass \n Sub New() \n End Sub \n End Class").Should().Be(1);
-            Functions(AnalyzerLanguage.VisualBasic, "Class MyClass \n Protected Overrides Sub Finalize() \n End Sub \n End Class").Should().Be(1);
-            Functions(AnalyzerLanguage.VisualBasic, "Class MyClass \n Sub MyMethod2() \n End Sub \n End Class").Should().Be(1);
-            Functions(AnalyzerLanguage.VisualBasic, "Class MyClass \n Public Shared Operator +(a As MyClass) As MyClass \n Return a \n End Operator \n End Class").Should().Be(1);
+            Functions(AnalyzerLanguage.VisualBasic, "Class Sample \n Public Property MyProperty As Integer \n End Class").Should().Be(0);
+            Functions(AnalyzerLanguage.VisualBasic, "Class Sample \n Shared Sub New() \n End Sub \n End Class").Should().Be(1);
+            Functions(AnalyzerLanguage.VisualBasic, "Class Sample \n Sub New() \n End Sub \n End Class").Should().Be(1);
+            Functions(AnalyzerLanguage.VisualBasic, "Class Sample \n Protected Overrides Sub Finalize() \n End Sub \n End Class").Should().Be(1);
+            Functions(AnalyzerLanguage.VisualBasic, "Class Sample \n Sub MyMethod2() \n End Sub \n End Class").Should().Be(1);
+            Functions(AnalyzerLanguage.VisualBasic, "Class Sample \n Public Shared Operator +(a As Sample) As Sample \n Return a \n End Operator \n End Class").Should().Be(1);
         }
+
+#endif
 
         [TestMethod]
         public void Complexity()
         {
-            Complexity(AnalyzerLanguage.CSharp, "")
+            Complexity(AnalyzerLanguage.CSharp, string.Empty)
                 .Should().Be(0);
-            Complexity(AnalyzerLanguage.CSharp, "class MyClass { }")
+            Complexity(AnalyzerLanguage.CSharp, "class Sample { }")
                 .Should().Be(0);
-            Complexity(AnalyzerLanguage.CSharp, "abstract class MyClass { abstract void MyMethod(); }")
+            Complexity(AnalyzerLanguage.CSharp, "abstract class Sample { public abstract void MyMethod(); }")
                 .Should().Be(0);
-            Complexity(AnalyzerLanguage.CSharp, "class MyClass { void MyMethod() { } }")
+            Complexity(AnalyzerLanguage.CSharp, "class Sample { void MyMethod() { } }")
                 .Should().Be(1);
-            Complexity(AnalyzerLanguage.CSharp, "class MyClass { void MyMethod() { return; } }")
+            Complexity(AnalyzerLanguage.CSharp, "class Sample { void MyMethod() { return; } }")
                 .Should().Be(1);
-            Complexity(AnalyzerLanguage.CSharp, "class MyClass { void MyMethod() { return; return; } }")
+            Complexity(AnalyzerLanguage.CSharp, "class Sample { void MyMethod() { return; return; } }")
                 .Should().Be(1);
-            Complexity(AnalyzerLanguage.CSharp, "class MyClass { void MyMethod() { { return; } } }")
+            Complexity(AnalyzerLanguage.CSharp, "class Sample { void MyMethod() { { return; } } }")
                 .Should().Be(1);
-            Complexity(AnalyzerLanguage.CSharp, "class MyClass { void MyMethod() { if (false) { } } }")
+            Complexity(AnalyzerLanguage.CSharp, "class Sample { void MyMethod() { if (false) { } } }")
                 .Should().Be(2);
-            Complexity(AnalyzerLanguage.CSharp, "class MyClass { void MyMethod() { if (false) { } else { } } }")
+            Complexity(AnalyzerLanguage.CSharp, "class Sample { void MyMethod() { if (false) { } else { } } }")
                 .Should().Be(2);
-            Complexity(AnalyzerLanguage.CSharp, "class MyClass { void MyMethod() { var t = false ? 0 : 1; } }")
+            Complexity(AnalyzerLanguage.CSharp, "class Sample { void MyMethod() { var t = false ? 0 : 1; } }")
                 .Should().Be(2);
-            Complexity(AnalyzerLanguage.CSharp, "class MyClass { void MyMethod(int p) { switch (p) { default: break; } } }")
+            Complexity(AnalyzerLanguage.CSharp, "class Sample { void MyMethod(int p) { switch (p) { default: break; } } }")
                 .Should().Be(1);
-            Complexity(AnalyzerLanguage.CSharp, "class MyClass { void MyMethod(int p) { var x = p switch { _ => 1  }; } }")
+            Complexity(AnalyzerLanguage.CSharp, "class Sample { void MyMethod(int p) { var x = p switch { _ => 1  }; } }")
                 .Should().Be(2);
-            Complexity(AnalyzerLanguage.CSharp, "class MyClass { void MyMethod(int p) { switch (p) { case 0: break; default: break; } } }")
+            Complexity(AnalyzerLanguage.CSharp, "class Sample { void MyMethod(int p) { switch (p) { case 0: break; default: break; } } }")
                 .Should().Be(2);
-            Complexity(AnalyzerLanguage.CSharp, "class MyClass { void MyMethod(int p) { var x = p switch { 0 => \"zero\", 1 => \"one\", _ => \"other\"  }; } }")
+            Complexity(AnalyzerLanguage.CSharp, "class Sample { void MyMethod(int p) { var x = p switch { 0 => \"zero\", 1 => \"one\", _ => \"other\"  }; } }")
                 .Should().Be(4);
-            Complexity(AnalyzerLanguage.CSharp, "class MyClass { void MyMethod(bool first, bool second) { var _ = first switch { true => second switch { true => 1, _ => 2}, _ => 3}; } }")
+            Complexity(AnalyzerLanguage.CSharp, "class Sample { void MyMethod(bool first, bool second) { var _ = first switch { true => second switch { true => 1, _ => 2}, _ => 3}; } }")
                 .Should().Be(5);
-            Complexity(AnalyzerLanguage.CSharp, "class MyClass { void MyMethod(int p) { foo: ; } }")
+            Complexity(AnalyzerLanguage.CSharp, "class Sample { void MyMethod(int p) { foo: ; } }")
                 .Should().Be(1);
-            Complexity(AnalyzerLanguage.CSharp, "class MyClass { void MyMethod(int p) { do { } while (false); } }")
+            Complexity(AnalyzerLanguage.CSharp, "class Sample { void MyMethod(int p) { do { } while (false); } }")
                 .Should().Be(2);
-            Complexity(AnalyzerLanguage.CSharp, "class MyClass { void MyMethod(int p) { for (;;) { } } }")
+            Complexity(AnalyzerLanguage.CSharp, "class Sample { void MyMethod(int p) { for (;;) { } } }")
                 .Should().Be(2);
-            Complexity(AnalyzerLanguage.CSharp, "class MyClass { void MyMethod(List<int> p) { foreach (var i in p) { } } }")
+            Complexity(AnalyzerLanguage.CSharp, "class Sample { void MyMethod(System.Collections.Generic.List<int> p) { foreach (var i in p) { } } }")
                 .Should().Be(2);
-            Complexity(AnalyzerLanguage.CSharp, "class MyClass { void MyMethod(int p) { var a = false; } }")
+            Complexity(AnalyzerLanguage.CSharp, "class Sample { void MyMethod(int p) { var a = false; } }")
                 .Should().Be(1);
-            Complexity(AnalyzerLanguage.CSharp, "class MyClass { void MyMethod(int p) { var a = false && false; } }")
+            Complexity(AnalyzerLanguage.CSharp, "class Sample { void MyMethod(int p) { var a = false && false; } }")
                 .Should().Be(2);
-            Complexity(AnalyzerLanguage.CSharp, "class MyClass { void MyMethod(int p) { var a = false || true; } }")
+            Complexity(AnalyzerLanguage.CSharp, "class Sample { void MyMethod(int p) { var a = false || true; } }")
                 .Should().Be(2);
-            Complexity(AnalyzerLanguage.CSharp, "class MyClass { int MyProperty { get; set; } }")
+            Complexity(AnalyzerLanguage.CSharp, "class Sample { int MyProperty { get; set; } }")
                 .Should().Be(2);
-            Complexity(AnalyzerLanguage.CSharp, "class MyClass { int MyProperty { get {} set {} } }")
+            Complexity(AnalyzerLanguage.CSharp, "class Sample { int MyProperty { get => 0; set {} } }")
                 .Should().Be(2);
-            Complexity(AnalyzerLanguage.CSharp, "class MyClass { public MyClass() { } }")
+            Complexity(AnalyzerLanguage.CSharp, "class Sample { public Sample() { } }")
                 .Should().Be(1);
-            Complexity(AnalyzerLanguage.CSharp, "class MyClass { ~MyClass() { } }")
+            Complexity(AnalyzerLanguage.CSharp, "class Sample { ~Sample() { } }")
                 .Should().Be(1);
-            Complexity(AnalyzerLanguage.CSharp, "class MyClass { public static MyClass operator +(MyClass a) { return a; } }")
+            Complexity(AnalyzerLanguage.CSharp, "class Sample { public static Sample operator +(Sample a) { return a; } }")
                 .Should().Be(1);
-            Complexity(AnalyzerLanguage.CSharp, "class MyClass { public event EventHandler OnSomething { add { } remove {} } }")
+            Complexity(AnalyzerLanguage.CSharp, "class Sample { public event System.EventHandler OnSomething { add { } remove {} } }")
                 .Should().Be(2);
-            Complexity(AnalyzerLanguage.CSharp, "class MyClass { void MyMethod() { var t = null ?? 0; } }")
+            Complexity(AnalyzerLanguage.CSharp, "class Sample { void MyMethod() { var t = (string)null ?? string.Empty; } }")
                 .Should().Be(2);
-            Complexity(AnalyzerLanguage.CSharp, "class MyClass { void MyMethod(int? t) { t ??= 0; } }")
+            Complexity(AnalyzerLanguage.CSharp, "class Sample { void MyMethod(int? t) { t ??= 0; } }")
                 .Should().Be(2);
-            Complexity(AnalyzerLanguage.CSharp, "class MyClass { void MyMethod(int? a, int? b, int? c) => a ??= b ??= c ??= 0; }")
+            Complexity(AnalyzerLanguage.CSharp, "class Sample { void MyMethod(int? a, int? b, int? c) => a ??= b ??= c ??= 0; }")
                 .Should().Be(4);
-            Complexity(AnalyzerLanguage.CSharp, "class MyClass { void MyMethod() { int? t = null; t?.ToString(); } }")
+            Complexity(AnalyzerLanguage.CSharp, "class Sample { void MyMethod() { int? t = null; t?.ToString(); } }")
                 .Should().Be(2);
-            Complexity(AnalyzerLanguage.CSharp, "class MyClass { void MyMethod() { throw new Exception(); } }")
+            Complexity(AnalyzerLanguage.CSharp, "class Sample { void MyMethod() { throw new System.Exception(); } }")
                .Should().Be(1);
-            Complexity(AnalyzerLanguage.CSharp, "class MyClass { void MyMethod() { try { } catch(Exception e) { } } }")
+            Complexity(AnalyzerLanguage.CSharp, "class Sample { void MyMethod() { try { } catch(System.Exception e) { } } }")
                .Should().Be(1);
-            Complexity(AnalyzerLanguage.CSharp, "class MyClass { void MyMethod() { goto Foo; Foo: var i = 0; } }")
+            Complexity(AnalyzerLanguage.CSharp, "class Sample { void MyMethod() { goto Foo; Foo: var i = 0; } }")
                .Should().Be(1);
 
-            Complexity(AnalyzerLanguage.VisualBasic, "")
+            Complexity(AnalyzerLanguage.VisualBasic, string.Empty)
                 .Should().Be(0);
-            Complexity(AnalyzerLanguage.VisualBasic, "Class MyClass \n End Class")
+            Complexity(AnalyzerLanguage.VisualBasic, "Class Sample \n End Class")
                 .Should().Be(0);
-            Complexity(AnalyzerLanguage.VisualBasic, "MustInherit Class MyClass \n Private MustOverride Sub MyMethod() \n End Class")
+            Complexity(AnalyzerLanguage.VisualBasic, "MustInherit Class Sample \n Public MustOverride Sub MyMethod() \n End Class")
                 .Should().Be(0);
-            Complexity(AnalyzerLanguage.VisualBasic, "Class MyClass \n Sub MyMethod() \n End Sub \n End Class")
+            Complexity(AnalyzerLanguage.VisualBasic, "Class Sample \n Sub MyMethod() \n End Sub \n End Class")
                 .Should().Be(1);
-            Complexity(AnalyzerLanguage.VisualBasic, "Class MyClass \n Sub MyMethod() \n Return \n End Sub \n End Class")
+            Complexity(AnalyzerLanguage.VisualBasic, "Class Sample \n Sub MyMethod() \n Return \n End Sub \n End Class")
                 .Should().Be(1);
-            Complexity(AnalyzerLanguage.VisualBasic, "Class MyClass \n Sub MyMethod() \n Return \n Return \n End Sub \n End Class")
+            Complexity(AnalyzerLanguage.VisualBasic, "Class Sample \n Sub MyMethod() \n Return \n Return \n End Sub \n End Class")
                 .Should().Be(1);
-            Complexity(AnalyzerLanguage.VisualBasic, "Class MyClass \n Sub MyMethod() \n If False Then \n End If \n End Sub \n End Class")
+            Complexity(AnalyzerLanguage.VisualBasic, "Class Sample \n Sub MyMethod() \n If False Then \n End If \n End Sub \n End Class")
                 .Should().Be(2);
-            Complexity(AnalyzerLanguage.VisualBasic, "Class MyClass \n Sub MyMethod() \n If False Then \n Else \n End If \n End Sub \n End Class")
+            Complexity(AnalyzerLanguage.VisualBasic, "Class Sample \n Sub MyMethod() \n If False Then \n Else \n End If \n End Sub \n End Class")
                 .Should().Be(2);
-            Complexity(AnalyzerLanguage.VisualBasic, "Class MyClass \n Sub MyMethod() \n Select Case p \n Case Else \n Exit Select \n End Select \n End Sub \n End Class")
+            Complexity(AnalyzerLanguage.VisualBasic, "Class Sample \n Sub MyMethod(p As Integer) \n Select Case p \n Case Else \n Exit Select \n End Select \n End Sub \n End Class")
                 .Should().Be(2);
             Complexity(AnalyzerLanguage.VisualBasic,
-                "Class MyClass \n Sub MyMethod() \n Select Case p \n Case 3 \n Exit Select \n Case Else \n Exit Select \n " +
+                "Class Sample \n Sub MyMethod(p As Integer) \n Select Case p \n Case 3 \n Exit Select \n Case Else \n Exit Select \n " +
                 "End Select \n End Sub \n End Class")
                 .Should().Be(4);
-            Complexity(AnalyzerLanguage.VisualBasic, "Class MyClass \n Sub MyMethod() \n Foo: \n End Sub \n End Class")
+            Complexity(AnalyzerLanguage.VisualBasic, "Class Sample \n Sub MyMethod() \n Foo: \n End Sub \n End Class")
                 .Should().Be(1);
-            Complexity(AnalyzerLanguage.VisualBasic, "Class MyClass \n Sub MyMethod() \n Do \n Loop While True \n End Sub \n End Class")
+            Complexity(AnalyzerLanguage.VisualBasic, "Class Sample \n Sub MyMethod() \n Do \n Loop While True \n End Sub \n End Class")
                 .Should().Be(2);
-            Complexity(AnalyzerLanguage.VisualBasic, "Class MyClass \n Sub MyMethod() \n For i As Integer = 0 To -1 \n Next \n End Sub \n End Class")
+            Complexity(AnalyzerLanguage.VisualBasic, "Class Sample \n Sub MyMethod() \n For i As Integer = 0 To -1 \n Next \n End Sub \n End Class")
                 .Should().Be(2);
-            Complexity(AnalyzerLanguage.VisualBasic, "Class MyClass \n Sub MyMethod() \n For Each e As var In c \n Next\n End Sub \n End Class")
+            Complexity(AnalyzerLanguage.VisualBasic, "Class Sample \n Sub MyMethod() \n For Each e As Integer In {1, 2, 3} \n Next\n End Sub \n End Class")
                 .Should().Be(2);
-            Complexity(AnalyzerLanguage.VisualBasic, "Class MyClass \n Sub MyMethod() \n Dim a As Boolean = False\n End Sub \n End Class")
+            Complexity(AnalyzerLanguage.VisualBasic, "Class Sample \n Sub MyMethod() \n Dim a As Boolean = False\n End Sub \n End Class")
                 .Should().Be(1);
-            Complexity(AnalyzerLanguage.VisualBasic, "Class MyClass \n Sub MyMethod() \n Dim a As Boolean = False And False\n End Sub \n End Class")
+            Complexity(AnalyzerLanguage.VisualBasic, "Class Sample \n Sub MyMethod() \n Dim a As Boolean = False And False\n End Sub \n End Class")
                 .Should().Be(1);
-            Complexity(AnalyzerLanguage.VisualBasic, "Class MyClass \n Sub MyMethod() \n Dim a As Boolean = False Or False\n End Sub \n End Class")
+            Complexity(AnalyzerLanguage.VisualBasic, "Class Sample \n Sub MyMethod() \n Dim a As Boolean = False Or False\n End Sub \n End Class")
                 .Should().Be(1);
-            Complexity(AnalyzerLanguage.VisualBasic, "Class MyClass \n Public Property MyProperty As Integer \n End Class")
+            Complexity(AnalyzerLanguage.VisualBasic, "Class Sample \n Public Property MyProperty As Integer \n End Class")
                 .Should().Be(0);
-            Complexity(AnalyzerLanguage.VisualBasic, "Class MyClass \n Public Property MyProperty As Integer \n Get \n End Get " +
+            Complexity(AnalyzerLanguage.VisualBasic, "Class Sample \n Public Property MyProperty As Integer \n Get \n End Get " +
                 "\n Set(value As Integer) \n End Set \n End Property \n End Class")
                 .Should().Be(2);
-            Complexity(AnalyzerLanguage.VisualBasic, "Class MyClass \n Sub New() \n End Sub \n End Class")
+            Complexity(AnalyzerLanguage.VisualBasic, "Class Sample \n Sub New() \n End Sub \n End Class")
                 .Should().Be(1);
-            Complexity(AnalyzerLanguage.VisualBasic, "Class MyClass \n Protected Overrides Sub Finalize() \n End Sub \n End Class")
+            Complexity(AnalyzerLanguage.VisualBasic, "Class Sample \n Protected Overrides Sub Finalize() \n End Sub \n End Class")
                 .Should().Be(1);
-            Complexity(AnalyzerLanguage.VisualBasic, "Class MyClass \n Public Shared Operator +(a As MyClass) As MyClass \n Return a \n End Operator \n End Class")
-                .Should().Be(1);
-            Complexity(AnalyzerLanguage.VisualBasic, "Class MyClass \n Public Custom Event OnSomething As EventHandler \n " +
-                "AddHandler(ByVal value As EventHandler) \n End AddHandler \n RemoveHandler(ByVal value As EventHandler) \n " +
-                "End RemoveHandler \n End Event \n End Class")
-                .Should().Be(2);
-
-            Complexity(AnalyzerLanguage.VisualBasic, "Module Module1\n Class Foo\n Function Bar() \n Return 0\n End Function \n End Class\n End Module")
+            Complexity(AnalyzerLanguage.VisualBasic, "Class Sample \n Public Shared Operator +(a As Sample) As Sample \n Return a \n End Operator \n End Class")
                 .Should().Be(1);
             Complexity(AnalyzerLanguage.VisualBasic,
-                "Module Module1\n Class Foo\n Function Bar() \n If False Then \n Return 1 \n Else \n Return 0 " +
+@"Class Sample
+    Public Custom Event OnSomething As EventHandler
+
+        AddHandler(ByVal value As EventHandler)
+        End AddHandler
+        RemoveHandler(ByVal value As EventHandler)
+        End RemoveHandler
+        RaiseEvent(ByVal sender As Object, ByVal e As EventArgs)
+        End RaiseEvent
+    End Event
+End Class")
+                .Should().Be(3);
+
+            Complexity(AnalyzerLanguage.VisualBasic, "Module Module1\n Class Sample\n Function Bar() \n Return 0\n End Function \n End Class\n End Module")
+                .Should().Be(1);
+            Complexity(AnalyzerLanguage.VisualBasic,
+                "Module Module1\n Class Sample\n Function Bar() \n If False Then \n Return 1 \n Else \n Return 0 " +
                 "\n End If\n End Function\n End Class\n End Module")
                 .Should().Be(2);
-            Complexity(AnalyzerLanguage.VisualBasic, "Module Module1\n Class Foo\n Function Foo() \n Dim foo = Sub() Return 42\n End Function\n End Class\n End Module")
+            Complexity(AnalyzerLanguage.VisualBasic, "Module Module1\n Class Sample\n Function Foo() \n Return 42\n End Function\n End Class\n End Module")
                 .Should().Be(1);
-            Complexity(AnalyzerLanguage.VisualBasic, "Module Module1\n Class Foo\n ReadOnly Property MyProp \n Get \n Return \"\" \n End Get \n End Property\n End Class\n End Module")
+            Complexity(AnalyzerLanguage.VisualBasic, "Module Module1\n Class Sample\n ReadOnly Property MyProp \n Get \n Return \"\" \n End Get \n End Property\n End Class\n End Module")
                 .Should().Be(1);
-            Complexity(AnalyzerLanguage.VisualBasic, "Module Module1\n Class Foo\n Sub Foo() \n End Sub\n End Class\n End Module")
+            Complexity(AnalyzerLanguage.VisualBasic, "Module Module1\n Class Sample\n Sub Foo() \n End Sub\n End Class\n End Module")
                 .Should().Be(1);
-            Complexity(AnalyzerLanguage.VisualBasic, "Module Module1\n Class Foo\n Sub Foo() \n Dim Foo = If(True, True, False)\n End Sub\n End Class\n End Module")
+            Complexity(AnalyzerLanguage.VisualBasic, "Module Module1\n Class Sample\n Sub Foo() \n Dim Foo = If(True, True, False)\n End Sub\n End Class\n End Module")
                 .Should().Be(2);
-            Complexity(AnalyzerLanguage.VisualBasic, "Module Module1\n Class Foo\n Sub Foo() \n Dim Foo = Function() 0\n End Sub\n End Class\n End Module")
+            Complexity(AnalyzerLanguage.VisualBasic, "Module Module1\n Class Sample\n Sub Foo() \n Dim Foo = Function() 0\n End Sub\n End Class\n End Module")
                 .Should().Be(1);
             Complexity(AnalyzerLanguage.VisualBasic,
-                "Module Module1\n Class Foo\n Sub Foo() \n Dim Foo = Function() \n Return False \n " +
+                "Module Module1\n Class Sample\n Sub Foo() \n Dim Foo = Function() \n Return False \n " +
                 "End Function\n End Sub\n End Class\n End Module")
                 .Should().Be(1);
-            Complexity(AnalyzerLanguage.VisualBasic, "Module Module1\n Class Foo\n Sub Foo() \n Throw New AccessViolationException()\n End Sub\n End Class\n End Module")
+            Complexity(AnalyzerLanguage.VisualBasic, "Module Module1\n Class Sample\n Sub Foo() \n Throw New AccessViolationException()\n End Sub\n End Class\n End Module")
                 .Should().Be(2);
-            Complexity(AnalyzerLanguage.VisualBasic, "Module Module1\n Class Foo\n Sub Foo() \n GoTo Foo\n End Sub\n End Class\n End Module")
+            Complexity(AnalyzerLanguage.VisualBasic, "Module Module1\n Class Sample\n Sub Method() \n GoTo Foo \n Foo: \n End Sub\n End Class\n End Module")
                 .Should().Be(2);
         }
 
@@ -519,17 +544,19 @@ End Class").Should().BeEquivalentTo(1, 2, 3, 4, 5, 6, 7, 8);
         [TestMethod]
         public void ExecutableLinesMetricsIsPopulated_CSharp() =>
             ExecutableLines(AnalyzerLanguage.CSharp,
-                @"public void Foo(int x) { int i = 0; if (i == 0) {i++;i--;} else { while(true){i--;} } }")
+                @"public class Sample { public void Foo(int x) { int i = 0; if (i == 0) {i++;i--;} else { while(true){i--;} } } }")
                 .Should().BeEquivalentTo(new[] { 1 });
 
         [TestMethod]
         public void ExecutableLinesMetricsIsPopulated_VB() =>
             ExecutableLines(AnalyzerLanguage.VisualBasic,
-                @"Private Sub Foo(x As Integer)
-                    If x = 42
-                    End If
-                  End Sub")
-                .Should().BeEquivalentTo(new[] { 2 });
+@"Module MainMod
+    Private Sub Foo(x As Integer)
+        If x = 42 Then
+        End If
+    End Sub
+End Module")
+                .Should().BeEquivalentTo(new[] { 3 });
 
         private static int Lines(AnalyzerLanguage language, string text) =>
             MetricsFor(language, text).LineCount;
@@ -563,17 +590,16 @@ End Class").Should().BeEquivalentTo(1, 2, 3, 4, 5, 6, 7, 8);
 
         private static MetricsBase MetricsFor(AnalyzerLanguage language, string text)
         {
-            if (language != AnalyzerLanguage.CSharp &&
-                language != AnalyzerLanguage.VisualBasic)
+            if (language != AnalyzerLanguage.CSharp && language != AnalyzerLanguage.VisualBasic)
             {
                 throw new ArgumentException("Supplied language is not C# neither VB.Net", nameof(language));
             }
 
-            var (syntaxTree, semanticModel) = TestHelper.Compile(text);
+            var (syntaxTree, semanticModel) = TestHelper.Compile(text, language == AnalyzerLanguage.CSharp);
 
             return language == AnalyzerLanguage.CSharp
                 ? new Metrics.CSharp.CSharpMetrics(syntaxTree, semanticModel)
-                : new Metrics.VisualBasic.VisualBasicMetrics(VisualBasicSyntaxTree.ParseText(text), semanticModel);
+                : new Metrics.VisualBasic.VisualBasicMetrics(syntaxTree, semanticModel);
         }
     }
 }

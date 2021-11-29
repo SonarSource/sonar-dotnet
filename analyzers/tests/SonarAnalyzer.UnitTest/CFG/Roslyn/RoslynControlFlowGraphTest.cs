@@ -42,7 +42,7 @@ namespace SonarAnalyzer.UnitTest.CFG.Roslyn
             const string code = @"
 public class Sample
 {
-    public void Method()
+    public int Method()
     {
         return 42;
     }
@@ -68,7 +68,7 @@ End Class";
             const string code = @"
 public class Sample
 {
-    public void Method()
+    public int Method()
     {
         System.Action a = () => { };
         return LocalMethod();

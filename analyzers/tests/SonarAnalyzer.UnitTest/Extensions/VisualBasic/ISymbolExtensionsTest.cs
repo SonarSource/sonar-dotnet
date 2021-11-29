@@ -121,7 +121,7 @@ End Class";
             const string code = @"
 public class Sample
 {
-    public void SymbolMember() { };
+    public void SymbolMember() { }
 }";
             ISymbolExtensions_Common.IsAutoProperty(CreateSymbol(code, true)).Should().BeFalse();
         }

@@ -92,7 +92,7 @@ namespace SonarAnalyzer.UnitTest.CBDE
 
         public static void ExportAllMethods(string code, TextWriter writer, bool withLoc)
         {
-            (var ast, var semanticModel) = TestHelper.Compile(code);
+            (var ast, var semanticModel) = TestHelper.CompileIgnoreErrors(code);
             var exporterMetrics = new MlirExporterMetrics();
             var exporter = new MlirExporter(writer, semanticModel, exporterMetrics, withLoc);
             foreach (var method in ast.GetRoot().DescendantNodes().OfType<MethodDeclarationSyntax>())

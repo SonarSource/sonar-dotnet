@@ -37,7 +37,7 @@ namespace SonarAnalyzer.UnitTest.LiveVariableAnalysis
         {
             var code = @"
 int a = 1;
-var b = Method();
+var b = Method(0);
 var c = 2 + 3;";
             CreateContextCS(code).ValidateAllEmpty();
         }
@@ -107,16 +107,17 @@ Method(intParameter);";
             // https://github.com/dotnet/roslyn/issues/56644
             var code = @"
 char[] charArray = null;
+var ret = false;
 var stringVariable = ""Lorem Ipsum"";
 if (boolParameter)
-    var ret = charArray.Any(stringVariable.Contains);
+    ret = charArray.Any(stringVariable.Contains);
 ";
             var context = CreateContextCS(code);
             context.ValidateEntry(new LiveIn("boolParameter"), new LiveOut("boolParameter"));
 #if NET
-            context.Validate("ret = charArray.Any(stringVariable.Contains)", new LiveIn("charArray", "stringVariable"));
+            context.Validate("ret = charArray.Any(stringVariable.Contains);", new LiveIn("charArray", "stringVariable"));
 #else
-            context.Validate("ret = charArray.Any(stringVariable.Contains)", new LiveIn("charArray"));
+            context.Validate("ret = charArray.Any(stringVariable.Contains);", new LiveIn("charArray"));
 #endif
         }
 
@@ -171,7 +172,7 @@ Method(intParameter);";
         [DataRow("Capturing(x => field + variable + intParameter);", DisplayName = "SimpleLambda")]
         [DataRow("Capturing((x) => field + variable + intParameter);", DisplayName = "ParenthesizedLambda")]
         [DataRow("Capturing(x => { Func<int> xxx = () => field + variable + intParameter; return xxx();});", DisplayName = "NestedLambda")]
-        [DataRow("VoidDelegate d = delegate { return field + variable + intParameter;};", DisplayName = "AnonymousMethod")]
+        [DataRow("VoidDelegate d = delegate { Method(field + variable + intParameter);};", DisplayName = "AnonymousMethod")]
         [DataRow("var items = from xxx in new int[] { 42, 100 } where xxx > field + variable + intParameter select xxx;", DisplayName = "Query")]
         public void Captured_NotLiveIn_NotLiveOut(string capturingStatement)
         {
@@ -592,7 +593,7 @@ Method(field, s.Property);";
         [TestMethod]
         public void ProcessLocalReference_UndefinedSymbol_NotLiveIn_NotLiveOut()
         {
-            var code = @"Method(undefined);";
+            var code = @"Method(undefined); // Error CS0103 The name 'undefined' does not exist in the current context";
             CreateContextCS(code).ValidateAllEmpty();
         }
 
@@ -602,6 +603,7 @@ Method(field, s.Property);";
             var code = @"
 var refVariable = 42;
 var outVariable = 42;
+outParameter = 0;
 if (boolParameter)
     return;
 Main(true, 0, out outVariable, ref refVariable);";
@@ -656,10 +658,10 @@ if (boolParameter)
             var code = @"
 var variable = 42;
 if (boolParameter)
-    Capuring(variable.CompareTo);";
+    Capturing(variable.CompareTo);";
             var context = CreateContextCS(code);
             context.ValidateEntry(new LiveIn("boolParameter"), new LiveOut("boolParameter"));
-            context.Validate("Capuring(variable.CompareTo);", new LiveIn("variable"));
+            context.Validate("Capturing(variable.CompareTo);", new LiveIn("variable"));
         }
 
         [TestMethod]
@@ -708,9 +710,9 @@ Method(intVariable);";
         public void ProcessSimpleAssignment_UndefinedSymbol_NotLiveIn_NotLiveOut()
         {
             var code = @"
-undefined = intParameter;
-if (undefined == 0)
-    Method(undefined);";
+undefined = intParameter;   // Error CS0103 The name 'undefined' does not exist in the current context
+if (undefined == 0)         // Error CS0103 The name 'undefined' does not exist in the current context
+    Method(undefined);      // Error CS0103 The name 'undefined' does not exist in the current context";
             var context = CreateContextCS(code);
             context.ValidateEntry(new LiveIn("intParameter"), new LiveOut("intParameter"));
             context.Validate("Method(undefined);");
@@ -774,22 +776,6 @@ foreach(var i in new int[] {1, 2, 3})
             context.Validate(context.Cfg.Blocks[2], null, new LiveIn("boolParameter", "intParameter"), new LiveOut("boolParameter", "intParameter"));
             context.Validate("Method(i, intParameter);", new LiveIn("boolParameter", "intParameter"), new LiveOut("boolParameter", "intParameter", "i"));
             context.Validate("Method(i);", new LiveIn("boolParameter", "intParameter", "i"), new LiveOut("boolParameter", "intParameter"));
-            context.ValidateExit();
-        }
-
-        [TestMethod]
-        public void ProcessVariableInForeach_Reused_LiveIn_LiveOut()
-        {
-            var code = @"
-int i = 42;
-foreach(i in new int[] {1, 2, 3})
-{
-    Method(i, intParameter);
-}";
-            var context = CreateContextCS(code);
-            context.Validate(context.Cfg.Blocks[1], null, new LiveIn("intParameter"), new LiveOut("intParameter"));
-            context.Validate(context.Cfg.Blocks[2], null, new LiveIn("intParameter"), new LiveOut("intParameter"));
-            context.Validate("Method(i, intParameter);", new LiveIn("intParameter"), new LiveOut("intParameter"));
             context.ValidateExit();
         }
 
@@ -942,7 +928,7 @@ End Class";
             public Context(string code, bool isCSharp, string localFunctionName = null)
             {
                 IMethodSymbol originalDeclaration;
-                Cfg = TestHelper.CompileCfg(code, isCSharp);
+                Cfg = TestHelper.CompileCfg(code, isCSharp, code.Contains("// Error CS"));
                 if (localFunctionName == null)
                 {
                     originalDeclaration = (IMethodSymbol)Cfg.OriginalOperation.SemanticModel.GetDeclaredSymbol(Cfg.OriginalOperation.Syntax);

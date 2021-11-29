@@ -122,12 +122,12 @@ public class Sample
     {
         var a = input;
     A:
-        if (input != "")
+        if (input != """")
             goto C;
         else
             goto B;
     C:
-        input = String.Empty;
+        input = System.String.Empty;
         goto A;
     B:
         input = input;

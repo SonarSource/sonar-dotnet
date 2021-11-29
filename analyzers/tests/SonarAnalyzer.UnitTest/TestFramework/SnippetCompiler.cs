@@ -50,8 +50,8 @@ namespace SonarAnalyzer.UnitTest.TestFramework
         public SnippetCompiler(string code, bool ignoreErrors, AnalyzerLanguage language, IEnumerable<MetadataReference> additionalReferences = null)
         {
             CompilationOptions compilationOptions = language == AnalyzerLanguage.CSharp
-                ? new CSharpCompilationOptions(OutputKind.DynamicallyLinkedLibrary)
-                : new VisualBasicCompilationOptions(OutputKind.DynamicallyLinkedLibrary);
+                ? new CSharpCompilationOptions(OutputKind.DynamicallyLinkedLibrary).WithAllowUnsafe(true)
+                : new VisualBasicCompilationOptions(OutputKind.DynamicallyLinkedLibrary).WithGlobalImports(SolutionBuilder.DefaultGlobalImportsVisualBasic);
 
             compilation = SolutionBuilder
                 .Create()
@@ -101,8 +101,8 @@ namespace SonarAnalyzer.UnitTest.TestFramework
 
         public INamespaceSymbol GetNamespaceSymbol(string name)
         {
-            var symbol = (GetNodes<CSharpSyntax.NamespaceDeclarationSyntax>()
-                .Concat<SyntaxNode>(GetNodes<VBSyntax.NamespaceStatementSyntax>()))
+            var symbol = GetNodes<CSharpSyntax.NamespaceDeclarationSyntax>()
+                .Concat<SyntaxNode>(GetNodes<VBSyntax.NamespaceStatementSyntax>())
                 .Select(s => SemanticModel.GetDeclaredSymbol(s))
                 .First(s => s.Name == name) as INamespaceSymbol;
 
@@ -154,14 +154,15 @@ namespace SonarAnalyzer.UnitTest.TestFramework
             new SyntaxNodeAnalysisContext(node, SemanticModel, null, null, null, CancellationToken.None);
 
         private static bool HasCompilationErrors(Compilation compilation) =>
-            compilation.GetDiagnostics().Any(d => d.Id.StartsWith("CS") || d.Id.StartsWith("BC"));
+            compilation.GetDiagnostics().Any(IsCompilationError);
+
+        private static bool IsCompilationError(Diagnostic diagnostic) =>
+            diagnostic.Severity == DiagnosticSeverity.Error && (diagnostic.Id.StartsWith("CS") || diagnostic.Id.StartsWith("BC"));
 
         private static void DumpCompilationErrors(Compilation compilation)
         {
-            var diagnostics = compilation.GetDiagnostics();
-
             Console.WriteLine("Diagnostic errors:");
-            foreach (var d in diagnostics)
+            foreach (var d in compilation.GetDiagnostics().Where(IsCompilationError))
             {
                 Console.WriteLine($"  {d.Id} Line: {d.Location.GetMappedLineSpan().StartLinePosition.Line}: {d.GetMessage()}");
             }

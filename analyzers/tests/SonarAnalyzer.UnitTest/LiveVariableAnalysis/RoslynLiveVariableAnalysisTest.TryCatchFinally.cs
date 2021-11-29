@@ -46,14 +46,14 @@ namespace SonarAnalyzer.UnitTest.LiveVariableAnalysis
              */
             var code = @$"
 {usingStatement}
-    Method(ms.Length);
+    Method(ms.Capacity);
     if (boolParameter)
         Method(0);
 {suffix}";
             var context = CreateContextCS(code);
             context.ValidateEntry(new LiveIn("boolParameter"), new LiveOut("boolParameter"));
             context.Validate<ISimpleAssignmentOperation>("ms = new MemoryStream()", new LiveIn("boolParameter"), new LiveOut("boolParameter", "ms"));
-            context.Validate("Method(ms.Length);", new LiveIn("boolParameter", "ms"), new LiveOut("ms"));
+            context.Validate("Method(ms.Capacity);", new LiveIn("boolParameter", "ms"), new LiveOut("ms"));
             context.Validate("Method(0);", new LiveIn("ms"), new LiveOut("ms"));
             context.ValidateExit();
             // Finally region

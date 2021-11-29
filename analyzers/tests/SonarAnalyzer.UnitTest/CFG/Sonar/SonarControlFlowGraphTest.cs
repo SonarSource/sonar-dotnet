@@ -225,7 +225,7 @@ public class Sample
             var input = @$"
 public class Sample
 {{
-    public string Main() => Go(x => x + {ExtremelyNestedExpression()});
+    public void Main() => Go(x => x + {ExtremelyNestedExpression()});
 
     public void Go(System.Func<string, string> arg) {{ }}
 }}";
@@ -240,7 +240,7 @@ public class Sample
             var input = @$"
 public class Sample
 {{
-    public string Main() => Go(() => {ExtremelyNestedExpression()});
+    public void Main() => Go(() => {ExtremelyNestedExpression()});
 
     public void Go(System.Func<string> arg) {{ }}
 }}";
@@ -5066,7 +5066,7 @@ namespace NS
         internal static MethodDeclarationSyntax CompileWithMethodBody(string input, string methodName, out SemanticModel semanticModel, ParseOptions parseOptions = null)
         {
             MethodDeclarationSyntax methodDeclaration;
-            (methodDeclaration, semanticModel) = TestHelper.Compile(input).GetMethod(methodName);
+            (methodDeclaration, semanticModel) = TestHelper.CompileIgnoreErrors(input).GetMethod(methodName);
             return methodDeclaration;
         }
 

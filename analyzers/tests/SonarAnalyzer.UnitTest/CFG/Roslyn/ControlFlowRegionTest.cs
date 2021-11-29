@@ -46,7 +46,7 @@ public class Sample
         }
         finally
         {
-            return value;
+            value = 0;
         }
 
         int LocalMethod() => 42;

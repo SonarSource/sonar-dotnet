@@ -493,7 +493,7 @@ namespace Namespace
 {
   public class DeclarationStatement
   {
-    public int Main(Dictionary<string, int> dictionary, string key)
+    public void Main(Dictionary<string, int> dictionary, string key)
     {
         dictionary.TryGetValue(key, out var value);
     }
@@ -559,7 +559,7 @@ namespace Namespace
 {
   public class DeclarationStatement
   {
-    public int Main(Dictionary<string, string> dictionary, string key)
+    public void Main(Dictionary<string, string> dictionary, string key)
     {
         dictionary.TryGetValue(key, out var value);
     }
@@ -1404,6 +1404,8 @@ namespace Test
             context.WalkWithExitBlocks(5, 2);
         }
 
+#if NET
+
         [TestMethod]
         public void ExplodedGraph_IndiceFromVariable()
         {
@@ -1511,6 +1513,8 @@ namespace Namespace
             context.WalkWithExitBlocks(5, 1);
             isIndexerVisited.Should().BeTrue();
         }
+
+#endif
 
         private class ExplodedGraphContext
         {

@@ -36,7 +36,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework
         private const string InitSnippet = @"namespace System.Runtime.CompilerServices { public class IsExternalInit { } }";
         private const string GeneratedAssemblyName = "project";
 
-        private static readonly IEnumerable<GlobalImport> DefaultGlobalImportsVisualBasic = GlobalImport.Parse(
+        public static readonly IEnumerable<GlobalImport> DefaultGlobalImportsVisualBasic = GlobalImport.Parse(
             "Microsoft.VisualBasic",
             "System",
             "System.Collections",
