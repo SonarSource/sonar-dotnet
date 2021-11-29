@@ -500,7 +500,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework
                                                         IEnumerable<MetadataReference> additionalReferences,
                                                         string sonarProjectConfigPath = null)
         {
-            var solution = SolutionBuilder.CreateSolutionFromPaths(paths, outputKind, additionalReferences, IsSupportForCSharp9InitNeeded(options));
+            var solution = SolutionBuilder.CreateSolutionFromPaths(paths, outputKind, additionalReferences);
             CompileAndVerifyAnalyzer(solution, diagnosticAnalyzers, options, checkMode, sonarProjectConfigPath);
         }
 
@@ -527,9 +527,6 @@ namespace SonarAnalyzer.UnitTest.TestFramework
                 DiagnosticVerifier.VerifyNoIssueReported(builder.GetCompilation(option), diagnosticAnalyzer, checkMode, sonarProjectConfigPath);
             }
         }
-
-        private static bool IsSupportForCSharp9InitNeeded(IEnumerable<ParseOptions> options) =>
-            options != null && options.OfType<CSharpParseOptions>().Select(option => option.LanguageVersion).Contains(LanguageVersion.CSharp9);
 
         private static IEnumerable<MetadataReference> AddTestReference(IEnumerable<MetadataReference> additionalReferences) =>
             NuGetMetadataReference.MSTestTestFrameworkV1.Concat(additionalReferences ?? Enumerable.Empty<MetadataReference>());

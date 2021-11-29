@@ -11,7 +11,7 @@ namespace StyleCop.Analyzers.Lightup
 {
     public static class INamedTypeSymbolExtensions
     {
-        private const string MainMethodImplicitName = "<Main>$";
+        public const string MainMethodImplicitName = "<Main>$";
 
         private static readonly HashSet<string> ProgramClassImplicitName = new HashSet<string> { "Program", "<Program>$" };
         private static readonly Func<INamedTypeSymbol, INamedTypeSymbol> TupleUnderlyingTypeAccessor;

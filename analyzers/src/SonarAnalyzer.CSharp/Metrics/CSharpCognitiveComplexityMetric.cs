@@ -20,6 +20,7 @@
 
 using System;
 using System.Collections.Immutable;
+using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
@@ -31,9 +32,12 @@ namespace SonarAnalyzer.Metrics.CSharp
 {
     public static class CSharpCognitiveComplexityMetric
     {
-        public static CognitiveComplexity GetComplexity(SyntaxNode node)
+        public static CognitiveComplexity GetComplexity(SyntaxNode node) =>
+            GetComplexity(node, false);
+
+        public static CognitiveComplexity GetComplexity(SyntaxNode node, bool onlyGlobalStatements)
         {
-            var walker = new CognitiveWalker();
+            var walker = new CognitiveWalker(onlyGlobalStatements);
             walker.SafeVisit(node);
 
             return new CognitiveComplexity(walker.State.Complexity, walker.State.IncrementLocations.ToImmutableArray());
@@ -41,8 +45,13 @@ namespace SonarAnalyzer.Metrics.CSharp
 
         private class CognitiveWalker : CSharpSyntaxWalker
         {
+            private readonly bool onlyGlobalStatements;
+
             public CognitiveComplexityWalkerState<MethodDeclarationSyntax> State { get; }
                 = new CognitiveComplexityWalkerState<MethodDeclarationSyntax>();
+
+            public CognitiveWalker(bool onlyGlobalStatements) =>
+                this.onlyGlobalStatements = onlyGlobalStatements;
 
             public override void Visit(SyntaxNode node)
             {
@@ -82,6 +91,19 @@ namespace SonarAnalyzer.Metrics.CSharp
                 else
                 {
                     base.Visit(node);
+                }
+            }
+
+            public override void VisitCompilationUnit(CompilationUnitSyntax node)
+            {
+                foreach (var globalStatement in node.Members.Where(x => x.IsKind(SyntaxKind.GlobalStatement)))
+                {
+                    base.Visit(globalStatement);
+                }
+
+                if (!onlyGlobalStatements)
+                {
+                    base.VisitCompilationUnit(node);
                 }
             }
 
