@@ -111,7 +111,9 @@ namespace SonarAnalyzer.Rules.CSharp
                     }
 
                     var elementType = GetElementType(invocation, methodSymbol, context.SemanticModel);
-                    if (elementType != null && elementType.Equals(castType))
+                    // Generic types {T} and {T?} are equal and there is no way to access NullableAnnotation field right now
+                    // See https://github.com/SonarSource/sonar-dotnet/issues/3273
+                    if (elementType != null && elementType.Equals(castType) && elementType.ToString() == castType.ToString())
                     {
                         var methodCalledAsStatic = methodSymbol.MethodKind == MethodKind.Ordinary;
                         context.ReportIssue(Diagnostic.Create(rule, GetReportLocation(invocation, methodCalledAsStatic),
