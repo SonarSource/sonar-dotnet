@@ -25,7 +25,7 @@ using StyleCop.Analyzers.Lightup;
 
 namespace SonarAnalyzer.Wrappers
 {
-    internal class MethodDeclarationFactory
+    internal static class MethodDeclarationFactory
     {
         public static IMethodDeclaration Create(SyntaxNode node)
         {
@@ -62,6 +62,8 @@ namespace SonarAnalyzer.Wrappers
 
             public ParameterListSyntax ParameterList => syntaxWrapper.ParameterList;
 
+            public TypeParameterListSyntax TypeParameterList => syntaxWrapper.TypeParameterList;
+
             public bool HasImplementation => Body != null || ExpressionBody != null;
 
             public bool IsLocal => true;
@@ -81,6 +83,8 @@ namespace SonarAnalyzer.Wrappers
             public SyntaxToken Identifier => declarationSyntax.Identifier;
 
             public ParameterListSyntax ParameterList => declarationSyntax.ParameterList;
+
+            public TypeParameterListSyntax TypeParameterList => declarationSyntax.TypeParameterList;
 
             public bool HasImplementation => Body != null || ExpressionBody != null;
 

@@ -33,6 +33,8 @@ namespace SonarAnalyzer.Wrappers
 
         ParameterListSyntax ParameterList { get; }
 
+        public TypeParameterListSyntax TypeParameterList { get; }
+
         bool HasImplementation { get; }
 
         bool IsLocal { get; }
