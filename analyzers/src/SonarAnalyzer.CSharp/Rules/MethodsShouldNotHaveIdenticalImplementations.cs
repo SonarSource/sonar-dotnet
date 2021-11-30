@@ -59,11 +59,14 @@ namespace SonarAnalyzer.Rules.CSharp
 
         protected override SyntaxToken GetMethodIdentifier(IMethodDeclaration method) => method.Identifier;
         protected override bool ShouldBeAnalyzed(ISymbol nodeContainingSymbol) =>
-            nodeContainingSymbol.Kind == SymbolKind.NamedType
-            && nodeContainingSymbol is INamespaceSymbol namespaceSymbol
+            nodeContainingSymbol.Kind == SymbolKind.NamedType || CompilationUnitContainsTopLevelStatements(nodeContainingSymbol);
+
+        private bool CompilationUnitContainsTopLevelStatements(ISymbol compilationUnitContainingSymbol) =>
+            compilationUnitContainingSymbol is INamespaceSymbol namespaceSymbol
             && namespaceSymbol.IsGlobalNamespace
             && namespaceSymbol.GetMembers()
                               .OfType<INamedTypeSymbol>()
                               .Any(x => x.IsTopLevelProgram());
+
     }
 }
