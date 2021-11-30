@@ -24,7 +24,7 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
 {
     public class SymbolicExecutionCheck
     {
-        protected SymbolicExecutionCheck() { } // Avoid abstract class
+        protected SymbolicExecutionCheck() { } // Avoid abstract class, fixes S1694
 
         public virtual ProgramState PreProcess(ProgramState state, IOperationWrapperSonar operation) => state;
         public virtual ProgramState PostProcess(ProgramState state, IOperationWrapperSonar operation) => state;
