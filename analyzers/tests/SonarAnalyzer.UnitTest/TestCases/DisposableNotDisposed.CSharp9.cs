@@ -34,7 +34,6 @@ class Foo
     {
         Action<int, int> a = static (int v, int w) => {
             var fs = new FileStream("", FileMode.Open); // Noncompliant
-                                                        // Noncompliant@-1 - duplicate
         };
         Action<int, int> b = (_, _) => {
             var fs = new FileStream("", FileMode.Open);
@@ -42,7 +41,6 @@ class Foo
         };
         Action<int, int> с = static (int v, int w) => {
             FileStream fs = new("", FileMode.Open); // Noncompliant
-                                                    // Noncompliant@-1 - duplicate
         };
         Action<int, int> в = (_, _) => {
             FileStream fs = new("", FileMode.Open);
@@ -56,10 +54,8 @@ record MyRecord
     private FileStream field_fs1; // Compliant - not instantiated
     public FileStream field_fs2 = new FileStream(@"c:\foo.txt", FileMode.Open); // Compliant - public
     private FileStream field_fs3 = new FileStream(@"c:\foo.txt", FileMode.Open); // Noncompliant {{Dispose 'field_fs3' when it is no longer needed.}}
-                                                                                 // Noncompliant@-1 - duplicate
     private FileStream field_fs4 = new FileStream(@"c:\foo.txt", FileMode.Open); // Compliant - disposed
     private FileStream field_fs5 = new(@"c:\foo.txt", FileMode.Open); // Noncompliant {{Dispose 'field_fs5' when it is no longer needed.}}
-                                                                      // Noncompliant@-1 - duplicate
 
     private FileStream backing_field1;
     public FileStream Prop1
@@ -67,7 +63,6 @@ record MyRecord
         init
         {
             backing_field1 = new FileStream("", FileMode.Open); // Noncompliant
-                                                                // Noncompliant@-1 - duplicate
         }
     }
 
@@ -77,7 +72,6 @@ record MyRecord
         init
         {
             backing_field2 = new ("", FileMode.Open); // Noncompliant
-                                                      // Noncompliant@-1 - duplicate
         }
     }
 
@@ -97,10 +91,7 @@ record MyRecord
         }
 
         FileStream fs1 = new(@"c:\foo.txt", FileMode.Open);        // Noncompliant
-                                                                   // Noncompliant@-1 - duplicate
         var fs2 = File.Open(@"c:\foo.txt", FileMode.Open);         // Noncompliant - instantiated with factory method
-                                                                   // Noncompliant@-1 - duplicate
         var s = new WebClient();                                   // Noncompliant - another tracked type
-                                                                   // Noncompliant@-1 - duplicate
     }
 }

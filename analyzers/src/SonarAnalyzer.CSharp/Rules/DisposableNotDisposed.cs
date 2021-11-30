@@ -69,21 +69,31 @@ namespace SonarAnalyzer.Rules.CSharp
             context.RegisterSymbolAction(
                 c =>
                 {
-                    var namedType = (INamedTypeSymbol)c.Symbol;
-                    if (namedType.ContainingType != null || !namedType.IsClassOrStruct())
+                    var namedTypeSymbol = (INamedTypeSymbol)c.Symbol;
+                    if (namedTypeSymbol.ContainingType != null || !namedTypeSymbol.IsClassOrStruct())
                     {
                         return;
                     }
 
-                    var typesDeclarationsAndSemanticModels = namedType.DeclaringSyntaxReferences
-                        .Select(x => new NodeAndSemanticModel<SyntaxNode>(c.Compilation.GetSemanticModel(x.SyntaxTree), x.GetSyntax()))
-                        .ToList();
+                    var typesDeclarationsAndSemanticModels = namedTypeSymbol.DeclaringSyntaxReferences
+                                                                            .Select(x => CreateNodeAndSemanticModelObject(x, c))
+                                                                            .ToList();
+                                                                            .ToList();
 
                     var trackedNodesAndSymbols = new HashSet<NodeAndSymbol>();
                     foreach (var typeDeclarationAndSemanticModel in typesDeclarationsAndSemanticModels)
                     {
-                        TrackInitializedLocalsAndPrivateFields(typeDeclarationAndSemanticModel.Node, typeDeclarationAndSemanticModel.SemanticModel, trackedNodesAndSymbols);
-                        TrackAssignmentsToLocalsAndPrivateFields(typeDeclarationAndSemanticModel.Node, typeDeclarationAndSemanticModel.SemanticModel, trackedNodesAndSymbols);
+                        TrackInitializedLocalsAndPrivateFields(
+                            namedTypeSymbol,
+                            typeDeclarationAndSemanticModel.Node,
+                            typeDeclarationAndSemanticModel.SemanticModel,
+                            trackedNodesAndSymbols);
+
+                        TrackAssignmentsToLocalsAndPrivateFields(
+                            namedTypeSymbol,
+                            typeDeclarationAndSemanticModel.Node,
+                            typeDeclarationAndSemanticModel.SemanticModel,
+                            trackedNodesAndSymbols);
                     }
 
                     if (trackedNodesAndSymbols.Any())
@@ -91,8 +101,14 @@ namespace SonarAnalyzer.Rules.CSharp
                         var excludedSymbols = new HashSet<ISymbol>();
                         foreach (var typeDeclarationAndSemanticModel in typesDeclarationsAndSemanticModels)
                         {
-                            ExcludeDisposedAndClosedLocalsAndPrivateFields(typeDeclarationAndSemanticModel.Node, typeDeclarationAndSemanticModel.SemanticModel, excludedSymbols);
-                            ExcludeReturnedPassedAndAliasedLocalsAndPrivateFields(typeDeclarationAndSemanticModel.Node, typeDeclarationAndSemanticModel.SemanticModel, excludedSymbols);
+                            ExcludeDisposedAndClosedLocalsAndPrivateFields(
+                                typeDeclarationAndSemanticModel.Node,
+                                typeDeclarationAndSemanticModel.SemanticModel,
+                                excludedSymbols);
+                            ExcludeReturnedPassedAndAliasedLocalsAndPrivateFields(
+                                typeDeclarationAndSemanticModel.Node,
+                                typeDeclarationAndSemanticModel.SemanticModel,
+                                excludedSymbols);
                         }
 
                         foreach (var trackedNodeAndSymbol in trackedNodesAndSymbols.Where(x => !excludedSymbols.Contains(x.Symbol)))
@@ -103,19 +119,22 @@ namespace SonarAnalyzer.Rules.CSharp
                 },
                 SymbolKind.NamedType);
 
-        private static void TrackInitializedLocalsAndPrivateFields(SyntaxNode typeDeclaration, SemanticModel semanticModel, ISet<NodeAndSymbol> trackedNodesAndSymbols)
-        {
-            var localVariableDeclarations = typeDeclaration
-                .DescendantNodes()
-                .OfType<LocalDeclarationStatementSyntax>()
-                .Where(x => !x.UsingKeyword().IsKind(SyntaxKind.UsingKeyword))
-                .Select(x => x.Declaration);
+        private NodeAndSemanticModel<SyntaxNode> CreateNodeAndSemanticModelObject(SyntaxReference syntaxReference, SymbolAnalysisContext c) =>
+            new (c.Compilation.GetSemanticModel(syntaxReference.SyntaxTree), syntaxReference.GetSyntax());
 
-            var fieldVariableDeclarations = typeDeclaration
-                .DescendantNodes()
-                .OfType<FieldDeclarationSyntax>()
-                .Where(x => !x.Modifiers.Any() || x.Modifiers.Any(SyntaxKind.PrivateKeyword))
-                .Select(x => x.Declaration);
+        private static void TrackInitializedLocalsAndPrivateFields(INamedTypeSymbol namedType,
+                                                                   SyntaxNode typeDeclaration,
+                                                                   SemanticModel semanticModel,
+                                                                   ISet<NodeAndSymbol> trackedNodesAndSymbols)
+        {
+            var descendantNodes = NamedTypeDescedantNodes(namedType, typeDeclaration);
+            var localVariableDeclarations = descendantNodes.OfType<LocalDeclarationStatementSyntax>()
+                                                           .Where(x => !x.UsingKeyword().IsKind(SyntaxKind.UsingKeyword))
+                                                           .Select(x => x.Declaration);
+
+            var fieldVariableDeclarations = descendantNodes.OfType<FieldDeclarationSyntax>()
+                                                           .Where(x => !x.Modifiers.Any() || x.Modifiers.Any(SyntaxKind.PrivateKeyword))
+                                                           .Select(x => x.Declaration);
 
             foreach (var declaration in localVariableDeclarations.Concat(fieldVariableDeclarations))
             {
@@ -127,10 +146,12 @@ namespace SonarAnalyzer.Rules.CSharp
             }
         }
 
-        private static void TrackAssignmentsToLocalsAndPrivateFields(SyntaxNode typeDeclaration, SemanticModel semanticModel, ISet<NodeAndSymbol> trackedNodesAndSymbols)
+        private static void TrackAssignmentsToLocalsAndPrivateFields(INamedTypeSymbol namedType,
+                                                                     SyntaxNode typeDeclaration,
+                                                                     SemanticModel semanticModel,
+                                                                     ISet<NodeAndSymbol> trackedNodesAndSymbols)
         {
-            var simpleAssignments = typeDeclaration
-                .DescendantNodes()
+            var simpleAssignments = NamedTypeDescedantNodes(namedType, typeDeclaration)
                 .Where(n => n.IsKind(SyntaxKind.SimpleAssignmentExpression))
                 .Cast<AssignmentExpressionSyntax>();
 
@@ -145,6 +166,11 @@ namespace SonarAnalyzer.Rules.CSharp
                 }
             }
         }
+
+        private static IEnumerable<SyntaxNode> NamedTypeDescedantNodes(INamedTypeSymbol namedType, SyntaxNode typeDeclaration) =>
+            namedType.IsTopLevelProgram()
+                ? typeDeclaration.ChildNodes().OfType<GlobalStatementSyntax>().Select(x => x.ChildNodes().First())
+                : typeDeclaration.DescendantNodes();
 
         private static bool IsLocalOrPrivateField(ISymbol symbol) =>
             symbol.Kind == SymbolKind.Local
