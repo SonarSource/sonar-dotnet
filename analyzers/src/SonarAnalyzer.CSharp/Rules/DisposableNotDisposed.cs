@@ -78,7 +78,6 @@ namespace SonarAnalyzer.Rules.CSharp
                     var typesDeclarationsAndSemanticModels = namedTypeSymbol.DeclaringSyntaxReferences
                                                                             .Select(x => CreateNodeAndSemanticModelObject(x, c))
                                                                             .ToList();
-                                                                            .ToList();
 
                     var trackedNodesAndSymbols = new HashSet<NodeAndSymbol>();
                     foreach (var typeDeclarationAndSemanticModel in typesDeclarationsAndSemanticModels)
