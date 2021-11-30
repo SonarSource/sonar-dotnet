@@ -67,7 +67,7 @@ namespace SonarAnalyzer.UnitTest.MetadataReferences
 
         internal static References NETStandard21 =>
 #if NETFRAMEWORK
-            NuGetMetadataReference.NETStandard21;
+            NuGetMetadataFactory.Create("NETStandard.Library.Ref", "2.1.0", "netstandard2.1");
 #else
             Enumerable.Empty<MetadataReference>();
 #endif
