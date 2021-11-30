@@ -38,7 +38,7 @@ namespace SonarAnalyzer.Rules
         protected abstract IEnumerable<TMethodDeclarationSyntax> GetMethodDeclarations(SyntaxNode node);
         protected abstract SyntaxToken GetMethodIdentifier(TMethodDeclarationSyntax method);
         protected abstract bool AreDuplicates(TMethodDeclarationSyntax firstMethod, TMethodDeclarationSyntax secondMethod);
-        protected abstract bool IsExcludedFromBeingExamined(ISymbol nodeContainingSymbol);
+        protected virtual bool ShouldBeAnalyzed(ISymbol nodeContainingSymbol) => nodeContainingSymbol.Kind == SymbolKind.NamedType;
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
 
         protected MethodsShouldNotHaveIdenticalImplementationsBase() =>
@@ -48,7 +48,7 @@ namespace SonarAnalyzer.Rules
             context.RegisterSyntaxNodeActionInNonGenerated(Language.GeneratedCodeRecognizer,
                 c =>
                 {
-                    if (IsExcludedFromBeingExamined(c.ContainingSymbol))
+                    if (!ShouldBeAnalyzed(c.ContainingSymbol))
                     {
                         return;
                     }
