@@ -37,7 +37,7 @@ namespace SonarAnalyzer.Extensions
                            .TakeWhile(x => x.IsKind(SyntaxKind.GlobalStatement));
 
         public static IEnumerable<IMethodDeclaration> GetMethodDeclarations(this CompilationUnitSyntax compilationUnitSyntax) =>
-            compilationUnitSyntax.Members.OfType<GlobalStatementSyntax>()
+            compilationUnitSyntax.GetTopLevelMainBody()
                                  .Select(x => x.ChildNodes().FirstOrDefault(y => y.IsKind(SyntaxKindEx.LocalFunctionStatement)))
                                  .Where(x => x != null)
                                  .Select(x => MethodDeclarationFactory.Create(x));
