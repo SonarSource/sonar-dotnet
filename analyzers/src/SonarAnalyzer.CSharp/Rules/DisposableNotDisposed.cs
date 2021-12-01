@@ -150,9 +150,8 @@ namespace SonarAnalyzer.Rules.CSharp
                                                                      SemanticModel semanticModel,
                                                                      ISet<NodeAndSymbol> trackedNodesAndSymbols)
         {
-            var simpleAssignments = GetDescendantNodes(namedType, typeDeclaration)
-                .Where(n => n.IsKind(SyntaxKind.SimpleAssignmentExpression))
-                .Cast<AssignmentExpressionSyntax>();
+            var simpleAssignments = GetDescendantNodes(namedType, typeDeclaration).Where(n => n.IsKind(SyntaxKind.SimpleAssignmentExpression))
+                                                                                  .Cast<AssignmentExpressionSyntax>();
 
             foreach (var simpleAssignment in simpleAssignments)
             {
