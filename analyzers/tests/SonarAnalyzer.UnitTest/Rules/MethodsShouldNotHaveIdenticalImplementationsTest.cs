@@ -30,16 +30,23 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         public void MethodsShouldNotHaveIdenticalImplementations() =>
-            Verifier.VerifyAnalyzer(@"TestCases\MethodsShouldNotHaveIdenticalImplementations.cs", new CS.MethodsShouldNotHaveIdenticalImplementations(), ParseOptionsHelper.FromCSharp8);
+            Verifier.VerifyAnalyzer(
+                @"TestCases\MethodsShouldNotHaveIdenticalImplementations.cs",
+                new CS.MethodsShouldNotHaveIdenticalImplementations(),
+                ParseOptionsHelper.FromCSharp8);
 
 #if NET
         [TestMethod]
         public void MethodsShouldNotHaveIdenticalImplementations_CSharp9() =>
-            Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\MethodsShouldNotHaveIdenticalImplementations.CSharp9.cs", new CS.MethodsShouldNotHaveIdenticalImplementations());
+            Verifier.VerifyAnalyzerFromCSharp9Console(
+                @"TestCases\MethodsShouldNotHaveIdenticalImplementations.CSharp9.cs",
+                new CS.MethodsShouldNotHaveIdenticalImplementations());
 
         [TestMethod]
         public void MethodsShouldNotHaveIdenticalImplementations_CSharp10() =>
-            Verifier.VerifyAnalyzerFromCSharp10Library(@"TestCases\MethodsShouldNotHaveIdenticalImplementations.CSharp10.cs", new CS.MethodsShouldNotHaveIdenticalImplementations());
+            Verifier.VerifyAnalyzerFromCSharp10Library(
+                @"TestCases\MethodsShouldNotHaveIdenticalImplementations.CSharp10.cs",
+                new CS.MethodsShouldNotHaveIdenticalImplementations());
 #endif
 
         [TestMethod]

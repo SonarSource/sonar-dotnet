@@ -19,6 +19,7 @@
  */
 
 using System.Collections.Generic;
+using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
@@ -27,6 +28,7 @@ using SonarAnalyzer.Common;
 using SonarAnalyzer.Extensions;
 using SonarAnalyzer.Helpers;
 using SonarAnalyzer.Wrappers;
+using StyleCop.Analyzers.Lightup;
 
 namespace SonarAnalyzer.Rules.CSharp
 {
@@ -36,8 +38,17 @@ namespace SonarAnalyzer.Rules.CSharp
     {
         protected override ILanguageFacade<SyntaxKind> Language => CSharpFacade.Instance;
 
+        protected override SyntaxKind[] SyntaxKinds => new[]
+        {
+            SyntaxKind.ClassDeclaration,
+            SyntaxKindEx.RecordClassDeclaration,
+            SyntaxKind.CompilationUnit
+        };
+
         protected override IEnumerable<IMethodDeclaration> GetMethodDeclarations(SyntaxNode node) =>
-            ((TypeDeclarationSyntax)node).GetMethodDeclarations();
+            node.IsKind(SyntaxKind.CompilationUnit)
+            ? ((CompilationUnitSyntax)node).GetMethodDeclarations()
+            : ((TypeDeclarationSyntax)node).GetMethodDeclarations();
 
         protected override bool AreDuplicates(IMethodDeclaration firstMethod, IMethodDeclaration secondMethod) =>
             firstMethod.Body != null
@@ -47,5 +58,7 @@ namespace SonarAnalyzer.Rules.CSharp
             && firstMethod.Body.IsEquivalentTo(secondMethod.Body, false);
 
         protected override SyntaxToken GetMethodIdentifier(IMethodDeclaration method) => method.Identifier;
+        protected override bool IsExcludedFromBeingExamined(ISymbol nodeContainingSymbol) =>
+            base.IsExcludedFromBeingExamined(nodeContainingSymbol) && !nodeContainingSymbol.IsTopLevelMain();
     }
 }

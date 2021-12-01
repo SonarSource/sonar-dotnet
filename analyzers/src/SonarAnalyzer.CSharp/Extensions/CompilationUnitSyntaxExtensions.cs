@@ -24,6 +24,8 @@ using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using SonarAnalyzer.Helpers;
+using SonarAnalyzer.Wrappers;
+using StyleCop.Analyzers.Lightup;
 
 namespace SonarAnalyzer.Extensions
 {
@@ -33,5 +35,11 @@ namespace SonarAnalyzer.Extensions
             compilationUnit.ChildNodes()
                            .SkipWhile(x => x.IsAnyKind(SyntaxKind.UsingDirective, SyntaxKind.NamespaceDeclaration))
                            .TakeWhile(x => x.IsKind(SyntaxKind.GlobalStatement));
+
+        public static IEnumerable<IMethodDeclaration> GetMethodDeclarations(this CompilationUnitSyntax compilationUnitSyntax) =>
+            compilationUnitSyntax.GetTopLevelMainBody()
+                                 .Select(x => x.ChildNodes().FirstOrDefault(y => y.IsKind(SyntaxKindEx.LocalFunctionStatement)))
+                                 .Where(x => x != null)
+                                 .Select(x => MethodDeclarationFactory.Create(x));
     }
 }

@@ -26,21 +26,22 @@ using SonarAnalyzer.Helpers;
 
 namespace SonarAnalyzer.Rules
 {
-    public abstract class MethodsShouldNotHaveIdenticalImplementationsBase<TMethodDeclarationSyntax, TLanguageKindEnum>
-        : SonarDiagnosticAnalyzer
+    public abstract class MethodsShouldNotHaveIdenticalImplementationsBase<TMethodDeclarationSyntax, TLanguageKindEnum> : SonarDiagnosticAnalyzer
         where TLanguageKindEnum : struct
     {
         protected const string DiagnosticId = "S4144";
         private const string MessageFormat = "Update this method so that its implementation is not identical to '{0}'.";
 
         private readonly DiagnosticDescriptor rule;
-
         protected abstract ILanguageFacade<TLanguageKindEnum> Language { get; }
+        protected abstract TLanguageKindEnum[] SyntaxKinds { get; }
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
+
         protected abstract IEnumerable<TMethodDeclarationSyntax> GetMethodDeclarations(SyntaxNode node);
         protected abstract SyntaxToken GetMethodIdentifier(TMethodDeclarationSyntax method);
         protected abstract bool AreDuplicates(TMethodDeclarationSyntax firstMethod, TMethodDeclarationSyntax secondMethod);
-
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
+        protected virtual bool IsExcludedFromBeingExamined(ISymbol nodeContainingSymbol) =>
+            nodeContainingSymbol.Kind != SymbolKind.NamedType;
 
         protected MethodsShouldNotHaveIdenticalImplementationsBase() =>
             rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, Language.RspecResources);
@@ -49,7 +50,7 @@ namespace SonarAnalyzer.Rules
             context.RegisterSyntaxNodeActionInNonGenerated(Language.GeneratedCodeRecognizer,
                 c =>
                 {
-                    if (c.ContainingSymbol.Kind != SymbolKind.NamedType)
+                    if (IsExcludedFromBeingExamined(c.ContainingSymbol))
                     {
                         return;
                     }
@@ -80,7 +81,8 @@ namespace SonarAnalyzer.Rules
                                 messageArgs: GetMethodIdentifier(method).ValueText));
                         }
                     }
-                }, Language.SyntaxKind.ClassAndRecordDeclaration);
+                },
+                SyntaxKinds);
 
         protected static bool HaveSameParameters<TSyntax>(SeparatedSyntaxList<TSyntax>? leftParameters, SeparatedSyntaxList<TSyntax>? rightParameters)
             where TSyntax : SyntaxNode

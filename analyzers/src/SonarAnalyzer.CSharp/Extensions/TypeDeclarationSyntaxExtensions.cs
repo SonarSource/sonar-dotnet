@@ -33,14 +33,13 @@ namespace SonarAnalyzer.Extensions
         /// Returns a union of all the methods and local functions from a given type declaration.
         /// </summary>
         public static IEnumerable<IMethodDeclaration> GetMethodDeclarations(this TypeDeclarationSyntax typeDeclaration) =>
-            typeDeclaration
-                .Members
-                .OfType<MethodDeclarationSyntax>()
-                .SelectMany(method => GetLocalFunctions(method).Union(new List<IMethodDeclaration> { MethodDeclarationFactory.Create(method) }));
+            typeDeclaration.Members
+                           .OfType<MethodDeclarationSyntax>()
+                           .SelectMany(method => GetLocalFunctions(method).Union(new List<IMethodDeclaration> { MethodDeclarationFactory.Create(method) }));
 
-        private static IEnumerable<IMethodDeclaration> GetLocalFunctions(MethodDeclarationSyntax methodDeclaration)
-            => methodDeclaration.DescendantNodes()
-                .Where(member => member.IsKind(SyntaxKindEx.LocalFunctionStatement))
-                .Select(member => MethodDeclarationFactory.Create(member));
+        private static IEnumerable<IMethodDeclaration> GetLocalFunctions(MethodDeclarationSyntax methodDeclaration) =>
+            methodDeclaration.DescendantNodes()
+                             .Where(member => member.IsKind(SyntaxKindEx.LocalFunctionStatement))
+                             .Select(member => MethodDeclarationFactory.Create(member));
     }
 }
