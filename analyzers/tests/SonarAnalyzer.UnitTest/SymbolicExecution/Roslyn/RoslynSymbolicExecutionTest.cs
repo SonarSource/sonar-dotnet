@@ -116,6 +116,5 @@ namespace SonarAnalyzer.UnitTest.SymbolicExecution.Roslyn
                 "LocalReference: b",
                 "LocalReference: b");
         }
-
     }
 }
