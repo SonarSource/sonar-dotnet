@@ -65,7 +65,7 @@ namespace SonarAnalyzer.Rules
         protected virtual bool IsNamedTypeOrTopLevelMain(SyntaxNodeAnalysisContext context) =>
             IsNamedType(context);
 
-        protected bool IsNamedType(SyntaxNodeAnalysisContext context) =>
+        protected static bool IsNamedType(SyntaxNodeAnalysisContext context) =>
             context.ContainingSymbol.Kind == SymbolKind.NamedType;
 
         private void ReportOnViolation(SyntaxNodeAnalysisContext context)

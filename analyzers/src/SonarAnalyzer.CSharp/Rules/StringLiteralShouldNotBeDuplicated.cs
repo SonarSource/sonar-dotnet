@@ -75,7 +75,7 @@ namespace SonarAnalyzer.Rules.CSharp
         protected override bool IsNamedTypeOrTopLevelMain(SyntaxNodeAnalysisContext context) =>
             IsNamedType(context) || IsTopLevelMain(context);
 
-        private bool IsTopLevelMain(SyntaxNodeAnalysisContext context) =>
+        private static bool IsTopLevelMain(SyntaxNodeAnalysisContext context) =>
             context.ContainingSymbol.IsTopLevelMain();
     }
 }
