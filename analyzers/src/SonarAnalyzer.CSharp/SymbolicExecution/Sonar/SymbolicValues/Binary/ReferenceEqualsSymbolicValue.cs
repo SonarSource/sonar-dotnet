@@ -18,9 +18,9 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using SonarAnalyzer.SymbolicExecution.Relationships;
+using SonarAnalyzer.SymbolicExecution.Sonar.Relationships;
 
-namespace SonarAnalyzer.SymbolicExecution.SymbolicValues
+namespace SonarAnalyzer.SymbolicExecution.Sonar.SymbolicValues
 {
     public class ReferenceEqualsSymbolicValue : EqualsSymbolicValue
     {

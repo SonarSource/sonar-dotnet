@@ -21,7 +21,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace SonarAnalyzer.SymbolicExecution.Relationships
+namespace SonarAnalyzer.SymbolicExecution.Sonar.Relationships
 {
     public abstract class BinaryRelationship : IEquatable<BinaryRelationship>
     {

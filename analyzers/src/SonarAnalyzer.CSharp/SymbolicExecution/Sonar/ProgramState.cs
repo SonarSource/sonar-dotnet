@@ -24,11 +24,11 @@ using System.Collections.Immutable;
 using System.Linq;
 using Microsoft.CodeAnalysis;
 using SonarAnalyzer.Helpers;
-using SonarAnalyzer.SymbolicExecution.Constraints;
-using SonarAnalyzer.SymbolicExecution.Relationships;
-using SonarAnalyzer.SymbolicExecution.SymbolicValues;
+using SonarAnalyzer.SymbolicExecution.Sonar.Constraints;
+using SonarAnalyzer.SymbolicExecution.Sonar.Relationships;
+using SonarAnalyzer.SymbolicExecution.Sonar.SymbolicValues;
 
-namespace SonarAnalyzer.SymbolicExecution
+namespace SonarAnalyzer.SymbolicExecution.Sonar
 {
     public sealed class ProgramState : IEquatable<ProgramState>
     {

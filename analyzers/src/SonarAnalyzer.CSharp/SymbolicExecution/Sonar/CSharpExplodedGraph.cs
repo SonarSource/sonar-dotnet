@@ -28,11 +28,11 @@ using SonarAnalyzer.CFG.Sonar;
 using SonarAnalyzer.Helpers;
 using SonarAnalyzer.LiveVariableAnalysis.CSharp;
 using SonarAnalyzer.Rules.CSharp;
-using SonarAnalyzer.SymbolicExecution.Constraints;
-using SonarAnalyzer.SymbolicExecution.SymbolicValues;
+using SonarAnalyzer.SymbolicExecution.Sonar.Constraints;
+using SonarAnalyzer.SymbolicExecution.Sonar.SymbolicValues;
 using StyleCop.Analyzers.Lightup;
 
-namespace SonarAnalyzer.SymbolicExecution
+namespace SonarAnalyzer.SymbolicExecution.Sonar
 {
     internal class CSharpExplodedGraph : AbstractExplodedGraph
     {

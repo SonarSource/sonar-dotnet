@@ -20,11 +20,10 @@
 
 using System.Collections.Generic;
 using System.Linq;
-using SonarAnalyzer.Helpers;
-using SonarAnalyzer.SymbolicExecution.Constraints;
-using SonarAnalyzer.SymbolicExecution.Relationships;
+using SonarAnalyzer.SymbolicExecution.Sonar.Constraints;
+using SonarAnalyzer.SymbolicExecution.Sonar.Relationships;
 
-namespace SonarAnalyzer.SymbolicExecution.SymbolicValues
+namespace SonarAnalyzer.SymbolicExecution.Sonar.SymbolicValues
 {
     public class ComparisonSymbolicValue : BoolBinarySymbolicValue
     {

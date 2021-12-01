@@ -20,10 +20,10 @@
 
 using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using SonarAnalyzer.SymbolicExecution;
-using SonarAnalyzer.SymbolicExecution.SymbolicValues;
+using SonarAnalyzer.SymbolicExecution.Sonar;
+using SonarAnalyzer.SymbolicExecution.Sonar.SymbolicValues;
 
-namespace SonarAnalyzer.UnitTest.SymbolicExecution.SymbolicValues
+namespace SonarAnalyzer.UnitTest.SymbolicExecution.Sonar.SymbolicValues
 {
     [TestClass]
     public class MemberAccessSymbolicValueTest

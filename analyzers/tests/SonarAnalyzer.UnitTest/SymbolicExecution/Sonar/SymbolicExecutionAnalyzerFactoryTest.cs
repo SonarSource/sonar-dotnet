@@ -30,7 +30,7 @@ using SonarAnalyzer.Rules;
 using SonarAnalyzer.Rules.CSharp;
 using SonarAnalyzer.Rules.SymbolicExecution;
 
-namespace SonarAnalyzer.UnitTest.Rules.SymbolicExecution
+namespace SonarAnalyzer.UnitTest.Rules.SymbolicExecution.Sonar
 {
     [TestClass]
     public class SymbolicExecutionAnalyzerFactoryTest

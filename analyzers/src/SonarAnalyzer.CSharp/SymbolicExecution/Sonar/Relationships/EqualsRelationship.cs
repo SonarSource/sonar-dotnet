@@ -20,7 +20,7 @@
 
 using System;
 
-namespace SonarAnalyzer.SymbolicExecution.Relationships
+namespace SonarAnalyzer.SymbolicExecution.Sonar.Relationships
 {
     public abstract class EqualsRelationship : BinaryRelationship, IEquatable<EqualsRelationship>
     {

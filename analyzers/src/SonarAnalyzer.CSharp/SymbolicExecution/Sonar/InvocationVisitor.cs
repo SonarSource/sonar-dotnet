@@ -23,10 +23,10 @@ using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using SonarAnalyzer.Helpers;
-using SonarAnalyzer.SymbolicExecution.Constraints;
-using SonarAnalyzer.SymbolicExecution.SymbolicValues;
+using SonarAnalyzer.SymbolicExecution.Sonar.Constraints;
+using SonarAnalyzer.SymbolicExecution.Sonar.SymbolicValues;
 
-namespace SonarAnalyzer.SymbolicExecution
+namespace SonarAnalyzer.SymbolicExecution.Sonar
 {
     internal class InvocationVisitor
     {
@@ -203,9 +203,9 @@ namespace SonarAnalyzer.SymbolicExecution
 
         private static bool IsStringNullOrWhiteSpaceCheckMethod(IMethodSymbol methodSymbol) =>
             IsStringStaticMethod(methodSymbol, nameof(string.IsNullOrWhiteSpace));
-        
 
-     
+
+
         private static bool IsStringNullOrEmptyCheckMethod(IMethodSymbol methodSymbol) =>
             IsStringStaticMethod(methodSymbol, nameof(string.IsNullOrEmpty));
 
