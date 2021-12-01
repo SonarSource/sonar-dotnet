@@ -311,7 +311,7 @@ stages:
 
       - powershell: .\scripts\whitesource\WhiteSource-Scan.ps1
         displayName: "WhiteSource scan"
-        condition: eq(variables['Build.SourceBranch'], 'refs/heads/master')
+        condition: or(eq(variables['Build.SourceBranch'], 'refs/heads/master'), startsWith(variables['Build.SourceBranch'], 'refs/heads/branch-'))
         env:
           WS_PRODUCTNAME: '$(WHITESOURCE_PRODUCTNAME)'
           WS_APIKEY: '$(WHITESOURCE_APIKEY)'
