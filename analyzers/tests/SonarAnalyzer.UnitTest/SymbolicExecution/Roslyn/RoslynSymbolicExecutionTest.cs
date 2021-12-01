@@ -116,5 +116,16 @@ namespace SonarAnalyzer.UnitTest.SymbolicExecution.Roslyn
                 "LocalReference: b",
                 "LocalReference: b");
         }
+
+        [TestMethod]
+        public void PostProcess_OperationHasValue()
+        {
+            var collector = SETestContext.CreateCS("var a = true;").Collector;
+            collector.PostProcessed.Should().HaveCount(3);
+            foreach (var (state, operation) in collector.PostProcessed)
+            {
+                state[operation].Should().NotBeNull();
+            }
+        }
     }
 }

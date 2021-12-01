@@ -30,16 +30,16 @@ namespace SonarAnalyzer.UnitTest.TestFramework.SymbolicExecution
 {
     internal class CollectorTestCheck : SymbolicExecutionCheck
     {
-        private readonly List<IOperationWrapperSonar> postProcessedOperations = new();
+        public readonly List<(ProgramState State, IOperationWrapperSonar Operation)> PostProcessed = new();
 
         public override ProgramState PostProcess(ProgramState state, IOperationWrapperSonar operation)
         {
-            postProcessedOperations.Add(operation);
+            PostProcessed.Add((state, operation));
             return state;
         }
 
         public void ValidateOrder(params string[] expected) =>
-            postProcessedOperations.Select(TestHelper.Serialize).Should().OnlyContainInOrder(expected);
+            PostProcessed.Select(x => TestHelper.Serialize(x.Operation)).Should().OnlyContainInOrder(expected);
     }
 
     internal class PreProcessTestCheck : SymbolicExecutionCheck
