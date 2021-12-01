@@ -62,10 +62,15 @@ namespace SonarAnalyzer.UnitTest
         }
 
         public static ControlFlowGraph CompileCfgBodyCS(string body = null) =>
-            TestHelper.CompileCfg($"public class Sample {{ public void Main() {{ {body} }} }}");
+            CompileCfg($"public class Sample {{ public void Main() {{ {body} }} }}");
 
         public static ControlFlowGraph CompileCfgBodyVB(string body = null) =>
-            TestHelper.CompileCfg($"Public Class Sample : Public Sub Main() :  {body}  : End Sub : End Class", false);
+            CompileCfg(
+$@"Public Class Sample
+    Public Sub Main()
+        {body}
+    End Sub
+End Class", false);
 
         public static ControlFlowGraph CompileCfg(string snippet, bool isCSharp = true, bool ignoreErrors = false)
         {
