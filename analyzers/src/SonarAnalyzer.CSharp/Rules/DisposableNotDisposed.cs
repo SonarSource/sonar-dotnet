@@ -126,7 +126,7 @@ namespace SonarAnalyzer.Rules.CSharp
                                                                    SemanticModel semanticModel,
                                                                    ISet<NodeAndSymbol> trackedNodesAndSymbols)
         {
-            var descendantNodes = NamedTypeDescedantNodes(namedType, typeDeclaration);
+            var descendantNodes = GetDescendantNodes(namedType, typeDeclaration).ToList();
             var localVariableDeclarations = descendantNodes.OfType<LocalDeclarationStatementSyntax>()
                                                            .Where(x => !x.UsingKeyword().IsKind(SyntaxKind.UsingKeyword))
                                                            .Select(x => x.Declaration);
@@ -150,7 +150,7 @@ namespace SonarAnalyzer.Rules.CSharp
                                                                      SemanticModel semanticModel,
                                                                      ISet<NodeAndSymbol> trackedNodesAndSymbols)
         {
-            var simpleAssignments = NamedTypeDescedantNodes(namedType, typeDeclaration)
+            var simpleAssignments = GetDescendantNodes(namedType, typeDeclaration)
                 .Where(n => n.IsKind(SyntaxKind.SimpleAssignmentExpression))
                 .Cast<AssignmentExpressionSyntax>();
 
@@ -166,7 +166,7 @@ namespace SonarAnalyzer.Rules.CSharp
             }
         }
 
-        private static IEnumerable<SyntaxNode> NamedTypeDescedantNodes(INamedTypeSymbol namedType, SyntaxNode typeDeclaration) =>
+        private static IEnumerable<SyntaxNode> GetDescendantNodes(INamedTypeSymbol namedType, SyntaxNode typeDeclaration) =>
             namedType.IsTopLevelProgram()
                 ? typeDeclaration.ChildNodes().OfType<GlobalStatementSyntax>().Select(x => x.ChildNodes().First())
                 : typeDeclaration.DescendantNodes();
