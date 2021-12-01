@@ -28,7 +28,7 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
 {
     public sealed class ExplodedNode
     {
-        private readonly IOperationWrapperSonar[] operations;      // ToDo: Validate performance and memory, compare with other options, 0) { }
+        private readonly IOperationWrapperSonar[] operations;   // Same memory footprint as ImmutableArray, regular array is marginally faster
         private readonly int index;
 
         public ProgramState State { get; }
