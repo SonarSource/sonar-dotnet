@@ -118,7 +118,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 },
                 SymbolKind.NamedType);
 
-        private NodeAndSemanticModel<SyntaxNode> CreateNodeAndSemanticModelObject(SyntaxReference syntaxReference, SymbolAnalysisContext c) =>
+        private static NodeAndSemanticModel<SyntaxNode> CreateNodeAndSemanticModelObject(SyntaxReference syntaxReference, SymbolAnalysisContext c) =>
             new (c.Compilation.GetSemanticModel(syntaxReference.SyntaxTree), syntaxReference.GetSyntax());
 
         private static void TrackInitializedLocalsAndPrivateFields(INamedTypeSymbol namedType,
