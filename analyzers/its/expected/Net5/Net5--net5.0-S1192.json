@@ -2,6 +2,48 @@
 "issues":  [
 {
 "id":  "S1192",
+"message":  "Define a constant instead of using this literal 'foobar' 4 times.",
+"location":  [
+{
+"uri":  "sources\Net5\Net5\Main.cs",
+"region":  {
+"startLine":  81,
+"startColumn":  13,
+"endLine":  81,
+"endColumn":  21
+}
+},
+{
+"uri":  "sources\Net5\Net5\Main.cs",
+"region":  {
+"startLine":  82,
+"startColumn":  13,
+"endLine":  82,
+"endColumn":  21
+}
+},
+{
+"uri":  "sources\Net5\Net5\Main.cs",
+"region":  {
+"startLine":  83,
+"startColumn":  13,
+"endLine":  83,
+"endColumn":  21
+}
+},
+{
+"uri":  "sources\Net5\Net5\Main.cs",
+"region":  {
+"startLine":  84,
+"startColumn":  13,
+"endLine":  84,
+"endColumn":  21
+}
+}
+]
+},
+{
+"id":  "S1192",
 "message":  "Define a constant instead of using this literal 'Server=myServerAddress;Database=myDataBase;User Id=myUsername;Password=' 5 times.",
 "location":  [
 {

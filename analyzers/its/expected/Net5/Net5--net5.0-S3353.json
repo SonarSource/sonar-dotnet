@@ -2,6 +2,136 @@
 "issues":  [
 {
 "id":  "S3353",
+"message":  "Add the 'const' modifier to 'a'.",
+"location":  {
+"uri":  "sources\Net5\Net5\Main.cs",
+"region":  {
+"startLine":  27,
+"startColumn":  5,
+"endLine":  27,
+"endColumn":  6
+}
+}
+},
+{
+"id":  "S3353",
+"message":  "Add the 'const' modifier to 'b'.",
+"location":  {
+"uri":  "sources\Net5\Net5\Main.cs",
+"region":  {
+"startLine":  27,
+"startColumn":  12,
+"endLine":  27,
+"endColumn":  13
+}
+}
+},
+{
+"id":  "S3353",
+"message":  "Add the 'const' modifier to 'one'.",
+"location":  {
+"uri":  "sources\Net5\Net5\Main.cs",
+"region":  {
+"startLine":  57,
+"startColumn":  5,
+"endLine":  57,
+"endColumn":  8
+}
+}
+},
+{
+"id":  "S3353",
+"message":  "Add the 'const' modifier to 'two'.",
+"location":  {
+"uri":  "sources\Net5\Net5\Main.cs",
+"region":  {
+"startLine":  57,
+"startColumn":  14,
+"endLine":  57,
+"endColumn":  17
+}
+}
+},
+{
+"id":  "S3353",
+"message":  "Add the 'const' modifier to 'l1'.",
+"location":  {
+"uri":  "sources\Net5\Net5\Main.cs",
+"region":  {
+"startLine":  81,
+"startColumn":  8,
+"endLine":  81,
+"endColumn":  10
+}
+}
+},
+{
+"id":  "S3353",
+"message":  "Add the 'const' modifier to 'l2'.",
+"location":  {
+"uri":  "sources\Net5\Net5\Main.cs",
+"region":  {
+"startLine":  82,
+"startColumn":  8,
+"endLine":  82,
+"endColumn":  10
+}
+}
+},
+{
+"id":  "S3353",
+"message":  "Add the 'const' modifier to 'l3'.",
+"location":  {
+"uri":  "sources\Net5\Net5\Main.cs",
+"region":  {
+"startLine":  83,
+"startColumn":  8,
+"endLine":  83,
+"endColumn":  10
+}
+}
+},
+{
+"id":  "S3353",
+"message":  "Add the 'const' modifier to 'l4'.",
+"location":  {
+"uri":  "sources\Net5\Net5\Main.cs",
+"region":  {
+"startLine":  84,
+"startColumn":  8,
+"endLine":  84,
+"endColumn":  10
+}
+}
+},
+{
+"id":  "S3353",
+"message":  "Add the 'const' modifier to 's'.",
+"location":  {
+"uri":  "sources\Net5\Net5\Main.cs",
+"region":  {
+"startLine":  116,
+"startColumn":  12,
+"endLine":  116,
+"endColumn":  13
+}
+}
+},
+{
+"id":  "S3353",
+"message":  "Add the 'const' modifier to 's'.",
+"location":  {
+"uri":  "sources\Net5\Net5\Main.cs",
+"region":  {
+"startLine":  121,
+"startColumn":  12,
+"endLine":  121,
+"endColumn":  13
+}
+}
+},
+{
+"id":  "S3353",
 "message":  "Add the 'const' modifier to 'i'.",
 "location":  {
 "uri":  "sources\Net5\Net5\NativeInts.cs",

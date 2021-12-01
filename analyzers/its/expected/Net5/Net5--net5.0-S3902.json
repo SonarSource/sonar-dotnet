@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S3902",
+"message":  "Replace this call to 'Assembly.GetExecutingAssembly()' with 'Type.Assembly'.",
+"location":  {
+"uri":  "sources\Net5\Net5\Main.cs",
+"region":  {
+"startLine":  68,
+"startColumn":  27,
+"endLine":  68,
+"endColumn":  47
+}
+}
+}
+]
+}

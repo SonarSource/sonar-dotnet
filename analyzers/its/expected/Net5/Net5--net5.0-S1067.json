@@ -2,6 +2,19 @@
 "issues":  [
 {
 "id":  "S1067",
+"message":  "Reduce the number of conditional operators (39) used in the expression (maximum allowed 3).",
+"location":  {
+"uri":  "sources\Net5\Net5\Main.cs",
+"region":  {
+"startLine":  58,
+"startColumn":  5,
+"endLine":  62,
+"endColumn":  80
+}
+}
+},
+{
+"id":  "S1067",
 "message":  "Reduce the number of conditional operators (4) used in the expression (maximum allowed 3).",
 "location":  {
 "uri":  "sources\Net5\Net5\S1067.cs",

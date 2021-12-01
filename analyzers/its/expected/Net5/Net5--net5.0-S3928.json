@@ -2,6 +2,19 @@
 "issues":  [
 {
 "id":  "S3928",
+"message":  "ArgumentException constructor arguments have been inverted.",
+"location":  {
+"uri":  "sources\Net5\Net5\Main.cs",
+"region":  {
+"startLine":  23,
+"startColumn":  11,
+"endLine":  23,
+"endColumn":  51
+}
+}
+},
+{
+"id":  "S3928",
 "message":  "The parameter name 'foo' is not declared in the argument list.",
 "location":  {
 "uri":  "sources\Net5\Net5\S3928.cs",

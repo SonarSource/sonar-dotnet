@@ -2,6 +2,19 @@
 "issues":  [
 {
 "id":  "S1854",
+"message":  "Remove this useless assignment to local variable 'i'.",
+"location":  {
+"uri":  "sources\Net5\Net5\Main.cs",
+"region":  {
+"startLine":  207,
+"startColumn":  5,
+"endLine":  207,
+"endColumn":  8
+}
+}
+},
+{
+"id":  "S1854",
 "message":  "Remove this useless assignment to local variable 'value'.",
 "location":  {
 "uri":  "sources\Net5\Net5\S1854.cs",

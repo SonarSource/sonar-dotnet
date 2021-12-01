@@ -54,6 +54,84 @@
 },
 {
 "id":  "S1481",
+"message":  "Remove the unused local variable 'assem'.",
+"location":  {
+"uri":  "sources\Net5\Net5\Main.cs",
+"region":  {
+"startLine":  68,
+"startColumn":  10,
+"endLine":  68,
+"endColumn":  15
+}
+}
+},
+{
+"id":  "S1481",
+"message":  "Remove the unused local variable 'fs0'.",
+"location":  {
+"uri":  "sources\Net5\Net5\Main.cs",
+"region":  {
+"startLine":  78,
+"startColumn":  5,
+"endLine":  78,
+"endColumn":  8
+}
+}
+},
+{
+"id":  "S1481",
+"message":  "Remove the unused local variable 'l1'.",
+"location":  {
+"uri":  "sources\Net5\Net5\Main.cs",
+"region":  {
+"startLine":  81,
+"startColumn":  8,
+"endLine":  81,
+"endColumn":  10
+}
+}
+},
+{
+"id":  "S1481",
+"message":  "Remove the unused local variable 'l2'.",
+"location":  {
+"uri":  "sources\Net5\Net5\Main.cs",
+"region":  {
+"startLine":  82,
+"startColumn":  8,
+"endLine":  82,
+"endColumn":  10
+}
+}
+},
+{
+"id":  "S1481",
+"message":  "Remove the unused local variable 'l3'.",
+"location":  {
+"uri":  "sources\Net5\Net5\Main.cs",
+"region":  {
+"startLine":  83,
+"startColumn":  8,
+"endLine":  83,
+"endColumn":  10
+}
+}
+},
+{
+"id":  "S1481",
+"message":  "Remove the unused local variable 'l4'.",
+"location":  {
+"uri":  "sources\Net5\Net5\Main.cs",
+"region":  {
+"startLine":  84,
+"startColumn":  8,
+"endLine":  84,
+"endColumn":  10
+}
+}
+},
+{
+"id":  "S1481",
 "message":  "Remove the unused local variable 'isNull'.",
 "location":  {
 "uri":  "sources\Net5\Net5\PatternMatchingImprovements.cs",

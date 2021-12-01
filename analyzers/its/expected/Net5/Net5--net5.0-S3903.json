@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S3903",
+"message":  "Move 'Record' into a named namespace.",
+"location":  {
+"uri":  "sources\Net5\Net5\Main.cs",
+"region":  {
+"startLine":  210,
+"startColumn":  15,
+"endLine":  210,
+"endColumn":  21
+}
+}
+}
+]
+}

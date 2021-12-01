@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S1075",
+"message":  "Refactor your code not to use hardcoded absolute paths or URIs.",
+"location":  {
+"uri":  "sources\Net5\Net5\Main.cs",
+"region":  {
+"startLine":  78,
+"startColumn":  26,
+"endLine":  78,
+"endColumn":  39
+}
+}
+}
+]
+}

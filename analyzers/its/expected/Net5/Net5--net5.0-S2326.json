@@ -2,6 +2,58 @@
 "issues":  [
 {
 "id":  "S2326",
+"message":  "'T1' is not used in the local function.",
+"location":  {
+"uri":  "sources\Net5\Net5\Main.cs",
+"region":  {
+"startLine":  92,
+"startColumn":  15,
+"endLine":  92,
+"endColumn":  17
+}
+}
+},
+{
+"id":  "S2326",
+"message":  "'T2' is not used in the local function.",
+"location":  {
+"uri":  "sources\Net5\Net5\Main.cs",
+"region":  {
+"startLine":  92,
+"startColumn":  19,
+"endLine":  92,
+"endColumn":  21
+}
+}
+},
+{
+"id":  "S2326",
+"message":  "'T3' is not used in the local function.",
+"location":  {
+"uri":  "sources\Net5\Net5\Main.cs",
+"region":  {
+"startLine":  92,
+"startColumn":  23,
+"endLine":  92,
+"endColumn":  25
+}
+}
+},
+{
+"id":  "S2326",
+"message":  "'T4' is not used in the local function.",
+"location":  {
+"uri":  "sources\Net5\Net5\Main.cs",
+"region":  {
+"startLine":  92,
+"startColumn":  27,
+"endLine":  92,
+"endColumn":  29
+}
+}
+},
+{
+"id":  "S2326",
 "message":  "'T' is not used in the record.",
 "location":  {
 "uri":  "sources\Net5\Net5\Records.cs",

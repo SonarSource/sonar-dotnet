@@ -2,6 +2,162 @@
 "issues":  [
 {
 "id":  "S2760",
+"message":  "This condition was just checked on line 28.",
+"location":  {
+"uri":  "sources\Net5\Net5\Main.cs",
+"region":  {
+"startLine":  29,
+"startColumn":  5,
+"endLine":  29,
+"endColumn":  11
+}
+}
+},
+{
+"id":  "S2760",
+"message":  "This condition was just checked on line 99.",
+"location":  {
+"uri":  "sources\Net5\Net5\Main.cs",
+"region":  {
+"startLine":  100,
+"startColumn":  9,
+"endLine":  100,
+"endColumn":  14
+}
+}
+},
+{
+"id":  "S2760",
+"message":  "This condition was just checked on line 100.",
+"location":  {
+"uri":  "sources\Net5\Net5\Main.cs",
+"region":  {
+"startLine":  101,
+"startColumn":  9,
+"endLine":  101,
+"endColumn":  14
+}
+}
+},
+{
+"id":  "S2760",
+"message":  "This condition was just checked on line 101.",
+"location":  {
+"uri":  "sources\Net5\Net5\Main.cs",
+"region":  {
+"startLine":  102,
+"startColumn":  9,
+"endLine":  102,
+"endColumn":  14
+}
+}
+},
+{
+"id":  "S2760",
+"message":  "This condition was just checked on line 102.",
+"location":  {
+"uri":  "sources\Net5\Net5\Main.cs",
+"region":  {
+"startLine":  103,
+"startColumn":  9,
+"endLine":  103,
+"endColumn":  14
+}
+}
+},
+{
+"id":  "S2760",
+"message":  "This condition was just checked on line 103.",
+"location":  {
+"uri":  "sources\Net5\Net5\Main.cs",
+"region":  {
+"startLine":  104,
+"startColumn":  9,
+"endLine":  104,
+"endColumn":  14
+}
+}
+},
+{
+"id":  "S2760",
+"message":  "This condition was just checked on line 104.",
+"location":  {
+"uri":  "sources\Net5\Net5\Main.cs",
+"region":  {
+"startLine":  105,
+"startColumn":  9,
+"endLine":  105,
+"endColumn":  14
+}
+}
+},
+{
+"id":  "S2760",
+"message":  "This condition was just checked on line 105.",
+"location":  {
+"uri":  "sources\Net5\Net5\Main.cs",
+"region":  {
+"startLine":  106,
+"startColumn":  9,
+"endLine":  106,
+"endColumn":  14
+}
+}
+},
+{
+"id":  "S2760",
+"message":  "This condition was just checked on line 106.",
+"location":  {
+"uri":  "sources\Net5\Net5\Main.cs",
+"region":  {
+"startLine":  107,
+"startColumn":  9,
+"endLine":  107,
+"endColumn":  14
+}
+}
+},
+{
+"id":  "S2760",
+"message":  "This condition was just checked on line 107.",
+"location":  {
+"uri":  "sources\Net5\Net5\Main.cs",
+"region":  {
+"startLine":  108,
+"startColumn":  9,
+"endLine":  108,
+"endColumn":  14
+}
+}
+},
+{
+"id":  "S2760",
+"message":  "This condition was just checked on line 108.",
+"location":  {
+"uri":  "sources\Net5\Net5\Main.cs",
+"region":  {
+"startLine":  109,
+"startColumn":  9,
+"endLine":  109,
+"endColumn":  14
+}
+}
+},
+{
+"id":  "S2760",
+"message":  "This condition was just checked on line 109.",
+"location":  {
+"uri":  "sources\Net5\Net5\Main.cs",
+"region":  {
+"startLine":  110,
+"startColumn":  9,
+"endLine":  110,
+"endColumn":  14
+}
+}
+},
+{
+"id":  "S2760",
 "message":  "This condition was just checked on line 13.",
 "location":  {
 "uri":  "sources\Net5\Net5\S1541.cs",

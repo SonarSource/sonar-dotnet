@@ -2,6 +2,19 @@
 "issues":  [
 {
 "id":  "S2930",
+"message":  "Dispose 'fs0' when it is no longer needed.",
+"location":  {
+"uri":  "sources\Net5\Net5\Main.cs",
+"region":  {
+"startLine":  78,
+"startColumn":  5,
+"endLine":  78,
+"endColumn":  55
+}
+}
+},
+{
+"id":  "S2930",
 "message":  "Dispose 'backing_field' when it is no longer needed.",
 "location":  {
 "uri":  "sources\Net5\Net5\S2930.cs",
