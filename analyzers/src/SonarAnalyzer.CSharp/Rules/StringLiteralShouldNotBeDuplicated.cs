@@ -72,7 +72,10 @@ namespace SonarAnalyzer.Rules.CSharp
         protected override string GetLiteralValue(LiteralExpressionSyntax literal) =>
             literal.Token.Text;
 
-        protected override bool IsNotNamedTypeOrTopLevelMain(SyntaxNodeAnalysisContext context) =>
-            base.IsNotNamedTypeOrTopLevelMain(context) && !context.ContainingSymbol.IsTopLevelMain();
+        protected override bool IsNamedTypeOrTopLevelMain(SyntaxNodeAnalysisContext context) =>
+            IsNamedType(context) || IsTopLevelMain(context);
+
+        private bool IsTopLevelMain(SyntaxNodeAnalysisContext context) =>
+            context.ContainingSymbol.IsTopLevelMain();
     }
 }
