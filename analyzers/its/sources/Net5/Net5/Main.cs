@@ -110,6 +110,9 @@ void AnotherLocalMethodInMain() {
     if (false) { }
 }
 
+// S4823
+Console.WriteLine(args[0]);
+
 // S4144
 void Method1()
 {
@@ -121,6 +124,7 @@ void Method2()
     string s = "test";
     Console.WriteLine("Result: {0}", s);
 }
+
 // S138
 void LongFunction(int i)
 {
