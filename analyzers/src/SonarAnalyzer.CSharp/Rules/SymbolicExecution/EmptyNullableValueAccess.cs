@@ -46,7 +46,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
         public IEnumerable<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
 
-        public ISymbolicExecutionAnalysisContext AddChecks(SonarExplodedGraph explodedGraph, SyntaxNodeAnalysisContext context) =>
+        public ISymbolicExecutionAnalysisContext CreateContext(SonarExplodedGraph explodedGraph, SyntaxNodeAnalysisContext context) =>
             new AnalysisContext(explodedGraph);
 
         private sealed class AnalysisContext : ISymbolicExecutionAnalysisContext

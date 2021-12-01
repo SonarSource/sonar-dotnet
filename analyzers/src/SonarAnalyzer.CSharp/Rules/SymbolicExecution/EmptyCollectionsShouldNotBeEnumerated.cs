@@ -89,7 +89,7 @@ namespace SonarAnalyzer.Rules.CSharp
             nameof(Dictionary<object, object>.TryGetValue),
         };
 
-        public ISymbolicExecutionAnalysisContext AddChecks(SonarExplodedGraph explodedGraph, SyntaxNodeAnalysisContext context) =>
+        public ISymbolicExecutionAnalysisContext CreateContext(SonarExplodedGraph explodedGraph, SyntaxNodeAnalysisContext context) =>
             new AnalysisContext(explodedGraph);
 
         private sealed class AnalysisContext : ISymbolicExecutionAnalysisContext

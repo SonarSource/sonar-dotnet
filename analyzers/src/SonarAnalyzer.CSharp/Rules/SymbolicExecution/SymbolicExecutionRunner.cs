@@ -22,11 +22,16 @@ using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Linq;
+using System.Text;
 using Microsoft.CodeAnalysis;
+using Microsoft.CodeAnalysis.CSharp;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
-using SonarAnalyzer.Extensions;
+using SonarAnalyzer.CFG.Sonar;
 using SonarAnalyzer.Helpers;
+using SonarAnalyzer.LiveVariableAnalysis.CSharp;
 using SonarAnalyzer.SymbolicExecution.Sonar;
+using StyleCop.Analyzers.Lightup;
 
 namespace SonarAnalyzer.Rules.SymbolicExecution
 {
@@ -49,55 +54,111 @@ namespace SonarAnalyzer.Rules.SymbolicExecution
             SupportedDiagnostics = symbolicExecutionAnalyzerFactory.SupportedDiagnostics;
         }
 
-        protected override void Initialize(SonarAnalysisContext context) =>
-            context.RegisterExplodedGraphBasedAnalysis(Analyze);
-
-        private void Analyze(SonarExplodedGraph explodedGraph, SyntaxNodeAnalysisContext context)
+        protected override void Initialize(SonarAnalysisContext context)
         {
-            var analyzerContexts = InitializeAnalyzers(explodedGraph, context).ToList();
+            context.RegisterSyntaxNodeActionInNonGenerated(
+                c => Analyze<BaseMethodDeclarationSyntax>(c, x => (CSharpSyntaxNode)x.Body ?? x.ExpressionBody()),
+                SyntaxKind.ConstructorDeclaration,
+                SyntaxKind.DestructorDeclaration,
+                SyntaxKind.ConversionOperatorDeclaration,
+                SyntaxKind.OperatorDeclaration,
+                SyntaxKind.MethodDeclaration);
 
+            context.RegisterSyntaxNodeActionInNonGenerated(
+                c => Analyze<PropertyDeclarationSyntax>(c, x => x.ExpressionBody),
+                SyntaxKind.PropertyDeclaration);
+
+            context.RegisterSyntaxNodeActionInNonGenerated(
+                c => Analyze<AccessorDeclarationSyntax>(c, x => (CSharpSyntaxNode)x.Body ?? x.ExpressionBody()),
+                SyntaxKind.GetAccessorDeclaration,
+                SyntaxKind.SetAccessorDeclaration,
+                SyntaxKindEx.InitAccessorDeclaration,
+                SyntaxKind.AddAccessorDeclaration,
+                SyntaxKind.RemoveAccessorDeclaration);
+
+            context.RegisterSyntaxNodeActionInNonGenerated(
+                c =>
+                {
+                    var declaration = (AnonymousFunctionExpressionSyntax)c.Node;
+                    if (c.SemanticModel.GetSymbolInfo(declaration).Symbol is { } symbol)
+                    {
+                        Analyze(c, declaration.Body, symbol);
+                    }
+                },
+                SyntaxKind.AnonymousMethodExpression,
+                SyntaxKind.SimpleLambdaExpression,
+                SyntaxKind.ParenthesizedLambdaExpression);
+        }
+
+        private void Analyze<TNode>(SyntaxNodeAnalysisContext context, Func<TNode, CSharpSyntaxNode> getBody) where TNode : SyntaxNode
+        {
+            if (getBody((TNode)context.Node) is { } body && context.SemanticModel.GetDeclaredSymbol(context.Node) is { } symbol)
+            {
+                Analyze(context, body, symbol);
+            }
+        }
+
+        private void Analyze(SyntaxNodeAnalysisContext context, CSharpSyntaxNode body, ISymbol symbol)
+        {
+            if (body == null
+                || body.ContainsDiagnostics
+                || !CSharpControlFlowGraph.TryGet(body, context.SemanticModel, out var cfg))
+            {
+                return;
+            }
+
+            var lva = new SonarCSharpLiveVariableAnalysis(cfg, symbol, context.SemanticModel);
             try
             {
-                explodedGraph.ExplorationEnded += ExplorationEndedHandler;
+                var explodedGraph = new SonarExplodedGraph(cfg, symbol, context.SemanticModel, lva);
+                var analyzerContexts = symbolicExecutionAnalyzerFactory.GetEnabledAnalyzers(context).Select(x => x.CreateContext(explodedGraph, context)).ToList();
+                try
+                {
+                    explodedGraph.ExplorationEnded += ExplorationEndedHandler;
+                    explodedGraph.Walk();
+                }
+                finally
+                {
+                    explodedGraph.ExplorationEnded -= ExplorationEndedHandler;
+                }
 
-                explodedGraph.Walk();
+                // Some of the rules can return good results if the tree was only partially visited; others need to completely
+                // walk the tree in order to avoid false positives.
+                //
+                // Due to this we split the rules in two sets and report the diagnostics in steps:
+                // - When the tree is successfully visited and ExplorationEnded event is raised.
+                // - When the tree visit ends (explodedGraph.Walk() returns). This will happen even if the maximum number of steps was
+                // reached or if an exception was thrown during analysis.
+                ReportDiagnostics(analyzerContexts, context, true);
+
+                void ExplorationEndedHandler(object sender, EventArgs args) =>
+                    ReportDiagnostics(analyzerContexts, context, false);
             }
-            finally
+            catch (Exception e)
             {
-                explodedGraph.ExplorationEnded -= ExplorationEndedHandler;
-            }
+                // Roslyn/MSBuild is currently cutting exception message at the end of the line instead
+                // of displaying the full message. As a workaround, we replace the line ending with ' ## '.
+                // See https://github.com/dotnet/roslyn/issues/1455 and https://github.com/dotnet/roslyn/issues/24346
+                var sb = new StringBuilder();
+                sb.AppendLine($"Error processing method: {symbol?.Name ?? "{unknown}"}");
+                sb.AppendLine($"Method file: {body.GetLocation()?.GetLineSpan().Path ?? "{unknown}"}");
+                sb.AppendLine($"Method line: {body.GetLocation()?.GetLineSpan().StartLinePosition.ToString() ?? "{unknown}"}");
+                sb.AppendLine($"Inner exception: {e}");
 
-            // Some of the rules can return good results if the tree was only partially visited; others need to completely
-            // walk the tree in order to avoid false positives.
-            //
-            // Due to this we split the rules in two sets and report the diagnostics in steps:
-            // - When the tree is successfully visited and ExplorationEnded event is raised.
-            // - When the tree visit ends (explodedGraph.Walk() returns). This will happen even if the maximum number of steps was
-            // reached or if an exception was thrown during analysis.
-            ReportDiagnostics(analyzerContexts, context, true);
-
-            void ExplorationEndedHandler(object sender, EventArgs args)
-            {
-                ReportDiagnostics(analyzerContexts, context, false);
+                throw new SymbolicExecutionException(sb.ToString().Replace(Environment.NewLine, " ## "), e);
             }
         }
 
         private static void ReportDiagnostics(IEnumerable<ISymbolicExecutionAnalysisContext> analyzerContexts, SyntaxNodeAnalysisContext context, bool supportsPartialResults)
         {
-            foreach (var analyzerContext in analyzerContexts.Where(analyzerContext => analyzerContext.SupportsPartialResults == supportsPartialResults))
+            foreach (var analyzerContext in analyzerContexts.Where(x => x.SupportsPartialResults == supportsPartialResults))
             {
                 foreach (var diagnostic in analyzerContext.GetDiagnostics())
                 {
                     context.ReportIssue(diagnostic);
                 }
-
                 analyzerContext.Dispose();
             }
         }
-
-        private IEnumerable<ISymbolicExecutionAnalysisContext> InitializeAnalyzers(SonarExplodedGraph explodedGraph, SyntaxNodeAnalysisContext context) =>
-            symbolicExecutionAnalyzerFactory
-                .GetEnabledAnalyzers(context)
-                .Select(analyzer => analyzer.AddChecks(explodedGraph, context));
     }
 }

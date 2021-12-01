@@ -38,7 +38,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
         public IEnumerable<DiagnosticDescriptor> SupportedDiagnostics  { get; } = ImmutableArray.Create(InvalidCastToInterfaceRuleConstants.Rule);
 
-        public ISymbolicExecutionAnalysisContext AddChecks(SonarExplodedGraph explodedGraph, SyntaxNodeAnalysisContext context) =>
+        public ISymbolicExecutionAnalysisContext CreateContext(SonarExplodedGraph explodedGraph, SyntaxNodeAnalysisContext context) =>
             new AnalysisContext(explodedGraph, context);
 
         internal sealed class NullableCastCheck : ExplodedGraphCheck
