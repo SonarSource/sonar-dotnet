@@ -37,7 +37,7 @@ namespace SonarAnalyzer.Rules.CSharp
     public sealed class MethodsShouldNotHaveTooManyLines
         : MethodsShouldNotHaveTooManyLinesBase<SyntaxKind, BaseMethodDeclarationSyntax>
     {
-        private const string TopLevelFunctionMessageFormat = "This top level function body has {0} lines, which is greater than the {1} lines authorized.";
+        private const string TopLevelFunctionMessageFormat = "This top level local function has {0} lines, which is greater than the {1} lines authorized.";
 
         private static readonly DiagnosticDescriptor DefaultRule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager, false);
         private static readonly DiagnosticDescriptor TopLevelRule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, TopLevelFunctionMessageFormat, RspecStrings.ResourceManager, false);
@@ -62,16 +62,15 @@ namespace SonarAnalyzer.Rules.CSharp
                 {
                     if (c.ContainingSymbol.IsTopLevelMain())
                     {
-                        var compilationUnit = (CompilationUnitSyntax)c.Node;
-                        var linesCount = CountLines(compilationUnit.GetTopLevelMainBody());
-
+                        var wrapper = (LocalFunctionStatementSyntaxWrapper)c.Node;
+                        var linesCount = CountLines(wrapper);
                         if (linesCount > Max)
                         {
-                            c.ReportIssue(Diagnostic.Create(TopLevelRule, null, linesCount, Max, MethodKeyword));
+                            c.ReportIssue(Diagnostic.Create(TopLevelRule, wrapper.Identifier.GetLocation(), linesCount, Max, MethodKeyword));
                         }
                     }
                 },
-                SyntaxKind.CompilationUnit);
+                SyntaxKindEx.LocalFunctionStatement);
 
             base.Initialize(context);
         }
@@ -111,10 +110,13 @@ namespace SonarAnalyzer.Rules.CSharp
             return "method";
         }
 
-        private static long CountLines(IEnumerable<SyntaxNode> nodes) =>
-            nodes.SelectMany(x => x.DescendantTokens())
-                 .SelectMany(x => x.GetLineNumbers())
-                 .Distinct()
-                 .LongCount();
+        private static IEnumerable<SyntaxToken> GetMethodTokens(LocalFunctionStatementSyntaxWrapper wrapper) =>
+            wrapper.ExpressionBody?.Expression.DescendantTokens()
+            ?? wrapper.Body.Statements.SelectMany(s => s.DescendantTokens());
+
+        private static long CountLines(LocalFunctionStatementSyntaxWrapper wrapper) =>
+            GetMethodTokens(wrapper).SelectMany(x => x.GetLineNumbers())
+                                    .Distinct()
+                                    .LongCount();
     }
 }

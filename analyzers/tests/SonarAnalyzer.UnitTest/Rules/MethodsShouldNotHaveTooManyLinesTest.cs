@@ -51,11 +51,16 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         public void MethodsShouldNotHaveTooManyLines_CSharp9_NoUsing() =>
             Verifier.VerifyCSharpAnalyzer(
-                @"// Noncompliant {{This top level function body has 4 lines, which is greater than the 2 lines authorized.}}
+                @"
 int i = 1; i++;
-i++;
-i++;
-i++;",
+
+void LocalFunction() // Noncompliant {{This top level local function has 4 lines, which is greater than the 2 lines authorized.}}
+{
+    i++;
+    i++;
+    i++;
+    i++;
+}",
                 new CS.MethodsShouldNotHaveTooManyLines { Max = 2 },
                 ParseOptionsHelper.FromCSharp9,
                 outputKind: OutputKind.ConsoleApplication);
