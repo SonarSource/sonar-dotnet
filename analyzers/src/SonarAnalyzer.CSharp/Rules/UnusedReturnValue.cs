@@ -26,6 +26,7 @@ using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.Common;
+using SonarAnalyzer.Extensions;
 using SonarAnalyzer.Helpers;
 using StyleCop.Analyzers.Lightup;
 using NodeSymbolAndSemanticModel = SonarAnalyzer.Common.NodeSymbolAndSemanticModel<Microsoft.CodeAnalysis.CSharp.Syntax.InvocationExpressionSyntax, Microsoft.CodeAnalysis.IMethodSymbol>;
@@ -65,7 +66,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 return;
             }
 
-            var invocations = removableDeclarationCollector.TypeDeclarations.SelectMany(x => FilterInvocations(x)).ToList();
+            var invocations = removableDeclarationCollector.TypeDeclarations.SelectMany(FilterInvocations).ToList();
 
             foreach (var declaredPrivateMethodWithReturn in declaredPrivateMethodsWithReturn)
             {
@@ -74,7 +75,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     .ToList();
 
                 // Method invocation is noncompliant when there is at least 1 invocation of the method, and no invocation is using the return value. The case of 0 invocation is handled by S1144.
-                if (matchingInvocations.Any() && !matchingInvocations.Any(x => IsReturnValueUsed(x)))
+                if (matchingInvocations.Any() && !matchingInvocations.Any(IsReturnValueUsed))
                 {
                     context.ReportIssue(Diagnostic.Create(Rule, declaredPrivateMethodWithReturn.Node.ReturnType.GetLocation()));
                 }
@@ -84,18 +85,26 @@ namespace SonarAnalyzer.Rules.CSharp
         private static void AnalyzeLocalFunctionStatements(SyntaxNodeAnalysisContext context)
         {
             var localFunctionSyntax = (LocalFunctionStatementSyntaxWrapper)context.Node;
-            var topmostContainingMethod = context.Node.GetTopMostContainingMethod();
+            var isInTopLevelMain = context.ContainingSymbol.IsTopLevelMain();
 
-            if (!(context.SemanticModel.GetDeclaredSymbol(localFunctionSyntax) is IMethodSymbol localFunctionSymbol)
-                || localFunctionSymbol.ReturnsVoid
-                || topmostContainingMethod == null)
+            var topMostContainingMethod = isInTopLevelMain
+                                              ? context.Node.Parent.Parent // .Parent.Parent is the CompilationUnit
+                                              : context.Node.GetTopMostContainingMethod();
+
+            if (topMostContainingMethod == null)
             {
                 return;
             }
 
-            var matchingInvocations = GetLocalMatchingInvocations(topmostContainingMethod, localFunctionSymbol, context.SemanticModel).ToList();
+            var localFunctionSymbol = (IMethodSymbol)context.SemanticModel.GetDeclaredSymbol(localFunctionSyntax);
+            if (localFunctionSymbol.ReturnsVoid)
+            {
+                return;
+            }
+
+            var matchingInvocations = GetLocalMatchingInvocations(topMostContainingMethod, localFunctionSymbol, context.SemanticModel).ToList();
             // Method invocation is noncompliant when there is at least 1 invocation of the method, and no invocation is using the return value. The case of 0 invocation is handled by S1144.
-            if (matchingInvocations.Any() && !matchingInvocations.Any(x => IsReturnValueUsed(x)))
+            if (matchingInvocations.Any() && !matchingInvocations.Any(IsReturnValueUsed))
             {
                 context.ReportIssue(Diagnostic.Create(Rule, localFunctionSyntax.ReturnType.GetLocation()));
             }
