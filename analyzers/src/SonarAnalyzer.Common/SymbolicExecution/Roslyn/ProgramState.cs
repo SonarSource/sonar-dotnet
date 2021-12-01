@@ -18,11 +18,25 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System.Collections.Immutable;
+using StyleCop.Analyzers.Lightup;
+
 namespace SonarAnalyzer.SymbolicExecution.Roslyn
 {
     public sealed class ProgramState
     {
-        public static readonly ProgramState Empty = new ProgramState();
-        // ToDo: Some stuff is missing here
+        public static readonly ProgramState Empty = new ProgramState(ImmutableDictionary<IOperationWrapperSonar, SymbolicValue>.Empty);
+
+        private readonly ImmutableDictionary<IOperationWrapperSonar, SymbolicValue> operationValue;
+
+        public SymbolicValue this[IOperationWrapperSonar operation] => operationValue.TryGetValue(operation, out var value) ? value : null;
+
+        private ProgramState(ImmutableDictionary<IOperationWrapperSonar, SymbolicValue> operationValue)
+        {
+            this.operationValue = operationValue;
+        }
+
+        public ProgramState AddOperationValue(IOperationWrapperSonar operation, SymbolicValue value) =>
+            new ProgramState(operationValue.Add(operation, value));
     }
 }
