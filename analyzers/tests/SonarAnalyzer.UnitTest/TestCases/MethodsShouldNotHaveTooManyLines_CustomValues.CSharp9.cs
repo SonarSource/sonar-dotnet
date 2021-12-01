@@ -1,16 +1,33 @@
-﻿// Noncompliant {{This top level function body has 11 lines, which is greater than the 2 lines authorized.}}
-int i = 1; i++;
+﻿int i = 1; i++;
 i++;
 i++;
 i++;
 
-void LocalFunction() // Local functions are checked as part of the method.
+void LocalFunction() // Noncompliant {{This top level local function has 4 lines, which is greater than the 2 lines authorized.}}
 {
     i++;
     i++;
     i++;
     i++;
 }
+
+void Compliant()
+{
+    i++;
+    i++;
+}
+
+void ABitLonger() // Noncompliant {{This top level local function has 3 lines, which is greater than the 2 lines authorized.}}
+{
+    i++;
+    i++;
+    i++;
+}
+
+int Lambda(int a, int b, int c) => // Noncompliant {{This top level local function has 3 lines, which is greater than the 2 lines authorized.}}
+    a
+    + b
+    + c;
 
 record Sample
 {
