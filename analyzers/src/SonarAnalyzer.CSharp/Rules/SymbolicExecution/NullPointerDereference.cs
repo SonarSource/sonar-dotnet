@@ -45,7 +45,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
         public IEnumerable<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(rule);
 
-        public ISymbolicExecutionAnalysisContext AddChecks(CSharpExplodedGraph explodedGraph, SyntaxNodeAnalysisContext context) =>
+        public ISymbolicExecutionAnalysisContext AddChecks(SonarExplodedGraph explodedGraph, SyntaxNodeAnalysisContext context) =>
             new AnalysisContext(explodedGraph, context);
 
         internal sealed class NullPointerCheck : ExplodedGraphCheck
@@ -53,7 +53,7 @@ namespace SonarAnalyzer.Rules.CSharp
             public event EventHandler<MemberAccessingEventArgs> MemberAccessing;
             public event EventHandler<MemberAccessedEventArgs> MemberAccessed;
 
-            public NullPointerCheck(CSharpExplodedGraph explodedGraph) : base(explodedGraph) { }
+            public NullPointerCheck(SonarExplodedGraph explodedGraph) : base(explodedGraph) { }
 
             private void OnMemberAccessing(IdentifierNameSyntax identifier, ISymbol symbol, ProgramState programState) =>
                 MemberAccessing?.Invoke(this, new MemberAccessingEventArgs(identifier, symbol, programState));
@@ -215,7 +215,7 @@ namespace SonarAnalyzer.Rules.CSharp
             private readonly HashSet<IdentifierNameSyntax> nullIdentifiers = new HashSet<IdentifierNameSyntax>();
             private readonly NullPointerCheck nullPointerCheck;
 
-            public AnalysisContext(CSharpExplodedGraph explodedGraph, SyntaxNodeAnalysisContext context)
+            public AnalysisContext(SonarExplodedGraph explodedGraph, SyntaxNodeAnalysisContext context)
             {
                 this.context = context;
 

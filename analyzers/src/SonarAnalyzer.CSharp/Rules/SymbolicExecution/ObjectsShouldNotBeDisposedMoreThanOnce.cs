@@ -45,7 +45,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
         public IEnumerable<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(rule);
 
-        public ISymbolicExecutionAnalysisContext AddChecks(CSharpExplodedGraph explodedGraph, SyntaxNodeAnalysisContext context) =>
+        public ISymbolicExecutionAnalysisContext AddChecks(SonarExplodedGraph explodedGraph, SyntaxNodeAnalysisContext context) =>
             new AnalysisContext(explodedGraph);
 
         private sealed class AnalysisContext : ISymbolicExecutionAnalysisContext
@@ -56,7 +56,7 @@ namespace SonarAnalyzer.Rules.CSharp
             // the walked CFG paths could be different and FPs will appear.
             private readonly Dictionary<SyntaxNode, string> nodesToReport = new Dictionary<SyntaxNode, string>();
 
-            public AnalysisContext(CSharpExplodedGraph explodedGraph) =>
+            public AnalysisContext(SonarExplodedGraph explodedGraph) =>
                 explodedGraph.AddExplodedGraphCheck(new ObjectDisposedPointerCheck(explodedGraph, this));
 
             public bool SupportsPartialResults => true;
@@ -77,7 +77,7 @@ namespace SonarAnalyzer.Rules.CSharp
         {
             private readonly AnalysisContext context;
 
-            public ObjectDisposedPointerCheck(CSharpExplodedGraph explodedGraph, AnalysisContext context) : base(explodedGraph) =>
+            public ObjectDisposedPointerCheck(SonarExplodedGraph explodedGraph, AnalysisContext context) : base(explodedGraph) =>
                 this.context = context;
 
             public override ProgramState PreProcessUsingStatement(ProgramPoint programPoint, ProgramState programState)

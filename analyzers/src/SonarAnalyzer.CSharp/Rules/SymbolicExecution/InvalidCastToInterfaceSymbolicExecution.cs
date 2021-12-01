@@ -38,19 +38,19 @@ namespace SonarAnalyzer.Rules.CSharp
 
         public IEnumerable<DiagnosticDescriptor> SupportedDiagnostics  { get; } = ImmutableArray.Create(InvalidCastToInterfaceRuleConstants.Rule);
 
-        public ISymbolicExecutionAnalysisContext AddChecks(CSharpExplodedGraph explodedGraph, SyntaxNodeAnalysisContext context) =>
+        public ISymbolicExecutionAnalysisContext AddChecks(SonarExplodedGraph explodedGraph, SyntaxNodeAnalysisContext context) =>
             new AnalysisContext(explodedGraph, context);
 
         internal sealed class NullableCastCheck : ExplodedGraphCheck
         {
             private readonly SyntaxNodeAnalysisContext context;
 
-            public NullableCastCheck(CSharpExplodedGraph explodedGraph)
+            public NullableCastCheck(SonarExplodedGraph explodedGraph)
                 : base(explodedGraph)
             {
             }
 
-            public NullableCastCheck(CSharpExplodedGraph explodedGraph, SyntaxNodeAnalysisContext context)
+            public NullableCastCheck(SonarExplodedGraph explodedGraph, SyntaxNodeAnalysisContext context)
                 : this(explodedGraph)
             {
                 this.context = context;
@@ -97,7 +97,7 @@ namespace SonarAnalyzer.Rules.CSharp
         {
             public bool SupportsPartialResults => true;
 
-            public AnalysisContext(CSharpExplodedGraph explodedGraph, SyntaxNodeAnalysisContext context) =>
+            public AnalysisContext(SonarExplodedGraph explodedGraph, SyntaxNodeAnalysisContext context) =>
                 explodedGraph.AddExplodedGraphCheck(new NullableCastCheck(explodedGraph, context));
 
             public void Dispose()

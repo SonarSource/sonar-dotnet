@@ -44,7 +44,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
         public IEnumerable<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(Rule);
 
-        public ISymbolicExecutionAnalysisContext AddChecks(CSharpExplodedGraph explodedGraph, SyntaxNodeAnalysisContext context) =>
+        public ISymbolicExecutionAnalysisContext AddChecks(SonarExplodedGraph explodedGraph, SyntaxNodeAnalysisContext context) =>
             new AnalysisContext(explodedGraph, context);
 
        private static void CollectMemberAccesses(MemberAccessingEventArgs args, ISet<IdentifierNameSyntax> identifiers, SemanticModel semanticModel)
@@ -66,7 +66,7 @@ namespace SonarAnalyzer.Rules.CSharp
             private readonly NullPointerDereference.NullPointerCheck nullPointerCheck;
             private readonly SyntaxNodeAnalysisContext syntaxNodeAnalysisContext;
 
-            public AnalysisContext(CSharpExplodedGraph explodedGraph, SyntaxNodeAnalysisContext context)
+            public AnalysisContext(SonarExplodedGraph explodedGraph, SyntaxNodeAnalysisContext context)
             {
                 if (!GetMethodSymbol(context).IsPubliclyAccessible())
                 {

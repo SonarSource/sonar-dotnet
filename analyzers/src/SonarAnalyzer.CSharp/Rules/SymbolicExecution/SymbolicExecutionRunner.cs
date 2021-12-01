@@ -52,7 +52,7 @@ namespace SonarAnalyzer.Rules.SymbolicExecution
         protected override void Initialize(SonarAnalysisContext context) =>
             context.RegisterExplodedGraphBasedAnalysis(Analyze);
 
-        private void Analyze(CSharpExplodedGraph explodedGraph, SyntaxNodeAnalysisContext context)
+        private void Analyze(SonarExplodedGraph explodedGraph, SyntaxNodeAnalysisContext context)
         {
             var analyzerContexts = InitializeAnalyzers(explodedGraph, context).ToList();
 
@@ -95,7 +95,7 @@ namespace SonarAnalyzer.Rules.SymbolicExecution
             }
         }
 
-        private IEnumerable<ISymbolicExecutionAnalysisContext> InitializeAnalyzers(CSharpExplodedGraph explodedGraph, SyntaxNodeAnalysisContext context) =>
+        private IEnumerable<ISymbolicExecutionAnalysisContext> InitializeAnalyzers(SonarExplodedGraph explodedGraph, SyntaxNodeAnalysisContext context) =>
             symbolicExecutionAnalyzerFactory
                 .GetEnabledAnalyzers(context)
                 .Select(analyzer => analyzer.AddChecks(explodedGraph, context));

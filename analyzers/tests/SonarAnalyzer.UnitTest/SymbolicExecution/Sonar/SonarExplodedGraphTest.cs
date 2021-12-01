@@ -40,7 +40,7 @@ using SonarAnalyzer.UnitTest.Helpers;
 namespace SonarAnalyzer.UnitTest.SymbolicExecution.Sonar
 {
     [TestClass]
-    public class ExplodedGraphTest
+    public class SonarExplodedGraphTest
     {
         private const string TestInput = @"
 namespace NS
@@ -112,7 +112,7 @@ namespace NS
         public void ExplodedGraph_SequentialInput_Max()
         {
             var inputBuilder = new StringBuilder();
-            for (var i = 0; i < CSharpExplodedGraph.MaxStepCount / 2 + 1; i++)
+            for (var i = 0; i < SonarExplodedGraph.MaxStepCount / 2 + 1; i++)
             {
                 inputBuilder.AppendLine($"var x{i} = true;");
             }
@@ -1522,7 +1522,7 @@ namespace Namespace
             public readonly IMethodSymbol MainMethodSymbol;
             public readonly SonarCSharpLiveVariableAnalysis LiveVariableAnalysis;
             public readonly IControlFlowGraph ControlFlowGraph;
-            public readonly CSharpExplodedGraph ExplodedGraph;
+            public readonly SonarExplodedGraph ExplodedGraph;
 
             public bool ExplorationEnded;
             public bool MaxStepCountReached;
@@ -1545,7 +1545,7 @@ namespace Namespace
                 var methodBody = (CSharpSyntaxNode)MainMethod.Body ?? MainMethod.ExpressionBody;
                 ControlFlowGraph = CSharpControlFlowGraph.Create(methodBody, semanticModel);
                 LiveVariableAnalysis = new SonarCSharpLiveVariableAnalysis(ControlFlowGraph, MainMethodSymbol, semanticModel);
-                ExplodedGraph = new CSharpExplodedGraph(ControlFlowGraph, MainMethodSymbol, semanticModel, LiveVariableAnalysis);
+                ExplodedGraph = new SonarExplodedGraph(ControlFlowGraph, MainMethodSymbol, semanticModel, LiveVariableAnalysis);
                 ExplodedGraph.InstructionProcessed += (sender, args) => { NumberOfProcessedInstructions++; };
                 ExplodedGraph.ExplorationEnded += (sender, args) => { ExplorationEnded = true; };
                 ExplodedGraph.MaxStepCountReached += (sender, args) => { MaxStepCountReached = true; };
