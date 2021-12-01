@@ -32,12 +32,8 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void RedundantJumpStatement() =>
             Verifier.VerifyAnalyzer(@"TestCases\RedundantJumpStatement.cs",
                                     new RedundantJumpStatement(),
-#if NETFRAMEWORK
                                     ParseOptionsHelper.FromCSharp8,
-                                    NuGetMetadataReference.NETStandardV2_1_0);
-#else
-                                    ParseOptionsHelper.FromCSharp8);
-#endif
+                                    MetadataReferenceFacade.NETStandard21);
 
 #if NET
         [TestMethod]

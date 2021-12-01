@@ -52,12 +52,8 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void ConditionEvaluatesToConstant_FromCSharp8() =>
             Verifier.VerifyAnalyzer(@"TestCases\SymbolicExecution\Sonar\ConditionEvaluatesToConstant.CSharp8.cs",
                                     GetAnalyzer(),
-#if NETFRAMEWORK
                                     ParseOptionsHelper.FromCSharp8,
-                                    NuGetMetadataReference.NETStandardV2_1_0);
-#else
-                                    ParseOptionsHelper.FromCSharp8);
-#endif
+                                    MetadataReferenceFacade.NETStandard21);
 
 #if NET
         [TestMethod]

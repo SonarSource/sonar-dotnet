@@ -33,11 +33,7 @@ namespace SonarAnalyzer.UnitTest.Rules.SymbolicExecution
         public void VerifySymbolicExecutionRules() =>
             Verifier.VerifyAnalyzer(@"TestCases\SymbolicExecution\Sonar\SymbolicExecutionRules.cs",
                 new SymbolicExecutionRunner(),
-#if NETFRAMEWORK
                 ParseOptionsHelper.FromCSharp8,
-                NuGetMetadataReference.NETStandardV2_1_0);
-#else
-                ParseOptionsHelper.FromCSharp8);
-#endif
+                MetadataReferenceFacade.NETStandard21);
     }
 }

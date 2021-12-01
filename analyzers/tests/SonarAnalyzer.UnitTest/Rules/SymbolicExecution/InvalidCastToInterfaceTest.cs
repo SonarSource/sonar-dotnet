@@ -38,11 +38,7 @@ namespace SonarAnalyzer.UnitTest.Rules.SymbolicExecution
         public void InvalidCastToInterface(ProjectType projectType) =>
             Verifier.VerifyAnalyzer(@"TestCases\SymbolicExecution\Sonar\InvalidCastToInterface.cs",
                 GetAnalyzers(),
-#if NETFRAMEWORK
-                additionalReferences: TestHelper.ProjectTypeReference(projectType).Concat(NuGetMetadataReference.NETStandardV2_1_0),
-#else
-                additionalReferences: TestHelper.ProjectTypeReference(projectType),
-#endif
+                additionalReferences: TestHelper.ProjectTypeReference(projectType).Concat(MetadataReferenceFacade.NETStandard21),
                 options: ParseOptionsHelper.FromCSharp8);
 
 #if NET

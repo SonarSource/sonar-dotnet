@@ -33,6 +33,13 @@ namespace SonarAnalyzer.UnitTest.MetadataReferences
             new[] {CoreMetadataReference.MsCorLib};
 #endif
 
+        internal static References MicrosoftExtensionsDependencyInjectionAbstractions =>
+#if NETFRAMEWORK
+            NuGetMetadataReference.MicrosoftExtensionsDependencyInjectionAbstractions(Constants.DotNetCore220Version);
+#else
+            new[] { CoreMetadataReference.MicrosoftExtensionsDependencyInjectionAbstractions };
+#endif
+
         internal static References MicrosoftVisualBasic =>
 #if NETFRAMEWORK
             FrameworkMetadataReference.MicrosoftVisualBasic;
@@ -56,6 +63,13 @@ namespace SonarAnalyzer.UnitTest.MetadataReferences
             Enumerable.Empty<MetadataReference>();
 #else
             new[] {CoreMetadataReference.MicrosoftWin32Primitives};
+#endif
+
+        internal static References NETStandard21 =>
+#if NETFRAMEWORK
+            NuGetMetadataFactory.Create("NETStandard.Library.Ref", "2.1.0", "netstandard2.1");
+#else
+            Enumerable.Empty<MetadataReference>();
 #endif
 
         internal static References PresentationFramework =>

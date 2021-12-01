@@ -40,11 +40,10 @@ namespace SonarAnalyzer.UnitTest.Rules
                 {
                     @"TestCases\ClassName.cs",
                     @"TestCases\ClassName.Partial.cs",
-                }, new CS.ClassAndMethodName(),
-#if NETFRAMEWORK
-                additionalReferences: NuGetMetadataReference.NETStandardV2_1_0,
-#endif
-                options: ParseOptionsHelper.FromCSharp8);
+                },
+                new CS.ClassAndMethodName(),
+                ParseOptionsHelper.FromCSharp8,
+                MetadataReferenceFacade.NETStandard21);
 
         [TestMethod]
         public void ClassName_InTestProject_CS() =>

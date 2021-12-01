@@ -37,10 +37,8 @@ namespace SonarAnalyzer.UnitTest.Rules
                     @"TestCases\StaticFieldInitializerOrder_PartialClass.cs"
                 },
                 new StaticFieldInitializerOrder(),
-#if NETFRAMEWORK
-                additionalReferences: NuGetMetadataReference.NETStandardV2_1_0,
-#endif
-                options: ParseOptionsHelper.FromCSharp8);
+                ParseOptionsHelper.FromCSharp8,
+                MetadataReferenceFacade.NETStandard21);
 
 #if NET
         [TestMethod]

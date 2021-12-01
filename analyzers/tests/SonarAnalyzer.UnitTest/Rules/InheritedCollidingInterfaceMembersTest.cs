@@ -36,11 +36,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void InheritedCollidingInterfaceMembers_CSharp8() =>
             Verifier.VerifyAnalyzer(@"TestCases\InheritedCollidingInterfaceMembers.AfterCSharp8.cs",
                                     new InheritedCollidingInterfaceMembers(),
-#if NETFRAMEWORK
                                     ParseOptionsHelper.FromCSharp8,
-                                    NuGetMetadataReference.NETStandardV2_1_0);
-#else
-                                    ParseOptionsHelper.FromCSharp8);
-#endif
+                                    MetadataReferenceFacade.NETStandard21);
     }
 }
