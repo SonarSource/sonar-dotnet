@@ -18,12 +18,12 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using Microsoft.CodeAnalysis;
-using SonarAnalyzer.Common;
-using SonarAnalyzer.Helpers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Microsoft.CodeAnalysis;
+using SonarAnalyzer.Common;
+using SonarAnalyzer.Helpers;
 
 namespace SonarAnalyzer.Rules
 {
@@ -47,24 +47,20 @@ namespace SonarAnalyzer.Rules
         protected abstract SyntaxToken? GetMethodIdentifierToken(TBaseMethodSyntax baseMethodDeclaration);
         protected abstract string GetMethodKindAndName(SyntaxToken identifierToken);
 
-        protected sealed override void Initialize(ParameterLoadingAnalysisContext context)
-        {
+        protected override void Initialize(ParameterLoadingAnalysisContext context) =>
             context.RegisterSyntaxNodeActionInNonGenerated(
                 GeneratedCodeRecognizer,
                 c =>
                 {
                     if (Max < 2)
                     {
-                        throw new InvalidOperationException(
-                            $"Invalid rule parameter: maximum number of lines = {Max}. Must be at least 2.");
+                        throw new InvalidOperationException($"Invalid rule parameter: maximum number of lines = {Max}. Must be at least 2.");
                     }
 
                     var baseMethod = (TBaseMethodSyntax)c.Node;
-
-                    var linesCount = GetMethodTokens(baseMethod)
-                        .SelectMany(token => token.GetLineNumbers())
-                        .Distinct()
-                        .LongCount();
+                    var linesCount = GetMethodTokens(baseMethod).SelectMany(token => token.GetLineNumbers())
+                                                                .Distinct()
+                                                                .LongCount();
 
                     if (linesCount > Max)
                     {
@@ -72,13 +68,16 @@ namespace SonarAnalyzer.Rules
 
                         if (!string.IsNullOrEmpty(identifierToken?.ValueText))
                         {
-                            c.ReportIssue(Diagnostic.Create(SupportedDiagnostics[0], identifierToken.Value.GetLocation(),
-                                GetMethodKindAndName(identifierToken.Value), linesCount, Max, MethodKeyword));
+                            c.ReportIssue(Diagnostic.Create(
+                                SupportedDiagnostics[0],
+                                identifierToken.Value.GetLocation(),
+                                GetMethodKindAndName(identifierToken.Value),
+                                linesCount,
+                                Max,
+                                MethodKeyword));
                         }
                     }
                 },
                 SyntaxKinds);
-        }
     }
 }
-

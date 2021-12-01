@@ -1,10 +1,10 @@
-﻿// Top-level statements are also in a method
-int i = 1; i++; // FN
+﻿// Noncompliant {{This top level function body has 11 lines, which is greater than the 2 lines authorized.}}
+int i = 1; i++;
 i++;
 i++;
 i++;
 
-void LocalFunction() // FN
+void LocalFunction() // Local functions are checked as part of the method.
 {
     i++;
     i++;
@@ -29,7 +29,6 @@ record Sample
         i++;
         i++;
     }
-
 
     public void Method_01() // Noncompliant {{This method 'Method_01' has 3 lines, which is greater than the 2 lines authorized. Split it into smaller methods.}}
     {
