@@ -33,6 +33,10 @@
     <Compile Include="..\Signing.cs" Link="Properties\Signing.cs" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\SonarAnalyzer.CFG\SonarAnalyzer.CFG.csproj" />
+  </ItemGroup>
+
   <!-- Generate protobuf classes, supports windows and linux execution -->
   <Target Name="GenerateProtobufClasses" BeforeTargets="CoreCompile" Outputs="./Protobuf/AnalyzerReport.cs" Inputs="./Protobuf/AnalyzerReport.proto">
     <Message Importance="high" Text="Generating protobuf classes..." />

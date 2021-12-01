@@ -101,6 +101,23 @@
           "System.Xml.XmlDocument": "4.0.1"
         }
       },
+      "Microsoft.CodeAnalysis.CSharp": {
+        "type": "Transitive",
+        "resolved": "1.3.2",
+        "contentHash": "GrYMp6ScZDOMR0fNn/Ce6SegNVFw1G/QRT/8FiKv7lAP+V6lEZx9e42n0FvFUgjjcKgcEJOI4muU6i+3LSvOBA==",
+        "dependencies": {
+          "Microsoft.CodeAnalysis.Common": "[1.3.2]"
+        }
+      },
+      "Microsoft.CodeAnalysis.CSharp.Workspaces": {
+        "type": "Transitive",
+        "resolved": "1.3.2",
+        "contentHash": "MwGmrrPx3okEJuCogSn4TM3yTtJUDdmTt8RXpnjVo0dPund0YSAq4bHQQ9bxgArbrrapcopJmkb7UOLAvanXkg==",
+        "dependencies": {
+          "Microsoft.CodeAnalysis.CSharp": "[1.3.2]",
+          "Microsoft.CodeAnalysis.Workspaces.Common": "[1.3.2]"
+        }
+      },
       "Microsoft.CodeAnalysis.VisualBasic": {
         "type": "Transitive",
         "resolved": "1.3.2",
@@ -341,6 +358,16 @@
           "Google.Protobuf.Tools": "3.6.1",
           "Microsoft.CodeAnalysis.Workspaces.Common": "1.3.2",
           "Microsoft.Composition": "1.0.27",
+          "SonarAnalyzer.CFG": "1.0.0",
+          "System.Collections.Immutable": "1.1.37",
+          "System.Text.RegularExpressions": "4.3.1"
+        }
+      },
+      "sonaranalyzer.cfg": {
+        "type": "Project",
+        "dependencies": {
+          "Microsoft.CodeAnalysis.CSharp.Workspaces": "1.3.2",
+          "Microsoft.Composition": "1.0.27",
           "System.Collections.Immutable": "1.1.37",
           "System.Text.RegularExpressions": "4.3.1"
         }
@@ -454,6 +481,23 @@
           "System.Xml.XDocument": "4.0.11",
           "System.Xml.XPath.XDocument": "4.0.1",
           "System.Xml.XmlDocument": "4.0.1"
+        }
+      },
+      "Microsoft.CodeAnalysis.CSharp": {
+        "type": "Transitive",
+        "resolved": "1.3.2",
+        "contentHash": "GrYMp6ScZDOMR0fNn/Ce6SegNVFw1G/QRT/8FiKv7lAP+V6lEZx9e42n0FvFUgjjcKgcEJOI4muU6i+3LSvOBA==",
+        "dependencies": {
+          "Microsoft.CodeAnalysis.Common": "[1.3.2]"
+        }
+      },
+      "Microsoft.CodeAnalysis.CSharp.Workspaces": {
+        "type": "Transitive",
+        "resolved": "1.3.2",
+        "contentHash": "MwGmrrPx3okEJuCogSn4TM3yTtJUDdmTt8RXpnjVo0dPund0YSAq4bHQQ9bxgArbrrapcopJmkb7UOLAvanXkg==",
+        "dependencies": {
+          "Microsoft.CodeAnalysis.CSharp": "[1.3.2]",
+          "Microsoft.CodeAnalysis.Workspaces.Common": "[1.3.2]"
         }
       },
       "Microsoft.CodeAnalysis.VisualBasic": {
@@ -1240,6 +1284,16 @@
           "Google.Protobuf": "3.6.1",
           "Google.Protobuf.Tools": "3.6.1",
           "Microsoft.CodeAnalysis.Workspaces.Common": "1.3.2",
+          "Microsoft.Composition": "1.0.27",
+          "SonarAnalyzer.CFG": "1.0.0",
+          "System.Collections.Immutable": "1.1.37",
+          "System.Text.RegularExpressions": "4.3.1"
+        }
+      },
+      "sonaranalyzer.cfg": {
+        "type": "Project",
+        "dependencies": {
+          "Microsoft.CodeAnalysis.CSharp.Workspaces": "1.3.2",
           "Microsoft.Composition": "1.0.27",
           "System.Collections.Immutable": "1.1.37",
           "System.Text.RegularExpressions": "4.3.1"

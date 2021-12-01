@@ -33,33 +33,19 @@ namespace SonarAnalyzer.UnitTest.Helpers
         public static void OnlyContain<T, TAssertions>(this SelfReferencingCollectionAssertions<T, TAssertions> self, params T[] expected)
              where TAssertions : SelfReferencingCollectionAssertions<T, TAssertions>
         {
-            if (expected == null)
-            {
-                throw new ArgumentNullException(nameof(expected));
-            }
-
-            self.Subject
-                .Should().HaveSameCount(expected)
-                .And.Contain(expected);
+            _ = expected ?? throw new ArgumentNullException(nameof(expected));
+            self.Subject.Should().Contain(expected).And.HaveSameCount(expected);
         }
 
         public static void OnlyContainInOrder<T, TAssertions>(this SelfReferencingCollectionAssertions<T, TAssertions> self, params T[] expected)
              where TAssertions : SelfReferencingCollectionAssertions<T, TAssertions>
         {
-            if (expected == null)
-            {
-                throw new ArgumentNullException(nameof(expected));
-            }
-
-            self.Subject
-                .Should().HaveSameCount(expected)
-                .And.ContainInOrder(expected);
+            _ = expected ?? throw new ArgumentNullException(nameof(expected));
+            self.Subject.Should().ContainInOrder(expected).And.HaveSameCount(expected);
         }
 
-        public static void BeIgnoringLineEndings(this StringAssertions stringAssertions, string expected)
-        {
+        public static void BeIgnoringLineEndings(this StringAssertions stringAssertions, string expected) =>
             stringAssertions.Subject.ToLinuxLineEndings().Should().Be(expected.ToLinuxLineEndings());
-        }
 
         // This allows to deal with multiple line endings
         private static string ToLinuxLineEndings(this string str) =>
