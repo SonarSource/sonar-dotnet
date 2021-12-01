@@ -43,9 +43,18 @@ namespace SonarAnalyzer.Helpers.Trackers
 
             void TrackMethodDeclaration(SymbolAnalysisContext c)
             {
-                if (IsTrackedMethod((IMethodSymbol)c.Symbol, c.Compilation))
+                if (!IsTrackedMethod((IMethodSymbol)c.Symbol, c.Compilation))
                 {
-                    foreach (var declaration in c.Symbol.DeclaringSyntaxReferences)
+                    return;
+                }
+
+                foreach (var declaration in c.Symbol.DeclaringSyntaxReferences)
+                {
+                    if (c.Symbol.IsTopLevelMain())
+                    {
+                        c.ReportIssue(Diagnostic.Create(input.Rule, null));
+                    }
+                    else
                     {
                         var methodIdentifier = GetMethodIdentifier(declaration.GetSyntax());
                         if (methodIdentifier.HasValue)
@@ -70,7 +79,8 @@ namespace SonarAnalyzer.Helpers.Trackers
             context => context.MethodSymbol.MethodKind == MethodKind.Ordinary;
 
         public Condition IsMainMethod() =>
-            context => context.MethodSymbol.IsMainMethod();
+            context => context.MethodSymbol.IsMainMethod()
+                       || context.MethodSymbol.IsTopLevelMain();
 
         internal Condition AnyParameterIsOfType(params KnownType[] types)
         {
