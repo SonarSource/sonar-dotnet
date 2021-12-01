@@ -41,17 +41,7 @@ namespace SonarAnalyzer.UnitTest.Wrappers
         [TestMethod]
         public void ValidateReflection()
         {
-            const string code = @"
-public class Sample
-{
-    public void Method()
-    {
-        var value = 42;
-    }
-}";
-            var (tree, semanticModel) = TestHelper.Compile(code);
-            var declaration = tree.GetRoot().DescendantNodes().OfType<EqualsValueClauseSyntax>().Single();
-            var sut = new IOperationWrapperSonar(semanticModel.GetOperation(declaration));
+            var sut = CreateWrapper(out var semanticModel);
             sut.Parent.Should().NotBeNull();
             sut.Parent.Kind.Should().Be(OperationKind.VariableDeclarator);
             sut.Instance.Should().NotBeNull();
@@ -61,6 +51,54 @@ public class Sample
             sut.Language.Should().Be("C#");
             sut.IsImplicit.Should().Be(false);
             sut.SemanticModel.Should().Be(semanticModel);
+        }
+
+        [TestMethod]
+        public void GetHashCode_ReturnsOperationHash()
+        {
+            var sut = CreateWrapper(out _);
+            sut.GetHashCode().Should().Be(sut.Instance.GetHashCode());
+        }
+
+        [TestMethod]
+        public void Equals_ComparesUnderlyingInstance()
+        {
+            var sut = CreateWrapper(out _);
+            var other = new IOperationWrapperSonar(sut.Instance);
+            sut.Equals(other).Should().BeTrue();
+        }
+
+        [TestMethod]
+        public void Equals_NotEqual()
+        {
+            var sut = CreateWrapper(out _);
+            sut.Parent.Should().NotBeNull();
+
+            sut.Equals(null).Should().BeFalse();
+            sut.Equals("Other type").Should().BeFalse();
+            sut.Equals(sut.Parent).Should().BeFalse();
+        }
+
+        [TestMethod]
+        public void ToString_ReturnsInstanceToString()
+        {
+            var sut = CreateWrapper(out _);
+            sut.ToString().Should().Be(sut.Instance.ToString());
+        }
+
+        private static IOperationWrapperSonar CreateWrapper(out SemanticModel semanticModel)
+        {
+            const string code = @"
+public class Sample
+{
+    public void Method()
+    {
+        var value = 42;
+    }
+}";
+            (var tree, semanticModel) = TestHelper.Compile(code);
+            var declaration = tree.GetRoot().DescendantNodes().OfType<EqualsValueClauseSyntax>().Single();
+            return new IOperationWrapperSonar(semanticModel.GetOperation(declaration));
         }
     }
 }
