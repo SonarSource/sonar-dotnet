@@ -41,6 +41,15 @@ namespace SonarAnalyzer.UnitTest.Rules
                 new RedundantCast(),
                 ParseOptionsHelper.FromCSharp8);
 
+#if NET
+        [TestMethod]
+        public void RedundantCast_CSharp9() =>
+            Verifier.VerifyAnalyzer(
+                @"TestCases\RedundantCast.CSharp9.cs",
+                new RedundantCast(),
+                ParseOptionsHelper.FromCSharp9);
+#endif
+
         [TestMethod]
         public void RedundantCast_CodeFix() =>
             Verifier.VerifyCodeFix(
