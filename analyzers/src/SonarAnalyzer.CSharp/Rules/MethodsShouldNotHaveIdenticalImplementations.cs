@@ -38,7 +38,7 @@ namespace SonarAnalyzer.Rules.CSharp
     {
         protected override ILanguageFacade<SyntaxKind> Language => CSharpFacade.Instance;
 
-        protected override SyntaxKind[] RegisteredSyntax => new[]
+        protected override SyntaxKind[] SyntaxKinds => new[]
         {
             SyntaxKind.ClassDeclaration,
             SyntaxKindEx.RecordClassDeclaration,
@@ -58,15 +58,7 @@ namespace SonarAnalyzer.Rules.CSharp
             && firstMethod.Body.IsEquivalentTo(secondMethod.Body, false);
 
         protected override SyntaxToken GetMethodIdentifier(IMethodDeclaration method) => method.Identifier;
-        protected override bool ShouldBeAnalyzed(ISymbol nodeContainingSymbol) =>
-            nodeContainingSymbol.Kind == SymbolKind.NamedType || CompilationUnitContainsTopLevelStatements(nodeContainingSymbol);
-
-        private bool CompilationUnitContainsTopLevelStatements(ISymbol compilationUnitContainingSymbol) =>
-            compilationUnitContainingSymbol is INamespaceSymbol namespaceSymbol
-            && namespaceSymbol.IsGlobalNamespace
-            && namespaceSymbol.GetMembers()
-                              .OfType<INamedTypeSymbol>()
-                              .Any(x => x.IsTopLevelProgram());
-
+        protected override bool IsExcludedFromBeingExamined(ISymbol nodeContainingSymbol) =>
+            base.IsExcludedFromBeingExamined(nodeContainingSymbol) && !nodeContainingSymbol.IsTopLevelMain();
     }
 }

@@ -34,12 +34,14 @@ namespace SonarAnalyzer.Rules
 
         private readonly DiagnosticDescriptor rule;
         protected abstract ILanguageFacade<TLanguageKindEnum> Language { get; }
-        protected abstract TLanguageKindEnum[] RegisteredSyntax { get; }
+        protected abstract TLanguageKindEnum[] SyntaxKinds { get; }
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
+
         protected abstract IEnumerable<TMethodDeclarationSyntax> GetMethodDeclarations(SyntaxNode node);
         protected abstract SyntaxToken GetMethodIdentifier(TMethodDeclarationSyntax method);
         protected abstract bool AreDuplicates(TMethodDeclarationSyntax firstMethod, TMethodDeclarationSyntax secondMethod);
-        protected virtual bool ShouldBeAnalyzed(ISymbol nodeContainingSymbol) => nodeContainingSymbol.Kind == SymbolKind.NamedType;
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
+        protected virtual bool IsExcludedFromBeingExamined(ISymbol nodeContainingSymbol) =>
+            nodeContainingSymbol.Kind != SymbolKind.NamedType;
 
         protected MethodsShouldNotHaveIdenticalImplementationsBase() =>
             rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, Language.RspecResources);
@@ -48,7 +50,7 @@ namespace SonarAnalyzer.Rules
             context.RegisterSyntaxNodeActionInNonGenerated(Language.GeneratedCodeRecognizer,
                 c =>
                 {
-                    if (!ShouldBeAnalyzed(c.ContainingSymbol))
+                    if (IsExcludedFromBeingExamined(c.ContainingSymbol))
                     {
                         return;
                     }
@@ -80,7 +82,7 @@ namespace SonarAnalyzer.Rules
                         }
                     }
                 },
-                RegisteredSyntax);
+                SyntaxKinds);
 
         protected static bool HaveSameParameters<TSyntax>(SeparatedSyntaxList<TSyntax>? leftParameters, SeparatedSyntaxList<TSyntax>? rightParameters)
             where TSyntax : SyntaxNode

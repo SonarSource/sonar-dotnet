@@ -1,19 +1,19 @@
 ﻿using System;
 
-void Method1()// Secondary
-              // Secondary@-1
+void Method1()// Secondary [0]
+              // Secondary@-1 [1]
 {
     string s = "test";
     Console.WriteLine("Result: {0}", s);
 }
 
-void Method2() // Noncompliant {{Update this method so that its implementation is not identical to 'Method1'.}}
+void Method2() // Noncompliant [0] {{Update this method so that its implementation is not identical to 'Method1'.}}
 {
     string s = "test";
     Console.WriteLine("Result: {0}", s);
 }
 
-void Method3() // Noncompliant {{Update this method so that its implementation is not identical to 'Method1'.}}
+void Method3() // Noncompliant [1] {{Update this method so that its implementation is not identical to 'Method1'.}}
 {
     string s = "test";
     Console.WriteLine("Result: {0}", s);
@@ -26,20 +26,20 @@ void Method4()
 
 public record Sample
 {
-    public void Method1() // Secondary
-                          // Secondary@-1
+    public void Method1() // Secondary [2]
+                          // Secondary@-1 [3]
     {
         string s = "test";
         Console.WriteLine("Result: {0}", s);
     }
 
-    public void Method2() // Noncompliant {{Update this method so that its implementation is not identical to 'Method1'.}}
+    public void Method2() // Noncompliant [2] {{Update this method so that its implementation is not identical to 'Method1'.}}
     {
         string s = "test";
         Console.WriteLine("Result: {0}", s);
     }
 
-    public void Method3() // Noncompliant {{Update this method so that its implementation is not identical to 'Method1'.}}
+    public void Method3() // Noncompliant [3] {{Update this method so that its implementation is not identical to 'Method1'.}}
     {
         string s = "test";
         Console.WriteLine("Result: {0}", s);
@@ -61,13 +61,13 @@ public record Sample
 
 public record SamplePositional(string Value)
 {
-    public void Method1() // Secondary
+    public void Method1() // Secondary [4]
     {
         string s = "test";
         Console.WriteLine("Result: {0}", s);
     }
 
-    public void Method2() // Noncompliant {{Update this method so that its implementation is not identical to 'Method1'.}}
+    public void Method2() // Noncompliant [4] {{Update this method so that its implementation is not identical to 'Method1'.}}
     {
         string s = "test";
         Console.WriteLine("Result: {0}", s);
