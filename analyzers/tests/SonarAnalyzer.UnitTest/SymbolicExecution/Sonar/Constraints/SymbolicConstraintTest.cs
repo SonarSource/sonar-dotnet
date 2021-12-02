@@ -63,10 +63,10 @@ namespace SonarAnalyzer.UnitTest.SymbolicExecution.Sonar.Constraints
         }
 
         [TestMethod]
-        public void NullableValueConstraint_ToString()
+        public void NullableConstraint_ToString()
         {
-            NullableValueConstraint.HasValue.ToString().Should().Be("HasValue");
-            NullableValueConstraint.NoValue.ToString().Should().Be("NoValue");
+            NullableConstraint.HasValue.ToString().Should().Be("HasValue");
+            NullableConstraint.NoValue.ToString().Should().Be("NoValue");
         }
 
         [TestMethod]

@@ -96,9 +96,9 @@ namespace SonarAnalyzer.SymbolicExecution.Sonar.Constraints
             if (constraint is BoolConstraint)
             {
                 constraints[typeof(ObjectConstraint)] = ObjectConstraint.NotNull;
-                if (constraints.ContainsKey(typeof(NullableValueConstraint)))
+                if (constraints.ContainsKey(typeof(NullableConstraint)))
                 {
-                    constraints[typeof(NullableValueConstraint)] = NullableValueConstraint.HasValue;
+                    constraints[typeof(NullableConstraint)] = NullableConstraint.HasValue;
                 }
             }
         }

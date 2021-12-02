@@ -220,13 +220,13 @@ namespace SonarAnalyzer.UnitTest.SymbolicExecution.Sonar.SymbolicValues
         {
             new object[]
             {
-                NullableValueConstraint.NoValue, // constraint to set
+                NullableConstraint.NoValue, // constraint to set
                 ConstraintList(), // existing
                 ProgramStateList(ConstraintList()) // Expected, NoValue cannot be applied on non-NullableSymbolicValue
             },
             new object[]
             {
-                NullableValueConstraint.NoValue, // constraint to set
+                NullableConstraint.NoValue, // constraint to set
                 ConstraintList(ObjectConstraint.Null), // existing
                 ProgramStateList(ConstraintList(ObjectConstraint.Null)) // Expected, NoValue cannot be applied on non-NullableSymbolicValue
             },
@@ -236,13 +236,13 @@ namespace SonarAnalyzer.UnitTest.SymbolicExecution.Sonar.SymbolicValues
         {
             new object[]
             {
-                NullableValueConstraint.HasValue, // constraint to set
+                NullableConstraint.HasValue, // constraint to set
                 ConstraintList(), // existing
                 ProgramStateList(ConstraintList()) // Expected, HasValue cannot be applied on non-NullableSymbolicValue
             },
             new object[]
             {
-                NullableValueConstraint.HasValue, // constraint to set
+                NullableConstraint.HasValue, // constraint to set
                 ConstraintList(ObjectConstraint.Null), // existing
                 ProgramStateList(ConstraintList(ObjectConstraint.Null)) // Expected, HasValue cannot be applied on non-NullableSymbolicValue
             },
