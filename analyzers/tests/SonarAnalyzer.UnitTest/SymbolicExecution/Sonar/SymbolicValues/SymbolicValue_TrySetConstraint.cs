@@ -556,19 +556,19 @@ namespace SonarAnalyzer.UnitTest.SymbolicExecution.Sonar.SymbolicValues
             }
         };
 
-        private static IEnumerable<object[]> SaltSizeSymbolicValueConstraintData { get; } = new[]
+        private static IEnumerable<object[]> SaltSizeConstraintData { get; } = new[]
         {
             new object[]
             {
-                SaltSizeSymbolicValueConstraint.Safe, // constraint to set
-                ConstraintList(SaltSizeSymbolicValueConstraint.Short), // existing
-                ProgramStateList(ConstraintList(SaltSizeSymbolicValueConstraint.Safe)) // Expected
+                SaltSizeConstraint.Safe, // constraint to set
+                ConstraintList(SaltSizeConstraint.Short), // existing
+                ProgramStateList(ConstraintList(SaltSizeConstraint.Safe)) // Expected
             },
             new object[]
             {
-                SaltSizeSymbolicValueConstraint.Short, // constraint to set
-                ConstraintList(SaltSizeSymbolicValueConstraint.Safe), // existing
-                ProgramStateList(ConstraintList(SaltSizeSymbolicValueConstraint.Short)) // Expected
+                SaltSizeConstraint.Short, // constraint to set
+                ConstraintList(SaltSizeConstraint.Safe), // existing
+                ProgramStateList(ConstraintList(SaltSizeConstraint.Short)) // Expected
             }
         };
 
@@ -587,7 +587,7 @@ namespace SonarAnalyzer.UnitTest.SymbolicExecution.Sonar.SymbolicValues
         [DynamicData(nameof(NotWhiteSpaceStringConstraintData))]
         [DynamicData(nameof(ByteArrayConstraintData))]
         [DynamicData(nameof(CryptographyIVSymbolicValueConstraintData))]
-        [DynamicData(nameof(SaltSizeSymbolicValueConstraintData))]
+        [DynamicData(nameof(SaltSizeConstraintData))]
         public void TrySetConstraint(SymbolicConstraint constraint,
                                      IList<SymbolicConstraint> existingConstraints,
                                      IList<IList<SymbolicConstraint>> expectedConstraintsPerProgramState)

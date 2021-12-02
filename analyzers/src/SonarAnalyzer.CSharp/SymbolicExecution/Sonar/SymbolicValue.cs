@@ -84,7 +84,7 @@ namespace SonarAnalyzer.SymbolicExecution.Sonar
             }
             else if (constraint is ByteArrayConstraint
                      || constraint is CryptographyIVSymbolicValueConstraint
-                     || constraint is SaltSizeSymbolicValueConstraint)
+                     || constraint is SaltSizeConstraint)
             {
                 return new[] { programState.SetConstraint(this, constraint) };
             }

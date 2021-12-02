@@ -110,7 +110,7 @@ namespace SonarAnalyzer.Rules.SymbolicExecution
                     && semanticModel.GetTypeInfo(arrayCreation).Type.Is(KnownType.System_Byte_Array)
                     && GetSize(arrayCreation) < MinimumSafeLength)
                 {
-                    programState = programState.SetConstraint(programState.PeekValue(), SaltSizeSymbolicValueConstraint.Short);
+                    programState = programState.SetConstraint(programState.PeekValue(), SaltSizeConstraint.Short);
                 }
 
                 return programState;
@@ -129,7 +129,7 @@ namespace SonarAnalyzer.Rules.SymbolicExecution
                     {
                         context.AddLocation(new LocationContext(objectCreation.ArgumentList.Arguments[1].Expression.GetLocation(), MakeSaltUnpredictableMessage));
                     }
-                    else if (programState.HasConstraint(symbolicValue, SaltSizeSymbolicValueConstraint.Short))
+                    else if (programState.HasConstraint(symbolicValue, SaltSizeConstraint.Short))
                     {
                         context.AddLocation(new LocationContext(objectCreation.ArgumentList.Arguments[1].Expression.GetLocation(), MakeThisSaltLongerMessage));
                     }

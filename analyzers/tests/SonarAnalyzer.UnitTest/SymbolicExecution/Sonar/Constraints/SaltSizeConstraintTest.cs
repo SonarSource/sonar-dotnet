@@ -25,22 +25,22 @@ using SonarAnalyzer.SymbolicExecution.Sonar.Constraints;
 namespace SonarAnalyzer.UnitTest.SymbolicExecution.Sonar.Constraints
 {
     [TestClass]
-    public class SaltSizeSymbolicValueConstraintTest
+    public class SaltSizeConstraintTest
     {
         [TestMethod]
         public void GivenSaltSizeIsShort_OppositeShouldBe_Safe() =>
-            SaltSizeSymbolicValueConstraint.Short.Opposite.Should().Be(SaltSizeSymbolicValueConstraint.Safe);
+            SaltSizeConstraint.Short.Opposite.Should().Be(SaltSizeConstraint.Safe);
 
         [TestMethod]
         public void GivenSaltSizeIsSafe_OppositeShouldBe_Short() =>
-            SaltSizeSymbolicValueConstraint.Safe.Opposite.Should().Be(SaltSizeSymbolicValueConstraint.Short);
+            SaltSizeConstraint.Safe.Opposite.Should().Be(SaltSizeConstraint.Short);
 
         [TestMethod]
         public void GivenSaltSizeIsShort_ToStringShouldBe_Short() =>
-            SaltSizeSymbolicValueConstraint.Short.ToString().Should().Be("Short");
+            SaltSizeConstraint.Short.ToString().Should().Be("Short");
 
         [TestMethod]
         public void GivenSaltSizeIsSafe_ToStringShouldBe_Safe() =>
-            SaltSizeSymbolicValueConstraint.Safe.ToString().Should().Be("Safe");
+            SaltSizeConstraint.Safe.ToString().Should().Be("Safe");
     }
 }
