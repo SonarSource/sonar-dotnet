@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project>
+  <!-- This file is included in all projects inside src and tests directories. -->
+  <Import Project="$(MSBuildThisFileDirectory)\StyleCopAnalyzers.targets" />
+
+  <PropertyGroup>
+    <RunAnalyzersDuringBuild>false</RunAnalyzersDuringBuild>
+    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <AdditionalFiles Include="$(MSBuildThisFileDirectory)\.sonarlint\sonaranalyzer-dotnet\CSharp\SonarLint.xml" Link="Properties\SonarLint.xml" />
+    <Compile Include="$(MSBuildThisFileDirectory)\src\AssemblyInfo.Shared.cs" Link="Properties\AssemblyInfo.Shared.cs" />
+  </ItemGroup>
+</Project>
