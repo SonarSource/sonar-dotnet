@@ -86,7 +86,7 @@ namespace NS
         public Foo(int i) {}
     }
 }";
-            var (ctor, semanticModel) = TestHelper.Compile(input).GetConstructor("Foo");
+            var (ctor, semanticModel) = TestHelper.CompileCS(input).GetConstructor("Foo");
             var cfg = CSharpControlFlowGraph.Create(ctor.Body, semanticModel);
 
             VerifyCfg(cfg, 5);
@@ -126,7 +126,7 @@ namespace NS
         public Foo(int i) {}
     }
 }";
-            var (ctor, semanticModel) = TestHelper.Compile(input).GetConstructor("Foo");
+            var (ctor, semanticModel) = TestHelper.CompileCS(input).GetConstructor("Foo");
             var cfg = CSharpControlFlowGraph.Create(ctor.Body, semanticModel);
 
             VerifyCfg(cfg, 2);
@@ -158,7 +158,7 @@ namespace NS
         public Bar(int i) {}
     }
 }";
-            var (ctor, semanticModel) = TestHelper.Compile(input).GetConstructor("Foo");
+            var (ctor, semanticModel) = TestHelper.CompileCS(input).GetConstructor("Foo");
             var cfg = CSharpControlFlowGraph.Create(ctor.Body, semanticModel);
 
             VerifyCfg(cfg, 2);
@@ -197,7 +197,7 @@ public class Sample
         return {ExtremelyNestedExpression()};
     }}
 }}";
-            var (method, semanticModel) = TestHelper.Compile(input).GetMethod("Main");
+            var (method, semanticModel) = TestHelper.CompileCS(input).GetMethod("Main");
             Action a = () => CSharpControlFlowGraph.Create(method.Body, semanticModel);
 
             a.Should().Throw<NotSupportedException>().WithMessage("Too complex expression");
@@ -212,7 +212,7 @@ public class Sample
 {{
     public string Main() =>{ExtremelyNestedExpression()};
 }}";
-            var (method, semanticModel) = TestHelper.Compile(input).GetMethod("Main");
+            var (method, semanticModel) = TestHelper.CompileCS(input).GetMethod("Main");
             Action a = () => CSharpControlFlowGraph.Create(method.ExpressionBody, semanticModel);
 
             a.Should().Throw<NotSupportedException>().WithMessage("Too complex expression");
@@ -229,7 +229,7 @@ public class Sample
 
     public void Go(System.Func<string, string> arg) {{ }}
 }}";
-            var (method, semanticModel) = TestHelper.Compile(input).GetMethod("Main");
+            var (method, semanticModel) = TestHelper.CompileCS(input).GetMethod("Main");
             CSharpControlFlowGraph.Create(method.ExpressionBody, semanticModel).Should().NotBeNull();
             CSharpControlFlowGraph.TryGet(method.ExpressionBody, semanticModel, out _).Should().BeTrue();
         }
@@ -244,7 +244,7 @@ public class Sample
 
     public void Go(System.Func<string> arg) {{ }}
 }}";
-            var (method, semanticModel) = TestHelper.Compile(input).GetMethod("Main");
+            var (method, semanticModel) = TestHelper.CompileCS(input).GetMethod("Main");
             CSharpControlFlowGraph.Create(method.ExpressionBody, semanticModel).Should().NotBeNull();
             CSharpControlFlowGraph.TryGet(method.ExpressionBody, semanticModel, out _).Should().BeTrue();
         }
@@ -5066,7 +5066,7 @@ namespace NS
         internal static MethodDeclarationSyntax CompileWithMethodBody(string input, string methodName, out SemanticModel semanticModel, ParseOptions parseOptions = null)
         {
             MethodDeclarationSyntax methodDeclaration;
-            (methodDeclaration, semanticModel) = TestHelper.CompileIgnoreErrors(input).GetMethod(methodName);
+            (methodDeclaration, semanticModel) = TestHelper.CompileIgnoreErrorsCS(input).GetMethod(methodName);
             return methodDeclaration;
         }
 

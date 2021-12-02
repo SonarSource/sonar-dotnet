@@ -110,7 +110,7 @@ public class Sample
         var x = 42;
     }
 }";
-            var (tree, semanticModel) = TestHelper.Compile(code);
+            var (tree, semanticModel) = TestHelper.CompileCS(code);
             var node = tree.GetRoot().DescendantNodes().OfType<MethodDeclarationSyntax>().Single();
 
             SyntaxNodeExtensions.CreateCfg(node.Body, semanticModel).Should().NotBeNull();
@@ -128,7 +128,7 @@ public class Sample
         Main();
     }
 }";
-            var (tree, semanticModel) = TestHelper.Compile(code);
+            var (tree, semanticModel) = TestHelper.CompileCS(code);
             var node = tree.GetRoot().DescendantNodes().OfType<InvocationExpressionSyntax>().Single();
 
             SyntaxNodeExtensions.CreateCfg(node, semanticModel).Should().NotBeNull();
@@ -147,7 +147,7 @@ public class Sample
         var result = from value in values select new Lazy<int>(() => value);
     }
 }";
-            var (tree, semanticModel) = TestHelper.Compile(code);
+            var (tree, semanticModel) = TestHelper.CompileCS(code);
             var lambda = tree.GetRoot().DescendantNodes().OfType<ParenthesizedLambdaExpressionSyntax>().Single();
 
             SyntaxNodeExtensions.CreateCfg(lambda.Body, semanticModel).Should().NotBeNull();
@@ -189,7 +189,7 @@ public class Sample
         }
     }
 }";
-            var (tree, semanticModel) = TestHelper.Compile(code);
+            var (tree, semanticModel) = TestHelper.CompileCS(code);
             var innerLambda = tree.GetRoot().DescendantNodes().OfType<SimpleLambdaExpressionSyntax>().Single();
             innerLambda.Parent.Parent.Should().BeOfType<VariableDeclaratorSyntax>().Subject.Identifier.ValueText.Should().Be("innerLambda");
 
@@ -217,7 +217,7 @@ public class Sample
         Undefined(() => 45);
     }
 }";
-            var (tree, semanticModel) = TestHelper.CompileIgnoreErrors(code);
+            var (tree, semanticModel) = TestHelper.CompileIgnoreErrorsCS(code);
             var lambda = tree.GetRoot().DescendantNodes().OfType<ParenthesizedLambdaExpressionSyntax>().Single();
 
             SyntaxNodeExtensions.CreateCfg(lambda.Body, semanticModel).Should().NotBeNull();
@@ -230,7 +230,7 @@ public class Sample
         [DataRow(@"{ () => => =>")]
         public void CreateCfg_InvalidSyntax_ReturnsCfg(string code)
         {
-            var (tree, semanticModel) = TestHelper.CompileIgnoreErrors(code);
+            var (tree, semanticModel) = TestHelper.CompileIgnoreErrorsCS(code);
             var lambda = tree.GetRoot().DescendantNodes().OfType<ParenthesizedLambdaExpressionSyntax>().Single();
 
             SyntaxNodeExtensions.CreateCfg(lambda.Body, semanticModel).Should().NotBeNull();

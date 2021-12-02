@@ -36,7 +36,7 @@ class Sample
 {
     void Method() { }
 }";
-            var dot = CfgSerializer.Serialize(TestHelper.CompileCfg(code), "GraphTitle");
+            var dot = CfgSerializer.Serialize(TestHelper.CompileCfgCS(code), "GraphTitle");
             dot.Should().BeIgnoringLineEndings(
 @"digraph ""GraphTitle"" {
 cfg0_block0 [shape=record label=""{ENTRY #0}""]
@@ -54,7 +54,7 @@ class Sample
 {
     void Method() { }
 }";
-            var dot = CfgSerializer.Serialize(TestHelper.CompileCfg(code));
+            var dot = CfgSerializer.Serialize(TestHelper.CompileCfgCS(code));
 
             dot.Should().BeIgnoringLineEndings(
 @"digraph ""RoslynCfg"" {
@@ -82,7 +82,7 @@ class Sample
     private void B() { }
     private int C() => 42;
 }";
-            var dot = CfgSerializer.Serialize(TestHelper.CompileCfg(code));
+            var dot = CfgSerializer.Serialize(TestHelper.CompileCfgCS(code));
             dot.Should().BeIgnoringLineEndings(
 @"digraph ""RoslynCfg"" {
 subgraph ""cluster_LocalLifetime region"" {
@@ -120,7 +120,7 @@ class Sample
     private void c2() { }
 }
 ";
-            var dot = CfgSerializer.Serialize(TestHelper.CompileCfg(code));
+            var dot = CfgSerializer.Serialize(TestHelper.CompileCfgCS(code));
             dot.Should().BeIgnoringLineEndings(
 @"digraph ""RoslynCfg"" {
 subgraph ""cluster_LocalLifetime region"" {
@@ -159,7 +159,7 @@ class Sample
     void Bar() { }
 }
 ";
-            var dot = CfgSerializer.Serialize(TestHelper.CompileCfg(code));
+            var dot = CfgSerializer.Serialize(TestHelper.CompileCfgCS(code));
 
             dot.Should().BeIgnoringLineEndings(
 @"digraph ""RoslynCfg"" {
@@ -190,7 +190,7 @@ class Sample
     }
     private void Bar(int i) { }
 }";
-            var dot = CfgSerializer.Serialize(TestHelper.CompileCfg(code));
+            var dot = CfgSerializer.Serialize(TestHelper.CompileCfgCS(code));
             dot.Should().BeIgnoringLineEndings(
 @"digraph ""RoslynCfg"" {
 subgraph ""cluster_LocalLifetime region"" {
@@ -244,7 +244,7 @@ public class Sample
         }
     }
 }";
-            var dot = CfgSerializer.Serialize(TestHelper.CompileCfg(code));
+            var dot = CfgSerializer.Serialize(TestHelper.CompileCfgCS(code));
             dot.Should().BeIgnoringLineEndings(
 @"digraph ""RoslynCfg"" {
 subgraph ""cluster_LocalLifetime region"" {
@@ -304,7 +304,7 @@ class Sample
     private void Bar(int i) { }
 }
 ";
-            var dot = CfgSerializer.Serialize(TestHelper.CompileCfg(code));
+            var dot = CfgSerializer.Serialize(TestHelper.CompileCfgCS(code));
             dot.Should().BeIgnoringLineEndings(
 @"digraph ""RoslynCfg"" {
 subgraph ""cluster_LocalLifetime region"" {
@@ -339,7 +339,7 @@ class Sample
     }
     private void Bar() { }
 }";
-            var dot = CfgSerializer.Serialize(TestHelper.CompileCfg(code));
+            var dot = CfgSerializer.Serialize(TestHelper.CompileCfgCS(code));
             dot.Should().BeIgnoringLineEndings(
 @"digraph ""RoslynCfg"" {
 subgraph ""cluster_LocalLifetime region"" {
@@ -389,7 +389,7 @@ class Sample
     }
     private void Bar() { }
 }";
-            var dot = CfgSerializer.Serialize(TestHelper.CompileCfg(code));
+            var dot = CfgSerializer.Serialize(TestHelper.CompileCfgCS(code));
             dot.Should().BeIgnoringLineEndings(
 @"digraph ""RoslynCfg"" {
 subgraph ""cluster_LocalLifetime region"" {
@@ -446,7 +446,7 @@ class Sample
     private void InFinally() { }
     private void After() { }
 }";
-            var dot = CfgSerializer.Serialize(TestHelper.CompileCfg(code));
+            var dot = CfgSerializer.Serialize(TestHelper.CompileCfgCS(code));
             dot.Should().BeIgnoringLineEndings(
 @"digraph ""RoslynCfg"" {
 subgraph ""cluster_TryAndFinally region"" {
@@ -485,7 +485,7 @@ class Sample
         catch(System.InvalidOperationException ex) { }
     }
 }";
-            var dot = CfgSerializer.Serialize(TestHelper.CompileCfg(code));
+            var dot = CfgSerializer.Serialize(TestHelper.CompileCfgCS(code));
             dot.Should().BeIgnoringLineEndings(
 @"digraph ""RoslynCfg"" {
 subgraph ""cluster_TryAndCatch region"" {
@@ -525,7 +525,7 @@ class Sample
         static int LocalStaticArg(int one) => one + 1; // Overloaded
     }
 }";
-            var dot = CfgSerializer.Serialize(TestHelper.CompileCfg(code));
+            var dot = CfgSerializer.Serialize(TestHelper.CompileCfgCS(code));
             dot.Should().BeIgnoringLineEndings(
 @"digraph ""RoslynCfg"" {
 subgraph ""cluster_LocalLifetime region"" {
@@ -577,7 +577,7 @@ class Sample
     }
     private void Bar(System.Func<int, int> f) { }
 }";
-            var dot = CfgSerializer.Serialize(TestHelper.CompileCfg(code));
+            var dot = CfgSerializer.Serialize(TestHelper.CompileCfgCS(code));
             dot.Should().BeIgnoringLineEndings(
 @"digraph ""RoslynCfg"" {
 cfg0_block0 [shape=record label=""{ENTRY #0}""]
@@ -617,7 +617,7 @@ class Sample
         b = arg || true;
     }
 }";
-            var dot = CfgSerializer.Serialize(TestHelper.CompileCfg(code));
+            var dot = CfgSerializer.Serialize(TestHelper.CompileCfgCS(code));
             dot.Should().BeIgnoringLineEndings(
 @"digraph ""RoslynCfg"" {
 subgraph ""cluster_LocalLifetime region"" {
@@ -665,7 +665,7 @@ class Sample
         undefined();
     }
 }";
-            var dot = CfgSerializer.Serialize(TestHelper.CompileCfg(code, ignoreErrors: true));
+            var dot = CfgSerializer.Serialize(TestHelper.CompileCfgCS(code, ignoreErrors: true));
             dot.Should().BeIgnoringLineEndings(
 @"digraph ""RoslynCfg"" {
 cfg0_block0 [shape=record label=""{ENTRY #0}""]

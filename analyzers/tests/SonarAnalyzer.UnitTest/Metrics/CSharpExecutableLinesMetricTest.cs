@@ -900,7 +900,7 @@ class Program
 
         private static void AssertLinesOfCode(string code, params int[] expectedExecutableLines)
         {
-            (var syntaxTree, var semanticModel) = TestHelper.Compile(code);
+            (var syntaxTree, var semanticModel) = TestHelper.CompileCS(code);
             Metrics.CSharp.CSharpExecutableLinesMetric.GetLineNumbers(syntaxTree, semanticModel).Should().BeEquivalentTo(expectedExecutableLines);
         }
     }

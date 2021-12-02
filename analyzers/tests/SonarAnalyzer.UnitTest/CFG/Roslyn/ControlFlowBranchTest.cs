@@ -36,7 +36,7 @@ public class Sample
 {
     public void Method(bool condition) { } // Empty, just Entry and Exit block
 }";
-            var cfg = TestHelper.CompileCfg(code);
+            var cfg = TestHelper.CompileCfgCS(code);
             var entry = cfg.EntryBlock;
             var exit = cfg.ExitBlock;
 
@@ -71,7 +71,7 @@ public class Sample
         }
     }
 }";
-            var cfg = TestHelper.CompileCfg(code);
+            var cfg = TestHelper.CompileCfgCS(code);
             /*
              *          Entry 0
              *            |

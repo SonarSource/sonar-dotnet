@@ -451,7 +451,7 @@ namespace TesteAnalyzer
     }
 }
 ";
-            var context = new ExplodedGraphContext(TestHelper.Compile(testInput));
+            var context = new ExplodedGraphContext(TestHelper.CompileCS(testInput));
             var maxInternalStateCountReached = false;
             context.ExplodedGraph.MaxInternalStateCountReached += (sender, args) => { maxInternalStateCountReached = true; };
 
@@ -498,7 +498,7 @@ namespace Namespace
     }
   }
 }";
-            var context = new ExplodedGraphContext(TestHelper.Compile(testInput));
+            var context = new ExplodedGraphContext(TestHelper.CompileCS(testInput));
             var dictionarySymbol = context.SemanticModel.GetDeclaredSymbol(context.MainMethod.ParameterList.Parameters.First());
             var valueSymbol = context.GetSymbol("value", ExplodedGraphContext.SymbolType.Declaration);
             context.ExplodedGraph.InstructionProcessed +=
@@ -564,7 +564,7 @@ namespace Namespace
     }
   }
 }";
-            var context = new ExplodedGraphContext(TestHelper.Compile(testInput));
+            var context = new ExplodedGraphContext(TestHelper.CompileCS(testInput));
             var dictionarySymbol = context.SemanticModel.GetDeclaredSymbol(context.MainMethod.ParameterList.Parameters.First());
             var valueSymbol = context.GetSymbol("value", ExplodedGraphContext.SymbolType.Declaration);
             context.ExplodedGraph.InstructionProcessed +=
@@ -788,7 +788,7 @@ namespace Namespace
         }
     }
 }";
-            var context = new ExplodedGraphContext(TestHelper.Compile(testInput));
+            var context = new ExplodedGraphContext(TestHelper.CompileCS(testInput));
             var personSymbol = context.SemanticModel.GetDeclaredSymbol(context.MainMethod.ParameterList.Parameters.First());
             var declarations = context.MainMethod.DescendantNodes().OfType<SingleVariableDesignationSyntax>().ToList();
             var addressSymbol = context.SemanticModel.GetDeclaredSymbol(declarations[0]);
@@ -920,7 +920,7 @@ namespace Namespace
     }
   }
 }";
-            var context = new ExplodedGraphContext(TestHelper.Compile(testInput));
+            var context = new ExplodedGraphContext(TestHelper.CompileCS(testInput));
             var strParameter = context.MainMethod.ParameterList.Parameters.First();
             var strSymbol = context.SemanticModel.GetDeclaredSymbol(strParameter);
             context.ExplodedGraph.InstructionProcessed +=
@@ -1177,7 +1177,7 @@ namespace Namespace
         bool Convert(out int bytesUsed, out int charsUsed);
     }
 }";
-            var context = new ExplodedGraphContext(TestHelper.Compile(testInput));
+            var context = new ExplodedGraphContext(TestHelper.CompileCS(testInput));
             var bytesUsedSymbol = context.GetSymbol("bytesUsed", ExplodedGraphContext.SymbolType.Declaration);
             var charsUsedSymbol = context.GetSymbol("charsUsed", ExplodedGraphContext.SymbolType.Declaration);
             context.ExplodedGraph.InstructionProcessed +=
@@ -1242,7 +1242,7 @@ namespace Test
     }
 }
 ";
-            var context = new ExplodedGraphContext(TestHelper.Compile(testInput));
+            var context = new ExplodedGraphContext(TestHelper.CompileCS(testInput));
 
             var identifierSymbol = context.GetSymbol("Empty", ExplodedGraphContext.SymbolType.Identifier);
 
@@ -1419,7 +1419,7 @@ namespace Namespace
         }
     }
 }";
-            var context = new ExplodedGraphContext(TestHelper.Compile(testInput));
+            var context = new ExplodedGraphContext(TestHelper.CompileCS(testInput));
             var isIndiceVisited = false;
 
             context.ExplodedGraph.InstructionProcessed +=
@@ -1446,7 +1446,7 @@ namespace Namespace
         }
     }
 }";
-            var context = new ExplodedGraphContext(TestHelper.Compile(testInput));
+            var context = new ExplodedGraphContext(TestHelper.CompileCS(testInput));
             var isIndexerVisited = false;
 
             context.ExplodedGraph.InstructionProcessed +=
@@ -1473,7 +1473,7 @@ namespace Namespace
         }
     }
 }";
-            var context = new ExplodedGraphContext(TestHelper.Compile(testInput));
+            var context = new ExplodedGraphContext(TestHelper.CompileCS(testInput));
             var isRangeVisited = false;
 
             context.ExplodedGraph.InstructionProcessed +=
@@ -1502,7 +1502,7 @@ namespace Namespace
         }
     }
 }";
-            var context = new ExplodedGraphContext(TestHelper.Compile(testInput));
+            var context = new ExplodedGraphContext(TestHelper.CompileCS(testInput));
             var isIndexerVisited = false;
 
             context.ExplodedGraph.InstructionProcessed +=

@@ -439,7 +439,7 @@ End Module", 4, 6);
 
         private static void AssertLinesOfCode(string code, params int[] expectedExecutableLines)
         {
-            (var syntaxTree, var semanticModel) = TestHelper.Compile(code, false);
+            var (syntaxTree, semanticModel) = TestHelper.CompileVB(code);
             Metrics.VisualBasic.VisualBasicExecutableLinesMetric.GetLineNumbers(syntaxTree, semanticModel).Should().BeEquivalentTo(expectedExecutableLines);
         }
     }

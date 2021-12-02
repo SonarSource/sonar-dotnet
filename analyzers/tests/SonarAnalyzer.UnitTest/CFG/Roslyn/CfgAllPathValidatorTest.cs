@@ -42,7 +42,7 @@ public class Sample
             return 1;
     }
 }";
-            var cfg = TestHelper.CompileCfg(code);
+            var cfg = TestHelper.CompileCfgCS(code);
             /*
              *           Entry 0
              *             |
@@ -87,7 +87,7 @@ public class Sample
     }
 }
 ";
-            var cfg = TestHelper.CompileCfg(code);
+            var cfg = TestHelper.CompileCfgCS(code);
             /*
              *           Entry 0
              *             |
@@ -134,7 +134,7 @@ public class Sample
     }
 }
 ";
-            var cfg = TestHelper.CompileCfg(code);
+            var cfg = TestHelper.CompileCfgCS(code);
             /*
              *           Entry 0
              *             |

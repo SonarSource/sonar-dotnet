@@ -27,6 +27,7 @@ using Microsoft.CodeAnalysis.Diagnostics;
 using Microsoft.CodeAnalysis.Text;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
+using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
 
 namespace SonarAnalyzer.UnitTest.Helpers
@@ -53,7 +54,7 @@ namespace SonarAnalyzer.UnitTest.Helpers
             var analyzerOptions = new AnalyzerOptions(ImmutableArray.Create(additionalTextMock.Object));
 
             var analysisContext = new Mock<AnalysisContext>();
-            var compilation = GetDummyCompilation(isCSharp: true);
+            var compilation = GetDummyCompilation(AnalyzerLanguage.CSharp);
 
             // Act
             bool result = SonarAnalysisContext.ShouldAnalyzeGenerated(analysisContext.Object, compilation, analyzerOptions);
@@ -86,7 +87,7 @@ namespace SonarAnalyzer.UnitTest.Helpers
             var analyzerOptions = new AnalyzerOptions(ImmutableArray.Create(additionalTextMock.Object));
 
             var analysisContext = new Mock<AnalysisContext>();
-            var compilation = GetDummyCompilation(isCSharp: true);
+            var compilation = GetDummyCompilation(AnalyzerLanguage.CSharp);
 
             // Act - call ShouldAnalyzeGenerated multiple times...
             bool result = SonarAnalysisContext.ShouldAnalyzeGenerated(analysisContext.Object, compilation, analyzerOptions);
@@ -111,7 +112,7 @@ namespace SonarAnalyzer.UnitTest.Helpers
             var analyzerOptions = new AnalyzerOptions(ImmutableArray.Create(additionalTextMock.Object));
 
             var analysisContext = new Mock<AnalysisContext>();
-            var compilation = GetDummyCompilation(isCSharp: true);
+            var compilation = GetDummyCompilation(AnalyzerLanguage.CSharp);
 
             // 1. Read -> no error, false returned
             bool result = SonarAnalysisContext.ShouldAnalyzeGenerated(analysisContext.Object, compilation, analyzerOptions);
@@ -148,8 +149,8 @@ namespace SonarAnalyzer.UnitTest.Helpers
             var analyzerOptions = new AnalyzerOptions(ImmutableArray.Create(additionalTextMock.Object));
 
             var analysisContext = new Mock<AnalysisContext>();
-            var vbCompilation = GetDummyCompilation(isCSharp: false);
-            var cSharpCompilation = GetDummyCompilation(isCSharp: true);
+            var vbCompilation = GetDummyCompilation(AnalyzerLanguage.VisualBasic);
+            var cSharpCompilation = GetDummyCompilation(AnalyzerLanguage.CSharp);
 
             // 1. Read both languages
             bool vbResult = SonarAnalysisContext.ShouldAnalyzeGenerated(analysisContext.Object, vbCompilation, analyzerOptions);
@@ -176,9 +177,9 @@ namespace SonarAnalyzer.UnitTest.Helpers
             return additionalTextMock;
         }
 
-        private static Compilation GetDummyCompilation(bool isCSharp)
+        private static Compilation GetDummyCompilation(AnalyzerLanguage language)
         {
-            (var syntaxTree, var semanticModel) = TestHelper.Compile(string.Empty, isCSharp);
+            var (_, semanticModel) = TestHelper.Compile(string.Empty, false, language); // FIXME: Improve
             return semanticModel.Compilation;
         }
 

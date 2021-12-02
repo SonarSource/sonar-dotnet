@@ -43,7 +43,7 @@ public class Sample
             field = 42 + 43;
     }
 }";
-            var cfg = TestHelper.CompileCfg(code);
+            var cfg = TestHelper.CompileCfgCS(code);
             var assign = cfg.Blocks[2];
             var finder = new FirstNumericLiteralFinder();
             finder.TryFind(cfg.EntryBlock, out var result).Should().BeFalse();

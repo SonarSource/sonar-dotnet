@@ -24,6 +24,7 @@ using Microsoft.CodeAnalysis.Operations;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.CFG.Helpers;
 using SonarAnalyzer.CFG.Roslyn;
+using SonarAnalyzer.Common;
 using StyleCop.Analyzers.Lightup;
 using FlowAnalysis = Microsoft.CodeAnalysis.FlowAnalysis;
 
@@ -47,7 +48,7 @@ public class Sample
         return 42;
     }
 }";
-            TestHelper.CompileCfg(code).Should().NotBeNull();
+            TestHelper.CompileCfgCS(code).Should().NotBeNull();
         }
 
         [TestMethod]
@@ -59,7 +60,7 @@ Public Class Sample
         Return 42
     End Function
 End Class";
-            TestHelper.CompileCfg(code, false).Should().NotBeNull();
+            TestHelper.CompileCfg(code, AnalyzerLanguage.VisualBasic).Should().NotBeNull();
         }
 
         [TestMethod]
@@ -76,7 +77,7 @@ public class Sample
         int LocalMethod() => 42;
     }
 }";
-            var cfg = TestHelper.CompileCfg(code);
+            var cfg = TestHelper.CompileCfgCS(code);
             cfg.Should().NotBeNull();
             cfg.Root.Should().NotBeNull();
             cfg.Blocks.Should().NotBeNull().And.HaveCount(3); // Enter, Instructions, Exit
@@ -107,7 +108,7 @@ public class Sample {
         return x => {  };
     }
 }";
-            var cfg = TestHelper.CompileCfg(code);
+            var cfg = TestHelper.CompileCfgCS(code);
             var anonymousFunctionOperations = SonarAnalyzer.Extensions.ControlFlowGraphExtensions.FlowAnonymousFunctionOperations(cfg).ToList();
             anonymousFunctionOperations.Should().HaveCount(2);
             cfg.GetAnonymousFunctionControlFlowGraph(anonymousFunctionOperations[0]).Should().NotBeNull();
