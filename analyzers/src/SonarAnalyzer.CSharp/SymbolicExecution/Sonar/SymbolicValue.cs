@@ -82,7 +82,7 @@ namespace SonarAnalyzer.SymbolicExecution.Sonar
             {
                 return TrySetObjectConstraint(objectConstraint, oldConstraints, programState);
             }
-            else if (constraint is ByteArraySymbolicValueConstraint
+            else if (constraint is ByteArrayConstraint
                      || constraint is CryptographyIVSymbolicValueConstraint
                      || constraint is SaltSizeSymbolicValueConstraint)
             {

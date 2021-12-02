@@ -20,10 +20,10 @@
 
 namespace SonarAnalyzer.SymbolicExecution.Sonar.Constraints
 {
-    internal class ByteArraySymbolicValueConstraint : SymbolicConstraint
+    internal class ByteArrayConstraint : SymbolicConstraint
     {
-        public static readonly ByteArraySymbolicValueConstraint Constant = new();
-        public static readonly ByteArraySymbolicValueConstraint Modified = new();
+        public static readonly ByteArrayConstraint Constant = new();
+        public static readonly ByteArrayConstraint Modified = new();
 
         public override SymbolicConstraint Opposite =>
             this == Modified ? Constant : Modified;
@@ -31,6 +31,6 @@ namespace SonarAnalyzer.SymbolicExecution.Sonar.Constraints
         protected override string Name =>
             this == Modified ? nameof(Modified) : nameof(Constant);
 
-        private ByteArraySymbolicValueConstraint() { }
+        private ByteArrayConstraint() { }
     }
 }

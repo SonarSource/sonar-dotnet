@@ -25,22 +25,22 @@ using SonarAnalyzer.SymbolicExecution.Sonar.Constraints;
 namespace SonarAnalyzer.UnitTest.SymbolicExecution.Sonar.Constraints
 {
     [TestClass]
-    public class ByteArraySymbolicValueConstraintTest
+    public class ByteArrayConstraintTest
     {
         [TestMethod]
         public void GivenByteArrayIsInitialized_OppositeShouldBe_NotInitialized() =>
-            ByteArraySymbolicValueConstraint.Constant.Opposite.Should().Be(ByteArraySymbolicValueConstraint.Modified);
+            ByteArrayConstraint.Constant.Opposite.Should().Be(ByteArrayConstraint.Modified);
 
         [TestMethod]
         public void GivenByteArrayIsNotInitialized_OppositeShouldBe_Initialized() =>
-            ByteArraySymbolicValueConstraint.Modified.Opposite.Should().Be(ByteArraySymbolicValueConstraint.Constant);
+            ByteArrayConstraint.Modified.Opposite.Should().Be(ByteArrayConstraint.Constant);
 
         [TestMethod]
         public void GivenByteArrayIsInitialized_ToStringShouldBe_Initialized() =>
-            ByteArraySymbolicValueConstraint.Constant.ToString().Should().Be("Constant");
+            ByteArrayConstraint.Constant.ToString().Should().Be("Constant");
 
         [TestMethod]
         public void GivenByteArrayIsNotInitialized_ToStringShouldBe_NotInitialized() =>
-            ByteArraySymbolicValueConstraint.Modified.ToString().Should().Be("Modified");
+            ByteArrayConstraint.Modified.ToString().Should().Be("Modified");
     }
 }

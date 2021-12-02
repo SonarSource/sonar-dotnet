@@ -35,10 +35,10 @@ namespace SonarAnalyzer.UnitTest.SymbolicExecution.Sonar.Constraints
         }
 
         [TestMethod]
-        public void ByteArraySymbolicValueConstraint_ToString()
+        public void ByteArrayConstraint_ToString()
         {
-            ByteArraySymbolicValueConstraint.Constant.ToString().Should().Be("Constant");
-            ByteArraySymbolicValueConstraint.Modified.ToString().Should().Be("Modified");
+            ByteArrayConstraint.Constant.ToString().Should().Be("Constant");
+            ByteArrayConstraint.Modified.ToString().Should().Be("Modified");
         }
 
         [TestMethod]

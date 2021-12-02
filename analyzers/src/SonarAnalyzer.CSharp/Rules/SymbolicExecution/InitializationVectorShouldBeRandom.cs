@@ -92,7 +92,7 @@ namespace SonarAnalyzer.Rules.SymbolicExecution
                 && IsSymmetricAlgorithmIVMemberAccess(memberAccess)
                 && GetSymbolicValue(memberAccess.Expression, programState) is {} leftSymbolicValue
                 && GetSymbolicValue(assignment.Right, programState) is {} rightSymbolicValue
-                && programState.HasConstraint(rightSymbolicValue, ByteArraySymbolicValueConstraint.Constant)
+                && programState.HasConstraint(rightSymbolicValue, ByteArrayConstraint.Constant)
                     ? programState.SetConstraint(leftSymbolicValue, CryptographyIVSymbolicValueConstraint.NotInitialized)
                     : programState;
 
@@ -124,7 +124,7 @@ namespace SonarAnalyzer.Rules.SymbolicExecution
                                                                  && programState.GetSymbolValue(semanticModel.GetSymbolInfo(memberAccess.Expression).Symbol) is {} symbolicValue
                                                                  && HasNotInitializedIVConstraint(symbolicValue, programState),
                     IdentifierNameSyntax identifier => programState.GetSymbolValue(semanticModel.GetSymbolInfo(identifier).Symbol) is {} symbolicValue
-                                                       && programState.HasConstraint(symbolicValue, ByteArraySymbolicValueConstraint.Constant),
+                                                       && programState.HasConstraint(symbolicValue, ByteArrayConstraint.Constant),
                     ArrayCreationExpressionSyntax _ => true,
                     _ => false
                 };
