@@ -20,17 +20,17 @@
 
 namespace SonarAnalyzer.SymbolicExecution.Sonar.Constraints
 {
-    public class SaltSizeSymbolicValueConstraint : SymbolicConstraint
+    internal class SaltSizeSymbolicValueConstraint : SymbolicConstraint
     {
-        internal static readonly SaltSizeSymbolicValueConstraint Short = new SaltSizeSymbolicValueConstraint();
-        internal static readonly SaltSizeSymbolicValueConstraint Safe = new SaltSizeSymbolicValueConstraint();
-
-        private SaltSizeSymbolicValueConstraint() { }
+        public static readonly SaltSizeSymbolicValueConstraint Short = new();
+        public static readonly SaltSizeSymbolicValueConstraint Safe = new();
 
         public override SymbolicConstraint Opposite =>
             this == Safe ? Short : Safe;
 
         protected override string Name =>
             this == Safe ? nameof(Safe) : nameof(Short);
+
+        private SaltSizeSymbolicValueConstraint() { }
     }
 }

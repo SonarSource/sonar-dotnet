@@ -20,16 +20,17 @@
 
 namespace SonarAnalyzer.SymbolicExecution.Sonar.Constraints
 {
-    public sealed class CollectionCapacityConstraint : SymbolicConstraint
+    internal sealed class CollectionCapacityConstraint : SymbolicConstraint
     {
-        public static readonly CollectionCapacityConstraint Empty = new CollectionCapacityConstraint();
-        public static readonly CollectionCapacityConstraint NotEmpty = new CollectionCapacityConstraint();
+        public static readonly CollectionCapacityConstraint Empty = new();
+        public static readonly CollectionCapacityConstraint NotEmpty = new();
 
         public override SymbolicConstraint Opposite =>
             this == Empty ? NotEmpty : Empty;
 
-        protected override string Name => this == Empty
-                ? "Empty"
-                : "NotEmpty";
+        protected override string Name =>
+            this == Empty ? nameof(Empty) : nameof(NotEmpty);
+
+        private CollectionCapacityConstraint() { }
     }
 }

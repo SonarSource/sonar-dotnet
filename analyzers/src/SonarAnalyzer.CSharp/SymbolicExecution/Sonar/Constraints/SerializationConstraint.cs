@@ -22,19 +22,15 @@ namespace SonarAnalyzer.SymbolicExecution.Sonar.Constraints
 {
     internal sealed class SerializationConstraint : SymbolicConstraint
     {
-        internal static readonly SerializationConstraint Unsafe = new SerializationConstraint();
-        internal static readonly SerializationConstraint Safe = new SerializationConstraint();
-
-        private SerializationConstraint()
-        {
-        }
+        public static readonly SerializationConstraint Unsafe = new();
+        public static readonly SerializationConstraint Safe = new();
 
         public override SymbolicConstraint Opposite =>
-            this == Safe
-                ? Unsafe
-                : Safe;
+            this == Safe ? Unsafe : Safe;
 
         protected override string Name =>
-            this == Safe ? "Safe" : "Unsafe";
+            this == Safe ? nameof(Safe) : nameof(Unsafe);
+
+        private SerializationConstraint() { }
     }
 }

@@ -22,21 +22,14 @@ using System;
 
 namespace SonarAnalyzer.SymbolicExecution.Sonar.Constraints
 {
-    public sealed class StringConstraint : SymbolicConstraint
+    internal sealed class StringConstraint : SymbolicConstraint
     {
-        public static readonly StringConstraint EmptyString = new StringConstraint();
-        public static readonly StringConstraint FullString = new StringConstraint();
-        public static readonly StringConstraint FullOrNullString = new StringConstraint();
-
-        public static readonly StringConstraint WhiteSpaceString = new StringConstraint();
-        public static readonly StringConstraint NotWhiteSpaceString = new StringConstraint();
-        public static readonly StringConstraint FullNotWhiteSpaceString = new StringConstraint();
-
-        public static bool IsNotNullConstraint(StringConstraint constraint) =>
-            constraint == StringConstraint.FullString
-            || constraint == StringConstraint.EmptyString
-            || constraint == StringConstraint.WhiteSpaceString
-            || constraint == StringConstraint.FullNotWhiteSpaceString;
+        public static readonly StringConstraint EmptyString = new();
+        public static readonly StringConstraint FullString = new();
+        public static readonly StringConstraint FullOrNullString = new();
+        public static readonly StringConstraint WhiteSpaceString = new();
+        public static readonly StringConstraint NotWhiteSpaceString = new();
+        public static readonly StringConstraint FullNotWhiteSpaceString = new();
 
         // Currently FullOrNullString and NotWhiteSpaceString  is never set as a constraint. It is there to imply the opposite of EmptyString
         public override SymbolicConstraint Opposite
@@ -92,5 +85,13 @@ namespace SonarAnalyzer.SymbolicExecution.Sonar.Constraints
                 }
             }
         }
+
+        private StringConstraint() { }
+
+        public static bool IsNotNullConstraint(StringConstraint constraint) =>  // FIXME: Rename
+            constraint == StringConstraint.FullString
+            || constraint == StringConstraint.EmptyString
+            || constraint == StringConstraint.WhiteSpaceString
+            || constraint == StringConstraint.FullNotWhiteSpaceString;
     }
 }

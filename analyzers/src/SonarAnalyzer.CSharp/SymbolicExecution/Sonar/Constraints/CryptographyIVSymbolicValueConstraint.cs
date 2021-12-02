@@ -20,17 +20,17 @@
 
 namespace SonarAnalyzer.SymbolicExecution.Sonar.Constraints
 {
-    public class CryptographyIVSymbolicValueConstraint : SymbolicConstraint
+    internal class CryptographyIVSymbolicValueConstraint : SymbolicConstraint
     {
-        internal static readonly CryptographyIVSymbolicValueConstraint NotInitialized = new CryptographyIVSymbolicValueConstraint();
-        internal static readonly CryptographyIVSymbolicValueConstraint Initialized = new CryptographyIVSymbolicValueConstraint();
-
-        private CryptographyIVSymbolicValueConstraint() { }
+        public static readonly CryptographyIVSymbolicValueConstraint NotInitialized = new();
+        public static readonly CryptographyIVSymbolicValueConstraint Initialized = new();
 
         public override SymbolicConstraint Opposite =>
             this == Initialized ? NotInitialized : Initialized;
 
         protected override string Name =>
             this == Initialized ? nameof(Initialized) : nameof(NotInitialized);
+
+        private CryptographyIVSymbolicValueConstraint() { }
     }
 }

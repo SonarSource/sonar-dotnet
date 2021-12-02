@@ -20,17 +20,17 @@
 
 namespace SonarAnalyzer.SymbolicExecution.Sonar.Constraints
 {
-    public sealed class NullableValueConstraint : SymbolicConstraint
+    internal sealed class NullableValueConstraint : SymbolicConstraint
     {
-        public static readonly NullableValueConstraint NoValue = new NullableValueConstraint();
-        public static readonly NullableValueConstraint HasValue = new NullableValueConstraint();
+        public static readonly NullableValueConstraint NoValue = new();
+        public static readonly NullableValueConstraint HasValue = new();
 
         public override SymbolicConstraint Opposite =>
             this == NoValue ? HasValue : NoValue;
 
         protected override string Name =>
-            this == NoValue
-                ? "NoValue"
-                : "HasValue";
+            this == NoValue ? nameof(NoValue) : nameof(HasValue);
+
+        private NullableValueConstraint() { }
     }
 }
