@@ -12,6 +12,45 @@
 "endColumn":  82
 }
 }
+},
+{
+"id":  "S122",
+"message":  "Reformat the code to have only one statement per line.",
+"location":  {
+"uri":  "sources\Net5\Net5\Main.cs",
+"region":  {
+"startLine":  28,
+"startColumn":  1,
+"endLine":  28,
+"endColumn":  37
+}
+}
+},
+{
+"id":  "S122",
+"message":  "Reformat the code to have only one statement per line.",
+"location":  {
+"uri":  "sources\Net5\Net5\Main.cs",
+"region":  {
+"startLine":  29,
+"startColumn":  1,
+"endLine":  29,
+"endColumn":  44
+}
+}
+},
+{
+"id":  "S122",
+"message":  "Reformat the code to have only one statement per line.",
+"location":  {
+"uri":  "sources\Net5\Net5\Main.cs",
+"region":  {
+"startLine":  98,
+"startColumn":  1,
+"endLine":  98,
+"endColumn":  30
+}
+}
 }
 ]
 }

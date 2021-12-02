@@ -15,6 +15,565 @@
 },
 {
 "id":  "S109",
+"message":  "Assign this magic number '2' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\Net5\Net5\Main.cs",
+"region":  {
+"startLine":  32,
+"startColumn":  12,
+"endLine":  32,
+"endColumn":  13
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '2' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\Net5\Net5\Main.cs",
+"region":  {
+"startLine":  37,
+"startColumn":  12,
+"endLine":  37,
+"endColumn":  13
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '2' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\Net5\Net5\Main.cs",
+"region":  {
+"startLine":  68,
+"startColumn":  18,
+"endLine":  68,
+"endColumn":  19
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '3' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\Net5\Net5\Main.cs",
+"region":  {
+"startLine":  68,
+"startColumn":  32,
+"endLine":  68,
+"endColumn":  33
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '5' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\Net5\Net5\Main.cs",
+"region":  {
+"startLine":  68,
+"startColumn":  37,
+"endLine":  68,
+"endColumn":  38
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '3' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\Net5\Net5\Main.cs",
+"region":  {
+"startLine":  68,
+"startColumn":  51,
+"endLine":  68,
+"endColumn":  52
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '5' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\Net5\Net5\Main.cs",
+"region":  {
+"startLine":  68,
+"startColumn":  56,
+"endLine":  68,
+"endColumn":  57
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '3' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\Net5\Net5\Main.cs",
+"region":  {
+"startLine":  68,
+"startColumn":  70,
+"endLine":  68,
+"endColumn":  71
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '5' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\Net5\Net5\Main.cs",
+"region":  {
+"startLine":  68,
+"startColumn":  75,
+"endLine":  68,
+"endColumn":  76
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '3' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\Net5\Net5\Main.cs",
+"region":  {
+"startLine":  69,
+"startColumn":  16,
+"endLine":  69,
+"endColumn":  17
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '5' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\Net5\Net5\Main.cs",
+"region":  {
+"startLine":  69,
+"startColumn":  21,
+"endLine":  69,
+"endColumn":  22
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '3' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\Net5\Net5\Main.cs",
+"region":  {
+"startLine":  69,
+"startColumn":  35,
+"endLine":  69,
+"endColumn":  36
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '5' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\Net5\Net5\Main.cs",
+"region":  {
+"startLine":  69,
+"startColumn":  40,
+"endLine":  69,
+"endColumn":  41
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '3' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\Net5\Net5\Main.cs",
+"region":  {
+"startLine":  69,
+"startColumn":  54,
+"endLine":  69,
+"endColumn":  55
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '5' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\Net5\Net5\Main.cs",
+"region":  {
+"startLine":  69,
+"startColumn":  59,
+"endLine":  69,
+"endColumn":  60
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '3' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\Net5\Net5\Main.cs",
+"region":  {
+"startLine":  69,
+"startColumn":  73,
+"endLine":  69,
+"endColumn":  74
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '5' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\Net5\Net5\Main.cs",
+"region":  {
+"startLine":  69,
+"startColumn":  78,
+"endLine":  69,
+"endColumn":  79
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '3' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\Net5\Net5\Main.cs",
+"region":  {
+"startLine":  70,
+"startColumn":  16,
+"endLine":  70,
+"endColumn":  17
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '5' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\Net5\Net5\Main.cs",
+"region":  {
+"startLine":  70,
+"startColumn":  21,
+"endLine":  70,
+"endColumn":  22
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '3' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\Net5\Net5\Main.cs",
+"region":  {
+"startLine":  70,
+"startColumn":  35,
+"endLine":  70,
+"endColumn":  36
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '5' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\Net5\Net5\Main.cs",
+"region":  {
+"startLine":  70,
+"startColumn":  40,
+"endLine":  70,
+"endColumn":  41
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '3' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\Net5\Net5\Main.cs",
+"region":  {
+"startLine":  70,
+"startColumn":  54,
+"endLine":  70,
+"endColumn":  55
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '5' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\Net5\Net5\Main.cs",
+"region":  {
+"startLine":  70,
+"startColumn":  59,
+"endLine":  70,
+"endColumn":  60
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '3' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\Net5\Net5\Main.cs",
+"region":  {
+"startLine":  70,
+"startColumn":  73,
+"endLine":  70,
+"endColumn":  74
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '5' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\Net5\Net5\Main.cs",
+"region":  {
+"startLine":  70,
+"startColumn":  78,
+"endLine":  70,
+"endColumn":  79
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '3' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\Net5\Net5\Main.cs",
+"region":  {
+"startLine":  71,
+"startColumn":  16,
+"endLine":  71,
+"endColumn":  17
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '5' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\Net5\Net5\Main.cs",
+"region":  {
+"startLine":  71,
+"startColumn":  21,
+"endLine":  71,
+"endColumn":  22
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '3' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\Net5\Net5\Main.cs",
+"region":  {
+"startLine":  71,
+"startColumn":  35,
+"endLine":  71,
+"endColumn":  36
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '5' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\Net5\Net5\Main.cs",
+"region":  {
+"startLine":  71,
+"startColumn":  40,
+"endLine":  71,
+"endColumn":  41
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '3' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\Net5\Net5\Main.cs",
+"region":  {
+"startLine":  71,
+"startColumn":  54,
+"endLine":  71,
+"endColumn":  55
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '5' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\Net5\Net5\Main.cs",
+"region":  {
+"startLine":  71,
+"startColumn":  59,
+"endLine":  71,
+"endColumn":  60
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '3' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\Net5\Net5\Main.cs",
+"region":  {
+"startLine":  71,
+"startColumn":  73,
+"endLine":  71,
+"endColumn":  74
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '5' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\Net5\Net5\Main.cs",
+"region":  {
+"startLine":  71,
+"startColumn":  78,
+"endLine":  71,
+"endColumn":  79
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '3' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\Net5\Net5\Main.cs",
+"region":  {
+"startLine":  72,
+"startColumn":  16,
+"endLine":  72,
+"endColumn":  17
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '5' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\Net5\Net5\Main.cs",
+"region":  {
+"startLine":  72,
+"startColumn":  21,
+"endLine":  72,
+"endColumn":  22
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '3' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\Net5\Net5\Main.cs",
+"region":  {
+"startLine":  72,
+"startColumn":  35,
+"endLine":  72,
+"endColumn":  36
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '5' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\Net5\Net5\Main.cs",
+"region":  {
+"startLine":  72,
+"startColumn":  40,
+"endLine":  72,
+"endColumn":  41
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '3' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\Net5\Net5\Main.cs",
+"region":  {
+"startLine":  72,
+"startColumn":  54,
+"endLine":  72,
+"endColumn":  55
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '5' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\Net5\Net5\Main.cs",
+"region":  {
+"startLine":  72,
+"startColumn":  59,
+"endLine":  72,
+"endColumn":  60
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '3' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\Net5\Net5\Main.cs",
+"region":  {
+"startLine":  72,
+"startColumn":  73,
+"endLine":  72,
+"endColumn":  74
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '5' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\Net5\Net5\Main.cs",
+"region":  {
+"startLine":  72,
+"startColumn":  78,
+"endLine":  72,
+"endColumn":  79
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '2' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\Net5\Net5\Main.cs",
+"region":  {
+"startLine":  82,
+"startColumn":  13,
+"endLine":  82,
+"endColumn":  14
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '42' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\Net5\Net5\Main.cs",
+"region":  {
+"startLine":  98,
+"startColumn":  25,
+"endLine":  98,
+"endColumn":  27
+}
+}
+},
+{
+"id":  "S109",
 "message":  "Assign this magic number '2.00' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
 "uri":  "sources\Net5\Net5\PatternMatchingImprovements.cs",

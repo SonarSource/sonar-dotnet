@@ -19,10 +19,231 @@
 "location":  {
 "uri":  "sources\Net5\Net5\Main.cs",
 "region":  {
-"startLine":  18,
+"startLine":  55,
+"startColumn":  25,
+"endLine":  55,
+"endColumn":  28
+}
+}
+},
+{
+"id":  "S108",
+"message":  "Either remove or fill this block of code.",
+"location":  {
+"uri":  "sources\Net5\Net5\Main.cs",
+"region":  {
+"startLine":  58,
+"startColumn":  23,
+"endLine":  58,
+"endColumn":  26
+}
+}
+},
+{
+"id":  "S108",
+"message":  "Either remove or fill this block of code.",
+"location":  {
+"uri":  "sources\Net5\Net5\Main.cs",
+"region":  {
+"startLine":  62,
+"startColumn":  11,
+"endLine":  62,
+"endColumn":  14
+}
+}
+},
+{
+"id":  "S108",
+"message":  "Either remove or fill this block of code.",
+"location":  {
+"uri":  "sources\Net5\Net5\Main.cs",
+"region":  {
+"startLine":  83,
+"startColumn":  5,
+"endLine":  84,
+"endColumn":  6
+}
+}
+},
+{
+"id":  "S108",
+"message":  "Either remove or fill this block of code.",
+"location":  {
+"uri":  "sources\Net5\Net5\Main.cs",
+"region":  {
+"startLine":  102,
+"startColumn":  33,
+"endLine":  102,
+"endColumn":  36
+}
+}
+},
+{
+"id":  "S108",
+"message":  "Either remove or fill this block of code.",
+"location":  {
+"uri":  "sources\Net5\Net5\Main.cs",
+"region":  {
+"startLine":  105,
 "startColumn":  26,
-"endLine":  18,
+"endLine":  105,
 "endColumn":  29
+}
+}
+},
+{
+"id":  "S108",
+"message":  "Either remove or fill this block of code.",
+"location":  {
+"uri":  "sources\Net5\Net5\Main.cs",
+"region":  {
+"startLine":  109,
+"startColumn":  16,
+"endLine":  109,
+"endColumn":  19
+}
+}
+},
+{
+"id":  "S108",
+"message":  "Either remove or fill this block of code.",
+"location":  {
+"uri":  "sources\Net5\Net5\Main.cs",
+"region":  {
+"startLine":  110,
+"startColumn":  16,
+"endLine":  110,
+"endColumn":  19
+}
+}
+},
+{
+"id":  "S108",
+"message":  "Either remove or fill this block of code.",
+"location":  {
+"uri":  "sources\Net5\Net5\Main.cs",
+"region":  {
+"startLine":  111,
+"startColumn":  16,
+"endLine":  111,
+"endColumn":  19
+}
+}
+},
+{
+"id":  "S108",
+"message":  "Either remove or fill this block of code.",
+"location":  {
+"uri":  "sources\Net5\Net5\Main.cs",
+"region":  {
+"startLine":  112,
+"startColumn":  16,
+"endLine":  112,
+"endColumn":  19
+}
+}
+},
+{
+"id":  "S108",
+"message":  "Either remove or fill this block of code.",
+"location":  {
+"uri":  "sources\Net5\Net5\Main.cs",
+"region":  {
+"startLine":  113,
+"startColumn":  16,
+"endLine":  113,
+"endColumn":  19
+}
+}
+},
+{
+"id":  "S108",
+"message":  "Either remove or fill this block of code.",
+"location":  {
+"uri":  "sources\Net5\Net5\Main.cs",
+"region":  {
+"startLine":  114,
+"startColumn":  16,
+"endLine":  114,
+"endColumn":  19
+}
+}
+},
+{
+"id":  "S108",
+"message":  "Either remove or fill this block of code.",
+"location":  {
+"uri":  "sources\Net5\Net5\Main.cs",
+"region":  {
+"startLine":  115,
+"startColumn":  16,
+"endLine":  115,
+"endColumn":  19
+}
+}
+},
+{
+"id":  "S108",
+"message":  "Either remove or fill this block of code.",
+"location":  {
+"uri":  "sources\Net5\Net5\Main.cs",
+"region":  {
+"startLine":  116,
+"startColumn":  16,
+"endLine":  116,
+"endColumn":  19
+}
+}
+},
+{
+"id":  "S108",
+"message":  "Either remove or fill this block of code.",
+"location":  {
+"uri":  "sources\Net5\Net5\Main.cs",
+"region":  {
+"startLine":  117,
+"startColumn":  16,
+"endLine":  117,
+"endColumn":  19
+}
+}
+},
+{
+"id":  "S108",
+"message":  "Either remove or fill this block of code.",
+"location":  {
+"uri":  "sources\Net5\Net5\Main.cs",
+"region":  {
+"startLine":  118,
+"startColumn":  16,
+"endLine":  118,
+"endColumn":  19
+}
+}
+},
+{
+"id":  "S108",
+"message":  "Either remove or fill this block of code.",
+"location":  {
+"uri":  "sources\Net5\Net5\Main.cs",
+"region":  {
+"startLine":  119,
+"startColumn":  16,
+"endLine":  119,
+"endColumn":  19
+}
+}
+},
+{
+"id":  "S108",
+"message":  "Either remove or fill this block of code.",
+"location":  {
+"uri":  "sources\Net5\Net5\Main.cs",
+"region":  {
+"startLine":  120,
+"startColumn":  16,
+"endLine":  120,
+"endColumn":  19
 }
 }
 },

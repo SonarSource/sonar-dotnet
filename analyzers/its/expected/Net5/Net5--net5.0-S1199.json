@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S1199",
+"message":  "Extract this nested code block into a separate method.",
+"location":  {
+"uri":  "sources\Net5\Net5\Main.cs",
+"region":  {
+"startLine":  81,
+"startColumn":  1,
+"endLine":  81,
+"endColumn":  2
+}
+}
+}
+]
+}

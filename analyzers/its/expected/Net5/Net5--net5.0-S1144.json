@@ -28,6 +28,19 @@
 },
 {
 "id":  "S1144",
+"message":  "Remove the unused private field 'a'.",
+"location":  {
+"uri":  "sources\Net5\Net5\Main.cs",
+"region":  {
+"startLine":  227,
+"startColumn":  5,
+"endLine":  227,
+"endColumn":  19
+}
+}
+},
+{
+"id":  "S1144",
 "message":  "Remove the unused private method 'Method'.",
 "location":  {
 "uri":  "sources\Net5\Net5\Records.cs",

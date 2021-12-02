@@ -4,6 +4,32 @@
 "id":  "S1659",
 "message":  "Declare 'b' in a separate statement.",
 "location":  {
+"uri":  "sources\Net5\Net5\Main.cs",
+"region":  {
+"startLine":  27,
+"startColumn":  12,
+"endLine":  27,
+"endColumn":  13
+}
+}
+},
+{
+"id":  "S1659",
+"message":  "Declare 'two' in a separate statement.",
+"location":  {
+"uri":  "sources\Net5\Net5\Main.cs",
+"region":  {
+"startLine":  67,
+"startColumn":  14,
+"endLine":  67,
+"endColumn":  17
+}
+}
+},
+{
+"id":  "S1659",
+"message":  "Declare 'b' in a separate statement.",
+"location":  {
 "uri":  "sources\Net5\Net5\S3240.cs",
 "region":  {
 "startLine":  10,

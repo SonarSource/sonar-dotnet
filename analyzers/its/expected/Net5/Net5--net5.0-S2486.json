@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S2486",
+"message":  "Handle the exception or explain in a comment why it can be ignored.",
+"location":  {
+"uri":  "sources\Net5\Net5\Main.cs",
+"region":  {
+"startLine":  58,
+"startColumn":  17,
+"endLine":  58,
+"endColumn":  26
+}
+}
+},
+{
+"id":  "S2486",
+"message":  "Handle the exception or explain in a comment why it can be ignored.",
+"location":  {
+"uri":  "sources\Net5\Net5\Main.cs",
+"region":  {
+"startLine":  62,
+"startColumn":  5,
+"endLine":  62,
+"endColumn":  14
+}
+}
+}
+]
+}

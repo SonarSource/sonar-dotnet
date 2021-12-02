@@ -4,6 +4,32 @@
 "id":  "S2221",
 "message":  "Catch a list of specific exception subtype or use exception filters instead.",
 "location":  {
+"uri":  "sources\Net5\Net5\Main.cs",
+"region":  {
+"startLine":  58,
+"startColumn":  17,
+"endLine":  58,
+"endColumn":  22
+}
+}
+},
+{
+"id":  "S2221",
+"message":  "Catch a list of specific exception subtype or use exception filters instead.",
+"location":  {
+"uri":  "sources\Net5\Net5\Main.cs",
+"region":  {
+"startLine":  62,
+"startColumn":  5,
+"endLine":  62,
+"endColumn":  10
+}
+}
+},
+{
+"id":  "S2221",
+"message":  "Catch a list of specific exception subtype or use exception filters instead.",
+"location":  {
 "uri":  "sources\Net5\Net5\S2221.cs",
 "region":  {
 "startLine":  11,

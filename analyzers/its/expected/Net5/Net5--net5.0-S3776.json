@@ -2,6 +2,444 @@
 "issues":  [
 {
 "id":  "S3776",
+"message":  "Refactor this top-level file to reduce its Cognitive Complexity from 73 to the 15 allowed.",
+"location":  [
+{
+"uri":  "sources\Net5\Net5\Main.cs",
+"region":  {
+"startLine":  1,
+"startColumn":  1,
+"endLine":  1,
+"endColumn":  1
+}
+},
+{
+"uri":  "sources\Net5\Net5\Main.cs",
+"region":  {
+"startLine":  21,
+"startColumn":  1,
+"endLine":  21,
+"endColumn":  3
+}
+},
+{
+"uri":  "sources\Net5\Net5\Main.cs",
+"region":  {
+"startLine":  28,
+"startColumn":  1,
+"endLine":  28,
+"endColumn":  3
+}
+},
+{
+"uri":  "sources\Net5\Net5\Main.cs",
+"region":  {
+"startLine":  29,
+"startColumn":  1,
+"endLine":  29,
+"endColumn":  3
+}
+},
+{
+"uri":  "sources\Net5\Net5\Main.cs",
+"region":  {
+"startLine":  30,
+"startColumn":  1,
+"endLine":  30,
+"endColumn":  7
+}
+},
+{
+"uri":  "sources\Net5\Net5\Main.cs",
+"region":  {
+"startLine":  35,
+"startColumn":  1,
+"endLine":  35,
+"endColumn":  7
+}
+},
+{
+"uri":  "sources\Net5\Net5\Main.cs",
+"region":  {
+"startLine":  42,
+"startColumn":  1,
+"endLine":  42,
+"endColumn":  3
+}
+},
+{
+"uri":  "sources\Net5\Net5\Main.cs",
+"region":  {
+"startLine":  46,
+"startColumn":  9,
+"endLine":  46,
+"endColumn":  14
+}
+},
+{
+"uri":  "sources\Net5\Net5\Main.cs",
+"region":  {
+"startLine":  48,
+"startColumn":  13,
+"endLine":  48,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\Net5\Net5\Main.cs",
+"region":  {
+"startLine":  52,
+"startColumn":  21,
+"endLine":  52,
+"endColumn":  26
+}
+},
+{
+"uri":  "sources\Net5\Net5\Main.cs",
+"region":  {
+"startLine":  54,
+"startColumn":  25,
+"endLine":  54,
+"endColumn":  27
+}
+},
+{
+"uri":  "sources\Net5\Net5\Main.cs",
+"region":  {
+"startLine":  58,
+"startColumn":  17,
+"endLine":  58,
+"endColumn":  22
+}
+},
+{
+"uri":  "sources\Net5\Net5\Main.cs",
+"region":  {
+"startLine":  62,
+"startColumn":  5,
+"endLine":  62,
+"endColumn":  10
+}
+},
+{
+"uri":  "sources\Net5\Net5\Main.cs",
+"region":  {
+"startLine":  68,
+"startColumn":  1,
+"endLine":  68,
+"endColumn":  3
+}
+},
+{
+"uri":  "sources\Net5\Net5\Main.cs",
+"region":  {
+"startLine":  68,
+"startColumn":  21,
+"endLine":  68,
+"endColumn":  23
+}
+},
+{
+"uri":  "sources\Net5\Net5\Main.cs",
+"region":  {
+"startLine":  68,
+"startColumn":  15,
+"endLine":  68,
+"endColumn":  17
+}
+},
+{
+"uri":  "sources\Net5\Net5\Main.cs",
+"region":  {
+"startLine":  68,
+"startColumn":  34,
+"endLine":  68,
+"endColumn":  36
+}
+},
+{
+"uri":  "sources\Net5\Net5\Main.cs",
+"region":  {
+"startLine":  68,
+"startColumn":  53,
+"endLine":  68,
+"endColumn":  55
+}
+},
+{
+"uri":  "sources\Net5\Net5\Main.cs",
+"region":  {
+"startLine":  68,
+"startColumn":  72,
+"endLine":  68,
+"endColumn":  74
+}
+},
+{
+"uri":  "sources\Net5\Net5\Main.cs",
+"region":  {
+"startLine":  69,
+"startColumn":  18,
+"endLine":  69,
+"endColumn":  20
+}
+},
+{
+"uri":  "sources\Net5\Net5\Main.cs",
+"region":  {
+"startLine":  69,
+"startColumn":  37,
+"endLine":  69,
+"endColumn":  39
+}
+},
+{
+"uri":  "sources\Net5\Net5\Main.cs",
+"region":  {
+"startLine":  69,
+"startColumn":  56,
+"endLine":  69,
+"endColumn":  58
+}
+},
+{
+"uri":  "sources\Net5\Net5\Main.cs",
+"region":  {
+"startLine":  69,
+"startColumn":  75,
+"endLine":  69,
+"endColumn":  77
+}
+},
+{
+"uri":  "sources\Net5\Net5\Main.cs",
+"region":  {
+"startLine":  70,
+"startColumn":  18,
+"endLine":  70,
+"endColumn":  20
+}
+},
+{
+"uri":  "sources\Net5\Net5\Main.cs",
+"region":  {
+"startLine":  70,
+"startColumn":  37,
+"endLine":  70,
+"endColumn":  39
+}
+},
+{
+"uri":  "sources\Net5\Net5\Main.cs",
+"region":  {
+"startLine":  70,
+"startColumn":  56,
+"endLine":  70,
+"endColumn":  58
+}
+},
+{
+"uri":  "sources\Net5\Net5\Main.cs",
+"region":  {
+"startLine":  70,
+"startColumn":  75,
+"endLine":  70,
+"endColumn":  77
+}
+},
+{
+"uri":  "sources\Net5\Net5\Main.cs",
+"region":  {
+"startLine":  71,
+"startColumn":  18,
+"endLine":  71,
+"endColumn":  20
+}
+},
+{
+"uri":  "sources\Net5\Net5\Main.cs",
+"region":  {
+"startLine":  71,
+"startColumn":  37,
+"endLine":  71,
+"endColumn":  39
+}
+},
+{
+"uri":  "sources\Net5\Net5\Main.cs",
+"region":  {
+"startLine":  71,
+"startColumn":  56,
+"endLine":  71,
+"endColumn":  58
+}
+},
+{
+"uri":  "sources\Net5\Net5\Main.cs",
+"region":  {
+"startLine":  71,
+"startColumn":  75,
+"endLine":  71,
+"endColumn":  77
+}
+},
+{
+"uri":  "sources\Net5\Net5\Main.cs",
+"region":  {
+"startLine":  72,
+"startColumn":  18,
+"endLine":  72,
+"endColumn":  20
+}
+},
+{
+"uri":  "sources\Net5\Net5\Main.cs",
+"region":  {
+"startLine":  72,
+"startColumn":  37,
+"endLine":  72,
+"endColumn":  39
+}
+},
+{
+"uri":  "sources\Net5\Net5\Main.cs",
+"region":  {
+"startLine":  72,
+"startColumn":  56,
+"endLine":  72,
+"endColumn":  58
+}
+},
+{
+"uri":  "sources\Net5\Net5\Main.cs",
+"region":  {
+"startLine":  72,
+"startColumn":  75,
+"endLine":  72,
+"endColumn":  77
+}
+},
+{
+"uri":  "sources\Net5\Net5\Main.cs",
+"region":  {
+"startLine":  82,
+"startColumn":  5,
+"endLine":  82,
+"endColumn":  7
+}
+},
+{
+"uri":  "sources\Net5\Net5\Main.cs",
+"region":  {
+"startLine":  109,
+"startColumn":  5,
+"endLine":  109,
+"endColumn":  7
+}
+},
+{
+"uri":  "sources\Net5\Net5\Main.cs",
+"region":  {
+"startLine":  110,
+"startColumn":  5,
+"endLine":  110,
+"endColumn":  7
+}
+},
+{
+"uri":  "sources\Net5\Net5\Main.cs",
+"region":  {
+"startLine":  111,
+"startColumn":  5,
+"endLine":  111,
+"endColumn":  7
+}
+},
+{
+"uri":  "sources\Net5\Net5\Main.cs",
+"region":  {
+"startLine":  112,
+"startColumn":  5,
+"endLine":  112,
+"endColumn":  7
+}
+},
+{
+"uri":  "sources\Net5\Net5\Main.cs",
+"region":  {
+"startLine":  113,
+"startColumn":  5,
+"endLine":  113,
+"endColumn":  7
+}
+},
+{
+"uri":  "sources\Net5\Net5\Main.cs",
+"region":  {
+"startLine":  114,
+"startColumn":  5,
+"endLine":  114,
+"endColumn":  7
+}
+},
+{
+"uri":  "sources\Net5\Net5\Main.cs",
+"region":  {
+"startLine":  115,
+"startColumn":  5,
+"endLine":  115,
+"endColumn":  7
+}
+},
+{
+"uri":  "sources\Net5\Net5\Main.cs",
+"region":  {
+"startLine":  116,
+"startColumn":  5,
+"endLine":  116,
+"endColumn":  7
+}
+},
+{
+"uri":  "sources\Net5\Net5\Main.cs",
+"region":  {
+"startLine":  117,
+"startColumn":  5,
+"endLine":  117,
+"endColumn":  7
+}
+},
+{
+"uri":  "sources\Net5\Net5\Main.cs",
+"region":  {
+"startLine":  118,
+"startColumn":  5,
+"endLine":  118,
+"endColumn":  7
+}
+},
+{
+"uri":  "sources\Net5\Net5\Main.cs",
+"region":  {
+"startLine":  119,
+"startColumn":  5,
+"endLine":  119,
+"endColumn":  7
+}
+},
+{
+"uri":  "sources\Net5\Net5\Main.cs",
+"region":  {
+"startLine":  120,
+"startColumn":  5,
+"endLine":  120,
+"endColumn":  7
+}
+}
+]
+},
+{
+"id":  "S3776",
 "message":  "Refactor this method to reduce its Cognitive Complexity from 21 to the 15 allowed.",
 "location":  [
 {

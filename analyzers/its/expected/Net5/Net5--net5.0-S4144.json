@@ -1,0 +1,28 @@
+{
+"issues":  [
+{
+"id":  "S4144",
+"message":  "Update this method so that its implementation is not identical to 'Method1'.",
+"location":  [
+{
+"uri":  "sources\Net5\Net5\Main.cs",
+"region":  {
+"startLine":  132,
+"startColumn":  6,
+"endLine":  132,
+"endColumn":  13
+}
+},
+{
+"uri":  "sources\Net5\Net5\Main.cs",
+"region":  {
+"startLine":  127,
+"startColumn":  6,
+"endLine":  127,
+"endColumn":  13
+}
+}
+]
+}
+]
+}

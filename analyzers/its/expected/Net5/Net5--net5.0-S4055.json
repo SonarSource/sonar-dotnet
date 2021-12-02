@@ -6,10 +6,36 @@
 "location":  {
 "uri":  "sources\Net5\Net5\Main.cs",
 "region":  {
-"startLine":  4,
+"startLine":  6,
 "startColumn":  19,
-"endLine":  4,
+"endLine":  6,
 "endColumn":  33
+}
+}
+},
+{
+"id":  "S4055",
+"message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
+"location":  {
+"uri":  "sources\Net5\Net5\Main.cs",
+"region":  {
+"startLine":  130,
+"startColumn":  23,
+"endLine":  130,
+"endColumn":  36
+}
+}
+},
+{
+"id":  "S4055",
+"message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
+"location":  {
+"uri":  "sources\Net5\Net5\Main.cs",
+"region":  {
+"startLine":  135,
+"startColumn":  23,
+"endLine":  135,
+"endColumn":  36
 }
 }
 },
