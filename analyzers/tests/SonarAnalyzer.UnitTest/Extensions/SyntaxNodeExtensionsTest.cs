@@ -217,10 +217,9 @@ public class Sample
         Undefined(() => 45);
     }
 }";
-            var (tree, semanticModel) = TestHelper.CompileIgnoreErrorsCS(code);
+            var (tree, model) = TestHelper.CompileIgnoreErrorsCS(code);
             var lambda = tree.GetRoot().DescendantNodes().OfType<ParenthesizedLambdaExpressionSyntax>().Single();
-
-            SyntaxNodeExtensions.CreateCfg(lambda.Body, semanticModel).Should().NotBeNull();
+            SyntaxNodeExtensions.CreateCfg(lambda.Body, model).Should().NotBeNull();
         }
 
         [DataTestMethod]
@@ -230,10 +229,10 @@ public class Sample
         [DataRow(@"{ () => => =>")]
         public void CreateCfg_InvalidSyntax_ReturnsCfg(string code)
         {
-            var (tree, semanticModel) = TestHelper.CompileIgnoreErrorsCS(code);
+            var (tree, model) = TestHelper.CompileIgnoreErrorsCS(code);
             var lambda = tree.GetRoot().DescendantNodes().OfType<ParenthesizedLambdaExpressionSyntax>().Single();
 
-            SyntaxNodeExtensions.CreateCfg(lambda.Body, semanticModel).Should().NotBeNull();
+            SyntaxNodeExtensions.CreateCfg(lambda.Body, model).Should().NotBeNull();
         }
 
         private static SyntaxToken GetFirstTokenOfKind(SyntaxTree syntaxTree, SyntaxKind kind) =>

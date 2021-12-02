@@ -177,11 +177,8 @@ namespace SonarAnalyzer.UnitTest.Helpers
             return additionalTextMock;
         }
 
-        private static Compilation GetDummyCompilation(AnalyzerLanguage language)
-        {
-            var (_, semanticModel) = TestHelper.Compile(string.Empty, false, language); // FIXME: Improve
-            return semanticModel.Compilation;
-        }
+        private static Compilation GetDummyCompilation(AnalyzerLanguage language) =>
+            TestHelper.Compile(string.Empty, false, language).Model.Compilation;
 
         // We can't use Mock<SourceText> because SourceText is an abstract class
         private class DummySourceText : SourceText

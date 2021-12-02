@@ -49,16 +49,16 @@ namespace SonarAnalyzer.UnitTest
     <OutPath>{2}</OutPath>
 </SonarProjectConfig>";
 
-        public static (SyntaxTree, SemanticModel) CompileIgnoreErrorsCS(string snippet, params MetadataReference[] additionalReferences) =>
+        public static (SyntaxTree Tree, SemanticModel Model) CompileIgnoreErrorsCS(string snippet, params MetadataReference[] additionalReferences) =>
             Compile(snippet, true, AnalyzerLanguage.CSharp, additionalReferences);
 
-        public static (SyntaxTree, SemanticModel) CompileCS(string snippet, params MetadataReference[] additionalReferences) =>
+        public static (SyntaxTree Tree, SemanticModel Model) CompileCS(string snippet, params MetadataReference[] additionalReferences) =>
             Compile(snippet, false, AnalyzerLanguage.CSharp, additionalReferences);
 
-        public static (SyntaxTree, SemanticModel) CompileVB(string snippet, params MetadataReference[] additionalReferences) =>
+        public static (SyntaxTree Tree, SemanticModel Model) CompileVB(string snippet, params MetadataReference[] additionalReferences) =>
             Compile(snippet, false, AnalyzerLanguage.VisualBasic, additionalReferences);
 
-        public static (SyntaxTree, SemanticModel) Compile(string snippet, bool ignoreErrors, AnalyzerLanguage language, params MetadataReference[] additionalReferences)
+        public static (SyntaxTree Tree, SemanticModel Model) Compile(string snippet, bool ignoreErrors, AnalyzerLanguage language, params MetadataReference[] additionalReferences)
         {
             var compiled = new SnippetCompiler(snippet, ignoreErrors, language, additionalReferences);
             return (compiled.SyntaxTree, compiled.SemanticModel);

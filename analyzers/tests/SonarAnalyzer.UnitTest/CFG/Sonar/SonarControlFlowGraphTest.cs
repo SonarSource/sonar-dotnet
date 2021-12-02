@@ -5063,11 +5063,10 @@ namespace NS
   }}
 }}";
 
-        internal static MethodDeclarationSyntax CompileWithMethodBody(string input, string methodName, out SemanticModel semanticModel, ParseOptions parseOptions = null)
+        internal static MethodDeclarationSyntax CompileWithMethodBody(string input, string methodName, out SemanticModel semanticModel)
         {
-            MethodDeclarationSyntax methodDeclaration;
-            (methodDeclaration, semanticModel) = TestHelper.CompileIgnoreErrorsCS(input).GetMethod(methodName);
-            return methodDeclaration;
+            (var method, semanticModel) = TestHelper.CompileIgnoreErrorsCS(input).GetMethod(methodName);
+            return method;
         }
 
         internal static string ExtremelyNestedExpression()
