@@ -2,6 +2,32 @@
 "issues":  [
 {
 "id":  "S1301",
+"message":  "Replace this 'switch' statement with 'if' statements to increase readability.",
+"location":  {
+"uri":  "sources\Net5\Net5\Main.cs",
+"region":  {
+"startLine":  30,
+"startColumn":  1,
+"endLine":  30,
+"endColumn":  7
+}
+}
+},
+{
+"id":  "S1301",
+"message":  "Replace this 'switch' statement with 'if' statements to increase readability.",
+"location":  {
+"uri":  "sources\Net5\Net5\Main.cs",
+"region":  {
+"startLine":  35,
+"startColumn":  1,
+"endLine":  35,
+"endColumn":  7
+}
+}
+},
+{
+"id":  "S1301",
 "message":  "Replace this 'switch' expression with a ternary conditional operator to increase readability.",
 "location":  {
 "uri":  "sources\Net5\Net5\S4201.cs",

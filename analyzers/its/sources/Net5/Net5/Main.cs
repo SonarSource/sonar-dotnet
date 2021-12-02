@@ -27,6 +27,16 @@ if (args == null)
 int a = 0, b = 1;
 if (a == b) { LocalMethodInMain(); }
 if (a == b) { AnotherLocalMethodInMain(); }
+switch (b)
+{
+    case > 2:
+        break;
+}
+switch (b)
+{
+    case > 2:
+        break;
+}
 
 // S134
 do
