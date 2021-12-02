@@ -42,10 +42,10 @@ namespace SonarAnalyzer.UnitTest.SymbolicExecution.Sonar.Constraints
         }
 
         [TestMethod]
-        public void CollectionCapacityConstraint_ToString()
+        public void CollectionConstraint_ToString()
         {
-            CollectionCapacityConstraint.Empty.ToString().Should().Be("Empty");
-            CollectionCapacityConstraint.NotEmpty.ToString().Should().Be("NotEmpty");
+            CollectionConstraint.Empty.ToString().Should().Be("Empty");
+            CollectionConstraint.NotEmpty.ToString().Should().Be("NotEmpty");
         }
 
         [TestMethod]

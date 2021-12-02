@@ -90,7 +90,7 @@ namespace SonarAnalyzer.SymbolicExecution.Sonar
             }
             else if (constraint is NullableConstraint
                 || constraint is DisposableConstraint
-                || constraint is CollectionCapacityConstraint
+                || constraint is CollectionConstraint
                 || constraint is SerializationConstraint)
             {
                 return new[] { programState };
