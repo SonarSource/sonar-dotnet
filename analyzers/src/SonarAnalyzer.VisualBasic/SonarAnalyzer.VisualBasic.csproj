@@ -5,6 +5,7 @@
     <RootNamespace>SonarAnalyzer</RootNamespace>
     <TargetFrameworks>net46;netstandard2.0</TargetFrameworks>
     <ProjectGuid>{7cfa8fa5-8842-4e89-bb90-39d5c0f20ba8}</ProjectGuid>
+    <DefineConstants>TRACE;VB</DefineConstants>
   </PropertyGroup>
 
   <ItemGroup>
@@ -20,14 +21,6 @@
   <ItemGroup>
     <ProjectReference Include="..\SonarAnalyzer.Common\SonarAnalyzer.Common.csproj" />
   </ItemGroup>
-
-  <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
-    <DefineConstants>TRACE;VB</DefineConstants>
-  </PropertyGroup>
-
-  <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
-    <DefineConstants>TRACE;VB</DefineConstants>
-  </PropertyGroup>
 
   <Import Project="..\SonarAnalyzer.Shared\SonarAnalyzer.Shared.projitems" Label="Shared" />
 
