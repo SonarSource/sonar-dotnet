@@ -2,6 +2,7 @@
 <Project>
   <!-- This file is included in all projects inside src and tests directories. -->
   <Import Project="$(MSBuildThisFileDirectory)\StyleCopAnalyzers.targets" />
+  <Import Project="$(MSBuildThisFileDirectory)\Directory.Build.targets" />
 
   <PropertyGroup>
     <LangVersion>9.0</LangVersion>
