@@ -49,20 +49,23 @@ namespace SonarAnalyzer.UnitTest
     <OutPath>{2}</OutPath>
 </SonarProjectConfig>";
 
-        public static (SyntaxTree, SemanticModel) CompileIgnoreErrors(string snippet, bool isCSharp = true, params MetadataReference[] additionalReferences) =>
-            Compile(snippet, true, isCSharp, additionalReferences);
+        public static (SyntaxTree, SemanticModel) CompileIgnoreErrorsCS(string snippet, params MetadataReference[] additionalReferences) =>
+            Compile(snippet, true, AnalyzerLanguage.CSharp, additionalReferences);
 
-        public static (SyntaxTree, SemanticModel) Compile(string snippet, bool isCSharp = true, params MetadataReference[] additionalReferences) =>
-            Compile(snippet, false, isCSharp, additionalReferences);
+        public static (SyntaxTree, SemanticModel) CompileCS(string snippet, params MetadataReference[] additionalReferences) =>
+            Compile(snippet, false, AnalyzerLanguage.CSharp, additionalReferences);
 
-        public static (SyntaxTree, SemanticModel) Compile(string snippet, bool ignoreErrors, bool isCSharp, params MetadataReference[] additionalReferences)
+        public static (SyntaxTree, SemanticModel) CompileVB(string snippet, params MetadataReference[] additionalReferences) =>
+            Compile(snippet, false, AnalyzerLanguage.VisualBasic, additionalReferences);
+
+        public static (SyntaxTree, SemanticModel) Compile(string snippet, bool ignoreErrors, AnalyzerLanguage language, params MetadataReference[] additionalReferences)
         {
-            var compiled = new SnippetCompiler(snippet, ignoreErrors, isCSharp ? AnalyzerLanguage.CSharp : AnalyzerLanguage.VisualBasic, additionalReferences);
+            var compiled = new SnippetCompiler(snippet, ignoreErrors, language, additionalReferences);
             return (compiled.SyntaxTree, compiled.SemanticModel);
         }
 
         public static ControlFlowGraph CompileCfgBodyCS(string body = null) =>
-            CompileCfg($"public class Sample {{ public void Main() {{ {body} }} }}");
+            CompileCfg($"public class Sample {{ public void Main() {{ {body} }} }}", AnalyzerLanguage.CSharp);
 
         public static ControlFlowGraph CompileCfgBodyVB(string body = null) =>
             CompileCfg(
@@ -70,16 +73,19 @@ $@"Public Class Sample
     Public Sub Main()
         {body}
     End Sub
-End Class", false);
+End Class", AnalyzerLanguage.VisualBasic);
 
-        public static ControlFlowGraph CompileCfg(string snippet, bool isCSharp = true, bool ignoreErrors = false)
+        public static ControlFlowGraph CompileCfgCS(string snippet, bool ignoreErrors = false) =>
+            CompileCfg(snippet, AnalyzerLanguage.CSharp, ignoreErrors);
+
+        public static ControlFlowGraph CompileCfg(string snippet, AnalyzerLanguage language, bool ignoreErrors = false)
         {
-            var (tree, semanticModel) = Compile(snippet, ignoreErrors, isCSharp);
+            var (tree, semanticModel) = Compile(snippet, ignoreErrors, language);
             var method = tree.GetRoot().DescendantNodes().First(IsMethod);
             return ControlFlowGraph.Create(method, semanticModel);
 
             bool IsMethod(SyntaxNode node) =>
-                isCSharp
+                language == AnalyzerLanguage.CSharp
                     ? node.RawKind == (int)CS.SyntaxKind.MethodDeclaration
                     : node.RawKind == (int)VB.SyntaxKind.FunctionBlock || node.RawKind == (int)VB.SyntaxKind.SubBlock;
         }
