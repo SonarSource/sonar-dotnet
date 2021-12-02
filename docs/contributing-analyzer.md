@@ -8,23 +8,23 @@ All C# and VB.NET code analyzers present in SonarLint for Visual Studio, SonarQu
 1. Download sub-modules `git submodule update --init --recursive`
 1. Run `.\scripts\build\dev-build.ps1 -build -test`
 
-In general, it is best to run commands from the Visual Studio Developer Command Prompt (if you're using ConEmu, you can setup a console task like `-new_console:C:\Workspace\sonar-dotnet cmd /k "C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\Common7\Tools\VsDevCmd.bat"` - it starts the Developer Console inside the folder `C:\Workspace\sonar-dotnet`)
+In general, it is best to run commands from the Visual Studio Developer Command Prompt (if you're using ConEmu, you can setup a console task like `-new_console:C:\Workspace\sonar-dotnet cmd /k ""c:\Program Files\Microsoft Visual Studio\2022\Community\Common7\Tools\VsDevCmd.bat" "` - it starts the Developer Console inside the folder `C:\Workspace\sonar-dotnet`)
 
-## Developing with Visual Studio 2019 or Rider
+## Developing with Visual Studio 2022 or Rider
 
-1. [Visual Studio 2019](https://visualstudio.microsoft.com/vs/) or [Rider](https://www.jetbrains.com/rider/download)
+1. [Visual Studio 2022](https://visualstudio.microsoft.com/vs/) or [Rider](https://www.jetbrains.com/rider/download)
 1. When using Visual Studio, ensure to install the following Workloads:
     - ASP.NET and web development
     - .NET desktop development
     - Visual Studio extension development
-    - .NET Core cross-platform development
 1. Ensure to install Individual components:
-    - .NET Core 3.1 SDK
     - .NET Framework 4.8 SDK
     - .NET Framework 4.8 Targeting pack
-    - .NET 3.5 SDK (SP1)
-    - .NET 5 SDK
+    - .NET SDK
     - .NET Compiler Platform SDK
+1. Install also:
+    - .NET Core 3.1 SDK
+    - .NET 3.5 SDK (SP1)
 1. The following environment variables must be set:
     - **JAVA_HOME**
     - **MSBUILD_PATH** - path to the MSBuild.exe executable (MSBuild 16)
@@ -63,7 +63,7 @@ For details on how the parsing works, read the [regression-test.ps1](../analyzer
 To run the ITs you will need to follow this pattern:
 
 1. Make sure the project is built: Integration tests don't build the analyzer, but use the results of the latest build (debug or release)
-1. Open the `Developer Command Prompt for VS2019` from the start menu
+1. Open the `Developer Command Prompt for VS2022` from the start menu
 1. Go to `PATH_TO_CLONED_REPOSITORY/analyzers/its`
 1. Run `powershell`
 1. Run `.\regression-test.ps1`
