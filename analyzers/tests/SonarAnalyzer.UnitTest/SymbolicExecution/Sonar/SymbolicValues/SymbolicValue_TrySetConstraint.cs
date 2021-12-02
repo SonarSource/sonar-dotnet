@@ -540,19 +540,19 @@ namespace SonarAnalyzer.UnitTest.SymbolicExecution.Sonar.SymbolicValues
             }
         };
 
-        private static IEnumerable<object[]> CryptographyIVSymbolicValueConstraintData { get; } = new[]
+        private static IEnumerable<object[]> InitializationVectorConstraintData { get; } = new[]
         {
             new object[]
             {
-                CryptographyIVSymbolicValueConstraint.Initialized, // constraint to set
-                ConstraintList(CryptographyIVSymbolicValueConstraint.NotInitialized), // existing
-                ProgramStateList(ConstraintList(CryptographyIVSymbolicValueConstraint.Initialized)) // Expected
+                InitializationVectorConstraint.Initialized, // constraint to set
+                ConstraintList(InitializationVectorConstraint.NotInitialized), // existing
+                ProgramStateList(ConstraintList(InitializationVectorConstraint.Initialized)) // Expected
             },
             new object[]
             {
-                CryptographyIVSymbolicValueConstraint.NotInitialized, // constraint to set
-                ConstraintList(CryptographyIVSymbolicValueConstraint.Initialized), // existing
-                ProgramStateList(ConstraintList(CryptographyIVSymbolicValueConstraint.NotInitialized)) // Expected
+                InitializationVectorConstraint.NotInitialized, // constraint to set
+                ConstraintList(InitializationVectorConstraint.Initialized), // existing
+                ProgramStateList(ConstraintList(InitializationVectorConstraint.NotInitialized)) // Expected
             }
         };
 
@@ -586,7 +586,7 @@ namespace SonarAnalyzer.UnitTest.SymbolicExecution.Sonar.SymbolicValues
         [DynamicData(nameof(FullNotWhiteSpaceStringConstraintData))]
         [DynamicData(nameof(NotWhiteSpaceStringConstraintData))]
         [DynamicData(nameof(ByteArrayConstraintData))]
-        [DynamicData(nameof(CryptographyIVSymbolicValueConstraintData))]
+        [DynamicData(nameof(InitializationVectorConstraintData))]
         [DynamicData(nameof(SaltSizeConstraintData))]
         public void TrySetConstraint(SymbolicConstraint constraint,
                                      IList<SymbolicConstraint> existingConstraints,

@@ -49,10 +49,10 @@ namespace SonarAnalyzer.UnitTest.SymbolicExecution.Sonar.Constraints
         }
 
         [TestMethod]
-        public void CryptographyIVSymbolicValueConstraint_ToString()
+        public void InitializationVectorConstraint_ToString()
         {
-            CryptographyIVSymbolicValueConstraint.Initialized.ToString().Should().Be("Initialized");
-            CryptographyIVSymbolicValueConstraint.NotInitialized.ToString().Should().Be("NotInitialized");
+            InitializationVectorConstraint.Initialized.ToString().Should().Be("Initialized");
+            InitializationVectorConstraint.NotInitialized.ToString().Should().Be("NotInitialized");
         }
 
         [TestMethod]
