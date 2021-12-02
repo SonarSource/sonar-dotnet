@@ -61,17 +61,17 @@ namespace SonarAnalyzer.UnitTest.SymbolicExecution.Roslyn
                  "Literal: 42",
                  "SimpleAssignment: value = 42 (Implicit)");
 
-            var sut = new ExplodedNode(block, ProgramState.Empty);
-            TestHelper.Serialize(sut.Operation).Should().Be("LocalReference: value = 42 (Implicit)");
+            var current = new ExplodedNode(block, ProgramState.Empty);
+            TestHelper.Serialize(current.Operation).Should().Be("LocalReference: value = 42 (Implicit)");
 
-            sut = new ExplodedNode(sut, ProgramState.Empty);
-            TestHelper.Serialize(sut.Operation).Should().Be("Literal: 42");
+            current = new ExplodedNode(current, ProgramState.Empty);
+            TestHelper.Serialize(current.Operation).Should().Be("Literal: 42");
 
-            sut = new ExplodedNode(sut, ProgramState.Empty);
-            TestHelper.Serialize(sut.Operation).Should().Be("SimpleAssignment: value = 42 (Implicit)");
+            current = new ExplodedNode(current, ProgramState.Empty);
+            TestHelper.Serialize(current.Operation).Should().Be("SimpleAssignment: value = 42 (Implicit)");
 
-            sut = new ExplodedNode(sut, ProgramState.Empty);
-            sut.Operation.Should().BeNull();
+            current = new ExplodedNode(current, ProgramState.Empty);
+            current.Operation.Should().BeNull();
         }
 
         [TestMethod]

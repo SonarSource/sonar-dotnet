@@ -26,9 +26,9 @@ using StyleCop.Analyzers.Lightup;
 
 namespace SonarAnalyzer.SymbolicExecution.Roslyn
 {
-    public sealed class ExplodedNode
+    internal sealed class ExplodedNode
     {
-        private readonly IOperationWrapperSonar[] operations;   // Same memory footprint as ImmutableArray, regular array is marginally faster
+        private readonly IOperationWrapperSonar[] operations;
         private readonly int index;
 
         public ProgramState State { get; }
