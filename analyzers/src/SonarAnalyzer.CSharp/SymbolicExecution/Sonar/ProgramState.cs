@@ -438,7 +438,7 @@ namespace SonarAnalyzer.SymbolicExecution.Sonar
 
         public override int GetHashCode() => this.hash.Value;
 
-        public ProgramState SetConstraint(SymbolicValue symbolicValue, SymbolicValueConstraint constraint)
+        public ProgramState SetConstraint(SymbolicValue symbolicValue, SymbolicConstraint constraint)
         {
             if (constraint == null)
             {
@@ -463,7 +463,7 @@ namespace SonarAnalyzer.SymbolicExecution.Sonar
                 Relationships);
         }
 
-        public ProgramState RemoveConstraint(SymbolicValue symbolicValue, SymbolicValueConstraint constraint)
+        public ProgramState RemoveConstraint(SymbolicValue symbolicValue, SymbolicConstraint constraint)
         {
             if (constraint == null)
             {
@@ -480,7 +480,7 @@ namespace SonarAnalyzer.SymbolicExecution.Sonar
                 Relationships);
         }
 
-        public bool HasConstraint(SymbolicValue symbolicValue, SymbolicValueConstraint constraint)
+        public bool HasConstraint(SymbolicValue symbolicValue, SymbolicConstraint constraint)
         {
             return Constraints.TryGetValue(symbolicValue, out var constraints) &&
                    constraints.HasConstraint(constraint);

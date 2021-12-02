@@ -20,7 +20,7 @@
 
 namespace SonarAnalyzer.SymbolicExecution.Sonar.Constraints
 {
-    public sealed class ObjectConstraint : SymbolicValueConstraint
+    public sealed class ObjectConstraint : SymbolicConstraint
     {
         public static readonly ObjectConstraint Null = new ObjectConstraint();
         public static readonly ObjectConstraint NotNull = new ObjectConstraint();
@@ -29,7 +29,7 @@ namespace SonarAnalyzer.SymbolicExecution.Sonar.Constraints
         {
         }
 
-        public override SymbolicValueConstraint OppositeForLogicalNot =>
+        public override SymbolicConstraint OppositeForLogicalNot =>
             this == Null ? NotNull : null /* not NotNull can be Null or another NotNull */;
 
         public override string ToString()

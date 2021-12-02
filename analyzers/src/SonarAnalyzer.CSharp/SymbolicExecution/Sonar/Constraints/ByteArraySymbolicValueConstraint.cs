@@ -20,14 +20,14 @@
 
 namespace SonarAnalyzer.SymbolicExecution.Sonar.Constraints
 {
-    public class ByteArraySymbolicValueConstraint : SymbolicValueConstraint
+    public class ByteArraySymbolicValueConstraint : SymbolicConstraint
     {
         internal static readonly ByteArraySymbolicValueConstraint Constant = new ByteArraySymbolicValueConstraint();
         internal static readonly ByteArraySymbolicValueConstraint Modified = new ByteArraySymbolicValueConstraint();
 
         private ByteArraySymbolicValueConstraint() { }
 
-        public override SymbolicValueConstraint OppositeForLogicalNot =>
+        public override SymbolicConstraint OppositeForLogicalNot =>
             this == Modified ? Constant : Modified;
 
         public override string ToString() =>

@@ -109,7 +109,7 @@ namespace SonarAnalyzer.UnitTest.SymbolicExecution.Sonar.SymbolicValues
             newProgramStates.Should().BeEquivalentTo(ps);
         }
 
-        private static void ShouldHaveConstraint(ProgramState ps, SymbolicValue sv, SymbolicValueConstraint expectedConstraint)
+        private static void ShouldHaveConstraint(ProgramState ps, SymbolicValue sv, SymbolicConstraint expectedConstraint)
         {
             sv.TryGetConstraints(ps, out var constraints).Should().BeTrue();
             constraints.HasConstraint(expectedConstraint).Should().BeTrue();

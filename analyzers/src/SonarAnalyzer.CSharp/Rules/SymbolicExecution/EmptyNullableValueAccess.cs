@@ -132,7 +132,7 @@ namespace SonarAnalyzer.Rules.CSharp
         {
             public HasValueAccessSymbolicValue(SymbolicValue nullable) : base(nullable, HasValueLiteral) { }
 
-            public override IEnumerable<ProgramState> TrySetConstraint(SymbolicValueConstraint constraint, ProgramState programState)
+            public override IEnumerable<ProgramState> TrySetConstraint(SymbolicConstraint constraint, ProgramState programState)
             {
                 if (!(constraint is BoolConstraint boolConstraint))
                 {

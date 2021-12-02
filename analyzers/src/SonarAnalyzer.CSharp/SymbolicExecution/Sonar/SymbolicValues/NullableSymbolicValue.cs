@@ -34,7 +34,7 @@ namespace SonarAnalyzer.SymbolicExecution.Sonar.SymbolicValues
             WrappedValue = wrappedValue;
         }
 
-        public override IEnumerable<ProgramState> TrySetConstraint(SymbolicValueConstraint constraint, ProgramState programState)
+        public override IEnumerable<ProgramState> TrySetConstraint(SymbolicConstraint constraint, ProgramState programState)
         {
             if (constraint == null)
             {
@@ -69,7 +69,7 @@ namespace SonarAnalyzer.SymbolicExecution.Sonar.SymbolicValues
             return TrySetConstraint(NullableValueConstraint.HasValue, programState).SelectMany(ps => WrappedValue.TrySetConstraint(constraint, ps));
         }
 
-        public override IEnumerable<ProgramState> TrySetOppositeConstraint(SymbolicValueConstraint constraint, ProgramState programState)
+        public override IEnumerable<ProgramState> TrySetOppositeConstraint(SymbolicConstraint constraint, ProgramState programState)
         {
             var negateConstraint = constraint?.OppositeForLogicalNot;
 

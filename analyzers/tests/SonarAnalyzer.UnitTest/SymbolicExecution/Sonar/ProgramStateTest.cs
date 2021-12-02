@@ -31,9 +31,9 @@ namespace SonarAnalyzer.UnitTest.SymbolicExecution.Sonar
     [TestClass]
     public class ProgramStateTest
     {
-        private class FakeConstraint : SymbolicValueConstraint
+        private class FakeConstraint : SymbolicConstraint
         {
-            public override SymbolicValueConstraint OppositeForLogicalNot => null;
+            public override SymbolicConstraint OppositeForLogicalNot => null;
         }
 
         [TestMethod]

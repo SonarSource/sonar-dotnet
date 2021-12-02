@@ -20,12 +20,8 @@
 
 namespace SonarAnalyzer.SymbolicExecution.Sonar.Constraints
 {
-    public abstract class SymbolicValueConstraint
+    public abstract class SymbolicConstraint
     {
-        protected SymbolicValueConstraint()
-        {
-        }
-
-        public abstract SymbolicValueConstraint OppositeForLogicalNot { get; }
+        public abstract SymbolicConstraint OppositeForLogicalNot { get; }
     }
 }

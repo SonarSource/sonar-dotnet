@@ -20,14 +20,14 @@
 
 namespace SonarAnalyzer.SymbolicExecution.Sonar.Constraints
 {
-    public class SaltSizeSymbolicValueConstraint : SymbolicValueConstraint
+    public class SaltSizeSymbolicValueConstraint : SymbolicConstraint
     {
         internal static readonly SaltSizeSymbolicValueConstraint Short = new SaltSizeSymbolicValueConstraint();
         internal static readonly SaltSizeSymbolicValueConstraint Safe = new SaltSizeSymbolicValueConstraint();
 
         private SaltSizeSymbolicValueConstraint() { }
 
-        public override SymbolicValueConstraint OppositeForLogicalNot =>
+        public override SymbolicConstraint OppositeForLogicalNot =>
             this == Safe ? Short : Safe;
 
         public override string ToString() =>

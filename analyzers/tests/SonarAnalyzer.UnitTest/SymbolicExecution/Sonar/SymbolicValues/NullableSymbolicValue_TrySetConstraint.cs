@@ -546,7 +546,7 @@ namespace SonarAnalyzer.UnitTest.SymbolicExecution.Sonar.SymbolicValues
             newProgramStates.Should().BeEquivalentTo(ps);
         }
 
-        private static void ShouldHaveConstraint(ProgramState ps, SymbolicValue sv, SymbolicValueConstraint constraint)
+        private static void ShouldHaveConstraint(ProgramState ps, SymbolicValue sv, SymbolicConstraint constraint)
         {
             sv.TryGetConstraints(ps, out var existing).Should().BeTrue();
             existing.HasConstraint(constraint).Should().BeTrue();

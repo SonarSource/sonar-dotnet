@@ -20,7 +20,7 @@
 
 namespace SonarAnalyzer.SymbolicExecution.Sonar.Constraints
 {
-    internal sealed class SerializationConstraint : SymbolicValueConstraint
+    internal sealed class SerializationConstraint : SymbolicConstraint
     {
         internal static readonly SerializationConstraint Unsafe = new SerializationConstraint();
         internal static readonly SerializationConstraint Safe = new SerializationConstraint();
@@ -29,7 +29,7 @@ namespace SonarAnalyzer.SymbolicExecution.Sonar.Constraints
         {
         }
 
-        public override SymbolicValueConstraint OppositeForLogicalNot =>
+        public override SymbolicConstraint OppositeForLogicalNot =>
             this == Safe
                 ? Unsafe
                 : Safe;

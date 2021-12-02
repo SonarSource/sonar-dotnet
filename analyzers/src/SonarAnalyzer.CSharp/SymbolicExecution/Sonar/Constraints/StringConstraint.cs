@@ -20,7 +20,7 @@
 
 namespace SonarAnalyzer.SymbolicExecution.Sonar.Constraints
 {
-    public sealed class StringConstraint : SymbolicValueConstraint
+    public sealed class StringConstraint : SymbolicConstraint
     {
         public static readonly StringConstraint EmptyString = new StringConstraint();
         public static readonly StringConstraint FullString = new StringConstraint();
@@ -37,7 +37,7 @@ namespace SonarAnalyzer.SymbolicExecution.Sonar.Constraints
             || constraint == StringConstraint.FullNotWhiteSpaceString;
 
         // Currently FullOrNullString and NotWhiteSpaceString  is never set as a constraint. It is there to imply the opposite of EmptyString
-        public override SymbolicValueConstraint OppositeForLogicalNot
+        public override SymbolicConstraint OppositeForLogicalNot
         {
             get
             {
