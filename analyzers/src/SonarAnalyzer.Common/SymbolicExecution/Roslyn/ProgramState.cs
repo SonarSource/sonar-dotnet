@@ -22,6 +22,7 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
 {
     public sealed class ProgramState
     {
+        public static readonly ProgramState Empty = new ProgramState();
         // ToDo: Some stuff is missing here
     }
 }

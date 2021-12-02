@@ -18,6 +18,7 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.IO;
@@ -34,6 +35,7 @@ using SonarAnalyzer.Helpers;
 using SonarAnalyzer.UnitTest.MetadataReferences;
 using SonarAnalyzer.UnitTest.PackagingTests;
 using SonarAnalyzer.UnitTest.TestFramework;
+using StyleCop.Analyzers.Lightup;
 using CS = Microsoft.CodeAnalysis.CSharp;
 using VB = Microsoft.CodeAnalysis.VisualBasic;
 
@@ -58,6 +60,17 @@ namespace SonarAnalyzer.UnitTest
             var compiled = new SnippetCompiler(snippet, ignoreErrors, isCSharp ? AnalyzerLanguage.CSharp : AnalyzerLanguage.VisualBasic, additionalReferences);
             return (compiled.SyntaxTree, compiled.SemanticModel);
         }
+
+        public static ControlFlowGraph CompileCfgBodyCS(string body = null) =>
+            CompileCfg($"public class Sample {{ public void Main() {{ {body} }} }}");
+
+        public static ControlFlowGraph CompileCfgBodyVB(string body = null) =>
+            CompileCfg(
+$@"Public Class Sample
+    Public Sub Main()
+        {body}
+    End Sub
+End Class", false);
 
         public static ControlFlowGraph CompileCfg(string snippet, bool isCSharp = true, bool ignoreErrors = false)
         {
@@ -148,6 +161,12 @@ namespace SonarAnalyzer.UnitTest
             projectType == ProjectType.Test
                 ? NuGetMetadataReference.MSTestTestFrameworkV1  // Any reference to detect a test project
                 : Enumerable.Empty<MetadataReference>();
+
+        public static string Serialize(IOperationWrapperSonar operation)
+        {
+            _ = operation ?? throw new ArgumentNullException(nameof(operation));
+            return operation.Instance.Kind + ": " + operation.Instance.Syntax + (operation.IsImplicit ? " (Implicit)" : null);
+        }
 
         public static AnalyzerOptions CreateOptions(string relativePath)
         {

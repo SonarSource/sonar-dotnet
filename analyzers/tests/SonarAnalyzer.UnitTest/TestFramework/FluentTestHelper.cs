@@ -41,7 +41,7 @@ namespace SonarAnalyzer.UnitTest.Helpers
              where TAssertions : SelfReferencingCollectionAssertions<T, TAssertions>
         {
             _ = expected ?? throw new ArgumentNullException(nameof(expected));
-            self.Subject.Should().ContainInOrder(expected).And.HaveSameCount(expected);
+            self.Subject.Should().ContainInOrder(expected).And.BeEquivalentTo(expected);    // BeEquivalentTo to have better collection message
         }
 
         public static void BeIgnoringLineEndings(this StringAssertions stringAssertions, string expected) =>

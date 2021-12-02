@@ -19,14 +19,11 @@
  */
 
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using SonarAnalyzer.SymbolicExecution.Roslyn;
-using SonarAnalyzer.UnitTest.Helpers;
-using StyleCop.Analyzers.Lightup;
+using SonarAnalyzer.UnitTest.TestFramework.SymbolicExecution;
 
 namespace SonarAnalyzer.UnitTest.SymbolicExecution.Roslyn
 {
@@ -46,10 +43,14 @@ namespace SonarAnalyzer.UnitTest.SymbolicExecution.Roslyn
         [TestMethod]
         public void SequentialInput_CS()
         {
-            var context = CreateContextCS("var a = true; var b = false; b = !b; a = (b);");
+            var context = SETestContext.CreateCS("var a = true; var b = false; b = !b; a = (b);");
             context.Collector.ValidateOrder(
+                "LocalReference: a = true (Implicit)",
                 "Literal: true",
+                "SimpleAssignment: a = true (Implicit)",
+                "LocalReference: b = false (Implicit)",
                 "Literal: false",
+                "SimpleAssignment: b = false (Implicit)",
                 "LocalReference: b",
                 "LocalReference: b",
                 "UnaryOperator: !b",
@@ -64,81 +65,56 @@ namespace SonarAnalyzer.UnitTest.SymbolicExecution.Roslyn
         [TestMethod]
         public void SequentialInput_VB()
         {
-            var context = CreateContextVB("Dim A As Boolean = True, B As Boolean = False : B = Not B : A = (B)");
+            var context = SETestContext.CreateVB("Dim A As Boolean = True, B As Boolean = False : B = Not B : A = (B)");
             context.Collector.ValidateOrder(
+                "LocalReference: A (Implicit)",
                 "Literal: True",
+                "SimpleAssignment: A As Boolean = True (Implicit)",
+                "LocalReference: B (Implicit)",
                 "Literal: False",
+                "SimpleAssignment: B As Boolean = False (Implicit)",
                 "LocalReference: B",
                 "LocalReference: B",
                 "UnaryOperator: Not B",
+                "SimpleAssignment: B = Not B (Implicit)",
                 "ExpressionStatement: B = Not B",
                 "LocalReference: A",
                 "LocalReference: B",
                 "Parenthesized: (B)",
+                "SimpleAssignment: A = (B) (Implicit)",
                 "ExpressionStatement: A = (B)");
         }
 
-        private Context CreateContextCS(string methodBody, string additionalParameters = null)
+        [TestMethod]
+        public void PreProcess_Null_StopsExecution()
         {
-            var code = $@"
-public class Sample
-{{
-    public void Main(bool boolParameter{additionalParameters})
-    {{
-        {methodBody}
-    }}
-
-    private string Method(params string[] args) => null;
-    private bool IsMethod(params bool[] args) => true;
-}}";
-            return new Context(code, true);
+            var stopper = new PreProcessTestCheck((state, operation) => operation.Instance.Kind == Microsoft.CodeAnalysis.OperationKind.Unary ? null : state);
+            var context = SETestContext.CreateCS("var a = true; var b = false; b = !b; a = (b);", stopper);
+            context.Collector.ValidateOrder(
+                "LocalReference: a = true (Implicit)",
+                "Literal: true",
+                "SimpleAssignment: a = true (Implicit)",
+                "LocalReference: b = false (Implicit)",
+                "Literal: false",
+                "SimpleAssignment: b = false (Implicit)",
+                "LocalReference: b",
+                "LocalReference: b");
         }
 
-        private Context CreateContextVB(string methodBody, string additionalParameters = null)
+        [TestMethod]
+        public void PostProcess_Null_StopsExecution()
         {
-            var code = $@"
-Public Class Sample
-
-    Public Sub Main(BoolParameter As Boolean{additionalParameters})
-        {methodBody}
-    End Sub
-
-    Private Function Method(ParamArray Args() As String) As String
-    End Function
-
-    Private Function IsMethod(ParamArray Args() As Boolean) As Boolean
-    End Function
-
-End Class";
-            return new Context(code, false);
-        }
-
-        private class Context
-        {
-            public readonly CollectorCheck Collector = new();
-            private readonly RoslynSymbolicExecution se;
-
-            public Context(string code, bool isCSharp)
-            {
-                var cfg = TestHelper.CompileCfg(code, isCSharp);
-                se = new RoslynSymbolicExecution(cfg, new[] { Collector });
-                se.Execute();
-            }
-        }
-
-        private class CollectorCheck : SymbolicExecutionCheck
-        {
-            // ToDo: Simplified version for now, we'll need ProgramState & Operation. Or even better, the whole exploded Node
-            private readonly List<IOperationWrapperSonar> preProcessedOperations = new();
-
-            public override ProgramState PreProcess(ProgramState state, IOperationWrapperSonar operation)
-            {
-                preProcessedOperations.Add(operation);
-                return state;
-            }
-
-            public void ValidateOrder(params string[] expected) =>
-                preProcessedOperations.Where(x => !x.IsImplicit).Select(x => x.Instance.Kind + ": " + x.Instance.Syntax).Should().OnlyContainInOrder(expected);
+            var stopper = new PostProcessTestCheck((state, operation) => operation.Instance.Kind == Microsoft.CodeAnalysis.OperationKind.Unary ? null : state);
+            var context = SETestContext.CreateCS("var a = true; var b = false; b = !b; a = (b);", stopper);
+            context.Collector.ValidateOrder(
+                "LocalReference: a = true (Implicit)",
+                "Literal: true",
+                "SimpleAssignment: a = true (Implicit)",
+                "LocalReference: b = false (Implicit)",
+                "Literal: false",
+                "SimpleAssignment: b = false (Implicit)",
+                "LocalReference: b",
+                "LocalReference: b");
         }
     }
 }
