@@ -76,7 +76,7 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
             }
 
             // ToDo: Something is still missing around here - process well known instructions
-            state = state.AddOperationValue(node.Operation, CreateSymbolicValue());
+            state = state.SetOperationValue(node.Operation, CreateSymbolicValue());
 
             state = InvokeChecks(state, (check, ps) => check.PostProcess(ps, node.Operation));
             if (state == null)

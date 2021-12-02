@@ -27,7 +27,7 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
     {
         public static readonly ProgramState Empty = new ProgramState(ImmutableDictionary<IOperationWrapperSonar, SymbolicValue>.Empty);
 
-        private readonly ImmutableDictionary<IOperationWrapperSonar, SymbolicValue> operationValue;
+        private readonly ImmutableDictionary<IOperationWrapperSonar, SymbolicValue> operationValue;     // Current SymbolicValue result of a given operation
 
         public SymbolicValue this[IOperationWrapperSonar operation] => operationValue.TryGetValue(operation, out var value) ? value : null;
 
@@ -36,7 +36,7 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
             this.operationValue = operationValue;
         }
 
-        public ProgramState AddOperationValue(IOperationWrapperSonar operation, SymbolicValue value) =>
-            new ProgramState(operationValue.Add(operation, value));
+        public ProgramState SetOperationValue(IOperationWrapperSonar operation, SymbolicValue value) =>
+            new ProgramState(operationValue.SetItem(operation, value));
     }
 }
