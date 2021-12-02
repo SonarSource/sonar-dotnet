@@ -31,6 +31,8 @@ Static methods are preferred to be after instance methods.
 
 Single variable lambdas should use `x` as the variable name (based on lambda calculus λx). Multi variable lambdas should use descriptive names, where `x` can be used for the main iterated item like `(x, index) => ...`. Name `c` can be used for context of Roslyn callback.
 
+Short names can be used as parameter and variable names, namely `SyntaxTree tree`, `SemanticModel model` and `SyntaxNode node`.
+
 Unit tests for common C# and VB.NET rules should use two aliases `using CS = SonarAnalyzer.Rules.CSharp` and `using VB = SonarAnalyzer.Rules.VisualBasic`. Test method names should have `_CS` and `_VB` suffixes.
 
 Unit tests for single language rule should not use alias nor language method suffix.
