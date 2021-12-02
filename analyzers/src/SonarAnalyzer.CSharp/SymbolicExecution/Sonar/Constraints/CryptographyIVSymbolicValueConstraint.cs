@@ -27,7 +27,7 @@ namespace SonarAnalyzer.SymbolicExecution.Sonar.Constraints
 
         private CryptographyIVSymbolicValueConstraint() { }
 
-        public override SymbolicConstraint OppositeForLogicalNot =>
+        public override SymbolicConstraint Opposite =>
             this == Initialized ? NotInitialized : Initialized;
 
         public override string ToString() =>

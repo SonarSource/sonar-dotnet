@@ -25,7 +25,7 @@ namespace SonarAnalyzer.SymbolicExecution.Sonar.Constraints
         public static readonly BoolConstraint True = new BoolConstraint();
         public static readonly BoolConstraint False = new BoolConstraint();
 
-        public override SymbolicConstraint OppositeForLogicalNot =>
+        public override SymbolicConstraint Opposite =>
             this == True ? False : True;
 
         public override string ToString()

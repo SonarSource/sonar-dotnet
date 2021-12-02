@@ -27,7 +27,7 @@ namespace SonarAnalyzer.SymbolicExecution.Sonar.Constraints
 
         private ByteArraySymbolicValueConstraint() { }
 
-        public override SymbolicConstraint OppositeForLogicalNot =>
+        public override SymbolicConstraint Opposite =>
             this == Modified ? Constant : Modified;
 
         public override string ToString() =>

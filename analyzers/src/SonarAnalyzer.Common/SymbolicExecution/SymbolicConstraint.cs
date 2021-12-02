@@ -22,6 +22,6 @@ namespace SonarAnalyzer.SymbolicExecution
 {
     public abstract class SymbolicConstraint
     {
-        public abstract SymbolicConstraint OppositeForLogicalNot { get; }
+        public abstract SymbolicConstraint Opposite { get; }
     }
 }

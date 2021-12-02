@@ -29,7 +29,7 @@ namespace SonarAnalyzer.SymbolicExecution.Sonar.Constraints
         {
         }
 
-        public override SymbolicConstraint OppositeForLogicalNot =>
+        public override SymbolicConstraint Opposite =>
             this == Null ? NotNull : null /* not NotNull can be Null or another NotNull */;
 
         public override string ToString()

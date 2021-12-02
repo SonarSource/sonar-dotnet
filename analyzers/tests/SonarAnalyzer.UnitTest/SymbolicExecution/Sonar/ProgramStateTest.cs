@@ -34,7 +34,7 @@ namespace SonarAnalyzer.UnitTest.SymbolicExecution.Sonar
     {
         private class FakeConstraint : SymbolicConstraint
         {
-            public override SymbolicConstraint OppositeForLogicalNot => null;
+            public override SymbolicConstraint Opposite => null;
         }
 
         [TestMethod]

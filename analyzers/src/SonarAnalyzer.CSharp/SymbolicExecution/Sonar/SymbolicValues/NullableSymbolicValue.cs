@@ -71,7 +71,7 @@ namespace SonarAnalyzer.SymbolicExecution.Sonar.SymbolicValues
 
         public override IEnumerable<ProgramState> TrySetOppositeConstraint(SymbolicConstraint constraint, ProgramState programState)
         {
-            var negateConstraint = constraint?.OppositeForLogicalNot;
+            var negateConstraint = constraint?.Opposite;
 
             return constraint is BoolConstraint
                 ? TrySetConstraint(negateConstraint, programState).Union(TrySetConstraint(NullableValueConstraint.NoValue, programState))

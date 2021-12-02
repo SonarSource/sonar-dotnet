@@ -102,7 +102,7 @@ namespace SonarAnalyzer.SymbolicExecution.Sonar
         }
 
         public virtual IEnumerable<ProgramState> TrySetOppositeConstraint(SymbolicConstraint constraint, ProgramState programState) =>
-            TrySetConstraint(constraint?.OppositeForLogicalNot, programState);
+            TrySetConstraint(constraint?.Opposite, programState);
 
         public IEnumerable<ProgramState> TrySetConstraints(SymbolicValueConstraints constraints, ProgramState programState) =>
             TrySetConstraints(constraints, programState, false);

@@ -25,7 +25,7 @@ namespace SonarAnalyzer.SymbolicExecution.Sonar.Constraints
         public static readonly DisposableConstraint Disposed = new DisposableConstraint();
         public static readonly DisposableConstraint NotDisposed = new DisposableConstraint();
 
-        public override SymbolicConstraint OppositeForLogicalNot =>
+        public override SymbolicConstraint Opposite =>
             this == Disposed ? NotDisposed : Disposed;
 
         public override string ToString()

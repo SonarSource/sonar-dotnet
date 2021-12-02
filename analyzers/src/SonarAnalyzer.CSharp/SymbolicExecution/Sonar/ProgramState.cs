@@ -452,7 +452,7 @@ namespace SonarAnalyzer.SymbolicExecution.Sonar
             if (constraint is BoolConstraint)
             {
                 updatedConstraintsMap = updatedConstraintsMap.AddConstraintTo<NotEqualsRelationship>(symbolicValue,
-                    constraint.OppositeForLogicalNot, this);
+                    constraint.Opposite, this);
             }
 
             return new ProgramState(

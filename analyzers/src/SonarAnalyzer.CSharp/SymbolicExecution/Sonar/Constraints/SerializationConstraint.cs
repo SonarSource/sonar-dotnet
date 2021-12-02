@@ -29,7 +29,7 @@ namespace SonarAnalyzer.SymbolicExecution.Sonar.Constraints
         {
         }
 
-        public override SymbolicConstraint OppositeForLogicalNot =>
+        public override SymbolicConstraint Opposite =>
             this == Safe
                 ? Unsafe
                 : Safe;

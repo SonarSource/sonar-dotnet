@@ -37,7 +37,7 @@ namespace SonarAnalyzer.SymbolicExecution.Sonar.SymbolicValues
                 return new[] { programState };
             }
 
-            return Operand.TrySetConstraint(boolConstraint.OppositeForLogicalNot, programState);
+            return Operand.TrySetConstraint(boolConstraint.Opposite, programState);
         }
 
         public override string ToString()

@@ -29,11 +29,11 @@ namespace SonarAnalyzer.UnitTest.SymbolicExecution.Sonar.Constraints
     {
         [TestMethod]
         public void GivenSaltSizeIsShort_OppositeShouldBe_Safe() =>
-            SaltSizeSymbolicValueConstraint.Short.OppositeForLogicalNot.Should().Be(SaltSizeSymbolicValueConstraint.Safe);
+            SaltSizeSymbolicValueConstraint.Short.Opposite.Should().Be(SaltSizeSymbolicValueConstraint.Safe);
 
         [TestMethod]
         public void GivenSaltSizeIsSafe_OppositeShouldBe_Short() =>
-            SaltSizeSymbolicValueConstraint.Safe.OppositeForLogicalNot.Should().Be(SaltSizeSymbolicValueConstraint.Short);
+            SaltSizeSymbolicValueConstraint.Safe.Opposite.Should().Be(SaltSizeSymbolicValueConstraint.Short);
 
         [TestMethod]
         public void GivenSaltSizeIsShort_ToStringShouldBe_Short() =>
