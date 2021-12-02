@@ -4,6 +4,7 @@
   <Import Project="$(MSBuildThisFileDirectory)\StyleCopAnalyzers.targets" />
 
   <PropertyGroup>
+    <LangVersion>9.0</LangVersion>
     <RunAnalyzersDuringBuild>false</RunAnalyzersDuringBuild>
     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
   </PropertyGroup>
