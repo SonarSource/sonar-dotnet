@@ -209,7 +209,7 @@ namespace SonarAnalyzer.SymbolicExecution.Sonar
         {
             if (oldObjectConstraint == ObjectConstraint.Null)
             {
-                return StringConstraint.IsNotNullConstraint(constraint) ? Enumerable.Empty<ProgramState>() : new[] { programState };
+                return StringConstraint.IsNotNull(constraint) ? Enumerable.Empty<ProgramState>() : new[] { programState };
             }
             else if (constraint == StringConstraint.FullOrNullString)
             {
@@ -263,7 +263,7 @@ namespace SonarAnalyzer.SymbolicExecution.Sonar
 
         private IEnumerable<ProgramState> SetNewStringConstraint(StringConstraint constraint, ref ProgramState programState)
         {
-            if (StringConstraint.IsNotNullConstraint(constraint))
+            if (StringConstraint.IsNotNull(constraint))
             {
                 programState = programState.SetConstraint(this, constraint);
                 programState = programState.SetConstraint(this, ObjectConstraint.NotNull);

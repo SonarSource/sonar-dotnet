@@ -88,7 +88,7 @@ namespace SonarAnalyzer.SymbolicExecution.Sonar.Constraints
 
         private StringConstraint() { }
 
-        public static bool IsNotNullConstraint(StringConstraint constraint) =>  // FIXME: Rename
+        public static bool IsNotNull(StringConstraint constraint) =>  // FIXME: Rename
             constraint == StringConstraint.FullString
             || constraint == StringConstraint.EmptyString
             || constraint == StringConstraint.WhiteSpaceString
