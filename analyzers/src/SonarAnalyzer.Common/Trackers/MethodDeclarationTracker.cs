@@ -22,6 +22,7 @@ using System.Collections.Immutable;
 using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Diagnostics;
+using Microsoft.CodeAnalysis.Text;
 
 namespace SonarAnalyzer.Helpers.Trackers
 {
@@ -52,7 +53,7 @@ namespace SonarAnalyzer.Helpers.Trackers
                 {
                     if (c.Symbol.IsTopLevelMain())
                     {
-                        c.ReportIssue(Diagnostic.Create(input.Rule, null));
+                        c.ReportIssue(Diagnostic.Create(input.Rule, Location.Create(declaration.SyntaxTree, TextSpan.FromBounds(0, 0))));
                     }
                     else
                     {
