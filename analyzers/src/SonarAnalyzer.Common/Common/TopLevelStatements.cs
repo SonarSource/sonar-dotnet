@@ -18,24 +18,14 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System.Linq;
-using Microsoft.CodeAnalysis;
-using SonarAnalyzer.Common;
+using System.Collections.Immutable;
 
-namespace SonarAnalyzer.Helpers
+namespace SonarAnalyzer.Common
 {
-    internal static class ISymbolExtensions
+    public static class TopLevelStatements
     {
-        public static bool HasAttribute(this ISymbol symbol, KnownType type) =>
-            symbol.GetAttributes(type).Any();
+        public const string MainMethodImplicitName = "<Main>$";
 
-        public static SyntaxNode GetFirstSyntaxRef(this ISymbol symbol) =>
-            symbol?.DeclaringSyntaxReferences.FirstOrDefault()?.GetSyntax();
-
-        public static bool IsAutoProperty(this ISymbol symbol) =>
-            symbol.Kind == SymbolKind.Property && symbol.ContainingType.GetMembers().OfType<IFieldSymbol>().Any(x => symbol.Equals(x.AssociatedSymbol));
-
-        public static bool IsTopLevelMain(this ISymbol symbol) =>
-            symbol is IMethodSymbol { Name: TopLevelStatements.MainMethodImplicitName };
+        public static readonly ImmutableHashSet<string> ProgramClassImplicitName = ImmutableHashSet.Create("Program", "<Program>$");
     }
 }

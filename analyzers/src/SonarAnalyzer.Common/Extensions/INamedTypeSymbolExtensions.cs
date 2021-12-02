@@ -22,20 +22,13 @@ using System.Linq;
 using Microsoft.CodeAnalysis;
 using SonarAnalyzer.Common;
 
-namespace SonarAnalyzer.Helpers
+namespace SonarAnalyzer.Extensions
 {
-    internal static class ISymbolExtensions
+    public static class INamedTypeSymbolExtensions
     {
-        public static bool HasAttribute(this ISymbol symbol, KnownType type) =>
-            symbol.GetAttributes(type).Any();
-
-        public static SyntaxNode GetFirstSyntaxRef(this ISymbol symbol) =>
-            symbol?.DeclaringSyntaxReferences.FirstOrDefault()?.GetSyntax();
-
-        public static bool IsAutoProperty(this ISymbol symbol) =>
-            symbol.Kind == SymbolKind.Property && symbol.ContainingType.GetMembers().OfType<IFieldSymbol>().Any(x => symbol.Equals(x.AssociatedSymbol));
-
-        public static bool IsTopLevelMain(this ISymbol symbol) =>
-            symbol is IMethodSymbol { Name: TopLevelStatements.MainMethodImplicitName };
+        public static bool IsTopLevelProgram(this INamedTypeSymbol symbol) =>
+            TopLevelStatements.ProgramClassImplicitName.Contains(symbol.Name)
+            && symbol.ContainingNamespace.IsGlobalNamespace
+            && symbol.GetMembers(TopLevelStatements.MainMethodImplicitName).Any();
     }
 }

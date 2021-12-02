@@ -18,10 +18,13 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System;
+using System.Collections.Generic;
 using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
+using SonarAnalyzer.Extensions;
 using StyleCop.Analyzers.Lightup;
 
 namespace SonarAnalyzer.Helpers.Trackers
@@ -39,28 +42,48 @@ namespace SonarAnalyzer.Helpers.Trackers
                     return false;
                 }
 
-                var methodDeclaration = context.MethodSymbol.DeclaringSyntaxReferences
-                    .Select(r => r.GetSyntax())
-                    .OfType<BaseMethodDeclarationSyntax>()
-                    .FirstOrDefault(declaration => declaration.HasBodyOrExpressionBody());
-
-                if (methodDeclaration == null)
+                var methodInfo = GetMethodInfo(context);
+                if (methodInfo?.DescendantNodes == null)
                 {
                     return false;
                 }
 
-                var semanticModel = context.GetSemanticModel(methodDeclaration);
-
-                var descendantNodes = methodDeclaration?.Body?.DescendantNodes()
-                    ?? methodDeclaration?.ExpressionBody()?.DescendantNodes()
-                    ?? Enumerable.Empty<SyntaxNode>();
-
-                return descendantNodes.Any(
+                return methodInfo.DescendantNodes.Any(
                     node =>
                         node.IsKind(SyntaxKind.IdentifierName)
                         && ((IdentifierNameSyntax)node).Identifier.ValueText == parameterSymbol.Name
-                        && parameterSymbol.Equals(semanticModel.GetSymbolInfo(node).Symbol));
+                        && parameterSymbol.Equals(methodInfo.SemanticModel.GetSymbolInfo(node).Symbol));
             };
+
+        private static MethodInfo GetMethodInfo(MethodDeclarationContext context)
+        {
+            if (context.MethodSymbol.IsTopLevelMain())
+            {
+                var declaration = context.MethodSymbol
+                                         .DeclaringSyntaxReferences
+                                         .Select(r => r.GetSyntax())
+                                         .OfType<CompilationUnitSyntax>()
+                                         .First();
+
+                return new MethodInfo(context.GetSemanticModel(declaration), declaration.GetTopLevelMainBody().SelectMany(x => x.DescendantNodes()));
+            }
+            else
+            {
+                var declaration = context.MethodSymbol
+                                         .DeclaringSyntaxReferences
+                                         .Select(r => r.GetSyntax())
+                                         .OfType<BaseMethodDeclarationSyntax>()
+                                         .FirstOrDefault(declaration => declaration.HasBodyOrExpressionBody());
+                if (declaration == null)
+                {
+                    return null;
+                }
+
+                return new MethodInfo(
+                    context.GetSemanticModel(declaration),
+                    declaration.Body?.DescendantNodes() ?? declaration.ExpressionBody()?.DescendantNodes() ?? Enumerable.Empty<SyntaxNode>());
+            }
+        }
 
         protected override SyntaxToken? GetMethodIdentifier(SyntaxNode methodDeclaration) =>
             methodDeclaration switch
@@ -77,5 +100,18 @@ namespace SonarAnalyzer.Helpers.Trackers
                     _ => null
                 }
             };
+
+        private sealed class MethodInfo
+        {
+            public SemanticModel SemanticModel { get; }
+
+            public IEnumerable<SyntaxNode> DescendantNodes { get; }
+
+            public MethodInfo(SemanticModel model, IEnumerable<SyntaxNode> descendantNodes)
+            {
+                SemanticModel = model;
+                DescendantNodes = descendantNodes;
+            }
+        }
     }
 }

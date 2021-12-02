@@ -24,7 +24,6 @@ using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using SonarAnalyzer.SymbolicExecution.Sonar;
 using SonarAnalyzer.SymbolicExecution.Sonar.Constraints;
-using StyleCop.Analyzers.Lightup;
 
 namespace SonarAnalyzer.Extensions
 {
@@ -68,9 +67,6 @@ namespace SonarAnalyzer.Extensions
 
         public static IEnumerable<SyntaxNode> GetLocationNodes(this ISymbol symbol, SyntaxNode node) =>
             symbol.Locations.SelectMany(location => GetDescendantNodes(location, node));
-
-        public static bool IsTopLevelMain(this ISymbol symbol) =>
-           symbol is IMethodSymbol { Name: INamedTypeSymbolExtensions.MainMethodImplicitName };
 
         private static IEnumerable<SyntaxNode> GetDescendantNodes(Location location, SyntaxNode invocation)
         {
