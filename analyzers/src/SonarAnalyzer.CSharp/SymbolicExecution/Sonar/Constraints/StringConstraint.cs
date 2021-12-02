@@ -18,6 +18,8 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System;
+
 namespace SonarAnalyzer.SymbolicExecution.Sonar.Constraints
 {
     public sealed class StringConstraint : SymbolicConstraint
@@ -45,11 +47,14 @@ namespace SonarAnalyzer.SymbolicExecution.Sonar.Constraints
                 {
                     return FullOrNullString;
                 }
-                if (this == WhiteSpaceString)
+                else if (this == WhiteSpaceString)
                 {
                     return NotWhiteSpaceString;
                 }
-                return null;
+                else
+                {
+                    return null;
+                }
             }
         }
 
@@ -59,31 +64,31 @@ namespace SonarAnalyzer.SymbolicExecution.Sonar.Constraints
             {
                 if (this == EmptyString)
                 {
-                    return "EmptyString";
+                    return nameof(EmptyString);
                 }
                 else if (this == FullString)
                 {
-                    return "FullString";
+                    return nameof(FullString);
                 }
                 else if (this == FullOrNullString)
                 {
-                    return "FullOrNullString";
+                    return nameof(FullOrNullString);
                 }
                 else if (this == WhiteSpaceString)
                 {
-                    return "FullOrNullString";  // FIXME: Wrong
+                    return nameof(WhiteSpaceString);
                 }
                 else if (this == NotWhiteSpaceString)
                 {
-                    return "FullOrNullString";  // FIXME: Wrong
+                    return nameof(NotWhiteSpaceString);
                 }
                 else if (this == FullNotWhiteSpaceString)
                 {
-                    return "FullNotWhiteSpaceString";
+                    return nameof(FullNotWhiteSpaceString);
                 }
                 else
                 {
-                    return "null";  // FIXME: Wrong?
+                    throw new InvalidOperationException("Unexpected object state");
                 }
             }
         }
