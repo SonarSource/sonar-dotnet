@@ -30,6 +30,7 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
         private readonly ControlFlowGraph cfg;
         private readonly SymbolicExecutionCheck[] checks;
         private readonly Queue<ExplodedNode> queue = new Queue<ExplodedNode>();
+        private readonly SymbolicValueCounter symbolicValueCounter = new SymbolicValueCounter();
 
         public RoslynSymbolicExecution(ControlFlowGraph cfg, SymbolicExecutionCheck[] checks)
         {
@@ -75,6 +76,7 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
             }
 
             // ToDo: Something is still missing around here - process well known instructions
+            state = state.SetOperationValue(node.Operation, CreateSymbolicValue());
 
             state = InvokeChecks(state, (check, ps) => check.PostProcess(ps, node.Operation));
             if (state == null)
@@ -97,5 +99,8 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
             }
             return state;
         }
+
+        private SymbolicValue CreateSymbolicValue() =>
+            new SymbolicValue(symbolicValueCounter);
     }
 }

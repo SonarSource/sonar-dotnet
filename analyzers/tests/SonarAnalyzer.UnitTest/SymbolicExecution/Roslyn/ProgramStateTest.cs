@@ -21,6 +21,7 @@
 using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.SymbolicExecution.Roslyn;
+using StyleCop.Analyzers.Lightup;
 
 namespace SonarAnalyzer.UnitTest.SymbolicExecution.Roslyn
 {
@@ -28,12 +29,66 @@ namespace SonarAnalyzer.UnitTest.SymbolicExecution.Roslyn
     public class ProgramStateTest
     {
         [TestMethod]
-        public void ScaffoldingOnly() // ToDo: Rewrite with something useful
+        public void SetOperationValue_ReturnsValues()
         {
-            var sut = new ProgramState();
-            sut.Should().NotBeNull();
+            var counter = new SymbolicValueCounter();
+            var value1 = new SymbolicValue(counter);
+            var value2 = new SymbolicValue(counter);
+            var operations = TestHelper.CompileCfgBodyCS("var x = 0; x = 1; x = 42;").Blocks[1].Operations;
+            var op1 = new IOperationWrapperSonar(operations[0]);
+            var op2 = new IOperationWrapperSonar(operations[1]);
+            var op3 = new IOperationWrapperSonar(operations[2]);
+            var sut = ProgramState.Empty;
+
+            sut[op1].Should().BeNull();
+            sut[op2].Should().BeNull();
+            sut[op3].Should().BeNull();
+
+            sut = sut.SetOperationValue(op1, value1);
+            sut = sut.SetOperationValue(op2, value2);
+
+            sut[op1].Should().Be(value1);
+            sut[op2].Should().Be(value2);
+            sut[op3].Should().BeNull();     // Value was not set
         }
 
-        // ToDo: Some stuff is missing here
+        [TestMethod]
+        public void SetOperationValue_IsImmutable()
+        {
+            var operation = new IOperationWrapperSonar(TestHelper.CompileCfgBodyCS("var x = 42;").Blocks[1].Operations[0]);
+            var sut = ProgramState.Empty;
+
+            sut[operation].Should().BeNull();
+            sut.SetOperationValue(operation, new SymbolicValue(new SymbolicValueCounter()));
+            sut[operation].Should().BeNull(nameof(sut.SetOperationValue) + " returned new ProgramState instance.");
+        }
+
+        [TestMethod]
+        public void SetOperationValue_UsesUnderlyingOperation()
+        {
+            var operation = new IOperationWrapperSonar(TestHelper.CompileCfgBodyCS("var x = 42;").Blocks[1].Operations[0]);
+            var another = new IOperationWrapperSonar(operation.Instance);
+            var value = new SymbolicValue(new SymbolicValueCounter());
+            var sut = ProgramState.Empty;
+
+            sut[operation].Should().BeNull();
+            sut = sut.SetOperationValue(operation, value);
+            sut[another].Should().Be(value, "GetHashCode and Equals are based on underlying IOperation instance.");
+        }
+
+        [TestMethod]
+        public void SetOperationValue_Overrides()
+        {
+            var counter = new SymbolicValueCounter();
+            var value1 = new SymbolicValue(counter);
+            var value2 = new SymbolicValue(counter);
+            var operation = new IOperationWrapperSonar(TestHelper.CompileCfgBodyCS("var x = 42;").Blocks[1].Operations[0]);
+            var sut = ProgramState.Empty;
+
+            sut[operation].Should().BeNull();
+            sut = sut.SetOperationValue(operation, value1);
+            sut = sut.SetOperationValue(operation, value2);
+            sut[operation].Should().Be(value2);
+        }
     }
 }

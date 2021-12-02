@@ -67,5 +67,14 @@ namespace StyleCop.Analyzers.Lightup
             isImplicit = IsImplicitProperty.ReadValue<bool>(instance);
             semanticModel = SemanticModelProperty.ReadValue<SemanticModel>(instance);
         }
+
+        public override int GetHashCode() =>
+            Instance.GetHashCode();
+
+        public override bool Equals(object obj) =>
+            obj is IOperationWrapperSonar wrapper && wrapper.Instance.Equals(Instance);
+
+        public override string ToString() =>
+            Instance.ToString();
     }
 }
