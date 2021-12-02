@@ -53,39 +53,39 @@ namespace SonarAnalyzer.SymbolicExecution.Sonar.Constraints
             }
         }
 
-        public override string ToString()
+        protected override string Name
         {
-            if (this == EmptyString)
+            get
             {
-                return "EmptyString";
+                if (this == EmptyString)
+                {
+                    return "EmptyString";
+                }
+                else if (this == FullString)
+                {
+                    return "FullString";
+                }
+                else if (this == FullOrNullString)
+                {
+                    return "FullOrNullString";
+                }
+                else if (this == WhiteSpaceString)
+                {
+                    return "FullOrNullString";  // FIXME: Wrong
+                }
+                else if (this == NotWhiteSpaceString)
+                {
+                    return "FullOrNullString";  // FIXME: Wrong
+                }
+                else if (this == FullNotWhiteSpaceString)
+                {
+                    return "FullNotWhiteSpaceString";
+                }
+                else
+                {
+                    return "null";  // FIXME: Wrong?
+                }
             }
-
-            if (this == FullString)
-            {
-                return "FullString";
-            }
-
-            if (this == FullOrNullString)
-            {
-                return "FullOrNullString";
-            }
-
-            if (this == WhiteSpaceString)
-            {
-                return "FullOrNullString";
-            }
-
-            if (this == NotWhiteSpaceString)
-            {
-                return "FullOrNullString";
-            }
-
-            if (this == FullNotWhiteSpaceString)
-            {
-                return "FullNotWhiteSpaceString";
-            }
-
-            return "null";
         }
     }
 }

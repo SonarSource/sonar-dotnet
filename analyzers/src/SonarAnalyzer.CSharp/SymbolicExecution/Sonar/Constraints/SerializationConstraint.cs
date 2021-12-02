@@ -34,9 +34,7 @@ namespace SonarAnalyzer.SymbolicExecution.Sonar.Constraints
                 ? Unsafe
                 : Safe;
 
-        public override string ToString() =>
-            this == Safe
-                ? "Safe"
-                : "Unsafe";
+        protected override string Name =>
+            this == Safe ? "Safe" : "Unsafe";
     }
 }

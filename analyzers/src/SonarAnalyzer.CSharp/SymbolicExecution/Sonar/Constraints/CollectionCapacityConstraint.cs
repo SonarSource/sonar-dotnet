@@ -28,11 +28,8 @@ namespace SonarAnalyzer.SymbolicExecution.Sonar.Constraints
         public override SymbolicConstraint Opposite =>
             this == Empty ? NotEmpty : Empty;
 
-        public override string ToString()
-        {
-            return this == Empty
+        protected override string Name => this == Empty
                 ? "Empty"
                 : "NotEmpty";
-        }
     }
 }

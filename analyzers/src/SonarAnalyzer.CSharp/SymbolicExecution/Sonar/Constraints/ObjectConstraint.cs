@@ -32,11 +32,8 @@ namespace SonarAnalyzer.SymbolicExecution.Sonar.Constraints
         public override SymbolicConstraint Opposite =>
             this == Null ? NotNull : null /* not NotNull can be Null or another NotNull */;
 
-        public override string ToString()
-        {
-            return this == Null
+        protected override string Name => this == Null
                 ? "Null"
                 : "Not null";
-        }
     }
 }

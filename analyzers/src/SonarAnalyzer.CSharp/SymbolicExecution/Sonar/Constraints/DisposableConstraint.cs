@@ -28,11 +28,9 @@ namespace SonarAnalyzer.SymbolicExecution.Sonar.Constraints
         public override SymbolicConstraint Opposite =>
             this == Disposed ? NotDisposed : Disposed;
 
-        public override string ToString()
-        {
-            return this == Disposed
+        protected override string Name =>
+            this == Disposed
                 ? "Disposed"
                 : "NotDisposed";
-        }
     }
 }

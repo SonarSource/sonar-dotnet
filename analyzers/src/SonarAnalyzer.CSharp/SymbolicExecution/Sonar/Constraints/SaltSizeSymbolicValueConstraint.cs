@@ -30,7 +30,7 @@ namespace SonarAnalyzer.SymbolicExecution.Sonar.Constraints
         public override SymbolicConstraint Opposite =>
             this == Safe ? Short : Safe;
 
-        public override string ToString() =>
+        protected override string Name =>
             this == Safe ? nameof(Safe) : nameof(Short);
     }
 }

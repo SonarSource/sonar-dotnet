@@ -30,7 +30,7 @@ namespace SonarAnalyzer.SymbolicExecution.Sonar.Constraints
         public override SymbolicConstraint Opposite =>
             this == Initialized ? NotInitialized : Initialized;
 
-        public override string ToString() =>
+        protected override string Name =>
             this == Initialized ? nameof(Initialized) : nameof(NotInitialized);
     }
 }

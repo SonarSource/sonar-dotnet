@@ -28,11 +28,7 @@ namespace SonarAnalyzer.SymbolicExecution.Sonar.Constraints
         public override SymbolicConstraint Opposite =>
             this == True ? False : True;
 
-        public override string ToString()
-        {
-            return this == True
-                ? "True"
-                : "False";
-        }
+        protected override string Name =>
+            this == True ? "True" : "False";
     }
 }

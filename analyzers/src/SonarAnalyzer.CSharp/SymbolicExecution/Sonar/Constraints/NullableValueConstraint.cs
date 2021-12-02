@@ -28,11 +28,9 @@ namespace SonarAnalyzer.SymbolicExecution.Sonar.Constraints
         public override SymbolicConstraint Opposite =>
             this == NoValue ? HasValue : NoValue;
 
-        public override string ToString()
-        {
-            return this == NoValue
+        protected override string Name =>
+            this == NoValue
                 ? "NoValue"
                 : "HasValue";
-        }
     }
 }
