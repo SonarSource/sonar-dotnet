@@ -25,22 +25,22 @@ using SonarAnalyzer.SymbolicExecution.Sonar.Constraints;
 namespace SonarAnalyzer.UnitTest.SymbolicExecution.Sonar.Constraints
 {
     [TestClass]
-    public class CryptographyIVSymbolicValueConstraintTest
+    public class InitializationVectorConstraintTest
     {
         [TestMethod]
         public void GivenIvIsInitialized_OppositeShouldBe_NotInitialized() =>
-            CryptographyIVSymbolicValueConstraint.Initialized.Opposite.Should().Be(CryptographyIVSymbolicValueConstraint.NotInitialized);
+            InitializationVectorConstraint.Initialized.Opposite.Should().Be(InitializationVectorConstraint.NotInitialized);
 
         [TestMethod]
         public void GivenIvIsNotInitialized_OppositeShouldBe_Initialized() =>
-            CryptographyIVSymbolicValueConstraint.NotInitialized.Opposite.Should().Be(CryptographyIVSymbolicValueConstraint.Initialized);
+            InitializationVectorConstraint.NotInitialized.Opposite.Should().Be(InitializationVectorConstraint.Initialized);
 
         [TestMethod]
         public void GivenIvIsInitialized_ToStringShouldBe_Initialized() =>
-            CryptographyIVSymbolicValueConstraint.Initialized.ToString().Should().Be("Initialized");
+            InitializationVectorConstraint.Initialized.ToString().Should().Be("Initialized");
 
         [TestMethod]
         public void GivenIvIsNotInitialized_ToStringShouldBe_NotInitialized() =>
-            CryptographyIVSymbolicValueConstraint.NotInitialized.ToString().Should().Be("NotInitialized");
+            InitializationVectorConstraint.NotInitialized.ToString().Should().Be("NotInitialized");
     }
 }

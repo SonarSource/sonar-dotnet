@@ -168,18 +168,18 @@ namespace SonarAnalyzer.Rules.CSharp
                     if (methodSymbol.IsExtensionMethod)
                     {
                         // Extension methods could modify the collection, hence we remove the Empty constraint if present
-                        return collectionSymbol.RemoveConstraint(CollectionCapacityConstraint.Empty, newProgramState);
+                        return collectionSymbol.RemoveConstraint(CollectionConstraint.Empty, newProgramState);
                     }
 
                     if (addMethods.Contains(methodSymbol.Name))
                     {
                         // ... set constraint if we are adding items
-                        newProgramState = collectionSymbol.SetConstraint(CollectionCapacityConstraint.NotEmpty, newProgramState);
+                        newProgramState = collectionSymbol.SetConstraint(CollectionConstraint.NotEmpty, newProgramState);
                     }
                     else
                     {
                         // ... notify we are accessing the collection
-                        context.AddCollectionAccess(invocation, collectionSymbol.HasConstraint(CollectionCapacityConstraint.Empty, newProgramState));
+                        context.AddCollectionAccess(invocation, collectionSymbol.HasConstraint(CollectionConstraint.Empty, newProgramState));
                     }
                 }
 
@@ -198,12 +198,12 @@ namespace SonarAnalyzer.Rules.CSharp
                     if (collectionType.ConstructedFrom.Is(KnownType.System_Collections_Generic_Dictionary_TKey_TValue) && IsDictionarySetItem(elementAccess))
                     {
                         // ... set constraint if we are calling the Dictionary set accessor
-                        return collectionSymbol.SetConstraint(CollectionCapacityConstraint.NotEmpty, programState);
+                        return collectionSymbol.SetConstraint(CollectionConstraint.NotEmpty, programState);
                     }
                     else
                     {
                         // ... notify we are accessing the collection
-                        context.AddCollectionAccess(elementAccess, collectionSymbol.HasConstraint(CollectionCapacityConstraint.Empty, programState));
+                        context.AddCollectionAccess(elementAccess, collectionSymbol.HasConstraint(CollectionConstraint.Empty, programState));
                     }
                 }
 
@@ -228,7 +228,7 @@ namespace SonarAnalyzer.Rules.CSharp
             public override ProgramState ObjectCreated(ProgramState programState, SymbolicValue symbolicValue, SyntaxNode instruction)
             {
                 var newProgramState = programState;
-                CollectionCapacityConstraint constraint = null;
+                CollectionConstraint constraint = null;
 
                 if (instruction.IsKind(SyntaxKind.ObjectCreationExpression))
                 {
@@ -260,7 +260,7 @@ namespace SonarAnalyzer.Rules.CSharp
             private static bool IsIgnoredMethod(ISymbol methodSymbol) =>
                 methodSymbol == null || ignoredMethods.Contains(methodSymbol.Name);
 
-            private static CollectionCapacityConstraint GetArrayConstraint(ArrayCreationExpressionSyntax arrayCreation)
+            private static CollectionConstraint GetArrayConstraint(ArrayCreationExpressionSyntax arrayCreation)
             {
                 // Only one-dimensional arrays can be empty, others are indeterminate, this can be improved in the future
                 if (arrayCreation?.Type?.RankSpecifiers == null
@@ -273,19 +273,19 @@ namespace SonarAnalyzer.Rules.CSharp
                 var size = arrayCreation.Type.RankSpecifiers[0].Sizes[0] as LiteralExpressionSyntax;
 
                 return size?.Token.ValueText == "0"
-                    ? CollectionCapacityConstraint.Empty
+                    ? CollectionConstraint.Empty
                     : null;
             }
 
-            private static CollectionCapacityConstraint GetCollectionConstraint(IMethodSymbol constructor) =>
+            private static CollectionConstraint GetCollectionConstraint(IMethodSymbol constructor) =>
                 // Default constructor, or constructor that specifies capacity means empty collection,
                 // otherwise do not apply constraint because we cannot be sure what has been passed
                 // as arguments.
                 !constructor.Parameters.Any() || constructor.Parameters.Count(p => p.IsType(KnownType.System_Int32)) == 1
-                    ? CollectionCapacityConstraint.Empty
+                    ? CollectionConstraint.Empty
                     : null;
 
-            private static CollectionCapacityConstraint GetInitializerConstraint(InitializerExpressionSyntax initializer)
+            private static CollectionConstraint GetInitializerConstraint(InitializerExpressionSyntax initializer)
             {
                 if (initializer?.Expressions == null)
                 {
@@ -293,13 +293,13 @@ namespace SonarAnalyzer.Rules.CSharp
                 }
 
                 return initializer.Expressions.Count == 0
-                    ? CollectionCapacityConstraint.Empty // No items added through the initializer
-                    : CollectionCapacityConstraint.NotEmpty;
+                    ? CollectionConstraint.Empty // No items added through the initializer
+                    : CollectionConstraint.NotEmpty;
             }
 
             private static ProgramState RemoveCollectionConstraintsFromArguments(BaseArgumentListSyntax argumentList, ProgramState programState) =>
                 GetArgumentSymbolicValues(argumentList, programState)
-                .Aggregate(programState, (state, value) => state.RemoveConstraint(value, CollectionCapacityConstraint.Empty));
+                .Aggregate(programState, (state, value) => state.RemoveConstraint(value, CollectionConstraint.Empty));
 
             private static IEnumerable<SymbolicValue> GetArgumentSymbolicValues(BaseArgumentListSyntax argumentList, ProgramState programState)
             {

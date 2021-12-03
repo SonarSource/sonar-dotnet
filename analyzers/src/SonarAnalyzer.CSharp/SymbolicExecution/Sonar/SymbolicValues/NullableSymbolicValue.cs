@@ -44,14 +44,14 @@ namespace SonarAnalyzer.SymbolicExecution.Sonar.SymbolicValues
             if (constraint is ObjectConstraint)
             {
                 var optionalConstraint = constraint == ObjectConstraint.Null
-                    ? NullableValueConstraint.NoValue
-                    : NullableValueConstraint.HasValue;
+                    ? NullableConstraint.NoValue
+                    : NullableConstraint.HasValue;
 
                 return TrySetConstraint(optionalConstraint, programState);
             }
 
-            var oldConstraint = programState.Constraints.GetValueOrDefault(this)?.GetConstraintOrDefault<NullableValueConstraint>();
-            if (constraint is NullableValueConstraint)
+            var oldConstraint = programState.Constraints.GetValueOrDefault(this)?.GetConstraintOrDefault<NullableConstraint>();
+            if (constraint is NullableConstraint)
             {
                 if (oldConstraint == null)
                 {
@@ -66,7 +66,7 @@ namespace SonarAnalyzer.SymbolicExecution.Sonar.SymbolicValues
                 return new[] { programState };
             }
 
-            return TrySetConstraint(NullableValueConstraint.HasValue, programState).SelectMany(ps => WrappedValue.TrySetConstraint(constraint, ps));
+            return TrySetConstraint(NullableConstraint.HasValue, programState).SelectMany(ps => WrappedValue.TrySetConstraint(constraint, ps));
         }
 
         public override IEnumerable<ProgramState> TrySetOppositeConstraint(SymbolicConstraint constraint, ProgramState programState)
@@ -74,7 +74,7 @@ namespace SonarAnalyzer.SymbolicExecution.Sonar.SymbolicValues
             var negateConstraint = constraint?.Opposite;
 
             return constraint is BoolConstraint
-                ? TrySetConstraint(negateConstraint, programState).Union(TrySetConstraint(NullableValueConstraint.NoValue, programState))
+                ? TrySetConstraint(negateConstraint, programState).Union(TrySetConstraint(NullableConstraint.NoValue, programState))
                 : TrySetConstraint(negateConstraint, programState);
         }
 

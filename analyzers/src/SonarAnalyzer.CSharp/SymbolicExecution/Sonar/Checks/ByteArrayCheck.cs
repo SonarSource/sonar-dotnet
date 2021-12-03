@@ -41,7 +41,7 @@ namespace SonarAnalyzer.SymbolicExecution.Sonar.Checks
 
         private ProgramState ArrayCreationPostProcess(ArrayCreationExpressionSyntax arrayCreation, ProgramState programState) =>
             semanticModel.GetTypeInfo(arrayCreation).Type.Is(KnownType.System_Byte_Array) && programState.HasValue
-                ? programState.SetConstraint(programState.PeekValue(), ByteArraySymbolicValueConstraint.Constant)
+                ? programState.SetConstraint(programState.PeekValue(), ByteArrayConstraint.Constant)
                 : programState;
 
         private ProgramState ImplicitlyTypedArrayPostProcess(InitializerExpressionSyntax initializerExpression, ProgramState programState) =>
@@ -51,7 +51,7 @@ namespace SonarAnalyzer.SymbolicExecution.Sonar.Checks
             && initializerExpression.FirstAncestorOrSelf<VariableDeclarationSyntax>() is VariableDeclarationSyntax variableDeclaration
             && semanticModel.GetTypeInfo(variableDeclaration.Type).Type.Is(KnownType.System_Byte_Array)
             && programState.HasValue
-                ? programState.SetConstraint(programState.PeekValue(), ByteArraySymbolicValueConstraint.Constant)
+                ? programState.SetConstraint(programState.PeekValue(), ByteArrayConstraint.Constant)
                 : programState;
 
         private ProgramState InvocationExpressionPostProcess(InvocationExpressionSyntax invocation, ProgramState programState) =>
@@ -59,7 +59,7 @@ namespace SonarAnalyzer.SymbolicExecution.Sonar.Checks
             && semanticModel.GetSymbolInfo(invocation.ArgumentList.Arguments[0].Expression).Symbol is {} symbol
             && symbol.GetSymbolType().Is(KnownType.System_Byte_Array)
             && programState.GetSymbolValue(symbol) is {} symbolicValue
-                ? programState.SetConstraint(symbolicValue, ByteArraySymbolicValueConstraint.Modified)
+                ? programState.SetConstraint(symbolicValue, ByteArrayConstraint.Modified)
                 : programState;
 
         private static bool IsSanitizer(InvocationExpressionSyntax invocation, SemanticModel semanticModel) =>

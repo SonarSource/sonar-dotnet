@@ -25,22 +25,22 @@ using SonarAnalyzer.SymbolicExecution.Sonar.Constraints;
 namespace SonarAnalyzer.UnitTest.SymbolicExecution.Sonar.Constraints
 {
     [TestClass]
-    public class SaltSizeSymbolicValueConstraintTest
+    public class ByteArrayConstraintTest
     {
         [TestMethod]
-        public void GivenSaltSizeIsShort_OppositeShouldBe_Safe() =>
-            SaltSizeSymbolicValueConstraint.Short.Opposite.Should().Be(SaltSizeSymbolicValueConstraint.Safe);
+        public void GivenByteArrayIsInitialized_OppositeShouldBe_NotInitialized() =>
+            ByteArrayConstraint.Constant.Opposite.Should().Be(ByteArrayConstraint.Modified);
 
         [TestMethod]
-        public void GivenSaltSizeIsSafe_OppositeShouldBe_Short() =>
-            SaltSizeSymbolicValueConstraint.Safe.Opposite.Should().Be(SaltSizeSymbolicValueConstraint.Short);
+        public void GivenByteArrayIsNotInitialized_OppositeShouldBe_Initialized() =>
+            ByteArrayConstraint.Modified.Opposite.Should().Be(ByteArrayConstraint.Constant);
 
         [TestMethod]
-        public void GivenSaltSizeIsShort_ToStringShouldBe_Short() =>
-            SaltSizeSymbolicValueConstraint.Short.ToString().Should().Be("Short");
+        public void GivenByteArrayIsInitialized_ToStringShouldBe_Initialized() =>
+            ByteArrayConstraint.Constant.ToString().Should().Be("Constant");
 
         [TestMethod]
-        public void GivenSaltSizeIsSafe_ToStringShouldBe_Safe() =>
-            SaltSizeSymbolicValueConstraint.Safe.ToString().Should().Be("Safe");
+        public void GivenByteArrayIsNotInitialized_ToStringShouldBe_NotInitialized() =>
+            ByteArrayConstraint.Modified.ToString().Should().Be("Modified");
     }
 }

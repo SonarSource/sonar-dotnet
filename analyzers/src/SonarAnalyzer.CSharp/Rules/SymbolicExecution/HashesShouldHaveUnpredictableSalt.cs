@@ -110,7 +110,7 @@ namespace SonarAnalyzer.Rules.SymbolicExecution
                     && semanticModel.GetTypeInfo(arrayCreation).Type.Is(KnownType.System_Byte_Array)
                     && GetSize(arrayCreation) < MinimumSafeLength)
                 {
-                    programState = programState.SetConstraint(programState.PeekValue(), SaltSizeSymbolicValueConstraint.Short);
+                    programState = programState.SetConstraint(programState.PeekValue(), SaltSizeConstraint.Short);
                 }
 
                 return programState;
@@ -125,11 +125,11 @@ namespace SonarAnalyzer.Rules.SymbolicExecution
                     // but we should always have a symbolic value for it.
                     && programState.ExpressionStack.Skip(objectCreation.ArgumentList.Arguments.Count - SaltParameterIndex).FirstOrDefault() is {} symbolicValue)
                 {
-                    if (programState.HasConstraint(symbolicValue, ByteArraySymbolicValueConstraint.Constant))
+                    if (programState.HasConstraint(symbolicValue, ByteArrayConstraint.Constant))
                     {
                         context.AddLocation(new LocationContext(objectCreation.ArgumentList.Arguments[1].Expression.GetLocation(), MakeSaltUnpredictableMessage));
                     }
-                    else if (programState.HasConstraint(symbolicValue, SaltSizeSymbolicValueConstraint.Short))
+                    else if (programState.HasConstraint(symbolicValue, SaltSizeConstraint.Short))
                     {
                         context.AddLocation(new LocationContext(objectCreation.ArgumentList.Arguments[1].Expression.GetLocation(), MakeThisSaltLongerMessage));
                     }

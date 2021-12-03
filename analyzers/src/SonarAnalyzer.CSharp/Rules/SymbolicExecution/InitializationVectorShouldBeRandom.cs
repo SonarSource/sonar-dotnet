@@ -81,7 +81,7 @@ namespace SonarAnalyzer.Rules.SymbolicExecution
                 if (IsSymmetricAlgorithmGenerateIVMethod(invocation, semanticModel)
                     && GetSymbolicValue(invocation, programState) is {} ivSymbolicValue)
                 {
-                    programState = programState.SetConstraint(ivSymbolicValue, CryptographyIVSymbolicValueConstraint.Initialized);
+                    programState = programState.SetConstraint(ivSymbolicValue, InitializationVectorConstraint.Initialized);
                 }
 
                 return programState;
@@ -92,8 +92,8 @@ namespace SonarAnalyzer.Rules.SymbolicExecution
                 && IsSymmetricAlgorithmIVMemberAccess(memberAccess)
                 && GetSymbolicValue(memberAccess.Expression, programState) is {} leftSymbolicValue
                 && GetSymbolicValue(assignment.Right, programState) is {} rightSymbolicValue
-                && programState.HasConstraint(rightSymbolicValue, ByteArraySymbolicValueConstraint.Constant)
-                    ? programState.SetConstraint(leftSymbolicValue, CryptographyIVSymbolicValueConstraint.NotInitialized)
+                && programState.HasConstraint(rightSymbolicValue, ByteArrayConstraint.Constant)
+                    ? programState.SetConstraint(leftSymbolicValue, InitializationVectorConstraint.NotInitialized)
                     : programState;
 
             private ProgramState InvocationExpressionPreProcess(InvocationExpressionSyntax invocation, ProgramState programState)
@@ -124,7 +124,7 @@ namespace SonarAnalyzer.Rules.SymbolicExecution
                                                                  && programState.GetSymbolValue(semanticModel.GetSymbolInfo(memberAccess.Expression).Symbol) is {} symbolicValue
                                                                  && HasNotInitializedIVConstraint(symbolicValue, programState),
                     IdentifierNameSyntax identifier => programState.GetSymbolValue(semanticModel.GetSymbolInfo(identifier).Symbol) is {} symbolicValue
-                                                       && programState.HasConstraint(symbolicValue, ByteArraySymbolicValueConstraint.Constant),
+                                                       && programState.HasConstraint(symbolicValue, ByteArrayConstraint.Constant),
                     ArrayCreationExpressionSyntax _ => true,
                     _ => false
                 };
@@ -142,7 +142,7 @@ namespace SonarAnalyzer.Rules.SymbolicExecution
                 memberAccess.IsMemberAccessOnKnownType("IV", KnownType.System_Security_Cryptography_SymmetricAlgorithm, semanticModel);
 
             private static bool HasNotInitializedIVConstraint(SymbolicValue value, ProgramState programState) =>
-                programState.Constraints[value].HasConstraint(CryptographyIVSymbolicValueConstraint.NotInitialized);
+                programState.Constraints[value].HasConstraint(InitializationVectorConstraint.NotInitialized);
 
             private static bool IsSymmetricAlgorithmCreateEncryptorMethod(InvocationExpressionSyntax invocation, SemanticModel semanticModel) =>
                 invocation.IsMemberAccessOnKnownType("CreateEncryptor", KnownType.System_Security_Cryptography_SymmetricAlgorithm, semanticModel);

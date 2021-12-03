@@ -35,24 +35,24 @@ namespace SonarAnalyzer.UnitTest.SymbolicExecution.Sonar.Constraints
         }
 
         [TestMethod]
-        public void ByteArraySymbolicValueConstraint_ToString()
+        public void ByteArrayConstraint_ToString()
         {
-            ByteArraySymbolicValueConstraint.Constant.ToString().Should().Be("Constant");
-            ByteArraySymbolicValueConstraint.Modified.ToString().Should().Be("Modified");
+            ByteArrayConstraint.Constant.ToString().Should().Be("Constant");
+            ByteArrayConstraint.Modified.ToString().Should().Be("Modified");
         }
 
         [TestMethod]
-        public void CollectionCapacityConstraint_ToString()
+        public void CollectionConstraint_ToString()
         {
-            CollectionCapacityConstraint.Empty.ToString().Should().Be("Empty");
-            CollectionCapacityConstraint.NotEmpty.ToString().Should().Be("NotEmpty");
+            CollectionConstraint.Empty.ToString().Should().Be("Empty");
+            CollectionConstraint.NotEmpty.ToString().Should().Be("NotEmpty");
         }
 
         [TestMethod]
-        public void CryptographyIVSymbolicValueConstraint_ToString()
+        public void InitializationVectorConstraint_ToString()
         {
-            CryptographyIVSymbolicValueConstraint.Initialized.ToString().Should().Be("Initialized");
-            CryptographyIVSymbolicValueConstraint.NotInitialized.ToString().Should().Be("NotInitialized");
+            InitializationVectorConstraint.Initialized.ToString().Should().Be("Initialized");
+            InitializationVectorConstraint.NotInitialized.ToString().Should().Be("NotInitialized");
         }
 
         [TestMethod]
@@ -63,10 +63,10 @@ namespace SonarAnalyzer.UnitTest.SymbolicExecution.Sonar.Constraints
         }
 
         [TestMethod]
-        public void NullableValueConstraint_ToString()
+        public void NullableConstraint_ToString()
         {
-            NullableValueConstraint.HasValue.ToString().Should().Be("HasValue");
-            NullableValueConstraint.NoValue.ToString().Should().Be("NoValue");
+            NullableConstraint.HasValue.ToString().Should().Be("HasValue");
+            NullableConstraint.NoValue.ToString().Should().Be("NoValue");
         }
 
         [TestMethod]
@@ -77,10 +77,10 @@ namespace SonarAnalyzer.UnitTest.SymbolicExecution.Sonar.Constraints
         }
 
         [TestMethod]
-        public void SaltSizeSymbolicValueConstraint_ToString()
+        public void SaltSizeConstraint_ToString()
         {
-            SaltSizeSymbolicValueConstraint.Safe.ToString().Should().Be("Safe");
-            SaltSizeSymbolicValueConstraint.Short.ToString().Should().Be("Short");
+            SaltSizeConstraint.Safe.ToString().Should().Be("Safe");
+            SaltSizeConstraint.Short.ToString().Should().Be("Short");
         }
 
         [TestMethod]

@@ -82,15 +82,15 @@ namespace SonarAnalyzer.SymbolicExecution.Sonar
             {
                 return TrySetObjectConstraint(objectConstraint, oldConstraints, programState);
             }
-            else if (constraint is ByteArraySymbolicValueConstraint
-                     || constraint is CryptographyIVSymbolicValueConstraint
-                     || constraint is SaltSizeSymbolicValueConstraint)
+            else if (constraint is ByteArrayConstraint
+                     || constraint is InitializationVectorConstraint
+                     || constraint is SaltSizeConstraint)
             {
                 return new[] { programState.SetConstraint(this, constraint) };
             }
-            else if (constraint is NullableValueConstraint
+            else if (constraint is NullableConstraint
                 || constraint is DisposableConstraint
-                || constraint is CollectionCapacityConstraint
+                || constraint is CollectionConstraint
                 || constraint is SerializationConstraint)
             {
                 return new[] { programState };
@@ -171,9 +171,9 @@ namespace SonarAnalyzer.SymbolicExecution.Sonar
             {
                 return oldObjectConstraint != constraint ? Enumerable.Empty<ProgramState>() : new[] { programState.SetConstraint(this, constraint) };
             }
-            else if (oldConstraints.GetConstraintOrDefault<NullableValueConstraint>() is { } oldNullableConstraint)
+            else if (oldConstraints.GetConstraintOrDefault<NullableConstraint>() is { } oldNullableConstraint)
             {
-                return oldNullableConstraint == NullableValueConstraint.HasValue ^ constraint == ObjectConstraint.NotNull
+                return oldNullableConstraint == NullableConstraint.HasValue ^ constraint == ObjectConstraint.NotNull
                     ? Enumerable.Empty<ProgramState>()  // Unreachable state, cannot be HasValue && Null nor NoValue && NotNull at the same time => don't explore this branch
                     : new[] { programState.SetConstraint(this, constraint) };
             }
