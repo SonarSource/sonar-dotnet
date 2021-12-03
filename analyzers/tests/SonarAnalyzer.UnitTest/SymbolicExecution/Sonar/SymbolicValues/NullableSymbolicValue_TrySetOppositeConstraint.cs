@@ -21,6 +21,7 @@
 using System.Linq;
 using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using SonarAnalyzer.SymbolicExecution;
 using SonarAnalyzer.SymbolicExecution.Sonar;
 using SonarAnalyzer.SymbolicExecution.Sonar.Constraints;
 using SonarAnalyzer.SymbolicExecution.Sonar.SymbolicValues;
@@ -109,7 +110,7 @@ namespace SonarAnalyzer.UnitTest.SymbolicExecution.Sonar.SymbolicValues
             newProgramStates.Should().BeEquivalentTo(ps);
         }
 
-        private static void ShouldHaveConstraint(ProgramState ps, SymbolicValue sv, SymbolicValueConstraint expectedConstraint)
+        private static void ShouldHaveConstraint(ProgramState ps, SymbolicValue sv, SymbolicConstraint expectedConstraint)
         {
             sv.TryGetConstraints(ps, out var constraints).Should().BeTrue();
             constraints.HasConstraint(expectedConstraint).Should().BeTrue();

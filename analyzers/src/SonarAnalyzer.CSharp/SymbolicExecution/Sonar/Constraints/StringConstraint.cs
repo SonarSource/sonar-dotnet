@@ -18,26 +18,21 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System;
+
 namespace SonarAnalyzer.SymbolicExecution.Sonar.Constraints
 {
-    public sealed class StringConstraint : SymbolicValueConstraint
+    internal sealed class StringConstraint : SymbolicConstraint
     {
-        public static readonly StringConstraint EmptyString = new StringConstraint();
-        public static readonly StringConstraint FullString = new StringConstraint();
-        public static readonly StringConstraint FullOrNullString = new StringConstraint();
-
-        public static readonly StringConstraint WhiteSpaceString = new StringConstraint();
-        public static readonly StringConstraint NotWhiteSpaceString = new StringConstraint();
-        public static readonly StringConstraint FullNotWhiteSpaceString = new StringConstraint();
-
-        public static bool IsNotNullConstraint(StringConstraint constraint) =>
-            constraint == StringConstraint.FullString
-            || constraint == StringConstraint.EmptyString
-            || constraint == StringConstraint.WhiteSpaceString
-            || constraint == StringConstraint.FullNotWhiteSpaceString;
+        public static readonly StringConstraint EmptyString = new();
+        public static readonly StringConstraint FullString = new();
+        public static readonly StringConstraint FullOrNullString = new();
+        public static readonly StringConstraint WhiteSpaceString = new();
+        public static readonly StringConstraint NotWhiteSpaceString = new();
+        public static readonly StringConstraint FullNotWhiteSpaceString = new();
 
         // Currently FullOrNullString and NotWhiteSpaceString  is never set as a constraint. It is there to imply the opposite of EmptyString
-        public override SymbolicValueConstraint OppositeForLogicalNot
+        public override SymbolicConstraint Opposite
         {
             get
             {
@@ -45,47 +40,58 @@ namespace SonarAnalyzer.SymbolicExecution.Sonar.Constraints
                 {
                     return FullOrNullString;
                 }
-                if (this == WhiteSpaceString)
+                else if (this == WhiteSpaceString)
                 {
                     return NotWhiteSpaceString;
                 }
-                return null;
+                else
+                {
+                    return null;
+                }
             }
         }
 
-        public override string ToString()
+        protected override string Name
         {
-            if (this == EmptyString)
+            get
             {
-                return "EmptyString";
+                if (this == EmptyString)
+                {
+                    return nameof(EmptyString);
+                }
+                else if (this == FullString)
+                {
+                    return nameof(FullString);
+                }
+                else if (this == FullOrNullString)
+                {
+                    return nameof(FullOrNullString);
+                }
+                else if (this == WhiteSpaceString)
+                {
+                    return nameof(WhiteSpaceString);
+                }
+                else if (this == NotWhiteSpaceString)
+                {
+                    return nameof(NotWhiteSpaceString);
+                }
+                else if (this == FullNotWhiteSpaceString)
+                {
+                    return nameof(FullNotWhiteSpaceString);
+                }
+                else
+                {
+                    throw new InvalidOperationException("Unexpected object state");
+                }
             }
-
-            if (this == FullString)
-            {
-                return "FullString";
-            }
-
-            if (this == FullOrNullString)
-            {
-                return "FullOrNullString";
-            }
-
-            if (this == WhiteSpaceString)
-            {
-                return "FullOrNullString";
-            }
-
-            if (this == NotWhiteSpaceString)
-            {
-                return "FullOrNullString";
-            }
-
-            if (this == FullNotWhiteSpaceString)
-            {
-                return "FullNotWhiteSpaceString";
-            }
-
-            return "null";
         }
+
+        private StringConstraint() { }
+
+        public static bool IsNotNull(StringConstraint constraint) =>
+            constraint == StringConstraint.FullString
+            || constraint == StringConstraint.EmptyString
+            || constraint == StringConstraint.WhiteSpaceString
+            || constraint == StringConstraint.FullNotWhiteSpaceString;
     }
 }

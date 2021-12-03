@@ -20,23 +20,17 @@
 
 namespace SonarAnalyzer.SymbolicExecution.Sonar.Constraints
 {
-    public sealed class ObjectConstraint : SymbolicValueConstraint
+    internal sealed class ObjectConstraint : SymbolicConstraint
     {
-        public static readonly ObjectConstraint Null = new ObjectConstraint();
-        public static readonly ObjectConstraint NotNull = new ObjectConstraint();
+        public static readonly ObjectConstraint Null = new();
+        public static readonly ObjectConstraint NotNull = new();
 
-        private ObjectConstraint()
-        {
-        }
-
-        public override SymbolicValueConstraint OppositeForLogicalNot =>
+        public override SymbolicConstraint Opposite =>
             this == Null ? NotNull : null /* not NotNull can be Null or another NotNull */;
 
-        public override string ToString()
-        {
-            return this == Null
-                ? "Null"
-                : "Not null";
-        }
+        protected override string Name =>
+            this == Null ? nameof(Null) : nameof(NotNull);
+
+        private ObjectConstraint() { }
     }
 }

@@ -22,14 +22,16 @@ using System.Collections.Generic;
 using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
+using SonarAnalyzer.SymbolicExecution;
 using SonarAnalyzer.SymbolicExecution.Sonar;
 using SonarAnalyzer.SymbolicExecution.Sonar.Constraints;
+using StyleCop.Analyzers.Lightup;
 
 namespace SonarAnalyzer.Extensions
 {
     internal static class ISymbolExtensions
     {
-        public static bool HasConstraint(this ISymbol symbol, SymbolicValueConstraint constraint, ProgramState programState)
+        public static bool HasConstraint(this ISymbol symbol, SymbolicConstraint constraint, ProgramState programState)
         {
             var symbolicValue = programState.GetSymbolValue(symbol);
             if (symbolicValue == null)
@@ -40,7 +42,7 @@ namespace SonarAnalyzer.Extensions
             return programState.HasConstraint(symbolicValue, constraint);
         }
 
-        public static ProgramState SetConstraint(this ISymbol symbol, SymbolicValueConstraint constraint,
+        public static ProgramState SetConstraint(this ISymbol symbol, SymbolicConstraint constraint,
             ProgramState programState)
         {
             var symbolicValue = programState.GetSymbolValue(symbol);
@@ -53,7 +55,7 @@ namespace SonarAnalyzer.Extensions
             return programState.SetConstraint(symbolicValue, constraint);
         }
 
-        public static ProgramState RemoveConstraint(this ISymbol symbol, SymbolicValueConstraint constraint, ProgramState programState)
+        public static ProgramState RemoveConstraint(this ISymbol symbol, SymbolicConstraint constraint, ProgramState programState)
         {
             var symbolicValue = programState.GetSymbolValue(symbol);
             if (symbolicValue == null ||

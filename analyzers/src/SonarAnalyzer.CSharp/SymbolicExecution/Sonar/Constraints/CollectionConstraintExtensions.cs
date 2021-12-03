@@ -29,7 +29,7 @@ namespace SonarAnalyzer.SymbolicExecution.Sonar.Constraints
     {
         public static ImmutableDictionary<SymbolicValue, SymbolicValueConstraints> AddConstraintForSymbolicValue(
             this ImmutableDictionary<SymbolicValue, SymbolicValueConstraints> constraintMap,
-            SymbolicValue symbolicValue, SymbolicValueConstraint constraint)
+            SymbolicValue symbolicValue, SymbolicConstraint constraint)
         {
             var constraints = ImmutableDictionary.GetValueOrDefault(constraintMap, symbolicValue);
 
@@ -42,7 +42,7 @@ namespace SonarAnalyzer.SymbolicExecution.Sonar.Constraints
 
         public static ImmutableDictionary<SymbolicValue, SymbolicValueConstraints> RemoveConstraintForSymbolicValue(
             this ImmutableDictionary<SymbolicValue, SymbolicValueConstraints> constraintMap,
-            SymbolicValue symbolicValue, SymbolicValueConstraint constraint)
+            SymbolicValue symbolicValue, SymbolicConstraint constraint)
         {
             var constraints = ImmutableDictionary.GetValueOrDefault(constraintMap, symbolicValue);
 
@@ -58,7 +58,7 @@ namespace SonarAnalyzer.SymbolicExecution.Sonar.Constraints
 
         public static ImmutableDictionary<SymbolicValue, SymbolicValueConstraints> AddConstraintTo<TRelationship>(
             this ImmutableDictionary<SymbolicValue, SymbolicValueConstraints> constraintsMap,
-            SymbolicValue symbolicValue, SymbolicValueConstraint constraint, ProgramState programState)
+            SymbolicValue symbolicValue, SymbolicConstraint constraint, ProgramState programState)
             where TRelationship : BinaryRelationship
         {
             var newConstraintsMap = constraintsMap;

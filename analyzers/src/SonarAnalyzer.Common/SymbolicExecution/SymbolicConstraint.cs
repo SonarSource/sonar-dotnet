@@ -18,14 +18,13 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-namespace SonarAnalyzer.SymbolicExecution.Sonar.Constraints
+namespace SonarAnalyzer.SymbolicExecution
 {
-    public abstract class SymbolicValueConstraint
+    public abstract class SymbolicConstraint
     {
-        protected SymbolicValueConstraint()
-        {
-        }
+        public abstract SymbolicConstraint Opposite { get; }
+        protected abstract string Name { get; }
 
-        public abstract SymbolicValueConstraint OppositeForLogicalNot { get; }
+        public sealed override string ToString() => Name;
     }
 }

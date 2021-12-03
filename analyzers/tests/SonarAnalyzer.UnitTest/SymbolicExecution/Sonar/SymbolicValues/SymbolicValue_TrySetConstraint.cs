@@ -22,6 +22,7 @@ using System.Collections.Generic;
 using System.Linq;
 using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using SonarAnalyzer.SymbolicExecution;
 using SonarAnalyzer.SymbolicExecution.Sonar;
 using SonarAnalyzer.SymbolicExecution.Sonar.Constraints;
 using SonarAnalyzer.SymbolicExecution.Sonar.SymbolicValues;
@@ -587,9 +588,9 @@ namespace SonarAnalyzer.UnitTest.SymbolicExecution.Sonar.SymbolicValues
         [DynamicData(nameof(ByteArraySymbolicValueConstraintData))]
         [DynamicData(nameof(CryptographyIVSymbolicValueConstraintData))]
         [DynamicData(nameof(SaltSizeSymbolicValueConstraintData))]
-        public void TrySetConstraint(SymbolicValueConstraint constraint,
-                                     IList<SymbolicValueConstraint> existingConstraints,
-                                     IList<IList<SymbolicValueConstraint>> expectedConstraintsPerProgramState)
+        public void TrySetConstraint(SymbolicConstraint constraint,
+                                     IList<SymbolicConstraint> existingConstraints,
+                                     IList<IList<SymbolicConstraint>> expectedConstraintsPerProgramState)
         {
             // Arrange
             var sv = new SymbolicValue();
@@ -624,11 +625,11 @@ namespace SonarAnalyzer.UnitTest.SymbolicExecution.Sonar.SymbolicValues
             newProgramStates.Should().ContainSingle().And.BeEquivalentTo(inputProgramState);
         }
 
-        private static IList<IList<SymbolicValueConstraint>> ProgramStateList(params IList<SymbolicValueConstraint>[] programStates) => programStates;
+        private static IList<IList<SymbolicConstraint>> ProgramStateList(params IList<SymbolicConstraint>[] programStates) => programStates;
 
-        private static IList<SymbolicValueConstraint> ConstraintList(params SymbolicValueConstraint[] constraints) => constraints;
+        private static IList<SymbolicConstraint> ConstraintList(params SymbolicConstraint[] constraints) => constraints;
 
-        private static ProgramState SetupProgramState(SymbolicValue sv, IEnumerable<SymbolicValueConstraint> constraints) =>
+        private static ProgramState SetupProgramState(SymbolicValue sv, IEnumerable<SymbolicConstraint> constraints) =>
             constraints.Aggregate(new ProgramState(), (ps, constraint) => ps.SetConstraint(sv, constraint));
     }
 }

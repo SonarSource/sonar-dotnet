@@ -29,11 +29,11 @@ namespace SonarAnalyzer.UnitTest.SymbolicExecution.Sonar.Constraints
     {
         [TestMethod]
         public void GivenByteArrayIsInitialized_OppositeShouldBe_NotInitialized() =>
-            ByteArraySymbolicValueConstraint.Constant.OppositeForLogicalNot.Should().Be(ByteArraySymbolicValueConstraint.Modified);
+            ByteArraySymbolicValueConstraint.Constant.Opposite.Should().Be(ByteArraySymbolicValueConstraint.Modified);
 
         [TestMethod]
         public void GivenByteArrayIsNotInitialized_OppositeShouldBe_Initialized() =>
-            ByteArraySymbolicValueConstraint.Modified.OppositeForLogicalNot.Should().Be(ByteArraySymbolicValueConstraint.Constant);
+            ByteArraySymbolicValueConstraint.Modified.Opposite.Should().Be(ByteArraySymbolicValueConstraint.Constant);
 
         [TestMethod]
         public void GivenByteArrayIsInitialized_ToStringShouldBe_Initialized() =>

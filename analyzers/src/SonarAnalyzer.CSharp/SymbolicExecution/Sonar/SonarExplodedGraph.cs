@@ -1021,7 +1021,7 @@ namespace SonarAnalyzer.SymbolicExecution.Sonar
             if (newProgramState.HasConstraint(sv, ObjectConstraint.Null))
             {
                 var constraint = instruction.IsKind(SyntaxKind.IsExpression)
-                    ? (SymbolicValueConstraint)BoolConstraint.False
+                    ? (SymbolicConstraint)BoolConstraint.False
                     : ObjectConstraint.Null;
                 newProgramState = newProgramState.SetConstraint(resultValue, constraint);
             }

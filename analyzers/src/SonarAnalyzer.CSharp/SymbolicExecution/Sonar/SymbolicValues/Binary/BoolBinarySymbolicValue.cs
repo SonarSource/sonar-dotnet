@@ -35,7 +35,7 @@ namespace SonarAnalyzer.SymbolicExecution.Sonar.SymbolicValues
 
         protected BoolBinarySymbolicValue(SymbolicValue leftOperand, SymbolicValue rightOperand) : base(leftOperand, rightOperand) { }
 
-        public sealed override IEnumerable<ProgramState> TrySetConstraint(SymbolicValueConstraint constraint, ProgramState programState)
+        public sealed override IEnumerable<ProgramState> TrySetConstraint(SymbolicConstraint constraint, ProgramState programState)
         {
             if (constraint is BoolConstraint boolConstraint)
             {

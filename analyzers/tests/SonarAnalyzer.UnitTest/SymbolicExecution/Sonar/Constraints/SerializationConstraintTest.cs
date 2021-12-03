@@ -29,11 +29,11 @@ namespace SonarAnalyzer.UnitTest.SymbolicExecution.Sonar.Constraints
     {
         [TestMethod]
         public void GivenBinderIsSafe_OppositeShouldBe_Unsafe() =>
-            SerializationConstraint.Safe.OppositeForLogicalNot.Should().Be(SerializationConstraint.Unsafe);
+            SerializationConstraint.Safe.Opposite.Should().Be(SerializationConstraint.Unsafe);
 
         [TestMethod]
         public void GivenBinderIsUnsafe_OppositeShouldBe_Safe() =>
-            SerializationConstraint.Unsafe.OppositeForLogicalNot.Should().Be(SerializationConstraint.Safe);
+            SerializationConstraint.Unsafe.Opposite.Should().Be(SerializationConstraint.Safe);
 
         [TestMethod]
         public void GivenBinderIsSafe_ToStringShouldBe_Safe() =>

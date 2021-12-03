@@ -22,6 +22,7 @@ using FluentAssertions;
 using Microsoft.CodeAnalysis;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.Extensions;
+using SonarAnalyzer.SymbolicExecution;
 using SonarAnalyzer.SymbolicExecution.Sonar;
 using SonarAnalyzer.SymbolicExecution.Sonar.Constraints;
 using SonarAnalyzer.UnitTest.CFG.Sonar;
@@ -31,9 +32,10 @@ namespace SonarAnalyzer.UnitTest.SymbolicExecution.Sonar
     [TestClass]
     public class ProgramStateTest
     {
-        private class FakeConstraint : SymbolicValueConstraint
+        private class FakeConstraint : SymbolicConstraint
         {
-            public override SymbolicValueConstraint OppositeForLogicalNot => null;
+            public override SymbolicConstraint Opposite => null;
+            protected override string Name => throw new System.NotImplementedException();
         }
 
         [TestMethod]

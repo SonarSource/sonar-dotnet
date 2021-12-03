@@ -58,7 +58,7 @@ namespace SonarAnalyzer.SymbolicExecution.Sonar
         public bool IsNull(ProgramState programState) =>
             programState.HasConstraint(this, ObjectConstraint.Null);
 
-        public virtual IEnumerable<ProgramState> TrySetConstraint(SymbolicValueConstraint constraint, ProgramState programState)
+        public virtual IEnumerable<ProgramState> TrySetConstraint(SymbolicConstraint constraint, ProgramState programState)
         {
             if (constraint == null)
             {
@@ -101,8 +101,8 @@ namespace SonarAnalyzer.SymbolicExecution.Sonar
             }
         }
 
-        public virtual IEnumerable<ProgramState> TrySetOppositeConstraint(SymbolicValueConstraint constraint, ProgramState programState) =>
-            TrySetConstraint(constraint?.OppositeForLogicalNot, programState);
+        public virtual IEnumerable<ProgramState> TrySetOppositeConstraint(SymbolicConstraint constraint, ProgramState programState) =>
+            TrySetConstraint(constraint?.Opposite, programState);
 
         public IEnumerable<ProgramState> TrySetConstraints(SymbolicValueConstraints constraints, ProgramState programState) =>
             TrySetConstraints(constraints, programState, false);
@@ -209,7 +209,7 @@ namespace SonarAnalyzer.SymbolicExecution.Sonar
         {
             if (oldObjectConstraint == ObjectConstraint.Null)
             {
-                return StringConstraint.IsNotNullConstraint(constraint) ? Enumerable.Empty<ProgramState>() : new[] { programState };
+                return StringConstraint.IsNotNull(constraint) ? Enumerable.Empty<ProgramState>() : new[] { programState };
             }
             else if (constraint == StringConstraint.FullOrNullString)
             {
@@ -263,7 +263,7 @@ namespace SonarAnalyzer.SymbolicExecution.Sonar
 
         private IEnumerable<ProgramState> SetNewStringConstraint(StringConstraint constraint, ref ProgramState programState)
         {
-            if (StringConstraint.IsNotNullConstraint(constraint))
+            if (StringConstraint.IsNotNull(constraint))
             {
                 programState = programState.SetConstraint(this, constraint);
                 programState = programState.SetConstraint(this, ObjectConstraint.NotNull);
@@ -271,7 +271,7 @@ namespace SonarAnalyzer.SymbolicExecution.Sonar
             return new[] { programState };
         }
 
-        private static Exception UnexpectedConstraintException(SymbolicValueConstraint constraint, SymbolicValueConstraints oldConstraints = null) =>
+        private static Exception UnexpectedConstraintException(SymbolicConstraint constraint, SymbolicValueConstraints oldConstraints = null) =>
             new NotSupportedException($"Unexpected constraint type: {constraint.GetType().Name}." + (oldConstraints == null ? null : "Old constraints: " + oldConstraints));
 
         private class BoolLiteralSymbolicValue : SymbolicValue
