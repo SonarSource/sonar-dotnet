@@ -18,16 +18,48 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using SonarAnalyzer.Helpers;
+
 namespace SonarAnalyzer.SymbolicExecution.Roslyn
 {
     public class SymbolicValue
     {
         private readonly int identifier;
+        private readonly Dictionary<Type, SymbolicConstraint> constraints = new();  // SymbolicValue can have only one constraint instance of specific type at a time
 
         public SymbolicValue(SymbolicValueCounter counter) =>
             identifier = counter.NextIdentifier();
 
-        public override string ToString() =>
-            "SV_" + identifier;
+        public override string ToString()
+        {
+            var ret = new StringBuilder();
+            ret.Append("SV_").Append(identifier);
+            if (constraints.Any())
+            {
+                ret.Append(": ").Append(constraints.Values.JoinStr(", ", x => x.ToString()));
+            }
+            return ret.ToString();
+        }
+
+        public void SetConstraint(SymbolicConstraint constraint) =>
+            constraints[constraint.GetType()] = constraint;
+
+        public void RemoveConstraint(SymbolicConstraint constraint)
+        {
+            if (HasConstraint(constraint))
+            {
+                constraints.Remove(constraint.GetType());
+            }
+        }
+
+        public bool HasConstraint<T>() where T : SymbolicConstraint =>
+            constraints.ContainsKey(typeof(T));
+
+        public bool HasConstraint(SymbolicConstraint constraint) =>
+            constraints.TryGetValue(constraint.GetType(), out var current) && constraint == current;
     }
 }
