@@ -19,6 +19,7 @@
  */
 
 using System;
+using Microsoft.CodeAnalysis;
 
 namespace SonarAnalyzer.Common
 {
@@ -33,6 +34,25 @@ namespace SonarAnalyzer.Common
         public static readonly AnalyzerLanguage Both = new AnalyzerLanguage("both");
 
         private readonly string language;
+
+        public string LanguageName
+        {
+            get
+            {
+                if (this == CSharp)
+                {
+                    return LanguageNames.CSharp;
+                }
+                else if (this == VisualBasic)
+                {
+                    return LanguageNames.VisualBasic;
+                }
+                else
+                {
+                    throw new NotSupportedException($"Can't get language name for '{ToString()}'.");
+                }
+            }
+        }
 
         public string RepositoryKey
         {
