@@ -62,9 +62,9 @@ namespace NS
     public int Bar() => 4 + 5;
   }
 }";
-            var method = CompileWithMethodBody(input, "Bar", out var semanticModel);
+            var (method, model) = CompileWithMethodBody(input, "Bar");
             var expression = method.ExpressionBody.Expression;
-            var cfg = CSharpControlFlowGraph.Create(expression, semanticModel);
+            var cfg = CSharpControlFlowGraph.Create(expression, model);
             VerifyMinimalCfg(cfg);
         }
 
@@ -178,12 +178,12 @@ namespace NS
         [TestMethod]
         public void Cfg_ExtremelyNestedExpression_NotSupported_FromExpression()
         {
-            var method = CompileWithMethodBody(string.Format(TestInput, $"var x = {ExtremelyNestedExpression()};"), "Bar", out var semanticModel);
+            var (method, model) = CompileWithMethodBody(string.Format(TestInput, $"var x = {ExtremelyNestedExpression()};"), "Bar");
             var equalsValueSyntax = method.DescendantNodes(x => !(x is ExpressionSyntax)).OfType<EqualsValueClauseSyntax>().Single();
-            Action a = () => CSharpControlFlowGraph.Create(equalsValueSyntax.Value, semanticModel);
+            Action a = () => CSharpControlFlowGraph.Create(equalsValueSyntax.Value, model);
 
             a.Should().Throw<NotSupportedException>().WithMessage("Too complex expression");
-            CSharpControlFlowGraph.TryGet(equalsValueSyntax.Value, semanticModel, out _).Should().BeFalse();
+            CSharpControlFlowGraph.TryGet(equalsValueSyntax.Value, model, out _).Should().BeFalse();
         }
 
         [TestMethod]
@@ -5063,12 +5063,8 @@ namespace NS
   }}
 }}";
 
-        internal static MethodDeclarationSyntax CompileWithMethodBody(string input, string methodName, out SemanticModel semanticModel)
-        {
-            var (method, model) = TestHelper.CompileIgnoreErrorsCS(input).GetMethod(methodName);
-            semanticModel = model;
-            return method;
-        }
+        internal static (MethodDeclarationSyntax, SemanticModel) CompileWithMethodBody(string input, string methodName) =>
+            TestHelper.CompileIgnoreErrorsCS(input).GetMethod(methodName);
 
         internal static string ExtremelyNestedExpression()
         {
@@ -5079,8 +5075,8 @@ namespace NS
 
         private static IControlFlowGraph Build(string methodBody)
         {
-            var method = CompileWithMethodBody(string.Format(TestInput, methodBody), "Bar", out var semanticModel);
-            var cfg = CSharpControlFlowGraph.Create(method.Body, semanticModel);
+            var (method, model) = CompileWithMethodBody(string.Format(TestInput, methodBody), "Bar");
+            var cfg = CSharpControlFlowGraph.Create(method.Body, model);
 
             // when debugging the CFG, it is useful to visualize the CFG
             var dot = CfgSerializer.Serialize(cfg, "CFG diagnostics");

@@ -634,24 +634,24 @@ public class Sample
     private bool IsMethod(params bool[] args) => true;
     private void Capturing(System.Func<int> f) {{ }}
 }}";
-                var method = SonarControlFlowGraphTest.CompileWithMethodBody(code, "Main", out var semanticModel);
+                var (method, model) = SonarControlFlowGraphTest.CompileWithMethodBody(code, "Main");
                 IMethodSymbol symbol;
                 CSharpSyntaxNode body;
                 if (localFunctionName == null)
                 {
-                    symbol = semanticModel.GetDeclaredSymbol(method);
+                    symbol = model.GetDeclaredSymbol(method);
                     body = method.Body;
                 }
                 else
                 {
                     var function = (LocalFunctionStatementSyntaxWrapper)method.DescendantNodes()
                         .Single(x => x.Kind() == SyntaxKindEx.LocalFunctionStatement && ((LocalFunctionStatementSyntaxWrapper)x).Identifier.Text == localFunctionName);
-                    symbol = semanticModel.GetDeclaredSymbol(function) as IMethodSymbol;
+                    symbol = model.GetDeclaredSymbol(function) as IMethodSymbol;
                     body = (CSharpSyntaxNode)function.Body ?? function.ExpressionBody;
                 }
-                Cfg = CSharpControlFlowGraph.Create(body, semanticModel);
+                Cfg = CSharpControlFlowGraph.Create(body, model);
                 Console.WriteLine(CfgSerializer.Serialize(Cfg));
-                Lva = new SonarCSharpLiveVariableAnalysis(Cfg, symbol, semanticModel);
+                Lva = new SonarCSharpLiveVariableAnalysis(Cfg, symbol, model);
             }
 
             public Block Block<TBlock>(string withInstruction = null) where TBlock : Block =>
