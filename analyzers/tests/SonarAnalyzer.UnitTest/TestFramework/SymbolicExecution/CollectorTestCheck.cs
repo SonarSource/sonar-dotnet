@@ -18,13 +18,13 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using FluentAssertions;
 using SonarAnalyzer.SymbolicExecution.Roslyn;
 using SonarAnalyzer.UnitTest.Helpers;
 using StyleCop.Analyzers.Lightup;
-using ProcessFunc = System.Func<SonarAnalyzer.SymbolicExecution.Roslyn.ProgramState, StyleCop.Analyzers.Lightup.IOperationWrapperSonar, SonarAnalyzer.SymbolicExecution.Roslyn.ProgramState>;
 
 namespace SonarAnalyzer.UnitTest.TestFramework.SymbolicExecution
 {
@@ -40,25 +40,14 @@ namespace SonarAnalyzer.UnitTest.TestFramework.SymbolicExecution
 
         public void ValidateOrder(params string[] expected) =>
             PostProcessed.Select(x => TestHelper.Serialize(x.Operation)).Should().OnlyContainInOrder(expected);
-    }
 
-    internal class PreProcessTestCheck : SymbolicExecutionCheck
-    {
-        private readonly ProcessFunc preProcess;
+        public void Validate(string operation, Action<ProgramState, IOperationWrapperSonar> action)
+        {
+            var data = PostProcessedData(operation);
+            action(data.State, data.Operation);
+        }
 
-        public PreProcessTestCheck(ProcessFunc preProcess) =>
-            this.preProcess = preProcess;
-
-        public override ProgramState PreProcess(ProgramState state, IOperationWrapperSonar operation) => preProcess(state, operation);
-    }
-
-    internal class PostProcessTestCheck : SymbolicExecutionCheck
-    {
-        private readonly ProcessFunc postProcess;
-
-        public PostProcessTestCheck(ProcessFunc postProcess) =>
-            this.postProcess = postProcess;
-
-        public override ProgramState PostProcess(ProgramState state, IOperationWrapperSonar operation) => postProcess(state, operation);
+        public (ProgramState State, IOperationWrapperSonar Operation) PostProcessedData(string operation) =>
+            PostProcessed.Single(x => TestHelper.Serialize(x.Operation) == operation);
     }
 }
