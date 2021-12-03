@@ -34,7 +34,7 @@ namespace SonarAnalyzer.UnitTest.SymbolicExecution.Roslyn
         [TestMethod]
         public void Constructor_Throws()
         {
-            var cfg = TestHelper.CompileCfg("public class Sample { public void Main() { } }", AnalyzerLanguage.CSharp);
+            var cfg = TestHelper.CompileCfgCS("public class Sample { public void Main() { } }");
             var check = new Mock<SymbolicExecutionCheck>().Object;
             ((Action)(() => new RoslynSymbolicExecution(null, new[] { check }))).Should().Throw<ArgumentNullException>().And.ParamName.Should().Be("cfg");
             ((Action)(() => new RoslynSymbolicExecution(cfg, null))).Should().Throw<ArgumentNullException>().And.ParamName.Should().Be("checks");
