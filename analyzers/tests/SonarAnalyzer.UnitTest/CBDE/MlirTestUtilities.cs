@@ -83,7 +83,7 @@ namespace SonarAnalyzer.UnitTest.CBDE
 
         public static IControlFlowGraph GetCfgForMethod(string code, string methodName)
         {
-            (var method, var semanticModel) = TestHelper.Compile(code).GetMethod(methodName);
+            (var method, var semanticModel) = TestHelper.CompileCS(code).GetMethod(methodName);
             return CSharpControlFlowGraph.Create(method.Body, semanticModel);
         }
 
@@ -92,10 +92,10 @@ namespace SonarAnalyzer.UnitTest.CBDE
 
         public static void ExportAllMethods(string code, TextWriter writer, bool withLoc)
         {
-            (var ast, var semanticModel) = TestHelper.CompileIgnoreErrors(code);
+            var (tree, model) = TestHelper.CompileIgnoreErrorsCS(code);
             var exporterMetrics = new MlirExporterMetrics();
-            var exporter = new MlirExporter(writer, semanticModel, exporterMetrics, withLoc);
-            foreach (var method in ast.GetRoot().DescendantNodes().OfType<MethodDeclarationSyntax>())
+            var exporter = new MlirExporter(writer, model, exporterMetrics, withLoc);
+            foreach (var method in tree.GetRoot().DescendantNodes().OfType<MethodDeclarationSyntax>())
             {
                 exporter.ExportFunction(method);
             }

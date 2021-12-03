@@ -26,6 +26,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.CFG;
 using SonarAnalyzer.CFG.LiveVariableAnalysis;
 using SonarAnalyzer.CFG.Roslyn;
+using SonarAnalyzer.Common;
 
 namespace SonarAnalyzer.UnitTest.LiveVariableAnalysis
 {
@@ -816,7 +817,7 @@ public class Sample
 {
     public Func<int> Main(int intParameter) => () => intParameter;
 }";
-            var context = new Context(code, true);
+            var context = new Context(code, AnalyzerLanguage.CSharp);
             context.ValidateEntry(new Captured("intParameter"));
             context.Validate("() => intParameter", new Captured("intParameter"));
         }
@@ -840,7 +841,7 @@ public class Sample
 
     private void RunTask(Func<Task> f) { }
 }";
-            var context = new Context(code, true);
+            var context = new Context(code, AnalyzerLanguage.CSharp);
             context.ValidateEntry(new Captured("asyncHandler"));
         }
 
@@ -859,7 +860,7 @@ public class Sample
             return NestedLocalFunction();
         };
 }";
-            var context = new Context(code, true);
+            var context = new Context(code, AnalyzerLanguage.CSharp);
             context.ValidateEntry(new Captured("intParameter"));
         }
 
@@ -887,7 +888,7 @@ public class Sample
     private bool IsMethod(params bool[] args) => true;
     private void Capturing(Func<int, int> f) {{ }}
 }}";
-            return new Context(code, true, localFunctionName);
+            return new Context(code, AnalyzerLanguage.CSharp, localFunctionName);
         }
 
         private static Context CreateContextVB(string methodBody)
@@ -917,7 +918,7 @@ Public Class Sample
     End Sub
 
 End Class";
-            return new Context(code, false);
+            return new Context(code, AnalyzerLanguage.VisualBasic);
         }
 
         private class Context
@@ -925,10 +926,10 @@ End Class";
             public readonly RoslynLiveVariableAnalysis Lva;
             public readonly ControlFlowGraph Cfg;
 
-            public Context(string code, bool isCSharp, string localFunctionName = null)
+            public Context(string code, AnalyzerLanguage language, string localFunctionName = null)
             {
                 IMethodSymbol originalDeclaration;
-                Cfg = TestHelper.CompileCfg(code, isCSharp, code.Contains("// Error CS"));
+                Cfg = TestHelper.CompileCfg(code, language, code.Contains("// Error CS"));
                 if (localFunctionName == null)
                 {
                     originalDeclaration = (IMethodSymbol)Cfg.OriginalOperation.SemanticModel.GetDeclaredSymbol(Cfg.OriginalOperation.Syntax);

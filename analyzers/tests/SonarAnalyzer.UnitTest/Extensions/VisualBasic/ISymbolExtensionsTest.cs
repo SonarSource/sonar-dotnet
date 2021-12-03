@@ -25,6 +25,7 @@ using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.VisualBasic;
 using Microsoft.CodeAnalysis.VisualBasic.Syntax;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using SonarAnalyzer.Common;
 using ISymbolExtensions_Common = SonarAnalyzer.Helpers.ISymbolExtensions;
 using ISymbolExtensions_VB = vbnet::SonarAnalyzer.Extensions.ISymbolExtensions;
 
@@ -62,7 +63,7 @@ public class Sample
 {
     public string SymbolMember {get; set;}
 }";
-            ISymbolExtensions_Common.IsAutoProperty(CreateSymbol(code, true)).Should().BeTrue();
+            ISymbolExtensions_Common.IsAutoProperty(CreateSymbol(code, AnalyzerLanguage.CSharp)).Should().BeTrue();
         }
 
         [TestMethod]
@@ -74,7 +75,7 @@ Public Class Sample
     Public Property SymbolMember As String
 
 End Class";
-            ISymbolExtensions_Common.IsAutoProperty(CreateSymbol(code, false)).Should().BeTrue();
+            ISymbolExtensions_Common.IsAutoProperty(CreateSymbol(code, AnalyzerLanguage.VisualBasic)).Should().BeTrue();
         }
 
         [TestMethod]
@@ -91,7 +92,7 @@ public class Sample
         set { _SymbolMember = value; }
     }
 }";
-            ISymbolExtensions_Common.IsAutoProperty(CreateSymbol(code, true)).Should().BeFalse();
+            ISymbolExtensions_Common.IsAutoProperty(CreateSymbol(code, AnalyzerLanguage.CSharp)).Should().BeFalse();
         }
 
         [TestMethod]
@@ -112,7 +113,7 @@ Public Class Sample
     End Property
 
 End Class";
-            ISymbolExtensions_Common.IsAutoProperty(CreateSymbol(code, false)).Should().BeFalse();
+            ISymbolExtensions_Common.IsAutoProperty(CreateSymbol(code, AnalyzerLanguage.VisualBasic)).Should().BeFalse();
         }
 
         [TestMethod]
@@ -123,7 +124,7 @@ public class Sample
 {
     public void SymbolMember() { }
 }";
-            ISymbolExtensions_Common.IsAutoProperty(CreateSymbol(code, true)).Should().BeFalse();
+            ISymbolExtensions_Common.IsAutoProperty(CreateSymbol(code, AnalyzerLanguage.CSharp)).Should().BeFalse();
         }
 
         [TestMethod]
@@ -136,12 +137,12 @@ Public Class Sample
     End Sub
 
 End Class";
-            ISymbolExtensions_Common.IsAutoProperty(CreateSymbol(code, false)).Should().BeFalse();
+            ISymbolExtensions_Common.IsAutoProperty(CreateSymbol(code, AnalyzerLanguage.VisualBasic)).Should().BeFalse();
         }
 
-        private static ISymbol CreateSymbol(string snippet, bool isCSharp)
+        private static ISymbol CreateSymbol(string snippet, AnalyzerLanguage language)
         {
-            var (tree, semanticModel) = TestHelper.Compile(snippet, isCSharp);
+            var (tree, semanticModel) = TestHelper.Compile(snippet, false, language);
             var node = tree.GetRoot().DescendantNodes().Last(x => x.ToString().Contains(" SymbolMember"));
             return semanticModel.GetDeclaredSymbol(node);
         }

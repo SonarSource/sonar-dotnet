@@ -384,9 +384,8 @@ internal class Test
 
         private static IControlFlowGraph GetCfgForMethod(string code, string methodName)
         {
-            (var method, var semanticModel) = TestHelper.CompileIgnoreErrors(code).GetMethod(methodName);
-
-            return CSharpControlFlowGraph.Create(method.Body, semanticModel);
+            var (method, model) = TestHelper.CompileIgnoreErrorsCS(code).GetMethod(methodName);
+            return CSharpControlFlowGraph.Create(method.Body, model);
         }
     }
 }

@@ -539,14 +539,14 @@ End Class")
         [TestMethod]
         public void WrongMetrics_CSharp()
         {
-            (var syntaxTree, var semanticModel) = TestHelper.Compile("", isCSharp: false);
+            (var syntaxTree, var semanticModel) = TestHelper.CompileVB("");
             Assert.ThrowsException<ArgumentException>(() => new Metrics.CSharp.CSharpMetrics(syntaxTree, semanticModel));
         }
 
         [TestMethod]
         public void WrongMetrics_VisualBasic()
         {
-            (var syntaxTree, var semanticModel) = TestHelper.Compile("", isCSharp: true);
+            (var syntaxTree, var semanticModel) = TestHelper.CompileCS("");
             Assert.ThrowsException<ArgumentException>(() => new Metrics.VisualBasic.VisualBasicMetrics(syntaxTree, semanticModel));
         }
 
@@ -604,7 +604,7 @@ End Module")
                 throw new ArgumentException("Supplied language is not C# neither VB.Net", nameof(language));
             }
 
-            var (syntaxTree, semanticModel) = TestHelper.Compile(text, language == AnalyzerLanguage.CSharp);
+            var (syntaxTree, semanticModel) = TestHelper.Compile(text, false, language);
 
             return language == AnalyzerLanguage.CSharp
                 ? new Metrics.CSharp.CSharpMetrics(syntaxTree, semanticModel)

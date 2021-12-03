@@ -40,7 +40,7 @@ public class Sample
         var t = true || true;
     }
 }";
-            var cfg = TestHelper.CompileCfg(code);
+            var cfg = TestHelper.CompileCfgCS(code);
             var localLifetimeRegion = cfg.Root.NestedRegions.Single();
             var block = cfg.Blocks[localLifetimeRegion.FirstBlockOrdinal];
 
@@ -67,7 +67,7 @@ public class Sample
 
     public void DoSomething() { }
 }";
-            var cfg = TestHelper.CompileCfg(code);
+            var cfg = TestHelper.CompileCfgCS(code);
             var block = cfg.Blocks[2];
 
             block.EnclosingRegion.Kind.Should().Be(ControlFlowRegionKind.LocalLifetime);

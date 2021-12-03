@@ -34,7 +34,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework
     {
         private const string GeneratedAssemblyName = "project";
 
-        public static readonly IEnumerable<GlobalImport> DefaultGlobalImportsVisualBasic = GlobalImport.Parse(
+        private static readonly IEnumerable<GlobalImport> DefaultGlobalImportsVisualBasic = GlobalImport.Parse(
             "Microsoft.VisualBasic",
             "System",
             "System.Collections",
@@ -105,14 +105,13 @@ namespace SonarAnalyzer.UnitTest.TestFramework
 
         private ProjectBuilder AddProject(AnalyzerLanguage language, string projectName, bool createExtraEmptyFile, OutputKind outputKind = OutputKind.DynamicallyLinkedLibrary)
         {
-            var languageName = language == AnalyzerLanguage.CSharp
-                ? LanguageNames.CSharp
-                : LanguageNames.VisualBasic;
-
-            var project = Solution.AddProject(projectName, projectName, languageName);
-
+            if (language != AnalyzerLanguage.CSharp && language != AnalyzerLanguage.VisualBasic)
+            {
+                throw new InvalidOperationException("Unexpected project language: " + language);
+            }
+            var project = Solution.AddProject(projectName, projectName, language.LanguageName);
             var compilationOptions = project.CompilationOptions.WithOutputKind(outputKind);
-            compilationOptions = languageName switch
+            compilationOptions = language.LanguageName switch
             {
                 LanguageNames.CSharp => ((CSharpCompilationOptions)compilationOptions).WithAllowUnsafe(true),
                 LanguageNames.VisualBasic => ((VisualBasicCompilationOptions)compilationOptions).WithGlobalImports(DefaultGlobalImportsVisualBasic),
@@ -132,11 +131,9 @@ namespace SonarAnalyzer.UnitTest.TestFramework
 
             if (createExtraEmptyFile)
             {
-                // adding an extra file to the project
-                // this won't trigger any issues, but it keeps a reference to the original ParseOption, so
+                // adding an extra file to the project this won't trigger any issues, but it keeps a reference to the original ParseOption, so
                 // if an analyzer/codefix changes the language version, Roslyn throws an ArgumentException
-                projectBuilder = projectBuilder
-                    .AddSnippet(string.Empty, fileName: "ExtraEmptyFile.g." + language.FileExtension);
+                projectBuilder = projectBuilder.AddSnippet(string.Empty, fileName: "ExtraEmptyFile.g." + language.FileExtension);
             }
 
             return projectBuilder;

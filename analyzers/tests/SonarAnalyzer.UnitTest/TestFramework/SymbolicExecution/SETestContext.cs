@@ -19,6 +19,7 @@
  */
 
 using System.Linq;
+using SonarAnalyzer.Common;
 using SonarAnalyzer.SymbolicExecution.Roslyn;
 
 namespace SonarAnalyzer.UnitTest.TestFramework.SymbolicExecution
@@ -28,9 +29,9 @@ namespace SonarAnalyzer.UnitTest.TestFramework.SymbolicExecution
         public readonly CollectorTestCheck Collector = new();
         private readonly RoslynSymbolicExecution se;
 
-        public SETestContext(string code, bool isCSharp, SymbolicExecutionCheck[] additionalChecks)
+        public SETestContext(string code, AnalyzerLanguage language, SymbolicExecutionCheck[] additionalChecks)
         {
-            var cfg = TestHelper.CompileCfg(code, isCSharp);
+            var cfg = TestHelper.CompileCfg(code, language);
             se = new RoslynSymbolicExecution(cfg, additionalChecks.Concat(new[] { Collector }).ToArray());
             se.Execute();
         }
@@ -51,7 +52,7 @@ public class Sample
     private string Method(params string[] args) => null;
     private bool IsMethod(params bool[] args) => true;
 }}";
-            return new SETestContext(code, true, additionalChecks);
+            return new SETestContext(code, AnalyzerLanguage.CSharp, additionalChecks);
         }
 
         public static SETestContext CreateVB(string methodBody, params SymbolicExecutionCheck[] additionalChecks) =>
@@ -73,7 +74,7 @@ Public Class Sample
     End Function
 
 End Class";
-            return new SETestContext(code, false, additionalChecks);
+            return new SETestContext(code, AnalyzerLanguage.VisualBasic, additionalChecks);
         }
     }
 }

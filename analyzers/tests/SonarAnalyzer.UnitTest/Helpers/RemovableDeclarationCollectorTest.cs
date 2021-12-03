@@ -122,7 +122,7 @@ End Class";
 
         private static VisualBasicRemovableDeclarationCollector CreateCollector(string code)
         {
-            var (tree, semanticModel) = TestHelper.Compile(code, false, MetadataReferenceFacade.SystemComponentModelPrimitives.ToArray());
+            var (tree, semanticModel) = TestHelper.CompileVB(code, MetadataReferenceFacade.SystemComponentModelPrimitives.ToArray());
             var type = tree.GetRoot().DescendantNodes().OfType<ClassBlockSyntax>().Single(x => x.ClassStatement.Identifier.ValueText == "Sample");
             return new VisualBasicRemovableDeclarationCollector(semanticModel.GetDeclaredSymbol(type), semanticModel.Compilation);
         }

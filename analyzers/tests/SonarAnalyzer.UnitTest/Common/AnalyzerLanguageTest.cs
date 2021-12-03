@@ -29,46 +29,78 @@ namespace SonarAnalyzer.UnitTest.Common
     public class AnalyzerLanguageTest
     {
         [TestMethod]
-        public void AnalyzerLanguage_Parse()
+        public void Parse()
         {
-            var parsed = AnalyzerLanguage.Parse("cs");
-            parsed.Should().Be(AnalyzerLanguage.CSharp);
+            AnalyzerLanguage.Parse("cs").Should().Be(AnalyzerLanguage.CSharp);
+            AnalyzerLanguage.Parse("vbnet").Should().Be(AnalyzerLanguage.VisualBasic);
         }
 
         [TestMethod]
-        public void AnalyzerLanguage_Parse_Fail() =>
+        public void Parse_Fail() =>
             Assert.ThrowsException<NotSupportedException>(() => AnalyzerLanguage.Parse("csharp"));
 
         [TestMethod]
-        public void AnalyzerLanguage_GetDirectory()
+        public void GetDirectory()
         {
             AnalyzerLanguage.CSharp.DirectoryName.Should().Be("CSharp");
             AnalyzerLanguage.VisualBasic.DirectoryName.Should().Be("VisualBasic");
         }
 
         [TestMethod]
-        public void AnalyzerLanguage_GetQualityProfileRepositoryKey()
+        public void GetQualityProfileRepositoryKey()
         {
             AnalyzerLanguage.CSharp.RepositoryKey.Should().Be("csharpsquid");
             AnalyzerLanguage.VisualBasic.RepositoryKey.Should().Be("vbnet");
         }
 
         [TestMethod]
-        public void AnalyzerLanguage_Operations()
+        public void AddLanguage()
         {
-            AnalyzerLanguage.CSharp.AddLanguage(AnalyzerLanguage.VisualBasic)
-                .Should().Be(AnalyzerLanguage.Both);
-            AnalyzerLanguage.CSharp.AddLanguage(AnalyzerLanguage.CSharp)
-                .Should().Be(AnalyzerLanguage.CSharp);
-            AnalyzerLanguage.CSharp.AddLanguage(AnalyzerLanguage.Both)
-                .Should().Be(AnalyzerLanguage.Both);
-
-            AnalyzerLanguage.CSharp.IsAlso(AnalyzerLanguage.CSharp)
-                .Should().BeTrue();
-            AnalyzerLanguage.CSharp.IsAlso(AnalyzerLanguage.VisualBasic)
-                .Should().BeFalse();
-            AnalyzerLanguage.Both.IsAlso(AnalyzerLanguage.VisualBasic)
-                .Should().BeTrue();
+            AnalyzerLanguage.CSharp.AddLanguage(AnalyzerLanguage.VisualBasic).Should().Be(AnalyzerLanguage.Both);
+            AnalyzerLanguage.CSharp.AddLanguage(AnalyzerLanguage.CSharp).Should().Be(AnalyzerLanguage.CSharp);
+            AnalyzerLanguage.CSharp.AddLanguage(AnalyzerLanguage.Both).Should().Be(AnalyzerLanguage.Both);
+            AnalyzerLanguage.CSharp.Invoking(x => x.AddLanguage(null)).Should().Throw<ArgumentNullException>();
         }
+
+        [TestMethod]
+        public void IsAlso()
+        {
+            AnalyzerLanguage.CSharp.IsAlso(AnalyzerLanguage.CSharp).Should().BeTrue();
+            AnalyzerLanguage.CSharp.IsAlso(AnalyzerLanguage.VisualBasic).Should().BeFalse();
+            AnalyzerLanguage.Both.IsAlso(AnalyzerLanguage.VisualBasic).Should().BeTrue();
+            AnalyzerLanguage.CSharp.Invoking<AnalyzerLanguage>(x => x.IsAlso(null)).Should().Throw<ArgumentNullException>();
+            AnalyzerLanguage.CSharp.Invoking<AnalyzerLanguage>(x => x.IsAlso(AnalyzerLanguage.None)).Should().Throw<NotSupportedException>();
+        }
+
+        [TestMethod]
+        public void LanguageProperties_None_Throws()
+        {
+            AnalyzerLanguage.None.Invoking(x => x.LanguageName).Should().Throw<NotSupportedException>();
+            AnalyzerLanguage.None.Invoking(x => x.RepositoryKey).Should().Throw<NotSupportedException>();
+            AnalyzerLanguage.None.Invoking(x => x.DirectoryName).Should().Throw<NotSupportedException>();
+            AnalyzerLanguage.None.Invoking(x => x.FileExtension).Should().Throw<NotSupportedException>();
+        }
+
+        [TestMethod]
+        public void LanguageProperties_Both_Throws()
+        {
+            AnalyzerLanguage.Both.Invoking(x => x.LanguageName).Should().Throw<NotSupportedException>();
+            AnalyzerLanguage.Both.Invoking(x => x.RepositoryKey).Should().Throw<NotSupportedException>();
+            AnalyzerLanguage.Both.Invoking(x => x.DirectoryName).Should().Throw<NotSupportedException>();
+            AnalyzerLanguage.Both.Invoking(x => x.FileExtension).Should().Throw<NotSupportedException>();
+        }
+
+        [TestMethod]
+        public void ToString_ReturnsValue()
+        {
+            AnalyzerLanguage.CSharp.ToString().Should().Be("cs");
+            AnalyzerLanguage.VisualBasic.ToString().Should().Be("vbnet");
+            AnalyzerLanguage.None.ToString().Should().Be("none");
+            AnalyzerLanguage.Both.ToString().Should().Be("both");
+        }
+
+        [TestMethod]
+        public void FromPath_Unexpected_ReturnsNone() =>
+            AnalyzerLanguage.FromPath("File.txt").Should().Be(AnalyzerLanguage.None);
     }
 }

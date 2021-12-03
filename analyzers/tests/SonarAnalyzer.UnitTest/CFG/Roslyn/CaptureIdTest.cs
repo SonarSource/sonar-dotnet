@@ -55,7 +55,7 @@ public class Sample
     public string Method(object a, object b) =>
         a?.ToString() + b?.ToString();
 }";
-            var cfg = TestHelper.CompileCfg(code);
+            var cfg = TestHelper.CompileCfgCS(code);
             var outerLocalLifetimeRegion = cfg.Root.NestedRegions.Single();
             outerLocalLifetimeRegion.Kind.Should().Be(ControlFlowRegionKind.LocalLifetime);
             outerLocalLifetimeRegion.NestedRegions.Should().HaveCount(2).And.OnlyContain(x => x.Kind == ControlFlowRegionKind.LocalLifetime);
