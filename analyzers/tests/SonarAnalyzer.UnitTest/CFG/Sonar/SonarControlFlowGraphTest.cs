@@ -5065,7 +5065,8 @@ namespace NS
 
         internal static MethodDeclarationSyntax CompileWithMethodBody(string input, string methodName, out SemanticModel semanticModel)
         {
-            (var method, semanticModel) = TestHelper.CompileIgnoreErrorsCS(input).GetMethod(methodName);
+            var (method, model) = TestHelper.CompileIgnoreErrorsCS(input).GetMethod(methodName);
+            semanticModel = model;
             return method;
         }
 
