@@ -46,7 +46,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     var node = c.Node;
                     if (true)
                     {
-                        c.ReportDiagnostic(Diagnostic.Create(Rule, node.GetLocation()));
+                        c.ReportIssue(Diagnostic.Create(Rule, node.GetLocation()));
                     }
                 },
                 SyntaxKind.InvocationExpression);
