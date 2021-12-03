@@ -23,6 +23,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.SymbolicExecution;
 using SonarAnalyzer.SymbolicExecution.Constraints;
 using SonarAnalyzer.SymbolicExecution.Roslyn;
+using SonarAnalyzer.UnitTest.TestFramework.SymbolicExecution;
 
 namespace SonarAnalyzer.UnitTest.SymbolicExecution.Roslyn
 {
@@ -120,28 +121,6 @@ namespace SonarAnalyzer.UnitTest.SymbolicExecution.Roslyn
             sut.SetConstraint(TestConstraint.First);
             sut.HasConstraint(TestConstraint.First).Should().BeTrue();
             sut.HasConstraint(TestConstraint.Second).Should().BeFalse();
-        }
-
-        private class TestConstraint : SymbolicConstraint
-        {
-            public static readonly TestConstraint First = new("First");
-            public static readonly TestConstraint Second = new("Second");
-
-            public override SymbolicConstraint Opposite => throw new System.NotImplementedException();
-            protected override string Name { get; }
-
-            private TestConstraint(string name) =>
-                Name = name;
-        }
-
-        private class DummyConstraint : SymbolicConstraint
-        {
-            public static readonly DummyConstraint Dummy = new();
-
-            public override SymbolicConstraint Opposite => throw new System.NotImplementedException();
-            protected override string Name { get; } = "Dummy";
-
-            private DummyConstraint() { }
         }
     }
 }
