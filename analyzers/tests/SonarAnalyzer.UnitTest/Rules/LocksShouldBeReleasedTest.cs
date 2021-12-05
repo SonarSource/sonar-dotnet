@@ -30,6 +30,6 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void LocksShouldBeReleased_CS() =>
-            Verifier.VerifyAnalyzer(@"TestCases\LocksShouldBeReleased.cs", new LocksShouldBeReleased());
+            Verifier.VerifyAnalyzer(@"TestCases\LocksShouldBeReleased.Monitor.cs", new LocksShouldBeReleased());
     }
 }
