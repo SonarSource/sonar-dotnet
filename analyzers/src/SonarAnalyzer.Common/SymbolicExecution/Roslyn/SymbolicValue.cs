@@ -29,7 +29,7 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
     public class SymbolicValue
     {
         private readonly int identifier;
-        private readonly Dictionary<Type, SymbolicConstraint> constraints = new();  // SymbolicValue can have only one constraint instance of specific type at a time
+        private readonly Lazy<Dictionary<Type, SymbolicConstraint>> constraints = new(() => new());  // SymbolicValue can have only one constraint instance of specific type at a time
 
         public SymbolicValue(SymbolicValueCounter counter) =>
             identifier = counter.NextIdentifier();
@@ -38,28 +38,28 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
         {
             var ret = new StringBuilder();
             ret.Append("SV_").Append(identifier);
-            if (constraints.Any())
+            if (constraints.Value.Any())
             {
-                ret.Append(": ").Append(constraints.Values.JoinStr(", ", x => x.ToString()));
+                ret.Append(": ").Append(constraints.Value.Values.JoinStr(", ", x => x.ToString()));
             }
             return ret.ToString();
         }
 
         public void SetConstraint(SymbolicConstraint constraint) =>
-            constraints[constraint.GetType()] = constraint;
+            constraints.Value[constraint.GetType()] = constraint;
 
         public void RemoveConstraint(SymbolicConstraint constraint)
         {
             if (HasConstraint(constraint))
             {
-                constraints.Remove(constraint.GetType());
+                constraints.Value.Remove(constraint.GetType());
             }
         }
 
         public bool HasConstraint<T>() where T : SymbolicConstraint =>
-            constraints.ContainsKey(typeof(T));
+            constraints.Value.ContainsKey(typeof(T));
 
         public bool HasConstraint(SymbolicConstraint constraint) =>
-            constraints.TryGetValue(constraint.GetType(), out var current) && constraint == current;
+            constraints.Value.TryGetValue(constraint.GetType(), out var current) && constraint == current;
     }
 }
