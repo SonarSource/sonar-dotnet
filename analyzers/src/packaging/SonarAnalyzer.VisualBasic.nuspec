@@ -22,9 +22,9 @@
     </frameworkAssemblies>
   </metadata>
   <files>
-    <file src="bin\Release\SonarAnalyzer.dll" target="analyzers" />
-    <file src="bin\Release\SonarAnalyzer.VisualBasic.dll" target="analyzers" />
-    <file src="bin\Release\Google.Protobuf.dll" target="analyzers" />
+    <file src="..\SonarAnalyzer.VisualBasic\bin\Release\net46\SonarAnalyzer.dll" target="analyzers" />
+    <file src="..\SonarAnalyzer.VisualBasic\bin\Release\net46\SonarAnalyzer.VisualBasic.dll" target="analyzers" />
+    <file src="..\SonarAnalyzer.VisualBasic\bin\Release\net46\Google.Protobuf.dll" target="analyzers" />
     <file src="tools-vbnet\*.ps1" target="tools\" />
     <file src="logos\sonarsource_64.png" target="images\" />
     <file src="..\..\..\THIRD-PARTY-NOTICES.txt" target="license\" />

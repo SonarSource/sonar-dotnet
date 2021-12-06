@@ -23,19 +23,13 @@
       <ExpectedMatchCount>1</ExpectedMatchCount>
     </AssemblyInformationalVersion>
 
-    <VsixVersion Include="$(SolutionRoot)\src\SonarAnalyzer.Vsix\source.extension.vsixmanifest">
-      <Find>(?&lt;=Identity.*Version=")([^"]*)</Find>
-      <ReplaceWith>$(VsixVersion)</ReplaceWith>
-      <ExpectedMatchCount>1</ExpectedMatchCount>
-    </VsixVersion>
-
-    <NugetAnalyzer Include="$(SolutionRoot)\src\SonarAnalyzer.Vsix\SonarAnalyzer.*.nuspec">
+    <NugetAnalyzer Include="$(SolutionRoot)\src\packaging\SonarAnalyzer.*.nuspec">
       <Find>(?&lt;=&lt;version&gt;)([^&lt;]*)</Find>
       <ReplaceWith>$(NugetVersion)</ReplaceWith>
       <ExpectedMatchCount>1</ExpectedMatchCount>
     </NugetAnalyzer>
 
-    <NugetReleaseNotes Include="$(SolutionRoot)\src\SonarAnalyzer.Vsix\SonarAnalyzer.*.nuspec">
+    <NugetReleaseNotes Include="$(SolutionRoot)\src\packaging\SonarAnalyzer.*.nuspec">
       <Find>(?&lt;=&lt;releaseNotes&gt;https:\/\/github.com\/SonarSource\/sonar-dotnet\/releases\/tag\/)([^&lt;]*)</Find>
       <ReplaceWith>$(NugetVersion)</ReplaceWith>
       <ExpectedMatchCount>1</ExpectedMatchCount>
@@ -52,7 +46,6 @@
     <RegexTransform Items="@(AssemblyVersion)" />
     <RegexTransform Items="@(AssemblyFileVersion)" />
     <RegexTransform Items="@(AssemblyInformationalVersion)" />
-    <RegexTransform Items="@(VsixVersion)" />
     <RegexTransform Items="@(NugetAnalyzer)" />
     <RegexTransform Items="@(NugetReleaseNotes)" />
     <RegexTransform Items="@(NugetCFG)" />

@@ -1,6 +1,3 @@
-# SonarLint binaries
-binaries/
-
 # Actual SARIF files
 actual/
 

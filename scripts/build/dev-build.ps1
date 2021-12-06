@@ -63,11 +63,6 @@ try {
     $StartDate=(Get-Date)
 
     if ($build) {
-        # Restore VSIX (special project)
-        Push-Location "src\SonarAnalyzer.Vsix"
-        nuget restore .\packages.SonarAnalyzer.Vsix.config -PackagesDirectory "../../packages"
-        Pop-Location
-
         # Cleanup first to avoid surprises with old files #3006
         Get-ChildItem src\*\bin\Debug | Remove-Item -Recurse
         Get-ChildItem src\*\bin\Release | Remove-Item -Recurse

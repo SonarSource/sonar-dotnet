@@ -24,8 +24,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{B7233F78
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SonarQube Integration", "SonarQube Integration", "{F51A8C2A-A0F5-4282-956F-549D05860396}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SonarAnalyzer.Vsix", "src\SonarAnalyzer.Vsix\SonarAnalyzer.Vsix.csproj", "{9D2DF65B-8BB4-4F85-8B71-C4B636513EF3}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SonarAnalyzer.Common", "src\SonarAnalyzer.Common\SonarAnalyzer.Common.csproj", "{8A8A663E-1318-4361-BC97-2E63666FEADB}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SonarAnalyzer.Utilities", "src\SonarAnalyzer.Utilities\SonarAnalyzer.Utilities.csproj", "{664E86BD-0863-49D5-B343-141CEAF47F4A}"
@@ -78,10 +76,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{9D2DF65B-8BB4-4F85-8B71-C4B636513EF3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{9D2DF65B-8BB4-4F85-8B71-C4B636513EF3}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{9D2DF65B-8BB4-4F85-8B71-C4B636513EF3}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{9D2DF65B-8BB4-4F85-8B71-C4B636513EF3}.Release|Any CPU.Build.0 = Release|Any CPU
 		{8A8A663E-1318-4361-BC97-2E63666FEADB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{8A8A663E-1318-4361-BC97-2E63666FEADB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8A8A663E-1318-4361-BC97-2E63666FEADB}.Release|Any CPU.ActiveCfg = Release|Any CPU

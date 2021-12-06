@@ -63,3 +63,6 @@ packages/
 *.restext
 /analyzers/src/SonarAnalyzer.CSharp/CBDE/windows
 .generated/
+
+# Analizer binaries
+analyzers/binaries/

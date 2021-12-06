@@ -3,6 +3,12 @@
   <Import Project="$(MSBuildThisFileDirectory)\..\Analyzers.targets" />
 
   <PropertyGroup>
+    <!-- `BinariesFolder` - binary files folder used by ITs and java packaging -->
+    <BinariesFolder>$(MSBuildThisFileDirectory)\..\packaging\binaries\</BinariesFolder>
     <CodeAnalysisRuleSet>$(MSBuildThisFileDirectory)\..\.sonarlint\sonaranalyzer-dotnetCSharp.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
+
+  <Target Name="CleanBinaries" AfterTargets="Clean">
+    <RemoveDir Directories="$(BinariesFolder)" />
+  </Target>
 </Project>
