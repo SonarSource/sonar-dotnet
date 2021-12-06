@@ -90,6 +90,7 @@ namespace SonarAnalyzer.UnitTest.MetadataReferences
         internal static MetadataReference SystemSecurityCryptographyCng { get; } = CreateReference("System.Security.Cryptography.Cng.dll");
         internal static MetadataReference SystemSecurityCryptographyPrimitives { get; } = CreateReference("System.Security.Cryptography.Primitives.dll");
         internal static MetadataReference SystemSecurityPrincipalWindows { get; } = CreateReference("System.Security.Principal.Windows.dll");
+        internal static MetadataReference SystemThreading { get; } = CreateReference("System.Threading.dll");
         internal static MetadataReference SystemThreadingTasks { get; } = CreateReference("System.Threading.Tasks.dll");
         internal static MetadataReference SystemXmlReaderWriter { get; } = CreateReference("System.Xml.ReaderWriter.dll");
         internal static MetadataReference SystemXml { get; } = CreateReference("System.Xml.dll");
