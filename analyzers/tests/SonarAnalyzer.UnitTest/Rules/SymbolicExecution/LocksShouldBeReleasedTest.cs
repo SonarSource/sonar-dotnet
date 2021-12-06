@@ -18,8 +18,12 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System.Collections.Generic;
+using System.Linq;
+using Microsoft.CodeAnalysis;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.Rules.CSharp;
+using SonarAnalyzer.UnitTest.MetadataReferences;
 using SonarAnalyzer.UnitTest.TestFramework;
 
 namespace SonarAnalyzer.UnitTest.Rules
@@ -36,5 +40,19 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestCategory("Rule")]
         public void LocksShouldBeReleased_SpinLock_CS() =>
             Verifier.VerifyAnalyzer(@"TestCases\SymbolicExecution\Sonar\LocksShouldBeReleased.SpinLock.cs", new LocksShouldBeReleased());
+
+        [TestMethod]
+        [TestCategory("Rule")]
+        public void LocksShouldBeReleased_ReaderWriterLock_CS() =>
+            Verifier.VerifyAnalyzer(@"TestCases\SymbolicExecution\Sonar\LocksShouldBeReleased.ReaderWriterLock.cs", new LocksShouldBeReleased(), GetReferences());
+
+        [TestMethod]
+        [TestCategory("Rule")]
+        public void LocksShouldBeReleased_ReaderWriterLockSlim_CS() =>
+            Verifier.VerifyAnalyzer(@"TestCases\SymbolicExecution\Sonar\LocksShouldBeReleased.ReaderWriterLockSlim.cs", new LocksShouldBeReleased());
+
+        private static IEnumerable<MetadataReference> GetReferences() =>
+            Enumerable.Empty<MetadataReference>()
+                .Concat(MetadataReferenceFacade.SystemThreading);
     }
 }

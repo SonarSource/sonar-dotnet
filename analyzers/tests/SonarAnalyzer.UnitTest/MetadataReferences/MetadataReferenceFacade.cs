@@ -184,6 +184,13 @@ namespace SonarAnalyzer.UnitTest.MetadataReferences
             NuGetMetadataReference.SystemSecurityPermissions();
 #endif
 
+        internal static References SystemThreading =>
+#if NETFRAMEWORK
+            FrameworkMetadataReference.SystemThreading;
+#else
+            new[] {CoreMetadataReference.SystemThreading};
+#endif
+
         internal static References SystemThreadingTasks =>
 #if NETFRAMEWORK
             FrameworkMetadataReference.SystemThreadingTasks
