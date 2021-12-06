@@ -21,10 +21,12 @@
 using System;
 using FluentAssertions;
 using Microsoft.CodeAnalysis;
+using Microsoft.CodeAnalysis.Operations;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using SonarAnalyzer.SymbolicExecution.Roslyn;
 using SonarAnalyzer.UnitTest.TestFramework.SymbolicExecution;
+using StyleCop.Analyzers.Lightup;
 
 namespace SonarAnalyzer.UnitTest.SymbolicExecution.Roslyn
 {
@@ -147,6 +149,47 @@ namespace SonarAnalyzer.UnitTest.SymbolicExecution.Roslyn
                 "SimpleAssignment: a = true (Implicit)");
             collector.Validate("Literal: true", (state, operation) => state[operation].HasConstraint(DummyConstraint.Dummy).Should().BeTrue());
             collector.Validate("SimpleAssignment: a = true (Implicit)", (state, operation) => state[operation].HasConstraint(DummyConstraint.Dummy).Should().BeFalse());
+        }
+
+        [TestMethod]
+        public void Execute_PersistSymbols()
+        {
+            var setter = new PreProcessTestCheck((state, operation) =>
+            {
+                // Set constraint to local symbol declarations. To assert them when they are used later.
+                if (operation.Instance is ILocalReferenceOperation local && operation.IsImplicit)
+                {
+                    var sv = new SymbolicValue(new SymbolicValueCounter()); // ToDo: Improve check design
+                    sv.SetConstraint(local.Local.Name switch
+                    {
+                        "first" => TestConstraint.First,
+                        "second" => TestConstraint.Second,
+                        _ => throw new InvalidOperationException("Unexpected local variable name: " + local.Local.Name)
+                    });
+                    return state.SetSymbolValue(local.Local, sv);
+                }
+                else
+                {
+                    return state;
+                }
+            });
+            var collector = SETestContext.CreateCS("var first = true; var second = false; first = second;", setter).Collector;
+            collector.ValidateOrder(    // Visualize operations
+                   "LocalReference: first = true (Implicit)",
+                   "Literal: true",
+                   "SimpleAssignment: first = true (Implicit)",
+                   "LocalReference: second = false (Implicit)",
+                   "Literal: false",
+                   "SimpleAssignment: second = false (Implicit)",
+                   "LocalReference: first",
+                   "LocalReference: second",
+                   "SimpleAssignment: first = second",
+                   "ExpressionStatement: first = second;");
+            collector.Validate("LocalReference: first", (state, operation) => state[LocalReferenceOperationSymbol(operation)].HasConstraint(TestConstraint.First).Should().BeTrue());
+            collector.Validate("LocalReference: second", (state, operation) => state[LocalReferenceOperationSymbol(operation)].HasConstraint(TestConstraint.Second).Should().BeTrue());
+
+            static ISymbol LocalReferenceOperationSymbol(IOperationWrapperSonar operation) =>
+                ((ILocalReferenceOperation)operation.Instance).Local;
         }
     }
 }
