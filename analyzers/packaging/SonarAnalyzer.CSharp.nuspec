@@ -1,9 +1,9 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
   <metadata>
-    <id>SonarAnalyzer.VisualBasic</id>
+    <id>SonarAnalyzer.CSharp</id>
     <version>8.34.0.0</version>
-    <title>SonarAnalyzer for Visual Basic</title>
+    <title>SonarAnalyzer for C#</title>
     <authors>SonarSource</authors>
     <owners>SonarSource</owners>
     <license type="expression">LGPL-3.0-only</license>
@@ -22,11 +22,12 @@
     </frameworkAssemblies>
   </metadata>
   <files>
-    <file src="..\SonarAnalyzer.VisualBasic\bin\Release\net46\SonarAnalyzer.dll" target="analyzers" />
-    <file src="..\SonarAnalyzer.VisualBasic\bin\Release\net46\SonarAnalyzer.VisualBasic.dll" target="analyzers" />
-    <file src="..\SonarAnalyzer.VisualBasic\bin\Release\net46\Google.Protobuf.dll" target="analyzers" />
-    <file src="tools-vbnet\*.ps1" target="tools\" />
+    <file src="..\src\SonarAnalyzer.CSharp\bin\Release\net46\SonarAnalyzer.CFG.dll" target="analyzers" />
+    <file src="..\src\SonarAnalyzer.CSharp\bin\Release\net46\SonarAnalyzer.dll" target="analyzers" />
+    <file src="..\src\SonarAnalyzer.CSharp\bin\Release\net46\SonarAnalyzer.CSharp.dll" target="analyzers" />
+    <file src="..\src\SonarAnalyzer.CSharp\bin\Release\net46\Google.Protobuf.dll" target="analyzers" />
+    <file src="tools-cs\*.ps1" target="tools\" />
     <file src="logos\sonarsource_64.png" target="images\" />
-    <file src="..\..\..\THIRD-PARTY-NOTICES.txt" target="license\" />
+    <file src="..\..\THIRD-PARTY-NOTICES.txt" target="license\" />
   </files>
 </package>

@@ -23,13 +23,13 @@
       <ExpectedMatchCount>1</ExpectedMatchCount>
     </AssemblyInformationalVersion>
 
-    <NugetAnalyzer Include="$(SolutionRoot)\src\packaging\SonarAnalyzer.*.nuspec">
+    <NugetAnalyzer Include="$(SolutionRoot)\packaging\SonarAnalyzer.*.nuspec">
       <Find>(?&lt;=&lt;version&gt;)([^&lt;]*)</Find>
       <ReplaceWith>$(NugetVersion)</ReplaceWith>
       <ExpectedMatchCount>1</ExpectedMatchCount>
     </NugetAnalyzer>
 
-    <NugetReleaseNotes Include="$(SolutionRoot)\src\packaging\SonarAnalyzer.*.nuspec">
+    <NugetReleaseNotes Include="$(SolutionRoot)\packaging\SonarAnalyzer.*.nuspec">
       <Find>(?&lt;=&lt;releaseNotes&gt;https:\/\/github.com\/SonarSource\/sonar-dotnet\/releases\/tag\/)([^&lt;]*)</Find>
       <ReplaceWith>$(NugetVersion)</ReplaceWith>
       <ExpectedMatchCount>1</ExpectedMatchCount>

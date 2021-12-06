@@ -3,7 +3,7 @@
           AfterTargets="ResolveCodeAnalysisRuleSet"
           BeforeTargets="CoreCompile">
     <PropertyGroup>
-      <BinariesFolder>$(MSBuildStartupDirectory)\..\binaries\</BinariesFolder>
+      <BinariesFolder>$(MSBuildStartupDirectory)\..\packaging\binaries</BinariesFolder>
       <SonarAnalyzerRegressionTestRunning Condition="Exists('$(BinariesFolder)\SonarAnalyzer.dll')">true</SonarAnalyzerRegressionTestRunning>
       <SonarAnalyzerRegressionTestRunning Condition="$(SonarAnalyzerRegressionTestRunning) == ''">false</SonarAnalyzerRegressionTestRunning>
       <SonarProjectOutputPath>$(MSBuildStartupDirectory)\output\$(PROJECT)\$(AssemblyName)</SonarProjectOutputPath>
