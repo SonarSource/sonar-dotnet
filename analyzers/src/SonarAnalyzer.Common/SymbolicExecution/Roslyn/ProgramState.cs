@@ -19,24 +19,31 @@
  */
 
 using System.Collections.Immutable;
+using Microsoft.CodeAnalysis;
 using StyleCop.Analyzers.Lightup;
 
 namespace SonarAnalyzer.SymbolicExecution.Roslyn
 {
     public sealed class ProgramState
     {
-        public static readonly ProgramState Empty = new ProgramState(ImmutableDictionary<IOperationWrapperSonar, SymbolicValue>.Empty);
+        public static readonly ProgramState Empty = new(ImmutableDictionary<IOperationWrapperSonar, SymbolicValue>.Empty, ImmutableDictionary<ISymbol, SymbolicValue>.Empty);
 
         private readonly ImmutableDictionary<IOperationWrapperSonar, SymbolicValue> operationValue;     // Current SymbolicValue result of a given operation
+        private readonly ImmutableDictionary<ISymbol, SymbolicValue> symbolValue;
 
         public SymbolicValue this[IOperationWrapperSonar operation] => operationValue.TryGetValue(operation, out var value) ? value : null;
+        public SymbolicValue this[ISymbol symbol] => symbolValue.TryGetValue(symbol, out var value) ? value : null;
 
-        private ProgramState(ImmutableDictionary<IOperationWrapperSonar, SymbolicValue> operationValue)
+        private ProgramState(ImmutableDictionary<IOperationWrapperSonar, SymbolicValue> operationValue, ImmutableDictionary<ISymbol, SymbolicValue> symbolValue)
         {
             this.operationValue = operationValue;
+            this.symbolValue = symbolValue;
         }
 
         public ProgramState SetOperationValue(IOperationWrapperSonar operation, SymbolicValue value) =>
-            new ProgramState(operationValue.SetItem(operation, value));
+            new(operationValue.SetItem(operation, value), symbolValue);
+
+        public ProgramState SetSymbolValue(ISymbol symbol, SymbolicValue value) =>
+            new(operationValue, symbolValue.SetItem(symbol, value));
     }
 }
