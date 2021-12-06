@@ -62,11 +62,12 @@ namespace Tests.Diagnostics
             }
         }
 
-        public void DoSomethingWithMonitor5()
+        public void DoSomethingWithMonitor5(string b)
         {
             Monitor.Enter(obj); // FN
             try
             {
+                Console.WriteLine(b.Length);
             }
             catch (Exception)
             {
@@ -99,7 +100,7 @@ namespace Tests.Diagnostics
 
         public void DoSomethingWithMonitor8(string b)
         {
-            Monitor.Enter(obj); // FN ?
+            Monitor.Enter(obj); // FN
             Console.WriteLine(b.Length);
             Monitor.Exit(obj);
         }
@@ -167,6 +168,41 @@ namespace Tests.Diagnostics
             {
                 Monitor.Exit(obj);
             }
+        }
+
+        public void DoSomethingWithMonitor15()
+        {
+            bool isAcquired = Monitor.TryEnter(obj, 42); // FN
+
+            if (isAcquired)
+            {
+            }
+            else
+            {
+                Monitor.Exit(obj);
+            }
+        }
+
+        public void DoSomethingWithMonitor16()
+        {
+            bool isAcquired = Monitor.TryEnter(obj, 42); // Compliant
+
+            if (isAcquired)
+            {
+                Monitor.Exit(obj);
+            }
+        }
+
+        public void DoSomethingWithMonitor17(bool b)
+        {
+            Monitor.Enter(obj); // FN
+
+            if (b)
+            {
+                throw new Exception();
+            }
+
+            Monitor.Exit(obj);
         }
     }
 }

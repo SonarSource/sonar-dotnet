@@ -29,7 +29,12 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         [TestCategory("Rule")]
-        public void LocksShouldBeReleased_CS() =>
-            Verifier.VerifyAnalyzer(@"TestCases\LocksShouldBeReleased.Monitor.cs", new LocksShouldBeReleased());
+        public void LocksShouldBeReleased_Monitor_CS() =>
+            Verifier.VerifyAnalyzer(@"TestCases\SymbolicExecution\Sonar\LocksShouldBeReleased.Monitor.cs", new LocksShouldBeReleased());
+
+        [TestMethod]
+        [TestCategory("Rule")]
+        public void LocksShouldBeReleased_SpinLock_CS() =>
+            Verifier.VerifyAnalyzer(@"TestCases\SymbolicExecution\Sonar\LocksShouldBeReleased.SpinLock.cs", new LocksShouldBeReleased());
     }
 }
