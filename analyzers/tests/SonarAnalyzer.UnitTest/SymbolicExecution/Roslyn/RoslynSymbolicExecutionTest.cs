@@ -91,7 +91,7 @@ namespace SonarAnalyzer.UnitTest.SymbolicExecution.Roslyn
         [TestMethod]
         public void PreProcess_Null_StopsExecution()
         {
-            var stopper = new PreProcessTestCheck((state, operation) => operation.Instance.Kind == OperationKind.Unary ? null : state);
+            var stopper = new PreProcessTestCheck(x => x.Operation.Instance.Kind == OperationKind.Unary ? null : x.State);
             var context = SETestContext.CreateCS("var a = true; var b = false; b = !b; a = (b);", stopper);
             context.Collector.ValidateOrder(
                 "LocalReference: a = true (Implicit)",
@@ -107,7 +107,7 @@ namespace SonarAnalyzer.UnitTest.SymbolicExecution.Roslyn
         [TestMethod]
         public void PostProcess_Null_StopsExecution()
         {
-            var stopper = new PostProcessTestCheck((state, operation) => operation.Instance.Kind == OperationKind.Unary ? null : state);
+            var stopper = new PostProcessTestCheck(x => x.Operation.Instance.Kind == OperationKind.Unary ? null : x.State);
             var context = SETestContext.CreateCS("var a = true; var b = false; b = !b; a = (b);", stopper);
             context.Collector.ValidateOrder(
                 "LocalReference: a = true (Implicit)",
@@ -125,39 +125,39 @@ namespace SonarAnalyzer.UnitTest.SymbolicExecution.Roslyn
         {
             var collector = SETestContext.CreateCS("var a = true;").Collector;
             collector.PostProcessed.Should().HaveCount(3);
-            foreach (var (state, operation) in collector.PostProcessed)
+            foreach (var context in collector.PostProcessed)
             {
-                state[operation].Should().NotBeNull();
+                context.State[context.Operation].Should().NotBeNull();
             }
         }
 
         [TestMethod]
         public void Execute_PersistConstraints()
         {
-            var setter = new PreProcessTestCheck((state, operation) =>
+            var setter = new PreProcessTestCheck(x =>
                 {
-                    if (operation.Instance.Kind == OperationKind.Literal)
+                    if (x.Operation.Instance.Kind == OperationKind.Literal)
                     {
-                        state[operation].SetConstraint(DummyConstraint.Dummy);
+                        x.State[x.Operation].SetConstraint(DummyConstraint.Dummy);
                     }
-                    return state;
+                    return x.State;
                 });
             var collector = SETestContext.CreateCS("var a = true;", setter).Collector;
             collector.ValidateOrder(    // Visualize operations
                 "LocalReference: a = true (Implicit)",
                 "Literal: true",
                 "SimpleAssignment: a = true (Implicit)");
-            collector.Validate("Literal: true", (state, operation) => state[operation].HasConstraint(DummyConstraint.Dummy).Should().BeTrue());
-            collector.Validate("SimpleAssignment: a = true (Implicit)", (state, operation) => state[operation].HasConstraint(DummyConstraint.Dummy).Should().BeFalse());
+            collector.Validate("Literal: true", x => x.State[x.Operation].HasConstraint(DummyConstraint.Dummy).Should().BeTrue());
+            collector.Validate("SimpleAssignment: a = true (Implicit)", x => x.State[x.Operation].HasConstraint(DummyConstraint.Dummy).Should().BeFalse());
         }
 
         [TestMethod]
         public void Execute_PersistSymbols()
         {
-            var setter = new PreProcessTestCheck((state, operation) =>
+            var setter = new PreProcessTestCheck(x =>
             {
                 // Set constraint to local symbol declarations. To assert them when they are used later.
-                if (operation.Instance is ILocalReferenceOperation local && operation.IsImplicit)
+                if (x.Operation.Instance is ILocalReferenceOperation local && x.Operation.IsImplicit)
                 {
                     var sv = new SymbolicValue(new SymbolicValueCounter()); // ToDo: Improve check design
                     sv.SetConstraint(local.Local.Name switch
@@ -166,11 +166,11 @@ namespace SonarAnalyzer.UnitTest.SymbolicExecution.Roslyn
                         "second" => TestConstraint.Second,
                         _ => throw new InvalidOperationException("Unexpected local variable name: " + local.Local.Name)
                     });
-                    return state.SetSymbolValue(local.Local, sv);
+                    return x.State.SetSymbolValue(local.Local, sv);
                 }
                 else
                 {
-                    return state;
+                    return x.State;
                 }
             });
             var collector = SETestContext.CreateCS("var first = true; var second = false; first = second;", setter).Collector;
@@ -185,8 +185,8 @@ namespace SonarAnalyzer.UnitTest.SymbolicExecution.Roslyn
                    "LocalReference: second",
                    "SimpleAssignment: first = second",
                    "ExpressionStatement: first = second;");
-            collector.Validate("LocalReference: first", (state, operation) => state[LocalReferenceOperationSymbol(operation)].HasConstraint(TestConstraint.First).Should().BeTrue());
-            collector.Validate("LocalReference: second", (state, operation) => state[LocalReferenceOperationSymbol(operation)].HasConstraint(TestConstraint.Second).Should().BeTrue());
+            collector.Validate("LocalReference: first", x => x.State[LocalReferenceOperationSymbol(x.Operation)].HasConstraint(TestConstraint.First).Should().BeTrue());
+            collector.Validate("LocalReference: second", x => x.State[LocalReferenceOperationSymbol(x.Operation)].HasConstraint(TestConstraint.Second).Should().BeTrue());
 
             static ISymbol LocalReferenceOperationSymbol(IOperationWrapperSonar operation) =>
                 ((ILocalReferenceOperation)operation.Instance).Local;

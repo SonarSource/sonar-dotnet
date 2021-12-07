@@ -24,30 +24,26 @@ using System.Linq;
 using FluentAssertions;
 using SonarAnalyzer.SymbolicExecution.Roslyn;
 using SonarAnalyzer.UnitTest.Helpers;
-using StyleCop.Analyzers.Lightup;
 
 namespace SonarAnalyzer.UnitTest.TestFramework.SymbolicExecution
 {
     internal class CollectorTestCheck : SymbolicCheck
     {
-        public readonly List<(ProgramState State, IOperationWrapperSonar Operation)> PostProcessed = new();
+        public readonly List<CheckContext> PostProcessed = new();
 
-        public override ProgramState PostProcess(ProgramState state, IOperationWrapperSonar operation)
+        public override ProgramState PostProcess(CheckContext context)
         {
-            PostProcessed.Add((state, operation));
-            return state;
+            PostProcessed.Add(context);
+            return context.State;
         }
 
         public void ValidateOrder(params string[] expected) =>
             PostProcessed.Select(x => TestHelper.Serialize(x.Operation)).Should().OnlyContainInOrder(expected);
 
-        public void Validate(string operation, Action<ProgramState, IOperationWrapperSonar> action)
-        {
-            var data = PostProcessedData(operation);
-            action(data.State, data.Operation);
-        }
+        public void Validate(string operation, Action<CheckContext> action) =>
+            action(PostProcessedContext(operation));
 
-        public (ProgramState State, IOperationWrapperSonar Operation) PostProcessedData(string operation) =>
+        public CheckContext PostProcessedContext(string operation) =>
             PostProcessed.Single(x => TestHelper.Serialize(x.Operation) == operation);
     }
 }

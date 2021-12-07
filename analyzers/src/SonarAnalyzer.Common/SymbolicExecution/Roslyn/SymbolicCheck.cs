@@ -18,15 +18,13 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using StyleCop.Analyzers.Lightup;
-
 namespace SonarAnalyzer.SymbolicExecution.Roslyn
 {
     public class SymbolicCheck
     {
         protected SymbolicCheck() { } // Avoid abstract class, fixes S1694
 
-        public virtual ProgramState PreProcess(ProgramState state, IOperationWrapperSonar operation) => state;
-        public virtual ProgramState PostProcess(ProgramState state, IOperationWrapperSonar operation) => state;
+        public virtual ProgramState PreProcess(CheckContext context) => context.State;
+        public virtual ProgramState PostProcess(CheckContext context) => context.State;
     }
 }
