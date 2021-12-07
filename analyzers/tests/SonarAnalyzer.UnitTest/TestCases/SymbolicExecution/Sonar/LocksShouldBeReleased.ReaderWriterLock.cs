@@ -48,10 +48,10 @@ namespace Tests.Diagnostics
             try
             {
                 readerWriterLock.AcquireReaderLock(42);
-                readerWriterLock.UpgradeToWriterLock(42); // FN
+                var cookie = readerWriterLock.UpgradeToWriterLock(42);
                 if (b)
                 {
-                    readerWriterLock.ReleaseWriterLock();
+                    readerWriterLock.DowngradeFromWriterLock(ref cookie);
                 }
             }
             catch (Exception)
@@ -70,10 +70,10 @@ namespace Tests.Diagnostics
             try
             {
                 readerWriterLock.AcquireReaderLock(new TimeSpan(42));
-                readerWriterLock.UpgradeToWriterLock(new TimeSpan(42)); // FN
+                var cookie = readerWriterLock.UpgradeToWriterLock(new TimeSpan(42));
                 if (b)
                 {
-                    readerWriterLock.ReleaseWriterLock();
+                    readerWriterLock.DowngradeFromWriterLock(ref cookie);
                 }
             }
             catch (Exception)
@@ -87,13 +87,22 @@ namespace Tests.Diagnostics
             }
         }
 
-        public void DoSomethingWithReaderWriterLock7(bool b)
+        public void DoSomethingWithReaderWriterLock7(string b)
         {
             try
             {
-                readerWriterLock.AcquireReaderLock(new TimeSpan(42));
-                var cookie = readerWriterLock.UpgradeToWriterLock(new TimeSpan(42)); // FN
-                if (b)
+                readerWriterLock.AcquireReaderLock(42);
+                var cookie = readerWriterLock.UpgradeToWriterLock(42);
+                try
+                {
+                    Console.WriteLine(b.Length);
+                }
+                catch (Exception)
+                {
+
+                    throw;
+                }
+                finally
                 {
                     readerWriterLock.DowngradeFromWriterLock(ref cookie);
                 }

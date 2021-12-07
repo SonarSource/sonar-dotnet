@@ -106,7 +106,7 @@ namespace Tests.Diagnostics
             try
             {
                 readerWriterLockSlim.EnterUpgradeableReadLock();
-                readerWriterLockSlim.EnterWriteLock(); // FN
+                readerWriterLockSlim.EnterWriteLock();
                 if (b)
                 {
                     readerWriterLockSlim.ExitWriteLock();
@@ -119,7 +119,7 @@ namespace Tests.Diagnostics
             }
             finally
             {
-                readerWriterLockSlim.ExitReadLock();
+                readerWriterLockSlim.ExitUpgradeableReadLock();
             }
         }
 
@@ -150,7 +150,7 @@ namespace Tests.Diagnostics
             }
             finally
             {
-                readerWriterLockSlim.ExitReadLock();
+                readerWriterLockSlim.ExitUpgradeableReadLock();
             }
         }
     }
