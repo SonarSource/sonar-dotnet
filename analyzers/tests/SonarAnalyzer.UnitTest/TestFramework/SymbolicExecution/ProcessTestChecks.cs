@@ -24,7 +24,7 @@ using ProcessFunc = System.Func<SonarAnalyzer.SymbolicExecution.Roslyn.ProgramSt
 
 namespace SonarAnalyzer.UnitTest.TestFramework.SymbolicExecution
 {
-    internal class PreProcessTestCheck : SymbolicExecutionCheck
+    internal class PreProcessTestCheck : SymbolicCheck
     {
         private readonly ProcessFunc preProcess;
 
@@ -34,7 +34,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework.SymbolicExecution
         public override ProgramState PreProcess(ProgramState state, IOperationWrapperSonar operation) => preProcess(state, operation);
     }
 
-    internal class PostProcessTestCheck : SymbolicExecutionCheck
+    internal class PostProcessTestCheck : SymbolicCheck
     {
         private readonly ProcessFunc postProcess;
 

@@ -28,7 +28,7 @@ using StyleCop.Analyzers.Lightup;
 
 namespace SonarAnalyzer.UnitTest.TestFramework.SymbolicExecution
 {
-    internal class CollectorTestCheck : SymbolicExecutionCheck
+    internal class CollectorTestCheck : SymbolicCheck
     {
         public readonly List<(ProgramState State, IOperationWrapperSonar Operation)> PostProcessed = new();
 

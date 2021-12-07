@@ -22,9 +22,9 @@ using StyleCop.Analyzers.Lightup;
 
 namespace SonarAnalyzer.SymbolicExecution.Roslyn
 {
-    public class SymbolicExecutionCheck
+    public class SymbolicCheck
     {
-        protected SymbolicExecutionCheck() { } // Avoid abstract class, fixes S1694
+        protected SymbolicCheck() { } // Avoid abstract class, fixes S1694
 
         public virtual ProgramState PreProcess(ProgramState state, IOperationWrapperSonar operation) => state;
         public virtual ProgramState PostProcess(ProgramState state, IOperationWrapperSonar operation) => state;

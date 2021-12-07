@@ -28,11 +28,11 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
     internal class RoslynSymbolicExecution
     {
         private readonly ControlFlowGraph cfg;
-        private readonly SymbolicExecutionCheck[] checks;
+        private readonly SymbolicCheck[] checks;
         private readonly Queue<ExplodedNode> queue = new Queue<ExplodedNode>();
         private readonly SymbolicValueCounter symbolicValueCounter = new SymbolicValueCounter();
 
-        public RoslynSymbolicExecution(ControlFlowGraph cfg, SymbolicExecutionCheck[] checks)
+        public RoslynSymbolicExecution(ControlFlowGraph cfg, SymbolicCheck[] checks)
         {
             this.cfg = cfg ?? throw new ArgumentNullException(nameof(cfg));
             this.checks = checks ?? throw new ArgumentNullException(nameof(checks));
@@ -86,7 +86,7 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
             yield return new ExplodedNode(node, state);
         }
 
-        private ProgramState InvokeChecks(ProgramState state, Func<SymbolicExecutionCheck, ProgramState, ProgramState> invoke)
+        private ProgramState InvokeChecks(ProgramState state, Func<SymbolicCheck, ProgramState, ProgramState> invoke)
         {
             foreach (var check in checks)
             {
