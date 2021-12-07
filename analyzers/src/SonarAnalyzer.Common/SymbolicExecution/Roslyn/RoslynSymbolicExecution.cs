@@ -100,6 +100,6 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
         }
 
         private SymbolicValue CreateSymbolicValue() =>
-            new SymbolicValue(symbolicValueCounter);
+            new(symbolicValueCounter);
     }
 }
