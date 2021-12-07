@@ -63,3 +63,15 @@ packages/
 *.restext
 /analyzers/src/SonarAnalyzer.CSharp/CBDE/windows
 .generated/
+
+# Analyzer binaries
+analyzers/packaging/binaries/
+
+# Actual SARIF files
+analyzers/its/actual/
+
+# MSBuild & other output
+analyzers/its/output/
+
+# Temporary diff folder
+analyzers/its/diff/

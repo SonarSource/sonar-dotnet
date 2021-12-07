@@ -247,8 +247,7 @@
                   <target>
                     <!-- ITs requires the SonarAnalyzer-VERSION.zip to be present so don't remove these lines -->
                     <copy todir="${sonarAnalyzer.workDirectory}/SonarAnalyzer.VisualBasic">
-                      <fileset
-                        dir="${project.build.directory}/../../analyzers/src/SonarAnalyzer.Vsix/bin/${analyzer.configuration}/">
+                      <fileset dir="${project.build.directory}/../../analyzers/packaging/binaries/">
                         <include name="SonarAnalyzer.dll"/>
                         <include name="SonarAnalyzer.VisualBasic.dll"/>
                         <include name="Google.Protobuf.dll"/>

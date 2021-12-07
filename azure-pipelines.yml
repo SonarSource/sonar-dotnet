@@ -90,7 +90,7 @@ stages:
         displayName: "Build NuGet packages"
         inputs:
           command: pack
-          packagesToPack: 'analyzers/src/**/*.nuspec'
+          packagesToPack: 'analyzers/src/**/*.nuspec;analyzers/packaging/*.nuspec'
           configuration: '$(BuildConfiguration)'
           packDestination: '$(Build.ArtifactStagingDirectory)/packages'
           verbosityPack: 'Detailed'
@@ -119,7 +119,7 @@ stages:
       - task: PublishPipelineArtifact@1
         displayName: 'Publish analyzer binaries as pipeline artifact'
         inputs:
-          path: analyzers/its/binaries/
+          path: analyzers/packaging/binaries/
           artifact: Binaries
 
       - task: PublishPipelineArtifact@1
@@ -325,7 +325,7 @@ stages:
         displayName: 'Download binaries to test'
         inputs:
           artifact: Binaries
-          targetPath: 'analyzers/its/binaries/'
+          targetPath: 'analyzers/packaging/binaries/'
 
       - task: NuGetToolInstaller@1
         displayName: "Install NuGet"
@@ -347,7 +347,7 @@ stages:
         displayName: 'Download .Net binaries for Maven build'
         inputs:
           artifact: Binaries
-          targetPath: 'analyzers/src/SonarAnalyzer.Vsix/bin/$(buildConfiguration)/'
+          targetPath: 'analyzers/packaging/binaries/'
 
       - task: DownloadPipelineArtifact@2
         displayName: 'Download rule descriptor binaries'
@@ -413,7 +413,7 @@ stages:
         displayName: 'Download .Net binaries for Maven build'
         inputs:
           artifact: Binaries
-          targetPath: 'analyzers/src/SonarAnalyzer.Vsix/bin/$(buildConfiguration)/'
+          targetPath: 'analyzers/packaging/binaries/'
 
       - task: DownloadPipelineArtifact@2
         displayName: 'Download rule descriptor binaries'
@@ -467,7 +467,7 @@ stages:
         displayName: 'Download .Net binaries for Maven build'
         inputs:
           artifact: Binaries
-          targetPath: 'analyzers/src/SonarAnalyzer.Vsix/bin/$(buildConfiguration)/'
+          targetPath: 'analyzers/packaging/binaries/'
 
       - task: DownloadPipelineArtifact@2
         displayName: 'Download rule descriptor binaries'

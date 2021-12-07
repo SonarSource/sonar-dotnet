@@ -3,7 +3,8 @@
           AfterTargets="ResolveCodeAnalysisRuleSet"
           BeforeTargets="CoreCompile">
     <PropertyGroup>
-      <SonarAnalyzerRegressionTestRunning Condition="Exists('$(MSBuildStartupDirectory)\binaries\SonarAnalyzer.dll')">true</SonarAnalyzerRegressionTestRunning>
+      <BinariesFolder>$(MSBuildStartupDirectory)\..\packaging\binaries</BinariesFolder>
+      <SonarAnalyzerRegressionTestRunning Condition="Exists('$(BinariesFolder)\SonarAnalyzer.dll')">true</SonarAnalyzerRegressionTestRunning>
       <SonarAnalyzerRegressionTestRunning Condition="$(SonarAnalyzerRegressionTestRunning) == ''">false</SonarAnalyzerRegressionTestRunning>
       <SonarProjectOutputPath>$(MSBuildStartupDirectory)\output\$(PROJECT)\$(AssemblyName)</SonarProjectOutputPath>
       <SonarProjectConfigFilePath>$(SonarProjectOutputPath)\SonarProjectConfig.xml</SonarProjectConfigFilePath>
@@ -36,14 +37,14 @@
             ContinueOnError="WarnAndContinue"
             Overwrite="true" />
 
-    <Error Text="Could not find '$(MSBuildStartupDirectory)\binaries\SonarAnalyzer.dll'" Condition="!$(SonarAnalyzerRegressionTestRunning)" />
+    <Error Text="Could not find '$(BinariesFolder)\SonarAnalyzer.dll'" Condition="!$(SonarAnalyzerRegressionTestRunning)" />
 
     <ItemGroup Condition="$(SonarAnalyzerRegressionTestRunning)">
       <!-- Remove all previously added analyzers -->
       <Analyzer Remove="@(Analyzer)" />
       <!-- Add the SonarAnalyzer analyzer DLLs -->
-      <Analyzer Include="$(MSBuildStartupDirectory)\binaries\SonarAnalyzer*.dll" />
-	    <Analyzer Include="$(MSBuildStartupDirectory)\binaries\Google.Protobuf.dll" />
+      <Analyzer Include="$(BinariesFolder)\SonarAnalyzer*.dll" />
+      <Analyzer Include="$(BinariesFolder)\Google.Protobuf.dll" />
       <AdditionalFiles Include="$(MSBuildStartupDirectory)\output\$(PROJECT)\SonarLint.xml" />
       <AdditionalFiles Include="$(SonarProjectConfigFilePath)" />
     </ItemGroup>

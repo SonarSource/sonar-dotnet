@@ -457,8 +457,8 @@ try {
     $msBuildImportBeforeCurrent = Get-MSBuildImportBeforePath "Current"
 
     Push-Location $PSScriptRoot
-    Test-FileExists ".\binaries\SonarAnalyzer.dll"
-    Test-FileExists ".\binaries\SonarAnalyzer.CFG.dll"
+    Test-FileExists "..\packaging\binaries\SonarAnalyzer.dll"
+    Test-FileExists "..\packaging\binaries\SonarAnalyzer.CFG.dll"
 
     Write-Header "Initializing the environment"
     Initialize-ActualFolder

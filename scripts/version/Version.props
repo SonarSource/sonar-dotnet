@@ -10,6 +10,5 @@
     <AssemblyFileVersion>$(FullVersion)</AssemblyFileVersion>
     <NugetVersion>$(FullVersion)</NugetVersion>
     <AssemblyInformationalVersion>Version:$(FullVersion) Branch:$(BranchName) Sha1:$(Sha1)</AssemblyInformationalVersion>
-    <VsixVersion>$(FullVersion)</VsixVersion>
   </PropertyGroup>
 </Project>

@@ -245,7 +245,7 @@
                   <target>
                     <!-- ITs requires the SonarAnalyzer-VERSION.zip to be present so don't remove these lines -->
                     <copy todir="${sonarAnalyzer.workDirectory}/SonarAnalyzer.CSharp">
-                      <fileset dir="${project.build.directory}/../../analyzers/src/SonarAnalyzer.Vsix/bin/${analyzer.configuration}/">
+                      <fileset dir="${project.build.directory}/../../analyzers/packaging/binaries/">
                         <include name="SonarAnalyzer.dll"/>
                         <include name="SonarAnalyzer.CFG.dll"/>
                         <include name="SonarAnalyzer.CSharp.dll"/>
