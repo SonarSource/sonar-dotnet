@@ -58,5 +58,15 @@ namespace SonarAnalyzer.UnitTest.TestFramework.SymbolicExecution
 
         public SymbolicContext PostProcessedContext(string operation) =>
             PostProcessed.Single(x => TestHelper.Serialize(x.Operation) == operation);
+
+        public void ValidateTag(string tag, Action<SymbolicValue> action)
+        {
+            var context = tags.Single(x => x.Name == tag).Context;
+            var invocation = (IInvocationOperation)context.Operation.Instance;
+            invocation.Arguments.Should().HaveCount(2, "Asserted argument is expected in Tag(..) invocation");
+            var symbol = ((ILocalReferenceOperation)((IConversionOperation)invocation.Arguments[1].Value).Operand).Local;
+            var value = context.State[symbol];
+            action(value);
+        }
     }
 }

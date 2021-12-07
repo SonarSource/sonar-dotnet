@@ -94,5 +94,29 @@ Tag(""End"")";
                 "Else",
                 "End");
         }
+
+        [TestMethod]
+        public void Branching_PersistSymbols_BetweenBlocks()
+        {
+            const string code = @"
+var first = true;
+var second = false;
+var dummy = true;
+if (boolParameter)
+{
+    Tag(""IfFirst"", first);
+    Tag(""IfSecond"", second);
+}
+else
+{
+    Tag(""ElseFirst"", first);
+    Tag(""ElseSecond"", second);
+}";
+            var collector = SETestContext.CreateCS(code, new SetTestConstraintCheck()).Collector;
+            collector.ValidateTag("IfFirst", x => x.HasConstraint(TestConstraint.First).Should().BeTrue());
+            collector.ValidateTag("IfSecond", x => x.HasConstraint(TestConstraint.Second).Should().BeTrue());
+            collector.ValidateTag("ElseFirst", x => x.HasConstraint(TestConstraint.First).Should().BeTrue());
+            collector.ValidateTag("ElseSecond", x => x.HasConstraint(TestConstraint.Second).Should().BeTrue());
+        }
     }
 }
