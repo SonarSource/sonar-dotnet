@@ -99,26 +99,6 @@ If you run the project `ReviewDiffs` in debug mode, it will print in the output 
 
 *PS*: This program outputs message in a way that is compatible with the [VsColorOutput](https://marketplace.visualstudio.com/items?itemName=MikeWard-AnnArbor.VSColorOutput) extension, so that errors are colored in red, and differences are colored like warnings.
 
-### Manual Tests
-
-From Visual Studio, make sure `SonarAnalyzer.Vsix.csproj` is selected as startup project. And then do the following:
-
-1. Make sure SonarLint for Visual Studio is uninstalled
-1. Hit `F5` to launch the experimental instance of Visual Studio
-1. Open one of the following solutions from the experimental instance:
-    - [Akka.NET](../analyzers/its/sources/akka.net/src/Akka.sln)
-    - [Nancy](../analyzers/its/sources/Nancy/src/Nancy.sln)
-    - [Ember-MM](../analyzers/its/sources/Ember-MM/Ember%20Media%20Manager.sln)
-1. Turn on your new rule in [Validation Ruleset](../analyzers/its/ValidationRuleset.ruleset), review the results, improve, and setup the regression test once you are satisfied.
-    - Note: the solutions have been pre-configured to use this ruleset on all their projects.
-    - Note: for rules that need project-specific configuration, you need to manually add the link to the project-specific SonarLint.xml file
-      e.g. for Akka.net `..\akka.net\src\core\Akka\Akka.csproj` add
-```
-  <ItemGroup>
-    <AdditionalFiles Include="..\..\..\SonarLint.xml" />
-  </ItemGroup>
-```
-
 ## Contributing
 
 Please see the [How to contribute](../README.md#how-to-contribute) section for details on
