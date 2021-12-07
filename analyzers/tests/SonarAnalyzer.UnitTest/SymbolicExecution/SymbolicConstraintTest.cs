@@ -20,6 +20,7 @@
 
 using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using SonarAnalyzer.SymbolicExecution.Constraints;
 using SonarAnalyzer.SymbolicExecution.Sonar.Constraints;
 
 namespace SonarAnalyzer.UnitTest.SymbolicExecution.Sonar.Constraints
@@ -60,6 +61,20 @@ namespace SonarAnalyzer.UnitTest.SymbolicExecution.Sonar.Constraints
         {
             DisposableConstraint.Disposed.ToString().Should().Be("Disposed");
             DisposableConstraint.NotDisposed.ToString().Should().Be("NotDisposed");
+        }
+
+        [TestMethod]
+        public void LockConstraint_ToString()
+        {
+            LockConstraint.Held.ToString().Should().Be("Held");
+            LockConstraint.Released.ToString().Should().Be("Released");
+        }
+
+        [TestMethod]
+        public void LockConstraint_Opposite()
+        {
+            LockConstraint.Held.Opposite.Should().Be(LockConstraint.Released);
+            LockConstraint.Released.Opposite.Should().Be(LockConstraint.Held);
         }
 
         [TestMethod]

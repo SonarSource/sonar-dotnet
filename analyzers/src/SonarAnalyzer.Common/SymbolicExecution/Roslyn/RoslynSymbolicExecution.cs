@@ -68,7 +68,7 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
 
         private IEnumerable<ExplodedNode> ProcessOperation(ExplodedNode node)
         {
-            var state = node.State;
+            var state = node.State.SetOperationValue(node.Operation, CreateSymbolicValue());
             state = InvokeChecks(state, (check, ps) => check.PreProcess(ps, node.Operation));
             if (state == null)
             {
@@ -76,7 +76,6 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
             }
 
             // ToDo: Something is still missing around here - process well known instructions
-            state = state.SetOperationValue(node.Operation, CreateSymbolicValue());
 
             state = InvokeChecks(state, (check, ps) => check.PostProcess(ps, node.Operation));
             if (state == null)

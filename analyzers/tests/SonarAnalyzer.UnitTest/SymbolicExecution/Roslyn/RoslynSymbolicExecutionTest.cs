@@ -20,9 +20,9 @@
 
 using System;
 using FluentAssertions;
+using Microsoft.CodeAnalysis;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
-using SonarAnalyzer.Common;
 using SonarAnalyzer.SymbolicExecution.Roslyn;
 using SonarAnalyzer.UnitTest.TestFramework.SymbolicExecution;
 
@@ -89,7 +89,7 @@ namespace SonarAnalyzer.UnitTest.SymbolicExecution.Roslyn
         [TestMethod]
         public void PreProcess_Null_StopsExecution()
         {
-            var stopper = new PreProcessTestCheck((state, operation) => operation.Instance.Kind == Microsoft.CodeAnalysis.OperationKind.Unary ? null : state);
+            var stopper = new PreProcessTestCheck((state, operation) => operation.Instance.Kind == OperationKind.Unary ? null : state);
             var context = SETestContext.CreateCS("var a = true; var b = false; b = !b; a = (b);", stopper);
             context.Collector.ValidateOrder(
                 "LocalReference: a = true (Implicit)",
@@ -105,7 +105,7 @@ namespace SonarAnalyzer.UnitTest.SymbolicExecution.Roslyn
         [TestMethod]
         public void PostProcess_Null_StopsExecution()
         {
-            var stopper = new PostProcessTestCheck((state, operation) => operation.Instance.Kind == Microsoft.CodeAnalysis.OperationKind.Unary ? null : state);
+            var stopper = new PostProcessTestCheck((state, operation) => operation.Instance.Kind == OperationKind.Unary ? null : state);
             var context = SETestContext.CreateCS("var a = true; var b = false; b = !b; a = (b);", stopper);
             context.Collector.ValidateOrder(
                 "LocalReference: a = true (Implicit)",
@@ -127,6 +127,26 @@ namespace SonarAnalyzer.UnitTest.SymbolicExecution.Roslyn
             {
                 state[operation].Should().NotBeNull();
             }
+        }
+
+        [TestMethod]
+        public void Execute_PersistConstraints()
+        {
+            var setter = new PreProcessTestCheck((state, operation) =>
+                {
+                    if (operation.Instance.Kind == OperationKind.Literal)
+                    {
+                        state[operation].SetConstraint(DummyConstraint.Dummy);
+                    }
+                    return state;
+                });
+            var collector = SETestContext.CreateCS("var a = true;", setter).Collector;
+            collector.ValidateOrder(    // Visualize operations
+                "LocalReference: a = true (Implicit)",
+                "Literal: true",
+                "SimpleAssignment: a = true (Implicit)");
+            collector.Validate("Literal: true", (state, operation) => state[operation].HasConstraint(DummyConstraint.Dummy).Should().BeTrue());
+            collector.Validate("SimpleAssignment: a = true (Implicit)", (state, operation) => state[operation].HasConstraint(DummyConstraint.Dummy).Should().BeFalse());
         }
     }
 }
