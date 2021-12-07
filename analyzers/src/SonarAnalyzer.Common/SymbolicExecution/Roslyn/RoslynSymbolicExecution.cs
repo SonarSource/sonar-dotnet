@@ -22,7 +22,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using SonarAnalyzer.CFG.Roslyn;
-using StyleCop.Analyzers.Lightup;
 
 namespace SonarAnalyzer.SymbolicExecution.Roslyn
 {
@@ -70,8 +69,7 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
         private IEnumerable<ExplodedNode> ProcessOperation(ExplodedNode node)
         {
             var context = new SymbolicContext(symbolicValueCounter, node.Operation, node.State.SetOperationValue(node.Operation, CreateSymbolicValue()));
-            // FIXME: simplify
-            context = InvokeChecks(context, (check, context) => check.PreProcess(context));
+            context = InvokeChecks(context, x => x.PreProcess);
             if (context == null)
             {
                 yield break;
@@ -79,7 +77,7 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
 
             // ToDo: Something is still missing around here - process well known instructions
 
-            context = InvokeChecks(context, (check, context) => check.PostProcess(context));
+            context = InvokeChecks(context, x => x.PostProcess);
             if (context == null)
             {
                 yield break;
@@ -88,11 +86,12 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
             yield return new ExplodedNode(node, context.State);
         }
 
-        private SymbolicContext InvokeChecks(SymbolicContext context, Func<SymbolicCheck, SymbolicContext, ProgramState> invoke)
+        private SymbolicContext InvokeChecks(SymbolicContext context, Func<SymbolicCheck, Func<SymbolicContext, ProgramState>> checkDelegate)
         {
             foreach (var check in checks)
             {
-                var newState = invoke(check, context);
+                var checkMethod = checkDelegate(check);
+                var newState = checkMethod(context);
                 if (newState == null)
                 {
                     return null;
