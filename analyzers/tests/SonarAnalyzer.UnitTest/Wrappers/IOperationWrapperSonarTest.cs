@@ -96,9 +96,10 @@ public class Sample
         var value = 42;
     }
 }";
-            (var tree, semanticModel) = TestHelper.CompileCS(code);
+            var (tree, model) = TestHelper.CompileCS(code);
             var declaration = tree.GetRoot().DescendantNodes().OfType<EqualsValueClauseSyntax>().Single();
-            return new IOperationWrapperSonar(semanticModel.GetOperation(declaration));
+            semanticModel = model;
+            return new IOperationWrapperSonar(model.GetOperation(declaration));
         }
     }
 }

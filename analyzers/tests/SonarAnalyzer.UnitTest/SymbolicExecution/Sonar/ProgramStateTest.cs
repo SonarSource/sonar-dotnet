@@ -141,8 +141,8 @@ namespace SonarAnalyzer.UnitTest.SymbolicExecution.Sonar
         private static ISymbol GetSymbol()
         {
             var testInput = "var a = true; var b = false; b = !b; a = (b);";
-            var method = SonarControlFlowGraphTest.CompileWithMethodBody(string.Format(SonarControlFlowGraphTest.TestInput, testInput), "Bar", out var semanticModel);
-            return semanticModel.GetDeclaredSymbol(method);
+            var (method, model) = SonarControlFlowGraphTest.CompileWithMethodBody(string.Format(SonarControlFlowGraphTest.TestInput, testInput), "Bar");
+            return model.GetDeclaredSymbol(method);
         }
     }
 }

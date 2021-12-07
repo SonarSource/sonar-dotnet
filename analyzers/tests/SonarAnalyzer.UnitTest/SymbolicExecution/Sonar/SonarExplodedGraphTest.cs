@@ -1530,22 +1530,22 @@ namespace Namespace
             public int NumberOfProcessedInstructions;
 
             public ExplodedGraphContext(string methodBody)
-                : this(SonarControlFlowGraphTest.CompileWithMethodBody(string.Format(TestInput, methodBody), "Main", out var semanticModel), semanticModel)
+                : this(SonarControlFlowGraphTest.CompileWithMethodBody(string.Format(TestInput, methodBody), "Main"))
             { }
 
             public ExplodedGraphContext((SyntaxTree tree, SemanticModel semanticModel) compilation)
-                : this(compilation.tree.GetRoot().DescendantNodes().OfType<MethodDeclarationSyntax>().Single(m => m.Identifier.ValueText == "Main"), compilation.semanticModel)
+                : this((compilation.tree.GetRoot().DescendantNodes().OfType<MethodDeclarationSyntax>().Single(m => m.Identifier.ValueText == "Main"), compilation.semanticModel))
             { }
 
-            private ExplodedGraphContext(MethodDeclarationSyntax mainMethod, SemanticModel semanticModel)
+            private ExplodedGraphContext((MethodDeclarationSyntax MainMethod, SemanticModel Model) tuple)
             {
-                MainMethod = mainMethod;
-                SemanticModel = semanticModel;
-                MainMethodSymbol = semanticModel.GetDeclaredSymbol(MainMethod);
+                MainMethod = tuple.MainMethod;
+                SemanticModel = tuple.Model;
+                MainMethodSymbol = tuple.Model.GetDeclaredSymbol(MainMethod);
                 var methodBody = (CSharpSyntaxNode)MainMethod.Body ?? MainMethod.ExpressionBody;
-                ControlFlowGraph = CSharpControlFlowGraph.Create(methodBody, semanticModel);
-                LiveVariableAnalysis = new SonarCSharpLiveVariableAnalysis(ControlFlowGraph, MainMethodSymbol, semanticModel);
-                ExplodedGraph = new SonarExplodedGraph(ControlFlowGraph, MainMethodSymbol, semanticModel, LiveVariableAnalysis);
+                ControlFlowGraph = CSharpControlFlowGraph.Create(methodBody, tuple.Model);
+                LiveVariableAnalysis = new SonarCSharpLiveVariableAnalysis(ControlFlowGraph, MainMethodSymbol, tuple.Model);
+                ExplodedGraph = new SonarExplodedGraph(ControlFlowGraph, MainMethodSymbol, tuple.Model, LiveVariableAnalysis);
                 ExplodedGraph.InstructionProcessed += (sender, args) => { NumberOfProcessedInstructions++; };
                 ExplodedGraph.ExplorationEnded += (sender, args) => { ExplorationEnded = true; };
                 ExplodedGraph.MaxStepCountReached += (sender, args) => { MaxStepCountReached = true; };

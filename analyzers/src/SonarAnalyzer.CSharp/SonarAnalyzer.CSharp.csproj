@@ -1,11 +1,11 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <LangVersion>9.0</LangVersion>
     <AssemblyName>SonarAnalyzer.CSharp</AssemblyName>
     <RootNamespace>SonarAnalyzer</RootNamespace>
     <TargetFrameworks>net46;netstandard2.0</TargetFrameworks>
     <ProjectGuid>{ca8eec07-8775-42e3-91eb-e51f4db72a48}</ProjectGuid>
+    <DefineConstants>TRACE;CS</DefineConstants>
   </PropertyGroup>
 
   <!-- Warning: when adding a package reference, we must make sure this package is available on oldest supported .NET version (currently net46) or packaged with the analyzer.
@@ -42,13 +42,6 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
-
-  <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
-    <DefineConstants>TRACE;CS</DefineConstants>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
-    <DefineConstants>TRACE;CS</DefineConstants>
-  </PropertyGroup>
 
   <Import Project="..\SonarAnalyzer.Shared\SonarAnalyzer.Shared.projitems" Label="Shared" />
 
