@@ -18,6 +18,8 @@ variables:
   # To make sure we don`t use MsBuild 17.
   - name: MsBuildPath
     value: 'C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\MSBuild\Current\Bin\msbuild.exe'
+  - name: isReleaseBranch
+    value: ${{ or(eq(variables['Build.SourceBranch'], 'refs/heads/master'), startsWith(variables['Build.SourceBranch'], 'refs/heads/branch-')) }}
 
 resources:
   repositories:
@@ -83,7 +85,7 @@ stages:
           solution: '$(solution)'
           platform: '$(buildPlatform)'
           configuration: '$(buildConfiguration)'
-          msbuildArgs: '/p:DeployExtension=false /p:SignAssembly=true /p:AssemblyOriginatorKeyFile="$(snk.secureFilePath)" /p:Sha1=$(Build.SourceVersion) /p:BuildNumber=$(Build.BuildId) /p:WarningLevel=0'
+          msbuildArgs: '/p:DeployExtension=false /p:SignAssembly=$(isReleaseBranch) /p:AssemblyOriginatorKeyFile="$(snk.secureFilePath)" /p:Sha1=$(Build.SourceVersion) /p:BuildNumber=$(Build.BuildId) /p:WarningLevel=0'
           vsVersion: '16.0'
 
       - task: NuGetCommand@2
@@ -98,6 +100,7 @@ stages:
 
       - task: NuGetCommand@2
         displayName: "Sign NuGet packages"
+        condition: eq(variables.isReleaseBranch, 'True')
         inputs:
           command: 'custom'
           arguments: 'sign $(Build.ArtifactStagingDirectory)\packages\*.nupkg -CertificatePath $(pfx.secureFilePath) -CertificatePassword $(pfxPassword2021-2023) -Timestamper http://sha256timestamp.ws.symantec.com/sha256/timestamp'
@@ -311,7 +314,7 @@ stages:
 
       - powershell: .\scripts\whitesource\WhiteSource-Scan.ps1
         displayName: "WhiteSource scan"
-        condition: or(eq(variables['Build.SourceBranch'], 'refs/heads/master'), startsWith(variables['Build.SourceBranch'], 'refs/heads/branch-'))
+        condition: eq(variables.isReleaseBranch, 'True')
         env:
           WS_PRODUCTNAME: '$(WHITESOURCE_PRODUCTNAME)'
           WS_APIKEY: '$(WHITESOURCE_APIKEY)'
