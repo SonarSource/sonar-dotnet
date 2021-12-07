@@ -101,7 +101,6 @@ Tag(""End"")";
             const string code = @"
 var first = true;
 var second = false;
-var dummy = true;
 if (boolParameter)
 {
     Tag(""IfFirst"", first);
