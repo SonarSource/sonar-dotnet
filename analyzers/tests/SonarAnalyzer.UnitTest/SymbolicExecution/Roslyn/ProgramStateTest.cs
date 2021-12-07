@@ -18,7 +18,10 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System.Collections.Immutable;
+using System.Linq;
 using FluentAssertions;
+using Microsoft.CodeAnalysis;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.SymbolicExecution.Roslyn;
 using StyleCop.Analyzers.Lightup;
@@ -89,6 +92,62 @@ namespace SonarAnalyzer.UnitTest.SymbolicExecution.Roslyn
             sut = sut.SetOperationValue(operation, value1);
             sut = sut.SetOperationValue(operation, value2);
             sut[operation].Should().Be(value2);
+        }
+
+        [TestMethod]
+        public void SetSymbolValue_ReturnsValues()
+        {
+            var counter = new SymbolicValueCounter();
+            var value1 = new SymbolicValue(counter);
+            var value2 = new SymbolicValue(counter);
+            var symbols = CreateSymbols();
+            var sut = ProgramState.Empty;
+
+            sut[symbols[0]].Should().BeNull();
+            sut[symbols[1]].Should().BeNull();
+            sut[symbols[2]].Should().BeNull();
+
+            sut = sut.SetSymbolValue(symbols[0], value1);
+            sut = sut.SetSymbolValue(symbols[1], value2);
+
+            sut[symbols[0]].Should().Be(value1);
+            sut[symbols[1]].Should().Be(value2);
+            sut[symbols[2]].Should().BeNull();     // Value was not set
+        }
+
+        [TestMethod]
+        public void SetSymbolValue_IsImmutable()
+        {
+            var symbol = CreateSymbols().First();
+            var sut = ProgramState.Empty;
+
+            sut[symbol].Should().BeNull();
+            sut.SetSymbolValue(symbol, new SymbolicValue(new SymbolicValueCounter()));
+            sut[symbol].Should().BeNull(nameof(sut.SetSymbolValue) + " returned new ProgramState instance.");
+        }
+
+        [TestMethod]
+        public void SetSymbolValue_Overrides()
+        {
+            var counter = new SymbolicValueCounter();
+            var value1 = new SymbolicValue(counter);
+            var value2 = new SymbolicValue(counter);
+            var symbol = CreateSymbols().First();
+            var sut = ProgramState.Empty;
+
+            sut[symbol].Should().BeNull();
+            sut = sut.SetSymbolValue(symbol, value1);
+            sut = sut.SetSymbolValue(symbol, value2);
+            sut[symbol].Should().Be(value2);
+        }
+
+        private static ISymbol[] CreateSymbols()
+        {
+            const string code = @"public class Sample { public void Main() { var variable = 0; } }";
+            var (_, model) = TestHelper.CompileCS(code);
+            var ret = model.LookupSymbols(code.IndexOf("variable")).Where(x => x.Name == "Sample" || x.Name == "Main" || x.Name == "variable").ToArray();
+            ret.Should().HaveCount(3);
+            return ret;
         }
     }
 }
