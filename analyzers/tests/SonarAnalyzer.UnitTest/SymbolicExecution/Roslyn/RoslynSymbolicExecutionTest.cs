@@ -159,7 +159,7 @@ namespace SonarAnalyzer.UnitTest.SymbolicExecution.Roslyn
                 // Set constraint to local symbol declarations. To assert them when they are used later.
                 if (x.Operation.Instance is ILocalReferenceOperation local && x.Operation.IsImplicit)
                 {
-                    var sv = new SymbolicValue(new SymbolicValueCounter()); // ToDo: Improve check design
+                    var sv = x.CreateSymbolicValue();
                     sv.SetConstraint(local.Local.Name switch
                     {
                         "first" => TestConstraint.First,
