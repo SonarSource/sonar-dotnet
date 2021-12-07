@@ -30,7 +30,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework.SymbolicExecution
         {
             if (context.Operation.Instance is ILocalReferenceOperation local && context.Operation.IsImplicit)
             {
-                var sv = new SymbolicValue(new SymbolicValueCounter()); // ToDo: Improve check design
+                var sv = context.CreateSymbolicValue();
                 sv.SetConstraint(local.Local.Name switch
                 {
                     "first" => TestConstraint.First,
