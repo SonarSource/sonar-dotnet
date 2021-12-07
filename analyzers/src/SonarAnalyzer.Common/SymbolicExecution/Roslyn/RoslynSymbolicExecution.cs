@@ -69,29 +69,27 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
 
         private IEnumerable<ExplodedNode> ProcessOperation(ExplodedNode node)
         {
-            // FIXME: Track context
-            var state = node.State.SetOperationValue(node.Operation, CreateSymbolicValue());
+            var context = new SymbolicContext(symbolicValueCounter, node.Operation, node.State.SetOperationValue(node.Operation, CreateSymbolicValue()));
             // FIXME: simplify
-            state = InvokeChecks(node.Operation, state, (check, context) => check.PreProcess(context));
-            if (state == null)
+            context = InvokeChecks(context, (check, context) => check.PreProcess(context));
+            if (context == null)
             {
                 yield break;
             }
 
             // ToDo: Something is still missing around here - process well known instructions
 
-            state = InvokeChecks(node.Operation, state, (check, context) => check.PostProcess(context));
-            if (state == null)
+            context = InvokeChecks(context, (check, context) => check.PostProcess(context));
+            if (context == null)
             {
                 yield break;
             }
 
-            yield return new ExplodedNode(node, state);
+            yield return new ExplodedNode(node, context.State);
         }
 
-        private ProgramState InvokeChecks(IOperationWrapperSonar operation, ProgramState oldState, Func<SymbolicCheck, SymbolicContext, ProgramState> invoke)
+        private SymbolicContext InvokeChecks(SymbolicContext context, Func<SymbolicCheck, SymbolicContext, ProgramState> invoke)
         {
-            var context = new SymbolicContext(symbolicValueCounter, operation, oldState);
             foreach (var check in checks)
             {
                 var newState = invoke(check, context);
@@ -99,9 +97,9 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
                 {
                     return null;
                 }
-                context = context.State == newState ? context : new SymbolicContext(symbolicValueCounter, operation, newState);    // Try reuse instance
+                context = context.State == newState ? context : new SymbolicContext(symbolicValueCounter, context.Operation, newState);
             }
-            return context.State;
+            return context;
         }
 
         private SymbolicValue CreateSymbolicValue() =>
