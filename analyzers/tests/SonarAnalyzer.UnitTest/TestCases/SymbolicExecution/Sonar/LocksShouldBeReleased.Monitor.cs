@@ -100,7 +100,7 @@ namespace Tests.Diagnostics
 
         public void DoSomethingWithMonitor8(string b)
         {
-            Monitor.Enter(obj); // FN
+            Monitor.Enter(obj); // Compliant
             Console.WriteLine(b.Length);
             Monitor.Exit(obj);
         }
