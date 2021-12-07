@@ -23,14 +23,14 @@ using StyleCop.Analyzers.Lightup;
 
 namespace SonarAnalyzer.SymbolicExecution.Roslyn
 {
-    public class CheckContext
+    public class SymbolicContext
     {
         private readonly SymbolicValueCounter symbolicValueCounter;
 
         public IOperationWrapperSonar Operation { get; }
         public ProgramState State { get; }
 
-        public CheckContext(SymbolicValueCounter symbolicValueCounter, IOperationWrapperSonar operation, ProgramState state)
+        public SymbolicContext(SymbolicValueCounter symbolicValueCounter, IOperationWrapperSonar operation, ProgramState state)
         {
             this.symbolicValueCounter = symbolicValueCounter ?? throw new ArgumentNullException(nameof(symbolicValueCounter));
             Operation = operation ?? throw new ArgumentNullException(nameof(operation));

@@ -27,7 +27,7 @@ using StyleCop.Analyzers.Lightup;
 namespace SonarAnalyzer.UnitTest.SymbolicExecution.Roslyn
 {
     [TestClass]
-    public class CheckContextTest
+    public class SymbolicContextTest
     {
         [TestMethod]
         public void NullArgument_Throws()
@@ -35,9 +35,9 @@ namespace SonarAnalyzer.UnitTest.SymbolicExecution.Roslyn
             var counter = new SymbolicValueCounter();
             var operation = CreateOperation();
 
-            ((Func<CheckContext>)(() => new CheckContext(null, operation, ProgramState.Empty))).Should().Throw<ArgumentNullException>().And.ParamName.Should().Be("symbolicValueCounter");
-            ((Func<CheckContext>)(() => new CheckContext(counter, null, ProgramState.Empty))).Should().Throw<ArgumentNullException>().And.ParamName.Should().Be("operation");
-            ((Func<CheckContext>)(() => new CheckContext(counter, operation, null))).Should().Throw<ArgumentNullException>().And.ParamName.Should().Be("state");
+            ((Func<SymbolicContext>)(() => new SymbolicContext(null, operation, ProgramState.Empty))).Should().Throw<ArgumentNullException>().And.ParamName.Should().Be("symbolicValueCounter");
+            ((Func<SymbolicContext>)(() => new SymbolicContext(counter, null, ProgramState.Empty))).Should().Throw<ArgumentNullException>().And.ParamName.Should().Be("operation");
+            ((Func<SymbolicContext>)(() => new SymbolicContext(counter, operation, null))).Should().Throw<ArgumentNullException>().And.ParamName.Should().Be("state");
         }
 
         [TestMethod]
@@ -47,7 +47,7 @@ namespace SonarAnalyzer.UnitTest.SymbolicExecution.Roslyn
             var operation = CreateOperation();
             var state = ProgramState.Empty.SetOperationValue(operation, new SymbolicValue(counter));
 
-            var sut = new CheckContext(counter, operation, state);
+            var sut = new SymbolicContext(counter, operation, state);
             sut.Operation.Should().Be(operation);
             sut.State.Should().Be(state);
         }
@@ -58,7 +58,7 @@ namespace SonarAnalyzer.UnitTest.SymbolicExecution.Roslyn
             var counter = new SymbolicValueCounter();
             counter.NextIdentifier().Should().Be(1);    // Skip first values
             counter.NextIdentifier().Should().Be(2);
-            var sut = new CheckContext(counter, CreateOperation(), ProgramState.Empty);
+            var sut = new SymbolicContext(counter, CreateOperation(), ProgramState.Empty);
             sut.CreateSymbolicValue().ToString().Should().Be("SV_3");
             counter.NextIdentifier().Should().Be(4);
         }

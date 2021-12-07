@@ -89,9 +89,9 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
             yield return new ExplodedNode(node, state);
         }
 
-        private ProgramState InvokeChecks(IOperationWrapperSonar operation, ProgramState oldState, Func<SymbolicCheck, CheckContext, ProgramState> invoke)
+        private ProgramState InvokeChecks(IOperationWrapperSonar operation, ProgramState oldState, Func<SymbolicCheck, SymbolicContext, ProgramState> invoke)
         {
-            var context = new CheckContext(symbolicValueCounter, operation, oldState);
+            var context = new SymbolicContext(symbolicValueCounter, operation, oldState);
             foreach (var check in checks)
             {
                 var newState = invoke(check, context);
@@ -99,7 +99,7 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
                 {
                     return null;
                 }
-                context = context.State == newState ? context : new CheckContext(symbolicValueCounter, operation, newState);    // Try reuse instance
+                context = context.State == newState ? context : new SymbolicContext(symbolicValueCounter, operation, newState);    // Try reuse instance
             }
             return context.State;
         }

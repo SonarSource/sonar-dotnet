@@ -19,7 +19,7 @@
  */
 
 using SonarAnalyzer.SymbolicExecution.Roslyn;
-using ProcessFunc = System.Func<SonarAnalyzer.SymbolicExecution.Roslyn.CheckContext, SonarAnalyzer.SymbolicExecution.Roslyn.ProgramState>;
+using ProcessFunc = System.Func<SonarAnalyzer.SymbolicExecution.Roslyn.SymbolicContext, SonarAnalyzer.SymbolicExecution.Roslyn.ProgramState>;
 
 namespace SonarAnalyzer.UnitTest.TestFramework.SymbolicExecution
 {
@@ -30,7 +30,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework.SymbolicExecution
         public PreProcessTestCheck(ProcessFunc preProcess) =>
             this.preProcess = preProcess;
 
-        public override ProgramState PreProcess(CheckContext context) => preProcess(context);
+        public override ProgramState PreProcess(SymbolicContext context) => preProcess(context);
     }
 
     internal class PostProcessTestCheck : SymbolicCheck
@@ -40,6 +40,6 @@ namespace SonarAnalyzer.UnitTest.TestFramework.SymbolicExecution
         public PostProcessTestCheck(ProcessFunc postProcess) =>
             this.postProcess = postProcess;
 
-        public override ProgramState PostProcess(CheckContext context) => postProcess(context);
+        public override ProgramState PostProcess(SymbolicContext context) => postProcess(context);
     }
 }

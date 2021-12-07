@@ -29,9 +29,9 @@ namespace SonarAnalyzer.UnitTest.TestFramework.SymbolicExecution
 {
     internal class CollectorTestCheck : SymbolicCheck
     {
-        public readonly List<CheckContext> PostProcessed = new();
+        public readonly List<SymbolicContext> PostProcessed = new();
 
-        public override ProgramState PostProcess(CheckContext context)
+        public override ProgramState PostProcess(SymbolicContext context)
         {
             PostProcessed.Add(context);
             return context.State;
@@ -40,10 +40,10 @@ namespace SonarAnalyzer.UnitTest.TestFramework.SymbolicExecution
         public void ValidateOrder(params string[] expected) =>
             PostProcessed.Select(x => TestHelper.Serialize(x.Operation)).Should().OnlyContainInOrder(expected);
 
-        public void Validate(string operation, Action<CheckContext> action) =>
+        public void Validate(string operation, Action<SymbolicContext> action) =>
             action(PostProcessedContext(operation));
 
-        public CheckContext PostProcessedContext(string operation) =>
+        public SymbolicContext PostProcessedContext(string operation) =>
             PostProcessed.Single(x => TestHelper.Serialize(x.Operation) == operation);
     }
 }
