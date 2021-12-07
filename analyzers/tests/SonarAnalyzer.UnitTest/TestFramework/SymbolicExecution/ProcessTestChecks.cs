@@ -19,28 +19,27 @@
  */
 
 using SonarAnalyzer.SymbolicExecution.Roslyn;
-using StyleCop.Analyzers.Lightup;
-using ProcessFunc = System.Func<SonarAnalyzer.SymbolicExecution.Roslyn.ProgramState, StyleCop.Analyzers.Lightup.IOperationWrapperSonar, SonarAnalyzer.SymbolicExecution.Roslyn.ProgramState>;
+using ProcessFunc = System.Func<SonarAnalyzer.SymbolicExecution.Roslyn.SymbolicContext, SonarAnalyzer.SymbolicExecution.Roslyn.ProgramState>;
 
 namespace SonarAnalyzer.UnitTest.TestFramework.SymbolicExecution
 {
-    internal class PreProcessTestCheck : SymbolicExecutionCheck
+    internal class PreProcessTestCheck : SymbolicCheck
     {
         private readonly ProcessFunc preProcess;
 
         public PreProcessTestCheck(ProcessFunc preProcess) =>
             this.preProcess = preProcess;
 
-        public override ProgramState PreProcess(ProgramState state, IOperationWrapperSonar operation) => preProcess(state, operation);
+        public override ProgramState PreProcess(SymbolicContext context) => preProcess(context);
     }
 
-    internal class PostProcessTestCheck : SymbolicExecutionCheck
+    internal class PostProcessTestCheck : SymbolicCheck
     {
         private readonly ProcessFunc postProcess;
 
         public PostProcessTestCheck(ProcessFunc postProcess) =>
             this.postProcess = postProcess;
 
-        public override ProgramState PostProcess(ProgramState state, IOperationWrapperSonar operation) => postProcess(state, operation);
+        public override ProgramState PostProcess(SymbolicContext context) => postProcess(context);
     }
 }

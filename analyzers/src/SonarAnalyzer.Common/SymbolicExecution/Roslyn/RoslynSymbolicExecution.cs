@@ -28,11 +28,11 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
     internal class RoslynSymbolicExecution
     {
         private readonly ControlFlowGraph cfg;
-        private readonly SymbolicExecutionCheck[] checks;
+        private readonly SymbolicCheck[] checks;
         private readonly Queue<ExplodedNode> queue = new Queue<ExplodedNode>();
         private readonly SymbolicValueCounter symbolicValueCounter = new SymbolicValueCounter();
 
-        public RoslynSymbolicExecution(ControlFlowGraph cfg, SymbolicExecutionCheck[] checks)
+        public RoslynSymbolicExecution(ControlFlowGraph cfg, SymbolicCheck[] checks)
         {
             this.cfg = cfg ?? throw new ArgumentNullException(nameof(cfg));
             this.checks = checks ?? throw new ArgumentNullException(nameof(checks));
@@ -68,38 +68,40 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
 
         private IEnumerable<ExplodedNode> ProcessOperation(ExplodedNode node)
         {
-            var state = node.State.SetOperationValue(node.Operation, CreateSymbolicValue());
-            state = InvokeChecks(state, (check, ps) => check.PreProcess(ps, node.Operation));
-            if (state == null)
+            var context = new SymbolicContext(symbolicValueCounter, node.Operation, node.State.SetOperationValue(node.Operation, CreateSymbolicValue()));
+            context = InvokeChecks(context, x => x.PreProcess);
+            if (context == null)
             {
                 yield break;
             }
 
             // ToDo: Something is still missing around here - process well known instructions
 
-            state = InvokeChecks(state, (check, ps) => check.PostProcess(ps, node.Operation));
-            if (state == null)
+            context = InvokeChecks(context, x => x.PostProcess);
+            if (context == null)
             {
                 yield break;
             }
 
-            yield return new ExplodedNode(node, state);
+            yield return new ExplodedNode(node, context.State);
         }
 
-        private ProgramState InvokeChecks(ProgramState state, Func<SymbolicExecutionCheck, ProgramState, ProgramState> invoke)
+        private SymbolicContext InvokeChecks(SymbolicContext context, Func<SymbolicCheck, Func<SymbolicContext, ProgramState>> checkDelegate)
         {
             foreach (var check in checks)
             {
-                state = invoke(check, state);
-                if (state == null)
+                var checkMethod = checkDelegate(check);
+                var newState = checkMethod(context);
+                if (newState == null)
                 {
                     return null;
                 }
+                context = context.State == newState ? context : new SymbolicContext(symbolicValueCounter, context.Operation, newState);
             }
-            return state;
+            return context;
         }
 
         private SymbolicValue CreateSymbolicValue() =>
-            new SymbolicValue(symbolicValueCounter);
+            new(symbolicValueCounter);
     }
 }
