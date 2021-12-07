@@ -49,8 +49,7 @@ public class Sample
         {methodBody}
     }}
 
-    private string Method(params string[] args) => null;
-    private bool IsMethod(params bool[] args) => true;
+    private void Tag(string name, object arg = null) {{ }}
 }}";
             return new SETestContext(code, AnalyzerLanguage.CSharp, additionalChecks);
         }
@@ -67,11 +66,8 @@ Public Class Sample
         {methodBody}
     End Sub
 
-    Private Function Method(ParamArray Args() As String) As String
-    End Function
-
-    Private Function IsMethod(ParamArray Args() As Boolean) As Boolean
-    End Function
+    Private Sub Tag(Name As String, Optional Arg As Object = Nothing)
+    End Sub
 
 End Class";
             return new SETestContext(code, AnalyzerLanguage.VisualBasic, additionalChecks);
