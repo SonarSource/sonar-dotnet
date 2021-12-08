@@ -28,7 +28,7 @@ namespace SonarAnalyzer.Rules.CSharp
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
     [Rule(DiagnosticId)]
-    public sealed class LocksShouldBeReleased : SonarDiagnosticAnalyzer
+    public sealed class LockReleasedAllPaths : SonarDiagnosticAnalyzer
     {
         private const string DiagnosticId = "S2222";
         private const string MessageFormat = "";
