@@ -43,7 +43,7 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
 
         private ExplodedNode(BasicBlock block, IOperationWrapperSonar[] operations, int index, ProgramState state)
         {
-            Block = block ?? throw new ArgumentNullException(nameof(block));
+            Block = block;
             State = state ?? throw new ArgumentNullException(nameof(state));
             this.operations = operations;
             this.index = index;
