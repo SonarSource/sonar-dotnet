@@ -99,6 +99,10 @@ If you run the project `ReviewDiffs` in debug mode, it will print in the output 
 
 *PS*: This program outputs message in a way that is compatible with the [VsColorOutput](https://marketplace.visualstudio.com/items?itemName=MikeWard-AnnArbor.VSColorOutput) extension, so that errors are colored in red, and differences are colored like warnings.
 
+### Manual Debugging
+
+If you want to debug the analysis of a project, you can add a [`Debugger.Launch()`](https://docs.microsoft.com/en-us/dotnet/api/system.diagnostics.debugger.launch?view=net-6.0) breakpoint in the class you want to debug. A UI window will prompt you to choose a debugger, where your IDE should show up - you will be able to open the solution and debug.
+
 ## Contributing
 
 Please see the [How to contribute](../README.md#how-to-contribute) section for details on
