@@ -24,12 +24,17 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
 {
     public abstract class SymbolicRuleCheck : SymbolicCheck
     {
+        protected SyntaxNodeAnalysisContext Context { get; private set; }
+
         /// <summary>
         /// Decide if a CFG should be created for current method and SE should be evaluated. We should only run SE for a method if there's a chance for finding something for performance reasons.
         /// </summary>
         /// <remarks>
         /// For example: It doesn't make sense to execute SE about handling disposing if there's no Dispose() invocation in the code.
         /// </remarks>
-        public abstract bool ShouldExecute(SyntaxNodeAnalysisContext context);
+        public abstract bool ShouldExecute();
+
+        public void Init(SyntaxNodeAnalysisContext context) =>
+            Context = context;
     }
 }

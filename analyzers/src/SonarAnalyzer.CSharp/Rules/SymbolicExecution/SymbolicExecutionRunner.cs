@@ -118,15 +118,14 @@ namespace SonarAnalyzer.Rules.SymbolicExecution
         {
             var checks = AllRules
                 .Where(x => SymbolicExecutionAnalyzerFactory.IsEnabled(context.Compilation.Options, x.Key))
-                .GroupBy(x => x.Value.Type)                     // Multiple DiagnosticDescriptors (S2583, S2589) can share the same check type
-                .Select(x => x.First().Value.CreateInstance())  // We need just one instance in that case
-                .Where(x => x.ShouldExecute(context))
+                .GroupBy(x => x.Value.Type)                             // Multiple DiagnosticDescriptors (S2583, S2589) can share the same check type
+                .Select(x => x.First().Value.CreateInstance(context))   // We need just one instance in that case
+                .Where(x => x.ShouldExecute())
                 .ToArray();
             if (checks.Any())
             {
                 try
                 {
-                    // FIXME: Init checks
                     var cfg = body.CreateCfg(context.SemanticModel);
                     var engine = new RoslynSymbolicExecution(cfg, checks);
                     engine.Execute();

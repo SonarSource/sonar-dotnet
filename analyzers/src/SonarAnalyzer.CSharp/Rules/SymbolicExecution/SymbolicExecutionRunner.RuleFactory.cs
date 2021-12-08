@@ -19,6 +19,7 @@
  */
 
 using System;
+using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.SymbolicExecution.Roslyn;
 
 namespace SonarAnalyzer.Rules.SymbolicExecution
@@ -39,8 +40,12 @@ namespace SonarAnalyzer.Rules.SymbolicExecution
                 this.createInstance = createInstance;
             }
 
-            public SymbolicRuleCheck CreateInstance() =>
-                createInstance();
+            public SymbolicRuleCheck CreateInstance(SyntaxNodeAnalysisContext context)
+            {
+                var ret = createInstance();
+                ret.Init(context);
+                return ret;
+            }
         }
 
         private sealed class RuleFactory<TCheck> : RuleFactory

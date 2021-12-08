@@ -30,7 +30,7 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn.Checks
 
         protected abstract DiagnosticDescriptor Rule { get; }
 
-        public override bool ShouldExecute(SyntaxNodeAnalysisContext context) =>
+        public override bool ShouldExecute() =>
             true;   // ToDo: Implement early bail-out if there's no interesting descendant node in context.Node to avoid useless SE runs
     }
 }
