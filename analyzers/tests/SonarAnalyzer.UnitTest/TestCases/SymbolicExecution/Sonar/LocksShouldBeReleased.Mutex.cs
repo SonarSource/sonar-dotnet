@@ -221,7 +221,10 @@ internal class Foo
     public void CompliantReleasedThenAcquired(Mutex paramMutex)
     {
         // this scenario would be a tolerable FP
-        paramMutex.ReleaseMutex();
+        if (cond)
+        {
+            paramMutex.ReleaseMutex();
+        }
         paramMutex.WaitOne(); 
     }
 
