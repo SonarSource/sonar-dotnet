@@ -41,6 +41,45 @@
 },
 {
 "id":  "S1481",
+"message":  "Remove the unused local variable 'm0'.",
+"location":  {
+"uri":  "sources\Net6\Net6\MutexAclTest.cs",
+"region":  {
+"startLine":  30,
+"startColumn":  17,
+"endLine":  30,
+"endColumn":  19
+}
+}
+},
+{
+"id":  "S1481",
+"message":  "Remove the unused local variable 'm0'.",
+"location":  {
+"uri":  "sources\Net6\Net6\MutexAclTest.cs",
+"region":  {
+"startLine":  37,
+"startColumn":  17,
+"endLine":  37,
+"endColumn":  19
+}
+}
+},
+{
+"id":  "S1481",
+"message":  "Remove the unused local variable 'm1'.",
+"location":  {
+"uri":  "sources\Net6\Net6\MutexAclTest.cs",
+"region":  {
+"startLine":  38,
+"startColumn":  17,
+"endLine":  38,
+"endColumn":  19
+}
+}
+},
+{
+"id":  "S1481",
 "message":  "Remove the unused local variable 'rs2'.",
 "location":  {
 "uri":  "sources\Net6\Net6\StructuresAsLeftHandOperandsInWithExpressions.cs",

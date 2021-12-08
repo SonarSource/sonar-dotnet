@@ -15,7 +15,7 @@
             {
                 m0.ReleaseMutex();
             }
-            if (MutexAcl.TryOpenExisting("foo", System.Security.AccessControl.MutexRights.FullControl, out var mutex) // FN
+            if (MutexAcl.TryOpenExisting("foo", System.Security.AccessControl.MutexRights.FullControl, out var mutex)) // FN
             {
                 mutex.WaitOne();
                 if (cond)
