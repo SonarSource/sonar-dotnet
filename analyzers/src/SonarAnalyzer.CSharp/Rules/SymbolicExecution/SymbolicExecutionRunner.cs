@@ -22,14 +22,16 @@ using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Linq;
-using System.Text;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
+using SonarAnalyzer.CFG.Roslyn;
 using SonarAnalyzer.CFG.Sonar;
+using SonarAnalyzer.Extensions;
 using SonarAnalyzer.Helpers;
 using SonarAnalyzer.LiveVariableAnalysis.CSharp;
+using SonarAnalyzer.SymbolicExecution.Roslyn;
 using SonarAnalyzer.SymbolicExecution.Sonar;
 using StyleCop.Analyzers.Lightup;
 
@@ -38,14 +40,14 @@ namespace SonarAnalyzer.Rules.SymbolicExecution
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
     public sealed class SymbolicExecutionRunner : SonarDiagnosticAnalyzer
     {
-        private readonly SymbolicExecutionAnalyzerFactory analyzerFactory;
+        private readonly SymbolicExecutionAnalyzerFactory analyzerFactory;  // ToDo: This should be eventually removed
 
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; }
         protected override bool EnableConcurrentExecution => false;
 
         public SymbolicExecutionRunner() : this(new SymbolicExecutionAnalyzerFactory()) { }
 
-        internal /* for testring */ SymbolicExecutionRunner(ISymbolicExecutionAnalyzer analyzer) : this (new SymbolicExecutionAnalyzerFactory(analyzer)) { }
+        internal /* for testring */ SymbolicExecutionRunner(ISymbolicExecutionAnalyzer analyzer) : this(new SymbolicExecutionAnalyzerFactory(analyzer)) { }
 
         private SymbolicExecutionRunner(SymbolicExecutionAnalyzerFactory analyzerFactory)
         {
@@ -99,60 +101,79 @@ namespace SonarAnalyzer.Rules.SymbolicExecution
 
         private void Analyze(SonarAnalysisContext analysisContext, SyntaxNodeAnalysisContext context, CSharpSyntaxNode body, ISymbol symbol)
         {
-            var isTestProject = analysisContext.IsTestProject(context.Compilation, context.Options);
-            var isScannerRun = analysisContext.IsScannerRun(context.Options);
-            var enabledAnalyzers = symbolicExecutionAnalyzerFactory.GetEnabledAnalyzers(context, isTestProject, isScannerRun);
-            if (body == null
-                || body.ContainsDiagnostics
-                || !enabledAnalyzers.Any()
-                || !CSharpControlFlowGraph.TryGet(body, context.SemanticModel, out var cfg))
+            if (body != null && !body.ContainsDiagnostics)
             {
-                return;
-            }
-
-            var lva = new SonarCSharpLiveVariableAnalysis(cfg, symbol, context.SemanticModel);
-            try
-            {
-                var explodedGraph = new SonarExplodedGraph(cfg, symbol, context.SemanticModel, lva);
-                var analyzerContexts = enabledAnalyzers.Select(x => x.CreateContext(explodedGraph, context)).ToList();
-                try
+                AnalyzeSonar(context, body, symbol);
+                if (ControlFlowGraph.IsAvailable)   // ToDo: Make this configurable for UTs when migrating other rules, see DeadStores
                 {
-                    explodedGraph.ExplorationEnded += ExplorationEndedHandler;
-                    explodedGraph.Walk();
+                    AnalyzeRoslyn(context, body, symbol);
                 }
-                finally
-                {
-                    explodedGraph.ExplorationEnded -= ExplorationEndedHandler;
-                }
-
-                // Some of the rules can return good results if the tree was only partially visited; others need to completely
-                // walk the tree in order to avoid false positives.
-                //
-                // Due to this we split the rules in two sets and report the diagnostics in steps:
-                // - When the tree is successfully visited and ExplorationEnded event is raised.
-                // - When the tree visit ends (explodedGraph.Walk() returns). This will happen even if the maximum number of steps was
-                // reached or if an exception was thrown during analysis.
-                ReportDiagnostics(analyzerContexts, context, true);
-
-                void ExplorationEndedHandler(object sender, EventArgs args) =>
-                    ReportDiagnostics(analyzerContexts, context, false);
-            }
-            catch (Exception e)
-            {
-                // Roslyn/MSBuild is currently cutting exception message at the end of the line instead
-                // of displaying the full message. As a workaround, we replace the line ending with ' ## '.
-                // See https://github.com/dotnet/roslyn/issues/1455 and https://github.com/dotnet/roslyn/issues/24346
-                var sb = new StringBuilder();
-                sb.AppendLine($"Error processing method: {symbol?.Name ?? "{unknown}"}");
-                sb.AppendLine($"Method file: {body.GetLocation()?.GetLineSpan().Path ?? "{unknown}"}");
-                sb.AppendLine($"Method line: {body.GetLocation()?.GetLineSpan().StartLinePosition.ToString() ?? "{unknown}"}");
-                sb.AppendLine($"Inner exception: {e}");
-
-                throw new SymbolicExecutionException(sb.ToString().Replace(Environment.NewLine, " ## "), e);
             }
         }
 
-        private static void ReportDiagnostics(IEnumerable<ISymbolicExecutionAnalysisContext> analyzerContexts, SyntaxNodeAnalysisContext context, bool supportsPartialResults)
+        private static void AnalyzeRoslyn(SyntaxNodeAnalysisContext context, CSharpSyntaxNode body, ISymbol symbol)
+        {
+            var checks = new SymbolicCheck[] { }; // FIXME: Fill
+            // FIXME: Filter enabled
+            // FIXME: Filter desired
+            if (checks.Any())
+            {
+                try
+                {
+                    // FIXME: Init checks
+                    var cfg = body.CreateCfg(context.SemanticModel);
+                    var engine = new RoslynSymbolicExecution(cfg, checks);
+                    engine.Execute();
+                }
+                catch (Exception ex)
+                {
+                    throw new SymbolicExecutionException(ex, symbol, body.GetLocation());
+                }
+            }
+        }
+
+        private void AnalyzeSonar(SyntaxNodeAnalysisContext context, CSharpSyntaxNode body, ISymbol symbol)
+        {
+            var isTestProject = analysisContext.IsTestProject(context.Compilation, context.Options);
+            var isScannerRun = analysisContext.IsScannerRun(context.Options);
+            var enabledAnalyzers = symbolicExecutionAnalyzerFactory.GetEnabledAnalyzers(context, isTestProject, isScannerRun);
+            if (enabledAnalyzers.Any() && CSharpControlFlowGraph.TryGet(body, context.SemanticModel, out var cfg))
+            {
+                var lva = new SonarCSharpLiveVariableAnalysis(cfg, symbol, context.SemanticModel);
+                try
+                {
+                    var explodedGraph = new SonarExplodedGraph(cfg, symbol, context.SemanticModel, lva);
+                    var analyzerContexts = enabledAnalyzers.Select(x => x.CreateContext(explodedGraph, context)).ToList();
+                    try
+                    {
+                        explodedGraph.ExplorationEnded += ExplorationEndedHandlerSonar;
+                        explodedGraph.Walk();
+                    }
+                    finally
+                    {
+                        explodedGraph.ExplorationEnded -= ExplorationEndedHandlerSonar;
+                    }
+
+                    // Some of the rules can return good results if the tree was only partially visited; others need to completely
+                    // walk the tree in order to avoid false positives.
+                    //
+                    // Due to this we split the rules in two sets and report the diagnostics in steps:
+                    // - When the tree is successfully visited and ExplorationEnded event is raised.
+                    // - When the tree visit ends (explodedGraph.Walk() returns). This will happen even if the maximum number of steps was
+                    // reached or if an exception was thrown during analysis.
+                    ReportDiagnosticsSonar(analyzerContexts, context, true);
+
+                    void ExplorationEndedHandlerSonar(object sender, EventArgs args) =>
+                        ReportDiagnosticsSonar(analyzerContexts, context, false);
+                }
+                catch (Exception ex)
+                {
+                    throw new SymbolicExecutionException(ex, symbol, body.GetLocation());
+                }
+            }
+        }
+
+        private static void ReportDiagnosticsSonar(IEnumerable<ISymbolicExecutionAnalysisContext> analyzerContexts, SyntaxNodeAnalysisContext context, bool supportsPartialResults)
         {
             foreach (var analyzerContext in analyzerContexts.Where(x => x.SupportsPartialResults == supportsPartialResults))
             {

@@ -19,6 +19,10 @@
  */
 
 using System;
+using System.Diagnostics.CodeAnalysis;
+using System.Runtime.Serialization;
+using System.Text;
+using Microsoft.CodeAnalysis;
 
 namespace SonarAnalyzer.SymbolicExecution.Sonar
 {
@@ -30,5 +34,23 @@ namespace SonarAnalyzer.SymbolicExecution.Sonar
         public SymbolicExecutionException(string message) : base(message) { }
 
         public SymbolicExecutionException(string message, Exception innerException) : base(message, innerException) { }
+
+        public SymbolicExecutionException(Exception ex, ISymbol symbol, Location location) : base(Serialize(ex, symbol, location), ex) { }
+
+        [ExcludeFromCodeCoverage]
+        private SymbolicExecutionException(SerializationInfo info, StreamingContext context) : base(info, context) { } // Fixes S3925
+
+        private static string Serialize(Exception ex, ISymbol symbol, Location location)
+        {
+            // Roslyn/MSBuild is currently cutting exception message at the end of the line instead
+            // of displaying the full message. As a workaround, we replace the line ending with ' ## '.
+            // See https://github.com/dotnet/roslyn/issues/1455 and https://github.com/dotnet/roslyn/issues/24346
+            var sb = new StringBuilder();
+            sb.AppendLine($"Error processing method: {symbol?.Name ?? "{unknown}"}");
+            sb.AppendLine($"Method file: {location?.GetLineSpan().Path ?? "{unknown}"}");
+            sb.AppendLine($"Method line: {location?.GetLineSpan().StartLinePosition.ToString() ?? "{unknown}"}");
+            sb.AppendLine($"Inner exception: {ex}");
+            return sb.ToString().Replace(Environment.NewLine, " ## ");
+        }
     }
 }
