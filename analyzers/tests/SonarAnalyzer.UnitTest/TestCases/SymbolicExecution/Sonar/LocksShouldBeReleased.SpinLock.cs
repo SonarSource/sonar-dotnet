@@ -3,69 +3,69 @@ using System.Threading;
 
 class Program
 {
-    public void Method1(bool b)
+    public void Method1(bool condition)
     {
         SpinLock sl = new SpinLock(false);
         bool isAcquired = false;
         sl.Enter(ref isAcquired); // FN
-        if (b)
+        if (condition)
         {
             sl.Exit();
         }
     }
 
-    public void Method2(bool b)
+    public void Method2(bool condition)
     {
         SpinLock sl = new SpinLock(true);
         bool isAcquired = false;
         sl.Enter(ref isAcquired); // FN
-        if (b)
+        if (condition)
         {
             sl.Exit(true);
         }
     }
 
-    public void Method3(bool b)
+    public void Method3(bool condition)
     {
         SpinLock sl = new SpinLock(false);
         bool isAcquired = false;
         sl.TryEnter(ref isAcquired);
-        if (b)
+        if (condition)
         {
             sl.Exit();
         }
     }
 
-    public void Method4(bool b)
+    public void Method4(bool condition)
     {
         SpinLock sl = new SpinLock(false);
         bool isAcquired = false;
         sl.TryEnter(42, ref isAcquired);
-        if (b)
+        if (condition)
         {
             sl.Exit();
         }
     }
 
-    public void Method5(bool b)
+    public void Method5(bool condition)
     {
         SpinLock sl = new SpinLock(false);
         bool isAcquired = false;
         sl.TryEnter(new TimeSpan(42), ref isAcquired);
-        if (b)
+        if (condition)
         {
             sl.Exit();
         }
     }
 
-    public void Method6(string b)
+    public void Method6(string condition)
     {
         bool isAcquired = false;
         SpinLock sl = new SpinLock(false);;
         sl.Enter(ref isAcquired);
         try
         {
-            Console.WriteLine(b.Length);
+            Console.WriteLine(condition.Length);
         }
         finally
         {

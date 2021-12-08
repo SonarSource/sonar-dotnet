@@ -38,11 +38,11 @@ class Program
         }
     }
 
-    public void Method4(bool b)
+    public void Method4(bool condition)
     {
         bool isAcquired = false;
         Monitor.TryEnter(obj, 42, ref isAcquired);
-        if (b)
+        if (condition)
         {
             Monitor.Exit(obj);
         }
@@ -59,11 +59,11 @@ class Program
         }
     }
 
-    public void Method6(bool b)
+    public void Method6(bool condition)
     {
         bool isAcquired = false;
         Monitor.TryEnter(obj, new TimeSpan(42), ref isAcquired);
-        if (b)
+        if (condition)
         {
             Monitor.Exit(obj);
         }
@@ -89,6 +89,42 @@ class Program
         if (isAcquired)
         {
             Monitor.Exit(obj);
+        }
+    }
+
+    public void Method9()
+    {
+        Monitor.TryEnter(obj); // Compliant
+        Monitor.Exit(obj);
+    }
+
+    public void Method10()
+    {
+        Monitor.Exit(obj);
+        Monitor.TryEnter(obj); // Compliant
+    }
+
+    public void Method11()
+    {
+        switch (Monitor.TryEnter(obj)) // Compliant
+        {
+            case true:
+                Monitor.Exit(obj);
+                break;
+            default:
+                break;
+        }
+    }
+
+    public void Method12()
+    {
+        switch (Monitor.TryEnter(obj)) // Compliant
+        {
+            case false:
+                Monitor.Exit(obj);
+                break;
+            default:
+                break;
         }
     }
 }

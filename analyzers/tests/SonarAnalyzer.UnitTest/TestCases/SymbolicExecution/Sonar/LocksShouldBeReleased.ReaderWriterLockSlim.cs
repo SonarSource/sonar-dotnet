@@ -5,28 +5,28 @@ class Program
 {
     private ReaderWriterLockSlim readerWriterLockSlim = new ReaderWriterLockSlim();
 
-    public void Method1(bool b)
+    public void Method1(bool condition)
     {
         readerWriterLockSlim.EnterReadLock(); // FN
-        if (b)
+        if (condition)
         {
             readerWriterLockSlim.ExitReadLock();
         }
     }
 
-    public void Method2(bool b)
+    public void Method2(bool condition)
     {
         readerWriterLockSlim.EnterWriteLock(); // FN
-        if (b)
+        if (condition)
         {
             readerWriterLockSlim.ExitWriteLock();
         }
     }
 
-    public void Method3(bool b)
+    public void Method3(bool condition)
     {
         readerWriterLockSlim.EnterUpgradeableReadLock(); // FN
-        if (b)
+        if (condition)
         {
             readerWriterLockSlim.ExitUpgradeableReadLock();
         }
@@ -99,13 +99,13 @@ class Program
     }
 
 
-    public void Method10(bool b)
+    public void Method10(bool condition)
     {
         try
         {
             readerWriterLockSlim.EnterUpgradeableReadLock();
             readerWriterLockSlim.EnterWriteLock();
-            if (b)
+            if (condition)
             {
                 readerWriterLockSlim.ExitWriteLock();
             }
@@ -121,7 +121,7 @@ class Program
         }
     }
 
-    public void Method11(string b)
+    public void Method11(string arg)
     {
         try
         {
@@ -129,7 +129,7 @@ class Program
             readerWriterLockSlim.EnterWriteLock();
             try
             {
-                Console.WriteLine(b.Length);
+                Console.WriteLine(arg.Length);
             }
             catch (Exception)
             {
