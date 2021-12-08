@@ -33,8 +33,28 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         [TestCategory("Rule")]
-        public void LocksShouldBeReleased_Monitor_CS() =>
-            Verifier.VerifyAnalyzer(@"TestCases\SymbolicExecution\Sonar\LocksShouldBeReleased.Monitor.cs", new LocksShouldBeReleased());
+        public void LocksShouldBeReleased_Monitor_Linear_CS() =>
+            Verifier.VerifyAnalyzer(@"TestCases\SymbolicExecution\Sonar\LocksShouldBeReleased.Monitor.Linear.cs", new LocksShouldBeReleased());
+
+        [TestMethod]
+        [TestCategory("Rule")]
+        public void LocksShouldBeReleased_Monitor_Conditions_CS() =>
+            Verifier.VerifyAnalyzer(@"TestCases\SymbolicExecution\Sonar\LocksShouldBeReleased.Monitor.Conditions.cs", new LocksShouldBeReleased());
+
+        [TestMethod]
+        [TestCategory("Rule")]
+        public void LocksShouldBeReleased_Monitor_TryCatch_CS() =>
+            Verifier.VerifyAnalyzer(@"TestCases\SymbolicExecution\Sonar\LocksShouldBeReleased.Monitor.TryCatch.cs", new LocksShouldBeReleased());
+
+        [TestMethod]
+        [TestCategory("Rule")]
+        public void LocksShouldBeReleased_Monitor_Loops_CS() =>
+            Verifier.VerifyAnalyzer(@"TestCases\SymbolicExecution\Sonar\LocksShouldBeReleased.Monitor.Loops.cs", new LocksShouldBeReleased());
+
+        [TestMethod]
+        [TestCategory("Rule")]
+        public void LocksShouldBeReleased_Monitor_TryEnter_CS() =>
+            Verifier.VerifyAnalyzer(@"TestCases\SymbolicExecution\Sonar\LocksShouldBeReleased.Monitor.TryEnter.cs", new LocksShouldBeReleased());
 
         [TestMethod]
         [TestCategory("Rule")]

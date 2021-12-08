@@ -5,7 +5,7 @@ class Program
 {
     private ReaderWriterLock readerWriterLock = new ReaderWriterLock();
 
-    public void DoSomethingWithReaderWriterLock1(bool b)
+    public void Method1(bool b)
     {
         readerWriterLock.AcquireReaderLock(42); // FN
         if (b)
@@ -14,7 +14,7 @@ class Program
         }
     }
 
-    public void DoSomethingWithReaderWriterLock2(bool b)
+    public void Method2(bool b)
     {
         readerWriterLock.AcquireReaderLock(new TimeSpan(42)); // FN
         if (b)
@@ -23,7 +23,7 @@ class Program
         }
     }
 
-    public void DoSomethingWithReaderWriterLock3(bool b)
+    public void Method3(bool b)
     {
         readerWriterLock.AcquireWriterLock(42); // FN
         if (b)
@@ -32,7 +32,7 @@ class Program
         }
     }
 
-    public void DoSomethingWithReaderWriterLock4(bool b)
+    public void Method4(bool b)
     {
         readerWriterLock.AcquireWriterLock(new TimeSpan(42)); // FN
         if (b)
@@ -41,7 +41,7 @@ class Program
         }
     }
 
-    public void DoSomethingWithReaderWriterLock5(bool b)
+    public void Method5(bool b)
     {
         try
         {
@@ -63,7 +63,7 @@ class Program
         }
     }
 
-    public void DoSomethingWithReaderWriterLock6(bool b)
+    public void Method6(bool b)
     {
         try
         {
@@ -85,7 +85,7 @@ class Program
         }
     }
 
-    public void DoSomethingWithReaderWriterLock7(string b)
+    public void Method7(string b)
     {
         try
         {
@@ -116,7 +116,7 @@ class Program
         }
     }
 
-    public void DoSomethingWithReaderWriterLock8(string b)
+    public void Method8(string b)
     {
         try
         {
@@ -147,7 +147,7 @@ class Program
         }
     }
 
-    public void DoSomethingWithReaderWriterLock9()
+    public void Method9()
     {
         readerWriterLock.AcquireReaderLock(new TimeSpan(42)); // Compliant because the cookie tracking is too complicated
         var cookie = readerWriterLock.ReleaseLock();
