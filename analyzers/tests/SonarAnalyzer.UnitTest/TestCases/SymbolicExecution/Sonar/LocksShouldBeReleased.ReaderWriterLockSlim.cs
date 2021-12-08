@@ -5,7 +5,7 @@ class Program
 {
     private ReaderWriterLockSlim readerWriterLockSlim = new ReaderWriterLockSlim();
 
-    public void DoSomethingWithReaderWriterSlimLock1(bool b)
+    public void Method1(bool b)
     {
         readerWriterLockSlim.EnterReadLock(); // FN
         if (b)
@@ -14,7 +14,7 @@ class Program
         }
     }
 
-    public void DoSomethingWithReaderWriterSlimLock2(bool b)
+    public void Method2(bool b)
     {
         readerWriterLockSlim.EnterWriteLock(); // FN
         if (b)
@@ -23,7 +23,7 @@ class Program
         }
     }
 
-    public void DoSomethingWithReaderWriterSlimLock3(bool b)
+    public void Method3(bool b)
     {
         readerWriterLockSlim.EnterUpgradeableReadLock(); // FN
         if (b)
@@ -32,7 +32,7 @@ class Program
         }
     }
 
-    public void DoSomethingWithReaderWriterSlimLock4()
+    public void Method4()
     {
         if (readerWriterLockSlim.TryEnterReadLock(42)) // FN
         {
@@ -43,7 +43,7 @@ class Program
         }
     }
 
-    public void DoSomethingWithReaderWriterSlimLock5()
+    public void Method5()
     {
         if (readerWriterLockSlim.TryEnterReadLock(new TimeSpan(42))) // FN
         {
@@ -54,7 +54,7 @@ class Program
         }
     }
 
-    public void DoSomethingWithReaderWriterSlimLock6()
+    public void Method6()
     {
         if (readerWriterLockSlim.TryEnterWriteLock(42)) // FN
         {
@@ -65,7 +65,7 @@ class Program
         }
     }
 
-    public void DoSomethingWithReaderWriterSlimLock7()
+    public void Method7()
     {
         if (readerWriterLockSlim.TryEnterWriteLock(new TimeSpan(42))) // FN
         {
@@ -76,7 +76,7 @@ class Program
         }
     }
 
-    public void DoSomethingWithReaderWriterSlimLock8()
+    public void Method8()
     {
         if (readerWriterLockSlim.TryEnterUpgradeableReadLock(42)) // FN
         {
@@ -87,7 +87,7 @@ class Program
         }
     }
 
-    public void DoSomethingWithReaderWriterSlimLock9()
+    public void Method9()
     {
         if (readerWriterLockSlim.TryEnterUpgradeableReadLock(new TimeSpan(42))) // FN
         {
@@ -99,7 +99,7 @@ class Program
     }
 
 
-    public void DoSomethingWithReaderWriterSlimLock10(bool b)
+    public void Method10(bool b)
     {
         try
         {
@@ -121,7 +121,7 @@ class Program
         }
     }
 
-    public void DoSomethingWithReaderWriterSlimLock11(string b)
+    public void Method11(string b)
     {
         try
         {
