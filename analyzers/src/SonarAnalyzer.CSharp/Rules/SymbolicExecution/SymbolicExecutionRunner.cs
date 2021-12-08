@@ -39,11 +39,11 @@ using StyleCop.Analyzers.Lightup;
 namespace SonarAnalyzer.Rules.SymbolicExecution
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
-    public sealed class SymbolicExecutionRunner : SonarDiagnosticAnalyzer
+    public sealed partial class SymbolicExecutionRunner : SonarDiagnosticAnalyzer
     {
         private readonly SymbolicExecutionAnalyzerFactory analyzerFactory;  // ToDo: This should be eventually removed
-        private static readonly ImmutableDictionary<DiagnosticDescriptor, Func<SymbolicCheck>> AllRules = ImmutableDictionary<DiagnosticDescriptor, Func<SymbolicCheck>>.Empty
-            .Add(LocksReleasedAllPaths.S2222, NewCheck<LocksReleasedAllPaths>());
+        private static readonly ImmutableDictionary<DiagnosticDescriptor, RuleFactory> AllRules = ImmutableDictionary<DiagnosticDescriptor, RuleFactory>.Empty
+            .Add(LocksReleasedAllPaths.S2222, CreateRuleFactory<LocksReleasedAllPaths>());
 
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; }
         protected override bool EnableConcurrentExecution => false;
@@ -118,8 +118,8 @@ namespace SonarAnalyzer.Rules.SymbolicExecution
         {
             var checks = AllRules
                 .Where(x => SymbolicExecutionAnalyzerFactory.IsEnabled(context.Compilation.Options, x.Key))
-                // FIXME: Only for unique type
-                .Select(x => x.Value())
+                .GroupBy(x => x.Value.Type)                     // Multiple DiagnosticDescriptors (S2583, S2589) can share the same check type
+                .Select(x => x.First().Value.CreateInstance())  // We need just one instance in that case
                 // FIXME: Filter desired
                 .ToArray();
             if (checks.Any())
@@ -190,8 +190,5 @@ namespace SonarAnalyzer.Rules.SymbolicExecution
                 analyzerContext.Dispose();
             }
         }
-
-        private static Func<SymbolicCheck> NewCheck<TCheck>() where TCheck : SymbolicCheck, new() =>
-            () => new TCheck(); // Main purpose of this method is to validate TCheck against generic constraints
     }
 }
