@@ -48,7 +48,6 @@ namespace SonarAnalyzer.UnitTest.MetadataReferences
         internal static References SystemRuntimeSerializationFormattersSoap { get; } = Create("System.Runtime.Serialization.Formatters.Soap.dll");
         internal static References SystemSecurityCryptographyAlgorithms { get; } = Create("System.Security.Cryptography.Algorithms.dll");
         internal static References SystemServiceModel { get; } = Create("System.ServiceModel.dll");
-        internal static References SystemThreading { get; } = Create("System.Threading.dll");
         internal static References SystemThreadingTasks { get; } = Create("System.Threading.Tasks.dll");
         internal static References SystemWeb { get; } = Create("System.Web.dll");
         internal static References SystemWebExtensions { get; } = Create("System.Web.Extensions.dll");

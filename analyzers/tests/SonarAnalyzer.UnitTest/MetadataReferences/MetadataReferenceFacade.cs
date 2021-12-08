@@ -186,7 +186,7 @@ namespace SonarAnalyzer.UnitTest.MetadataReferences
 
         internal static References SystemThreading =>
 #if NETFRAMEWORK
-            FrameworkMetadataReference.SystemThreading;
+            Enumerable.Empty<MetadataReference>();
 #else
             new[] {CoreMetadataReference.SystemThreading};
 #endif

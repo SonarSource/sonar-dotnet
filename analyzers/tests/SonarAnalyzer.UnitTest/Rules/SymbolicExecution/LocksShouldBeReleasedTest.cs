@@ -44,15 +44,11 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void LocksShouldBeReleased_ReaderWriterLock_CS() =>
-            Verifier.VerifyAnalyzer(@"TestCases\SymbolicExecution\Sonar\LocksShouldBeReleased.ReaderWriterLock.cs", new LocksShouldBeReleased(), GetReferences());
+            Verifier.VerifyAnalyzer(@"TestCases\SymbolicExecution\Sonar\LocksShouldBeReleased.ReaderWriterLock.cs", new LocksShouldBeReleased(), MetadataReferenceFacade.SystemThreading);
 
         [TestMethod]
         [TestCategory("Rule")]
         public void LocksShouldBeReleased_ReaderWriterLockSlim_CS() =>
             Verifier.VerifyAnalyzer(@"TestCases\SymbolicExecution\Sonar\LocksShouldBeReleased.ReaderWriterLockSlim.cs", new LocksShouldBeReleased());
-
-        private static IEnumerable<MetadataReference> GetReferences() =>
-            Enumerable.Empty<MetadataReference>()
-                .Concat(MetadataReferenceFacade.SystemThreading);
     }
 }

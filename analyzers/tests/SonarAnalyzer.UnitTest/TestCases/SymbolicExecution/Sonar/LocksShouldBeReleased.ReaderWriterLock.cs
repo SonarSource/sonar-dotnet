@@ -1,58 +1,99 @@
 ﻿using System;
 using System.Threading;
 
-namespace Tests.Diagnostics
+class Program
 {
-    class Program
+    private ReaderWriterLock readerWriterLock = new ReaderWriterLock();
+
+    public void DoSomethingWithReaderWriterLock1(bool b)
     {
-        private ReaderWriterLock readerWriterLock = new ReaderWriterLock();
-
-        public void DoSomethingWithReaderWriterLock1(bool b)
+        readerWriterLock.AcquireReaderLock(42); // FN
+        if (b)
         {
-            readerWriterLock.AcquireReaderLock(42); // FN
+            readerWriterLock.ReleaseReaderLock();
+        }
+    }
+
+    public void DoSomethingWithReaderWriterLock2(bool b)
+    {
+        readerWriterLock.AcquireReaderLock(new TimeSpan(42)); // FN
+        if (b)
+        {
+            readerWriterLock.ReleaseReaderLock();
+        }
+    }
+
+    public void DoSomethingWithReaderWriterLock3(bool b)
+    {
+        readerWriterLock.AcquireWriterLock(42); // FN
+        if (b)
+        {
+            readerWriterLock.ReleaseWriterLock();
+        }
+    }
+
+    public void DoSomethingWithReaderWriterLock4(bool b)
+    {
+        readerWriterLock.AcquireWriterLock(new TimeSpan(42)); // FN
+        if (b)
+        {
+            readerWriterLock.ReleaseWriterLock();
+        }
+    }
+
+    public void DoSomethingWithReaderWriterLock5(bool b)
+    {
+        try
+        {
+            readerWriterLock.AcquireReaderLock(42);
+            var cookie = readerWriterLock.UpgradeToWriterLock(42);
             if (b)
             {
-                readerWriterLock.ReleaseReaderLock();
+                readerWriterLock.DowngradeFromWriterLock(ref cookie);
             }
         }
-
-        public void DoSomethingWithReaderWriterLock2(bool b)
+        catch (Exception)
         {
-            readerWriterLock.AcquireReaderLock(new TimeSpan(42)); // FN
+
+            throw;
+        }
+        finally
+        {
+            readerWriterLock.ReleaseReaderLock();
+        }
+    }
+
+    public void DoSomethingWithReaderWriterLock6(bool b)
+    {
+        try
+        {
+            readerWriterLock.AcquireReaderLock(new TimeSpan(42));
+            var cookie = readerWriterLock.UpgradeToWriterLock(new TimeSpan(42));
             if (b)
             {
-                readerWriterLock.ReleaseReaderLock();
+                readerWriterLock.DowngradeFromWriterLock(ref cookie);
             }
         }
-
-        public void DoSomethingWithReaderWriterLock3(bool b)
+        catch (Exception)
         {
-            readerWriterLock.AcquireWriterLock(42); // FN
-            if (b)
-            {
-                readerWriterLock.ReleaseWriterLock();
-            }
+
+            throw;
         }
-
-        public void DoSomethingWithReaderWriterLock4(bool b)
+        finally
         {
-            readerWriterLock.AcquireWriterLock(new TimeSpan(42)); // FN
-            if (b)
-            {
-                readerWriterLock.ReleaseWriterLock();
-            }
+            readerWriterLock.ReleaseReaderLock();
         }
+    }
 
-        public void DoSomethingWithReaderWriterLock5(bool b)
+    public void DoSomethingWithReaderWriterLock7(string b)
+    {
+        try
         {
+            readerWriterLock.AcquireReaderLock(42);
+            var cookie = readerWriterLock.UpgradeToWriterLock(42);
             try
             {
-                readerWriterLock.AcquireReaderLock(42);
-                var cookie = readerWriterLock.UpgradeToWriterLock(42);
-                if (b)
-                {
-                    readerWriterLock.DowngradeFromWriterLock(ref cookie);
-                }
+                Console.WriteLine(b.Length);
             }
             catch (Exception)
             {
@@ -61,20 +102,29 @@ namespace Tests.Diagnostics
             }
             finally
             {
-                readerWriterLock.ReleaseReaderLock();
+                readerWriterLock.DowngradeFromWriterLock(ref cookie);
             }
         }
-
-        public void DoSomethingWithReaderWriterLock6(bool b)
+        catch (Exception)
         {
+
+            throw;
+        }
+        finally
+        {
+            readerWriterLock.ReleaseReaderLock();
+        }
+    }
+
+    public void DoSomethingWithReaderWriterLock8(string b)
+    {
+        try
+        {
+            readerWriterLock.AcquireReaderLock(new TimeSpan(42));
+            var cookie = readerWriterLock.UpgradeToWriterLock(new TimeSpan(42));
             try
             {
-                readerWriterLock.AcquireReaderLock(new TimeSpan(42));
-                var cookie = readerWriterLock.UpgradeToWriterLock(new TimeSpan(42));
-                if (b)
-                {
-                    readerWriterLock.DowngradeFromWriterLock(ref cookie);
-                }
+                Console.WriteLine(b.Length);
             }
             catch (Exception)
             {
@@ -83,77 +133,24 @@ namespace Tests.Diagnostics
             }
             finally
             {
-                readerWriterLock.ReleaseReaderLock();
+                readerWriterLock.DowngradeFromWriterLock(ref cookie);
             }
         }
-
-        public void DoSomethingWithReaderWriterLock7(string b)
+        catch (Exception)
         {
-            try
-            {
-                readerWriterLock.AcquireReaderLock(42);
-                var cookie = readerWriterLock.UpgradeToWriterLock(42);
-                try
-                {
-                    Console.WriteLine(b.Length);
-                }
-                catch (Exception)
-                {
 
-                    throw;
-                }
-                finally
-                {
-                    readerWriterLock.DowngradeFromWriterLock(ref cookie);
-                }
-            }
-            catch (Exception)
-            {
-
-                throw;
-            }
-            finally
-            {
-                readerWriterLock.ReleaseReaderLock();
-            }
+            throw;
         }
-
-        public void DoSomethingWithReaderWriterLock8(string b)
+        finally
         {
-            try
-            {
-                readerWriterLock.AcquireReaderLock(new TimeSpan(42));
-                var cookie = readerWriterLock.UpgradeToWriterLock(new TimeSpan(42));
-                try
-                {
-                    Console.WriteLine(b.Length);
-                }
-                catch (Exception)
-                {
-
-                    throw;
-                }
-                finally
-                {
-                    readerWriterLock.DowngradeFromWriterLock(ref cookie);
-                }
-            }
-            catch (Exception)
-            {
-
-                throw;
-            }
-            finally
-            {
-                readerWriterLock.ReleaseReaderLock();
-            }
+            readerWriterLock.ReleaseReaderLock();
         }
+    }
 
-        public void DoSomethingWithReaderWriterLock9()
-        {
-            readerWriterLock.AcquireReaderLock(new TimeSpan(42)); // Compliant because the cookie tracking is too complicated
-            var cookie = readerWriterLock.ReleaseLock();
-            readerWriterLock.RestoreLock(ref cookie);
-        }
+    public void DoSomethingWithReaderWriterLock9()
+    {
+        readerWriterLock.AcquireReaderLock(new TimeSpan(42)); // Compliant because the cookie tracking is too complicated
+        var cookie = readerWriterLock.ReleaseLock();
+        readerWriterLock.RestoreLock(ref cookie);
     }
 }
