@@ -18,19 +18,18 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Diagnostics;
 
-namespace SonarAnalyzer.SymbolicExecution.Roslyn.Checks
+namespace SonarAnalyzer.SymbolicExecution.Roslyn
 {
-    public abstract class LocksReleasedAllPathsBase : SymbolicRuleCheck
+    public abstract class SymbolicRuleCheck : SymbolicCheck
     {
-        protected const string DiagnosticId = "S2222";
-        protected const string MessageFormat = "Unlock this lock along all executions paths of this method.";
-
-        protected abstract DiagnosticDescriptor Rule { get; }
-
-        public override bool ShouldExecute(SyntaxNodeAnalysisContext context) =>
-            true;   // ToDo: Implement early bail-out if there's no interesting descendant node in context.Node to avoid useless SE runs
+        /// <summary>
+        /// Decide if a CFG should be created for current method and SE should be evaluated. We should only run SE for a method if there's a chance for finding something for performance reasons.
+        /// </summary>
+        /// <remarks>
+        /// For example: It doesn't make sense to execute SE about handling disposing if there's no Dispose() invocation in the code.
+        /// </remarks>
+        public abstract bool ShouldExecute(SyntaxNodeAnalysisContext context);
     }
 }

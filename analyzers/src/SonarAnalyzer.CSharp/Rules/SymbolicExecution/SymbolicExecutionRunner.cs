@@ -43,7 +43,7 @@ namespace SonarAnalyzer.Rules.SymbolicExecution
     {
         private readonly SymbolicExecutionAnalyzerFactory analyzerFactory;  // ToDo: This should be eventually removed
         private static readonly ImmutableDictionary<DiagnosticDescriptor, RuleFactory> AllRules = ImmutableDictionary<DiagnosticDescriptor, RuleFactory>.Empty
-            .Add(LocksReleasedAllPaths.S2222, CreateRuleFactory<LocksReleasedAllPaths>());
+            .Add(LocksReleasedAllPaths.S2222, CreateFactory<LocksReleasedAllPaths>());
 
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; }
         protected override bool EnableConcurrentExecution => false;
@@ -120,7 +120,7 @@ namespace SonarAnalyzer.Rules.SymbolicExecution
                 .Where(x => SymbolicExecutionAnalyzerFactory.IsEnabled(context.Compilation.Options, x.Key))
                 .GroupBy(x => x.Value.Type)                     // Multiple DiagnosticDescriptors (S2583, S2589) can share the same check type
                 .Select(x => x.First().Value.CreateInstance())  // We need just one instance in that case
-                // FIXME: Filter desired
+                .Where(x => x.ShouldExecute(context))
                 .ToArray();
             if (checks.Any())
             {

@@ -25,26 +25,26 @@ namespace SonarAnalyzer.Rules.SymbolicExecution
 {
     public partial class SymbolicExecutionRunner
     {
-        private static RuleFactory CreateRuleFactory<TRuleCheck>() where TRuleCheck : SymbolicCheck, new() =>
+        private static RuleFactory CreateFactory<TRuleCheck>() where TRuleCheck : SymbolicRuleCheck, new() =>
             new RuleFactory<TRuleCheck>();
 
         private class RuleFactory
         {
             public readonly Type Type;
-            private readonly Func<SymbolicCheck> createInstance;
+            private readonly Func<SymbolicRuleCheck> createInstance;
 
-            protected RuleFactory(Type type, Func<SymbolicCheck> createInstance)
+            protected RuleFactory(Type type, Func<SymbolicRuleCheck> createInstance)
             {
                 Type = type;
                 this.createInstance = createInstance;
             }
 
-            public SymbolicCheck CreateInstance() =>
+            public SymbolicRuleCheck CreateInstance() =>
                 createInstance();
         }
 
         private sealed class RuleFactory<TCheck> : RuleFactory
-            where TCheck : SymbolicCheck, new()
+            where TCheck : SymbolicRuleCheck, new()
         {
             public RuleFactory() : base(typeof(TCheck), () => new TCheck()) { }
         }
