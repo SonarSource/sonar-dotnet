@@ -32,16 +32,18 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
         private readonly int index;
 
         public ProgramState State { get; }
+        public BasicBlock Block { get; }
         public IOperationWrapperSonar Operation => index < operations.Length ? operations[index] : null;
 
         public ExplodedNode(BasicBlock block, ProgramState state)
-            : this(block.OperationsAndBranchValue.ToExecutionOrder().ToArray(), 0, state) { }
+            : this(block, block.OperationsAndBranchValue.ToExecutionOrder().ToArray(), 0, state) { }
 
         public ExplodedNode(ExplodedNode predecessor, ProgramState state)
-            : this(predecessor.operations, predecessor.index + 1, state) { }
+            : this(predecessor.Block, predecessor.operations, predecessor.index + 1, state) { }
 
-        private ExplodedNode(IOperationWrapperSonar[] operations, int index, ProgramState state)
+        private ExplodedNode(BasicBlock block, IOperationWrapperSonar[] operations, int index, ProgramState state)
         {
+            Block = block;
             State = state ?? throw new ArgumentNullException(nameof(state));
             this.operations = operations;
             this.index = index;

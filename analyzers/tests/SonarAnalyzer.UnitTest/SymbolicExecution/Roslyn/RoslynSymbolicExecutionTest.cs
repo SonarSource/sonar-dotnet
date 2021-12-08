@@ -31,7 +31,7 @@ using StyleCop.Analyzers.Lightup;
 namespace SonarAnalyzer.UnitTest.SymbolicExecution.Roslyn
 {
     [TestClass]
-    public class RoslynSymbolicExecutionTest
+    public partial class RoslynSymbolicExecutionTest
     {
         [TestMethod]
         public void Constructor_Throws()
@@ -152,28 +152,9 @@ namespace SonarAnalyzer.UnitTest.SymbolicExecution.Roslyn
         }
 
         [TestMethod]
-        public void Execute_PersistSymbols()
+        public void Execute_PersistSymbols_InsideBlock()
         {
-            var setter = new PreProcessTestCheck(x =>
-            {
-                // Set constraint to local symbol declarations. To assert them when they are used later.
-                if (x.Operation.Instance is ILocalReferenceOperation local && x.Operation.IsImplicit)
-                {
-                    var sv = x.CreateSymbolicValue();
-                    sv.SetConstraint(local.Local.Name switch
-                    {
-                        "first" => TestConstraint.First,
-                        "second" => TestConstraint.Second,
-                        _ => throw new InvalidOperationException("Unexpected local variable name: " + local.Local.Name)
-                    });
-                    return x.State.SetSymbolValue(local.Local, sv);
-                }
-                else
-                {
-                    return x.State;
-                }
-            });
-            var collector = SETestContext.CreateCS("var first = true; var second = false; first = second;", setter).Collector;
+            var collector = SETestContext.CreateCS("var first = true; var second = false; first = second;", new SetTestConstraintCheck()).Collector;
             collector.ValidateOrder(    // Visualize operations
                    "LocalReference: first = true (Implicit)",
                    "Literal: true",

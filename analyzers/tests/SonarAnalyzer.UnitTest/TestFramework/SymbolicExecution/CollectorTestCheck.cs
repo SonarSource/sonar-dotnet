@@ -22,6 +22,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using FluentAssertions;
+using Microsoft.CodeAnalysis.Operations;
 using SonarAnalyzer.SymbolicExecution.Roslyn;
 using SonarAnalyzer.UnitTest.Helpers;
 
@@ -30,20 +31,42 @@ namespace SonarAnalyzer.UnitTest.TestFramework.SymbolicExecution
     internal class CollectorTestCheck : SymbolicCheck
     {
         public readonly List<SymbolicContext> PostProcessed = new();
+        private readonly List<(string Name, SymbolicContext Context)> tags = new();
 
         public override ProgramState PostProcess(SymbolicContext context)
         {
             PostProcessed.Add(context);
+            if (context.Operation.Instance is IInvocationOperation invocation && invocation.TargetMethod.Name == "Tag")
+            {
+                var tagName = invocation.Arguments.First().Value.ConstantValue;
+                tagName.HasValue.Should().BeTrue("tag should have literal name");
+                var name = (string)tagName.Value;
+                tags.Any(x => x.Name == name).Should().BeFalse("tags should be unique"); // ToDo: We'll need to redesign this to graph paths for complex branching
+                tags.Add((name, context));
+            }
             return context.State;
         }
 
         public void ValidateOrder(params string[] expected) =>
             PostProcessed.Select(x => TestHelper.Serialize(x.Operation)).Should().OnlyContainInOrder(expected);
 
+        public void ValidateTagOrder(params string[] expected) =>
+            tags.Select(x => x.Name).Should().BeEquivalentTo(expected);
+
         public void Validate(string operation, Action<SymbolicContext> action) =>
             action(PostProcessedContext(operation));
 
         public SymbolicContext PostProcessedContext(string operation) =>
             PostProcessed.Single(x => TestHelper.Serialize(x.Operation) == operation);
+
+        public void ValidateTag(string tag, Action<SymbolicValue> action)
+        {
+            var context = tags.Single(x => x.Name == tag).Context;
+            var invocation = (IInvocationOperation)context.Operation.Instance;
+            invocation.Arguments.Should().HaveCount(2, "Asserted argument is expected in Tag(..) invocation");
+            var symbol = ((ILocalReferenceOperation)((IConversionOperation)invocation.Arguments[1].Value).Operand).Local;
+            var value = context.State[symbol];
+            action(value);
+        }
     }
 }

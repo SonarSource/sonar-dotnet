@@ -45,25 +45,25 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
         public void Execute()
         {
             // ToDo: Forbid running twice
-            foreach (var block in cfg.Blocks)   // ToDo: This is a temporary simplification until we support proper branching
+            queue.Enqueue(new ExplodedNode(cfg.EntryBlock, ProgramState.Empty));
+            while (queue.Any())
             {
-                queue.Enqueue(new ExplodedNode(block, ProgramState.Empty));
-                while (queue.Any())
+                var current = queue.Dequeue();
+                var successors = current.Operation == null ? ProcessBranching(current) : ProcessOperation(current);
+                foreach (var node in successors)
                 {
-                    var current = queue.Dequeue();
-                    var successors = current.Operation == null ? ProcessBranching(current) : ProcessOperation(current);
-                    foreach (var node in successors)
-                    {
-                        queue.Enqueue(node);
-                    }
+                    queue.Enqueue(node);
                 }
             }
         }
 
         private IEnumerable<ExplodedNode> ProcessBranching(ExplodedNode node)
         {
-            // ToDo: Something is still missing around here - process branching
-            yield break;
+            // ToDo: This is a temporary simplification until we support proper branching. This only continues to the next ordinal block
+            if (node.Block.Kind != BasicBlockKind.Exit)
+            {
+                yield return new ExplodedNode(cfg.Blocks[node.Block.Ordinal + 1], node.State);
+            }
         }
 
         private IEnumerable<ExplodedNode> ProcessOperation(ExplodedNode node)
