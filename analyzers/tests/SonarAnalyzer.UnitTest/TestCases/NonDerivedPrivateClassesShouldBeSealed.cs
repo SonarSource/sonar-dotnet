@@ -107,3 +107,11 @@ namespace Tests.Diagnostics
         public interface InnerInterface { }
     }
 }
+
+// https://github.com/SonarSource/sonar-dotnet/issues/5160
+public class Repro_5160
+{
+    private class Inner { }     // Noncompliant FP
+
+    private sealed class Inner<T> : Inner { }
+}
