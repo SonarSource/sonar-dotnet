@@ -4,8 +4,6 @@
           BeforeTargets="CoreCompile">
     <PropertyGroup>
       <BinariesFolder>$(MSBuildStartupDirectory)\..\packaging\binaries</BinariesFolder>
-      <SonarAnalyzerRegressionTestRunning Condition="Exists('$(BinariesFolder)\SonarAnalyzer.dll')">true</SonarAnalyzerRegressionTestRunning>
-      <SonarAnalyzerRegressionTestRunning Condition="$(SonarAnalyzerRegressionTestRunning) == ''">false</SonarAnalyzerRegressionTestRunning>
       <SonarProjectOutputPath>$(MSBuildStartupDirectory)\output\$(PROJECT)\$(AssemblyName)</SonarProjectOutputPath>
       <SonarProjectConfigFilePath>$(SonarProjectOutputPath)\SonarProjectConfig.xml</SonarProjectConfigFilePath>
       <SonarFilesToAnalyzePath>$(SonarProjectOutputPath)\FilesToAnalyze.txt</SonarFilesToAnalyzePath>
@@ -13,6 +11,8 @@
       <SonarProjectType Condition="$(SonarQubeTestProject) != 'true'">Product</SonarProjectType>
       <SonarProjectType Condition="$(SonarQubeTestProject) == 'true'">Test</SonarProjectType>
     </PropertyGroup>
+
+    <Error Text="Could not find '$(BinariesFolder)\SonarAnalyzer.dll'" Condition="!Exists('$(BinariesFolder)\SonarAnalyzer.dll')" />
 
     <!-- This section builds content of SonarProjectConfig.xml additional file. We need to simulate S4MSB behavior to configure the analyzer. -->
     <ItemGroup>
@@ -27,19 +27,18 @@
       <SonarProjectConfigLine Include="&lt;/SonarProjectConfig&gt;" />
     </ItemGroup>
 
-    <MakeDir Condition="$(SonarAnalyzerRegressionTestRunning)" Directories="$(SonarProjectOutputPath)"/>
+    <MakeDir Directories="$(SonarProjectOutputPath)"/>
+
     <!-- First FINDSTR removes \bin\, \obj\ and \packages\ subdirectories from FilesToAnalyze.txt. Second FINDSTR includes only files with an extension, because DIR lists also directories themselves.-->
     <Exec Command="dir &quot;$(MSBuildStartupDirectory)\sources\$(PROJECT)&quot; /s /b | findstr /v &quot;\\bin\\ \\obj\\ \\packages\\&quot; | findstr /e /r &quot;\\[^\\]*\.[^\\]*&quot; > &quot;$(SonarFilesToAnalyzePath)&quot;" Condition="'$(TargetFrameworks)' == ''"/>
-    <WriteLinesToFile Condition="$(SonarAnalyzerRegressionTestRunning)"
-            File="$(SonarProjectConfigFilePath)"
-            Lines="@(SonarProjectConfigLine)"
-            WriteOnlyWhenDifferent="true"
-            ContinueOnError="WarnAndContinue"
-            Overwrite="true" />
 
-    <Error Text="Could not find '$(BinariesFolder)\SonarAnalyzer.dll'" Condition="!$(SonarAnalyzerRegressionTestRunning)" />
+    <WriteLinesToFile File="$(SonarProjectConfigFilePath)"
+                      Lines="@(SonarProjectConfigLine)"
+                      WriteOnlyWhenDifferent="true"
+                      ContinueOnError="WarnAndContinue"
+                      Overwrite="true" />
 
-    <ItemGroup Condition="$(SonarAnalyzerRegressionTestRunning)">
+    <ItemGroup>
       <!-- Remove all previously added analyzers -->
       <Analyzer Remove="@(Analyzer)" />
       <!-- Add the SonarAnalyzer analyzer DLLs -->
@@ -49,7 +48,7 @@
       <AdditionalFiles Include="$(SonarProjectConfigFilePath)" />
     </ItemGroup>
 
-    <PropertyGroup Condition="$(SonarAnalyzerRegressionTestRunning)">
+    <PropertyGroup>
       <!-- Set the path to the SARIF report -->
       <ErrorLog Condition="'$(TargetFramework)' != ''">$(SonarProjectOutputPath)-$(ProjectGuid)-$(TargetFramework).json</ErrorLog>
       <ErrorLog Condition="'$(TargetFramework)' == ''">$(SonarProjectOutputPath)-$(ProjectGuid).json</ErrorLog>
