@@ -2,6 +2,7 @@
 <p>Failing to do so will expose the conditional locking logic to the method’s callers and hence be deadlock-prone.</p>
 <p>The types tracked by the rule are: Monitor, Mutex, ReaderWriterLock, ReaderWriterLockSlim and SpinLock from the <code>System.Threading</code>
 namespace.</p>
+<p>Note that the rule is currently in an experimental phase.</p>
 <h2>Noncompliant Code Example</h2>
 <pre>
 class MyClass
@@ -23,7 +24,11 @@ class MyClass
   public void DoSomethingWithReaderWriteLockSlim()
   {
     lockObj.EnterReadLock(); // Noncompliant
-    // do something without releasing in the same method
+    if (IsInitialized())
+    {
+      // ...
+      lockObj.ExitReadLock();
+    }
   }
 }
 </pre>
