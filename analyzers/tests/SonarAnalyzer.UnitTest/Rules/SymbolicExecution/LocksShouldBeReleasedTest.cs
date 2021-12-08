@@ -43,6 +43,11 @@ namespace SonarAnalyzer.UnitTest.Rules
 
         [TestMethod]
         [TestCategory("Rule")]
+        public void LocksShouldBeReleased_Monitor_Conditions_CSharp8() =>
+            Verifier.VerifyAnalyzer(@"TestCases\SymbolicExecution\Sonar\LocksShouldBeReleased.Monitor.Conditions.CSharp8.cs", new LocksShouldBeReleased(), ParseOptionsHelper.FromCSharp8);
+
+        [TestMethod]
+        [TestCategory("Rule")]
         public void LocksShouldBeReleased_Monitor_TryCatch_CS() =>
             Verifier.VerifyAnalyzer(@"TestCases\SymbolicExecution\Sonar\LocksShouldBeReleased.Monitor.TryCatch.cs", new LocksShouldBeReleased());
 
