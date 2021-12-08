@@ -3,7 +3,12 @@ using System.Security.AccessControl;
 using System.Threading;
 
 // .NET Framework 4.8 APIs https://docs.microsoft.com/en-us/dotnet/api/system.threading.mutex.-ctor?view=netframework-4.8
-// In .NET Core, the constructors/methods with MutexSecurity and MutexRights are in the MutexAcl class inside the Microsoft.Windows.Compatibility NuGet.
+
+// In .NET 6, the constructors/methods with MutexSecurity and MutexRights are in the MutexAcl class inside the Microsoft.Windows.Compatibility NuGet.
+// However, Microsoft.Windows.Compatibility does not contain DLLs, but rather a target to liaise with the .NET Framework DLLs.
+// So we test them in the ITs.
+// https://docs.microsoft.com/en-us/dotnet/api/system.threading.mutexacl.tryopenexisting?view=dotnet-plat-ext-6.0
+
 public class MutexTest
 {
     public static void Noncompliant(MutexSecurity mutexSecurity, bool cond)
