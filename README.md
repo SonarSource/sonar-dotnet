@@ -113,7 +113,7 @@ Standalone NuGet packages can be configured the same way as SonarLint in connect
 
 You can see how we do it in our own repository for SonarLint Connected mode (and you can reuse the same concept for the NuGet package):
 
-* We reference in each production-code project this [Directory.Build.props](analyzers/src/Directory.Build.props).
+* We reference in each production-code project this [Directory.Build.targets](analyzers/src/Directory.Build.targets).
 * This file points to the following ruleset: [sonaranalyzer-dotnetCSharp.ruleset](analyzers/.sonarlint/sonaranalyzer-dotnetCSharp.ruleset).
 * And the following [SonarLint.xml](analyzers/.sonarlint/sonaranalyzer-dotnet/CSharp/SonarLint.xml).
 
