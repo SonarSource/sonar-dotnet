@@ -38,20 +38,19 @@ namespace SonarAnalyzer.Rules.SymbolicExecution
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
     public sealed class SymbolicExecutionRunner : SonarDiagnosticAnalyzer
     {
-        private readonly SymbolicExecutionAnalyzerFactory symbolicExecutionAnalyzerFactory = new SymbolicExecutionAnalyzerFactory();
+        private readonly SymbolicExecutionAnalyzerFactory analyzerFactory;
 
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; }
         protected override bool EnableConcurrentExecution => false;
 
-        // This constructor is needed by the Roslyn framework. Please do not delete this.
-        public SymbolicExecutionRunner() =>
-            SupportedDiagnostics = symbolicExecutionAnalyzerFactory.SupportedDiagnostics;
+        public SymbolicExecutionRunner() : this(new SymbolicExecutionAnalyzerFactory()) { }
 
-        // Only testing purposes.
-        internal SymbolicExecutionRunner(ISymbolicExecutionAnalyzer analyzer)
+        internal /* for testring */ SymbolicExecutionRunner(ISymbolicExecutionAnalyzer analyzer) : this (new SymbolicExecutionAnalyzerFactory(analyzer)) { }
+
+        private SymbolicExecutionRunner(SymbolicExecutionAnalyzerFactory analyzerFactory)
         {
-            symbolicExecutionAnalyzerFactory = new SymbolicExecutionAnalyzerFactory(ImmutableArray.Create(analyzer));
-            SupportedDiagnostics = symbolicExecutionAnalyzerFactory.SupportedDiagnostics;
+            this.analyzerFactory = analyzerFactory;
+            SupportedDiagnostics = analyzerFactory.SupportedDiagnostics;
         }
 
         protected override void Initialize(SonarAnalysisContext context)

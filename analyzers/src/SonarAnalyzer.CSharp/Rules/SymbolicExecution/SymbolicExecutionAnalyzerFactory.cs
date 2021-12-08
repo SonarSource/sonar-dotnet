@@ -47,7 +47,7 @@ namespace SonarAnalyzer.Rules.SymbolicExecution
         public ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; }
 
         public SymbolicExecutionAnalyzerFactory()
-            : this(ImmutableArray.Create<ISymbolicExecutionAnalyzer>(
+            : this(
                 new EmptyNullableValueAccess(),
                 new ObjectsShouldNotBeDisposedMoreThanOnce(),
                 new PublicMethodArgumentsShouldBeCheckedForNull(),
@@ -57,15 +57,13 @@ namespace SonarAnalyzer.Rules.SymbolicExecution
                 new NullPointerDereference(),
                 new RestrictDeserializedTypes(),
                 new InitializationVectorShouldBeRandom(),
-                new HashesShouldHaveUnpredictableSalt()))
-        {
-        }
+                new HashesShouldHaveUnpredictableSalt())
+        { }
 
-        internal SymbolicExecutionAnalyzerFactory(ImmutableArray<ISymbolicExecutionAnalyzer> analyzers)
+        internal SymbolicExecutionAnalyzerFactory(params ISymbolicExecutionAnalyzer[] analyzers)
         {
             // Symbolic execution analyzers and supported diagnostics will not change at runtime so they can be safely cached.
-            this.analyzers = analyzers;
-
+            this.analyzers = analyzers.ToImmutableArray();
             SupportedDiagnostics = analyzers.SelectMany(analyzer => analyzer.SupportedDiagnostics).ToImmutableArray();
         }
 
