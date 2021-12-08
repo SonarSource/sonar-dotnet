@@ -18,16 +18,15 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-namespace SonarAnalyzer.SymbolicExecution.Roslyn
-{
-    /// <summary>
-    /// Lifespan of this class is one method analyzed with SE.
-    /// </summary>
-    public class SymbolicCheck
-    {
-        protected SymbolicCheck() { } // Avoid abstract class, fixes S1694
+using Microsoft.CodeAnalysis;
+using SonarAnalyzer.Helpers;
 
-        public virtual ProgramState PreProcess(SymbolicContext context) => context.State;
-        public virtual ProgramState PostProcess(SymbolicContext context) => context.State;
+namespace SonarAnalyzer.SymbolicExecution.Roslyn.Checks
+{
+    public class LocksReleasedAllPaths : LocksReleasedAllPathsBase
+    {
+        public static readonly DiagnosticDescriptor S2222 = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
+
+        protected override DiagnosticDescriptor Rule { get; } = S2222;
     }
 }

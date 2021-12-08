@@ -32,6 +32,7 @@ using SonarAnalyzer.Extensions;
 using SonarAnalyzer.Helpers;
 using SonarAnalyzer.LiveVariableAnalysis.CSharp;
 using SonarAnalyzer.SymbolicExecution.Roslyn;
+using SonarAnalyzer.SymbolicExecution.Roslyn.Checks;
 using SonarAnalyzer.SymbolicExecution.Sonar;
 using StyleCop.Analyzers.Lightup;
 
@@ -41,6 +42,8 @@ namespace SonarAnalyzer.Rules.SymbolicExecution
     public sealed class SymbolicExecutionRunner : SonarDiagnosticAnalyzer
     {
         private readonly SymbolicExecutionAnalyzerFactory analyzerFactory;  // ToDo: This should be eventually removed
+        private static readonly ImmutableDictionary<DiagnosticDescriptor, Func<SymbolicCheck>> AllRules = ImmutableDictionary<DiagnosticDescriptor, Func<SymbolicCheck>>.Empty
+            .Add(LocksReleasedAllPaths.S2222, NewCheck<LocksReleasedAllPaths>());
 
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; }
         protected override bool EnableConcurrentExecution => false;
@@ -52,7 +55,7 @@ namespace SonarAnalyzer.Rules.SymbolicExecution
         private SymbolicExecutionRunner(SymbolicExecutionAnalyzerFactory analyzerFactory)
         {
             this.analyzerFactory = analyzerFactory;
-            SupportedDiagnostics = analyzerFactory.SupportedDiagnostics;
+            SupportedDiagnostics = analyzerFactory.SupportedDiagnostics.Concat(AllRules.Keys).ToImmutableArray();  // ToDo: This should be eventually moved to the property itself
         }
 
         protected override void Initialize(SonarAnalysisContext context)
@@ -113,7 +116,7 @@ namespace SonarAnalyzer.Rules.SymbolicExecution
 
         private static void AnalyzeRoslyn(SyntaxNodeAnalysisContext context, CSharpSyntaxNode body, ISymbol symbol)
         {
-            var checks = new SymbolicCheck[] { }; // FIXME: Fill
+            var checks = AllRules.Values.Select(x => x()).ToArray();
             // FIXME: Filter enabled
             // FIXME: Filter desired
             if (checks.Any())
@@ -184,5 +187,8 @@ namespace SonarAnalyzer.Rules.SymbolicExecution
                 analyzerContext.Dispose();
             }
         }
+
+        private static Func<SymbolicCheck> NewCheck<TCheck>() where TCheck : SymbolicCheck, new() =>
+            () => new TCheck(); // Main purpose of this method is to validate TCheck against generic constraints
     }
 }
