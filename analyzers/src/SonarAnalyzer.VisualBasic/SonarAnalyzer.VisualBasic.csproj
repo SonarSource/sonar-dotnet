@@ -24,7 +24,7 @@
 
   <Target Name="SignDlls" Condition="'$(SignAssembly)' == 'true' And '$(TargetFramework)' == 'NET46' ">
     <Message Importance="high" Text="Signing analyzer assemblies from $(OutputPath)" />
-    <Exec WorkingDirectory="$(OutputPath)" Command="&quot;$(SIGNTOOL_PATH)&quot; sign /fd SHA256 /f $(PFX_PATH) /p $(PFX_PASSWORD) /tr http://sha256timestamp.ws.symantec.com/sha256/timestamp SonarAnalyzer*.dll" />
+    <Exec WorkingDirectory="$(OutputPath)" Command="&quot;$(SIGNTOOL_PATH)&quot; sign /fd SHA256 /f $(PFX_PATH) /p $(PFX_PASSWORD) /du https://www.sonarsource.com/ /d &quot;Roslyn analyzers that spot Bugs, Vulnerabilities and Code Smells in your code.&quot; /tr http://sha256timestamp.ws.symantec.com/sha256/timestamp SonarAnalyzer*.dll" />
   </Target>
 
   <Target Name="CopyBinaries" AfterTargets="Build" DependsOnTargets="SignDlls" Condition=" '$(TargetFramework)' == 'NET46' ">
