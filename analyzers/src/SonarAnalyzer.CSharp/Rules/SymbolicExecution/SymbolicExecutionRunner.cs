@@ -116,9 +116,12 @@ namespace SonarAnalyzer.Rules.SymbolicExecution
 
         private static void AnalyzeRoslyn(SyntaxNodeAnalysisContext context, CSharpSyntaxNode body, ISymbol symbol)
         {
-            var checks = AllRules.Values.Select(x => x()).ToArray();
-            // FIXME: Filter enabled
-            // FIXME: Filter desired
+            var checks = AllRules
+                .Where(x => SymbolicExecutionAnalyzerFactory.IsEnabled(context.Compilation.Options, x.Key))
+                // FIXME: Only for unique type
+                .Select(x => x.Value())
+                // FIXME: Filter desired
+                .ToArray();
             if (checks.Any())
             {
                 try
