@@ -39,3 +39,20 @@ record Record
         }
     }
 }
+
+// https://github.com/SonarSource/sonar-dotnet/issues/5117
+public class Repro_5117
+{
+    public void Method()
+    {
+        [System.Diagnostics.Contracts.Pure] // Noncompliant
+        void LocalFunctionPure()
+        {
+        }
+
+        [System.Diagnostics.Contracts.ContractAbbreviator]  // Qualified name was throwing NRE
+        void LocalFunctionOther()
+        {
+        }
+    }
+}
