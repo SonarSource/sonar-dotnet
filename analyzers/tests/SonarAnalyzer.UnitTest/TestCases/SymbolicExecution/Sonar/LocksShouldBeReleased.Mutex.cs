@@ -1,139 +1,257 @@
 ﻿using System;
 using System.Threading;
 
-namespace Net6
+// https://docs.microsoft.com/en-us/dotnet/standard/threading/mutexes
+internal class Foo
 {
-    // https://docs.microsoft.com/en-us/dotnet/standard/threading/mutexes
-    internal class NetMutexTest
+    bool cond;
+    public Mutex instanceMutex;
+    public static Mutex staticMutex;
+
+    // Note that dispose does not release the resource
+    public void Noncompliant(Mutex paramMutex, Mutex paramMutex2, Foo foo)
     {
-        public static void AcquiredNotReleased(Mutex paramMutex)
+        var m0 = new Mutex(true, "bar", out var m0WasCreated); // FN
+
+        var m1 = new Mutex(false);
+        m1.WaitOne(); // FN
+
+        var m2 = new Mutex(false, "qix", out var m2WasCreated);
+        m2.WaitOne(); // FN
+
+        var m3 = Mutex.OpenExisting("x");
+        m3.WaitOne(); // FN
+
+        foo.instanceMutex.WaitOne(); // FN
+
+        Foo.staticMutex.WaitOne(); // FN
+
+        if (cond)
         {
-            // Note that dispose does not release the resource
+            m0.ReleaseMutex();
+            m1.ReleaseMutex();
+            m2.ReleaseMutex();
+            m3.ReleaseMutex();
+            foo.instanceMutex.ReleaseMutex();
+            Foo.staticMutex.ReleaseMutex();
+        }
+        m0.Dispose();
+        m1.Dispose();
+        m2.Dispose();
+        m3.Dispose();
 
-            using (var m = new Mutex(true, "foo")) // FN, 'true' means it owns the mutex if no exception gets thrown
+        using (var mutexInUsing = new Mutex(true, "foo")) // FN
+        {
+            // 'true' means it owns the mutex if no exception gets thrown
+            if (cond)
             {
-                // do stuff
+                mutexInUsing.ReleaseMutex();
             }
+        }
 
-            var m0 = new Mutex(initiallyOwned: true, "bar", out var m0WasCreated); // FN
-            m0.Dispose();
-
-            var m1 = new Mutex(false);
-            m1.WaitOne(); // FN
-            m1.Dispose();
-
-            var m2 = new Mutex(false, "qix", out var m2WasCreated);
-            m2.WaitOne(); // FN
-            m2.Dispose();
-
-            var m3 = Mutex.OpenExisting("x");
-            m3.WaitOne(); // FN
-
-            if (Mutex.TryOpenExisting("y", out var m4))
+        if (Mutex.TryOpenExisting("y", out var mutexInOutVar))
+        {
+            mutexInOutVar.WaitOne(); // FN
+            if (cond)
             {
-                m4.WaitOne(); // FN
+                mutexInOutVar.ReleaseMutex();
             }
+        }
 
-            var m5 = new Mutex(false);
-            var acquired = m5.WaitOne(200, true); // FN, not released on the corect flow
-            if (acquired)
+        var m = new Mutex(false);
+        var mIsAcquired = m.WaitOne(200, true); // FN
+        if (mIsAcquired)
+        {
+            // here it should be released
+        }
+        else
+        {
+            m.ReleaseMutex(); // this is a programming error
+        }
+
+        var paramMutexIsAcquired = paramMutex.WaitOne(400, false); // FN
+        if (paramMutexIsAcquired)
+        {
+            if (cond)
             {
-                // here it should be released
+
             }
             else
-            {
-                m5.ReleaseMutex(); // this is a programming error
-            }
-
-            var isAcquired = paramMutex.WaitOne(400, false); // FN
-            if (isAcquired)
-            {
-                // not released
-            }
-        }
-
-        public static void UnsupportedWaitAny(Mutex m1, Mutex m2, Mutex m3)
-        {
-            // it is too complex to support this scenario
-            WaitHandle[] handles = new[] { m1, m2, m3 };
-            var index = WaitHandle.WaitAny(handles);
-            // the mutex at the given index should be released
-        }
-
-        public static void UnsupportedWaitAll(Mutex m1, Mutex m2, Mutex m3)
-        {
-            // it is too complex to support this scenario
-            WaitHandle[] handles = new[] { m1, m2, m3 };
-            var allHaveBeenAcquired = WaitHandle.WaitAll(handles);
-            if (allHaveBeenAcquired)
-            {
-                // all indexes should be released
-            }
-        }
-
-        public static void CompliantNotAcquired(Mutex paramMutex)
-        {
-            var m1 = new Mutex(false);
-            var m2 = Mutex.OpenExisting("foo");
-            if (Mutex.TryOpenExisting("foo", out var m3))
-            {
-                // do stuff but don't acquire
-            }
-            var m4 = new Mutex(initiallyOwned: false, "foo", out var mutexWasCreated);
-            if (paramMutex != null)
-            {
-                // do stuff but don't acquire
-            }
-        }
-
-        public static void CompliantAcquiredAndReleased(Mutex paramMutex)
-        {
-            var m1 = new Mutex(false);
-            m1.WaitOne();
-            m1.ReleaseMutex();
-
-            var m2 = Mutex.OpenExisting("foo");
-            if (m2.WaitOne(500))
-            {
-                m2.ReleaseMutex();
-            }
-
-            var isAcquired = paramMutex.WaitOne(400, false);
-            if (isAcquired)
             {
                 paramMutex.ReleaseMutex();
             }
         }
-
-        public static void CompliantComplex(string mutexName, bool shouldAcquire)
+        while (paramMutex2.WaitOne(400, false)) // FN
         {
-            Mutex m = null;
-            bool acquired = false;
-            try
+            if (cond)
             {
-                m = Mutex.OpenExisting(mutexName);
-                if (shouldAcquire)
-                {
-                    m.WaitOne();
-                    acquired = true;
-                }
+                paramMutex2.ReleaseMutex();
             }
-            catch (UnauthorizedAccessException)
+        }
+    }
+
+    public void NoncompliantReleasedThenAcquiredAndReleased(Mutex paramMutex)
+    {
+        paramMutex.ReleaseMutex();
+        paramMutex.WaitOne(); // FN, after this acquire it's not released on all paths
+        if (cond)
+        {
+            paramMutex.ReleaseMutex();
+        }
+    }
+
+    public void UnsupportedWaitAny(Mutex m1, Mutex m2, Mutex m3)
+    {
+        // it is too complex to support this scenario
+        WaitHandle[] handles = new[] { m1, m2, m3 };
+        var index = WaitHandle.WaitAny(handles); // FN
+        // the mutex at the given index should be released
+        var acquiredMutex = (Mutex)handles[index];
+        if (cond)
+        {
+            acquiredMutex.ReleaseMutex();
+        }
+    }
+
+    public void UnsupportedWaitAll(Mutex m1, Mutex m2, Mutex m3)
+    {
+        // it is too complex to support this scenario
+        WaitHandle[] handles = new[] { m1, m2, m3 };
+        var allHaveBeenAcquired = WaitHandle.WaitAll(handles); // FN
+        if (allHaveBeenAcquired)
+        {
+            // all indexes should be released
+            if (cond)
             {
-                return;
+                ((Mutex)handles[0]).ReleaseMutex();
             }
-            finally
+        }
+    }
+
+    public void CompliantAcquiredNotReleased(Mutex paramMutex, Foo foo)
+    {
+        using (var m = new Mutex(true, "foo"))
+        {
+            // do stuff
+        }
+
+        var m0 = new Mutex(true, "bar", out var m0WasCreated);
+        m0.Dispose();
+
+        var m1 = new Mutex(false);
+        m1.WaitOne();
+        m1.Dispose();
+
+        var m2 = new Mutex(false, "qix", out var m2WasCreated);
+        m2.WaitOne();
+        m2.Dispose();
+
+        var m3 = Mutex.OpenExisting("x");
+        m3.WaitOne();
+
+        if (Mutex.TryOpenExisting("y", out var m4))
+        {
+            m4.WaitOne();
+        }
+
+        var isAcquired = paramMutex.WaitOne(400, false);
+        if (isAcquired)
+        {
+            // not released
+        }
+
+        foo.instanceMutex.WaitOne();
+        Foo.staticMutex.WaitOne();
+    }
+
+    public void CompliantNotAcquired(Mutex paramMutex)
+    {
+        var m1 = new Mutex(false);
+        var m2 = Mutex.OpenExisting("foo");
+        if (Mutex.TryOpenExisting("foo", out var m3))
+        {
+            // do stuff but don't acquire
+        }
+        var m4 = new Mutex(false, "foo", out var mutexWasCreated);
+        if (paramMutex != null)
+        {
+            // do stuff but don't acquire
+        }
+    }
+
+    public void CompliantAcquiredAndReleased(Mutex paramMutex, Foo foo)
+    {
+        var m1 = new Mutex(false);
+        m1.WaitOne();
+        m1.ReleaseMutex();
+
+        var m2 = Mutex.OpenExisting("foo");
+        if (m2.WaitOne(500))
+        {
+            m2.ReleaseMutex();
+        }
+
+        var isAcquired = paramMutex.WaitOne(400, false);
+        if (isAcquired)
+        {
+            paramMutex.ReleaseMutex();
+        }
+        if (paramMutex.WaitOne(400, false))
+        {
+            paramMutex.ReleaseMutex();
+        }
+
+        foo.instanceMutex.WaitOne();
+        if (cond)
+        {
+            foo.instanceMutex.ReleaseMutex();
+        }
+        else
+        {
+            foo.instanceMutex.ReleaseMutex();
+        }
+
+        while (cond)
+        {
+            Foo.staticMutex.WaitOne();
+            Foo.staticMutex.ReleaseMutex();
+        }
+    }
+
+    public void CompliantReleasedThenAcquired(Mutex paramMutex)
+    {
+        // this scenario would be a tolerable FP
+        paramMutex.ReleaseMutex();
+        paramMutex.WaitOne(); 
+    }
+
+    public void CompliantComplex(string mutexName, bool shouldAcquire)
+    {
+        Mutex m = null;
+        bool acquired = false;
+        try
+        {
+            m = Mutex.OpenExisting(mutexName);
+            if (shouldAcquire)
             {
-                // there can be other exceptions when opening
-                if (m != null)
+                m.WaitOne();
+                acquired = true;
+            }
+        }
+        catch (UnauthorizedAccessException)
+        {
+            return;
+        }
+        finally
+        {
+            if (m != null)
+            {
+                // can enter also if an exception was thrown when Waiting
+                if (acquired)
                 {
-                    // can enter also if an exception was thrown when Waiting
-                    if (acquired)
-                    {
-                        m.ReleaseMutex();
-                    }
-                    m.Dispose();
+                    m.ReleaseMutex();
                 }
+                m.Dispose();
             }
         }
     }

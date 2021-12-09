@@ -85,7 +85,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void LockReleasedAllPaths_Mutex_NetFramework_CS() =>
-            Verifier.VerifyAnalyzer(@"TestCases\SymbolicExecution\Sonar\LocksShouldBeReleased.Mutex.NetFramework.cs", new LockReleasedAllPaths(), ParseOptionsHelper.FromCSharp8);
+            Verifier.VerifyAnalyzer(@"TestCases\SymbolicExecution\Sonar\LocksShouldBeReleased.Mutex.NetFx.cs", new LockReleasedAllPaths(), ParseOptionsHelper.FromCSharp8);
 #endif
 
 
