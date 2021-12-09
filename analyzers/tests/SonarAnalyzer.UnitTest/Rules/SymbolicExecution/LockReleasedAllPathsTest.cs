@@ -75,5 +75,19 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestCategory("Rule")]
         public void LockReleasedAllPaths_ReaderWriterLockSlim_CS() =>
             Verifier.VerifyAnalyzer(@"TestCases\SymbolicExecution\Sonar\LockReleasedAllPaths.ReaderWriterLockSlim.cs", new LockReleasedAllPaths());
+
+        [TestMethod]
+        [TestCategory("Rule")]
+        public void LockReleasedAllPaths_Mutex_CS() =>
+    Verifier.VerifyAnalyzer(@"TestCases\SymbolicExecution\Sonar\LocksShouldBeReleased.Mutex.cs", new LockReleasedAllPaths(), ParseOptionsHelper.FromCSharp8);
+
+#if NETFRAMEWORK
+        [TestMethod]
+        [TestCategory("Rule")]
+        public void LockReleasedAllPaths_Mutex_NetFramework_CS() =>
+            Verifier.VerifyAnalyzer(@"TestCases\SymbolicExecution\Sonar\LocksShouldBeReleased.Mutex.NetFramework.cs", new LockReleasedAllPaths(), ParseOptionsHelper.FromCSharp8);
+#endif
+
+
     }
 }
