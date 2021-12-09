@@ -385,7 +385,10 @@ stages:
           GITHUB_BRANCH: $(Build.SourceBranchName)
           GIT_SHA1: $(Build.SourceVersion)
         inputs:
-          goals: 'deploy -P release,sign'
+          ${{ if eq(variables.isReleaseBranch, 'True') }}:
+            goals: 'deploy -P release,sign'
+          ${{ else }}:
+            goals: 'deploy -P release'
           options: >-
             $(commonMavenArguments)
             --settings $(mavenSettings.secureFilePath)
