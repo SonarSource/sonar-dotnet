@@ -13,7 +13,7 @@ public class MutexTest
 {
     public static void Noncompliant(MutexSecurity mutexSecurity, bool cond)
     {
-        // Dispose does not release the resource
+        // Note that Dispose() closes the underlying WaitHandle, but does not release the mutex
         var m0 = new Mutex(true, "foo", out var mutexWasCreated, mutexSecurity); // FN
         if (cond)
         {
@@ -24,7 +24,6 @@ public class MutexTest
 
     public static void CompliantAcquiredNotReleased(MutexSecurity mutexSecurity)
     {
-        // Dispose does not release the resource
         var m0 = new Mutex(true, "foo", out var mutexWasCreated, mutexSecurity);
         m0.Dispose();
     }

@@ -8,7 +8,6 @@ internal class Foo
     public Mutex instanceMutex;
     public static Mutex staticMutex;
 
-    // Note that dispose does not release the resource
     public void Noncompliant(Mutex paramMutex, Mutex paramMutex2, Foo foo)
     {
         var m0 = new Mutex(true, "bar", out var m0WasCreated); // FN
@@ -35,14 +34,16 @@ internal class Foo
             foo.instanceMutex.ReleaseMutex();
             Foo.staticMutex.ReleaseMutex();
         }
+
+        // Note that Dispose() closes the underlying WaitHandle, but does not release the mutex
         m0.Dispose();
         m1.Dispose();
         m2.Dispose();
         m3.Dispose();
 
+        // 'true' means it owns the mutex if no exception gets thrown
         using (var mutexInUsing = new Mutex(true, "foo")) // FN
         {
-            // 'true' means it owns the mutex if no exception gets thrown
             if (cond)
             {
                 mutexInUsing.ReleaseMutex();
@@ -97,6 +98,26 @@ internal class Foo
         if (cond)
         {
             paramMutex.ReleaseMutex();
+        }
+    }
+
+    public void DifferentInstancesOnThis(Foo foo)
+    {
+        foo.instanceMutex.WaitOne(); // Compliant
+        instanceMutex.WaitOne(); // FN
+        if (cond)
+        {
+            instanceMutex.ReleaseMutex();
+        }
+    }
+
+    public void DifferentInstancesOnParameter(Foo foo)
+    {
+        foo.instanceMutex.WaitOne(); // FN
+        instanceMutex.WaitOne(); // Compliant
+        if (cond)
+        {
+            foo.instanceMutex.ReleaseMutex();
         }
     }
 
