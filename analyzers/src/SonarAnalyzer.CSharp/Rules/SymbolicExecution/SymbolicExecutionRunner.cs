@@ -106,18 +106,20 @@ namespace SonarAnalyzer.Rules.SymbolicExecution
         {
             if (body != null && !body.ContainsDiagnostics)
             {
-                AnalyzeSonar(context, body, symbol);
+                var isTestProject = analysisContext.IsTestProject(context.Compilation, context.Options);
+                var isScannerRun = analysisContext.IsScannerRun(context.Options);
+                AnalyzeSonar(context, isTestProject, isScannerRun, body, symbol);
                 if (ControlFlowGraph.IsAvailable)   // ToDo: Make this configurable for UTs when migrating other rules, see DeadStores
                 {
-                    AnalyzeRoslyn(context, body, symbol);
+                    AnalyzeRoslyn(context, isTestProject, isScannerRun, body, symbol);
                 }
             }
         }
 
-        private static void AnalyzeRoslyn(SyntaxNodeAnalysisContext context, CSharpSyntaxNode body, ISymbol symbol)
+        private static void AnalyzeRoslyn(SyntaxNodeAnalysisContext context, bool isTestProject, bool isScannerRun, CSharpSyntaxNode body, ISymbol symbol)
         {
             var checks = AllRules
-                .Where(x => SymbolicExecutionAnalyzerFactory.IsEnabled(context.Compilation.Options, x.Key))
+                .Where(x => SymbolicExecutionAnalyzerFactory.IsEnabled(context, isTestProject, isScannerRun, x.Key))
                 .GroupBy(x => x.Value.Type)                             // Multiple DiagnosticDescriptors (S2583, S2589) can share the same check type
                 .Select(x => x.First().Value.CreateInstance(context))   // We need just one instance in that case
                 .Where(x => x.ShouldExecute())
@@ -137,11 +139,9 @@ namespace SonarAnalyzer.Rules.SymbolicExecution
             }
         }
 
-        private void AnalyzeSonar(SyntaxNodeAnalysisContext context, CSharpSyntaxNode body, ISymbol symbol)
+        private void AnalyzeSonar(SyntaxNodeAnalysisContext context, bool isTestProject, bool isScannerRun, CSharpSyntaxNode body, ISymbol symbol)
         {
-            var isTestProject = analysisContext.IsTestProject(context.Compilation, context.Options);
-            var isScannerRun = analysisContext.IsScannerRun(context.Options);
-            var enabledAnalyzers = symbolicExecutionAnalyzerFactory.GetEnabledAnalyzers(context, isTestProject, isScannerRun);
+            var enabledAnalyzers = analyzerFactory.GetEnabledAnalyzers(context, isTestProject, isScannerRun);
             if (enabledAnalyzers.Any() && CSharpControlFlowGraph.TryGet(body, context.SemanticModel, out var cfg))
             {
                 var lva = new SonarCSharpLiveVariableAnalysis(cfg, symbol, context.SemanticModel);
