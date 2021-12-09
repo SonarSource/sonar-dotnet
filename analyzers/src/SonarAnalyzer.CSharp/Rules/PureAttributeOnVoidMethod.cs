@@ -21,6 +21,7 @@
 using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
@@ -41,7 +42,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 c =>
                 {
                     if ((LocalFunctionStatementSyntaxWrapper)c.Node is var localFunction
-                        && localFunction.AttributeLists.SelectMany(x => x.Attributes).Any(attribute => IsPureAttribute(attribute.Name.GetIdentifier().Identifier.ValueText))
+                        && localFunction.AttributeLists.SelectMany(x => x.Attributes).Any(IsPureAttribute)
                         && InvalidPureDataAttributeUsage((IMethodSymbol)c.SemanticModel.GetDeclaredSymbol(c.Node)) is { } pureAttribute)
                     {
                         c.ReportIssue(Diagnostic.Create(Rule, pureAttribute.ApplicationSyntaxReference.GetSyntax().GetLocation()));
@@ -50,7 +51,8 @@ namespace SonarAnalyzer.Rules.CSharp
                 SyntaxKindEx.LocalFunctionStatement);
         }
 
-        private static bool IsPureAttribute(string attributeName) =>
-            attributeName.Equals("Pure") || attributeName.Equals("PureAttribute");
+        private static bool IsPureAttribute(AttributeSyntax attribute) =>
+            attribute.Name.GetIdentifier() is { } name
+            && (name.Identifier.ValueText == "Pure" || name.Identifier.ValueText == "PureAttribute");
     }
 }

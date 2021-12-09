@@ -303,6 +303,7 @@ namespace SonarAnalyzer.Helpers
             {
                 MemberBindingExpressionSyntax memberBinding => memberBinding.Name,
                 MemberAccessExpressionSyntax memberAccess => memberAccess.Name,
+                QualifiedNameSyntax qualified => qualified.Right,
                 IdentifierNameSyntax identifier => identifier,
                 _ => null
             };
