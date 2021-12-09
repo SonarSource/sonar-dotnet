@@ -69,7 +69,7 @@ namespace SonarAnalyzer.Rules.SymbolicExecution
                 SyntaxKind.MethodDeclaration);
 
             context.RegisterSyntaxNodeActionInNonGenerated(
-                c => Analyze<PropertyDeclarationSyntax>(context, c, x => x.ExpressionBody),
+                c => Analyze<PropertyDeclarationSyntax>(context, c, x => x.ExpressionBody?.Expression),
                 SyntaxKind.PropertyDeclaration);
 
             context.RegisterSyntaxNodeActionInNonGenerated(
