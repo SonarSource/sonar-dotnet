@@ -22,6 +22,7 @@ using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Linq;
 using System.Threading;
+using FluentAssertions;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.Diagnostics;
@@ -35,7 +36,7 @@ namespace SonarAnalyzer.UnitTest.Rules.SymbolicExecution.Sonar
     [TestClass]
     public class SymbolicExecutionAnalyzerFactoryTest
     {
-        private readonly List<string> symbolicExecutionRuleIds = new ()
+        private readonly List<string> symbolicExecutionRuleIds = new()
         {
             EmptyNullableValueAccess.DiagnosticId,
             ObjectsShouldNotBeDisposedMoreThanOnce.DiagnosticId,
@@ -71,15 +72,11 @@ namespace SonarAnalyzer.UnitTest.Rules.SymbolicExecution.Sonar
         {
             var sut = new SymbolicExecutionAnalyzerFactory();
             var diagnostics = symbolicExecutionRuleIds.ToImmutableDictionary(v => v, v => v == EmptyNullableValueAccess.DiagnosticId ? reportDiagnostic : ReportDiagnostic.Suppress);
-
             var context = CreateSyntaxNodeAnalysisContext(diagnostics);
-            var analyzers = sut.GetEnabledAnalyzers(context).ToList();
-            var enabledAnalyzers =
-                analyzers
-                    .SelectMany(analyzer => analyzer.SupportedDiagnostics.Select(descriptor => descriptor.Id))
-                    .ToList();
+            var analyzers = sut.GetEnabledAnalyzers(context, false, false).ToList();
+            var enabledAnalyzers = analyzers.SelectMany(analyzer => analyzer.SupportedDiagnostics.Select(descriptor => descriptor.Id)).ToList();
 
-            CollectionAssert.AreEquivalent(enabledAnalyzers, new[] {EmptyNullableValueAccess.DiagnosticId});
+            enabledAnalyzers.Should().Contain(EmptyNullableValueAccess.DiagnosticId).And.ContainSingle();
         }
 
         [TestMethod]
@@ -88,13 +85,22 @@ namespace SonarAnalyzer.UnitTest.Rules.SymbolicExecution.Sonar
             var sut = new SymbolicExecutionAnalyzerFactory();
             var diagnostics = symbolicExecutionRuleIds.ToImmutableDictionary(v => v, _ => ReportDiagnostic.Suppress);
             var context = CreateSyntaxNodeAnalysisContext(diagnostics);
-            var analyzers = sut.GetEnabledAnalyzers(context).ToList();
-            var enabledAnalyzers =
-                analyzers
-                    .SelectMany(analyzer => analyzer.SupportedDiagnostics.Select(descriptor => descriptor.Id))
-                    .ToList();
+            var analyzers = sut.GetEnabledAnalyzers(context, false, false).ToList();
+            var enabledAnalyzers = analyzers.SelectMany(analyzer => analyzer.SupportedDiagnostics.Select(descriptor => descriptor.Id)).ToList();
 
-            CollectionAssert.AreEquivalent(new List<string>(), enabledAnalyzers);
+            enabledAnalyzers.Should().BeEmpty();
+        }
+
+        [TestMethod]
+        public void GetEnabledAnalyzers_ReturnsEmptyList_OnTestProjectScannerRun()  // Old SE rules do not run on test code
+        {
+            var sut = new SymbolicExecutionAnalyzerFactory();
+            var diagnostics = symbolicExecutionRuleIds.ToImmutableDictionary(v => v, _ => ReportDiagnostic.Warn);
+            var context = CreateSyntaxNodeAnalysisContext(diagnostics);
+            var analyzers = sut.GetEnabledAnalyzers(context, true, true).ToList();
+            var enabledAnalyzers = analyzers.SelectMany(analyzer => analyzer.SupportedDiagnostics.Select(descriptor => descriptor.Id)).ToList();
+
+            enabledAnalyzers.Should().BeEmpty();
         }
 
         private static SyntaxNodeAnalysisContext CreateSyntaxNodeAnalysisContext(ImmutableDictionary<string, ReportDiagnostic> diagnostics)
@@ -111,7 +117,7 @@ namespace SonarAnalyzer.UnitTest.Rules.SymbolicExecution.Sonar
 
         private static CSharpCompilation CreateCSharpCompilation(ImmutableDictionary<string, ReportDiagnostic> diagnostics, SyntaxTree syntaxTree) =>
             CSharpCompilation
-                .Create("Assembly.dll", new[] {syntaxTree}, null, new CSharpCompilationOptions(OutputKind.DynamicallyLinkedLibrary)
+                .Create("Assembly.dll", new[] { syntaxTree }, null, new CSharpCompilationOptions(OutputKind.DynamicallyLinkedLibrary)
                 .WithSpecificDiagnosticOptions(diagnostics));
     }
 }
