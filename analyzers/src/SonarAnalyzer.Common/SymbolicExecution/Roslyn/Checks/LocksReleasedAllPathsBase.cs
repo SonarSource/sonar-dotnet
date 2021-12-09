@@ -30,7 +30,9 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn.Checks
 
         protected abstract DiagnosticDescriptor Rule { get; }
 
+        // ToDo: Implement early bail-out if there's no interesting descendant node in context.Node to avoid useless SE runs
+        // ToDo: This returns "false" now to avoid running this check on master and creating Roslyn CFG for all rules
         public override bool ShouldExecute() =>
-            true;   // ToDo: Implement early bail-out if there's no interesting descendant node in context.Node to avoid useless SE runs
+            false;
     }
 }
