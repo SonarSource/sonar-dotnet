@@ -27,7 +27,6 @@ using System.Text.RegularExpressions;
 using FluentAssertions;
 using Google.Protobuf;
 using Microsoft.CodeAnalysis;
-using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;

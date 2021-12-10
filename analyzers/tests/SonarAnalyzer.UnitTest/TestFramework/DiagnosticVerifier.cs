@@ -122,6 +122,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework
                                                                         string sonarProjectConfigPath = null,
                                                                         string[] onlyDiagnostics = null)
         {
+            onlyDiagnostics ??= Array.Empty<string>();
             var supportedDiagnostics = diagnosticAnalyzers
                     .SelectMany(x => x.SupportedDiagnostics.Select(d => d.Id))
                     .Concat(new[] { AnalyzerFailedDiagnosticId })
@@ -150,7 +151,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework
                 }
                 else
                 {
-                    return onlyDiagnostics == null || onlyDiagnostics.Contains(id) ? ReportDiagnostic.Warn : ReportDiagnostic.Suppress;
+                    return !onlyDiagnostics.Any() || onlyDiagnostics.Contains(id) ? ReportDiagnostic.Warn : ReportDiagnostic.Suppress;
                 }
             }
         }

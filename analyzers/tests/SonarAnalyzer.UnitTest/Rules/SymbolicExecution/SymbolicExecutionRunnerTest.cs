@@ -118,59 +118,46 @@ namespace SonarAnalyzer.UnitTest.Rules.SymbolicExecution
         }
 
         [TestMethod]
-        public void Analyze_Severity_ExecutesWhenAll()
-        {
-            const string code =
-@"public class Sample
-{
-    public void Main()
-    {
-        string s = null; // Noncompliant {{Message for SMain}}
-                         // Noncompliant@-1 {{Message for SAll}}
-        s.ToString();    // Noncompliant {{'s' is null on at least one execution path.}} S2259
-    }
-}";
-            var sut = new SymbolicExecutionRunner();
-            sut.RegisterRule<MainScopeAssignmentRuleCheck>(MainScopeAssignmentRuleCheck.SMain);
-            sut.RegisterRule<AllScopeAssignmentRuleCheck>(AllScopeAssignmentRuleCheck.SAll);
-            Verifier.VerifyCSharpAnalyzer(code, sut, null);
-        }
+        public void Analyze_Severity_ExecutesWhenAll() =>
+            Verify(@"string s = null;   // Noncompliant    {{Message for SAll}}
+                                        // Noncompliant@-1 {{Message for SMain}}
+                    s.ToString();       // Noncompliant    {{'s' is null on at least one execution path.}} - rule S2259");
 
         [TestMethod]
-        public void Analyze_Severity_ExecutesWhenOne()
-        {
-            const string code =
-@"public class Sample
-{
-    public void Main()
-    {
-        string s = null; // Noncompliant {{Message for SMain}}
-        s.ToString();    // Compliant, should not raise S2259
-    }
-}";
-            var sut = new SymbolicExecutionRunner();
-            sut.RegisterRule<MainScopeAssignmentRuleCheck>(MainScopeAssignmentRuleCheck.SMain);
-            sut.RegisterRule<AllScopeAssignmentRuleCheck>(AllScopeAssignmentRuleCheck.SAll);
-            Verifier.VerifyCSharpAnalyzer(code, sut, null, MainScopeAssignmentRuleCheck.SMain);
-        }
+        public void Analyze_Severity_ExecutesWhenMore() =>
+            Verify(@"string s = null;   // Noncompliant    {{Message for SAll}}
+                                        // Noncompliant@-1 {{Message for SMain}}
+                    s.ToString();       // Compliant, should not raise S2259",
+                AllScopeAssignmentRuleCheck.SAll,
+                MainScopeAssignmentRuleCheck.SMain);
+
 
         [TestMethod]
-        public void Analyze_Severity_DoesNotExecutesWhenNone()
+        public void Analyze_Severity_ExecutesWhenOne() =>
+            Verify(@"string s = null; // Noncompliant {{Message for SMain}}
+                     s.ToString();    // Compliant, should not raise S2259",
+                MainScopeAssignmentRuleCheck.SMain);
+
+        [TestMethod]
+        public void Analyze_Severity_DoesNotExecutesWhenNone() =>
+            Verify(@"string s = null;   // Compliant, SMain and SAll are suppressed by test framework, because only 'SAnother' is active
+                     s.ToString();      // Compliant, should not raise S2259",
+                new DiagnosticDescriptor("SAnother", "Non-SE rule", "Message", "Category", DiagnosticSeverity.Warning, true, customTags: DiagnosticDescriptorBuilder.MainSourceScopeTag));
+
+        private static void Verify(string body, params DiagnosticDescriptor[] onlyRules)
         {
-            const string code =
-@"public class Sample
-{
+            var code =
+$@"public class Sample
+{{
     public void Main()
-    {
-        string s = null; // Compliant, SMain and SAll are suppressed by test framework, because only 'SAnother' is active
-        s.ToString();    // Compliant, should not raise S2259
-    }
-}";
+    {{
+        {body}
+    }}
+}}";
             var sut = new SymbolicExecutionRunner();
-            sut.RegisterRule<MainScopeAssignmentRuleCheck>(MainScopeAssignmentRuleCheck.SMain);
             sut.RegisterRule<AllScopeAssignmentRuleCheck>(AllScopeAssignmentRuleCheck.SAll);
-            var anotherRule = new DiagnosticDescriptor("SAnother", "Non-SE rule", "Message", "Category", DiagnosticSeverity.Warning, true, customTags: DiagnosticDescriptorBuilder.MainSourceScopeTag);
-            Verifier.VerifyCSharpAnalyzer(code, sut, null, anotherRule);
+            sut.RegisterRule<MainScopeAssignmentRuleCheck>(MainScopeAssignmentRuleCheck.SMain);
+            Verifier.VerifyCSharpAnalyzer(code, sut, null, onlyRules);
         }
     }
 }
