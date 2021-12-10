@@ -92,7 +92,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework
                                           .AddSnippet(snippet)
                                           .AddReferences(additionalReferences)
                                           .GetSolution();
-            CompileAndVerifyAnalyzer(solution, new DiagnosticAnalyzer[] { diagnosticAnalyzer }, options, checkMode, null, onlyDiagnostics.Select(x => x.Id).ToArray());
+            CompileAndVerifyAnalyzer(solution, new DiagnosticAnalyzer[] { diagnosticAnalyzer }, options, checkMode, null, onlyDiagnostics?.Select(x => x.Id).ToArray());
         }
 
         /// <summary>

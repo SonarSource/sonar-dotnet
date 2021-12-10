@@ -18,7 +18,9 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using Microsoft.CodeAnalysis;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using SonarAnalyzer.Helpers;
 using SonarAnalyzer.Rules.SymbolicExecution;
 using SonarAnalyzer.UnitTest.MetadataReferences;
 using SonarAnalyzer.UnitTest.TestFramework;
@@ -40,18 +42,7 @@ namespace SonarAnalyzer.UnitTest.Rules.SymbolicExecution
         [TestMethod]
         public void Initialize_MethodBase()
         {
-            const string code =
-@"public class Sample
-{
-    public void Main()
-    {
-        string s = null; // Noncompliant {{Message for SMain}}
-        s.ToString();    // Compliant, should not raise S2259
-    }
-}";
-            var sut = new SymbolicExecutionRunner();
-            sut.RegisterRule<MainScopeAssignmentRuleCheck>(MainScopeAssignmentRuleCheck.SMain);
-            Verifier.VerifyCSharpAnalyzer(code, sut, null, MainScopeAssignmentRuleCheck.SMain);
+            Assert.Inconclusive();
         }
 
         [TestMethod]
@@ -127,21 +118,59 @@ namespace SonarAnalyzer.UnitTest.Rules.SymbolicExecution
         }
 
         [TestMethod]
-        public void Analyze_ShouldExecute_ExecutesWhenAll()
+        public void Analyze_Severity_ExecutesWhenAll()
         {
-            Assert.Inconclusive();
+            const string code =
+@"public class Sample
+{
+    public void Main()
+    {
+        string s = null; // Noncompliant {{Message for SMain}}
+                         // Noncompliant@-1 {{Message for SAll}}
+        s.ToString();    // Noncompliant {{'s' is null on at least one execution path.}} S2259
+    }
+}";
+            var sut = new SymbolicExecutionRunner();
+            sut.RegisterRule<MainScopeAssignmentRuleCheck>(MainScopeAssignmentRuleCheck.SMain);
+            sut.RegisterRule<AllScopeAssignmentRuleCheck>(AllScopeAssignmentRuleCheck.SAll);
+            Verifier.VerifyCSharpAnalyzer(code, sut, null);
         }
 
         [TestMethod]
-        public void Analyze_ShouldExecute_ExecutesWhenOne()
+        public void Analyze_Severity_ExecutesWhenOne()
         {
-            Assert.Inconclusive();
+            const string code =
+@"public class Sample
+{
+    public void Main()
+    {
+        string s = null; // Noncompliant {{Message for SMain}}
+        s.ToString();    // Compliant, should not raise S2259
+    }
+}";
+            var sut = new SymbolicExecutionRunner();
+            sut.RegisterRule<MainScopeAssignmentRuleCheck>(MainScopeAssignmentRuleCheck.SMain);
+            sut.RegisterRule<AllScopeAssignmentRuleCheck>(AllScopeAssignmentRuleCheck.SAll);
+            Verifier.VerifyCSharpAnalyzer(code, sut, null, MainScopeAssignmentRuleCheck.SMain);
         }
 
         [TestMethod]
-        public void Analyze_ShouldExecute_DoesNotExecutesWhenNone()
+        public void Analyze_Severity_DoesNotExecutesWhenNone()
         {
-            Assert.Inconclusive();
+            const string code =
+@"public class Sample
+{
+    public void Main()
+    {
+        string s = null; // Compliant, SMain and SAll are suppressed by test framework, because only 'SAnother' is active
+        s.ToString();    // Compliant, should not raise S2259
+    }
+}";
+            var sut = new SymbolicExecutionRunner();
+            sut.RegisterRule<MainScopeAssignmentRuleCheck>(MainScopeAssignmentRuleCheck.SMain);
+            sut.RegisterRule<AllScopeAssignmentRuleCheck>(AllScopeAssignmentRuleCheck.SAll);
+            var anotherRule = new DiagnosticDescriptor("SAnother", "Non-SE rule", "Message", "Category", DiagnosticSeverity.Warning, true, customTags: DiagnosticDescriptorBuilder.MainSourceScopeTag);
+            Verifier.VerifyCSharpAnalyzer(code, sut, null, anotherRule);
         }
     }
 }
