@@ -39,3 +39,31 @@ record Record
         }
     }
 }
+
+namespace UserDefined
+{
+    public class PureAttribute : System.Attribute { }
+}
+
+
+// https://github.com/SonarSource/sonar-dotnet/issues/5117
+public class Repro_5117
+{
+    public void Method()
+    {
+        [System.Diagnostics.Contracts.Pure] // Noncompliant
+        void LocalFunctionPure()
+        {
+        }
+
+        [UserDefined.Pure] // Compliant, it's user defined attribute
+        void LocalFunctionUserDefinedAttribute()
+        {
+        }
+
+        [System.Diagnostics.Contracts.ContractAbbreviator]  // Qualified name was throwing NRE
+        void LocalFunctionOther()
+        {
+        }
+    }
+}

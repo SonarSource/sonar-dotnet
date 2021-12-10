@@ -22,6 +22,7 @@ namespace Tests.Diagnostics
             string decoded;
             decoded = decoder.Decode(invalidToken, secret, true);
             decoded = decoder.Decode(invalidToken, secret, false); // Noncompliant {{Use only strong cipher algorithms when verifying the signature of this JWT.}}
+            decoded = decoder?.Decode(invalidToken, secret, false); // Noncompliant
 
             decoded = decoder.Decode(invalidToken, secret, trueField);
             decoded = decoder.Decode(invalidToken, secret, falseField);         // Noncompliant

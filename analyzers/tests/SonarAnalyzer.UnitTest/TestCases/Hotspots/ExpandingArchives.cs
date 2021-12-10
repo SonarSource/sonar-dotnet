@@ -35,6 +35,7 @@ namespace ClassLibrary1
             Stream stream;
 
             entry.ExtractToFile(""); // Noncompliant
+            entry?.ExtractToFile(""); // Noncompliant
             entry.ExtractToFile("", true); // Noncompliant
 
             ZipFileExtensions.ExtractToFile(entry, ""); // Noncompliant
