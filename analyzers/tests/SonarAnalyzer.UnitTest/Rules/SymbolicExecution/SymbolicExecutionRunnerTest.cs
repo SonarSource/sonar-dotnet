@@ -35,5 +35,101 @@ namespace SonarAnalyzer.UnitTest.Rules.SymbolicExecution
                 new SymbolicExecutionRunner(),
                 ParseOptionsHelper.FromCSharp8,
                 MetadataReferenceFacade.NETStandard21);
+
+        [TestMethod]
+        public void Initialize_MethodBase()
+        {
+            Assert.Inconclusive();
+        }
+
+        [TestMethod]
+        public void Initialize_Property()
+        {
+            Assert.Inconclusive();
+        }
+
+        [TestMethod]
+        public void Initialize_Accessors()
+        {
+            Assert.Inconclusive();
+        }
+
+        [TestMethod]
+        public void Initialize_AnonymousFunction()
+        {
+            Assert.Inconclusive();
+        }
+
+        [TestMethod]
+        public void Analyze_DoNotRunWhenContainsDiagnostics()
+        {
+            Assert.Inconclusive();
+        }
+
+        [TestMethod]
+        public void Enabled_MainScope_MainProject()
+        {
+            Assert.Inconclusive();
+        }
+
+        [TestMethod]
+        public void Enabled_MainScope_TestProject()
+        {
+            Assert.Inconclusive();
+        }
+
+        [TestMethod]
+        public void Enabled_TestScope_MainProject()
+        {
+            Assert.Inconclusive();
+        }
+
+        [TestMethod]
+        public void Enabled_TestScope_TestProject()
+        {
+            Assert.Inconclusive();
+        }
+
+        [TestMethod]
+        public void Enabled_AllScope_MainProject()
+        {
+            Assert.Inconclusive();
+        }
+
+        [TestMethod]
+        public void Enabled_AllScope_TestProject_StandaloneRun()
+        {
+            Assert.Inconclusive();
+        }
+
+        [TestMethod]
+        public void Enabled_AllScope_TestProject_ScannerRun()
+        {
+            Assert.Inconclusive();
+        }
+
+        [TestMethod]
+        public void Analyze_DescriptorsWithSameType_ExecutesOnce()
+        {
+            Assert.Inconclusive();
+        }
+
+        [TestMethod]
+        public void Analyze_ShouldExecute_ExecutesWhenAll()
+        {
+            Assert.Inconclusive();
+        }
+
+        [TestMethod]
+        public void Analyze_ShouldExecute_ExecutesWhenOne()
+        {
+            Assert.Inconclusive();
+        }
+
+        [TestMethod]
+        public void Analyze_ShouldExecute_DoesNotExecutesWhenNone()
+        {
+            Assert.Inconclusive();
+        }
     }
 }
