@@ -43,6 +43,8 @@ namespace SonarAnalyzer.UnitTest.TestFramework.SymbolicExecution
             var code = $@"
 public class Sample
 {{
+    public static int PublicField;
+
     public void Main(bool boolParameter{additionalParameters})
     {{
         {methodBody}

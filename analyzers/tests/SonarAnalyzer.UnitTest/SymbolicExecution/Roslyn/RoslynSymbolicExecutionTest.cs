@@ -220,5 +220,21 @@ namespace SonarAnalyzer.UnitTest.SymbolicExecution.Roslyn
             collector.Validate("SimpleAssignment: boolParameter = true", x => x.State[new IOperationWrapperSonar(((ISimpleAssignmentOperation)x.Operation.Instance).Target)].HasConstraint(DummyConstraint.Dummy).Should().BeTrue());
             collector.ValidateTag("boolParameter", x => x.HasConstraint(DummyConstraint.Dummy).Should().BeTrue());
         }
+
+        [TestMethod]
+        public void Execute_SimpleAssignmentOnField_PropagatesConstraintsToOperationsOnly()
+        {
+            var setter = new PreProcessTestCheck(x =>
+            {
+                if (x.Operation.Instance.Kind == OperationKind.Literal)
+                {
+                    x.State[x.Operation].SetConstraint(DummyConstraint.Dummy);
+                }
+                return x.State;
+            });
+            var collector = SETestContext.CreateCS(@"Sample.PublicField = 42; Tag(""staticField"", Sample.PublicField);", setter).Collector;
+            collector.Validate("Literal: 42", x => x.State[x.Operation].HasConstraint(DummyConstraint.Dummy).Should().BeTrue());
+            collector.Validate("SimpleAssignment: Sample.PublicField = 42", x => x.State[new IOperationWrapperSonar(((ISimpleAssignmentOperation)x.Operation.Instance).Target)].HasConstraint(DummyConstraint.Dummy).Should().BeTrue());
+        }
     }
 }

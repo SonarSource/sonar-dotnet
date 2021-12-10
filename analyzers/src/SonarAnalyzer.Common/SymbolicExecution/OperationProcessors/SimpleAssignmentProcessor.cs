@@ -27,7 +27,7 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
     {
         public static ProgramState ProcessSimpleAssignment(SymbolicContext context)
         {
-            ProgramState newState = context.State;
+            var newState = context.State;
             var assignment = ISimpleAssignmentOperationWrapper.FromOperation(context.Operation.Instance);
             var rightSide = context.State[new IOperationWrapperSonar(assignment.Value)];
             if (ParameterOrLocalSymbol(assignment.Target) is { } symbol)
@@ -37,16 +37,12 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
             return newState.SetOperationValue(new IOperationWrapperSonar(assignment.Target), rightSide);
         }
 
-        private static ISymbol ParameterOrLocalSymbol(IOperation operation)
-        {
-            ISymbol candidate = operation switch
+        private static ISymbol ParameterOrLocalSymbol(IOperation operation) =>
+            operation switch
             {
                 var _ when IParameterReferenceOperationWrapper.IsInstance(operation) => IParameterReferenceOperationWrapper.FromOperation(operation).Parameter,
                 var _ when ILocalReferenceOperationWrapper.IsInstance(operation) => ILocalReferenceOperationWrapper.FromOperation(operation).Local,
                 _ => null
             };
-
-            return candidate;
-        }
     }
 }
