@@ -22,9 +22,11 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using FluentAssertions;
+using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Operations;
 using SonarAnalyzer.SymbolicExecution.Roslyn;
 using SonarAnalyzer.UnitTest.Helpers;
+using StyleCop.Analyzers.Lightup;
 
 namespace SonarAnalyzer.UnitTest.TestFramework.SymbolicExecution
 {
@@ -71,9 +73,21 @@ namespace SonarAnalyzer.UnitTest.TestFramework.SymbolicExecution
             var context = tags.Single(x => x.Name == tag).Context;
             var invocation = (IInvocationOperation)context.Operation.Instance;
             invocation.Arguments.Should().HaveCount(2, "Asserted argument is expected in Tag(..) invocation");
-            var symbol = ((ILocalReferenceOperation)((IConversionOperation)invocation.Arguments[1].Value).Operand).Local;
+            var symbol = ParameterOrLocalSymbol(((IConversionOperation)invocation.Arguments[1].Value).Operand);
             var value = context.State[symbol];
             action(value);
+        }
+
+        private ISymbol ParameterOrLocalSymbol(IOperation operation)
+        {
+            ISymbol candidate = operation switch
+            {
+                var _ when IParameterReferenceOperationWrapper.IsInstance(operation) => IParameterReferenceOperationWrapper.FromOperation(operation).Parameter,
+                var _ when ILocalReferenceOperationWrapper.IsInstance(operation) => ILocalReferenceOperationWrapper.FromOperation(operation).Local,
+                _ => null
+            };
+
+            return candidate;
         }
 
         public void ValidateExitReachCount(int expected) =>

@@ -151,7 +151,24 @@ namespace SonarAnalyzer.UnitTest.SymbolicExecution.Roslyn
         [TestMethod]
         public void Execute_PersistSymbols_InsideBlock()
         {
-            var collector = SETestContext.CreateCS("var first = true; var second = false; first = second;", new SetTestConstraintCheck()).Validator;
+            var setter = new PreProcessTestCheck(x =>
+            {
+                if (x.Operation.Instance.Kind == OperationKind.Literal
+                    && ((ILiteralOperation)x.Operation.Instance).ConstantValue.Value is bool value)
+                {
+                    if (value == false)
+                    {
+                        x.State[x.Operation].SetConstraint(TestConstraint.Second);
+                    }
+                    else
+                    {
+                        x.State[x.Operation].SetConstraint(TestConstraint.First);
+                    }
+                }
+                return x.State;
+            });
+
+            var collector = SETestContext.CreateCS("var first = true; var second = false; first = second;", setter).Collector;
             collector.ValidateOrder(    // Visualize operations
                    "LocalReference: first = true (Implicit)",
                    "Literal: true",
@@ -168,6 +185,40 @@ namespace SonarAnalyzer.UnitTest.SymbolicExecution.Roslyn
 
             static ISymbol LocalReferenceOperationSymbol(IOperationWrapperSonar operation) =>
                 ((ILocalReferenceOperation)operation.Instance).Local;
+        }
+
+        [TestMethod]
+        public void Execute_SimpleAssignmentOnLocalVariables_PropagatesConstraints()
+        {
+            var setter = new PreProcessTestCheck(x =>
+            {
+                if (x.Operation.Instance.Kind == OperationKind.Literal)
+                {
+                    x.State[x.Operation].SetConstraint(DummyConstraint.Dummy);
+                }
+                return x.State;
+            });
+            var collector = SETestContext.CreateCS(@"var a = true; Tag(""a"", a);", setter).Collector;
+            collector.Validate("Literal: true", x => x.State[x.Operation].HasConstraint(DummyConstraint.Dummy).Should().BeTrue());
+            collector.Validate("SimpleAssignment: a = true (Implicit)", x => x.State[new IOperationWrapperSonar(((ISimpleAssignmentOperation)x.Operation.Instance).Target)].HasConstraint(DummyConstraint.Dummy).Should().BeTrue());
+            collector.ValidateTag("a", x => x.HasConstraint(DummyConstraint.Dummy).Should().BeTrue());
+        }
+
+        [TestMethod]
+        public void Execute_SimpleAssignmentOnParameters_PropagatesConstraints()
+        {
+            var setter = new PreProcessTestCheck(x =>
+            {
+                if (x.Operation.Instance.Kind == OperationKind.Literal)
+                {
+                    x.State[x.Operation].SetConstraint(DummyConstraint.Dummy);
+                }
+                return x.State;
+            });
+            var collector = SETestContext.CreateCS(@"boolParameter = true; Tag(""boolParameter"", boolParameter);", setter).Collector;
+            collector.Validate("Literal: true", x => x.State[x.Operation].HasConstraint(DummyConstraint.Dummy).Should().BeTrue());
+            collector.Validate("SimpleAssignment: boolParameter = true", x => x.State[new IOperationWrapperSonar(((ISimpleAssignmentOperation)x.Operation.Instance).Target)].HasConstraint(DummyConstraint.Dummy).Should().BeTrue());
+            collector.ValidateTag("boolParameter", x => x.HasConstraint(DummyConstraint.Dummy).Should().BeTrue());
         }
     }
 }

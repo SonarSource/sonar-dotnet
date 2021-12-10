@@ -21,7 +21,9 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Microsoft.CodeAnalysis;
 using SonarAnalyzer.CFG.Roslyn;
+using StyleCop.Analyzers.Lightup;
 
 namespace SonarAnalyzer.SymbolicExecution.Roslyn
 {
@@ -86,7 +88,13 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
             }
 
             // ToDo: Something is still missing around here - process well known instructions
+            ProgramState newState = context.State;
+            if (context.Operation.Instance.Kind == OperationKindEx.SimpleAssignment)
+            {
+               newState = ProcessSimpleAssignment(context);
+            }
 
+            context = context.State == newState ? context : new SymbolicContext(symbolicValueCounter, context.Operation, newState);
             context = InvokeChecks(context, x => x.PostProcess);
             if (context == null)
             {
@@ -121,5 +129,29 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
 
         private SymbolicValue CreateSymbolicValue() =>
             new(symbolicValueCounter);
+
+        private ProgramState ProcessSimpleAssignment(SymbolicContext context)
+        {
+            ProgramState newState = context.State;
+            var assignment = ISimpleAssignmentOperationWrapper.FromOperation(context.Operation.Instance);
+            var rightSide = context.State[new IOperationWrapperSonar(assignment.Value)];
+            if (ParameterOrLocalSymbol(assignment.Target) is { } symbol)
+            {
+                newState = context.State.SetSymbolValue(symbol, rightSide);
+            }
+            return newState.SetOperationValue(new IOperationWrapperSonar(assignment.Target), rightSide);
+        }
+
+        private ISymbol ParameterOrLocalSymbol(IOperation operation)
+        {
+            ISymbol candidate = operation switch
+            {
+                var _ when IParameterReferenceOperationWrapper.IsInstance(operation) => IParameterReferenceOperationWrapper.FromOperation(operation).Parameter,
+                var _ when ILocalReferenceOperationWrapper.IsInstance(operation) => ILocalReferenceOperationWrapper.FromOperation(operation).Local,
+                _ => null
+            };
+
+            return candidate;
+        }
     }
 }
