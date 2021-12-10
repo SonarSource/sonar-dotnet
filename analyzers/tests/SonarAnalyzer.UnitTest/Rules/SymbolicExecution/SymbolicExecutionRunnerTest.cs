@@ -39,7 +39,17 @@ namespace SonarAnalyzer.UnitTest.Rules.SymbolicExecution
         [TestMethod]
         public void Initialize_MethodBase()
         {
-            Assert.Inconclusive();
+            const string code =
+@"public class Sample
+{
+    public void Main()
+    {
+        string s = null; // FN Should be Non-compliant { {Message for SMain} }
+        s.ToString();    // Noncompliant FP: Compliant, should not raise S2259
+    }
+}";
+            var sut = new SymbolicExecutionRunner();
+            Verifier.VerifyCSharpAnalyzer(code, sut);
         }
 
         [TestMethod]

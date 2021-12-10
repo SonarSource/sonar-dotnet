@@ -40,7 +40,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework.SymbolicExecution
             true;
 
         protected static DiagnosticDescriptor CreateDescriptor(string id, params string[] customTags) =>
-            new(id, "Title", "Message", "Category", DiagnosticSeverity.Warning, true, customTags: customTags);
+            new(id, "Title", "Message for " + id, "Category", DiagnosticSeverity.Warning, true, customTags: customTags);
     }
 
     internal class MainScopeAssignmentRuleCheck : AssignmentRuleCheck
