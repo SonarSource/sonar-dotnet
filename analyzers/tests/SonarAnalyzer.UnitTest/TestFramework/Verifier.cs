@@ -62,9 +62,8 @@ namespace SonarAnalyzer.UnitTest.TestFramework
         /// </summary>
         public static void VerifyCSharpAnalyzer(string snippet,
                                         SonarDiagnosticAnalyzer diagnosticAnalyzer,
-                                        IEnumerable<MetadataReference> additionalReferences,
-                                        params DiagnosticDescriptor[] onlyDiagnostics) =>
-            VerifyCSharpAnalyzer(snippet, diagnosticAnalyzer, null, CompilationErrorBehavior.Default, additionalReferences, onlyDiagnostics: onlyDiagnostics);
+                                        IEnumerable<MetadataReference> additionalReferences) =>
+            VerifyCSharpAnalyzer(snippet, diagnosticAnalyzer, null, CompilationErrorBehavior.Default, additionalReferences);
 
         /// <summary>
         /// Verify analyzer from C# on a snippet in non-concurrent execution mode.

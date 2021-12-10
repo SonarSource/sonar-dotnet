@@ -40,28 +40,142 @@ namespace SonarAnalyzer.UnitTest.Rules.SymbolicExecution
                 MetadataReferenceFacade.NETStandard21);
 
         [TestMethod]
-        public void Initialize_MethodBase()
-        {
-            Assert.Inconclusive();
-        }
+        public void Initialize_MethodBase() =>
+            VerifyClassMain(@"
+public Sample() // ConstructorDeclaration
+{
+    string s = null;   // Noncompliant {{Message for SMain}}
+}
+
+public Sample(string s) => // ConstructorDeclaration
+    s = null;   // Noncompliant {{Message for SMain}}
+
+~Sample() // DestructorDeclaration
+{
+    string s = null;   // Noncompliant {{Message for SMain}}
+}
+
+public static implicit operator byte(Sample arg)
+{
+    string s = null;   // Noncompliant {{Message for SMain}}
+    return 0;
+}
+
+public static explicit operator Sample(byte arg)
+{
+    string s = null;   // Noncompliant {{Message for SMain}}
+    return null;
+}
+
+public static int operator +(Sample a, Sample b)  // OperatorDeclaration
+{
+    string s = null;   // Noncompliant {{Message for SMain}}
+    return 0;
+}
+
+public void MethodDeclaration()
+{
+    string s = null;   // Noncompliant {{Message for SMain}}
+}
+
+public void MethodDeclaration(string s) =>
+    s = null;   // Noncompliant {{Message for SMain}}");
 
         [TestMethod]
-        public void Initialize_Property()
-        {
-            Assert.Inconclusive();
-        }
+        public void Initialize_Property() =>
+            VerifyClassMain(@"
+private int target;
+public int Property => target = 42;     // Noncompliant {{Message for SMain}}");
 
         [TestMethod]
-        public void Initialize_Accessors()
-        {
-            Assert.Inconclusive();
-        }
+        public void Initialize_Accessors() =>
+            VerifyClassMain(@"
+private string target;
+
+public string BodyProperty
+{
+    get
+    {
+        string s = null;   // Noncompliant {{Message for SMain}}
+        return s;
+    }
+    set
+    {
+        string s = value;   // Noncompliant {{Message for SMain}}
+    }
+}
+
+public string ArrowProperty
+{
+    get => target = null;   // Noncompliant {{Message for SMain}}
+    set => target = value;  // Noncompliant {{Message for SMain}}
+}
+
+public event EventHandler BlockEvent
+{
+    add
+    {
+        string s = null;   // Noncompliant {{Message for SMain}}
+    }
+    remove
+    {
+        string s = null;   // Noncompliant {{Message for SMain}}
+    }
+}
+
+public event EventHandler ArrowEvent
+{
+    add => target = null;       // Noncompliant {{Message for SMain}}
+    remove => target = null;    // Noncompliant {{Message for SMain}}
+}");
+
+#if NET
 
         [TestMethod]
-        public void Initialize_AnonymousFunction()
+        public void Initialize_Accessors_Init() =>
+            VerifyClass(@"
+private string target;
+
+public string InitOnlyPropertyBlock
+{
+    get => null;
+    init
+    {
+        string s = null;   // Noncompliant {{Message for SMain}}
+    }
+}
+
+public string InitOnlyPropertyArrow
+{
+    get => null;
+    init => target = value; // Noncompliant {{Message for SMain}}
+}",
+                    MainScopeAssignmentRuleCheck.SMain);
+
+#endif
+
+        [TestMethod]
+        public void Initialize_AnonymousFunction() =>
+            VerifyClassMain(@"
+delegate void VoidDelegate();
+
+public void Method()
+{
+    Action parenthesizedLambda = () =>  // Noncompliant {{Message for SMain}} - scaffolding noise
         {
-            Assert.Inconclusive();
-        }
+            string s = null;            // Noncompliant {{Message for SMain}}
+        };
+
+    Action<int> simpleLambda = x =>     // Noncompliant {{Message for SMain}} - scaffolding noise
+        {
+            string s = null;            // Noncompliant {{Message for SMain}}
+        };
+
+    VoidDelegate anonymousMethod = delegate     // Noncompliant {{Message for SMain}} - scaffolding noise
+    {
+        string s = null;                // Noncompliant {{Message for SMain}}
+    };
+}");
 
         [TestMethod]
         public void Analyze_DoNotRunWhenContainsDiagnostics()
@@ -144,20 +258,33 @@ namespace SonarAnalyzer.UnitTest.Rules.SymbolicExecution
                      s.ToString();      // Compliant, should not raise S2259",
                 new DiagnosticDescriptor("SAnother", "Non-SE rule", "Message", "Category", DiagnosticSeverity.Warning, true, customTags: DiagnosticDescriptorBuilder.MainSourceScopeTag));
 
+
         private static void Verify(string body, params DiagnosticDescriptor[] onlyRules)
         {
             var code =
-$@"public class Sample
+$@"public void Main()
 {{
-    public void Main()
-    {{
-        {body}
-    }}
+    {body}
+}}";
+            VerifyClass(code, onlyRules);
+        }
+
+        private static void VerifyClassMain(string members) =>
+            VerifyClass(members, MainScopeAssignmentRuleCheck.SMain);
+
+        private static void VerifyClass(string members, params DiagnosticDescriptor[] onlyRules)
+        {
+            var code =
+$@"using System;
+using System.Linq;
+public class Sample
+{{
+    {members}
 }}";
             var sut = new SymbolicExecutionRunner();
             sut.RegisterRule<AllScopeAssignmentRuleCheck>(AllScopeAssignmentRuleCheck.SAll);
             sut.RegisterRule<MainScopeAssignmentRuleCheck>(MainScopeAssignmentRuleCheck.SMain);
-            Verifier.VerifyCSharpAnalyzer(code, sut, null, onlyRules);
+            Verifier.VerifyCSharpAnalyzer(code, sut, ParseOptionsHelper.FromCSharp9, onlyDiagnostics: onlyRules);
         }
     }
 }
