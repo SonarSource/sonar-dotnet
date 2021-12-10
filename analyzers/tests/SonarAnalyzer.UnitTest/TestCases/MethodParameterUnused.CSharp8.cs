@@ -226,4 +226,29 @@ namespace Tests.TestCases
             return !this.invalidCharacters.Any(viewName.Contains);
         }
     }
+
+    static class Repro5145
+    {
+        public static void Print(string[] args)
+        {
+            var dict = new Dictionary<string, int>();
+            Console.WriteLine(GetSegmentSortKey(dict));
+        }
+
+        private static int GetSegmentSortKey(IDictionary<string, int> nodes) // Noncompliant - FP, See: https://github.com/SonarSource/sonar-dotnet/issues/5145
+        {
+            return Run(nodes.TryGetValueOrNull);
+        }
+
+        private static int Run(Func<string, int> tryGetValueOrNull)
+        {
+            return tryGetValueOrNull("test");
+        }
+    }
+
+    public static class DictionaryExtensions
+    {
+        public static TValue TryGetValueOrNull<TKey, TValue>(this IDictionary<TKey, TValue> dictionary, TKey key) where TValue : struct => default(TValue);
+    }
+
 }
