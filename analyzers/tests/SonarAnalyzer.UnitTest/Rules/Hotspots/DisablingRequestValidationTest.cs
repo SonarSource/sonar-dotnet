@@ -103,7 +103,7 @@ namespace SonarAnalyzer.UnitTest.Rules
 
             try
             {
-                allDiagnostics = DiagnosticVerifier.GetDiagnostics(
+                allDiagnostics = DiagnosticVerifier.GetDiagnosticsNoExceptions(
                     compilation,
                     new CS.DisablingRequestValidation(AnalyzerConfiguration.AlwaysEnabled),
                     CompilationErrorBehavior.Default,
