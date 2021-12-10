@@ -98,6 +98,13 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
             yield return node.CreateNext(context.State);
         }
 
+        private static ProgramState ProcessOperation(SymbolicContext context) =>
+            context.Operation.Instance.Kind switch
+            {
+                OperationKindEx.SimpleAssignment => SimpleAssignmentProcessor.ProcessSimpleAssignment(context),
+                _ => context.State
+            };
+
         private SymbolicContext InvokeChecks(SymbolicContext context, Func<SymbolicCheck, Func<SymbolicContext, ProgramState>> checkDelegate)
         {
             foreach (var check in checks)
@@ -123,12 +130,5 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
 
         private SymbolicValue CreateSymbolicValue() =>
             new(symbolicValueCounter);
-
-        private ProgramState ProcessOperation(SymbolicContext context) =>
-            context.Operation.Instance.Kind switch
-            {
-                OperationKindEx.SimpleAssignment => SimpleAssignmentProcessor.ProcessSimpleAssignment(context),
-                _ => context.State
-            };
     }
 }

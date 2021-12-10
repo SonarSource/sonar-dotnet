@@ -78,7 +78,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework.SymbolicExecution
             action(value);
         }
 
-        private ISymbol ParameterOrLocalSymbol(IOperation operation)
+        private static ISymbol ParameterOrLocalSymbol(IOperation operation)
         {
             ISymbol candidate = operation switch
             {
