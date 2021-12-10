@@ -26,7 +26,7 @@ using SonarAnalyzer.UnitTest.TestFramework;
 namespace SonarAnalyzer.UnitTest.Rules.SymbolicExecution
 {
     [TestClass]
-    public class SymbolicExecutionRulesTest
+    public class SymbolicExecutionRunnerTest
     {
         // This test is meant to run all the symbolic execution rules together and verify different scenarios.
         [TestMethod]

@@ -19,7 +19,6 @@
  */
 
 using Microsoft.CodeAnalysis;
-using Microsoft.CodeAnalysis.Diagnostics;
 
 namespace SonarAnalyzer.SymbolicExecution.Roslyn.Checks
 {

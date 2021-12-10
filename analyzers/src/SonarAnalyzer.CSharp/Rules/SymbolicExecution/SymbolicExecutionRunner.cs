@@ -42,6 +42,7 @@ namespace SonarAnalyzer.Rules.SymbolicExecution
     public sealed partial class SymbolicExecutionRunner : SonarDiagnosticAnalyzer
     {
         private readonly SymbolicExecutionAnalyzerFactory analyzerFactory;  // ToDo: This should be eventually removed
+        private readonly Dictionary<DiagnosticDescriptor, RuleFactory> additionalTestRules = new();
         private static readonly ImmutableDictionary<DiagnosticDescriptor, RuleFactory> AllRules = ImmutableDictionary<DiagnosticDescriptor, RuleFactory>.Empty
             .Add(LocksReleasedAllPaths.S2222, CreateFactory<LocksReleasedAllPaths>());
 
@@ -57,6 +58,9 @@ namespace SonarAnalyzer.Rules.SymbolicExecution
             this.analyzerFactory = analyzerFactory;
             SupportedDiagnostics = analyzerFactory.SupportedDiagnostics.Concat(AllRules.Keys).ToImmutableArray();  // ToDo: This should be eventually moved to the property itself
         }
+
+        internal /* for testing */ void RegisterRule<TRuleCheck>(DiagnosticDescriptor descriptor) where TRuleCheck : SymbolicRuleCheck, new () =>
+            additionalTestRules.Add(descriptor, CreateFactory<TRuleCheck>());
 
         protected override void Initialize(SonarAnalysisContext context)
         {
@@ -116,9 +120,9 @@ namespace SonarAnalyzer.Rules.SymbolicExecution
             }
         }
 
-        private static void AnalyzeRoslyn(SyntaxNodeAnalysisContext context, bool isTestProject, bool isScannerRun, CSharpSyntaxNode body, ISymbol symbol)
+        private void AnalyzeRoslyn(SyntaxNodeAnalysisContext context, bool isTestProject, bool isScannerRun, CSharpSyntaxNode body, ISymbol symbol)
         {
-            var checks = AllRules
+            var checks = AllRules.Concat(additionalTestRules)
                 .Where(x => SymbolicExecutionAnalyzerFactory.IsEnabled(context, isTestProject, isScannerRun, x.Key))
                 .GroupBy(x => x.Value.Type)                             // Multiple DiagnosticDescriptors (S2583, S2589) can share the same check type
                 .Select(x => x.First().Value.CreateInstance(context))   // We need just one instance in that case
