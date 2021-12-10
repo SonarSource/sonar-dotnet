@@ -228,7 +228,19 @@ public void Method()
         [TestMethod]
         public void Analyze_DescriptorsWithSameType_ExecutesOnce()
         {
-            Assert.Inconclusive();
+            var code =
+@"public class Sample
+{
+    public void Method()
+    {
+        string s = null;   // Noncompliant {{Message for SMain}} - this should be raised only once
+    }
+}";
+            var another = new DiagnosticDescriptor("SAnother", "Title", "Message", "Category", DiagnosticSeverity.Warning, true, customTags: DiagnosticDescriptorBuilder.MainSourceScopeTag);
+            var sut = new SymbolicExecutionRunner();
+            sut.RegisterRule<MainScopeAssignmentRuleCheck>(MainScopeAssignmentRuleCheck.SMain);
+            sut.RegisterRule<MainScopeAssignmentRuleCheck>(another);     // Register the same RuleCheck with another ID
+            Verifier.VerifyCSharpAnalyzer(code, sut, ParseOptionsHelper.FromCSharp9, onlyDiagnostics: new[] { MainScopeAssignmentRuleCheck.SMain, another });
         }
 
         [TestMethod]
