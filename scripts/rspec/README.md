@@ -21,7 +21,7 @@ Basically, the rule-api JAR will update: `sonarway_profile*`, `*.html` and `*.js
 
 **Usage 2**: Pull metadata (replace or create) for single rule.
 
-When the rule had been already specified and is on the `master` branch of 
+When the rule had been already specified and is on the `master` branch of the [RSPEC repo:](https://github.com/SonarSource/rspec)
 
 `sonarway_profile*` will not be updated!
 
