@@ -63,8 +63,9 @@ namespace SonarAnalyzer.UnitTest.TestFramework
         /// </summary>
         public static void VerifyCSharpAnalyzer(string snippet,
                                         SonarDiagnosticAnalyzer diagnosticAnalyzer,
-                                        IEnumerable<MetadataReference> additionalReferences) =>
-            VerifyCSharpAnalyzer(snippet, diagnosticAnalyzer, null, CompilationErrorBehavior.Default, additionalReferences);
+                                        IEnumerable<MetadataReference> additionalReferences,
+                                        params DiagnosticDescriptor[] onlyDiagnostics) =>
+            VerifyCSharpAnalyzer(snippet, diagnosticAnalyzer, null, CompilationErrorBehavior.Default, additionalReferences, onlyDiagnostics: onlyDiagnostics);
 
         /// <summary>
         /// Verify analyzer from C# on a snippet in non-concurrent execution mode.
@@ -83,14 +84,15 @@ namespace SonarAnalyzer.UnitTest.TestFramework
                                                 IEnumerable<ParseOptions> options = null,
                                                 CompilationErrorBehavior checkMode = CompilationErrorBehavior.Default,
                                                 IEnumerable<MetadataReference> additionalReferences = null,
-                                                OutputKind outputKind = OutputKind.DynamicallyLinkedLibrary)
+                                                OutputKind outputKind = OutputKind.DynamicallyLinkedLibrary,
+                                                DiagnosticDescriptor[] onlyDiagnostics = null)
         {
             var solution = SolutionBuilder.Create()
                                           .AddProject(AnalyzerLanguage.CSharp, outputKind: outputKind)
                                           .AddSnippet(snippet)
                                           .AddReferences(additionalReferences)
                                           .GetSolution();
-            CompileAndVerifyAnalyzer(solution, new DiagnosticAnalyzer[] { diagnosticAnalyzer }, options, checkMode);
+            CompileAndVerifyAnalyzer(solution, new DiagnosticAnalyzer[] { diagnosticAnalyzer }, options, checkMode, null, onlyDiagnostics.Select(x => x.Id).ToArray());
         }
 
         /// <summary>
@@ -514,11 +516,12 @@ namespace SonarAnalyzer.UnitTest.TestFramework
                                                      DiagnosticAnalyzer[] diagnosticAnalyzers,
                                                      IEnumerable<ParseOptions> options,
                                                      CompilationErrorBehavior checkMode,
-                                                     string sonarProjectConfigPath = null)
+                                                     string sonarProjectConfigPath = null,
+                                                     string[] onlyDiagnostics = null)
         {
             foreach (var compilation in solution.Compile(options?.ToArray()))
             {
-                DiagnosticVerifier.Verify(compilation, diagnosticAnalyzers, checkMode, sonarProjectConfigPath);
+                DiagnosticVerifier.Verify(compilation, diagnosticAnalyzers, checkMode, sonarProjectConfigPath, onlyDiagnostics);
             }
         }
 

@@ -46,12 +46,12 @@ namespace SonarAnalyzer.UnitTest.Rules.SymbolicExecution
     public void Main()
     {
         string s = null; // Noncompliant {{Message for SMain}}
-        s.ToString();    // Noncompliant FP: Compliant, should not raise S2259
+        s.ToString();    // Compliant, should not raise S2259
     }
 }";
             var sut = new SymbolicExecutionRunner();
             sut.RegisterRule<MainScopeAssignmentRuleCheck>(MainScopeAssignmentRuleCheck.SMain);
-            Verifier.VerifyCSharpAnalyzer(code, sut);
+            Verifier.VerifyCSharpAnalyzer(code, sut, null, MainScopeAssignmentRuleCheck.SMain);
         }
 
         [TestMethod]
