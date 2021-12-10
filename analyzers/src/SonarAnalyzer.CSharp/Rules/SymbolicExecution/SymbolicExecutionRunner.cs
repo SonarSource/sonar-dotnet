@@ -41,12 +41,13 @@ namespace SonarAnalyzer.Rules.SymbolicExecution
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
     public sealed partial class SymbolicExecutionRunner : SonarDiagnosticAnalyzer
     {
-        private readonly SymbolicExecutionAnalyzerFactory analyzerFactory;  // ToDo: This should be eventually removed
-        private readonly Dictionary<DiagnosticDescriptor, RuleFactory> additionalTestRules = new();
         private static readonly ImmutableDictionary<DiagnosticDescriptor, RuleFactory> AllRules = ImmutableDictionary<DiagnosticDescriptor, RuleFactory>.Empty
             .Add(LocksReleasedAllPaths.S2222, CreateFactory<LocksReleasedAllPaths>());
+        private readonly SymbolicExecutionAnalyzerFactory analyzerFactory;  // ToDo: This should be eventually removed
+        private readonly Dictionary<DiagnosticDescriptor, RuleFactory> additionalTestRules = new();
+        private ImmutableArray<DiagnosticDescriptor> supportedDiagnostics;
 
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; }
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => supportedDiagnostics;
         protected override bool EnableConcurrentExecution => false;
 
         public SymbolicExecutionRunner() : this(new SymbolicExecutionAnalyzerFactory()) { }
@@ -56,11 +57,14 @@ namespace SonarAnalyzer.Rules.SymbolicExecution
         private SymbolicExecutionRunner(SymbolicExecutionAnalyzerFactory analyzerFactory)
         {
             this.analyzerFactory = analyzerFactory;
-            SupportedDiagnostics = analyzerFactory.SupportedDiagnostics.Concat(AllRules.Keys).ToImmutableArray();  // ToDo: This should be eventually moved to the property itself
+            supportedDiagnostics = analyzerFactory.SupportedDiagnostics.Concat(AllRules.Keys).ToImmutableArray();  // ToDo: This should be eventually moved to the property itself
         }
 
-        internal /* for testing */ void RegisterRule<TRuleCheck>(DiagnosticDescriptor descriptor) where TRuleCheck : SymbolicRuleCheck, new () =>
+        internal /* for testing */ void RegisterRule<TRuleCheck>(DiagnosticDescriptor descriptor) where TRuleCheck : SymbolicRuleCheck, new ()
+        {
             additionalTestRules.Add(descriptor, CreateFactory<TRuleCheck>());
+            supportedDiagnostics = supportedDiagnostics.Concat(new[] { descriptor }).ToImmutableArray();
+        }
 
         protected override void Initialize(SonarAnalysisContext context)
         {

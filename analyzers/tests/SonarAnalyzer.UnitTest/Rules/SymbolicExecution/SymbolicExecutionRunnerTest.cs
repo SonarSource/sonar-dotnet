@@ -22,6 +22,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.Rules.SymbolicExecution;
 using SonarAnalyzer.UnitTest.MetadataReferences;
 using SonarAnalyzer.UnitTest.TestFramework;
+using SonarAnalyzer.UnitTest.TestFramework.SymbolicExecution;
 
 namespace SonarAnalyzer.UnitTest.Rules.SymbolicExecution
 {
@@ -44,11 +45,12 @@ namespace SonarAnalyzer.UnitTest.Rules.SymbolicExecution
 {
     public void Main()
     {
-        string s = null; // FN Should be Non-compliant { {Message for SMain} }
+        string s = null; // Noncompliant {{Message for SMain}}
         s.ToString();    // Noncompliant FP: Compliant, should not raise S2259
     }
 }";
             var sut = new SymbolicExecutionRunner();
+            sut.RegisterRule<MainScopeAssignmentRuleCheck>(MainScopeAssignmentRuleCheck.SMain);
             Verifier.VerifyCSharpAnalyzer(code, sut);
         }
 

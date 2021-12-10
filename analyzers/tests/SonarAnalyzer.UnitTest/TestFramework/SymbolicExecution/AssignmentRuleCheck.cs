@@ -32,7 +32,10 @@ namespace SonarAnalyzer.UnitTest.TestFramework.SymbolicExecution
 
         public override ProgramState PostProcess(SymbolicContext context)
         {
-            Context.ReportIssue(Diagnostic.Create(Rule, context.Operation.Instance.Syntax.GetLocation()));
+            if (context.Operation.Instance.Kind == OperationKind.SimpleAssignment)
+            {
+                Context.ReportIssue(Diagnostic.Create(Rule, context.Operation.Instance.Syntax.GetLocation()));
+            }
             return context.State;
         }
 
