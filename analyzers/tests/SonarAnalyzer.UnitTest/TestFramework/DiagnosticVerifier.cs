@@ -22,10 +22,8 @@ using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Collections.Immutable;
-using System.IO;
 using System.Linq;
 using System.Text;
-using System.Threading;
 using FluentAssertions;
 using FluentAssertions.Execution;
 using Microsoft.CodeAnalysis;
@@ -88,6 +86,13 @@ namespace SonarAnalyzer.UnitTest.TestFramework
             }
         }
 
+        public static void VerifyNoIssueReported(
+                Compilation compilation,
+                DiagnosticAnalyzer diagnosticAnalyzer,
+                CompilationErrorBehavior checkMode = CompilationErrorBehavior.Default,
+                string sonarProjectConfigPath = null) =>
+            GetDiagnosticsNoExceptions(compilation, diagnosticAnalyzer, checkMode, sonarProjectConfigPath: sonarProjectConfigPath).Should().BeEmpty();
+
         public static IEnumerable<Diagnostic> GetDiagnosticsNoExceptions(
             Compilation compilation,
             DiagnosticAnalyzer diagnosticAnalyzer,
@@ -101,13 +106,6 @@ namespace SonarAnalyzer.UnitTest.TestFramework
 
         public static IEnumerable<Diagnostic> GetDiagnosticsIgnoreExceptions(Compilation compilation, DiagnosticAnalyzer diagnosticAnalyzer) =>
             GetAnalyzerDiagnostics(compilation, new[] { diagnosticAnalyzer }, CompilationErrorBehavior.FailTest);
-
-        public static void VerifyNoIssueReported(
-            Compilation compilation,
-            DiagnosticAnalyzer diagnosticAnalyzer,
-            CompilationErrorBehavior checkMode = CompilationErrorBehavior.Default,
-            string sonarProjectConfigPath = null) =>
-            GetDiagnosticsNoExceptions(compilation, diagnosticAnalyzer, checkMode, sonarProjectConfigPath: sonarProjectConfigPath).Should().BeEmpty();
 
         public static ImmutableArray<Diagnostic> GetAnalyzerDiagnostics(
             Compilation compilation,
