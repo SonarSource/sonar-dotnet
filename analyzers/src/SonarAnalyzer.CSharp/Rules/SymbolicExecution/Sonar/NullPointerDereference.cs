@@ -40,10 +40,10 @@ namespace SonarAnalyzer.Rules.CSharp
         internal const string DiagnosticId = "S2259";
         private const string MessageFormat = "'{0}' is null on at least one execution path.";
 
-        private static readonly DiagnosticDescriptor rule =
+        private static readonly DiagnosticDescriptor Rule =
             DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
 
-        public IEnumerable<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(rule);
+        public IEnumerable<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
 
         public ISymbolicExecutionAnalysisContext CreateContext(SonarExplodedGraph explodedGraph, SyntaxNodeAnalysisContext context) =>
             new AnalysisContext(explodedGraph, context);
@@ -196,7 +196,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 programPoint.Block.SuccessorBlocks.First() is BinaryBranchBlock successorBlock
                 && successorBlock.BranchingNode.IsKind(SyntaxKind.ForEachStatement);
 
-            private class MemberAccessIdentifierScope
+            private sealed class MemberAccessIdentifierScope
             {
                 public IdentifierNameSyntax Identifier { get; }
                 public bool IsOnCurrentInstance { get; }
@@ -226,7 +226,7 @@ namespace SonarAnalyzer.Rules.CSharp
             public bool SupportsPartialResults => true;
 
             public IEnumerable<Diagnostic> GetDiagnostics() =>
-                nullIdentifiers.Select(nullIdentifier => Diagnostic.Create(rule, nullIdentifier.GetLocation(), nullIdentifier.Identifier.ValueText));
+                nullIdentifiers.Select(nullIdentifier => Diagnostic.Create(Rule, nullIdentifier.GetLocation(), nullIdentifier.Identifier.ValueText));
 
             public void Dispose() => nullPointerCheck.MemberAccessed -= MemberAccessedHandler;
 

@@ -40,12 +40,12 @@ namespace SonarAnalyzer.Rules.CSharp
         internal const string DiagnosticId = "S4158";
         private const string MessageFormat = "Remove this call, the collection is known to be empty here.";
 
-        private static readonly DiagnosticDescriptor rule =
+        private static readonly DiagnosticDescriptor Rule =
             DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
 
-        public IEnumerable<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(rule);
+        public IEnumerable<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
 
-        private static readonly ImmutableArray<KnownType> trackedCollectionTypes =
+        private static readonly ImmutableArray<KnownType> TrackedCollectionTypes =
             ImmutableArray.Create(
                 KnownType.System_Collections_Generic_Dictionary_TKey_TValue,
                 KnownType.System_Collections_Generic_List_T,
@@ -53,10 +53,9 @@ namespace SonarAnalyzer.Rules.CSharp
                 KnownType.System_Collections_Generic_Stack_T,
                 KnownType.System_Collections_Generic_HashSet_T,
                 KnownType.System_Collections_ObjectModel_ObservableCollection_T,
-                KnownType.System_Array
-            );
+                KnownType.System_Array);
 
-        private static readonly HashSet<string> addMethods = new HashSet<string>
+        private static readonly HashSet<string> AddMethods = new HashSet<string>
         {
             nameof(List<object>.Add),
             nameof(List<object>.AddRange),
@@ -69,7 +68,7 @@ namespace SonarAnalyzer.Rules.CSharp
             "TryAdd" // This is a .NetCore 2.0+ method on Dictionary
         };
 
-        private static readonly HashSet<string> ignoredMethods = new HashSet<string>
+        private static readonly HashSet<string> IgnoredMethods = new HashSet<string>
         {
             nameof(List<object>.GetHashCode),
             nameof(List<object>.Equals),
@@ -103,7 +102,7 @@ namespace SonarAnalyzer.Rules.CSharp
             public bool SupportsPartialResults => false;
 
             public IEnumerable<Diagnostic> GetDiagnostics() =>
-                emptyCollections.Except(nonEmptyCollections).Select(node => Diagnostic.Create(rule, node.GetLocation()));
+                emptyCollections.Except(nonEmptyCollections).Select(node => Diagnostic.Create(Rule, node.GetLocation()));
 
             public void Dispose()
             {
@@ -156,7 +155,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 var collectionType = GetCollectionType(collectionSymbol);
 
                 // When invoking a collection method ...
-                if (collectionType.IsAny(trackedCollectionTypes))
+                if (collectionType.IsAny(TrackedCollectionTypes))
                 {
                     var methodSymbol = semanticModel.GetSymbolInfo(invocation).Symbol as IMethodSymbol;
                     if (IsIgnoredMethod(methodSymbol))
@@ -171,7 +170,7 @@ namespace SonarAnalyzer.Rules.CSharp
                         return collectionSymbol.RemoveConstraint(CollectionConstraint.Empty, newProgramState);
                     }
 
-                    if (addMethods.Contains(methodSymbol.Name))
+                    if (AddMethods.Contains(methodSymbol.Name))
                     {
                         // ... set constraint if we are adding items
                         newProgramState = collectionSymbol.SetConstraint(CollectionConstraint.NotEmpty, newProgramState);
@@ -193,7 +192,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
                 // When accessing elements from a collection ...
                 if (collectionType?.ConstructedFrom != null &&
-                    collectionType.ConstructedFrom.IsAny(trackedCollectionTypes))
+                    collectionType.ConstructedFrom.IsAny(TrackedCollectionTypes))
                 {
                     if (collectionType.ConstructedFrom.Is(KnownType.System_Collections_Generic_Dictionary_TKey_TValue) && IsDictionarySetItem(elementAccess))
                     {
@@ -258,7 +257,7 @@ namespace SonarAnalyzer.Rules.CSharp
             }
 
             private static bool IsIgnoredMethod(ISymbol methodSymbol) =>
-                methodSymbol == null || ignoredMethods.Contains(methodSymbol.Name);
+                methodSymbol == null || IgnoredMethods.Contains(methodSymbol.Name);
 
             private static CollectionConstraint GetArrayConstraint(ArrayCreationExpressionSyntax arrayCreation)
             {
@@ -330,7 +329,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
             private static bool IsCollectionConstructor(ISymbol constructorSymbol) =>
                 constructorSymbol?.ContainingType?.ConstructedFrom != null
-                && constructorSymbol.ContainingType.ConstructedFrom.IsAny(trackedCollectionTypes);
+                && constructorSymbol.ContainingType.ConstructedFrom.IsAny(TrackedCollectionTypes);
 
             private static INamedTypeSymbol GetCollectionType(ISymbol collectionSymbol) =>
                 (collectionSymbol.GetSymbolType() as INamedTypeSymbol)?.ConstructedFrom  // collections

@@ -40,10 +40,10 @@ namespace SonarAnalyzer.Rules.CSharp
         internal const string DiagnosticId = "S3966";
         private const string MessageFormat = "Refactor this code to make sure '{0}' is disposed only once.";
 
-        private static readonly DiagnosticDescriptor rule =
+        private static readonly DiagnosticDescriptor Rule =
             DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
 
-        public IEnumerable<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(rule);
+        public IEnumerable<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
 
         public ISymbolicExecutionAnalysisContext CreateContext(SonarExplodedGraph explodedGraph, SyntaxNodeAnalysisContext context) =>
             new AnalysisContext(explodedGraph);
@@ -62,7 +62,7 @@ namespace SonarAnalyzer.Rules.CSharp
             public bool SupportsPartialResults => true;
 
             public IEnumerable<Diagnostic> GetDiagnostics() =>
-                nodesToReport.Select(item => Diagnostic.Create(rule, item.Key.GetLocation(), item.Value));
+                nodesToReport.Select(item => Diagnostic.Create(Rule, item.Key.GetLocation(), item.Value));
 
             public void Dispose()
             {
