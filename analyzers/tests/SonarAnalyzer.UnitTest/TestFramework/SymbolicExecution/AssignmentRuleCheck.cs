@@ -18,6 +18,7 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System;
 using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
@@ -76,5 +77,14 @@ namespace SonarAnalyzer.UnitTest.TestFramework.SymbolicExecution
         // This RuleCheck executes ONLY on methods that contains at least one invocation
         public override bool ShouldExecute() =>
             NodeContext.Node.DescendantNodes().Any(x => x.IsKind(SyntaxKind.InvocationExpression));
+    }
+
+    internal class ThrowAssignmentRuleCheck : AssignmentRuleCheck
+    {
+        public static readonly DiagnosticDescriptor SThrow = CreateDescriptor("SThrow", DiagnosticDescriptorBuilder.MainSourceScopeTag);
+
+        protected override DiagnosticDescriptor Rule { get; } = SThrow;
+
+        public override ProgramState PostProcess(SymbolicContext context) => throw new InvalidOperationException("This check is not useful.");
     }
 }

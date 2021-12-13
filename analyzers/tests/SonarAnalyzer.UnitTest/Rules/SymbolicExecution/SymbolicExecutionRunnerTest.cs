@@ -18,8 +18,11 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System.Linq;
+using FluentAssertions;
 using Microsoft.CodeAnalysis;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
 using SonarAnalyzer.Rules.SymbolicExecution;
 using SonarAnalyzer.UnitTest.MetadataReferences;
@@ -270,6 +273,25 @@ public class Sample
         Method();
     }
 }", sut);
+        }
+
+        [TestMethod]
+        public void Analyze_Rethrows_SymbolicExecutionException()
+        {
+            var code = @"
+public class Sample
+{
+    public void Method()
+    {
+        string s = null;    // Nothing is raised because exception is thrown on the way
+    }
+}";
+            var sut = new SymbolicExecutionRunner();
+            sut.RegisterRule<ThrowAssignmentRuleCheck>(ThrowAssignmentRuleCheck.SThrow);
+            var compilation = SolutionBuilder.Create().AddProject(AnalyzerLanguage.CSharp).AddSnippet(code).GetSolution().Compile(ParseOptionsHelper.CSharpLatest.ToArray()).Single();
+            var diagnostics = DiagnosticVerifier.GetDiagnosticsIgnoreExceptions(compilation, sut);
+            diagnostics.Should().ContainSingle(x => x.Id == "AD0001").Which.GetMessage().Should()
+                .StartWith("Analyzer 'SonarAnalyzer.Rules.SymbolicExecution.SymbolicExecutionRunner' threw an exception of type 'SonarAnalyzer.SymbolicExecution.SymbolicExecutionException' with message 'Error processing method: Method ## Method file: snippet1.cs ## Method line: 4,4 ## Inner exception: System.InvalidOperationException: This check is not useful. ##    at SonarAnalyzer.UnitTest.TestFramework.SymbolicExecution.ThrowAssignmentRuleCheck.PostProcess(SymbolicContext context)");
         }
 
         private static void Verify(string body, params DiagnosticDescriptor[] onlyRules) =>
