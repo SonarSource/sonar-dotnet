@@ -18,9 +18,6 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System.Collections.Generic;
-using System.Linq;
-using Microsoft.CodeAnalysis;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.Rules.CSharp;
 using SonarAnalyzer.UnitTest.MetadataReferences;
@@ -34,58 +31,58 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void LockReleasedAllPaths_Monitor_Linear_CS() =>
-            Verifier.VerifyAnalyzer(@"TestCases\SymbolicExecution\Sonar\LockReleasedAllPaths.Monitor.Linear.cs", new LockReleasedAllPaths());
+            Verifier.VerifyAnalyzer(@"TestCases\SymbolicExecution\Roslyn\LockReleasedAllPaths.Monitor.Linear.cs", new LockReleasedAllPaths());
 
         [TestMethod]
         [TestCategory("Rule")]
         public void LockReleasedAllPaths_Monitor_Conditions_CS() =>
-            Verifier.VerifyAnalyzer(@"TestCases\SymbolicExecution\Sonar\LockReleasedAllPaths.Monitor.Conditions.cs", new LockReleasedAllPaths());
+            Verifier.VerifyAnalyzer(@"TestCases\SymbolicExecution\Roslyn\LockReleasedAllPaths.Monitor.Conditions.cs", new LockReleasedAllPaths());
 
         [TestMethod]
         [TestCategory("Rule")]
         public void LockReleasedAllPaths_Monitor_Conditions_CSharp8() =>
-            Verifier.VerifyAnalyzer(@"TestCases\SymbolicExecution\Sonar\LockReleasedAllPaths.Monitor.Conditions.CSharp8.cs", new LockReleasedAllPaths(), ParseOptionsHelper.FromCSharp8);
+            Verifier.VerifyAnalyzer(@"TestCases\SymbolicExecution\Roslyn\LockReleasedAllPaths.Monitor.Conditions.CSharp8.cs", new LockReleasedAllPaths(), ParseOptionsHelper.FromCSharp8);
 
         [TestMethod]
         [TestCategory("Rule")]
         public void LockReleasedAllPaths_Monitor_TryCatch_CS() =>
-            Verifier.VerifyAnalyzer(@"TestCases\SymbolicExecution\Sonar\LockReleasedAllPaths.Monitor.TryCatch.cs", new LockReleasedAllPaths());
+            Verifier.VerifyAnalyzer(@"TestCases\SymbolicExecution\Roslyn\LockReleasedAllPaths.Monitor.TryCatch.cs", new LockReleasedAllPaths());
 
         [TestMethod]
         [TestCategory("Rule")]
         public void LockReleasedAllPaths_Monitor_Loops_CS() =>
-            Verifier.VerifyAnalyzer(@"TestCases\SymbolicExecution\Sonar\LockReleasedAllPaths.Monitor.Loops.cs", new LockReleasedAllPaths());
+            Verifier.VerifyAnalyzer(@"TestCases\SymbolicExecution\Roslyn\LockReleasedAllPaths.Monitor.Loops.cs", new LockReleasedAllPaths());
 
         [TestMethod]
         [TestCategory("Rule")]
         public void LockReleasedAllPaths_Monitor_TryEnter_CS() =>
-            Verifier.VerifyAnalyzer(@"TestCases\SymbolicExecution\Sonar\LockReleasedAllPaths.Monitor.TryEnter.cs", new LockReleasedAllPaths());
+            Verifier.VerifyAnalyzer(@"TestCases\SymbolicExecution\Roslyn\LockReleasedAllPaths.Monitor.TryEnter.cs", new LockReleasedAllPaths());
 
         [TestMethod]
         [TestCategory("Rule")]
         public void LockReleasedAllPaths_SpinLock_CS() =>
-            Verifier.VerifyAnalyzer(@"TestCases\SymbolicExecution\Sonar\LockReleasedAllPaths.SpinLock.cs", new LockReleasedAllPaths());
+            Verifier.VerifyAnalyzer(@"TestCases\SymbolicExecution\Roslyn\LockReleasedAllPaths.SpinLock.cs", new LockReleasedAllPaths());
 
         [TestMethod]
         [TestCategory("Rule")]
         public void LockReleasedAllPaths_ReaderWriterLock_CS() =>
-            Verifier.VerifyAnalyzer(@"TestCases\SymbolicExecution\Sonar\LockReleasedAllPaths.ReaderWriterLock.cs", new LockReleasedAllPaths(), MetadataReferenceFacade.SystemThreading);
+            Verifier.VerifyAnalyzer(@"TestCases\SymbolicExecution\Roslyn\LockReleasedAllPaths.ReaderWriterLock.cs", new LockReleasedAllPaths(), MetadataReferenceFacade.SystemThreading);
 
         [TestMethod]
         [TestCategory("Rule")]
         public void LockReleasedAllPaths_ReaderWriterLockSlim_CS() =>
-            Verifier.VerifyAnalyzer(@"TestCases\SymbolicExecution\Sonar\LockReleasedAllPaths.ReaderWriterLockSlim.cs", new LockReleasedAllPaths());
+            Verifier.VerifyAnalyzer(@"TestCases\SymbolicExecution\Roslyn\LockReleasedAllPaths.ReaderWriterLockSlim.cs", new LockReleasedAllPaths());
 
         [TestMethod]
         [TestCategory("Rule")]
         public void LockReleasedAllPaths_Mutex_CS() =>
-            Verifier.VerifyAnalyzer(@"TestCases\SymbolicExecution\Sonar\LockReleasedAllPaths.Mutex.cs", new LockReleasedAllPaths(), ParseOptionsHelper.FromCSharp8);
+            Verifier.VerifyAnalyzer(@"TestCases\SymbolicExecution\Roslyn\LockReleasedAllPaths.Mutex.cs", new LockReleasedAllPaths(), ParseOptionsHelper.FromCSharp8);
 
 #if NETFRAMEWORK
         [TestMethod]
         [TestCategory("Rule")]
         public void LockReleasedAllPaths_Mutex_NetFramework_CS() =>
-            Verifier.VerifyAnalyzer(@"TestCases\SymbolicExecution\Sonar\LockReleasedAllPaths.Mutex.NetFx.cs", new LockReleasedAllPaths(), ParseOptionsHelper.FromCSharp8);
+            Verifier.VerifyAnalyzer(@"TestCases\SymbolicExecution\Roslyn\LockReleasedAllPaths.Mutex.NetFx.cs", new LockReleasedAllPaths(), ParseOptionsHelper.FromCSharp8);
 #endif
     }
 }
