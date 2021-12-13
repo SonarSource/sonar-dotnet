@@ -177,10 +177,11 @@ public void Method()
 }");
 
         [TestMethod]
-        public void Analyze_DoNotRunWhenContainsDiagnostics()
-        {
-            Assert.Inconclusive();
-        }
+        public void Analyze_DoNotRunWhenContainsDiagnostics() =>
+            Verify(@"string s = null;   // Error CS1525: Invalid expression term '>' - misleading location, duplicate reporting from Roslyn
+                     >>;                // Error CS1525: Invalid expression term '>' - this will set body.ContainsDiagnostics",
+                ProjectType.Product,
+                null);
 
         [TestMethod]
         public void Enabled_MainProject() =>
