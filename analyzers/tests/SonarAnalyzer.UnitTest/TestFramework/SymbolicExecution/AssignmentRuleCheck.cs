@@ -34,7 +34,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework.SymbolicExecution
         {
             if (context.Operation.Instance.Kind == OperationKind.SimpleAssignment)
             {
-                Context.ReportIssue(Diagnostic.Create(Rule, context.Operation.Instance.Syntax.GetLocation()));
+                NodeContext.ReportIssue(Diagnostic.Create(Rule, context.Operation.Instance.Syntax.GetLocation()), SonarContext);
             }
             return context.State;
         }
@@ -55,7 +55,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework.SymbolicExecution
 
     internal class TestScopeAssignmentRuleCheck : AssignmentRuleCheck
     {
-        public static readonly DiagnosticDescriptor STest = CreateDescriptor("STest", DiagnosticDescriptorBuilder.MainSourceScopeTag);
+        public static readonly DiagnosticDescriptor STest = CreateDescriptor("STest", DiagnosticDescriptorBuilder.TestSourceScopeTag);
 
         protected override DiagnosticDescriptor Rule { get; } = STest;
     }
@@ -75,6 +75,6 @@ namespace SonarAnalyzer.UnitTest.TestFramework.SymbolicExecution
 
         // This RuleCheck executes ONLY on methods that contains at least one invocation
         public override bool ShouldExecute() =>
-            Context.Node.DescendantNodes().Any(x => x.IsKind(SyntaxKind.InvocationExpression));
+            NodeContext.Node.DescendantNodes().Any(x => x.IsKind(SyntaxKind.InvocationExpression));
     }
 }
