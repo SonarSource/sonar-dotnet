@@ -24,7 +24,7 @@ using System.Runtime.Serialization;
 using System.Text;
 using Microsoft.CodeAnalysis;
 
-namespace SonarAnalyzer.SymbolicExecution.Sonar
+namespace SonarAnalyzer.SymbolicExecution
 {
     [Serializable]
     public sealed class SymbolicExecutionException : Exception

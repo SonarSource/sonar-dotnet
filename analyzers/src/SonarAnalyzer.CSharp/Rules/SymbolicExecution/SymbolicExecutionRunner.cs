@@ -31,6 +31,7 @@ using SonarAnalyzer.CFG.Sonar;
 using SonarAnalyzer.Extensions;
 using SonarAnalyzer.Helpers;
 using SonarAnalyzer.LiveVariableAnalysis.CSharp;
+using SonarAnalyzer.SymbolicExecution;
 using SonarAnalyzer.SymbolicExecution.Roslyn;
 using SonarAnalyzer.SymbolicExecution.Roslyn.Checks;
 using SonarAnalyzer.SymbolicExecution.Sonar;
