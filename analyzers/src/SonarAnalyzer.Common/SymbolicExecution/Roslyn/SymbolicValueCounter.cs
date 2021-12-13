@@ -18,8 +18,6 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System.Threading;
-
 namespace SonarAnalyzer.SymbolicExecution.Roslyn
 {
     public class SymbolicValueCounter
@@ -27,6 +25,6 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
         private int identifier;
 
         public int NextIdentifier() =>
-            Interlocked.Increment(ref identifier);
+            ++identifier;
     }
 }
