@@ -83,7 +83,7 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
                 yield break;
             }
 
-            yield return new ExplodedNode(node, context.State);
+            yield return node.CreateNext(context.State);
         }
 
         private SymbolicContext InvokeChecks(SymbolicContext context, Func<SymbolicCheck, Func<SymbolicContext, ProgramState>> checkDelegate)

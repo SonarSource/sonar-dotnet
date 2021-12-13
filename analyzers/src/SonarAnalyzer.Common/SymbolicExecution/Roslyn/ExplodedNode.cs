@@ -38,8 +38,8 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
         public ExplodedNode(BasicBlock block, ProgramState state)
             : this(block, block.OperationsAndBranchValue.ToExecutionOrder().ToArray(), 0, state) { }
 
-        public ExplodedNode(ExplodedNode predecessor, ProgramState state)
-            : this(predecessor.Block, predecessor.operations, predecessor.index + 1, state) { }
+        public ExplodedNode CreateNext(ProgramState state) =>
+            new(Block, operations, index + 1, state);
 
         private ExplodedNode(BasicBlock block, IOperationWrapperSonar[] operations, int index, ProgramState state)
         {
