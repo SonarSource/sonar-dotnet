@@ -20,6 +20,7 @@
 
 using System;
 using Microsoft.CodeAnalysis.Diagnostics;
+using SonarAnalyzer.Helpers;
 using SonarAnalyzer.SymbolicExecution.Roslyn;
 
 namespace SonarAnalyzer.Rules.SymbolicExecution
@@ -40,10 +41,10 @@ namespace SonarAnalyzer.Rules.SymbolicExecution
                 this.createInstance = createInstance;
             }
 
-            public SymbolicRuleCheck CreateInstance(SyntaxNodeAnalysisContext context)
+            public SymbolicRuleCheck CreateInstance(SonarAnalysisContext sonarContext, SyntaxNodeAnalysisContext nodeContext)
             {
                 var ret = createInstance();
-                ret.Init(context);
+                ret.Init(sonarContext, nodeContext);
                 return ret;
             }
         }

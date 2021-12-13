@@ -184,10 +184,10 @@ public void Method()
         }
 
         [TestMethod]
-        public void Enabled_MainScope_MainProject()
-        {
-            Assert.Inconclusive();
-        }
+        public void Enabled_MainScope_MainProject() =>
+            Verify(@"string s = null;   // Noncompliant    {{Message for SAll}}
+                                        // Noncompliant@-1 {{Message for SMain}}");
+
 
         [TestMethod]
         public void Enabled_MainScope_TestProject()
@@ -296,6 +296,7 @@ public class Sample
             var sut = new SymbolicExecutionRunner();
             sut.RegisterRule<AllScopeAssignmentRuleCheck>(AllScopeAssignmentRuleCheck.SAll);
             sut.RegisterRule<MainScopeAssignmentRuleCheck>(MainScopeAssignmentRuleCheck.SMain);
+            sut.RegisterRule<TestScopeAssignmentRuleCheck>(TestScopeAssignmentRuleCheck.STest);
             Verifier.VerifyCSharpAnalyzer(code, sut, ParseOptionsHelper.FromCSharp9, onlyDiagnostics: onlyRules);
         }
     }

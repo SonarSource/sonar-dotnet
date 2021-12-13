@@ -110,33 +110,33 @@ namespace SonarAnalyzer.Rules.SymbolicExecution
             }
         }
 
-        private void Analyze(SonarAnalysisContext analysisContext, SyntaxNodeAnalysisContext context, CSharpSyntaxNode body, ISymbol symbol)
+        private void Analyze(SonarAnalysisContext sonarContext, SyntaxNodeAnalysisContext nodeContext, CSharpSyntaxNode body, ISymbol symbol)
         {
             if (body != null && !body.ContainsDiagnostics)
             {
-                var isTestProject = analysisContext.IsTestProject(context.Compilation, context.Options);
-                var isScannerRun = analysisContext.IsScannerRun(context.Options);
-                AnalyzeSonar(context, isTestProject, isScannerRun, body, symbol);
+                var isTestProject = sonarContext.IsTestProject(nodeContext.Compilation, nodeContext.Options);
+                var isScannerRun = sonarContext.IsScannerRun(nodeContext.Options);
+                AnalyzeSonar(nodeContext, isTestProject, isScannerRun, body, symbol);
                 if (ControlFlowGraph.IsAvailable)   // ToDo: Make this configurable for UTs when migrating other rules, see DeadStores
                 {
-                    AnalyzeRoslyn(context, isTestProject, isScannerRun, body, symbol);
+                    AnalyzeRoslyn(sonarContext, nodeContext, isTestProject, isScannerRun, body, symbol);
                 }
             }
         }
 
-        private void AnalyzeRoslyn(SyntaxNodeAnalysisContext context, bool isTestProject, bool isScannerRun, CSharpSyntaxNode body, ISymbol symbol)
+        private void AnalyzeRoslyn(SonarAnalysisContext sonarContext, SyntaxNodeAnalysisContext nodeContext, bool isTestProject, bool isScannerRun, CSharpSyntaxNode body, ISymbol symbol)
         {
             var checks = AllRules.Concat(additionalTestRules)
-                .Where(x => SymbolicExecutionAnalyzerFactory.IsEnabled(context, isTestProject, isScannerRun, x.Key))
+                .Where(x => SymbolicExecutionAnalyzerFactory.IsEnabled(nodeContext, isTestProject, isScannerRun, x.Key))
                 .GroupBy(x => x.Value.Type)                             // Multiple DiagnosticDescriptors (S2583, S2589) can share the same check type
-                .Select(x => x.First().Value.CreateInstance(context))   // We need just one instance in that case
+                .Select(x => x.First().Value.CreateInstance(sonarContext, nodeContext))   // We need just one instance in that case
                 .Where(x => x.ShouldExecute())
                 .ToArray();
             if (checks.Any())
             {
                 try
                 {
-                    var cfg = body.CreateCfg(context.SemanticModel);
+                    var cfg = body.CreateCfg(nodeContext.SemanticModel);
                     var engine = new RoslynSymbolicExecution(cfg, checks);
                     engine.Execute();
                 }

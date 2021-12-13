@@ -19,12 +19,14 @@
  */
 
 using Microsoft.CodeAnalysis.Diagnostics;
+using SonarAnalyzer.Helpers;
 
 namespace SonarAnalyzer.SymbolicExecution.Roslyn
 {
     public abstract class SymbolicRuleCheck : SymbolicCheck
     {
-        protected SyntaxNodeAnalysisContext Context { get; private set; }
+        protected SonarAnalysisContext SonarContext { get; private set; }
+        protected SyntaxNodeAnalysisContext NodeContext { get; private set; }
 
         /// <summary>
         /// Decide if a CFG should be created for current method and SE should be evaluated. We should only run SE for a method if there's a chance for finding something for performance reasons.
@@ -34,7 +36,10 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
         /// </remarks>
         public abstract bool ShouldExecute();
 
-        public void Init(SyntaxNodeAnalysisContext context) =>
-            Context = context;
+        public void Init(SonarAnalysisContext sonarContext, SyntaxNodeAnalysisContext nodeContext)
+        {
+            SonarContext = sonarContext;
+            NodeContext = nodeContext;
+        }
     }
 }
