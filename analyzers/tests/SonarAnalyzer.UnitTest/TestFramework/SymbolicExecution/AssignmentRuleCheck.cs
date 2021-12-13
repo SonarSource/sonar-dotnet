@@ -62,7 +62,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework.SymbolicExecution
 
     internal class AllScopeAssignmentRuleCheck : AssignmentRuleCheck
     {
-        public static readonly DiagnosticDescriptor SAll = CreateDescriptor("SAll", DiagnosticDescriptorBuilder.MainSourceScopeTag);
+        public static readonly DiagnosticDescriptor SAll = CreateDescriptor("SAll", DiagnosticDescriptorBuilder.MainSourceScopeTag, DiagnosticDescriptorBuilder.TestSourceScopeTag);
 
         protected override DiagnosticDescriptor Rule { get; } = SAll;
     }
