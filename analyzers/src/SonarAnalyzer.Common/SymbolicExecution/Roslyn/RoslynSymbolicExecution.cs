@@ -101,7 +101,9 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
         private static ProgramState ProcessOperation(SymbolicContext context) =>
             context.Operation.Instance.Kind switch
             {
-                OperationKindEx.SimpleAssignment => SimpleAssignmentProcessor.ProcessSimpleAssignment(context),
+                OperationKindEx.SimpleAssignment => SimpleAssignmentProcessor.Process(context),
+                OperationKindEx.LocalReference => LocalReferenceProcessor.Process(context),
+                OperationKindEx.ParameterReference => ParameterReference.Process(context),
                 _ => context.State
             };
 

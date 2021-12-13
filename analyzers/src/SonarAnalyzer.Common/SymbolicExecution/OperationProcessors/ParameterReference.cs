@@ -18,31 +18,19 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using Microsoft.CodeAnalysis;
 using StyleCop.Analyzers.Lightup;
 
 namespace SonarAnalyzer.SymbolicExecution.Roslyn
 {
-    internal static class SimpleAssignmentProcessor
+    internal static class ParameterReference
     {
         public static ProgramState Process(SymbolicContext context)
         {
             var newState = context.State;
-            var assignment = ISimpleAssignmentOperationWrapper.FromOperation(context.Operation.Instance);
-            var rightSide = context.State[new IOperationWrapperSonar(assignment.Value)];
-            if (ParameterOrLocalSymbol(assignment.Target) is { } symbol)
-            {
-                newState = context.State.SetSymbolValue(symbol, rightSide);
-            }
-            return newState.SetOperationValue(new IOperationWrapperSonar(assignment.Target), rightSide);
+            var symbol = IParameterReferenceOperationWrapper.FromOperation(context.Operation.Instance).Parameter;
+            return symbol != null && context.State[symbol] is { } symbolState
+                ? newState.SetOperationValue(context.Operation, symbolState)
+                : context.State;
         }
-
-        private static ISymbol ParameterOrLocalSymbol(IOperation operation) =>
-            operation switch
-            {
-                var _ when IParameterReferenceOperationWrapper.IsInstance(operation) => IParameterReferenceOperationWrapper.FromOperation(operation).Parameter,
-                var _ when ILocalReferenceOperationWrapper.IsInstance(operation) => ILocalReferenceOperationWrapper.FromOperation(operation).Local,
-                _ => null
-            };
     }
 }
