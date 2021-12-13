@@ -22,11 +22,9 @@ using System;
 using System.Linq;
 using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using SonarAnalyzer.CFG.Roslyn;
 using SonarAnalyzer.Extensions;
 using SonarAnalyzer.SymbolicExecution.Roslyn;
 using SonarAnalyzer.UnitTest.Helpers;
-using StyleCop.Analyzers.Lightup;
 
 namespace SonarAnalyzer.UnitTest.SymbolicExecution.Roslyn
 {
@@ -37,10 +35,15 @@ namespace SonarAnalyzer.UnitTest.SymbolicExecution.Roslyn
         public void Constructor_NullState_Throws()
         {
             var cfg = TestHelper.CompileCfgBodyCS();
-            var validNode = new ExplodedNode(cfg.EntryBlock, ProgramState.Empty);
-
-            ((Action)(() => new ExplodedNode(validNode, null))).Should().Throw<ArgumentNullException>().And.ParamName.Should().Be("state");
             ((Action)(() => new ExplodedNode(cfg.EntryBlock, null))).Should().Throw<ArgumentNullException>().And.ParamName.Should().Be("state");
+        }
+
+        [TestMethod]
+        public void CreateNext_NullState_Throws()
+        {
+            var cfg = TestHelper.CompileCfgBodyCS();
+            var validNode = new ExplodedNode(cfg.EntryBlock, ProgramState.Empty);
+            ((Action)(() => validNode.CreateNext(null))).Should().Throw<ArgumentNullException>().And.ParamName.Should().Be("state");
         }
 
         [TestMethod]
@@ -64,13 +67,13 @@ namespace SonarAnalyzer.UnitTest.SymbolicExecution.Roslyn
             var current = new ExplodedNode(block, ProgramState.Empty);
             TestHelper.Serialize(current.Operation).Should().Be("LocalReference: value = 42 (Implicit)");
 
-            current = new ExplodedNode(current, ProgramState.Empty);
+            current = current.CreateNext(ProgramState.Empty);
             TestHelper.Serialize(current.Operation).Should().Be("Literal: 42");
 
-            current = new ExplodedNode(current, ProgramState.Empty);
+            current = current.CreateNext(ProgramState.Empty);
             TestHelper.Serialize(current.Operation).Should().Be("SimpleAssignment: value = 42 (Implicit)");
 
-            current = new ExplodedNode(current, ProgramState.Empty);
+            current = current.CreateNext(ProgramState.Empty);
             current.Operation.Should().BeNull();
         }
 
@@ -87,13 +90,13 @@ namespace SonarAnalyzer.UnitTest.SymbolicExecution.Roslyn
             var sut = new ExplodedNode(block, ProgramState.Empty);
             TestHelper.Serialize(sut.Operation).Should().Be("LocalReference: Value (Implicit)");
 
-            sut = new ExplodedNode(sut, ProgramState.Empty);
+            sut = sut.CreateNext(ProgramState.Empty);
             TestHelper.Serialize(sut.Operation).Should().Be("Literal: 42");
 
-            sut = new ExplodedNode(sut, ProgramState.Empty);
+            sut = sut.CreateNext(ProgramState.Empty);
             TestHelper.Serialize(sut.Operation).Should().Be("SimpleAssignment: Value As Integer = 42 (Implicit)");
 
-            sut = new ExplodedNode(sut, ProgramState.Empty);
+            sut = sut.CreateNext(ProgramState.Empty);
             sut.Operation.Should().BeNull();
         }
     }
