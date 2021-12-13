@@ -86,18 +86,16 @@ namespace SonarAnalyzer.UnitTest.TestFramework
             }
         }
 
-        public static void VerifyNoIssueReported(
-                Compilation compilation,
-                DiagnosticAnalyzer diagnosticAnalyzer,
-                CompilationErrorBehavior checkMode = CompilationErrorBehavior.Default,
-                string sonarProjectConfigPath = null) =>
+        public static void VerifyNoIssueReported(Compilation compilation,
+                                                 DiagnosticAnalyzer diagnosticAnalyzer,
+                                                 CompilationErrorBehavior checkMode = CompilationErrorBehavior.Default,
+                                                 string sonarProjectConfigPath = null) =>
             GetDiagnosticsNoExceptions(compilation, diagnosticAnalyzer, checkMode, sonarProjectConfigPath: sonarProjectConfigPath).Should().BeEmpty();
 
-        public static IEnumerable<Diagnostic> GetDiagnosticsNoExceptions(
-            Compilation compilation,
-            DiagnosticAnalyzer diagnosticAnalyzer,
-            CompilationErrorBehavior checkMode,
-            string sonarProjectConfigPath = null)
+        public static IEnumerable<Diagnostic> GetDiagnosticsNoExceptions(Compilation compilation,
+                                                                         DiagnosticAnalyzer diagnosticAnalyzer,
+                                                                         CompilationErrorBehavior checkMode,
+                                                                         string sonarProjectConfigPath = null)
         {
             var ret = GetAnalyzerDiagnostics(compilation, new[] { diagnosticAnalyzer }, checkMode, sonarProjectConfigPath);
             VerifyNoExceptionThrown(ret);
@@ -107,11 +105,10 @@ namespace SonarAnalyzer.UnitTest.TestFramework
         public static IEnumerable<Diagnostic> GetDiagnosticsIgnoreExceptions(Compilation compilation, DiagnosticAnalyzer diagnosticAnalyzer) =>
             GetAnalyzerDiagnostics(compilation, new[] { diagnosticAnalyzer }, CompilationErrorBehavior.FailTest);
 
-        public static ImmutableArray<Diagnostic> GetAnalyzerDiagnostics(
-            Compilation compilation,
-            IEnumerable<DiagnosticAnalyzer> diagnosticAnalyzers,
-            CompilationErrorBehavior checkMode,
-            string sonarProjectConfigPath = null)
+        public static ImmutableArray<Diagnostic> GetAnalyzerDiagnostics(Compilation compilation,
+                                                                        IEnumerable<DiagnosticAnalyzer> diagnosticAnalyzers,
+                                                                        CompilationErrorBehavior checkMode,
+                                                                        string sonarProjectConfigPath = null)
         {
             var supportedDiagnostics = diagnosticAnalyzers
                     .SelectMany(analyzer => analyzer.SupportedDiagnostics)
