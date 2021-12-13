@@ -237,7 +237,6 @@ public void Method()
                 AllScopeAssignmentRuleCheck.SAll,
                 MainScopeAssignmentRuleCheck.SMain);
 
-
         [TestMethod]
         public void Analyze_Severity_ExecutesWhenOne() =>
             Verify(@"string s = null; // Noncompliant {{Message for SMain}}
@@ -249,6 +248,30 @@ public void Method()
             Verify(@"string s = null;   // Compliant, SMain and SAll are suppressed by test framework, because only 'SAnother' is active
                      s.ToString();      // Compliant, should not raise S2259",
                 new DiagnosticDescriptor("SAnother", "Non-SE rule", "Message", "Category", DiagnosticSeverity.Warning, true, customTags: DiagnosticDescriptorBuilder.MainSourceScopeTag));
+
+        [TestMethod]
+        public void Analyze_ShouldExecute_ExcludesCheckFromExecution()
+        {
+            var sut = new SymbolicExecutionRunner();
+            sut.RegisterRule<InvocationAssignmentRuleCheck>(InvocationAssignmentRuleCheck.SInvocation);
+            Verifier.VerifyCSharpAnalyzer(@"
+public class Sample
+{
+    public void Method()
+    {
+        string s = null;    // Nothing is raised because InvocationAssignmentRuleCheck.ShouldExecute returns false
+    }
+}", sut);
+            Verifier.VerifyCSharpAnalyzer(@"
+public class Sample
+{
+    public void Method()
+    {
+        string s = null;    // Noncompliant {{Message for SInvocation}} - because invocation is present in the method body
+        Method();
+    }
+}", sut);
+        }
 
         private static void Verify(string body, params DiagnosticDescriptor[] onlyRules) =>
             Verify(body, ProjectType.Product, null, onlyRules);

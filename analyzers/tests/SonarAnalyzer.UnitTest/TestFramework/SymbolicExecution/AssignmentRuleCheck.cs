@@ -69,9 +69,9 @@ namespace SonarAnalyzer.UnitTest.TestFramework.SymbolicExecution
 
     internal class InvocationAssignmentRuleCheck : AssignmentRuleCheck
     {
-        public static readonly DiagnosticDescriptor SAll = CreateDescriptor("SAll", DiagnosticDescriptorBuilder.MainSourceScopeTag);
+        public static readonly DiagnosticDescriptor SInvocation = CreateDescriptor("SInvocation", DiagnosticDescriptorBuilder.MainSourceScopeTag);
 
-        protected override DiagnosticDescriptor Rule { get; } = SAll;
+        protected override DiagnosticDescriptor Rule { get; } = SInvocation;
 
         // This RuleCheck executes ONLY on methods that contains at least one invocation
         public override bool ShouldExecute() =>
