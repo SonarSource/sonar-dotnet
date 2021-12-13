@@ -49,7 +49,7 @@ namespace SonarAnalyzer.SymbolicExecution
             sb.AppendLine($"Error processing method: {symbol?.Name ?? "{unknown}"}");
             sb.AppendLine($"Method file: {location?.GetLineSpan().Path ?? "{unknown}"}");
             sb.AppendLine($"Method line: {location?.GetLineSpan().StartLinePosition.ToString() ?? "{unknown}"}");
-            sb.AppendLine($"Inner exception: {ex}");
+            sb.Append($"Inner exception: {ex}");
             return sb.ToString().Replace(Environment.NewLine, " ## ");
         }
     }
