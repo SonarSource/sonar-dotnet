@@ -133,7 +133,7 @@ public event EventHandler ArrowEvent
 
         [TestMethod]
         public void Initialize_Accessors_Init() =>
-            VerifyClass(@"
+            VerifyClassMain(@"
 private string target;
 
 public string InitOnlyPropertyBlock
@@ -149,8 +149,7 @@ public string InitOnlyPropertyArrow
 {
     get => null;
     init => target = value; // Noncompliant {{Message for SMain}}
-}",
-                    MainScopeAssignmentRuleCheck.SMain);
+}");
 
 #endif
 
@@ -184,46 +183,26 @@ public void Method()
         }
 
         [TestMethod]
-        public void Enabled_MainScope_MainProject() =>
+        public void Enabled_MainProject() =>
             Verify(@"string s = null;   // Noncompliant    {{Message for SAll}}
-                                        // Noncompliant@-1 {{Message for SMain}}");
-
-
-        [TestMethod]
-        public void Enabled_MainScope_TestProject()
-        {
-            Assert.Inconclusive();
-        }
+                                        // Noncompliant@-1 {{Message for SMain}}",
+                ProjectType.Product,
+                null);
 
         [TestMethod]
-        public void Enabled_TestScope_MainProject()
-        {
-            Assert.Inconclusive();
-        }
+        public void Enabled_TestProject_StandaloneRun() =>
+            // ToDo: SonarAnalysisContext.IsAnalysisScopeMatching doesn't handle mixed situation correctly, see https://github.com/SonarSource/sonar-dotnet/issues/5173
+            Verify(@"string s = null;   // Noncompliant    {{Message for STest}}
+                                        // FN, should be Non-compliant@-1 { {Message for SAll} }",
+                ProjectType.Test,
+                null);
 
         [TestMethod]
-        public void Enabled_TestScope_TestProject()
-        {
-            Assert.Inconclusive();
-        }
-
-        [TestMethod]
-        public void Enabled_AllScope_MainProject()
-        {
-            Assert.Inconclusive();
-        }
-
-        [TestMethod]
-        public void Enabled_AllScope_TestProject_StandaloneRun()
-        {
-            Assert.Inconclusive();
-        }
-
-        [TestMethod]
-        public void Enabled_AllScope_TestProject_ScannerRun()
-        {
-            Assert.Inconclusive();
-        }
+        public void Enabled_TestProject_ScannerRun() =>
+            // ToDo: SonarAnalysisContext.IsAnalysisScopeMatching doesn't handle mixed situation correctly, see https://github.com/SonarSource/sonar-dotnet/issues/5173
+            Verify(@"string s = null;   // FN, should be Non-compliant@-1 { {Message for STest} }",
+                ProjectType.Test,
+                TestHelper.CreateSonarProjectConfig(nameof(Enabled_TestProject_ScannerRun), ProjectType.Test));
 
         [TestMethod]
         public void Analyze_DescriptorsWithSameType_ExecutesOnce()
@@ -270,21 +249,23 @@ public void Method()
                      s.ToString();      // Compliant, should not raise S2259",
                 new DiagnosticDescriptor("SAnother", "Non-SE rule", "Message", "Category", DiagnosticSeverity.Warning, true, customTags: DiagnosticDescriptorBuilder.MainSourceScopeTag));
 
+        private static void Verify(string body, params DiagnosticDescriptor[] onlyRules) =>
+            Verify(body, ProjectType.Product, null, onlyRules);
 
-        private static void Verify(string body, params DiagnosticDescriptor[] onlyRules)
+        private static void Verify(string body, ProjectType projectType, string sonarProjectConfigPath, params DiagnosticDescriptor[] onlyRules)
         {
             var code =
 $@"public void Main()
 {{
     {body}
 }}";
-            VerifyClass(code, onlyRules);
+            VerifyClass(code, projectType, sonarProjectConfigPath, onlyRules);
         }
 
         private static void VerifyClassMain(string members) =>
-            VerifyClass(members, MainScopeAssignmentRuleCheck.SMain);
+            VerifyClass(members, ProjectType.Product, null, MainScopeAssignmentRuleCheck.SMain);
 
-        private static void VerifyClass(string members, params DiagnosticDescriptor[] onlyRules)
+        private static void VerifyClass(string members, ProjectType projectType, string sonarProjectConfigPath, params DiagnosticDescriptor[] onlyRules)
         {
             var code =
 $@"using System;
@@ -297,7 +278,10 @@ public class Sample
             sut.RegisterRule<AllScopeAssignmentRuleCheck>(AllScopeAssignmentRuleCheck.SAll);
             sut.RegisterRule<MainScopeAssignmentRuleCheck>(MainScopeAssignmentRuleCheck.SMain);
             sut.RegisterRule<TestScopeAssignmentRuleCheck>(TestScopeAssignmentRuleCheck.STest);
-            Verifier.VerifyCSharpAnalyzer(code, sut, ParseOptionsHelper.FromCSharp9, onlyDiagnostics: onlyRules);
+            Verifier.VerifyCSharpAnalyzer(code, sut, ParseOptionsHelper.FromCSharp9,
+                additionalReferences: TestHelper.ProjectTypeReference(projectType),
+                onlyDiagnostics: onlyRules,
+                sonarProjectConfigPath: sonarProjectConfigPath);
         }
     }
 }

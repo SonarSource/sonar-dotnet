@@ -78,7 +78,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework
             SuppressionHandler.HookSuppression();
             try
             {
-                var diagnostics = GetAnalyzerDiagnostics(compilation, diagnosticAnalyzers, checkMode, sonarProjectConfigPath: sonarProjectConfigPath, onlyDiagnostics);
+                var diagnostics = GetAnalyzerDiagnostics(compilation, diagnosticAnalyzers, checkMode, sonarProjectConfigPath, onlyDiagnostics);
                 var expectedIssues = sources.Select(x => x.ToExpectedIssueLocations()).ToArray();
                 VerifyNoExceptionThrown(diagnostics);
                 CompareActualToExpected(compilation.LanguageVersionString(), diagnostics, expectedIssues, false);

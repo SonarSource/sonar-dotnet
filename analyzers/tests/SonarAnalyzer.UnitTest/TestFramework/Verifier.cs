@@ -83,14 +83,15 @@ namespace SonarAnalyzer.UnitTest.TestFramework
                                                 CompilationErrorBehavior checkMode = CompilationErrorBehavior.Default,
                                                 IEnumerable<MetadataReference> additionalReferences = null,
                                                 OutputKind outputKind = OutputKind.DynamicallyLinkedLibrary,
-                                                DiagnosticDescriptor[] onlyDiagnostics = null)
+                                                DiagnosticDescriptor[] onlyDiagnostics = null,
+                                                string sonarProjectConfigPath = null)
         {
             var solution = SolutionBuilder.Create()
                                           .AddProject(AnalyzerLanguage.CSharp, outputKind: outputKind)
                                           .AddSnippet(snippet)
                                           .AddReferences(additionalReferences)
                                           .GetSolution();
-            CompileAndVerifyAnalyzer(solution, new DiagnosticAnalyzer[] { diagnosticAnalyzer }, options, checkMode, null, onlyDiagnostics?.Select(x => x.Id).ToArray());
+            CompileAndVerifyAnalyzer(solution, new DiagnosticAnalyzer[] { diagnosticAnalyzer }, options, checkMode, sonarProjectConfigPath, onlyDiagnostics?.Select(x => x.Id).ToArray());
         }
 
         /// <summary>
