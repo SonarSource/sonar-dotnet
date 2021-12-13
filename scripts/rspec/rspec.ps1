@@ -28,7 +28,10 @@ param (
     $ruleKey,
     [Parameter(HelpMessage = "The name of the rule class.", Position = 2)]
     [string]
-    $className
+    $className,
+    [Parameter(HelpMessage = "The branch in the rspec github repo.", Position = 3)]
+    [string]
+    $rspecBranch
 )
 
 Set-StrictMode -version 1.0
@@ -340,7 +343,12 @@ Write-Host "Will change directory to $sonarpediaFolder to run rule-api (from $ru
 pushd $sonarpediaFolder
 
 if ($ruleKey) {
-    java "-Dline.separator=`n" -jar $rule_api_jar generate -rule $ruleKey
+    if ($rspecBranch) {
+        java "-Dline.separator=`n" -jar $rule_api_jar generate -rule $ruleKey -branch $rspecBranch
+    }
+    else {
+        java "-Dline.separator=`n" -jar $rule_api_jar generate -rule $ruleKey
+    }
 }
 else {
     java "-Dline.separator=`n" -jar $rule_api_jar update
