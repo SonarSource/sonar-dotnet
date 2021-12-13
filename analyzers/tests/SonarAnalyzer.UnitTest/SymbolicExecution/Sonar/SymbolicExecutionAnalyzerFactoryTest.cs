@@ -92,7 +92,7 @@ namespace SonarAnalyzer.UnitTest.Rules.SymbolicExecution.Sonar
         }
 
         [TestMethod]
-        public void GetEnabledAnalyzers_ReturnsEmptyList_OnTestProjectScannerRun()  // Old SE rules do not run on test code
+        public void GetEnabledAnalyzers_ReturnsEmptyList_OnTestProjectScannerRun()  // Old SE rules do not run on test code under scanner run
         {
             var sut = new SymbolicExecutionAnalyzerFactory();
             var diagnostics = symbolicExecutionRuleIds.ToImmutableDictionary(v => v, _ => ReportDiagnostic.Warn);
