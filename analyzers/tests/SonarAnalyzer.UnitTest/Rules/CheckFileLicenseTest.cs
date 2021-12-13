@@ -19,6 +19,7 @@
  */
 
 using System;
+using System.Linq;
 using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.UnitTest.TestFramework;
@@ -175,9 +176,10 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         public void CheckFileLicense_WhenProvidingAnInvalidRegex_ShouldThrowException_CS()
         {
-            Action action = () => Verifier.VerifyAnalyzer(@"TestCases\CheckFileLicense_NoLicenseStartWithUsing.cs", new CS.CheckFileLicense { HeaderFormat = FailingSingleLineRegexHeader, IsRegularExpression = true });
-
-            action.Should().Throw<AssertFailedException>().WithMessage("*error AD0001:*SonarAnalyzer.Rules.CSharp.CheckFileLicense*System.InvalidOperationException*Invalid regular expression: [*");
+            var compilation = SolutionBuilder.CreateSolutionFromPaths(new[] { @"TestCases\CheckFileLicense_NoLicenseStartWithUsing.cs" }).Compile(ParseOptionsHelper.OnlyCSharp7.ToArray()).Single();
+            var diagnostics = DiagnosticVerifier.GetDiagnosticsIgnoreExceptions(compilation, new CS.CheckFileLicense { HeaderFormat = FailingSingleLineRegexHeader, IsRegularExpression = true });
+            diagnostics.Should().ContainSingle(x => x.Id == "AD0001").Which.GetMessage().Should()
+                .StartWith("Analyzer 'SonarAnalyzer.Rules.CSharp.CheckFileLicense' threw an exception of type 'System.InvalidOperationException' with message 'Invalid regular expression:");
         }
 
         [TestMethod]

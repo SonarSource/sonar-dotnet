@@ -171,7 +171,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework
 
                 Compilation = project.GetCompilationAsync().Result;
                 Document = document;
-                Diagnostics = DiagnosticVerifier.GetDiagnostics(Compilation, diagnosticAnalyzer, CompilationErrorBehavior.Ignore).ToImmutableArray();
+                Diagnostics = DiagnosticVerifier.GetDiagnosticsNoExceptions(Compilation, diagnosticAnalyzer, CompilationErrorBehavior.Ignore).ToImmutableArray();
                 ActualCode = document.GetSyntaxRootAsync().Result.GetText().ToString();
             }
         }

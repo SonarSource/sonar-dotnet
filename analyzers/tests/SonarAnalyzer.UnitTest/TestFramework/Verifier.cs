@@ -54,7 +54,8 @@ namespace SonarAnalyzer.UnitTest.TestFramework
                 .AddDocument(path)
                 .GetCompilation();
 
-            DiagnosticVerifier.GetAllDiagnostics(compilation, diagnosticAnalyzers, checkMode);
+            var diagnostics = DiagnosticVerifier.GetAnalyzerDiagnostics(compilation, diagnosticAnalyzers, checkMode);
+            DiagnosticVerifier.VerifyNoExceptionThrown(diagnostics);
         }
 
         /// <summary>
