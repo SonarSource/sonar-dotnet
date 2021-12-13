@@ -101,7 +101,7 @@ public class Foo
         public void MethodsShouldNotHaveTooManyLines_InvalidMaxThreshold_CS(int max)
         {
             var compilation = SolutionBuilder.CreateSolutionFromPaths(new[] { @"TestCases\MethodsShouldNotHaveTooManyLines_CustomValues.cs" })
-                .Compile(ParseOptionsHelper.OnlyCSharp7.ToArray()).Single();
+                .Compile(ParseOptionsHelper.CSharpLatest.ToArray()).Single();
             var diagnostics = DiagnosticVerifier.GetDiagnosticsIgnoreExceptions(compilation, new CS.MethodsShouldNotHaveTooManyLines { Max = max });
             diagnostics.Should().OnlyContain(x => x.Id == "AD0001" && x.GetMessage(null).Contains("Invalid rule parameter: maximum number of lines = ")).And.HaveCount(12);
         }
