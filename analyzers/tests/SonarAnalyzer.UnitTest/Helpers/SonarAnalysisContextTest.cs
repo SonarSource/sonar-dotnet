@@ -411,7 +411,7 @@ namespace SonarAnalyzer.UnitTest.Helpers
         [DataRow(true, ProjectType.Product, MainTag, MainTag)]
         [DataRow(true, ProjectType.Product, MainTag, TestTag)]
         [DataRow(true, ProjectType.Test, TestTag, TestTag)]
-        [DataRow(false, ProjectType.Test, TestTag, MainTag)]    // Rules with scope Test&Main do not run on test code under scanner context for now.
+        [DataRow(true, ProjectType.Test, TestTag, MainTag)]    // Rules with scope Test&Main will run to let the Test diagnostics to be detected. ReportDiagnostic should filter Main issues out.
         [DataRow(false, ProjectType.Product, TestTag, TestTag)]
         [DataRow(false, ProjectType.Test, MainTag, MainTag)]
         public void IsAnalysisScopeMatching_MultipleDiagnostics_WithSingleScope_Scanner(bool expectedResult, ProjectType projectType, params string[] rulesTag)
