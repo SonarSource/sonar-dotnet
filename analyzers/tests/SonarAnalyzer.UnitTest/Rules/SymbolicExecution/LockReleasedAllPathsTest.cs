@@ -87,7 +87,5 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void LockReleasedAllPaths_Mutex_NetFramework_CS() =>
             Verifier.VerifyAnalyzer(@"TestCases\SymbolicExecution\Sonar\LockReleasedAllPaths.Mutex.NetFx.cs", new LockReleasedAllPaths(), ParseOptionsHelper.FromCSharp8);
 #endif
-
-
     }
 }
