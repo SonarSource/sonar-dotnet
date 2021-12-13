@@ -24,6 +24,7 @@ using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.Common;
+using SonarAnalyzer.Helpers;
 using SonarAnalyzer.Rules.CSharp;
 
 namespace SonarAnalyzer.Rules.SymbolicExecution
@@ -68,15 +69,13 @@ namespace SonarAnalyzer.Rules.SymbolicExecution
             SupportedDiagnostics = analyzers.SelectMany(analyzer => analyzer.SupportedDiagnostics).ToImmutableArray();
         }
 
-        public IEnumerable<ISymbolicExecutionAnalyzer> GetEnabledAnalyzers(SyntaxNodeAnalysisContext context) =>
-            // Enabled analyzers can be changed at runtime in the IDE or by using connected mode in SonarLint and because of this
-            // they cannot be cached.
-            analyzers.Where(analyzer => HasEnabledDiagnostics(analyzer, context.Compilation.Options));
+        public IEnumerable<ISymbolicExecutionAnalyzer> GetEnabledAnalyzers(SyntaxNodeAnalysisContext context, bool isTestProject, bool isScannerRun) =>
+             // Enabled analyzers can be changed at runtime in the IDE or by using connected mode in SonarLint and because of this they cannot be cached.
+             analyzers.Where(x => x.SupportedDiagnostics.Any(descriptor => IsEnabled(context, isTestProject, isScannerRun, descriptor)));
 
-        private static bool HasEnabledDiagnostics(ISymbolicExecutionAnalyzer analyzer, CompilationOptions options) =>
-            analyzer.SupportedDiagnostics.Any(diagnosticDescriptor => IsEnabled(options, diagnosticDescriptor));
-
-        private static bool IsEnabled(CompilationOptions options, DiagnosticDescriptor diagnosticDescriptor) =>
-            diagnosticDescriptor.GetEffectiveSeverity(options) != ReportDiagnostic.Suppress;
+        // We need to rewrite this https://github.com/SonarSource/sonar-dotnet/issues/4824
+        public static bool IsEnabled(SyntaxNodeAnalysisContext context, bool isTestProject, bool isScannerRun, DiagnosticDescriptor descriptor) =>
+            SonarAnalysisContext.IsAnalysisScopeMatching(context.Compilation, isTestProject, isScannerRun, new[] { descriptor })
+            && descriptor.GetEffectiveSeverity(context.Compilation.Options) != ReportDiagnostic.Suppress;
     }
 }

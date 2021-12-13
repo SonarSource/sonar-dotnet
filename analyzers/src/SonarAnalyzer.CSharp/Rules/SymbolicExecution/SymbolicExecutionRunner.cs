@@ -57,7 +57,7 @@ namespace SonarAnalyzer.Rules.SymbolicExecution
         protected override void Initialize(SonarAnalysisContext context)
         {
             context.RegisterSyntaxNodeActionInNonGenerated(
-                c => Analyze<BaseMethodDeclarationSyntax>(c, x => (CSharpSyntaxNode)x.Body ?? x.ExpressionBody()),
+                c => Analyze<BaseMethodDeclarationSyntax>(context, c, x => (CSharpSyntaxNode)x.Body ?? x.ExpressionBody()),
                 SyntaxKind.ConstructorDeclaration,
                 SyntaxKind.DestructorDeclaration,
                 SyntaxKind.ConversionOperatorDeclaration,
@@ -65,11 +65,11 @@ namespace SonarAnalyzer.Rules.SymbolicExecution
                 SyntaxKind.MethodDeclaration);
 
             context.RegisterSyntaxNodeActionInNonGenerated(
-                c => Analyze<PropertyDeclarationSyntax>(c, x => x.ExpressionBody),
+                c => Analyze<PropertyDeclarationSyntax>(context, c, x => x.ExpressionBody),
                 SyntaxKind.PropertyDeclaration);
 
             context.RegisterSyntaxNodeActionInNonGenerated(
-                c => Analyze<AccessorDeclarationSyntax>(c, x => (CSharpSyntaxNode)x.Body ?? x.ExpressionBody()),
+                c => Analyze<AccessorDeclarationSyntax>(context, c, x => (CSharpSyntaxNode)x.Body ?? x.ExpressionBody()),
                 SyntaxKind.GetAccessorDeclaration,
                 SyntaxKind.SetAccessorDeclaration,
                 SyntaxKindEx.InitAccessorDeclaration,
@@ -82,7 +82,7 @@ namespace SonarAnalyzer.Rules.SymbolicExecution
                     var declaration = (AnonymousFunctionExpressionSyntax)c.Node;
                     if (c.SemanticModel.GetSymbolInfo(declaration).Symbol is { } symbol)
                     {
-                        Analyze(c, declaration.Body, symbol);
+                        Analyze(context, c, declaration.Body, symbol);
                     }
                 },
                 SyntaxKind.AnonymousMethodExpression,
@@ -90,17 +90,19 @@ namespace SonarAnalyzer.Rules.SymbolicExecution
                 SyntaxKind.ParenthesizedLambdaExpression);
         }
 
-        private void Analyze<TNode>(SyntaxNodeAnalysisContext context, Func<TNode, CSharpSyntaxNode> getBody) where TNode : SyntaxNode
+        private void Analyze<TNode>(SonarAnalysisContext analysisContext, SyntaxNodeAnalysisContext context, Func<TNode, CSharpSyntaxNode> getBody) where TNode : SyntaxNode
         {
             if (getBody((TNode)context.Node) is { } body && context.SemanticModel.GetDeclaredSymbol(context.Node) is { } symbol)
             {
-                Analyze(context, body, symbol);
+                Analyze(analysisContext, context, body, symbol);
             }
         }
 
-        private void Analyze(SyntaxNodeAnalysisContext context, CSharpSyntaxNode body, ISymbol symbol)
+        private void Analyze(SonarAnalysisContext analysisContext, SyntaxNodeAnalysisContext context, CSharpSyntaxNode body, ISymbol symbol)
         {
-            var enabledAnalyzers = symbolicExecutionAnalyzerFactory.GetEnabledAnalyzers(context);
+            var isTestProject = analysisContext.IsTestProject(context.Compilation, context.Options);
+            var isScannerRun = analysisContext.IsScannerRun(context.Options);
+            var enabledAnalyzers = symbolicExecutionAnalyzerFactory.GetEnabledAnalyzers(context, isTestProject, isScannerRun);
             if (body == null
                 || body.ContainsDiagnostics
                 || !enabledAnalyzers.Any()
