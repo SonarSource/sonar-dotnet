@@ -73,22 +73,21 @@ namespace SonarAnalyzer.UnitTest.TestFramework.SymbolicExecution
             var context = tags.Single(x => x.Name == tag).Context;
             var invocation = (IInvocationOperation)context.Operation.Instance;
             invocation.Arguments.Should().HaveCount(2, "Asserted argument is expected in Tag(..) invocation");
-            var symbol = ParameterOrLocalSymbol(((IConversionOperation)invocation.Arguments[1].Value).Operand);
+            var symbol = SymbolValue(((IConversionOperation)invocation.Arguments[1].Value).Operand);
             var value = context.State[symbol];
             action(value);
         }
 
-        private static ISymbol ParameterOrLocalSymbol(IOperation operation)
-        {
-            ISymbol candidate = operation switch
+        private ISymbol SymbolValue(IOperation operation) =>
+            operation switch
             {
-                var _ when IParameterReferenceOperationWrapper.IsInstance(operation) => IParameterReferenceOperationWrapper.FromOperation(operation).Parameter,
-                var _ when ILocalReferenceOperationWrapper.IsInstance(operation) => ILocalReferenceOperationWrapper.FromOperation(operation).Local,
+                var _ when IParameterReferenceOperationWrapper.IsInstance(operation) => operation.TrackedSymbol(),
+                var _ when ILocalReferenceOperationWrapper.IsInstance(operation) => operation.TrackedSymbol(),
+                var _ when IFieldReferenceOperationWrapper.IsInstance(operation) => IFieldReferenceOperationWrapper.FromOperation(operation).Member,
+                var _ when IPropertyReferenceOperationWrapper.IsInstance(operation) => IPropertyReferenceOperationWrapper.FromOperation(operation).Member,
+                var _ when IArrayElementReferenceOperationWrapper.IsInstance(operation) => IArrayElementReferenceOperationWrapper.FromOperation(operation).ArrayReference.TrackedSymbol(),
                 _ => null
             };
-
-            return candidate;
-        }
 
         public void ValidateExitReachCount(int expected) =>
             exitReachedCount.Should().Be(expected);

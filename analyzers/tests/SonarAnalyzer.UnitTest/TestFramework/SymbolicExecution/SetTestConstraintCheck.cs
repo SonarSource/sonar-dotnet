@@ -19,6 +19,7 @@
  */
 
 using System;
+using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Operations;
 using SonarAnalyzer.SymbolicExecution.Roslyn;
 
@@ -43,6 +44,23 @@ namespace SonarAnalyzer.UnitTest.TestFramework.SymbolicExecution
             {
                 return context.State;
             }
+        }
+
+        public override ProgramState PostProcess(SymbolicContext context)
+        {
+            if (context.Operation.Instance.Kind == OperationKind.Literal
+                   && ((ILiteralOperation)context.Operation.Instance).ConstantValue.Value is bool value)
+            {
+                if (value == false)
+                {
+                    context.State[context.Operation].SetConstraint(TestConstraint.Second);
+                }
+                else
+                {
+                    context.State[context.Operation].SetConstraint(TestConstraint.First);
+                }
+            }
+            return context.State;
         }
     }
 }

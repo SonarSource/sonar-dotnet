@@ -20,17 +20,13 @@
 
 using StyleCop.Analyzers.Lightup;
 
-namespace SonarAnalyzer.SymbolicExecution.Roslyn
+namespace SonarAnalyzer.SymbolicExecution.Roslyn.OperationProcessors
 {
-    internal static class ParameterReference
+    internal static class LocalReference
     {
-        public static ProgramState Process(SymbolicContext context)
-        {
-            var newState = context.State;
-            var symbol = IParameterReferenceOperationWrapper.FromOperation(context.Operation.Instance).Parameter;
-            return symbol != null && context.State[symbol] is { } symbolState
-                ? newState.SetOperationValue(context.Operation, symbolState)
+        public static ProgramState Process(SymbolicContext context, ILocalReferenceOperationWrapper localReference) =>
+            context.State[localReference.Local] is { } symbolState
+                ? context.State.SetOperationValue(context.Operation, symbolState)
                 : context.State;
-        }
     }
 }

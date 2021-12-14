@@ -18,19 +18,19 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using Microsoft.CodeAnalysis;
 using StyleCop.Analyzers.Lightup;
 
 namespace SonarAnalyzer.SymbolicExecution.Roslyn
 {
-    internal static class LocalReferenceProcessor
+    internal static class IOperationExtensions
     {
-        public static ProgramState Process(SymbolicContext context)
-        {
-            var newState = context.State;
-            var symbol =  ILocalReferenceOperationWrapper.FromOperation(context.Operation.Instance).Local;
-            return symbol != null && context.State[symbol] is { } symbolState
-                ? newState.SetOperationValue(context.Operation, symbolState)
-                : context.State;
-        }
+        internal static ISymbol TrackedSymbol(this IOperation operation) =>
+            operation switch
+            {
+                var _ when IParameterReferenceOperationWrapper.IsInstance(operation) => IParameterReferenceOperationWrapper.FromOperation(operation).Parameter,
+                var _ when ILocalReferenceOperationWrapper.IsInstance(operation) => ILocalReferenceOperationWrapper.FromOperation(operation).Local,
+                _ => null
+            };
     }
 }

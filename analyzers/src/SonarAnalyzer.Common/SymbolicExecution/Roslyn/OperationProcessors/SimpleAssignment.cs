@@ -18,31 +18,23 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using Microsoft.CodeAnalysis;
 using StyleCop.Analyzers.Lightup;
 
-namespace SonarAnalyzer.SymbolicExecution.Roslyn
+namespace SonarAnalyzer.SymbolicExecution.Roslyn.OperationProcessors
 {
-    internal static class SimpleAssignmentProcessor
+    internal static class SimpleAssignment
     {
-        public static ProgramState Process(SymbolicContext context)
+        public static ProgramState Process(SymbolicContext context, ISimpleAssignmentOperationWrapper assignment)
         {
             var newState = context.State;
-            var assignment = ISimpleAssignmentOperationWrapper.FromOperation(context.Operation.Instance);
-            var rightSide = context.State[new IOperationWrapperSonar(assignment.Value)];
-            if (ParameterOrLocalSymbol(assignment.Target) is { } symbol)
+            var rightSide = context.State[assignment.Value];
+            if (assignment.Target.TrackedSymbol() is { } symbol)
             {
                 newState = context.State.SetSymbolValue(symbol, rightSide);
             }
-            return newState.SetOperationValue(new IOperationWrapperSonar(assignment.Target), rightSide);
-        }
 
-        private static ISymbol ParameterOrLocalSymbol(IOperation operation) =>
-            operation switch
-            {
-                var _ when IParameterReferenceOperationWrapper.IsInstance(operation) => IParameterReferenceOperationWrapper.FromOperation(operation).Parameter,
-                var _ when ILocalReferenceOperationWrapper.IsInstance(operation) => ILocalReferenceOperationWrapper.FromOperation(operation).Local,
-                _ => null
-            };
+            newState = newState.SetOperationValue(assignment.Target, rightSide);
+            return newState.SetOperationValue(assignment.WrappedOperation, rightSide);
+        }
     }
 }

@@ -19,7 +19,6 @@
  */
 
 using FluentAssertions;
-using Microsoft.CodeAnalysis;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.UnitTest.TestFramework.SymbolicExecution;
 
@@ -96,22 +95,6 @@ Tag(""End"")";
         [TestMethod]
         public void Branching_PersistSymbols_BetweenBlocks()
         {
-            var setter = new PreProcessTestCheck(x =>
-            {
-                if (x.Operation.Instance.Kind == OperationKind.Literal
-                    && ((ILiteralOperation)x.Operation.Instance).ConstantValue.Value is bool value)
-                {
-                    if (value == false)
-                    {
-                        x.State[x.Operation].SetConstraint(TestConstraint.Second);
-                    }
-                    else
-                    {
-                        x.State[x.Operation].SetConstraint(TestConstraint.First);
-                    }
-                }
-                return x.State;
-            });
             const string code = @"
 var first = true;
 var second = false;
@@ -125,7 +108,7 @@ else
     Tag(""ElseFirst"", first);
     Tag(""ElseSecond"", second);
 }";
-            var collector = SETestContext.CreateCS(code, setter).Collector;
+            var collector = SETestContext.CreateCS(code, new SetTestConstraintCheck()).Collector;
             collector.ValidateTag("IfFirst", x => x.HasConstraint(TestConstraint.First).Should().BeTrue());
             collector.ValidateTag("IfSecond", x => x.HasConstraint(TestConstraint.Second).Should().BeTrue());
             collector.ValidateTag("ElseFirst", x => x.HasConstraint(TestConstraint.First).Should().BeTrue());

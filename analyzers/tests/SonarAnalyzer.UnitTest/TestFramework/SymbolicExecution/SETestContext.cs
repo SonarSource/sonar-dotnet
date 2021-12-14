@@ -41,9 +41,15 @@ namespace SonarAnalyzer.UnitTest.TestFramework.SymbolicExecution
         public static SETestContext CreateCS(string methodBody, string additionalParameters, params SymbolicCheck[] additionalChecks)
         {
             var code = $@"
+using System.Collections.Generic;
+
 public class Sample
 {{
-    public static int PublicField;
+    public static int StaticField;
+
+    public static int StaticProperty {{get; set;}}
+
+    public int Property {{get; set;}}
 
     public void Main(bool boolParameter{additionalParameters})
     {{

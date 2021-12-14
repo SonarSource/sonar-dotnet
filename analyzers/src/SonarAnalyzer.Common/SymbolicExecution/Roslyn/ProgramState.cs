@@ -32,6 +32,7 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
         private readonly ImmutableDictionary<ISymbol, SymbolicValue> symbolValue;
 
         public SymbolicValue this[IOperationWrapperSonar operation] => operationValue.TryGetValue(operation, out var value) ? value : null;
+        public SymbolicValue this[IOperation operation] => operationValue.TryGetValue(new IOperationWrapperSonar(operation), out var value) ? value : null;
         public SymbolicValue this[ISymbol symbol] => symbolValue.TryGetValue(symbol, out var value) ? value : null;
 
         private ProgramState(ImmutableDictionary<IOperationWrapperSonar, SymbolicValue> operationValue, ImmutableDictionary<ISymbol, SymbolicValue> symbolValue)
@@ -39,6 +40,9 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
             this.operationValue = operationValue;
             this.symbolValue = symbolValue;
         }
+
+        public ProgramState SetOperationValue(IOperation operation, SymbolicValue value) =>
+            new(operationValue.SetItem(new IOperationWrapperSonar(operation), value), symbolValue);
 
         public ProgramState SetOperationValue(IOperationWrapperSonar operation, SymbolicValue value) =>
             new(operationValue.SetItem(operation, value), symbolValue);
