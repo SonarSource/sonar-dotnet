@@ -202,8 +202,7 @@ public void Method()
 
         [TestMethod]
         public void Enabled_TestProject_ScannerRun() =>
-            // ToDo: SonarAnalysisContext.IsAnalysisScopeMatching doesn't handle mixed situation correctly, see https://github.com/SonarSource/sonar-dotnet/issues/5173
-            Verify(@"string s = null;   // FN, should be Non-compliant@-1 { {Message for STest} }",
+            Verify(@"string s = null;   // Noncompliant {{Message for STest}}",
                 ProjectType.Test,
                 TestHelper.CreateSonarProjectConfig(nameof(Enabled_TestProject_ScannerRun), ProjectType.Test));
 

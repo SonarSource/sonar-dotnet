@@ -158,19 +158,21 @@ namespace SonarAnalyzer.Helpers
 
         internal static bool IsAnalysisScopeMatching(Compilation compilation, bool isTestProject, bool isScannerRun, IEnumerable<DiagnosticDescriptor> diagnostics)
         {
-            if (compilation == null)
-            {
-                return true; // We don't know whether this is a Main or Test source so let's run the rule
-            }
-            // MMF-2297: Test Code as 1st Class Citizen is not ready on server side yet.
-            // ScannerRun: Only utility rules and rules with TEST-ONLY scope are executed for test projects for now.
-            // SonarLint & Standalone Nuget: Respect the scope as before.
-            return isTestProject
-                ? ContainsTag(TestSourceScopeTag) && !(isScannerRun && ContainsTag(MainSourceScopeTag) && !ContainsTag(UtilityTag))
-                : ContainsTag(MainSourceScopeTag);
+            // We don't know the project type without the compilation so let's run the rule
+            return compilation == null || diagnostics.Any(IsMatching);
 
-            bool ContainsTag(string tag) =>
-                diagnostics.Any(d => d.CustomTags.Contains(tag));
+            bool IsMatching(DiagnosticDescriptor descriptor)
+            {
+                // MMF-2297: Test Code as 1st Class Citizen is not ready on server side yet.
+                // ScannerRun: Only utility rules and rules with TEST-ONLY scope are executed for test projects for now.
+                // SonarLint & Standalone Nuget: Respect the scope as before.
+                return isTestProject
+                    ? ContainsTag(TestSourceScopeTag) && !(isScannerRun && ContainsTag(MainSourceScopeTag) && !ContainsTag(UtilityTag))
+                    : ContainsTag(MainSourceScopeTag);
+
+                bool ContainsTag(string tag) =>
+                    descriptor.CustomTags.Contains(tag);
+            }
         }
 
         private static bool IsTestProject(TryGetValueDelegate<ProjectConfigReader> tryGetValue, Compilation compilation, AnalyzerOptions options)
