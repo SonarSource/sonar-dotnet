@@ -60,9 +60,20 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
         private IEnumerable<ExplodedNode> ProcessBranching(ExplodedNode node)
         {
             // ToDo: This is a temporary simplification until we support proper branching. This only continues to the next ordinal block
-            if (node.Block.Kind != BasicBlockKind.Exit)
+            if (node.Block.Kind == BasicBlockKind.Exit)
             {
-                yield return new ExplodedNode(cfg.Blocks[node.Block.Ordinal + 1], node.State);
+                NotifyExitReached(node.State);
+            }
+            else
+            {
+                if (node.Block.ContainsThrow())
+                {
+                    yield return new ExplodedNode(cfg.ExitBlock, node.State);
+                }
+                else
+                {
+                    yield return new ExplodedNode(cfg.Blocks[node.Block.Ordinal + 1], node.State);
+                }
             }
         }
 
@@ -99,6 +110,14 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
                 context = context.State == newState ? context : new SymbolicContext(symbolicValueCounter, context.Operation, newState);
             }
             return context;
+        }
+
+        private void NotifyExitReached(ProgramState state)
+        {
+            foreach (var check in checks)
+            {
+                check.ExitReached(state);
+            }
         }
 
         private SymbolicValue CreateSymbolicValue() =>

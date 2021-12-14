@@ -54,6 +54,13 @@ public class Sample
             return new SETestContext(code, AnalyzerLanguage.CSharp, additionalChecks);
         }
 
+        public static SETestContext CreateCSMethod(string method, params SymbolicCheck[] additionalChecks) =>
+            new($@"
+public class Sample
+{{
+    {method}
+}}", AnalyzerLanguage.CSharp, additionalChecks);
+
         public static SETestContext CreateVB(string methodBody, params SymbolicCheck[] additionalChecks) =>
             CreateVB(methodBody, null, additionalChecks);
 

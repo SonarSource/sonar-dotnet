@@ -127,6 +127,9 @@ namespace SonarAnalyzer.CFG.Roslyn
             });
         }
 
+        public bool ContainsThrow() =>
+            Successors.Any(successor => successor.Semantics == ControlFlowBranchSemantics.Throw);
+
         public static BasicBlock Wrap(object instance) =>
             instance == null ? null : InstanceCache.GetValue(instance, x => new BasicBlock(x));
     }
