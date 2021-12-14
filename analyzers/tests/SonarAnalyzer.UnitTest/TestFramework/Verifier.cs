@@ -27,7 +27,6 @@ using System.Text.RegularExpressions;
 using FluentAssertions;
 using Google.Protobuf;
 using Microsoft.CodeAnalysis;
-using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
@@ -83,14 +82,16 @@ namespace SonarAnalyzer.UnitTest.TestFramework
                                                 IEnumerable<ParseOptions> options = null,
                                                 CompilationErrorBehavior checkMode = CompilationErrorBehavior.Default,
                                                 IEnumerable<MetadataReference> additionalReferences = null,
-                                                OutputKind outputKind = OutputKind.DynamicallyLinkedLibrary)
+                                                OutputKind outputKind = OutputKind.DynamicallyLinkedLibrary,
+                                                DiagnosticDescriptor[] onlyDiagnostics = null,
+                                                string sonarProjectConfigPath = null)
         {
             var solution = SolutionBuilder.Create()
                                           .AddProject(AnalyzerLanguage.CSharp, outputKind: outputKind)
                                           .AddSnippet(snippet)
                                           .AddReferences(additionalReferences)
                                           .GetSolution();
-            CompileAndVerifyAnalyzer(solution, new DiagnosticAnalyzer[] { diagnosticAnalyzer }, options, checkMode);
+            CompileAndVerifyAnalyzer(solution, new DiagnosticAnalyzer[] { diagnosticAnalyzer }, options, checkMode, sonarProjectConfigPath, onlyDiagnostics?.Select(x => x.Id).ToArray());
         }
 
         /// <summary>
@@ -514,11 +515,12 @@ namespace SonarAnalyzer.UnitTest.TestFramework
                                                      DiagnosticAnalyzer[] diagnosticAnalyzers,
                                                      IEnumerable<ParseOptions> options,
                                                      CompilationErrorBehavior checkMode,
-                                                     string sonarProjectConfigPath = null)
+                                                     string sonarProjectConfigPath = null,
+                                                     string[] onlyDiagnostics = null)
         {
             foreach (var compilation in solution.Compile(options?.ToArray()))
             {
-                DiagnosticVerifier.Verify(compilation, diagnosticAnalyzers, checkMode, sonarProjectConfigPath);
+                DiagnosticVerifier.Verify(compilation, diagnosticAnalyzers, checkMode, sonarProjectConfigPath, onlyDiagnostics);
             }
         }
 

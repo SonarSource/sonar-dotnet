@@ -20,6 +20,9 @@
 
 namespace SonarAnalyzer.SymbolicExecution.Roslyn
 {
+    /// <summary>
+    /// Lifespan of this class is one method analyzed with SE.
+    /// </summary>
     public class SymbolicCheck
     {
         protected SymbolicCheck() { } // Avoid abstract class, fixes S1694

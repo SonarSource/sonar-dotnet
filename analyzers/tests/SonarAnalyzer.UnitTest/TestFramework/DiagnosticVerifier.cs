@@ -46,11 +46,21 @@ namespace SonarAnalyzer.UnitTest.TestFramework
         public static void VerifyExternalFile(Compilation compilation, DiagnosticAnalyzer diagnosticAnalyzer, string fileName, string sonarProjectConfigPath) =>
             Verify(compilation, new[] { diagnosticAnalyzer }, CompilationErrorBehavior.FailTest, new[] { new File(fileName) }, sonarProjectConfigPath);
 
-        public static void Verify(Compilation compilation, DiagnosticAnalyzer diagnosticAnalyzer, CompilationErrorBehavior checkMode, string sonarProjectConfigPath = null) =>
-            Verify(compilation, new[] { diagnosticAnalyzer }, checkMode, sonarProjectConfigPath);
+        public static void Verify(
+                Compilation compilation,
+                DiagnosticAnalyzer diagnosticAnalyzer,
+                CompilationErrorBehavior checkMode,
+                string sonarProjectConfigPath = null,
+                string[] onlyDiagnostics = null) =>
+            Verify(compilation, new[] { diagnosticAnalyzer }, checkMode, sonarProjectConfigPath, onlyDiagnostics);
 
-        public static void Verify(Compilation compilation, DiagnosticAnalyzer[] diagnosticAnalyzers, CompilationErrorBehavior checkMode, string sonarProjectConfigPath = null) =>
-            Verify(compilation, diagnosticAnalyzers, checkMode, compilation.SyntaxTrees.Skip(1).Select(x => new File(x)), sonarProjectConfigPath);
+        public static void Verify(
+                Compilation compilation,
+                DiagnosticAnalyzer[] diagnosticAnalyzers,
+                CompilationErrorBehavior checkMode,
+                string sonarProjectConfigPath = null,
+                string[] onlyDiagnostics = null) =>
+            Verify(compilation, diagnosticAnalyzers, checkMode, compilation.SyntaxTrees.Skip(1).Select(x => new File(x)), sonarProjectConfigPath, onlyDiagnostics);
 
         public static void Verify(Compilation compilation,
                                   DiagnosticAnalyzer diagnosticAnalyzer,
@@ -62,12 +72,13 @@ namespace SonarAnalyzer.UnitTest.TestFramework
                                   DiagnosticAnalyzer[] diagnosticAnalyzers,
                                   CompilationErrorBehavior checkMode,
                                   IEnumerable<File> sources,
-                                  string sonarProjectConfigPath = null)
+                                  string sonarProjectConfigPath = null,
+                                  string[] onlyDiagnostics = null)
         {
             SuppressionHandler.HookSuppression();
             try
             {
-                var diagnostics = GetAnalyzerDiagnostics(compilation, diagnosticAnalyzers, checkMode, sonarProjectConfigPath: sonarProjectConfigPath);
+                var diagnostics = GetAnalyzerDiagnostics(compilation, diagnosticAnalyzers, checkMode, sonarProjectConfigPath, onlyDiagnostics);
                 var expectedIssues = sources.Select(x => x.ToExpectedIssueLocations()).ToArray();
                 VerifyNoExceptionThrown(diagnostics);
                 CompareActualToExpected(compilation.LanguageVersionString(), diagnostics, expectedIssues, false);
@@ -108,12 +119,14 @@ namespace SonarAnalyzer.UnitTest.TestFramework
         public static ImmutableArray<Diagnostic> GetAnalyzerDiagnostics(Compilation compilation,
                                                                         IEnumerable<DiagnosticAnalyzer> diagnosticAnalyzers,
                                                                         CompilationErrorBehavior checkMode,
-                                                                        string sonarProjectConfigPath = null)
+                                                                        string sonarProjectConfigPath = null,
+                                                                        string[] onlyDiagnostics = null)
         {
+            onlyDiagnostics ??= Array.Empty<string>();
             var supportedDiagnostics = diagnosticAnalyzers
-                    .SelectMany(analyzer => analyzer.SupportedDiagnostics)
-                    .Select(diagnostic => new KeyValuePair<string, ReportDiagnostic>(diagnostic.Id, ReportDiagnostic.Warn))
-                    .Concat(new[] { new KeyValuePair<string, ReportDiagnostic>(AnalyzerFailedDiagnosticId, ReportDiagnostic.Error) });
+                    .SelectMany(x => x.SupportedDiagnostics.Select(d => d.Id))
+                    .Concat(new[] { AnalyzerFailedDiagnosticId })
+                    .Select(x => new KeyValuePair<string, ReportDiagnostic>(x, Severity(x)));
             var ids = supportedDiagnostics.Select(x => x.Key).ToHashSet();
 
             var compilationOptions = compilation.Options.WithSpecificDiagnosticOptions(supportedDiagnostics);
@@ -129,6 +142,18 @@ namespace SonarAnalyzer.UnitTest.TestFramework
                 VerifyBuildErrors(diagnostics, compilation);
             }
             return diagnostics.Where(x => ids.Contains(x.Id)).ToImmutableArray();
+
+            ReportDiagnostic Severity(string id)
+            {
+                if (id == AnalyzerFailedDiagnosticId)
+                {
+                    return ReportDiagnostic.Error;
+                }
+                else
+                {
+                    return !onlyDiagnostics.Any() || onlyDiagnostics.Contains(id) ? ReportDiagnostic.Warn : ReportDiagnostic.Suppress;
+                }
+            }
         }
 
         public static void CompareActualToExpected(string languageVersion, IEnumerable<Diagnostic> diagnostics, FileIssueLocations[] expectedIssuesPerFile, bool compareIdToMessage)

@@ -18,17 +18,20 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System;
+using Microsoft.CodeAnalysis;
 
-namespace SonarAnalyzer.SymbolicExecution.Sonar
+namespace SonarAnalyzer.SymbolicExecution.Roslyn.Checks
 {
-    [Serializable]
-    public sealed class SymbolicExecutionException : Exception
+    public abstract class LocksReleasedAllPathsBase : SymbolicRuleCheck
     {
-        public SymbolicExecutionException() { }
+        protected const string DiagnosticId = "S2222";
+        protected const string MessageFormat = "Unlock this lock along all executions paths of this method.";
 
-        public SymbolicExecutionException(string message) : base(message) { }
+        protected abstract DiagnosticDescriptor Rule { get; }
 
-        public SymbolicExecutionException(string message, Exception innerException) : base(message, innerException) { }
+        // ToDo: Implement early bail-out if there's no interesting descendant node in context.Node to avoid useless SE runs
+        // ToDo: This returns "false" now to avoid running this check on master and creating Roslyn CFG for all rules
+        public override bool ShouldExecute() =>
+            false;
     }
 }

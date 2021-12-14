@@ -18,22 +18,15 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using SonarAnalyzer.Rules.SymbolicExecution;
-using SonarAnalyzer.UnitTest.MetadataReferences;
-using SonarAnalyzer.UnitTest.TestFramework;
+using Microsoft.CodeAnalysis;
+using SonarAnalyzer.Helpers;
 
-namespace SonarAnalyzer.UnitTest.Rules.SymbolicExecution
+namespace SonarAnalyzer.SymbolicExecution.Roslyn.Checks
 {
-    [TestClass]
-    public class SymbolicExecutionRulesTest
+    public class LocksReleasedAllPaths : LocksReleasedAllPathsBase
     {
-        // This test is meant to run all the symbolic execution rules together and verify different scenarios.
-        [TestMethod]
-        public void VerifySymbolicExecutionRules() =>
-            Verifier.VerifyAnalyzer(@"TestCases\SymbolicExecution\Sonar\SymbolicExecutionRules.cs",
-                new SymbolicExecutionRunner(),
-                ParseOptionsHelper.FromCSharp8,
-                MetadataReferenceFacade.NETStandard21);
+        public static readonly DiagnosticDescriptor S2222 = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
+
+        protected override DiagnosticDescriptor Rule { get; } = S2222;
     }
 }

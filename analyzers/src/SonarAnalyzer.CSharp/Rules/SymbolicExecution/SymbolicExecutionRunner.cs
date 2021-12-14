@@ -22,36 +22,49 @@ using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Linq;
-using System.Text;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
+using SonarAnalyzer.CFG.Roslyn;
 using SonarAnalyzer.CFG.Sonar;
+using SonarAnalyzer.Extensions;
 using SonarAnalyzer.Helpers;
 using SonarAnalyzer.LiveVariableAnalysis.CSharp;
+using SonarAnalyzer.SymbolicExecution;
+using SonarAnalyzer.SymbolicExecution.Roslyn;
+using SonarAnalyzer.SymbolicExecution.Roslyn.Checks;
 using SonarAnalyzer.SymbolicExecution.Sonar;
 using StyleCop.Analyzers.Lightup;
 
 namespace SonarAnalyzer.Rules.SymbolicExecution
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
-    public sealed class SymbolicExecutionRunner : SonarDiagnosticAnalyzer
+    public sealed partial class SymbolicExecutionRunner : SonarDiagnosticAnalyzer
     {
-        private readonly SymbolicExecutionAnalyzerFactory symbolicExecutionAnalyzerFactory = new SymbolicExecutionAnalyzerFactory();
+        private static readonly ImmutableDictionary<DiagnosticDescriptor, RuleFactory> AllRules = ImmutableDictionary<DiagnosticDescriptor, RuleFactory>.Empty
+            .Add(LocksReleasedAllPaths.S2222, CreateFactory<LocksReleasedAllPaths>());
+        private readonly SymbolicExecutionAnalyzerFactory analyzerFactory;  // ToDo: This should be eventually removed
+        private readonly Dictionary<DiagnosticDescriptor, RuleFactory> additionalTestRules = new();
+        private ImmutableArray<DiagnosticDescriptor> supportedDiagnostics;
 
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; }
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => supportedDiagnostics;
         protected override bool EnableConcurrentExecution => false;
 
-        // This constructor is needed by the Roslyn framework. Please do not delete this.
-        public SymbolicExecutionRunner() =>
-            SupportedDiagnostics = symbolicExecutionAnalyzerFactory.SupportedDiagnostics;
+        public SymbolicExecutionRunner() : this(new SymbolicExecutionAnalyzerFactory()) { }
 
-        // Only testing purposes.
-        internal SymbolicExecutionRunner(ISymbolicExecutionAnalyzer analyzer)
+        internal /* for testring */ SymbolicExecutionRunner(ISymbolicExecutionAnalyzer analyzer) : this(new SymbolicExecutionAnalyzerFactory(analyzer)) { }
+
+        private SymbolicExecutionRunner(SymbolicExecutionAnalyzerFactory analyzerFactory)
         {
-            symbolicExecutionAnalyzerFactory = new SymbolicExecutionAnalyzerFactory(ImmutableArray.Create(analyzer));
-            SupportedDiagnostics = symbolicExecutionAnalyzerFactory.SupportedDiagnostics;
+            this.analyzerFactory = analyzerFactory;
+            supportedDiagnostics = analyzerFactory.SupportedDiagnostics.Concat(AllRules.Keys).ToImmutableArray();  // ToDo: This should be eventually moved to the property itself
+        }
+
+        internal /* for testing */ void RegisterRule<TRuleCheck>(DiagnosticDescriptor descriptor) where TRuleCheck : SymbolicRuleCheck, new ()
+        {
+            additionalTestRules.Add(descriptor, CreateFactory<TRuleCheck>());
+            supportedDiagnostics = supportedDiagnostics.Concat(new[] { descriptor }).ToImmutableArray();
         }
 
         protected override void Initialize(SonarAnalysisContext context)
@@ -65,7 +78,7 @@ namespace SonarAnalyzer.Rules.SymbolicExecution
                 SyntaxKind.MethodDeclaration);
 
             context.RegisterSyntaxNodeActionInNonGenerated(
-                c => Analyze<PropertyDeclarationSyntax>(context, c, x => x.ExpressionBody),
+                c => Analyze<PropertyDeclarationSyntax>(context, c, x => x.ExpressionBody?.Expression),
                 SyntaxKind.PropertyDeclaration);
 
             context.RegisterSyntaxNodeActionInNonGenerated(
@@ -98,62 +111,83 @@ namespace SonarAnalyzer.Rules.SymbolicExecution
             }
         }
 
-        private void Analyze(SonarAnalysisContext analysisContext, SyntaxNodeAnalysisContext context, CSharpSyntaxNode body, ISymbol symbol)
+        private void Analyze(SonarAnalysisContext sonarContext, SyntaxNodeAnalysisContext nodeContext, CSharpSyntaxNode body, ISymbol symbol)
         {
-            var isTestProject = analysisContext.IsTestProject(context.Compilation, context.Options);
-            var isScannerRun = analysisContext.IsScannerRun(context.Options);
-            var enabledAnalyzers = symbolicExecutionAnalyzerFactory.GetEnabledAnalyzers(context, isTestProject, isScannerRun);
-            if (body == null
-                || body.ContainsDiagnostics
-                || !enabledAnalyzers.Any()
-                || !CSharpControlFlowGraph.TryGet(body, context.SemanticModel, out var cfg))
+            if (body != null && !body.ContainsDiagnostics)
             {
-                return;
-            }
-
-            var lva = new SonarCSharpLiveVariableAnalysis(cfg, symbol, context.SemanticModel);
-            try
-            {
-                var explodedGraph = new SonarExplodedGraph(cfg, symbol, context.SemanticModel, lva);
-                var analyzerContexts = enabledAnalyzers.Select(x => x.CreateContext(explodedGraph, context)).ToList();
-                try
+                var isTestProject = sonarContext.IsTestProject(nodeContext.Compilation, nodeContext.Options);
+                var isScannerRun = sonarContext.IsScannerRun(nodeContext.Options);
+                AnalyzeSonar(nodeContext, isTestProject, isScannerRun, body, symbol);
+                if (ControlFlowGraph.IsAvailable)   // ToDo: Make this configurable for UTs when migrating other rules, see DeadStores
                 {
-                    explodedGraph.ExplorationEnded += ExplorationEndedHandler;
-                    explodedGraph.Walk();
+                    AnalyzeRoslyn(sonarContext, nodeContext, isTestProject, isScannerRun, body, symbol);
                 }
-                finally
-                {
-                    explodedGraph.ExplorationEnded -= ExplorationEndedHandler;
-                }
-
-                // Some of the rules can return good results if the tree was only partially visited; others need to completely
-                // walk the tree in order to avoid false positives.
-                //
-                // Due to this we split the rules in two sets and report the diagnostics in steps:
-                // - When the tree is successfully visited and ExplorationEnded event is raised.
-                // - When the tree visit ends (explodedGraph.Walk() returns). This will happen even if the maximum number of steps was
-                // reached or if an exception was thrown during analysis.
-                ReportDiagnostics(analyzerContexts, context, true);
-
-                void ExplorationEndedHandler(object sender, EventArgs args) =>
-                    ReportDiagnostics(analyzerContexts, context, false);
-            }
-            catch (Exception e)
-            {
-                // Roslyn/MSBuild is currently cutting exception message at the end of the line instead
-                // of displaying the full message. As a workaround, we replace the line ending with ' ## '.
-                // See https://github.com/dotnet/roslyn/issues/1455 and https://github.com/dotnet/roslyn/issues/24346
-                var sb = new StringBuilder();
-                sb.AppendLine($"Error processing method: {symbol?.Name ?? "{unknown}"}");
-                sb.AppendLine($"Method file: {body.GetLocation()?.GetLineSpan().Path ?? "{unknown}"}");
-                sb.AppendLine($"Method line: {body.GetLocation()?.GetLineSpan().StartLinePosition.ToString() ?? "{unknown}"}");
-                sb.AppendLine($"Inner exception: {e}");
-
-                throw new SymbolicExecutionException(sb.ToString().Replace(Environment.NewLine, " ## "), e);
             }
         }
 
-        private static void ReportDiagnostics(IEnumerable<ISymbolicExecutionAnalysisContext> analyzerContexts, SyntaxNodeAnalysisContext context, bool supportsPartialResults)
+        private void AnalyzeRoslyn(SonarAnalysisContext sonarContext, SyntaxNodeAnalysisContext nodeContext, bool isTestProject, bool isScannerRun, CSharpSyntaxNode body, ISymbol symbol)
+        {
+            var checks = AllRules.Concat(additionalTestRules)
+                .Where(x => SymbolicExecutionAnalyzerFactory.IsEnabled(nodeContext, isTestProject, isScannerRun, x.Key))
+                .GroupBy(x => x.Value.Type)                             // Multiple DiagnosticDescriptors (S2583, S2589) can share the same check type
+                .Select(x => x.First().Value.CreateInstance(sonarContext, nodeContext))   // We need just one instance in that case
+                .Where(x => x.ShouldExecute())
+                .ToArray();
+            if (checks.Any())
+            {
+                try
+                {
+                    var cfg = body.CreateCfg(nodeContext.SemanticModel);
+                    var engine = new RoslynSymbolicExecution(cfg, checks);
+                    engine.Execute();
+                }
+                catch (Exception ex)
+                {
+                    throw new SymbolicExecutionException(ex, symbol, body.GetLocation());
+                }
+            }
+        }
+
+        private void AnalyzeSonar(SyntaxNodeAnalysisContext context, bool isTestProject, bool isScannerRun, CSharpSyntaxNode body, ISymbol symbol)
+        {
+            var enabledAnalyzers = analyzerFactory.GetEnabledAnalyzers(context, isTestProject, isScannerRun);
+            if (enabledAnalyzers.Any() && CSharpControlFlowGraph.TryGet(body, context.SemanticModel, out var cfg))
+            {
+                var lva = new SonarCSharpLiveVariableAnalysis(cfg, symbol, context.SemanticModel);
+                try
+                {
+                    var explodedGraph = new SonarExplodedGraph(cfg, symbol, context.SemanticModel, lva);
+                    var analyzerContexts = enabledAnalyzers.Select(x => x.CreateContext(explodedGraph, context)).ToList();
+                    try
+                    {
+                        explodedGraph.ExplorationEnded += ExplorationEndedHandlerSonar;
+                        explodedGraph.Walk();
+                    }
+                    finally
+                    {
+                        explodedGraph.ExplorationEnded -= ExplorationEndedHandlerSonar;
+                    }
+
+                    // Some of the rules can return good results if the tree was only partially visited; others need to completely
+                    // walk the tree in order to avoid false positives.
+                    //
+                    // Due to this we split the rules in two sets and report the diagnostics in steps:
+                    // - When the tree is successfully visited and ExplorationEnded event is raised.
+                    // - When the tree visit ends (explodedGraph.Walk() returns). This will happen even if the maximum number of steps was
+                    // reached or if an exception was thrown during analysis.
+                    ReportDiagnosticsSonar(analyzerContexts, context, true);
+
+                    void ExplorationEndedHandlerSonar(object sender, EventArgs args) =>
+                        ReportDiagnosticsSonar(analyzerContexts, context, false);
+                }
+                catch (Exception ex)
+                {
+                    throw new SymbolicExecutionException(ex, symbol, body.GetLocation());
+                }
+            }
+        }
+
+        private static void ReportDiagnosticsSonar(IEnumerable<ISymbolicExecutionAnalysisContext> analyzerContexts, SyntaxNodeAnalysisContext context, bool supportsPartialResults)
         {
             foreach (var analyzerContext in analyzerContexts.Where(x => x.SupportsPartialResults == supportsPartialResults))
             {
