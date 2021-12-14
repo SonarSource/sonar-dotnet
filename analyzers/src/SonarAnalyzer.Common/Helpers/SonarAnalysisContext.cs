@@ -173,7 +173,6 @@ namespace SonarAnalyzer.Helpers
                 bool ContainsTag(string tag) =>
                     descriptor.CustomTags.Contains(tag);
             }
-
         }
 
         private static bool IsTestProject(TryGetValueDelegate<ProjectConfigReader> tryGetValue, Compilation compilation, AnalyzerOptions options)
