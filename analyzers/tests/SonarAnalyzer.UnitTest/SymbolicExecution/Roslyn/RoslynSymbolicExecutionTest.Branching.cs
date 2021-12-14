@@ -117,8 +117,12 @@ else
         }
 
         [TestMethod]
-        public void ExitReached_SimpleFlow() =>
-            SETestContext.CreateCS("var a = true;").Validator.ValidateExitReachCount(1);
+        public void ExitReached_SimpleFlow()
+        {
+            var validator = SETestContext.CreateCS("var a = true;").Validator;
+            validator.ValidateExitReachCount(1);
+            validator.ValidateExecutionCompleted();
+        }
 
         [TestMethod]
         public void ExitReached_MultipleBranches()
@@ -131,7 +135,9 @@ public int Method(bool a)
     else
         return 2;
 }";
-            SETestContext.CreateCSMethod(method).Validator.ValidateExitReachCount(1);
+            var validator = SETestContext.CreateCSMethod(method).Validator;
+            validator.ValidateExitReachCount(1);
+            validator.ValidateExecutionCompleted();
         }
 
         [TestMethod]
@@ -150,7 +156,9 @@ public int Method(bool a)
                x.Operation.Instance.Kind.Should().NotBe(OperationKind.Literal, "we don't support multiple branches yet");
                return x.State;
             });
-            SETestContext.CreateCSMethod(method, returnNotReached).Validator.ValidateExitReachCount(1);
+            var validator = SETestContext.CreateCSMethod(method, returnNotReached).Validator;
+            validator.ValidateExitReachCount(1);
+            validator.ValidateExecutionCompleted();
         }
 
         [TestMethod]
@@ -164,7 +172,9 @@ public System.Collections.Generic.IEnumerable<int> Method(bool a)
 
     yield return 2;
 }";
-            SETestContext.CreateCSMethod(method).Validator.ValidateExitReachCount(1);
+            var validator = SETestContext.CreateCSMethod(method).Validator;
+            validator.ValidateExitReachCount(1);
+            validator.ValidateExecutionCompleted();
         }
 
         [TestMethod]
@@ -178,7 +188,9 @@ public System.Collections.Generic.IEnumerable<int> Method(bool a)
 
     var b = a;
 }";
-            SETestContext.CreateCSMethod(method).Validator.ValidateExitReachCount(1);
+            var validator = SETestContext.CreateCSMethod(method).Validator;
+            validator.ValidateExitReachCount(1);
+            validator.ValidateExecutionCompleted();
         }
     }
 }

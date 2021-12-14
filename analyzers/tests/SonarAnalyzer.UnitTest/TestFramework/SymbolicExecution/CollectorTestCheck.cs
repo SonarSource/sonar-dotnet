@@ -33,6 +33,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework.SymbolicExecution
         private readonly List<SymbolicContext> postProcessed = new();
         private readonly List<(string Name, SymbolicContext Context)> tags = new();
         private int exitReachedCount;
+        private int executionCompletedCount;
 
         public override ProgramState PostProcess(SymbolicContext context)
         {
@@ -53,6 +54,8 @@ namespace SonarAnalyzer.UnitTest.TestFramework.SymbolicExecution
             exitReachedCount++;
             return context.State;
         }
+
+        public override void ExecutionCompleted() => ++executionCompletedCount;
 
         public void ValidateOrder(params string[] expected) =>
             postProcessed.Select(x => TestHelper.Serialize(x.Operation)).Should().OnlyContainInOrder(expected);
@@ -75,6 +78,9 @@ namespace SonarAnalyzer.UnitTest.TestFramework.SymbolicExecution
 
         public void ValidateExitReachCount(int expected) =>
             exitReachedCount.Should().Be(expected);
+
+        public void ValidateExecutionCompleted() =>
+            executionCompletedCount.Should().Be(1);
 
         public void ValidatePostProcess(int expected) =>
             postProcessed.Should().HaveCount(expected);
