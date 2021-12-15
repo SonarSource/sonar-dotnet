@@ -3,69 +3,71 @@ using System.Threading;
 
 class Program
 {
-    private object obj1 = new object();
-    private object obj2 = new object();
+    private object obj = new object();
+    private object other = new object();
 
     public object PublicObject = new object();
 
-    public void Method1(bool condition)
+    private bool condition;
+
+    public void Method1()
     {
-        Monitor.Enter(obj1); // FN
+        Monitor.Enter(obj); // FN
         if (condition)
         {
-            Monitor.Exit(obj1);
+            Monitor.Exit(obj);
         }
     }
 
-    public void Method2(bool condition)
+    public void Method2()
     {
-        Monitor.Enter(obj1); // FN
+        Monitor.Enter(obj); // FN
         switch (condition)
         {
             case true:
-                Monitor.Exit(obj1);
+                Monitor.Exit(obj);
                 break;
             default:
                 break;
         }
     }
 
-    public void Method3(bool condition)
+    public void Method3()
     {
         bool isAcquired = false;
-        Monitor.Enter(obj1, ref isAcquired); // FN
+        Monitor.Enter(obj, ref isAcquired); // FN
         if (condition)
         {
-            Monitor.Exit(obj1);
+            Monitor.Exit(obj);
         }
     }
 
-    public void Method4(bool condition)
+    public void Method4()
     {
-        Monitor.Enter(obj1); // FN
-        Monitor.Enter(obj2); // FN
+        Monitor.Enter(obj); // FN
+        Monitor.Enter(other); // FN
         if (condition)
         {
-            Monitor.Exit(obj1);
+            Monitor.Exit(obj);
         }
         else
         {
-            Monitor.Exit(obj2);
+            Monitor.Exit(other);
         }
     }
 
-    public void Method5(bool condition)
+    public void Method5()
     {
-        Monitor.Enter(obj1); // Compliant
+        Monitor.Enter(obj); // Compliant
         if (condition)
         {
-            Monitor.Exit(obj2);
+            Monitor.Exit(other);
         }
     }
 
-    public void Method6(bool condition, string arg)
+    public void Method6(string arg)
     {
-        var localObj = obj1;
+        var localObj = obj;
         Monitor.Enter(localObj); // FN
         Console.WriteLine(arg.Length);
         if (condition)
@@ -74,10 +76,10 @@ class Program
         }
     }
 
-    public void Method7(bool condition, string arg)
+    public void Method7(string arg)
     {
-        var localObj = obj1;
-        Monitor.Enter(obj1); // FN
+        var localObj = obj;
+        Monitor.Enter(obj); // FN
         Console.WriteLine(arg.Length);
         if (condition)
         {
@@ -85,10 +87,10 @@ class Program
         }
     }
 
-    public void Method8(bool condition, string arg, object paramObj)
+    public void Method8(string arg, object paramObj)
     {
-        paramObj = obj1;
-        Monitor.Enter(obj1); // FN
+        paramObj = obj;
+        Monitor.Enter(obj); // FN
         Console.WriteLine(arg.Length);
         if (condition)
         {
@@ -96,9 +98,9 @@ class Program
         }
     }
 
-    public void Method9(bool condition, string arg, object paramObj)
+    public void Method9(string arg, object paramObj)
     {
-        Monitor.Enter(obj1); // FN
+        Monitor.Enter(obj);
         Console.WriteLine(arg.Length);
         if (condition)
         {
@@ -106,7 +108,7 @@ class Program
         }
     }
 
-    public void Method10(bool condition, string arg, Program p1)
+    public void Method10(string arg, Program p1)
     {
         Monitor.Enter(p1.PublicObject); // FN
         Console.WriteLine(arg.Length);
@@ -116,9 +118,9 @@ class Program
         }
     }
 
-    public void Method11(bool condition, string arg, Program p1, Program p2)
+    public void Method11(string arg, Program p1, Program p2)
     {
-        Monitor.Enter(p1.PublicObject); // FN
+        Monitor.Enter(p1.PublicObject);
         Console.WriteLine(arg.Length);
         if (condition)
         {
@@ -126,11 +128,11 @@ class Program
         }
     }
 
-    public void Method12(bool condition)
+    public void Method12()
     {
         var getObj = new Func<object>(() =>
         {
-            return obj1;
+            return obj;
         });
 
         Monitor.Enter(getObj()); // FN
@@ -140,12 +142,12 @@ class Program
         }
     }
 
-    public void Method13(bool condition)
+    public void Method13()
     {
-        Monitor.Enter(obj1); // FN
+        Monitor.Enter(obj); // FN
         var a = new Action(() =>
         {
-            Monitor.Exit(obj1);
+            Monitor.Exit(obj);
         });
 
         if (condition)
@@ -154,76 +156,80 @@ class Program
         }
     }
 
-    public void Method14(bool condition)
+    public void Method14()
     {
-        Monitor.Enter(obj1); // Compliant
+        Monitor.Enter(obj); // Compliant
         if (condition)
         {
-            Monitor.Exit(obj1);
+            Monitor.Exit(obj);
         }
         else
         {
-            Monitor.Exit(obj1);
+            Monitor.Exit(obj);
         }
     }
 
     public void Method15(string arg)
     {
-        Monitor.Enter(obj1); // Compliant
+        Monitor.Enter(obj); // Compliant
         if (arg.Length == 16)
         {
-            Monitor.Exit(obj1);
+            Monitor.Exit(obj);
         }
         else if (arg.Length == 23)
         {
-            Monitor.Exit(obj1);
+            Monitor.Exit(obj);
         }
         else
         {
-            Monitor.Exit(obj1);
+            Monitor.Exit(obj);
         }
     }
 
     public void Method16(string arg)
     {
-        Monitor.Enter(obj1); // FN
+        Monitor.Enter(obj); // FN
         if (arg.Length == 16)
         {
-            Monitor.Exit(obj1);
+            Monitor.Exit(obj);
         }
         else if (arg.Length == 23)
         {
-            Monitor.Exit(obj1);
+            Monitor.Exit(obj);
         }
         else
         {
         }
     }
 
-    public void Method17(bool condition1, bool condition2)
+    public void Method17(bool condition1)
     {
-        Monitor.Enter(obj1); // FN
-        if (condition1)
+        Monitor.Enter(obj);
+        if (condition)
         {
-            if (!condition2)
+            if (!condition1)
             {
-                Monitor.Exit(obj2);
+                Monitor.Exit(obj);
             }
         }
     }
 
-    public void Method18(bool condition1, bool condition2, bool condition3)
+    public void Method18(bool condition1, bool condition2)
     {
-        Monitor.Enter(obj1); // FN
-        if (condition1)
+        Monitor.Enter(obj); // FN
+        if (condition)
         {
-            switch (condition2)
+            switch (condition1)
             {
                 case true:
                     {
-                        if (!condition3)
+                        if (!condition2)
                         {
-                            Monitor.Exit(obj1);
+                            Monitor.Exit(obj);
+                        }
+                        else
+                        {
+                            Monitor.Exit(obj);
                         }
                     }
                     break;
@@ -231,14 +237,79 @@ class Program
         }
     }
 
+    public void Method19()
+    {
+        Monitor.Enter(obj); // FN
+        if (condition)
+        {
+            Monitor.Exit(obj);
+        }
+        else
+        {
+            Monitor.Exit(other);
+        }
+    }
+
+    public void Method20(Program first, Program second)
+    {
+        Monitor.Enter(first.obj); // FN
+        Monitor.Exit(second.obj);
+        if (condition)
+        {
+            Monitor.Exit(first.obj);
+        }
+    }
+
+    public void Method21(string arg)
+    {
+        Monitor.Enter(obj); // FN
+        if (arg.Length == 16)
+        {
+            Monitor.Exit(obj);
+        }
+        else if (arg.Length == 23)
+        {
+        }
+        else
+        {
+            Monitor.Exit(obj);
+        }
+    }
+
+    public void Method22()
+    {
+        bool isAcquired = false;
+        Monitor.Enter(obj, ref isAcquired); // Compliant
+        if (isAcquired)
+        {
+            Monitor.Exit(obj);
+        }
+    }
+
+    public void Method23(bool condition1)
+    {
+        Monitor.Enter(obj); // FN
+        if (condition)
+        {
+            if (!condition1)
+            {
+                Monitor.Exit(obj);
+            }
+        }
+        else
+        {
+            Monitor.Exit(obj);
+        }
+    }
+
     public int MyProperty
     {
         set
         {
-            Monitor.Enter(obj1); // FN
+            Monitor.Enter(obj); // FN
             if (value == 42)
             {
-                Monitor.Exit(obj1);
+                Monitor.Exit(obj);
             }
         }
     }

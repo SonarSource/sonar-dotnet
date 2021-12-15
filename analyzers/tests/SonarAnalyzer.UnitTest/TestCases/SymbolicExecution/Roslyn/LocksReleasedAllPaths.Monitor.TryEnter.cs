@@ -41,7 +41,7 @@ class Program
     public void Method4(bool condition)
     {
         bool isAcquired = false;
-        Monitor.TryEnter(obj, 42, ref isAcquired);
+        Monitor.TryEnter(obj, 42, ref isAcquired); // FN
         if (condition)
         {
             Monitor.Exit(obj);
@@ -62,7 +62,7 @@ class Program
     public void Method6(bool condition)
     {
         bool isAcquired = false;
-        Monitor.TryEnter(obj, new TimeSpan(42), ref isAcquired);
+        Monitor.TryEnter(obj, new TimeSpan(42), ref isAcquired); // FN
         if (condition)
         {
             Monitor.Exit(obj);
@@ -71,7 +71,7 @@ class Program
 
     public void Method7()
     {
-        bool isAcquired = Monitor.TryEnter(obj, 42);
+        bool isAcquired = Monitor.TryEnter(obj, 42); // FN
 
         if (isAcquired)
         {
@@ -118,13 +118,23 @@ class Program
 
     public void Method12()
     {
-        switch (Monitor.TryEnter(obj)) // Compliant
+        switch (Monitor.TryEnter(obj)) // FN
         {
             case false:
                 Monitor.Exit(obj);
                 break;
             default:
                 break;
+        }
+    }
+
+    public void Method13(bool condition)
+    {
+        bool isAcquired = false;
+        Monitor.TryEnter(obj, 42, ref isAcquired);
+        if (isAcquired)
+        {
+            Monitor.Exit(obj);
         }
     }
 }

@@ -3,37 +3,37 @@ using System.Threading;
 
 class Program
 {
-    private object obj1 = new object();
-    private object obj2 = new object();
+    private object obj = new object();
+    private object other = new object();
 
     public object PublicObject = new object();
 
     public void Method1(string arg)
     {
-        Monitor.Enter(obj1); // Compliant
+        Monitor.Enter(obj); // Compliant
         Console.WriteLine(arg.Length);
-        Monitor.Exit(obj1);
+        Monitor.Exit(obj);
     }
 
     public void Method2(string arg)
     {
-        Monitor.Enter(obj1); // Compliant
+        Monitor.Enter(obj); // Compliant
         Console.WriteLine(arg.Length);
-        Monitor.Exit(obj2);
+        Monitor.Exit(other);
     }
 
     public void Method3()
     {
-        Monitor.Enter(obj1); // Compliant
+        Monitor.Enter(obj); // Compliant
         var a = new Action(() =>
         {
-            Monitor.Exit(obj1);
+            Monitor.Exit(obj);
         });
     }
 
     public void Method4(string arg)
     {
-        var localObj = obj1;
+        var localObj = obj;
         Monitor.Enter(localObj); // Compliant
         Console.WriteLine(arg.Length);
         Monitor.Exit(localObj);
@@ -41,15 +41,15 @@ class Program
 
     public void Method5(string arg)
     {
-        var localObj = obj1;
-        Monitor.Enter(obj1); // Compliant
+        var localObj = obj;
+        Monitor.Enter(obj); // Compliant
         Console.WriteLine(arg.Length);
         Monitor.Exit(localObj);
     }
 
     public void Method6(string arg, object paramObj)
     {
-        paramObj = obj1;
+        paramObj = obj;
         Monitor.Enter(paramObj); // Compliant
         Console.WriteLine(arg.Length);
         Monitor.Exit(paramObj);
@@ -57,9 +57,9 @@ class Program
 
     public void Method7(string arg)
     {
-        Monitor.Enter(obj1); // Compliant
+        Monitor.Enter(obj); // Compliant
         Console.WriteLine(arg.Length);
-        var localObj = obj1;
+        var localObj = obj;
         Monitor.Exit(localObj);
     }
 
@@ -81,17 +81,17 @@ class Program
     {
         var a = new Action(() =>
         {
-            Monitor.Enter(obj1); // Compliant
+            Monitor.Enter(obj); // Compliant
         });
 
-        Monitor.Exit(obj1);
+        Monitor.Exit(obj);
     }
 
     public void Method10()
     {
         var getObj = new Func<object>(() =>
         {
-            return obj1;
+            return obj;
         });
 
         Monitor.Enter(getObj());
@@ -102,19 +102,19 @@ class Program
     {
         var getObj = new Func<object>(() =>
         {
-            return obj1;
+            return obj;
         });
 
-        Monitor.Enter(obj1);
+        Monitor.Enter(obj);
         Monitor.Exit(getObj());
     }
 
     public void Method12()
     {
-        Monitor.Enter(obj1); // Compliant
+        Monitor.Enter(obj); // Compliant
         var a = new Action(() =>
         {
-            Monitor.Exit(obj1);
+            Monitor.Exit(obj);
         });
 
         a();
@@ -122,17 +122,67 @@ class Program
 
     public void Method13(string arg)
     {
-        Monitor.Exit(obj1);
+        Monitor.Exit(obj);
         Console.WriteLine(arg.Length);
-        Monitor.Enter(obj1); // Compliant
+        Monitor.Enter(obj); // Compliant
     }
 
     public void Method14(string arg)
     {
-        Monitor.Exit(obj1);
+        Monitor.Exit(obj);
         Console.WriteLine(arg.Length);
-        Monitor.Enter(obj1); // Compliant
+        Monitor.Enter(obj); // Compliant
         Console.WriteLine(arg.Length);
-        Monitor.Exit(obj1);
+        Monitor.Exit(obj);
+    }
+
+    public void Method15(Program first, Program second)
+    {
+        Monitor.Enter(first.obj); // Compliant
+        Monitor.Exit(second.obj);
+    }
+
+
+    public void Method16()
+    {
+        void LocalFunc()
+        {
+            Monitor.Enter(obj); // Compliant
+        }
+
+        Monitor.Exit(obj);
+    }
+
+    public void Method17()
+    {
+        object LocalFunc()
+        {
+            return obj;
+        }
+
+        Monitor.Enter(LocalFunc());
+        Monitor.Exit(LocalFunc());
+    }
+
+    public void Method18()
+    {
+        object LocalFunc()
+        {
+            return obj;
+        }
+
+        Monitor.Enter(obj);
+        Monitor.Exit(LocalFunc());
+    }
+
+    public void Method19()
+    {
+        Monitor.Enter(obj); // Compliant
+        LocalFunc();
+
+        void LocalFunc()
+        {
+            Monitor.Exit(obj); // Compliant
+        }
     }
 }

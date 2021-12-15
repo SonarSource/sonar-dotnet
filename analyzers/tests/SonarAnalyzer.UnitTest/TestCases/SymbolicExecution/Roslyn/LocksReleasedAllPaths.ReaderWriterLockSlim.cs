@@ -3,9 +3,10 @@ using System.Threading;
 
 class Program
 {
+    private bool condition;
     private ReaderWriterLockSlim readerWriterLockSlim = new ReaderWriterLockSlim();
 
-    public void Method1(bool condition)
+    public void Method1()
     {
         readerWriterLockSlim.EnterReadLock(); // FN
         if (condition)
@@ -14,7 +15,7 @@ class Program
         }
     }
 
-    public void Method2(bool condition)
+    public void Method2()
     {
         readerWriterLockSlim.EnterWriteLock(); // FN
         if (condition)
@@ -23,7 +24,7 @@ class Program
         }
     }
 
-    public void Method3(bool condition)
+    public void Method3()
     {
         readerWriterLockSlim.EnterUpgradeableReadLock(); // FN
         if (condition)
@@ -99,7 +100,7 @@ class Program
     }
 
 
-    public void Method10(bool condition)
+    public void Method10()
     {
         try
         {
@@ -149,6 +150,35 @@ class Program
         finally
         {
             readerWriterLockSlim.ExitUpgradeableReadLock();
+        }
+    }
+
+    public void Method12()
+    {
+        readerWriterLockSlim.EnterReadLock(); // Compliant
+        readerWriterLockSlim.ExitReadLock();
+    }
+
+    public void Method13()
+    {
+        readerWriterLockSlim.EnterReadLock(); // Compliant
+        readerWriterLockSlim.ExitWriteLock();
+    }
+
+    public void Method14()
+    {
+        readerWriterLockSlim.EnterReadLock(); // FN
+        if (condition)
+        {
+            readerWriterLockSlim.ExitWriteLock();
+        }
+    }
+
+    public void Method15()
+    {
+        if (readerWriterLockSlim.TryEnterReadLock(42)) // Compliant
+        {
+            readerWriterLockSlim.ExitReadLock();
         }
     }
 }

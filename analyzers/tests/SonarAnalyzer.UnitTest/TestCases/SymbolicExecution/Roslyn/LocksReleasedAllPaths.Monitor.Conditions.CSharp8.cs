@@ -3,15 +3,17 @@ using System.Threading;
 
 class Program
 {
-    private object obj1 = new object();
-    private object obj2 = new object();
+    private object obj = new object();
+    private object other = new object();
 
-    public void Method1(bool condition)
+    private bool condition;
+
+    public void Method1()
     {
         var lockObj = condition switch
         {
-            true => obj1,
-            false => obj2,
+            true => obj,
+            false => other,
         };
 
         Monitor.Enter(lockObj); // FN
@@ -21,18 +23,18 @@ class Program
         }
     }
 
-    public void Method2(bool condition)
+    public void Method2()
     {
         var lockObj = condition switch
         {
-            true => obj1,
-            false => obj2,
+            true => obj,
+            false => other,
         };
 
         Monitor.Enter(lockObj); // Compliant
         if (!condition)
         {
-            Monitor.Exit(obj2);
+            Monitor.Exit(other);
         }
     }
 }

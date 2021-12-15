@@ -3,7 +3,9 @@ using System.Threading;
 
 class Program
 {
-    public void Method1(bool condition)
+    private bool condition;
+
+    public void Method1()
     {
         SpinLock sl = new SpinLock(false);
         bool isAcquired = false;
@@ -14,7 +16,7 @@ class Program
         }
     }
 
-    public void Method2(bool condition)
+    public void Method2()
     {
         SpinLock sl = new SpinLock(true);
         bool isAcquired = false;
@@ -25,7 +27,7 @@ class Program
         }
     }
 
-    public void Method3(bool condition)
+    public void Method3()
     {
         SpinLock sl = new SpinLock(false);
         bool isAcquired = false;
@@ -36,7 +38,7 @@ class Program
         }
     }
 
-    public void Method4(bool condition)
+    public void Method4()
     {
         SpinLock sl = new SpinLock(false);
         bool isAcquired = false;
@@ -47,7 +49,7 @@ class Program
         }
     }
 
-    public void Method5(bool condition)
+    public void Method5()
     {
         SpinLock sl = new SpinLock(false);
         bool isAcquired = false;
@@ -58,18 +60,48 @@ class Program
         }
     }
 
-    public void Method6(string condition)
+    public void Method6(string someString)
     {
         bool isAcquired = false;
         SpinLock sl = new SpinLock(false);;
         sl.Enter(ref isAcquired);
         try
         {
-            Console.WriteLine(condition.Length);
+            Console.WriteLine(someString.Length);
         }
         finally
         {
             sl.Exit();
         }
+    }
+
+    public void Method7()
+    {
+        SpinLock sl = new SpinLock(false);
+        bool isAcquired = false;
+        sl.Enter(ref isAcquired); // Compliant
+        if (isAcquired)
+        {
+            sl.Exit();
+        }
+    }
+
+    public void Method8()
+    {
+        SpinLock sl = new SpinLock(false);
+        bool isAcquired = false;
+        sl.TryEnter(ref isAcquired);
+        if (isAcquired)
+        {
+            sl.Exit();
+        }
+    }
+
+    public void Method9()
+    {
+        SpinLock sl = new SpinLock(false);
+        bool isAcquired = false;
+        sl.Enter(ref isAcquired); // Compliant
+        sl.Exit();
     }
 }

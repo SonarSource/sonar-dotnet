@@ -8,7 +8,7 @@ class Program
 
     public void Method1()
     {
-        Monitor.Enter(obj); // FN
+        Monitor.Enter(obj);
         for (int i = 0; i < 10; i++)
         {
             if (i == 9)
@@ -50,7 +50,7 @@ class Program
 
     public void Method4()
     {
-        Monitor.Enter(obj); // FN
+        Monitor.Enter(obj);
         for (int i = 0; i < 10; i++)
         {
             if (i == 10)
@@ -67,7 +67,7 @@ class Program
 
     public void Method5()
     {
-        Monitor.Enter(obj); // Compliant
+        Monitor.Enter(obj); // FN
         for (int i = 0; i < 10; i++)
         {
             if (i == 9)
@@ -94,7 +94,16 @@ class Program
         }
     }
 
-    public void Method6(bool condition, List<byte> array)
+    public void Method7(bool condition, byte[] array)
+    {
+        Monitor.Enter(obj); // FN
+        foreach (var item in array)
+        {
+            Monitor.Exit(obj);
+        }
+    }
+
+    public void Method8(bool condition, List<byte> array)
     {
         Monitor.Enter(obj); // FN
         while (array.Count < 42)
@@ -107,7 +116,17 @@ class Program
         }
     }
 
-    public void Method7(bool condition, List<byte> array)
+    public void Method9(bool condition, List<byte> array)
+    {
+        Monitor.Enter(obj); // FN
+        while (array.Count < 42)
+        {
+            Monitor.Exit(obj);
+            array.RemoveAt(0);
+        }
+    }
+
+    public void Method10(bool condition, List<byte> array)
     {
         Monitor.Enter(obj); // FN
         do
@@ -116,6 +135,17 @@ class Program
             {
                 Monitor.Exit(obj);
             }
+            array.RemoveAt(0);
+        }
+        while (array.Count < 42);
+    }
+
+    public void Method11(bool condition, List<byte> array)
+    {
+        Monitor.Enter(obj); // FN
+        do
+        {
+            Monitor.Exit(obj);
             array.RemoveAt(0);
         }
         while (array.Count < 42);

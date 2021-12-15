@@ -53,6 +53,11 @@ namespace SonarAnalyzer.UnitTest.Rules
 
         [TestMethod]
         [TestCategory("Rule")]
+        public void LocksReleasedAllPaths_Monitor_GoTo_CS() =>
+            Verifier.VerifyAnalyzer(@"TestCases\SymbolicExecution\Roslyn\LocksReleasedAllPaths.Monitor.GoTo.cs", new SymbolicExecutionRunner());
+
+        [TestMethod]
+        [TestCategory("Rule")]
         public void LocksReleasedAllPaths_Monitor_Loops_CS() =>
             Verifier.VerifyAnalyzer(@"TestCases\SymbolicExecution\Roslyn\LocksReleasedAllPaths.Monitor.Loops.cs", new SymbolicExecutionRunner());
 

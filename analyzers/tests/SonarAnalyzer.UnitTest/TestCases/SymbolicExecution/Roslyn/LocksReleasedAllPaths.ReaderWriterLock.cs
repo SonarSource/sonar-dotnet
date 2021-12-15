@@ -3,9 +3,10 @@ using System.Threading;
 
 class Program
 {
+    private bool condition;
     private ReaderWriterLock readerWriterLock = new ReaderWriterLock();
 
-    public void Method1(bool condition)
+    public void Method1()
     {
         readerWriterLock.AcquireReaderLock(42); // FN
         if (condition)
@@ -14,7 +15,7 @@ class Program
         }
     }
 
-    public void Method2(bool condition)
+    public void Method2()
     {
         readerWriterLock.AcquireReaderLock(new TimeSpan(42)); // FN
         if (condition)
@@ -23,7 +24,7 @@ class Program
         }
     }
 
-    public void Method3(bool condition)
+    public void Method3()
     {
         readerWriterLock.AcquireWriterLock(42); // FN
         if (condition)
@@ -32,7 +33,7 @@ class Program
         }
     }
 
-    public void Method4(bool condition)
+    public void Method4()
     {
         readerWriterLock.AcquireWriterLock(new TimeSpan(42)); // FN
         if (condition)
@@ -41,11 +42,11 @@ class Program
         }
     }
 
-    public void Method5(bool condition)
+    public void Method5()
     {
+        readerWriterLock.AcquireReaderLock(42);
         try
         {
-            readerWriterLock.AcquireReaderLock(42);
             var cookie = readerWriterLock.UpgradeToWriterLock(42);
             if (condition)
             {
@@ -63,7 +64,7 @@ class Program
         }
     }
 
-    public void Method6(bool condition)
+    public void Method6()
     {
         try
         {
@@ -147,7 +148,7 @@ class Program
         }
     }
 
-    public void Method9(bool condition)
+    public void Method9()
     {
         readerWriterLock.AcquireReaderLock(new TimeSpan(42)); // Compliant because the cookie tracking is too complicated
         LockCookie cookie = new LockCookie();
@@ -157,5 +158,11 @@ class Program
         }
 
         readerWriterLock.RestoreLock(ref cookie);
+    }
+
+    public void Method10()
+    {
+        readerWriterLock.AcquireReaderLock(42); // Compliant
+        readerWriterLock.ReleaseReaderLock();
     }
 }
