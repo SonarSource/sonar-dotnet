@@ -26,12 +26,12 @@ namespace SonarAnalyzer.UnitTest.TestFramework.SymbolicExecution
 {
     internal class SETestContext
     {
-        public readonly CollectorTestCheck Collector = new();
+        public readonly ValidatorTestCheck Validator = new();
 
         public SETestContext(string code, AnalyzerLanguage language, SymbolicCheck[] additionalChecks)
         {
             var cfg = TestHelper.CompileCfg(code, language);
-            var se = new RoslynSymbolicExecution(cfg, additionalChecks.Concat(new[] { Collector }).ToArray());
+            var se = new RoslynSymbolicExecution(cfg, additionalChecks.Concat(new[] { Validator }).ToArray());
             se.Execute();
         }
 

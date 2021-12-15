@@ -55,6 +55,8 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
                     queue.Enqueue(node);
                 }
             }
+
+            NotifyExecutionCompleted();
         }
 
         private IEnumerable<ExplodedNode> ProcessBranching(ExplodedNode node)
@@ -107,6 +109,14 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
                 context = context.State == newState ? context : new SymbolicContext(symbolicValueCounter, context.Operation, newState);
             }
             return context;
+        }
+
+        private void NotifyExecutionCompleted()
+        {
+            foreach (var check in checks)
+            {
+                check.ExecutionCompleted();
+            }
         }
 
         private SymbolicValue CreateSymbolicValue() =>

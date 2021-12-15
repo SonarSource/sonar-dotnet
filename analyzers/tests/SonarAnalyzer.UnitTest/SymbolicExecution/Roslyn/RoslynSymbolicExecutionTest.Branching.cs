@@ -54,7 +54,7 @@ else
     Tag(""Else"");
 }
 Tag(""End"");";
-            SETestContext.CreateCS(code).Collector.ValidateTagOrder(
+            SETestContext.CreateCS(code).Validator.ValidateTagOrder(
                 "Entry",
                 "BeforeTry",
                 "InTry",
@@ -83,7 +83,7 @@ Else
     Tag(""Else"")
 End If
 Tag(""End"")";
-            SETestContext.CreateVB(code).Collector.ValidateTagOrder(
+            SETestContext.CreateVB(code).Validator.ValidateTagOrder(
                 "Entry",
                 "BeforeTry",
                 "InTry",
@@ -109,7 +109,7 @@ else
     Tag(""ElseFirst"", first);
     Tag(""ElseSecond"", second);
 }";
-            var collector = SETestContext.CreateCS(code, new SetTestConstraintCheck()).Collector;
+            var collector = SETestContext.CreateCS(code, new SetTestConstraintCheck()).Validator;
             collector.ValidateTag("IfFirst", x => x.HasConstraint(TestConstraint.First).Should().BeTrue());
             collector.ValidateTag("IfSecond", x => x.HasConstraint(TestConstraint.Second).Should().BeTrue());
             collector.ValidateTag("ElseFirst", x => x.HasConstraint(TestConstraint.First).Should().BeTrue());
@@ -117,11 +117,15 @@ else
         }
 
         [TestMethod]
-        public void ExitReached_SimpleFlow() =>
-            SETestContext.CreateCS("var a = true;").Collector.ValidateExitReachCount(1);
+        public void EndNotifications_SimpleFlow()
+        {
+            var validator = SETestContext.CreateCS("var a = true;").Validator;
+            validator.ValidateExitReachCount(1);
+            validator.ValidateExecutionCompleted();
+        }
 
         [TestMethod]
-        public void ExitReached_MultipleBranches()
+        public void EndNotifications_MultipleBranches()
         {
             const string method = @"
 public int Method(bool a)
@@ -131,11 +135,13 @@ public int Method(bool a)
     else
         return 2;
 }";
-            SETestContext.CreateCSMethod(method).Collector.ValidateExitReachCount(1);
+            var validator = SETestContext.CreateCSMethod(method).Validator;
+            validator.ValidateExitReachCount(1);
+            validator.ValidateExecutionCompleted();
         }
 
         [TestMethod]
-        public void ExitReached_Throw()
+        public void EndNotifications_Throw()
         {
             const string method = @"
 public int Method(bool a)
@@ -150,11 +156,13 @@ public int Method(bool a)
                x.Operation.Instance.Kind.Should().NotBe(OperationKind.Literal, "we don't support multiple branches yet");
                return x.State;
             });
-            SETestContext.CreateCSMethod(method, returnNotReached).Collector.ValidateExitReachCount(1);
+            var validator = SETestContext.CreateCSMethod(method, returnNotReached).Validator;
+            validator.ValidateExitReachCount(1);
+            validator.ValidateExecutionCompleted();
         }
 
         [TestMethod]
-        public void ExitReached_YieldReturn()
+        public void EndNotifications_YieldReturn()
         {
             const string method = @"
 public System.Collections.Generic.IEnumerable<int> Method(bool a)
@@ -164,11 +172,13 @@ public System.Collections.Generic.IEnumerable<int> Method(bool a)
 
     yield return 2;
 }";
-            SETestContext.CreateCSMethod(method).Collector.ValidateExitReachCount(1);
+            var validator = SETestContext.CreateCSMethod(method).Validator;
+            validator.ValidateExitReachCount(1);
+            validator.ValidateExecutionCompleted();
         }
 
         [TestMethod]
-        public void ExitReached_YieldBreak()
+        public void EndNotifications_YieldBreak()
         {
             const string method = @"
 public System.Collections.Generic.IEnumerable<int> Method(bool a)
@@ -178,7 +188,9 @@ public System.Collections.Generic.IEnumerable<int> Method(bool a)
 
     var b = a;
 }";
-            SETestContext.CreateCSMethod(method).Collector.ValidateExitReachCount(1);
+            var validator = SETestContext.CreateCSMethod(method).Validator;
+            validator.ValidateExitReachCount(1);
+            validator.ValidateExecutionCompleted();
         }
     }
 }
