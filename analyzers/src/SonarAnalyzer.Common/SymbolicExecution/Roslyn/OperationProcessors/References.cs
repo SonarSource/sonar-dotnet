@@ -22,6 +22,14 @@ using StyleCop.Analyzers.Lightup;
 
 namespace SonarAnalyzer.SymbolicExecution.Roslyn.OperationProcessors
 {
+    internal static class LocalReference
+    {
+        public static ProgramState Process(SymbolicContext context, ILocalReferenceOperationWrapper localReference) =>
+            context.State[localReference.Local] is { } symbolState
+                ? context.State.SetOperationValue(context.Operation, symbolState)
+                : context.State;
+    }
+
     internal static class ParameterReference
     {
         public static ProgramState Process(SymbolicContext context, IParameterReferenceOperationWrapper parameterReference) =>

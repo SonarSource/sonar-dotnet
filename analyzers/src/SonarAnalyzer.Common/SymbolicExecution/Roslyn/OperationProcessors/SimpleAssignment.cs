@@ -26,15 +26,13 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn.OperationProcessors
     {
         public static ProgramState Process(SymbolicContext context, ISimpleAssignmentOperationWrapper assignment)
         {
-            var newState = context.State;
             var rightSide = context.State[assignment.Value];
-            if (assignment.Target.TrackedSymbol() is { } symbol)
-            {
-                newState = context.State.SetSymbolValue(symbol, rightSide);
-            }
-
-            newState = newState.SetOperationValue(assignment.Target, rightSide);
-            return newState.SetOperationValue(assignment.WrappedOperation, rightSide);
+            var newState = context.State
+                .SetOperationValue(assignment.Target, rightSide)
+                .SetOperationValue(assignment.WrappedOperation, rightSide);
+            return assignment.Target.TrackedSymbol() is { } symbol
+                ? newState.SetSymbolValue(symbol, rightSide)
+                : newState;
         }
     }
 }

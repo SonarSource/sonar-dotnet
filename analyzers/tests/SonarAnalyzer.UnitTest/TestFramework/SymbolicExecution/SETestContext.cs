@@ -46,10 +46,9 @@ using System.Collections.Generic;
 public class Sample
 {{
     public static int StaticField;
-
     public static int StaticProperty {{get; set;}}
-
     public int Property {{get; set;}}
+    private byte[] arr;
 
     public void Main(bool boolParameter{additionalParameters})
     {{

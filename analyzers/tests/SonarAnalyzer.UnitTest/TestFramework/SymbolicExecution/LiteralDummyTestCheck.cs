@@ -18,15 +18,20 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using StyleCop.Analyzers.Lightup;
+using Microsoft.CodeAnalysis;
+using SonarAnalyzer.SymbolicExecution.Roslyn;
 
-namespace SonarAnalyzer.SymbolicExecution.Roslyn.OperationProcessors
+namespace SonarAnalyzer.UnitTest.TestFramework.SymbolicExecution
 {
-    internal static class LocalReference
+    internal class LiteralDummyTestCheck : SymbolicCheck
     {
-        public static ProgramState Process(SymbolicContext context, ILocalReferenceOperationWrapper localReference) =>
-            context.State[localReference.Local] is { } symbolState
-                ? context.State.SetOperationValue(context.Operation, symbolState)
-                : context.State;
+        public override ProgramState PreProcess(SymbolicContext context)
+        {
+            if (context.Operation.Instance.Kind == OperationKind.Literal)
+            {
+                context.State[context.Operation].SetConstraint(DummyConstraint.Dummy);
+            }
+            return context.State;
+        }
     }
 }

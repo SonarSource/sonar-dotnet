@@ -18,7 +18,6 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Operations;
 using SonarAnalyzer.SymbolicExecution.Roslyn;
@@ -27,38 +26,11 @@ namespace SonarAnalyzer.UnitTest.TestFramework.SymbolicExecution
 {
     internal class SetTestConstraintCheck : SymbolicCheck
     {
-        public override ProgramState PreProcess(SymbolicContext context)
-        {
-            if (context.Operation.Instance is ILocalReferenceOperation local && context.Operation.IsImplicit)
-            {
-                var sv = context.CreateSymbolicValue();
-                sv.SetConstraint(local.Local.Name switch
-                {
-                    "first" => TestConstraint.First,
-                    "second" => TestConstraint.Second,
-                    _ => throw new InvalidOperationException("Unexpected local variable name: " + local.Local.Name)
-                });
-                return context.State.SetSymbolValue(local.Local, sv);
-            }
-            else
-            {
-                return context.State;
-            }
-        }
-
         public override ProgramState PostProcess(SymbolicContext context)
         {
-            if (context.Operation.Instance.Kind == OperationKind.Literal
-                   && ((ILiteralOperation)context.Operation.Instance).ConstantValue.Value is bool value)
+            if (context.Operation.Instance.Kind == OperationKind.Literal && ((ILiteralOperation)context.Operation.Instance).ConstantValue.Value is bool value)
             {
-                if (value == false)
-                {
-                    context.State[context.Operation].SetConstraint(TestConstraint.Second);
-                }
-                else
-                {
-                    context.State[context.Operation].SetConstraint(TestConstraint.First);
-                }
+                context.State[context.Operation].SetConstraint(value ? TestConstraint.First : TestConstraint.Second);
             }
             return context.State;
         }

@@ -32,39 +32,39 @@ namespace SonarAnalyzer.UnitTest.SymbolicExecution.Roslyn
         [TestMethod]
         public void SimpleAssignment_ToLocalVariable_FromLiteral()
         {
-            var setter = new LiteralDummyTestCheck();
-            var collector = SETestContext.CreateCS(@"var a = true; Tag(""a"", a);", setter).Collector;
-            collector.Validate("Literal: true", x => x.State[x.Operation].HasConstraint(DummyConstraint.Dummy).Should().BeTrue());
+            var collector = SETestContext.CreateCS(@"var a = true; Tag(""a"", a);", new LiteralDummyTestCheck()).Collector;
+            collector.Validate("Literal: true", x => x.State[x.Operation].HasConstraint(DummyConstraint.Dummy).Should().BeTrue("it's scaffolded"));
+            collector.Validate("SimpleAssignment: a = true (Implicit)", x => x.State[x.Operation].HasConstraint(DummyConstraint.Dummy).Should().BeTrue());
             collector.Validate("SimpleAssignment: a = true (Implicit)", x => x.State[((ISimpleAssignmentOperation)x.Operation.Instance).Target].HasConstraint(DummyConstraint.Dummy).Should().BeTrue());
             collector.ValidateTag("a", x => x.HasConstraint(DummyConstraint.Dummy).Should().BeTrue());
         }
 
-        [TestMethod] // SimpleAssignment_ToLocalVariable_FromLocalVariable
+        [TestMethod]
         public void SimpleAssignment_ToLocalVariable_FromTrackedSymbol()
         {
-            var setter = new LiteralDummyTestCheck();
-            var collector = SETestContext.CreateCS(@"var a = true; bool b; b = a; Tag(""b"", b);", setter).Collector;
-            collector.Validate("Literal: true", x => x.State[x.Operation].HasConstraint(DummyConstraint.Dummy).Should().BeTrue());
-            collector.Validate("SimpleAssignment: a = true (Implicit)", x => x.State[((ISimpleAssignmentOperation)x.Operation.Instance).Target].HasConstraint(DummyConstraint.Dummy).Should().BeTrue());
+            var collector = SETestContext.CreateCS(@"bool a = true, b; b = a; Tag(""b"", b);", new LiteralDummyTestCheck()).Collector;
+            collector.Validate("Literal: true", x => x.State[x.Operation].HasConstraint(DummyConstraint.Dummy).Should().BeTrue("it's scaffolded"));
+            collector.Validate("SimpleAssignment: b = a", x => x.State[x.Operation].HasConstraint(DummyConstraint.Dummy).Should().BeTrue());
+            collector.Validate("SimpleAssignment: b = a", x => x.State[((ISimpleAssignmentOperation)x.Operation.Instance).Target].HasConstraint(DummyConstraint.Dummy).Should().BeTrue());
             collector.ValidateTag("b", x => x.HasConstraint(DummyConstraint.Dummy).Should().BeTrue());
         }
 
         [TestMethod]
         public void SimpleAssignment_ToLocalVariable_FromTrackedSymbol_Chained()
         {
-            var setter = new LiteralDummyTestCheck();
-            var collector = SETestContext.CreateCS(@"var a = true; bool b,c; c = b = a; Tag(""c"", c);", setter).Collector;
-            collector.Validate("Literal: true", x => x.State[x.Operation].HasConstraint(DummyConstraint.Dummy).Should().BeTrue());
-            collector.Validate("SimpleAssignment: a = true (Implicit)", x => x.State[((ISimpleAssignmentOperation)x.Operation.Instance).Target].HasConstraint(DummyConstraint.Dummy).Should().BeTrue());
+            var collector = SETestContext.CreateCS(@"bool a = true, b, c; c = b = a; Tag(""c"", c);", new LiteralDummyTestCheck()).Collector;
+            collector.Validate("Literal: true", x => x.State[x.Operation].HasConstraint(DummyConstraint.Dummy).Should().BeTrue("it's scaffolded"));
+            collector.Validate("SimpleAssignment: c = b = a", x => x.State[x.Operation].HasConstraint(DummyConstraint.Dummy).Should().BeTrue());
+            collector.Validate("SimpleAssignment: c = b = a", x => x.State[((ISimpleAssignmentOperation)x.Operation.Instance).Target].HasConstraint(DummyConstraint.Dummy).Should().BeTrue());
             collector.ValidateTag("c", x => x.HasConstraint(DummyConstraint.Dummy).Should().BeTrue());
         }
 
         [TestMethod]
         public void SimpleAssignment_ToParameter_FromLiteral()
         {
-            var setter = new LiteralDummyTestCheck();
-            var collector = SETestContext.CreateCS(@"boolParameter = true; Tag(""boolParameter"", boolParameter);", setter).Collector;
-            collector.Validate("Literal: true", x => x.State[x.Operation].HasConstraint(DummyConstraint.Dummy).Should().BeTrue());
+            var collector = SETestContext.CreateCS(@"boolParameter = true; Tag(""boolParameter"", boolParameter);", new LiteralDummyTestCheck()).Collector;
+            collector.Validate("Literal: true", x => x.State[x.Operation].HasConstraint(DummyConstraint.Dummy).Should().BeTrue("it's scaffolded"));
+            collector.Validate("SimpleAssignment: boolParameter = true", x => x.State[x.Operation].HasConstraint(DummyConstraint.Dummy).Should().BeTrue());
             collector.Validate("SimpleAssignment: boolParameter = true", x => x.State[((ISimpleAssignmentOperation)x.Operation.Instance).Target].HasConstraint(DummyConstraint.Dummy).Should().BeTrue());
             collector.ValidateTag("boolParameter", x => x.HasConstraint(DummyConstraint.Dummy).Should().BeTrue());
         }
@@ -77,7 +77,6 @@ namespace SonarAnalyzer.UnitTest.SymbolicExecution.Roslyn
                 if (x.Operation.Instance.Kind == OperationKind.ParameterReference)
                 {
                     x.State[x.Operation].SetConstraint(DummyConstraint.Dummy);
-                    return x.State.SetSymbolValue(x.Operation.Instance.TrackedSymbol(), x.State[x.Operation]);
                 }
                 return x.State;
             });
@@ -93,34 +92,25 @@ namespace SonarAnalyzer.UnitTest.SymbolicExecution.Roslyn
                 if (x.Operation.Instance.Kind == OperationKind.ParameterReference)
                 {
                     x.State[x.Operation].SetConstraint(DummyConstraint.Dummy);
-                    return x.State.SetSymbolValue(x.Operation.Instance.TrackedSymbol(), x.State[x.Operation]);
                 }
                 return x.State;
             });
-            var collector = SETestContext.CreateVB(
-@"BoolParameter = True
-Dim B As Boolean = BoolParameter
-Tag(""B"", B)",
-setter).Collector;
+            var collector = SETestContext.CreateVB(@"Dim B As Boolean = BoolParameter : Tag(""B"", B)", setter).Collector;
             collector.ValidateTag("B", x => x.HasConstraint(DummyConstraint.Dummy).Should().BeTrue());
         }
 
         [DataTestMethod]
-        [DataRow("Sample.StaticField", "StaticField")]
-        [DataRow("Sample.StaticProperty", "StaticProperty")]
-        [DataRow("arr[0]", "array")]
-        [DataRow(@"dict[""key""]", "dictionary")]
-        [DataRow(@"other.Property", "other")]
-        [DataRow(@"this.Property", "this")]
-        public void SimpleAssignment_ToUnsupported_FromLiteral(string assignmentTarget, string tagName)
+        [DataRow(@"Sample.StaticField = 42; Tag(""Target"", Sample.StaticField);")]
+        [DataRow(@"Sample.StaticProperty = 42; Tag(""Target"", Sample.StaticProperty);")]
+        [DataRow(@"arr[0] = 42; Tag(""Target"", arr[0]);")]
+        [DataRow(@"var dict = new Dictionary<string, int>(); dict[""key""] = 42; Tag(""Target"", dict[""key""]);")]
+        [DataRow(@"var other = new Sample(); other.Property = 42; Tag(""Target"", other.Property);")]
+        [DataRow(@"this.Property = 42; Tag(""Target"", this.Property);")]
+        public void SimpleAssignment_ToUnsupported_FromLiteral(string snipet)
         {
-            var setter = new LiteralDummyTestCheck();
-            var collector = SETestContext.CreateCS(
-                $@"{assignmentTarget} = 42; Tag(""{tagName}"", {assignmentTarget});",
-                ", byte[] arr, Dictionary<string, int> dict, Sample other",
-                setter).Collector;
-            collector.Validate("Literal: 42", x => x.State[x.Operation].HasConstraint(DummyConstraint.Dummy).Should().BeTrue());
-            collector.ValidateTag(tagName, x => x.Should().BeNull());
+            var collector = SETestContext.CreateCS(snipet, ", byte[] arr", new LiteralDummyTestCheck()).Collector;
+            collector.Validate("Literal: 42", x => x.State[x.Operation].HasConstraint(DummyConstraint.Dummy).Should().BeTrue("it's scaffolded"));
+            collector.ValidateTag("Target", x => x.Should().BeNull());
         }
     }
 }

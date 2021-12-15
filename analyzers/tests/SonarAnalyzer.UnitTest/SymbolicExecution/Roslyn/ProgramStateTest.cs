@@ -18,7 +18,6 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System.Collections.Immutable;
 using System.Linq;
 using FluentAssertions;
 using Microsoft.CodeAnalysis;
@@ -32,7 +31,7 @@ namespace SonarAnalyzer.UnitTest.SymbolicExecution.Roslyn
     public class ProgramStateTest
     {
         [TestMethod]
-        public void SetOperationValueWithWrapper_ReturnsValues()
+        public void SetOperationValue_WithWrapper_ReturnsValues()
         {
             var counter = new SymbolicValueCounter();
             var value1 = new SymbolicValue(counter);
@@ -62,7 +61,7 @@ namespace SonarAnalyzer.UnitTest.SymbolicExecution.Roslyn
             var value1 = new SymbolicValue(counter);
             var value2 = new SymbolicValue(counter);
             var operations = TestHelper.CompileCfgBodyCS("var x = 0; x = 1; x = 42;").Blocks[1].Operations;
-            var op3 = new IOperationWrapperSonar(operations[2]);
+            var op3 = operations[2];
             var sut = ProgramState.Empty;
 
             sut[operations[0]].Should().BeNull();
@@ -78,7 +77,7 @@ namespace SonarAnalyzer.UnitTest.SymbolicExecution.Roslyn
         }
 
         [TestMethod]
-        public void SetOperationValueWithWrapper_IsImmutable()
+        public void SetOperationValue_WithWrapper_IsImmutable()
         {
             var operation = new IOperationWrapperSonar(TestHelper.CompileCfgBodyCS("var x = 42;").Blocks[1].Operations[0]);
             var sut = ProgramState.Empty;
@@ -100,7 +99,7 @@ namespace SonarAnalyzer.UnitTest.SymbolicExecution.Roslyn
         }
 
         [TestMethod]
-        public void SetOperationValueWithWrapper_UsesUnderlyingOperation()
+        public void SetOperationValue_WithWrapper_UsesUnderlyingOperation()
         {
             var operation = new IOperationWrapperSonar(TestHelper.CompileCfgBodyCS("var x = 42;").Blocks[1].Operations[0]);
             var another = new IOperationWrapperSonar(operation.Instance);
@@ -110,10 +109,11 @@ namespace SonarAnalyzer.UnitTest.SymbolicExecution.Roslyn
             sut[operation].Should().BeNull();
             sut = sut.SetOperationValue(operation, value);
             sut[another].Should().Be(value, "GetHashCode and Equals are based on underlying IOperation instance.");
+            sut[another.Instance].Should().Be(value, "GetHashCode and Equals are based on underlying IOperation instance.");
         }
 
         [TestMethod]
-        public void SetOperationValueWithWrapper_Overrides()
+        public void SetOperationValue_WithWrapper_Overrides()
         {
             var counter = new SymbolicValueCounter();
             var value1 = new SymbolicValue(counter);

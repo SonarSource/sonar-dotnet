@@ -131,8 +131,7 @@ namespace SonarAnalyzer.UnitTest.SymbolicExecution.Roslyn
         [TestMethod]
         public void Execute_PersistConstraints()
         {
-            var setter = new LiteralDummyTestCheck();
-            var collector = SETestContext.CreateCS("var a = true;", setter).Validator;
+            var collector = SETestContext.CreateCS("var a = true;", new LiteralDummyTestCheck()).Collector;
             collector.ValidateOrder(    // Visualize operations
                 "LocalReference: a = true (Implicit)",
                 "Literal: true",
@@ -161,22 +160,6 @@ namespace SonarAnalyzer.UnitTest.SymbolicExecution.Roslyn
 
             static ISymbol LocalReferenceOperationSymbol(IOperationWrapperSonar operation) =>
                 ((ILocalReferenceOperation)operation.Instance).Local;
-        }
-
-        private class LiteralDummyTestCheck : PreProcessTestCheck
-        {
-            public LiteralDummyTestCheck() : base(DummyPreProcess)
-            {
-            }
-
-            private static ProgramState DummyPreProcess(SymbolicContext context)
-            {
-                if (context.Operation.Instance.Kind == OperationKind.Literal)
-                {
-                    context.State[context.Operation].SetConstraint(DummyConstraint.Dummy);
-                }
-                return context.State;
-            }
         }
     }
 }

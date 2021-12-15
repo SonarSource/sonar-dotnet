@@ -40,7 +40,7 @@ namespace SonarAnalyzer.UnitTest.SymbolicExecution.Roslyn
         [TestMethod]
         public void TrackedSymbol_ParameterReference_IsParameterSymbol()
         {
-            var expressionStatement = (IExpressionStatementOperation)TestHelper.CompileCfgBodyCS("parameter = true;").Blocks[1].Operations[0];
+            var expressionStatement = (IExpressionStatementOperation)TestHelper.CompileCfgBodyCS("parameter = true;", "bool parameter").Blocks[1].Operations[0];
             var paramaterReference = ((ISimpleAssignmentOperation)expressionStatement.Operation).Target;
             var symbol = IParameterReferenceOperationWrapper.FromOperation(paramaterReference).Parameter;
             paramaterReference.TrackedSymbol().Should().Be(symbol);
@@ -50,7 +50,7 @@ namespace SonarAnalyzer.UnitTest.SymbolicExecution.Roslyn
         public void TrackedSymbol_SimpleAssignment_IsNull()
         {
             var simpleAssignment = TestHelper.CompileCfgBodyCS("var a = true; bool b; b = a;").Blocks[1].Operations[0];
-            simpleAssignment.TrackedSymbol().Should().Be(null);
+            simpleAssignment.TrackedSymbol().Should().BeNull();
         }
     }
 }
