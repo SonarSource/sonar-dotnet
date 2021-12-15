@@ -44,7 +44,7 @@ namespace SonarAnalyzer.UnitTest.Rules.SymbolicExecution.Sonar
             EmptyCollectionsShouldNotBeEnumerated.DiagnosticId,
             ConditionEvaluatesToConstant.S2583DiagnosticId,
             ConditionEvaluatesToConstant.S2589DiagnosticId,
-            InvalidCastToInterfaceRuleConstants.DiagnosticId,
+            InvalidCastToInterfaceSymbolicExecution.DiagnosticId,
             NullPointerDereference.DiagnosticId,
             RestrictDeserializedTypes.DiagnosticId,
             InitializationVectorShouldBeRandom.DiagnosticId,

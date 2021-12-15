@@ -19,6 +19,7 @@
  */
 
 using System.Linq;
+using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Diagnostics;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.Helpers;
@@ -32,30 +33,36 @@ namespace SonarAnalyzer.UnitTest.Rules.SymbolicExecution
     [TestClass]
     public class InvalidCastToInterfaceTest
     {
+        private static readonly DiagnosticDescriptor[] OnlyDiagnostics = new[] { InvalidCastToInterfaceSymbolicExecution.S1944 };
+
         [DataTestMethod]
         [DataRow(ProjectType.Product)]
         [DataRow(ProjectType.Test)]
         public void InvalidCastToInterface(ProjectType projectType) =>
-            Verifier.VerifyAnalyzer(@"TestCases\SymbolicExecution\Sonar\InvalidCastToInterface.cs",
-                GetAnalyzers(),
+            Verifier.VerifyAnalyzer(
+                @"TestCases\SymbolicExecution\Sonar\InvalidCastToInterface.cs",
+                Analyzers(),
                 additionalReferences: TestHelper.ProjectTypeReference(projectType).Concat(MetadataReferenceFacade.NETStandard21),
-                options: ParseOptionsHelper.FromCSharp8);
+                options: ParseOptionsHelper.FromCSharp8,
+                onlyDiagnostics: OnlyDiagnostics);
 
 #if NET
         [TestMethod]
         public void InvalidCastToInterface_CSharp9() =>
-            Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\SymbolicExecution\Sonar\InvalidCastToInterface.CSharp9.cs", GetAnalyzers());
+            Verifier.VerifyAnalyzerFromCSharp9Console(
+                @"TestCases\SymbolicExecution\Sonar\InvalidCastToInterface.CSharp9.cs",
+                Analyzers(),
+                onlyDiagnostics: OnlyDiagnostics);
 
         [TestMethod]
         public void InvalidCastToInterface_CSharp10() =>
-            Verifier.VerifyAnalyzerFromCSharp10Library(@"TestCases\SymbolicExecution\Sonar\InvalidCastToInterface.CSharp10.cs", GetAnalyzers());
+            Verifier.VerifyAnalyzerFromCSharp10Library(
+                @"TestCases\SymbolicExecution\Sonar\InvalidCastToInterface.CSharp10.cs",
+                Analyzers(),
+                onlyDiagnostics: OnlyDiagnostics);
 #endif
 
-        private static DiagnosticAnalyzer[] GetAnalyzers() =>
-            new DiagnosticAnalyzer[]
-                {
-                    new SymbolicExecutionRunner(new InvalidCastToInterfaceSymbolicExecution()),
-                    new InvalidCastToInterface()
-                };
+        private static DiagnosticAnalyzer[] Analyzers() =>
+            new DiagnosticAnalyzer[] { new SymbolicExecutionRunner(), new InvalidCastToInterface() };
     }
 }
