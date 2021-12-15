@@ -26,6 +26,7 @@ using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
 using SonarAnalyzer.Rules.CSharp;
+using SonarAnalyzer.SymbolicExecution.Roslyn.Checks;
 
 namespace SonarAnalyzer.Rules.SymbolicExecution
 {
@@ -40,6 +41,7 @@ namespace SonarAnalyzer.Rules.SymbolicExecution
     [Rule(RestrictDeserializedTypes.DiagnosticId, LanguageNames.CSharp)]
     [Rule(InitializationVectorShouldBeRandom.DiagnosticId, LanguageNames.CSharp)]
     [Rule(HashesShouldHaveUnpredictableSalt.DiagnosticId, LanguageNames.CSharp)]
+    [Rule(LocksReleasedAllPathsBase.DiagnosticId, LanguageNames.CSharp)]
     internal sealed class SymbolicExecutionAnalyzerFactory : IRuleFactory
     {
         private readonly ImmutableArray<ISymbolicExecutionAnalyzer> analyzers;
