@@ -146,10 +146,10 @@ public int Method(bool a)
         return 2;
 }";
             var returnNotReached = new PreProcessTestCheck(x =>
-                                                           {
-                                                               x.Operation.Instance.Kind.Should().NotBe(OperationKind.Literal, "we don't support multiple branches yet");
-                                                               return x.State;
-                                                           });
+            {
+               x.Operation.Instance.Kind.Should().NotBe(OperationKind.Literal, "we don't support multiple branches yet");
+               return x.State;
+            });
             SETestContext.CreateCSMethod(method, returnNotReached).Collector.ValidateExitReachCount(1);
         }
 

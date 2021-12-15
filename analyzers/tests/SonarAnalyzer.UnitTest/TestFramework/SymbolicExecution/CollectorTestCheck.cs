@@ -32,7 +32,6 @@ namespace SonarAnalyzer.UnitTest.TestFramework.SymbolicExecution
     {
         public readonly List<SymbolicContext> PostProcessed = new();
         private readonly List<(string Name, SymbolicContext Context)> tags = new();
-
         private int exitReachedCount;
 
         public override ProgramState PostProcess(SymbolicContext context)
