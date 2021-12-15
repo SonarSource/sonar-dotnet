@@ -161,13 +161,13 @@ class Program
 
     public void Method13()
     {
-        readerWriterLockSlim.EnterReadLock(); // Compliant
+        readerWriterLockSlim.EnterReadLock(); // Compliant, this rule doesn't care if it was released with correct API
         readerWriterLockSlim.ExitWriteLock();
     }
 
     public void Method14()
     {
-        readerWriterLockSlim.EnterReadLock(); // FN
+        readerWriterLockSlim.EnterReadLock(); // FN, this rule doesn't care if it was released with correct API
         if (condition)
         {
             readerWriterLockSlim.ExitWriteLock();

@@ -96,7 +96,7 @@ class Program
 
     public void Method7(bool condition, byte[] array)
     {
-        Monitor.Enter(obj); // FN
+        Monitor.Enter(obj); // FN, array can be empty
         foreach (var item in array)
         {
             Monitor.Exit(obj);
@@ -118,7 +118,7 @@ class Program
 
     public void Method9(bool condition, List<byte> array)
     {
-        Monitor.Enter(obj); // FN
+        Monitor.Enter(obj); // FN, count can be bigger than 42
         while (array.Count < 42)
         {
             Monitor.Exit(obj);
@@ -128,7 +128,7 @@ class Program
 
     public void Method10(bool condition, List<byte> array)
     {
-        Monitor.Enter(obj); // FN
+        Monitor.Enter(obj); // FN, 
         do
         {
             if (condition)
@@ -142,7 +142,7 @@ class Program
 
     public void Method11(bool condition, List<byte> array)
     {
-        Monitor.Enter(obj); // FN
+        Monitor.Enter(obj); // Compliant
         do
         {
             Monitor.Exit(obj);

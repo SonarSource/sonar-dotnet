@@ -1,5 +1,4 @@
-﻿extern alias csharp;
-/*
+﻿/*
 * SonarAnalyzer for .NET
 * Copyright (C) 2015-2021 SonarSource SA
 * mailto: contact AT sonarsource DOT com
@@ -20,9 +19,7 @@
 */
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using SonarAnalyzer.Helpers;
 using SonarAnalyzer.Rules.SymbolicExecution;
-using SonarAnalyzer.SymbolicExecution.Roslyn.Checks;
 using SonarAnalyzer.UnitTest.MetadataReferences;
 using SonarAnalyzer.UnitTest.TestFramework;
 
@@ -31,11 +28,6 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class LocksReleasedAllPathsTest
     {
-        [TestMethod]
-        [TestCategory("Rule")]
-        public void LocksReleasedAllPaths_Monitor_Linear_CS() =>
-            Verifier.VerifyAnalyzer(@"TestCases\SymbolicExecution\Roslyn\LocksReleasedAllPaths.Monitor.Linear.cs", new SymbolicExecutionRunner());
-
         [TestMethod]
         [TestCategory("Rule")]
         public void LocksReleasedAllPaths_Monitor_Conditions_CS() =>
@@ -48,13 +40,13 @@ namespace SonarAnalyzer.UnitTest.Rules
 
         [TestMethod]
         [TestCategory("Rule")]
-        public void LocksReleasedAllPaths_Monitor_TryCatch_CS() =>
-            Verifier.VerifyAnalyzer(@"TestCases\SymbolicExecution\Roslyn\LocksReleasedAllPaths.Monitor.TryCatch.cs", new SymbolicExecutionRunner());
+        public void LocksReleasedAllPaths_Monitor_GoTo_CS() =>
+            Verifier.VerifyAnalyzer(@"TestCases\SymbolicExecution\Roslyn\LocksReleasedAllPaths.Monitor.GoTo.cs", new SymbolicExecutionRunner());
 
         [TestMethod]
         [TestCategory("Rule")]
-        public void LocksReleasedAllPaths_Monitor_GoTo_CS() =>
-            Verifier.VerifyAnalyzer(@"TestCases\SymbolicExecution\Roslyn\LocksReleasedAllPaths.Monitor.GoTo.cs", new SymbolicExecutionRunner());
+        public void LocksReleasedAllPaths_Monitor_Linear_CS() =>
+            Verifier.VerifyAnalyzer(@"TestCases\SymbolicExecution\Roslyn\LocksReleasedAllPaths.Monitor.Linear.cs", new SymbolicExecutionRunner());
 
         [TestMethod]
         [TestCategory("Rule")]
@@ -63,13 +55,25 @@ namespace SonarAnalyzer.UnitTest.Rules
 
         [TestMethod]
         [TestCategory("Rule")]
+        public void LocksReleasedAllPaths_Monitor_TryCatch_CS() =>
+            Verifier.VerifyAnalyzer(@"TestCases\SymbolicExecution\Roslyn\LocksReleasedAllPaths.Monitor.TryCatch.cs", new SymbolicExecutionRunner());
+
+        [TestMethod]
+        [TestCategory("Rule")]
         public void LocksReleasedAllPaths_Monitor_TryEnter_CS() =>
             Verifier.VerifyAnalyzer(@"TestCases\SymbolicExecution\Roslyn\LocksReleasedAllPaths.Monitor.TryEnter.cs", new SymbolicExecutionRunner());
 
         [TestMethod]
         [TestCategory("Rule")]
-        public void LocksReleasedAllPaths_SpinLock_CS() =>
-            Verifier.VerifyAnalyzer(@"TestCases\SymbolicExecution\Roslyn\LocksReleasedAllPaths.SpinLock.cs", new SymbolicExecutionRunner());
+        public void LocksReleasedAllPaths_Mutex_CS() =>
+            Verifier.VerifyAnalyzer(@"TestCases\SymbolicExecution\Roslyn\LocksReleasedAllPaths.Mutex.cs", new SymbolicExecutionRunner(), ParseOptionsHelper.FromCSharp8);
+
+#if NETFRAMEWORK
+        [TestMethod]
+        [TestCategory("Rule")]
+        public void LocksReleasedAllPaths_Mutex_NetFramework_CS() =>
+            Verifier.VerifyAnalyzer(@"TestCases\SymbolicExecution\Roslyn\LocksReleasedAllPaths.Mutex.NetFx.cs", new SymbolicExecutionRunner(), ParseOptionsHelper.FromCSharp8);
+#endif
 
         [TestMethod]
         [TestCategory("Rule")]
@@ -83,14 +87,7 @@ namespace SonarAnalyzer.UnitTest.Rules
 
         [TestMethod]
         [TestCategory("Rule")]
-        public void LocksReleasedAllPaths_Mutex_CS() =>
-            Verifier.VerifyAnalyzer(@"TestCases\SymbolicExecution\Roslyn\LocksReleasedAllPaths.Mutex.cs", new SymbolicExecutionRunner(), ParseOptionsHelper.FromCSharp8);
-
-#if NETFRAMEWORK
-        [TestMethod]
-        [TestCategory("Rule")]
-        public void LocksReleasedAllPaths_Mutex_NetFramework_CS() =>
-            Verifier.VerifyAnalyzer(@"TestCases\SymbolicExecution\Roslyn\LocksReleasedAllPaths.Mutex.NetFx.cs", new SymbolicExecutionRunner(), ParseOptionsHelper.FromCSharp8);
-#endif
+        public void LocksReleasedAllPaths_SpinLock_CS() =>
+            Verifier.VerifyAnalyzer(@"TestCases\SymbolicExecution\Roslyn\LocksReleasedAllPaths.SpinLock.cs", new SymbolicExecutionRunner());
     }
 }

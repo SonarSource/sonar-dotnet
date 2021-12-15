@@ -235,6 +235,10 @@ class Program
                     break;
             }
         }
+        else
+        {
+            Monitor.Exit(obj);
+        }
     }
 
     public void Method19()
