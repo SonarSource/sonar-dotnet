@@ -23,7 +23,6 @@ using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.Text;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using SonarAnalyzer.Helpers;
 using SonarAnalyzer.Rules.SymbolicExecution;
 using SonarAnalyzer.UnitTest.MetadataReferences;
 using SonarAnalyzer.UnitTest.TestFramework;
@@ -33,21 +32,25 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class HashesShouldHaveUnpredictableSaltTest
     {
+        private static readonly DiagnosticDescriptor[] OnlyDiagnostics = new[] { HashesShouldHaveUnpredictableSalt.S2053 };
+
         [TestMethod]
-        public void HashesShouldHaveUnpredictableSalt() =>
+        public void HashesShouldHaveUnpredictableSalt_CS() =>
             Verifier.VerifyAnalyzer(
                 @"TestCases\SymbolicExecution\Sonar\HashesShouldHaveUnpredictableSalt.cs",
-                GetAnalyzer(),
+                new SymbolicExecutionRunner(),
                 ParseOptionsHelper.FromCSharp8,
-                MetadataReferenceFacade.SystemSecurityCryptography);
+                MetadataReferenceFacade.SystemSecurityCryptography,
+                onlyDiagnostics: OnlyDiagnostics);
 
         [TestMethod]
         public void HashesShouldHaveUnpredictableSalt_DoesNotRaiseIssuesForTestProject() =>
             Verifier.VerifyNoIssueReportedInTest(
                 @"TestCases\SymbolicExecution\Sonar\HashesShouldHaveUnpredictableSalt.cs",
-                GetAnalyzer(),
+                new SymbolicExecutionRunner(),
                 ParseOptionsHelper.FromCSharp8,
-                MetadataReferenceFacade.SystemSecurityCryptography);
+                MetadataReferenceFacade.SystemSecurityCryptography,
+                onlyDiagnostics: OnlyDiagnostics);
 
 #if NET
 
@@ -55,15 +58,17 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void HashesShouldHaveUnpredictableSalt_CSharp9() =>
             Verifier.VerifyAnalyzerFromCSharp9Console(
                 @"TestCases\SymbolicExecution\Sonar\HashesShouldHaveUnpredictableSalt.CSharp9.cs",
-                GetAnalyzer(),
-                MetadataReferenceFacade.SystemSecurityCryptography);
+                new SymbolicExecutionRunner(),
+                MetadataReferenceFacade.SystemSecurityCryptography,
+                onlyDiagnostics: OnlyDiagnostics);
 
         [TestMethod]
         public void HashesShouldHaveUnpredictableSalt_CSharp10() =>
             Verifier.VerifyAnalyzerFromCSharp10Library(
                 @"TestCases\SymbolicExecution\Sonar\HashesShouldHaveUnpredictableSalt.CSharp10.cs",
-                GetAnalyzer(),
-                MetadataReferenceFacade.SystemSecurityCryptography);
+                new SymbolicExecutionRunner(),
+                MetadataReferenceFacade.SystemSecurityCryptography,
+                onlyDiagnostics: OnlyDiagnostics);
 
 #endif
 
@@ -85,8 +90,5 @@ namespace SonarAnalyzer.UnitTest.Rules
             context1.Equals(context1).Should().BeTrue();
             context1.Equals(context4).Should().BeTrue();
         }
-
-        private static SonarDiagnosticAnalyzer GetAnalyzer() =>
-            new SymbolicExecutionRunner(new HashesShouldHaveUnpredictableSalt());
     }
 }

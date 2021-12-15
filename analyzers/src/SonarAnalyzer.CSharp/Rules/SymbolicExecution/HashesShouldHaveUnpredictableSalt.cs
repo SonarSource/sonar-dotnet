@@ -39,9 +39,9 @@ namespace SonarAnalyzer.Rules.SymbolicExecution
         private const string MakeSaltUnpredictableMessage = "Make this salt unpredictable.";
         private const string MakeThisSaltLongerMessage = "Make this salt at least 16 bytes.";
 
-        private static readonly DiagnosticDescriptor Rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
+        internal static readonly DiagnosticDescriptor S2053 = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
 
-        public IEnumerable<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
+        public IEnumerable<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(S2053);
 
         public ISymbolicExecutionAnalysisContext CreateContext(SonarExplodedGraph explodedGraph, SyntaxNodeAnalysisContext context) =>
             new AnalysisContext(explodedGraph);
@@ -77,7 +77,7 @@ namespace SonarAnalyzer.Rules.SymbolicExecution
             }
 
             protected override Diagnostic CreateDiagnostic(LocationContext location) =>
-                Diagnostic.Create(Rule, location.Location, location.Message);
+                Diagnostic.Create(S2053, location.Location, location.Message);
         }
 
         private sealed class SaltCheck : ExplodedGraphCheck
