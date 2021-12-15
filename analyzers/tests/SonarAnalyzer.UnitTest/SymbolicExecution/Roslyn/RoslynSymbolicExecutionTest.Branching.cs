@@ -19,6 +19,7 @@
  */
 
 using FluentAssertions;
+using Microsoft.CodeAnalysis;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.UnitTest.TestFramework.SymbolicExecution;
 
@@ -108,7 +109,7 @@ else
     Tag(""ElseFirst"", first);
     Tag(""ElseSecond"", second);
 }";
-            var collector = SETestContext.CreateCS(code, new SetTestConstraintCheck()).Collector;
+            var collector = SETestContext.CreateCS(code, new SetTestConstraintCheck()).Validator;
             collector.ValidateTag("IfFirst", x => x.HasConstraint(TestConstraint.First).Should().BeTrue());
             collector.ValidateTag("IfSecond", x => x.HasConstraint(TestConstraint.Second).Should().BeTrue());
             collector.ValidateTag("ElseFirst", x => x.HasConstraint(TestConstraint.First).Should().BeTrue());

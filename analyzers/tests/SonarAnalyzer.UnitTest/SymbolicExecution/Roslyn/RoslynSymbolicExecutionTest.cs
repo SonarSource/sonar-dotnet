@@ -131,7 +131,7 @@ namespace SonarAnalyzer.UnitTest.SymbolicExecution.Roslyn
         [TestMethod]
         public void Execute_PersistConstraints()
         {
-            var collector = SETestContext.CreateCS("var a = true;", new LiteralDummyTestCheck()).Collector;
+            var collector = SETestContext.CreateCS("var a = true;", new LiteralDummyTestCheck()).Validator;
             collector.ValidateOrder(    // Visualize operations
                 "LocalReference: a = true (Implicit)",
                 "Literal: true",
@@ -143,7 +143,7 @@ namespace SonarAnalyzer.UnitTest.SymbolicExecution.Roslyn
         [TestMethod]
         public void Execute_PersistSymbols_InsideBlock()
         {
-            var collector = SETestContext.CreateCS("var first = true; var second = false; first = second;", new SetTestConstraintCheck()).Collector;
+            var collector = SETestContext.CreateCS("var first = true; var second = false; first = second;", new SetTestConstraintCheck()).Validator;
             collector.ValidateOrder(    // Visualize operations
                    "LocalReference: first = true (Implicit)",
                    "Literal: true",
