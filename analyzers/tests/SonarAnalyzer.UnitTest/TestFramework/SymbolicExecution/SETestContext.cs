@@ -26,7 +26,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework.SymbolicExecution
 {
     internal class SETestContext
     {
-        public readonly SymbolicExecutionValidatorCheck Validator = new();
+        public readonly ValidatorTestCheck Validator = new();
 
         public SETestContext(string code, AnalyzerLanguage language, SymbolicCheck[] additionalChecks)
         {

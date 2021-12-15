@@ -117,7 +117,7 @@ else
         }
 
         [TestMethod]
-        public void ExitReached_SimpleFlow()
+        public void EndNotifications_SimpleFlow()
         {
             var validator = SETestContext.CreateCS("var a = true;").Validator;
             validator.ValidateExitReachCount(1);
@@ -125,7 +125,7 @@ else
         }
 
         [TestMethod]
-        public void ExitReached_MultipleBranches()
+        public void EndNotifications_MultipleBranches()
         {
             const string method = @"
 public int Method(bool a)
@@ -141,7 +141,7 @@ public int Method(bool a)
         }
 
         [TestMethod]
-        public void ExitReached_Throw()
+        public void EndNotifications_Throw()
         {
             const string method = @"
 public int Method(bool a)
@@ -162,7 +162,7 @@ public int Method(bool a)
         }
 
         [TestMethod]
-        public void ExitReached_YieldReturn()
+        public void EndNotifications_YieldReturn()
         {
             const string method = @"
 public System.Collections.Generic.IEnumerable<int> Method(bool a)
@@ -178,7 +178,7 @@ public System.Collections.Generic.IEnumerable<int> Method(bool a)
         }
 
         [TestMethod]
-        public void ExitReached_YieldBreak()
+        public void EndNotifications_YieldBreak()
         {
             const string method = @"
 public System.Collections.Generic.IEnumerable<int> Method(bool a)

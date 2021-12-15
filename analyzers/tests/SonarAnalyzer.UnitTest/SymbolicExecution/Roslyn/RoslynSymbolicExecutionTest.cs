@@ -124,7 +124,7 @@ namespace SonarAnalyzer.UnitTest.SymbolicExecution.Roslyn
         public void PostProcess_OperationHasValue()
         {
             var collector = SETestContext.CreateCS("var a = true;").Validator;
-            collector.ValidatePostProcess(3);
+            collector.ValidatePostProcessCount(3);
             collector.ValidateOperationsAreNotNull();
         }
 

@@ -28,7 +28,7 @@ using SonarAnalyzer.UnitTest.Helpers;
 
 namespace SonarAnalyzer.UnitTest.TestFramework.SymbolicExecution
 {
-    internal class SymbolicExecutionValidatorCheck : SymbolicCheck
+    internal class ValidatorTestCheck : SymbolicCheck
     {
         private readonly List<SymbolicContext> postProcessed = new();
         private readonly List<(string Name, SymbolicContext Context)> tags = new();
@@ -55,7 +55,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework.SymbolicExecution
             return context.State;
         }
 
-        public override void ExecutionCompleted() => ++executionCompletedCount;
+        public override void ExecutionCompleted() => executionCompletedCount++;
 
         public void ValidateOrder(params string[] expected) =>
             postProcessed.Select(x => TestHelper.Serialize(x.Operation)).Should().OnlyContainInOrder(expected);
@@ -64,7 +64,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework.SymbolicExecution
             tags.Select(x => x.Name).Should().BeEquivalentTo(expected);
 
         public void Validate(string operation, Action<SymbolicContext> action) =>
-            action(PostProcessedContext(operation));
+            action(postProcessed.Single(x => TestHelper.Serialize(x.Operation) == operation));
 
         public void ValidateTag(string tag, Action<SymbolicValue> action)
         {
@@ -82,18 +82,10 @@ namespace SonarAnalyzer.UnitTest.TestFramework.SymbolicExecution
         public void ValidateExecutionCompleted() =>
             executionCompletedCount.Should().Be(1);
 
-        public void ValidatePostProcess(int expected) =>
+        public void ValidatePostProcessCount(int expected) =>
             postProcessed.Should().HaveCount(expected);
 
-        public void ValidateOperationsAreNotNull()
-        {
-            foreach (var context in postProcessed)
-            {
-                context.State[context.Operation].Should().NotBeNull();
-            }
-        }
-
-        private SymbolicContext PostProcessedContext(string operation) =>
-            postProcessed.Single(x => TestHelper.Serialize(x.Operation) == operation);
+        public void ValidateOperationsAreNotNull() =>
+            postProcessed.Should().OnlyContain(x => x.State[x.Operation] != null);
     }
 }
