@@ -18,8 +18,8 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using Microsoft.CodeAnalysis;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using SonarAnalyzer.Helpers;
 using SonarAnalyzer.Rules.CSharp;
 using SonarAnalyzer.Rules.SymbolicExecution;
 using SonarAnalyzer.UnitTest.MetadataReferences;
@@ -30,6 +30,8 @@ namespace SonarAnalyzer.UnitTest.Rules.SymbolicExecution
     [TestClass]
     public class NullPointerDereferenceTest
     {
+        private static readonly DiagnosticDescriptor[] OnlyDiagnostics = new[] { NullPointerDereference.S2259 };
+
         [TestMethod]
         public void NullPointerDereference_ValidatedNotNull() =>
             Verifier.VerifyCSharpAnalyzer(@"
@@ -58,46 +60,58 @@ public static class Utils
         return value.ToUpper(); // Compliant
     }
 }
-", GetAnalyzer());
+", new SymbolicExecutionRunner(), onlyDiagnostics: OnlyDiagnostics);
 
         [TestMethod]
-        public void NullPointerDereference() =>
-            Verifier.VerifyNonConcurrentAnalyzer(@"TestCases\SymbolicExecution\Sonar\NullPointerDereference.cs", GetAnalyzer());
+        public void NullPointerDereference_CS() =>
+            Verifier.VerifyNonConcurrentAnalyzer(
+                @"TestCases\SymbolicExecution\Sonar\NullPointerDereference.cs",
+                new SymbolicExecutionRunner(),
+                onlyDiagnostics: OnlyDiagnostics);
 
         [TestMethod]
         public void NullPointerDereference_DoesNotRaiseIssuesForTestProject() =>
-            Verifier.VerifyNoIssueReportedInTest(@"TestCases\SymbolicExecution\Sonar\NullPointerDereference.cs", GetAnalyzer());
+            Verifier.VerifyNoIssueReportedInTest(
+                @"TestCases\SymbolicExecution\Sonar\NullPointerDereference.cs",
+                new SymbolicExecutionRunner(),
+                onlyDiagnostics: OnlyDiagnostics);
 
         [TestMethod]
         public void NullPointerDereference_CSharp6() =>
             Verifier.VerifyAnalyzer(@"TestCases\SymbolicExecution\Sonar\NullPointerDereference.CSharp6.cs",
-                GetAnalyzer(),
-                ParseOptionsHelper.FromCSharp6);
+                new SymbolicExecutionRunner(),
+                ParseOptionsHelper.FromCSharp6,
+                onlyDiagnostics: OnlyDiagnostics);
 
         [TestMethod]
         public void NullPointerDereference_CSharp7() =>
             Verifier.VerifyAnalyzer(@"TestCases\SymbolicExecution\Sonar\NullPointerDereference.CSharp7.cs",
-                GetAnalyzer(),
-                ParseOptionsHelper.FromCSharp7);
+                new SymbolicExecutionRunner(),
+                ParseOptionsHelper.FromCSharp7,
+                onlyDiagnostics: OnlyDiagnostics);
 
         [TestMethod]
         public void NullPointerDereference_CSharp8() =>
             Verifier.VerifyAnalyzer(@"TestCases\SymbolicExecution\Sonar\NullPointerDereference.CSharp8.cs",
-                GetAnalyzer(),
+                new SymbolicExecutionRunner(),
                 ParseOptionsHelper.FromCSharp8,
-                MetadataReferenceFacade.NETStandard21);
+                MetadataReferenceFacade.NETStandard21,
+                onlyDiagnostics: OnlyDiagnostics);
 
 #if NET
         [TestMethod]
         public void NullPointerDereference_CSharp9() =>
-            Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\SymbolicExecution\Sonar\NullPointerDereference.CSharp9.cs", GetAnalyzer());
+            Verifier.VerifyAnalyzerFromCSharp9Console(
+                @"TestCases\SymbolicExecution\Sonar\NullPointerDereference.CSharp9.cs",
+                new SymbolicExecutionRunner(),
+                onlyDiagnostics: OnlyDiagnostics);
 
         [TestMethod]
         public void NullPointerDereference_CSharp10() =>
-            Verifier.VerifyAnalyzerFromCSharp10Library(@"TestCases\SymbolicExecution\Sonar\NullPointerDereference.CSharp10.cs", GetAnalyzer());
+            Verifier.VerifyAnalyzerFromCSharp10Library(
+                @"TestCases\SymbolicExecution\Sonar\NullPointerDereference.CSharp10.cs",
+                new SymbolicExecutionRunner(),
+                onlyDiagnostics: OnlyDiagnostics);
 #endif
-
-        private static SonarDiagnosticAnalyzer GetAnalyzer() =>
-            new SymbolicExecutionRunner(new NullPointerDereference());
     }
 }
