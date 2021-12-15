@@ -40,10 +40,9 @@ namespace SonarAnalyzer.Rules.CSharp
         private const string RestrictTypesMessage = "Restrict types of objects allowed to be deserialized.";
         private const string VerifyMacMessage = "Serialized data signature (MAC) should be verified.";
 
-        private static readonly DiagnosticDescriptor Rule =
-            DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
+        internal static readonly DiagnosticDescriptor S5773 = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
 
-        public IEnumerable<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(Rule);
+        public IEnumerable<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(S5773);
 
         public ISymbolicExecutionAnalysisContext CreateContext(SonarExplodedGraph explodedGraph, SyntaxNodeAnalysisContext context) =>
             new AnalysisContext(explodedGraph);
@@ -58,7 +57,7 @@ namespace SonarAnalyzer.Rules.CSharp
             public bool SupportsPartialResults => true;
 
             public IEnumerable<Diagnostic> GetDiagnostics() =>
-                locations.Select(location => Diagnostic.Create(Rule, location.Primary,  location.SecondaryLocations, location.Message));
+                locations.Select(location => Diagnostic.Create(S5773, location.Primary,  location.SecondaryLocations, location.Message));
 
             public void Dispose()
             {
