@@ -39,10 +39,9 @@ namespace SonarAnalyzer.Rules.CSharp
         private const string Constructor = "constructor to avoid using members of parameter '{0}' because it could be null";
         private const string Method = "method to add validation of parameter '{0}' before using it";
 
-        private static readonly DiagnosticDescriptor Rule =
-            DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
+        public static readonly DiagnosticDescriptor S3900 = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
 
-        public IEnumerable<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(Rule);
+        public IEnumerable<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(S3900);
 
         public ISymbolicExecutionAnalysisContext CreateContext(SonarExplodedGraph explodedGraph, SyntaxNodeAnalysisContext context) =>
             new AnalysisContext(explodedGraph, context);
@@ -62,7 +61,7 @@ namespace SonarAnalyzer.Rules.CSharp
         {
             public bool SupportsPartialResults => true;
 
-            private readonly HashSet<IdentifierNameSyntax> identifiers = new HashSet<IdentifierNameSyntax>();
+            private readonly HashSet<IdentifierNameSyntax> identifiers = new();
             private readonly NullPointerDereference.NullPointerCheck nullPointerCheck;
             private readonly SyntaxNodeAnalysisContext syntaxNodeAnalysisContext;
 
@@ -79,7 +78,7 @@ namespace SonarAnalyzer.Rules.CSharp
             }
 
             public IEnumerable<Diagnostic> GetDiagnostics() =>
-                identifiers.Select(identifier => Diagnostic.Create(Rule, identifier.GetLocation(), GetMessage(identifier)));
+                identifiers.Select(identifier => Diagnostic.Create(S3900, identifier.GetLocation(), GetMessage(identifier)));
 
             public void Dispose()
             {
