@@ -37,27 +37,38 @@ namespace SonarAnalyzer.Rules.CSharp
 {
     internal sealed class ConditionEvaluatesToConstant : ISymbolicExecutionAnalyzer
     {
-        private static readonly ISet<SyntaxKind> omittedSyntaxKinds = new HashSet<SyntaxKind>
+        internal const string S2583DiagnosticId = "S2583"; // Bug
+        private const string S2583MessageFormatBool = "Change this condition so that it does not always evaluate to '{0}'; some subsequent code is never executed.";
+        private const string S2583MessageNotNull = "Change this expression which always evaluates to 'not null'; some subsequent code is never executed.";
+
+        internal const string S2589DiagnosticId = "S2589"; // Code smell
+        private const string S2589MessageFormatBool = "Change this condition so that it does not always evaluate to '{0}'.";
+        private const string S2589MessageNull = "Change this expression which always evaluates to 'null'.";
+
+        private static readonly DiagnosticDescriptor S2583 = DiagnosticDescriptorBuilder.GetDescriptor(S2583DiagnosticId, "{0}", RspecStrings.ResourceManager);
+        private static readonly DiagnosticDescriptor S2589 = DiagnosticDescriptorBuilder.GetDescriptor(S2589DiagnosticId, "{0}", RspecStrings.ResourceManager);
+
+        private static readonly ISet<SyntaxKind> OmittedSyntaxKinds = new HashSet<SyntaxKind>
         {
             SyntaxKind.LogicalAndExpression,
             SyntaxKind.LogicalOrExpression
         };
 
-        private static readonly ISet<SyntaxKind> loopBreakingStatements = new HashSet<SyntaxKind>
+        private static readonly ISet<SyntaxKind> LoopBreakingStatements = new HashSet<SyntaxKind>
         {
             SyntaxKind.BreakStatement,
             SyntaxKind.ThrowStatement,
             SyntaxKind.ReturnStatement
         };
 
-        private static readonly ISet<SyntaxKind> loopStatements = new HashSet<SyntaxKind>
+        private static readonly ISet<SyntaxKind> LoopStatements = new HashSet<SyntaxKind>
         {
             SyntaxKind.WhileStatement,
             SyntaxKind.DoStatement,
             SyntaxKind.ForStatement
         };
 
-        private static readonly ISet<SyntaxKind> conditionalStatements = new HashSet<SyntaxKind>
+        private static readonly ISet<SyntaxKind> ConditionalStatements = new HashSet<SyntaxKind>
         {
             SyntaxKind.IfStatement,
             SyntaxKind.WhileStatement,
@@ -66,7 +77,7 @@ namespace SonarAnalyzer.Rules.CSharp
             SyntaxKind.CoalesceExpression
         };
 
-        private static readonly ISet<SyntaxKind> coalesceExpressions = new HashSet<SyntaxKind>
+        private static readonly ISet<SyntaxKind> CoalesceExpressions = new HashSet<SyntaxKind>
         {
             SyntaxKind.CoalesceExpression,
             SyntaxKindEx.CoalesceAssignmentExpression
@@ -76,32 +87,19 @@ namespace SonarAnalyzer.Rules.CSharp
         // this problem we would need to link all CFG blocks for catch clauses to all statements within
         // the try block. This is unreasonable because it will generate tons of paths, thus making
         // the debugging a hell and probably slowing down the performance.
-        private static readonly ISet<SyntaxKind> ignoredBlocks = new HashSet<SyntaxKind>
+        private static readonly ISet<SyntaxKind> IgnoredBlocks = new HashSet<SyntaxKind>
         {
             SyntaxKind.FinallyClause,
             SyntaxKind.CatchClause,
         };
 
-        private static readonly ISet<SyntaxKind> booleanLiterals = new HashSet<SyntaxKind>
+        private static readonly ISet<SyntaxKind> BooleanLiterals = new HashSet<SyntaxKind>
         {
             SyntaxKind.TrueLiteralExpression,
             SyntaxKind.FalseLiteralExpression
         };
 
-        private const string MessageFormat = "{0}";
-
-        internal const string S2583DiagnosticId = "S2583"; // Bug
-        private const string S2583MessageFormatBool = "Change this condition so that it does not always evaluate to '{0}'; some subsequent code is never executed.";
-        private const string S2583MessageNotNull = "Change this expression which always evaluates to 'not null'; some subsequent code is never executed.";
-
-        internal const string S2589DiagnosticId = "S2589"; // Code smell
-        private const string S2589MessageFormatBool = "Change this condition so that it does not always evaluate to '{0}'.";
-        private const string S2589MessageNull = "Change this expression which always evaluates to 'null'.";
-
-        private static readonly DiagnosticDescriptor s2583 = DiagnosticDescriptorBuilder.GetDescriptor(S2583DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
-        private static readonly DiagnosticDescriptor s2589 = DiagnosticDescriptorBuilder.GetDescriptor(S2589DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
-
-        public IEnumerable<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(s2583, s2589);
+        public IEnumerable<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(S2583, S2589);
 
         public ISymbolicExecutionAnalysisContext CreateContext(SonarExplodedGraph explodedGraph, SyntaxNodeAnalysisContext context) =>
             new AnalysisContext(explodedGraph, context);
@@ -151,12 +149,12 @@ namespace SonarAnalyzer.Rules.CSharp
                         .Except(isUnknown)
                         .Except(isNotNull)
                         .Where(x => !IsMuted(x) && !IsInsideCatchOrFinallyBlock(x))
-                        .Select(x => Diagnostic.Create(s2589, x.GetLocation(), S2589MessageNull)))
+                        .Select(x => Diagnostic.Create(S2589, x.GetLocation(), S2589MessageNull)))
                     .Union(isNotNull
                         .Except(isUnknown)
                         .Except(isNull)
                         .Where(x => !IsMuted(x) && !IsInsideCatchOrFinallyBlock(x))
-                        .Select(x => Diagnostic.Create(s2583, x.GetLocation(), S2583MessageNotNull)));
+                        .Select(x => Diagnostic.Create(S2583, x.GetLocation(), S2583MessageNotNull)));
 
                 bool IsMuted(SyntaxNode node) =>
                     new MutedSyntaxWalker(context.SemanticModel, node).IsMuted();
@@ -182,7 +180,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 jumpBlock.JumpNode.IsAnyKind(SyntaxKind.YieldReturnStatement, SyntaxKind.YieldBreakStatement);
 
             private static bool IsInsideCatchOrFinallyBlock(SyntaxNode c) =>
-                c.Ancestors().Any(n => n.IsAnyKind(ignoredBlocks));
+                c.Ancestors().Any(n => n.IsAnyKind(IgnoredBlocks));
 
             private static bool IsConditionOfLoopWithBreak(SyntaxNode constantExpression)
             {
@@ -206,18 +204,18 @@ namespace SonarAnalyzer.Rules.CSharp
             }
 
             private static SyntaxNode GetParentLoop(SyntaxNode syntaxNode) =>
-                syntaxNode.Ancestors().First(a => a.IsAnyKind(loopStatements));
+                syntaxNode.Ancestors().First(a => a.IsAnyKind(LoopStatements));
 
             private static bool IsLoopBreakingStatement(SyntaxNode syntaxNode) =>
-                syntaxNode.IsAnyKind(loopBreakingStatements);
+                syntaxNode.IsAnyKind(LoopBreakingStatements);
 
             private static Diagnostic GetNodeDiagnostics(SyntaxNode constantNode, bool constantValue)
             {
                 var unreachableLocations = GetUnreachableLocations(constantNode, constantValue).ToList();
                 var constantText = constantValue.ToString().ToLowerInvariant();
                 return unreachableLocations.Count > 0
-                    ? Diagnostic.Create(s2583, constantNode.GetLocation(), messageArgs: string.Format(S2583MessageFormatBool, constantText), additionalLocations: unreachableLocations)
-                    : Diagnostic.Create(s2589, constantNode.GetLocation(), messageArgs: string.Format(S2589MessageFormatBool, constantText));
+                    ? Diagnostic.Create(S2583, constantNode.GetLocation(), messageArgs: string.Format(S2583MessageFormatBool, constantText), additionalLocations: unreachableLocations)
+                    : Diagnostic.Create(S2589, constantNode.GetLocation(), messageArgs: string.Format(S2589MessageFormatBool, constantText));
             }
 
             private static IEnumerable<Location> GetUnreachableLocations(SyntaxNode constantExpression, bool constantValue)
@@ -308,7 +306,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 var condition = (args.Condition as ExpressionSyntax).RemoveParentheses() ?? args.Condition;
 
                 if (condition == null ||
-                    omittedSyntaxKinds.Contains(condition.Kind()) ||
+                    OmittedSyntaxKinds.Contains(condition.Kind()) ||
                     IsConstantOrLiteralCondition(condition, semanticModel))
                 {
                     return;
@@ -326,7 +324,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
             private static bool IsConstantOrLiteralCondition(SyntaxNode condition, SemanticModel semanticModel)
             {
-                if (!condition.Parent.IsAnyKind(conditionalStatements))
+                if (!condition.Parent.IsAnyKind(ConditionalStatements))
                 {
                     return false;
                 }
@@ -347,7 +345,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
                 static bool IsBooleanLiteral(SyntaxNode syntaxNode)
                 {
-                    return syntaxNode.IsAnyKind(booleanLiterals);
+                    return syntaxNode.IsAnyKind(BooleanLiterals);
                 }
             }
 
@@ -390,7 +388,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 }
 
                 if (args.ProgramPoint.Block is BinaryBranchBlock bbb
-                    && bbb.BranchingNode.IsAnyKind(coalesceExpressions)
+                    && bbb.BranchingNode.IsAnyKind(CoalesceExpressions)
                     && args.ProgramPoint.Offset == args.ProgramPoint.Block.Instructions.Count - 1 //Last instruction of BBB holds ??= left operand value
                     && args.ProgramPoint.CurrentInstruction is ExpressionSyntax left)
                 {
