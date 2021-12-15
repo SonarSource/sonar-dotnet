@@ -45,8 +45,8 @@ namespace SonarAnalyzer.Rules.CSharp
         private const string S2589MessageFormatBool = "Change this condition so that it does not always evaluate to '{0}'.";
         private const string S2589MessageNull = "Change this expression which always evaluates to 'null'.";
 
-        private static readonly DiagnosticDescriptor S2583 = DiagnosticDescriptorBuilder.GetDescriptor(S2583DiagnosticId, "{0}", RspecStrings.ResourceManager);
-        private static readonly DiagnosticDescriptor S2589 = DiagnosticDescriptorBuilder.GetDescriptor(S2589DiagnosticId, "{0}", RspecStrings.ResourceManager);
+        internal static readonly DiagnosticDescriptor S2583 = DiagnosticDescriptorBuilder.GetDescriptor(S2583DiagnosticId, "{0}", RspecStrings.ResourceManager);
+        internal static readonly DiagnosticDescriptor S2589 = DiagnosticDescriptorBuilder.GetDescriptor(S2589DiagnosticId, "{0}", RspecStrings.ResourceManager);
 
         private static readonly ISet<SyntaxKind> OmittedSyntaxKinds = new HashSet<SyntaxKind>
         {
