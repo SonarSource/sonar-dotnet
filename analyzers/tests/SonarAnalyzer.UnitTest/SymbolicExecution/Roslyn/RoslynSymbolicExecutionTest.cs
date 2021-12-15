@@ -47,7 +47,7 @@ namespace SonarAnalyzer.UnitTest.SymbolicExecution.Roslyn
         public void SequentialInput_CS()
         {
             var context = SETestContext.CreateCS("var a = true; var b = false; b = !b; a = (b);");
-            context.Collector.ValidateOrder(
+            context.Validator.ValidateOrder(
                 "LocalReference: a = true (Implicit)",
                 "Literal: true",
                 "SimpleAssignment: a = true (Implicit)",
@@ -69,7 +69,7 @@ namespace SonarAnalyzer.UnitTest.SymbolicExecution.Roslyn
         public void SequentialInput_VB()
         {
             var context = SETestContext.CreateVB("Dim A As Boolean = True, B As Boolean = False : B = Not B : A = (B)");
-            context.Collector.ValidateOrder(
+            context.Validator.ValidateOrder(
                 "LocalReference: A (Implicit)",
                 "Literal: True",
                 "SimpleAssignment: A As Boolean = True (Implicit)",
@@ -93,7 +93,7 @@ namespace SonarAnalyzer.UnitTest.SymbolicExecution.Roslyn
         {
             var stopper = new PreProcessTestCheck(x => x.Operation.Instance.Kind == OperationKind.Unary ? null : x.State);
             var context = SETestContext.CreateCS("var a = true; var b = false; b = !b; a = (b);", stopper);
-            context.Collector.ValidateOrder(
+            context.Validator.ValidateOrder(
                 "LocalReference: a = true (Implicit)",
                 "Literal: true",
                 "SimpleAssignment: a = true (Implicit)",
@@ -109,7 +109,7 @@ namespace SonarAnalyzer.UnitTest.SymbolicExecution.Roslyn
         {
             var stopper = new PostProcessTestCheck(x => x.Operation.Instance.Kind == OperationKind.Unary ? null : x.State);
             var context = SETestContext.CreateCS("var a = true; var b = false; b = !b; a = (b);", stopper);
-            context.Collector.ValidateOrder(
+            context.Validator.ValidateOrder(
                 "LocalReference: a = true (Implicit)",
                 "Literal: true",
                 "SimpleAssignment: a = true (Implicit)",
@@ -123,12 +123,9 @@ namespace SonarAnalyzer.UnitTest.SymbolicExecution.Roslyn
         [TestMethod]
         public void PostProcess_OperationHasValue()
         {
-            var collector = SETestContext.CreateCS("var a = true;").Collector;
-            collector.PostProcessed.Should().HaveCount(3);
-            foreach (var context in collector.PostProcessed)
-            {
-                context.State[context.Operation].Should().NotBeNull();
-            }
+            var collector = SETestContext.CreateCS("var a = true;").Validator;
+            collector.ValidatePostProcess(3);
+            collector.ValidateOperationsAreNotNull();
         }
 
         [TestMethod]
@@ -142,7 +139,7 @@ namespace SonarAnalyzer.UnitTest.SymbolicExecution.Roslyn
                     }
                     return x.State;
                 });
-            var collector = SETestContext.CreateCS("var a = true;", setter).Collector;
+            var collector = SETestContext.CreateCS("var a = true;", setter).Validator;
             collector.ValidateOrder(    // Visualize operations
                 "LocalReference: a = true (Implicit)",
                 "Literal: true",
@@ -154,7 +151,7 @@ namespace SonarAnalyzer.UnitTest.SymbolicExecution.Roslyn
         [TestMethod]
         public void Execute_PersistSymbols_InsideBlock()
         {
-            var collector = SETestContext.CreateCS("var first = true; var second = false; first = second;", new SetTestConstraintCheck()).Collector;
+            var collector = SETestContext.CreateCS("var first = true; var second = false; first = second;", new SetTestConstraintCheck()).Validator;
             collector.ValidateOrder(    // Visualize operations
                    "LocalReference: first = true (Implicit)",
                    "Literal: true",

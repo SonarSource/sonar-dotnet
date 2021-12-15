@@ -54,7 +54,7 @@ else
     Tag(""Else"");
 }
 Tag(""End"");";
-            SETestContext.CreateCS(code).Collector.ValidateTagOrder(
+            SETestContext.CreateCS(code).Validator.ValidateTagOrder(
                 "Entry",
                 "BeforeTry",
                 "InTry",
@@ -83,7 +83,7 @@ Else
     Tag(""Else"")
 End If
 Tag(""End"")";
-            SETestContext.CreateVB(code).Collector.ValidateTagOrder(
+            SETestContext.CreateVB(code).Validator.ValidateTagOrder(
                 "Entry",
                 "BeforeTry",
                 "InTry",
@@ -109,7 +109,7 @@ else
     Tag(""ElseFirst"", first);
     Tag(""ElseSecond"", second);
 }";
-            var collector = SETestContext.CreateCS(code, new SetTestConstraintCheck()).Collector;
+            var collector = SETestContext.CreateCS(code, new SetTestConstraintCheck()).Validator;
             collector.ValidateTag("IfFirst", x => x.HasConstraint(TestConstraint.First).Should().BeTrue());
             collector.ValidateTag("IfSecond", x => x.HasConstraint(TestConstraint.Second).Should().BeTrue());
             collector.ValidateTag("ElseFirst", x => x.HasConstraint(TestConstraint.First).Should().BeTrue());
@@ -118,7 +118,7 @@ else
 
         [TestMethod]
         public void ExitReached_SimpleFlow() =>
-            SETestContext.CreateCS("var a = true;").Collector.ValidateExitReachCount(1);
+            SETestContext.CreateCS("var a = true;").Validator.ValidateExitReachCount(1);
 
         [TestMethod]
         public void ExitReached_MultipleBranches()
@@ -131,7 +131,7 @@ public int Method(bool a)
     else
         return 2;
 }";
-            SETestContext.CreateCSMethod(method).Collector.ValidateExitReachCount(1);
+            SETestContext.CreateCSMethod(method).Validator.ValidateExitReachCount(1);
         }
 
         [TestMethod]
@@ -150,7 +150,7 @@ public int Method(bool a)
                x.Operation.Instance.Kind.Should().NotBe(OperationKind.Literal, "we don't support multiple branches yet");
                return x.State;
             });
-            SETestContext.CreateCSMethod(method, returnNotReached).Collector.ValidateExitReachCount(1);
+            SETestContext.CreateCSMethod(method, returnNotReached).Validator.ValidateExitReachCount(1);
         }
 
         [TestMethod]
@@ -164,7 +164,7 @@ public System.Collections.Generic.IEnumerable<int> Method(bool a)
 
     yield return 2;
 }";
-            SETestContext.CreateCSMethod(method).Collector.ValidateExitReachCount(1);
+            SETestContext.CreateCSMethod(method).Validator.ValidateExitReachCount(1);
         }
 
         [TestMethod]
@@ -178,7 +178,7 @@ public System.Collections.Generic.IEnumerable<int> Method(bool a)
 
     var b = a;
 }";
-            SETestContext.CreateCSMethod(method).Collector.ValidateExitReachCount(1);
+            SETestContext.CreateCSMethod(method).Validator.ValidateExitReachCount(1);
         }
     }
 }

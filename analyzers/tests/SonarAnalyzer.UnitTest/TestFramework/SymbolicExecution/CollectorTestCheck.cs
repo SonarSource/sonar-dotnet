@@ -28,15 +28,15 @@ using SonarAnalyzer.UnitTest.Helpers;
 
 namespace SonarAnalyzer.UnitTest.TestFramework.SymbolicExecution
 {
-    internal class CollectorTestCheck : SymbolicCheck
+    internal class SymbolicExecutionValidatorCheck : SymbolicCheck
     {
-        public readonly List<SymbolicContext> PostProcessed = new();
+        private readonly List<SymbolicContext> postProcessed = new();
         private readonly List<(string Name, SymbolicContext Context)> tags = new();
         private int exitReachedCount;
 
         public override ProgramState PostProcess(SymbolicContext context)
         {
-            PostProcessed.Add(context);
+            postProcessed.Add(context);
             if (context.Operation.Instance is IInvocationOperation invocation && invocation.TargetMethod.Name == "Tag")
             {
                 var tagName = invocation.Arguments.First().Value.ConstantValue;
@@ -55,16 +55,13 @@ namespace SonarAnalyzer.UnitTest.TestFramework.SymbolicExecution
         }
 
         public void ValidateOrder(params string[] expected) =>
-            PostProcessed.Select(x => TestHelper.Serialize(x.Operation)).Should().OnlyContainInOrder(expected);
+            postProcessed.Select(x => TestHelper.Serialize(x.Operation)).Should().OnlyContainInOrder(expected);
 
         public void ValidateTagOrder(params string[] expected) =>
             tags.Select(x => x.Name).Should().BeEquivalentTo(expected);
 
         public void Validate(string operation, Action<SymbolicContext> action) =>
             action(PostProcessedContext(operation));
-
-        public SymbolicContext PostProcessedContext(string operation) =>
-            PostProcessed.Single(x => TestHelper.Serialize(x.Operation) == operation);
 
         public void ValidateTag(string tag, Action<SymbolicValue> action)
         {
@@ -78,5 +75,19 @@ namespace SonarAnalyzer.UnitTest.TestFramework.SymbolicExecution
 
         public void ValidateExitReachCount(int expected) =>
             exitReachedCount.Should().Be(expected);
+
+        public void ValidatePostProcess(int expected) =>
+            postProcessed.Should().HaveCount(expected);
+
+        public void ValidateOperationsAreNotNull()
+        {
+            foreach (var context in postProcessed)
+            {
+                context.State[context.Operation].Should().NotBeNull();
+            }
+        }
+
+        private SymbolicContext PostProcessedContext(string operation) =>
+            postProcessed.Single(x => TestHelper.Serialize(x.Operation) == operation);
     }
 }
