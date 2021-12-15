@@ -78,7 +78,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework.SymbolicExecution
             action(value);
         }
 
-        private ISymbol SymbolValue(IOperation operation) =>
+        private static ISymbol SymbolValue(IOperation operation) =>
             operation switch
             {
                 var _ when IParameterReferenceOperationWrapper.IsInstance(operation) => operation.TrackedSymbol(),
