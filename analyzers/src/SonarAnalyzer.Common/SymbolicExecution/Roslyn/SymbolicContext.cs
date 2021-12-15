@@ -33,8 +33,9 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
         public SymbolicContext(SymbolicValueCounter symbolicValueCounter, IOperationWrapperSonar operation, ProgramState state)
         {
             this.symbolicValueCounter = symbolicValueCounter ?? throw new ArgumentNullException(nameof(symbolicValueCounter));
-            Operation = operation ?? throw new ArgumentNullException(nameof(operation));
             State = state ?? throw new ArgumentNullException(nameof(state));
+
+            Operation = operation; // Operation can be null for the branch nodes.
         }
 
         public SymbolicValue CreateSymbolicValue() =>

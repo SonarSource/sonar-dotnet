@@ -20,10 +20,8 @@
 
 using FluentAssertions;
 using Microsoft.CodeAnalysis;
-using Microsoft.CodeAnalysis.Operations;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.UnitTest.TestFramework.SymbolicExecution;
-using StyleCop.Analyzers.Lightup;
 
 namespace SonarAnalyzer.UnitTest.SymbolicExecution.Roslyn
 {
@@ -116,6 +114,71 @@ else
             collector.ValidateTag("IfSecond", x => x.HasConstraint(TestConstraint.Second).Should().BeTrue());
             collector.ValidateTag("ElseFirst", x => x.HasConstraint(TestConstraint.First).Should().BeTrue());
             collector.ValidateTag("ElseSecond", x => x.HasConstraint(TestConstraint.Second).Should().BeTrue());
+        }
+
+        [TestMethod]
+        public void ExitReached_SimpleFlow() =>
+            SETestContext.CreateCS("var a = true;").Collector.ValidateExitReachCount(1);
+
+        [TestMethod]
+        public void ExitReached_MultipleBranches()
+        {
+            const string method = @"
+public int Method(bool a)
+{
+    if (a)
+        return 1;
+    else
+        return 2;
+}";
+            SETestContext.CreateCSMethod(method).Collector.ValidateExitReachCount(1);
+        }
+
+        [TestMethod]
+        public void ExitReached_Throw()
+        {
+            const string method = @"
+public int Method(bool a)
+{
+    if (a)
+        throw new System.NullReferenceException();
+    else
+        return 2;
+}";
+            var returnNotReached = new PreProcessTestCheck(x =>
+                                                           {
+                                                               x.Operation.Instance.Kind.Should().NotBe(OperationKind.Literal, "we don't support multiple branches yet");
+                                                               return x.State;
+                                                           });
+            SETestContext.CreateCSMethod(method, returnNotReached).Collector.ValidateExitReachCount(1);
+        }
+
+        [TestMethod]
+        public void ExitReached_YieldReturn()
+        {
+            const string method = @"
+public System.Collections.Generic.IEnumerable<int> Method(bool a)
+{
+    if (a)
+        yield return 1;
+
+    yield return 2;
+}";
+            SETestContext.CreateCSMethod(method).Collector.ValidateExitReachCount(1);
+        }
+
+        [TestMethod]
+        public void ExitReached_YieldBreak()
+        {
+            const string method = @"
+public System.Collections.Generic.IEnumerable<int> Method(bool a)
+{
+    if (a)
+        yield break;
+
+    var b = a;
+}";
+            SETestContext.CreateCSMethod(method).Collector.ValidateExitReachCount(1);
         }
     }
 }

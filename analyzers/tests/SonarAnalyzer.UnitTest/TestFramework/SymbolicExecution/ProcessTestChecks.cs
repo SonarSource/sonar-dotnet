@@ -18,7 +18,6 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System;
 using SonarAnalyzer.SymbolicExecution.Roslyn;
 using ProcessFunc = System.Func<SonarAnalyzer.SymbolicExecution.Roslyn.SymbolicContext, SonarAnalyzer.SymbolicExecution.Roslyn.ProgramState>;
 
@@ -42,15 +41,5 @@ namespace SonarAnalyzer.UnitTest.TestFramework.SymbolicExecution
             this.postProcess = postProcess;
 
         public override ProgramState PostProcess(SymbolicContext context) => postProcess(context);
-    }
-
-    internal class ExitReachedTestCheck : SymbolicCheck
-    {
-        private readonly Func<ProgramState, ProgramState> completed;
-
-        public ExitReachedTestCheck(Func<ProgramState, ProgramState> completed) =>
-            this.completed = completed;
-
-        public override ProgramState ExitReached(ProgramState state) => completed(state);
     }
 }

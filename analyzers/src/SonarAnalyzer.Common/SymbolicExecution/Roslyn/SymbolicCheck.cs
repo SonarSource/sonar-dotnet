@@ -31,6 +31,6 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
 
         public virtual ProgramState PostProcess(SymbolicContext context) => context.State;
 
-        public virtual ProgramState ExitReached(ProgramState state) => state;
+        public virtual ProgramState ExitReached(SymbolicContext context) => context.State;
     }
 }

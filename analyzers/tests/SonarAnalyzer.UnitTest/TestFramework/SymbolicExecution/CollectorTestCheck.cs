@@ -33,6 +33,8 @@ namespace SonarAnalyzer.UnitTest.TestFramework.SymbolicExecution
         public readonly List<SymbolicContext> PostProcessed = new();
         private readonly List<(string Name, SymbolicContext Context)> tags = new();
 
+        private int exitReachedCount;
+
         public override ProgramState PostProcess(SymbolicContext context)
         {
             PostProcessed.Add(context);
@@ -44,6 +46,12 @@ namespace SonarAnalyzer.UnitTest.TestFramework.SymbolicExecution
                 tags.Any(x => x.Name == name).Should().BeFalse("tags should be unique"); // ToDo: We'll need to redesign this to graph paths for complex branching
                 tags.Add((name, context));
             }
+            return context.State;
+        }
+
+        public override ProgramState ExitReached(SymbolicContext context)
+        {
+            exitReachedCount++;
             return context.State;
         }
 
@@ -68,5 +76,8 @@ namespace SonarAnalyzer.UnitTest.TestFramework.SymbolicExecution
             var value = context.State[symbol];
             action(value);
         }
+
+        public void ValidateExitReachCount(int expected) =>
+            exitReachedCount.Should().Be(expected);
     }
 }

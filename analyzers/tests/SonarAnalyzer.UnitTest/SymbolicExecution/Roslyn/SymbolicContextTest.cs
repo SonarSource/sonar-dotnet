@@ -36,9 +36,12 @@ namespace SonarAnalyzer.UnitTest.SymbolicExecution.Roslyn
             var operation = CreateOperation();
 
             ((Func<SymbolicContext>)(() => new SymbolicContext(null, operation, ProgramState.Empty))).Should().Throw<ArgumentNullException>().And.ParamName.Should().Be("symbolicValueCounter");
-            ((Func<SymbolicContext>)(() => new SymbolicContext(counter, null, ProgramState.Empty))).Should().Throw<ArgumentNullException>().And.ParamName.Should().Be("operation");
             ((Func<SymbolicContext>)(() => new SymbolicContext(counter, operation, null))).Should().Throw<ArgumentNullException>().And.ParamName.Should().Be("state");
         }
+
+        [TestMethod]
+        public void NullOperation_SetsOperationToNull() =>
+            new SymbolicContext(new SymbolicValueCounter(), null, ProgramState.Empty).Operation.Should().Be(null);
 
         [TestMethod]
         public void PropertiesArePersisted()
