@@ -29,8 +29,8 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
     {
         private readonly ControlFlowGraph cfg;
         private readonly SymbolicCheck[] checks;
-        private readonly Queue<ExplodedNode> queue = new Queue<ExplodedNode>();
-        private readonly SymbolicValueCounter symbolicValueCounter = new SymbolicValueCounter();
+        private readonly Queue<ExplodedNode> queue = new();
+        private readonly SymbolicValueCounter symbolicValueCounter = new();
 
         public RoslynSymbolicExecution(ControlFlowGraph cfg, SymbolicCheck[] checks)
         {
@@ -60,7 +60,15 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
         private IEnumerable<ExplodedNode> ProcessBranching(ExplodedNode node)
         {
             // ToDo: This is a temporary simplification until we support proper branching. This only continues to the next ordinal block
-            if (node.Block.Kind != BasicBlockKind.Exit)
+            if (node.Block.Kind == BasicBlockKind.Exit)
+            {
+                InvokeChecks(new SymbolicContext(symbolicValueCounter, null, node.State), x => x.ExitReached);
+            }
+            else if (node.Block.ContainsThrow())
+            {
+                yield return new ExplodedNode(cfg.ExitBlock, node.State);
+            }
+            else
             {
                 yield return new ExplodedNode(cfg.Blocks[node.Block.Ordinal + 1], node.State);
             }

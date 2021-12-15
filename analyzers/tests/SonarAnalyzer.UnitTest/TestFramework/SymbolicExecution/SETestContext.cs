@@ -27,12 +27,11 @@ namespace SonarAnalyzer.UnitTest.TestFramework.SymbolicExecution
     internal class SETestContext
     {
         public readonly CollectorTestCheck Collector = new();
-        private readonly RoslynSymbolicExecution se;
 
         public SETestContext(string code, AnalyzerLanguage language, SymbolicCheck[] additionalChecks)
         {
             var cfg = TestHelper.CompileCfg(code, language);
-            se = new RoslynSymbolicExecution(cfg, additionalChecks.Concat(new[] { Collector }).ToArray());
+            var se = new RoslynSymbolicExecution(cfg, additionalChecks.Concat(new[] { Collector }).ToArray());
             se.Execute();
         }
 
@@ -51,8 +50,15 @@ public class Sample
 
     private void Tag(string name, object arg = null) {{ }}
 }}";
-            return new SETestContext(code, AnalyzerLanguage.CSharp, additionalChecks);
+            return new(code, AnalyzerLanguage.CSharp, additionalChecks);
         }
+
+        public static SETestContext CreateCSMethod(string method, params SymbolicCheck[] additionalChecks) =>
+            new($@"
+public class Sample
+{{
+    {method}
+}}", AnalyzerLanguage.CSharp, additionalChecks);
 
         public static SETestContext CreateVB(string methodBody, params SymbolicCheck[] additionalChecks) =>
             CreateVB(methodBody, null, additionalChecks);
@@ -70,7 +76,7 @@ Public Class Sample
     End Sub
 
 End Class";
-            return new SETestContext(code, AnalyzerLanguage.VisualBasic, additionalChecks);
+            return new(code, AnalyzerLanguage.VisualBasic, additionalChecks);
         }
     }
 }
