@@ -55,8 +55,6 @@ namespace SonarAnalyzer.Rules.SymbolicExecution
 
         public SymbolicExecutionRunner() : this(new SymbolicExecutionAnalyzerFactory()) { }
 
-        internal /* for testring */ SymbolicExecutionRunner(ISymbolicExecutionAnalyzer analyzer) : this(new SymbolicExecutionAnalyzerFactory(analyzer)) { }
-
         private SymbolicExecutionRunner(SymbolicExecutionAnalyzerFactory analyzerFactory)
         {
             this.analyzerFactory = analyzerFactory;
