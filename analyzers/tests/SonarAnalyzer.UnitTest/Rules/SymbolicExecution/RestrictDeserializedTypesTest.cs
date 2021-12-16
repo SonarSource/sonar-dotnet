@@ -18,15 +18,14 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using Microsoft.CodeAnalysis;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using SonarAnalyzer.Helpers;
 using SonarAnalyzer.Rules.CSharp;
 using SonarAnalyzer.Rules.SymbolicExecution;
 using SonarAnalyzer.UnitTest.TestFramework;
 #if NETFRAMEWORK
 using System.Collections.Generic;
 using System.Linq;
-using Microsoft.CodeAnalysis;
 using SonarAnalyzer.UnitTest.MetadataReferences;
 #endif
 
@@ -35,36 +34,42 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class RestrictDeserializedTypesTest
     {
+        private static readonly DiagnosticDescriptor[] OnlyDiagnostics = new[] { RestrictDeserializedTypes.S5773 };
+
 #if NETFRAMEWORK // These serializers are available only when targeting .Net Framework
         [TestMethod]
         public void RestrictDeserializedTypesFormatters() =>
             Verifier.VerifyAnalyzer(@"TestCases\SymbolicExecution\Sonar\RestrictDeserializedTypes.cs",
-                GetAnalyzer(),
+                new SymbolicExecutionRunner(),
                 ParseOptionsHelper.FromCSharp8,
-                GetAdditionalReferences());
+                AdditionalReferencesNetFx(),
+                onlyDiagnostics: OnlyDiagnostics);
 
         [TestMethod]
         public void RestrictDeserializedTypes_DoesNotRaiseIssuesForTestProject() =>
             Verifier.VerifyNoIssueReportedInTest(@"TestCases\SymbolicExecution\Sonar\RestrictDeserializedTypes.cs",
-                GetAnalyzer(),
+                new SymbolicExecutionRunner(),
                 ParseOptionsHelper.FromCSharp8,
-                GetAdditionalReferences());
+                AdditionalReferencesNetFx(),
+                onlyDiagnostics: OnlyDiagnostics);
 
         [TestMethod]
         public void RestrictDeserializedTypesJavaScriptSerializer() =>
             Verifier.VerifyAnalyzer(@"TestCases\SymbolicExecution\Sonar\RestrictDeserializedTypes.JavaScriptSerializer.cs",
-                GetAnalyzer(),
+                new SymbolicExecutionRunner(),
                 ParseOptionsHelper.FromCSharp8,
-                GetAdditionalReferences());
+                AdditionalReferencesNetFx(),
+                onlyDiagnostics: OnlyDiagnostics);
 
         [TestMethod]
         public void RestrictDeserializedTypesLosFormatter() =>
             Verifier.VerifyAnalyzer(@"TestCases\SymbolicExecution\Sonar\RestrictDeserializedTypes.LosFormatter.cs",
-                GetAnalyzer(),
+                new SymbolicExecutionRunner(),
                 ParseOptionsHelper.FromCSharp8,
-                GetAdditionalReferences());
+                AdditionalReferencesNetFx(),
+                onlyDiagnostics: OnlyDiagnostics);
 
-        private static IEnumerable<MetadataReference> GetAdditionalReferences() =>
+        private static IEnumerable<MetadataReference> AdditionalReferencesNetFx() =>
             FrameworkMetadataReference.SystemRuntimeSerialization
             .Union(FrameworkMetadataReference.SystemRuntimeSerializationFormattersSoap)
             .Union(FrameworkMetadataReference.SystemWeb)
@@ -75,11 +80,9 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         public void RestrictDeserializedTypesFormatters_CSharp9() =>
             Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\SymbolicExecution\Sonar\RestrictDeserializedTypes.CSharp9.cs",
-                GetAnalyzer(),
-                new[] { MetadataReferences.CoreMetadataReference.SystemRuntimeSerializationFormatters });
+                new SymbolicExecutionRunner(),
+                new[] { MetadataReferences.CoreMetadataReference.SystemRuntimeSerializationFormatters },
+                onlyDiagnostics: OnlyDiagnostics);
 #endif
-
-        private static SonarDiagnosticAnalyzer GetAnalyzer() =>
-            new SymbolicExecutionRunner(new RestrictDeserializedTypes());
     }
 }

@@ -37,9 +37,9 @@ namespace SonarAnalyzer.Rules.SymbolicExecution
         internal const string DiagnosticId = "S3329";
         private const string MessageFormat = "Use a dynamically-generated, random IV.";
 
-        private static readonly DiagnosticDescriptor Rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
+        internal static readonly DiagnosticDescriptor S3329 = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
 
-        public IEnumerable<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(Rule);
+        public IEnumerable<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(S3329);
 
         public ISymbolicExecutionAnalysisContext CreateContext(SonarExplodedGraph explodedGraph, SyntaxNodeAnalysisContext context) =>
             new AnalysisContext(explodedGraph);
@@ -53,7 +53,7 @@ namespace SonarAnalyzer.Rules.SymbolicExecution
             }
 
             protected override Diagnostic CreateDiagnostic(Location location) =>
-                Diagnostic.Create(Rule, location);
+                Diagnostic.Create(S3329, location);
         }
 
         private sealed class InitializationVectorCheck : ExplodedGraphCheck

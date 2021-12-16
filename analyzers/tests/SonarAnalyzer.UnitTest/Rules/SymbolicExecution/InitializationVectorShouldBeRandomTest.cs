@@ -18,8 +18,8 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using Microsoft.CodeAnalysis;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using SonarAnalyzer.Helpers;
 using SonarAnalyzer.Rules.SymbolicExecution;
 using SonarAnalyzer.UnitTest.MetadataReferences;
 using SonarAnalyzer.UnitTest.TestFramework;
@@ -29,21 +29,25 @@ namespace SonarAnalyzer.UnitTest.Rules.SymbolicExecution
     [TestClass]
     public class InitializationVectorShouldBeRandomTest
     {
+        private static readonly DiagnosticDescriptor[] OnlyDiagnostics = new[] { InitializationVectorShouldBeRandom.S3329 };
+
         [TestMethod]
-        public void InitializationVectorShouldBeRandom() =>
+        public void InitializationVectorShouldBeRandom_CS() =>
             Verifier.VerifyAnalyzer(
                 @"TestCases\SymbolicExecution\Sonar\InitializationVectorShouldBeRandom.cs",
-                GetAnalyzer(),
+                new SymbolicExecutionRunner(),
                 ParseOptionsHelper.FromCSharp8,
-                MetadataReferenceFacade.SystemSecurityCryptography);
+                MetadataReferenceFacade.SystemSecurityCryptography,
+                onlyDiagnostics: OnlyDiagnostics);
 
         [TestMethod]
         public void InitializationVectorShouldBeRandom_DoesNotRaiseIssuesForTestProject() =>
             Verifier.VerifyNoIssueReportedInTest(
                 @"TestCases\SymbolicExecution\Sonar\InitializationVectorShouldBeRandom.cs",
-                GetAnalyzer(),
+                new SymbolicExecutionRunner(),
                 ParseOptionsHelper.FromCSharp8,
-                MetadataReferenceFacade.SystemSecurityCryptography);
+                MetadataReferenceFacade.SystemSecurityCryptography,
+                onlyDiagnostics: OnlyDiagnostics);
 
 #if NET
 
@@ -51,19 +55,18 @@ namespace SonarAnalyzer.UnitTest.Rules.SymbolicExecution
         public void InitializationVectorShouldBeRandom_CSharp9() =>
             Verifier.VerifyAnalyzerFromCSharp9Console(
                 @"TestCases\SymbolicExecution\Sonar\InitializationVectorShouldBeRandom.CSharp9.cs",
-                GetAnalyzer(),
-                MetadataReferenceFacade.SystemSecurityCryptography);
+                new SymbolicExecutionRunner(),
+                MetadataReferenceFacade.SystemSecurityCryptography,
+                onlyDiagnostics: OnlyDiagnostics);
 
         [TestMethod]
         public void InitializationVectorShouldBeRandom_CSharp10() =>
             Verifier.VerifyAnalyzerFromCSharp10Library(
                 @"TestCases\SymbolicExecution\Sonar\InitializationVectorShouldBeRandom.CSharp10.cs",
-                GetAnalyzer(),
-                MetadataReferenceFacade.SystemSecurityCryptography);
+                new SymbolicExecutionRunner(),
+                MetadataReferenceFacade.SystemSecurityCryptography,
+                onlyDiagnostics: OnlyDiagnostics);
 
 #endif
-
-        private static SonarDiagnosticAnalyzer GetAnalyzer() =>
-            new SymbolicExecutionRunner(new InitializationVectorShouldBeRandom());
     }
 }
