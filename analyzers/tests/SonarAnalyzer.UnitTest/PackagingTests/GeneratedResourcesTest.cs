@@ -54,9 +54,7 @@ namespace SonarAnalyzer.UnitTest.PackagingTests
         [TestMethod]
         public void ThereShouldBeRuleDetailsForAllCSharpRuleClasses()
         {
-            var ruleDetailsKeys = RuleDetailBuilder.GetAllRuleDetails(AnalyzerLanguage.CSharp)
-                                                   .Select(rd => rd.Key)
-                                                   .OrderBy(key => key);
+            var ruleDetailsKeys = SortedRulesFromDetailbuilder(AnalyzerLanguage.CSharp);
             var rulesFromTypes = SortedRulesFromTypes(AnalyzerLanguage.CSharp);
             ruleDetailsKeys.Should().Equal(rulesFromTypes);
         }
@@ -64,9 +62,7 @@ namespace SonarAnalyzer.UnitTest.PackagingTests
         [TestMethod]
         public void ThereShouldBeRuleDetailsForAllVbNetRuleClasses()
         {
-            var ruleDetailsKeys = RuleDetailBuilder.GetAllRuleDetails(AnalyzerLanguage.VisualBasic)
-                                                   .Select(rd => rd.Key)
-                                                   .OrderBy(key => key);
+            var ruleDetailsKeys = SortedRulesFromDetailbuilder(AnalyzerLanguage.VisualBasic);
             var rulesFromTypes = SortedRulesFromTypes(AnalyzerLanguage.VisualBasic);
             ruleDetailsKeys.Should().Equal(rulesFromTypes);
         }
@@ -75,7 +71,10 @@ namespace SonarAnalyzer.UnitTest.PackagingTests
             RuleFinder.GetAnalyzers(language)
                 .Where(x => x is not UtilityAnalyzerBase)
                 .SelectMany(x => x.SupportedDiagnostics)
-                .Select(x => x.Id).OrderBy(x => x).ToArray();
+                .Select(x => x.Id)
+                .OrderBy(x => x)
+                .Distinct()
+                .ToArray();
 
         private static string[] SortedRulesFromResources(string relativePath)
         {
@@ -87,6 +86,9 @@ namespace SonarAnalyzer.UnitTest.PackagingTests
                 .OrderBy(name => name)
                 .ToArray();
         }
+
+        private static string[] SortedRulesFromDetailbuilder(AnalyzerLanguage language) =>
+            RuleDetailBuilder.GetAllRuleDetails(language).Select(x => x.Key).OrderBy(x => x).ToArray();
 
         private static string RuleFromFileName(string fileName)
         {
