@@ -61,19 +61,18 @@ namespace SonarAnalyzer.UnitTest.SymbolicExecution.Roslyn
             var value1 = new SymbolicValue(counter);
             var value2 = new SymbolicValue(counter);
             var operations = TestHelper.CompileCfgBodyCS("var x = 0; x = 1; x = 42;").Blocks[1].Operations;
-            var op3 = operations[2];
             var sut = ProgramState.Empty;
 
             sut[operations[0]].Should().BeNull();
             sut[operations[1]].Should().BeNull();
-            sut[op3].Should().BeNull();
+            sut[operations[2]].Should().BeNull();
 
             sut = sut.SetOperationValue(operations[0], value1);
             sut = sut.SetOperationValue(operations[1], value2);
 
             sut[operations[0]].Should().Be(value1);
             sut[operations[1]].Should().Be(value2);
-            sut[op3].Should().BeNull();     // Value was not set
+            sut[operations[2]].Should().BeNull();     // Value was not set
         }
 
         [TestMethod]
