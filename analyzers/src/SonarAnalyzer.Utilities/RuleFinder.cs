@@ -93,8 +93,7 @@ namespace SonarAnalyzer.Utilities
                 });
 
         private static IEnumerable<string> GetLanguages(MemberInfo analyzerType) =>
-            analyzerType.GetCustomAttributes<DiagnosticAnalyzerAttribute>().FirstOrDefault()?.Languages
-            ?? analyzerType.GetCustomAttributes<RuleAttribute>().FirstOrDefault()?.Languages
+            analyzerType.GetCustomAttributes<DiagnosticAnalyzerAttribute>().SingleOrDefault()?.Languages
             ?? throw new NotSupportedException($"Can not find any language for the given type {analyzerType.Name}!");
     }
 }

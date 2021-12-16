@@ -27,12 +27,9 @@ namespace SonarAnalyzer.Common
     {
         public string Key { get; }
 
-        public string[] Languages { get; }
-
         public RuleAttribute(string key, params string[] languages)
         {
             Key = key;
-            Languages = languages;
         }
     }
 }
