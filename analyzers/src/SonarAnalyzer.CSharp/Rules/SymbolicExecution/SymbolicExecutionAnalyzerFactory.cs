@@ -29,17 +29,6 @@ using SonarAnalyzer.Rules.CSharp;
 
 namespace SonarAnalyzer.Rules.SymbolicExecution
 {
-    [Rule(EmptyNullableValueAccess.DiagnosticId, LanguageNames.CSharp)]
-    [Rule(ObjectsShouldNotBeDisposedMoreThanOnce.DiagnosticId, LanguageNames.CSharp)]
-    [Rule(PublicMethodArgumentsShouldBeCheckedForNull.DiagnosticId, LanguageNames.CSharp)]
-    [Rule(EmptyCollectionsShouldNotBeEnumerated.DiagnosticId, LanguageNames.CSharp)]
-    [Rule(ConditionEvaluatesToConstant.S2583DiagnosticId, LanguageNames.CSharp)]
-    [Rule(ConditionEvaluatesToConstant.S2589DiagnosticId, LanguageNames.CSharp)]
-    [Rule(InvalidCastToInterfaceSymbolicExecution.DiagnosticId, LanguageNames.CSharp)]
-    [Rule(NullPointerDereference.DiagnosticId, LanguageNames.CSharp)]
-    [Rule(RestrictDeserializedTypes.DiagnosticId, LanguageNames.CSharp)]
-    [Rule(InitializationVectorShouldBeRandom.DiagnosticId, LanguageNames.CSharp)]
-    [Rule(HashesShouldHaveUnpredictableSalt.DiagnosticId, LanguageNames.CSharp)]
     internal sealed class SymbolicExecutionAnalyzerFactory : IRuleFactory
     {
         private readonly ImmutableArray<ISymbolicExecutionAnalyzer> analyzers;
