@@ -47,11 +47,7 @@ namespace SonarAnalyzer.Rules.SymbolicExecution
 
         public IEnumerable<ISymbolicExecutionAnalyzer> GetEnabledAnalyzers(SyntaxNodeAnalysisContext context, bool isTestProject, bool isScannerRun) =>
              // Enabled analyzers can be changed at runtime in the IDE or by using connected mode in SonarLint and because of this they cannot be cached.
-             analyzers.Where(x => x.SupportedDiagnostics.Any(descriptor => IsEnabled(context, isTestProject, isScannerRun, descriptor)));
+             analyzers;
 
-        // We need to rewrite this https://github.com/SonarSource/sonar-dotnet/issues/4824
-        public static bool IsEnabled(SyntaxNodeAnalysisContext context, bool isTestProject, bool isScannerRun, DiagnosticDescriptor descriptor) =>
-            SonarAnalysisContext.IsAnalysisScopeMatching(context.Compilation, isTestProject, isScannerRun, new[] { descriptor })
-            && descriptor.GetEffectiveSeverity(context.Compilation.Options) != ReportDiagnostic.Suppress;
     }
 }
