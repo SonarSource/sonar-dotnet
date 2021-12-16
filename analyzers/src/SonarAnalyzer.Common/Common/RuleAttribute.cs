@@ -25,11 +25,8 @@ namespace SonarAnalyzer.Common
     [AttributeUsage(AttributeTargets.Class, AllowMultiple = true)]
     public sealed class RuleAttribute : Attribute
     {
-        public string Key { get; }
-
         public RuleAttribute(string key, params string[] languages)
         {
-            Key = key;
         }
     }
 }

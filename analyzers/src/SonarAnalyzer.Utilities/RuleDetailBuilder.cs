@@ -25,6 +25,7 @@ using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Resources;
+using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
 using SonarAnalyzer.RuleDescriptors;
@@ -49,35 +50,29 @@ namespace SonarAnalyzer.Utilities
         {
             return new RuleFinder()
                 .GetAnalyzerTypes(language)
-                .SelectMany(t => GetRuleDetailFromRuleAttributes(t, language));
+                .Select(x => (DiagnosticAnalyzer)Activator.CreateInstance(x))
+                .SelectMany(x => GetRuleDetails(x, language));
         }
 
-        private static IEnumerable<RuleDetail> GetRuleDetailFromRuleAttributes(Type analyzerType,
-            AnalyzerLanguage language)
-        {
-            return analyzerType.GetCustomAttributes<RuleAttribute>()
-                .Select(ruleAttribute => GetRuleDetail(ruleAttribute, analyzerType, language));
-        }
+        private static IEnumerable<RuleDetail> GetRuleDetails(DiagnosticAnalyzer analyzer, AnalyzerLanguage language) =>
+            analyzer.SupportedDiagnostics.Select(x => x.Id).Distinct().Select(id => GetRuleDetail(id, analyzer.GetType(), language));
 
-        private static RuleDetail GetRuleDetail(RuleAttribute rule, Type analyzerType, AnalyzerLanguage language)
+        private static RuleDetail GetRuleDetail(string id, Type analyzerType, AnalyzerLanguage language)
         {
             var resources = new ResourceManager("SonarAnalyzer.RspecStrings", analyzerType.Assembly);
-
             var ruleDetail = new RuleDetail
             {
-                Key = rule.Key,
-                Type = GetBackwardsCompatibleType(resources.GetString($"{rule.Key}_Type")),
-                Title = resources.GetString($"{rule.Key}_Title"),
-                Severity = resources.GetString($"{rule.Key}_Severity"),
-                Status = resources.GetString($"{rule.Key}_Status"),
-                IsActivatedByDefault = bool.Parse(resources.GetString($"{rule.Key}_IsActivatedByDefault")),
-                Description = GetResourceHtml(rule, language),
-                Remediation = ToSonarQubeRemediationFunction(resources.GetString($"{rule.Key}_Remediation")),
-                RemediationCost = resources.GetString($"{rule.Key}_RemediationCost")
+                Key = id,
+                Type = GetBackwardsCompatibleType(resources.GetString($"{id}_Type")),
+                Title = resources.GetString($"{id}_Title"),
+                Severity = resources.GetString($"{id}_Severity"),
+                Status = resources.GetString($"{id}_Status"),
+                IsActivatedByDefault = bool.Parse(resources.GetString($"{id}_IsActivatedByDefault")),
+                Description = GetResourceHtml(id, language),
+                Remediation = ToSonarQubeRemediationFunction(resources.GetString($"{id}_Remediation")),
+                RemediationCost = resources.GetString($"{id}_RemediationCost")
             };
-
-            ruleDetail.Tags.AddRange(resources.GetString($"{rule.Key}_Tags").Split(new[] { ',' },
-                StringSplitOptions.RemoveEmptyEntries));
+            ruleDetail.Tags.AddRange(resources.GetString($"{id}_Tags").Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries));
 
             GetParameters(analyzerType, ruleDetail);
             GetCodeFixNames(analyzerType, ruleDetail);
@@ -160,13 +155,13 @@ namespace SonarAnalyzer.Utilities
             }
         }
 
-        private static string GetResourceHtml(RuleAttribute rule, AnalyzerLanguage language)
+        private static string GetResourceHtml(string id, AnalyzerLanguage language)
         {
             var resources = SonarAnalyzerUtilitiesAssembly.GetManifestResourceNames();
-            var resource = GetResource(resources, rule.Key, language);
+            var resource = GetResource(resources, id, language);
             if (resource == null)
             {
-                throw new InvalidDataException($"Could not locate resource for rule {rule.Key}");
+                throw new InvalidDataException($"Could not locate resource for rule {id}");
             }
 
             using (var stream = SonarAnalyzerUtilitiesAssembly.GetManifestResourceStream(resource))
