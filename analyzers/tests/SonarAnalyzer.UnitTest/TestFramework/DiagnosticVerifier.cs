@@ -100,15 +100,17 @@ namespace SonarAnalyzer.UnitTest.TestFramework
         public static void VerifyNoIssueReported(Compilation compilation,
                                                  DiagnosticAnalyzer diagnosticAnalyzer,
                                                  CompilationErrorBehavior checkMode = CompilationErrorBehavior.Default,
-                                                 string sonarProjectConfigPath = null) =>
-            GetDiagnosticsNoExceptions(compilation, diagnosticAnalyzer, checkMode, sonarProjectConfigPath: sonarProjectConfigPath).Should().BeEmpty();
+                                                 string sonarProjectConfigPath = null,
+                                                 string[] onlyDiagnostics = null) =>
+            GetDiagnosticsNoExceptions(compilation, diagnosticAnalyzer, checkMode, sonarProjectConfigPath, onlyDiagnostics).Should().BeEmpty();
 
         public static IEnumerable<Diagnostic> GetDiagnosticsNoExceptions(Compilation compilation,
                                                                          DiagnosticAnalyzer diagnosticAnalyzer,
                                                                          CompilationErrorBehavior checkMode,
-                                                                         string sonarProjectConfigPath = null)
+                                                                         string sonarProjectConfigPath = null,
+                                                                         string[] onlyDiagnostics = null)
         {
-            var ret = GetAnalyzerDiagnostics(compilation, new[] { diagnosticAnalyzer }, checkMode, sonarProjectConfigPath);
+            var ret = GetAnalyzerDiagnostics(compilation, new[] { diagnosticAnalyzer }, checkMode, sonarProjectConfigPath, onlyDiagnostics);
             VerifyNoExceptionThrown(ret);
             return ret;
         }

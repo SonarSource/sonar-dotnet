@@ -43,9 +43,9 @@ namespace SonarAnalyzer.Rules.CSharp
         private const string ValueLiteral = "Value";
         private const string HasValueLiteral = "HasValue";
 
-        private static readonly DiagnosticDescriptor Rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
+        internal static readonly DiagnosticDescriptor S3655 = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
 
-        public IEnumerable<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
+        public IEnumerable<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(S3655);
 
         public ISymbolicExecutionAnalysisContext CreateContext(SonarExplodedGraph explodedGraph, SyntaxNodeAnalysisContext context) =>
             new AnalysisContext(explodedGraph);
@@ -64,7 +64,7 @@ namespace SonarAnalyzer.Rules.CSharp
             }
 
             public IEnumerable<Diagnostic> GetDiagnostics() =>
-                nullIdentifiers.Select(x => Diagnostic.Create(Rule, x.Parent.GetLocation(), x.Identifier.ValueText));
+                nullIdentifiers.Select(x => Diagnostic.Create(S3655, x.Parent.GetLocation(), x.Identifier.ValueText));
 
             private void AddIdentifier(object sender, MemberAccessedEventArgs args) =>
                 nullIdentifiers.Add(args.Identifier);

@@ -19,6 +19,7 @@
  */
 
 using System.Linq;
+using Microsoft.CodeAnalysis;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.Helpers;
 using SonarAnalyzer.Rules.CSharp;
@@ -31,23 +32,33 @@ namespace SonarAnalyzer.UnitTest.Rules.SymbolicExecution
     [TestClass]
     public class EmptyNullableValueAccessTest
     {
+        private static readonly DiagnosticDescriptor[] OnlyDiagnostics = new[] { EmptyNullableValueAccess.S3655 };
+
         [DataTestMethod]
         [DataRow(ProjectType.Product)]
         [DataRow(ProjectType.Test)]
-        public void EmptyNullableValueAccess(ProjectType projectType) =>
-            Verifier.VerifyAnalyzer(@"TestCases\SymbolicExecution\Sonar\EmptyNullableValueAccess.cs",
-                new SymbolicExecutionRunner(new EmptyNullableValueAccess()),
+        public void EmptyNullableValueAccess_CS(ProjectType projectType) =>
+            Verifier.VerifyAnalyzer(
+                @"TestCases\SymbolicExecution\Sonar\EmptyNullableValueAccess.cs",
+                new SymbolicExecutionRunner(),
                 ParseOptionsHelper.FromCSharp8,
-                TestHelper.ProjectTypeReference(projectType).Concat(MetadataReferenceFacade.NETStandard21));
+                TestHelper.ProjectTypeReference(projectType).Concat(MetadataReferenceFacade.NETStandard21),
+                onlyDiagnostics: OnlyDiagnostics);
 
 #if NET
         [TestMethod]
         public void EmptyNullableValueAccess_CSharp9() =>
-            Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\SymbolicExecution\Sonar\EmptyNullableValueAccess.CSharp9.cs", new SymbolicExecutionRunner(new EmptyNullableValueAccess()));
+            Verifier.VerifyAnalyzerFromCSharp9Console(
+                @"TestCases\SymbolicExecution\Sonar\EmptyNullableValueAccess.CSharp9.cs",
+                new SymbolicExecutionRunner(),
+                onlyDiagnostics: OnlyDiagnostics);
 
         [TestMethod]
         public void EmptyNullableValueAccess_CSharp10() =>
-            Verifier.VerifyAnalyzerFromCSharp10Library(@"TestCases\SymbolicExecution\Sonar\EmptyNullableValueAccess.CSharp10.cs", new SymbolicExecutionRunner(new EmptyNullableValueAccess()));
+            Verifier.VerifyAnalyzerFromCSharp10Library(
+                @"TestCases\SymbolicExecution\Sonar\EmptyNullableValueAccess.CSharp10.cs",
+                new SymbolicExecutionRunner(),
+                onlyDiagnostics: OnlyDiagnostics);
 #endif
     }
 }

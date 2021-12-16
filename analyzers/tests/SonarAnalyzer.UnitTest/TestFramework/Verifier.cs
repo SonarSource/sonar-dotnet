@@ -260,8 +260,9 @@ namespace SonarAnalyzer.UnitTest.TestFramework
                                                        IEnumerable<ParseOptions> options = null,
                                                        CompilationErrorBehavior checkMode = CompilationErrorBehavior.Default,
                                                        OutputKind outputKind = OutputKind.DynamicallyLinkedLibrary,
-                                                       IEnumerable<MetadataReference> additionalReferences = null) =>
-            VerifyNonConcurrentAnalyzer(new[] { path }, new[] { diagnosticAnalyzer }, options, checkMode, outputKind, additionalReferences);
+                                                       IEnumerable<MetadataReference> additionalReferences = null,
+                                                       DiagnosticDescriptor[] onlyDiagnostics = null) =>
+            VerifyNonConcurrentAnalyzer(new[] { path }, new[] { diagnosticAnalyzer }, options, checkMode, outputKind, additionalReferences, null, onlyDiagnostics);
 
         public static void VerifyNonConcurrentAnalyzer(IEnumerable<string> paths,
                                                        DiagnosticAnalyzer diagnosticAnalyzer,
@@ -383,13 +384,17 @@ namespace SonarAnalyzer.UnitTest.TestFramework
             }
         }
 
-        public static void VerifyNoIssueReportedInTest(string path, SonarDiagnosticAnalyzer diagnosticAnalyzer, IEnumerable<MetadataReference> additionalReferences = null) =>
-            VerifyNoIssueReportedInTest(path, diagnosticAnalyzer, null, additionalReferences);
+        public static void VerifyNoIssueReportedInTest(string path,
+                                                       SonarDiagnosticAnalyzer diagnosticAnalyzer,
+                                                       IEnumerable<MetadataReference> additionalReferences = null,
+                                                       DiagnosticDescriptor[] onlyDiagnostics = null) =>
+            VerifyNoIssueReportedInTest(path, diagnosticAnalyzer, null, additionalReferences, onlyDiagnostics);
 
         public static void VerifyNoIssueReportedInTest(string path,
                                                        SonarDiagnosticAnalyzer diagnosticAnalyzer,
                                                        IEnumerable<ParseOptions> options,
-                                                       IEnumerable<MetadataReference> additionalReferences = null)
+                                                       IEnumerable<MetadataReference> additionalReferences = null,
+                                                       DiagnosticDescriptor[] onlyDiagnostics = null)
         {
             var builder = SolutionBuilder.Create()
                 .AddProject(AnalyzerLanguage.FromPath(path))
@@ -397,7 +402,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework
                 .AddReferences(additionalReferences)
                 .AddDocument(path);
 
-            VerifyNoIssueReported(builder, diagnosticAnalyzer, options, CompilationErrorBehavior.Default, null);
+            VerifyNoIssueReported(builder, diagnosticAnalyzer, options, CompilationErrorBehavior.Default, null, onlyDiagnostics);
         }
 
         public static void VerifyNoIssueReported(string path,
@@ -550,11 +555,12 @@ namespace SonarAnalyzer.UnitTest.TestFramework
                                                   SonarDiagnosticAnalyzer diagnosticAnalyzer,
                                                   IEnumerable<ParseOptions> options,
                                                   CompilationErrorBehavior checkMode,
-                                                  string sonarProjectConfigPath)
+                                                  string sonarProjectConfigPath,
+                                                  DiagnosticDescriptor[] onlyDiagnostics = null)
         {
             foreach (var option in options ?? new ParseOptions[] { null })
             {
-                DiagnosticVerifier.VerifyNoIssueReported(builder.GetCompilation(option), diagnosticAnalyzer, checkMode, sonarProjectConfigPath);
+                DiagnosticVerifier.VerifyNoIssueReported(builder.GetCompilation(option), diagnosticAnalyzer, checkMode, sonarProjectConfigPath, onlyDiagnostics?.Select(x => x.Id).ToArray());
             }
         }
 

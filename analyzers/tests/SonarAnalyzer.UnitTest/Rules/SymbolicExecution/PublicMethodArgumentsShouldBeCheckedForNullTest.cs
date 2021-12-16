@@ -19,6 +19,7 @@
  */
 
 using System.Linq;
+using Microsoft.CodeAnalysis;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.Helpers;
 using SonarAnalyzer.Rules.CSharp;
@@ -31,21 +32,27 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class PublicMethodArgumentsShouldBeCheckedForNullTest
     {
+        private static readonly DiagnosticDescriptor[] OnlyDiagnostics = new[] { PublicMethodArgumentsShouldBeCheckedForNull.S3900 };
+
         [DataTestMethod]
         [DataRow(ProjectType.Product)]
         [DataRow(ProjectType.Test)]
-        public void PublicMethodArgumentsShouldBeCheckedForNull(ProjectType projectType) =>
-            Verifier.VerifyAnalyzer(@"TestCases\SymbolicExecution\Sonar\PublicMethodArgumentsShouldBeCheckedForNull.cs",
-                new SymbolicExecutionRunner(new PublicMethodArgumentsShouldBeCheckedForNull()),
+        public void PublicMethodArgumentsShouldBeCheckedForNull_CS(ProjectType projectType) =>
+            Verifier.VerifyAnalyzer(
+                @"TestCases\SymbolicExecution\Sonar\PublicMethodArgumentsShouldBeCheckedForNull.cs",
+                new SymbolicExecutionRunner(),
                 ParseOptionsHelper.FromCSharp8,
-                TestHelper.ProjectTypeReference(projectType).Concat(MetadataReferenceFacade.NETStandard21));
+                TestHelper.ProjectTypeReference(projectType).Concat(MetadataReferenceFacade.NETStandard21),
+                onlyDiagnostics: OnlyDiagnostics);
 
 #if NET
         [TestMethod]
         public void PublicMethodArgumentsShouldBeCheckedForNull_CSharp9() =>
-            Verifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\SymbolicExecution\Sonar\PublicMethodArgumentsShouldBeCheckedForNull.CSharp9.cs",
-                                                      new SymbolicExecutionRunner(new PublicMethodArgumentsShouldBeCheckedForNull()),
-                                                      NuGetMetadataReference.MicrosoftAspNetCoreMvcCore(Constants.NuGetLatestVersion));
+            Verifier.VerifyAnalyzerFromCSharp9Library(
+                @"TestCases\SymbolicExecution\Sonar\PublicMethodArgumentsShouldBeCheckedForNull.CSharp9.cs",
+                new SymbolicExecutionRunner(),
+                NuGetMetadataReference.MicrosoftAspNetCoreMvcCore(Constants.NuGetLatestVersion),
+                onlyDiagnostics: OnlyDiagnostics);
 #endif
     }
 }

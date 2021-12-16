@@ -38,7 +38,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [DataTestMethod]
         [DataRow(ProjectType.Product)]
         [DataRow(ProjectType.Test)]
-        public void ConditionEvaluatesToConstant_Scope(ProjectType projectType) =>
+        public void ConditionEvaluatesToConstant_CS(ProjectType projectType) =>
             Verifier.VerifyAnalyzer(
                 @"TestCases\SymbolicExecution\Sonar\ConditionEvaluatesToConstant.cs",
                 new SymbolicExecutionRunner(),
