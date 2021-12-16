@@ -28,6 +28,7 @@ using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.CFG.Roslyn;
 using SonarAnalyzer.CFG.Sonar;
+using SonarAnalyzer.Common;
 using SonarAnalyzer.Extensions;
 using SonarAnalyzer.Helpers;
 using SonarAnalyzer.LiveVariableAnalysis.CSharp;
@@ -40,6 +41,7 @@ using StyleCop.Analyzers.Lightup;
 namespace SonarAnalyzer.Rules.SymbolicExecution
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
+    [Rule(LocksReleasedAllPathsBase.DiagnosticId, LanguageNames.CSharp)]
     public sealed partial class SymbolicExecutionRunner : SonarDiagnosticAnalyzer
     {
         private static readonly ImmutableDictionary<DiagnosticDescriptor, RuleFactory> AllRules = ImmutableDictionary<DiagnosticDescriptor, RuleFactory>.Empty

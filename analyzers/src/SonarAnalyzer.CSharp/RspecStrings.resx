@@ -3565,7 +3565,7 @@
     <value>20min</value>
   </data>
   <data name="S2222_Scope" xml:space="preserve">
-    <value>All</value>
+    <value>Main</value>
   </data>
   <data name="S2222_Severity" xml:space="preserve">
     <value>Critical</value>

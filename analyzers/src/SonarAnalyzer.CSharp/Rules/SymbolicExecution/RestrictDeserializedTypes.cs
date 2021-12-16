@@ -40,10 +40,10 @@ namespace SonarAnalyzer.Rules.CSharp
         private const string RestrictTypesMessage = "Restrict types of objects allowed to be deserialized.";
         private const string VerifyMacMessage = "Serialized data signature (MAC) should be verified.";
 
-        private static readonly DiagnosticDescriptor rule =
+        private static readonly DiagnosticDescriptor Rule =
             DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
 
-        public IEnumerable<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
+        public IEnumerable<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(Rule);
 
         public ISymbolicExecutionAnalysisContext CreateContext(SonarExplodedGraph explodedGraph, SyntaxNodeAnalysisContext context) =>
             new AnalysisContext(explodedGraph);
@@ -58,7 +58,7 @@ namespace SonarAnalyzer.Rules.CSharp
             public bool SupportsPartialResults => true;
 
             public IEnumerable<Diagnostic> GetDiagnostics() =>
-                locations.Select(location => Diagnostic.Create(rule, location.Primary,  location.SecondaryLocations, location.Message));
+                locations.Select(location => Diagnostic.Create(Rule, location.Primary,  location.SecondaryLocations, location.Message));
 
             public void Dispose()
             {
@@ -78,7 +78,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private sealed class SerializationBinderCheck : ExplodedGraphCheck
         {
-            private static readonly ImmutableArray<KnownType> typesWithBinder =
+            private static readonly ImmutableArray<KnownType> TypesWithBinder =
                 ImmutableArray.Create(
                     KnownType.System_Runtime_Serialization_Formatters_Binary_BinaryFormatter,
                     KnownType.System_Runtime_Serialization_NetDataContractSerializer,
@@ -257,7 +257,6 @@ namespace SonarAnalyzer.Rules.CSharp
                 // - JavaScriptSerializer(): safe
                 // - JavaScriptSerializer(JavaScriptTypeResolver): this one is safe only if the given resolver is safe
                 // See: https://docs.microsoft.com/en-us/dotnet/api/system.web.script.serialization.javascriptserializer.-ctor?view=netframework-4.8
-
                 if (objectCreation.ArgumentList == null ||
                     objectCreation.ArgumentList.Arguments.Count == 0 ||
                     objectCreation.ArgumentList.Arguments[0].Expression.IsNullLiteral())
@@ -334,7 +333,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 && (IsFormatterWithBinder(typeSymbol) || IsJavaScriptSerializer(typeSymbol));
 
             private static bool IsFormatterWithBinder(ITypeSymbol typeSymbol) =>
-                typeSymbol.IsAny(typesWithBinder);
+                typeSymbol.IsAny(TypesWithBinder);
 
             private static bool IsBinderProperty(ExpressionSyntax expression) =>
                 expression.NameIs("Binder");

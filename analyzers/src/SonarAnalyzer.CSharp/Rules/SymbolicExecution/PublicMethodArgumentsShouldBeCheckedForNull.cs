@@ -47,7 +47,7 @@ namespace SonarAnalyzer.Rules.CSharp
         public ISymbolicExecutionAnalysisContext CreateContext(SonarExplodedGraph explodedGraph, SyntaxNodeAnalysisContext context) =>
             new AnalysisContext(explodedGraph, context);
 
-       private static void CollectMemberAccesses(MemberAccessingEventArgs args, ISet<IdentifierNameSyntax> identifiers, SemanticModel semanticModel)
+        private static void CollectMemberAccesses(MemberAccessingEventArgs args, ISet<IdentifierNameSyntax> identifiers, SemanticModel semanticModel)
         {
             if (args.Symbol is IParameterSymbol
                 && !semanticModel.IsExtensionMethod(args.Identifier.Parent)

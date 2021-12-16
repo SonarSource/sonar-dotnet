@@ -263,14 +263,12 @@ namespace SonarAnalyzer.Rules.CSharp
                     .FirstOrDefault();
 
                 return constantValue
-                    ? (SyntaxNode)
-                        (parent as ConditionalExpressionSyntax)?.WhenFalse ??
-                        (parent as IfStatementSyntax)?.Else?.Statement
-                    : (SyntaxNode)
-                        (parent as ConditionalExpressionSyntax)?.WhenTrue ??
-                        (parent as IfStatementSyntax)?.Statement ??
-                        (parent as WhileStatementSyntax)?.Statement ??
-                        (parent as DoStatementSyntax)?.Statement;
+                    ? (SyntaxNode)(parent as ConditionalExpressionSyntax)?.WhenFalse
+                        ?? (parent as IfStatementSyntax)?.Else?.Statement
+                    : (SyntaxNode)(parent as ConditionalExpressionSyntax)?.WhenTrue
+                        ?? (parent as IfStatementSyntax)?.Statement
+                        ?? (parent as WhileStatementSyntax)?.Statement
+                        ?? (parent as DoStatementSyntax)?.Statement;
             }
 
             private static IEnumerable<ExpressionSyntax> GetUnreachableExpressions(SyntaxNode constantExpression, bool constantValue)
@@ -383,13 +381,13 @@ namespace SonarAnalyzer.Rules.CSharp
 
                 foreach (var right in rightOperands)
                 {
-                    //It's too late for left operands of ??= or x=x??, symbolic value was already set
+                    // It's too late for left operands of ??= or x=x??, symbolic value was already set
                     ProcessOperand(right, false);
                 }
 
                 if (args.ProgramPoint.Block is BinaryBranchBlock bbb
                     && bbb.BranchingNode.IsAnyKind(CoalesceExpressions)
-                    && args.ProgramPoint.Offset == args.ProgramPoint.Block.Instructions.Count - 1 //Last instruction of BBB holds ??= left operand value
+                    && args.ProgramPoint.Offset == args.ProgramPoint.Block.Instructions.Count - 1 // Last instruction of BBB holds ??= left operand value
                     && args.ProgramPoint.CurrentInstruction is ExpressionSyntax left)
                 {
                     ProcessOperand(left, true);
