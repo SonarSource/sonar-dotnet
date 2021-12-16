@@ -24,6 +24,7 @@ using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Operations;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
+using SonarAnalyzer.SymbolicExecution.Constraints;
 using SonarAnalyzer.SymbolicExecution.Roslyn;
 using SonarAnalyzer.UnitTest.TestFramework.SymbolicExecution;
 using StyleCop.Analyzers.Lightup;
@@ -143,7 +144,7 @@ namespace SonarAnalyzer.UnitTest.SymbolicExecution.Roslyn
         [TestMethod]
         public void Execute_PersistSymbols_InsideBlock()
         {
-            var collector = SETestContext.CreateCS("var first = true; var second = false; first = second;", new SetTestConstraintCheck()).Validator;
+            var collector = SETestContext.CreateCS("var first = true; var second = false; first = second;", new BoolTestCheck()).Validator;
             collector.ValidateOrder(    // Visualize operations
                    "LocalReference: first = true (Implicit)",
                    "Literal: true",
@@ -155,8 +156,8 @@ namespace SonarAnalyzer.UnitTest.SymbolicExecution.Roslyn
                    "LocalReference: second",
                    "SimpleAssignment: first = second",
                    "ExpressionStatement: first = second;");
-            collector.Validate("LocalReference: first", x => x.State[LocalReferenceOperationSymbol(x.Operation)].HasConstraint(TestConstraint.First).Should().BeTrue());
-            collector.Validate("LocalReference: second", x => x.State[LocalReferenceOperationSymbol(x.Operation)].HasConstraint(TestConstraint.Second).Should().BeTrue());
+            collector.Validate("LocalReference: first", x => x.State[LocalReferenceOperationSymbol(x.Operation)].HasConstraint(BoolConstraint.True).Should().BeTrue());
+            collector.Validate("LocalReference: second", x => x.State[LocalReferenceOperationSymbol(x.Operation)].HasConstraint(BoolConstraint.False).Should().BeTrue());
 
             static ISymbol LocalReferenceOperationSymbol(IOperationWrapperSonar operation) =>
                 ((ILocalReferenceOperation)operation.Instance).Local;

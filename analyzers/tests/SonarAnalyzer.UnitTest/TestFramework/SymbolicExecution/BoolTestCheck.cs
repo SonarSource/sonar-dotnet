@@ -20,17 +20,18 @@
 
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Operations;
+using SonarAnalyzer.SymbolicExecution.Constraints;
 using SonarAnalyzer.SymbolicExecution.Roslyn;
 
 namespace SonarAnalyzer.UnitTest.TestFramework.SymbolicExecution
 {
-    internal class SetTestConstraintCheck : SymbolicCheck
+    internal class BoolTestCheck : SymbolicCheck    // ToDo: This will be replaced with default engine behavior in MMF-2229
     {
         public override ProgramState PostProcess(SymbolicContext context)
         {
             if (context.Operation.Instance.Kind == OperationKind.Literal && ((ILiteralOperation)context.Operation.Instance).ConstantValue.Value is bool value)
             {
-                context.State[context.Operation].SetConstraint(value ? TestConstraint.First : TestConstraint.Second);
+                context.State[context.Operation].SetConstraint(value ? BoolConstraint.True : BoolConstraint.False);
             }
             return context.State;
         }
