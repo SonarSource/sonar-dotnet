@@ -40,10 +40,7 @@ namespace SonarAnalyzer.Rules.CSharp
         internal const string DiagnosticId = "S4158";
         private const string MessageFormat = "Remove this call, the collection is known to be empty here.";
 
-        private static readonly DiagnosticDescriptor Rule =
-            DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
-
-        public IEnumerable<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
+        internal static readonly DiagnosticDescriptor S4158 = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
 
         private static readonly ImmutableArray<KnownType> TrackedCollectionTypes =
             ImmutableArray.Create(
@@ -88,6 +85,8 @@ namespace SonarAnalyzer.Rules.CSharp
             nameof(Dictionary<object, object>.TryGetValue),
         };
 
+        public IEnumerable<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(S4158);
+
         public ISymbolicExecutionAnalysisContext CreateContext(SonarExplodedGraph explodedGraph, SyntaxNodeAnalysisContext context) =>
             new AnalysisContext(explodedGraph);
 
@@ -102,7 +101,7 @@ namespace SonarAnalyzer.Rules.CSharp
             public bool SupportsPartialResults => false;
 
             public IEnumerable<Diagnostic> GetDiagnostics() =>
-                emptyCollections.Except(nonEmptyCollections).Select(node => Diagnostic.Create(Rule, node.GetLocation()));
+                emptyCollections.Except(nonEmptyCollections).Select(node => Diagnostic.Create(S4158, node.GetLocation()));
 
             public void Dispose()
             {

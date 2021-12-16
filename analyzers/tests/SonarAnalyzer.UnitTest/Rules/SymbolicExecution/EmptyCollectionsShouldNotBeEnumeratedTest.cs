@@ -19,6 +19,7 @@
  */
 
 using System.Linq;
+using Microsoft.CodeAnalysis;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.Helpers;
 using SonarAnalyzer.Rules.CSharp;
@@ -31,28 +32,33 @@ namespace SonarAnalyzer.UnitTest.Rules.SymbolicExecution
     [TestClass]
     public class EmptyCollectionsShouldNotBeEnumeratedTest
     {
+        private static readonly DiagnosticDescriptor[] OnlyDiagnostics = new[] { EmptyCollectionsShouldNotBeEnumerated.S4158 };
+
         [DataTestMethod]
         [DataRow(ProjectType.Product)]
         [DataRow(ProjectType.Test)]
-        public void EmptyCollectionsShouldNotBeEnumerated(ProjectType projectType) =>
+        public void EmptyCollectionsShouldNotBeEnumerated_CS(ProjectType projectType) =>
             Verifier.VerifyAnalyzer(
                 @"TestCases\SymbolicExecution\Sonar\EmptyCollectionsShouldNotBeEnumerated.cs",
-                new SymbolicExecutionRunner(new EmptyCollectionsShouldNotBeEnumerated()),
+                new SymbolicExecutionRunner(),
                 ParseOptionsHelper.FromCSharp8,
-                TestHelper.ProjectTypeReference(projectType).Concat(MetadataReferenceFacade.NETStandard21));
+                TestHelper.ProjectTypeReference(projectType).Concat(MetadataReferenceFacade.NETStandard21),
+                onlyDiagnostics: OnlyDiagnostics);
 
 #if NET
         [TestMethod]
         public void EmptyCollectionsShouldNotBeEnumerated_CSharp9() =>
             Verifier.VerifyAnalyzerFromCSharp9Console(
                 @"TestCases\SymbolicExecution\Sonar\EmptyCollectionsShouldNotBeEnumerated.CSharp9.cs",
-                new SymbolicExecutionRunner(new EmptyCollectionsShouldNotBeEnumerated()));
+                new SymbolicExecutionRunner(),
+                onlyDiagnostics: OnlyDiagnostics);
 
         [TestMethod]
         public void EmptyCollectionsShouldNotBeEnumerated_CSharp10() =>
             Verifier.VerifyAnalyzerFromCSharp10Library(
                 @"TestCases\SymbolicExecution\Sonar\EmptyCollectionsShouldNotBeEnumerated.CSharp10.cs",
-                new SymbolicExecutionRunner(new EmptyCollectionsShouldNotBeEnumerated()));
+                new SymbolicExecutionRunner(),
+                onlyDiagnostics: OnlyDiagnostics);
 #endif
     }
 }

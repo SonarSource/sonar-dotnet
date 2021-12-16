@@ -35,7 +35,7 @@ namespace SonarAnalyzer.Rules.SymbolicExecution
     [Rule(EmptyCollectionsShouldNotBeEnumerated.DiagnosticId, LanguageNames.CSharp)]
     [Rule(ConditionEvaluatesToConstant.S2583DiagnosticId, LanguageNames.CSharp)]
     [Rule(ConditionEvaluatesToConstant.S2589DiagnosticId, LanguageNames.CSharp)]
-    [Rule(InvalidCastToInterfaceRuleConstants.DiagnosticId, LanguageNames.CSharp)]
+    [Rule(InvalidCastToInterfaceSymbolicExecution.DiagnosticId, LanguageNames.CSharp)]
     [Rule(NullPointerDereference.DiagnosticId, LanguageNames.CSharp)]
     [Rule(RestrictDeserializedTypes.DiagnosticId, LanguageNames.CSharp)]
     [Rule(InitializationVectorShouldBeRandom.DiagnosticId, LanguageNames.CSharp)]

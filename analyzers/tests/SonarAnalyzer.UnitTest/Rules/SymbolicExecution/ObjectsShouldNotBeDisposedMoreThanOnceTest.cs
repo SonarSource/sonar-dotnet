@@ -19,6 +19,7 @@
  */
 
 using System.Linq;
+using Microsoft.CodeAnalysis;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.Helpers;
 using SonarAnalyzer.Rules.CSharp;
@@ -31,21 +32,26 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class ObjectsShouldNotBeDisposedMoreThanOnceTest
     {
+        private static readonly DiagnosticDescriptor[] OnlyDiagnostics = new[] { ObjectsShouldNotBeDisposedMoreThanOnce.S3966 };
+
         [DataTestMethod]
         [DataRow(ProjectType.Product)]
         [DataRow(ProjectType.Test)]
-        public void ObjectsShouldNotBeDisposedMoreThanOnce(ProjectType projectType) =>
-            Verifier.VerifyAnalyzer(@"TestCases\SymbolicExecution\Sonar\ObjectsShouldNotBeDisposedMoreThanOnce.cs",
-                new SymbolicExecutionRunner(new ObjectsShouldNotBeDisposedMoreThanOnce()),
+        public void ObjectsShouldNotBeDisposedMoreThanOnce_CS(ProjectType projectType) =>
+            Verifier.VerifyAnalyzer(
+                @"TestCases\SymbolicExecution\Sonar\ObjectsShouldNotBeDisposedMoreThanOnce.cs",
+                new SymbolicExecutionRunner(),
                 ParseOptionsHelper.FromCSharp8,
-                TestHelper.ProjectTypeReference(projectType).Concat(MetadataReferenceFacade.NETStandard21));
+                TestHelper.ProjectTypeReference(projectType).Concat(MetadataReferenceFacade.NETStandard21),
+                onlyDiagnostics: OnlyDiagnostics);
 
 #if NET
         [TestMethod]
         public void ObjectsShouldNotBeDisposedMoreThanOnce_CSharp9() =>
             Verifier.VerifyAnalyzerFromCSharp9Console(
                 @"TestCases\SymbolicExecution\Sonar\ObjectsShouldNotBeDisposedMoreThanOnce.CSharp9.cs",
-                new SymbolicExecutionRunner(new ObjectsShouldNotBeDisposedMoreThanOnce()));
+                new SymbolicExecutionRunner(),
+                onlyDiagnostics: OnlyDiagnostics);
 #endif
     }
 }
