@@ -103,16 +103,17 @@ If you run the project `ReviewDiffs` in debug mode, it will print in the output 
 
 If you want to debug the analysis of a project, you can add a [`Debugger.Launch()`](https://docs.microsoft.com/en-us/dotnet/api/system.diagnostics.debugger.launch?view=net-6.0) breakpoint in the class you want to debug. Rebuild `SonarAnalyzer.sln` and link the analyzer debug binaries to the project you want to debug the analysis for.
 
-This also works with the Java ITs, as long as the debug assemblies are in the folder which is used by the Java ITs.
-
 - If you are analyzing the project with the Scanner for .NET, after the begin step you can replace the binaries in the local cache (`%TEMP%\.sonarqube\resources\` - the `0` folder for the C# Analyzer, the `1` folder for the VB .NET analyzer), and then run the build.
 - If you don't want to use the Scanner for .NET, you can manually reference the binaries in `analyzers/packaging/binaries/` in the {cs,vb}proj file with `<Analyzer Include=... />` items (see [SonarAnalyzer.Testing.ImportBefore.targets](../analyzers/its/SonarAnalyzer.Testing.ImportBefore.targets#L46) as an example)
 
 Please note that if the rule is not in SonarWay, you will also need to enable it in a RuleSet file and link it in the {cs,vb}proj file with the `<CodeAnalysisRuleSet>` property (see [example](../analyzers/src/Directory.Build.targets#L8)).
 
+This also works with the Java ITs, as long as the debug assemblies are in the folder which is used by the Java ITs.
+
 When running the build and doing the Roslyn analysis, when hitting the `Debugger.Launch()` line, a UI window will prompt you to choose a debugger, where your IDE should show up - you will be able to open the solution and debug.
 
 After the debug session, remove the `Debugger.Launch()` line.
+
 
 ## Contributing
 
