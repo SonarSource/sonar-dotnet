@@ -18,9 +18,8 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System;
 using System.Linq;
-using FluentAssertions;
+using Microsoft.CodeAnalysis;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.Helpers;
 using SonarAnalyzer.Rules.CSharp;
@@ -33,43 +32,57 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class ConditionEvaluatesToConstantTest
     {
+        private static readonly DiagnosticDescriptor[] OnlyDiagnostics = new[] { ConditionEvaluatesToConstant.S2583, ConditionEvaluatesToConstant.S2589 };
+
         [TestMethod]
         [DataTestMethod]
         [DataRow(ProjectType.Product)]
         [DataRow(ProjectType.Test)]
-        public void ConditionEvaluatesToConstant(ProjectType projectType) =>
-            Verifier.VerifyAnalyzer(@"TestCases\SymbolicExecution\Sonar\ConditionEvaluatesToConstant.cs",
-                                    GetAnalyzer(),
-                                    NuGetMetadataReference.MicrosoftExtensionsPrimitives("3.1.7").Concat(TestHelper.ProjectTypeReference(projectType)));
+        public void ConditionEvaluatesToConstant_Scope(ProjectType projectType) =>
+            Verifier.VerifyAnalyzer(
+                @"TestCases\SymbolicExecution\Sonar\ConditionEvaluatesToConstant.cs",
+                new SymbolicExecutionRunner(),
+                NuGetMetadataReference.MicrosoftExtensionsPrimitives("3.1.7").Concat(TestHelper.ProjectTypeReference(projectType)),
+                onlyDiagnostics: OnlyDiagnostics);
 
         [TestMethod]
         public void ConditionEvaluatesToConstant_FromCSharp7() =>
-            Verifier.VerifyAnalyzer(@"TestCases\SymbolicExecution\Sonar\ConditionEvaluatesToConstant.CSharp7.cs",
-                                    GetAnalyzer(),
-                                    ParseOptionsHelper.FromCSharp7);
+            Verifier.VerifyAnalyzer(
+                @"TestCases\SymbolicExecution\Sonar\ConditionEvaluatesToConstant.CSharp7.cs",
+                new SymbolicExecutionRunner(),
+                ParseOptionsHelper.FromCSharp7,
+                onlyDiagnostics: OnlyDiagnostics);
 
         [TestMethod]
         public void ConditionEvaluatesToConstant_FromCSharp8() =>
-            Verifier.VerifyAnalyzer(@"TestCases\SymbolicExecution\Sonar\ConditionEvaluatesToConstant.CSharp8.cs",
-                                    GetAnalyzer(),
-                                    ParseOptionsHelper.FromCSharp8,
-                                    MetadataReferenceFacade.NETStandard21);
+            Verifier.VerifyAnalyzer(
+                @"TestCases\SymbolicExecution\Sonar\ConditionEvaluatesToConstant.CSharp8.cs",
+                new SymbolicExecutionRunner(),
+                ParseOptionsHelper.FromCSharp8,
+                MetadataReferenceFacade.NETStandard21,
+                onlyDiagnostics: OnlyDiagnostics);
 
 #if NET
         [TestMethod]
         public void ConditionEvaluatesToConstant_FromCSharp9() =>
-            Verifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\SymbolicExecution\Sonar\ConditionEvaluatesToConstant.CSharp9.cs", GetAnalyzer());
+            Verifier.VerifyAnalyzerFromCSharp9Library(
+                @"TestCases\SymbolicExecution\Sonar\ConditionEvaluatesToConstant.CSharp9.cs",
+                new SymbolicExecutionRunner(),
+                onlyDiagnostics: OnlyDiagnostics);
 
         [TestMethod]
         public void ConditionEvaluatesToConstant_FromCSharp9_TopLevelStatements() =>
-            Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\SymbolicExecution\Sonar\ConditionEvaluatesToConstant.CSharp9.TopLevelStatements.cs", GetAnalyzer());
+            Verifier.VerifyAnalyzerFromCSharp9Console(
+                @"TestCases\SymbolicExecution\Sonar\ConditionEvaluatesToConstant.CSharp9.TopLevelStatements.cs",
+                new SymbolicExecutionRunner(),
+                onlyDiagnostics: OnlyDiagnostics);
 
         [TestMethod]
         public void ConditionEvaluatesToConstant_FromCSharp10() =>
-            Verifier.VerifyAnalyzerFromCSharp10Library(@"TestCases\SymbolicExecution\Sonar\ConditionEvaluatesToConstant.CSharp10.cs", GetAnalyzer());
+            Verifier.VerifyAnalyzerFromCSharp10Library(
+                @"TestCases\SymbolicExecution\Sonar\ConditionEvaluatesToConstant.CSharp10.cs",
+                new SymbolicExecutionRunner(),
+                onlyDiagnostics: OnlyDiagnostics);
 #endif
-
-        private static SonarDiagnosticAnalyzer GetAnalyzer() =>
-            new SymbolicExecutionRunner(new ConditionEvaluatesToConstant());
     }
 }
