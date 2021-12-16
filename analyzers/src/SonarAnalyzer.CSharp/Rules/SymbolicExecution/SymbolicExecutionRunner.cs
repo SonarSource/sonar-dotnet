@@ -58,26 +58,24 @@ namespace SonarAnalyzer.Rules.SymbolicExecution
     {
         private static readonly ImmutableDictionary<DiagnosticDescriptor, RuleFactory> AllRules = ImmutableDictionary<DiagnosticDescriptor, RuleFactory>.Empty
             .Add(LocksReleasedAllPaths.S2222, CreateFactory<LocksReleasedAllPaths>());
-        private static readonly ImmutableArray<ISymbolicExecutionAnalyzer> SonarRules = new()    // ToDo: This should be migrated to AllRules
-        {
-                new EmptyNullableValueAccess(),
-                new ObjectsShouldNotBeDisposedMoreThanOnce(),
-                new PublicMethodArgumentsShouldBeCheckedForNull(),
-                new EmptyCollectionsShouldNotBeEnumerated(),
-                new ConditionEvaluatesToConstant(),
-                new InvalidCastToInterfaceSymbolicExecution(),
-                new NullPointerDereference(),
-                new RestrictDeserializedTypes(),
-                new InitializationVectorShouldBeRandom(),
-                new HashesShouldHaveUnpredictableSalt()
-        };
+        private static readonly ImmutableArray<ISymbolicExecutionAnalyzer> SonarRules = ImmutableArray.Create<ISymbolicExecutionAnalyzer>(    // ToDo: This should be migrated to AllRules
+            new EmptyNullableValueAccess(),
+            new ObjectsShouldNotBeDisposedMoreThanOnce(),
+            new PublicMethodArgumentsShouldBeCheckedForNull(),
+            new EmptyCollectionsShouldNotBeEnumerated(),
+            new ConditionEvaluatesToConstant(),
+            new InvalidCastToInterfaceSymbolicExecution(),
+            new NullPointerDereference(),
+            new RestrictDeserializedTypes(),
+            new InitializationVectorShouldBeRandom(),
+            new HashesShouldHaveUnpredictableSalt());
         private readonly Dictionary<DiagnosticDescriptor, RuleFactory> additionalTestRules = new();
         private ImmutableArray<DiagnosticDescriptor> supportedDiagnostics = SonarRules.SelectMany(x => x.SupportedDiagnostics).Concat(AllRules.Keys).ToImmutableArray();
 
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => supportedDiagnostics;
         protected override bool EnableConcurrentExecution => false;
 
-        internal /* for testing */ void RegisterRule<TRuleCheck>(DiagnosticDescriptor descriptor) where TRuleCheck : SymbolicRuleCheck, new ()
+        internal /* for testing */ void RegisterRule<TRuleCheck>(DiagnosticDescriptor descriptor) where TRuleCheck : SymbolicRuleCheck, new()
         {
             additionalTestRules.Add(descriptor, CreateFactory<TRuleCheck>());
             supportedDiagnostics = supportedDiagnostics.Concat(new[] { descriptor }).ToImmutableArray();
