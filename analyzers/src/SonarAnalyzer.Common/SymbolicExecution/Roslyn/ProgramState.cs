@@ -26,26 +26,26 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
 {
     public sealed class ProgramState
     {
-        public static readonly ProgramState Empty = new(ImmutableDictionary<IOperationWrapperSonar, SymbolicValue>.Empty, ImmutableDictionary<ISymbol, SymbolicValue>.Empty);
+        public static readonly ProgramState Empty = new(ImmutableDictionary<IOperation, SymbolicValue>.Empty, ImmutableDictionary<ISymbol, SymbolicValue>.Empty);
 
-        private readonly ImmutableDictionary<IOperationWrapperSonar, SymbolicValue> operationValue;     // Current SymbolicValue result of a given operation
+        private readonly ImmutableDictionary<IOperation, SymbolicValue> operationValue;     // Current SymbolicValue result of a given operation
         private readonly ImmutableDictionary<ISymbol, SymbolicValue> symbolValue;
 
-        public SymbolicValue this[IOperationWrapperSonar operation] => operationValue.TryGetValue(operation, out var value) ? value : null;
-        public SymbolicValue this[IOperation operation] => operationValue.TryGetValue(new IOperationWrapperSonar(operation), out var value) ? value : null;
+        public SymbolicValue this[IOperationWrapperSonar operation] => this[operation.Instance];
+        public SymbolicValue this[IOperation operation] => operationValue.TryGetValue(operation, out var value) ? value : null;
         public SymbolicValue this[ISymbol symbol] => symbolValue.TryGetValue(symbol, out var value) ? value : null;
 
-        private ProgramState(ImmutableDictionary<IOperationWrapperSonar, SymbolicValue> operationValue, ImmutableDictionary<ISymbol, SymbolicValue> symbolValue)
+        private ProgramState(ImmutableDictionary<IOperation, SymbolicValue> operationValue, ImmutableDictionary<ISymbol, SymbolicValue> symbolValue)
         {
             this.operationValue = operationValue;
             this.symbolValue = symbolValue;
         }
 
         public ProgramState SetOperationValue(IOperation operation, SymbolicValue value) =>
-            new(operationValue.SetItem(new IOperationWrapperSonar(operation), value), symbolValue);
+            new(operationValue.SetItem(operation, value), symbolValue);
 
         public ProgramState SetOperationValue(IOperationWrapperSonar operation, SymbolicValue value) =>
-            new(operationValue.SetItem(operation, value), symbolValue);
+            new(operationValue.SetItem(operation.Instance, value), symbolValue);
 
         public ProgramState SetSymbolValue(ISymbol symbol, SymbolicValue value) =>
             new(operationValue, symbolValue.SetItem(symbol, value));
