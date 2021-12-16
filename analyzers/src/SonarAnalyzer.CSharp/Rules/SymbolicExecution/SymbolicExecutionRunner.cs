@@ -58,20 +58,24 @@ namespace SonarAnalyzer.Rules.SymbolicExecution
     {
         private static readonly ImmutableDictionary<DiagnosticDescriptor, RuleFactory> AllRules = ImmutableDictionary<DiagnosticDescriptor, RuleFactory>.Empty
             .Add(LocksReleasedAllPaths.S2222, CreateFactory<LocksReleasedAllPaths>());
-        private readonly SymbolicExecutionAnalyzerFactory analyzerFactory;  // ToDo: This should be eventually removed
+        private static readonly ImmutableArray<ISymbolicExecutionAnalyzer> SonarRules = new()    // ToDo: This should be migrated to AllRules
+        {
+                new EmptyNullableValueAccess(),
+                new ObjectsShouldNotBeDisposedMoreThanOnce(),
+                new PublicMethodArgumentsShouldBeCheckedForNull(),
+                new EmptyCollectionsShouldNotBeEnumerated(),
+                new ConditionEvaluatesToConstant(),
+                new InvalidCastToInterfaceSymbolicExecution(),
+                new NullPointerDereference(),
+                new RestrictDeserializedTypes(),
+                new InitializationVectorShouldBeRandom(),
+                new HashesShouldHaveUnpredictableSalt()
+        };
         private readonly Dictionary<DiagnosticDescriptor, RuleFactory> additionalTestRules = new();
-        private ImmutableArray<DiagnosticDescriptor> supportedDiagnostics;
+        private ImmutableArray<DiagnosticDescriptor> supportedDiagnostics = SonarRules.SelectMany(x => x.SupportedDiagnostics).Concat(AllRules.Keys).ToImmutableArray();
 
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => supportedDiagnostics;
         protected override bool EnableConcurrentExecution => false;
-
-        public SymbolicExecutionRunner() : this(new SymbolicExecutionAnalyzerFactory()) { }
-
-        private SymbolicExecutionRunner(SymbolicExecutionAnalyzerFactory analyzerFactory)
-        {
-            this.analyzerFactory = analyzerFactory;
-            supportedDiagnostics = analyzerFactory.SupportedDiagnostics.Concat(AllRules.Keys).ToImmutableArray();  // ToDo: This should be eventually moved to the property itself
-        }
 
         internal /* for testing */ void RegisterRule<TRuleCheck>(DiagnosticDescriptor descriptor) where TRuleCheck : SymbolicRuleCheck, new ()
         {
@@ -162,7 +166,7 @@ namespace SonarAnalyzer.Rules.SymbolicExecution
 
         private void AnalyzeSonar(SyntaxNodeAnalysisContext context, bool isTestProject, bool isScannerRun, CSharpSyntaxNode body, ISymbol symbol)
         {
-            var enabledAnalyzers = analyzerFactory.GetEnabledAnalyzers(context, isTestProject, isScannerRun);
+            var enabledAnalyzers = SonarRules.Where(x => x.SupportedDiagnostics.Any(descriptor => SymbolicExecutionAnalyzerFactory.IsEnabled(context, isTestProject, isScannerRun, descriptor))).ToArray();
             if (enabledAnalyzers.Any() && CSharpControlFlowGraph.TryGet(body, context.SemanticModel, out var cfg))
             {
                 var lva = new SonarCSharpLiveVariableAnalysis(cfg, symbol, context.SemanticModel);

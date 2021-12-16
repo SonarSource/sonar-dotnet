@@ -36,17 +36,6 @@ namespace SonarAnalyzer.Rules.SymbolicExecution
         public ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; }
 
         public SymbolicExecutionAnalyzerFactory()
-            : this(
-                new EmptyNullableValueAccess(),
-                new ObjectsShouldNotBeDisposedMoreThanOnce(),
-                new PublicMethodArgumentsShouldBeCheckedForNull(),
-                new EmptyCollectionsShouldNotBeEnumerated(),
-                new ConditionEvaluatesToConstant(),
-                new InvalidCastToInterfaceSymbolicExecution(),
-                new NullPointerDereference(),
-                new RestrictDeserializedTypes(),
-                new InitializationVectorShouldBeRandom(),
-                new HashesShouldHaveUnpredictableSalt())
         { }
 
         internal SymbolicExecutionAnalyzerFactory(params ISymbolicExecutionAnalyzer[] analyzers)
