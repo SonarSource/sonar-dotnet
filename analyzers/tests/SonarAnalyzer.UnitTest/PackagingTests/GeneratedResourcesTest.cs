@@ -38,16 +38,16 @@ namespace SonarAnalyzer.UnitTest.PackagingTests
         [TestMethod]
         public void AnalyzersHaveCorrespondingResource_CSharp()
         {
-            var rulesFromResources = SortedRulesFromResources(RspecRelativeFolderPath + "cs");
-            var rulesFromTypes = SortedRulesFromTypes(AnalyzerLanguage.CSharp);
+            var rulesFromResources = SortedRulesFromResources(RspecRelativeFolderPath + "cs");          // Unique list
+            var rulesFromTypes = SortedRulesFromTypes(AnalyzerLanguage.CSharp).Distinct().ToArray();    // Same ruleId can be in multiple classes (see InvalidCastToInterface)
             rulesFromResources.Should().Equal(rulesFromTypes);
         }
 
         [TestMethod]
         public void AnalyzersHaveCorrespondingResource_VisualBasic()
         {
-            var rulesFromResources = SortedRulesFromResources(RspecRelativeFolderPath + "vbnet");
-            var rulesFromTypes = SortedRulesFromTypes(AnalyzerLanguage.VisualBasic);
+            var rulesFromResources = SortedRulesFromResources(RspecRelativeFolderPath + "vbnet");           // Unique list
+            var rulesFromTypes = SortedRulesFromTypes(AnalyzerLanguage.VisualBasic).Distinct().ToArray();   // Same ruleId can be in multiple classes (see InvalidCastToInterface)
             rulesFromResources.Should().Equal(rulesFromTypes);
         }
 
@@ -70,10 +70,8 @@ namespace SonarAnalyzer.UnitTest.PackagingTests
         private static string[] SortedRulesFromTypes(AnalyzerLanguage language) =>
             RuleFinder.GetAnalyzers(language)
                 .Where(x => x is not UtilityAnalyzerBase)
-                .SelectMany(x => x.SupportedDiagnostics)
-                .Select(x => x.Id)
+                .SelectMany(x => x.SupportedDiagnostics.Select(desciptor => desciptor.Id).Distinct())   // One class can have the same ruleId multiple times, see S3240
                 .OrderBy(x => x)
-                .Distinct()
                 .ToArray();
 
         private static string[] SortedRulesFromResources(string relativePath)

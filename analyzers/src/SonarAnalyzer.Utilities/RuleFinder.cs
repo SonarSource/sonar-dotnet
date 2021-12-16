@@ -39,22 +39,22 @@ namespace SonarAnalyzer.Utilities
                 Assembly.Load(typeof(Rules.Common.DoNotInstantiateSharedClassesBase).Assembly.GetName())
             };
 
-        internal IEnumerable<Type> AllAnalyzerTypes { get; } // Rule-only, without utility analyzers
+        internal IEnumerable<Type> RuleAnalyzerTypes { get; } // Rule-only, without utility analyzers
         internal IEnumerable<Type> UtilityAnalyzerTypes { get; }
 
         public RuleFinder()
         {
             var all = PackagedRuleAssemblies
                 .SelectMany(assembly => assembly.GetTypes())
-                .Where(x => x.IsSubclassOf(typeof(DiagnosticAnalyzer)))
+                .Where(x => x.IsSubclassOf(typeof(DiagnosticAnalyzer)) && x.GetCustomAttributes<DiagnosticAnalyzerAttribute>().Any())
                 .ToArray();
 
-            AllAnalyzerTypes = all.Where(x => x.GetCustomAttributes<RuleAttribute>().Any()).ToList();
-            UtilityAnalyzerTypes = all.Where(x => typeof(UtilityAnalyzerBase).IsAssignableFrom(x) && x.GetCustomAttributes<DiagnosticAnalyzerAttribute>().Any()).ToList();
+            RuleAnalyzerTypes = all.Where(x => !typeof(UtilityAnalyzerBase).IsAssignableFrom(x)).ToList();
+            UtilityAnalyzerTypes = all.Where(x => typeof(UtilityAnalyzerBase).IsAssignableFrom(x)).ToList();
         }
 
         public IEnumerable<Type> GetAnalyzerTypes(AnalyzerLanguage language) =>
-            AllAnalyzerTypes.Where(type => GetTargetLanguages(type).IsAlso(language));
+            RuleAnalyzerTypes.Where(type => GetTargetLanguages(type).IsAlso(language));
 
         internal static IEnumerable<SonarDiagnosticAnalyzer> GetAnalyzers(AnalyzerLanguage language)
         {
@@ -78,7 +78,7 @@ namespace SonarAnalyzer.Utilities
         }
 
         internal IEnumerable<Type> GetParameterlessAnalyzerTypes(AnalyzerLanguage language) =>
-            AllAnalyzerTypes.Where(type => !IsParameterized(type) && GetTargetLanguages(type).IsAlso(language));
+            RuleAnalyzerTypes.Where(type => !IsParameterized(type) && GetTargetLanguages(type).IsAlso(language));
 
         internal static bool IsParameterized(Type analyzerType) =>
             analyzerType.GetProperties().Any(p => p.GetCustomAttributes<RuleParameterAttribute>().Any());

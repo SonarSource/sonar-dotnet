@@ -31,38 +31,11 @@ namespace SonarAnalyzer.UnitTest.Common
     public class RuleDescriptorTest
     {
         [TestMethod]
-        public void CheckAllAnalyzersHaveRuleId()
-        {
-            CheckLanguageSpecificAnalyzersHaveRuleId(AnalyzerLanguage.CSharp);
-            CheckLanguageSpecificAnalyzersHaveRuleId(AnalyzerLanguage.VisualBasic);
-        }
-
-        [TestMethod]
-        public void CheckParameterlessRuleDescriptorsHaveRuleId()
-        {
-            CheckLanguageSpecificParameterlessRuleDescriptorsHaveRuleId(AnalyzerLanguage.CSharp);
-            CheckLanguageSpecificParameterlessRuleDescriptorsHaveRuleId(AnalyzerLanguage.VisualBasic);
-        }
-
-        [TestMethod]
         public void RuleDescriptors_NotEmpty()
         {
             CheckRuleDescriptorsNotEmpty(AnalyzerLanguage.CSharp);
             CheckRuleDescriptorsNotEmpty(AnalyzerLanguage.VisualBasic);
         }
-
-        private static void CheckLanguageSpecificAnalyzersHaveRuleId(AnalyzerLanguage language) =>
-            new RuleFinder()
-                .GetAnalyzerTypes(language)
-                .Any(at => !at.GetCustomAttributes<RuleAttribute>().Any())
-                .Should()
-                .BeFalse();
-
-        private static void CheckLanguageSpecificParameterlessRuleDescriptorsHaveRuleId(AnalyzerLanguage language) =>
-            new RuleFinder().GetParameterlessAnalyzerTypes(language)
-                .Any(at => !at.GetCustomAttributes<RuleAttribute>().Any())
-                .Should()
-                .BeFalse();
 
         private static void CheckRuleDescriptorsNotEmpty(AnalyzerLanguage language)
         {

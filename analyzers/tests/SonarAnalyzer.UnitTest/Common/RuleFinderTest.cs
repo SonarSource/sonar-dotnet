@@ -57,10 +57,10 @@ namespace SonarAnalyzer.UnitTest.Common
             var finder = new RuleFinder();
 
             var countParameterless = finder.GetParameterlessAnalyzerTypes(AnalyzerLanguage.CSharp).Count();
-            finder.AllAnalyzerTypes.Should().HaveCountGreaterThan(countParameterless);
+            finder.RuleAnalyzerTypes.Should().HaveCountGreaterThan(countParameterless);
 
             countParameterless = finder.GetParameterlessAnalyzerTypes(AnalyzerLanguage.VisualBasic).Count();
-            finder.AllAnalyzerTypes.Should().HaveCountGreaterThan(countParameterless);
+            finder.RuleAnalyzerTypes.Should().HaveCountGreaterThan(countParameterless);
         }
 
         [TestMethod]

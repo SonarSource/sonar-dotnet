@@ -44,28 +44,6 @@ namespace SonarAnalyzer.UnitTest.Common
     public class RuleTest
     {
         [TestMethod]
-        public void DiagnosticAnalyzerHasRuleAttribute()
-        {
-            foreach (var analyzer in new RuleFinder().AllAnalyzerTypes)
-            {
-                var ruleDescriptors = analyzer.GetCustomAttributes<RuleAttribute>();
-                ruleDescriptors.Should().NotBeEmpty("RuleAttribute is missing from DiagnosticAnalyzer '{0}'", analyzer.Name);
-            }
-        }
-
-        [TestMethod]
-        public void AbstractDiagnosticAnalyzer_Should_Have_No_RuleAttribute()
-        {
-            var analyzers = RuleFinder.PackagedRuleAssemblies
-                .SelectMany(assembly => assembly.GetTypes())
-                .Where(t => t.IsSubclassOf(typeof(DiagnosticAnalyzer)) && t.IsAbstract);
-            foreach (var analyzer in analyzers)
-            {
-                analyzer.GetCustomAttributes<RuleAttribute>().Should().BeEmpty("At least one RuleAttribute is added to the abstract DiagnosticAnalyzer '{0}'", analyzer.Name);
-            }
-        }
-
-        [TestMethod]
         public void CodeFixProviders_Named_Properly()
         {
             foreach (var codeFixProvider in GetCodeFixProviderTypes(RuleFinder.PackagedRuleAssemblies))
@@ -154,7 +132,7 @@ namespace SonarAnalyzer.UnitTest.Common
 
         [TestMethod]
         public void AllParameterizedRules_AreDisabledByDefault() =>
-            new RuleFinder().AllAnalyzerTypes
+            new RuleFinder().RuleAnalyzerTypes
                 .Where(RuleFinder.IsParameterized)
                 .Select(type => (DiagnosticAnalyzer)Activator.CreateInstance(type))
                 .SelectMany(analyzer => analyzer.SupportedDiagnostics)
@@ -165,7 +143,7 @@ namespace SonarAnalyzer.UnitTest.Common
         [TestMethod]
         public void AllRulesEnabledByDefault_ContainSonarWayCustomTag()
         {
-            var descriptors = new RuleFinder().AllAnalyzerTypes.SelectMany(SupportedDiagnostics)
+            var descriptors = new RuleFinder().RuleAnalyzerTypes.SelectMany(SupportedDiagnostics)
                 // Security hotspots are enabled by default, but they will report issues only
                 // when their ID is contained in SonarLint.xml
                 .Where(descriptor => !IsSecurityHotspot(descriptor));
@@ -190,7 +168,7 @@ namespace SonarAnalyzer.UnitTest.Common
         [TestMethod]
         public void DeprecatedRules_AreNotInSonarWay()
         {
-            foreach (var diagnostic in new RuleFinder().AllAnalyzerTypes.SelectMany(SupportedDiagnostics).Where(IsDeprecated))
+            foreach (var diagnostic in new RuleFinder().RuleAnalyzerTypes.SelectMany(SupportedDiagnostics).Where(IsDeprecated))
             {
                 IsSonarWay(diagnostic).Should().BeFalse($"{diagnostic.Id} is deprecated and should be removed from SonarWay.");
             }
@@ -199,7 +177,7 @@ namespace SonarAnalyzer.UnitTest.Common
         [TestMethod]
         public void AllRules_DoNotHaveUtilityTag()
         {
-            foreach (var diagnostic in new RuleFinder().AllAnalyzerTypes.SelectMany(SupportedDiagnostics))
+            foreach (var diagnostic in new RuleFinder().RuleAnalyzerTypes.SelectMany(SupportedDiagnostics))
             {
                 diagnostic.CustomTags.Should().NotContain(DiagnosticDescriptorBuilder.UtilityTag);
             }
@@ -217,12 +195,12 @@ namespace SonarAnalyzer.UnitTest.Common
         [TestMethod]
         public void AllRules_SonarWayTagPresenceMatchesIsEnabledByDefault()
         {
-            var parameterized = new RuleFinder().AllAnalyzerTypes
+            var parameterized = new RuleFinder().RuleAnalyzerTypes
                 .Where(RuleFinder.IsParameterized)
                 .SelectMany(type => ((DiagnosticAnalyzer)Activator.CreateInstance(type)).SupportedDiagnostics)
                 .ToHashSet();
 
-            foreach (var diagnostic in new RuleFinder().AllAnalyzerTypes.SelectMany(SupportedDiagnostics))
+            foreach (var diagnostic in new RuleFinder().RuleAnalyzerTypes.SelectMany(SupportedDiagnostics))
             {
                 if (IsSecurityHotspot(diagnostic))
                 {
