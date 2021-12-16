@@ -19,18 +19,17 @@
  */
 
 using Microsoft.CodeAnalysis;
-using Microsoft.CodeAnalysis.Operations;
 using SonarAnalyzer.SymbolicExecution.Roslyn;
 
 namespace SonarAnalyzer.UnitTest.TestFramework.SymbolicExecution
 {
-    internal class SetTestConstraintCheck : SymbolicCheck
+    internal class LiteralDummyTestCheck : SymbolicCheck
     {
-        public override ProgramState PostProcess(SymbolicContext context)
+        public override ProgramState PreProcess(SymbolicContext context)
         {
-            if (context.Operation.Instance.Kind == OperationKind.Literal && ((ILiteralOperation)context.Operation.Instance).ConstantValue.Value is bool value)
+            if (context.Operation.Instance.Kind == OperationKind.Literal)
             {
-                context.State[context.Operation].SetConstraint(value ? TestConstraint.First : TestConstraint.Second);
+                context.State[context.Operation].SetConstraint(DummyConstraint.Dummy);
             }
             return context.State;
         }

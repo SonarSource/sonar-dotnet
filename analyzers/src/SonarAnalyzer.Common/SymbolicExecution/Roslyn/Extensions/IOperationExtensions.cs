@@ -19,20 +19,18 @@
  */
 
 using Microsoft.CodeAnalysis;
-using Microsoft.CodeAnalysis.Operations;
-using SonarAnalyzer.SymbolicExecution.Roslyn;
+using StyleCop.Analyzers.Lightup;
 
-namespace SonarAnalyzer.UnitTest.TestFramework.SymbolicExecution
+namespace SonarAnalyzer.SymbolicExecution.Roslyn
 {
-    internal class SetTestConstraintCheck : SymbolicCheck
+    internal static class IOperationExtensions
     {
-        public override ProgramState PostProcess(SymbolicContext context)
-        {
-            if (context.Operation.Instance.Kind == OperationKind.Literal && ((ILiteralOperation)context.Operation.Instance).ConstantValue.Value is bool value)
+        internal static ISymbol TrackedSymbol(this IOperation operation) =>
+            operation switch
             {
-                context.State[context.Operation].SetConstraint(value ? TestConstraint.First : TestConstraint.Second);
-            }
-            return context.State;
-        }
+                var _ when IParameterReferenceOperationWrapper.IsInstance(operation) => IParameterReferenceOperationWrapper.FromOperation(operation).Parameter,
+                var _ when ILocalReferenceOperationWrapper.IsInstance(operation) => ILocalReferenceOperationWrapper.FromOperation(operation).Local,
+                _ => null
+            };
     }
 }

@@ -21,7 +21,10 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Microsoft.CodeAnalysis;
 using SonarAnalyzer.CFG.Roslyn;
+using SonarAnalyzer.SymbolicExecution.Roslyn.OperationProcessors;
+using StyleCop.Analyzers.Lightup;
 
 namespace SonarAnalyzer.SymbolicExecution.Roslyn
 {
@@ -85,8 +88,7 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
                 yield break;
             }
 
-            // ToDo: Something is still missing around here - process well known instructions
-
+            context = EnsureContext(context, ProcessOperation(context));
             context = InvokeChecks(context, x => x.PostProcess);
             if (context == null)
             {
@@ -95,6 +97,15 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
 
             yield return node.CreateNext(context.State);
         }
+
+        private static ProgramState ProcessOperation(SymbolicContext context) =>
+            context.Operation.Instance.Kind switch
+            {
+                OperationKindEx.SimpleAssignment => SimpleAssignment.Process(context, ISimpleAssignmentOperationWrapper.FromOperation(context.Operation.Instance)),
+                OperationKindEx.LocalReference => References.Process(context, ILocalReferenceOperationWrapper.FromOperation(context.Operation.Instance)),
+                OperationKindEx.ParameterReference => References.Process(context, IParameterReferenceOperationWrapper.FromOperation(context.Operation.Instance)),
+                _ => context.State
+            };
 
         private SymbolicContext InvokeChecks(SymbolicContext context, Func<SymbolicCheck, Func<SymbolicContext, ProgramState>> checkDelegate)
         {
@@ -106,7 +117,8 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
                 {
                     return null;
                 }
-                context = context.State == newState ? context : new SymbolicContext(symbolicValueCounter, context.Operation, newState);
+
+                context = EnsureContext(context, newState);
             }
             return context;
         }
@@ -121,5 +133,8 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
 
         private SymbolicValue CreateSymbolicValue() =>
             new(symbolicValueCounter);
+
+        private SymbolicContext EnsureContext(SymbolicContext current, ProgramState newState) =>
+            current.State == newState ? current : new SymbolicContext(symbolicValueCounter, current.Operation, newState);
     }
 }

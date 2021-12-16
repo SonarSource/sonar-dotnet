@@ -18,21 +18,20 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using Microsoft.CodeAnalysis;
-using Microsoft.CodeAnalysis.Operations;
-using SonarAnalyzer.SymbolicExecution.Roslyn;
+using StyleCop.Analyzers.Lightup;
 
-namespace SonarAnalyzer.UnitTest.TestFramework.SymbolicExecution
+namespace SonarAnalyzer.SymbolicExecution.Roslyn.OperationProcessors
 {
-    internal class SetTestConstraintCheck : SymbolicCheck
+    internal static class References
     {
-        public override ProgramState PostProcess(SymbolicContext context)
-        {
-            if (context.Operation.Instance.Kind == OperationKind.Literal && ((ILiteralOperation)context.Operation.Instance).ConstantValue.Value is bool value)
-            {
-                context.State[context.Operation].SetConstraint(value ? TestConstraint.First : TestConstraint.Second);
-            }
-            return context.State;
-        }
+        public static ProgramState Process(SymbolicContext context, ILocalReferenceOperationWrapper localReference) =>
+            context.State[localReference.Local] is { } symbolState
+                ? context.State.SetOperationValue(context.Operation, symbolState)
+                : context.State;
+
+        public static ProgramState Process(SymbolicContext context, IParameterReferenceOperationWrapper parameterReference) =>
+            context.State[parameterReference.Parameter] is { } symbolState
+                ? context.State.SetOperationValue(context.Operation, symbolState)
+                : context.State;
     }
 }

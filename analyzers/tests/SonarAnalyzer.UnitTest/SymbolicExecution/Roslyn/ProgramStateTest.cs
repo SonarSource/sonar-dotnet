@@ -18,7 +18,6 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System.Collections.Immutable;
 using System.Linq;
 using FluentAssertions;
 using Microsoft.CodeAnalysis;
@@ -32,7 +31,7 @@ namespace SonarAnalyzer.UnitTest.SymbolicExecution.Roslyn
     public class ProgramStateTest
     {
         [TestMethod]
-        public void SetOperationValue_ReturnsValues()
+        public void SetOperationValue_WithWrapper_ReturnsValues()
         {
             var counter = new SymbolicValueCounter();
             var value1 = new SymbolicValue(counter);
@@ -56,7 +55,28 @@ namespace SonarAnalyzer.UnitTest.SymbolicExecution.Roslyn
         }
 
         [TestMethod]
-        public void SetOperationValue_IsImmutable()
+        public void SetOperationValue_ReturnsValues()
+        {
+            var counter = new SymbolicValueCounter();
+            var value1 = new SymbolicValue(counter);
+            var value2 = new SymbolicValue(counter);
+            var operations = TestHelper.CompileCfgBodyCS("var x = 0; x = 1; x = 42;").Blocks[1].Operations;
+            var sut = ProgramState.Empty;
+
+            sut[operations[0]].Should().BeNull();
+            sut[operations[1]].Should().BeNull();
+            sut[operations[2]].Should().BeNull();
+
+            sut = sut.SetOperationValue(operations[0], value1);
+            sut = sut.SetOperationValue(operations[1], value2);
+
+            sut[operations[0]].Should().Be(value1);
+            sut[operations[1]].Should().Be(value2);
+            sut[operations[2]].Should().BeNull();     // Value was not set
+        }
+
+        [TestMethod]
+        public void SetOperationValue_WithWrapper_IsImmutable()
         {
             var operation = new IOperationWrapperSonar(TestHelper.CompileCfgBodyCS("var x = 42;").Blocks[1].Operations[0]);
             var sut = ProgramState.Empty;
@@ -67,7 +87,18 @@ namespace SonarAnalyzer.UnitTest.SymbolicExecution.Roslyn
         }
 
         [TestMethod]
-        public void SetOperationValue_UsesUnderlyingOperation()
+        public void SetOperationValue_IsImmutable()
+        {
+            var operation = TestHelper.CompileCfgBodyCS("var x = 42;").Blocks[1].Operations[0];
+            var sut = ProgramState.Empty;
+
+            sut[operation].Should().BeNull();
+            sut.SetOperationValue(operation, new SymbolicValue(new SymbolicValueCounter()));
+            sut[operation].Should().BeNull(nameof(sut.SetOperationValue) + " returned new ProgramState instance.");
+        }
+
+        [TestMethod]
+        public void SetOperationValue_WithWrapper_UsesUnderlyingOperation()
         {
             var operation = new IOperationWrapperSonar(TestHelper.CompileCfgBodyCS("var x = 42;").Blocks[1].Operations[0]);
             var another = new IOperationWrapperSonar(operation.Instance);
@@ -77,6 +108,22 @@ namespace SonarAnalyzer.UnitTest.SymbolicExecution.Roslyn
             sut[operation].Should().BeNull();
             sut = sut.SetOperationValue(operation, value);
             sut[another].Should().Be(value, "GetHashCode and Equals are based on underlying IOperation instance.");
+            sut[another.Instance].Should().Be(value, "GetHashCode and Equals are based on underlying IOperation instance.");
+        }
+
+        [TestMethod]
+        public void SetOperationValue_WithWrapper_Overrides()
+        {
+            var counter = new SymbolicValueCounter();
+            var value1 = new SymbolicValue(counter);
+            var value2 = new SymbolicValue(counter);
+            var operation = new IOperationWrapperSonar(TestHelper.CompileCfgBodyCS("var x = 42;").Blocks[1].Operations[0]);
+            var sut = ProgramState.Empty;
+
+            sut[operation].Should().BeNull();
+            sut = sut.SetOperationValue(operation, value1);
+            sut = sut.SetOperationValue(operation, value2);
+            sut[operation].Should().Be(value2);
         }
 
         [TestMethod]
@@ -85,7 +132,7 @@ namespace SonarAnalyzer.UnitTest.SymbolicExecution.Roslyn
             var counter = new SymbolicValueCounter();
             var value1 = new SymbolicValue(counter);
             var value2 = new SymbolicValue(counter);
-            var operation = new IOperationWrapperSonar(TestHelper.CompileCfgBodyCS("var x = 42;").Blocks[1].Operations[0]);
+            var operation = TestHelper.CompileCfgBodyCS("var x = 42;").Blocks[1].Operations[0];
             var sut = ProgramState.Empty;
 
             sut[operation].Should().BeNull();

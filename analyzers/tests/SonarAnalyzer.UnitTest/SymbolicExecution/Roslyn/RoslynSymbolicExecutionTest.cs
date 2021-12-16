@@ -131,21 +131,13 @@ namespace SonarAnalyzer.UnitTest.SymbolicExecution.Roslyn
         [TestMethod]
         public void Execute_PersistConstraints()
         {
-            var setter = new PreProcessTestCheck(x =>
-                {
-                    if (x.Operation.Instance.Kind == OperationKind.Literal)
-                    {
-                        x.State[x.Operation].SetConstraint(DummyConstraint.Dummy);
-                    }
-                    return x.State;
-                });
-            var collector = SETestContext.CreateCS("var a = true;", setter).Validator;
+            var collector = SETestContext.CreateCS("var a = true;", new LiteralDummyTestCheck()).Validator;
             collector.ValidateOrder(    // Visualize operations
                 "LocalReference: a = true (Implicit)",
                 "Literal: true",
                 "SimpleAssignment: a = true (Implicit)");
             collector.Validate("Literal: true", x => x.State[x.Operation].HasConstraint(DummyConstraint.Dummy).Should().BeTrue());
-            collector.Validate("SimpleAssignment: a = true (Implicit)", x => x.State[x.Operation].HasConstraint(DummyConstraint.Dummy).Should().BeFalse());
+            collector.Validate("SimpleAssignment: a = true (Implicit)", x => x.State[x.Operation].HasConstraint(DummyConstraint.Dummy).Should().BeTrue());
         }
 
         [TestMethod]

@@ -64,8 +64,8 @@ namespace SonarAnalyzer.UnitTest
             return (compiled.SyntaxTree, compiled.SemanticModel);
         }
 
-        public static ControlFlowGraph CompileCfgBodyCS(string body = null) =>
-            CompileCfg($"public class Sample {{ public void Main() {{ {body} }} }}", AnalyzerLanguage.CSharp);
+        public static ControlFlowGraph CompileCfgBodyCS(string body = null, string additionalParameters = null) =>
+            CompileCfg($"public class Sample {{ public void Main({additionalParameters}) {{ {body} }} }}", AnalyzerLanguage.CSharp);
 
         public static ControlFlowGraph CompileCfgBodyVB(string body = null) =>
             CompileCfg(
