@@ -18,6 +18,7 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System.Text;
 using Microsoft.CodeAnalysis;
 using Comparison = SonarAnalyzer.Helpers.ComparisonKind;
 
@@ -25,6 +26,25 @@ namespace SonarAnalyzer.Helpers
 {
     public static class MethodSymbolExtensions
     {
+        internal static bool HasName(this IMethodSymbol methodSymbol, string name)
+        {
+            var builder = new StringBuilder();
+
+            var currentNamespace = methodSymbol.ContainingNamespace;
+            while (currentNamespace is { IsGlobalNamespace: false })
+            {
+                builder.Insert(0, currentNamespace.MetadataName);
+                builder.Insert(currentNamespace.MetadataName.Length, ".");
+                currentNamespace = currentNamespace.ContainingNamespace;
+            }
+
+            builder.Append(methodSymbol.ContainingType.MetadataName);
+            builder.Append(".");
+            builder.Append(methodSymbol.MetadataName);
+
+            return builder.ToString() == name;
+        }
+
         public static Comparison ComparisonKind(this IMethodSymbol method) =>
             method?.MethodKind == MethodKind.UserDefinedOperator
                 ? ComparisonKind(method.Name)

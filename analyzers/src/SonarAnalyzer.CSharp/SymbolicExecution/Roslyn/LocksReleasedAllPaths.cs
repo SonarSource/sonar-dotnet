@@ -27,6 +27,6 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn.Checks
     {
         public static readonly DiagnosticDescriptor S2222 = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
 
-        protected override DiagnosticDescriptor Rule { get; } = S2222;
+        protected override DiagnosticDescriptor Rule => S2222;
     }
 }

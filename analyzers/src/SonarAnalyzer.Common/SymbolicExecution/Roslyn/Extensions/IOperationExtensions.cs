@@ -21,15 +21,22 @@
 using Microsoft.CodeAnalysis;
 using StyleCop.Analyzers.Lightup;
 
-namespace SonarAnalyzer.SymbolicExecution.Roslyn
+namespace SonarAnalyzer.SymbolicExecution.Roslyn.Extensions
 {
     internal static class IOperationExtensions
     {
         internal static ISymbol TrackedSymbol(this IOperation operation) =>
             operation switch
             {
-                var _ when IParameterReferenceOperationWrapper.IsInstance(operation) => IParameterReferenceOperationWrapper.FromOperation(operation).Parameter,
-                var _ when ILocalReferenceOperationWrapper.IsInstance(operation) => ILocalReferenceOperationWrapper.FromOperation(operation).Local,
+                _ when IParameterReferenceOperationWrapper.IsInstance(operation) => IParameterReferenceOperationWrapper.FromOperation(operation).Parameter,
+                _ when ILocalReferenceOperationWrapper.IsInstance(operation) => ILocalReferenceOperationWrapper.FromOperation(operation).Local,
+                _ when IInvocationOperationWrapper.IsInstance(operation) => IInvocationOperationWrapper.FromOperation(operation).TargetMethod,
+                _ when IConversionOperationWrapper.IsInstance(operation) => IConversionOperationWrapper.FromOperation(operation).Operand.TrackedSymbol(),
+                _ when IFieldReferenceOperationWrapper.IsInstance(operation) => IFieldReferenceOperationWrapper.FromOperation(operation).Field,
+                _ when IPropertyReferenceOperationWrapper.IsInstance(operation) => IPropertyReferenceOperationWrapper.FromOperation(operation).Property,
+                _ when IArrayElementReferenceOperationWrapper.IsInstance(operation) => IArrayElementReferenceOperationWrapper.FromOperation(operation).ArrayReference.TrackedSymbol(),
+                // ToDo: Implement the cases below and fix the SimpleAssignment tests.
+                // _ => throw new NotSupportedException($"Unsupported operation type: {operation.Kind}")
                 _ => null
             };
     }

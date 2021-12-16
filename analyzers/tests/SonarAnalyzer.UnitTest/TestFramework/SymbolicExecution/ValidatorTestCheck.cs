@@ -25,6 +25,7 @@ using FluentAssertions;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Operations;
 using SonarAnalyzer.SymbolicExecution.Roslyn;
+using SonarAnalyzer.SymbolicExecution.Roslyn.Extensions;
 using SonarAnalyzer.UnitTest.Helpers;
 using StyleCop.Analyzers.Lightup;
 
@@ -73,19 +74,10 @@ namespace SonarAnalyzer.UnitTest.TestFramework.SymbolicExecution
             var context = tags.Single(x => x.Name == tag).Context;
             var invocation = (IInvocationOperation)context.Operation.Instance;
             invocation.Arguments.Should().HaveCount(2, "Asserted argument is expected in Tag(..) invocation");
-            var symbol = Symbol(((IConversionOperation)invocation.Arguments[1].Value).Operand);
+            var symbol = ((IConversionOperation)invocation.Arguments[1].Value).Operand.TrackedSymbol();
             var value = context.State[symbol];
             action(value);
         }
-
-        private static ISymbol Symbol(IOperation operation) =>
-            operation.TrackedSymbol() ?? operation switch
-            {
-                var _ when IFieldReferenceOperationWrapper.IsInstance(operation) => IFieldReferenceOperationWrapper.FromOperation(operation).Member,
-                var _ when IPropertyReferenceOperationWrapper.IsInstance(operation) => IPropertyReferenceOperationWrapper.FromOperation(operation).Member,
-                var _ when IArrayElementReferenceOperationWrapper.IsInstance(operation) => IArrayElementReferenceOperationWrapper.FromOperation(operation).ArrayReference.TrackedSymbol(),
-                _ => null
-            };
 
         public void ValidateExitReachCount(int expected) =>
             exitReachedCount.Should().Be(expected);

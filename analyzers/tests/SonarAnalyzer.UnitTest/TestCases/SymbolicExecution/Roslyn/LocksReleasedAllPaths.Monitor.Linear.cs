@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Threading;
+using System.Threading.Tasks;
 
 class Program
 {
@@ -124,7 +126,7 @@ class Program
     {
         Monitor.Exit(obj);
         Console.WriteLine(arg.Length);
-        Monitor.Enter(obj); // Compliant
+        Monitor.Enter(obj); // Noncompliant {{Unlock this lock along all executions paths of this method.}}
     }
 
     public void Method14(string arg)
@@ -183,6 +185,66 @@ class Program
         void LocalFunc()
         {
             Monitor.Exit(obj); // Compliant
+        }
+    }
+
+    static int Property
+    {
+        get // Adds coverage for handling FlowCaptureReference operations.
+        {
+            var lockObject = new object();
+            lock (lockObject)
+            {
+                return 1;
+            }
+        }
+    }
+
+    public abstract class Base
+    {
+        protected abstract List<Task> GetScheduledTasks();
+    }
+
+    public class Derived : Base
+    {
+        private readonly List<Task> _tasks = new List<Task>();
+        protected override List<Task> GetScheduledTasks() // Adds coverage for handling Conversion operations
+        {
+            var lockTaken = false;
+            try
+            {
+                Monitor.TryEnter(_tasks, ref lockTaken);
+
+                if (lockTaken) return _tasks;
+                else throw new NotSupportedException();
+            }
+            finally
+            {
+                if (lockTaken) Monitor.Exit(_tasks);
+            }
+        }
+    }
+
+    public class PropertyReference
+    {
+        public Contex PreMovieInfoScraperAction(Contex context) // adds coverage for PropertyReference operations
+        {
+            if (string.IsNullOrEmpty(context.Movie.Year))
+            {
+                context.Movie.Year = "2022";
+            }
+
+            return context;
+        }
+
+        public class Contex
+        {
+            public Movie Movie { get; }
+        }
+
+        public class Movie
+        {
+            public string Year { get; set; }
         }
     }
 }
