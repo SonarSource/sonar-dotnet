@@ -30,6 +30,7 @@ using SonarAnalyzer.Extensions;
 using SonarAnalyzer.Helpers;
 using SonarAnalyzer.Rules.SymbolicExecution;
 using SonarAnalyzer.SymbolicExecution;
+using SonarAnalyzer.SymbolicExecution.Constraints;
 using SonarAnalyzer.SymbolicExecution.Sonar;
 using SonarAnalyzer.SymbolicExecution.Sonar.Constraints;
 using SonarAnalyzer.SymbolicExecution.Sonar.SymbolicValues;
