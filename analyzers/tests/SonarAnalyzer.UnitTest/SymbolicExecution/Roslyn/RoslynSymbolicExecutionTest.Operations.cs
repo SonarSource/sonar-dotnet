@@ -115,19 +115,7 @@ namespace SonarAnalyzer.UnitTest.SymbolicExecution.Roslyn
         {
             var collector = SETestContext.CreateCS(snipet, new LiteralDummyTestCheck()).Validator;
             collector.Validate("Literal: 42", x => x.State[x.Operation].HasConstraint(DummyConstraint.Dummy).Should().BeTrue("it's scaffolded"));
-            collector.ValidateTag("Target", CheckSymbolicValue);
-
-            static void CheckSymbolicValue(SymbolicValue value)
-            {
-                if (value == null)
-                {
-                    value.Should().BeNull();
-                }
-                else
-                {
-                    value.HasConstraint(DummyConstraint.Dummy).Should().BeFalse();
-                }
-            }
+            collector.ValidateTag("Target", x => (x?.HasConstraint(DummyConstraint.Dummy) ?? false).Should().BeFalse());
         }
     }
 }
