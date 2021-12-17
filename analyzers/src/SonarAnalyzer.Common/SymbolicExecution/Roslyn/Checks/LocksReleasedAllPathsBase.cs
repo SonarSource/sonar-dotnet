@@ -31,6 +31,7 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn.Checks
     {
         internal const string DiagnosticId = "S2222";
         protected const string MessageFormat = "Unlock this lock along all executions paths of this method.";
+
         private readonly HashSet<ISymbol> previouslyReleasedSymbols = new();
         private readonly HashSet<ISymbol> exitHeldSymbols = new();
         private readonly Dictionary<ISymbol, IOperationWrapperSonar> symbolOperationMap = new();
