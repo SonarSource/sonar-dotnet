@@ -127,9 +127,6 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
             }
         }
 
-        private SymbolicValue CreateSymbolicValue() =>
-            new(symbolicValueCounter);
-
         private SymbolicContext EnsureContext(SymbolicContext current, ProgramState newState) =>
             current.State == newState ? current : new SymbolicContext(symbolicValueCounter, current.Operation, newState);
     }
