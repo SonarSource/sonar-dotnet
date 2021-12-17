@@ -280,9 +280,7 @@ namespace SonarAnalyzer.UnitTest.Common
             new RuleFinder().GetAnalyzerTypes(language).SelectMany(SupportedDiagnostics);
 
         private static IEnumerable<DiagnosticDescriptor> SupportedDiagnostics(Type type) =>
-            typeof(DiagnosticAnalyzer).IsAssignableFrom(type)
-                ? ((DiagnosticAnalyzer)Activator.CreateInstance(type)).SupportedDiagnostics
-                : ((IRuleFactory)Activator.CreateInstance(type)).SupportedDiagnostics;
+            ((DiagnosticAnalyzer)Activator.CreateInstance(type)).SupportedDiagnostics;
 
         private static IEnumerable<Type> GetCodeFixProviderTypes(IEnumerable<Assembly> assemblies) =>
             assemblies.SelectMany(assembly => assembly.GetTypes()).Where(t => t.IsSubclassOf(typeof(SonarCodeFixProvider)));

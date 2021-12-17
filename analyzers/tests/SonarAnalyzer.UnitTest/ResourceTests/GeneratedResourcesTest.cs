@@ -84,11 +84,9 @@ namespace SonarAnalyzer.UnitTest.ResourceTests
 
         private static string[] GetRulesFromClasses(Assembly assembly) =>
             assembly.GetTypes()
-                    .Where(t => typeof(SonarDiagnosticAnalyzer).IsAssignableFrom(t) || typeof(IRuleFactory).IsAssignableFrom(t))
-                    .Where(t => !t.IsAbstract)
-                    .Where(IsNotUtilityAnalyzer)
+                    .Where(x => !x.IsAbstract && typeof(SonarDiagnosticAnalyzer).IsAssignableFrom(x) && IsNotUtilityAnalyzer(x))
                     .SelectMany(GetRuleNamesFromAttributes)
-                    .OrderBy(name => name)
+                    .OrderBy(x => x)
                     .ToArray();
 
         private static bool IsNotUtilityAnalyzer(Type arg) =>
