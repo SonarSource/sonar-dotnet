@@ -23,13 +23,11 @@ using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Diagnostics;
 using Microsoft.CodeAnalysis.VisualBasic;
 using Microsoft.CodeAnalysis.VisualBasic.Syntax;
-using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
 
 namespace SonarAnalyzer.Rules.VisualBasic
 {
     [DiagnosticAnalyzer(LanguageNames.VisualBasic)]
-    [Rule(DiagnosticId)]
     public sealed class RedundantNullCheck : RedundantNullCheckBase<BinaryExpressionSyntax>
     {
         private const string MessageFormat = "Remove this unnecessary null check; 'TypeOf ... Is' returns false for nulls.";

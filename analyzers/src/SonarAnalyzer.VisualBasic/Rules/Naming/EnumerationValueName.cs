@@ -29,7 +29,6 @@ using SonarAnalyzer.Helpers;
 namespace SonarAnalyzer.Rules.VisualBasic
 {
     [DiagnosticAnalyzer(LanguageNames.VisualBasic)]
-    [Rule(DiagnosticId)]
     public sealed class EnumerationValueName : ParameterLoadingDiagnosticAnalyzer
     {
         internal const string DiagnosticId = "S2343";

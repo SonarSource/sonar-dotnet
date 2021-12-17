@@ -23,14 +23,11 @@ using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Diagnostics;
 using Microsoft.CodeAnalysis.VisualBasic;
 using Microsoft.CodeAnalysis.VisualBasic.Syntax;
-using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
 
 namespace SonarAnalyzer.Rules.VisualBasic
 {
     [DiagnosticAnalyzer(LanguageNames.VisualBasic)]
-    [Rule(S2387DiagnosticId)]
-    [Rule(S4025DiagnosticId)]
     public sealed class FieldShadowsParentField : FieldShadowsParentFieldBase<ModifiedIdentifierSyntax>
     {
         public FieldShadowsParentField() : base(RspecStrings.ResourceManager) { }

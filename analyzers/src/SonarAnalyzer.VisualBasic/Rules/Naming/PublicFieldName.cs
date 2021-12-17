@@ -28,7 +28,6 @@ using SonarAnalyzer.Helpers;
 namespace SonarAnalyzer.Rules.VisualBasic
 {
     [DiagnosticAnalyzer(LanguageNames.VisualBasic)]
-    [Rule(DiagnosticId)]
     public sealed class PublicFieldName : FieldNameChecker
     {
         internal const string DiagnosticId = "S2369";

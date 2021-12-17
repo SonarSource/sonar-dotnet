@@ -28,7 +28,6 @@ using SonarAnalyzer.Helpers;
 namespace SonarAnalyzer.Rules.VisualBasic
 {
     [DiagnosticAnalyzer(LanguageNames.VisualBasic)]
-    [Rule(DiagnosticId)]
     [Obsolete("This rule is deprecated.")]
     public sealed class ControllingPermissions : ControllingPermissionsBase<SyntaxKind>
     {
