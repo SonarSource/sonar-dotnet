@@ -70,8 +70,7 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn.Checks
 
         public override void ExecutionCompleted()
         {
-            var unreleasedSymbols = exitHeldSymbols.Intersect(releasedSymbols);
-            foreach (var symbol in unreleasedSymbols)
+            foreach (var symbol in exitHeldSymbols.Intersect(releasedSymbols))
             {
                 var location = symbolOperationMap[symbol].Instance.Syntax.GetLocation();
                 NodeContext.ReportIssue(Diagnostic.Create(Rule, location));
