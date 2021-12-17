@@ -31,7 +31,7 @@ using SonarAnalyzer.UnitTest.CFG.Sonar;
 namespace SonarAnalyzer.UnitTest.SymbolicExecution.Sonar
 {
     [TestClass]
-    public class ProgramStateTest
+    public class SonarProgramStateTest
     {
         private class FakeConstraint : SymbolicConstraint
         {
