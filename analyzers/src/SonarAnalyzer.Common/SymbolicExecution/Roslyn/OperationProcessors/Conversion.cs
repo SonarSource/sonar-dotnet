@@ -25,6 +25,8 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn.OperationProcessors
     internal static class Conversion
     {
         public static ProgramState Process(SymbolicContext context, IConversionOperationWrapper conversion) =>
-            context.State.SetOperationValue(context.Operation, context.State[conversion.Operand]);
+            context.State[conversion.Operand] is { } newState
+                ? context.State.SetOperationValue(context.Operation, newState)
+                : context.State;
     }
 }

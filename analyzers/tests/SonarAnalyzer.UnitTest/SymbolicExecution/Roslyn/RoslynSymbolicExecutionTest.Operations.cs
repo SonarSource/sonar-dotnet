@@ -106,15 +106,44 @@ namespace SonarAnalyzer.UnitTest.SymbolicExecution.Roslyn
         [TestMethod]
         public void Conversion_ToLocalVariable_FromTrackedSymbol_ExplicitCast()
         {
-            var collector = SETestContext.CreateCS(@"int a = 42; byte b = (byte)a; Tag(""b"", b);", new LiteralDummyTestCheck()).Validator;
-            collector.ValidateTag("b", x => x.HasConstraint(DummyConstraint.Dummy).Should().BeTrue());
+            var validator = SETestContext.CreateCS(@"int a = 42; byte b = (byte)a; Tag(""b"", b);", new LiteralDummyTestCheck()).Validator;
+            validator.ValidateOrder(
+                "LocalReference: a = 42 (Implicit)",
+                "Literal: 42",
+                "SimpleAssignment: a = 42 (Implicit)",
+                "LocalReference: b = (byte)a (Implicit)",
+                "LocalReference: a",
+                "Conversion: (byte)a",
+                "SimpleAssignment: b = (byte)a (Implicit)",
+                "InstanceReference: Tag (Implicit)",
+                @"Literal: ""b""",
+                @"Argument: ""b""",
+                "LocalReference: b",
+                "Conversion: b (Implicit)",
+                "Argument: b",
+                @"Invocation: Tag(""b"", b)",
+                @"ExpressionStatement: Tag(""b"", b);");
+            validator.ValidateTag("b", x => x.HasConstraint(DummyConstraint.Dummy).Should().BeTrue());
         }
 
         [TestMethod]
         public void Conversion_ToLocalVariable_FromLiteral_ImplicitCast()
         {
-            var collector = SETestContext.CreateCS(@"byte b = 42; Tag(""b"", b);", new LiteralDummyTestCheck()).Validator;
-            collector.ValidateTag("b", x => x.HasConstraint(DummyConstraint.Dummy).Should().BeTrue());
+            var validator = SETestContext.CreateCS(@"byte b = 42; Tag(""b"", b);", new LiteralDummyTestCheck()).Validator;
+            validator.ValidateOrder(
+                "LocalReference: b = 42 (Implicit)",
+                "Literal: 42",
+                "Conversion: 42 (Implicit)",
+                "SimpleAssignment: b = 42 (Implicit)",
+                "InstanceReference: Tag (Implicit)",
+                @"Literal: ""b""",
+                @"Argument: ""b""",
+                "LocalReference: b",
+                "Conversion: b (Implicit)",
+                "Argument: b",
+                @"Invocation: Tag(""b"", b)",
+                @"ExpressionStatement: Tag(""b"", b);");
+            validator.ValidateTag("b", x => x.HasConstraint(DummyConstraint.Dummy).Should().BeTrue());
         }
     }
 }
