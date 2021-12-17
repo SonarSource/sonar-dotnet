@@ -30,8 +30,6 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
             {
                 _ when IParameterReferenceOperationWrapper.IsInstance(operation) => IParameterReferenceOperationWrapper.FromOperation(operation).Parameter,
                 _ when ILocalReferenceOperationWrapper.IsInstance(operation) => ILocalReferenceOperationWrapper.FromOperation(operation).Local,
-                // ToDo: Implement the cases below and fix the SimpleAssignment tests.
-                // _ => throw new NotSupportedException($"Unsupported operation type: {operation.Kind}")
                 _ => null
             };
 

@@ -27,7 +27,7 @@ namespace SonarAnalyzer.Helpers
     public static class MethodSymbolExtensions
     {
         internal static bool Is(this IMethodSymbol methodSymbol, KnownType knownType, string name) =>
-            methodSymbol.ContainingType.Is(knownType) && methodSymbol.MetadataName == name;
+            methodSymbol.ContainingType.Is(knownType) && methodSymbol.Name == name;
 
         public static Comparison ComparisonKind(this IMethodSymbol method) =>
             method?.MethodKind == MethodKind.UserDefinedOperator
