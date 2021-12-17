@@ -83,19 +83,15 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
         {
             var context = new SymbolicContext(symbolicValueCounter, node.Operation, node.State.SetOperationValue(node.Operation, CreateSymbolicValue()));
             context = InvokeChecks(context, x => x.PreProcess);
-            if (context == null)
+            if (context != null)
             {
-                yield break;
+                context = EnsureContext(context, ProcessOperation(context));
+                context = InvokeChecks(context, x => x.PostProcess);
+                if (context != null)
+                {
+                    yield return node.CreateNext(context.State);
+                }
             }
-
-            context = EnsureContext(context, ProcessOperation(context));
-            context = InvokeChecks(context, x => x.PostProcess);
-            if (context == null)
-            {
-                yield break;
-            }
-
-            yield return node.CreateNext(context.State);
         }
 
         private static ProgramState ProcessOperation(SymbolicContext context) =>
