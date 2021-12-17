@@ -1,9 +1,12 @@
-pool:
-  vmImage: 'windows-2022'
+pool: '.Net Bubble - GCP'
 
 variables:
   - group: sonar-dotnet-variables
   - group: sonarsource-build-variables
+  - name: MsBuildPath
+    value: 'C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\MSBuild\Current\Bin\msbuild.exe'
+  - name: vsVersion
+    value: '17.0'
 
 stages:
 - stage: buildAndTests
@@ -35,12 +38,8 @@ stages:
           dotnet --version
         displayName: 'List dotnet versions and current version'
 
-      - task: NuGetCommand@2
-        displayName: "Restore NuGet packages"
-        inputs:
-          restoreSolution: '$(solution)'
-          feedsToUse: 'config'
-          nugetConfigPath: 'analyzers\NuGet.Config'
+      - script: '"${{ variables.MsBuildPath }}" /t:restore /p:RestoreLockedMode=true /p:RestoreConfigFile="analyzers\NuGet.Config" $(solution)'
+        displayName: "NuGet Restore"
 
       - powershell: |
           # Calculate the file path
@@ -61,7 +60,7 @@ stages:
         inputs:
           solution: scripts/version/ChangeVersion.proj
           msbuildArgs: '/p:Sha1=$(Build.SourceVersion) /p:BranchName=$(Build.SourceBranchName) /p:BuildNumber=$(Build.BuildId) /p:BuildConfiguration=$(BuildConfiguration)'
-          vsVersion: '16.0'
+          vsVersion: $(vsVersion)
 
       - task: VSBuild@1
         displayName: 'Build SonarAnalyzer solution'
@@ -70,7 +69,7 @@ stages:
           platform: '$(buildPlatform)'
           configuration: '$(buildConfiguration)'
           msbuildArgs: '/p:DeployExtension=false /p:Sha1=$(Build.SourceVersion) /p:BuildNumber=$(Build.BuildId)'
-          vsVersion: '16.0'
+          vsVersion: $(vsVersion)
 
       - task: VSTest@2
         displayName: ".NET UTs"
