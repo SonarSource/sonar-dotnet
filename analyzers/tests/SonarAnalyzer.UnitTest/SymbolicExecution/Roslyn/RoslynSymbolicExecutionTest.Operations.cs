@@ -102,5 +102,19 @@ namespace SonarAnalyzer.UnitTest.SymbolicExecution.Roslyn
             validator.Validate("Literal: 42", x => x.State[x.Operation].HasConstraint(DummyConstraint.Dummy).Should().BeTrue("it's scaffolded"));
             validator.ValidateTag("Target", x => (x?.HasConstraint(DummyConstraint.Dummy) ?? false).Should().BeFalse());
         }
+
+        [TestMethod]
+        public void Conversion_ToLocalVariable_FromTrackedSymbol_ExplicitCast()
+        {
+            var collector = SETestContext.CreateCS(@"int a = 42; byte b = (byte)a; Tag(""b"", b);", new LiteralDummyTestCheck()).Validator;
+            collector.ValidateTag("b", x => x.HasConstraint(DummyConstraint.Dummy).Should().BeTrue());
+        }
+
+        [TestMethod]
+        public void Conversion_ToLocalVariable_FromLiteral_ImplicitCast()
+        {
+            var collector = SETestContext.CreateCS(@"byte b = 42; Tag(""b"", b);", new LiteralDummyTestCheck()).Validator;
+            collector.ValidateTag("b", x => x.HasConstraint(DummyConstraint.Dummy).Should().BeTrue());
+        }
     }
 }
