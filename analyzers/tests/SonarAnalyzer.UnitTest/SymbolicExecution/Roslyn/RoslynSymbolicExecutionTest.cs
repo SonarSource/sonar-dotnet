@@ -124,28 +124,28 @@ namespace SonarAnalyzer.UnitTest.SymbolicExecution.Roslyn
         [TestMethod]
         public void PostProcess_OperationHasValue()
         {
-            var collector = SETestContext.CreateCS("var a = true;").Validator;
-            collector.ValidatePostProcessCount(3);
-            collector.ValidateOperationsAreNotNull();
+            var validator = SETestContext.CreateCS("var a = true;").Validator;
+            validator.ValidatePostProcessCount(3);
+            validator.ValidateOperationsAreNotNull();
         }
 
         [TestMethod]
         public void Execute_PersistConstraints()
         {
-            var collector = SETestContext.CreateCS("var a = true;", new LiteralDummyTestCheck()).Validator;
-            collector.ValidateOrder(    // Visualize operations
+            var validator = SETestContext.CreateCS("var a = true;", new LiteralDummyTestCheck()).Validator;
+            validator.ValidateOrder(    // Visualize operations
                 "LocalReference: a = true (Implicit)",
                 "Literal: true",
                 "SimpleAssignment: a = true (Implicit)");
-            collector.Validate("Literal: true", x => x.State[x.Operation].HasConstraint(DummyConstraint.Dummy).Should().BeTrue());
-            collector.Validate("SimpleAssignment: a = true (Implicit)", x => x.State[x.Operation].HasConstraint(DummyConstraint.Dummy).Should().BeTrue());
+            validator.Validate("Literal: true", x => x.State[x.Operation].HasConstraint(DummyConstraint.Dummy).Should().BeTrue());
+            validator.Validate("SimpleAssignment: a = true (Implicit)", x => x.State[x.Operation].HasConstraint(DummyConstraint.Dummy).Should().BeTrue());
         }
 
         [TestMethod]
         public void Execute_PersistSymbols_InsideBlock()
         {
-            var collector = SETestContext.CreateCS("var first = true; var second = false; first = second;", new BoolTestCheck()).Validator;
-            collector.ValidateOrder(    // Visualize operations
+            var validator = SETestContext.CreateCS("var first = true; var second = false; first = second;", new BoolTestCheck()).Validator;
+            validator.ValidateOrder(    // Visualize operations
                    "LocalReference: first = true (Implicit)",
                    "Literal: true",
                    "SimpleAssignment: first = true (Implicit)",
@@ -156,8 +156,8 @@ namespace SonarAnalyzer.UnitTest.SymbolicExecution.Roslyn
                    "LocalReference: second",
                    "SimpleAssignment: first = second",
                    "ExpressionStatement: first = second;");
-            collector.Validate("LocalReference: first", x => x.State[LocalReferenceOperationSymbol(x.Operation)].HasConstraint(BoolConstraint.True).Should().BeTrue());
-            collector.Validate("LocalReference: second", x => x.State[LocalReferenceOperationSymbol(x.Operation)].HasConstraint(BoolConstraint.False).Should().BeTrue());
+            validator.Validate("LocalReference: first", x => x.State[LocalReferenceOperationSymbol(x.Operation)].HasConstraint(BoolConstraint.True).Should().BeTrue());
+            validator.Validate("LocalReference: second", x => x.State[LocalReferenceOperationSymbol(x.Operation)].HasConstraint(BoolConstraint.False).Should().BeTrue());
 
             static ISymbol LocalReferenceOperationSymbol(IOperationWrapperSonar operation) =>
                 ((ILocalReferenceOperation)operation.Instance).Local;
