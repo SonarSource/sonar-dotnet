@@ -23,6 +23,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Microsoft.CodeAnalysis;
 using SonarAnalyzer.Helpers;
+using SonarAnalyzer.SymbolicExecution.Constraints;
 using SonarAnalyzer.SymbolicExecution.Sonar.Constraints;
 using SonarAnalyzer.SymbolicExecution.Sonar.SymbolicValues;
 

@@ -21,6 +21,7 @@
 using FluentAssertions;
 using Microsoft.CodeAnalysis;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using SonarAnalyzer.SymbolicExecution.Constraints;
 using SonarAnalyzer.UnitTest.TestFramework.SymbolicExecution;
 
 namespace SonarAnalyzer.UnitTest.SymbolicExecution.Roslyn
@@ -109,11 +110,11 @@ else
     Tag(""ElseFirst"", first);
     Tag(""ElseSecond"", second);
 }";
-            var collector = SETestContext.CreateCS(code, new SetTestConstraintCheck()).Validator;
-            collector.ValidateTag("IfFirst", x => x.HasConstraint(TestConstraint.First).Should().BeTrue());
-            collector.ValidateTag("IfSecond", x => x.HasConstraint(TestConstraint.Second).Should().BeTrue());
-            collector.ValidateTag("ElseFirst", x => x.HasConstraint(TestConstraint.First).Should().BeTrue());
-            collector.ValidateTag("ElseSecond", x => x.HasConstraint(TestConstraint.Second).Should().BeTrue());
+            var collector = SETestContext.CreateCS(code, new BoolTestCheck()).Validator;
+            collector.ValidateTag("IfFirst", x => x.HasConstraint(BoolConstraint.True).Should().BeTrue());
+            collector.ValidateTag("IfSecond", x => x.HasConstraint(BoolConstraint.False).Should().BeTrue());
+            collector.ValidateTag("ElseFirst", x => x.HasConstraint(BoolConstraint.True).Should().BeTrue());
+            collector.ValidateTag("ElseSecond", x => x.HasConstraint(BoolConstraint.False).Should().BeTrue());
         }
 
         [TestMethod]

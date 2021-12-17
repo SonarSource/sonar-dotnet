@@ -21,6 +21,7 @@
 using System;
 using System.Collections.Generic;
 using SonarAnalyzer.Helpers;
+using SonarAnalyzer.SymbolicExecution.Constraints;
 
 namespace SonarAnalyzer.SymbolicExecution.Sonar.Constraints
 {

@@ -19,7 +19,7 @@
  */
 
 using System.Collections.Generic;
-using SonarAnalyzer.SymbolicExecution.Sonar.Constraints;
+using SonarAnalyzer.SymbolicExecution.Constraints;
 
 namespace SonarAnalyzer.SymbolicExecution.Sonar.SymbolicValues
 {

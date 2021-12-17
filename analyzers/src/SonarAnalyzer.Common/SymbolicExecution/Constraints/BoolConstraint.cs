@@ -18,21 +18,19 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using Microsoft.CodeAnalysis;
-using Microsoft.CodeAnalysis.Operations;
-using SonarAnalyzer.SymbolicExecution.Roslyn;
-
-namespace SonarAnalyzer.UnitTest.TestFramework.SymbolicExecution
+namespace SonarAnalyzer.SymbolicExecution.Constraints
 {
-    internal class SetTestConstraintCheck : SymbolicCheck
+    public sealed class BoolConstraint : SymbolicConstraint
     {
-        public override ProgramState PostProcess(SymbolicContext context)
-        {
-            if (context.Operation.Instance.Kind == OperationKind.Literal && ((ILiteralOperation)context.Operation.Instance).ConstantValue.Value is bool value)
-            {
-                context.State[context.Operation].SetConstraint(value ? TestConstraint.First : TestConstraint.Second);
-            }
-            return context.State;
-        }
+        public static readonly BoolConstraint True = new();
+        public static readonly BoolConstraint False = new();
+
+        public override SymbolicConstraint Opposite =>
+            this == True ? False : True;
+
+        protected override string Name =>
+            this == True ? nameof(True) : nameof(False);
+
+        private BoolConstraint() { }
     }
 }

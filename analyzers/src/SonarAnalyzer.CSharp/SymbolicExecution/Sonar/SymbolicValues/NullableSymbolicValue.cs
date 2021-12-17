@@ -21,6 +21,7 @@
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Linq;
+using SonarAnalyzer.SymbolicExecution.Constraints;
 using SonarAnalyzer.SymbolicExecution.Sonar.Constraints;
 
 namespace SonarAnalyzer.SymbolicExecution.Sonar.SymbolicValues

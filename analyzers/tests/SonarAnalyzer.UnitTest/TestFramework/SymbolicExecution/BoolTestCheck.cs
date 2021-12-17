@@ -18,19 +18,22 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-namespace SonarAnalyzer.SymbolicExecution.Sonar.Constraints
+using Microsoft.CodeAnalysis;
+using Microsoft.CodeAnalysis.Operations;
+using SonarAnalyzer.SymbolicExecution.Constraints;
+using SonarAnalyzer.SymbolicExecution.Roslyn;
+
+namespace SonarAnalyzer.UnitTest.TestFramework.SymbolicExecution
 {
-    public sealed class BoolConstraint : SymbolicConstraint
+    internal class BoolTestCheck : SymbolicCheck    // ToDo: This will be replaced with default engine behavior in MMF-2229
     {
-        public static readonly BoolConstraint True = new();
-        public static readonly BoolConstraint False = new();
-
-        public override SymbolicConstraint Opposite =>
-            this == True ? False : True;
-
-        protected override string Name =>
-            this == True ? nameof(True) : nameof(False);
-
-        private BoolConstraint() { }
+        public override ProgramState PostProcess(SymbolicContext context)
+        {
+            if (context.Operation.Instance.Kind == OperationKind.Literal && ((ILiteralOperation)context.Operation.Instance).ConstantValue.Value is bool value)
+            {
+                context.State[context.Operation].SetConstraint(value ? BoolConstraint.True : BoolConstraint.False);
+            }
+            return context.State;
+        }
     }
 }
