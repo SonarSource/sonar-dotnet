@@ -121,7 +121,9 @@ You can see how we do it in our own repository for SonarLint Connected mode (and
 
 ### Build configuration
 
-* [CI pipeline scripts and docs](https://github.com/SonarSource/dotnet-infra)
+* [CI Infrastructure](https://github.com/SonarSource/re-ci-infrastructure)
+* [CI Infrastructure docs](https://github.com/SonarSource/re-ci-infrastructure/blob/master/languages-dotnet/README.md)
+* [VM Images repository](https://github.com/SonarSource/re-ci-images)
 * [Azure Pipelines](https://sonarsource.visualstudio.com/DotNetTeam%20Project/_build?definitionId=77&_a=summary)
 * [Peachee configuration](https://github.com/SonarSource/peachee-languages/tree/dotnet)
 
