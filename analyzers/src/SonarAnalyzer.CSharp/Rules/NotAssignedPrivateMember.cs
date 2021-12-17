@@ -33,7 +33,6 @@ using MemberUsage = SonarAnalyzer.Common.NodeSymbolAndSemanticModel<Microsoft.Co
 namespace SonarAnalyzer.Rules.CSharp
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
-    [Rule(DiagnosticId)]
     public sealed class NotAssignedPrivateMember : SonarDiagnosticAnalyzer
     {
         /*

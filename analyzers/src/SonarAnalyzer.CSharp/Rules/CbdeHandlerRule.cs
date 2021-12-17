@@ -23,13 +23,11 @@ using System.Collections.Immutable;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.CBDE;
-using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
 
 namespace SonarAnalyzer.Rules.CSharp
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
-    [Rule(S3949DiagnosticId)]
     // Note (1): For now, this rule actually runs only under windows and outside of SonarLint
     // Note (2): This rule is disabled for integration tests due to inconsistent behavior.
     // After removing the CBDE and rewriting the rule please don't forget to enable it in `AllSonarAnalyzerRules.ruleset`

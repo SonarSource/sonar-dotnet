@@ -25,18 +25,12 @@ using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
-using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
 using StyleCop.Analyzers.Lightup;
 
 namespace SonarAnalyzer.Rules.CSharp
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
-    [Rule(DiagnosticIdRuleS3994)]
-    [Rule(DiagnosticIdRuleS3995)]
-    [Rule(DiagnosticIdRuleS3996)]
-    [Rule(DiagnosticIdRuleS3997)]
-    [Rule(DiagnosticIdRuleS4005)]
     public sealed class UseUriInsteadOfString : SonarDiagnosticAnalyzer
     {
         private const string DiagnosticIdRuleS3994 = "S3994";

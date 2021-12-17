@@ -31,7 +31,6 @@ using StyleCop.Analyzers.Lightup;
 namespace SonarAnalyzer.Rules.CSharp
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
-    [Rule(DiagnosticId)]
     public partial class InfiniteRecursion : SonarDiagnosticAnalyzer
     {
         private const string DiagnosticId = "S2190";

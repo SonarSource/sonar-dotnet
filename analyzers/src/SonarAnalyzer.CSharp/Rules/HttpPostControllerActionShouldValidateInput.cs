@@ -30,7 +30,6 @@ using SonarAnalyzer.Helpers;
 namespace SonarAnalyzer.Rules.CSharp
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
-    [Rule(DiagnosticId)]
     public sealed class HttpPostControllerActionShouldValidateInput : SonarDiagnosticAnalyzer
     {
         private const string DiagnosticId = "S4564";

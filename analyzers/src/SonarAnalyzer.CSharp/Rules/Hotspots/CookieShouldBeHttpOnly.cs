@@ -28,7 +28,6 @@ using SonarAnalyzer.Helpers.Trackers;
 namespace SonarAnalyzer.Rules.CSharp
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
-    [Rule(DiagnosticId)]
     public sealed class CookieShouldBeHttpOnly : ObjectShouldBeInitializedCorrectlyBase
     {
         private const string DiagnosticId = "S3330";

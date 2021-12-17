@@ -32,7 +32,6 @@ using StyleCop.Analyzers.Lightup;
 namespace SonarAnalyzer.Rules.CSharp
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
-    [Rule(DiagnosticId)]
     public class TooManyGenericParameters : ParameterLoadingDiagnosticAnalyzer
     {
         private const string DiagnosticId = "S2436";

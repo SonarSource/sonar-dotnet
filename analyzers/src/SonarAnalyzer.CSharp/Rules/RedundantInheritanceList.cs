@@ -35,7 +35,6 @@ using StyleCop.Analyzers.Lightup;
 namespace SonarAnalyzer.Rules.CSharp
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
-    [Rule(DiagnosticId)]
     public sealed class RedundantInheritanceList : SonarDiagnosticAnalyzer
     {
         internal const string DiagnosticId = "S1939";

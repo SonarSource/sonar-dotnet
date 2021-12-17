@@ -31,7 +31,6 @@ using SonarAnalyzer.Helpers;
 namespace SonarAnalyzer.Rules.CSharp
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
-    [Rule(DiagnosticId)]
     public sealed class CommentedOutCode : SonarDiagnosticAnalyzer
     {
         private const string DiagnosticId = "S125";

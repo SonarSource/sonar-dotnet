@@ -37,7 +37,6 @@ using StyleCop.Analyzers.Lightup;
 namespace SonarAnalyzer.Rules.CSharp
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
-    [Rule(DiagnosticId)]
     public sealed class ClearTextProtocolsAreSensitive : HotspotDiagnosticAnalyzer
     {
         private const string DiagnosticId = "S5332";
