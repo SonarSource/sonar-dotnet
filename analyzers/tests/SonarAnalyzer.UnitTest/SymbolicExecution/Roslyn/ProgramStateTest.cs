@@ -18,6 +18,7 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System;
 using System.Linq;
 using FluentAssertions;
 using Microsoft.CodeAnalysis;
@@ -142,6 +143,25 @@ namespace SonarAnalyzer.UnitTest.SymbolicExecution.Roslyn
         }
 
         [TestMethod]
+        public void SetOperationValue_Null_ReturnsNull()
+        {
+            var operation = TestHelper.CompileCfgBodyCS("var x = 42;").Blocks[1].Operations[0];
+            var sut = ProgramState.Empty;
+
+            sut[operation].Should().BeNull();
+            sut = sut.SetOperationValue(operation, null);
+            sut[operation].Should().Be(null);
+        }
+
+        [TestMethod]
+        public void SetOperationValue_NullOperation_Throws() =>
+            ProgramState.Empty.Invoking(x => x.SetOperationValue((IOperation)null, new SymbolicValue(new SymbolicValueCounter()))).Should().Throw<ArgumentNullException>();
+
+        [TestMethod]
+        public void SetOperationValue_WithWrapper_NullOperation_Throws() =>
+            ProgramState.Empty.Invoking(x => x.SetOperationValue((IOperationWrapperSonar)null, new SymbolicValue(new SymbolicValueCounter()))).Should().Throw<NullReferenceException>();
+
+        [TestMethod]
         public void SetSymbolValue_ReturnsValues()
         {
             var counter = new SymbolicValueCounter();
@@ -187,6 +207,10 @@ namespace SonarAnalyzer.UnitTest.SymbolicExecution.Roslyn
             sut = sut.SetSymbolValue(symbol, value2);
             sut[symbol].Should().Be(value2);
         }
+
+        [TestMethod]
+        public void SetSymbolValue_NullSymbol_Throws() =>
+            ProgramState.Empty.Invoking(x => x.SetSymbolValue(null, new SymbolicValue(new SymbolicValueCounter()))).Should().Throw<ArgumentNullException>();
 
         private static ISymbol[] CreateSymbols()
         {

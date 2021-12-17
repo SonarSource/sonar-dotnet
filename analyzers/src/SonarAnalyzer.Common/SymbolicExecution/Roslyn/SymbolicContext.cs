@@ -39,5 +39,20 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
 
         public SymbolicValue CreateSymbolicValue() =>
             new(symbolicValueCounter);
+
+        public ProgramState SetOperationConstraint(SymbolicConstraint constraint)
+        {
+            if (State[Operation] is { } value)
+            {
+                value.SetConstraint(constraint);
+                return State;
+            }
+            else
+            {
+                value = CreateSymbolicValue();
+                value.SetConstraint(constraint);
+                return State.SetOperationValue(Operation, value);
+            }
+        }
     }
 }

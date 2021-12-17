@@ -43,11 +43,11 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
             this.symbolValue = symbolValue;
         }
 
+        public ProgramState SetOperationValue(IOperationWrapperSonar operation, SymbolicValue value) =>
+            SetOperationValue(operation.Instance, value);
+
         public ProgramState SetOperationValue(IOperation operation, SymbolicValue value) =>
             new(operationValue.SetItem(operation, value), symbolValue);
-
-        public ProgramState SetOperationValue(IOperationWrapperSonar operation, SymbolicValue value) =>
-            new(operationValue.SetItem(operation.Instance, value), symbolValue);
 
         public ProgramState SetSymbolValue(ISymbol symbol, SymbolicValue value) =>
             new(operationValue, symbolValue.SetItem(symbol, value));

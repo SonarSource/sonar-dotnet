@@ -81,7 +81,7 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
 
         private IEnumerable<ExplodedNode> ProcessOperation(ExplodedNode node)
         {
-            var context = new SymbolicContext(symbolicValueCounter, node.Operation, node.State.SetOperationValue(node.Operation, CreateSymbolicValue()));
+            var context = new SymbolicContext(symbolicValueCounter, node.Operation, node.State);
             context = InvokeChecks(context, x => x.PreProcess);
             if (context != null)
             {

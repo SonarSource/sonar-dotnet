@@ -22,6 +22,7 @@ using System;
 using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.SymbolicExecution.Roslyn;
+using SonarAnalyzer.UnitTest.TestFramework.SymbolicExecution;
 using StyleCop.Analyzers.Lightup;
 
 namespace SonarAnalyzer.UnitTest.SymbolicExecution.Roslyn
@@ -64,6 +65,32 @@ namespace SonarAnalyzer.UnitTest.SymbolicExecution.Roslyn
             var sut = new SymbolicContext(counter, CreateOperation(), ProgramState.Empty);
             sut.CreateSymbolicValue().ToString().Should().Be("SV_3");
             counter.NextIdentifier().Should().Be(4);
+        }
+
+        [TestMethod]
+        public void SetOperationConstraint_WithExistingValue_ReusesProgramState()
+        {
+            var counter = new SymbolicValueCounter();
+            var operation = CreateOperation();
+            var state = ProgramState.Empty.SetOperationValue(operation, new SymbolicValue(counter));
+
+            var sut = new SymbolicContext(counter, operation, state);
+            var result = sut.SetOperationConstraint(DummyConstraint.Dummy);
+            result.Should().Be(state);
+            result[operation].HasConstraint(DummyConstraint.Dummy).Should().BeTrue();
+        }
+
+        [TestMethod]
+        public void SetOperationConstraint_WithNewValue_CreatesNewProgramState()
+        {
+            var counter = new SymbolicValueCounter();
+            var operation = CreateOperation();
+            var state = ProgramState.Empty;
+
+            var sut = new SymbolicContext(counter, operation, state);
+            var result = sut.SetOperationConstraint(DummyConstraint.Dummy);
+            result.Should().NotBe(state, "new ProgramState instance should be created");
+            result[operation].HasConstraint(DummyConstraint.Dummy).Should().BeTrue();
         }
 
         private static IOperationWrapperSonar CreateOperation() =>

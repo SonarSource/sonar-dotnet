@@ -122,11 +122,11 @@ namespace SonarAnalyzer.UnitTest.SymbolicExecution.Roslyn
         }
 
         [TestMethod]
-        public void PostProcess_OperationHasValue()
+        public void PostProcess_OperationDoesNotHaveValuesByDefault()
         {
             var validator = SETestContext.CreateCS("var a = true;").Validator;
             validator.ValidatePostProcessCount(3);
-            validator.ValidateOperationsAreNotNull();
+            validator.ValidateOperationValuesAreNull();
         }
 
         [TestMethod]
