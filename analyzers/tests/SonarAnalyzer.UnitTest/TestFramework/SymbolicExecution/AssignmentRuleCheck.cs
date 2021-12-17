@@ -29,13 +29,11 @@ namespace SonarAnalyzer.UnitTest.TestFramework.SymbolicExecution
 {
     internal abstract class AssignmentRuleCheck : SymbolicRuleCheck
     {
-        protected abstract DiagnosticDescriptor Rule { get; }
-
         public override ProgramState PostProcess(SymbolicContext context)
         {
             if (context.Operation.Instance.Kind == OperationKind.SimpleAssignment)
             {
-                NodeContext.ReportIssue(Diagnostic.Create(Rule, context.Operation.Instance.Syntax.GetLocation()), SonarContext);
+                ReportIssue(context.Operation);
             }
             return context.State;
         }
@@ -51,28 +49,28 @@ namespace SonarAnalyzer.UnitTest.TestFramework.SymbolicExecution
     {
         public static readonly DiagnosticDescriptor SMain = CreateDescriptor("SMain", DiagnosticDescriptorBuilder.MainSourceScopeTag);
 
-        protected override DiagnosticDescriptor Rule { get; } = SMain;
+        protected override DiagnosticDescriptor Rule => SMain;
     }
 
     internal class TestScopeAssignmentRuleCheck : AssignmentRuleCheck
     {
         public static readonly DiagnosticDescriptor STest = CreateDescriptor("STest", DiagnosticDescriptorBuilder.TestSourceScopeTag);
 
-        protected override DiagnosticDescriptor Rule { get; } = STest;
+        protected override DiagnosticDescriptor Rule => STest;
     }
 
     internal class AllScopeAssignmentRuleCheck : AssignmentRuleCheck
     {
         public static readonly DiagnosticDescriptor SAll = CreateDescriptor("SAll", DiagnosticDescriptorBuilder.MainSourceScopeTag, DiagnosticDescriptorBuilder.TestSourceScopeTag);
 
-        protected override DiagnosticDescriptor Rule { get; } = SAll;
+        protected override DiagnosticDescriptor Rule => SAll;
     }
 
     internal class InvocationAssignmentRuleCheck : AssignmentRuleCheck
     {
         public static readonly DiagnosticDescriptor SInvocation = CreateDescriptor("SInvocation", DiagnosticDescriptorBuilder.MainSourceScopeTag);
 
-        protected override DiagnosticDescriptor Rule { get; } = SInvocation;
+        protected override DiagnosticDescriptor Rule => SInvocation;
 
         // This RuleCheck executes ONLY on methods that contains at least one invocation
         public override bool ShouldExecute() =>
@@ -83,7 +81,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework.SymbolicExecution
     {
         public static readonly DiagnosticDescriptor SThrow = CreateDescriptor("SThrow", DiagnosticDescriptorBuilder.MainSourceScopeTag);
 
-        protected override DiagnosticDescriptor Rule { get; } = SThrow;
+        protected override DiagnosticDescriptor Rule => SThrow;
 
         public override ProgramState PostProcess(SymbolicContext context) => throw new InvalidOperationException("This check is not useful.");
     }

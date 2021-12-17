@@ -36,8 +36,6 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn.Checks
         private readonly HashSet<ISymbol> exitHeldSymbols = new();
         private readonly Dictionary<ISymbol, IOperationWrapperSonar> symbolOperationMap = new();
 
-        protected abstract DiagnosticDescriptor Rule { get; }
-
         // ToDo: Implement early bail-out if there's no interesting descendant node in context.Node to avoid useless SE runs
         // ToDo: Update this to be disabled by default.
         public override bool ShouldExecute() =>
@@ -72,8 +70,7 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn.Checks
         {
             foreach (var symbol in exitHeldSymbols.Intersect(releasedSymbols))
             {
-                var location = symbolOperationMap[symbol].Instance.Syntax.GetLocation();
-                NodeContext.ReportIssue(Diagnostic.Create(Rule, location));
+                ReportIssue(symbolOperationMap[symbol]);
             }
         }
 
