@@ -49,11 +49,11 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn.Checks
                 if (invocation.TargetMethod.Is(KnownType.System_Threading_Monitor, "Enter")
                     || invocation.TargetMethod.Is(KnownType.System_Threading_Monitor, "TryEnter"))
                 {
-                    return ProcessMonitorEnter(invocation, context);
+                    return ProcessMonitorEnter(context, invocation);
                 }
                 else if (invocation.TargetMethod.Is(KnownType.System_Threading_Monitor, "Exit"))
                 {
-                    return ProcessMonitorExit(invocation, context);
+                    return ProcessMonitorExit(context, invocation);
                 }
             }
             return context.State;
@@ -73,46 +73,42 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn.Checks
             }
         }
 
-        private ProgramState ProcessMonitorEnter(IInvocationOperationWrapper invocationWrapper, SymbolicContext context)
+        private ProgramState ProcessMonitorEnter(SymbolicContext context, IInvocationOperationWrapper invocation)
         {
-            var lockObjectSymbol = FirstArgumentSymbol(invocationWrapper);
-            if (lockObjectSymbol == null)
+            if (FirstArgumentSymbol(invocation) is { } symbol)
             {
-                return context.State;
-            }
+                var state = context.State;
+                if (state[symbol] == null)
+                {
+                    state = state.SetSymbolValue(symbol, context.CreateSymbolicValue());
+                }
 
-            var state = context.State;
-            if (state[lockObjectSymbol] == null)
-            {
-                state = state.SetSymbolValue(lockObjectSymbol, context.CreateSymbolicValue());
+                state[symbol].SetConstraint(LockConstraint.Held);
+                symbolOperationMap[symbol] = context.Operation;
+                return state;
             }
-
-            state[lockObjectSymbol].SetConstraint(LockConstraint.Held);
-            symbolOperationMap[lockObjectSymbol] = context.Operation;
-            return state;
+            return context.State;
         }
 
-        private ProgramState ProcessMonitorExit(IInvocationOperationWrapper invocationWrapper, SymbolicContext context)
+        private ProgramState ProcessMonitorExit(SymbolicContext context, IInvocationOperationWrapper invocation)
         {
-            var lockObjectSymbol = FirstArgumentSymbol(invocationWrapper);
-            if (lockObjectSymbol == null)
+            if (FirstArgumentSymbol(invocation) is { } symbol)
             {
-                return context.State;
-            }
+                var state = context.State;
+                if (state[symbol] == null)
+                {
+                    // In this case the mutex has been released without being held.
+                    state = state.SetSymbolValue(symbol, context.CreateSymbolicValue());
+                }
 
-            var state = context.State;
-            if (state[lockObjectSymbol] == null)
-            {
-                // In this case the mutex has been released without being held.
-                state = state.SetSymbolValue(lockObjectSymbol, context.CreateSymbolicValue());
+                state[symbol].SetConstraint(LockConstraint.Released);
+                releasedSymbols.Add(symbol);
+                return state;
             }
-
-            state[lockObjectSymbol].SetConstraint(LockConstraint.Released);
-            releasedSymbols.Add(lockObjectSymbol);
-            return state;
+            return context.State;
         }
 
-        private static ISymbol FirstArgumentSymbol(IInvocationOperationWrapper invocationWrapper) =>
-            IArgumentOperationWrapper.FromOperation(invocationWrapper.Arguments.First()).Value.TrackedSymbol();
+        private static ISymbol FirstArgumentSymbol(IInvocationOperationWrapper invocation) =>
+            IArgumentOperationWrapper.FromOperation(invocation.Arguments.First()).Value.TrackedSymbol();
     }
 }
