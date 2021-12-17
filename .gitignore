@@ -75,3 +75,5 @@ analyzers/its/output/
 
 # Temporary diff folder
 analyzers/its/diff/
+
+/analyzers/its/sources/**/packages.lock.json
