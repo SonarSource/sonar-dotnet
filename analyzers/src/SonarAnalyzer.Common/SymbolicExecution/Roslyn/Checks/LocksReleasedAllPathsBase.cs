@@ -66,7 +66,7 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn.Checks
 
         public override ProgramState ExitReached(SymbolicContext context)
         {
-            exitHeldSymbols.AddRange(context.State.GetSymbolsWith(LockConstraint.Held));
+            exitHeldSymbols.AddRange(context.State.SymbolsWith(LockConstraint.Held));
             return base.ExitReached(context);
         }
 

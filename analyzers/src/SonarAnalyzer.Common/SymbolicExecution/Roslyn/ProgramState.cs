@@ -52,7 +52,7 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
         public ProgramState SetSymbolValue(ISymbol symbol, SymbolicValue value) =>
             new(operationValue, symbolValue.SetItem(symbol, value));
 
-        public IEnumerable<ISymbol> GetSymbolsWith(SymbolicConstraint constraint) =>
+        public IEnumerable<ISymbol> SymbolsWith(SymbolicConstraint constraint) =>
             symbolValue.Where(x => x.Value.HasConstraint(constraint)).Select(x => x.Key);
     }
 }
