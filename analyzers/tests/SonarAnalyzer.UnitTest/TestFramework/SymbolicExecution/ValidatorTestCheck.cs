@@ -22,12 +22,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using FluentAssertions;
-using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Operations;
 using SonarAnalyzer.SymbolicExecution.Roslyn;
-using SonarAnalyzer.SymbolicExecution.Roslyn.Extensions;
 using SonarAnalyzer.UnitTest.Helpers;
-using StyleCop.Analyzers.Lightup;
 
 namespace SonarAnalyzer.UnitTest.TestFramework.SymbolicExecution
 {

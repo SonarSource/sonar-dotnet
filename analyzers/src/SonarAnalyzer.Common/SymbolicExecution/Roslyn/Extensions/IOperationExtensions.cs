@@ -21,7 +21,7 @@
 using Microsoft.CodeAnalysis;
 using StyleCop.Analyzers.Lightup;
 
-namespace SonarAnalyzer.SymbolicExecution.Roslyn.Extensions
+namespace SonarAnalyzer.SymbolicExecution.Roslyn
 {
     internal static class IOperationExtensions
     {
