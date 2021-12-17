@@ -35,7 +35,7 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn.Checks
 
         private readonly HashSet<ISymbol> releasedSymbols = new();
         private readonly HashSet<ISymbol> exitHeldSymbols = new();
-        private readonly Dictionary<ISymbol, IOperationWrapperSonar> symbolOperationMap = new();
+        private readonly Dictionary<ISymbol, IOperationWrapperSonar> lastSymbolLock = new();
 
         // ToDo: Implement early bail-out if there's no interesting descendant node in context.Node to avoid useless SE runs
         public override bool ShouldExecute() =>
@@ -69,7 +69,7 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn.Checks
         {
             foreach (var unreleasedSymbol in exitHeldSymbols.Intersect(releasedSymbols))
             {
-                ReportIssue(symbolOperationMap[unreleasedSymbol]);
+                ReportIssue(lastSymbolLock[unreleasedSymbol]);
             }
         }
 
@@ -84,7 +84,7 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn.Checks
                 }
 
                 state[symbol].SetConstraint(LockConstraint.Held);
-                symbolOperationMap[symbol] = context.Operation;
+                lastSymbolLock[symbol] = context.Operation;
                 return state;
             }
             return context.State;
