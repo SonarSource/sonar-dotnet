@@ -20,6 +20,8 @@ variables:
     value: 'C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\MSBuild\Current\Bin\msbuild.exe'
   - name: isReleaseBranch
     value: ${{ or(eq(variables['Build.SourceBranch'], 'refs/heads/master'), startsWith(variables['Build.SourceBranch'], 'refs/heads/branch-')) }}
+  - name: vsVersion
+    value: '17.0'
 
 resources:
   repositories:
@@ -61,7 +63,7 @@ stages:
         inputs:
           solution: scripts/version/ChangeVersion.proj
           msbuildArgs: '/p:Sha1=$(Build.SourceVersion) /p:BranchName=$(Build.SourceBranchName) /p:BuildNumber=$(Build.BuildId) /p:BuildConfiguration=$(BuildConfiguration)'
-          vsVersion: '16.0'
+          vsVersion: $(vsVersion)
 
       - task: DownloadSecureFile@1
         displayName: 'Download snk file'
@@ -86,7 +88,7 @@ stages:
           platform: '$(buildPlatform)'
           configuration: '$(buildConfiguration)'
           msbuildArgs: '/p:DeployExtension=false /p:SignAssembly=$(isReleaseBranch) /p:AssemblyOriginatorKeyFile="$(snk.secureFilePath)" /p:Sha1=$(Build.SourceVersion) /p:BuildNumber=$(Build.BuildId) /p:WarningLevel=0'
-          vsVersion: '16.0'
+          vsVersion: $(vsVersion)
 
       - task: NuGetCommand@2
         displayName: "Build NuGet packages"
@@ -266,7 +268,7 @@ stages:
         inputs:
           solution: scripts/version/ChangeVersion.proj
           msbuildArgs: '/p:Sha1=$(Build.SourceVersion) /p:BranchName=$(Build.SourceBranchName) /p:BuildNumber=$(Build.BuildId) /p:BuildConfiguration=$(BuildConfiguration)'
-          vsVersion: '16.0'
+          vsVersion: $(vsVersion)
 
       - script: '"${{ variables.MsBuildPath }}" /t:restore /p:RestoreLockedMode=true /p:RestoreConfigFile="analyzers\NuGet.Config" $(solution)'
         displayName: "NuGet Restore"
@@ -278,7 +280,7 @@ stages:
           platform: '$(buildPlatform)'
           configuration: '$(buildConfiguration)'
           msbuildArgs: '/p:DeployExtension=false /p:RunAnalyzers=true'
-          vsVersion: '16.0'
+          vsVersion: $(vsVersion)
 
       - task: DownloadPipelineArtifact@2
         displayName: 'Download coverage reports'
