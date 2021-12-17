@@ -30,7 +30,7 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class LocksReleasedAllPathsTest
     {
-        private static readonly DiagnosticDescriptor[] OnlyDiagnostics = new[] { LocksReleasedAllPaths.S2222 };
+        private static readonly DiagnosticDescriptor[] OnlyDiagnostics = { LocksReleasedAllPaths.S2222 };
 
         [TestMethod]
         [TestCategory("Rule")]

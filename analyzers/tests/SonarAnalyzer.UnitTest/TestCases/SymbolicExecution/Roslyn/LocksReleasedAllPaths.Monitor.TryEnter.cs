@@ -101,7 +101,7 @@ class Program
     public void Method10()
     {
         Monitor.Exit(obj);
-        Monitor.TryEnter(obj); // Compliant
+        Monitor.TryEnter(obj); // FN
     }
 
     public void Method11()

@@ -416,6 +416,7 @@ namespace SonarAnalyzer.Helpers
         internal static readonly KnownType System_Text_RegularExpressions_Regex = new KnownType("System.Text.RegularExpressions.Regex");
         internal static readonly KnownType System_Text_StringBuilder = new KnownType("System.Text.StringBuilder");
         internal static readonly KnownType System_Threading_Tasks_Task = new KnownType("System.Threading.Tasks.Task");
+        internal static readonly KnownType System_Threading_Monitor = new("System.Threading.Monitor");
         internal static readonly KnownType System_Threading_Tasks_Task_T = new KnownType("System.Threading.Tasks.Task<TResult>");
         internal static readonly KnownType System_Threading_Tasks_TaskFactory = new KnownType("System.Threading.Tasks.TaskFactory");
         internal static readonly KnownType System_Threading_Tasks_ValueTask = new KnownType("System.Threading.Tasks.ValueTask");

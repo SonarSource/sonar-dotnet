@@ -18,7 +18,9 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System.Collections.Generic;
 using System.Collections.Immutable;
+using System.Linq;
 using Microsoft.CodeAnalysis;
 using StyleCop.Analyzers.Lightup;
 
@@ -49,5 +51,8 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
 
         public ProgramState SetSymbolValue(ISymbol symbol, SymbolicValue value) =>
             new(operationValue, symbolValue.SetItem(symbol, value));
+
+        public IEnumerable<ISymbol> SymbolsWith(SymbolicConstraint constraint) =>
+            symbolValue.Where(x => x.Value.HasConstraint(constraint)).Select(x => x.Key);
     }
 }

@@ -18,8 +18,10 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.Helpers;
+using StyleCop.Analyzers.Lightup;
 
 namespace SonarAnalyzer.SymbolicExecution.Roslyn
 {
@@ -27,6 +29,8 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
     {
         protected SonarAnalysisContext SonarContext { get; private set; }
         protected SyntaxNodeAnalysisContext NodeContext { get; private set; }
+
+        protected abstract DiagnosticDescriptor Rule { get; }
 
         /// <summary>
         /// Decide if a CFG should be created for current method and SE should be evaluated. We should only run SE for a method if there's a chance for finding something for performance reasons.
@@ -41,5 +45,8 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
             SonarContext = sonarContext;
             NodeContext = nodeContext;
         }
+
+        protected void ReportIssue(IOperationWrapperSonar operation) =>
+            NodeContext.ReportIssue(Diagnostic.Create(Rule, operation.Instance.Syntax.GetLocation()));
     }
 }
