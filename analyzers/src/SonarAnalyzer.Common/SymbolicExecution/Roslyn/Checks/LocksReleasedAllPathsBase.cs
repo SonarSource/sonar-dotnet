@@ -44,8 +44,6 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn.Checks
 
         public override ProgramState PostProcess(SymbolicContext context)
         {
-            var currentState = context.State;
-
             if (context.Operation.Instance.Kind == OperationKindEx.Invocation)
             {
                 var invocationWrapper = IInvocationOperationWrapper.FromOperation(context.Operation.Instance);
@@ -53,15 +51,14 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn.Checks
                 if (invocationWrapper.TargetMethod.Is(KnownType.System_Threading_Monitor, "Enter")
                     || invocationWrapper.TargetMethod.Is(KnownType.System_Threading_Monitor, "TryEnter"))
                 {
-                    currentState = ProcessMonitorEnter(invocationWrapper, currentState, context);
+                    return ProcessMonitorEnter(invocationWrapper, context);
                 }
                 else if (invocationWrapper.TargetMethod.Is(KnownType.System_Threading_Monitor, "Exit"))
                 {
-                    currentState = ProcessMonitorExit(invocationWrapper, currentState, context);
+                    return ProcessMonitorExit(invocationWrapper, context);
                 }
             }
-
-            return currentState;
+            return context.State;
         }
 
         public override ProgramState ExitReached(SymbolicContext context)
@@ -80,42 +77,44 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn.Checks
             }
         }
 
-        private ProgramState ProcessMonitorEnter(IInvocationOperationWrapper invocationWrapper, ProgramState currentState, SymbolicContext context)
+        private ProgramState ProcessMonitorEnter(IInvocationOperationWrapper invocationWrapper, SymbolicContext context)
         {
             var lockObjectSymbol = GetParameterValueSymbol(invocationWrapper);
             if (lockObjectSymbol == null)
             {
-                return currentState;
+                return context.State;
             }
 
-            if (currentState[lockObjectSymbol] == null)
+            var state = context.State;
+            if (state[lockObjectSymbol] == null)
             {
-                currentState = currentState.SetSymbolValue(lockObjectSymbol, context.CreateSymbolicValue());
+                state = state.SetSymbolValue(lockObjectSymbol, context.CreateSymbolicValue());
             }
 
             // Should we handle the cases when the mutex is already held or released?
-            currentState[lockObjectSymbol].SetConstraint(LockConstraint.Held);
+            state[lockObjectSymbol].SetConstraint(LockConstraint.Held);
             symbolOperationMap[lockObjectSymbol] = context.Operation;
-            return currentState;
+            return state;
         }
 
-        private ProgramState ProcessMonitorExit(IInvocationOperationWrapper invocationWrapper, ProgramState currentState, SymbolicContext context)
+        private ProgramState ProcessMonitorExit(IInvocationOperationWrapper invocationWrapper, SymbolicContext context)
         {
             var lockObjectSymbol = GetParameterValueSymbol(invocationWrapper);
             if (lockObjectSymbol == null)
             {
-                return currentState;
+                return context.State;
             }
 
-            if (currentState[lockObjectSymbol] == null)
+            var state = context.State;
+            if (state[lockObjectSymbol] == null)
             {
                 // In this case the mutex has been released without being held.
-                currentState = currentState.SetSymbolValue(lockObjectSymbol, context.CreateSymbolicValue());
+                state = state.SetSymbolValue(lockObjectSymbol, context.CreateSymbolicValue());
             }
 
-            currentState[lockObjectSymbol].SetConstraint(LockConstraint.Released);
+            state[lockObjectSymbol].SetConstraint(LockConstraint.Released);
             previouslyReleasedSymbols.Add(lockObjectSymbol);
-            return currentState;
+            return state;
         }
 
         private static ISymbol GetParameterValueSymbol(IInvocationOperationWrapper invocationWrapper) =>
