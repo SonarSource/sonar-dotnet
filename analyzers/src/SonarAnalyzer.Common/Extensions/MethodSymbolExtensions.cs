@@ -26,24 +26,8 @@ namespace SonarAnalyzer.Helpers
 {
     public static class MethodSymbolExtensions
     {
-        internal static bool HasName(this IMethodSymbol methodSymbol, string name)
-        {
-            var builder = new StringBuilder();
-
-            var currentNamespace = methodSymbol.ContainingNamespace;
-            while (currentNamespace is { IsGlobalNamespace: false })
-            {
-                builder.Insert(0, currentNamespace.MetadataName);
-                builder.Insert(currentNamespace.MetadataName.Length, ".");
-                currentNamespace = currentNamespace.ContainingNamespace;
-            }
-
-            builder.Append(methodSymbol.ContainingType.MetadataName);
-            builder.Append(".");
-            builder.Append(methodSymbol.MetadataName);
-
-            return builder.ToString() == name;
-        }
+        internal static bool Is(this IMethodSymbol methodSymbol, KnownType knownType, string name) =>
+            methodSymbol.ContainingType.Is(knownType) && methodSymbol.MetadataName == name;
 
         public static Comparison ComparisonKind(this IMethodSymbol method) =>
             method?.MethodKind == MethodKind.UserDefinedOperator

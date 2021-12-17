@@ -32,22 +32,9 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn.Checks
     {
         internal const string DiagnosticId = "S2222";
         protected const string MessageFormat = "Unlock this lock along all executions paths of this method.";
-        private const string MonitorEnter = "System.Threading.Monitor.Enter";
-        private const string MonitorTryEnter = "System.Threading.Monitor.TryEnter";
-        private const string MonitorExit = "System.Threading.Monitor.Exit";
         private readonly HashSet<ISymbol> previouslyReleasedSymbols = new();
         private readonly HashSet<ISymbol> exitHeldSymbols = new();
         private readonly Dictionary<ISymbol, IOperationWrapperSonar> symbolOperationMap = new();
-        /*
-        ToDo: Add support for the other thread synchronization APIs
-        private const string MutexOpenExisting = "System.Threading.Mutex.OpenExisting";
-        private const string MutexReleaseMutex = "System.Threading.Mutex.ReleaseMutex";
-        private const string MutexTryOpenExisting = "System.Threading.Mutex.OpenExisting";
-        private const string MutexWaitOne = "System.Threading.Mutex.WaitOne";
-        private const string ReaderWriterLockAcquireReaderLock = "System.Threading.ReaderWriterLock.AcquireReaderLock";
-        private const string ReaderWriterLockAcquireWriterLock = "System.Threading.ReaderWriterLock.AcquireWriterLock";
-        private const string ReaderWriterLockDowngradeFromWriterLock = "System.Threading.ReaderWriterLock.DowngradeFromWriterLock";
-        */
 
         protected abstract DiagnosticDescriptor Rule { get; }
 
@@ -64,11 +51,12 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn.Checks
             {
                 var invocationWrapper = IInvocationOperationWrapper.FromOperation(context.Operation.Instance);
                 // ToDo: we ignore the number of parameters for now.
-                if (invocationWrapper.TargetMethod.HasName(MonitorEnter) || invocationWrapper.TargetMethod.HasName(MonitorTryEnter))
+                if (invocationWrapper.TargetMethod.Is(KnownType.System_Threading_Monitor, "Enter")
+                    || invocationWrapper.TargetMethod.Is(KnownType.System_Threading_Monitor, "TryEnter"))
                 {
                     currentState = ProcessMonitorEnter(invocationWrapper, currentState, context);
                 }
-                else if (invocationWrapper.TargetMethod.HasName(MonitorExit))
+                else if (invocationWrapper.TargetMethod.Is(KnownType.System_Threading_Monitor, "Exit"))
                 {
                     currentState = ProcessMonitorExit(invocationWrapper, currentState, context);
                 }
