@@ -47,7 +47,7 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn.Checks
         {
             if (context.Operation.Instance.Kind == OperationKindEx.Invocation)
             {
-                var invocationWrapper = IInvocationOperationWrapper.FromOperation(context.Operation.Instance);
+                var invocationWrapper = context.Operation.Instance.AsInvocation();
                 // ToDo: we ignore the number of parameters for now.
                 if (invocationWrapper.TargetMethod.Is(KnownType.System_Threading_Monitor, "Enter")
                     || invocationWrapper.TargetMethod.Is(KnownType.System_Threading_Monitor, "TryEnter"))

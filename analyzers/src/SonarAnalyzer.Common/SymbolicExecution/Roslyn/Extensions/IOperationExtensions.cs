@@ -39,5 +39,8 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
                 // _ => throw new NotSupportedException($"Unsupported operation type: {operation.Kind}")
                 _ => null
             };
+
+        internal static IInvocationOperationWrapper AsInvocation(this IOperation operation) =>
+            IInvocationOperationWrapper.FromOperation(operation);
     }
 }
