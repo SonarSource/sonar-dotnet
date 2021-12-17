@@ -46,10 +46,7 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
             NodeContext = nodeContext;
         }
 
-        protected void ReportIssue(IOperationWrapperSonar operationWrapperSonar)
-        {
-            var location = operationWrapperSonar.Instance.Syntax.GetLocation();
-            NodeContext.ReportIssue(Diagnostic.Create(Rule, location));
-        }
+        protected void ReportIssue(IOperationWrapperSonar operationWrapperSonar) =>
+            NodeContext.ReportIssue(Diagnostic.Create(Rule, operationWrapperSonar.Instance.Syntax.GetLocation()));
     }
 }

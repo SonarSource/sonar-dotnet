@@ -103,26 +103,16 @@ namespace SonarAnalyzer.UnitTest.SymbolicExecution.Roslyn
         [DataRow(@"StaticField = 42; Tag(""Target"", StaticField);")]
         [DataRow(@"Sample.StaticProperty = 42; Tag(""Target"", Sample.StaticProperty);")]
         [DataRow(@"StaticProperty = 42; Tag(""Target"", StaticProperty);")]
+        [DataRow(@"var arr = new byte[] { 13 }; arr[0] = 42; Tag(""Target"", arr[0]);")]
         [DataRow(@"var dict = new Dictionary<string, int>(); dict[""key""] = 42; Tag(""Target"", dict[""key""]);")]
         [DataRow(@"var other = new Sample(); other.Property = 42; Tag(""Target"", other.Property);")]
         [DataRow(@"this.Property = 42; Tag(""Target"", this.Property);")]
         [DataRow(@"Property = 42; Tag(""Target"", Property);")]
         [DataRow(@"this.field = 42; Tag(""Target"", this.field);")]
         [DataRow(@"field = 42; Tag(""Target"", this.field);")]
-        public void SimpleAssignment_ToSupported_FromLiteral(string snippet)
+        public void SimpleAssignment_ToUnsupported_FromLiteral(string snipet)
         {
-            var collector = SETestContext.CreateCS(snippet, new LiteralDummyTestCheck()).Validator;
-            collector.Validate("Literal: 42", x => x.State[x.Operation].HasConstraint(DummyConstraint.Dummy).Should().BeTrue("it's scaffolded"));
-            collector.ValidateTag("Target", x => (x?.HasConstraint(DummyConstraint.Dummy) ?? false).Should().BeTrue());
-        }
-
-
-
-        [DataTestMethod]
-        [DataRow(@"var arr = new byte[] { 13 }; arr[0] = 42; Tag(""Target"", arr[0]);")]
-        public void SimpleAssignment_ToUnsupported_FromLiteral(string snippet)
-        {
-            var collector = SETestContext.CreateCS(snippet, new LiteralDummyTestCheck()).Validator;
+            var collector = SETestContext.CreateCS(snipet, new LiteralDummyTestCheck()).Validator;
             collector.Validate("Literal: 42", x => x.State[x.Operation].HasConstraint(DummyConstraint.Dummy).Should().BeTrue("it's scaffolded"));
             collector.ValidateTag("Target", x => (x?.HasConstraint(DummyConstraint.Dummy) ?? false).Should().BeFalse());
         }

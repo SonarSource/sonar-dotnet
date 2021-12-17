@@ -101,7 +101,7 @@ class Program
     public void Method10()
     {
         Monitor.Exit(obj);
-        Monitor.TryEnter(obj); // Noncompliant {{Unlock this lock along all executions paths of this method.}}
+        Monitor.TryEnter(obj); // FN
     }
 
     public void Method11()

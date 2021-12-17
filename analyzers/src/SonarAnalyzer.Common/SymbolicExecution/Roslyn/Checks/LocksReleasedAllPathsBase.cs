@@ -21,6 +21,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using Microsoft.CodeAnalysis;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
 using SonarAnalyzer.Helpers;
 using SonarAnalyzer.SymbolicExecution.Constraints;
 using StyleCop.Analyzers.Lightup;
@@ -37,24 +38,22 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn.Checks
         private readonly Dictionary<ISymbol, IOperationWrapperSonar> symbolOperationMap = new();
 
         // ToDo: Implement early bail-out if there's no interesting descendant node in context.Node to avoid useless SE runs
-        // ToDo: Update this to be disabled by default.
         public override bool ShouldExecute() =>
-            true;
+            NodeContext.Node.DescendantNodes().OfType<IdentifierNameSyntax>().Any(x => x.Identifier.Text == "Exit");
 
         public override ProgramState PostProcess(SymbolicContext context)
         {
-            if (context.Operation.Instance.Kind == OperationKindEx.Invocation)
+            if (context.Operation.Instance.AsInvocation() is { } invocation)
             {
-                var invocationWrapper = context.Operation.Instance.AsInvocation();
                 // ToDo: we ignore the number of parameters for now.
-                if (invocationWrapper.TargetMethod.Is(KnownType.System_Threading_Monitor, "Enter")
-                    || invocationWrapper.TargetMethod.Is(KnownType.System_Threading_Monitor, "TryEnter"))
+                if (invocation.TargetMethod.Is(KnownType.System_Threading_Monitor, "Enter")
+                    || invocation.TargetMethod.Is(KnownType.System_Threading_Monitor, "TryEnter"))
                 {
-                    return ProcessMonitorEnter(invocationWrapper, context);
+                    return ProcessMonitorEnter(invocation, context);
                 }
-                else if (invocationWrapper.TargetMethod.Is(KnownType.System_Threading_Monitor, "Exit"))
+                else if (invocation.TargetMethod.Is(KnownType.System_Threading_Monitor, "Exit"))
                 {
-                    return ProcessMonitorExit(invocationWrapper, context);
+                    return ProcessMonitorExit(invocation, context);
                 }
             }
             return context.State;
@@ -68,9 +67,9 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn.Checks
 
         public override void ExecutionCompleted()
         {
-            foreach (var symbol in exitHeldSymbols.Intersect(releasedSymbols))
+            foreach (var unreleasedSymbol in exitHeldSymbols.Intersect(releasedSymbols))
             {
-                ReportIssue(symbolOperationMap[symbol]);
+                ReportIssue(symbolOperationMap[unreleasedSymbol]);
             }
         }
 
