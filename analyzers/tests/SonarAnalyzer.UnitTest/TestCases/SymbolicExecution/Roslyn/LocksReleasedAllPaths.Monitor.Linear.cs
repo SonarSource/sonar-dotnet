@@ -188,6 +188,13 @@ class Program
         }
     }
 
+    public void WrongCallNoArgs(string arg)
+    {
+        Monitor.Exit(obj);
+        Console.WriteLine(arg.Length);
+        Monitor.Enter(); // Error CS1501 No overload for method 'Enter' takes 0 arguments
+    }
+
     static int Property
     {
         get // Adds coverage for handling FlowCaptureReference operations.

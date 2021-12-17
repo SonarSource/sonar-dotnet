@@ -76,7 +76,7 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn.Checks
 
         private ProgramState ProcessMonitorEnter(IInvocationOperationWrapper invocationWrapper, SymbolicContext context)
         {
-            var lockObjectSymbol = GetParameterValueSymbol(invocationWrapper);
+            var lockObjectSymbol = FirstArgumentSymbol(invocationWrapper);
             if (lockObjectSymbol == null)
             {
                 return context.State;
@@ -88,7 +88,6 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn.Checks
                 state = state.SetSymbolValue(lockObjectSymbol, context.CreateSymbolicValue());
             }
 
-            // Should we handle the cases when the mutex is already held or released?
             state[lockObjectSymbol].SetConstraint(LockConstraint.Held);
             symbolOperationMap[lockObjectSymbol] = context.Operation;
             return state;
@@ -96,7 +95,7 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn.Checks
 
         private ProgramState ProcessMonitorExit(IInvocationOperationWrapper invocationWrapper, SymbolicContext context)
         {
-            var lockObjectSymbol = GetParameterValueSymbol(invocationWrapper);
+            var lockObjectSymbol = FirstArgumentSymbol(invocationWrapper);
             if (lockObjectSymbol == null)
             {
                 return context.State;
@@ -114,7 +113,7 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn.Checks
             return state;
         }
 
-        private static ISymbol GetParameterValueSymbol(IInvocationOperationWrapper invocationWrapper) =>
+        private static ISymbol FirstArgumentSymbol(IInvocationOperationWrapper invocationWrapper) =>
             IArgumentOperationWrapper.FromOperation(invocationWrapper.Arguments.First()).Value.TrackedSymbol();
     }
 }
