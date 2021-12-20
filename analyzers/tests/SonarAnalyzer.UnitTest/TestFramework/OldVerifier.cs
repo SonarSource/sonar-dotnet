@@ -297,7 +297,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework
             new VerifierBuilder()
                 .AddAnalyzer(() => diagnosticAnalyzer)
                 .AddReferences(additionalReferences)
-                .AddPaths(paths.ToArray())
+                .AddPaths(RemoveTestCasesPrefix(paths))
                 .Verify();
 
         public static void VerifyAnalyzer(string path,
@@ -587,5 +587,13 @@ namespace SonarAnalyzer.UnitTest.TestFramework
 
         private static IEnumerable<MetadataReference> AddTestReference(IEnumerable<MetadataReference> additionalReferences) =>
             NuGetMetadataReference.MSTestTestFrameworkV1.Concat(additionalReferences ?? Enumerable.Empty<MetadataReference>());
+
+        private static string[] RemoveTestCasesPrefix(IEnumerable<string> paths)
+        {
+            const string prefix = @"TestCases\";
+            return paths.FirstOrDefault(x => !x.StartsWith(prefix)) is { } unexpectedPath
+                ? throw new ArgumentException($"TestCase path doesn't start with {prefix}: {unexpectedPath}")
+                : paths.Select(x => x.Substring(prefix.Length)).ToArray();
+        }
     }
 }

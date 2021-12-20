@@ -37,12 +37,14 @@ namespace SonarAnalyzer.UnitTest.TestFramework
         public Verifier(VerifierBuilder builder)
         {
             this.builder = builder ?? throw new ArgumentNullException(nameof(builder));
+            // FIXME: Validate input
         }
 
         public void Verify()    // This should never has any arguments
         {
             using var scope = new EnvironmentVariableScope { EnableConcurrentAnalysis = true };     // ToDo: Implement properly
-            var pathsWithConcurrencyTests = builder.Paths.Count() == 1 ? CreateConcurrencyTest(builder.Paths) : builder.Paths.AsEnumerable();  // FIXME: Redesign
+            var paths = builder.Paths.Select(x => Path.GetFullPath(Path.Combine("TestCases", x)));
+            var pathsWithConcurrencyTests = paths.Count() == 1 ? CreateConcurrencyTest(paths) : paths;  // FIXME: Redesign
             var solution = SolutionBuilder.CreateSolutionFromPaths(pathsWithConcurrencyTests, OutputKind.DynamicallyLinkedLibrary, builder.References);
             var analyzers = builder.Analyzers.Select(x => x()).ToArray();
             foreach (var compilation in solution.Compile(builder.ParseOptions.ToArray()))
