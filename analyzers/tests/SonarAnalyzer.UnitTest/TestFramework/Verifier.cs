@@ -53,26 +53,29 @@ namespace SonarAnalyzer.UnitTest.TestFramework
             }
         }
 
-        private static List<string> CreateConcurrencyTest(IEnumerable<string> paths)
+        private static IEnumerable<string> CreateConcurrencyTest(IEnumerable<string> paths)
         {
-            var ret = new List<string>(paths);  // FIXME: Redesign
             var language = AnalyzerLanguage.FromPath(paths.First());    // FIXME: Redesign
             foreach (var path in paths)
             {
-                var sourcePath = Path.GetFullPath(path);
-                var newPath = Path.Combine(Path.GetDirectoryName(sourcePath), Path.GetFileNameWithoutExtension(path) + ".Concurrent" + Path.GetExtension(path));    // FIXME: Ugly
-                var content = File.ReadAllText(sourcePath, Encoding.UTF8);
-                File.WriteAllText(newPath, language == AnalyzerLanguage.CSharp ? $"namespace AppendedNamespaceForConcurrencyTest {{ {content} }}" : InsertNamespaceForVB(content)); // FIXME: Redesign
-                ret.Add(newPath);
+                var newPath = Path.ChangeExtension(path, ".Concurrent." + language.FileExtension);  // FIXME: dot
+                var content = File.ReadAllText(path, Encoding.UTF8);
+                File.WriteAllText(newPath, InsertConcurrentNamespace(content, language));
+                yield return newPath;
             }
-            return ret;
         }
 
-        private static string InsertNamespaceForVB(string content)
+        private static string InsertConcurrentNamespace(string content, AnalyzerLanguage language)   // FIXME: Not static
         {
-            var match = Regex.Match(content, @"^\s*Imports\s+.+$", RegexOptions.Multiline | RegexOptions.RightToLeft);
-            var idx = match.Success ? match.Index + match.Length + 1 : 0;
-            return content.Insert(idx, "Namespace AppendedNamespaceForConcurrencyTest : ") + " : End Namespace";
+            return language.LanguageName switch
+            {
+                LanguageNames.CSharp => $"namespace AppendedNamespaceForConcurrencyTest {{ {content} }}",
+                LanguageNames.VisualBasic => content.Insert(ImportsIndexVB(), "Namespace AppendedNamespaceForConcurrencyTest : ") + " : End Namespace",
+                _ => throw new InvalidOperationException("Unexpected project language: " + language)    // FIXME: Refactor repetitive
+            };
+
+            int ImportsIndexVB() =>
+                Regex.Match(content, @"^\s*Imports\s+.+$", RegexOptions.Multiline | RegexOptions.RightToLeft) is { Success: true } match ? match.Index + match.Length + 1 : 0;
         }
     }
 }
