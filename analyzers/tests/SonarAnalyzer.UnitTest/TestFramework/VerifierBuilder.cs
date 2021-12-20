@@ -45,6 +45,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework
             Paths = original.Paths;
             References = original.References;
             ParseOptions = original.ParseOptions;
+            Analyzers = original.Analyzers;
         }
 
         /// <summary>
