@@ -143,14 +143,14 @@ namespace SonarAnalyzer.UnitTest.SymbolicExecution.Roslyn
         }
 
         [TestMethod]
-        public void SetOperationValue_Null_ReturnsNull()
+        public void SetOperationValue_NullValue_ReturnsNull()
         {
             var operation = TestHelper.CompileCfgBodyCS("var x = 42;").Blocks[1].Operations[0];
             var sut = ProgramState.Empty;
 
             sut[operation].Should().BeNull();
             sut = sut.SetOperationValue(operation, null);
-            sut[operation].Should().Be(null);
+            sut[operation].Should().BeNull();
         }
 
         [TestMethod]
