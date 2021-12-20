@@ -34,6 +34,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework
 {
     internal class Verifier
     {
+        private static readonly Regex ImportsRegexVB = new Regex(@"^\s*Imports\s+.+$", RegexOptions.Multiline | RegexOptions.RightToLeft);
         private readonly VerifierBuilder builder;
         private readonly DiagnosticAnalyzer[] analyzers;
         private readonly AnalyzerLanguage language;
@@ -80,7 +81,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework
             };
 
             int ImportsIndexVB() =>
-                Regex.Match(content, @"^\s*Imports\s+.+$", RegexOptions.Multiline | RegexOptions.RightToLeft) is { Success: true } match ? match.Index + match.Length + 1 : 0;  //FIXME: Extract regex
+                ImportsRegexVB.Match(content) is { Success: true } match ? match.Index + match.Length + 1 : 0;
         }
     }
 }
