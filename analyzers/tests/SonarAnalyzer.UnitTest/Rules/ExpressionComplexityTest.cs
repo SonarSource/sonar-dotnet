@@ -30,25 +30,25 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         public void ExpressionComplexity_CSharp() =>
-            Verifier.VerifyAnalyzer(@"TestCases\ExpressionComplexity.cs",
+            OldVerifier.VerifyAnalyzer(@"TestCases\ExpressionComplexity.cs",
                 new CS.ExpressionComplexity { Maximum = 3},
                 ParseOptionsHelper.FromCSharp8);
 
 #if NET
         [TestMethod]
         public void ExpressionComplexity_CSharp9() =>
-            Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\ExpressionComplexity.CSharp9.cs",
+            OldVerifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\ExpressionComplexity.CSharp9.cs",
                 new CS.ExpressionComplexity { Maximum = 3});
 
         [TestMethod]
         public void ExpressionComplexity_CSharp10() =>
-            Verifier.VerifyAnalyzerFromCSharp10Console(@"TestCases\ExpressionComplexity.CSharp10.cs",
+            OldVerifier.VerifyAnalyzerFromCSharp10Console(@"TestCases\ExpressionComplexity.CSharp10.cs",
                 new CS.ExpressionComplexity { Maximum = 3});
 #endif
 
         [TestMethod]
         public void ExpressionComplexity_VisualBasic() =>
-            Verifier.VerifyAnalyzer(@"TestCases\ExpressionComplexity.vb",
+            OldVerifier.VerifyAnalyzer(@"TestCases\ExpressionComplexity.vb",
                 new VB.ExpressionComplexity { Maximum = 3 });
     }
 }

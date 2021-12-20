@@ -29,6 +29,6 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         public void RightCurlyBraceStartsLine() =>
-            Verifier.VerifyAnalyzer(@"TestCases\RightCurlyBraceStartsLine.cs", new RightCurlyBraceStartsLine());
+            OldVerifier.VerifyAnalyzer(@"TestCases\RightCurlyBraceStartsLine.cs", new RightCurlyBraceStartsLine());
     }
 }

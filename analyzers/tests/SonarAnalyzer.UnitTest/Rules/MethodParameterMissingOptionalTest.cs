@@ -29,17 +29,17 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         public void MethodParameterMissingOptional() =>
-            Verifier.VerifyAnalyzer(@"TestCases\MethodParameterMissingOptional.cs", new MethodParameterMissingOptional());
+            OldVerifier.VerifyAnalyzer(@"TestCases\MethodParameterMissingOptional.cs", new MethodParameterMissingOptional());
 
 #if NET
         [TestMethod]
         public void MethodParameterMissingOptional_CSharp9() =>
-            Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\MethodParameterMissingOptional.CSharp9.cs", new MethodParameterMissingOptional());
+            OldVerifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\MethodParameterMissingOptional.CSharp9.cs", new MethodParameterMissingOptional());
 #endif
 
         [TestMethod]
         public void MethodParameterMissingOptional_CodeFix() =>
-            Verifier.VerifyCodeFix(
+            OldVerifier.VerifyCodeFix(
                 @"TestCases\MethodParameterMissingOptional.cs",
                 @"TestCases\MethodParameterMissingOptional.Fixed.cs",
                 new MethodParameterMissingOptional(),

@@ -29,17 +29,17 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         public void FieldShouldBeReadonly() =>
-            Verifier.VerifyAnalyzer(@"TestCases\FieldShouldBeReadonly.cs", new FieldShouldBeReadonly(), ParseOptionsHelper.FromCSharp8);
+            OldVerifier.VerifyAnalyzer(@"TestCases\FieldShouldBeReadonly.cs", new FieldShouldBeReadonly(), ParseOptionsHelper.FromCSharp8);
 
 #if NET
         [TestMethod]
         public void FieldShouldBeReadonly_CSharp9() =>
-            Verifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\FieldShouldBeReadonly.CSharp9.cs", new FieldShouldBeReadonly());
+            OldVerifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\FieldShouldBeReadonly.CSharp9.cs", new FieldShouldBeReadonly());
 #endif
 
         [TestMethod]
         public void FieldShouldBeReadonly_CodeFix() =>
-            Verifier.VerifyCodeFix(
+            OldVerifier.VerifyCodeFix(
                 @"TestCases\FieldShouldBeReadonly.cs",
                 @"TestCases\FieldShouldBeReadonly.Fixed.cs",
                 new FieldShouldBeReadonly(),

@@ -39,7 +39,7 @@ namespace SonarAnalyzer.UnitTest.Rules.SymbolicExecution
         [DataRow(ProjectType.Product)]
         [DataRow(ProjectType.Test)]
         public void InvalidCastToInterface(ProjectType projectType) =>
-            Verifier.VerifyAnalyzer(
+            OldVerifier.VerifyAnalyzer(
                 @"TestCases\SymbolicExecution\Sonar\InvalidCastToInterface.cs",
                 Analyzers(),
                 additionalReferences: TestHelper.ProjectTypeReference(projectType).Concat(MetadataReferenceFacade.NETStandard21),
@@ -49,14 +49,14 @@ namespace SonarAnalyzer.UnitTest.Rules.SymbolicExecution
 #if NET
         [TestMethod]
         public void InvalidCastToInterface_CSharp9() =>
-            Verifier.VerifyAnalyzerFromCSharp9Console(
+            OldVerifier.VerifyAnalyzerFromCSharp9Console(
                 @"TestCases\SymbolicExecution\Sonar\InvalidCastToInterface.CSharp9.cs",
                 Analyzers(),
                 onlyDiagnostics: OnlyDiagnostics);
 
         [TestMethod]
         public void InvalidCastToInterface_CSharp10() =>
-            Verifier.VerifyAnalyzerFromCSharp10Library(
+            OldVerifier.VerifyAnalyzerFromCSharp10Library(
                 @"TestCases\SymbolicExecution\Sonar\InvalidCastToInterface.CSharp10.cs",
                 Analyzers(),
                 onlyDiagnostics: OnlyDiagnostics);

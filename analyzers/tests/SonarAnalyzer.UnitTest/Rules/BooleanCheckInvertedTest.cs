@@ -30,11 +30,11 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         public void BooleanCheckInverted_CS() =>
-            Verifier.VerifyAnalyzer(@"TestCases\BooleanCheckInverted.cs", new CS.BooleanCheckInverted());
+            OldVerifier.VerifyAnalyzer(@"TestCases\BooleanCheckInverted.cs", new CS.BooleanCheckInverted());
 
         [TestMethod]
         public void BooleanCheckInverted_CS_CodeFix() =>
-            Verifier.VerifyCodeFix(
+            OldVerifier.VerifyCodeFix(
                 @"TestCases\BooleanCheckInverted.cs",
                 @"TestCases\BooleanCheckInverted.Fixed.cs",
                 @"TestCases\BooleanCheckInverted.Fixed.Batch.cs",
@@ -43,7 +43,7 @@ namespace SonarAnalyzer.UnitTest.Rules
 
         [TestMethod]
         public void BooleanCheckInverted_VB() =>
-            Verifier.VerifyAnalyzer(@"TestCases\BooleanCheckInverted.vb",
+            OldVerifier.VerifyAnalyzer(@"TestCases\BooleanCheckInverted.vb",
                 new VB.BooleanCheckInverted());
     }
 }

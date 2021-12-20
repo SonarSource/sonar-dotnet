@@ -29,11 +29,11 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         public void UseCurlyBraces() =>
-            Verifier.VerifyAnalyzer(@"TestCases\UseCurlyBraces.cs", new UseCurlyBraces());
+            OldVerifier.VerifyAnalyzer(@"TestCases\UseCurlyBraces.cs", new UseCurlyBraces());
 
         [TestMethod]
         public void UseCurlyBraces_FromCSharp7() =>
-            Verifier.VerifyAnalyzer(@"TestCases\UseCurlyBraces.CSharp7.cs",
+            OldVerifier.VerifyAnalyzer(@"TestCases\UseCurlyBraces.CSharp7.cs",
                 new UseCurlyBraces(),
                 ParseOptionsHelper.FromCSharp7);
     }

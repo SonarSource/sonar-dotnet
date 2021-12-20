@@ -35,21 +35,21 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         public void DisablingCSRFProtection_CS() =>
-            Verifier.VerifyAnalyzerFromCSharp9Library(
+            OldVerifier.VerifyAnalyzerFromCSharp9Library(
                 @"TestCases\Hotspots\DisablingCSRFProtection.cs",
                 new DisablingCsrfProtection(AnalyzerConfiguration.AlwaysEnabled),
                 AdditionalReferences());
 
         [TestMethod]
         public void DisablingCSRFProtection_CSharp10() =>
-            Verifier.VerifyAnalyzerFromCSharp10Library(
+            OldVerifier.VerifyAnalyzerFromCSharp10Library(
                 @"TestCases\Hotspots\DisablingCSRFProtection.CSharp10.cs",
                 new DisablingCsrfProtection(AnalyzerConfiguration.AlwaysEnabled),
                 AdditionalReferences());
 
         [TestMethod]
         public void DisablingCSRFProtection_CSharpPreview() =>
-            Verifier.VerifyAnalyzerCSharpPreviewLibrary(
+            OldVerifier.VerifyAnalyzerCSharpPreviewLibrary(
                 @"TestCases\Hotspots\DisablingCSRFProtection.CSharp.Preview.cs",
                 new DisablingCsrfProtection(AnalyzerConfiguration.AlwaysEnabled),
                 AdditionalReferences());

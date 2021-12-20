@@ -30,28 +30,28 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         public void UseShortCircuitingOperators_VisualBasic() =>
-            Verifier.VerifyAnalyzer(@"TestCases\UseShortCircuitingOperator.vb", new VB.UseShortCircuitingOperator());
+            OldVerifier.VerifyAnalyzer(@"TestCases\UseShortCircuitingOperator.vb", new VB.UseShortCircuitingOperator());
 
         [TestMethod]
         public void UseShortCircuitingOperators_VisualBasic_CodeFix() =>
-            Verifier.VerifyCodeFix(@"TestCases\UseShortCircuitingOperator.vb",
+            OldVerifier.VerifyCodeFix(@"TestCases\UseShortCircuitingOperator.vb",
                                    @"TestCases\UseShortCircuitingOperator.Fixed.vb",
                                    new VB.UseShortCircuitingOperator(),
                                    new VB.UseShortCircuitingOperatorFixProvider());
 
         [TestMethod]
         public void UseShortCircuitingOperators_CSharp() =>
-            Verifier.VerifyAnalyzer(@"TestCases\UseShortCircuitingOperator.cs", new CS.UseShortCircuitingOperator());
+            OldVerifier.VerifyAnalyzer(@"TestCases\UseShortCircuitingOperator.cs", new CS.UseShortCircuitingOperator());
 
 #if NET
         [TestMethod]
         public void UseShortCircuitingOperators_CSharp9() =>
-            Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\UseShortCircuitingOperator.CSharp9.cs",
+            OldVerifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\UseShortCircuitingOperator.CSharp9.cs",
                                                       new CS.UseShortCircuitingOperator());
 
         [TestMethod]
         public void UseShortCircuitingOperators_CSharp9_CodeFix() =>
-            Verifier.VerifyCodeFix(@"TestCases\UseShortCircuitingOperator.CSharp9.cs",
+            OldVerifier.VerifyCodeFix(@"TestCases\UseShortCircuitingOperator.CSharp9.cs",
                                    @"TestCases\UseShortCircuitingOperator.CSharp9.Fixed.cs",
                                    new CS.UseShortCircuitingOperator(),
                                    new CS.UseShortCircuitingOperatorFixProvider(),
@@ -60,7 +60,7 @@ namespace SonarAnalyzer.UnitTest.Rules
 
         [TestMethod]
         public void UseShortCircuitingOperators_CSharp_CodeFix() =>
-            Verifier.VerifyCodeFix(@"TestCases\UseShortCircuitingOperator.cs",
+            OldVerifier.VerifyCodeFix(@"TestCases\UseShortCircuitingOperator.cs",
                                    @"TestCases\UseShortCircuitingOperator.Fixed.cs",
                                    new CS.UseShortCircuitingOperator(),
                                    new CS.UseShortCircuitingOperatorFixProvider());

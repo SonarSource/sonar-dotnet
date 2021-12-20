@@ -30,7 +30,7 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         public void StaticFieldWrittenFromInstanceMember() =>
-            Verifier.VerifyAnalyzer(@"TestCases\StaticFieldWrittenFromInstanceMember.cs",
+            OldVerifier.VerifyAnalyzer(@"TestCases\StaticFieldWrittenFromInstanceMember.cs",
                                     new StaticFieldWrittenFromInstanceMember(),
                                     ParseOptionsHelper.FromCSharp8,
                                     MetadataReferenceFacade.NETStandard21);
@@ -38,11 +38,11 @@ namespace SonarAnalyzer.UnitTest.Rules
 #if NET
         [TestMethod]
         public void StaticFieldWrittenFromInstanceMember_CSharp9() =>
-            Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\StaticFieldWrittenFromInstanceMember.CSharp9.cs", new StaticFieldWrittenFromInstanceMember());
+            OldVerifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\StaticFieldWrittenFromInstanceMember.CSharp9.cs", new StaticFieldWrittenFromInstanceMember());
 
         [TestMethod]
         public void StaticFieldWrittenFromInstanceMember_CSharp10() =>
-            Verifier.VerifyAnalyzerFromCSharp10Console(@"TestCases\StaticFieldWrittenFromInstanceMember.CSharp10.cs", new StaticFieldWrittenFromInstanceMember());
+            OldVerifier.VerifyAnalyzerFromCSharp10Console(@"TestCases\StaticFieldWrittenFromInstanceMember.CSharp10.cs", new StaticFieldWrittenFromInstanceMember());
 #endif
     }
 }

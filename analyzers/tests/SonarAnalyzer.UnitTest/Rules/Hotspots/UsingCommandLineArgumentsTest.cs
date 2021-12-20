@@ -31,12 +31,12 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         public void UsingCommandLineArguments_CS() =>
-            Verifier.VerifyAnalyzer(@"TestCases\Hotspots\UsingCommandLineArguments.cs",
+            OldVerifier.VerifyAnalyzer(@"TestCases\Hotspots\UsingCommandLineArguments.cs",
                                     new CS.UsingCommandLineArguments(AnalyzerConfiguration.AlwaysEnabled));
 
         [TestMethod]
         public void UsingCommandLineArguments_CSharp9() =>
-            Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\Hotspots\UsingCommandLineArguments.CSharp9.cs",
+            OldVerifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\Hotspots\UsingCommandLineArguments.CSharp9.cs",
                                                       new CS.UsingCommandLineArguments(AnalyzerConfiguration.AlwaysEnabled));
 
         [TestMethod]
@@ -67,7 +67,7 @@ partial class Program1
 
         [TestMethod]
         public void UsingCommandLineArguments_VB() =>
-            Verifier.VerifyAnalyzer(@"TestCases\Hotspots\UsingCommandLineArguments.vb",
+            OldVerifier.VerifyAnalyzer(@"TestCases\Hotspots\UsingCommandLineArguments.vb",
                                     new VB.UsingCommandLineArguments(AnalyzerConfiguration.AlwaysEnabled));
 
         [TestMethod]

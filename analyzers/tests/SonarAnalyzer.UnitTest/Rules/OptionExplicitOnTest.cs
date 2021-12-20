@@ -42,15 +42,15 @@ namespace SonarAnalyzer.UnitTest.Rules
 
         [TestMethod]
         public void OptionExplicitOn_IsOff() =>
-            Verifier.VerifyVisualBasicAnalyzer("Option Explicit Off ' Noncompliant ^1#19 {{Change this to 'Option Explicit On'.}}", new OptionExplicitOn());
+            OldVerifier.VerifyVisualBasicAnalyzer("Option Explicit Off ' Noncompliant ^1#19 {{Change this to 'Option Explicit On'.}}", new OptionExplicitOn());
 
         [TestMethod]
         public void OptionExplicitOn_IsOn() =>
-            Verifier.VerifyVisualBasicAnalyzer("Option Explicit On", new OptionExplicitOn());
+            OldVerifier.VerifyVisualBasicAnalyzer("Option Explicit On", new OptionExplicitOn());
 
         [TestMethod]
         public void OptionExplicitOn_IsMissing() =>
-            Verifier.VerifyVisualBasicAnalyzer("Option Strict Off", new OptionExplicitOn());
+            OldVerifier.VerifyVisualBasicAnalyzer("Option Strict Off", new OptionExplicitOn());
 
         [TestMethod]
         public void OptionExplicitOn_Concurrent()

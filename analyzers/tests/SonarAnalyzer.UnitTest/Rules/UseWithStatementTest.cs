@@ -29,6 +29,6 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         public void UseWithStatement() =>
-            Verifier.VerifyAnalyzer(@"TestCases\UseWithStatement.vb", new UseWithStatement { MinimumSeriesLength = 2 });
+            OldVerifier.VerifyAnalyzer(@"TestCases\UseWithStatement.vb", new UseWithStatement { MinimumSeriesLength = 2 });
     }
 }

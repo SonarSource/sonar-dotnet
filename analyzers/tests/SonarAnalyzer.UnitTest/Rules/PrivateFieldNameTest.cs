@@ -29,6 +29,6 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         public void PrivateFieldName() =>
-            Verifier.VerifyAnalyzer(@"TestCases\PrivateFieldName.vb", new PrivateFieldName());
+            OldVerifier.VerifyAnalyzer(@"TestCases\PrivateFieldName.vb", new PrivateFieldName());
     }
 }

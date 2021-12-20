@@ -31,16 +31,16 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         public void PubliclyWritableDirectories_CS() =>
-            Verifier.VerifyAnalyzer(@"TestCases\Hotspots\PubliclyWritableDirectories.cs", new CS.PubliclyWritableDirectories(AnalyzerConfiguration.AlwaysEnabled));
+            OldVerifier.VerifyAnalyzer(@"TestCases\Hotspots\PubliclyWritableDirectories.cs", new CS.PubliclyWritableDirectories(AnalyzerConfiguration.AlwaysEnabled));
 
 #if NET
         [TestMethod]
         public void PubliclyWritableDirectories_CSharp10() =>
-            Verifier.VerifyAnalyzerFromCSharp10Library(@"TestCases\Hotspots\PubliclyWritableDirectories.CSharp10.cs", new CS.PubliclyWritableDirectories(AnalyzerConfiguration.AlwaysEnabled));
+            OldVerifier.VerifyAnalyzerFromCSharp10Library(@"TestCases\Hotspots\PubliclyWritableDirectories.CSharp10.cs", new CS.PubliclyWritableDirectories(AnalyzerConfiguration.AlwaysEnabled));
 #endif
 
         [TestMethod]
         public void PubliclyWritableDirectories_VB() =>
-            Verifier.VerifyAnalyzer(@"TestCases\Hotspots\PubliclyWritableDirectories.vb", new VB.PubliclyWritableDirectories(AnalyzerConfiguration.AlwaysEnabled));
+            OldVerifier.VerifyAnalyzer(@"TestCases\Hotspots\PubliclyWritableDirectories.vb", new VB.PubliclyWritableDirectories(AnalyzerConfiguration.AlwaysEnabled));
     }
 }

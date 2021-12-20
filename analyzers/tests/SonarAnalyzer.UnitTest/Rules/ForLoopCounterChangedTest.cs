@@ -29,12 +29,12 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         public void ForLoopCounterChanged() =>
-            Verifier.VerifyAnalyzer(@"TestCases\ForLoopCounterChanged.cs", new ForLoopCounterChanged());
+            OldVerifier.VerifyAnalyzer(@"TestCases\ForLoopCounterChanged.cs", new ForLoopCounterChanged());
 
 #if NET
         [TestMethod]
         public void ForLoopCounterChanged_CSharp10() =>
-            Verifier.VerifyAnalyzerFromCSharp10Library(@"TestCases\ForLoopCounterChanged.CSharp10.cs", new ForLoopCounterChanged());
+            OldVerifier.VerifyAnalyzerFromCSharp10Library(@"TestCases\ForLoopCounterChanged.CSharp10.cs", new ForLoopCounterChanged());
 #endif
     }
 }

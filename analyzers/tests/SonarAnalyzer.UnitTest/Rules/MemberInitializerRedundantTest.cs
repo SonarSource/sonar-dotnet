@@ -30,20 +30,20 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         public void MemberInitializerRedundant_RoslynCfg() =>
-            Verifier.VerifyAnalyzer(@"TestCases\MemberInitializerRedundant.cs", new MemberInitializerRedundant(), ParseOptionsHelper.FromCSharp8);
+            OldVerifier.VerifyAnalyzer(@"TestCases\MemberInitializerRedundant.cs", new MemberInitializerRedundant(), ParseOptionsHelper.FromCSharp8);
 
         [TestMethod]
         public void MemberInitializerRedundant_RoslynCfg_FlowCaptureOperationNotSupported() =>
-            Verifier.VerifyNoIssueReported(@"TestCases\MemberInitializerRedundant.RoslynCfg.FlowCaptureBug.cs", new MemberInitializerRedundant(), ParseOptionsHelper.FromCSharp8);
+            OldVerifier.VerifyNoIssueReported(@"TestCases\MemberInitializerRedundant.RoslynCfg.FlowCaptureBug.cs", new MemberInitializerRedundant(), ParseOptionsHelper.FromCSharp8);
 
         [TestMethod]
         public void MemberInitializerRedundant_SonarCfg() =>
-            Verifier.VerifyAnalyzer(@"TestCases\MemberInitializerRedundant.cs", new MemberInitializerRedundant(AnalyzerConfiguration.AlwaysEnabledWithSonarCfg), ParseOptionsHelper.FromCSharp8);
+            OldVerifier.VerifyAnalyzer(@"TestCases\MemberInitializerRedundant.cs", new MemberInitializerRedundant(AnalyzerConfiguration.AlwaysEnabledWithSonarCfg), ParseOptionsHelper.FromCSharp8);
 
         [TestMethod]
         [TestCategory("CodeFix")]
         public void MemberInitializerRedundant_CodeFix() =>
-            Verifier.VerifyCodeFix(
+            OldVerifier.VerifyCodeFix(
                 @"TestCases\MemberInitializerRedundant.cs",
                 @"TestCases\MemberInitializerRedundant.Fixed.cs",
                 new MemberInitializerRedundant(),
@@ -52,11 +52,11 @@ namespace SonarAnalyzer.UnitTest.Rules
 #if NET
         [TestMethod]
         public void MemberInitializerRedundant_CSharp9() =>
-            Verifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\MemberInitializerRedundant.CSharp9.cs", new MemberInitializerRedundant());
+            OldVerifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\MemberInitializerRedundant.CSharp9.cs", new MemberInitializerRedundant());
 
         [TestMethod]
         public void MemberInitializerRedundant_CSharp9_CodeFix() =>
-            Verifier.VerifyCodeFix(
+            OldVerifier.VerifyCodeFix(
                 @"TestCases\MemberInitializerRedundant.CSharp9.cs",
                 @"TestCases\MemberInitializerRedundant.CSharp9.Fixed.cs",
                 new MemberInitializerRedundant(),
@@ -65,11 +65,11 @@ namespace SonarAnalyzer.UnitTest.Rules
 
         [TestMethod]
         public void MemberInitializerRedundant_CSharp10() =>
-            Verifier.VerifyAnalyzerFromCSharp10Library(@"TestCases\MemberInitializerRedundant.CSharp10.cs", new MemberInitializerRedundant());
+            OldVerifier.VerifyAnalyzerFromCSharp10Library(@"TestCases\MemberInitializerRedundant.CSharp10.cs", new MemberInitializerRedundant());
 
         [TestMethod]
         public void MemberInitializerRedundant_CSharp10_CodeFix() =>
-            Verifier.VerifyCodeFix(
+            OldVerifier.VerifyCodeFix(
                 @"TestCases\MemberInitializerRedundant.CSharp10.cs",
                 @"TestCases\MemberInitializerRedundant.CSharp10.Fixed.cs",
                 new MemberInitializerRedundant(),

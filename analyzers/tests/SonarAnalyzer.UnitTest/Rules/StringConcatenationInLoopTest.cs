@@ -31,8 +31,8 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         public void StringConcatenationInLoop()
         {
-            Verifier.VerifyAnalyzer(@"TestCases\StringConcatenationInLoop.cs", new CS.StringConcatenationInLoop());
-            Verifier.VerifyAnalyzer(@"TestCases\StringConcatenationInLoop.vb", new VB.StringConcatenationInLoop());
+            OldVerifier.VerifyAnalyzer(@"TestCases\StringConcatenationInLoop.cs", new CS.StringConcatenationInLoop());
+            OldVerifier.VerifyAnalyzer(@"TestCases\StringConcatenationInLoop.vb", new VB.StringConcatenationInLoop());
         }
     }
 }

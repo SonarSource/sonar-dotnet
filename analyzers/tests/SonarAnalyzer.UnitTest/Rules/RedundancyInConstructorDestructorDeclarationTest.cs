@@ -29,20 +29,20 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         public void RedundancyInConstructorDestructorDeclaration() =>
-            Verifier.VerifyAnalyzer(@"TestCases\RedundancyInConstructorDestructorDeclaration.cs", new RedundancyInConstructorDestructorDeclaration());
+            OldVerifier.VerifyAnalyzer(@"TestCases\RedundancyInConstructorDestructorDeclaration.cs", new RedundancyInConstructorDestructorDeclaration());
 
 #if NET
         [TestMethod]
         public void RedundancyInConstructorDestructorDeclaration_CSharp9() =>
-            Verifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\RedundancyInConstructorDestructorDeclaration.CSharp9.cs", new RedundancyInConstructorDestructorDeclaration());
+            OldVerifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\RedundancyInConstructorDestructorDeclaration.CSharp9.cs", new RedundancyInConstructorDestructorDeclaration());
 
         [TestMethod]
         public void RedundancyInConstructorDestructorDeclaration_CSharp10() =>
-            Verifier.VerifyAnalyzerFromCSharp10Library(@"TestCases\RedundancyInConstructorDestructorDeclaration.CSharp10.cs", new RedundancyInConstructorDestructorDeclaration());
+            OldVerifier.VerifyAnalyzerFromCSharp10Library(@"TestCases\RedundancyInConstructorDestructorDeclaration.CSharp10.cs", new RedundancyInConstructorDestructorDeclaration());
 
         [TestMethod]
         public void RedundancyInConstructorDestructorDeclaration_CodeFix_CSharp9() =>
-            Verifier.VerifyCodeFix(
+            OldVerifier.VerifyCodeFix(
                 @"TestCases\RedundancyInConstructorDestructorDeclaration.CSharp9.cs",
                 @"TestCases\RedundancyInConstructorDestructorDeclaration.CSharp9.Fixed.cs",
                 new RedundancyInConstructorDestructorDeclaration(),
@@ -52,7 +52,7 @@ namespace SonarAnalyzer.UnitTest.Rules
 
         [TestMethod]
         public void RedundancyInConstructorDestructorDeclaration_CodeFix_CSharp10() =>
-            Verifier.VerifyCodeFix(
+            OldVerifier.VerifyCodeFix(
                 @"TestCases\RedundancyInConstructorDestructorDeclaration.CSharp10.cs",
                 @"TestCases\RedundancyInConstructorDestructorDeclaration.CSharp10.Fixed.cs",
                 new RedundancyInConstructorDestructorDeclaration(),
@@ -63,7 +63,7 @@ namespace SonarAnalyzer.UnitTest.Rules
 
         [TestMethod]
         public void RedundancyInConstructorDestructorDeclaration_CodeFix_BaseCall() =>
-            Verifier.VerifyCodeFix(
+            OldVerifier.VerifyCodeFix(
                 @"TestCases\RedundancyInConstructorDestructorDeclaration.cs",
                 @"TestCases\RedundancyInConstructorDestructorDeclaration.BaseCall.Fixed.cs",
                 new RedundancyInConstructorDestructorDeclaration(),
@@ -72,7 +72,7 @@ namespace SonarAnalyzer.UnitTest.Rules
 
         [TestMethod]
         public void RedundancyInConstructorDestructorDeclaration_CodeFix_Constructor() =>
-            Verifier.VerifyCodeFix(
+            OldVerifier.VerifyCodeFix(
                 @"TestCases\RedundancyInConstructorDestructorDeclaration.cs",
                 @"TestCases\RedundancyInConstructorDestructorDeclaration.Constructor.Fixed.cs",
                 new RedundancyInConstructorDestructorDeclaration(),
@@ -81,7 +81,7 @@ namespace SonarAnalyzer.UnitTest.Rules
 
         [TestMethod]
         public void RedundancyInConstructorDestructorDeclaration_CodeFix_Destructor() =>
-            Verifier.VerifyCodeFix(
+            OldVerifier.VerifyCodeFix(
                 @"TestCases\RedundancyInConstructorDestructorDeclaration.cs",
                 @"TestCases\RedundancyInConstructorDestructorDeclaration.Destructor.Fixed.cs",
                 new RedundancyInConstructorDestructorDeclaration(),

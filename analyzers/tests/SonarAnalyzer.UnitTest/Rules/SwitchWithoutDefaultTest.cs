@@ -31,8 +31,8 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         public void SwitchWithoutDefault()
         {
-            Verifier.VerifyAnalyzer(@"TestCases\SwitchWithoutDefault.cs", new CS.SwitchWithoutDefault());
-            Verifier.VerifyAnalyzer(@"TestCases\SwitchWithoutDefault.vb", new VB.SwitchWithoutDefault());
+            OldVerifier.VerifyAnalyzer(@"TestCases\SwitchWithoutDefault.cs", new CS.SwitchWithoutDefault());
+            OldVerifier.VerifyAnalyzer(@"TestCases\SwitchWithoutDefault.vb", new VB.SwitchWithoutDefault());
         }
     }
 }

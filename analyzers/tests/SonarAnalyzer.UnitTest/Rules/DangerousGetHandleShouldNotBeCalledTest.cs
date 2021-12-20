@@ -31,20 +31,20 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         public void DangerousGetHandleShouldNotBeCalled_CS() =>
-            Verifier.VerifyAnalyzer(@"TestCases\DangerousGetHandleShouldNotBeCalled.cs",
+            OldVerifier.VerifyAnalyzer(@"TestCases\DangerousGetHandleShouldNotBeCalled.cs",
                 new CS.DangerousGetHandleShouldNotBeCalled(),
                 MetadataReferenceFacade.MicrosoftWin32Registry);
 #if NET
         [TestMethod]
         public void DangerousGetHandleShouldNotBeCalled_CS_CSharp9() =>
-            Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\DangerousGetHandleShouldNotBeCalled.CSharp9.cs",
+            OldVerifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\DangerousGetHandleShouldNotBeCalled.CSharp9.cs",
                 new CS.DangerousGetHandleShouldNotBeCalled(),
                 MetadataReferenceFacade.MicrosoftWin32Registry);
 #endif
 
         [TestMethod]
         public void DangerousGetHandleShouldNotBeCalled_VB() =>
-            Verifier.VerifyAnalyzer(@"TestCases\DangerousGetHandleShouldNotBeCalled.vb",
+            OldVerifier.VerifyAnalyzer(@"TestCases\DangerousGetHandleShouldNotBeCalled.vb",
                 new VB.DangerousGetHandleShouldNotBeCalled());
     }
 }

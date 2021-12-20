@@ -31,7 +31,7 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         public void DisposableNotDisposed() =>
-            Verifier.VerifyAnalyzer(@"TestCases\DisposableNotDisposed.cs",
+            OldVerifier.VerifyAnalyzer(@"TestCases\DisposableNotDisposed.cs",
                                     new DisposableNotDisposed(),
                                     ParseOptionsHelper.FromCSharp8,
                                     MetadataReferenceFacade.SystemNetHttp.Concat(NuGetMetadataReference.FluentAssertions("5.9.0")));
@@ -39,13 +39,13 @@ namespace SonarAnalyzer.UnitTest.Rules
 #if NET
         [TestMethod]
         public void DisposableNotDisposed_CSharp9() =>
-            Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\DisposableNotDisposed.CSharp9.cs",
+            OldVerifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\DisposableNotDisposed.CSharp9.cs",
                                                       new DisposableNotDisposed(),
                                                       MetadataReferenceFacade.SystemNetHttp);
 
         [TestMethod]
         public void DisposableNotDisposed_CSharp10() =>
-            Verifier.VerifyAnalyzerFromCSharp10Library(@"TestCases\DisposableNotDisposed.CSharp10.cs", new DisposableNotDisposed());
+            OldVerifier.VerifyAnalyzerFromCSharp10Library(@"TestCases\DisposableNotDisposed.CSharp10.cs", new DisposableNotDisposed());
 #endif
     }
 }

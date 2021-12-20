@@ -29,22 +29,22 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         public void UnchangedLocalVariablesShouldBeConst() =>
-            Verifier.VerifyAnalyzer(@"TestCases\UnchangedLocalVariablesShouldBeConst.cs", new UnchangedLocalVariablesShouldBeConst());
+            OldVerifier.VerifyAnalyzer(@"TestCases\UnchangedLocalVariablesShouldBeConst.cs", new UnchangedLocalVariablesShouldBeConst());
 
 #if NET
         [TestMethod]
         public void UnchangedLocalVariablesShouldBeConst_CSharp9() =>
-            Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\UnchangedLocalVariablesShouldBeConst.CSharp9.cs", new UnchangedLocalVariablesShouldBeConst());
+            OldVerifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\UnchangedLocalVariablesShouldBeConst.CSharp9.cs", new UnchangedLocalVariablesShouldBeConst());
 
         [TestMethod]
         public void UnchangedLocalVariablesShouldBeConst_CSharp10() =>
-            Verifier.VerifyAnalyzerFromCSharp10Console(@"TestCases\UnchangedLocalVariablesShouldBeConst.CSharp10.cs", new UnchangedLocalVariablesShouldBeConst());
+            OldVerifier.VerifyAnalyzerFromCSharp10Console(@"TestCases\UnchangedLocalVariablesShouldBeConst.CSharp10.cs", new UnchangedLocalVariablesShouldBeConst());
 
 #endif
 
         [TestMethod]
         public void UnchangedLocalVariablesShouldBeConst_InvalidCode() =>
-            Verifier.VerifyCSharpAnalyzer(@"
+            OldVerifier.VerifyCSharpAnalyzer(@"
 // invalid code
 public void Test_TypeThatCannotBeConst(int arg)
 {

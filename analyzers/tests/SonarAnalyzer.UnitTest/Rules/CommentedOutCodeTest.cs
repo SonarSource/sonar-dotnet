@@ -30,15 +30,15 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         public void CommentedOutCode_Nonconcurrent() =>
-            Verifier.VerifyNonConcurrentAnalyzer(@"TestCases\CommentedOutCode_Nonconcurrent.cs", new CommentedOutCode());
+            OldVerifier.VerifyNonConcurrentAnalyzer(@"TestCases\CommentedOutCode_Nonconcurrent.cs", new CommentedOutCode());
 
         [TestMethod]
         public void CommentedOutCode() =>
-            Verifier.VerifyAnalyzer(@"TestCases\CommentedOutCode.cs", new CommentedOutCode());
+            OldVerifier.VerifyAnalyzer(@"TestCases\CommentedOutCode.cs", new CommentedOutCode());
 
         [TestMethod]
         public void CommentedOutCode_NoDocumentation() =>
-            Verifier.VerifyNonConcurrentAnalyzer(@"TestCases\CommentedOutCode.cs", new CommentedOutCode(),
+            OldVerifier.VerifyNonConcurrentAnalyzer(@"TestCases\CommentedOutCode.cs", new CommentedOutCode(),
                 new[] { new CSharpParseOptions(documentationMode: Microsoft.CodeAnalysis.DocumentationMode.None) });
     }
 }

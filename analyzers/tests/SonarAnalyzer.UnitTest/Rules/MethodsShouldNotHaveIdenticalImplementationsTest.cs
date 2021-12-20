@@ -30,7 +30,7 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         public void MethodsShouldNotHaveIdenticalImplementations() =>
-            Verifier.VerifyAnalyzer(
+            OldVerifier.VerifyAnalyzer(
                 @"TestCases\MethodsShouldNotHaveIdenticalImplementations.cs",
                 new CS.MethodsShouldNotHaveIdenticalImplementations(),
                 ParseOptionsHelper.FromCSharp8);
@@ -38,19 +38,19 @@ namespace SonarAnalyzer.UnitTest.Rules
 #if NET
         [TestMethod]
         public void MethodsShouldNotHaveIdenticalImplementations_CSharp9() =>
-            Verifier.VerifyAnalyzerFromCSharp9Console(
+            OldVerifier.VerifyAnalyzerFromCSharp9Console(
                 @"TestCases\MethodsShouldNotHaveIdenticalImplementations.CSharp9.cs",
                 new CS.MethodsShouldNotHaveIdenticalImplementations());
 
         [TestMethod]
         public void MethodsShouldNotHaveIdenticalImplementations_CSharp10() =>
-            Verifier.VerifyAnalyzerFromCSharp10Library(
+            OldVerifier.VerifyAnalyzerFromCSharp10Library(
                 @"TestCases\MethodsShouldNotHaveIdenticalImplementations.CSharp10.cs",
                 new CS.MethodsShouldNotHaveIdenticalImplementations());
 #endif
 
         [TestMethod]
         public void MethodsShouldNotHaveIdenticalImplementations_VB() =>
-            Verifier.VerifyAnalyzer(@"TestCases\MethodsShouldNotHaveIdenticalImplementations.vb", new VB.MethodsShouldNotHaveIdenticalImplementations());
+            OldVerifier.VerifyAnalyzer(@"TestCases\MethodsShouldNotHaveIdenticalImplementations.vb", new VB.MethodsShouldNotHaveIdenticalImplementations());
     }
 }

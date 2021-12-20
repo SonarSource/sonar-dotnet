@@ -30,7 +30,7 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         public void GenericTypeParameterEmptinessChecking() =>
-            Verifier.VerifyAnalyzer(
+            OldVerifier.VerifyAnalyzer(
                 @"TestCases\GenericTypeParameterEmptinessChecking.cs",
                 new GenericTypeParameterEmptinessChecking(),
                 CompilationErrorBehavior.Ignore,
@@ -39,7 +39,7 @@ namespace SonarAnalyzer.UnitTest.Rules
 #if NET
         [TestMethod]
         public void GenericTypeParameterEmptinessChecking_CSharp9() =>
-            Verifier.VerifyAnalyzerFromCSharp9Console(
+            OldVerifier.VerifyAnalyzerFromCSharp9Console(
                 @"TestCases\GenericTypeParameterEmptinessChecking.CSharp9.cs",
                 new GenericTypeParameterEmptinessChecking(),
                 MetadataReferenceFacade.SystemCollections);
@@ -47,7 +47,7 @@ namespace SonarAnalyzer.UnitTest.Rules
 
         [TestMethod]
         public void GenericTypeParameterEmptinessChecking_CodeFix() =>
-            Verifier.VerifyCodeFix(
+            OldVerifier.VerifyCodeFix(
                 @"TestCases\GenericTypeParameterEmptinessChecking.cs",
                 @"TestCases\GenericTypeParameterEmptinessChecking.Fixed.cs",
                 new GenericTypeParameterEmptinessChecking(),

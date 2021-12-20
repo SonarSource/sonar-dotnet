@@ -37,14 +37,14 @@ namespace SonarAnalyzer.UnitTest.Rules
 
         [TestMethod]
         public void ExecutingSqlQueries_CS_Net46() =>
-            Verifier.VerifyAnalyzer(
+            OldVerifier.VerifyAnalyzer(
                 @"TestCases\Hotspots\ExecutingSqlQueries_Net46.cs",
                 new CS.ExecutingSqlQueries(AnalyzerConfiguration.AlwaysEnabled),
                 GetReferencesNet46(Constants.NuGetLatestVersion));
 
         [TestMethod]
         public void ExecutingSqlQueries_VB_Net46() =>
-            Verifier.VerifyAnalyzer(
+            OldVerifier.VerifyAnalyzer(
                 @"TestCases\Hotspots\ExecutingSqlQueries_Net46.vb",
                 new VB.ExecutingSqlQueries(AnalyzerConfiguration.AlwaysEnabled),
                 ParseOptionsHelper.FromVisualBasic15,
@@ -63,7 +63,7 @@ namespace SonarAnalyzer.UnitTest.Rules
 
         [TestMethod]
         public void ExecutingSqlQueries_CS_NetCore() =>
-            Verifier.VerifyAnalyzer(
+            OldVerifier.VerifyAnalyzer(
                 @"TestCases\Hotspots\ExecutingSqlQueries_NetCore.cs",
                 new CS.ExecutingSqlQueries(AnalyzerConfiguration.AlwaysEnabled),
                 ParseOptionsHelper.FromCSharp8,
@@ -71,21 +71,21 @@ namespace SonarAnalyzer.UnitTest.Rules
 
         [TestMethod]
         public void ExecutingSqlQueries_CSharp9() =>
-            Verifier.VerifyAnalyzerFromCSharp9Console(
+            OldVerifier.VerifyAnalyzerFromCSharp9Console(
                 @"TestCases\Hotspots\ExecutingSqlQueries.CSharp9.cs",
                 new CS.ExecutingSqlQueries(AnalyzerConfiguration.AlwaysEnabled),
                 GetReferencesNetCore(Constants.DotNetCore220Version).Concat(NuGetMetadataReference.MicrosoftDataSqliteCore()));
 
         [TestMethod]
         public void ExecutingSqlQueries_CSharp10() =>
-            Verifier.VerifyAnalyzerFromCSharp10Console(
+            OldVerifier.VerifyAnalyzerFromCSharp10Console(
                 @"TestCases\Hotspots\ExecutingSqlQueries.CSharp10.cs",
                 new CS.ExecutingSqlQueries(AnalyzerConfiguration.AlwaysEnabled),
                 GetReferencesNetCore(Constants.DotNetCore220Version).Concat(NuGetMetadataReference.MicrosoftDataSqliteCore()));
 
         [TestMethod]
         public void ExecutingSqlQueries_VB_NetCore() =>
-            Verifier.VerifyAnalyzer(
+            OldVerifier.VerifyAnalyzer(
                 @"TestCases\Hotspots\ExecutingSqlQueries_NetCore.vb",
                 new VB.ExecutingSqlQueries(AnalyzerConfiguration.AlwaysEnabled),
                 ParseOptionsHelper.FromVisualBasic15,

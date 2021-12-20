@@ -30,7 +30,7 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         public void CollectionsShouldImplementGenericInterface() =>
-            Verifier.VerifyAnalyzer(
+            OldVerifier.VerifyAnalyzer(
                 @"TestCases\CollectionsShouldImplementGenericInterface.cs",
                 new CollectionsShouldImplementGenericInterface(),
                 CompilationErrorBehavior.Ignore,     // It would be too tedious to implement all those interfaces
@@ -39,7 +39,7 @@ namespace SonarAnalyzer.UnitTest.Rules
 #if NET
         [TestMethod]
         public void CollectionsShouldImplementGenericInterface_Csharp9() =>
-            Verifier.VerifyAnalyzerFromCSharp9Library(
+            OldVerifier.VerifyAnalyzerFromCSharp9Library(
                 @"TestCases\CollectionsShouldImplementGenericInterface.CSharp9.cs",
                 new CollectionsShouldImplementGenericInterface(),
                 CompilationErrorBehavior.Ignore,     // It would be too tedious to implement all those interfaces
@@ -47,7 +47,7 @@ namespace SonarAnalyzer.UnitTest.Rules
 
         [TestMethod]
         public void CollectionsShouldImplementGenericInterface_Csharp10() =>
-            Verifier.VerifyAnalyzerFromCSharp10Library(
+            OldVerifier.VerifyAnalyzerFromCSharp10Library(
                 @"TestCases\CollectionsShouldImplementGenericInterface.CSharp10.cs",
                 new CollectionsShouldImplementGenericInterface(),
                 CompilationErrorBehavior.Ignore,     // It would be too tedious to implement all those interfaces

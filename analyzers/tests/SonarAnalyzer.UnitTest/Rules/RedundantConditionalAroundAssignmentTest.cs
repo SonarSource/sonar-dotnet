@@ -30,16 +30,16 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         public void RedundantConditionalAroundAssignment() =>
-            Verifier.VerifyAnalyzer(@"TestCases\RedundantConditionalAroundAssignment.cs", new RedundantConditionalAroundAssignment());
+            OldVerifier.VerifyAnalyzer(@"TestCases\RedundantConditionalAroundAssignment.cs", new RedundantConditionalAroundAssignment());
 
 #if NET
         [TestMethod]
         public void RedundantConditionalAroundAssignment_CSharp9() =>
-            Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\RedundantConditionalAroundAssignment.CSharp9.cs", new RedundantConditionalAroundAssignment());
+            OldVerifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\RedundantConditionalAroundAssignment.CSharp9.cs", new RedundantConditionalAroundAssignment());
 
         [TestMethod]
         public void RedundantConditionalAroundAssignment_CSharp9_CodeFix() =>
-            Verifier.VerifyCodeFix(@"TestCases\RedundantConditionalAroundAssignment.CSharp9.cs",
+            OldVerifier.VerifyCodeFix(@"TestCases\RedundantConditionalAroundAssignment.CSharp9.cs",
                                    @"TestCases\RedundantConditionalAroundAssignment.CSharp9.Fixed.cs",
                                    new RedundantConditionalAroundAssignment(),
                                    new RedundantConditionalAroundAssignmentCodeFixProvider(),
@@ -48,11 +48,11 @@ namespace SonarAnalyzer.UnitTest.Rules
 
         [TestMethod]
         public void RedundantConditionalAroundAssignment_CSharp10() =>
-            Verifier.VerifyAnalyzerFromCSharp10Console(@"TestCases\RedundantConditionalAroundAssignment.CSharp10.cs", new RedundantConditionalAroundAssignment());
+            OldVerifier.VerifyAnalyzerFromCSharp10Console(@"TestCases\RedundantConditionalAroundAssignment.CSharp10.cs", new RedundantConditionalAroundAssignment());
 
         [TestMethod]
         public void RedundantConditionalAroundAssignment_CSharp10_CodeFix() =>
-            Verifier.VerifyCodeFix(@"TestCases\RedundantConditionalAroundAssignment.CSharp10.cs",
+            OldVerifier.VerifyCodeFix(@"TestCases\RedundantConditionalAroundAssignment.CSharp10.cs",
                                    @"TestCases\RedundantConditionalAroundAssignment.CSharp10.Fixed.cs",
                                    new RedundantConditionalAroundAssignment(),
                                    new RedundantConditionalAroundAssignmentCodeFixProvider(),
@@ -62,7 +62,7 @@ namespace SonarAnalyzer.UnitTest.Rules
 
         [TestMethod]
         public void RedundantConditionalAroundAssignment_CodeFix() =>
-            Verifier.VerifyCodeFix(@"TestCases\RedundantConditionalAroundAssignment.cs",
+            OldVerifier.VerifyCodeFix(@"TestCases\RedundantConditionalAroundAssignment.cs",
                                    @"TestCases\RedundantConditionalAroundAssignment.Fixed.cs",
                                    new RedundantConditionalAroundAssignment(),
                                    new RedundantConditionalAroundAssignmentCodeFixProvider());

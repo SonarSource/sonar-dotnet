@@ -31,7 +31,7 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         public void InfiniteRecursion_SonarCfg() =>
-            Verifier.VerifyAnalyzer(
+            OldVerifier.VerifyAnalyzer(
                 @"TestCases\InfiniteRecursion.SonarCfg.cs",
                 new InfiniteRecursion(AnalyzerConfiguration.AlwaysEnabledWithSonarCfg),
                 ParseOptionsHelper.OnlyCSharp7,
@@ -39,7 +39,7 @@ namespace SonarAnalyzer.UnitTest.Rules
 
         [TestMethod]
         public void InfiniteRecursion_RoslynCfg() =>
-            Verifier.VerifyAnalyzer(
+            OldVerifier.VerifyAnalyzer(
                 @"TestCases\InfiniteRecursion.RoslynCfg.cs",
                 new InfiniteRecursion(),
                 ParseOptionsHelper.FromCSharp8,

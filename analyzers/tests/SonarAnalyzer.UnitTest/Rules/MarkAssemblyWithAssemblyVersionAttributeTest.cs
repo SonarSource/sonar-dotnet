@@ -33,17 +33,17 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         public void MarkAssemblyWithAssemblyVersionAttribute_CS() =>
-            Verifier.VerifyNonConcurrentAnalyzer(@"TestCases\MarkAssemblyWithAssemblyVersionAttribute.cs", new CS.MarkAssemblyWithAssemblyVersionAttribute());
+            OldVerifier.VerifyNonConcurrentAnalyzer(@"TestCases\MarkAssemblyWithAssemblyVersionAttribute.cs", new CS.MarkAssemblyWithAssemblyVersionAttribute());
 
         [TestMethod]
         public void MarkAssemblyWithAssemblyVersionAttributeRazor_CS() =>
-            Verifier.VerifyNonConcurrentAnalyzer(@"TestCases\MarkAssemblyWithAssemblyVersionAttributeRazor.cs",
+            OldVerifier.VerifyNonConcurrentAnalyzer(@"TestCases\MarkAssemblyWithAssemblyVersionAttributeRazor.cs",
                 new CS.MarkAssemblyWithAssemblyVersionAttribute(),
                 NuGetMetadataReference.MicrosoftAspNetCoreMvcRazorRuntime());
 
         [TestMethod]
         public void MarkAssemblyWithAssemblyVersionAttribute_CS_Concurrent() =>
-            Verifier.VerifyAnalyzer(new[] { @"TestCases\MarkAssemblyWithAssemblyVersionAttribute.cs", @"TestCases\MarkAssemblyWithAssemblyVersionAttributeRazor.cs", },
+            OldVerifier.VerifyAnalyzer(new[] { @"TestCases\MarkAssemblyWithAssemblyVersionAttribute.cs", @"TestCases\MarkAssemblyWithAssemblyVersionAttributeRazor.cs", },
                 new CS.MarkAssemblyWithAssemblyVersionAttribute(),
                 null,
                 NuGetMetadataReference.MicrosoftAspNetCoreMvcRazorRuntime());
@@ -51,14 +51,14 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         public void MarkAssemblyWithAssemblyVersionAttributeNoncompliant_CS()
         {
-            Action action = () => Verifier.VerifyNonConcurrentAnalyzer(@"TestCases\MarkAssemblyWithAssemblyVersionAttributeNoncompliant.cs", new CS.MarkAssemblyWithAssemblyVersionAttribute());
+            Action action = () => OldVerifier.VerifyNonConcurrentAnalyzer(@"TestCases\MarkAssemblyWithAssemblyVersionAttributeNoncompliant.cs", new CS.MarkAssemblyWithAssemblyVersionAttribute());
             action.Should().Throw<UnexpectedDiagnosticException>().WithMessage("*Provide an 'AssemblyVersion' attribute for assembly 'project0'.*");
         }
 
         [TestMethod]
         public void MarkAssemblyWithAssemblyVersionAttributeNoncompliant_NoTargets_ShouldNotRaise_CS()
         {
-            Action action = () => Verifier.VerifyNonConcurrentAnalyzer(
+            Action action = () => OldVerifier.VerifyNonConcurrentAnalyzer(
                 @"TestCases\MarkAssemblyWithAssemblyVersionAttributeNoncompliant.cs",
                 new CS.MarkAssemblyWithAssemblyVersionAttribute(),
                 NuGetMetadataReference.MicrosoftBuildNoTargets());
@@ -69,17 +69,17 @@ namespace SonarAnalyzer.UnitTest.Rules
 
         [TestMethod]
         public void MarkAssemblyWithAssemblyVersionAttribute_VB() =>
-            Verifier.VerifyNonConcurrentAnalyzer(@"TestCases\MarkAssemblyWithAssemblyVersionAttribute.vb", new VB.MarkAssemblyWithAssemblyVersionAttribute());
+            OldVerifier.VerifyNonConcurrentAnalyzer(@"TestCases\MarkAssemblyWithAssemblyVersionAttribute.vb", new VB.MarkAssemblyWithAssemblyVersionAttribute());
 
         [TestMethod]
         public void MarkAssemblyWithAssemblyVersionAttributeRazor_VB() =>
-            Verifier.VerifyNonConcurrentAnalyzer(@"TestCases\MarkAssemblyWithAssemblyVersionAttributeRazor.vb",
+            OldVerifier.VerifyNonConcurrentAnalyzer(@"TestCases\MarkAssemblyWithAssemblyVersionAttributeRazor.vb",
                 new VB.MarkAssemblyWithAssemblyVersionAttribute(),
                 NuGetMetadataReference.MicrosoftAspNetCoreMvcRazorRuntime());
 
         [TestMethod]
         public void MarkAssemblyWithAssemblyVersionAttribute_VB_Concurrent() =>
-            Verifier.VerifyAnalyzer(new[] { @"TestCases\MarkAssemblyWithAssemblyVersionAttribute.vb", @"TestCases\MarkAssemblyWithAssemblyVersionAttributeRazor.vb", },
+            OldVerifier.VerifyAnalyzer(new[] { @"TestCases\MarkAssemblyWithAssemblyVersionAttribute.vb", @"TestCases\MarkAssemblyWithAssemblyVersionAttributeRazor.vb", },
                 new VB.MarkAssemblyWithAssemblyVersionAttribute(),
                 null,
                 NuGetMetadataReference.MicrosoftAspNetCoreMvcRazorRuntime());
@@ -87,14 +87,14 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         public void MarkAssemblyWithAssemblyVersionAttributeNoncompliant_VB()
         {
-            Action action = () => Verifier.VerifyNonConcurrentAnalyzer(@"TestCases\MarkAssemblyWithAssemblyVersionAttributeNoncompliant.vb", new VB.MarkAssemblyWithAssemblyVersionAttribute());
+            Action action = () => OldVerifier.VerifyNonConcurrentAnalyzer(@"TestCases\MarkAssemblyWithAssemblyVersionAttributeNoncompliant.vb", new VB.MarkAssemblyWithAssemblyVersionAttribute());
             action.Should().Throw<UnexpectedDiagnosticException>().WithMessage("*Provide an 'AssemblyVersion' attribute for assembly 'project0'.*");
         }
 
         [TestMethod]
         public void MarkAssemblyWithAssemblyVersionAttributeNoncompliant_NoTargets_ShouldNotRaise_VB()
         {
-            Action action = () => Verifier.VerifyNonConcurrentAnalyzer(
+            Action action = () => OldVerifier.VerifyNonConcurrentAnalyzer(
                 @"TestCases\MarkAssemblyWithAssemblyVersionAttributeNoncompliant.vb",
                 new CS.MarkAssemblyWithAssemblyVersionAttribute(),
                 NuGetMetadataReference.MicrosoftBuildNoTargets());

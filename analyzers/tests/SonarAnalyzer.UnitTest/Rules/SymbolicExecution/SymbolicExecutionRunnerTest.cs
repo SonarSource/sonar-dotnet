@@ -37,7 +37,7 @@ namespace SonarAnalyzer.UnitTest.Rules.SymbolicExecution
         // This test is meant to run all the symbolic execution rules together and verify different scenarios.
         [TestMethod]
         public void VerifySymbolicExecutionRules() =>
-            Verifier.VerifyAnalyzer(@"TestCases\SymbolicExecution\Sonar\SymbolicExecutionRules.cs",
+            OldVerifier.VerifyAnalyzer(@"TestCases\SymbolicExecution\Sonar\SymbolicExecutionRules.cs",
                 new SymbolicExecutionRunner(),
                 ParseOptionsHelper.FromCSharp8,
                 MetadataReferenceFacade.NETStandard21);
@@ -221,7 +221,7 @@ public void Method()
             var sut = new SymbolicExecutionRunner();
             sut.RegisterRule<MainScopeAssignmentRuleCheck>(MainScopeAssignmentRuleCheck.SMain);
             sut.RegisterRule<MainScopeAssignmentRuleCheck>(another);     // Register the same RuleCheck with another ID
-            Verifier.VerifyCSharpAnalyzer(code, sut, ParseOptionsHelper.FromCSharp9, onlyDiagnostics: new[] { MainScopeAssignmentRuleCheck.SMain, another });
+            OldVerifier.VerifyCSharpAnalyzer(code, sut, ParseOptionsHelper.FromCSharp9, onlyDiagnostics: new[] { MainScopeAssignmentRuleCheck.SMain, another });
         }
 
         [TestMethod]
@@ -255,7 +255,7 @@ public void Method()
         {
             var sut = new SymbolicExecutionRunner();
             sut.RegisterRule<InvocationAssignmentRuleCheck>(InvocationAssignmentRuleCheck.SInvocation);
-            Verifier.VerifyCSharpAnalyzer(@"
+            OldVerifier.VerifyCSharpAnalyzer(@"
 public class Sample
 {
     public void Method()
@@ -263,7 +263,7 @@ public class Sample
         string s = null;    // Nothing is raised because InvocationAssignmentRuleCheck.ShouldExecute returns false
     }
 }", sut);
-            Verifier.VerifyCSharpAnalyzer(@"
+            OldVerifier.VerifyCSharpAnalyzer(@"
 public class Sample
 {
     public void Method()
@@ -322,7 +322,7 @@ public class Sample
             sut.RegisterRule<AllScopeAssignmentRuleCheck>(AllScopeAssignmentRuleCheck.SAll);
             sut.RegisterRule<MainScopeAssignmentRuleCheck>(MainScopeAssignmentRuleCheck.SMain);
             sut.RegisterRule<TestScopeAssignmentRuleCheck>(TestScopeAssignmentRuleCheck.STest);
-            Verifier.VerifyCSharpAnalyzer(code, sut, ParseOptionsHelper.FromCSharp9,
+            OldVerifier.VerifyCSharpAnalyzer(code, sut, ParseOptionsHelper.FromCSharp9,
                 additionalReferences: TestHelper.ProjectTypeReference(projectType),
                 onlyDiagnostics: onlyRules,
                 sonarProjectConfigPath: sonarProjectConfigPath);

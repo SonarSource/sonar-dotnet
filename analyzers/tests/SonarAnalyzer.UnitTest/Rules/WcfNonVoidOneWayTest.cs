@@ -31,13 +31,13 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         public void WcfNonVoidOneWay_CS() =>
-            Verifier.VerifyAnalyzer(@"TestCases\WcfNonVoidOneWay.cs",
+            OldVerifier.VerifyAnalyzer(@"TestCases\WcfNonVoidOneWay.cs",
                 new CS.WcfNonVoidOneWay(),
                 MetadataReferenceFacade.SystemServiceModel);
 
         [TestMethod]
         public void WcfNonVoidOneWay_VB() =>
-            Verifier.VerifyAnalyzer(@"TestCases\WcfNonVoidOneWay.vb",
+            OldVerifier.VerifyAnalyzer(@"TestCases\WcfNonVoidOneWay.vb",
                 new VB.WcfNonVoidOneWay(),
                 MetadataReferenceFacade.SystemServiceModel);
     }

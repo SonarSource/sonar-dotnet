@@ -30,7 +30,7 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         public void MethodOverloadOptionalParameter() =>
-            Verifier.VerifyAnalyzer(@"TestCases\MethodOverloadOptionalParameter.cs",
+            OldVerifier.VerifyAnalyzer(@"TestCases\MethodOverloadOptionalParameter.cs",
                 new MethodOverloadOptionalParameter(),
                 ParseOptionsHelper.FromCSharp8,
                 MetadataReferenceFacade.NETStandard21);
@@ -38,15 +38,15 @@ namespace SonarAnalyzer.UnitTest.Rules
 #if NET
         [TestMethod]
         public void MethodOverloadOptionalParameter_CSharp9() =>
-            Verifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\MethodOverloadOptionalParameter.CSharp9.cs", new MethodOverloadOptionalParameter());
+            OldVerifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\MethodOverloadOptionalParameter.CSharp9.cs", new MethodOverloadOptionalParameter());
 
         [TestMethod]
         public void MethodOverloadOptionalParameter_CSharp10() =>
-            Verifier.VerifyAnalyzerFromCSharp10Library(@"TestCases\MethodOverloadOptionalParameter.CSharp10.cs", new MethodOverloadOptionalParameter());
+            OldVerifier.VerifyAnalyzerFromCSharp10Library(@"TestCases\MethodOverloadOptionalParameter.CSharp10.cs", new MethodOverloadOptionalParameter());
 
         [TestMethod]
         public void MethodOverloadOptionalParameter_CSharpPreview() =>
-            Verifier.VerifyAnalyzerCSharpPreviewLibrary(@"TestCases\MethodOverloadOptionalParameter.CSharpPreview.cs", new MethodOverloadOptionalParameter());
+            OldVerifier.VerifyAnalyzerCSharpPreviewLibrary(@"TestCases\MethodOverloadOptionalParameter.CSharpPreview.cs", new MethodOverloadOptionalParameter());
 #endif
     }
 }

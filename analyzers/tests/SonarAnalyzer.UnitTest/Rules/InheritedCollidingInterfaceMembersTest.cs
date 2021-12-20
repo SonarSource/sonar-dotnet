@@ -30,11 +30,11 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         public void InheritedCollidingInterfaceMembers() =>
-            Verifier.VerifyAnalyzer(@"TestCases\InheritedCollidingInterfaceMembers.cs", new InheritedCollidingInterfaceMembers());
+            OldVerifier.VerifyAnalyzer(@"TestCases\InheritedCollidingInterfaceMembers.cs", new InheritedCollidingInterfaceMembers());
 
         [TestMethod]
         public void InheritedCollidingInterfaceMembers_CSharp8() =>
-            Verifier.VerifyAnalyzer(@"TestCases\InheritedCollidingInterfaceMembers.AfterCSharp8.cs",
+            OldVerifier.VerifyAnalyzer(@"TestCases\InheritedCollidingInterfaceMembers.AfterCSharp8.cs",
                                     new InheritedCollidingInterfaceMembers(),
                                     ParseOptionsHelper.FromCSharp8,
                                     MetadataReferenceFacade.NETStandard21);

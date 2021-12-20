@@ -38,7 +38,7 @@ namespace SonarAnalyzer.UnitTest.Rules.SymbolicExecution
         [DataRow(ProjectType.Product)]
         [DataRow(ProjectType.Test)]
         public void EmptyNullableValueAccess_CS(ProjectType projectType) =>
-            Verifier.VerifyAnalyzer(
+            OldVerifier.VerifyAnalyzer(
                 @"TestCases\SymbolicExecution\Sonar\EmptyNullableValueAccess.cs",
                 new SymbolicExecutionRunner(),
                 ParseOptionsHelper.FromCSharp8,
@@ -48,14 +48,14 @@ namespace SonarAnalyzer.UnitTest.Rules.SymbolicExecution
 #if NET
         [TestMethod]
         public void EmptyNullableValueAccess_CSharp9() =>
-            Verifier.VerifyAnalyzerFromCSharp9Console(
+            OldVerifier.VerifyAnalyzerFromCSharp9Console(
                 @"TestCases\SymbolicExecution\Sonar\EmptyNullableValueAccess.CSharp9.cs",
                 new SymbolicExecutionRunner(),
                 onlyDiagnostics: OnlyDiagnostics);
 
         [TestMethod]
         public void EmptyNullableValueAccess_CSharp10() =>
-            Verifier.VerifyAnalyzerFromCSharp10Library(
+            OldVerifier.VerifyAnalyzerFromCSharp10Library(
                 @"TestCases\SymbolicExecution\Sonar\EmptyNullableValueAccess.CSharp10.cs",
                 new SymbolicExecutionRunner(),
                 onlyDiagnostics: OnlyDiagnostics);

@@ -30,15 +30,15 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         public void ForeachLoopExplicitConversion() =>
-            Verifier.VerifyAnalyzer(@"TestCases\ForeachLoopExplicitConversion.cs", new ForeachLoopExplicitConversion());
+            OldVerifier.VerifyAnalyzer(@"TestCases\ForeachLoopExplicitConversion.cs", new ForeachLoopExplicitConversion());
 
         [TestMethod]
         public void ForeachLoopExplicitConversion_CSharp10() =>
-            Verifier.VerifyAnalyzerFromCSharp10Library(@"TestCases\ForeachLoopExplicitConversion.CSharp10.cs", new ForeachLoopExplicitConversion());
+            OldVerifier.VerifyAnalyzerFromCSharp10Library(@"TestCases\ForeachLoopExplicitConversion.CSharp10.cs", new ForeachLoopExplicitConversion());
 
         [TestMethod]
         public void ForeachLoopExplicitConversion_CodeFix() =>
-            Verifier.VerifyCodeFix(
+            OldVerifier.VerifyCodeFix(
                 @"TestCases\ForeachLoopExplicitConversion.cs",
                 @"TestCases\ForeachLoopExplicitConversion.Fixed.cs",
                 new ForeachLoopExplicitConversion(),
@@ -47,7 +47,7 @@ namespace SonarAnalyzer.UnitTest.Rules
 #if NET
         [TestMethod]
         public void ForeachLoopExplicitConversion_CSharp10_CodeFix() =>
-            Verifier.VerifyCodeFix(
+            OldVerifier.VerifyCodeFix(
                 @"TestCases\ForeachLoopExplicitConversion.CSharp10.cs",
                 @"TestCases\ForeachLoopExplicitConversion.CSharp10.Fixed.cs",
                 new ForeachLoopExplicitConversion(),

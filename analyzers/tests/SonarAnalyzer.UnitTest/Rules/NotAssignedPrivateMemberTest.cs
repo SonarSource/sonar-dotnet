@@ -30,17 +30,17 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         public void NotAssignedPrivateMember() =>
-            Verifier.VerifyAnalyzer(@"TestCases\NotAssignedPrivateMember.cs", new NotAssignedPrivateMember());
+            OldVerifier.VerifyAnalyzer(@"TestCases\NotAssignedPrivateMember.cs", new NotAssignedPrivateMember());
 
 #if NET
         [TestMethod]
         public void NotAssignedPrivateMember_CSharp9() =>
-            Verifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\NotAssignedPrivateMember.CSharp9.cs", new NotAssignedPrivateMember());
+            OldVerifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\NotAssignedPrivateMember.CSharp9.cs", new NotAssignedPrivateMember());
 #endif
 
         [TestMethod]
         public void NotAssignedPrivateMember_IndexingMovableFixedBuffer() =>
-            Verifier.VerifyCSharpAnalyzer(@"
+            OldVerifier.VerifyCSharpAnalyzer(@"
 unsafe struct FixedArray
 {
     private fixed int a[42]; // Compliant, because of the fixed modifier

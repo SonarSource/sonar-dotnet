@@ -29,16 +29,16 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         public void VariableShadowsField() =>
-            Verifier.VerifyAnalyzer(@"TestCases\VariableShadowsField.cs", new VariableShadowsField(), ParseOptionsHelper.FromCSharp8);
+            OldVerifier.VerifyAnalyzer(@"TestCases\VariableShadowsField.cs", new VariableShadowsField(), ParseOptionsHelper.FromCSharp8);
 
 #if NET
         [TestMethod]
         public void VariableShadowsField_CSharp9() =>
-            Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\VariableShadowsField.CSharp9.cs", new VariableShadowsField());
+            OldVerifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\VariableShadowsField.CSharp9.cs", new VariableShadowsField());
 
         [TestMethod]
         public void VariableShadowsField_CSharp10() =>
-            Verifier.VerifyAnalyzerFromCSharp10Library(@"TestCases\VariableShadowsField.CSharp10.cs", new VariableShadowsField());
+            OldVerifier.VerifyAnalyzerFromCSharp10Library(@"TestCases\VariableShadowsField.CSharp10.cs", new VariableShadowsField());
 
 #endif
     }

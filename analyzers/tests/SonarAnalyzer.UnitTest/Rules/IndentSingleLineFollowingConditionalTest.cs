@@ -29,12 +29,12 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         public void IndentSingleLineFollowingConditional() =>
-            Verifier.VerifyAnalyzer(@"TestCases\IndentSingleLineFollowingConditional.cs", new IndentSingleLineFollowingConditional());
+            OldVerifier.VerifyAnalyzer(@"TestCases\IndentSingleLineFollowingConditional.cs", new IndentSingleLineFollowingConditional());
 
 #if NET
         [TestMethod]
         public void IndentSingleLineFollowingConditional_FromCSharp9() =>
-            Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\IndentSingleLineFollowingConditional.CSharp9.cs", new IndentSingleLineFollowingConditional());
+            OldVerifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\IndentSingleLineFollowingConditional.CSharp9.cs", new IndentSingleLineFollowingConditional());
 #endif
     }
 }

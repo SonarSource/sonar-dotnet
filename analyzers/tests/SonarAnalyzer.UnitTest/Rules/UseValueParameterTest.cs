@@ -29,21 +29,21 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         public void UseValueParameter() =>
-            Verifier.VerifyAnalyzer(@"TestCases\UseValueParameter.cs", new UseValueParameter());
+            OldVerifier.VerifyAnalyzer(@"TestCases\UseValueParameter.cs", new UseValueParameter());
 
 #if NET
         [TestMethod]
         public void UseValueParameter_CSharp9() =>
-            Verifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\UseValueParameter.CSharp9.cs", new UseValueParameter());
+            OldVerifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\UseValueParameter.CSharp9.cs", new UseValueParameter());
 
         [TestMethod]
         public void UseValueParameter_CSharpPreview() =>
-            Verifier.VerifyAnalyzerCSharpPreviewLibrary(@"TestCases\UseValueParameter.CSharpPreview.cs", new UseValueParameter());
+            OldVerifier.VerifyAnalyzerCSharpPreviewLibrary(@"TestCases\UseValueParameter.CSharpPreview.cs", new UseValueParameter());
 #endif
 
         [TestMethod]
         public void UseValueParameter_InvalidCode() =>
-            Verifier.VerifyCSharpAnalyzer(@"
+            OldVerifier.VerifyCSharpAnalyzer(@"
 public int Foo
 {
     get => field;

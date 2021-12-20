@@ -29,7 +29,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void NonDerivedPrivateClassesShouldBeSealed_CS() =>
-            Verifier.VerifyAnalyzer(new[]
+            OldVerifier.VerifyAnalyzer(new[]
                                     {
                                         @"TestCases\NonDerivedPrivateClassesShouldBeSealed.cs",
                                         @"TestCases\NonDerivedPrivateClassesShouldBeSealed_PartialClass.cs"
@@ -39,7 +39,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void NonDerivedPrivateClassesShouldBeSealed_CSharp9() =>
-            Verifier.VerifyAnalyzer(@"TestCases\NonDerivedPrivateClassesShouldBeSealed.Csharp9.cs",
+            OldVerifier.VerifyAnalyzer(@"TestCases\NonDerivedPrivateClassesShouldBeSealed.Csharp9.cs",
                                     new NonDerivedPrivateClassesShouldBeSealed(),
                                     ParseOptionsHelper.FromCSharp9);
     }

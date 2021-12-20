@@ -29,22 +29,22 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         public void DoNotExposeListT() =>
-            Verifier.VerifyAnalyzer(@"TestCases\DoNotExposeListT.cs", new DoNotExposeListT(),
+            OldVerifier.VerifyAnalyzer(@"TestCases\DoNotExposeListT.cs", new DoNotExposeListT(),
                 MetadataReferences.MetadataReferenceFacade.SystemXml);
 
         [TestMethod]
         public void DoNotExposeListT_CSharp8() =>
-            Verifier.VerifyAnalyzer(@"TestCases\DoNotExposeListT.CSharp8.cs", new DoNotExposeListT(), ParseOptionsHelper.FromCSharp8);
+            OldVerifier.VerifyAnalyzer(@"TestCases\DoNotExposeListT.CSharp8.cs", new DoNotExposeListT(), ParseOptionsHelper.FromCSharp8);
 
 #if NET
         [TestMethod]
         public void DoNotExposeListT_CSharp9() =>
-            Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\DoNotExposeListT.CSharp9.cs", new DoNotExposeListT());
+            OldVerifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\DoNotExposeListT.CSharp9.cs", new DoNotExposeListT());
 #endif
 
         [TestMethod]
         public void DoNotExposeListT_InvalidCode() =>
-            Verifier.VerifyCSharpAnalyzer(
+            OldVerifier.VerifyCSharpAnalyzer(
                 @"
 public class InvalidCode
 {

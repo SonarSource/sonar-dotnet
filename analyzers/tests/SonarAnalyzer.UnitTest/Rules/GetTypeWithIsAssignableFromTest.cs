@@ -30,16 +30,16 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         public void GetTypeWithIsAssignableFrom() =>
-            Verifier.VerifyAnalyzer(@"TestCases\GetTypeWithIsAssignableFrom.cs", new GetTypeWithIsAssignableFrom());
+            OldVerifier.VerifyAnalyzer(@"TestCases\GetTypeWithIsAssignableFrom.cs", new GetTypeWithIsAssignableFrom());
 
 #if NET
         [TestMethod]
         public void GetTypeWithIsAssignableFrom_CSharp9() =>
-            Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\GetTypeWithIsAssignableFrom.CSharp9.cs", new GetTypeWithIsAssignableFrom());
+            OldVerifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\GetTypeWithIsAssignableFrom.CSharp9.cs", new GetTypeWithIsAssignableFrom());
 
         [TestMethod]
         public void GetTypeWithIsAssignableFrom_CSharp9_CodeFix() =>
-            Verifier.VerifyCodeFix(@"TestCases\GetTypeWithIsAssignableFrom.CSharp9.cs",
+            OldVerifier.VerifyCodeFix(@"TestCases\GetTypeWithIsAssignableFrom.CSharp9.cs",
                                    @"TestCases\GetTypeWithIsAssignableFrom.CSharp9.Fixed.cs",
                                    new GetTypeWithIsAssignableFrom(),
                                    new GetTypeWithIsAssignableFromCodeFixProvider(),
@@ -48,11 +48,11 @@ namespace SonarAnalyzer.UnitTest.Rules
 
         [TestMethod]
         public void GetTypeWithIsAssignableFrom_CSharp10() =>
-            Verifier.VerifyAnalyzerFromCSharp10Console(@"TestCases\GetTypeWithIsAssignableFrom.CSharp10.cs", new GetTypeWithIsAssignableFrom());
+            OldVerifier.VerifyAnalyzerFromCSharp10Console(@"TestCases\GetTypeWithIsAssignableFrom.CSharp10.cs", new GetTypeWithIsAssignableFrom());
 
         [TestMethod]
         public void GetTypeWithIsAssignableFrom_CSharp10_CodeFix() =>
-            Verifier.VerifyCodeFix(@"TestCases\GetTypeWithIsAssignableFrom.CSharp10.cs",
+            OldVerifier.VerifyCodeFix(@"TestCases\GetTypeWithIsAssignableFrom.CSharp10.cs",
                                    @"TestCases\GetTypeWithIsAssignableFrom.CSharp10.Fixed.cs",
                                    new GetTypeWithIsAssignableFrom(),
                                    new GetTypeWithIsAssignableFromCodeFixProvider(),
@@ -62,7 +62,7 @@ namespace SonarAnalyzer.UnitTest.Rules
 
         [TestMethod]
         public void GetTypeWithIsAssignableFrom_CodeFix() =>
-            Verifier.VerifyCodeFix(@"TestCases\GetTypeWithIsAssignableFrom.cs",
+            OldVerifier.VerifyCodeFix(@"TestCases\GetTypeWithIsAssignableFrom.cs",
                                    @"TestCases\GetTypeWithIsAssignableFrom.Fixed.cs",
                                    @"TestCases\GetTypeWithIsAssignableFrom.Fixed.Batch.cs",
                                    new GetTypeWithIsAssignableFrom(),

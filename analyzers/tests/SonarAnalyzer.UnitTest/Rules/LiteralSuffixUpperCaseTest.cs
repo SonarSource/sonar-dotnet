@@ -29,11 +29,11 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         public void LiteralSuffixUpperCase() =>
-            Verifier.VerifyAnalyzer(@"TestCases\LiteralSuffixUpperCase.cs", new LiteralSuffixUpperCase());
+            OldVerifier.VerifyAnalyzer(@"TestCases\LiteralSuffixUpperCase.cs", new LiteralSuffixUpperCase());
 
         [TestMethod]
         public void LiteralSuffixUpperCase_CodeFix() =>
-            Verifier.VerifyCodeFix(
+            OldVerifier.VerifyCodeFix(
                 @"TestCases\LiteralSuffixUpperCase.cs",
                 @"TestCases\LiteralSuffixUpperCase.Fixed.cs",
                 new LiteralSuffixUpperCase(),
@@ -42,7 +42,7 @@ namespace SonarAnalyzer.UnitTest.Rules
 #if NET
         [TestMethod]
         public void LiteralSuffixUpperCase_CSharp10() =>
-            Verifier.VerifyAnalyzerFromCSharp10Library(@"TestCases\LiteralSuffixUpperCase.CSharp10.cs", new LiteralSuffixUpperCase());
+            OldVerifier.VerifyAnalyzerFromCSharp10Library(@"TestCases\LiteralSuffixUpperCase.CSharp10.cs", new LiteralSuffixUpperCase());
 #endif
     }
 }

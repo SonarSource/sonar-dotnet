@@ -29,6 +29,6 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         public void DeclareEventHandlersCorrectly() =>
-            Verifier.VerifyAnalyzer(@"TestCases\DeclareEventHandlersCorrectly.cs", new DeclareEventHandlersCorrectly());
+            OldVerifier.VerifyAnalyzer(@"TestCases\DeclareEventHandlersCorrectly.cs", new DeclareEventHandlersCorrectly());
     }
 }

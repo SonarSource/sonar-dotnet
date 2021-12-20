@@ -29,11 +29,11 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         public void ExceptionsNeedStandardConstructors() =>
-            Verifier.VerifyAnalyzer(@"TestCases\ExceptionsNeedStandardConstructors.cs", new ExceptionsNeedStandardConstructors());
+            OldVerifier.VerifyAnalyzer(@"TestCases\ExceptionsNeedStandardConstructors.cs", new ExceptionsNeedStandardConstructors());
 
         [TestMethod]
         public void ExceptionsNeedStandardConstructors_InvalidCode() =>
-            Verifier.VerifyCSharpAnalyzer(@"
+            OldVerifier.VerifyCSharpAnalyzer(@"
 public class  : Exception
 {
     My_07_Exception() {}

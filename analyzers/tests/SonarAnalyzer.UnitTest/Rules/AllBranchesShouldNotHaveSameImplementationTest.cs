@@ -30,7 +30,7 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         public void AllBranchesShouldNotHaveSameImplementation_CS() =>
-            Verifier.VerifyAnalyzer(
+            OldVerifier.VerifyAnalyzer(
                 @"TestCases\AllBranchesShouldNotHaveSameImplementation.cs",
                 new CS.AllBranchesShouldNotHaveSameImplementation(),
                 ParseOptionsHelper.FromCSharp8);
@@ -38,14 +38,14 @@ namespace SonarAnalyzer.UnitTest.Rules
 #if NET
         [TestMethod]
         public void AllBranchesShouldNotHaveSameImplementation_CSharp9() =>
-            Verifier.VerifyAnalyzerFromCSharp9Console(
+            OldVerifier.VerifyAnalyzerFromCSharp9Console(
                 @"TestCases\AllBranchesShouldNotHaveSameImplementation.CSharp9.cs",
                 new CS.AllBranchesShouldNotHaveSameImplementation());
 #endif
 
         [TestMethod]
         public void AllBranchesShouldNotHaveSameImplementation_VB() =>
-            Verifier.VerifyAnalyzer(
+            OldVerifier.VerifyAnalyzer(
                 @"TestCases\AllBranchesShouldNotHaveSameImplementation.vb",
                 new VB.AllBranchesShouldNotHaveSameImplementation());
     }

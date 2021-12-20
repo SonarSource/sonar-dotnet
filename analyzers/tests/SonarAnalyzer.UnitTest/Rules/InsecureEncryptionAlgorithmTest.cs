@@ -34,25 +34,25 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         public void InsecureEncryptionAlgorithm_MainProject_CS() =>
-            Verifier.VerifyAnalyzer(@"TestCases\InsecureEncryptionAlgorithm.cs", new CS.InsecureEncryptionAlgorithm(), GetAdditionalReferences());
+            OldVerifier.VerifyAnalyzer(@"TestCases\InsecureEncryptionAlgorithm.cs", new CS.InsecureEncryptionAlgorithm(), GetAdditionalReferences());
 
         [TestMethod]
         public void InsecureEncryptionAlgorithm_DoesNotRaiseIssuesForTestProject_CS() =>
-            Verifier.VerifyNoIssueReportedInTest(@"TestCases\InsecureEncryptionAlgorithm.cs", new CS.InsecureEncryptionAlgorithm(), GetAdditionalReferences());
+            OldVerifier.VerifyNoIssueReportedInTest(@"TestCases\InsecureEncryptionAlgorithm.cs", new CS.InsecureEncryptionAlgorithm(), GetAdditionalReferences());
 
 #if NET
         [TestMethod]
         public void InsecureEncryptionAlgorithm_CSharp9() =>
-            Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\InsecureEncryptionAlgorithm.CSharp9.cs", new CS.InsecureEncryptionAlgorithm(), GetAdditionalReferences());
+            OldVerifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\InsecureEncryptionAlgorithm.CSharp9.cs", new CS.InsecureEncryptionAlgorithm(), GetAdditionalReferences());
 
         [TestMethod]
         public void InsecureEncryptionAlgorithm_CSharp10() =>
-            Verifier.VerifyAnalyzerFromCSharp10Library(@"TestCases\InsecureEncryptionAlgorithm.CSharp10.cs", new CS.InsecureEncryptionAlgorithm(), GetAdditionalReferences());
+            OldVerifier.VerifyAnalyzerFromCSharp10Library(@"TestCases\InsecureEncryptionAlgorithm.CSharp10.cs", new CS.InsecureEncryptionAlgorithm(), GetAdditionalReferences());
 #endif
 
         [TestMethod]
         public void InsecureEncryptionAlgorithm_VB() =>
-            Verifier.VerifyAnalyzer(@"TestCases\InsecureEncryptionAlgorithm.vb", new VB.InsecureEncryptionAlgorithm(), GetAdditionalReferences());
+            OldVerifier.VerifyAnalyzer(@"TestCases\InsecureEncryptionAlgorithm.vb", new VB.InsecureEncryptionAlgorithm(), GetAdditionalReferences());
 
         private static IEnumerable<MetadataReference> GetAdditionalReferences() =>
             MetadataReferenceFacade.SystemSecurityCryptography.Concat(NuGetMetadataReference.BouncyCastle());

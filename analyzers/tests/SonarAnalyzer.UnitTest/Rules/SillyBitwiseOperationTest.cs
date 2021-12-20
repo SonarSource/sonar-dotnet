@@ -30,28 +30,28 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         public void SillyBitwiseOperation_CS() =>
-            Verifier.VerifyAnalyzer(@"TestCases\SillyBitwiseOperation.cs", new CS.SillyBitwiseOperation());
+            OldVerifier.VerifyAnalyzer(@"TestCases\SillyBitwiseOperation.cs", new CS.SillyBitwiseOperation());
 
 #if NET
         [TestMethod]
         public void SillyBitwiseOperation_CSharp9() =>
-            Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\SillyBitwiseOperation.CSharp9.cs", new CS.SillyBitwiseOperation());
+            OldVerifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\SillyBitwiseOperation.CSharp9.cs", new CS.SillyBitwiseOperation());
 #endif
 
         [TestMethod]
         public void SillyBitwiseOperation_CS_CodeFix() =>
-            Verifier.VerifyCodeFix(@"TestCases\SillyBitwiseOperation.cs",
+            OldVerifier.VerifyCodeFix(@"TestCases\SillyBitwiseOperation.cs",
                                    @"TestCases\SillyBitwiseOperation.Fixed.cs",
                                    new CS.SillyBitwiseOperation(),
                                    new CS.SillyBitwiseOperationCodeFixProvider());
 
         [TestMethod]
         public void SillyBitwiseOperation_VB() =>
-            Verifier.VerifyAnalyzer(@"TestCases\SillyBitwiseOperation.vb", new VB.SillyBitwiseOperation());
+            OldVerifier.VerifyAnalyzer(@"TestCases\SillyBitwiseOperation.vb", new VB.SillyBitwiseOperation());
 
         [TestMethod]
         public void SillyBitwiseOperation_VB_CodeFix() =>
-            Verifier.VerifyCodeFix(@"TestCases\SillyBitwiseOperation.vb",
+            OldVerifier.VerifyCodeFix(@"TestCases\SillyBitwiseOperation.vb",
                                    @"TestCases\SillyBitwiseOperation.Fixed.vb",
                                    new VB.SillyBitwiseOperation(),
                                    new VB.SillyBitwiseOperationCodeFixProvider());

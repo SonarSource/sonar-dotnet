@@ -30,7 +30,7 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         public void WcfMissingContractAttribute() =>
-            Verifier.VerifyAnalyzer(
+            OldVerifier.VerifyAnalyzer(
                 @"TestCases\WcfMissingContractAttribute.cs",
                 new WcfMissingContractAttribute(),
                 MetadataReferenceFacade.SystemServiceModel);

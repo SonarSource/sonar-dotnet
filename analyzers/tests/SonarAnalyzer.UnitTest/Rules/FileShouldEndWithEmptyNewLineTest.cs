@@ -29,7 +29,7 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         public void FileShouldEndWithEmptyNewLine() =>
-            Verifier.VerifyAnalyzer(new[]
+            OldVerifier.VerifyAnalyzer(new[]
                 {
                     @"TestCases\FileShouldEndWithEmptyNewLine_EmptyLine.cs",
                     @"TestCases\FileShouldEndWithEmptyNewLine_NoEmptyLine.cs",

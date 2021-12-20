@@ -29,6 +29,6 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         public void TypeExaminationOnSystemType() =>
-            Verifier.VerifyAnalyzer(@"TestCases\TypeExaminationOnSystemType.cs", new TypeExaminationOnSystemType());
+            OldVerifier.VerifyAnalyzer(@"TestCases\TypeExaminationOnSystemType.cs", new TypeExaminationOnSystemType());
     }
 }

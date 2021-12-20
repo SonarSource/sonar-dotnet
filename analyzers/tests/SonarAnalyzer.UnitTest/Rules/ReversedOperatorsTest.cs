@@ -30,16 +30,16 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         public void ReversedOperators_CS() =>
-            Verifier.VerifyAnalyzer(@"TestCases\ReversedOperators.cs", new CS.ReversedOperators());
+            OldVerifier.VerifyAnalyzer(@"TestCases\ReversedOperators.cs", new CS.ReversedOperators());
 
 #if NET
         [TestMethod]
         public void ReversedOperators_CSharp9() =>
-            Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\ReversedOperators.CSharp9.cs", new CS.ReversedOperators());
+            OldVerifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\ReversedOperators.CSharp9.cs", new CS.ReversedOperators());
 #endif
 
         [TestMethod]
         public void ReversedOperators_VB() =>
-            Verifier.VerifyAnalyzer(@"TestCases\ReversedOperators.vb", new VB.ReversedOperators());
+            OldVerifier.VerifyAnalyzer(@"TestCases\ReversedOperators.vb", new VB.ReversedOperators());
     }
 }

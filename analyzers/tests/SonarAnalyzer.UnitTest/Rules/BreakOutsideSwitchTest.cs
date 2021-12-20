@@ -29,6 +29,6 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         public void BreakOutsideSwitch() =>
-            Verifier.VerifyAnalyzer(@"TestCases\BreakOutsideSwitch.cs", new BreakOutsideSwitch());
+            OldVerifier.VerifyAnalyzer(@"TestCases\BreakOutsideSwitch.cs", new BreakOutsideSwitch());
     }
 }

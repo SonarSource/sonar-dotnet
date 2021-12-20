@@ -29,16 +29,16 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         public void StaticFieldVisible() =>
-            Verifier.VerifyAnalyzer(@"TestCases\StaticFieldVisible.cs", new StaticFieldVisible());
+            OldVerifier.VerifyAnalyzer(@"TestCases\StaticFieldVisible.cs", new StaticFieldVisible());
 
 #if NET
         [TestMethod]
         public void StaticFieldVisible_CSharp9() =>
-            Verifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\StaticFieldVisible.CSharp9.cs", new StaticFieldVisible());
+            OldVerifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\StaticFieldVisible.CSharp9.cs", new StaticFieldVisible());
 
         [TestMethod]
         public void StaticFieldVisible_CSharp10() =>
-            Verifier.VerifyAnalyzerFromCSharp10Library(@"TestCases\StaticFieldVisible.CSharp10.cs", new StaticFieldVisible());
+            OldVerifier.VerifyAnalyzerFromCSharp10Library(@"TestCases\StaticFieldVisible.CSharp10.cs", new StaticFieldVisible());
 #endif
     }
 }

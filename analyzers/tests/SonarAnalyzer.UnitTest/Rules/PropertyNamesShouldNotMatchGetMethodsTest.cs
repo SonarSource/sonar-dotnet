@@ -29,11 +29,11 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         public void PropertyNamesShouldNotMatchGetMethods() =>
-            Verifier.VerifyAnalyzer(@"TestCases\PropertyNamesShouldNotMatchGetMethods.cs", new PropertyNamesShouldNotMatchGetMethods());
+            OldVerifier.VerifyAnalyzer(@"TestCases\PropertyNamesShouldNotMatchGetMethods.cs", new PropertyNamesShouldNotMatchGetMethods());
 
         [TestMethod]
         public void PropertyNamesShouldNotMatchGetMethods_InvalidCode() =>
-            Verifier.VerifyCSharpAnalyzer(@"
+            OldVerifier.VerifyCSharpAnalyzer(@"
     public int { get; } // Missing identifier on purpose
     public int () { return 42; } // Missing identifier on purpose
 ", new PropertyNamesShouldNotMatchGetMethods(), CompilationErrorBehavior.Ignore);
@@ -41,11 +41,11 @@ namespace SonarAnalyzer.UnitTest.Rules
 #if NET
         [TestMethod]
         public void PropertyNamesShouldNotMatchGetMethods_CSharp9() =>
-            Verifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\PropertyNamesShouldNotMatchGetMethods.CSharp9.cs", new PropertyNamesShouldNotMatchGetMethods());
+            OldVerifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\PropertyNamesShouldNotMatchGetMethods.CSharp9.cs", new PropertyNamesShouldNotMatchGetMethods());
 
         [TestMethod]
         public void PropertyNamesShouldNotMatchGetMethods_CSharp10() =>
-            Verifier.VerifyAnalyzerFromCSharp10Library(@"TestCases\PropertyNamesShouldNotMatchGetMethods.CSharp10.cs", new PropertyNamesShouldNotMatchGetMethods());
+            OldVerifier.VerifyAnalyzerFromCSharp10Library(@"TestCases\PropertyNamesShouldNotMatchGetMethods.CSharp10.cs", new PropertyNamesShouldNotMatchGetMethods());
 #endif
     }
 }

@@ -30,28 +30,28 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         public void StringLiteralShouldNotBeDuplicated_CS() =>
-            Verifier.VerifyAnalyzer(@"TestCases\StringLiteralShouldNotBeDuplicated.cs", new CS.StringLiteralShouldNotBeDuplicated());
+            OldVerifier.VerifyAnalyzer(@"TestCases\StringLiteralShouldNotBeDuplicated.cs", new CS.StringLiteralShouldNotBeDuplicated());
 
 #if NET
         [TestMethod]
         public void StringLiteralShouldNotBeDuplicated_CSharp9() =>
-            Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\StringLiteralShouldNotBeDuplicated.CSharp9.cs", new CS.StringLiteralShouldNotBeDuplicated());
+            OldVerifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\StringLiteralShouldNotBeDuplicated.CSharp9.cs", new CS.StringLiteralShouldNotBeDuplicated());
 
         [TestMethod]
         public void StringLiteralShouldNotBeDuplicated_CSharp10() =>
-            Verifier.VerifyAnalyzerFromCSharp10Console(@"TestCases\StringLiteralShouldNotBeDuplicated.CSharp10.cs", new CS.StringLiteralShouldNotBeDuplicated());
+            OldVerifier.VerifyAnalyzerFromCSharp10Console(@"TestCases\StringLiteralShouldNotBeDuplicated.CSharp10.cs", new CS.StringLiteralShouldNotBeDuplicated());
 #endif
 
         [TestMethod]
         public void StringLiteralShouldNotBeDuplicated_Attributes_CS() =>
-            Verifier.VerifyNonConcurrentAnalyzer(@"TestCases\StringLiteralShouldNotBeDuplicated_Attributes.cs", new CS.StringLiteralShouldNotBeDuplicated { Threshold = 2 });
+            OldVerifier.VerifyNonConcurrentAnalyzer(@"TestCases\StringLiteralShouldNotBeDuplicated_Attributes.cs", new CS.StringLiteralShouldNotBeDuplicated { Threshold = 2 });
 
         [TestMethod]
         public void StringLiteralShouldNotBeDuplicated_VB() =>
-            Verifier.VerifyAnalyzer(@"TestCases\StringLiteralShouldNotBeDuplicated.vb", new VB.StringLiteralShouldNotBeDuplicated());
+            OldVerifier.VerifyAnalyzer(@"TestCases\StringLiteralShouldNotBeDuplicated.vb", new VB.StringLiteralShouldNotBeDuplicated());
 
         [TestMethod]
         public void StringLiteralShouldNotBeDuplicated_Attributes_VB() =>
-           Verifier.VerifyNonConcurrentAnalyzer(@"TestCases\StringLiteralShouldNotBeDuplicated_Attributes.vb", new VB.StringLiteralShouldNotBeDuplicated { Threshold = 2 });
+           OldVerifier.VerifyNonConcurrentAnalyzer(@"TestCases\StringLiteralShouldNotBeDuplicated_Attributes.vb", new VB.StringLiteralShouldNotBeDuplicated { Threshold = 2 });
     }
 }

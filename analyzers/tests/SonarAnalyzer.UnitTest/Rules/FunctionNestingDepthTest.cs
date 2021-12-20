@@ -30,16 +30,16 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         public void FunctionNestingDepth_CS() =>
-            Verifier.VerifyAnalyzer(@"TestCases\FunctionNestingDepth.cs", new CS.FunctionNestingDepth { Maximum = 3 });
+            OldVerifier.VerifyAnalyzer(@"TestCases\FunctionNestingDepth.cs", new CS.FunctionNestingDepth { Maximum = 3 });
 
 #if NET
         [TestMethod]
         public void FunctionNestingDepth_CS_CSharp9() =>
-            Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\FunctionNestingDepth.CSharp9.cs", new CS.FunctionNestingDepth { Maximum = 3 });
+            OldVerifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\FunctionNestingDepth.CSharp9.cs", new CS.FunctionNestingDepth { Maximum = 3 });
 #endif
 
         [TestMethod]
         public void FunctionNestingDepth_VB() =>
-            Verifier.VerifyAnalyzer(@"TestCases\FunctionNestingDepth.vb", new VB.FunctionNestingDepth { Maximum = 3 });
+            OldVerifier.VerifyAnalyzer(@"TestCases\FunctionNestingDepth.vb", new VB.FunctionNestingDepth { Maximum = 3 });
     }
 }

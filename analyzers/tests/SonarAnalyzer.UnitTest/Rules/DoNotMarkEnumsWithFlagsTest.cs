@@ -29,11 +29,11 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         public void DoNotMarkEnumsWithFlags() =>
-            Verifier.VerifyAnalyzer(@"TestCases\DoNotMarkEnumsWithFlags.cs", new DoNotMarkEnumsWithFlags());
+            OldVerifier.VerifyAnalyzer(@"TestCases\DoNotMarkEnumsWithFlags.cs", new DoNotMarkEnumsWithFlags());
 
         [TestMethod]
         public void DoNotMarkEnumsWithFlags_InvalidEnumType() =>
-            Verifier.VerifyCSharpAnalyzer(@"
+            OldVerifier.VerifyCSharpAnalyzer(@"
 [System.Flags]
 public enum InvalidStringEnum : string // Noncompliant
 {

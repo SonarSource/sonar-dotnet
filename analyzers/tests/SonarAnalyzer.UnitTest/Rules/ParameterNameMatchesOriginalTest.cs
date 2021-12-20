@@ -31,7 +31,7 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         public void ParameterNameMatchesOriginal_CS() =>
-            Verifier.VerifyAnalyzer(
+            OldVerifier.VerifyAnalyzer(
                 @"TestCases\ParameterNameMatchesOriginal.cs",
                 new CS.ParameterNameMatchesOriginal(),
                 ParseOptionsHelper.FromCSharp8,
@@ -40,15 +40,15 @@ namespace SonarAnalyzer.UnitTest.Rules
 #if NET
         [TestMethod]
         public void ParameterNameMatchesOriginal_CSharp9() =>
-            Verifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\ParameterNameMatchesOriginal.CSharp9.cs", new CS.ParameterNameMatchesOriginal());
+            OldVerifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\ParameterNameMatchesOriginal.CSharp9.cs", new CS.ParameterNameMatchesOriginal());
 
         [TestMethod]
         public void ParameterNameMatchesOriginal_CSharpPreview() =>
-            Verifier.VerifyAnalyzerCSharpPreviewLibrary(@"TestCases\ParameterNameMatchesOriginal.CSharpPreview.cs", new CS.ParameterNameMatchesOriginal());
+            OldVerifier.VerifyAnalyzerCSharpPreviewLibrary(@"TestCases\ParameterNameMatchesOriginal.CSharpPreview.cs", new CS.ParameterNameMatchesOriginal());
 #endif
 
         [TestMethod]
         public void ParameterNameMatchesOriginal_VB() =>
-            Verifier.VerifyAnalyzer(@"TestCases\ParameterNameMatchesOriginal.vb", new VB.ParameterNameMatchesOriginal());
+            OldVerifier.VerifyAnalyzer(@"TestCases\ParameterNameMatchesOriginal.vb", new VB.ParameterNameMatchesOriginal());
     }
 }

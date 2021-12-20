@@ -34,13 +34,13 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         public void ExpandingArchives_CS() =>
-            Verifier.VerifyAnalyzer(@"TestCases\Hotspots\ExpandingArchives.cs",
+            OldVerifier.VerifyAnalyzer(@"TestCases\Hotspots\ExpandingArchives.cs",
                                     new CS.ExpandingArchives(AnalyzerConfiguration.AlwaysEnabled),
                                     AdditionalReferences);
 
         [TestMethod]
         public void ExpandingArchives_VB() =>
-            Verifier.VerifyAnalyzer(@"TestCases\Hotspots\ExpandingArchives.vb",
+            OldVerifier.VerifyAnalyzer(@"TestCases\Hotspots\ExpandingArchives.vb",
                                     new VB.ExpandingArchives(AnalyzerConfiguration.AlwaysEnabled),
                                     AdditionalReferences);
 

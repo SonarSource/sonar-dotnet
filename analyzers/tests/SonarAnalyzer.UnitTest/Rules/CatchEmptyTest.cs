@@ -29,10 +29,10 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         public void CatchEmpty() =>
-            Verifier.VerifyAnalyzer(@"TestCases\CatchEmpty.cs", new CatchEmpty());
+            OldVerifier.VerifyAnalyzer(@"TestCases\CatchEmpty.cs", new CatchEmpty());
 
         [TestMethod]
         public void CatchEmpty_InTest() =>
-            Verifier.VerifyNoIssueReportedInTest(@"TestCases\CatchEmpty.cs", new CatchEmpty());
+            OldVerifier.VerifyNoIssueReportedInTest(@"TestCases\CatchEmpty.cs", new CatchEmpty());
     }
 }

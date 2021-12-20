@@ -31,27 +31,27 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         public void ShouldImplementExportedInterfaces_CS() =>
-            Verifier.VerifyAnalyzer(@"TestCases\ShouldImplementExportedInterfaces.cs",
+            OldVerifier.VerifyAnalyzer(@"TestCases\ShouldImplementExportedInterfaces.cs",
                                     new CS.ShouldImplementExportedInterfaces(),
                                     MetadataReferenceFacade.SystemComponentModelComposition);
 
 #if NET
         [TestMethod]
         public void ShouldImplementExportedInterfaces_CSharp9() =>
-            Verifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\ShouldImplementExportedInterfaces.CSharp9.cs",
+            OldVerifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\ShouldImplementExportedInterfaces.CSharp9.cs",
                                                       new CS.ShouldImplementExportedInterfaces(),
                                                       MetadataReferenceFacade.SystemComponentModelComposition);
 #endif
 
         [TestMethod]
         public void ShouldImplementExportedInterfaces_VB() =>
-            Verifier.VerifyAnalyzer(@"TestCases\ShouldImplementExportedInterfaces.vb",
+            OldVerifier.VerifyAnalyzer(@"TestCases\ShouldImplementExportedInterfaces.vb",
                                     new VB.ShouldImplementExportedInterfaces(),
                                     MetadataReferenceFacade.SystemComponentModelComposition);
 
         [TestMethod]
         public void ShouldImplementExportedInterfaces_Partial() =>
-            Verifier.VerifyAnalyzer(new[]
+            OldVerifier.VerifyAnalyzer(new[]
                 {
                     @"TestCases\ShouldImplementExportedInterfaces_Part1.cs",
                     @"TestCases\ShouldImplementExportedInterfaces_Part2.cs",

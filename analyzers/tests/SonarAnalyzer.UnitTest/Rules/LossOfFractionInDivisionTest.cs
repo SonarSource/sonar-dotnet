@@ -29,16 +29,16 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         public void LossOfFractionInDivision() =>
-            Verifier.VerifyAnalyzer(@"TestCases\LossOfFractionInDivision.cs", new LossOfFractionInDivision());
+            OldVerifier.VerifyAnalyzer(@"TestCases\LossOfFractionInDivision.cs", new LossOfFractionInDivision());
 
 #if NET
         [TestMethod]
         public void LossOfFractionInDivision_FromCSharp9() =>
-            Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\LossOfFractionInDivision.CSharp9.cs", new LossOfFractionInDivision());
+            OldVerifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\LossOfFractionInDivision.CSharp9.cs", new LossOfFractionInDivision());
 
         [TestMethod]
         public void LossOfFractionInDivision_FromCSharp10() =>
-            Verifier.VerifyAnalyzerFromCSharp10Library(@"TestCases\LossOfFractionInDivision.CSharp10.cs", new LossOfFractionInDivision());
+            OldVerifier.VerifyAnalyzerFromCSharp10Library(@"TestCases\LossOfFractionInDivision.CSharp10.cs", new LossOfFractionInDivision());
 #endif
     }
 }

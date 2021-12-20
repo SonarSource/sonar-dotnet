@@ -64,17 +64,17 @@ internal class Bar
 
         [TestMethod]
         public void MethodsShouldUseBaseTypes() =>
-            Verifier.VerifyAnalyzer(new[] { @"TestCases\MethodsShouldUseBaseTypes.cs", @"TestCases\MethodsShouldUseBaseTypes2.cs", }, new MethodsShouldUseBaseTypes());
+            OldVerifier.VerifyAnalyzer(new[] { @"TestCases\MethodsShouldUseBaseTypes.cs", @"TestCases\MethodsShouldUseBaseTypes2.cs", }, new MethodsShouldUseBaseTypes());
 
 #if NET
         [TestMethod]
         public void MethodsShouldUseBaseTypes_CSharp9() =>
-            Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\MethodsShouldUseBaseTypes.CSharp9.cs", new MethodsShouldUseBaseTypes());
+            OldVerifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\MethodsShouldUseBaseTypes.CSharp9.cs", new MethodsShouldUseBaseTypes());
 #endif
 
         [TestMethod]
         public void MethodsShouldUseBaseTypes_InvalidCode() =>
-            Verifier.VerifyCSharpAnalyzer(@"
+            OldVerifier.VerifyCSharpAnalyzer(@"
 using System;
 using System.Collections;
 using System.Collections.Generic;

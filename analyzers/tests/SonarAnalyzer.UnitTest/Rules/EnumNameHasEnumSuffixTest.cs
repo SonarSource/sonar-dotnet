@@ -30,10 +30,10 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         public void EnumNameHasEnumSuffix_CS() =>
-            Verifier.VerifyAnalyzer(@"TestCases\EnumNameHasEnumSuffix.cs", new CS.EnumNameHasEnumSuffix());
+            OldVerifier.VerifyAnalyzer(@"TestCases\EnumNameHasEnumSuffix.cs", new CS.EnumNameHasEnumSuffix());
 
         [TestMethod]
         public void EnumNameHasEnumSuffix_VB() =>
-            Verifier.VerifyAnalyzer(@"TestCases\EnumNameHasEnumSuffix.vb", new VB.EnumNameHasEnumSuffix());
+            OldVerifier.VerifyAnalyzer(@"TestCases\EnumNameHasEnumSuffix.vb", new VB.EnumNameHasEnumSuffix());
     }
 }

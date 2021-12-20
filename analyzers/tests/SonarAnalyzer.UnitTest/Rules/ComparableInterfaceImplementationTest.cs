@@ -29,6 +29,6 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         public void IComparableImplementation() =>
-            Verifier.VerifyAnalyzer(@"TestCases\ComparableInterfaceImplementation.cs", new ComparableInterfaceImplementation());
+            OldVerifier.VerifyAnalyzer(@"TestCases\ComparableInterfaceImplementation.cs", new ComparableInterfaceImplementation());
     }
 }

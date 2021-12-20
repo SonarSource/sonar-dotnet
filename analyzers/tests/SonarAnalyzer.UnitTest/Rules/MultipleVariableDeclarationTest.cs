@@ -31,21 +31,21 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         public void MultipleVariableDeclaration()
         {
-            Verifier.VerifyAnalyzer(@"TestCases\MultipleVariableDeclaration.cs", new CS.MultipleVariableDeclaration());
-            Verifier.VerifyAnalyzer(@"TestCases\MultipleVariableDeclaration.vb", new VB.MultipleVariableDeclaration());
+            OldVerifier.VerifyAnalyzer(@"TestCases\MultipleVariableDeclaration.cs", new CS.MultipleVariableDeclaration());
+            OldVerifier.VerifyAnalyzer(@"TestCases\MultipleVariableDeclaration.vb", new VB.MultipleVariableDeclaration());
         }
 
         [TestMethod]
         public void MultipleVariableDeclaration_CodeFix()
         {
-            Verifier.VerifyCodeFix(
+            OldVerifier.VerifyCodeFix(
                 @"TestCases\MultipleVariableDeclaration.cs",
                 @"TestCases\MultipleVariableDeclaration.Fixed.cs",
                 new CS.MultipleVariableDeclaration(),
                 new CS.MultipleVariableDeclarationCodeFixProvider(),
                 SonarAnalyzer.Rules.Common.MultipleVariableDeclarationCodeFixProviderBase.Title);
 
-            Verifier.VerifyCodeFix(
+            OldVerifier.VerifyCodeFix(
                 @"TestCases\MultipleVariableDeclaration.vb",
                 @"TestCases\MultipleVariableDeclaration.Fixed.vb",
                 new VB.MultipleVariableDeclaration(),

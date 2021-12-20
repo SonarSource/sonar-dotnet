@@ -29,14 +29,14 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         public void UnusedReturnValue() =>
-            Verifier.VerifyAnalyzer(
+            OldVerifier.VerifyAnalyzer(
                 @"TestCases\UnusedReturnValue.cs",
                 new UnusedReturnValue(),
                 ParseOptionsHelper.FromCSharp8);
 
         [TestMethod]
         public void UnusedReturnValueWithPartialClasses() =>
-            Verifier.VerifyAnalyzer(
+            OldVerifier.VerifyAnalyzer(
                 new[] { @"TestCases\UnusedReturnValue.part1.cs", @"TestCases\UnusedReturnValue.part2.cs", @"TestCases\UnusedReturnValue.External.cs" },
                 new UnusedReturnValue(),
                 ParseOptionsHelper.FromCSharp8);
@@ -44,15 +44,15 @@ namespace SonarAnalyzer.UnitTest.Rules
 #if NET
         [TestMethod]
         public void UnusedReturnValue_CSharp9() =>
-            Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\UnusedReturnValue.CSharp9.cs", new UnusedReturnValue());
+            OldVerifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\UnusedReturnValue.CSharp9.cs", new UnusedReturnValue());
 
         [TestMethod]
         public void UnusedReturnValue_CSharp10() =>
-            Verifier.VerifyAnalyzerFromCSharp10Console(@"TestCases\UnusedReturnValue.CSharp10.cs", new UnusedReturnValue());
+            OldVerifier.VerifyAnalyzerFromCSharp10Console(@"TestCases\UnusedReturnValue.CSharp10.cs", new UnusedReturnValue());
 
         [TestMethod]
         public void UnusedReturnValue_CSharpPreview() =>
-            Verifier.VerifyAnalyzerCSharpPreviewLibrary(@"TestCases\UnusedReturnValue.CSharpPreview.cs", new UnusedReturnValue());
+            OldVerifier.VerifyAnalyzerCSharpPreviewLibrary(@"TestCases\UnusedReturnValue.CSharpPreview.cs", new UnusedReturnValue());
 #endif
     }
 }

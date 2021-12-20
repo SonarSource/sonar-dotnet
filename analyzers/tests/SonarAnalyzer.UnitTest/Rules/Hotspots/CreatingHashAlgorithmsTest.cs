@@ -34,14 +34,14 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         public void CreatingHashAlgorithms_CS() =>
-            Verifier.VerifyAnalyzer(@"TestCases\Hotspots\CreatingHashAlgorithms.cs",
+            OldVerifier.VerifyAnalyzer(@"TestCases\Hotspots\CreatingHashAlgorithms.cs",
                                     new CS.CreatingHashAlgorithms(AnalyzerConfiguration.AlwaysEnabled),
                                     ParseOptionsHelper.FromCSharp8,
                                     GetAdditionalReferences());
 #if NETFRAMEWORK // HMACRIPEMD160, MD5Cng, RIPEMD160Managed and RIPEMD160 are available only for .Net Framework
         [TestMethod]
         public void CreatingHashAlgorithms_CS_NetFx() =>
-            Verifier.VerifyAnalyzer(@"TestCases\Hotspots\CreatingHashAlgorithms.NetFramework.cs",
+            OldVerifier.VerifyAnalyzer(@"TestCases\Hotspots\CreatingHashAlgorithms.NetFramework.cs",
                                     new CS.CreatingHashAlgorithms(AnalyzerConfiguration.AlwaysEnabled),
                                     ParseOptionsHelper.FromCSharp8,
                                     GetAdditionalReferences());
@@ -49,14 +49,14 @@ namespace SonarAnalyzer.UnitTest.Rules
 
         [TestMethod]
         public void CreatingHashAlgorithms_VB() =>
-            Verifier.VerifyAnalyzer(@"TestCases\Hotspots\CreatingHashAlgorithms.vb",
+            OldVerifier.VerifyAnalyzer(@"TestCases\Hotspots\CreatingHashAlgorithms.vb",
                                     new VB.CreatingHashAlgorithms(AnalyzerConfiguration.AlwaysEnabled),
                                     GetAdditionalReferences());
 
 #if NETFRAMEWORK // HMACRIPEMD160, MD5Cng, RIPEMD160Managed and RIPEMD160 are available only for .Net Framework
         [TestMethod]
         public void CreatingHashAlgorithms_VB_NetFx() =>
-            Verifier.VerifyAnalyzer(@"TestCases\Hotspots\CreatingHashAlgorithms.NetFramework.vb",
+            OldVerifier.VerifyAnalyzer(@"TestCases\Hotspots\CreatingHashAlgorithms.NetFramework.vb",
                                     new VB.CreatingHashAlgorithms(AnalyzerConfiguration.AlwaysEnabled),
                                     GetAdditionalReferences());
 #endif

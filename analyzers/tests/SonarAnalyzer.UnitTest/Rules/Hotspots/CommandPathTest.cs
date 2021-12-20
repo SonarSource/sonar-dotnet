@@ -32,12 +32,12 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         public void CommandPath_CS() =>
-            Verifier.VerifyAnalyzer(@"TestCases\Hotspots\CommandPath.cs", new CS.CommandPath(AnalyzerConfiguration.AlwaysEnabled), MetadataReferenceFacade.SystemDiagnosticsProcess);
+            OldVerifier.VerifyAnalyzer(@"TestCases\Hotspots\CommandPath.cs", new CS.CommandPath(AnalyzerConfiguration.AlwaysEnabled), MetadataReferenceFacade.SystemDiagnosticsProcess);
 
 #if NET
         [TestMethod]
         public void CommandPath_CSharp10() =>
-            Verifier.VerifyAnalyzerFromCSharp10Library(
+            OldVerifier.VerifyAnalyzerFromCSharp10Library(
                 @"TestCases\Hotspots\CommandPath.CSharp10.cs",
                 new CS.CommandPath(AnalyzerConfiguration.AlwaysEnabled),
                 MetadataReferenceFacade.SystemDiagnosticsProcess);
@@ -45,6 +45,6 @@ namespace SonarAnalyzer.UnitTest.Rules
 
         [TestMethod]
         public void CommandPath_VB() =>
-            Verifier.VerifyAnalyzer(@"TestCases\Hotspots\CommandPath.vb", new VB.CommandPath(AnalyzerConfiguration.AlwaysEnabled), MetadataReferenceFacade.SystemDiagnosticsProcess);
+            OldVerifier.VerifyAnalyzer(@"TestCases\Hotspots\CommandPath.vb", new VB.CommandPath(AnalyzerConfiguration.AlwaysEnabled), MetadataReferenceFacade.SystemDiagnosticsProcess);
     }
 }

@@ -29,16 +29,16 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         public void UninvokedEventDeclaration() =>
-            Verifier.VerifyAnalyzer(@"TestCases\UninvokedEventDeclaration.cs", new UninvokedEventDeclaration());
+            OldVerifier.VerifyAnalyzer(@"TestCases\UninvokedEventDeclaration.cs", new UninvokedEventDeclaration());
 
 #if NET
         [TestMethod]
         public void UninvokedEventDeclaration_CSharp9() =>
-            Verifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\UninvokedEventDeclaration.CSharp9.cs", new UninvokedEventDeclaration());
+            OldVerifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\UninvokedEventDeclaration.CSharp9.cs", new UninvokedEventDeclaration());
 
         [TestMethod]
         public void UninvokedEventDeclaration_CSharpPreview() =>
-            Verifier.VerifyAnalyzerCSharpPreviewLibrary(@"TestCases\UninvokedEventDeclaration.CSharpPreview.cs", new UninvokedEventDeclaration());
+            OldVerifier.VerifyAnalyzerCSharpPreviewLibrary(@"TestCases\UninvokedEventDeclaration.CSharpPreview.cs", new UninvokedEventDeclaration());
 #endif
     }
 }

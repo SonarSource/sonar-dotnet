@@ -29,12 +29,12 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         public void PInvokesShouldNotBeVisible() =>
-            Verifier.VerifyAnalyzer(@"TestCases\PInvokesShouldNotBeVisible.cs", new PInvokesShouldNotBeVisible());
+            OldVerifier.VerifyAnalyzer(@"TestCases\PInvokesShouldNotBeVisible.cs", new PInvokesShouldNotBeVisible());
 
 #if NET
         [TestMethod]
         public void PInvokesShouldNotBeVisible_CSharp9() =>
-            Verifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\PInvokesShouldNotBeVisible.CSharp9.cs", new PInvokesShouldNotBeVisible());
+            OldVerifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\PInvokesShouldNotBeVisible.CSharp9.cs", new PInvokesShouldNotBeVisible());
 #endif
     }
 }

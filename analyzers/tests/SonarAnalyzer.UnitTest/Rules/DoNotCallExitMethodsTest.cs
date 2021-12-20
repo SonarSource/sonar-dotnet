@@ -30,14 +30,14 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         public void DoNotCallExitMethods() =>
-            Verifier.VerifyAnalyzer(@"TestCases\DoNotCallExitMethods.cs",
+            OldVerifier.VerifyAnalyzer(@"TestCases\DoNotCallExitMethods.cs",
                 new DoNotCallExitMethods(),
                 MetadataReferenceFacade.SystemWindowsForms);
 
 #if NET
         [TestMethod]
         public void DoNotCallExitMethods_CSharp9() =>
-            Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\DoNotCallExitMethods.CSharp9.cs", new DoNotCallExitMethods());
+            OldVerifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\DoNotCallExitMethods.CSharp9.cs", new DoNotCallExitMethods());
 #endif
     }
 }

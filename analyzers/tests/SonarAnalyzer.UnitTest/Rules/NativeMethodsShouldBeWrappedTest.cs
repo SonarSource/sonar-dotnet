@@ -29,16 +29,16 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         public void NativeMethodsShouldBeWrapped() =>
-            Verifier.VerifyAnalyzer(@"TestCases\NativeMethodsShouldBeWrapped.cs", new NativeMethodsShouldBeWrapped(), CompilationErrorBehavior.Ignore);
+            OldVerifier.VerifyAnalyzer(@"TestCases\NativeMethodsShouldBeWrapped.cs", new NativeMethodsShouldBeWrapped(), CompilationErrorBehavior.Ignore);
 
 #if NET
         [TestMethod]
         public void NativeMethodsShouldBeWrapped_CSharp9() =>
-            Verifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\NativeMethodsShouldBeWrapped.CSharp9.cs", new NativeMethodsShouldBeWrapped());
+            OldVerifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\NativeMethodsShouldBeWrapped.CSharp9.cs", new NativeMethodsShouldBeWrapped());
 #endif
 
         [TestMethod]
-        public void NativeMethodsShouldBeWrapped_InvalidCode() => Verifier.VerifyCSharpAnalyzer(@"
+        public void NativeMethodsShouldBeWrapped_InvalidCode() => OldVerifier.VerifyCSharpAnalyzer(@"
 public class InvalidSyntax
 {
     extern public void Extern1

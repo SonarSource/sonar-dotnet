@@ -29,7 +29,7 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         public void ControlCharacterInString() =>
-            Verifier.VerifyAnalyzer(
+            OldVerifier.VerifyAnalyzer(
                 @"TestCases\ControlCharacterInString.cs",
                 new ControlCharacterInString(),
                 ParseOptionsHelper.FromCSharp8);
@@ -37,7 +37,7 @@ namespace SonarAnalyzer.UnitTest.Rules
 #if NET
         [TestMethod]
         public void ControlCharacterInString_CSharp10() =>
-            Verifier.VerifyAnalyzerFromCSharp10Library(
+            OldVerifier.VerifyAnalyzerFromCSharp10Library(
                 @"TestCases\ControlCharacterInString.CSharp10.cs",
                 new ControlCharacterInString());
 #endif

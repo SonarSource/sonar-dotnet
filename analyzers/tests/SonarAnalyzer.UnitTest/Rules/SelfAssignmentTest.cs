@@ -30,18 +30,18 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         public void SelfAssignment_CSharp() =>
-            Verifier.VerifyAnalyzer(@"TestCases\SelfAssignment.cs",
+            OldVerifier.VerifyAnalyzer(@"TestCases\SelfAssignment.cs",
                 new CS.SelfAssignment(),
                 ParseOptionsHelper.FromCSharp8);
 
 #if NET
         [TestMethod]
         public void SelfAssignment_CSharp10() =>
-            Verifier.VerifyAnalyzerFromCSharp10Console(@"TestCases\SelfAssignment.CSharp10.cs", new CS.SelfAssignment());
+            OldVerifier.VerifyAnalyzerFromCSharp10Console(@"TestCases\SelfAssignment.CSharp10.cs", new CS.SelfAssignment());
 #endif
 
         [TestMethod]
         public void SelfAssignment_VisualBasic() =>
-            Verifier.VerifyAnalyzer(@"TestCases\SelfAssignment.vb", new VB.SelfAssignment());
+            OldVerifier.VerifyAnalyzer(@"TestCases\SelfAssignment.vb", new VB.SelfAssignment());
     }
 }

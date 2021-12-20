@@ -29,12 +29,12 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         public void OverrideGetHashCodeOnOverridingEquals() =>
-            Verifier.VerifyAnalyzer(@"TestCases\OverrideGetHashCodeOnOverridingEquals.cs", new OverrideGetHashCodeOnOverridingEquals());
+            OldVerifier.VerifyAnalyzer(@"TestCases\OverrideGetHashCodeOnOverridingEquals.cs", new OverrideGetHashCodeOnOverridingEquals());
 
 #if NET
         [TestMethod]
         public void OverrideGetHashCodeOnOverridingEquals_CSharp9() =>
-            Verifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\OverrideGetHashCodeOnOverridingEquals.CSharp9.cs", new OverrideGetHashCodeOnOverridingEquals());
+            OldVerifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\OverrideGetHashCodeOnOverridingEquals.CSharp9.cs", new OverrideGetHashCodeOnOverridingEquals());
 #endif
     }
 }

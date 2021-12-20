@@ -29,6 +29,6 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         public void SimpleDoLoop() =>
-            Verifier.VerifyAnalyzer(@"TestCases\SimpleDoLoop.vb", new SimpleDoLoop());
+            OldVerifier.VerifyAnalyzer(@"TestCases\SimpleDoLoop.vb", new SimpleDoLoop());
     }
 }

@@ -29,14 +29,14 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         public void DoNotWriteToStandardOutput() =>
-            Verifier.VerifyAnalyzer(@"TestCases\ConsoleLogging.cs", new DoNotWriteToStandardOutput());
+            OldVerifier.VerifyAnalyzer(@"TestCases\ConsoleLogging.cs", new DoNotWriteToStandardOutput());
 
         [TestMethod]
         public void DoNotWriteToStandardOutput_ConditionalDirectives1() =>
-            Verifier.VerifyNonConcurrentAnalyzer(@"TestCases\ConsoleLogging_Conditionals1.cs", new DoNotWriteToStandardOutput());
+            OldVerifier.VerifyNonConcurrentAnalyzer(@"TestCases\ConsoleLogging_Conditionals1.cs", new DoNotWriteToStandardOutput());
 
         [TestMethod]
         public void DoNotWriteToStandardOutput_ConditionalDirectives2() =>
-            Verifier.VerifyNonConcurrentAnalyzer(@"TestCases\ConsoleLogging_Conditionals2.cs", new DoNotWriteToStandardOutput());
+            OldVerifier.VerifyNonConcurrentAnalyzer(@"TestCases\ConsoleLogging_Conditionals2.cs", new DoNotWriteToStandardOutput());
     }
 }

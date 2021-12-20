@@ -30,22 +30,22 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         public void ConditionalStructureSameImplementation_If_CSharp() =>
-            Verifier.VerifyAnalyzer(@"TestCases\ConditionalStructureSameImplementation_If.cs",
+            OldVerifier.VerifyAnalyzer(@"TestCases\ConditionalStructureSameImplementation_If.cs",
                 new CS.ConditionalStructureSameImplementation());
 
         [TestMethod]
         public void ConditionalStructureSameImplementation_Switch_CSharp() =>
-            Verifier.VerifyAnalyzer(@"TestCases\ConditionalStructureSameImplementation_Switch.cs",
+            OldVerifier.VerifyAnalyzer(@"TestCases\ConditionalStructureSameImplementation_Switch.cs",
                 new CS.ConditionalStructureSameImplementation());
 
         [TestMethod]
         public void ConditionalStructureSameImplementation_If_VisualBasic() =>
-            Verifier.VerifyAnalyzer(@"TestCases\ConditionalStructureSameImplementation_If.vb",
+            OldVerifier.VerifyAnalyzer(@"TestCases\ConditionalStructureSameImplementation_If.vb",
                 new VB.ConditionalStructureSameImplementation());
 
         [TestMethod]
         public void ConditionalStructureSameImplementation_Switch_VisualBasic() =>
-            Verifier.VerifyAnalyzer(@"TestCases\ConditionalStructureSameImplementation_Switch.vb",
+            OldVerifier.VerifyAnalyzer(@"TestCases\ConditionalStructureSameImplementation_Switch.vb",
                 new VB.ConditionalStructureSameImplementation());
     }
 }

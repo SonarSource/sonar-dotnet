@@ -32,21 +32,21 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         public void SerializationConstructorsShouldBeSecured() =>
-            Verifier.VerifyNonConcurrentAnalyzer(@"TestCases\SerializationConstructorsShouldBeSecured.cs",
+            OldVerifier.VerifyNonConcurrentAnalyzer(@"TestCases\SerializationConstructorsShouldBeSecured.cs",
                                     new SerializationConstructorsShouldBeSecured(),
                                     GetAdditionalReferences());
 
 #if NET
         [TestMethod]
         public void SerializationConstructorsShouldBeSecured_CSharp9() =>
-            Verifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\SerializationConstructorsShouldBeSecured.CSharp9.cs",
+            OldVerifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\SerializationConstructorsShouldBeSecured.CSharp9.cs",
                                     new SerializationConstructorsShouldBeSecured(),
                                     GetAdditionalReferences());
 #endif
 
         [TestMethod]
         public void SerializationConstructorsShouldBeSecured_InvalidCode() =>
-            Verifier.VerifyCSharpAnalyzer(@"
+            OldVerifier.VerifyCSharpAnalyzer(@"
 [Serializable]
     public partial class InvalidCode : ISerializable
     {
@@ -61,13 +61,13 @@ namespace SonarAnalyzer.UnitTest.Rules
 
         [TestMethod]
         public void SerializationConstructorsShouldBeSecured_NoAssemblyAttribute() =>
-            Verifier.VerifyAnalyzer(@"TestCases\SerializationConstructorsShouldBeSecured_NoAssemblyAttribute.cs",
+            OldVerifier.VerifyAnalyzer(@"TestCases\SerializationConstructorsShouldBeSecured_NoAssemblyAttribute.cs",
                                     new SerializationConstructorsShouldBeSecured(),
                                     GetAdditionalReferences());
 
         [TestMethod]
         public void SerializationConstructorsShouldBeSecured_PartialClasses() =>
-            Verifier.VerifyNonConcurrentAnalyzer(
+            OldVerifier.VerifyNonConcurrentAnalyzer(
                                     new[]
                                     {
                                         @"TestCases\SerializationConstructorsShouldBeSecured_Part1.cs",

@@ -29,12 +29,12 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         public void ReturnValueIgnored() =>
-            Verifier.VerifyAnalyzer(@"TestCases\ReturnValueIgnored.cs", new ReturnValueIgnored());
+            OldVerifier.VerifyAnalyzer(@"TestCases\ReturnValueIgnored.cs", new ReturnValueIgnored());
 
 #if NET
         [TestMethod]
         public void ReturnValueIgnored_CSharp9() =>
-            Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\ReturnValueIgnored.CSharp9.cs", new ReturnValueIgnored());
+            OldVerifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\ReturnValueIgnored.CSharp9.cs", new ReturnValueIgnored());
 #endif
     }
 }

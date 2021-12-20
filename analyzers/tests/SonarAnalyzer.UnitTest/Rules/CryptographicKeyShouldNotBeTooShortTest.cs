@@ -33,7 +33,7 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         public void CryptographicKeyShouldNotBeTooShort() =>
-            Verifier.VerifyAnalyzer(@"TestCases\CryptographicKeyShouldNotBeTooShort.cs",
+            OldVerifier.VerifyAnalyzer(@"TestCases\CryptographicKeyShouldNotBeTooShort.cs",
                                     new CryptographicKeyShouldNotBeTooShort(),
                                     ParseOptionsHelper.FromCSharp8,
                                     GetAdditionalReferences());
@@ -41,7 +41,7 @@ namespace SonarAnalyzer.UnitTest.Rules
 #if NET
         [TestMethod]
         public void CryptographicKeyShouldNotBeTooShort_CSharp9() =>
-            Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\CryptographicKeyShouldNotBeTooShort.CSharp9.cs",
+            OldVerifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\CryptographicKeyShouldNotBeTooShort.CSharp9.cs",
                                                       new CryptographicKeyShouldNotBeTooShort(),
                                                       GetAdditionalReferences());
 #endif

@@ -31,16 +31,16 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         public void FunctionComplexity_CS() =>
-            Verifier.VerifyAnalyzer(@"TestCases\FunctionComplexity.cs", new CS.FunctionComplexity { Maximum = 3 }, ParseOptionsHelper.FromCSharp8);
+            OldVerifier.VerifyAnalyzer(@"TestCases\FunctionComplexity.cs", new CS.FunctionComplexity { Maximum = 3 }, ParseOptionsHelper.FromCSharp8);
 
 #if NET
         [TestMethod]
         public void FunctionComplexity_CSharp9() =>
-            Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\FunctionComplexity.CSharp9.cs", new CS.FunctionComplexity { Maximum = 3 });
+            OldVerifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\FunctionComplexity.CSharp9.cs", new CS.FunctionComplexity { Maximum = 3 });
 
         [TestMethod]
         public void FunctionComplexity_CSharp10() =>
-            Verifier.VerifyAnalyzerFromCSharp10Library(@"TestCases\FunctionComplexity.CSharp10.cs", new CS.FunctionComplexity { Maximum = 1 });
+            OldVerifier.VerifyAnalyzerFromCSharp10Library(@"TestCases\FunctionComplexity.CSharp10.cs", new CS.FunctionComplexity { Maximum = 1 });
 #endif
 
         [TestMethod]
@@ -48,12 +48,12 @@ namespace SonarAnalyzer.UnitTest.Rules
         {
             if (!TestContextHelper.IsAzureDevOpsContext) // ToDo: Test doesn't work on Azure DevOps
             {
-                Verifier.VerifyAnalyzer(@"TestCases\SyntaxWalker_InsufficientExecutionStackException.cs", new CS.FunctionComplexity { Maximum = 3 });
+                OldVerifier.VerifyAnalyzer(@"TestCases\SyntaxWalker_InsufficientExecutionStackException.cs", new CS.FunctionComplexity { Maximum = 3 });
             }
         }
 
         [TestMethod]
         public void FunctionComplexity_VB() =>
-            Verifier.VerifyAnalyzer(@"TestCases\FunctionComplexity.vb", new VB.FunctionComplexity { Maximum = 3 });
+            OldVerifier.VerifyAnalyzer(@"TestCases\FunctionComplexity.vb", new VB.FunctionComplexity { Maximum = 3 });
     }
 }

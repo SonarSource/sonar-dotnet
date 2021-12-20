@@ -30,12 +30,12 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         public void SwitchShouldNotBeNested_CS() =>
-            Verifier.VerifyAnalyzer(@"TestCases\SwitchShouldNotBeNested.cs",
+            OldVerifier.VerifyAnalyzer(@"TestCases\SwitchShouldNotBeNested.cs",
                 new CS.SwitchShouldNotBeNested(),
                 ParseOptionsHelper.FromCSharp8);
 
         [TestMethod]
-        public void SwitchShouldNotBeNested_VB() => Verifier.VerifyAnalyzer(@"TestCases\SwitchShouldNotBeNested.vb",
+        public void SwitchShouldNotBeNested_VB() => OldVerifier.VerifyAnalyzer(@"TestCases\SwitchShouldNotBeNested.vb",
                 new VB.SwitchShouldNotBeNested());
     }
 }

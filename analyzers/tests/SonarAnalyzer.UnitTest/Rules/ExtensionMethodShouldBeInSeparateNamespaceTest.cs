@@ -29,16 +29,16 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         public void ExtensionMethodShouldBeInSeparateNamespace() =>
-            Verifier.VerifyAnalyzer(@"TestCases\ExtensionMethodShouldBeInSeparateNamespace.cs", new ExtensionMethodShouldBeInSeparateNamespace());
+            OldVerifier.VerifyAnalyzer(@"TestCases\ExtensionMethodShouldBeInSeparateNamespace.cs", new ExtensionMethodShouldBeInSeparateNamespace());
 
 #if NET
         [TestMethod]
         public void ExtensionMethodShouldBeInSeparateNamespace_CSharp9() =>
-            Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\ExtensionMethodShouldBeInSeparateNamespace.CSharp9.cs", new ExtensionMethodShouldBeInSeparateNamespace());
+            OldVerifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\ExtensionMethodShouldBeInSeparateNamespace.CSharp9.cs", new ExtensionMethodShouldBeInSeparateNamespace());
 
         [TestMethod]
         public void ExtensionMethodShouldBeInSeparateNamespace_CSharp10() =>
-            Verifier.VerifyAnalyzerFromCSharp10Library(@"TestCases\ExtensionMethodShouldBeInSeparateNamespace.CSharp10.cs", new ExtensionMethodShouldBeInSeparateNamespace());
+            OldVerifier.VerifyAnalyzerFromCSharp10Library(@"TestCases\ExtensionMethodShouldBeInSeparateNamespace.CSharp10.cs", new ExtensionMethodShouldBeInSeparateNamespace());
 
 #endif
     }

@@ -29,12 +29,12 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         public void DefaultSectionShouldBeFirstOrLast() =>
-            Verifier.VerifyAnalyzer(@"TestCases\DefaultSectionShouldBeFirstOrLast.cs", new DefaultSectionShouldBeFirstOrLast());
+            OldVerifier.VerifyAnalyzer(@"TestCases\DefaultSectionShouldBeFirstOrLast.cs", new DefaultSectionShouldBeFirstOrLast());
 
 #if NET
         [TestMethod]
         public void DefaultSectionShouldBeFirstOrLast_CSharp9() =>
-            Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\DefaultSectionShouldBeFirstOrLast.CSharp9.cs", new DefaultSectionShouldBeFirstOrLast());
+            OldVerifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\DefaultSectionShouldBeFirstOrLast.CSharp9.cs", new DefaultSectionShouldBeFirstOrLast());
 #endif
     }
 }

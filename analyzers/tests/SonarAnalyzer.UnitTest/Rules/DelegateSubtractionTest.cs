@@ -29,12 +29,12 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         public void DelegateSubtraction() =>
-            Verifier.VerifyAnalyzer(@"TestCases\DelegateSubtraction.cs", new DelegateSubtraction());
+            OldVerifier.VerifyAnalyzer(@"TestCases\DelegateSubtraction.cs", new DelegateSubtraction());
 
 #if NET
         [TestMethod]
         public void DelegateSubtraction_CSharp9() =>
-            Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\DelegateSubtraction.CSharp9.cs", new DelegateSubtraction());
+            OldVerifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\DelegateSubtraction.CSharp9.cs", new DelegateSubtraction());
 #endif
     }
 }

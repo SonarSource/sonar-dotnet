@@ -31,13 +31,13 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         public void PartCreationPolicyShouldBeUsedWithExportAttribute_CS() =>
-            Verifier.VerifyAnalyzer(@"TestCases\PartCreationPolicyShouldBeUsedWithExportAttribute.cs",
+            OldVerifier.VerifyAnalyzer(@"TestCases\PartCreationPolicyShouldBeUsedWithExportAttribute.cs",
                                     new CS.PartCreationPolicyShouldBeUsedWithExportAttribute(),
                                     MetadataReferenceFacade.SystemComponentModelComposition);
 
         [TestMethod]
         public void PartCreationPolicyShouldBeUsedWithExportAttribute_UnresolvedSymbol_CS() =>
-            Verifier.VerifyCSharpAnalyzer(@"
+            OldVerifier.VerifyCSharpAnalyzer(@"
 [UnresolvedAttribute] // Error [CS0246]
 class Bar { }",
                                           new CS.PartCreationPolicyShouldBeUsedWithExportAttribute(),
@@ -46,14 +46,14 @@ class Bar { }",
 #if NET
         [TestMethod]
         public void PartCreationPolicyShouldBeUsedWithExportAttribute_CSharp9() =>
-            Verifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\PartCreationPolicyShouldBeUsedWithExportAttribute.CSharp9.cs",
+            OldVerifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\PartCreationPolicyShouldBeUsedWithExportAttribute.CSharp9.cs",
                                                       new CS.PartCreationPolicyShouldBeUsedWithExportAttribute(),
                                                       MetadataReferenceFacade.SystemComponentModelComposition);
 #endif
 
         [TestMethod]
         public void PartCreationPolicyShouldBeUsedWithExportAttribute_VB() =>
-            Verifier.VerifyAnalyzer(@"TestCases\PartCreationPolicyShouldBeUsedWithExportAttribute.vb",
+            OldVerifier.VerifyAnalyzer(@"TestCases\PartCreationPolicyShouldBeUsedWithExportAttribute.vb",
                                     new VB.PartCreationPolicyShouldBeUsedWithExportAttribute(),
                                     MetadataReferenceFacade.SystemComponentModelComposition);
     }

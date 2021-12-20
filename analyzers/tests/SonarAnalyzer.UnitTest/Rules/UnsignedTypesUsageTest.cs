@@ -29,6 +29,6 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         public void UnsignedTypesUsage() =>
-            Verifier.VerifyAnalyzer(@"TestCases\UnsignedTypesUsage.vb", new UnsignedTypesUsage());
+            OldVerifier.VerifyAnalyzer(@"TestCases\UnsignedTypesUsage.vb", new UnsignedTypesUsage());
     }
 }

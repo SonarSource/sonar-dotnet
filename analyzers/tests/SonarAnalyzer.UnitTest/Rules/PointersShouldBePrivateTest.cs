@@ -29,12 +29,12 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         public void PointersShouldBePrivate() =>
-            Verifier.VerifyAnalyzer(@"TestCases\PointersShouldBePrivate.cs", new PointersShouldBePrivate());
+            OldVerifier.VerifyAnalyzer(@"TestCases\PointersShouldBePrivate.cs", new PointersShouldBePrivate());
 
 #if NET // Function pointers are supported only by .Net 5 runtime
         [TestMethod]
         public void PointersShouldBePrivate_CSharp9() =>
-            Verifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\PointersShouldBePrivate.CSharp9.cs", new PointersShouldBePrivate());
+            OldVerifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\PointersShouldBePrivate.CSharp9.cs", new PointersShouldBePrivate());
 #endif
     }
 }

@@ -30,7 +30,7 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         public void MethodOverrideChangedDefaultValue() =>
-            Verifier.VerifyAnalyzer(@"TestCases\MethodOverrideChangedDefaultValue.cs",
+            OldVerifier.VerifyAnalyzer(@"TestCases\MethodOverrideChangedDefaultValue.cs",
                 new MethodOverrideChangedDefaultValue(),
                 ParseOptionsHelper.FromCSharp8,
                 MetadataReferenceFacade.NETStandard21);
@@ -38,15 +38,15 @@ namespace SonarAnalyzer.UnitTest.Rules
 #if NET
         [TestMethod]
         public void MethodOverrideChangedDefaultValue_CSharp9() =>
-            Verifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\MethodOverrideChangedDefaultValue.CSharp9.cs", new MethodOverrideChangedDefaultValue());
+            OldVerifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\MethodOverrideChangedDefaultValue.CSharp9.cs", new MethodOverrideChangedDefaultValue());
 
         [TestMethod]
         public void MethodOverrideChangedDefaultValue_CSharpPreview() =>
-            Verifier.VerifyAnalyzerCSharpPreviewLibrary(@"TestCases\MethodOverrideChangedDefaultValue.CSharpPreview.cs", new MethodOverrideChangedDefaultValue());
+            OldVerifier.VerifyAnalyzerCSharpPreviewLibrary(@"TestCases\MethodOverrideChangedDefaultValue.CSharpPreview.cs", new MethodOverrideChangedDefaultValue());
 
         [TestMethod]
         public void MethodOverrideChangedDefaultValue_CSharpPreview_CodeFix() =>
-            Verifier.VerifyCodeFix(
+            OldVerifier.VerifyCodeFix(
                 @"TestCases\MethodOverrideChangedDefaultValue.CSharpPreview.cs",
                 @"TestCases\MethodOverrideChangedDefaultValue.CSharpPreview.Fixed.cs",
                 new MethodOverrideChangedDefaultValue(),
@@ -56,7 +56,7 @@ namespace SonarAnalyzer.UnitTest.Rules
 
         [TestMethod]
         public void MethodOverrideChangedDefaultValue_CodeFix() =>
-            Verifier.VerifyCodeFix(
+            OldVerifier.VerifyCodeFix(
                 @"TestCases\MethodOverrideChangedDefaultValue.cs",
                 @"TestCases\MethodOverrideChangedDefaultValue.Fixed.cs",
                 @"TestCases\MethodOverrideChangedDefaultValue.Fixed.Batch.cs",

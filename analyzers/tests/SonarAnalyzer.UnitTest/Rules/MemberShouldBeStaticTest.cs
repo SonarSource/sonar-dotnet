@@ -34,7 +34,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [DataRow("1.0.0", "3.0.20105.1")]
         [DataRow(Constants.NuGetLatestVersion, Constants.NuGetLatestVersion)]
         public void MemberShouldBeStatic(string aspnetCoreVersion, string aspnetVersion) =>
-            Verifier.VerifyAnalyzer(@"TestCases\MemberShouldBeStatic.cs",
+            OldVerifier.VerifyAnalyzer(@"TestCases\MemberShouldBeStatic.cs",
                                     new MemberShouldBeStatic(),
                                     NuGetMetadataReference.MicrosoftAspNetCoreMvcWebApiCompatShim(aspnetCoreVersion)
                                         .Concat(NuGetMetadataReference.MicrosoftAspNetMvc(aspnetVersion))
@@ -46,12 +46,12 @@ namespace SonarAnalyzer.UnitTest.Rules
 #if NET
         [TestMethod]
         public void MemberShouldBeStatic_CSharp9() =>
-            Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\MemberShouldBeStatic.CSharp9.cs", new MemberShouldBeStatic());
+            OldVerifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\MemberShouldBeStatic.CSharp9.cs", new MemberShouldBeStatic());
 #endif
 
         [TestMethod]
         public void MemberShouldBeStatic_CSharp8() =>
-            Verifier.VerifyAnalyzer(@"TestCases\MemberShouldBeStatic.CSharp8.cs",
+            OldVerifier.VerifyAnalyzer(@"TestCases\MemberShouldBeStatic.CSharp8.cs",
                 new MemberShouldBeStatic(),
                 ParseOptionsHelper.FromCSharp8,
                 MetadataReferenceFacade.NETStandard21);
@@ -59,7 +59,7 @@ namespace SonarAnalyzer.UnitTest.Rules
 #if NETFRAMEWORK // HttpApplication is available only on .Net Framework
         [TestMethod]
         public void MemberShouldBeStatic_HttpApplication() =>
-            Verifier.VerifyCSharpAnalyzer(@"
+            OldVerifier.VerifyCSharpAnalyzer(@"
 public class HttpApplication1 : System.Web.HttpApplication
 {
     public int Foo() => 0;
@@ -73,7 +73,7 @@ public class HttpApplication1 : System.Web.HttpApplication
         [TestMethod]
         public void MemberShouldBeStatic_InvalidCode() =>
             // Handle invalid code causing NullReferenceException: https://github.com/SonarSource/sonar-dotnet/issues/819
-            Verifier.VerifyCSharpAnalyzer(@"
+            OldVerifier.VerifyCSharpAnalyzer(@"
 public class Class7
 {
     public async Task<Result<T> Function<T>(Func<Task<Result<T>>> f)

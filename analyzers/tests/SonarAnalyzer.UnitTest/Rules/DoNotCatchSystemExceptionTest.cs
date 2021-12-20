@@ -29,16 +29,16 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         public void DoNotCatchSystemException() =>
-            Verifier.VerifyAnalyzer(@"TestCases\DoNotCatchSystemException.cs", new DoNotCatchSystemException());
+            OldVerifier.VerifyAnalyzer(@"TestCases\DoNotCatchSystemException.cs", new DoNotCatchSystemException());
 
 #if NET
         [TestMethod]
         public void DoNotCatchSystemException_CSharp9() =>
-            Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\DoNotCatchSystemException.CSharp9.cs", new DoNotCatchSystemException());
+            OldVerifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\DoNotCatchSystemException.CSharp9.cs", new DoNotCatchSystemException());
 
         [TestMethod]
         public void DoNotCatchSystemException_CSharp10() =>
-            Verifier.VerifyAnalyzerFromCSharp10Console(@"TestCases\DoNotCatchSystemException.CSharp10.cs", new DoNotCatchSystemException());
+            OldVerifier.VerifyAnalyzerFromCSharp10Console(@"TestCases\DoNotCatchSystemException.CSharp10.cs", new DoNotCatchSystemException());
 #endif
     }
 }

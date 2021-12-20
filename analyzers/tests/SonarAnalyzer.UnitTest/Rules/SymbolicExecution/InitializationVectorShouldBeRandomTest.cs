@@ -33,7 +33,7 @@ namespace SonarAnalyzer.UnitTest.Rules.SymbolicExecution
 
         [TestMethod]
         public void InitializationVectorShouldBeRandom_CS() =>
-            Verifier.VerifyAnalyzer(
+            OldVerifier.VerifyAnalyzer(
                 @"TestCases\SymbolicExecution\Sonar\InitializationVectorShouldBeRandom.cs",
                 new SymbolicExecutionRunner(),
                 ParseOptionsHelper.FromCSharp8,
@@ -42,7 +42,7 @@ namespace SonarAnalyzer.UnitTest.Rules.SymbolicExecution
 
         [TestMethod]
         public void InitializationVectorShouldBeRandom_DoesNotRaiseIssuesForTestProject() =>
-            Verifier.VerifyNoIssueReportedInTest(
+            OldVerifier.VerifyNoIssueReportedInTest(
                 @"TestCases\SymbolicExecution\Sonar\InitializationVectorShouldBeRandom.cs",
                 new SymbolicExecutionRunner(),
                 ParseOptionsHelper.FromCSharp8,
@@ -53,7 +53,7 @@ namespace SonarAnalyzer.UnitTest.Rules.SymbolicExecution
 
         [TestMethod]
         public void InitializationVectorShouldBeRandom_CSharp9() =>
-            Verifier.VerifyAnalyzerFromCSharp9Console(
+            OldVerifier.VerifyAnalyzerFromCSharp9Console(
                 @"TestCases\SymbolicExecution\Sonar\InitializationVectorShouldBeRandom.CSharp9.cs",
                 new SymbolicExecutionRunner(),
                 MetadataReferenceFacade.SystemSecurityCryptography,
@@ -61,7 +61,7 @@ namespace SonarAnalyzer.UnitTest.Rules.SymbolicExecution
 
         [TestMethod]
         public void InitializationVectorShouldBeRandom_CSharp10() =>
-            Verifier.VerifyAnalyzerFromCSharp10Library(
+            OldVerifier.VerifyAnalyzerFromCSharp10Library(
                 @"TestCases\SymbolicExecution\Sonar\InitializationVectorShouldBeRandom.CSharp10.cs",
                 new SymbolicExecutionRunner(),
                 MetadataReferenceFacade.SystemSecurityCryptography,

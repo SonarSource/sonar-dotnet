@@ -30,24 +30,24 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         public void MethodOverloadsShouldBeGrouped_CS() =>
-            Verifier.VerifyAnalyzer(@"TestCases\MethodOverloadsShouldBeGrouped.cs", new CS.MethodOverloadsShouldBeGrouped());
+            OldVerifier.VerifyAnalyzer(@"TestCases\MethodOverloadsShouldBeGrouped.cs", new CS.MethodOverloadsShouldBeGrouped());
 
 #if NET
         [TestMethod]
         public void MethodOverloadsShouldBeGrouped_CS_CSharp9() =>
-            Verifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\MethodOverloadsShouldBeGrouped.CSharp9.cs", new CS.MethodOverloadsShouldBeGrouped());
+            OldVerifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\MethodOverloadsShouldBeGrouped.CSharp9.cs", new CS.MethodOverloadsShouldBeGrouped());
 
         [TestMethod]
         public void MethodOverloadsShouldBeGrouped_CS_CSharp10() =>
-            Verifier.VerifyAnalyzerFromCSharp10Library(@"TestCases\MethodOverloadsShouldBeGrouped.CSharp10.cs", new CS.MethodOverloadsShouldBeGrouped());
+            OldVerifier.VerifyAnalyzerFromCSharp10Library(@"TestCases\MethodOverloadsShouldBeGrouped.CSharp10.cs", new CS.MethodOverloadsShouldBeGrouped());
 
         [TestMethod]
         public void MethodOverloadsShouldBeGrouped_CS_CSharpPreview() =>
-            Verifier.VerifyAnalyzerCSharpPreviewLibrary(@"TestCases\MethodOverloadsShouldBeGrouped.CSharpPreview.cs", new CS.MethodOverloadsShouldBeGrouped());
+            OldVerifier.VerifyAnalyzerCSharpPreviewLibrary(@"TestCases\MethodOverloadsShouldBeGrouped.CSharpPreview.cs", new CS.MethodOverloadsShouldBeGrouped());
 #endif
 
         [TestMethod]
         public void MethodOverloadsShouldBeGrouped_VB() =>
-            Verifier.VerifyAnalyzer(@"TestCases\MethodOverloadsShouldBeGrouped.vb", new VB.MethodOverloadsShouldBeGrouped());
+            OldVerifier.VerifyAnalyzer(@"TestCases\MethodOverloadsShouldBeGrouped.vb", new VB.MethodOverloadsShouldBeGrouped());
     }
 }

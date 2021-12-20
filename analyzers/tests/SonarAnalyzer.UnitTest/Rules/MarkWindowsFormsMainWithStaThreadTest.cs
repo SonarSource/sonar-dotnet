@@ -32,7 +32,7 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         public void MarkWindowsFormsMainWithStaThread_CS() =>
-            Verifier.VerifyAnalyzer(
+            OldVerifier.VerifyAnalyzer(
                 @"TestCases\MarkWindowsFormsMainWithStaThread.cs",
                 new CS.MarkWindowsFormsMainWithStaThread(),
                 null,
@@ -42,7 +42,7 @@ namespace SonarAnalyzer.UnitTest.Rules
 
         [TestMethod]
         public void MarkWindowsFormsMainWithStaThread_VB() =>
-            Verifier.VerifyAnalyzer(
+            OldVerifier.VerifyAnalyzer(
                 @"TestCases\MarkWindowsFormsMainWithStaThread.vb",
                 new VB.MarkWindowsFormsMainWithStaThread(),
                 null,
@@ -52,7 +52,7 @@ namespace SonarAnalyzer.UnitTest.Rules
 
         [TestMethod]
         public void MarkWindowsFormsMainWithStaThread_ClassLibrary_CS() =>
-            Verifier.VerifyNoIssueReported(
+            OldVerifier.VerifyNoIssueReported(
                 @"TestCases\MarkWindowsFormsMainWithStaThread.cs",
                 new CS.MarkWindowsFormsMainWithStaThread(),
                 null,
@@ -62,7 +62,7 @@ namespace SonarAnalyzer.UnitTest.Rules
 
         [TestMethod]
         public void MarkWindowsFormsMainWithStaThread_ClassLibrary_VB() =>
-            Verifier.VerifyNoIssueReported(
+            OldVerifier.VerifyNoIssueReported(
                 @"TestCases\MarkWindowsFormsMainWithStaThread.vb",
                 new VB.MarkWindowsFormsMainWithStaThread(),
                 null,
@@ -72,7 +72,7 @@ namespace SonarAnalyzer.UnitTest.Rules
 
         [TestMethod]
         public void MarkWindowsFormsMainWithStaThread_CS_NoWindowsForms() =>
-            Verifier.VerifyAnalyzer(
+            OldVerifier.VerifyAnalyzer(
                 @"TestCases\MarkWindowsFormsMainWithStaThread_NoWindowsForms.cs",
                 new CS.MarkWindowsFormsMainWithStaThread(),
                 null,
@@ -81,7 +81,7 @@ namespace SonarAnalyzer.UnitTest.Rules
 
         [TestMethod]
         public void MarkWindowsFormsMainWithStaThread_VB_NoWindowsForms() =>
-            Verifier.VerifyAnalyzer(
+            OldVerifier.VerifyAnalyzer(
                 @"TestCases\MarkWindowsFormsMainWithStaThread_NoWindowsForms.vb",
                 new VB.MarkWindowsFormsMainWithStaThread(),
                 null,

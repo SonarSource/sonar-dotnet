@@ -29,17 +29,17 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         public void DisposableTypesNeedFinalizers() =>
-            Verifier.VerifyAnalyzer(@"TestCases\DisposableTypesNeedFinalizers.cs", new DisposableTypesNeedFinalizers());
+            OldVerifier.VerifyAnalyzer(@"TestCases\DisposableTypesNeedFinalizers.cs", new DisposableTypesNeedFinalizers());
 
 #if NET
         [TestMethod]
         public void DisposableTypesNeedFinalizers_CSharp9() =>
-            Verifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\DisposableTypesNeedFinalizers.CSharp9.cs", new DisposableTypesNeedFinalizers());
+            OldVerifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\DisposableTypesNeedFinalizers.CSharp9.cs", new DisposableTypesNeedFinalizers());
 #endif
 
         [TestMethod]
         public void DisposableTypesNeedFinalizers_InvalidCode() =>
-            Verifier.VerifyCSharpAnalyzer(@"
+            OldVerifier.VerifyCSharpAnalyzer(@"
 public class Foo_05 : IDisposable
 {
     private HandleRef;

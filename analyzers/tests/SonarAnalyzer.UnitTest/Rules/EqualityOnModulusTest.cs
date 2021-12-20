@@ -29,12 +29,12 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         public void EqualityOnModulus() =>
-            Verifier.VerifyAnalyzer(@"TestCases\EqualityOnModulus.cs", new EqualityOnModulus());
+            OldVerifier.VerifyAnalyzer(@"TestCases\EqualityOnModulus.cs", new EqualityOnModulus());
 
 #if NET
         [TestMethod]
         public void EqualityOnModulus_CSharp9() =>
-            Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\EqualityOnModulus.CSharp9.cs", new EqualityOnModulus());
+            OldVerifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\EqualityOnModulus.CSharp9.cs", new EqualityOnModulus());
 #endif
     }
 }

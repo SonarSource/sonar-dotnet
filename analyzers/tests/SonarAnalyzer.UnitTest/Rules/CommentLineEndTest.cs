@@ -29,6 +29,6 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         public void CommentLineEnd() =>
-            Verifier.VerifyAnalyzer(@"TestCases\CommentLineEnd.vb", new CommentLineEnd());
+            OldVerifier.VerifyAnalyzer(@"TestCases\CommentLineEnd.vb", new CommentLineEnd());
     }
 }

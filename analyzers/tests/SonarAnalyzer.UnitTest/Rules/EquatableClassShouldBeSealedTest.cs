@@ -29,12 +29,12 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         public void EquatableClassShouldBeSealed() =>
-            Verifier.VerifyAnalyzer(@"TestCases\EquatableClassShouldBeSealed.cs", new EquatableClassShouldBeSealed());
+            OldVerifier.VerifyAnalyzer(@"TestCases\EquatableClassShouldBeSealed.cs", new EquatableClassShouldBeSealed());
 
 #if NET
         [TestMethod]
         public void EquatableClassShouldBeSealed_CSharp9() =>
-            Verifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\EquatableClassShouldBeSealed.CSharp9.cs", new EquatableClassShouldBeSealed());
+            OldVerifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\EquatableClassShouldBeSealed.CSharp9.cs", new EquatableClassShouldBeSealed());
 #endif
     }
 }

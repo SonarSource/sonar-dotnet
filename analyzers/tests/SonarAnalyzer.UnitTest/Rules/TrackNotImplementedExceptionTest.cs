@@ -30,7 +30,7 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         public void TrackNotImplementedException() =>
-            Verifier.VerifyAnalyzer(
+            OldVerifier.VerifyAnalyzer(
                 @"TestCases\TrackNotImplementedException.cs",
                 new TrackNotImplementedException(),
                 ParseOptionsHelper.FromCSharp8,
@@ -39,7 +39,7 @@ namespace SonarAnalyzer.UnitTest.Rules
 #if NET
         [TestMethod]
         public void TrackNotImplementedException_CSharpPreview() =>
-            Verifier.VerifyAnalyzerCSharpPreviewLibrary(
+            OldVerifier.VerifyAnalyzerCSharpPreviewLibrary(
                 @"TestCases\TrackNotImplementedException.CSharpPreview.cs",
                 new TrackNotImplementedException());
 #endif

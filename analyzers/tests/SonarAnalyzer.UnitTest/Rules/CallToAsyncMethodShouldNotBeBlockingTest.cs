@@ -29,12 +29,12 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         public void CallToAsyncMethodShouldNotBeBlocking() =>
-            Verifier.VerifyAnalyzer(@"TestCases\CallToAsyncMethodShouldNotBeBlocking.cs", new CallToAsyncMethodShouldNotBeBlocking());
+            OldVerifier.VerifyAnalyzer(@"TestCases\CallToAsyncMethodShouldNotBeBlocking.cs", new CallToAsyncMethodShouldNotBeBlocking());
 
 #if NET
         [TestMethod]
         public void CallToAsyncMethodShouldNotBeBlocking_CSharp9() =>
-            Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\CallToAsyncMethodShouldNotBeBlocking.CSharp9.cs", new CallToAsyncMethodShouldNotBeBlocking());
+            OldVerifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\CallToAsyncMethodShouldNotBeBlocking.CSharp9.cs", new CallToAsyncMethodShouldNotBeBlocking());
 #endif
     }
 }

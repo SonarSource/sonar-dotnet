@@ -29,12 +29,12 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         public void CollectionQuerySimplification() =>
-            Verifier.VerifyAnalyzer(@"TestCases\CollectionQuerySimplification.cs", new CollectionQuerySimplification());
+            OldVerifier.VerifyAnalyzer(@"TestCases\CollectionQuerySimplification.cs", new CollectionQuerySimplification());
 
 #if NET
         [TestMethod]
         public void CollectionQuerySimplification_CSharp9() =>
-            Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\CollectionQuerySimplification.CSharp9.cs", new CollectionQuerySimplification());
+            OldVerifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\CollectionQuerySimplification.CSharp9.cs", new CollectionQuerySimplification());
 #endif
     }
 }

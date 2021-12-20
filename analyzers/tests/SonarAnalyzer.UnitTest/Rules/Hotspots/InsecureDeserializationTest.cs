@@ -30,18 +30,18 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         public void InsecureDeserialization() =>
-            Verifier.VerifyAnalyzer(@"TestCases\Hotspots\InsecureDeserialization.cs",
+            OldVerifier.VerifyAnalyzer(@"TestCases\Hotspots\InsecureDeserialization.cs",
                                     new InsecureDeserialization(AnalyzerConfiguration.AlwaysEnabled),
                                     ParseOptionsHelper.FromCSharp8);
 
 #if NET
         [TestMethod]
         public void InsecureDeserialization_CSharp9() =>
-            Verifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\Hotspots\InsecureDeserialization.CSharp9.cs", new InsecureDeserialization(AnalyzerConfiguration.AlwaysEnabled));
+            OldVerifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\Hotspots\InsecureDeserialization.CSharp9.cs", new InsecureDeserialization(AnalyzerConfiguration.AlwaysEnabled));
 
         [TestMethod]
         public void InsecureDeserialization_CSharp10() =>
-            Verifier.VerifyAnalyzerFromCSharp10Library(@"TestCases\Hotspots\InsecureDeserialization.CSharp10.cs", new InsecureDeserialization(AnalyzerConfiguration.AlwaysEnabled));
+            OldVerifier.VerifyAnalyzerFromCSharp10Library(@"TestCases\Hotspots\InsecureDeserialization.CSharp10.cs", new InsecureDeserialization(AnalyzerConfiguration.AlwaysEnabled));
 #endif
     }
 }

@@ -30,24 +30,24 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         public void BeginInvokePairedWithEndInvoke_CS() =>
-            Verifier.VerifyAnalyzer(@"TestCases\BeginInvokePairedWithEndInvoke.cs", new CS.BeginInvokePairedWithEndInvoke());
+            OldVerifier.VerifyAnalyzer(@"TestCases\BeginInvokePairedWithEndInvoke.cs", new CS.BeginInvokePairedWithEndInvoke());
 
 #if NET
         [TestMethod]
         public void BeginInvokePairedWithEndInvoke_CSharp9() =>
-            Verifier.VerifyAnalyzerFromCSharp9Library(
+            OldVerifier.VerifyAnalyzerFromCSharp9Library(
                 new[] { @"TestCases\BeginInvokePairedWithEndInvoke.CSharp9.Part1.cs", @"TestCases\BeginInvokePairedWithEndInvoke.CSharp9.Part2.cs" },
                 new CS.BeginInvokePairedWithEndInvoke());
 
         [TestMethod]
         public void BeginInvokePairedWithEndInvoke_CSharp10() =>
-            Verifier.VerifyAnalyzerFromCSharp10Library(
+            OldVerifier.VerifyAnalyzerFromCSharp10Library(
                 new[] { @"TestCases\BeginInvokePairedWithEndInvoke.CSharp10.cs" },
                 new CS.BeginInvokePairedWithEndInvoke());
 #endif
 
         [TestMethod]
         public void BeginInvokePairedWithEndInvoke_VB() =>
-            Verifier.VerifyAnalyzer(@"TestCases\BeginInvokePairedWithEndInvoke.vb", new VB.BeginInvokePairedWithEndInvoke());
+            OldVerifier.VerifyAnalyzer(@"TestCases\BeginInvokePairedWithEndInvoke.vb", new VB.BeginInvokePairedWithEndInvoke());
     }
 }

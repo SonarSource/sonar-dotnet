@@ -30,20 +30,20 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         public void DeclareTypesInNamespaces_CS() =>
-            Verifier.VerifyAnalyzer(
+            OldVerifier.VerifyAnalyzer(
                 new[] { @"TestCases\DeclareTypesInNamespaces.cs", @"TestCases\DeclareTypesInNamespaces2.cs", },
                 new CS.DeclareTypesInNamespaces());
 
         [TestMethod]
         public void DeclareTypesInNamespaces_CS_Before8() =>
-            Verifier.VerifyNonConcurrentAnalyzer(
+            OldVerifier.VerifyNonConcurrentAnalyzer(
                 @"TestCases\DeclareTypesInNamespaces.BeforeCSharp8.cs",
                 new CS.DeclareTypesInNamespaces(),
                 ParseOptionsHelper.BeforeCSharp8);
 
         [TestMethod]
         public void DeclareTypesInNamespaces_CS_After8() =>
-            Verifier.VerifyNonConcurrentAnalyzer(
+            OldVerifier.VerifyNonConcurrentAnalyzer(
                 @"TestCases\DeclareTypesInNamespaces.AfterCSharp8.cs",
                 new CS.DeclareTypesInNamespaces(),
                 ParseOptionsHelper.FromCSharp8);
@@ -51,11 +51,11 @@ namespace SonarAnalyzer.UnitTest.Rules
 #if NET
         [TestMethod]
         public void DeclareTypesInNamespaces_CS_AfterCSharp9() =>
-            Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\DeclareTypesInNamespaces.AfterCSharp9.cs", new CS.DeclareTypesInNamespaces());
+            OldVerifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\DeclareTypesInNamespaces.AfterCSharp9.cs", new CS.DeclareTypesInNamespaces());
 
         [TestMethod]
         public void DeclareTypesInNamespaces_CS_AfterCSharp10() =>
-            Verifier.VerifyAnalyzerFromCSharp10Library(
+            OldVerifier.VerifyAnalyzerFromCSharp10Library(
                 new[]
                 {
                     @"TestCases\DeclareTypesInNamespaces.AfterCSharp10.FileScopedNamespace.cs",
@@ -67,7 +67,7 @@ namespace SonarAnalyzer.UnitTest.Rules
 
         [TestMethod]
         public void DeclareTypesInNamespaces_VB() =>
-            Verifier.VerifyAnalyzer(
+            OldVerifier.VerifyAnalyzer(
                 new[] { @"TestCases\DeclareTypesInNamespaces.vb", @"TestCases\DeclareTypesInNamespaces2.vb", },
                 new VB.DeclareTypesInNamespaces());
     }

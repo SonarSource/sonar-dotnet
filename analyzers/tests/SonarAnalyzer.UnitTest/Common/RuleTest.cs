@@ -89,9 +89,9 @@ namespace SonarAnalyzer.UnitTest.Common
         {
             var analyzers = RuleFinder.GetAnalyzers(AnalyzerLanguage.CSharp).ToList();
 
-            Verifier.VerifyNoExceptionThrown(@"TestCasesForRuleFailure\InvalidSyntax.cs", analyzers, CompilationErrorBehavior.Ignore);
-            Verifier.VerifyNoExceptionThrown(@"TestCasesForRuleFailure\SpecialCases.cs", analyzers, CompilationErrorBehavior.Ignore);
-            Verifier.VerifyNoExceptionThrown(@"TestCasesForRuleFailure\PerformanceTestCases.cs", analyzers, CompilationErrorBehavior.Ignore);
+            OldVerifier.VerifyNoExceptionThrown(@"TestCasesForRuleFailure\InvalidSyntax.cs", analyzers, CompilationErrorBehavior.Ignore);
+            OldVerifier.VerifyNoExceptionThrown(@"TestCasesForRuleFailure\SpecialCases.cs", analyzers, CompilationErrorBehavior.Ignore);
+            OldVerifier.VerifyNoExceptionThrown(@"TestCasesForRuleFailure\PerformanceTestCases.cs", analyzers, CompilationErrorBehavior.Ignore);
         }
 
         [TestMethod]
@@ -99,8 +99,8 @@ namespace SonarAnalyzer.UnitTest.Common
         {
             var analyzers = RuleFinder.GetAnalyzers(AnalyzerLanguage.VisualBasic).ToList();
 
-            Verifier.VerifyNoExceptionThrown(@"TestCasesForRuleFailure\InvalidSyntax.vb", analyzers, CompilationErrorBehavior.Ignore);
-            Verifier.VerifyNoExceptionThrown(@"TestCasesForRuleFailure\SpecialCases.vb", analyzers, CompilationErrorBehavior.Ignore);
+            OldVerifier.VerifyNoExceptionThrown(@"TestCasesForRuleFailure\InvalidSyntax.vb", analyzers, CompilationErrorBehavior.Ignore);
+            OldVerifier.VerifyNoExceptionThrown(@"TestCasesForRuleFailure\SpecialCases.vb", analyzers, CompilationErrorBehavior.Ignore);
         }
 
         [TestMethod]
@@ -121,7 +121,7 @@ namespace SonarAnalyzer.UnitTest.Common
         {
             var reader = new ConcurrentExecutionReader();
             reader.IsConcurrentExecutionEnabled.Should().BeNull();
-            Verifier.VerifyNoExceptionThrown("TestCases\\AsyncVoidMethod.cs", new[] { reader });
+            OldVerifier.VerifyNoExceptionThrown("TestCases\\AsyncVoidMethod.cs", new[] { reader });
             reader.IsConcurrentExecutionEnabled.Should().BeFalse();
         }
 
@@ -134,7 +134,7 @@ namespace SonarAnalyzer.UnitTest.Common
             scope.SetVariable(SonarDiagnosticAnalyzer.EnableConcurrentExecutionVariable, value);
             var reader = new ConcurrentExecutionReader();
             reader.IsConcurrentExecutionEnabled.Should().BeNull();
-            Verifier.VerifyNoExceptionThrown("TestCases\\AsyncVoidMethod.cs", new[] { reader });
+            OldVerifier.VerifyNoExceptionThrown("TestCases\\AsyncVoidMethod.cs", new[] { reader });
             reader.IsConcurrentExecutionEnabled.Should().BeTrue();
         }
 
@@ -148,7 +148,7 @@ namespace SonarAnalyzer.UnitTest.Common
             scope.SetVariable(SonarDiagnosticAnalyzer.EnableConcurrentExecutionVariable, value);
             var reader = new ConcurrentExecutionReader();
             reader.IsConcurrentExecutionEnabled.Should().BeNull();
-            Verifier.VerifyNoExceptionThrown("TestCases\\AsyncVoidMethod.cs", new[] { reader });
+            OldVerifier.VerifyNoExceptionThrown("TestCases\\AsyncVoidMethod.cs", new[] { reader });
             reader.IsConcurrentExecutionEnabled.Should().BeFalse();
         }
 

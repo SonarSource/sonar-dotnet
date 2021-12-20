@@ -35,14 +35,14 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         public void SocketsCreation_CS() =>
-            Verifier.VerifyAnalyzer(
+            OldVerifier.VerifyAnalyzer(
                 @"TestCases\Hotspots\SocketsCreation.cs",
                 new CS.SocketsCreation(AnalyzerConfiguration.AlwaysEnabled),
                 GetAdditionalReferences());
 
         [TestMethod]
         public void SocketsCreation_VB() =>
-            Verifier.VerifyAnalyzer(
+            OldVerifier.VerifyAnalyzer(
                 @"TestCases\Hotspots\SocketsCreation.vb",
                 new VB.SocketsCreation(AnalyzerConfiguration.AlwaysEnabled),
                 GetAdditionalReferences());

@@ -30,7 +30,7 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         public void RedundantJumpStatement() =>
-            Verifier.VerifyAnalyzer(@"TestCases\RedundantJumpStatement.cs",
+            OldVerifier.VerifyAnalyzer(@"TestCases\RedundantJumpStatement.cs",
                                     new RedundantJumpStatement(),
                                     ParseOptionsHelper.FromCSharp8,
                                     MetadataReferenceFacade.NETStandard21);
@@ -38,7 +38,7 @@ namespace SonarAnalyzer.UnitTest.Rules
 #if NET
         [TestMethod]
         public void RedundantJumpStatement_CSharp9() =>
-            Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\RedundantJumpStatement.CSharp9.cs", new RedundantJumpStatement());
+            OldVerifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\RedundantJumpStatement.CSharp9.cs", new RedundantJumpStatement());
 #endif
     }
 }

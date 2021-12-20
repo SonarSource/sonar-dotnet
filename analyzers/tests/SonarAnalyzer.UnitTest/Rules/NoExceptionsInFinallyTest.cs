@@ -30,10 +30,10 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         public void NoExceptionsInFinally_CS() =>
-            Verifier.VerifyAnalyzer(@"TestCases\NoExceptionsInFinally.cs", new CS.NoExceptionsInFinally());
+            OldVerifier.VerifyAnalyzer(@"TestCases\NoExceptionsInFinally.cs", new CS.NoExceptionsInFinally());
 
         [TestMethod]
         public void NoExceptionsInFinally_VB() =>
-            Verifier.VerifyAnalyzer(@"TestCases\NoExceptionsInFinally.vb", new VB.NoExceptionsInFinally());
+            OldVerifier.VerifyAnalyzer(@"TestCases\NoExceptionsInFinally.vb", new VB.NoExceptionsInFinally());
     }
 }

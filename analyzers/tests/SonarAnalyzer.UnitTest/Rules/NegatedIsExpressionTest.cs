@@ -29,11 +29,11 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         public void NegatedIsExpression() =>
-            Verifier.VerifyAnalyzer(@"TestCases\NegatedIsExpression.vb", new NegatedIsExpression());
+            OldVerifier.VerifyAnalyzer(@"TestCases\NegatedIsExpression.vb", new NegatedIsExpression());
 
         [TestMethod]
         public void NegatedIsExpression_CodeFix() =>
-            Verifier.VerifyCodeFix(
+            OldVerifier.VerifyCodeFix(
                 @"TestCases\NegatedIsExpression.vb",
                 @"TestCases\NegatedIsExpression.Fixed.vb",
                 new NegatedIsExpression(),
