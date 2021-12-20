@@ -58,7 +58,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework
             var language = AnalyzerLanguage.FromPath(paths.First());    // FIXME: Redesign
             foreach (var path in paths)
             {
-                var newPath = Path.ChangeExtension(path, ".Concurrent." + language.FileExtension);  // FIXME: dot
+                var newPath = Path.ChangeExtension(path, ".Concurrent" + language.FileExtension);
                 var content = File.ReadAllText(path, Encoding.UTF8);
                 File.WriteAllText(newPath, InsertConcurrentNamespace(content, language));
                 yield return newPath;

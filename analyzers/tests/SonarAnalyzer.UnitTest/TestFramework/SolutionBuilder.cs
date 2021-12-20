@@ -133,7 +133,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework
             {
                 // adding an extra file to the project this won't trigger any issues, but it keeps a reference to the original ParseOption, so
                 // if an analyzer/codefix changes the language version, Roslyn throws an ArgumentException
-                projectBuilder = projectBuilder.AddSnippet(string.Empty, fileName: "ExtraEmptyFile.g." + language.FileExtension);
+                projectBuilder = projectBuilder.AddSnippet(string.Empty, fileName: "ExtraEmptyFile.g" + language.FileExtension);
             }
 
             return projectBuilder;

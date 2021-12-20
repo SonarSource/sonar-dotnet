@@ -98,11 +98,11 @@ namespace SonarAnalyzer.Common
             {
                 if (this == CSharp)
                 {
-                    return "cs";
+                    return ".cs";
                 }
                 else if (this == VisualBasic)
                 {
-                    return "vb";
+                    return ".vb";
                 }
                 else
                 {
