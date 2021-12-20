@@ -81,21 +81,17 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
 
         private IEnumerable<ExplodedNode> ProcessOperation(ExplodedNode node)
         {
-            var context = new SymbolicContext(symbolicValueCounter, node.Operation, node.State.SetOperationValue(node.Operation, CreateSymbolicValue()));
+            var context = new SymbolicContext(symbolicValueCounter, node.Operation, node.State);
             context = InvokeChecks(context, x => x.PreProcess);
-            if (context == null)
+            if (context != null)
             {
-                yield break;
+                context = EnsureContext(context, ProcessOperation(context));
+                context = InvokeChecks(context, x => x.PostProcess);
+                if (context != null)
+                {
+                    yield return node.CreateNext(context.State);
+                }
             }
-
-            context = EnsureContext(context, ProcessOperation(context));
-            context = InvokeChecks(context, x => x.PostProcess);
-            if (context == null)
-            {
-                yield break;
-            }
-
-            yield return node.CreateNext(context.State);
         }
 
         private static ProgramState ProcessOperation(SymbolicContext context) =>
@@ -130,9 +126,6 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
                 check.ExecutionCompleted();
             }
         }
-
-        private SymbolicValue CreateSymbolicValue() =>
-            new(symbolicValueCounter);
 
         private SymbolicContext EnsureContext(SymbolicContext current, ProgramState newState) =>
             current.State == newState ? current : new SymbolicContext(symbolicValueCounter, current.Operation, newState);

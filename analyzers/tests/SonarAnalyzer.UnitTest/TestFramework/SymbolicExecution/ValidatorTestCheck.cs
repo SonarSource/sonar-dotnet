@@ -96,7 +96,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework.SymbolicExecution
         public void ValidatePostProcessCount(int expected) =>
             postProcessed.Should().HaveCount(expected);
 
-        public void ValidateOperationsAreNotNull() =>
-            postProcessed.Should().OnlyContain(x => x.State[x.Operation] != null);
+        public void ValidateOperationValuesAreNull() =>
+            postProcessed.Should().OnlyContain(x => x.State[x.Operation] == null);
     }
 }

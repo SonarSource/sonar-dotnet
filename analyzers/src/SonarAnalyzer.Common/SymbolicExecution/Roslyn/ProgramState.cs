@@ -43,16 +43,16 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
             this.symbolValue = symbolValue;
         }
 
+        public ProgramState SetOperationValue(IOperationWrapperSonar operation, SymbolicValue value) =>
+            SetOperationValue(operation.Instance, value);
+
         public ProgramState SetOperationValue(IOperation operation, SymbolicValue value) =>
             new(operationValue.SetItem(operation, value), symbolValue);
-
-        public ProgramState SetOperationValue(IOperationWrapperSonar operation, SymbolicValue value) =>
-            new(operationValue.SetItem(operation.Instance, value), symbolValue);
 
         public ProgramState SetSymbolValue(ISymbol symbol, SymbolicValue value) =>
             new(operationValue, symbolValue.SetItem(symbol, value));
 
         public IEnumerable<ISymbol> SymbolsWith(SymbolicConstraint constraint) =>
-            symbolValue.Where(x => x.Value.HasConstraint(constraint)).Select(x => x.Key);
+            symbolValue.Where(x => x.Value != null && x.Value.HasConstraint(constraint)).Select(x => x.Key);
     }
 }

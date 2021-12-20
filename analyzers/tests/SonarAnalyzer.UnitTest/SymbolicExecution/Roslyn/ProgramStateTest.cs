@@ -18,11 +18,13 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System;
 using System.Linq;
 using FluentAssertions;
 using Microsoft.CodeAnalysis;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.SymbolicExecution.Roslyn;
+using SonarAnalyzer.UnitTest.TestFramework.SymbolicExecution;
 using StyleCop.Analyzers.Lightup;
 
 namespace SonarAnalyzer.UnitTest.SymbolicExecution.Roslyn
@@ -142,6 +144,25 @@ namespace SonarAnalyzer.UnitTest.SymbolicExecution.Roslyn
         }
 
         [TestMethod]
+        public void SetOperationValue_NullValue_ReturnsNull()
+        {
+            var operation = TestHelper.CompileCfgBodyCS("var x = 42;").Blocks[1].Operations[0];
+            var sut = ProgramState.Empty;
+
+            sut[operation].Should().BeNull();
+            sut = sut.SetOperationValue(operation, null);
+            sut[operation].Should().BeNull();
+        }
+
+        [TestMethod]
+        public void SetOperationValue_NullOperation_Throws() =>
+            ProgramState.Empty.Invoking(x => x.SetOperationValue((IOperation)null, new SymbolicValue(new SymbolicValueCounter()))).Should().Throw<ArgumentNullException>();
+
+        [TestMethod]
+        public void SetOperationValue_WithWrapper_NullOperation_Throws() =>
+            ProgramState.Empty.Invoking(x => x.SetOperationValue((IOperationWrapperSonar)null, new SymbolicValue(new SymbolicValueCounter()))).Should().Throw<NullReferenceException>();
+
+        [TestMethod]
         public void SetSymbolValue_ReturnsValues()
         {
             var counter = new SymbolicValueCounter();
@@ -186,6 +207,39 @@ namespace SonarAnalyzer.UnitTest.SymbolicExecution.Roslyn
             sut = sut.SetSymbolValue(symbol, value1);
             sut = sut.SetSymbolValue(symbol, value2);
             sut[symbol].Should().Be(value2);
+        }
+
+        [TestMethod]
+        public void SetSymbolValue_NullSymbol_Throws() =>
+            ProgramState.Empty.Invoking(x => x.SetSymbolValue(null, new SymbolicValue(new SymbolicValueCounter()))).Should().Throw<ArgumentNullException>();
+
+        [TestMethod]
+        public void SymbolsWith_ReturnCorrectSymbols()
+        {
+            var counter = new SymbolicValueCounter();
+            var value0 = new SymbolicValue(counter);
+            var value1 = new SymbolicValue(counter);
+            var value2 = new SymbolicValue(counter);
+            value0.SetConstraint(DummyConstraint.Dummy);
+            value1.SetConstraint(TestConstraint.First);
+            value2.SetConstraint(TestConstraint.First);
+            var symbols = CreateSymbols();
+            var sut = ProgramState.Empty
+                .SetSymbolValue(symbols[0], value0)
+                .SetSymbolValue(symbols[1], value1)
+                .SetSymbolValue(symbols[2], value2);
+
+            sut.SymbolsWith(DummyConstraint.Dummy).Should().ContainSingle().Which.Should().Be(symbols[0]);
+            sut.SymbolsWith(TestConstraint.First).Should().HaveCount(2);
+            sut.SymbolsWith(TestConstraint.Second).Should().BeEmpty();
+        }
+
+        [TestMethod]
+        public void SymbolsWith_IgnoreNullValue()
+        {
+            var symbol = CreateSymbols().First();
+            var sut = ProgramState.Empty.SetSymbolValue(symbol, null);
+            sut.SymbolsWith(DummyConstraint.Dummy).Should().BeEmpty();
         }
 
         private static ISymbol[] CreateSymbols()

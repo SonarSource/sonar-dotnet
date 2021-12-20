@@ -27,13 +27,9 @@ namespace SonarAnalyzer.UnitTest.TestFramework.SymbolicExecution
 {
     internal class BoolTestCheck : SymbolicCheck    // ToDo: This will be replaced with default engine behavior in MMF-2229
     {
-        public override ProgramState PostProcess(SymbolicContext context)
-        {
-            if (context.Operation.Instance.Kind == OperationKind.Literal && ((ILiteralOperation)context.Operation.Instance).ConstantValue.Value is bool value)
-            {
-                context.State[context.Operation].SetConstraint(value ? BoolConstraint.True : BoolConstraint.False);
-            }
-            return context.State;
-        }
+        public override ProgramState PostProcess(SymbolicContext context) =>
+            context.Operation.Instance.Kind == OperationKind.Literal && ((ILiteralOperation)context.Operation.Instance).ConstantValue.Value is bool value
+                ? context.SetOperationConstraint(value ? BoolConstraint.True : BoolConstraint.False)
+                : context.State;
     }
 }
