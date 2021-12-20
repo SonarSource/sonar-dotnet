@@ -47,6 +47,9 @@ namespace SonarAnalyzer.UnitTest.TestFramework
             ParseOptions = original.ParseOptions;
         }
 
+        /// <summary>
+        /// This method solves complicated scenarios. Use 'new VerifierBuilder&lt;TAnalyzer&gt;()' for single analyzer cases with no rule parameters.
+        /// </summary>
         public VerifierBuilder AddAnalyzer(Func<DiagnosticAnalyzer> createConfiguredAnalyzer) =>
             new(this) { Analyzers = Analyzers.Append(createConfiguredAnalyzer).ToImmutableArray() };
 
@@ -68,5 +71,11 @@ namespace SonarAnalyzer.UnitTest.TestFramework
     {
         public VerifierBuilder() =>
             Analyzers = new Func<DiagnosticAnalyzer>[] { () => new TAnalyzer() }.ToImmutableArray();
+    }
+
+    internal static class VerifierBuilderExtensions // FIXME: Move it inside VerifierBuilder?
+    {
+        public static void Verify(this VerifierBuilder builder) =>
+            builder.Build().Verify();
     }
 }
