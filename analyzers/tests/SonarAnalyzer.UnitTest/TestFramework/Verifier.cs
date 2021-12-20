@@ -19,6 +19,14 @@
  */
 
 using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using System.Text;
+using System.Text.RegularExpressions;
+using Microsoft.CodeAnalysis;
+using SonarAnalyzer.Common;
+using SonarAnalyzer.UnitTest.Helpers;
 
 namespace SonarAnalyzer.UnitTest.TestFramework
 {
@@ -31,9 +39,38 @@ namespace SonarAnalyzer.UnitTest.TestFramework
             this.builder = builder ?? throw new ArgumentNullException(nameof(builder));
         }
 
-        public void Verify()
+        public void Verify()    // This should never has any arguments
         {
+            using var scope = new EnvironmentVariableScope { EnableConcurrentAnalysis = true };     // ToDo: Implement properly
+            var pathsWithConcurrencyTests = builder.Paths.Count() == 1 ? CreateConcurrencyTest(builder.Paths) : builder.Paths.AsEnumerable();  // FIXME: Redesign
+            var solution = SolutionBuilder.CreateSolutionFromPaths(pathsWithConcurrencyTests, OutputKind.DynamicallyLinkedLibrary, builder.References);
+            var analyzers = builder.Analyzers.Select(x => x()).ToArray();
+            foreach (var compilation in solution.Compile(builder.ParseOptions.ToArray()))
+            {
+                DiagnosticVerifier.Verify(compilation, analyzers, CompilationErrorBehavior.Default, null, null);
+            }
+        }
 
+        private static List<string> CreateConcurrencyTest(IEnumerable<string> paths)
+        {
+            var ret = new List<string>(paths);  // FIXME: Redesign
+            var language = AnalyzerLanguage.FromPath(paths.First());    // FIXME: Redesign
+            foreach (var path in paths)
+            {
+                var sourcePath = Path.GetFullPath(path);
+                var newPath = Path.Combine(Path.GetDirectoryName(sourcePath), Path.GetFileNameWithoutExtension(path) + ".Concurrent" + Path.GetExtension(path));    // FIXME: Ugly
+                var content = File.ReadAllText(sourcePath, Encoding.UTF8);
+                File.WriteAllText(newPath, language == AnalyzerLanguage.CSharp ? $"namespace AppendedNamespaceForConcurrencyTest {{ {content} }}" : InsertNamespaceForVB(content)); // FIXME: Redesign
+                ret.Add(newPath);
+            }
+            return ret;
+        }
+
+        private static string InsertNamespaceForVB(string content)
+        {
+            var match = Regex.Match(content, @"^\s*Imports\s+.+$", RegexOptions.Multiline | RegexOptions.RightToLeft);
+            var idx = match.Success ? match.Index + match.Length + 1 : 0;
+            return content.Insert(idx, "Namespace AppendedNamespaceForConcurrencyTest : ") + " : End Namespace";
         }
     }
 }
