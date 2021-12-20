@@ -53,6 +53,6 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
             new(operationValue, symbolValue.SetItem(symbol, value));
 
         public IEnumerable<ISymbol> SymbolsWith(SymbolicConstraint constraint) =>
-            symbolValue.Where(x => x.Value.HasConstraint(constraint)).Select(x => x.Key);
+            symbolValue.Where(x => x.Value != null && x.Value.HasConstraint(constraint)).Select(x => x.Key);
     }
 }

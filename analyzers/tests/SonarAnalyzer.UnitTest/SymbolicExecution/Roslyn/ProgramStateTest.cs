@@ -24,6 +24,7 @@ using FluentAssertions;
 using Microsoft.CodeAnalysis;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.SymbolicExecution.Roslyn;
+using SonarAnalyzer.UnitTest.TestFramework.SymbolicExecution;
 using StyleCop.Analyzers.Lightup;
 
 namespace SonarAnalyzer.UnitTest.SymbolicExecution.Roslyn
@@ -211,6 +212,35 @@ namespace SonarAnalyzer.UnitTest.SymbolicExecution.Roslyn
         [TestMethod]
         public void SetSymbolValue_NullSymbol_Throws() =>
             ProgramState.Empty.Invoking(x => x.SetSymbolValue(null, new SymbolicValue(new SymbolicValueCounter()))).Should().Throw<ArgumentNullException>();
+
+        [TestMethod]
+        public void SymbolsWith_ReturnCorrectSymbols()
+        {
+            var counter = new SymbolicValueCounter();
+            var value0 = new SymbolicValue(counter);
+            var value1 = new SymbolicValue(counter);
+            var value2 = new SymbolicValue(counter);
+            value0.SetConstraint(DummyConstraint.Dummy);
+            value1.SetConstraint(TestConstraint.First);
+            value2.SetConstraint(TestConstraint.First);
+            var symbols = CreateSymbols();
+            var sut = ProgramState.Empty
+                .SetSymbolValue(symbols[0], value0)
+                .SetSymbolValue(symbols[1], value1)
+                .SetSymbolValue(symbols[2], value2);
+
+            sut.SymbolsWith(DummyConstraint.Dummy).Should().ContainSingle().Which.Should().Be(symbols[0]);
+            sut.SymbolsWith(TestConstraint.First).Should().HaveCount(2);
+            sut.SymbolsWith(TestConstraint.Second).Should().BeEmpty();
+        }
+
+        [TestMethod]
+        public void SymbolsWith_IgnoreNullValue()
+        {
+            var symbol = CreateSymbols().First();
+            var sut = ProgramState.Empty.SetSymbolValue(symbol, null);
+            sut.SymbolsWith(DummyConstraint.Dummy).Should().BeEmpty();
+        }
 
         private static ISymbol[] CreateSymbols()
         {
