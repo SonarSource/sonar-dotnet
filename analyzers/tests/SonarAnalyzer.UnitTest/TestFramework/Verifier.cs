@@ -22,9 +22,11 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Text.RegularExpressions;
 using Microsoft.CodeAnalysis;
+using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.UnitTest.Helpers;
 
@@ -33,11 +35,16 @@ namespace SonarAnalyzer.UnitTest.TestFramework
     internal class Verifier
     {
         private readonly VerifierBuilder builder;
+        private readonly DiagnosticAnalyzer[] analyzers;
+        private readonly AnalyzerLanguage language;
 
         public Verifier(VerifierBuilder builder)
         {
             this.builder = builder ?? throw new ArgumentNullException(nameof(builder));
             // FIXME: Validate input
+            analyzers = builder.Analyzers.Select(x => x()).ToArray();
+            language = AnalyzerLanguage.FromName(analyzers.SelectMany(x => x.GetType().GetCustomAttributes<DiagnosticAnalyzerAttribute>()).SelectMany(x => x.Languages).Single());
+            // FIXME: Validate path language
         }
 
         public void Verify()    // This should never has any arguments
@@ -46,26 +53,24 @@ namespace SonarAnalyzer.UnitTest.TestFramework
             var paths = builder.Paths.Select(x => Path.GetFullPath(Path.Combine("TestCases", x)));
             var pathsWithConcurrencyTests = paths.Count() == 1 ? CreateConcurrencyTest(paths) : paths;  // FIXME: Redesign
             var solution = SolutionBuilder.CreateSolutionFromPaths(pathsWithConcurrencyTests, OutputKind.DynamicallyLinkedLibrary, builder.References);
-            var analyzers = builder.Analyzers.Select(x => x()).ToArray();
             foreach (var compilation in solution.Compile(builder.ParseOptions.ToArray()))
             {
                 DiagnosticVerifier.Verify(compilation, analyzers, CompilationErrorBehavior.Default, null, null);
             }
         }
 
-        private static IEnumerable<string> CreateConcurrencyTest(IEnumerable<string> paths)
+        private IEnumerable<string> CreateConcurrencyTest(IEnumerable<string> paths)
         {
-            var language = AnalyzerLanguage.FromPath(paths.First());    // FIXME: Redesign
             foreach (var path in paths)
             {
                 var newPath = Path.ChangeExtension(path, ".Concurrent" + language.FileExtension);
                 var content = File.ReadAllText(path, Encoding.UTF8);
-                File.WriteAllText(newPath, InsertConcurrentNamespace(content, language));
+                File.WriteAllText(newPath, InsertConcurrentNamespace(content));
                 yield return newPath;
             }
         }
 
-        private static string InsertConcurrentNamespace(string content, AnalyzerLanguage language)   // FIXME: Not static
+        private string InsertConcurrentNamespace(string content)
         {
             return language.LanguageName switch
             {
@@ -75,7 +80,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework
             };
 
             int ImportsIndexVB() =>
-                Regex.Match(content, @"^\s*Imports\s+.+$", RegexOptions.Multiline | RegexOptions.RightToLeft) is { Success: true } match ? match.Index + match.Length + 1 : 0;
+                Regex.Match(content, @"^\s*Imports\s+.+$", RegexOptions.Multiline | RegexOptions.RightToLeft) is { Success: true } match ? match.Index + match.Length + 1 : 0;  //FIXME: Extract regex
         }
     }
 }

@@ -159,5 +159,13 @@ namespace SonarAnalyzer.Common
                 ".VB" => VisualBasic,
                 _ => None
             };
+
+        public static AnalyzerLanguage FromName(string name) =>
+            name switch
+            {
+                LanguageNames.CSharp => CSharp,
+                LanguageNames.VisualBasic => VisualBasic,
+                _ => None
+            };
     }
 }
