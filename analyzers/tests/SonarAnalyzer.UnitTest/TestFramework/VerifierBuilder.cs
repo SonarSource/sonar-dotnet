@@ -18,6 +18,7 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Linq;
@@ -29,33 +30,43 @@ namespace SonarAnalyzer.UnitTest.TestFramework
     /// <summary>
     /// Immutable builder that holds all parameters for rule verification.
     /// </summary>
-    internal class VerifierBuilder<TAnalyzer>
-        where TAnalyzer : DiagnosticAnalyzer, new()
+    internal class VerifierBuilder
     {
         // All properties are (and should be) immutable.
+        public ImmutableArray<Func<DiagnosticAnalyzer>> Analyzers { get; init; } = ImmutableArray<Func<DiagnosticAnalyzer>>.Empty;
         public ImmutableArray<string> Paths { get; init; } = ImmutableArray<string>.Empty;
         public ImmutableArray<MetadataReference> References { get; init; } = ImmutableArray<MetadataReference>.Empty;
         public ImmutableArray<ParseOptions> ParseOptions { get; init; } = ImmutableArray<ParseOptions>.Empty;
 
         public VerifierBuilder() { }
 
-        private VerifierBuilder(VerifierBuilder<TAnalyzer> original)
+        private VerifierBuilder(VerifierBuilder original)
         {
             Paths = original.Paths;
             References = original.References;
             ParseOptions = original.ParseOptions;
         }
 
-        public VerifierBuilder<TAnalyzer> AddPaths(params string[] paths) =>
+        public VerifierBuilder AddAnalyzer(Func<DiagnosticAnalyzer> createConfiguredAnalyzer) =>
+            new(this) { Analyzers = Analyzers.Append(createConfiguredAnalyzer).ToImmutableArray() };
+
+        public VerifierBuilder AddPaths(params string[] paths) =>
             new(this) { Paths = Paths.Concat(paths).ToImmutableArray() };
 
-        public VerifierBuilder<TAnalyzer> AddReferences(IEnumerable<MetadataReference> references) =>
+        public VerifierBuilder AddReferences(IEnumerable<MetadataReference> references) =>
             new(this) { References = References.Concat(references).ToImmutableArray() };
 
-        public VerifierBuilder<TAnalyzer> WithOptions(ImmutableArray<ParseOptions> parseOptions) =>
+        public VerifierBuilder WithOptions(ImmutableArray<ParseOptions> parseOptions) =>
             new(this) { ParseOptions = parseOptions };
 
-        public Verifier<TAnalyzer> Build() =>
+        public Verifier Build() =>
             new(this);
+    }
+
+    internal class VerifierBuilder<TAnalyzer> : VerifierBuilder
+        where TAnalyzer : DiagnosticAnalyzer, new()
+    {
+        public VerifierBuilder() =>
+            Analyzers = new Func<DiagnosticAnalyzer>[] { () => new TAnalyzer() }.ToImmutableArray();
     }
 }

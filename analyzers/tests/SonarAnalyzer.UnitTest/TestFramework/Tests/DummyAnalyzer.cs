@@ -30,6 +30,8 @@ namespace SonarAnalyzer.UnitTest.TestFramework.Tests
     {
         private static readonly DiagnosticDescriptor Rule = new("SDummy", "Dummy title", "Dummy description", string.Empty, DiagnosticSeverity.Warning, true);
 
+        public int DummyProperty { get; set; }
+
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(Rule);
 
         public override sealed void Initialize(AnalysisContext context) =>

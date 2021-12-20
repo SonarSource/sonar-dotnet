@@ -28,36 +28,55 @@ namespace SonarAnalyzer.UnitTest.TestFramework.Tests
     [TestClass]
     public partial class VerifierBuilderTest
     {
-        private static readonly VerifierBuilder<DummyAnalyzer> Empty = new();
+        private static readonly VerifierBuilder Empty = new();
+
+        [TestMethod]
+        public void AddAnalyzer_Concatenates_IsImmutable()
+        {
+            var one = Empty.AddAnalyzer(() => new DummyAnalyzer());
+            var two = one.AddAnalyzer(() => new DummyAnalyzer { DummyProperty = 42 });
+            Empty.Analyzers.Should().BeEmpty();
+            one.Analyzers.Should().ContainSingle().And.ContainSingle(x => ((DummyAnalyzer)x()).DummyProperty == 0);
+            two.Analyzers.Should().HaveCount(2)
+                .And.ContainSingle(x => ((DummyAnalyzer)x()).DummyProperty == 0)
+                .And.ContainSingle(x => ((DummyAnalyzer)x()).DummyProperty == 42);
+        }
+
+        [TestMethod]
+        public void AddAnalyzer_Generic_AddAnalyzer()
+        {
+            var sut = new VerifierBuilder<DummyAnalyzer>();
+            sut.Analyzers.Should().ContainSingle().Which().Should().BeOfType<DummyAnalyzer>();
+        }
 
         [TestMethod]
         public void AddPaths_Concatenates_IsImmutable()
         {
-            var single = Empty.AddPaths("First");
-            var three = single.AddPaths("Second", "Third");
+            var one = Empty.AddPaths("First");
+            var three = one.AddPaths("Second", "Third");
             Empty.Paths.Should().BeEmpty();
-            single.Paths.Should().ContainSingle().Which.Should().Be("First");
+            one.Paths.Should().ContainSingle().Which.Should().Be("First");
             three.Paths.Should().BeEquivalentTo("First", "Second", "Third");
         }
 
         [TestMethod]
         public void AddReferences_Concatenates_IsImmutable()
         {
-            var single = Empty.AddReferences(MetadataReferenceFacade.MsCorLib);
-            var two = single.AddReferences(MetadataReferenceFacade.SystemData);
+            var one = Empty.AddReferences(MetadataReferenceFacade.MsCorLib);
+            var two = one.AddReferences(MetadataReferenceFacade.SystemData);
             Empty.References.Should().BeEmpty();
-            single.References.Should().BeEquivalentTo(MetadataReferenceFacade.MsCorLib).And.HaveCount(1);
+            one.References.Should().BeEquivalentTo(MetadataReferenceFacade.MsCorLib).And.HaveCount(1);
             two.References.Should().BeEquivalentTo(MetadataReferenceFacade.MsCorLib.Concat(MetadataReferenceFacade.SystemData)).And.HaveCount(2);
         }
 
         [TestMethod]
         public void WithOptions_Overrides_IsImmutable()
         {
-            var first = Empty.WithOptions(ParseOptionsHelper.OnlyCSharp7);
-            var second = first.WithOptions(ParseOptionsHelper.FromCSharp8);
+            var only7 = Empty.WithOptions(ParseOptionsHelper.OnlyCSharp7);
+            var from8 = only7.WithOptions(ParseOptionsHelper.FromCSharp8);
             Empty.ParseOptions.Should().BeEmpty();
-            first.ParseOptions.Should().BeEquivalentTo(ParseOptionsHelper.OnlyCSharp7);
-            second.ParseOptions.Should().BeEquivalentTo(ParseOptionsHelper.FromCSharp8);
+            only7.ParseOptions.Should().BeEquivalentTo(ParseOptionsHelper.OnlyCSharp7);
+            from8.ParseOptions.Should().BeEquivalentTo(ParseOptionsHelper.FromCSharp8);
         }
 
         [TestMethod]

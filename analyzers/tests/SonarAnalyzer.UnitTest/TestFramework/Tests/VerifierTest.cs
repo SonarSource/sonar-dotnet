@@ -29,6 +29,6 @@ namespace SonarAnalyzer.UnitTest.TestFramework.Tests
     {
         [TestMethod]
         public void Constructor_Null_Throws() =>
-            ((Func<Verifier<DummyAnalyzer>>)(() => new(null))).Should().Throw<ArgumentNullException>().And.ParamName.Should().Be("builder");
+            ((Func<Verifier>)(() => new(null))).Should().Throw<ArgumentNullException>().And.ParamName.Should().Be("builder");
     }
 }

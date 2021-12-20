@@ -19,16 +19,21 @@
  */
 
 using System;
-using Microsoft.CodeAnalysis.Diagnostics;
 
 namespace SonarAnalyzer.UnitTest.TestFramework
 {
-    internal class Verifier<TAnalyzer>
-        where TAnalyzer : DiagnosticAnalyzer, new()
+    internal class Verifier
     {
-        private readonly VerifierBuilder<TAnalyzer> builder;
+        private readonly VerifierBuilder builder;
 
-        public Verifier(VerifierBuilder<TAnalyzer> builder) =>
+        public Verifier(VerifierBuilder builder)
+        {
             this.builder = builder ?? throw new ArgumentNullException(nameof(builder));
+        }
+
+        public void Verify()
+        {
+
+        }
     }
 }
