@@ -22,13 +22,13 @@ using System;
 using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace SonarAnalyzer.UnitTest.TestFramework
+namespace SonarAnalyzer.UnitTest.TestFramework.Tests
 {
     [TestClass]
     public class VerifierTest
     {
         [TestMethod]
         public void Constructor_Null_Throws() =>
-            ((Func<Verifier>)(() => new Verifier(null))).Should().Throw<ArgumentNullException>().And.ParamName.Should().Be("builder");
+            ((Func<Verifier<DummyAnalyzer>>)(() => new(null))).Should().Throw<ArgumentNullException>().And.ParamName.Should().Be("builder");
     }
 }

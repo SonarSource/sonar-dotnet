@@ -26,7 +26,7 @@ using SonarAnalyzer.UnitTest.Helpers;
 using CS = Microsoft.CodeAnalysis.CSharp;
 using VB = Microsoft.CodeAnalysis.VisualBasic;
 
-namespace SonarAnalyzer.UnitTest.TestFramework
+namespace SonarAnalyzer.UnitTest.TestFramework.Tests
 {
     [TestClass]
     public class ParseOptionsHelperTest

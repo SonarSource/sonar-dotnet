@@ -22,15 +22,13 @@ using Microsoft.CodeAnalysis.Diagnostics;
 
 namespace SonarAnalyzer.UnitTest.TestFramework
 {
-    internal abstract class VerifierBuilder
-    {
-        public abstract DiagnosticAnalyzer CreateAnalyzer();
-    }
-
-    internal class VerifierBuilder<TAnalyzer> : VerifierBuilder
+    /// <summary>
+    /// Immutable builder that holds all parameters for rule verification.
+    /// </summary>
+    internal class VerifierBuilder<TAnalyzer>
         where TAnalyzer : DiagnosticAnalyzer, new()
     {
-        public override DiagnosticAnalyzer CreateAnalyzer() =>
-            new TAnalyzer();
+        public Verifier<TAnalyzer> Build() =>
+            new Verifier<TAnalyzer>(this);
     }
 }

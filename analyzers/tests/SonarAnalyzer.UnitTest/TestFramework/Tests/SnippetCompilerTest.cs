@@ -23,7 +23,7 @@ using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.Common;
 
-namespace SonarAnalyzer.UnitTest.TestFramework
+namespace SonarAnalyzer.UnitTest.TestFramework.Tests
 {
     [TestClass]
     public class SnippetCompilerTest

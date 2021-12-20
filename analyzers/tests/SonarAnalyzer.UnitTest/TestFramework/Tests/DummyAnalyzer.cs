@@ -18,16 +18,21 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using FluentAssertions;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System.Collections.Immutable;
+using Microsoft.CodeAnalysis;
+using Microsoft.CodeAnalysis.CSharp;
+using Microsoft.CodeAnalysis.Diagnostics;
 
-namespace SonarAnalyzer.UnitTest.TestFramework
+namespace SonarAnalyzer.UnitTest.TestFramework.Tests
 {
-    [TestClass]
-    public partial class VerifierBuilderTest
+    [DiagnosticAnalyzer(LanguageNames.CSharp)]
+    internal class DummyAnalyzer : DiagnosticAnalyzer
     {
-        [TestMethod]
-        public void CreateAnalyzer() =>
-            new VerifierBuilder<DummyAnalyzer>().CreateAnalyzer().Should().NotBeNull();
+        private static readonly DiagnosticDescriptor Rule = new("SDummy", "Dummy title", "Dummy description", string.Empty, DiagnosticSeverity.Warning, true);
+
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(Rule);
+
+        public override sealed void Initialize(AnalysisContext context) =>
+            context.RegisterSyntaxNodeAction(c => c.ReportDiagnostic(Diagnostic.Create(Rule, c.Node.GetLocation())), SyntaxKind.NumericLiteralExpression);
     }
 }
