@@ -30,7 +30,7 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         public void RedundantArgument() =>
-            Verifier.VerifyAnalyzer(
+            OldVerifier.VerifyAnalyzer(
                 @"TestCases\RedundantArgument.cs",
                 new RedundantArgument(),
                 ParseOptionsHelper.FromCSharp8,
@@ -39,12 +39,12 @@ namespace SonarAnalyzer.UnitTest.Rules
 #if NET
         [TestMethod]
         public void RedundantArgument_CSharp9() =>
-            Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\RedundantArgument.CSharp9.cs", new RedundantArgument());
+            OldVerifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\RedundantArgument.CSharp9.cs", new RedundantArgument());
 #endif
 
         [TestMethod]
         public void RedundantArgument_CodeFix_No_Named_Arguments() =>
-            Verifier.VerifyCodeFix(@"TestCases\RedundantArgument.cs",
+            OldVerifier.VerifyCodeFix(@"TestCases\RedundantArgument.cs",
                                    @"TestCases\RedundantArgument.NoNamed.Fixed.cs",
                                    new RedundantArgument(),
                                    new RedundantArgumentCodeFixProvider(),
@@ -53,7 +53,7 @@ namespace SonarAnalyzer.UnitTest.Rules
 
         [TestMethod]
         public void RedundantArgument_CodeFix_Named_Arguments() =>
-            Verifier.VerifyCodeFix(@"TestCases\RedundantArgument.cs",
+            OldVerifier.VerifyCodeFix(@"TestCases\RedundantArgument.cs",
                                    @"TestCases\RedundantArgument.Named.Fixed.cs",
                                    new RedundantArgument(),
                                    new RedundantArgumentCodeFixProvider(),

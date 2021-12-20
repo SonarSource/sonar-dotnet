@@ -35,7 +35,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [DataRow("2.5.7.10213")]
         [DataRow(Constants.NuGetLatestVersion)]
         public void TestClassShouldHaveTestMethod_NUnit(string testFwkVersion) =>
-            Verifier.VerifyAnalyzer(
+            OldVerifier.VerifyAnalyzer(
                 @"TestCases\TestClassShouldHaveTestMethod.NUnit.cs",
                 new TestClassShouldHaveTestMethod(),
                 NuGetMetadataReference.NUnit(testFwkVersion));
@@ -44,7 +44,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [DataRow("1.1.11")]
         [DataRow(Constants.NuGetLatestVersion)]
         public void TestClassShouldHaveTestMethod_MSTest(string testFwkVersion) =>
-            Verifier.VerifyAnalyzer(
+            OldVerifier.VerifyAnalyzer(
                 @"TestCases\TestClassShouldHaveTestMethod.MsTest.cs",
                 new TestClassShouldHaveTestMethod(),
                 NuGetMetadataReference.MSTestTestFramework(testFwkVersion));
@@ -52,7 +52,7 @@ namespace SonarAnalyzer.UnitTest.Rules
 #if NET
         [DataTestMethod]
         public void TestClassShouldHaveTestMethod_CSharp9() =>
-            Verifier.VerifyAnalyzerFromCSharp9Library(
+            OldVerifier.VerifyAnalyzerFromCSharp9Library(
                 @"TestCases\TestClassShouldHaveTestMethod.CSharp9.cs",
                 new TestClassShouldHaveTestMethod(),
                 NuGetMetadataReference.MSTestTestFramework(Constants.NuGetLatestVersion)

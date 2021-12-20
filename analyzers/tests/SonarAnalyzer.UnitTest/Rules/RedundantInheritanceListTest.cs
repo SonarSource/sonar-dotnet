@@ -29,16 +29,16 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         public void RedundantInheritanceList() =>
-            Verifier.VerifyAnalyzer(@"TestCases\RedundantInheritanceList.cs", new RedundantInheritanceList());
+            OldVerifier.VerifyAnalyzer(@"TestCases\RedundantInheritanceList.cs", new RedundantInheritanceList());
 
 #if NET
         [TestMethod]
         public void RedundantInheritanceList_CSharp9() =>
-            Verifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\RedundantInheritanceList.CSharp9.cs", new RedundantInheritanceList());
+            OldVerifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\RedundantInheritanceList.CSharp9.cs", new RedundantInheritanceList());
 
         [TestMethod]
         public void RedundantInheritanceList_CSharp9_CodeFix() =>
-            Verifier.VerifyCodeFix(
+            OldVerifier.VerifyCodeFix(
                 @"TestCases\RedundantInheritanceList.CSharp9.cs",
                 @"TestCases\RedundantInheritanceList.CSharp9.Fixed.cs",
                 new RedundantInheritanceList(),
@@ -47,11 +47,11 @@ namespace SonarAnalyzer.UnitTest.Rules
 
         [TestMethod]
         public void RedundantInheritanceList_CSharp10() =>
-            Verifier.VerifyAnalyzerFromCSharp10Library(@"TestCases\RedundantInheritanceList.CSharp10.cs", new RedundantInheritanceList());
+            OldVerifier.VerifyAnalyzerFromCSharp10Library(@"TestCases\RedundantInheritanceList.CSharp10.cs", new RedundantInheritanceList());
 
         [TestMethod]
         public void RedundantInheritanceList_CSharp10_CodeFix() =>
-            Verifier.VerifyCodeFix(
+            OldVerifier.VerifyCodeFix(
                 @"TestCases\RedundantInheritanceList.CSharp10.cs",
                 @"TestCases\RedundantInheritanceList.CSharp10.Fixed.cs",
                 new RedundantInheritanceList(),
@@ -62,7 +62,7 @@ namespace SonarAnalyzer.UnitTest.Rules
 
         [TestMethod]
         public void RedundantInheritanceList_CodeFix() =>
-            Verifier.VerifyCodeFix(
+            OldVerifier.VerifyCodeFix(
                 @"TestCases\RedundantInheritanceList.cs",
                 @"TestCases\RedundantInheritanceList.Fixed.cs",
                 new RedundantInheritanceList(),

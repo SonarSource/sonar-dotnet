@@ -30,10 +30,10 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         public void FlagsEnumZeroMember_CS() =>
-            Verifier.VerifyAnalyzer(@"TestCases\FlagsEnumZeroMember.cs", new CS.FlagsEnumZeroMember());
+            OldVerifier.VerifyAnalyzer(@"TestCases\FlagsEnumZeroMember.cs", new CS.FlagsEnumZeroMember());
 
         [TestMethod]
         public void FlagsEnumZeroMember_VB() =>
-            Verifier.VerifyAnalyzer(@"TestCases\FlagsEnumZeroMember.vb", new VB.FlagsEnumZeroMember());
+            OldVerifier.VerifyAnalyzer(@"TestCases\FlagsEnumZeroMember.vb", new VB.FlagsEnumZeroMember());
     }
 }

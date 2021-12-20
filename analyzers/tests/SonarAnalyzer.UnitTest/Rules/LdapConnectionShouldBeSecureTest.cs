@@ -31,7 +31,7 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         public void LdapConnectionsShouldBeSecure() =>
-            Verifier.VerifyAnalyzer(@"TestCases\LdapConnectionShouldBeSecure.cs",
+            OldVerifier.VerifyAnalyzer(@"TestCases\LdapConnectionShouldBeSecure.cs",
                                     new LdapConnectionShouldBeSecure(),
                                     ParseOptionsHelper.FromCSharp8,
                                     MetadataReferenceFacade.SystemDirectoryServices.Concat(MetadataReferenceFacade.NETStandard21));
@@ -40,7 +40,7 @@ namespace SonarAnalyzer.UnitTest.Rules
 
         [TestMethod]
         public void LdapConnectionsShouldBeSecure_FromCSharp9() =>
-            Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\LdapConnectionShouldBeSecure.CSharp9.cs",
+            OldVerifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\LdapConnectionShouldBeSecure.CSharp9.cs",
                                                       new LdapConnectionShouldBeSecure(),
                                                       MetadataReferenceFacade.SystemDirectoryServices);
 #endif

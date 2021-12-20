@@ -29,19 +29,19 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         public void NumberPatternShouldBeRegular_BeforeCSharp7() =>
-            Verifier.VerifyNoIssueReported(@"TestCases\NumberPatternShouldBeRegular.cs",
+            OldVerifier.VerifyNoIssueReported(@"TestCases\NumberPatternShouldBeRegular.cs",
                                            new NumberPatternShouldBeRegular(),
                                            ParseOptionsHelper.BeforeCSharp7,
                                            CompilationErrorBehavior.Ignore);
 
         [TestMethod]
         public void NumberPatternShouldBeRegular_FromCSharp7() =>
-            Verifier.VerifyAnalyzer(@"TestCases\NumberPatternShouldBeRegular.cs", new NumberPatternShouldBeRegular(), ParseOptionsHelper.FromCSharp7);
+            OldVerifier.VerifyAnalyzer(@"TestCases\NumberPatternShouldBeRegular.cs", new NumberPatternShouldBeRegular(), ParseOptionsHelper.FromCSharp7);
 
 #if NET
         [TestMethod]
         public void NumberPatternShouldBeRegular_FromCSharp9() =>
-            Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\NumberPatternShouldBeRegular.CSharp9.cs", new NumberPatternShouldBeRegular());
+            OldVerifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\NumberPatternShouldBeRegular.CSharp9.cs", new NumberPatternShouldBeRegular());
 #endif
 
         [DataTestMethod]

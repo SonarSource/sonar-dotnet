@@ -33,13 +33,13 @@ using DocumentBasedFixAllProvider = SonarAnalyzer.Common.DocumentBasedFixAllProv
 namespace SonarAnalyzer.UnitTest.TestFramework
 {
     [TestClass]
-    public class VerifierTest
+    public class OldVerifierTest
     {
         [TestMethod]
         public void VerifyCodeFix_WithDuplicateIssues()
         {
             const string filename = @"TestCases\VerifyCodeFix.Empty.cs";
-            Action a = () => { Verifier.VerifyCodeFix(filename, filename, new TestDuplicateLocationRule(), new TestDuplicateLocationRuleCodeFix()); };
+            Action a = () => { OldVerifier.VerifyCodeFix(filename, filename, new TestDuplicateLocationRule(), new TestDuplicateLocationRuleCodeFix()); };
             a.Should().NotThrow();
         }
 

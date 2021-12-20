@@ -30,10 +30,10 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         public void DoNotOverwriteCollectionElements_CS() =>
-            Verifier.VerifyAnalyzer(@"TestCases\DoNotOverwriteCollectionElements.cs", new CS.DoNotOverwriteCollectionElements());
+            OldVerifier.VerifyAnalyzer(@"TestCases\DoNotOverwriteCollectionElements.cs", new CS.DoNotOverwriteCollectionElements());
 
         [TestMethod]
         public void DoNotOverwriteCollectionElements_VB() =>
-            Verifier.VerifyAnalyzer(@"TestCases\DoNotOverwriteCollectionElements.vb", new VB.DoNotOverwriteCollectionElements());
+            OldVerifier.VerifyAnalyzer(@"TestCases\DoNotOverwriteCollectionElements.vb", new VB.DoNotOverwriteCollectionElements());
     }
 }

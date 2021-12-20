@@ -32,17 +32,17 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         public void EmptyStatement() =>
-            Verifier.VerifyAnalyzer(@"TestCases\EmptyStatement.cs", new EmptyStatement());
+            OldVerifier.VerifyAnalyzer(@"TestCases\EmptyStatement.cs", new EmptyStatement());
 
 #if NET
         [TestMethod]
         public void EmptyStatement_CSharp9() =>
-            Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\EmptyStatement.CSharp9.cs", new EmptyStatement());
+            OldVerifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\EmptyStatement.CSharp9.cs", new EmptyStatement());
 #endif
 
         [TestMethod]
         public void EmptyStatement_CodeFix() =>
-            Verifier.VerifyCodeFix(
+            OldVerifier.VerifyCodeFix(
                 @"TestCases\EmptyStatement.cs",
                 @"TestCases\EmptyStatement.Fixed.cs",
                 new EmptyStatement(),
@@ -51,7 +51,7 @@ namespace SonarAnalyzer.UnitTest.Rules
 #if NET
         [TestMethod]
         public void EmptyStatement_CodeFix_CSharp9() =>
-            Verifier.VerifyCodeFix(@"TestCases\EmptyStatement.CSharp9.cs",
+            OldVerifier.VerifyCodeFix(@"TestCases\EmptyStatement.CSharp9.cs",
                                    @"TestCases\EmptyStatement.CSharp9.Fixed.cs",
                                    new EmptyStatement(),
                                    new EmptyStatementCodeFixProvider(),

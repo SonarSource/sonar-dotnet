@@ -34,25 +34,25 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         public void EncryptionAlgorithmsShouldBeSecure_CS() =>
-            Verifier.VerifyAnalyzer(@"TestCases\EncryptionAlgorithmsShouldBeSecure.cs",
+            OldVerifier.VerifyAnalyzer(@"TestCases\EncryptionAlgorithmsShouldBeSecure.cs",
                 new CS.EncryptionAlgorithmsShouldBeSecure(),
                 GetAdditionalReferences());
 
         [TestMethod]
         public void EncryptionAlgorithmsShouldBeSecure_CS_NetStandard21() =>
-            Verifier.VerifyAnalyzer(@"TestCases\EncryptionAlgorithmsShouldBeSecure_NetStandard21.cs",
+            OldVerifier.VerifyAnalyzer(@"TestCases\EncryptionAlgorithmsShouldBeSecure_NetStandard21.cs",
                 new CS.EncryptionAlgorithmsShouldBeSecure(),
                 MetadataReferenceFacade.NETStandard21.Concat(GetAdditionalReferences()));
 
         [TestMethod]
         public void EncryptionAlgorithmsShouldBeSecure_VB() =>
-            Verifier.VerifyAnalyzer(@"TestCases\EncryptionAlgorithmsShouldBeSecure.vb",
+            OldVerifier.VerifyAnalyzer(@"TestCases\EncryptionAlgorithmsShouldBeSecure.vb",
                 new VB.EncryptionAlgorithmsShouldBeSecure(),
                 GetAdditionalReferences());
 
         [TestMethod]
         public void EncryptionAlgorithmsShouldBeSecure_VB_NetStandard21() =>
-            Verifier.VerifyAnalyzer(@"TestCases\EncryptionAlgorithmsShouldBeSecure_NetStandard21.vb",
+            OldVerifier.VerifyAnalyzer(@"TestCases\EncryptionAlgorithmsShouldBeSecure_NetStandard21.vb",
                 new VB.EncryptionAlgorithmsShouldBeSecure(),
                 MetadataReferenceFacade.NETStandard21.Concat(GetAdditionalReferences()));
 

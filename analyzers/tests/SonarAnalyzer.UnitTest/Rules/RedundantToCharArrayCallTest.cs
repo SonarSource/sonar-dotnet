@@ -29,11 +29,11 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         public void RedundantToCharArrayCall() =>
-            Verifier.VerifyAnalyzer(@"TestCases\RedundantToCharArrayCall.cs", new RedundantToCharArrayCall());
+            OldVerifier.VerifyAnalyzer(@"TestCases\RedundantToCharArrayCall.cs", new RedundantToCharArrayCall());
 
         [TestMethod]
         public void RedundantToCharArrayCall_CodeFix() =>
-            Verifier.VerifyCodeFix(
+            OldVerifier.VerifyCodeFix(
                 @"TestCases\RedundantToCharArrayCall.cs",
                 @"TestCases\RedundantToCharArrayCall.Fixed.cs",
                 new RedundantToCharArrayCall(),

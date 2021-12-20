@@ -32,25 +32,25 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         public void MarkAssemblyWithComVisibleAttribute_CS() =>
-            Verifier.VerifyNonConcurrentAnalyzer(@"TestCases\MarkAssemblyWithComVisibleAttribute.cs",
+            OldVerifier.VerifyNonConcurrentAnalyzer(@"TestCases\MarkAssemblyWithComVisibleAttribute.cs",
                 new CS.MarkAssemblyWithComVisibleAttribute());
 
         [TestMethod]
         public void MarkAssemblyWithComVisibleAttribute_VB() =>
-            Verifier.VerifyNonConcurrentAnalyzer(@"TestCases\MarkAssemblyWithComVisibleAttribute.vb",
+            OldVerifier.VerifyNonConcurrentAnalyzer(@"TestCases\MarkAssemblyWithComVisibleAttribute.vb",
                 new VB.MarkAssemblyWithComVisibleAttribute());
 
         [TestMethod]
         public void MarkAssemblyWithComVisibleAttributeNoncompliant_CS()
         {
-            Action action = () => Verifier.VerifyNonConcurrentAnalyzer(@"TestCases\MarkAssemblyWithComVisibleAttributeNoncompliant.cs", new CS.MarkAssemblyWithComVisibleAttribute());
+            Action action = () => OldVerifier.VerifyNonConcurrentAnalyzer(@"TestCases\MarkAssemblyWithComVisibleAttributeNoncompliant.cs", new CS.MarkAssemblyWithComVisibleAttribute());
             action.Should().Throw<UnexpectedDiagnosticException>().WithMessage("*Provide a 'ComVisible' attribute for assembly 'project0'.*");
         }
 
         [TestMethod]
         public void MarkAssemblyWithComVisibleAttributeNoncompliant_VB()
         {
-            Action action = () => Verifier.VerifyNonConcurrentAnalyzer(@"TestCases\MarkAssemblyWithComVisibleAttributeNoncompliant.vb", new VB.MarkAssemblyWithComVisibleAttribute());
+            Action action = () => OldVerifier.VerifyNonConcurrentAnalyzer(@"TestCases\MarkAssemblyWithComVisibleAttributeNoncompliant.vb", new VB.MarkAssemblyWithComVisibleAttribute());
             action.Should().Throw<UnexpectedDiagnosticException>().WithMessage("*Provide a 'ComVisible' attribute for assembly 'project0'.*");
         }
 

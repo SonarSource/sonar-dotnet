@@ -34,7 +34,7 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         public void EmptyMethod() =>
-            Verifier.VerifyAnalyzer(@"TestCases\EmptyMethod.cs",
+            OldVerifier.VerifyAnalyzer(@"TestCases\EmptyMethod.cs",
                 new CS.EmptyMethod(),
                 ParseOptionsHelper.FromCSharp8,
                 MetadataReferenceFacade.NETStandard21);
@@ -42,16 +42,16 @@ namespace SonarAnalyzer.UnitTest.Rules
 #if NET
         [TestMethod]
         public void EmptyMethod_CSharp10() =>
-            Verifier.VerifyAnalyzerFromCSharp10Library(@"TestCases\EmptyMethod.CSharp10.cs", new CS.EmptyMethod());
+            OldVerifier.VerifyAnalyzerFromCSharp10Library(@"TestCases\EmptyMethod.CSharp10.cs", new CS.EmptyMethod());
 
         [TestMethod]
         public void EmptyMethod_CSharp9() =>
-            Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\EmptyMethod.CSharp9.cs", new CS.EmptyMethod());
+            OldVerifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\EmptyMethod.CSharp9.cs", new CS.EmptyMethod());
 #endif
 
         [TestMethod]
         public void EmptyMethod_CodeFix_Throw() =>
-            Verifier.VerifyCodeFix(
+            OldVerifier.VerifyCodeFix(
                 @"TestCases\EmptyMethod.cs",
                 @"TestCases\EmptyMethod.Throw.Fixed.cs",
                 new CS.EmptyMethod(),
@@ -60,7 +60,7 @@ namespace SonarAnalyzer.UnitTest.Rules
 
         [TestMethod]
         public void EmptyMethod_CodeFix_Comment() =>
-            Verifier.VerifyCodeFix(
+            OldVerifier.VerifyCodeFix(
                 @"TestCases\EmptyMethod.cs",
                 @"TestCases\EmptyMethod.Comment.Fixed.cs",
                 new CS.EmptyMethod(),
@@ -69,22 +69,22 @@ namespace SonarAnalyzer.UnitTest.Rules
 
         [TestMethod]
         public void EmptyMethod_VB() =>
-            Verifier.VerifyAnalyzer(@"TestCases\EmptyMethod.vb", new VB.EmptyMethod());
+            OldVerifier.VerifyAnalyzer(@"TestCases\EmptyMethod.vb", new VB.EmptyMethod());
 
         [TestMethod]
         public void EmptyMethod_WithVirtualOverride_RaisesIssueForMainProject_CS() =>
-            Verifier.VerifyAnalyzer(@"TestCases\EmptyMethod.OverrideVirtual.cs", new CS.EmptyMethod());
+            OldVerifier.VerifyAnalyzer(@"TestCases\EmptyMethod.OverrideVirtual.cs", new CS.EmptyMethod());
 
         [TestMethod]
         public void EmptyMethod_WithVirtualOverride_DoesNotRaiseIssuesForTestProject_CS() =>
-            Verifier.VerifyNoIssueReportedInTest(@"TestCases\EmptyMethod.OverrideVirtual.cs", new CS.EmptyMethod());
+            OldVerifier.VerifyNoIssueReportedInTest(@"TestCases\EmptyMethod.OverrideVirtual.cs", new CS.EmptyMethod());
 
         [TestMethod]
         public void EmptyMethod_WithVirtualOverride_RaisesIssueForMainProject_VB() =>
-            Verifier.VerifyAnalyzer(@"TestCases\EmptyMethod.OverrideVirtual.vb", new VB.EmptyMethod());
+            OldVerifier.VerifyAnalyzer(@"TestCases\EmptyMethod.OverrideVirtual.vb", new VB.EmptyMethod());
 
         [TestMethod]
         public void EmptyMethod_WithVirtualOverride_DoesNotRaiseIssuesForTestProject_VB() =>
-            Verifier.VerifyNoIssueReportedInTest(@"TestCases\EmptyMethod.OverrideVirtual.vb", new VB.EmptyMethod());
+            OldVerifier.VerifyNoIssueReportedInTest(@"TestCases\EmptyMethod.OverrideVirtual.vb", new VB.EmptyMethod());
     }
 }

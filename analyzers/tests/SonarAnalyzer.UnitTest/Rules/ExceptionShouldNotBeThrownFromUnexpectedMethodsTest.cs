@@ -29,13 +29,13 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         public void ExceptionShouldNotBeThrownFromUnexpectedMethods() =>
-            Verifier.VerifyAnalyzer(@"TestCases\ExceptionShouldNotBeThrownFromUnexpectedMethods.cs",
+            OldVerifier.VerifyAnalyzer(@"TestCases\ExceptionShouldNotBeThrownFromUnexpectedMethods.cs",
                                     new ExceptionShouldNotBeThrownFromUnexpectedMethods(),
                                     ParseOptionsHelper.FromCSharp8);
  #if NET
         [TestMethod]
         public void ExceptionShouldNotBeThrownFromUnexpectedMethods_CSharp9() =>
-            Verifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\ExceptionShouldNotBeThrownFromUnexpectedMethods.CSharp9.cs",
+            OldVerifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\ExceptionShouldNotBeThrownFromUnexpectedMethods.CSharp9.cs",
                                                       new ExceptionShouldNotBeThrownFromUnexpectedMethods());
 #endif
 

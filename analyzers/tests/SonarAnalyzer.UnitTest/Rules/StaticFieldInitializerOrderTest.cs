@@ -30,7 +30,7 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         public void StaticFieldInitializerOrder() =>
-            Verifier.VerifyAnalyzer(
+            OldVerifier.VerifyAnalyzer(
                 new[]
                 {
                     @"TestCases\StaticFieldInitializerOrder.cs",
@@ -43,11 +43,11 @@ namespace SonarAnalyzer.UnitTest.Rules
 #if NET
         [TestMethod]
         public void StaticFieldInitializerOrder_CSharp9() =>
-            Verifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\StaticFieldInitializerOrder.CSharp9.cs", new StaticFieldInitializerOrder());
+            OldVerifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\StaticFieldInitializerOrder.CSharp9.cs", new StaticFieldInitializerOrder());
 
         [TestMethod]
         public void StaticFieldInitializerOrder_CSharp10() =>
-            Verifier.VerifyAnalyzerFromCSharp10Library(@"TestCases\StaticFieldInitializerOrder.CSharp10.cs", new StaticFieldInitializerOrder());
+            OldVerifier.VerifyAnalyzerFromCSharp10Library(@"TestCases\StaticFieldInitializerOrder.CSharp10.cs", new StaticFieldInitializerOrder());
 #endif
     }
 }

@@ -29,21 +29,21 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         public void UseNumericLiteralSeparator_BeforeCSharp7() =>
-            Verifier.VerifyNoIssueReported(@"TestCases\UseNumericLiteralSeparator.cs",
+            OldVerifier.VerifyNoIssueReported(@"TestCases\UseNumericLiteralSeparator.cs",
                                            new UseNumericLiteralSeparator(),
                                            ParseOptionsHelper.BeforeCSharp7,
                                            CompilationErrorBehavior.Ignore);
 
         [TestMethod]
         public void UseNumericLiteralSeparator_FromCSharp7() =>
-            Verifier.VerifyAnalyzer(@"TestCases\UseNumericLiteralSeparator.cs",
+            OldVerifier.VerifyAnalyzer(@"TestCases\UseNumericLiteralSeparator.cs",
                                     new UseNumericLiteralSeparator(),
                                     ParseOptionsHelper.FromCSharp7);
 
 #if NET
         [TestMethod]
         public void UseNumericLiteralSeparator_CSharp9() =>
-            Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\UseNumericLiteralSeparator.CSharp9.cs", new UseNumericLiteralSeparator());
+            OldVerifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\UseNumericLiteralSeparator.CSharp9.cs", new UseNumericLiteralSeparator());
 #endif
     }
 }

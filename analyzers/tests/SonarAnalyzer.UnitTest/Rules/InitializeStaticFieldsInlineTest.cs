@@ -29,6 +29,6 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         public void InitializeStaticFieldsInline() =>
-            Verifier.VerifyAnalyzer(@"TestCases\InitializeStaticFieldsInline.cs", new InitializeStaticFieldsInline());
+            OldVerifier.VerifyAnalyzer(@"TestCases\InitializeStaticFieldsInline.cs", new InitializeStaticFieldsInline());
     }
 }

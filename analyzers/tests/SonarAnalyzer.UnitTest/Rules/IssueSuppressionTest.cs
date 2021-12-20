@@ -29,16 +29,16 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         public void IssueSuppression() =>
-            Verifier.VerifyAnalyzer(new[] { @"TestCases\IssueSuppression.cs", @"TestCases\IssueSuppression2.cs", }, new IssueSuppression());
+            OldVerifier.VerifyAnalyzer(new[] { @"TestCases\IssueSuppression.cs", @"TestCases\IssueSuppression2.cs", }, new IssueSuppression());
 
 #if NET
         [TestMethod]
         public void IssueSuppression_CSharp9() =>
-            Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\IssueSuppression.CSharp9.cs", new IssueSuppression());
+            OldVerifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\IssueSuppression.CSharp9.cs", new IssueSuppression());
 
         [TestMethod]
         public void IssueSuppression_CSharp10() =>
-            Verifier.VerifyAnalyzerFromCSharp10Library(@"TestCases\IssueSuppression.CSharp10.cs", new IssueSuppression());
+            OldVerifier.VerifyAnalyzerFromCSharp10Library(@"TestCases\IssueSuppression.CSharp10.cs", new IssueSuppression());
 #endif
     }
 }

@@ -30,7 +30,7 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         public void GenericReadonlyFieldPropertyAssignment() =>
-            Verifier.VerifyAnalyzer(
+            OldVerifier.VerifyAnalyzer(
                 @"TestCases\GenericReadonlyFieldPropertyAssignment.cs",
                 new CS.GenericReadonlyFieldPropertyAssignment(),
                 ParseOptionsHelper.FromCSharp8);
@@ -38,17 +38,17 @@ namespace SonarAnalyzer.UnitTest.Rules
 #if NET
         [TestMethod]
         public void GenericReadonlyFieldPropertyAssignment_CSharp9() =>
-            Verifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\GenericReadonlyFieldPropertyAssignment.CSharp9.cs", new CS.GenericReadonlyFieldPropertyAssignment());
+            OldVerifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\GenericReadonlyFieldPropertyAssignment.CSharp9.cs", new CS.GenericReadonlyFieldPropertyAssignment());
 
         [TestMethod]
         public void GenericReadonlyFieldPropertyAssignment_CSharp10() =>
-            Verifier.VerifyAnalyzerFromCSharp10Library(@"TestCases\GenericReadonlyFieldPropertyAssignment.CSharp10.cs", new CS.GenericReadonlyFieldPropertyAssignment());
+            OldVerifier.VerifyAnalyzerFromCSharp10Library(@"TestCases\GenericReadonlyFieldPropertyAssignment.CSharp10.cs", new CS.GenericReadonlyFieldPropertyAssignment());
 
 #endif
 
         [TestMethod]
         public void GenericReadonlyFieldPropertyAssignment_CodeFix_Remove_Statement() =>
-            Verifier.VerifyCodeFix(
+            OldVerifier.VerifyCodeFix(
                 @"TestCases\GenericReadonlyFieldPropertyAssignment.cs",
                 @"TestCases\GenericReadonlyFieldPropertyAssignment.Remove.Fixed.cs",
                 new CS.GenericReadonlyFieldPropertyAssignment(),
@@ -58,7 +58,7 @@ namespace SonarAnalyzer.UnitTest.Rules
 
         [TestMethod]
         public void GenericReadonlyFieldPropertyAssignment_CodeFix_Add_Generic_Type_Constraint() =>
-            Verifier.VerifyCodeFix(
+            OldVerifier.VerifyCodeFix(
                 @"TestCases\GenericReadonlyFieldPropertyAssignment.cs",
                 @"TestCases\GenericReadonlyFieldPropertyAssignment.AddConstraint.Fixed.cs",
                 new CS.GenericReadonlyFieldPropertyAssignment(),

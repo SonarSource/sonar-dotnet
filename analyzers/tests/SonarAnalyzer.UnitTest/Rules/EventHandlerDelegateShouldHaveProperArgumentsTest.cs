@@ -29,13 +29,13 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         public void EventHandlerDelegateShouldHaveProperArguments() =>
-            Verifier.VerifyAnalyzer(@"TestCases\EventHandlerDelegateShouldHaveProperArguments.cs",
+            OldVerifier.VerifyAnalyzer(@"TestCases\EventHandlerDelegateShouldHaveProperArguments.cs",
                 new EventHandlerDelegateShouldHaveProperArguments());
 
 #if NET
         [TestMethod]
         public void EventHandlerDelegateShouldHaveProperArguments_CSharp9() =>
-            Verifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\EventHandlerDelegateShouldHaveProperArguments.CSharp9.cs",
+            OldVerifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\EventHandlerDelegateShouldHaveProperArguments.CSharp9.cs",
                 new EventHandlerDelegateShouldHaveProperArguments());
 #endif
     }

@@ -29,16 +29,16 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         public void MemberOverrideCallsBaseMember() =>
-            Verifier.VerifyAnalyzer(@"TestCases\MemberOverrideCallsBaseMember.cs", new MemberOverrideCallsBaseMember());
+            OldVerifier.VerifyAnalyzer(@"TestCases\MemberOverrideCallsBaseMember.cs", new MemberOverrideCallsBaseMember());
 
 #if NET
         [TestMethod]
         public void MemberOverrideCallsBaseMember_CSharp9() =>
-            Verifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\MemberOverrideCallsBaseMember.CSharp9.cs", new MemberOverrideCallsBaseMember());
+            OldVerifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\MemberOverrideCallsBaseMember.CSharp9.cs", new MemberOverrideCallsBaseMember());
 
         [TestMethod]
         public void MemberOverrideCallsBaseMember_CSharp9_CodeFix() =>
-            Verifier.VerifyCodeFix(@"TestCases\MemberOverrideCallsBaseMember.CSharp9.cs",
+            OldVerifier.VerifyCodeFix(@"TestCases\MemberOverrideCallsBaseMember.CSharp9.cs",
                                    @"TestCases\MemberOverrideCallsBaseMember.CSharp9.Fixed.cs",
                                    new MemberOverrideCallsBaseMember(),
                                    new MemberOverrideCallsBaseMemberCodeFixProvider(),
@@ -47,7 +47,7 @@ namespace SonarAnalyzer.UnitTest.Rules
 
         [TestMethod]
         public void MemberOverrideCallsBaseMember_CodeFix() =>
-            Verifier.VerifyCodeFix(
+            OldVerifier.VerifyCodeFix(
                 @"TestCases\MemberOverrideCallsBaseMember.cs",
                 @"TestCases\MemberOverrideCallsBaseMember.Fixed.cs",
                 new MemberOverrideCallsBaseMember(),

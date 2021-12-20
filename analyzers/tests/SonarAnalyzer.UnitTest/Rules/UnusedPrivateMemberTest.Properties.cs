@@ -28,7 +28,7 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         public void UnusedPrivateMember_Property_Accessibility() =>
-            Verifier.VerifyCSharpAnalyzer(@"
+            OldVerifier.VerifyCSharpAnalyzer(@"
 public class PrivateMembers
 {
     private int PrivateProperty { get; set; } // Noncompliant {{Remove the unused private property 'PrivateProperty'.}}
@@ -86,7 +86,7 @@ public class InterfaceImpl : IInterface
 
         [TestMethod]
         public void UnusedPrivateMember_Properties_DirectReferences() =>
-            Verifier.VerifyCSharpAnalyzer(@"
+            OldVerifier.VerifyCSharpAnalyzer(@"
 using System;
 public class PropertyUsages
 {

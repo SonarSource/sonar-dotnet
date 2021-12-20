@@ -30,20 +30,20 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         public void ParameterAssignedTo_CSharp() =>
-            Verifier.VerifyAnalyzer(@"TestCases\ParameterAssignedTo.cs", new CS.ParameterAssignedTo());
+            OldVerifier.VerifyAnalyzer(@"TestCases\ParameterAssignedTo.cs", new CS.ParameterAssignedTo());
 
 #if NET
         [TestMethod]
         public void ParameterAssignedTo_CSharp9() =>
-            Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\ParameterAssignedTo.CSharp9.cs", new CS.ParameterAssignedTo());
+            OldVerifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\ParameterAssignedTo.CSharp9.cs", new CS.ParameterAssignedTo());
 
         [TestMethod]
         public void ParameterAssignedTo_CSharp10() =>
-            Verifier.VerifyAnalyzerFromCSharp10Library(@"TestCases\ParameterAssignedTo.CSharp10.cs", new CS.ParameterAssignedTo());
+            OldVerifier.VerifyAnalyzerFromCSharp10Library(@"TestCases\ParameterAssignedTo.CSharp10.cs", new CS.ParameterAssignedTo());
 #endif
 
         [TestMethod]
         public void ParameterAssignedTo_VisualBasic() =>
-            Verifier.VerifyAnalyzer(@"TestCases\ParameterAssignedTo.vb", new VB.ParameterAssignedTo());
+            OldVerifier.VerifyAnalyzer(@"TestCases\ParameterAssignedTo.vb", new VB.ParameterAssignedTo());
     }
 }

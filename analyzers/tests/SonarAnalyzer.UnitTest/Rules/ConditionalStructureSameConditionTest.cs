@@ -30,24 +30,24 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         public void ConditionalStructureSameCondition_CS() =>
-            Verifier.VerifyAnalyzer(@"TestCases\ConditionalStructureSameCondition.cs",
+            OldVerifier.VerifyAnalyzer(@"TestCases\ConditionalStructureSameCondition.cs",
                 new CS.ConditionalStructureSameCondition());
 
 #if NET
         [TestMethod]
         public void ConditionalStructureSameCondition_CS_CSharp9() =>
-            Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\ConditionalStructureSameCondition.CSharp9.cs",
+            OldVerifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\ConditionalStructureSameCondition.CSharp9.cs",
                 new CS.ConditionalStructureSameCondition());
 
         [TestMethod]
         public void ConditionalStructureSameCondition_CS_CSharp10() =>
-            Verifier.VerifyAnalyzerFromCSharp10Console(@"TestCases\ConditionalStructureSameCondition.CSharp10.cs",
+            OldVerifier.VerifyAnalyzerFromCSharp10Console(@"TestCases\ConditionalStructureSameCondition.CSharp10.cs",
                 new CS.ConditionalStructureSameCondition());
 #endif
 
         [TestMethod]
         public void ConditionalStructureSameCondition_VisualBasic() =>
-            Verifier.VerifyAnalyzer(@"TestCases\ConditionalStructureSameCondition.vb",
+            OldVerifier.VerifyAnalyzer(@"TestCases\ConditionalStructureSameCondition.vb",
                 new VB.ConditionalStructureSameCondition());
     }
 }

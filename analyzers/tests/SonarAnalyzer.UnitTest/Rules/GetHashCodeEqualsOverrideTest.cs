@@ -30,14 +30,14 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         public void GetHashCodeEqualsOverride() =>
-            Verifier.VerifyAnalyzer(@"TestCases\GetHashCodeEqualsOverride.cs",
+            OldVerifier.VerifyAnalyzer(@"TestCases\GetHashCodeEqualsOverride.cs",
                                     new GetHashCodeEqualsOverride(),
                                     MetadataReferenceFacade.SystemComponentModelPrimitives);
 
 #if NET
         [TestMethod]
         public void GetHashCodeEqualsOverride_CSharp9() =>
-            Verifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\GetHashCodeEqualsOverride.CSharp9.cs",
+            OldVerifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\GetHashCodeEqualsOverride.CSharp9.cs",
                                                       new GetHashCodeEqualsOverride(),
                                                       MetadataReferenceFacade.SystemComponentModelPrimitives);
 #endif

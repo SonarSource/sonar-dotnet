@@ -33,21 +33,21 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void DisposeFromDispose_CSharp7_2() =>
             // Readonly structs have been introduced in C# 7.2.
             // In C# 8, readonly structs can be disposed of, and the behavior is different.
-            Verifier.VerifyAnalyzer(@"TestCases\DisposeFromDispose.CSharp7_2.cs", new DisposeFromDispose(),
+            OldVerifier.VerifyAnalyzer(@"TestCases\DisposeFromDispose.CSharp7_2.cs", new DisposeFromDispose(),
                 ImmutableArray.Create(new CSharpParseOptions(LanguageVersion.CSharp7_2)));
 
         [TestMethod]
         public void DisposeFromDispose_CSharp8() =>
-            Verifier.VerifyAnalyzer(@"TestCases\DisposeFromDispose.CSharp8.cs", new DisposeFromDispose(), ParseOptionsHelper.FromCSharp8);
+            OldVerifier.VerifyAnalyzer(@"TestCases\DisposeFromDispose.CSharp8.cs", new DisposeFromDispose(), ParseOptionsHelper.FromCSharp8);
 
 #if NET
         [TestMethod]
         public void DisposeFromDispose_CSharp9() =>
-            Verifier.VerifyAnalyzerFromCSharp9Console(new[] { @"TestCases\DisposeFromDispose.CSharp9.Part1.cs", @"TestCases\DisposeFromDispose.CSharp9.Part2.cs", }, new DisposeFromDispose());
+            OldVerifier.VerifyAnalyzerFromCSharp9Console(new[] { @"TestCases\DisposeFromDispose.CSharp9.Part1.cs", @"TestCases\DisposeFromDispose.CSharp9.Part2.cs", }, new DisposeFromDispose());
 #endif
         [TestMethod]
         public void DisposeFromDispose_CSharp10() =>
-            Verifier.VerifyAnalyzerFromCSharp10Console(@"TestCases\DisposeFromDispose.CSharp10.cs", new DisposeFromDispose());
+            OldVerifier.VerifyAnalyzerFromCSharp10Console(@"TestCases\DisposeFromDispose.CSharp10.cs", new DisposeFromDispose());
 
     }
 }

@@ -29,12 +29,12 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         public void OptionalParameterWithDefaultValue() =>
-            Verifier.VerifyAnalyzer(@"TestCases\OptionalParameterWithDefaultValue.cs",
+            OldVerifier.VerifyAnalyzer(@"TestCases\OptionalParameterWithDefaultValue.cs",
                 new OptionalParameterWithDefaultValue());
 
         [TestMethod]
         public void OptionalParameterWithDefaultValue_CodeFix() =>
-            Verifier.VerifyCodeFix(
+            OldVerifier.VerifyCodeFix(
                 @"TestCases\OptionalParameterWithDefaultValue.cs",
                 @"TestCases\OptionalParameterWithDefaultValue.Fixed.cs",
                 new OptionalParameterWithDefaultValue(),

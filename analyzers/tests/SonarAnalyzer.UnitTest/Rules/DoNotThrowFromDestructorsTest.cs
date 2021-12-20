@@ -30,16 +30,16 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         public void DoNotThrowFromDestructors_CS() =>
-            Verifier.VerifyAnalyzer(@"TestCases\DoNotThrowFromDestructors.cs", new CS.DoNotThrowFromDestructors());
+            OldVerifier.VerifyAnalyzer(@"TestCases\DoNotThrowFromDestructors.cs", new CS.DoNotThrowFromDestructors());
 
 #if NET
         [TestMethod]
         public void DoNotThrowFromDestructors_CS_CSharp9() =>
-            Verifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\DoNotThrowFromDestructors.CSharp9.cs", new CS.DoNotThrowFromDestructors());
+            OldVerifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\DoNotThrowFromDestructors.CSharp9.cs", new CS.DoNotThrowFromDestructors());
 #endif
 
         [TestMethod]
         public void DoNotThrowFromDestructors_VB() =>
-            Verifier.VerifyAnalyzer(@"TestCases\DoNotThrowFromDestructors.vb", new VB.DoNotThrowFromDestructors());
+            OldVerifier.VerifyAnalyzer(@"TestCases\DoNotThrowFromDestructors.vb", new VB.DoNotThrowFromDestructors());
     }
 }

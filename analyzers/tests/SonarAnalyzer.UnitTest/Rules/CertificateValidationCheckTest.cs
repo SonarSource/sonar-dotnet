@@ -36,33 +36,33 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         public void CertificateValidationCheck_CS() =>
-            Verifier.VerifyAnalyzer(@"TestCases\CertificateValidationCheck.cs", new CS.CertificateValidationCheck(), GetAdditionalReferences());
+            OldVerifier.VerifyAnalyzer(@"TestCases\CertificateValidationCheck.cs", new CS.CertificateValidationCheck(), GetAdditionalReferences());
 
 #if NET
         [TestMethod]
         public void CertificateValidationCheck_CSharp8() =>
-            Verifier.VerifyAnalyzer(@"TestCases\CertificateValidationCheck.CSharp8.cs",
+            OldVerifier.VerifyAnalyzer(@"TestCases\CertificateValidationCheck.CSharp8.cs",
                                     new CS.CertificateValidationCheck(),
                                     ParseOptionsHelper.FromCSharp8,
                                     GetAdditionalReferences());
 
         [TestMethod]
         public void CertificateValidationCheck_CS_CSharp9() =>
-            Verifier.VerifyAnalyzerFromCSharp9Library(
+            OldVerifier.VerifyAnalyzerFromCSharp9Library(
                 new[] { @"TestCases\CertificateValidationCheck.CSharp9.cs", @"TestCases\CertificateValidationCheck.CSharp9.Partial.cs" },
                 new CS.CertificateValidationCheck(),
                 GetAdditionalReferences());
 
         [TestMethod]
         public void CertificateValidationCheck_CS_TopLevelStatements() =>
-            Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\CertificateValidationCheck.TopLevelStatements.cs",
+            OldVerifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\CertificateValidationCheck.TopLevelStatements.cs",
                                                       new CS.CertificateValidationCheck(),
                                                       GetAdditionalReferences());
 #endif
 
         [TestMethod]
         public void CertificateValidationCheck_VB() =>
-            Verifier.VerifyAnalyzer(@"TestCases\CertificateValidationCheck.vb",
+            OldVerifier.VerifyAnalyzer(@"TestCases\CertificateValidationCheck.vb",
                                     new VB.CertificateValidationCheck(),
                                     GetAdditionalReferences());
 

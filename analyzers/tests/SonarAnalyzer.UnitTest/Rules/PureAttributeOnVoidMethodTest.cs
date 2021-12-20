@@ -30,20 +30,20 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         public void PureAttributeOnVoidMethod_CS() =>
-            Verifier.VerifyAnalyzer(@"TestCases\PureAttributeOnVoidMethod.cs", new CS.PureAttributeOnVoidMethod());
+            OldVerifier.VerifyAnalyzer(@"TestCases\PureAttributeOnVoidMethod.cs", new CS.PureAttributeOnVoidMethod());
 
         [TestMethod]
         public void PureAttributeOnVoidMethod_CSharp8() =>
-            Verifier.VerifyAnalyzer(@"TestCases\PureAttributeOnVoidMethod.CSharp8.cs", new CS.PureAttributeOnVoidMethod(), ParseOptionsHelper.FromCSharp8);
+            OldVerifier.VerifyAnalyzer(@"TestCases\PureAttributeOnVoidMethod.CSharp8.cs", new CS.PureAttributeOnVoidMethod(), ParseOptionsHelper.FromCSharp8);
 
 #if NET
         [TestMethod]
         public void PureAttributeOnVoidMethod_CSharp9() =>
-            Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\PureAttributeOnVoidMethod.CSharp9.cs", new CS.PureAttributeOnVoidMethod());
+            OldVerifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\PureAttributeOnVoidMethod.CSharp9.cs", new CS.PureAttributeOnVoidMethod());
 #endif
 
         [TestMethod]
         public void PureAttributeOnVoidMethod_VB() =>
-            Verifier.VerifyAnalyzer(@"TestCases\PureAttributeOnVoidMethod.vb", new VB.PureAttributeOnVoidMethod());
+            OldVerifier.VerifyAnalyzer(@"TestCases\PureAttributeOnVoidMethod.vb", new VB.PureAttributeOnVoidMethod());
     }
 }

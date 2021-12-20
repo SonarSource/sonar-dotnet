@@ -29,16 +29,16 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         public void MemberShadowsOuterStaticMember() =>
-            Verifier.VerifyAnalyzer(@"TestCases\MemberShadowsOuterStaticMember.cs", new MemberShadowsOuterStaticMember());
+            OldVerifier.VerifyAnalyzer(@"TestCases\MemberShadowsOuterStaticMember.cs", new MemberShadowsOuterStaticMember());
 
 #if NET
         [TestMethod]
         public void MemberShadowsOuterStaticMember_CSharp9() =>
-            Verifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\MemberShadowsOuterStaticMember.CSharp9.cs", new MemberShadowsOuterStaticMember());
+            OldVerifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\MemberShadowsOuterStaticMember.CSharp9.cs", new MemberShadowsOuterStaticMember());
 
         [TestMethod]
         public void MemberShadowsOuterStaticMember_CSharp10() =>
-            Verifier.VerifyAnalyzerFromCSharp10Library(@"TestCases\MemberShadowsOuterStaticMember.CSharp10.cs", new MemberShadowsOuterStaticMember());
+            OldVerifier.VerifyAnalyzerFromCSharp10Library(@"TestCases\MemberShadowsOuterStaticMember.CSharp10.cs", new MemberShadowsOuterStaticMember());
 #endif
     }
 }

@@ -32,26 +32,26 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         public void NameOfShouldBeUsed_FromCSharp6() =>
-            Verifier.VerifyAnalyzer(@"TestCases\NameOfShouldBeUsed.cs",
+            OldVerifier.VerifyAnalyzer(@"TestCases\NameOfShouldBeUsed.cs",
                 new CS.NameOfShouldBeUsed(),
                 ParseOptionsHelper.FromCSharp6);
 
         [TestMethod]
         public void NameOfShouldBeUsed_CSharp5() =>
-            Verifier.VerifyNoIssueReported(@"TestCases\NameOfShouldBeUsed.cs",
+            OldVerifier.VerifyNoIssueReported(@"TestCases\NameOfShouldBeUsed.cs",
                 new CS.NameOfShouldBeUsed(),
                 new[] { new RoslynCS.CSharpParseOptions(RoslynCS.LanguageVersion.CSharp5) },
                 CompilationErrorBehavior.Ignore);
 
         [TestMethod]
         public void NameOfShouldBeUsed_FromVB14() =>
-            Verifier.VerifyAnalyzer(@"TestCases\NameOfShouldBeUsed.vb",
+            OldVerifier.VerifyAnalyzer(@"TestCases\NameOfShouldBeUsed.vb",
                 new VB.NameOfShouldBeUsed(),
                 ParseOptionsHelper.FromVisualBasic14);
 
         [TestMethod]
         public void NameOfShouldBeUsed_VB12() =>
-            Verifier.VerifyNoIssueReported(@"TestCases\NameOfShouldBeUsed.vb",
+            OldVerifier.VerifyNoIssueReported(@"TestCases\NameOfShouldBeUsed.vb",
                 new VB.NameOfShouldBeUsed(),
                 new[] { new RoslynVB.VisualBasicParseOptions(RoslynVB.LanguageVersion.VisualBasic12) },
                 CompilationErrorBehavior.Ignore);

@@ -31,16 +31,16 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         public void HardcodedIpAddress_CS() =>
-            Verifier.VerifyAnalyzer(@"TestCases\Hotspots\HardcodedIpAddress.cs", new CS.HardcodedIpAddress(AnalyzerConfiguration.AlwaysEnabled));
+            OldVerifier.VerifyAnalyzer(@"TestCases\Hotspots\HardcodedIpAddress.cs", new CS.HardcodedIpAddress(AnalyzerConfiguration.AlwaysEnabled));
 
 #if NET
         [TestMethod]
         public void HardcodedIpAddress_CSharp10() =>
-            Verifier.VerifyAnalyzerFromCSharp10Library(@"TestCases\Hotspots\HardcodedIpAddress.CSharp10.cs", new CS.HardcodedIpAddress(AnalyzerConfiguration.AlwaysEnabled));
+            OldVerifier.VerifyAnalyzerFromCSharp10Library(@"TestCases\Hotspots\HardcodedIpAddress.CSharp10.cs", new CS.HardcodedIpAddress(AnalyzerConfiguration.AlwaysEnabled));
 #endif
 
         [TestMethod]
         public void HardcodedIpAddress_VB() =>
-            Verifier.VerifyAnalyzer(@"TestCases\Hotspots\HardcodedIpAddress.vb", new VB.HardcodedIpAddress(AnalyzerConfiguration.AlwaysEnabled));
+            OldVerifier.VerifyAnalyzer(@"TestCases\Hotspots\HardcodedIpAddress.vb", new VB.HardcodedIpAddress(AnalyzerConfiguration.AlwaysEnabled));
     }
 }

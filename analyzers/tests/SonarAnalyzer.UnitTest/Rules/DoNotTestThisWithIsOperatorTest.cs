@@ -29,16 +29,16 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         public void DoNotTestThisWithIsOperator() =>
-            Verifier.VerifyAnalyzer(@"TestCases\DoNotTestThisWithIsOperator.cs", new DoNotTestThisWithIsOperator());
+            OldVerifier.VerifyAnalyzer(@"TestCases\DoNotTestThisWithIsOperator.cs", new DoNotTestThisWithIsOperator());
 
 #if NET
         [TestMethod]
         public void DoNotTestThisWithIsOperator_CSharp9() =>
-            Verifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\DoNotTestThisWithIsOperator.CSharp9.cs", new DoNotTestThisWithIsOperator());
+            OldVerifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\DoNotTestThisWithIsOperator.CSharp9.cs", new DoNotTestThisWithIsOperator());
 
         [TestMethod]
         public void DoNotTestThisWithIsOperator_CSharp10() =>
-            Verifier.VerifyAnalyzerFromCSharp10Library(@"TestCases\DoNotTestThisWithIsOperator.CSharp10.cs", new DoNotTestThisWithIsOperator());
+            OldVerifier.VerifyAnalyzerFromCSharp10Library(@"TestCases\DoNotTestThisWithIsOperator.CSharp10.cs", new DoNotTestThisWithIsOperator());
 #endif
     }
 }

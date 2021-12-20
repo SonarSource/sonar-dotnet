@@ -34,13 +34,13 @@ namespace SonarAnalyzer.UnitTest.Rules
 
         [TestMethod]
         public void TaskConfigureAwait_NetFx() =>
-            Verifier.VerifyAnalyzer(@"TestCases\TaskConfigureAwait.NetFx.cs", new TaskConfigureAwait());
+            OldVerifier.VerifyAnalyzer(@"TestCases\TaskConfigureAwait.NetFx.cs", new TaskConfigureAwait());
 
 #else
 
         [TestMethod]
         public void TaskConfigureAwait_NetCore() =>
-            Verifier.VerifyAnalyzer(@"TestCases\TaskConfigureAwait.NetCore.cs", new TaskConfigureAwait());
+            OldVerifier.VerifyAnalyzer(@"TestCases\TaskConfigureAwait.NetCore.cs", new TaskConfigureAwait());
 
 #endif
 

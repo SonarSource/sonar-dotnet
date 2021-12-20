@@ -29,12 +29,12 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         public void StreamReadStatement() =>
-            Verifier.VerifyAnalyzer(@"TestCases\StreamReadStatement.cs", new StreamReadStatement());
+            OldVerifier.VerifyAnalyzer(@"TestCases\StreamReadStatement.cs", new StreamReadStatement());
 
 #if NET
         [TestMethod]
         public void StreamReadStatement_CSharp10() =>
-            Verifier.VerifyAnalyzerFromCSharp10Library(@"TestCases\StreamReadStatement.CSharp10.cs", new StreamReadStatement());
+            OldVerifier.VerifyAnalyzerFromCSharp10Library(@"TestCases\StreamReadStatement.CSharp10.cs", new StreamReadStatement());
 #endif
     }
 }

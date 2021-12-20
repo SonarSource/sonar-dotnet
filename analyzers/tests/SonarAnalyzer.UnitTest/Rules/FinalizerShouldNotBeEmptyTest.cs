@@ -29,17 +29,17 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         public void FinalizerShouldNotBeEmpty() =>
-            Verifier.VerifyAnalyzer(@"TestCases\FinalizerShouldNotBeEmpty.cs", new FinalizerShouldNotBeEmpty());
+            OldVerifier.VerifyAnalyzer(@"TestCases\FinalizerShouldNotBeEmpty.cs", new FinalizerShouldNotBeEmpty());
 
 #if NET
         [TestMethod]
         public void FinalizerShouldNotBeEmpty_CSharp9() =>
-            Verifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\FinalizerShouldNotBeEmpty.CSharp9.cs", new FinalizerShouldNotBeEmpty());
+            OldVerifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\FinalizerShouldNotBeEmpty.CSharp9.cs", new FinalizerShouldNotBeEmpty());
 #endif
 
         [TestMethod]
         public void FinalizerShouldNotBeEmpty_InvalidCode() =>
-            Verifier.VerifyCSharpAnalyzer(@"class Program4
+            OldVerifier.VerifyCSharpAnalyzer(@"class Program4
     {
         ~Program4() =>
     }", new FinalizerShouldNotBeEmpty(), CompilationErrorBehavior.Ignore);

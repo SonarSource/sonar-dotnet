@@ -29,16 +29,16 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         public void ValuesUselesslyIncremented() =>
-            Verifier.VerifyAnalyzer(@"TestCases\ValuesUselesslyIncremented.cs", new ValuesUselesslyIncremented());
+            OldVerifier.VerifyAnalyzer(@"TestCases\ValuesUselesslyIncremented.cs", new ValuesUselesslyIncremented());
 
 #if NET
         [TestMethod]
         public void ValuesUselesslyIncremented_CSharp9() =>
-            Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\ValuesUselesslyIncremented.CSharp9.cs", new ValuesUselesslyIncremented());
+            OldVerifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\ValuesUselesslyIncremented.CSharp9.cs", new ValuesUselesslyIncremented());
 
         [TestMethod]
         public void ValuesUselesslyIncremented_CSharp10() =>
-            Verifier.VerifyAnalyzerFromCSharp10Library(@"TestCases\ValuesUselesslyIncremented.CSharp10.cs", new ValuesUselesslyIncremented());
+            OldVerifier.VerifyAnalyzerFromCSharp10Library(@"TestCases\ValuesUselesslyIncremented.CSharp10.cs", new ValuesUselesslyIncremented());
 #endif
     }
 }

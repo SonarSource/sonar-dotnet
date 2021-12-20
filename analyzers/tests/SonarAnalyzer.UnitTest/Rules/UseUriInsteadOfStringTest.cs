@@ -34,7 +34,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [DataRow(ProjectType.Product)]
         [DataRow(ProjectType.Test)]
         public void UseUriInsteadOfString(ProjectType projectType) =>
-            Verifier.VerifyAnalyzer(
+            OldVerifier.VerifyAnalyzer(
                 @"TestCases\UseUriInsteadOfString.cs",
                 new UseUriInsteadOfString(),
                 MetadataReferenceFacade.SystemDrawing.Concat(TestHelper.ProjectTypeReference(projectType)));
@@ -42,14 +42,14 @@ namespace SonarAnalyzer.UnitTest.Rules
 #if NET
         [TestMethod]
         public void UseUriInsteadOfString_CSharp9() =>
-            Verifier.VerifyAnalyzerFromCSharp9Console(
+            OldVerifier.VerifyAnalyzerFromCSharp9Console(
                 @"TestCases\UseUriInsteadOfString.CSharp9.cs",
                 new UseUriInsteadOfString(),
                 MetadataReferenceFacade.SystemDrawing);
 
         [TestMethod]
         public void UseUriInsteadOfString_CSharp10() =>
-            Verifier.VerifyAnalyzerFromCSharp10Library(
+            OldVerifier.VerifyAnalyzerFromCSharp10Library(
                 @"TestCases\UseUriInsteadOfString.CSharp10.cs",
                 new UseUriInsteadOfString(),
                 MetadataReferenceFacade.SystemDrawing);
@@ -57,7 +57,7 @@ namespace SonarAnalyzer.UnitTest.Rules
 
         [TestMethod]
         public void UseUriInsteadOfString_InvalidCode() =>
-            Verifier.VerifyCSharpAnalyzer(@"
+            OldVerifier.VerifyCSharpAnalyzer(@"
 public class Foo
 {
 }

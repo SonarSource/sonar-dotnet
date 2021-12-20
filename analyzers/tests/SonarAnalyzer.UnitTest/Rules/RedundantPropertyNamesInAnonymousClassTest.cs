@@ -29,11 +29,11 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         public void RedundantPropertyNamesInAnonymousClass() =>
-            Verifier.VerifyAnalyzer(@"TestCases\RedundantPropertyNamesInAnonymousClass.cs", new RedundantPropertyNamesInAnonymousClass());
+            OldVerifier.VerifyAnalyzer(@"TestCases\RedundantPropertyNamesInAnonymousClass.cs", new RedundantPropertyNamesInAnonymousClass());
 
         [TestMethod]
         public void RedundantPropertyNamesInAnonymousClass_CodeFix() =>
-            Verifier.VerifyCodeFix(
+            OldVerifier.VerifyCodeFix(
                 @"TestCases\RedundantPropertyNamesInAnonymousClass.cs",
                 @"TestCases\RedundantPropertyNamesInAnonymousClass.Fixed.cs",
                 new RedundantPropertyNamesInAnonymousClass(),

@@ -35,7 +35,7 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         public void UnnecessaryUsings() =>
-            Verifier.VerifyAnalyzer(
+            OldVerifier.VerifyAnalyzer(
                 new[] { @"TestCases\UnnecessaryUsings.cs", @"TestCases\UnnecessaryUsings2.cs", @"TestCases\UnnecessaryUsingsFNRepro.cs" },
                 new UnnecessaryUsings(),
                 GetAdditionalReferences());
@@ -44,35 +44,35 @@ namespace SonarAnalyzer.UnitTest.Rules
 
         [TestMethod]
         public void UnnecessaryUsings_CSharp10_GlobalUsings() =>
-            Verifier.VerifyAnalyzerFromCSharp10Console(
+            OldVerifier.VerifyAnalyzerFromCSharp10Console(
                 new[] { @"TestCases\UnnecessaryUsings.CSharp10.Global.cs", @"TestCases\UnnecessaryUsings.CSharp10.Consumer.cs" },
                 new UnnecessaryUsings());
 
         [TestMethod]
         public void UnnecessaryUsings_CSharp10_FileScopedNamespace() =>
-            Verifier.VerifyAnalyzerFromCSharp10Library(
+            OldVerifier.VerifyAnalyzerFromCSharp10Library(
                 new[] { @"TestCases\UnnecessaryUsings.CSharp10.FileScopedNamespace.cs" },
                 new UnnecessaryUsings());
 
         [TestMethod]
         public void UnnecessaryUsings_CSharp9() =>
-            Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\UnnecessaryUsings.CSharp9.cs", new UnnecessaryUsings());
+            OldVerifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\UnnecessaryUsings.CSharp9.cs", new UnnecessaryUsings());
 
         [TestMethod]
         public void UnnecessaryUsings_TupleDeconstruct_NetCore() =>
-            Verifier.VerifyAnalyzer(@"TestCases\UnnecessaryUsings.TupleDeconstruct.NetCore.cs", new UnnecessaryUsings());
+            OldVerifier.VerifyAnalyzer(@"TestCases\UnnecessaryUsings.TupleDeconstruct.NetCore.cs", new UnnecessaryUsings());
 
 #elif NETFRAMEWORK
 
         [TestMethod]
         public void UnnecessaryUsings_TupleDeconstruct_NetFx() =>
-            Verifier.VerifyAnalyzer(@"TestCases\UnnecessaryUsings.TupleDeconstruct.NetFx.cs", new UnnecessaryUsings());
+            OldVerifier.VerifyAnalyzer(@"TestCases\UnnecessaryUsings.TupleDeconstruct.NetFx.cs", new UnnecessaryUsings());
 
 #endif
 
         [TestMethod]
         public void UnnecessaryUsings_CodeFix() =>
-            Verifier.VerifyCodeFix(
+            OldVerifier.VerifyCodeFix(
                 @"TestCases\UnnecessaryUsings.cs",
                 @"TestCases\UnnecessaryUsings.Fixed.cs",
                 @"TestCases\UnnecessaryUsings.Fixed.Batch.cs",

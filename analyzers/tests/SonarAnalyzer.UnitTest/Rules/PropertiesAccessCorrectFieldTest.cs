@@ -34,33 +34,33 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         public void PropertiesAccessCorrectField_CS() =>
-            Verifier.VerifyAnalyzer(@"TestCases\PropertiesAccessCorrectField.cs",
+            OldVerifier.VerifyAnalyzer(@"TestCases\PropertiesAccessCorrectField.cs",
                                     new CS.PropertiesAccessCorrectField(),
                                     AdditionalReferences);
 
         [TestMethod]
         public void PropertiesAccessCorrectField_CSharp8() =>
-            Verifier.VerifyAnalyzer(@"TestCases\PropertiesAccessCorrectField.CSharp8.cs",
+            OldVerifier.VerifyAnalyzer(@"TestCases\PropertiesAccessCorrectField.CSharp8.cs",
                                     new CS.PropertiesAccessCorrectField(),
                                     ParseOptionsHelper.FromCSharp8);
 
 #if NET
         [TestMethod]
         public void PropertiesAccessCorrectField_CSharp9() =>
-            Verifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\PropertiesAccessCorrectField.CSharp9.cs", new CS.PropertiesAccessCorrectField());
+            OldVerifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\PropertiesAccessCorrectField.CSharp9.cs", new CS.PropertiesAccessCorrectField());
 #else
         [TestMethod]
         public void PropertiesAccessCorrectField_CS_NetFramework() =>
-            Verifier.VerifyAnalyzer(@"TestCases\PropertiesAccessCorrectField.NetFramework.cs", new CS.PropertiesAccessCorrectField(), AdditionalReferences);
+            OldVerifier.VerifyAnalyzer(@"TestCases\PropertiesAccessCorrectField.NetFramework.cs", new CS.PropertiesAccessCorrectField(), AdditionalReferences);
 
         [TestMethod]
         public void PropertiesAccessCorrectField_VB_NetFramework() =>
-            Verifier.VerifyAnalyzer(@"TestCases\PropertiesAccessCorrectField.NetFramework.vb", new VB.PropertiesAccessCorrectField(), AdditionalReferences);
+            OldVerifier.VerifyAnalyzer(@"TestCases\PropertiesAccessCorrectField.NetFramework.vb", new VB.PropertiesAccessCorrectField(), AdditionalReferences);
 #endif
 
         [TestMethod]
         public void PropertiesAccessCorrectField_VB() =>
-            Verifier.VerifyAnalyzer(@"TestCases\PropertiesAccessCorrectField.vb",
+            OldVerifier.VerifyAnalyzer(@"TestCases\PropertiesAccessCorrectField.vb",
                                     new VB.PropertiesAccessCorrectField(),
                                     AdditionalReferences);
 

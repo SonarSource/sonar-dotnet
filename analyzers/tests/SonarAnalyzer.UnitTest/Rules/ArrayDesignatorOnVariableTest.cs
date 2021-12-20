@@ -29,11 +29,11 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         public void ArrayDesignatorOnVariable() =>
-            Verifier.VerifyAnalyzer(@"TestCases\ArrayDesignatorOnVariable.vb", new ArrayDesignatorOnVariable());
+            OldVerifier.VerifyAnalyzer(@"TestCases\ArrayDesignatorOnVariable.vb", new ArrayDesignatorOnVariable());
 
         [TestMethod]
         public void ArrayDesignatorOnVariable_CodeFix() =>
-            Verifier.VerifyCodeFix(@"TestCases\ArrayDesignatorOnVariable.vb",
+            OldVerifier.VerifyCodeFix(@"TestCases\ArrayDesignatorOnVariable.vb",
                                    @"TestCases\ArrayDesignatorOnVariable.Fixed.vb",
                                    new ArrayDesignatorOnVariable(),
                                    new ArrayDesignatorOnVariableCodeFixProvider());

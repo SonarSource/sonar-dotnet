@@ -29,12 +29,12 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         public void OperatorsShouldBeOverloadedConsistently() =>
-            Verifier.VerifyAnalyzer(@"TestCases\OperatorsShouldBeOverloadedConsistently.cs", new OperatorsShouldBeOverloadedConsistently());
+            OldVerifier.VerifyAnalyzer(@"TestCases\OperatorsShouldBeOverloadedConsistently.cs", new OperatorsShouldBeOverloadedConsistently());
 
 #if NET
         [TestMethod]
         public void OperatorsShouldBeOverloadedConsistently_CSharp9() =>
-            Verifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\OperatorsShouldBeOverloadedConsistently.CSharp9.cs", new OperatorsShouldBeOverloadedConsistently());
+            OldVerifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\OperatorsShouldBeOverloadedConsistently.CSharp9.cs", new OperatorsShouldBeOverloadedConsistently());
 #endif
     }
 }

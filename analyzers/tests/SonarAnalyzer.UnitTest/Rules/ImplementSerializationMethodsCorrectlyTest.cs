@@ -30,26 +30,26 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         public void ImplementSerializationMethodsCorrectly_CS() =>
-            Verifier.VerifyAnalyzer(@"TestCases\ImplementSerializationMethodsCorrectly.cs", new CS.ImplementSerializationMethodsCorrectly());
+            OldVerifier.VerifyAnalyzer(@"TestCases\ImplementSerializationMethodsCorrectly.cs", new CS.ImplementSerializationMethodsCorrectly());
 
 #if NET
         [TestMethod]
         public void ImplementSerializationMethodsCorrectly_CS_FromCSharp9() =>
-            Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\ImplementSerializationMethodsCorrectly.CSharp9.cs", new CS.ImplementSerializationMethodsCorrectly());
+            OldVerifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\ImplementSerializationMethodsCorrectly.CSharp9.cs", new CS.ImplementSerializationMethodsCorrectly());
 
         [TestMethod]
         public void ImplementSerializationMethodsCorrectly_CS_CSharp10() =>
-            Verifier.VerifyAnalyzerFromCSharp10Library(@"TestCases\ImplementSerializationMethodsCorrectly.CSharp10.cs", new CS.ImplementSerializationMethodsCorrectly());
+            OldVerifier.VerifyAnalyzerFromCSharp10Library(@"TestCases\ImplementSerializationMethodsCorrectly.CSharp10.cs", new CS.ImplementSerializationMethodsCorrectly());
 
         [TestMethod]
         public void ImplementSerializationMethodsCorrectly_CS_CSharpPreview() =>
-            Verifier.VerifyAnalyzerCSharpPreviewLibrary(@"TestCases\ImplementSerializationMethodsCorrectly.CSharp.Preview.cs", new CS.ImplementSerializationMethodsCorrectly());
+            OldVerifier.VerifyAnalyzerCSharpPreviewLibrary(@"TestCases\ImplementSerializationMethodsCorrectly.CSharp.Preview.cs", new CS.ImplementSerializationMethodsCorrectly());
 
 #endif
 
         [TestMethod]
         public void ImplementSerializationMethodsCorrectly_CS_InvalidCode() =>
-            Verifier.VerifyCSharpAnalyzer(@"
+            OldVerifier.VerifyCSharpAnalyzer(@"
 [Serializable]
 public class Foo
 {
@@ -59,6 +59,6 @@ public class Foo
 
         [TestMethod]
         public void ImplementSerializationMethodsCorrectly_VB() =>
-            Verifier.VerifyAnalyzer(@"TestCases\ImplementSerializationMethodsCorrectly.vb", new VB.ImplementSerializationMethodsCorrectly());
+            OldVerifier.VerifyAnalyzer(@"TestCases\ImplementSerializationMethodsCorrectly.vb", new VB.ImplementSerializationMethodsCorrectly());
     }
 }

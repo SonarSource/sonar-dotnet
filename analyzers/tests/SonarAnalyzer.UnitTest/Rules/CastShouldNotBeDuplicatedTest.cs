@@ -29,16 +29,16 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         public void CastShouldNotBeDuplicated() =>
-            Verifier.VerifyAnalyzer(@"TestCases\CastShouldNotBeDuplicated.cs", new CastShouldNotBeDuplicated());
+            OldVerifier.VerifyAnalyzer(@"TestCases\CastShouldNotBeDuplicated.cs", new CastShouldNotBeDuplicated());
 
 #if NET
         [TestMethod]
         public void CastShouldNotBeDuplicated_CSharp9() =>
-            Verifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\CastShouldNotBeDuplicated.CSharp9.cs", new CastShouldNotBeDuplicated());
+            OldVerifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\CastShouldNotBeDuplicated.CSharp9.cs", new CastShouldNotBeDuplicated());
 
         [TestMethod]
         public void CastShouldNotBeDuplicated_CSharp10() =>
-            Verifier.VerifyAnalyzerFromCSharp10Library(@"TestCases\CastShouldNotBeDuplicated.CSharp10.cs", new CastShouldNotBeDuplicated());
+            OldVerifier.VerifyAnalyzerFromCSharp10Library(@"TestCases\CastShouldNotBeDuplicated.CSharp10.cs", new CastShouldNotBeDuplicated());
 #endif
     }
 }

@@ -29,11 +29,11 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         public void RedundantDeclaration() =>
-            Verifier.VerifyAnalyzer(@"TestCases\RedundantDeclaration.cs", new RedundantDeclaration(), ParseOptionsHelper.BeforeCSharp10);
+            OldVerifier.VerifyAnalyzer(@"TestCases\RedundantDeclaration.cs", new RedundantDeclaration(), ParseOptionsHelper.BeforeCSharp10);
 
         [TestMethod]
         public void RedundantDeclaration_UnusedLambdaParameters_BeforeCSharp9() =>
-            Verifier.VerifyCSharpAnalyzer(
+            OldVerifier.VerifyCSharpAnalyzer(
                 @"using System; public class C { public void M() { Action<int, int> a = (p1, p2) => { }; /* Compliant - Lambda discard parameters have been introduced in C# 9 */ } }",
                 new RedundantDeclaration(),
                 ParseOptionsHelper.BeforeCSharp9);
@@ -41,11 +41,11 @@ namespace SonarAnalyzer.UnitTest.Rules
 #if NET
         [TestMethod]
         public void RedundantDeclaration_CSharp9() =>
-            Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\RedundantDeclaration.CSharp9.cs", new RedundantDeclaration());
+            OldVerifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\RedundantDeclaration.CSharp9.cs", new RedundantDeclaration());
 
         [TestMethod]
         public void RedundantDeclaration_CSharp9_CodeFix_TitleRedundantParameterName() =>
-            Verifier.VerifyCodeFix(@"TestCases\RedundantDeclaration.CSharp9.cs",
+            OldVerifier.VerifyCodeFix(@"TestCases\RedundantDeclaration.CSharp9.cs",
                                    @"TestCases\RedundantDeclaration.CSharp9.Fixed.cs",
                                    new RedundantDeclaration(),
                                    new RedundantDeclarationCodeFixProvider(),
@@ -54,11 +54,11 @@ namespace SonarAnalyzer.UnitTest.Rules
 
         [TestMethod]
         public void RedundantDeclaration_CSharp10() =>
-            Verifier.VerifyAnalyzerFromCSharp10Library(@"TestCases\RedundantDeclaration.CSharp10.cs", new RedundantDeclaration());
+            OldVerifier.VerifyAnalyzerFromCSharp10Library(@"TestCases\RedundantDeclaration.CSharp10.cs", new RedundantDeclaration());
 
         [TestMethod]
         public void RedundantDeclaration_CSharp10_CodeFix_ExplicitDelegate() =>
-            Verifier.VerifyCodeFix(@"TestCases\RedundantDeclaration.CSharp10.cs",
+            OldVerifier.VerifyCodeFix(@"TestCases\RedundantDeclaration.CSharp10.cs",
                                    @"TestCases\RedundantDeclaration.CSharp10.Fixed.cs",
                                    new RedundantDeclaration(),
                                    new RedundantDeclarationCodeFixProvider(),
@@ -68,7 +68,7 @@ namespace SonarAnalyzer.UnitTest.Rules
 
         [TestMethod]
         public void RedundantDeclaration_CodeFix_ArraySize() =>
-            Verifier.VerifyCodeFix(@"TestCases\RedundantDeclaration.cs",
+            OldVerifier.VerifyCodeFix(@"TestCases\RedundantDeclaration.cs",
                                    @"TestCases\RedundantDeclaration.ArraySize.Fixed.cs",
                                    new RedundantDeclaration(),
                                    new RedundantDeclarationCodeFixProvider(),
@@ -76,7 +76,7 @@ namespace SonarAnalyzer.UnitTest.Rules
 
         [TestMethod]
         public void RedundantDeclaration_CodeFix_ArrayType() =>
-            Verifier.VerifyCodeFix(@"TestCases\RedundantDeclaration.cs",
+            OldVerifier.VerifyCodeFix(@"TestCases\RedundantDeclaration.cs",
                                    @"TestCases\RedundantDeclaration.ArrayType.Fixed.cs",
                                    new RedundantDeclaration(),
                                    new RedundantDeclarationCodeFixProvider(),
@@ -84,7 +84,7 @@ namespace SonarAnalyzer.UnitTest.Rules
 
         [TestMethod]
         public void RedundantDeclaration_CodeFix_DelegateParameterList() =>
-            Verifier.VerifyCodeFix(@"TestCases\RedundantDeclaration.cs",
+            OldVerifier.VerifyCodeFix(@"TestCases\RedundantDeclaration.cs",
                                    @"TestCases\RedundantDeclaration.DelegateParameterList.Fixed.cs",
                                    new RedundantDeclaration(),
                                    new RedundantDeclarationCodeFixProvider(),
@@ -92,7 +92,7 @@ namespace SonarAnalyzer.UnitTest.Rules
 
         [TestMethod]
         public void RedundantDeclaration_CodeFix_ExplicitDelegate() =>
-            Verifier.VerifyCodeFix(@"TestCases\RedundantDeclaration.cs",
+            OldVerifier.VerifyCodeFix(@"TestCases\RedundantDeclaration.cs",
                                    @"TestCases\RedundantDeclaration.ExplicitDelegate.Fixed.cs",
                                    new RedundantDeclaration(),
                                    new RedundantDeclarationCodeFixProvider(),
@@ -101,7 +101,7 @@ namespace SonarAnalyzer.UnitTest.Rules
 
         [TestMethod]
         public void RedundantDeclaration_CodeFix_ExplicitNullable() =>
-            Verifier.VerifyCodeFix(@"TestCases\RedundantDeclaration.cs",
+            OldVerifier.VerifyCodeFix(@"TestCases\RedundantDeclaration.cs",
                                    @"TestCases\RedundantDeclaration.ExplicitNullable.Fixed.cs",
                                    new RedundantDeclaration(),
                                    new RedundantDeclarationCodeFixProvider(),
@@ -109,7 +109,7 @@ namespace SonarAnalyzer.UnitTest.Rules
 
         [TestMethod]
         public void RedundantDeclaration_CodeFix_LambdaParameterType() =>
-            Verifier.VerifyCodeFix(@"TestCases\RedundantDeclaration.cs",
+            OldVerifier.VerifyCodeFix(@"TestCases\RedundantDeclaration.cs",
                                    @"TestCases\RedundantDeclaration.LambdaParameterType.Fixed.cs",
                                    new RedundantDeclaration(),
                                    new RedundantDeclarationCodeFixProvider(),
@@ -117,7 +117,7 @@ namespace SonarAnalyzer.UnitTest.Rules
 
         [TestMethod]
         public void RedundantDeclaration_CodeFix_ObjectInitializer() =>
-            Verifier.VerifyCodeFix(@"TestCases\RedundantDeclaration.cs",
+            OldVerifier.VerifyCodeFix(@"TestCases\RedundantDeclaration.cs",
                                    @"TestCases\RedundantDeclaration.ObjectInitializer.Fixed.cs",
                                    new RedundantDeclaration(),
                                    new RedundantDeclarationCodeFixProvider(),

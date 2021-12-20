@@ -29,12 +29,12 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         public void FieldsShouldBeEncapsulatedInProperties() =>
-            Verifier.VerifyAnalyzer(@"TestCases\FieldsShouldBeEncapsulatedInProperties.cs", new FieldsShouldBeEncapsulatedInProperties());
+            OldVerifier.VerifyAnalyzer(@"TestCases\FieldsShouldBeEncapsulatedInProperties.cs", new FieldsShouldBeEncapsulatedInProperties());
 
 #if NET
         [TestMethod]
         public void FieldsShouldBeEncapsulatedInProperties_CSharp9() =>
-            Verifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\FieldsShouldBeEncapsulatedInProperties.CSharp9.cs", new FieldsShouldBeEncapsulatedInProperties());
+            OldVerifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\FieldsShouldBeEncapsulatedInProperties.CSharp9.cs", new FieldsShouldBeEncapsulatedInProperties());
 #endif
     }
 }

@@ -30,20 +30,20 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         public void AsyncVoidMethod() =>
-            Verifier.VerifyAnalyzer(@"TestCases\AsyncVoidMethod.cs", new AsyncVoidMethod());
+            OldVerifier.VerifyAnalyzer(@"TestCases\AsyncVoidMethod.cs", new AsyncVoidMethod());
 
 #if NET
         [TestMethod]
         public void AsyncVoidMethod_CSharp9() =>
-            Verifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\AsyncVoidMethod.CSharp9.cs", new AsyncVoidMethod());
+            OldVerifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\AsyncVoidMethod.CSharp9.cs", new AsyncVoidMethod());
 
         [TestMethod]
         public void AsyncVoidMethod_CSharpPreview() =>
-            Verifier.VerifyAnalyzerCSharpPreviewLibrary(@"TestCases\AsyncVoidMethod.CSharpPreview.cs", new AsyncVoidMethod());
+            OldVerifier.VerifyAnalyzerCSharpPreviewLibrary(@"TestCases\AsyncVoidMethod.CSharpPreview.cs", new AsyncVoidMethod());
 
         [TestMethod]
         public void AsyncVoidMethod_CSharp10() =>
-            Verifier.VerifyAnalyzerFromCSharp10Library(
+            OldVerifier.VerifyAnalyzerFromCSharp10Library(
                 @"TestCases\AsyncVoidMethod.CSharp10.cs",
                 new AsyncVoidMethod(),
                 NuGetMetadataReference.MicrosoftVisualStudioQualityToolsUnitTestFramework);
@@ -52,7 +52,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [DataRow("1.1.11")]
         [DataRow(Constants.NuGetLatestVersion)]
         public void AsyncVoidMethod_MsTestV2_CSharpPreview(string testFwkVersion) =>
-            Verifier.VerifyAnalyzerCSharpPreviewLibrary(
+            OldVerifier.VerifyAnalyzerCSharpPreviewLibrary(
                 // The first version of the framework is not compatible with Net 6 so we need to test only v2 with preview features
                 @"TestCases\AsyncVoidMethod_MsTestV2_CSharp.Preview.cs",
                 new AsyncVoidMethod(),
@@ -63,14 +63,14 @@ namespace SonarAnalyzer.UnitTest.Rules
         [DataRow("1.1.11")]
         [DataRow(Constants.NuGetLatestVersion)]
         public void AsyncVoidMethod_MsTestV2(string testFwkVersion) =>
-            Verifier.VerifyAnalyzer(
+            OldVerifier.VerifyAnalyzer(
                 @"TestCases\AsyncVoidMethod_MsTestV2.cs",
                 new AsyncVoidMethod(),
                 NuGetMetadataReference.MSTestTestFramework(testFwkVersion));
 
         [TestMethod]
         public void AsyncVoidMethod_MsTestV1() =>
-            Verifier.VerifyAnalyzer(
+            OldVerifier.VerifyAnalyzer(
                 @"TestCases\AsyncVoidMethod_MsTestV1.cs",
                 new AsyncVoidMethod(),
                 NuGetMetadataReference.MicrosoftVisualStudioQualityToolsUnitTestFramework);

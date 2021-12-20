@@ -29,16 +29,16 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         public void ThisShouldNotBeExposedFromConstructors() =>
-            Verifier.VerifyAnalyzer(@"TestCases\ThisShouldNotBeExposedFromConstructors.cs", new ThisShouldNotBeExposedFromConstructors());
+            OldVerifier.VerifyAnalyzer(@"TestCases\ThisShouldNotBeExposedFromConstructors.cs", new ThisShouldNotBeExposedFromConstructors());
 
 #if NET
         [TestMethod]
         public void ThisShouldNotBeExposedFromConstructors_CSharp9() =>
-            Verifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\ThisShouldNotBeExposedFromConstructors.CSharp9.cs", new ThisShouldNotBeExposedFromConstructors());
+            OldVerifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\ThisShouldNotBeExposedFromConstructors.CSharp9.cs", new ThisShouldNotBeExposedFromConstructors());
 
         [TestMethod]
         public void ThisShouldNotBeExposedFromConstructors_CSharp10() =>
-            Verifier.VerifyAnalyzerFromCSharp10Library(@"TestCases\ThisShouldNotBeExposedFromConstructors.CSharp10.cs", new ThisShouldNotBeExposedFromConstructors());
+            OldVerifier.VerifyAnalyzerFromCSharp10Library(@"TestCases\ThisShouldNotBeExposedFromConstructors.CSharp10.cs", new ThisShouldNotBeExposedFromConstructors());
 
 #endif
     }

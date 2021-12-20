@@ -29,12 +29,12 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         public void NewGuidShouldNotBeUsed() =>
-            Verifier.VerifyAnalyzer(@"TestCases\NewGuidShouldNotBeUsed.cs", new NewGuidShouldNotBeUsed());
+            OldVerifier.VerifyAnalyzer(@"TestCases\NewGuidShouldNotBeUsed.cs", new NewGuidShouldNotBeUsed());
 
 #if NET
         [TestMethod]
         public void NewGuidShouldNotBeUsed_CSharp9() =>
-            Verifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\NewGuidShouldNotBeUsed.CSharp9.cs", new NewGuidShouldNotBeUsed());
+            OldVerifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\NewGuidShouldNotBeUsed.CSharp9.cs", new NewGuidShouldNotBeUsed());
 #endif
     }
 }

@@ -43,7 +43,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework
         Default = FailTest
     }
 
-    public static class Verifier
+    public static class OldVerifier
     {
         public static void VerifyNoExceptionThrown(string path, IEnumerable<DiagnosticAnalyzer> diagnosticAnalyzers, CompilationErrorBehavior checkMode = CompilationErrorBehavior.Default)
         {

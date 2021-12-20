@@ -29,24 +29,24 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         public void GetHashCodeMutable() =>
-            Verifier.VerifyAnalyzer(@"TestCases\GetHashCodeMutable.cs", new GetHashCodeMutable());
+            OldVerifier.VerifyAnalyzer(@"TestCases\GetHashCodeMutable.cs", new GetHashCodeMutable());
 
 #if NET
         [TestMethod]
         public void GetHashCodeMutable_CSharp9() =>
-            Verifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\GetHashCodeMutable.CSharp9.cs", new GetHashCodeMutable());
+            OldVerifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\GetHashCodeMutable.CSharp9.cs", new GetHashCodeMutable());
 #endif
 
         [TestMethod]
         public void GetHashCodeMutable_CodeFix() =>
-            Verifier.VerifyCodeFix(@"TestCases\GetHashCodeMutable.cs",
+            OldVerifier.VerifyCodeFix(@"TestCases\GetHashCodeMutable.cs",
                                    @"TestCases\GetHashCodeMutable.Fixed.cs",
                                    new GetHashCodeMutable(),
                                    new GetHashCodeMutableCodeFixProvider());
 
         [TestMethod]
         public void GetHashCodeMutable_InvalidCode() =>
-            Verifier.VerifyCSharpAnalyzer(@"class
+            OldVerifier.VerifyCSharpAnalyzer(@"class
 {
     int i;
     public override int GetHashCode()

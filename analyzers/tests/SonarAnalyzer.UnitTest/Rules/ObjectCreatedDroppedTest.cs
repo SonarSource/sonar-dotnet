@@ -29,10 +29,10 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         public void ObjectCreatedDropped() =>
-            Verifier.VerifyAnalyzer(@"TestCases\ObjectCreatedDropped.cs", new ObjectCreatedDropped());
+            OldVerifier.VerifyAnalyzer(@"TestCases\ObjectCreatedDropped.cs", new ObjectCreatedDropped());
 
         [TestMethod]
         public void ObjectCreatedDropped_InTest() =>
-            Verifier.VerifyNoIssueReportedInTest(@"TestCases\ObjectCreatedDropped.cs", new ObjectCreatedDropped());
+            OldVerifier.VerifyNoIssueReportedInTest(@"TestCases\ObjectCreatedDropped.cs", new ObjectCreatedDropped());
     }
 }

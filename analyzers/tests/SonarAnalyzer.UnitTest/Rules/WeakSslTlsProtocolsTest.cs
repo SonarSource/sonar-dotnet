@@ -34,14 +34,14 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         public void WeakSslTlsProtocols_CSharp() =>
-            Verifier.VerifyAnalyzer(@"TestCases\WeakSslTlsProtocols.cs",
+            OldVerifier.VerifyAnalyzer(@"TestCases\WeakSslTlsProtocols.cs",
                                     new CS.WeakSslTlsProtocols(),
                                     ParseOptionsHelper.FromCSharp8,
                                     GetAdditionalReferences());
 
         [TestMethod]
         public void WeakSslTlsProtocols_VB() =>
-            Verifier.VerifyAnalyzer(@"TestCases\WeakSslTlsProtocols.vb",
+            OldVerifier.VerifyAnalyzer(@"TestCases\WeakSslTlsProtocols.vb",
                                     new VB.WeakSslTlsProtocols(),
                                     GetAdditionalReferences());
 

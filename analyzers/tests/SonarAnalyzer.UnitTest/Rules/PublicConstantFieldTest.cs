@@ -30,20 +30,20 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         public void PublicConstantField_CSharp() =>
-            Verifier.VerifyAnalyzer(@"TestCases\PublicConstantField.cs", new CS.PublicConstantField());
+            OldVerifier.VerifyAnalyzer(@"TestCases\PublicConstantField.cs", new CS.PublicConstantField());
 
 #if NET
         [TestMethod]
         public void PublicConstantField_CSharp9() =>
-            Verifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\PublicConstantField.CSharp9.cs", new CS.PublicConstantField());
+            OldVerifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\PublicConstantField.CSharp9.cs", new CS.PublicConstantField());
 
         [TestMethod]
         public void PublicConstantField_CSharp10() =>
-            Verifier.VerifyAnalyzerFromCSharp10Library(@"TestCases\PublicConstantField.CSharp10.cs", new CS.PublicConstantField());
+            OldVerifier.VerifyAnalyzerFromCSharp10Library(@"TestCases\PublicConstantField.CSharp10.cs", new CS.PublicConstantField());
 #endif
 
         [TestMethod]
         public void PublicConstantField_VB() =>
-            Verifier.VerifyAnalyzer(@"TestCases\PublicConstantField.vb", new VB.PublicConstantField());
+            OldVerifier.VerifyAnalyzer(@"TestCases\PublicConstantField.vb", new VB.PublicConstantField());
     }
 }

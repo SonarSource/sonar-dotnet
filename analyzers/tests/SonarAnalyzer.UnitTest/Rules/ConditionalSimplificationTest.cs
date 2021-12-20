@@ -33,19 +33,19 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         public void ConditionalSimplification_BeforeCSharp8() =>
-            Verifier.VerifyAnalyzer(@"TestCases\ConditionalSimplification.BeforeCSharp8.cs",
+            OldVerifier.VerifyAnalyzer(@"TestCases\ConditionalSimplification.BeforeCSharp8.cs",
                                     new ConditionalSimplification(),
                                     ParseOptionsHelper.BeforeCSharp8);
 
         [TestMethod]
         public void ConditionalSimplification_CSharp8() =>
-            Verifier.VerifyAnalyzer(@"TestCases\ConditionalSimplification.CSharp8.cs",
+            OldVerifier.VerifyAnalyzer(@"TestCases\ConditionalSimplification.CSharp8.cs",
                                     new ConditionalSimplification(),
                                     new[] { new CSharpParseOptions(LanguageVersion.CSharp8) });
 
         [TestMethod]
         public void ConditionalSimplification_CSharp8_CodeFix() =>
-            Verifier.VerifyCodeFix(@"TestCases\ConditionalSimplification.CSharp8.cs",
+            OldVerifier.VerifyCodeFix(@"TestCases\ConditionalSimplification.CSharp8.cs",
                                    @"TestCases\ConditionalSimplification.CSharp8.Fixed.cs",
                                    new ConditionalSimplification(),
                                    new ConditionalSimplificationCodeFixProvider(),
@@ -53,24 +53,24 @@ namespace SonarAnalyzer.UnitTest.Rules
 
         [TestMethod]
         public void ConditionalSimplification_FromCSharp8() =>
-            Verifier.VerifyAnalyzer(@"TestCases\ConditionalSimplification.FromCSharp8.cs",
+            OldVerifier.VerifyAnalyzer(@"TestCases\ConditionalSimplification.FromCSharp8.cs",
                                     new ConditionalSimplification(),
                                     ParseOptionsHelper.FromCSharp8);
 #if NET
         [TestMethod]
         public void ConditionalSimplification_FromCSharp9() =>
-            Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\ConditionalSimplification.FromCSharp9.cs",
+            OldVerifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\ConditionalSimplification.FromCSharp9.cs",
                                                       new ConditionalSimplification());
 
         [TestMethod]
         public void ConditionalSimplification_FromCSharp10() =>
-            Verifier.VerifyAnalyzerFromCSharp10Console(@"TestCases\ConditionalSimplification.FromCSharp10.cs",
+            OldVerifier.VerifyAnalyzerFromCSharp10Console(@"TestCases\ConditionalSimplification.FromCSharp10.cs",
                                                        new ConditionalSimplification());
 #endif
 
         [TestMethod]
         public void ConditionalSimplification_BeforeCSharp8_CodeFix() =>
-            Verifier.VerifyCodeFix(@"TestCases\ConditionalSimplification.BeforeCSharp8.cs",
+            OldVerifier.VerifyCodeFix(@"TestCases\ConditionalSimplification.BeforeCSharp8.cs",
                                    @"TestCases\ConditionalSimplification.BeforeCSharp8.Fixed.cs",
                                    new ConditionalSimplification(),
                                    new ConditionalSimplificationCodeFixProvider(),
@@ -78,7 +78,7 @@ namespace SonarAnalyzer.UnitTest.Rules
 
         [TestMethod]
         public void ConditionalSimplification_FromCSharp8_CodeFix() =>
-            Verifier.VerifyCodeFix(@"TestCases\ConditionalSimplification.FromCSharp8.cs",
+            OldVerifier.VerifyCodeFix(@"TestCases\ConditionalSimplification.FromCSharp8.cs",
                                    @"TestCases\ConditionalSimplification.FromCSharp8.Fixed.cs",
                                    new ConditionalSimplification(),
                                    new ConditionalSimplificationCodeFixProvider(),
@@ -87,7 +87,7 @@ namespace SonarAnalyzer.UnitTest.Rules
 #if NET
         [TestMethod]
         public void ConditionalSimplification_FromCSharp9_CodeFix() =>
-            Verifier.VerifyCodeFix(@"TestCases\ConditionalSimplification.FromCSharp9.cs",
+            OldVerifier.VerifyCodeFix(@"TestCases\ConditionalSimplification.FromCSharp9.cs",
                                    @"TestCases\ConditionalSimplification.FromCSharp9.Fixed.cs",
                                    new ConditionalSimplification(),
                                    new ConditionalSimplificationCodeFixProvider(),
@@ -96,7 +96,7 @@ namespace SonarAnalyzer.UnitTest.Rules
 
         [TestMethod]
         public void ConditionalSimplification_FromCSharp10_CodeFix() =>
-            Verifier.VerifyCodeFix(@"TestCases\ConditionalSimplification.FromCSharp10.cs",
+            OldVerifier.VerifyCodeFix(@"TestCases\ConditionalSimplification.FromCSharp10.cs",
                                    @"TestCases\ConditionalSimplification.FromCSharp10.Fixed.cs",
                                    new ConditionalSimplification(),
                                    new ConditionalSimplificationCodeFixProvider(),

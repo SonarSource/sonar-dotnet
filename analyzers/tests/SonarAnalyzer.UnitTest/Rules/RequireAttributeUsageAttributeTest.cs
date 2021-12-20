@@ -29,12 +29,12 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         public void RequireAttributeUsageAttribute() =>
-            Verifier.VerifyAnalyzer(@"TestCases\RequireAttributeUsageAttribute.cs", new RequireAttributeUsageAttribute());
+            OldVerifier.VerifyAnalyzer(@"TestCases\RequireAttributeUsageAttribute.cs", new RequireAttributeUsageAttribute());
 
 #if NET
         [TestMethod]
         public void RequireAttributeUsageAttribute_CSharpPreview() =>
-            Verifier.VerifyAnalyzerCSharpPreviewLibrary(@"TestCases\RequireAttributeUsageAttribute.CSharp.Preview.cs", new RequireAttributeUsageAttribute());
+            OldVerifier.VerifyAnalyzerCSharpPreviewLibrary(@"TestCases\RequireAttributeUsageAttribute.CSharp.Preview.cs", new RequireAttributeUsageAttribute());
 #endif
     }
 }

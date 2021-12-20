@@ -30,13 +30,13 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         public void ParametersCorrectOrder_CS() =>
-            Verifier.VerifyAnalyzer(@"TestCases\ParametersCorrectOrder.cs",
+            OldVerifier.VerifyAnalyzer(@"TestCases\ParametersCorrectOrder.cs",
                 new CS.ParametersCorrectOrder(),
                 ParseOptionsHelper.FromCSharp8);
 
         [TestMethod]
         public void ParametersCorrectOrder_InvalidCode_CS() =>
-            Verifier.VerifyCSharpAnalyzer(@"
+            OldVerifier.VerifyCSharpAnalyzer(@"
 public class Foo
 {
     public void Bar()
@@ -49,12 +49,12 @@ public class Foo
 
         [TestMethod]
         public void ParametersCorrectOrder_VB() =>
-            Verifier.VerifyAnalyzer(@"TestCases\ParametersCorrectOrder.vb",
+            OldVerifier.VerifyAnalyzer(@"TestCases\ParametersCorrectOrder.vb",
                 new VB.ParametersCorrectOrder());
 
         [TestMethod]
         public void ParametersCorrectOrder_InvalidCode_VB() =>
-            Verifier.VerifyVisualBasicAnalyzer(@"
+            OldVerifier.VerifyVisualBasicAnalyzer(@"
 Public Class Foo
     Public Sub Bar()
         Dim x = New ()

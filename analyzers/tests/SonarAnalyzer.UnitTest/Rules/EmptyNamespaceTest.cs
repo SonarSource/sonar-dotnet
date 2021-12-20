@@ -29,19 +29,19 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         public void EmptyNamespace() =>
-            Verifier.VerifyAnalyzer(@"TestCases\EmptyNamespace.cs", new EmptyNamespace());
+            OldVerifier.VerifyAnalyzer(@"TestCases\EmptyNamespace.cs", new EmptyNamespace());
 
 #if NET
         [TestMethod]
         public void EmptyNamespace_CSharp10() =>
-            Verifier.VerifyAnalyzerFromCSharp10Library(
+            OldVerifier.VerifyAnalyzerFromCSharp10Library(
                 new[] { @"TestCases\EmptyNamespace.CSharp10.Empty.cs", @"TestCases\EmptyNamespace.CSharp10.NotEmpty.cs" },
                 new EmptyNamespace());
 #endif
 
         [TestMethod]
         public void EmptyNamespace_CodeFix() =>
-            Verifier.VerifyCodeFix(
+            OldVerifier.VerifyCodeFix(
                 @"TestCases\EmptyNamespace.cs",
                 @"TestCases\EmptyNamespace.Fixed.cs",
                 @"TestCases\EmptyNamespace.Fixed.Batch.cs",

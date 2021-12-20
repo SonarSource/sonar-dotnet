@@ -33,7 +33,7 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         public void SqlKeywordsDelimitedBySpace() =>
-            Verifier.VerifyAnalyzer(
+            OldVerifier.VerifyAnalyzer(
                 @"TestCases\SqlKeywordsDelimitedBySpace.cs",
                 new SqlKeywordsDelimitedBySpace(),
                 ParseOptionsHelper.FromCSharp8,
@@ -41,14 +41,14 @@ namespace SonarAnalyzer.UnitTest.Rules
 
         [TestMethod]
         public void SqlKeywordsDelimitedBySpace_UsingInsideNamespace() =>
-            Verifier.VerifyNonConcurrentAnalyzer(
+            OldVerifier.VerifyNonConcurrentAnalyzer(
                 @"TestCases\SqlKeywordsDelimitedBySpace_InsideNamespace.cs",
                 new SqlKeywordsDelimitedBySpace(),
                 GetAdditionalReferences());
 
         [TestMethod]
         public void SqlKeywordsDelimitedBySpace_DefaultNamespace() =>
-            Verifier.VerifyNoIssueReportedInTest(
+            OldVerifier.VerifyNoIssueReportedInTest(
                 @"TestCases\SqlKeywordsDelimitedBySpace_DefaultNamespace.cs",
                 new SqlKeywordsDelimitedBySpace(),
                 GetAdditionalReferences());
@@ -57,7 +57,7 @@ namespace SonarAnalyzer.UnitTest.Rules
 
         [TestMethod]
         public void SqlKeywordsDelimitedBySpace_CSharp10_GlobalUsings() =>
-            Verifier.VerifyAnalyzerFromCSharp10Library(
+            OldVerifier.VerifyAnalyzerFromCSharp10Library(
                 new[]
                 {
                     @"TestCases\SqlKeywordsDelimitedBySpace.CSharp10.GlobalUsing.cs",
@@ -68,14 +68,14 @@ namespace SonarAnalyzer.UnitTest.Rules
 
         [TestMethod]
         public void SqlKeywordsDelimitedBySpace_CSharp10_FileScopesNamespace() =>
-            Verifier.VerifyAnalyzerFromCSharp10Library(
+            OldVerifier.VerifyAnalyzerFromCSharp10Library(
                 new[] { @"TestCases\SqlKeywordsDelimitedBySpace.CSharp10.FileScopedNamespaceDeclaration.cs", },
                 new SqlKeywordsDelimitedBySpace(),
                 GetAdditionalReferences());
 
         [TestMethod]
         public void SqlKeywordsDelimitedBySpace_CSharp10() =>
-            Verifier.VerifyAnalyzerFromCSharp10Library(
+            OldVerifier.VerifyAnalyzerFromCSharp10Library(
                 new[] { @"TestCases\SqlKeywordsDelimitedBySpace.CSharp10.cs", },
                 new SqlKeywordsDelimitedBySpace(),
                 GetAdditionalReferences());
@@ -105,7 +105,7 @@ namespace SonarAnalyzer.UnitTest.Rules
                 .Concat(NuGetMetadataReference.SystemDataSqlClient())
                 .Concat(NuGetMetadataReference.SystemDataSQLiteCore());
 
-            Verifier.VerifyCSharpAnalyzer($@"
+            OldVerifier.VerifyCSharpAnalyzer($@"
 using {sqlNamespace};
 namespace TestNamespace
 {{
@@ -133,7 +133,7 @@ namespace TestNamespace
                 .Concat(NuGetMetadataReference.SystemDataSqlClient())
                 .Concat(NuGetMetadataReference.SystemDataOracleClient());
 
-            Verifier.VerifyCSharpAnalyzer($@"
+            OldVerifier.VerifyCSharpAnalyzer($@"
 using {sqlNamespace};
 namespace TestNamespace
 {{

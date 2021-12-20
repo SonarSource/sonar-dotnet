@@ -29,6 +29,6 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         public void PropertyWithArrayType() =>
-            Verifier.VerifyAnalyzer(@"TestCases\PropertyWithArrayType.vb", new PropertyWithArrayType());
+            OldVerifier.VerifyAnalyzer(@"TestCases\PropertyWithArrayType.vb", new PropertyWithArrayType());
     }
 }

@@ -29,20 +29,20 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         public void CheckArgumentException() =>
-            Verifier.VerifyAnalyzer(@"TestCases\CheckArgumentException.cs", new CheckArgumentException());
+            OldVerifier.VerifyAnalyzer(@"TestCases\CheckArgumentException.cs", new CheckArgumentException());
 
 #if NET
         [TestMethod]
         public void CheckArgumentException_CSharp9() =>
-            Verifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\CheckArgumentException.CSharp9.cs", new CheckArgumentException());
+            OldVerifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\CheckArgumentException.CSharp9.cs", new CheckArgumentException());
 
         [TestMethod]
         public void CheckArgumentException_CSharp10() =>
-            Verifier.VerifyAnalyzerFromCSharp10Library(@"TestCases\CheckArgumentException.CSharp10.cs", new CheckArgumentException());
+            OldVerifier.VerifyAnalyzerFromCSharp10Library(@"TestCases\CheckArgumentException.CSharp10.cs", new CheckArgumentException());
 
         [TestMethod]
         public void CheckArgumentException_TopLevelStatements() =>
-            Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\CheckArgumentException.TopLevelStatements.cs", new CheckArgumentException());
+            OldVerifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\CheckArgumentException.TopLevelStatements.cs", new CheckArgumentException());
 #endif
     }
 }

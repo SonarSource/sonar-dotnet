@@ -29,11 +29,11 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         public void DoNotUseByVal() =>
-            Verifier.VerifyAnalyzer(@"TestCases\DoNotUseByVal.vb", new DoNotUseByVal());
+            OldVerifier.VerifyAnalyzer(@"TestCases\DoNotUseByVal.vb", new DoNotUseByVal());
 
         [TestMethod]
         public void DoNotUseByValCodeFix() =>
-            Verifier.VerifyCodeFix(
+            OldVerifier.VerifyCodeFix(
                 @"TestCases\DoNotUseByVal.vb",
                 @"TestCases\DoNotUseByVal.Fixed.vb",
                 new DoNotUseByVal(),

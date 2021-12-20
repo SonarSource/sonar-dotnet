@@ -35,7 +35,7 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         public void ClassName_CS() =>
-            Verifier.VerifyNonConcurrentAnalyzer(
+            OldVerifier.VerifyNonConcurrentAnalyzer(
                 new[]
                 {
                     @"TestCases\ClassName.cs",
@@ -47,45 +47,45 @@ namespace SonarAnalyzer.UnitTest.Rules
 
         [TestMethod]
         public void ClassName_InTestProject_CS() =>
-            Verifier.VerifyAnalyzer(@"TestCases\ClassName.Tests.cs", new CS.ClassAndMethodName(), ParseOptionsHelper.FromCSharp8, NuGetMetadataReference.MSTestTestFrameworkV1);
+            OldVerifier.VerifyAnalyzer(@"TestCases\ClassName.Tests.cs", new CS.ClassAndMethodName(), ParseOptionsHelper.FromCSharp8, NuGetMetadataReference.MSTestTestFrameworkV1);
 
 #if NET
         [TestMethod]
         public void ClassName_TopLevelStatement_CS() =>
-            Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\ClassName.TopLevelStatement.cs", new CS.ClassAndMethodName());
+            OldVerifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\ClassName.TopLevelStatement.cs", new CS.ClassAndMethodName());
 
         [TestMethod]
         public void ClassName_TopLevelStatement_InTestProject_CS() =>
-            Verifier.VerifyAnalyzerFromCSharp9ConsoleInTest(@"TestCases\ClassName.TopLevelStatement.Test.cs", new CS.ClassAndMethodName());
+            OldVerifier.VerifyAnalyzerFromCSharp9ConsoleInTest(@"TestCases\ClassName.TopLevelStatement.Test.cs", new CS.ClassAndMethodName());
 
         [TestMethod]
         public void RecordName_CS() =>
-            Verifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\RecordName.cs", new CS.ClassAndMethodName());
+            OldVerifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\RecordName.cs", new CS.ClassAndMethodName());
 
         [TestMethod]
         public void RecordName_InTestProject_CS() =>
-            Verifier.VerifyAnalyzerFromCSharp9LibraryInTest(@"TestCases\RecordName.cs", new CS.ClassAndMethodName());
+            OldVerifier.VerifyAnalyzerFromCSharp9LibraryInTest(@"TestCases\RecordName.cs", new CS.ClassAndMethodName());
 
         [TestMethod]
         public void RecordStructName_CS() =>
-            Verifier.VerifyAnalyzerFromCSharp10Library(@"TestCases\RecordStructName.cs", new CS.ClassAndMethodName());
+            OldVerifier.VerifyAnalyzerFromCSharp10Library(@"TestCases\RecordStructName.cs", new CS.ClassAndMethodName());
 
         [TestMethod]
         public void RecordStructName_InTestProject_CS() =>
-            Verifier.VerifyAnalyzerFromCSharp10LibraryInTest(@"TestCases\RecordStructName.cs", new CS.ClassAndMethodName());
+            OldVerifier.VerifyAnalyzerFromCSharp10LibraryInTest(@"TestCases\RecordStructName.cs", new CS.ClassAndMethodName());
 #endif
 
         [DataTestMethod]
         [DataRow(ProjectType.Product)]
         [DataRow(ProjectType.Test)]
         public void ClassName_VB(ProjectType projectType) =>
-            Verifier.VerifyAnalyzer(@"TestCases\ClassName.vb", new VB.ClassName(), TestHelper.ProjectTypeReference(projectType));
+            OldVerifier.VerifyAnalyzer(@"TestCases\ClassName.vb", new VB.ClassName(), TestHelper.ProjectTypeReference(projectType));
 
         [DataTestMethod]
         [DataRow(ProjectType.Product)]
         [DataRow(ProjectType.Test)]
         public void MethodName(ProjectType projectType) =>
-            Verifier.VerifyAnalyzer(
+            OldVerifier.VerifyAnalyzer(
                 new[]
                 {
                     @"TestCases\MethodName.cs",
@@ -98,15 +98,15 @@ namespace SonarAnalyzer.UnitTest.Rules
 #if NET
         [TestMethod]
         public void MethodName_CSharp9() =>
-            Verifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\MethodName.CSharp9.cs", new CS.ClassAndMethodName());
+            OldVerifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\MethodName.CSharp9.cs", new CS.ClassAndMethodName());
 
         [TestMethod]
         public void MethodName_InTestProject_CSharp9() =>
-            Verifier.VerifyAnalyzerFromCSharp9LibraryInTest(@"TestCases\MethodName.CSharp9.cs", new CS.ClassAndMethodName());
+            OldVerifier.VerifyAnalyzerFromCSharp9LibraryInTest(@"TestCases\MethodName.CSharp9.cs", new CS.ClassAndMethodName());
 
         [TestMethod]
         public void MethodName_CSharpPreview() =>
-            Verifier.VerifyAnalyzerCSharpPreviewLibrary(@"TestCases\MethodName.CSharpPreview.cs", new CS.ClassAndMethodName());
+            OldVerifier.VerifyAnalyzerCSharpPreviewLibrary(@"TestCases\MethodName.CSharpPreview.cs", new CS.ClassAndMethodName());
 #endif
 
         [TestMethod]

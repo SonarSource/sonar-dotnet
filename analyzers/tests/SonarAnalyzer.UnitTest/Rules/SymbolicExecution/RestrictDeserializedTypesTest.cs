@@ -39,7 +39,7 @@ namespace SonarAnalyzer.UnitTest.Rules
 #if NETFRAMEWORK // These serializers are available only when targeting .Net Framework
         [TestMethod]
         public void RestrictDeserializedTypesFormatters() =>
-            Verifier.VerifyAnalyzer(@"TestCases\SymbolicExecution\Sonar\RestrictDeserializedTypes.cs",
+            OldVerifier.VerifyAnalyzer(@"TestCases\SymbolicExecution\Sonar\RestrictDeserializedTypes.cs",
                 new SymbolicExecutionRunner(),
                 ParseOptionsHelper.FromCSharp8,
                 AdditionalReferencesNetFx(),
@@ -47,7 +47,7 @@ namespace SonarAnalyzer.UnitTest.Rules
 
         [TestMethod]
         public void RestrictDeserializedTypes_DoesNotRaiseIssuesForTestProject() =>
-            Verifier.VerifyNoIssueReportedInTest(@"TestCases\SymbolicExecution\Sonar\RestrictDeserializedTypes.cs",
+            OldVerifier.VerifyNoIssueReportedInTest(@"TestCases\SymbolicExecution\Sonar\RestrictDeserializedTypes.cs",
                 new SymbolicExecutionRunner(),
                 ParseOptionsHelper.FromCSharp8,
                 AdditionalReferencesNetFx(),
@@ -55,7 +55,7 @@ namespace SonarAnalyzer.UnitTest.Rules
 
         [TestMethod]
         public void RestrictDeserializedTypesJavaScriptSerializer() =>
-            Verifier.VerifyAnalyzer(@"TestCases\SymbolicExecution\Sonar\RestrictDeserializedTypes.JavaScriptSerializer.cs",
+            OldVerifier.VerifyAnalyzer(@"TestCases\SymbolicExecution\Sonar\RestrictDeserializedTypes.JavaScriptSerializer.cs",
                 new SymbolicExecutionRunner(),
                 ParseOptionsHelper.FromCSharp8,
                 AdditionalReferencesNetFx(),
@@ -63,7 +63,7 @@ namespace SonarAnalyzer.UnitTest.Rules
 
         [TestMethod]
         public void RestrictDeserializedTypesLosFormatter() =>
-            Verifier.VerifyAnalyzer(@"TestCases\SymbolicExecution\Sonar\RestrictDeserializedTypes.LosFormatter.cs",
+            OldVerifier.VerifyAnalyzer(@"TestCases\SymbolicExecution\Sonar\RestrictDeserializedTypes.LosFormatter.cs",
                 new SymbolicExecutionRunner(),
                 ParseOptionsHelper.FromCSharp8,
                 AdditionalReferencesNetFx(),
@@ -79,7 +79,7 @@ namespace SonarAnalyzer.UnitTest.Rules
 #if NET
         [TestMethod]
         public void RestrictDeserializedTypesFormatters_CSharp9() =>
-            Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\SymbolicExecution\Sonar\RestrictDeserializedTypes.CSharp9.cs",
+            OldVerifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\SymbolicExecution\Sonar\RestrictDeserializedTypes.CSharp9.cs",
                 new SymbolicExecutionRunner(),
                 new[] { MetadataReferences.CoreMetadataReference.SystemRuntimeSerializationFormatters },
                 onlyDiagnostics: OnlyDiagnostics);

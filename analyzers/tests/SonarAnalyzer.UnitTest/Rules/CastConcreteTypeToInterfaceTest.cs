@@ -29,6 +29,6 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         public void CastConcreteTypeToInterface() =>
-            Verifier.VerifyAnalyzer(@"TestCases\CastConcreteTypeToInterface.cs", new CastConcreteTypeToInterface());
+            OldVerifier.VerifyAnalyzer(@"TestCases\CastConcreteTypeToInterface.cs", new CastConcreteTypeToInterface());
     }
 }

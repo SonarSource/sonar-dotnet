@@ -28,7 +28,7 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         public void UnusedPrivateMember_Field_Accessibility() =>
-            Verifier.VerifyCSharpAnalyzer(@"
+            OldVerifier.VerifyCSharpAnalyzer(@"
 public class PrivateMembers
 {
     private int privateField; // Noncompliant {{Remove the unused private field 'privateField'.}}
@@ -75,7 +75,7 @@ public class NonPrivateMembers
 
         [TestMethod]
         public void UnusedPrivateMember_Field_MultipleDeclarations() =>
-            Verifier.VerifyCSharpAnalyzer(@"
+            OldVerifier.VerifyCSharpAnalyzer(@"
 public class PrivateMembers
 {
     private int x, y, z; // Noncompliant {{Remove the unused private field 'x'.}}
@@ -91,7 +91,7 @@ public class PrivateMembers
 
         [TestMethod]
         public void UnusedPrivateMember_Fields_DirectReferences() =>
-            Verifier.VerifyCSharpAnalyzer(@"
+            OldVerifier.VerifyCSharpAnalyzer(@"
 using System;
 public class FieldUsages
 {

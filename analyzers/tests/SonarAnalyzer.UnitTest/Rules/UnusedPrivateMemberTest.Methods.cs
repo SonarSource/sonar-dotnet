@@ -28,7 +28,7 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         public void UnusedPrivateMember_Method_Accessibility() =>
-            Verifier.VerifyCSharpAnalyzer(@"
+            OldVerifier.VerifyCSharpAnalyzer(@"
 public class PrivateMembers
 {
     private int PrivateMethod() { return 0; } // Noncompliant {{Remove the unused private method 'PrivateMethod'.}}
@@ -85,7 +85,7 @@ public class InterfaceImpl : IInterface
 
         [TestMethod]
         public void UnusedPrivateMember_Methods_DirectReferences() =>
-            Verifier.VerifyCSharpAnalyzer(@"
+            OldVerifier.VerifyCSharpAnalyzer(@"
 using System;
 using System.Linq;
 public class MethodUsages
@@ -135,7 +135,7 @@ public class MethodUsages
 
         [TestMethod]
         public void UnusedPrivateMember_Methods_Main() =>
-            Verifier.VerifyCSharpAnalyzer(@"
+            OldVerifier.VerifyCSharpAnalyzer(@"
 using System.Threading.Tasks;
 public class NewClass1
 {

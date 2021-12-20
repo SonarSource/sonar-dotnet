@@ -34,13 +34,13 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         public void EncryptingData_CS() =>
-            Verifier.VerifyAnalyzer(@"TestCases\Hotspots\EncryptingData.cs",
+            OldVerifier.VerifyAnalyzer(@"TestCases\Hotspots\EncryptingData.cs",
                 new CS.EncryptingData(AnalyzerConfiguration.AlwaysEnabled),
                 GetAdditionalReferences());
 
         [TestMethod]
         public void EncryptingData_VB() =>
-            Verifier.VerifyAnalyzer(@"TestCases\Hotspots\EncryptingData.vb",
+            OldVerifier.VerifyAnalyzer(@"TestCases\Hotspots\EncryptingData.vb",
                 new VB.EncryptingData(AnalyzerConfiguration.AlwaysEnabled),
                 GetAdditionalReferences());
 

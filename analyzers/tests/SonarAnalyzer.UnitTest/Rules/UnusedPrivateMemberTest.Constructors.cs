@@ -28,7 +28,7 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         public void UnusedPrivateMember_Constructor_Accessibility() =>
-            Verifier.VerifyCSharpAnalyzer(@"
+            OldVerifier.VerifyCSharpAnalyzer(@"
 public class PrivateConstructors
 {
     private PrivateConstructors(int i) { var x = 5; } // Noncompliant {{Remove the unused private constructor 'PrivateConstructors'.}}
@@ -68,7 +68,7 @@ public class NonPrivateMembers
 
         [TestMethod]
         public void UnusedPrivateMember_Constructor_DirectReferences() =>
-            Verifier.VerifyCSharpAnalyzer(@"
+            OldVerifier.VerifyCSharpAnalyzer(@"
 public abstract class PrivateConstructors
 {
     public class Constructor1
@@ -98,7 +98,7 @@ public abstract class PrivateConstructors
 
         [TestMethod]
         public void UnusedPrivateMember_Constructor_Inheritance() =>
-            Verifier.VerifyCSharpAnalyzer(@"
+            OldVerifier.VerifyCSharpAnalyzer(@"
 public class Inheritance
 {
     private abstract class BaseClass1
@@ -126,7 +126,7 @@ public class Inheritance
 
         [TestMethod]
         public void UnusedPrivateMember_Empty_Constructors() =>
-            Verifier.VerifyCSharpAnalyzer(@"
+            OldVerifier.VerifyCSharpAnalyzer(@"
 public class PrivateConstructors
 {
     private PrivateConstructors(int i) { } // Compliant, empty ctors are reported from another rule
@@ -137,7 +137,7 @@ public class PrivateConstructors
         public void UnusedPrivateMember_Illegal_Interface_Constructor() =>
             // While typing code in IDE, we can end up in a state where an interface has a constructor defined.
             // Even though this results in a compiler error (CS0526), IDE will still trigger rules on the interface.
-            Verifier.VerifyCSharpAnalyzer(@"
+            OldVerifier.VerifyCSharpAnalyzer(@"
 public interface IInterface
 {
     // UnusedPrivateMember rule does not trigger AD0001 error from NullReferenceException

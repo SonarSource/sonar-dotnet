@@ -30,30 +30,30 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         public void TooManyParameters_CS_CustomValues() =>
-            Verifier.VerifyAnalyzer(@"TestCases\TooManyParameters_CustomValues.cs", new CS.TooManyParameters { Maximum = 3 }, ParseOptionsHelper.FromCSharp8);
+            OldVerifier.VerifyAnalyzer(@"TestCases\TooManyParameters_CustomValues.cs", new CS.TooManyParameters { Maximum = 3 }, ParseOptionsHelper.FromCSharp8);
 
 #if NET
 
         [TestMethod]
         public void TooManyParameters_CS_CustomValues_CSharp9() =>
-            Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\TooManyParameters_CustomValues.CSharp9.cs", new CS.TooManyParameters { Maximum = 3 });
+            OldVerifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\TooManyParameters_CustomValues.CSharp9.cs", new CS.TooManyParameters { Maximum = 3 });
 
         [TestMethod]
         public void TooManyParameters_CS_CustomValues_CSharpPreview() =>
-            Verifier.VerifyAnalyzerCSharpPreviewLibrary(@"TestCases\TooManyParameters_CustomValues.CSharpPreview.cs", new CS.TooManyParameters { Maximum = 3 });
+            OldVerifier.VerifyAnalyzerCSharpPreviewLibrary(@"TestCases\TooManyParameters_CustomValues.CSharpPreview.cs", new CS.TooManyParameters { Maximum = 3 });
 
 #endif
 
         [TestMethod]
         public void TooManyParameters_VB_CustomValues() =>
-            Verifier.VerifyAnalyzer(@"TestCases\TooManyParameters_CustomValues.vb", new VB.TooManyParameters { Maximum = 3 });
+            OldVerifier.VerifyAnalyzer(@"TestCases\TooManyParameters_CustomValues.vb", new VB.TooManyParameters { Maximum = 3 });
 
         [TestMethod]
         public void TooManyParameters_CS_DefaultValues() =>
-            Verifier.VerifyAnalyzer(@"TestCases\TooManyParameters_DefaultValues.cs", new CS.TooManyParameters(), ParseOptionsHelper.FromCSharp8);
+            OldVerifier.VerifyAnalyzer(@"TestCases\TooManyParameters_DefaultValues.cs", new CS.TooManyParameters(), ParseOptionsHelper.FromCSharp8);
 
         [TestMethod]
         public void TooManyParameters_VB_DefaultValues() =>
-            Verifier.VerifyAnalyzer(@"TestCases\TooManyParameters_DefaultValues.vb", new VB.TooManyParameters());
+            OldVerifier.VerifyAnalyzer(@"TestCases\TooManyParameters_DefaultValues.vb", new VB.TooManyParameters());
     }
 }

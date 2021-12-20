@@ -29,6 +29,6 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         public void IndexedPropertyName() =>
-            Verifier.VerifyAnalyzer(@"TestCases\IndexedPropertyName.vb", new IndexedPropertyName());
+            OldVerifier.VerifyAnalyzer(@"TestCases\IndexedPropertyName.vb", new IndexedPropertyName());
     }
 }

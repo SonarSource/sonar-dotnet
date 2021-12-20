@@ -30,7 +30,7 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         public void StringOrIntegralTypesForIndexers() =>
-            Verifier.VerifyAnalyzer(
+            OldVerifier.VerifyAnalyzer(
                 @"TestCases\StringOrIntegralTypesForIndexers.cs",
                 new StringOrIntegralTypesForIndexers(),
                 ParseOptionsHelper.FromCSharp8,
@@ -39,7 +39,7 @@ namespace SonarAnalyzer.UnitTest.Rules
 #if NET
         [TestMethod]
         public void StringOrIntegralTypesForIndexers_CSharp9() =>
-            Verifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\StringOrIntegralTypesForIndexers.CSharp9.cs", new StringOrIntegralTypesForIndexers());
+            OldVerifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\StringOrIntegralTypesForIndexers.CSharp9.cs", new StringOrIntegralTypesForIndexers());
 #endif
     }
 }

@@ -30,11 +30,11 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         public void SwitchCasesMinimumThree_CS() =>
-            Verifier.VerifyAnalyzer(@"TestCases\SwitchCasesMinimumThree.cs", new CS.SwitchCasesMinimumThree(), ParseOptionsHelper.FromCSharp8);
+            OldVerifier.VerifyAnalyzer(@"TestCases\SwitchCasesMinimumThree.cs", new CS.SwitchCasesMinimumThree(), ParseOptionsHelper.FromCSharp8);
 
         [TestMethod]
         public void SwitchCasesMinimumThree_VB() =>
-            Verifier.VerifyAnalyzer(@"TestCases\SwitchCasesMinimumThree.vb",
+            OldVerifier.VerifyAnalyzer(@"TestCases\SwitchCasesMinimumThree.vb",
                 new VB.SwitchCasesMinimumThree());
     }
 }

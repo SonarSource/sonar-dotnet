@@ -30,12 +30,12 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         public void DoNotLockOnSharedResource_CS() =>
-            Verifier.VerifyAnalyzer(@"TestCases\DoNotLockOnSharedResource.cs",
+            OldVerifier.VerifyAnalyzer(@"TestCases\DoNotLockOnSharedResource.cs",
                 new CS.DoNotLockOnSharedResource());
 
         [TestMethod]
         public void DoNotLockOnSharedResource_VB() =>
-            Verifier.VerifyAnalyzer(@"TestCases\DoNotLockOnSharedResource.vb",
+            OldVerifier.VerifyAnalyzer(@"TestCases\DoNotLockOnSharedResource.vb",
                 new VB.DoNotLockOnSharedResource());
     }
 }

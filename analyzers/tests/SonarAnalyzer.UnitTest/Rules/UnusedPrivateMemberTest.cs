@@ -37,7 +37,7 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         public void UnusedPrivateMember_DebuggerDisplay_Attribute() =>
-            Verifier.VerifyCSharpAnalyzer(@"
+            OldVerifier.VerifyCSharpAnalyzer(@"
 // https://github.com/SonarSource/sonar-dotnet/issues/1195
 [System.Diagnostics.DebuggerDisplay(""{field1}"", Name = ""{Property1} {Property3}"", Type = ""{Method1()}"")]
 public class MethodUsages
@@ -59,7 +59,7 @@ public class MethodUsages
 
         [TestMethod]
         public void UnusedPrivateMember_Members_With_Attributes_Are_Not_Removable() =>
-            Verifier.VerifyCSharpAnalyzer(@"
+            OldVerifier.VerifyCSharpAnalyzer(@"
 using System;
 public class FieldUsages
 {
@@ -79,7 +79,7 @@ public class FieldUsages
 
         [TestMethod]
         public void UnusedPrivateMember_Assembly_Level_Attributes() =>
-            Verifier.VerifyCSharpAnalyzer(@"
+            OldVerifier.VerifyCSharpAnalyzer(@"
 [assembly: System.Reflection.AssemblyCompany(Foo.Constants.AppCompany)]
 public static class Foo
 {
@@ -92,7 +92,7 @@ public static class Foo
 
         [TestMethod]
         public void UnusedPrivateMemberWithPartialClasses() =>
-            Verifier.VerifyAnalyzer(
+            OldVerifier.VerifyAnalyzer(
                 new[]
                 {
                     @"TestCases\UnusedPrivateMember.part1.cs",
@@ -106,7 +106,7 @@ public static class Foo
             // could be added through XAML and no warning will be generated if the
             // method is removed, which could lead to serious problems that are hard
             // to diagnose.
-            Verifier.VerifyCSharpAnalyzer(@"
+            OldVerifier.VerifyCSharpAnalyzer(@"
 using System;
 public class NewClass
 {
@@ -120,7 +120,7 @@ public partial class PartialClass
 
         [TestMethod]
         public void UnusedPrivateMember_Unity3D_Ignored() =>
-            Verifier.VerifyCSharpAnalyzer(@"
+            OldVerifier.VerifyCSharpAnalyzer(@"
 // https://github.com/SonarSource/sonar-dotnet/issues/159
 public class UnityMessages1 : UnityEngine.MonoBehaviour
 {
@@ -157,7 +157,7 @@ namespace UnityEditor
 
         [TestMethod]
         public void EntityFrameworkMigration_Ignored() =>
-            Verifier.VerifyCSharpAnalyzer(@"
+            OldVerifier.VerifyCSharpAnalyzer(@"
 namespace EntityFrameworkMigrations
 {
     using Microsoft.EntityFrameworkCore.Migrations;
@@ -175,21 +175,21 @@ namespace EntityFrameworkMigrations
         [DataRow(ProjectType.Product)]
         [DataRow(ProjectType.Test)]
         public void UnusedPrivateMember(ProjectType projectType) =>
-            Verifier.VerifyAnalyzer(
+            OldVerifier.VerifyAnalyzer(
                 @"TestCases\UnusedPrivateMember.cs",
                 new UnusedPrivateMember(),
                 TestHelper.ProjectTypeReference(projectType));
 
         [TestMethod]
         public void UnusedPrivateMember_FromCSharp7() =>
-            Verifier.VerifyAnalyzer(
+            OldVerifier.VerifyAnalyzer(
                 @"TestCases\UnusedPrivateMember.CSharp7.cs",
                 new UnusedPrivateMember(),
                 ParseOptionsHelper.FromCSharp7);
 
         [TestMethod]
         public void UnusedPrivateMember_FromCSharp8() =>
-            Verifier.VerifyAnalyzer(
+            OldVerifier.VerifyAnalyzer(
                 @"TestCases\UnusedPrivateMember.CSharp8.cs",
                 new UnusedPrivateMember(),
                 ParseOptionsHelper.FromCSharp8,
@@ -198,7 +198,7 @@ namespace EntityFrameworkMigrations
 #if NET
         [TestMethod]
         public void UnusedPrivateMember_FromCSharp9() =>
-            Verifier.VerifyAnalyzerFromCSharp9Library(
+            OldVerifier.VerifyAnalyzerFromCSharp9Library(
                 new[]
                 {
                     @"TestCases\UnusedPrivateMember.CSharp9.cs",
@@ -208,20 +208,20 @@ namespace EntityFrameworkMigrations
 
         [TestMethod]
         public void UnusedPrivateMember_FromCSharp9_TopLevelStatements() =>
-            Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\UnusedPrivateMember.CSharp9.TopLevelStatements.cs", new UnusedPrivateMember());
+            OldVerifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\UnusedPrivateMember.CSharp9.TopLevelStatements.cs", new UnusedPrivateMember());
 
         [TestMethod]
         public void UnusedPrivateMember_FromCSharp10() =>
-            Verifier.VerifyAnalyzerFromCSharp10Library(@"TestCases\UnusedPrivateMember.CSharp10.cs", new UnusedPrivateMember());
+            OldVerifier.VerifyAnalyzerFromCSharp10Library(@"TestCases\UnusedPrivateMember.CSharp10.cs", new UnusedPrivateMember());
 
         [TestMethod]
         public void UnusedPrivateMember_FromCSharpPreview() =>
-            Verifier.VerifyAnalyzerCSharpPreviewLibrary(@"TestCases\UnusedPrivateMember.CSharpPreview.cs", new UnusedPrivateMember());
+            OldVerifier.VerifyAnalyzerCSharpPreviewLibrary(@"TestCases\UnusedPrivateMember.CSharpPreview.cs", new UnusedPrivateMember());
 #endif
 
         [TestMethod]
         public void UnusedPrivateMember_CodeFix() =>
-            Verifier.VerifyCodeFix(
+            OldVerifier.VerifyCodeFix(
                 @"TestCases\UnusedPrivateMember.cs",
                 @"TestCases\UnusedPrivateMember.Fixed.cs",
                 @"TestCases\UnusedPrivateMember.Fixed.Batch.cs",
@@ -230,7 +230,7 @@ namespace EntityFrameworkMigrations
 
         [TestMethod]
         public void UnusedPrivateMember_UsedInGeneratedFile() =>
-            Verifier.VerifyAnalyzer(
+            OldVerifier.VerifyAnalyzer(
                 new[]
                 {
                     @"TestCases\UnusedPrivateMember.CalledFromGenerated.cs",
@@ -241,7 +241,7 @@ namespace EntityFrameworkMigrations
         [TestMethod]
         public void UnusedPrivateMember_Performance()
         {
-            Action verifyAnalyzer = () => Verifier.VerifyAnalyzer(new[] {@"TestCases\UnusedPrivateMember.Performance.cs"},
+            Action verifyAnalyzer = () => OldVerifier.VerifyAnalyzer(new[] {@"TestCases\UnusedPrivateMember.Performance.cs"},
                                                                   new UnusedPrivateMember(),
                                                                   GetEntityFrameworkCoreReferences("5.0.12")); // Latest before 6.0.0 for .NET 6 that has Linq versioning collision issue
 

@@ -29,16 +29,16 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         public void VirtualEventField() =>
-            Verifier.VerifyAnalyzer(@"TestCases\VirtualEventField.cs", new VirtualEventField());
+            OldVerifier.VerifyAnalyzer(@"TestCases\VirtualEventField.cs", new VirtualEventField());
 
 #if NET
         [TestMethod]
         public void VirtualEventField_CSharp9() =>
-            Verifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\VirtualEventField.CSharp9.cs", new VirtualEventField());
+            OldVerifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\VirtualEventField.CSharp9.cs", new VirtualEventField());
 
         [TestMethod]
         public void VirtualEventField_CSharp9_CodeFix() =>
-            Verifier.VerifyCodeFix(@"TestCases\VirtualEventField.CSharp9.cs",
+            OldVerifier.VerifyCodeFix(@"TestCases\VirtualEventField.CSharp9.cs",
                                    @"TestCases\VirtualEventField.CSharp9.Fixed.cs",
                                    new VirtualEventField(),
                                    new VirtualEventFieldCodeFixProvider(),
@@ -47,7 +47,7 @@ namespace SonarAnalyzer.UnitTest.Rules
 
         [TestMethod]
         public void VirtualEventField_CodeFix() =>
-            Verifier.VerifyCodeFix(
+            OldVerifier.VerifyCodeFix(
                 @"TestCases\VirtualEventField.cs",
                 @"TestCases\VirtualEventField.Fixed.cs",
                 new VirtualEventField(),

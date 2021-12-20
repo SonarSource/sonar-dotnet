@@ -30,23 +30,23 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void TypeMemberVisibility_CS() =>
-            Verifier.VerifyAnalyzer(@"TestCases\TypeMemberVisibility.cs", new TypeMemberVisibility());
+            OldVerifier.VerifyAnalyzer(@"TestCases\TypeMemberVisibility.cs", new TypeMemberVisibility());
 
 #if NET
         [TestMethod]
         [TestCategory("Rule")]
         public void TypeMemberVisibility_CSharp9() =>
-            Verifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\TypeMemberVisibility.CSharp9.cs", new TypeMemberVisibility());
+            OldVerifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\TypeMemberVisibility.CSharp9.cs", new TypeMemberVisibility());
 
         [TestMethod]
         [TestCategory("Rule")]
         public void TypeMemberVisibility_CSharp10() =>
-            Verifier.VerifyAnalyzerFromCSharp10Library(@"TestCases\TypeMemberVisibility.CSharp10.cs", new TypeMemberVisibility());
+            OldVerifier.VerifyAnalyzerFromCSharp10Library(@"TestCases\TypeMemberVisibility.CSharp10.cs", new TypeMemberVisibility());
 
         [TestMethod]
         [TestCategory("Rule")]
         public void TypeMemberVisibility_CSharpPreview() =>
-            Verifier.VerifyAnalyzerCSharpPreviewLibrary(@"TestCases\TypeMemberVisibility.CSharpPreview.cs", new TypeMemberVisibility());
+            OldVerifier.VerifyAnalyzerCSharpPreviewLibrary(@"TestCases\TypeMemberVisibility.CSharpPreview.cs", new TypeMemberVisibility());
 #endif
     }
 }

@@ -30,20 +30,20 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         public void VariableUnused_CS() =>
-            Verifier.VerifyAnalyzer(@"TestCases\VariableUnused.cs", new CS.VariableUnused(), ParseOptionsHelper.FromCSharp8);
+            OldVerifier.VerifyAnalyzer(@"TestCases\VariableUnused.cs", new CS.VariableUnused(), ParseOptionsHelper.FromCSharp8);
 
 #if NET
         [TestMethod]
         public void VariableUnused_CSharp9() =>
-            Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\VariableUnused.CSharp9.cs", new CS.VariableUnused());
+            OldVerifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\VariableUnused.CSharp9.cs", new CS.VariableUnused());
 
         [TestMethod]
         public void VariableUnused_CSharp10() =>
-            Verifier.VerifyAnalyzerFromCSharp10Library(@"TestCases\VariableUnused.CSharp10.cs", new CS.VariableUnused());
+            OldVerifier.VerifyAnalyzerFromCSharp10Library(@"TestCases\VariableUnused.CSharp10.cs", new CS.VariableUnused());
 #endif
 
         [TestMethod]
         public void VariableUnused_VB() =>
-            Verifier.VerifyAnalyzer(@"TestCases\VariableUnused.vb", new VB.VariableUnused());
+            OldVerifier.VerifyAnalyzer(@"TestCases\VariableUnused.vb", new VB.VariableUnused());
     }
 }

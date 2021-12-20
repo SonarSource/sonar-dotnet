@@ -30,7 +30,7 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         public void MethodOverrideAddsParams() =>
-            Verifier.VerifyAnalyzer(@"TestCases\MethodOverrideAddsParams.cs",
+            OldVerifier.VerifyAnalyzer(@"TestCases\MethodOverrideAddsParams.cs",
                 new MethodOverrideAddsParams(),
                 ParseOptionsHelper.FromCSharp8,
                 MetadataReferenceFacade.NETStandard21);
@@ -38,12 +38,12 @@ namespace SonarAnalyzer.UnitTest.Rules
 #if NET
         [TestMethod]
         public void MethodOverrideAddsParams_CSharp9() =>
-            Verifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\MethodOverrideAddsParams.CSharp9.cs", new MethodOverrideAddsParams());
+            OldVerifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\MethodOverrideAddsParams.CSharp9.cs", new MethodOverrideAddsParams());
 #endif
 
         [TestMethod]
         public void MethodOverrideAddsParams_CodeFix() =>
-            Verifier.VerifyCodeFix(
+            OldVerifier.VerifyCodeFix(
                 @"TestCases\MethodOverrideAddsParams.cs",
                 @"TestCases\MethodOverrideAddsParams.Fixed.cs",
                 new MethodOverrideAddsParams(),

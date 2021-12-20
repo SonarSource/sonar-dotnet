@@ -33,7 +33,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [DataRow("4.0.0")]
         [DataRow(Constants.NuGetLatestVersion)]
         public void MethodShouldBeNamedAccordingToSynchronicity(string tasksVersion) =>
-            Verifier.VerifyAnalyzer(
+            OldVerifier.VerifyAnalyzer(
                 @"TestCases\MethodShouldBeNamedAccordingToSynchronicity.cs",
                 new MethodShouldBeNamedAccordingToSynchronicity(),
                 MetadataReferenceFacade.SystemThreadingTasksExtensions(tasksVersion)
@@ -44,7 +44,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [DataRow("3.0.20105.1")]
         [DataRow(Constants.NuGetLatestVersion)]
         public void MethodShouldBeNamedAccordingToSynchronicity_MVC(string mvcVersion) =>
-            Verifier.VerifyAnalyzer(
+            OldVerifier.VerifyAnalyzer(
                 @"TestCases\MethodShouldBeNamedAccordingToSynchronicity.MVC.cs",
                 new MethodShouldBeNamedAccordingToSynchronicity(),
                 NuGetMetadataReference.MicrosoftAspNetMvc(mvcVersion));
@@ -53,7 +53,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [DataRow("2.0.4", "2.0.3")]
         [DataRow(Constants.NuGetLatestVersion, Constants.NuGetLatestVersion)]
         public void MethodShouldBeNamedAccordingToSynchronicity_MVC_Core(string aspNetCoreMvcVersion, string aspNetCoreRoutingVersion) =>
-            Verifier.VerifyAnalyzer(
+            OldVerifier.VerifyAnalyzer(
                 @"TestCases\MethodShouldBeNamedAccordingToSynchronicity.MVC.Core.cs",
                 new MethodShouldBeNamedAccordingToSynchronicity(),
                 NetStandardMetadataReference.Netstandard
@@ -65,7 +65,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [DataRow("1.1.11")]
         [DataRow(Constants.NuGetLatestVersion)]
         public void MethodShouldBeNamedAccordingToSynchronicity_MsTest(string testFwkVersion) =>
-            Verifier.VerifyAnalyzer(
+            OldVerifier.VerifyAnalyzer(
                 @"TestCases\MethodShouldBeNamedAccordingToSynchronicity.MsTest.cs",
                 new MethodShouldBeNamedAccordingToSynchronicity(),
                 NuGetMetadataReference.MSTestTestFramework(testFwkVersion)
@@ -75,7 +75,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [DataRow("2.5.7.10213")]
         [DataRow(Constants.NuGetLatestVersion)]
         public void MethodShouldBeNamedAccordingToSynchronicity_NUnit(string testFwkVersion) =>
-            Verifier.VerifyAnalyzer(
+            OldVerifier.VerifyAnalyzer(
                 @"TestCases\MethodShouldBeNamedAccordingToSynchronicity.NUnit.cs",
                 new MethodShouldBeNamedAccordingToSynchronicity(),
                 NuGetMetadataReference.NUnit(testFwkVersion)
@@ -85,7 +85,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [DataRow("2.0.0")]
         [DataRow(Constants.NuGetLatestVersion)]
         public void MethodShouldBeNamedAccordingToSynchronicity_Xunit(string testFwkVersion) =>
-            Verifier.VerifyAnalyzer(
+            OldVerifier.VerifyAnalyzer(
                 @"TestCases\MethodShouldBeNamedAccordingToSynchronicity.Xunit.cs",
                 new MethodShouldBeNamedAccordingToSynchronicity(),
                 NuGetMetadataReference.XunitFramework(testFwkVersion)
@@ -93,7 +93,7 @@ namespace SonarAnalyzer.UnitTest.Rules
 
         [TestMethod]
         public void MethodShouldBeNamedAccordingToSynchronicity_CSharp8() =>
-            Verifier.VerifyAnalyzer(
+            OldVerifier.VerifyAnalyzer(
                 @"TestCases\MethodShouldBeNamedAccordingToSynchronicity.CSharp8.cs",
                 new MethodShouldBeNamedAccordingToSynchronicity(),
                 ParseOptionsHelper.FromCSharp8,
@@ -104,7 +104,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [DataRow("4.0.0")]
         [DataRow(Constants.NuGetLatestVersion)]
         public void MethodShouldBeNamedAccordingToSynchronicity_CSharpPreview(string tasksVersion) =>
-            Verifier.VerifyAnalyzerCSharpPreviewLibrary(
+            OldVerifier.VerifyAnalyzerCSharpPreviewLibrary(
                 @"TestCases\MethodShouldBeNamedAccordingToSynchronicity.CSharpPreview.cs",
                 new MethodShouldBeNamedAccordingToSynchronicity(),
                 MetadataReferenceFacade.SystemThreadingTasksExtensions(tasksVersion)

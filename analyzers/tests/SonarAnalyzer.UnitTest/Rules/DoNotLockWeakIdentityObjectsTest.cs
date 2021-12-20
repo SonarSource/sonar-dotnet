@@ -30,10 +30,10 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         public void DoNotLockWeakIdentityObjects_CS() =>
-            Verifier.VerifyAnalyzer(@"TestCases\DoNotLockWeakIdentityObjects.cs", new CS.DoNotLockWeakIdentityObjects());
+            OldVerifier.VerifyAnalyzer(@"TestCases\DoNotLockWeakIdentityObjects.cs", new CS.DoNotLockWeakIdentityObjects());
 
         [TestMethod]
         public void DoNotLockWeakIdentityObjects_VB() =>
-            Verifier.VerifyAnalyzer(@"TestCases\DoNotLockWeakIdentityObjects.vb", new VB.DoNotLockWeakIdentityObjects());
+            OldVerifier.VerifyAnalyzer(@"TestCases\DoNotLockWeakIdentityObjects.vb", new VB.DoNotLockWeakIdentityObjects());
     }
 }

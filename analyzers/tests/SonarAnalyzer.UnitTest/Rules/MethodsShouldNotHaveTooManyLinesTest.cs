@@ -34,24 +34,24 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         public void MethodsShouldNotHaveTooManyLines_DefaultValues_CS() =>
-            Verifier.VerifyAnalyzer(@"TestCases\MethodsShouldNotHaveTooManyLines_DefaultValues.cs", new CS.MethodsShouldNotHaveTooManyLines());
+            OldVerifier.VerifyAnalyzer(@"TestCases\MethodsShouldNotHaveTooManyLines_DefaultValues.cs", new CS.MethodsShouldNotHaveTooManyLines());
 
         [TestMethod]
         public void MethodsShouldNotHaveTooManyLines_CustomValues_CS() =>
-            Verifier.VerifyAnalyzer(@"TestCases\MethodsShouldNotHaveTooManyLines_CustomValues.cs", new CS.MethodsShouldNotHaveTooManyLines { Max = 2 });
+            OldVerifier.VerifyAnalyzer(@"TestCases\MethodsShouldNotHaveTooManyLines_CustomValues.cs", new CS.MethodsShouldNotHaveTooManyLines { Max = 2 });
 
 #if NET
         [TestMethod]
         public void MethodsShouldNotHaveTooManyLines_CustomValues_CSharp9() =>
-            Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\MethodsShouldNotHaveTooManyLines_CustomValues.CSharp9.cs", new CS.MethodsShouldNotHaveTooManyLines { Max = 2 });
+            OldVerifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\MethodsShouldNotHaveTooManyLines_CustomValues.CSharp9.cs", new CS.MethodsShouldNotHaveTooManyLines { Max = 2 });
 
         [TestMethod]
         public void MethodsShouldNotHaveTooManyLines_CustomValues_CSharp10() =>
-            Verifier.VerifyAnalyzerFromCSharp10Library(@"TestCases\MethodsShouldNotHaveTooManyLines_CustomValues.CSharp10.cs", new CS.MethodsShouldNotHaveTooManyLines { Max = 2 });
+            OldVerifier.VerifyAnalyzerFromCSharp10Library(@"TestCases\MethodsShouldNotHaveTooManyLines_CustomValues.CSharp10.cs", new CS.MethodsShouldNotHaveTooManyLines { Max = 2 });
 
         [TestMethod]
         public void MethodsShouldNotHaveTooManyLines_CSharp9_NoUsing() =>
-            Verifier.VerifyCSharpAnalyzer(
+            OldVerifier.VerifyCSharpAnalyzer(
                 @"
 int i = 1; i++;
 
@@ -68,7 +68,7 @@ void LocalFunction() // Noncompliant {{This top level local function has 4 lines
 
         [TestMethod]
         public void MethodsShouldNotHaveTooManyLines_CSharp9_Valid() =>
-            Verifier.VerifyCSharpAnalyzer(@"
+            OldVerifier.VerifyCSharpAnalyzer(@"
 int i = 1; i++;
 i++;
 i++;
@@ -80,11 +80,11 @@ i++;",
 
         [TestMethod]
         public void MethodsShouldNotHaveTooManyLines_DoesntReportInTest_CS() =>
-            Verifier.VerifyNoIssueReportedInTest(@"TestCases\MethodsShouldNotHaveTooManyLines_DefaultValues.cs", new CS.MethodsShouldNotHaveTooManyLines());
+            OldVerifier.VerifyNoIssueReportedInTest(@"TestCases\MethodsShouldNotHaveTooManyLines_DefaultValues.cs", new CS.MethodsShouldNotHaveTooManyLines());
 
         [TestMethod]
         public void MethodsShouldNotHaveTooManyLines_InvalidSyntax_CS() =>
-            Verifier.VerifyCSharpAnalyzer(@"
+            OldVerifier.VerifyCSharpAnalyzer(@"
 public class Foo
 {
     public string ()
@@ -108,15 +108,15 @@ public class Foo
 
         [TestMethod]
         public void MethodsShouldNotHaveTooManyLines_DefaultValues_VB() =>
-            Verifier.VerifyAnalyzer(@"TestCases\MethodsShouldNotHaveTooManyLines_DefaultValues.vb", new VB.MethodsShouldNotHaveTooManyLines());
+            OldVerifier.VerifyAnalyzer(@"TestCases\MethodsShouldNotHaveTooManyLines_DefaultValues.vb", new VB.MethodsShouldNotHaveTooManyLines());
 
         [TestMethod]
         public void MethodsShouldNotHaveTooManyLines_CustomValues_VB() =>
-            Verifier.VerifyAnalyzer(@"TestCases\MethodsShouldNotHaveTooManyLines_CustomValues.vb", new VB.MethodsShouldNotHaveTooManyLines { Max = 2 });
+            OldVerifier.VerifyAnalyzer(@"TestCases\MethodsShouldNotHaveTooManyLines_CustomValues.vb", new VB.MethodsShouldNotHaveTooManyLines { Max = 2 });
 
         [TestMethod]
         public void MethodsShouldNotHaveTooManyLines_DoesntReportInTest_VB() =>
-            Verifier.VerifyNoIssueReportedInTest(@"TestCases\MethodsShouldNotHaveTooManyLines_DefaultValues.vb", new VB.MethodsShouldNotHaveTooManyLines());
+            OldVerifier.VerifyNoIssueReportedInTest(@"TestCases\MethodsShouldNotHaveTooManyLines_DefaultValues.vb", new VB.MethodsShouldNotHaveTooManyLines());
 
         [DataTestMethod]
         [DataRow(1)]

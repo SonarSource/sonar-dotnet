@@ -38,21 +38,21 @@ namespace SonarAnalyzer.UnitTest.Rules
 #if NET
         [TestMethod]
         public void PermissiveCors_CS() =>
-            Verifier.VerifyAnalyzerFromCSharp9Library(
+            OldVerifier.VerifyAnalyzerFromCSharp9Library(
                 @"TestCases\Hotspots\PermissiveCors.Net.cs",
                 new PermissiveCors(AnalyzerConfiguration.AlwaysEnabled),
                 AdditionalReferences);
 
         [TestMethod]
         public void PermissiveCors_CSharp10() =>
-            Verifier.VerifyAnalyzerFromCSharp10Library(
+            OldVerifier.VerifyAnalyzerFromCSharp10Library(
                 @"TestCases\Hotspots\PermissiveCors.CSharp10.cs",
                 new PermissiveCors(AnalyzerConfiguration.AlwaysEnabled),
                 AdditionalReferences);
 
         [TestMethod]
         public void PermissiveCors_CSharpPreview() =>
-            Verifier.VerifyAnalyzerCSharpPreviewLibrary(
+            OldVerifier.VerifyAnalyzerCSharpPreviewLibrary(
                 @"TestCases\Hotspots\PermissiveCors.CSharp.Preview.cs",
                 new PermissiveCors(AnalyzerConfiguration.AlwaysEnabled),
                 AdditionalReferences);
@@ -74,7 +74,7 @@ namespace SonarAnalyzer.UnitTest.Rules
 #else
         [TestMethod]
         public void PermissiveCors_AspNet_WebApi() =>
-            Verifier.VerifyAnalyzer(@"TestCases\Hotspots\PermissiveCors.NetFramework.cs",
+            OldVerifier.VerifyAnalyzer(@"TestCases\Hotspots\PermissiveCors.NetFramework.cs",
                                     new PermissiveCors(AnalyzerConfiguration.AlwaysEnabled),
                                     ParseOptionsHelper.FromCSharp9,
                                     AdditionalReferences);

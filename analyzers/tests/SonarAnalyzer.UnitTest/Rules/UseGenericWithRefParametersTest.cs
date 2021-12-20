@@ -29,12 +29,12 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         public void UseGenericWithRefParameters() =>
-            Verifier.VerifyAnalyzer(@"TestCases\UseGenericWithRefParameters.cs",
+            OldVerifier.VerifyAnalyzer(@"TestCases\UseGenericWithRefParameters.cs",
                 new UseGenericWithRefParameters());
 
         [TestMethod]
         public void UseGenericWithRefParameters_InvalidCode() =>
-            Verifier.VerifyCSharpAnalyzer(@"
+            OldVerifier.VerifyCSharpAnalyzer(@"
 public void (ref object o1)
 {
 }", new UseGenericWithRefParameters(), CompilationErrorBehavior.Ignore);

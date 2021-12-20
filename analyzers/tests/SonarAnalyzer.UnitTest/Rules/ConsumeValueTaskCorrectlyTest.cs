@@ -33,7 +33,7 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         public void ConsumeValueTaskCorrectly() =>
-            Verifier.VerifyAnalyzer(@"TestCases\ConsumeValueTaskCorrectly.cs",
+            OldVerifier.VerifyAnalyzer(@"TestCases\ConsumeValueTaskCorrectly.cs",
                                     new ConsumeValueTaskCorrectly(),
                                     GetReferences());
 

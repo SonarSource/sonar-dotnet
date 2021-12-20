@@ -29,12 +29,12 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         public void ToStringNoNull() =>
-            Verifier.VerifyAnalyzer(@"TestCases\ToStringNoNull.cs", new ToStringNoNull());
+            OldVerifier.VerifyAnalyzer(@"TestCases\ToStringNoNull.cs", new ToStringNoNull());
 
 #if NET
         [TestMethod]
         public void ToStringNoNull_CSharp9() =>
-            Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\ToStringNoNull.CSharp9.cs", new ToStringNoNull());
+            OldVerifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\ToStringNoNull.CSharp9.cs", new ToStringNoNull());
 #endif
     }
 }

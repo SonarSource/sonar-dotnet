@@ -30,22 +30,22 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         public void PropertiesShouldBePreferred() =>
-            Verifier.VerifyAnalyzer(@"TestCases\PropertiesShouldBePreferred.cs",
+            OldVerifier.VerifyAnalyzer(@"TestCases\PropertiesShouldBePreferred.cs",
                                     new PropertiesShouldBePreferred(),
                                     MetadataReferenceFacade.SystemThreadingTasks);
 
 #if NET
         [TestMethod]
         public void PropertiesShouldBePreferred_CSharp9() =>
-            Verifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\PropertiesShouldBePreferred.CSharp9.cs", new PropertiesShouldBePreferred());
+            OldVerifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\PropertiesShouldBePreferred.CSharp9.cs", new PropertiesShouldBePreferred());
 
         [TestMethod]
         public void PropertiesShouldBePreferred_CSharp10() =>
-            Verifier.VerifyAnalyzerFromCSharp10Library(@"TestCases\PropertiesShouldBePreferred.CSharp10.cs", new PropertiesShouldBePreferred());
+            OldVerifier.VerifyAnalyzerFromCSharp10Library(@"TestCases\PropertiesShouldBePreferred.CSharp10.cs", new PropertiesShouldBePreferred());
 
         [TestMethod]
         public void PropertiesShouldBePreferred_CSharpPreview() =>
-            Verifier.VerifyAnalyzerCSharpPreviewLibrary(@"TestCases\PropertiesShouldBePreferred.CSharpPreview.cs", new PropertiesShouldBePreferred());
+            OldVerifier.VerifyAnalyzerCSharpPreviewLibrary(@"TestCases\PropertiesShouldBePreferred.CSharpPreview.cs", new PropertiesShouldBePreferred());
 #endif
     }
 }

@@ -30,12 +30,12 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         public void ThrowReservedExceptions_CSharp() =>
-            Verifier.VerifyAnalyzer(@"TestCases\ThrowReservedExceptions.cs",
+            OldVerifier.VerifyAnalyzer(@"TestCases\ThrowReservedExceptions.cs",
                 new CS.ThrowReservedExceptions());
 
         [TestMethod]
         public void ThrowReservedExceptions_VisualBasic() =>
-            Verifier.VerifyAnalyzer(@"TestCases\ThrowReservedExceptions.vb",
+            OldVerifier.VerifyAnalyzer(@"TestCases\ThrowReservedExceptions.vb",
                 new VB.ThrowReservedExceptions());
     }
 }

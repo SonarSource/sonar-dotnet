@@ -34,7 +34,7 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         public void ClearTextProtocolsAreSensitive() =>
-            Verifier.VerifyAnalyzer(
+            OldVerifier.VerifyAnalyzer(
                 @"TestCases\Hotspots\ClearTextProtocolsAreSensitive.cs",
                 new ClearTextProtocolsAreSensitive(AnalyzerConfiguration.AlwaysEnabled),
                 ParseOptionsHelper.FromCSharp8,
@@ -43,14 +43,14 @@ namespace SonarAnalyzer.UnitTest.Rules
 #if NET
         [TestMethod]
         public void ClearTextProtocolsAreSensitive_CSharp9() =>
-            Verifier.VerifyAnalyzerFromCSharp9Console(
+            OldVerifier.VerifyAnalyzerFromCSharp9Console(
                 @"TestCases\Hotspots\ClearTextProtocolsAreSensitive.CSharp9.cs",
                 new ClearTextProtocolsAreSensitive(AnalyzerConfiguration.AlwaysEnabled),
                 AdditionalReferences);
 
         [TestMethod]
         public void ClearTextProtocolsAreSensitive_CSharp10() =>
-            Verifier.VerifyAnalyzerFromCSharp10Console(
+            OldVerifier.VerifyAnalyzerFromCSharp10Console(
                 @"TestCases\Hotspots\ClearTextProtocolsAreSensitive.CSharp10.cs",
                 new ClearTextProtocolsAreSensitive(AnalyzerConfiguration.AlwaysEnabled),
                 AdditionalReferences);

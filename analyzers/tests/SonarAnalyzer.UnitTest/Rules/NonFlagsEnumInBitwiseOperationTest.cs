@@ -30,13 +30,13 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         public void NonFlagsEnumInBitwiseOperation() =>
-            Verifier.VerifyAnalyzer(@"TestCases\NonFlagsEnumInBitwiseOperation.cs",
+            OldVerifier.VerifyAnalyzer(@"TestCases\NonFlagsEnumInBitwiseOperation.cs",
                                     new NonFlagsEnumInBitwiseOperation(),
                                     MetadataReferenceFacade.SystemComponentModelPrimitives);
 
         [TestMethod]
         public void NonFlagsEnumInBitwiseOperation_CodeFix() =>
-            Verifier.VerifyCodeFix(@"TestCases\NonFlagsEnumInBitwiseOperation.cs",
+            OldVerifier.VerifyCodeFix(@"TestCases\NonFlagsEnumInBitwiseOperation.cs",
                                    @"TestCases\NonFlagsEnumInBitwiseOperation.Fixed.cs",
                                    new NonFlagsEnumInBitwiseOperation(),
                                    new NonFlagsEnumInBitwiseOperationCodeFixProvider());

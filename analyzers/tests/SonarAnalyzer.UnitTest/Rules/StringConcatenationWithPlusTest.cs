@@ -31,11 +31,11 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         public void StringConcatenationWithPlus() =>
-            Verifier.VerifyAnalyzer(@"TestCases\StringConcatenationWithPlus.vb", new StringConcatenationWithPlus(), MetadataReferenceFacade.SystemXml.Concat(MetadataReferenceFacade.SystemXmlLinq));
+            OldVerifier.VerifyAnalyzer(@"TestCases\StringConcatenationWithPlus.vb", new StringConcatenationWithPlus(), MetadataReferenceFacade.SystemXml.Concat(MetadataReferenceFacade.SystemXmlLinq));
 
         [TestMethod]
         public void StringConcatenationWithPlus_CodeFix() =>
-            Verifier.VerifyCodeFix(
+            OldVerifier.VerifyCodeFix(
                 @"TestCases\StringConcatenationWithPlus.vb",
                 @"TestCases\StringConcatenationWithPlus.Fixed.vb",
                 new StringConcatenationWithPlus(),

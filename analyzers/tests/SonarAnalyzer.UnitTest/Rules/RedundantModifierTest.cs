@@ -29,16 +29,16 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         public void RedundantModifier() =>
-            Verifier.VerifyAnalyzer(@"TestCases\RedundantModifier.cs", new RedundantModifier());
+            OldVerifier.VerifyAnalyzer(@"TestCases\RedundantModifier.cs", new RedundantModifier());
 
 #if NET
         [TestMethod]
         public void RedundantModifier_CSharp9() =>
-            Verifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\RedundantModifier.CSharp9.cs", new RedundantModifier());
+            OldVerifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\RedundantModifier.CSharp9.cs", new RedundantModifier());
 
         [TestMethod]
         public void RedundantModifier_CodeFix_CSharp9() =>
-            Verifier.VerifyCodeFix(
+            OldVerifier.VerifyCodeFix(
                 @"TestCases\RedundantModifier.CSharp9.cs",
                 @"TestCases\RedundantModifier.CSharp9.Fixed.cs",
                 new RedundantModifier(),
@@ -47,11 +47,11 @@ namespace SonarAnalyzer.UnitTest.Rules
 
         [TestMethod]
         public void RedundantModifier_CSharp10() =>
-            Verifier.VerifyAnalyzerFromCSharp10Library(@"TestCases\RedundantModifier.CSharp10.cs", new RedundantModifier());
+            OldVerifier.VerifyAnalyzerFromCSharp10Library(@"TestCases\RedundantModifier.CSharp10.cs", new RedundantModifier());
 
         [TestMethod]
         public void RedundantModifier_CodeFix_CSharp10() =>
-            Verifier.VerifyCodeFix(
+            OldVerifier.VerifyCodeFix(
                 @"TestCases\RedundantModifier.CSharp10.cs",
                 @"TestCases\RedundantModifier.CSharp10.Fixed.cs",
                 new RedundantModifier(),
@@ -61,7 +61,7 @@ namespace SonarAnalyzer.UnitTest.Rules
 
         [TestMethod]
         public void RedundantModifier_CodeFix() =>
-            Verifier.VerifyCodeFix(
+            OldVerifier.VerifyCodeFix(
                 @"TestCases\RedundantModifier.cs",
                 @"TestCases\RedundantModifier.Fixed.cs",
                 new RedundantModifier(),

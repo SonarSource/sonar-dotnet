@@ -29,17 +29,17 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         public void SwitchCaseFallsThroughToDefault() =>
-            Verifier.VerifyAnalyzer(@"TestCases\SwitchCaseFallsThroughToDefault.cs", new SwitchCaseFallsThroughToDefault());
+            OldVerifier.VerifyAnalyzer(@"TestCases\SwitchCaseFallsThroughToDefault.cs", new SwitchCaseFallsThroughToDefault());
 
 #if NET
         [TestMethod]
         public void SwitchCaseFallsThroughToDefault_CSharp9() =>
-            Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\SwitchCaseFallsThroughToDefault.CSharp9.cs", new SwitchCaseFallsThroughToDefault());
+            OldVerifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\SwitchCaseFallsThroughToDefault.CSharp9.cs", new SwitchCaseFallsThroughToDefault());
 #endif
 
         [TestMethod]
         public void SwitchCaseFallsThroughToDefault_CodeFix() =>
-            Verifier.VerifyCodeFix(@"TestCases\SwitchCaseFallsThroughToDefault.cs",
+            OldVerifier.VerifyCodeFix(@"TestCases\SwitchCaseFallsThroughToDefault.cs",
                                    @"TestCases\SwitchCaseFallsThroughToDefault.Fixed.cs",
                                    new SwitchCaseFallsThroughToDefault(),
                                    new SwitchCaseFallsThroughToDefaultCodeFixProvider());

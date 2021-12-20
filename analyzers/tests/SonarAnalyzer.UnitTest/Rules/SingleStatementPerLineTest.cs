@@ -30,16 +30,16 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         public void SingleStatementPerLine_CSharp() =>
-            Verifier.VerifyAnalyzer(@"TestCases\SingleStatementPerLine.cs", new CS.SingleStatementPerLine());
+            OldVerifier.VerifyAnalyzer(@"TestCases\SingleStatementPerLine.cs", new CS.SingleStatementPerLine());
 
 #if NET
         [TestMethod]
         public void SingleStatementPerLine_CSharp9() =>
-            Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\SingleStatementPerLine.CSharp9.cs", new CS.SingleStatementPerLine());
+            OldVerifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\SingleStatementPerLine.CSharp9.cs", new CS.SingleStatementPerLine());
 #endif
 
         [TestMethod]
         public void SingleStatementPerLine_VisualBasic() =>
-            Verifier.VerifyAnalyzer(new[] { @"TestCases\SingleStatementPerLine.vb", @"TestCases\SingleStatementPerLine2.vb", }, new VB.SingleStatementPerLine());
+            OldVerifier.VerifyAnalyzer(new[] { @"TestCases\SingleStatementPerLine.vb", @"TestCases\SingleStatementPerLine2.vb", }, new VB.SingleStatementPerLine());
     }
 }

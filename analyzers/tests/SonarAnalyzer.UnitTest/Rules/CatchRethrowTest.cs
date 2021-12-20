@@ -30,11 +30,11 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         public void CatchRethrow() =>
-            Verifier.VerifyAnalyzer(@"TestCases\CatchRethrow.cs", new CS.CatchRethrow());
+            OldVerifier.VerifyAnalyzer(@"TestCases\CatchRethrow.cs", new CS.CatchRethrow());
 
         [TestMethod]
         public void CatchRethrow_CodeFix() =>
-            Verifier.VerifyCodeFix(
+            OldVerifier.VerifyCodeFix(
                 @"TestCases\CatchRethrow.cs",
                 @"TestCases\CatchRethrow.Fixed.cs",
                 new CS.CatchRethrow(),
@@ -42,7 +42,7 @@ namespace SonarAnalyzer.UnitTest.Rules
 
         [TestMethod]
         public void CatchRethrow_VB() =>
-            Verifier.VerifyAnalyzer(@"TestCases\CatchRethrow.vb",
+            OldVerifier.VerifyAnalyzer(@"TestCases\CatchRethrow.vb",
                 new VB.CatchRethrow());
     }
 }

@@ -29,17 +29,17 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         public void OptionalRefOutParameter() =>
-            Verifier.VerifyAnalyzer(@"TestCases\OptionalRefOutParameter.cs", new OptionalRefOutParameter());
+            OldVerifier.VerifyAnalyzer(@"TestCases\OptionalRefOutParameter.cs", new OptionalRefOutParameter());
 
 #if NET
         [TestMethod]
         public void OptionalRefOutParameter_CSharp9() =>
-            Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\OptionalRefOutParameter.CSharp9.cs", new OptionalRefOutParameter());
+            OldVerifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\OptionalRefOutParameter.CSharp9.cs", new OptionalRefOutParameter());
 #endif
 
         [TestMethod]
         public void OptionalRefOutParameter_CodeFix() =>
-            Verifier.VerifyCodeFix(@"TestCases\OptionalRefOutParameter.cs",
+            OldVerifier.VerifyCodeFix(@"TestCases\OptionalRefOutParameter.cs",
                                    @"TestCases\OptionalRefOutParameter.Fixed.cs",
                                    new OptionalRefOutParameter(),
                                    new OptionalRefOutParameterCodeFixProvider());

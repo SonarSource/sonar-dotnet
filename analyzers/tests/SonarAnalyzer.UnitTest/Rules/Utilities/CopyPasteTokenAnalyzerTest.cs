@@ -72,7 +72,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         {
             var testRoot = Root + TestContext.TestName;
             var fileName = "Duplicated.CSharp10.cs";
-            Verifier.VerifyNonConcurrentUtilityAnalyzer<CopyPasteTokenInfo>(
+            OldVerifier.VerifyNonConcurrentUtilityAnalyzer<CopyPasteTokenInfo>(
                 new[] { Root + fileName },
                 new TestCopyPasteTokenAnalyzer_CS(testRoot, false),
                 @$"{testRoot}\token-cpd.pb",
@@ -100,7 +100,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void Verify_NotRunForTestProject_CS()
         {
             var testRoot = Root + TestContext.TestName;
-            Verifier.VerifyUtilityAnalyzerIsNotRun(new[] { Root + "DuplicatedDifferentLiterals.cs" },
+            OldVerifier.VerifyUtilityAnalyzerIsNotRun(new[] { Root + "DuplicatedDifferentLiterals.cs" },
                                                    new TestCopyPasteTokenAnalyzer_CS(testRoot, true),
                                                    @$"{testRoot}\token-cpd.pb");
         }
@@ -112,7 +112,7 @@ namespace SonarAnalyzer.UnitTest.Rules
                 ? new TestCopyPasteTokenAnalyzer_CS(testRoot, false)
                 : new TestCopyPasteTokenAnalyzer_VB(testRoot, false);
 
-            Verifier.VerifyNonConcurrentUtilityAnalyzer<CopyPasteTokenInfo>(
+            OldVerifier.VerifyNonConcurrentUtilityAnalyzer<CopyPasteTokenInfo>(
                 new[] { Root + fileName },
                 analyzer,
                 @$"{testRoot}\token-cpd.pb",

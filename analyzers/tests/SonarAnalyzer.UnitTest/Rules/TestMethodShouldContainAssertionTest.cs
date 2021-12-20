@@ -59,7 +59,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [DataRow(MsTestVersions.Ver1)]
         [DataRow(Constants.NuGetLatestVersion)]
         public void TestMethodShouldContainAssertion_MSTest(string testFwkVersion) =>
-            Verifier.VerifyAnalyzer(new[] { @"TestCases\TestMethodShouldContainAssertion.MsTest.cs", @"TestCases\TestMethodShouldContainAssertion.MsTest.AnotherFile.cs" },
+            OldVerifier.VerifyAnalyzer(new[] { @"TestCases\TestMethodShouldContainAssertion.MsTest.cs", @"TestCases\TestMethodShouldContainAssertion.MsTest.AnotherFile.cs" },
                 new TestMethodShouldContainAssertion(),
                 AdditionalTestReferences(NuGetMetadataReference.MSTestTestFramework(testFwkVersion)));
 
@@ -68,7 +68,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [DataRow(Constants.NuGetLatestVersion, FluentAssertionVersions.Ver5, Constants.NuGetLatestVersion)]
         [DataRow(Constants.NuGetLatestVersion, Constants.NuGetLatestVersion, Constants.NuGetLatestVersion)]
         public void TestMethodShouldContainAssertion_NUnit(string testFwkVersion, string fluentVersion, string nSubstituteVersion) =>
-            Verifier.VerifyAnalyzer(@"TestCases\TestMethodShouldContainAssertion.NUnit.cs",
+            OldVerifier.VerifyAnalyzer(@"TestCases\TestMethodShouldContainAssertion.NUnit.cs",
                 new TestMethodShouldContainAssertion(),
                 AdditionalTestReferences(NuGetMetadataReference.NUnit(testFwkVersion), fluentVersion, nSubstituteVersion));
 
@@ -76,7 +76,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [DataRow(NUnitVersions.Ver25)]
         [DataRow(NUnitVersions.Ver27)]
         public void TestMethodShouldContainAssertion_NUnit_V2Specific(string testFwkVersion) =>
-            Verifier.VerifyCSharpAnalyzer(@"
+            OldVerifier.VerifyCSharpAnalyzer(@"
 using System;
 using NUnit.Framework;
 
@@ -118,13 +118,13 @@ public class Foo
         [DataRow(XUnitVersions.Ver2, Constants.NuGetLatestVersion, Constants.NuGetLatestVersion)]
         [DataRow(Constants.NuGetLatestVersion, Constants.NuGetLatestVersion, Constants.NuGetLatestVersion)]
         public void TestMethodShouldContainAssertion_Xunit(string testFwkVersion, string fluentVersion, string nSubstituteVersion) =>
-            Verifier.VerifyAnalyzer(@"TestCases\TestMethodShouldContainAssertion.Xunit.cs",
+            OldVerifier.VerifyAnalyzer(@"TestCases\TestMethodShouldContainAssertion.Xunit.cs",
                 new TestMethodShouldContainAssertion(),
                 AdditionalTestReferences(NuGetMetadataReference.XunitFramework(testFwkVersion), fluentVersion, nSubstituteVersion));
 
         [TestMethod]
         public void TestMethodShouldContainAssertion_Xunit_Legacy() =>
-            Verifier.VerifyAnalyzer(@"TestCases\TestMethodShouldContainAssertion.Xunit.Legacy.cs",
+            OldVerifier.VerifyAnalyzer(@"TestCases\TestMethodShouldContainAssertion.Xunit.Legacy.cs",
                 new TestMethodShouldContainAssertion(),
                 AdditionalTestReferences(NuGetMetadataReference.XunitFrameworkV1));
 
@@ -132,7 +132,7 @@ public class Foo
         [DataRow(NUnitVersions.Ver25, FluentAssertionVersions.Ver1)]
         [DataRow(NUnitVersions.Ver25, FluentAssertionVersions.Ver4)]
         public void TestMethodShouldContainAssertion_NUnit_FluentAssertionsLegacy(string testFwkVersion, string fluentVersion) =>
-            Verifier.VerifyCSharpAnalyzer(@"
+            OldVerifier.VerifyCSharpAnalyzer(@"
 using System;
 using FluentAssertions;
 using NUnit.Framework;
@@ -165,7 +165,7 @@ public class Foo
 
         [TestMethod]
         public void TestMethodShouldContainAssertion_NUnit_NFluentLegacy() =>
-           Verifier.VerifyCSharpAnalyzer(@"
+           OldVerifier.VerifyCSharpAnalyzer(@"
 using System;
 using NFluent;
 using NUnit.Framework;
@@ -184,14 +184,14 @@ public class Foo
 
         [TestMethod]
         public void TestMethodShouldContainAssertion_CustomAssertionMethod() =>
-            Verifier.VerifyAnalyzer(@"TestCases\TestMethodShouldContainAssertion.Custom.cs",
+            OldVerifier.VerifyAnalyzer(@"TestCases\TestMethodShouldContainAssertion.Custom.cs",
                 new TestMethodShouldContainAssertion(),
                 NuGetMetadataReference.MSTestTestFramework(Constants.NuGetLatestVersion));
 
 #if NET
         [TestMethod]
         public void TestMethodShouldContainAssertion_CSharp9() =>
-            Verifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\TestMethodShouldContainAssertion.CSharp9.cs",
+            OldVerifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\TestMethodShouldContainAssertion.CSharp9.cs",
                                                 new TestMethodShouldContainAssertion(),
                                                 NuGetMetadataReference.MSTestTestFrameworkV1
                                                     .Concat(NuGetMetadataReference.XunitFramework(Constants.NuGetLatestVersion))

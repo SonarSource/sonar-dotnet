@@ -39,21 +39,21 @@ namespace SonarAnalyzer.UnitTest.Rules
         [DataRow("3.1.11", "3.19.80")]
         [DataRow("5.0.2", "5.21.1")]
         public void DatabasePasswordsShouldBeSecure_CS(string entityFrameworkCoreVersion, string oracleVersion) =>
-            Verifier.VerifyAnalyzer(@"TestCases\DatabasePasswordsShouldBeSecure.cs",
+            OldVerifier.VerifyAnalyzer(@"TestCases\DatabasePasswordsShouldBeSecure.cs",
                                     new DatabasePasswordsShouldBeSecure(),
                                     ParseOptionsHelper.FromCSharp8,
                                     GetReferences(entityFrameworkCoreVersion, oracleVersion));
 
         [TestMethod]
         public void DatabasePasswordsShouldBeSecure_Net5_CS() =>
-            Verifier.VerifyAnalyzer(@"TestCases\DatabasePasswordsShouldBeSecure.Net5.cs",
+            OldVerifier.VerifyAnalyzer(@"TestCases\DatabasePasswordsShouldBeSecure.Net5.cs",
                                     new DatabasePasswordsShouldBeSecure(),
                                     ParseOptionsHelper.FromCSharp8,
                                     GetReferences("5.0.2", "5.21.1"));
 
         [TestMethod]
         public void DatabasePasswordsShouldBeSecure_NetCore3_CS() =>
-            Verifier.VerifyAnalyzer(@"TestCases\DatabasePasswordsShouldBeSecure.NetCore31.cs",
+            OldVerifier.VerifyAnalyzer(@"TestCases\DatabasePasswordsShouldBeSecure.NetCore31.cs",
                                     new DatabasePasswordsShouldBeSecure(),
                                     ParseOptionsHelper.FromCSharp8,
                                     GetReferences("3.1.11", "3.19.80"));

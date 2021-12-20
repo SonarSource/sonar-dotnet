@@ -32,25 +32,25 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         public void MarkAssemblyWithClsCompliantAttribute_CS() =>
-            Verifier.VerifyNonConcurrentAnalyzer(@"TestCases\MarkAssemblyWithClsCompliantAttribute.cs",
+            OldVerifier.VerifyNonConcurrentAnalyzer(@"TestCases\MarkAssemblyWithClsCompliantAttribute.cs",
                 new CS.MarkAssemblyWithClsCompliantAttribute());
 
         [TestMethod]
         public void MarkAssemblyWithClsCompliantAttribute_VB() =>
-            Verifier.VerifyNonConcurrentAnalyzer(@"TestCases\MarkAssemblyWithClsCompliantAttribute.vb",
+            OldVerifier.VerifyNonConcurrentAnalyzer(@"TestCases\MarkAssemblyWithClsCompliantAttribute.vb",
                 new VB.MarkAssemblyWithClsCompliantAttribute());
 
         [TestMethod]
         public void MarkAssemblyWithClsCompliantAttributeNoncompliant_CS()
         {
-            Action action = () => Verifier.VerifyNonConcurrentAnalyzer(@"TestCases\MarkAssemblyWithClsCompliantAttributeNoncompliant.cs", new CS.MarkAssemblyWithClsCompliantAttribute());
+            Action action = () => OldVerifier.VerifyNonConcurrentAnalyzer(@"TestCases\MarkAssemblyWithClsCompliantAttributeNoncompliant.cs", new CS.MarkAssemblyWithClsCompliantAttribute());
             action.Should().Throw<UnexpectedDiagnosticException>().WithMessage("*Provide a 'CLSCompliant' attribute for assembly 'project0'.*");
         }
 
         [TestMethod]
         public void MarkAssemblyWithClsCompliantAttributeNoncompliant_VB()
         {
-            Action action = () => Verifier.VerifyNonConcurrentAnalyzer(@"TestCases\MarkAssemblyWithClsCompliantAttributeNoncompliant.vb", new VB.MarkAssemblyWithClsCompliantAttribute());
+            Action action = () => OldVerifier.VerifyNonConcurrentAnalyzer(@"TestCases\MarkAssemblyWithClsCompliantAttributeNoncompliant.vb", new VB.MarkAssemblyWithClsCompliantAttribute());
             action.Should().Throw<UnexpectedDiagnosticException>().WithMessage("*Provide a 'CLSCompliant' attribute for assembly 'project0'.*");
         }
     }

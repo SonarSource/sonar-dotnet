@@ -29,6 +29,6 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         public void FunctionName() =>
-            Verifier.VerifyAnalyzer(@"TestCases\FunctionName.vb", new FunctionName());
+            OldVerifier.VerifyAnalyzer(@"TestCases\FunctionName.vb", new FunctionName());
     }
 }

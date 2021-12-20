@@ -35,13 +35,13 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         public void DeliveringDebugFeaturesInProduction_NetCore2_CS() =>
-            Verifier.VerifyAnalyzer(@"TestCases\Hotspots\DeliveringDebugFeaturesInProduction.NetCore2.cs",
+            OldVerifier.VerifyAnalyzer(@"TestCases\Hotspots\DeliveringDebugFeaturesInProduction.NetCore2.cs",
                                     new CS.DeliveringDebugFeaturesInProduction(AnalyzerConfiguration.AlwaysEnabled),
                                     AdditionalReferencesNetCore2);
 
         [TestMethod]
         public void DeliveringDebugFeaturesInProduction_NetCore2_VB() =>
-            Verifier.VerifyAnalyzer(@"TestCases\Hotspots\DeliveringDebugFeaturesInProduction.NetCore2.vb",
+            OldVerifier.VerifyAnalyzer(@"TestCases\Hotspots\DeliveringDebugFeaturesInProduction.NetCore2.vb",
                                     new VB.DeliveringDebugFeaturesInProduction(AnalyzerConfiguration.AlwaysEnabled),
                                     AdditionalReferencesNetCore2);
 
@@ -49,13 +49,13 @@ namespace SonarAnalyzer.UnitTest.Rules
 
         [TestMethod]
         public void DeliveringDebugFeaturesInProduction_NetCore3_CS() =>
-            Verifier.VerifyAnalyzer(@"TestCases\Hotspots\DeliveringDebugFeaturesInProduction.NetCore3.cs",
+            OldVerifier.VerifyAnalyzer(@"TestCases\Hotspots\DeliveringDebugFeaturesInProduction.NetCore3.cs",
                                     new CS.DeliveringDebugFeaturesInProduction(AnalyzerConfiguration.AlwaysEnabled),
                                     AdditionalReferencesNetCore3);
 
         [TestMethod]
         public void DeliveringDebugFeaturesInProduction_NetCore3_VB() =>
-            Verifier.VerifyAnalyzer(@"TestCases\Hotspots\DeliveringDebugFeaturesInProduction.NetCore3.vb",
+            OldVerifier.VerifyAnalyzer(@"TestCases\Hotspots\DeliveringDebugFeaturesInProduction.NetCore3.vb",
                                     new VB.DeliveringDebugFeaturesInProduction(AnalyzerConfiguration.AlwaysEnabled),
                                     AdditionalReferencesNetCore3);
 

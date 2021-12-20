@@ -31,14 +31,14 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         public void DeadStores_SonarCfg() =>
-            Verifier.VerifyAnalyzer(@"TestCases\DeadStores.SonarCfg.cs",
+            OldVerifier.VerifyAnalyzer(@"TestCases\DeadStores.SonarCfg.cs",
                                     new DeadStores(AnalyzerConfiguration.AlwaysEnabledWithSonarCfg),
                                     ParseOptionsHelper.FromCSharp8,
                                     MetadataReferenceFacade.NETStandard21);
 
         [TestMethod]
         public void DeadStores_RoslynCfg() =>
-            Verifier.VerifyAnalyzer(@"TestCases\DeadStores.RoslynCfg.cs",
+            OldVerifier.VerifyAnalyzer(@"TestCases\DeadStores.RoslynCfg.cs",
                                     new DeadStores(),
                                     ParseOptionsHelper.FromCSharp8,
                                     MetadataReferenceFacade.NETStandard21);
@@ -46,11 +46,11 @@ namespace SonarAnalyzer.UnitTest.Rules
 #if NET
         [TestMethod]
         public void DeadStores_CSharp9() =>
-            Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\DeadStores.CSharp9.cs", new DeadStores());
+            OldVerifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\DeadStores.CSharp9.cs", new DeadStores());
 
         [TestMethod]
         public void DeadStores_CSharp10() =>
-            Verifier.VerifyAnalyzerFromCSharp10Console(@"TestCases\DeadStores.CSharp10.cs", new DeadStores());
+            OldVerifier.VerifyAnalyzerFromCSharp10Console(@"TestCases\DeadStores.CSharp10.cs", new DeadStores());
 #endif
     }
 }

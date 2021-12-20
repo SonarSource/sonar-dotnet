@@ -101,7 +101,7 @@ namespace SonarAnalyzer.UnitTest.Helpers
                 foreach (var testCase in testCases)
                 {
                     // ToDo: We should find a way to ack the fact the action was not run
-                    Verifier.VerifyNoIssueReported(testCase.Path,
+                    OldVerifier.VerifyNoIssueReported(testCase.Path,
                                                    testCase.Analyzer,
                                                    ParseOptionsHelper.FromCSharp8,
                                                    testCase.AdditionalReferences);
@@ -119,7 +119,7 @@ namespace SonarAnalyzer.UnitTest.Helpers
             foreach (var testCase in testCases)
             {
                 // ToDo: We test that a rule is enabled only by checking the issues are reported
-                Verifier.VerifyAnalyzer(testCase.Path,
+                OldVerifier.VerifyAnalyzer(testCase.Path,
                                         testCase.Analyzer,
                                         ParseOptionsHelper.FromCSharp8,
                                         testCase.AdditionalReferences);
@@ -135,7 +135,7 @@ namespace SonarAnalyzer.UnitTest.Helpers
                 var hasTestScope = testCase.Analyzer.SupportedDiagnostics.Any(d => d.CustomTags.Contains(DiagnosticDescriptorBuilder.TestSourceScopeTag));
                 if (hasTestScope)
                 {
-                    Verifier.VerifyAnalyzer(testCase.Path,
+                    OldVerifier.VerifyAnalyzer(testCase.Path,
                                             testCase.Analyzer,
                                             ParseOptionsHelper.FromCSharp8,
                                             testCase.AdditionalReferences,
@@ -144,7 +144,7 @@ namespace SonarAnalyzer.UnitTest.Helpers
                 else
                 {
                     // MAIN-only
-                    Verifier.VerifyNoIssueReported(testCase.Path,
+                    OldVerifier.VerifyNoIssueReported(testCase.Path,
                                                    testCase.Analyzer,
                                                    ParseOptionsHelper.FromCSharp8,
                                                    testCase.AdditionalReferences,
@@ -163,7 +163,7 @@ namespace SonarAnalyzer.UnitTest.Helpers
                 if (hasProductScope)
                 {
                     // MAIN-only and MAIN & TEST rules
-                    Verifier.VerifyNoIssueReported(testCase.Path,
+                    OldVerifier.VerifyNoIssueReported(testCase.Path,
                                                    testCase.Analyzer,
                                                    ParseOptionsHelper.FromCSharp8,
                                                    testCase.AdditionalReferences,
@@ -171,7 +171,7 @@ namespace SonarAnalyzer.UnitTest.Helpers
                 }
                 else
                 {
-                    Verifier.VerifyAnalyzer(testCase.Path,
+                    OldVerifier.VerifyAnalyzer(testCase.Path,
                                             testCase.Analyzer,
                                             ParseOptionsHelper.FromCSharp8,
                                             testCase.AdditionalReferences,
@@ -189,7 +189,7 @@ namespace SonarAnalyzer.UnitTest.Helpers
                 var hasProductScope = testCase.Analyzer.SupportedDiagnostics.Any(d => d.CustomTags.Contains(DiagnosticDescriptorBuilder.MainSourceScopeTag));
                 if (hasProductScope)
                 {
-                    Verifier.VerifyAnalyzer(testCase.Path,
+                    OldVerifier.VerifyAnalyzer(testCase.Path,
                                             testCase.Analyzer,
                                             ParseOptionsHelper.FromCSharp8,
                                             testCase.AdditionalReferences,
@@ -198,7 +198,7 @@ namespace SonarAnalyzer.UnitTest.Helpers
                 else
                 {
                     // TEST-only rule
-                    Verifier.VerifyNoIssueReported(testCase.Path,
+                    OldVerifier.VerifyNoIssueReported(testCase.Path,
                                                    testCase.Analyzer,
                                                    ParseOptionsHelper.FromCSharp8,
                                                    testCase.AdditionalReferences,
@@ -215,8 +215,8 @@ namespace SonarAnalyzer.UnitTest.Helpers
             try
             {
                 SonarAnalysisContext.ShouldExecuteRegisteredAction = (diags, tree) => tree.FilePath.EndsWith(new FileInfo(testCases[0].Path).Name, StringComparison.OrdinalIgnoreCase);
-                Verifier.VerifyNonConcurrentAnalyzer(testCases[0].Path, testCases[0].Analyzer);
-                Verifier.VerifyNoIssueReported(testCases[2].Path, testCases[2].Analyzer);
+                OldVerifier.VerifyNonConcurrentAnalyzer(testCases[0].Path, testCases[0].Analyzer);
+                OldVerifier.VerifyNoIssueReported(testCases[2].Path, testCases[2].Analyzer);
             }
             finally
             {
@@ -250,14 +250,14 @@ namespace SonarAnalyzer.UnitTest.Helpers
                         // special logic for rules with SyntaxNodeAnalysisContext
                         if (testCase.Analyzer is AnonymousDelegateEventUnsubscribe || testCase.Analyzer is TestMethodShouldContainAssertion)
                         {
-                            Verifier.VerifyNoIssueReported(testCase.Path,
+                            OldVerifier.VerifyNoIssueReported(testCase.Path,
                                                            testCase.Analyzer,
                                                            ParseOptionsHelper.FromCSharp8,
                                                            testCase.AdditionalReferences);
                         }
                         else
                         {
-                            Verifier.VerifyAnalyzer(testCase.Path,
+                            OldVerifier.VerifyAnalyzer(testCase.Path,
                                                     testCase.Analyzer,
                                                     ParseOptionsHelper.FromCSharp8,
                                                     testCase.AdditionalReferences);
