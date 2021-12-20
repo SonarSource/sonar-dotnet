@@ -106,7 +106,7 @@ namespace SonarAnalyzer.UnitTest.SymbolicExecution.Roslyn
         [TestMethod]
         public void Conversion_ToLocalVariable_FromTrackedSymbol_ExplicitCast()
         {
-            var validator = SETestContext.CreateCS(@"int a = 42; byte b = (byte)a; Tag(""b"", b);", new LiteralDummyTestCheck()).Validator;
+            var validator = SETestContext.CreateCS(@"int a = 42; byte b = (byte)a; var c = (byte)field; Tag(""b"", b); Tag(""c"", c);", new LiteralDummyTestCheck()).Validator;
             validator.ValidateOrder(
                 "LocalReference: a = 42 (Implicit)",
                 "Literal: 42",
@@ -115,6 +115,11 @@ namespace SonarAnalyzer.UnitTest.SymbolicExecution.Roslyn
                 "LocalReference: a",
                 "Conversion: (byte)a",
                 "SimpleAssignment: b = (byte)a (Implicit)",
+                "LocalReference: c = (byte)field (Implicit)",
+                "InstanceReference: field (Implicit)",
+                "FieldReference: field",
+                "Conversion: (byte)field",
+                "SimpleAssignment: c = (byte)field (Implicit)",
                 "InstanceReference: Tag (Implicit)",
                 @"Literal: ""b""",
                 @"Argument: ""b""",
@@ -122,8 +127,17 @@ namespace SonarAnalyzer.UnitTest.SymbolicExecution.Roslyn
                 "Conversion: b (Implicit)",
                 "Argument: b",
                 @"Invocation: Tag(""b"", b)",
-                @"ExpressionStatement: Tag(""b"", b);");
+                @"ExpressionStatement: Tag(""b"", b);",
+                "InstanceReference: Tag (Implicit)",
+                @"Literal: ""c""",
+                @"Argument: ""c""",
+                "LocalReference: c",
+                "Conversion: c (Implicit)",
+                "Argument: c",
+                @"Invocation: Tag(""c"", c)",
+                @"ExpressionStatement: Tag(""c"", c);");
             validator.ValidateTag("b", x => x.HasConstraint(DummyConstraint.Dummy).Should().BeTrue());
+            validator.ValidateTag("c", x => x.Should().BeNull());
         }
 
         [TestMethod]
