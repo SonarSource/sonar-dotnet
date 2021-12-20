@@ -71,7 +71,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework
             {
                 LanguageNames.CSharp => $"namespace AppendedNamespaceForConcurrencyTest {{ {content} }}",
                 LanguageNames.VisualBasic => content.Insert(ImportsIndexVB(), "Namespace AppendedNamespaceForConcurrencyTest : ") + " : End Namespace",
-                _ => throw new InvalidOperationException("Unexpected project language: " + language)    // FIXME: Refactor repetitive
+                _ => throw language.ToUnexpectedLanguageException()
             };
 
             int ImportsIndexVB() =>
