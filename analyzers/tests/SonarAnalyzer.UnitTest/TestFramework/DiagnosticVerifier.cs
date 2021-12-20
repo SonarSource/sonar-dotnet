@@ -38,7 +38,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework
     {
         private const string AnalyzerFailedDiagnosticId = "AD0001";
 
-        private static readonly string[] BuildErrorsToIgnore = new[]
+        private static readonly string[] BuildErrorsToIgnore =
         {
             "BC36716" // VB12 does not support line continuation comments" i.e. a comment at the end of a multi-line statement.
         };
@@ -68,17 +68,17 @@ namespace SonarAnalyzer.UnitTest.TestFramework
                                   SyntaxTree syntaxTree) =>
             Verify(compilation, new[] { diagnosticAnalyzer }, checkMode, new[] { new File(syntaxTree), });
 
-        public static void Verify(Compilation compilation,
-                                  DiagnosticAnalyzer[] diagnosticAnalyzers,
-                                  CompilationErrorBehavior checkMode,
-                                  IEnumerable<File> sources,
-                                  string sonarProjectConfigPath = null,
-                                  string[] onlyDiagnostics = null)
+        private static void Verify(Compilation compilation,
+                                   DiagnosticAnalyzer[] diagnosticAnalyzers,
+                                   CompilationErrorBehavior checkMode,
+                                   IEnumerable<File> sources,
+                                   string sonarProjectConfigPath = null,
+                                   string[] onlyDiagnostics = null)
         {
             SuppressionHandler.HookSuppression();
             try
             {
-                var diagnostics = GetAnalyzerDiagnostics(compilation, diagnosticAnalyzers, checkMode, sonarProjectConfigPath, onlyDiagnostics);
+                var diagnostics = GetAnalyzerDiagnostics(compilation, diagnosticAnalyzers, checkMode, sonarProjectConfigPath, onlyDiagnostics).ToArray();
                 var expectedIssues = sources.Select(x => x.ToExpectedIssueLocations()).ToArray();
                 VerifyNoExceptionThrown(diagnostics);
                 CompareActualToExpected(compilation.LanguageVersionString(), diagnostics, expectedIssues, false);
@@ -119,16 +119,18 @@ namespace SonarAnalyzer.UnitTest.TestFramework
             GetAnalyzerDiagnostics(compilation, new[] { diagnosticAnalyzer }, CompilationErrorBehavior.FailTest);
 
         public static ImmutableArray<Diagnostic> GetAnalyzerDiagnostics(Compilation compilation,
-                                                                        IEnumerable<DiagnosticAnalyzer> diagnosticAnalyzers,
+                                                                        DiagnosticAnalyzer[] diagnosticAnalyzers,
                                                                         CompilationErrorBehavior checkMode,
                                                                         string sonarProjectConfigPath = null,
                                                                         string[] onlyDiagnostics = null)
         {
             onlyDiagnostics ??= Array.Empty<string>();
             var supportedDiagnostics = diagnosticAnalyzers
-                    .SelectMany(x => x.SupportedDiagnostics.Select(d => d.Id))
-                    .Concat(new[] { AnalyzerFailedDiagnosticId })
-                    .Select(x => new KeyValuePair<string, ReportDiagnostic>(x, Severity(x)));
+                .SelectMany(x => x.SupportedDiagnostics.Select(d => d.Id))
+                .Concat(new[] { AnalyzerFailedDiagnosticId })
+                .Select(x => new KeyValuePair<string, ReportDiagnostic>(x, Severity(x)))
+                .ToArray();
+
             var ids = supportedDiagnostics.Select(x => x.Key).ToHashSet();
 
             var compilationOptions = compilation.Options.WithSpecificDiagnosticOptions(supportedDiagnostics);
@@ -158,7 +160,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework
             }
         }
 
-        public static void CompareActualToExpected(string languageVersion, IEnumerable<Diagnostic> diagnostics, FileIssueLocations[] expectedIssuesPerFile, bool compareIdToMessage)
+        public static void CompareActualToExpected(string languageVersion, Diagnostic[] diagnostics, FileIssueLocations[] expectedIssuesPerFile, bool compareIdToMessage)
         {
             DumpActualDiagnostics(languageVersion, diagnostics);
 
@@ -175,7 +177,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework
                         : null);
 
                 var secondaryLocations = diagnostic.AdditionalLocations
-                    .Select((location, i) => diagnostic.GetSecondaryLocation(i))
+                    .Select((_, i) => diagnostic.GetSecondaryLocation(i))
                     .OrderBy(x => x.Location.GetLineNumberToReport())
                     .ThenBy(x => x.Location.GetLineSpan().StartLinePosition.Character);
 
@@ -209,9 +211,9 @@ namespace SonarAnalyzer.UnitTest.TestFramework
                 ? expectedIssuesPerFile.SingleOrDefault(x => x.IssueLocations.Any())?.IssueLocations ?? new List<IIssueLocation>() // Issue locations get removed, so the list could become empty
                 : expectedIssuesPerFile.Single(x => x.FileName == location.SourceTree.FilePath).IssueLocations;
 
-        private static void DumpActualDiagnostics(string languageVersion, IEnumerable<Diagnostic> diagnostics)
+        private static void DumpActualDiagnostics(string languageVersion, Diagnostic[] diagnostics)
         {
-            Console.WriteLine($"{languageVersion}: Actual diagnostics: {diagnostics.Count()}");
+            Console.WriteLine($"{languageVersion}: Actual diagnostics: {diagnostics.Length}");
             foreach (var d in diagnostics.OrderBy(x => x.GetLineNumberToReport()))
             {
                 var lineSpan = d.Location.GetLineSpan();
@@ -221,12 +223,13 @@ namespace SonarAnalyzer.UnitTest.TestFramework
 
         private static void VerifyBuildErrors(ImmutableArray<Diagnostic> diagnostics, Compilation compilation)
         {
-            var buildErrors = GetBuildErrors(diagnostics);
+            var buildErrors = GetBuildErrors(diagnostics).ToArray();
 
             var expectedBuildErrors = compilation.SyntaxTrees
                                                  .Skip(1)
                                                  .Select(x => new FileIssueLocations(x.FilePath, IssueLocationCollector.GetExpectedBuildErrors(x.GetText().Lines).ToList()))
                                                  .ToArray();
+
             CompareActualToExpected(compilation.LanguageVersionString(), buildErrors, expectedBuildErrors, true);
         }
 
@@ -246,8 +249,14 @@ namespace SonarAnalyzer.UnitTest.TestFramework
             Location location, string message, string issueId) =>
             VerifyIssue(languageVersion, expectedIssues, issueFilter, location, message, null, false, issueId);
 
-        private static string VerifyIssue(string languageVersion, ICollection<IIssueLocation> expectedIssues, Func<IIssueLocation, bool> issueFilter,
-            Location location, string message, string extraInfo, bool isPrimary, string primaryIssueId)
+        private static string VerifyIssue(string languageVersion,
+                                          ICollection<IIssueLocation> expectedIssues,
+                                          Func<IIssueLocation, bool> issueFilter,
+                                          Location location,
+                                          string message,
+                                          string extraInfo,
+                                          bool isPrimary,
+                                          string primaryIssueId)
         {
             var lineNumber = location.GetLineNumberToReport();
             var expectedIssue = expectedIssues
@@ -330,9 +339,8 @@ Actual  : '{message}'");
 
         internal static class SuppressionHandler
         {
+            private static readonly ConcurrentDictionary<string, int> Counters = new();
             private static bool isHooked;
-
-            private static ConcurrentDictionary<string, int> counters = new ConcurrentDictionary<string, int>();
 
             public static void HookSuppression()
             {
@@ -342,7 +350,7 @@ Actual  : '{message}'");
                 }
                 isHooked = true;
 
-                SonarAnalysisContext.ShouldDiagnosticBeReported = (s, d) =>
+                SonarAnalysisContext.ShouldDiagnosticBeReported = (_, d) =>
                 {
                     IncrementReportCount(d.Id);
                     return true;
@@ -361,7 +369,7 @@ Actual  : '{message}'");
             }
 
             public static void IncrementReportCount(string ruleId) =>
-                counters.AddOrUpdate(ruleId, addValueFactory: key => 1, updateValueFactory: (key, count) => count + 1);
+                Counters.AddOrUpdate(ruleId, _ => 1, (_, count) => count + 1);
 
             public static bool ExtensionMethodsCalledForAllDiagnostics(IEnumerable<DiagnosticAnalyzer> analyzers) =>
                 // In general this check is not very precise, because when the tests are run in parallel
@@ -369,8 +377,8 @@ Actual  : '{message}'");
                 // words, we cannot distinguish between diagnostics reported from different tests. That's
                 // why we require each diagnostic to be reported through the extension methods at least once.
                 analyzers.SelectMany(analyzer => analyzer.SupportedDiagnostics)
-                    .Select(d => DictionaryExtensions.GetValueOrDefault(counters, d.Id))
-                    .Any(count => count > 0);
+                         .Select(d => DictionaryExtensions.GetValueOrDefault(Counters, d.Id))
+                         .Any(count => count > 0);
         }
     }
 }
