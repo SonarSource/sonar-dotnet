@@ -30,5 +30,25 @@ namespace SonarAnalyzer.UnitTest.TestFramework.Tests
         [TestMethod]
         public void Constructor_Null_Throws() =>
             ((Func<Verifier>)(() => new(null))).Should().Throw<ArgumentNullException>().And.ParamName.Should().Be("builder");
+
+        [TestMethod]
+        public void Constructor_NoAnalyzers_Throws() =>
+            new VerifierBuilder()
+                .Invoking(x => x.Build()).Should().Throw<ArgumentException>().WithMessage("Analyzers cannot be empty.");
+
+        [TestMethod]
+        public void Constructor_NullAnalyzers_Throws() =>
+            new VerifierBuilder().AddAnalyzer(() => null)
+                .Invoking(x => x.Build()).Should().Throw<ArgumentException>().WithMessage("Analyzers cannot produce null.");
+
+        [TestMethod]
+        public void Constructor_NoPaths_Throws() =>
+            new VerifierBuilder<DummyAnalyzer>()
+                .Invoking(x => x.Build()).Should().Throw<ArgumentException>().WithMessage("Paths cannot be empty.");
+
+        [TestMethod]
+        public void Constructor_MixedLanguagePaths_Throws() =>
+            new VerifierBuilder<DummyAnalyzer>().AddPaths("File.txt")
+                .Invoking(x => x.Build()).Should().Throw<ArgumentException>().WithMessage("Path 'File.txt' doesn't match C# file extension '.cs'.");
     }
 }

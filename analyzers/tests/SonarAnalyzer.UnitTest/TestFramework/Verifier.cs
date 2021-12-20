@@ -42,17 +42,31 @@ namespace SonarAnalyzer.UnitTest.TestFramework
         public Verifier(VerifierBuilder builder)
         {
             this.builder = builder ?? throw new ArgumentNullException(nameof(builder));
-            // FIXME: Validate input
             analyzers = builder.Analyzers.Select(x => x()).ToArray();
+            if (!analyzers.Any())
+            {
+                throw new ArgumentException(nameof(builder.Analyzers) + " cannot be empty.");
+            }
+            if (analyzers.Any(x => x == null))
+            {
+                throw new ArgumentException(nameof(builder.Analyzers) + " cannot produce null.");
+            }
             language = AnalyzerLanguage.FromName(analyzers.SelectMany(x => x.GetType().GetCustomAttributes<DiagnosticAnalyzerAttribute>()).SelectMany(x => x.Languages).Single());
-            // FIXME: Validate path language
+            if (!builder.Paths.Any())
+            {
+                throw new ArgumentException(nameof(builder.Paths) + " cannot be empty.");
+            }
+            if (builder.Paths.FirstOrDefault(x => !Path.GetExtension(x).Equals(language.FileExtension, StringComparison.OrdinalIgnoreCase)) is { } unexpectedPath)
+            {
+                throw new ArgumentException($"Path '{unexpectedPath}' doesn't match {language.LanguageName} file extension '{language.FileExtension}'.");
+            }
         }
 
         public void Verify()    // This should never has any arguments
         {
             using var scope = new EnvironmentVariableScope { EnableConcurrentAnalysis = true };     // ToDo: Implement properly
             var paths = builder.Paths.Select(x => Path.GetFullPath(Path.Combine("TestCases", x)));
-            var pathsWithConcurrencyTests = paths.Count() == 1 ? CreateConcurrencyTest(paths) : paths;  // FIXME: Redesign
+            var pathsWithConcurrencyTests = paths.Count() == 1 ? CreateConcurrencyTest(paths) : paths;  // ToDo: Redesign when implementing concurrency
             var solution = SolutionBuilder.CreateSolutionFromPaths(pathsWithConcurrencyTests, OutputKind.DynamicallyLinkedLibrary, builder.References);
             foreach (var compilation in solution.Compile(builder.ParseOptions.ToArray()))
             {
