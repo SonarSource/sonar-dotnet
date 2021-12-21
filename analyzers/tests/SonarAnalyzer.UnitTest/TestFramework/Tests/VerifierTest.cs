@@ -20,7 +20,10 @@
 
 using System;
 using FluentAssertions;
+using Microsoft.CodeAnalysis;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using SonarAnalyzer.Rules.CSharp;
+using SonarAnalyzer.Rules.SymbolicExecution;
 
 namespace SonarAnalyzer.UnitTest.TestFramework.Tests
 {
@@ -117,11 +120,11 @@ Line: 4, Type: primary, Id: ''
 {
     private bool a = true;     // Noncompliant - FN in File.cs
 }")
-            .AddPaths(WriteFile(
+            .AddPaths(WriteFile("Second.cs",
 @"public class Second
 {
     private bool a = true;     // Noncompliant - FN in Second.cs
-}", "Second.cs"))
+}"))
             .Invoking(x => x.Verify()).Should().Throw<AssertFailedException>().WithMessage(
 @"CSharp7: Issue(s) expected but not raised in file(s):
 File: File.cs
@@ -144,10 +147,57 @@ Line: 3, Type: primary, Id: ''
                 .WithMessage("CSharp5: Unexpected build error [CS8026]: Feature 'target-typed object creation' is not available in C# 5. Please use language version 9.0 or greater. on line 3");
         }
 
-        private VerifierBuilder WithSnippet(string code) =>
-            Dummy.AddPaths(WriteFile(code));
+        [TestMethod]
+        public void Verify_ErrorBehavior()
+        {
+            var builder = WithSnippet("undefined");
+            builder.Invoking(x => x.Verify()).Should().Throw<UnexpectedDiagnosticException>()
+                .WithMessage("CSharp7: Unexpected build error [CS0116]: A namespace cannot directly contain members such as fields, methods or statements on line 1");
+            builder.WithErrorBehavior(CompilationErrorBehavior.FailTest).Invoking(x => x.Verify()).Should().Throw<UnexpectedDiagnosticException>()
+                .WithMessage("CSharp7: Unexpected build error [CS0116]: A namespace cannot directly contain members such as fields, methods or statements on line 1");
+            builder.WithErrorBehavior(CompilationErrorBehavior.Ignore).Invoking(x => x.Verify()).Should().NotThrow();
+        }
 
-        private string WriteFile(string content, string name = "File.cs") =>
+        [TestMethod]
+        public void Verify_OnlyDiagnostics()
+        {
+            var builder = new VerifierBuilder<SymbolicExecutionRunner>().AddPaths(WriteFile("File.cs",
+@"public class Sample
+{
+    public void Method()
+    {
+        var t = true;
+        if (t)          // S2583
+            t = true;
+        else
+            t = true;
+        if (t)          // S2589
+            t = true;
+    }
+}"));
+            builder.Invoking(x => x.Verify()).Should().Throw<UnexpectedDiagnosticException>().WithMessage(
+@"CSharp7: Unexpected primary issue on line 6, span (5,12)-(5,13) with message 'Change this condition so that it does not always evaluate to 'true'; some subsequent code is never executed.'.*");
+            builder.WithOnlyDiagnostics(ConditionEvaluatesToConstant.S2589).Invoking(x => x.Verify()).Should().Throw<UnexpectedDiagnosticException>().WithMessage(
+@"CSharp7: Unexpected primary issue on line 10, span (9,12)-(9,13) with message 'Change this condition so that it does not always evaluate to 'true'.'*");
+            builder.WithOnlyDiagnostics(NullPointerDereference.S2259).Invoking(x => x.Verify()).Should().NotThrow();
+        }
+
+        [TestMethod]
+        public void Verify_OutputKind()
+        {
+            var builder = WithSnippet("var topLevelStatement = true;")
+                .AddPaths(WriteFile("Second.cs", "public class Workaround { }")) // ToDo: This should be replaced with .WithNonconcurrent() inside WithTopLevelStatement
+                .WithOptions(ParseOptionsHelper.FromCSharp9);
+            builder.WithTopLevelStatements().Invoking(x => x.Verify()).Should().NotThrow();
+            builder.WithOutputKind(OutputKind.ConsoleApplication).Invoking(x => x.Verify()).Should().NotThrow();
+            builder.Invoking(x => x.Verify()).Should().Throw<UnexpectedDiagnosticException>()
+                .WithMessage("CSharp9: Unexpected build error [CS8805]: Program using top-level statements must be an executable. on line 1");
+        }
+
+        private VerifierBuilder WithSnippet(string code) =>
+            Dummy.AddPaths(WriteFile("File.cs", code));
+
+        private string WriteFile(string name, string content) =>
             TestHelper.WriteFile(TestContext, name, content);
     }
 }
