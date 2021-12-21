@@ -24,6 +24,8 @@ using System.Collections.Immutable;
 using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Diagnostics;
+using CS = Microsoft.CodeAnalysis.CSharp;
+using VB = Microsoft.CodeAnalysis.VisualBasic;
 
 namespace SonarAnalyzer.UnitTest.TestFramework
 {
@@ -66,10 +68,18 @@ namespace SonarAnalyzer.UnitTest.TestFramework
             new(this) { Paths = Paths.Concat(paths).ToImmutableArray() };
 
         public VerifierBuilder AddReferences(IEnumerable<MetadataReference> references) =>
-            new(this) { References = References.Concat(references).ToImmutableArray() };
+            references != null && references.Any()
+                ? new(this) { References = References.Concat(references).ToImmutableArray() }
+                : this;
 
         public VerifierBuilder WithErrorBehavior(CompilationErrorBehavior errorBehavior) =>
             new(this) { ErrorBehavior = errorBehavior };
+
+        public VerifierBuilder WithLanguageVersion(CS.LanguageVersion languageVersion) =>
+            WithOptions(ImmutableArray.Create<ParseOptions>(new CS.CSharpParseOptions(languageVersion)));
+
+        public VerifierBuilder WithLanguageVersion(VB.LanguageVersion languageVersion) =>
+            WithOptions(ImmutableArray.Create<ParseOptions>(new VB.VisualBasicParseOptions(languageVersion)));
 
         public VerifierBuilder WithOnlyDiagnostics(params DiagnosticDescriptor[] onlyDiagnostics) =>
             new(this) { OnlyDiagnostics = onlyDiagnostics.ToImmutableArray() };

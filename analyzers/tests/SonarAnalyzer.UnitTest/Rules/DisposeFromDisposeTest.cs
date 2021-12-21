@@ -34,8 +34,10 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void DisposeFromDispose_CSharp7_2() =>
             // Readonly structs have been introduced in C# 7.2.
             // In C# 8, readonly structs can be disposed of, and the behavior is different.
-            OldVerifier.VerifyAnalyzer(@"TestCases\DisposeFromDispose.CSharp7_2.cs", new DisposeFromDispose(),
-                ImmutableArray.Create<ParseOptions>(new CSharpParseOptions(LanguageVersion.CSharp7_2)));
+            new VerifierBuilder<DisposeFromDispose>()
+                .AddPaths("DisposeFromDispose.CSharp7_2.cs")
+                .WithLanguageVersion(LanguageVersion.CSharp7_2)
+                .Verify();
 
         [TestMethod]
         public void DisposeFromDispose_CSharp8() =>

@@ -52,6 +52,6 @@ unsafe struct FixedArray
         a[0] = 42;
         b[0] = 42;
     }
-}", new NotAssignedPrivateMember(), new[] { new CSharpParseOptions(LanguageVersion.CSharp7_3) });
+}", new NotAssignedPrivateMember(), new[] { new CSharpParseOptions(LanguageVersion.CSharp7_3) });   // ToDo: Use WithLanguageVersion instead
     }
 }

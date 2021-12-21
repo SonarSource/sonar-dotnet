@@ -24,6 +24,8 @@ using Microsoft.CodeAnalysis;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.Rules.CSharp;
 using SonarAnalyzer.UnitTest.MetadataReferences;
+using CS = Microsoft.CodeAnalysis.CSharp;
+using VB = Microsoft.CodeAnalysis.VisualBasic;
 
 namespace SonarAnalyzer.UnitTest.TestFramework.Tests
 {
@@ -72,6 +74,14 @@ namespace SonarAnalyzer.UnitTest.TestFramework.Tests
         }
 
         [TestMethod]
+        public void AddReferences_Null_ReturnsSelf() =>
+            Empty.AddReferences(null).Should().Be(Empty);
+
+        [TestMethod]
+        public void AddReferences_Empty_ReturnsSelf() =>
+            Empty.AddReferences(Enumerable.Empty<MetadataReference>()).Should().Be(Empty);
+
+        [TestMethod]
         public void WithErrorBehavior_Overrides_IsImmutable()
         {
             var one = Empty.WithErrorBehavior(CompilationErrorBehavior.FailTest);
@@ -79,6 +89,26 @@ namespace SonarAnalyzer.UnitTest.TestFramework.Tests
             Empty.ErrorBehavior.Should().Be(CompilationErrorBehavior.Default);
             one.ErrorBehavior.Should().Be(CompilationErrorBehavior.FailTest);
             two.ErrorBehavior.Should().Be(CompilationErrorBehavior.Ignore);
+        }
+
+        [TestMethod]
+        public void WithLanguageVersion_Overrides_IsImmutable_CS()
+        {
+            var one = Empty.WithLanguageVersion(CS.LanguageVersion.CSharp10);
+            var two = one.WithLanguageVersion(CS.LanguageVersion.CSharp7);
+            Empty.ParseOptions.Should().BeEmpty();
+            one.ParseOptions.Should().ContainSingle().Which.Should().BeOfType<CS.CSharpParseOptions>().Which.LanguageVersion.Should().Be(CS.LanguageVersion.CSharp10);
+            two.ParseOptions.Should().ContainSingle().Which.Should().BeOfType<CS.CSharpParseOptions>().Which.LanguageVersion.Should().Be(CS.LanguageVersion.CSharp7);
+        }
+
+        [TestMethod]
+        public void WithLanguageVersion_Overrides_IsImmutable_VB()
+        {
+            var one = Empty.WithLanguageVersion(VB.LanguageVersion.VisualBasic16);
+            var two = one.WithLanguageVersion(VB.LanguageVersion.VisualBasic10);
+            Empty.ParseOptions.Should().BeEmpty();
+            one.ParseOptions.Should().ContainSingle().Which.Should().BeOfType<VB.VisualBasicParseOptions>().Which.LanguageVersion.Should().Be(VB.LanguageVersion.VisualBasic16);
+            two.ParseOptions.Should().ContainSingle().Which.Should().BeOfType<VB.VisualBasicParseOptions>().Which.LanguageVersion.Should().Be(VB.LanguageVersion.VisualBasic10);
         }
 
         [TestMethod]

@@ -73,6 +73,6 @@ public static class MyClass
 
      public static T RunFunc<T>(Func<T> func, T returnValue = default) => returnValue;
 }",
-                new RedundantCast(), new[] { new CSharpParseOptions(LanguageVersion.CSharp7_1) });
+                new RedundantCast(), new[] { new CSharpParseOptions(LanguageVersion.CSharp7_1) });  //ToDo: Use WithLanguageVersion instead
     }
 }
