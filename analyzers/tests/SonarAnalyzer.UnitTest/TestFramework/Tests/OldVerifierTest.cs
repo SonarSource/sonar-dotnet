@@ -30,7 +30,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.Helpers;
 using DocumentBasedFixAllProvider = SonarAnalyzer.Common.DocumentBasedFixAllProvider;
 
-namespace SonarAnalyzer.UnitTest.TestFramework
+namespace SonarAnalyzer.UnitTest.TestFramework.Tests
 {
     [TestClass]
     public class OldVerifierTest

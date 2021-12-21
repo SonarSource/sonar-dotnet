@@ -25,10 +25,9 @@ using FluentAssertions;
 using Microsoft.CodeAnalysis.Text;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace SonarAnalyzer.UnitTest.TestFramework.IssueLocationCollectorTests
+namespace SonarAnalyzer.UnitTest.TestFramework.Tests
 {
-    [TestClass]
-    public class IssueLocationCollector_GetPreciseIssueLocations
+    public partial class IssueLocationCollectorTest
     {
         [TestMethod]
         public void GetPreciseIssueLocations_NoMessage_NoIds()

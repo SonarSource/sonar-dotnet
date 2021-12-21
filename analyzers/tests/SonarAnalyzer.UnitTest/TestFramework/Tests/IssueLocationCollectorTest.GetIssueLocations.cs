@@ -24,10 +24,9 @@ using FluentAssertions;
 using Microsoft.CodeAnalysis.Text;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace SonarAnalyzer.UnitTest.TestFramework.IssueLocationCollectorTests
+namespace SonarAnalyzer.UnitTest.TestFramework.Tests
 {
-    [TestClass]
-    public class IssueLocationCollector_GetIssueLocations
+    public partial class IssueLocationCollectorTest
     {
         [TestMethod]
         public void GetIssueLocations_Noncompliant_With_Two_Flows()

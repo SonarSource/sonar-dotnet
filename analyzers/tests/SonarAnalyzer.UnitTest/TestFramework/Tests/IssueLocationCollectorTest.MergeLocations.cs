@@ -24,10 +24,9 @@ using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using IssueLocation = SonarAnalyzer.UnitTest.TestFramework.IssueLocationCollector.IssueLocation;
 
-namespace SonarAnalyzer.UnitTest.TestFramework.IssueLocationCollectorTests
+namespace SonarAnalyzer.UnitTest.TestFramework.Tests
 {
-    [TestClass]
-    public class IssueLocationCollector_MergeLocations
+    public partial class IssueLocationCollectorTest
     {
         [TestMethod]
         public void MergeLocations_No_Issues()
