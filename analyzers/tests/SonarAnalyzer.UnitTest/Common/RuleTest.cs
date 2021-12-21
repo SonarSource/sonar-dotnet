@@ -48,7 +48,7 @@ namespace SonarAnalyzer.UnitTest.Common
         {
             foreach (var codeFixProvider in GetCodeFixProviderTypes(RuleFinder.PackagedRuleAssemblies))
             {
-                var analyzerName = codeFixProvider.FullName.Replace(RuleDetailBuilder.CodeFixProviderSuffix, "");
+                var analyzerName = codeFixProvider.FullName.Replace(RuleDetailBuilder.CodeFixProviderSuffix, string.Empty);
                 codeFixProvider.Assembly.GetType(analyzerName).Should().NotBeNull("CodeFixProvider '{0}' has no matching DiagnosticAnalyzer.", codeFixProvider.Name);
             }
         }
@@ -58,7 +58,9 @@ namespace SonarAnalyzer.UnitTest.Common
         {
             foreach (var codeFixProvider in GetCodeFixProviderTypes(RuleFinder.PackagedRuleAssemblies))
             {
-                RuleDetailBuilder.GetCodeFixTitles(codeFixProvider).Should().NotBeEmpty("CodeFixProvider '{0}' has no title field.", codeFixProvider.Name);
+                if (codeFixProvider.Name == "MultipleVariableDeclarationCodeFixProvider")
+                    System.Diagnostics.Debugger.Break();
+                RuleDetailBuilder.CodeFixTitles(codeFixProvider).Should().NotBeEmpty("CodeFixProvider '{0}' has no title field.", codeFixProvider.Name);
             }
         }
 

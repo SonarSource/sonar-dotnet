@@ -70,7 +70,8 @@ namespace SonarAnalyzer.UnitTest.PackagingTests
         private static string[] SortedRulesFromTypes(AnalyzerLanguage language) =>
             RuleFinder.GetAnalyzers(language)
                 .Where(x => x is not UtilityAnalyzerBase)
-                .SelectMany(x => x.SupportedDiagnostics.Select(desciptor => desciptor.Id).Distinct())   // One class can have the same ruleId multiple times, see S3240
+                .SelectMany(x => x.SupportedDiagnostics.Select(desciptor => desciptor.Id))
+                .Distinct() // One class can have the same ruleId multiple times, see S3240, same ruleId can be in multiple classes (see InvalidCastToInterface)
                 .OrderBy(x => x)
                 .ToArray();
 

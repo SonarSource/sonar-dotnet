@@ -18,30 +18,78 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System;
 using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using System.Reflection;
+using System.Resources;
+using SonarAnalyzer.Common;
 
 namespace SonarAnalyzer.RuleDescriptors
 {
     public class RuleDetail
     {
-        public RuleDetail()
+        private static readonly Assembly SonarAnalyzerUtilitiesAssembly = typeof(RuleDetail).Assembly;
+        private static readonly HashSet<string> BackwardsCompatibleTypes = new()
         {
-            Tags = new List<string>();
-            Parameters = new List<RuleParameter>();
-            CodeFixTitles = new List<string>();
-        }
+            "BUG",
+            "CODE_SMELL",
+            "VULNERABILITY",
+        };
 
-        public string Key { get; set; }
-        public string Type { get; set; }
-        public string Title { get; set; }
-        public string Severity { get; set; }
-        public string Status { get; set; }
-        public string Description { get; set; }
-        public List<string> Tags { get; private set; }
-        public List<RuleParameter> Parameters { get; private set; }
+        public string Key { get; }
+        public string Type { get; }
+        public string Title { get; }
+        public string Severity { get; }
+        public string Status { get; }
+        public string Description { get; }
         public bool IsActivatedByDefault { get; set; }
-        public List<string> CodeFixTitles { get; private set; }
         public string Remediation { get; set; }
         public string RemediationCost { get; set; }
+        public List<string> Tags { get; }
+        public List<RuleParameter> Parameters { get; } = new List<RuleParameter>();
+        public List<string> CodeFixTitles { get; } = new List<string>();
+
+        public RuleDetail(AnalyzerLanguage language, ResourceManager resources, string id)
+        {
+            Key = id;
+            Type = BackwardsCompatibleType(resources.GetString($"{id}_Type"));
+            Title = resources.GetString($"{id}_Title");
+            Severity = resources.GetString($"{id}_Severity");
+            Status = resources.GetString($"{id}_Status");
+            IsActivatedByDefault = bool.Parse(resources.GetString($"{id}_IsActivatedByDefault"));
+            Description = HtmlDescription(language, id);
+            Remediation = SonarQubeRemediationFunction(resources.GetString($"{id}_Remediation"));
+            RemediationCost = resources.GetString($"{id}_RemediationCost");
+            Tags = resources.GetString($"{id}_Tags").Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries).ToList();
+        }
+
+        // SonarQube before 7.3 supports only 3 types of issues: BUG, CODE_SMELL and VULNERABILITY.
+        // This method returns backwards compatible issue type. The type should be adjusted in
+        // AbstractRulesDefinition.
+        private static string BackwardsCompatibleType(string type) =>
+            BackwardsCompatibleTypes.Contains(type) ? type : "VULNERABILITY";
+
+        private static string SonarQubeRemediationFunction(string remediation) =>
+            remediation == "Constant/Issue" ? "CONSTANT_ISSUE" : null;
+
+        private static string HtmlDescription(AnalyzerLanguage language, string id)
+        {
+            if (SonarAnalyzerUtilitiesAssembly.GetManifestResourceNames().FirstOrDefault(MatchesRule) is { }  resourceName)
+            {
+                using var stream = SonarAnalyzerUtilitiesAssembly.GetManifestResourceStream(resourceName);
+                using var reader = new StreamReader(stream);
+                return reader.ReadToEnd();
+            }
+            else
+            {
+                throw new InvalidDataException($"Could not locate resource for rule {id}");
+            }
+
+            bool MatchesRule(string resource) =>
+                resource.EndsWith($"SonarAnalyzer.Rules.Description.{id}.html", StringComparison.OrdinalIgnoreCase)
+                || resource.EndsWith($"SonarAnalyzer.Rules.Description.{id}{language.ResourceSuffix}.html", StringComparison.OrdinalIgnoreCase);
+        }
     }
 }

@@ -20,11 +20,10 @@
 
 using System;
 using System.Collections.Generic;
-using System.Globalization;
-using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Resources;
+using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
@@ -34,171 +33,63 @@ namespace SonarAnalyzer.Utilities
 {
     public static class RuleDetailBuilder
     {
-        private const string RuleDescriptionPathPattern = "SonarAnalyzer.Rules.Description.{0}.html";
         internal const string CodeFixProviderSuffix = "CodeFixProvider";
-
-        private static readonly HashSet<string> BackwardsCompatibleTypes = new HashSet<string>
-        {
-            "BUG",
-            "CODE_SMELL",
-            "VULNERABILITY",
-        };
-
-        private static readonly Assembly SonarAnalyzerUtilitiesAssembly = typeof(RuleDetailBuilder).Assembly;
 
         public static IEnumerable<RuleDetail> GetAllRuleDetails(AnalyzerLanguage language)
         {
+            var resources = language.LanguageName switch
+            {
+                LanguageNames.CSharp => new ResourceManager("SonarAnalyzer.RspecStrings", typeof(Rules.CSharp.FlagsEnumZeroMember).Assembly),
+                LanguageNames.VisualBasic => new ResourceManager("SonarAnalyzer.RspecStrings", typeof(Rules.VisualBasic.FlagsEnumZeroMember).Assembly),
+                _ => throw new InvalidOperationException("Unexpected language: " + language)
+            };
             return new RuleFinder()
                 .GetAnalyzerTypes(language)
                 .Select(x => (DiagnosticAnalyzer)Activator.CreateInstance(x))
-                .SelectMany(x => GetRuleDetails(x, language));
+                .SelectMany(x => UniqueRuleIds(x).Select(id => new { Id = id, Type = x.GetType() }))
+                .GroupBy(x => x.Id)    // Same ruleId can be in multiple classes (see InvalidCastToInterface)
+                .Select(x => CreateRuleDetail(language, resources, x.Key, x.Select(item => item.Type)));
         }
 
-        private static IEnumerable<RuleDetail> GetRuleDetails(DiagnosticAnalyzer analyzer, AnalyzerLanguage language) =>
-            analyzer.SupportedDiagnostics.Select(x => x.Id).Distinct().Select(id => GetRuleDetail(id, analyzer.GetType(), language));
+        internal /*for testring*/ static IEnumerable<string> CodeFixTitles(Type codeFixType) =>
+            CodeFixProvidersWithBase(codeFixType)
+                .SelectMany(x => x.GetFields(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Static))
+                .Where(x => x.Name.StartsWith("Title", StringComparison.Ordinal) && x.FieldType == typeof(string))
+                .Select(x => (string)x.GetRawConstantValue());
 
-        private static RuleDetail GetRuleDetail(string id, Type analyzerType, AnalyzerLanguage language)
+        private static IEnumerable<string> UniqueRuleIds(DiagnosticAnalyzer analyzer) =>
+            analyzer.SupportedDiagnostics.Select(x => x.Id).Distinct(); // One class can have the same ruleId multiple times, see S3240
+
+        private static RuleDetail CreateRuleDetail(AnalyzerLanguage language, ResourceManager resources, string id, IEnumerable<Type> analyzerTypes)
         {
-            var resources = new ResourceManager("SonarAnalyzer.RspecStrings", analyzerType.Assembly);
-            var ruleDetail = new RuleDetail
+            var ret = new RuleDetail(language, resources, id);
+            foreach (var type in analyzerTypes)
             {
-                Key = id,
-                Type = GetBackwardsCompatibleType(resources.GetString($"{id}_Type")),
-                Title = resources.GetString($"{id}_Title"),
-                Severity = resources.GetString($"{id}_Severity"),
-                Status = resources.GetString($"{id}_Status"),
-                IsActivatedByDefault = bool.Parse(resources.GetString($"{id}_IsActivatedByDefault")),
-                Description = GetResourceHtml(id, language),
-                Remediation = ToSonarQubeRemediationFunction(resources.GetString($"{id}_Remediation")),
-                RemediationCost = resources.GetString($"{id}_RemediationCost")
-            };
-            ruleDetail.Tags.AddRange(resources.GetString($"{id}_Tags").Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries));
-
-            GetParameters(analyzerType, ruleDetail);
-            GetCodeFixNames(analyzerType, ruleDetail);
-
-            return ruleDetail;
-        }
-
-        private static Type GetCodeFixProviderType(Type analyzerType)
-        {
-            var typeName = analyzerType.FullName + CodeFixProviderSuffix;
-            return analyzerType.Assembly.GetType(typeName);
-        }
-
-        private static string ToSonarQubeRemediationFunction(string remediation)
-        {
-            if (remediation == null)
-            {
-                return null;
+                ret.Parameters.AddRange(Parameters(type));
+                if (type.Assembly.GetType(type.FullName + CodeFixProviderSuffix) is { } codeFixType)
+                {
+                    ret.CodeFixTitles.AddRange(CodeFixTitles(codeFixType));
+                }
             }
-
-            if (remediation == "Constant/Issue")
-            {
-                return "CONSTANT_ISSUE";
-            }
-
-            return null;
+            return ret;
         }
 
-        private static void GetCodeFixNames(Type analyzerType, RuleDetail ruleDetail)
-        {
-            var codeFixProvider = GetCodeFixProviderType(analyzerType);
-            if (codeFixProvider == null)
-            {
-                return;
-            }
-
-            var titles = GetCodeFixTitles(codeFixProvider);
-
-            ruleDetail.CodeFixTitles.AddRange(titles);
-        }
-
-        public static IEnumerable<string> GetCodeFixTitles(Type codeFixProvider)
-        {
-            return GetCodeFixProvidersWithBase(codeFixProvider)
-                .SelectMany(t => t.GetFields(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Static))
-                .Where(field =>
-                    field.Name.StartsWith("Title", StringComparison.Ordinal) &&
-                    field.FieldType == typeof(string))
-                .Select(field => (string)field.GetRawConstantValue());
-        }
-
-        private static IEnumerable<Type> GetCodeFixProvidersWithBase(Type codeFixProvider)
+        private static IEnumerable<Type> CodeFixProvidersWithBase(Type codeFixProvider)
         {
             yield return codeFixProvider;
 
-            var baseClass = codeFixProvider.BaseType;
-            while (baseClass != null && baseClass != typeof(SonarCodeFixProvider))
+            var baseType = codeFixProvider.BaseType;
+            while (baseType != null && baseType != typeof(SonarCodeFixProvider))
             {
-                yield return baseClass;
-                baseClass = baseClass.BaseType;
+                yield return baseType;
+                baseType = baseType.BaseType;
             }
         }
 
-        private static void GetParameters(Type analyzerType, RuleDetail ruleDetail)
-        {
-            var parameters = analyzerType.GetProperties()
-                .Select(p => p.GetCustomAttributes<RuleParameterAttribute>().SingleOrDefault());
-
-            foreach (var ruleParameter in parameters
-                .WhereNotNull())
-            {
-                ruleDetail.Parameters.Add(
-                    new RuleParameter
-                    {
-                        DefaultValue = ruleParameter.DefaultValue,
-                        Description = ruleParameter.Description,
-                        Key = ruleParameter.Key,
-                        Type = ruleParameter.Type.ToSonarQubeString()
-                    });
-            }
-        }
-
-        private static string GetResourceHtml(string id, AnalyzerLanguage language)
-        {
-            var resources = SonarAnalyzerUtilitiesAssembly.GetManifestResourceNames();
-            var resource = GetResource(resources, id, language);
-            if (resource == null)
-            {
-                throw new InvalidDataException($"Could not locate resource for rule {id}");
-            }
-
-            using (var stream = SonarAnalyzerUtilitiesAssembly.GetManifestResourceStream(resource))
-            using (var reader = new StreamReader(stream))
-            {
-                return reader.ReadToEnd();
-            }
-        }
-
-        private static string GetResource(IEnumerable<string> resources, string key, AnalyzerLanguage language)
-        {
-            if (language == AnalyzerLanguage.CSharp)
-            {
-                return resources.FirstOrDefault(r =>
-                    r.EndsWith(string.Format(CultureInfo.InvariantCulture, RuleDescriptionPathPattern, key),
-                        StringComparison.OrdinalIgnoreCase) ||
-                    r.EndsWith(string.Format(CultureInfo.InvariantCulture, RuleDescriptionPathPattern, key + "_cs"),
-                        StringComparison.OrdinalIgnoreCase));
-            }
-            if (language == AnalyzerLanguage.VisualBasic)
-            {
-                return resources.FirstOrDefault(r =>
-                    r.EndsWith(string.Format(CultureInfo.InvariantCulture, RuleDescriptionPathPattern, key),
-                        StringComparison.OrdinalIgnoreCase) ||
-                    r.EndsWith(string.Format(CultureInfo.InvariantCulture, RuleDescriptionPathPattern, key + "_vb"),
-                        StringComparison.OrdinalIgnoreCase));
-            }
-
-            throw new ArgumentException("Language needs to be either C# or VB.NET", nameof(language));
-        }
-
-        // SonarQube before 7.3 supports only 3 types of issues: BUG, CODE_SMELL and VULNERABILITY.
-        // This method returns backwards compatible issue type. The type should be adjusted in
-        // AbstractRulesDefinition.
-        private static string GetBackwardsCompatibleType(string type) =>
-            BackwardsCompatibleTypes.Contains(type)
-                ? type
-                : "VULNERABILITY";
+        private static IEnumerable<RuleParameter> Parameters(Type analyzerType) =>
+            analyzerType.GetProperties()
+                .Select(x => x.GetCustomAttributes<RuleParameterAttribute>().SingleOrDefault())
+                .WhereNotNull()
+                .Select(x => new RuleParameter(x));
     }
 }

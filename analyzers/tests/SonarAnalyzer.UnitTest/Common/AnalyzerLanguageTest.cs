@@ -80,6 +80,7 @@ namespace SonarAnalyzer.UnitTest.Common
             AnalyzerLanguage.None.Invoking(x => x.RepositoryKey).Should().Throw<NotSupportedException>();
             AnalyzerLanguage.None.Invoking(x => x.DirectoryName).Should().Throw<NotSupportedException>();
             AnalyzerLanguage.None.Invoking(x => x.FileExtension).Should().Throw<NotSupportedException>();
+            AnalyzerLanguage.None.Invoking(x => x.ResourceSuffix).Should().Throw<NotSupportedException>();
         }
 
         [TestMethod]
@@ -89,6 +90,7 @@ namespace SonarAnalyzer.UnitTest.Common
             AnalyzerLanguage.Both.Invoking(x => x.RepositoryKey).Should().Throw<NotSupportedException>();
             AnalyzerLanguage.Both.Invoking(x => x.DirectoryName).Should().Throw<NotSupportedException>();
             AnalyzerLanguage.Both.Invoking(x => x.FileExtension).Should().Throw<NotSupportedException>();
+            AnalyzerLanguage.Both.Invoking(x => x.ResourceSuffix).Should().Throw<NotSupportedException>();
         }
 
         [TestMethod]
