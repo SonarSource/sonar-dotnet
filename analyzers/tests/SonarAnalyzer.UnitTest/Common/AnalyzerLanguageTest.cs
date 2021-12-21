@@ -20,6 +20,7 @@
 
 using System;
 using FluentAssertions;
+using Microsoft.CodeAnalysis;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.Common;
 
@@ -102,5 +103,14 @@ namespace SonarAnalyzer.UnitTest.Common
         [TestMethod]
         public void FromPath_Unexpected_ReturnsNone() =>
             AnalyzerLanguage.FromPath("File.txt").Should().Be(AnalyzerLanguage.None);
+
+        [TestMethod]
+        public void FromName()
+        {
+            AnalyzerLanguage.FromName(LanguageNames.CSharp).Should().Be(AnalyzerLanguage.CSharp);
+            AnalyzerLanguage.FromName(LanguageNames.VisualBasic).Should().Be(AnalyzerLanguage.VisualBasic);
+            AnalyzerLanguage.FromName(LanguageNames.FSharp).Should().Be(AnalyzerLanguage.None);
+            AnalyzerLanguage.FromName("Random").Should().Be(AnalyzerLanguage.None);
+        }
     }
 }
