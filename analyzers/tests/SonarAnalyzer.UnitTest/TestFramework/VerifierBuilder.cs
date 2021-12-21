@@ -74,7 +74,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework
             Analyzers = new Func<DiagnosticAnalyzer>[] { () => new TAnalyzer() }.ToImmutableArray();
     }
 
-    internal static class VerifierBuilderExtensions // FIXME: Move it inside VerifierBuilder?
+    internal static class VerifierBuilderExtensions
     {
         public static void Verify(this VerifierBuilder builder) =>
             builder.Build().Verify();
