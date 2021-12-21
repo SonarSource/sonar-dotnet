@@ -35,17 +35,17 @@ namespace SonarAnalyzer.UnitTest.TestFramework
         // All properties are (and should be) immutable.
         public ImmutableArray<Func<DiagnosticAnalyzer>> Analyzers { get; init; } = ImmutableArray<Func<DiagnosticAnalyzer>>.Empty;
         public ImmutableArray<string> Paths { get; init; } = ImmutableArray<string>.Empty;
-        public ImmutableArray<MetadataReference> References { get; init; } = ImmutableArray<MetadataReference>.Empty;
         public ImmutableArray<ParseOptions> ParseOptions { get; init; } = ImmutableArray<ParseOptions>.Empty;
+        public ImmutableArray<MetadataReference> References { get; init; } = ImmutableArray<MetadataReference>.Empty;
 
         public VerifierBuilder() { }
 
         private VerifierBuilder(VerifierBuilder original)
         {
-            Paths = original.Paths;
-            References = original.References;
-            ParseOptions = original.ParseOptions;
             Analyzers = original.Analyzers;
+            Paths = original.Paths;
+            ParseOptions = original.ParseOptions;
+            References = original.References;
         }
 
         /// <summary>
