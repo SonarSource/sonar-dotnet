@@ -20,7 +20,9 @@
 
 using System.Linq;
 using FluentAssertions;
+using Microsoft.CodeAnalysis;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using SonarAnalyzer.Rules.CSharp;
 using SonarAnalyzer.UnitTest.MetadataReferences;
 
 namespace SonarAnalyzer.UnitTest.TestFramework.Tests
@@ -70,6 +72,26 @@ namespace SonarAnalyzer.UnitTest.TestFramework.Tests
         }
 
         [TestMethod]
+        public void WithErrorBehavior_Overrides_IsImmutable()
+        {
+            var one = Empty.WithErrorBehavior(CompilationErrorBehavior.FailTest);
+            var two = Empty.WithErrorBehavior(CompilationErrorBehavior.Ignore);
+            Empty.ErrorBehavior.Should().Be(CompilationErrorBehavior.Default);
+            one.ErrorBehavior.Should().Be(CompilationErrorBehavior.FailTest);
+            two.ErrorBehavior.Should().Be(CompilationErrorBehavior.Ignore);
+        }
+
+        [TestMethod]
+        public void WithOnlyDiagnostics_Overrides_IsImmutable()
+        {
+            var one = Empty.WithOnlyDiagnostics(NullPointerDereference.S2259);
+            var two = Empty.WithOnlyDiagnostics(PublicMethodArgumentsShouldBeCheckedForNull.S3900, ConditionEvaluatesToConstant.S2583);
+            Empty.OnlyDiagnostics.Should().BeEmpty();
+            one.OnlyDiagnostics.Should().BeEquivalentTo(NullPointerDereference.S2259);
+            two.OnlyDiagnostics.Should().BeEquivalentTo(PublicMethodArgumentsShouldBeCheckedForNull.S3900, ConditionEvaluatesToConstant.S2583);
+        }
+
+        [TestMethod]
         public void WithOptions_Overrides_IsImmutable()
         {
             var only7 = Empty.WithOptions(ParseOptionsHelper.OnlyCSharp7);
@@ -78,6 +100,20 @@ namespace SonarAnalyzer.UnitTest.TestFramework.Tests
             only7.ParseOptions.Should().BeEquivalentTo(ParseOptionsHelper.OnlyCSharp7);
             from8.ParseOptions.Should().BeEquivalentTo(ParseOptionsHelper.FromCSharp8);
         }
+
+        [TestMethod]
+        public void WithOutputKind_Overrides_IsImmutable()
+        {
+            var one = Empty.WithOutputKind(OutputKind.WindowsApplication);
+            var two = Empty.WithOutputKind(OutputKind.NetModule);
+            Empty.OutputKind.Should().Be(OutputKind.DynamicallyLinkedLibrary);
+            one.OutputKind.Should().Be(OutputKind.WindowsApplication);
+            two.OutputKind.Should().Be(OutputKind.NetModule);
+        }
+
+        [TestMethod]
+        public void WithTopLevelSupport_Overrides_IsImmutable() =>
+            Empty.WithTopLevelStatements().OutputKind.Should().Be(OutputKind.ConsoleApplication);
 
         [TestMethod]
         public void Build_ReturnsVerifier() =>

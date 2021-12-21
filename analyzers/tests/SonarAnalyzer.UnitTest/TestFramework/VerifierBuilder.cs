@@ -34,6 +34,9 @@ namespace SonarAnalyzer.UnitTest.TestFramework
     {
         // All properties are (and should be) immutable.
         public ImmutableArray<Func<DiagnosticAnalyzer>> Analyzers { get; init; } = ImmutableArray<Func<DiagnosticAnalyzer>>.Empty;
+        public CompilationErrorBehavior ErrorBehavior { get; init; } = CompilationErrorBehavior.Default;
+        public ImmutableArray<DiagnosticDescriptor> OnlyDiagnostics { get; init; } = ImmutableArray<DiagnosticDescriptor>.Empty;
+        public OutputKind OutputKind { get; init; } = OutputKind.DynamicallyLinkedLibrary;
         public ImmutableArray<string> Paths { get; init; } = ImmutableArray<string>.Empty;
         public ImmutableArray<ParseOptions> ParseOptions { get; init; } = ImmutableArray<ParseOptions>.Empty;
         public ImmutableArray<MetadataReference> References { get; init; } = ImmutableArray<MetadataReference>.Empty;
@@ -43,6 +46,9 @@ namespace SonarAnalyzer.UnitTest.TestFramework
         private VerifierBuilder(VerifierBuilder original)
         {
             Analyzers = original.Analyzers;
+            ErrorBehavior = original.ErrorBehavior;
+            OnlyDiagnostics = original.OnlyDiagnostics;
+            OutputKind = original.OutputKind;
             Paths = original.Paths;
             ParseOptions = original.ParseOptions;
             References = original.References;
@@ -60,8 +66,20 @@ namespace SonarAnalyzer.UnitTest.TestFramework
         public VerifierBuilder AddReferences(IEnumerable<MetadataReference> references) =>
             new(this) { References = References.Concat(references).ToImmutableArray() };
 
+        public VerifierBuilder WithErrorBehavior(CompilationErrorBehavior errorBehavior) =>
+            new(this) { ErrorBehavior = errorBehavior };
+
+        public VerifierBuilder WithOnlyDiagnostics(params DiagnosticDescriptor[] onlyDiagnostics) =>
+            new(this) { OnlyDiagnostics = onlyDiagnostics.ToImmutableArray() };
+
         public VerifierBuilder WithOptions(ImmutableArray<ParseOptions> parseOptions) =>
             new(this) { ParseOptions = parseOptions };
+
+        public VerifierBuilder WithOutputKind(OutputKind outputKind) =>
+            new(this) { OutputKind = outputKind };
+
+        public VerifierBuilder WithTopLevelStatements() =>
+            WithOutputKind(OutputKind.ConsoleApplication);
 
         public Verifier Build() =>
             new(this);
