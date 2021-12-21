@@ -19,6 +19,7 @@
  */
 
 using System.Collections.Immutable;
+using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.Rules.CSharp;
@@ -34,7 +35,7 @@ namespace SonarAnalyzer.UnitTest.Rules
             // Readonly structs have been introduced in C# 7.2.
             // In C# 8, readonly structs can be disposed of, and the behavior is different.
             OldVerifier.VerifyAnalyzer(@"TestCases\DisposeFromDispose.CSharp7_2.cs", new DisposeFromDispose(),
-                ImmutableArray.Create(new CSharpParseOptions(LanguageVersion.CSharp7_2)));
+                ImmutableArray.Create<ParseOptions>(new CSharpParseOptions(LanguageVersion.CSharp7_2)));
 
         [TestMethod]
         public void DisposeFromDispose_CSharp8() =>

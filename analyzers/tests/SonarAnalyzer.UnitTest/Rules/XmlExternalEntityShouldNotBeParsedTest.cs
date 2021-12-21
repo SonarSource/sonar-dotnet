@@ -19,6 +19,7 @@
  */
 
 using System.Collections.Generic;
+using System.Collections.Immutable;
 using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -137,7 +138,7 @@ namespace SonarAnalyzer.UnitTest.Rules
                 new XmlExternalEntityShouldNotBeParsed(GetVersionProviderMock(NetFrameworkVersion.After452)),
                 MetadataReferenceFacade.SystemXml);
 
-        private static void VerifyRule(NetFrameworkVersion version, string testFilePath, OutputKind outputKind = OutputKind.DynamicallyLinkedLibrary, IEnumerable<ParseOptions> options = null) =>
+        private static void VerifyRule(NetFrameworkVersion version, string testFilePath, OutputKind outputKind = OutputKind.DynamicallyLinkedLibrary, ImmutableArray<ParseOptions> options = default) =>
             OldVerifier.VerifyAnalyzer(testFilePath,
                 new XmlExternalEntityShouldNotBeParsed(GetVersionProviderMock(version)),
                 options,
