@@ -307,22 +307,23 @@ Actual  : '{message}'");
         internal class File
         {
             private readonly string fileName;
-            private readonly SourceText content;
+
+            public SourceText Content { get; }
 
             public File(string fileName)
             {
                 this.fileName = fileName;
-                content = SourceText.From(System.IO.File.ReadAllText(fileName));
+                Content = SourceText.From(System.IO.File.ReadAllText(fileName));
             }
 
             public File(SyntaxTree syntaxTree)
             {
                 fileName = syntaxTree.FilePath;
-                content = syntaxTree.GetText();
+                Content = syntaxTree.GetText();
             }
 
             public FileIssueLocations ToExpectedIssueLocations() =>
-                new(fileName, IssueLocationCollector.GetExpectedIssueLocations(content.Lines));
+                new(fileName, IssueLocationCollector.GetExpectedIssueLocations(Content.Lines));
         }
 
         internal class FileIssueLocations
