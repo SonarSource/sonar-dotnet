@@ -75,7 +75,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework
             var solution = SolutionBuilder.CreateSolutionFromPaths(pathsWithConcurrencyTests, builder.OutputKind, builder.References);
             foreach (var compilation in solution.Compile(builder.ParseOptions.ToArray()))
             {
-                DiagnosticVerifier.Verify(compilation, analyzers, builder.ErrorBehavior, null, builder.OnlyDiagnostics.Select(x => x.Id).ToArray());
+                DiagnosticVerifier.Verify(compilation, analyzers, builder.ErrorBehavior, builder.SonarProjectConfigPath, builder.OnlyDiagnostics.Select(x => x.Id).ToArray());
             }
         }
 

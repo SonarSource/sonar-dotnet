@@ -112,6 +112,18 @@ namespace SonarAnalyzer.UnitTest.TestFramework.Tests
         }
 
         [TestMethod]
+        public void WithSonarProjectConfig_Overrides_IsImmutable()
+        {
+            var one = Empty.WithSonarProjectConfigPath("First");
+            var two = one.WithSonarProjectConfigPath("Second");
+            var three = two.WithSonarProjectConfigPath(null);
+            Empty.SonarProjectConfigPath.Should().BeNull();
+            one.SonarProjectConfigPath.Should().Be("First");
+            two.SonarProjectConfigPath.Should().Be("Second");
+            three.SonarProjectConfigPath.Should().BeNull();
+        }
+
+        [TestMethod]
         public void WithTopLevelSupport_Overrides_IsImmutable() =>
             Empty.WithTopLevelStatements().OutputKind.Should().Be(OutputKind.ConsoleApplication);
 

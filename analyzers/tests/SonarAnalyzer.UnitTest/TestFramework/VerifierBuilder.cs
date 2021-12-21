@@ -40,6 +40,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework
         public ImmutableArray<string> Paths { get; init; } = ImmutableArray<string>.Empty;
         public ImmutableArray<ParseOptions> ParseOptions { get; init; } = ImmutableArray<ParseOptions>.Empty;
         public ImmutableArray<MetadataReference> References { get; init; } = ImmutableArray<MetadataReference>.Empty;
+        public string SonarProjectConfigPath { get; init; }
 
         public VerifierBuilder() { }
 
@@ -52,6 +53,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework
             Paths = original.Paths;
             ParseOptions = original.ParseOptions;
             References = original.References;
+            SonarProjectConfigPath = original.SonarProjectConfigPath;
         }
 
         /// <summary>
@@ -77,6 +79,9 @@ namespace SonarAnalyzer.UnitTest.TestFramework
 
         public VerifierBuilder WithOutputKind(OutputKind outputKind) =>
             new(this) { OutputKind = outputKind };
+
+        public VerifierBuilder WithSonarProjectConfigPath(string sonarProjectConfigPath) =>
+            new(this) { SonarProjectConfigPath = sonarProjectConfigPath };
 
         public VerifierBuilder WithTopLevelStatements() =>
             WithOutputKind(OutputKind.ConsoleApplication);
