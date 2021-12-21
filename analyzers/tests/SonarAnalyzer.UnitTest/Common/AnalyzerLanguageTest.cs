@@ -112,5 +112,9 @@ namespace SonarAnalyzer.UnitTest.Common
             AnalyzerLanguage.FromName(LanguageNames.FSharp).Should().Be(AnalyzerLanguage.None);
             AnalyzerLanguage.FromName("Random").Should().Be(AnalyzerLanguage.None);
         }
+
+        [TestMethod]
+        public void ToUnexpectedLanguageException() =>
+            AnalyzerLanguage.Both.ToUnexpectedLanguageException().Message.Should().Be("Unexpected language: both");
     }
 }
