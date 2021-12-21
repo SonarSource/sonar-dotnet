@@ -99,7 +99,7 @@ If you run the project `ReviewDiffs` in debug mode, it will print in the output 
 
 *PS*: This program outputs message in a way that is compatible with the [VsColorOutput](https://marketplace.visualstudio.com/items?itemName=MikeWard-AnnArbor.VSColorOutput) extension, so that errors are colored in red, and differences are colored like warnings.
 
-### Debug an analysis started from the command line
+### Debug an analysis started from the command line / Java ITs
 
 If you want to debug the analysis of a project, you can add a [`Debugger.Launch()`](https://docs.microsoft.com/en-us/dotnet/api/system.diagnostics.debugger.launch?view=net-6.0) breakpoint in the class you want to debug. Rebuild `SonarAnalyzer.sln` and link the analyzer debug binaries to the project you want to debug the analysis for.
 
@@ -108,9 +108,12 @@ If you want to debug the analysis of a project, you can add a [`Debugger.Launch(
 
 Please note that if the rule is not in SonarWay, you will also need to enable it in a RuleSet file and link it in the {cs,vb}proj file with the `<CodeAnalysisRuleSet>` property (see [example](../analyzers/src/Directory.Build.targets#L8)).
 
+This also works with the Java ITs, as long as the debug assemblies are in the folder which is used by the Java ITs.
+
 When running the build and doing the Roslyn analysis, when hitting the `Debugger.Launch()` line, a UI window will prompt you to choose a debugger, where your IDE should show up - you will be able to open the solution and debug.
 
 After the debug session, remove the `Debugger.Launch()` line.
+
 
 ## Contributing
 
