@@ -22,19 +22,20 @@ using System.Collections.Immutable;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.Diagnostics;
+using SonarAnalyzer.Helpers;
 
 namespace SonarAnalyzer.UnitTest.TestFramework.Tests
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
     internal class DummyAnalyzer : DiagnosticAnalyzer
     {
-        private static readonly DiagnosticDescriptor Rule = new("SDummy", "Dummy title", "Dummy description", string.Empty, DiagnosticSeverity.Warning, true);
+        private static readonly DiagnosticDescriptor Rule = new("SDummy", "Dummy title", "Dummy message", string.Empty, DiagnosticSeverity.Warning, true);
 
         public int DummyProperty { get; set; }
 
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(Rule);
 
         public override sealed void Initialize(AnalysisContext context) =>
-            context.RegisterSyntaxNodeAction(c => c.ReportDiagnostic(Diagnostic.Create(Rule, c.Node.GetLocation())), SyntaxKind.NumericLiteralExpression);
+            context.RegisterSyntaxNodeAction(c => c.ReportIssue(Diagnostic.Create(Rule, c.Node.GetLocation())), SyntaxKind.NumericLiteralExpression);
     }
 }

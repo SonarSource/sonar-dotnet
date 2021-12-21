@@ -81,6 +81,6 @@ namespace SonarAnalyzer.UnitTest.TestFramework.Tests
 
         [TestMethod]
         public void Build_ReturnsVerifier() =>
-            new VerifierBuilder<DummyAnalyzer>().Build().Should().NotBeNull();
+            new VerifierBuilder<DummyAnalyzer>().AddPaths("File.cs").Build().Should().NotBeNull();
     }
 }

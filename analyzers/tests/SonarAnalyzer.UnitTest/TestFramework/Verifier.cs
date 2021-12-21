@@ -34,7 +34,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework
 {
     internal class Verifier
     {
-        private static readonly Regex ImportsRegexVB = new Regex(@"^\s*Imports\s+.+$", RegexOptions.Multiline | RegexOptions.RightToLeft);
+        private static readonly Regex ImportsRegexVB = new(@"^\s*Imports\s+.+$", RegexOptions.Multiline | RegexOptions.RightToLeft);
         private readonly VerifierBuilder builder;
         private readonly DiagnosticAnalyzer[] analyzers;
         private readonly AnalyzerLanguage language;
@@ -51,7 +51,12 @@ namespace SonarAnalyzer.UnitTest.TestFramework
             {
                 throw new ArgumentException(nameof(builder.Analyzers) + " cannot produce null.");
             }
-            language = AnalyzerLanguage.FromName(analyzers.SelectMany(x => x.GetType().GetCustomAttributes<DiagnosticAnalyzerAttribute>()).SelectMany(x => x.Languages).Single());
+            var allLanguages = analyzers.SelectMany(x => x.GetType().GetCustomAttributes<DiagnosticAnalyzerAttribute>()).SelectMany(x => x.Languages).Distinct().ToArray();
+            if (allLanguages.Length > 1)
+            {
+                throw new ArgumentException(nameof(builder.Analyzers) + " cannot declare different languages in DiagnosticAnalyzerAttribute.");
+            }
+            language = AnalyzerLanguage.FromName(allLanguages.Single());
             if (!builder.Paths.Any())
             {
                 throw new ArgumentException(nameof(builder.Paths) + " cannot be empty.");
@@ -64,7 +69,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework
 
         public void Verify()    // This should never has any arguments
         {
-            using var scope = new EnvironmentVariableScope { EnableConcurrentAnalysis = true };     // ToDo: Implement properly
+            using var scope = new EnvironmentVariableScope { EnableConcurrentAnalysis = true };         // ToDo: Implement properly
             var paths = builder.Paths.Select(x => Path.GetFullPath(Path.Combine("TestCases", x)));
             var pathsWithConcurrencyTests = paths.Count() == 1 ? CreateConcurrencyTest(paths) : paths;  // ToDo: Redesign when implementing concurrency
             var solution = SolutionBuilder.CreateSolutionFromPaths(pathsWithConcurrencyTests, OutputKind.DynamicallyLinkedLibrary, builder.References);
