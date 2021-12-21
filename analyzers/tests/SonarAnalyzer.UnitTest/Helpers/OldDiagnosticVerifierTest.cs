@@ -26,7 +26,7 @@ using SonarAnalyzer.Rules.CSharp;
 namespace SonarAnalyzer.UnitTest.TestFramework
 {
     [TestClass]
-    public class DiagnosticVerifierTest
+    public class OldDiagnosticVerifierTest
     {
         [TestMethod]
         public void PrimaryIssueNotExpected()

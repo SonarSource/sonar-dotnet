@@ -225,7 +225,7 @@ $@"namespace PartiallyGenerated
                .AddSnippet(content, "Foo.cs")
                .GetCompilation();
 
-            DiagnosticVerifier.Verify(compilation, new CS.EmptyStatement(), CompilationErrorBehavior.FailTest, compilation.SyntaxTrees.First());
+            OldDiagnosticVerifier.Verify(compilation, new CS.EmptyStatement(), CompilationErrorBehavior.FailTest, compilation.SyntaxTrees.First());
         }
 
         [TestMethod]
@@ -325,7 +325,7 @@ $@"namespace PartiallyGenerated
                .AddSnippet(content, name)
                .GetCompilation(parseOptions);
 
-            DiagnosticVerifier.VerifyNoIssueReported(compilation, diagnosticAnalyzer, checkMode);
+            OldDiagnosticVerifier.VerifyNoIssueReported(compilation, diagnosticAnalyzer, checkMode);
         }
     }
 }

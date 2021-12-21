@@ -68,7 +68,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         {
             var options = new VisualBasicCompilationOptions(OutputKind.DynamicallyLinkedLibrary, optionStrict: optionStrict);
             var compilation = project.GetCompilation(null, options);
-            DiagnosticVerifier.Verify(compilation, new OptionStrictOn(), CompilationErrorBehavior.Default);
+            OldDiagnosticVerifier.Verify(compilation, new OptionStrictOn(), CompilationErrorBehavior.Default);
         }
     }
 }

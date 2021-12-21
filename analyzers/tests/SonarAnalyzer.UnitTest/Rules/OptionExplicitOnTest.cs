@@ -37,7 +37,7 @@ namespace SonarAnalyzer.UnitTest.Rules
             var project = SolutionBuilder.Create().AddProject(AnalyzerLanguage.VisualBasic).AddSnippet("' Noncompliant ^1#0 {{Configure 'Option Explicit On' for assembly 'project0'.}}");
             var options = new VisualBasicCompilationOptions(OutputKind.DynamicallyLinkedLibrary, optionExplicit: false);    // optionExplicit is true by default => tested in other tests
             var compilation = project.GetCompilation(null, options);
-            DiagnosticVerifier.Verify(compilation, new OptionExplicitOn(), CompilationErrorBehavior.Default);
+            OldDiagnosticVerifier.Verify(compilation, new OptionExplicitOn(), CompilationErrorBehavior.Default);
         }
 
         [TestMethod]
@@ -62,7 +62,7 @@ namespace SonarAnalyzer.UnitTest.Rules
                                          .AddSnippet("Option Explicit Off ' Noncompliant ^1#19 {{Change this to 'Option Explicit On'.}}");
             var options = new VisualBasicCompilationOptions(OutputKind.DynamicallyLinkedLibrary, optionExplicit: false);    // optionExplicit is true by default => tested in other tests
             var compilation = project.GetCompilation(null, options);
-            DiagnosticVerifier.Verify(compilation, new OptionExplicitOn(), CompilationErrorBehavior.Default);
+            OldDiagnosticVerifier.Verify(compilation, new OptionExplicitOn(), CompilationErrorBehavior.Default);
         }
     }
 }

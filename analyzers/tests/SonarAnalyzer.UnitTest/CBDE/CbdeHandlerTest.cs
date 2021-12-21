@@ -131,7 +131,7 @@ namespace SonarAnalyzer.UnitTest.Rules
                                              .AddReferences(additionalReferences)
                                              .AddDocument(path)
                                              .GetCompilation();
-            DiagnosticVerifier.GetDiagnosticsIgnoreExceptions(compilation, diagnosticAnalyzer);
+            OldDiagnosticVerifier.GetDiagnosticsIgnoreExceptions(compilation, diagnosticAnalyzer);
         }
 
         private static string CreateMockPath(string mockName)

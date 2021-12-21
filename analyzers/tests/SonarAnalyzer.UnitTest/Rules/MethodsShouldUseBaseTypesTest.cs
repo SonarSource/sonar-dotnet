@@ -58,7 +58,7 @@ internal class Bar
 
             foreach (var compilation in solution.Compile())
             {
-                DiagnosticVerifier.Verify(compilation, new MethodsShouldUseBaseTypes(), CompilationErrorBehavior.FailTest);
+                OldDiagnosticVerifier.Verify(compilation, new MethodsShouldUseBaseTypes(), CompilationErrorBehavior.FailTest);
             }
         }
 

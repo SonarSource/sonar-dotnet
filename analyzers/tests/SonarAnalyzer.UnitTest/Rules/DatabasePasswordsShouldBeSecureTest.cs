@@ -64,7 +64,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void DatabasePasswordsShouldBeSecure_CS_WebConfig(string root)
         {
             var webConfigPath = GetWebConfigPath(root);
-            DiagnosticVerifier.VerifyExternalFile(
+            OldDiagnosticVerifier.VerifyExternalFile(
                 CreateCompilation(),
                 new DatabasePasswordsShouldBeSecure(),
                 webConfigPath,
@@ -77,7 +77,7 @@ namespace SonarAnalyzer.UnitTest.Rules
             var root = @"TestCases\WebConfig\DatabasePasswordsShouldBeSecure\ExternalConfig";
             var webConfigPath = GetWebConfigPath(root);
             var externalConfigPath = Path.Combine(root, "external.config");
-            DiagnosticVerifier.VerifyExternalFile(
+            OldDiagnosticVerifier.VerifyExternalFile(
                 CreateCompilation(),
                 new DatabasePasswordsShouldBeSecure(),
                 webConfigPath,
@@ -91,7 +91,7 @@ namespace SonarAnalyzer.UnitTest.Rules
             var missingDirectory = @"TestCases\WebConfig\DatabasePasswordsShouldBeSecure\NonExistingDirectory";
             var corruptFilePath = GetWebConfigPath(root);
             var nonExistingFilePath = GetWebConfigPath(missingDirectory);
-            DiagnosticVerifier.VerifyExternalFile(
+            OldDiagnosticVerifier.VerifyExternalFile(
                 CreateCompilation(),
                 new DatabasePasswordsShouldBeSecure(),
                 corruptFilePath,
@@ -107,7 +107,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void DatabasePasswordsShouldBeSecure_CS_AppSettings(string root)
         {
             var appSettingsPath = GetAppSettingsPath(root);
-            DiagnosticVerifier.VerifyExternalFile(
+            OldDiagnosticVerifier.VerifyExternalFile(
                 CreateCompilation(),
                 new DatabasePasswordsShouldBeSecure(),
                 appSettingsPath,
@@ -121,7 +121,7 @@ namespace SonarAnalyzer.UnitTest.Rules
             var missingDirectory = @"TestCases\AppSettings\DatabasePasswordsShouldBeSecure\NonExistingDirectory";
             var corruptFilePath = GetAppSettingsPath(root);
             var nonExistingFilePath = GetAppSettingsPath(missingDirectory);
-            DiagnosticVerifier.VerifyExternalFile(
+            OldDiagnosticVerifier.VerifyExternalFile(
                 CreateCompilation(),
                 new DatabasePasswordsShouldBeSecure(),
                 corruptFilePath,

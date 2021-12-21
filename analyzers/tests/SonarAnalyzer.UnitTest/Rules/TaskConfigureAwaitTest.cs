@@ -59,7 +59,7 @@ public static class EntryPoint
             var analyzer = new TaskConfigureAwait();
             var compilation = projectBuilder.GetCompilation(null, compilationOptions);
 
-            DiagnosticVerifier.Verify(compilation, analyzer, CompilationErrorBehavior.Default);
+            OldDiagnosticVerifier.Verify(compilation, analyzer, CompilationErrorBehavior.Default);
         }
     }
 }

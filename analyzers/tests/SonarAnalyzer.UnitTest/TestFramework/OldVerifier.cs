@@ -53,8 +53,8 @@ namespace SonarAnalyzer.UnitTest.TestFramework
                 .AddDocument(path)
                 .GetCompilation();
 
-            var diagnostics = DiagnosticVerifier.GetAnalyzerDiagnostics(compilation, diagnosticAnalyzers, checkMode);
-            DiagnosticVerifier.VerifyNoExceptionThrown(diagnostics);
+            var diagnostics = OldDiagnosticVerifier.GetAnalyzerDiagnostics(compilation, diagnosticAnalyzers, checkMode);
+            OldDiagnosticVerifier.VerifyNoExceptionThrown(diagnostics);
         }
 
         /// <summary>
@@ -370,7 +370,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework
             var solutionBuilder = SolutionBuilder.CreateSolutionFromPaths(paths);
             foreach (var compilation in solutionBuilder.Compile(options?.ToArray()))
             {
-                DiagnosticVerifier.Verify(compilation, diagnosticAnalyzer, CompilationErrorBehavior.Default, sonarProjectConfigPath);
+                OldDiagnosticVerifier.Verify(compilation, diagnosticAnalyzer, CompilationErrorBehavior.Default, sonarProjectConfigPath);
                 verifyProtobuf(ReadProtobuf(protobufPath).ToList());
             }
 
@@ -396,7 +396,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework
             var solutionBuilder = SolutionBuilder.CreateSolutionFromPaths(paths);
             foreach (var compilation in solutionBuilder.Compile(options?.ToArray()))
             {
-                DiagnosticVerifier.Verify(compilation, diagnosticAnalyzer, CompilationErrorBehavior.Default);
+                OldDiagnosticVerifier.Verify(compilation, diagnosticAnalyzer, CompilationErrorBehavior.Default);
                 new FileInfo(protobufPath).Length.Should().Be(0);
             }
         }
@@ -564,7 +564,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework
         {
             foreach (var compilation in solution.Compile(options?.ToArray()))
             {
-                DiagnosticVerifier.Verify(compilation, diagnosticAnalyzers, checkMode, sonarProjectConfigPath, onlyDiagnostics?.Select(x => x.Id).ToArray());
+                OldDiagnosticVerifier.Verify(compilation, diagnosticAnalyzers, checkMode, sonarProjectConfigPath, onlyDiagnostics?.Select(x => x.Id).ToArray());
             }
         }
 
@@ -577,7 +577,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework
         {
             foreach (var option in options ?? new ParseOptions[] { null })
             {
-                DiagnosticVerifier.VerifyNoIssueReported(builder.GetCompilation(option), diagnosticAnalyzer, checkMode, sonarProjectConfigPath, onlyDiagnostics?.Select(x => x.Id).ToArray());
+                OldDiagnosticVerifier.VerifyNoIssueReported(builder.GetCompilation(option), diagnosticAnalyzer, checkMode, sonarProjectConfigPath, onlyDiagnostics?.Select(x => x.Id).ToArray());
             }
         }
 

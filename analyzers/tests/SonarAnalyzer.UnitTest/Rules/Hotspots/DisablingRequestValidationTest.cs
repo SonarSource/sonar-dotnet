@@ -60,7 +60,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void DisablingRequestValidation_CS_WebConfig(string root)
         {
             var webConfigPath = Path.Combine(root, WebConfig);
-            DiagnosticVerifier.VerifyExternalFile(
+            OldDiagnosticVerifier.VerifyExternalFile(
                 SolutionBuilder.Create().AddProject(AnalyzerLanguage.CSharp).GetCompilation(),
                 new CS.DisablingRequestValidation(AnalyzerConfiguration.AlwaysEnabled),
                 webConfigPath,
@@ -74,7 +74,7 @@ namespace SonarAnalyzer.UnitTest.Rules
             var nonexisting = @"TestCases\WebConfig\DisablingRequestValidation\NonExsitingDirectory";
             var corruptFilePath = Path.Combine(root, WebConfig);
             var nonExistingFilePath = Path.Combine(nonexisting, WebConfig);
-            DiagnosticVerifier.VerifyExternalFile(
+            OldDiagnosticVerifier.VerifyExternalFile(
                 SolutionBuilder.Create().AddProject(AnalyzerLanguage.CSharp).GetCompilation(),
                 new CS.DisablingRequestValidation(AnalyzerConfiguration.AlwaysEnabled),
                 corruptFilePath,
@@ -103,7 +103,7 @@ namespace SonarAnalyzer.UnitTest.Rules
 
             try
             {
-                allDiagnostics = DiagnosticVerifier.GetDiagnosticsNoExceptions(
+                allDiagnostics = OldDiagnosticVerifier.GetDiagnosticsNoExceptions(
                     compilation,
                     new CS.DisablingRequestValidation(AnalyzerConfiguration.AlwaysEnabled),
                     CompilationErrorBehavior.Default,
@@ -129,7 +129,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         {
             var root = @"TestCases\WebConfig\DisablingRequestValidation\LowerCase";
             var webConfigPath = Path.Combine(root, "web.config");
-            DiagnosticVerifier.VerifyExternalFile(
+            OldDiagnosticVerifier.VerifyExternalFile(
                 SolutionBuilder.Create().AddProject(AnalyzerLanguage.CSharp).GetCompilation(),
                 new CS.DisablingRequestValidation(AnalyzerConfiguration.AlwaysEnabled),
                 webConfigPath,
@@ -141,7 +141,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [DataRow(@"TestCases\WebConfig\DisablingRequestValidation\TransformDebug\Web.Debug.config")]
         [DataRow(@"TestCases\WebConfig\DisablingRequestValidation\TransformRelease\Web.Release.config")]
         public void DisablingRequestValidation_CS_WebConfig_Transformation(string configPath) =>
-            DiagnosticVerifier.VerifyExternalFile(
+            OldDiagnosticVerifier.VerifyExternalFile(
                 SolutionBuilder.Create().AddProject(AnalyzerLanguage.CSharp).GetCompilation(),
                 new CS.DisablingRequestValidation(AnalyzerConfiguration.AlwaysEnabled),
                 configPath,
@@ -164,7 +164,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         {
             var root = @"TestCases\WebConfig\DisablingRequestValidation\Values";
             var webConfigPath = Path.Combine(root, WebConfig);
-            DiagnosticVerifier.VerifyExternalFile(
+            OldDiagnosticVerifier.VerifyExternalFile(
                 SolutionBuilder.Create().AddProject(AnalyzerLanguage.VisualBasic).GetCompilation(),
                 new VB.DisablingRequestValidation(AnalyzerConfiguration.AlwaysEnabled),
                 webConfigPath,
@@ -175,9 +175,9 @@ namespace SonarAnalyzer.UnitTest.Rules
         private static void VerifyResults(string webConfigPath, IList<Diagnostic> allDiagnostics, string languageVersion)
         {
             var actualIssues = allDiagnostics.Where(d => d.Location.GetLineSpan().Path.EndsWith(webConfigPath)).ToArray();
-            var fileNameSourceText = new DiagnosticVerifier.File(webConfigPath);
+            var fileNameSourceText = new OldDiagnosticVerifier.File(webConfigPath);
             var expectedIssueLocations = fileNameSourceText.ToExpectedIssueLocations();
-            DiagnosticVerifier.CompareActualToExpected(languageVersion, actualIssues, new[] { expectedIssueLocations }, false);
+            OldDiagnosticVerifier.CompareActualToExpected(languageVersion, actualIssues, new[] { expectedIssueLocations }, false);
         }
     }
 }

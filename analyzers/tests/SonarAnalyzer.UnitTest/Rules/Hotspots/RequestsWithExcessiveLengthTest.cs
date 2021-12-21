@@ -102,7 +102,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void RequestsWithExcessiveLength_CS_WebConfig(string root)
         {
             var webConfigPath = GetWebConfigPath(root);
-            DiagnosticVerifier.VerifyExternalFile(
+            OldDiagnosticVerifier.VerifyExternalFile(
                 CreateCompilation(),
                 new CS.RequestsWithExcessiveLength(),
                 webConfigPath,
@@ -116,7 +116,7 @@ namespace SonarAnalyzer.UnitTest.Rules
             var missingDirectory = @"TestCases\WebConfig\RequestsWithExcessiveLength\NonExistingDirectory";
             var corruptFilePath = GetWebConfigPath(root);
             var nonExistingFilePath = GetWebConfigPath(missingDirectory);
-            DiagnosticVerifier.VerifyExternalFile(
+            OldDiagnosticVerifier.VerifyExternalFile(
                 CreateCompilation(),
                 new CS.RequestsWithExcessiveLength(),
                 corruptFilePath,

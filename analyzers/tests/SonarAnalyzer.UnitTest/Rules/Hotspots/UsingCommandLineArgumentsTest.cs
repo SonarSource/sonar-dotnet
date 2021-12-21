@@ -59,7 +59,7 @@ partial class Program1
 }")
                 .GetCompilation();
 
-            DiagnosticVerifier.Verify(
+            OldDiagnosticVerifier.Verify(
                 compilation,
                 new CS.UsingCommandLineArguments(AnalyzerConfiguration.AlwaysEnabled),
                 CompilationErrorBehavior.Default);
@@ -90,7 +90,7 @@ End Class
 ")
                 .GetCompilation();
 
-            DiagnosticVerifier.Verify(
+            OldDiagnosticVerifier.Verify(
                 compilation,
                 new VB.UsingCommandLineArguments(AnalyzerConfiguration.AlwaysEnabled),
                 CompilationErrorBehavior.Default);

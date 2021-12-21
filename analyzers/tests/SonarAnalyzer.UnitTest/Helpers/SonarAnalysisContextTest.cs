@@ -236,7 +236,7 @@ namespace SonarAnalyzer.UnitTest.Helpers
                     {
                         // Verifier expects all diagnostics to increase the counter in order to check that all rules call the
                         // extension method and not the direct `ReportDiagnostic`.
-                        DiagnosticVerifier.SuppressionHandler.IncrementReportCount(context.Diagnostic.Id);
+                        OldDiagnosticVerifier.SuppressionHandler.IncrementReportCount(context.Diagnostic.Id);
                         context.ReportDiagnostic(context.Diagnostic);
                     }
                 };
