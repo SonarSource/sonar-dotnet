@@ -58,8 +58,6 @@ namespace SonarAnalyzer.UnitTest.Common
         {
             foreach (var codeFixProvider in GetCodeFixProviderTypes(RuleFinder.PackagedRuleAssemblies))
             {
-                if (codeFixProvider.Name == "MultipleVariableDeclarationCodeFixProvider")
-                    System.Diagnostics.Debugger.Break();
                 RuleDetailBuilder.CodeFixTitles(codeFixProvider).Should().NotBeEmpty("CodeFixProvider '{0}' has no title field.", codeFixProvider.Name);
             }
         }
