@@ -18,11 +18,12 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System;
 using System.Linq;
-using System.Reflection;
 using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.Common;
+using SonarAnalyzer.RuleDescriptors;
 using SonarAnalyzer.Utilities;
 
 namespace SonarAnalyzer.UnitTest.Common
@@ -35,6 +36,21 @@ namespace SonarAnalyzer.UnitTest.Common
         {
             CheckRuleDescriptorsNotEmpty(AnalyzerLanguage.CSharp);
             CheckRuleDescriptorsNotEmpty(AnalyzerLanguage.VisualBasic);
+        }
+
+        [TestMethod]
+        public void GetAllRuleDetails_UnexpectedLanguage_Throws() =>
+            ((Action)(() => RuleDetailBuilder.GetAllRuleDetails(AnalyzerLanguage.Both))).Should().Throw<InvalidOperationException>();
+
+        [TestMethod]
+        public void RuleParameter_Constructor_CopiesValues()
+        {
+            var att = new RuleParameterAttribute("key", PropertyType.Password, "Description", "Secret");
+            var sut = new RuleParameter(att);
+            sut.Key.Should().Be("key");
+            sut.Description.Should().Be("Description");
+            sut.Type.Should().Be("PASSWORD");
+            sut.DefaultValue.Should().Be("Secret");
         }
 
         private static void CheckRuleDescriptorsNotEmpty(AnalyzerLanguage language)
