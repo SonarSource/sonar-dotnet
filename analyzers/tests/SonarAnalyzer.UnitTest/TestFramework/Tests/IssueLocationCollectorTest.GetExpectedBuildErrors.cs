@@ -25,7 +25,6 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace SonarAnalyzer.UnitTest.TestFramework.Tests
 {
-    [TestClass]
     public partial class IssueLocationCollectorTest
     {
         [TestMethod]

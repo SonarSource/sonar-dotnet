@@ -19,17 +19,14 @@
  */
 
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using FluentAssertions;
-using Microsoft.CodeAnalysis.Text;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace SonarAnalyzer.UnitTest.TestFramework.Tests
 {
     public partial class IssueLocationCollectorTest
     {
-        [TestMethod]
         public void GetPreciseIssueLocations_NoMessage_NoIds()
         {
             var line = GetLine(3, @"if (a > b)
@@ -329,24 +326,6 @@ internal class MyClass : IInterface1 // there should be no Noncompliant comment
             issueLocation = result.Single();
             issueLocation.Start.Should().Be(11);
             issueLocation.Length.Should().Be(15);
-        }
-
-        private static TextLine GetLine(int lineNumber, string code)
-        {
-            var sourceText = SourceText.From(code);
-            return sourceText.Lines[lineNumber];
-        }
-
-        private static void VerifyIssueLocations(IEnumerable<IIssueLocation> result,
-            IEnumerable<bool> expectedIsPrimary,
-            IEnumerable<int> expectedLineNumbers,
-            IEnumerable<string> expectedMessages,
-            IEnumerable<string> expectedIssueIds)
-        {
-            result.Select(l => l.IsPrimary).Should().Equal(expectedIsPrimary);
-            result.Select(l => l.LineNumber).Should().Equal(expectedLineNumbers);
-            result.Select(l => l.Message).Should().Equal(expectedMessages);
-            result.Select(l => l.IssueId).Should().Equal(expectedIssueIds);
         }
     }
 }

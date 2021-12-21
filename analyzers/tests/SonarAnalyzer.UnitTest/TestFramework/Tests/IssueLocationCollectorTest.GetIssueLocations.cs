@@ -18,10 +18,8 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System.Collections.Generic;
 using System.Linq;
 using FluentAssertions;
-using Microsoft.CodeAnalysis.Text;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace SonarAnalyzer.UnitTest.TestFramework.Tests
@@ -314,21 +312,6 @@ namespace SonarAnalyzer.UnitTest.TestFramework.Tests
                 expectedIssueIds: new[] { "myIssueId" });
             result.Select(issue => issue.Start).Should().Equal(new[] { 4 });
             result.Select(issue => issue.Length).Should().Equal(new[] { 16 });
-        }
-
-        private static TextLine GetLine(int lineNumber, string code) =>
-            SourceText.From(code).Lines[lineNumber];
-
-        private static void VerifyIssueLocations(IEnumerable<IIssueLocation> result,
-            IEnumerable<bool> expectedIsPrimary,
-            IEnumerable<int> expectedLineNumbers,
-            IEnumerable<string> expectedMessages,
-            IEnumerable<string> expectedIssueIds)
-        {
-            result.Select(l => l.IsPrimary).Should().Equal(expectedIsPrimary);
-            result.Select(l => l.LineNumber).Should().Equal(expectedLineNumbers);
-            result.Select(l => l.Message).Should().Equal(expectedMessages);
-            result.Select(l => l.IssueId).Should().Equal(expectedIssueIds);
         }
     }
 }
