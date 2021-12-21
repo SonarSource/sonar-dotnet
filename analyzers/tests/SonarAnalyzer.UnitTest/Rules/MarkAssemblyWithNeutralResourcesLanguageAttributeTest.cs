@@ -33,8 +33,8 @@ namespace SonarAnalyzer.UnitTest.Rules
                 new[]
                 {
                     @"TestCases\MarkAssemblyWithNeutralResourcesLanguageAttribute.cs",
-                    @"ResourceTests\SomeResources.Designer.cs",
-                    @"ResourceTests\AnotherResources.Designer.cs",
+                    @"TestCases\Resources\SomeResources.Designer.cs",
+                    @"TestCases\Resources\AnotherResources.Designer.cs",
                 },
                 new MarkAssemblyWithNeutralResourcesLanguageAttribute());
 
@@ -50,7 +50,7 @@ namespace SonarAnalyzer.UnitTest.Rules
                 new[]
                 {
                     @"TestCases\MarkAssemblyWithNeutralResourcesLanguageAttributeNonCompliant.Invalid.cs",
-                    @"ResourceTests\SomeResources.Designer.cs"
+                    @"TestCases\Resources\SomeResources.Designer.cs"
                 }, new MarkAssemblyWithNeutralResourcesLanguageAttribute());
 
         [TestMethod]
@@ -59,7 +59,7 @@ namespace SonarAnalyzer.UnitTest.Rules
                 new[]
                 {
                     @"TestCases\MarkAssemblyWithNeutralResourcesLanguageAttributeNonCompliant.cs",
-                    @"ResourceTests\SomeResources.Designer.cs"
+                    @"TestCases\Resources\SomeResources.Designer.cs"
                 }, new MarkAssemblyWithNeutralResourcesLanguageAttribute());
     }
 }
