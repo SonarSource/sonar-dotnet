@@ -40,7 +40,7 @@ namespace SonarAnalyzer.UnitTest.Common
 
         [TestMethod]
         public void GetAllRuleDetails_UnexpectedLanguage_Throws() =>
-            ((Action)(() => RuleDetailBuilder.GetAllRuleDetails(AnalyzerLanguage.Both))).Should().Throw<InvalidOperationException>();
+            ((Action)(() => RuleDetailBuilder.GetAllRuleDetails(AnalyzerLanguage.Both))).Should().Throw<NotSupportedException>();
 
         [TestMethod]
         public void RuleParameter_Constructor_CopiesValues()
