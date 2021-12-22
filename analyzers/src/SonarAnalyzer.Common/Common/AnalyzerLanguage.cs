@@ -141,9 +141,6 @@ namespace SonarAnalyzer.Common
                 : this == other || this == Both;
         }
 
-        public InvalidOperationException ToUnexpectedLanguageException() =>
-             new("Unexpected language: " + ToString());
-
         public static AnalyzerLanguage Parse(string language) =>
             language switch
             {

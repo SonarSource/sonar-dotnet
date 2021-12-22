@@ -38,22 +38,23 @@ namespace SonarAnalyzer.UnitTest.TestFramework.Tests
         [TestMethod]
         public void Constructor_NoAnalyzers_Throws() =>
             new VerifierBuilder()
-                .Invoking(x => x.Build()).Should().Throw<ArgumentException>().WithMessage("Analyzers cannot be empty.");
+                .Invoking(x => x.Build()).Should().Throw<ArgumentException>()
+                .WithMessage("Analyzers cannot be empty. Use VerifierBuilder<TAnalyzer> instead or add at least one analyzer using builder.AddAnalyzer().");
 
         [TestMethod]
         public void Constructor_NullAnalyzers_Throws() =>
             new VerifierBuilder().AddAnalyzer(() => null)
-                .Invoking(x => x.Build()).Should().Throw<ArgumentException>().WithMessage("Analyzers cannot produce null.");
+                .Invoking(x => x.Build()).Should().Throw<ArgumentException>().WithMessage("Analyzer instance cannot be null.");
 
         [TestMethod]
         public void Constructor_NoPaths_Throws() =>
             new VerifierBuilder<DummyAnalyzer>()
-                .Invoking(x => x.Build()).Should().Throw<ArgumentException>().WithMessage("Paths cannot be empty.");
+                .Invoking(x => x.Build()).Should().Throw<ArgumentException>().WithMessage("Paths cannot be empty. Add at least one path using builder.AddPaths().");
 
         [TestMethod]
         public void Constructor_MixedLanguageAnalyzers_Throws() =>
             new VerifierBuilder<DummyAnalyzer>().AddAnalyzer(() => new SonarAnalyzer.Rules.VisualBasic.OptionStrictOn())
-                .Invoking(x => x.Build()).Should().Throw<ArgumentException>().WithMessage("Analyzers cannot declare different languages in DiagnosticAnalyzerAttribute.");
+                .Invoking(x => x.Build()).Should().Throw<ArgumentException>().WithMessage("All Analyzers must declare the same language in their DiagnosticAnalyzerAttribute.");
 
         [TestMethod]
         public void Constructor_MixedLanguagePaths_Throws() =>

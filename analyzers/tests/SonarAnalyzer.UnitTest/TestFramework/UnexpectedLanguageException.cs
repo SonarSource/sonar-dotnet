@@ -18,24 +18,13 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System.Collections.Immutable;
-using Microsoft.CodeAnalysis;
-using Microsoft.CodeAnalysis.CSharp;
-using Microsoft.CodeAnalysis.Diagnostics;
-using SonarAnalyzer.Helpers;
+using System;
+using SonarAnalyzer.Common;
 
-namespace SonarAnalyzer.UnitTest.TestFramework.Tests
+namespace SonarAnalyzer.UnitTest.TestFramework
 {
-    [DiagnosticAnalyzer(LanguageNames.CSharp)]
-    internal class DummyAnalyzer : DiagnosticAnalyzer
+    public class UnexpectedLanguageException : Exception
     {
-        private static readonly DiagnosticDescriptor Rule = new("SDummy", "Dummy title", "Dummy message", string.Empty, DiagnosticSeverity.Warning, true);
-
-        public int DummyProperty { get; set; }
-
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(Rule);
-
-        public sealed override void Initialize(AnalysisContext context) =>
-            context.RegisterSyntaxNodeAction(c => c.ReportIssue(Diagnostic.Create(Rule, c.Node.GetLocation())), SyntaxKind.NumericLiteralExpression);
+        public UnexpectedLanguageException(AnalyzerLanguage language) : base($"Unexpected language: {language}") { }
     }
 }

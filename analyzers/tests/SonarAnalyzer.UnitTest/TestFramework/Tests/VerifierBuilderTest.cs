@@ -26,7 +26,7 @@ using SonarAnalyzer.UnitTest.MetadataReferences;
 namespace SonarAnalyzer.UnitTest.TestFramework.Tests
 {
     [TestClass]
-    public partial class VerifierBuilderTest
+    public class VerifierBuilderTest
     {
         private static readonly VerifierBuilder Empty = new();
 

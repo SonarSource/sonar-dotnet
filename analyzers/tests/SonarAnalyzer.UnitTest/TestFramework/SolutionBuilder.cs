@@ -107,7 +107,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework
         {
             if (language != AnalyzerLanguage.CSharp && language != AnalyzerLanguage.VisualBasic)
             {
-                throw language.ToUnexpectedLanguageException();
+                throw new UnexpectedLanguageException(language);
             }
             var project = Solution.AddProject(projectName, projectName, language.LanguageName);
             var compilationOptions = project.CompilationOptions.WithOutputKind(outputKind);
@@ -115,7 +115,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework
             {
                 LanguageNames.CSharp => ((CSharpCompilationOptions)compilationOptions).WithAllowUnsafe(true),
                 LanguageNames.VisualBasic => ((VisualBasicCompilationOptions)compilationOptions).WithGlobalImports(DefaultGlobalImportsVisualBasic),
-                _ => throw language.ToUnexpectedLanguageException()
+                _ => throw new UnexpectedLanguageException(language)
             };
             project = project.WithCompilationOptions(compilationOptions);
 

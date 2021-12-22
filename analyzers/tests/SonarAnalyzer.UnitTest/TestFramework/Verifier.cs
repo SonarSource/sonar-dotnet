@@ -45,21 +45,21 @@ namespace SonarAnalyzer.UnitTest.TestFramework
             analyzers = builder.Analyzers.Select(x => x()).ToArray();
             if (!analyzers.Any())
             {
-                throw new ArgumentException(nameof(builder.Analyzers) + " cannot be empty.");
+                throw new ArgumentException($"{nameof(builder.Analyzers)} cannot be empty. Use {nameof(VerifierBuilder)}<TAnalyzer> instead or add at least one analyzer using {nameof(builder)}.{nameof(builder.AddAnalyzer)}().");
             }
             if (analyzers.Any(x => x == null))
             {
-                throw new ArgumentException(nameof(builder.Analyzers) + " cannot produce null.");
+                throw new ArgumentException("Analyzer instance cannot be null.");
             }
             var allLanguages = analyzers.SelectMany(x => x.GetType().GetCustomAttributes<DiagnosticAnalyzerAttribute>()).SelectMany(x => x.Languages).Distinct().ToArray();
             if (allLanguages.Length > 1)
             {
-                throw new ArgumentException(nameof(builder.Analyzers) + " cannot declare different languages in DiagnosticAnalyzerAttribute.");
+                throw new ArgumentException($"All {nameof(builder.Analyzers)} must declare the same language in their DiagnosticAnalyzerAttribute.");
             }
             language = AnalyzerLanguage.FromName(allLanguages.Single());
             if (!builder.Paths.Any())
             {
-                throw new ArgumentException(nameof(builder.Paths) + " cannot be empty.");
+                throw new ArgumentException($"{nameof(builder.Paths)} cannot be empty. Add at least one path using {nameof(builder)}.{nameof(builder.AddPaths)}().");
             }
             if (builder.Paths.FirstOrDefault(x => !Path.GetExtension(x).Equals(language.FileExtension, StringComparison.OrdinalIgnoreCase)) is { } unexpectedPath)
             {
@@ -96,7 +96,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework
             {
                 LanguageNames.CSharp => $"namespace AppendedNamespaceForConcurrencyTest {{ {content} }}",
                 LanguageNames.VisualBasic => content.Insert(ImportsIndexVB(), "Namespace AppendedNamespaceForConcurrencyTest : ") + " : End Namespace",
-                _ => throw language.ToUnexpectedLanguageException()
+                _ => throw new UnexpectedLanguageException(language)
             };
 
             int ImportsIndexVB() =>
