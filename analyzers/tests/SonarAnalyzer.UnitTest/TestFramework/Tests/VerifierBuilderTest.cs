@@ -75,6 +75,46 @@ namespace SonarAnalyzer.UnitTest.TestFramework.Tests
         }
 
         [TestMethod]
+        public void AddSnippet_Appends_IsImmutable()
+        {
+            var one = Empty.AddSnippet("First");
+            var two = one.AddSnippet("Second");
+            Empty.Snippets.Should().BeEmpty();
+            one.Snippets.Should().BeEquivalentTo("First");
+            two.Snippets.Should().BeEquivalentTo("First", "Second");
+        }
+
+        [TestMethod]
+        public void AddTestReference_Concatenates_IsImmutable()
+        {
+            var one = Empty.AddReferences(MetadataReferenceFacade.MsCorLib);
+            var two = one.AddTestReference();
+            Empty.References.Should().BeEmpty();
+            one.References.Should().BeEquivalentTo(MetadataReferenceFacade.MsCorLib).And.HaveCount(1);
+            two.References.Should().BeEquivalentTo(MetadataReferenceFacade.MsCorLib.Concat(NuGetMetadataReference.MSTestTestFrameworkV1));
+        }
+
+        [TestMethod]
+        public void WithBasePath()
+        {
+            var one = Empty.WithBasePath("Hotspots");
+            var two = Empty.WithBasePath("SymbolicExecution");
+            Empty.BasePath.Should().BeNull();
+            one.BasePath.Should().Be("Hotspots");
+            two.BasePath.Should().Be("SymbolicExecution");
+        }
+
+        [TestMethod]
+        public void WithConcurrentAnalysis_Overrides_IsImmutable()
+        {
+            var one = Empty.WithConcurrentAnalysis(false);
+            var two = Empty.WithConcurrentAnalysis(true);
+            Empty.ConcurrentAnalysis.Should().BeTrue();
+            one.ConcurrentAnalysis.Should().BeFalse();
+            two.ConcurrentAnalysis.Should().BeTrue();
+        }
+
+        [TestMethod]
         public void WithErrorBehavior_Overrides_IsImmutable()
         {
             var one = Empty.WithErrorBehavior(CompilationErrorBehavior.FailTest);
