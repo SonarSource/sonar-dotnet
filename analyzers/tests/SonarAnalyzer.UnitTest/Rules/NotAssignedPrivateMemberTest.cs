@@ -18,6 +18,8 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System.Collections.Immutable;
+using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.Rules.CSharp;
@@ -52,6 +54,6 @@ unsafe struct FixedArray
         a[0] = 42;
         b[0] = 42;
     }
-}", new NotAssignedPrivateMember(), new[] { new CSharpParseOptions(LanguageVersion.CSharp7_3) });   // ToDo: Use WithLanguageVersion instead
+}", new NotAssignedPrivateMember(), ImmutableArray.Create<ParseOptions>(new CSharpParseOptions(LanguageVersion.CSharp7_3)));   // ToDo: Use WithLanguageVersion instead
     }
 }

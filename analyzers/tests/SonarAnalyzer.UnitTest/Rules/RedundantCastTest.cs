@@ -18,6 +18,8 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System.Collections.Immutable;
+using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.Rules.CSharp;
@@ -73,6 +75,6 @@ public static class MyClass
 
      public static T RunFunc<T>(Func<T> func, T returnValue = default) => returnValue;
 }",
-                new RedundantCast(), new[] { new CSharpParseOptions(LanguageVersion.CSharp7_1) });  //ToDo: Use WithLanguageVersion instead
+                new RedundantCast(), ImmutableArray.Create<ParseOptions>(new CSharpParseOptions(LanguageVersion.CSharp7_1)));  //ToDo: Use WithLanguageVersion instead
     }
 }
