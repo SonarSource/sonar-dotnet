@@ -96,7 +96,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         {
             Action action = () => OldVerifier.VerifyNonConcurrentAnalyzer(
                 @"TestCases\MarkAssemblyWithAssemblyVersionAttributeNoncompliant.vb",
-                new CS.MarkAssemblyWithAssemblyVersionAttribute(),
+                new VB.MarkAssemblyWithAssemblyVersionAttribute(),
                 NuGetMetadataReference.MicrosoftBuildNoTargets());
 
             // False positive. No assembly gets generated when Microsoft.Build.NoTargets is referenced.
