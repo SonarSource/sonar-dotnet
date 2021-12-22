@@ -107,7 +107,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework
         {
             if (language != AnalyzerLanguage.CSharp && language != AnalyzerLanguage.VisualBasic)
             {
-                throw new InvalidOperationException("Unexpected project language: " + language);
+                throw new UnexpectedLanguageException(language);
             }
             var project = Solution.AddProject(projectName, projectName, language.LanguageName);
             var compilationOptions = project.CompilationOptions.WithOutputKind(outputKind);
@@ -115,7 +115,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework
             {
                 LanguageNames.CSharp => ((CSharpCompilationOptions)compilationOptions).WithAllowUnsafe(true),
                 LanguageNames.VisualBasic => ((VisualBasicCompilationOptions)compilationOptions).WithGlobalImports(DefaultGlobalImportsVisualBasic),
-                _ => throw new InvalidOperationException("Unexpected project language: " + language)
+                _ => throw new UnexpectedLanguageException(language)
             };
             project = project.WithCompilationOptions(compilationOptions);
 
@@ -133,7 +133,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework
             {
                 // adding an extra file to the project this won't trigger any issues, but it keeps a reference to the original ParseOption, so
                 // if an analyzer/codefix changes the language version, Roslyn throws an ArgumentException
-                projectBuilder = projectBuilder.AddSnippet(string.Empty, fileName: "ExtraEmptyFile.g." + language.FileExtension);
+                projectBuilder = projectBuilder.AddSnippet(string.Empty, fileName: "ExtraEmptyFile.g" + language.FileExtension);
             }
 
             return projectBuilder;

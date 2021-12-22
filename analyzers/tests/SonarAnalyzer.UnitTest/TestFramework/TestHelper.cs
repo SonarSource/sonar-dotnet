@@ -28,6 +28,7 @@ using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
 using Microsoft.CodeAnalysis.Text;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using SonarAnalyzer.CFG.Roslyn;
 using SonarAnalyzer.Common;
@@ -210,6 +211,14 @@ End Class", AnalyzerLanguage.VisualBasic);
             var projectConfigContent = string.Format(ProjectConfigTemplate, element, value, isScannerRun ? directory : null);
             File.WriteAllText(sonarProjectConfigPath, projectConfigContent);
             return sonarProjectConfigPath;
+        }
+
+        public static string WriteFile(TestContext context, string fileName, string content = null)
+        {
+            var path = Path.Combine(context.TestDir, context.FullyQualifiedTestClassName.Replace("SonarAnalyzer.UnitTest.", null), context.TestName, fileName);
+            Directory.CreateDirectory(Path.GetDirectoryName(path));
+            File.WriteAllText(path, content);
+            return path;
         }
     }
 }

@@ -98,11 +98,11 @@ namespace SonarAnalyzer.Common
             {
                 if (this == CSharp)
                 {
-                    return "cs";
+                    return ".cs";
                 }
                 else if (this == VisualBasic)
                 {
-                    return "vb";
+                    return ".vb";
                 }
                 else
                 {
@@ -154,6 +154,14 @@ namespace SonarAnalyzer.Common
             {
                 ".CS" => CSharp,
                 ".VB" => VisualBasic,
+                _ => None
+            };
+
+        public static AnalyzerLanguage FromName(string name) =>
+            name switch
+            {
+                LanguageNames.CSharp => CSharp,
+                LanguageNames.VisualBasic => VisualBasic,
                 _ => None
             };
     }
