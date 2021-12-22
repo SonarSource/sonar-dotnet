@@ -24,7 +24,9 @@ using System.Diagnostics;
 using System.Linq;
 using System.Text.RegularExpressions;
 using FluentAssertions.Execution;
+using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Text;
+using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
 
 namespace SonarAnalyzer.UnitTest.TestFramework
@@ -333,6 +335,27 @@ internal class MyClass : IInterface1 // there should be no Noncompliant comment
             public string IssueId { get; set; }
             public int? Start { get; set; }
             public int? Length { get; set; }
+
+            public IssueLocation(Diagnostic diagnostic) : this(diagnostic.GetMessage(), diagnostic.Location)
+            {
+                IsPrimary = true;
+                IssueId = diagnostic.Id;
+            }
+
+            public IssueLocation(SecondaryLocation secondaryLocation) : this(secondaryLocation.Message, secondaryLocation.Location)
+            {
+                IsPrimary = false;
+            }
+
+            public IssueLocation() { }
+
+            private IssueLocation(string message, Location location)
+            {
+                Message = message;
+                LineNumber = location.GetLineNumberToReport();
+                Start = location.GetLineSpan().StartLinePosition.Character;
+                Length = location.SourceSpan.Length;
+            }
         }
     }
 }

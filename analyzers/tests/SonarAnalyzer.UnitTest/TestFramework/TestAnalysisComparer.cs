@@ -23,7 +23,6 @@ using System.Linq;
 using System.Text;
 using Microsoft.CodeAnalysis;
 using SonarAnalyzer.Common;
-using SonarAnalyzer.Helpers;
 
 namespace SonarAnalyzer.UnitTest.TestFramework
 {
@@ -32,22 +31,24 @@ namespace SonarAnalyzer.UnitTest.TestFramework
         public static StringBuilder Compare(Diagnostic[] diagnostics, Dictionary<string, IList<IIssueLocation>> expectedIssuesPerFile, string languageVersion)
         {
             var summary = new StringBuilder($"Comparing actual issues with expected:\nLanguage version: {languageVersion}.\n");
-            var actualIssues = diagnostics.ToIssueLocations();
+            var actualIssuesPerFile = diagnostics.ToIssueLocations();
 
-            foreach (var fileName in actualIssues.Keys.OrderBy(x => x))
+            foreach (var fileName in actualIssuesPerFile.Keys.OrderBy(x => x))
             {
                 summary.Append('\n').Append(fileName).Append('\n');
 
-                foreach (var actualIssue in actualIssues[fileName].OrderBy(x => x.LineNumber))
+                var expectedIssues = expectedIssuesPerFile[fileName];
+                foreach (var actualIssue in actualIssuesPerFile[fileName].OrderBy(x => x.LineNumber))
                 {
-                    var issue = expectedIssuesPerFile[fileName].FirstOrDefault(x => x.IsPrimary == actualIssue.IsPrimary && x.LineNumber == actualIssue.LineNumber);
-                    summary.Append(Compare(actualIssue, issue));
-                    expectedIssuesPerFile[fileName].Remove(issue);
+                    var expectedIssue = expectedIssues.FirstOrDefault(x => x.IsPrimary == actualIssue.IsPrimary && x.LineNumber == actualIssue.LineNumber);
+                    summary.Append(Compare(actualIssue, expectedIssue));
+                    expectedIssues.Remove(expectedIssue);
                 }
 
-                foreach (var expectedIssue in expectedIssuesPerFile[fileName].OrderBy(x => x.LineNumber))
+                foreach (var expectedIssue in expectedIssues.OrderBy(x => x.LineNumber))
                 {
-                    summary.Append($"Line {expectedIssue.LineNumber}: expected {IssueType(expectedIssue.IsPrimary)} issue {expectedIssue.IssueId ?? "(no id)"} was not raised!\n");
+                    var issueId = expectedIssue.IssueId is { } id ? $" ID: {id}" : string.Empty;
+                    summary.Append($"Line {expectedIssue.LineNumber}: Expected {IssueType(expectedIssue.IsPrimary)} issue was not raised!{issueId}\n");
                 }
             }
 
@@ -59,49 +60,27 @@ namespace SonarAnalyzer.UnitTest.TestFramework
             var summary = new StringBuilder();
             var prefix = $"Line {actual.LineNumber}";
             var issueType = IssueType(actual.IsPrimary);
-            var issueId = expected?.IssueId ?? actual.IssueId ?? "(no id)";
+            var issueId = (expected?.IssueId ?? actual.IssueId) is { } id ? $" ID: {id}" : string.Empty;
 
             if (expected == null)
             {
-                summary.Append($"{prefix}: unexpected {issueType} issue {issueId} with message '{actual.Message}'.\n");
+                summary.Append($"{prefix}: Unexpected {issueType} issue '{actual.Message}'!{issueId}\n");
             }
             else if (expected.Message != null && actual.Message != expected.Message)
             {
-                summary.Append($"{prefix}: {issueType} issue {issueId} message '{expected.Message}' does not match the actual message '{actual.Message}'.\n");
+                summary.Append($"{prefix}: {issueType} issue message '{expected.Message}' does not match the actual message '{actual.Message}'!{issueId}\n");
             }
             else if (expected.Start.HasValue && actual.Start != expected.Start)
             {
-                summary.Append($"{prefix}: {issueType} issue {issueId} should start on column {expected.Start} but got column {actual.Start}.\n");
+                summary.Append($"{prefix}: {issueType} issue should start on column {expected.Start} but got column {actual.Start}!{issueId}\n");
             }
             else if (expected.Length.HasValue && actual.Length != expected.Length)
             {
-                summary.Append($"{prefix}: {issueType} issue {issueId} should have a length of {expected.Length} but got a length of {actual.Length}.\n");
+                summary.Append($"{prefix}: {issueType} issue should have a length of {expected.Length} but got a length of {actual.Length}!{issueId}\n");
             }
 
             return summary;
         }
-
-        private static IIssueLocation ToIssueLocation(this Diagnostic diagnostic) =>
-            new IssueLocationCollector.IssueLocation
-            {
-                IsPrimary = true,
-                LineNumber = diagnostic.Location.GetLineNumberToReport(),
-                Message = diagnostic.GetMessage(),
-                IssueId = diagnostic.Id,
-                Start = diagnostic.Location.GetLineSpan().StartLinePosition.Character,
-                Length = diagnostic.Location.SourceSpan.Length
-            };
-
-        private static IIssueLocation ToIssueLocation(this SecondaryLocation secondaryLocation) =>
-            new IssueLocationCollector.IssueLocation
-            {
-                IsPrimary = false,
-                LineNumber = secondaryLocation.Location.GetLineNumberToReport(),
-                Message = secondaryLocation.Message,
-                IssueId = null,
-                Start = secondaryLocation.Location.GetLineSpan().StartLinePosition.Character,
-                Length = secondaryLocation.Location.SourceSpan.Length
-            };
 
         private static Dictionary<string, IList<IIssueLocation>> ToIssueLocations(this IEnumerable<Diagnostic> diagnostics)
         {
@@ -114,12 +93,11 @@ namespace SonarAnalyzer.UnitTest.TestFramework
                 {
                     actualIssues.Add(path, new List<IIssueLocation>());
                 }
+                actualIssues[path].Add(new IssueLocationCollector.IssueLocation(diagnostic));
 
-                actualIssues[path].Add(diagnostic.ToIssueLocation());
-
-                foreach (var secondaryLocation in diagnostic.AdditionalLocations.Select((_, i) => diagnostic.GetSecondaryLocation(i)))
+                for (var i = 0; i < diagnostic.AdditionalLocations.Count; i++)
                 {
-                    actualIssues[path].Add(secondaryLocation.ToIssueLocation());
+                    actualIssues[path].Add(new IssueLocationCollector.IssueLocation(diagnostic.GetSecondaryLocation(i)));
                 }
             }
 
@@ -127,6 +105,6 @@ namespace SonarAnalyzer.UnitTest.TestFramework
         }
 
         private static string IssueType(bool isPrimary) =>
-            isPrimary ? "primary" : "secondary";
+            isPrimary ? "Primary" : "Secondary";
     }
 }
