@@ -41,7 +41,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework
                 foreach (var actualIssue in actualIssuesPerFile[fileName].OrderBy(x => x.LineNumber))
                 {
                     var expectedIssue = expectedIssues.FirstOrDefault(x => x.IsPrimary == actualIssue.IsPrimary && x.LineNumber == actualIssue.LineNumber);
-                    summary.Append(Compare(actualIssue, expectedIssue));
+                    summary.AppendComparison(actualIssue, expectedIssue);
                     expectedIssues.Remove(expectedIssue);
                 }
 
@@ -55,9 +55,8 @@ namespace SonarAnalyzer.UnitTest.TestFramework
             return summary;
         }
 
-        private static StringBuilder Compare(IIssueLocation actual, IIssueLocation expected)
+        private static void AppendComparison(this StringBuilder summary, IIssueLocation actual, IIssueLocation expected)
         {
-            var summary = new StringBuilder();
             var prefix = $"Line {actual.LineNumber}";
             var issueType = IssueType(actual.IsPrimary);
             var issueId = (expected?.IssueId ?? actual.IssueId) is { } id ? $" ID: {id}" : string.Empty;
@@ -78,8 +77,6 @@ namespace SonarAnalyzer.UnitTest.TestFramework
             {
                 summary.Append($"{prefix}: {issueType} issue should have a length of {expected.Length} but got a length of {actual.Length}!{issueId}\n");
             }
-
-            return summary;
         }
 
         private static Dictionary<string, IList<IIssueLocation>> ToIssueLocations(this IEnumerable<Diagnostic> diagnostics)
