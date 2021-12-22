@@ -70,11 +70,16 @@ namespace SonarAnalyzer.UnitTest.TestFramework
 
         public ProjectBuilder AddReferences(IEnumerable<MetadataReference> references)
         {
-            var existingReferences = Project.MetadataReferences;
-            var deduplicated = references == null
-                ? Enumerable.Empty<MetadataReference>()
-                : references.Where(mr => !existingReferences.Contains(mr)).Distinct().ToHashSet();
-            return FromProject(Project.AddMetadataReferences(deduplicated));
+            if (references == null || !references.Any())
+            {
+                return this;
+            }
+            if (references.Any(x => x.Display.Contains("\\netstandard")))
+            {
+                references = references.Concat(NetStandardMetadataReference.Netstandard);
+            }
+            var existingReferences = Project.MetadataReferences.ToHashSet();
+            return FromProject(Project.AddMetadataReferences(references.Distinct().Where(x => !existingReferences.Contains(x))));
         }
 
         public ProjectBuilder AddProjectReference(Func<SolutionBuilder, ProjectId> getProjectId) =>

@@ -78,12 +78,6 @@ namespace SonarAnalyzer.UnitTest.TestFramework
                 .AddDocuments(paths)
                 .AddReferences(additionalReferences);
 
-            if (additionalReferences != null
-                && additionalReferences.Any(r => r.Display.Contains("\\netstandard")))
-            {
-                project = project.AddReferences(NetStandardMetadataReference.Netstandard);
-            }
-
             return project.GetSolution();
         }
 
