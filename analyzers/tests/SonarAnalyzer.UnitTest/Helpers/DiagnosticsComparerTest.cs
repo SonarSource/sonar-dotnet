@@ -32,7 +32,7 @@ using VB = SonarAnalyzer.Rules.VisualBasic;
 namespace SonarAnalyzer.UnitTest.Helpers
 {
     [TestClass]
-    public class TestAnalysisComparerTest
+    public class DiagnosticsComparerTest
     {
         [TestMethod]
         public void CompareShouldListAllDifferences_CS()
@@ -41,7 +41,7 @@ namespace SonarAnalyzer.UnitTest.Helpers
 @"Comparing actual issues with expected:
 Language version: C# 10.
 
-TestAnalysisComparer.Primary.cs
+DiagnosticsComparer.Primary.cs
 Line 6: Unexpected Primary issue 'Return 'Task' instead.'! ID: S3168
 Line 8: Primary issue message 'Wrong message' does not match the actual message 'Return 'Task' instead.'! ID: S3168
 Line 10: Primary issue message 'Wrong message, wrong place' does not match the actual message 'Return 'Task' instead.'! ID: S3168
@@ -50,18 +50,17 @@ Line 16: Primary issue should start on column 15 but got column 10! ID: S3168
 Line 19: Primary issue should have a length of 5 but got a length of 4! ID: S3168
 Line 1: Expected Primary issue was not raised!
 
-TestAnalysisComparer.Secondary.cs
-Line 7: Primary issue should have a length of 5 but got a length of 4! ID: S3168
-Line 10: Secondary issue message 'Wrong message' does not match the actual message ''! ID: flow-1
-Line 17: Primary issue message 'Wrong message' does not match the actual message 'Update this method so that its implementation is not identical to 'Default'.'! ID: flow-0
-Line 14: Expected Secondary issue was not raised! ID: flow-2
+DiagnosticsComparer.Secondary.cs
+Line 5: Primary issue should have a length of 5 but got a length of 4! ID: S3168
+Line 8: Secondary issue message 'Wrong message' does not match the actual message ''! ID: flow-1
+Line 15: Primary issue message 'Wrong message' does not match the actual message 'Update this method so that its implementation is not identical to 'Default'.'! ID: flow-0
+Line 12: Expected Secondary issue was not raised! ID: flow-2
 ";
-
-            var compilation = CreateCompilation(new[] { "TestCases/TestAnalysisComparer.Primary.cs", "TestCases/TestAnalysisComparer.Secondary.cs"}, AnalyzerLanguage.CSharp);
+            var compilation = CreateCompilation(AnalyzerLanguage.CSharp, "TestCases/DiagnosticsComparer.Primary.cs", "TestCases/DiagnosticsComparer.Secondary.cs");
             var diagnostics = GetDiagnostics(compilation, new CS.AsyncVoidMethod(), new CS.MethodsShouldNotHaveIdenticalImplementations());
             var expectedIssues = GetExpectedIssues(compilation);
 
-            var summary = TestAnalysisComparer.Compare(diagnostics, expectedIssues, "C# 10");
+            var summary = DiagnosticsComparer.Compare(diagnostics, expectedIssues, "C# 10");
 
             summary.ToString().Should().Be(expected);
         }
@@ -73,18 +72,18 @@ Line 14: Expected Secondary issue was not raised! ID: flow-2
 @"Comparing actual issues with expected:
 Language version: VB.Net 12.
 
-TestAnalysisComparer.Primary.vb
-Line 10: Unexpected Primary issue 'Use an array literal here instead.'! ID: S2355
-Line 14: Primary issue message 'Wrong message' does not match the actual message 'Use an array literal here instead.'! ID: S2355
-Line 18: Primary issue should start on column 24 but got column 22! ID: S2355
-Line 23: Primary issue should have a length of 25 but got a length of 28! ID: S2355
+DiagnosticsComparer.Primary.vb
+Line 3: Primary issue should start on column 22 but got column 18! ID: S2355
+Line 8: Unexpected Primary issue 'Use an array literal here instead.'! ID: S2355
+Line 12: Primary issue message 'Wrong message' does not match the actual message 'Use an array literal here instead.'! ID: S2355
+Line 16: Primary issue should start on column 24 but got column 18! ID: S2355
+Line 21: Primary issue should start on column 22 but got column 18! ID: S2355
 ";
-
-            var compilation = CreateCompilation(new[] { "TestCases/TestAnalysisComparer.Primary.vb" }, AnalyzerLanguage.VisualBasic);
+            var compilation = CreateCompilation(AnalyzerLanguage.VisualBasic, "TestCases/DiagnosticsComparer.Primary.vb");
             var diagnostics = GetDiagnostics(compilation, new VB.ArrayCreationLongSyntax());
             var expectedIssues = GetExpectedIssues(compilation);
 
-            var summary = TestAnalysisComparer.Compare(diagnostics, expectedIssues, "VB.Net 12");
+            var summary = DiagnosticsComparer.Compare(diagnostics, expectedIssues, "VB.Net 12");
 
             summary.ToString().Should().Be(expected);
         }
@@ -92,7 +91,7 @@ Line 23: Primary issue should have a length of 25 but got a length of 28! ID: S2
         private static Diagnostic[] GetDiagnostics(Compilation compilation, params DiagnosticAnalyzer[] diagnostics) =>
             DiagnosticVerifier.GetAnalyzerDiagnostics(compilation, diagnostics, CompilationErrorBehavior.Ignore).ToArray();
 
-        private static Compilation CreateCompilation(IEnumerable<string> filePaths, AnalyzerLanguage language) =>
+        private static Compilation CreateCompilation(AnalyzerLanguage language, params string[] filePaths) =>
             SolutionBuilder.Create().AddProject(language, false).AddDocuments(filePaths).GetCompilation();
 
         private static Dictionary<string, IList<IIssueLocation>> GetExpectedIssues(Compilation compilation) =>

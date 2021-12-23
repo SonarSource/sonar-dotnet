@@ -26,12 +26,12 @@ using SonarAnalyzer.Common;
 
 namespace SonarAnalyzer.UnitTest.TestFramework
 {
-    public static class TestAnalysisComparer
+    public static class DiagnosticsComparer
     {
         public static StringBuilder Compare(Diagnostic[] diagnostics, Dictionary<string, IList<IIssueLocation>> expectedIssuesPerFile, string languageVersion)
         {
             var summary = new StringBuilder($"Comparing actual issues with expected:\nLanguage version: {languageVersion}.\n");
-            var actualIssuesPerFile = diagnostics.ToIssueLocations();
+            var actualIssuesPerFile = diagnostics.ToIssueLocationsPerFile();
 
             foreach (var fileName in actualIssuesPerFile.Keys.OrderBy(x => x))
             {
@@ -79,26 +79,26 @@ namespace SonarAnalyzer.UnitTest.TestFramework
             }
         }
 
-        private static Dictionary<string, IList<IIssueLocation>> ToIssueLocations(this IEnumerable<Diagnostic> diagnostics)
+        private static Dictionary<string, IList<IIssueLocation>> ToIssueLocationsPerFile(this IEnumerable<Diagnostic> diagnostics)
         {
-            var actualIssues = new Dictionary<string, IList<IIssueLocation>>();
+            var issuesPerFile = new Dictionary<string, IList<IIssueLocation>>();
 
             foreach (var diagnostic in diagnostics)
             {
                 var path = diagnostic.Location.SourceTree?.FilePath ?? string.Empty;
-                if (!actualIssues.ContainsKey(path))
+                if (!issuesPerFile.ContainsKey(path))
                 {
-                    actualIssues.Add(path, new List<IIssueLocation>());
+                    issuesPerFile.Add(path, new List<IIssueLocation>());
                 }
-                actualIssues[path].Add(new IssueLocationCollector.IssueLocation(diagnostic));
+                issuesPerFile[path].Add(new IssueLocationCollector.IssueLocation(diagnostic));
 
                 for (var i = 0; i < diagnostic.AdditionalLocations.Count; i++)
                 {
-                    actualIssues[path].Add(new IssueLocationCollector.IssueLocation(diagnostic.GetSecondaryLocation(i)));
+                    issuesPerFile[path].Add(new IssueLocationCollector.IssueLocation(diagnostic.GetSecondaryLocation(i)));
                 }
             }
 
-            return actualIssues;
+            return issuesPerFile;
         }
 
         private static string IssueType(bool isPrimary) =>

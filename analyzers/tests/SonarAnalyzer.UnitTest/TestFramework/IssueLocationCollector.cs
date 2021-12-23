@@ -342,10 +342,7 @@ internal class MyClass : IInterface1 // there should be no Noncompliant comment
                 IssueId = diagnostic.Id;
             }
 
-            public IssueLocation(SecondaryLocation secondaryLocation) : this(secondaryLocation.Message, secondaryLocation.Location)
-            {
-                IsPrimary = false;
-            }
+            public IssueLocation(SecondaryLocation secondaryLocation) : this(secondaryLocation.Message, secondaryLocation.Location) { }
 
             public IssueLocation() { }
 
