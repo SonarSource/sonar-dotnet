@@ -32,7 +32,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework.Tests
         private static TextLine GetLine(int lineNumber, string code) =>
             SourceText.From(code).Lines[lineNumber];
 
-        private static void VerifyIssueLocations(IEnumerable<IIssueLocation> result,
+        private static void VerifyIssueLocations(IReadOnlyCollection<IIssueLocation> result,
             IEnumerable<bool> expectedIsPrimary,
             IEnumerable<int> expectedLineNumbers,
             IEnumerable<string> expectedMessages,

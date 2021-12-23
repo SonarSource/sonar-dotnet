@@ -131,18 +131,20 @@ Noncompliant - this should not be detected as expected issue
     public void Bar(object o)
 //              ^^^
 //                         ^ Secondary@-1
+//                  ^^^^^^ Secondary@-2 [flow]
+//                   ^^^^ Secondary@-3 [flow] {{Some message}}
     {
         Console.WriteLine(o);
     }
 }";
             var locations = IssueLocationCollector.GetExpectedIssueLocations(SourceText.From(code).Lines);
 
-            locations.Should().HaveCount(2);
+            locations.Should().HaveCount(4);
 
-            locations.Select(l => l.IsPrimary).Should().BeEquivalentTo(new[] { true, false });
-            locations.Select(l => l.LineNumber).Should().Equal(3, 3);
-            locations.Select(l => l.Start).Should().Equal(new[] { 16, 27 });
-            locations.Select(l => l.Length).Should().Equal(new[] { 3, 1 });
+            locations.Select(l => l.IsPrimary).Should().BeEquivalentTo(new[] { true, false, false, false });
+            locations.Select(l => l.LineNumber).Should().Equal(3, 3, 3, 3);
+            locations.Select(l => l.Start).Should().Equal(new[] { 16, 27, 20, 21 });
+            locations.Select(l => l.Length).Should().Equal(new[] { 3, 1, 6, 4 });
         }
 
         [TestMethod]
