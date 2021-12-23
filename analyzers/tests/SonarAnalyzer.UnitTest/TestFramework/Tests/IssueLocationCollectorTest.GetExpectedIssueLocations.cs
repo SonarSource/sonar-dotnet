@@ -31,7 +31,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework.Tests
         [TestMethod]
         public void GetExpectedIssueLocations_No_Comments()
         {
-            var code = @"public class Foo
+            const string code = @"public class Foo
 {
     public void Bar(object o)
     {
@@ -46,7 +46,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework.Tests
         [TestMethod]
         public void GetExpectedIssueLocations_Locations_CS()
         {
-            var code = @"
+            const string code = @"
 public class Foo
 {
     public void Bar(object o) // Noncompliant
@@ -59,14 +59,14 @@ public class Foo
 
             locations.Should().HaveCount(2);
 
-            locations.Select(l => l.IsPrimary).Should().Equal(new[] { true, true });
-            locations.Select(l => l.LineNumber).Should().Equal(new[] { 4, 7 });
+            locations.Select(l => l.IsPrimary).Should().Equal(true, true);
+            locations.Select(l => l.LineNumber).Should().Equal(4, 7);
         }
 
         [TestMethod]
         public void GetExpectedIssueLocations_Locations_VB()
         {
-            var code = @"
+            const string code = @"
 Public Class Foo
 
     Public Sub Bar(o As Object) ' Noncompliant
@@ -79,14 +79,14 @@ End Class";
 
             locations.Should().HaveCount(2);
 
-            locations.Select(l => l.IsPrimary).Should().Equal(new[] { true, true });
-            locations.Select(l => l.LineNumber).Should().Equal(new[] { 4, 6 });
+            locations.Select(l => l.IsPrimary).Should().Equal(true, true);
+            locations.Select(l => l.LineNumber).Should().Equal(4, 6);
         }
 
         [TestMethod]
         public void GetExpectedIssueLocations_Locations_Xml()
         {
-            var code = @"<Root>
+            const string code = @"<Root>
 <SelfClosing /><!-- Noncompliant -->
 <SelfClosing /><!-- Noncompliant with additional comment and new line
 -->
@@ -102,14 +102,14 @@ Noncompliant - this should not be detected as expected issue
 
             locations.Should().HaveCount(5);
 
-            locations.Select(l => l.IsPrimary).Should().Equal(new[] { true, true, true, false, true });
-            locations.Select(l => l.LineNumber).Should().Equal(new[] { 2, 3, 5, 6, 8 });
+            locations.Select(l => l.IsPrimary).Should().Equal(true, true, true, false, true);
+            locations.Select(l => l.LineNumber).Should().Equal(2, 3, 5, 6, 8);
         }
 
         [TestMethod]
         public void GetExpectedIssueLocations_OnlyCommentedNoncompliant()
         {
-            var code = @"public class MyNoncompliantClass
+            const string code = @"public class MyNoncompliantClass
 {
     public void NoncompliantMethod(object o)
     {
@@ -119,14 +119,14 @@ Noncompliant - this should not be detected as expected issue
             var locations = IssueLocationCollector.GetExpectedIssueLocations(SourceText.From(code).Lines);
 
             locations.Should().ContainSingle();
-            locations.Select(l => l.IsPrimary).Should().Equal(new[] { true });
-            locations.Select(l => l.LineNumber).Should().Equal(new[] { 5 });
+            locations.Select(l => l.IsPrimary).Should().Equal(true);
+            locations.Select(l => l.LineNumber).Should().Equal(5);
         }
 
         [TestMethod]
         public void GetExpectedIssueLocations_ExactLocations()
         {
-            var code = @"public class Foo
+            const string code = @"public class Foo
 {
     public void Bar(object o)
 //              ^^^
@@ -140,7 +140,7 @@ Noncompliant - this should not be detected as expected issue
             locations.Should().HaveCount(2);
 
             locations.Select(l => l.IsPrimary).Should().BeEquivalentTo(new[] { true, false });
-            locations.Select(l => l.LineNumber).Should().Equal(new[] { 3, 3 });
+            locations.Select(l => l.LineNumber).Should().Equal(3, 3);
             locations.Select(l => l.Start).Should().Equal(new[] { 16, 27 });
             locations.Select(l => l.Length).Should().Equal(new[] { 3, 1 });
         }
@@ -148,7 +148,7 @@ Noncompliant - this should not be detected as expected issue
         [TestMethod]
         public void GetExpectedIssueLocations_ExactColumns()
         {
-            var code = @"public class Foo
+            const string code = @"public class Foo
 {
     public void Bar(object o) // Noncompliant ^17#3
                               // Secondary@-1 ^28#1
@@ -161,7 +161,7 @@ Noncompliant - this should not be detected as expected issue
             locations.Should().HaveCount(2);
 
             locations.Select(l => l.IsPrimary).Should().BeEquivalentTo(new[] { true, false });
-            locations.Select(l => l.LineNumber).Should().Equal(new[] { 3, 3 });
+            locations.Select(l => l.LineNumber).Should().Equal(3, 3);
             locations.Select(l => l.Start).Should().Equal(new[] { 16, 27 });
             locations.Select(l => l.Length).Should().Equal(new[] { 3, 1 });
         }
@@ -169,7 +169,7 @@ Noncompliant - this should not be detected as expected issue
         [TestMethod]
         public void GetExpectedIssueLocations_Redundant_Locations()
         {
-            var code = @"public class Foo
+            const string code = @"public class Foo
 {
     public void Bar(object o) // Noncompliant ^17#3
 //              ^^^
@@ -180,15 +180,15 @@ Noncompliant - this should not be detected as expected issue
 
             Action action = () => IssueLocationCollector.GetExpectedIssueLocations(SourceText.From(code).Lines);
 
-            action.Should().Throw<InvalidOperationException>()
-                .WithMessage("Unexpected redundant issue location on line 3. Issue location can be set either " +
-                "with 'precise issue location' or 'exact column location' pattern but not both.");
+            action.Should()
+                  .Throw<InvalidOperationException>()
+                  .WithMessage("Unexpected redundant issue location on line 3. Issue location can be set either with 'precise issue location' or 'exact column location' pattern but not both.");
         }
 
         [TestMethod]
         public void GetExpectedIssueLocations_Multiple_PrimaryIds()
         {
-            var code = @"public class Foo
+            const string code = @"public class Foo
 {
     public void Bar(object o) // Noncompliant [myId1]
     {
@@ -198,14 +198,13 @@ Noncompliant - this should not be detected as expected issue
 
             Action action = () => IssueLocationCollector.GetExpectedIssueLocations(SourceText.From(code).Lines);
 
-            action.Should().Throw<InvalidOperationException>()
-                .WithMessage("Primary location with id [myId1] found on multiple lines: 3, 5");
+            action.Should().Throw<InvalidOperationException>().WithMessage("Primary location with id [myId1] found on multiple lines: 3, 5");
         }
 
         [TestMethod]
         public void GetExpectedIssueLocations_Invalid_Type_Format()
         {
-            var code = @"public class Foo
+            const string code = @"public class Foo
 {
     public void Bar(object o) // Is Noncompliant
     {
@@ -215,15 +214,16 @@ Noncompliant - this should not be detected as expected issue
 
             Action action = () => IssueLocationCollector.GetExpectedIssueLocations(SourceText.From(code).Lines);
 
-            action.Should().Throw<InvalidOperationException>()
-                .WithMessage(@"Line 2 looks like it contains comment for noncompliant code, but it is not recognized as one of the expected pattern.
+            action.Should()
+                  .Throw<InvalidOperationException>()
+                  .WithMessage(@"Line 2 looks like it contains comment for noncompliant code, but it is not recognized as one of the expected pattern.
 Either remove the Noncompliant/Secondary word or precise pattern '^^' from the comment, or fix the pattern.");
         }
 
         [TestMethod]
         public void GetExpectedIssueLocations_Invalid_Precise_Format()
         {
-            var code = @"public class Foo
+            const string code = @"public class Foo
 {
     public void Bar(object o) // Noncompliant
 //  issue is here   ^^^^^^
@@ -234,8 +234,9 @@ Either remove the Noncompliant/Secondary word or precise pattern '^^' from the c
 
             Action action = () => IssueLocationCollector.GetExpectedIssueLocations(SourceText.From(code).Lines);
 
-            action.Should().Throw<InvalidOperationException>()
-                .WithMessage(@"Line 3 looks like it contains comment for noncompliant code, but it is not recognized as one of the expected pattern.
+            action.Should()
+                  .Throw<InvalidOperationException>()
+                  .WithMessage(@"Line 3 looks like it contains comment for noncompliant code, but it is not recognized as one of the expected pattern.
 Either remove the Noncompliant/Secondary word or precise pattern '^^' from the comment, or fix the pattern.");
         }
     }

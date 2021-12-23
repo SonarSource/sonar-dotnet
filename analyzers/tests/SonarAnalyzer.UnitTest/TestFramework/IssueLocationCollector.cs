@@ -89,7 +89,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework
     ///     private void MyMethod() // Noncompliant@+1 ^4#7 [MyIssueId] {{Remove this unused private method}}
     /// </code>
     /// </summary>
-    public class IssueLocationCollector
+    public static class IssueLocationCollector
     {
         private const string CommentPattern = @"(?<comment>//|'|<!--|/\*)";
         private const string PrecisePositionPattern = @"\s*(?<position>\^+)(\s+(?<invalid>\^+))*";
@@ -102,15 +102,14 @@ namespace SonarAnalyzer.UnitTest.TestFramework
         private const string MessagePattern = @"(\s*\{\{(?<message>.+)\}\})?";
 
         internal static readonly Regex RxIssue =
-           new Regex(CommentPattern + NoPrecisePositionPattern + IssueTypePattern + OffsetPattern + ExactColumnPattern + IssueIdsPattern + MessagePattern, RegexOptions.Compiled);
+            new(CommentPattern + NoPrecisePositionPattern + IssueTypePattern + OffsetPattern + ExactColumnPattern + IssueIdsPattern + MessagePattern, RegexOptions.Compiled);
+
         internal static readonly Regex RxPreciseLocation =
-            new Regex(@"^\s*" + CommentPattern + PrecisePositionPattern + IssueTypePattern + "?" + OffsetPattern + IssueIdsPattern + MessagePattern + @"\s*(-->|\*/)?$", RegexOptions.Compiled);
-        private static readonly Regex RxBuildError =
-            new Regex(CommentPattern + ErrorTypePattern + OffsetPattern + ExactColumnPattern + IssueIdsPattern, RegexOptions.Compiled);
-        private static readonly Regex RxInvalidType =
-            new Regex(CommentPattern + ".*" + IssueTypePattern, RegexOptions.Compiled);
-        private static readonly Regex RxInvalidxPreciseLocation =
-            new Regex(@"^\s*" + CommentPattern + ".*" + PrecisePositionPattern, RegexOptions.Compiled);
+            new(@"^\s*" + CommentPattern + PrecisePositionPattern + IssueTypePattern + "?" + OffsetPattern + IssueIdsPattern + MessagePattern + @"\s*(-->|\*/)?$", RegexOptions.Compiled);
+
+        private static readonly Regex RxBuildError = new(CommentPattern + ErrorTypePattern + OffsetPattern + ExactColumnPattern + IssueIdsPattern, RegexOptions.Compiled);
+        private static readonly Regex RxInvalidType = new(CommentPattern + ".*" + IssueTypePattern, RegexOptions.Compiled);
+        private static readonly Regex RxInvalidPreciseLocation = new(@"^\s*" + CommentPattern + ".*" + PrecisePositionPattern, RegexOptions.Compiled);
 
         public static IList<IIssueLocation> GetExpectedIssueLocations(IEnumerable<TextLine> lines)
         {
@@ -119,12 +118,12 @@ namespace SonarAnalyzer.UnitTest.TestFramework
 
             foreach (var line in lines)
             {
-                var newPreciseLocations = GetPreciseIssueLocations(line);
+                var newPreciseLocations = GetPreciseIssueLocations(line).ToList();
                 if (newPreciseLocations.Any())
                 {
                     preciseLocations.AddRange(newPreciseLocations);
                 }
-                else if (GetIssueLocations(line) is IEnumerable<IssueLocation> newLocations && newLocations.Any())
+                else if (GetIssueLocations(line).ToList() is var newLocations && newLocations.Any())
                 {
                     locations.AddRange(newLocations);
                 }
@@ -134,30 +133,31 @@ namespace SonarAnalyzer.UnitTest.TestFramework
                 }
             }
 
-            return EnsureNoDuplicatedPrimaryIds(MergeLocations(locations, preciseLocations));
+            return EnsureNoDuplicatedPrimaryIds(MergeLocations(locations.ToArray(), preciseLocations.ToArray()));
         }
 
         internal static IEnumerable<IIssueLocation> GetExpectedBuildErrors(IEnumerable<TextLine> lines) =>
-            lines?.SelectMany(GetBuildErrorsLocations).OfType<IIssueLocation>() ?? Enumerable.Empty<IIssueLocation>();
+            lines?.SelectMany(GetBuildErrorsLocations) ?? Enumerable.Empty<IIssueLocation>();
 
-        internal static /*for testing*/ IList<IIssueLocation> MergeLocations(IEnumerable<IssueLocation> locations, IEnumerable<IssueLocation> preciseLocations)
+        internal static /*for testing*/ IList<IIssueLocation> MergeLocations(IssueLocation[] locations, IssueLocation[] preciseLocations)
         {
             var usedLocations = new List<IssueLocation>();
             foreach (var location in locations)
             {
-                var preciseLocationsOnSameLine = preciseLocations.Where(l => l.LineNumber == location.LineNumber);
-                if (preciseLocationsOnSameLine.Count() > 1)
+                var preciseLocationsOnSameLine = preciseLocations.Where(l => l.LineNumber == location.LineNumber).ToList();
+                if (preciseLocationsOnSameLine.Count > 1)
                 {
-                    ThrowUnexpectedPreciseLocationCount(preciseLocationsOnSameLine.Count(), preciseLocationsOnSameLine.First().LineNumber);
+                    ThrowUnexpectedPreciseLocationCount(preciseLocationsOnSameLine.Count, preciseLocationsOnSameLine.First().LineNumber);
                 }
 
-                if (preciseLocationsOnSameLine.SingleOrDefault() is { }  preciseLocation)
+                if (preciseLocationsOnSameLine.SingleOrDefault() is { } preciseLocation)
                 {
                     if (location.Start.HasValue)
                     {
                         throw new InvalidOperationException($"Unexpected redundant issue location on line {location.LineNumber}. Issue location can " +
-                            $"be set either with 'precise issue location' or 'exact column location' pattern but not both.");
+                                                            "be set either with 'precise issue location' or 'exact column location' pattern but not both.");
                     }
+
                     location.Start = preciseLocation.Start;
                     location.Length = preciseLocation.Length;
                     usedLocations.Add(preciseLocation);
@@ -165,16 +165,13 @@ namespace SonarAnalyzer.UnitTest.TestFramework
             }
 
             return locations
-                .Union(preciseLocations.Except(usedLocations))
-                .Cast<IIssueLocation>()
-                .ToList();
+                   .Union(preciseLocations.Except(usedLocations))
+                   .Cast<IIssueLocation>()
+                   .ToList();
         }
 
         internal static /*for testing*/ IEnumerable<IssueLocation> GetIssueLocations(TextLine line) =>
             GetLocations(line, RxIssue);
-
-        internal static /*for testing*/ IEnumerable<IssueLocation> GetBuildErrorsLocations(TextLine line) =>
-            GetLocations(line, RxBuildError);
 
         internal static /*for testing*/ IEnumerable<IssueLocation> GetPreciseIssueLocations(TextLine line)
         {
@@ -184,8 +181,12 @@ namespace SonarAnalyzer.UnitTest.TestFramework
                 EnsureNoRemainingCurlyBrace(line, match);
                 return CreateIssueLocations(match, line.LineNumber);
             }
+
             return Enumerable.Empty<IssueLocation>();
         }
+
+        private static IEnumerable<IssueLocation> GetBuildErrorsLocations(TextLine line) =>
+            GetLocations(line, RxBuildError);
 
         private static IEnumerable<IssueLocation> GetLocations(TextLine line, Regex rx)
         {
@@ -195,6 +196,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework
                 EnsureNoRemainingCurlyBrace(line, match);
                 return CreateIssueLocations(match, line.LineNumber + 1);
             }
+
             return Enumerable.Empty<IssueLocation>();
         }
 
@@ -214,57 +216,37 @@ namespace SonarAnalyzer.UnitTest.TestFramework
 
             return GetIssueIds(match).Select(
                 issueId => new IssueLocation
-                {
-                    IsPrimary = isPrimary,
-                    LineNumber = line,
-                    Message = message,
-                    IssueId = issueId,
-                    Start = start,
-                    Length = length,
-                });
+                           {
+                               IsPrimary = isPrimary,
+                               LineNumber = line,
+                               Message = message,
+                               IssueId = issueId,
+                               Start = start,
+                               Length = length,
+                           });
         }
 
-        private static int? GetStart(Match match)
-        {
-            var position = match.Groups["position"];
-            return position.Success ? (int?)position.Index : null;
-        }
+        private static int? GetStart(Match match) =>
+            match.Groups["position"] is {Success: true} position ? position.Index : null;
 
-        private static int? GetLength(Match match)
-        {
-            var position = match.Groups["position"];
-            return position.Success ? (int?)position.Length : null;
-        }
+        private static int? GetLength(Match match) =>
+            match.Groups["position"] is { Success: true } position ? position.Length : null;
 
-        private static int? GetColumnStart(Match match)
-        {
-            var columnStart = match.Groups["columnStart"];
-            return columnStart.Success ? (int?)int.Parse(columnStart.Value) - 1 : null;
-        }
+        private static int? GetColumnStart(Match match) =>
+            match.Groups["columnStart"] is { Success: true } columnStart ? (int?)int.Parse(columnStart.Value) - 1 : null;
 
-        private static int? GetColumnLength(Match match)
-        {
-            var length = match.Groups["length"];
-            return length.Success ? (int?)int.Parse(length.Value) : null;
-        }
+        private static int? GetColumnLength(Match match) =>
+            match.Groups["length"] is { Success: true } length ? int.Parse(length.Value) : null;
 
-        private static bool GetIsPrimary(Match match)
-        {
-            var issueType = match.Groups["issueType"];
-            return !issueType.Success || issueType.Value == "Noncompliant";
-        }
+        private static bool GetIsPrimary(Match match) =>
+            match.Groups["issueType"] is var issueType
+            && (!issueType.Success || issueType.Value == "Noncompliant");
 
-        private static string GetMessage(Match match)
-        {
-            var message = match.Groups["message"];
-            return message.Success ? message.Value : null;
-        }
+        private static string GetMessage(Match match) =>
+            match.Groups["message"] is { Success: true } message ? message.Value : null;
 
-        private static int GetOffset(Match match)
-        {
-            var offset = match.Groups["offset"];
-            return offset.Success ? int.Parse(offset.Value) : 0;
-        }
+        private static int GetOffset(Match match) =>
+            match.Groups["offset"] is { Success: true } offset ? int.Parse(offset.Value) : 0;
 
         private static IEnumerable<string> GetIssueIds(Match match)
         {
@@ -276,16 +258,16 @@ namespace SonarAnalyzer.UnitTest.TestFramework
             }
 
             return issueIds.Value
-                .Split(',')
-                .Select(s => s.Trim())
-                .Where(s => !string.IsNullOrEmpty(s))
-                .OrderBy(s => s);
+                           .Split(',')
+                           .Select(s => s.Trim())
+                           .Where(s => !string.IsNullOrEmpty(s))
+                           .OrderBy(s => s);
         }
 
         private static void EnsureNoInvalidFormat(TextLine line)
         {
             var lineText = line.ToString();
-            if (RxInvalidType.IsMatch(lineText) || RxInvalidxPreciseLocation.IsMatch(lineText))
+            if (RxInvalidType.IsMatch(lineText) || RxInvalidPreciseLocation.IsMatch(lineText))
             {
                 throw new InvalidOperationException($@"Line {line.LineNumber} looks like it contains comment for noncompliant code, but it is not recognized as one of the expected pattern.
 Either remove the Noncompliant/Secondary word or precise pattern '^^' from the comment, or fix the pattern.");
@@ -306,7 +288,7 @@ Either remove the Noncompliant/Secondary word or precise pattern '^^' from the c
             return mergedLocations;
         }
 
-        private static void EnsureNoRemainingCurlyBrace(TextLine line, Match match)
+        private static void EnsureNoRemainingCurlyBrace(TextLine line, Capture match)
         {
             var remainingLine = line.ToString().Substring(match.Index + match.Length);
             if (remainingLine.Contains("{") || remainingLine.Contains("}"))
@@ -329,10 +311,10 @@ internal class MyClass : IInterface1 // there should be no Noncompliant comment
         [DebuggerDisplay("ID:{IssueId} @{LineNumber} Primary:{IsPrimary} Start:{Start} Length:{Length} '{Message}'")]
         internal class IssueLocation : IIssueLocation
         {
-            public bool IsPrimary { get; set; }
-            public int LineNumber { get; set; }
-            public string Message { get; set; }
-            public string IssueId { get; set; }
+            public bool IsPrimary { get; init; }
+            public int LineNumber { get; init; }
+            public string Message { get; init; }
+            public string IssueId { get; init; }
             public int? Start { get; set; }
             public int? Length { get; set; }
 

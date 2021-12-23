@@ -288,8 +288,8 @@ namespace SonarAnalyzer.UnitTest.TestFramework.Tests
 }");
             Action action = () => IssueLocationCollector.GetPreciseIssueLocations(line);
             action.Should()
-                .Throw<InvalidOperationException>()
-                .WithMessage(@"Expecting only one precise location per line, found 3 on line 3. If you want to specify more than one precise location per line you need to omit the Noncompliant comment:
+                  .Throw<InvalidOperationException>()
+                  .WithMessage(@"Expecting only one precise location per line, found 3 on line 3. If you want to specify more than one precise location per line you need to omit the Noncompliant comment:
 internal class MyClass : IInterface1 // there should be no Noncompliant comment
 ^^^^^^^ {{Do not create internal classes.}}
                          ^^^^^^^^^^^ @-1 {{IInterface1 is bad for your health.}}");
@@ -298,7 +298,7 @@ internal class MyClass : IInterface1 // there should be no Noncompliant comment
         [TestMethod]
         public void GetPreciseIssueLocations_Xml()
         {
-            var code = @"<Root>
+            const string code = @"<Root>
 <Space><SelfClosing /></Space>
 <!--   ^^^^^^^^^^^^^^^ -->
 <NoSpace><SelfClosing /></NoSpace>
