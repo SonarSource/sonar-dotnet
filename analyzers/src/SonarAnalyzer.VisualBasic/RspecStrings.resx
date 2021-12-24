@@ -5341,7 +5341,7 @@
     <value>Major Code Smell</value>
   </data>
   <data name="S6354_Description" xml:space="preserve">
-    <value>One of the principles of a unit test is that it must have full control of the system under test. This is problematic when production code includes calls to static methods, and date/time functions are usually provided by system libraries as static methods.</value>
+    <value>One of the principles of a unit test is that it must have full control of the system under test. This is problematic when production code includes calls to static methods, which cannot be changed or controlled. Date/time functions are usually provided by system libraries as static methods.</value>
   </data>
   <data name="S6354_IsActivatedByDefault" xml:space="preserve">
     <value>False</value>
