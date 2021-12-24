@@ -1,5 +1,5 @@
 <p>One of the principles of a unit test is that it must have full control of the system under test. This is problematic when production code includes
-calls to static methods, and date/time functions are usually provided by system libraries as static methods.</p>
+calls to static methods, which cannot be changed or controlled. Date/time functions are usually provided by system libraries as static methods.</p>
 <p>This can be improved by wrapping the system calls in an object or service that can be controlled inside the unit test.</p>
 <h2>Noncompliant Code Example</h2>
 <pre>
