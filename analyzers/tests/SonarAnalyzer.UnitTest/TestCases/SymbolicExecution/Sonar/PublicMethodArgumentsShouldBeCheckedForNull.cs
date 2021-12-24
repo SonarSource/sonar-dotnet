@@ -155,7 +155,7 @@ namespace Tests.Diagnostics
             s6.ToUpper();
 
             s7.GuardExtensionMoreArguments(null, null);
-            s7.ToUpper(); // Noncompliant
+            s7.ToUpper();
         }
 
         public void Guard1<T>([ValidatedNotNull] T value) where T : class { }
