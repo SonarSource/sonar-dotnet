@@ -1004,6 +1004,19 @@ namespace SonarAnalyzer.SymbolicExecution.Sonar
                         newProgramState = newProgramState.StoreSymbolicValue(symbol, sv);
                     }
                 }
+                else if (symbol is IMethodSymbol { IsExtensionMethod: true, Parameters: { IsEmpty: true } } methodSymbol)
+                {
+                    var declaration = methodSymbol.DeclaringSyntaxReferences.FirstOrDefault()?.GetSyntax();
+                    if (declaration is MethodDeclarationSyntax syntax)
+                    {
+                        var x = syntax.ParameterList.Parameters.First();
+                        if (x.AttributeLists.SelectMany(list => list.Attributes).Any(x => x.ToStringContains("ValidatedNotNull")))
+                        {
+                            var invocationSymbolicValue = programState.PeekValue();
+                            newProgramState = newProgramState.SetConstraint(invocationSymbolicValue, ObjectConstraint.NotNull);
+                        }
+                    }
+                }
             }
             if (sv == null)
             {

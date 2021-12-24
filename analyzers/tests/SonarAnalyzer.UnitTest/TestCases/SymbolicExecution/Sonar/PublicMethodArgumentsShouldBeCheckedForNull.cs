@@ -141,7 +141,7 @@ namespace Tests.Diagnostics
             s4.ToUpper();
 
             s5.GuardExtension();
-            s5.ToUpper(); // Noncompliant - FP for extensions having the [ValidatedNotNull] attribute
+            s5.ToUpper();
         }
 
         public void Guard1<T>([ValidatedNotNull] T value) where T : class { }
