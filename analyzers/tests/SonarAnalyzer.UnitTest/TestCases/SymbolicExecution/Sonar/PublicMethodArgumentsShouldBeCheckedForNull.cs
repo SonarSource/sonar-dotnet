@@ -119,14 +119,22 @@ namespace Tests.Diagnostics
     [AttributeUsage(AttributeTargets.Parameter)]
     public sealed class ValidatedNotNullAttribute : Attribute { }
 
+    [AttributeUsage(AttributeTargets.Parameter)]
+    public sealed class FooAttribute : Attribute { }
+
+    [AttributeUsage(AttributeTargets.Parameter)]
+    public sealed class BarAttribute : Attribute { }
+
     public static class GuardExtensionClass
     {
         public static void GuardExtension([ValidatedNotNull] this string value) { }
+        public static void GuardExtensionMoreAttributes([Foo][ValidatedNotNull][Bar] this string value) { }
+        public static void GuardExtensionMoreArguments([ValidatedNotNull] this string value, string foo, string bar) { }
     }
 
     public class GuardedTests
     {
-        public void Guarded(string s1, string s2, string s3, string s4, string s5)
+        public void Guarded(string s1, string s2, string s3, string s4, string s5, string s6, string s7)
         {
             Guard1(s1);
             s1.ToUpper();
@@ -142,6 +150,12 @@ namespace Tests.Diagnostics
 
             s5.GuardExtension();
             s5.ToUpper();
+
+            s6.GuardExtensionMoreAttributes();
+            s6.ToUpper();
+
+            s7.GuardExtensionMoreArguments(null, null);
+            s7.ToUpper(); // Noncompliant
         }
 
         public void Guard1<T>([ValidatedNotNull] T value) where T : class { }
