@@ -691,7 +691,7 @@ namespace Tests.Diagnostics
             object a = null;
             if (a.IsNotNull())
             {
-                a.ToString();   // Noncompliant FP
+                a.ToString();
             }
         }
 

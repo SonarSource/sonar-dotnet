@@ -1005,6 +1005,12 @@ namespace SonarAnalyzer.SymbolicExecution.Sonar
                         newProgramState = newProgramState.StoreSymbolicValue(symbol, sv);
                     }
                 }
+                else if (symbol is IMethodSymbol { IsExtensionMethod: true } methodSymbol
+                    && methodSymbol.GetFirstSyntaxRef() is MethodDeclarationSyntax syntax
+                    && syntax.ParameterList.Parameters.FirstOrDefault().AttributeLists.SelectMany(list => list.Attributes).Any(x => x.ToStringContains("ValidatedNotNull")))
+                {
+                    newProgramState = newProgramState.SetConstraint(programState.PeekValue(), ObjectConstraint.NotNull);
+                }
             }
             if (sv == null)
             {
