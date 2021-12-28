@@ -28,8 +28,8 @@ namespace SonarAnalyzer.Rules
     public abstract class UseTestableTimeProviderBase<TSyntaxKind> : SonarDiagnosticAnalyzer
          where TSyntaxKind : struct
     {
-        protected const string DiagnosticId = "S6354";
-        protected const string MessageFormat = "Use a testable (date) time provider instead.";
+        private const string DiagnosticId = "S6354";
+        private const string MessageFormat = "Use a testable (date) time provider instead.";
 
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
         private readonly DiagnosticDescriptor rule;
