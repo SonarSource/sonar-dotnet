@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 
 namespace Tests.Diagnostics
@@ -9,7 +8,7 @@ namespace Tests.Diagnostics
         private static bool HasContent1(IEnumerable<string> l)
         {
             return l.Count() > 0; // Noncompliant {{Use '.Any()' to test whether this 'IEnumerable<string>' is empty or not.}}
-//                   ^^^^^
+            //       ^^^^^
         }
         private static bool HasContent1b(IEnumerable<string> l)
         {
@@ -18,11 +17,11 @@ namespace Tests.Diagnostics
         private static bool HasContent2(List<string> l)
         {
             return Enumerable.Count(l) >= 0x1; // Noncompliant
-//                            ^^^^^
+            //                ^^^^^
         }
         private static bool HasContent2b(List<string> l)
         {
-            return 1UL <= Enumerable.Count(l); // Noncompliant // Error [CS0034]
+            return 1UL <= Enumerable.Count(l); // Noncompliant // Error[CS0034]
         }
         private static bool HasContent3(List<string> l)
         {
