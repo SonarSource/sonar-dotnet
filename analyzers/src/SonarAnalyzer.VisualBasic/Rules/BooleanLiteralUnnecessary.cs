@@ -18,7 +18,6 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System.Collections.Immutable;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Diagnostics;
 using Microsoft.CodeAnalysis.VisualBasic;
@@ -32,11 +31,6 @@ namespace SonarAnalyzer.Rules.VisualBasic
     [Rule(DiagnosticId)]
     public sealed class BooleanLiteralUnnecessary : BooleanLiteralUnnecessaryBase<BinaryExpressionSyntax, SyntaxKind>
     {
-        private static readonly DiagnosticDescriptor rule =
-            DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
-
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(rule);
-
         protected override ILanguageFacade<SyntaxKind> Language => VisualBasicFacade.Instance;
 
         protected override bool IsBooleanLiteral(SyntaxNode node) => IsTrueLiteralKind(node) || IsFalseLiteralKind(node);
@@ -53,37 +47,14 @@ namespace SonarAnalyzer.Rules.VisualBasic
 
         protected override void Initialize(SonarAnalysisContext context)
         {
-            context.RegisterSyntaxNodeActionInNonGenerated(
-                CheckLogicalNot,
-                SyntaxKind.NotExpression);
-
-            context.RegisterSyntaxNodeActionInNonGenerated(
-                CheckAndExpression,
-                SyntaxKind.AndAlsoExpression);
-
-            context.RegisterSyntaxNodeActionInNonGenerated(
-                CheckAndExpression,
-                SyntaxKind.AndExpression);
-
-            context.RegisterSyntaxNodeActionInNonGenerated(
-                CheckOrExpression,
-                SyntaxKind.OrElseExpression);
-
-            context.RegisterSyntaxNodeActionInNonGenerated(
-                CheckOrExpression,
-                SyntaxKind.OrExpression);
-
-            context.RegisterSyntaxNodeActionInNonGenerated(
-                CheckEquals,
-                SyntaxKind.EqualsExpression);
-
-            context.RegisterSyntaxNodeActionInNonGenerated(
-                CheckNotEquals,
-                SyntaxKind.NotEqualsExpression);
-
-            context.RegisterSyntaxNodeActionInNonGenerated(
-                CheckConditional,
-                SyntaxKind.TernaryConditionalExpression);
+            context.RegisterSyntaxNodeActionInNonGenerated(CheckLogicalNot, SyntaxKind.NotExpression);
+            context.RegisterSyntaxNodeActionInNonGenerated(CheckAndExpression, SyntaxKind.AndAlsoExpression);
+            context.RegisterSyntaxNodeActionInNonGenerated(CheckAndExpression, SyntaxKind.AndExpression);
+            context.RegisterSyntaxNodeActionInNonGenerated(CheckOrExpression, SyntaxKind.OrElseExpression);
+            context.RegisterSyntaxNodeActionInNonGenerated(CheckOrExpression, SyntaxKind.OrExpression);
+            context.RegisterSyntaxNodeActionInNonGenerated(CheckEquals, SyntaxKind.EqualsExpression);
+            context.RegisterSyntaxNodeActionInNonGenerated(CheckNotEquals, SyntaxKind.NotEqualsExpression);
+            context.RegisterSyntaxNodeActionInNonGenerated(CheckConditional, SyntaxKind.TernaryConditionalExpression);
         }
 
         private void CheckLogicalNot(SyntaxNodeAnalysisContext context)
@@ -92,7 +63,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
             var logicalNotOperand = logicalNot.Operand.RemoveParentheses();
             if (IsBooleanLiteral(logicalNotOperand))
             {
-                context.ReportIssue(Diagnostic.Create(rule, logicalNot.Operand.GetLocation()));
+                context.ReportIssue(Diagnostic.Create(Rule, logicalNot.Operand.GetLocation()));
             }
         }
 

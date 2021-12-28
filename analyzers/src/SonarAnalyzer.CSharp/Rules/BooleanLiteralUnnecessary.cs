@@ -18,7 +18,6 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System.Collections.Immutable;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
@@ -33,11 +32,6 @@ namespace SonarAnalyzer.Rules.CSharp
     [Rule(DiagnosticId)]
     public sealed class BooleanLiteralUnnecessary : BooleanLiteralUnnecessaryBase<BinaryExpressionSyntax, SyntaxKind>
     {
-        private static readonly DiagnosticDescriptor rule =
-            DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
-
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(rule);
-
         protected override ILanguageFacade<SyntaxKind> Language => CSharpFacade.Instance;
 
         protected override bool IsBooleanLiteral(SyntaxNode node) => IsTrueLiteralKind(node) || IsFalseLiteralKind(node);
@@ -63,14 +57,14 @@ namespace SonarAnalyzer.Rules.CSharp
             context.RegisterSyntaxNodeActionInNonGenerated(CheckForLoopCondition, SyntaxKind.ForStatement);
         }
 
-        private static void CheckForLoopCondition(SyntaxNodeAnalysisContext context)
+        private void CheckForLoopCondition(SyntaxNodeAnalysisContext context)
         {
             var forLoop = (ForStatementSyntax)context.Node;
 
             if (forLoop.Condition != null
                 && CSharpEquivalenceChecker.AreEquivalent(forLoop.Condition.RemoveParentheses(), CSharpSyntaxHelper.TrueLiteralExpression))
             {
-                context.ReportIssue(Diagnostic.Create(rule, forLoop.Condition.GetLocation()));
+                context.ReportIssue(Diagnostic.Create(Rule, forLoop.Condition.GetLocation()));
             }
         }
 
@@ -80,7 +74,7 @@ namespace SonarAnalyzer.Rules.CSharp
             var logicalNotOperand = logicalNot.Operand.RemoveParentheses();
             if (IsBooleanLiteral(logicalNotOperand))
             {
-                context.ReportIssue(Diagnostic.Create(rule, logicalNot.Operand.GetLocation()));
+                context.ReportIssue(Diagnostic.Create(Rule, logicalNot.Operand.GetLocation()));
             }
 
             static bool IsBooleanLiteral(SyntaxNode node) =>

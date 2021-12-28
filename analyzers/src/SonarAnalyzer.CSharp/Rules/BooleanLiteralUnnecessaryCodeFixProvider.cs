@@ -36,23 +36,17 @@ namespace SonarAnalyzer.Rules.CSharp
     public sealed class BooleanLiteralUnnecessaryCodeFixProvider : SonarCodeFixProvider
     {
         internal const string Title = "Remove the unnecessary Boolean literal(s)";
-        public override ImmutableArray<string> FixableDiagnosticIds
-        {
-            get
-            {
-                return ImmutableArray.Create(BooleanLiteralUnnecessary.DiagnosticId);
-            }
-        }
-        public override FixAllProvider GetFixAllProvider()
-        {
-            return WellKnownFixAllProviders.BatchFixer;
-        }
+        public override ImmutableArray<string> FixableDiagnosticIds =>
+            ImmutableArray.Create(BooleanLiteralUnnecessary.DiagnosticId);
+
+        public override FixAllProvider GetFixAllProvider() =>
+            WellKnownFixAllProviders.BatchFixer;
 
         protected override Task RegisterCodeFixesAsync(SyntaxNode root, CodeFixContext context)
         {
             var diagnostic = context.Diagnostics.First();
             var diagnosticSpan = diagnostic.Location.SourceSpan;
-            if (!(root.FindNode(diagnosticSpan, getInnermostNodeForTie: true) is ExpressionSyntax syntaxNode))
+            if (root.FindNode(diagnosticSpan, getInnermostNodeForTie: true) is not ExpressionSyntax syntaxNode)
             {
                 return Task.CompletedTask;
             }
@@ -72,7 +66,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 return Task.CompletedTask;
             }
 
-            if (!(syntaxNode is LiteralExpressionSyntax literal))
+            if (syntaxNode is not LiteralExpressionSyntax literal)
             {
                 return Task.CompletedTask;
             }
@@ -104,8 +98,7 @@ namespace SonarAnalyzer.Rules.CSharp
             return Task.CompletedTask;
         }
 
-        private static void RegisterForStatementConditionRemoval(CodeFixContext context, SyntaxNode root, ForStatementSyntax forStatement)
-        {
+        private static void RegisterForStatementConditionRemoval(CodeFixContext context, SyntaxNode root, ForStatementSyntax forStatement) =>
             context.RegisterCodeFix(
                 CodeAction.Create(
                     Title,
@@ -118,7 +111,6 @@ namespace SonarAnalyzer.Rules.CSharp
                         return Task.FromResult(context.Document.WithSyntaxRoot(newRoot));
                     }),
                 context.Diagnostics);
-        }
 
         private static void RegisterBinaryExpressionRemoval(CodeFixContext context, SyntaxNode root, LiteralExpressionSyntax literal, BinaryExpressionSyntax binaryParent)
         {
@@ -140,35 +132,28 @@ namespace SonarAnalyzer.Rules.CSharp
                 context.Diagnostics);
         }
 
-        private static void RegisterConditionalExpressionRewrite(CodeFixContext context, SyntaxNode root, LiteralExpressionSyntax literal, ConditionalExpressionSyntax conditionalParent)
-        {
+        private static void RegisterConditionalExpressionRewrite(CodeFixContext context, SyntaxNode root, LiteralExpressionSyntax literal, ConditionalExpressionSyntax conditionalParent) =>
             context.RegisterCodeFix(
                 CodeAction.Create(
                     Title,
                     c => Task.FromResult(RewriteConditional(context.Document, root, literal, conditionalParent))),
                 context.Diagnostics);
-        }
 
-        private static void RegisterBooleanInversion(CodeFixContext context, SyntaxNode root, LiteralExpressionSyntax literal)
-        {
+        private static void RegisterBooleanInversion(CodeFixContext context, SyntaxNode root, LiteralExpressionSyntax literal) =>
             context.RegisterCodeFix(
                 CodeAction.Create(
                     Title,
                     c => Task.FromResult(RemovePrefixUnary(context.Document, root, literal))),
                 context.Diagnostics);
-        }
 
-        private static void RegisterConditionalExpressionRemoval(CodeFixContext context, SyntaxNode root, ConditionalExpressionSyntax conditional)
-        {
+        private static void RegisterConditionalExpressionRemoval(CodeFixContext context, SyntaxNode root, ConditionalExpressionSyntax conditional) =>
             context.RegisterCodeFix(
                 CodeAction.Create(
                     Title,
                     c => Task.FromResult(RemoveConditional(context.Document, root, conditional))),
                 context.Diagnostics);
-        }
 
-        private static void RegisterBinaryExpressionReplacement(CodeFixContext context, SyntaxNode root, SyntaxNode syntaxNode, BinaryExpressionSyntax binary)
-        {
+        private static void RegisterBinaryExpressionReplacement(CodeFixContext context, SyntaxNode root, SyntaxNode syntaxNode, BinaryExpressionSyntax binary) =>
             context.RegisterCodeFix(
                 CodeAction.Create(
                     Title,
@@ -180,21 +165,20 @@ namespace SonarAnalyzer.Rules.CSharp
                         return Task.FromResult(context.Document.WithSyntaxRoot(newRoot));
                     }),
                 context.Diagnostics);
-        }
 
         private static SyntaxNode FindNodeToKeep(BinaryExpressionSyntax binary)
         {
             #region logical and false, logical or true
 
-            if (binary.IsKind(SyntaxKind.LogicalAndExpression) &&
-                (CSharpEquivalenceChecker.AreEquivalent(binary.Left, CSharpSyntaxHelper.FalseLiteralExpression) ||
-                 CSharpEquivalenceChecker.AreEquivalent(binary.Right, CSharpSyntaxHelper.FalseLiteralExpression)))
+            if (binary.IsKind(SyntaxKind.LogicalAndExpression)
+                && (CSharpEquivalenceChecker.AreEquivalent(binary.Left, CSharpSyntaxHelper.FalseLiteralExpression)
+                   || CSharpEquivalenceChecker.AreEquivalent(binary.Right, CSharpSyntaxHelper.FalseLiteralExpression)))
             {
                 return CSharpSyntaxHelper.FalseLiteralExpression;
             }
-            if (binary.IsKind(SyntaxKind.LogicalOrExpression) &&
-                (CSharpEquivalenceChecker.AreEquivalent(binary.Left, CSharpSyntaxHelper.TrueLiteralExpression) ||
-                 CSharpEquivalenceChecker.AreEquivalent(binary.Right, CSharpSyntaxHelper.TrueLiteralExpression)))
+            if (binary.IsKind(SyntaxKind.LogicalOrExpression)
+                && (CSharpEquivalenceChecker.AreEquivalent(binary.Left, CSharpSyntaxHelper.TrueLiteralExpression)
+                   || CSharpEquivalenceChecker.AreEquivalent(binary.Right, CSharpSyntaxHelper.TrueLiteralExpression)))
             {
                 return CSharpSyntaxHelper.TrueLiteralExpression;
             }
@@ -203,58 +187,47 @@ namespace SonarAnalyzer.Rules.CSharp
 
             #region ==/!= both sides booleans
 
-            if (binary.IsKind(SyntaxKind.EqualsExpression) &&
-                TwoSidesAreDifferentBooleans(binary))
+            if (binary.IsKind(SyntaxKind.EqualsExpression)
+                && TwoSidesAreDifferentBooleans(binary))
             {
                 return CSharpSyntaxHelper.FalseLiteralExpression;
             }
-            if (binary.IsKind(SyntaxKind.EqualsExpression) &&
-                TwoSidesAreSameBooleans(binary))
+            if (binary.IsKind(SyntaxKind.EqualsExpression)
+                && TwoSidesAreSameBooleans(binary))
             {
                 return CSharpSyntaxHelper.TrueLiteralExpression;
             }
-            if (binary.IsKind(SyntaxKind.NotEqualsExpression) &&
-                TwoSidesAreSameBooleans(binary))
+            if (binary.IsKind(SyntaxKind.NotEqualsExpression)
+                && TwoSidesAreSameBooleans(binary))
             {
                 return CSharpSyntaxHelper.FalseLiteralExpression;
             }
-            if (binary.IsKind(SyntaxKind.NotEqualsExpression) &&
-                TwoSidesAreDifferentBooleans(binary))
+            if (binary.IsKind(SyntaxKind.NotEqualsExpression)
+                && TwoSidesAreDifferentBooleans(binary))
             {
                 return CSharpSyntaxHelper.TrueLiteralExpression;
             }
 
             #endregion
 
-            if (CSharpEquivalenceChecker.AreEquivalent(binary.Left, CSharpSyntaxHelper.TrueLiteralExpression) ||
-                CSharpEquivalenceChecker.AreEquivalent(binary.Left, CSharpSyntaxHelper.FalseLiteralExpression))
-            {
-                return binary.Right;
-            }
-            return binary.Left;
+            return CSharpEquivalenceChecker.AreEquivalent(binary.Left, CSharpSyntaxHelper.TrueLiteralExpression)
+                   || CSharpEquivalenceChecker.AreEquivalent(binary.Left, CSharpSyntaxHelper.FalseLiteralExpression)
+                ? binary.Right
+                : binary.Left;
         }
 
-        private static bool TwoSidesAreDifferentBooleans(BinaryExpressionSyntax binary)
-        {
-            return (
-                CSharpEquivalenceChecker.AreEquivalent(binary.Left, CSharpSyntaxHelper.TrueLiteralExpression) &&
-                CSharpEquivalenceChecker.AreEquivalent(binary.Right, CSharpSyntaxHelper.FalseLiteralExpression)) ||
-                (
-                CSharpEquivalenceChecker.AreEquivalent(binary.Left, CSharpSyntaxHelper.FalseLiteralExpression) &&
-                CSharpEquivalenceChecker.AreEquivalent(binary.Right, CSharpSyntaxHelper.TrueLiteralExpression));
-        }
-        private static bool TwoSidesAreSameBooleans(BinaryExpressionSyntax binary)
-        {
-            return (
-                CSharpEquivalenceChecker.AreEquivalent(binary.Left, CSharpSyntaxHelper.TrueLiteralExpression) &&
-                CSharpEquivalenceChecker.AreEquivalent(binary.Right, CSharpSyntaxHelper.TrueLiteralExpression)) ||
-                (
-                CSharpEquivalenceChecker.AreEquivalent(binary.Left, CSharpSyntaxHelper.FalseLiteralExpression) &&
-                CSharpEquivalenceChecker.AreEquivalent(binary.Right, CSharpSyntaxHelper.FalseLiteralExpression));
-        }
+        private static bool TwoSidesAreDifferentBooleans(BinaryExpressionSyntax binary) =>
+            (CSharpEquivalenceChecker.AreEquivalent(binary.Left, CSharpSyntaxHelper.TrueLiteralExpression)
+             && CSharpEquivalenceChecker.AreEquivalent(binary.Right, CSharpSyntaxHelper.FalseLiteralExpression))
+            || (CSharpEquivalenceChecker.AreEquivalent(binary.Left, CSharpSyntaxHelper.FalseLiteralExpression)
+               && CSharpEquivalenceChecker.AreEquivalent(binary.Right, CSharpSyntaxHelper.TrueLiteralExpression));
+        private static bool TwoSidesAreSameBooleans(BinaryExpressionSyntax binary) =>
+            (CSharpEquivalenceChecker.AreEquivalent(binary.Left, CSharpSyntaxHelper.TrueLiteralExpression)
+             && CSharpEquivalenceChecker.AreEquivalent(binary.Right, CSharpSyntaxHelper.TrueLiteralExpression))
+            || (CSharpEquivalenceChecker.AreEquivalent(binary.Left, CSharpSyntaxHelper.FalseLiteralExpression)
+               && CSharpEquivalenceChecker.AreEquivalent(binary.Right, CSharpSyntaxHelper.FalseLiteralExpression));
 
-        private static Document RemovePrefixUnary(Document document, SyntaxNode root,
-            SyntaxNode literal)
+        private static Document RemovePrefixUnary(Document document, SyntaxNode root, SyntaxNode literal)
         {
             if (CSharpEquivalenceChecker.AreEquivalent(literal, CSharpSyntaxHelper.TrueLiteralExpression))
             {
@@ -268,41 +241,38 @@ namespace SonarAnalyzer.Rules.CSharp
             }
         }
 
-        private static Document RemoveConditional(Document document, SyntaxNode root,
-            ConditionalExpressionSyntax conditional)
+        private static Document RemoveConditional(Document document, SyntaxNode root, ConditionalExpressionSyntax conditional)
         {
             if (CSharpEquivalenceChecker.AreEquivalent(conditional.WhenTrue, CSharpSyntaxHelper.TrueLiteralExpression))
             {
-                var newRoot = root.ReplaceNode(conditional,
+                var newRoot = root.ReplaceNode(
+                    conditional,
                     conditional.Condition.WithAdditionalAnnotations(Formatter.Annotation));
                 return document.WithSyntaxRoot(newRoot);
             }
             else
             {
-                var newRoot = root.ReplaceNode(conditional,
-                        GetNegatedExpression(conditional.Condition).WithAdditionalAnnotations(Formatter.Annotation));
+                var newRoot = root.ReplaceNode(
+                    conditional,
+                    GetNegatedExpression(conditional.Condition).WithAdditionalAnnotations(Formatter.Annotation));
                 return document.WithSyntaxRoot(newRoot);
             }
         }
 
-        private static SyntaxNode ReplaceExpressionWithBinary(SyntaxNode nodeToReplace, SyntaxNode root,
-            SyntaxKind binaryKind, ExpressionSyntax left, ExpressionSyntax right)
-        {
-            return root.ReplaceNode(nodeToReplace,
-                    SyntaxFactory.BinaryExpression(
-                        binaryKind,
-                        left,
-                        right).WithAdditionalAnnotations(Formatter.Annotation));
-        }
+        private static SyntaxNode ReplaceExpressionWithBinary(SyntaxNode nodeToReplace, SyntaxNode root, SyntaxKind binaryKind, ExpressionSyntax left, ExpressionSyntax right) =>
+            root.ReplaceNode(
+                nodeToReplace,
+                SyntaxFactory.BinaryExpression(binaryKind, left, right).WithAdditionalAnnotations(Formatter.Annotation));
 
-        private static Document RewriteConditional(Document document, SyntaxNode root, SyntaxNode syntaxNode,
-            ConditionalExpressionSyntax conditional)
+        private static Document RewriteConditional(Document document, SyntaxNode root, SyntaxNode syntaxNode, ConditionalExpressionSyntax conditional)
         {
             var whenTrue = conditional.WhenTrue.RemoveParentheses();
-            if (whenTrue.Equals(syntaxNode) &&
-                CSharpEquivalenceChecker.AreEquivalent(syntaxNode, CSharpSyntaxHelper.TrueLiteralExpression))
+            if (whenTrue.Equals(syntaxNode)
+                && CSharpEquivalenceChecker.AreEquivalent(syntaxNode, CSharpSyntaxHelper.TrueLiteralExpression))
             {
-                var newRoot = ReplaceExpressionWithBinary(conditional, root,
+                var newRoot = ReplaceExpressionWithBinary(
+                    conditional,
+                    root,
                     SyntaxKind.LogicalOrExpression,
                     conditional.Condition,
                     conditional.WhenFalse);
@@ -310,10 +280,12 @@ namespace SonarAnalyzer.Rules.CSharp
                 return document.WithSyntaxRoot(newRoot);
             }
 
-            if (whenTrue.Equals(syntaxNode) &&
-                CSharpEquivalenceChecker.AreEquivalent(syntaxNode, CSharpSyntaxHelper.FalseLiteralExpression))
+            if (whenTrue.Equals(syntaxNode)
+                && CSharpEquivalenceChecker.AreEquivalent(syntaxNode, CSharpSyntaxHelper.FalseLiteralExpression))
             {
-                var newRoot = ReplaceExpressionWithBinary(conditional, root,
+                var newRoot = ReplaceExpressionWithBinary(
+                    conditional,
+                    root,
                     SyntaxKind.LogicalAndExpression,
                     GetNegatedExpression(conditional.Condition),
                     conditional.WhenFalse);
@@ -323,10 +295,12 @@ namespace SonarAnalyzer.Rules.CSharp
 
             var whenFalse = conditional.WhenFalse.RemoveParentheses();
 
-            if (whenFalse.Equals(syntaxNode) &&
-                CSharpEquivalenceChecker.AreEquivalent(syntaxNode, CSharpSyntaxHelper.TrueLiteralExpression))
+            if (whenFalse.Equals(syntaxNode)
+                && CSharpEquivalenceChecker.AreEquivalent(syntaxNode, CSharpSyntaxHelper.TrueLiteralExpression))
             {
-                var newRoot = ReplaceExpressionWithBinary(conditional, root,
+                var newRoot = ReplaceExpressionWithBinary(
+                    conditional,
+                    root,
                     SyntaxKind.LogicalOrExpression,
                     GetNegatedExpression(conditional.Condition),
                     conditional.WhenTrue);
@@ -334,10 +308,12 @@ namespace SonarAnalyzer.Rules.CSharp
                 return document.WithSyntaxRoot(newRoot);
             }
 
-            if (whenFalse.Equals(syntaxNode) &&
-                CSharpEquivalenceChecker.AreEquivalent(syntaxNode, CSharpSyntaxHelper.FalseLiteralExpression))
+            if (whenFalse.Equals(syntaxNode)
+                && CSharpEquivalenceChecker.AreEquivalent(syntaxNode, CSharpSyntaxHelper.FalseLiteralExpression))
             {
-                var newRoot = ReplaceExpressionWithBinary(conditional, root,
+                var newRoot = ReplaceExpressionWithBinary(
+                    conditional,
+                    root,
                     SyntaxKind.LogicalAndExpression,
                     conditional.Condition,
                     conditional.WhenTrue);
@@ -351,15 +327,13 @@ namespace SonarAnalyzer.Rules.CSharp
         private static ExpressionSyntax GetNegatedExpression(ExpressionSyntax expression)
         {
             var exp = expression;
-            if (expression is BinaryExpressionSyntax ||
-                expression is ConditionalExpressionSyntax)
+            if (expression is BinaryExpressionSyntax
+               || expression is ConditionalExpressionSyntax)
             {
                 exp = SyntaxFactory.ParenthesizedExpression(expression);
             }
 
-            return SyntaxFactory.PrefixUnaryExpression(
-                SyntaxKind.LogicalNotExpression,
-                exp);
+            return SyntaxFactory.PrefixUnaryExpression(SyntaxKind.LogicalNotExpression, exp);
         }
     }
 }
