@@ -201,3 +201,22 @@ End Class
 Public Class Socket
   Public Property IsStateValid As Boolean?
 End Class
+
+' Repro for: https://github.com/SonarSource/sonar-dotnet/issues/5219
+Public Class Repro
+    Private Sub Reproducers(ByVal condition As Boolean)
+        Dim v1 As Boolean? = If(condition, True, Nothing)
+        Dim v2 As Boolean? = If(condition, Nothing, True)
+        Dim v3 As Boolean? = If(condition, True, SomeMethod())
+        Dim v4 As Boolean? = If(condition, True, SomeMethod2()) ' Noncompliant
+        Dim v5 As Boolean? = condition OrElse SomeMethod2()
+    End Sub
+
+    Public Function SomeMethod() As Boolean?
+        Return Nothing
+    End Function
+
+    Public Function SomeMethod2() As Boolean
+        Return True
+    End Function
+End Class
