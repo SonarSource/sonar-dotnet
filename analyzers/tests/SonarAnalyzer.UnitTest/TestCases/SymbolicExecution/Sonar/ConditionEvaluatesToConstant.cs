@@ -2871,3 +2871,15 @@ public class Tuples
 
     public (MemoryStream, string) GetData() => (null, null);
 }
+
+// https://github.com/SonarSource/sonar-dotnet/issues/5221
+public class ReproWithNullableValueTypes
+{
+    protected void Test(decimal? value1, decimal? value2)
+    {
+        if (value1 == null || value2 == null || value1 != value2) // Noncompliant FP
+        {
+            Console.WriteLine("test");
+        }
+    }
+}
