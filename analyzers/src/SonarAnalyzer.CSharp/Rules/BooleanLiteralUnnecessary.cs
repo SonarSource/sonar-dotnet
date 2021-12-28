@@ -54,41 +54,21 @@ namespace SonarAnalyzer.Rules.CSharp
 
         protected override void Initialize(SonarAnalysisContext context)
         {
-            context.RegisterSyntaxNodeActionInNonGenerated(
-                CheckLogicalNot,
-                SyntaxKind.LogicalNotExpression);
-
-            context.RegisterSyntaxNodeActionInNonGenerated(
-                CheckAndExpression,
-                SyntaxKind.LogicalAndExpression);
-
-            context.RegisterSyntaxNodeActionInNonGenerated(
-                CheckOrExpression,
-                SyntaxKind.LogicalOrExpression);
-
-            context.RegisterSyntaxNodeActionInNonGenerated(
-                CheckEquals,
-                SyntaxKind.EqualsExpression);
-
-            context.RegisterSyntaxNodeActionInNonGenerated(
-                CheckNotEquals,
-                SyntaxKind.NotEqualsExpression);
-
-            context.RegisterSyntaxNodeActionInNonGenerated(
-                CheckConditional,
-                SyntaxKind.ConditionalExpression);
-
-            context.RegisterSyntaxNodeActionInNonGenerated(
-                CheckForLoopCondition,
-                SyntaxKind.ForStatement);
+            context.RegisterSyntaxNodeActionInNonGenerated(CheckLogicalNot, SyntaxKind.LogicalNotExpression);
+            context.RegisterSyntaxNodeActionInNonGenerated(CheckAndExpression, SyntaxKind.LogicalAndExpression);
+            context.RegisterSyntaxNodeActionInNonGenerated(CheckOrExpression, SyntaxKind.LogicalOrExpression);
+            context.RegisterSyntaxNodeActionInNonGenerated(CheckEquals, SyntaxKind.EqualsExpression);
+            context.RegisterSyntaxNodeActionInNonGenerated(CheckNotEquals, SyntaxKind.NotEqualsExpression);
+            context.RegisterSyntaxNodeActionInNonGenerated(CheckConditional, SyntaxKind.ConditionalExpression);
+            context.RegisterSyntaxNodeActionInNonGenerated(CheckForLoopCondition, SyntaxKind.ForStatement);
         }
 
         private static void CheckForLoopCondition(SyntaxNodeAnalysisContext context)
         {
             var forLoop = (ForStatementSyntax)context.Node;
 
-            if (forLoop.Condition != null &&
-                CSharpEquivalenceChecker.AreEquivalent(forLoop.Condition.RemoveParentheses(), CSharpSyntaxHelper.TrueLiteralExpression))
+            if (forLoop.Condition != null
+                && CSharpEquivalenceChecker.AreEquivalent(forLoop.Condition.RemoveParentheses(), CSharpSyntaxHelper.TrueLiteralExpression))
             {
                 context.ReportIssue(Diagnostic.Create(rule, forLoop.Condition.GetLocation()));
             }
@@ -102,7 +82,8 @@ namespace SonarAnalyzer.Rules.CSharp
             {
                 context.ReportIssue(Diagnostic.Create(rule, logicalNot.Operand.GetLocation()));
             }
-            bool IsBooleanLiteral(SyntaxNode node) =>
+
+            static bool IsBooleanLiteral(SyntaxNode node) =>
                 node.IsKind(SyntaxKind.TrueLiteralExpression) || node.IsKind(SyntaxKind.FalseLiteralExpression);
         }
 
@@ -113,7 +94,10 @@ namespace SonarAnalyzer.Rules.CSharp
             var whenFalse = conditional.WhenFalse;
             var typeLeft = context.SemanticModel.GetTypeInfo(whenTrue).Type;
             var typeRight = context.SemanticModel.GetTypeInfo(whenFalse).Type;
-            if (typeLeft.IsNullableBoolean() || typeRight.IsNullableBoolean())
+            if (typeLeft.IsNullableBoolean()
+                || typeRight.IsNullableBoolean()
+                || typeLeft == null
+                || typeRight == null)
             {
                 return;
             }
