@@ -18,6 +18,7 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System;
 using System.Collections.Immutable;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Diagnostics;
@@ -51,7 +52,8 @@ namespace SonarAnalyzer.Rules.VisualBasic
                 c =>
                 {
                     var methodDeclaration = (MethodStatementSyntax)c.Node;
-                    if (!NamingHelper.IsRegexMatch(methodDeclaration.Identifier.ValueText, Pattern))
+                    if (ShouldBeChecked(methodDeclaration, c.ContainingSymbol)
+                        && !NamingHelper.IsRegexMatch(methodDeclaration.Identifier.ValueText, Pattern))
                     {
                         c.ReportIssue(Diagnostic.Create(rule, methodDeclaration.Identifier.GetLocation(),
                             "function", methodDeclaration.Identifier.ValueText, Pattern));
@@ -63,14 +65,29 @@ namespace SonarAnalyzer.Rules.VisualBasic
                 c =>
                 {
                     var methodDeclaration = (MethodStatementSyntax)c.Node;
-                    if (!NamingHelper.IsRegexMatch(methodDeclaration.Identifier.ValueText, Pattern) &&
-                        !EventHandlerName.IsEventHandler(methodDeclaration, c.SemanticModel))
+                    if (ShouldBeChecked(methodDeclaration, c.ContainingSymbol)
+                        && !NamingHelper.IsRegexMatch(methodDeclaration.Identifier.ValueText, Pattern)
+                        && !EventHandlerName.IsEventHandler(methodDeclaration, c.SemanticModel))
                     {
                         c.ReportIssue(Diagnostic.Create(rule, methodDeclaration.Identifier.GetLocation(),
                             "procedure", methodDeclaration.Identifier.ValueText, Pattern));
                     }
                 },
                 SyntaxKind.SubStatement);
+
+            static bool ShouldBeChecked(MethodStatementSyntax methodStatement, ISymbol declaredSymbol) =>
+                !declaredSymbol.IsOverride
+                && !IsExternImport(declaredSymbol)
+                && !ImplementsSingleMethodWithoutOverride(methodStatement, declaredSymbol);
+
+            static bool IsExternImport(ISymbol methodSymbol) =>
+                methodSymbol.IsExtern && methodSymbol.IsStatic && methodSymbol.HasAttribute(KnownType.System_Runtime_InteropServices_DllImportAttribute);
+
+            static bool ImplementsSingleMethodWithoutOverride(MethodStatementSyntax methodStatement, ISymbol methodSymbol) =>
+                methodStatement.ImplementsClause is { } implementsClause
+                && implementsClause.InterfaceMembers.Count == 1
+                && methodSymbol.GetInterfaceMember() is { } interfaceMember
+                && string.Equals(interfaceMember.Name, methodStatement.Identifier.ValueText, StringComparison.Ordinal);
         }
     }
 }
