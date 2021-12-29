@@ -4,7 +4,7 @@ Console.WriteLine("Hello World!");
 
 abstract class Base
 {
-    public Base() { } // Noncompliant {{Change the visibility of this constructor to 'protected'.}}
+    public Base() { } // Noncompliant {{Change the visibility of this constructor to 'private', 'private protected' or 'protected'.}}
 
     private Base(int i) { } // Compliant
 }

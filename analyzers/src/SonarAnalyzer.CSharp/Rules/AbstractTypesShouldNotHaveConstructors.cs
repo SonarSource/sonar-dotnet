@@ -35,7 +35,7 @@ namespace SonarAnalyzer.Rules.CSharp
     public sealed class AbstractTypesShouldNotHaveConstructors : SonarDiagnosticAnalyzer
     {
         private const string DiagnosticId = "S3442";
-        private const string MessageFormat = "Change the visibility of this constructor to 'protected'.";
+        private const string MessageFormat = "Change the visibility of this constructor to {0}.";
 
         private static readonly DiagnosticDescriptor Rule =
             DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
@@ -51,10 +51,11 @@ namespace SonarAnalyzer.Rules.CSharp
                         var invalidAccessModifier = GetModifiers(c.Node).FirstOrDefault(IsPublicOrInternal);
                         if (invalidAccessModifier != default)
                         {
-                            c.ReportIssue(Diagnostic.Create(Rule, invalidAccessModifier.GetLocation()));
+                            c.ReportIssue(Diagnostic.Create(Rule, invalidAccessModifier.GetLocation(), SuggestedModifier(invalidAccessModifier)));
                         }
                     }
-                }, SyntaxKind.ConstructorDeclaration);
+                },
+                SyntaxKind.ConstructorDeclaration);
 
         private static SyntaxTokenList GetModifiers(SyntaxNode node) =>
             node switch
@@ -67,5 +68,13 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private static bool IsPublicOrInternal(SyntaxToken token) =>
             token.IsKind(SyntaxKind.PublicKeyword) || token.IsKind(SyntaxKind.InternalKeyword);
+
+        private static string SuggestedModifier(SyntaxToken token) =>
+            token.Kind() switch
+            {
+                SyntaxKind.PublicKeyword => "'private', 'private protected' or 'protected'",
+                SyntaxKind.InternalKeyword => "'private' or 'private protected'",
+                _ => string.Empty
+            };
     }
 }

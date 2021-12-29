@@ -7,7 +7,7 @@ namespace Tests.Diagnostics
     {
         abstract class Base
         {
-            public Base() // Noncompliant {{Change the visibility of this constructor to 'protected'.}}
+            public Base() // Noncompliant {{Change the visibility of this constructor to 'private', 'private protected' or 'protected'.}}
 //          ^^^^^^
             {
                 //...
@@ -23,7 +23,7 @@ namespace Tests.Diagnostics
 
             }
 
-            internal Base(int i, int j, int k) // Noncompliant
+            internal Base(int i, int j, int k) // Noncompliant {{Change the visibility of this constructor to 'private' or 'private protected'.}}
             {
 
             }
