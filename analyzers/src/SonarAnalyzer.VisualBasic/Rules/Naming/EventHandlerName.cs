@@ -35,33 +35,27 @@ namespace SonarAnalyzer.Rules.VisualBasic
         internal const string DiagnosticId = "S2347";
         private const string MessageFormat = "Rename event handler '{0}' to match the regular expression: '{1}'.";
 
-        private static readonly DiagnosticDescriptor rule =
-            DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager,
-                isEnabledByDefault: false);
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(rule);
+        private const string DefaultPattern = "^(([a-z][a-z0-9]*)?" + NamingHelper.PascalCasingInternalPattern + "_)?" + NamingHelper.PascalCasingInternalPattern + "$";
 
-        private const string DefaultPattern = "^(([a-z][a-z0-9]*)?" + NamingHelper.PascalCasingInternalPattern + "_)?" +
-            NamingHelper.PascalCasingInternalPattern + "$";
+        private static readonly DiagnosticDescriptor Rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager, isEnabledByDefault: false);
 
-        [RuleParameter("format", PropertyType.String,
-            "Regular expression used to check the even handler names against.", DefaultPattern)]
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
+
+        [RuleParameter("format", PropertyType.String, "Regular expression used to check the even handler names against.", DefaultPattern)]
         public string Pattern { get; set; } = DefaultPattern;
 
-        protected override void Initialize(ParameterLoadingAnalysisContext context)
-        {
+        protected override void Initialize(ParameterLoadingAnalysisContext context) =>
             context.RegisterSyntaxNodeActionInNonGenerated(
                 c =>
                 {
                     var methodDeclaration = (MethodStatementSyntax)c.Node;
-                    if (!NamingHelper.IsRegexMatch(methodDeclaration.Identifier.ValueText, Pattern) &&
-                        IsEventHandler(methodDeclaration, c.SemanticModel))
+                    if (!NamingHelper.IsRegexMatch(methodDeclaration.Identifier.ValueText, Pattern)
+                        && IsEventHandler(methodDeclaration, c.SemanticModel))
                     {
-                        c.ReportIssue(Diagnostic.Create(rule, methodDeclaration.Identifier.GetLocation(),
-                            methodDeclaration.Identifier.ValueText, Pattern));
+                        c.ReportIssue(Diagnostic.Create(Rule, methodDeclaration.Identifier.GetLocation(), methodDeclaration.Identifier.ValueText, Pattern));
                     }
                 },
                 SyntaxKind.SubStatement);
-        }
 
         internal static bool IsEventHandler(MethodStatementSyntax declaration, SemanticModel semanticModel)
         {
@@ -71,8 +65,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
             }
 
             var symbol = semanticModel.GetDeclaredSymbol(declaration);
-            return symbol != null &&
-                symbol.IsEventHandler();
+            return symbol != null && symbol.IsEventHandler();
         }
     }
 }
