@@ -53,8 +53,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
                     if (ShouldBeChecked(methodDeclaration, c.ContainingSymbol)
                         && !NamingHelper.IsRegexMatch(methodDeclaration.Identifier.ValueText, Pattern))
                     {
-                        c.ReportIssue(Diagnostic.Create(Rule, methodDeclaration.Identifier.GetLocation(),
-                            "function", methodDeclaration.Identifier.ValueText, Pattern));
+                        c.ReportIssue(Diagnostic.Create(Rule, methodDeclaration.Identifier.GetLocation(), "function", methodDeclaration.Identifier.ValueText, Pattern));
                     }
                 },
                 SyntaxKind.FunctionStatement);
@@ -67,8 +66,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
                         && !NamingHelper.IsRegexMatch(methodDeclaration.Identifier.ValueText, Pattern)
                         && !EventHandlerName.IsEventHandler(methodDeclaration, c.SemanticModel))
                     {
-                        c.ReportIssue(Diagnostic.Create(Rule, methodDeclaration.Identifier.GetLocation(),
-                            "procedure", methodDeclaration.Identifier.ValueText, Pattern));
+                        c.ReportIssue(Diagnostic.Create(Rule, methodDeclaration.Identifier.GetLocation(), "procedure", methodDeclaration.Identifier.ValueText, Pattern));
                     }
                 },
                 SyntaxKind.SubStatement);
