@@ -35,7 +35,7 @@ namespace SonarAnalyzer.Rules.CSharp
     public sealed class AbstractTypesShouldNotHaveConstructors : SonarDiagnosticAnalyzer
     {
         private const string DiagnosticId = "S3442";
-        private const string MessageFormat = "Change the visibility of this constructor to {0}.";
+        private const string MessageFormat = "Change the visibility of this constructor to '{0}'.";
 
         private static readonly DiagnosticDescriptor Rule =
             DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
@@ -72,8 +72,8 @@ namespace SonarAnalyzer.Rules.CSharp
         private static string SuggestedModifier(SyntaxToken token) =>
             token.Kind() switch
             {
-                SyntaxKind.PublicKeyword => "'private', 'private protected' or 'protected'",
-                SyntaxKind.InternalKeyword => "'private' or 'private protected'",
+                SyntaxKind.PublicKeyword => "protected",
+                SyntaxKind.InternalKeyword => "private protected",
                 _ => string.Empty
             };
     }
