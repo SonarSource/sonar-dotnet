@@ -2,7 +2,7 @@
 "issues":  [
 {
 "id":  "S3442",
-"message":  "Change the visibility of this constructor to 'protected'.",
+"message":  "Change the visibility of this constructor to 'private protected'.",
 "location":  {
 "uri":  "sources\akka.net\src\core\Akka\Pattern\BackoffSupervisorBase.cs",
 "region":  {
