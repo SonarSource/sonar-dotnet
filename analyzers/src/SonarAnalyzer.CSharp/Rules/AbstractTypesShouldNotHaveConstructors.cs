@@ -70,11 +70,6 @@ namespace SonarAnalyzer.Rules.CSharp
             token.IsKind(SyntaxKind.PublicKeyword) || token.IsKind(SyntaxKind.InternalKeyword);
 
         private static string SuggestedModifier(SyntaxToken token) =>
-            token.Kind() switch
-            {
-                SyntaxKind.PublicKeyword => "protected",
-                SyntaxKind.InternalKeyword => "private protected",
-                _ => string.Empty
-            };
+            token.IsKind(SyntaxKind.InternalKeyword) ? "private protected" : "protected";
     }
 }
