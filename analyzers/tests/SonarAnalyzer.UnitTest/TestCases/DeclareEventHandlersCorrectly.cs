@@ -53,11 +53,30 @@ namespace Tests.Diagnostics
 
     public interface ILocalizationProvider
     {
-        event ProviderChangedEventHandler ProviderChanged; // Noncompliant
+        event ProviderChangedEventHandler ProviderChanged1; // Noncompliant
+        event ProviderChangedEventHandler ProviderChanged2; // Noncompliant
     }
 
-    public class Repro3453 : ILocalizationProvider
+    public abstract class BaseClass
     {
-        public event ProviderChangedEventHandler ProviderChanged; // Noncompliant (See https://github.com/SonarSource/sonar-dotnet/issues/3453)
+        public abstract event ProviderChangedEventHandler ProviderChanged3; // Noncompliant
+        public abstract event ProviderChangedEventHandler ProviderChanged4; // Noncompliant
+    }
+
+    public class Repro3453 : BaseClass, ILocalizationProvider
+    {
+        public event ProviderChangedEventHandler ProviderChanged1;
+        public event ProviderChangedEventHandler ProviderChanged2
+        {
+            add { }
+            remove { }
+        }
+
+        public override event ProviderChangedEventHandler ProviderChanged3;
+        public override event ProviderChangedEventHandler ProviderChanged4
+        {
+            add { }
+            remove { }
+        }
     }
 }

@@ -44,16 +44,21 @@ namespace SonarAnalyzer.Rules.CSharp
         protected override void Initialize(SonarAnalysisContext context)
         {
             context.RegisterSyntaxNodeActionInNonGenerated(
-               c => AnalyzeEventType(c, ((EventFieldDeclarationSyntax)c.Node).Declaration.Type),
+               c => AnalyzeEventType(c, ((EventFieldDeclarationSyntax)c.Node).Declaration.Type, c.ContainingSymbol),
                SyntaxKind.EventFieldDeclaration);
 
             context.RegisterSyntaxNodeActionInNonGenerated(
-               c => AnalyzeEventType(c, ((EventDeclarationSyntax)c.Node).Type),
+               c => AnalyzeEventType(c, ((EventDeclarationSyntax)c.Node).Type, c.ContainingSymbol),
                SyntaxKind.EventDeclaration);
         }
 
-        private static void AnalyzeEventType(SyntaxNodeAnalysisContext analysisContext, TypeSyntax typeSyntax)
+        private static void AnalyzeEventType(SyntaxNodeAnalysisContext analysisContext, TypeSyntax typeSyntax, ISymbol eventSymbol)
         {
+            if (eventSymbol.IsOverride || eventSymbol.GetInterfaceMember() != null)
+            {
+                return;
+            }
+
             var eventHandlerType = analysisContext.SemanticModel.GetSymbolInfo(typeSyntax).Symbol as INamedTypeSymbol;
             if (eventHandlerType?.DelegateInvokeMethod is { } methodSymbol
                 && !IsCorrectEventHandlerSignature(methodSymbol))
