@@ -73,7 +73,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private static bool IsPrivateTypeInherited(INamedTypeSymbol privateTypeInfo) =>
             privateTypeInfo.ContainingType.GetAllNamedTypes()
-                                          .Any(symbol => !symbol.Name.Equals(privateTypeInfo.Name)
+                                          .Any(symbol => !symbol.MetadataName.Equals(privateTypeInfo.MetadataName)
                                                          && symbol.DerivesFrom(privateTypeInfo));
     }
 }
