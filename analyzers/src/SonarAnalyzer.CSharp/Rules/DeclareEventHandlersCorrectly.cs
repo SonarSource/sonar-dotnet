@@ -35,10 +35,11 @@ namespace SonarAnalyzer.Rules.CSharp
     {
         internal const string DiagnosticId = "S3906";
         private const string MessageFormat = "Change the signature of that event handler to match the specified signature.";
+        private const int EventArgumentPosition = 2;
 
-        private static readonly DiagnosticDescriptor rule =
+        private static readonly DiagnosticDescriptor Rule =
             DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(rule);
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
 
         protected override void Initialize(SonarAnalysisContext context)
         {
@@ -51,35 +52,27 @@ namespace SonarAnalyzer.Rules.CSharp
                SyntaxKind.EventDeclaration);
         }
 
-        private void AnalyzeEventType(SyntaxNodeAnalysisContext analysisContext, TypeSyntax typeSyntax)
+        private static void AnalyzeEventType(SyntaxNodeAnalysisContext analysisContext, TypeSyntax typeSyntax)
         {
-            var eventHandlerType = analysisContext.SemanticModel.GetSymbolInfo(typeSyntax).Symbol
-                        as INamedTypeSymbol;
-            var methodSymbol = eventHandlerType?.DelegateInvokeMethod;
-            if (methodSymbol == null)
+            var eventHandlerType = analysisContext.SemanticModel.GetSymbolInfo(typeSyntax).Symbol as INamedTypeSymbol;
+            if (eventHandlerType?.DelegateInvokeMethod is { } methodSymbol
+                && !IsCorrectEventHandlerSignature(methodSymbol))
             {
-                return;
-            }
-
-            if (!IsCorrectEventHandlerSignature(methodSymbol))
-            {
-                analysisContext.ReportIssue(Diagnostic.Create(rule, typeSyntax.GetLocation()));
+                analysisContext.ReportIssue(Diagnostic.Create(Rule, typeSyntax.GetLocation()));
             }
         }
 
-        private bool IsCorrectEventHandlerSignature(IMethodSymbol methodSymbol)
-        {
-            return methodSymbol.ReturnsVoid &&
-                methodSymbol.Parameters.Length == 2 &&
-                methodSymbol.Parameters[0].Name == "sender" &&
-                methodSymbol.Parameters[0].Type.Is(KnownType.System_Object) &&
-                methodSymbol.Parameters[1].Name == "e" &&
-                IsDerivedFromEventArgs(methodSymbol.Parameters[1].Type);
-        }
+        private static bool IsCorrectEventHandlerSignature(IMethodSymbol methodSymbol) =>
+            methodSymbol.ReturnsVoid
+            && methodSymbol.Parameters.Length == EventArgumentPosition
+            && methodSymbol.Parameters[0].Name == "sender"
+            && methodSymbol.Parameters[0].Type.Is(KnownType.System_Object)
+            && methodSymbol.Parameters[1].Name == "e"
+            && IsDerivedFromEventArgs(methodSymbol.Parameters[1].Type);
 
         private static bool IsDerivedFromEventArgs(ITypeSymbol type) =>
-            type.DerivesFrom(KnownType.System_EventArgs) ||
-                (type is ITypeParameterSymbol typeParameterSymbol &&
-                typeParameterSymbol.ConstraintTypes.Any(IsDerivedFromEventArgs));
+            type.DerivesFrom(KnownType.System_EventArgs)
+            || (type is ITypeParameterSymbol typeParameterSymbol
+                && typeParameterSymbol.ConstraintTypes.Any(IsDerivedFromEventArgs));
     }
 }
