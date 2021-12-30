@@ -19,6 +19,7 @@
  */
 
 using System.Collections.Immutable;
+using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
@@ -87,19 +88,17 @@ namespace SonarAnalyzer.Rules.CSharp
                 },
                 SyntaxKind.MethodDeclaration);
 
-        private static bool HasAsyncReturnType(IMethodSymbol methodSymbol)
-        {
-            var returnSymbol = (methodSymbol.ReturnType as INamedTypeSymbol)?.ConstructedFrom;
-            if (returnSymbol == null || returnSymbol.Is(KnownType.Void))
-            {
-                return false;
-            }
+        private static bool HasAsyncReturnType(IMethodSymbol methodSymbol) =>
+            methodSymbol.ReturnType is ITypeParameterSymbol typeParameter
+                ? typeParameter.ConstraintTypes.Any(x => IsAsyncType(x))
+                : (methodSymbol.ReturnType as INamedTypeSymbol)?.ConstructedFrom is { } returnSymbol
+                  && !returnSymbol.Is(KnownType.Void)
+                  && IsAsyncType(returnSymbol);
 
-            return returnSymbol.DerivesFromAny(AsyncReturnTypes)
-                   || returnSymbol.IsAny(AsyncReturnInterfaces)
-                   || returnSymbol.ImplementsAny(AsyncReturnInterfaces);
-
-        }
+        private static bool IsAsyncType(ITypeSymbol typeSymbol) =>
+            typeSymbol.DerivesFromAny(AsyncReturnTypes)
+            || typeSymbol.IsAny(AsyncReturnInterfaces)
+            || typeSymbol.ImplementsAny(AsyncReturnInterfaces);
 
         private static bool HasAsyncSuffix(MethodDeclarationSyntax methodDeclaration) =>
             methodDeclaration.Identifier.ValueText.ToUpper().EndsWith("ASYNC");

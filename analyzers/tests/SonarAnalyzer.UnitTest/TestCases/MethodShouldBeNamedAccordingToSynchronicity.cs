@@ -187,7 +187,28 @@ namespace Tests.Diagnostics
     // See https://github.com/SonarSource/sonar-dotnet/issues/4799
     public class AsyncCouldStay
     {
-        public T GenericTaskTAsync<T>(T input) where T : Task // Noncompliant FP
+        public T GenericTaskTAsync<T>(T input) where T : Task
+        {
+            return input;
+        }
+
+        public T GenericTaskT2Async<T, V>(V input) where V : Task // Noncompliant
+        {
+            return default(T);
+        }
+    }
+
+    public class GenericWithoutConstraint
+    {
+        public T GenericTaskTAsync<T>(T input) // Noncompliant
+        {
+            return input;
+        }
+    }
+
+    public class GenericWithDifferentConstraint
+    {
+        public T GenericTaskTAsync<T>(T input) where T : new() // Noncompliant
         {
             return input;
         }
