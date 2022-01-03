@@ -184,6 +184,14 @@ namespace Tests.Diagnostics
         }
     }
 
+    public unsafe class PointerReturnType
+    {
+        public int* MethodWithPointerReturnTypeAsync(int* input)  // Noncompliant
+        {
+            return input;
+        }
+    }
+
     // See https://github.com/SonarSource/sonar-dotnet/issues/4799
     public class AsyncCouldStay
     {
