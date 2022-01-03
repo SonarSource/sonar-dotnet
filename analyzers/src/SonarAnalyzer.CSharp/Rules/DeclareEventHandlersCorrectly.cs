@@ -35,7 +35,9 @@ namespace SonarAnalyzer.Rules.CSharp
     {
         internal const string DiagnosticId = "S3906";
         private const string MessageFormat = "Change the signature of that event handler to match the specified signature.";
-        private const int EventArgumentPosition = 2;
+        private const int SenderArgumentPosition = 0;
+        private const int EventArgsPosition = 1;
+        private const int DelegateEventHandlerArgCount = 2;
 
         private static readonly DiagnosticDescriptor Rule =
             DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
@@ -54,13 +56,10 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private static void AnalyzeEventType(SyntaxNodeAnalysisContext analysisContext, TypeSyntax typeSyntax, ISymbol eventSymbol)
         {
-            if (eventSymbol.IsOverride || eventSymbol.GetInterfaceMember() != null)
-            {
-                return;
-            }
-
-            var eventHandlerType = analysisContext.SemanticModel.GetSymbolInfo(typeSyntax).Symbol as INamedTypeSymbol;
-            if (eventHandlerType?.DelegateInvokeMethod is { } methodSymbol
+            if (!eventSymbol.IsOverride
+                && eventSymbol.GetInterfaceMember() is null
+                && analysisContext.SemanticModel.GetSymbolInfo(typeSyntax).Symbol is INamedTypeSymbol eventHandlerType
+                && eventHandlerType.DelegateInvokeMethod is { } methodSymbol
                 && !IsCorrectEventHandlerSignature(methodSymbol))
             {
                 analysisContext.ReportIssue(Diagnostic.Create(Rule, typeSyntax.GetLocation()));
@@ -69,10 +68,10 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private static bool IsCorrectEventHandlerSignature(IMethodSymbol methodSymbol) =>
             methodSymbol.ReturnsVoid
-            && methodSymbol.Parameters.Length == EventArgumentPosition
-            && methodSymbol.Parameters[0].Name == "sender"
-            && methodSymbol.Parameters[0].Type.Is(KnownType.System_Object)
-            && methodSymbol.Parameters[1].Name == "e"
+            && methodSymbol.Parameters.Length == DelegateEventHandlerArgCount
+            && methodSymbol.Parameters[SenderArgumentPosition].Name == "sender"
+            && methodSymbol.Parameters[SenderArgumentPosition].Type.Is(KnownType.System_Object)
+            && methodSymbol.Parameters[EventArgsPosition].Name == "e"
             && IsDerivedFromEventArgs(methodSymbol.Parameters[1].Type);
 
         private static bool IsDerivedFromEventArgs(ITypeSymbol type) =>
