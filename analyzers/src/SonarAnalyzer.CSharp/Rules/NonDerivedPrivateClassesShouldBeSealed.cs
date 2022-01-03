@@ -60,9 +60,9 @@ namespace SonarAnalyzer.Rules.CSharp
         {
             var classMembers = typeDeclaration.Members;
             return classMembers.OfType<MethodDeclarationSyntax>().Any(member => member.Modifiers.Any(SyntaxKind.VirtualKeyword))
-            || classMembers.OfType<PropertyDeclarationSyntax>().Any(member => member.Modifiers.Any(SyntaxKind.VirtualKeyword))
-            || classMembers.OfType<IndexerDeclarationSyntax>().Any(member => member.Modifiers.Any(SyntaxKind.VirtualKeyword))
-            || classMembers.OfType<EventDeclarationSyntax>().Any(member => member.Modifiers.Any(SyntaxKind.VirtualKeyword));
+                   || classMembers.OfType<PropertyDeclarationSyntax>().Any(member => member.Modifiers.Any(SyntaxKind.VirtualKeyword))
+                   || classMembers.OfType<IndexerDeclarationSyntax>().Any(member => member.Modifiers.Any(SyntaxKind.VirtualKeyword))
+                   || classMembers.OfType<EventDeclarationSyntax>().Any(member => member.Modifiers.Any(SyntaxKind.VirtualKeyword));
         }
 
         private static bool IsPrivateButNotSealedType(TypeDeclarationSyntax typeDeclaration) =>
@@ -73,7 +73,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private static bool IsPrivateTypeInherited(INamedTypeSymbol privateTypeInfo) =>
             privateTypeInfo.ContainingType.GetAllNamedTypes()
-                                          .Any(symbol => !symbol.Name.Equals(privateTypeInfo.Name)
+                                          .Any(symbol => !symbol.MetadataName.Equals(privateTypeInfo.MetadataName)
                                                          && symbol.DerivesFrom(privateTypeInfo));
     }
 }

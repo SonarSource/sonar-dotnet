@@ -111,7 +111,13 @@ namespace Tests.Diagnostics
 // https://github.com/SonarSource/sonar-dotnet/issues/5160
 public class Repro_5160
 {
-    private class Inner { }     // Noncompliant FP
+    private class Inner { }
 
-    private sealed class Inner<T> : Inner { }
+    private class Inner<T> : Inner { }
+
+    private class Inner<T, V> : Inner<T> { }
+
+    private sealed class Inner<T, V, W> : Inner<T, V> { }
+
+    private class Inner<A, B, C, D> : Inner { } // Noncompliant 
 }
