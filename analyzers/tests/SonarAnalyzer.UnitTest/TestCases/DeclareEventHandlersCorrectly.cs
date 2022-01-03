@@ -7,6 +7,7 @@ namespace Tests.Diagnostics
     public delegate void EventHandler3(int sender, EventArgs e);
     public delegate void EventHandler4(object sender, int e);
     public delegate void EventHandler5(object sender, EventArgs args);
+    public delegate void EventHandler6(object wrongName, EventArgs e);
 
     public delegate void potentiallyCorrectEventHandler<T>(object sender, T e);
 
@@ -21,7 +22,11 @@ namespace Tests.Diagnostics
         public event EventHandler3 Event3; // Noncompliant
         public event EventHandler4 Event4; // Noncompliant
         public event EventHandler5 Event5; // Noncompliant
-        public event potentiallyCorrectEventHandler<Object> Event6; // Noncompliant
+        public event EventHandler6 Event6; // Noncompliant
+        public event potentiallyCorrectEventHandler<Object> Event7; // Noncompliant
+
+        public event NonExistentType Event8; // Error[CS0246]
+        public event NamedType Event9; // Error[CS0066]
 
         public event EventHandler1 Event1AsProperty // Noncompliant {{Change the signature of that event handler to match the specified signature.}}
 //                   ^^^^^^^^^^^^^
@@ -35,6 +40,8 @@ namespace Tests.Diagnostics
         public event CorrectEventHandler2<TEventArgs> CorrectEvent3;
         public event potentiallyCorrectEventHandler<EventArgs> CorrectEvent4;
         public event potentiallyCorrectEventHandler<TEventArgs> CorrectEvent5;
+
+        public class NamedType { }
     }
 
     public class Bar<TEventArgs1, TEventArgs2, TParamWithoutConstraint>
