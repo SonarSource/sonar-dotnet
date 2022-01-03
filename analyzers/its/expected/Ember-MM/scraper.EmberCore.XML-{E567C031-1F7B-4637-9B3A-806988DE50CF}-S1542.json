@@ -80,19 +80,6 @@
 },
 {
 "id":  "S1542",
-"message":  "Rename function 'CreateXML' to match the regular expression: '^([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
-"location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\Scraper.vb",
-"region":  {
-"startLine":  545,
-"startColumn":  59,
-"endLine":  545,
-"endColumn":  68
-}
-}
-},
-{
-"id":  "S1542",
 "message":  "Rename function 'GetXMLString' to match the regular expression: '^([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
 "uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScraperExpression.vb",
