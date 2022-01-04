@@ -39,7 +39,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
         protected override IEnumerable<FieldData> FindFieldAssignments(IPropertySymbol property, Compilation compilation)
         {
-            if (!(property.SetMethod.GetFirstSyntaxRef() is AccessorDeclarationSyntax setter))
+            if (property.SetMethod.GetFirstSyntaxRef() is not AccessorDeclarationSyntax setter)
             {
                 return Enumerable.Empty<FieldData>();
             }
@@ -111,8 +111,8 @@ namespace SonarAnalyzer.Rules.CSharp
             }
 
             // Statement-bodied syntax
-            return (accessor.Body.DescendantNodes().Count(n => n is StatementSyntax) == 1
-                    && accessor.Body.DescendantNodes().Count(n => n is ThrowStatementSyntax) == 1);
+            return  accessor.Body.DescendantNodes().Count(n => n is StatementSyntax) == 1
+                    && accessor.Body.DescendantNodes().Count(n => n is ThrowStatementSyntax) == 1;
         }
 
         protected override bool ImplementsExplicitGetterOrSetter(IPropertySymbol property) =>
