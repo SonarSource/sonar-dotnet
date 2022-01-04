@@ -23,7 +23,7 @@ namespace Tests.Diagnostics
 
             }
 
-            internal Base(int i, int j, int k) // Noncompliant
+            internal Base(int i, int j, int k) // Noncompliant {{Change the visibility of this constructor to 'private protected'.}}
             {
 
             }

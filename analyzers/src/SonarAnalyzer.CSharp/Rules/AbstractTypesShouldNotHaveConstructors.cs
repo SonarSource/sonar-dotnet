@@ -35,12 +35,12 @@ namespace SonarAnalyzer.Rules.CSharp
     public sealed class AbstractTypesShouldNotHaveConstructors : SonarDiagnosticAnalyzer
     {
         private const string DiagnosticId = "S3442";
-        private const string MessageFormat = "Change the visibility of this constructor to 'protected'.";
+        private const string MessageFormat = "Change the visibility of this constructor to '{0}'.";
 
-        private static readonly DiagnosticDescriptor rule =
+        private static readonly DiagnosticDescriptor Rule =
             DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
 
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(rule);
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
 
         protected override void Initialize(SonarAnalysisContext context) =>
             context.RegisterSyntaxNodeActionInNonGenerated(
@@ -51,10 +51,11 @@ namespace SonarAnalyzer.Rules.CSharp
                         var invalidAccessModifier = GetModifiers(c.Node).FirstOrDefault(IsPublicOrInternal);
                         if (invalidAccessModifier != default)
                         {
-                            c.ReportIssue(Diagnostic.Create(rule, invalidAccessModifier.GetLocation()));
+                            c.ReportIssue(Diagnostic.Create(Rule, invalidAccessModifier.GetLocation(), SuggestModifier(invalidAccessModifier)));
                         }
                     }
-                }, SyntaxKind.ConstructorDeclaration);
+                },
+                SyntaxKind.ConstructorDeclaration);
 
         private static SyntaxTokenList GetModifiers(SyntaxNode node) =>
             node switch
@@ -62,10 +63,13 @@ namespace SonarAnalyzer.Rules.CSharp
                 ClassDeclarationSyntax classDeclaration => classDeclaration.Modifiers,
                 ConstructorDeclarationSyntax ctorDeclaration => ctorDeclaration.Modifiers,
                 {} syntaxNode when RecordDeclarationSyntaxWrapper.IsInstance(syntaxNode) => ((RecordDeclarationSyntaxWrapper)syntaxNode).Modifiers,
-                _ => new SyntaxTokenList()
+                _ => default
             };
 
         private static bool IsPublicOrInternal(SyntaxToken token) =>
             token.IsKind(SyntaxKind.PublicKeyword) || token.IsKind(SyntaxKind.InternalKeyword);
+
+        private static string SuggestModifier(SyntaxToken token) =>
+            token.IsKind(SyntaxKind.InternalKeyword) ? "private protected" : "protected";
     }
 }
