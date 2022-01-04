@@ -53,8 +53,12 @@ namespace Tests.Diagnostics
 
         public event EventHandler<TParamWithoutConstraint> IncorrectEvent; // Noncompliant
     }
+}
 
-    public class ProviderChangedEventArgs : EventArgs {}
+// Reproducer of https://github.com/SonarSource/sonar-dotnet/issues/3453
+namespace Repro3453
+{
+    public class ProviderChangedEventArgs : EventArgs { }
 
     public delegate void ProviderChangedEventHandler(object sender, ProviderChangedEventArgs args);
 
@@ -84,6 +88,28 @@ namespace Tests.Diagnostics
         {
             add { }
             remove { }
+        }
+
+        public event ProviderChangedEventHandler NonOverridenNotFromInterfaceEvent1; // Noncompliant
+        public event ProviderChangedEventHandler NonOverridenNotFromInterfaceEvent2 // Noncompliant
+        {
+            add { }
+            remove { }
+        }
+    }
+
+    public class DisposableClass : IDisposable
+    {
+        public event ProviderChangedEventHandler ProviderChanged1; // Noncompliant
+        public event ProviderChangedEventHandler ProviderChanged2 // Noncompliant
+        {
+            add { }
+            remove { }
+        }
+
+        public void Dispose()
+        {
+            throw new NotImplementedException();
         }
     }
 }
