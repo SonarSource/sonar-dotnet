@@ -110,4 +110,10 @@ namespace Tests.Diagnostics
             : base() // Fixed
             => i++;
     }
+
+    class LambdaCtorTrailing
+    {
+        private int i;
+        LambdaCtorTrailing() : /*a*/ base() /*b*/ => /*c*/ i++ /*d*/ ;   // Fixed
+    }
 }

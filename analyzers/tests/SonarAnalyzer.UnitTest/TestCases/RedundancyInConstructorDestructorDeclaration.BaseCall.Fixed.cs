@@ -97,12 +97,19 @@ namespace Tests.Diagnostics
     class LambdaCtor
     {
         private int i;
-        LambdaCtor() => i++;     }
+        LambdaCtor() => i++; // Fixed
+    }
 
     class LambdaCtorWithLineEnding
     {
         private int i;
         LambdaCtorWithLineEnding()
             => i++;
+    }
+
+    class LambdaCtorTrailing
+    {
+        private int i;
+        LambdaCtorTrailing() /*b*/ => /*c*/ i++ /*d*/ ;   // Fixed
     }
 }

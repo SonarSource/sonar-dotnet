@@ -148,7 +148,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 {
                     if (initializer.HasTrailingTrivia)
                     {
-                        newRoot = newRoot.ReplaceNode(ctor, ctor.WithTrailingTrivia(trailingTrivia));
+                        newRoot = newRoot.ReplaceNode(ctor.ParameterList, ctor.ParameterList.WithTrailingTrivia(trailingTrivia));
                     }
                 }
             }
