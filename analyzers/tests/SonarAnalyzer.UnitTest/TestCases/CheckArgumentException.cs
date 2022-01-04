@@ -267,5 +267,24 @@ namespace Tests.Diagnostics
             }
         }
     }
+
+    // https://github.com/SonarSource/sonar-dotnet/issues/5226
+    public class Repro_5226
+    {
+        public void NamedInverted(int a)
+        {
+            throw new ArgumentOutOfRangeException(paramName: nameof(a), message: "Sample message");
+        }
+
+        public void NamedNotInverted(int a)
+        {
+            throw new ArgumentOutOfRangeException(message: "Sample message", paramName: nameof(a)); // Noncompliant FP
+        }
+
+        public void NameWrongPosition(int a)
+        {
+            throw new ArgumentOutOfRangeException(actualValue: nameof(a), message: "Sample message", paramName: "vuzdrs"); // FN
+        }
+    }
 }
 
