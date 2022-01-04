@@ -1007,7 +1007,8 @@ namespace SonarAnalyzer.SymbolicExecution.Sonar
                 }
                 else if (symbol is IMethodSymbol { IsExtensionMethod: true } methodSymbol
                     && methodSymbol.GetFirstSyntaxRef() is MethodDeclarationSyntax syntax
-                    && syntax.ParameterList.Parameters.FirstOrDefault().AttributeLists.SelectMany(list => list.Attributes).Any(x => x.ToStringContains("ValidatedNotNull")))
+                    && syntax.ParameterList.Parameters.Count > 0
+                    && syntax.ParameterList.Parameters.First().AttributeLists.SelectMany(list => list.Attributes).Any(x => x.ToStringContains("ValidatedNotNull")))
                 {
                     newProgramState = newProgramState.SetConstraint(programState.PeekValue(), ObjectConstraint.NotNull);
                 }
