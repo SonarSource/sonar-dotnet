@@ -173,4 +173,17 @@ namespace Tests.Diagnostics
             }
         }
     }
+
+    // Reproducer for https://github.com/SonarSource/sonar-dotnet/issues/5232
+    public class Repro5232
+    {
+        private int Random
+        {
+            get => new Random().Next();
+        }
+        public void Print()
+        {
+            Console.WriteLine(Random);
+        }
+    }
 }

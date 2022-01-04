@@ -133,7 +133,7 @@ namespace SonarAnalyzer.Rules.CSharp
         private static bool IsAutoPropertyWithNoInitializer(PropertyDeclarationSyntax declaration) =>
             declaration.Initializer == null
             && declaration.AccessorList != null
-            && declaration.AccessorList.Accessors.All(acc => acc.Body == null);
+            && declaration.AccessorList.Accessors.All(acc => acc.Body == null && acc.ExpressionBody() == null);
 
         private static IList<MemberUsage> GetMemberUsages(CSharpRemovableDeclarationCollector removableDeclarationCollector, HashSet<ISymbol> declaredPrivateSymbols)
         {
