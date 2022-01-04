@@ -122,4 +122,10 @@ namespace Tests.Diagnostics
             : base() // Noncompliant
             => i++;
     }
+
+    class LambdaCtorTrailing
+    {
+        private int i;
+        LambdaCtorTrailing() : /*a*/ base() /*b*/ => /*c*/ i++ /*d*/ ;   // Noncompliant
+    }
 }

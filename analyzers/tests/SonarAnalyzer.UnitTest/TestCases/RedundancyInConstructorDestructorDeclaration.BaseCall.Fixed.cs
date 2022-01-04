@@ -106,4 +106,10 @@ namespace Tests.Diagnostics
         LambdaCtorWithLineEnding()
             => i++;
     }
+
+    class LambdaCtorTrailing
+    {
+        private int i;
+        LambdaCtorTrailing() /*b*/ => /*c*/ i++ /*d*/ ;   // Fixed
+    }
 }
