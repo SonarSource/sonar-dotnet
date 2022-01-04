@@ -54,10 +54,10 @@ namespace SonarAnalyzer.Rules.CSharp
                SyntaxKind.EventDeclaration);
         }
 
-        private static void AnalyzeEventType(SyntaxNodeAnalysisContext analysisContext, TypeSyntax typeSyntax, ISymbol containingSymbol)
+        private static void AnalyzeEventType(SyntaxNodeAnalysisContext analysisContext, TypeSyntax typeSyntax, ISymbol eventSymbol)
         {
-            if (!containingSymbol.IsOverride
-                && containingSymbol.GetInterfaceMember() is null
+            if (!eventSymbol.IsOverride
+                && eventSymbol.GetInterfaceMember() is null
                 && analysisContext.SemanticModel.GetSymbolInfo(typeSyntax).Symbol is INamedTypeSymbol eventHandlerType
                 && eventHandlerType.DelegateInvokeMethod is { } methodSymbol
                 && !IsCorrectEventHandlerSignature(methodSymbol))
