@@ -51,7 +51,7 @@ namespace SonarAnalyzer.Rules.CSharp
                         var invalidAccessModifier = GetModifiers(c.Node).FirstOrDefault(IsPublicOrInternal);
                         if (invalidAccessModifier != default)
                         {
-                            c.ReportIssue(Diagnostic.Create(Rule, invalidAccessModifier.GetLocation(), SuggestedModifier(invalidAccessModifier)));
+                            c.ReportIssue(Diagnostic.Create(Rule, invalidAccessModifier.GetLocation(), SuggestModifier(invalidAccessModifier)));
                         }
                     }
                 },
@@ -69,7 +69,7 @@ namespace SonarAnalyzer.Rules.CSharp
         private static bool IsPublicOrInternal(SyntaxToken token) =>
             token.IsKind(SyntaxKind.PublicKeyword) || token.IsKind(SyntaxKind.InternalKeyword);
 
-        private static string SuggestedModifier(SyntaxToken token) =>
+        private static string SuggestModifier(SyntaxToken token) =>
             token.IsKind(SyntaxKind.InternalKeyword) ? "private protected" : "protected";
     }
 }
