@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Runtime.InteropServices;
 using System.Runtime.Serialization;
 using System.Threading.Tasks;
 
@@ -152,6 +153,26 @@ namespace Tests.Diagnostics
                 set => hasOnlyWrite = value;
             }
         }
+    }
+
+    // https://github.com/SonarSource/sonar-dotnet/issues/2752
+    public class ReproIssue2752
+    {
+        private struct PrivateStructRef
+        {
+            public uint part1; // Noncompliant FP. Type is communicated an external call.
+        }
+
+        private class PrivateClassRef
+        {
+            public uint part1; // Noncompliant FP. Type is communicated an external call.
+        }
+
+        [DllImport("user32.dll")]
+        private static extern bool ExternalMethodWithStruct(ref PrivateStructRef reference);
+
+        [DllImport("user32.dll")]
+        private static extern bool ExternalMethodWithClass(ref PrivateClassRef reference);
     }
 
     public class EmptyCtor

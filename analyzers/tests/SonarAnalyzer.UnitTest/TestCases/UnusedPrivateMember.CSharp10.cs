@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Runtime.InteropServices;
 
 namespace Tests.Diagnostics
 {
@@ -76,5 +77,17 @@ namespace Tests.Diagnostics
         public int B() => b;
 
         private record struct UnusedNested(string Name, int CategoryId) { } // FN
+    }
+
+    // https://github.com/SonarSource/sonar-dotnet/issues/2752
+    public class ReproIssue2752
+    {
+        private record struct PrivateRecordStruct
+        {
+            public uint part1; // Noncompliant FP. Type is communicated an external call.
+        }
+
+        [DllImport("user32.dll")]
+        private static extern bool ExternalMethod(ref PrivateRecordStruct reference);
     }
 }
