@@ -71,8 +71,8 @@ namespace SonarAnalyzer.Rules.CSharp
                 return;
             }
 
-            var parameterNameValue = new Optional<object>();
-            var messageValue = new Optional<object>();
+            var parameterNameValue = default(Optional<object>);
+            var messageValue = default(Optional<object>);
             for (var i = 0; i < methodSymbol.Parameters.Length; i++)
             {
                 var argumentExpression = objectCreation.ArgumentList.Arguments[i].Expression;
