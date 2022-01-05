@@ -60,7 +60,10 @@ namespace Tests.Diagnostics
             booleanVariable = !condition || exp; // Fixed
             booleanVariable = condition && exp; // Fixed
             booleanVariable = condition; // Fixed
+            booleanVariable = !condition; // Fixed
             booleanVariable = condition ? true : true; // Compliant, this triggers another issue S2758
+            booleanVariable = condition ? throw new Exception() : true; // Compliant, we don't raise for throw expressions
+            booleanVariable = condition ? throw new Exception() : false; // Compliant, we don't raise for throw expressions
 
             booleanVariable = condition ? exp : exp2;
 
@@ -121,7 +124,8 @@ namespace Tests.Diagnostics
         {
             public int LiteralInTernaryCondition(bool condition, int result)
             {
-                return !condition ? result
+                return condition == false
+                    ? result
                     : throw new Exception();
             }
 
@@ -130,6 +134,15 @@ namespace Tests.Diagnostics
                 return condition
                     ? throw new Exception()
                     : true;
+            }
+
+            public void ThrowExpressionIsIgnored(bool condition, int number)
+            {
+                var x = !condition ? throw new Exception() : false;
+                x = number > 0 ? throw new Exception() : false;
+                x = condition && condition ? throw new Exception() : false;
+                x = condition || condition ? throw new Exception() : false;
+                x = condition != true ? throw new Exception() : false;
             }
         }
     }

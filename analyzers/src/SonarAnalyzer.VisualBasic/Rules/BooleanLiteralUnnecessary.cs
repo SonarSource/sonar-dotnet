@@ -45,6 +45,9 @@ namespace SonarAnalyzer.Rules.VisualBasic
 
         protected override bool IsFalseLiteralKind(SyntaxNode syntaxNode) => syntaxNode.IsKind(SyntaxKind.FalseLiteralExpression);
 
+        // C# 7 syntax
+        protected override bool IsInsideTernaryWithThrowExpression(BinaryExpressionSyntax syntaxNode) => false;
+
         protected override void Initialize(SonarAnalysisContext context)
         {
             context.RegisterSyntaxNodeActionInNonGenerated(CheckLogicalNot, SyntaxKind.NotExpression);
