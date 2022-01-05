@@ -92,7 +92,7 @@ namespace SonarAnalyzer.Rules
                 var parameter = parameters[i];
                 var expectedParameter = expectedParameters[i];
                 if (!parameter.ValueText.Equals(expectedParameter.Name, Language.NameComparison)
-                    && !AreGenericWithDifferentTypes(actualParameters[i].Type, expectedParameter.Type)
+                    && !AreGenericTypeParametersWithDifferentTypes(actualParameters[i].Type, expectedParameter.Type)
                     && (expectedParameter.Type.Kind != SymbolKind.TypeParameter
                         || actualParameters[i].Type.Kind == SymbolKind.TypeParameter))
                 {
@@ -101,19 +101,19 @@ namespace SonarAnalyzer.Rules
             }
         }
 
-        private static bool AreGenericWithDifferentTypes(ITypeSymbol actualType, ITypeSymbol expectedType)
+        private static bool AreGenericTypeParametersWithDifferentTypes(ITypeSymbol actualType, ITypeSymbol expectedType) =>
+            actualType is INamedTypeSymbol actualNamedType
+            && expectedType is INamedTypeSymbol expectedNamedType
+            && AreTypeArgumentsDifferent(actualNamedType, expectedNamedType);
+
+        private static bool AreTypeArgumentsDifferent(INamedTypeSymbol namedType, INamedTypeSymbol otherNamedType)
         {
-            if (actualType is INamedTypeSymbol actualNamedType
-                && expectedType is INamedTypeSymbol expectedNamedType)
+            for (var i = 0; i < namedType.TypeArguments.Count(); i++)
             {
-                for (var i = 0; i < actualNamedType.TypeArguments.Count(); i++)
+                if (namedType.TypeArguments[i].TypeKind != otherNamedType.TypeArguments[i].TypeKind)
                 {
-                    if (actualNamedType.TypeArguments[i].TypeKind != expectedNamedType.TypeArguments[i].TypeKind)
-                    {
-                        return true;
-                    }
+                    return true;
                 }
-                return false;
             }
             return false;
         }
