@@ -6,6 +6,17 @@ namespace Tests.Diagnostics
 {
     public class Startup
     {
+        // for coverage
+        private IApplicationBuilder foo;
+        public IApplicationBuilder Foo
+        {
+            set
+            {
+                var x = value.UseDeveloperExceptionPage(); // Noncompliant
+                foo = value;
+            }
+        }
+
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
             // Invoking as extension methods
