@@ -74,18 +74,21 @@ namespace SonarAnalyzer.Rules.CSharp
 
             var parameterAndMessage = RetrieveParameterAndMessageArgumentValue(methodSymbol, objectCreation, analysisContext.SemanticModel);
 
-            if (!parameterAndMessage.Item1.HasValue)
+            var constructorParameterArgument = parameterAndMessage.Item1;
+            var constructorMessageArgument = parameterAndMessage.Item2;
+
+            if (!constructorParameterArgument.HasValue)
             {
                 // can't check non-constant strings OR argument is not set
                 return;
             }
 
             var methodArgumentNames = GetMethodArgumentNames(objectCreation.Expression).ToHashSet();
-            if (!methodArgumentNames.Contains(TakeOnlyBeforeDot(parameterAndMessage.Item1)))
+            if (!methodArgumentNames.Contains(TakeOnlyBeforeDot(constructorParameterArgument)))
             {
-                var message = parameterAndMessage.Item2.HasValue && parameterAndMessage.Item2.Value != null && methodArgumentNames.Contains(TakeOnlyBeforeDot(parameterAndMessage.Item2))
+                var message = constructorMessageArgument.HasValue && methodArgumentNames.Contains(TakeOnlyBeforeDot(constructorMessageArgument))
                     ? ConstructorParametersInverted
-                    : string.Format(InvalidParameterName, parameterAndMessage.Item1.Value);
+                    : string.Format(InvalidParameterName, constructorParameterArgument.Value);
                 analysisContext.ReportIssue(Diagnostic.Create(Rule, objectCreation.Expression.GetLocation(), message));
             }
         }
