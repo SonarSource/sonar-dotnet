@@ -96,6 +96,7 @@ namespace SonarAnalyzer.Rules.CSharp
         {
             return methodSymbol.MethodKind == MethodKind.Ordinary &&
                 methodSymbol.Name == EqualsMethodName &&
+                methodSymbol.IsPubliclyAccessible() &&
                 !methodSymbol.IsOverride &&
                 methodSymbol.ReturnType.Is(KnownType.System_Boolean) &&
                 methodSymbol.Parameters.Length == 1;
