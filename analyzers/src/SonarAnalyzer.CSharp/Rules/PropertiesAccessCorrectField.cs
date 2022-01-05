@@ -184,15 +184,21 @@ namespace SonarAnalyzer.Rules.CSharp
 
             // Check for direct field access: "foo"
             if (strippedExpression is IdentifierNameSyntax
-                && semanticModel.GetSymbolInfo(strippedExpression).Symbol is IFieldSymbol field)
+                && semanticModel.GetSymbolInfo(strippedExpression).Symbol is IFieldSymbol directAccessField)
             {
-                return new FieldData(accessorKind, field, strippedExpression, useFieldLocation);
+                return new FieldData(accessorKind, directAccessField, strippedExpression, useFieldLocation);
             }
             // Check for "this.foo"
             else if (strippedExpression is MemberAccessExpressionSyntax {Expression: ThisExpressionSyntax _} member
-                     && semanticModel.GetSymbolInfo(strippedExpression).Symbol is IFieldSymbol field2)
+                     && semanticModel.GetSymbolInfo(strippedExpression).Symbol is IFieldSymbol fieldAccessedWithThis)
             {
-                return new FieldData(accessorKind, field2, member.Name, useFieldLocation);
+                return new FieldData(accessorKind, fieldAccessedWithThis, member.Name, useFieldLocation);
+            }
+            else if (strippedExpression is AssignmentExpressionSyntax assignmentExpression
+                     && assignmentExpression.Parent is ReturnStatementSyntax
+                     && semanticModel.GetSymbolInfo(assignmentExpression.Left).Symbol is IFieldSymbol fieldAssignedFromExpression)
+            {
+                return new FieldData(accessorKind, fieldAssignedFromExpression, assignmentExpression.Left, useFieldLocation);
             }
 
             return null;

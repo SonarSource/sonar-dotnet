@@ -740,7 +740,7 @@ namespace Tests.Diagnostics
         private int textBufferUndoHistory;
         public int TextBufferUndoHistory
         {
-            get // Noncompliant - FP
+            get
             {
                 return textBufferUndoHistory = GetValue();
             }

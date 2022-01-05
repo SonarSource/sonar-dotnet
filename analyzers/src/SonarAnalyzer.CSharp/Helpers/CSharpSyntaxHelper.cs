@@ -334,8 +334,8 @@ namespace SonarAnalyzer.Helpers
         {
             var topParenthesizedExpression = expression.GetSelfOrTopParenthesizedExpression();
             return topParenthesizedExpression.Parent.IsKind(SyntaxKind.SimpleAssignmentExpression)
-                    && topParenthesizedExpression.Parent is AssignmentExpressionSyntax assignment
-                    && assignment.Left == topParenthesizedExpression;
+                   && topParenthesizedExpression.Parent is AssignmentExpressionSyntax assignment
+                   && assignment.Left == topParenthesizedExpression;
         }
 
         public static bool IsComment(this SyntaxTrivia trivia)
