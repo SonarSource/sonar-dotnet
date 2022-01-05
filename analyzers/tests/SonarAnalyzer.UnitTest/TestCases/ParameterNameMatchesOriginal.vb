@@ -230,6 +230,31 @@ End Interface
 Public Class BasicImplementation
     Implements BaseInterface(Of Integer)
 
-    Public Sub Apply(ByVal intValueParam As SomeInterface(Of Integer)) Implements BaseInterface(Of Integer).Apply  'Noncompliant FN
+    Public Sub Apply(ByVal intValueParam As SomeInterface(Of Integer)) Implements BaseInterface(Of Integer).Apply
+    End Sub
+End Class
+
+Public Class StillGeneric(Of T)
+    Implements BaseInterface(Of T)
+
+    Public Sub Apply(ByVal renamedParam As SomeInterface(Of T)) Implements BaseInterface(Of T).Apply  ' Noncompliant
+    End Sub
+End Class
+
+Public MustInherit Class AbstractClass(Of T)
+    Public MustOverride Sub Apply(ByVal param As SomeInterface(Of T))
+End Class
+
+Public Class OverridenCompliant
+    Inherits AbstractClass(Of Integer)
+
+    Public Overrides Overloads Sub Apply(ByVal intValueParam As SomeInterface(Of Integer))
+    End Sub
+End Class
+
+Public Class OverridenNonCompliant(Of K)
+    Inherits AbstractClass(Of K)
+
+    Public Overrides Overloads Sub Apply(ByVal renamedParam As SomeInterface(Of K)) ' Noncompliant
     End Sub
 End Class

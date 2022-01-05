@@ -203,7 +203,37 @@ namespace Tests.Diagnostics
 
     public class BasicImplementation : BaseInterface<int>
     {
-        public void Apply(SomeInterface<int> intValueParam) { }   //Noncompliant FN
+        public void Apply(SomeInterface<int> intValueParam) { }
+    }
+
+    public class StillGeneric<T> : BaseInterface<T>
+    {
+        public void Apply(SomeInterface<T> renamedParam) { }  // Noncompliant
+    }
+
+    public abstract class AbstractClass<T>
+    {
+        public abstract void Apply(SomeInterface<T> intValueParam);
+    }
+
+    public class OverridenCompliant : AbstractClass<int>
+    {
+        public override void Apply(SomeInterface<int> intValueParam) { }
+    }
+
+    public class OverridenNonCompliant<K> : AbstractClass<K>
+    {
+        public override void Apply(SomeInterface<K> renamedParam) { } // Noncompliant
+    }
+
+    public interface BaseInterface2<A, B>
+    {
+        void Apply(Tuple<A, B> param);
+    }
+
+    public class SomeClass<T> : BaseInterface2<T, int>
+    {
+        public void Apply(Tuple<T, int> renamed) { }
     }
 
     // The following two classes reproduce: https://github.com/SonarSource/sonar-dotnet/issues/5005
