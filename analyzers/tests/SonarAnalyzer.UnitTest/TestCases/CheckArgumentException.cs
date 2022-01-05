@@ -278,12 +278,12 @@ namespace Tests.Diagnostics
 
         public void NamedNotInverted(int a)
         {
-            throw new ArgumentOutOfRangeException(message: "Sample message", paramName: nameof(a)); // Noncompliant FP
+            throw new ArgumentOutOfRangeException(message: "Sample message", paramName: nameof(a));
         }
 
-        public void NameWrongPosition(int a)
+        public void ShuffledPositions(int a)
         {
-            throw new ArgumentOutOfRangeException(actualValue: nameof(a), message: "Sample message", paramName: "vuzdrs"); // FN
+            throw new ArgumentOutOfRangeException(actualValue: nameof(a), message: "Sample message", paramName: "randomString"); // Noncompliant
         }
     }
 }

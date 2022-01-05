@@ -18,6 +18,7 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Linq;
@@ -75,18 +76,15 @@ namespace SonarAnalyzer.Rules.CSharp
             var messageValue = default(Optional<object>);
             for (var i = 0; i < methodSymbol.Parameters.Length; i++)
             {
+                var argument = objectCreation.ArgumentList.Arguments[i];
                 var argumentExpression = objectCreation.ArgumentList.Arguments[i].Expression;
-                if (methodSymbol.Parameters[i].MetadataName == "paramName" || methodSymbol.Parameters[i].MetadataName == "parameterName")
+                if (argument.NameColon != null)
                 {
-                    parameterNameValue = analysisContext.SemanticModel.GetConstantValue(argumentExpression);
-                }
-                else if (methodSymbol.Parameters[i].MetadataName == "message")
-                {
-                    messageValue = analysisContext.SemanticModel.GetConstantValue(argumentExpression);
+                    RetrieveParameterAndMessageArgumentValue(argument.NameColon.Name.Identifier.ValueText, argumentExpression, analysisContext.SemanticModel, ref parameterNameValue, ref messageValue);
                 }
                 else
                 {
-                    // do nothing
+                    RetrieveParameterAndMessageArgumentValue(methodSymbol.Parameters[i].MetadataName, argumentExpression, analysisContext.SemanticModel, ref parameterNameValue, ref messageValue);
                 }
             }
 
@@ -103,6 +101,22 @@ namespace SonarAnalyzer.Rules.CSharp
                     ? ConstructorParametersInverted
                     : string.Format(InvalidParameterName, parameterNameValue.Value);
                 analysisContext.ReportIssue(Diagnostic.Create(Rule, objectCreation.Expression.GetLocation(), message));
+            }
+        }
+
+        private static void RetrieveParameterAndMessageArgumentValue(string argumentName,
+                                                                     ExpressionSyntax argumentExpression,
+                                                                     SemanticModel semanticModel,
+                                                                     ref Optional<object> parameterNameValue,
+                                                                     ref Optional<object> messageValue)
+        {
+            if (argumentName.Equals("paramName", StringComparison.Ordinal) || argumentName.Equals("parameterName", StringComparison.Ordinal))
+            {
+                parameterNameValue = semanticModel.GetConstantValue(argumentExpression);
+            }
+            else if (argumentName.Equals("message", StringComparison.Ordinal))
+            {
+                messageValue = semanticModel.GetConstantValue(argumentExpression);
             }
         }
 
