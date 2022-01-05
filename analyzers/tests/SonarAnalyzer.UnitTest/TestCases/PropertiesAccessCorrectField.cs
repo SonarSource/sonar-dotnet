@@ -734,7 +734,7 @@ namespace Tests.Diagnostics
         public bool Pause
         {
             get => pause;
-            set => pause |= value; // Noncompliant - FP
+            set => pause |= value;
         }
 
         private int textBufferUndoHistory;

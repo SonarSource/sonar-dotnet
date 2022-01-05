@@ -62,7 +62,7 @@ namespace SonarAnalyzer.Rules.CSharp
         protected override IEnumerable<FieldData> FindFieldReads(IPropertySymbol property, Compilation compilation)
         {
             // We don't handle properties with multiple returns that return different fields
-            if (!(property.GetMethod.GetFirstSyntaxRef() is AccessorDeclarationSyntax getter))
+            if (property.GetMethod.GetFirstSyntaxRef() is not AccessorDeclarationSyntax getter)
             {
                 return Enumerable.Empty<FieldData>();
             }
@@ -96,7 +96,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
         protected override bool ShouldIgnoreAccessor(IMethodSymbol accessorMethod, Compilation compilation)
         {
-            if (!(accessorMethod.GetFirstSyntaxRef() is AccessorDeclarationSyntax accessor)
+            if (accessorMethod.GetFirstSyntaxRef() is not AccessorDeclarationSyntax accessor
                 || ((SyntaxNode)accessor.Body ?? accessor).ContainsGetOrSetOnDependencyProperty(compilation))
             {
                 return true;
@@ -124,7 +124,7 @@ namespace SonarAnalyzer.Rules.CSharp
             foreach (var node in root.DescendantNodes())
             {
                 FieldData? foundField = null;
-                if (node is AssignmentExpressionSyntax assignment && node.IsAnyKind(SyntaxKind.SimpleAssignmentExpression, SyntaxKindEx.CoalesceAssignmentExpression))
+                if (node is AssignmentExpressionSyntax assignment)
                 {
                     foundField = assignment.Left.DescendantNodesAndSelf().OfType<ExpressionSyntax>()
                         .Select(x => ExtractFieldFromExpression(AccessorKind.Setter, x, compilation, useFieldLocation))
