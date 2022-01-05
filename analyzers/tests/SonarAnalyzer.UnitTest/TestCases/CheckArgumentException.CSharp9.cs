@@ -99,3 +99,32 @@ public record Data(string Code)
 {
     public string Code { get; } = Code ?? throw new ArgumentNullException(nameof(Code)); // Noncompliant, FP - Code is a record parameter
 }
+
+// https://github.com/SonarSource/sonar-dotnet/issues/5226
+public class Repro_5226
+{
+    public void OnePositionalOneNamedCompliant(int a)
+    {
+        throw new ArgumentOutOfRangeException(nameof(a), message: "Sample message");
+    }
+
+    public void OnePositionalOneNamedNonCompliant(int a)
+    {
+        throw new ArgumentOutOfRangeException("randomString", message: nameof(a)); // Noncompliant
+    }
+
+    public void ShuffledPositions1(int a)
+    {
+        throw new ArgumentOutOfRangeException("randomString", actualValue: "", nameof(a)); // Noncompliant
+    }
+
+    public void ShuffledPositions2(int a)
+    {
+        throw new ArgumentOutOfRangeException("randomString", message: nameof(a), actualValue: ""); // Noncompliant
+    }
+
+    public void ShuffledPositions3(int a)
+    {
+        throw new ArgumentOutOfRangeException(nameof(a), message: "randomString", actualValue: "");
+    }
+}
