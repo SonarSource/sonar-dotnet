@@ -7,6 +7,7 @@ namespace Tests.Diagnostics
     public delegate void EventHandler3(int sender, EventArgs e);
     public delegate void EventHandler4(object sender, int e);
     public delegate void EventHandler5(object sender, EventArgs args);
+    public delegate void EventHandler6(object wrongName, EventArgs e);
 
     public delegate void potentiallyCorrectEventHandler<T>(object sender, T e);
 
@@ -21,7 +22,11 @@ namespace Tests.Diagnostics
         public event EventHandler3 Event3; // Noncompliant
         public event EventHandler4 Event4; // Noncompliant
         public event EventHandler5 Event5; // Noncompliant
-        public event potentiallyCorrectEventHandler<Object> Event6; // Noncompliant
+        public event EventHandler6 Event6; // Noncompliant
+        public event potentiallyCorrectEventHandler<Object> Event7; // Noncompliant
+
+        public event NonExistentType Event8; // Error[CS0246]
+        public event NamedType Event9; // Error[CS0066]
 
         public event EventHandler1 Event1AsProperty // Noncompliant {{Change the signature of that event handler to match the specified signature.}}
 //                   ^^^^^^^^^^^^^
@@ -35,6 +40,8 @@ namespace Tests.Diagnostics
         public event CorrectEventHandler2<TEventArgs> CorrectEvent3;
         public event potentiallyCorrectEventHandler<EventArgs> CorrectEvent4;
         public event potentiallyCorrectEventHandler<TEventArgs> CorrectEvent5;
+
+        public class NamedType { }
     }
 
     public class Bar<TEventArgs1, TEventArgs2, TParamWithoutConstraint>
@@ -46,18 +53,63 @@ namespace Tests.Diagnostics
 
         public event EventHandler<TParamWithoutConstraint> IncorrectEvent; // Noncompliant
     }
+}
 
-    public class ProviderChangedEventArgs : EventArgs {}
+// Reproducer of https://github.com/SonarSource/sonar-dotnet/issues/3453
+namespace Repro3453
+{
+    public class ProviderChangedEventArgs : EventArgs { }
 
     public delegate void ProviderChangedEventHandler(object sender, ProviderChangedEventArgs args);
 
     public interface ILocalizationProvider
     {
-        event ProviderChangedEventHandler ProviderChanged; // Noncompliant
+        event ProviderChangedEventHandler ProviderChanged1; // Noncompliant
+        event ProviderChangedEventHandler ProviderChanged2; // Noncompliant
     }
 
-    public class Repro3453 : ILocalizationProvider
+    public abstract class BaseClass
     {
-        public event ProviderChangedEventHandler ProviderChanged; // Noncompliant (See https://github.com/SonarSource/sonar-dotnet/issues/3453)
+        public abstract event ProviderChangedEventHandler ProviderChanged3; // Noncompliant
+        public abstract event ProviderChangedEventHandler ProviderChanged4; // Noncompliant
+    }
+
+    public class Repro3453 : BaseClass, ILocalizationProvider
+    {
+        public event ProviderChangedEventHandler ProviderChanged1;
+        public event ProviderChangedEventHandler ProviderChanged2
+        {
+            add { }
+            remove { }
+        }
+
+        public override event ProviderChangedEventHandler ProviderChanged3;
+        public override event ProviderChangedEventHandler ProviderChanged4
+        {
+            add { }
+            remove { }
+        }
+
+        public event ProviderChangedEventHandler NonOverridenNotFromInterfaceEvent1; // Noncompliant
+        public event ProviderChangedEventHandler NonOverridenNotFromInterfaceEvent2 // Noncompliant
+        {
+            add { }
+            remove { }
+        }
+    }
+
+    public class DisposableClass : IDisposable
+    {
+        public event ProviderChangedEventHandler ProviderChanged1; // Noncompliant
+        public event ProviderChangedEventHandler ProviderChanged2 // Noncompliant
+        {
+            add { }
+            remove { }
+        }
+
+        public void Dispose()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

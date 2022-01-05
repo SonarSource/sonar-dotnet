@@ -35,51 +35,48 @@ namespace SonarAnalyzer.Rules.CSharp
     {
         internal const string DiagnosticId = "S3906";
         private const string MessageFormat = "Change the signature of that event handler to match the specified signature.";
+        private const int SenderArgumentPosition = 0;
+        private const int EventArgsPosition = 1;
+        private const int DelegateEventHandlerArgCount = 2;
 
-        private static readonly DiagnosticDescriptor rule =
+        private static readonly DiagnosticDescriptor Rule =
             DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(rule);
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
 
         protected override void Initialize(SonarAnalysisContext context)
         {
             context.RegisterSyntaxNodeActionInNonGenerated(
-               c => AnalyzeEventType(c, ((EventFieldDeclarationSyntax)c.Node).Declaration.Type),
+               c => AnalyzeEventType(c, ((EventFieldDeclarationSyntax)c.Node).Declaration.Type, c.ContainingSymbol),
                SyntaxKind.EventFieldDeclaration);
 
             context.RegisterSyntaxNodeActionInNonGenerated(
-               c => AnalyzeEventType(c, ((EventDeclarationSyntax)c.Node).Type),
+               c => AnalyzeEventType(c, ((EventDeclarationSyntax)c.Node).Type, c.ContainingSymbol),
                SyntaxKind.EventDeclaration);
         }
 
-        private void AnalyzeEventType(SyntaxNodeAnalysisContext analysisContext, TypeSyntax typeSyntax)
+        private static void AnalyzeEventType(SyntaxNodeAnalysisContext analysisContext, TypeSyntax typeSyntax, ISymbol eventSymbol)
         {
-            var eventHandlerType = analysisContext.SemanticModel.GetSymbolInfo(typeSyntax).Symbol
-                        as INamedTypeSymbol;
-            var methodSymbol = eventHandlerType?.DelegateInvokeMethod;
-            if (methodSymbol == null)
+            if (!eventSymbol.IsOverride
+                && eventSymbol.GetInterfaceMember() is null
+                && analysisContext.SemanticModel.GetSymbolInfo(typeSyntax).Symbol is INamedTypeSymbol eventHandlerType
+                && eventHandlerType.DelegateInvokeMethod is { } methodSymbol
+                && !IsCorrectEventHandlerSignature(methodSymbol))
             {
-                return;
-            }
-
-            if (!IsCorrectEventHandlerSignature(methodSymbol))
-            {
-                analysisContext.ReportIssue(Diagnostic.Create(rule, typeSyntax.GetLocation()));
+                analysisContext.ReportIssue(Diagnostic.Create(Rule, typeSyntax.GetLocation()));
             }
         }
 
-        private bool IsCorrectEventHandlerSignature(IMethodSymbol methodSymbol)
-        {
-            return methodSymbol.ReturnsVoid &&
-                methodSymbol.Parameters.Length == 2 &&
-                methodSymbol.Parameters[0].Name == "sender" &&
-                methodSymbol.Parameters[0].Type.Is(KnownType.System_Object) &&
-                methodSymbol.Parameters[1].Name == "e" &&
-                IsDerivedFromEventArgs(methodSymbol.Parameters[1].Type);
-        }
+        private static bool IsCorrectEventHandlerSignature(IMethodSymbol methodSymbol) =>
+            methodSymbol.ReturnsVoid
+            && methodSymbol.Parameters.Length == DelegateEventHandlerArgCount
+            && methodSymbol.Parameters[SenderArgumentPosition].Name == "sender"
+            && methodSymbol.Parameters[SenderArgumentPosition].Type.Is(KnownType.System_Object)
+            && methodSymbol.Parameters[EventArgsPosition].Name == "e"
+            && IsDerivedFromEventArgs(methodSymbol.Parameters[1].Type);
 
         private static bool IsDerivedFromEventArgs(ITypeSymbol type) =>
-            type.DerivesFrom(KnownType.System_EventArgs) ||
-                (type is ITypeParameterSymbol typeParameterSymbol &&
-                typeParameterSymbol.ConstraintTypes.Any(IsDerivedFromEventArgs));
+            type.DerivesFrom(KnownType.System_EventArgs)
+            || (type is ITypeParameterSymbol typeParameterSymbol
+                && typeParameterSymbol.ConstraintTypes.Any(IsDerivedFromEventArgs));
     }
 }
