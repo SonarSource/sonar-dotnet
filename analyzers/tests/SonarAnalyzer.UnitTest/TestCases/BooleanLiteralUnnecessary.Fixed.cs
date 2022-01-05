@@ -116,17 +116,21 @@ namespace Tests.Diagnostics
             }
         }
 
-        public int LiteralInTernaryCondition(bool condition, int result)
+        // Reproducer for https://github.com/SonarSource/sonar-dotnet/issues/4465
+        private class Repro4465
         {
-            return !condition ? result
-                : throw new Exception();
-        }
+            public int LiteralInTernaryCondition(bool condition, int result)
+            {
+                return !condition ? result
+                    : throw new Exception();
+            }
 
-        public bool LiteralInTernaryBranch(bool condition)
-        {
-            return !condition
-|| throw new Exception()
-; // Fixed
+            public bool LiteralInTernaryBranch(bool condition)
+            {
+                return condition
+                    ? throw new Exception()
+                    : true;
+            }
         }
     }
 

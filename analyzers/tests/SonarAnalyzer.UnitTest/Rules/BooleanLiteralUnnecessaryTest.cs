@@ -53,6 +53,23 @@ namespace SonarAnalyzer.UnitTest.Rules
                 new CS.BooleanLiteralUnnecessaryCodeFixProvider(),
                 ParseOptionsHelper.FromCSharp8);
 
+#if NET
+
+        [TestMethod]
+        public void BooleanLiteralUnnecessary_CSharp9() =>
+            OldVerifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\BooleanLiteralUnnecessary.CSharp9.cs", new CS.BooleanLiteralUnnecessary());
+
+        [TestMethod]
+        public void BooleanLiteralUnnecessary_CodeFix_CSharp9() =>
+            OldVerifier.VerifyCodeFix(
+                @"TestCases\BooleanLiteralUnnecessary.CSharp9.cs",
+                @"TestCases\BooleanLiteralUnnecessary.CSharp9.Fixed.cs",
+                new CS.BooleanLiteralUnnecessary(),
+                new CS.BooleanLiteralUnnecessaryCodeFixProvider(),
+                ParseOptionsHelper.FromCSharp9);
+
+#endif
+
         [TestMethod]
         public void BooleanLiteralUnnecessary_VB() =>
             OldVerifier.VerifyAnalyzer(@"TestCases\BooleanLiteralUnnecessary.vb", new VB.BooleanLiteralUnnecessary());
