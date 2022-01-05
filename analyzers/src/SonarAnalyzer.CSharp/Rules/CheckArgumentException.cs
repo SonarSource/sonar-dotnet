@@ -78,14 +78,14 @@ namespace SonarAnalyzer.Rules.CSharp
             {
                 var argument = objectCreation.ArgumentList.Arguments[i];
                 var argumentExpression = objectCreation.ArgumentList.Arguments[i].Expression;
-                if (argument.NameColon != null)
-                {
-                    RetrieveParameterAndMessageArgumentValue(argument.NameColon.Name.Identifier.ValueText, argumentExpression, analysisContext.SemanticModel, ref parameterNameValue, ref messageValue);
-                }
-                else
-                {
-                    RetrieveParameterAndMessageArgumentValue(methodSymbol.Parameters[i].MetadataName, argumentExpression, analysisContext.SemanticModel, ref parameterNameValue, ref messageValue);
-                }
+                RetrieveParameterAndMessageArgumentValue(
+                    argument.NameColon != null
+                        ? argument.NameColon.Name.Identifier.ValueText
+                        : methodSymbol.Parameters[i].MetadataName,
+                    argumentExpression,
+                    analysisContext.SemanticModel,
+                    ref parameterNameValue,
+                    ref messageValue);
             }
 
             if (!parameterNameValue.HasValue)
