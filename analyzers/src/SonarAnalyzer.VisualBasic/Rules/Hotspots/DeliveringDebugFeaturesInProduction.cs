@@ -38,7 +38,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
 
         internal /*for testing*/ DeliveringDebugFeaturesInProduction(IAnalyzerConfiguration configuration) : base(configuration) { }
 
-        protected override bool IsInvokedConditionally(SyntaxNode node, SemanticModel semanticModel) =>
+        protected override bool IsDevelopmentCheckInvoked(SyntaxNode node, SemanticModel semanticModel) =>
             node.FirstAncestorOrSelf<StatementSyntax>() is var invocationStatement
             && invocationStatement.Ancestors().Any(x => IsDevelopmentCheck(x, semanticModel));
 

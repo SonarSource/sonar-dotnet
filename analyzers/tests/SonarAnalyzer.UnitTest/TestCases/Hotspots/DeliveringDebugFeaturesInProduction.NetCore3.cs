@@ -13,35 +13,54 @@ namespace NetCore3
             {
                 app.UseDeveloperExceptionPage(); // Compliant
             }
+        }
 
+        public void Configure2(IApplicationBuilder app, IWebHostEnvironment env)
+        {
             // Invoking as static methods
             if (HostEnvironmentEnvExtensions.IsDevelopment(env))
             {
                 DeveloperExceptionPageExtensions.UseDeveloperExceptionPage(app); // Compliant
             }
+        }
 
+        public void Configure3(IApplicationBuilder app, IWebHostEnvironment env)
+        {
             // Not in development
             if (!env.IsDevelopment())
             {
-                DeveloperExceptionPageExtensions.UseDeveloperExceptionPage(app); // Noncompliant
+                DeveloperExceptionPageExtensions.UseDeveloperExceptionPage(app); // FN
             }
+        }
 
-            // Custom conditions are deliberately ignored
+        public void Configure4(IApplicationBuilder app, IWebHostEnvironment env)
+        {
             var isDevelopment = env.IsDevelopment();
             if (isDevelopment)
             {
-                app.UseDeveloperExceptionPage(); // Noncompliant, False Positive
+                app.UseDeveloperExceptionPage();
             }
+        }
 
+        public void Configure5(IApplicationBuilder app, IWebHostEnvironment env)
+        {
             while (env.IsDevelopment())
             {
-                app.UseDeveloperExceptionPage(); // Noncompliant FP, we inspect only IF statements
+                app.UseDeveloperExceptionPage();
                 break;
             }
+        }
 
-            // These are called unconditionally
+        public void Configure6(IApplicationBuilder app, IWebHostEnvironment env)
+        {
             app.UseDeveloperExceptionPage(); // Noncompliant
             DeveloperExceptionPageExtensions.UseDeveloperExceptionPage(app); // Noncompliant
+        }
+
+        public void Configure7(IApplicationBuilder app, IWebHostEnvironment env)
+        {
+            var x = env.IsDevelopment();
+            app.UseDeveloperExceptionPage(); // FN
         }
 
         public void ConfigureAsArrow(IApplicationBuilder app, IWebHostEnvironment env) =>
