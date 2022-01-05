@@ -221,6 +221,7 @@ namespace SonarAnalyzer.Rules.CSharp
              && CSharpEquivalenceChecker.AreEquivalent(binary.Right, CSharpSyntaxHelper.FalseLiteralExpression))
             || (CSharpEquivalenceChecker.AreEquivalent(binary.Left, CSharpSyntaxHelper.FalseLiteralExpression)
                && CSharpEquivalenceChecker.AreEquivalent(binary.Right, CSharpSyntaxHelper.TrueLiteralExpression));
+
         private static bool TwoSidesAreSameBooleans(BinaryExpressionSyntax binary) =>
             (CSharpEquivalenceChecker.AreEquivalent(binary.Left, CSharpSyntaxHelper.TrueLiteralExpression)
              && CSharpEquivalenceChecker.AreEquivalent(binary.Right, CSharpSyntaxHelper.TrueLiteralExpression))
