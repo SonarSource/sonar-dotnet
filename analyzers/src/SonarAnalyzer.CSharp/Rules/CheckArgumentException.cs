@@ -72,52 +72,47 @@ namespace SonarAnalyzer.Rules.CSharp
                 return;
             }
 
-            var parameterNameValue = default(Optional<object>);
-            var messageValue = default(Optional<object>);
-            for (var i = 0; i < methodSymbol.Parameters.Length; i++)
-            {
-                var argument = objectCreation.ArgumentList.Arguments[i];
-                var argumentExpression = objectCreation.ArgumentList.Arguments[i].Expression;
-                RetrieveParameterAndMessageArgumentValue(
-                    argument.NameColon != null
-                        ? argument.NameColon.Name.Identifier.ValueText
-                        : methodSymbol.Parameters[i].MetadataName,
-                    argumentExpression,
-                    analysisContext.SemanticModel,
-                    ref parameterNameValue,
-                    ref messageValue);
-            }
+            var parameterAndMessage = RetrieveParameterAndMessageArgumentValue(methodSymbol, objectCreation, analysisContext.SemanticModel);
 
-            if (!parameterNameValue.HasValue)
+            if (!parameterAndMessage.Item1.HasValue)
             {
                 // can't check non-constant strings OR argument is not set
                 return;
             }
 
             var methodArgumentNames = GetMethodArgumentNames(objectCreation.Expression).ToHashSet();
-            if (!methodArgumentNames.Contains(TakeOnlyBeforeDot(parameterNameValue)))
+            if (!methodArgumentNames.Contains(TakeOnlyBeforeDot(parameterAndMessage.Item1)))
             {
-                var message = messageValue.HasValue && messageValue.Value != null && methodArgumentNames.Contains(TakeOnlyBeforeDot(messageValue))
+                var message = parameterAndMessage.Item2.HasValue && parameterAndMessage.Item2.Value != null && methodArgumentNames.Contains(TakeOnlyBeforeDot(parameterAndMessage.Item2))
                     ? ConstructorParametersInverted
-                    : string.Format(InvalidParameterName, parameterNameValue.Value);
+                    : string.Format(InvalidParameterName, parameterAndMessage.Item1.Value);
                 analysisContext.ReportIssue(Diagnostic.Create(Rule, objectCreation.Expression.GetLocation(), message));
             }
         }
 
-        private static void RetrieveParameterAndMessageArgumentValue(string argumentName,
-                                                                     ExpressionSyntax argumentExpression,
-                                                                     SemanticModel semanticModel,
-                                                                     ref Optional<object> parameterNameValue,
-                                                                     ref Optional<object> messageValue)
+        private static Tuple<Optional<object>, Optional<object>> RetrieveParameterAndMessageArgumentValue(IMethodSymbol methodSymbol, IObjectCreation objectCreation, SemanticModel semanticModel)
         {
-            if (argumentName.Equals("paramName", StringComparison.Ordinal) || argumentName.Equals("parameterName", StringComparison.Ordinal))
+            var parameterNameValue = default(Optional<object>);
+            var messageValue = default(Optional<object>);
+            for (var i = 0; i < methodSymbol.Parameters.Length; i++)
             {
-                parameterNameValue = semanticModel.GetConstantValue(argumentExpression);
+                var argument = objectCreation.ArgumentList.Arguments[i];
+                var argumentExpression = objectCreation.ArgumentList.Arguments[i].Expression;
+                var argumentName = argument.NameColon != null
+                                   ? argument.NameColon.Name.Identifier.ValueText
+                                   : methodSymbol.Parameters[i].MetadataName;
+
+                if (argumentName.Equals("paramName", StringComparison.Ordinal) || argumentName.Equals("parameterName", StringComparison.Ordinal))
+                {
+                    parameterNameValue = semanticModel.GetConstantValue(argumentExpression);
+                }
+                else if (argumentName.Equals("message", StringComparison.Ordinal))
+                {
+                    messageValue = semanticModel.GetConstantValue(argumentExpression);
+                }
             }
-            else if (argumentName.Equals("message", StringComparison.Ordinal))
-            {
-                messageValue = semanticModel.GetConstantValue(argumentExpression);
-            }
+
+            return new Tuple<Optional<object>, Optional<object>>(parameterNameValue, messageValue);
         }
 
         private static IEnumerable<string> GetMethodArgumentNames(SyntaxNode creationSyntax)
