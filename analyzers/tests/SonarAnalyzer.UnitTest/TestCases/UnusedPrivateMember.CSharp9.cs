@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Runtime.InteropServices;
 
 namespace Tests.Diagnostics
 {
@@ -103,5 +104,17 @@ namespace Tests.Diagnostics
 
     public partial class PartialMethods
     {
+    }
+
+    // https://github.com/SonarSource/sonar-dotnet/issues/2752
+    public class ReproIssue2752
+    {
+        private record PrivateRecordRef
+        {
+            public uint part1; // Noncompliant FP. Type is communicated an external call.
+        }
+
+        [DllImport("user32.dll")]
+        private static extern bool ExternalMethod(ref PrivateRecordRef reference);
     }
 }
