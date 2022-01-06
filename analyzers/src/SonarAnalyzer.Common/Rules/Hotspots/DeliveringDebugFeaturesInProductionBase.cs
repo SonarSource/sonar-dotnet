@@ -38,7 +38,7 @@ namespace SonarAnalyzer.Rules
             new MemberDescriptor(KnownType.Microsoft_AspNetCore_Hosting_HostingEnvironmentExtensions, "IsDevelopment"),
             new MemberDescriptor(KnownType.Microsoft_Extensions_Hosting_HostEnvironmentEnvExtensions, "IsDevelopment"));
 
-        protected abstract bool IsInvokedConditionally(SyntaxNode node, SemanticModel semanticModel);
+        protected abstract bool IsDevelopmentCheckInvoked(SyntaxNode node, SemanticModel semanticModel);
 
         protected abstract bool IsInDevelopmentContext(SyntaxNode node);
 
@@ -51,7 +51,7 @@ namespace SonarAnalyzer.Rules
             t.Track(input,
                     t.MatchMethod(new MemberDescriptor(KnownType.Microsoft_AspNetCore_Builder_DeveloperExceptionPageExtensions, "UseDeveloperExceptionPage"),
                                   new MemberDescriptor(KnownType.Microsoft_AspNetCore_Builder_DatabaseErrorPageExtensions, "UseDatabaseErrorPage")),
-                    t.ExceptWhen(c => IsInvokedConditionally(c.Node, c.SemanticModel)),
+                    t.ExceptWhen(c => IsDevelopmentCheckInvoked(c.Node, c.SemanticModel)),
                     t.ExceptWhen(c => IsInDevelopmentContext(c.Node)));
         }
 

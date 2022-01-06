@@ -6,6 +6,17 @@ namespace Tests.Diagnostics
 {
     public class Startup
     {
+        // for coverage
+        private IApplicationBuilder foo;
+        public IApplicationBuilder Foo
+        {
+            set
+            {
+                var x = value.UseDeveloperExceptionPage(); // Noncompliant
+                foo = value;
+            }
+        }
+
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
             // Invoking as extension methods
@@ -14,42 +25,61 @@ namespace Tests.Diagnostics
                 app.UseDeveloperExceptionPage(); // Compliant
                 app.UseDatabaseErrorPage(); // Compliant
             }
+        }
 
+        public void Configure2(IApplicationBuilder app, IHostingEnvironment env)
+        {
             // Invoking as static methods
             if (HostingEnvironmentExtensions.IsDevelopment(env))
             {
                 DeveloperExceptionPageExtensions.UseDeveloperExceptionPage(app); // Compliant
                 DatabaseErrorPageExtensions.UseDatabaseErrorPage(app); // Compliant
             }
+        }
 
+        public void Configure3(IApplicationBuilder app, IHostingEnvironment env)
+        {
             // Not in development
             if (!env.IsDevelopment())
             {
-                DeveloperExceptionPageExtensions.UseDeveloperExceptionPage(app); // Noncompliant
-                DatabaseErrorPageExtensions.UseDatabaseErrorPage(app); // Noncompliant
+                DeveloperExceptionPageExtensions.UseDeveloperExceptionPage(app); // FN
+                DatabaseErrorPageExtensions.UseDatabaseErrorPage(app); // FN
             }
+        }
 
-            // Custom conditions are deliberately ignored
+        public void Configure4(IApplicationBuilder app, IHostingEnvironment env)
+        {
             var isDevelopment = env.IsDevelopment();
             if (isDevelopment)
             {
-                app.UseDeveloperExceptionPage(); // Noncompliant, False Positive
-                app.UseDatabaseErrorPage(); // Noncompliant, False Positive
+                app.UseDeveloperExceptionPage();
+                app.UseDatabaseErrorPage();
             }
+        }
 
-            // Only simple IF checks are considered
+        public void Configure5(IApplicationBuilder app, IHostingEnvironment env)
+        {
             while (env.IsDevelopment())
             {
-                app.UseDeveloperExceptionPage(); // Noncompliant FP
-                app.UseDatabaseErrorPage(); // Noncompliant FP
+                app.UseDeveloperExceptionPage();
+                app.UseDatabaseErrorPage();
                 break;
             }
+        }
 
-            // These are called unconditionally
+        public void Configure6(IApplicationBuilder app, IHostingEnvironment env)
+        {
             app.UseDeveloperExceptionPage(); // Noncompliant
             app.UseDatabaseErrorPage(); // Noncompliant
             DeveloperExceptionPageExtensions.UseDeveloperExceptionPage(app); // Noncompliant
             DatabaseErrorPageExtensions.UseDatabaseErrorPage(app); // Noncompliant
+        }
+
+        public void Configure7(IApplicationBuilder app, IHostingEnvironment env)
+        {
+            var x = env.IsDevelopment();
+            app.UseDeveloperExceptionPage(); // FN
+            app.UseDatabaseErrorPage(); // FN
         }
 
         public void ConfigureAsArrow(IApplicationBuilder app, IHostingEnvironment env) =>
