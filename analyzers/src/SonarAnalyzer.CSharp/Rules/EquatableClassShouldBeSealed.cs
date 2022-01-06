@@ -48,12 +48,12 @@ namespace SonarAnalyzer.Rules.CSharp
                     var classDeclaration = (ClassDeclarationSyntax)c.Node;
                     var classSymbol = c.SemanticModel.GetDeclaredSymbol(classDeclaration);
 
-                    if (classSymbol != null &&
-                        !classSymbol.IsSealed &&
-                        !classSymbol.IsStatic &&
-                        classSymbol.IsPubliclyAccessible() &&
-                        !classDeclaration.Identifier.IsMissing &&
-                        HasAnyInvalidIEquatableEqualsMethod(classSymbol))
+                    if (classSymbol != null
+                        && !classSymbol.IsSealed
+                        && !classSymbol.IsStatic
+                        && classSymbol.IsPubliclyAccessible()
+                        && !classDeclaration.Identifier.IsMissing
+                        && HasAnyInvalidIEquatableEqualsMethod(classSymbol))
                     {
                         c.ReportIssue(Diagnostic.Create(Rule, classDeclaration.Identifier.GetLocation(), classDeclaration.Identifier));
                     }
@@ -86,15 +86,15 @@ namespace SonarAnalyzer.Rules.CSharp
         }
 
         private static bool IsCompilableIEquatableTSymbol(INamedTypeSymbol namedTypeSymbol) =>
-            namedTypeSymbol.ConstructedFrom.Is(KnownType.System_IEquatable_T) &&
-            namedTypeSymbol.TypeArguments.Length == 1;
+            namedTypeSymbol.ConstructedFrom.Is(KnownType.System_IEquatable_T)
+            && namedTypeSymbol.TypeArguments.Length == 1;
 
         private static bool IsIEquatableEqualsMethodCandidate(IMethodSymbol methodSymbol) =>
-            methodSymbol.MethodKind == MethodKind.Ordinary &&
-            methodSymbol.Name == EqualsMethodName &&
-            methodSymbol.IsPubliclyAccessible() &&
-            !methodSymbol.IsOverride &&
-            methodSymbol.ReturnType.Is(KnownType.System_Boolean) &&
-            methodSymbol.Parameters.Length == 1;
+            methodSymbol.MethodKind == MethodKind.Ordinary
+            && methodSymbol.Name == EqualsMethodName
+            && methodSymbol.IsPubliclyAccessible()
+            && !methodSymbol.IsOverride
+            && methodSymbol.ReturnType.Is(KnownType.System_Boolean)
+            && methodSymbol.Parameters.Length == 1;
     }
 }
