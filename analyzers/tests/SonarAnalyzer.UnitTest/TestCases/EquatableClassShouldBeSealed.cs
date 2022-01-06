@@ -68,4 +68,21 @@ namespace Tests.Diagnostics
             public bool Equals(PrivateClass other) => false;
         }
     }
+
+    // https://github.com/SonarSource/sonar-dotnet/issues/4446
+    public abstract class AbstractBase
+    {
+        public string X { get; set; }
+        public override bool Equals(object obj) => obj is AbstractBase ab && Equals(ab);
+        private bool Equals(AbstractBase other) => other?.X == this.X;
+        public override int GetHashCode() => 0;
+    }
+
+    public class Derived : AbstractBase
+    {
+        public string Y { get; set; }
+        public override bool Equals(object obj) => obj is Derived ab && Equals(ab);
+        private bool Equals(Derived other) => other.Y == this.Y && base.Equals(other);
+        public override int GetHashCode() => 0;
+    }
 }

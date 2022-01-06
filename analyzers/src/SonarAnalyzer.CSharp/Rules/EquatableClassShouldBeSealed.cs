@@ -37,30 +37,28 @@ namespace SonarAnalyzer.Rules.CSharp
         private const string MessageFormat = "Seal class '{0}' or implement 'IEqualityComparer<T>' instead.";
         private const string EqualsMethodName = nameof(object.Equals);
 
-        private static readonly DiagnosticDescriptor rule =
+        private static readonly DiagnosticDescriptor Rule =
             DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(rule);
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
 
-        protected override void Initialize(SonarAnalysisContext context)
-        {
+        protected override void Initialize(SonarAnalysisContext context) =>
             context.RegisterSyntaxNodeActionInNonGenerated(
                 c =>
                 {
                     var classDeclaration = (ClassDeclarationSyntax)c.Node;
                     var classSymbol = c.SemanticModel.GetDeclaredSymbol(classDeclaration);
 
-                    if (classSymbol != null &&
-                        !classSymbol.IsSealed &&
-                        !classSymbol.IsStatic &&
-                        classSymbol.IsPubliclyAccessible() &&
-                        !classDeclaration.Identifier.IsMissing &&
-                        HasAnyInvalidIEquatableEqualsMethod(classSymbol))
+                    if (classSymbol != null
+                        && !classSymbol.IsSealed
+                        && !classSymbol.IsStatic
+                        && classSymbol.IsPubliclyAccessible()
+                        && !classDeclaration.Identifier.IsMissing
+                        && HasAnyInvalidIEquatableEqualsMethod(classSymbol))
                     {
-                        c.ReportIssue(Diagnostic.Create(rule, classDeclaration.Identifier.GetLocation(),
-                            classDeclaration.Identifier));
+                        c.ReportIssue(Diagnostic.Create(Rule, classDeclaration.Identifier.GetLocation(), classDeclaration.Identifier));
                     }
-                }, SyntaxKind.ClassDeclaration);
-        }
+                },
+                SyntaxKind.ClassDeclaration);
 
         private static bool HasAnyInvalidIEquatableEqualsMethod(INamedTypeSymbol classSymbol)
         {
@@ -86,19 +84,17 @@ namespace SonarAnalyzer.Rules.CSharp
             var unprocessedTypeNames = equalsMethodsByTypeName.Keys.Except(equatableInterfacesByTypeName.Keys);
             return unprocessedTypeNames.Any(typeName => !equalsMethodsByTypeName[typeName].IsVirtual);
         }
-        private static bool IsCompilableIEquatableTSymbol(INamedTypeSymbol namedTypeSymbol)
-        {
-            return namedTypeSymbol.ConstructedFrom.Is(KnownType.System_IEquatable_T) &&
-                namedTypeSymbol.TypeArguments.Length == 1;
-        }
 
-        private static bool IsIEquatableEqualsMethodCandidate(IMethodSymbol methodSymbol)
-        {
-            return methodSymbol.MethodKind == MethodKind.Ordinary &&
-                methodSymbol.Name == EqualsMethodName &&
-                !methodSymbol.IsOverride &&
-                methodSymbol.ReturnType.Is(KnownType.System_Boolean) &&
-                methodSymbol.Parameters.Length == 1;
-        }
+        private static bool IsCompilableIEquatableTSymbol(INamedTypeSymbol namedTypeSymbol) =>
+            namedTypeSymbol.ConstructedFrom.Is(KnownType.System_IEquatable_T)
+            && namedTypeSymbol.TypeArguments.Length == 1;
+
+        private static bool IsIEquatableEqualsMethodCandidate(IMethodSymbol methodSymbol) =>
+            methodSymbol.MethodKind == MethodKind.Ordinary
+            && methodSymbol.Name == EqualsMethodName
+            && methodSymbol.IsPubliclyAccessible()
+            && !methodSymbol.IsOverride
+            && methodSymbol.ReturnType.Is(KnownType.System_Boolean)
+            && methodSymbol.Parameters.Length == 1;
     }
 }
