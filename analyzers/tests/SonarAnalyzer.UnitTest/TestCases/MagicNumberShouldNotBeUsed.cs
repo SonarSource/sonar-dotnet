@@ -43,7 +43,7 @@ namespace Tests.Diagnostics
             var g = new Guid(0xA, 0xB, 0xC, new Byte[] { 0, 1, 2, 3, 4, 5, 6, 7 }); // Compliant, class constructor
             long[] values1 = { 30L, 40L }; // Compliant, array initialisation
             int[] values2 = new int[] { 100, 200 }; // Compliant, array initialisation
-            Console.WriteLine(value: 12); // Noncompliant FP - Compliant, named argument
+            Console.WriteLine(value: 12); // Compliant, named argument
 
             for (int i = 0; i < 0; i++)
             {

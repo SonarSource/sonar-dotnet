@@ -18,6 +18,7 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using Microsoft.CodeAnalysis;
@@ -68,7 +69,12 @@ namespace SonarAnalyzer.Rules.CSharp
             // It's ok to use magic numbers in pragma directives
             || literalExpression.FirstAncestorOrSelf<PragmaWarningDirectiveTriviaSyntax>() != null
             // It's ok to use magic numbers in property declaration
-            || IsInsideProperty(literalExpression);
+            || IsInsideProperty(literalExpression)
+            || IsNamedArgument(literalExpression);
+
+        private static bool IsNamedArgument(LiteralExpressionSyntax literalExpression) =>
+            literalExpression.Parent is ArgumentSyntax arg
+            && arg.NameColon is not null;
 
         // Inside property we consider magic numbers as exceptions in the following cases:
         //   - A {get; set;} = MAGIC_NUMBER
