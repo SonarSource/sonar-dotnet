@@ -25,6 +25,7 @@ using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Extensions;
 using SonarAnalyzer.Helpers;
+using StyleCop.Analyzers.Lightup;
 
 namespace SonarAnalyzer.Rules.CSharp
 {
@@ -45,6 +46,10 @@ namespace SonarAnalyzer.Rules.CSharp
         protected override bool IsTrueLiteralKind(SyntaxNode syntaxNode) => syntaxNode.IsKind(SyntaxKind.TrueLiteralExpression);
 
         protected override bool IsFalseLiteralKind(SyntaxNode syntaxNode) => syntaxNode.IsKind(SyntaxKind.FalseLiteralExpression);
+
+        protected override bool IsInsideTernaryWithThrowExpression(BinaryExpressionSyntax syntaxNode) =>
+            syntaxNode.Parent is ConditionalExpressionSyntax conditionalExpression
+            && (IsThrowExpression(conditionalExpression.WhenTrue) || IsThrowExpression(conditionalExpression.WhenFalse));
 
         protected override void Initialize(SonarAnalysisContext context)
         {
@@ -86,6 +91,10 @@ namespace SonarAnalyzer.Rules.CSharp
             var conditional = (ConditionalExpressionSyntax)context.Node;
             var whenTrue = conditional.WhenTrue;
             var whenFalse = conditional.WhenFalse;
+            if (IsThrowExpression(whenTrue) || IsThrowExpression(whenFalse))
+            {
+                return;
+            }
             var typeLeft = context.SemanticModel.GetTypeInfo(whenTrue).Type;
             var typeRight = context.SemanticModel.GetTypeInfo(whenFalse).Type;
             if (typeLeft.IsNullableBoolean()
@@ -97,5 +106,8 @@ namespace SonarAnalyzer.Rules.CSharp
             }
             CheckTernaryExpressionBranches(context, conditional.SyntaxTree, whenTrue, whenFalse);
         }
+
+        private static bool IsThrowExpression(ExpressionSyntax expressionSyntax) =>
+            ThrowExpressionSyntaxWrapper.IsInstance(expressionSyntax);
     }
 }
