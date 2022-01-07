@@ -61,39 +61,14 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private static bool IsExceptionToTheRule(LiteralExpressionSyntax literalExpression) =>
             NotConsideredAsMagicNumbers.Contains(literalExpression.Token.ValueText)
-            // It's ok to use magic numbers as part of a variable declaration
             || literalExpression.FirstAncestorOrSelf<VariableDeclarationSyntax>() != null
-            // It's ok to use magic numbers as part of a parameter declaration
             || literalExpression.FirstAncestorOrSelf<ParameterSyntax>() != null
-            // It's ok to use magic numbers as part of an enum declaration
             || literalExpression.FirstAncestorOrSelf<EnumMemberDeclarationSyntax>() != null
-            // It's ok to use magic numbers in the GetHashCode method. Note that I am only checking the method name of the sake of simplicity
             || literalExpression.FirstAncestorOrSelf<MethodDeclarationSyntax>()?.Identifier.ValueText == nameof(object.GetHashCode)
-            // It's ok to use magic numbers in pragma directives
             || literalExpression.FirstAncestorOrSelf<PragmaWarningDirectiveTriviaSyntax>() != null
-            // It's ok to use magic numbers in property declaration
             || IsInsideProperty(literalExpression)
-            || IsNamedArgument(literalExpression)
-            || IsSingleOrNamedAttributeArgument(literalExpression)
-            || IsSingleDigitInToleratedComparisons(literalExpression);
-
-        private static bool IsSingleDigitInToleratedComparisons(LiteralExpressionSyntax literalExpression) =>
-            literalExpression.Parent is BinaryExpressionSyntax binaryExpression
-            && binaryExpression.IsAnyKind(SyntaxKind.EqualsExpression, SyntaxKind.LessThanExpression, SyntaxKind.LessThanOrEqualExpression)
-            && IsSingleDigit(literalExpression.Token.ValueText)
-            && ToStringContainsAnyAcceptedNames(binaryExpression);
-
-        private static bool IsSingleDigit(string text) => byte.TryParse(text, out var result) && result <= 9;
-
-        private static bool IsNamedArgument(LiteralExpressionSyntax literalExpression) =>
-            literalExpression.Parent is ArgumentSyntax arg
-            && arg.NameColon is not null;
-
-        private static bool IsSingleOrNamedAttributeArgument(LiteralExpressionSyntax literalExpression) =>
-            literalExpression.Parent is AttributeArgumentSyntax arg
-            && (arg.NameColon is not null
-                || arg.NameEquals is not null
-                || (arg.Parent is AttributeArgumentListSyntax argList && argList.Arguments.Count == 1));
+            || IsSingleDigitInToleratedComparisons(literalExpression)
+            || IsToleratedArgument(literalExpression);
 
         // Inside property we consider magic numbers as exceptions in the following cases:
         //   - A {get; set;} = MAGIC_NUMBER
@@ -107,6 +82,28 @@ namespace SonarAnalyzer.Rules.CSharp
             var parent = node.Parent;
             return parent is ReturnStatementSyntax || parent is EqualsValueClauseSyntax;
         }
+
+        private static bool IsSingleDigitInToleratedComparisons(LiteralExpressionSyntax literalExpression) =>
+            literalExpression.Parent is BinaryExpressionSyntax binaryExpression
+            && IsSingleDigit(literalExpression.Token.ValueText)
+            && ToStringContainsAnyAcceptedNames(binaryExpression);
+
+        private static bool IsToleratedArgument(LiteralExpressionSyntax literalExpression) =>
+            IsToleratedMethodArgument(literalExpression)
+            || IsSingleOrNamedAttributeArgument(literalExpression);
+
+        // Named argument or constructor argument.
+        private static bool IsToleratedMethodArgument(LiteralExpressionSyntax literalExpression) =>
+            literalExpression.Parent is ArgumentSyntax arg
+            && (arg.NameColon is not null || arg.Parent.Parent is ObjectCreationExpressionSyntax);
+
+        private static bool IsSingleOrNamedAttributeArgument(LiteralExpressionSyntax literalExpression) =>
+            literalExpression.Parent is AttributeArgumentSyntax arg
+            && (arg.NameColon is not null
+                || arg.NameEquals is not null
+                || (arg.Parent is AttributeArgumentListSyntax argList && argList.Arguments.Count == 1));
+
+        private static bool IsSingleDigit(string text) => byte.TryParse(text, out var result) && result <= 9;
 
         private static bool ToStringContainsAnyAcceptedNames(SyntaxNode syntaxNode)
         {
