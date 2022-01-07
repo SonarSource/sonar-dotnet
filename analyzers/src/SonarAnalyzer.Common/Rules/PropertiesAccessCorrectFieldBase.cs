@@ -111,9 +111,9 @@ namespace SonarAnalyzer.Rules
 
         private IEnumerable<IPropertySymbol> GetExplicitlyDeclaredProperties(INamedTypeSymbol symbol) =>
             symbol.GetMembers()
-                .Where(m => m.Kind == SymbolKind.Property)
-                .OfType<IPropertySymbol>()
-                .Where(ImplementsExplicitGetterOrSetter);
+                  .Where(m => m.Kind == SymbolKind.Property)
+                  .OfType<IPropertySymbol>()
+                  .Where(ImplementsExplicitGetterOrSetter);
 
         private void CheckExpectedFieldIsUsed(IMethodSymbol methodSymbol, IFieldSymbol expectedField, ImmutableArray<FieldData> actualFields, SymbolAnalysisContext context)
         {
@@ -235,11 +235,8 @@ namespace SonarAnalyzer.Rules
 
             public IFieldSymbol GetSingleMatchingFieldOrNull(IPropertySymbol propertySymbol)
             {
-                // We're not caching the property name as only expect to be called once per property
-                var standardisedPropertyName = GetCanonicalFieldName(propertySymbol.Name);
-
                 var matchingFields = fieldToStandardNameMap.Keys
-                    .Where(k => AreCanonicalNamesEqual(fieldToStandardNameMap[k], standardisedPropertyName))
+                    .Where(fieldSymbol => FieldMatchesTheProperty(fieldSymbol, propertySymbol))
                     .ToList();
 
                 return matchingFields.Count != 1
@@ -252,6 +249,13 @@ namespace SonarAnalyzer.Rules
 
             private static bool AreCanonicalNamesEqual(string name1, string name2) =>
                 name1.Equals(name2, StringComparison.OrdinalIgnoreCase);
+
+            private bool FieldMatchesTheProperty(IFieldSymbol field, IPropertySymbol property) =>
+                // We're not caching the property name as only expect to be called once per property
+                AreCanonicalNamesEqual(fieldToStandardNameMap[field], GetCanonicalFieldName(property.Name))
+                    && field.Type == property.Type
+                    && ((property.IsStatic && field.IsStatic) || (!property.IsStatic && !field.IsStatic))
+                    && !field.IsConst;
         }
     }
 }

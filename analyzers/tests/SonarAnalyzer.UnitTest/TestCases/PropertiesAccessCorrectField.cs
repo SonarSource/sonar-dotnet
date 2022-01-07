@@ -72,10 +72,8 @@ namespace Tests.Diagnostics
 
         public string AAA
         {
-            get { return aString; } // Noncompliant - field called 'aaa' exists, even though type is different
-//                       ^^^^^^^
-            set { aString = value; } // Noncompliant
-//                ^^^^^^^
+            get { return aString; } // Compliant - field called 'aaa' exists, but type is different
+            set { aString = value; } // Compliant - Type is different.
         }
     }
 
@@ -86,8 +84,7 @@ namespace Tests.Diagnostics
 
         public string AAA
         {
-            set { aString = "foo" + value; } // Noncompliant
-//                ^^^^^^^
+            set { aString = "foo" + value; } // Compliant field called 'aaa' exists, but type is different.
         }
     }
 
@@ -757,8 +754,8 @@ namespace Tests.Diagnostics
         private string m_prefix;
         public string Prefix
         {
-            get { return m_prefix; } // Noncompliant - FP
-            set { m_prefix = value; } // Noncompliant - FP
+            get { return m_prefix; } // Compliant PREFIX is const
+            set { m_prefix = value; } // Compliant PREFIX is const
         }
     }
 
@@ -768,9 +765,7 @@ namespace Tests.Diagnostics
 
         public ContainsConstraint IgnoreCase
         {
-            // Refactor this getter so that it actually refers to the field '_ignoreCase'.
-            // _ignoreCase has a different type than the property return type
-            get // Noncompliant - FP
+            get // Compliant - _IgnoreCase has different type
             {
                 _ignoreCase = true;
                 return this;
@@ -778,24 +773,35 @@ namespace Tests.Diagnostics
         }
     }
 
-    public class Base
-    {
-        protected long writeLockTimeout;
-    }
-
-    public class SubClass : Base
+    public class AClass
     {
         public static long WRITE_LOCK_TIMEOUT = 1000;
+        public long longValue;
         public long WriteLockTimeout
         {
             get
             {
-                return writeLockTimeout; // Noncompliant - FP
+                return longValue; // Compliant - WRITE_LOCK_TIMEOUT is static field when the property is not static.
             }
             set
             {
-                this.writeLockTimeout = value; // Noncompliant - FP
+                longValue = value; // Compliant - WRITE_LOCK_TIMEOUT is static field when the property is not static.
+            }
+        }
+
+        public static long TEST_STATIC_CASE = 1000;
+        public static long ALong = 2000;
+        public static long TestStaticCase
+        {
+            get
+            {
+                return ALong; // Noncompliant
+            }
+            set
+            {
+                ALong = value; // Noncompliant
             }
         }
     }
+
 }
