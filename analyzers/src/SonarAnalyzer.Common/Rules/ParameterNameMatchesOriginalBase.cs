@@ -80,8 +80,11 @@ namespace SonarAnalyzer.Rules
             }
         }
 
-        private void VerifyGenericParameters(SyntaxNodeAnalysisContext context, TMethodDeclarationSyntax methodSyntax, IList<IParameterSymbol> actualParameters,
-            IList<IParameterSymbol> expectedParameters, string expectedLocation)
+        private void VerifyGenericParameters(SyntaxNodeAnalysisContext context,
+                                             TMethodDeclarationSyntax methodSyntax,
+                                             IList<IParameterSymbol> actualParameters,
+                                             IList<IParameterSymbol> expectedParameters,
+                                             string expectedLocation)
         {
             var parameters = ParameterIdentifiers(methodSyntax).ToList();
             for (var i = 0; i < parameters.Count; i++)
@@ -89,11 +92,30 @@ namespace SonarAnalyzer.Rules
                 var parameter = parameters[i];
                 var expectedParameter = expectedParameters[i];
                 if (!parameter.ValueText.Equals(expectedParameter.Name, Language.NameComparison)
-                    && (expectedParameter.Type.Kind != SymbolKind.TypeParameter || actualParameters[i].Type.Kind == SymbolKind.TypeParameter))
+                    && !AreGenericTypeParametersWithDifferentTypes(actualParameters[i].Type, expectedParameter.Type)
+                    && (expectedParameter.Type.Kind != SymbolKind.TypeParameter
+                        || actualParameters[i].Type.Kind == SymbolKind.TypeParameter))
                 {
                     context.ReportIssue(Diagnostic.Create(rule, parameter.GetLocation(), parameter.ValueText, expectedParameter.Name, expectedLocation));
                 }
             }
+        }
+
+        private static bool AreGenericTypeParametersWithDifferentTypes(ITypeSymbol actualType, ITypeSymbol expectedType) =>
+            actualType is INamedTypeSymbol actualNamedType
+            && expectedType is INamedTypeSymbol expectedNamedType
+            && AreTypeArgumentsDifferent(actualNamedType, expectedNamedType);
+
+        private static bool AreTypeArgumentsDifferent(INamedTypeSymbol namedType, INamedTypeSymbol otherNamedType)
+        {
+            for (var i = 0; i < namedType.TypeArguments.Count(); i++)
+            {
+                if (namedType.TypeArguments[i].TypeKind != otherNamedType.TypeArguments[i].TypeKind)
+                {
+                    return true;
+                }
+            }
+            return false;
         }
     }
 }

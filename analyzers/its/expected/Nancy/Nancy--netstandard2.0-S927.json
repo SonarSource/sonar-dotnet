@@ -2,32 +2,6 @@
 "issues":  [
 {
 "id":  "S927",
-"message":  "Rename parameter 'pipelineItem' to 'syncDelegate' to match the base class declaration.",
-"location":  {
-"uri":  "sources\Nancy\src\Nancy\AfterPipeline.cs",
-"region":  {
-"startLine":  121,
-"startColumn":  126,
-"endLine":  121,
-"endColumn":  138
-}
-}
-},
-{
-"id":  "S927",
-"message":  "Rename parameter 'pipelineItem' to 'syncDelegate' to match the base class declaration.",
-"location":  {
-"uri":  "sources\Nancy\src\Nancy\BeforePipeline.cs",
-"region":  {
-"startLine":  136,
-"startColumn":  144,
-"endLine":  136,
-"endColumn":  156
-}
-}
-},
-{
-"id":  "S927",
 "message":  "Rename parameter 'collectionTypeRegistrations' to 'collectionTypeRegistrationsn' to match the base class declaration.",
 "location":  {
 "uri":  "sources\Nancy\src\Nancy\DefaultNancyBootstrapper.cs",
