@@ -65,14 +65,13 @@ namespace Tests.Diagnostics
             return MY_VALUE * 397;
         }
 
-        [Foo(Bar: 42, Baz = 43)] // Noncompliant FP - Compliant, explicit attribute argument names
-        // Noncompliant @-1
+        [Foo(Bar: 42, Baz = 43)] // Compliant, explicit attribute argument names
         public void Foo(int value = 42)
         {
             var x = -1 < 1;
         }
 
-        [Foo(42)] // Noncompliant FP -Compliant, attribute with only one argument
+        [Foo(42)] // Compliant, attribute with only one argument
         public static int Bar(int value) => 0;
     }
 

@@ -70,11 +70,19 @@ namespace SonarAnalyzer.Rules.CSharp
             || literalExpression.FirstAncestorOrSelf<PragmaWarningDirectiveTriviaSyntax>() != null
             // It's ok to use magic numbers in property declaration
             || IsInsideProperty(literalExpression)
-            || IsNamedArgument(literalExpression);
+            || IsNamedArgument(literalExpression)
+            || IsInAllowedAttribute(literalExpression);
 
         private static bool IsNamedArgument(LiteralExpressionSyntax literalExpression) =>
             literalExpression.Parent is ArgumentSyntax arg
             && arg.NameColon is not null;
+
+        // Either it is the only argument of the attribute, or it is a named argument.
+        private static bool IsInAllowedAttribute(LiteralExpressionSyntax literalExpression) =>
+            literalExpression.Parent is AttributeArgumentSyntax arg
+            && (arg.NameColon is not null
+                || arg.NameEquals is not null
+                || (arg.Parent is AttributeArgumentListSyntax argList && argList.Arguments.Count == 1));
 
         // Inside property we consider magic numbers as exceptions in the following cases:
         //   - A {get; set;} = MAGIC_NUMBER
