@@ -23,7 +23,7 @@ namespace Tests.Diagnostics
     public class ValidUseCases
     {
         private const int MAGIC = 42;
-        private IntPtr Pointer = new IntPtr(19922); // Compliant, class constructor
+        private IntPtr Pointer = new IntPtr(19922); // Compliant, store in field
         public readonly int MY_VALUE = 25;
         const int ONE_YEAR_IN_SECONDS = 31_557_600;
         static readonly int ReadOnlyValue = Bar(999); // Compliant as stored in static readonly
@@ -33,6 +33,15 @@ namespace Tests.Diagnostics
         public static double FooProp
         {
             get { return 2; }
+        }
+
+        public static double FooProp2
+        {
+            get
+            {
+                var someName = Math.Sqrt(4096); // Compliant, stored in a variable
+                return someName;
+            }
         }
 
         public ValidUseCases(int x, int y) { }
@@ -45,14 +54,13 @@ namespace Tests.Diagnostics
             int i4 = 42;
             var list = new List<string>(42); // Compliant, set to variable
             var bigInteger = new IntPtr(1612342); // compliant, set to variable
-            var g = new Guid(0xA, 0xB, 0xC, new Byte[] { 0, 1, 2, 3, 4, 5, 6, 7 }); // Compliant, set in a variable
+            var g = new Guid(0xA, 0xB, 0xC, new Byte[] { 0, 1, 2, 3, 4, 5, 6, 7 }); // Compliant, set to a variable
+            var valid = new ValidUseCases(100, 300);
+            var fooResult = Bar(42, Bar(110, Bar(233, 23454, Bar(999)))); // FN https://github.com/SonarSource/sonar-dotnet/issues/5251
+            Foo(new IntPtr(123456)); // compliant, constructor
 
-            Foo(new IntPtr(123456)); // Compliant, class constructor
-            var byteArrayName = new Byte[] { 0, 1, 2, 3, 4, 5, 6, 7 };
-            Foo(new Guid(0xA, 0xB, 0xC, byteArrayName)); // Compliant, magic numbers set directly as constructor params
-
-            long[] values1 = { 30L, 40L }; // Compliant, array initialisation
-            int[] values2 = new int[] { 100, 200 }; // Compliant, array initialisation
+            long[] values1 = { 30L, 40L }; // Compliant, set to variable
+            int[] values2 = new int[] { 100, 200 }; // Compliant, set to variable
             Console.WriteLine(value: 12); // Compliant, named argument
 
             for (int i = 0; i < 0; i++)
@@ -70,12 +78,11 @@ namespace Tests.Diagnostics
             result = foo.COUNT == 8; // Compliant
             result = foo.length == 9; // Compliant
 
+            WithTimeSpan(TimeSpan.FromDays(1), TimeSpan.FromMilliseconds(33)); // compliant
+
             const int VAL = 15;
 
             Console.Write("test");
-
-            // we tolerate magic constants sent to constructors
-            new ValidUseCases(100, 300);
         }
 
         public override int GetHashCode()
@@ -97,11 +104,13 @@ namespace Tests.Diagnostics
             var x = -1 < 1;
         }
 
-        [Foo(42)] // Compliant, attribute with only one argument
-        public static int Bar(int value) => 0;
-
         public static void Foo(IntPtr x) { }
-        public static void Foo(Guid x) { }
+
+        [Foo(42)] // Compliant, attribute with only one argument
+        public static int Bar(int value, params int[] values) => 0;
+
+        public static void WithTimeSpan(TimeSpan one, TimeSpan two) { }
+
     }
 
     public enum MyEnum
@@ -115,27 +124,30 @@ namespace Tests.Diagnostics
     {
         public static double FooProp
         {
-            get { return Math.Sqrt(4); } // Noncompliant
+            get { return Math.Sqrt(4); } // Noncompliant {{Assign this magic number '4' to a well-named (variable|constant), and use the (variable|constant) instead.}}
+//                                 ^
         }
 
         public WrongUseCases(int x, int y) { }
 
         public WrongUseCases(List<int> list, string s, FooBar foo)
         {
-            Console.WriteLine(12); // Noncompliant
+            Console.WriteLine(12); // Noncompliant {{Assign this magic number '12' to a well-named (variable|constant), and use the (variable|constant) instead.}}
 
-            for (int i = 10; i < 50; i++) // Noncompliant
+            for (int i = 10; i < 50; i++) // Noncompliant {{Assign this magic number '50' to a well-named (variable|constant), and use the (variable|constant) instead.}}
             {
 
             }
 
             var array = new string[10];
-            array[5] = "test"; // Noncompliant
-            Foo(new int[] { 100 }); // Noncompliant, array with magic numbers should have a decent name
-
+            array[5] = "test"; // Noncompliant {{Assign this magic number '5' to a well-named (variable|constant), and use the (variable|constant) instead.}}
+            Foo(new int[] { 100 }); // Noncompliant
 
             new WrongUseCases(100, Foo(200, 300)); // Noncompliant {{Assign this magic number '200' to a well-named (variable|constant), and use the (variable|constant) instead.}}
             // Noncompliant@-1 {{Assign this magic number '300' to a well-named (variable|constant), and use the (variable|constant) instead.}}
+
+            Foo(new int[] { 100, 200 }); // Noncompliant {{Assign this magic number '100' to a well-named (variable|constant), and use the (variable|constant) instead.}}
+            // Noncompliant@-1 {{Assign this magic number '200' to a well-named (variable|constant), and use the (variable|constant) instead.}}
 
             var result = list.Count == 99;
             result = list.Count < 400; // Noncompliant
