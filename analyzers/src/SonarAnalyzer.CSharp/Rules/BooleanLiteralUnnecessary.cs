@@ -108,6 +108,6 @@ namespace SonarAnalyzer.Rules.CSharp
         }
 
         private static bool IsThrowExpression(ExpressionSyntax expressionSyntax) =>
-            ThrowExpressionSyntaxWrapper.IsInstance(expressionSyntax.RemoveParentheses());
+            ThrowExpressionSyntaxWrapper.IsInstance(expressionSyntax);
     }
 }

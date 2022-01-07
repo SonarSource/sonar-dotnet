@@ -55,7 +55,8 @@ namespace SonarAnalyzer.Rules
         protected abstract SyntaxToken GetOperatorToken(TBinaryExpression binaryExpression);
         protected abstract bool IsTrueLiteralKind(SyntaxNode syntaxNode);
         protected abstract bool IsFalseLiteralKind(SyntaxNode syntaxNode);
-        protected abstract bool IsInsideTernaryWithThrowExpression(TBinaryExpression syntaxNode);
+        // For C# 7 syntax
+        protected virtual bool IsInsideTernaryWithThrowExpression(TBinaryExpression syntaxNode) => false;
 
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(Rule);
 
@@ -68,11 +69,8 @@ namespace SonarAnalyzer.Rules
         protected void CheckAndExpression(SyntaxNodeAnalysisContext context)
         {
             var binaryExpression = (TBinaryExpression)context.Node;
-            if (IsInsideTernaryWithThrowExpression(binaryExpression))
-            {
-                return;
-            }
-            if (CheckForNullabilityAndBooleanConstantsReport(binaryExpression, context, reportOnTrue: true))
+            if (IsInsideTernaryWithThrowExpression(binaryExpression)
+                || CheckForNullabilityAndBooleanConstantsReport(binaryExpression, context, reportOnTrue: true))
             {
                 return;
             }
@@ -90,11 +88,8 @@ namespace SonarAnalyzer.Rules
         protected void CheckOrExpression(SyntaxNodeAnalysisContext context)
         {
             var binaryExpression = (TBinaryExpression)context.Node;
-            if (IsInsideTernaryWithThrowExpression(binaryExpression))
-            {
-                return;
-            }
-            if (CheckForNullabilityAndBooleanConstantsReport(binaryExpression, context, reportOnTrue: false))
+            if (IsInsideTernaryWithThrowExpression(binaryExpression)
+                || CheckForNullabilityAndBooleanConstantsReport(binaryExpression, context, reportOnTrue: false))
             {
                 return;
             }
@@ -111,11 +106,8 @@ namespace SonarAnalyzer.Rules
         protected void CheckEquals(SyntaxNodeAnalysisContext context)
         {
             var binaryExpression = (TBinaryExpression)context.Node;
-            if (IsInsideTernaryWithThrowExpression(binaryExpression))
-            {
-                return;
-            }
-            if (CheckForNullabilityAndBooleanConstantsReport(binaryExpression, context, reportOnTrue: true))
+            if (IsInsideTernaryWithThrowExpression(binaryExpression)
+                || CheckForNullabilityAndBooleanConstantsReport(binaryExpression, context, reportOnTrue: true))
             {
                 return;
             }
@@ -130,11 +122,8 @@ namespace SonarAnalyzer.Rules
         protected void CheckNotEquals(SyntaxNodeAnalysisContext context)
         {
             var binaryExpression = (TBinaryExpression)context.Node;
-            if (IsInsideTernaryWithThrowExpression(binaryExpression))
-            {
-                return;
-            }
-            if (CheckForNullabilityAndBooleanConstantsReport(binaryExpression, context, reportOnTrue: false))
+            if (IsInsideTernaryWithThrowExpression(binaryExpression)
+                || CheckForNullabilityAndBooleanConstantsReport(binaryExpression, context, reportOnTrue: false))
             {
                 return;
             }
