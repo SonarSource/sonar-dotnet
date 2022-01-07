@@ -21,6 +21,7 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
+using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
@@ -41,6 +42,8 @@ namespace SonarAnalyzer.Rules.CSharp
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
 
         private static readonly ISet<string> NotConsideredAsMagicNumbers = new HashSet<string> { "-1", "0", "1" };
+
+        private static readonly string[] AcceptedNamesForSingleDigitComparison = { "size", "count", "length" };
 
         protected override void Initialize(SonarAnalysisContext context) =>
             context.RegisterSyntaxNodeActionInNonGenerated(
@@ -71,14 +74,22 @@ namespace SonarAnalyzer.Rules.CSharp
             // It's ok to use magic numbers in property declaration
             || IsInsideProperty(literalExpression)
             || IsNamedArgument(literalExpression)
-            || IsInAllowedAttribute(literalExpression);
+            || IsSingleOrNamedAttributeArgument(literalExpression)
+            || IsSingleDigitInToleratedComparisons(literalExpression);
+
+        private static bool IsSingleDigitInToleratedComparisons(LiteralExpressionSyntax literalExpression) =>
+            literalExpression.Parent is BinaryExpressionSyntax binaryExpression
+            && binaryExpression.IsAnyKind(SyntaxKind.EqualsExpression, SyntaxKind.LessThanExpression, SyntaxKind.LessThanOrEqualExpression)
+            && IsSingleDigit(literalExpression.Token.ValueText)
+            && ToStringContainsAnyAcceptedNames(binaryExpression);
+
+        private static bool IsSingleDigit(string text) => byte.TryParse(text, out var result) && result <= 9;
 
         private static bool IsNamedArgument(LiteralExpressionSyntax literalExpression) =>
             literalExpression.Parent is ArgumentSyntax arg
             && arg.NameColon is not null;
 
-        // Either it is the only argument of the attribute, or it is a named argument.
-        private static bool IsInAllowedAttribute(LiteralExpressionSyntax literalExpression) =>
+        private static bool IsSingleOrNamedAttributeArgument(LiteralExpressionSyntax literalExpression) =>
             literalExpression.Parent is AttributeArgumentSyntax arg
             && (arg.NameColon is not null
                 || arg.NameEquals is not null
@@ -95,6 +106,12 @@ namespace SonarAnalyzer.Rules.CSharp
             }
             var parent = node.Parent;
             return parent is ReturnStatementSyntax || parent is EqualsValueClauseSyntax;
+        }
+
+        private static bool ToStringContainsAnyAcceptedNames(SyntaxNode syntaxNode)
+        {
+            var toString = syntaxNode.ToString().ToLower();
+            return AcceptedNamesForSingleDigitComparison.Any(x => toString.Contains(x));
         }
     }
 }

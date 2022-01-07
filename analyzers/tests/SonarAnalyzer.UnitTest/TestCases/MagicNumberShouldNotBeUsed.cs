@@ -15,6 +15,8 @@ namespace Tests.Diagnostics
     public class FooBar
     {
         public int Size { get; set; }
+        public int COUNT { get; set; }
+        public int length { get; set; }
     }
 
     public class ValidUseCases
@@ -50,10 +52,12 @@ namespace Tests.Diagnostics
 
             }
 
-            var result = list.Count == 9; // Compliant, single digit for Count
-            result = list.Count < 4; // Noncompliant FP - Compliant, single digit for Count
-            result = s.Length == 2; // Noncompliant FP - Compliant, single digit for Length
-            result = foo.Size == 2; // Noncompliant FP - Compliant, single digit for Size
+            var result = list.Count == 1; // Compliant, single digit for Count
+            result = list.Count < 2; // Compliant, single digit for Count
+            result = s.Length == 3; // Compliant, single digit for Length
+            result = foo.Size == 4; // Compliant, single digit for Size
+            result = foo.COUNT == 8; // Compliant, single digit for Size
+            result = foo.length == 9; // Compliant, single digit for Size
 
             const int VAL = 15;
 
@@ -105,6 +109,8 @@ namespace Tests.Diagnostics
             result = list.Count < 400; // Noncompliant
             result = s.Length == 121; // Noncompliant
             result = foo.Size == 472; // Noncompliant
+            var x = 1;
+            result = x == 2; // Noncompliant
         }
 
         [Foo(42, 43)] // Noncompliant
