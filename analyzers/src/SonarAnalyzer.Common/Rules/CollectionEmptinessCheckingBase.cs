@@ -64,9 +64,9 @@ namespace SonarAnalyzer.Rules
             countLocation = null;
             typeArgument = null;
 
-            if (Language.Syntax.NodeIdentifier(expression)?.Parent is { } expressionName
-                && Language.Syntax.InvocationIdentifier(expression)?.ValueText == nameof(Enumerable.Count)
-                && (semanticModel.GetSymbolInfo(expressionName.Parent).Symbol is IMethodSymbol methodSymbol)
+            if (Language.Syntax.NodeIdentifier(expression) is { } identifier
+                && identifier.ValueText == nameof(Enumerable.Count)
+                && (semanticModel.GetSymbolInfo(identifier.Parent.Parent).Symbol is IMethodSymbol methodSymbol)
                 && IsMethodCountExtension(methodSymbol)
                 && methodSymbol.IsExtensionOn(KnownType.System_Collections_Generic_IEnumerable_T))
             {
@@ -74,7 +74,7 @@ namespace SonarAnalyzer.Rules
                 {
                     typeArgument = methodSymbol.TypeArguments.Single().ToDisplayString();
                 }
-                countLocation = expressionName.GetLocation();
+                countLocation = identifier.Parent.GetLocation();
                 return true;
             }
             else
