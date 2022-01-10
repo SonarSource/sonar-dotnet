@@ -31,7 +31,7 @@ using SonarAnalyzer.Helpers;
 using SonarAnalyzer.Rules;
 using SonarAnalyzer.Utilities;
 
-namespace SonarAnalyzer.UnitTest.ResourceTests
+namespace SonarAnalyzer.UnitTest.PackagingTests
 {
     [TestClass]
     public class GeneratedResourcesTest
