@@ -15,7 +15,7 @@ Namespace Tests.Diagnostics
         End Function
 
         Private Function HasContent2(l As IEnumerable(Of String)) As Boolean
-            Return Enumerable.Count(l) >= &HE1 ' FN {{Hexadecimals are not picked up.}}
+            Return Enumerable.Count(l) >= &HE1 ' FN. Hexadecimals are not picked up.
         End Function
 
         Private Function HasContent2b(l As IEnumerable(Of String)) As Boolean
