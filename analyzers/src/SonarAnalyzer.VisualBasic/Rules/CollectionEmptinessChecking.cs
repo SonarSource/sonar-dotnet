@@ -21,21 +21,16 @@
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Diagnostics;
 using Microsoft.CodeAnalysis.VisualBasic;
-using Microsoft.CodeAnalysis.VisualBasic.Syntax;
+using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
 
 namespace SonarAnalyzer.Rules.VisualBasic
 {
+    [Rule(DiagnosticId)]
     [DiagnosticAnalyzer(LanguageNames.VisualBasic)]
     public sealed class CollectionEmptinessChecking : CollectionEmptinessCheckingBase<SyntaxKind>
     {
         protected override string MessageFormat => "Use '.Any()' to test whether this 'IEnumerable(Of {0})' is empty or not.";
         protected override ILanguageFacade<SyntaxKind> Language => VisualBasicFacade.Instance;
-
-        protected override SyntaxNode GetMemberAccess(SyntaxNode invocation) =>
-            (invocationSyntax as InvocationExpressionSyntax)?.Expression as MemberAccessExpressionSyntax;
-
-        protected override Location GetLocation(SyntaxNode node) =>
-             ((MemberAccessExpressionSyntax)node).Name.GetLocation();
     }
 }

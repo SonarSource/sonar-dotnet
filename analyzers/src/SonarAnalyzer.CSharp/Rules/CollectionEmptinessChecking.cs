@@ -20,23 +20,17 @@
 
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
-using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
 
 namespace SonarAnalyzer.Rules.CSharp
 {
+    [Rule(DiagnosticId)]
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
     public sealed class CollectionEmptinessChecking : CollectionEmptinessCheckingBase<SyntaxKind>
     {
         protected override string MessageFormat => "Use '.Any()' to test whether this 'IEnumerable<{0}>' is empty or not.";
         protected override ILanguageFacade<SyntaxKind> Language => CSharpFacade.Instance;
-
-        protected override SyntaxNode GetMemberAccess(SyntaxNode invocationSyntax) =>
-            (invocationSyntax as InvocationExpressionSyntax)?.Expression as MemberAccessExpressionSyntax;
-
-        protected override Location GetLocation(SyntaxNode node) =>
-             ((MemberAccessExpressionSyntax)node).Name.GetLocation();
     }
 }

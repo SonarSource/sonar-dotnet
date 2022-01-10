@@ -28,12 +28,9 @@ namespace SonarAnalyzer.Rules
     public abstract class CollectionEmptinessCheckingBase<TSyntaxKind> : SonarDiagnosticAnalyzer<TSyntaxKind>
         where TSyntaxKind : struct
     {
-        private const string DiagnosticId = "S1155";
+        internal const string DiagnosticId = "S1155";
 
         protected CollectionEmptinessCheckingBase() : base(DiagnosticId) { }
-
-        protected abstract SyntaxNode GetMemberAccess(SyntaxNode invocationSyntax);
-        protected abstract Location GetLocation(SyntaxNode node);
 
         protected override void Initialize(SonarAnalysisContext context) =>
             context.RegisterSyntaxNodeActionInNonGenerated(Language.GeneratedCodeRecognizer,
@@ -67,9 +64,9 @@ namespace SonarAnalyzer.Rules
             countLocation = null;
             typeArgument = null;
 
-            if (GetMemberAccess(expression) is { } memberAccess
+            if (Language.Syntax.NodeIdentifier(expression)?.Parent is { } expressionName
                 && Language.Syntax.InvocationIdentifier(expression)?.ValueText == nameof(Enumerable.Count)
-                && (semanticModel.GetSymbolInfo(memberAccess).Symbol is IMethodSymbol methodSymbol)
+                && (semanticModel.GetSymbolInfo(expressionName.Parent).Symbol is IMethodSymbol methodSymbol)
                 && IsMethodCountExtension(methodSymbol)
                 && methodSymbol.IsExtensionOn(KnownType.System_Collections_Generic_IEnumerable_T))
             {
@@ -77,7 +74,7 @@ namespace SonarAnalyzer.Rules
                 {
                     typeArgument = methodSymbol.TypeArguments.Single().ToDisplayString();
                 }
-                countLocation = GetLocation(memberAccess);
+                countLocation = expressionName.GetLocation();
                 return true;
             }
             else
