@@ -32,7 +32,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
         protected override string MessageFormat => "Use '.Any()' to test whether this IEnumerable is empty or not.";
         protected override ILanguageFacade<SyntaxKind> Language => VisualBasicFacade.Instance;
 
-        protected override SyntaxNode GetMemberAccess(SyntaxNode invocationSyntax) =>
+        protected override SyntaxNode GetMemberAccess(SyntaxNode invocation) =>
             (invocationSyntax as InvocationExpressionSyntax)?.Expression as MemberAccessExpressionSyntax;
 
         protected override Location GetLocation(SyntaxNode node) =>
