@@ -41,19 +41,6 @@
 },
 {
 "id":  "S109",
-"message":  "Assign this magic number '3' to a well-named (variable|constant), and use the (variable|constant) instead.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Journal\JournalSpec.cs",
-"region":  {
-"startLine":  168,
-"startColumn":  45,
-"endLine":  168,
-"endColumn":  46
-}
-}
-},
-{
-"id":  "S109",
 "message":  "Assign this magic number '5' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
 "uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Journal\JournalSpec.cs",
@@ -75,19 +62,6 @@
 "startColumn":  83,
 "endLine":  170,
 "endColumn":  85
-}
-}
-},
-{
-"id":  "S109",
-"message":  "Assign this magic number '3' to a well-named (variable|constant), and use the (variable|constant) instead.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Journal\JournalSpec.cs",
-"region":  {
-"startLine":  176,
-"startColumn":  48,
-"endLine":  176,
-"endColumn":  49
 }
 }
 },
@@ -123,19 +97,6 @@
 "location":  {
 "uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Journal\JournalSpec.cs",
 "region":  {
-"startLine":  184,
-"startColumn":  63,
-"endLine":  184,
-"endColumn":  64
-}
-}
-},
-{
-"id":  "S109",
-"message":  "Assign this magic number '3' to a well-named (variable|constant), and use the (variable|constant) instead.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Journal\JournalSpec.cs",
-"region":  {
 "startLine":  185,
 "startColumn":  34,
 "endLine":  185,
@@ -153,32 +114,6 @@
 "startColumn":  83,
 "endLine":  186,
 "endColumn":  85
-}
-}
-},
-{
-"id":  "S109",
-"message":  "Assign this magic number '2' to a well-named (variable|constant), and use the (variable|constant) instead.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Journal\JournalSpec.cs",
-"region":  {
-"startLine":  192,
-"startColumn":  45,
-"endLine":  192,
-"endColumn":  46
-}
-}
-},
-{
-"id":  "S109",
-"message":  "Assign this magic number '3' to a well-named (variable|constant), and use the (variable|constant) instead.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Journal\JournalSpec.cs",
-"region":  {
-"startLine":  192,
-"startColumn":  48,
-"endLine":  192,
-"endColumn":  49
 }
 }
 },
@@ -205,45 +140,6 @@
 "startColumn":  83,
 "endLine":  194,
 "endColumn":  85
-}
-}
-},
-{
-"id":  "S109",
-"message":  "Assign this magic number '2' to a well-named (variable|constant), and use the (variable|constant) instead.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Journal\JournalSpec.cs",
-"region":  {
-"startLine":  200,
-"startColumn":  45,
-"endLine":  200,
-"endColumn":  46
-}
-}
-},
-{
-"id":  "S109",
-"message":  "Assign this magic number '5' to a well-named (variable|constant), and use the (variable|constant) instead.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Journal\JournalSpec.cs",
-"region":  {
-"startLine":  200,
-"startColumn":  48,
-"endLine":  200,
-"endColumn":  49
-}
-}
-},
-{
-"id":  "S109",
-"message":  "Assign this magic number '2' to a well-named (variable|constant), and use the (variable|constant) instead.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Journal\JournalSpec.cs",
-"region":  {
-"startLine":  200,
-"startColumn":  51,
-"endLine":  200,
-"endColumn":  52
 }
 }
 },
@@ -279,32 +175,6 @@
 "location":  {
 "uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Journal\JournalSpec.cs",
 "region":  {
-"startLine":  208,
-"startColumn":  45,
-"endLine":  208,
-"endColumn":  46
-}
-}
-},
-{
-"id":  "S109",
-"message":  "Assign this magic number '2' to a well-named (variable|constant), and use the (variable|constant) instead.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Journal\JournalSpec.cs",
-"region":  {
-"startLine":  208,
-"startColumn":  48,
-"endLine":  208,
-"endColumn":  49
-}
-}
-},
-{
-"id":  "S109",
-"message":  "Assign this magic number '2' to a well-named (variable|constant), and use the (variable|constant) instead.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Journal\JournalSpec.cs",
-"region":  {
 "startLine":  209,
 "startColumn":  81,
 "endLine":  209,
@@ -322,32 +192,6 @@
 "startColumn":  83,
 "endLine":  210,
 "endColumn":  85
-}
-}
-},
-{
-"id":  "S109",
-"message":  "Assign this magic number '2' to a well-named (variable|constant), and use the (variable|constant) instead.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Journal\JournalSpec.cs",
-"region":  {
-"startLine":  216,
-"startColumn":  45,
-"endLine":  216,
-"endColumn":  46
-}
-}
-},
-{
-"id":  "S109",
-"message":  "Assign this magic number '4' to a well-named (variable|constant), and use the (variable|constant) instead.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Journal\JournalSpec.cs",
-"region":  {
-"startLine":  216,
-"startColumn":  48,
-"endLine":  216,
-"endColumn":  49
 }
 }
 },
@@ -379,32 +223,6 @@
 },
 {
 "id":  "S109",
-"message":  "Assign this magic number '2' to a well-named (variable|constant), and use the (variable|constant) instead.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Journal\JournalSpec.cs",
-"region":  {
-"startLine":  224,
-"startColumn":  45,
-"endLine":  224,
-"endColumn":  46
-}
-}
-},
-{
-"id":  "S109",
-"message":  "Assign this magic number '4' to a well-named (variable|constant), and use the (variable|constant) instead.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Journal\JournalSpec.cs",
-"region":  {
-"startLine":  224,
-"startColumn":  48,
-"endLine":  224,
-"endColumn":  49
-}
-}
-},
-{
-"id":  "S109",
 "message":  "Assign this magic number '5' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
 "uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Journal\JournalSpec.cs",
@@ -413,32 +231,6 @@
 "startColumn":  83,
 "endLine":  225,
 "endColumn":  85
-}
-}
-},
-{
-"id":  "S109",
-"message":  "Assign this magic number '3' to a well-named (variable|constant), and use the (variable|constant) instead.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Journal\JournalSpec.cs",
-"region":  {
-"startLine":  231,
-"startColumn":  45,
-"endLine":  231,
-"endColumn":  46
-}
-}
-},
-{
-"id":  "S109",
-"message":  "Assign this magic number '2' to a well-named (variable|constant), and use the (variable|constant) instead.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Journal\JournalSpec.cs",
-"region":  {
-"startLine":  231,
-"startColumn":  48,
-"endLine":  231,
-"endColumn":  49
 }
 }
 },
@@ -496,19 +288,6 @@
 },
 {
 "id":  "S109",
-"message":  "Assign this magic number '200' to a well-named (variable|constant), and use the (variable|constant) instead.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Journal\JournalSpec.cs",
-"region":  {
-"startLine":  258,
-"startColumn":  66,
-"endLine":  258,
-"endColumn":  69
-}
-}
-},
-{
-"id":  "S109",
 "message":  "Assign this magic number '5' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
 "uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Journal\JournalSpec.cs",
@@ -530,19 +309,6 @@
 "startColumn":  83,
 "endLine":  266,
 "endColumn":  85
-}
-}
-},
-{
-"id":  "S109",
-"message":  "Assign this magic number '3' to a well-named (variable|constant), and use the (variable|constant) instead.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Journal\JournalSpec.cs",
-"region":  {
-"startLine":  268,
-"startColumn":  52,
-"endLine":  268,
-"endColumn":  54
 }
 }
 },
@@ -634,19 +400,6 @@
 "startColumn":  40,
 "endLine":  310,
 "endColumn":  42
-}
-}
-},
-{
-"id":  "S109",
-"message":  "Assign this magic number '6' to a well-named (variable|constant), and use the (variable|constant) instead.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Journal\JournalSpec.cs",
-"region":  {
-"startLine":  315,
-"startColumn":  45,
-"endLine":  315,
-"endColumn":  47
 }
 }
 },
@@ -756,19 +509,6 @@
 },
 {
 "id":  "S109",
-"message":  "Assign this magic number '100' to a well-named (variable|constant), and use the (variable|constant) instead.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Query\AllEventsSpec.cs",
-"region":  {
-"startLine":  56,
-"startColumn":  57,
-"endLine":  56,
-"endColumn":  60
-}
-}
-},
-{
-"id":  "S109",
 "message":  "Assign this magic number '2' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
 "uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Query\AllEventsSpec.cs",
@@ -777,19 +517,6 @@
 "startColumn":  92,
 "endLine":  63,
 "endColumn":  94
-}
-}
-},
-{
-"id":  "S109",
-"message":  "Assign this magic number '100' to a well-named (variable|constant), and use the (variable|constant) instead.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Query\AllEventsSpec.cs",
-"region":  {
-"startLine":  65,
-"startColumn":  57,
-"endLine":  65,
-"endColumn":  60
 }
 }
 },
@@ -899,19 +626,6 @@
 },
 {
 "id":  "S109",
-"message":  "Assign this magic number '500' to a well-named (variable|constant), and use the (variable|constant) instead.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Query\CurrentAllEventsSpec.cs",
-"region":  {
-"startLine":  70,
-"startColumn":  57,
-"endLine":  70,
-"endColumn":  60
-}
-}
-},
-{
-"id":  "S109",
 "message":  "Assign this magic number '2' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
 "uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Query\CurrentAllEventsSpec.cs",
@@ -959,32 +673,6 @@
 "startColumn":  92,
 "endLine":  99,
 "endColumn":  94
-}
-}
-},
-{
-"id":  "S109",
-"message":  "Assign this magic number '100' to a well-named (variable|constant), and use the (variable|constant) instead.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Query\CurrentAllEventsSpec.cs",
-"region":  {
-"startLine":  100,
-"startColumn":  57,
-"endLine":  100,
-"endColumn":  60
-}
-}
-},
-{
-"id":  "S109",
-"message":  "Assign this magic number '100' to a well-named (variable|constant), and use the (variable|constant) instead.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Query\CurrentAllEventsSpec.cs",
-"region":  {
-"startLine":  105,
-"startColumn":  57,
-"endLine":  105,
-"endColumn":  60
 }
 }
 },
@@ -1068,19 +756,6 @@
 },
 {
 "id":  "S109",
-"message":  "Assign this magic number '500' to a well-named (variable|constant), and use the (variable|constant) instead.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Query\CurrentAllEventsSpec.cs",
-"region":  {
-"startLine":  164,
-"startColumn":  57,
-"endLine":  164,
-"endColumn":  60
-}
-}
-},
-{
-"id":  "S109",
 "message":  "Assign this magic number '2' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
 "uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Query\CurrentEventsByPersistenceIdSpec.cs",
@@ -1089,19 +764,6 @@
 "startColumn":  27,
 "endLine":  48,
 "endColumn":  28
-}
-}
-},
-{
-"id":  "S109",
-"message":  "Assign this magic number '500' to a well-named (variable|constant), and use the (variable|constant) instead.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Query\CurrentEventsByPersistenceIdSpec.cs",
-"region":  {
-"startLine":  50,
-"startColumn":  56,
-"endLine":  50,
-"endColumn":  59
 }
 }
 },
@@ -1120,19 +782,6 @@
 },
 {
 "id":  "S109",
-"message":  "Assign this magic number '100' to a well-named (variable|constant), and use the (variable|constant) instead.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Query\CurrentEventsByPersistenceIdSpec.cs",
-"region":  {
-"startLine":  82,
-"startColumn":  57,
-"endLine":  82,
-"endColumn":  60
-}
-}
-},
-{
-"id":  "S109",
 "message":  "Assign this magic number '5' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
 "uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Query\CurrentEventsByPersistenceIdSpec.cs",
@@ -1141,45 +790,6 @@
 "startColumn":  27,
 "endLine":  83,
 "endColumn":  28
-}
-}
-},
-{
-"id":  "S109",
-"message":  "Assign this magic number '3' to a well-named (variable|constant), and use the (variable|constant) instead.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Query\CurrentEventsByPersistenceIdSpec.cs",
-"region":  {
-"startLine":  94,
-"startColumn":  51,
-"endLine":  94,
-"endColumn":  52
-}
-}
-},
-{
-"id":  "S109",
-"message":  "Assign this magic number '3' to a well-named (variable|constant), and use the (variable|constant) instead.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Query\CurrentEventsByPersistenceIdSpec.cs",
-"region":  {
-"startLine":  107,
-"startColumn":  51,
-"endLine":  107,
-"endColumn":  52
-}
-}
-},
-{
-"id":  "S109",
-"message":  "Assign this magic number '2' to a well-named (variable|constant), and use the (variable|constant) instead.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Query\CurrentEventsByPersistenceIdSpec.cs",
-"region":  {
-"startLine":  120,
-"startColumn":  51,
-"endLine":  120,
-"endColumn":  52
 }
 }
 },
@@ -1232,19 +842,6 @@
 "startColumn":  92,
 "endLine":  63,
 "endColumn":  94
-}
-}
-},
-{
-"id":  "S109",
-"message":  "Assign this magic number '500' to a well-named (variable|constant), and use the (variable|constant) instead.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Query\CurrentEventsByTagSpec.cs",
-"region":  {
-"startLine":  64,
-"startColumn":  57,
-"endLine":  64,
-"endColumn":  60
 }
 }
 },
@@ -1367,32 +964,6 @@
 },
 {
 "id":  "S109",
-"message":  "Assign this magic number '100' to a well-named (variable|constant), and use the (variable|constant) instead.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Query\CurrentEventsByTagSpec.cs",
-"region":  {
-"startLine":  113,
-"startColumn":  57,
-"endLine":  113,
-"endColumn":  60
-}
-}
-},
-{
-"id":  "S109",
-"message":  "Assign this magic number '100' to a well-named (variable|constant), and use the (variable|constant) instead.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Query\CurrentEventsByTagSpec.cs",
-"region":  {
-"startLine":  118,
-"startColumn":  57,
-"endLine":  118,
-"endColumn":  60
-}
-}
-},
-{
-"id":  "S109",
 "message":  "Assign this magic number '5' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
 "uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Query\CurrentEventsByTagSpec.cs",
@@ -1510,19 +1081,6 @@
 },
 {
 "id":  "S109",
-"message":  "Assign this magic number '500' to a well-named (variable|constant), and use the (variable|constant) instead.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Query\CurrentEventsByTagSpec.cs",
-"region":  {
-"startLine":  185,
-"startColumn":  57,
-"endLine":  185,
-"endColumn":  60
-}
-}
-},
-{
-"id":  "S109",
 "message":  "Assign this magic number '2' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
 "uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Query\CurrentEventsByTagSpec.cs",
@@ -1531,19 +1089,6 @@
 "startColumn":  27,
 "endLine":  203,
 "endColumn":  28
-}
-}
-},
-{
-"id":  "S109",
-"message":  "Assign this magic number '10' to a well-named (variable|constant), and use the (variable|constant) instead.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Query\CurrentPersistenceIdsSpec.cs",
-"region":  {
-"startLine":  50,
-"startColumn":  47,
-"endLine":  50,
-"endColumn":  49
 }
 }
 },
@@ -1579,19 +1124,6 @@
 "location":  {
 "uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Query\CurrentPersistenceIdsSpec.cs",
 "region":  {
-"startLine":  65,
-"startColumn":  47,
-"endLine":  65,
-"endColumn":  49
-}
-}
-},
-{
-"id":  "S109",
-"message":  "Assign this magic number '10' to a well-named (variable|constant), and use the (variable|constant) instead.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Query\CurrentPersistenceIdsSpec.cs",
-"region":  {
 "startLine":  66,
 "startColumn":  31,
 "endLine":  66,
@@ -1614,32 +1146,6 @@
 },
 {
 "id":  "S109",
-"message":  "Assign this magic number '100' to a well-named (variable|constant), and use the (variable|constant) instead.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Query\CurrentPersistenceIdsSpec.cs",
-"region":  {
-"startLine":  86,
-"startColumn":  56,
-"endLine":  86,
-"endColumn":  59
-}
-}
-},
-{
-"id":  "S109",
-"message":  "Assign this magic number '100' to a well-named (variable|constant), and use the (variable|constant) instead.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Query\CurrentPersistenceIdsSpec.cs",
-"region":  {
-"startLine":  90,
-"startColumn":  57,
-"endLine":  90,
-"endColumn":  60
-}
-}
-},
-{
-"id":  "S109",
 "message":  "Assign this magic number '5' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
 "uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Query\CurrentPersistenceIdsSpec.cs",
@@ -1648,19 +1154,6 @@
 "startColumn":  27,
 "endLine":  91,
 "endColumn":  28
-}
-}
-},
-{
-"id":  "S109",
-"message":  "Assign this magic number '100' to a well-named (variable|constant), and use the (variable|constant) instead.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Query\EventsByPersistenceIdSpec.cs",
-"region":  {
-"startLine":  89,
-"startColumn":  57,
-"endLine":  89,
-"endColumn":  60
 }
 }
 },
@@ -1700,32 +1193,6 @@
 "startColumn":  27,
 "endLine":  53,
 "endColumn":  28
-}
-}
-},
-{
-"id":  "S109",
-"message":  "Assign this magic number '100' to a well-named (variable|constant), and use the (variable|constant) instead.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Query\EventsByTagSpec.cs",
-"region":  {
-"startLine":  55,
-"startColumn":  57,
-"endLine":  55,
-"endColumn":  60
-}
-}
-},
-{
-"id":  "S109",
-"message":  "Assign this magic number '100' to a well-named (variable|constant), and use the (variable|constant) instead.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Query\EventsByTagSpec.cs",
-"region":  {
-"startLine":  63,
-"startColumn":  57,
-"endLine":  63,
-"endColumn":  60
 }
 }
 },
@@ -1809,32 +1276,6 @@
 },
 {
 "id":  "S109",
-"message":  "Assign this magic number '100' to a well-named (variable|constant), and use the (variable|constant) instead.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Query\EventsByTagSpec.cs",
-"region":  {
-"startLine":  105,
-"startColumn":  58,
-"endLine":  105,
-"endColumn":  61
-}
-}
-},
-{
-"id":  "S109",
-"message":  "Assign this magic number '10' to a well-named (variable|constant), and use the (variable|constant) instead.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Query\PersistenceIdsSpec.cs",
-"region":  {
-"startLine":  62,
-"startColumn":  47,
-"endLine":  62,
-"endColumn":  49
-}
-}
-},
-{
-"id":  "S109",
 "message":  "Assign this magic number '5' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
 "uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Query\PersistenceIdsSpec.cs",
@@ -1843,58 +1284,6 @@
 "startColumn":  72,
 "endLine":  62,
 "endColumn":  73
-}
-}
-},
-{
-"id":  "S109",
-"message":  "Assign this magic number '10' to a well-named (variable|constant), and use the (variable|constant) instead.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Query\PersistenceIdsSpec.cs",
-"region":  {
-"startLine":  65,
-"startColumn":  56,
-"endLine":  65,
-"endColumn":  58
-}
-}
-},
-{
-"id":  "S109",
-"message":  "Assign this magic number '10' to a well-named (variable|constant), and use the (variable|constant) instead.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Query\PersistenceIdsSpec.cs",
-"region":  {
-"startLine":  79,
-"startColumn":  47,
-"endLine":  79,
-"endColumn":  49
-}
-}
-},
-{
-"id":  "S109",
-"message":  "Assign this magic number '100' to a well-named (variable|constant), and use the (variable|constant) instead.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Query\PersistenceIdsSpec.cs",
-"region":  {
-"startLine":  82,
-"startColumn":  68,
-"endLine":  82,
-"endColumn":  71
-}
-}
-},
-{
-"id":  "S109",
-"message":  "Assign this magic number '10' to a well-named (variable|constant), and use the (variable|constant) instead.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Query\PersistenceIdsSpec.cs",
-"region":  {
-"startLine":  86,
-"startColumn":  47,
-"endLine":  86,
-"endColumn":  49
 }
 }
 },
@@ -1991,19 +1380,6 @@
 },
 {
 "id":  "S109",
-"message":  "Assign this magic number '10' to a well-named (variable|constant), and use the (variable|constant) instead.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Query\PersistenceIdsSpec.cs",
-"region":  {
-"startLine":  110,
-"startColumn":  47,
-"endLine":  110,
-"endColumn":  49
-}
-}
-},
-{
-"id":  "S109",
 "message":  "Assign this magic number '3' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
 "uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Query\PersistenceIdsSpec.cs",
@@ -2017,32 +1393,6 @@
 },
 {
 "id":  "S109",
-"message":  "Assign this magic number '200' to a well-named (variable|constant), and use the (variable|constant) instead.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Query\PersistenceIdsSpec.cs",
-"region":  {
-"startLine":  114,
-"startColumn":  56,
-"endLine":  114,
-"endColumn":  59
-}
-}
-},
-{
-"id":  "S109",
-"message":  "Assign this magic number '10' to a well-named (variable|constant), and use the (variable|constant) instead.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Query\PersistenceIdsSpec.cs",
-"region":  {
-"startLine":  116,
-"startColumn":  47,
-"endLine":  116,
-"endColumn":  49
-}
-}
-},
-{
-"id":  "S109",
 "message":  "Assign this magic number '3' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
 "uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Query\PersistenceIdsSpec.cs",
@@ -2051,32 +1401,6 @@
 "startColumn":  72,
 "endLine":  116,
 "endColumn":  73
-}
-}
-},
-{
-"id":  "S109",
-"message":  "Assign this magic number '200' to a well-named (variable|constant), and use the (variable|constant) instead.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Query\PersistenceIdsSpec.cs",
-"region":  {
-"startLine":  120,
-"startColumn":  56,
-"endLine":  120,
-"endColumn":  59
-}
-}
-},
-{
-"id":  "S109",
-"message":  "Assign this magic number '10' to a well-named (variable|constant), and use the (variable|constant) instead.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Query\PersistenceIdsSpec.cs",
-"region":  {
-"startLine":  137,
-"startColumn":  47,
-"endLine":  137,
-"endColumn":  49
 }
 }
 },
@@ -2095,19 +1419,6 @@
 },
 {
 "id":  "S109",
-"message":  "Assign this magic number '1000' to a well-named (variable|constant), and use the (variable|constant) instead.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Query\PersistenceIdsSpec.cs",
-"region":  {
-"startLine":  142,
-"startColumn":  61,
-"endLine":  142,
-"endColumn":  65
-}
-}
-},
-{
-"id":  "S109",
 "message":  "Assign this magic number '2' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
 "uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Query\PersistenceIdsSpec.cs",
@@ -2116,19 +1427,6 @@
 "startColumn":  31,
 "endLine":  144,
 "endColumn":  32
-}
-}
-},
-{
-"id":  "S109",
-"message":  "Assign this magic number '1000' to a well-named (variable|constant), and use the (variable|constant) instead.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Query\PersistenceIdsSpec.cs",
-"region":  {
-"startLine":  147,
-"startColumn":  61,
-"endLine":  147,
-"endColumn":  65
 }
 }
 },
@@ -2151,36 +1449,10 @@
 "location":  {
 "uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Query\PersistenceIdsSpec.cs",
 "region":  {
-"startLine":  163,
-"startColumn":  47,
-"endLine":  163,
-"endColumn":  49
-}
-}
-},
-{
-"id":  "S109",
-"message":  "Assign this magic number '10' to a well-named (variable|constant), and use the (variable|constant) instead.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Query\PersistenceIdsSpec.cs",
-"region":  {
 "startLine":  165,
 "startColumn":  38,
 "endLine":  165,
 "endColumn":  40
-}
-}
-},
-{
-"id":  "S109",
-"message":  "Assign this magic number '200' to a well-named (variable|constant), and use the (variable|constant) instead.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Query\PersistenceIdsSpec.cs",
-"region":  {
-"startLine":  167,
-"startColumn":  60,
-"endLine":  167,
-"endColumn":  63
 }
 }
 },
@@ -2203,49 +1475,10 @@
 "location":  {
 "uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Query\PersistenceIdsSpec.cs",
 "region":  {
-"startLine":  172,
-"startColumn":  47,
-"endLine":  172,
-"endColumn":  49
-}
-}
-},
-{
-"id":  "S109",
-"message":  "Assign this magic number '10' to a well-named (variable|constant), and use the (variable|constant) instead.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Query\PersistenceIdsSpec.cs",
-"region":  {
 "startLine":  174,
 "startColumn":  38,
 "endLine":  174,
 "endColumn":  40
-}
-}
-},
-{
-"id":  "S109",
-"message":  "Assign this magic number '200' to a well-named (variable|constant), and use the (variable|constant) instead.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Query\PersistenceIdsSpec.cs",
-"region":  {
-"startLine":  176,
-"startColumn":  60,
-"endLine":  176,
-"endColumn":  63
-}
-}
-},
-{
-"id":  "S109",
-"message":  "Assign this magic number '10' to a well-named (variable|constant), and use the (variable|constant) instead.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Query\PersistenceIdsSpec.cs",
-"region":  {
-"startLine":  202,
-"startColumn":  51,
-"endLine":  202,
-"endColumn":  53
 }
 }
 },
@@ -2264,32 +1497,6 @@
 },
 {
 "id":  "S109",
-"message":  "Assign this magic number '200' to a well-named (variable|constant), and use the (variable|constant) instead.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Query\PersistenceIdsSpec.cs",
-"region":  {
-"startLine":  204,
-"startColumn":  60,
-"endLine":  204,
-"endColumn":  63
-}
-}
-},
-{
-"id":  "S109",
-"message":  "Assign this magic number '10' to a well-named (variable|constant), and use the (variable|constant) instead.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Query\PersistenceIdsSpec.cs",
-"region":  {
-"startLine":  211,
-"startColumn":  52,
-"endLine":  211,
-"endColumn":  54
-}
-}
-},
-{
-"id":  "S109",
 "message":  "Assign this magic number '4' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
 "uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Query\PersistenceIdsSpec.cs",
@@ -2298,19 +1505,6 @@
 "startColumn":  78,
 "endLine":  211,
 "endColumn":  79
-}
-}
-},
-{
-"id":  "S109",
-"message":  "Assign this magic number '200' to a well-named (variable|constant), and use the (variable|constant) instead.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Query\PersistenceIdsSpec.cs",
-"region":  {
-"startLine":  213,
-"startColumn":  60,
-"endLine":  213,
-"endColumn":  63
 }
 }
 },
@@ -2407,45 +1601,6 @@
 },
 {
 "id":  "S109",
-"message":  "Assign this magic number '100000' to a well-named (variable|constant), and use the (variable|constant) instead.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Snapshot\SnapshotStoreSpec.cs",
-"region":  {
-"startLine":  119,
-"startColumn":  112,
-"endLine":  119,
-"endColumn":  118
-}
-}
-},
-{
-"id":  "S109",
-"message":  "Assign this magic number '7' to a well-named (variable|constant), and use the (variable|constant) instead.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Snapshot\SnapshotStoreSpec.cs",
-"region":  {
-"startLine":  126,
-"startColumn":  84,
-"endLine":  126,
-"endColumn":  85
-}
-}
-},
-{
-"id":  "S109",
-"message":  "Assign this magic number '7' to a well-named (variable|constant), and use the (variable|constant) instead.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Snapshot\SnapshotStoreSpec.cs",
-"region":  {
-"startLine":  129,
-"startColumn":  88,
-"endLine":  129,
-"endColumn":  89
-}
-}
-},
-{
-"id":  "S109",
 "message":  "Assign this magic number '7' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
 "uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Snapshot\SnapshotStoreSpec.cs",
@@ -2472,19 +1627,6 @@
 },
 {
 "id":  "S109",
-"message":  "Assign this magic number '13' to a well-named (variable|constant), and use the (variable|constant) instead.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Snapshot\SnapshotStoreSpec.cs",
-"region":  {
-"startLine":  147,
-"startColumn":  84,
-"endLine":  147,
-"endColumn":  86
-}
-}
-},
-{
-"id":  "S109",
 "message":  "Assign this magic number '2' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
 "uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Snapshot\SnapshotStoreSpec.cs",
@@ -2493,19 +1635,6 @@
 "startColumn":  61,
 "endLine":  151,
 "endColumn":  62
-}
-}
-},
-{
-"id":  "S109",
-"message":  "Assign this magic number '13' to a well-named (variable|constant), and use the (variable|constant) instead.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Snapshot\SnapshotStoreSpec.cs",
-"region":  {
-"startLine":  154,
-"startColumn":  88,
-"endLine":  154,
-"endColumn":  90
 }
 }
 },
@@ -2532,19 +1661,6 @@
 "startColumn":  61,
 "endLine":  158,
 "endColumn":  62
-}
-}
-},
-{
-"id":  "S109",
-"message":  "Assign this magic number '13' to a well-named (variable|constant), and use the (variable|constant) instead.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Snapshot\SnapshotStoreSpec.cs",
-"region":  {
-"startLine":  165,
-"startColumn":  84,
-"endLine":  165,
-"endColumn":  86
 }
 }
 },
@@ -2584,19 +1700,6 @@
 "startColumn":  108,
 "endLine":  172,
 "endColumn":  109
-}
-}
-},
-{
-"id":  "S109",
-"message":  "Assign this magic number '13' to a well-named (variable|constant), and use the (variable|constant) instead.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Snapshot\SnapshotStoreSpec.cs",
-"region":  {
-"startLine":  172,
-"startColumn":  123,
-"endLine":  172,
-"endColumn":  125
 }
 }
 },

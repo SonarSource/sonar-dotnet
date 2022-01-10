@@ -41,32 +41,6 @@
 },
 {
 "id":  "S109",
-"message":  "Assign this magic number '20' to a well-named (variable|constant), and use the (variable|constant) instead.",
-"location":  {
-"uri":  "sources\akka.net\src\contrib\persistence\Akka.Persistence.Sql.Common\Journal\BatchingSqlJournal.cs",
-"region":  {
-"startLine":  146,
-"startColumn":  83,
-"endLine":  146,
-"endColumn":  85
-}
-}
-},
-{
-"id":  "S109",
-"message":  "Assign this magic number '60' to a well-named (variable|constant), and use the (variable|constant) instead.",
-"location":  {
-"uri":  "sources\akka.net\src\contrib\persistence\Akka.Persistence.Sql.Common\Journal\BatchingSqlJournal.cs",
-"region":  {
-"startLine":  147,
-"startColumn":  85,
-"endLine":  147,
-"endColumn":  87
-}
-}
-},
-{
-"id":  "S109",
 "message":  "Assign this magic number '64' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
 "uri":  "sources\akka.net\src\contrib\persistence\Akka.Persistence.Sql.Common\Journal\BatchingSqlJournal.cs",
@@ -101,19 +75,6 @@
 "startColumn":  62,
 "endLine":  287,
 "endColumn":  68
-}
-}
-},
-{
-"id":  "S109",
-"message":  "Assign this magic number '30' to a well-named (variable|constant), and use the (variable|constant) instead.",
-"location":  {
-"uri":  "sources\akka.net\src\contrib\persistence\Akka.Persistence.Sql.Common\Journal\BatchingSqlJournal.cs",
-"region":  {
-"startLine":  289,
-"startColumn":  95,
-"endLine":  289,
-"endColumn":  97
 }
 }
 },

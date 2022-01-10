@@ -129,19 +129,6 @@
 "endColumn":  39
 }
 }
-},
-{
-"id":  "S109",
-"message":  "Assign this magic number '3' to a well-named (variable|constant), and use the (variable|constant) instead.",
-"location":  {
-"uri":  "sources\akka.net\src\benchmark\RemotePingPong\Program.cs",
-"region":  {
-"startLine":  221,
-"startColumn":  33,
-"endLine":  221,
-"endColumn":  34
-}
-}
 }
 ]
 }
