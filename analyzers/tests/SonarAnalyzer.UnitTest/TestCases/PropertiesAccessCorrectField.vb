@@ -63,7 +63,7 @@ Namespace Tests.Diagnostics
             End Set
         End Property
 
-        Public ReadOnly Property _Y___Y_Y_ As String
+        Public ReadOnly Property _Y___Y_Y_ As Integer
             Get
                 Return __x__X ' Noncompliant
             End Get
@@ -76,10 +76,10 @@ Namespace Tests.Diagnostics
 
         Public Property AAA As String
             Get
-                Return aString ' Noncompliant - field called 'aaa' exists, even though type is different
+                Return aString ' Compliant - field called 'aaa' exists, but type is different
             End Get
             Set(ByVal value As String)
-                aString = value ' Noncompliant
+                aString = value ' Compliant - field called 'aaa' exists, but type is different
             End Set
         End Property
     End Class
@@ -90,7 +90,7 @@ Namespace Tests.Diagnostics
 
         Public WriteOnly Property AAA As String
             Set(ByVal value As String)
-                aString = "foo" & value ' Noncompliant
+                aString = "foo" & value ' Compliant - field called 'aaa' exists, but type is different
             End Set
         End Property
     End Class
@@ -526,11 +526,11 @@ Namespace Tests.Diagnostics
             _BodyValue = Value
         End Sub
 
-        Public Property TooNested
+        Public Property TooNested As Integer
             Get         ' Noncompliant, only one level Of nesting Is supported
                 Return GetTooNestedA()
             End Get
-            Set(value)  ' Noncompliant, only one level Of nesting Is supported
+            Set(value As Integer)  ' Noncompliant, only one level Of nesting Is supported
                 SetTooNestedA(value)
             End Set
         End Property
