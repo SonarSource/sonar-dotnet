@@ -253,7 +253,7 @@ namespace SonarAnalyzer.Rules
             private bool FieldMatchesTheProperty(IFieldSymbol field, IPropertySymbol property) =>
                 // We're not caching the property name as only expect to be called once per property
                 AreCanonicalNamesEqual(fieldToStandardNameMap[field], GetCanonicalFieldName(property.Name))
-                    && field.Type == property.Type
+                    && field.Type.Equals(property.Type)
                     && ((property.IsStatic && field.IsStatic) || (!property.IsStatic && !field.IsStatic))
                     && !field.IsConst;
         }
