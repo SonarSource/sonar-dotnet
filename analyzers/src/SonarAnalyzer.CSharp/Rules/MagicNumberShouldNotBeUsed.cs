@@ -45,6 +45,16 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private static readonly string[] AcceptedNamesForSingleDigitComparison = { "size", "count", "length" };
 
+        private static readonly SyntaxKind[] AllowedSingleDigitComparisons =
+        {
+            SyntaxKind.EqualsExpression,
+            SyntaxKind.NotEqualsExpression,
+            SyntaxKind.LessThanOrEqualExpression,
+            SyntaxKind.LessThanExpression,
+            SyntaxKind.GreaterThanExpression,
+            SyntaxKind.GreaterThanOrEqualExpression
+        };
+
         protected override void Initialize(SonarAnalysisContext context) =>
             context.RegisterSyntaxNodeActionInNonGenerated(
                 c =>
@@ -86,6 +96,7 @@ namespace SonarAnalyzer.Rules.CSharp
         private static bool IsSingleDigitInToleratedComparisons(LiteralExpressionSyntax literalExpression) =>
             literalExpression.Parent is BinaryExpressionSyntax binaryExpression
             && IsSingleDigit(literalExpression.Token.ValueText)
+            && binaryExpression.IsAnyKind(AllowedSingleDigitComparisons)
             && ToStringContainsAnyAcceptedNames(binaryExpression);
 
         private static bool IsToleratedArgument(LiteralExpressionSyntax literalExpression) =>
@@ -95,7 +106,12 @@ namespace SonarAnalyzer.Rules.CSharp
         // Named argument or constructor argument.
         private static bool IsToleratedMethodArgument(LiteralExpressionSyntax literalExpression) =>
             literalExpression.Parent is ArgumentSyntax arg
-            && (arg.NameColon is not null || arg.Parent.Parent is ObjectCreationExpressionSyntax);
+            && (arg.NameColon is not null || arg.Parent.Parent is ObjectCreationExpressionSyntax || LooksLikeTimeApi(arg.Parent.Parent));
+
+        private static bool LooksLikeTimeApi(SyntaxNode node) =>
+            node is InvocationExpressionSyntax invocationExpression
+            && invocationExpression.Expression.GetIdentifier() is { } identifier
+            && identifier.Identifier.ValueText.StartsWith("From");
 
         private static bool IsSingleOrNamedAttributeArgument(LiteralExpressionSyntax literalExpression) =>
             literalExpression.Parent is AttributeArgumentSyntax arg

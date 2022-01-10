@@ -63,10 +63,7 @@ namespace Tests.Diagnostics
             int[] values2 = new int[] { 100, 200 }; // Compliant, set to variable
             Console.WriteLine(value: 12); // Compliant, named argument
 
-            for (int i = 0; i < 0; i++)
-            {
-
-            }
+            for (int i = 0; i < 0; i++) { }
 
             var result = list.Count == 1; // Compliant, single digit for Count
             result = list.Count < 2; // Compliant, single digit for Count
@@ -110,7 +107,6 @@ namespace Tests.Diagnostics
         public static int Bar(int value, params int[] values) => 0;
 
         public static void WithTimeSpan(TimeSpan one, TimeSpan two) { }
-
     }
 
     public enum MyEnum
@@ -149,13 +145,22 @@ namespace Tests.Diagnostics
             Foo(new int[] { 100, 200 }); // Noncompliant {{Assign this magic number '100' to a well-named (variable|constant), and use the (variable|constant) instead.}}
             // Noncompliant@-1 {{Assign this magic number '200' to a well-named (variable|constant), and use the (variable|constant) instead.}}
 
+            GetSomeFrom(42); // Noncompliant
+
+            for (int i = 0; i < list.Count / 8; i++) { } // Noncompliant
+
             var result = list.Count == 99;
             result = list.Count < 400; // Noncompliant
             result = s.Length == 121; // Noncompliant
             result = foo.Size == 472; // Noncompliant
             result = foo.baz == 4; // Noncompliant
+            result = s.Length == list.Count / 2 ; // Noncompliant FP - clear it's checking if it's half the list
             var x = 1;
             result = x == 2; // Noncompliant
+            Foo(foo.Size + 41, s.Length - 43, list.Count * 2, list.Count / 8); // Noncompliant
+            // Noncompliant@-1
+            // Noncompliant@-2
+            // Noncompliant@-3
         }
 
         [Foo(42, 43)] // Noncompliant
@@ -165,8 +170,9 @@ namespace Tests.Diagnostics
             return 13; // Noncompliant
         }
 
-        public static void Foo(int[] array) { }
+        public static void Foo(params int[] array) { }
         public static int Foo(int x, int y) => 1;
+        public static void GetSomeFrom(int value) { }
     }
 }
 
