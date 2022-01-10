@@ -68,8 +68,8 @@ namespace SonarAnalyzer.UnitTest.TestFramework
             new(this) { Paths = Paths.Concat(paths).ToImmutableArray() };
 
         public VerifierBuilder AddReferences(IEnumerable<MetadataReference> references) =>
-            references != null && references.Any()
-                ? new(this) { References = References.Concat(references).ToImmutableArray() }
+            references?.ToArray() is { Length: not 0 } referenceArray
+                ? new(this) { References = References.Concat(referenceArray).ToImmutableArray() }
                 : this;
 
         public VerifierBuilder WithErrorBehavior(CompilationErrorBehavior errorBehavior) =>
@@ -93,8 +93,19 @@ namespace SonarAnalyzer.UnitTest.TestFramework
         public VerifierBuilder WithSonarProjectConfigPath(string sonarProjectConfigPath) =>
             new(this) { SonarProjectConfigPath = sonarProjectConfigPath };
 
-        public VerifierBuilder WithTopLevelStatements() =>
-            WithOutputKind(OutputKind.ConsoleApplication);
+        public VerifierBuilder WithTopLevelStatements()
+        {
+            if (ParseOptions.OfType<VB.VisualBasicParseOptions>().Any())
+            {
+                throw new InvalidOperationException($"{nameof(WithTopLevelStatements)} is not supported with {nameof(VB.VisualBasicParseOptions)}.");
+            }
+            if (ParseOptions.Cast<CS.CSharpParseOptions>().Any(x => x.LanguageVersion < CS.LanguageVersion.CSharp9))
+            {
+                throw new InvalidOperationException($"{nameof(WithTopLevelStatements)} is supported from {nameof(CS.LanguageVersion.CSharp9)}.");
+            }
+            return (ParseOptions.IsEmpty ? WithOptions(ParseOptionsHelper.FromCSharp9) : this)
+                .WithOutputKind(OutputKind.ConsoleApplication);
+        }
 
         public Verifier Build() =>
             new(this);

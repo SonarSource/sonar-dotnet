@@ -27,6 +27,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework.Tests
 {
     public partial class IssueLocationCollectorTest
     {
+        [TestMethod]
         public void GetPreciseIssueLocations_NoMessage_NoIds()
         {
             var line = GetLine(3, @"if (a > b)

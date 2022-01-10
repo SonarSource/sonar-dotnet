@@ -18,6 +18,7 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System;
 using System.Linq;
 using FluentAssertions;
 using Microsoft.CodeAnalysis;
@@ -154,8 +155,32 @@ namespace SonarAnalyzer.UnitTest.TestFramework.Tests
         }
 
         [TestMethod]
-        public void WithTopLevelSupport_Overrides_IsImmutable() =>
-            Empty.WithTopLevelStatements().OutputKind.Should().Be(OutputKind.ConsoleApplication);
+        public void WithTopLevelSupport_Overrides_IsImmutable()
+        {
+            var sut = Empty.WithTopLevelStatements();
+            Empty.OutputKind.Should().Be(OutputKind.DynamicallyLinkedLibrary);
+            Empty.ParseOptions.Should().BeEmpty();
+            sut.OutputKind.Should().Be(OutputKind.ConsoleApplication);
+            sut.ParseOptions.Should().BeEquivalentTo(ParseOptionsHelper.FromCSharp9);
+        }
+
+        [TestMethod]
+        public void WithTopLevelSupport_PreservesParseOptions()
+        {
+            var sut = Empty.WithOptions(ParseOptionsHelper.FromCSharp10).WithTopLevelStatements();
+            sut.OutputKind.Should().Be(OutputKind.ConsoleApplication);
+            sut.ParseOptions.Should().BeEquivalentTo(ParseOptionsHelper.FromCSharp10);
+        }
+
+        [TestMethod]
+        public void WithTopLevelSupport_ForVisualBasicOptions_NotSupported() =>
+            Empty.WithOptions(ParseOptionsHelper.FromVisualBasic15).Invoking(x => x.WithTopLevelStatements()).Should().Throw<InvalidOperationException>()
+                .WithMessage("WithTopLevelStatements is not supported with VisualBasicParseOptions.");
+
+        [TestMethod]
+        public void WithTopLevelSupport_ForOldCSharp_NotSupported() =>
+            Empty.WithOptions(ParseOptionsHelper.FromCSharp8).Invoking(x => x.WithTopLevelStatements()).Should().Throw<InvalidOperationException>()
+                .WithMessage("WithTopLevelStatements is supported from CSharp9.");
 
         [TestMethod]
         public void Build_ReturnsVerifier() =>
