@@ -29,13 +29,13 @@ using SonarAnalyzer.Utilities;
 namespace SonarAnalyzer.UnitTest.Common
 {
     [TestClass]
-    public class RuleDescriptorTest
+    public class RuleDetailTest
     {
         [TestMethod]
-        public void RuleDescriptors_NotEmpty()
+        public void RuleDetails_NotEmpty()
         {
-            CheckRuleDescriptorsNotEmpty(AnalyzerLanguage.CSharp);
-            CheckRuleDescriptorsNotEmpty(AnalyzerLanguage.VisualBasic);
+            CheckRuleDetailsNotEmpty(AnalyzerLanguage.CSharp);
+            CheckRuleDetailsNotEmpty(AnalyzerLanguage.VisualBasic);
         }
 
         [TestMethod]
@@ -53,7 +53,7 @@ namespace SonarAnalyzer.UnitTest.Common
             sut.DefaultValue.Should().Be("Secret");
         }
 
-        private static void CheckRuleDescriptorsNotEmpty(AnalyzerLanguage language)
+        private static void CheckRuleDetailsNotEmpty(AnalyzerLanguage language)
         {
             var ruleDetails = RuleDetailBuilder.GetAllRuleDetails(language).ToList();
             foreach (var ruleDetail in ruleDetails)

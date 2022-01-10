@@ -51,7 +51,7 @@ namespace SonarAnalyzer.Utilities
                 .Select(x => CreateRuleDetail(language, resources, x.Key, x.Select(item => item.Type)));
         }
 
-        internal /*for testring*/ static IEnumerable<string> CodeFixTitles(Type codeFixType) =>
+        internal static IEnumerable<string> CodeFixTitles(Type codeFixType) =>
             CodeFixProvidersWithBase(codeFixType)
                 .SelectMany(x => x.GetFields(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Static))
                 .Where(x => x.Name.StartsWith("Title", StringComparison.Ordinal) && x.FieldType == typeof(string))

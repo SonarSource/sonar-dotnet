@@ -54,7 +54,7 @@ namespace SonarAnalyzer.UnitTest.PackagingTests
         [TestMethod]
         public void ThereShouldBeRuleDetailsForAllCSharpRuleClasses()
         {
-            var ruleDetailsKeys = SortedRulesFromDetailbuilder(AnalyzerLanguage.CSharp);
+            var ruleDetailsKeys = SortedRulesFromDetailBuilder(AnalyzerLanguage.CSharp);
             var rulesFromTypes = SortedRulesFromTypes(AnalyzerLanguage.CSharp);
             ruleDetailsKeys.Should().Equal(rulesFromTypes);
         }
@@ -62,7 +62,7 @@ namespace SonarAnalyzer.UnitTest.PackagingTests
         [TestMethod]
         public void ThereShouldBeRuleDetailsForAllVbNetRuleClasses()
         {
-            var ruleDetailsKeys = SortedRulesFromDetailbuilder(AnalyzerLanguage.VisualBasic);
+            var ruleDetailsKeys = SortedRulesFromDetailBuilder(AnalyzerLanguage.VisualBasic);
             var rulesFromTypes = SortedRulesFromTypes(AnalyzerLanguage.VisualBasic);
             ruleDetailsKeys.Should().Equal(rulesFromTypes);
         }
@@ -70,7 +70,7 @@ namespace SonarAnalyzer.UnitTest.PackagingTests
         private static string[] SortedRulesFromTypes(AnalyzerLanguage language) =>
             RuleFinder.GetAnalyzers(language)
                 .Where(x => x is not UtilityAnalyzerBase)
-                .SelectMany(x => x.SupportedDiagnostics.Select(desciptor => desciptor.Id))
+                .SelectMany(x => x.SupportedDiagnostics.Select(descriptor => descriptor.Id))
                 .Distinct() // One class can have the same ruleId multiple times, see S3240, same ruleId can be in multiple classes (see InvalidCastToInterface)
                 .OrderBy(x => x)
                 .ToArray();
@@ -86,7 +86,7 @@ namespace SonarAnalyzer.UnitTest.PackagingTests
                 .ToArray();
         }
 
-        private static string[] SortedRulesFromDetailbuilder(AnalyzerLanguage language) =>
+        private static string[] SortedRulesFromDetailBuilder(AnalyzerLanguage language) =>
             RuleDetailBuilder.GetAllRuleDetails(language).Select(x => x.Key).OrderBy(x => x).ToArray();
 
         private static string RuleFromFileName(string fileName)

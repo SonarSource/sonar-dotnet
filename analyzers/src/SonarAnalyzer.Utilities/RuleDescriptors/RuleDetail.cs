@@ -44,12 +44,12 @@ namespace SonarAnalyzer.RuleDescriptors
         public string Severity { get; }
         public string Status { get; }
         public string Description { get; }
-        public bool IsActivatedByDefault { get; set; }
-        public string Remediation { get; set; }
-        public string RemediationCost { get; set; }
+        public bool IsActivatedByDefault { get; }
+        public string Remediation { get; }
+        public string RemediationCost { get; }
         public List<string> Tags { get; }
-        public List<RuleParameter> Parameters { get; } = new List<RuleParameter>();
-        public List<string> CodeFixTitles { get; } = new List<string>();
+        public List<RuleParameter> Parameters { get; } = new();
+        public List<string> CodeFixTitles { get; } = new();
 
         public RuleDetail(AnalyzerLanguage language, ResourceManager resources, string id)
         {
@@ -76,7 +76,7 @@ namespace SonarAnalyzer.RuleDescriptors
 
         private static string HtmlDescription(AnalyzerLanguage language, string id)
         {
-            if (SonarAnalyzerUtilitiesAssembly.GetManifestResourceNames().FirstOrDefault(MatchesRule) is { }  resourceName)
+            if (SonarAnalyzerUtilitiesAssembly.GetManifestResourceNames().FirstOrDefault(MatchesRule) is { } resourceName)
             {
                 using var stream = SonarAnalyzerUtilitiesAssembly.GetManifestResourceStream(resourceName);
                 using var reader = new StreamReader(stream);
