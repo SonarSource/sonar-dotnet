@@ -21,6 +21,7 @@
 using System;
 using System.Linq;
 using FluentAssertions;
+using Microsoft.CodeAnalysis;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.RuleDescriptors;
@@ -31,13 +32,6 @@ namespace SonarAnalyzer.UnitTest.Common
     [TestClass]
     public class RuleDetailTest
     {
-        [TestMethod]
-        public void RuleDetails_NotEmpty()
-        {
-            CheckRuleDetailsNotEmpty(AnalyzerLanguage.CSharp);
-            CheckRuleDetailsNotEmpty(AnalyzerLanguage.VisualBasic);
-        }
-
         [TestMethod]
         public void GetAllRuleDetails_UnexpectedLanguage_Throws() =>
             ((Action)(() => RuleDetailBuilder.GetAllRuleDetails(AnalyzerLanguage.Both))).Should().Throw<NotSupportedException>();
@@ -53,9 +47,12 @@ namespace SonarAnalyzer.UnitTest.Common
             sut.DefaultValue.Should().Be("Secret");
         }
 
-        private static void CheckRuleDetailsNotEmpty(AnalyzerLanguage language)
+        [DataTestMethod]
+        [DataRow(LanguageNames.CSharp)]
+        [DataRow(LanguageNames.VisualBasic)]
+        public void RuleDetails_NotEmpty(string languageName)
         {
-            var ruleDetails = RuleDetailBuilder.GetAllRuleDetails(language).ToList();
+            var ruleDetails = RuleDetailBuilder.GetAllRuleDetails(AnalyzerLanguage.FromName(languageName)).ToList();
             foreach (var ruleDetail in ruleDetails)
             {
                 ruleDetail.Should().NotBeNull();
