@@ -31,7 +31,7 @@ Namespace Tests.Diagnostics
         End Function
 
         Private Function IsNotEmpty2(l As IEnumerable(Of String)) As Boolean
-            Return 0 <> l.Count() ' Noncompliant As Boolean
+            Return 0 <> l.Count() ' Noncompliant
         End Function
 
         Private Function IsEmpty1(l As IEnumerable(Of String)) As Boolean
