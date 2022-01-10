@@ -29,7 +29,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
     [DiagnosticAnalyzer(LanguageNames.VisualBasic)]
     public sealed class CollectionEmptinessChecking : CollectionEmptinessCheckingBase<SyntaxKind>
     {
-        protected override string MessageFormat => "Use '.Any()' to test whether this IEnumerable is empty or not.";
+        protected override string MessageFormat => "Use '.Any()' to test whether this 'IEnumerable(Of {0})' is empty or not.";
         protected override ILanguageFacade<SyntaxKind> Language => VisualBasicFacade.Instance;
 
         protected override SyntaxNode GetMemberAccess(SyntaxNode invocation) =>
