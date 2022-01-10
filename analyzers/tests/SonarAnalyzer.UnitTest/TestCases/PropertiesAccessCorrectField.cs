@@ -256,8 +256,29 @@ namespace Tests.Diagnostics
 
         public int Field1
         {
-            get { return field2; }      // Compliant - aren't checking inherited fields
-            set { field2 = value; }     // Compliant
+            get { return field2; }      // Noncompliant
+            set { field2 = value; }     // Noncompliant
+        }
+    }
+
+    public class Base
+    {
+        protected long writeLockTimeout;
+    }
+
+    public class SubClass : Base
+    {
+        public long WRITE_LOCK_TIMEOUT = 1000;
+        public long WriteLockTimeout
+        {
+            get
+            {
+                return writeLockTimeout; // Compliant - points to the field in the base class
+            }
+            set
+            {
+                this.writeLockTimeout = value; // Compliant - points to the field in the base class
+            }
         }
     }
 

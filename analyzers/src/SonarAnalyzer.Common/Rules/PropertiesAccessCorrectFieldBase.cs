@@ -76,7 +76,7 @@ namespace SonarAnalyzer.Rules
                 return;
             }
 
-            var fields = symbol.GetMembers().Where(m => m.Kind == SymbolKind.Field).OfType<IFieldSymbol>();
+            var fields = SelfAndBaseTypesFieldSymbols(symbol);
             if (!fields.Any())
             {
                 return;
@@ -107,6 +107,17 @@ namespace SonarAnalyzer.Rules
                     }
                 }
             }
+        }
+
+        private IEnumerable<IFieldSymbol> SelfAndBaseTypesFieldSymbols(INamedTypeSymbol typeSymbol)
+        {
+            var fieldSymbols = Enumerable.Empty<IFieldSymbol>();
+            var selfAndBaseTypesSymbols = typeSymbol.GetSelfAndBaseTypes();
+            foreach (var symbol in selfAndBaseTypesSymbols)
+            {
+                fieldSymbols = fieldSymbols.Concat(symbol.GetMembers().Where(m => m.Kind == SymbolKind.Field).OfType<IFieldSymbol>());
+            }
+            return fieldSymbols;
         }
 
         private IEnumerable<IPropertySymbol> GetExplicitlyDeclaredProperties(INamedTypeSymbol symbol) =>
@@ -253,9 +264,9 @@ namespace SonarAnalyzer.Rules
             private bool FieldMatchesTheProperty(IFieldSymbol field, IPropertySymbol property) =>
                 // We're not caching the property name as only expect to be called once per property
                 AreCanonicalNamesEqual(fieldToStandardNameMap[field], GetCanonicalFieldName(property.Name))
-                    && field.Type.Equals(property.Type)
-                    && ((property.IsStatic && field.IsStatic) || (!property.IsStatic && !field.IsStatic))
-                    && !field.IsConst;
+                && field.Type.Equals(property.Type)
+                && ((property.IsStatic && field.IsStatic) || (!property.IsStatic && !field.IsStatic))
+                && !field.IsConst;
         }
     }
 }

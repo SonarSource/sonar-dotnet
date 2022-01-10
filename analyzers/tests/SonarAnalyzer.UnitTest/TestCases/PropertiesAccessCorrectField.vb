@@ -261,10 +261,10 @@ Namespace Tests.Diagnostics
 
         Public Property Field1 As Integer
             Get
-                Return field2 ' Compliant - aren't checking inherited fields
+                Return field2 ' Noncompliant - should point to the field in the base class or change the property name.
             End Get
             Set(ByVal value As Integer)
-                field2 = value
+                field2 = value ' Noncompliant - should point to the field in the base class or change the property name.
             End Set
         End Property
     End Class
