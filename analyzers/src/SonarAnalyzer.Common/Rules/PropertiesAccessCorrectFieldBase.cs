@@ -61,7 +61,7 @@ namespace SonarAnalyzer.Rules
         protected static SyntaxNode FindInvokedMethod(Compilation compilation, INamedTypeSymbol containingType, SyntaxNode expression) =>
             compilation.GetSemanticModel(expression.SyntaxTree) is { } semanticModel
             && semanticModel.GetSymbolInfo(expression).Symbol is { } invocationSymbol
-            && invocationSymbol.ContainingType == containingType
+            && invocationSymbol.ContainingType.Equals(containingType)
             && invocationSymbol.DeclaringSyntaxReferences.Length == 1
             && invocationSymbol.DeclaringSyntaxReferences.Single().GetSyntax() is { } invokedMethod
             ? invokedMethod
@@ -70,8 +70,8 @@ namespace SonarAnalyzer.Rules
         private void CheckType(SymbolAnalysisContext context)
         {
             var symbol = (INamedTypeSymbol)context.Symbol;
-            if (symbol.TypeKind != TypeKind.Class &&
-                symbol.TypeKind != TypeKind.Structure)
+            if (!symbol.TypeKind.Equals(TypeKind.Class)
+                && !symbol.TypeKind.Equals(TypeKind.Structure))
             {
                 return;
             }
@@ -109,26 +109,26 @@ namespace SonarAnalyzer.Rules
             }
         }
 
-        private IEnumerable<IFieldSymbol> SelfAndBaseTypesFieldSymbols(INamedTypeSymbol typeSymbol)
+        private static IEnumerable<IFieldSymbol> SelfAndBaseTypesFieldSymbols(INamedTypeSymbol typeSymbol)
         {
             var fieldSymbols = Enumerable.Empty<IFieldSymbol>();
             var selfAndBaseTypesSymbols = typeSymbol.GetSelfAndBaseTypes();
             foreach (var symbol in selfAndBaseTypesSymbols)
             {
-                fieldSymbols = fieldSymbols.Concat(symbol.GetMembers().Where(m => m.Kind == SymbolKind.Field).OfType<IFieldSymbol>());
+                fieldSymbols = fieldSymbols.Concat(symbol.GetMembers().Where(m => m.Kind.Equals(SymbolKind.Field)).OfType<IFieldSymbol>());
             }
             return fieldSymbols;
         }
 
         private IEnumerable<IPropertySymbol> GetExplicitlyDeclaredProperties(INamedTypeSymbol symbol) =>
             symbol.GetMembers()
-                  .Where(m => m.Kind == SymbolKind.Property)
+                  .Where(m => m.Kind.Equals(SymbolKind.Property))
                   .OfType<IPropertySymbol>()
                   .Where(ImplementsExplicitGetterOrSetter);
 
         private void CheckExpectedFieldIsUsed(IMethodSymbol methodSymbol, IFieldSymbol expectedField, ImmutableArray<FieldData> actualFields, SymbolAnalysisContext context)
         {
-            var expectedFieldIsUsed = actualFields.Any(a => a.Field == expectedField);
+            var expectedFieldIsUsed = actualFields.Any(a => a.Field.Equals(expectedField));
             if (!expectedFieldIsUsed || !actualFields.Any())
             {
                 var locationAndAccessorType = GetLocationAndAccessor(actualFields, methodSymbol);
@@ -150,7 +150,7 @@ namespace SonarAnalyzer.Rules
                 {
                     var fieldWithValue = fields.First();
                     location = fieldWithValue.LocationNode.GetLocation();
-                    accessorType = fieldWithValue.AccessorKind == AccessorKind.Getter ? "getter" : "setter";
+                    accessorType = fieldWithValue.AccessorKind.Equals(AccessorKind.Getter) ? "getter" : "setter";
                 }
                 else
                 {
@@ -181,8 +181,11 @@ namespace SonarAnalyzer.Rules
 
         private readonly struct PropertyData
         {
-            public PropertyData(IPropertySymbol propertySymbol, IEnumerable<FieldData> read, IEnumerable<FieldData> updated,
-                bool ignoreGetter, bool ignoreSetter)
+            public PropertyData(IPropertySymbol propertySymbol,
+                                IEnumerable<FieldData> read,
+                                IEnumerable<FieldData> updated,
+                                bool ignoreGetter,
+                                bool ignoreSetter)
             {
                 PropertySymbol = propertySymbol;
                 ReadFields = read.ToImmutableArray();
