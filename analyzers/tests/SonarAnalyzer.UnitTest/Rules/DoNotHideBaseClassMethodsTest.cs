@@ -29,12 +29,12 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         public void DoNotHideBaseClassMethods() =>
-            OldVerifier.VerifyAnalyzer(new[] { @"TestCases\DoNotHideBaseClassMethods.cs", @"TestCases\DoNotHideBaseClassMethods2.cs", }, new DoNotHideBaseClassMethods());
+            new VerifierBuilder<DoNotHideBaseClassMethods>().AddPaths("DoNotHideBaseClassMethods.cs", "DoNotHideBaseClassMethods2.cs").WithAutogenerateConcurrentFiles(false).Verify();
 
 #if NET
         [TestMethod]
         public void DoNotHideBaseClassMethods_CSharp9() =>
-            OldVerifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\DoNotHideBaseClassMethods.CSharp9.cs", new DoNotHideBaseClassMethods());
+            new VerifierBuilder<DoNotHideBaseClassMethods>().AddPaths("DoNotHideBaseClassMethods.CSharp9.cs").WithOptions(ParseOptionsHelper.FromCSharp9).WithConcurrentAnalysis(false).Verify();
 #endif
     }
 }

@@ -29,7 +29,8 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         public void ReferenceEqualityCheckWhenEqualsExists() =>
-            OldVerifier.VerifyAnalyzer(new[] { @"TestCases\ReferenceEqualityCheckWhenEqualsExists.cs", @"TestCases\ReferenceEqualityCheckWhenEqualsExists2.cs" },
-                new ReferenceEqualityCheckWhenEqualsExists());
+            new VerifierBuilder<ReferenceEqualityCheckWhenEqualsExists>()
+                .AddPaths("ReferenceEqualityCheckWhenEqualsExists.cs", "ReferenceEqualityCheckWhenEqualsExists2.cs")
+                .WithAutogenerateConcurrentFiles(false).Verify();
     }
 }

@@ -27,18 +27,20 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class IssueSuppressionTest
     {
+        private readonly VerifierBuilder builder = new VerifierBuilder<IssueSuppression>();
+
         [TestMethod]
         public void IssueSuppression() =>
-            OldVerifier.VerifyAnalyzer(new[] { @"TestCases\IssueSuppression.cs", @"TestCases\IssueSuppression2.cs", }, new IssueSuppression());
+            builder.AddPaths("IssueSuppression.cs", "IssueSuppression2.cs").WithAutogenerateConcurrentFiles(false).Verify();
 
 #if NET
         [TestMethod]
         public void IssueSuppression_CSharp9() =>
-            OldVerifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\IssueSuppression.CSharp9.cs", new IssueSuppression());
+            builder.AddPaths("IssueSuppression.CSharp9.cs").WithTopLevelStatements().Verify();
 
         [TestMethod]
         public void IssueSuppression_CSharp10() =>
-            OldVerifier.VerifyAnalyzerFromCSharp10Library(@"TestCases\IssueSuppression.CSharp10.cs", new IssueSuppression());
+            builder.AddPaths("IssueSuppression.CSharp10.cs").WithOptions(ParseOptionsHelper.FromCSharp10).Verify();
 #endif
     }
 }

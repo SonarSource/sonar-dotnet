@@ -30,10 +30,10 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         public void FileLines_CS() =>
-            OldVerifier.VerifyAnalyzer(new[] { @"TestCases\FileLines20.cs", @"TestCases\FileLines9.cs" }, new CS.FileLines { Maximum = 10 });
+            new VerifierBuilder().AddAnalyzer(() => new CS.FileLines { Maximum = 10 }).AddPaths("FileLines20.cs", "FileLines9.cs").WithAutogenerateConcurrentFiles(false).Verify();
 
         [TestMethod]
         public void FileLines_VB() =>
-            OldVerifier.VerifyAnalyzer(new[] { @"TestCases\FileLines20.vb", @"TestCases\FileLines9.vb" }, new VB.FileLines { Maximum = 10 });
+            new VerifierBuilder().AddAnalyzer(() => new VB.FileLines { Maximum = 10 }).AddPaths("FileLines20.vb", "FileLines9.vb").WithAutogenerateConcurrentFiles(false).Verify();
     }
 }
