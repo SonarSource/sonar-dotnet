@@ -28,7 +28,7 @@ using SonarAnalyzer.Common;
 
 namespace SonarAnalyzer.RuleDescriptors
 {
-    public class RuleDetail
+    public sealed class RuleDetail
     {
         private static readonly Assembly SonarAnalyzerUtilitiesAssembly = typeof(RuleDetail).Assembly;
         private static readonly HashSet<string> BackwardsCompatibleTypes = new()
