@@ -70,11 +70,16 @@ namespace SonarAnalyzer.UnitTest.TestFramework
 
         public ProjectBuilder AddReferences(IEnumerable<MetadataReference> references)
         {
-            var existingReferences = Project.MetadataReferences;
-            var deduplicated = references == null
-                ? Enumerable.Empty<MetadataReference>()
-                : references.Where(mr => !existingReferences.Contains(mr)).Distinct().ToHashSet();
-            return FromProject(Project.AddMetadataReferences(deduplicated));
+            if (references == null || !references.Any())
+            {
+                return this;
+            }
+            if (references.Any(x => x.Display.Contains("\\netstandard")))
+            {
+                references = references.Concat(NetStandardMetadataReference.Netstandard);
+            }
+            var existingReferences = Project.MetadataReferences.ToHashSet();
+            return FromProject(Project.AddMetadataReferences(references.Distinct().Where(x => !existingReferences.Contains(x))));
         }
 
         public ProjectBuilder AddProjectReference(Func<SolutionBuilder, ProjectId> getProjectId) =>
@@ -98,6 +103,9 @@ namespace SonarAnalyzer.UnitTest.TestFramework
                 : AddDocument(Project, fileInfo.Name, File.ReadAllText(fileInfo.FullName, Encoding.UTF8), removeAnalysisComments);
         }
 
+        public ProjectBuilder AddSnippets(params string[] snippets) =>
+            snippets.Aggregate(this, (current, snippet) => current.AddSnippet(snippet));
+
         public ProjectBuilder AddSnippet(string code, string fileName = null, bool removeAnalysisComments = false)
         {
             if (code == null)
@@ -111,7 +119,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework
         }
 
         public static ProjectBuilder FromProject(Project project) =>
-            new ProjectBuilder(project);
+            new(project);
 
         private static ProjectBuilder AddDocument(Project project, string fileName, string fileContent, bool removeAnalysisComments)
         {

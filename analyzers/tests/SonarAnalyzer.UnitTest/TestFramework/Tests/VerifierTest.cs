@@ -19,6 +19,7 @@
  */
 
 using System;
+using System.IO;
 using FluentAssertions;
 using Microsoft.CodeAnalysis;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -52,7 +53,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework.Tests
         [TestMethod]
         public void Constructor_NoPaths_Throws() =>
             new VerifierBuilder<DummyAnalyzer>()
-                .Invoking(x => x.Build()).Should().Throw<ArgumentException>().WithMessage("Paths cannot be empty. Add at least one path using builder.AddPaths().");
+                .Invoking(x => x.Build()).Should().Throw<ArgumentException>().WithMessage("Paths cannot be empty. Add at least one file using builder.AddPaths() or AddSnippet().");
 
         [TestMethod]
         public void Constructor_MixedLanguageAnalyzers_Throws() =>
@@ -135,6 +136,15 @@ Line: 3, Type: primary, Id: ''
 ");
 
         [TestMethod]
+        public void Verify_TestProject()
+        {
+            var builder = new VerifierBuilder<DoNotWriteToStandardOutput>() // Rule with scope Main
+                .AddSnippet("public class Sample { public void Main() { System.Console.WriteLine(); } }");
+            builder.Invoking(x => x.Verify()).Should().Throw<UnexpectedDiagnosticException>();
+            builder.AddTestReference().Invoking(x => x.Verify()).Should().NotThrow("Project references should be recognized as Test code.");
+        }
+
+        [TestMethod]
         public void Verify_ParseOptions()
         {
             var builder = WithSnippet(
@@ -145,6 +155,14 @@ Line: 3, Type: primary, Id: ''
             builder.WithOptions(ParseOptionsHelper.FromCSharp9).Invoking(x => x.Verify()).Should().NotThrow();
             builder.WithOptions(ParseOptionsHelper.BeforeCSharp9).Invoking(x => x.Verify()).Should().Throw<UnexpectedDiagnosticException>()
                 .WithMessage("CSharp5: Unexpected build error [CS8026]: Feature 'target-typed object creation' is not available in C# 5. Please use language version 9.0 or greater. on line 3");
+        }
+
+        [TestMethod]
+        public void Verify_BasePath()
+        {
+            Dummy.AddPaths("Nonexistent.cs").Invoking(x => x.Verify()).Should().Throw<FileNotFoundException>("This file should not exist in TestCases directory.");
+            Dummy.AddPaths("ArrayCovariance.cs").Invoking(x => x.Verify()).Should().Throw<UnexpectedDiagnosticException>("File should be found in TestCases directory.");
+            Dummy.WithBasePath("TestFramework").AddPaths("Verifier.BasePath.cs").Invoking(x => x.Verify()).Should().NotThrow();
         }
 
         [TestMethod]
@@ -183,16 +201,36 @@ Line: 3, Type: primary, Id: ''
         }
 
         [TestMethod]
+        public void Verify_NonConcurrentAnalysis()
+        {
+            var builder = WithSnippet("var topLevelStatement = true;").WithOptions(ParseOptionsHelper.FromCSharp9).WithOutputKind(OutputKind.ConsoleApplication);
+            builder.Invoking(x => x.Verify()).Should().Throw<UnexpectedDiagnosticException>("Default Verifier behavior duplicates the source file.")
+                .WithMessage("CSharp9: Unexpected build error [CS5001]: Program does not contain a static 'Main' method suitable for an entry point on line 1");
+            builder.WithConcurrentAnalysis(false).Invoking(x => x.Verify()).Should().NotThrow();
+        }
+
+        [TestMethod]
         public void Verify_OutputKind()
         {
-            var builder = WithSnippet("var topLevelStatement = true;")
-                .AddPaths(WriteFile("Second.cs", "public class Workaround { }")) // ToDo: This should be replaced with .WithNonconcurrent() inside WithTopLevelStatement
-                .WithOptions(ParseOptionsHelper.FromCSharp9);
+            var builder = WithSnippet("var topLevelStatement = true;").WithOptions(ParseOptionsHelper.FromCSharp9);
             builder.WithTopLevelStatements().Invoking(x => x.Verify()).Should().NotThrow();
-            builder.WithOutputKind(OutputKind.ConsoleApplication).Invoking(x => x.Verify()).Should().NotThrow();
+            builder.WithOutputKind(OutputKind.ConsoleApplication).WithConcurrentAnalysis(false).Invoking(x => x.Verify()).Should().NotThrow();
             builder.Invoking(x => x.Verify()).Should().Throw<UnexpectedDiagnosticException>()
-                .WithMessage("CSharp9: Unexpected build error [CS8805]: Program using top-level statements must be an executable. on line 1");
+                .WithMessage("CSharp9: Unexpected build error [CS0825]: The contextual keyword 'var' may only appear within a local variable declaration or in script code on line 1");
         }
+
+        [TestMethod]
+        public void Verify_Snippets() =>
+            Dummy.AddSnippet("public class First { } // Noncompliant [first]  - not raised")
+                .AddSnippet("public class Second { } // Noncompliant [second] - not raised")
+                .Invoking(x => x.Verify()).Should().Throw<AssertFailedException>().WithMessage(
+@"CSharp7: Issue(s) expected but not raised in file(s):
+File: snippet1.cs
+Line: 1, Type: primary, Id: 'first'
+
+File: snippet2.cs
+Line: 1, Type: primary, Id: 'second'
+");
 
         private VerifierBuilder WithSnippet(string code) =>
             Dummy.AddPaths(WriteFile("File.cs", code));

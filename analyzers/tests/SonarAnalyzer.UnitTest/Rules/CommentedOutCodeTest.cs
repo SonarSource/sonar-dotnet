@@ -18,6 +18,8 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System.Collections.Immutable;
+using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.Rules.CSharp;
@@ -39,6 +41,6 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         public void CommentedOutCode_NoDocumentation() =>
             OldVerifier.VerifyNonConcurrentAnalyzer(@"TestCases\CommentedOutCode.cs", new CommentedOutCode(),
-                new[] { new CSharpParseOptions(documentationMode: Microsoft.CodeAnalysis.DocumentationMode.None) });
+                ImmutableArray.Create<ParseOptions>(new CSharpParseOptions(documentationMode: DocumentationMode.None)));
     }
 }

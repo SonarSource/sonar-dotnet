@@ -42,27 +42,21 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         public void UsingCommandLineArguments_CS_Partial()
         {
-            var compilation = SolutionBuilder.Create()
-                .AddProject(AnalyzerLanguage.CSharp)
-                .AddSnippet(@"
+            const string code1 = @"
 partial class Program1
 {
     static partial void Main(params string[] args) // Noncompliant
     {
         System.Console.WriteLine(args);
     }
-}")
-                .AddSnippet(@"
+}";
+            const string code2 = @"
 partial class Program1
 {
     static partial void Main(params string[] args); // Compliant, we raise only on methods with implementation
-}")
-                .GetCompilation();
-
-            DiagnosticVerifier.Verify(
-                compilation,
-                new CS.UsingCommandLineArguments(AnalyzerConfiguration.AlwaysEnabled),
-                CompilationErrorBehavior.Default);
+}";
+            var compilation = SolutionBuilder.Create().AddProject(AnalyzerLanguage.CSharp).AddSnippets(code1, code2).GetCompilation();
+            DiagnosticVerifier.Verify(compilation, new CS.UsingCommandLineArguments(AnalyzerConfiguration.AlwaysEnabled), CompilationErrorBehavior.Default);
         }
 
         [TestMethod]
@@ -73,27 +67,19 @@ partial class Program1
         [TestMethod]
         public void UsingCommandLineArguments_VB_Partial()
         {
-            var compilation = SolutionBuilder.Create()
-                .AddProject(AnalyzerLanguage.VisualBasic)
-                .AddSnippet(@"
+            const string code1 = @"
 Partial Class Program1
     Private Shared Sub Main(ParamArray args As String()) ' Noncompliant
         System.Console.WriteLine(args)
     End Sub
-End Class
-")
-                .AddSnippet(@"
+End Class";
+            const string code2 = @"
 Partial Class Program1
     Private Shared Partial Sub Main(ParamArray args As String()) ' Compliant, we raise only on methods with implementation
     End Sub
-End Class
-")
-                .GetCompilation();
-
-            DiagnosticVerifier.Verify(
-                compilation,
-                new VB.UsingCommandLineArguments(AnalyzerConfiguration.AlwaysEnabled),
-                CompilationErrorBehavior.Default);
+End Class";
+            var compilation = SolutionBuilder.Create().AddProject(AnalyzerLanguage.VisualBasic).AddSnippets(code1, code2).GetCompilation();
+            DiagnosticVerifier.Verify(compilation, new VB.UsingCommandLineArguments(AnalyzerConfiguration.AlwaysEnabled), CompilationErrorBehavior.Default);
         }
     }
 }

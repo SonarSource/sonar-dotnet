@@ -57,9 +57,9 @@ namespace SonarAnalyzer.UnitTest.TestFramework
                 throw new ArgumentException($"All {nameof(builder.Analyzers)} must declare the same language in their DiagnosticAnalyzerAttribute.");
             }
             language = AnalyzerLanguage.FromName(allLanguages.Single());
-            if (!builder.Paths.Any())
+            if (!builder.Paths.Any() && !builder.Snippets.Any())
             {
-                throw new ArgumentException($"{nameof(builder.Paths)} cannot be empty. Add at least one path using {nameof(builder)}.{nameof(builder.AddPaths)}().");
+                throw new ArgumentException($"{nameof(builder.Paths)} cannot be empty. Add at least one file using {nameof(builder)}.{nameof(builder.AddPaths)}() or {nameof(builder.AddSnippet)}().");
             }
             if (builder.Paths.FirstOrDefault(x => !Path.GetExtension(x).Equals(language.FileExtension, StringComparison.OrdinalIgnoreCase)) is { } unexpectedPath)
             {
@@ -69,11 +69,17 @@ namespace SonarAnalyzer.UnitTest.TestFramework
 
         public void Verify()    // This should never has any arguments
         {
-            using var scope = new EnvironmentVariableScope { EnableConcurrentAnalysis = true };         // ToDo: Implement properly
-            var paths = builder.Paths.Select(x => Path.GetFullPath(Path.Combine("TestCases", x)));
-            var pathsWithConcurrencyTests = paths.Count() == 1 ? CreateConcurrencyTest(paths) : paths;  // ToDo: Redesign when implementing concurrency
-            var solution = SolutionBuilder.CreateSolutionFromPaths(pathsWithConcurrencyTests, builder.OutputKind, builder.References);
-            foreach (var compilation in solution.Compile(builder.ParseOptions.ToArray()))
+            const string TestCases = "TestCases";
+            using var scope = new EnvironmentVariableScope { EnableConcurrentAnalysis = builder.ConcurrentAnalysis};
+            var basePath = Path.GetFullPath(builder.BasePath == null ? TestCases : Path.Combine(TestCases, builder.BasePath));
+            var paths = builder.Paths.Select(x => Path.Combine(basePath, x));
+            var pathsWithConcurrencyTests = paths.Count() == 1 && builder.ConcurrentAnalysis ? CreateConcurrencyTest(paths) : paths;  // ToDo: Redesign when implementing concurrency
+            var project = SolutionBuilder.Create()
+                .AddProject(language, true, builder.OutputKind)
+                .AddDocuments(pathsWithConcurrencyTests)
+                .AddSnippets(builder.Snippets.ToArray())
+                .AddReferences(builder.References);
+            foreach (var compilation in project.GetSolution().Compile(builder.ParseOptions.ToArray()))
             {
                 DiagnosticVerifier.Verify(compilation, analyzers, builder.ErrorBehavior, builder.SonarProjectConfigPath, builder.OnlyDiagnostics.Select(x => x.Id).ToArray());
             }
