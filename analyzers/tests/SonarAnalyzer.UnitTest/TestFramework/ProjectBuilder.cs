@@ -103,15 +103,8 @@ namespace SonarAnalyzer.UnitTest.TestFramework
                 : AddDocument(Project, fileInfo.Name, File.ReadAllText(fileInfo.FullName, Encoding.UTF8), removeAnalysisComments);
         }
 
-        public ProjectBuilder AddSnippets(params string[] snippets)
-        {
-            var ret = this;
-            foreach (var snippet in snippets)
-            {
-                ret = ret.AddSnippet(snippet);
-            }
-            return ret;
-        }
+        public ProjectBuilder AddSnippets(params string[] snippets) =>
+            snippets.Aggregate(this, (current, snippet) => current.AddSnippet(snippet));
 
         public ProjectBuilder AddSnippet(string code, string fileName = null, bool removeAnalysisComments = false)
         {
@@ -126,7 +119,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework
         }
 
         public static ProjectBuilder FromProject(Project project) =>
-            new ProjectBuilder(project);
+            new(project);
 
         private static ProjectBuilder AddDocument(Project project, string fileName, string fileContent, bool removeAnalysisComments)
         {

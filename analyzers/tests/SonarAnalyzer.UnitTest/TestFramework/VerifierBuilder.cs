@@ -89,7 +89,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework
         /// <summary>
         /// Path infix relative to TestCases directory.
         /// </summary>
-        /// <remarks>If we ever need to change the root outside TestCases directory, add WithRootPath(..)</remarks>
+        /// <remarks>If we ever need to change the root outside the .\TestCases directory, add WithRootPath(..) while WithBasePath(..) would still append another part after the root path.</remarks>
         public VerifierBuilder WithBasePath(string basePath) =>
             new(this) { BasePath = basePath };
 
