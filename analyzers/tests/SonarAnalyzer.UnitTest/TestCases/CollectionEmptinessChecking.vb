@@ -6,7 +6,7 @@ Namespace Tests.Diagnostics
     Public Class CollectionEmptinessChecking
 
         Private Function HasContent1(l As IEnumerable(Of String)) As Boolean
-            Return l.Count() > 0 ' Noncompliant {{Use '.Any()' to test whether this IEnumerable is empty or not.}}
+            Return l.Count() > 0 ' Noncompliant {{Use '.Any()' to test whether this 'IEnumerable(Of String)' is empty or not.}}
             '        ^^^^^
         End Function
 

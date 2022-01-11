@@ -68,13 +68,13 @@ namespace SonarAnalyzer.Rules
                 && identifier.ValueText == nameof(Enumerable.Count)
                 && (semanticModel.GetSymbolInfo(identifier.Parent.Parent).Symbol is IMethodSymbol methodSymbol)
                 && IsMethodCountExtension(methodSymbol)
-                && methodSymbol.IsExtensionOn(KnownType.System_Collections_Generic_IEnumerable_T))
+                && methodSymbol.IsExtensionOn(KnownType.System_Collections_Generic_IEnumerable_T)
+                && methodSymbol.ReceiverType is INamedTypeSymbol receiverType)
             {
-                if (methodSymbol.IsGenericMethod)
-                {
-                    typeArgument = methodSymbol.TypeArguments.Single().ToDisplayString();
-                }
                 countLocation = identifier.Parent.GetLocation();
+                typeArgument = (methodSymbol.TypeArguments.Any()
+                    ? methodSymbol.TypeArguments
+                    : receiverType.TypeArguments).Single().ToDisplayString();
                 return true;
             }
             else
