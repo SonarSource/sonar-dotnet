@@ -236,7 +236,6 @@ namespace Tests.Diagnostics
         public void Apply(Tuple<T, int> renamed) { }
     }
 
-    // The following two classes reproduce: https://github.com/SonarSource/sonar-dotnet/issues/5005
     public abstract class BaseRepro
     {
         public abstract int SomeMethod(int SomeParam1, int SomeParam2);
@@ -244,6 +243,6 @@ namespace Tests.Diagnostics
 
     public class Reproducer : BaseRepro
     {
-        public override int SomeMethod(int _, int SomeParam2) => SomeParam2; // Noncompliant FP
+        public override int SomeMethod(int _, int SomeParam2) => SomeParam2; // Noncompliant, it is not a discard
     }
 }
