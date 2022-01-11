@@ -21,12 +21,10 @@
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Diagnostics;
 using Microsoft.CodeAnalysis.VisualBasic;
-using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
 
 namespace SonarAnalyzer.Rules.VisualBasic
 {
-    [Rule(DiagnosticId)]
     [DiagnosticAnalyzer(LanguageNames.VisualBasic)]
     public sealed class CollectionEmptinessChecking : CollectionEmptinessCheckingBase<SyntaxKind>
     {

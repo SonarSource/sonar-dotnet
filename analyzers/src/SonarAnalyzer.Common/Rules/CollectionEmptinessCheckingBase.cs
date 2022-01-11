@@ -28,7 +28,7 @@ namespace SonarAnalyzer.Rules
     public abstract class CollectionEmptinessCheckingBase<TSyntaxKind> : SonarDiagnosticAnalyzer<TSyntaxKind>
         where TSyntaxKind : struct
     {
-        internal const string DiagnosticId = "S1155";
+        private const string DiagnosticId = "S1155";
 
         protected CollectionEmptinessCheckingBase() : base(DiagnosticId) { }
 
@@ -61,9 +61,6 @@ namespace SonarAnalyzer.Rules
 
         private bool TryGetCountCall(SyntaxNode expression, SemanticModel semanticModel, out Location countLocation, out string typeArgument)
         {
-            countLocation = null;
-            typeArgument = null;
-
             if (Language.Syntax.NodeIdentifier(expression) is { } identifier
                 && identifier.ValueText == nameof(Enumerable.Count)
                 && (semanticModel.GetSymbolInfo(identifier.Parent.Parent).Symbol is IMethodSymbol methodSymbol)
@@ -79,6 +76,8 @@ namespace SonarAnalyzer.Rules
             }
             else
             {
+                countLocation = null;
+                typeArgument = null;
                 return false;
             }
         }
