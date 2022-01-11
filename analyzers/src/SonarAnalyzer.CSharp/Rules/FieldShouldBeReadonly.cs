@@ -25,7 +25,6 @@ using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
-using SonarAnalyzer.Common;
 using SonarAnalyzer.Extensions;
 using SonarAnalyzer.Helpers;
 using StyleCop.Analyzers.Lightup;
@@ -35,7 +34,6 @@ using TypeDeclarationTuple = SonarAnalyzer.Common.NodeAndSemanticModel<Microsoft
 namespace SonarAnalyzer.Rules.CSharp
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
-    [Rule(DiagnosticId)]
     public sealed class FieldShouldBeReadonly : SonarDiagnosticAnalyzer
     {
         internal const string DiagnosticId = "S2933";

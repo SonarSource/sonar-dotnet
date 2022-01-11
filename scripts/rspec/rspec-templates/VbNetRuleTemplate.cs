@@ -30,7 +30,6 @@ using SonarAnalyzer.Helpers;
 namespace SonarAnalyzer.Rules.VisualBasic
 {
     [DiagnosticAnalyzer(LanguageNames.VisualBasic)]
-    [Rule(DiagnosticId)]
     public sealed class $DiagnosticClassName$ : SonarDiagnosticAnalyzer
     {
         private const string DiagnosticId = "$DiagnosticId$";

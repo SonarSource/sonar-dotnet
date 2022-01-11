@@ -20,14 +20,11 @@
 
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Diagnostics;
-using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
 
 namespace SonarAnalyzer.Rules.VisualBasic
 {
     [DiagnosticAnalyzer(LanguageNames.VisualBasic)]
-    [Rule(FixMeDiagnosticId)]
-    [Rule(TodoDiagnosticId)]
     public sealed class CommentKeyword : CommentKeywordBase
     {
         internal static readonly DiagnosticDescriptor TODO_Descriptor =

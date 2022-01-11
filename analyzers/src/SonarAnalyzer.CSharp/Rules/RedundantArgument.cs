@@ -31,7 +31,6 @@ using StyleCop.Analyzers.Lightup;
 namespace SonarAnalyzer.Rules.CSharp
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
-    [Rule(DiagnosticId)]
     public sealed class RedundantArgument : SonarDiagnosticAnalyzer
     {
         internal const string DiagnosticId = "S3254";

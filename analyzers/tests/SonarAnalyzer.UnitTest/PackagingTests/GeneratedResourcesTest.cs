@@ -19,15 +19,12 @@
  */
 
 using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Reflection;
 using System.Text.RegularExpressions;
 using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.Common;
-using SonarAnalyzer.Helpers;
 using SonarAnalyzer.Rules;
 using SonarAnalyzer.Utilities;
 
@@ -41,80 +38,60 @@ namespace SonarAnalyzer.UnitTest.PackagingTests
         [TestMethod]
         public void AnalyzersHaveCorrespondingResource_CSharp()
         {
-            var rulesFromResources = GetRulesFromResources(RspecRelativeFolderPath + "cs");
-
-            var rulesFromClasses = GetRulesFromClasses(typeof(CSharpSyntaxHelper).Assembly);
-
-            rulesFromResources.Should().Equal(rulesFromClasses);
+            var rulesFromResources = SortedRulesFromResources(RspecRelativeFolderPath + "cs");          // Unique list
+            var rulesFromTypes = SortedRulesFromTypes(AnalyzerLanguage.CSharp).Distinct().ToArray();    // Same ruleId can be in multiple classes (see InvalidCastToInterface)
+            rulesFromResources.Should().Equal(rulesFromTypes);
         }
 
         [TestMethod]
         public void AnalyzersHaveCorrespondingResource_VisualBasic()
         {
-            var rulesFromResources = GetRulesFromResources(RspecRelativeFolderPath + "vbnet");
-
-            var rulesFromClasses = GetRulesFromClasses(typeof(VisualBasicSyntaxHelper).Assembly);
-
-            rulesFromResources.Should().Equal(rulesFromClasses);
+            var rulesFromResources = SortedRulesFromResources(RspecRelativeFolderPath + "vbnet");           // Unique list
+            var rulesFromTypes = SortedRulesFromTypes(AnalyzerLanguage.VisualBasic).Distinct().ToArray();   // Same ruleId can be in multiple classes (see InvalidCastToInterface)
+            rulesFromResources.Should().Equal(rulesFromTypes);
         }
 
         [TestMethod]
         public void ThereShouldBeRuleDetailsForAllCSharpRuleClasses()
         {
-            var ruleDetailsKeys = RuleDetailBuilder.GetAllRuleDetails(AnalyzerLanguage.CSharp)
-                                                   .Select(rd => rd.Key)
-                                                   .OrderBy(key => key);
-
-            var rulesFromClasses = GetRulesFromClasses(typeof(CSharpSyntaxHelper).Assembly).OrderBy(key => key);
-
-            ruleDetailsKeys.Should().Equal(rulesFromClasses);
+            var ruleDetailsKeys = SortedRulesFromDetailBuilder(AnalyzerLanguage.CSharp);
+            var rulesFromTypes = SortedRulesFromTypes(AnalyzerLanguage.CSharp);
+            ruleDetailsKeys.Should().Equal(rulesFromTypes);
         }
 
         [TestMethod]
         public void ThereShouldBeRuleDetailsForAllVbNetRuleClasses()
         {
-            var ruleDetailsKeys = RuleDetailBuilder.GetAllRuleDetails(AnalyzerLanguage.VisualBasic)
-                                                   .Select(rd => rd.Key)
-                                                   .OrderBy(key => key);
-
-            var rulesFromClasses = GetRulesFromClasses(typeof(VisualBasicSyntaxHelper).Assembly).OrderBy(key => key);
-
-            ruleDetailsKeys.Should().Equal(rulesFromClasses);
+            var ruleDetailsKeys = SortedRulesFromDetailBuilder(AnalyzerLanguage.VisualBasic);
+            var rulesFromTypes = SortedRulesFromTypes(AnalyzerLanguage.VisualBasic);
+            ruleDetailsKeys.Should().Equal(rulesFromTypes);
         }
 
-        private static string[] GetRulesFromClasses(Assembly assembly) =>
-            assembly.GetTypes()
-                    .Where(x => !x.IsAbstract && typeof(SonarDiagnosticAnalyzer).IsAssignableFrom(x) && IsNotUtilityAnalyzer(x))
-                    .SelectMany(GetRuleNamesFromAttributes)
-                    .OrderBy(x => x)
-                    .ToArray();
+        private static string[] SortedRulesFromTypes(AnalyzerLanguage language) =>
+            RuleFinder.GetAnalyzers(language)
+                .Where(x => x is not UtilityAnalyzerBase)
+                .SelectMany(x => x.SupportedDiagnostics.Select(descriptor => descriptor.Id))
+                .Distinct() // One class can have the same ruleId multiple times, see S3240, same ruleId can be in multiple classes (see InvalidCastToInterface)
+                .OrderBy(x => x)
+                .ToArray();
 
-        private static bool IsNotUtilityAnalyzer(Type arg) =>
-            !typeof(UtilityAnalyzerBase).IsAssignableFrom(arg);
-
-        private static string[] GetRulesFromResources(string relativePath)
+        private static string[] SortedRulesFromResources(string relativePath)
         {
             var resourcesRoot = Path.GetFullPath(Path.Combine(Directory.GetCurrentDirectory(), relativePath));
-
-            var resources = Directory.GetFiles(resourcesRoot);
-
-            return resources.Where(IsHtmlFile)
-                            .Select(Path.GetFileNameWithoutExtension)
-                            .Select(GetRuleFromFileName)
-                            .OrderBy(name => name)
-                            .ToArray();
+            return Directory.GetFiles(resourcesRoot)
+                .Where(IsHtmlFile)
+                .Select(Path.GetFileNameWithoutExtension)
+                .Select(RuleFromFileName)
+                .OrderBy(name => name)
+                .ToArray();
         }
 
-        private static IEnumerable<string> GetRuleNamesFromAttributes(Type analyzerType) =>
-            analyzerType.GetCustomAttributes(typeof(RuleAttribute), true)
-                        .OfType<RuleAttribute>()
-                        .Select(attr => attr.Key);
+        private static string[] SortedRulesFromDetailBuilder(AnalyzerLanguage language) =>
+            RuleDetailBuilder.GetAllRuleDetails(language).Select(x => x.Key).OrderBy(x => x).ToArray();
 
-        private static string GetRuleFromFileName(string fileName)
+        private static string RuleFromFileName(string fileName)
         {
-            // S1234_c# or S1234_vb.net
-            var match = Regex.Match(fileName, @"(S\d+)_.*");
-
+            var match = Regex.Match(fileName, @"(S\d+)_.*");    // S1234_c# or S1234_vb.net
             return match.Success ? match.Groups[1].Value : null;
         }
 

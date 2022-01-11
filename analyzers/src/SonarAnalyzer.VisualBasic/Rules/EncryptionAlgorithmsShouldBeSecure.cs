@@ -28,7 +28,6 @@ using SonarAnalyzer.Helpers;
 namespace SonarAnalyzer.Rules.VisualBasic
 {
     [DiagnosticAnalyzer(LanguageNames.VisualBasic)]
-    [Rule(DiagnosticId)]
     public sealed class EncryptionAlgorithmsShouldBeSecure : EncryptionAlgorithmsShouldBeSecureBase<SyntaxKind>
     {
         protected override ILanguageFacade<SyntaxKind> Language => VisualBasicFacade.Instance;

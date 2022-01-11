@@ -18,55 +18,41 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System;
 using System.Linq;
-using System.Reflection;
 using FluentAssertions;
+using Microsoft.CodeAnalysis;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.Common;
+using SonarAnalyzer.RuleDescriptors;
 using SonarAnalyzer.Utilities;
 
 namespace SonarAnalyzer.UnitTest.Common
 {
     [TestClass]
-    public class RuleDescriptorTest
+    public class RuleDetailTest
     {
         [TestMethod]
-        public void CheckAllAnalyzersHaveRuleId()
-        {
-            CheckLanguageSpecificAnalyzersHaveRuleId(AnalyzerLanguage.CSharp);
-            CheckLanguageSpecificAnalyzersHaveRuleId(AnalyzerLanguage.VisualBasic);
-        }
+        public void GetAllRuleDetails_UnexpectedLanguage_Throws() =>
+            ((Action)(() => RuleDetailBuilder.GetAllRuleDetails(AnalyzerLanguage.Both))).Should().Throw<NotSupportedException>();
 
         [TestMethod]
-        public void CheckParameterlessRuleDescriptorsHaveRuleId()
+        public void RuleParameter_Constructor_CopiesValues()
         {
-            CheckLanguageSpecificParameterlessRuleDescriptorsHaveRuleId(AnalyzerLanguage.CSharp);
-            CheckLanguageSpecificParameterlessRuleDescriptorsHaveRuleId(AnalyzerLanguage.VisualBasic);
+            var att = new RuleParameterAttribute("key", PropertyType.Password, "Description", "Secret");
+            var sut = new RuleParameter(att);
+            sut.Key.Should().Be("key");
+            sut.Description.Should().Be("Description");
+            sut.Type.Should().Be("PASSWORD");
+            sut.DefaultValue.Should().Be("Secret");
         }
 
-        [TestMethod]
-        public void RuleDescriptors_NotEmpty()
+        [DataTestMethod]
+        [DataRow(LanguageNames.CSharp)]
+        [DataRow(LanguageNames.VisualBasic)]
+        public void RuleDetails_NotEmpty(string languageName)
         {
-            CheckRuleDescriptorsNotEmpty(AnalyzerLanguage.CSharp);
-            CheckRuleDescriptorsNotEmpty(AnalyzerLanguage.VisualBasic);
-        }
-
-        private static void CheckLanguageSpecificAnalyzersHaveRuleId(AnalyzerLanguage language) =>
-            new RuleFinder()
-                .GetAnalyzerTypes(language)
-                .Any(at => !at.GetCustomAttributes<RuleAttribute>().Any())
-                .Should()
-                .BeFalse();
-
-        private static void CheckLanguageSpecificParameterlessRuleDescriptorsHaveRuleId(AnalyzerLanguage language) =>
-            new RuleFinder().GetParameterlessAnalyzerTypes(language)
-                .Any(at => !at.GetCustomAttributes<RuleAttribute>().Any())
-                .Should()
-                .BeFalse();
-
-        private static void CheckRuleDescriptorsNotEmpty(AnalyzerLanguage language)
-        {
-            var ruleDetails = RuleDetailBuilder.GetAllRuleDetails(language).ToList();
+            var ruleDetails = RuleDetailBuilder.GetAllRuleDetails(AnalyzerLanguage.FromName(languageName)).ToList();
             foreach (var ruleDetail in ruleDetails)
             {
                 ruleDetail.Should().NotBeNull();

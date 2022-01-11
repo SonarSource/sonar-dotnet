@@ -30,7 +30,6 @@ using SonarAnalyzer.Helpers;
 namespace SonarAnalyzer.Rules.VisualBasic
 {
     [DiagnosticAnalyzer(LanguageNames.VisualBasic)]
-    [Rule(DiagnosticId)]
     public sealed class CommentLineEnd : SonarDiagnosticAnalyzer
     {
         internal const string DiagnosticId = "S139";

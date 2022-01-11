@@ -21,7 +21,6 @@
 using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Diagnostics;
-using SonarAnalyzer.Common;
 using SonarAnalyzer.Rules.Common;
 
 namespace SonarAnalyzer.Rules.VisualBasic
@@ -33,7 +32,6 @@ namespace SonarAnalyzer.Rules.VisualBasic
     using Microsoft.CodeAnalysis.VisualBasic.Syntax;
 
     [DiagnosticAnalyzer(LanguageNames.VisualBasic)]
-    [Rule(DiagnosticId)]
     public sealed class MultipleVariableDeclaration : MultipleVariableDeclarationBase<SyntaxKind,
         FieldDeclarationSyntax, LocalDeclarationStatementSyntax>
     {

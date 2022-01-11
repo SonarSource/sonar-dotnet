@@ -33,7 +33,6 @@ using StyleCop.Analyzers.Lightup;
 namespace SonarAnalyzer.Rules.CSharp
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
-    [Rule(DiagnosticId)]
     public sealed class LooseFilePermissions : LooseFilePermissionsBase<SyntaxKind>
     {
         protected override ILanguageFacade<SyntaxKind> Language => CSharpFacade.Instance;

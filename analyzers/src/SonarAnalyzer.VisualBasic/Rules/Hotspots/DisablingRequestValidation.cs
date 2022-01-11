@@ -25,7 +25,6 @@ using SonarAnalyzer.Common;
 namespace SonarAnalyzer.Rules.VisualBasic
 {
     [DiagnosticAnalyzer(LanguageNames.VisualBasic)]
-    [Rule(DiagnosticId)]
     public sealed class DisablingRequestValidation : DisablingRequestValidationBase
     {
         public DisablingRequestValidation() : this(AnalyzerConfiguration.Hotspot) { }

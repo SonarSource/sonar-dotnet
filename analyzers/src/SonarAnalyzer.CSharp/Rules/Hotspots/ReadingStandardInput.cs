@@ -27,7 +27,6 @@ using SonarAnalyzer.Helpers;
 namespace SonarAnalyzer.Rules.CSharp
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
-    [Rule(DiagnosticId)]
     public sealed class ReadingStandardInput : ReadingStandardInputBase<SyntaxKind>
     {
         protected override ILanguageFacade<SyntaxKind> Language => CSharpFacade.Instance;

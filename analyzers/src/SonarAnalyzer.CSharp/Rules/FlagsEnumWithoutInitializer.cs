@@ -22,14 +22,12 @@ using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
-using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
 using SonarAnalyzer.Rules.Common;
 
 namespace SonarAnalyzer.Rules.CSharp
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
-    [Rule(DiagnosticId)]
     public sealed class FlagsEnumWithoutInitializer : FlagsEnumWithoutInitializerBase<SyntaxKind, EnumMemberDeclarationSyntax>
     {
         protected override ILanguageFacade<SyntaxKind> Language { get; } = CSharpFacade.Instance;

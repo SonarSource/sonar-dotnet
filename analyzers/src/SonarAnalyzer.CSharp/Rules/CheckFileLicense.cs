@@ -26,7 +26,6 @@ using SonarAnalyzer.Helpers;
 namespace SonarAnalyzer.Rules.CSharp
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
-    [Rule(DiagnosticId)]
     public class CheckFileLicense : CheckFileLicenseBase
     {
         internal const string HeaderFormatDefaultValue = @"/*

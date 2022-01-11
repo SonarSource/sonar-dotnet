@@ -26,7 +26,6 @@ using SonarAnalyzer.Helpers;
 namespace SonarAnalyzer.Rules.VisualBasic
 {
     [DiagnosticAnalyzer(LanguageNames.VisualBasic)]
-    [Rule(DiagnosticId)]
     public sealed class CheckFileLicense : CheckFileLicenseBase
     {
         internal const string HeaderFormatDefaultValue =

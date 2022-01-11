@@ -30,7 +30,6 @@ using SonarAnalyzer.Helpers;
 namespace SonarAnalyzer.Rules.VisualBasic
 {
     [DiagnosticAnalyzer(LanguageNames.VisualBasic)]
-    [Rule(DiagnosticId)]
     public sealed class PubliclyWritableDirectories : PubliclyWritableDirectoriesBase<SyntaxKind, InvocationExpressionSyntax>
     {
         protected override ILanguageFacade<SyntaxKind> Language => VisualBasicFacade.Instance;

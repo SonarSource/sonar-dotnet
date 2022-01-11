@@ -28,7 +28,7 @@ using System.Xml.Serialization;
 namespace SonarAnalyzer.RuleDescriptorGenerator
 {
     [ExcludeFromCodeCoverage]
-    public class RuleDetail
+    public sealed class RuleDetail
     {
         private const string CardinalitySingle = "SINGLE";
 

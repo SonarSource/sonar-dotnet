@@ -22,14 +22,12 @@ using System;
 using System.Collections.Immutable;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Diagnostics;
-using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
 
 namespace SonarAnalyzer.Rules.CSharp
 {
     [Obsolete("This rule is superseded by S106.")]
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
-    [Rule(DiagnosticId)]
     public sealed class ConsoleLogging : DoNotWriteToStandardOutputBase
     {
         private const string DiagnosticId = "S2228";

@@ -28,7 +28,6 @@ using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.CFG.Roslyn;
 using SonarAnalyzer.CFG.Sonar;
-using SonarAnalyzer.Common;
 using SonarAnalyzer.Extensions;
 using SonarAnalyzer.Helpers;
 using SonarAnalyzer.LiveVariableAnalysis.CSharp;
@@ -42,18 +41,6 @@ using StyleCop.Analyzers.Lightup;
 namespace SonarAnalyzer.Rules.SymbolicExecution
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
-    [Rule(ConditionEvaluatesToConstant.S2583DiagnosticId, LanguageNames.CSharp)]
-    [Rule(ConditionEvaluatesToConstant.S2589DiagnosticId, LanguageNames.CSharp)]
-    [Rule(EmptyCollectionsShouldNotBeEnumerated.DiagnosticId, LanguageNames.CSharp)]
-    [Rule(EmptyNullableValueAccess.DiagnosticId, LanguageNames.CSharp)]
-    [Rule(InitializationVectorShouldBeRandom.DiagnosticId, LanguageNames.CSharp)]
-    [Rule(InvalidCastToInterfaceSymbolicExecution.DiagnosticId, LanguageNames.CSharp)]
-    [Rule(LocksReleasedAllPathsBase.DiagnosticId, LanguageNames.CSharp)]
-    [Rule(HashesShouldHaveUnpredictableSalt.DiagnosticId, LanguageNames.CSharp)]
-    [Rule(NullPointerDereference.DiagnosticId, LanguageNames.CSharp)]
-    [Rule(ObjectsShouldNotBeDisposedMoreThanOnce.DiagnosticId, LanguageNames.CSharp)]
-    [Rule(PublicMethodArgumentsShouldBeCheckedForNull.DiagnosticId, LanguageNames.CSharp)]
-    [Rule(RestrictDeserializedTypes.DiagnosticId, LanguageNames.CSharp)]
     public sealed partial class SymbolicExecutionRunner : SonarDiagnosticAnalyzer
     {
         private static readonly ImmutableDictionary<DiagnosticDescriptor, RuleFactory> AllRules = ImmutableDictionary<DiagnosticDescriptor, RuleFactory>.Empty

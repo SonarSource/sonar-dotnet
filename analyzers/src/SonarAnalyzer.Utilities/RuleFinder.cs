@@ -39,46 +39,37 @@ namespace SonarAnalyzer.Utilities
                 Assembly.Load(typeof(Rules.Common.DoNotInstantiateSharedClassesBase).Assembly.GetName())
             };
 
-        internal IEnumerable<Type> AllAnalyzerTypes { get; } // Rule-only, without utility analyzers
+        internal IEnumerable<Type> RuleAnalyzerTypes { get; } // Rule-only, without utility analyzers
         internal IEnumerable<Type> UtilityAnalyzerTypes { get; }
 
         public RuleFinder()
         {
             var all = PackagedRuleAssemblies
                 .SelectMany(assembly => assembly.GetTypes())
-                .Where(x => x.IsSubclassOf(typeof(DiagnosticAnalyzer)))
+                .Where(x => x.IsSubclassOf(typeof(DiagnosticAnalyzer)) && x.GetCustomAttributes<DiagnosticAnalyzerAttribute>().Any())
                 .ToArray();
 
-            AllAnalyzerTypes = all.Where(x => x.GetCustomAttributes<RuleAttribute>().Any()).ToList();
-            UtilityAnalyzerTypes = all.Where(x => typeof(UtilityAnalyzerBase).IsAssignableFrom(x) && x.GetCustomAttributes<DiagnosticAnalyzerAttribute>().Any()).ToList();
+            RuleAnalyzerTypes = all.Where(x => !typeof(UtilityAnalyzerBase).IsAssignableFrom(x)).ToList();
+            UtilityAnalyzerTypes = all.Where(x => typeof(UtilityAnalyzerBase).IsAssignableFrom(x)).ToList();
         }
 
         public IEnumerable<Type> GetAnalyzerTypes(AnalyzerLanguage language) =>
-            AllAnalyzerTypes.Where(type => GetTargetLanguages(type).IsAlso(language));
+            RuleAnalyzerTypes.Where(type => GetTargetLanguages(type).IsAlso(language));
 
-        internal static IEnumerable<SonarDiagnosticAnalyzer> GetAnalyzers(AnalyzerLanguage language)
+        internal static IEnumerable<DiagnosticAnalyzer> GetAnalyzers(AnalyzerLanguage language)
         {
             var analyzerTypes = PackagedRuleAssemblies.SelectMany(assembly => assembly.GetTypes())
                                                       .Where(type => !type.IsAbstract && typeof(SonarDiagnosticAnalyzer).IsAssignableFrom(type) && GetTargetLanguages(type).IsAlso(language));
-            var analyzerList = new List<SonarDiagnosticAnalyzer>(analyzerTypes.Count());
             foreach (var analyzerType in analyzerTypes)
             {
-                if (typeof(HotspotDiagnosticAnalyzer).IsAssignableFrom(analyzerType)
-                    && analyzerType.GetConstructor(new[] { typeof(IAnalyzerConfiguration) }) != null)
-                {
-                    analyzerList.Add((SonarDiagnosticAnalyzer)Activator.CreateInstance(analyzerType, AnalyzerConfiguration.AlwaysEnabled));
-                }
-                else
-                {
-                    analyzerList.Add((SonarDiagnosticAnalyzer)Activator.CreateInstance(analyzerType));
-                }
+                yield return typeof(HotspotDiagnosticAnalyzer).IsAssignableFrom(analyzerType) && analyzerType.GetConstructor(new[] { typeof(IAnalyzerConfiguration) }) != null
+                    ? (DiagnosticAnalyzer)Activator.CreateInstance(analyzerType, AnalyzerConfiguration.AlwaysEnabled)
+                    : (DiagnosticAnalyzer)Activator.CreateInstance(analyzerType);
             }
-
-            return analyzerList;
         }
 
         internal IEnumerable<Type> GetParameterlessAnalyzerTypes(AnalyzerLanguage language) =>
-            AllAnalyzerTypes.Where(type => !IsParameterized(type) && GetTargetLanguages(type).IsAlso(language));
+            RuleAnalyzerTypes.Where(type => !IsParameterized(type) && GetTargetLanguages(type).IsAlso(language));
 
         internal static bool IsParameterized(Type analyzerType) =>
             analyzerType.GetProperties().Any(p => p.GetCustomAttributes<RuleParameterAttribute>().Any());
@@ -93,8 +84,7 @@ namespace SonarAnalyzer.Utilities
                 });
 
         private static IEnumerable<string> GetLanguages(MemberInfo analyzerType) =>
-            analyzerType.GetCustomAttributes<DiagnosticAnalyzerAttribute>().FirstOrDefault()?.Languages
-            ?? analyzerType.GetCustomAttributes<RuleAttribute>().FirstOrDefault()?.Languages
+            analyzerType.GetCustomAttributes<DiagnosticAnalyzerAttribute>().SingleOrDefault()?.Languages
             ?? throw new NotSupportedException($"Can not find any language for the given type {analyzerType.Name}!");
     }
 }

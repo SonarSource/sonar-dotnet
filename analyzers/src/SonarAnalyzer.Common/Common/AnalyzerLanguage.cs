@@ -111,6 +111,25 @@ namespace SonarAnalyzer.Common
             }
         }
 
+        public string ResourceSuffix
+        {
+            get
+            {
+                if (this == CSharp)
+                {
+                    return "_cs";
+                }
+                else if (this == VisualBasic)
+                {
+                    return "_vb";
+                }
+                else
+                {
+                    throw new NotSupportedException($"Can't get resource suffix for '{ToString()}'.");
+                }
+            }
+        }
+
         private AnalyzerLanguage(string language) =>
             this.language = language;
 

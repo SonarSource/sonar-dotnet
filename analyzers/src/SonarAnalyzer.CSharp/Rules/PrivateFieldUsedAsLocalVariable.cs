@@ -33,7 +33,6 @@ using StyleCop.Analyzers.Lightup;
 namespace SonarAnalyzer.Rules.CSharp
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
-    [Rule(DiagnosticId)]
     public sealed class PrivateFieldUsedAsLocalVariable : SonarDiagnosticAnalyzer
     {
         private const string DiagnosticId = "S1450";

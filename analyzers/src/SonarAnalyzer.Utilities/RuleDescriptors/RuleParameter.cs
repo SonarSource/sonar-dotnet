@@ -18,13 +18,24 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using SonarAnalyzer.Common;
+using SonarAnalyzer.Helpers;
+
 namespace SonarAnalyzer.RuleDescriptors
 {
     public class RuleParameter
     {
-        public string Key { get; set; }
-        public string Description { get; set; }
-        public string Type { get; set; }
-        public string DefaultValue { get; set; }
+        public string Key { get; }
+        public string Description { get; }
+        public string Type { get; }
+        public string DefaultValue { get; }
+
+        public RuleParameter(RuleParameterAttribute attribute)
+        {
+            Key = attribute.Key;
+            Description = attribute.Description;
+            Type = attribute.Type.ToSonarQubeString();
+            DefaultValue = attribute.DefaultValue;
+        }
     }
 }

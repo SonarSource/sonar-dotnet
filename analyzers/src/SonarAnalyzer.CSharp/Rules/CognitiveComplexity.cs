@@ -23,8 +23,6 @@ using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
 using Microsoft.CodeAnalysis.Text;
-using SonarAnalyzer.Common;
-using SonarAnalyzer.Extensions;
 using SonarAnalyzer.Helpers;
 using SonarAnalyzer.Metrics.CSharp;
 using StyleCop.Analyzers.Lightup;
@@ -32,7 +30,6 @@ using StyleCop.Analyzers.Lightup;
 namespace SonarAnalyzer.Rules.CSharp
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
-    [Rule(DiagnosticId)]
     public sealed class CognitiveComplexity : CognitiveComplexityBase<SyntaxKind>
     {
         protected override ILanguageFacade<SyntaxKind> Language => CSharpFacade.Instance;

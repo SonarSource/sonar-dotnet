@@ -20,12 +20,10 @@
 
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Diagnostics;
-using SonarAnalyzer.Common;
 
 namespace SonarAnalyzer.Rules.VisualBasic
 {
     [DiagnosticAnalyzer(LanguageNames.VisualBasic)]
-    [Rule(DiagnosticId)]
     public sealed class MarkAssemblyWithComVisibleAttribute : MarkAssemblyWithComVisibleAttributeBase
     {
         public MarkAssemblyWithComVisibleAttribute() : base(RspecStrings.ResourceManager) { }
