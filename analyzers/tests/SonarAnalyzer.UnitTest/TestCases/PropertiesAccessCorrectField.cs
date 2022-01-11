@@ -824,5 +824,4 @@ namespace Tests.Diagnostics
             }
         }
     }
-
 }

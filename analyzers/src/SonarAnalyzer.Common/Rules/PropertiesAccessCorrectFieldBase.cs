@@ -241,7 +241,7 @@ namespace SonarAnalyzer.Rules
             {
                 // Calculate and cache the standardised versions of the field names to avoid
                 // calculating them every time
-                fieldToStandardNameMap = fields.ToDictionary(f => f, f => GetCanonicalFieldName(f.Name));
+                fieldToStandardNameMap = fields.ToDictionary(f => f, f => GetCanonicalName(f.Name));
             }
 
             public IFieldSymbol GetSingleMatchingFieldOrNull(IPropertySymbol propertySymbol)
@@ -255,7 +255,7 @@ namespace SonarAnalyzer.Rules
                     : matchingFields[0];
             }
 
-            private static string GetCanonicalFieldName(string name) =>
+            private static string GetCanonicalName(string name) =>
                 name.Replace("_", string.Empty);
 
             private static bool AreCanonicalNamesEqual(string name1, string name2) =>
@@ -263,10 +263,10 @@ namespace SonarAnalyzer.Rules
 
             private bool FieldMatchesTheProperty(IFieldSymbol field, IPropertySymbol property) =>
                 // We're not caching the property name as only expect to be called once per property
-                AreCanonicalNamesEqual(fieldToStandardNameMap[field], GetCanonicalFieldName(property.Name))
-                && field.Type.Equals(property.Type)
+                !field.IsConst
                 && ((property.IsStatic && field.IsStatic) || (!property.IsStatic && !field.IsStatic))
-                && !field.IsConst;
+                && field.Type.Equals(property.Type)
+                && AreCanonicalNamesEqual(fieldToStandardNameMap[field], GetCanonicalName(property.Name));
         }
     }
 }
