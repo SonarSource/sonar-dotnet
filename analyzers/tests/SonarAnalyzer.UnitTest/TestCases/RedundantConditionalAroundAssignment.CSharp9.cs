@@ -1,4 +1,6 @@
-﻿int x = 5;
+﻿using System;
+
+int x = 5;
 int y = 6;
 
 y = y switch
@@ -111,5 +113,23 @@ record Record
     string CompliantProperty2
     {
         init { x = value; }
+    }
+}
+
+public static class SwitchExpressionCases
+{
+    public static Uri ToWebsocketUri(this Uri uri)
+    {
+        // See: https://github.com/SonarSource/sonar-dotnet/issues/5246
+        var builder = new UriBuilder(uri);
+        builder.Scheme = uri.Scheme switch
+        {
+            "https" => "wss",
+            "http" => "ws",
+            "wss" => "wss", // Noncompliant FP
+            "ws" => "ws", // Noncompliant FP
+            _ => throw new ArgumentException($"Cannot convert URI scheme '{uri.Scheme}' to a websocket scheme."),
+        };
+        return builder.Uri;
     }
 }
