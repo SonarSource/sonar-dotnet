@@ -20,6 +20,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Collections.Immutable;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -31,7 +32,6 @@ using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
 using SonarAnalyzer.Rules;
-using SonarAnalyzer.UnitTest.Helpers;
 using SonarAnalyzer.UnitTest.MetadataReferences;
 
 namespace SonarAnalyzer.UnitTest.TestFramework
@@ -301,68 +301,104 @@ namespace SonarAnalyzer.UnitTest.TestFramework
                 .AddPaths(RemoveTestCasesPrefix(paths))
                 .Verify();
 
+        [Obsolete("Use VerifierBuilder instead.")]
         public static void VerifyAnalyzer(string path,
                                           DiagnosticAnalyzer[] diagnosticAnalyzers,
-                                          IEnumerable<ParseOptions> options = null,
+                                          ImmutableArray<ParseOptions> options = default,
                                           CompilationErrorBehavior checkMode = CompilationErrorBehavior.Default,
                                           OutputKind outputKind = OutputKind.DynamicallyLinkedLibrary,
                                           IEnumerable<MetadataReference> additionalReferences = null,
                                           DiagnosticDescriptor[] onlyDiagnostics = null) =>
-            VerifyAnalyzer(new[] { path }, diagnosticAnalyzers, options, checkMode, outputKind, additionalReferences, null, onlyDiagnostics);
+            diagnosticAnalyzers.Aggregate(new VerifierBuilder(), (builder, analyzer) => builder.AddAnalyzer(() => analyzer))
+                .AddReferences(additionalReferences ?? Enumerable.Empty<MetadataReference>())
+                .AddPaths(RemoveTestCasesPrefix(path))
+                .WithOptions(options.IsDefault ? ImmutableArray<ParseOptions>.Empty : options)
+                .WithErrorBehavior(checkMode)
+                .WithOutputKind(outputKind)
+                .WithOnlyDiagnostics(onlyDiagnostics ?? Array.Empty<DiagnosticDescriptor>())
+                .Verify();
 
+        [Obsolete("Use VerifierBuilder instead.")]
         public static void VerifyAnalyzer(string path,
                                           DiagnosticAnalyzer diagnosticAnalyzer,
                                           IEnumerable<MetadataReference> additionalReferences,
                                           string sonarProjectConfigPath) =>
-            VerifyAnalyzer(new[] { path },
-                           new[] { diagnosticAnalyzer },
-                           null, CompilationErrorBehavior.Default,
-                           OutputKind.DynamicallyLinkedLibrary,
-                           additionalReferences,
-                           sonarProjectConfigPath);
+            new VerifierBuilder()
+                .AddAnalyzer(() => diagnosticAnalyzer)
+                .AddReferences(additionalReferences)
+                .AddPaths(RemoveTestCasesPrefix(path))
+                .WithSonarProjectConfigPath(sonarProjectConfigPath)
+                .Verify();
 
+        [Obsolete("Use VerifierBuilder instead.")]
         public static void VerifyAnalyzer(string path,
                                           DiagnosticAnalyzer diagnosticAnalyzer,
-                                          IEnumerable<ParseOptions> options,
+                                          ImmutableArray<ParseOptions> options,
                                           IEnumerable<MetadataReference> additionalReferences,
                                           string sonarProjectConfigPath = null,
                                           DiagnosticDescriptor[] onlyDiagnostics = null) =>
-            VerifyAnalyzer(
-                new[] { path },
-                new[] { diagnosticAnalyzer },
-                options,
-                CompilationErrorBehavior.Default,
-                OutputKind.DynamicallyLinkedLibrary,
-                additionalReferences,
-                sonarProjectConfigPath,
-                onlyDiagnostics);
+            new VerifierBuilder()
+                .AddAnalyzer(() => diagnosticAnalyzer)
+                .AddReferences(additionalReferences)
+                .AddPaths(RemoveTestCasesPrefix(path))
+                .WithOptions(options)
+                .WithSonarProjectConfigPath(sonarProjectConfigPath)
+                .WithOnlyDiagnostics(onlyDiagnostics ?? Array.Empty<DiagnosticDescriptor>())
+                .Verify();
 
+        [Obsolete("Use VerifierBuilder instead.")]
         public static void VerifyAnalyzer(string path,
                                           DiagnosticAnalyzer diagnosticAnalyzer,
                                           IEnumerable<MetadataReference> additionalReferences,
                                           DiagnosticDescriptor[] onlyDiagnostics = null) =>
-            VerifyAnalyzer(new[] { path }, new[] { diagnosticAnalyzer }, null, CompilationErrorBehavior.Default, OutputKind.DynamicallyLinkedLibrary, additionalReferences, null, onlyDiagnostics);
+            new VerifierBuilder()
+                .AddAnalyzer(() => diagnosticAnalyzer)
+                .AddReferences(additionalReferences)
+                .AddPaths(RemoveTestCasesPrefix(path))
+                .WithOnlyDiagnostics(onlyDiagnostics ?? Array.Empty<DiagnosticDescriptor>())
+                .Verify();
 
+        [Obsolete("Use VerifierBuilder instead.")]
         public static void VerifyAnalyzer(string path,
                                           DiagnosticAnalyzer diagnosticAnalyzer,
-                                          IEnumerable<ParseOptions> options = null,
+                                          ImmutableArray<ParseOptions> options = default,
                                           CompilationErrorBehavior checkMode = CompilationErrorBehavior.Default,
                                           OutputKind outputKind = OutputKind.DynamicallyLinkedLibrary,
                                           IEnumerable<MetadataReference> additionalReferences = null,
                                           DiagnosticDescriptor[] onlyDiagnostics = null) =>
-            VerifyAnalyzer(new[] { path }, new[] { diagnosticAnalyzer }, options, checkMode, outputKind, additionalReferences, null, onlyDiagnostics);
+            new VerifierBuilder()
+                .AddAnalyzer(() => diagnosticAnalyzer)
+                .AddReferences(additionalReferences ?? Enumerable.Empty<MetadataReference>())
+                .AddPaths(RemoveTestCasesPrefix(path))
+                .WithOptions(options.IsDefault ? ImmutableArray<ParseOptions>.Empty : options)
+                .WithErrorBehavior(checkMode)
+                .WithOutputKind(outputKind)
+                .WithOnlyDiagnostics(onlyDiagnostics ?? Array.Empty<DiagnosticDescriptor>())
+                .Verify();
 
+        [Obsolete("Use VerifierBuilder instead.")]
         public static void VerifyAnalyzer(IEnumerable<string> paths,
                                           DiagnosticAnalyzer diagnosticAnalyzer,
-                                          IEnumerable<ParseOptions> options = null,
+                                          ImmutableArray<ParseOptions> options = default,
                                           IEnumerable<MetadataReference> additionalReferences = null) =>
-            VerifyAnalyzer(paths, new[] { diagnosticAnalyzer }, options, CompilationErrorBehavior.Default, OutputKind.DynamicallyLinkedLibrary, additionalReferences);
+            new VerifierBuilder()
+                .AddAnalyzer(() => diagnosticAnalyzer)
+                .AddReferences(additionalReferences ?? Enumerable.Empty<MetadataReference>())
+                .AddPaths(RemoveTestCasesPrefix(paths))
+                .WithOptions(options.IsDefault ? ImmutableArray<ParseOptions>.Empty : options)
+                .Verify();
 
+        [Obsolete("Use VerifierBuilder instead.")]
         public static void VerifyAnalyzer(string path,
                                           DiagnosticAnalyzer diagnosticAnalyzer,
                                           CompilationErrorBehavior checkMode,
                                           IEnumerable<MetadataReference> additionalReferences = null) =>
-            VerifyAnalyzer(new[] { path }, new[] { diagnosticAnalyzer }, null, checkMode, OutputKind.DynamicallyLinkedLibrary, additionalReferences);
+            new VerifierBuilder()
+                .AddAnalyzer(() => diagnosticAnalyzer)
+                .AddReferences(additionalReferences ?? Enumerable.Empty<MetadataReference>())
+                .AddPaths(RemoveTestCasesPrefix(path))
+                .WithErrorBehavior(checkMode)
+                .Verify();
 
         public static void VerifyNonConcurrentUtilityAnalyzer<TMessage>(IEnumerable<string> paths,
                                                                         UtilityAnalyzerBase diagnosticAnalyzer,
@@ -421,7 +457,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework
             var builder = SolutionBuilder.Create()
                 .AddProject(AnalyzerLanguage.FromPath(path))
                 .AddTestReferences()
-                .AddReferences(additionalReferences)
+                .AddReferences(additionalReferences ?? Enumerable.Empty<MetadataReference>())
                 .AddDocument(path);
 
             VerifyNoIssueReported(builder, diagnosticAnalyzer, options, CompilationErrorBehavior.Default, null, onlyDiagnostics);
@@ -449,7 +485,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework
         {
             var builder = SolutionBuilder.Create()
                 .AddProject(AnalyzerLanguage.FromPath(path), outputKind: outputKind)
-                .AddReferences(additionalReferences)
+                .AddReferences(additionalReferences ?? Enumerable.Empty<MetadataReference>())
                 .AddDocument(path);
 
             VerifyNoIssueReported(builder, diagnosticAnalyzer, options, checkMode, sonarProjectConfigPath);
@@ -509,21 +545,6 @@ namespace SonarAnalyzer.UnitTest.TestFramework
                                         CompilationErrorBehavior.Default,
                                         outputKind,
                                         AddTestReference(additionalReferences));
-
-        private static void VerifyAnalyzer(IEnumerable<string> paths,
-                                           DiagnosticAnalyzer[] diagnosticAnalyzers,
-                                           IEnumerable<ParseOptions> options,
-                                           CompilationErrorBehavior checkMode,
-                                           OutputKind outputKind,
-                                           IEnumerable<MetadataReference> additionalReferences,
-                                           string sonarProjectConfigPath = null,
-                                           DiagnosticDescriptor[] onlyDiagnostics = null)
-        {
-            using var scope = new EnvironmentVariableScope { EnableConcurrentAnalysis = true};
-            var pathsWithConcurrencyTests = paths.Count() == 1 ? CreateConcurrencyTest(paths) : paths;
-            var solution = SolutionBuilder.CreateSolutionFromPaths(pathsWithConcurrencyTests, outputKind, additionalReferences);
-            CompileAndVerifyAnalyzer(solution, diagnosticAnalyzers, options, checkMode, sonarProjectConfigPath, onlyDiagnostics);
-        }
 
         private static List<string> CreateConcurrencyTest(IEnumerable<string> paths)
         {
@@ -589,12 +610,15 @@ namespace SonarAnalyzer.UnitTest.TestFramework
         private static IEnumerable<MetadataReference> AddTestReference(IEnumerable<MetadataReference> additionalReferences) =>
             NuGetMetadataReference.MSTestTestFrameworkV1.Concat(additionalReferences ?? Enumerable.Empty<MetadataReference>());
 
-        private static string[] RemoveTestCasesPrefix(IEnumerable<string> paths)
+        private static string[] RemoveTestCasesPrefix(IEnumerable<string> paths) =>
+            paths.Select(RemoveTestCasesPrefix).ToArray();
+
+        private static string RemoveTestCasesPrefix(string path)
         {
             const string prefix = @"TestCases\";
-            return paths.FirstOrDefault(x => !x.StartsWith(prefix)) is { } unexpectedPath
-                ? throw new ArgumentException($"TestCase path doesn't start with {prefix}: {unexpectedPath}")
-                : paths.Select(x => x.Substring(prefix.Length)).ToArray();
+            return path.StartsWith(prefix)
+                ? path.Substring(prefix.Length)
+                : throw new ArgumentException($"TestCase path doesn't start with {prefix}: {path}");
         }
     }
 }

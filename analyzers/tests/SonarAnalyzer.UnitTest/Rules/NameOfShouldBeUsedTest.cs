@@ -40,7 +40,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void NameOfShouldBeUsed_CSharp5() =>
             OldVerifier.VerifyNoIssueReported(@"TestCases\NameOfShouldBeUsed.cs",
                 new CS.NameOfShouldBeUsed(),
-                new[] { new RoslynCS.CSharpParseOptions(RoslynCS.LanguageVersion.CSharp5) },
+                new[] { new RoslynCS.CSharpParseOptions(RoslynCS.LanguageVersion.CSharp5) },    // ToDo: Use WithLanguageVersion instead
                 CompilationErrorBehavior.Ignore);
 
         [TestMethod]

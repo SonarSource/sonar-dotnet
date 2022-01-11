@@ -18,9 +18,8 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-#if NET
+using System.Collections.Immutable;
 using Microsoft.CodeAnalysis;
-#endif
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.Rules.CSharp;
@@ -39,9 +38,10 @@ namespace SonarAnalyzer.UnitTest.Rules
 
         [TestMethod]
         public void ConditionalSimplification_CSharp8() =>
-            OldVerifier.VerifyAnalyzer(@"TestCases\ConditionalSimplification.CSharp8.cs",
-                                    new ConditionalSimplification(),
-                                    new[] { new CSharpParseOptions(LanguageVersion.CSharp8) });
+            new VerifierBuilder<ConditionalSimplification>()
+                .AddPaths("ConditionalSimplification.CSharp8.cs")
+                .WithLanguageVersion(LanguageVersion.CSharp8)
+                .Verify();
 
         [TestMethod]
         public void ConditionalSimplification_CSharp8_CodeFix() =>
@@ -49,7 +49,7 @@ namespace SonarAnalyzer.UnitTest.Rules
                                    @"TestCases\ConditionalSimplification.CSharp8.Fixed.cs",
                                    new ConditionalSimplification(),
                                    new ConditionalSimplificationCodeFixProvider(),
-                                   new[] { new CSharpParseOptions(LanguageVersion.CSharp8) });
+                                   new[] { new CSharpParseOptions(LanguageVersion.CSharp8) });  // ToDo: Use WithLanguageVersion instead
 
         [TestMethod]
         public void ConditionalSimplification_FromCSharp8() =>

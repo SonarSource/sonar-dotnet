@@ -35,7 +35,7 @@ namespace SonarAnalyzer.UnitTest.Rules
             OldVerifier.VerifyAnalyzer(
                 @"TestCases\MarkWindowsFormsMainWithStaThread.cs",
                 new CS.MarkWindowsFormsMainWithStaThread(),
-                null,
+                default,
                 CompilationErrorBehavior.Ignore,
                 OutputKind.WindowsApplication,
                 MetadataReferenceFacade.SystemWindowsForms);
@@ -45,7 +45,7 @@ namespace SonarAnalyzer.UnitTest.Rules
             OldVerifier.VerifyAnalyzer(
                 @"TestCases\MarkWindowsFormsMainWithStaThread.vb",
                 new VB.MarkWindowsFormsMainWithStaThread(),
-                null,
+                default,
                 CompilationErrorBehavior.Ignore,
                 OutputKind.WindowsApplication,
                 MetadataReferenceFacade.SystemWindowsForms);
@@ -75,7 +75,7 @@ namespace SonarAnalyzer.UnitTest.Rules
             OldVerifier.VerifyAnalyzer(
                 @"TestCases\MarkWindowsFormsMainWithStaThread_NoWindowsForms.cs",
                 new CS.MarkWindowsFormsMainWithStaThread(),
-                null,
+                default,
                 CompilationErrorBehavior.Ignore,
                 OutputKind.WindowsApplication);
 
@@ -84,7 +84,7 @@ namespace SonarAnalyzer.UnitTest.Rules
             OldVerifier.VerifyAnalyzer(
                 @"TestCases\MarkWindowsFormsMainWithStaThread_NoWindowsForms.vb",
                 new VB.MarkWindowsFormsMainWithStaThread(),
-                null,
+                default,
                 CompilationErrorBehavior.Ignore,
                 OutputKind.WindowsApplication);
     }

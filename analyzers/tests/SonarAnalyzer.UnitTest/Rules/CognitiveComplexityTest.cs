@@ -61,7 +61,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         {
             if (!TestContextHelper.IsAzureDevOpsContext) // ToDO: Test throws OOM on Azure DevOps
             {
-                OldVerifier.VerifyAnalyzer(@"TestCases\SyntaxWalker_InsufficientExecutionStackException.vb", new CS.CognitiveComplexity { Threshold = 0, PropertyThreshold = 0 });
+                OldVerifier.VerifyAnalyzer(@"TestCases\SyntaxWalker_InsufficientExecutionStackException.vb", new VB.CognitiveComplexity { Threshold = 0, PropertyThreshold = 0 });
             }
         }
     }

@@ -18,10 +18,15 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System;
 using System.Linq;
 using FluentAssertions;
+using Microsoft.CodeAnalysis;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using SonarAnalyzer.Rules.CSharp;
 using SonarAnalyzer.UnitTest.MetadataReferences;
+using CS = Microsoft.CodeAnalysis.CSharp;
+using VB = Microsoft.CodeAnalysis.VisualBasic;
 
 namespace SonarAnalyzer.UnitTest.TestFramework.Tests
 {
@@ -70,6 +75,46 @@ namespace SonarAnalyzer.UnitTest.TestFramework.Tests
         }
 
         [TestMethod]
+        public void WithErrorBehavior_Overrides_IsImmutable()
+        {
+            var one = Empty.WithErrorBehavior(CompilationErrorBehavior.FailTest);
+            var two = Empty.WithErrorBehavior(CompilationErrorBehavior.Ignore);
+            Empty.ErrorBehavior.Should().Be(CompilationErrorBehavior.Default);
+            one.ErrorBehavior.Should().Be(CompilationErrorBehavior.FailTest);
+            two.ErrorBehavior.Should().Be(CompilationErrorBehavior.Ignore);
+        }
+
+        [TestMethod]
+        public void WithLanguageVersion_Overrides_IsImmutable_CS()
+        {
+            var one = Empty.WithLanguageVersion(CS.LanguageVersion.CSharp10);
+            var two = one.WithLanguageVersion(CS.LanguageVersion.CSharp7);
+            Empty.ParseOptions.Should().BeEmpty();
+            one.ParseOptions.Should().ContainSingle().Which.Should().BeOfType<CS.CSharpParseOptions>().Which.LanguageVersion.Should().Be(CS.LanguageVersion.CSharp10);
+            two.ParseOptions.Should().ContainSingle().Which.Should().BeOfType<CS.CSharpParseOptions>().Which.LanguageVersion.Should().Be(CS.LanguageVersion.CSharp7);
+        }
+
+        [TestMethod]
+        public void WithLanguageVersion_Overrides_IsImmutable_VB()
+        {
+            var one = Empty.WithLanguageVersion(VB.LanguageVersion.VisualBasic16);
+            var two = one.WithLanguageVersion(VB.LanguageVersion.VisualBasic10);
+            Empty.ParseOptions.Should().BeEmpty();
+            one.ParseOptions.Should().ContainSingle().Which.Should().BeOfType<VB.VisualBasicParseOptions>().Which.LanguageVersion.Should().Be(VB.LanguageVersion.VisualBasic16);
+            two.ParseOptions.Should().ContainSingle().Which.Should().BeOfType<VB.VisualBasicParseOptions>().Which.LanguageVersion.Should().Be(VB.LanguageVersion.VisualBasic10);
+        }
+
+        [TestMethod]
+        public void WithOnlyDiagnostics_Overrides_IsImmutable()
+        {
+            var one = Empty.WithOnlyDiagnostics(NullPointerDereference.S2259);
+            var two = Empty.WithOnlyDiagnostics(PublicMethodArgumentsShouldBeCheckedForNull.S3900, ConditionEvaluatesToConstant.S2583);
+            Empty.OnlyDiagnostics.Should().BeEmpty();
+            one.OnlyDiagnostics.Should().BeEquivalentTo(NullPointerDereference.S2259);
+            two.OnlyDiagnostics.Should().BeEquivalentTo(PublicMethodArgumentsShouldBeCheckedForNull.S3900, ConditionEvaluatesToConstant.S2583);
+        }
+
+        [TestMethod]
         public void WithOptions_Overrides_IsImmutable()
         {
             var only7 = Empty.WithOptions(ParseOptionsHelper.OnlyCSharp7);
@@ -78,6 +123,56 @@ namespace SonarAnalyzer.UnitTest.TestFramework.Tests
             only7.ParseOptions.Should().BeEquivalentTo(ParseOptionsHelper.OnlyCSharp7);
             from8.ParseOptions.Should().BeEquivalentTo(ParseOptionsHelper.FromCSharp8);
         }
+
+        [TestMethod]
+        public void WithOutputKind_Overrides_IsImmutable()
+        {
+            var one = Empty.WithOutputKind(OutputKind.WindowsApplication);
+            var two = Empty.WithOutputKind(OutputKind.NetModule);
+            Empty.OutputKind.Should().Be(OutputKind.DynamicallyLinkedLibrary);
+            one.OutputKind.Should().Be(OutputKind.WindowsApplication);
+            two.OutputKind.Should().Be(OutputKind.NetModule);
+        }
+
+        [TestMethod]
+        public void WithSonarProjectConfig_Overrides_IsImmutable()
+        {
+            var one = Empty.WithSonarProjectConfigPath("First");
+            var two = one.WithSonarProjectConfigPath("Second");
+            var three = two.WithSonarProjectConfigPath(null);
+            Empty.SonarProjectConfigPath.Should().BeNull();
+            one.SonarProjectConfigPath.Should().Be("First");
+            two.SonarProjectConfigPath.Should().Be("Second");
+            three.SonarProjectConfigPath.Should().BeNull();
+        }
+
+        [TestMethod]
+        public void WithTopLevelSupport_Overrides_IsImmutable()
+        {
+            var sut = Empty.WithTopLevelStatements();
+            Empty.OutputKind.Should().Be(OutputKind.DynamicallyLinkedLibrary);
+            Empty.ParseOptions.Should().BeEmpty();
+            sut.OutputKind.Should().Be(OutputKind.ConsoleApplication);
+            sut.ParseOptions.Should().BeEquivalentTo(ParseOptionsHelper.FromCSharp9);
+        }
+
+        [TestMethod]
+        public void WithTopLevelSupport_PreservesParseOptions()
+        {
+            var sut = Empty.WithOptions(ParseOptionsHelper.FromCSharp10).WithTopLevelStatements();
+            sut.OutputKind.Should().Be(OutputKind.ConsoleApplication);
+            sut.ParseOptions.Should().BeEquivalentTo(ParseOptionsHelper.FromCSharp10);
+        }
+
+        [TestMethod]
+        public void WithTopLevelSupport_ForVisualBasicOptions_NotSupported() =>
+            Empty.WithOptions(ParseOptionsHelper.FromVisualBasic15).Invoking(x => x.WithTopLevelStatements()).Should().Throw<InvalidOperationException>()
+                .WithMessage("WithTopLevelStatements is not supported with VisualBasicParseOptions.");
+
+        [TestMethod]
+        public void WithTopLevelSupport_ForOldCSharp_NotSupported() =>
+            Empty.WithOptions(ParseOptionsHelper.FromCSharp8).Invoking(x => x.WithTopLevelStatements()).Should().Throw<InvalidOperationException>()
+                .WithMessage("WithTopLevelStatements is supported from CSharp9.");
 
         [TestMethod]
         public void Build_ReturnsVerifier() =>

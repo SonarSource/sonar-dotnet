@@ -24,6 +24,8 @@ using System.Collections.Immutable;
 using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Diagnostics;
+using CS = Microsoft.CodeAnalysis.CSharp;
+using VB = Microsoft.CodeAnalysis.VisualBasic;
 
 namespace SonarAnalyzer.UnitTest.TestFramework
 {
@@ -34,18 +36,26 @@ namespace SonarAnalyzer.UnitTest.TestFramework
     {
         // All properties are (and should be) immutable.
         public ImmutableArray<Func<DiagnosticAnalyzer>> Analyzers { get; init; } = ImmutableArray<Func<DiagnosticAnalyzer>>.Empty;
+        public CompilationErrorBehavior ErrorBehavior { get; init; } = CompilationErrorBehavior.Default;
+        public ImmutableArray<DiagnosticDescriptor> OnlyDiagnostics { get; init; } = ImmutableArray<DiagnosticDescriptor>.Empty;
+        public OutputKind OutputKind { get; init; } = OutputKind.DynamicallyLinkedLibrary;
         public ImmutableArray<string> Paths { get; init; } = ImmutableArray<string>.Empty;
-        public ImmutableArray<MetadataReference> References { get; init; } = ImmutableArray<MetadataReference>.Empty;
         public ImmutableArray<ParseOptions> ParseOptions { get; init; } = ImmutableArray<ParseOptions>.Empty;
+        public ImmutableArray<MetadataReference> References { get; init; } = ImmutableArray<MetadataReference>.Empty;
+        public string SonarProjectConfigPath { get; init; }
 
         public VerifierBuilder() { }
 
         private VerifierBuilder(VerifierBuilder original)
         {
-            Paths = original.Paths;
-            References = original.References;
-            ParseOptions = original.ParseOptions;
             Analyzers = original.Analyzers;
+            ErrorBehavior = original.ErrorBehavior;
+            OnlyDiagnostics = original.OnlyDiagnostics;
+            OutputKind = original.OutputKind;
+            Paths = original.Paths;
+            ParseOptions = original.ParseOptions;
+            References = original.References;
+            SonarProjectConfigPath = original.SonarProjectConfigPath;
         }
 
         /// <summary>
@@ -60,8 +70,40 @@ namespace SonarAnalyzer.UnitTest.TestFramework
         public VerifierBuilder AddReferences(IEnumerable<MetadataReference> references) =>
             new(this) { References = References.Concat(references).ToImmutableArray() };
 
+        public VerifierBuilder WithErrorBehavior(CompilationErrorBehavior errorBehavior) =>
+            new(this) { ErrorBehavior = errorBehavior };
+
+        public VerifierBuilder WithLanguageVersion(CS.LanguageVersion languageVersion) =>
+            WithOptions(ImmutableArray.Create<ParseOptions>(new CS.CSharpParseOptions(languageVersion)));
+
+        public VerifierBuilder WithLanguageVersion(VB.LanguageVersion languageVersion) =>
+            WithOptions(ImmutableArray.Create<ParseOptions>(new VB.VisualBasicParseOptions(languageVersion)));
+
+        public VerifierBuilder WithOnlyDiagnostics(params DiagnosticDescriptor[] onlyDiagnostics) =>
+            new(this) { OnlyDiagnostics = onlyDiagnostics.ToImmutableArray() };
+
         public VerifierBuilder WithOptions(ImmutableArray<ParseOptions> parseOptions) =>
             new(this) { ParseOptions = parseOptions };
+
+        public VerifierBuilder WithOutputKind(OutputKind outputKind) =>
+            new(this) { OutputKind = outputKind };
+
+        public VerifierBuilder WithSonarProjectConfigPath(string sonarProjectConfigPath) =>
+            new(this) { SonarProjectConfigPath = sonarProjectConfigPath };
+
+        public VerifierBuilder WithTopLevelStatements()
+        {
+            if (ParseOptions.OfType<VB.VisualBasicParseOptions>().Any())
+            {
+                throw new InvalidOperationException($"{nameof(WithTopLevelStatements)} is not supported with {nameof(VB.VisualBasicParseOptions)}.");
+            }
+            if (ParseOptions.Cast<CS.CSharpParseOptions>().Any(x => x.LanguageVersion < CS.LanguageVersion.CSharp9))
+            {
+                throw new InvalidOperationException($"{nameof(WithTopLevelStatements)} is supported from {nameof(CS.LanguageVersion.CSharp9)}.");
+            }
+            return (ParseOptions.IsEmpty ? WithOptions(ParseOptionsHelper.FromCSharp9) : this)
+                .WithOutputKind(OutputKind.ConsoleApplication);
+        }
 
         public Verifier Build() =>
             new(this);

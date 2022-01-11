@@ -72,10 +72,10 @@ namespace SonarAnalyzer.UnitTest.TestFramework
             using var scope = new EnvironmentVariableScope { EnableConcurrentAnalysis = true };         // ToDo: Implement properly
             var paths = builder.Paths.Select(x => Path.GetFullPath(Path.Combine("TestCases", x)));
             var pathsWithConcurrencyTests = paths.Count() == 1 ? CreateConcurrencyTest(paths) : paths;  // ToDo: Redesign when implementing concurrency
-            var solution = SolutionBuilder.CreateSolutionFromPaths(pathsWithConcurrencyTests, OutputKind.DynamicallyLinkedLibrary, builder.References);
+            var solution = SolutionBuilder.CreateSolutionFromPaths(pathsWithConcurrencyTests, builder.OutputKind, builder.References);
             foreach (var compilation in solution.Compile(builder.ParseOptions.ToArray()))
             {
-                DiagnosticVerifier.Verify(compilation, analyzers, CompilationErrorBehavior.Default, null, null);
+                DiagnosticVerifier.Verify(compilation, analyzers, builder.ErrorBehavior, builder.SonarProjectConfigPath, builder.OnlyDiagnostics.Select(x => x.Id).ToArray());
             }
         }
 

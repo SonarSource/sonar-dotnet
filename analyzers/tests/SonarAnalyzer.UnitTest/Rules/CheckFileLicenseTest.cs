@@ -162,8 +162,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         public void CheckFileLicense_WhenEmptyFile_ShouldBeNonCompliant_CS()
         {
-            Action action =
-                () => OldVerifier.VerifyAnalyzer(@"TestCases\CheckFileLicense_EmptyFile.cs", new CS.CheckFileLicense { HeaderFormat = SingleLineHeader });
+            Action action = () => OldVerifier.VerifyAnalyzer(@"TestCases\CheckFileLicense_EmptyFile.cs", new CS.CheckFileLicense { HeaderFormat = SingleLineHeader });
             action.Should().Throw<UnexpectedDiagnosticException>().WithMessage(
                 "CSharp*: Unexpected primary issue on line 1, span (0,0)-(0,0) with message 'Add or update the header of this file.'." + Environment.NewLine
                 + "See output to see all actual diagnostics raised on the file");
