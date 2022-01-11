@@ -95,6 +95,16 @@ namespace SonarAnalyzer.UnitTest.TestFramework.Tests
         }
 
         [TestMethod]
+        public void WithAutogenerateConcurrentFiles_Overrides_IsImmutable()
+        {
+            var one = Empty.WithAutogenerateConcurrentFiles(false);
+            var two = Empty.WithAutogenerateConcurrentFiles(true);
+            Empty.AutogenerateConcurrentFiles.Should().BeTrue();
+            one.AutogenerateConcurrentFiles.Should().BeFalse();
+            two.AutogenerateConcurrentFiles.Should().BeTrue();
+        }
+
+        [TestMethod]
         public void WithBasePath_Overrides_IsImmutable()
         {
             var one = Empty.WithBasePath("Hotspots");
