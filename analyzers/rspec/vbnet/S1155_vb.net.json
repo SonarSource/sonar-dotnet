@@ -1,0 +1,17 @@
+{
+  "title": "\"Any()\" should be used to test for emptiness",
+  "type": "CODE_SMELL",
+  "status": "ready",
+  "remediation": {
+    "func": "Constant\/Issue",
+    "constantCost": "2min"
+  },
+  "tags": [
+    "clumsy"
+  ],
+  "defaultSeverity": "Minor",
+  "ruleSpecification": "RSPEC-1155",
+  "sqKey": "S1155",
+  "scope": "All",
+  "quickfix": "unknown"
+}
