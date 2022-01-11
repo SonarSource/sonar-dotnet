@@ -205,4 +205,14 @@ namespace Tests.Diagnostics
     {
         public void Apply(SomeInterface<int> intValueParam) { }   //Noncompliant FN
     }
+
+    public abstract class BaseRepro
+    {
+        public abstract int SomeMethod(int SomeParam1, int SomeParam2);
+    }
+
+    public class Reproducer : BaseRepro
+    {
+        public override int SomeMethod(int _, int SomeParam2) => SomeParam2; // Noncompliant, it is not a discard
+    }
 }
