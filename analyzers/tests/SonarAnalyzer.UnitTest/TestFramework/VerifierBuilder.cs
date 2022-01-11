@@ -68,9 +68,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework
             new(this) { Paths = Paths.Concat(paths).ToImmutableArray() };
 
         public VerifierBuilder AddReferences(IEnumerable<MetadataReference> references) =>
-            references?.ToArray() is { Length: not 0 } referenceArray
-                ? new(this) { References = References.Concat(referenceArray).ToImmutableArray() }
-                : this;
+            new(this) { References = References.Concat(references).ToImmutableArray() };
 
         public VerifierBuilder WithErrorBehavior(CompilationErrorBehavior errorBehavior) =>
             new(this) { ErrorBehavior = errorBehavior };

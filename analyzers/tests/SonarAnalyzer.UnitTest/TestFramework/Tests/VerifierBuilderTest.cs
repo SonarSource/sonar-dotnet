@@ -75,14 +75,6 @@ namespace SonarAnalyzer.UnitTest.TestFramework.Tests
         }
 
         [TestMethod]
-        public void AddReferences_Null_ReturnsSelf() =>
-            Empty.AddReferences(null).Should().Be(Empty);
-
-        [TestMethod]
-        public void AddReferences_Empty_ReturnsSelf() =>
-            Empty.AddReferences(Enumerable.Empty<MetadataReference>()).Should().Be(Empty);
-
-        [TestMethod]
         public void WithErrorBehavior_Overrides_IsImmutable()
         {
             var one = Empty.WithErrorBehavior(CompilationErrorBehavior.FailTest);
