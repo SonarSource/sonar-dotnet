@@ -71,7 +71,6 @@ namespace SonarAnalyzer.UnitTest.TestFramework
 
         public void Verify()    // This should never has any arguments
         {
-            using var scope = new EnvironmentVariableScope { EnableConcurrentAnalysis = builder.ConcurrentAnalysis };
             foreach (var compilation in Compile())
             {
                 DiagnosticVerifier.Verify(compilation, analyzers, builder.ErrorBehavior, builder.SonarProjectConfigPath, onlyDiagnosticIds);
@@ -92,6 +91,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework
         private IEnumerable<Compilation> Compile()
         {
             const string TestCases = "TestCases";
+            using var scope = new EnvironmentVariableScope { EnableConcurrentAnalysis = builder.ConcurrentAnalysis };
             var basePath = Path.GetFullPath(builder.BasePath == null ? TestCases : Path.Combine(TestCases, builder.BasePath));
             var paths = builder.Paths.Select(x => Path.Combine(basePath, x)).ToArray();
             var project = SolutionBuilder.Create()
