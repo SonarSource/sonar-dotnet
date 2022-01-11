@@ -103,6 +103,16 @@ namespace SonarAnalyzer.UnitTest.TestFramework
                 : AddDocument(Project, fileInfo.Name, File.ReadAllText(fileInfo.FullName, Encoding.UTF8), removeAnalysisComments);
         }
 
+        public ProjectBuilder AddSnippets(params string[] snippets)
+        {
+            var ret = this;
+            foreach (var snippet in snippets)
+            {
+                ret = ret.AddSnippet(snippet);
+            }
+            return ret;
+        }
+
         public ProjectBuilder AddSnippet(string code, string fileName = null, bool removeAnalysisComments = false)
         {
             if (code == null)

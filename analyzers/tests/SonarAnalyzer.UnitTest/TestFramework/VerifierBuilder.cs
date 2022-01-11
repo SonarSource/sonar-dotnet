@@ -87,7 +87,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework
             AddReferences(NuGetMetadataReference.MSTestTestFrameworkV1);
 
         /// <summary>
-        /// Path infix relative to TestCases directory
+        /// Path infix relative to TestCases directory.
         /// </summary>
         /// <remarks>If we ever need to change the root outside TestCases directory, add WithRootPath(..)</remarks>
         public VerifierBuilder WithBasePath(string basePath) =>

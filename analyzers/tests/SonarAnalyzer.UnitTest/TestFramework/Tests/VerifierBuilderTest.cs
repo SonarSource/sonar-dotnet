@@ -95,7 +95,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework.Tests
         }
 
         [TestMethod]
-        public void WithBasePath()
+        public void WithBasePath_Overrides_IsImmutable()
         {
             var one = Empty.WithBasePath("Hotspots");
             var two = Empty.WithBasePath("SymbolicExecution");

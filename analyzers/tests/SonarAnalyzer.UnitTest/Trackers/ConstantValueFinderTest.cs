@@ -48,10 +48,7 @@ public partial class Sample
         return Field;
     }
 }";
-            var compilation = SolutionBuilder.Create().AddProject(AnalyzerLanguage.CSharp, createExtraEmptyFile: false)
-                .AddSnippet(code1)
-                .AddSnippet(code2)
-                .GetCompilation();
+            var compilation = SolutionBuilder.Create().AddProject(AnalyzerLanguage.CSharp, createExtraEmptyFile: false).AddSnippets(code1, code2).GetCompilation();
             var tree = compilation.SyntaxTrees.Single(x => x.GetRoot().DescendantNodes().OfType<MethodDeclarationSyntax>().Any());
             var returnExpression = tree.GetRoot().DescendantNodes().OfType<ReturnStatementSyntax>().Single().Expression;
             var finder = new CSharpConstantValueFinder(compilation.GetSemanticModel(tree));
@@ -76,12 +73,8 @@ public class Bar
         return Field;
     }
 }";
-            var firstCompilation = SolutionBuilder.Create().AddProject(AnalyzerLanguage.CSharp, createExtraEmptyFile: false)
-                .AddSnippet(firstSnippet)
-                .GetCompilation();
-            var secondCompilation = SolutionBuilder.Create().AddProject(AnalyzerLanguage.CSharp, createExtraEmptyFile: false)
-                .AddSnippet(secondSnippet)
-                .GetCompilation();
+            var firstCompilation = SolutionBuilder.Create().AddProject(AnalyzerLanguage.CSharp, createExtraEmptyFile: false).AddSnippet(firstSnippet).GetCompilation();
+            var secondCompilation = SolutionBuilder.Create().AddProject(AnalyzerLanguage.CSharp, createExtraEmptyFile: false).AddSnippet(secondSnippet).GetCompilation();
             var secondCompilationReturnExpression = secondCompilation.SyntaxTrees.Single().GetRoot().DescendantNodes().OfType<ReturnStatementSyntax>().Single().Expression;
             var firstCompilationFinder = new CSharpConstantValueFinder(firstCompilation.GetSemanticModel(firstCompilation.SyntaxTrees.Single()));
             firstCompilationFinder.FindConstant(secondCompilationReturnExpression).Should().BeNull();
