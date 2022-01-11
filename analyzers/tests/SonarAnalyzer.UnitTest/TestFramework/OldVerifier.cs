@@ -556,7 +556,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework
                                                        DiagnosticDescriptor[] onlyDiagnostics = null) =>
             new VerifierBuilder()
                 .AddAnalyzer(() => diagnosticAnalyzer)
-                .AddReferences(additionalReferences)
+                .AddReferences(additionalReferences ?? Enumerable.Empty<MetadataReference>())
                 .AddTestReference()
                 .AddPaths(RemoveTestCasesPrefix(path))
                 .WithOnlyDiagnostics(onlyDiagnostics ?? Array.Empty<DiagnosticDescriptor>())
@@ -570,7 +570,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework
                                                        DiagnosticDescriptor[] onlyDiagnostics = null) =>
             new VerifierBuilder()
                 .AddAnalyzer(() => diagnosticAnalyzer)
-                .AddReferences(additionalReferences)
+                .AddReferences(additionalReferences ?? Enumerable.Empty<MetadataReference>())
                 .AddTestReference()
                 .AddPaths(RemoveTestCasesPrefix(path))
                 .WithOptions(options.IsDefault ? ImmutableArray<ParseOptions>.Empty : options)
@@ -611,7 +611,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework
                                                  string sonarProjectConfigPath = null) =>
             new VerifierBuilder()
                 .AddAnalyzer(() => diagnosticAnalyzer)
-                .AddReferences(additionalReferences)
+                .AddReferences(additionalReferences ?? Enumerable.Empty<MetadataReference>())
                 .AddPaths(RemoveTestCasesPrefix(path))
                 .WithOptions(options.IsDefault ? ImmutableArray<ParseOptions>.Empty : options)
                 .WithErrorBehavior(checkMode)
