@@ -71,10 +71,12 @@ public static class Utils
 
         [TestMethod]
         public void NullPointerDereference_DoesNotRaiseIssuesForTestProject() =>
-            OldVerifier.VerifyNoIssueReportedInTest(
-                @"TestCases\SymbolicExecution\Sonar\NullPointerDereference.cs",
-                new SymbolicExecutionRunner(),
-                onlyDiagnostics: OnlyDiagnostics);
+            new VerifierBuilder<SymbolicExecutionRunner>()
+                .AddTestReference()
+                .AddPaths(@"SymbolicExecution\Sonar\NullPointerDereference.cs")
+                .WithOnlyDiagnostics(OnlyDiagnostics)
+                .WithConcurrentAnalysis(false)
+                .VerifyNoIssueReported();
 
         [TestMethod]
         public void NullPointerDereference_CSharp6() =>
