@@ -73,10 +73,10 @@ namespace SonarAnalyzer.UnitTest.TestFramework
             using var scope = new EnvironmentVariableScope { EnableConcurrentAnalysis = builder.ConcurrentAnalysis};
             var basePath = Path.GetFullPath(builder.BasePath == null ? TestCases : Path.Combine(TestCases, builder.BasePath));
             var paths = builder.Paths.Select(x => Path.Combine(basePath, x));
-            var pathsWithConcurrencyTests = paths.Count() == 1 && builder.ConcurrentAnalysis ? CreateConcurrencyTest(paths) : paths;  // ToDo: Redesign when implementing concurrency
             var project = SolutionBuilder.Create()
                 .AddProject(language, true, builder.OutputKind)
-                .AddDocuments(pathsWithConcurrencyTests)
+                .AddDocuments(paths)
+                .AddDocuments(builder.ConcurrentAnalysis && paths.Count() == 1 ? CreateConcurrencyTest(paths) : Enumerable.Empty<string>())
                 .AddSnippets(builder.Snippets.ToArray())
                 .AddReferences(builder.References);
             foreach (var compilation in project.GetSolution().Compile(builder.ParseOptions.ToArray()))

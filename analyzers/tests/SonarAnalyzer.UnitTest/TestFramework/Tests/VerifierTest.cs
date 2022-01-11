@@ -95,6 +95,10 @@ namespace SonarAnalyzer.UnitTest.TestFramework.Tests
     private bool c = true;
 }").Invoking(x => x.Verify()).Should().Throw<AssertFailedException>().WithMessage(
 @"CSharp7: Issue(s) expected but not raised in file(s):
+File: File.cs
+Line: 3, Type: primary, Id: ''
+Line: 4, Type: primary, Id: ''
+
 File: File.Concurrent.cs
 Line: 3, Type: primary, Id: ''
 Line: 4, Type: primary, Id: ''
@@ -205,7 +209,7 @@ Line: 3, Type: primary, Id: ''
         {
             var builder = WithSnippet("var topLevelStatement = true;").WithOptions(ParseOptionsHelper.FromCSharp9).WithOutputKind(OutputKind.ConsoleApplication);
             builder.Invoking(x => x.Verify()).Should().Throw<UnexpectedDiagnosticException>("Default Verifier behavior duplicates the source file.")
-                .WithMessage("CSharp9: Unexpected build error [CS5001]: Program does not contain a static 'Main' method suitable for an entry point on line 1");
+                .WithMessage("CSharp9: Unexpected build error [CS0825]: The contextual keyword 'var' may only appear within a local variable declaration or in script code on line 1");
             builder.WithConcurrentAnalysis(false).Invoking(x => x.Verify()).Should().NotThrow();
         }
 
@@ -216,7 +220,7 @@ Line: 3, Type: primary, Id: ''
             builder.WithTopLevelStatements().Invoking(x => x.Verify()).Should().NotThrow();
             builder.WithOutputKind(OutputKind.ConsoleApplication).WithConcurrentAnalysis(false).Invoking(x => x.Verify()).Should().NotThrow();
             builder.Invoking(x => x.Verify()).Should().Throw<UnexpectedDiagnosticException>()
-                .WithMessage("CSharp9: Unexpected build error [CS0825]: The contextual keyword 'var' may only appear within a local variable declaration or in script code on line 1");
+                .WithMessage("CSharp9: Unexpected build error [CS8805]: Program using top-level statements must be an executable. on line 1");
         }
 
         [TestMethod]
