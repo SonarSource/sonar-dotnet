@@ -79,7 +79,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework
                                         IEnumerable<MetadataReference> additionalReferences = null) =>
             new VerifierBuilder()
                 .AddAnalyzer(() => diagnosticAnalyzer)
-                .AddReferences(additionalReferences)
+                .AddReferences(additionalReferences ?? Enumerable.Empty<MetadataReference>())
                 .AddSnippet(snippet)
                 .WithConcurrentAnalysis(false)
                 .WithErrorBehavior(checkMode)
@@ -99,7 +99,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework
                                                 string sonarProjectConfigPath = null) =>
             new VerifierBuilder()
                 .AddAnalyzer(() => diagnosticAnalyzer)
-                .AddReferences(additionalReferences)
+                .AddReferences(additionalReferences ?? Enumerable.Empty<MetadataReference>())
                 .AddSnippet(snippet)
                 .WithConcurrentAnalysis(false)
                 .WithOptions(options.IsDefault ? ImmutableArray<ParseOptions>.Empty : options)
@@ -119,7 +119,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework
                                                      IEnumerable<MetadataReference> additionalReferences = null) =>
             new VerifierBuilder()
                 .AddAnalyzer(() => diagnosticAnalyzer)
-                .AddReferences(additionalReferences)
+                .AddReferences(additionalReferences ?? Enumerable.Empty<MetadataReference>())
                 .AddSnippet(snippet)
                 .WithConcurrentAnalysis(false)
                 .WithErrorBehavior(checkMode)
@@ -135,7 +135,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework
                                                             DiagnosticDescriptor[] onlyDiagnostics = null) =>
             new VerifierBuilder()
                 .AddAnalyzer(() => diagnosticAnalyzer)
-                .AddReferences(additionalReferences)
+                .AddReferences(additionalReferences ?? Enumerable.Empty<MetadataReference>())
                 .AddPaths(RemoveTestCasesPrefix(path))
                 .WithOptions(ParseOptionsHelper.FromCSharp9)
                 .WithTopLevelStatements()
@@ -146,7 +146,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework
         public static void VerifyAnalyzerFromCSharp10Console(string path, DiagnosticAnalyzer diagnosticAnalyzer, IEnumerable<MetadataReference> additionalReferences = null) =>
             new VerifierBuilder()
                 .AddAnalyzer(() => diagnosticAnalyzer)
-                .AddReferences(additionalReferences)
+                .AddReferences(additionalReferences ?? Enumerable.Empty<MetadataReference>())
                 .AddPaths(RemoveTestCasesPrefix(path))
                 .WithOptions(ParseOptionsHelper.FromCSharp10)
                 .WithTopLevelStatements()
@@ -159,7 +159,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework
         public static void VerifyAnalyzerFromCSharp9Console(string[] paths, DiagnosticAnalyzer diagnosticAnalyzer, IEnumerable<MetadataReference> additionalReferences = null) =>
             new VerifierBuilder()
                 .AddAnalyzer(() => diagnosticAnalyzer)
-                .AddReferences(additionalReferences)
+                .AddReferences(additionalReferences ?? Enumerable.Empty<MetadataReference>())
                 .AddPaths(RemoveTestCasesPrefix(paths))
                 .WithOptions(ParseOptionsHelper.FromCSharp9)
                 .WithTopLevelStatements()
@@ -169,7 +169,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework
         public static void VerifyAnalyzerFromCSharp10Console(string[] paths, DiagnosticAnalyzer diagnosticAnalyzer, IEnumerable<MetadataReference> additionalReferences = null) =>
             new VerifierBuilder()
                 .AddAnalyzer(() => diagnosticAnalyzer)
-                .AddReferences(additionalReferences)
+                .AddReferences(additionalReferences ?? Enumerable.Empty<MetadataReference>())
                 .AddPaths(RemoveTestCasesPrefix(paths))
                 .WithOptions(ParseOptionsHelper.FromCSharp10)
                 .WithTopLevelStatements()
@@ -184,7 +184,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework
                                                             IEnumerable<MetadataReference> additionalReferences = null,
                                                             DiagnosticDescriptor[] onlyDiagnostics = null) =>
             diagnosticAnalyzers.Aggregate(new VerifierBuilder(), (builder, analyzer) => builder.AddAnalyzer(() => analyzer))
-                .AddReferences(additionalReferences)
+                .AddReferences(additionalReferences ?? Enumerable.Empty<MetadataReference>())
                 .AddPaths(RemoveTestCasesPrefix(path))
                 .WithOptions(ParseOptionsHelper.FromCSharp9)
                 .WithTopLevelStatements()
@@ -198,7 +198,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework
         public static void VerifyAnalyzerFromCSharp9LibraryInTest(string path, DiagnosticAnalyzer diagnosticAnalyzer, IEnumerable<MetadataReference> additionalReferences = null) =>
             new VerifierBuilder()
                 .AddAnalyzer(() => diagnosticAnalyzer)
-                .AddReferences(additionalReferences)
+                .AddReferences(additionalReferences ?? Enumerable.Empty<MetadataReference>())
                 .AddTestReference()
                 .AddPaths(RemoveTestCasesPrefix(path))
                 .WithConcurrentAnalysis(false)
@@ -212,7 +212,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework
         public static void VerifyAnalyzerFromCSharp10LibraryInTest(string path, DiagnosticAnalyzer diagnosticAnalyzer, IEnumerable<MetadataReference> additionalReferences = null) =>
             new VerifierBuilder()
                 .AddAnalyzer(() => diagnosticAnalyzer)
-                .AddReferences(additionalReferences)
+                .AddReferences(additionalReferences ?? Enumerable.Empty<MetadataReference>())
                 .AddTestReference()
                 .AddPaths(RemoveTestCasesPrefix(path))
                 .WithConcurrentAnalysis(false)
@@ -226,7 +226,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework
         public static void VerifyAnalyzerFromCSharp9ConsoleInTest(string path, DiagnosticAnalyzer diagnosticAnalyzer, IEnumerable<MetadataReference> additionalReferences = null) =>
             new VerifierBuilder()
                 .AddAnalyzer(() => diagnosticAnalyzer)
-                .AddReferences(additionalReferences)
+                .AddReferences(additionalReferences ?? Enumerable.Empty<MetadataReference>())
                 .AddTestReference()
                 .AddPaths(RemoveTestCasesPrefix(path))
                 .WithTopLevelStatements()
@@ -243,7 +243,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework
                                                             DiagnosticDescriptor[] onlyDiagnostics = null) =>
             new VerifierBuilder()
                 .AddAnalyzer(() => diagnosticAnalyzer)
-                .AddReferences(additionalReferences)
+                .AddReferences(additionalReferences ?? Enumerable.Empty<MetadataReference>())
                 .AddPaths(RemoveTestCasesPrefix(path))
                 .WithConcurrentAnalysis(false)
                 .WithOptions(ParseOptionsHelper.FromCSharp9)
@@ -261,7 +261,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework
                                                             DiagnosticDescriptor[] onlyDiagnostics = null) =>
             new VerifierBuilder()
                 .AddAnalyzer(() => diagnosticAnalyzer)
-                .AddReferences(additionalReferences)
+                .AddReferences(additionalReferences ?? Enumerable.Empty<MetadataReference>())
                 .AddPaths(RemoveTestCasesPrefix(path))
                 .WithConcurrentAnalysis(false)
                 .WithOptions(ParseOptionsHelper.FromCSharp9)
@@ -276,7 +276,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework
                                                              DiagnosticDescriptor[] onlyDiagnostics = null) =>
             new VerifierBuilder()
                 .AddAnalyzer(() => diagnosticAnalyzer)
-                .AddReferences(additionalReferences)
+                .AddReferences(additionalReferences ?? Enumerable.Empty<MetadataReference>())
                 .AddPaths(RemoveTestCasesPrefix(path))
                 .WithConcurrentAnalysis(false)
                 .WithOptions(ParseOptionsHelper.FromCSharp10)
@@ -289,7 +289,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework
                                                              IEnumerable<MetadataReference> additionalReferences = null,
                                                              DiagnosticDescriptor[] onlyDiagnostics = null) =>
             diagnosticAnalyzers.Aggregate(new VerifierBuilder(), (builder, analyzer) => builder.AddAnalyzer(() => analyzer))
-                .AddReferences(additionalReferences)
+                .AddReferences(additionalReferences ?? Enumerable.Empty<MetadataReference>())
                 .AddPaths(RemoveTestCasesPrefix(path))
                 .WithConcurrentAnalysis(false)
                 .WithOptions(ParseOptionsHelper.FromCSharp10)
@@ -304,7 +304,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework
                                                              DiagnosticDescriptor[] onlyDiagnostics = null) =>
             new VerifierBuilder()
                 .AddAnalyzer(() => diagnosticAnalyzer)
-                .AddReferences(additionalReferences)
+                .AddReferences(additionalReferences ?? Enumerable.Empty<MetadataReference>())
                 .AddPaths(RemoveTestCasesPrefix(path))
                 .WithConcurrentAnalysis(false)
                 .WithOptions(ParseOptionsHelper.FromCSharp10)
@@ -316,7 +316,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework
         public static void VerifyAnalyzerCSharpPreviewLibrary(string path, DiagnosticAnalyzer diagnosticAnalyzer, IEnumerable<MetadataReference> additionalReferences = null) =>
             new VerifierBuilder()
                 .AddAnalyzer(() => diagnosticAnalyzer)
-                .AddReferences(additionalReferences)
+                .AddReferences(additionalReferences ?? Enumerable.Empty<MetadataReference>())
                 .AddPaths(RemoveTestCasesPrefix(path))
                 .WithConcurrentAnalysis(false)
                 .WithOptions(ParseOptionsHelper.CSharpPreview)
@@ -329,7 +329,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework
         public static void VerifyAnalyzerFromCSharp9Library(string[] paths, DiagnosticAnalyzer diagnosticAnalyzer, IEnumerable<MetadataReference> additionalReferences = null) =>
             new VerifierBuilder()
                 .AddAnalyzer(() => diagnosticAnalyzer)
-                .AddReferences(additionalReferences)
+                .AddReferences(additionalReferences ?? Enumerable.Empty<MetadataReference>())
                 .AddPaths(RemoveTestCasesPrefix(paths))
                 .WithConcurrentAnalysis(false)
                 .WithOptions(ParseOptionsHelper.FromCSharp9)
@@ -339,7 +339,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework
         public static void VerifyAnalyzerFromCSharp10Library(string[] paths, DiagnosticAnalyzer diagnosticAnalyzer, IEnumerable<MetadataReference> additionalReferences = null) =>
             new VerifierBuilder()
                 .AddAnalyzer(() => diagnosticAnalyzer)
-                .AddReferences(additionalReferences)
+                .AddReferences(additionalReferences ?? Enumerable.Empty<MetadataReference>())
                 .AddPaths(RemoveTestCasesPrefix(paths))
                 .WithConcurrentAnalysis(false)
                 .WithOptions(ParseOptionsHelper.FromCSharp10)
@@ -351,7 +351,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework
                                                        IEnumerable<MetadataReference> additionalReferences) =>
             new VerifierBuilder()
                 .AddAnalyzer(() => diagnosticAnalyzer)
-                .AddReferences(additionalReferences)
+                .AddReferences(additionalReferences ?? Enumerable.Empty<MetadataReference>())
                 .AddPaths(RemoveTestCasesPrefix(path))
                 .WithConcurrentAnalysis(false)
                 .Verify();
@@ -366,7 +366,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework
                                                        DiagnosticDescriptor[] onlyDiagnostics = null) =>
             new VerifierBuilder()
                 .AddAnalyzer(() => diagnosticAnalyzer)
-                .AddReferences(additionalReferences)
+                .AddReferences(additionalReferences ?? Enumerable.Empty<MetadataReference>())
                 .AddPaths(RemoveTestCasesPrefix(path))
                 .WithConcurrentAnalysis(false)
                 .WithOptions(options.IsDefault ? ImmutableArray<ParseOptions>.Empty : options)
@@ -381,7 +381,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework
                                                        IEnumerable<MetadataReference> additionalReferences) =>
             new VerifierBuilder()
                 .AddAnalyzer(() => diagnosticAnalyzer)
-                .AddReferences(additionalReferences)
+                .AddReferences(additionalReferences ?? Enumerable.Empty<MetadataReference>())
                 .AddPaths(RemoveTestCasesPrefix(paths))
                 .WithConcurrentAnalysis(false)
                 .Verify();
@@ -393,7 +393,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework
                                                        IEnumerable<MetadataReference> additionalReferences = null) =>
             new VerifierBuilder()
                 .AddAnalyzer(() => diagnosticAnalyzer)
-                .AddReferences(additionalReferences)
+                .AddReferences(additionalReferences ?? Enumerable.Empty<MetadataReference>())
                 .AddPaths(RemoveTestCasesPrefix(paths))
                 .WithConcurrentAnalysis(false)
                 .WithOptions(options.IsDefault ? ImmutableArray<ParseOptions>.Empty : options)
@@ -405,7 +405,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework
                                           IEnumerable<MetadataReference> additionalReferences) =>
             new VerifierBuilder()
                 .AddAnalyzer(() => diagnosticAnalyzer)
-                .AddReferences(additionalReferences)
+                .AddReferences(additionalReferences ?? Enumerable.Empty<MetadataReference>())
                 .AddPaths(RemoveTestCasesPrefix(paths))
                 .Verify();
 
