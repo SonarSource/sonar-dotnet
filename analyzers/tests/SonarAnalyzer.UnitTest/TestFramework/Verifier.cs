@@ -76,7 +76,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework
             var project = SolutionBuilder.Create()
                 .AddProject(language, true, builder.OutputKind)
                 .AddDocuments(paths)
-                .AddDocuments(builder.ConcurrentAnalysis && paths.Count() == 1 ? CreateConcurrencyTest(paths) : Enumerable.Empty<string>())
+                .AddDocuments(builder.ConcurrentAnalysis && builder.AutogenerateConcurrentFiles ? CreateConcurrencyTest(paths) : Enumerable.Empty<string>())
                 .AddSnippets(builder.Snippets.ToArray())
                 .AddReferences(builder.References);
             foreach (var compilation in project.GetSolution().Compile(builder.ParseOptions.ToArray()))
@@ -100,8 +100,8 @@ namespace SonarAnalyzer.UnitTest.TestFramework
         {
             return language.LanguageName switch
             {
-                LanguageNames.CSharp => $"namespace AppendedNamespaceForConcurrencyTest {{ {content} }}",
-                LanguageNames.VisualBasic => content.Insert(ImportsIndexVB(), "Namespace AppendedNamespaceForConcurrencyTest : ") + " : End Namespace",
+                LanguageNames.CSharp => $"namespace AppendedNamespaceForConcurrencyTest {{ {content} {Environment.NewLine}}}",  // Last line can be a comment
+                LanguageNames.VisualBasic => content.Insert(ImportsIndexVB(), "Namespace AppendedNamespaceForConcurrencyTest : ") + Environment.NewLine + " : End Namespace",
                 _ => throw new UnexpectedLanguageException(language)
             };
 

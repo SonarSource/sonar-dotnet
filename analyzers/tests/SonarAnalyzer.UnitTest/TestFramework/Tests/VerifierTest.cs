@@ -31,7 +31,8 @@ namespace SonarAnalyzer.UnitTest.TestFramework.Tests
     [TestClass]
     public class VerifierTest
     {
-        private static readonly VerifierBuilder Dummy = new VerifierBuilder<DummyAnalyzer>();
+        private static readonly VerifierBuilder DummyCS = new VerifierBuilder<DummyAnalyzerCS>();
+        private static readonly VerifierBuilder DummyVB = new VerifierBuilder<DummyAnalyzerVB>();
 
         public TestContext TestContext { get; set; }
 
@@ -52,22 +53,22 @@ namespace SonarAnalyzer.UnitTest.TestFramework.Tests
 
         [TestMethod]
         public void Constructor_NoPaths_Throws() =>
-            new VerifierBuilder<DummyAnalyzer>()
+            new VerifierBuilder<DummyAnalyzerCS>()
                 .Invoking(x => x.Build()).Should().Throw<ArgumentException>().WithMessage("Paths cannot be empty. Add at least one file using builder.AddPaths() or AddSnippet().");
 
         [TestMethod]
         public void Constructor_MixedLanguageAnalyzers_Throws() =>
-            new VerifierBuilder<DummyAnalyzer>().AddAnalyzer(() => new SonarAnalyzer.Rules.VisualBasic.OptionStrictOn())
+            new VerifierBuilder<DummyAnalyzerCS>().AddAnalyzer(() => new SonarAnalyzer.Rules.VisualBasic.OptionStrictOn())
                 .Invoking(x => x.Build()).Should().Throw<ArgumentException>().WithMessage("All Analyzers must declare the same language in their DiagnosticAnalyzerAttribute.");
 
         [TestMethod]
         public void Constructor_MixedLanguagePaths_Throws() =>
-            new VerifierBuilder<DummyAnalyzer>().AddPaths("File.txt")
+            new VerifierBuilder<DummyAnalyzerCS>().AddPaths("File.txt")
                 .Invoking(x => x.Build()).Should().Throw<ArgumentException>().WithMessage("Path 'File.txt' doesn't match C# file extension '.cs'.");
 
         [TestMethod]
-        public void Verify_RaiseExpectedIssues() =>
-            WithSnippet(
+        public void Verify_RaiseExpectedIssues_CS() =>
+            WithSnippetCS(
 @"public class Sample
 {
     private int a = 42;     // Noncompliant {{Dummy message}}
@@ -76,8 +77,17 @@ namespace SonarAnalyzer.UnitTest.TestFramework.Tests
 }").Invoking(x => x.Verify()).Should().NotThrow();
 
         [TestMethod]
-        public void Verify_RaiseUnexpectedIssues() =>
-            WithSnippet(
+        public void Verify_RaiseExpectedIssues_VB() =>
+            WithSnippetVB(
+@"Public Class Sample
+    Private A As Integer = 42   ' Noncompliant {{Dummy message}}
+    Private B As Integer = 42   ' Noncompliant
+    Private C As Boolean = True
+End Class").Invoking(x => x.Verify()).Should().NotThrow();
+
+        [TestMethod]
+        public void Verify_RaiseUnexpectedIssues_CS() =>
+            WithSnippetCS(
 @"public class Sample
 {
     private int a = 42;     // FP
@@ -86,8 +96,17 @@ namespace SonarAnalyzer.UnitTest.TestFramework.Tests
 }").Invoking(x => x.Verify()).Should().Throw<UnexpectedDiagnosticException>().WithMessage("CSharp7: Unexpected primary issue on line 3, span (2,20)-(2,22) with message 'Dummy message'*");
 
         [TestMethod]
+        public void Verify_RaiseUnexpectedIssues_VB() =>
+            WithSnippetVB(
+@"Public Class Sample
+    Private A As Integer = 42   ' FP
+    Private B As Integer = 42   ' FP
+    Private C As Boolean = True
+End Class").Invoking(x => x.Verify()).Should().Throw<UnexpectedDiagnosticException>().WithMessage("VisualBasic12: Unexpected primary issue on line 2, span (1,27)-(1,29) with message 'Dummy message'*");
+
+        [TestMethod]
         public void Verify_MissingExpectedIssues() =>
-            WithSnippet(
+            WithSnippetCS(
 @"public class Sample
 {
     private bool a = true;   // Noncompliant - FN
@@ -106,7 +125,7 @@ Line: 4, Type: primary, Id: ''
 
         [TestMethod]
         public void Verify_TwoAnalyzers() =>
-            WithSnippet(
+            WithSnippetCS(
 @"public class Sample
 {
     private int a = 42;     // Noncompliant {{Dummy message}}
@@ -115,12 +134,12 @@ Line: 4, Type: primary, Id: ''
                             // Noncompliant@-1
     private bool c = true;
 }")
-            .AddAnalyzer(() => new DummyAnalyzer()) // Duplicate
+            .AddAnalyzer(() => new DummyAnalyzerCS()) // Duplicate
             .Invoking(x => x.Verify()).Should().NotThrow();
 
         [TestMethod]
         public void Verify_TwoPaths() =>
-            WithSnippet(
+            WithSnippetCS(
 @"public class First
 {
     private bool a = true;     // Noncompliant - FN in File.cs
@@ -130,6 +149,7 @@ Line: 4, Type: primary, Id: ''
 {
     private bool a = true;     // Noncompliant - FN in Second.cs
 }"))
+            .WithConcurrentAnalysis(false)
             .Invoking(x => x.Verify()).Should().Throw<AssertFailedException>().WithMessage(
 @"CSharp7: Issue(s) expected but not raised in file(s):
 File: File.cs
@@ -138,6 +158,27 @@ Line: 3, Type: primary, Id: ''
 File: Second.cs
 Line: 3, Type: primary, Id: ''
 ");
+
+        [TestMethod]
+        public void Verify_AutogenerateConcurrentFiles()
+        {
+            var builder = WithSnippetCS("// Noncompliant - FN");
+            // Concurrent analysis by-default automatically generates concurrent files - File.Concurrent.cs
+            builder.Invoking(x => x.Verify()).Should().Throw<AssertFailedException>().WithMessage(
+    @"CSharp7: Issue(s) expected but not raised in file(s):
+File: File.cs
+Line: 1, Type: primary, Id: ''
+
+File: File.Concurrent.cs
+Line: 1, Type: primary, Id: ''
+");
+            // When AutogenerateConcurrentFiles is turned off, only the provided snippet is analyzed
+            builder.WithAutogenerateConcurrentFiles(false).Invoking(x => x.Verify()).Should().Throw<AssertFailedException>().WithMessage(
+    @"CSharp7: Issue(s) expected but not raised in file(s):
+File: File.cs
+Line: 1, Type: primary, Id: ''
+");
+        }
 
         [TestMethod]
         public void Verify_TestProject()
@@ -151,7 +192,7 @@ Line: 3, Type: primary, Id: ''
         [TestMethod]
         public void Verify_ParseOptions()
         {
-            var builder = WithSnippet(
+            var builder = WithSnippetCS(
 @"public class Sample
 {
     private System.Exception ex = new(); // C# 9 target-typed new
@@ -164,15 +205,15 @@ Line: 3, Type: primary, Id: ''
         [TestMethod]
         public void Verify_BasePath()
         {
-            Dummy.AddPaths("Nonexistent.cs").Invoking(x => x.Verify()).Should().Throw<FileNotFoundException>("This file should not exist in TestCases directory.");
-            Dummy.AddPaths("ArrayCovariance.cs").Invoking(x => x.Verify()).Should().Throw<UnexpectedDiagnosticException>("File should be found in TestCases directory.");
-            Dummy.WithBasePath("TestFramework").AddPaths("Verifier.BasePath.cs").Invoking(x => x.Verify()).Should().NotThrow();
+            DummyCS.AddPaths("Nonexistent.cs").Invoking(x => x.Verify()).Should().Throw<FileNotFoundException>("This file should not exist in TestCases directory.");
+            DummyCS.AddPaths("ArrayCovariance.cs").Invoking(x => x.Verify()).Should().Throw<UnexpectedDiagnosticException>("File should be found in TestCases directory.");
+            DummyCS.WithBasePath("TestFramework").AddPaths("Verifier.BasePath.cs").Invoking(x => x.Verify()).Should().NotThrow();
         }
 
         [TestMethod]
         public void Verify_ErrorBehavior()
         {
-            var builder = WithSnippet("undefined");
+            var builder = WithSnippetCS("undefined");
             builder.Invoking(x => x.Verify()).Should().Throw<UnexpectedDiagnosticException>()
                 .WithMessage("CSharp7: Unexpected build error [CS0116]: A namespace cannot directly contain members such as fields, methods or statements on line 1");
             builder.WithErrorBehavior(CompilationErrorBehavior.FailTest).Invoking(x => x.Verify()).Should().Throw<UnexpectedDiagnosticException>()
@@ -207,7 +248,7 @@ Line: 3, Type: primary, Id: ''
         [TestMethod]
         public void Verify_NonConcurrentAnalysis()
         {
-            var builder = WithSnippet("var topLevelStatement = true;").WithOptions(ParseOptionsHelper.FromCSharp9).WithOutputKind(OutputKind.ConsoleApplication);
+            var builder = WithSnippetCS("var topLevelStatement = true;").WithOptions(ParseOptionsHelper.FromCSharp9).WithOutputKind(OutputKind.ConsoleApplication);
             builder.Invoking(x => x.Verify()).Should().Throw<UnexpectedDiagnosticException>("Default Verifier behavior duplicates the source file.")
                 .WithMessage("CSharp9: Unexpected build error [CS0825]: The contextual keyword 'var' may only appear within a local variable declaration or in script code on line 1");
             builder.WithConcurrentAnalysis(false).Invoking(x => x.Verify()).Should().NotThrow();
@@ -216,7 +257,7 @@ Line: 3, Type: primary, Id: ''
         [TestMethod]
         public void Verify_OutputKind()
         {
-            var builder = WithSnippet("var topLevelStatement = true;").WithOptions(ParseOptionsHelper.FromCSharp9);
+            var builder = WithSnippetCS("var topLevelStatement = true;").WithOptions(ParseOptionsHelper.FromCSharp9);
             builder.WithTopLevelStatements().Invoking(x => x.Verify()).Should().NotThrow();
             builder.WithOutputKind(OutputKind.ConsoleApplication).WithConcurrentAnalysis(false).Invoking(x => x.Verify()).Should().NotThrow();
             builder.Invoking(x => x.Verify()).Should().Throw<UnexpectedDiagnosticException>()
@@ -225,7 +266,7 @@ Line: 3, Type: primary, Id: ''
 
         [TestMethod]
         public void Verify_Snippets() =>
-            Dummy.AddSnippet("public class First { } // Noncompliant [first]  - not raised")
+            DummyCS.AddSnippet("public class First { } // Noncompliant [first]  - not raised")
                 .AddSnippet("public class Second { } // Noncompliant [second] - not raised")
                 .Invoking(x => x.Verify()).Should().Throw<AssertFailedException>().WithMessage(
 @"CSharp7: Issue(s) expected but not raised in file(s):
@@ -236,8 +277,19 @@ File: snippet2.cs
 Line: 1, Type: primary, Id: 'second'
 ");
 
-        private VerifierBuilder WithSnippet(string code) =>
-            Dummy.AddPaths(WriteFile("File.cs", code));
+        [TestMethod]
+        public void Verify_ConcurrentAnalysis_FileEndingWithComment_CS() =>
+            WithSnippetCS("// Nothing to see here, file ends with a comment").Invoking(x => x.Verify()).Should().NotThrow();
+
+        [TestMethod]
+        public void Verify_ConcurrentAnalysis_FileEndingWithComment_VB() =>
+            WithSnippetVB("' Nothing to see here, file ends with a comment").Invoking(x => x.Verify()).Should().NotThrow();
+
+        private VerifierBuilder WithSnippetCS(string code) =>
+            DummyCS.AddPaths(WriteFile("File.cs", code));
+
+        private VerifierBuilder WithSnippetVB(string code) =>
+            DummyVB.AddPaths(WriteFile("File.vb", code));
 
         private string WriteFile(string name, string content) =>
             TestHelper.WriteFile(TestContext, name, content);

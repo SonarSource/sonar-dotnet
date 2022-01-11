@@ -38,20 +38,20 @@ namespace SonarAnalyzer.UnitTest.TestFramework.Tests
         [TestMethod]
         public void AddAnalyzer_Concatenates_IsImmutable()
         {
-            var one = Empty.AddAnalyzer(() => new DummyAnalyzer());
-            var two = one.AddAnalyzer(() => new DummyAnalyzer { DummyProperty = 42 });
+            var one = Empty.AddAnalyzer(() => new DummyAnalyzerCS());
+            var two = one.AddAnalyzer(() => new DummyAnalyzerCS { DummyProperty = 42 });
             Empty.Analyzers.Should().BeEmpty();
-            one.Analyzers.Should().ContainSingle().And.ContainSingle(x => ((DummyAnalyzer)x()).DummyProperty == 0);
+            one.Analyzers.Should().ContainSingle().And.ContainSingle(x => ((DummyAnalyzerCS)x()).DummyProperty == 0);
             two.Analyzers.Should().HaveCount(2)
-                .And.ContainSingle(x => ((DummyAnalyzer)x()).DummyProperty == 0)
-                .And.ContainSingle(x => ((DummyAnalyzer)x()).DummyProperty == 42);
+                .And.ContainSingle(x => ((DummyAnalyzerCS)x()).DummyProperty == 0)
+                .And.ContainSingle(x => ((DummyAnalyzerCS)x()).DummyProperty == 42);
         }
 
         [TestMethod]
         public void AddAnalyzer_Generic_AddAnalyzer()
         {
-            var sut = new VerifierBuilder<DummyAnalyzer>();
-            sut.Analyzers.Should().ContainSingle().Which().Should().BeOfType<DummyAnalyzer>();
+            var sut = new VerifierBuilder<DummyAnalyzerCS>();
+            sut.Analyzers.Should().ContainSingle().Which().Should().BeOfType<DummyAnalyzerCS>();
         }
 
         [TestMethod]
@@ -226,6 +226,6 @@ namespace SonarAnalyzer.UnitTest.TestFramework.Tests
 
         [TestMethod]
         public void Build_ReturnsVerifier() =>
-            new VerifierBuilder<DummyAnalyzer>().AddPaths("File.cs").Build().Should().NotBeNull();
+            new VerifierBuilder<DummyAnalyzerCS>().AddPaths("File.cs").Build().Should().NotBeNull();
     }
 }
