@@ -55,8 +55,9 @@ namespace SonarAnalyzer.UnitTest.Common
                 if (IsTestValid(analyzerName))
                 {
                     OldVerifier.VerifyNoIssueReported(@$"TestCases\Hotspots\{GetTestCaseFileName(analyzerName)}{language.FileExtension}",
-                                                   analyzer,
-                                                   GetAdditionalReferences(analyzerName));
+                        analyzer,
+                        ParseOptionsHelper.FromCSharp9,
+                        GetAdditionalReferences(analyzerName));
                 }
             }
         }
