@@ -22,10 +22,6 @@ Namespace Tests.Diagnostics
             Return 1UL <= Enumerable.Count(l) ' Noncompliant
         End Function
 
-        Private Function HasContent3(l As IEnumerable(Of String)) As Boolean
-            Return l.Any()
-        End Function
-
         Private Function IsNotEmpty1(l As IEnumerable(Of String)) As Boolean
             Return l.Count() <> 0 ' Noncompliant
         End Function
@@ -44,10 +40,6 @@ Namespace Tests.Diagnostics
 
         Private Function IsEmpty2b(l As IEnumerable(Of String)) As Boolean
             Return 0 >= l.Count() ' Noncompliant
-        End Function
-
-        Private Function IsEmpty3(l As IEnumerable(Of String)) As Boolean
-            Return Not l.Any() 'Compliant
         End Function
 
         Private Function IsEmpty4(l As IEnumerable(Of String)) As Boolean
@@ -73,6 +65,43 @@ Namespace Tests.Diagnostics
         Private Shared Function IsNegative(n As Integer) As Boolean
             Return n < 0
         End Function
+    End Class
+
+    Public Class Compliant
+
+        Function Any(list As List(Of String)) As Boolean
+            Return list.Any()
+        End Function
+
+        Function NotAny(list As List(Of String)) As Boolean
+            Return Not list.Any()
+        End Function
+
+        Function NotAnExtension(model As Compliant) As Boolean
+            Return model.Count() = 0
+        End Function
+
+        Function NotAMethod(value As Integer) As Boolean
+            Return value <> 0
+        End Function
+
+        Function SizeDepedent(numbers As Integer()) As Boolean
+            Return numbers.Count() <> 2 OrElse
+                numbers.Count(AddressOf IsNegative) = 3 OrElse
+                1 <> numbers.Count() OrElse
+                1 = numbers.Count(AddressOf IsNegative) OrElse
+                Enumerable.Count(numbers) > 1 OrElse
+                42 < Enumerable.Count(numbers)
+        End Function
+
+        Function Count() As Integer
+            Return 42
+        End Function
+
+        Shared Function IsNegative(n As Integer) As Boolean
+            Return n < 0
+        End Function
+
     End Class
 
 End Namespace
