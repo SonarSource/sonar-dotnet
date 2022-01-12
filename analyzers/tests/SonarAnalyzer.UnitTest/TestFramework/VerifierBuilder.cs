@@ -37,6 +37,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework
     {
         // All properties are (and should be) immutable.
         public ImmutableArray<Func<DiagnosticAnalyzer>> Analyzers { get; init; } = ImmutableArray<Func<DiagnosticAnalyzer>>.Empty;
+        public bool AutogenerateConcurrentFiles { get; init; } = true;
         public string BasePath { get; init; }
         public bool ConcurrentAnalysis { get; init; } = true;
         public CompilationErrorBehavior ErrorBehavior { get; init; } = CompilationErrorBehavior.Default;
@@ -53,6 +54,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework
         private VerifierBuilder(VerifierBuilder original)
         {
             Analyzers = original.Analyzers;
+            AutogenerateConcurrentFiles = original.AutogenerateConcurrentFiles;
             BasePath = original.BasePath;
             ConcurrentAnalysis = original.ConcurrentAnalysis;
             ErrorBehavior = original.ErrorBehavior;
@@ -85,6 +87,9 @@ namespace SonarAnalyzer.UnitTest.TestFramework
         /// </summary>
         public VerifierBuilder AddTestReference() =>
             AddReferences(NuGetMetadataReference.MSTestTestFrameworkV1);
+
+        public VerifierBuilder WithAutogenerateConcurrentFiles(bool autogenerateConcurrentFiles) =>
+            new(this) { AutogenerateConcurrentFiles = autogenerateConcurrentFiles };
 
         /// <summary>
         /// Path infix relative to TestCases directory.

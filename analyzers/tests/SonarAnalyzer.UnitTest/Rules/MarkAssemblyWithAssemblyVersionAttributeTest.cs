@@ -31,22 +31,24 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class MarkAssemblyWithAssemblyVersionAttributeTest
     {
+        private readonly VerifierBuilder builderCS = new VerifierBuilder<CS.MarkAssemblyWithAssemblyVersionAttribute>();
+        private readonly VerifierBuilder builderVB = new VerifierBuilder<VB.MarkAssemblyWithAssemblyVersionAttribute>();
+
         [TestMethod]
         public void MarkAssemblyWithAssemblyVersionAttribute_CS() =>
-            OldVerifier.VerifyNonConcurrentAnalyzer(@"TestCases\MarkAssemblyWithAssemblyVersionAttribute.cs", new CS.MarkAssemblyWithAssemblyVersionAttribute());
+            builderCS.AddPaths("MarkAssemblyWithAssemblyVersionAttribute.cs").WithConcurrentAnalysis(false).Verify();
 
         [TestMethod]
         public void MarkAssemblyWithAssemblyVersionAttributeRazor_CS() =>
-            OldVerifier.VerifyNonConcurrentAnalyzer(@"TestCases\MarkAssemblyWithAssemblyVersionAttributeRazor.cs",
-                new CS.MarkAssemblyWithAssemblyVersionAttribute(),
-                NuGetMetadataReference.MicrosoftAspNetCoreMvcRazorRuntime());
+            builderCS.AddPaths("MarkAssemblyWithAssemblyVersionAttributeRazor.cs").WithConcurrentAnalysis(false).AddReferences(NuGetMetadataReference.MicrosoftAspNetCoreMvcRazorRuntime()).Verify();
 
         [TestMethod]
         public void MarkAssemblyWithAssemblyVersionAttribute_CS_Concurrent() =>
-            OldVerifier.VerifyAnalyzer(new[] { @"TestCases\MarkAssemblyWithAssemblyVersionAttribute.cs", @"TestCases\MarkAssemblyWithAssemblyVersionAttributeRazor.cs", },
-                new CS.MarkAssemblyWithAssemblyVersionAttribute(),
-                default,
-                NuGetMetadataReference.MicrosoftAspNetCoreMvcRazorRuntime());
+            builderCS
+                .AddPaths("MarkAssemblyWithAssemblyVersionAttribute.cs", "MarkAssemblyWithAssemblyVersionAttributeRazor.cs")
+                .AddReferences(NuGetMetadataReference.MicrosoftAspNetCoreMvcRazorRuntime())
+                .WithAutogenerateConcurrentFiles(false)
+                .Verify();
 
         [TestMethod]
         public void MarkAssemblyWithAssemblyVersionAttributeNoncompliant_CS()
@@ -69,20 +71,19 @@ namespace SonarAnalyzer.UnitTest.Rules
 
         [TestMethod]
         public void MarkAssemblyWithAssemblyVersionAttribute_VB() =>
-            OldVerifier.VerifyNonConcurrentAnalyzer(@"TestCases\MarkAssemblyWithAssemblyVersionAttribute.vb", new VB.MarkAssemblyWithAssemblyVersionAttribute());
+            builderVB.AddPaths("MarkAssemblyWithAssemblyVersionAttribute.vb").WithConcurrentAnalysis(false).Verify();
 
         [TestMethod]
         public void MarkAssemblyWithAssemblyVersionAttributeRazor_VB() =>
-            OldVerifier.VerifyNonConcurrentAnalyzer(@"TestCases\MarkAssemblyWithAssemblyVersionAttributeRazor.vb",
-                new VB.MarkAssemblyWithAssemblyVersionAttribute(),
-                NuGetMetadataReference.MicrosoftAspNetCoreMvcRazorRuntime());
+            builderVB.AddPaths("MarkAssemblyWithAssemblyVersionAttributeRazor.vb").WithConcurrentAnalysis(false).AddReferences(NuGetMetadataReference.MicrosoftAspNetCoreMvcRazorRuntime()).Verify();
 
         [TestMethod]
         public void MarkAssemblyWithAssemblyVersionAttribute_VB_Concurrent() =>
-            OldVerifier.VerifyAnalyzer(new[] { @"TestCases\MarkAssemblyWithAssemblyVersionAttribute.vb", @"TestCases\MarkAssemblyWithAssemblyVersionAttributeRazor.vb", },
-                new VB.MarkAssemblyWithAssemblyVersionAttribute(),
-                default,
-                NuGetMetadataReference.MicrosoftAspNetCoreMvcRazorRuntime());
+            builderVB
+                .AddPaths("MarkAssemblyWithAssemblyVersionAttribute.vb", "MarkAssemblyWithAssemblyVersionAttributeRazor.vb")
+                .AddReferences(NuGetMetadataReference.MicrosoftAspNetCoreMvcRazorRuntime())
+                .WithAutogenerateConcurrentFiles(false)
+                .Verify();
 
         [TestMethod]
         public void MarkAssemblyWithAssemblyVersionAttributeNoncompliant_VB()

@@ -30,16 +30,16 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         public void EmptyNestedBlock_CS() =>
-            OldVerifier.VerifyAnalyzer(new[] { @"TestCases\EmptyNestedBlock.cs", @"TestCases\EmptyNestedBlock2.cs" }, new CS.EmptyNestedBlock());
+            new VerifierBuilder<CS.EmptyNestedBlock>().AddPaths("EmptyNestedBlock.cs", "EmptyNestedBlock2.cs").WithAutogenerateConcurrentFiles(false).Verify();
 
 #if NET
         [TestMethod]
         public void EmptyNestedBlock_CSharp10() =>
-            OldVerifier.VerifyAnalyzerFromCSharp10Library(@"TestCases\EmptyNestedBlock.CSharp10.cs", new CS.EmptyNestedBlock());
+            new VerifierBuilder<CS.EmptyNestedBlock>().AddPaths("EmptyNestedBlock.CSharp10.cs").WithOptions(ParseOptionsHelper.FromCSharp10).Verify();
 #endif
 
         [TestMethod]
         public void EmptyNestedBlock_VB() =>
-            OldVerifier.VerifyAnalyzer(@"TestCases\EmptyNestedBlock.vb", new VB.EmptyNestedBlock());
+            new VerifierBuilder<VB.EmptyNestedBlock>().AddPaths("EmptyNestedBlock.vb").Verify();
     }
 }

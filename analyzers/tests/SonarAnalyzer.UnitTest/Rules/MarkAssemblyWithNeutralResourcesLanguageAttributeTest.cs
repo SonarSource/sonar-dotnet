@@ -29,14 +29,10 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         public void MarkAssemblyWithNeutralResourcesLanguageAttribute_HasResx_HasAttribute_Compliant() =>
-            OldVerifier.VerifyAnalyzer(
-                new[]
-                {
-                    @"TestCases\MarkAssemblyWithNeutralResourcesLanguageAttribute.cs",
-                    @"TestCases\Resources\SomeResources.Designer.cs",
-                    @"TestCases\Resources\AnotherResources.Designer.cs",
-                },
-                new MarkAssemblyWithNeutralResourcesLanguageAttribute());
+            new VerifierBuilder<MarkAssemblyWithNeutralResourcesLanguageAttribute>()
+                .AddPaths("MarkAssemblyWithNeutralResourcesLanguageAttribute.cs", @"Resources\SomeResources.Designer.cs", @"Resources\AnotherResources.Designer.cs")
+                .WithAutogenerateConcurrentFiles(false)
+                .Verify();
 
         [TestMethod]
         public void MarkAssemblyWithNeutralResourcesLanguageAttribute_NoResx_HasAttribute_Compliant() =>

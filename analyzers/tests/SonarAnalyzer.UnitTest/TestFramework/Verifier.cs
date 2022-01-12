@@ -72,11 +72,11 @@ namespace SonarAnalyzer.UnitTest.TestFramework
             const string TestCases = "TestCases";
             using var scope = new EnvironmentVariableScope { EnableConcurrentAnalysis = builder.ConcurrentAnalysis};
             var basePath = Path.GetFullPath(builder.BasePath == null ? TestCases : Path.Combine(TestCases, builder.BasePath));
-            var paths = builder.Paths.Select(x => Path.Combine(basePath, x));
-            var pathsWithConcurrencyTests = paths.Count() == 1 && builder.ConcurrentAnalysis ? CreateConcurrencyTest(paths) : paths;  // ToDo: Redesign when implementing concurrency
+            var paths = builder.Paths.Select(x => Path.Combine(basePath, x)).ToArray();
             var project = SolutionBuilder.Create()
                 .AddProject(language, true, builder.OutputKind)
-                .AddDocuments(pathsWithConcurrencyTests)
+                .AddDocuments(paths)
+                .AddDocuments(builder.ConcurrentAnalysis && builder.AutogenerateConcurrentFiles ? CreateConcurrencyTest(paths) : Enumerable.Empty<string>())
                 .AddSnippets(builder.Snippets.ToArray())
                 .AddReferences(builder.References);
             foreach (var compilation in project.GetSolution().Compile(builder.ParseOptions.ToArray()))
@@ -100,8 +100,8 @@ namespace SonarAnalyzer.UnitTest.TestFramework
         {
             return language.LanguageName switch
             {
-                LanguageNames.CSharp => $"namespace AppendedNamespaceForConcurrencyTest {{ {content} }}",
-                LanguageNames.VisualBasic => content.Insert(ImportsIndexVB(), "Namespace AppendedNamespaceForConcurrencyTest : ") + " : End Namespace",
+                LanguageNames.CSharp => $"namespace AppendedNamespaceForConcurrencyTest {{ {content} {Environment.NewLine}}}",  // Last line can be a comment
+                LanguageNames.VisualBasic => content.Insert(ImportsIndexVB(), "Namespace AppendedNamespaceForConcurrencyTest : ") + Environment.NewLine + " : End Namespace",
                 _ => throw new UnexpectedLanguageException(language)
             };
 

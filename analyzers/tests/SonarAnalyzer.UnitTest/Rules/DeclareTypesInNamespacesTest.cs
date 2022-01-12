@@ -28,47 +28,41 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class DeclareTypesInNamespacesTest
     {
+        private readonly VerifierBuilder builder = new VerifierBuilder<CS.DeclareTypesInNamespaces>();
+        private readonly VerifierBuilder nonConcurrent = new VerifierBuilder<CS.DeclareTypesInNamespaces>().WithConcurrentAnalysis(false);
+
         [TestMethod]
         public void DeclareTypesInNamespaces_CS() =>
-            OldVerifier.VerifyAnalyzer(
-                new[] { @"TestCases\DeclareTypesInNamespaces.cs", @"TestCases\DeclareTypesInNamespaces2.cs", },
-                new CS.DeclareTypesInNamespaces());
+            builder.AddPaths("DeclareTypesInNamespaces.cs", "DeclareTypesInNamespaces2.cs").WithAutogenerateConcurrentFiles(false).Verify();
 
         [TestMethod]
         public void DeclareTypesInNamespaces_CS_Before8() =>
-            OldVerifier.VerifyNonConcurrentAnalyzer(
-                @"TestCases\DeclareTypesInNamespaces.BeforeCSharp8.cs",
-                new CS.DeclareTypesInNamespaces(),
-                ParseOptionsHelper.BeforeCSharp8);
+            nonConcurrent.AddPaths("DeclareTypesInNamespaces.BeforeCSharp8.cs").WithOptions(ParseOptionsHelper.BeforeCSharp8).Verify();
 
         [TestMethod]
         public void DeclareTypesInNamespaces_CS_After8() =>
-            OldVerifier.VerifyNonConcurrentAnalyzer(
-                @"TestCases\DeclareTypesInNamespaces.AfterCSharp8.cs",
-                new CS.DeclareTypesInNamespaces(),
-                ParseOptionsHelper.FromCSharp8);
+            nonConcurrent.AddPaths("DeclareTypesInNamespaces.AfterCSharp8.cs").WithOptions(ParseOptionsHelper.FromCSharp8).Verify();
 
 #if NET
+
         [TestMethod]
         public void DeclareTypesInNamespaces_CS_AfterCSharp9() =>
-            OldVerifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\DeclareTypesInNamespaces.AfterCSharp9.cs", new CS.DeclareTypesInNamespaces());
+            builder.AddPaths("DeclareTypesInNamespaces.AfterCSharp9.cs").WithTopLevelStatements().Verify();
 
         [TestMethod]
         public void DeclareTypesInNamespaces_CS_AfterCSharp10() =>
-            OldVerifier.VerifyAnalyzerFromCSharp10Library(
-                new[]
-                {
-                    @"TestCases\DeclareTypesInNamespaces.AfterCSharp10.FileScopedNamespace.cs",
-                    @"TestCases\DeclareTypesInNamespaces.AfterCSharp10.RecordStruct.cs"
-                },
-                new CS.DeclareTypesInNamespaces());
+            nonConcurrent
+                .AddPaths("DeclareTypesInNamespaces.AfterCSharp10.FileScopedNamespace.cs", "DeclareTypesInNamespaces.AfterCSharp10.RecordStruct.cs")
+                .WithOptions(ParseOptionsHelper.FromCSharp10)
+                .Verify();
 
 #endif
 
         [TestMethod]
         public void DeclareTypesInNamespaces_VB() =>
-            OldVerifier.VerifyAnalyzer(
-                new[] { @"TestCases\DeclareTypesInNamespaces.vb", @"TestCases\DeclareTypesInNamespaces2.vb", },
-                new VB.DeclareTypesInNamespaces());
+            new VerifierBuilder<VB.DeclareTypesInNamespaces>()
+                .AddPaths("DeclareTypesInNamespaces.vb", "DeclareTypesInNamespaces2.vb")
+                .WithAutogenerateConcurrentFiles(false)
+                .Verify();
     }
 }

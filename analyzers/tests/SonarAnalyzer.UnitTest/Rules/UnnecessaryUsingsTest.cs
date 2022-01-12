@@ -35,10 +35,11 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         public void UnnecessaryUsings() =>
-            OldVerifier.VerifyAnalyzer(
-                new[] { @"TestCases\UnnecessaryUsings.cs", @"TestCases\UnnecessaryUsings2.cs", @"TestCases\UnnecessaryUsingsFNRepro.cs" },
-                new UnnecessaryUsings(),
-                GetAdditionalReferences());
+            new VerifierBuilder<UnnecessaryUsings>()
+                .AddPaths("UnnecessaryUsings.cs", "UnnecessaryUsings2.cs", "UnnecessaryUsingsFNRepro.cs")
+                .AddReferences(GetAdditionalReferences())
+                .WithAutogenerateConcurrentFiles(false)
+                .Verify();
 
 #if NET
 

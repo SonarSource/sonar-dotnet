@@ -40,6 +40,6 @@ namespace SonarAnalyzer.UnitTest.Rules
 
         [TestMethod]
         public void ShiftDynamicNotInteger_VB() =>
-            OldVerifier.VerifyAnalyzer(new[] { @"TestCases\ShiftDynamicNotInteger.vb", @"TestCases\ShiftDynamicNotInteger2.vb" }, new VB.ShiftDynamicNotInteger());
+            new VerifierBuilder<VB.ShiftDynamicNotInteger>().AddPaths("ShiftDynamicNotInteger.vb", "ShiftDynamicNotInteger2.vb").WithAutogenerateConcurrentFiles(false).Verify();
     }
 }

@@ -28,6 +28,8 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class MethodsShouldUseBaseTypesTest
     {
+        private readonly VerifierBuilder builder = new VerifierBuilder<MethodsShouldUseBaseTypes>();
+
         [TestMethod]
         public void MethodsShouldUseBaseTypes_Internals()
         {
@@ -64,17 +66,17 @@ internal class Bar
 
         [TestMethod]
         public void MethodsShouldUseBaseTypes() =>
-            OldVerifier.VerifyAnalyzer(new[] { @"TestCases\MethodsShouldUseBaseTypes.cs", @"TestCases\MethodsShouldUseBaseTypes2.cs", }, new MethodsShouldUseBaseTypes());
+            builder.AddPaths("MethodsShouldUseBaseTypes.cs", "MethodsShouldUseBaseTypes2.cs").WithAutogenerateConcurrentFiles(false).Verify();
 
 #if NET
         [TestMethod]
         public void MethodsShouldUseBaseTypes_CSharp9() =>
-            OldVerifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\MethodsShouldUseBaseTypes.CSharp9.cs", new MethodsShouldUseBaseTypes());
+            builder.AddPaths("MethodsShouldUseBaseTypes.CSharp9.cs").WithTopLevelStatements().Verify();
 #endif
 
         [TestMethod]
         public void MethodsShouldUseBaseTypes_InvalidCode() =>
-            OldVerifier.VerifyCSharpAnalyzer(@"
+            builder.AddSnippet(@"
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -92,6 +94,6 @@ public class Foo
     {
         a.ToList();
     }
-}", new MethodsShouldUseBaseTypes(), CompilationErrorBehavior.Ignore);
+}").WithErrorBehavior(CompilationErrorBehavior.Ignore).Verify();
     }
 }
