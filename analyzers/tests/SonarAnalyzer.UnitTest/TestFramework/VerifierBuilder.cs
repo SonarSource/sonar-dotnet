@@ -24,6 +24,7 @@ using System.Collections.Immutable;
 using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Diagnostics;
+using SonarAnalyzer.Helpers;
 using SonarAnalyzer.UnitTest.MetadataReferences;
 using CS = Microsoft.CodeAnalysis.CSharp;
 using VB = Microsoft.CodeAnalysis.VisualBasic;
@@ -39,6 +40,10 @@ namespace SonarAnalyzer.UnitTest.TestFramework
         public ImmutableArray<Func<DiagnosticAnalyzer>> Analyzers { get; init; } = ImmutableArray<Func<DiagnosticAnalyzer>>.Empty;
         public bool AutogenerateConcurrentFiles { get; init; } = true;
         public string BasePath { get; init; }
+        public Func<SonarCodeFixProvider> CodeFix { get; init; }
+        public string CodeFixedPath { get; init; }
+        public string CodeFixedPathBatch { get; init; }
+        public string CodeFixTitle { get; init; }
         public bool ConcurrentAnalysis { get; init; } = true;
         public CompilationErrorBehavior ErrorBehavior { get; init; } = CompilationErrorBehavior.Default;
         public ImmutableArray<DiagnosticDescriptor> OnlyDiagnostics { get; init; } = ImmutableArray<DiagnosticDescriptor>.Empty;
@@ -56,6 +61,10 @@ namespace SonarAnalyzer.UnitTest.TestFramework
             Analyzers = original.Analyzers;
             AutogenerateConcurrentFiles = original.AutogenerateConcurrentFiles;
             BasePath = original.BasePath;
+            CodeFix = original.CodeFix;
+            CodeFixedPath = original.CodeFixedPath;
+            CodeFixedPathBatch = original.CodeFixedPathBatch;
+            CodeFixTitle = original.CodeFixTitle;
             ConcurrentAnalysis = original.ConcurrentAnalysis;
             ErrorBehavior = original.ErrorBehavior;
             OnlyDiagnostics = original.OnlyDiagnostics;
@@ -97,6 +106,21 @@ namespace SonarAnalyzer.UnitTest.TestFramework
         /// <remarks>If we ever need to change the root outside the .\TestCases directory, add WithRootPath(..) while WithBasePath(..) would still append another part after the root path.</remarks>
         public VerifierBuilder WithBasePath(string basePath) =>
             new(this) { BasePath = basePath };
+
+        public VerifierBuilder WithCodeFix<TCodeFix>() where TCodeFix : SonarCodeFixProvider, new() =>
+            new(this) { CodeFix = () => new TCodeFix() };
+
+        public VerifierBuilder WithCodeFixedPath(string codeFixedPath) =>
+            new(this) { CodeFixedPath = codeFixedPath };
+
+        /// <summary>
+        /// Optional alternative fixed file for cases when FixAllProvider produces different results than applying all code fixes on the same original document.
+        /// </summary>
+        public VerifierBuilder WithCodeFixedPathBatch(string codeFixedPathBatch) =>
+            new(this) { CodeFixedPathBatch = codeFixedPathBatch };
+
+        public VerifierBuilder WithCodeFixTitle(string codeFixTitle) =>
+            new(this) { CodeFixTitle = codeFixTitle };
 
         public VerifierBuilder WithErrorBehavior(CompilationErrorBehavior errorBehavior) =>
             new(this) { ErrorBehavior = errorBehavior };

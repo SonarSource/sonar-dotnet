@@ -115,6 +115,44 @@ namespace SonarAnalyzer.UnitTest.TestFramework.Tests
         }
 
         [TestMethod]
+        public void WithCodeFix_Overrides_IsImmutable()
+        {
+            var one = Empty.WithCodeFix<DummyCodeFixCS>();
+            var two = one.WithCodeFix<DummyCodeFixVB>();
+            Empty.CodeFix.Should().BeNull();
+            one.CodeFix().Should().BeOfType<DummyCodeFixCS>();
+            two.CodeFix().Should().BeOfType<DummyCodeFixVB>();
+        }
+
+        [TestMethod]
+        public void WithCodeFixedPath_Overrides_IsImmutable()
+        {
+            var one = Empty.WithCodeFixedPath("First");
+            var two = Empty.WithCodeFixedPath("Second");
+            Empty.CodeFixedPath.Should().BeNull();
+            one.CodeFixedPath.Should().Be("First");
+            two.CodeFixedPath.Should().Be("Second");
+            // Batch version should not be modified:
+            Empty.CodeFixedPathBatch.Should().BeNull();
+            one.CodeFixedPathBatch.Should().BeNull();
+            two.CodeFixedPathBatch.Should().BeNull();
+        }
+
+        [TestMethod]
+        public void WithCodeFixedPathBatch_Overrides_IsImmutable()
+        {
+            var one = Empty.WithCodeFixedPathBatch("First");
+            var two = Empty.WithCodeFixedPathBatch("Second");
+            Empty.CodeFixedPathBatch.Should().BeNull();
+            one.CodeFixedPathBatch.Should().Be("First");
+            two.CodeFixedPathBatch.Should().Be("Second");
+            // Non-Batch version should not be modified:
+            Empty.CodeFixedPath.Should().BeNull();
+            one.CodeFixedPath.Should().BeNull();
+            two.CodeFixedPath.Should().BeNull();
+        }
+
+        [TestMethod]
         public void WithConcurrentAnalysis_Overrides_IsImmutable()
         {
             var one = Empty.WithConcurrentAnalysis(false);
@@ -122,6 +160,16 @@ namespace SonarAnalyzer.UnitTest.TestFramework.Tests
             Empty.ConcurrentAnalysis.Should().BeTrue();
             one.ConcurrentAnalysis.Should().BeFalse();
             two.ConcurrentAnalysis.Should().BeTrue();
+        }
+
+        [TestMethod]
+        public void WithCodeFixTitle_Overrides_IsImmutable()
+        {
+            var one = Empty.WithCodeFixTitle("First");
+            var two = Empty.WithCodeFixTitle("Second");
+            Empty.CodeFixTitle.Should().BeNull();
+            one.CodeFixTitle.Should().Be("First");
+            two.CodeFixTitle.Should().Be("Second");
         }
 
         [TestMethod]
