@@ -594,7 +594,7 @@ Namespace Tests.Diagnostics
         End Property
     End Class
 
-#If NETFRAMEWORK ' System.Windows.Controls.Primitives.ButtonBase is in a different assembly in NETCOREAPP
+#If NETFRAMEWORK Then ' System.Windows.Controls.Primitives.ButtonBase is in a different assembly in NETCOREAPP
     ' https://github.com/SonarSource/sonar-dotnet/issues/3442
     ' Also see "Add WPF support in unit tests when targeting .Net Core" https://github.com/SonarSource/sonar-dotnet/issues/4883
     Public Class SampleFor3442
@@ -612,5 +612,89 @@ Namespace Tests.Diagnostics
         End Property
     End Class
 #End If
+
+    Public Class TestCases
+        Private pause_ As Boolean
+
+        Public Property Pause As Boolean
+            Get
+                Return pause_
+            End Get
+            Set(ByVal value As Boolean)
+                pause_ = pause_ Or value
+            End Set
+        End Property
+
+        Private textBufferUndoHistory_ As Integer
+
+        Public ReadOnly Property TextBufferUndoHistory As Integer
+            Get
+                Return textBufferUndoHistory_ = GetValue()
+            End Get
+        End Property
+
+        Private Shared Function GetValue() As Integer
+            Return 1
+        End Function
+
+        ' https://github.com/SonarSource/sonar-dotnet/issues/5259
+        Private attributes_ As Integer()
+        Public WriteOnly Property Attributes As Integer()
+            Set(ByVal value As Integer()) ' Noncompliant - FP
+                value.CopyTo(attributes_, 0)
+            End Set
+        End Property
+
+        Private Const PREFIX_ As String = "pre"
+        Private m_prefix As String
+
+        Public Property Prefix As String
+            Get
+                Return m_prefix ' Compliant - PREFIX is const
+            End Get
+            Set(ByVal value As String)
+                m_prefix = value
+            End Set
+        End Property
+    End Class
+
+    Public Class ContainsConstraint
+        Private _ignoreCase As Boolean
+
+        Public ReadOnly Property IgnoreCase As ContainsConstraint
+            Get ' Compliant - _IgnoreCase has different type
+                _ignoreCase = True
+                Return Me
+            End Get
+        End Property
+    End Class
+
+    Public Class AClass
+        Public Shared WRITE_LOCK_TIMEOUT As Long = 1000
+        Public longValue As Long
+
+        Public Property WriteLockTimeout As Long
+            Get
+                Return longValue ' Compliant - WRITE_LOCK_TIMEOUT is shared field when the property is not shared.
+            End Get
+            Set(ByVal value As Long)
+                longValue = value
+            End Set
+        End Property
+
+        Public Shared TEST_STATIC_CASE As Long = 1000
+        Public Shared ALong As Long = 2000
+
+        Public Shared Property TestStaticCase As Long
+            Get
+                Return ALong ' Noncompliant
+            End Get
+            Set(ByVal value As Long)
+                ALong = value ' Noncompliant
+            End Set
+        End Property
+    End Class
+
+
 
 End Namespace

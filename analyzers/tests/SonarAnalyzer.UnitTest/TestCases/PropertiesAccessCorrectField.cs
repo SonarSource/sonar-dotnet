@@ -765,6 +765,7 @@ namespace Tests.Diagnostics
         }
         private static int GetValue() => 1;
 
+        // https://github.com/SonarSource/sonar-dotnet/issues/5259
         private int[] attributes;
         public int[] Attributes
         {
