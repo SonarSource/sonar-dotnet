@@ -125,50 +125,35 @@ namespace SonarAnalyzer.Rules.CSharp
             return mapping;
         }
 
-        private static SyntaxNode GetNewDocumentRoot(SyntaxNode docRoot, ITypeParameterSymbol typeParameterSymbol,
-            KeyValuePair<DocumentId, ICollection<ClassDeclarationSyntax>> classes)
+        private static SyntaxNode GetNewDocumentRoot(SyntaxNode docRoot, ITypeParameterSymbol typeParameterSymbol, KeyValuePair<DocumentId, ICollection<ClassDeclarationSyntax>> classes)
         {
-            var newDocRoot = docRoot.ReplaceNodes(classes.Value, (original, rewritten) => original.WithAdditionalAnnotations(annotation));
+            var newDocRoot = docRoot.ReplaceNodes(classes.Value, (original, rewritten) => rewritten.WithAdditionalAnnotations(annotation));
             var annotatedNodes = newDocRoot.GetAnnotatedNodes(annotation).ToList();
             while (annotatedNodes.Any())
             {
                 var classDeclaration = (ClassDeclarationSyntax)annotatedNodes.First();
                 var constraintClauses = GetNewConstraintClause(classDeclaration.ConstraintClauses, typeParameterSymbol.Name);
-                newDocRoot = newDocRoot.ReplaceNode(
-                    classDeclaration,
-                    classDeclaration
-                        .WithConstraintClauses(constraintClauses)
-                        .WithoutAnnotations(annotation));
+                newDocRoot = newDocRoot.ReplaceNode(classDeclaration, classDeclaration.WithConstraintClauses(constraintClauses).WithoutAnnotations(annotation));
                 annotatedNodes = newDocRoot.GetAnnotatedNodes(annotation).ToList();
             }
 
             return newDocRoot;
         }
 
-        private static SyntaxList<TypeParameterConstraintClauseSyntax> GetNewConstraintClause(
-            SyntaxList<TypeParameterConstraintClauseSyntax> constraintClauses, string typeParameterName)
+        private static SyntaxList<TypeParameterConstraintClauseSyntax> GetNewConstraintClause(SyntaxList<TypeParameterConstraintClauseSyntax> constraintClauses, string typeParameterName)
         {
-            if (!constraintClauses.Any())
-            {
-                return constraintClauses;
-            }
-
             var constraintList = SyntaxFactory.List<TypeParameterConstraintClauseSyntax>();
-
             foreach (var constraint in constraintClauses)
             {
                 var currentConstraint = constraint;
-                if (constraint.Name.Identifier.ValueText == typeParameterName)
+                if (constraint.Name.Identifier.ValueText == typeParameterName && !currentConstraint.Constraints.AnyOfKind(SyntaxKind.ClassConstraint))
                 {
                     currentConstraint = currentConstraint
-                        .WithConstraints(
-                            currentConstraint.Constraints.Insert(0,
-                                SyntaxFactory.ClassOrStructConstraint(SyntaxKind.ClassConstraint)))
+                        .WithConstraints(currentConstraint.Constraints.Insert(0, SyntaxFactory.ClassOrStructConstraint(SyntaxKind.ClassConstraint)))
                         .WithAdditionalAnnotations(Formatter.Annotation);
                 }
                 constraintList = constraintList.Add(currentConstraint);
             }
-
             return constraintList;
         }
     }

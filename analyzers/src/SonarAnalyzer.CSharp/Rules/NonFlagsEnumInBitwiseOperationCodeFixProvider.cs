@@ -37,8 +37,6 @@ namespace SonarAnalyzer.Rules.CSharp
 
         public override ImmutableArray<string> FixableDiagnosticIds => ImmutableArray.Create(NonFlagsEnumInBitwiseOperation.DiagnosticId);
 
-        public override FixAllProvider GetFixAllProvider() => WellKnownFixAllProviders.BatchFixer;
-
         protected override async Task RegisterCodeFixesAsync(SyntaxNode root, CodeFixContext context)
         {
             var diagnostic = context.Diagnostics.First();
@@ -49,6 +47,11 @@ namespace SonarAnalyzer.Rules.CSharp
             var operation = semanticModel.GetSymbolInfo(node).Symbol as IMethodSymbol;
 
             if (!(operation?.ReturnType?.DeclaringSyntaxReferences.FirstOrDefault()?.GetSyntax(context.CancellationToken) is EnumDeclarationSyntax enumDeclaration))
+            {
+                return;
+            }
+
+            if (enumDeclaration.AttributeLists.GetAttributes(KnownType.System_FlagsAttribute, semanticModel).Any()) // FixAllProvider already added it from another issue
             {
                 return;
             }
