@@ -88,6 +88,10 @@ namespace Tests.Diagnostics
                 || Enumerable.Count(numbers) > 1
                 || 42 < Enumerable.Count(numbers);
         }
+        bool Undefined(object model)
+        {
+            return model.Count(); // Error[CS1061]
+        }
 
         int Count() { return 42; }
     }

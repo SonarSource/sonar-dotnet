@@ -94,6 +94,10 @@ Namespace Tests.Diagnostics
                 42 < Enumerable.Count(numbers)
         End Function
 
+        Function Undefined(model As Date) As Boolean
+            Return model.Count() ' Error[BC30456]
+        End Function
+
         Function Count() As Integer
             Return 42
         End Function
