@@ -181,11 +181,7 @@ namespace SonarAnalyzer.Rules
 
         private readonly struct PropertyData
         {
-            public PropertyData(IPropertySymbol propertySymbol,
-                                IEnumerable<FieldData> read,
-                                IEnumerable<FieldData> updated,
-                                bool ignoreGetter,
-                                bool ignoreSetter)
+            public PropertyData(IPropertySymbol propertySymbol, IEnumerable<FieldData> read, IEnumerable<FieldData> updated, bool ignoreGetter, bool ignoreSetter)
             {
                 PropertySymbol = propertySymbol;
                 ReadFields = read.ToImmutableArray();
