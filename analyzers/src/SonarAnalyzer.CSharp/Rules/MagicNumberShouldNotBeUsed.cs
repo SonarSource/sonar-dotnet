@@ -43,7 +43,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private static readonly ISet<string> NotConsideredAsMagicNumbers = new HashSet<string> { "-1", "0", "1" };
 
-        private static readonly string[] AcceptedNamesForSingleDigitComparison = { "size", "count", "length" };
+        private static readonly string[] AcceptedCollectionMembersForSingleDigitComparison = { "Size", "Count", "Length" };
 
         private static readonly SyntaxKind[] AllowedSingleDigitComparisons =
         {
@@ -97,7 +97,7 @@ namespace SonarAnalyzer.Rules.CSharp
             literalExpression.Parent is BinaryExpressionSyntax binaryExpression
             && IsSingleDigit(literalExpression.Token.ValueText)
             && binaryExpression.IsAnyKind(AllowedSingleDigitComparisons)
-            && ToStringContainsAnyAcceptedNames(binaryExpression);
+            && IsComparingCollectionSize(binaryExpression);
 
         private static bool IsToleratedArgument(LiteralExpressionSyntax literalExpression) =>
             IsToleratedMethodArgument(literalExpression)
@@ -121,10 +121,21 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private static bool IsSingleDigit(string text) => byte.TryParse(text, out var result) && result <= 9;
 
-        private static bool ToStringContainsAnyAcceptedNames(SyntaxNode syntaxNode)
+        // We allow single-digit comparisons when checking the size of a collection, which is usually done to access the first elements.
+        private static bool IsComparingCollectionSize(BinaryExpressionSyntax binaryComparisonToLiteral)
         {
-            var toString = syntaxNode.ToString().ToLower();
-            return AcceptedNamesForSingleDigitComparison.Any(x => toString.Contains(x));
+            var comparedToLiteral = binaryComparisonToLiteral.Left is LiteralExpressionSyntax ? binaryComparisonToLiteral.Right : binaryComparisonToLiteral.Left;
+            return GetMemberName(comparedToLiteral) is { } name
+                && AcceptedCollectionMembersForSingleDigitComparison.Contains(name);
+
+            // we also allow LINQ Count() - the implementation is kept simple to avoid expensive SemanticModel calls
+            static string GetMemberName(SyntaxNode node) =>
+                node switch
+                {
+                    MemberAccessExpressionSyntax memberAccess => memberAccess.Name.Identifier.ValueText,
+                    InvocationExpressionSyntax invocationExpressionSyntax => GetMemberName(invocationExpressionSyntax.Expression),
+                    _ => null
+                };
         }
     }
 }

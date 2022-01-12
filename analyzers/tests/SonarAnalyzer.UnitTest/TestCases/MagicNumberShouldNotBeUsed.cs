@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Tests.Diagnostics
 {
@@ -18,6 +19,15 @@ namespace Tests.Diagnostics
         public int COUNT { get; set; }
         public int length { get; set; }
         public int baz { get; set; }
+        public FooBar fooBar { get; set; }
+        public FooBar GetFooBar() => null;
+        public int Count() => 0;
+        public FooBar Length() => null; // for coverage
+    }
+
+    public class Baz
+    {
+        public int Size() => 1;
     }
 
     public class ValidUseCases
@@ -46,7 +56,7 @@ namespace Tests.Diagnostics
 
         public ValidUseCases(int x, int y) { }
 
-        public ValidUseCases(string s, FooBar foo)
+        public ValidUseCases(string s, FooBar foo, Baz baz)
         {
             int i1 = 0;
             int i2 = -1;
@@ -66,14 +76,16 @@ namespace Tests.Diagnostics
             for (int i = 0; i < 0; i++) { }
 
             var result = list.Count == 1; // Compliant, single digit for Count
-            result = list.Count < 2; // Compliant, single digit for Count
+            result = list.Count < 2; // Compliant
             result = list.Count <= 2; // Compliant
             result = list.Count != 2; // Compliant
             result = list.Count > 2; // Compliant
+            result = list.Count() > 2; // Compliant
             result = s.Length == 3; // Compliant, single digit for Length
             result = foo.Size == 4; // Compliant, single digit for Size
-            result = foo.COUNT == 8; // Compliant
-            result = foo.length == 9; // Compliant
+            result = baz.Size() == 7; // tolerated FN
+            result = foo.fooBar.fooBar.fooBar.Size == 4; // Compliant
+            result = foo.GetFooBar().fooBar.fooBar.GetFooBar().Count() == 4; // possible FN, we don't check if Count() is from LINQ to be efficient
 
             WithTimeSpan(TimeSpan.FromDays(1), TimeSpan.FromMilliseconds(33)); // compliant
 
@@ -155,6 +167,14 @@ namespace Tests.Diagnostics
             result = foo.Size == 472; // Noncompliant
             result = foo.baz == 4; // Noncompliant
             result = s.Length == list.Count / 2 ; // Noncompliant FP - clear it's checking if it's half the list
+
+            result = foo.COUNT == 8; // Noncompliant
+            result = foo.length == 9; // Noncompliant
+            result = GetCount() < 9; // Noncompliant
+            result = SizeOfSomething == 5; // Noncompliant
+            // for coverage
+            result = foo.Length().fooBar.length == 4; // Noncompliant
+
             var x = 1;
             result = x == 2; // Noncompliant
             Foo(foo.Size + 41, s.Length - 43, list.Count * 2, list.Count / 8); // Noncompliant
@@ -169,6 +189,9 @@ namespace Tests.Diagnostics
         {
             return 13; // Noncompliant
         }
+
+        public int GetCount() => 1;
+        public int SizeOfSomething { get; } = 1;
 
         public static void Foo(params int[] array) { }
         public static int Foo(int x, int y) => 1;
