@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S4275",
+"message":  "Refactor this getter so that it actually refers to the field '_messages'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Journal\MemoryJournal.cs",
+"region":  {
+"startLine":  251,
+"startColumn":  120,
+"endLine":  251,
+"endColumn":  134
+}
+}
+}
+]
+}

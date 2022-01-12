@@ -34,35 +34,46 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         public void PropertiesAccessCorrectField_CS() =>
-            OldVerifier.VerifyAnalyzer(@"TestCases\PropertiesAccessCorrectField.cs",
-                                    new CS.PropertiesAccessCorrectField(),
-                                    AdditionalReferences);
+            OldVerifier.VerifyAnalyzer(
+                @"TestCases\PropertiesAccessCorrectField.cs",
+                new CS.PropertiesAccessCorrectField(),
+                AdditionalReferences);
 
         [TestMethod]
         public void PropertiesAccessCorrectField_CSharp8() =>
-            OldVerifier.VerifyAnalyzer(@"TestCases\PropertiesAccessCorrectField.CSharp8.cs",
-                                    new CS.PropertiesAccessCorrectField(),
-                                    ParseOptionsHelper.FromCSharp8);
+            OldVerifier.VerifyAnalyzer(
+                @"TestCases\PropertiesAccessCorrectField.CSharp8.cs",
+                new CS.PropertiesAccessCorrectField(),
+                ParseOptionsHelper.FromCSharp8);
 
 #if NET
         [TestMethod]
         public void PropertiesAccessCorrectField_CSharp9() =>
-            OldVerifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\PropertiesAccessCorrectField.CSharp9.cs", new CS.PropertiesAccessCorrectField());
+            OldVerifier.VerifyAnalyzerFromCSharp9Library(
+                @"TestCases\PropertiesAccessCorrectField.CSharp9.cs",
+                new CS.PropertiesAccessCorrectField());
 #else
         [TestMethod]
         public void PropertiesAccessCorrectField_CS_NetFramework() =>
-            OldVerifier.VerifyAnalyzer(@"TestCases\PropertiesAccessCorrectField.NetFramework.cs", new CS.PropertiesAccessCorrectField(), AdditionalReferences);
+            OldVerifier.VerifyAnalyzer(
+                @"TestCases\PropertiesAccessCorrectField.NetFramework.cs",
+                new CS.PropertiesAccessCorrectField(),
+                AdditionalReferences);
 
         [TestMethod]
         public void PropertiesAccessCorrectField_VB_NetFramework() =>
-            OldVerifier.VerifyAnalyzer(@"TestCases\PropertiesAccessCorrectField.NetFramework.vb", new VB.PropertiesAccessCorrectField(), AdditionalReferences);
+            OldVerifier.VerifyAnalyzer(
+                @"TestCases\PropertiesAccessCorrectField.NetFramework.vb",
+                new VB.PropertiesAccessCorrectField(),
+                AdditionalReferences);
 #endif
 
         [TestMethod]
         public void PropertiesAccessCorrectField_VB() =>
-            OldVerifier.VerifyAnalyzer(@"TestCases\PropertiesAccessCorrectField.vb",
-                                    new VB.PropertiesAccessCorrectField(),
-                                    AdditionalReferences);
+            OldVerifier.VerifyAnalyzer(
+                @"TestCases\PropertiesAccessCorrectField.vb",
+                new VB.PropertiesAccessCorrectField(),
+                AdditionalReferences);
 
         private static IEnumerable<MetadataReference> AdditionalReferences =>
             NuGetMetadataReference.MvvmLightLibs("5.4.1.1")

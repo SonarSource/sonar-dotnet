@@ -37,7 +37,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
         protected override IEnumerable<FieldData> FindFieldAssignments(IPropertySymbol property, Compilation compilation)
         {
-            if (!(property.SetMethod.GetFirstSyntaxRef() is AccessorDeclarationSyntax setter))
+            if (property.SetMethod.GetFirstSyntaxRef() is not AccessorDeclarationSyntax setter)
             {
                 return Enumerable.Empty<FieldData>();
             }
@@ -60,7 +60,7 @@ namespace SonarAnalyzer.Rules.CSharp
         protected override IEnumerable<FieldData> FindFieldReads(IPropertySymbol property, Compilation compilation)
         {
             // We don't handle properties with multiple returns that return different fields
-            if (!(property.GetMethod.GetFirstSyntaxRef() is AccessorDeclarationSyntax getter))
+            if (property.GetMethod.GetFirstSyntaxRef() is not AccessorDeclarationSyntax getter)
             {
                 return Enumerable.Empty<FieldData>();
             }
@@ -94,7 +94,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
         protected override bool ShouldIgnoreAccessor(IMethodSymbol accessorMethod, Compilation compilation)
         {
-            if (!(accessorMethod.GetFirstSyntaxRef() is AccessorDeclarationSyntax accessor)
+            if (accessorMethod.GetFirstSyntaxRef() is not AccessorDeclarationSyntax accessor
                 || ((SyntaxNode)accessor.Body ?? accessor).ContainsGetOrSetOnDependencyProperty(compilation))
             {
                 return true;
@@ -109,8 +109,8 @@ namespace SonarAnalyzer.Rules.CSharp
             }
 
             // Statement-bodied syntax
-            return (accessor.Body.DescendantNodes().Count(n => n is StatementSyntax) == 1
-                    && accessor.Body.DescendantNodes().Count(n => n is ThrowStatementSyntax) == 1);
+            return  accessor.Body.DescendantNodes().Count(n => n is StatementSyntax) == 1
+                    && accessor.Body.DescendantNodes().Count(n => n is ThrowStatementSyntax) == 1;
         }
 
         protected override bool ImplementsExplicitGetterOrSetter(IPropertySymbol property) =>
@@ -122,7 +122,7 @@ namespace SonarAnalyzer.Rules.CSharp
             foreach (var node in root.DescendantNodes())
             {
                 FieldData? foundField = null;
-                if (node is AssignmentExpressionSyntax assignment && node.IsAnyKind(SyntaxKind.SimpleAssignmentExpression, SyntaxKindEx.CoalesceAssignmentExpression))
+                if (node is AssignmentExpressionSyntax assignment)
                 {
                     foundField = assignment.Left.DescendantNodesAndSelf().OfType<ExpressionSyntax>()
                         .Select(x => ExtractFieldFromExpression(AccessorKind.Setter, x, compilation, useFieldLocation))
@@ -182,15 +182,21 @@ namespace SonarAnalyzer.Rules.CSharp
 
             // Check for direct field access: "foo"
             if (strippedExpression is IdentifierNameSyntax
-                && semanticModel.GetSymbolInfo(strippedExpression).Symbol is IFieldSymbol field)
+                && semanticModel.GetSymbolInfo(strippedExpression).Symbol is IFieldSymbol directAccessField)
             {
-                return new FieldData(accessorKind, field, strippedExpression, useFieldLocation);
+                return new FieldData(accessorKind, directAccessField, strippedExpression, useFieldLocation);
             }
             // Check for "this.foo"
             else if (strippedExpression is MemberAccessExpressionSyntax {Expression: ThisExpressionSyntax _} member
-                     && semanticModel.GetSymbolInfo(strippedExpression).Symbol is IFieldSymbol field2)
+                     && semanticModel.GetSymbolInfo(strippedExpression).Symbol is IFieldSymbol fieldAccessedWithThis)
             {
-                return new FieldData(accessorKind, field2, member.Name, useFieldLocation);
+                return new FieldData(accessorKind, fieldAccessedWithThis, member.Name, useFieldLocation);
+            }
+            else if (strippedExpression is AssignmentExpressionSyntax assignmentExpression
+                     && assignmentExpression.Parent is ReturnStatementSyntax
+                     && semanticModel.GetSymbolInfo(assignmentExpression.Left).Symbol is IFieldSymbol fieldAssignedFromExpression)
+            {
+                return new FieldData(accessorKind, fieldAssignedFromExpression, assignmentExpression.Left, useFieldLocation);
             }
 
             return null;

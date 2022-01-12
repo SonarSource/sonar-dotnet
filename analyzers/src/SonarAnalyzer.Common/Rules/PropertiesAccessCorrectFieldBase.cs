@@ -61,7 +61,7 @@ namespace SonarAnalyzer.Rules
         protected static SyntaxNode FindInvokedMethod(Compilation compilation, INamedTypeSymbol containingType, SyntaxNode expression) =>
             compilation.GetSemanticModel(expression.SyntaxTree) is { } semanticModel
             && semanticModel.GetSymbolInfo(expression).Symbol is { } invocationSymbol
-            && invocationSymbol.ContainingType == containingType
+            && invocationSymbol.ContainingType.Equals(containingType)
             && invocationSymbol.DeclaringSyntaxReferences.Length == 1
             && invocationSymbol.DeclaringSyntaxReferences.Single().GetSyntax() is { } invokedMethod
             ? invokedMethod
@@ -70,13 +70,13 @@ namespace SonarAnalyzer.Rules
         private void CheckType(SymbolAnalysisContext context)
         {
             var symbol = (INamedTypeSymbol)context.Symbol;
-            if (symbol.TypeKind != TypeKind.Class &&
-                symbol.TypeKind != TypeKind.Structure)
+            if (!symbol.TypeKind.Equals(TypeKind.Class)
+                && !symbol.TypeKind.Equals(TypeKind.Structure))
             {
                 return;
             }
 
-            var fields = symbol.GetMembers().Where(m => m.Kind == SymbolKind.Field).OfType<IFieldSymbol>();
+            var fields = SelfAndBaseTypesFieldSymbols(symbol);
             if (!fields.Any())
             {
                 return;
@@ -109,24 +109,36 @@ namespace SonarAnalyzer.Rules
             }
         }
 
+        private static IEnumerable<IFieldSymbol> SelfAndBaseTypesFieldSymbols(INamedTypeSymbol typeSymbol)
+        {
+            var fieldSymbols = Enumerable.Empty<IFieldSymbol>();
+            var selfAndBaseTypesSymbols = typeSymbol.GetSelfAndBaseTypes();
+            foreach (var symbol in selfAndBaseTypesSymbols)
+            {
+                fieldSymbols = fieldSymbols.Concat(symbol.GetMembers().Where(m => m.Kind.Equals(SymbolKind.Field)).OfType<IFieldSymbol>());
+            }
+            return fieldSymbols;
+        }
+
         private IEnumerable<IPropertySymbol> GetExplicitlyDeclaredProperties(INamedTypeSymbol symbol) =>
             symbol.GetMembers()
-                .Where(m => m.Kind == SymbolKind.Property)
-                .OfType<IPropertySymbol>()
-                .Where(ImplementsExplicitGetterOrSetter);
+                  .Where(m => m.Kind.Equals(SymbolKind.Property))
+                  .OfType<IPropertySymbol>()
+                  .Where(ImplementsExplicitGetterOrSetter);
 
         private void CheckExpectedFieldIsUsed(IMethodSymbol methodSymbol, IFieldSymbol expectedField, ImmutableArray<FieldData> actualFields, SymbolAnalysisContext context)
         {
-            var expectedFieldIsUsed = actualFields.Any(a => a.Field == expectedField);
+            var expectedFieldIsUsed = actualFields.Any(a => a.Field.Equals(expectedField));
             if (!expectedFieldIsUsed || !actualFields.Any())
             {
                 var locationAndAccessorType = GetLocationAndAccessor(actualFields, methodSymbol);
                 if (locationAndAccessorType.Item1 != null)
                 {
-                    context.ReportIssue(Diagnostic.Create(rule,
-                                                                         locationAndAccessorType.Item1,
-                                                                         locationAndAccessorType.Item2,
-                                                                         expectedField.Name));
+                    context.ReportIssue(Diagnostic.Create(
+                        rule,
+                        locationAndAccessorType.Item1,
+                        locationAndAccessorType.Item2,
+                        expectedField.Name));
                 }
             }
 
@@ -138,7 +150,7 @@ namespace SonarAnalyzer.Rules
                 {
                     var fieldWithValue = fields.First();
                     location = fieldWithValue.LocationNode.GetLocation();
-                    accessorType = fieldWithValue.AccessorKind == AccessorKind.Getter ? "getter" : "setter";
+                    accessorType = fieldWithValue.AccessorKind.Equals(AccessorKind.Getter) ? "getter" : "setter";
                 }
                 else
                 {
@@ -169,8 +181,7 @@ namespace SonarAnalyzer.Rules
 
         private readonly struct PropertyData
         {
-            public PropertyData(IPropertySymbol propertySymbol, IEnumerable<FieldData> read, IEnumerable<FieldData> updated,
-                bool ignoreGetter, bool ignoreSetter)
+            public PropertyData(IPropertySymbol propertySymbol, IEnumerable<FieldData> read, IEnumerable<FieldData> updated, bool ignoreGetter, bool ignoreSetter)
             {
                 PropertySymbol = propertySymbol;
                 ReadFields = read.ToImmutableArray();
@@ -229,16 +240,13 @@ namespace SonarAnalyzer.Rules
             {
                 // Calculate and cache the standardised versions of the field names to avoid
                 // calculating them every time
-                fieldToStandardNameMap = fields.ToDictionary(f => f, f => GetCanonicalFieldName(f.Name));
+                fieldToStandardNameMap = fields.ToDictionary(f => f, f => GetCanonicalName(f.Name));
             }
 
             public IFieldSymbol GetSingleMatchingFieldOrNull(IPropertySymbol propertySymbol)
             {
-                // We're not caching the property name as only expect to be called once per property
-                var standardisedPropertyName = GetCanonicalFieldName(propertySymbol.Name);
-
                 var matchingFields = fieldToStandardNameMap.Keys
-                    .Where(k => AreCanonicalNamesEqual(fieldToStandardNameMap[k], standardisedPropertyName))
+                    .Where(fieldSymbol => FieldMatchesTheProperty(fieldSymbol, propertySymbol))
                     .ToList();
 
                 return matchingFields.Count != 1
@@ -246,11 +254,18 @@ namespace SonarAnalyzer.Rules
                     : matchingFields[0];
             }
 
-            private static string GetCanonicalFieldName(string name) =>
+            private static string GetCanonicalName(string name) =>
                 name.Replace("_", string.Empty);
 
             private static bool AreCanonicalNamesEqual(string name1, string name2) =>
                 name1.Equals(name2, StringComparison.OrdinalIgnoreCase);
+
+            private bool FieldMatchesTheProperty(IFieldSymbol field, IPropertySymbol property) =>
+                // We're not caching the property name as only expect to be called once per property
+                !field.IsConst
+                && ((property.IsStatic && field.IsStatic) || (!property.IsStatic && !field.IsStatic))
+                && field.Type.Equals(property.Type)
+                && AreCanonicalNamesEqual(fieldToStandardNameMap[field], GetCanonicalName(property.Name));
         }
     }
 }
