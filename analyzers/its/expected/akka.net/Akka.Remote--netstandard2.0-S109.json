@@ -2,19 +2,6 @@
 "issues":  [
 {
 "id":  "S109",
-"message":  "Assign this magic number '20' to a well-named (variable|constant), and use the (variable|constant) instead.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote\AkkaProtocolSettings.cs",
-"region":  {
-"startLine":  58,
-"startColumn":  109,
-"endLine":  58,
-"endColumn":  111
-}
-}
-},
-{
-"id":  "S109",
 "message":  "Assign this magic number '1.2' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
 "uri":  "sources\akka.net\src\core\Akka.Remote\Endpoint.cs",
@@ -88,32 +75,6 @@
 "startColumn":  152,
 "endLine":  1584,
 "endColumn":  156
-}
-}
-},
-{
-"id":  "S109",
-"message":  "Assign this magic number '10' to a well-named (variable|constant), and use the (variable|constant) instead.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote\EndpointManager.cs",
-"region":  {
-"startLine":  492,
-"startColumn":  163,
-"endLine":  492,
-"endColumn":  165
-}
-}
-},
-{
-"id":  "S109",
-"message":  "Assign this magic number '10' to a well-named (variable|constant), and use the (variable|constant) instead.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote\EndpointManager.cs",
-"region":  {
-"startLine":  691,
-"startColumn":  91,
-"endLine":  691,
-"endColumn":  93
 }
 }
 },
@@ -262,71 +223,6 @@
 },
 {
 "id":  "S109",
-"message":  "Assign this magic number '4' to a well-named (variable|constant), and use the (variable|constant) instead.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\DotNetty\DotNettyTransport.cs",
-"region":  {
-"startLine":  318,
-"startColumn":  132,
-"endLine":  318,
-"endColumn":  133
-}
-}
-},
-{
-"id":  "S109",
-"message":  "Assign this magic number '4' to a well-named (variable|constant), and use the (variable|constant) instead.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\DotNetty\DotNettyTransport.cs",
-"region":  {
-"startLine":  318,
-"startColumn":  138,
-"endLine":  318,
-"endColumn":  139
-}
-}
-},
-{
-"id":  "S109",
-"message":  "Assign this magic number '4' to a well-named (variable|constant), and use the (variable|constant) instead.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\DotNetty\DotNettyTransport.cs",
-"region":  {
-"startLine":  321,
-"startColumn":  107,
-"endLine":  321,
-"endColumn":  108
-}
-}
-},
-{
-"id":  "S109",
-"message":  "Assign this magic number '4' to a well-named (variable|constant), and use the (variable|constant) instead.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\DotNetty\DotNettyTransport.cs",
-"region":  {
-"startLine":  325,
-"startColumn":  99,
-"endLine":  325,
-"endColumn":  100
-}
-}
-},
-{
-"id":  "S109",
-"message":  "Assign this magic number '15' to a well-named (variable|constant), and use the (variable|constant) instead.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\DotNetty\DotNettyTransportSettings.cs",
-"region":  {
-"startLine":  82,
-"startColumn":  95,
-"endLine":  82,
-"endColumn":  97
-}
-}
-},
-{
-"id":  "S109",
 "message":  "Assign this magic number '2552' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
 "uri":  "sources\akka.net\src\core\Akka.Remote\Transport\DotNetty\DotNettyTransportSettings.cs",
@@ -439,19 +335,6 @@
 "startColumn":  68,
 "endLine":  72,
 "endColumn":  74
-}
-}
-},
-{
-"id":  "S109",
-"message":  "Assign this magic number '3' to a well-named (variable|constant), and use the (variable|constant) instead.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\TestTransport.cs",
-"region":  {
-"startLine":  814,
-"startColumn":  50,
-"endLine":  814,
-"endColumn":  51
 }
 }
 }

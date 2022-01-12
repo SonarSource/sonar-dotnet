@@ -15,32 +15,6 @@
 },
 {
 "id":  "S109",
-"message":  "Assign this magic number '2' to a well-named (variable|constant), and use the (variable|constant) instead.",
-"location":  {
-"uri":  "sources\Automapper\src\AutoMapper\Execution\TypeMapPlanBuilder.cs",
-"region":  {
-"startLine":  42,
-"startColumn":  51,
-"endLine":  42,
-"endColumn":  52
-}
-}
-},
-{
-"id":  "S109",
-"message":  "Assign this magic number '3' to a well-named (variable|constant), and use the (variable|constant) instead.",
-"location":  {
-"uri":  "sources\Automapper\src\AutoMapper\Execution\TypeMapPlanBuilder.cs",
-"region":  {
-"startLine":  43,
-"startColumn":  53,
-"endLine":  43,
-"endColumn":  54
-}
-}
-},
-{
-"id":  "S109",
 "message":  "Assign this magic number '10' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
 "uri":  "sources\Automapper\src\AutoMapper\Execution\TypeMapPlanBuilder.cs",

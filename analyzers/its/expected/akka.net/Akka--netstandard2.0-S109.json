@@ -54,19 +54,6 @@
 },
 {
 "id":  "S109",
-"message":  "Assign this magic number '1970' to a well-named (variable|constant), and use the (variable|constant) instead.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\ActorSystem.cs",
-"region":  {
-"startLine":  216,
-"startColumn":  77,
-"endLine":  216,
-"endColumn":  81
-}
-}
-},
-{
-"id":  "S109",
 "message":  "Assign this magic number '3' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
 "uri":  "sources\akka.net\src\core\Akka\Actor\Address.cs",
@@ -101,19 +88,6 @@
 "startColumn":  36,
 "endLine":  150,
 "endColumn":  38
-}
-}
-},
-{
-"id":  "S109",
-"message":  "Assign this magic number '2' to a well-named (variable|constant), and use the (variable|constant) instead.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\Deployer.cs",
-"region":  {
-"startLine":  61,
-"startColumn":  65,
-"endLine":  61,
-"endColumn":  66
 }
 }
 },
@@ -808,58 +782,6 @@
 },
 {
 "id":  "S109",
-"message":  "Assign this magic number '2' to a well-named (variable|constant), and use the (variable|constant) instead.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka\Helios.Concurrency.DedicatedThreadPool.cs",
-"region":  {
-"startLine":  544,
-"startColumn":  30,
-"endLine":  544,
-"endColumn":  31
-}
-}
-},
-{
-"id":  "S109",
-"message":  "Assign this magic number '4' to a well-named (variable|constant), and use the (variable|constant) instead.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka\Helios.Concurrency.DedicatedThreadPool.cs",
-"region":  {
-"startLine":  548,
-"startColumn":  30,
-"endLine":  548,
-"endColumn":  31
-}
-}
-},
-{
-"id":  "S109",
-"message":  "Assign this magic number '6' to a well-named (variable|constant), and use the (variable|constant) instead.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka\Helios.Concurrency.DedicatedThreadPool.cs",
-"region":  {
-"startLine":  552,
-"startColumn":  30,
-"endLine":  552,
-"endColumn":  31
-}
-}
-},
-{
-"id":  "S109",
-"message":  "Assign this magic number '64' to a well-named (variable|constant), and use the (variable|constant) instead.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka\Helios.Concurrency.DedicatedThreadPool.cs",
-"region":  {
-"startLine":  559,
-"startColumn":  55,
-"endLine":  559,
-"endColumn":  57
-}
-}
-},
-{
-"id":  "S109",
 "message":  "Assign this magic number '256' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
 "uri":  "sources\akka.net\src\core\Akka\IO\Buffers\DirectBufferPool.cs",
@@ -964,19 +886,6 @@
 },
 {
 "id":  "S109",
-"message":  "Assign this magic number '5' to a well-named (variable|constant), and use the (variable|constant) instead.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka\IO\TcpSettings.cs",
-"region":  {
-"startLine":  48,
-"startColumn":  94,
-"endLine":  48,
-"endColumn":  95
-}
-}
-},
-{
-"id":  "S109",
 "message":  "Assign this magic number '512' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
 "uri":  "sources\akka.net\src\core\Akka\IO\TcpSettings.cs",
@@ -1029,45 +938,6 @@
 },
 {
 "id":  "S109",
-"message":  "Assign this magic number '36500' to a well-named (variable|constant), and use the (variable|constant) instead.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka\Pattern\CircuitBreaker.cs",
-"region":  {
-"startLine":  160,
-"startColumn":  89,
-"endLine":  160,
-"endColumn":  94
-}
-}
-},
-{
-"id":  "S109",
-"message":  "Assign this magic number '2' to a well-named (variable|constant), and use the (variable|constant) instead.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka\Pattern\CircuitBreaker.cs",
-"region":  {
-"startLine":  342,
-"startColumn":  107,
-"endLine":  342,
-"endColumn":  110
-}
-}
-},
-{
-"id":  "S109",
-"message":  "Assign this magic number '100' to a well-named (variable|constant), and use the (variable|constant) instead.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka\Routing\RoutedActorCell.cs",
-"region":  {
-"startLine":  143,
-"startColumn":  81,
-"endLine":  143,
-"endColumn":  84
-}
-}
-},
-{
-"id":  "S109",
 "message":  "Assign this magic number '2' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
 "uri":  "sources\akka.net\src\core\Akka\Util\AppVersion.cs",
@@ -1098,19 +968,6 @@
 "location":  {
 "uri":  "sources\akka.net\src\core\Akka\Util\AppVersion.cs",
 "region":  {
-"startLine":  178,
-"startColumn":  45,
-"endLine":  178,
-"endColumn":  46
-}
-}
-},
-{
-"id":  "S109",
-"message":  "Assign this magic number '2' to a well-named (variable|constant), and use the (variable|constant) instead.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka\Util\AppVersion.cs",
-"region":  {
 "startLine":  184,
 "startColumn":  26,
 "endLine":  184,
@@ -1128,19 +985,6 @@
 "startColumn":  26,
 "endLine":  185,
 "endColumn":  27
-}
-}
-},
-{
-"id":  "S109",
-"message":  "Assign this magic number '3' to a well-named (variable|constant), and use the (variable|constant) instead.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka\Util\AppVersion.cs",
-"region":  {
-"startLine":  188,
-"startColumn":  45,
-"endLine":  188,
-"endColumn":  46
 }
 }
 },
@@ -1375,19 +1219,6 @@
 "startColumn":  50,
 "endLine":  28,
 "endColumn":  52
-}
-}
-},
-{
-"id":  "S109",
-"message":  "Assign this magic number '1970' to a well-named (variable|constant), and use the (variable|constant) instead.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka\Util\Extensions\DateTimeExtensions.cs",
-"region":  {
-"startLine":  22,
-"startColumn":  51,
-"endLine":  22,
-"endColumn":  55
 }
 }
 },
@@ -2753,19 +2584,6 @@
 "startColumn":  68,
 "endLine":  249,
 "endColumn":  69
-}
-}
-},
-{
-"id":  "S109",
-"message":  "Assign this magic number '8' to a well-named (variable|constant), and use the (variable|constant) instead.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka\Util\MurmurHash.cs",
-"region":  {
-"startLine":  270,
-"startColumn":  31,
-"endLine":  270,
-"endColumn":  32
 }
 }
 },

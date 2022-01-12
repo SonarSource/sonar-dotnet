@@ -145,19 +145,6 @@
 },
 {
 "id":  "S109",
-"message":  "Assign this magic number '10' to a well-named (variable|constant), and use the (variable|constant) instead.",
-"location":  {
-"uri":  "sources\akka.net\src\benchmark\PingPong\Program.cs",
-"region":  {
-"startLine":  197,
-"startColumn":  54,
-"endLine":  197,
-"endColumn":  56
-}
-}
-},
-{
-"id":  "S109",
 "message":  "Assign this magic number '3' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
 "uri":  "sources\akka.net\src\benchmark\PingPong\Program.cs",

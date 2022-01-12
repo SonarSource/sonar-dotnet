@@ -67,19 +67,6 @@
 },
 {
 "id":  "S109",
-"message":  "Assign this magic number '5' to a well-named (variable|constant), and use the (variable|constant) instead.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\ActorMaterializer.cs",
-"region":  {
-"startLine":  679,
-"startColumn":  72,
-"endLine":  679,
-"endColumn":  73
-}
-}
-},
-{
-"id":  "S109",
 "message":  "Assign this magic number '2' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
 "uri":  "sources\akka.net\src\core\Akka.Streams\Actors\RequestStrategies.cs",
@@ -353,32 +340,6 @@
 },
 {
 "id":  "S109",
-"message":  "Assign this magic number '5' to a well-named (variable|constant), and use the (variable|constant) instead.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\StreamConverters.cs",
-"region":  {
-"startLine":  65,
-"startColumn":  98,
-"endLine":  65,
-"endColumn":  99
-}
-}
-},
-{
-"id":  "S109",
-"message":  "Assign this magic number '5' to a well-named (variable|constant), and use the (variable|constant) instead.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\StreamConverters.cs",
-"region":  {
-"startLine":  107,
-"startColumn":  63,
-"endLine":  107,
-"endColumn":  64
-}
-}
-},
-{
-"id":  "S109",
 "message":  "Assign this magic number '32' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
 "uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\StreamRefs.cs",
@@ -387,32 +348,6 @@
 "startColumn":  66,
 "endLine":  65,
 "endColumn":  68
-}
-}
-},
-{
-"id":  "S109",
-"message":  "Assign this magic number '30' to a well-named (variable|constant), and use the (variable|constant) instead.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\StreamRefs.cs",
-"region":  {
-"startLine":  67,
-"startColumn":  102,
-"endLine":  67,
-"endColumn":  104
-}
-}
-},
-{
-"id":  "S109",
-"message":  "Assign this magic number '2' to a well-named (variable|constant), and use the (variable|constant) instead.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\StreamRefs.cs",
-"region":  {
-"startLine":  68,
-"startColumn":  126,
-"endLine":  68,
-"endColumn":  127
 }
 }
 },
@@ -439,19 +374,6 @@
 "startColumn":  70,
 "endLine":  99,
 "endColumn":  80
-}
-}
-},
-{
-"id":  "S109",
-"message":  "Assign this magic number '2' to a well-named (variable|constant), and use the (variable|constant) instead.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\FanOut.cs",
-"region":  {
-"startLine":  711,
-"startColumn":  64,
-"endLine":  711,
-"endColumn":  65
 }
 }
 },
@@ -665,32 +587,6 @@
 },
 {
 "id":  "S109",
-"message":  "Assign this magic number '2' to a well-named (variable|constant), and use the (variable|constant) instead.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\StreamLayout.cs",
-"region":  {
-"startLine":  588,
-"startColumn":  60,
-"endLine":  588,
-"endColumn":  61
-}
-}
-},
-{
-"id":  "S109",
-"message":  "Assign this magic number '2' to a well-named (variable|constant), and use the (variable|constant) instead.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\StreamLayout.cs",
-"region":  {
-"startLine":  588,
-"startColumn":  83,
-"endLine":  588,
-"endColumn":  84
-}
-}
-},
-{
-"id":  "S109",
 "message":  "Assign this magic number '4' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
 "uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\StreamLayout.cs",
@@ -777,32 +673,6 @@
 "startColumn":  113,
 "endLine":  36,
 "endColumn":  114
-}
-}
-},
-{
-"id":  "S109",
-"message":  "Assign this magic number '2' to a well-named (variable|constant), and use the (variable|constant) instead.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Shape.cs",
-"region":  {
-"startLine":  668,
-"startColumn":  34,
-"endLine":  668,
-"endColumn":  35
-}
-}
-},
-{
-"id":  "S109",
-"message":  "Assign this magic number '2' to a well-named (variable|constant), and use the (variable|constant) instead.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Shape.cs",
-"region":  {
-"startLine":  669,
-"startColumn":  35,
-"endLine":  669,
-"endColumn":  36
 }
 }
 },

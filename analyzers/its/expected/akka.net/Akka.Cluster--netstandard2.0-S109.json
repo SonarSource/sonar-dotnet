@@ -80,45 +80,6 @@
 },
 {
 "id":  "S109",
-"message":  "Assign this magic number '7' to a well-named (variable|constant), and use the (variable|constant) instead.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterSettings.cs",
-"region":  {
-"startLine":  110,
-"startColumn":  53,
-"endLine":  110,
-"endColumn":  54
-}
-}
-},
-{
-"id":  "S109",
-"message":  "Assign this magic number '2' to a well-named (variable|constant), and use the (variable|constant) instead.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\Member.cs",
-"region":  {
-"startLine":  318,
-"startColumn":  34,
-"endLine":  318,
-"endColumn":  35
-}
-}
-},
-{
-"id":  "S109",
-"message":  "Assign this magic number '2' to a well-named (variable|constant), and use the (variable|constant) instead.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\Member.cs",
-"region":  {
-"startLine":  369,
-"startColumn":  34,
-"endLine":  369,
-"endColumn":  35
-}
-}
-},
-{
-"id":  "S109",
 "message":  "Assign this magic number '2' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
 "uri":  "sources\akka.net\src\core\Akka.Cluster\SBR\DowningStrategy.cs",
@@ -192,19 +153,6 @@
 "startColumn":  44,
 "endLine":  591,
 "endColumn":  45
-}
-}
-},
-{
-"id":  "S109",
-"message":  "Assign this magic number '4' to a well-named (variable|constant), and use the (variable|constant) instead.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\SBR\SplitBrainResolverSettings.cs",
-"region":  {
-"startLine":  55,
-"startColumn":  50,
-"endLine":  55,
-"endColumn":  51
 }
 }
 },

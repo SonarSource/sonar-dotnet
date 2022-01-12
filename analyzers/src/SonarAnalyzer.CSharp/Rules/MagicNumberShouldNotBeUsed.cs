@@ -18,8 +18,10 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
+using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
@@ -39,6 +41,18 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private static readonly ISet<string> NotConsideredAsMagicNumbers = new HashSet<string> { "-1", "0", "1" };
 
+        private static readonly string[] AcceptedCollectionMembersForSingleDigitComparison = { "Size", "Count", "Length" };
+
+        private static readonly SyntaxKind[] AllowedSingleDigitComparisons =
+        {
+            SyntaxKind.EqualsExpression,
+            SyntaxKind.NotEqualsExpression,
+            SyntaxKind.LessThanOrEqualExpression,
+            SyntaxKind.LessThanExpression,
+            SyntaxKind.GreaterThanExpression,
+            SyntaxKind.GreaterThanOrEqualExpression
+        };
+
         protected override void Initialize(SonarAnalysisContext context) =>
             context.RegisterSyntaxNodeActionInNonGenerated(
                 c =>
@@ -55,18 +69,14 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private static bool IsExceptionToTheRule(LiteralExpressionSyntax literalExpression) =>
             NotConsideredAsMagicNumbers.Contains(literalExpression.Token.ValueText)
-            // It's ok to use magic numbers as part of a variable declaration
             || literalExpression.FirstAncestorOrSelf<VariableDeclarationSyntax>() != null
-            // It's ok to use magic numbers as part of a parameter declaration
             || literalExpression.FirstAncestorOrSelf<ParameterSyntax>() != null
-            // It's ok to use magic numbers as part of an enum declaration
             || literalExpression.FirstAncestorOrSelf<EnumMemberDeclarationSyntax>() != null
-            // It's ok to use magic numbers in the GetHashCode method. Note that I am only checking the method name of the sake of simplicity
             || literalExpression.FirstAncestorOrSelf<MethodDeclarationSyntax>()?.Identifier.ValueText == nameof(object.GetHashCode)
-            // It's ok to use magic numbers in pragma directives
             || literalExpression.FirstAncestorOrSelf<PragmaWarningDirectiveTriviaSyntax>() != null
-            // It's ok to use magic numbers in property declaration
-            || IsInsideProperty(literalExpression);
+            || IsInsideProperty(literalExpression)
+            || IsSingleDigitInToleratedComparisons(literalExpression)
+            || IsToleratedArgument(literalExpression);
 
         // Inside property we consider magic numbers as exceptions in the following cases:
         //   - A {get; set;} = MAGIC_NUMBER
@@ -79,6 +89,51 @@ namespace SonarAnalyzer.Rules.CSharp
             }
             var parent = node.Parent;
             return parent is ReturnStatementSyntax || parent is EqualsValueClauseSyntax;
+        }
+
+        private static bool IsSingleDigitInToleratedComparisons(LiteralExpressionSyntax literalExpression) =>
+            literalExpression.Parent is BinaryExpressionSyntax binaryExpression
+            && IsSingleDigit(literalExpression.Token.ValueText)
+            && binaryExpression.IsAnyKind(AllowedSingleDigitComparisons)
+            && IsComparingCollectionSize(binaryExpression);
+
+        private static bool IsToleratedArgument(LiteralExpressionSyntax literalExpression) =>
+            IsToleratedMethodArgument(literalExpression)
+            || IsSingleOrNamedAttributeArgument(literalExpression);
+
+        // Named argument or constructor argument.
+        private static bool IsToleratedMethodArgument(LiteralExpressionSyntax literalExpression) =>
+            literalExpression.Parent is ArgumentSyntax arg
+            && (arg.NameColon is not null || arg.Parent.Parent is ObjectCreationExpressionSyntax || LooksLikeTimeApi(arg.Parent.Parent));
+
+        private static bool LooksLikeTimeApi(SyntaxNode node) =>
+            node is InvocationExpressionSyntax invocationExpression
+            && invocationExpression.Expression.GetIdentifier() is { } identifier
+            && identifier.Identifier.ValueText.StartsWith("From");
+
+        private static bool IsSingleOrNamedAttributeArgument(LiteralExpressionSyntax literalExpression) =>
+            literalExpression.Parent is AttributeArgumentSyntax arg
+            && (arg.NameColon is not null
+                || arg.NameEquals is not null
+                || (arg.Parent is AttributeArgumentListSyntax argList && argList.Arguments.Count == 1));
+
+        private static bool IsSingleDigit(string text) => byte.TryParse(text, out var result) && result <= 9;
+
+        // We allow single-digit comparisons when checking the size of a collection, which is usually done to access the first elements.
+        private static bool IsComparingCollectionSize(BinaryExpressionSyntax binaryComparisonToLiteral)
+        {
+            var comparedToLiteral = binaryComparisonToLiteral.Left is LiteralExpressionSyntax ? binaryComparisonToLiteral.Right : binaryComparisonToLiteral.Left;
+            return GetMemberName(comparedToLiteral) is { } name
+                && AcceptedCollectionMembersForSingleDigitComparison.Contains(name);
+
+            // we also allow LINQ Count() - the implementation is kept simple to avoid expensive SemanticModel calls
+            static string GetMemberName(SyntaxNode node) =>
+                node switch
+                {
+                    MemberAccessExpressionSyntax memberAccess => memberAccess.Name.Identifier.ValueText,
+                    InvocationExpressionSyntax invocationExpressionSyntax => GetMemberName(invocationExpressionSyntax.Expression),
+                    _ => null
+                };
         }
     }
 }

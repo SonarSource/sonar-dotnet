@@ -93,32 +93,6 @@
 },
 {
 "id":  "S109",
-"message":  "Assign this magic number '2' to a well-named (variable|constant), and use the (variable|constant) instead.",
-"location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\ReplicatorSettings.cs",
-"region":  {
-"startLine":  70,
-"startColumn":  92,
-"endLine":  70,
-"endColumn":  93
-}
-}
-},
-{
-"id":  "S109",
-"message":  "Assign this magic number '500' to a well-named (variable|constant), and use the (variable|constant) instead.",
-"location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\ReplicatorSettings.cs",
-"region":  {
-"startLine":  71,
-"startColumn":  120,
-"endLine":  71,
-"endColumn":  123
-}
-}
-},
-{
-"id":  "S109",
 "message":  "Assign this magic number '500' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
 "uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\ReplicatorSettings.cs",
@@ -127,58 +101,6 @@
 "startColumn":  71,
 "endLine":  72,
 "endColumn":  74
-}
-}
-},
-{
-"id":  "S109",
-"message":  "Assign this magic number '120' to a well-named (variable|constant), and use the (variable|constant) instead.",
-"location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\ReplicatorSettings.cs",
-"region":  {
-"startLine":  74,
-"startColumn":  94,
-"endLine":  74,
-"endColumn":  97
-}
-}
-},
-{
-"id":  "S109",
-"message":  "Assign this magic number '300' to a well-named (variable|constant), and use the (variable|constant) instead.",
-"location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\ReplicatorSettings.cs",
-"region":  {
-"startLine":  75,
-"startColumn":  111,
-"endLine":  75,
-"endColumn":  114
-}
-}
-},
-{
-"id":  "S109",
-"message":  "Assign this magic number '6' to a well-named (variable|constant), and use the (variable|constant) instead.",
-"location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\ReplicatorSettings.cs",
-"region":  {
-"startLine":  78,
-"startColumn":  111,
-"endLine":  78,
-"endColumn":  112
-}
-}
-},
-{
-"id":  "S109",
-"message":  "Assign this magic number '10' to a well-named (variable|constant), and use the (variable|constant) instead.",
-"location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\ReplicatorSettings.cs",
-"region":  {
-"startLine":  79,
-"startColumn":  124,
-"endLine":  79,
-"endColumn":  126
 }
 }
 },
@@ -205,32 +127,6 @@
 "startColumn":  32,
 "endLine":  48,
 "endColumn":  34
-}
-}
-},
-{
-"id":  "S109",
-"message":  "Assign this magic number '4' to a well-named (variable|constant), and use the (variable|constant) instead.",
-"location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Serialization\ReplicatorMessageSerializer.cs",
-"region":  {
-"startLine":  161,
-"startColumn":  55,
-"endLine":  161,
-"endColumn":  56
-}
-}
-},
-{
-"id":  "S109",
-"message":  "Assign this magic number '4' to a well-named (variable|constant), and use the (variable|constant) instead.",
-"location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Serialization\ReplicatorMessageSerializer.cs",
-"region":  {
-"startLine":  162,
-"startColumn":  57,
-"endLine":  162,
-"endColumn":  58
 }
 }
 },
