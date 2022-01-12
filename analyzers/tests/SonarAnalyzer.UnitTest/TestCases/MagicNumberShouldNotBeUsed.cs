@@ -78,6 +78,7 @@ namespace Tests.Diagnostics
             var result = list.Count == 1; // Compliant, single digit for Count
             result = list.Count < 2; // Compliant
             result = list.Count <= 2; // Compliant
+            result = 2 <= list.Count; // Compliant
             result = list.Count != 2; // Compliant
             result = list.Count > 2; // Compliant
             result = list.Count() > 2; // Compliant
