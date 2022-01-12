@@ -83,8 +83,7 @@ namespace SonarAnalyzer.Rules
         }
 
         private static bool IsMethodCountExtension(IMethodSymbol methodSymbol) =>
-            methodSymbol.Name == nameof(Enumerable.Count)
-            && methodSymbol.IsExtensionMethod
+            methodSymbol.IsExtensionMethod
             && methodSymbol.ReceiverType != null;
     }
 }
