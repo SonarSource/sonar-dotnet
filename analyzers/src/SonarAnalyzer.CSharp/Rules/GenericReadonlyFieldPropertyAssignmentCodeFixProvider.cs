@@ -127,7 +127,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private static SyntaxNode GetNewDocumentRoot(SyntaxNode docRoot, ITypeParameterSymbol typeParameterSymbol, KeyValuePair<DocumentId, ICollection<ClassDeclarationSyntax>> classes)
         {
-            var newDocRoot = docRoot.ReplaceNodes(classes.Value, (original, rewritten) => rewritten.WithAdditionalAnnotations(annotation));
+            var newDocRoot = docRoot.ReplaceNodes(classes.Value, (_, rewritten) => rewritten.WithAdditionalAnnotations(annotation));
             var annotatedNodes = newDocRoot.GetAnnotatedNodes(annotation).ToList();
             while (annotatedNodes.Any())
             {

@@ -44,7 +44,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 return ImmutableArray.Create(GetHashCodeMutable.DiagnosticId);
             }
         }
-        
+
         protected  override async Task RegisterCodeFixesAsync(SyntaxNode root, CodeFixContext context)
         {
             var diagnostic = context.Diagnostics.First();
