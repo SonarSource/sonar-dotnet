@@ -52,5 +52,4 @@ namespace SonarAnalyzer.UnitTest.TestFramework.Tests
         public sealed override void Initialize(AnalysisContext context) =>
             context.RegisterSyntaxNodeAction(c => c.ReportIssue(Diagnostic.Create(Rule, c.Node.GetLocation())), VB.SyntaxKind.NumericLiteralExpression);
     }
-
 }
