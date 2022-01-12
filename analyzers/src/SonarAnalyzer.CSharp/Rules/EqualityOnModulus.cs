@@ -19,6 +19,7 @@
  */
 
 using System.Collections.Immutable;
+using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
@@ -33,6 +34,14 @@ namespace SonarAnalyzer.Rules.CSharp
     {
         private const string DiagnosticId = "S2197";
         private const string MessageFormat = "The result of this modulus operation may not be {0}.";
+
+        private static readonly string[] MethodsOrPropertiesReturningAlwaysPositiveInt =
+        {
+            "System.Array.Length",
+            "System.Collections.Generic.IEnumerable<int>.Count<int>()",
+            "System.Collections.Generic.IEnumerable<int>.LongCount<int>()",
+            "System.Collections.Generic.List<int>.Count"
+        };
 
         private static readonly CSharpExpressionNumericConverter ExpressionNumericConverter = new CSharpExpressionNumericConverter();
 
@@ -50,9 +59,7 @@ namespace SonarAnalyzer.Rules.CSharp
             if (CheckExpression(equalsExpression.Left, equalsExpression.Right, c.SemanticModel, out var constantValue)
                 || CheckExpression(equalsExpression.Right, equalsExpression.Left, c.SemanticModel, out constantValue))
             {
-                c.ReportIssue(Diagnostic.Create(Rule,
-                                                               equalsExpression.GetLocation(),
-                                                               constantValue < 0 ? "negative" : "positive"));
+                c.ReportIssue(Diagnostic.Create(Rule, equalsExpression.GetLocation(), constantValue < 0 ? "negative" : "positive"));
             }
         }
 
@@ -60,7 +67,8 @@ namespace SonarAnalyzer.Rules.CSharp
             ExpressionNumericConverter.TryGetConstantIntValue(node, out constantValue)
             && constantValue != 0
             && IsModulus(modulus)
-            && !IsUnsigned(modulus, semanticModel);
+            && !IsUnsigned(modulus, semanticModel)
+            && !IsMethodOrPropertyThatAlwaysReturnsPositiveInt(((BinaryExpressionSyntax)modulus).Left, semanticModel);
 
         private static bool IsModulus(ExpressionSyntax expression) =>
             expression.RemoveParentheses() is BinaryExpressionSyntax binary
@@ -71,6 +79,13 @@ namespace SonarAnalyzer.Rules.CSharp
             var type = semantic.GetTypeInfo(expression).Type;
             return type.IsAny(KnownType.UnsignedIntegers)
                    || type.Is(KnownType.System_UIntPtr);
+        }
+
+        private static bool IsMethodOrPropertyThatAlwaysReturnsPositiveInt(ExpressionSyntax expression, SemanticModel semantic)
+        {
+            var symbol = semantic.GetSymbolInfo(expression).Symbol;
+            return (symbol is IPropertySymbol || symbol is IMethodSymbol)
+                    && MethodsOrPropertiesReturningAlwaysPositiveInt.Contains(symbol.ToDisplayString());
         }
     }
 }

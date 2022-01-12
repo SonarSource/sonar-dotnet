@@ -20,11 +20,14 @@ namespace Tests.Diagnostics
             var xx = unsignedY % 4 == 1; // Compliant
 
             var array = new[] {1};
-            y = array.Length % 2 == 1; // Noncompliant - FP: array Length is > 0;
+            y = array.Length % 2 == 1; // Compliant: array Length is > 0;
 
             IEnumerable<int> enumerable = array;
-            y = enumerable.Count() % 2 == 1; // Noncompliant - FP: IEnumerable Count is > 0;
-            y = enumerable.LongCount() % 2 == 1; // Noncompliant - FP: IEnumerable LongCount is > 0;
+            y = enumerable.Count() % 2 == 1; // Compliant - IEnumerable Count is > 0;
+            y = enumerable.LongCount() % 2 == 1; // Compliant - IEnumerable LongCount is > 0;
+
+            var list = new List<int>();
+            y = list.Count % 2 == 1; // Compliant - Count property is > 0;
         }
     }
 }
