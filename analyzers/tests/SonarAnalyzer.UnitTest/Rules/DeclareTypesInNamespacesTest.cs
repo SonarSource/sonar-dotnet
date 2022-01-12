@@ -29,7 +29,7 @@ namespace SonarAnalyzer.UnitTest.Rules
     public class DeclareTypesInNamespacesTest
     {
         private readonly VerifierBuilder builder = new VerifierBuilder<CS.DeclareTypesInNamespaces>();
-        private readonly VerifierBuilder nonconcurrent = new VerifierBuilder<CS.DeclareTypesInNamespaces>().WithConcurrentAnalysis(false);
+        private readonly VerifierBuilder nonConcurrent = new VerifierBuilder<CS.DeclareTypesInNamespaces>().WithConcurrentAnalysis(false);
 
         [TestMethod]
         public void DeclareTypesInNamespaces_CS() =>
@@ -37,11 +37,11 @@ namespace SonarAnalyzer.UnitTest.Rules
 
         [TestMethod]
         public void DeclareTypesInNamespaces_CS_Before8() =>
-            nonconcurrent.AddPaths("DeclareTypesInNamespaces.BeforeCSharp8.cs").WithOptions(ParseOptionsHelper.BeforeCSharp8).Verify();
+            nonConcurrent.AddPaths("DeclareTypesInNamespaces.BeforeCSharp8.cs").WithOptions(ParseOptionsHelper.BeforeCSharp8).Verify();
 
         [TestMethod]
         public void DeclareTypesInNamespaces_CS_After8() =>
-            nonconcurrent.AddPaths("DeclareTypesInNamespaces.AfterCSharp8.cs").WithOptions(ParseOptionsHelper.FromCSharp8).Verify();
+            nonConcurrent.AddPaths("DeclareTypesInNamespaces.AfterCSharp8.cs").WithOptions(ParseOptionsHelper.FromCSharp8).Verify();
 
 #if NET
 
@@ -51,7 +51,7 @@ namespace SonarAnalyzer.UnitTest.Rules
 
         [TestMethod]
         public void DeclareTypesInNamespaces_CS_AfterCSharp10() =>
-            nonconcurrent
+            nonConcurrent
                 .AddPaths("DeclareTypesInNamespaces.AfterCSharp10.FileScopedNamespace.cs", "DeclareTypesInNamespaces.AfterCSharp10.RecordStruct.cs")
                 .WithOptions(ParseOptionsHelper.FromCSharp10)
                 .Verify();

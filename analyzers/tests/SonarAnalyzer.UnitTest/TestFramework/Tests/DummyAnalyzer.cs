@@ -28,28 +28,28 @@ using VB = Microsoft.CodeAnalysis.VisualBasic;
 namespace SonarAnalyzer.UnitTest.TestFramework.Tests
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
-    internal class DummyAnalyzerCS : DiagnosticAnalyzer
+    internal class DummyAnalyzerCS : DummyAnalyzer<CS.SyntaxKind>
     {
-        private static readonly DiagnosticDescriptor Rule = new("SDummy", "Dummy title", "Dummy message", string.Empty, DiagnosticSeverity.Warning, true);
-
-        public int DummyProperty { get; set; }
-
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(Rule);
-
-        public sealed override void Initialize(AnalysisContext context) =>
-            context.RegisterSyntaxNodeAction(c => c.ReportIssue(Diagnostic.Create(Rule, c.Node.GetLocation())), CS.SyntaxKind.NumericLiteralExpression);
+        protected override CS.SyntaxKind NumericLiteralExpression => CS.SyntaxKind.NumericLiteralExpression;
     }
 
     [DiagnosticAnalyzer(LanguageNames.VisualBasic)]
-    internal class DummyAnalyzerVB : DiagnosticAnalyzer
+    internal class DummyAnalyzerVB : DummyAnalyzer<VB.SyntaxKind>
+    {
+        protected override VB.SyntaxKind NumericLiteralExpression => VB.SyntaxKind.NumericLiteralExpression;
+    }
+
+    internal abstract class DummyAnalyzer<TSyntaxKind> : DiagnosticAnalyzer where TSyntaxKind : struct
     {
         private static readonly DiagnosticDescriptor Rule = new("SDummy", "Dummy title", "Dummy message", string.Empty, DiagnosticSeverity.Warning, true);
+
+        protected abstract TSyntaxKind NumericLiteralExpression { get;}
 
         public int DummyProperty { get; set; }
 
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(Rule);
 
         public sealed override void Initialize(AnalysisContext context) =>
-            context.RegisterSyntaxNodeAction(c => c.ReportIssue(Diagnostic.Create(Rule, c.Node.GetLocation())), VB.SyntaxKind.NumericLiteralExpression);
+            context.RegisterSyntaxNodeAction(c => c.ReportIssue(Diagnostic.Create(Rule, c.Node.GetLocation())), NumericLiteralExpression);
     }
 }

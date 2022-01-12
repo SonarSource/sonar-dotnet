@@ -72,7 +72,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework
             const string TestCases = "TestCases";
             using var scope = new EnvironmentVariableScope { EnableConcurrentAnalysis = builder.ConcurrentAnalysis};
             var basePath = Path.GetFullPath(builder.BasePath == null ? TestCases : Path.Combine(TestCases, builder.BasePath));
-            var paths = builder.Paths.Select(x => Path.Combine(basePath, x));
+            var paths = builder.Paths.Select(x => Path.Combine(basePath, x)).ToArray();
             var project = SolutionBuilder.Create()
                 .AddProject(language, true, builder.OutputKind)
                 .AddDocuments(paths)
