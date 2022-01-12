@@ -97,6 +97,19 @@
 "location":  {
 "uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Framing.cs",
 "region":  {
+"startLine":  64,
+"startColumn":  50,
+"endLine":  64,
+"endColumn":  51
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '4' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Framing.cs",
+"region":  {
 "startLine":  101,
 "startColumn":  32,
 "endLine":  101,

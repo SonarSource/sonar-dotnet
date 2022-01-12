@@ -155,6 +155,19 @@
 "endColumn":  45
 }
 }
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '2' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\WriteAggregator.cs",
+"region":  {
+"startLine":  196,
+"startColumn":  25,
+"endLine":  196,
+"endColumn":  26
+}
+}
 }
 ]
 }

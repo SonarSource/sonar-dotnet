@@ -838,6 +838,19 @@
 "location":  {
 "uri":  "sources\Nancy\src\Nancy\ViewEngines\ResourceViewLocationProvider.cs",
 "region":  {
+"startLine":  173,
+"startColumn":  36,
+"endLine":  173,
+"endColumn":  37
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '2' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\ViewEngines\ResourceViewLocationProvider.cs",
+"region":  {
 "startLine":  175,
 "startColumn":  59,
 "endLine":  175,

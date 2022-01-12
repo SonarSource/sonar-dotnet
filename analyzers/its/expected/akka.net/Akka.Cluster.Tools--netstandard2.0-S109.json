@@ -77,6 +77,19 @@
 "endColumn":  70
 }
 }
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '3' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\Singleton\ClusterSingletonManager.cs",
+"region":  {
+"startLine":  1247,
+"startColumn":  74,
+"endLine":  1247,
+"endColumn":  75
+}
+}
 }
 ]
 }
