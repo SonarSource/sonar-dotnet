@@ -45,10 +45,6 @@ namespace SonarAnalyzer.Rules.CSharp
                 return ImmutableArray.Create(EmptyMethod.DiagnosticId);
             }
         }
-        public override FixAllProvider GetFixAllProvider()
-        {
-            return WellKnownFixAllProviders.BatchFixer;
-        }
 
         private const string LiteralNotSupportedException = "NotSupportedException";
         private const string LiteralSystem = "System";

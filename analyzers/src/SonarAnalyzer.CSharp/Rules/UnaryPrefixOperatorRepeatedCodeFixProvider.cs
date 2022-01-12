@@ -42,10 +42,6 @@ namespace SonarAnalyzer.Rules.CSharp
                 return ImmutableArray.Create(UnaryPrefixOperatorRepeated.DiagnosticId);
             }
         }
-        public override FixAllProvider GetFixAllProvider()
-        {
-            return WellKnownFixAllProviders.BatchFixer;
-        }
 
         protected override Task RegisterCodeFixesAsync(SyntaxNode root, CodeFixContext context)
         {

@@ -26,7 +26,6 @@ using Microsoft.CodeAnalysis.CodeActions;
 using Microsoft.CodeAnalysis.CodeFixes;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
-using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
 
 namespace SonarAnalyzer.Rules.CSharp
@@ -36,8 +35,6 @@ namespace SonarAnalyzer.Rules.CSharp
     {
         internal const string Title = "Remove redundant explicit property names";
         public override ImmutableArray<string> FixableDiagnosticIds => ImmutableArray.Create(RedundantPropertyNamesInAnonymousClass.DiagnosticId);
-
-        public override FixAllProvider GetFixAllProvider() => DocumentBasedFixAllProvider.Instance;
 
         protected override Task RegisterCodeFixesAsync(SyntaxNode root, CodeFixContext context)
         {

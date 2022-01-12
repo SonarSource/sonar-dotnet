@@ -41,11 +41,6 @@ namespace SonarAnalyzer.Rules.Common
             }
         }
 
-        public sealed override FixAllProvider GetFixAllProvider()
-        {
-            return DocumentBasedFixAllProvider.Instance;
-        }
-
         protected sealed override Task RegisterCodeFixesAsync(SyntaxNode root, CodeFixContext context)
         {
             var diagnostic = context.Diagnostics.First();

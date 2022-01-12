@@ -39,7 +39,6 @@ namespace SonarAnalyzer.Rules.CSharp
         internal const string TitleRemoveDestructor = "Remove destructor";
 
         public override ImmutableArray<string> FixableDiagnosticIds => ImmutableArray.Create(RedundancyInConstructorDestructorDeclaration.DiagnosticId);
-        public override FixAllProvider GetFixAllProvider() => DocumentBasedFixAllProvider.Instance;
 
         protected override Task RegisterCodeFixesAsync(SyntaxNode root, CodeFixContext context)
         {

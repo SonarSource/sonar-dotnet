@@ -24,7 +24,6 @@ using System.Threading.Tasks;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CodeActions;
 using Microsoft.CodeAnalysis.CodeFixes;
-using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
 
 namespace SonarAnalyzer.Rules.CSharp
@@ -35,7 +34,6 @@ namespace SonarAnalyzer.Rules.CSharp
         internal const string Title = "Remove unused member";
         // We only want to fix S1144 and not S4487 because for S4487 the field is written so we don't know the fix
         public sealed override ImmutableArray<string> FixableDiagnosticIds => ImmutableArray.Create(UnusedPrivateMember.S1144DiagnosticId);
-        public sealed override FixAllProvider GetFixAllProvider() => DocumentBasedFixAllProvider.Instance;
 
         protected sealed override Task RegisterCodeFixesAsync(SyntaxNode root, CodeFixContext context)
         {

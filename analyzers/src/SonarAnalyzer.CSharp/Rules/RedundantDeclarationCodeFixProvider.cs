@@ -48,8 +48,6 @@ namespace SonarAnalyzer.Rules.CSharp
 
         public override ImmutableArray<string> FixableDiagnosticIds => ImmutableArray.Create(RedundantDeclaration.DiagnosticId);
 
-        public override FixAllProvider GetFixAllProvider() => DocumentBasedFixAllProvider.Instance;
-
         protected override Task RegisterCodeFixesAsync(SyntaxNode root, CodeFixContext context)
         {
             var diagnostic = context.Diagnostics.First();

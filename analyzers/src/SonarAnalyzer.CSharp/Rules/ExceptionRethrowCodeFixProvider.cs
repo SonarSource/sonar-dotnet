@@ -26,7 +26,6 @@ using Microsoft.CodeAnalysis.CodeActions;
 using Microsoft.CodeAnalysis.CodeFixes;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
-using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
 
 namespace SonarAnalyzer.Rules.CSharp
@@ -41,10 +40,6 @@ namespace SonarAnalyzer.Rules.CSharp
             {
                 return ImmutableArray.Create(ExceptionRethrow.DiagnosticId);
             }
-        }
-        public override FixAllProvider GetFixAllProvider()
-        {
-            return DocumentBasedFixAllProvider.Instance;
         }
 
         protected override Task RegisterCodeFixesAsync(SyntaxNode root, CodeFixContext context)

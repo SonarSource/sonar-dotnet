@@ -36,7 +36,6 @@ namespace SonarAnalyzer.Rules.CSharp
     {
         private const string Title = "Remove redundant declaration";
         public override ImmutableArray<string> FixableDiagnosticIds => ImmutableArray.Create(RedundantInheritanceList.DiagnosticId);
-        public override FixAllProvider GetFixAllProvider() => WellKnownFixAllProviders.BatchFixer;
 
         protected override Task RegisterCodeFixesAsync(SyntaxNode root, CodeFixContext context)
         {

@@ -40,10 +40,6 @@ namespace SonarAnalyzer.Rules.CSharp
                 return ImmutableArray.Create(ThreadStaticNonStaticField.DiagnosticId);
             }
         }
-        public override FixAllProvider GetFixAllProvider()
-        {
-            return WellKnownFixAllProviders.BatchFixer;
-        }
 
         protected override Task RegisterCodeFixesAsync(SyntaxNode root, CodeFixContext context)
         {

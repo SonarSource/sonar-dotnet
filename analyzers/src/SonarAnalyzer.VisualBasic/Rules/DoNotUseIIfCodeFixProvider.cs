@@ -39,11 +39,6 @@ namespace SonarAnalyzer.Rules.VisualBasic
         public override ImmutableArray<string> FixableDiagnosticIds =>
             ImmutableArray.Create(DoNotUseIif.DiagnosticId);
 
-        public override FixAllProvider GetFixAllProvider()
-        {
-            return WellKnownFixAllProviders.BatchFixer;
-        }
-
         protected override Task RegisterCodeFixesAsync(SyntaxNode root, CodeFixContext context)
         {
             var diagnostic = context.Diagnostics.First();

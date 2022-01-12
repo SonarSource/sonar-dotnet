@@ -36,8 +36,6 @@ namespace SonarAnalyzer.Rules.CSharp
         private const string Title = "Remove redundant override";
         public override ImmutableArray<string> FixableDiagnosticIds =>
             ImmutableArray.Create(MemberOverrideCallsBaseMember.DiagnosticId);
-        public override FixAllProvider GetFixAllProvider() =>
-            DocumentBasedFixAllProvider.Instance;
 
         protected override Task RegisterCodeFixesAsync(SyntaxNode root, CodeFixContext context)
         {

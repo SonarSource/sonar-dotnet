@@ -42,11 +42,6 @@ namespace SonarAnalyzer.Rules.CSharp
             }
         }
 
-        public override FixAllProvider GetFixAllProvider()
-        {
-            return DocumentBasedFixAllProvider.Instance;
-        }
-
         protected override Task RegisterCodeFixesAsync(SyntaxNode root, CodeFixContext context)
         {
             var diagnostic = context.Diagnostics.First();

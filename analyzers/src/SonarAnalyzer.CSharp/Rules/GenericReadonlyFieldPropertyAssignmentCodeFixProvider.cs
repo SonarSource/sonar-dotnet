@@ -89,7 +89,8 @@ namespace SonarAnalyzer.Rules.CSharp
                             }
 
                             return currentSolution;
-                        }),
+                        },
+                        TitleAddClassConstraint),
                     context.Diagnostics);
             }
 
@@ -106,7 +107,8 @@ namespace SonarAnalyzer.Rules.CSharp
                     {
                         var newRoot = root.RemoveNode(statement, SyntaxRemoveOptions.KeepNoTrivia);
                         return Task.FromResult(context.Document.WithSyntaxRoot(newRoot));
-                    }),
+                    },
+                    TitleRemove),
                 context.Diagnostics);
         }
 
@@ -171,4 +173,3 @@ namespace SonarAnalyzer.Rules.CSharp
         }
     }
 }
-

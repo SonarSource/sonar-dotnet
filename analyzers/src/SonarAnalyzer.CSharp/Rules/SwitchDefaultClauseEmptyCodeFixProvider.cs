@@ -35,8 +35,6 @@ namespace SonarAnalyzer.Rules.CSharp
         internal const string Title = "Remove empty 'default' clause";
         public override ImmutableArray<string> FixableDiagnosticIds => ImmutableArray.Create(SwitchDefaultClauseEmpty.DiagnosticId);
 
-        public override FixAllProvider GetFixAllProvider() => WellKnownFixAllProviders.BatchFixer;
-
         protected override Task RegisterCodeFixesAsync(SyntaxNode root, CodeFixContext context)
         {
             var diagnostic = context.Diagnostics.First();
