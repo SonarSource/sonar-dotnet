@@ -63,7 +63,7 @@ namespace SonarAnalyzer.Rules
         {
             if (Language.Syntax.NodeIdentifier(expression) is { } identifier
                 && identifier.ValueText == nameof(Enumerable.Count)
-                && (semanticModel.GetSymbolInfo(identifier.Parent.Parent).Symbol is IMethodSymbol methodSymbol)
+                && semanticModel.GetSymbolInfo(identifier.Parent.Parent).Symbol is IMethodSymbol methodSymbol
                 && IsMethodCountExtension(methodSymbol)
                 && methodSymbol.IsExtensionOn(KnownType.System_Collections_Generic_IEnumerable_T)
                 && methodSymbol.ReceiverType is INamedTypeSymbol receiverType)
