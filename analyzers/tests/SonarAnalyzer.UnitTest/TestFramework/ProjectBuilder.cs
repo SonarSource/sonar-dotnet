@@ -99,18 +99,16 @@ namespace SonarAnalyzer.UnitTest.TestFramework
 
         private static ProjectBuilder AddDocument(Project project, string fileName, string fileContent, bool removeAnalysisComments)
         {
-            const string WindowsLineEnding = "\r\n";
-            const string UnixLineEnding = "\n";
             return FromProject(project.AddDocument(fileName, ReadDocument()).Project);
 
             string ReadDocument()
             {
-                var lines = fileContent.Replace(WindowsLineEnding, UnixLineEnding).Split(new[] { UnixLineEnding }, StringSplitOptions.None);
+                var lines = fileContent.ToUnixLineEndings().Split(new[] { Constants.UnixLineEnding }, StringSplitOptions.None);
                 if (removeAnalysisComments)
                 {
                     lines = lines.Where(x => !IssueLocationCollector.RxPreciseLocation.IsMatch(x)).Select(ReplaceNonCompliantComment).ToArray();
                 }
-                return string.Join(UnixLineEnding, lines);
+                return string.Join(Constants.UnixLineEnding, lines);
             }
         }
 

@@ -191,11 +191,22 @@ End Class", AnalyzerLanguage.VisualBasic);
             return new AnalyzerOptions(ImmutableArray.Create(additionalText.Object));
         }
 
+        public static string ToUnixLineEndings(this string value) =>
+            value.Replace(Constants.WindowsLineEnding, Constants.UnixLineEnding);
+
         public static string CreateFilesToAnalyze(string filesToAnalyzeDirectory, params string[] filesToAnalyze)
         {
             var filestoAnalyzePath = Path.Combine(filesToAnalyzeDirectory, "FilesToAnalyze.txt");
             File.WriteAllLines(filestoAnalyzePath, filesToAnalyze);
             return filestoAnalyzePath;
+        }
+
+        public static string WriteFile(TestContext context, string fileName, string content = null)
+        {
+            var path = Path.Combine(context.TestDir, context.FullyQualifiedTestClassName.Replace("SonarAnalyzer.UnitTest.", null), context.TestName, fileName);
+            Directory.CreateDirectory(Path.GetDirectoryName(path));
+            File.WriteAllText(path, content);
+            return path;
         }
 
         public static string CreateSonarProjectConfig(string sonarProjectConfigDirectory, string filesToAnalyzePath) =>
@@ -213,12 +224,5 @@ End Class", AnalyzerLanguage.VisualBasic);
             return sonarProjectConfigPath;
         }
 
-        public static string WriteFile(TestContext context, string fileName, string content = null)
-        {
-            var path = Path.Combine(context.TestDir, context.FullyQualifiedTestClassName.Replace("SonarAnalyzer.UnitTest.", null), context.TestName, fileName);
-            Directory.CreateDirectory(Path.GetDirectoryName(path));
-            File.WriteAllText(path, content);
-            return path;
-        }
     }
 }

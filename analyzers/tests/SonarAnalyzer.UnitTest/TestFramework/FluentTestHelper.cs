@@ -27,9 +27,6 @@ namespace SonarAnalyzer.UnitTest.Helpers
 {
     internal static class FluentTestHelper
     {
-        private const string WindowsLineEnding = "\r\n";
-        private const string UnixLineEnding = "\n";
-
         public static void OnlyContain<T, TAssertions>(this SelfReferencingCollectionAssertions<T, TAssertions> self, params T[] expected)
              where TAssertions : SelfReferencingCollectionAssertions<T, TAssertions>
         {
@@ -45,10 +42,6 @@ namespace SonarAnalyzer.UnitTest.Helpers
         }
 
         public static void BeIgnoringLineEndings(this StringAssertions stringAssertions, string expected) =>
-            stringAssertions.Subject.ToLinuxLineEndings().Should().Be(expected.ToLinuxLineEndings());
-
-        // This allows to deal with multiple line endings
-        private static string ToLinuxLineEndings(this string str) =>
-            str.Replace(WindowsLineEnding, UnixLineEnding);
+            stringAssertions.Subject.ToUnixLineEndings().Should().Be(expected.ToUnixLineEndings());
     }
 }
