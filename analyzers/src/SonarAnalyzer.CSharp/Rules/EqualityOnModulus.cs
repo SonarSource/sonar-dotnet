@@ -94,8 +94,8 @@ namespace SonarAnalyzer.Rules.CSharp
             IsEnumerableCountMethod(symbol)
             || IsLengthProperty(symbol)
             || IsCollectionCountProperty(symbol)
-            || IsReadonlyCollectionCountProperty(symbol)
             || IsListCapacityProperty(symbol);
+
         private static bool IsEnumerableCountMethod(ISymbol symbol) =>
             (CountName.Equals(symbol.Name) || LongCountName.Equals(symbol.Name))
             && symbol is IMethodSymbol methodSymbol
@@ -111,12 +111,8 @@ namespace SonarAnalyzer.Rules.CSharp
         private static bool IsCollectionCountProperty(ISymbol symbol) =>
             CountName.Equals(symbol.Name)
             && symbol is IPropertySymbol propertySymbol
-            && propertySymbol.ContainingType.DerivesOrImplements(KnownType.System_Collections_Generic_ICollection_T);
-
-        private static bool IsReadonlyCollectionCountProperty(ISymbol symbol) =>
-            CountName.Equals(symbol.Name)
-            && symbol is IPropertySymbol propertySymbol
-            && propertySymbol.ContainingType.DerivesOrImplements(KnownType.System_Collections_Generic_IReadOnlyCollection_T);
+            && (propertySymbol.ContainingType.DerivesOrImplements(KnownType.System_Collections_Generic_ICollection_T)
+               || propertySymbol.ContainingType.DerivesOrImplements(KnownType.System_Collections_Generic_IReadOnlyCollection_T));
 
         private static bool IsListCapacityProperty(ISymbol symbol) =>
             ListCapacityName.Equals(symbol.Name)
