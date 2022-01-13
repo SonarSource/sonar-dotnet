@@ -23,6 +23,7 @@ using System.IO;
 using FluentAssertions;
 using Microsoft.CodeAnalysis;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using SonarAnalyzer.Protobuf;
 using SonarAnalyzer.Rules.CSharp;
 using SonarAnalyzer.Rules.SymbolicExecution;
 
@@ -87,7 +88,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework.Tests
         [TestMethod]
         public void Constructor_CodeFix_MultipleAnalyzers_Throws() =>
             DummyCodeFixCS.AddAnalyzer(() => new DummyAnalyzerCS())
-                .Invoking(x => x.Build()).Should().Throw<ArgumentException>().WithMessage("Analyzers must contain only 1 analyzer, but 2 were found.");
+                .Invoking(x => x.Build()).Should().Throw<ArgumentException>().WithMessage("When CodeFix is set, Analyzers must contain only 1 analyzer, but 2 were found.");
 
         [TestMethod]
         public void Constructor_CodeFix_MultiplePaths_Throws() =>
@@ -113,6 +114,16 @@ namespace SonarAnalyzer.UnitTest.TestFramework.Tests
         public void Constructor_CodeFix_MissingAttribute_Throws() =>
             DummyCodeFixCS.WithCodeFix<DummyCodeFixNoAttribute>()
                 .Invoking(x => x.Build()).Should().Throw<ArgumentException>().WithMessage("DummyCodeFixNoAttribute does not have ExportCodeFixProviderAttribute.");
+
+        [TestMethod]
+        public void Constructor_ProtobufPath_MultipleAnalyzers_Throws() =>
+            DummyCS.AddSnippet("//Empty").WithProtobufPath("Proto.pb").AddAnalyzer(() => new DummyAnalyzerCS())
+                .Invoking(x => x.Build()).Should().Throw<ArgumentException>().WithMessage("When ProtobufPath is set, Analyzers must contain only 1 analyzer, but 2 were found.");
+
+        [TestMethod]
+        public void Constructor_ProtobufPath_WrongAnalyzerType_Throws() =>
+            DummyCS.AddSnippet("//Empty").WithProtobufPath("Proto.pb")
+                .Invoking(x => x.Build()).Should().Throw<ArgumentException>().WithMessage("DummyAnalyzerCS does not inherit from UtilityAnalyzerBase.");
 
         [TestMethod]
         public void Verify_RaiseExpectedIssues_CS() =>
@@ -435,16 +446,68 @@ End Class"" has a length of 151, differs near ""Not"" (index 47).");
         [TestMethod]
         public void VerifyUtilityAnalyzerProducesEmptyProtobuf_EmptyFile()
         {
-            var protobuf = WriteFile("empty.pb", null);
-            WithSnippetCS("// Nothing to see here").WithProtobufPath(protobuf).Invoking(x => x.VerifyUtilityAnalyzerProducesEmptyProtobuf()).Should().NotThrow();
+            var protobuf = TestHelper.TestPath(TestContext, "Empty.pb");
+            new VerifierBuilder().AddAnalyzer(() => new DummyUtilityAnalyzerCS(protobuf, null)).AddSnippet("// Nothing to see here").WithProtobufPath(protobuf)
+                .Invoking(x => x.VerifyUtilityAnalyzerProducesEmptyProtobuf())
+                .Should().NotThrow();
         }
 
         [TestMethod]
         public void VerifyUtilityAnalyzerProducesEmptyProtobuf_WithContent()
         {
-            var protobuf = WriteFile("empty.pb", "Something unexpected");
-            WithSnippetCS("// Nothing to see here").WithProtobufPath(protobuf).Invoking(x => x.VerifyUtilityAnalyzerProducesEmptyProtobuf())
-                .Should().Throw<AssertFailedException>().WithMessage("Expected value to be 0L because protobuf file should be empty, but found 20L.");
+            var protobuf = TestHelper.TestPath(TestContext, "Empty.pb");
+            var message = new LogInfo { Text = "Lorem Ipsum" };
+            new VerifierBuilder().AddAnalyzer(() => new DummyUtilityAnalyzerCS(protobuf, message)).AddSnippet("// Nothing to see here").WithProtobufPath(protobuf)
+                .Invoking(x => x.VerifyUtilityAnalyzerProducesEmptyProtobuf())
+                .Should().Throw<AssertFailedException>().WithMessage("Expected value to be 0L because protobuf file should be empty, but found *");
+        }
+
+        [TestMethod]
+        public void VerifyUtilityAnalyzer_CorrectProtobuf_CS()
+        {
+            var protobuf = TestHelper.TestPath(TestContext, "Log.pb");
+            var message = new LogInfo { Text = "Lorem Ipsum" };
+            var wasInvoked = false;
+            new VerifierBuilder().AddAnalyzer(() => new DummyUtilityAnalyzerCS(protobuf, message)).AddSnippet("// Nothing to see here").WithProtobufPath(protobuf)
+                .VerifyUtilityAnalyzer<LogInfo>(x =>
+                {
+                    x.Should().ContainSingle().Which.Text.Should().Be("Lorem Ipsum");
+                    wasInvoked = true;
+                });
+            wasInvoked.Should().BeTrue();
+        }
+
+        [TestMethod]
+        public void VerifyUtilityAnalyzer_CorrectProtobuf_VB()
+        {
+            var protobuf = TestHelper.TestPath(TestContext, "Log.pb");
+            var message = new LogInfo { Text = "Lorem Ipsum" };
+            var wasInvoked = false;
+            new VerifierBuilder().AddAnalyzer(() => new DummyUtilityAnalyzerVB(protobuf, message)).AddSnippet("' Nothing to see here").WithProtobufPath(protobuf)
+                .VerifyUtilityAnalyzer<LogInfo>(x =>
+                {
+                    x.Should().ContainSingle().Which.Text.Should().Be("Lorem Ipsum");
+                    wasInvoked = true;
+                });
+            wasInvoked.Should().BeTrue();
+        }
+
+        [TestMethod]
+        public void VerifyUtilityAnalyzer_UnexpectedProtobuf_CS()
+        {
+            var protobuf = TestHelper.TestPath(TestContext, "Empty.pb");
+            new VerifierBuilder().AddAnalyzer(() => new DummyUtilityAnalyzerCS(protobuf, null)).AddSnippet("// Nothing to see here").WithProtobufPath(protobuf)
+                .Invoking(x => x.VerifyUtilityAnalyzer<LogInfo>(x => x.Should().NotBeEmpty()))
+                .Should().Throw<AssertFailedException>().WithMessage("Expected x not to be empty.");
+        }
+
+        [TestMethod]
+        public void VerifyUtilityAnalyzer_UnexpectedProtobuf_VB()
+        {
+            var protobuf = TestHelper.TestPath(TestContext, "Empty.pb");
+            new VerifierBuilder().AddAnalyzer(() => new DummyUtilityAnalyzerVB(protobuf, null)).AddSnippet("' Nothing to see here").WithProtobufPath(protobuf)
+                .Invoking(x => x.VerifyUtilityAnalyzer<LogInfo>(x => x.Should().NotBeEmpty()))
+                .Should().Throw<AssertFailedException>().WithMessage("Expected x not to be empty.");
         }
 
         private VerifierBuilder WithSnippetCS(string code) =>

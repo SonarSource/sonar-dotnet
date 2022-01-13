@@ -43,7 +43,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework.Tests
     {
         private static readonly DiagnosticDescriptor Rule = new("SDummy", "Dummy title", "Dummy message", string.Empty, DiagnosticSeverity.Warning, true);
 
-        protected abstract TSyntaxKind NumericLiteralExpression { get;}
+        protected abstract TSyntaxKind NumericLiteralExpression { get; }
 
         public int DummyProperty { get; set; }
 

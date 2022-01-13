@@ -22,6 +22,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Linq;
+using Google.Protobuf;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.Helpers;
@@ -190,5 +191,9 @@ namespace SonarAnalyzer.UnitTest.TestFramework
 
         public static void VerifyUtilityAnalyzerProducesEmptyProtobuf(this VerifierBuilder builder) =>
             builder.Build().VerifyUtilityAnalyzerProducesEmptyProtobuf();
+
+        public static void VerifyUtilityAnalyzer<TMessage>(this VerifierBuilder builder, Action<IReadOnlyList<TMessage>> verifyProtobuf)
+            where TMessage : IMessage<TMessage>, new() =>
+            builder.Build().VerifyUtilityAnalyzer(verifyProtobuf);
     }
 }

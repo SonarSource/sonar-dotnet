@@ -112,10 +112,10 @@ namespace SonarAnalyzer.Rules
                     lock (FileWriteLock)
                     {
                         Directory.CreateDirectory(OutPath);
-                        using var metricsStream = File.Create(Path.Combine(OutPath, FileName));
+                        using var stream = File.Create(Path.Combine(OutPath, FileName));
                         foreach (var message in messages)
                         {
-                            message.WriteDelimitedTo(metricsStream);
+                            message.WriteDelimitedTo(stream);
                         }
                     }
                 });
