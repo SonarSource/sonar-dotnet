@@ -639,7 +639,6 @@ namespace SonarAnalyzer.UnitTest.TestFramework
                 .WithCodeFixedPath(pathToExpected)
                 .VerifyCodeFix();
 
-
         [Obsolete("Use VerifierBuilder instead.")]
         public static void VerifyCodeFix<TCodeFix>(string path,
                                                    string pathToExpected,
