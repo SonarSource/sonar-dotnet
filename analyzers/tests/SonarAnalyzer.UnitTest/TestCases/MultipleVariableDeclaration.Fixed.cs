@@ -5,6 +5,7 @@
         private int /*aaa1*/ a /*aaa2*/;
         private int
             /*bbb1*/ b /*bbb2*/;
+
         private int c;
         public MultipleVariableDeclaration(int n)
         {
