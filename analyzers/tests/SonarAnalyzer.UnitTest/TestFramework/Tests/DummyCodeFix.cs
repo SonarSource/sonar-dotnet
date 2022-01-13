@@ -59,4 +59,9 @@ namespace SonarAnalyzer.UnitTest.TestFramework.Tests
             return Task.CompletedTask;
         }
     }
+
+    internal class DummyCodeFixNoAttribute : DummyCodeFix
+    {
+        protected override SyntaxNode NewNode() => throw new System.NotImplementedException();
+    }
 }

@@ -91,9 +91,16 @@ namespace SonarAnalyzer.UnitTest.TestFramework
                 {
                     ValidateExtension(builder.CodeFixedPathBatch);
                 }
-                if (codeFix.GetType().GetCustomAttribute<ExportCodeFixProviderAttribute>().Languages.Single() != language.LanguageName)
+                if (codeFix.GetType().GetCustomAttribute<ExportCodeFixProviderAttribute>() is { } codeFixAttribute)
                 {
-                    throw new ArgumentException($"{analyzers.Single().GetType().Name} language {language.LanguageName} does not match {codeFix.GetType().Name} language.");
+                    if (codeFix.GetType().GetCustomAttribute<ExportCodeFixProviderAttribute>().Languages.Single() != language.LanguageName)
+                    {
+                        throw new ArgumentException($"{analyzers.Single().GetType().Name} language {language.LanguageName} does not match {codeFix.GetType().Name} language.");
+                    }
+                }
+                else
+                {
+                    throw new ArgumentException($"{codeFix.GetType().Name} does not have {nameof(ExportCodeFixProviderAttribute)}.");
                 }
                 if (!analyzers.Single().SupportedDiagnostics.Select(x => x.Id).Intersect(codeFix.FixableDiagnosticIds).Any())
                 {
