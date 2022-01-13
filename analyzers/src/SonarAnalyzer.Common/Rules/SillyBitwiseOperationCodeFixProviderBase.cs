@@ -26,7 +26,6 @@ using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CodeActions;
 using Microsoft.CodeAnalysis.CodeFixes;
 using Microsoft.CodeAnalysis.Text;
-using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
 
 namespace SonarAnalyzer.Rules
@@ -38,9 +37,6 @@ namespace SonarAnalyzer.Rules
         protected abstract Func<SyntaxNode> CreateNewRoot(SyntaxNode root, TextSpan diagnosticSpan, bool isReportingOnLeft);
 
         public override ImmutableArray<string> FixableDiagnosticIds => ImmutableArray.Create(SillyBitwiseOperationBase.DiagnosticId);
-
-        public override FixAllProvider GetFixAllProvider() =>
-            DocumentBasedFixAllProvider.Instance;
 
         protected override Task RegisterCodeFixesAsync(SyntaxNode root, CodeFixContext context)
         {

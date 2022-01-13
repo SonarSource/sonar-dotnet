@@ -36,7 +36,6 @@ namespace SonarAnalyzer.Rules.CSharp
         private const string Title = "Add 'readonly' keyword";
 
         public override ImmutableArray<string> FixableDiagnosticIds => ImmutableArray.Create(FieldShouldBeReadonly.DiagnosticId);
-        public override FixAllProvider GetFixAllProvider() => WellKnownFixAllProviders.BatchFixer;
 
         protected override Task RegisterCodeFixesAsync(SyntaxNode root, CodeFixContext context)
         {

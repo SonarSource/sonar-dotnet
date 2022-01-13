@@ -22,6 +22,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CodeFixes;
+using SonarAnalyzer.Common;
 
 namespace SonarAnalyzer.Helpers
 {
@@ -48,6 +49,9 @@ namespace SonarAnalyzer.Helpers
                 await RegisterCodeFixesAsync(syntaxRoot, context).ConfigureAwait(false);
             }
         }
+
+        public override FixAllProvider GetFixAllProvider() =>
+            DocumentBasedFixAllProvider.Instance;
 
         protected abstract Task RegisterCodeFixesAsync(SyntaxNode root, CodeFixContext context);
     }

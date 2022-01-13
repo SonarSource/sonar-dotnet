@@ -24,7 +24,6 @@ using System.Threading.Tasks;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CodeActions;
 using Microsoft.CodeAnalysis.CodeFixes;
-using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
 
 namespace SonarAnalyzer.Rules.Common
@@ -39,11 +38,6 @@ namespace SonarAnalyzer.Rules.Common
             {
                 return ImmutableArray.Create(MultipleVariableDeclarationBase.DiagnosticId);
             }
-        }
-
-        public sealed override FixAllProvider GetFixAllProvider()
-        {
-            return DocumentBasedFixAllProvider.Instance;
         }
 
         protected sealed override Task RegisterCodeFixesAsync(SyntaxNode root, CodeFixContext context)

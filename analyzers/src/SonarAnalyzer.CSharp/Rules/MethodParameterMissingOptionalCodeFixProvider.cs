@@ -27,7 +27,6 @@ using Microsoft.CodeAnalysis.CodeFixes;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Formatting;
-using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
 
 namespace SonarAnalyzer.Rules.CSharp
@@ -38,8 +37,6 @@ namespace SonarAnalyzer.Rules.CSharp
         private const string Title = "Add missing 'Optional' attribute";
 
         public override ImmutableArray<string> FixableDiagnosticIds => ImmutableArray.Create(MethodParameterMissingOptional.DiagnosticId);
-
-        public override FixAllProvider GetFixAllProvider() => DocumentBasedFixAllProvider.Instance;
 
         protected override async Task RegisterCodeFixesAsync(SyntaxNode root, CodeFixContext context)
         {

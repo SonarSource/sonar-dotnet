@@ -35,7 +35,6 @@ namespace SonarAnalyzer.Rules.CSharp
     {
         internal const string Title = "Add or update license header";
         public override ImmutableArray<string> FixableDiagnosticIds => ImmutableArray.Create(CheckFileLicense.DiagnosticId);
-        public override FixAllProvider GetFixAllProvider() => WellKnownFixAllProviders.BatchFixer;
 
         protected override Task RegisterCodeFixesAsync(SyntaxNode root, CodeFixContext context)
         {

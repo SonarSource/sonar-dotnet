@@ -28,7 +28,6 @@ using Microsoft.CodeAnalysis.CodeFixes;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.Helpers;
-using DocumentBasedFixAllProvider = SonarAnalyzer.Common.DocumentBasedFixAllProvider;
 
 namespace SonarAnalyzer.UnitTest.TestFramework.Tests
 {
@@ -64,7 +63,6 @@ namespace SonarAnalyzer.UnitTest.TestFramework.Tests
         private class TestDuplicateLocationRuleCodeFix : SonarCodeFixProvider
         {
             public override ImmutableArray<string> FixableDiagnosticIds => ImmutableArray.Create(TestDuplicateLocationRule.DiagnosticId);
-            public override FixAllProvider GetFixAllProvider() => DocumentBasedFixAllProvider.Instance;
 
             protected override Task RegisterCodeFixesAsync(SyntaxNode root, CodeFixContext context)
             {

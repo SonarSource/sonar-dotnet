@@ -25,7 +25,6 @@ using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CodeActions;
 using Microsoft.CodeAnalysis.CodeFixes;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
-using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
 using StyleCop.Analyzers.Lightup;
 
@@ -37,8 +36,6 @@ namespace SonarAnalyzer.Rules.CSharp
         private const string Title = "Remove redundant conditional";
 
         public override ImmutableArray<string> FixableDiagnosticIds => ImmutableArray.Create(RedundantConditionalAroundAssignment.DiagnosticId);
-
-        public override FixAllProvider GetFixAllProvider() => DocumentBasedFixAllProvider.Instance;
 
         protected override Task RegisterCodeFixesAsync(SyntaxNode root, CodeFixContext context)
         {

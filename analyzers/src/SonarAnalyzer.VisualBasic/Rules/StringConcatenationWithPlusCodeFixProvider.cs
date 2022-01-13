@@ -26,7 +26,6 @@ using Microsoft.CodeAnalysis.CodeActions;
 using Microsoft.CodeAnalysis.CodeFixes;
 using Microsoft.CodeAnalysis.VisualBasic;
 using Microsoft.CodeAnalysis.VisualBasic.Syntax;
-using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
 
 namespace SonarAnalyzer.Rules.VisualBasic
@@ -42,11 +41,6 @@ namespace SonarAnalyzer.Rules.VisualBasic
             {
                 return ImmutableArray.Create(StringConcatenationWithPlus.DiagnosticId);
             }
-        }
-
-        public override FixAllProvider GetFixAllProvider()
-        {
-            return DocumentBasedFixAllProvider.Instance;
         }
 
         protected override Task RegisterCodeFixesAsync(SyntaxNode root, CodeFixContext context)

@@ -39,8 +39,6 @@ namespace SonarAnalyzer.Rules.CSharp
 
         public override ImmutableArray<string> FixableDiagnosticIds { get; } = ImmutableArray.Create(RedundantNullCheck.DiagnosticId);
 
-        public override FixAllProvider GetFixAllProvider() => WellKnownFixAllProviders.BatchFixer;
-
         protected override Task RegisterCodeFixesAsync(SyntaxNode root, CodeFixContext context)
         {
             var diagnostic = context.Diagnostics.First();

@@ -28,7 +28,6 @@ using Microsoft.CodeAnalysis.CodeFixes;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Formatting;
-using SonarAnalyzer.Common;
 using SonarAnalyzer.Constants;
 using SonarAnalyzer.Helpers;
 
@@ -47,8 +46,6 @@ namespace SonarAnalyzer.Rules.CSharp
         internal const string TitleRedundantParameterName = "Use discard parameter";
 
         public override ImmutableArray<string> FixableDiagnosticIds => ImmutableArray.Create(RedundantDeclaration.DiagnosticId);
-
-        public override FixAllProvider GetFixAllProvider() => DocumentBasedFixAllProvider.Instance;
 
         protected override Task RegisterCodeFixesAsync(SyntaxNode root, CodeFixContext context)
         {

@@ -36,6 +36,9 @@ namespace SonarAnalyzer.Rules.CSharp
         public override ImmutableArray<string> FixableDiagnosticIds =>
             ImmutableArray.Create(RedundantToStringCall.DiagnosticId);
 
+        public override FixAllProvider GetFixAllProvider() =>
+            null;   // This CodeFix doesn't support FixAll (yet), because removing one .ToString() can invalidate other diagnostic in the same expression
+
         protected override Task RegisterCodeFixesAsync(SyntaxNode root, CodeFixContext context)
         {
             var diagnostic = context.Diagnostics.First();

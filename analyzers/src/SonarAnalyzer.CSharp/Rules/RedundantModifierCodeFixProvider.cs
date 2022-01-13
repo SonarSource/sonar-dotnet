@@ -28,7 +28,6 @@ using Microsoft.CodeAnalysis.CodeFixes;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Formatting;
-using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
 
 namespace SonarAnalyzer.Rules.CSharp
@@ -47,11 +46,6 @@ namespace SonarAnalyzer.Rules.CSharp
             {
                 return ImmutableArray.Create(RedundantModifier.DiagnosticId);
             }
-        }
-
-        public override FixAllProvider GetFixAllProvider()
-        {
-            return DocumentBasedFixAllProvider.Instance;
         }
 
         private static readonly ISet<SyntaxKind> SimpleTokenKinds = new HashSet<SyntaxKind>

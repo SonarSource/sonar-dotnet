@@ -26,7 +26,6 @@ using Microsoft.CodeAnalysis.CodeActions;
 using Microsoft.CodeAnalysis.CodeFixes;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
-using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
 
 namespace SonarAnalyzer.Rules.CSharp
@@ -37,8 +36,6 @@ namespace SonarAnalyzer.Rules.CSharp
         internal const string Title = "Change to '[DefaultParameterValue]'";
         public override ImmutableArray<string> FixableDiagnosticIds =>
             ImmutableArray.Create(OptionalParameterWithDefaultValue.DiagnosticId);
-
-        public override FixAllProvider GetFixAllProvider() => DocumentBasedFixAllProvider.Instance;
 
         protected override async Task RegisterCodeFixesAsync(SyntaxNode root, CodeFixContext context)
         {

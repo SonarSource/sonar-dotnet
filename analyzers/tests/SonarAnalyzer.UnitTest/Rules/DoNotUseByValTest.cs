@@ -37,7 +37,6 @@ namespace SonarAnalyzer.UnitTest.Rules
                 @"TestCases\DoNotUseByVal.vb",
                 @"TestCases\DoNotUseByVal.Fixed.vb",
                 new DoNotUseByVal(),
-                new DoNotUseByValCodeFixProvider(),
-                DoNotUseByValCodeFixProvider.Title);
+                new DoNotUseByValCodeFixProvider());
     }
 }
