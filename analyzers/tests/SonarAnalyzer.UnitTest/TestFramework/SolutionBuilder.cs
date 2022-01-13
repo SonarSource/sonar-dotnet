@@ -20,6 +20,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Collections.Immutable;
 using System.IO;
 using System.Linq;
 using Microsoft.CodeAnalysis;
@@ -82,15 +83,13 @@ namespace SonarAnalyzer.UnitTest.TestFramework
         public static SolutionBuilder FromSolution(Solution solution) =>
             new(solution);
 
-        public IReadOnlyList<Compilation> Compile(params ParseOptions[] parseOptions)
-        {
-            var options = ParseOptionsHelper.GetParseOptionsOrDefault(parseOptions);
+        public ImmutableArray<Compilation> Compile(params ParseOptions[] parseOptions) =>
+            solution.Projects.SelectMany(x => Compile(x, parseOptions)).ToImmutableArray();
 
-            return solution
-                .Projects
-                .SelectMany(x => options.Where(ParseOptionsHelper.GetFilterByLanguage(x.Language)).Select(o => GetCompilation(x, o)))   // FIXME: Can be simplified?
-                .ToList()
-                .AsReadOnly();
+        private static IEnumerable<Compilation> Compile(Project project, ParseOptions[] parseOptions)
+        {
+            var options = ParseOptionsHelper.GetParseOptionsOrDefault(parseOptions, project.Language);
+            return options.Select(x => project.WithParseOptions(x).GetCompilationAsync().Result);
         }
 
         private ProjectBuilder AddProject(AnalyzerLanguage language, string projectName, bool createExtraEmptyFile, OutputKind outputKind = OutputKind.DynamicallyLinkedLibrary)
@@ -128,8 +127,5 @@ namespace SonarAnalyzer.UnitTest.TestFramework
 
             return projectBuilder;
         }
-
-        private static Compilation GetCompilation(Project project, ParseOptions options) =>
-            project.WithParseOptions(options).GetCompilationAsync().Result;
     }
 }

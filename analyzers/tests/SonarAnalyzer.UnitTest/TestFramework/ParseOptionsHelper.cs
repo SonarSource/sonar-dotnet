@@ -53,6 +53,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework
         public static ImmutableArray<ParseOptions> CSharpPreview { get; }
 
         public static ImmutableArray<ParseOptions> CSharpLatest { get; }
+        public static ImmutableArray<ParseOptions> VisualBasicLatest { get; }
 
         public static ImmutableArray<ParseOptions> OnlyCSharp7 { get; }
 
@@ -76,8 +77,6 @@ namespace SonarAnalyzer.UnitTest.TestFramework
             BeforeCSharp9 = BeforeCSharp8.Concat(cs8).FilterByEnvironment();
             BeforeCSharp10 = BeforeCSharp9.Concat(cs9).FilterByEnvironment();
 
-            CSharpPreview = CreateOptions(Preview).FilterByEnvironment();
-            CSharpLatest = CreateOptions(CS.LanguageVersion.Latest).FilterByEnvironment();
             FromCSharp10 = CreateOptions(CSharp10).FilterByEnvironment();
             FromCSharp9 = cs9.Concat(FromCSharp10).FilterByEnvironment();
             FromCSharp8 = cs8.Concat(FromCSharp9).FilterByEnvironment();
@@ -91,13 +90,16 @@ namespace SonarAnalyzer.UnitTest.TestFramework
             FromVisualBasic12 = CreateOptions(VisualBasic12).Concat(FromVisualBasic14).FilterByEnvironment();
 
             DefaultParseOptions = FromCSharp7.Concat(FromVisualBasic12).ToImmutableArray(); // Values depends on the build environment
+            CSharpPreview = CreateOptions(Preview).ToImmutableArray();
+            CSharpLatest = CreateOptions(CS.LanguageVersion.Latest).ToImmutableArray();
+            VisualBasicLatest = CreateOptions(VB.LanguageVersion.Latest).ToImmutableArray();
         }
 #pragma warning restore S3963
 
-        public static IEnumerable<ParseOptions> GetParseOptionsOrDefault(IEnumerable<ParseOptions> parseOptions) =>
+        public static IEnumerable<ParseOptions> GetParseOptionsOrDefault(IEnumerable<ParseOptions> parseOptions, string language) =>
             parseOptions != null && parseOptions.WhereNotNull().Any()
                 ? parseOptions.WhereNotNull()
-                : DefaultParseOptions;
+                : DefaultParseOptions.Where(GetFilterByLanguage(language));
 
         public static Func<ParseOptions, bool> GetFilterByLanguage(string language) =>
             language switch
