@@ -44,20 +44,20 @@ namespace SonarAnalyzer.UnitTest.Rules
 
         [TestMethod]
         public void RedundantArgument_CodeFix_No_Named_Arguments() =>
-            OldVerifier.VerifyCodeFix(@"TestCases\RedundantArgument.cs",
-                                   @"TestCases\RedundantArgument.NoNamed.Fixed.cs",
-                                   new RedundantArgument(),
-                                   new RedundantArgumentCodeFixProvider(),
-                                   RedundantArgumentCodeFixProvider.TitleRemove,
-                                   ParseOptionsHelper.FromCSharp8);
+            OldVerifier.VerifyCodeFix<RedundantArgumentCodeFixProvider>(
+                @"TestCases\RedundantArgument.cs",
+                @"TestCases\RedundantArgument.NoNamed.Fixed.cs",
+                new RedundantArgument(),
+                RedundantArgumentCodeFixProvider.TitleRemove,
+                ParseOptionsHelper.FromCSharp8);
 
         [TestMethod]
         public void RedundantArgument_CodeFix_Named_Arguments() =>
-            OldVerifier.VerifyCodeFix(@"TestCases\RedundantArgument.cs",
-                                   @"TestCases\RedundantArgument.Named.Fixed.cs",
-                                   new RedundantArgument(),
-                                   new RedundantArgumentCodeFixProvider(),
-                                   RedundantArgumentCodeFixProvider.TitleRemoveWithNameAdditions,
-                                   ParseOptionsHelper.FromCSharp8);
+            OldVerifier.VerifyCodeFix<RedundantArgumentCodeFixProvider>(
+                @"TestCases\RedundantArgument.cs",
+                @"TestCases\RedundantArgument.Named.Fixed.cs",
+                new RedundantArgument(),
+                RedundantArgumentCodeFixProvider.TitleRemoveWithNameAdditions,
+                ParseOptionsHelper.FromCSharp8);
     }
 }

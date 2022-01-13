@@ -45,12 +45,12 @@ namespace SonarAnalyzer.UnitTest.Rules
 
         [TestMethod]
         public void RedundantDeclaration_CSharp9_CodeFix_TitleRedundantParameterName() =>
-            OldVerifier.VerifyCodeFix(@"TestCases\RedundantDeclaration.CSharp9.cs",
-                                   @"TestCases\RedundantDeclaration.CSharp9.Fixed.cs",
-                                   new RedundantDeclaration(),
-                                   new RedundantDeclarationCodeFixProvider(),
-                                   RedundantDeclarationCodeFixProvider.TitleRedundantParameterName,
-                                   ParseOptionsHelper.FromCSharp9);
+            OldVerifier.VerifyCodeFix<RedundantDeclarationCodeFixProvider>(
+                @"TestCases\RedundantDeclaration.CSharp9.cs",
+                @"TestCases\RedundantDeclaration.CSharp9.Fixed.cs",
+                new RedundantDeclaration(),
+                RedundantDeclarationCodeFixProvider.TitleRedundantParameterName,
+                ParseOptionsHelper.FromCSharp9);
 
         [TestMethod]
         public void RedundantDeclaration_CSharp10() =>
@@ -58,69 +58,69 @@ namespace SonarAnalyzer.UnitTest.Rules
 
         [TestMethod]
         public void RedundantDeclaration_CSharp10_CodeFix_ExplicitDelegate() =>
-            OldVerifier.VerifyCodeFix(@"TestCases\RedundantDeclaration.CSharp10.cs",
-                                   @"TestCases\RedundantDeclaration.CSharp10.Fixed.cs",
-                                   new RedundantDeclaration(),
-                                   new RedundantDeclarationCodeFixProvider(),
-                                   RedundantDeclarationCodeFixProvider.TitleRedundantExplicitDelegate,
-                                   ParseOptionsHelper.FromCSharp10);
+            OldVerifier.VerifyCodeFix<RedundantDeclarationCodeFixProvider>(
+                @"TestCases\RedundantDeclaration.CSharp10.cs",
+                @"TestCases\RedundantDeclaration.CSharp10.Fixed.cs",
+                new RedundantDeclaration(),
+                RedundantDeclarationCodeFixProvider.TitleRedundantExplicitDelegate,
+                ParseOptionsHelper.FromCSharp10);
 #endif
 
         [TestMethod]
         public void RedundantDeclaration_CodeFix_ArraySize() =>
-            OldVerifier.VerifyCodeFix(@"TestCases\RedundantDeclaration.cs",
-                                   @"TestCases\RedundantDeclaration.ArraySize.Fixed.cs",
-                                   new RedundantDeclaration(),
-                                   new RedundantDeclarationCodeFixProvider(),
-                                   RedundantDeclarationCodeFixProvider.TitleRedundantArraySize);
+            OldVerifier.VerifyCodeFix<RedundantDeclarationCodeFixProvider>(
+                @"TestCases\RedundantDeclaration.cs",
+                @"TestCases\RedundantDeclaration.ArraySize.Fixed.cs",
+                new RedundantDeclaration(),
+                RedundantDeclarationCodeFixProvider.TitleRedundantArraySize);
 
         [TestMethod]
         public void RedundantDeclaration_CodeFix_ArrayType() =>
-            OldVerifier.VerifyCodeFix(@"TestCases\RedundantDeclaration.cs",
-                                   @"TestCases\RedundantDeclaration.ArrayType.Fixed.cs",
-                                   new RedundantDeclaration(),
-                                   new RedundantDeclarationCodeFixProvider(),
-                                   RedundantDeclarationCodeFixProvider.TitleRedundantArrayType);
+            OldVerifier.VerifyCodeFix<RedundantDeclarationCodeFixProvider>(
+                @"TestCases\RedundantDeclaration.cs",
+                @"TestCases\RedundantDeclaration.ArrayType.Fixed.cs",
+                new RedundantDeclaration(),
+                RedundantDeclarationCodeFixProvider.TitleRedundantArrayType);
 
         [TestMethod]
         public void RedundantDeclaration_CodeFix_DelegateParameterList() =>
-            OldVerifier.VerifyCodeFix(@"TestCases\RedundantDeclaration.cs",
-                                   @"TestCases\RedundantDeclaration.DelegateParameterList.Fixed.cs",
-                                   new RedundantDeclaration(),
-                                   new RedundantDeclarationCodeFixProvider(),
-                                   RedundantDeclarationCodeFixProvider.TitleRedundantDelegateParameterList);
+            OldVerifier.VerifyCodeFix<RedundantDeclarationCodeFixProvider>(
+                @"TestCases\RedundantDeclaration.cs",
+                @"TestCases\RedundantDeclaration.DelegateParameterList.Fixed.cs",
+                new RedundantDeclaration(),
+                RedundantDeclarationCodeFixProvider.TitleRedundantDelegateParameterList);
 
         [TestMethod]
         public void RedundantDeclaration_CodeFix_ExplicitDelegate() =>
-            OldVerifier.VerifyCodeFix(@"TestCases\RedundantDeclaration.cs",
-                                   @"TestCases\RedundantDeclaration.ExplicitDelegate.Fixed.cs",
-                                   new RedundantDeclaration(),
-                                   new RedundantDeclarationCodeFixProvider(),
-                                   RedundantDeclarationCodeFixProvider.TitleRedundantExplicitDelegate,
-                                   ParseOptionsHelper.BeforeCSharp10);
+            OldVerifier.VerifyCodeFix<RedundantDeclarationCodeFixProvider>(
+                @"TestCases\RedundantDeclaration.cs",
+                @"TestCases\RedundantDeclaration.ExplicitDelegate.Fixed.cs",
+                new RedundantDeclaration(),
+                RedundantDeclarationCodeFixProvider.TitleRedundantExplicitDelegate,
+                ParseOptionsHelper.BeforeCSharp10);
 
         [TestMethod]
         public void RedundantDeclaration_CodeFix_ExplicitNullable() =>
-            OldVerifier.VerifyCodeFix(@"TestCases\RedundantDeclaration.cs",
-                                   @"TestCases\RedundantDeclaration.ExplicitNullable.Fixed.cs",
-                                   new RedundantDeclaration(),
-                                   new RedundantDeclarationCodeFixProvider(),
-                                   RedundantDeclarationCodeFixProvider.TitleRedundantExplicitNullable);
+            OldVerifier.VerifyCodeFix<RedundantDeclarationCodeFixProvider>(
+                @"TestCases\RedundantDeclaration.cs",
+                @"TestCases\RedundantDeclaration.ExplicitNullable.Fixed.cs",
+                new RedundantDeclaration(),
+                RedundantDeclarationCodeFixProvider.TitleRedundantExplicitNullable);
 
         [TestMethod]
         public void RedundantDeclaration_CodeFix_LambdaParameterType() =>
-            OldVerifier.VerifyCodeFix(@"TestCases\RedundantDeclaration.cs",
-                                   @"TestCases\RedundantDeclaration.LambdaParameterType.Fixed.cs",
-                                   new RedundantDeclaration(),
-                                   new RedundantDeclarationCodeFixProvider(),
-                                   RedundantDeclarationCodeFixProvider.TitleRedundantLambdaParameterType);
+            OldVerifier.VerifyCodeFix<RedundantDeclarationCodeFixProvider>(
+                @"TestCases\RedundantDeclaration.cs",
+                @"TestCases\RedundantDeclaration.LambdaParameterType.Fixed.cs",
+                new RedundantDeclaration(),
+                RedundantDeclarationCodeFixProvider.TitleRedundantLambdaParameterType);
 
         [TestMethod]
         public void RedundantDeclaration_CodeFix_ObjectInitializer() =>
-            OldVerifier.VerifyCodeFix(@"TestCases\RedundantDeclaration.cs",
-                                   @"TestCases\RedundantDeclaration.ObjectInitializer.Fixed.cs",
-                                   new RedundantDeclaration(),
-                                   new RedundantDeclarationCodeFixProvider(),
-                                   RedundantDeclarationCodeFixProvider.TitleRedundantObjectInitializer);
+            OldVerifier.VerifyCodeFix<RedundantDeclarationCodeFixProvider>(
+                @"TestCases\RedundantDeclaration.cs",
+                @"TestCases\RedundantDeclaration.ObjectInitializer.Fixed.cs",
+                new RedundantDeclaration(),
+                RedundantDeclarationCodeFixProvider.TitleRedundantObjectInitializer);
     }
 }

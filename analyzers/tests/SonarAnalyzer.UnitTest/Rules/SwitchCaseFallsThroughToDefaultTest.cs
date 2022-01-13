@@ -39,9 +39,9 @@ namespace SonarAnalyzer.UnitTest.Rules
 
         [TestMethod]
         public void SwitchCaseFallsThroughToDefault_CodeFix() =>
-            OldVerifier.VerifyCodeFix(@"TestCases\SwitchCaseFallsThroughToDefault.cs",
-                                   @"TestCases\SwitchCaseFallsThroughToDefault.Fixed.cs",
-                                   new SwitchCaseFallsThroughToDefault(),
-                                   new SwitchCaseFallsThroughToDefaultCodeFixProvider());
+            OldVerifier.VerifyCodeFix<SwitchCaseFallsThroughToDefaultCodeFixProvider>(
+                @"TestCases\SwitchCaseFallsThroughToDefault.cs",
+                @"TestCases\SwitchCaseFallsThroughToDefault.Fixed.cs",
+                new SwitchCaseFallsThroughToDefault());
     }
 }

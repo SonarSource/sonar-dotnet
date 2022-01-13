@@ -29,28 +29,27 @@ namespace SonarAnalyzer.UnitTest.Rules
     public class MultipleVariableDeclarationTest
     {
         [TestMethod]
-        public void MultipleVariableDeclaration()
-        {
+        public void MultipleVariableDeclaration_CS() =>
             OldVerifier.VerifyAnalyzer(@"TestCases\MultipleVariableDeclaration.cs", new CS.MultipleVariableDeclaration());
-            OldVerifier.VerifyAnalyzer(@"TestCases\MultipleVariableDeclaration.vb", new VB.MultipleVariableDeclaration());
-        }
 
         [TestMethod]
-        public void MultipleVariableDeclaration_CodeFix()
-        {
-            OldVerifier.VerifyCodeFix(
+        public void MultipleVariableDeclaration_VB() =>
+            OldVerifier.VerifyAnalyzer(@"TestCases\MultipleVariableDeclaration.vb", new VB.MultipleVariableDeclaration());
+
+        [TestMethod]
+        public void MultipleVariableDeclaration_CodeFix_CS() =>
+            OldVerifier.VerifyCodeFix<CS.MultipleVariableDeclarationCodeFixProvider>(
                 @"TestCases\MultipleVariableDeclaration.cs",
                 @"TestCases\MultipleVariableDeclaration.Fixed.cs",
                 new CS.MultipleVariableDeclaration(),
-                new CS.MultipleVariableDeclarationCodeFixProvider(),
                 SonarAnalyzer.Rules.Common.MultipleVariableDeclarationCodeFixProviderBase.Title);
 
-            OldVerifier.VerifyCodeFix(
+        [TestMethod]
+        public void MultipleVariableDeclaration_CodeFix_VB() =>
+            OldVerifier.VerifyCodeFix<VB.MultipleVariableDeclarationCodeFixProvider>(
                 @"TestCases\MultipleVariableDeclaration.vb",
                 @"TestCases\MultipleVariableDeclaration.Fixed.vb",
                 new VB.MultipleVariableDeclaration(),
-                new VB.MultipleVariableDeclarationCodeFixProvider(),
                 SonarAnalyzer.Rules.Common.MultipleVariableDeclarationCodeFixProviderBase.Title);
-        }
     }
 }

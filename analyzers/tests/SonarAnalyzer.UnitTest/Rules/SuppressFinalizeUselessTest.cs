@@ -39,9 +39,9 @@ namespace SonarAnalyzer.UnitTest.Rules
 
         [TestMethod]
         public void SuppressFinalizeUseless_CodeFix() =>
-            OldVerifier.VerifyCodeFix(@"TestCases\SuppressFinalizeUseless.cs",
-                                   @"TestCases\SuppressFinalizeUseless.Fixed.cs",
-                                   new SuppressFinalizeUseless(),
-                                   new SuppressFinalizeUselessCodeFixProvider());
+            OldVerifier.VerifyCodeFix<SuppressFinalizeUselessCodeFixProvider>(
+                @"TestCases\SuppressFinalizeUseless.cs",
+                @"TestCases\SuppressFinalizeUseless.Fixed.cs",
+                new SuppressFinalizeUseless());
     }
 }

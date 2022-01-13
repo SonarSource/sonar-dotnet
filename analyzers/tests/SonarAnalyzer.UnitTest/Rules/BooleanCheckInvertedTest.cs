@@ -34,16 +34,14 @@ namespace SonarAnalyzer.UnitTest.Rules
 
         [TestMethod]
         public void BooleanCheckInverted_CS_CodeFix() =>
-            OldVerifier.VerifyCodeFix(
+            OldVerifier.VerifyCodeFix<CS.BooleanCheckInvertedCodeFixProvider>(
                 @"TestCases\BooleanCheckInverted.cs",
                 @"TestCases\BooleanCheckInverted.Fixed.cs",
                 @"TestCases\BooleanCheckInverted.Fixed.Batch.cs",
-                new CS.BooleanCheckInverted(),
-                new CS.BooleanCheckInvertedCodeFixProvider());
+                new CS.BooleanCheckInverted());
 
         [TestMethod]
         public void BooleanCheckInverted_VB() =>
-            OldVerifier.VerifyAnalyzer(@"TestCases\BooleanCheckInverted.vb",
-                new VB.BooleanCheckInverted());
+            OldVerifier.VerifyAnalyzer(@"TestCases\BooleanCheckInverted.vb", new VB.BooleanCheckInverted());
     }
 }

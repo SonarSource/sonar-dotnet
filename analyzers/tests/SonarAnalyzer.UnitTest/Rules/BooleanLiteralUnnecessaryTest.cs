@@ -34,11 +34,10 @@ namespace SonarAnalyzer.UnitTest.Rules
 
         [TestMethod]
         public void BooleanLiteralUnnecessary_CodeFix_CS() =>
-            OldVerifier.VerifyCodeFix(
+            OldVerifier.VerifyCodeFix<CS.BooleanLiteralUnnecessaryCodeFixProvider>(
                 @"TestCases\BooleanLiteralUnnecessary.cs",
                 @"TestCases\BooleanLiteralUnnecessary.Fixed.cs",
-                new CS.BooleanLiteralUnnecessary(),
-                new CS.BooleanLiteralUnnecessaryCodeFixProvider());
+                new CS.BooleanLiteralUnnecessary());
 
         [TestMethod]
         public void BooleanLiteralUnnecessary_CSharp8() =>
@@ -46,11 +45,10 @@ namespace SonarAnalyzer.UnitTest.Rules
 
         [TestMethod]
         public void BooleanLiteralUnnecessary_CodeFix_CSharp8() =>
-            OldVerifier.VerifyCodeFix(
+            OldVerifier.VerifyCodeFix<CS.BooleanLiteralUnnecessaryCodeFixProvider>(
                 @"TestCases\BooleanLiteralUnnecessary.CSharp8.cs",
                 @"TestCases\BooleanLiteralUnnecessary.CSharp8.Fixed.cs",
                 new CS.BooleanLiteralUnnecessary(),
-                new CS.BooleanLiteralUnnecessaryCodeFixProvider(),
                 ParseOptionsHelper.FromCSharp8);
 
 #if NET
@@ -61,11 +59,10 @@ namespace SonarAnalyzer.UnitTest.Rules
 
         [TestMethod]
         public void BooleanLiteralUnnecessary_CodeFix_CSharp9() =>
-            OldVerifier.VerifyCodeFix(
+            OldVerifier.VerifyCodeFix<CS.BooleanLiteralUnnecessaryCodeFixProvider>(
                 @"TestCases\BooleanLiteralUnnecessary.CSharp9.cs",
                 @"TestCases\BooleanLiteralUnnecessary.CSharp9.Fixed.cs",
                 new CS.BooleanLiteralUnnecessary(),
-                new CS.BooleanLiteralUnnecessaryCodeFixProvider(),
                 ParseOptionsHelper.FromCSharp9);
 
 #endif

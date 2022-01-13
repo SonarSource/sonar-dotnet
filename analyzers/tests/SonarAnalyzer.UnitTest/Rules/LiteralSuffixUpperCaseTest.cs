@@ -33,11 +33,10 @@ namespace SonarAnalyzer.UnitTest.Rules
 
         [TestMethod]
         public void LiteralSuffixUpperCase_CodeFix() =>
-            OldVerifier.VerifyCodeFix(
+            OldVerifier.VerifyCodeFix<LiteralSuffixUpperCaseCodeFixProvider>(
                 @"TestCases\LiteralSuffixUpperCase.cs",
                 @"TestCases\LiteralSuffixUpperCase.Fixed.cs",
-                new LiteralSuffixUpperCase(),
-                new LiteralSuffixUpperCaseCodeFixProvider());
+                new LiteralSuffixUpperCase());
 
 #if NET
         [TestMethod]

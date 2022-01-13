@@ -34,11 +34,10 @@ namespace SonarAnalyzer.UnitTest.Rules
 
         [TestMethod]
         public void CatchRethrow_CodeFix() =>
-            OldVerifier.VerifyCodeFix(
+            OldVerifier.VerifyCodeFix<CS.CatchRethrowCodeFixProvider>(
                 @"TestCases\CatchRethrow.cs",
                 @"TestCases\CatchRethrow.Fixed.cs",
-                new CS.CatchRethrow(),
-                new CS.CatchRethrowCodeFixProvider());
+                new CS.CatchRethrow());
 
         [TestMethod]
         public void CatchRethrow_VB() =>

@@ -45,30 +45,30 @@ namespace SonarAnalyzer.UnitTest.Rules
 
         [TestMethod]
         public void RedundantNullCheck_CS_CodeFix() =>
-            OldVerifier.VerifyCodeFix(@"TestCases\RedundantNullCheck.cs",
-                                   @"TestCases\RedundantNullCheck.Fixed.cs",
-                                   @"TestCases\RedundantNullCheck.Fixed.Batch.cs",
-                                   new CS.RedundantNullCheck(),
-                                   new CS.RedundantNullCheckCodeFixProvider());
+            OldVerifier.VerifyCodeFix<CS.RedundantNullCheckCodeFixProvider>(
+                @"TestCases\RedundantNullCheck.cs",
+                @"TestCases\RedundantNullCheck.Fixed.cs",
+                @"TestCases\RedundantNullCheck.Fixed.Batch.cs",
+                new CS.RedundantNullCheck());
 
 #if NET
         [TestMethod]
         public void RedundantNullCheck_CSharp9_CodeFix() =>
-            OldVerifier.VerifyCodeFix(@"TestCases\RedundantNullCheck.CSharp9.cs",
-                                   @"TestCases\RedundantNullCheck.CSharp9.Fixed.cs",
-                                   new CS.RedundantNullCheck(),
-                                   new CS.RedundantNullCheckCodeFixProvider(),
-                                   ParseOptionsHelper.FromCSharp9,
-                                   OutputKind.ConsoleApplication);
+            OldVerifier.VerifyCodeFix<CS.RedundantNullCheckCodeFixProvider>(
+                @"TestCases\RedundantNullCheck.CSharp9.cs",
+                @"TestCases\RedundantNullCheck.CSharp9.Fixed.cs",
+                new CS.RedundantNullCheck(),
+                ParseOptionsHelper.FromCSharp9,
+                OutputKind.ConsoleApplication);
 
         [TestMethod]
         public void RedundantNullCheck_CSharp10_CodeFix() =>
-            OldVerifier.VerifyCodeFix(@"TestCases\RedundantNullCheck.CSharp10.cs",
-                                   @"TestCases\RedundantNullCheck.CSharp10.Fixed.cs",
-                                   new CS.RedundantNullCheck(),
-                                   new CS.RedundantNullCheckCodeFixProvider(),
-                                   ParseOptionsHelper.FromCSharp10,
-                                   OutputKind.ConsoleApplication);
+            OldVerifier.VerifyCodeFix<CS.RedundantNullCheckCodeFixProvider>(
+                @"TestCases\RedundantNullCheck.CSharp10.cs",
+                @"TestCases\RedundantNullCheck.CSharp10.Fixed.cs",
+                new CS.RedundantNullCheck(),
+                ParseOptionsHelper.FromCSharp10,
+                OutputKind.ConsoleApplication);
 #endif
 
         [TestMethod]

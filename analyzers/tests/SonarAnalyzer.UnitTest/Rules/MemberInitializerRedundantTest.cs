@@ -43,11 +43,10 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("CodeFix")]
         public void MemberInitializerRedundant_CodeFix() =>
-            OldVerifier.VerifyCodeFix(
+            OldVerifier.VerifyCodeFix<MemberInitializedToDefaultCodeFixProvider>(
                 @"TestCases\MemberInitializerRedundant.cs",
                 @"TestCases\MemberInitializerRedundant.Fixed.cs",
-                new MemberInitializerRedundant(),
-                new MemberInitializedToDefaultCodeFixProvider());
+                new MemberInitializerRedundant());
 
 #if NET
         [TestMethod]
@@ -56,11 +55,10 @@ namespace SonarAnalyzer.UnitTest.Rules
 
         [TestMethod]
         public void MemberInitializerRedundant_CSharp9_CodeFix() =>
-            OldVerifier.VerifyCodeFix(
+            OldVerifier.VerifyCodeFix<MemberInitializedToDefaultCodeFixProvider>(
                 @"TestCases\MemberInitializerRedundant.CSharp9.cs",
                 @"TestCases\MemberInitializerRedundant.CSharp9.Fixed.cs",
                 new MemberInitializerRedundant(),
-                new MemberInitializedToDefaultCodeFixProvider(),
                 ParseOptionsHelper.FromCSharp9);
 
         [TestMethod]
@@ -69,11 +67,10 @@ namespace SonarAnalyzer.UnitTest.Rules
 
         [TestMethod]
         public void MemberInitializerRedundant_CSharp10_CodeFix() =>
-            OldVerifier.VerifyCodeFix(
+            OldVerifier.VerifyCodeFix<MemberInitializedToDefaultCodeFixProvider>(
                 @"TestCases\MemberInitializerRedundant.CSharp10.cs",
                 @"TestCases\MemberInitializerRedundant.CSharp10.Fixed.cs",
                 new MemberInitializerRedundant(),
-                new MemberInitializedToDefaultCodeFixProvider(),
                 ParseOptionsHelper.FromCSharp10);
 
 #endif

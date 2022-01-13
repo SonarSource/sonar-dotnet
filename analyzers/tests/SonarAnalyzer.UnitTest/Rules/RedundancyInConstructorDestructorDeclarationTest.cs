@@ -42,50 +42,45 @@ namespace SonarAnalyzer.UnitTest.Rules
 
         [TestMethod]
         public void RedundancyInConstructorDestructorDeclaration_CodeFix_CSharp9() =>
-            OldVerifier.VerifyCodeFix(
+            OldVerifier.VerifyCodeFix<RedundancyInConstructorDestructorDeclarationCodeFixProvider>(
                 @"TestCases\RedundancyInConstructorDestructorDeclaration.CSharp9.cs",
                 @"TestCases\RedundancyInConstructorDestructorDeclaration.CSharp9.Fixed.cs",
                 new RedundancyInConstructorDestructorDeclaration(),
-                new RedundancyInConstructorDestructorDeclarationCodeFixProvider(),
                 RedundancyInConstructorDestructorDeclarationCodeFixProvider.TitleRemoveBaseCall,
                 ParseOptionsHelper.FromCSharp9);
 
         [TestMethod]
         public void RedundancyInConstructorDestructorDeclaration_CodeFix_CSharp10() =>
-            OldVerifier.VerifyCodeFix(
+            OldVerifier.VerifyCodeFix<RedundancyInConstructorDestructorDeclarationCodeFixProvider>(
                 @"TestCases\RedundancyInConstructorDestructorDeclaration.CSharp10.cs",
                 @"TestCases\RedundancyInConstructorDestructorDeclaration.CSharp10.Fixed.cs",
                 new RedundancyInConstructorDestructorDeclaration(),
-                new RedundancyInConstructorDestructorDeclarationCodeFixProvider(),
                 RedundancyInConstructorDestructorDeclarationCodeFixProvider.TitleRemoveConstructor,
                 ParseOptionsHelper.FromCSharp10);
 #endif
 
         [TestMethod]
         public void RedundancyInConstructorDestructorDeclaration_CodeFix_BaseCall() =>
-            OldVerifier.VerifyCodeFix(
+            OldVerifier.VerifyCodeFix<RedundancyInConstructorDestructorDeclarationCodeFixProvider>(
                 @"TestCases\RedundancyInConstructorDestructorDeclaration.cs",
                 @"TestCases\RedundancyInConstructorDestructorDeclaration.BaseCall.Fixed.cs",
                 new RedundancyInConstructorDestructorDeclaration(),
-                new RedundancyInConstructorDestructorDeclarationCodeFixProvider(),
                 RedundancyInConstructorDestructorDeclarationCodeFixProvider.TitleRemoveBaseCall);
 
         [TestMethod]
         public void RedundancyInConstructorDestructorDeclaration_CodeFix_Constructor() =>
-            OldVerifier.VerifyCodeFix(
+            OldVerifier.VerifyCodeFix<RedundancyInConstructorDestructorDeclarationCodeFixProvider>(
                 @"TestCases\RedundancyInConstructorDestructorDeclaration.cs",
                 @"TestCases\RedundancyInConstructorDestructorDeclaration.Constructor.Fixed.cs",
                 new RedundancyInConstructorDestructorDeclaration(),
-                new RedundancyInConstructorDestructorDeclarationCodeFixProvider(),
                 RedundancyInConstructorDestructorDeclarationCodeFixProvider.TitleRemoveConstructor);
 
         [TestMethod]
         public void RedundancyInConstructorDestructorDeclaration_CodeFix_Destructor() =>
-            OldVerifier.VerifyCodeFix(
+            OldVerifier.VerifyCodeFix<RedundancyInConstructorDestructorDeclarationCodeFixProvider>(
                 @"TestCases\RedundancyInConstructorDestructorDeclaration.cs",
                 @"TestCases\RedundancyInConstructorDestructorDeclaration.Destructor.Fixed.cs",
                 new RedundancyInConstructorDestructorDeclaration(),
-                new RedundancyInConstructorDestructorDeclarationCodeFixProvider(),
                 RedundancyInConstructorDestructorDeclarationCodeFixProvider.TitleRemoveDestructor);
     }
 }

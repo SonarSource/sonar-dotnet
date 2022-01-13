@@ -39,9 +39,9 @@ namespace SonarAnalyzer.UnitTest.Rules
 
         [TestMethod]
         public void OptionalRefOutParameter_CodeFix() =>
-            OldVerifier.VerifyCodeFix(@"TestCases\OptionalRefOutParameter.cs",
-                                   @"TestCases\OptionalRefOutParameter.Fixed.cs",
-                                   new OptionalRefOutParameter(),
-                                   new OptionalRefOutParameterCodeFixProvider());
+            OldVerifier.VerifyCodeFix<OptionalRefOutParameterCodeFixProvider>(
+                @"TestCases\OptionalRefOutParameter.cs",
+                @"TestCases\OptionalRefOutParameter.Fixed.cs",
+                new OptionalRefOutParameter());
     }
 }

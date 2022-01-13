@@ -42,19 +42,17 @@ namespace SonarAnalyzer.UnitTest.Rules
 
         [TestMethod]
         public void ThreadStaticNonStaticField_CodeFix_CSharp10() =>
-            OldVerifier.VerifyCodeFix(
+            OldVerifier.VerifyCodeFix<ThreadStaticNonStaticFieldCodeFixProvider>(
                 @"TestCases\ThreadStaticNonStaticField.CSharp10.cs",
                 @"TestCases\ThreadStaticNonStaticField.CSharp10.Fixed.cs",
-                new ThreadStaticNonStaticField(),
-                new ThreadStaticNonStaticFieldCodeFixProvider());
+                new ThreadStaticNonStaticField());
 #endif
 
         [TestMethod]
         public void ThreadStaticNonStaticField_CodeFix() =>
-            OldVerifier.VerifyCodeFix(
+            OldVerifier.VerifyCodeFix<ThreadStaticNonStaticFieldCodeFixProvider>(
                 @"TestCases\ThreadStaticNonStaticField.cs",
                 @"TestCases\ThreadStaticNonStaticField.Fixed.cs",
-                new ThreadStaticNonStaticField(),
-                new ThreadStaticNonStaticFieldCodeFixProvider());
+                new ThreadStaticNonStaticField());
     }
 }

@@ -33,10 +33,9 @@ namespace SonarAnalyzer.UnitTest.Rules
 
         [TestMethod]
         public void RedundantPropertyNamesInAnonymousClass_CodeFix() =>
-            OldVerifier.VerifyCodeFix(
+            OldVerifier.VerifyCodeFix<RedundantPropertyNamesInAnonymousClassCodeFixProvider>(
                 @"TestCases\RedundantPropertyNamesInAnonymousClass.cs",
                 @"TestCases\RedundantPropertyNamesInAnonymousClass.Fixed.cs",
-                new RedundantPropertyNamesInAnonymousClass(),
-                new RedundantPropertyNamesInAnonymousClassCodeFixProvider());
+                new RedundantPropertyNamesInAnonymousClass());
     }
 }

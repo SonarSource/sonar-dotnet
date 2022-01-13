@@ -73,12 +73,11 @@ namespace SonarAnalyzer.UnitTest.Rules
 
         [TestMethod]
         public void UnnecessaryUsings_CodeFix() =>
-            OldVerifier.VerifyCodeFix(
+            OldVerifier.VerifyCodeFix<UnnecessaryUsingsCodeFixProvider>(
                 @"TestCases\UnnecessaryUsings.cs",
                 @"TestCases\UnnecessaryUsings.Fixed.cs",
                 @"TestCases\UnnecessaryUsings.Fixed.Batch.cs",
                 new UnnecessaryUsings(),
-                new UnnecessaryUsingsCodeFixProvider(),
                 additionalReferences: GetAdditionalReferences());
 
         [TestMethod]

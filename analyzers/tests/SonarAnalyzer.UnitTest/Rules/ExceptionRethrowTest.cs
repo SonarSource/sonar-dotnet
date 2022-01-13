@@ -33,10 +33,9 @@ namespace SonarAnalyzer.UnitTest.Rules
 
         [TestMethod]
         public void ExceptionRethrow_CodeFix() =>
-            OldVerifier.VerifyCodeFix(
+            OldVerifier.VerifyCodeFix<ExceptionRethrowCodeFixProvider>(
                 @"TestCases\ExceptionRethrow.cs",
                 @"TestCases\ExceptionRethrow.Fixed.cs",
-                new ExceptionRethrow(),
-                new ExceptionRethrowCodeFixProvider());
+                new ExceptionRethrow());
     }
 }
