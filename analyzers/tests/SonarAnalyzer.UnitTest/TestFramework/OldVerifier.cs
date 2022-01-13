@@ -42,18 +42,6 @@ namespace SonarAnalyzer.UnitTest.TestFramework
 
     public static class OldVerifier
     {
-        public static void VerifyNoExceptionThrown(string path, DiagnosticAnalyzer[] diagnosticAnalyzers, CompilationErrorBehavior checkMode = CompilationErrorBehavior.Default)
-        {
-            var compilation = SolutionBuilder
-                .Create()
-                .AddProject(AnalyzerLanguage.FromPath(path))
-                .AddDocument(path)
-                .GetCompilation();
-
-            var diagnostics = DiagnosticVerifier.GetAnalyzerDiagnostics(compilation, diagnosticAnalyzers, checkMode);
-            DiagnosticVerifier.VerifyNoExceptionThrown(diagnostics);
-        }
-
         /// <summary>
         /// Verify analyzer from C# on a snippet in non-concurrent execution mode.
         /// </summary>

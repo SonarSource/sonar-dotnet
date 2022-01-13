@@ -67,9 +67,9 @@ namespace SonarAnalyzer.UnitTest.Common
         {
             var analyzers = RuleFinder.GetAnalyzers(AnalyzerLanguage.CSharp).ToArray();
 
-            OldVerifier.VerifyNoExceptionThrown(@"TestCasesForRuleFailure\InvalidSyntax.cs", analyzers, CompilationErrorBehavior.Ignore);
-            OldVerifier.VerifyNoExceptionThrown(@"TestCasesForRuleFailure\SpecialCases.cs", analyzers, CompilationErrorBehavior.Ignore);
-            OldVerifier.VerifyNoExceptionThrown(@"TestCasesForRuleFailure\PerformanceTestCases.cs", analyzers, CompilationErrorBehavior.Ignore);
+            VerifyNoExceptionThrown(@"TestCasesForRuleFailure\InvalidSyntax.cs", analyzers, CompilationErrorBehavior.Ignore);
+            VerifyNoExceptionThrown(@"TestCasesForRuleFailure\SpecialCases.cs", analyzers, CompilationErrorBehavior.Ignore);
+            VerifyNoExceptionThrown(@"TestCasesForRuleFailure\PerformanceTestCases.cs", analyzers, CompilationErrorBehavior.Ignore);
         }
 
         [TestMethod]
@@ -77,8 +77,8 @@ namespace SonarAnalyzer.UnitTest.Common
         {
             var analyzers = RuleFinder.GetAnalyzers(AnalyzerLanguage.VisualBasic).ToArray();
 
-            OldVerifier.VerifyNoExceptionThrown(@"TestCasesForRuleFailure\InvalidSyntax.vb", analyzers, CompilationErrorBehavior.Ignore);
-            OldVerifier.VerifyNoExceptionThrown(@"TestCasesForRuleFailure\SpecialCases.vb", analyzers, CompilationErrorBehavior.Ignore);
+            VerifyNoExceptionThrown(@"TestCasesForRuleFailure\InvalidSyntax.vb", analyzers, CompilationErrorBehavior.Ignore);
+            VerifyNoExceptionThrown(@"TestCasesForRuleFailure\SpecialCases.vb", analyzers, CompilationErrorBehavior.Ignore);
         }
 
         [TestMethod]
@@ -99,7 +99,7 @@ namespace SonarAnalyzer.UnitTest.Common
         {
             var reader = new ConcurrentExecutionReader();
             reader.IsConcurrentExecutionEnabled.Should().BeNull();
-            OldVerifier.VerifyNoExceptionThrown("TestCases\\AsyncVoidMethod.cs", new[] { reader });
+            VerifyNoExceptionThrown("TestCases\\AsyncVoidMethod.cs", new[] { reader });
             reader.IsConcurrentExecutionEnabled.Should().BeFalse();
         }
 
@@ -112,7 +112,7 @@ namespace SonarAnalyzer.UnitTest.Common
             scope.SetVariable(SonarDiagnosticAnalyzer.EnableConcurrentExecutionVariable, value);
             var reader = new ConcurrentExecutionReader();
             reader.IsConcurrentExecutionEnabled.Should().BeNull();
-            OldVerifier.VerifyNoExceptionThrown("TestCases\\AsyncVoidMethod.cs", new[] { reader });
+            VerifyNoExceptionThrown("TestCases\\AsyncVoidMethod.cs", new[] { reader });
             reader.IsConcurrentExecutionEnabled.Should().BeTrue();
         }
 
@@ -126,7 +126,7 @@ namespace SonarAnalyzer.UnitTest.Common
             scope.SetVariable(SonarDiagnosticAnalyzer.EnableConcurrentExecutionVariable, value);
             var reader = new ConcurrentExecutionReader();
             reader.IsConcurrentExecutionEnabled.Should().BeNull();
-            OldVerifier.VerifyNoExceptionThrown("TestCases\\AsyncVoidMethod.cs", new[] { reader });
+            VerifyNoExceptionThrown("TestCases\\AsyncVoidMethod.cs", new[] { reader });
             reader.IsConcurrentExecutionEnabled.Should().BeFalse();
         }
 
@@ -290,6 +290,18 @@ namespace SonarAnalyzer.UnitTest.Common
                     throw new InvalidOperationException($"{nameof(AllCSharpRules_HaveCSharpTag)} or {nameof(AllVbNetRules_HaveVbNetTag)} should fail, fix them first.");
                 }
             }
+        }
+
+        private static void VerifyNoExceptionThrown(string path, DiagnosticAnalyzer[] diagnosticAnalyzers, CompilationErrorBehavior checkMode = CompilationErrorBehavior.Default)
+        {
+            var compilation = SolutionBuilder
+                .Create()
+                .AddProject(AnalyzerLanguage.FromPath(path))
+                .AddDocument(path)
+                .GetCompilation();
+
+            var diagnostics = DiagnosticVerifier.GetAnalyzerDiagnostics(compilation, diagnosticAnalyzers, checkMode);
+            DiagnosticVerifier.VerifyNoExceptionThrown(diagnostics);
         }
 
         [DiagnosticAnalyzer(LanguageNames.CSharp)]
