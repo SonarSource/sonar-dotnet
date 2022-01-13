@@ -100,7 +100,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework
                 .AddDocuments(builder.ConcurrentAnalysis && builder.AutogenerateConcurrentFiles ? CreateConcurrencyTest(paths) : Enumerable.Empty<string>())
                 .AddSnippets(builder.Snippets.ToArray())
                 .AddReferences(builder.References);
-            return project.GetSolution().Compile(builder.ParseOptions.ToArray());
+            return project.Solution.Compile(builder.ParseOptions.ToArray());
         }
 
         private IEnumerable<string> CreateConcurrencyTest(IEnumerable<string> paths)
