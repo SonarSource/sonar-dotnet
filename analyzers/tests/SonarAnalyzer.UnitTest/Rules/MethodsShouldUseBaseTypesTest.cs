@@ -45,7 +45,7 @@ public class Foo : IFoo
 {
     public bool IsFoo { get; set; }
 }
-")              .GetSolution()
+")              .Solution
                 .AddProject(AnalyzerLanguage.CSharp)
                 .AddProjectReference(sln => sln.ProjectIds[0])
                 .AddSnippet(@"
@@ -56,7 +56,7 @@ internal class Bar
         var x = foo.IsFoo;
     }
 }
-")              .GetSolution();
+")              .Solution;
 
             foreach (var compilation in solution.Compile())
             {

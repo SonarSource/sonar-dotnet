@@ -44,13 +44,12 @@ namespace SonarAnalyzer.UnitTest.TestFramework
             "System.Linq",
             "System.Xml.Linq",
             "System.Threading.Tasks");
+        private readonly Solution solution;
 
-        public IReadOnlyList<ProjectId> ProjectIds => Solution.ProjectIds;
-
-        private Solution Solution { get; }
+        public IReadOnlyList<ProjectId> ProjectIds => solution.ProjectIds;
 
         private SolutionBuilder(Solution solution) =>
-            Solution = solution;
+            this.solution = solution;
 
         public ProjectBuilder AddProject(AnalyzerLanguage language, bool createExtraEmptyFile = true, OutputKind outputKind = OutputKind.DynamicallyLinkedLibrary) =>
             AddProject(language, $"{GeneratedAssemblyName}{ProjectIds.Count}", createExtraEmptyFile, outputKind);
@@ -73,26 +72,23 @@ namespace SonarAnalyzer.UnitTest.TestFramework
                 throw new ArgumentException("Please use a collection of paths with the same extension", nameof(paths));
             }
 
-            var project = Create()
+            return Create()
                 .AddProject(AnalyzerLanguage.FromPath(paths.First()), outputKind: outputKind)
                 .AddDocuments(paths)
-                .AddReferences(additionalReferences);
-
-            return project.GetSolution();
+                .AddReferences(additionalReferences)
+                .Solution;
         }
 
         public static SolutionBuilder FromSolution(Solution solution) =>
-            new SolutionBuilder(solution);
+            new(solution);
 
         public IReadOnlyList<Compilation> Compile(params ParseOptions[] parseOptions)
         {
             var options = ParseOptionsHelper.GetParseOptionsOrDefault(parseOptions);
 
-            return Solution
+            return solution
                 .Projects
-                .SelectMany(project => options
-                    .Where(ParseOptionsHelper.GetFilterByLanguage(project.Language))
-                    .Select(o => GetCompilation(project, o)))
+                .SelectMany(x => options.Where(ParseOptionsHelper.GetFilterByLanguage(x.Language)).Select(o => GetCompilation(x, o)))   // FIXME: Can be simplified?
                 .ToList()
                 .AsReadOnly();
         }
@@ -103,7 +99,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework
             {
                 throw new UnexpectedLanguageException(language);
             }
-            var project = Solution.AddProject(projectName, projectName, language.LanguageName);
+            var project = solution.AddProject(projectName, projectName, language.LanguageName);
             var compilationOptions = project.CompilationOptions.WithOutputKind(outputKind);
             compilationOptions = language.LanguageName switch
             {
@@ -134,9 +130,6 @@ namespace SonarAnalyzer.UnitTest.TestFramework
         }
 
         private static Compilation GetCompilation(Project project, ParseOptions options) =>
-            project
-                .WithParseOptions(options)
-                .GetCompilationAsync()
-                .Result;
+            project.WithParseOptions(options).GetCompilationAsync().Result;
     }
 }
