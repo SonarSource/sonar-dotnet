@@ -25,6 +25,7 @@ using System.Linq;
 using System.Reflection;
 using System.Text;
 using System.Text.RegularExpressions;
+using FluentAssertions;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CodeFixes;
 using Microsoft.CodeAnalysis.Diagnostics;
@@ -81,7 +82,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework
 
         public void Verify()    // This should never has any arguments
         {
-            foreach (var compilation in Compile())
+            foreach (var compilation in Compile(builder.ConcurrentAnalysis))
             {
                 DiagnosticVerifier.Verify(compilation, analyzers, builder.ErrorBehavior, builder.SonarProjectConfigPath, onlyDiagnosticIds);
             }
@@ -89,7 +90,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework
 
         public void VerifyNoIssueReported()    // This should never has any arguments
         {
-            foreach (var compilation in Compile())
+            foreach (var compilation in Compile(builder.ConcurrentAnalysis))
             {
                 foreach (var analyzer in analyzers)
                 {
@@ -114,8 +115,20 @@ namespace SonarAnalyzer.UnitTest.TestFramework
             }
         }
 
-        private IEnumerable<Compilation> Compile() =>
-            CreateProject(builder.ConcurrentAnalysis).Solution.Compile(builder.ParseOptions.ToArray());
+        public void VerifyUtilityAnalyzerProducesEmptyProtobuf()     // This should never has any arguments
+        {
+            foreach (var compilation in Compile(false))
+            {
+                foreach (var analyzer in analyzers)
+                {
+                    DiagnosticVerifier.Verify(compilation, analyzer, CompilationErrorBehavior.Default);
+                    new FileInfo(builder.ProtobufPath).Length.Should().Be(0, "protobuf file should be empty");
+                }
+            }
+        }
+
+        private IEnumerable<Compilation> Compile(bool concurrentAnalysis) =>
+            CreateProject(concurrentAnalysis).Solution.Compile(builder.ParseOptions.ToArray());
 
         private ProjectBuilder CreateProject(bool concurrentAnalysis)
         {

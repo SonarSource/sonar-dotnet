@@ -432,6 +432,21 @@ End Class"" has a length of 151, differs near ""Not"" (index 47).");
         public void Verify_ConcurrentAnalysis_FileEndingWithComment_VB() =>
             WithSnippetVB("' Nothing to see here, file ends with a comment").Invoking(x => x.Verify()).Should().NotThrow();
 
+        [TestMethod]
+        public void VerifyUtilityAnalyzerProducesEmptyProtobuf_EmptyFile()
+        {
+            var protobuf = WriteFile("empty.pb", null);
+            WithSnippetCS("// Nothing to see here").WithProtobufPath(protobuf).Invoking(x => x.VerifyUtilityAnalyzerProducesEmptyProtobuf()).Should().NotThrow();
+        }
+
+        [TestMethod]
+        public void VerifyUtilityAnalyzerProducesEmptyProtobuf_WithContent()
+        {
+            var protobuf = WriteFile("empty.pb", "Something unexpected");
+            WithSnippetCS("// Nothing to see here").WithProtobufPath(protobuf).Invoking(x => x.VerifyUtilityAnalyzerProducesEmptyProtobuf())
+                .Should().Throw<AssertFailedException>().WithMessage("Expected value to be 0L because protobuf file should be empty, but found 20L.");
+        }
+
         private VerifierBuilder WithSnippetCS(string code) =>
             DummyCS.AddPaths(WriteFile("File.cs", code));
 

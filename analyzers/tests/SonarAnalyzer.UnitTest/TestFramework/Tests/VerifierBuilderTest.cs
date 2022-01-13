@@ -233,6 +233,16 @@ namespace SonarAnalyzer.UnitTest.TestFramework.Tests
         }
 
         [TestMethod]
+        public void WithProtobufPath_Overrides_IsImmutable()
+        {
+            var one = Empty.WithProtobufPath("First");
+            var two = one.WithProtobufPath("Second");
+            Empty.ProtobufPath.Should().BeNull();
+            one.ProtobufPath.Should().Be("First");
+            two.ProtobufPath.Should().Be("Second");
+        }
+
+        [TestMethod]
         public void WithSonarProjectConfig_Overrides_IsImmutable()
         {
             var one = Empty.WithSonarProjectConfigPath("First");
