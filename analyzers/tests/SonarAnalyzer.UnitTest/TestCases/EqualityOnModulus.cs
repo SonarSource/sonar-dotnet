@@ -36,6 +36,10 @@ namespace Tests.Diagnostics
 
             var someString = "HelloImAWhale";
             y = someString.Length % 2 == 1; // Compliant - Length property is > 0;
+
+            y = FakeCount() % 2 == 1; // Noncompliant
         }
+
+        public int FakeCount() => -1;
     }
 }
