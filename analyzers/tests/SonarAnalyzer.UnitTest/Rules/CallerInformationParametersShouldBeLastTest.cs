@@ -43,8 +43,10 @@ namespace SonarAnalyzer.UnitTest.Rules
 
         [TestMethod]
         public void CallerInformationParametersShouldBeLastInvalidSyntax() =>
-            OldVerifier.VerifyNoIssueReported(@"TestCases\CallerInformationParametersShouldBeLastInvalidSyntax.cs",
-                                           new CallerInformationParametersShouldBeLast(),
-                                           checkMode: CompilationErrorBehavior.Ignore);
+            new VerifierBuilder<CallerInformationParametersShouldBeLast>()
+                .AddPaths("CallerInformationParametersShouldBeLastInvalidSyntax.cs")
+                .WithErrorBehavior(CompilationErrorBehavior.Ignore)
+                .WithConcurrentAnalysis(false)
+                .VerifyNoIssueReported();
     }
 }

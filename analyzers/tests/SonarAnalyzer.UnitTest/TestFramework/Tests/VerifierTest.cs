@@ -278,6 +278,18 @@ Line: 1, Type: primary, Id: 'second'
 ");
 
         [TestMethod]
+        public void VerifyNoIssueReported_NoIssues_Succeeds() =>
+            WithSnippetCS("// Noncompliant - this comment is ignored").Invoking(x => x.VerifyNoIssueReported()).Should().NotThrow();
+
+        [TestMethod]
+        public void VerifyNoIssueReported_WithIssues_Throws() =>
+            WithSnippetCS(
+@"public class Sample
+{
+    private int a = 42;     // This will raise an issue
+}").Invoking(x => x.VerifyNoIssueReported()).Should().Throw<AssertFailedException>();
+
+        [TestMethod]
         public void Verify_ConcurrentAnalysis_FileEndingWithComment_CS() =>
             WithSnippetCS("// Nothing to see here, file ends with a comment").Invoking(x => x.Verify()).Should().NotThrow();
 

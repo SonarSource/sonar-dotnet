@@ -30,7 +30,6 @@ using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
 using SonarAnalyzer.Rules;
-using SonarAnalyzer.UnitTest.MetadataReferences;
 
 namespace SonarAnalyzer.UnitTest.TestFramework
 {
@@ -550,54 +549,75 @@ namespace SonarAnalyzer.UnitTest.TestFramework
             }
         }
 
+        [Obsolete("Use VerifierBuilder instead.")]
         public static void VerifyNoIssueReportedInTest(string path,
                                                        SonarDiagnosticAnalyzer diagnosticAnalyzer,
                                                        IEnumerable<MetadataReference> additionalReferences = null,
                                                        DiagnosticDescriptor[] onlyDiagnostics = null) =>
-            VerifyNoIssueReportedInTest(path, diagnosticAnalyzer, null, additionalReferences, onlyDiagnostics);
+            new VerifierBuilder()
+                .AddAnalyzer(() => diagnosticAnalyzer)
+                .AddReferences(additionalReferences ?? Enumerable.Empty<MetadataReference>())
+                .AddTestReference()
+                .AddPaths(RemoveTestCasesPrefix(path))
+                .WithOnlyDiagnostics(onlyDiagnostics ?? Array.Empty<DiagnosticDescriptor>())
+                .VerifyNoIssueReported();
 
+        [Obsolete("Use VerifierBuilder instead.")]
         public static void VerifyNoIssueReportedInTest(string path,
                                                        SonarDiagnosticAnalyzer diagnosticAnalyzer,
-                                                       IEnumerable<ParseOptions> options,
+                                                       ImmutableArray<ParseOptions> options,
                                                        IEnumerable<MetadataReference> additionalReferences = null,
-                                                       DiagnosticDescriptor[] onlyDiagnostics = null)
-        {
-            var builder = SolutionBuilder.Create()
-                .AddProject(AnalyzerLanguage.FromPath(path))
-                .AddTestReferences()
+                                                       DiagnosticDescriptor[] onlyDiagnostics = null) =>
+            new VerifierBuilder()
+                .AddAnalyzer(() => diagnosticAnalyzer)
                 .AddReferences(additionalReferences ?? Enumerable.Empty<MetadataReference>())
-                .AddDocument(path);
+                .AddTestReference()
+                .AddPaths(RemoveTestCasesPrefix(path))
+                .WithOptions(options.IsDefault ? ImmutableArray<ParseOptions>.Empty : options)
+                .WithOnlyDiagnostics(onlyDiagnostics ?? Array.Empty<DiagnosticDescriptor>())
+                .VerifyNoIssueReported();
 
-            VerifyNoIssueReported(builder, diagnosticAnalyzer, options, CompilationErrorBehavior.Default, null, onlyDiagnostics);
-        }
-
+        [Obsolete("Use VerifierBuilder instead.")]
         public static void VerifyNoIssueReported(string path,
                                                  SonarDiagnosticAnalyzer diagnosticAnalyzer,
                                                  IEnumerable<MetadataReference> additionalReferences) =>
-            VerifyNoIssueReported(path, diagnosticAnalyzer, null, checkMode: CompilationErrorBehavior.Default, additionalReferences: additionalReferences);
+            new VerifierBuilder()
+                .AddAnalyzer(() => diagnosticAnalyzer)
+                .AddReferences(additionalReferences)
+                .AddPaths(RemoveTestCasesPrefix(path))
+                .VerifyNoIssueReported();
 
+        [Obsolete("Use VerifierBuilder instead.")]
         public static void VerifyNoIssueReported(string path,
                                                  SonarDiagnosticAnalyzer diagnosticAnalyzer,
-                                                 IEnumerable<ParseOptions> options,
+                                                 ImmutableArray<ParseOptions> options,
                                                  IEnumerable<MetadataReference> additionalReferences,
                                                  string sonarProjectConfigPath = null) =>
-            VerifyNoIssueReported(path, diagnosticAnalyzer, options, CompilationErrorBehavior.Default, additionalReferences: additionalReferences, sonarProjectConfigPath: sonarProjectConfigPath);
+            new VerifierBuilder()
+                .AddAnalyzer(() => diagnosticAnalyzer)
+                .AddReferences(additionalReferences)
+                .AddPaths(RemoveTestCasesPrefix(path))
+                .WithOptions(options.IsDefault ? ImmutableArray<ParseOptions>.Empty : options)
+                .WithSonarProjectConfigPath(sonarProjectConfigPath)
+                .VerifyNoIssueReported();
 
+        [Obsolete("Use VerifierBuilder instead.")]
         public static void VerifyNoIssueReported(string path,
                                                  SonarDiagnosticAnalyzer diagnosticAnalyzer,
-                                                 IEnumerable<ParseOptions> options = null,
+                                                 ImmutableArray<ParseOptions> options = default,
                                                  CompilationErrorBehavior checkMode = CompilationErrorBehavior.Default,
                                                  OutputKind outputKind = OutputKind.DynamicallyLinkedLibrary,
                                                  IEnumerable<MetadataReference> additionalReferences = null,
-                                                 string sonarProjectConfigPath = null)
-        {
-            var builder = SolutionBuilder.Create()
-                .AddProject(AnalyzerLanguage.FromPath(path), outputKind: outputKind)
+                                                 string sonarProjectConfigPath = null) =>
+            new VerifierBuilder()
+                .AddAnalyzer(() => diagnosticAnalyzer)
                 .AddReferences(additionalReferences ?? Enumerable.Empty<MetadataReference>())
-                .AddDocument(path);
-
-            VerifyNoIssueReported(builder, diagnosticAnalyzer, options, checkMode, sonarProjectConfigPath);
-        }
+                .AddPaths(RemoveTestCasesPrefix(path))
+                .WithOptions(options.IsDefault ? ImmutableArray<ParseOptions>.Empty : options)
+                .WithErrorBehavior(checkMode)
+                .WithOutputKind(outputKind)
+                .WithSonarProjectConfigPath(sonarProjectConfigPath)
+                .VerifyNoIssueReported();
 
         public static void VerifyCodeFix(string path,
                                          string pathToExpected,
@@ -631,19 +651,6 @@ namespace SonarAnalyzer.UnitTest.TestFramework
                                          IEnumerable<ParseOptions> options = null,
                                          IEnumerable<MetadataReference> additionalReferences = null) =>
             CodeFixVerifier.VerifyCodeFix(path, pathToExpected, pathToExpected, diagnosticAnalyzer, codeFixProvider, codeFixTitle, options, OutputKind.DynamicallyLinkedLibrary, additionalReferences);
-
-        private static void VerifyNoIssueReported(ProjectBuilder builder,
-                                                  SonarDiagnosticAnalyzer diagnosticAnalyzer,
-                                                  IEnumerable<ParseOptions> options,
-                                                  CompilationErrorBehavior checkMode,
-                                                  string sonarProjectConfigPath,
-                                                  DiagnosticDescriptor[] onlyDiagnostics = null)
-        {
-            foreach (var option in options ?? new ParseOptions[] { null })
-            {
-                DiagnosticVerifier.VerifyNoIssueReported(builder.GetCompilation(option), diagnosticAnalyzer, checkMode, sonarProjectConfigPath, onlyDiagnostics?.Select(x => x.Id).ToArray());
-            }
-        }
 
         private static string[] RemoveTestCasesPrefix(IEnumerable<string> paths) =>
             paths.Select(RemoveTestCasesPrefix).ToArray();

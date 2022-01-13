@@ -38,10 +38,12 @@ namespace SonarAnalyzer.UnitTest.TestFramework
         private readonly VerifierBuilder builder;
         private readonly DiagnosticAnalyzer[] analyzers;
         private readonly AnalyzerLanguage language;
+        private readonly string[] onlyDiagnosticIds;
 
         public Verifier(VerifierBuilder builder)
         {
             this.builder = builder ?? throw new ArgumentNullException(nameof(builder));
+            onlyDiagnosticIds = builder.OnlyDiagnostics.Select(x => x.Id).ToArray();
             analyzers = builder.Analyzers.Select(x => x()).ToArray();
             if (!analyzers.Any())
             {
@@ -69,8 +71,27 @@ namespace SonarAnalyzer.UnitTest.TestFramework
 
         public void Verify()    // This should never has any arguments
         {
+            foreach (var compilation in Compile())
+            {
+                DiagnosticVerifier.Verify(compilation, analyzers, builder.ErrorBehavior, builder.SonarProjectConfigPath, onlyDiagnosticIds);
+            }
+        }
+
+        public void VerifyNoIssueReported()    // This should never has any arguments
+        {
+            foreach (var compilation in Compile())
+            {
+                foreach (var analyzer in analyzers)
+                {
+                    DiagnosticVerifier.VerifyNoIssueReported(compilation, analyzer, builder.ErrorBehavior, builder.SonarProjectConfigPath, onlyDiagnosticIds);
+                }
+            }
+        }
+
+        private IEnumerable<Compilation> Compile()
+        {
             const string TestCases = "TestCases";
-            using var scope = new EnvironmentVariableScope { EnableConcurrentAnalysis = builder.ConcurrentAnalysis};
+            using var scope = new EnvironmentVariableScope { EnableConcurrentAnalysis = builder.ConcurrentAnalysis };
             var basePath = Path.GetFullPath(builder.BasePath == null ? TestCases : Path.Combine(TestCases, builder.BasePath));
             var paths = builder.Paths.Select(x => Path.Combine(basePath, x)).ToArray();
             var project = SolutionBuilder.Create()
@@ -79,10 +100,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework
                 .AddDocuments(builder.ConcurrentAnalysis && builder.AutogenerateConcurrentFiles ? CreateConcurrencyTest(paths) : Enumerable.Empty<string>())
                 .AddSnippets(builder.Snippets.ToArray())
                 .AddReferences(builder.References);
-            foreach (var compilation in project.GetSolution().Compile(builder.ParseOptions.ToArray()))
-            {
-                DiagnosticVerifier.Verify(compilation, analyzers, builder.ErrorBehavior, builder.SonarProjectConfigPath, builder.OnlyDiagnostics.Select(x => x.Id).ToArray());
-            }
+            return project.GetSolution().Compile(builder.ParseOptions.ToArray());
         }
 
         private IEnumerable<string> CreateConcurrencyTest(IEnumerable<string> paths)

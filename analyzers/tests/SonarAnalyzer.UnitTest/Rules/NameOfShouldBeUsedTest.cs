@@ -18,6 +18,8 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System.Collections.Immutable;
+using Microsoft.CodeAnalysis;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.UnitTest.TestFramework;
 using CS = SonarAnalyzer.Rules.CSharp;
@@ -40,7 +42,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void NameOfShouldBeUsed_CSharp5() =>
             OldVerifier.VerifyNoIssueReported(@"TestCases\NameOfShouldBeUsed.cs",
                 new CS.NameOfShouldBeUsed(),
-                new[] { new RoslynCS.CSharpParseOptions(RoslynCS.LanguageVersion.CSharp5) },    // ToDo: Use WithLanguageVersion instead
+                ImmutableArray.Create<ParseOptions>(new RoslynCS.CSharpParseOptions(RoslynCS.LanguageVersion.CSharp5)),    // ToDo: Use WithLanguageVersion instead
                 CompilationErrorBehavior.Ignore);
 
         [TestMethod]
@@ -53,7 +55,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void NameOfShouldBeUsed_VB12() =>
             OldVerifier.VerifyNoIssueReported(@"TestCases\NameOfShouldBeUsed.vb",
                 new VB.NameOfShouldBeUsed(),
-                new[] { new RoslynVB.VisualBasicParseOptions(RoslynVB.LanguageVersion.VisualBasic12) },
+                ImmutableArray.Create<ParseOptions>(new RoslynVB.VisualBasicParseOptions(RoslynVB.LanguageVersion.VisualBasic12)),
                 CompilationErrorBehavior.Ignore);
     }
 }

@@ -55,7 +55,7 @@ namespace SonarAnalyzer.UnitTest.Rules
             OldVerifier.VerifyNoIssueReported(
                 @"TestCases\MarkWindowsFormsMainWithStaThread.cs",
                 new CS.MarkWindowsFormsMainWithStaThread(),
-                null,
+                default,
                 CompilationErrorBehavior.Ignore,
                 OutputKind.DynamicallyLinkedLibrary,
                 MetadataReferenceFacade.SystemWindowsForms);
@@ -65,7 +65,7 @@ namespace SonarAnalyzer.UnitTest.Rules
             OldVerifier.VerifyNoIssueReported(
                 @"TestCases\MarkWindowsFormsMainWithStaThread.vb",
                 new VB.MarkWindowsFormsMainWithStaThread(),
-                null,
+                default,
                 CompilationErrorBehavior.Ignore,
                 OutputKind.DynamicallyLinkedLibrary,
                 MetadataReferenceFacade.SystemWindowsForms);
