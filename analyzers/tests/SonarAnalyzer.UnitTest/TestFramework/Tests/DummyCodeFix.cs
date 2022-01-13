@@ -33,13 +33,13 @@ namespace SonarAnalyzer.UnitTest.TestFramework.Tests
     [ExportCodeFixProvider(LanguageNames.CSharp)]
     internal class DummyCodeFixCS : DummyCodeFix
     {
-        protected override SyntaxNode NewNode() => CS.SyntaxFactory.LiteralExpression(CS.SyntaxKind.NumericLiteralExpression, CS.SyntaxFactory.Literal(42));
+        protected override SyntaxNode NewNode() => CS.SyntaxFactory.LiteralExpression(CS.SyntaxKind.DefaultLiteralExpression);
     }
 
     [ExportCodeFixProvider(LanguageNames.VisualBasic)]
     internal class DummyCodeFixVB : DummyCodeFix
     {
-        protected override SyntaxNode NewNode() => VB.SyntaxFactory.LiteralExpression(VB.SyntaxKind.NumericLiteralExpression, VB.SyntaxFactory.Literal(42));
+        protected override SyntaxNode NewNode() => VB.SyntaxFactory.NothingLiteralExpression(VB.SyntaxFactory.Token(VB.SyntaxKind.NothingKeyword));
     }
 
     internal abstract class DummyCodeFix : SonarCodeFixProvider
@@ -53,7 +53,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework.Tests
             context.RegisterCodeFix(CodeAction.Create("Dummy Action", _ =>
             {
                 var oldNode = root.FindNode(context.Diagnostics.Single().Location.SourceSpan);
-                var newRoot = root.ReplaceNode(oldNode, NewNode());
+                var newRoot = root.ReplaceNode(oldNode, NewNode().WithTriviaFrom(oldNode));
                 return Task.FromResult(context.Document.WithSyntaxRoot(newRoot));
             }), context.Diagnostics);
             return Task.CompletedTask;

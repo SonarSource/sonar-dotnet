@@ -179,5 +179,8 @@ namespace SonarAnalyzer.UnitTest.TestFramework
 
         public static void VerifyNoIssueReported(this VerifierBuilder builder) =>
             builder.Build().VerifyNoIssueReported();
+
+        public static void VerifyCodeFix(this VerifierBuilder builder) =>
+            builder.Build().VerifyCodeFix();
     }
 }
