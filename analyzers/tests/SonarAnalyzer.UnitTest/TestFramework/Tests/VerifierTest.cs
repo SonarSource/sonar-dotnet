@@ -107,7 +107,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework.Tests
         [TestMethod]
         public void Constructor_CodeFix_FixableDiagnosticsNotSupported_Throws() =>
             DummyCodeFixCS.WithCodeFix<EmptyMethodCodeFixProvider>()
-                .Invoking(x => x.Build()).Should().Throw<ArgumentException>().WithMessage("DummyAnalyzerCS does not support S1186 fixable by the EmptyMethodCodeFixProvider");
+                .Invoking(x => x.Build()).Should().Throw<ArgumentException>().WithMessage("{DummyAnalyzerCS} does not support diagnostics fixable by the EmptyMethodCodeFixProvider.");
 
         [TestMethod]
         public void Verify_RaiseExpectedIssues_CS() =>
@@ -395,16 +395,16 @@ End Class");
 End Class");
             DummyVB.AddPaths(originalPath).WithCodeFix<DummyCodeFixVB>().WithCodeFixedPath(originalPath).Invoking(x => x.VerifyCodeFix()).Should().Throw<AssertFailedException>().WithMessage(
 @"Expected ActualCodeWithReplacedComments().ToUnixLineEndings() to be*
-    ""Public Class Sample
-        Private A As Integer = 42   ' Noncompliant
-        Private B As Integer = 42   ' Noncompliant
-        Private C As Boolean = True
-    End Class"" with a length of 155 because VerifyWhileDocumentChanges updates the document until all issues are fixed, even if the fix itself creates a new issue again. Language: VisualBasic12, but*
-    ""Public Class Sample
-        Private A As Integer = Nothing   ' Fixed
-        Private B As Integer = Nothing   ' Fixed
-        Private C As Boolean = True
-    End Class"" has a length of 151, differs near ""Not"" (index 47).");
+""Public Class Sample
+    Private A As Integer = 42   ' Noncompliant
+    Private B As Integer = 42   ' Noncompliant
+    Private C As Boolean = True
+End Class"" with a length of 155 because VerifyWhileDocumentChanges updates the document until all issues are fixed, even if the fix itself creates a new issue again. Language: VisualBasic12, but*
+""Public Class Sample
+    Private A As Integer = Nothing   ' Fixed
+    Private B As Integer = Nothing   ' Fixed
+    Private C As Boolean = True
+End Class"" has a length of 151, differs near ""Not"" (index 47).");
         }
 
         [TestMethod]

@@ -95,12 +95,9 @@ namespace SonarAnalyzer.UnitTest.TestFramework
                 {
                     throw new ArgumentException($"{analyzers.Single().GetType().Name} language {language.LanguageName} does not match {codeFix.GetType().Name} language.");
                 }
-                foreach (var fixableId in codeFix.FixableDiagnosticIds)
+                if (!analyzers.Single().SupportedDiagnostics.Select(x => x.Id).Intersect(codeFix.FixableDiagnosticIds).Any())
                 {
-                    if (!analyzers.Single().SupportedDiagnostics.Any(x => x.Id == fixableId))
-                    {
-                        throw new ArgumentException($"{analyzers.Single().GetType().Name} does not support {fixableId} fixable by the {codeFix.GetType().Name}");
-                    }
+                    throw new ArgumentException($"{analyzers.Single().GetType().Name} does not support diagnostics fixable by the {codeFix.GetType().Name}.");
                 }
             }
         }
