@@ -31,11 +31,17 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void UseTestableTimeProvider_CS() =>
-            Verifier.VerifyAnalyzer(@"TestCases\UseTestableTimeProvider.cs", new CS.UseTestableTimeProvider());
+             new VerifierBuilder()
+                .AddAnalyzer(() => new CS.UseTestableTimeProvider())
+                .AddPaths("UseTestableTimeProvider.cs")
+                .Verify();
 
         [TestMethod]
         [TestCategory("Rule")]
         public void UseTestableTimeProvider_VB() =>
-            Verifier.VerifyAnalyzer(@"TestCases\UseTestableTimeProvider.vb", new VB.UseTestableTimeProvider());
+             new VerifierBuilder()
+                .AddAnalyzer(() => new VB.UseTestableTimeProvider())
+                .AddPaths("UseTestableTimeProvider.vb")
+                .Verify();
     }
 }
