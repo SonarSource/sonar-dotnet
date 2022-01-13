@@ -18,6 +18,7 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System;
 using System.Collections.Immutable;
 using System.Linq;
 using Microsoft.CodeAnalysis;
@@ -35,15 +36,14 @@ namespace SonarAnalyzer.Rules.CSharp
         private const string DiagnosticId = "S2197";
         private const string MessageFormat = "The result of this modulus operation may not be {0}.";
 
-        private static readonly string[] MethodsOrPropertiesReturningAlwaysPositiveInt =
-        {
-            "System.Array.Length",
-            "System.Collections.Generic.IEnumerable<int>.Count<int>()",
-            "System.Collections.Generic.IEnumerable<int>.LongCount<int>()",
-            "System.Collections.Generic.List<int>.Count"
-        };
+        private const string CountName = nameof(Enumerable.Count);
+        private const string LongCountName = nameof(Enumerable.LongCount);
+        private const string LengthName = nameof(Array.Length);
+        private const string LongLengthName = nameof(Array.LongLength);
 
-        private static readonly CSharpExpressionNumericConverter ExpressionNumericConverter = new CSharpExpressionNumericConverter();
+        private static readonly string[] CollectionSizePropertyOrMethodNames = { CountName, LongCountName, LengthName, LongLengthName};
+
+        private static readonly CSharpExpressionNumericConverter ExpressionNumericConverter = new();
 
         private static readonly DiagnosticDescriptor Rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
 
@@ -67,25 +67,53 @@ namespace SonarAnalyzer.Rules.CSharp
             ExpressionNumericConverter.TryGetConstantIntValue(node, out constantValue)
             && constantValue != 0
             && IsModulus(modulus)
-            && !IsUnsigned(modulus, semanticModel)
-            && !IsMethodOrPropertyThatAlwaysReturnsPositiveInt(((BinaryExpressionSyntax)modulus).Left, semanticModel);
+            && !ExpressionIsAlwaysPositive(modulus, semanticModel);
 
         private static bool IsModulus(ExpressionSyntax expression) =>
             expression.RemoveParentheses() is BinaryExpressionSyntax binary
             && binary.IsKind(SyntaxKind.ModuloExpression);
 
-        private static bool IsUnsigned(ExpressionSyntax expression, SemanticModel semantic)
+        private static bool ExpressionIsAlwaysPositive(ExpressionSyntax expression, SemanticModel semantic)
         {
             var type = semantic.GetTypeInfo(expression).Type;
-            return type.IsAny(KnownType.UnsignedIntegers)
-                   || type.Is(KnownType.System_UIntPtr);
+            var isUint = type.IsAny(KnownType.UnsignedIntegers)
+                          || type.Is(KnownType.System_UIntPtr);
+
+            var leftExpression = ((BinaryExpressionSyntax)expression).Left;
+            if (!isUint && CollectionSizePropertyOrMethodNames.Any(x => leftExpression.ToString().Contains(x)))
+            {
+                var symbol = semantic.GetSymbolInfo(((BinaryExpressionSyntax)expression).Left).Symbol;
+                return IsCollectionSizeMethodOrProperty(symbol);
+            }
+            return isUint;
         }
 
-        private static bool IsMethodOrPropertyThatAlwaysReturnsPositiveInt(ExpressionSyntax expression, SemanticModel semantic)
-        {
-            var symbol = semantic.GetSymbolInfo(expression).Symbol;
-            return (symbol is IPropertySymbol || symbol is IMethodSymbol)
-                    && MethodsOrPropertiesReturningAlwaysPositiveInt.Contains(symbol.ToDisplayString());
-        }
+        private static bool IsCollectionSizeMethodOrProperty(ISymbol symbol) =>
+            IsEnumerableCountMethod(symbol)
+            || IsArrayLengthProperty(symbol)
+            || IsCollectionCountProperty(symbol)
+            || IsReadonlyCollectionCountProperty(symbol);
+        private static bool IsEnumerableCountMethod(ISymbol symbol) =>
+            (CountName.Equals(symbol.Name) || LongCountName.Equals(symbol.Name))
+            && symbol is IMethodSymbol methodSymbol
+            && methodSymbol.IsExtensionMethod
+            && methodSymbol.ReceiverType != null
+            && methodSymbol.IsExtensionOn(KnownType.System_Collections_Generic_IEnumerable_T);
+
+        private static bool IsArrayLengthProperty(ISymbol symbol) =>
+            (LengthName.Equals(symbol.Name) || LongLengthName.Equals(symbol.Name))
+            && symbol is IPropertySymbol propertySymbol
+            && propertySymbol.ContainingType.Is(KnownType.System_Array);
+
+        private static bool IsCollectionCountProperty(ISymbol symbol) =>
+            CountName.Equals(symbol.Name)
+            && symbol is IPropertySymbol propertySymbol
+            && propertySymbol.ContainingType.DerivesOrImplements(KnownType.System_Collections_Generic_ICollection_T);
+
+        private static bool IsReadonlyCollectionCountProperty(ISymbol symbol) =>
+            CountName.Equals(symbol.Name)
+            && symbol is IPropertySymbol propertySymbol
+            && propertySymbol.ContainingType.DerivesOrImplements(KnownType.System_Collections_Generic_IReadOnlyCollection_T);
+
     }
 }
