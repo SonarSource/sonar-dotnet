@@ -20,8 +20,10 @@
 
 using System;
 using System.Collections.Generic;
+using System.Collections.Immutable;
 using System.Linq;
 using FluentAssertions;
+using Microsoft.CodeAnalysis;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.Helpers;
 using SonarAnalyzer.Protobuf;
@@ -124,7 +126,7 @@ namespace SonarAnalyzer.UnitTest.Rules
                     info.FilePath.Should().Be(fileName);
                     verifyTokenInfo(info.TokenInfo);
                 },
-                ParseOptionsHelper.FromCSharp10);
+                fileName.EndsWith(".cs") ? ParseOptionsHelper.CSharpLatest : ParseOptionsHelper.VisualBasicLatest);
         }
 
         // We need to set protected properties and this class exists just to enable the analyzer without bothering with additional files with parameters
