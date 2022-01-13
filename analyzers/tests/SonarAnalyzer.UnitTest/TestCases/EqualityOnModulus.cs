@@ -32,6 +32,10 @@ namespace Tests.Diagnostics
 
             var list = new List<int>();
             y = list.Count % 2 == 1; // Compliant - Count property is > 0;
+            y = list.Capacity % 2 == 1; // Compliant - Capacityproperty is > 0;
+
+            var someString = "HelloImAWhale";
+            y = someString.Length % 2 == 1; // Compliant - Length property is > 0;
         }
     }
 }
