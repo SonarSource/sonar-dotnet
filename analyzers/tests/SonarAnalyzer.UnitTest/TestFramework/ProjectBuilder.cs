@@ -103,7 +103,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework
             const string UnixLineEnding = "\n";
             return FromProject(project.AddDocument(fileName, ReadDocument()).Project);
 
-            string ReadDocument()   // FIXME: Can be simplified?
+            string ReadDocument()
             {
                 var lines = fileContent.Replace(WindowsLineEnding, UnixLineEnding).Split(new[] { UnixLineEnding }, StringSplitOptions.None);
                 if (removeAnalysisComments)
