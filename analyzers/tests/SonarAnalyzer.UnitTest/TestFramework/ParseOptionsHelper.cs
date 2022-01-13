@@ -96,18 +96,10 @@ namespace SonarAnalyzer.UnitTest.TestFramework
         }
 #pragma warning restore S3963
 
-        public static IEnumerable<ParseOptions> GetParseOptionsOrDefault(IEnumerable<ParseOptions> parseOptions, string language) =>
+        public static IEnumerable<ParseOptions> OrDefault(this IEnumerable<ParseOptions> parseOptions, string language) =>
             parseOptions != null && parseOptions.WhereNotNull().Any()
                 ? parseOptions.WhereNotNull()
-                : DefaultParseOptions.Where(GetFilterByLanguage(language));
-
-        public static Func<ParseOptions, bool> GetFilterByLanguage(string language) =>
-            language switch
-            {
-                LanguageNames.CSharp => x => x is CS.CSharpParseOptions,
-                LanguageNames.VisualBasic => x => x is VB.VisualBasicParseOptions,
-                _ => throw new NotSupportedException($"Not supported language '{language}'")
-            };
+                : DefaultParseOptions.Where(x => x.Language == language);
 
         private static ImmutableArray<ParseOptions> FilterByEnvironment(this IEnumerable<ParseOptions> options) =>
             TestContextHelper.IsAzureDevOpsContext && !TestContextHelper.IsPullRequestBuild

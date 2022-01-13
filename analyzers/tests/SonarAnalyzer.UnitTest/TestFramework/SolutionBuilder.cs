@@ -88,7 +88,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework
 
         private static IEnumerable<Compilation> Compile(Project project, ParseOptions[] parseOptions)
         {
-            var options = ParseOptionsHelper.GetParseOptionsOrDefault(parseOptions, project.Language);
+            var options = parseOptions.OrDefault(project.Language);
             return options.Select(x => project.WithParseOptions(x).GetCompilationAsync().Result);
         }
 

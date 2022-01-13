@@ -23,7 +23,6 @@ using System.Collections.Immutable;
 using System.IO;
 using System.Linq;
 using System.Threading;
-using System.Threading.Tasks;
 using FluentAssertions;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CodeActions;
@@ -47,7 +46,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework
             IEnumerable<MetadataReference> additionalReferences = null)
         {
             var document = CreateDocument(path, outputKind, additionalReferences);
-            var parseOptions = ParseOptionsHelper.GetParseOptionsOrDefault(options).Where(ParseOptionsHelper.GetFilterByLanguage(document.Project.Language)).ToArray();
+            var parseOptions = options.OrDefault(document.Project.Language).ToArray();
             foreach (var parseOption in parseOptions)
             {
                 RunCodeFixWhileDocumentChanges(diagnosticAnalyzer, codeFixProvider, codeFixTitle, document, parseOption, pathToExpected);
