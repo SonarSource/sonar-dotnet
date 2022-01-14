@@ -41,8 +41,13 @@ namespace Tests.Diagnostics
 
             y = (enumerableLong.Count() % 2) == 1; // Compliant
             y = 1 == (x % 2); // Noncompliant {{The result of this modulus operation may not be positive.}}
+
+            var fakeList = new FakeList();
+            y = fakeList.Count % 2 == 1; // Compliant - Count property is inherited from List and is > 0;
         }
 
         public int FakeCount() => -1;
     }
+
+    public class FakeList : List<int> { }
 }
