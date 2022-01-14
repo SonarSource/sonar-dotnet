@@ -6,7 +6,7 @@
   <parent>
     <groupId>org.sonarsource.parent</groupId>
     <artifactId>parent</artifactId>
-    <version>59.0.29</version>
+    <version>60.0.52</version>
     <relativePath/>
   </parent>
 
@@ -24,6 +24,7 @@
   <properties>
     <scannerMsbuild.version>5.2.0.29862</scannerMsbuild.version>
     <surefire.argLine>-server</surefire.argLine>
+    <maven.compiler.release>8</maven.compiler.release>
   </properties>
 
   <dependencies>

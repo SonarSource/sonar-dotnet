@@ -1,7 +1,6 @@
-﻿extern alias csharp;
-/*
+﻿/*
 * SonarAnalyzer for .NET
-* Copyright (C) 2015-2021 SonarSource SA
+* Copyright (C) 2015-2022 SonarSource SA
 * mailto: contact AT sonarsource DOT com
 *
 * This program is free software; you can redistribute it and/or
@@ -24,8 +23,8 @@ using System.Linq;
 using FluentAssertions;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using csharp::SonarAnalyzer.Wrappers;
 using SonarAnalyzer.UnitTest.TestFramework;
+using SonarAnalyzer.Wrappers;
 
 namespace SonarAnalyzer.UnitTest.Wrappers
 {
