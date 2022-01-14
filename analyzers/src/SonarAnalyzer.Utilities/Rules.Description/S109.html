@@ -27,5 +27,12 @@ public static void DoSomething()
 }
 </pre>
 <h2>Exceptions</h2>
-<p>This rule doesn’t raise an issue when the magic number is used as part of the <code>GetHashCode</code> method or a variable/field declaration.</p>
+<p>This rule doesn’t raise an issue when the magic number is used as part of:</p>
+<ul>
+  <li> the <code>GetHashCode</code> method </li>
+  <li> a variable/field declaration </li>
+  <li> the single argument of an attribute </li>
+  <li> a named argument for a method or attribute </li>
+  <li> a constructor call </li>
+</ul>
 
