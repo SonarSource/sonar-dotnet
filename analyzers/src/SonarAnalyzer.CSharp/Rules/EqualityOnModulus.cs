@@ -65,27 +65,25 @@ namespace SonarAnalyzer.Rules.CSharp
             }
         }
 
-        private static bool CheckExpression(SyntaxNode node, ExpressionSyntax modulus, SemanticModel semanticModel, out int constantValue) =>
+        private static bool CheckExpression(SyntaxNode node, ExpressionSyntax expression, SemanticModel semanticModel, out int constantValue) =>
             ExpressionNumericConverter.TryGetConstantIntValue(node, out constantValue)
             && constantValue != 0
-            && IsModulus(modulus)
-            && !ExpressionIsAlwaysPositive(modulus, semanticModel);
+            && expression.RemoveParentheses() is BinaryExpressionSyntax binary
+            && binary.IsKind(SyntaxKind.ModuloExpression)
+            && !ExpressionIsAlwaysPositive(binary, semanticModel);
 
-        private static bool IsModulus(ExpressionSyntax expression) =>
-            expression.RemoveParentheses() is BinaryExpressionSyntax binary
-            && binary.IsKind(SyntaxKind.ModuloExpression);
-
-        private static bool ExpressionIsAlwaysPositive(ExpressionSyntax expression, SemanticModel semantic)
+        private static bool ExpressionIsAlwaysPositive(BinaryExpressionSyntax binaryExpression, SemanticModel semantic)
         {
-            var type = semantic.GetTypeInfo(expression).Type;
+            var type = semantic.GetTypeInfo(binaryExpression).Type;
             if (type.IsAny(KnownType.UnsignedIntegers) || type.Is(KnownType.System_UIntPtr))
             {
                 return true;
             }
 
-            var leftExpression = ((BinaryExpressionSyntax)expression).Left;
-            return CollectionSizePropertyOrMethodNames.Any(x => leftExpression.ToString().Contains(x))
-                   && semantic.GetSymbolInfo(((BinaryExpressionSyntax)expression).Left).Symbol is { } symbol
+            var leftExpression = binaryExpression.Left;
+            var leftExpressionStringForm = leftExpression.ToString();
+            return CollectionSizePropertyOrMethodNames.Any(x => leftExpressionStringForm.Contains(x))
+                   && semantic.GetSymbolInfo(leftExpression).Symbol is { } symbol
                    && IsCollectionSize(symbol);
         }
 
