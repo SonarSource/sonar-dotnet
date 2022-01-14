@@ -1,0 +1,147 @@
+{
+"issues":  [
+{
+"id":  "S1155",
+"message":  "Use '.Any()' to test whether this 'IEnumerable(Of System.Xml.Linq.XElement)' is empty or not.",
+"location":  {
+"uri":  "C:\Projects\.Community\Corniel%20sonar-dotnet\analyzers\its\sources\Ember-MM\Ember%20Media%20Manager\clsTheming.vb",
+"region":  {
+"startLine":  230,
+"startColumn":  21,
+"endLine":  230,
+"endColumn":  26
+}
+}
+},
+{
+"id":  "S1155",
+"message":  "Use '.Any()' to test whether this 'IEnumerable(Of System.Xml.Linq.XElement)' is empty or not.",
+"location":  {
+"uri":  "C:\Projects\.Community\Corniel%20sonar-dotnet\analyzers\its\sources\Ember-MM\Ember%20Media%20Manager\clsTheming.vb",
+"region":  {
+"startLine":  241,
+"startColumn":  24,
+"endLine":  241,
+"endColumn":  29
+}
+}
+},
+{
+"id":  "S1155",
+"message":  "Use '.Any()' to test whether this 'IEnumerable(Of <anonymous type: Key backcolor As String, Key ipup As String, Key ipmid As String>)' is empty or not.",
+"location":  {
+"uri":  "C:\Projects\.Community\Corniel%20sonar-dotnet\analyzers\its\sources\Ember-MM\Ember%20Media%20Manager\clsTheming.vb",
+"region":  {
+"startLine":  256,
+"startColumn":  24,
+"endLine":  256,
+"endColumn":  29
+}
+}
+},
+{
+"id":  "S1155",
+"message":  "Use '.Any()' to test whether this 'IEnumerable(Of Ember_Media_Manager.Theming.Controls)' is empty or not.",
+"location":  {
+"uri":  "C:\Projects\.Community\Corniel%20sonar-dotnet\analyzers\its\sources\Ember-MM\Ember%20Media%20Manager\clsTheming.vb",
+"region":  {
+"startLine":  267,
+"startColumn":  33,
+"endLine":  267,
+"endColumn":  38
+}
+}
+},
+{
+"id":  "S1155",
+"message":  "Use '.Any()' to test whether this 'IEnumerable(Of Ember_Media_Manager.Theming.Controls)' is empty or not.",
+"location":  {
+"uri":  "C:\Projects\.Community\Corniel%20sonar-dotnet\analyzers\its\sources\Ember-MM\Ember%20Media%20Manager\clsTheming.vb",
+"region":  {
+"startLine":  307,
+"startColumn":  25,
+"endLine":  307,
+"endColumn":  30
+}
+}
+},
+{
+"id":  "S1155",
+"message":  "Use '.Any()' to test whether this 'IEnumerable(Of String)' is empty or not.",
+"location":  {
+"uri":  "C:\Projects\.Community\Corniel%20sonar-dotnet\analyzers\its\sources\Ember-MM\Ember%20Media%20Manager\dlgEditMovie.vb",
+"region":  {
+"startLine":  673,
+"startColumn":  34,
+"endLine":  673,
+"endColumn":  39
+}
+}
+},
+{
+"id":  "S1155",
+"message":  "Use '.Any()' to test whether this 'IEnumerable(Of System.Xml.Linq.XElement)' is empty or not.",
+"location":  {
+"uri":  "C:\Projects\.Community\Corniel%20sonar-dotnet\analyzers\its\sources\Ember-MM\Ember%20Media%20Manager\dlgEditMovie.vb",
+"region":  {
+"startLine":  1124,
+"startColumn":  335,
+"endLine":  1124,
+"endColumn":  340
+}
+}
+},
+{
+"id":  "S1155",
+"message":  "Use '.Any()' to test whether this 'IEnumerable(Of String)' is empty or not.",
+"location":  {
+"uri":  "C:\Projects\.Community\Corniel%20sonar-dotnet\analyzers\its\sources\Ember-MM\Ember%20Media%20Manager\dlgEditMovie.vb",
+"region":  {
+"startLine":  1228,
+"startColumn":  34,
+"endLine":  1228,
+"endColumn":  39
+}
+}
+},
+{
+"id":  "S1155",
+"message":  "Use '.Any()' to test whether this 'IEnumerable(Of System.Xml.Linq.XElement)' is empty or not.",
+"location":  {
+"uri":  "C:\Projects\.Community\Corniel%20sonar-dotnet\analyzers\its\sources\Ember-MM\Ember%20Media%20Manager\dlgEditShow.vb",
+"region":  {
+"startLine":  671,
+"startColumn":  235,
+"endLine":  671,
+"endColumn":  240
+}
+}
+},
+{
+"id":  "S1155",
+"message":  "Use '.Any()' to test whether this 'IEnumerable(Of EmberAPI.Settings.TVShowRegEx)' is empty or not.",
+"location":  {
+"uri":  "C:\Projects\.Community\Corniel%20sonar-dotnet\analyzers\its\sources\Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
+"region":  {
+"startLine":  383,
+"startColumn":  23,
+"endLine":  383,
+"endColumn":  28
+}
+}
+},
+{
+"id":  "S1155",
+"message":  "Use '.Any()' to test whether this 'IEnumerable(Of EmberAPI.Settings.TVShowRegEx)' is empty or not.",
+"location":  {
+"uri":  "C:\Projects\.Community\Corniel%20sonar-dotnet\analyzers\its\sources\Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
+"region":  {
+"startLine":  3152,
+"startColumn":  23,
+"endLine":  3152,
+"endColumn":  28
+}
+}
+}
+]
+}

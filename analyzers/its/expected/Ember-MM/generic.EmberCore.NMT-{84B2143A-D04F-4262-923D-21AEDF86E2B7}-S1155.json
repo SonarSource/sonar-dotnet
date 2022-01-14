@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S1155",
+"message":  "Use '.Any()' to test whether this 'IEnumerable(Of System.Data.DataRow)' is empty or not.",
+"location":  {
+"uri":  "C:\Projects\.Community\Corniel%20sonar-dotnet\analyzers\its\sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
+"region":  {
+"startLine":  433,
+"startColumn":  158,
+"endLine":  433,
+"endColumn":  163
+}
+}
+}
+]
+}

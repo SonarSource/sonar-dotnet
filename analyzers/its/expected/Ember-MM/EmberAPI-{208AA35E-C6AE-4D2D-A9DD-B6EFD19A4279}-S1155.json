@@ -1,0 +1,433 @@
+{
+"issues":  [
+{
+"id":  "S1155",
+"message":  "Use '.Any()' to test whether this 'IEnumerable(Of <anonymous type: Key control As String, Key Value As String>)' is empty or not.",
+"location":  {
+"uri":  "C:\Projects\.Community\Corniel%20sonar-dotnet\analyzers\its\sources\Ember-MM\EmberAPI\clsAPILocalization.vb",
+"region":  {
+"startLine":  182,
+"startColumn":  30,
+"endLine":  182,
+"endColumn":  35
+}
+}
+},
+{
+"id":  "S1155",
+"message":  "Use '.Any()' to test whether this 'IEnumerable(Of <anonymous type: Key id As String, Key Value As String>)' is empty or not.",
+"location":  {
+"uri":  "C:\Projects\.Community\Corniel%20sonar-dotnet\analyzers\its\sources\Ember-MM\EmberAPI\clsAPILocalization.vb",
+"region":  {
+"startLine":  231,
+"startColumn":  34,
+"endLine":  231,
+"endColumn":  39
+}
+}
+},
+{
+"id":  "S1155",
+"message":  "Use '.Any()' to test whether this 'IEnumerable(Of EmberAPI.MediaContainers.Set)' is empty or not.",
+"location":  {
+"uri":  "C:\Projects\.Community\Corniel%20sonar-dotnet\analyzers\its\sources\Ember-MM\EmberAPI\clsAPIMediaContainers.vb",
+"region":  {
+"startLine":  1119,
+"startColumn":  21,
+"endLine":  1119,
+"endColumn":  26
+}
+}
+},
+{
+"id":  "S1155",
+"message":  "Use '.Any()' to test whether this 'IEnumerable(Of EmberAPI.MediaContainers.Set)' is empty or not.",
+"location":  {
+"uri":  "C:\Projects\.Community\Corniel%20sonar-dotnet\analyzers\its\sources\Ember-MM\EmberAPI\clsAPIMediaContainers.vb",
+"region":  {
+"startLine":  1247,
+"startColumn":  21,
+"endLine":  1247,
+"endColumn":  26
+}
+}
+},
+{
+"id":  "S1155",
+"message":  "Use '.Any()' to test whether this 'IEnumerable(Of Integer)' is empty or not.",
+"location":  {
+"uri":  "C:\Projects\.Community\Corniel%20sonar-dotnet\analyzers\its\sources\Ember-MM\EmberAPI\clsAPIScanner.vb",
+"region":  {
+"startLine":  124,
+"startColumn":  111,
+"endLine":  124,
+"endColumn":  116
+}
+}
+},
+{
+"id":  "S1155",
+"message":  "Use '.Any()' to test whether this 'IEnumerable(Of EmberAPI.Scanner.Seasons)' is empty or not.",
+"location":  {
+"uri":  "C:\Projects\.Community\Corniel%20sonar-dotnet\analyzers\its\sources\Ember-MM\EmberAPI\clsAPIScanner.vb",
+"region":  {
+"startLine":  124,
+"startColumn":  122,
+"endLine":  124,
+"endColumn":  127
+}
+}
+},
+{
+"id":  "S1155",
+"message":  "Use '.Any()' to test whether this 'IEnumerable(Of System.IO.FileInfo)' is empty or not.",
+"location":  {
+"uri":  "C:\Projects\.Community\Corniel%20sonar-dotnet\analyzers\its\sources\Ember-MM\EmberAPI\clsAPIScanner.vb",
+"region":  {
+"startLine":  791,
+"startColumn":  77,
+"endLine":  791,
+"endColumn":  82
+}
+}
+},
+{
+"id":  "S1155",
+"message":  "Use '.Any()' to test whether this 'IEnumerable(Of System.IO.FileInfo)' is empty or not.",
+"location":  {
+"uri":  "C:\Projects\.Community\Corniel%20sonar-dotnet\analyzers\its\sources\Ember-MM\EmberAPI\clsAPIScanner.vb",
+"region":  {
+"startLine":  837,
+"startColumn":  139,
+"endLine":  837,
+"endColumn":  144
+}
+}
+},
+{
+"id":  "S1155",
+"message":  "Use '.Any()' to test whether this 'IEnumerable(Of String)' is empty or not.",
+"location":  {
+"uri":  "C:\Projects\.Community\Corniel%20sonar-dotnet\analyzers\its\sources\Ember-MM\EmberAPI\clsAPIScanner.vb",
+"region":  {
+"startLine":  837,
+"startColumn":  150,
+"endLine":  837,
+"endColumn":  155
+}
+}
+},
+{
+"id":  "S1155",
+"message":  "Use '.Any()' to test whether this 'IEnumerable(Of System.IO.FileInfo)' is empty or not.",
+"location":  {
+"uri":  "C:\Projects\.Community\Corniel%20sonar-dotnet\analyzers\its\sources\Ember-MM\EmberAPI\clsAPIScanner.vb",
+"region":  {
+"startLine":  953,
+"startColumn":  122,
+"endLine":  953,
+"endColumn":  127
+}
+}
+},
+{
+"id":  "S1155",
+"message":  "Use '.Any()' to test whether this 'IEnumerable(Of System.IO.DirectoryInfo)' is empty or not.",
+"location":  {
+"uri":  "C:\Projects\.Community\Corniel%20sonar-dotnet\analyzers\its\sources\Ember-MM\EmberAPI\clsAPIScanner.vb",
+"region":  {
+"startLine":  976,
+"startColumn":  42,
+"endLine":  976,
+"endColumn":  47
+}
+}
+},
+{
+"id":  "S1155",
+"message":  "Use '.Any()' to test whether this 'IEnumerable(Of System.IO.FileInfo)' is empty or not.",
+"location":  {
+"uri":  "C:\Projects\.Community\Corniel%20sonar-dotnet\analyzers\its\sources\Ember-MM\EmberAPI\clsAPIScanner.vb",
+"region":  {
+"startLine":  976,
+"startColumn":  75,
+"endLine":  976,
+"endColumn":  80
+}
+}
+},
+{
+"id":  "S1155",
+"message":  "Use '.Any()' to test whether this 'IEnumerable(Of System.IO.DirectoryInfo)' is empty or not.",
+"location":  {
+"uri":  "C:\Projects\.Community\Corniel%20sonar-dotnet\analyzers\its\sources\Ember-MM\EmberAPI\clsAPIScanner.vb",
+"region":  {
+"startLine":  976,
+"startColumn":  177,
+"endLine":  976,
+"endColumn":  182
+}
+}
+},
+{
+"id":  "S1155",
+"message":  "Use '.Any()' to test whether this 'IEnumerable(Of System.Xml.Linq.XNode)' is empty or not.",
+"location":  {
+"uri":  "C:\Projects\.Community\Corniel%20sonar-dotnet\analyzers\its\sources\Ember-MM\EmberAPI\clsAPIXML.vb",
+"region":  {
+"startLine":  245,
+"startColumn":  27,
+"endLine":  245,
+"endColumn":  32
+}
+}
+},
+{
+"id":  "S1155",
+"message":  "Use '.Any()' to test whether this 'IEnumerable(Of String)' is empty or not.",
+"location":  {
+"uri":  "C:\Projects\.Community\Corniel%20sonar-dotnet\analyzers\its\sources\Ember-MM\EmberAPI\clsAPIXML.vb",
+"region":  {
+"startLine":  252,
+"startColumn":  29,
+"endLine":  252,
+"endColumn":  34
+}
+}
+},
+{
+"id":  "S1155",
+"message":  "Use '.Any()' to test whether this 'IEnumerable(Of String)' is empty or not.",
+"location":  {
+"uri":  "C:\Projects\.Community\Corniel%20sonar-dotnet\analyzers\its\sources\Ember-MM\EmberAPI\clsAPIXML.vb",
+"region":  {
+"startLine":  257,
+"startColumn":  27,
+"endLine":  257,
+"endColumn":  32
+}
+}
+},
+{
+"id":  "S1155",
+"message":  "Use '.Any()' to test whether this 'IEnumerable(Of String)' is empty or not.",
+"location":  {
+"uri":  "C:\Projects\.Community\Corniel%20sonar-dotnet\analyzers\its\sources\Ember-MM\EmberAPI\clsAPIXML.vb",
+"region":  {
+"startLine":  284,
+"startColumn":  27,
+"endLine":  284,
+"endColumn":  32
+}
+}
+},
+{
+"id":  "S1155",
+"message":  "Use '.Any()' to test whether this 'IEnumerable(Of <anonymous type: Key searchstring As String, Key language As String>)' is empty or not.",
+"location":  {
+"uri":  "C:\Projects\.Community\Corniel%20sonar-dotnet\analyzers\its\sources\Ember-MM\EmberAPI\clsAPIXML.vb",
+"region":  {
+"startLine":  290,
+"startColumn":  27,
+"endLine":  290,
+"endColumn":  32
+}
+}
+},
+{
+"id":  "S1155",
+"message":  "Use '.Any()' to test whether this 'IEnumerable(Of System.Xml.Linq.XNode)' is empty or not.",
+"location":  {
+"uri":  "C:\Projects\.Community\Corniel%20sonar-dotnet\analyzers\its\sources\Ember-MM\EmberAPI\clsAPIXML.vb",
+"region":  {
+"startLine":  317,
+"startColumn":  28,
+"endLine":  317,
+"endColumn":  33
+}
+}
+},
+{
+"id":  "S1155",
+"message":  "Use '.Any()' to test whether this 'IEnumerable(Of System.Xml.Linq.XElement)' is empty or not.",
+"location":  {
+"uri":  "C:\Projects\.Community\Corniel%20sonar-dotnet\analyzers\its\sources\Ember-MM\EmberAPI\clsAPIXML.vb",
+"region":  {
+"startLine":  322,
+"startColumn":  322,
+"endLine":  322,
+"endColumn":  327
+}
+}
+},
+{
+"id":  "S1155",
+"message":  "Use '.Any()' to test whether this 'IEnumerable(Of String)' is empty or not.",
+"location":  {
+"uri":  "C:\Projects\.Community\Corniel%20sonar-dotnet\analyzers\its\sources\Ember-MM\EmberAPI\clsAPIXML.vb",
+"region":  {
+"startLine":  324,
+"startColumn":  32,
+"endLine":  324,
+"endColumn":  37
+}
+}
+},
+{
+"id":  "S1155",
+"message":  "Use '.Any()' to test whether this 'IEnumerable(Of String)' is empty or not.",
+"location":  {
+"uri":  "C:\Projects\.Community\Corniel%20sonar-dotnet\analyzers\its\sources\Ember-MM\EmberAPI\clsAPIXML.vb",
+"region":  {
+"startLine":  329,
+"startColumn":  32,
+"endLine":  329,
+"endColumn":  37
+}
+}
+},
+{
+"id":  "S1155",
+"message":  "Use '.Any()' to test whether this 'IEnumerable(Of System.Xml.Linq.XElement)' is empty or not.",
+"location":  {
+"uri":  "C:\Projects\.Community\Corniel%20sonar-dotnet\analyzers\its\sources\Ember-MM\EmberAPI\clsAPIXML.vb",
+"region":  {
+"startLine":  351,
+"startColumn":  317,
+"endLine":  351,
+"endColumn":  322
+}
+}
+},
+{
+"id":  "S1155",
+"message":  "Use '.Any()' to test whether this 'IEnumerable(Of String)' is empty or not.",
+"location":  {
+"uri":  "C:\Projects\.Community\Corniel%20sonar-dotnet\analyzers\its\sources\Ember-MM\EmberAPI\clsAPIXML.vb",
+"region":  {
+"startLine":  353,
+"startColumn":  28,
+"endLine":  353,
+"endColumn":  33
+}
+}
+},
+{
+"id":  "S1155",
+"message":  "Use '.Any()' to test whether this 'IEnumerable(Of String)' is empty or not.",
+"location":  {
+"uri":  "C:\Projects\.Community\Corniel%20sonar-dotnet\analyzers\its\sources\Ember-MM\EmberAPI\clsAPIXML.vb",
+"region":  {
+"startLine":  358,
+"startColumn":  28,
+"endLine":  358,
+"endColumn":  33
+}
+}
+},
+{
+"id":  "S1155",
+"message":  "Use '.Any()' to test whether this 'IEnumerable(Of String)' is empty or not.",
+"location":  {
+"uri":  "C:\Projects\.Community\Corniel%20sonar-dotnet\analyzers\its\sources\Ember-MM\EmberAPI\clsAPIXML.vb",
+"region":  {
+"startLine":  373,
+"startColumn":  24,
+"endLine":  373,
+"endColumn":  29
+}
+}
+},
+{
+"id":  "S1155",
+"message":  "Use '.Any()' to test whether this 'IEnumerable(Of System.Xml.Linq.XNode)' is empty or not.",
+"location":  {
+"uri":  "C:\Projects\.Community\Corniel%20sonar-dotnet\analyzers\its\sources\Ember-MM\EmberAPI\clsAPIXML.vb",
+"region":  {
+"startLine":  400,
+"startColumn":  28,
+"endLine":  400,
+"endColumn":  33
+}
+}
+},
+{
+"id":  "S1155",
+"message":  "Use '.Any()' to test whether this 'IEnumerable(Of System.Xml.Linq.XElement)' is empty or not.",
+"location":  {
+"uri":  "C:\Projects\.Community\Corniel%20sonar-dotnet\analyzers\its\sources\Ember-MM\EmberAPI\clsAPIXML.vb",
+"region":  {
+"startLine":  405,
+"startColumn":  169,
+"endLine":  405,
+"endColumn":  174
+}
+}
+},
+{
+"id":  "S1155",
+"message":  "Use '.Any()' to test whether this 'IEnumerable(Of String)' is empty or not.",
+"location":  {
+"uri":  "C:\Projects\.Community\Corniel%20sonar-dotnet\analyzers\its\sources\Ember-MM\EmberAPI\clsAPIXML.vb",
+"region":  {
+"startLine":  407,
+"startColumn":  32,
+"endLine":  407,
+"endColumn":  37
+}
+}
+},
+{
+"id":  "S1155",
+"message":  "Use '.Any()' to test whether this 'IEnumerable(Of String)' is empty or not.",
+"location":  {
+"uri":  "C:\Projects\.Community\Corniel%20sonar-dotnet\analyzers\its\sources\Ember-MM\EmberAPI\clsAPIXML.vb",
+"region":  {
+"startLine":  412,
+"startColumn":  32,
+"endLine":  412,
+"endColumn":  37
+}
+}
+},
+{
+"id":  "S1155",
+"message":  "Use '.Any()' to test whether this 'IEnumerable(Of System.Xml.Linq.XElement)' is empty or not.",
+"location":  {
+"uri":  "C:\Projects\.Community\Corniel%20sonar-dotnet\analyzers\its\sources\Ember-MM\EmberAPI\clsAPIXML.vb",
+"region":  {
+"startLine":  434,
+"startColumn":  168,
+"endLine":  434,
+"endColumn":  173
+}
+}
+},
+{
+"id":  "S1155",
+"message":  "Use '.Any()' to test whether this 'IEnumerable(Of String)' is empty or not.",
+"location":  {
+"uri":  "C:\Projects\.Community\Corniel%20sonar-dotnet\analyzers\its\sources\Ember-MM\EmberAPI\clsAPIXML.vb",
+"region":  {
+"startLine":  436,
+"startColumn":  28,
+"endLine":  436,
+"endColumn":  33
+}
+}
+},
+{
+"id":  "S1155",
+"message":  "Use '.Any()' to test whether this 'IEnumerable(Of String)' is empty or not.",
+"location":  {
+"uri":  "C:\Projects\.Community\Corniel%20sonar-dotnet\analyzers\its\sources\Ember-MM\EmberAPI\clsAPIXML.vb",
+"region":  {
+"startLine":  441,
+"startColumn":  28,
+"endLine":  441,
+"endColumn":  33
+}
+}
+}
+]
+}
