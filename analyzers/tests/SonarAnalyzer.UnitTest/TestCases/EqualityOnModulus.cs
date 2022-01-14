@@ -38,6 +38,9 @@ namespace Tests.Diagnostics
             y = someString.Length % 2 == 1; // Compliant - Length property is > 0;
 
             y = FakeCount() % 2 == 1; // Noncompliant
+
+            y = (enumerableLong.Count() % 2) == 1; // Compliant
+            y = 1 == (x % 2); // Noncompliant {{The result of this modulus operation may not be positive.}}
         }
 
         public int FakeCount() => -1;

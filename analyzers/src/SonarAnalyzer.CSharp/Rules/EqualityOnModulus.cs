@@ -43,7 +43,7 @@ namespace SonarAnalyzer.Rules.CSharp
         private const string LongLengthName = nameof(Array.LongLength);
         private const string ListCapacityName = nameof(List<object>.Capacity);
 
-        private static readonly string[] CollectionSizePropertyOrMethodNames = { CountName, LongCountName, LengthName, LongLengthName, ListCapacityName};
+        private static readonly string[] CollectionSizePropertyOrMethodNames = { CountName, LongCountName, LengthName, LongLengthName, ListCapacityName };
 
         private static readonly CSharpExpressionNumericConverter ExpressionNumericConverter = new();
 
