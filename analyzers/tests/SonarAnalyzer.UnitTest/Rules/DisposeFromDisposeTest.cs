@@ -18,8 +18,6 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System.Collections.Immutable;
-using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.Rules.CSharp;
@@ -30,6 +28,8 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class DisposeFromDisposeTest
     {
+        private readonly VerifierBuilder builder = new VerifierBuilder<DisposeFromDispose>();
+
         [TestMethod]
         public void DisposeFromDispose_CSharp7_2() =>
             // Readonly structs have been introduced in C# 7.2.
@@ -41,16 +41,17 @@ namespace SonarAnalyzer.UnitTest.Rules
 
         [TestMethod]
         public void DisposeFromDispose_CSharp8() =>
-            OldVerifier.VerifyAnalyzer(@"TestCases\DisposeFromDispose.CSharp8.cs", new DisposeFromDispose(), ParseOptionsHelper.FromCSharp8);
+            builder.AddPaths("DisposeFromDispose.CSharp8.cs").WithOptions(ParseOptionsHelper.FromCSharp8).Verify();
 
 #if NET
         [TestMethod]
         public void DisposeFromDispose_CSharp9() =>
-            OldVerifier.VerifyAnalyzerFromCSharp9Console(new[] { @"TestCases\DisposeFromDispose.CSharp9.Part1.cs", @"TestCases\DisposeFromDispose.CSharp9.Part2.cs", }, new DisposeFromDispose());
+            builder.AddPaths("DisposeFromDispose.CSharp9.Part1.cs", "DisposeFromDispose.CSharp9.Part2.cs").WithTopLevelStatements().Verify();
 #endif
+
         [TestMethod]
         public void DisposeFromDispose_CSharp10() =>
-            OldVerifier.VerifyAnalyzerFromCSharp10Console(@"TestCases\DisposeFromDispose.CSharp10.cs", new DisposeFromDispose());
+            builder.AddPaths("DisposeFromDispose.CSharp10.cs").WithTopLevelStatements().WithOptions(ParseOptionsHelper.FromCSharp10).Verify();
 
     }
 }
