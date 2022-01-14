@@ -4,7 +4,7 @@
 "id":  "S1155",
 "message":  "Use '.Any()' to test whether this 'IEnumerable(Of System.Xml.Linq.XElement)' is empty or not.",
 "location":  {
-"uri":  "C:\Projects\.Community\Corniel%20sonar-dotnet\analyzers\its\sources\Ember-MM\Ember%20Media%20Manager\clsTheming.vb",
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\clsTheming.vb",
 "region":  {
 "startLine":  230,
 "startColumn":  21,
@@ -17,7 +17,7 @@
 "id":  "S1155",
 "message":  "Use '.Any()' to test whether this 'IEnumerable(Of System.Xml.Linq.XElement)' is empty or not.",
 "location":  {
-"uri":  "C:\Projects\.Community\Corniel%20sonar-dotnet\analyzers\its\sources\Ember-MM\Ember%20Media%20Manager\clsTheming.vb",
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\clsTheming.vb",
 "region":  {
 "startLine":  241,
 "startColumn":  24,
@@ -30,7 +30,7 @@
 "id":  "S1155",
 "message":  "Use '.Any()' to test whether this 'IEnumerable(Of <anonymous type: Key backcolor As String, Key ipup As String, Key ipmid As String>)' is empty or not.",
 "location":  {
-"uri":  "C:\Projects\.Community\Corniel%20sonar-dotnet\analyzers\its\sources\Ember-MM\Ember%20Media%20Manager\clsTheming.vb",
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\clsTheming.vb",
 "region":  {
 "startLine":  256,
 "startColumn":  24,
@@ -43,7 +43,7 @@
 "id":  "S1155",
 "message":  "Use '.Any()' to test whether this 'IEnumerable(Of Ember_Media_Manager.Theming.Controls)' is empty or not.",
 "location":  {
-"uri":  "C:\Projects\.Community\Corniel%20sonar-dotnet\analyzers\its\sources\Ember-MM\Ember%20Media%20Manager\clsTheming.vb",
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\clsTheming.vb",
 "region":  {
 "startLine":  267,
 "startColumn":  33,
@@ -56,7 +56,7 @@
 "id":  "S1155",
 "message":  "Use '.Any()' to test whether this 'IEnumerable(Of Ember_Media_Manager.Theming.Controls)' is empty or not.",
 "location":  {
-"uri":  "C:\Projects\.Community\Corniel%20sonar-dotnet\analyzers\its\sources\Ember-MM\Ember%20Media%20Manager\clsTheming.vb",
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\clsTheming.vb",
 "region":  {
 "startLine":  307,
 "startColumn":  25,
@@ -69,7 +69,7 @@
 "id":  "S1155",
 "message":  "Use '.Any()' to test whether this 'IEnumerable(Of String)' is empty or not.",
 "location":  {
-"uri":  "C:\Projects\.Community\Corniel%20sonar-dotnet\analyzers\its\sources\Ember-MM\Ember%20Media%20Manager\dlgEditMovie.vb",
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgEditMovie.vb",
 "region":  {
 "startLine":  673,
 "startColumn":  34,
@@ -82,7 +82,7 @@
 "id":  "S1155",
 "message":  "Use '.Any()' to test whether this 'IEnumerable(Of System.Xml.Linq.XElement)' is empty or not.",
 "location":  {
-"uri":  "C:\Projects\.Community\Corniel%20sonar-dotnet\analyzers\its\sources\Ember-MM\Ember%20Media%20Manager\dlgEditMovie.vb",
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgEditMovie.vb",
 "region":  {
 "startLine":  1124,
 "startColumn":  335,
@@ -95,7 +95,7 @@
 "id":  "S1155",
 "message":  "Use '.Any()' to test whether this 'IEnumerable(Of String)' is empty or not.",
 "location":  {
-"uri":  "C:\Projects\.Community\Corniel%20sonar-dotnet\analyzers\its\sources\Ember-MM\Ember%20Media%20Manager\dlgEditMovie.vb",
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgEditMovie.vb",
 "region":  {
 "startLine":  1228,
 "startColumn":  34,
@@ -108,7 +108,7 @@
 "id":  "S1155",
 "message":  "Use '.Any()' to test whether this 'IEnumerable(Of System.Xml.Linq.XElement)' is empty or not.",
 "location":  {
-"uri":  "C:\Projects\.Community\Corniel%20sonar-dotnet\analyzers\its\sources\Ember-MM\Ember%20Media%20Manager\dlgEditShow.vb",
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgEditShow.vb",
 "region":  {
 "startLine":  671,
 "startColumn":  235,
@@ -121,7 +121,7 @@
 "id":  "S1155",
 "message":  "Use '.Any()' to test whether this 'IEnumerable(Of EmberAPI.Settings.TVShowRegEx)' is empty or not.",
 "location":  {
-"uri":  "C:\Projects\.Community\Corniel%20sonar-dotnet\analyzers\its\sources\Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
 "region":  {
 "startLine":  383,
 "startColumn":  23,
@@ -134,7 +134,7 @@
 "id":  "S1155",
 "message":  "Use '.Any()' to test whether this 'IEnumerable(Of EmberAPI.Settings.TVShowRegEx)' is empty or not.",
 "location":  {
-"uri":  "C:\Projects\.Community\Corniel%20sonar-dotnet\analyzers\its\sources\Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
 "region":  {
 "startLine":  3152,
 "startColumn":  23,

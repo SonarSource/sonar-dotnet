@@ -4,7 +4,7 @@
 "id":  "S1155",
 "message":  "Use '.Any()' to test whether this 'IEnumerable(Of String)' is empty or not.",
 "location":  {
-"uri":  "C:\Projects\.Community\Corniel%20sonar-dotnet\analyzers\its\sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScraperSettings.vb",
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScraperSettings.vb",
 "region":  {
 "startLine":  183,
 "startColumn":  67,
@@ -17,7 +17,7 @@
 "id":  "S1155",
 "message":  "Use '.Any()' to test whether this 'IEnumerable(Of EmberScraperModule.XMLScraper.ScraperLib.ScraperSetting)' is empty or not.",
 "location":  {
-"uri":  "C:\Projects\.Community\Corniel%20sonar-dotnet\analyzers\its\sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScraperSettings.vb",
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScraperSettings.vb",
 "region":  {
 "startLine":  645,
 "startColumn":  59,
@@ -30,7 +30,7 @@
 "id":  "S1155",
 "message":  "Use '.Any()' to test whether this 'IEnumerable(Of EmberScraperModule.XMLScraper.ScraperLib.ScraperSetting)' is empty or not.",
 "location":  {
-"uri":  "C:\Projects\.Community\Corniel%20sonar-dotnet\analyzers\its\sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScraperSettings.vb",
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScraperSettings.vb",
 "region":  {
 "startLine":  650,
 "startColumn":  59,
@@ -43,7 +43,7 @@
 "id":  "S1155",
 "message":  "Use '.Any()' to test whether this 'IEnumerable(Of System.Xml.Linq.XElement)' is empty or not.",
 "location":  {
-"uri":  "C:\Projects\.Community\Corniel%20sonar-dotnet\analyzers\its\sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperXML\GenericScraper.vb",
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperXML\GenericScraper.vb",
 "region":  {
 "startLine":  487,
 "startColumn":  35,
@@ -56,7 +56,7 @@
 "id":  "S1155",
 "message":  "Use '.Any()' to test whether this 'IEnumerable(Of System.Xml.Linq.XElement)' is empty or not.",
 "location":  {
-"uri":  "C:\Projects\.Community\Corniel%20sonar-dotnet\analyzers\its\sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\Utilities\Util.vb",
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\Utilities\Util.vb",
 "region":  {
 "startLine":  200,
 "startColumn":  40,

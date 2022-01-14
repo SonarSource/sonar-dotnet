@@ -4,7 +4,7 @@
 "id":  "S1155",
 "message":  "Use '.Any()' to test whether this 'IEnumerable(Of EmberAPI.MediaContainers.Image)' is empty or not.",
 "location":  {
-"uri":  "C:\Projects\.Community\Corniel%20sonar-dotnet\analyzers\its\sources\Ember-MM\Addons\scraper.EmberCore\Scraper\clsScrapeImages.vb",
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\Scraper\clsScrapeImages.vb",
 "region":  {
 "startLine":  286,
 "startColumn":  14,
@@ -17,7 +17,7 @@
 "id":  "S1155",
 "message":  "Use '.Any()' to test whether this 'IEnumerable(Of EmberAPI.MediaContainers.Image)' is empty or not.",
 "location":  {
-"uri":  "C:\Projects\.Community\Corniel%20sonar-dotnet\analyzers\its\sources\Ember-MM\Addons\scraper.EmberCore\Scraper\clsScrapeImages.vb",
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\Scraper\clsScrapeImages.vb",
 "region":  {
 "startLine":  292,
 "startColumn":  14,
@@ -30,7 +30,7 @@
 "id":  "S1155",
 "message":  "Use '.Any()' to test whether this 'IEnumerable(Of EmberAPI.MediaContainers.Image)' is empty or not.",
 "location":  {
-"uri":  "C:\Projects\.Community\Corniel%20sonar-dotnet\analyzers\its\sources\Ember-MM\Addons\scraper.EmberCore\Scraper\clsScrapeImages.vb",
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\Scraper\clsScrapeImages.vb",
 "region":  {
 "startLine":  298,
 "startColumn":  14,
@@ -43,7 +43,7 @@
 "id":  "S1155",
 "message":  "Use '.Any()' to test whether this 'IEnumerable(Of EmberAPI.MediaContainers.Image)' is empty or not.",
 "location":  {
-"uri":  "C:\Projects\.Community\Corniel%20sonar-dotnet\analyzers\its\sources\Ember-MM\Addons\scraper.EmberCore\Scraper\clsScrapeImages.vb",
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\Scraper\clsScrapeImages.vb",
 "region":  {
 "startLine":  304,
 "startColumn":  14,
@@ -56,7 +56,7 @@
 "id":  "S1155",
 "message":  "Use '.Any()' to test whether this 'IEnumerable(Of EmberAPI.MediaContainers.Image)' is empty or not.",
 "location":  {
-"uri":  "C:\Projects\.Community\Corniel%20sonar-dotnet\analyzers\its\sources\Ember-MM\Addons\scraper.EmberCore\Scraper\clsScrapeImages.vb",
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\Scraper\clsScrapeImages.vb",
 "region":  {
 "startLine":  619,
 "startColumn":  14,
@@ -69,7 +69,7 @@
 "id":  "S1155",
 "message":  "Use '.Any()' to test whether this 'IEnumerable(Of EmberAPI.MediaContainers.Image)' is empty or not.",
 "location":  {
-"uri":  "C:\Projects\.Community\Corniel%20sonar-dotnet\analyzers\its\sources\Ember-MM\Addons\scraper.EmberCore\Scraper\clsScrapeImages.vb",
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\Scraper\clsScrapeImages.vb",
 "region":  {
 "startLine":  625,
 "startColumn":  14,
@@ -82,7 +82,7 @@
 "id":  "S1155",
 "message":  "Use '.Any()' to test whether this 'IEnumerable(Of EmberAPI.MediaContainers.Image)' is empty or not.",
 "location":  {
-"uri":  "C:\Projects\.Community\Corniel%20sonar-dotnet\analyzers\its\sources\Ember-MM\Addons\scraper.EmberCore\Scraper\clsScrapeImages.vb",
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\Scraper\clsScrapeImages.vb",
 "region":  {
 "startLine":  631,
 "startColumn":  14,
@@ -95,7 +95,7 @@
 "id":  "S1155",
 "message":  "Use '.Any()' to test whether this 'IEnumerable(Of String)' is empty or not.",
 "location":  {
-"uri":  "C:\Projects\.Community\Corniel%20sonar-dotnet\analyzers\its\sources\Ember-MM\Addons\scraper.EmberCore\Scraper\clsScrapeIMDB.vb",
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\Scraper\clsScrapeIMDB.vb",
 "region":  {
 "startLine":  228,
 "startColumn":  41,
@@ -108,7 +108,7 @@
 "id":  "S1155",
 "message":  "Use '.Any()' to test whether this 'IEnumerable(Of String)' is empty or not.",
 "location":  {
-"uri":  "C:\Projects\.Community\Corniel%20sonar-dotnet\analyzers\its\sources\Ember-MM\Addons\scraper.EmberCore\Scraper\clsScrapeIMDB.vb",
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\Scraper\clsScrapeIMDB.vb",
 "region":  {
 "startLine":  371,
 "startColumn":  32,
@@ -121,7 +121,7 @@
 "id":  "S1155",
 "message":  "Use '.Any()' to test whether this 'IEnumerable(Of String)' is empty or not.",
 "location":  {
-"uri":  "C:\Projects\.Community\Corniel%20sonar-dotnet\analyzers\its\sources\Ember-MM\Addons\scraper.EmberCore\Scraper\clsScrapeIMDB.vb",
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\Scraper\clsScrapeIMDB.vb",
 "region":  {
 "startLine":  391,
 "startColumn":  32,
@@ -134,7 +134,7 @@
 "id":  "S1155",
 "message":  "Use '.Any()' to test whether this 'IEnumerable(Of String)' is empty or not.",
 "location":  {
-"uri":  "C:\Projects\.Community\Corniel%20sonar-dotnet\analyzers\its\sources\Ember-MM\Addons\scraper.EmberCore\Scraper\clsScrapeIMDB.vb",
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\Scraper\clsScrapeIMDB.vb",
 "region":  {
 "startLine":  415,
 "startColumn":  40,
@@ -147,7 +147,7 @@
 "id":  "S1155",
 "message":  "Use '.Any()' to test whether this 'IEnumerable(Of String)' is empty or not.",
 "location":  {
-"uri":  "C:\Projects\.Community\Corniel%20sonar-dotnet\analyzers\its\sources\Ember-MM\Addons\scraper.EmberCore\Scraper\clsScrapeIMDB.vb",
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\Scraper\clsScrapeIMDB.vb",
 "region":  {
 "startLine":  542,
 "startColumn":  30,
@@ -160,7 +160,7 @@
 "id":  "S1155",
 "message":  "Use '.Any()' to test whether this 'IEnumerable(Of String)' is empty or not.",
 "location":  {
-"uri":  "C:\Projects\.Community\Corniel%20sonar-dotnet\analyzers\its\sources\Ember-MM\Addons\scraper.EmberCore\Scraper\clsScrapeIMDB.vb",
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\Scraper\clsScrapeIMDB.vb",
 "region":  {
 "startLine":  571,
 "startColumn":  39,
@@ -173,7 +173,7 @@
 "id":  "S1155",
 "message":  "Use '.Any()' to test whether this 'IEnumerable(Of String)' is empty or not.",
 "location":  {
-"uri":  "C:\Projects\.Community\Corniel%20sonar-dotnet\analyzers\its\sources\Ember-MM\Addons\scraper.EmberCore\Scraper\clsScrapeIMDB.vb",
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\Scraper\clsScrapeIMDB.vb",
 "region":  {
 "startLine":  583,
 "startColumn":  39,
@@ -186,7 +186,7 @@
 "id":  "S1155",
 "message":  "Use '.Any()' to test whether this 'IEnumerable(Of String)' is empty or not.",
 "location":  {
-"uri":  "C:\Projects\.Community\Corniel%20sonar-dotnet\analyzers\its\sources\Ember-MM\Addons\scraper.EmberCore\Scraper\clsScrapeIMDB.vb",
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\Scraper\clsScrapeIMDB.vb",
 "region":  {
 "startLine":  601,
 "startColumn":  35,
@@ -199,7 +199,7 @@
 "id":  "S1155",
 "message":  "Use '.Any()' to test whether this 'IEnumerable(Of String)' is empty or not.",
 "location":  {
-"uri":  "C:\Projects\.Community\Corniel%20sonar-dotnet\analyzers\its\sources\Ember-MM\Addons\scraper.EmberCore\Scraper\clsScrapeOFDB.vb",
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\Scraper\clsScrapeOFDB.vb",
 "region":  {
 "startLine":  203,
 "startColumn":  40,
@@ -212,7 +212,7 @@
 "id":  "S1155",
 "message":  "Use '.Any()' to test whether this 'IEnumerable(Of System.Xml.Linq.XElement)' is empty or not.",
 "location":  {
-"uri":  "C:\Projects\.Community\Corniel%20sonar-dotnet\analyzers\its\sources\Ember-MM\Addons\scraper.EmberCore\Scraper\clsScrapeTMDB.vb",
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\Scraper\clsScrapeTMDB.vb",
 "region":  {
 "startLine":  93,
 "startColumn":  43,
@@ -225,7 +225,7 @@
 "id":  "S1155",
 "message":  "Use '.Any()' to test whether this 'IEnumerable(Of System.Xml.Linq.XElement)' is empty or not.",
 "location":  {
-"uri":  "C:\Projects\.Community\Corniel%20sonar-dotnet\analyzers\its\sources\Ember-MM\Addons\scraper.EmberCore\Scraper\clsScrapeTMDB.vb",
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\Scraper\clsScrapeTMDB.vb",
 "region":  {
 "startLine":  103,
 "startColumn":  43,
@@ -238,7 +238,7 @@
 "id":  "S1155",
 "message":  "Use '.Any()' to test whether this 'IEnumerable(Of System.Xml.Linq.XElement)' is empty or not.",
 "location":  {
-"uri":  "C:\Projects\.Community\Corniel%20sonar-dotnet\analyzers\its\sources\Ember-MM\Addons\scraper.EmberCore\Scraper\clsScrapeTMDB.vb",
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\Scraper\clsScrapeTMDB.vb",
 "region":  {
 "startLine":  153,
 "startColumn":  33,
@@ -251,7 +251,7 @@
 "id":  "S1155",
 "message":  "Use '.Any()' to test whether this 'IEnumerable(Of System.Collections.Generic.IEnumerable(Of System.Xml.Linq.XElement))' is empty or not.",
 "location":  {
-"uri":  "C:\Projects\.Community\Corniel%20sonar-dotnet\analyzers\its\sources\Ember-MM\Addons\scraper.EmberCore\Scraper\clsScrapeTMDB.vb",
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\Scraper\clsScrapeTMDB.vb",
 "region":  {
 "startLine":  179,
 "startColumn":  49,
@@ -264,7 +264,7 @@
 "id":  "S1155",
 "message":  "Use '.Any()' to test whether this 'IEnumerable(Of System.Xml.Linq.XElement)' is empty or not.",
 "location":  {
-"uri":  "C:\Projects\.Community\Corniel%20sonar-dotnet\analyzers\its\sources\Ember-MM\Addons\scraper.EmberCore\TVScraper\clsScrapeTVDB.vb",
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\TVScraper\clsScrapeTVDB.vb",
 "region":  {
 "startLine":  343,
 "startColumn":  390,
@@ -277,7 +277,7 @@
 "id":  "S1155",
 "message":  "Use '.Any()' to test whether this 'IEnumerable(Of System.Xml.Linq.XElement)' is empty or not.",
 "location":  {
-"uri":  "C:\Projects\.Community\Corniel%20sonar-dotnet\analyzers\its\sources\Ember-MM\Addons\scraper.EmberCore\TVScraper\clsScrapeTVDB.vb",
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\TVScraper\clsScrapeTVDB.vb",
 "region":  {
 "startLine":  349,
 "startColumn":  278,
@@ -290,7 +290,7 @@
 "id":  "S1155",
 "message":  "Use '.Any()' to test whether this 'IEnumerable(Of System.Xml.Linq.XElement)' is empty or not.",
 "location":  {
-"uri":  "C:\Projects\.Community\Corniel%20sonar-dotnet\analyzers\its\sources\Ember-MM\Addons\scraper.EmberCore\TVScraper\clsScrapeTVDB.vb",
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\TVScraper\clsScrapeTVDB.vb",
 "region":  {
 "startLine":  355,
 "startColumn":  272,
@@ -303,7 +303,7 @@
 "id":  "S1155",
 "message":  "Use '.Any()' to test whether this 'IEnumerable(Of EmberScraperModule.Scraper.TVDBSeasonImage)' is empty or not.",
 "location":  {
-"uri":  "C:\Projects\.Community\Corniel%20sonar-dotnet\analyzers\its\sources\Ember-MM\Addons\scraper.EmberCore\TVScraper\clsScrapeTVDB.vb",
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\TVScraper\clsScrapeTVDB.vb",
 "region":  {
 "startLine":  860,
 "startColumn":  41,
@@ -316,7 +316,7 @@
 "id":  "S1155",
 "message":  "Use '.Any()' to test whether this 'IEnumerable(Of System.Xml.Linq.XElement)' is empty or not.",
 "location":  {
-"uri":  "C:\Projects\.Community\Corniel%20sonar-dotnet\analyzers\its\sources\Ember-MM\Addons\scraper.EmberCore\TVScraper\clsScrapeTVDB.vb",
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\TVScraper\clsScrapeTVDB.vb",
 "region":  {
 "startLine":  981,
 "startColumn":  174,
@@ -329,7 +329,7 @@
 "id":  "S1155",
 "message":  "Use '.Any()' to test whether this 'IEnumerable(Of System.Xml.Linq.XElement)' is empty or not.",
 "location":  {
-"uri":  "C:\Projects\.Community\Corniel%20sonar-dotnet\analyzers\its\sources\Ember-MM\Addons\scraper.EmberCore\TVScraper\clsScrapeTVDB.vb",
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\TVScraper\clsScrapeTVDB.vb",
 "region":  {
 "startLine":  1009,
 "startColumn":  263,
@@ -342,7 +342,7 @@
 "id":  "S1155",
 "message":  "Use '.Any()' to test whether this 'IEnumerable(Of System.Xml.Linq.XElement)' is empty or not.",
 "location":  {
-"uri":  "C:\Projects\.Community\Corniel%20sonar-dotnet\analyzers\its\sources\Ember-MM\Addons\scraper.EmberCore\TVScraper\clsScrapeTVDB.vb",
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\TVScraper\clsScrapeTVDB.vb",
 "region":  {
 "startLine":  1086,
 "startColumn":  31,
@@ -355,7 +355,7 @@
 "id":  "S1155",
 "message":  "Use '.Any()' to test whether this 'IEnumerable(Of System.Xml.Linq.XElement)' is empty or not.",
 "location":  {
-"uri":  "C:\Projects\.Community\Corniel%20sonar-dotnet\analyzers\its\sources\Ember-MM\Addons\scraper.EmberCore\TVScraper\clsScrapeTVDB.vb",
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\TVScraper\clsScrapeTVDB.vb",
 "region":  {
 "startLine":  1125,
 "startColumn":  432,
@@ -368,7 +368,7 @@
 "id":  "S1155",
 "message":  "Use '.Any()' to test whether this 'IEnumerable(Of System.Xml.Linq.XElement)' is empty or not.",
 "location":  {
-"uri":  "C:\Projects\.Community\Corniel%20sonar-dotnet\analyzers\its\sources\Ember-MM\Addons\scraper.EmberCore\TVScraper\clsScrapeTVDB.vb",
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\TVScraper\clsScrapeTVDB.vb",
 "region":  {
 "startLine":  1129,
 "startColumn":  265,
@@ -381,7 +381,7 @@
 "id":  "S1155",
 "message":  "Use '.Any()' to test whether this 'IEnumerable(Of EmberScraperModule.Scraper.TVSearchResults)' is empty or not.",
 "location":  {
-"uri":  "C:\Projects\.Community\Corniel%20sonar-dotnet\analyzers\its\sources\Ember-MM\Addons\scraper.EmberCore\TVScraper\dlgTVDBSearchResults.vb",
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\TVScraper\dlgTVDBSearchResults.vb",
 "region":  {
 "startLine":  347,
 "startColumn":  67,
@@ -394,7 +394,7 @@
 "id":  "S1155",
 "message":  "Use '.Any()' to test whether this 'IEnumerable(Of EmberScraperModule.Scraper.TVDBSeasonImage)' is empty or not.",
 "location":  {
-"uri":  "C:\Projects\.Community\Corniel%20sonar-dotnet\analyzers\its\sources\Ember-MM\Addons\scraper.EmberCore\TVScraper\dlgTVImageSelect.vb",
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\TVScraper\dlgTVImageSelect.vb",
 "region":  {
 "startLine":  527,
 "startColumn":  109,
@@ -407,7 +407,7 @@
 "id":  "S1155",
 "message":  "Use '.Any()' to test whether this 'IEnumerable(Of EmberScraperModule.Scraper.TVDBSeasonImage)' is empty or not.",
 "location":  {
-"uri":  "C:\Projects\.Community\Corniel%20sonar-dotnet\analyzers\its\sources\Ember-MM\Addons\scraper.EmberCore\TVScraper\dlgTVImageSelect.vb",
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\TVScraper\dlgTVImageSelect.vb",
 "region":  {
 "startLine":  556,
 "startColumn":  105,
