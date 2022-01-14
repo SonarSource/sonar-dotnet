@@ -1,8 +1,5 @@
 ﻿using System;
 
-namespace Tests.Diagnostics
+public class Program
 {
-    class Program
-    {
-    }
 }
