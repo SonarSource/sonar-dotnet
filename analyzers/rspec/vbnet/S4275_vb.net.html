@@ -12,52 +12,38 @@ properties</a> (VB.NET 10.0 or later).</p>
 <p>Field and property names are compared as case-insensitive. All underscore characters are ignored.</p>
 <h2>Noncompliant Code Example</h2>
 <pre>
-Class A
-    Private x As Integer
-    Private y As Integer
+Public Class Sample
 
-    Public Property X As Integer
-        Get
-            Return x
-        End Get
-        Set(ByVal value As Integer)
-            x = value
-        End Set
-    End Property
+    Private _x As Integer
+    Private _y As Integer
 
     Public Property Y As Integer
-        Get  ' Noncompliant: field 'y' is not used in the return value
-            Return x
+        Get
+            Return _x   ' Noncompliant: field '_y' is not used in the return value
         End Get
-        Set(ByVal value As Integer) ' Noncompliant: field 'y' is not updated
-            x = value
+        Set(value As Integer)
+            _x = value  ' Noncompliant: field '_y' is not updated
         End Set
     End Property
+
 End Class
 </pre>
 <h2>Compliant Solution</h2>
 <pre>
-Class A
-    Private x As Integer
-    Private y As Integer
+Public Class Sample
 
-    Public Property X As Integer
-        Get
-            Return x
-        End Get
-        Set(ByVal value As Integer)
-            x = value
-        End Set
-    End Property
+    Private _x As Integer
+    Private _y As Integer
 
     Public Property Y As Integer
         Get
-            Return y
+            Return _y
         End Get
-        Set(ByVal value As Integer)
-            y = value
+        Set(value As Integer)
+            _y = value
         End Set
     End Property
+
 End Class
 </pre>
 
