@@ -78,19 +78,18 @@ namespace SonarAnalyzer.Rules.CSharp
         private static bool ExpressionIsAlwaysPositive(ExpressionSyntax expression, SemanticModel semantic)
         {
             var type = semantic.GetTypeInfo(expression).Type;
-            var isUint = type.IsAny(KnownType.UnsignedIntegers)
-                          || type.Is(KnownType.System_UIntPtr);
+            if (type.IsAny(KnownType.UnsignedIntegers) || type.Is(KnownType.System_UIntPtr))
+            {
+                return true;
+            }
 
             var leftExpression = ((BinaryExpressionSyntax)expression).Left;
-            if (!isUint && CollectionSizePropertyOrMethodNames.Any(x => leftExpression.ToString().Contains(x)))
-            {
-                var symbol = semantic.GetSymbolInfo(((BinaryExpressionSyntax)expression).Left).Symbol;
-                return IsCollectionSizeMethodOrProperty(symbol);
-            }
-            return isUint;
+            return CollectionSizePropertyOrMethodNames.Any(x => leftExpression.ToString().Contains(x))
+                   && semantic.GetSymbolInfo(((BinaryExpressionSyntax)expression).Left).Symbol is { } symbol
+                   && IsCollectionSize(symbol);
         }
 
-        private static bool IsCollectionSizeMethodOrProperty(ISymbol symbol) =>
+        private static bool IsCollectionSize(ISymbol symbol) =>
             IsEnumerableCountMethod(symbol)
             || IsLengthProperty(symbol)
             || IsCollectionCountProperty(symbol)
@@ -106,17 +105,17 @@ namespace SonarAnalyzer.Rules.CSharp
         private static bool IsLengthProperty(ISymbol symbol) =>
             (LengthName.Equals(symbol.Name) || LongLengthName.Equals(symbol.Name))
             && symbol is IPropertySymbol propertySymbol
-            && (propertySymbol.ContainingType.Is(KnownType.System_Array) || propertySymbol.ContainingType.Is(KnownType.System_String));
+            && propertySymbol.ContainingType.IsAny(KnownType.System_Array, KnownType.System_String);
 
         private static bool IsCollectionCountProperty(ISymbol symbol) =>
             CountName.Equals(symbol.Name)
             && symbol is IPropertySymbol propertySymbol
-            && (propertySymbol.ContainingType.DerivesOrImplements(KnownType.System_Collections_Generic_ICollection_T)
-               || propertySymbol.ContainingType.DerivesOrImplements(KnownType.System_Collections_Generic_IReadOnlyCollection_T));
+            && (propertySymbol.ContainingType.Implements(KnownType.System_Collections_Generic_ICollection_T)
+                || propertySymbol.ContainingType.Implements(KnownType.System_Collections_Generic_IReadOnlyCollection_T));
 
         private static bool IsListCapacityProperty(ISymbol symbol) =>
             ListCapacityName.Equals(symbol.Name)
             && symbol is IPropertySymbol propertySymbol
-            && propertySymbol.ContainingType.DerivesOrImplements(KnownType.System_Collections_Generic_IList_T);
+            && propertySymbol.ContainingType.Implements(KnownType.System_Collections_Generic_IList_T);
     }
 }
