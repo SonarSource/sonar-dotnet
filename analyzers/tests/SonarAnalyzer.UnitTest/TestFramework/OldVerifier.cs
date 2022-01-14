@@ -636,7 +636,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework
                 .WithOptions(options.IsDefault ? ImmutableArray<ParseOptions>.Empty : options)
                 .WithOutputKind(outputKind)
                 .WithCodeFix<TCodeFix>()
-                .WithCodeFixedPath(pathToExpected)
+                .WithCodeFixedPath(RemoveTestCasesPrefix(pathToExpected))
                 .VerifyCodeFix();
 
         [Obsolete("Use VerifierBuilder instead.")]
@@ -653,8 +653,8 @@ namespace SonarAnalyzer.UnitTest.TestFramework
                 .AddPaths(RemoveTestCasesPrefix(path))
                 .WithOptions(options.IsDefault ? ImmutableArray<ParseOptions>.Empty : options)
                 .WithCodeFix<TCodeFix>()
-                .WithCodeFixedPath(pathToExpected)
-                .WithCodeFixedPathBatch(pathToBatchExpected)
+                .WithCodeFixedPath(RemoveTestCasesPrefix(pathToExpected))
+                .WithCodeFixedPathBatch(RemoveTestCasesPrefix(pathToBatchExpected))
                 .VerifyCodeFix();
 
         [Obsolete("Use VerifierBuilder instead.")]
@@ -672,7 +672,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework
                 .WithOptions(options.IsDefault ? ImmutableArray<ParseOptions>.Empty : options)
                 .WithCodeFix<TCodeFix>()
                 .WithCodeFixTitle(codeFixTitle)
-                .WithCodeFixedPath(pathToExpected)
+                .WithCodeFixedPath(RemoveTestCasesPrefix(pathToExpected))
                 .VerifyCodeFix();
 
         private static string[] RemoveTestCasesPrefix(IEnumerable<string> paths) =>
