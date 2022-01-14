@@ -24,6 +24,7 @@
   <properties>
     <scannerMsbuild.version>5.2.0.29862</scannerMsbuild.version>
     <surefire.argLine>-server</surefire.argLine>
+    <maven.compiler.release>8</maven.compiler.release>
   </properties>
 
   <dependencies>
