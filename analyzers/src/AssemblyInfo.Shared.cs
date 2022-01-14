@@ -29,7 +29,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyInformationalVersion("Version:8.34.0.0 Branch: Sha1:")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("SonarSource")]
-[assembly: AssemblyCopyright("Copyright © 2015-2021 SonarSource SA")]
+[assembly: AssemblyCopyright("Copyright © 2015-2022 SonarSource SA")]
 [assembly: AssemblyTrademark("SonarLint, SonarQube, SonarSource")]
 [assembly: AssemblyCulture("")]
 [assembly: CLSCompliant(false)]
