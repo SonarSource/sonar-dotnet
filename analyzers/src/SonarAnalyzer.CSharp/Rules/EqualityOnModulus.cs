@@ -39,7 +39,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private const string CountName = nameof(Enumerable.Count);
         private const string LongCountName = nameof(Enumerable.LongCount);
-        private const string LengthName = "Length";
+        private const string LengthName = "Length"; // Represents Array.Length and String.Length
         private const string LongLengthName = nameof(Array.LongLength);
         private const string ListCapacityName = nameof(List<object>.Capacity);
 
@@ -89,9 +89,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private static bool IsCollectionSize(ISymbol symbol) =>
             IsEnumerableCountMethod(symbol)
-            || IsLengthProperty(symbol)
-            || IsCollectionCountProperty(symbol)
-            || IsListCapacityProperty(symbol);
+            || (symbol is IPropertySymbol propertySymbol && IsCollectionSizeProperty(propertySymbol));
 
         private static bool IsEnumerableCountMethod(ISymbol symbol) =>
             (CountName.Equals(symbol.Name) || LongCountName.Equals(symbol.Name))
@@ -100,20 +98,13 @@ namespace SonarAnalyzer.Rules.CSharp
             && methodSymbol.ReceiverType != null
             && methodSymbol.IsExtensionOn(KnownType.System_Collections_Generic_IEnumerable_T);
 
-        private static bool IsLengthProperty(ISymbol symbol) =>
-            (LengthName.Equals(symbol.Name) || LongLengthName.Equals(symbol.Name))
-            && symbol is IPropertySymbol propertySymbol
-            && propertySymbol.ContainingType.IsAny(KnownType.System_Array, KnownType.System_String);
-
-        private static bool IsCollectionCountProperty(ISymbol symbol) =>
-            CountName.Equals(symbol.Name)
-            && symbol is IPropertySymbol propertySymbol
-            && (propertySymbol.ContainingType.Implements(KnownType.System_Collections_Generic_ICollection_T)
-                || propertySymbol.ContainingType.Implements(KnownType.System_Collections_Generic_IReadOnlyCollection_T));
-
-        private static bool IsListCapacityProperty(ISymbol symbol) =>
-            ListCapacityName.Equals(symbol.Name)
-            && symbol is IPropertySymbol propertySymbol
-            && propertySymbol.ContainingType.Implements(KnownType.System_Collections_Generic_IList_T);
+        private static bool IsCollectionSizeProperty(IPropertySymbol propertySymbol) =>
+            ((LengthName.Equals(propertySymbol.Name) || LongLengthName.Equals(propertySymbol.Name))
+                && propertySymbol.ContainingType.IsAny(KnownType.System_Array, KnownType.System_String))
+            || (CountName.Equals(propertySymbol.Name)
+                && (propertySymbol.ContainingType.Implements(KnownType.System_Collections_Generic_ICollection_T) || propertySymbol.ContainingType.Implements(KnownType.System_Collections_Generic_IReadOnlyCollection_T)))
+            || (ListCapacityName.Equals(propertySymbol.Name)
+                && propertySymbol.ContainingType.Implements(KnownType.System_Collections_Generic_IList_T));
     }
+
 }
