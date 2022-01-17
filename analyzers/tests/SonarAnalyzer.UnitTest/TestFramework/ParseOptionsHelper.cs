@@ -18,12 +18,10 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Linq;
 using Microsoft.CodeAnalysis;
-using SonarAnalyzer.Helpers;
 using SonarAnalyzer.UnitTest.Helpers;
 
 using static Microsoft.CodeAnalysis.CSharp.LanguageVersion;
@@ -97,9 +95,10 @@ namespace SonarAnalyzer.UnitTest.TestFramework
 #pragma warning restore S3963
 
         public static IEnumerable<ParseOptions> OrDefault(this IEnumerable<ParseOptions> parseOptions, string language) =>
-            parseOptions != null && parseOptions.WhereNotNull().Any()
-                ? parseOptions.WhereNotNull()
-                : DefaultParseOptions.Where(x => x.Language == language);
+            parseOptions != null && parseOptions.Any() ? parseOptions : Default(language);
+
+        public static IEnumerable<ParseOptions> Default(string language) =>
+            DefaultParseOptions.Where(x => x.Language == language);
 
         private static ImmutableArray<ParseOptions> FilterByEnvironment(this IEnumerable<ParseOptions> options) =>
             TestContextHelper.IsAzureDevOpsContext && !TestContextHelper.IsPullRequestBuild

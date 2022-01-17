@@ -28,7 +28,7 @@ using SonarAnalyzer.UnitTest.MetadataReferences;
 
 namespace SonarAnalyzer.UnitTest.TestFramework
 {
-    internal struct ProjectBuilder
+    internal readonly struct ProjectBuilder
     {
         private const string FixedMessage = "Fixed";
 

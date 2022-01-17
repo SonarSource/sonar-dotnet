@@ -31,7 +31,7 @@ using SonarAnalyzer.UnitTest.MetadataReferences;
 
 namespace SonarAnalyzer.UnitTest.TestFramework
 {
-    internal struct SolutionBuilder
+    internal readonly struct SolutionBuilder
     {
         private const string GeneratedAssemblyName = "project";
 
@@ -58,27 +58,12 @@ namespace SonarAnalyzer.UnitTest.TestFramework
         public static SolutionBuilder Create() =>
             FromSolution(new AdhocWorkspace().CurrentSolution);
 
-        public static SolutionBuilder CreateSolutionFromPaths(IEnumerable<string> paths,
-                                                              OutputKind outputKind = OutputKind.DynamicallyLinkedLibrary,
-                                                              IEnumerable<MetadataReference> additionalReferences = null)
-        {
-            if (paths == null || !paths.Any())
-            {
-                throw new ArgumentException("Please specify at least one file path to analyze.", nameof(paths));
-            }
-
-            var extensions = paths.Select(path => Path.GetExtension(path)).Distinct().ToList();
-            if (extensions.Count != 1)
-            {
-                throw new ArgumentException("Please use a collection of paths with the same extension", nameof(paths));
-            }
-
-            return Create()
-                .AddProject(AnalyzerLanguage.FromPath(paths.First()), outputKind: outputKind)
-                .AddDocuments(paths)
+        public static SolutionBuilder CreateSolutionFromPath(string path, OutputKind outputKind = OutputKind.DynamicallyLinkedLibrary, IEnumerable<MetadataReference> additionalReferences = null) =>
+            Create()
+                .AddProject(AnalyzerLanguage.FromPath(path), outputKind: outputKind)
+                .AddDocument(path)
                 .AddReferences(additionalReferences)
                 .Solution;
-        }
 
         public static SolutionBuilder FromSolution(Solution solution) =>
             new(solution);
@@ -86,11 +71,8 @@ namespace SonarAnalyzer.UnitTest.TestFramework
         public ImmutableArray<Compilation> Compile(params ParseOptions[] parseOptions) =>
             solution.Projects.SelectMany(x => Compile(x, parseOptions)).ToImmutableArray();
 
-        private static IEnumerable<Compilation> Compile(Project project, ParseOptions[] parseOptions)
-        {
-            var options = parseOptions.OrDefault(project.Language);
-            return options.Select(x => project.WithParseOptions(x).GetCompilationAsync().Result);
-        }
+        private static IEnumerable<Compilation> Compile(Project project, ParseOptions[] parseOptions) =>
+            parseOptions.OrDefault(project.Language).Select(x => project.WithParseOptions(x).GetCompilationAsync().Result);
 
         private ProjectBuilder AddProject(AnalyzerLanguage language, string projectName, bool createExtraEmptyFile, OutputKind outputKind = OutputKind.DynamicallyLinkedLibrary)
         {

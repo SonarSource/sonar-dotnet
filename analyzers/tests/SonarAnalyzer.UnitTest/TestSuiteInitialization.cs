@@ -38,17 +38,11 @@ namespace SonarAnalyzer.UnitTest
             Console.WriteLine(@"Running tests initialization...");
             Console.WriteLine(@$"Build reason: {Environment.GetEnvironmentVariable(TestContextHelper.BuildReason) ?? "Not set / Local build"}");
 
-            var csVersions = ParseOptionsHelper.OrDefault(null, LanguageNames.CSharp).Cast<CSharpParseOptions>().Select(GetVersion);
+            var csVersions = ParseOptionsHelper.Default(LanguageNames.CSharp).Cast<CSharpParseOptions>().Select(x => x.LanguageVersion.ToDisplayString());
             Console.WriteLine(@"C# versions used for analysis: " + string.Join(", ", csVersions));
 
-            var vbVersions = ParseOptionsHelper.OrDefault(null, LanguageNames.VisualBasic).Cast<VisualBasicParseOptions>().Select(GetVersion);
+            var vbVersions = ParseOptionsHelper.Default(LanguageNames.VisualBasic).Cast<VisualBasicParseOptions>().Select(x => x.LanguageVersion.ToDisplayString());
             Console.WriteLine(@"VB.Net versions used for analysis: " + string.Join(", ", vbVersions));
         }
-
-        private static string GetVersion(CSharpParseOptions options) =>
-            options.LanguageVersion.ToDisplayString();
-
-        private static string GetVersion(VisualBasicParseOptions options) =>
-            options.LanguageVersion.ToDisplayString();
     }
 }
