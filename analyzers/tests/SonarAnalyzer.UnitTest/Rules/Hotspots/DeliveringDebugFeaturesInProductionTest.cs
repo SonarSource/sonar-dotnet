@@ -35,31 +35,35 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         public void DeliveringDebugFeaturesInProduction_NetCore2_CS() =>
-            OldVerifier.VerifyAnalyzer(@"TestCases\Hotspots\DeliveringDebugFeaturesInProduction.NetCore2.cs",
-                                    new CS.DeliveringDebugFeaturesInProduction(AnalyzerConfiguration.AlwaysEnabled),
-                                    AdditionalReferencesNetCore2);
+            OldVerifier.VerifyAnalyzer(
+                @"TestCases\Hotspots\DeliveringDebugFeaturesInProduction.NetCore2.cs",
+                new CS.DeliveringDebugFeaturesInProduction(AnalyzerConfiguration.AlwaysEnabled),
+                AdditionalReferencesForAspNetCore2);
 
         [TestMethod]
         public void DeliveringDebugFeaturesInProduction_NetCore2_VB() =>
-            OldVerifier.VerifyAnalyzer(@"TestCases\Hotspots\DeliveringDebugFeaturesInProduction.NetCore2.vb",
-                                    new VB.DeliveringDebugFeaturesInProduction(AnalyzerConfiguration.AlwaysEnabled),
-                                    AdditionalReferencesNetCore2);
+            OldVerifier.VerifyAnalyzer(
+                @"TestCases\Hotspots\DeliveringDebugFeaturesInProduction.NetCore2.vb",
+                new VB.DeliveringDebugFeaturesInProduction(AnalyzerConfiguration.AlwaysEnabled),
+                AdditionalReferencesForAspNetCore2);
 
 #if NET
 
         [TestMethod]
         public void DeliveringDebugFeaturesInProduction_NetCore3_CS() =>
-            OldVerifier.VerifyAnalyzer(@"TestCases\Hotspots\DeliveringDebugFeaturesInProduction.NetCore3.cs",
-                                    new CS.DeliveringDebugFeaturesInProduction(AnalyzerConfiguration.AlwaysEnabled),
-                                    AdditionalReferencesNetCore3);
+            OldVerifier.VerifyAnalyzer(
+                @"TestCases\Hotspots\DeliveringDebugFeaturesInProduction.NetCore3.cs",
+                new CS.DeliveringDebugFeaturesInProduction(AnalyzerConfiguration.AlwaysEnabled),
+                AdditionalReferencesForAspNetCore3AndLater);
 
         [TestMethod]
         public void DeliveringDebugFeaturesInProduction_NetCore3_VB() =>
-            OldVerifier.VerifyAnalyzer(@"TestCases\Hotspots\DeliveringDebugFeaturesInProduction.NetCore3.vb",
-                                    new VB.DeliveringDebugFeaturesInProduction(AnalyzerConfiguration.AlwaysEnabled),
-                                    AdditionalReferencesNetCore3);
+            OldVerifier.VerifyAnalyzer(
+                @"TestCases\Hotspots\DeliveringDebugFeaturesInProduction.NetCore3.vb",
+                new VB.DeliveringDebugFeaturesInProduction(AnalyzerConfiguration.AlwaysEnabled),
+                AdditionalReferencesForAspNetCore3AndLater);
 
-        private static IEnumerable<MetadataReference> AdditionalReferencesNetCore3 =>
+        private static IEnumerable<MetadataReference> AdditionalReferencesForAspNetCore3AndLater =>
             Enumerable.Empty<MetadataReference>()
                       .Concat(AspNetCoreMetadataReference.MicrosoftAspNetCoreDiagnostics)
                       .Concat(AspNetCoreMetadataReference.MicrosoftAspNetCoreHostingAbstractions)
@@ -68,7 +72,7 @@ namespace SonarAnalyzer.UnitTest.Rules
 
 #endif
 
-        internal static IEnumerable<MetadataReference> AdditionalReferencesNetCore2 =>
+        internal static IEnumerable<MetadataReference> AdditionalReferencesForAspNetCore2 =>
             Enumerable.Empty<MetadataReference>()
                       .Concat(NetStandardMetadataReference.Netstandard)
                       .Concat(NuGetMetadataReference.MicrosoftAspNetCoreDiagnostics(Constants.DotNetCore220Version))

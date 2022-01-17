@@ -111,7 +111,7 @@ namespace SonarAnalyzer.UnitTest.Common
                 nameof(CookieShouldBeHttpOnly) => CookieShouldBeHttpOnlyTest.AdditionalReferences,
                 nameof(CookieShouldBeSecure) => CookieShouldBeSecureTest.AdditionalReferences,
                 nameof(ConfiguringLoggers) => ConfiguringLoggersTest.Log4NetReferences,
-                nameof(DeliveringDebugFeaturesInProduction) => DeliveringDebugFeaturesInProductionTest.AdditionalReferencesNetCore2,
+                nameof(DeliveringDebugFeaturesInProduction) => DeliveringDebugFeaturesInProductionTest.AdditionalReferencesForAspNetCore2,
                 nameof(DisablingRequestValidation) => NuGetMetadataReference.MicrosoftAspNetMvc(Constants.NuGetLatestVersion),
                 nameof(DoNotHardcodeCredentials) => DoNotHardcodeCredentialsTest.AdditionalReferences,
                 nameof(DoNotUseRandom) => MetadataReferenceFacade.SystemSecurityCryptography,
