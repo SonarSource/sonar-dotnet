@@ -1,0 +1,420 @@
+{
+"issues":  [
+{
+"id":  "S1155",
+"message":  "Use '.Any()' to test whether this 'IEnumerable(Of EmberAPI.MediaContainers.Image)' is empty or not.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\Scraper\clsScrapeImages.vb",
+"region":  {
+"startLine":  286,
+"startColumn":  14,
+"endLine":  286,
+"endColumn":  19
+}
+}
+},
+{
+"id":  "S1155",
+"message":  "Use '.Any()' to test whether this 'IEnumerable(Of EmberAPI.MediaContainers.Image)' is empty or not.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\Scraper\clsScrapeImages.vb",
+"region":  {
+"startLine":  292,
+"startColumn":  14,
+"endLine":  292,
+"endColumn":  19
+}
+}
+},
+{
+"id":  "S1155",
+"message":  "Use '.Any()' to test whether this 'IEnumerable(Of EmberAPI.MediaContainers.Image)' is empty or not.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\Scraper\clsScrapeImages.vb",
+"region":  {
+"startLine":  298,
+"startColumn":  14,
+"endLine":  298,
+"endColumn":  19
+}
+}
+},
+{
+"id":  "S1155",
+"message":  "Use '.Any()' to test whether this 'IEnumerable(Of EmberAPI.MediaContainers.Image)' is empty or not.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\Scraper\clsScrapeImages.vb",
+"region":  {
+"startLine":  304,
+"startColumn":  14,
+"endLine":  304,
+"endColumn":  19
+}
+}
+},
+{
+"id":  "S1155",
+"message":  "Use '.Any()' to test whether this 'IEnumerable(Of EmberAPI.MediaContainers.Image)' is empty or not.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\Scraper\clsScrapeImages.vb",
+"region":  {
+"startLine":  619,
+"startColumn":  14,
+"endLine":  619,
+"endColumn":  19
+}
+}
+},
+{
+"id":  "S1155",
+"message":  "Use '.Any()' to test whether this 'IEnumerable(Of EmberAPI.MediaContainers.Image)' is empty or not.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\Scraper\clsScrapeImages.vb",
+"region":  {
+"startLine":  625,
+"startColumn":  14,
+"endLine":  625,
+"endColumn":  19
+}
+}
+},
+{
+"id":  "S1155",
+"message":  "Use '.Any()' to test whether this 'IEnumerable(Of EmberAPI.MediaContainers.Image)' is empty or not.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\Scraper\clsScrapeImages.vb",
+"region":  {
+"startLine":  631,
+"startColumn":  14,
+"endLine":  631,
+"endColumn":  19
+}
+}
+},
+{
+"id":  "S1155",
+"message":  "Use '.Any()' to test whether this 'IEnumerable(Of String)' is empty or not.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\Scraper\clsScrapeIMDB.vb",
+"region":  {
+"startLine":  228,
+"startColumn":  41,
+"endLine":  228,
+"endColumn":  46
+}
+}
+},
+{
+"id":  "S1155",
+"message":  "Use '.Any()' to test whether this 'IEnumerable(Of String)' is empty or not.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\Scraper\clsScrapeIMDB.vb",
+"region":  {
+"startLine":  371,
+"startColumn":  32,
+"endLine":  371,
+"endColumn":  37
+}
+}
+},
+{
+"id":  "S1155",
+"message":  "Use '.Any()' to test whether this 'IEnumerable(Of String)' is empty or not.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\Scraper\clsScrapeIMDB.vb",
+"region":  {
+"startLine":  391,
+"startColumn":  32,
+"endLine":  391,
+"endColumn":  37
+}
+}
+},
+{
+"id":  "S1155",
+"message":  "Use '.Any()' to test whether this 'IEnumerable(Of String)' is empty or not.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\Scraper\clsScrapeIMDB.vb",
+"region":  {
+"startLine":  415,
+"startColumn":  40,
+"endLine":  415,
+"endColumn":  45
+}
+}
+},
+{
+"id":  "S1155",
+"message":  "Use '.Any()' to test whether this 'IEnumerable(Of String)' is empty or not.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\Scraper\clsScrapeIMDB.vb",
+"region":  {
+"startLine":  542,
+"startColumn":  30,
+"endLine":  542,
+"endColumn":  35
+}
+}
+},
+{
+"id":  "S1155",
+"message":  "Use '.Any()' to test whether this 'IEnumerable(Of String)' is empty or not.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\Scraper\clsScrapeIMDB.vb",
+"region":  {
+"startLine":  571,
+"startColumn":  39,
+"endLine":  571,
+"endColumn":  44
+}
+}
+},
+{
+"id":  "S1155",
+"message":  "Use '.Any()' to test whether this 'IEnumerable(Of String)' is empty or not.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\Scraper\clsScrapeIMDB.vb",
+"region":  {
+"startLine":  583,
+"startColumn":  39,
+"endLine":  583,
+"endColumn":  44
+}
+}
+},
+{
+"id":  "S1155",
+"message":  "Use '.Any()' to test whether this 'IEnumerable(Of String)' is empty or not.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\Scraper\clsScrapeIMDB.vb",
+"region":  {
+"startLine":  601,
+"startColumn":  35,
+"endLine":  601,
+"endColumn":  40
+}
+}
+},
+{
+"id":  "S1155",
+"message":  "Use '.Any()' to test whether this 'IEnumerable(Of String)' is empty or not.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\Scraper\clsScrapeOFDB.vb",
+"region":  {
+"startLine":  203,
+"startColumn":  40,
+"endLine":  203,
+"endColumn":  45
+}
+}
+},
+{
+"id":  "S1155",
+"message":  "Use '.Any()' to test whether this 'IEnumerable(Of System.Xml.Linq.XElement)' is empty or not.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\Scraper\clsScrapeTMDB.vb",
+"region":  {
+"startLine":  93,
+"startColumn":  43,
+"endLine":  93,
+"endColumn":  48
+}
+}
+},
+{
+"id":  "S1155",
+"message":  "Use '.Any()' to test whether this 'IEnumerable(Of System.Xml.Linq.XElement)' is empty or not.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\Scraper\clsScrapeTMDB.vb",
+"region":  {
+"startLine":  103,
+"startColumn":  43,
+"endLine":  103,
+"endColumn":  48
+}
+}
+},
+{
+"id":  "S1155",
+"message":  "Use '.Any()' to test whether this 'IEnumerable(Of System.Xml.Linq.XElement)' is empty or not.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\Scraper\clsScrapeTMDB.vb",
+"region":  {
+"startLine":  153,
+"startColumn":  33,
+"endLine":  153,
+"endColumn":  38
+}
+}
+},
+{
+"id":  "S1155",
+"message":  "Use '.Any()' to test whether this 'IEnumerable(Of System.Collections.Generic.IEnumerable(Of System.Xml.Linq.XElement))' is empty or not.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\Scraper\clsScrapeTMDB.vb",
+"region":  {
+"startLine":  179,
+"startColumn":  49,
+"endLine":  179,
+"endColumn":  54
+}
+}
+},
+{
+"id":  "S1155",
+"message":  "Use '.Any()' to test whether this 'IEnumerable(Of System.Xml.Linq.XElement)' is empty or not.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\TVScraper\clsScrapeTVDB.vb",
+"region":  {
+"startLine":  343,
+"startColumn":  390,
+"endLine":  343,
+"endColumn":  395
+}
+}
+},
+{
+"id":  "S1155",
+"message":  "Use '.Any()' to test whether this 'IEnumerable(Of System.Xml.Linq.XElement)' is empty or not.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\TVScraper\clsScrapeTVDB.vb",
+"region":  {
+"startLine":  349,
+"startColumn":  278,
+"endLine":  349,
+"endColumn":  283
+}
+}
+},
+{
+"id":  "S1155",
+"message":  "Use '.Any()' to test whether this 'IEnumerable(Of System.Xml.Linq.XElement)' is empty or not.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\TVScraper\clsScrapeTVDB.vb",
+"region":  {
+"startLine":  355,
+"startColumn":  272,
+"endLine":  355,
+"endColumn":  277
+}
+}
+},
+{
+"id":  "S1155",
+"message":  "Use '.Any()' to test whether this 'IEnumerable(Of EmberScraperModule.Scraper.TVDBSeasonImage)' is empty or not.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\TVScraper\clsScrapeTVDB.vb",
+"region":  {
+"startLine":  860,
+"startColumn":  41,
+"endLine":  860,
+"endColumn":  46
+}
+}
+},
+{
+"id":  "S1155",
+"message":  "Use '.Any()' to test whether this 'IEnumerable(Of System.Xml.Linq.XElement)' is empty or not.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\TVScraper\clsScrapeTVDB.vb",
+"region":  {
+"startLine":  981,
+"startColumn":  174,
+"endLine":  981,
+"endColumn":  179
+}
+}
+},
+{
+"id":  "S1155",
+"message":  "Use '.Any()' to test whether this 'IEnumerable(Of System.Xml.Linq.XElement)' is empty or not.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\TVScraper\clsScrapeTVDB.vb",
+"region":  {
+"startLine":  1009,
+"startColumn":  263,
+"endLine":  1009,
+"endColumn":  268
+}
+}
+},
+{
+"id":  "S1155",
+"message":  "Use '.Any()' to test whether this 'IEnumerable(Of System.Xml.Linq.XElement)' is empty or not.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\TVScraper\clsScrapeTVDB.vb",
+"region":  {
+"startLine":  1086,
+"startColumn":  31,
+"endLine":  1086,
+"endColumn":  36
+}
+}
+},
+{
+"id":  "S1155",
+"message":  "Use '.Any()' to test whether this 'IEnumerable(Of System.Xml.Linq.XElement)' is empty or not.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\TVScraper\clsScrapeTVDB.vb",
+"region":  {
+"startLine":  1125,
+"startColumn":  432,
+"endLine":  1125,
+"endColumn":  437
+}
+}
+},
+{
+"id":  "S1155",
+"message":  "Use '.Any()' to test whether this 'IEnumerable(Of System.Xml.Linq.XElement)' is empty or not.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\TVScraper\clsScrapeTVDB.vb",
+"region":  {
+"startLine":  1129,
+"startColumn":  265,
+"endLine":  1129,
+"endColumn":  270
+}
+}
+},
+{
+"id":  "S1155",
+"message":  "Use '.Any()' to test whether this 'IEnumerable(Of EmberScraperModule.Scraper.TVSearchResults)' is empty or not.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\TVScraper\dlgTVDBSearchResults.vb",
+"region":  {
+"startLine":  347,
+"startColumn":  67,
+"endLine":  347,
+"endColumn":  72
+}
+}
+},
+{
+"id":  "S1155",
+"message":  "Use '.Any()' to test whether this 'IEnumerable(Of EmberScraperModule.Scraper.TVDBSeasonImage)' is empty or not.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\TVScraper\dlgTVImageSelect.vb",
+"region":  {
+"startLine":  527,
+"startColumn":  109,
+"endLine":  527,
+"endColumn":  114
+}
+}
+},
+{
+"id":  "S1155",
+"message":  "Use '.Any()' to test whether this 'IEnumerable(Of EmberScraperModule.Scraper.TVDBSeasonImage)' is empty or not.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\TVScraper\dlgTVImageSelect.vb",
+"region":  {
+"startLine":  556,
+"startColumn":  105,
+"endLine":  556,
+"endColumn":  110
+}
+}
+}
+]
+}

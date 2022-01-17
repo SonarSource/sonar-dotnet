@@ -19,16 +19,16 @@
  */
 
 using Microsoft.CodeAnalysis;
-using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.Diagnostics;
+using Microsoft.CodeAnalysis.VisualBasic;
 using SonarAnalyzer.Helpers;
 
-namespace SonarAnalyzer.Rules.CSharp
+namespace SonarAnalyzer.Rules.VisualBasic
 {
-    [DiagnosticAnalyzer(LanguageNames.CSharp)]
+    [DiagnosticAnalyzer(LanguageNames.VisualBasic)]
     public sealed class CollectionEmptinessChecking : CollectionEmptinessCheckingBase<SyntaxKind>
     {
-        protected override string MessageFormat => "Use '.Any()' to test whether this 'IEnumerable<{0}>' is empty or not.";
-        protected override ILanguageFacade<SyntaxKind> Language => CSharpFacade.Instance;
+        protected override string MessageFormat => "Use '.Any()' to test whether this 'IEnumerable(Of {0})' is empty or not.";
+        protected override ILanguageFacade<SyntaxKind> Language => VisualBasicFacade.Instance;
     }
 }

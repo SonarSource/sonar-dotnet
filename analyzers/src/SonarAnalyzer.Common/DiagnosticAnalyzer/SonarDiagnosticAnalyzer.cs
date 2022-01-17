@@ -19,6 +19,8 @@
  */
 
 using System;
+using System.Collections.Immutable;
+using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Diagnostics;
 
 namespace SonarAnalyzer.Helpers
@@ -50,5 +52,18 @@ namespace SonarAnalyzer.Helpers
             }
             return false;
         }
+    }
+
+    public abstract class SonarDiagnosticAnalyzer<TSyntaxKind> : SonarDiagnosticAnalyzer
+        where TSyntaxKind : struct
+    {
+        protected abstract string MessageFormat { get; }
+        protected abstract ILanguageFacade<TSyntaxKind> Language { get; }
+        protected DiagnosticDescriptor Rule { get; }
+
+        protected SonarDiagnosticAnalyzer(string diagnosticId) =>
+           Rule = DiagnosticDescriptorBuilder.GetDescriptor(diagnosticId, MessageFormat, Language.RspecResources);
+
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(Rule);
     }
 }
