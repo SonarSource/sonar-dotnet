@@ -181,8 +181,8 @@ stages:
           path: 'TestResults'
           artifact: DotnetTestResultsNet48
 
-    - job: runUnitTestsJobNet5
-      displayName: '.NET 5 UTs'
+    - job: runUnitTestsJobNet6
+      displayName: '.NET 6 UTs'
 
       steps:
       - task: DownloadPipelineArtifact@2
@@ -197,21 +197,21 @@ stages:
           CreateFolder("coverage")
           CreateFolder("TestResults")
 
-          & OpenCover.Console.exe -target:"dotnet.exe" -targetargs:"test analyzers\tests\SonarAnalyzer.UnitTest\bin\$(BuildConfiguration)\net5.0\SonarAnalyzer.UnitTest.dll -l trx -l console;verbosity=detailed" -returntargetcode -filter:"+[SonarAnalyzer.CFG]* +[SonarAnalyzer]* +[SonarAnalyzer.CSharp]* +[SonarAnalyzer.Utilities]* +[SonarAnalyzer.VisualBasic]*" -output:coverage/net5.0.xml -safemode:off -excludebyattribute:*.ExcludeFromCodeCoverageAttribute
-          Test-ExitCode "ERROR: Unit tests for net5.0 FAILED."
+          & OpenCover.Console.exe -target:"dotnet.exe" -targetargs:"test analyzers\tests\SonarAnalyzer.UnitTest\bin\$(BuildConfiguration)\net6.0\SonarAnalyzer.UnitTest.dll -l trx -l console;verbosity=detailed" -returntargetcode -filter:"+[SonarAnalyzer.CFG]* +[SonarAnalyzer]* +[SonarAnalyzer.CSharp]* +[SonarAnalyzer.Utilities]* +[SonarAnalyzer.VisualBasic]*" -output:coverage/net6.0.xml -safemode:off -excludebyattribute:*.ExcludeFromCodeCoverageAttribute
+          Test-ExitCode "ERROR: Unit tests for net6.0 FAILED."
         displayName: '.Net UTs'
 
       - task: PublishPipelineArtifact@1
         displayName: 'Save coverage files'
         inputs:
           path: 'coverage'
-          artifact: DotnetCoverageNet5
+          artifact: DotnetCoverageNet6
 
       - task: PublishPipelineArtifact@1
         displayName: 'Save test results files'
         inputs:
           path: 'TestResults'
-          artifact: DotnetTestResultsNet5
+          artifact: DotnetTestResultsNet6
 
     - job: dotNetAnalysis
       displayName: '.Net Analysis'
@@ -219,7 +219,7 @@ stages:
       # in previous jobs.
       dependsOn:
       - runUnitTestsJobNet48
-      - runUnitTestsJobNet5
+      - runUnitTestsJobNet6
       steps:
       - task: NuGetToolInstaller@1
         displayName: "Install NuGet"
@@ -291,7 +291,7 @@ stages:
       - task: DownloadPipelineArtifact@2
         displayName: 'Download coverage reports'
         inputs:
-          artifact: DotnetCoverageNet5
+          artifact: DotnetCoverageNet6
           targetPath: 'coverage'
 
       - task: DownloadPipelineArtifact@2
@@ -303,7 +303,7 @@ stages:
       - task: DownloadPipelineArtifact@2
         displayName: 'Download test results'
         inputs:
-          artifact: DotnetTestResultsNet5
+          artifact: DotnetTestResultsNet6
           targetPath: 'TestResults'
 
       - task: SonarCloudAnalyze@1
