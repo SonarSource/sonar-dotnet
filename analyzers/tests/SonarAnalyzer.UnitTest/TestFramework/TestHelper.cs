@@ -223,6 +223,5 @@ End Class", AnalyzerLanguage.VisualBasic);
             File.WriteAllText(sonarProjectConfigPath, projectConfigContent);
             return sonarProjectConfigPath;
         }
-
     }
 }

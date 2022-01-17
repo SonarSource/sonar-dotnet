@@ -624,11 +624,11 @@ namespace SonarAnalyzer.UnitTest.TestFramework
 
         [Obsolete("Use VerifierBuilder instead.")]
         public static void VerifyCodeFix<TCodeFix>(string path,
-                                         string pathToExpected,
-                                         SonarDiagnosticAnalyzer diagnosticAnalyzer,
-                                         ImmutableArray<ParseOptions> options = default,
-                                         OutputKind outputKind = OutputKind.DynamicallyLinkedLibrary,
-                                         IEnumerable<MetadataReference> additionalReferences = null) where TCodeFix : SonarCodeFixProvider, new() =>
+                                                   string pathToExpected,
+                                                   SonarDiagnosticAnalyzer diagnosticAnalyzer,
+                                                   ImmutableArray<ParseOptions> options = default,
+                                                   OutputKind outputKind = OutputKind.DynamicallyLinkedLibrary,
+                                                   IEnumerable<MetadataReference> additionalReferences = null) where TCodeFix : SonarCodeFixProvider, new() =>
             new VerifierBuilder()
                 .AddAnalyzer(() => diagnosticAnalyzer)
                 .AddReferences(additionalReferences ?? Enumerable.Empty<MetadataReference>())
@@ -659,11 +659,11 @@ namespace SonarAnalyzer.UnitTest.TestFramework
 
         [Obsolete("Use VerifierBuilder instead.")]
         public static void VerifyCodeFix<TCodeFix>(string path,
-                                         string pathToExpected,
-                                         SonarDiagnosticAnalyzer diagnosticAnalyzer,
-                                         string codeFixTitle,
-                                         ImmutableArray<ParseOptions> options = default,
-                                         IEnumerable<MetadataReference> additionalReferences = null)
+                                                   string pathToExpected,
+                                                   SonarDiagnosticAnalyzer diagnosticAnalyzer,
+                                                   string codeFixTitle,
+                                                   ImmutableArray<ParseOptions> options = default,
+                                                   IEnumerable<MetadataReference> additionalReferences = null)
             where TCodeFix : SonarCodeFixProvider, new() =>
             new VerifierBuilder()
                 .AddAnalyzer(() => diagnosticAnalyzer)

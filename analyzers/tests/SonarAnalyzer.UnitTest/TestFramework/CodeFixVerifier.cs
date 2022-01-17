@@ -105,10 +105,10 @@ namespace SonarAnalyzer.UnitTest.TestFramework
 
         private class State
         {
-            public readonly Compilation Compilation;
             public readonly Document Document;
             public readonly ImmutableArray<Diagnostic> Diagnostics;
             public readonly string ActualCode;
+            private readonly Compilation compilation;
 
             public State(DiagnosticAnalyzer analyzer, Document document, ParseOptions parseOptions)
             {
@@ -119,16 +119,16 @@ namespace SonarAnalyzer.UnitTest.TestFramework
                     document = project.GetDocument(document.Id);    // There's a new instance with the same ID
                 }
 
-                Compilation = project.GetCompilationAsync().Result;
+                compilation = project.GetCompilationAsync().Result;
                 Document = document;
-                Diagnostics = DiagnosticVerifier.GetDiagnosticsNoExceptions(Compilation, analyzer, CompilationErrorBehavior.Ignore).ToImmutableArray();
+                Diagnostics = DiagnosticVerifier.GetDiagnosticsNoExceptions(compilation, analyzer, CompilationErrorBehavior.Ignore).ToImmutableArray();
                 ActualCode = document.GetSyntaxRootAsync().Result.GetText().ToString();
             }
 
             public void AssertExpected(string pathToExpected, string becauseMessage)
             {
                 var expected = File.ReadAllText(pathToExpected).ToUnixLineEndings();
-                ActualCodeWithReplacedComments().ToUnixLineEndings().Should().Be(expected, $"{becauseMessage}. Language: {Compilation.LanguageVersionString()}");
+                ActualCodeWithReplacedComments().ToUnixLineEndings().Should().Be(expected, $"{becauseMessage}. Language: {compilation.LanguageVersionString()}");
             }
 
             private string ActualCodeWithReplacedComments() =>

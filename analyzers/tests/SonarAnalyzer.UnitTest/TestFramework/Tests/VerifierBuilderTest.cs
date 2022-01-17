@@ -128,7 +128,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework.Tests
         public void WithCodeFixedPath_Overrides_IsImmutable()
         {
             var one = Empty.WithCodeFixedPath("First");
-            var two = Empty.WithCodeFixedPath("Second");
+            var two = one.WithCodeFixedPath("Second");
             Empty.CodeFixedPath.Should().BeNull();
             one.CodeFixedPath.Should().Be("First");
             two.CodeFixedPath.Should().Be("Second");
@@ -142,7 +142,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework.Tests
         public void WithCodeFixedPathBatch_Overrides_IsImmutable()
         {
             var one = Empty.WithCodeFixedPathBatch("First");
-            var two = Empty.WithCodeFixedPathBatch("Second");
+            var two = one.WithCodeFixedPathBatch("Second");
             Empty.CodeFixedPathBatch.Should().BeNull();
             one.CodeFixedPathBatch.Should().Be("First");
             two.CodeFixedPathBatch.Should().Be("Second");
@@ -166,7 +166,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework.Tests
         public void WithCodeFixTitle_Overrides_IsImmutable()
         {
             var one = Empty.WithCodeFixTitle("First");
-            var two = Empty.WithCodeFixTitle("Second");
+            var two = one.WithCodeFixTitle("Second");
             Empty.CodeFixTitle.Should().BeNull();
             one.CodeFixTitle.Should().Be("First");
             two.CodeFixTitle.Should().Be("Second");

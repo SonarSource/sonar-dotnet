@@ -73,39 +73,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework
             if (builder.CodeFix is not null)
             {
                 codeFix = builder.CodeFix();
-                _ = builder.CodeFixedPath ?? throw new ArgumentException($"{nameof(builder.CodeFixedPath)} was not set.");
-                if (builder.Analyzers.Length != 1)
-                {
-                    throw new ArgumentException($"{nameof(builder.Analyzers)} must contain only 1 analyzer, but {analyzers.Length} were found.");
-                }
-                if (builder.Paths.Length != 1)
-                {
-                    throw new ArgumentException($"{nameof(builder.Paths)} must contain only 1 file, but {builder.Paths.Length} were found.");
-                }
-                if (builder.Snippets.Any())
-                {
-                    throw new ArgumentException($"{nameof(builder.Snippets)} must be empty when {nameof(builder.CodeFix)} is set.");
-                }
-                ValidateExtension(builder.CodeFixedPath);
-                if (builder.CodeFixedPathBatch is not null)
-                {
-                    ValidateExtension(builder.CodeFixedPathBatch);
-                }
-                if (codeFix.GetType().GetCustomAttribute<ExportCodeFixProviderAttribute>() is { } codeFixAttribute)
-                {
-                    if (codeFix.GetType().GetCustomAttribute<ExportCodeFixProviderAttribute>().Languages.Single() != language.LanguageName)
-                    {
-                        throw new ArgumentException($"{analyzers.Single().GetType().Name} language {language.LanguageName} does not match {codeFix.GetType().Name} language.");
-                    }
-                }
-                else
-                {
-                    throw new ArgumentException($"{codeFix.GetType().Name} does not have {nameof(ExportCodeFixProviderAttribute)}.");
-                }
-                if (!analyzers.Single().SupportedDiagnostics.Select(x => x.Id).Intersect(codeFix.FixableDiagnosticIds).Any())
-                {
-                    throw new ArgumentException($"{analyzers.Single().GetType().Name} does not support diagnostics fixable by the {codeFix.GetType().Name}.");
-                }
+                ValidateCodeFix();
             }
         }
 
@@ -190,6 +158,43 @@ namespace SonarAnalyzer.UnitTest.TestFramework
             if (!Path.GetExtension(path).Equals(language.FileExtension, StringComparison.OrdinalIgnoreCase))
             {
                 throw new ArgumentException($"Path '{path}' doesn't match {language.LanguageName} file extension '{language.FileExtension}'.");
+            }
+        }
+
+        private void ValidateCodeFix()
+        {
+            _ = builder.CodeFixedPath ?? throw new ArgumentException($"{nameof(builder.CodeFixedPath)} was not set.");
+            if (builder.Analyzers.Length != 1)
+            {
+                throw new ArgumentException($"{nameof(builder.Analyzers)} must contain only 1 analyzer, but {analyzers.Length} were found.");
+            }
+            if (builder.Paths.Length != 1)
+            {
+                throw new ArgumentException($"{nameof(builder.Paths)} must contain only 1 file, but {builder.Paths.Length} were found.");
+            }
+            if (builder.Snippets.Any())
+            {
+                throw new ArgumentException($"{nameof(builder.Snippets)} must be empty when {nameof(builder.CodeFix)} is set.");
+            }
+            ValidateExtension(builder.CodeFixedPath);
+            if (builder.CodeFixedPathBatch is not null)
+            {
+                ValidateExtension(builder.CodeFixedPathBatch);
+            }
+            if (codeFix.GetType().GetCustomAttribute<ExportCodeFixProviderAttribute>() is { } codeFixAttribute)
+            {
+                if (codeFixAttribute.Languages.Single() != language.LanguageName)
+                {
+                    throw new ArgumentException($"{analyzers.Single().GetType().Name} language {language.LanguageName} does not match {codeFix.GetType().Name} language.");
+                }
+            }
+            else
+            {
+                throw new ArgumentException($"{codeFix.GetType().Name} does not have {nameof(ExportCodeFixProviderAttribute)}.");
+            }
+            if (!analyzers.Single().SupportedDiagnostics.Select(x => x.Id).Intersect(codeFix.FixableDiagnosticIds).Any())
+            {
+                throw new ArgumentException($"{analyzers.Single().GetType().Name} does not support diagnostics fixable by the {codeFix.GetType().Name}.");
             }
         }
     }

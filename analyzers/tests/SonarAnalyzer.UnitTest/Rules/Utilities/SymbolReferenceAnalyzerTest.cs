@@ -24,6 +24,7 @@ using System.Linq;
 using FluentAssertions;
 using Microsoft.CodeAnalysis;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
 using SonarAnalyzer.Protobuf;
 using SonarAnalyzer.Rules;
@@ -152,10 +153,13 @@ namespace SonarAnalyzer.UnitTest.Rules
                             bool isMessageExpected = true)
         {
             var testRoot = Root + TestContext.TestName;
-            UtilityAnalyzerBase analyzer = fileName.EndsWith(".cs")
-                ? new TestSymbolReferenceAnalyzer_CS(testRoot, projectType == ProjectType.Test)
-                : new TestSymbolReferenceAnalyzer_VB(testRoot, projectType == ProjectType.Test);
-
+            var language = AnalyzerLanguage.FromPath(fileName);
+            UtilityAnalyzerBase analyzer = language.LanguageName switch
+            {
+                LanguageNames.CSharp => new TestSymbolReferenceAnalyzer_CS(testRoot, projectType == ProjectType.Test),
+                LanguageNames.VisualBasic => new TestSymbolReferenceAnalyzer_VB(testRoot, projectType == ProjectType.Test),
+                _ => throw new UnexpectedLanguageException(language)
+            };
             OldVerifier.VerifyNonConcurrentUtilityAnalyzer<SymbolReferenceInfo>(
                 new[] { Root + fileName },
                 analyzer,
@@ -172,7 +176,7 @@ namespace SonarAnalyzer.UnitTest.Rules
                         verifyReference(info.Reference);
                     }
                 },
-                fileName.EndsWith(".cs") ? ParseOptionsHelper.CSharpLatest : ParseOptionsHelper.VisualBasicLatest);
+                ParseOptionsHelper.Latest(language));
         }
 
         // We need to set protected properties and this class exists just to enable the analyzer without bothering with additional files with parameters

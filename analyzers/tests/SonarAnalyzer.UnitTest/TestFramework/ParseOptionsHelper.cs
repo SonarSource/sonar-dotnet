@@ -22,6 +22,8 @@ using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Linq;
 using Microsoft.CodeAnalysis;
+using SonarAnalyzer.Common;
+using SonarAnalyzer.Helpers;
 using SonarAnalyzer.UnitTest.Helpers;
 
 using static Microsoft.CodeAnalysis.CSharp.LanguageVersion;
@@ -99,6 +101,14 @@ namespace SonarAnalyzer.UnitTest.TestFramework
 
         public static IEnumerable<ParseOptions> Default(string language) =>
             DefaultParseOptions.Where(x => x.Language == language);
+
+        public static ImmutableArray<ParseOptions> Latest(AnalyzerLanguage language) =>
+            language.LanguageName switch
+            {
+                LanguageNames.CSharp => CSharpLatest,
+                LanguageNames.VisualBasic => VisualBasicLatest,
+                _ => throw new UnexpectedLanguageException(language)
+            };
 
         private static ImmutableArray<ParseOptions> FilterByEnvironment(this IEnumerable<ParseOptions> options) =>
             TestContextHelper.IsAzureDevOpsContext && !TestContextHelper.IsPullRequestBuild
