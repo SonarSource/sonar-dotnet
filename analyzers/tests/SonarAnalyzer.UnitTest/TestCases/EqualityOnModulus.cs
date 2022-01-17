@@ -21,6 +21,7 @@ namespace Tests.Diagnostics
 
             var array = new[] {1};
             y = array.Length % 2 == 1; // Compliant: array Length is > 0;
+            y = array.LongLength % 2 == 1; // Compliant: array Length is > 0;
 
             IEnumerable<int> enumerable = array;
             y = enumerable.Count() % 2 == 1; // Compliant - IEnumerable Count is > 0;

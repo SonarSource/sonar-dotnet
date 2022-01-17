@@ -98,13 +98,19 @@ namespace SonarAnalyzer.Rules.CSharp
             && methodSymbol.ReceiverType != null
             && methodSymbol.IsExtensionOn(KnownType.System_Collections_Generic_IEnumerable_T);
 
-        private static bool IsCollectionSizeProperty(IPropertySymbol propertySymbol) =>
-            ((LengthName.Equals(propertySymbol.Name) || LongLengthName.Equals(propertySymbol.Name))
-                && propertySymbol.ContainingType.IsAny(KnownType.System_Array, KnownType.System_String))
-            || (CountName.Equals(propertySymbol.Name)
-                && (propertySymbol.ContainingType.Implements(KnownType.System_Collections_Generic_ICollection_T) || propertySymbol.ContainingType.Implements(KnownType.System_Collections_Generic_IReadOnlyCollection_T)))
-            || (ListCapacityName.Equals(propertySymbol.Name)
-                && propertySymbol.ContainingType.Implements(KnownType.System_Collections_Generic_IList_T));
-    }
+        private static bool IsCollectionSizeProperty(IPropertySymbol propertySymbol)
+        {
+            var containingType = propertySymbol.ContainingType;
+            return (EqualsLengthName(propertySymbol.Name) && containingType.IsAny(KnownType.System_Array, KnownType.System_String))
+            || (CountName.Equals(propertySymbol.Name) && ImplementsICollection(containingType))
+            || (ListCapacityName.Equals(propertySymbol.Name) && containingType.Implements(KnownType.System_Collections_Generic_IList_T));
+        }
 
+        private static bool ImplementsICollection(INamedTypeSymbol typeSymbol) =>
+            typeSymbol.ContainingType.Implements(KnownType.System_Collections_Generic_ICollection_T)
+            || typeSymbol.ContainingType.Implements(KnownType.System_Collections_Generic_IReadOnlyCollection_T);
+
+        private static bool EqualsLengthName(string name) =>
+            LengthName.Equals(name) || LongLengthName.Equals(name);
+    }
 }
