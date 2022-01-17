@@ -175,7 +175,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         public void CheckFileLicense_WhenProvidingAnInvalidRegex_ShouldThrowException_CS()
         {
-            var compilation = SolutionBuilder.CreateSolutionFromPaths(new[] { @"TestCases\CheckFileLicense_NoLicenseStartWithUsing.cs" }).Compile(ParseOptionsHelper.CSharpLatest.ToArray()).Single();
+            var compilation = SolutionBuilder.CreateSolutionFromPath(@"TestCases\CheckFileLicense_NoLicenseStartWithUsing.cs").Compile(ParseOptionsHelper.CSharpLatest.ToArray()).Single();
             var diagnostics = DiagnosticVerifier.GetDiagnosticsIgnoreExceptions(compilation, new CS.CheckFileLicense { HeaderFormat = FailingSingleLineRegexHeader, IsRegularExpression = true });
             diagnostics.Should().ContainSingle(x => x.Id == "AD0001").Which.GetMessage().Should()
                 .StartWith("Analyzer 'SonarAnalyzer.Rules.CSharp.CheckFileLicense' threw an exception of type 'System.InvalidOperationException' with message 'Invalid regular expression:");

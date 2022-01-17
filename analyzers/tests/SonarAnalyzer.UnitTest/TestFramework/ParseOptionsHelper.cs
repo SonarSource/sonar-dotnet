@@ -18,12 +18,10 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Linq;
 using Microsoft.CodeAnalysis;
-using SonarAnalyzer.Helpers;
 using SonarAnalyzer.UnitTest.Helpers;
 
 using static Microsoft.CodeAnalysis.CSharp.LanguageVersion;
@@ -53,6 +51,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework
         public static ImmutableArray<ParseOptions> CSharpPreview { get; }
 
         public static ImmutableArray<ParseOptions> CSharpLatest { get; }
+        public static ImmutableArray<ParseOptions> VisualBasicLatest { get; }
 
         public static ImmutableArray<ParseOptions> OnlyCSharp7 { get; }
 
@@ -76,8 +75,6 @@ namespace SonarAnalyzer.UnitTest.TestFramework
             BeforeCSharp9 = BeforeCSharp8.Concat(cs8).FilterByEnvironment();
             BeforeCSharp10 = BeforeCSharp9.Concat(cs9).FilterByEnvironment();
 
-            CSharpPreview = CreateOptions(Preview).FilterByEnvironment();
-            CSharpLatest = CreateOptions(CS.LanguageVersion.Latest).FilterByEnvironment();
             FromCSharp10 = CreateOptions(CSharp10).FilterByEnvironment();
             FromCSharp9 = cs9.Concat(FromCSharp10).FilterByEnvironment();
             FromCSharp8 = cs8.Concat(FromCSharp9).FilterByEnvironment();
@@ -91,21 +88,17 @@ namespace SonarAnalyzer.UnitTest.TestFramework
             FromVisualBasic12 = CreateOptions(VisualBasic12).Concat(FromVisualBasic14).FilterByEnvironment();
 
             DefaultParseOptions = FromCSharp7.Concat(FromVisualBasic12).ToImmutableArray(); // Values depends on the build environment
+            CSharpPreview = CreateOptions(Preview).ToImmutableArray();
+            CSharpLatest = CreateOptions(CS.LanguageVersion.Latest).ToImmutableArray();
+            VisualBasicLatest = CreateOptions(VB.LanguageVersion.Latest).ToImmutableArray();
         }
 #pragma warning restore S3963
 
-        public static IEnumerable<ParseOptions> GetParseOptionsOrDefault(IEnumerable<ParseOptions> parseOptions) =>
-            parseOptions != null && parseOptions.WhereNotNull().Any()
-                ? parseOptions.WhereNotNull()
-                : DefaultParseOptions;
+        public static IEnumerable<ParseOptions> OrDefault(this IEnumerable<ParseOptions> parseOptions, string language) =>
+            parseOptions != null && parseOptions.Any() ? parseOptions : Default(language);
 
-        public static Func<ParseOptions, bool> GetFilterByLanguage(string language) =>
-            language switch
-            {
-                LanguageNames.CSharp => x => x is CS.CSharpParseOptions,
-                LanguageNames.VisualBasic => x => x is VB.VisualBasicParseOptions,
-                _ => throw new NotSupportedException($"Not supported language '{language}'")
-            };
+        public static IEnumerable<ParseOptions> Default(string language) =>
+            DefaultParseOptions.Where(x => x.Language == language);
 
         private static ImmutableArray<ParseOptions> FilterByEnvironment(this IEnumerable<ParseOptions> options) =>
             TestContextHelper.IsAzureDevOpsContext && !TestContextHelper.IsPullRequestBuild

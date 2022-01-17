@@ -172,7 +172,7 @@ namespace SonarAnalyzer.UnitTest.Rules
                         verifyReference(info.Reference);
                     }
                 },
-                ParseOptionsHelper.CSharpLatest);
+                fileName.EndsWith(".cs") ? ParseOptionsHelper.CSharpLatest : ParseOptionsHelper.VisualBasicLatest);
         }
 
         // We need to set protected properties and this class exists just to enable the analyzer without bothering with additional files with parameters

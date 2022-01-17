@@ -66,7 +66,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         {
             const string testRoot = Root + nameof(Verify_NotRunForTestProject);
             OldVerifier.VerifyUtilityAnalyzerIsNotRun(
-                new[] { Root + "AllMetrics.cs" },
+                Root + "AllMetrics.cs",
                 new TestMetricsAnalyzer(testRoot, true),
                 @$"{testRoot}\metrics.pb",
                 ParseOptionsHelper.CSharpLatest);

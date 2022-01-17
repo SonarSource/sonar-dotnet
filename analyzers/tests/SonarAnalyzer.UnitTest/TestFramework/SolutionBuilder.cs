@@ -20,6 +20,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Collections.Immutable;
 using System.IO;
 using System.Linq;
 using Microsoft.CodeAnalysis;
@@ -30,7 +31,7 @@ using SonarAnalyzer.UnitTest.MetadataReferences;
 
 namespace SonarAnalyzer.UnitTest.TestFramework
 {
-    internal struct SolutionBuilder
+    internal readonly struct SolutionBuilder
     {
         private const string GeneratedAssemblyName = "project";
 
@@ -44,13 +45,12 @@ namespace SonarAnalyzer.UnitTest.TestFramework
             "System.Linq",
             "System.Xml.Linq",
             "System.Threading.Tasks");
+        private readonly Solution solution;
 
-        public IReadOnlyList<ProjectId> ProjectIds => Solution.ProjectIds;
-
-        private Solution Solution { get; }
+        public IReadOnlyList<ProjectId> ProjectIds => solution.ProjectIds;
 
         private SolutionBuilder(Solution solution) =>
-            Solution = solution;
+            this.solution = solution;
 
         public ProjectBuilder AddProject(AnalyzerLanguage language, bool createExtraEmptyFile = true, OutputKind outputKind = OutputKind.DynamicallyLinkedLibrary) =>
             AddProject(language, $"{GeneratedAssemblyName}{ProjectIds.Count}", createExtraEmptyFile, outputKind);
@@ -58,44 +58,21 @@ namespace SonarAnalyzer.UnitTest.TestFramework
         public static SolutionBuilder Create() =>
             FromSolution(new AdhocWorkspace().CurrentSolution);
 
-        public static SolutionBuilder CreateSolutionFromPaths(IEnumerable<string> paths,
-                                                              OutputKind outputKind = OutputKind.DynamicallyLinkedLibrary,
-                                                              IEnumerable<MetadataReference> additionalReferences = null)
-        {
-            if (paths == null || !paths.Any())
-            {
-                throw new ArgumentException("Please specify at least one file path to analyze.", nameof(paths));
-            }
-
-            var extensions = paths.Select(path => Path.GetExtension(path)).Distinct().ToList();
-            if (extensions.Count != 1)
-            {
-                throw new ArgumentException("Please use a collection of paths with the same extension", nameof(paths));
-            }
-
-            var project = Create()
-                .AddProject(AnalyzerLanguage.FromPath(paths.First()), outputKind: outputKind)
-                .AddDocuments(paths)
-                .AddReferences(additionalReferences);
-
-            return project.GetSolution();
-        }
+        public static SolutionBuilder CreateSolutionFromPath(string path, OutputKind outputKind = OutputKind.DynamicallyLinkedLibrary, IEnumerable<MetadataReference> additionalReferences = null) =>
+            Create()
+                .AddProject(AnalyzerLanguage.FromPath(path), outputKind: outputKind)
+                .AddDocument(path)
+                .AddReferences(additionalReferences)
+                .Solution;
 
         public static SolutionBuilder FromSolution(Solution solution) =>
-            new SolutionBuilder(solution);
+            new(solution);
 
-        public IReadOnlyList<Compilation> Compile(params ParseOptions[] parseOptions)
-        {
-            var options = ParseOptionsHelper.GetParseOptionsOrDefault(parseOptions);
+        public ImmutableArray<Compilation> Compile(params ParseOptions[] parseOptions) =>
+            solution.Projects.SelectMany(x => Compile(x, parseOptions)).ToImmutableArray();
 
-            return Solution
-                .Projects
-                .SelectMany(project => options
-                    .Where(ParseOptionsHelper.GetFilterByLanguage(project.Language))
-                    .Select(o => GetCompilation(project, o)))
-                .ToList()
-                .AsReadOnly();
-        }
+        private static IEnumerable<Compilation> Compile(Project project, ParseOptions[] parseOptions) =>
+            parseOptions.OrDefault(project.Language).Select(x => project.WithParseOptions(x).GetCompilationAsync().Result);
 
         private ProjectBuilder AddProject(AnalyzerLanguage language, string projectName, bool createExtraEmptyFile, OutputKind outputKind = OutputKind.DynamicallyLinkedLibrary)
         {
@@ -103,7 +80,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework
             {
                 throw new UnexpectedLanguageException(language);
             }
-            var project = Solution.AddProject(projectName, projectName, language.LanguageName);
+            var project = solution.AddProject(projectName, projectName, language.LanguageName);
             var compilationOptions = project.CompilationOptions.WithOutputKind(outputKind);
             compilationOptions = language.LanguageName switch
             {
@@ -132,11 +109,5 @@ namespace SonarAnalyzer.UnitTest.TestFramework
 
             return projectBuilder;
         }
-
-        private static Compilation GetCompilation(Project project, ParseOptions options) =>
-            project
-                .WithParseOptions(options)
-                .GetCompilationAsync()
-                .Result;
     }
 }

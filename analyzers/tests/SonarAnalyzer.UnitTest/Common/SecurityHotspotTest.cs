@@ -20,6 +20,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Collections.Immutable;
 using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Diagnostics;
@@ -40,13 +41,13 @@ namespace SonarAnalyzer.UnitTest.Common
     {
         [TestMethod]
         public void SecurityHotspotRules_DoNotRaiseIssues_CS() =>
-            VerifyNoIssueReported(AnalyzerLanguage.CSharp);
+            VerifyNoIssueReported(AnalyzerLanguage.CSharp, ParseOptionsHelper.FromCSharp9);
 
         [TestMethod]
         public void SecurityHotspotRules_DoNotRaiseIssues_VB() =>
-            VerifyNoIssueReported(AnalyzerLanguage.VisualBasic);
+            VerifyNoIssueReported(AnalyzerLanguage.VisualBasic, ParseOptionsHelper.FromVisualBasic12);
 
-        private static void VerifyNoIssueReported(AnalyzerLanguage language)
+        private static void VerifyNoIssueReported(AnalyzerLanguage language, ImmutableArray<ParseOptions> parseOptions)
         {
             foreach (var analyzer in GetHotspotAnalyzers(language))
             {
@@ -56,7 +57,7 @@ namespace SonarAnalyzer.UnitTest.Common
                 {
                     OldVerifier.VerifyNoIssueReported(@$"TestCases\Hotspots\{GetTestCaseFileName(analyzerName)}{language.FileExtension}",
                         analyzer,
-                        ParseOptionsHelper.FromCSharp9,
+                        parseOptions,
                         GetAdditionalReferences(analyzerName));
                 }
             }

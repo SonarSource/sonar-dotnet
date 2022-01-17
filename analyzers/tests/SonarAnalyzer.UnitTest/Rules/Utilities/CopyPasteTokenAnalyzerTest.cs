@@ -20,8 +20,10 @@
 
 using System;
 using System.Collections.Generic;
+using System.Collections.Immutable;
 using System.Linq;
 using FluentAssertions;
+using Microsoft.CodeAnalysis;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.Helpers;
 using SonarAnalyzer.Protobuf;
@@ -100,9 +102,9 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void Verify_NotRunForTestProject_CS()
         {
             var testRoot = Root + TestContext.TestName;
-            OldVerifier.VerifyUtilityAnalyzerIsNotRun(new[] { Root + "DuplicatedDifferentLiterals.cs" },
-                                                   new TestCopyPasteTokenAnalyzer_CS(testRoot, true),
-                                                   @$"{testRoot}\token-cpd.pb");
+            OldVerifier.VerifyUtilityAnalyzerIsNotRun(Root + "DuplicatedDifferentLiterals.cs",
+                                                      new TestCopyPasteTokenAnalyzer_CS(testRoot, true),
+                                                      @$"{testRoot}\token-cpd.pb");
         }
 
         private void Verify(string fileName, Action<IReadOnlyList<CopyPasteTokenInfo.Types.TokenInfo>> verifyTokenInfo)
@@ -124,7 +126,7 @@ namespace SonarAnalyzer.UnitTest.Rules
                     info.FilePath.Should().Be(fileName);
                     verifyTokenInfo(info.TokenInfo);
                 },
-                ParseOptionsHelper.FromCSharp10);
+                fileName.EndsWith(".cs") ? ParseOptionsHelper.CSharpLatest : ParseOptionsHelper.VisualBasicLatest);
         }
 
         // We need to set protected properties and this class exists just to enable the analyzer without bothering with additional files with parameters

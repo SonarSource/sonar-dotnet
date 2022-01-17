@@ -28,42 +28,32 @@ using SonarAnalyzer.UnitTest.MetadataReferences;
 
 namespace SonarAnalyzer.UnitTest.TestFramework
 {
-    internal struct ProjectBuilder
+    internal readonly struct ProjectBuilder
     {
         private const string FixedMessage = "Fixed";
 
-        private readonly Lazy<SolutionBuilder> solutionWrapper;
+        private readonly Lazy<SolutionBuilder> solution;
+        private readonly Project project;
+        private readonly string fileExtension;
 
-        private Project Project { get; }
-
-        private string FileExtension { get; }
+        public SolutionBuilder Solution => solution.Value;
 
         private ProjectBuilder(Project project)
         {
-            Project = project;
-            FileExtension = project.Language == LanguageNames.CSharp ? ".cs" : ".vb";
-
-            solutionWrapper = new Lazy<SolutionBuilder>(() => SolutionBuilder.FromSolution(project.Solution));
+            this.project = project;
+            fileExtension = project.Language == LanguageNames.CSharp ? ".cs" : ".vb";
+            solution = new Lazy<SolutionBuilder>(() => SolutionBuilder.FromSolution(project.Solution));
         }
-
-        public SolutionBuilder GetSolution() =>
-            solutionWrapper.Value;
 
         public Compilation GetCompilation(ParseOptions parseOptions = null, CompilationOptions compilationOptions = null)
         {
-            var project = parseOptions != null
-                ? Project.WithParseOptions(parseOptions)
-                : Project;
-
-            var compilation = project.GetCompilationAsync().Result;
-
-            return compilationOptions == null
-                ? compilation
-                : compilation.WithOptions(compilationOptions);
+            var projectWithOptions = parseOptions == null ? project : project.WithParseOptions(parseOptions);
+            var compilation = projectWithOptions.GetCompilationAsync().Result;
+            return compilationOptions == null ? compilation : compilation.WithOptions(compilationOptions);
         }
 
         public Document FindDocument(string name) =>
-            Project.Documents.Single(d => d.Name == name);
+            project.Documents.Single(d => d.Name == name);
 
         public ProjectBuilder AddReferences(IEnumerable<MetadataReference> references)
         {
@@ -75,29 +65,23 @@ namespace SonarAnalyzer.UnitTest.TestFramework
             {
                 references = references.Concat(NetStandardMetadataReference.Netstandard);
             }
-            var existingReferences = Project.MetadataReferences.ToHashSet();
-            return FromProject(Project.AddMetadataReferences(references.Distinct().Where(x => !existingReferences.Contains(x))));
+            var existingReferences = project.MetadataReferences.ToHashSet();
+            return FromProject(project.AddMetadataReferences(references.Distinct().Where(x => !existingReferences.Contains(x))));
         }
 
         public ProjectBuilder AddProjectReference(Func<SolutionBuilder, ProjectId> getProjectId) =>
-            FromProject(Project.AddProjectReference(new ProjectReference(getProjectId(GetSolution()))));
+            FromProject(project.AddProjectReference(new ProjectReference(getProjectId(Solution))));
 
         public ProjectBuilder AddDocuments(IEnumerable<string> paths) =>
             paths.Aggregate(this, (projectBuilder, path) => projectBuilder.AddDocument(path));
 
         public ProjectBuilder AddDocument(string path, bool removeAnalysisComments = false)
         {
-            if (path == null)
-            {
-                throw new ArgumentNullException(nameof(path));
-            }
-
+            _ = path ?? throw new ArgumentNullException(nameof(path));
             var fileInfo = new FileInfo(path);
-
-            return fileInfo.Extension != FileExtension
-                ? throw new ArgumentException($"The file extension '{fileInfo.Extension}' does not" +
-                                              $" match the project language '{Project.Language}'.", nameof(path))
-                : AddDocument(Project, fileInfo.Name, File.ReadAllText(fileInfo.FullName, Encoding.UTF8), removeAnalysisComments);
+            return fileInfo.Extension == fileExtension
+                ? AddDocument(project, fileInfo.Name, File.ReadAllText(fileInfo.FullName, Encoding.UTF8), removeAnalysisComments)
+                : throw new ArgumentException($"The file extension '{fileInfo.Extension}' does not match the project language '{project.Language}'.", nameof(path));
         }
 
         public ProjectBuilder AddSnippets(params string[] snippets) =>
@@ -105,14 +89,9 @@ namespace SonarAnalyzer.UnitTest.TestFramework
 
         public ProjectBuilder AddSnippet(string code, string fileName = null, bool removeAnalysisComments = false)
         {
-            if (code == null)
-            {
-                throw new ArgumentNullException(nameof(code));
-            }
-
-            fileName ??= $"snippet{Project.Documents.Count()}{FileExtension}";
-
-            return AddDocument(Project, fileName, code, removeAnalysisComments);
+            _ = code ?? throw new ArgumentNullException(nameof(code));
+            fileName ??= $"snippet{project.Documents.Count()}{fileExtension}";
+            return AddDocument(project, fileName, code, removeAnalysisComments);
         }
 
         public static ProjectBuilder FromProject(Project project) =>
@@ -120,24 +99,17 @@ namespace SonarAnalyzer.UnitTest.TestFramework
 
         private static ProjectBuilder AddDocument(Project project, string fileName, string fileContent, bool removeAnalysisComments)
         {
+            const string WindowsLineEnding = "\r\n";
+            const string UnixLineEnding = "\n";
             return FromProject(project.AddDocument(fileName, ReadDocument()).Project);
 
             string ReadDocument()
             {
-                const string WindowsLineEnding = "\r\n";
-                const string UnixLineEnding = "\n";
-
-                var lines = fileContent
-                    .Replace(WindowsLineEnding, UnixLineEnding) // This allows to deal with multiple line endings
-                    .Split(new[] { UnixLineEnding }, StringSplitOptions.None);
-
+                var lines = fileContent.Replace(WindowsLineEnding, UnixLineEnding).Split(new[] { UnixLineEnding }, StringSplitOptions.None);
                 if (removeAnalysisComments)
                 {
-                    lines = lines.Where(line => !IssueLocationCollector.RxPreciseLocation.IsMatch(line))
-                        .Select(ReplaceNonCompliantComment)
-                        .ToArray();
+                    lines = lines.Where(x => !IssueLocationCollector.RxPreciseLocation.IsMatch(x)).Select(ReplaceNonCompliantComment).ToArray();
                 }
-
                 return string.Join(UnixLineEnding, lines);
             }
         }

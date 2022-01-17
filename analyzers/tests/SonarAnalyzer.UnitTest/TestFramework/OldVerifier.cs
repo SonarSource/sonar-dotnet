@@ -515,7 +515,10 @@ namespace SonarAnalyzer.UnitTest.TestFramework
                                                                         IEnumerable<ParseOptions> options = null)
             where TMessage : IMessage<TMessage>, new()
         {
-            var solutionBuilder = SolutionBuilder.CreateSolutionFromPaths(paths);
+            var solutionBuilder = SolutionBuilder.Create()
+                .AddProject(AnalyzerLanguage.FromPath(paths.First()))
+                .AddDocuments(paths)
+                .Solution;
             foreach (var compilation in solutionBuilder.Compile(options?.ToArray()))
             {
                 DiagnosticVerifier.Verify(compilation, diagnosticAnalyzer, CompilationErrorBehavior.Default, sonarProjectConfigPath);
@@ -536,12 +539,12 @@ namespace SonarAnalyzer.UnitTest.TestFramework
         /// <summary>
         /// Verify utility analyzer is not run in non-concurrent execution mode.
         /// </summary>
-        public static void VerifyUtilityAnalyzerIsNotRun(IEnumerable<string> paths,
+        public static void VerifyUtilityAnalyzerIsNotRun(string path,
                                                          UtilityAnalyzerBase diagnosticAnalyzer,
                                                          string protobufPath,
                                                          IEnumerable<ParseOptions> options = null)
         {
-            var solutionBuilder = SolutionBuilder.CreateSolutionFromPaths(paths);
+            var solutionBuilder = SolutionBuilder.CreateSolutionFromPath(path);
             foreach (var compilation in solutionBuilder.Compile(options?.ToArray()))
             {
                 DiagnosticVerifier.Verify(compilation, diagnosticAnalyzer, CompilationErrorBehavior.Default);
