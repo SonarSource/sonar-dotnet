@@ -509,13 +509,13 @@ namespace SonarAnalyzer.UnitTest.TestFramework
                 .VerifyUtilityAnalyzer(verifyProtobuf);
 
         [Obsolete("Use VerifierBuilder instead.")]
-        public static void VerifyUtilityAnalyzerIsNotRun(IEnumerable<string> paths,
+        public static void VerifyUtilityAnalyzerIsNotRun(string path,
                                                          UtilityAnalyzerBase diagnosticAnalyzer,
                                                          string protobufPath,
                                                          ImmutableArray<ParseOptions> options = default) =>
             new VerifierBuilder()
                 .AddAnalyzer(() => diagnosticAnalyzer)
-                .AddPaths(RemoveTestCasesPrefix(paths))
+                .AddPaths(RemoveTestCasesPrefix(path))
                 .WithOptions(options.IsDefault ? ImmutableArray<ParseOptions>.Empty : options)
                 .WithProtobufPath(protobufPath)
                 .VerifyUtilityAnalyzerProducesEmptyProtobuf();
