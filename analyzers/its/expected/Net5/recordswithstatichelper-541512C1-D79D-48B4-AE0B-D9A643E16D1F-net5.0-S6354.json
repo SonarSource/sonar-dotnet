@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S6354",
+"message":  "Use a testable (date) time provider instead.",
+"location":  {
+"uri":  "sources\Net5\Net5Samples\RecordWithStaticHelper\Program.cs",
+"region":  {
+"startLine":  4,
+"startColumn":  37,
+"endLine":  4,
+"endColumn":  49
+}
+}
+}
+]
+}

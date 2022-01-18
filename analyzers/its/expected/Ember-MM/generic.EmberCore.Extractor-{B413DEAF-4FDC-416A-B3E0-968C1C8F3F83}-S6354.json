@@ -1,0 +1,82 @@
+{
+"issues":  [
+{
+"id":  "S6354",
+"message":  "Use a testable (date) time provider instead.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.Extractor\clsExtractor.vb",
+"region":  {
+"startLine":  185,
+"startColumn":  91,
+"endLine":  185,
+"endColumn":  105
+}
+}
+},
+{
+"id":  "S6354",
+"message":  "Use a testable (date) time provider instead.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.Extractor\clsExtractor.vb",
+"region":  {
+"startLine":  185,
+"startColumn":  145,
+"endLine":  185,
+"endColumn":  159
+}
+}
+},
+{
+"id":  "S6354",
+"message":  "Use a testable (date) time provider instead.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.Extractor\frmMovieExtractor.vb",
+"region":  {
+"startLine":  31,
+"startColumn":  67,
+"endLine":  31,
+"endColumn":  81
+}
+}
+},
+{
+"id":  "S6354",
+"message":  "Use a testable (date) time provider instead.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.Extractor\frmMovieExtractor.vb",
+"region":  {
+"startLine":  31,
+"startColumn":  121,
+"endLine":  31,
+"endColumn":  135
+}
+}
+},
+{
+"id":  "S6354",
+"message":  "Use a testable (date) time provider instead.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.Extractor\frmTVExtrator.vb",
+"region":  {
+"startLine":  62,
+"startColumn":  91,
+"endLine":  62,
+"endColumn":  105
+}
+}
+},
+{
+"id":  "S6354",
+"message":  "Use a testable (date) time provider instead.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.Extractor\frmTVExtrator.vb",
+"region":  {
+"startLine":  62,
+"startColumn":  145,
+"endLine":  62,
+"endColumn":  159
+}
+}
+}
+]
+}

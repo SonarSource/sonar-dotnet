@@ -1,0 +1,69 @@
+{
+"issues":  [
+{
+"id":  "S6354",
+"message":  "Use a testable (date) time provider instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote\Deadline.cs",
+"region":  {
+"startLine":  31,
+"startColumn":  26,
+"endLine":  31,
+"endColumn":  41
+}
+}
+},
+{
+"id":  "S6354",
+"message":  "Use a testable (date) time provider instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote\Deadline.cs",
+"region":  {
+"startLine":  39,
+"startColumn":  26,
+"endLine":  39,
+"endColumn":  41
+}
+}
+},
+{
+"id":  "S6354",
+"message":  "Use a testable (date) time provider instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote\Deadline.cs",
+"region":  {
+"startLine":  55,
+"startColumn":  56,
+"endLine":  55,
+"endColumn":  71
+}
+}
+},
+{
+"id":  "S6354",
+"message":  "Use a testable (date) time provider instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote\Deadline.cs",
+"region":  {
+"startLine":  83,
+"startColumn":  56,
+"endLine":  83,
+"endColumn":  62
+}
+}
+},
+{
+"id":  "S6354",
+"message":  "Use a testable (date) time provider instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote\Deadline.cs",
+"region":  {
+"startLine":  89,
+"startColumn":  37,
+"endLine":  89,
+"endColumn":  52
+}
+}
+}
+]
+}
