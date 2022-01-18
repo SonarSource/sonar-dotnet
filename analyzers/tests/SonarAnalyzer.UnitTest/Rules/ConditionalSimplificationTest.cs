@@ -45,11 +45,11 @@ namespace SonarAnalyzer.UnitTest.Rules
 
         [TestMethod]
         public void ConditionalSimplification_CSharp8_CodeFix() =>
-            OldVerifier.VerifyCodeFix(@"TestCases\ConditionalSimplification.CSharp8.cs",
-                                   @"TestCases\ConditionalSimplification.CSharp8.Fixed.cs",
-                                   new ConditionalSimplification(),
-                                   new ConditionalSimplificationCodeFixProvider(),
-                                   new[] { new CSharpParseOptions(LanguageVersion.CSharp8) });  // ToDo: Use WithLanguageVersion instead
+            OldVerifier.VerifyCodeFix<ConditionalSimplificationCodeFixProvider>(
+                @"TestCases\ConditionalSimplification.CSharp8.cs",
+                @"TestCases\ConditionalSimplification.CSharp8.Fixed.cs",
+                new ConditionalSimplification(),
+                ImmutableArray.Create<ParseOptions>(new CSharpParseOptions(LanguageVersion.CSharp8)));  // ToDo: Use WithLanguageVersion instead
 
         [TestMethod]
         public void ConditionalSimplification_FromCSharp8() =>
@@ -70,38 +70,38 @@ namespace SonarAnalyzer.UnitTest.Rules
 
         [TestMethod]
         public void ConditionalSimplification_BeforeCSharp8_CodeFix() =>
-            OldVerifier.VerifyCodeFix(@"TestCases\ConditionalSimplification.BeforeCSharp8.cs",
-                                   @"TestCases\ConditionalSimplification.BeforeCSharp8.Fixed.cs",
-                                   new ConditionalSimplification(),
-                                   new ConditionalSimplificationCodeFixProvider(),
-                                   ParseOptionsHelper.BeforeCSharp8);
+            OldVerifier.VerifyCodeFix<ConditionalSimplificationCodeFixProvider>(
+                @"TestCases\ConditionalSimplification.BeforeCSharp8.cs",
+                @"TestCases\ConditionalSimplification.BeforeCSharp8.Fixed.cs",
+                new ConditionalSimplification(),
+                ParseOptionsHelper.BeforeCSharp8);
 
         [TestMethod]
         public void ConditionalSimplification_FromCSharp8_CodeFix() =>
-            OldVerifier.VerifyCodeFix(@"TestCases\ConditionalSimplification.FromCSharp8.cs",
-                                   @"TestCases\ConditionalSimplification.FromCSharp8.Fixed.cs",
-                                   new ConditionalSimplification(),
-                                   new ConditionalSimplificationCodeFixProvider(),
-                                   ParseOptionsHelper.FromCSharp8);
+            OldVerifier.VerifyCodeFix<ConditionalSimplificationCodeFixProvider>(
+                @"TestCases\ConditionalSimplification.FromCSharp8.cs",
+                @"TestCases\ConditionalSimplification.FromCSharp8.Fixed.cs",
+                new ConditionalSimplification(),
+                ParseOptionsHelper.FromCSharp8);
 
 #if NET
         [TestMethod]
         public void ConditionalSimplification_FromCSharp9_CodeFix() =>
-            OldVerifier.VerifyCodeFix(@"TestCases\ConditionalSimplification.FromCSharp9.cs",
-                                   @"TestCases\ConditionalSimplification.FromCSharp9.Fixed.cs",
-                                   new ConditionalSimplification(),
-                                   new ConditionalSimplificationCodeFixProvider(),
-                                   ParseOptionsHelper.FromCSharp9,
-                                   OutputKind.ConsoleApplication);
+            OldVerifier.VerifyCodeFix<ConditionalSimplificationCodeFixProvider>(
+                @"TestCases\ConditionalSimplification.FromCSharp9.cs",
+                @"TestCases\ConditionalSimplification.FromCSharp9.Fixed.cs",
+                new ConditionalSimplification(),
+                ParseOptionsHelper.FromCSharp9,
+                OutputKind.ConsoleApplication);
 
         [TestMethod]
         public void ConditionalSimplification_FromCSharp10_CodeFix() =>
-            OldVerifier.VerifyCodeFix(@"TestCases\ConditionalSimplification.FromCSharp10.cs",
-                                   @"TestCases\ConditionalSimplification.FromCSharp10.Fixed.cs",
-                                   new ConditionalSimplification(),
-                                   new ConditionalSimplificationCodeFixProvider(),
-                                   ParseOptionsHelper.FromCSharp10,
-                                   OutputKind.ConsoleApplication);
+            OldVerifier.VerifyCodeFix<ConditionalSimplificationCodeFixProvider>(
+                @"TestCases\ConditionalSimplification.FromCSharp10.cs",
+                @"TestCases\ConditionalSimplification.FromCSharp10.Fixed.cs",
+                new ConditionalSimplification(),
+                ParseOptionsHelper.FromCSharp10,
+                OutputKind.ConsoleApplication);
 #endif
     }
 }

@@ -39,12 +39,12 @@ namespace SonarAnalyzer.UnitTest.Rules
 
         [TestMethod]
         public void GetTypeWithIsAssignableFrom_CSharp9_CodeFix() =>
-            OldVerifier.VerifyCodeFix(@"TestCases\GetTypeWithIsAssignableFrom.CSharp9.cs",
-                                   @"TestCases\GetTypeWithIsAssignableFrom.CSharp9.Fixed.cs",
-                                   new GetTypeWithIsAssignableFrom(),
-                                   new GetTypeWithIsAssignableFromCodeFixProvider(),
-                                   ParseOptionsHelper.FromCSharp9,
-                                   OutputKind.ConsoleApplication);
+            OldVerifier.VerifyCodeFix<GetTypeWithIsAssignableFromCodeFixProvider>(
+                @"TestCases\GetTypeWithIsAssignableFrom.CSharp9.cs",
+                @"TestCases\GetTypeWithIsAssignableFrom.CSharp9.Fixed.cs",
+                new GetTypeWithIsAssignableFrom(),
+                ParseOptionsHelper.FromCSharp9,
+                OutputKind.ConsoleApplication);
 
         [TestMethod]
         public void GetTypeWithIsAssignableFrom_CSharp10() =>
@@ -52,20 +52,20 @@ namespace SonarAnalyzer.UnitTest.Rules
 
         [TestMethod]
         public void GetTypeWithIsAssignableFrom_CSharp10_CodeFix() =>
-            OldVerifier.VerifyCodeFix(@"TestCases\GetTypeWithIsAssignableFrom.CSharp10.cs",
-                                   @"TestCases\GetTypeWithIsAssignableFrom.CSharp10.Fixed.cs",
-                                   new GetTypeWithIsAssignableFrom(),
-                                   new GetTypeWithIsAssignableFromCodeFixProvider(),
-                                   ParseOptionsHelper.FromCSharp10,
-                                   OutputKind.ConsoleApplication);
+            OldVerifier.VerifyCodeFix<GetTypeWithIsAssignableFromCodeFixProvider>(
+                @"TestCases\GetTypeWithIsAssignableFrom.CSharp10.cs",
+                @"TestCases\GetTypeWithIsAssignableFrom.CSharp10.Fixed.cs",
+                new GetTypeWithIsAssignableFrom(),
+                ParseOptionsHelper.FromCSharp10,
+                OutputKind.ConsoleApplication);
 #endif
 
         [TestMethod]
         public void GetTypeWithIsAssignableFrom_CodeFix() =>
-            OldVerifier.VerifyCodeFix(@"TestCases\GetTypeWithIsAssignableFrom.cs",
-                                   @"TestCases\GetTypeWithIsAssignableFrom.Fixed.cs",
-                                   @"TestCases\GetTypeWithIsAssignableFrom.Fixed.Batch.cs",
-                                   new GetTypeWithIsAssignableFrom(),
-                                   new GetTypeWithIsAssignableFromCodeFixProvider());
+            OldVerifier.VerifyCodeFix<GetTypeWithIsAssignableFromCodeFixProvider>(
+                @"TestCases\GetTypeWithIsAssignableFrom.cs",
+                @"TestCases\GetTypeWithIsAssignableFrom.Fixed.cs",
+                @"TestCases\GetTypeWithIsAssignableFrom.Fixed.Batch.cs",
+                new GetTypeWithIsAssignableFrom());
     }
 }

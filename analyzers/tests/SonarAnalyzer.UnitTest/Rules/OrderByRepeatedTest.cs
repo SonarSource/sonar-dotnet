@@ -33,10 +33,9 @@ namespace SonarAnalyzer.UnitTest.Rules
 
         [TestMethod]
         public void OrderByRepeated_CodeFix() =>
-            OldVerifier.VerifyCodeFix(
+            OldVerifier.VerifyCodeFix<OrderByRepeatedCodeFixProvider>(
                 @"TestCases\OrderByRepeated.cs",
                 @"TestCases\OrderByRepeated.Fixed.cs",
-                new OrderByRepeated(),
-                new OrderByRepeatedCodeFixProvider());
+                new OrderByRepeated());
     }
 }

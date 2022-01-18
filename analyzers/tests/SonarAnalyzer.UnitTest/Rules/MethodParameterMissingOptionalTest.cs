@@ -39,10 +39,9 @@ namespace SonarAnalyzer.UnitTest.Rules
 
         [TestMethod]
         public void MethodParameterMissingOptional_CodeFix() =>
-            OldVerifier.VerifyCodeFix(
+            OldVerifier.VerifyCodeFix<MethodParameterMissingOptionalCodeFixProvider>(
                 @"TestCases\MethodParameterMissingOptional.cs",
                 @"TestCases\MethodParameterMissingOptional.Fixed.cs",
-                new MethodParameterMissingOptional(),
-                new MethodParameterMissingOptionalCodeFixProvider());
+                new MethodParameterMissingOptional());
     }
 }

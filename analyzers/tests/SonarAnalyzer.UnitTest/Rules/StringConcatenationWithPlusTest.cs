@@ -35,11 +35,10 @@ namespace SonarAnalyzer.UnitTest.Rules
 
         [TestMethod]
         public void StringConcatenationWithPlus_CodeFix() =>
-            OldVerifier.VerifyCodeFix(
+            OldVerifier.VerifyCodeFix<StringConcatenationWithPlusCodeFixProvider>(
                 @"TestCases\StringConcatenationWithPlus.vb",
                 @"TestCases\StringConcatenationWithPlus.Fixed.vb",
                 new StringConcatenationWithPlus(),
-                new StringConcatenationWithPlusCodeFixProvider(),
                 additionalReferences: MetadataReferenceFacade.SystemXml.Concat(MetadataReferenceFacade.SystemXmlLinq));
     }
 }

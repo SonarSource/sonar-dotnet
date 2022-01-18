@@ -46,22 +46,20 @@ namespace SonarAnalyzer.UnitTest.Rules
 
         [TestMethod]
         public void MethodOverrideChangedDefaultValue_CSharpPreview_CodeFix() =>
-            OldVerifier.VerifyCodeFix(
+            OldVerifier.VerifyCodeFix<MethodOverrideChangedDefaultValueCodeFixProvider>(
                 @"TestCases\MethodOverrideChangedDefaultValue.CSharpPreview.cs",
                 @"TestCases\MethodOverrideChangedDefaultValue.CSharpPreview.Fixed.cs",
                 new MethodOverrideChangedDefaultValue(),
-                new MethodOverrideChangedDefaultValueCodeFixProvider(),
                 ParseOptionsHelper.CSharpPreview);
 #endif
 
         [TestMethod]
         public void MethodOverrideChangedDefaultValue_CodeFix() =>
-            OldVerifier.VerifyCodeFix(
+            OldVerifier.VerifyCodeFix<MethodOverrideChangedDefaultValueCodeFixProvider>(
                 @"TestCases\MethodOverrideChangedDefaultValue.cs",
                 @"TestCases\MethodOverrideChangedDefaultValue.Fixed.cs",
                 @"TestCases\MethodOverrideChangedDefaultValue.Fixed.Batch.cs",
                 new MethodOverrideChangedDefaultValue(),
-                new MethodOverrideChangedDefaultValueCodeFixProvider(),
                 ParseOptionsHelper.FromCSharp8);
     }
 }

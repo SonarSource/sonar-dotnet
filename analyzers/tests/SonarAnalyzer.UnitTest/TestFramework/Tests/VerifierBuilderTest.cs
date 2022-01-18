@@ -98,7 +98,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework.Tests
         public void WithAutogenerateConcurrentFiles_Overrides_IsImmutable()
         {
             var one = Empty.WithAutogenerateConcurrentFiles(false);
-            var two = Empty.WithAutogenerateConcurrentFiles(true);
+            var two = one.WithAutogenerateConcurrentFiles(true);
             Empty.AutogenerateConcurrentFiles.Should().BeTrue();
             one.AutogenerateConcurrentFiles.Should().BeFalse();
             two.AutogenerateConcurrentFiles.Should().BeTrue();
@@ -108,27 +108,75 @@ namespace SonarAnalyzer.UnitTest.TestFramework.Tests
         public void WithBasePath_Overrides_IsImmutable()
         {
             var one = Empty.WithBasePath("Hotspots");
-            var two = Empty.WithBasePath("SymbolicExecution");
+            var two = one.WithBasePath("SymbolicExecution");
             Empty.BasePath.Should().BeNull();
             one.BasePath.Should().Be("Hotspots");
             two.BasePath.Should().Be("SymbolicExecution");
         }
 
         [TestMethod]
+        public void WithCodeFix_Overrides_IsImmutable()
+        {
+            var one = Empty.WithCodeFix<DummyCodeFixCS>();
+            var two = one.WithCodeFix<DummyCodeFixVB>();
+            Empty.CodeFix.Should().BeNull();
+            one.CodeFix().Should().BeOfType<DummyCodeFixCS>();
+            two.CodeFix().Should().BeOfType<DummyCodeFixVB>();
+        }
+
+        [TestMethod]
+        public void WithCodeFixedPath_Overrides_IsImmutable()
+        {
+            var one = Empty.WithCodeFixedPath("First");
+            var two = one.WithCodeFixedPath("Second");
+            Empty.CodeFixedPath.Should().BeNull();
+            one.CodeFixedPath.Should().Be("First");
+            two.CodeFixedPath.Should().Be("Second");
+            // Batch version should not be modified:
+            Empty.CodeFixedPathBatch.Should().BeNull();
+            one.CodeFixedPathBatch.Should().BeNull();
+            two.CodeFixedPathBatch.Should().BeNull();
+        }
+
+        [TestMethod]
+        public void WithCodeFixedPathBatch_Overrides_IsImmutable()
+        {
+            var one = Empty.WithCodeFixedPathBatch("First");
+            var two = one.WithCodeFixedPathBatch("Second");
+            Empty.CodeFixedPathBatch.Should().BeNull();
+            one.CodeFixedPathBatch.Should().Be("First");
+            two.CodeFixedPathBatch.Should().Be("Second");
+            // Non-Batch version should not be modified:
+            Empty.CodeFixedPath.Should().BeNull();
+            one.CodeFixedPath.Should().BeNull();
+            two.CodeFixedPath.Should().BeNull();
+        }
+
+        [TestMethod]
         public void WithConcurrentAnalysis_Overrides_IsImmutable()
         {
             var one = Empty.WithConcurrentAnalysis(false);
-            var two = Empty.WithConcurrentAnalysis(true);
+            var two = one.WithConcurrentAnalysis(true);
             Empty.ConcurrentAnalysis.Should().BeTrue();
             one.ConcurrentAnalysis.Should().BeFalse();
             two.ConcurrentAnalysis.Should().BeTrue();
         }
 
         [TestMethod]
+        public void WithCodeFixTitle_Overrides_IsImmutable()
+        {
+            var one = Empty.WithCodeFixTitle("First");
+            var two = one.WithCodeFixTitle("Second");
+            Empty.CodeFixTitle.Should().BeNull();
+            one.CodeFixTitle.Should().Be("First");
+            two.CodeFixTitle.Should().Be("Second");
+        }
+
+        [TestMethod]
         public void WithErrorBehavior_Overrides_IsImmutable()
         {
             var one = Empty.WithErrorBehavior(CompilationErrorBehavior.FailTest);
-            var two = Empty.WithErrorBehavior(CompilationErrorBehavior.Ignore);
+            var two = one.WithErrorBehavior(CompilationErrorBehavior.Ignore);
             Empty.ErrorBehavior.Should().Be(CompilationErrorBehavior.Default);
             one.ErrorBehavior.Should().Be(CompilationErrorBehavior.FailTest);
             two.ErrorBehavior.Should().Be(CompilationErrorBehavior.Ignore);
@@ -158,7 +206,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework.Tests
         public void WithOnlyDiagnostics_Overrides_IsImmutable()
         {
             var one = Empty.WithOnlyDiagnostics(NullPointerDereference.S2259);
-            var two = Empty.WithOnlyDiagnostics(PublicMethodArgumentsShouldBeCheckedForNull.S3900, ConditionEvaluatesToConstant.S2583);
+            var two = one.WithOnlyDiagnostics(PublicMethodArgumentsShouldBeCheckedForNull.S3900, ConditionEvaluatesToConstant.S2583);
             Empty.OnlyDiagnostics.Should().BeEmpty();
             one.OnlyDiagnostics.Should().BeEquivalentTo(NullPointerDereference.S2259);
             two.OnlyDiagnostics.Should().BeEquivalentTo(PublicMethodArgumentsShouldBeCheckedForNull.S3900, ConditionEvaluatesToConstant.S2583);
@@ -178,7 +226,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework.Tests
         public void WithOutputKind_Overrides_IsImmutable()
         {
             var one = Empty.WithOutputKind(OutputKind.WindowsApplication);
-            var two = Empty.WithOutputKind(OutputKind.NetModule);
+            var two = one.WithOutputKind(OutputKind.NetModule);
             Empty.OutputKind.Should().Be(OutputKind.DynamicallyLinkedLibrary);
             one.OutputKind.Should().Be(OutputKind.WindowsApplication);
             two.OutputKind.Should().Be(OutputKind.NetModule);

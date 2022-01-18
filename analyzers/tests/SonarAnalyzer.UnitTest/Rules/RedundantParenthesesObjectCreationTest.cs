@@ -47,10 +47,9 @@ namespace SonarAnalyzer.UnitTest.Rules
 
         [TestMethod]
         public void RedundantParenthesesObjectCreation_CodeFix() =>
-            OldVerifier.VerifyCodeFix(
+            OldVerifier.VerifyCodeFix<RedundantParenthesesCodeFixProvider>(
                 @"TestCases\RedundantParenthesesObjectCreation.cs",
                 @"TestCases\RedundantParenthesesObjectCreation.Fixed.cs",
-                new RedundantParenthesesObjectsCreation(),
-                new RedundantParenthesesCodeFixProvider());
+                new RedundantParenthesesObjectsCreation());
     }
 }

@@ -622,38 +622,58 @@ namespace SonarAnalyzer.UnitTest.TestFramework
                 .WithSonarProjectConfigPath(sonarProjectConfigPath)
                 .VerifyNoIssueReported();
 
-        public static void VerifyCodeFix(string path,
-                                         string pathToExpected,
-                                         SonarDiagnosticAnalyzer diagnosticAnalyzer,
-                                         SonarCodeFixProvider codeFixProvider,
-                                         IEnumerable<ParseOptions> options = null,
-                                         OutputKind outputKind = OutputKind.DynamicallyLinkedLibrary,
-                                         IEnumerable<MetadataReference> additionalReferences = null) =>
-            CodeFixVerifier.VerifyCodeFix(path, pathToExpected, pathToExpected, diagnosticAnalyzer, codeFixProvider, null, options, outputKind, additionalReferences);
+        [Obsolete("Use VerifierBuilder instead.")]
+        public static void VerifyCodeFix<TCodeFix>(string path,
+                                                   string pathToExpected,
+                                                   SonarDiagnosticAnalyzer diagnosticAnalyzer,
+                                                   ImmutableArray<ParseOptions> options = default,
+                                                   OutputKind outputKind = OutputKind.DynamicallyLinkedLibrary,
+                                                   IEnumerable<MetadataReference> additionalReferences = null) where TCodeFix : SonarCodeFixProvider, new() =>
+            new VerifierBuilder()
+                .AddAnalyzer(() => diagnosticAnalyzer)
+                .AddReferences(additionalReferences ?? Enumerable.Empty<MetadataReference>())
+                .AddPaths(RemoveTestCasesPrefix(path))
+                .WithOptions(options.IsDefault ? ImmutableArray<ParseOptions>.Empty : options)
+                .WithOutputKind(outputKind)
+                .WithCodeFix<TCodeFix>()
+                .WithCodeFixedPath(pathToExpected)
+                .VerifyCodeFix();
 
-        /// <summary>
-        /// Verifies batch code fix.
-        /// </summary>
-        public static void VerifyCodeFix(string path,
-                                         string pathToExpected,
-                                         string pathToBatchExpected,
-                                         SonarDiagnosticAnalyzer diagnosticAnalyzer,
-                                         SonarCodeFixProvider codeFixProvider,
-                                         IEnumerable<ParseOptions> options = null,
-                                         IEnumerable<MetadataReference> additionalReferences = null) =>
-            CodeFixVerifier.VerifyCodeFix(path, pathToExpected, pathToBatchExpected, diagnosticAnalyzer, codeFixProvider, null, options, OutputKind.DynamicallyLinkedLibrary, additionalReferences);
+        [Obsolete("Use VerifierBuilder instead.")]
+        public static void VerifyCodeFix<TCodeFix>(string path,
+                                                   string pathToExpected,
+                                                   string pathToBatchExpected,
+                                                   SonarDiagnosticAnalyzer diagnosticAnalyzer,
+                                                   ImmutableArray<ParseOptions> options = default,
+                                                   IEnumerable<MetadataReference> additionalReferences = null)
+            where TCodeFix : SonarCodeFixProvider, new() =>
+            new VerifierBuilder()
+                .AddAnalyzer(() => diagnosticAnalyzer)
+                .AddReferences(additionalReferences ?? Enumerable.Empty<MetadataReference>())
+                .AddPaths(RemoveTestCasesPrefix(path))
+                .WithOptions(options.IsDefault ? ImmutableArray<ParseOptions>.Empty : options)
+                .WithCodeFix<TCodeFix>()
+                .WithCodeFixedPath(pathToExpected)
+                .WithCodeFixedPathBatch(pathToBatchExpected)
+                .VerifyCodeFix();
 
-        /// <summary>
-        /// Verifies code fix with title.
-        /// </summary>
-        public static void VerifyCodeFix(string path,
-                                         string pathToExpected,
-                                         SonarDiagnosticAnalyzer diagnosticAnalyzer,
-                                         SonarCodeFixProvider codeFixProvider,
-                                         string codeFixTitle,
-                                         IEnumerable<ParseOptions> options = null,
-                                         IEnumerable<MetadataReference> additionalReferences = null) =>
-            CodeFixVerifier.VerifyCodeFix(path, pathToExpected, pathToExpected, diagnosticAnalyzer, codeFixProvider, codeFixTitle, options, OutputKind.DynamicallyLinkedLibrary, additionalReferences);
+        [Obsolete("Use VerifierBuilder instead.")]
+        public static void VerifyCodeFix<TCodeFix>(string path,
+                                                   string pathToExpected,
+                                                   SonarDiagnosticAnalyzer diagnosticAnalyzer,
+                                                   string codeFixTitle,
+                                                   ImmutableArray<ParseOptions> options = default,
+                                                   IEnumerable<MetadataReference> additionalReferences = null)
+            where TCodeFix : SonarCodeFixProvider, new() =>
+            new VerifierBuilder()
+                .AddAnalyzer(() => diagnosticAnalyzer)
+                .AddReferences(additionalReferences ?? Enumerable.Empty<MetadataReference>())
+                .AddPaths(RemoveTestCasesPrefix(path))
+                .WithOptions(options.IsDefault ? ImmutableArray<ParseOptions>.Empty : options)
+                .WithCodeFix<TCodeFix>()
+                .WithCodeFixTitle(codeFixTitle)
+                .WithCodeFixedPath(pathToExpected)
+                .VerifyCodeFix();
 
         private static string[] RemoveTestCasesPrefix(IEnumerable<string> paths) =>
             paths.Select(RemoveTestCasesPrefix).ToArray();

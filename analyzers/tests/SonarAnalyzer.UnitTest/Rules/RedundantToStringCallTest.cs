@@ -43,10 +43,9 @@ namespace SonarAnalyzer.UnitTest.Rules
 
         [TestMethod]
         public void RedundantToStringCall_CodeFix() =>
-            OldVerifier.VerifyCodeFix(
+            OldVerifier.VerifyCodeFix<RedundantToStringCallCodeFixProvider>(
                 @"TestCases\RedundantToStringCall.cs",
                 @"TestCases\RedundantToStringCall.Fixed.cs",
-                new RedundantToStringCall(),
-                new RedundantToStringCallCodeFixProvider());
+                new RedundantToStringCall());
     }
 }

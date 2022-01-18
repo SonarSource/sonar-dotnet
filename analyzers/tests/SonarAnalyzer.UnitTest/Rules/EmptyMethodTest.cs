@@ -51,20 +51,18 @@ namespace SonarAnalyzer.UnitTest.Rules
 
         [TestMethod]
         public void EmptyMethod_CodeFix_Throw() =>
-            OldVerifier.VerifyCodeFix(
+            OldVerifier.VerifyCodeFix<CS.EmptyMethodCodeFixProvider>(
                 @"TestCases\EmptyMethod.cs",
                 @"TestCases\EmptyMethod.Throw.Fixed.cs",
                 new CS.EmptyMethod(),
-                new CS.EmptyMethodCodeFixProvider(),
                 CS.EmptyMethodCodeFixProvider.TitleThrow);
 
         [TestMethod]
         public void EmptyMethod_CodeFix_Comment() =>
-            OldVerifier.VerifyCodeFix(
+            OldVerifier.VerifyCodeFix<CS.EmptyMethodCodeFixProvider>(
                 @"TestCases\EmptyMethod.cs",
                 @"TestCases\EmptyMethod.Comment.Fixed.cs",
                 new CS.EmptyMethod(),
-                new CS.EmptyMethodCodeFixProvider(),
                 CS.EmptyMethodCodeFixProvider.TitleComment);
 
         [TestMethod]

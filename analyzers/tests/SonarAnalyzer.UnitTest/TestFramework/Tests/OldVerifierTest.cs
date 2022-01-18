@@ -38,7 +38,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework.Tests
         public void VerifyCodeFix_WithDuplicateIssues()
         {
             const string filename = @"TestCases\VerifyCodeFix.Empty.cs";
-            Action a = () => { OldVerifier.VerifyCodeFix(filename, filename, new TestDuplicateLocationRule(), new TestDuplicateLocationRuleCodeFix()); };
+            Action a = () => { OldVerifier.VerifyCodeFix<TestDuplicateLocationRuleCodeFix>(filename, filename, new TestDuplicateLocationRule()); };
             a.Should().NotThrow();
         }
 
@@ -60,6 +60,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework.Tests
             }
         }
 
+        [ExportCodeFixProvider(LanguageNames.CSharp)]
         private class TestDuplicateLocationRuleCodeFix : SonarCodeFixProvider
         {
             public override ImmutableArray<string> FixableDiagnosticIds => ImmutableArray.Create(TestDuplicateLocationRule.DiagnosticId);

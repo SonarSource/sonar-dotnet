@@ -22,7 +22,9 @@ namespace SonarAnalyzer.UnitTest
 {
     internal static class Constants
     {
-        internal const string NuGetLatestVersion = "LATEST";
-        internal const string DotNetCore220Version = "2.2.0";
+        public const string NuGetLatestVersion = "LATEST";
+        public const string DotNetCore220Version = "2.2.0";
+        public const string WindowsLineEnding = "\r\n";
+        public const string UnixLineEnding = "\n";
     }
 }

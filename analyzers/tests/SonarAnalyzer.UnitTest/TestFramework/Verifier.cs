@@ -26,8 +26,10 @@ using System.Reflection;
 using System.Text;
 using System.Text.RegularExpressions;
 using Microsoft.CodeAnalysis;
+using Microsoft.CodeAnalysis.CodeFixes;
 using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.Common;
+using SonarAnalyzer.Helpers;
 using SonarAnalyzer.UnitTest.Helpers;
 
 namespace SonarAnalyzer.UnitTest.TestFramework
@@ -37,6 +39,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework
         private static readonly Regex ImportsRegexVB = new(@"^\s*Imports\s+.+$", RegexOptions.Multiline | RegexOptions.RightToLeft);
         private readonly VerifierBuilder builder;
         private readonly DiagnosticAnalyzer[] analyzers;
+        private readonly SonarCodeFixProvider codeFix;
         private readonly AnalyzerLanguage language;
         private readonly string[] onlyDiagnosticIds;
 
@@ -63,9 +66,14 @@ namespace SonarAnalyzer.UnitTest.TestFramework
             {
                 throw new ArgumentException($"{nameof(builder.Paths)} cannot be empty. Add at least one file using {nameof(builder)}.{nameof(builder.AddPaths)}() or {nameof(builder.AddSnippet)}().");
             }
-            if (builder.Paths.FirstOrDefault(x => !Path.GetExtension(x).Equals(language.FileExtension, StringComparison.OrdinalIgnoreCase)) is { } unexpectedPath)
+            foreach (var path in builder.Paths)
             {
-                throw new ArgumentException($"Path '{unexpectedPath}' doesn't match {language.LanguageName} file extension '{language.FileExtension}'.");
+                ValidateExtension(path);
+            }
+            if (builder.CodeFix is not null)
+            {
+                codeFix = builder.CodeFix();
+                ValidateCodeFix();
             }
         }
 
@@ -88,19 +96,37 @@ namespace SonarAnalyzer.UnitTest.TestFramework
             }
         }
 
-        private IEnumerable<Compilation> Compile()
+        public void VerifyCodeFix()     // This should never has any arguments
+        {
+            _ = codeFix ?? throw new InvalidOperationException($"{nameof(builder.CodeFix)} was not set.");
+            var document = CreateProject(false).FindDocument(Path.GetFileName(builder.Paths.Single()));
+            var codeFixVerifier = new CodeFixVerifier(analyzers.Single(), codeFix, document, builder.CodeFixTitle);
+            var fixAllProvider = codeFix.GetFixAllProvider();
+            foreach (var parseOptions in builder.ParseOptions.OrDefault(language.LanguageName))
+            {
+                codeFixVerifier.VerifyWhileDocumentChanges(parseOptions, builder.CodeFixedPath);
+                if (fixAllProvider is not null)
+                {
+                    codeFixVerifier.VerifyFixAllProvider(fixAllProvider, parseOptions, builder.CodeFixedPathBatch ?? builder.CodeFixedPath);
+                }
+            }
+        }
+
+        private IEnumerable<Compilation> Compile() =>
+            CreateProject(builder.ConcurrentAnalysis).Solution.Compile(builder.ParseOptions.ToArray());
+
+        private ProjectBuilder CreateProject(bool concurrentAnalysis)
         {
             const string TestCases = "TestCases";
-            using var scope = new EnvironmentVariableScope { EnableConcurrentAnalysis = builder.ConcurrentAnalysis };
+            using var scope = new EnvironmentVariableScope { EnableConcurrentAnalysis = concurrentAnalysis };
             var basePath = Path.GetFullPath(builder.BasePath == null ? TestCases : Path.Combine(TestCases, builder.BasePath));
             var paths = builder.Paths.Select(x => Path.Combine(basePath, x)).ToArray();
-            var project = SolutionBuilder.Create()
+            return SolutionBuilder.Create()
                 .AddProject(language, true, builder.OutputKind)
                 .AddDocuments(paths)
-                .AddDocuments(builder.ConcurrentAnalysis && builder.AutogenerateConcurrentFiles ? CreateConcurrencyTest(paths) : Enumerable.Empty<string>())
+                .AddDocuments(concurrentAnalysis && builder.AutogenerateConcurrentFiles ? CreateConcurrencyTest(paths) : Enumerable.Empty<string>())
                 .AddSnippets(builder.Snippets.ToArray())
                 .AddReferences(builder.References);
-            return project.Solution.Compile(builder.ParseOptions.ToArray());
         }
 
         private IEnumerable<string> CreateConcurrencyTest(IEnumerable<string> paths)
@@ -125,6 +151,51 @@ namespace SonarAnalyzer.UnitTest.TestFramework
 
             int ImportsIndexVB() =>
                 ImportsRegexVB.Match(content) is { Success: true } match ? match.Index + match.Length + 1 : 0;
+        }
+
+        private void ValidateExtension(string path)
+        {
+            if (!Path.GetExtension(path).Equals(language.FileExtension, StringComparison.OrdinalIgnoreCase))
+            {
+                throw new ArgumentException($"Path '{path}' doesn't match {language.LanguageName} file extension '{language.FileExtension}'.");
+            }
+        }
+
+        private void ValidateCodeFix()
+        {
+            _ = builder.CodeFixedPath ?? throw new ArgumentException($"{nameof(builder.CodeFixedPath)} was not set.");
+            if (builder.Analyzers.Length != 1)
+            {
+                throw new ArgumentException($"{nameof(builder.Analyzers)} must contain only 1 analyzer, but {analyzers.Length} were found.");
+            }
+            if (builder.Paths.Length != 1)
+            {
+                throw new ArgumentException($"{nameof(builder.Paths)} must contain only 1 file, but {builder.Paths.Length} were found.");
+            }
+            if (builder.Snippets.Any())
+            {
+                throw new ArgumentException($"{nameof(builder.Snippets)} must be empty when {nameof(builder.CodeFix)} is set.");
+            }
+            ValidateExtension(builder.CodeFixedPath);
+            if (builder.CodeFixedPathBatch is not null)
+            {
+                ValidateExtension(builder.CodeFixedPathBatch);
+            }
+            if (codeFix.GetType().GetCustomAttribute<ExportCodeFixProviderAttribute>() is { } codeFixAttribute)
+            {
+                if (codeFixAttribute.Languages.Single() != language.LanguageName)
+                {
+                    throw new ArgumentException($"{analyzers.Single().GetType().Name} language {language.LanguageName} does not match {codeFix.GetType().Name} language.");
+                }
+            }
+            else
+            {
+                throw new ArgumentException($"{codeFix.GetType().Name} does not have {nameof(ExportCodeFixProviderAttribute)}.");
+            }
+            if (!analyzers.Single().SupportedDiagnostics.Select(x => x.Id).Intersect(codeFix.FixableDiagnosticIds).Any())
+            {
+                throw new ArgumentException($"{analyzers.Single().GetType().Name} does not support diagnostics fixable by the {codeFix.GetType().Name}.");
+            }
         }
     }
 }

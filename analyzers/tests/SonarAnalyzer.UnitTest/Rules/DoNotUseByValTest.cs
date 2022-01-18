@@ -33,10 +33,9 @@ namespace SonarAnalyzer.UnitTest.Rules
 
         [TestMethod]
         public void DoNotUseByValCodeFix() =>
-            OldVerifier.VerifyCodeFix(
+            OldVerifier.VerifyCodeFix<DoNotUseByValCodeFixProvider>(
                 @"TestCases\DoNotUseByVal.vb",
                 @"TestCases\DoNotUseByVal.Fixed.vb",
-                new DoNotUseByVal(),
-                new DoNotUseByValCodeFixProvider());
+                new DoNotUseByVal());
     }
 }

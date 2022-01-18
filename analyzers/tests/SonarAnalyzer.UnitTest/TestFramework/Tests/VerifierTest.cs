@@ -33,6 +33,10 @@ namespace SonarAnalyzer.UnitTest.TestFramework.Tests
     {
         private static readonly VerifierBuilder DummyCS = new VerifierBuilder<DummyAnalyzerCS>();
         private static readonly VerifierBuilder DummyVB = new VerifierBuilder<DummyAnalyzerVB>();
+        private static readonly VerifierBuilder DummyCodeFixCS = new VerifierBuilder<DummyAnalyzerCS>()
+            .AddPaths("Path.cs")
+            .WithCodeFix<DummyCodeFixCS>()
+            .WithCodeFixedPath("Expected.cs");
 
         public TestContext TestContext { get; set; }
 
@@ -53,18 +57,62 @@ namespace SonarAnalyzer.UnitTest.TestFramework.Tests
 
         [TestMethod]
         public void Constructor_NoPaths_Throws() =>
-            new VerifierBuilder<DummyAnalyzerCS>()
-                .Invoking(x => x.Build()).Should().Throw<ArgumentException>().WithMessage("Paths cannot be empty. Add at least one file using builder.AddPaths() or AddSnippet().");
+            DummyCS.Invoking(x => x.Build()).Should().Throw<ArgumentException>().WithMessage("Paths cannot be empty. Add at least one file using builder.AddPaths() or AddSnippet().");
 
         [TestMethod]
         public void Constructor_MixedLanguageAnalyzers_Throws() =>
-            new VerifierBuilder<DummyAnalyzerCS>().AddAnalyzer(() => new SonarAnalyzer.Rules.VisualBasic.OptionStrictOn())
+            DummyCS.AddAnalyzer(() => new SonarAnalyzer.Rules.VisualBasic.OptionStrictOn())
                 .Invoking(x => x.Build()).Should().Throw<ArgumentException>().WithMessage("All Analyzers must declare the same language in their DiagnosticAnalyzerAttribute.");
 
         [TestMethod]
         public void Constructor_MixedLanguagePaths_Throws() =>
-            new VerifierBuilder<DummyAnalyzerCS>().AddPaths("File.txt")
+            DummyCS.AddPaths("File.txt")
                 .Invoking(x => x.Build()).Should().Throw<ArgumentException>().WithMessage("Path 'File.txt' doesn't match C# file extension '.cs'.");
+
+        [TestMethod]
+        public void Constructor_CodeFix_MissingCodeFixedPath_Throws() =>
+            DummyCodeFixCS.WithCodeFixedPath(null)
+                .Invoking(x => x.Build()).Should().Throw<ArgumentException>().WithMessage("CodeFixedPath was not set.");
+
+        [TestMethod]
+        public void Constructor_CodeFix_WrongCodeFixedPath_Throws() =>
+            DummyCodeFixCS.WithCodeFixedPath("File.vb")
+                .Invoking(x => x.Build()).Should().Throw<ArgumentException>().WithMessage("Path 'File.vb' doesn't match C# file extension '.cs'.");
+
+        [TestMethod]
+        public void Constructor_CodeFix_WrongCodeFixedPathBatch_Throws() =>
+            DummyCodeFixCS.WithCodeFixedPathBatch("File.vb")
+                .Invoking(x => x.Build()).Should().Throw<ArgumentException>().WithMessage("Path 'File.vb' doesn't match C# file extension '.cs'.");
+
+        [TestMethod]
+        public void Constructor_CodeFix_MultipleAnalyzers_Throws() =>
+            DummyCodeFixCS.AddAnalyzer(() => new DummyAnalyzerCS())
+                .Invoking(x => x.Build()).Should().Throw<ArgumentException>().WithMessage("Analyzers must contain only 1 analyzer, but 2 were found.");
+
+        [TestMethod]
+        public void Constructor_CodeFix_MultiplePaths_Throws() =>
+            DummyCodeFixCS.AddPaths("Second.cs", "Third.cs")
+                .Invoking(x => x.Build()).Should().Throw<ArgumentException>().WithMessage("Paths must contain only 1 file, but 3 were found.");
+
+        [TestMethod]
+        public void Constructor_CodeFix_WithSnippets_Throws() =>
+            DummyCodeFixCS.AddSnippet("Wrong")
+                .Invoking(x => x.Build()).Should().Throw<ArgumentException>().WithMessage("Snippets must be empty when CodeFix is set.");
+
+        [TestMethod]
+        public void Constructor_CodeFix_WrongLanguage_Throws() =>
+            DummyCodeFixCS.WithCodeFix<DummyCodeFixVB>()
+                .Invoking(x => x.Build()).Should().Throw<ArgumentException>().WithMessage("DummyAnalyzerCS language C# does not match DummyCodeFixVB language.");
+
+        [TestMethod]
+        public void Constructor_CodeFix_FixableDiagnosticsNotSupported_Throws() =>
+            DummyCodeFixCS.WithCodeFix<EmptyMethodCodeFixProvider>()
+                .Invoking(x => x.Build()).Should().Throw<ArgumentException>().WithMessage("DummyAnalyzerCS does not support diagnostics fixable by the EmptyMethodCodeFixProvider.");
+
+        [TestMethod]
+        public void Constructor_CodeFix_MissingAttribute_Throws() =>
+            DummyCodeFixCS.WithCodeFix<DummyCodeFixNoAttribute>()
+                .Invoking(x => x.Build()).Should().Throw<ArgumentException>().WithMessage("DummyCodeFixNoAttribute does not have ExportCodeFixProviderAttribute.");
 
         [TestMethod]
         public void Verify_RaiseExpectedIssues_CS() =>
@@ -276,6 +324,93 @@ Line: 1, Type: primary, Id: 'first'
 File: snippet2.cs
 Line: 1, Type: primary, Id: 'second'
 ");
+
+        [TestMethod]
+        public void VerifyCodeFix_FixExpected_CS()
+        {
+            var originalPath = WriteFile("File.cs",
+@"public class Sample
+{
+    private int a = 0;     // Noncompliant
+    private int b = 0;     // Noncompliant
+    private bool c = true;
+}");
+            var fixedPath = WriteFile("File.Fixed.cs",
+@"public class Sample
+{
+    private int a = default;     // Fixed
+    private int b = default;     // Fixed
+    private bool c = true;
+}");
+            DummyCS.AddPaths(originalPath).WithCodeFix<DummyCodeFixCS>().WithCodeFixedPath(fixedPath).Invoking(x => x.VerifyCodeFix()).Should().NotThrow();
+        }
+
+        [TestMethod]
+        public void VerifyCodeFix_FixExpected_VB()
+        {
+            var originalPath = WriteFile("File.vb",
+@"Public Class Sample
+    Private A As Integer = 42   ' Noncompliant
+    Private B As Integer = 42   ' Noncompliant
+    Private C As Boolean = True
+End Class");
+            var fixedPath = WriteFile("File.Fixed.vb",
+@"Public Class Sample
+    Private A As Integer = Nothing   ' Fixed
+    Private B As Integer = Nothing   ' Fixed
+    Private C As Boolean = True
+End Class");
+            DummyVB.AddPaths(originalPath).WithCodeFix<DummyCodeFixVB>().WithCodeFixedPath(fixedPath).Invoking(x => x.VerifyCodeFix()).Should().NotThrow();
+        }
+
+        [TestMethod]
+        public void VerifyCodeFix_NotFixed_CS()
+        {
+            var originalPath = WriteFile("File.cs",
+@"public class Sample
+{
+    private int a = 0;     // Noncompliant
+    private int b = 0;     // Noncompliant
+    private bool c = true;
+}");
+            DummyCS.AddPaths(originalPath).WithCodeFix<DummyCodeFixCS>().WithCodeFixedPath(originalPath).Invoking(x => x.VerifyCodeFix()).Should().Throw<AssertFailedException>().WithMessage(
+@"Expected ActualCodeWithReplacedComments().ToUnixLineEndings() to be*
+""public class Sample
+{
+    private int a = 0;     // Noncompliant
+    private int b = 0;     // Noncompliant
+    private bool c = true;
+}"" with a length of 136 because VerifyWhileDocumentChanges updates the document until all issues are fixed, even if the fix itself creates a new issue again. Language: CSharp7, but*
+""public class Sample
+{
+    private int a = default;     // Fixed
+    private int b = default;     // Fixed
+    private bool c = true;
+}"" has a length of 134, differs near ""def"" (index 42).");
+        }
+
+        [TestMethod]
+        public void VerifyCodeFix_NotFixed_VB()
+        {
+            var originalPath = WriteFile("File.vb",
+@"Public Class Sample
+    Private A As Integer = 42   ' Noncompliant
+    Private B As Integer = 42   ' Noncompliant
+    Private C As Boolean = True
+End Class");
+            DummyVB.AddPaths(originalPath).WithCodeFix<DummyCodeFixVB>().WithCodeFixedPath(originalPath).Invoking(x => x.VerifyCodeFix()).Should().Throw<AssertFailedException>().WithMessage(
+@"Expected ActualCodeWithReplacedComments().ToUnixLineEndings() to be*
+""Public Class Sample
+    Private A As Integer = 42   ' Noncompliant
+    Private B As Integer = 42   ' Noncompliant
+    Private C As Boolean = True
+End Class"" with a length of 155 because VerifyWhileDocumentChanges updates the document until all issues are fixed, even if the fix itself creates a new issue again. Language: VisualBasic12, but*
+""Public Class Sample
+    Private A As Integer = Nothing   ' Fixed
+    Private B As Integer = Nothing   ' Fixed
+    Private C As Boolean = True
+End Class"" has a length of 151, differs near ""Not"" (index 47).");
+        }
 
         [TestMethod]
         public void VerifyNoIssueReported_NoIssues_Succeeds() =>

@@ -47,10 +47,9 @@ namespace SonarAnalyzer.UnitTest.Rules
 
         [TestMethod]
         public void GenericTypeParameterEmptinessChecking_CodeFix() =>
-            OldVerifier.VerifyCodeFix(
+            OldVerifier.VerifyCodeFix<GenericTypeParameterEmptinessCheckingCodeFixProvider>(
                 @"TestCases\GenericTypeParameterEmptinessChecking.cs",
                 @"TestCases\GenericTypeParameterEmptinessChecking.Fixed.cs",
-                new GenericTypeParameterEmptinessChecking(),
-                new GenericTypeParameterEmptinessCheckingCodeFixProvider());
+                new GenericTypeParameterEmptinessChecking());
     }
 }

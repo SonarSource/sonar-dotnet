@@ -30,16 +30,13 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         public void DoNotUseIif() =>
-            OldVerifier.VerifyAnalyzer(@"TestCases\DoNotUseIif.vb",
-                                    new DoNotUseIif(),
-                                    MetadataReferenceFacade.MicrosoftVisualBasic);
+            OldVerifier.VerifyAnalyzer(@"TestCases\DoNotUseIif.vb", new DoNotUseIif());
 
         [TestMethod]
         public void DoNotUseIif_CodeFix() =>
-            OldVerifier.VerifyCodeFix(@"TestCases\DoNotUseIif.vb",
-                                   @"TestCases\DoNotUseIif.Fixed.vb",
-                                   new DoNotUseIif(),
-                                   new DoNotUseIifCodeFixProvider(),
-                                   additionalReferences: MetadataReferenceFacade.MicrosoftVisualBasic);
+            OldVerifier.VerifyCodeFix<DoNotUseIifCodeFixProvider>(
+                @"TestCases\DoNotUseIif.vb",
+                @"TestCases\DoNotUseIif.Fixed.vb",
+                new DoNotUseIif());
     }
 }

@@ -30,8 +30,6 @@ namespace SonarAnalyzer.UnitTest.TestFramework
 {
     internal readonly struct ProjectBuilder
     {
-        private const string FixedMessage = "Fixed";
-
         private readonly Lazy<SolutionBuilder> solution;
         private readonly Project project;
         private readonly string fileExtension;
@@ -75,60 +73,29 @@ namespace SonarAnalyzer.UnitTest.TestFramework
         public ProjectBuilder AddDocuments(IEnumerable<string> paths) =>
             paths.Aggregate(this, (projectBuilder, path) => projectBuilder.AddDocument(path));
 
-        public ProjectBuilder AddDocument(string path, bool removeAnalysisComments = false)
+        public ProjectBuilder AddDocument(string path)
         {
             _ = path ?? throw new ArgumentNullException(nameof(path));
             var fileInfo = new FileInfo(path);
             return fileInfo.Extension == fileExtension
-                ? AddDocument(project, fileInfo.Name, File.ReadAllText(fileInfo.FullName, Encoding.UTF8), removeAnalysisComments)
+                ? AddDocument(project, fileInfo.Name, File.ReadAllText(fileInfo.FullName, Encoding.UTF8))
                 : throw new ArgumentException($"The file extension '{fileInfo.Extension}' does not match the project language '{project.Language}'.", nameof(path));
         }
 
         public ProjectBuilder AddSnippets(params string[] snippets) =>
             snippets.Aggregate(this, (current, snippet) => current.AddSnippet(snippet));
 
-        public ProjectBuilder AddSnippet(string code, string fileName = null, bool removeAnalysisComments = false)
+        public ProjectBuilder AddSnippet(string code, string fileName = null)
         {
             _ = code ?? throw new ArgumentNullException(nameof(code));
             fileName ??= $"snippet{project.Documents.Count()}{fileExtension}";
-            return AddDocument(project, fileName, code, removeAnalysisComments);
+            return AddDocument(project, fileName, code);
         }
 
         public static ProjectBuilder FromProject(Project project) =>
             new(project);
 
-        private static ProjectBuilder AddDocument(Project project, string fileName, string fileContent, bool removeAnalysisComments)
-        {
-            const string WindowsLineEnding = "\r\n";
-            const string UnixLineEnding = "\n";
-            return FromProject(project.AddDocument(fileName, ReadDocument()).Project);
-
-            string ReadDocument()
-            {
-                var lines = fileContent.Replace(WindowsLineEnding, UnixLineEnding).Split(new[] { UnixLineEnding }, StringSplitOptions.None);
-                if (removeAnalysisComments)
-                {
-                    lines = lines.Where(x => !IssueLocationCollector.RxPreciseLocation.IsMatch(x)).Select(ReplaceNonCompliantComment).ToArray();
-                }
-                return string.Join(UnixLineEnding, lines);
-            }
-        }
-
-        private static string ReplaceNonCompliantComment(string line)
-        {
-            var match = IssueLocationCollector.RxIssue.Match(line);
-            if (!match.Success)
-            {
-                return line;
-            }
-
-            if (match.Groups["issueType"].Value == "Noncompliant")
-            {
-                var startIndex = line.IndexOf(match.Groups["issueType"].Value);
-                return string.Concat(line.Remove(startIndex), FixedMessage);
-            }
-
-            return line.Replace(match.Value, string.Empty).TrimEnd();
-        }
+        private static ProjectBuilder AddDocument(Project project, string fileName, string fileContent) =>
+            FromProject(project.AddDocument(fileName, fileContent).Project);
     }
 }

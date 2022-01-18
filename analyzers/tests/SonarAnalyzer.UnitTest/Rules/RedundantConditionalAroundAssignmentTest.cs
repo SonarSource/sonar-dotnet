@@ -39,12 +39,12 @@ namespace SonarAnalyzer.UnitTest.Rules
 
         [TestMethod]
         public void RedundantConditionalAroundAssignment_CSharp9_CodeFix() =>
-            OldVerifier.VerifyCodeFix(@"TestCases\RedundantConditionalAroundAssignment.CSharp9.cs",
-                                   @"TestCases\RedundantConditionalAroundAssignment.CSharp9.Fixed.cs",
-                                   new RedundantConditionalAroundAssignment(),
-                                   new RedundantConditionalAroundAssignmentCodeFixProvider(),
-                                   ParseOptionsHelper.FromCSharp9,
-                                   OutputKind.ConsoleApplication);
+            OldVerifier.VerifyCodeFix<RedundantConditionalAroundAssignmentCodeFixProvider>(
+                @"TestCases\RedundantConditionalAroundAssignment.CSharp9.cs",
+                @"TestCases\RedundantConditionalAroundAssignment.CSharp9.Fixed.cs",
+                new RedundantConditionalAroundAssignment(),
+                ParseOptionsHelper.FromCSharp9,
+                OutputKind.ConsoleApplication);
 
         [TestMethod]
         public void RedundantConditionalAroundAssignment_CSharp10() =>
@@ -52,19 +52,19 @@ namespace SonarAnalyzer.UnitTest.Rules
 
         [TestMethod]
         public void RedundantConditionalAroundAssignment_CSharp10_CodeFix() =>
-            OldVerifier.VerifyCodeFix(@"TestCases\RedundantConditionalAroundAssignment.CSharp10.cs",
-                                   @"TestCases\RedundantConditionalAroundAssignment.CSharp10.Fixed.cs",
-                                   new RedundantConditionalAroundAssignment(),
-                                   new RedundantConditionalAroundAssignmentCodeFixProvider(),
-                                   ParseOptionsHelper.FromCSharp10,
-                                   OutputKind.ConsoleApplication);
+            OldVerifier.VerifyCodeFix<RedundantConditionalAroundAssignmentCodeFixProvider>(
+                @"TestCases\RedundantConditionalAroundAssignment.CSharp10.cs",
+                @"TestCases\RedundantConditionalAroundAssignment.CSharp10.Fixed.cs",
+                new RedundantConditionalAroundAssignment(),
+                ParseOptionsHelper.FromCSharp10,
+                OutputKind.ConsoleApplication);
 #endif
 
         [TestMethod]
         public void RedundantConditionalAroundAssignment_CodeFix() =>
-            OldVerifier.VerifyCodeFix(@"TestCases\RedundantConditionalAroundAssignment.cs",
-                                   @"TestCases\RedundantConditionalAroundAssignment.Fixed.cs",
-                                   new RedundantConditionalAroundAssignment(),
-                                   new RedundantConditionalAroundAssignmentCodeFixProvider());
+            OldVerifier.VerifyCodeFix<RedundantConditionalAroundAssignmentCodeFixProvider>(
+                @"TestCases\RedundantConditionalAroundAssignment.cs",
+                @"TestCases\RedundantConditionalAroundAssignment.Fixed.cs",
+                new RedundantConditionalAroundAssignment());
     }
 }

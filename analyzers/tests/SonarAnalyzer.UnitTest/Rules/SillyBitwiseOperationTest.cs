@@ -40,10 +40,10 @@ namespace SonarAnalyzer.UnitTest.Rules
 
         [TestMethod]
         public void SillyBitwiseOperation_CS_CodeFix() =>
-            OldVerifier.VerifyCodeFix(@"TestCases\SillyBitwiseOperation.cs",
-                                   @"TestCases\SillyBitwiseOperation.Fixed.cs",
-                                   new CS.SillyBitwiseOperation(),
-                                   new CS.SillyBitwiseOperationCodeFixProvider());
+            OldVerifier.VerifyCodeFix<CS.SillyBitwiseOperationCodeFixProvider>(
+                @"TestCases\SillyBitwiseOperation.cs",
+                @"TestCases\SillyBitwiseOperation.Fixed.cs",
+                new CS.SillyBitwiseOperation());
 
         [TestMethod]
         public void SillyBitwiseOperation_VB() =>
@@ -51,9 +51,9 @@ namespace SonarAnalyzer.UnitTest.Rules
 
         [TestMethod]
         public void SillyBitwiseOperation_VB_CodeFix() =>
-            OldVerifier.VerifyCodeFix(@"TestCases\SillyBitwiseOperation.vb",
-                                   @"TestCases\SillyBitwiseOperation.Fixed.vb",
-                                   new VB.SillyBitwiseOperation(),
-                                   new VB.SillyBitwiseOperationCodeFixProvider());
+            OldVerifier.VerifyCodeFix<VB.SillyBitwiseOperationCodeFixProvider>(
+                @"TestCases\SillyBitwiseOperation.vb",
+                @"TestCases\SillyBitwiseOperation.Fixed.vb",
+                new VB.SillyBitwiseOperation());
     }
 }

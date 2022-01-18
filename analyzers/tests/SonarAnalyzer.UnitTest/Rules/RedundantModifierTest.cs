@@ -38,11 +38,10 @@ namespace SonarAnalyzer.UnitTest.Rules
 
         [TestMethod]
         public void RedundantModifier_CodeFix_CSharp9() =>
-            OldVerifier.VerifyCodeFix(
+            OldVerifier.VerifyCodeFix<RedundantModifierCodeFixProvider>(
                 @"TestCases\RedundantModifier.CSharp9.cs",
                 @"TestCases\RedundantModifier.CSharp9.Fixed.cs",
                 new RedundantModifier(),
-                new RedundantModifierCodeFixProvider(),
                 options: ParseOptionsHelper.FromCSharp9);
 
         [TestMethod]
@@ -51,20 +50,18 @@ namespace SonarAnalyzer.UnitTest.Rules
 
         [TestMethod]
         public void RedundantModifier_CodeFix_CSharp10() =>
-            OldVerifier.VerifyCodeFix(
+            OldVerifier.VerifyCodeFix<RedundantModifierCodeFixProvider>(
                 @"TestCases\RedundantModifier.CSharp10.cs",
                 @"TestCases\RedundantModifier.CSharp10.Fixed.cs",
                 new RedundantModifier(),
-                new RedundantModifierCodeFixProvider(),
                 options: ParseOptionsHelper.FromCSharp10);
 #endif
 
         [TestMethod]
         public void RedundantModifier_CodeFix() =>
-            OldVerifier.VerifyCodeFix(
+            OldVerifier.VerifyCodeFix<RedundantModifierCodeFixProvider>(
                 @"TestCases\RedundantModifier.cs",
                 @"TestCases\RedundantModifier.Fixed.cs",
-                new RedundantModifier(),
-                new RedundantModifierCodeFixProvider());
+                new RedundantModifier());
     }
 }

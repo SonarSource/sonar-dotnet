@@ -42,21 +42,20 @@ namespace SonarAnalyzer.UnitTest.Rules
 
         [TestMethod]
         public void EmptyStatement_CodeFix() =>
-            OldVerifier.VerifyCodeFix(
+            OldVerifier.VerifyCodeFix<EmptyStatementCodeFixProvider>(
                 @"TestCases\EmptyStatement.cs",
                 @"TestCases\EmptyStatement.Fixed.cs",
-                new EmptyStatement(),
-                new EmptyStatementCodeFixProvider());
+                new EmptyStatement());
 
 #if NET
         [TestMethod]
         public void EmptyStatement_CodeFix_CSharp9() =>
-            OldVerifier.VerifyCodeFix(@"TestCases\EmptyStatement.CSharp9.cs",
-                                   @"TestCases\EmptyStatement.CSharp9.Fixed.cs",
-                                   new EmptyStatement(),
-                                   new EmptyStatementCodeFixProvider(),
-                                   ParseOptionsHelper.FromCSharp9,
-                                   OutputKind.ConsoleApplication);
+            OldVerifier.VerifyCodeFix<EmptyStatementCodeFixProvider>(
+                @"TestCases\EmptyStatement.CSharp9.cs",
+                @"TestCases\EmptyStatement.CSharp9.Fixed.cs",
+                new EmptyStatement(),
+                ParseOptionsHelper.FromCSharp9,
+                OutputKind.ConsoleApplication);
 #endif
     }
 }

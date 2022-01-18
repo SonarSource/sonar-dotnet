@@ -33,10 +33,9 @@ namespace SonarAnalyzer.UnitTest.Rules
 
         [TestMethod]
         public void SwitchDefaultClauseEmpty_CodeFix() =>
-            OldVerifier.VerifyCodeFix(
+            OldVerifier.VerifyCodeFix<SwitchDefaultClauseEmptyCodeFixProvider>(
                 @"TestCases\SwitchDefaultClauseEmpty.cs",
                 @"TestCases\SwitchDefaultClauseEmpty.Fixed.cs",
-                new SwitchDefaultClauseEmpty(),
-                new SwitchDefaultClauseEmptyCodeFixProvider());
+                new SwitchDefaultClauseEmpty());
     }
 }

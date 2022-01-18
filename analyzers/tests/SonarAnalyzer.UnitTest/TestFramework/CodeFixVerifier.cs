@@ -18,6 +18,7 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.IO;
@@ -28,107 +29,63 @@ using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CodeActions;
 using Microsoft.CodeAnalysis.CodeFixes;
 using Microsoft.CodeAnalysis.Diagnostics;
-using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
 
 namespace SonarAnalyzer.UnitTest.TestFramework
 {
-    internal static class CodeFixVerifier
+    internal class CodeFixVerifier
     {
-        public static void VerifyCodeFix(string path,
-            string pathToExpected,
-            string pathToBatchExpected,
-            SonarDiagnosticAnalyzer diagnosticAnalyzer,
-            SonarCodeFixProvider codeFixProvider,
-            string codeFixTitle,
-            IEnumerable<ParseOptions> options = null,
-            OutputKind outputKind = OutputKind.DynamicallyLinkedLibrary,
-            IEnumerable<MetadataReference> additionalReferences = null)
+        private const string FixedMessage = "Fixed";
+
+        private readonly DiagnosticAnalyzer analyzer;
+        private readonly CodeFixProvider codeFix;
+        private readonly Document originalDocument;
+        private readonly string codeFixTitle;
+
+        public CodeFixVerifier(DiagnosticAnalyzer analyzer, CodeFixProvider codeFix, Document originalDocument, string codeFixTitle)
         {
-            var document = CreateDocument(path, outputKind, additionalReferences);
-            var parseOptions = options.OrDefault(document.Project.Language).ToArray();
-            foreach (var parseOption in parseOptions)
-            {
-                RunCodeFixWhileDocumentChanges(diagnosticAnalyzer, codeFixProvider, codeFixTitle, document, parseOption, pathToExpected);
-            }
-            if (codeFixProvider.GetFixAllProvider() is { } fixAllProvider)
-            {
-                foreach (var parseOption in parseOptions)
-                {
-                    RunFixAllProvider(diagnosticAnalyzer, codeFixProvider, codeFixTitle, fixAllProvider, document, parseOption, pathToBatchExpected);
-                }
-            }
+            this.analyzer = analyzer;
+            this.codeFix = codeFix;
+            this.originalDocument = originalDocument;
+            this.codeFixTitle = codeFixTitle;
         }
 
-        private static Document CreateDocument(string path, OutputKind outputKind, IEnumerable<MetadataReference> additionalReferences) =>
-            SolutionBuilder.Create()
-                .AddProject(AnalyzerLanguage.FromPath(path), outputKind: outputKind)
-                .AddReferences(additionalReferences)
-                .AddDocument(path, true)
-                .FindDocument(Path.GetFileName(path));
-
-        private static void RunCodeFixWhileDocumentChanges(DiagnosticAnalyzer diagnosticAnalyzer, CodeFixProvider codeFixProvider,
-            string codeFixTitle, Document document, ParseOptions parseOption, string pathToExpected)
+        public void VerifyWhileDocumentChanges(ParseOptions parseOptions, string pathToExpected)
         {
-            var currentDocument = document;
-            var state = new DocumentState(diagnosticAnalyzer, currentDocument, parseOption);
-            state.Diagnostics.Should().NotBeEmpty();
-
+            var state = new State(analyzer, originalDocument, parseOptions);
+            var codeFixExecuted = false;
             string codeBeforeFix;
-            var codeFixExecutedAtLeastOnce = false;
+            state.Diagnostics.Should().NotBeEmpty();
             do
             {
                 codeBeforeFix = state.ActualCode;
-
-                var codeFixExecuted = false;
-                for (var diagnosticIndexToFix = 0; !codeFixExecuted && diagnosticIndexToFix < state.Diagnostics.Length; diagnosticIndexToFix++)
+                if (state.Diagnostics
+                        .Where(x => codeFix.FixableDiagnosticIds.Contains(x.Id))    // Analyzer can also raise other Diagnostics that we can't fix
+                        .SelectMany(x => ActionToApply(codeFix, state.Document, x))
+                        .FirstOrDefault() is { } actionToApply)
                 {
-                    var diagnostic = state.Diagnostics[diagnosticIndexToFix];
-                    if (!codeFixProvider.FixableDiagnosticIds.Contains(diagnostic.Id))
-                    {
-                        // a Diagnostic can raise issues for different rules, but provide fixes for only one of them
-                        // if we don't have a fixer for this rule, we skip it
-                        continue;
-                    }
-                    var codeActionsForDiagnostic = GetCodeActionsForDiagnostic(codeFixProvider, currentDocument, diagnostic);
-                    if (CodeActionToApply(codeFixTitle, codeActionsForDiagnostic) is { } codeActionToApply)
-                    {
-                        currentDocument = ApplyCodeFix(currentDocument, codeActionToApply);
-                        state = new DocumentState(diagnosticAnalyzer, currentDocument, parseOption);
-                        codeFixExecutedAtLeastOnce = true;
-                        codeFixExecuted = true;
-                    }
+                    state = new State(analyzer, ApplyCodeFix(state.Document, actionToApply), parseOptions);
+                    codeFixExecuted = true;
                 }
             }
             while (codeBeforeFix != state.ActualCode);
 
-            codeFixExecutedAtLeastOnce.Should().BeTrue();
-            AreEqualIgnoringLineEnding(pathToExpected, state);
+            codeFixExecuted.Should().BeTrue();
+            state.AssertExpected(pathToExpected, nameof(VerifyWhileDocumentChanges) + " updates the document until all issues are fixed, even if the fix itself creates a new issue again");
         }
 
-        private static void AreEqualIgnoringLineEnding(string pathToExpected, DocumentState state)
+        public void VerifyFixAllProvider(FixAllProvider fixAllProvider, ParseOptions parseOptions, string pathToExpected)
         {
-            const string WindowsLineEnding = "\r\n";
-            const string UnixLineEnding = "\n";
-
-            var actualWithUnixLineEnding = state.ActualCode.Replace(WindowsLineEnding, UnixLineEnding);
-            var expectedWithUnixLineEnding = File.ReadAllText(pathToExpected).Replace(WindowsLineEnding, UnixLineEnding);
-            actualWithUnixLineEnding.Should().Be(expectedWithUnixLineEnding, state.Compilation.LanguageVersionString());
-        }
-
-        private static void RunFixAllProvider(DiagnosticAnalyzer diagnosticAnalyzer, CodeFixProvider codeFixProvider,
-            string codeFixTitle, FixAllProvider fixAllProvider, Document document, ParseOptions parseOption, string pathToExpected)
-        {
-            var state = new DocumentState(diagnosticAnalyzer, document, parseOption);
+            var state = new State(analyzer, originalDocument, parseOptions);
             state.Diagnostics.Should().NotBeEmpty();
 
             var fixAllDiagnosticProvider = new FixAllDiagnosticProvider(state.Diagnostics);
-            var fixAllContext = new FixAllContext(state.Document, codeFixProvider, FixAllScope.Document, codeFixTitle, codeFixProvider.FixableDiagnosticIds, fixAllDiagnosticProvider, default);
+            var fixAllContext = new FixAllContext(state.Document, codeFix, FixAllScope.Document, codeFixTitle, codeFix.FixableDiagnosticIds, fixAllDiagnosticProvider, default);
             var codeActionToExecute = fixAllProvider.GetFixAsync(fixAllContext).Result;
             codeActionToExecute.Should().NotBeNull();
 
-            state = new DocumentState(diagnosticAnalyzer, ApplyCodeFix(state.Document, codeActionToExecute), parseOption);
-            AreEqualIgnoringLineEnding(pathToExpected, state);
+            new State(analyzer, ApplyCodeFix(state.Document, codeActionToExecute), parseOptions)
+                .AssertExpected(pathToExpected, $"{nameof(VerifyFixAllProvider)} runs {fixAllProvider.GetType().Name} once");
         }
 
         private static Document ApplyCodeFix(Document document, CodeAction codeAction)
@@ -138,41 +95,65 @@ namespace SonarAnalyzer.UnitTest.TestFramework
             return solution.GetDocument(document.Id);
         }
 
-        private static CodeAction CodeActionToApply(string codeFixTitle, IEnumerable<CodeAction> codeActions) =>
-            codeFixTitle == null
-                ? codeActions.FirstOrDefault()
-                : codeActions.SingleOrDefault(action => action.Title == codeFixTitle);
-
-        private static IEnumerable<CodeAction> GetCodeActionsForDiagnostic(CodeFixProvider codeFixProvider, Document document, Diagnostic diagnostic)
+        private IEnumerable<CodeAction> ActionToApply(CodeFixProvider codeFixProvider, Document document, Diagnostic diagnostic)
         {
             var actions = new List<CodeAction>();
-            var context = new CodeFixContext(document, diagnostic, (a, d) => actions.Add(a), CancellationToken.None);
-
+            var context = new CodeFixContext(document, diagnostic, (action, _) => actions.Add(action), default);
             codeFixProvider.RegisterCodeFixesAsync(context).Wait();
-            return actions;
+            return actions.Where(x => codeFixTitle is null || x.Title == codeFixTitle);
         }
 
-        private class DocumentState
+        private class State
         {
-            public readonly Compilation Compilation;
             public readonly Document Document;
             public readonly ImmutableArray<Diagnostic> Diagnostics;
             public readonly string ActualCode;
+            private readonly Compilation compilation;
 
-            public DocumentState(DiagnosticAnalyzer diagnosticAnalyzer, Document document, ParseOptions parseOption)
+            public State(DiagnosticAnalyzer analyzer, Document document, ParseOptions parseOptions)
             {
                 var project = document.Project;
-                if (parseOption != null)
+                if (parseOptions != null)
                 {
-                    project = project.WithParseOptions(parseOption);
+                    project = project.WithParseOptions(parseOptions);
                     document = project.GetDocument(document.Id);    // There's a new instance with the same ID
                 }
 
-                Compilation = project.GetCompilationAsync().Result;
+                compilation = project.GetCompilationAsync().Result;
                 Document = document;
-                Diagnostics = DiagnosticVerifier.GetDiagnosticsNoExceptions(Compilation, diagnosticAnalyzer, CompilationErrorBehavior.Ignore).ToImmutableArray();
+                Diagnostics = DiagnosticVerifier.GetDiagnosticsNoExceptions(compilation, analyzer, CompilationErrorBehavior.Ignore).ToImmutableArray();
                 ActualCode = document.GetSyntaxRootAsync().Result.GetText().ToString();
             }
+
+            public void AssertExpected(string pathToExpected, string becauseMessage)
+            {
+                var expected = File.ReadAllText(pathToExpected).ToUnixLineEndings();
+                ActualCodeWithReplacedComments().ToUnixLineEndings().Should().Be(expected, $"{becauseMessage}. Language: {compilation.LanguageVersionString()}");
+            }
+
+            private string ActualCodeWithReplacedComments() =>
+                ActualCode.ToUnixLineEndings()
+                    .Split(new[] { Constants.UnixLineEnding }, StringSplitOptions.None)
+                    .Where(x => !IssueLocationCollector.RxPreciseLocation.IsMatch(x))
+                    .Select(ReplaceNonCompliantComment)
+                    .JoinStr(Constants.UnixLineEnding);
+        }
+
+        private static string ReplaceNonCompliantComment(string line)
+        {
+            var match = IssueLocationCollector.RxIssue.Match(line);
+            if (!match.Success)
+            {
+                return line;
+            }
+
+            if (match.Groups["issueType"].Value == "Noncompliant")
+            {
+                var startIndex = line.IndexOf(match.Groups["issueType"].Value);
+                return string.Concat(line.Remove(startIndex), FixedMessage);
+            }
+
+            return line.Replace(match.Value, string.Empty).TrimEnd();
         }
     }
 }
