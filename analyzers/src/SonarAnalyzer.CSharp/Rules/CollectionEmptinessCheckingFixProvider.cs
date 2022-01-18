@@ -1,0 +1,92 @@
+﻿/*
+ * SonarAnalyzer for .NET
+ * Copyright (C) 2015-2022 SonarSource SA
+ * mailto: contact AT sonarsource DOT com
+ *
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU Lesser General Public
+ * License as published by the Free Software Foundation; either
+ * version 3 of the License, or (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * Lesser General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public License
+ * along with this program; if not, write to the Free Software Foundation,
+ * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ */
+
+using System.Collections.Immutable;
+using System.Linq;
+using System.Threading.Tasks;
+using Microsoft.CodeAnalysis;
+using Microsoft.CodeAnalysis.CodeActions;
+using Microsoft.CodeAnalysis.CodeFixes;
+using Microsoft.CodeAnalysis.CSharp;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
+using Microsoft.CodeAnalysis.Formatting;
+using SonarAnalyzer.Helpers;
+
+namespace SonarAnalyzer.Rules.CSharp
+{
+    [ExportCodeFixProvider(LanguageNames.CSharp)]
+    public sealed class CollectionEmptinessCheckingFixProvider : SonarCodeFixProvider
+    {
+        internal const string Title = "Use Any() instead";
+        public override ImmutableArray<string> FixableDiagnosticIds => ImmutableArray.Create(CollectionEmptinessChecking.DiagnosticId);
+
+        private readonly CSharpFacade language = CSharpFacade.Instance;
+
+        protected override Task RegisterCodeFixesAsync(SyntaxNode root, CodeFixContext context)
+        {
+            if (root.FindNode(context.Diagnostics.First().Location.SourceSpan)?.FirstAncestorOrSelf<BinaryExpressionSyntax>() is { } binary)
+            {
+                var binaryLeft = binary.Left;
+                var binaryRight = binary.Right;
+
+                if (language.ExpressionNumericConverter.TryGetConstantIntValue(binaryLeft, out var left))
+                {
+                    Simplify(root, binary, binaryRight, language.Syntax.ComparisonKind(binary).Mirror().Compare(left), context);
+                }
+                else if (language.ExpressionNumericConverter.TryGetConstantIntValue(binaryRight, out var right))
+                {
+                    Simplify(root, binary, binaryLeft, language.Syntax.ComparisonKind(binary).Compare(right), context);
+                }
+            }
+            return Task.CompletedTask;
+        }
+
+        public static void Simplify(
+            SyntaxNode root,
+            ExpressionSyntax expression,
+            ExpressionSyntax countExpression,
+            CountComparisonResult comparisonResult,
+            CodeFixContext context) =>
+
+            context.RegisterCodeFix(
+                CodeAction.Create(
+                    Title,
+                    c => Replacement(root, expression, countExpression, comparisonResult, context)),
+                context.Diagnostics);
+
+        private static Task<Document> Replacement(
+            SyntaxNode root,
+            ExpressionSyntax expression,
+            ExpressionSyntax countExpression,
+            CountComparisonResult comparisonResult,
+            CodeFixContext context)
+        {
+            var anyExpression = countExpression.ReplaceNode(countExpression, AnyNode((InvocationExpressionSyntax)countExpression));
+            if (comparisonResult == CountComparisonResult.Empty)
+            {
+                anyExpression = SyntaxFactory.PrefixUnaryExpression(SyntaxKind.LogicalNotExpression, anyExpression);
+            }
+            return Task.FromResult(context.Document.WithSyntaxRoot(root.ReplaceNode(expression, anyExpression).WithAdditionalAnnotations(Formatter.Annotation)));
+        }
+
+        private static ExpressionSyntax AnyNode(InvocationExpressionSyntax invocation) =>
+            ((MemberAccessExpressionSyntax)invocation.Expression).WithName(SyntaxFactory.IdentifierName(nameof(Enumerable.Any)));
+    }
+}

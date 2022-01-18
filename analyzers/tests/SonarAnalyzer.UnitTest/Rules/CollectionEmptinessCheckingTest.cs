@@ -30,10 +30,25 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         public void CollectionEmptinessChecking_CS() =>
-            OldVerifier.VerifyAnalyzer(@"TestCases\CollectionEmptinessChecking.cs", new CS.CollectionEmptinessChecking());
+            new VerifierBuilder()
+                .AddAnalyzer(() => new CS.CollectionEmptinessChecking())
+                .AddPaths("CollectionEmptinessChecking.cs")
+                .Verify();
 
         [TestMethod]
         public void CollectionEmptinessChecking_VB() =>
-            OldVerifier.VerifyAnalyzer(@"TestCases\CollectionEmptinessChecking.vb", new VB.CollectionEmptinessChecking());
+            new VerifierBuilder()
+                .AddAnalyzer(() => new VB.CollectionEmptinessChecking())
+                .AddPaths("CollectionEmptinessChecking.vb")
+                .Verify();
+
+        [TestMethod]
+        public void CollectionEmptinessChecking_CodeFix_CS() =>
+            new VerifierBuilder()
+                .AddAnalyzer(() => new CS.CollectionEmptinessChecking())
+                .AddPaths("CollectionEmptinessChecking.cs")
+                .WithCodeFix<CS.CollectionEmptinessCheckingFixProvider>()
+                .WithCodeFixedPath(@"TestCases\CollectionEmptinessChecking.Fixed.cs")
+                .VerifyCodeFix();
     }
 }
