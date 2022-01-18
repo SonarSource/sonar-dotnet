@@ -29,25 +29,20 @@ using SonarAnalyzer.Helpers;
 
 namespace SonarAnalyzer.Rules
 {
-    public abstract class MethodOverloadsShouldBeGroupedBase<TSyntaxKind, TMemberDeclarationSyntax> : SonarDiagnosticAnalyzer
+    public abstract class MethodOverloadsShouldBeGroupedBase<TSyntaxKind, TMemberDeclarationSyntax> : SonarDiagnosticAnalyzer<TSyntaxKind>
         where TSyntaxKind : struct
         where TMemberDeclarationSyntax : SyntaxNode
     {
         protected const string DiagnosticId = "S4136";
-        private const string MessageFormat = "All '{0}' method overloads should be adjacent.";
 
-        private readonly DiagnosticDescriptor rule;
-
-        protected abstract ILanguageFacade<TSyntaxKind> Language { get; }
         protected abstract TSyntaxKind[] SyntaxKinds { get; }
 
         protected abstract IEnumerable<TMemberDeclarationSyntax> GetMemberDeclarations(SyntaxNode node);
         protected abstract MemberInfo CreateMemberInfo(SyntaxNodeAnalysisContext c, TMemberDeclarationSyntax member);
 
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
+        protected override string MessageFormat => "All '{0}' method overloads should be adjacent.";
 
-        protected MethodOverloadsShouldBeGroupedBase() =>
-            rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, Language.RspecResources);
+        protected MethodOverloadsShouldBeGroupedBase() : base(DiagnosticId) { }
 
         protected override void Initialize(SonarAnalysisContext context) =>
             context.RegisterSyntaxNodeActionInNonGenerated(Language.GeneratedCodeRecognizer, c =>
@@ -61,11 +56,12 @@ namespace SonarAnalyzer.Rules
                 {
                     var firstName = misplacedOverload.First().NameSyntax;
                     var secondaryLocations = misplacedOverload.Skip(1).Select(x => new SecondaryLocation(x.NameSyntax.GetLocation(), "Non-adjacent overload")).ToList();
-                    c.ReportIssue(Diagnostic.Create(descriptor: rule,
-                                                                   location: firstName.GetLocation(),
-                                                                   additionalLocations: secondaryLocations.ToAdditionalLocations(),
-                                                                   properties: secondaryLocations.ToProperties(),
-                                                                   messageArgs: firstName.ValueText));
+                    c.ReportIssue(Diagnostic.Create(
+                        descriptor: Rule,
+                        location: firstName.GetLocation(),
+                        additionalLocations: secondaryLocations.ToAdditionalLocations(),
+                        properties: secondaryLocations.ToProperties(),
+                        messageArgs: firstName.ValueText));
                 }
             },
             SyntaxKinds);

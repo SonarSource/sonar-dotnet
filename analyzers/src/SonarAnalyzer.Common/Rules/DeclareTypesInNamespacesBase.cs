@@ -24,24 +24,19 @@ using SonarAnalyzer.Helpers;
 
 namespace SonarAnalyzer.Rules
 {
-    public abstract class DeclareTypesInNamespacesBase<TSyntaxKind> : SonarDiagnosticAnalyzer
+    public abstract class DeclareTypesInNamespacesBase<TSyntaxKind> : SonarDiagnosticAnalyzer<TSyntaxKind>
         where TSyntaxKind : struct
     {
         protected const string DiagnosticId = "S3903";
-        private const string MessageFormat = "Move '{0}' into a named namespace.";
 
-        private readonly DiagnosticDescriptor rule;
-
-        protected abstract ILanguageFacade<TSyntaxKind> Language { get; }
         protected abstract TSyntaxKind[] SyntaxKinds { get; }
 
         protected abstract bool IsInnerTypeOrWithinNamespace(SyntaxNode declaration, SemanticModel semanticModel);
         protected abstract SyntaxToken GetTypeIdentifier(SyntaxNode declaration);
 
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
+        protected override string MessageFormat => "Move '{0}' into a named namespace.";
 
-        protected DeclareTypesInNamespacesBase() =>
-            rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, Language.RspecResources);
+        protected DeclareTypesInNamespacesBase() : base(DiagnosticId) { }
 
         protected override void Initialize(SonarAnalysisContext context) =>
           context.RegisterSyntaxNodeActionInNonGenerated(Language.GeneratedCodeRecognizer,
@@ -56,7 +51,7 @@ namespace SonarAnalyzer.Rules
                   }
 
                   var identifier = GetTypeIdentifier(declaration);
-                  c.ReportIssue(Diagnostic.Create(rule, identifier.GetLocation(), identifier.ValueText));
+                  c.ReportIssue(Diagnostic.Create(Rule, identifier.GetLocation(), identifier.ValueText));
               },
               SyntaxKinds);
     }

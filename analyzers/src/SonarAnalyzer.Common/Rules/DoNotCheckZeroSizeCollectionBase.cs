@@ -20,7 +20,6 @@
 
 using System;
 using System.Collections.Generic;
-using System.Collections.Immutable;
 using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Diagnostics;
@@ -28,23 +27,19 @@ using SonarAnalyzer.Helpers;
 
 namespace SonarAnalyzer.Rules
 {
-    public abstract class DoNotCheckZeroSizeCollectionBase<TSyntaxKind> : SonarDiagnosticAnalyzer
+    public abstract class DoNotCheckZeroSizeCollectionBase<TSyntaxKind> : SonarDiagnosticAnalyzer<TSyntaxKind>
         where TSyntaxKind : struct
     {
         protected const string DiagnosticId = "S3981";
-        private const string MessageFormat = "The '{0}' of '{1}' always evaluates as '{2}' regardless the size.";
         private const string CountName = nameof(Enumerable.Count);
         private const string LengthName = nameof(Array.Length);
         private const string LongLengthName = nameof(Array.LongLength);
-        private readonly DiagnosticDescriptor rule;
 
-        protected abstract ILanguageFacade<TSyntaxKind> Language { get; }
         protected abstract string IEnumerableTString { get; }
 
-        protected DoNotCheckZeroSizeCollectionBase() =>
-            rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, Language.RspecResources);
+        protected override string MessageFormat => "The '{0}' of '{1}' always evaluates as '{2}' regardless the size.";
 
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
+        protected DoNotCheckZeroSizeCollectionBase() : base(DiagnosticId) { }
 
         protected override void Initialize(SonarAnalysisContext context) =>
             context.RegisterSyntaxNodeActionInNonGenerated(Language.GeneratedCodeRecognizer,
@@ -74,7 +69,7 @@ namespace SonarAnalyzer.Rules
                 && context.SemanticModel.GetSymbolInfo(expression).Symbol is ISymbol symbol
                 && CollecionSizeTypeName(symbol) is { } symbolType)
             {
-                context.ReportIssue(Diagnostic.Create(rule, issue.GetLocation(), symbol.Name, symbolType, result == CountComparisonResult.AlwaysTrue));
+                context.ReportIssue(Diagnostic.Create(Rule, issue.GetLocation(), symbol.Name, symbolType, result == CountComparisonResult.AlwaysTrue));
             }
         }
 

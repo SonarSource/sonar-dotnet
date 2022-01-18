@@ -24,13 +24,11 @@ using SonarAnalyzer.Helpers;
 
 namespace SonarAnalyzer.Rules
 {
-    public abstract class DoNotLockWeakIdentityObjectsBase<TSyntaxKind> : SonarDiagnosticAnalyzer
+    public abstract class DoNotLockWeakIdentityObjectsBase<TSyntaxKind> : SonarDiagnosticAnalyzer<TSyntaxKind>
         where TSyntaxKind : struct
     {
         protected const string DiagnosticId = "S3998";
-        private const string MessageFormat = "Replace this lock on '{0}' with a lock against an object that cannot be accessed across application domain boundaries.";
 
-        private readonly DiagnosticDescriptor rule;
         private readonly ImmutableArray<KnownType> weakIdentityTypes =
             ImmutableArray.Create(
                 KnownType.System_MarshalByRefObject,
@@ -44,13 +42,11 @@ namespace SonarAnalyzer.Rules
                 KnownType.System_Threading_Thread
             );
 
-        protected abstract ILanguageFacade<TSyntaxKind> Language { get; }
         protected abstract TSyntaxKind SyntaxKind { get; }
 
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
+        protected override string MessageFormat => "Replace this lock on '{0}' with a lock against an object that cannot be accessed across application domain boundaries.";
 
-        protected DoNotLockWeakIdentityObjectsBase() =>
-            rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, Language.RspecResources);
+        protected DoNotLockWeakIdentityObjectsBase() : base(DiagnosticId) { }
 
         protected override void Initialize(SonarAnalysisContext context) =>
             context.RegisterSyntaxNodeActionInNonGenerated(Language.GeneratedCodeRecognizer, c =>
@@ -58,7 +54,7 @@ namespace SonarAnalyzer.Rules
                 var lockExpression = Language.Syntax.NodeExpression(c.Node);
                 if (c.SemanticModel.GetSymbolInfo(lockExpression).Symbol?.GetSymbolType() is { } lockExpressionType && lockExpressionType.DerivesFromAny(weakIdentityTypes))
                 {
-                    c.ReportIssue(Diagnostic.Create(rule, lockExpression.GetLocation(), lockExpressionType.Name));
+                    c.ReportIssue(Diagnostic.Create(Rule, lockExpression.GetLocation(), lockExpressionType.Name));
                 }
             }, SyntaxKind);
     }

@@ -26,13 +26,12 @@ using SonarAnalyzer.Helpers;
 
 namespace SonarAnalyzer.Rules.Common
 {
-    public abstract class ShouldImplementExportedInterfacesBase<TArgumentSyntax, TAttributeSyntax, TSyntaxKind> : SonarDiagnosticAnalyzer
+    public abstract class ShouldImplementExportedInterfacesBase<TArgumentSyntax, TAttributeSyntax, TSyntaxKind> : SonarDiagnosticAnalyzer<TSyntaxKind>
         where TArgumentSyntax : SyntaxNode
         where TAttributeSyntax : SyntaxNode
         where TSyntaxKind : struct
     {
         internal const string DiagnosticId = "S4159";
-        private const string MessageFormat = "{0} '{1}' on '{2}' or remove this export attribute.";
         private const string ActionForInterface = "Implement";
         private const string ActionForClass = "Derive from";
 
@@ -44,15 +43,13 @@ namespace SonarAnalyzer.Rules.Common
 
         protected abstract SeparatedSyntaxList<TArgumentSyntax>? GetAttributeArguments(TAttributeSyntax attributeSyntax);
         protected abstract SyntaxNode GetAttributeName(TAttributeSyntax attributeSyntax);
-        protected abstract ILanguageFacade<TSyntaxKind> Language { get; }
         protected abstract bool IsClassOrRecordSyntax(SyntaxNode syntaxNode);
         // Retrieve the expression inside of the typeof()/GetType() (e.g. typeof(Foo) => Foo)
         protected abstract SyntaxNode GetTypeOfOrGetTypeExpression(SyntaxNode expressionSyntax);
 
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
+        protected override string MessageFormat => "{0} '{1}' on '{2}' or remove this export attribute.";
 
-        protected ShouldImplementExportedInterfacesBase() =>
-            rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, Language.RspecResources);
+        protected ShouldImplementExportedInterfacesBase() : base(DiagnosticId) { }
 
         protected override void Initialize(SonarAnalysisContext context) =>
             context.RegisterSyntaxNodeActionInNonGenerated(Language.GeneratedCodeRecognizer,

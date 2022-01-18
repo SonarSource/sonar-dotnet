@@ -18,19 +18,17 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System.Collections.Immutable;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.Helpers;
 
 namespace SonarAnalyzer.Rules
 {
-    public abstract class BooleanLiteralUnnecessaryBase<TBinaryExpression, TSyntaxKind> : SonarDiagnosticAnalyzer
+    public abstract class BooleanLiteralUnnecessaryBase<TBinaryExpression, TSyntaxKind> : SonarDiagnosticAnalyzer<TSyntaxKind>
         where TBinaryExpression : SyntaxNode
         where TSyntaxKind : struct
     {
         internal const string DiagnosticId = "S1125";
-        private const string MessageFormat = "Remove the unnecessary Boolean literal(s).";
 
         protected enum ErrorLocation
         {
@@ -47,8 +45,6 @@ namespace SonarAnalyzer.Rules
 
         protected delegate bool IsBooleanLiteralKind(SyntaxNode node);
 
-        protected abstract ILanguageFacade<TSyntaxKind> Language { get; }
-
         protected abstract bool IsBooleanLiteral(SyntaxNode node);
         protected abstract SyntaxNode GetLeftNode(TBinaryExpression binaryExpression);
         protected abstract SyntaxNode GetRightNode(TBinaryExpression binaryExpression);
@@ -58,12 +54,9 @@ namespace SonarAnalyzer.Rules
         // For C# 7 syntax
         protected virtual bool IsInsideTernaryWithThrowExpression(TBinaryExpression syntaxNode) => false;
 
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(Rule);
+        protected override string MessageFormat => "Remove the unnecessary Boolean literal(s).";
 
-        protected DiagnosticDescriptor Rule { get; }
-
-        protected BooleanLiteralUnnecessaryBase() =>
-            Rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, Language.RspecResources);
+        protected BooleanLiteralUnnecessaryBase() : base(DiagnosticId) { }
 
         // LogicalAnd (C#) / AndAlso (VB)
         protected void CheckAndExpression(SyntaxNodeAnalysisContext context)

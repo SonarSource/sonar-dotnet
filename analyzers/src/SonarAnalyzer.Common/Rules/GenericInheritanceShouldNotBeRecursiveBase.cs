@@ -19,33 +19,27 @@
  */
 
 using System.Collections.Generic;
-using System.Collections.Immutable;
 using System.Linq;
 using Microsoft.CodeAnalysis;
 using SonarAnalyzer.Helpers;
 
 namespace SonarAnalyzer.Rules
 {
-    public abstract class GenericInheritanceShouldNotBeRecursiveBase<TSyntaxKind, TDeclaration> : SonarDiagnosticAnalyzer
+    public abstract class GenericInheritanceShouldNotBeRecursiveBase<TSyntaxKind, TDeclaration> : SonarDiagnosticAnalyzer<TSyntaxKind>
         where TSyntaxKind : struct
         where TDeclaration : SyntaxNode
     {
         protected const string DiagnosticId = "S3464";
-        private const string MessageFormat = "Refactor this {0} so that the generic inheritance chain is not recursive.";
 
-        private readonly DiagnosticDescriptor rule;
-
-        protected abstract ILanguageFacade<TSyntaxKind> Language { get; }
         protected abstract TSyntaxKind[] SyntaxKinds { get; }
 
         protected abstract INamedTypeSymbol GetNamedTypeSymbol(TDeclaration declaration, SemanticModel semanticModel);
         protected abstract Location GetLocation(TDeclaration declaration);
         protected abstract SyntaxToken GetKeyword(TDeclaration declaration);
 
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
+        protected override string MessageFormat => "Refactor this {0} so that the generic inheritance chain is not recursive.";
 
-        protected GenericInheritanceShouldNotBeRecursiveBase() =>
-            rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, Language.RspecResources);
+        protected GenericInheritanceShouldNotBeRecursiveBase() : base(DiagnosticId) { }
 
         protected override void Initialize(SonarAnalysisContext context) =>
             context.RegisterSyntaxNodeActionInNonGenerated(Language.GeneratedCodeRecognizer,
@@ -56,7 +50,7 @@ namespace SonarAnalyzer.Rules
                     if (c.ContainingSymbol.Kind == SymbolKind.NamedType
                         && IsRecursiveInheritance(GetNamedTypeSymbol(declaration, c.SemanticModel)))
                     {
-                        c.ReportIssue(Diagnostic.Create(rule, GetLocation(declaration), GetKeyword(declaration)));
+                        c.ReportIssue(Diagnostic.Create(Rule, GetLocation(declaration), GetKeyword(declaration)));
                     }
                 },
                 SyntaxKinds);

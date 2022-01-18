@@ -18,27 +18,20 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System.Collections.Immutable;
 using System.Linq;
 using Microsoft.CodeAnalysis;
 using SonarAnalyzer.Helpers;
 
 namespace SonarAnalyzer.Rules
 {
-    public abstract class PureAttributeOnVoidMethodBase<TSyntaxKind> : SonarDiagnosticAnalyzer
+    public abstract class PureAttributeOnVoidMethodBase<TSyntaxKind> : SonarDiagnosticAnalyzer<TSyntaxKind>
         where TSyntaxKind : struct
     {
         protected const string DiagnosticId = "S3603";
-        private const string MessageFormat = "Remove the 'Pure' attribute or change the method to return a value.";
 
-        protected abstract ILanguageFacade<TSyntaxKind> Language { get; }
+        protected override string MessageFormat => "Remove the 'Pure' attribute or change the method to return a value.";
 
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(Rule);
-
-        protected DiagnosticDescriptor Rule { get; }
-
-        protected PureAttributeOnVoidMethodBase() =>
-            Rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, Language.RspecResources);
+        protected PureAttributeOnVoidMethodBase() : base(DiagnosticId) { }
 
         protected override void Initialize(SonarAnalysisContext context) =>
             context.RegisterSymbolAction(

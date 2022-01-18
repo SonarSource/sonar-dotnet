@@ -18,7 +18,6 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System.Collections.Immutable;
 using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Diagnostics;
@@ -26,26 +25,21 @@ using SonarAnalyzer.Helpers;
 
 namespace SonarAnalyzer.Rules
 {
-    public abstract class MarkWindowsFormsMainWithStaThreadBase<TSyntaxKind, TMethodSyntax> : SonarDiagnosticAnalyzer
+    public abstract class MarkWindowsFormsMainWithStaThreadBase<TSyntaxKind, TMethodSyntax> : SonarDiagnosticAnalyzer<TSyntaxKind>
         where TSyntaxKind : struct
         where TMethodSyntax : SyntaxNode
     {
         protected const string DiagnosticId = "S4210";
-        private const string MessageFormat = "{0}";
         private const string AddStaThreadMessage = "Add the 'STAThread' attribute to this entry point.";
         private const string ChangeMtaThreadToStaThreadMessage = "Change the 'MTAThread' attribute of this entry point to 'STAThread'.";
 
-        private readonly DiagnosticDescriptor rule;
-
-        protected abstract ILanguageFacade<TSyntaxKind> Language { get; }
         protected abstract TSyntaxKind[] SyntaxKinds { get; }
 
         protected abstract Location GetLocation(TMethodSyntax method);
 
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
+        protected override string MessageFormat => "{0}";
 
-        protected MarkWindowsFormsMainWithStaThreadBase() =>
-            rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, Language.RspecResources);
+        protected MarkWindowsFormsMainWithStaThreadBase() : base(DiagnosticId) { }
 
         protected override void Initialize(SonarAnalysisContext context) =>
             context.RegisterSyntaxNodeActionInNonGenerated(Language.GeneratedCodeRecognizer, Action, SyntaxKinds);
@@ -65,7 +59,7 @@ namespace SonarAnalyzer.Rules
                     ? ChangeMtaThreadToStaThreadMessage
                     : AddStaThreadMessage;
 
-                c.ReportIssue(Diagnostic.Create(SupportedDiagnostics[0], GetLocation(methodDeclaration), message));
+                c.ReportIssue(Diagnostic.Create(Rule, GetLocation(methodDeclaration), message));
             }
         }
 

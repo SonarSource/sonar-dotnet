@@ -19,7 +19,6 @@
  */
 
 using System.Collections.Generic;
-using System.Collections.Immutable;
 using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Diagnostics;
@@ -27,23 +26,18 @@ using SonarAnalyzer.Helpers;
 
 namespace SonarAnalyzer.Rules
 {
-    public abstract class ParameterNameMatchesOriginalBase<TSyntaxKind, TMethodDeclarationSyntax> : SonarDiagnosticAnalyzer
+    public abstract class ParameterNameMatchesOriginalBase<TSyntaxKind, TMethodDeclarationSyntax> : SonarDiagnosticAnalyzer<TSyntaxKind>
         where TSyntaxKind : struct
         where TMethodDeclarationSyntax : SyntaxNode
     {
         protected const string DiagnosticId = "S927";
-        private const string MessageFormat = "Rename parameter '{0}' to '{1}' to match the {2} declaration.";
 
-        private readonly DiagnosticDescriptor rule;
-
-        protected abstract ILanguageFacade<TSyntaxKind> Language { get; }
         protected abstract TSyntaxKind[] SyntaxKinds { get; }
         protected abstract IEnumerable<SyntaxToken> ParameterIdentifiers(TMethodDeclarationSyntax method);
 
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
+        protected override string MessageFormat => "Rename parameter '{0}' to '{1}' to match the {2} declaration.";
 
-        protected ParameterNameMatchesOriginalBase() =>
-            rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, Language.RspecResources);
+        protected ParameterNameMatchesOriginalBase() : base(DiagnosticId) { }
 
         protected override void Initialize(SonarAnalysisContext context) =>
             context.RegisterSyntaxNodeActionInNonGenerated(Language.GeneratedCodeRecognizer, c =>
@@ -76,7 +70,7 @@ namespace SonarAnalyzer.Rules
                                     .Zip(expectedParameters, (actual, expected) => new { actual, expected })
                                     .Where(x => !x.actual.ValueText.Equals(x.expected.Name, Language.NameComparison)))
             {
-                context.ReportIssue(Diagnostic.Create(rule, item.actual.GetLocation(), item.actual.ValueText, item.expected.Name, expectedLocation));
+                context.ReportIssue(Diagnostic.Create(Rule, item.actual.GetLocation(), item.actual.ValueText, item.expected.Name, expectedLocation));
             }
         }
 
@@ -96,7 +90,7 @@ namespace SonarAnalyzer.Rules
                     && (expectedParameter.Type.Kind != SymbolKind.TypeParameter
                         || actualParameters[i].Type.Kind == SymbolKind.TypeParameter))
                 {
-                    context.ReportIssue(Diagnostic.Create(rule, parameter.GetLocation(), parameter.ValueText, expectedParameter.Name, expectedLocation));
+                    context.ReportIssue(Diagnostic.Create(Rule, parameter.GetLocation(), parameter.ValueText, expectedParameter.Name, expectedLocation));
                 }
             }
         }
