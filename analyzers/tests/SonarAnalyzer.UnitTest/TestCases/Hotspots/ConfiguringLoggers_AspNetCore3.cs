@@ -1,4 +1,12 @@
-﻿using Microsoft.Extensions.Options;
+﻿using System;
+using System.Collections;
+using System.Collections.Generic;
+using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Options;
 using Microsoft.AspNetCore;
 
 namespace MvcApp
@@ -18,40 +26,52 @@ namespace MvcApp
 
     public class StartupLogging
     {
-        public IServiceCollection ConfigureServices(IServiceCollection services)
+        public void ConfigureServices(IServiceCollection services)
         {
             services.AddLogging(logging => // Noncompliant {{Make sure that this logger's configuration is safe.}}
             {
-                logging.AddConsole();
                 // ...
             });
-            return services;
         }
 
-        public void Configure(IApplicationBuilder app, Microsoft.AspNetCore.Hosting.IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
         {
             IConfiguration config = null;
             LogLevel level = LogLevel.Critical;
             bool includeScopes = false;
             Func<string, Microsoft.Extensions.Logging.LogLevel, bool> filter = null;
-            Microsoft.Extensions.Logging.Console.ConsoleLoggerOptions consoleSettings = null;
-            Microsoft.Extensions.Logging.AzureAppServices.AzureBlobLoggerOptions azureSettings = null;
+            Microsoft.Extensions.Logging.Console.IConsoleLoggerSettings consoleSettings = null;
+            Microsoft.Extensions.Logging.AzureAppServices.AzureAppServicesDiagnosticsSettings azureSettings = null;
             Microsoft.Extensions.Logging.EventLog.EventLogSettings eventLogSettings = null;
 
-            using (var loggerFactory = LoggerFactory.Create(builder => builder.AddFilter("SampleApp.Program", LogLevel.Debug)
-                                                                              .AddAzureWebAppDiagnostics() // Noncompliant
-                                                                              .AddConsole()// Noncompliant
-                                                                              .AddDebug() // Noncompliant
-                                                                              .AddEventLog()// Noncompliant
-                                                                              .AddEventSourceLogger())) // Noncompliant
-            { }
+            // An issue will be raised for each call to an ILoggerFactory extension methods adding loggers.
+            loggerFactory.AddAzureWebAppDiagnostics();
+            //          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^    {{Make sure that this logger's configuration is safe.}}
+            loggerFactory.AddAzureWebAppDiagnostics(azureSettings); // Noncompliant
+            loggerFactory.AddConsole(); // Noncompliant
+            loggerFactory.AddConsole(level); // Noncompliant
+            loggerFactory.AddConsole(level, includeScopes); // Noncompliant
+            loggerFactory.AddConsole(filter); // Noncompliant
+            loggerFactory.AddConsole(filter, includeScopes); // Noncompliant
+            loggerFactory.AddConsole(config); // Noncompliant
+            loggerFactory.AddConsole(consoleSettings); // Noncompliant
+            loggerFactory.AddDebug(); // Noncompliant
+            loggerFactory.AddDebug(level); // Noncompliant
+            loggerFactory.AddDebug(filter); // Noncompliant
+            loggerFactory.AddEventLog(); // Noncompliant
+            loggerFactory.AddEventLog(eventLogSettings); // Noncompliant
+            loggerFactory.AddEventLog(level); // Noncompliant
+                                              //          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^    {{Make sure that this logger's configuration is safe.}}
+
+            // Testing the next method using a hack - see notes at the end of the file
+            loggerFactory.AddEventSourceLogger(); // Noncompliant
 
             IEnumerable<ILoggerProvider> providers = null;
             LoggerFilterOptions filterOptions1 = null;
             IOptionsMonitor<LoggerFilterOptions> filterOptions2 = null;
 
             LoggerFactory factory = new LoggerFactory(); // Noncompliant
-//                                  ^^^^^^^^^^^^^^^^^^^    {{Make sure that this logger's configuration is safe.}}
+                                                         //                                  ^^^^^^^^^^^^^^^^^^^    {{Make sure that this logger's configuration is safe.}}
 
             new LoggerFactory(providers); // Noncompliant
             new LoggerFactory(providers, filterOptions1); // Noncompliant
@@ -61,12 +81,17 @@ namespace MvcApp
         public void AdditionalTests(IWebHostBuilder webHostBuilder, IServiceCollection serviceDescriptors)
         {
             var factory = new MyLoggerFactory();
-//                        ^^^^^^^^^^^^^^^^^^^^^
+            //                        ^^^^^^^^^^^^^^^^^^^^^
             new MyLoggerFactory("data"); // Noncompliant
 
             // Calling extension methods as static methods
             WebHostBuilderExtensions.ConfigureLogging(webHostBuilder, (Action<ILoggingBuilder>)null);            // Noncompliant
             LoggingServiceCollectionExtensions.AddLogging(serviceDescriptors, (Action<ILoggingBuilder>)null);    // Noncompliant
+
+            AzureAppServicesLoggerFactoryExtensions.AddAzureWebAppDiagnostics(factory, null);    // Noncompliant
+            ConsoleLoggerExtensions.AddConsole(factory);                            // Noncompliant
+            DebugLoggerFactoryExtensions.AddDebug(factory);                         // Noncompliant
+            EventLoggerFactoryExtensions.AddEventLog(factory);                      // Noncompliant
             EventSourceLoggerFactoryExtensions.AddEventSourceLogger(factory);       // Noncompliant
         }
     }

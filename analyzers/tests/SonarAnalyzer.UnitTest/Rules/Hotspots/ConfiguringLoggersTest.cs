@@ -84,6 +84,14 @@ namespace SonarAnalyzer.UnitTest.Rules
                 AspNetCoreLoggingReferences);
 
         [TestMethod]
+        public void ConfiguringLoggers_AspNetCore3_CS() =>
+            OldVerifier.VerifyNonConcurrentAnalyzer(
+                @"TestCases\Hotspots\ConfiguringLoggers_AspNetCore.cs",
+                new CS.ConfiguringLoggers(AnalyzerConfiguration.AlwaysEnabled),
+                options: ParseOptionsHelper.FromCSharp9,
+                additionalReferences: AspNetCore3LoggingReferences);
+
+     [TestMethod]
         public void ConfiguringLoggers_AspNetCore_VB() =>
             OldVerifier.VerifyAnalyzer(
                 @"TestCases\Hotspots\ConfiguringLoggers_AspNetCore.vb",
@@ -112,6 +120,14 @@ namespace SonarAnalyzer.UnitTest.Rules
                                         .Concat(NuGetMetadataReference.MicrosoftExtensionsOptions(Constants.DotNetCore220Version))
                                         .Concat(NuGetMetadataReference.MicrosoftExtensionsLoggingPackages(Constants.DotNetCore220Version))
                                         .Concat(new[] {CoreMetadataReference.MicrosoftExtensionsDependencyInjectionAbstractions});
+
+        private static IEnumerable<MetadataReference> AspNetCore3LoggingReferences =>
+                Enumerable.Empty<MetadataReference>()
+                      .Concat(AspNetCoreMetadataReference.MicrosoftAspNetCoreDiagnostics)
+                      .Concat(AspNetCoreMetadataReference.MicrosoftAspNetCoreHostingAbstractions)
+                      .Concat(AspNetCoreMetadataReference.MicrosoftAspNetCoreHttpAbstractions)
+                      .Concat(AspNetCoreMetadataReference.MicrosoftExtensionsHostingAbstractions)
+                      .Concat(AspNetCoreMetadataReference.MicrosoftExtensionsIOptionsMonitor);
 #endif
     }
 }
