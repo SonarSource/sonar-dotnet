@@ -49,16 +49,16 @@ namespace SonarAnalyzer.Rules.CSharp
             context.RegisterSyntaxNodeActionInNonGenerated(c =>
             {
                 var methodCall = (InvocationExpressionSyntax)c.Node;
-                if (!methodCall.Expression.IsKind(SyntaxKind.SimpleMemberAccessExpression) ||
-                    methodCall.ArgumentList.Arguments.Count < 2)
+                if (!methodCall.Expression.IsKind(SyntaxKind.SimpleMemberAccessExpression)
+                    || methodCall.ArgumentList.Arguments.Count < 2)
                 {
                     return;
                 }
 
                 var firstArgument = methodCall.ArgumentList.Arguments[0];
                 var secondArgument = methodCall.ArgumentList.Arguments[1];
-                if (firstArgument.Expression is LiteralExpressionSyntax ||
-                    !(secondArgument.Expression is LiteralExpressionSyntax))
+                if (firstArgument.Expression is LiteralExpressionSyntax
+                    || secondArgument.Expression is not LiteralExpressionSyntax)
                 {
                     return;
                 }
