@@ -71,8 +71,8 @@ namespace SonarAnalyzer.Rules.CSharp
                     return;
                 }
 
-                var isAnyTrackedAssertType = (c.SemanticModel.GetSymbolInfo(methodCallExpression.Expression).Symbol
-                    as INamedTypeSymbol).IsAny(methodKnownTypes);
+                var symbolInfo = c.SemanticModel.GetSymbolInfo(methodCallExpression.Expression).Symbol;
+                var isAnyTrackedAssertType = (symbolInfo as INamedTypeSymbol).IsAny(methodKnownTypes);
                 if (!isAnyTrackedAssertType)
                 {
                     return;
