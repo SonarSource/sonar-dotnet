@@ -32,60 +32,54 @@ namespace SonarAnalyzer.Rules.CSharp
     public sealed class AssertionArgsShouldBePassedInCorrectOrder : SonarDiagnosticAnalyzer
     {
         internal const string DiagnosticId = "S3415";
-        private const string MessageFormat = "Make sure these 2 arguments are in the correct order: expected value, " +
-            "actual value.";
+        private const string MessageFormat = "Make sure these 2 arguments are in the correct order: expected value, actual value.";
 
-        private static readonly DiagnosticDescriptor rule =
-            DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(rule);
+        private static readonly DiagnosticDescriptor Rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
 
-        private static readonly IDictionary<string, ImmutableArray<KnownType>> methodsWithType = new Dictionary<string, ImmutableArray<KnownType>>
+        private static readonly IDictionary<string, ImmutableArray<KnownType>> MethodsWithType = new Dictionary<string, ImmutableArray<KnownType>>
         {
-            ["AreEqual"] = ImmutableArray.Create(KnownType.Microsoft_VisualStudio_TestTools_UnitTesting_Assert,
-                KnownType.NUnit_Framework_Assert),
-            ["AreSame"] = ImmutableArray.Create(KnownType.Microsoft_VisualStudio_TestTools_UnitTesting_Assert,
-                KnownType.NUnit_Framework_Assert),
-            ["Equal"] = ImmutableArray.Create(KnownType.Xunit_Assert),
-            ["Same"] = ImmutableArray.Create(KnownType.Xunit_Assert)
+            ["AreEqual"] = ImmutableArray.Create(KnownType.Microsoft_VisualStudio_TestTools_UnitTesting_Assert, KnownType.NUnit_Framework_Assert),
+            ["AreSame"]  = ImmutableArray.Create(KnownType.Microsoft_VisualStudio_TestTools_UnitTesting_Assert, KnownType.NUnit_Framework_Assert),
+            ["Equal"]    = ImmutableArray.Create(KnownType.Xunit_Assert),
+            ["Same"]     = ImmutableArray.Create(KnownType.Xunit_Assert)
         };
 
-        protected override void Initialize(SonarAnalysisContext context)
-        {
-            context.RegisterSyntaxNodeActionInNonGenerated(
-                c =>
+        protected override void Initialize(SonarAnalysisContext context) =>
+            context.RegisterSyntaxNodeActionInNonGenerated(c =>
+            {
+                var methodCall = (InvocationExpressionSyntax)c.Node;
+                if (!methodCall.Expression.IsKind(SyntaxKind.SimpleMemberAccessExpression) ||
+                    methodCall.ArgumentList.Arguments.Count < 2)
                 {
-                    var methodCall = (InvocationExpressionSyntax)c.Node;
-                    if (!methodCall.Expression.IsKind(SyntaxKind.SimpleMemberAccessExpression) ||
-                        methodCall.ArgumentList.Arguments.Count < 2)
-                    {
-                        return;
-                    }
+                    return;
+                }
 
-                    var firstArgument = methodCall.ArgumentList.Arguments[0];
-                    var secondArgument = methodCall.ArgumentList.Arguments[1];
-                    if (firstArgument.Expression is LiteralExpressionSyntax ||
-                        !(secondArgument.Expression is LiteralExpressionSyntax))
-                    {
-                        return;
-                    }
+                var firstArgument = methodCall.ArgumentList.Arguments[0];
+                var secondArgument = methodCall.ArgumentList.Arguments[1];
+                if (firstArgument.Expression is LiteralExpressionSyntax ||
+                    !(secondArgument.Expression is LiteralExpressionSyntax))
+                {
+                    return;
+                }
 
-                    var methodCallExpression = (MemberAccessExpressionSyntax)methodCall.Expression;
+                var methodCallExpression = (MemberAccessExpressionSyntax)methodCall.Expression;
 
-                    var methodKnownTypes = methodsWithType.GetValueOrDefault(methodCallExpression.Name.Identifier.ValueText);
-                    if (methodKnownTypes == null)
-                    {
-                        return;
-                    }
+                var methodKnownTypes = MethodsWithType.GetValueOrDefault(methodCallExpression.Name.Identifier.ValueText);
+                if (methodKnownTypes == null)
+                {
+                    return;
+                }
 
-                    var isAnyTrackedAssertType = (c.SemanticModel.GetSymbolInfo(methodCallExpression.Expression).Symbol
-                        as INamedTypeSymbol).IsAny(methodKnownTypes);
-                    if (!isAnyTrackedAssertType)
-                    {
-                        return;
-                    }
+                var isAnyTrackedAssertType = (c.SemanticModel.GetSymbolInfo(methodCallExpression.Expression).Symbol
+                    as INamedTypeSymbol).IsAny(methodKnownTypes);
+                if (!isAnyTrackedAssertType)
+                {
+                    return;
+                }
 
-                    c.ReportIssue(Diagnostic.Create(rule, firstArgument.CreateLocation(secondArgument)));
-                }, SyntaxKind.InvocationExpression);
-        }
+                c.ReportIssue(Diagnostic.Create(Rule, firstArgument.CreateLocation(secondArgument)));
+            },
+            SyntaxKind.InvocationExpression);
     }
 }
