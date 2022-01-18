@@ -35,58 +35,65 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         public void ConfiguringLoggers_Log4Net_CS() =>
-            OldVerifier.VerifyAnalyzer(@"TestCases\Hotspots\ConfiguringLoggers_Log4Net.cs",
+            OldVerifier.VerifyAnalyzer(
+                @"TestCases\Hotspots\ConfiguringLoggers_Log4Net.cs",
                 new CS.ConfiguringLoggers(AnalyzerConfiguration.AlwaysEnabled),
                 Log4NetReferences);
 
         [TestMethod]
         public void ConfiguringLoggers_Log4Net_VB() =>
-            OldVerifier.VerifyAnalyzer(@"TestCases\Hotspots\ConfiguringLoggers_Log4Net.vb",
+            OldVerifier.VerifyAnalyzer(
+                @"TestCases\Hotspots\ConfiguringLoggers_Log4Net.vb",
                 new VB.ConfiguringLoggers(AnalyzerConfiguration.AlwaysEnabled),
                 Log4NetReferences);
 
         [TestMethod]
         public void ConfiguringLoggers_NLog_CS() =>
-            OldVerifier.VerifyAnalyzer(@"TestCases\Hotspots\ConfiguringLoggers_NLog.cs",
+            OldVerifier.VerifyAnalyzer(
+                @"TestCases\Hotspots\ConfiguringLoggers_NLog.cs",
                 new CS.ConfiguringLoggers(AnalyzerConfiguration.AlwaysEnabled),
                 NLogReferences);
 
         [TestMethod]
         public void ConfiguringLoggers_NLog_VB() =>
-            OldVerifier.VerifyAnalyzer(@"TestCases\Hotspots\ConfiguringLoggers_NLog.vb",
+            OldVerifier.VerifyAnalyzer(
+                @"TestCases\Hotspots\ConfiguringLoggers_NLog.vb",
                 new VB.ConfiguringLoggers(AnalyzerConfiguration.AlwaysEnabled),
                 NLogReferences);
 
         [TestMethod]
         public void ConfiguringLoggers_Serilog_CS() =>
-            OldVerifier.VerifyAnalyzer(@"TestCases\Hotspots\ConfiguringLoggers_Serilog.cs",
+            OldVerifier.VerifyAnalyzer(
+                @"TestCases\Hotspots\ConfiguringLoggers_Serilog.cs",
                 new CS.ConfiguringLoggers(AnalyzerConfiguration.AlwaysEnabled),
                 SeriLogReferences);
 
         [TestMethod]
         public void ConfiguringLoggers_Serilog_VB() =>
-            OldVerifier.VerifyAnalyzer(@"TestCases\Hotspots\ConfiguringLoggers_Serilog.vb",
+            OldVerifier.VerifyAnalyzer(
+                @"TestCases\Hotspots\ConfiguringLoggers_Serilog.vb",
                 new VB.ConfiguringLoggers(AnalyzerConfiguration.AlwaysEnabled),
                 SeriLogReferences);
 
 #if NET
         [TestMethod]
         public void ConfiguringLoggers_AspNetCore_CS() =>
-            OldVerifier.VerifyNonConcurrentAnalyzer(@"TestCases\Hotspots\ConfiguringLoggers_AspNetCore.cs",
-                                    new CS.ConfiguringLoggers(AnalyzerConfiguration.AlwaysEnabled),
-                                    AspNetCoreLoggingReferences);
+            OldVerifier.VerifyNonConcurrentAnalyzer(
+                @"TestCases\Hotspots\ConfiguringLoggers_AspNetCore.cs",
+                new CS.ConfiguringLoggers(AnalyzerConfiguration.AlwaysEnabled),
+                AspNetCoreLoggingReferences);
 
         [TestMethod]
         public void ConfiguringLoggers_AspNetCore_VB() =>
-            OldVerifier.VerifyAnalyzer(@"TestCases\Hotspots\ConfiguringLoggers_AspNetCore.vb",
-                                    new VB.ConfiguringLoggers(AnalyzerConfiguration.AlwaysEnabled),
-                                    AspNetCoreLoggingReferences);
+            OldVerifier.VerifyAnalyzer(
+                @"TestCases\Hotspots\ConfiguringLoggers_AspNetCore.vb",
+                new VB.ConfiguringLoggers(AnalyzerConfiguration.AlwaysEnabled),
+                AspNetCoreLoggingReferences);
 #endif
 
         internal static IEnumerable<MetadataReference> Log4NetReferences =>
             // See: https://github.com/SonarSource/sonar-dotnet/issues/3548
-            NuGetMetadataReference.Log4Net("2.0.8", "net45-full")
-            .Concat(MetadataReferenceFacade.SystemXml);
+            NuGetMetadataReference.Log4Net("2.0.8", "net45-full").Concat(MetadataReferenceFacade.SystemXml);
 
         private static IEnumerable<MetadataReference> NLogReferences =>
             NuGetMetadataReference.NLog(Constants.NuGetLatestVersion);

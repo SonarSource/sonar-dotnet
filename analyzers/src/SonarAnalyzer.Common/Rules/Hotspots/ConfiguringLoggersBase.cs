@@ -37,7 +37,8 @@ namespace SonarAnalyzer.Rules
             var pa = Language.Tracker.PropertyAccess;
             var oc = Language.Tracker.ObjectCreation;
             // ASP.NET Core
-            inv.Track(input,
+            inv.Track(
+                input,
                 inv.MatchMethod(
                     new MemberDescriptor(KnownType.Microsoft_AspNetCore_Hosting_WebHostBuilderExtensions, "ConfigureLogging"),
                     new MemberDescriptor(KnownType.Microsoft_Extensions_DependencyInjection_LoggingServiceCollectionExtensions, "AddLogging"),
@@ -52,7 +53,8 @@ namespace SonarAnalyzer.Rules
             oc.Track(input, oc.WhenImplements(KnownType.Microsoft_Extensions_Logging_ILoggerFactory));
 
             // log4net
-            inv.Track(input,
+            inv.Track(
+                input,
                 inv.MatchMethod(
                     new MemberDescriptor(KnownType.log4net_Config_XmlConfigurator, "Configure"),
                     new MemberDescriptor(KnownType.log4net_Config_XmlConfigurator, "ConfigureAndWatch"),
@@ -61,12 +63,14 @@ namespace SonarAnalyzer.Rules
                     new MemberDescriptor(KnownType.log4net_Config_BasicConfigurator, "Configure")));
 
             // NLog
-            pa.Track(input,
+            pa.Track(
+                input,
                 pa.MatchSetter(),
                 pa.MatchProperty(new MemberDescriptor(KnownType.NLog_LogManager, "Configuration")));
 
             // Serilog
-            oc.Track(input,
+            oc.Track(
+                input,
                 oc.WhenDerivesFrom(KnownType.Serilog_LoggerConfiguration));
         }
     }
