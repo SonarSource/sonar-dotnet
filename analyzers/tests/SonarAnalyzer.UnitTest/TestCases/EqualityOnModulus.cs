@@ -42,11 +42,14 @@ namespace Tests.Diagnostics
             y = enumerableLong.LongCount() % 2 == 1; // Compliant - IEnumerable LongCount is > 0;
 
             var fakeList = new FakeList();
-            y = fakeList.Count % 2 == 1; // Compliant - Count property is inherited from List and is > 0;
+            y = fakeList.Count() % 2 == 1; // Compliant - Count property is inherited from List and is > 0;
+            y = fakeList.Count(1) % 2 == 1; // Noncompliant - Count method is not inherited from List
         }
 
         public int FakeCount() => -1;
     }
 
-    public class FakeList : List<int> { }
+    public class FakeList : List<int> {
+        public int Count(int i) { return i; }
+    }
 }
