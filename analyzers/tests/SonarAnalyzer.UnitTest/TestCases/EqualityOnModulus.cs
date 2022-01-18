@@ -26,10 +26,7 @@ namespace Tests.Diagnostics
             IEnumerable<int> enumerable = array;
             y = enumerable.Count() % 2 == 1; // Compliant - IEnumerable Count is > 0;
             y = enumerable.LongCount() % 2 == 1; // Compliant - IEnumerable LongCount is > 0;
-
-            IEnumerable<long> enumerableLong = new List<long>();
-            y = enumerableLong.Count() % 2 == 1; // Compliant - IEnumerable Count is > 0;
-            y = enumerableLong.LongCount() % 2 == 1; // Compliant - IEnumerable LongCount is > 0;
+            y = enumerable.Average() % 2 == 1; // Noncompliant
 
             var list = new List<int>();
             y = list.Count % 2 == 1; // Compliant - Count property is > 0;
