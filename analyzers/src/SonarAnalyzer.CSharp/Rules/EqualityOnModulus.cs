@@ -89,7 +89,6 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private static bool IsCollectionSize(ISymbol symbol) =>
             IsEnumerableCountMethod(symbol)
-            || IsEnumerableCountMethod(symbol)
             || (symbol is IPropertySymbol propertySymbol
                 && (IsLengthProperty(propertySymbol)
                     || IsCollectionCountProperty(propertySymbol)
