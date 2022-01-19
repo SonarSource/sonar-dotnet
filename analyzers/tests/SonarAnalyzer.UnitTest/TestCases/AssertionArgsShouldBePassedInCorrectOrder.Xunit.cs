@@ -13,7 +13,6 @@ namespace Tests.Diagnostics
 //                       ^^^^^^^
             Assert.Same(str, ""); // Noncompliant
 //                      ^^^^^^^
-
             double d = 42;
             Assert.Equal(d, 42); // Noncompliant
 //                       ^^^^^
