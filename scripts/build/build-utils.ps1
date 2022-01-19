@@ -145,9 +145,9 @@ function Invoke-UnitTests([string]$binPath, [string]$buildConfiguration) {
         }
     $testDirs = $testDirs | Select-Object -Uniq
 
-#     Write-Header "Running unit tests .NET Framework 4.8"
-#     & (Get-VsTestPath) $testFiles /Logger:"console;verbosity=minimal" /Parallel /Enablecodecoverage /InIsolation  /TestAdapterPath:$testDirs
-#     Test-ExitCode "ERROR: Unit Tests execution FAILED."
+    Write-Header "Running unit tests .NET Framework 4.8"
+    & (Get-VsTestPath) $testFiles /Logger:"console;verbosity=minimal" /Parallel /Enablecodecoverage /InIsolation  /TestAdapterPath:$testDirs
+    Test-ExitCode "ERROR: Unit Tests execution FAILED."
 
     $testProjFileName = "tests\SonarAnalyzer.UnitTest\SonarAnalyzer.UnitTest.csproj"
 
