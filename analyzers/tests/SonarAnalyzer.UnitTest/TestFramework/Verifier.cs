@@ -36,6 +36,8 @@ namespace SonarAnalyzer.UnitTest.TestFramework
 {
     internal class Verifier
     {
+        private const string TestCases = "TestCases";
+
         private static readonly Regex ImportsRegexVB = new(@"^\s*Imports\s+.+$", RegexOptions.Multiline | RegexOptions.RightToLeft);
         private readonly VerifierBuilder builder;
         private readonly DiagnosticAnalyzer[] analyzers;
@@ -104,10 +106,10 @@ namespace SonarAnalyzer.UnitTest.TestFramework
             var fixAllProvider = codeFix.GetFixAllProvider();
             foreach (var parseOptions in builder.ParseOptions.OrDefault(language.LanguageName))
             {
-                codeFixVerifier.VerifyWhileDocumentChanges(parseOptions, builder.CodeFixedPath);
+                codeFixVerifier.VerifyWhileDocumentChanges(parseOptions, TestCasePath(builder.CodeFixedPath));
                 if (fixAllProvider is not null)
                 {
-                    codeFixVerifier.VerifyFixAllProvider(fixAllProvider, parseOptions, builder.CodeFixedPathBatch ?? builder.CodeFixedPath);
+                    codeFixVerifier.VerifyFixAllProvider(fixAllProvider, parseOptions, TestCasePath(builder.CodeFixedPathBatch ?? builder.CodeFixedPath));
                 }
             }
         }
@@ -117,10 +119,8 @@ namespace SonarAnalyzer.UnitTest.TestFramework
 
         private ProjectBuilder CreateProject(bool concurrentAnalysis)
         {
-            const string TestCases = "TestCases";
             using var scope = new EnvironmentVariableScope { EnableConcurrentAnalysis = concurrentAnalysis };
-            var basePath = Path.GetFullPath(builder.BasePath == null ? TestCases : Path.Combine(TestCases, builder.BasePath));
-            var paths = builder.Paths.Select(x => Path.Combine(basePath, x)).ToArray();
+            var paths = builder.Paths.Select(TestCasePath).ToArray();
             return SolutionBuilder.Create()
                 .AddProject(language, true, builder.OutputKind)
                 .AddDocuments(paths)
@@ -152,6 +152,9 @@ namespace SonarAnalyzer.UnitTest.TestFramework
             int ImportsIndexVB() =>
                 ImportsRegexVB.Match(content) is { Success: true } match ? match.Index + match.Length + 1 : 0;
         }
+
+        private string TestCasePath(string fileName) =>
+            Path.GetFullPath(builder.BasePath == null ? Path.Combine(TestCases, fileName) : Path.Combine(TestCases, builder.BasePath, fileName));
 
         private void ValidateExtension(string path)
         {
