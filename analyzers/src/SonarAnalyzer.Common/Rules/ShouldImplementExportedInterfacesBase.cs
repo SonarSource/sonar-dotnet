@@ -35,7 +35,6 @@ namespace SonarAnalyzer.Rules.Common
         private const string ActionForInterface = "Implement";
         private const string ActionForClass = "Derive from";
 
-        private readonly DiagnosticDescriptor rule;
         private readonly ImmutableArray<KnownType> exportAttributes =
             ImmutableArray.Create(
                 KnownType.System_ComponentModel_Composition_ExportAttribute,
@@ -72,7 +71,7 @@ namespace SonarAnalyzer.Rules.Common
                             ? ActionForInterface
                             : ActionForClass;
 
-                        c.ReportIssue(Diagnostic.Create(rule, attributeSyntax.GetLocation(), action,
+                        c.ReportIssue(Diagnostic.Create(Rule, attributeSyntax.GetLocation(), action,
                             exportedType.ToDisplayString(SymbolDisplayFormat.MinimallyQualifiedFormat),
                             attributeTargetType.ToDisplayString(SymbolDisplayFormat.MinimallyQualifiedFormat)));
                     }
