@@ -497,8 +497,8 @@ End Class"" has a length of 151, differs near ""Not"" (index 47).");
         {
             var protobufPath = TestHelper.TestPath(TestContext, "Empty.pb");
             new VerifierBuilder().AddAnalyzer(() => new DummyUtilityAnalyzerCS(protobufPath, null)).AddSnippet("// Nothing to see here").WithProtobufPath(protobufPath)
-                .Invoking(x => x.VerifyUtilityAnalyzer<LogInfo>(x => x.Should().NotBeEmpty()))
-                .Should().Throw<AssertFailedException>().WithMessage("Expected x not to be empty.");
+                .Invoking(x => x.VerifyUtilityAnalyzer<LogInfo>(x => throw new AssertFailedException("Some failed assertion about Protobuf")))
+                .Should().Throw<AssertFailedException>().WithMessage("Some failed assertion about Protobuf");
         }
 
         [TestMethod]
