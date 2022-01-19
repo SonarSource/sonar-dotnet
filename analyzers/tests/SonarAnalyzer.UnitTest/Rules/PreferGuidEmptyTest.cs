@@ -29,19 +29,28 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void PreferGuidEmpty_CS() =>
-            Verifier.VerifyAnalyzer(@"TestCases\PreferGuidEmpty.cs", new CS.PreferGuidEmpty(), ParseOptionsHelper.FromCSharp8);
+            new VerifierBuilder()
+                .AddAnalyzer(() => new CS.PreferGuidEmpty())
+                .WithOptions(ParseOptionsHelper.FromCSharp8)
+                .AddPaths("PreferGuidEmpty.cs")
+                .Verify();
 
         [TestMethod]
         [TestCategory("Rule")]
         public void PreferGuidEmpty_VB() =>
-            Verifier.VerifyAnalyzer(@"TestCases\PreferGuidEmpty.vb", new VB.PreferGuidEmpty());
+             new VerifierBuilder()
+                .AddAnalyzer(() => new VB.PreferGuidEmpty())
+                .AddPaths("PreferGuidEmpty.vb")
+                .Verify();
 
         [TestMethod]
         public void PreferGuidEmpty_CodeFix_CS() =>
-            Verifier.VerifyCodeFix(
-                @"TestCases\PreferGuidEmpty.cs",
-                @"TestCases\PreferGuidEmpty.Fixed.cs",
-                new CS.PreferGuidEmpty(),
-                new CS.PreferGuidEmptyFixProvider());
+             new VerifierBuilder()
+                .AddAnalyzer(() => new CS.PreferGuidEmpty())
+                .WithOptions(ParseOptionsHelper.FromCSharp8)
+                .AddPaths("PreferGuidEmpty.cs")
+                .WithCodeFix<CS.PreferGuidEmptyFixProvider>()
+                .WithCodeFixedPath("PreferGuidEmpty.Fixed.cs")
+                .VerifyCodeFix();
     }
 }

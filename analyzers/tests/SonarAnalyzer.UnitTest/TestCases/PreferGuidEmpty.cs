@@ -1,43 +1,68 @@
 ﻿using System;
 
-class GuidAssignment
+class Compliant
 {
     Guid? NullableField; // Compliant
     readonly Guid? ReadonlyNullableField; // Compliant
     Guid Property { get; set; } // Compliant
 
-    void Allowed()
+    void GuidEmpty()
     {
         var empty = Guid.Empty; // Compliant
-        var rnd = Guid.NewGuid(); // Compliant
-        var bytes = new Guid(new byte[0]); // Compliant
-        var str = new Guid("FA97FFE7-532C-4015-8698-49D8CE4126F4"); // Compliant
-        Guid? nullable = default; // Compliant, not equivalent to Guid.Empty.
-        var nullableOfT = default(Guid?); // Compliant
-		var instance = new NullableGuidClass(default); // Compliant
-		instance.Method(default); // Compliant
-        Guid parsed; // Compliant
-        Guid.TryParse("FA97FFE7-532C-4015-8698-49D8CE4126F4", out parsed);
     }
 
+    void NotEmpty()
+    {
+        var rnd = Guid.NewGuid();// Compliant
+        var bytes = new Guid(new byte[0]); // Compliant
+        var str = new Guid("FA97FFE7-532C-4015-8698-49D8CE4126F4"); // Compliant
+    }
+
+    void NullableDefault()
+    {
+        Guid? nullable = default; // Compliant, not equivalent to Guid.Empty.
+        var nullableOfT = default(Guid?); // Compliant
+        var instance = new NullableGuidClass(default); // Compliant
+        instance.Method(default);
+    }
+
+    void NotInitiated(string str)
+    {
+        Guid parsed; // Compliant
+        Guid.TryParse(str, out parsed);
+    }
+
+    void OptionalParameter(Guid id = default) { } // Compliant, default has to be a run-time constant
+}
+
+class NonCompliant
+{
     Guid Field; // Noncompliant
     readonly Guid ReadonlyField; // Noncompliant
+    Guid Property { get; set; }
 
-    void NotAllowed()
+    void DefaultCtor()
     {
         var ctor = new Guid(); // Noncompliant {{Use 'Guid.NewGuid()' or 'Guid.Empty' or add arguments to this GUID instantiation.}}
         //         ^^^^^^^^^^
+    }
+
+    void DefaultInintiation()
+    {
         Guid defaultValue = default; // Noncompliant
         var defaultOfGuid = default(Guid); // Noncompliant
-        var emptyString = new Guid("00000000-0000-0000-0000-000000000000"); // Noncompliant
         Property = default; // Noncompliant
-		var instance = new GuidClass(default); // Noncompliant
-		instance.Method(default); // Noncompliant
+        var instance = new GuidClass(default); // Noncompliant
+        instance.Method(default); // Noncompliant
     }
-	
-	void Method(Guid? param){ }
-	void Method(Guid param){ }
+
+    void DefaultString()
+    {
+        var emptyCtor = new Guid("00000000-0000-0000-0000-000000000000"); // Noncompliant
+        var emptyParse = Guid.Parse("00000000-0000-0000-0000-000000000000"); // Noncompliant
+    }
 }
+
 struct GuidAssignmentStruct
 {
     static readonly Guid Static; // Noncompliant

@@ -1,6 +1,6 @@
 ﻿/*
  * SonarAnalyzer for .NET
- * Copyright (C) 2015-2021 SonarSource SA
+ * Copyright (C) 2015-2022 SonarSource SA
  * mailto: contact AT sonarsource DOT com
  *
  * This program is free software; you can redistribute it and/or
@@ -19,29 +19,20 @@
  */
 
 using System;
-using System.Collections.Generic;
-using System.Collections.Immutable;
 using System.Linq;
 using Microsoft.CodeAnalysis;
 using SonarAnalyzer.Helpers;
 
 namespace SonarAnalyzer.Rules
 {
-    public abstract class PreferGuidEmptyBase<TExpression, TSyntaxKind> : SonarDiagnosticAnalyzer
-        where TExpression : SyntaxNode
+    public abstract class PreferGuidEmptyBase<TSyntaxKind> : SonarDiagnosticAnalyzer<TSyntaxKind>
         where TSyntaxKind : struct
     {
         internal const string DiagnosticId = "S4581";
-        private const string MessageFormat = "Use 'Guid.NewGuid()' or 'Guid.Empty' or add arguments to this GUID instantiation.";
-        protected readonly DiagnosticDescriptor rule;
 
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
+        protected override string MessageFormat => "Use 'Guid.NewGuid()' or 'Guid.Empty' or add arguments to this GUID instantiation.";
 
-        protected abstract ILanguageFacade<TSyntaxKind> Language { get; }
-        protected abstract IEnumerable<TExpression> ArgumentExpressions(SyntaxNode node);
-
-        protected PreferGuidEmptyBase() =>
-            rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, Language.RspecResources);
+        protected PreferGuidEmptyBase() : base(DiagnosticId) { }
 
         protected override void Initialize(SonarAnalysisContext context)
         {
@@ -53,7 +44,7 @@ namespace SonarAnalyzer.Rules
                         && c.SemanticModel.GetSymbolInfo(c.Node).Symbol is IMethodSymbol methodSymbol
                         && methodSymbol.ContainingType.Is(KnownType.System_Guid))
                     {
-                        c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, c.Node.GetLocation()));
+                        c.ReportIssue(Diagnostic.Create(Rule, c.Node.GetLocation()));
                     }
                 },
                 Language.SyntaxKind.ObjectCreationExpressions);
@@ -62,9 +53,10 @@ namespace SonarAnalyzer.Rules
                 Language.GeneratedCodeRecognizer,
                 c =>
                 {
-                    if (c.SemanticModel.GetTypeInfo(c.Node).Type.Is(KnownType.System_Guid))
+                    if (NoParameter(c.Node)
+                        && c.SemanticModel.GetTypeInfo(c.Node).Type.Is(KnownType.System_Guid))
                     {
-                        c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, c.Node.GetLocation()));
+                        c.ReportIssue(Diagnostic.Create(Rule, c.Node.GetLocation()));
                     }
                 },
                 Language.SyntaxKind.DefaultExpressions);
@@ -72,11 +64,15 @@ namespace SonarAnalyzer.Rules
 
         private bool NotAllowedGuidCtorArguments(SyntaxNode ctorNode, SemanticModel semanticModel)
         {
-            var arguments = ArgumentExpressions(ctorNode).ToArray();
+            var arguments = Language.Syntax.ArgumentExpressions(ctorNode).ToArray();
             return arguments.Length == 0 || CreatesGuidEmpty(arguments, semanticModel);
         }
 
-        private static bool CreatesGuidEmpty(TExpression[] arguments, SemanticModel semanticModel) =>
+        private bool NoParameter(SyntaxNode defaultExpression) =>
+            !defaultExpression.Ancestors()
+                .Any(node => Language.Syntax.IsKind(node, Language.SyntaxKind.Parameter));
+
+        private static bool CreatesGuidEmpty(SyntaxNode[] arguments, SemanticModel semanticModel) =>
             arguments.Length == 1
             && semanticModel.GetConstantValue(arguments[0]) is { HasValue: true } optional
             && optional.Value is string str

@@ -53,6 +53,14 @@ namespace SonarAnalyzer.Helpers.Facade
 
         public override bool IsNullLiteral(SyntaxNode node) => node.IsNullLiteral();
 
+        public override IEnumerable<SyntaxNode> ArgumentExpressions(SyntaxNode node) =>
+            node switch
+            {
+                ObjectCreationExpressionSyntax objectCreation => objectCreation.ArgumentList?.Arguments.Select(x => x.Expression),
+                null => Enumerable.Empty<SyntaxNode>(),
+                _ => throw InvalidOperation(node, nameof(ArgumentExpressions))
+            };
+
         public override SyntaxNode BinaryExpressionLeft(SyntaxNode binaryExpression) =>
             Cast<BinaryExpressionSyntax>(binaryExpression).Left;
 

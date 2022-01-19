@@ -24,19 +24,13 @@ using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
-using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
 
 namespace SonarAnalyzer.Rules.CSharp
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
-    [Rule(DiagnosticId)]
-    public sealed class PreferGuidEmpty : PreferGuidEmptyBase<ExpressionSyntax, SyntaxKind>
+    public sealed class PreferGuidEmpty : PreferGuidEmptyBase<SyntaxKind>
     {
         protected override ILanguageFacade<SyntaxKind> Language => CSharpFacade.Instance;
-
-        protected override IEnumerable<ExpressionSyntax> ArgumentExpressions(SyntaxNode node) =>
-            ((ObjectCreationExpressionSyntax)node).ArgumentList?.Arguments
-                .Select(arg => arg.Expression);
     }
 }

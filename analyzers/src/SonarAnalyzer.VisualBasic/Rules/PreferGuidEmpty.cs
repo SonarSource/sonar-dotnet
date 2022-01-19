@@ -1,6 +1,6 @@
 ﻿/*
  * SonarAnalyzer for .NET
- * Copyright (C) 2015-2021 SonarSource SA
+ * Copyright (C) 2015-2022 SonarSource SA
  * mailto: contact AT sonarsource DOT com
  *
  * This program is free software; you can redistribute it and/or
@@ -18,25 +18,16 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System.Collections.Generic;
-using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Diagnostics;
 using Microsoft.CodeAnalysis.VisualBasic;
-using Microsoft.CodeAnalysis.VisualBasic.Syntax;
-using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
 
 namespace SonarAnalyzer.Rules.VisualBasic
 {
     [DiagnosticAnalyzer(LanguageNames.VisualBasic)]
-    [Rule(DiagnosticId)]
-    public sealed class PreferGuidEmpty : PreferGuidEmptyBase<ExpressionSyntax, SyntaxKind>
+    public sealed class PreferGuidEmpty : PreferGuidEmptyBase<SyntaxKind>
     {
         protected override ILanguageFacade<SyntaxKind> Language => VisualBasicFacade.Instance;
-
-        protected override IEnumerable<ExpressionSyntax> ArgumentExpressions(SyntaxNode node) =>
-            ((ObjectCreationExpressionSyntax)node).ArgumentList?.Arguments
-            .Select(arg => arg.GetExpression());
     }
 }
