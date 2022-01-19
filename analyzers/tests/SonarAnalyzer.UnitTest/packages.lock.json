@@ -460,7 +460,7 @@
         }
       }
     },
-    ".NETCoreApp,Version=v5.0": {
+    "net6.0": {
       "FluentAssertions": {
         "type": "Direct",
         "requested": "[5.10.3, )",
