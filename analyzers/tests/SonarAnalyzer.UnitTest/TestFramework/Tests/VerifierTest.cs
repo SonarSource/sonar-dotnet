@@ -446,8 +446,8 @@ End Class"" has a length of 151, differs near ""Not"" (index 47).");
         [TestMethod]
         public void VerifyUtilityAnalyzerProducesEmptyProtobuf_EmptyFile()
         {
-            var protobuf = TestHelper.TestPath(TestContext, "Empty.pb");
-            new VerifierBuilder().AddAnalyzer(() => new DummyUtilityAnalyzerCS(protobuf, null)).AddSnippet("// Nothing to see here").WithProtobufPath(protobuf)
+            var protobufPath = TestHelper.TestPath(TestContext, "Empty.pb");
+            new VerifierBuilder().AddAnalyzer(() => new DummyUtilityAnalyzerCS(protobufPath, null)).AddSnippet("// Nothing to see here").WithProtobufPath(protobufPath)
                 .Invoking(x => x.VerifyUtilityAnalyzerProducesEmptyProtobuf())
                 .Should().NotThrow();
         }
@@ -455,9 +455,9 @@ End Class"" has a length of 151, differs near ""Not"" (index 47).");
         [TestMethod]
         public void VerifyUtilityAnalyzerProducesEmptyProtobuf_WithContent()
         {
-            var protobuf = TestHelper.TestPath(TestContext, "Empty.pb");
+            var protobufPath = TestHelper.TestPath(TestContext, "Empty.pb");
             var message = new LogInfo { Text = "Lorem Ipsum" };
-            new VerifierBuilder().AddAnalyzer(() => new DummyUtilityAnalyzerCS(protobuf, message)).AddSnippet("// Nothing to see here").WithProtobufPath(protobuf)
+            new VerifierBuilder().AddAnalyzer(() => new DummyUtilityAnalyzerCS(protobufPath, message)).AddSnippet("// Nothing to see here").WithProtobufPath(protobufPath)
                 .Invoking(x => x.VerifyUtilityAnalyzerProducesEmptyProtobuf())
                 .Should().Throw<AssertFailedException>().WithMessage("Expected value to be 0L because protobuf file should be empty, but found *");
         }
@@ -465,10 +465,10 @@ End Class"" has a length of 151, differs near ""Not"" (index 47).");
         [TestMethod]
         public void VerifyUtilityAnalyzer_CorrectProtobuf_CS()
         {
-            var protobuf = TestHelper.TestPath(TestContext, "Log.pb");
+            var protobufPath = TestHelper.TestPath(TestContext, "Log.pb");
             var message = new LogInfo { Text = "Lorem Ipsum" };
             var wasInvoked = false;
-            new VerifierBuilder().AddAnalyzer(() => new DummyUtilityAnalyzerCS(protobuf, message)).AddSnippet("// Nothing to see here").WithProtobufPath(protobuf)
+            new VerifierBuilder().AddAnalyzer(() => new DummyUtilityAnalyzerCS(protobufPath, message)).AddSnippet("// Nothing to see here").WithProtobufPath(protobufPath)
                 .VerifyUtilityAnalyzer<LogInfo>(x =>
                 {
                     x.Should().ContainSingle().Which.Text.Should().Be("Lorem Ipsum");
@@ -480,10 +480,10 @@ End Class"" has a length of 151, differs near ""Not"" (index 47).");
         [TestMethod]
         public void VerifyUtilityAnalyzer_CorrectProtobuf_VB()
         {
-            var protobuf = TestHelper.TestPath(TestContext, "Log.pb");
+            var protobufPath = TestHelper.TestPath(TestContext, "Log.pb");
             var message = new LogInfo { Text = "Lorem Ipsum" };
             var wasInvoked = false;
-            new VerifierBuilder().AddAnalyzer(() => new DummyUtilityAnalyzerVB(protobuf, message)).AddSnippet("' Nothing to see here").WithProtobufPath(protobuf)
+            new VerifierBuilder().AddAnalyzer(() => new DummyUtilityAnalyzerVB(protobufPath, message)).AddSnippet("' Nothing to see here").WithProtobufPath(protobufPath)
                 .VerifyUtilityAnalyzer<LogInfo>(x =>
                 {
                     x.Should().ContainSingle().Which.Text.Should().Be("Lorem Ipsum");
@@ -495,8 +495,8 @@ End Class"" has a length of 151, differs near ""Not"" (index 47).");
         [TestMethod]
         public void VerifyUtilityAnalyzer_UnexpectedProtobuf_CS()
         {
-            var protobuf = TestHelper.TestPath(TestContext, "Empty.pb");
-            new VerifierBuilder().AddAnalyzer(() => new DummyUtilityAnalyzerCS(protobuf, null)).AddSnippet("// Nothing to see here").WithProtobufPath(protobuf)
+            var protobufPath = TestHelper.TestPath(TestContext, "Empty.pb");
+            new VerifierBuilder().AddAnalyzer(() => new DummyUtilityAnalyzerCS(protobufPath, null)).AddSnippet("// Nothing to see here").WithProtobufPath(protobufPath)
                 .Invoking(x => x.VerifyUtilityAnalyzer<LogInfo>(x => x.Should().NotBeEmpty()))
                 .Should().Throw<AssertFailedException>().WithMessage("Expected x not to be empty.");
         }
@@ -504,10 +504,10 @@ End Class"" has a length of 151, differs near ""Not"" (index 47).");
         [TestMethod]
         public void VerifyUtilityAnalyzer_UnexpectedProtobuf_VB()
         {
-            var protobuf = TestHelper.TestPath(TestContext, "Empty.pb");
-            new VerifierBuilder().AddAnalyzer(() => new DummyUtilityAnalyzerVB(protobuf, null)).AddSnippet("' Nothing to see here").WithProtobufPath(protobuf)
-                .Invoking(x => x.VerifyUtilityAnalyzer<LogInfo>(x => x.Should().NotBeEmpty()))
-                .Should().Throw<AssertFailedException>().WithMessage("Expected x not to be empty.");
+            var protobufPath = TestHelper.TestPath(TestContext, "Empty.pb");
+            new VerifierBuilder().AddAnalyzer(() => new DummyUtilityAnalyzerVB(protobufPath, null)).AddSnippet("' Nothing to see here").WithProtobufPath(protobufPath)
+                .Invoking(x => x.VerifyUtilityAnalyzer<LogInfo>(x => throw new AssertFailedException("Some failed assertion about Protobuf")))
+                .Should().Throw<AssertFailedException>().WithMessage("Some failed assertion about Protobuf");
         }
 
         private VerifierBuilder WithSnippetCS(string code) =>
