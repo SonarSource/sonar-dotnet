@@ -374,7 +374,7 @@ End Class");
     private bool c = true;
 }");
             DummyCS.AddPaths(originalPath).WithCodeFix<DummyCodeFixCS>().WithCodeFixedPath(originalPath).Invoking(x => x.VerifyCodeFix()).Should().Throw<AssertFailedException>().WithMessage(
-@"Expected ActualCodeWithReplacedComments().ToUnixLineEndings() to be*
+@"Expected * to be*
 ""public class Sample
 {
     private int a = 0;     // Noncompliant
@@ -399,7 +399,7 @@ End Class");
     Private C As Boolean = True
 End Class");
             DummyVB.AddPaths(originalPath).WithCodeFix<DummyCodeFixVB>().WithCodeFixedPath(originalPath).Invoking(x => x.VerifyCodeFix()).Should().Throw<AssertFailedException>().WithMessage(
-@"Expected ActualCodeWithReplacedComments().ToUnixLineEndings() to be*
+@"Expected * to be*
 ""Public Class Sample
     Private A As Integer = 42   ' Noncompliant
     Private B As Integer = 42   ' Noncompliant
