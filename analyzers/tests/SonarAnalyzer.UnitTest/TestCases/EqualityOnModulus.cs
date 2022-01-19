@@ -11,9 +11,10 @@ namespace Tests.Diagnostics
             var y = x%2 == 1; // Noncompliant; if x is negative, x % 2 == -1
 //                  ^^^^^^^^
             y = x%2 != -1; // Noncompliant {{The result of this modulus operation may not be negative.}}
-            y = 1 == x%2; // Noncompliant {{The result of this modulus operation may not be positive.}}
+            y = 1 == x % 2; // Noncompliant {{The result of this modulus operation may not be positive.}}
             y = x%2 != 0;
-            y = Math.Abs(x%2) == 1;
+            y = 1 == (x % 2); // Noncompliant {{The result of this modulus operation may not be positive.}}
+            y = Math.Abs(x % 2) == 1;
 
             var unsignedY = 54U;
 
@@ -38,6 +39,7 @@ namespace Tests.Diagnostics
             y = FakeCount() % 2 == 1; // Noncompliant
 
             IEnumerable<long> enumerableLong = new List<long>();
+            y = (enumerableLong.Count() % 2) == 1; // Compliant
             y = enumerableLong.Count() % 2 == 1; // Compliant - IEnumerable Count is > 0;
             y = enumerableLong.LongCount() % 2 == 1; // Compliant - IEnumerable LongCount is > 0;
 
