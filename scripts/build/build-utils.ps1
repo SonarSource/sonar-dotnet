@@ -12,7 +12,7 @@ function Get-VsWherePath {
     return Get-ExecutablePath -name "vswhere.exe" -envVar "VSWHERE_PATH"
 }
 
-function Get-MsBuildPath([ValidateSet("14.0", "15.0", "16.0", "Current")][string]$msbuildVersion) {
+function Get-MsBuildPath([ValidateSet("14.0", "15.0", "16.0", "17.0", "Current")][string]$msbuildVersion) {
     if ($msbuildVersion -eq "14.0") {
         return Get-ExecutablePath -name "msbuild.exe" -envVar "MSBUILD_PATH"
     }
@@ -53,7 +53,7 @@ function Get-CodeCoveragePath {
     return Get-ExecutablePath -name "CodeCoverage.exe" -directory $codeCoverageDirectory -envVar "CODE_COVERAGE_PATH"
 }
 
-function Get-MSBuildImportBeforePath([ValidateSet("14.0", "15.0", "16.0", "Current")][string]$msbuildVersion) {
+function Get-MSBuildImportBeforePath([ValidateSet("14.0", "15.0", "16.0", "17.0", "Current")][string]$msbuildVersion) {
     return "$env:USERPROFILE\AppData\Local\Microsoft\MSBuild\${msbuildVersion}\Microsoft.Common.targets\ImportBefore"
 }
 
@@ -87,7 +87,7 @@ function New-NuGetPackages([string]$binPath) {
 
 # Used by the integration tests in analyzers\its\regression-test.ps1
 function Restore-Packages (
-    [Parameter(Mandatory = $true, Position = 0)][ValidateSet("14.0", "15.0", "16.0", "Current")][string]$msbuildVersion,
+    [Parameter(Mandatory = $true, Position = 0)][ValidateSet("14.0", "15.0", "16.0", "17.0", "Current")][string]$msbuildVersion,
     [Parameter(Mandatory = $true, Position = 1)][string]$solutionPath) {
 
     $solutionName = Split-Path $solutionPath -Leaf
@@ -107,7 +107,7 @@ function Restore-Packages (
 
 # Build
 function Invoke-MSBuild (
-    [Parameter(Mandatory = $true, Position = 0)][ValidateSet("14.0", "15.0", "16.0", "Current")][string]$msbuildVersion,
+    [Parameter(Mandatory = $true, Position = 0)][ValidateSet("14.0", "15.0", "16.0", "17.0", "Current")][string]$msbuildVersion,
     [Parameter(Mandatory = $true, Position = 1)][string]$solutionPath,
     [parameter(ValueFromRemainingArguments = $true)][array]$remainingArgs) {
 
@@ -145,18 +145,18 @@ function Invoke-UnitTests([string]$binPath, [string]$buildConfiguration) {
         }
     $testDirs = $testDirs | Select-Object -Uniq
 
-    Write-Header "Running unit tests .NET Framework 4.8"
-    & (Get-VsTestPath) $testFiles /Logger:"console;verbosity=minimal"  /Parallel /Enablecodecoverage /InIsolation  /TestAdapterPath:$testDirs
-    Test-ExitCode "ERROR: Unit Tests execution FAILED."
+#     Write-Header "Running unit tests .NET Framework 4.8"
+#     & (Get-VsTestPath) $testFiles /Logger:"console;verbosity=minimal" /Parallel /Enablecodecoverage /InIsolation  /TestAdapterPath:$testDirs
+#     Test-ExitCode "ERROR: Unit Tests execution FAILED."
 
     $testProjFileName = "tests\SonarAnalyzer.UnitTest\SonarAnalyzer.UnitTest.csproj"
 
-    Write-Header "Running unit tests .NET 5"
-    dotnet test  $testProjFileName -f net5.0 -v minimal -c $buildConfiguration --no-build --no-restore
-    Test-ExitCode "ERROR: Unit tests for .NET 5 FAILED."
+    Write-Header "Running unit tests .NET 6"
+    dotnet test $testProjFileName -f net6.0 -v minimal -c $buildConfiguration --no-build --no-restore
+    Test-ExitCode "ERROR: Unit tests for .NET 6 FAILED."
 }
 
-function Invoke-IntegrationTests([ValidateSet("14.0", "15.0", "16.0", "Current")][string] $msbuildVersion) {
+function Invoke-IntegrationTests([ValidateSet("14.0", "15.0", "16.0", "17.0", "Current")][string] $msbuildVersion) {
     Write-Header "Running integration tests"
 
     Invoke-InLocation "its" {
