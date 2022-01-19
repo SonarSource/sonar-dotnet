@@ -95,11 +95,11 @@ namespace SonarAnalyzer.UnitTest.TestFramework
             return solution.GetDocument(document.Id);
         }
 
-        private IEnumerable<CodeAction> ActionToApply(CodeFixProvider codeFixProvider, Document document, Diagnostic diagnostic)
+        private IEnumerable<CodeAction> ActionToApply(CodeFixProvider codeFix, Document document, Diagnostic diagnostic)
         {
             var actions = new List<CodeAction>();
             var context = new CodeFixContext(document, diagnostic, (action, _) => actions.Add(action), default);
-            codeFixProvider.RegisterCodeFixesAsync(context).Wait();
+            codeFix.RegisterCodeFixesAsync(context).Wait();
             return actions.Where(x => codeFixTitle is null || x.Title == codeFixTitle);
         }
 

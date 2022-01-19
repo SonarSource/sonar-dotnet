@@ -33,7 +33,7 @@ namespace SonarAnalyzer.Utilities
 {
     public static class RuleDetailBuilder
     {
-        internal const string CodeFixProviderSuffix = "CodeFixProvider";
+        internal const string CodeFixSuffix = "CodeFix";
 
         public static IEnumerable<RuleDetail> GetAllRuleDetails(AnalyzerLanguage language)
         {
@@ -52,7 +52,7 @@ namespace SonarAnalyzer.Utilities
         }
 
         internal static IEnumerable<string> CodeFixTitles(Type codeFixType) =>
-            CodeFixProvidersWithBase(codeFixType)
+            CodeFixesWithBase(codeFixType)
                 .SelectMany(x => x.GetFields(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Static))
                 .Where(x => x.Name.StartsWith("Title", StringComparison.Ordinal) && x.FieldType == typeof(string))
                 .Select(x => (string)x.GetRawConstantValue());
@@ -66,7 +66,7 @@ namespace SonarAnalyzer.Utilities
             foreach (var type in analyzerTypes)
             {
                 ret.Parameters.AddRange(Parameters(type));
-                if (type.Assembly.GetType(type.FullName + CodeFixProviderSuffix) is { } codeFixType)
+                if (type.Assembly.GetType(type.FullName + CodeFixSuffix) is { } codeFixType)
                 {
                     ret.CodeFixTitles.AddRange(CodeFixTitles(codeFixType));
                 }
@@ -74,11 +74,11 @@ namespace SonarAnalyzer.Utilities
             return ret;
         }
 
-        private static IEnumerable<Type> CodeFixProvidersWithBase(Type codeFixProvider)
+        private static IEnumerable<Type> CodeFixesWithBase(Type codeFix)
         {
-            yield return codeFixProvider;
+            yield return codeFix;
 
-            var baseType = codeFixProvider.BaseType;
+            var baseType = codeFix.BaseType;
             while (baseType != null && baseType != typeof(SonarCodeFix))
             {
                 yield return baseType;

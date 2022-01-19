@@ -37,7 +37,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
         internal const string Title = "Use 'If' operator.";
 
         public override ImmutableArray<string> FixableDiagnosticIds =>
-            ImmutableArray.Create(DoNotUseIif.DiagnosticId);
+            ImmutableArray.Create(DoNotUseIIf.DiagnosticId);
 
         protected override Task RegisterCodeFixesAsync(SyntaxNode root, CodeFixContext context)
         {

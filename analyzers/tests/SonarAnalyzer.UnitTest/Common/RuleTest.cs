@@ -44,21 +44,21 @@ namespace SonarAnalyzer.UnitTest.Common
     public class RuleTest
     {
         [TestMethod]
-        public void CodeFixProviders_Named_Properly()
+        public void CodeFixes_Named_Properly()
         {
-            foreach (var codeFixProvider in GetCodeFixProviderTypes(RuleFinder.PackagedRuleAssemblies))
+            foreach (var codeFix in GetCodeFixTypes(RuleFinder.PackagedRuleAssemblies))
             {
-                var analyzerName = codeFixProvider.FullName.Replace(RuleDetailBuilder.CodeFixProviderSuffix, string.Empty);
-                codeFixProvider.Assembly.GetType(analyzerName).Should().NotBeNull("CodeFixProvider '{0}' has no matching DiagnosticAnalyzer.", codeFixProvider.Name);
+                var analyzerName = codeFix.FullName.Replace(RuleDetailBuilder.CodeFixSuffix, string.Empty);
+                codeFix.Assembly.GetType(analyzerName).Should().NotBeNull("CodeFix '{0}' has no matching DiagnosticAnalyzer.", codeFix.Name);
             }
         }
 
         [TestMethod]
-        public void CodeFixProviders_Have_Title()
+        public void CodeFixes_Have_Title()
         {
-            foreach (var codeFixProvider in GetCodeFixProviderTypes(RuleFinder.PackagedRuleAssemblies))
+            foreach (var codeFix in GetCodeFixTypes(RuleFinder.PackagedRuleAssemblies))
             {
-                RuleDetailBuilder.CodeFixTitles(codeFixProvider).Should().NotBeEmpty("CodeFixProvider '{0}' has no title field.", codeFixProvider.Name);
+                RuleDetailBuilder.CodeFixTitles(codeFix).Should().NotBeEmpty("CodeFix '{0}' has no title field.", codeFix.Name);
             }
         }
 
@@ -260,8 +260,8 @@ namespace SonarAnalyzer.UnitTest.Common
         private static IEnumerable<DiagnosticDescriptor> SupportedDiagnostics(Type type) =>
             ((DiagnosticAnalyzer)Activator.CreateInstance(type)).SupportedDiagnostics;
 
-        private static IEnumerable<Type> GetCodeFixProviderTypes(IEnumerable<Assembly> assemblies) =>
-            assemblies.SelectMany(assembly => assembly.GetTypes()).Where(t => t.IsSubclassOf(typeof(SonarCodeFix)));
+        private static IEnumerable<Type> GetCodeFixTypes(IEnumerable<Assembly> assemblies) =>
+            assemblies.SelectMany(x => x.GetTypes()).Where(x => x.IsSubclassOf(typeof(SonarCodeFix)) && !x.IsAbstract);
 
         private static bool IsSonarWay(DiagnosticDescriptor diagnostic) =>
             diagnostic.CustomTags.Contains(DiagnosticDescriptorBuilder.SonarWayTag);

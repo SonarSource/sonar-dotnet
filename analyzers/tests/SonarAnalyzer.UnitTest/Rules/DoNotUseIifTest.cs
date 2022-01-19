@@ -20,23 +20,22 @@
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.Rules.VisualBasic;
-using SonarAnalyzer.UnitTest.MetadataReferences;
 using SonarAnalyzer.UnitTest.TestFramework;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
     [TestClass]
-    public class DoNotUseIifTest
+    public class DoNotUseIIfTest
     {
         [TestMethod]
         public void DoNotUseIif() =>
-            OldVerifier.VerifyAnalyzer(@"TestCases\DoNotUseIif.vb", new DoNotUseIif());
+            OldVerifier.VerifyAnalyzer(@"TestCases\DoNotUseIif.vb", new DoNotUseIIf());
 
         [TestMethod]
         public void DoNotUseIif_CodeFix() =>
             OldVerifier.VerifyCodeFix<DoNotUseIIfCodeFix>(
                 @"TestCases\DoNotUseIif.vb",
                 @"TestCases\DoNotUseIif.Fixed.vb",
-                new DoNotUseIif());
+                new DoNotUseIIf());
     }
 }
