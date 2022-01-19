@@ -42,7 +42,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework.Tests
         protected override SyntaxNode NewNode() => VB.SyntaxFactory.NothingLiteralExpression(VB.SyntaxFactory.Token(VB.SyntaxKind.NothingKeyword));
     }
 
-    internal abstract class DummyCodeFix : SonarCodeFixProvider
+    internal abstract class DummyCodeFix : SonarCodeFix
     {
         protected abstract SyntaxNode NewNode();
 

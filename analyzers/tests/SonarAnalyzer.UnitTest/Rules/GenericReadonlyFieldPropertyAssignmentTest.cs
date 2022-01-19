@@ -48,20 +48,20 @@ namespace SonarAnalyzer.UnitTest.Rules
 
         [TestMethod]
         public void GenericReadonlyFieldPropertyAssignment_CodeFix_Remove_Statement() =>
-            OldVerifier.VerifyCodeFix<CS.GenericReadonlyFieldPropertyAssignmentCodeFixProvider>(
+            OldVerifier.VerifyCodeFix<CS.GenericReadonlyFieldPropertyAssignmentCodeFix>(
                 @"TestCases\GenericReadonlyFieldPropertyAssignment.cs",
                 @"TestCases\GenericReadonlyFieldPropertyAssignment.Remove.Fixed.cs",
                 new CS.GenericReadonlyFieldPropertyAssignment(),
-                CS.GenericReadonlyFieldPropertyAssignmentCodeFixProvider.TitleRemove,
+                CS.GenericReadonlyFieldPropertyAssignmentCodeFix.TitleRemove,
                 ParseOptionsHelper.FromCSharp8);
 
         [TestMethod]
         public void GenericReadonlyFieldPropertyAssignment_CodeFix_Add_Generic_Type_Constraint() =>
-            OldVerifier.VerifyCodeFix<CS.GenericReadonlyFieldPropertyAssignmentCodeFixProvider>(
+            OldVerifier.VerifyCodeFix<CS.GenericReadonlyFieldPropertyAssignmentCodeFix>(
                 @"TestCases\GenericReadonlyFieldPropertyAssignment.cs",
                 @"TestCases\GenericReadonlyFieldPropertyAssignment.AddConstraint.Fixed.cs",
                 new CS.GenericReadonlyFieldPropertyAssignment(),
-                CS.GenericReadonlyFieldPropertyAssignmentCodeFixProvider.TitleAddClassConstraint,
+                CS.GenericReadonlyFieldPropertyAssignmentCodeFix.TitleAddClassConstraint,
                 ParseOptionsHelper.FromCSharp8);
     }
 }

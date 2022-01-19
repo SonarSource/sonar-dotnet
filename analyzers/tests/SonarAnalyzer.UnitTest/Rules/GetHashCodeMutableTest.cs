@@ -39,7 +39,7 @@ namespace SonarAnalyzer.UnitTest.Rules
 
         [TestMethod]
         public void GetHashCodeMutable_CodeFix() =>
-            OldVerifier.VerifyCodeFix<GetHashCodeMutableCodeFixProvider>(
+            OldVerifier.VerifyCodeFix<GetHashCodeMutableCodeFix>(
                 @"TestCases\GetHashCodeMutable.cs",
                 @"TestCases\GetHashCodeMutable.Fixed.cs",
                 new GetHashCodeMutable());

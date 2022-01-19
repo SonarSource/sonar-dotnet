@@ -1,6 +1,6 @@
 ﻿/*
  * SonarAnalyzer for .NET
- * Copyright (C) 2015-2022 SonarSource SA
+ * Copyright (C) 2015-2021 SonarSource SA
  * mailto: contact AT sonarsource DOT com
  *
  * This program is free software; you can redistribute it and/or
@@ -38,7 +38,7 @@ namespace SonarAnalyzer.UnitTest.Rules
 
         [TestMethod]
         public void RedundantModifier_CodeFix_CSharp9() =>
-            OldVerifier.VerifyCodeFix<RedundantModifierCodeFixProvider>(
+            OldVerifier.VerifyCodeFix<RedundantModifierCodeFix>(
                 @"TestCases\RedundantModifier.CSharp9.cs",
                 @"TestCases\RedundantModifier.CSharp9.Fixed.cs",
                 new RedundantModifier(),
@@ -50,7 +50,7 @@ namespace SonarAnalyzer.UnitTest.Rules
 
         [TestMethod]
         public void RedundantModifier_CodeFix_CSharp10() =>
-            OldVerifier.VerifyCodeFix<RedundantModifierCodeFixProvider>(
+            OldVerifier.VerifyCodeFix<RedundantModifierCodeFix>(
                 @"TestCases\RedundantModifier.CSharp10.cs",
                 @"TestCases\RedundantModifier.CSharp10.Fixed.cs",
                 new RedundantModifier(),
@@ -59,7 +59,7 @@ namespace SonarAnalyzer.UnitTest.Rules
 
         [TestMethod]
         public void RedundantModifier_CodeFix() =>
-            OldVerifier.VerifyCodeFix<RedundantModifierCodeFixProvider>(
+            OldVerifier.VerifyCodeFix<RedundantModifierCodeFix>(
                 @"TestCases\RedundantModifier.cs",
                 @"TestCases\RedundantModifier.Fixed.cs",
                 new RedundantModifier());

@@ -1,6 +1,6 @@
 ﻿/*
  * SonarAnalyzer for .NET
- * Copyright (C) 2015-2022 SonarSource SA
+ * Copyright (C) 2015-2021 SonarSource SA
  * mailto: contact AT sonarsource DOT com
  *
  * This program is free software; you can redistribute it and/or
@@ -44,20 +44,20 @@ namespace SonarAnalyzer.UnitTest.Rules
 
         [TestMethod]
         public void RedundantArgument_CodeFix_No_Named_Arguments() =>
-            OldVerifier.VerifyCodeFix<RedundantArgumentCodeFixProvider>(
+            OldVerifier.VerifyCodeFix<RedundantArgumentCodeFix>(
                 @"TestCases\RedundantArgument.cs",
                 @"TestCases\RedundantArgument.NoNamed.Fixed.cs",
                 new RedundantArgument(),
-                RedundantArgumentCodeFixProvider.TitleRemove,
+                RedundantArgumentCodeFix.TitleRemove,
                 ParseOptionsHelper.FromCSharp8);
 
         [TestMethod]
         public void RedundantArgument_CodeFix_Named_Arguments() =>
-            OldVerifier.VerifyCodeFix<RedundantArgumentCodeFixProvider>(
+            OldVerifier.VerifyCodeFix<RedundantArgumentCodeFix>(
                 @"TestCases\RedundantArgument.cs",
                 @"TestCases\RedundantArgument.Named.Fixed.cs",
                 new RedundantArgument(),
-                RedundantArgumentCodeFixProvider.TitleRemoveWithNameAdditions,
+                RedundantArgumentCodeFix.TitleRemoveWithNameAdditions,
                 ParseOptionsHelper.FromCSharp8);
     }
 }

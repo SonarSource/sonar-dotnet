@@ -33,7 +33,7 @@ namespace SonarAnalyzer.UnitTest.Rules
 
         [TestMethod]
         public void NegatedIsExpression_CodeFix() =>
-            OldVerifier.VerifyCodeFix<NegatedIsExpressionCodeFixProvider>(
+            OldVerifier.VerifyCodeFix<NegatedIsExpressionCodeFix>(
                 @"TestCases\NegatedIsExpression.vb",
                 @"TestCases\NegatedIsExpression.Fixed.vb",
                 new NegatedIsExpression());

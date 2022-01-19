@@ -34,7 +34,7 @@ namespace SonarAnalyzer.UnitTest.Rules
 
         [TestMethod]
         public void BooleanCheckInverted_CS_CodeFix() =>
-            OldVerifier.VerifyCodeFix<CS.BooleanCheckInvertedCodeFixProvider>(
+            OldVerifier.VerifyCodeFix<CS.BooleanCheckInvertedCodeFix>(
                 @"TestCases\BooleanCheckInverted.cs",
                 @"TestCases\BooleanCheckInverted.Fixed.cs",
                 @"TestCases\BooleanCheckInverted.Fixed.Batch.cs",

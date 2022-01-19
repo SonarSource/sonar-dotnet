@@ -38,18 +38,18 @@ namespace SonarAnalyzer.UnitTest.Rules
 
         [TestMethod]
         public void MultipleVariableDeclaration_CodeFix_CS() =>
-            OldVerifier.VerifyCodeFix<CS.MultipleVariableDeclarationCodeFixProvider>(
+            OldVerifier.VerifyCodeFix<CS.MultipleVariableDeclarationCodeFix>(
                 @"TestCases\MultipleVariableDeclaration.cs",
                 @"TestCases\MultipleVariableDeclaration.Fixed.cs",
                 new CS.MultipleVariableDeclaration(),
-                SonarAnalyzer.Rules.Common.MultipleVariableDeclarationCodeFixProviderBase.Title);
+                SonarAnalyzer.Rules.Common.MultipleVariableDeclarationCodeFixBase.Title);
 
         [TestMethod]
         public void MultipleVariableDeclaration_CodeFix_VB() =>
-            OldVerifier.VerifyCodeFix<VB.MultipleVariableDeclarationCodeFixProvider>(
+            OldVerifier.VerifyCodeFix<VB.MultipleVariableDeclarationCodeFix>(
                 @"TestCases\MultipleVariableDeclaration.vb",
                 @"TestCases\MultipleVariableDeclaration.Fixed.vb",
                 new VB.MultipleVariableDeclaration(),
-                SonarAnalyzer.Rules.Common.MultipleVariableDeclarationCodeFixProviderBase.Title);
+                SonarAnalyzer.Rules.Common.MultipleVariableDeclarationCodeFixBase.Title);
     }
 }

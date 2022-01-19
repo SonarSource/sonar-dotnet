@@ -193,7 +193,7 @@ namespace SonarAnalyzer.UnitTest.Rules
 
         [TestMethod]
         public void CheckFileLicenseCodeFix_WhenNoLicenseStartWithNamespaceAndUsesDefaultValues_ShouldBeNoncompliant_CS() =>
-            OldVerifier.VerifyCodeFix<CS.CheckFileLicenseCodeFixProvider>(
+            OldVerifier.VerifyCodeFix<CS.CheckFileLicenseCodeFix>(
                 @"TestCases\CheckFileLicense_DefaultValues.cs",
                 @"TestCases\CheckFileLicense_DefaultValues.Fixed.cs",
                 new CS.CheckFileLicense());
@@ -201,7 +201,7 @@ namespace SonarAnalyzer.UnitTest.Rules
 #if NET
         [TestMethod]
         public void CheckFileLicenseCodeFix_CSharp9_ShouldBeNoncompliant_CS() =>
-            OldVerifier.VerifyCodeFix<CS.CheckFileLicenseCodeFixProvider>(
+            OldVerifier.VerifyCodeFix<CS.CheckFileLicenseCodeFix>(
                 @"TestCases\CheckFileLicense_CSharp9.cs",
                 @"TestCases\CheckFileLicense_CSharp9.Fixed.cs",
                 new CS.CheckFileLicense(),
@@ -210,35 +210,35 @@ namespace SonarAnalyzer.UnitTest.Rules
 
         [TestMethod]
         public void CheckFileLicenseCodeFix_WhenNoLicenseStartingWithUsing_ShouldBeFixedAsExpected_CS() =>
-            OldVerifier.VerifyCodeFix<CS.CheckFileLicenseCodeFixProvider>(
+            OldVerifier.VerifyCodeFix<CS.CheckFileLicenseCodeFix>(
                 @"TestCases\CheckFileLicense_NoLicenseStartWithUsing.cs",
                 @"TestCases\CheckFileLicense_NoLicenseStartWithUsing.Fixed.cs",
                 new CS.CheckFileLicense { HeaderFormat = SingleLineHeader });
 
         [TestMethod]
         public void CheckFileLicenseCodeFix_WhenNoLicenseStartingWithNamespace_ShouldBeFixedAsExpected_CS() =>
-            OldVerifier.VerifyCodeFix<CS.CheckFileLicenseCodeFixProvider>(
+            OldVerifier.VerifyCodeFix<CS.CheckFileLicenseCodeFix>(
                 @"TestCases\CheckFileLicense_NoLicenseStartWithNamespace.cs",
                 @"TestCases\CheckFileLicense_NoLicenseStartWithNamespace.Fixed.cs",
                 new CS.CheckFileLicense { HeaderFormat = SingleLineHeader });
 
         [TestMethod]
         public void CheckFileLicenseCodeFix_WhenThereIsAYearDifference_ShouldBeFixedAsExpected_CS() =>
-            OldVerifier.VerifyCodeFix<CS.CheckFileLicenseCodeFixProvider>(
+            OldVerifier.VerifyCodeFix<CS.CheckFileLicenseCodeFix>(
                 @"TestCases\CheckFileLicense_YearDifference.cs",
                 @"TestCases\CheckFileLicense_YearDifference.Fixed.cs",
                 new CS.CheckFileLicense { HeaderFormat = MultiLineHeader });
 
         [TestMethod]
         public void CheckFileLicenseCodeFix_WhenOutdatedLicenseStartingWithUsing_ShouldBeFixedAsExpected_CS() =>
-            OldVerifier.VerifyCodeFix<CS.CheckFileLicenseCodeFixProvider>(
+            OldVerifier.VerifyCodeFix<CS.CheckFileLicenseCodeFix>(
                 @"TestCases\CheckFileLicense_OutdatedLicenseStartWithUsing.cs",
                 @"TestCases\CheckFileLicense_OutdatedLicenseStartWithUsing.Fixed.cs",
                 new CS.CheckFileLicense { HeaderFormat = MultiLineHeader });
 
         [TestMethod]
         public void CheckFileLicenseCodeFix_WhenOutdatedLicenseStartingWithNamespace_ShouldBeFixedAsExpected_CS() =>
-            OldVerifier.VerifyCodeFix<CS.CheckFileLicenseCodeFixProvider>(
+            OldVerifier.VerifyCodeFix<CS.CheckFileLicenseCodeFix>(
                 @"TestCases\CheckFileLicense_OutdatedLicenseStartWithNamespace.cs",
                 @"TestCases\CheckFileLicense_OutdatedLicenseStartWithNamespace.Fixed.cs",
                 new CS.CheckFileLicense { HeaderFormat = MultiLineHeader });

@@ -34,7 +34,7 @@ namespace SonarAnalyzer.UnitTest.Rules
 
         [TestMethod]
         public void DoNotUseIif_CodeFix() =>
-            OldVerifier.VerifyCodeFix<DoNotUseIifCodeFixProvider>(
+            OldVerifier.VerifyCodeFix<DoNotUseIIfCodeFix>(
                 @"TestCases\DoNotUseIif.vb",
                 @"TestCases\DoNotUseIif.Fixed.vb",
                 new DoNotUseIif());

@@ -40,7 +40,7 @@ namespace SonarAnalyzer.UnitTest.Rules
 
         [TestMethod]
         public void UnaryPrefixOperatorRepeated_CodeFix() =>
-            OldVerifier.VerifyCodeFix<CS.UnaryPrefixOperatorRepeatedCodeFixProvider>(
+            OldVerifier.VerifyCodeFix<CS.UnaryPrefixOperatorRepeatedCodeFix>(
                 @"TestCases\UnaryPrefixOperatorRepeated.cs",
                 @"TestCases\UnaryPrefixOperatorRepeated.Fixed.cs",
                 new CS.UnaryPrefixOperatorRepeated());

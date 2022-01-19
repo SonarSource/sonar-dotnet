@@ -1,6 +1,6 @@
 ﻿/*
  * SonarAnalyzer for .NET
- * Copyright (C) 2015-2022 SonarSource SA
+ * Copyright (C) 2015-2021 SonarSource SA
  * mailto: contact AT sonarsource DOT com
  *
  * This program is free software; you can redistribute it and/or
@@ -40,7 +40,7 @@ namespace SonarAnalyzer.UnitTest.Rules
 
         [TestMethod]
         public void SillyBitwiseOperation_CS_CodeFix() =>
-            OldVerifier.VerifyCodeFix<CS.SillyBitwiseOperationCodeFixProvider>(
+            OldVerifier.VerifyCodeFix<CS.SillyBitwiseOperationCodeFix>(
                 @"TestCases\SillyBitwiseOperation.cs",
                 @"TestCases\SillyBitwiseOperation.Fixed.cs",
                 new CS.SillyBitwiseOperation());
@@ -51,7 +51,7 @@ namespace SonarAnalyzer.UnitTest.Rules
 
         [TestMethod]
         public void SillyBitwiseOperation_VB_CodeFix() =>
-            OldVerifier.VerifyCodeFix<VB.SillyBitwiseOperationCodeFixProvider>(
+            OldVerifier.VerifyCodeFix<VB.SillyBitwiseOperationCodeFix>(
                 @"TestCases\SillyBitwiseOperation.vb",
                 @"TestCases\SillyBitwiseOperation.Fixed.vb",
                 new VB.SillyBitwiseOperation());

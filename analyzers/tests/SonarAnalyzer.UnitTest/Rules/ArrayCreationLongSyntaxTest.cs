@@ -34,7 +34,7 @@ namespace SonarAnalyzer.UnitTest.Rules
 
         [TestMethod]
         public void ArrayCreationLongSyntax_CodeFix() =>
-            OldVerifier.VerifyCodeFix<ArrayCreationLongSyntaxCodeFixProvider>(
+            OldVerifier.VerifyCodeFix<ArrayCreationLongSyntaxCodeFix>(
                 @"TestCases\ArrayCreationLongSyntax.vb",
                 @"TestCases\ArrayCreationLongSyntax.Fixed.vb",
                 new ArrayCreationLongSyntax());

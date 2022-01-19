@@ -48,7 +48,7 @@ namespace SonarAnalyzer.UnitTest.Rules
 
         [TestMethod]
         public void MethodParameterUnused_CodeFix_CS() =>
-            OldVerifier.VerifyCodeFix<CS.MethodParameterUnusedCodeFixProvider>(
+            OldVerifier.VerifyCodeFix<CS.MethodParameterUnusedCodeFix>(
                 @"TestCases\MethodParameterUnused.RoslynCfg.cs",
                 @"TestCases\MethodParameterUnused.RoslynCfg.Fixed.cs",
                 new CS.MethodParameterUnused());

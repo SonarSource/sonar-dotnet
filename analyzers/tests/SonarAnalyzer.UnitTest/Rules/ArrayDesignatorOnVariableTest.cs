@@ -33,7 +33,7 @@ namespace SonarAnalyzer.UnitTest.Rules
 
         [TestMethod]
         public void ArrayDesignatorOnVariable_CodeFix() =>
-            OldVerifier.VerifyCodeFix<ArrayDesignatorOnVariableCodeFixProvider>(
+            OldVerifier.VerifyCodeFix<ArrayDesignatorOnVariableCodeFix>(
                 @"TestCases\ArrayDesignatorOnVariable.vb",
                 @"TestCases\ArrayDesignatorOnVariable.Fixed.vb",
                 new ArrayDesignatorOnVariable());

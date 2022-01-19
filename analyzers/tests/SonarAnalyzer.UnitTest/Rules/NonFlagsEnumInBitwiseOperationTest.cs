@@ -36,7 +36,7 @@ namespace SonarAnalyzer.UnitTest.Rules
 
         [TestMethod]
         public void NonFlagsEnumInBitwiseOperation_CodeFix() =>
-            OldVerifier.VerifyCodeFix<NonFlagsEnumInBitwiseOperationCodeFixProvider>(
+            OldVerifier.VerifyCodeFix<NonFlagsEnumInBitwiseOperationCodeFix>(
                 @"TestCases\NonFlagsEnumInBitwiseOperation.cs",
                 @"TestCases\NonFlagsEnumInBitwiseOperation.Fixed.cs",
                 new NonFlagsEnumInBitwiseOperation());

@@ -1,6 +1,6 @@
 ﻿/*
  * SonarAnalyzer for .NET
- * Copyright (C) 2015-2022 SonarSource SA
+ * Copyright (C) 2015-2021 SonarSource SA
  * mailto: contact AT sonarsource DOT com
  *
  * This program is free software; you can redistribute it and/or
@@ -79,7 +79,7 @@ namespace SonarAnalyzer.Utilities
             yield return codeFixProvider;
 
             var baseType = codeFixProvider.BaseType;
-            while (baseType != null && baseType != typeof(SonarCodeFixProvider))
+            while (baseType != null && baseType != typeof(SonarCodeFix))
             {
                 yield return baseType;
                 baseType = baseType.BaseType;

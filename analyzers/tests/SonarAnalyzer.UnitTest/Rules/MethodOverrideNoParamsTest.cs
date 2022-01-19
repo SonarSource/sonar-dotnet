@@ -39,7 +39,7 @@ namespace SonarAnalyzer.UnitTest.Rules
 
         [TestMethod]
         public void MethodOverrideNoParams_CodeFix() =>
-            OldVerifier.VerifyCodeFix<MethodOverrideNoParamsCodeFixProvider>(
+            OldVerifier.VerifyCodeFix<MethodOverrideNoParamsCodeFix>(
                 @"TestCases\MethodOverrideNoParams.cs",
                 @"TestCases\MethodOverrideNoParams.Fixed.cs",
                 new MethodOverrideNoParams());

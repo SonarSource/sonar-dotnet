@@ -1,6 +1,6 @@
 ﻿/*
  * SonarAnalyzer for .NET
- * Copyright (C) 2015-2022 SonarSource SA
+ * Copyright (C) 2015-2021 SonarSource SA
  * mailto: contact AT sonarsource DOT com
  *
  * This program is free software; you can redistribute it and/or
@@ -39,7 +39,7 @@ namespace SonarAnalyzer.UnitTest.Rules
 
         [TestMethod]
         public void RedundantConditionalAroundAssignment_CSharp9_CodeFix() =>
-            OldVerifier.VerifyCodeFix<RedundantConditionalAroundAssignmentCodeFixProvider>(
+            OldVerifier.VerifyCodeFix<RedundantConditionalAroundAssignmentCodeFix>(
                 @"TestCases\RedundantConditionalAroundAssignment.CSharp9.cs",
                 @"TestCases\RedundantConditionalAroundAssignment.CSharp9.Fixed.cs",
                 new RedundantConditionalAroundAssignment(),
@@ -52,7 +52,7 @@ namespace SonarAnalyzer.UnitTest.Rules
 
         [TestMethod]
         public void RedundantConditionalAroundAssignment_CSharp10_CodeFix() =>
-            OldVerifier.VerifyCodeFix<RedundantConditionalAroundAssignmentCodeFixProvider>(
+            OldVerifier.VerifyCodeFix<RedundantConditionalAroundAssignmentCodeFix>(
                 @"TestCases\RedundantConditionalAroundAssignment.CSharp10.cs",
                 @"TestCases\RedundantConditionalAroundAssignment.CSharp10.Fixed.cs",
                 new RedundantConditionalAroundAssignment(),
@@ -62,7 +62,7 @@ namespace SonarAnalyzer.UnitTest.Rules
 
         [TestMethod]
         public void RedundantConditionalAroundAssignment_CodeFix() =>
-            OldVerifier.VerifyCodeFix<RedundantConditionalAroundAssignmentCodeFixProvider>(
+            OldVerifier.VerifyCodeFix<RedundantConditionalAroundAssignmentCodeFix>(
                 @"TestCases\RedundantConditionalAroundAssignment.cs",
                 @"TestCases\RedundantConditionalAroundAssignment.Fixed.cs",
                 new RedundantConditionalAroundAssignment());

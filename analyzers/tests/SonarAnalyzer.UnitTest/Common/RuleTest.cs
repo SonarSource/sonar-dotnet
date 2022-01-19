@@ -261,7 +261,7 @@ namespace SonarAnalyzer.UnitTest.Common
             ((DiagnosticAnalyzer)Activator.CreateInstance(type)).SupportedDiagnostics;
 
         private static IEnumerable<Type> GetCodeFixProviderTypes(IEnumerable<Assembly> assemblies) =>
-            assemblies.SelectMany(assembly => assembly.GetTypes()).Where(t => t.IsSubclassOf(typeof(SonarCodeFixProvider)));
+            assemblies.SelectMany(assembly => assembly.GetTypes()).Where(t => t.IsSubclassOf(typeof(SonarCodeFix)));
 
         private static bool IsSonarWay(DiagnosticDescriptor diagnostic) =>
             diagnostic.CustomTags.Contains(DiagnosticDescriptorBuilder.SonarWayTag);

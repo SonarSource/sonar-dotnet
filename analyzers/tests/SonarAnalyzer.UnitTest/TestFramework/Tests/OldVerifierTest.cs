@@ -61,7 +61,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework.Tests
         }
 
         [ExportCodeFixProvider(LanguageNames.CSharp)]
-        private class TestDuplicateLocationRuleCodeFix : SonarCodeFixProvider
+        private class TestDuplicateLocationRuleCodeFix : SonarCodeFix
         {
             public override ImmutableArray<string> FixableDiagnosticIds => ImmutableArray.Create(TestDuplicateLocationRule.DiagnosticId);
 
