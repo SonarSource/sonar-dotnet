@@ -164,7 +164,7 @@ Public Class Sample
     Declare Function ExternalMethod Lib ""foo.dll"" (lpBuffer As String) As Integer
 
 End Class";
-            OldVerifier.VerifyVisualBasicAnalyzer(code, new TestRule_VB());
+            new VerifierBuilder<TestRule_VB>().AddSnippet(code).Verify();
         }
 
         private static MethodDeclarationContext CreateContext(string testInput, AnalyzerLanguage language, string methodName)

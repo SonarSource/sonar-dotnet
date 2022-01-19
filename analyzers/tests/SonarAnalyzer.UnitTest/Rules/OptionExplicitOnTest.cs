@@ -31,6 +31,8 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class OptionExplicitOnTest
     {
+        private readonly VerifierBuilder builder = new VerifierBuilder<OptionExplicitOn>();
+
         [TestMethod]
         public void OptionExplicitOn_IsOffForProject()
         {
@@ -42,15 +44,15 @@ namespace SonarAnalyzer.UnitTest.Rules
 
         [TestMethod]
         public void OptionExplicitOn_IsOff() =>
-            OldVerifier.VerifyVisualBasicAnalyzer("Option Explicit Off ' Noncompliant ^1#19 {{Change this to 'Option Explicit On'.}}", new OptionExplicitOn());
+            builder.AddSnippet("Option Explicit Off ' Noncompliant ^1#19 {{Change this to 'Option Explicit On'.}}").Verify();
 
         [TestMethod]
         public void OptionExplicitOn_IsOn() =>
-            OldVerifier.VerifyVisualBasicAnalyzer("Option Explicit On", new OptionExplicitOn());
+            builder.AddSnippet("Option Explicit On").Verify();
 
         [TestMethod]
         public void OptionExplicitOn_IsMissing() =>
-            OldVerifier.VerifyVisualBasicAnalyzer("Option Strict Off", new OptionExplicitOn());
+            builder.AddSnippet("Option Strict Off").Verify();
 
         [TestMethod]
         public void OptionExplicitOn_Concurrent()

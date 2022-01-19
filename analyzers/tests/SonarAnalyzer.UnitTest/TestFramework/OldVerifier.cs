@@ -95,22 +95,6 @@ namespace SonarAnalyzer.UnitTest.TestFramework
                 .Verify();
 
         /// <summary>
-        /// Verify analyzer from VB.NET on a snippet in non-concurrent execution mode.
-        /// </summary>
-        [Obsolete("Use VerifierBuilder instead.")]
-        public static void VerifyVisualBasicAnalyzer(string snippet,
-                                                     DiagnosticAnalyzer diagnosticAnalyzer,
-                                                     CompilationErrorBehavior checkMode = CompilationErrorBehavior.Default,
-                                                     IEnumerable<MetadataReference> additionalReferences = null) =>
-            new VerifierBuilder()
-                .AddAnalyzer(() => diagnosticAnalyzer)
-                .AddReferences(additionalReferences ?? Enumerable.Empty<MetadataReference>())
-                .AddSnippet(snippet)
-                .WithConcurrentAnalysis(false)
-                .WithErrorBehavior(checkMode)
-                .Verify();
-
-        /// <summary>
         /// Verify analyzer from C# 9 with top level statements in non-concurrent execution mode.
         /// </summary>
         [Obsolete("Use VerifierBuilder instead.")]
