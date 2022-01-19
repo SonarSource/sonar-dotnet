@@ -18,6 +18,7 @@ namespace Tests.Diagnostics
             Assert.Equal(d, 42); // Noncompliant
 //                       ^^^^^
             Assert.Same(d, 42); // Noncompliant
+            Assert.NotSame(d, 42); // Noncompliant
             Assert.Equal(d, 42, 1); // Noncompliant
 
             Assert.Equal("", str);

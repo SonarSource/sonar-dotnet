@@ -39,10 +39,13 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private static readonly IDictionary<string, ImmutableArray<KnownType>> MethodsWithType = new Dictionary<string, ImmutableArray<KnownType>>
         {
-            ["AreEqual"] = ImmutableArray.Create(KnownType.Microsoft_VisualStudio_TestTools_UnitTesting_Assert, KnownType.NUnit_Framework_Assert),
-            ["AreSame"]  = ImmutableArray.Create(KnownType.Microsoft_VisualStudio_TestTools_UnitTesting_Assert, KnownType.NUnit_Framework_Assert),
-            ["Equal"]    = ImmutableArray.Create(KnownType.Xunit_Assert),
-            ["Same"]     = ImmutableArray.Create(KnownType.Xunit_Assert)
+            ["AreEqual"]    = ImmutableArray.Create(KnownType.Microsoft_VisualStudio_TestTools_UnitTesting_Assert, KnownType.NUnit_Framework_Assert),
+            ["AreNotEqual"] = ImmutableArray.Create(KnownType.Microsoft_VisualStudio_TestTools_UnitTesting_Assert, KnownType.NUnit_Framework_Assert),
+            ["AreSame"]     = ImmutableArray.Create(KnownType.Microsoft_VisualStudio_TestTools_UnitTesting_Assert, KnownType.NUnit_Framework_Assert),
+            ["AreNotSame"]  = ImmutableArray.Create(KnownType.Microsoft_VisualStudio_TestTools_UnitTesting_Assert, KnownType.NUnit_Framework_Assert),
+            ["Equal"]       = ImmutableArray.Create(KnownType.Xunit_Assert),
+            ["Same"]        = ImmutableArray.Create(KnownType.Xunit_Assert),
+            ["NotSame"]     = ImmutableArray.Create(KnownType.Xunit_Assert)
         };
 
         protected override void Initialize(SonarAnalysisContext context) =>
