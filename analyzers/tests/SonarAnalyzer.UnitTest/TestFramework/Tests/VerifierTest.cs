@@ -493,7 +493,7 @@ End Class"" has a length of 151, differs near ""Not"" (index 47).");
         }
 
         [TestMethod]
-        public void VerifyUtilityAnalyzer_UnexpectedProtobuf_CS()
+        public void VerifyUtilityAnalyzer_VerifyProtobuf_PropagateFailedAssertion_CS()
         {
             var protobufPath = TestHelper.TestPath(TestContext, "Empty.pb");
             new VerifierBuilder().AddAnalyzer(() => new DummyUtilityAnalyzerCS(protobufPath, null)).AddSnippet("// Nothing to see here").WithProtobufPath(protobufPath)
@@ -502,7 +502,7 @@ End Class"" has a length of 151, differs near ""Not"" (index 47).");
         }
 
         [TestMethod]
-        public void VerifyUtilityAnalyzer_UnexpectedProtobuf_VB()
+        public void VerifyUtilityAnalyzer_VerifyProtobuf_PropagateFailedAssertion_VB()
         {
             var protobufPath = TestHelper.TestPath(TestContext, "Empty.pb");
             new VerifierBuilder().AddAnalyzer(() => new DummyUtilityAnalyzerVB(protobufPath, null)).AddSnippet("' Nothing to see here").WithProtobufPath(protobufPath)
