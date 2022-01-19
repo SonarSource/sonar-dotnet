@@ -1,0 +1,56 @@
+{
+"issues":  [
+{
+"id":  "S6354",
+"message":  "Use a testable (date) time provider instead.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\persistence\Akka.Persistence.Sql.Common\Journal\BatchingSqlJournal.cs",
+"region":  {
+"startLine":  1279,
+"startColumn":  66,
+"endLine":  1279,
+"endColumn":  81
+}
+}
+},
+{
+"id":  "S6354",
+"message":  "Use a testable (date) time provider instead.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\persistence\Akka.Persistence.Sql.Common\Journal\ITimestampProvider.cs",
+"region":  {
+"startLine":  26,
+"startColumn":  83,
+"endLine":  26,
+"endColumn":  89
+}
+}
+},
+{
+"id":  "S6354",
+"message":  "Use a testable (date) time provider instead.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\persistence\Akka.Persistence.Sql.Common\Journal\ITimestampProvider.cs",
+"region":  {
+"startLine":  35,
+"startColumn":  77,
+"endLine":  35,
+"endColumn":  92
+}
+}
+},
+{
+"id":  "S6354",
+"message":  "Use a testable (date) time provider instead.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\persistence\Akka.Persistence.Sql.Common\Journal\QueryExecutor.cs",
+"region":  {
+"startLine":  687,
+"startColumn":  59,
+"endLine":  687,
+"endColumn":  74
+}
+}
+}
+]
+}

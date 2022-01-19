@@ -1,0 +1,147 @@
+{
+"issues":  [
+{
+"id":  "S6354",
+"message":  "Use a testable (date) time provider instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterHeartbeat.cs",
+"region":  {
+"startLine":  85,
+"startColumn":  30,
+"endLine":  85,
+"endColumn":  45
+}
+}
+},
+{
+"id":  "S6354",
+"message":  "Use a testable (date) time provider instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterHeartbeat.cs",
+"region":  {
+"startLine":  155,
+"startColumn":  34,
+"endLine":  155,
+"endColumn":  49
+}
+}
+},
+{
+"id":  "S6354",
+"message":  "Use a testable (date) time provider instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterHeartbeat.cs",
+"region":  {
+"startLine":  241,
+"startColumn":  23,
+"endLine":  241,
+"endColumn":  38
+}
+}
+},
+{
+"id":  "S6354",
+"message":  "Use a testable (date) time provider instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterHeartbeat.cs",
+"region":  {
+"startLine":  253,
+"startColumn":  30,
+"endLine":  253,
+"endColumn":  45
+}
+}
+},
+{
+"id":  "S6354",
+"message":  "Use a testable (date) time provider instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\SBR\SplitBrainResolver.cs",
+"region":  {
+"startLine":  85,
+"startColumn":  42,
+"endLine":  85,
+"endColumn":  57
+}
+}
+},
+{
+"id":  "S6354",
+"message":  "Use a testable (date) time provider instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\SBR\SplitBrainResolver.cs",
+"region":  {
+"startLine":  85,
+"startColumn":  59,
+"endLine":  85,
+"endColumn":  74
+}
+}
+},
+{
+"id":  "S6354",
+"message":  "Use a testable (date) time provider instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\SBR\SplitBrainResolver.cs",
+"region":  {
+"startLine":  144,
+"startColumn":  23,
+"endLine":  144,
+"endColumn":  38
+}
+}
+},
+{
+"id":  "S6354",
+"message":  "Use a testable (date) time provider instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\SBR\SplitBrainResolver.cs",
+"region":  {
+"startLine":  171,
+"startColumn":  25,
+"endLine":  171,
+"endColumn":  40
+}
+}
+},
+{
+"id":  "S6354",
+"message":  "Use a testable (date) time provider instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\SBR\SplitBrainResolver.cs",
+"region":  {
+"startLine":  298,
+"startColumn":  27,
+"endLine":  298,
+"endColumn":  42
+}
+}
+},
+{
+"id":  "S6354",
+"message":  "Use a testable (date) time provider instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\SBR\SplitBrainResolver.cs",
+"region":  {
+"startLine":  556,
+"startColumn":  23,
+"endLine":  556,
+"endColumn":  38
+}
+}
+},
+{
+"id":  "S6354",
+"message":  "Use a testable (date) time provider instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\SBR\SplitBrainResolver.cs",
+"region":  {
+"startLine":  732,
+"startColumn":  27,
+"endLine":  732,
+"endColumn":  42
+}
+}
+}
+]
+}

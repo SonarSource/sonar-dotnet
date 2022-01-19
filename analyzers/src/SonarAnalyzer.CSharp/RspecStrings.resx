@@ -12811,6 +12811,39 @@
   <data name="S5773_Type" xml:space="preserve">
     <value>VULNERABILITY</value>
   </data>
+  <data name="S6354_Category" xml:space="preserve">
+    <value>Major Code Smell</value>
+  </data>
+  <data name="S6354_Description" xml:space="preserve">
+    <value>One of the principles of a unit test is that it must have full control of the system under test. This is problematic when production code includes calls to static methods, which cannot be changed or controlled. Date/time functions are usually provided by system libraries as static methods.</value>
+  </data>
+  <data name="S6354_IsActivatedByDefault" xml:space="preserve">
+    <value>False</value>
+  </data>
+  <data name="S6354_Remediation" xml:space="preserve">
+    <value>Constant/Issue</value>
+  </data>
+  <data name="S6354_RemediationCost" xml:space="preserve">
+    <value>20min</value>
+  </data>
+  <data name="S6354_Scope" xml:space="preserve">
+    <value>Main</value>
+  </data>
+  <data name="S6354_Severity" xml:space="preserve">
+    <value>Major</value>
+  </data>
+  <data name="S6354_Status" xml:space="preserve">
+    <value>ready</value>
+  </data>
+  <data name="S6354_Tags" xml:space="preserve">
+    <value />
+  </data>
+  <data name="S6354_Title" xml:space="preserve">
+    <value>Use a testable date/time provider.</value>
+  </data>
+  <data name="S6354_Type" xml:space="preserve">
+    <value>CODE_SMELL</value>
+  </data>
   <data name="S818_Category" xml:space="preserve">
     <value>Minor Code Smell</value>
   </data>

@@ -1,0 +1,56 @@
+{
+"issues":  [
+{
+"id":  "S6354",
+"message":  "Use a testable (date) time provider instead.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Diagnostics\DiagnosticsHook.cs",
+"region":  {
+"startLine":  169,
+"startColumn":  106,
+"endLine":  169,
+"endColumn":  118
+}
+}
+},
+{
+"id":  "S6354",
+"message":  "Use a testable (date) time provider instead.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Diagnostics\DiagnosticsHook.cs",
+"region":  {
+"startLine":  207,
+"startColumn":  30,
+"endLine":  207,
+"endColumn":  42
+}
+}
+},
+{
+"id":  "S6354",
+"message":  "Use a testable (date) time provider instead.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Diagnostics\DiagnosticsHook.cs",
+"region":  {
+"startLine":  283,
+"startColumn":  26,
+"endLine":  283,
+"endColumn":  38
+}
+}
+},
+{
+"id":  "S6354",
+"message":  "Use a testable (date) time provider instead.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\NancyEngine.cs",
+"region":  {
+"startLine":  215,
+"startColumn":  27,
+"endLine":  215,
+"endColumn":  39
+}
+}
+}
+]
+}

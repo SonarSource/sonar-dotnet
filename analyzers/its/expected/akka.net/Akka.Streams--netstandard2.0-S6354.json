@@ -1,0 +1,251 @@
+{
+"issues":  [
+{
+"id":  "S6354",
+"message":  "Use a testable (date) time provider instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Restart.cs",
+"region":  {
+"startLine":  603,
+"startColumn":  47,
+"endLine":  603,
+"endColumn":  62
+}
+}
+},
+{
+"id":  "S6354",
+"message":  "Use a testable (date) time provider instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Restart.cs",
+"region":  {
+"startLine":  605,
+"startColumn":  65,
+"endLine":  605,
+"endColumn":  80
+}
+}
+},
+{
+"id":  "S6354",
+"message":  "Use a testable (date) time provider instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Extra\Timed.cs",
+"region":  {
+"startLine":  296,
+"startColumn":  36,
+"endLine":  296,
+"endColumn":  48
+}
+}
+},
+{
+"id":  "S6354",
+"message":  "Use a testable (date) time provider instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\Ops.cs",
+"region":  {
+"startLine":  3237,
+"startColumn":  90,
+"endLine":  3237,
+"endColumn":  105
+}
+}
+},
+{
+"id":  "S6354",
+"message":  "Use a testable (date) time provider instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\Ops.cs",
+"region":  {
+"startLine":  3267,
+"startColumn":  34,
+"endLine":  3267,
+"endColumn":  49
+}
+}
+},
+{
+"id":  "S6354",
+"message":  "Use a testable (date) time provider instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Timers.cs",
+"region":  {
+"startLine":  212,
+"startColumn":  33,
+"endLine":  212,
+"endColumn":  48
+}
+}
+},
+{
+"id":  "S6354",
+"message":  "Use a testable (date) time provider instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Timers.cs",
+"region":  {
+"startLine":  220,
+"startColumn":  33,
+"endLine":  220,
+"endColumn":  48
+}
+}
+},
+{
+"id":  "S6354",
+"message":  "Use a testable (date) time provider instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Timers.cs",
+"region":  {
+"startLine":  234,
+"startColumn":  37,
+"endLine":  234,
+"endColumn":  52
+}
+}
+},
+{
+"id":  "S6354",
+"message":  "Use a testable (date) time provider instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Timers.cs",
+"region":  {
+"startLine":  295,
+"startColumn":  33,
+"endLine":  295,
+"endColumn":  48
+}
+}
+},
+{
+"id":  "S6354",
+"message":  "Use a testable (date) time provider instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Timers.cs",
+"region":  {
+"startLine":  304,
+"startColumn":  33,
+"endLine":  304,
+"endColumn":  48
+}
+}
+},
+{
+"id":  "S6354",
+"message":  "Use a testable (date) time provider instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Timers.cs",
+"region":  {
+"startLine":  322,
+"startColumn":  56,
+"endLine":  322,
+"endColumn":  71
+}
+}
+},
+{
+"id":  "S6354",
+"message":  "Use a testable (date) time provider instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Timers.cs",
+"region":  {
+"startLine":  383,
+"startColumn":  33,
+"endLine":  383,
+"endColumn":  48
+}
+}
+},
+{
+"id":  "S6354",
+"message":  "Use a testable (date) time provider instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Timers.cs",
+"region":  {
+"startLine":  416,
+"startColumn":  37,
+"endLine":  416,
+"endColumn":  52
+}
+}
+},
+{
+"id":  "S6354",
+"message":  "Use a testable (date) time provider instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Timers.cs",
+"region":  {
+"startLine":  423,
+"startColumn":  58,
+"endLine":  423,
+"endColumn":  73
+}
+}
+},
+{
+"id":  "S6354",
+"message":  "Use a testable (date) time provider instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Timers.cs",
+"region":  {
+"startLine":  589,
+"startColumn":  33,
+"endLine":  589,
+"endColumn":  48
+}
+}
+},
+{
+"id":  "S6354",
+"message":  "Use a testable (date) time provider instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Timers.cs",
+"region":  {
+"startLine":  597,
+"startColumn":  33,
+"endLine":  597,
+"endColumn":  48
+}
+}
+},
+{
+"id":  "S6354",
+"message":  "Use a testable (date) time provider instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Timers.cs",
+"region":  {
+"startLine":  626,
+"startColumn":  32,
+"endLine":  626,
+"endColumn":  47
+}
+}
+},
+{
+"id":  "S6354",
+"message":  "Use a testable (date) time provider instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Timers.cs",
+"region":  {
+"startLine":  641,
+"startColumn":  28,
+"endLine":  641,
+"endColumn":  43
+}
+}
+},
+{
+"id":  "S6354",
+"message":  "Use a testable (date) time provider instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Timers.cs",
+"region":  {
+"startLine":  645,
+"startColumn":  37,
+"endLine":  645,
+"endColumn":  52
+}
+}
+}
+]
+}

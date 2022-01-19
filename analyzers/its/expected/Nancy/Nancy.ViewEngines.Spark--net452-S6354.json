@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S6354",
+"message":  "Use a testable (date) time provider instead.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.ViewEngines.Spark\NancyViewFolder.cs",
+"region":  {
+"startLine":  242,
+"startColumn":  40,
+"endLine":  242,
+"endColumn":  52
+}
+}
+}
+]
+}

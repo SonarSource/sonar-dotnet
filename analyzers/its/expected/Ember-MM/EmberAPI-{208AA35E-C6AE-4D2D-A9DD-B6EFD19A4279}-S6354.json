@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S6354",
+"message":  "Use a testable (date) time provider instead.",
+"location":  {
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIErrorLog.vb",
+"region":  {
+"startLine":  60,
+"startColumn":  63,
+"endLine":  60,
+"endColumn":  75
+}
+}
+}
+]
+}

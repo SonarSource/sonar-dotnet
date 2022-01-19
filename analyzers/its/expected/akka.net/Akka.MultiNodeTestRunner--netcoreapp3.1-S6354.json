@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S6354",
+"message":  "Use a testable (date) time provider instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.MultiNodeTestRunner\Program.cs",
+"region":  {
+"startLine":  476,
+"startColumn":  23,
+"endLine":  476,
+"endColumn":  38
+}
+}
+}
+]
+}

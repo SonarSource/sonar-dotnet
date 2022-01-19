@@ -1,0 +1,225 @@
+{
+"issues":  [
+{
+"id":  "S6354",
+"message":  "Use a testable (date) time provider instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Actor\ActorSystem.cs",
+"region":  {
+"startLine":  216,
+"startColumn":  46,
+"endLine":  216,
+"endColumn":  61
+}
+}
+},
+{
+"id":  "S6354",
+"message":  "Use a testable (date) time provider instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Dispatch\Mailbox.cs",
+"region":  {
+"startLine":  535,
+"startColumn":  70,
+"endLine":  535,
+"endColumn":  82
+}
+}
+},
+{
+"id":  "S6354",
+"message":  "Use a testable (date) time provider instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Event\DeadLetterListener.cs",
+"region":  {
+"startLine":  235,
+"startColumn":  38,
+"endLine":  235,
+"endColumn":  53
+}
+}
+},
+{
+"id":  "S6354",
+"message":  "Use a testable (date) time provider instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Event\DeadLetterListener.cs",
+"region":  {
+"startLine":  240,
+"startColumn":  40,
+"endLine":  240,
+"endColumn":  55
+}
+}
+},
+{
+"id":  "S6354",
+"message":  "Use a testable (date) time provider instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Event\DeadLetterListener.cs",
+"region":  {
+"startLine":  255,
+"startColumn":  60,
+"endLine":  255,
+"endColumn":  75
+}
+}
+},
+{
+"id":  "S6354",
+"message":  "Use a testable (date) time provider instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Event\DeadLetterListener.cs",
+"region":  {
+"startLine":  274,
+"startColumn":  60,
+"endLine":  274,
+"endColumn":  66
+}
+}
+},
+{
+"id":  "S6354",
+"message":  "Use a testable (date) time provider instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Event\DeadLetterListener.cs",
+"region":  {
+"startLine":  276,
+"startColumn":  56,
+"endLine":  276,
+"endColumn":  71
+}
+}
+},
+{
+"id":  "S6354",
+"message":  "Use a testable (date) time provider instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Event\LogEvent.cs",
+"region":  {
+"startLine":  51,
+"startColumn":  25,
+"endLine":  51,
+"endColumn":  40
+}
+}
+},
+{
+"id":  "S6354",
+"message":  "Use a testable (date) time provider instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\IO\SimpleDnsCache.cs",
+"region":  {
+"startLine":  40,
+"startColumn":  26,
+"endLine":  40,
+"endColumn":  38
+}
+}
+},
+{
+"id":  "S6354",
+"message":  "Use a testable (date) time provider instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\IO\SimpleDnsCache.cs",
+"region":  {
+"startLine":  59,
+"startColumn":  23,
+"endLine":  59,
+"endColumn":  35
+}
+}
+},
+{
+"id":  "S6354",
+"message":  "Use a testable (date) time provider instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Pattern\CircuitBreakerState.cs",
+"region":  {
+"startLine":  40,
+"startColumn":  30,
+"endLine":  40,
+"endColumn":  45
+}
+}
+},
+{
+"id":  "S6354",
+"message":  "Use a testable (date) time provider instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Pattern\CircuitBreakerState.cs",
+"region":  {
+"startLine":  94,
+"startColumn":  23,
+"endLine":  94,
+"endColumn":  38
+}
+}
+},
+{
+"id":  "S6354",
+"message":  "Use a testable (date) time provider instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Util\Internal\AtomicState.cs",
+"region":  {
+"startLine":  87,
+"startColumn":  28,
+"endLine":  87,
+"endColumn":  43
+}
+}
+},
+{
+"id":  "S6354",
+"message":  "Use a testable (date) time provider instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Util\Internal\AtomicState.cs",
+"region":  {
+"startLine":  105,
+"startColumn":  22,
+"endLine":  105,
+"endColumn":  37
+}
+}
+},
+{
+"id":  "S6354",
+"message":  "Use a testable (date) time provider instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Util\Internal\AtomicState.cs",
+"region":  {
+"startLine":  130,
+"startColumn":  28,
+"endLine":  130,
+"endColumn":  43
+}
+}
+},
+{
+"id":  "S6354",
+"message":  "Use a testable (date) time provider instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Util\Internal\AtomicState.cs",
+"region":  {
+"startLine":  148,
+"startColumn":  22,
+"endLine":  148,
+"endColumn":  37
+}
+}
+},
+{
+"id":  "S6354",
+"message":  "Use a testable (date) time provider instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Util\TokenBucket.cs",
+"region":  {
+"startLine":  139,
+"startColumn":  45,
+"endLine":  139,
+"endColumn":  57
+}
+}
+}
+]
+}
