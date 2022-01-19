@@ -86,10 +86,9 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         public void ConfiguringLoggers_AspNetCore3_CS() =>
             OldVerifier.VerifyNonConcurrentAnalyzer(
-                @"TestCases\Hotspots\ConfiguringLoggers_AspNetCore.cs",
+                @"TestCases\Hotspots\ConfiguringLoggers_AspNetCore3.cs",
                 new CS.ConfiguringLoggers(AnalyzerConfiguration.AlwaysEnabled),
-                options: ParseOptionsHelper.FromCSharp9,
-                additionalReferences: AspNetCore3LoggingReferences);
+                AspNetCore3LoggingReferences);
 
      [TestMethod]
         public void ConfiguringLoggers_AspNetCore_VB() =>
@@ -123,11 +122,19 @@ namespace SonarAnalyzer.UnitTest.Rules
 
         private static IEnumerable<MetadataReference> AspNetCore3LoggingReferences =>
                 Enumerable.Empty<MetadataReference>()
-                      .Concat(AspNetCoreMetadataReference.MicrosoftAspNetCoreDiagnostics)
-                      .Concat(AspNetCoreMetadataReference.MicrosoftAspNetCoreHostingAbstractions)
-                      .Concat(AspNetCoreMetadataReference.MicrosoftAspNetCoreHttpAbstractions)
-                      .Concat(AspNetCoreMetadataReference.MicrosoftExtensionsHostingAbstractions)
-                      .Concat(AspNetCoreMetadataReference.MicrosoftExtensionsIOptionsMonitor);
+                    .Concat(AspNetCoreMetadataReference.MicrosoftAspNetCoreDiagnostics)
+                    .Concat(AspNetCoreMetadataReference.MicrosoftAspNetCoreHostingAbstractions)
+                    .Concat(AspNetCoreMetadataReference.MicrosoftAspNetCoreHostingWebHostBuilderExtensions)
+                    .Concat(AspNetCoreMetadataReference.MicrosoftAspNetCoreHttpAbstractions)
+                    .Concat(AspNetCoreMetadataReference.MicrosoftExtensionsHostingAbstractions)
+                    .Concat(AspNetCoreMetadataReference.MicrosoftAspNetCoreWebHost)
+                    .Concat(AspNetCoreMetadataReference.MicrosoftAspNetCoreEventSourceLoggerFactoryExtensions)
+                    .Concat(NuGetMetadataReference.MicrosoftExtensionsConfigurationAbstractions(Constants.DotNetCore500Version))
+                    .Concat(NuGetMetadataReference.MicrosoftExtensionsOptions(Constants.DotNetCore500Version))
+                    .Concat(NuGetMetadataReference.MicrosoftExtensionsLoggingPackages(Constants.DotNetCore500Version))
+                    .Concat(NuGetMetadataReference.MicrosoftExtensionsDependencyInjectionAbstractions(Constants.DotNetCore500Version));
+
+
 #endif
     }
 }
