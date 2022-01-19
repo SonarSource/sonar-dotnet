@@ -56,6 +56,7 @@ namespace SonarAnalyzer.Rules
         }
 
         protected bool IsValidationMethod(SemanticModel semanticModel, SyntaxNode condition, string methodName) =>
-            isDevelopmentMethods.Any(x => x.IsMatch(methodName, new Lazy<IMethodSymbol>(() => semanticModel.GetSymbolInfo(condition).Symbol as IMethodSymbol), Language.NameComparison));
+            new Lazy<IMethodSymbol>(() => semanticModel.GetSymbolInfo(condition).Symbol as IMethodSymbol) is var lazySymbol
+            && isDevelopmentMethods.Any(x => x.IsMatch(methodName, lazySymbol, Language.NameComparison));
     }
 }
