@@ -20,9 +20,6 @@
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.Rules.CSharp;
-#if NET
-using SonarAnalyzer.UnitTest.MetadataReferences;
-#endif
 using SonarAnalyzer.UnitTest.TestFramework;
 
 namespace SonarAnalyzer.UnitTest.Rules
@@ -30,64 +27,22 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class DisposableMemberInNonDisposableClassTest
     {
+        private readonly VerifierBuilder builder = new VerifierBuilder<DisposableMemberInNonDisposableClass>();
+
         [TestMethod]
         public void DisposableMemberInNonDisposableClass() =>
-            OldVerifier.VerifyAnalyzer(@"TestCases\DisposableMemberInNonDisposableClass.cs",
-                                    new DisposableMemberInNonDisposableClass(),
-                                    ParseOptionsHelper.FromCSharp8);
+            builder.AddPaths("DisposableMemberInNonDisposableClass.cs").WithOptions(ParseOptionsHelper.FromCSharp8).Verify();
 
 #if NET
+
         [TestMethod]
         public void DisposableMemberInNonDisposableClass_CSharp9() =>
-            OldVerifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\DisposableMemberInNonDisposableClass.CSharp9.cs", new DisposableMemberInNonDisposableClass());
+            builder.AddPaths("DisposableMemberInNonDisposableClass.CSharp9.cs").WithTopLevelStatements().Verify();
 
         [TestMethod]
         public void DisposableMemberInNonDisposableClass_IAsyncDisposable() => // IAsyncDisposable is available only on .Net Core
-            OldVerifier.VerifyCSharpAnalyzer(@"
-namespace Namespace
-{
-    using System;
-    using System.Threading;
-    using System.Threading.Tasks;
+            builder.AddPaths("DisposableMemberInNonDisposableClass.NetCore.cs").Verify();
 
-    public class TestClass : IAsyncDisposable
-    {
-        private CancellationTokenSource cancellationTokenSource;
-
-        public Task MethodAsync()
-        {
-            this.cancellationTokenSource = new CancellationTokenSource();
-            return Task.Delay(1000, this.cancellationTokenSource.Token);
-        }
-
-        public ValueTask DisposeAsync()
-        {
-            this.cancellationTokenSource?.Dispose();
-            return new ValueTask();
-        }
-    }
-
-    public class C1 // Noncompliant, needs to implement IDisposable or IAsyncDisposable
-    {
-        private IAsyncDisposable disposable;
-
-        public void Init() => disposable = new AsyncDisposable();
-    }
-
-    public class C2 : IAsyncDisposable // Implements IAsyncDisposable
-    {
-        private IAsyncDisposable disposable;
-
-        public void Init() => disposable = new AsyncDisposable();
-
-        public ValueTask DisposeAsync() => disposable.DisposeAsync();
-    }
-
-    public class AsyncDisposable : IAsyncDisposable
-    {
-        public ValueTask DisposeAsync() => new ValueTask();
-    }
-}", new DisposableMemberInNonDisposableClass(), additionalReferences: NetStandardMetadataReference.Netstandard);
 #endif
     }
 }
