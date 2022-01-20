@@ -29,7 +29,7 @@ namespace SonarAnalyzer.UnitTest.Rules
     public class ConditionalSimplificationTest
     {
         private readonly VerifierBuilder builder = new VerifierBuilder<ConditionalSimplification>();
-        private readonly VerifierBuilder codeFix = new VerifierBuilder<ConditionalSimplification>().WithCodeFix<ConditionalSimplificationCodeFixProvider>();
+        private readonly VerifierBuilder codeFix = new VerifierBuilder<ConditionalSimplification>().WithCodeFix<ConditionalSimplificationCodeFix>();
 
         [TestMethod]
         public void ConditionalSimplification_BeforeCSharp8() =>
