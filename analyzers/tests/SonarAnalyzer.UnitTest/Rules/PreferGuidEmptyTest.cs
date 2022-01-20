@@ -49,7 +49,7 @@ namespace SonarAnalyzer.UnitTest.Rules
                 .AddAnalyzer(() => new CS.PreferGuidEmpty())
                 .WithOptions(ParseOptionsHelper.FromCSharp8)
                 .AddPaths("PreferGuidEmpty.cs")
-                .WithCodeFix<CS.PreferGuidEmptyFixProvider>()
+                .WithCodeFix<CS.PreferGuidEmptyCodeFix>()
                 .WithCodeFixedPath("PreferGuidEmpty.Fixed.cs")
                 .VerifyCodeFix();
     }

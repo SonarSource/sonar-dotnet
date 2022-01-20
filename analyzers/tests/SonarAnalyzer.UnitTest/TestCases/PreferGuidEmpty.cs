@@ -6,7 +6,7 @@ class Compliant
     readonly Guid? ReadonlyNullableField; // Compliant
     Guid Property { get; set; } // Compliant
 
-    void GuidEmpty()
+    void Empty()
     {
         var empty = Guid.Empty; // Compliant
     }
@@ -23,7 +23,7 @@ class Compliant
         Guid? nullable = default; // Compliant, not equivalent to Guid.Empty.
         var nullableOfT = default(Guid?); // Compliant
         var instance = new NullableGuidClass(default); // Compliant
-        instance.Method(default);
+        instance.Method(default); // Compliant
     }
 
     void NotInitiated(string str)
@@ -37,8 +37,8 @@ class Compliant
 
 class NonCompliant
 {
-    Guid Field; // Noncompliant
-    readonly Guid ReadonlyField; // Noncompliant
+    Guid Field; // FN
+    readonly Guid ReadonlyField; // FN
     Guid Property { get; set; }
 
     void DefaultCtor()
@@ -56,16 +56,16 @@ class NonCompliant
         instance.Method(default); // Noncompliant
     }
 
-    void DefaultString()
+    void EmptyString()
     {
         var emptyCtor = new Guid("00000000-0000-0000-0000-000000000000"); // Noncompliant
-        var emptyParse = Guid.Parse("00000000-0000-0000-0000-000000000000"); // Noncompliant
+        var emptyParse = Guid.Parse("00000000-0000-0000-0000-000000000000"); // FN
     }
 }
 
 struct GuidAssignmentStruct
 {
-    static readonly Guid Static; // Noncompliant
+    static readonly Guid Static; // FN
     Guid Field; // Compliant, structs do not allow assigned instance values
     readonly Guid ReadOnly; // Compliant, structs do not allow assigned instance values
 }

@@ -1,45 +1,70 @@
 ﻿using System;
 
-class GuidAssignment
+class Compliant
 {
     Guid? NullableField; // Compliant
     readonly Guid? ReadonlyNullableField; // Compliant
     Guid Property { get; set; } // Compliant
 
-    void Allowed()
+    void Empty()
     {
         var empty = Guid.Empty; // Compliant
-        var rnd = Guid.NewGuid(); // Compliant
+    }
+
+    void NotEmpty()
+    {
+        var rnd = Guid.NewGuid();// Compliant
         var bytes = new Guid(new byte[0]); // Compliant
         var str = new Guid("FA97FFE7-532C-4015-8698-49D8CE4126F4"); // Compliant
+    }
+
+    void NullableDefault()
+    {
         Guid? nullable = default; // Compliant, not equivalent to Guid.Empty.
         var nullableOfT = default(Guid?); // Compliant
         var instance = new NullableGuidClass(default); // Compliant
         instance.Method(default); // Compliant
-        Guid parsed; // Compliant
-        Guid.TryParse("FA97FFE7-532C-4015-8698-49D8CE4126F4", out parsed);
     }
 
-    Guid Field; // Fixed
-    readonly Guid ReadonlyField; // Fixed
+    void NotInitiated(string str)
+    {
+        Guid parsed; // Compliant
+        Guid.TryParse(str, out parsed);
+    }
 
-    void NotAllowed()
+    void OptionalParameter(Guid id = default) { } // Compliant, default has to be a run-time constant
+}
+
+class NonCompliant
+{
+    Guid Field; // FN
+    readonly Guid ReadonlyField; // FN
+    Guid Property { get; set; }
+
+    void DefaultCtor()
     {
         var ctor = Guid.Empty; // Fixed
+    }
+
+    void DefaultInintiation()
+    {
         Guid defaultValue = Guid.Empty; // Fixed
         var defaultOfGuid = Guid.Empty; // Fixed
-        var emptyString = Guid.Empty; // Fixed
         Property = Guid.Empty; // Fixed
         var instance = new GuidClass(Guid.Empty); // Fixed
         instance.Method(Guid.Empty); // Fixed
     }
 
-    void Method(Guid? param) { }
-    void Method(Guid param) { }
+    void EmptyString()
+    {
+        var emptyCtor = Guid.Empty; // Fixed
+        var emptyParse = Guid.Parse("00000000-0000-0000-0000-000000000000"); // FN
+    }
 }
+
 struct GuidAssignmentStruct
 {
-    static readonly Guid Static; // Fixed
+    static readonly Guid Static; // FN
     Guid Field; // Compliant, structs do not allow assigned instance values
     readonly Guid ReadOnly; // Compliant, structs do not allow assigned instance values
 }
