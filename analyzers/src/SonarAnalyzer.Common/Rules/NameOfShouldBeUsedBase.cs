@@ -28,21 +28,16 @@ using SonarAnalyzer.Helpers;
 
 namespace SonarAnalyzer.Rules
 {
-    public abstract class NameOfShouldBeUsedBase<TMethodSyntax, TSyntaxKind, TThrowSyntax> : SonarDiagnosticAnalyzer
+    public abstract class NameOfShouldBeUsedBase<TMethodSyntax, TSyntaxKind, TThrowSyntax> : SonarDiagnosticAnalyzer<TSyntaxKind>
         where TMethodSyntax : SyntaxNode
         where TSyntaxKind : struct
         where TThrowSyntax : SyntaxNode
     {
         internal const string DiagnosticId = "S2302";
-        private const string MessageFormat = "Replace the string '{0}' with 'nameof({0})'.";
         // when the parameter name is inside a bigger string, we want to avoid common English words like
         // "a", "then", "he", "of", "have" etc, to avoid false positives
         private const int MinStringLength = 5;
         private readonly char[] separators = { ' ', '.', ',', ';', '!', '?' };
-
-        private readonly DiagnosticDescriptor rule;
-
-        protected abstract ILanguageFacade<TSyntaxKind> Language { get; }
 
         // Is string literal or interpolated string
         protected abstract bool IsStringLiteral(SyntaxToken t);
@@ -54,10 +49,9 @@ namespace SonarAnalyzer.Rules
 
         protected abstract bool IsArgumentExceptionCallingNameOf(SyntaxNode node, IEnumerable<string> arguments);
 
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
+        protected override string MessageFormat => "Replace the string '{0}' with 'nameof({0})'.";
 
-        protected NameOfShouldBeUsedBase() =>
-            rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, Language.RspecResources);
+        protected NameOfShouldBeUsedBase() : base(DiagnosticId) { }
 
         protected override void Initialize(SonarAnalysisContext context)
         {
@@ -107,7 +101,7 @@ namespace SonarAnalyzer.Rules
             foreach (var stringTokenAndParam in stringTokenAndParameterPairs)
             {
                 context.ReportIssue(Diagnostic.Create(
-                    descriptor: rule,
+                    descriptor: Rule,
                     location: stringTokenAndParam.Key.GetLocation(),
                     messageArgs: stringTokenAndParam.Value));
             }

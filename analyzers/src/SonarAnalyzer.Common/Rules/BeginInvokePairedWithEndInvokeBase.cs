@@ -19,29 +19,26 @@
  */
 
 using System.Collections.Generic;
-using System.Collections.Immutable;
 using System.Linq;
 using Microsoft.CodeAnalysis;
 using SonarAnalyzer.Helpers;
 
 namespace SonarAnalyzer.Rules
 {
-    public abstract class BeginInvokePairedWithEndInvokeBase<TSyntaxKind, TInvocationExpressionSyntax> : SonarDiagnosticAnalyzer
+    public abstract class BeginInvokePairedWithEndInvokeBase<TSyntaxKind, TInvocationExpressionSyntax> : SonarDiagnosticAnalyzer<TSyntaxKind>
         where TSyntaxKind : struct
         where TInvocationExpressionSyntax : SyntaxNode
     {
         protected const string DiagnosticId = "S4583";
         protected const string EndInvoke = "EndInvoke";
-        private const string MessageFormat = "Pair this \"BeginInvoke\" with an \"EndInvoke\".";
         private const string BeginInvoke = "BeginInvoke";
 
-        private readonly DiagnosticDescriptor rule;
-
-        protected abstract ILanguageFacade<TSyntaxKind> Language { get; }
         protected abstract TSyntaxKind InvocationExpressionKind { get; }
         protected abstract ISet<TSyntaxKind> ParentDeclarationKinds { get; }
         protected abstract string CallbackParameterName { get; }
         protected abstract void VisitInvocation(EndInvokeContext context);
+
+        protected override string MessageFormat => "Pair this \"BeginInvoke\" with an \"EndInvoke\".";
 
         /// <returns>
         /// - true if callback code has been resolved and does not contain "EndInvoke".
@@ -49,10 +46,7 @@ namespace SonarAnalyzer.Rules
         /// </returns>
         protected abstract bool IsInvalidCallback(SyntaxNode callbackArg, SemanticModel semanticModel);
 
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
-
-        protected BeginInvokePairedWithEndInvokeBase() =>
-            rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, Language.RspecResources);
+        protected BeginInvokePairedWithEndInvokeBase() : base(DiagnosticId) { }
 
         protected override void Initialize(SonarAnalysisContext context) =>
             context.RegisterSyntaxNodeActionInNonGenerated(Language.GeneratedCodeRecognizer, c =>
@@ -68,7 +62,7 @@ namespace SonarAnalyzer.Rules
                     && IsInvalidCallback(callbackArg, c.SemanticModel)
                     && !ParentMethodContainsEndInvoke(invocation, c.SemanticModel))
                 {
-                    c.ReportIssue(Diagnostic.Create(rule, Language.Syntax.InvocationIdentifier(invocation).Value.GetLocation()));
+                    c.ReportIssue(Diagnostic.Create(Rule, Language.Syntax.InvocationIdentifier(invocation).Value.GetLocation()));
                 }
             }, InvocationExpressionKind);
 

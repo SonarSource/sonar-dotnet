@@ -18,32 +18,27 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System.Collections.Immutable;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.Helpers;
 
 namespace SonarAnalyzer.Rules
 {
-    public abstract class IfChainWithoutElseBase<TSyntaxKind, TIfSyntax> : SonarDiagnosticAnalyzer
+    public abstract class IfChainWithoutElseBase<TSyntaxKind, TIfSyntax> : SonarDiagnosticAnalyzer<TSyntaxKind>
         where TSyntaxKind : struct
         where TIfSyntax : SyntaxNode
     {
         protected const string DiagnosticId = "S126";
-        private const string MessageFormat = "Add the missing '{0}' clause with either the appropriate action or a suitable comment as to why no action is taken.";
-        private readonly DiagnosticDescriptor rule;
 
-        protected abstract ILanguageFacade<TSyntaxKind> Language { get; }
         protected abstract TSyntaxKind SyntaxKind { get; }
         protected abstract string ElseClause { get; }
 
         protected abstract bool IsElseIfWithoutElse(TIfSyntax ifSyntax);
         protected abstract Location IssueLocation(SyntaxNodeAnalysisContext context, TIfSyntax ifSyntax);
 
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
+        protected override string MessageFormat => "Add the missing '{0}' clause with either the appropriate action or a suitable comment as to why no action is taken.";
 
-        protected IfChainWithoutElseBase() =>
-            rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, Language.RspecResources);
+        protected IfChainWithoutElseBase() : base(DiagnosticId) { }
 
         protected override void Initialize(SonarAnalysisContext context) =>
             context.RegisterSyntaxNodeActionInNonGenerated(Language.GeneratedCodeRecognizer,
@@ -55,7 +50,7 @@ namespace SonarAnalyzer.Rules
                         return;
                     }
 
-                    c.ReportIssue(Diagnostic.Create(rule, IssueLocation(c, ifNode), ElseClause));
+                    c.ReportIssue(Diagnostic.Create(Rule, IssueLocation(c, ifNode), ElseClause));
                 },
                 SyntaxKind);
     }

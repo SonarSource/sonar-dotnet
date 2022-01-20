@@ -25,12 +25,11 @@ using SonarAnalyzer.Helpers;
 
 namespace SonarAnalyzer.Rules
 {
-    public abstract class IndexOfCheckAgainstZeroBase<TSyntaxKind, TBinaryExpressionSyntax> : SonarDiagnosticAnalyzer
+    public abstract class IndexOfCheckAgainstZeroBase<TSyntaxKind, TBinaryExpressionSyntax> : SonarDiagnosticAnalyzer<TSyntaxKind>
         where TSyntaxKind : struct
         where TBinaryExpressionSyntax : SyntaxNode
     {
         protected const string DiagnosticId = "S2692";
-        private const string MessageFormat = "0 is a valid index, but this check ignores it.";
 
         private static readonly string[] TrackedMethods =
             {
@@ -45,12 +44,8 @@ namespace SonarAnalyzer.Rules
                 KnownType.System_Array,
                 KnownType.System_Collections_Generic_IList_T,
                 KnownType.System_String,
-                KnownType.System_Collections_IList
-            );
+                KnownType.System_Collections_IList);
 
-        private readonly DiagnosticDescriptor rule;
-
-        protected abstract ILanguageFacade<TSyntaxKind> Language { get; }
         protected abstract TSyntaxKind LessThanExpression { get; }
         protected abstract TSyntaxKind GreaterThanExpression { get; }
 
@@ -58,10 +53,9 @@ namespace SonarAnalyzer.Rules
         protected abstract SyntaxNode Right(TBinaryExpressionSyntax binaryExpression);
         protected abstract SyntaxToken OperatorToken(TBinaryExpressionSyntax binaryExpression);
 
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
+        protected override string MessageFormat => "0 is a valid index, but this check ignores it.";
 
-        protected IndexOfCheckAgainstZeroBase() =>
-            rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, Language.RspecResources);
+        protected IndexOfCheckAgainstZeroBase() : base(DiagnosticId) { }
 
         protected override void Initialize(SonarAnalysisContext context)
         {
@@ -72,7 +66,7 @@ namespace SonarAnalyzer.Rules
                     var lessThan = (TBinaryExpressionSyntax)c.Node;
                     if (IsInvalidComparison(Left(lessThan), Right(lessThan), c.SemanticModel))
                     {
-                        c.ReportIssue(Diagnostic.Create(rule, Left(lessThan).CreateLocation(OperatorToken(lessThan))));
+                        c.ReportIssue(Diagnostic.Create(Rule, Left(lessThan).CreateLocation(OperatorToken(lessThan))));
                     }
                 },
                 LessThanExpression);
@@ -84,7 +78,7 @@ namespace SonarAnalyzer.Rules
                     var greaterThan = (TBinaryExpressionSyntax)c.Node;
                     if (IsInvalidComparison(Right(greaterThan), Left(greaterThan), c.SemanticModel))
                     {
-                        c.ReportIssue(Diagnostic.Create(rule, OperatorToken(greaterThan).CreateLocation(Right(greaterThan))));
+                        c.ReportIssue(Diagnostic.Create(Rule, OperatorToken(greaterThan).CreateLocation(Right(greaterThan))));
                     }
                 },
                 GreaterThanExpression);

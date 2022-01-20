@@ -18,31 +18,24 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System.Collections.Immutable;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.Helpers;
 
 namespace SonarAnalyzer.Rules
 {
-    public abstract class InsecureTemporaryFilesCreationBase<TMemberAccessSyntax, TSyntaxKind> : SonarDiagnosticAnalyzer
+    public abstract class InsecureTemporaryFilesCreationBase<TMemberAccessSyntax, TSyntaxKind> : SonarDiagnosticAnalyzer<TSyntaxKind>
         where TMemberAccessSyntax : SyntaxNode
         where TSyntaxKind : struct
     {
         protected const string DiagnosticId = "S5445";
         private const string VulnerableApiName = "GetTempFileName";
-        private const string MessageFormat = "'Path.GetTempFileName()' is insecure. Use 'Path.GetRandomFileName()' instead.";
-
-        private readonly DiagnosticDescriptor rule;
-
-        protected abstract ILanguageFacade<TSyntaxKind> Language { get; }
 
         internal abstract bool IsMemberAccessOnKnownType(TMemberAccessSyntax memberAccess, string name, KnownType knownType, SemanticModel model);
 
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
+        protected override string MessageFormat => "'Path.GetTempFileName()' is insecure. Use 'Path.GetRandomFileName()' instead.";
 
-        protected InsecureTemporaryFilesCreationBase() =>
-            rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, Language.RspecResources);
+        protected InsecureTemporaryFilesCreationBase() : base(DiagnosticId) { }
 
         protected override void Initialize(SonarAnalysisContext context) =>
             context.RegisterSyntaxNodeActionInNonGenerated(Language.GeneratedCodeRecognizer, Visit, Language.SyntaxKind.SimpleMemberAccessExpression);
@@ -52,7 +45,7 @@ namespace SonarAnalyzer.Rules
             var memberAccess = (TMemberAccessSyntax)context.Node;
             if (IsMemberAccessOnKnownType(memberAccess, VulnerableApiName, KnownType.System_IO_Path, context.SemanticModel))
             {
-                context.ReportIssue(Diagnostic.Create(rule, memberAccess.GetLocation()));
+                context.ReportIssue(Diagnostic.Create(Rule, memberAccess.GetLocation()));
             }
         }
     }

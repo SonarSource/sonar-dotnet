@@ -19,25 +19,18 @@
  */
 
 using System;
-using System.Collections.Immutable;
 using Microsoft.CodeAnalysis;
 using SonarAnalyzer.Helpers;
 
 namespace SonarAnalyzer.Rules.Common
 {
-    public abstract class FlagsEnumZeroMemberBase<TSyntaxKind> : SonarDiagnosticAnalyzer
+    public abstract class FlagsEnumZeroMemberBase<TSyntaxKind> : SonarDiagnosticAnalyzer<TSyntaxKind>
         where TSyntaxKind : struct
     {
         protected const string DiagnosticId = "S2346";
-        private const string MessageFormat = "Rename '{0}' to 'None'.";
+        protected override string MessageFormat => "Rename '{0}' to 'None'.";
 
-        protected abstract ILanguageFacade<TSyntaxKind> Language { get; }
-
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
-        private readonly DiagnosticDescriptor rule;
-
-        protected FlagsEnumZeroMemberBase() =>
-            rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, Language.RspecResources);
+        protected FlagsEnumZeroMemberBase() : base(DiagnosticId) { }
 
         protected sealed override void Initialize(SonarAnalysisContext context) =>
             context.RegisterSyntaxNodeActionInNonGenerated(Language.GeneratedCodeRecognizer, c =>
@@ -47,7 +40,7 @@ namespace SonarAnalyzer.Rules.Common
                         && Language.Syntax.NodeIdentifier(zeroMember) is { } identifier
                         && identifier.ValueText != "None")
                     {
-                        c.ReportIssue(Diagnostic.Create(rule, zeroMember.GetLocation(), identifier.ValueText));
+                        c.ReportIssue(Diagnostic.Create(Rule, zeroMember.GetLocation(), identifier.ValueText));
                     }
                 },
                 Language.SyntaxKind.EnumDeclaration);

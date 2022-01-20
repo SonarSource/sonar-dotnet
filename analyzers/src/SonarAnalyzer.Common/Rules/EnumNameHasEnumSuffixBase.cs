@@ -26,21 +26,15 @@ using SonarAnalyzer.Helpers;
 
 namespace SonarAnalyzer.Rules
 {
-    public abstract class EnumNameHasEnumSuffixBase<TSyntaxKind> : SonarDiagnosticAnalyzer
+    public abstract class EnumNameHasEnumSuffixBase<TSyntaxKind> : SonarDiagnosticAnalyzer<TSyntaxKind>
         where TSyntaxKind : struct
     {
         protected const string DiagnosticId = "S2344";
-        private const string MessageFormat = "Rename this enumeration to remove the '{0}' suffix.";
-
         private readonly IEnumerable<string> nameEndings = ImmutableArray.Create("enum", "flags");
 
-        protected abstract ILanguageFacade<TSyntaxKind> Language { get; }
+        protected override string MessageFormat => "Rename this enumeration to remove the '{0}' suffix.";
 
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
-        private readonly DiagnosticDescriptor rule;
-
-        protected EnumNameHasEnumSuffixBase() =>
-            rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, Language.RspecResources);
+        protected EnumNameHasEnumSuffixBase() : base(DiagnosticId) { }
 
         protected sealed override void Initialize(SonarAnalysisContext context) =>
             context.RegisterSyntaxNodeActionInNonGenerated(Language.GeneratedCodeRecognizer, c =>
@@ -48,7 +42,7 @@ namespace SonarAnalyzer.Rules
                     if (Language.Syntax.NodeIdentifier(c.Node) is { } identifier
                         && nameEndings.FirstOrDefault(ending => identifier.ValueText.EndsWith(ending, System.StringComparison.OrdinalIgnoreCase)) is { } nameEnding)
                     {
-                        c.ReportIssue(Diagnostic.Create(rule, identifier.GetLocation(), identifier.ValueText.Substring(identifier.ValueText.Length - nameEnding.Length)));
+                        c.ReportIssue(Diagnostic.Create(Rule, identifier.GetLocation(), identifier.ValueText.Substring(identifier.ValueText.Length - nameEnding.Length)));
                     }
                 },
                 Language.SyntaxKind.EnumDeclaration);

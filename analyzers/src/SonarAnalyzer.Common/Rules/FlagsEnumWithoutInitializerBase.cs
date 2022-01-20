@@ -18,36 +18,31 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System.Collections.Immutable;
 using System.Linq;
 using Microsoft.CodeAnalysis;
 using SonarAnalyzer.Helpers;
 
 namespace SonarAnalyzer.Rules.Common
 {
-    public abstract class FlagsEnumWithoutInitializerBase<TSyntaxKind, TEnumMemberDeclarationSyntax> : SonarDiagnosticAnalyzer
+    public abstract class FlagsEnumWithoutInitializerBase<TSyntaxKind, TEnumMemberDeclarationSyntax> : SonarDiagnosticAnalyzer<TSyntaxKind>
         where TSyntaxKind : struct
         where TEnumMemberDeclarationSyntax : SyntaxNode
     {
         protected const string DiagnosticId = "S2345";
-        private const string MessageFormat = "Initialize all the members of this 'Flags' enumeration.";
         private const int AllowedEmptyMemberCount = 3;
 
-        protected abstract ILanguageFacade<TSyntaxKind> Language { get; }
         protected abstract bool IsInitialized(TEnumMemberDeclarationSyntax member);
 
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
-        private readonly DiagnosticDescriptor rule;
+        protected override string MessageFormat => "Initialize all the members of this 'Flags' enumeration.";
 
-        protected FlagsEnumWithoutInitializerBase() =>
-            rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, Language.RspecResources);
+        protected FlagsEnumWithoutInitializerBase() : base(DiagnosticId) { }
 
         protected sealed override void Initialize(SonarAnalysisContext context) =>
             context.RegisterSyntaxNodeActionInNonGenerated(Language.GeneratedCodeRecognizer, c =>
                 {
                     if (c.Node.HasFlagsAttribute(c.SemanticModel) && !AreAllRequiredMembersInitialized(c.Node) && Language.Syntax.NodeIdentifier(c.Node) is { } identifier)
                     {
-                        c.ReportIssue(Diagnostic.Create(rule, identifier.GetLocation()));
+                        c.ReportIssue(Diagnostic.Create(Rule, identifier.GetLocation()));
                     }
                 },
                 Language.SyntaxKind.EnumDeclaration);

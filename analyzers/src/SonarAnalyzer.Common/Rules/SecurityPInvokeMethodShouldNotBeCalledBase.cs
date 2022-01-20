@@ -20,7 +20,6 @@
 
 using System;
 using System.Collections.Generic;
-using System.Collections.Immutable;
 using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Diagnostics;
@@ -28,22 +27,17 @@ using SonarAnalyzer.Helpers;
 
 namespace SonarAnalyzer.Rules
 {
-    public abstract class SecurityPInvokeMethodShouldNotBeCalledBase<TSyntaxKind, TInvocationExpressionSyntax> : SonarDiagnosticAnalyzer
+    public abstract class SecurityPInvokeMethodShouldNotBeCalledBase<TSyntaxKind, TInvocationExpressionSyntax> : SonarDiagnosticAnalyzer<TSyntaxKind>
         where TSyntaxKind : struct
         where TInvocationExpressionSyntax : SyntaxNode
     {
         protected const string DiagnosticId = "S3884";
-        protected const string MessageFormat = "Refactor the code to remove this use of '{0}'.";
         protected const string InteropName = "ole32";
         protected const string InteropDllName = InteropName + ".dll";
 
-        protected abstract ILanguageFacade<TSyntaxKind> Language { get; }
-
         protected abstract IMethodSymbol MethodSymbolForInvalidInvocation(SyntaxNode syntaxNode, SemanticModel semanticModel);
 
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(Rule);
-
-        protected DiagnosticDescriptor Rule { get; }
+        protected override string MessageFormat => "Refactor the code to remove this use of '{0}'.";
 
         protected ISet<string> InvalidMethods { get; } = new HashSet<string>
         {
@@ -51,8 +45,7 @@ namespace SonarAnalyzer.Rules
             "CoInitializeSecurity"
         };
 
-        protected SecurityPInvokeMethodShouldNotBeCalledBase() =>
-            Rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, Language.RspecResources);
+        protected SecurityPInvokeMethodShouldNotBeCalledBase() : base(DiagnosticId) { }
 
         protected override void Initialize(SonarAnalysisContext context) =>
             context.RegisterSyntaxNodeActionInNonGenerated(Language.GeneratedCodeRecognizer, CheckForIssue, Language.SyntaxKind.InvocationExpression);

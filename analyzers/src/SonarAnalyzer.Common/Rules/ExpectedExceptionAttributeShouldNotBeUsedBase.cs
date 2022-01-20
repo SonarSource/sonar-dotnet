@@ -18,28 +18,22 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System.Collections.Immutable;
 using System.Linq;
 using Microsoft.CodeAnalysis;
 using SonarAnalyzer.Helpers;
 
 namespace SonarAnalyzer.Rules
 {
-    public abstract class ExpectedExceptionAttributeShouldNotBeUsedBase<TSyntaxKind> : SonarDiagnosticAnalyzer
+    public abstract class ExpectedExceptionAttributeShouldNotBeUsedBase<TSyntaxKind> : SonarDiagnosticAnalyzer<TSyntaxKind>
         where TSyntaxKind : struct
     {
         internal const string DiagnosticId = "S3431";
-        private const string MessageFormat = "Replace the 'ExpectedException' attribute with a throw assertion or a try/catch block.";
-
-        private readonly DiagnosticDescriptor rule;
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
-
-        protected abstract ILanguageFacade<TSyntaxKind> Language { get; }
 
         protected abstract bool HasMultiLineBody(SyntaxNode syntax);
 
-        protected ExpectedExceptionAttributeShouldNotBeUsedBase() =>
-            rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, Language.RspecResources);
+        protected override string MessageFormat => "Replace the 'ExpectedException' attribute with a throw assertion or a try/catch block.";
+
+        protected ExpectedExceptionAttributeShouldNotBeUsedBase() : base(DiagnosticId) { }
 
         protected override void Initialize(SonarAnalysisContext context) =>
             context.RegisterSyntaxNodeActionInNonGenerated(Language.GeneratedCodeRecognizer, c =>
@@ -48,7 +42,7 @@ namespace SonarAnalyzer.Rules
                     && c.SemanticModel.GetDeclaredSymbol(c.Node) is { } methodSymbol
                     && methodSymbol.GetAttributes(UnitTestHelper.KnownExpectedExceptionAttributes).FirstOrDefault() is { } attribute)
                 {
-                    c.ReportIssue(Diagnostic.Create(rule, attribute.ApplicationSyntaxReference.GetSyntax().GetLocation()));
+                    c.ReportIssue(Diagnostic.Create(Rule, attribute.ApplicationSyntaxReference.GetSyntax().GetLocation()));
                 }
             },
             Language.SyntaxKind.MethodDeclarations);

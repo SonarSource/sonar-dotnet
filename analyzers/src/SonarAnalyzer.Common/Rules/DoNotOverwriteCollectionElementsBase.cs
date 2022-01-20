@@ -20,7 +20,6 @@
 
 using System;
 using System.Collections.Generic;
-using System.Collections.Immutable;
 using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Diagnostics;
@@ -28,17 +27,11 @@ using SonarAnalyzer.Helpers;
 
 namespace SonarAnalyzer.Rules
 {
-    public abstract class DoNotOverwriteCollectionElementsBase<TSyntaxKind, TStatementSyntax> : SonarDiagnosticAnalyzer
+    public abstract class DoNotOverwriteCollectionElementsBase<TSyntaxKind, TStatementSyntax> : SonarDiagnosticAnalyzer<TSyntaxKind>
         where TSyntaxKind : struct
         where TStatementSyntax : SyntaxNode
     {
         protected const string DiagnosticId = "S4143";
-        private const string MessageFormat = "Verify this is the index/key that was intended; " +
-            "a value has already been set for it.";
-
-        private readonly DiagnosticDescriptor rule;
-
-        protected abstract ILanguageFacade<TSyntaxKind> Language { get; }
 
         /// <summary>
         /// Returns the index or key from the provided InvocationExpression or SimpleAssignmentExpression.
@@ -59,10 +52,10 @@ namespace SonarAnalyzer.Rules
         /// </summary>
         protected abstract bool IsIdentifierOrLiteral(SyntaxNode syntaxNode);
 
-        public sealed override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
+        protected override string MessageFormat => "Verify this is the index/key that was intended; " +
+            "a value has already been set for it.";
 
-        protected DoNotOverwriteCollectionElementsBase() =>
-            rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, Language.RspecResources);
+        protected DoNotOverwriteCollectionElementsBase() : base(DiagnosticId) { }
 
         protected void AnalysisAction(SyntaxNodeAnalysisContext context)
         {
@@ -84,7 +77,7 @@ namespace SonarAnalyzer.Rules
 
             if (previousSet != null)
             {
-                context.ReportIssue(Diagnostic.Create(rule, context.Node.GetLocation(), additionalLocations: new[] { previousSet.GetLocation() }));
+                context.ReportIssue(Diagnostic.Create(Rule, context.Node.GetLocation(), additionalLocations: new[] { previousSet.GetLocation() }));
             }
         }
 

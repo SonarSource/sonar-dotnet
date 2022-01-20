@@ -19,7 +19,6 @@
  */
 
 using System.Collections.Generic;
-using System.Collections.Immutable;
 using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Diagnostics;
@@ -27,24 +26,19 @@ using SonarAnalyzer.Helpers;
 
 namespace SonarAnalyzer.Rules
 {
-    public abstract class UnconditionalJumpStatementBase<TStatementSyntax, TSyntaxKind> : SonarDiagnosticAnalyzer
+    public abstract class UnconditionalJumpStatementBase<TStatementSyntax, TSyntaxKind> : SonarDiagnosticAnalyzer<TSyntaxKind>
         where TStatementSyntax : SyntaxNode
         where TSyntaxKind : struct
     {
         protected const string DiagnosticId = "S1751";
-        private const string MessageFormat = "Refactor the containing loop to do more than one iteration.";
 
-        private readonly DiagnosticDescriptor rule;
-
-        protected abstract ILanguageFacade<TSyntaxKind> Language { get; }
         protected abstract ISet<TSyntaxKind> LoopStatements { get; }
 
         protected abstract LoopWalkerBase<TStatementSyntax, TSyntaxKind> GetWalker(SyntaxNodeAnalysisContext context);
 
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
+        protected override string MessageFormat => "Refactor the containing loop to do more than one iteration.";
 
-        protected UnconditionalJumpStatementBase() =>
-            rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, Language.RspecResources);
+        protected UnconditionalJumpStatementBase() : base(DiagnosticId) { }
 
         protected override void Initialize(SonarAnalysisContext context) =>
             context.RegisterSyntaxNodeActionInNonGenerated(Language.GeneratedCodeRecognizer,
@@ -54,7 +48,7 @@ namespace SonarAnalyzer.Rules
                     walker.Visit();
                     foreach (var node in walker.GetRuleViolations())
                     {
-                        c.ReportIssue(Diagnostic.Create(SupportedDiagnostics[0], node.GetLocation()));
+                        c.ReportIssue(Diagnostic.Create(Rule, node.GetLocation()));
                     }
                 },
                 LoopStatements.ToArray());

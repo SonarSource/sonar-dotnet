@@ -38,7 +38,7 @@ namespace SonarAnalyzer.Rules
         TVariableSyntax,
         TLambdaSyntax,
         TMemberAccessSyntax
-        > : SonarDiagnosticAnalyzer
+        > : SonarDiagnosticAnalyzer<TSyntaxKind>
         where TSyntaxKind : struct
         where TArgumentSyntax : SyntaxNode
         where TExpressionSyntax : SyntaxNode
@@ -51,12 +51,8 @@ namespace SonarAnalyzer.Rules
         where TMemberAccessSyntax : SyntaxNode
     {
         protected const string DiagnosticId = "S4830";
-        private const string MessageFormat = "Enable server certificate validation on this SSL/TLS connection";
-        private readonly DiagnosticDescriptor rule;
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
 
         internal /* for testing */ abstract MethodParameterLookupBase<TArgumentSyntax> CreateParameterLookup(SyntaxNode argumentListNode, IMethodSymbol method);
-        protected abstract ILanguageFacade<TSyntaxKind> Language { get; }
         protected abstract TSyntaxKind[] MethodDeclarationKinds { get; }
         protected abstract Location ExpressionLocation(SyntaxNode expression);
         protected abstract void SplitAssignment(TAssignmentExpressionSyntax assignment, out TIdentifierNameSyntax leftIdentifier, out TExpressionSyntax right);
@@ -70,10 +66,9 @@ namespace SonarAnalyzer.Rules
         protected abstract SyntaxNode SyntaxFromReference(SyntaxReference reference);
         private protected abstract KnownType GenericDelegateType();
 
-        protected CertificateValidationCheckBase()
-        {
-            rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, Language.RspecResources);
-        }
+        protected override string MessageFormat => "Enable server certificate validation on this SSL/TLS connection";
+
+        protected CertificateValidationCheckBase() : base(DiagnosticId) { }
 
         protected void CheckAssignmentSyntax(SyntaxNodeAnalysisContext c)
         {
@@ -163,7 +158,7 @@ namespace SonarAnalyzer.Rules
             if (!locations.IsEmpty)
             {
                 // Report both, assignment as well as all implementation occurrences
-                c.Context.ReportIssue(Diagnostic.Create(rule, primaryLocation, locations));
+                c.Context.ReportIssue(Diagnostic.Create(Rule, primaryLocation, locations));
             }
         }
 

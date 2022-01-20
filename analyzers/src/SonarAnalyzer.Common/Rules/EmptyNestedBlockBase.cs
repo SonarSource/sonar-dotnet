@@ -19,29 +19,23 @@
  */
 
 using System.Collections.Generic;
-using System.Collections.Immutable;
 using Microsoft.CodeAnalysis;
 using SonarAnalyzer.Helpers;
 
 namespace SonarAnalyzer.Rules
 {
-    public abstract class EmptyNestedBlockBase<TSyntaxKind> : SonarDiagnosticAnalyzer
+    public abstract class EmptyNestedBlockBase<TSyntaxKind> : SonarDiagnosticAnalyzer<TSyntaxKind>
         where TSyntaxKind : struct
     {
         protected const string DiagnosticId = "S108";
-        private const string MessageFormat = "Either remove or fill this block of code.";
 
-        private readonly DiagnosticDescriptor rule;
-
-        protected abstract ILanguageFacade<TSyntaxKind> Language { get; }
         protected abstract TSyntaxKind[] SyntaxKinds { get; }
 
         protected abstract IEnumerable<SyntaxNode> EmptyBlocks(SyntaxNode node);
 
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
+        protected override string MessageFormat => "Either remove or fill this block of code.";
 
-        protected EmptyNestedBlockBase() =>
-            rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, Language.RspecResources);
+        protected EmptyNestedBlockBase() : base(DiagnosticId) { }
 
         protected override void Initialize(SonarAnalysisContext context) =>
             context.RegisterSyntaxNodeActionInNonGenerated(
@@ -50,7 +44,7 @@ namespace SonarAnalyzer.Rules
                 {
                     foreach (var node in EmptyBlocks(c.Node))
                     {
-                        c.ReportIssue(Diagnostic.Create(rule, node.GetLocation()));
+                        c.ReportIssue(Diagnostic.Create(Rule, node.GetLocation()));
                     }
                 },
                 SyntaxKinds);

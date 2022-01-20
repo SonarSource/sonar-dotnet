@@ -18,29 +18,24 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System.Collections.Immutable;
 using Microsoft.CodeAnalysis;
 using SonarAnalyzer.Helpers;
 
 namespace SonarAnalyzer.Rules.Common
 {
-    public abstract class PropertyWriteOnlyBase<TSyntaxKind, TPropertyDeclaration> : SonarDiagnosticAnalyzer
+    public abstract class PropertyWriteOnlyBase<TSyntaxKind, TPropertyDeclaration> : SonarDiagnosticAnalyzer<TSyntaxKind>
         where TSyntaxKind : struct
         where TPropertyDeclaration : SyntaxNode
     {
         protected const string DiagnosticId = "S2376";
-        private const string MessageFormat = "Provide a getter for '{0}' or replace the property with a 'Set{0}' method.";
-        private readonly DiagnosticDescriptor rule;
 
-        protected abstract ILanguageFacade<TSyntaxKind> Language { get; }
         protected abstract TSyntaxKind SyntaxKind { get; }
 
         protected abstract bool IsWriteOnlyProperty(TPropertyDeclaration prop);
 
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
+        protected override string MessageFormat => "Provide a getter for '{0}' or replace the property with a 'Set{0}' method.";
 
-        protected PropertyWriteOnlyBase() =>
-            rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, Language.RspecResources);
+        protected PropertyWriteOnlyBase() : base(DiagnosticId) { }
 
         protected sealed override void Initialize(SonarAnalysisContext context) =>
             context.RegisterSyntaxNodeActionInNonGenerated(
