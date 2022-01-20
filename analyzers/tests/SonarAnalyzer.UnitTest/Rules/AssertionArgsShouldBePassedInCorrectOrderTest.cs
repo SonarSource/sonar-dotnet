@@ -35,7 +35,8 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void AssertionArgsShouldBePassedInCorrectOrder_MsTest(string testFwkVersion) =>
             new VerifierBuilder<AssertionArgsShouldBePassedInCorrectOrder>()
                 .AddPaths("AssertionArgsShouldBePassedInCorrectOrder.MsTest.cs")
-                .AddReferences(NuGetMetadataReference.MSTestTestFramework(testFwkVersion));
+                .AddReferences(NuGetMetadataReference.MSTestTestFramework(testFwkVersion))
+                .Verify();
 
         [DataTestMethod]
         [DataRow("2.5.7.10213")]
@@ -43,7 +44,8 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void AssertionArgsShouldBePassedInCorrectOrder_NUnit(string testFwkVersion) =>
             new VerifierBuilder<AssertionArgsShouldBePassedInCorrectOrder>()
                 .AddPaths("AssertionArgsShouldBePassedInCorrectOrder.NUnit.cs")
-                .AddReferences(NuGetMetadataReference.NUnit(testFwkVersion));
+                .AddReferences(NuGetMetadataReference.NUnit(testFwkVersion))
+                .Verify();
 
         [DataTestMethod]
         [DataRow("2.0.0")]
@@ -52,6 +54,7 @@ namespace SonarAnalyzer.UnitTest.Rules
             new VerifierBuilder<AssertionArgsShouldBePassedInCorrectOrder>()
                 .AddPaths("AssertionArgsShouldBePassedInCorrectOrder.Xunit.cs")
                 .AddReferences(NuGetMetadataReference.XunitFramework(testFwkVersion)
-                                .Concat(NetStandardMetadataReference.Netstandard));
+                                .Concat(NetStandardMetadataReference.Netstandard))
+                .Verify();
     }
 }
