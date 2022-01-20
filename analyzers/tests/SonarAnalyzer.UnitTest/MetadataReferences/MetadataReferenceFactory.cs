@@ -33,16 +33,13 @@ namespace SonarAnalyzer.UnitTest.MetadataReferences
         public static IEnumerable<MetadataReference> Create(string assemblyName) =>
             ImmutableArray.Create(CreateReference(assemblyName));
 
-        public static IEnumerable<MetadataReference> Create(Type type) =>
-            ImmutableArray.Create(CreateReference(type));
+        public static MetadataReference Create(Type type) =>
+            MetadataReference.CreateFromFile(type.Assembly.Location);
 
         public static MetadataReference CreateReference(string assemblyName) =>
             MetadataReference.CreateFromFile(Path.Combine(SystemAssembliesFolder, assemblyName));
 
         public static MetadataReference CreateReference(string assemblyName, string subFolder) =>
             MetadataReference.CreateFromFile(Path.Combine(SystemAssembliesFolder, subFolder, assemblyName));
-
-        private static MetadataReference CreateReference(Type type) =>
-            MetadataReference.CreateFromFile(type.Assembly.Location);
     }
 }

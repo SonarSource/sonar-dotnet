@@ -21,6 +21,7 @@
 #if NET
 
 using System.Collections.Generic;
+using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.Common;
@@ -57,10 +58,10 @@ namespace SonarAnalyzer.UnitTest.Rules
         internal static IEnumerable<MetadataReference> AdditionalReferences() =>
             new[]
             {
-                CoreMetadataReference.MicrosoftAspNetCoreMvc,
-                CoreMetadataReference.MicrosoftAspNetCoreMvcAbstractions,
-                CoreMetadataReference.MicrosoftAspNetCoreMvcCore,
-                CoreMetadataReference.MicrosoftAspNetCoreMvcViewFeatures,
+                AspNetCoreMetadataReference.MicrosoftAspNetCoreMvc,
+                AspNetCoreMetadataReference.MicrosoftAspNetCoreMvcAbstractions,
+                AspNetCoreMetadataReference.MicrosoftAspNetCoreMvcCore,
+                AspNetCoreMetadataReference.MicrosoftAspNetCoreMvcViewFeatures,
                 CoreMetadataReference.MicrosoftExtensionsDependencyInjectionAbstractions
             };
     }

@@ -20,14 +20,15 @@
 
 #if NET
 
+using Microsoft.CodeAnalysis;
 using static SonarAnalyzer.UnitTest.MetadataReferences.MetadataReferenceFactory;
-using References = System.Collections.Generic.IEnumerable<Microsoft.CodeAnalysis.MetadataReference>;
 
 namespace SonarAnalyzer.UnitTest.MetadataReferences
 {
     internal static class WindowsFormsMetadataReference
     {
-        internal static References SystemWindowsForms { get; } = Create(typeof(System.Windows.Forms.Application));
+        internal static MetadataReference SystemWindowsForms { get; } = Create(typeof(System.Windows.Forms.Application));
     }
 }
+
 #endif
