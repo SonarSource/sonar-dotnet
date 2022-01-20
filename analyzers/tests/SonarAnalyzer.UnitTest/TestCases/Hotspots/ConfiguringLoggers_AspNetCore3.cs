@@ -40,7 +40,7 @@ namespace MvcApp
         {
             services.AddLogging(logging => // Noncompliant {{Make sure that this logger's configuration is safe.}}
             {
-                logging.AddConsole(); // Noncompliant - TO-CHECK
+                logging.AddConsole(); // Noncompliant
                 // ...
             });
             return services;
@@ -56,11 +56,12 @@ namespace MvcApp
             AzureBlobLoggerOptions azureSettings = null;
             EventLogSettings eventLogSettings = null;
 
-            using (var loggerFactory = LoggerFactory.Create(builder => builder.AddAzureWebAppDiagnostics() // Noncompliant
-                                                                              .AddConsole()// Noncompliant
-                                                                              .AddDebug() // Noncompliant
-                                                                              .AddEventLog()// Noncompliant
-                                                                              .AddEventSourceLogger())) // Noncompliant
+            using (var loggerFactory = LoggerFactory.Create(builder => builder.AddAzureWebAppDiagnostics() // Noncompliant [1,2,3,4,5,6]
+                                                                              .AddConsole()                // Every invocation in this chain is noncompliant
+                                                                              .AddConsole()
+                                                                              .AddDebug()
+                                                                              .AddEventLog()
+                                                                              .AddEventSourceLogger()))
             { }
 
             IEnumerable<ILoggerProvider> providers = null;
@@ -84,7 +85,6 @@ namespace MvcApp
             // Calling extension methods as static methods
             WebHostBuilderExtensions.ConfigureLogging(webHostBuilder, (Action<ILoggingBuilder>)null);            // Noncompliant
             LoggingServiceCollectionExtensions.AddLogging(serviceDescriptors, (Action<ILoggingBuilder>)null);    // Noncompliant
-            factory.AddEventSourceLogger();  // Noncompliant
         }
     }
 
@@ -96,16 +96,5 @@ namespace MvcApp
         public void AddProvider(ILoggerProvider provider) { /* no-op */ }
         public ILogger CreateLogger(string categoryName) => null;
         public void Dispose() { /* no-op */ }
-    }
-}
-
-// HACK - the tests are not currently built againts NET Core 2.0 so one of the
-// methods we want to test is not available. Instead, we'll define a type with
-// the expected name and method signature
-namespace Microsoft.Extensions.Logging
-{
-    internal static class EventSourceLoggerFactoryExtensions
-    {
-        public static void AddEventSourceLogger(this ILoggerFactory factory) { /* no-op */ }
     }
 }
