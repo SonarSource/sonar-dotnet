@@ -22,6 +22,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Linq;
+using Google.Protobuf;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.Helpers;
@@ -50,6 +51,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework
         public OutputKind OutputKind { get; init; } = OutputKind.DynamicallyLinkedLibrary;
         public ImmutableArray<string> Paths { get; init; } = ImmutableArray<string>.Empty;
         public ImmutableArray<ParseOptions> ParseOptions { get; init; } = ImmutableArray<ParseOptions>.Empty;
+        public string ProtobufPath { get; init; }
         public ImmutableArray<MetadataReference> References { get; init; } = ImmutableArray<MetadataReference>.Empty;
         public ImmutableArray<string> Snippets { get; init; } = ImmutableArray<string>.Empty;
         public string SonarProjectConfigPath { get; init; }
@@ -71,6 +73,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework
             OutputKind = original.OutputKind;
             Paths = original.Paths;
             ParseOptions = original.ParseOptions;
+            ProtobufPath = original.ProtobufPath;
             References = original.References;
             Snippets = original.Snippets;
             SonarProjectConfigPath = original.SonarProjectConfigPath;
@@ -122,6 +125,9 @@ namespace SonarAnalyzer.UnitTest.TestFramework
         public VerifierBuilder WithCodeFixTitle(string codeFixTitle) =>
             new(this) { CodeFixTitle = codeFixTitle };
 
+        public VerifierBuilder WithConcurrentAnalysis(bool concurrentAnalysis) =>
+            new(this) { ConcurrentAnalysis = concurrentAnalysis };
+
         public VerifierBuilder WithErrorBehavior(CompilationErrorBehavior errorBehavior) =>
             new(this) { ErrorBehavior = errorBehavior };
 
@@ -134,14 +140,14 @@ namespace SonarAnalyzer.UnitTest.TestFramework
         public VerifierBuilder WithOnlyDiagnostics(params DiagnosticDescriptor[] onlyDiagnostics) =>
             new(this) { OnlyDiagnostics = onlyDiagnostics.ToImmutableArray() };
 
-        public VerifierBuilder WithConcurrentAnalysis(bool concurrentAnalysis) =>
-            new(this) { ConcurrentAnalysis = concurrentAnalysis };
-
         public VerifierBuilder WithOptions(ImmutableArray<ParseOptions> parseOptions) =>
             new(this) { ParseOptions = parseOptions };
 
         public VerifierBuilder WithOutputKind(OutputKind outputKind) =>
             new(this) { OutputKind = outputKind };
+
+        public VerifierBuilder WithProtobufPath(string protobufPath) =>
+            new(this) { ProtobufPath = protobufPath };
 
         public VerifierBuilder WithSonarProjectConfigPath(string sonarProjectConfigPath) =>
             new(this) { SonarProjectConfigPath = sonarProjectConfigPath };
@@ -182,5 +188,12 @@ namespace SonarAnalyzer.UnitTest.TestFramework
 
         public static void VerifyCodeFix(this VerifierBuilder builder) =>
             builder.Build().VerifyCodeFix();
+
+        public static void VerifyUtilityAnalyzerProducesEmptyProtobuf(this VerifierBuilder builder) =>
+            builder.Build().VerifyUtilityAnalyzerProducesEmptyProtobuf();
+
+        public static void VerifyUtilityAnalyzer<TMessage>(this VerifierBuilder builder, Action<IReadOnlyList<TMessage>> verifyProtobuf)
+            where TMessage : IMessage<TMessage>, new() =>
+            builder.Build().VerifyUtilityAnalyzer(verifyProtobuf);
     }
 }

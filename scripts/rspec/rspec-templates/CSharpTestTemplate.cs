@@ -28,8 +28,7 @@ namespace SonarAnalyzer.UnitTest.Rules
     public class $DiagnosticClassName$Test
     {
         [TestMethod]
-        [TestCategory("Rule")]
         public void $DiagnosticClassName$_CS() =>
-            Verifier.VerifyAnalyzer(@"TestCases\$DiagnosticClassName$.cs", new $DiagnosticClassName$());
+            new VerifierBuilder<$DiagnosticClassName$>().AddPaths("$DiagnosticClassName$.cs").Verify();
     }
 }

@@ -25,11 +25,14 @@ using System.Linq;
 using System.Reflection;
 using System.Text;
 using System.Text.RegularExpressions;
+using FluentAssertions;
+using Google.Protobuf;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CodeFixes;
 using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
+using SonarAnalyzer.Rules;
 using SonarAnalyzer.UnitTest.Helpers;
 
 namespace SonarAnalyzer.UnitTest.TestFramework
@@ -72,6 +75,14 @@ namespace SonarAnalyzer.UnitTest.TestFramework
             {
                 ValidateExtension(path);
             }
+            if (builder.ProtobufPath is not null)
+            {
+                ValidateSingleAnalyzer(nameof(builder.ProtobufPath));
+                if (analyzers.Single() is not UtilityAnalyzerBase)
+                {
+                    throw new ArgumentException($"{analyzers.Single().GetType().Name} does not inherit from {nameof(UtilityAnalyzerBase)}.");
+                }
+            }
             if (builder.CodeFix is not null)
             {
                 codeFix = builder.CodeFix();
@@ -81,7 +92,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework
 
         public void Verify()    // This should never has any arguments
         {
-            foreach (var compilation in Compile())
+            foreach (var compilation in Compile(builder.ConcurrentAnalysis))
             {
                 DiagnosticVerifier.Verify(compilation, analyzers, builder.ErrorBehavior, builder.SonarProjectConfigPath, onlyDiagnosticIds);
             }
@@ -89,7 +100,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework
 
         public void VerifyNoIssueReported()    // This should never has any arguments
         {
-            foreach (var compilation in Compile())
+            foreach (var compilation in Compile(builder.ConcurrentAnalysis))
             {
                 foreach (var analyzer in analyzers)
                 {
@@ -114,8 +125,37 @@ namespace SonarAnalyzer.UnitTest.TestFramework
             }
         }
 
-        private IEnumerable<Compilation> Compile() =>
-            CreateProject(builder.ConcurrentAnalysis).Solution.Compile(builder.ParseOptions.ToArray());
+        public void VerifyUtilityAnalyzerProducesEmptyProtobuf()     // This should never has any arguments
+        {
+            foreach (var compilation in Compile(false))
+            {
+                DiagnosticVerifier.Verify(compilation, analyzers.Single(), CompilationErrorBehavior.Default);
+                new FileInfo(builder.ProtobufPath).Length.Should().Be(0, "protobuf file should be empty");
+            }
+        }
+
+        public void VerifyUtilityAnalyzer<TMessage>(Action<IReadOnlyList<TMessage>> verifyProtobuf)
+            where TMessage : IMessage<TMessage>, new()
+        {
+            foreach (var compilation in Compile(false))
+            {
+                DiagnosticVerifier.Verify(compilation, analyzers.Single(), builder.ErrorBehavior, builder.SonarProjectConfigPath);
+                verifyProtobuf(ReadProtobuf().ToList());
+            }
+
+            IEnumerable<TMessage> ReadProtobuf()
+            {
+                using var input = File.OpenRead(builder.ProtobufPath);
+                var parser = new MessageParser<TMessage>(() => new TMessage());
+                while (input.Position < input.Length)
+                {
+                    yield return parser.ParseDelimitedFrom(input);
+                }
+            }
+        }
+
+        private IEnumerable<Compilation> Compile(bool concurrentAnalysis) =>
+            CreateProject(concurrentAnalysis).Solution.Compile(builder.ParseOptions.ToArray());
 
         private ProjectBuilder CreateProject(bool concurrentAnalysis)
         {
@@ -156,6 +196,14 @@ namespace SonarAnalyzer.UnitTest.TestFramework
         private string TestCasePath(string fileName) =>
             Path.GetFullPath(builder.BasePath == null ? Path.Combine(TestCases, fileName) : Path.Combine(TestCases, builder.BasePath, fileName));
 
+        private void ValidateSingleAnalyzer(string propertyName)
+        {
+            if (builder.Analyzers.Length != 1)
+            {
+                throw new ArgumentException($"When {propertyName} is set, {nameof(builder.Analyzers)} must contain only 1 analyzer, but {analyzers.Length} were found.");
+            }
+        }
+
         private void ValidateExtension(string path)
         {
             if (!Path.GetExtension(path).Equals(language.FileExtension, StringComparison.OrdinalIgnoreCase))
@@ -167,10 +215,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework
         private void ValidateCodeFix()
         {
             _ = builder.CodeFixedPath ?? throw new ArgumentException($"{nameof(builder.CodeFixedPath)} was not set.");
-            if (builder.Analyzers.Length != 1)
-            {
-                throw new ArgumentException($"{nameof(builder.Analyzers)} must contain only 1 analyzer, but {analyzers.Length} were found.");
-            }
+            ValidateSingleAnalyzer(nameof(builder.CodeFix));
             if (builder.Paths.Length != 1)
             {
                 throw new ArgumentException($"{nameof(builder.Paths)} must contain only 1 file, but {builder.Paths.Length} were found.");

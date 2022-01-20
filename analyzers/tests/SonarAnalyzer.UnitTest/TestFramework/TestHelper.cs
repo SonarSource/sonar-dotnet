@@ -201,10 +201,16 @@ End Class", AnalyzerLanguage.VisualBasic);
             return filestoAnalyzePath;
         }
 
-        public static string WriteFile(TestContext context, string fileName, string content = null)
+        public static string TestPath(TestContext context, string fileName)
         {
             var path = Path.Combine(context.TestDir, context.FullyQualifiedTestClassName.Replace("SonarAnalyzer.UnitTest.", null), context.TestName, fileName);
             Directory.CreateDirectory(Path.GetDirectoryName(path));
+            return path;
+        }
+
+        public static string WriteFile(TestContext context, string fileName, string content = null)
+        {
+            var path = TestPath(context, fileName);
             File.WriteAllText(path, content);
             return path;
         }

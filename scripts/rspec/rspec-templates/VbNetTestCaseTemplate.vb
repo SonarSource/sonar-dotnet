@@ -1,13 +1,7 @@
-﻿Imports System
+﻿Public Class Program
 
-Namespace Tests.TestCases
+    Public Sub Test()
 
-    Class Program
+    End Sub
 
-        Public Sub Test()
-
-        End Sub
-
-    End Class
-
-End Namespace
+End Class

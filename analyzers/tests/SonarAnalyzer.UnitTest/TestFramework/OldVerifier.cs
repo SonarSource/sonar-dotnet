@@ -21,13 +21,10 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
-using System.IO;
 using System.Linq;
-using FluentAssertions;
 using Google.Protobuf;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Diagnostics;
-using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
 using SonarAnalyzer.Rules;
 
@@ -40,20 +37,9 @@ namespace SonarAnalyzer.UnitTest.TestFramework
         Default = FailTest
     }
 
+    [Obsolete("Use VerifierBuilder instead.")]
     public static class OldVerifier
     {
-        public static void VerifyNoExceptionThrown(string path, DiagnosticAnalyzer[] diagnosticAnalyzers, CompilationErrorBehavior checkMode = CompilationErrorBehavior.Default)
-        {
-            var compilation = SolutionBuilder
-                .Create()
-                .AddProject(AnalyzerLanguage.FromPath(path))
-                .AddDocument(path)
-                .GetCompilation();
-
-            var diagnostics = DiagnosticVerifier.GetAnalyzerDiagnostics(compilation, diagnosticAnalyzers, checkMode);
-            DiagnosticVerifier.VerifyNoExceptionThrown(diagnostics);
-        }
-
         /// <summary>
         /// Verify analyzer from C# on a snippet in non-concurrent execution mode.
         /// </summary>
@@ -512,45 +498,27 @@ namespace SonarAnalyzer.UnitTest.TestFramework
                                                                         string protobufPath,
                                                                         string sonarProjectConfigPath,
                                                                         Action<IReadOnlyList<TMessage>> verifyProtobuf,
-                                                                        IEnumerable<ParseOptions> options = null)
-            where TMessage : IMessage<TMessage>, new()
-        {
-            var solutionBuilder = SolutionBuilder.Create()
-                .AddProject(AnalyzerLanguage.FromPath(paths.First()))
-                .AddDocuments(paths)
-                .Solution;
-            foreach (var compilation in solutionBuilder.Compile(options?.ToArray()))
-            {
-                DiagnosticVerifier.Verify(compilation, diagnosticAnalyzer, CompilationErrorBehavior.Default, sonarProjectConfigPath);
-                verifyProtobuf(ReadProtobuf(protobufPath).ToList());
-            }
+                                                                        ImmutableArray<ParseOptions> options = default)
+            where TMessage : IMessage<TMessage>, new() =>
+            new VerifierBuilder()
+                .AddAnalyzer(() => diagnosticAnalyzer)
+                .AddPaths(RemoveTestCasesPrefix(paths))
+                .WithOptions(options.IsDefault ? ImmutableArray<ParseOptions>.Empty : options)
+                .WithSonarProjectConfigPath(sonarProjectConfigPath)
+                .WithProtobufPath(protobufPath)
+                .VerifyUtilityAnalyzer(verifyProtobuf);
 
-            static IEnumerable<TMessage> ReadProtobuf(string path)
-            {
-                using var input = File.OpenRead(path);
-                var parser = new MessageParser<TMessage>(() => new TMessage());
-                while (input.Position < input.Length)
-                {
-                    yield return parser.ParseDelimitedFrom(input);
-                }
-            }
-        }
-
-        /// <summary>
-        /// Verify utility analyzer is not run in non-concurrent execution mode.
-        /// </summary>
+        [Obsolete("Use VerifierBuilder instead.")]
         public static void VerifyUtilityAnalyzerIsNotRun(string path,
                                                          UtilityAnalyzerBase diagnosticAnalyzer,
                                                          string protobufPath,
-                                                         IEnumerable<ParseOptions> options = null)
-        {
-            var solutionBuilder = SolutionBuilder.CreateSolutionFromPath(path);
-            foreach (var compilation in solutionBuilder.Compile(options?.ToArray()))
-            {
-                DiagnosticVerifier.Verify(compilation, diagnosticAnalyzer, CompilationErrorBehavior.Default);
-                new FileInfo(protobufPath).Length.Should().Be(0);
-            }
-        }
+                                                         ImmutableArray<ParseOptions> options = default) =>
+            new VerifierBuilder()
+                .AddAnalyzer(() => diagnosticAnalyzer)
+                .AddPaths(RemoveTestCasesPrefix(path))
+                .WithOptions(options.IsDefault ? ImmutableArray<ParseOptions>.Empty : options)
+                .WithProtobufPath(protobufPath)
+                .VerifyUtilityAnalyzerProducesEmptyProtobuf();
 
         [Obsolete("Use VerifierBuilder instead.")]
         public static void VerifyNoIssueReportedInTest(string path,
