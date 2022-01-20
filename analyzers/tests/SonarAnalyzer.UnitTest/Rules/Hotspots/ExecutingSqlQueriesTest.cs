@@ -33,22 +33,23 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class ExecutingSqlQueriesTest
     {
+        private readonly VerifierBuilder builderCs = new VerifierBuilder().AddAnalyzer(() => new CS.ExecutingSqlQueries(AnalyzerConfiguration.AlwaysEnabled));
+        private readonly VerifierBuilder builderVb = new VerifierBuilder().AddAnalyzer(() => new VB.ExecutingSqlQueries(AnalyzerConfiguration.AlwaysEnabled));
+
 #if NETFRAMEWORK // System.Data.OracleClient.dll is not available on .Net Core
 
         [TestMethod]
         public void ExecutingSqlQueries_CS_Net46() =>
-            OldVerifier.VerifyAnalyzer(
-                @"TestCases\Hotspots\ExecutingSqlQueries_Net46.cs",
-                new CS.ExecutingSqlQueries(AnalyzerConfiguration.AlwaysEnabled),
-                GetReferencesNet46(Constants.NuGetLatestVersion));
+            builderCs.AddPaths(@"Hotspots\ExecutingSqlQueries_Net46.cs")
+                .AddReferences(GetReferencesNet46(Constants.NuGetLatestVersion))
+                .Verify();
 
         [TestMethod]
         public void ExecutingSqlQueries_VB_Net46() =>
-            OldVerifier.VerifyAnalyzer(
-                @"TestCases\Hotspots\ExecutingSqlQueries_Net46.vb",
-                new VB.ExecutingSqlQueries(AnalyzerConfiguration.AlwaysEnabled),
-                ParseOptionsHelper.FromVisualBasic15,
-                GetReferencesNet46(Constants.NuGetLatestVersion));
+            builderVb.AddPaths(@"Hotspots\ExecutingSqlQueries_Net46.vb")
+                .WithOptions(ParseOptionsHelper.FromVisualBasic15)
+                .AddReferences(GetReferencesNet46(Constants.NuGetLatestVersion))
+                .Verify();
 
         internal static IEnumerable<MetadataReference> GetReferencesNet46(string sqlServerCeVersion) =>
             NetStandardMetadataReference.Netstandard
@@ -63,33 +64,32 @@ namespace SonarAnalyzer.UnitTest.Rules
 
         [TestMethod]
         public void ExecutingSqlQueries_CS_NetCore() =>
-            OldVerifier.VerifyAnalyzer(
-                @"TestCases\Hotspots\ExecutingSqlQueries_NetCore.cs",
-                new CS.ExecutingSqlQueries(AnalyzerConfiguration.AlwaysEnabled),
-                ParseOptionsHelper.FromCSharp8,
-                GetReferencesNetCore(Constants.DotNetCore220Version));
+            builderCs.AddPaths(@"Hotspots\ExecutingSqlQueries_NetCore.cs")
+                .WithOptions(ParseOptionsHelper.FromCSharp8)
+                .AddReferences(GetReferencesNetCore(Constants.DotNetCore220Version))
+                .Verify();
 
         [TestMethod]
         public void ExecutingSqlQueries_CSharp9() =>
-            OldVerifier.VerifyAnalyzerFromCSharp9Console(
-                @"TestCases\Hotspots\ExecutingSqlQueries.CSharp9.cs",
-                new CS.ExecutingSqlQueries(AnalyzerConfiguration.AlwaysEnabled),
-                GetReferencesNetCore(Constants.DotNetCore220Version).Concat(NuGetMetadataReference.MicrosoftDataSqliteCore()));
+            builderCs.AddPaths(@"Hotspots\ExecutingSqlQueries.CSharp9.cs")
+                .WithTopLevelStatements()
+                .AddReferences(GetReferencesNetCore(Constants.DotNetCore220Version).Concat(NuGetMetadataReference.MicrosoftDataSqliteCore()))
+                .Verify();
 
         [TestMethod]
         public void ExecutingSqlQueries_CSharp10() =>
-            OldVerifier.VerifyAnalyzerFromCSharp10Console(
-                @"TestCases\Hotspots\ExecutingSqlQueries.CSharp10.cs",
-                new CS.ExecutingSqlQueries(AnalyzerConfiguration.AlwaysEnabled),
-                GetReferencesNetCore(Constants.DotNetCore220Version).Concat(NuGetMetadataReference.MicrosoftDataSqliteCore()));
+            builderCs.AddPaths(@"Hotspots\ExecutingSqlQueries.CSharp10.cs")
+                .WithOptions(ParseOptionsHelper.FromCSharp10)
+                .WithTopLevelStatements()
+                .AddReferences(GetReferencesNetCore(Constants.DotNetCore220Version).Concat(NuGetMetadataReference.MicrosoftDataSqliteCore()))
+                .Verify();
 
         [TestMethod]
         public void ExecutingSqlQueries_VB_NetCore() =>
-            OldVerifier.VerifyAnalyzer(
-                @"TestCases\Hotspots\ExecutingSqlQueries_NetCore.vb",
-                new VB.ExecutingSqlQueries(AnalyzerConfiguration.AlwaysEnabled),
-                ParseOptionsHelper.FromVisualBasic15,
-                GetReferencesNetCore(Constants.DotNetCore220Version));
+            builderVb.AddPaths(@"Hotspots\ExecutingSqlQueries_NetCore.vb")
+                .WithOptions(ParseOptionsHelper.FromVisualBasic15)
+                .AddReferences(GetReferencesNetCore(Constants.DotNetCore220Version))
+                .Verify();
 
         internal static IEnumerable<MetadataReference> GetReferencesNetCore(string entityFrameworkVersion) =>
             Enumerable.Empty<MetadataReference>()

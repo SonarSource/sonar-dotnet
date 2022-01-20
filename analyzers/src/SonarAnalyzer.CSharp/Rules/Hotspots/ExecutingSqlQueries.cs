@@ -71,8 +71,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 return Location.None;
             }
 
-            if (node.Parent is EqualsValueClauseSyntax equalsValueClause
-                && equalsValueClause.Parent is VariableDeclaratorSyntax declarationSyntax)
+            if (node.Parent is EqualsValueClauseSyntax {Parent: VariableDeclaratorSyntax declarationSyntax})
             {
                 return declarationSyntax.Identifier.GetLocation();
             }
@@ -95,7 +94,7 @@ namespace SonarAnalyzer.Rules.CSharp
         private static bool IsConcatenationOfConstants(BinaryExpressionSyntax binaryExpression, SemanticModel semanticModel)
         {
             System.Diagnostics.Debug.Assert(binaryExpression.IsKind(SyntaxKind.AddExpression), "Binary expression should be of syntax kind add expression.");
-            if ((semanticModel.GetTypeInfo(binaryExpression).Type is ITypeSymbol) && binaryExpression.Right.HasConstantValue(semanticModel))
+            if ((semanticModel.GetTypeInfo(binaryExpression).Type != null) && binaryExpression.Right.HasConstantValue(semanticModel))
             {
                 var nestedLeft = binaryExpression.Left;
                 var nestedBinary = nestedLeft as BinaryExpressionSyntax;
