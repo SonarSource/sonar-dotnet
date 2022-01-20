@@ -30,7 +30,7 @@ namespace SonarAnalyzer.Rules
     public abstract class DeliveringDebugFeaturesInProductionBase<TSyntaxKind> : TrackerHotspotDiagnosticAnalyzer<TSyntaxKind>
         where TSyntaxKind : struct
     {
-        protected const string DiagnosticId = "S4507";
+        private const string DiagnosticId = "S4507";
         protected const string StartupDevelopment = "StartupDevelopment";
         private const string MessageFormat = "Make sure this debug feature is deactivated before delivering the code in production.";
 
@@ -55,10 +55,8 @@ namespace SonarAnalyzer.Rules
                     t.ExceptWhen(c => IsInDevelopmentContext(c.Node)));
         }
 
-        protected bool IsValidationMethod(SemanticModel semanticModel, SyntaxNode condition, string methodName)
-        {
-            var methodSymbol = new Lazy<IMethodSymbol>(() => semanticModel.GetSymbolInfo(condition).Symbol as IMethodSymbol);
-            return isDevelopmentMethods.Any(x => x.IsMatch(methodName, methodSymbol, Language.NameComparison));
-        }
+        protected bool IsValidationMethod(SemanticModel semanticModel, SyntaxNode condition, string methodName) =>
+            new Lazy<IMethodSymbol>(() => semanticModel.GetSymbolInfo(condition).Symbol as IMethodSymbol) is var lazySymbol
+            && isDevelopmentMethods.Any(x => x.IsMatch(methodName, lazySymbol, Language.NameComparison));
     }
 }
