@@ -18,11 +18,13 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System.Collections.Generic;
 #if NETFRAMEWORK
 using System.IO;
-#endif
+#else
 using System.Linq;
+#endif
+
+using System.Collections.Generic;
 using Microsoft.CodeAnalysis;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.Common;
@@ -108,6 +110,6 @@ namespace SonarAnalyzer.UnitTest.Rules
 
 #endif
         internal static IEnumerable<MetadataReference> AdditionalReferences =>
-            NetStandardMetadataReference.Netstandard.Concat(NuGetMetadataReference.Nancy());
+            NuGetMetadataReference.Nancy();
     }
 }

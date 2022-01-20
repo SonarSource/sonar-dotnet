@@ -38,10 +38,10 @@ namespace SonarAnalyzer.Rules.CSharp
                 KnownType.System_Web_HttpCookie,
                 KnownType.Microsoft_AspNetCore_Http_CookieOptions);
 
-        protected override CSharpObjectInitializationTracker ObjectInitializationTracker { get; } = new CSharpObjectInitializationTracker(
-            isAllowedConstantValue: constantValue => constantValue is bool value && value,
+        protected override CSharpObjectInitializationTracker ObjectInitializationTracker { get; } = new(
+            isAllowedConstantValue: constantValue => constantValue is true,
             trackedTypes: TrackedTypes,
-            isTrackedPropertyName: propertyName => "Secure" == propertyName);
+            isTrackedPropertyName: propertyName => propertyName == "Secure");
 
         public CookieShouldBeSecure() : this(AnalyzerConfiguration.Hotspot) { }
 
