@@ -39,7 +39,7 @@ namespace SonarAnalyzer.UnitTest.Rules
 
         [TestMethod]
         public void FieldShouldBeReadonly_CodeFix() =>
-            OldVerifier.VerifyCodeFix<FieldShouldBeReadonlyCodeFixProvider>(
+            OldVerifier.VerifyCodeFix<FieldShouldBeReadonlyCodeFix>(
                 @"TestCases\FieldShouldBeReadonly.cs",
                 @"TestCases\FieldShouldBeReadonly.Fixed.cs",
                 new FieldShouldBeReadonly(),

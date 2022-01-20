@@ -221,7 +221,7 @@ namespace EntityFrameworkMigrations
 
         [TestMethod]
         public void UnusedPrivateMember_CodeFix() =>
-            OldVerifier.VerifyCodeFix<UnusedPrivateMemberCodeFixProvider>(
+            OldVerifier.VerifyCodeFix<UnusedPrivateMemberCodeFix>(
                 @"TestCases\UnusedPrivateMember.cs",
                 @"TestCases\UnusedPrivateMember.Fixed.cs",
                 @"TestCases\UnusedPrivateMember.Fixed.Batch.cs",

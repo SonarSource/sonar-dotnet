@@ -40,7 +40,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework
         public ImmutableArray<Func<DiagnosticAnalyzer>> Analyzers { get; init; } = ImmutableArray<Func<DiagnosticAnalyzer>>.Empty;
         public bool AutogenerateConcurrentFiles { get; init; } = true;
         public string BasePath { get; init; }
-        public Func<SonarCodeFixProvider> CodeFix { get; init; }
+        public Func<SonarCodeFix> CodeFix { get; init; }
         public string CodeFixedPath { get; init; }
         public string CodeFixedPathBatch { get; init; }
         public string CodeFixTitle { get; init; }
@@ -107,7 +107,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework
         public VerifierBuilder WithBasePath(string basePath) =>
             new(this) { BasePath = basePath };
 
-        public VerifierBuilder WithCodeFix<TCodeFix>() where TCodeFix : SonarCodeFixProvider, new() =>
+        public VerifierBuilder WithCodeFix<TCodeFix>() where TCodeFix : SonarCodeFix, new() =>
             new(this) { CodeFix = () => new TCodeFix() };
 
         public VerifierBuilder WithCodeFixedPath(string codeFixedPath) =>

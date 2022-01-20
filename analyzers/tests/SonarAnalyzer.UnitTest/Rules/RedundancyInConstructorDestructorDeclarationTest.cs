@@ -1,6 +1,6 @@
 ﻿/*
  * SonarAnalyzer for .NET
- * Copyright (C) 2015-2022 SonarSource SA
+ * Copyright (C) 2015-2021 SonarSource SA
  * mailto: contact AT sonarsource DOT com
  *
  * This program is free software; you can redistribute it and/or
@@ -42,45 +42,45 @@ namespace SonarAnalyzer.UnitTest.Rules
 
         [TestMethod]
         public void RedundancyInConstructorDestructorDeclaration_CodeFix_CSharp9() =>
-            OldVerifier.VerifyCodeFix<RedundancyInConstructorDestructorDeclarationCodeFixProvider>(
+            OldVerifier.VerifyCodeFix<RedundancyInConstructorDestructorDeclarationCodeFix>(
                 @"TestCases\RedundancyInConstructorDestructorDeclaration.CSharp9.cs",
                 @"TestCases\RedundancyInConstructorDestructorDeclaration.CSharp9.Fixed.cs",
                 new RedundancyInConstructorDestructorDeclaration(),
-                RedundancyInConstructorDestructorDeclarationCodeFixProvider.TitleRemoveBaseCall,
+                RedundancyInConstructorDestructorDeclarationCodeFix.TitleRemoveBaseCall,
                 ParseOptionsHelper.FromCSharp9);
 
         [TestMethod]
         public void RedundancyInConstructorDestructorDeclaration_CodeFix_CSharp10() =>
-            OldVerifier.VerifyCodeFix<RedundancyInConstructorDestructorDeclarationCodeFixProvider>(
+            OldVerifier.VerifyCodeFix<RedundancyInConstructorDestructorDeclarationCodeFix>(
                 @"TestCases\RedundancyInConstructorDestructorDeclaration.CSharp10.cs",
                 @"TestCases\RedundancyInConstructorDestructorDeclaration.CSharp10.Fixed.cs",
                 new RedundancyInConstructorDestructorDeclaration(),
-                RedundancyInConstructorDestructorDeclarationCodeFixProvider.TitleRemoveConstructor,
+                RedundancyInConstructorDestructorDeclarationCodeFix.TitleRemoveConstructor,
                 ParseOptionsHelper.FromCSharp10);
 #endif
 
         [TestMethod]
         public void RedundancyInConstructorDestructorDeclaration_CodeFix_BaseCall() =>
-            OldVerifier.VerifyCodeFix<RedundancyInConstructorDestructorDeclarationCodeFixProvider>(
+            OldVerifier.VerifyCodeFix<RedundancyInConstructorDestructorDeclarationCodeFix>(
                 @"TestCases\RedundancyInConstructorDestructorDeclaration.cs",
                 @"TestCases\RedundancyInConstructorDestructorDeclaration.BaseCall.Fixed.cs",
                 new RedundancyInConstructorDestructorDeclaration(),
-                RedundancyInConstructorDestructorDeclarationCodeFixProvider.TitleRemoveBaseCall);
+                RedundancyInConstructorDestructorDeclarationCodeFix.TitleRemoveBaseCall);
 
         [TestMethod]
         public void RedundancyInConstructorDestructorDeclaration_CodeFix_Constructor() =>
-            OldVerifier.VerifyCodeFix<RedundancyInConstructorDestructorDeclarationCodeFixProvider>(
+            OldVerifier.VerifyCodeFix<RedundancyInConstructorDestructorDeclarationCodeFix>(
                 @"TestCases\RedundancyInConstructorDestructorDeclaration.cs",
                 @"TestCases\RedundancyInConstructorDestructorDeclaration.Constructor.Fixed.cs",
                 new RedundancyInConstructorDestructorDeclaration(),
-                RedundancyInConstructorDestructorDeclarationCodeFixProvider.TitleRemoveConstructor);
+                RedundancyInConstructorDestructorDeclarationCodeFix.TitleRemoveConstructor);
 
         [TestMethod]
         public void RedundancyInConstructorDestructorDeclaration_CodeFix_Destructor() =>
-            OldVerifier.VerifyCodeFix<RedundancyInConstructorDestructorDeclarationCodeFixProvider>(
+            OldVerifier.VerifyCodeFix<RedundancyInConstructorDestructorDeclarationCodeFix>(
                 @"TestCases\RedundancyInConstructorDestructorDeclaration.cs",
                 @"TestCases\RedundancyInConstructorDestructorDeclaration.Destructor.Fixed.cs",
                 new RedundancyInConstructorDestructorDeclaration(),
-                RedundancyInConstructorDestructorDeclarationCodeFixProvider.TitleRemoveDestructor);
+                RedundancyInConstructorDestructorDeclarationCodeFix.TitleRemoveDestructor);
     }
 }

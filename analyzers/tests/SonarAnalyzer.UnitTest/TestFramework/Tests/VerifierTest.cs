@@ -106,8 +106,8 @@ namespace SonarAnalyzer.UnitTest.TestFramework.Tests
 
         [TestMethod]
         public void Constructor_CodeFix_FixableDiagnosticsNotSupported_Throws() =>
-            DummyCodeFixCS.WithCodeFix<EmptyMethodCodeFixProvider>()
-                .Invoking(x => x.Build()).Should().Throw<ArgumentException>().WithMessage("DummyAnalyzerCS does not support diagnostics fixable by the EmptyMethodCodeFixProvider.");
+            DummyCodeFixCS.WithCodeFix<EmptyMethodCodeFix>()
+                .Invoking(x => x.Build()).Should().Throw<ArgumentException>().WithMessage("DummyAnalyzerCS does not support diagnostics fixable by the EmptyMethodCodeFix.");
 
         [TestMethod]
         public void Constructor_CodeFix_MissingAttribute_Throws() =>

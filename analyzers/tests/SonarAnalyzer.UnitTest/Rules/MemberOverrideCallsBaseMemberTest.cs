@@ -38,7 +38,7 @@ namespace SonarAnalyzer.UnitTest.Rules
 
         [TestMethod]
         public void MemberOverrideCallsBaseMember_CSharp9_CodeFix() =>
-            OldVerifier.VerifyCodeFix<MemberOverrideCallsBaseMemberCodeFixProvider>(
+            OldVerifier.VerifyCodeFix<MemberOverrideCallsBaseMemberCodeFix>(
                 @"TestCases\MemberOverrideCallsBaseMember.CSharp9.cs",
                 @"TestCases\MemberOverrideCallsBaseMember.CSharp9.Fixed.cs",
                 new MemberOverrideCallsBaseMember(),
@@ -47,7 +47,7 @@ namespace SonarAnalyzer.UnitTest.Rules
 
         [TestMethod]
         public void MemberOverrideCallsBaseMember_CodeFix() =>
-            OldVerifier.VerifyCodeFix<MemberOverrideCallsBaseMemberCodeFixProvider>(
+            OldVerifier.VerifyCodeFix<MemberOverrideCallsBaseMemberCodeFix>(
                 @"TestCases\MemberOverrideCallsBaseMember.cs",
                 @"TestCases\MemberOverrideCallsBaseMember.Fixed.cs",
                 new MemberOverrideCallsBaseMember());

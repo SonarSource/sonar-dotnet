@@ -34,7 +34,7 @@ namespace SonarAnalyzer.UnitTest.Rules
 
         [TestMethod]
         public void UseShortCircuitingOperators_VisualBasic_CodeFix() =>
-            OldVerifier.VerifyCodeFix<VB.UseShortCircuitingOperatorFixProvider>(
+            OldVerifier.VerifyCodeFix<VB.UseShortCircuitingOperatorCodeFix>(
                 @"TestCases\UseShortCircuitingOperator.vb",
                 @"TestCases\UseShortCircuitingOperator.Fixed.vb",
                 new VB.UseShortCircuitingOperator());
@@ -51,7 +51,7 @@ namespace SonarAnalyzer.UnitTest.Rules
 
         [TestMethod]
         public void UseShortCircuitingOperators_CSharp9_CodeFix() =>
-            OldVerifier.VerifyCodeFix<CS.UseShortCircuitingOperatorFixProvider>(
+            OldVerifier.VerifyCodeFix<CS.UseShortCircuitingOperatorCodeFix>(
                 @"TestCases\UseShortCircuitingOperator.CSharp9.cs",
                 @"TestCases\UseShortCircuitingOperator.CSharp9.Fixed.cs",
                 new CS.UseShortCircuitingOperator(),
@@ -60,7 +60,7 @@ namespace SonarAnalyzer.UnitTest.Rules
 
         [TestMethod]
         public void UseShortCircuitingOperators_CSharp_CodeFix() =>
-            OldVerifier.VerifyCodeFix<CS.UseShortCircuitingOperatorFixProvider>(
+            OldVerifier.VerifyCodeFix<CS.UseShortCircuitingOperatorCodeFix>(
                 @"TestCases\UseShortCircuitingOperator.cs",
                 @"TestCases\UseShortCircuitingOperator.Fixed.cs",
                 new CS.UseShortCircuitingOperator());

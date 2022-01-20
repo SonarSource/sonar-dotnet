@@ -34,7 +34,7 @@ namespace SonarAnalyzer.UnitTest.Rules
 
         [TestMethod]
         public void OptionalParameterWithDefaultValue_CodeFix() =>
-            OldVerifier.VerifyCodeFix<OptionalParameterWithDefaultValueCodeFixProvider>(
+            OldVerifier.VerifyCodeFix<OptionalParameterWithDefaultValueCodeFix>(
                 @"TestCases\OptionalParameterWithDefaultValue.cs",
                 @"TestCases\OptionalParameterWithDefaultValue.Fixed.cs",
                 new OptionalParameterWithDefaultValue());

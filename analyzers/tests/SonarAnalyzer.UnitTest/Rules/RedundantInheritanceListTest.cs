@@ -1,6 +1,6 @@
 ﻿/*
  * SonarAnalyzer for .NET
- * Copyright (C) 2015-2022 SonarSource SA
+ * Copyright (C) 2015-2021 SonarSource SA
  * mailto: contact AT sonarsource DOT com
  *
  * This program is free software; you can redistribute it and/or
@@ -38,7 +38,7 @@ namespace SonarAnalyzer.UnitTest.Rules
 
         [TestMethod]
         public void RedundantInheritanceList_CSharp9_CodeFix() =>
-            OldVerifier.VerifyCodeFix<RedundantInheritanceListCodeFixProvider>(
+            OldVerifier.VerifyCodeFix<RedundantInheritanceListCodeFix>(
                 @"TestCases\RedundantInheritanceList.CSharp9.cs",
                 @"TestCases\RedundantInheritanceList.CSharp9.Fixed.cs",
                 new RedundantInheritanceList(),
@@ -50,7 +50,7 @@ namespace SonarAnalyzer.UnitTest.Rules
 
         [TestMethod]
         public void RedundantInheritanceList_CSharp10_CodeFix() =>
-            OldVerifier.VerifyCodeFix<RedundantInheritanceListCodeFixProvider>(
+            OldVerifier.VerifyCodeFix<RedundantInheritanceListCodeFix>(
                 @"TestCases\RedundantInheritanceList.CSharp10.cs",
                 @"TestCases\RedundantInheritanceList.CSharp10.Fixed.cs",
                 new RedundantInheritanceList(),
@@ -60,7 +60,7 @@ namespace SonarAnalyzer.UnitTest.Rules
 
         [TestMethod]
         public void RedundantInheritanceList_CodeFix() =>
-            OldVerifier.VerifyCodeFix<RedundantInheritanceListCodeFixProvider>(
+            OldVerifier.VerifyCodeFix<RedundantInheritanceListCodeFix>(
                 @"TestCases\RedundantInheritanceList.cs",
                 @"TestCases\RedundantInheritanceList.Fixed.cs",
                 new RedundantInheritanceList());

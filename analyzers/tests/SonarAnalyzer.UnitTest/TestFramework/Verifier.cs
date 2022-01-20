@@ -41,7 +41,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework
         private static readonly Regex ImportsRegexVB = new(@"^\s*Imports\s+.+$", RegexOptions.Multiline | RegexOptions.RightToLeft);
         private readonly VerifierBuilder builder;
         private readonly DiagnosticAnalyzer[] analyzers;
-        private readonly SonarCodeFixProvider codeFix;
+        private readonly SonarCodeFix codeFix;
         private readonly AnalyzerLanguage language;
         private readonly string[] onlyDiagnosticIds;
 

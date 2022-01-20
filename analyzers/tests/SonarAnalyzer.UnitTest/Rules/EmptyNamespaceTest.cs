@@ -41,7 +41,7 @@ namespace SonarAnalyzer.UnitTest.Rules
 
         [TestMethod]
         public void EmptyNamespace_CodeFix() =>
-            OldVerifier.VerifyCodeFix<EmptyNamespaceCodeFixProvider>(
+            OldVerifier.VerifyCodeFix<EmptyNamespaceCodeFix>(
                 @"TestCases\EmptyNamespace.cs",
                 @"TestCases\EmptyNamespace.Fixed.cs",
                 @"TestCases\EmptyNamespace.Fixed.Batch.cs",

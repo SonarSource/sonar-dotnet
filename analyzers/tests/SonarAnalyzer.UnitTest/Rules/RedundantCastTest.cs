@@ -54,7 +54,7 @@ namespace SonarAnalyzer.UnitTest.Rules
 
         [TestMethod]
         public void RedundantCast_CodeFix() =>
-            OldVerifier.VerifyCodeFix<RedundantCastCodeFixProvider>(
+            OldVerifier.VerifyCodeFix<RedundantCastCodeFix>(
                 @"TestCases\RedundantCast.cs",
                 @"TestCases\RedundantCast.Fixed.cs",
                 new RedundantCast());

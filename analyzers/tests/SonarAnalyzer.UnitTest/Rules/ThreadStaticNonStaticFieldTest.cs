@@ -1,6 +1,6 @@
 ﻿/*
  * SonarAnalyzer for .NET
- * Copyright (C) 2015-2022 SonarSource SA
+ * Copyright (C) 2015-2021 SonarSource SA
  * mailto: contact AT sonarsource DOT com
  *
  * This program is free software; you can redistribute it and/or
@@ -42,7 +42,7 @@ namespace SonarAnalyzer.UnitTest.Rules
 
         [TestMethod]
         public void ThreadStaticNonStaticField_CodeFix_CSharp10() =>
-            OldVerifier.VerifyCodeFix<ThreadStaticNonStaticFieldCodeFixProvider>(
+            OldVerifier.VerifyCodeFix<ThreadStaticNonStaticFieldCodeFix>(
                 @"TestCases\ThreadStaticNonStaticField.CSharp10.cs",
                 @"TestCases\ThreadStaticNonStaticField.CSharp10.Fixed.cs",
                 new ThreadStaticNonStaticField());
@@ -50,7 +50,7 @@ namespace SonarAnalyzer.UnitTest.Rules
 
         [TestMethod]
         public void ThreadStaticNonStaticField_CodeFix() =>
-            OldVerifier.VerifyCodeFix<ThreadStaticNonStaticFieldCodeFixProvider>(
+            OldVerifier.VerifyCodeFix<ThreadStaticNonStaticFieldCodeFix>(
                 @"TestCases\ThreadStaticNonStaticField.cs",
                 @"TestCases\ThreadStaticNonStaticField.Fixed.cs",
                 new ThreadStaticNonStaticField());

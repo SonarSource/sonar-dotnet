@@ -628,7 +628,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework
                                                    SonarDiagnosticAnalyzer diagnosticAnalyzer,
                                                    ImmutableArray<ParseOptions> options = default,
                                                    OutputKind outputKind = OutputKind.DynamicallyLinkedLibrary,
-                                                   IEnumerable<MetadataReference> additionalReferences = null) where TCodeFix : SonarCodeFixProvider, new() =>
+                                                   IEnumerable<MetadataReference> additionalReferences = null) where TCodeFix : SonarCodeFix, new() =>
             new VerifierBuilder()
                 .AddAnalyzer(() => diagnosticAnalyzer)
                 .AddReferences(additionalReferences ?? Enumerable.Empty<MetadataReference>())
@@ -646,7 +646,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework
                                                    SonarDiagnosticAnalyzer diagnosticAnalyzer,
                                                    ImmutableArray<ParseOptions> options = default,
                                                    IEnumerable<MetadataReference> additionalReferences = null)
-            where TCodeFix : SonarCodeFixProvider, new() =>
+            where TCodeFix : SonarCodeFix, new() =>
             new VerifierBuilder()
                 .AddAnalyzer(() => diagnosticAnalyzer)
                 .AddReferences(additionalReferences ?? Enumerable.Empty<MetadataReference>())
@@ -664,7 +664,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework
                                                    string codeFixTitle,
                                                    ImmutableArray<ParseOptions> options = default,
                                                    IEnumerable<MetadataReference> additionalReferences = null)
-            where TCodeFix : SonarCodeFixProvider, new() =>
+            where TCodeFix : SonarCodeFix, new() =>
             new VerifierBuilder()
                 .AddAnalyzer(() => diagnosticAnalyzer)
                 .AddReferences(additionalReferences ?? Enumerable.Empty<MetadataReference>())

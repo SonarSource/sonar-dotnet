@@ -1,6 +1,6 @@
 ﻿/*
  * SonarAnalyzer for .NET
- * Copyright (C) 2015-2022 SonarSource SA
+ * Copyright (C) 2015-2021 SonarSource SA
  * mailto: contact AT sonarsource DOT com
  *
  * This program is free software; you can redistribute it and/or
@@ -45,7 +45,7 @@ namespace SonarAnalyzer.UnitTest.Rules
 
         [TestMethod]
         public void RedundantNullCheck_CS_CodeFix() =>
-            OldVerifier.VerifyCodeFix<CS.RedundantNullCheckCodeFixProvider>(
+            OldVerifier.VerifyCodeFix<CS.RedundantNullCheckCodeFix>(
                 @"TestCases\RedundantNullCheck.cs",
                 @"TestCases\RedundantNullCheck.Fixed.cs",
                 @"TestCases\RedundantNullCheck.Fixed.Batch.cs",
@@ -54,7 +54,7 @@ namespace SonarAnalyzer.UnitTest.Rules
 #if NET
         [TestMethod]
         public void RedundantNullCheck_CSharp9_CodeFix() =>
-            OldVerifier.VerifyCodeFix<CS.RedundantNullCheckCodeFixProvider>(
+            OldVerifier.VerifyCodeFix<CS.RedundantNullCheckCodeFix>(
                 @"TestCases\RedundantNullCheck.CSharp9.cs",
                 @"TestCases\RedundantNullCheck.CSharp9.Fixed.cs",
                 new CS.RedundantNullCheck(),
@@ -63,7 +63,7 @@ namespace SonarAnalyzer.UnitTest.Rules
 
         [TestMethod]
         public void RedundantNullCheck_CSharp10_CodeFix() =>
-            OldVerifier.VerifyCodeFix<CS.RedundantNullCheckCodeFixProvider>(
+            OldVerifier.VerifyCodeFix<CS.RedundantNullCheckCodeFix>(
                 @"TestCases\RedundantNullCheck.CSharp10.cs",
                 @"TestCases\RedundantNullCheck.CSharp10.Fixed.cs",
                 new CS.RedundantNullCheck(),
