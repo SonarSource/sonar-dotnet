@@ -201,7 +201,7 @@ namespace EntityFrameworkMigrations
         [TestMethod]
         public void UnusedPrivateMember_CodeFix() =>
             builder.AddPaths("UnusedPrivateMember.cs")
-                .WithCodeFix<UnusedPrivateMemberCodeFixProvider>()
+                .WithCodeFix<UnusedPrivateMemberCodeFix>()
                 .WithCodeFixedPath("UnusedPrivateMember.Fixed.cs")
                 .WithCodeFixedPathBatch("UnusedPrivateMember.Fixed.Batch.cs")
                 .VerifyCodeFix();
