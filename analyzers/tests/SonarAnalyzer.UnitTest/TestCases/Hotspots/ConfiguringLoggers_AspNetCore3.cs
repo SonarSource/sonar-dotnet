@@ -52,16 +52,16 @@ namespace MvcApp
             LogLevel level = LogLevel.Critical;
             bool includeScopes = false;
             Func<string, LogLevel, bool> filter = null;
-            ConsoleLoggerOptions consoleSettings = null;
-            AzureBlobLoggerOptions azureSettings = null;
             EventLogSettings eventLogSettings = null;
 
-            using (var loggerFactory = LoggerFactory.Create(builder => builder.AddAzureWebAppDiagnostics() // Noncompliant [1,2,3,4,5,6]
-                                                                              .AddConsole()                // Every invocation in this chain is noncompliant
-                                                                              .AddConsole()
+            using (var loggerFactory = LoggerFactory.Create(builder => builder.AddAzureWebAppDiagnostics() // Noncompliant [1,2,3,4,5,6,7]
+                                                                              .AddAzureWebAppDiagnostics(azureSettings => { azureSettings.IncludeScopes = true; }) // Every invocation in this chain is noncompliant
+                                                                              .AddConsole(options => { options.FormatterName = "simple"; })
                                                                               .AddDebug()
                                                                               .AddEventLog()
-                                                                              .AddEventSourceLogger()))
+                                                                              .AddEventLog(eventLogSettings)
+                                                                              .AddEventSourceLogger()
+                                                                              .AddFilter(filter))) // Filter cannot be given to AddConsole as input. Is this an FN?
             { }
 
             IEnumerable<ILoggerProvider> providers = null;

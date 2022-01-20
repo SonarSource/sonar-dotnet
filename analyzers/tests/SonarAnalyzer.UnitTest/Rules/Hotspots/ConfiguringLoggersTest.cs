@@ -129,10 +129,10 @@ namespace SonarAnalyzer.UnitTest.Rules
                     .Concat(AspNetCoreMetadataReference.MicrosoftExtensionsHostingAbstractions)
                     .Concat(AspNetCoreMetadataReference.MicrosoftAspNetCoreWebHost)
                     .Concat(AspNetCoreMetadataReference.MicrosoftAspNetCoreEventSourceLoggerFactoryExtensions)
-                    .Concat(NuGetMetadataReference.MicrosoftExtensionsConfigurationAbstractions(Constants.DotNetCore500Version))
-                    .Concat(NuGetMetadataReference.MicrosoftExtensionsOptions(Constants.DotNetCore500Version))
-                    .Concat(NuGetMetadataReference.MicrosoftExtensionsLoggingPackages(Constants.DotNetCore500Version))
-                    .Concat(NuGetMetadataReference.MicrosoftExtensionsDependencyInjectionAbstractions(Constants.DotNetCore500Version));
+                    .Concat(NuGetMetadataReference.MicrosoftExtensionsConfigurationAbstractions(Constants.DotNetCore600Version))
+                    .Concat(NuGetMetadataReference.MicrosoftExtensionsOptions(Constants.DotNetCore600Version))
+                    .Concat(NuGetMetadataReference.MicrosoftExtensionsLoggingPackages(Constants.DotNetCore600Version))
+                    .Concat(NuGetMetadataReference.MicrosoftExtensionsDependencyInjectionAbstractions(Constants.DotNetCore600Version));
 
 
 #endif

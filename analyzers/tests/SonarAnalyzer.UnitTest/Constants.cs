@@ -25,7 +25,7 @@ namespace SonarAnalyzer.UnitTest
         public const string NuGetLatestVersion = "LATEST";
         public const string DotNetCore220Version = "2.2.0";
         public const string DotNetCore310Version = "3.1.0";
-        public const string DotNetCore500Version = "5.0.0";
+        public const string DotNetCore600Version = "6.0.0";
         public const string WindowsLineEnding = "\r\n";
         public const string UnixLineEnding = "\n";
     }
