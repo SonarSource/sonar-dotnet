@@ -33,29 +33,25 @@ namespace SonarAnalyzer.UnitTest.Rules
         [DataRow("1.1.11")]
         [DataRow(Constants.NuGetLatestVersion)]
         public void AssertionArgsShouldBePassedInCorrectOrder_MsTest(string testFwkVersion) =>
-            OldVerifier.VerifyAnalyzer(
-                @"TestCases\AssertionArgsShouldBePassedInCorrectOrder.MsTest.cs",
-                new AssertionArgsShouldBePassedInCorrectOrder(),
-                NuGetMetadataReference.MSTestTestFramework(testFwkVersion).ToArray());
+            new VerifierBuilder<AssertionArgsShouldBePassedInCorrectOrder>()
+                .AddPaths("AssertionArgsShouldBePassedInCorrectOrder.MsTest.cs")
+                .AddReferences(NuGetMetadataReference.MSTestTestFramework(testFwkVersion));
 
         [DataTestMethod]
         [DataRow("2.5.7.10213")]
         [DataRow(Constants.NuGetLatestVersion)]
         public void AssertionArgsShouldBePassedInCorrectOrder_NUnit(string testFwkVersion) =>
-            OldVerifier.VerifyAnalyzer(
-                @"TestCases\AssertionArgsShouldBePassedInCorrectOrder.NUnit.cs",
-                new AssertionArgsShouldBePassedInCorrectOrder(),
-                NuGetMetadataReference.NUnit(testFwkVersion).ToArray());
+            new VerifierBuilder<AssertionArgsShouldBePassedInCorrectOrder>()
+                .AddPaths("AssertionArgsShouldBePassedInCorrectOrder.NUnit.cs")
+                .AddReferences(NuGetMetadataReference.NUnit(testFwkVersion));
 
         [DataTestMethod]
         [DataRow("2.0.0")]
         [DataRow(Constants.NuGetLatestVersion)]
         public void AssertionArgsShouldBePassedInCorrectOrder_XUnit(string testFwkVersion) =>
-            OldVerifier.VerifyAnalyzer(
-                @"TestCases\AssertionArgsShouldBePassedInCorrectOrder.Xunit.cs",
-                new AssertionArgsShouldBePassedInCorrectOrder(),
-                NuGetMetadataReference.XunitFramework(testFwkVersion)
-                                      .Concat(NetStandardMetadataReference.Netstandard)
-                                      .ToArray());
+            new VerifierBuilder<AssertionArgsShouldBePassedInCorrectOrder>()
+                .AddPaths("AssertionArgsShouldBePassedInCorrectOrder.Xunit.cs")
+                .AddReferences(NuGetMetadataReference.XunitFramework(testFwkVersion)
+                                .Concat(NetStandardMetadataReference.Netstandard));
     }
 }
