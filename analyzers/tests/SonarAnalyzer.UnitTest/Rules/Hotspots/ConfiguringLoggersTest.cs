@@ -75,10 +75,10 @@ namespace SonarAnalyzer.UnitTest.Rules
 #if NET
         [TestMethod]
         public void ConfiguringLoggers_AspNetCore2_CS() =>
-            OldVerifier.VerifyNonConcurrentAnalyzer(
-                @"TestCases\Hotspots\ConfiguringLoggers_AspNetCore.cs",
-                new CS.ConfiguringLoggers(AnalyzerConfiguration.AlwaysEnabled),
-                AspNetCore2LoggingReferences);
+            builderCS.AddPaths(@"Hotspots\ConfiguringLoggers_AspNetCore.cs")
+                .AddReferences(AspNetCore2LoggingReferences)
+                .WithConcurrentAnalysis(false)
+                .Verify();
 
         [TestMethod]
         public void ConfiguringLoggers_AspNetCore6_CS() =>
