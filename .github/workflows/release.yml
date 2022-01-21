@@ -19,7 +19,6 @@ jobs:
           publish_to_binaries: true
           distribute: true
           attach_artifacts_to_github_release: true
-          run_rules_cov: true
           slack_channel: team-lang-dotnet
         env:
           ARTIFACTORY_API_KEY: ${{ secrets.ARTIFACTORY_API_KEY }}
@@ -32,7 +31,7 @@ jobs:
           RELEASE_SSH_KEY: ${{ secrets.RELEASE_SSH_KEY }}
           SLACK_API_TOKEN: ${{secrets.SLACK_API_TOKEN }}
         # Put your action repo here
-        uses: SonarSource/gh-action_release/main@v3
+        uses: SonarSource/gh-action_release/main@v4
 
       - name: Check outputs
         if: always()
@@ -60,14 +59,14 @@ jobs:
         id: local_repo
         run: echo ::set-output name=dir::"$(mktemp -d repo.XXXXXXXX)"
       - name: Download Artifacts
-        uses: SonarSource/gh-action_release/download-build@v3
+        uses: SonarSource/gh-action_release/download-build@v4
         with:
           build-number: ${{ steps.get_version.outputs.build }}
           local-repo-dir: ${{ steps.local_repo.outputs.dir }}
       - name: Maven Central Sync
         id: maven-central-sync
         continue-on-error: true
-        uses: SonarSource/gh-action_release/maven-central-sync@v3
+        uses: SonarSource/gh-action_release/maven-central-sync@v4
         with:
           local-repo-dir: ${{ steps.local_repo.outputs.dir }}
         env:
@@ -75,7 +74,7 @@ jobs:
           OSSRH_PASSWORD: ${{ secrets.OSSRH_PASSWORD }}
       - name: Notify on failure
         if: ${{ failure() || steps.maven-central-sync.outcome == 'failure' }}
-        uses: 8398a7/action-slack@v3
+        uses: 8398a7/action-slack@v4
         with:
           status: failure
           fields: repo,author,eventName
