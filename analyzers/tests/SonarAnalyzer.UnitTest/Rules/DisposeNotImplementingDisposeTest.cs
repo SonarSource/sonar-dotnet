@@ -27,20 +27,23 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class DisposeNotImplementingDisposeTest
     {
+        private readonly VerifierBuilder builder = new VerifierBuilder<DisposeNotImplementingDispose>();
+
         [TestMethod]
         public void DisposeNotImplementingDispose() =>
-            OldVerifier.VerifyAnalyzer(@"TestCases\DisposeNotImplementingDispose.cs", new DisposeNotImplementingDispose(), ParseOptionsHelper.FromCSharp8);
+            builder.AddPaths("DisposeNotImplementingDispose.cs").WithOptions(ParseOptionsHelper.FromCSharp8).Verify();
 
 #if NET
+
         [TestMethod]
         public void DisposeNotImplementingDispose_CSharp9() =>
-            OldVerifier.VerifyAnalyzerFromCSharp9Console(
-                new[] { @"TestCases\DisposeNotImplementingDispose.CSharp9.Part1.cs", @"TestCases\DisposeNotImplementingDispose.CSharp9.Part2.cs", },
-                new DisposeNotImplementingDispose());
+            builder.AddPaths("DisposeNotImplementingDispose.CSharp9.Part1.cs", "DisposeNotImplementingDispose.CSharp9.Part2.cs").WithTopLevelStatements().Verify();
 
         [TestMethod]
         public void DisposeNotImplementingDispose_CSharp10() =>
-            OldVerifier.VerifyAnalyzerFromCSharp10Library(@"TestCases\DisposeNotImplementingDispose.CSharp10.cs", new DisposeNotImplementingDispose());
+            builder.AddPaths("DisposeNotImplementingDispose.CSharp10.cs").WithOptions(ParseOptionsHelper.FromCSharp10).Verify();
+
 #endif
+
     }
 }

@@ -19,10 +19,7 @@
  */
 
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using FluentAssertions;
-using Microsoft.CodeAnalysis;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.UnitTest.MetadataReferences;
 using SonarAnalyzer.UnitTest.TestFramework;
@@ -34,37 +31,38 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class CertificateValidationCheckTest
     {
+        private readonly VerifierBuilder builderCS = new VerifierBuilder<CS.CertificateValidationCheck>()
+            .AddReferences(MetadataReferenceFacade.SystemNetHttp)
+            .AddReferences(MetadataReferenceFacade.SystemSecurityCryptography)
+            .AddReferences(NetStandardMetadataReference.Netstandard);
+        private readonly VerifierBuilder builderVB = new VerifierBuilder<VB.CertificateValidationCheck>()
+            .AddReferences(MetadataReferenceFacade.SystemNetHttp)
+            .AddReferences(MetadataReferenceFacade.SystemSecurityCryptography)
+            .AddReferences(NetStandardMetadataReference.Netstandard);
+
         [TestMethod]
         public void CertificateValidationCheck_CS() =>
-            OldVerifier.VerifyAnalyzer(@"TestCases\CertificateValidationCheck.cs", new CS.CertificateValidationCheck(), GetAdditionalReferences());
+            builderCS.AddPaths("CertificateValidationCheck.cs").Verify();
 
 #if NET
+
         [TestMethod]
         public void CertificateValidationCheck_CSharp8() =>
-            OldVerifier.VerifyAnalyzer(@"TestCases\CertificateValidationCheck.CSharp8.cs",
-                                    new CS.CertificateValidationCheck(),
-                                    ParseOptionsHelper.FromCSharp8,
-                                    GetAdditionalReferences());
+            builderCS.AddPaths("CertificateValidationCheck.CSharp8.cs").WithOptions(ParseOptionsHelper.FromCSharp8).Verify();
 
         [TestMethod]
         public void CertificateValidationCheck_CS_CSharp9() =>
-            OldVerifier.VerifyAnalyzerFromCSharp9Library(
-                new[] { @"TestCases\CertificateValidationCheck.CSharp9.cs", @"TestCases\CertificateValidationCheck.CSharp9.Partial.cs" },
-                new CS.CertificateValidationCheck(),
-                GetAdditionalReferences());
+            builderCS.AddPaths("CertificateValidationCheck.CSharp9.cs", "CertificateValidationCheck.CSharp9.Partial.cs").WithOptions(ParseOptionsHelper.FromCSharp9).Verify();
 
         [TestMethod]
         public void CertificateValidationCheck_CS_TopLevelStatements() =>
-            OldVerifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\CertificateValidationCheck.TopLevelStatements.cs",
-                                                      new CS.CertificateValidationCheck(),
-                                                      GetAdditionalReferences());
+            builderCS.AddPaths("CertificateValidationCheck.TopLevelStatements.cs").WithTopLevelStatements().Verify();
+
 #endif
 
         [TestMethod]
         public void CertificateValidationCheck_VB() =>
-            OldVerifier.VerifyAnalyzer(@"TestCases\CertificateValidationCheck.vb",
-                                    new VB.CertificateValidationCheck(),
-                                    GetAdditionalReferences());
+            builderVB.AddPaths("CertificateValidationCheck.vb").Verify();
 
         [TestMethod]
         public void CreateParameterLookup_CS_ThrowsException()
@@ -81,10 +79,5 @@ namespace SonarAnalyzer.UnitTest.Rules
             Action a = () => analyzer.CreateParameterLookup(null, null);
             a.Should().Throw<ArgumentException>();
         }
-
-        private static IEnumerable<MetadataReference> GetAdditionalReferences() =>
-            MetadataReferenceFacade.SystemNetHttp
-                                   .Concat(MetadataReferenceFacade.SystemSecurityCryptography)
-                                   .Concat(NetStandardMetadataReference.Netstandard);
     }
 }

@@ -28,27 +28,23 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class MutableFieldsShouldNotBePublicReadonlyTest
     {
+        private readonly VerifierBuilder builder = new VerifierBuilder<MutableFieldsShouldNotBePublicReadonly>().AddReferences(NuGetMetadataReference.SystemCollectionsImmutable("1.3.0"));
+
         [TestMethod]
         public void PublicMutableFieldsShouldNotBeReadonly() =>
-            OldVerifier.VerifyAnalyzer(
-                @"TestCases\MutableFieldsShouldNotBePublicReadonly.cs",
-                new MutableFieldsShouldNotBePublicReadonly(),
-                NuGetMetadataReference.SystemCollectionsImmutable("1.3.0"));
+            builder.AddPaths("MutableFieldsShouldNotBePublicReadonly.cs").Verify();
 
 #if NET
+
         [TestMethod]
         public void PublicMutableFieldsShouldNotBeReadonly_CSharp9() =>
-            OldVerifier.VerifyAnalyzerFromCSharp9Library(
-                @"TestCases\MutableFieldsShouldNotBePublicReadonly.CSharp9.cs",
-                new MutableFieldsShouldNotBePublicReadonly(),
-                NuGetMetadataReference.SystemCollectionsImmutable("1.3.0"));
+            builder.AddPaths("MutableFieldsShouldNotBePublicReadonly.CSharp9.cs").WithOptions(ParseOptionsHelper.FromCSharp9).Verify();
 
         [TestMethod]
         public void PublicMutableFieldsShouldNotBeReadonly_CSharp10() =>
-            OldVerifier.VerifyAnalyzerFromCSharp10Library(
-                new[] { @"TestCases\MutableFieldsShouldNotBePublicReadonly.CSharp10.cs" },
-                new MutableFieldsShouldNotBePublicReadonly(),
-                NuGetMetadataReference.SystemCollectionsImmutable("1.3.0"));
+            builder.AddPaths("MutableFieldsShouldNotBePublicReadonly.CSharp10.cs").WithOptions(ParseOptionsHelper.FromCSharp10).Verify();
+
 #endif
+
     }
 }

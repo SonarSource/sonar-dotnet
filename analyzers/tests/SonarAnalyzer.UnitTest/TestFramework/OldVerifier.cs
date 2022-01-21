@@ -108,87 +108,6 @@ namespace SonarAnalyzer.UnitTest.TestFramework
                 .Verify();
 
         /// <summary>
-        /// Verify analyzer from C# 9 with top level statements in non-concurrent execution mode.
-        /// </summary>
-        [Obsolete("Use VerifierBuilder instead.")]
-        public static void VerifyAnalyzerFromCSharp9Console(string[] paths, DiagnosticAnalyzer diagnosticAnalyzer, IEnumerable<MetadataReference> additionalReferences = null) =>
-            new VerifierBuilder()
-                .AddAnalyzer(() => diagnosticAnalyzer)
-                .AddReferences(additionalReferences ?? Enumerable.Empty<MetadataReference>())
-                .AddPaths(RemoveTestCasesPrefix(paths))
-                .WithOptions(ParseOptionsHelper.FromCSharp9)
-                .WithTopLevelStatements()
-                .Verify();
-
-        [Obsolete("Use VerifierBuilder instead.")]
-        public static void VerifyAnalyzerFromCSharp10Console(string[] paths, DiagnosticAnalyzer diagnosticAnalyzer, IEnumerable<MetadataReference> additionalReferences = null) =>
-            new VerifierBuilder()
-                .AddAnalyzer(() => diagnosticAnalyzer)
-                .AddReferences(additionalReferences ?? Enumerable.Empty<MetadataReference>())
-                .AddPaths(RemoveTestCasesPrefix(paths))
-                .WithOptions(ParseOptionsHelper.FromCSharp10)
-                .WithTopLevelStatements()
-                .Verify();
-
-        /// <summary>
-        /// Verify analyzer from C# 9 with top level statements in non-concurrent execution mode.
-        /// </summary>
-        [Obsolete("Use VerifierBuilder instead.")]
-        public static void VerifyAnalyzerFromCSharp9Console(string path,
-                                                            DiagnosticAnalyzer[] diagnosticAnalyzers,
-                                                            IEnumerable<MetadataReference> additionalReferences = null,
-                                                            DiagnosticDescriptor[] onlyDiagnostics = null) =>
-            diagnosticAnalyzers.Aggregate(new VerifierBuilder(), (builder, analyzer) => builder.AddAnalyzer(() => analyzer))
-                .AddReferences(additionalReferences ?? Enumerable.Empty<MetadataReference>())
-                .AddPaths(RemoveTestCasesPrefix(path))
-                .WithOptions(ParseOptionsHelper.FromCSharp9)
-                .WithTopLevelStatements()
-                .WithOnlyDiagnostics(onlyDiagnostics ?? Array.Empty<DiagnosticDescriptor>())
-                .Verify();
-
-        /// <summary>
-        /// Verify analyzer from C# 9 on a test library project in non-concurrent execution mode.
-        /// </summary>
-        [Obsolete("Use VerifierBuilder instead.")]
-        public static void VerifyAnalyzerFromCSharp9LibraryInTest(string path, DiagnosticAnalyzer diagnosticAnalyzer, IEnumerable<MetadataReference> additionalReferences = null) =>
-            new VerifierBuilder()
-                .AddAnalyzer(() => diagnosticAnalyzer)
-                .AddReferences(additionalReferences ?? Enumerable.Empty<MetadataReference>())
-                .AddTestReference()
-                .AddPaths(RemoveTestCasesPrefix(path))
-                .WithConcurrentAnalysis(false)
-                .WithOptions(ParseOptionsHelper.FromCSharp9)
-                .Verify();
-
-        /// <summary>
-        /// Verify analyzer from C# 10 on a test library project in non-concurrent execution mode.
-        /// </summary>
-        [Obsolete("Use VerifierBuilder instead.")]
-        public static void VerifyAnalyzerFromCSharp10LibraryInTest(string path, DiagnosticAnalyzer diagnosticAnalyzer, IEnumerable<MetadataReference> additionalReferences = null) =>
-            new VerifierBuilder()
-                .AddAnalyzer(() => diagnosticAnalyzer)
-                .AddReferences(additionalReferences ?? Enumerable.Empty<MetadataReference>())
-                .AddTestReference()
-                .AddPaths(RemoveTestCasesPrefix(path))
-                .WithConcurrentAnalysis(false)
-                .WithOptions(ParseOptionsHelper.FromCSharp10)
-                .Verify();
-
-        /// <summary>
-        /// Verify analyzer from C# 9 on a test console project in non-concurrent execution mode.
-        /// </summary>
-        [Obsolete("Use VerifierBuilder instead.")]
-        public static void VerifyAnalyzerFromCSharp9ConsoleInTest(string path, DiagnosticAnalyzer diagnosticAnalyzer, IEnumerable<MetadataReference> additionalReferences = null) =>
-            new VerifierBuilder()
-                .AddAnalyzer(() => diagnosticAnalyzer)
-                .AddReferences(additionalReferences ?? Enumerable.Empty<MetadataReference>())
-                .AddTestReference()
-                .AddPaths(RemoveTestCasesPrefix(path))
-                .WithTopLevelStatements()
-                .WithOptions(ParseOptionsHelper.FromCSharp9)
-                .Verify();
-
-        /// <summary>
         /// Verify analyzer from C# 9 without top level statements in non-concurrent execution mode.
         /// </summary>
         [Obsolete("Use VerifierBuilder instead.")]
@@ -205,25 +124,6 @@ namespace SonarAnalyzer.UnitTest.TestFramework
                 .WithOnlyDiagnostics(onlyDiagnostics ?? Array.Empty<DiagnosticDescriptor>())
                 .Verify();
 
-        /// <summary>
-        /// Verify analyzer from C# 9 without top level statements in non-concurrent execution mode.
-        /// </summary>
-        [Obsolete("Use VerifierBuilder instead.")]
-        public static void VerifyAnalyzerFromCSharp9Library(string path,
-                                                            DiagnosticAnalyzer diagnosticAnalyzer,
-                                                            CompilationErrorBehavior behaviour,
-                                                            IEnumerable<MetadataReference> additionalReferences = null,
-                                                            DiagnosticDescriptor[] onlyDiagnostics = null) =>
-            new VerifierBuilder()
-                .AddAnalyzer(() => diagnosticAnalyzer)
-                .AddReferences(additionalReferences ?? Enumerable.Empty<MetadataReference>())
-                .AddPaths(RemoveTestCasesPrefix(path))
-                .WithConcurrentAnalysis(false)
-                .WithOptions(ParseOptionsHelper.FromCSharp9)
-                .WithErrorBehavior(behaviour)
-                .WithOnlyDiagnostics(onlyDiagnostics ?? Array.Empty<DiagnosticDescriptor>())
-                .Verify();
-
         [Obsolete("Use VerifierBuilder instead.")]
         public static void VerifyAnalyzerFromCSharp10Library(string path,
                                                              DiagnosticAnalyzer diagnosticAnalyzer,
@@ -235,35 +135,6 @@ namespace SonarAnalyzer.UnitTest.TestFramework
                 .AddPaths(RemoveTestCasesPrefix(path))
                 .WithConcurrentAnalysis(false)
                 .WithOptions(ParseOptionsHelper.FromCSharp10)
-                .WithOnlyDiagnostics(onlyDiagnostics ?? Array.Empty<DiagnosticDescriptor>())
-                .Verify();
-
-        [Obsolete("Use VerifierBuilder instead.")]
-        public static void VerifyAnalyzerFromCSharp10Library(string path,
-                                                             DiagnosticAnalyzer[] diagnosticAnalyzers,
-                                                             IEnumerable<MetadataReference> additionalReferences = null,
-                                                             DiagnosticDescriptor[] onlyDiagnostics = null) =>
-            diagnosticAnalyzers.Aggregate(new VerifierBuilder(), (builder, analyzer) => builder.AddAnalyzer(() => analyzer))
-                .AddReferences(additionalReferences ?? Enumerable.Empty<MetadataReference>())
-                .AddPaths(RemoveTestCasesPrefix(path))
-                .WithConcurrentAnalysis(false)
-                .WithOptions(ParseOptionsHelper.FromCSharp10)
-                .WithOnlyDiagnostics(onlyDiagnostics ?? Array.Empty<DiagnosticDescriptor>())
-                .Verify();
-
-        [Obsolete("Use VerifierBuilder instead.")]
-        public static void VerifyAnalyzerFromCSharp10Library(string path,
-                                                             DiagnosticAnalyzer diagnosticAnalyzer,
-                                                             CompilationErrorBehavior behavior,
-                                                             IEnumerable<MetadataReference> additionalReferences = null,
-                                                             DiagnosticDescriptor[] onlyDiagnostics = null) =>
-            new VerifierBuilder()
-                .AddAnalyzer(() => diagnosticAnalyzer)
-                .AddReferences(additionalReferences ?? Enumerable.Empty<MetadataReference>())
-                .AddPaths(RemoveTestCasesPrefix(path))
-                .WithConcurrentAnalysis(false)
-                .WithOptions(ParseOptionsHelper.FromCSharp10)
-                .WithErrorBehavior(behavior)
                 .WithOnlyDiagnostics(onlyDiagnostics ?? Array.Empty<DiagnosticDescriptor>())
                 .Verify();
 
@@ -275,29 +146,6 @@ namespace SonarAnalyzer.UnitTest.TestFramework
                 .AddPaths(RemoveTestCasesPrefix(path))
                 .WithConcurrentAnalysis(false)
                 .WithOptions(ParseOptionsHelper.CSharpPreview)
-                .Verify();
-
-        /// <summary>
-        /// Verify analyzer from C# 9 without top level statements in non-concurrent execution mode.
-        /// </summary>
-        [Obsolete("Use VerifierBuilder instead.")]
-        public static void VerifyAnalyzerFromCSharp9Library(string[] paths, DiagnosticAnalyzer diagnosticAnalyzer, IEnumerable<MetadataReference> additionalReferences = null) =>
-            new VerifierBuilder()
-                .AddAnalyzer(() => diagnosticAnalyzer)
-                .AddReferences(additionalReferences ?? Enumerable.Empty<MetadataReference>())
-                .AddPaths(RemoveTestCasesPrefix(paths))
-                .WithConcurrentAnalysis(false)
-                .WithOptions(ParseOptionsHelper.FromCSharp9)
-                .Verify();
-
-        [Obsolete("Use VerifierBuilder instead.")]
-        public static void VerifyAnalyzerFromCSharp10Library(string[] paths, DiagnosticAnalyzer diagnosticAnalyzer, IEnumerable<MetadataReference> additionalReferences = null) =>
-            new VerifierBuilder()
-                .AddAnalyzer(() => diagnosticAnalyzer)
-                .AddReferences(additionalReferences ?? Enumerable.Empty<MetadataReference>())
-                .AddPaths(RemoveTestCasesPrefix(paths))
-                .WithConcurrentAnalysis(false)
-                .WithOptions(ParseOptionsHelper.FromCSharp10)
                 .Verify();
 
         [Obsolete("Use VerifierBuilder instead.")]

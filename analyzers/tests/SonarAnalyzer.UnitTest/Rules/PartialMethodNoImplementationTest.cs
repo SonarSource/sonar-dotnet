@@ -27,22 +27,23 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class PartialMethodNoImplementationTest
     {
+        private readonly VerifierBuilder builder = new VerifierBuilder<PartialMethodNoImplementation>();
+
         [TestMethod]
         public void PartialMethodNoImplementation() =>
-            OldVerifier.VerifyAnalyzer(@"TestCases\PartialMethodNoImplementation.cs", new PartialMethodNoImplementation());
+            builder.AddPaths("PartialMethodNoImplementation.cs").Verify();
 
 #if NET
+
         [TestMethod]
         public void PartialMethodNoImplementation_CSharp9() =>
-            OldVerifier.VerifyAnalyzerFromCSharp9Library(
-                new string[] { @"TestCases\PartialMethodNoImplementation.CSharp9.Part1.cs", @"TestCases\PartialMethodNoImplementation.CSharp9.Part2.cs"},
-                new PartialMethodNoImplementation());
+            builder.AddPaths("PartialMethodNoImplementation.CSharp9.Part1.cs", "PartialMethodNoImplementation.CSharp9.Part2.cs").WithOptions(ParseOptionsHelper.FromCSharp9).Verify();
 
         [TestMethod]
         public void PartialMethodNoImplementation_CSharp10() =>
-            OldVerifier.VerifyAnalyzerFromCSharp10Library(
-                new string[] { @"TestCases\PartialMethodNoImplementation.CSharp10.Part1.cs", @"TestCases\PartialMethodNoImplementation.CSharp10.Part2.cs"},
-                new PartialMethodNoImplementation());
+            builder.AddPaths("PartialMethodNoImplementation.CSharp10.Part1.cs", "PartialMethodNoImplementation.CSharp10.Part2.cs").WithOptions(ParseOptionsHelper.FromCSharp10).Verify();
+
 #endif
+
     }
 }

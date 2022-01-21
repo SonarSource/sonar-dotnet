@@ -28,26 +28,27 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class BeginInvokePairedWithEndInvokeTest
     {
+        private readonly VerifierBuilder builderCS = new VerifierBuilder<CS.BeginInvokePairedWithEndInvoke>();
+        private readonly VerifierBuilder builderVB = new VerifierBuilder<VB.BeginInvokePairedWithEndInvoke>();
+
         [TestMethod]
         public void BeginInvokePairedWithEndInvoke_CS() =>
-            OldVerifier.VerifyAnalyzer(@"TestCases\BeginInvokePairedWithEndInvoke.cs", new CS.BeginInvokePairedWithEndInvoke());
+            builderCS.AddPaths("BeginInvokePairedWithEndInvoke.cs").Verify();
 
 #if NET
+
         [TestMethod]
         public void BeginInvokePairedWithEndInvoke_CSharp9() =>
-            OldVerifier.VerifyAnalyzerFromCSharp9Library(
-                new[] { @"TestCases\BeginInvokePairedWithEndInvoke.CSharp9.Part1.cs", @"TestCases\BeginInvokePairedWithEndInvoke.CSharp9.Part2.cs" },
-                new CS.BeginInvokePairedWithEndInvoke());
+            builderCS.AddPaths("BeginInvokePairedWithEndInvoke.CSharp9.Part1.cs", "BeginInvokePairedWithEndInvoke.CSharp9.Part2.cs").WithOptions(ParseOptionsHelper.FromCSharp9).Verify();
 
         [TestMethod]
         public void BeginInvokePairedWithEndInvoke_CSharp10() =>
-            OldVerifier.VerifyAnalyzerFromCSharp10Library(
-                new[] { @"TestCases\BeginInvokePairedWithEndInvoke.CSharp10.cs" },
-                new CS.BeginInvokePairedWithEndInvoke());
+            builderCS.AddPaths("BeginInvokePairedWithEndInvoke.CSharp10.cs").WithOptions(ParseOptionsHelper.FromCSharp10).Verify();
+
 #endif
 
         [TestMethod]
         public void BeginInvokePairedWithEndInvoke_VB() =>
-            OldVerifier.VerifyAnalyzer(@"TestCases\BeginInvokePairedWithEndInvoke.vb", new VB.BeginInvokePairedWithEndInvoke());
+            builderVB.AddPaths("BeginInvokePairedWithEndInvoke.vb").Verify();
     }
 }
