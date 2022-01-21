@@ -29,12 +29,13 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class AssertionArgsShouldBePassedInCorrectOrderTest
     {
+        private readonly VerifierBuilder builder = new VerifierBuilder<AssertionArgsShouldBePassedInCorrectOrder>();
+
         [DataTestMethod]
         [DataRow("1.1.11")]
         [DataRow(Constants.NuGetLatestVersion)]
         public void AssertionArgsShouldBePassedInCorrectOrder_MsTest(string testFwkVersion) =>
-            new VerifierBuilder<AssertionArgsShouldBePassedInCorrectOrder>()
-                .AddPaths("AssertionArgsShouldBePassedInCorrectOrder.MsTest.cs")
+            builder.AddPaths("AssertionArgsShouldBePassedInCorrectOrder.MsTest.cs")
                 .AddReferences(NuGetMetadataReference.MSTestTestFramework(testFwkVersion))
                 .Verify();
 
@@ -42,8 +43,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [DataRow("2.5.7.10213")]
         [DataRow(Constants.NuGetLatestVersion)]
         public void AssertionArgsShouldBePassedInCorrectOrder_NUnit(string testFwkVersion) =>
-            new VerifierBuilder<AssertionArgsShouldBePassedInCorrectOrder>()
-                .AddPaths("AssertionArgsShouldBePassedInCorrectOrder.NUnit.cs")
+            builder.AddPaths("AssertionArgsShouldBePassedInCorrectOrder.MsTest.cs")
                 .AddReferences(NuGetMetadataReference.NUnit(testFwkVersion))
                 .Verify();
 
@@ -51,8 +51,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [DataRow("2.0.0")]
         [DataRow(Constants.NuGetLatestVersion)]
         public void AssertionArgsShouldBePassedInCorrectOrder_XUnit(string testFwkVersion) =>
-            new VerifierBuilder<AssertionArgsShouldBePassedInCorrectOrder>()
-                .AddPaths("AssertionArgsShouldBePassedInCorrectOrder.Xunit.cs")
+            builder.AddPaths("AssertionArgsShouldBePassedInCorrectOrder.MsTest.cs")
                 .AddReferences(NuGetMetadataReference.XunitFramework(testFwkVersion)
                                 .Concat(NetStandardMetadataReference.Netstandard))
                 .Verify();
