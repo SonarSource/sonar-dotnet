@@ -6,6 +6,8 @@ namespace Tests.Diagnostics
     [TestFixture]
     class Program
     {
+        void FakeAssert(object a, object b) { }
+
         [Test]
         public void Foo()
         {
@@ -14,6 +16,7 @@ namespace Tests.Diagnostics
 //                          ^^^^^^^
             Assert.AreSame(str, ""); // Noncompliant
 //                         ^^^^^^^
+            Assert.AreNotSame(str, ""); // Noncompliant
 
             double d = 42;
             Assert.AreEqual(d, 42); // Noncompliant
@@ -24,6 +27,8 @@ namespace Tests.Diagnostics
             Assert.AreEqual("", str);
             Assert.AreSame("", str);
             Assert.AreEqual(42, d, 1, "message");
+
+            FakeAssert(d, 42);
         }
     }
 }
