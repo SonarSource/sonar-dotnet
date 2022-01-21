@@ -58,16 +58,14 @@ namespace SonarAnalyzer.Rules.CSharp
                 SymbolKind.Field,
                 SymbolKind.Property,
                 SymbolKind.Event,
-                SymbolKind.Method
-            );
+                SymbolKind.Method);
 
         private static readonly ImmutableArray<KnownType> WebControllerTypes =
             ImmutableArray.Create(
                 KnownType.System_Web_Mvc_Controller,
                 KnownType.System_Web_Http_ApiController,
                 KnownType.Microsoft_AspNetCore_Mvc_Controller,
-                KnownType.System_Web_HttpApplication
-            );
+                KnownType.System_Web_HttpApplication);
 
         protected override void Initialize(SonarAnalysisContext context)
         {
@@ -179,7 +177,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 return true;
             }
 
-            if (!(node is SimpleNameSyntax))
+            if (node is not SimpleNameSyntax)
             {
                 return false;
             }
