@@ -18,8 +18,6 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System.Collections.Immutable;
-using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.Rules.CSharp;
@@ -30,19 +28,21 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class NotAssignedPrivateMemberTest
     {
+        private readonly VerifierBuilder builder = new VerifierBuilder<NotAssignedPrivateMember>();
+
         [TestMethod]
         public void NotAssignedPrivateMember() =>
-            OldVerifier.VerifyAnalyzer(@"TestCases\NotAssignedPrivateMember.cs", new NotAssignedPrivateMember());
+            builder.AddPaths("NotAssignedPrivateMember.cs").Verify();
 
 #if NET
         [TestMethod]
         public void NotAssignedPrivateMember_CSharp9() =>
-            OldVerifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\NotAssignedPrivateMember.CSharp9.cs", new NotAssignedPrivateMember());
+            builder.AddPaths("NotAssignedPrivateMember.CSharp9.cs").WithOptions(ParseOptionsHelper.FromCSharp9).Verify();
 #endif
 
         [TestMethod]
         public void NotAssignedPrivateMember_IndexingMovableFixedBuffer() =>
-            OldVerifier.VerifyCSharpAnalyzer(@"
+            builder.AddSnippet(@"
 unsafe struct FixedArray
 {
     private fixed int a[42]; // Compliant, because of the fixed modifier
@@ -54,6 +54,6 @@ unsafe struct FixedArray
         a[0] = 42;
         b[0] = 42;
     }
-}", new NotAssignedPrivateMember(), ImmutableArray.Create<ParseOptions>(new CSharpParseOptions(LanguageVersion.CSharp7_3)));   // ToDo: Use WithLanguageVersion instead
+}").WithLanguageVersion(LanguageVersion.CSharp7_3).Verify();
     }
 }

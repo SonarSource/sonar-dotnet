@@ -18,8 +18,6 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System.Collections.Immutable;
-using Microsoft.CodeAnalysis;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.UnitTest.TestFramework;
 using CS = SonarAnalyzer.Rules.CSharp;
@@ -32,30 +30,23 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class NameOfShouldBeUsedTest
     {
+        private readonly VerifierBuilder builderCS = new VerifierBuilder<CS.NameOfShouldBeUsed>().AddPaths("NameOfShouldBeUsed.cs");
+        private readonly VerifierBuilder builderVB = new VerifierBuilder<VB.NameOfShouldBeUsed>().AddPaths("NameOfShouldBeUsed.vb");
+
         [TestMethod]
         public void NameOfShouldBeUsed_FromCSharp6() =>
-            OldVerifier.VerifyAnalyzer(@"TestCases\NameOfShouldBeUsed.cs",
-                new CS.NameOfShouldBeUsed(),
-                ParseOptionsHelper.FromCSharp6);
+            builderCS.WithOptions(ParseOptionsHelper.FromCSharp6).Verify();
 
         [TestMethod]
         public void NameOfShouldBeUsed_CSharp5() =>
-            OldVerifier.VerifyNoIssueReported(@"TestCases\NameOfShouldBeUsed.cs",
-                new CS.NameOfShouldBeUsed(),
-                ImmutableArray.Create<ParseOptions>(new RoslynCS.CSharpParseOptions(RoslynCS.LanguageVersion.CSharp5)),    // ToDo: Use WithLanguageVersion instead
-                CompilationErrorBehavior.Ignore);
+            builderCS.WithLanguageVersion(RoslynCS.LanguageVersion.CSharp5).WithErrorBehavior(CompilationErrorBehavior.Ignore).VerifyNoIssueReported();
 
         [TestMethod]
         public void NameOfShouldBeUsed_FromVB14() =>
-            OldVerifier.VerifyAnalyzer(@"TestCases\NameOfShouldBeUsed.vb",
-                new VB.NameOfShouldBeUsed(),
-                ParseOptionsHelper.FromVisualBasic14);
+            builderVB.WithOptions(ParseOptionsHelper.FromVisualBasic14).Verify();
 
         [TestMethod]
         public void NameOfShouldBeUsed_VB12() =>
-            OldVerifier.VerifyNoIssueReported(@"TestCases\NameOfShouldBeUsed.vb",
-                new VB.NameOfShouldBeUsed(),
-                ImmutableArray.Create<ParseOptions>(new RoslynVB.VisualBasicParseOptions(RoslynVB.LanguageVersion.VisualBasic12)),
-                CompilationErrorBehavior.Ignore);
+            builderVB.WithLanguageVersion(RoslynVB.LanguageVersion.VisualBasic12).WithErrorBehavior(CompilationErrorBehavior.Ignore).VerifyNoIssueReported();
     }
 }

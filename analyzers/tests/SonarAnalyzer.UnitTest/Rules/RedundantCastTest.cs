@@ -18,8 +18,6 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System.Collections.Immutable;
-using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.Rules.CSharp;
@@ -30,38 +28,29 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class RedundantCastTest
     {
+        private readonly VerifierBuilder builder = new VerifierBuilder<RedundantCast>();
+
         [TestMethod]
         public void RedundantCast() =>
-            OldVerifier.VerifyAnalyzer(
-                @"TestCases\RedundantCast.cs",
-                new RedundantCast());
+            builder.AddPaths("RedundantCast.cs").Verify();
 
         [TestMethod]
         public void RedundantCast_CSharp8() =>
-            OldVerifier.VerifyAnalyzer(
-                @"TestCases\RedundantCast.CSharp8.cs",
-                new RedundantCast(),
-                ParseOptionsHelper.FromCSharp8);
+            builder.AddPaths("RedundantCast.CSharp8.cs").WithOptions(ParseOptionsHelper.FromCSharp8).Verify();
 
 #if NET
         [TestMethod]
         public void RedundantCast_CSharp9() =>
-            OldVerifier.VerifyAnalyzer(
-                @"TestCases\RedundantCast.CSharp9.cs",
-                new RedundantCast(),
-                ParseOptionsHelper.FromCSharp9);
+            builder.AddPaths("RedundantCast.CSharp9.cs").WithOptions(ParseOptionsHelper.FromCSharp9).Verify();
 #endif
 
         [TestMethod]
         public void RedundantCast_CodeFix() =>
-            OldVerifier.VerifyCodeFix<RedundantCastCodeFix>(
-                @"TestCases\RedundantCast.cs",
-                @"TestCases\RedundantCast.Fixed.cs",
-                new RedundantCast());
+            builder.AddPaths("RedundantCast.cs").WithCodeFix<RedundantCastCodeFix>().WithCodeFixedPath("RedundantCast.Fixed.cs").VerifyCodeFix();
 
         [TestMethod]
         public void RedundantCast_DefaultLiteral() =>
-            OldVerifier.VerifyCSharpAnalyzer(@"
+            builder.AddSnippet(@"
 using System;
 public static class MyClass
 {
@@ -73,7 +62,6 @@ public static class MyClass
     }
 
      public static T RunFunc<T>(Func<T> func, T returnValue = default) => returnValue;
-}",
-                new RedundantCast(), ImmutableArray.Create<ParseOptions>(new CSharpParseOptions(LanguageVersion.CSharp7_1)));  //ToDo: Use WithLanguageVersion instead
+}").WithLanguageVersion(LanguageVersion.CSharp7_1).Verify();
     }
 }

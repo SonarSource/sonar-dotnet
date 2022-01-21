@@ -30,17 +30,21 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class CommentedOutCodeTest
     {
+        private readonly VerifierBuilder builder = new VerifierBuilder<CommentedOutCode>();
+
         [TestMethod]
         public void CommentedOutCode_Nonconcurrent() =>
-            OldVerifier.VerifyNonConcurrentAnalyzer(@"TestCases\CommentedOutCode_Nonconcurrent.cs", new CommentedOutCode());
+            builder.AddPaths("CommentedOutCode_Nonconcurrent.cs").WithConcurrentAnalysis(false).Verify();
 
         [TestMethod]
         public void CommentedOutCode() =>
-            OldVerifier.VerifyAnalyzer(@"TestCases\CommentedOutCode.cs", new CommentedOutCode());
+            builder.AddPaths("CommentedOutCode.cs").Verify();
 
         [TestMethod]
         public void CommentedOutCode_NoDocumentation() =>
-            OldVerifier.VerifyNonConcurrentAnalyzer(@"TestCases\CommentedOutCode.cs", new CommentedOutCode(),
-                ImmutableArray.Create<ParseOptions>(new CSharpParseOptions(documentationMode: DocumentationMode.None)));
+            builder.AddPaths("CommentedOutCode.cs")
+                .WithConcurrentAnalysis(false)
+                .WithOptions(ImmutableArray.Create<ParseOptions>(new CSharpParseOptions(documentationMode: DocumentationMode.None)))
+                .Verify();
     }
 }
