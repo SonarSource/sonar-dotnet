@@ -62,7 +62,7 @@ namespace MvcApp
                                                                               .AddEventLog(eventLogSettings)
                                                                               .AddEventSourceLogger())) { }
 
-            using (var loggerFactory = LoggerFactory.Create(builder => builder.AddFilter()) { } // Compliant, AddFilter does not add a new logger.
+            using (var loggerFactory = LoggerFactory.Create(builder => builder.AddFilter(filter))) { } // Compliant, AddFilter does not add a new logger.
 
             IEnumerable<ILoggerProvider> providers = null;
             LoggerFilterOptions filterOptions1 = null;
