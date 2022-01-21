@@ -60,9 +60,9 @@ namespace MvcApp
                                                                               .AddDebug()
                                                                               .AddEventLog()
                                                                               .AddEventLog(eventLogSettings)
-                                                                              .AddEventSourceLogger()
-                                                                              .AddFilter(filter))) // Filter cannot be given to AddConsole as input. Is this an FN?
-            { }
+                                                                              .AddEventSourceLogger())) { }
+
+            using (var loggerFactory = LoggerFactory.Create(builder => builder.AddFilter()) { } // Compliant, AddFilter does not add a new logger.
 
             IEnumerable<ILoggerProvider> providers = null;
             LoggerFilterOptions filterOptions1 = null;

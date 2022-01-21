@@ -111,7 +111,7 @@ namespace SonarAnalyzer.UnitTest.Rules
 
 #if NET
         private static IEnumerable<MetadataReference> AspNetCore2LoggingReferences =>
-            NetStandardMetadataReference.Netstandard
+            Enumerable.Empty<MetadataReference>()
                 .Concat(NuGetMetadataReference.MicrosoftAspNetCore(Constants.DotNetCore220Version))
                 .Concat(NuGetMetadataReference.MicrosoftAspNetCoreHosting(Constants.DotNetCore220Version))
                 .Concat(NuGetMetadataReference.MicrosoftAspNetCoreHostingAbstractions(Constants.DotNetCore220Version))
@@ -121,15 +121,9 @@ namespace SonarAnalyzer.UnitTest.Rules
                 .Concat(NuGetMetadataReference.MicrosoftExtensionsLoggingPackages(Constants.DotNetCore220Version))
                 .Concat(new[] {CoreMetadataReference.MicrosoftExtensionsDependencyInjectionAbstractions});
 
-        private static IEnumerable<MetadataReference> AspNetCoreLoggingReferences(string version)
-        {
-            var references = Enumerable.Empty<MetadataReference>()
-                .Concat(NuGetMetadataReference.MicrosoftExtensionsConfigurationAbstractions(version))
-                .Concat(NuGetMetadataReference.MicrosoftExtensionsOptions(version))
-                .Concat(NuGetMetadataReference.MicrosoftExtensionsLoggingPackages(version))
-                .Concat(NuGetMetadataReference.MicrosoftExtensionsDependencyInjectionAbstractions(version));
-            return references.Concat(new MetadataReference[]
-            {
+        private static IEnumerable<MetadataReference> AspNetCoreLoggingReferences(string version) =>
+            new[]
+                {
                     AspNetCoreMetadataReference.MicrosoftAspNetCoreDiagnostics,
                     AspNetCoreMetadataReference.MicrosoftAspNetCoreHostingAbstractions,
                     AspNetCoreMetadataReference.MicrosoftAspNetCoreHostingWebHostBuilderExtensions,
@@ -137,8 +131,12 @@ namespace SonarAnalyzer.UnitTest.Rules
                     AspNetCoreMetadataReference.MicrosoftExtensionsHostingAbstractions,
                     AspNetCoreMetadataReference.MicrosoftAspNetCoreWebHost,
                     AspNetCoreMetadataReference.MicrosoftAspNetCoreEventSourceLoggerFactoryExtensions
-            });
-        }
+                }
+                .Concat(NuGetMetadataReference.MicrosoftExtensionsConfigurationAbstractions(version))
+                .Concat(NuGetMetadataReference.MicrosoftExtensionsOptions(version))
+                .Concat(NuGetMetadataReference.MicrosoftExtensionsLoggingPackages(version))
+                .Concat(NuGetMetadataReference.MicrosoftExtensionsDependencyInjectionAbstractions(version));
+
 #endif
     }
 }

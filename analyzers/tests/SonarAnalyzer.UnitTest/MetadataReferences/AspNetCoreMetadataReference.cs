@@ -29,17 +29,17 @@ namespace SonarAnalyzer.UnitTest.MetadataReferences
     {
         internal static MetadataReference MicrosoftAspNetCoreCors { get; } = Create(typeof(Microsoft.Extensions.DependencyInjection.CorsServiceCollectionExtensions));
         internal static MetadataReference MicrosoftAspNetCoreDiagnostics { get; } = Create(typeof(Microsoft.AspNetCore.Diagnostics.StatusCodeContext));
+        internal static MetadataReference MicrosoftAspNetCoreEventSourceLoggerFactoryExtensions { get; } = Create(typeof(Microsoft.Extensions.Logging.EventSourceLoggerFactoryExtensions));
         internal static MetadataReference MicrosoftAspNetCoreHostingAbstractions { get; } = Create(typeof(Microsoft.AspNetCore.Hosting.IWebHost));
+        internal static MetadataReference MicrosoftAspNetCoreHostingWebHostBuilderExtensions { get; } = Create(typeof(Microsoft.AspNetCore.Hosting.WebHostBuilderExtensions));
         internal static MetadataReference MicrosoftAspNetCoreHttpAbstractions { get; } = Create(typeof(Microsoft.AspNetCore.Http.IHttpContextFactory));
         internal static MetadataReference MicrosoftAspNetCoreHttpFeatures { get; } = Create(typeof(Microsoft.AspNetCore.Http.IHeaderDictionary));
         internal static MetadataReference MicrosoftAspNetCoreMvc { get; } = Create(typeof(Microsoft.Extensions.DependencyInjection.MvcServiceCollectionExtensions));
         internal static MetadataReference MicrosoftAspNetCoreMvcAbstractions { get; } = Create(typeof(Microsoft.AspNetCore.Mvc.IActionResult));
         internal static MetadataReference MicrosoftAspNetCoreMvcCore { get; } = Create(typeof(Microsoft.AspNetCore.Mvc.ControllerBase));
         internal static MetadataReference MicrosoftAspNetCoreMvcViewFeatures { get; } = Create(typeof(Microsoft.AspNetCore.Mvc.Controller));
-        internal static MetadataReference MicrosoftAspNetCoreEventSourceLoggerFactoryExtensions { get; } = Create(typeof(Microsoft.Extensions.Logging.EventSourceLoggerFactoryExtensions));
-        internal static MetadataReference MicrosoftAspNetCoreHostingWebHostBuilderExtensions { get; } = Create(typeof(Microsoft.AspNetCore.Hosting.WebHostBuilderExtensions));
-        internal static MetadataReference MicrosoftExtensionsHostingAbstractions { get; } = Create(typeof(Microsoft.Extensions.Hosting.IHost));
         internal static MetadataReference MicrosoftAspNetCoreWebHost { get; } = Create(typeof(Microsoft.AspNetCore.WebHost));
+        internal static MetadataReference MicrosoftExtensionsHostingAbstractions { get; } = Create(typeof(Microsoft.Extensions.Hosting.IHost));
     }
 }
 #endif
