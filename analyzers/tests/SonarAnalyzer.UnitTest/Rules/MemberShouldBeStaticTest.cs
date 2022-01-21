@@ -41,8 +41,7 @@ namespace SonarAnalyzer.UnitTest.Rules
                                         .Concat(NuGetMetadataReference.MicrosoftAspNetMvc(aspnetVersion))
                                         .Concat(NuGetMetadataReference.MicrosoftAspNetCoreMvcCore(aspnetCoreVersion))
                                         .Concat(NuGetMetadataReference.MicrosoftAspNetCoreMvcViewFeatures(aspnetCoreVersion))
-                                        .Concat(NuGetMetadataReference.MicrosoftAspNetCoreRoutingAbstractions(aspnetCoreVersion))
-                                        .ToImmutableArray())
+                                        .Concat(NuGetMetadataReference.MicrosoftAspNetCoreRoutingAbstractions(aspnetCoreVersion)))
                 .Verify();
 
 #if NET
@@ -54,7 +53,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         public void MemberShouldBeStatic_CSharp8() =>
             builder.AddPaths("MemberShouldBeStatic.CSharp8.cs")
-                .WithOptions(parseOptions: ParseOptionsHelper.FromCSharp8)
+                .WithOptions(ParseOptionsHelper.FromCSharp8)
                 .AddReferences(MetadataReferenceFacade.NETStandard21)
                 .Verify();
 
