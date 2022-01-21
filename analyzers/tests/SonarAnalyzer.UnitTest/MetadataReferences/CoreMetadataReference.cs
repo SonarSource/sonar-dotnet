@@ -28,17 +28,10 @@ namespace SonarAnalyzer.UnitTest.MetadataReferences
 {
     internal static class CoreMetadataReference
     {
-        internal static MetadataReference MicrosoftAspNetCoreCors { get; } = CreateReference(typeof(Microsoft.Extensions.DependencyInjection.CorsServiceCollectionExtensions).Assembly.Location);
-        internal static MetadataReference MicrosoftAspNetCoreMvc { get; } = CreateReference(typeof(Microsoft.Extensions.DependencyInjection.MvcServiceCollectionExtensions).Assembly.Location);
-        internal static MetadataReference MicrosoftAspNetCoreMvcAbstractions { get; } = CreateReference(typeof(Microsoft.AspNetCore.Mvc.IActionResult).Assembly.Location);
-        internal static MetadataReference MicrosoftAspNetCoreMvcCore { get; } = CreateReference(typeof(Microsoft.AspNetCore.Mvc.ControllerBase).Assembly.Location);
-        internal static MetadataReference MicrosoftAspNetCoreMvcViewFeatures { get; } = CreateReference(typeof(Microsoft.AspNetCore.Mvc.Controller).Assembly.Location);
-        internal static MetadataReference MicrosoftAspNetCoreHttpAbstractions { get; } = CreateReference(typeof(Microsoft.AspNetCore.Http.HttpResponse).Assembly.Location);
-        internal static MetadataReference MicrosoftAspNetCoreHttpFeatures { get; } = CreateReference(typeof(Microsoft.AspNetCore.Http.IHeaderDictionary).Assembly.Location);
-        internal static MetadataReference MicrosoftExtensionsDependencyInjectionAbstractions { get; } =
-            CreateReference(typeof(Microsoft.Extensions.DependencyInjection.IServiceCollection).Assembly.Location);
-        internal static MetadataReference MicrosoftExtensionsPrimitives { get; } = CreateReference(typeof(Microsoft.Extensions.Primitives.StringValues).Assembly.Location);
-        internal static MetadataReference MicrosoftNetHttpHeadersHeaderNames { get; } = CreateReference(typeof(Microsoft.Net.Http.Headers.HeaderNames).Assembly.Location);
+        internal static MetadataReference MicrosoftExtensionsHostingAbstractions { get; } = Create(typeof(Microsoft.Extensions.Hosting.IHost));
+        internal static MetadataReference MicrosoftExtensionsDependencyInjectionAbstractions { get; } = Create(typeof(Microsoft.Extensions.DependencyInjection.IServiceCollection));
+        internal static MetadataReference MicrosoftExtensionsPrimitives { get; } = Create(typeof(Microsoft.Extensions.Primitives.StringValues));
+        internal static MetadataReference MicrosoftNetHttpHeadersHeaderNames { get; } = Create(typeof(Microsoft.Net.Http.Headers.HeaderNames));
         internal static MetadataReference MicrosoftVisualBasic { get; } = CreateReference("Microsoft.VisualBasic.dll");
         internal static MetadataReference MicrosoftVisualBasicCore { get; } = CreateReference("Microsoft.VisualBasic.Core.dll");
         internal static MetadataReference MicrosoftWin32Registry { get; } = CreateReference("Microsoft.Win32.Registry.dll");

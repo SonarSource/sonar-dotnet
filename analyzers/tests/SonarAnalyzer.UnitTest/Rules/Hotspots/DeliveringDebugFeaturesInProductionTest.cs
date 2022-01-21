@@ -64,11 +64,13 @@ namespace SonarAnalyzer.UnitTest.Rules
                 AdditionalReferencesForAspNetCore3AndLater);
 
         private static IEnumerable<MetadataReference> AdditionalReferencesForAspNetCore3AndLater =>
-            Enumerable.Empty<MetadataReference>()
-                      .Concat(AspNetCoreMetadataReference.MicrosoftAspNetCoreDiagnostics)
-                      .Concat(AspNetCoreMetadataReference.MicrosoftAspNetCoreHostingAbstractions)
-                      .Concat(AspNetCoreMetadataReference.MicrosoftAspNetCoreHttpAbstractions)
-                      .Concat(AspNetCoreMetadataReference.MicrosoftExtensionsHostingAbstractions);
+            new []
+            {
+                AspNetCoreMetadataReference.MicrosoftAspNetCoreDiagnostics,
+                AspNetCoreMetadataReference.MicrosoftAspNetCoreHostingAbstractions,
+                AspNetCoreMetadataReference.MicrosoftAspNetCoreHttpAbstractions,
+                CoreMetadataReference.MicrosoftExtensionsHostingAbstractions
+            };
 
 #endif
 

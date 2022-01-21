@@ -60,16 +60,16 @@ namespace SonarAnalyzer.UnitTest.Rules
         internal static IEnumerable<MetadataReference> AdditionalReferences =>
             new[]
             {
-                CoreMetadataReference.MicrosoftAspNetCoreCors,
-                CoreMetadataReference.MicrosoftAspNetCoreHttpAbstractions,
-                CoreMetadataReference.MicrosoftAspNetCoreHttpFeatures,
-                CoreMetadataReference.MicrosoftAspNetCoreMvc,
-                CoreMetadataReference.MicrosoftAspNetCoreMvcAbstractions,
-                CoreMetadataReference.MicrosoftAspNetCoreMvcCore,
-                CoreMetadataReference.MicrosoftAspNetCoreMvcViewFeatures,
+                AspNetCoreMetadataReference.MicrosoftAspNetCoreCors,
+                AspNetCoreMetadataReference.MicrosoftAspNetCoreHttpAbstractions,
+                AspNetCoreMetadataReference.MicrosoftAspNetCoreHttpFeatures,
+                AspNetCoreMetadataReference.MicrosoftAspNetCoreMvc,
+                AspNetCoreMetadataReference.MicrosoftAspNetCoreMvcAbstractions,
+                AspNetCoreMetadataReference.MicrosoftAspNetCoreMvcCore,
+                AspNetCoreMetadataReference.MicrosoftAspNetCoreMvcViewFeatures,
                 CoreMetadataReference.MicrosoftExtensionsDependencyInjectionAbstractions,
                 CoreMetadataReference.MicrosoftExtensionsPrimitives,
-                CoreMetadataReference.MicrosoftNetHttpHeadersHeaderNames,
+                CoreMetadataReference.MicrosoftNetHttpHeadersHeaderNames
             };
 #else
         [TestMethod]
