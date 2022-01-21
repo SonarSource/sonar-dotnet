@@ -67,7 +67,7 @@ public class HttpApplication1 : System.Web.HttpApplication
     public int Foo() => 0;
 
     protected int FooFoo() => 0; // Noncompliant
-}").WithErrorBehavior(errorBehavior: CompilationErrorBehavior.Ignore).Verify();
+}").WithErrorBehavior(CompilationErrorBehavior.Ignore).Verify();
 
 #endif
 
@@ -83,6 +83,6 @@ public class Class7
         result = await f();
         return result;
     }
-}").WithErrorBehavior(errorBehavior: CompilationErrorBehavior.Ignore).Verify();
+}").WithErrorBehavior(CompilationErrorBehavior.Ignore).Verify();
     }
 }
