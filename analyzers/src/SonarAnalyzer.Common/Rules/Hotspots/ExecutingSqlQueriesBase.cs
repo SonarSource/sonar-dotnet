@@ -67,6 +67,13 @@ namespace SonarAnalyzer.Rules
                 new(KnownType.Microsoft_EntityFrameworkCore_RelationalQueryableExtensions, "FromSql")
             };
 
+        private readonly MemberDescriptor[] invocationsForFirstTwoArgumentsAfterV2 =
+            {
+                new(KnownType.Microsoft_EntityFrameworkCore_RelationalDatabaseFacadeExtensions, "ExecuteSqlRaw"),
+                new(KnownType.Microsoft_EntityFrameworkCore_RelationalDatabaseFacadeExtensions, "ExecuteSqlRawAsync"),
+                new(KnownType.Microsoft_EntityFrameworkCore_RelationalQueryableExtensions, "FromSqlRaw")
+            };
+
         private readonly MemberDescriptor[] invocationsForFirstArgument =
             {
                 new(KnownType.System_Data_Sqlite_SqliteCommand, "Execute")
@@ -114,6 +121,11 @@ namespace SonarAnalyzer.Rules
             inv.Track(input,
                 inv.MatchMethod(invocationsForFirstTwoArguments),
                 inv.And(MethodHasRawSqlQueryParameter(), inv.Or(ArgumentAtIndexIsTracked(0), ArgumentAtIndexIsTracked(1))),
+                inv.ExceptWhen(inv.ArgumentAtIndexIsConstant(0)));
+
+            inv.Track(input,
+                inv.MatchMethod(invocationsForFirstTwoArgumentsAfterV2),
+                inv.Or(ArgumentAtIndexIsTracked(0), ArgumentAtIndexIsTracked(1)),
                 inv.ExceptWhen(inv.ArgumentAtIndexIsConstant(0)));
 
             TrackInvocations(input, invocationsForFirstArgument, FirstArgumentIndex);
