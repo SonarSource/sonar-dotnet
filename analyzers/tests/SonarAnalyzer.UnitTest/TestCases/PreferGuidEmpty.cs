@@ -33,6 +33,12 @@ class Compliant
     }
 
     void OptionalParameter(Guid id = default) { } // Compliant, default has to be a run-time constant
+
+    void NotGuid()
+    {
+        int integer = default;
+        var date = default(DateTime);
+    }
 }
 
 class NonCompliant

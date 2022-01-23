@@ -30,6 +30,11 @@ Class Compliant
     Sub OptionalParameter(Optional guid As Guid = Nothing) ' Compliant, default has to be a run-time constant
     End Sub
 
+    Sub NotGuid()
+        Dim int As Integer = Nothing ' Compliant
+        Dim dat As Date = Nothing ' Compliant
+    End Sub
+
 End Class
 
 Class NonCompliant
@@ -46,7 +51,7 @@ Class NonCompliant
 
     Sub DefaultInintiation()
         Dim defaultValue As Guid = Nothing ' Noncompliant
-        Dim unasignend As Guid ' Noncompliant
+        Dim unasignend As Guid ' FN
         Dim instance As New GuidClass(Nothing) ' Noncompliant
         instance.Method(Nothing) ' Noncompliant
         Prop = Nothing ' Noncompliant
@@ -54,7 +59,7 @@ Class NonCompliant
 
     Sub EmptyString()
         Dim ctor As Guid = New Guid("00000000-0000-0000-0000-000000000000") ' Noncompliant
-        Dim parse As Guid = Guid.Parse("00000000-0000-0000-0000-000000000000") ' FP
+        Dim parse As Guid = Guid.Parse("00000000-0000-0000-0000-000000000000") ' FN
     End Sub
 
 End Class
@@ -66,11 +71,11 @@ Structure GuidAssignmentStruct
 End Structure
 
 Class GuidClass
-	Public Sub New(param As Guid)
-	End Sub
-	
-	Public Sub Method(param As Guid)
-	End Sub
+    Public Sub New(param As Guid)
+    End Sub
+
+    Public Sub Method(param As Guid)
+    End Sub
 End Class
 
 Class NullableGuidClass

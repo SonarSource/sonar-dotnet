@@ -54,7 +54,7 @@ namespace SonarAnalyzer.Rules
                 c =>
                 {
                     if (NoParameter(c.Node)
-                        && c.SemanticModel.GetTypeInfo(c.Node).Type.Is(KnownType.System_Guid))
+                        && c.SemanticModel.GetTypeInfo(c.Node).ConvertedType.Is(KnownType.System_Guid))
                     {
                         c.ReportIssue(Diagnostic.Create(Rule, c.Node.GetLocation()));
                     }
