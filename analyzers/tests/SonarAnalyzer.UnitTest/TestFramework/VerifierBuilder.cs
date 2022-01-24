@@ -90,14 +90,9 @@ namespace SonarAnalyzer.UnitTest.TestFramework
         public VerifierBuilder WithCodeFix<TCodeFix>() where TCodeFix : SonarCodeFix, new() =>
             this with { CodeFix = () => new TCodeFix() };
 
-        public VerifierBuilder WithCodeFixedPath(string codeFixedPath) =>
-            this with { CodeFixedPath = codeFixedPath };
-
-        /// <summary>
-        /// Optional alternative fixed file for cases when FixAllProvider produces different results than applying all code fixes on the same original document.
-        /// </summary>
-        public VerifierBuilder WithCodeFixedPathBatch(string codeFixedPathBatch) =>
-            this with { CodeFixedPathBatch = codeFixedPathBatch };
+        /// <param name="codeFixedPathBatch">Fixed file for cases when FixAllProvider produces different results than applying all code fixes on the same original document.</param>
+        public VerifierBuilder WithCodeFixedPaths(string codeFixedPath, string codeFixedPathBatch = null) =>
+            this with { CodeFixedPath = codeFixedPath, CodeFixedPathBatch = codeFixedPathBatch };
 
         public VerifierBuilder WithCodeFixTitle(string codeFixTitle) =>
             this with { CodeFixTitle = codeFixTitle };

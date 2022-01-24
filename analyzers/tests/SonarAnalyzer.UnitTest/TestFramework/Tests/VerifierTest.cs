@@ -37,7 +37,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework.Tests
         private static readonly VerifierBuilder DummyCodeFixCS = new VerifierBuilder<DummyAnalyzerCS>()
             .AddPaths("Path.cs")
             .WithCodeFix<DummyCodeFixCS>()
-            .WithCodeFixedPath("Expected.cs");
+            .WithCodeFixedPaths("Expected.cs");
 
         public TestContext TestContext { get; set; }
 
@@ -72,18 +72,18 @@ namespace SonarAnalyzer.UnitTest.TestFramework.Tests
 
         [TestMethod]
         public void Constructor_CodeFix_MissingCodeFixedPath_Throws() =>
-            DummyCodeFixCS.WithCodeFixedPath(null)
+            DummyCodeFixCS.WithCodeFixedPaths(null)
                 .Invoking(x => x.Build()).Should().Throw<ArgumentException>().WithMessage("CodeFixedPath was not set.");
 
         [TestMethod]
         public void Constructor_CodeFix_WrongCodeFixedPath_Throws() =>
-            DummyCodeFixCS.WithCodeFixedPath("File.vb")
+            DummyCodeFixCS.WithCodeFixedPaths("File.vb")
                 .Invoking(x => x.Build()).Should().Throw<ArgumentException>().WithMessage("Path 'File.vb' doesn't match C# file extension '.cs'.");
 
         [TestMethod]
         public void Constructor_CodeFix_WrongCodeFixedPathBatch_Throws() =>
-            DummyCodeFixCS.WithCodeFixedPathBatch("File.vb")
-                .Invoking(x => x.Build()).Should().Throw<ArgumentException>().WithMessage("Path 'File.vb' doesn't match C# file extension '.cs'.");
+            DummyCodeFixCS.WithCodeFixedPaths("File.cs", "Batch.vb")
+                .Invoking(x => x.Build()).Should().Throw<ArgumentException>().WithMessage("Path 'Batch.vb' doesn't match C# file extension '.cs'.");
 
         [TestMethod]
         public void Constructor_CodeFix_MultipleAnalyzers_Throws() =>
@@ -353,7 +353,7 @@ Line: 1, Type: primary, Id: 'second'
     private int b = default;     // Fixed
     private bool c = true;
 }");
-            DummyCS.AddPaths(originalPath).WithCodeFix<DummyCodeFixCS>().WithCodeFixedPath(fixedPath).Invoking(x => x.VerifyCodeFix()).Should().NotThrow();
+            DummyCS.AddPaths(originalPath).WithCodeFix<DummyCodeFixCS>().WithCodeFixedPaths(fixedPath).Invoking(x => x.VerifyCodeFix()).Should().NotThrow();
         }
 
         [TestMethod]
@@ -371,7 +371,7 @@ End Class");
     Private B As Integer = Nothing   ' Fixed
     Private C As Boolean = True
 End Class");
-            DummyVB.AddPaths(originalPath).WithCodeFix<DummyCodeFixVB>().WithCodeFixedPath(fixedPath).Invoking(x => x.VerifyCodeFix()).Should().NotThrow();
+            DummyVB.AddPaths(originalPath).WithCodeFix<DummyCodeFixVB>().WithCodeFixedPaths(fixedPath).Invoking(x => x.VerifyCodeFix()).Should().NotThrow();
         }
 
         [TestMethod]
@@ -384,7 +384,7 @@ End Class");
     private int b = 0;     // Noncompliant
     private bool c = true;
 }");
-            DummyCS.AddPaths(originalPath).WithCodeFix<DummyCodeFixCS>().WithCodeFixedPath(originalPath).Invoking(x => x.VerifyCodeFix()).Should().Throw<AssertFailedException>().WithMessage(
+            DummyCS.AddPaths(originalPath).WithCodeFix<DummyCodeFixCS>().WithCodeFixedPaths(originalPath).Invoking(x => x.VerifyCodeFix()).Should().Throw<AssertFailedException>().WithMessage(
 @"Expected * to be*
 ""public class Sample
 {
@@ -409,7 +409,7 @@ End Class");
     Private B As Integer = 42   ' Noncompliant
     Private C As Boolean = True
 End Class");
-            DummyVB.AddPaths(originalPath).WithCodeFix<DummyCodeFixVB>().WithCodeFixedPath(originalPath).Invoking(x => x.VerifyCodeFix()).Should().Throw<AssertFailedException>().WithMessage(
+            DummyVB.AddPaths(originalPath).WithCodeFix<DummyCodeFixVB>().WithCodeFixedPaths(originalPath).Invoking(x => x.VerifyCodeFix()).Should().Throw<AssertFailedException>().WithMessage(
 @"Expected * to be*
 ""Public Class Sample
     Private A As Integer = 42   ' Noncompliant

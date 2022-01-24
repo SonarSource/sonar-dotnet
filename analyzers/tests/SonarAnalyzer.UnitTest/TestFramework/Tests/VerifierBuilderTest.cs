@@ -125,31 +125,20 @@ namespace SonarAnalyzer.UnitTest.TestFramework.Tests
         }
 
         [TestMethod]
-        public void WithCodeFixedPath_Overrides_IsImmutable()
+        public void WithCodeFixedPaths_Overrides_IsImmutable()
         {
-            var one = Empty.WithCodeFixedPath("First");
-            var two = one.WithCodeFixedPath("Second");
+            var one = Empty.WithCodeFixedPaths("First");
+            var two = one.WithCodeFixedPaths("Second");
+            var withBatch = one.WithCodeFixedPaths("Third", "Batch");
             Empty.CodeFixedPath.Should().BeNull();
             one.CodeFixedPath.Should().Be("First");
             two.CodeFixedPath.Should().Be("Second");
+            withBatch.CodeFixedPath.Should().Be("Third");
             // Batch version should not be modified:
             Empty.CodeFixedPathBatch.Should().BeNull();
             one.CodeFixedPathBatch.Should().BeNull();
             two.CodeFixedPathBatch.Should().BeNull();
-        }
-
-        [TestMethod]
-        public void WithCodeFixedPathBatch_Overrides_IsImmutable()
-        {
-            var one = Empty.WithCodeFixedPathBatch("First");
-            var two = one.WithCodeFixedPathBatch("Second");
-            Empty.CodeFixedPathBatch.Should().BeNull();
-            one.CodeFixedPathBatch.Should().Be("First");
-            two.CodeFixedPathBatch.Should().Be("Second");
-            // Non-Batch version should not be modified:
-            Empty.CodeFixedPath.Should().BeNull();
-            one.CodeFixedPath.Should().BeNull();
-            two.CodeFixedPath.Should().BeNull();
+            withBatch.CodeFixedPathBatch.Should().Be("Batch");
         }
 
         [TestMethod]
