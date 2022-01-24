@@ -48,7 +48,6 @@ namespace SonarAnalyzer.UnitTest.Helpers
             public string Path { get; }
             public DiagnosticAnalyzer Analyzer { get; }
             public VerifierBuilder Verifier { get; }
-            public IEnumerable<MetadataReference> AdditionalReferences { get; }
 
             public TestSetup(string testCase, SonarDiagnosticAnalyzer analyzer) : this(testCase, analyzer, Enumerable.Empty<MetadataReference>()) { }
 
@@ -56,10 +55,11 @@ namespace SonarAnalyzer.UnitTest.Helpers
             {
                 Path = testCase;
                 Analyzer = analyzer;
-                Verifier = new VerifierBuilder().AddAnalyzer(() => analyzer).AddPaths(Path).AddReferences(AdditionalReferences);
-                AdditionalReferences = additionalReferences.Concat(MetadataReferenceFacade.SystemComponentModelPrimitives)
-                                                           .Concat(NetStandardMetadataReference.Netstandard)
-                                                           .Concat(MetadataReferenceFacade.SystemData);
+                additionalReferences = additionalReferences
+                    .Concat(MetadataReferenceFacade.SystemComponentModelPrimitives)
+                    .Concat(NetStandardMetadataReference.Netstandard)
+                    .Concat(MetadataReferenceFacade.SystemData);
+                Verifier = new VerifierBuilder().AddAnalyzer(() => analyzer).AddPaths(Path).AddReferences(additionalReferences);
             }
         }
 
