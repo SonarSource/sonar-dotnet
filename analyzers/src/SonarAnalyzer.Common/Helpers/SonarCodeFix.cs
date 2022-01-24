@@ -51,7 +51,7 @@ namespace SonarAnalyzer.Helpers
         }
 
         public override FixAllProvider GetFixAllProvider() =>
-            DocumentBasedFixAllProvider.Instance;
+            SonarAnalyzer.Common.DocumentBasedFixAllProvider.Instance;
 
         protected abstract Task RegisterCodeFixesAsync(SyntaxNode root, CodeFixContext context);
     }

@@ -4,7 +4,7 @@
     <AssemblyName>SonarAnalyzer.RuleDescriptorGenerator</AssemblyName>
     <RootNamespace>SonarAnalyzer.RuleDescriptorGenerator</RootNamespace>
     <OutputType>Exe</OutputType>
-    <TargetFrameworks>net46;netcoreapp3.1</TargetFrameworks>
+    <TargetFrameworks>netcoreapp3.1</TargetFrameworks>
     <ProjectGuid>{07e31f39-7419-4b4e-998e-c2bf1a6bb91c}</ProjectGuid>
   </PropertyGroup>
 
