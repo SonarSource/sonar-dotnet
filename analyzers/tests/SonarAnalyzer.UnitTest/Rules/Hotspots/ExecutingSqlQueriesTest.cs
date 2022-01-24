@@ -33,22 +33,22 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class ExecutingSqlQueriesTest
     {
-        private readonly VerifierBuilder builderCs = new VerifierBuilder().AddAnalyzer(() => new CS.ExecutingSqlQueries(AnalyzerConfiguration.AlwaysEnabled));
-        private readonly VerifierBuilder builderVb = new VerifierBuilder().AddAnalyzer(() => new VB.ExecutingSqlQueries(AnalyzerConfiguration.AlwaysEnabled));
+        private readonly VerifierBuilder builderCS = new VerifierBuilder().AddAnalyzer(() => new CS.ExecutingSqlQueries(AnalyzerConfiguration.AlwaysEnabled)).WithBasePath("Hotspots");
+        private readonly VerifierBuilder builderVB = new VerifierBuilder().AddAnalyzer(() => new VB.ExecutingSqlQueries(AnalyzerConfiguration.AlwaysEnabled)).WithBasePath("Hotspots");
 
 #if NETFRAMEWORK // System.Data.OracleClient.dll is not available on .Net Core
 
         [TestMethod]
         public void ExecutingSqlQueries_CS_Net46() =>
-            builderCs
-                .AddPaths(@"Hotspots\ExecutingSqlQueries_Net46.cs")
+            builderCS
+                .AddPaths(@"ExecutingSqlQueries_Net46.cs")
                 .AddReferences(GetReferencesNet46(Constants.NuGetLatestVersion))
                 .Verify();
 
         [TestMethod]
         public void ExecutingSqlQueries_VB_Net46() =>
-            builderVb
-                .AddPaths(@"Hotspots\ExecutingSqlQueries_Net46.vb")
+            builderVB
+                .AddPaths(@"ExecutingSqlQueries_Net46.vb")
                 .WithOptions(ParseOptionsHelper.FromVisualBasic15)
                 .AddReferences(GetReferencesNet46(Constants.NuGetLatestVersion))
                 .Verify();
@@ -66,32 +66,32 @@ namespace SonarAnalyzer.UnitTest.Rules
 
         [TestMethod]
         public void ExecutingSqlQueries_CS_EntityFrameworkCore2() =>
-            builderCs
-                .AddPaths(@"Hotspots\ExecutingSqlQueries_EntityFrameworkCore2.cs")
+            builderCS
+                .AddPaths(@"ExecutingSqlQueries_EntityFrameworkCore2.cs")
                 .WithOptions(ParseOptionsHelper.FromCSharp8)
                 .AddReferences(GetReferencesEntityFrameworkNetCore("2.2.6"))
                 .Verify();
 
         [TestMethod]
         public void ExecutingSqlQueries_CS_EntityFrameworkCoreLatest() =>
-            builderCs
-                .AddPaths(@"Hotspots\ExecutingSqlQueries_EntityFrameworkCoreLatest.cs")
+            builderCS
+                .AddPaths(@"ExecutingSqlQueries_EntityFrameworkCoreLatest.cs")
                 .WithOptions(ParseOptionsHelper.FromCSharp8)
                 .AddReferences(GetReferencesEntityFrameworkNetCore(Constants.NuGetLatestVersion))
                 .Verify();
 
         [TestMethod]
         public void ExecutingSqlQueries_CSharp9() =>
-            builderCs
-                .AddPaths(@"Hotspots\ExecutingSqlQueries.CSharp9.cs")
+            builderCS
+                .AddPaths(@"ExecutingSqlQueries.CSharp9.cs")
                 .WithTopLevelStatements()
                 .AddReferences(GetReferencesEntityFrameworkNetCore(Constants.DotNetCore220Version).Concat(NuGetMetadataReference.MicrosoftDataSqliteCore()))
                 .Verify();
 
         [TestMethod]
         public void ExecutingSqlQueries_CSharp10() =>
-            builderCs
-                .AddPaths(@"Hotspots\ExecutingSqlQueries.CSharp10.cs")
+            builderCS
+                .AddPaths(@"ExecutingSqlQueries.CSharp10.cs")
                 .WithOptions(ParseOptionsHelper.FromCSharp10)
                 .WithTopLevelStatements()
                 .AddReferences(GetReferencesEntityFrameworkNetCore(Constants.DotNetCore220Version).Concat(NuGetMetadataReference.MicrosoftDataSqliteCore()))
@@ -99,16 +99,16 @@ namespace SonarAnalyzer.UnitTest.Rules
 
         [TestMethod]
         public void ExecutingSqlQueries_VB_EntityFrameworkCore2() =>
-            builderVb
-                .AddPaths(@"Hotspots\ExecutingSqlQueries_EntityFrameworkCore2.vb")
+            builderVB
+                .AddPaths(@"ExecutingSqlQueries_EntityFrameworkCore2.vb")
                 .WithOptions(ParseOptionsHelper.FromVisualBasic15)
                 .AddReferences(GetReferencesEntityFrameworkNetCore(Constants.DotNetCore220Version))
                 .Verify();
 
         [TestMethod]
         public void ExecutingSqlQueries_VB_EntityFrameworkCoreLatest() =>
-            builderVb
-                .AddPaths(@"Hotspots\ExecutingSqlQueries_EntityFrameworkCoreLatest.vb")
+            builderVB
+                .AddPaths(@"ExecutingSqlQueries_EntityFrameworkCoreLatest.vb")
                 .WithOptions(ParseOptionsHelper.FromVisualBasic15)
                 .AddReferences(GetReferencesEntityFrameworkNetCore(Constants.NuGetLatestVersion))
                 .Verify();
