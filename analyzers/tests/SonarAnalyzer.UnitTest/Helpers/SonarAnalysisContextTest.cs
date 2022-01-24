@@ -270,7 +270,7 @@ namespace SonarAnalyzer.UnitTest.Helpers
             }
         }
 
-         [TestMethod]
+        [TestMethod]
         public void ProjectConfiguration_LoadsExpectedValues()
         {
             var options = TestHelper.CreateOptions($@"ResourceTests\SonarProjectConfig\Path_Windows\SonarProjectConfig.xml");
