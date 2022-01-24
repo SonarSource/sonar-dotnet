@@ -213,6 +213,7 @@ public class Foo
                 .Concat(MetadataReferenceFacade.SystemXml)
                 .Concat(MetadataReferenceFacade.SystemXmlLinq)
                 .Concat(MetadataReferenceFacade.SystemThreadingTasks)
+                .Concat(MetadataReferenceFacade.SystemNetHttp)
                 .ToArray();
     }
 }

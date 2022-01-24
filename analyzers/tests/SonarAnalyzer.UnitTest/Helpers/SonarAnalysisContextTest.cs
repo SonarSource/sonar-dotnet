@@ -119,7 +119,7 @@ namespace SonarAnalyzer.UnitTest.Helpers
                     builder.AddPaths(testCase.Path)
                         .WithOptions(ParseOptionsHelper.FromCSharp8)
                         .AddReferences(testCase.AdditionalReferences)
-                        .Verify();
+                        .VerifyNoIssueReported();
                 }
             }
             finally
@@ -244,8 +244,8 @@ namespace SonarAnalyzer.UnitTest.Helpers
                 var (testCase, builder) = testCases.Where(x => x.Key.Analyzer is AnonymousDelegateEventUnsubscribe).Select(x => (x.Key, x.Value)).FirstOrDefault();
                 var (testCase2, builder2) = testCases.Where(x => x.Key.Analyzer is AsyncAwaitIdentifier).Select(x => (x.Key, x.Value)).FirstOrDefault();
                 SonarAnalysisContext.ShouldExecuteRegisteredAction = (diags, tree) => tree.FilePath.EndsWith(new FileInfo(testCase.Path).Name, StringComparison.OrdinalIgnoreCase);
-                builder.AddPaths(testCase.Path).Verify();
-                builder2.AddPaths(testCase2.Path).Verify();
+                builder.AddPaths(testCase.Path).WithConcurrentAnalysis(false).Verify();
+                builder2.AddPaths(testCase2.Path).VerifyNoIssueReported();
             }
             finally
             {
