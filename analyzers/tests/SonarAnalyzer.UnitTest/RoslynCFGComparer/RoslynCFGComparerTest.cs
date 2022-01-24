@@ -31,6 +31,8 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class RoslynCfgComparerTest
     {
+        private readonly VerifierBuilder builder = new VerifierBuilder().WithBasePath("RoslynCFGComparer").WithConcurrentAnalysis(false);
+
         [TestMethod]
         [DataRow("AnonymousFunctions.cs")]
         [DataRow("LocalFunctions.cs")]
@@ -41,12 +43,12 @@ namespace SonarAnalyzer.UnitTest.Rules
         [DataRow("Simple.cs")]
         [DataRow("TryCatch.cs")]
         public void RoslynCfgComparer_RenderCfgs_CS(string filename) =>
-            new VerifierBuilder<CS.RoslynCfgComparer>().WithBasePath("RoslynCFGComparer").AddPaths(filename).WithOptions(ParseOptionsHelper.CSharpLatest).Verify();
+            builder.AddAnalyzer(() => new CS.RoslynCfgComparer()).AddPaths(filename).WithOptions(ParseOptionsHelper.CSharpLatest).Verify();
 
         [TestMethod]
         [DataRow("Branching.vb")]
         [DataRow("TryCatch.vb")]
         public void RoslynCfgComparer_RenderCfgs_VB(string filename) =>
-            new VerifierBuilder<VB.RoslynCfgComparer>().WithBasePath("RoslynCFGComparer").AddPaths(filename).WithOptions(ParseOptionsHelper.VisualBasicLatest).Verify();
+            builder.AddAnalyzer(() => new VB.RoslynCfgComparer()).AddPaths(filename).WithOptions(ParseOptionsHelper.VisualBasicLatest).Verify();
     }
 }

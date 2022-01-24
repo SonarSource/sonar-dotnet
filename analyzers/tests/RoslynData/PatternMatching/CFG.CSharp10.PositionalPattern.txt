@@ -1,0 +1,45 @@
+// http://viz-js.com/
+// https://edotor.net/?engine=dot#digraph%20%22PositionalPattern%22%20%7B%0D%0Asubgraph%20%22cluster_LocalLifetime%20region%22%20%7B%0Alabel%20%3D%20%22LocalLifetime%20region%22%0D%0Asubgraph%20%22cluster_LocalLifetime%20region%22%20%7B%0Alabel%20%3D%20%22LocalLifetime%20region%22%0D%0Acfg0_block1%20%5Bshape%3Drecord%20label%3D%22%7BBLOCK%20%231%7C0%23%20FlowCaptureOperation%3A%20%231%20%2F%20IdentifierNameSyntax%3A%20arg%7C1%23%20ParameterReferenceOperation%20%2F%20IdentifierNameSyntax%3A%20arg%7C%23%23%23%23%23%23%23%23%23%23%7C%23%23%20BranchValue%20%23%23%7C0%23%20IsPatternOperation%20%2F%20SwitchExpressionArmSyntax%3A%20Deconstructed(0%2C%20_)%20%3D%5C%3E%20%5C%22A%20is%20zero%5C%22%7C1%23%20FlowCaptureReferenceOperation%3A%20%231%20%2F%20IdentifierNameSyntax%3A%20arg%7C1%23%20RecursivePatternOperation%20%2F%20RecursivePatternSyntax%3A%20Deconstructed(0%2C%20_)%7C2%23%20ConstantPatternOperation%20%2F%20ConstantPatternSyntax%3A%200%7C3%23%20LiteralOperation%20%2F%20LiteralExpressionSyntax%3A%200%7C2%23%20DiscardPatternOperation%20%2F%20DiscardPatternSyntax%3A%20_%7C%23%23%23%23%23%23%23%23%23%23%7D%22%5D%0D%0Acfg0_block2%20%5Bshape%3Drecord%20label%3D%22%7BBLOCK%20%232%7C0%23%20FlowCaptureOperation%3A%20%230%20%2F%20LiteralExpressionSyntax%3A%20%5C%22A%20is%20zero%5C%22%7C1%23%20LiteralOperation%20%2F%20LiteralExpressionSyntax%3A%20%5C%22A%20is%20zero%5C%22%7C%23%23%23%23%23%23%23%23%23%23%7D%22%5D%0D%0Acfg0_block3%20%5Bshape%3Drecord%20label%3D%22%7BBLOCK%20%233%7C%23%23%20BranchValue%20%23%23%7C0%23%20IsPatternOperation%20%2F%20SwitchExpressionArmSyntax%3A%20Deconstructed(_%2C%200)%20%3D%5C%3E%20%5C%22B%20is%20zero%5C%22%7C1%23%20FlowCaptureReferenceOperation%3A%20%231%20%2F%20IdentifierNameSyntax%3A%20arg%7C1%23%20RecursivePatternOperation%20%2F%20RecursivePatternSyntax%3A%20Deconstructed(_%2C%200)%7C2%23%20DiscardPatternOperation%20%2F%20DiscardPatternSyntax%3A%20_%7C2%23%20ConstantPatternOperation%20%2F%20ConstantPatternSyntax%3A%200%7C3%23%20LiteralOperation%20%2F%20LiteralExpressionSyntax%3A%200%7C%23%23%23%23%23%23%23%23%23%23%7D%22%5D%0D%0Acfg0_block4%20%5Bshape%3Drecord%20label%3D%22%7BBLOCK%20%234%7C0%23%20FlowCaptureOperation%3A%20%230%20%2F%20LiteralExpressionSyntax%3A%20%5C%22B%20is%20zero%5C%22%7C1%23%20LiteralOperation%20%2F%20LiteralExpressionSyntax%3A%20%5C%22B%20is%20zero%5C%22%7C%23%23%23%23%23%23%23%23%23%23%7D%22%5D%0D%0Acfg0_block5%20%5Bshape%3Drecord%20label%3D%22%7BBLOCK%20%235%7C%23%23%20BranchValue%20%23%23%7C0%23%20IsPatternOperation%20%2F%20SwitchExpressionArmSyntax%3A%20_%20%3D%5C%3E%20%5C%22No%20zero%5C%22%7C1%23%20FlowCaptureReferenceOperation%3A%20%231%20%2F%20IdentifierNameSyntax%3A%20arg%7C1%23%20DiscardPatternOperation%20%2F%20DiscardPatternSyntax%3A%20_%7C%23%23%23%23%23%23%23%23%23%23%7D%22%5D%0D%0Acfg0_block6%20%5Bshape%3Drecord%20label%3D%22%7BBLOCK%20%236%7C0%23%20FlowCaptureOperation%3A%20%230%20%2F%20LiteralExpressionSyntax%3A%20%5C%22No%20zero%5C%22%7C1%23%20LiteralOperation%20%2F%20LiteralExpressionSyntax%3A%20%5C%22No%20zero%5C%22%7C%23%23%23%23%23%23%23%23%23%23%7D%22%5D%0D%0A%7D%0D%0Acfg0_block7%20%5Bshape%3Drecord%20label%3D%22%7BBLOCK%20%237%7C%23%23%20BranchValue%20%23%23%7C0%23%20ObjectCreationOperation%20%2F%20SwitchExpressionSyntax%3A%20arg%20switch%5Cn%20%20%20%20%20%20%20%20%5C%7B%5Cn%20%20%20%20%20%20%20%20%20%20%20%20Deconstructed(0%2C%20_)%20%3D%5C%3E%20%5C%22A%20is%20zero%5C%22%2C%5Cn%20%20%20%20%20%20%20%20%20%20%20%20Deconstructed(_%2C%200)%20%3D%5C%3E%20%5C%22B%20is%20zero%5C%22%2C%5Cn%20%20%20%20%20%20%20%20%20%20%20%20_%20%3D%5C%3E%20%5C%22No%20zero%5C%22%5Cn%20%20%20%20%20%20%20%20%5C%7D%7C%23%23%23%23%23%23%23%23%23%23%7D%22%5D%0D%0Acfg0_block8%20%5Bshape%3Drecord%20label%3D%22%7BBLOCK%20%238%7C%23%23%20BranchValue%20%23%23%7C0%23%20FlowCaptureReferenceOperation%3A%20%230%20%2F%20SwitchExpressionSyntax%3A%20arg%20switch%5Cn%20%20%20%20%20%20%20%20%5C%7B%5Cn%20%20%20%20%20%20%20%20%20%20%20%20Deconstructed(0%2C%20_)%20%3D%5C%3E%20%5C%22A%20is%20zero%5C%22%2C%5Cn%20%20%20%20%20%20%20%20%20%20%20%20Deconstructed(_%2C%200)%20%3D%5C%3E%20%5C%22B%20is%20zero%5C%22%2C%5Cn%20%20%20%20%20%20%20%20%20%20%20%20_%20%3D%5C%3E%20%5C%22No%20zero%5C%22%5Cn%20%20%20%20%20%20%20%20%5C%7D%7C%23%23%23%23%23%23%23%23%23%23%7D%22%5D%0D%0A%7D%0D%0Acfg0_block0%20%5Bshape%3Drecord%20label%3D%22%7BENTRY%20%230%7D%22%5D%0D%0Acfg0_block9%20%5Bshape%3Drecord%20label%3D%22%7BEXIT%20%239%7D%22%5D%0D%0Acfg0_block0%20-%3E%20cfg0_block1%0D%0Acfg0_block1%20-%3E%20cfg0_block2%20%5Blabel%3D%22Else%22%5D%0D%0Acfg0_block1%20-%3E%20cfg0_block3%20%5Blabel%3D%22WhenFalse%22%5D%0D%0Acfg0_block3%20-%3E%20cfg0_block4%20%5Blabel%3D%22Else%22%5D%0D%0Acfg0_block3%20-%3E%20cfg0_block5%20%5Blabel%3D%22WhenFalse%22%5D%0D%0Acfg0_block5%20-%3E%20cfg0_block6%20%5Blabel%3D%22Else%22%5D%0D%0Acfg0_block5%20-%3E%20cfg0_block7%20%5Blabel%3D%22WhenFalse%22%5D%0D%0Acfg0_block7%20-%3E%20NoDestination_cfg0_block7%20%5Blabel%3D%22Throw%22%5D%0D%0Acfg0_block2%20-%3E%20cfg0_block8%0D%0Acfg0_block4%20-%3E%20cfg0_block8%0D%0Acfg0_block6%20-%3E%20cfg0_block8%0D%0Acfg0_block8%20-%3E%20cfg0_block9%20%5Blabel%3D%22Return%22%5D%0D%0A%7D%0D%0A
+
+/*
+public string PositionalPattern(object arg)
+    {
+        return arg switch
+        {
+            Deconstructed(0, _) => "A is zero",
+            Deconstructed(_, 0) => "B is zero",
+            _ => "No zero"
+        };
+    }
+*/
+
+digraph "PositionalPattern" {
+subgraph "cluster_LocalLifetime region" {
+label = "LocalLifetime region"
+subgraph "cluster_LocalLifetime region" {
+label = "LocalLifetime region"
+cfg0_block1 [shape=record label="{BLOCK #1|0# FlowCaptureOperation: #1 / IdentifierNameSyntax: arg|1# ParameterReferenceOperation / IdentifierNameSyntax: arg|##########|## BranchValue ##|0# IsPatternOperation / SwitchExpressionArmSyntax: Deconstructed(0, _) =\> \"A is zero\"|1# FlowCaptureReferenceOperation: #1 / IdentifierNameSyntax: arg|1# RecursivePatternOperation / RecursivePatternSyntax: Deconstructed(0, _)|2# ConstantPatternOperation / ConstantPatternSyntax: 0|3# LiteralOperation / LiteralExpressionSyntax: 0|2# DiscardPatternOperation / DiscardPatternSyntax: _|##########}"]
+cfg0_block2 [shape=record label="{BLOCK #2|0# FlowCaptureOperation: #0 / LiteralExpressionSyntax: \"A is zero\"|1# LiteralOperation / LiteralExpressionSyntax: \"A is zero\"|##########}"]
+cfg0_block3 [shape=record label="{BLOCK #3|## BranchValue ##|0# IsPatternOperation / SwitchExpressionArmSyntax: Deconstructed(_, 0) =\> \"B is zero\"|1# FlowCaptureReferenceOperation: #1 / IdentifierNameSyntax: arg|1# RecursivePatternOperation / RecursivePatternSyntax: Deconstructed(_, 0)|2# DiscardPatternOperation / DiscardPatternSyntax: _|2# ConstantPatternOperation / ConstantPatternSyntax: 0|3# LiteralOperation / LiteralExpressionSyntax: 0|##########}"]
+cfg0_block4 [shape=record label="{BLOCK #4|0# FlowCaptureOperation: #0 / LiteralExpressionSyntax: \"B is zero\"|1# LiteralOperation / LiteralExpressionSyntax: \"B is zero\"|##########}"]
+cfg0_block5 [shape=record label="{BLOCK #5|## BranchValue ##|0# IsPatternOperation / SwitchExpressionArmSyntax: _ =\> \"No zero\"|1# FlowCaptureReferenceOperation: #1 / IdentifierNameSyntax: arg|1# DiscardPatternOperation / DiscardPatternSyntax: _|##########}"]
+cfg0_block6 [shape=record label="{BLOCK #6|0# FlowCaptureOperation: #0 / LiteralExpressionSyntax: \"No zero\"|1# LiteralOperation / LiteralExpressionSyntax: \"No zero\"|##########}"]
+}
+cfg0_block7 [shape=record label="{BLOCK #7|## BranchValue ##|0# ObjectCreationOperation / SwitchExpressionSyntax: arg switch\n        \{\n            Deconstructed(0, _) =\> \"A is zero\",\n            Deconstructed(_, 0) =\> \"B is zero\",\n            _ =\> \"No zero\"\n        \}|##########}"]
+cfg0_block8 [shape=record label="{BLOCK #8|## BranchValue ##|0# FlowCaptureReferenceOperation: #0 / SwitchExpressionSyntax: arg switch\n        \{\n            Deconstructed(0, _) =\> \"A is zero\",\n            Deconstructed(_, 0) =\> \"B is zero\",\n            _ =\> \"No zero\"\n        \}|##########}"]
+}
+cfg0_block0 [shape=record label="{ENTRY #0}"]
+cfg0_block9 [shape=record label="{EXIT #9}"]
+cfg0_block0 -> cfg0_block1
+cfg0_block1 -> cfg0_block2 [label="Else"]
+cfg0_block1 -> cfg0_block3 [label="WhenFalse"]
+cfg0_block3 -> cfg0_block4 [label="Else"]
+cfg0_block3 -> cfg0_block5 [label="WhenFalse"]
+cfg0_block5 -> cfg0_block6 [label="Else"]
+cfg0_block5 -> cfg0_block7 [label="WhenFalse"]
+cfg0_block7 -> NoDestination_cfg0_block7 [label="Throw"]
+cfg0_block2 -> cfg0_block8
+cfg0_block4 -> cfg0_block8
+cfg0_block6 -> cfg0_block8
+cfg0_block8 -> cfg0_block9 [label="Return"]
+}

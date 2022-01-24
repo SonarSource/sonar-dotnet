@@ -1,0 +1,84 @@
+// http://viz-js.com/
+// https://edotor.net/?engine=dot#digraph%20%22ForEach%22%20%7B%0D%0Asubgraph%20%22cluster_LocalLifetime%20region%22%20%7B%0Alabel%20%3D%20%22LocalLifetime%20region%22%0D%0Asubgraph%20%22cluster_TryAndFinally%20region%22%20%7B%0Alabel%20%3D%20%22TryAndFinally%20region%22%0D%0Asubgraph%20%22cluster_Try%20region%22%20%7B%0Alabel%20%3D%20%22Try%20region%22%0D%0Asubgraph%20%22cluster_LocalLifetime%20region%22%20%7B%0Alabel%20%3D%20%22LocalLifetime%20region%22%0D%0Asubgraph%20%22cluster_LocalLifetime%20region%22%20%7B%0Alabel%20%3D%20%22LocalLifetime%20region%22%0D%0Asubgraph%20%22cluster_TryAndFinally%20region%22%20%7B%0Alabel%20%3D%20%22TryAndFinally%20region%22%0D%0Asubgraph%20%22cluster_Try%20region%22%20%7B%0Alabel%20%3D%20%22Try%20region%22%0D%0Asubgraph%20%22cluster_LocalLifetime%20region%22%20%7B%0Alabel%20%3D%20%22LocalLifetime%20region%22%0D%0Asubgraph%20%22cluster_LocalLifetime%20region%22%20%7B%0Alabel%20%3D%20%22LocalLifetime%20region%22%0D%0Acfg0_block7%20%5Bshape%3Drecord%20label%3D%22%7BBLOCK%20%237%7C0%23%20SimpleAssignmentOperation%20%2F%20VariableDeclaratorSyntax%3A%20ret%20%3D%20%24%5C%22%5C%7Bnumber%5C%7D.%20%5C%7Bname%5C%7D%5C%22%7C1%23%20LocalReferenceOperation%20%2F%20VariableDeclaratorSyntax%3A%20ret%20%3D%20%24%5C%22%5C%7Bnumber%5C%7D.%20%5C%7Bname%5C%7D%5C%22%7C1%23%20InterpolatedStringOperation%20%2F%20InterpolatedStringExpressionSyntax%3A%20%24%5C%22%5C%7Bnumber%5C%7D.%20%5C%7Bname%5C%7D%5C%22%7C2%23%20InterpolationOperation%20%2F%20InterpolationSyntax%3A%20%5C%7Bnumber%5C%7D%7C3%23%20LocalReferenceOperation%20%2F%20IdentifierNameSyntax%3A%20number%7C2%23%20InterpolatedStringTextOperation%20%2F%20InterpolatedStringTextSyntax%3A%20.%20%7C3%23%20LiteralOperation%20%2F%20InterpolatedStringTextSyntax%3A%20.%20%7C2%23%20InterpolationOperation%20%2F%20InterpolationSyntax%3A%20%5C%7Bname%5C%7D%7C3%23%20LocalReferenceOperation%20%2F%20IdentifierNameSyntax%3A%20name%7C%23%23%23%23%23%23%23%23%23%23%7D%22%5D%0D%0A%7D%0D%0Acfg0_block6%20%5Bshape%3Drecord%20label%3D%22%7BBLOCK%20%236%7C0%23%20SimpleAssignmentOperation%20%2F%20IdentifierNameSyntax%3A%20var%7C1%23%20LocalReferenceOperation%20%2F%20IdentifierNameSyntax%3A%20var%7C1%23%20ConversionOperation%20%2F%20IdentifierNameSyntax%3A%20var%7C2%23%20PropertyReferenceOperation%20%2F%20IdentifierNameSyntax%3A%20var%7C3%23%20FlowCaptureReferenceOperation%3A%20%231%20%2F%20IdentifierNameSyntax%3A%20names%7C%23%23%23%23%23%23%23%23%23%23%7D%22%5D%0D%0A%7D%0D%0Acfg0_block5%20%5Bshape%3Drecord%20label%3D%22%7BBLOCK%20%235%7C%23%23%20BranchValue%20%23%23%7C0%23%20InvocationOperation%3A%20MoveNext%20%2F%20IdentifierNameSyntax%3A%20names%7C1%23%20FlowCaptureReferenceOperation%3A%20%231%20%2F%20IdentifierNameSyntax%3A%20names%7C%23%23%23%23%23%23%23%23%23%23%7D%22%5D%0D%0A%7D%0D%0Asubgraph%20%22cluster_Finally%20region%22%20%7B%0Alabel%20%3D%20%22Finally%20region%22%0D%0Acfg0_block8%20%5Bshape%3Drecord%20label%3D%22%7BBLOCK%20%238%7C0%23%20FlowCaptureOperation%3A%20%232%20%2F%20IdentifierNameSyntax%3A%20names%7C1%23%20ConversionOperation%20%2F%20IdentifierNameSyntax%3A%20names%7C2%23%20FlowCaptureReferenceOperation%3A%20%231%20%2F%20IdentifierNameSyntax%3A%20names%7C%23%23%23%23%23%23%23%23%23%23%7C%23%23%20BranchValue%20%23%23%7C0%23%20IsNullOperation%20%2F%20IdentifierNameSyntax%3A%20names%7C1%23%20FlowCaptureReferenceOperation%3A%20%232%20%2F%20IdentifierNameSyntax%3A%20names%7C%23%23%23%23%23%23%23%23%23%23%7D%22%5D%0D%0Acfg0_block9%20%5Bshape%3Drecord%20label%3D%22%7BBLOCK%20%239%7C0%23%20InvocationOperation%3A%20Dispose%20%2F%20IdentifierNameSyntax%3A%20names%7C1%23%20FlowCaptureReferenceOperation%3A%20%232%20%2F%20IdentifierNameSyntax%3A%20names%7C%23%23%23%23%23%23%23%23%23%23%7D%22%5D%0D%0Acfg0_block10%20%5Bshape%3Drecord%20label%3D%22%7BBLOCK%20%2310%7D%22%5D%0D%0A%7D%0D%0A%7D%0D%0Acfg0_block4%20%5Bshape%3Drecord%20label%3D%22%7BBLOCK%20%234%7C0%23%20FlowCaptureOperation%3A%20%231%20%2F%20IdentifierNameSyntax%3A%20names%7C1%23%20InvocationOperation%3A%20GetEnumerator%20%2F%20IdentifierNameSyntax%3A%20names%7C2%23%20ConversionOperation%20%2F%20IdentifierNameSyntax%3A%20names%7C3%23%20ParameterReferenceOperation%20%2F%20IdentifierNameSyntax%3A%20names%7C%23%23%23%23%23%23%23%23%23%23%7D%22%5D%0D%0A%7D%0D%0Acfg0_block3%20%5Bshape%3Drecord%20label%3D%22%7BBLOCK%20%233%7C0%23%20SimpleAssignmentOperation%20%2F%20IdentifierNameSyntax%3A%20var%7C1%23%20LocalReferenceOperation%20%2F%20IdentifierNameSyntax%3A%20var%7C1%23%20ConversionOperation%20%2F%20IdentifierNameSyntax%3A%20var%7C2%23%20PropertyReferenceOperation%20%2F%20IdentifierNameSyntax%3A%20var%7C3%23%20FlowCaptureReferenceOperation%3A%20%230%20%2F%20IdentifierNameSyntax%3A%20numbers%7C%23%23%23%23%23%23%23%23%23%23%7D%22%5D%0D%0A%7D%0D%0Acfg0_block2%20%5Bshape%3Drecord%20label%3D%22%7BBLOCK%20%232%7C%23%23%20BranchValue%20%23%23%7C0%23%20InvocationOperation%3A%20MoveNext%20%2F%20IdentifierNameSyntax%3A%20numbers%7C1%23%20FlowCaptureReferenceOperation%3A%20%230%20%2F%20IdentifierNameSyntax%3A%20numbers%7C%23%23%23%23%23%23%23%23%23%23%7D%22%5D%0D%0A%7D%0D%0Asubgraph%20%22cluster_Finally%20region%22%20%7B%0Alabel%20%3D%20%22Finally%20region%22%0D%0Acfg0_block11%20%5Bshape%3Drecord%20label%3D%22%7BBLOCK%20%2311%7C0%23%20FlowCaptureOperation%3A%20%233%20%2F%20IdentifierNameSyntax%3A%20numbers%7C1%23%20ConversionOperation%20%2F%20IdentifierNameSyntax%3A%20numbers%7C2%23%20FlowCaptureReferenceOperation%3A%20%230%20%2F%20IdentifierNameSyntax%3A%20numbers%7C%23%23%23%23%23%23%23%23%23%23%7C%23%23%20BranchValue%20%23%23%7C0%23%20IsNullOperation%20%2F%20IdentifierNameSyntax%3A%20numbers%7C1%23%20FlowCaptureReferenceOperation%3A%20%233%20%2F%20IdentifierNameSyntax%3A%20numbers%7C%23%23%23%23%23%23%23%23%23%23%7D%22%5D%0D%0Acfg0_block12%20%5Bshape%3Drecord%20label%3D%22%7BBLOCK%20%2312%7C0%23%20InvocationOperation%3A%20Dispose%20%2F%20IdentifierNameSyntax%3A%20numbers%7C1%23%20FlowCaptureReferenceOperation%3A%20%233%20%2F%20IdentifierNameSyntax%3A%20numbers%7C%23%23%23%23%23%23%23%23%23%23%7D%22%5D%0D%0Acfg0_block13%20%5Bshape%3Drecord%20label%3D%22%7BBLOCK%20%2313%7D%22%5D%0D%0A%7D%0D%0A%7D%0D%0Acfg0_block1%20%5Bshape%3Drecord%20label%3D%22%7BBLOCK%20%231%7C0%23%20FlowCaptureOperation%3A%20%230%20%2F%20IdentifierNameSyntax%3A%20numbers%7C1%23%20InvocationOperation%3A%20GetEnumerator%20%2F%20IdentifierNameSyntax%3A%20numbers%7C2%23%20ConversionOperation%20%2F%20IdentifierNameSyntax%3A%20numbers%7C3%23%20ParameterReferenceOperation%20%2F%20IdentifierNameSyntax%3A%20numbers%7C%23%23%23%23%23%23%23%23%23%23%7D%22%5D%0D%0A%7D%0D%0Acfg0_block0%20%5Bshape%3Drecord%20label%3D%22%7BENTRY%20%230%7D%22%5D%0D%0Acfg0_block14%20%5Bshape%3Drecord%20label%3D%22%7BEXIT%20%2314%7D%22%5D%0D%0Acfg0_block6%20-%3E%20cfg0_block7%0D%0Acfg0_block5%20-%3E%20cfg0_block6%20%5Blabel%3D%22Else%22%5D%0D%0Acfg0_block4%20-%3E%20cfg0_block5%0D%0Acfg0_block7%20-%3E%20cfg0_block5%0D%0Acfg0_block8%20-%3E%20cfg0_block9%20%5Blabel%3D%22Else%22%5D%0D%0Acfg0_block8%20-%3E%20cfg0_block10%20%5Blabel%3D%22WhenTrue%22%5D%0D%0Acfg0_block9%20-%3E%20cfg0_block10%0D%0Acfg0_block10%20-%3E%20NoDestination_cfg0_block10%20%5Blabel%3D%22StructuredExceptionHandling%22%5D%0D%0Acfg0_block3%20-%3E%20cfg0_block4%0D%0Acfg0_block2%20-%3E%20cfg0_block3%20%5Blabel%3D%22Else%22%5D%0D%0Acfg0_block1%20-%3E%20cfg0_block2%0D%0Acfg0_block5%20-%3E%20cfg0_block2%20%5Blabel%3D%22WhenFalse%22%5D%0D%0Acfg0_block11%20-%3E%20cfg0_block12%20%5Blabel%3D%22Else%22%5D%0D%0Acfg0_block11%20-%3E%20cfg0_block13%20%5Blabel%3D%22WhenTrue%22%5D%0D%0Acfg0_block12%20-%3E%20cfg0_block13%0D%0Acfg0_block13%20-%3E%20NoDestination_cfg0_block13%20%5Blabel%3D%22StructuredExceptionHandling%22%5D%0D%0Acfg0_block0%20-%3E%20cfg0_block1%0D%0Acfg0_block2%20-%3E%20cfg0_block14%20%5Blabel%3D%22WhenFalse%22%5D%0D%0A%7D%0D%0A
+
+/*
+public void ForEach(string[] names, int[] numbers)
+    {
+        foreach (var number in numbers)
+        {
+            foreach (var name in names)
+            {
+                var ret = $"{number}. {name}";
+            }
+        }
+    }
+*/
+
+digraph "ForEach" {
+subgraph "cluster_LocalLifetime region" {
+label = "LocalLifetime region"
+subgraph "cluster_TryAndFinally region" {
+label = "TryAndFinally region"
+subgraph "cluster_Try region" {
+label = "Try region"
+subgraph "cluster_LocalLifetime region" {
+label = "LocalLifetime region"
+subgraph "cluster_LocalLifetime region" {
+label = "LocalLifetime region"
+subgraph "cluster_TryAndFinally region" {
+label = "TryAndFinally region"
+subgraph "cluster_Try region" {
+label = "Try region"
+subgraph "cluster_LocalLifetime region" {
+label = "LocalLifetime region"
+subgraph "cluster_LocalLifetime region" {
+label = "LocalLifetime region"
+cfg0_block7 [shape=record label="{BLOCK #7|0# SimpleAssignmentOperation / VariableDeclaratorSyntax: ret = $\"\{number\}. \{name\}\"|1# LocalReferenceOperation / VariableDeclaratorSyntax: ret = $\"\{number\}. \{name\}\"|1# InterpolatedStringOperation / InterpolatedStringExpressionSyntax: $\"\{number\}. \{name\}\"|2# InterpolationOperation / InterpolationSyntax: \{number\}|3# LocalReferenceOperation / IdentifierNameSyntax: number|2# InterpolatedStringTextOperation / InterpolatedStringTextSyntax: . |3# LiteralOperation / InterpolatedStringTextSyntax: . |2# InterpolationOperation / InterpolationSyntax: \{name\}|3# LocalReferenceOperation / IdentifierNameSyntax: name|##########}"]
+}
+cfg0_block6 [shape=record label="{BLOCK #6|0# SimpleAssignmentOperation / IdentifierNameSyntax: var|1# LocalReferenceOperation / IdentifierNameSyntax: var|1# ConversionOperation / IdentifierNameSyntax: var|2# PropertyReferenceOperation / IdentifierNameSyntax: var|3# FlowCaptureReferenceOperation: #1 / IdentifierNameSyntax: names|##########}"]
+}
+cfg0_block5 [shape=record label="{BLOCK #5|## BranchValue ##|0# InvocationOperation: MoveNext / IdentifierNameSyntax: names|1# FlowCaptureReferenceOperation: #1 / IdentifierNameSyntax: names|##########}"]
+}
+subgraph "cluster_Finally region" {
+label = "Finally region"
+cfg0_block8 [shape=record label="{BLOCK #8|0# FlowCaptureOperation: #2 / IdentifierNameSyntax: names|1# ConversionOperation / IdentifierNameSyntax: names|2# FlowCaptureReferenceOperation: #1 / IdentifierNameSyntax: names|##########|## BranchValue ##|0# IsNullOperation / IdentifierNameSyntax: names|1# FlowCaptureReferenceOperation: #2 / IdentifierNameSyntax: names|##########}"]
+cfg0_block9 [shape=record label="{BLOCK #9|0# InvocationOperation: Dispose / IdentifierNameSyntax: names|1# FlowCaptureReferenceOperation: #2 / IdentifierNameSyntax: names|##########}"]
+cfg0_block10 [shape=record label="{BLOCK #10}"]
+}
+}
+cfg0_block4 [shape=record label="{BLOCK #4|0# FlowCaptureOperation: #1 / IdentifierNameSyntax: names|1# InvocationOperation: GetEnumerator / IdentifierNameSyntax: names|2# ConversionOperation / IdentifierNameSyntax: names|3# ParameterReferenceOperation / IdentifierNameSyntax: names|##########}"]
+}
+cfg0_block3 [shape=record label="{BLOCK #3|0# SimpleAssignmentOperation / IdentifierNameSyntax: var|1# LocalReferenceOperation / IdentifierNameSyntax: var|1# ConversionOperation / IdentifierNameSyntax: var|2# PropertyReferenceOperation / IdentifierNameSyntax: var|3# FlowCaptureReferenceOperation: #0 / IdentifierNameSyntax: numbers|##########}"]
+}
+cfg0_block2 [shape=record label="{BLOCK #2|## BranchValue ##|0# InvocationOperation: MoveNext / IdentifierNameSyntax: numbers|1# FlowCaptureReferenceOperation: #0 / IdentifierNameSyntax: numbers|##########}"]
+}
+subgraph "cluster_Finally region" {
+label = "Finally region"
+cfg0_block11 [shape=record label="{BLOCK #11|0# FlowCaptureOperation: #3 / IdentifierNameSyntax: numbers|1# ConversionOperation / IdentifierNameSyntax: numbers|2# FlowCaptureReferenceOperation: #0 / IdentifierNameSyntax: numbers|##########|## BranchValue ##|0# IsNullOperation / IdentifierNameSyntax: numbers|1# FlowCaptureReferenceOperation: #3 / IdentifierNameSyntax: numbers|##########}"]
+cfg0_block12 [shape=record label="{BLOCK #12|0# InvocationOperation: Dispose / IdentifierNameSyntax: numbers|1# FlowCaptureReferenceOperation: #3 / IdentifierNameSyntax: numbers|##########}"]
+cfg0_block13 [shape=record label="{BLOCK #13}"]
+}
+}
+cfg0_block1 [shape=record label="{BLOCK #1|0# FlowCaptureOperation: #0 / IdentifierNameSyntax: numbers|1# InvocationOperation: GetEnumerator / IdentifierNameSyntax: numbers|2# ConversionOperation / IdentifierNameSyntax: numbers|3# ParameterReferenceOperation / IdentifierNameSyntax: numbers|##########}"]
+}
+cfg0_block0 [shape=record label="{ENTRY #0}"]
+cfg0_block14 [shape=record label="{EXIT #14}"]
+cfg0_block6 -> cfg0_block7
+cfg0_block5 -> cfg0_block6 [label="Else"]
+cfg0_block4 -> cfg0_block5
+cfg0_block7 -> cfg0_block5
+cfg0_block8 -> cfg0_block9 [label="Else"]
+cfg0_block8 -> cfg0_block10 [label="WhenTrue"]
+cfg0_block9 -> cfg0_block10
+cfg0_block10 -> NoDestination_cfg0_block10 [label="StructuredExceptionHandling"]
+cfg0_block3 -> cfg0_block4
+cfg0_block2 -> cfg0_block3 [label="Else"]
+cfg0_block1 -> cfg0_block2
+cfg0_block5 -> cfg0_block2 [label="WhenFalse"]
+cfg0_block11 -> cfg0_block12 [label="Else"]
+cfg0_block11 -> cfg0_block13 [label="WhenTrue"]
+cfg0_block12 -> cfg0_block13
+cfg0_block13 -> NoDestination_cfg0_block13 [label="StructuredExceptionHandling"]
+cfg0_block0 -> cfg0_block1
+cfg0_block2 -> cfg0_block14 [label="WhenFalse"]
+}

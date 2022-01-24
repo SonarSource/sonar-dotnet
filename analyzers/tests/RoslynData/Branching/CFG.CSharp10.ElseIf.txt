@@ -1,0 +1,39 @@
+// http://viz-js.com/
+// https://edotor.net/?engine=dot#digraph%20%22ElseIf%22%20%7B%0D%0Acfg0_block0%20%5Bshape%3Drecord%20label%3D%22%7BENTRY%20%230%7D%22%5D%0D%0Acfg0_block1%20%5Bshape%3Drecord%20label%3D%22%7BBLOCK%20%231%7C%23%23%20BranchValue%20%23%23%7C0%23%20BinaryOperation%20%2F%20BinaryExpressionSyntax%3A%20value%20%3D%3D%200%7C1%23%20ParameterReferenceOperation%20%2F%20IdentifierNameSyntax%3A%20value%7C1%23%20LiteralOperation%20%2F%20LiteralExpressionSyntax%3A%200%7C%23%23%23%23%23%23%23%23%23%23%7D%22%5D%0D%0Acfg0_block2%20%5Bshape%3Drecord%20label%3D%22%7BBLOCK%20%232%7C%23%23%20BranchValue%20%23%23%7C0%23%20LiteralOperation%20%2F%20LiteralExpressionSyntax%3A%20%5C%22Zero%5C%22%7C%23%23%23%23%23%23%23%23%23%23%7D%22%5D%0D%0Acfg0_block3%20%5Bshape%3Drecord%20label%3D%22%7BBLOCK%20%233%7C%23%23%20BranchValue%20%23%23%7C0%23%20BinaryOperation%20%2F%20BinaryExpressionSyntax%3A%20value%20%3D%3D%201%7C1%23%20ParameterReferenceOperation%20%2F%20IdentifierNameSyntax%3A%20value%7C1%23%20LiteralOperation%20%2F%20LiteralExpressionSyntax%3A%201%7C%23%23%23%23%23%23%23%23%23%23%7D%22%5D%0D%0Acfg0_block4%20%5Bshape%3Drecord%20label%3D%22%7BBLOCK%20%234%7C%23%23%20BranchValue%20%23%23%7C0%23%20LiteralOperation%20%2F%20LiteralExpressionSyntax%3A%20%5C%22One%5C%22%7C%23%23%23%23%23%23%23%23%23%23%7D%22%5D%0D%0Acfg0_block5%20%5Bshape%3Drecord%20label%3D%22%7BBLOCK%20%235%7C%23%23%20BranchValue%20%23%23%7C0%23%20BinaryOperation%20%2F%20BinaryExpressionSyntax%3A%20value%20%3D%3D%202%7C1%23%20ParameterReferenceOperation%20%2F%20IdentifierNameSyntax%3A%20value%7C1%23%20LiteralOperation%20%2F%20LiteralExpressionSyntax%3A%202%7C%23%23%23%23%23%23%23%23%23%23%7D%22%5D%0D%0Acfg0_block6%20%5Bshape%3Drecord%20label%3D%22%7BBLOCK%20%236%7C%23%23%20BranchValue%20%23%23%7C0%23%20LiteralOperation%20%2F%20LiteralExpressionSyntax%3A%20%5C%22Two%5C%22%7C%23%23%23%23%23%23%23%23%23%23%7D%22%5D%0D%0Acfg0_block7%20%5Bshape%3Drecord%20label%3D%22%7BBLOCK%20%237%7C%23%23%20BranchValue%20%23%23%7C0%23%20LiteralOperation%20%2F%20LiteralExpressionSyntax%3A%20%5C%22Something%20else%5C%22%7C%23%23%23%23%23%23%23%23%23%23%7D%22%5D%0D%0Acfg0_block8%20%5Bshape%3Drecord%20label%3D%22%7BEXIT%20%238%7D%22%5D%0D%0Acfg0_block0%20-%3E%20cfg0_block1%0D%0Acfg0_block1%20-%3E%20cfg0_block2%20%5Blabel%3D%22Else%22%5D%0D%0Acfg0_block1%20-%3E%20cfg0_block3%20%5Blabel%3D%22WhenFalse%22%5D%0D%0Acfg0_block3%20-%3E%20cfg0_block4%20%5Blabel%3D%22Else%22%5D%0D%0Acfg0_block3%20-%3E%20cfg0_block5%20%5Blabel%3D%22WhenFalse%22%5D%0D%0Acfg0_block5%20-%3E%20cfg0_block6%20%5Blabel%3D%22Else%22%5D%0D%0Acfg0_block5%20-%3E%20cfg0_block7%20%5Blabel%3D%22WhenFalse%22%5D%0D%0Acfg0_block2%20-%3E%20cfg0_block8%20%5Blabel%3D%22Return%22%5D%0D%0Acfg0_block4%20-%3E%20cfg0_block8%20%5Blabel%3D%22Return%22%5D%0D%0Acfg0_block6%20-%3E%20cfg0_block8%20%5Blabel%3D%22Return%22%5D%0D%0Acfg0_block7%20-%3E%20cfg0_block8%20%5Blabel%3D%22Return%22%5D%0D%0A%7D%0D%0A
+
+/*
+public string ElseIf(int value)
+    {
+        if (value == 0)
+            return "Zero";
+        else if (value == 1)
+            return "One";
+        else if (value == 2)
+            return "Two";
+        else
+            return "Something else";
+    }
+*/
+
+digraph "ElseIf" {
+cfg0_block0 [shape=record label="{ENTRY #0}"]
+cfg0_block1 [shape=record label="{BLOCK #1|## BranchValue ##|0# BinaryOperation / BinaryExpressionSyntax: value == 0|1# ParameterReferenceOperation / IdentifierNameSyntax: value|1# LiteralOperation / LiteralExpressionSyntax: 0|##########}"]
+cfg0_block2 [shape=record label="{BLOCK #2|## BranchValue ##|0# LiteralOperation / LiteralExpressionSyntax: \"Zero\"|##########}"]
+cfg0_block3 [shape=record label="{BLOCK #3|## BranchValue ##|0# BinaryOperation / BinaryExpressionSyntax: value == 1|1# ParameterReferenceOperation / IdentifierNameSyntax: value|1# LiteralOperation / LiteralExpressionSyntax: 1|##########}"]
+cfg0_block4 [shape=record label="{BLOCK #4|## BranchValue ##|0# LiteralOperation / LiteralExpressionSyntax: \"One\"|##########}"]
+cfg0_block5 [shape=record label="{BLOCK #5|## BranchValue ##|0# BinaryOperation / BinaryExpressionSyntax: value == 2|1# ParameterReferenceOperation / IdentifierNameSyntax: value|1# LiteralOperation / LiteralExpressionSyntax: 2|##########}"]
+cfg0_block6 [shape=record label="{BLOCK #6|## BranchValue ##|0# LiteralOperation / LiteralExpressionSyntax: \"Two\"|##########}"]
+cfg0_block7 [shape=record label="{BLOCK #7|## BranchValue ##|0# LiteralOperation / LiteralExpressionSyntax: \"Something else\"|##########}"]
+cfg0_block8 [shape=record label="{EXIT #8}"]
+cfg0_block0 -> cfg0_block1
+cfg0_block1 -> cfg0_block2 [label="Else"]
+cfg0_block1 -> cfg0_block3 [label="WhenFalse"]
+cfg0_block3 -> cfg0_block4 [label="Else"]
+cfg0_block3 -> cfg0_block5 [label="WhenFalse"]
+cfg0_block5 -> cfg0_block6 [label="Else"]
+cfg0_block5 -> cfg0_block7 [label="WhenFalse"]
+cfg0_block2 -> cfg0_block8 [label="Return"]
+cfg0_block4 -> cfg0_block8 [label="Return"]
+cfg0_block6 -> cfg0_block8 [label="Return"]
+cfg0_block7 -> cfg0_block8 [label="Return"]
+}

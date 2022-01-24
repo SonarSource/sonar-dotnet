@@ -1,0 +1,22 @@
+// http://viz-js.com/
+// https://edotor.net/?engine=dot#digraph%20%22Dynamic%22%20%7B%0D%0Asubgraph%20%22cluster_LocalLifetime%20region%22%20%7B%0Alabel%20%3D%20%22LocalLifetime%20region%22%0D%0Acfg0_block1%20%5Bshape%3Drecord%20label%3D%22%7BBLOCK%20%231%7C0%23%20ExpressionStatementOperation%20%2F%20ExpressionStatementSyntax%3A%20arg.Field%20%3D%2042%3B%7C1%23%20SimpleAssignmentOperation%20%2F%20AssignmentExpressionSyntax%3A%20arg.Field%20%3D%2042%7C2%23%20DynamicMemberReferenceOperation%20%2F%20MemberAccessExpressionSyntax%3A%20arg.Field%7C3%23%20ParameterReferenceOperation%20%2F%20IdentifierNameSyntax%3A%20arg%7C2%23%20LiteralOperation%20%2F%20LiteralExpressionSyntax%3A%2042%7C%23%23%23%23%23%23%23%23%23%23%7C0%23%20SimpleAssignmentOperation%20%2F%20VariableDeclaratorSyntax%3A%20invocation%20%3D%20arg.Value()%7C1%23%20LocalReferenceOperation%20%2F%20VariableDeclaratorSyntax%3A%20invocation%20%3D%20arg.Value()%7C1%23%20DynamicInvocationOperation%20%2F%20InvocationExpressionSyntax%3A%20arg.Value()%7C2%23%20DynamicMemberReferenceOperation%20%2F%20MemberAccessExpressionSyntax%3A%20arg.Value%7C3%23%20ParameterReferenceOperation%20%2F%20IdentifierNameSyntax%3A%20arg%7C%23%23%23%23%23%23%23%23%23%23%7C0%23%20SimpleAssignmentOperation%20%2F%20VariableDeclaratorSyntax%3A%20field%20%3D%20arg.Field%7C1%23%20LocalReferenceOperation%20%2F%20VariableDeclaratorSyntax%3A%20field%20%3D%20arg.Field%7C1%23%20DynamicMemberReferenceOperation%20%2F%20MemberAccessExpressionSyntax%3A%20arg.Field%7C2%23%20ParameterReferenceOperation%20%2F%20IdentifierNameSyntax%3A%20arg%7C%23%23%23%23%23%23%23%23%23%23%7D%22%5D%0D%0A%7D%0D%0Acfg0_block0%20%5Bshape%3Drecord%20label%3D%22%7BENTRY%20%230%7D%22%5D%0D%0Acfg0_block2%20%5Bshape%3Drecord%20label%3D%22%7BEXIT%20%232%7D%22%5D%0D%0Acfg0_block0%20-%3E%20cfg0_block1%0D%0Acfg0_block1%20-%3E%20cfg0_block2%0D%0A%7D%0D%0A
+
+/*
+public void Dynamic(dynamic arg)
+    {
+        arg.Field = 42;
+        var invocation = arg.Value();
+        var field = arg.Field;
+    }
+*/
+
+digraph "Dynamic" {
+subgraph "cluster_LocalLifetime region" {
+label = "LocalLifetime region"
+cfg0_block1 [shape=record label="{BLOCK #1|0# ExpressionStatementOperation / ExpressionStatementSyntax: arg.Field = 42;|1# SimpleAssignmentOperation / AssignmentExpressionSyntax: arg.Field = 42|2# DynamicMemberReferenceOperation / MemberAccessExpressionSyntax: arg.Field|3# ParameterReferenceOperation / IdentifierNameSyntax: arg|2# LiteralOperation / LiteralExpressionSyntax: 42|##########|0# SimpleAssignmentOperation / VariableDeclaratorSyntax: invocation = arg.Value()|1# LocalReferenceOperation / VariableDeclaratorSyntax: invocation = arg.Value()|1# DynamicInvocationOperation / InvocationExpressionSyntax: arg.Value()|2# DynamicMemberReferenceOperation / MemberAccessExpressionSyntax: arg.Value|3# ParameterReferenceOperation / IdentifierNameSyntax: arg|##########|0# SimpleAssignmentOperation / VariableDeclaratorSyntax: field = arg.Field|1# LocalReferenceOperation / VariableDeclaratorSyntax: field = arg.Field|1# DynamicMemberReferenceOperation / MemberAccessExpressionSyntax: arg.Field|2# ParameterReferenceOperation / IdentifierNameSyntax: arg|##########}"]
+}
+cfg0_block0 [shape=record label="{ENTRY #0}"]
+cfg0_block2 [shape=record label="{EXIT #2}"]
+cfg0_block0 -> cfg0_block1
+cfg0_block1 -> cfg0_block2
+}

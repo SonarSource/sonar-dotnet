@@ -1,0 +1,35 @@
+// http://viz-js.com/
+// https://edotor.net/?engine=dot#digraph%20%22TermaryCoalesce%22%20%7B%0D%0Asubgraph%20%22cluster_LocalLifetime%20region%22%20%7B%0Alabel%20%3D%20%22LocalLifetime%20region%22%0D%0Asubgraph%20%22cluster_LocalLifetime%20region%22%20%7B%0Alabel%20%3D%20%22LocalLifetime%20region%22%0D%0Acfg0_block2%20%5Bshape%3Drecord%20label%3D%22%7BBLOCK%20%232%7C0%23%20FlowCaptureOperation%3A%20%231%20%2F%20IdentifierNameSyntax%3A%20first%7C1%23%20ParameterReferenceOperation%20%2F%20IdentifierNameSyntax%3A%20first%7C%23%23%23%23%23%23%23%23%23%23%7C%23%23%20BranchValue%20%23%23%7C0%23%20IsNullOperation%20%2F%20IdentifierNameSyntax%3A%20first%7C1%23%20FlowCaptureReferenceOperation%3A%20%231%20%2F%20IdentifierNameSyntax%3A%20first%7C%23%23%23%23%23%23%23%23%23%23%7D%22%5D%0D%0Acfg0_block3%20%5Bshape%3Drecord%20label%3D%22%7BBLOCK%20%233%7C0%23%20FlowCaptureOperation%3A%20%230%20%2F%20IdentifierNameSyntax%3A%20first%7C1%23%20FlowCaptureReferenceOperation%3A%20%231%20%2F%20IdentifierNameSyntax%3A%20first%7C%23%23%23%23%23%23%23%23%23%23%7D%22%5D%0D%0A%7D%0D%0Acfg0_block1%20%5Bshape%3Drecord%20label%3D%22%7BBLOCK%20%231%7C%23%23%20BranchValue%20%23%23%7C0%23%20ParameterReferenceOperation%20%2F%20IdentifierNameSyntax%3A%20condition%7C%23%23%23%23%23%23%23%23%23%23%7D%22%5D%0D%0Acfg0_block4%20%5Bshape%3Drecord%20label%3D%22%7BBLOCK%20%234%7C0%23%20FlowCaptureOperation%3A%20%230%20%2F%20IdentifierNameSyntax%3A%20second%7C1%23%20ParameterReferenceOperation%20%2F%20IdentifierNameSyntax%3A%20second%7C%23%23%23%23%23%23%23%23%23%23%7D%22%5D%0D%0Acfg0_block5%20%5Bshape%3Drecord%20label%3D%22%7BBLOCK%20%235%7C0%23%20FlowCaptureOperation%3A%20%230%20%2F%20IdentifierNameSyntax%3A%20ternaryFalse%7C1%23%20ParameterReferenceOperation%20%2F%20IdentifierNameSyntax%3A%20ternaryFalse%7C%23%23%23%23%23%23%23%23%23%23%7D%22%5D%0D%0Acfg0_block6%20%5Bshape%3Drecord%20label%3D%22%7BBLOCK%20%236%7C0%23%20SimpleAssignmentOperation%20%2F%20VariableDeclaratorSyntax%3A%20x%20%3D%20condition%20%3F%20(first%20%3F%3F%20second)%20%3A%20ternaryFalse%7C1%23%20LocalReferenceOperation%20%2F%20VariableDeclaratorSyntax%3A%20x%20%3D%20condition%20%3F%20(first%20%3F%3F%20second)%20%3A%20ternaryFalse%7C1%23%20FlowCaptureReferenceOperation%3A%20%230%20%2F%20ConditionalExpressionSyntax%3A%20condition%20%3F%20(first%20%3F%3F%20second)%20%3A%20ternaryFalse%7C%23%23%23%23%23%23%23%23%23%23%7D%22%5D%0D%0A%7D%0D%0Acfg0_block0%20%5Bshape%3Drecord%20label%3D%22%7BENTRY%20%230%7D%22%5D%0D%0Acfg0_block7%20%5Bshape%3Drecord%20label%3D%22%7BEXIT%20%237%7D%22%5D%0D%0Acfg0_block1%20-%3E%20cfg0_block2%20%5Blabel%3D%22Else%22%5D%0D%0Acfg0_block2%20-%3E%20cfg0_block3%20%5Blabel%3D%22Else%22%5D%0D%0Acfg0_block0%20-%3E%20cfg0_block1%0D%0Acfg0_block2%20-%3E%20cfg0_block4%20%5Blabel%3D%22WhenTrue%22%5D%0D%0Acfg0_block1%20-%3E%20cfg0_block5%20%5Blabel%3D%22WhenFalse%22%5D%0D%0Acfg0_block3%20-%3E%20cfg0_block6%0D%0Acfg0_block4%20-%3E%20cfg0_block6%0D%0Acfg0_block5%20-%3E%20cfg0_block6%0D%0Acfg0_block6%20-%3E%20cfg0_block7%0D%0A%7D%0D%0A
+
+/*
+public void TermaryCoalesce(bool condition, string first, string second, string ternaryFalse, string last)
+    {
+        var x = condition ? (first ?? second) : ternaryFalse;
+    }
+*/
+
+digraph "TermaryCoalesce" {
+subgraph "cluster_LocalLifetime region" {
+label = "LocalLifetime region"
+subgraph "cluster_LocalLifetime region" {
+label = "LocalLifetime region"
+cfg0_block2 [shape=record label="{BLOCK #2|0# FlowCaptureOperation: #1 / IdentifierNameSyntax: first|1# ParameterReferenceOperation / IdentifierNameSyntax: first|##########|## BranchValue ##|0# IsNullOperation / IdentifierNameSyntax: first|1# FlowCaptureReferenceOperation: #1 / IdentifierNameSyntax: first|##########}"]
+cfg0_block3 [shape=record label="{BLOCK #3|0# FlowCaptureOperation: #0 / IdentifierNameSyntax: first|1# FlowCaptureReferenceOperation: #1 / IdentifierNameSyntax: first|##########}"]
+}
+cfg0_block1 [shape=record label="{BLOCK #1|## BranchValue ##|0# ParameterReferenceOperation / IdentifierNameSyntax: condition|##########}"]
+cfg0_block4 [shape=record label="{BLOCK #4|0# FlowCaptureOperation: #0 / IdentifierNameSyntax: second|1# ParameterReferenceOperation / IdentifierNameSyntax: second|##########}"]
+cfg0_block5 [shape=record label="{BLOCK #5|0# FlowCaptureOperation: #0 / IdentifierNameSyntax: ternaryFalse|1# ParameterReferenceOperation / IdentifierNameSyntax: ternaryFalse|##########}"]
+cfg0_block6 [shape=record label="{BLOCK #6|0# SimpleAssignmentOperation / VariableDeclaratorSyntax: x = condition ? (first ?? second) : ternaryFalse|1# LocalReferenceOperation / VariableDeclaratorSyntax: x = condition ? (first ?? second) : ternaryFalse|1# FlowCaptureReferenceOperation: #0 / ConditionalExpressionSyntax: condition ? (first ?? second) : ternaryFalse|##########}"]
+}
+cfg0_block0 [shape=record label="{ENTRY #0}"]
+cfg0_block7 [shape=record label="{EXIT #7}"]
+cfg0_block1 -> cfg0_block2 [label="Else"]
+cfg0_block2 -> cfg0_block3 [label="Else"]
+cfg0_block0 -> cfg0_block1
+cfg0_block2 -> cfg0_block4 [label="WhenTrue"]
+cfg0_block1 -> cfg0_block5 [label="WhenFalse"]
+cfg0_block3 -> cfg0_block6
+cfg0_block4 -> cfg0_block6
+cfg0_block5 -> cfg0_block6
+cfg0_block6 -> cfg0_block7
+}

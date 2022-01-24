@@ -1,0 +1,21 @@
+// http://viz-js.com/
+// https://edotor.net/?engine=dot#digraph%20%22Invocation%22%20%7B%0D%0Asubgraph%20%22cluster_LocalLifetime%20region%22%20%7B%0Alabel%20%3D%20%22LocalLifetime%20region%22%0D%0Acfg0_block1%20%5Bshape%3Drecord%20label%3D%22%7BBLOCK%20%231%7C0%23%20SimpleAssignmentOperation%20%2F%20VariableDeclaratorSyntax%3A%20value%20%3D%20arg.ToString()%7C1%23%20LocalReferenceOperation%20%2F%20VariableDeclaratorSyntax%3A%20value%20%3D%20arg.ToString()%7C1%23%20InvocationOperation%3A%20ToString%20%2F%20InvocationExpressionSyntax%3A%20arg.ToString()%7C2%23%20ParameterReferenceOperation%20%2F%20IdentifierNameSyntax%3A%20arg%7C%23%23%23%23%23%23%23%23%23%23%7C0%23%20ExpressionStatementOperation%20%2F%20ExpressionStatementSyntax%3A%20Console.WriteLine(value)%3B%7C1%23%20InvocationOperation%3A%20WriteLine%20%2F%20InvocationExpressionSyntax%3A%20Console.WriteLine(value)%7C2%23%20ArgumentOperation%20%2F%20ArgumentSyntax%3A%20value%7C3%23%20LocalReferenceOperation%20%2F%20IdentifierNameSyntax%3A%20value%7C%23%23%23%23%23%23%23%23%23%23%7D%22%5D%0D%0A%7D%0D%0Acfg0_block0%20%5Bshape%3Drecord%20label%3D%22%7BENTRY%20%230%7D%22%5D%0D%0Acfg0_block2%20%5Bshape%3Drecord%20label%3D%22%7BEXIT%20%232%7D%22%5D%0D%0Acfg0_block0%20-%3E%20cfg0_block1%0D%0Acfg0_block1%20-%3E%20cfg0_block2%0D%0A%7D%0D%0A
+
+/*
+public void Invocation(object arg)
+    {
+        var value = arg.ToString();
+        Console.WriteLine(value);
+    }
+*/
+
+digraph "Invocation" {
+subgraph "cluster_LocalLifetime region" {
+label = "LocalLifetime region"
+cfg0_block1 [shape=record label="{BLOCK #1|0# SimpleAssignmentOperation / VariableDeclaratorSyntax: value = arg.ToString()|1# LocalReferenceOperation / VariableDeclaratorSyntax: value = arg.ToString()|1# InvocationOperation: ToString / InvocationExpressionSyntax: arg.ToString()|2# ParameterReferenceOperation / IdentifierNameSyntax: arg|##########|0# ExpressionStatementOperation / ExpressionStatementSyntax: Console.WriteLine(value);|1# InvocationOperation: WriteLine / InvocationExpressionSyntax: Console.WriteLine(value)|2# ArgumentOperation / ArgumentSyntax: value|3# LocalReferenceOperation / IdentifierNameSyntax: value|##########}"]
+}
+cfg0_block0 [shape=record label="{ENTRY #0}"]
+cfg0_block2 [shape=record label="{EXIT #2}"]
+cfg0_block0 -> cfg0_block1
+cfg0_block1 -> cfg0_block2
+}

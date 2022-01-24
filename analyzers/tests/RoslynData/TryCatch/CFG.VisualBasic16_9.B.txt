@@ -1,0 +1,13 @@
+// http://viz-js.com/
+// https://edotor.net/?engine=dot#digraph%20%22B%22%20%7B%0D%0Acfg0_block0%20%5Bshape%3Drecord%20label%3D%22%7BENTRY%20%230%7D%22%5D%0D%0Acfg0_block1%20%5Bshape%3Drecord%20label%3D%22%7BEXIT%20%231%7D%22%5D%0D%0Acfg0_block0%20-%3E%20cfg0_block1%0D%0A%7D%0D%0A
+
+/*
+Public Sub B()
+    End Sub
+*/
+
+digraph "B" {
+cfg0_block0 [shape=record label="{ENTRY #0}"]
+cfg0_block1 [shape=record label="{EXIT #1}"]
+cfg0_block0 -> cfg0_block1
+}

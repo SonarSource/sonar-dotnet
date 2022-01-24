@@ -1,0 +1,59 @@
+// http://viz-js.com/
+// https://edotor.net/?engine=dot#digraph%20%22TryFinallyTryFinally%22%20%7B%0D%0Asubgraph%20%22cluster_TryAndFinally%20region%22%20%7B%0Alabel%20%3D%20%22TryAndFinally%20region%22%0D%0Asubgraph%20%22cluster_Try%20region%22%20%7B%0Alabel%20%3D%20%22Try%20region%22%0D%0Acfg0_block1%20%5Bshape%3Drecord%20label%3D%22%7BBLOCK%20%231%7C0%23%20ExpressionStatementOperation%20%2F%20ExpressionStatementSyntax%3A%20A()%3B%7C1%23%20InvocationOperation%3A%20A%20%2F%20InvocationExpressionSyntax%3A%20A()%7C2%23%20InstanceReferenceOperation%20%2F%20IdentifierNameSyntax%3A%20A%7C%23%23%23%23%23%23%23%23%23%23%7D%22%5D%0D%0A%7D%0D%0Asubgraph%20%22cluster_Finally%20region%22%20%7B%0Alabel%20%3D%20%22Finally%20region%22%0D%0Acfg0_block2%20%5Bshape%3Drecord%20label%3D%22%7BBLOCK%20%232%7C0%23%20ExpressionStatementOperation%20%2F%20ExpressionStatementSyntax%3A%20F()%3B%7C1%23%20InvocationOperation%3A%20F%20%2F%20InvocationExpressionSyntax%3A%20F()%7C2%23%20InstanceReferenceOperation%20%2F%20IdentifierNameSyntax%3A%20F%7C%23%23%23%23%23%23%23%23%23%23%7D%22%5D%0D%0A%7D%0D%0A%7D%0D%0Asubgraph%20%22cluster_TryAndFinally%20region%22%20%7B%0Alabel%20%3D%20%22TryAndFinally%20region%22%0D%0Asubgraph%20%22cluster_Try%20region%22%20%7B%0Alabel%20%3D%20%22Try%20region%22%0D%0Acfg0_block4%20%5Bshape%3Drecord%20label%3D%22%7BBLOCK%20%234%7C0%23%20ExpressionStatementOperation%20%2F%20ExpressionStatementSyntax%3A%20C()%3B%7C1%23%20InvocationOperation%3A%20C%20%2F%20InvocationExpressionSyntax%3A%20C()%7C2%23%20InstanceReferenceOperation%20%2F%20IdentifierNameSyntax%3A%20C%7C%23%23%23%23%23%23%23%23%23%23%7D%22%5D%0D%0A%7D%0D%0Asubgraph%20%22cluster_Finally%20region%22%20%7B%0Alabel%20%3D%20%22Finally%20region%22%0D%0Acfg0_block5%20%5Bshape%3Drecord%20label%3D%22%7BBLOCK%20%235%7C0%23%20ExpressionStatementOperation%20%2F%20ExpressionStatementSyntax%3A%20F()%3B%7C1%23%20InvocationOperation%3A%20F%20%2F%20InvocationExpressionSyntax%3A%20F()%7C2%23%20InstanceReferenceOperation%20%2F%20IdentifierNameSyntax%3A%20F%7C%23%23%23%23%23%23%23%23%23%23%7D%22%5D%0D%0A%7D%0D%0A%7D%0D%0Acfg0_block0%20%5Bshape%3Drecord%20label%3D%22%7BENTRY%20%230%7D%22%5D%0D%0Acfg0_block3%20%5Bshape%3Drecord%20label%3D%22%7BBLOCK%20%233%7C0%23%20ExpressionStatementOperation%20%2F%20ExpressionStatementSyntax%3A%20B()%3B%7C1%23%20InvocationOperation%3A%20B%20%2F%20InvocationExpressionSyntax%3A%20B()%7C2%23%20InstanceReferenceOperation%20%2F%20IdentifierNameSyntax%3A%20B%7C%23%23%23%23%23%23%23%23%23%23%7D%22%5D%0D%0Acfg0_block6%20%5Bshape%3Drecord%20label%3D%22%7BEXIT%20%236%7D%22%5D%0D%0Acfg0_block0%20-%3E%20cfg0_block1%0D%0Acfg0_block2%20-%3E%20NoDestination_cfg0_block2%20%5Blabel%3D%22StructuredExceptionHandling%22%5D%0D%0Acfg0_block3%20-%3E%20cfg0_block4%0D%0Acfg0_block5%20-%3E%20NoDestination_cfg0_block5%20%5Blabel%3D%22StructuredExceptionHandling%22%5D%0D%0Acfg0_block1%20-%3E%20cfg0_block3%0D%0Acfg0_block4%20-%3E%20cfg0_block6%0D%0A%7D%0D%0A
+
+/*
+public void TryFinallyTryFinally()
+    {
+        try
+        {
+            A();
+        }
+        finally
+        {
+            F();
+        }
+        B();
+        try
+        {
+            C();
+        }
+        finally
+        {
+            F();
+        }
+    }
+*/
+
+digraph "TryFinallyTryFinally" {
+subgraph "cluster_TryAndFinally region" {
+label = "TryAndFinally region"
+subgraph "cluster_Try region" {
+label = "Try region"
+cfg0_block1 [shape=record label="{BLOCK #1|0# ExpressionStatementOperation / ExpressionStatementSyntax: A();|1# InvocationOperation: A / InvocationExpressionSyntax: A()|2# InstanceReferenceOperation / IdentifierNameSyntax: A|##########}"]
+}
+subgraph "cluster_Finally region" {
+label = "Finally region"
+cfg0_block2 [shape=record label="{BLOCK #2|0# ExpressionStatementOperation / ExpressionStatementSyntax: F();|1# InvocationOperation: F / InvocationExpressionSyntax: F()|2# InstanceReferenceOperation / IdentifierNameSyntax: F|##########}"]
+}
+}
+subgraph "cluster_TryAndFinally region" {
+label = "TryAndFinally region"
+subgraph "cluster_Try region" {
+label = "Try region"
+cfg0_block4 [shape=record label="{BLOCK #4|0# ExpressionStatementOperation / ExpressionStatementSyntax: C();|1# InvocationOperation: C / InvocationExpressionSyntax: C()|2# InstanceReferenceOperation / IdentifierNameSyntax: C|##########}"]
+}
+subgraph "cluster_Finally region" {
+label = "Finally region"
+cfg0_block5 [shape=record label="{BLOCK #5|0# ExpressionStatementOperation / ExpressionStatementSyntax: F();|1# InvocationOperation: F / InvocationExpressionSyntax: F()|2# InstanceReferenceOperation / IdentifierNameSyntax: F|##########}"]
+}
+}
+cfg0_block0 [shape=record label="{ENTRY #0}"]
+cfg0_block3 [shape=record label="{BLOCK #3|0# ExpressionStatementOperation / ExpressionStatementSyntax: B();|1# InvocationOperation: B / InvocationExpressionSyntax: B()|2# InstanceReferenceOperation / IdentifierNameSyntax: B|##########}"]
+cfg0_block6 [shape=record label="{EXIT #6}"]
+cfg0_block0 -> cfg0_block1
+cfg0_block2 -> NoDestination_cfg0_block2 [label="StructuredExceptionHandling"]
+cfg0_block3 -> cfg0_block4
+cfg0_block5 -> NoDestination_cfg0_block5 [label="StructuredExceptionHandling"]
+cfg0_block1 -> cfg0_block3
+cfg0_block4 -> cfg0_block6
+}

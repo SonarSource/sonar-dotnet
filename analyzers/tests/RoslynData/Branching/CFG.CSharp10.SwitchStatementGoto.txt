@@ -1,0 +1,53 @@
+// http://viz-js.com/
+// https://edotor.net/?engine=dot#digraph%20%22SwitchStatementGoto%22%20%7B%0D%0Asubgraph%20%22cluster_LocalLifetime%20region%22%20%7B%0Alabel%20%3D%20%22LocalLifetime%20region%22%0D%0Asubgraph%20%22cluster_LocalLifetime%20region%22%20%7B%0Alabel%20%3D%20%22LocalLifetime%20region%22%0D%0Acfg0_block1%20%5Bshape%3Drecord%20label%3D%22%7BBLOCK%20%231%7C0%23%20FlowCaptureOperation%3A%20%230%20%2F%20IdentifierNameSyntax%3A%20value%7C1%23%20ParameterReferenceOperation%20%2F%20IdentifierNameSyntax%3A%20value%7C%23%23%23%23%23%23%23%23%23%23%7C%23%23%20BranchValue%20%23%23%7C0%23%20BinaryOperation%20%2F%20LiteralExpressionSyntax%3A%200%7C1%23%20FlowCaptureReferenceOperation%3A%20%230%20%2F%20IdentifierNameSyntax%3A%20value%7C1%23%20LiteralOperation%20%2F%20LiteralExpressionSyntax%3A%200%7C%23%23%23%23%23%23%23%23%23%23%7D%22%5D%0D%0Acfg0_block2%20%5Bshape%3Drecord%20label%3D%22%7BBLOCK%20%232%7C%23%23%20BranchValue%20%23%23%7C0%23%20BinaryOperation%20%2F%20LiteralExpressionSyntax%3A%201%7C1%23%20FlowCaptureReferenceOperation%3A%20%230%20%2F%20IdentifierNameSyntax%3A%20value%7C1%23%20LiteralOperation%20%2F%20LiteralExpressionSyntax%3A%201%7C%23%23%23%23%23%23%23%23%23%23%7D%22%5D%0D%0Acfg0_block3%20%5Bshape%3Drecord%20label%3D%22%7BBLOCK%20%233%7C0%23%20ExpressionStatementOperation%20%2F%20ExpressionStatementSyntax%3A%20ret%20%3D%20%5C%22ZeroOrOne%5C%22%3B%7C1%23%20SimpleAssignmentOperation%20%2F%20AssignmentExpressionSyntax%3A%20ret%20%3D%20%5C%22ZeroOrOne%5C%22%7C2%23%20LocalReferenceOperation%20%2F%20IdentifierNameSyntax%3A%20ret%7C2%23%20LiteralOperation%20%2F%20LiteralExpressionSyntax%3A%20%5C%22ZeroOrOne%5C%22%7C%23%23%23%23%23%23%23%23%23%23%7D%22%5D%0D%0Acfg0_block4%20%5Bshape%3Drecord%20label%3D%22%7BBLOCK%20%234%7C%23%23%20BranchValue%20%23%23%7C0%23%20BinaryOperation%20%2F%20LiteralExpressionSyntax%3A%202%7C1%23%20FlowCaptureReferenceOperation%3A%20%230%20%2F%20IdentifierNameSyntax%3A%20value%7C1%23%20LiteralOperation%20%2F%20LiteralExpressionSyntax%3A%202%7C%23%23%23%23%23%23%23%23%23%23%7D%22%5D%0D%0Acfg0_block5%20%5Bshape%3Drecord%20label%3D%22%7BBLOCK%20%235%7C0%23%20ExpressionStatementOperation%20%2F%20ExpressionStatementSyntax%3A%20ret%20%3D%20%5C%22Other%5C%22%3B%7C1%23%20SimpleAssignmentOperation%20%2F%20AssignmentExpressionSyntax%3A%20ret%20%3D%20%5C%22Other%5C%22%7C2%23%20LocalReferenceOperation%20%2F%20IdentifierNameSyntax%3A%20ret%7C2%23%20LiteralOperation%20%2F%20LiteralExpressionSyntax%3A%20%5C%22Other%5C%22%7C%23%23%23%23%23%23%23%23%23%23%7D%22%5D%0D%0A%7D%0D%0Acfg0_block6%20%5Bshape%3Drecord%20label%3D%22%7BBLOCK%20%236%7C%23%23%20BranchValue%20%23%23%7C0%23%20LocalReferenceOperation%20%2F%20IdentifierNameSyntax%3A%20ret%7C%23%23%23%23%23%23%23%23%23%23%7D%22%5D%0D%0A%7D%0D%0Acfg0_block0%20%5Bshape%3Drecord%20label%3D%22%7BENTRY%20%230%7D%22%5D%0D%0Acfg0_block7%20%5Bshape%3Drecord%20label%3D%22%7BEXIT%20%237%7D%22%5D%0D%0Acfg0_block0%20-%3E%20cfg0_block1%0D%0Acfg0_block1%20-%3E%20cfg0_block2%20%5Blabel%3D%22WhenFalse%22%5D%0D%0Acfg0_block1%20-%3E%20cfg0_block3%20%5Blabel%3D%22Else%22%5D%0D%0Acfg0_block2%20-%3E%20cfg0_block3%20%5Blabel%3D%22Else%22%5D%0D%0Acfg0_block2%20-%3E%20cfg0_block4%20%5Blabel%3D%22WhenFalse%22%5D%0D%0Acfg0_block4%20-%3E%20cfg0_block5%20%5Blabel%3D%22WhenFalse%22%5D%0D%0Acfg0_block4%20-%3E%20cfg0_block5%20%5Blabel%3D%22Else%22%5D%0D%0Acfg0_block3%20-%3E%20cfg0_block6%0D%0Acfg0_block5%20-%3E%20cfg0_block6%0D%0Acfg0_block6%20-%3E%20cfg0_block7%20%5Blabel%3D%22Return%22%5D%0D%0A%7D%0D%0A
+
+/*
+public string SwitchStatementGoto(int value)
+    {
+        string ret;
+        switch (value)
+        {
+            case 0:
+                goto case 1;
+
+            case 1:
+                ret = "ZeroOrOne";
+                break;
+
+            case 2:
+                goto default;
+
+            default:
+                ret = "Other";
+                break;
+        }
+        return ret;
+    }
+*/
+
+digraph "SwitchStatementGoto" {
+subgraph "cluster_LocalLifetime region" {
+label = "LocalLifetime region"
+subgraph "cluster_LocalLifetime region" {
+label = "LocalLifetime region"
+cfg0_block1 [shape=record label="{BLOCK #1|0# FlowCaptureOperation: #0 / IdentifierNameSyntax: value|1# ParameterReferenceOperation / IdentifierNameSyntax: value|##########|## BranchValue ##|0# BinaryOperation / LiteralExpressionSyntax: 0|1# FlowCaptureReferenceOperation: #0 / IdentifierNameSyntax: value|1# LiteralOperation / LiteralExpressionSyntax: 0|##########}"]
+cfg0_block2 [shape=record label="{BLOCK #2|## BranchValue ##|0# BinaryOperation / LiteralExpressionSyntax: 1|1# FlowCaptureReferenceOperation: #0 / IdentifierNameSyntax: value|1# LiteralOperation / LiteralExpressionSyntax: 1|##########}"]
+cfg0_block3 [shape=record label="{BLOCK #3|0# ExpressionStatementOperation / ExpressionStatementSyntax: ret = \"ZeroOrOne\";|1# SimpleAssignmentOperation / AssignmentExpressionSyntax: ret = \"ZeroOrOne\"|2# LocalReferenceOperation / IdentifierNameSyntax: ret|2# LiteralOperation / LiteralExpressionSyntax: \"ZeroOrOne\"|##########}"]
+cfg0_block4 [shape=record label="{BLOCK #4|## BranchValue ##|0# BinaryOperation / LiteralExpressionSyntax: 2|1# FlowCaptureReferenceOperation: #0 / IdentifierNameSyntax: value|1# LiteralOperation / LiteralExpressionSyntax: 2|##########}"]
+cfg0_block5 [shape=record label="{BLOCK #5|0# ExpressionStatementOperation / ExpressionStatementSyntax: ret = \"Other\";|1# SimpleAssignmentOperation / AssignmentExpressionSyntax: ret = \"Other\"|2# LocalReferenceOperation / IdentifierNameSyntax: ret|2# LiteralOperation / LiteralExpressionSyntax: \"Other\"|##########}"]
+}
+cfg0_block6 [shape=record label="{BLOCK #6|## BranchValue ##|0# LocalReferenceOperation / IdentifierNameSyntax: ret|##########}"]
+}
+cfg0_block0 [shape=record label="{ENTRY #0}"]
+cfg0_block7 [shape=record label="{EXIT #7}"]
+cfg0_block0 -> cfg0_block1
+cfg0_block1 -> cfg0_block2 [label="WhenFalse"]
+cfg0_block1 -> cfg0_block3 [label="Else"]
+cfg0_block2 -> cfg0_block3 [label="Else"]
+cfg0_block2 -> cfg0_block4 [label="WhenFalse"]
+cfg0_block4 -> cfg0_block5 [label="WhenFalse"]
+cfg0_block4 -> cfg0_block5 [label="Else"]
+cfg0_block3 -> cfg0_block6
+cfg0_block5 -> cfg0_block6
+cfg0_block6 -> cfg0_block7 [label="Return"]
+}

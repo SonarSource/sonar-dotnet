@@ -1,0 +1,22 @@
+// http://viz-js.com/
+// https://edotor.net/?engine=dot#digraph%20%22SimpleCall%22%20%7B%0D%0Acfg0_block0%20%5Bshape%3Drecord%20label%3D%22%7BENTRY%20%230%7D%22%5D%0D%0Acfg0_block1%20%5Bshape%3Drecord%20label%3D%22%7BBLOCK%20%231%7C%23%23%20BranchValue%20%23%23%7C0%23%20ConversionOperation%20%2F%20InvocationExpressionSyntax%3A%20new%5B%5D%20%5C%7B1%2C%202%5C%7D.OrderBy(x%20%3D%5C%3E%20x)%7C1%23%20InvocationOperation%3A%20OrderBy%20%2F%20InvocationExpressionSyntax%3A%20new%5B%5D%20%5C%7B1%2C%202%5C%7D.OrderBy(x%20%3D%5C%3E%20x)%7C2%23%20ArgumentOperation%20%2F%20ImplicitArrayCreationExpressionSyntax%3A%20new%5B%5D%20%5C%7B1%2C%202%5C%7D%7C3%23%20ConversionOperation%20%2F%20ImplicitArrayCreationExpressionSyntax%3A%20new%5B%5D%20%5C%7B1%2C%202%5C%7D%7C4%23%20ArrayCreationOperation%20%2F%20ImplicitArrayCreationExpressionSyntax%3A%20new%5B%5D%20%5C%7B1%2C%202%5C%7D%7C5%23%20LiteralOperation%20%2F%20ImplicitArrayCreationExpressionSyntax%3A%20new%5B%5D%20%5C%7B1%2C%202%5C%7D%7C5%23%20ArrayInitializerOperation%20%2F%20InitializerExpressionSyntax%3A%20%5C%7B1%2C%202%5C%7D%7C6%23%20LiteralOperation%20%2F%20LiteralExpressionSyntax%3A%201%7C6%23%20LiteralOperation%20%2F%20LiteralExpressionSyntax%3A%202%7C2%23%20ArgumentOperation%20%2F%20ArgumentSyntax%3A%20x%20%3D%5C%3E%20x%7C3%23%20DelegateCreationOperation%20%2F%20SimpleLambdaExpressionSyntax%3A%20x%20%3D%5C%3E%20x%7C4%23%20FlowAnonymousFunctionOperation%20%2F%20SimpleLambdaExpressionSyntax%3A%20x%20%3D%5C%3E%20x%7C%23%23%23%23%23%23%23%23%23%23%7D%22%5D%0D%0Acfg0_block2%20%5Bshape%3Drecord%20label%3D%22%7BEXIT%20%232%7D%22%5D%0D%0Asubgraph%20%22cluster_SimpleCall.anonymous.2%22%20%7B%0Alabel%20%3D%20%22SimpleCall.anonymous.2%22%0D%0Acfg1_block0%20%5Bshape%3Drecord%20label%3D%22%7BENTRY%20%230%7D%22%5D%0D%0Acfg1_block1%20%5Bshape%3Drecord%20label%3D%22%7BBLOCK%20%231%7C%23%23%20BranchValue%20%23%23%7C0%23%20ParameterReferenceOperation%20%2F%20IdentifierNameSyntax%3A%20x%7C%23%23%23%23%23%23%23%23%23%23%7D%22%5D%0D%0Acfg1_block2%20%5Bshape%3Drecord%20label%3D%22%7BEXIT%20%232%7D%22%5D%0D%0A%7D%0D%0Acfg0_block0%20-%3E%20cfg0_block1%0D%0Acfg0_block1%20-%3E%20cfg0_block2%20%5Blabel%3D%22Return%22%5D%0D%0Acfg1_block0%20-%3E%20cfg1_block1%0D%0Acfg1_block1%20-%3E%20cfg1_block2%20%5Blabel%3D%22Return%22%5D%0D%0A%7D%0D%0A
+
+/*
+public IEnumerable<int> SimpleCall() => new[] {1, 2}.OrderBy(x => x);
+*/
+
+digraph "SimpleCall" {
+cfg0_block0 [shape=record label="{ENTRY #0}"]
+cfg0_block1 [shape=record label="{BLOCK #1|## BranchValue ##|0# ConversionOperation / InvocationExpressionSyntax: new[] \{1, 2\}.OrderBy(x =\> x)|1# InvocationOperation: OrderBy / InvocationExpressionSyntax: new[] \{1, 2\}.OrderBy(x =\> x)|2# ArgumentOperation / ImplicitArrayCreationExpressionSyntax: new[] \{1, 2\}|3# ConversionOperation / ImplicitArrayCreationExpressionSyntax: new[] \{1, 2\}|4# ArrayCreationOperation / ImplicitArrayCreationExpressionSyntax: new[] \{1, 2\}|5# LiteralOperation / ImplicitArrayCreationExpressionSyntax: new[] \{1, 2\}|5# ArrayInitializerOperation / InitializerExpressionSyntax: \{1, 2\}|6# LiteralOperation / LiteralExpressionSyntax: 1|6# LiteralOperation / LiteralExpressionSyntax: 2|2# ArgumentOperation / ArgumentSyntax: x =\> x|3# DelegateCreationOperation / SimpleLambdaExpressionSyntax: x =\> x|4# FlowAnonymousFunctionOperation / SimpleLambdaExpressionSyntax: x =\> x|##########}"]
+cfg0_block2 [shape=record label="{EXIT #2}"]
+subgraph "cluster_SimpleCall.anonymous.2" {
+label = "SimpleCall.anonymous.2"
+cfg1_block0 [shape=record label="{ENTRY #0}"]
+cfg1_block1 [shape=record label="{BLOCK #1|## BranchValue ##|0# ParameterReferenceOperation / IdentifierNameSyntax: x|##########}"]
+cfg1_block2 [shape=record label="{EXIT #2}"]
+}
+cfg0_block0 -> cfg0_block1
+cfg0_block1 -> cfg0_block2 [label="Return"]
+cfg1_block0 -> cfg1_block1
+cfg1_block1 -> cfg1_block2 [label="Return"]
+}

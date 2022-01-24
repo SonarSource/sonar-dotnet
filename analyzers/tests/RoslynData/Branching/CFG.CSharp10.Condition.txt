@@ -1,0 +1,36 @@
+// http://viz-js.com/
+// https://edotor.net/?engine=dot#digraph%20%22Condition%22%20%7B%0D%0Asubgraph%20%22cluster_LocalLifetime%20region%22%20%7B%0Alabel%20%3D%20%22LocalLifetime%20region%22%0D%0Acfg0_block1%20%5Bshape%3Drecord%20label%3D%22%7BBLOCK%20%231%7C0%23%20SimpleAssignmentOperation%20%2F%20VariableDeclaratorSyntax%3A%20value%20%3D%20%5C%22Init%5C%22%7C1%23%20LocalReferenceOperation%20%2F%20VariableDeclaratorSyntax%3A%20value%20%3D%20%5C%22Init%5C%22%7C1%23%20LiteralOperation%20%2F%20LiteralExpressionSyntax%3A%20%5C%22Init%5C%22%7C%23%23%23%23%23%23%23%23%23%23%7C%23%23%20BranchValue%20%23%23%7C0%23%20ParameterReferenceOperation%20%2F%20IdentifierNameSyntax%3A%20condition%7C%23%23%23%23%23%23%23%23%23%23%7D%22%5D%0D%0Acfg0_block2%20%5Bshape%3Drecord%20label%3D%22%7BBLOCK%20%232%7C0%23%20ExpressionStatementOperation%20%2F%20ExpressionStatementSyntax%3A%20value%20%3D%20%5C%22True%5C%22%3B%7C1%23%20SimpleAssignmentOperation%20%2F%20AssignmentExpressionSyntax%3A%20value%20%3D%20%5C%22True%5C%22%7C2%23%20LocalReferenceOperation%20%2F%20IdentifierNameSyntax%3A%20value%7C2%23%20LiteralOperation%20%2F%20LiteralExpressionSyntax%3A%20%5C%22True%5C%22%7C%23%23%23%23%23%23%23%23%23%23%7D%22%5D%0D%0Acfg0_block3%20%5Bshape%3Drecord%20label%3D%22%7BBLOCK%20%233%7C0%23%20ExpressionStatementOperation%20%2F%20ExpressionStatementSyntax%3A%20value%20%3D%20%5C%22False%5C%22%3B%7C1%23%20SimpleAssignmentOperation%20%2F%20AssignmentExpressionSyntax%3A%20value%20%3D%20%5C%22False%5C%22%7C2%23%20LocalReferenceOperation%20%2F%20IdentifierNameSyntax%3A%20value%7C2%23%20LiteralOperation%20%2F%20LiteralExpressionSyntax%3A%20%5C%22False%5C%22%7C%23%23%23%23%23%23%23%23%23%23%7D%22%5D%0D%0Acfg0_block4%20%5Bshape%3Drecord%20label%3D%22%7BBLOCK%20%234%7C%23%23%20BranchValue%20%23%23%7C0%23%20LocalReferenceOperation%20%2F%20IdentifierNameSyntax%3A%20value%7C%23%23%23%23%23%23%23%23%23%23%7D%22%5D%0D%0A%7D%0D%0Acfg0_block0%20%5Bshape%3Drecord%20label%3D%22%7BENTRY%20%230%7D%22%5D%0D%0Acfg0_block5%20%5Bshape%3Drecord%20label%3D%22%7BEXIT%20%235%7D%22%5D%0D%0Acfg0_block0%20-%3E%20cfg0_block1%0D%0Acfg0_block1%20-%3E%20cfg0_block2%20%5Blabel%3D%22Else%22%5D%0D%0Acfg0_block1%20-%3E%20cfg0_block3%20%5Blabel%3D%22WhenFalse%22%5D%0D%0Acfg0_block2%20-%3E%20cfg0_block4%0D%0Acfg0_block3%20-%3E%20cfg0_block4%0D%0Acfg0_block4%20-%3E%20cfg0_block5%20%5Blabel%3D%22Return%22%5D%0D%0A%7D%0D%0A
+
+/*
+public string Condition(bool condition)
+    {
+        string value = "Init";
+        if (condition)
+        {
+            value = "True";
+        }
+        else
+        {
+            value = "False";
+        }
+        return value;
+    }
+*/
+
+digraph "Condition" {
+subgraph "cluster_LocalLifetime region" {
+label = "LocalLifetime region"
+cfg0_block1 [shape=record label="{BLOCK #1|0# SimpleAssignmentOperation / VariableDeclaratorSyntax: value = \"Init\"|1# LocalReferenceOperation / VariableDeclaratorSyntax: value = \"Init\"|1# LiteralOperation / LiteralExpressionSyntax: \"Init\"|##########|## BranchValue ##|0# ParameterReferenceOperation / IdentifierNameSyntax: condition|##########}"]
+cfg0_block2 [shape=record label="{BLOCK #2|0# ExpressionStatementOperation / ExpressionStatementSyntax: value = \"True\";|1# SimpleAssignmentOperation / AssignmentExpressionSyntax: value = \"True\"|2# LocalReferenceOperation / IdentifierNameSyntax: value|2# LiteralOperation / LiteralExpressionSyntax: \"True\"|##########}"]
+cfg0_block3 [shape=record label="{BLOCK #3|0# ExpressionStatementOperation / ExpressionStatementSyntax: value = \"False\";|1# SimpleAssignmentOperation / AssignmentExpressionSyntax: value = \"False\"|2# LocalReferenceOperation / IdentifierNameSyntax: value|2# LiteralOperation / LiteralExpressionSyntax: \"False\"|##########}"]
+cfg0_block4 [shape=record label="{BLOCK #4|## BranchValue ##|0# LocalReferenceOperation / IdentifierNameSyntax: value|##########}"]
+}
+cfg0_block0 [shape=record label="{ENTRY #0}"]
+cfg0_block5 [shape=record label="{EXIT #5}"]
+cfg0_block0 -> cfg0_block1
+cfg0_block1 -> cfg0_block2 [label="Else"]
+cfg0_block1 -> cfg0_block3 [label="WhenFalse"]
+cfg0_block2 -> cfg0_block4
+cfg0_block3 -> cfg0_block4
+cfg0_block4 -> cfg0_block5 [label="Return"]
+}

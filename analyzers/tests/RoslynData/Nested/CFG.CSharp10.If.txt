@@ -1,0 +1,50 @@
+// http://viz-js.com/
+// https://edotor.net/?engine=dot#digraph%20%22If%22%20%7B%0D%0Asubgraph%20%22cluster_LocalLifetime%20region%22%20%7B%0Alabel%20%3D%20%22LocalLifetime%20region%22%0D%0Acfg0_block3%20%5Bshape%3Drecord%20label%3D%22%7BBLOCK%20%233%7C0%23%20SimpleAssignmentOperation%20%2F%20VariableDeclaratorSyntax%3A%20a%20%3D%20%5C%22Outer%20%26%26%20Inner%5C%22%7C1%23%20LocalReferenceOperation%20%2F%20VariableDeclaratorSyntax%3A%20a%20%3D%20%5C%22Outer%20%26%26%20Inner%5C%22%7C1%23%20LiteralOperation%20%2F%20LiteralExpressionSyntax%3A%20%5C%22Outer%20%26%26%20Inner%5C%22%7C%23%23%23%23%23%23%23%23%23%23%7D%22%5D%0D%0A%7D%0D%0Asubgraph%20%22cluster_LocalLifetime%20region%22%20%7B%0Alabel%20%3D%20%22LocalLifetime%20region%22%0D%0Acfg0_block4%20%5Bshape%3Drecord%20label%3D%22%7BBLOCK%20%234%7C0%23%20SimpleAssignmentOperation%20%2F%20VariableDeclaratorSyntax%3A%20a%20%3D%20%5C%22Outer%20%26%26%20!Inner%5C%22%7C1%23%20LocalReferenceOperation%20%2F%20VariableDeclaratorSyntax%3A%20a%20%3D%20%5C%22Outer%20%26%26%20!Inner%5C%22%7C1%23%20LiteralOperation%20%2F%20LiteralExpressionSyntax%3A%20%5C%22Outer%20%26%26%20!Inner%5C%22%7C%23%23%23%23%23%23%23%23%23%23%7D%22%5D%0D%0A%7D%0D%0Asubgraph%20%22cluster_LocalLifetime%20region%22%20%7B%0Alabel%20%3D%20%22LocalLifetime%20region%22%0D%0Acfg0_block5%20%5Bshape%3Drecord%20label%3D%22%7BBLOCK%20%235%7C0%23%20SimpleAssignmentOperation%20%2F%20VariableDeclaratorSyntax%3A%20a%20%3D%20%5C%22!Outer%5C%22%7C1%23%20LocalReferenceOperation%20%2F%20VariableDeclaratorSyntax%3A%20a%20%3D%20%5C%22!Outer%5C%22%7C1%23%20LiteralOperation%20%2F%20LiteralExpressionSyntax%3A%20%5C%22!Outer%5C%22%7C%23%23%23%23%23%23%23%23%23%23%7D%22%5D%0D%0A%7D%0D%0Acfg0_block0%20%5Bshape%3Drecord%20label%3D%22%7BENTRY%20%230%7D%22%5D%0D%0Acfg0_block1%20%5Bshape%3Drecord%20label%3D%22%7BBLOCK%20%231%7C%23%23%20BranchValue%20%23%23%7C0%23%20ParameterReferenceOperation%20%2F%20IdentifierNameSyntax%3A%20outer%7C%23%23%23%23%23%23%23%23%23%23%7D%22%5D%0D%0Acfg0_block2%20%5Bshape%3Drecord%20label%3D%22%7BBLOCK%20%232%7C%23%23%20BranchValue%20%23%23%7C0%23%20ParameterReferenceOperation%20%2F%20IdentifierNameSyntax%3A%20inner%7C%23%23%23%23%23%23%23%23%23%23%7D%22%5D%0D%0Acfg0_block6%20%5Bshape%3Drecord%20label%3D%22%7BEXIT%20%236%7D%22%5D%0D%0Acfg0_block2%20-%3E%20cfg0_block3%20%5Blabel%3D%22Else%22%5D%0D%0Acfg0_block2%20-%3E%20cfg0_block4%20%5Blabel%3D%22WhenFalse%22%5D%0D%0Acfg0_block1%20-%3E%20cfg0_block5%20%5Blabel%3D%22WhenFalse%22%5D%0D%0Acfg0_block0%20-%3E%20cfg0_block1%0D%0Acfg0_block1%20-%3E%20cfg0_block2%20%5Blabel%3D%22Else%22%5D%0D%0Acfg0_block3%20-%3E%20cfg0_block6%0D%0Acfg0_block4%20-%3E%20cfg0_block6%0D%0Acfg0_block5%20-%3E%20cfg0_block6%0D%0A%7D%0D%0A
+
+/*
+public void If(bool outer, bool inner)
+    {
+        if (outer)
+        {
+            if (inner)
+            {
+                var a = "Outer && Inner";
+            }
+            else
+            {
+                var a = "Outer && !Inner";
+            }
+        }
+        else
+        {
+            var a = "!Outer";
+        }
+    }
+*/
+
+digraph "If" {
+subgraph "cluster_LocalLifetime region" {
+label = "LocalLifetime region"
+cfg0_block3 [shape=record label="{BLOCK #3|0# SimpleAssignmentOperation / VariableDeclaratorSyntax: a = \"Outer && Inner\"|1# LocalReferenceOperation / VariableDeclaratorSyntax: a = \"Outer && Inner\"|1# LiteralOperation / LiteralExpressionSyntax: \"Outer && Inner\"|##########}"]
+}
+subgraph "cluster_LocalLifetime region" {
+label = "LocalLifetime region"
+cfg0_block4 [shape=record label="{BLOCK #4|0# SimpleAssignmentOperation / VariableDeclaratorSyntax: a = \"Outer && !Inner\"|1# LocalReferenceOperation / VariableDeclaratorSyntax: a = \"Outer && !Inner\"|1# LiteralOperation / LiteralExpressionSyntax: \"Outer && !Inner\"|##########}"]
+}
+subgraph "cluster_LocalLifetime region" {
+label = "LocalLifetime region"
+cfg0_block5 [shape=record label="{BLOCK #5|0# SimpleAssignmentOperation / VariableDeclaratorSyntax: a = \"!Outer\"|1# LocalReferenceOperation / VariableDeclaratorSyntax: a = \"!Outer\"|1# LiteralOperation / LiteralExpressionSyntax: \"!Outer\"|##########}"]
+}
+cfg0_block0 [shape=record label="{ENTRY #0}"]
+cfg0_block1 [shape=record label="{BLOCK #1|## BranchValue ##|0# ParameterReferenceOperation / IdentifierNameSyntax: outer|##########}"]
+cfg0_block2 [shape=record label="{BLOCK #2|## BranchValue ##|0# ParameterReferenceOperation / IdentifierNameSyntax: inner|##########}"]
+cfg0_block6 [shape=record label="{EXIT #6}"]
+cfg0_block2 -> cfg0_block3 [label="Else"]
+cfg0_block2 -> cfg0_block4 [label="WhenFalse"]
+cfg0_block1 -> cfg0_block5 [label="WhenFalse"]
+cfg0_block0 -> cfg0_block1
+cfg0_block1 -> cfg0_block2 [label="Else"]
+cfg0_block3 -> cfg0_block6
+cfg0_block4 -> cfg0_block6
+cfg0_block5 -> cfg0_block6
+}

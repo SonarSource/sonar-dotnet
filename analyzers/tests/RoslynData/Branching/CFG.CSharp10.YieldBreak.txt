@@ -1,0 +1,22 @@
+// http://viz-js.com/
+// https://edotor.net/?engine=dot#digraph%20%22YieldBreak%22%20%7B%0D%0Acfg0_block0%20%5Bshape%3Drecord%20label%3D%22%7BENTRY%20%230%7D%22%5D%0D%0Acfg0_block1%20%5Bshape%3Drecord%20label%3D%22%7BBLOCK%20%231%7C0%23%20ReturnOperation%20%2F%20YieldStatementSyntax%3A%20yield%20return%20%5C%22A%5C%22%3B%7C1%23%20LiteralOperation%20%2F%20LiteralExpressionSyntax%3A%20%5C%22A%5C%22%7C%23%23%23%23%23%23%23%23%23%23%7C0%23%20ReturnOperation%20%2F%20YieldStatementSyntax%3A%20yield%20return%20%5C%22B%5C%22%3B%7C1%23%20LiteralOperation%20%2F%20LiteralExpressionSyntax%3A%20%5C%22B%5C%22%7C%23%23%23%23%23%23%23%23%23%23%7D%22%5D%0D%0Acfg0_block2%20%5Bshape%3Drecord%20label%3D%22%7BBLOCK%20%232%7C0%23%20ReturnOperation%20%2F%20YieldStatementSyntax%3A%20yield%20return%20%5C%22C%5C%22%3B%7C1%23%20LiteralOperation%20%2F%20LiteralExpressionSyntax%3A%20%5C%22C%5C%22%7C%23%23%23%23%23%23%23%23%23%23%7D%22%5D%0D%0Acfg0_block3%20%5Bshape%3Drecord%20label%3D%22%7BEXIT%20%233%7D%22%5D%0D%0Acfg0_block0%20-%3E%20cfg0_block1%0D%0Acfg0_block1%20-%3E%20cfg0_block3%0D%0Acfg0_block2%20-%3E%20cfg0_block3%0D%0A%7D%0D%0A
+
+/*
+public IEnumerable<string> YieldBreak()
+    {
+        yield return "A";
+        yield return "B";
+        yield break;
+        yield return "C";
+    }
+*/
+
+digraph "YieldBreak" {
+cfg0_block0 [shape=record label="{ENTRY #0}"]
+cfg0_block1 [shape=record label="{BLOCK #1|0# ReturnOperation / YieldStatementSyntax: yield return \"A\";|1# LiteralOperation / LiteralExpressionSyntax: \"A\"|##########|0# ReturnOperation / YieldStatementSyntax: yield return \"B\";|1# LiteralOperation / LiteralExpressionSyntax: \"B\"|##########}"]
+cfg0_block2 [shape=record label="{BLOCK #2|0# ReturnOperation / YieldStatementSyntax: yield return \"C\";|1# LiteralOperation / LiteralExpressionSyntax: \"C\"|##########}"]
+cfg0_block3 [shape=record label="{EXIT #3}"]
+cfg0_block0 -> cfg0_block1
+cfg0_block1 -> cfg0_block3
+cfg0_block2 -> cfg0_block3
+}

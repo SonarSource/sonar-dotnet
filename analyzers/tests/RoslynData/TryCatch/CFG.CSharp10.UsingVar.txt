@@ -1,0 +1,39 @@
+// http://viz-js.com/
+// https://edotor.net/?engine=dot#digraph%20%22UsingVar%22%20%7B%0D%0Asubgraph%20%22cluster_LocalLifetime%20region%22%20%7B%0Alabel%20%3D%20%22LocalLifetime%20region%22%0D%0Asubgraph%20%22cluster_TryAndFinally%20region%22%20%7B%0Alabel%20%3D%20%22TryAndFinally%20region%22%0D%0Asubgraph%20%22cluster_Try%20region%22%20%7B%0Alabel%20%3D%20%22Try%20region%22%0D%0Acfg0_block2%20%5Bshape%3Drecord%20label%3D%22%7BBLOCK%20%232%7C0%23%20ExpressionStatementOperation%20%2F%20ExpressionStatementSyntax%3A%20ms.Write(null%2C%200%2C%200)%3B%7C1%23%20InvocationOperation%3A%20Write%20%2F%20InvocationExpressionSyntax%3A%20ms.Write(null%2C%200%2C%200)%7C2%23%20LocalReferenceOperation%20%2F%20IdentifierNameSyntax%3A%20ms%7C2%23%20ArgumentOperation%20%2F%20ArgumentSyntax%3A%20null%7C3%23%20ConversionOperation%20%2F%20LiteralExpressionSyntax%3A%20null%7C4%23%20LiteralOperation%20%2F%20LiteralExpressionSyntax%3A%20null%7C2%23%20ArgumentOperation%20%2F%20ArgumentSyntax%3A%200%7C3%23%20LiteralOperation%20%2F%20LiteralExpressionSyntax%3A%200%7C2%23%20ArgumentOperation%20%2F%20ArgumentSyntax%3A%200%7C3%23%20LiteralOperation%20%2F%20LiteralExpressionSyntax%3A%200%7C%23%23%23%23%23%23%23%23%23%23%7D%22%5D%0D%0A%7D%0D%0Asubgraph%20%22cluster_Finally%20region%22%20%7B%0Alabel%20%3D%20%22Finally%20region%22%0D%0Acfg0_block3%20%5Bshape%3Drecord%20label%3D%22%7BBLOCK%20%233%7C%23%23%20BranchValue%20%23%23%7C0%23%20IsNullOperation%20%2F%20VariableDeclaratorSyntax%3A%20ms%20%3D%20new%20MemoryStream()%7C1%23%20LocalReferenceOperation%20%2F%20VariableDeclaratorSyntax%3A%20ms%20%3D%20new%20MemoryStream()%7C%23%23%23%23%23%23%23%23%23%23%7D%22%5D%0D%0Acfg0_block4%20%5Bshape%3Drecord%20label%3D%22%7BBLOCK%20%234%7C0%23%20InvocationOperation%3A%20Dispose%20%2F%20VariableDeclaratorSyntax%3A%20ms%20%3D%20new%20MemoryStream()%7C1%23%20ConversionOperation%20%2F%20VariableDeclaratorSyntax%3A%20ms%20%3D%20new%20MemoryStream()%7C2%23%20LocalReferenceOperation%20%2F%20VariableDeclaratorSyntax%3A%20ms%20%3D%20new%20MemoryStream()%7C%23%23%23%23%23%23%23%23%23%23%7D%22%5D%0D%0Acfg0_block5%20%5Bshape%3Drecord%20label%3D%22%7BBLOCK%20%235%7D%22%5D%0D%0A%7D%0D%0A%7D%0D%0Acfg0_block1%20%5Bshape%3Drecord%20label%3D%22%7BBLOCK%20%231%7C0%23%20SimpleAssignmentOperation%20%2F%20VariableDeclaratorSyntax%3A%20ms%20%3D%20new%20MemoryStream()%7C1%23%20LocalReferenceOperation%20%2F%20VariableDeclaratorSyntax%3A%20ms%20%3D%20new%20MemoryStream()%7C1%23%20ObjectCreationOperation%20%2F%20ObjectCreationExpressionSyntax%3A%20new%20MemoryStream()%7C%23%23%23%23%23%23%23%23%23%23%7D%22%5D%0D%0A%7D%0D%0Acfg0_block0%20%5Bshape%3Drecord%20label%3D%22%7BENTRY%20%230%7D%22%5D%0D%0Acfg0_block6%20%5Bshape%3Drecord%20label%3D%22%7BEXIT%20%236%7D%22%5D%0D%0Acfg0_block1%20-%3E%20cfg0_block2%0D%0Acfg0_block3%20-%3E%20cfg0_block4%20%5Blabel%3D%22Else%22%5D%0D%0Acfg0_block3%20-%3E%20cfg0_block5%20%5Blabel%3D%22WhenTrue%22%5D%0D%0Acfg0_block4%20-%3E%20cfg0_block5%0D%0Acfg0_block5%20-%3E%20NoDestination_cfg0_block5%20%5Blabel%3D%22StructuredExceptionHandling%22%5D%0D%0Acfg0_block0%20-%3E%20cfg0_block1%0D%0Acfg0_block2%20-%3E%20cfg0_block6%0D%0A%7D%0D%0A
+
+/*
+public void UsingVar()
+    {
+        using var ms = new MemoryStream();
+        ms.Write(null, 0, 0);
+    }
+*/
+
+digraph "UsingVar" {
+subgraph "cluster_LocalLifetime region" {
+label = "LocalLifetime region"
+subgraph "cluster_TryAndFinally region" {
+label = "TryAndFinally region"
+subgraph "cluster_Try region" {
+label = "Try region"
+cfg0_block2 [shape=record label="{BLOCK #2|0# ExpressionStatementOperation / ExpressionStatementSyntax: ms.Write(null, 0, 0);|1# InvocationOperation: Write / InvocationExpressionSyntax: ms.Write(null, 0, 0)|2# LocalReferenceOperation / IdentifierNameSyntax: ms|2# ArgumentOperation / ArgumentSyntax: null|3# ConversionOperation / LiteralExpressionSyntax: null|4# LiteralOperation / LiteralExpressionSyntax: null|2# ArgumentOperation / ArgumentSyntax: 0|3# LiteralOperation / LiteralExpressionSyntax: 0|2# ArgumentOperation / ArgumentSyntax: 0|3# LiteralOperation / LiteralExpressionSyntax: 0|##########}"]
+}
+subgraph "cluster_Finally region" {
+label = "Finally region"
+cfg0_block3 [shape=record label="{BLOCK #3|## BranchValue ##|0# IsNullOperation / VariableDeclaratorSyntax: ms = new MemoryStream()|1# LocalReferenceOperation / VariableDeclaratorSyntax: ms = new MemoryStream()|##########}"]
+cfg0_block4 [shape=record label="{BLOCK #4|0# InvocationOperation: Dispose / VariableDeclaratorSyntax: ms = new MemoryStream()|1# ConversionOperation / VariableDeclaratorSyntax: ms = new MemoryStream()|2# LocalReferenceOperation / VariableDeclaratorSyntax: ms = new MemoryStream()|##########}"]
+cfg0_block5 [shape=record label="{BLOCK #5}"]
+}
+}
+cfg0_block1 [shape=record label="{BLOCK #1|0# SimpleAssignmentOperation / VariableDeclaratorSyntax: ms = new MemoryStream()|1# LocalReferenceOperation / VariableDeclaratorSyntax: ms = new MemoryStream()|1# ObjectCreationOperation / ObjectCreationExpressionSyntax: new MemoryStream()|##########}"]
+}
+cfg0_block0 [shape=record label="{ENTRY #0}"]
+cfg0_block6 [shape=record label="{EXIT #6}"]
+cfg0_block1 -> cfg0_block2
+cfg0_block3 -> cfg0_block4 [label="Else"]
+cfg0_block3 -> cfg0_block5 [label="WhenTrue"]
+cfg0_block4 -> cfg0_block5
+cfg0_block5 -> NoDestination_cfg0_block5 [label="StructuredExceptionHandling"]
+cfg0_block0 -> cfg0_block1
+cfg0_block2 -> cfg0_block6
+}
