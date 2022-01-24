@@ -47,7 +47,7 @@ namespace SonarAnalyzer.UnitTest.Helpers
         {
             public string Path { get; }
             public DiagnosticAnalyzer Analyzer { get; }
-            public VerifierBuilder Verifier { get; set; }
+            public VerifierBuilder Verifier { get; }
             public IEnumerable<MetadataReference> AdditionalReferences { get; }
 
             public TestSetup(string testCase, SonarDiagnosticAnalyzer analyzer) : this(testCase, analyzer, Enumerable.Empty<MetadataReference>()) { }
@@ -56,7 +56,7 @@ namespace SonarAnalyzer.UnitTest.Helpers
             {
                 Path = testCase;
                 Analyzer = analyzer;
-                Verifier = new VerifierBuilder().AddAnalyzer(() => analyzer);
+                Verifier = new VerifierBuilder().AddAnalyzer(() => analyzer).AddPaths(Path).AddReferences(AdditionalReferences);
                 AdditionalReferences = additionalReferences.Concat(MetadataReferenceFacade.SystemComponentModelPrimitives)
                                                            .Concat(NetStandardMetadataReference.Netstandard)
                                                            .Concat(MetadataReferenceFacade.SystemData);
@@ -109,9 +109,7 @@ namespace SonarAnalyzer.UnitTest.Helpers
                 {
                     // ToDo: We should find a way to ack the fact the action was not run
                     testCase.Verifier
-                        .AddPaths(testCase.Path)
                         .WithOptions(ParseOptionsHelper.FromCSharp8)
-                        .AddReferences(testCase.AdditionalReferences)
                         .VerifyNoIssueReported();
                 }
             }
@@ -128,9 +126,7 @@ namespace SonarAnalyzer.UnitTest.Helpers
             {
                 // ToDo: We test that a rule is enabled only by checking the issues are reported
                 testCase.Verifier
-                    .AddPaths(testCase.Path)
                     .WithOptions(ParseOptionsHelper.FromCSharp8)
-                    .AddReferences(testCase.AdditionalReferences)
                     .Verify();
             }
         }
@@ -145,9 +141,7 @@ namespace SonarAnalyzer.UnitTest.Helpers
                 if (hasTestScope)
                 {
                     testCase.Verifier
-                        .AddPaths(testCase.Path)
                         .WithOptions(ParseOptionsHelper.FromCSharp8)
-                        .AddReferences(testCase.AdditionalReferences)
                         .WithSonarProjectConfigPath(sonarProjectConfig)
                         .Verify();
                 }
@@ -155,9 +149,7 @@ namespace SonarAnalyzer.UnitTest.Helpers
                 {
                     // MAIN-only
                     testCase.Verifier
-                        .AddPaths(testCase.Path)
                         .WithOptions(ParseOptionsHelper.FromCSharp8)
-                        .AddReferences(testCase.AdditionalReferences)
                         .WithSonarProjectConfigPath(sonarProjectConfig)
                         .VerifyNoIssueReported();
                 }
@@ -175,17 +167,14 @@ namespace SonarAnalyzer.UnitTest.Helpers
                 {
                     // MAIN-only and MAIN & TEST rules
                     testCase.Verifier
-                        .AddPaths(testCase.Path)
                         .WithOptions(ParseOptionsHelper.FromCSharp8)
-                        .AddReferences(testCase.AdditionalReferences)
                         .WithSonarProjectConfigPath(sonarProjectConfig)
                         .VerifyNoIssueReported();
                 }
                 else
                 {
-                    testCase.Verifier.AddPaths(testCase.Path)
+                    testCase.Verifier
                         .WithOptions(ParseOptionsHelper.FromCSharp8)
-                        .AddReferences(testCase.AdditionalReferences)
                         .WithSonarProjectConfigPath(sonarProjectConfig)
                         .Verify();
                 }
@@ -202,9 +191,7 @@ namespace SonarAnalyzer.UnitTest.Helpers
                 if (hasProductScope)
                 {
                     testCase.Verifier
-                        .AddPaths(testCase.Path)
                         .WithOptions(ParseOptionsHelper.FromCSharp8)
-                        .AddReferences(testCase.AdditionalReferences)
                         .WithSonarProjectConfigPath(sonarProjectConfig)
                         .Verify();
                 }
@@ -212,9 +199,7 @@ namespace SonarAnalyzer.UnitTest.Helpers
                 {
                     // TEST-only rule
                     testCase.Verifier
-                        .AddPaths(testCase.Path)
                         .WithOptions(ParseOptionsHelper.FromCSharp8)
-                        .AddReferences(testCase.AdditionalReferences)
                         .WithSonarProjectConfigPath(sonarProjectConfig)
                         .VerifyNoIssueReported();
                 }
@@ -231,8 +216,8 @@ namespace SonarAnalyzer.UnitTest.Helpers
                 var testCase = testCases[0];
                 var testCase2 = testCases[2];
                 SonarAnalysisContext.ShouldExecuteRegisteredAction = (diags, tree) => tree.FilePath.EndsWith(new FileInfo(testCase.Path).Name, StringComparison.OrdinalIgnoreCase);
-                testCase.Verifier.AddPaths(testCase.Path).WithConcurrentAnalysis(false).Verify();
-                testCase2.Verifier.AddPaths(testCase2.Path).VerifyNoIssueReported();
+                testCase.Verifier.WithConcurrentAnalysis(false).Verify();
+                testCase2.Verifier.VerifyNoIssueReported();
             }
             finally
             {
@@ -267,17 +252,13 @@ namespace SonarAnalyzer.UnitTest.Helpers
                         if (testCase.Analyzer is AnonymousDelegateEventUnsubscribe || testCase.Analyzer is TestMethodShouldContainAssertion)
                         {
                             testCase.Verifier
-                                .AddPaths(testCase.Path)
                                 .WithOptions(ParseOptionsHelper.FromCSharp8)
-                                .AddReferences(testCase.AdditionalReferences)
                                 .VerifyNoIssueReported();
                         }
                         else
                         {
                             testCase.Verifier
-                                .AddPaths(testCase.Path)
                                 .WithOptions(ParseOptionsHelper.FromCSharp8)
-                                .AddReferences(testCase.AdditionalReferences)
                                 .Verify();
                         }
                     }

@@ -62,7 +62,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [DataRow(MsTestVersions.Ver1)]
         [DataRow(Constants.NuGetLatestVersion)]
         public void TestMethodShouldContainAssertion_MSTest(string testFwkVersion) =>
-            builder.AddPaths(new[] { "TestMethodShouldContainAssertion.MsTest.cs", "TestMethodShouldContainAssertion.MsTest.AnotherFile.cs" })
+            builder.AddPaths("TestMethodShouldContainAssertion.MsTest.cs", "TestMethodShouldContainAssertion.MsTest.AnotherFile.cs" )
                 .AddReferences(AdditionalTestReferences(NuGetMetadataReference.MSTestTestFramework(testFwkVersion)))
                 .Verify();
 
