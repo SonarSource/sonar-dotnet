@@ -46,65 +46,71 @@ namespace SonarAnalyzer.UnitTest.Helpers
         private class TestSetup
         {
             public string Path { get; }
-            public SonarDiagnosticAnalyzer Analyzer { get; }
-            public IEnumerable<MetadataReference> AdditionalReferences { get; }
+            public DiagnosticAnalyzer Analyzer { get; }
+            public VerifierBuilder Verifier { get; }
 
             public TestSetup(string testCase, SonarDiagnosticAnalyzer analyzer) : this(testCase, analyzer, Enumerable.Empty<MetadataReference>()) { }
 
             public TestSetup(string testCase, SonarDiagnosticAnalyzer analyzer, IEnumerable<MetadataReference> additionalReferences)
             {
-                Path = System.IO.Path.Combine("TestCases", testCase);
+                Path = testCase;
                 Analyzer = analyzer;
-                AdditionalReferences = additionalReferences.Concat(MetadataReferenceFacade.SystemComponentModelPrimitives)
-                                                           .Concat(NetStandardMetadataReference.Netstandard)
-                                                           .Concat(MetadataReferenceFacade.SystemData);
+                additionalReferences = additionalReferences
+                    .Concat(MetadataReferenceFacade.SystemComponentModelPrimitives)
+                    .Concat(NetStandardMetadataReference.Netstandard)
+                    .Concat(MetadataReferenceFacade.SystemData);
+                Verifier = new VerifierBuilder().AddAnalyzer(() => analyzer).AddPaths(Path).AddReferences(additionalReferences);
             }
         }
 
         // Various classes that invoke all the `ReportIssue` methods in AnalysisContextExtensions
         // We mention in comments the type of Context that is used to invoke (directly or indirectly) the `ReportIssue` method
-        private readonly List<TestSetup> testCases = new (new[]
-        {
-            // SyntaxNodeAnalysisContext
-            // S3244 - MAIN and TEST
-            new TestSetup("AnonymousDelegateEventUnsubscribe.cs", new AnonymousDelegateEventUnsubscribe()),
-            // S2699 - TEST only
-            new TestSetup("TestMethodShouldContainAssertion.NUnit.cs", new TestMethodShouldContainAssertion(),
-                TestMethodShouldContainAssertionTest.AdditionalTestReferences(NuGetMetadataReference.NUnit(Constants.NuGetLatestVersion))),
+        private readonly List<TestSetup> testCases = new(
+            new[]
+            {
+                // SyntaxNodeAnalysisContext
+                // S3244 - MAIN and TEST
+                new TestSetup("AnonymousDelegateEventUnsubscribe.cs", new AnonymousDelegateEventUnsubscribe()),
+                // S2699 - TEST only
+                new TestSetup(
+                    "TestMethodShouldContainAssertion.NUnit.cs",
+                    new TestMethodShouldContainAssertion(),
+                    TestMethodShouldContainAssertionTest.AdditionalTestReferences(NuGetMetadataReference.NUnit(Constants.NuGetLatestVersion))),
 
-            // SyntaxTreeAnalysisContext
-            // S3244 - MAIN and TEST
-            new TestSetup("AsyncAwaitIdentifier.cs", new AsyncAwaitIdentifier()),
+                // SyntaxTreeAnalysisContext
+                // S3244 - MAIN and TEST
+                new TestSetup("AsyncAwaitIdentifier.cs", new AsyncAwaitIdentifier()),
 
-            // CompilationAnalysisContext
-            // S3244 - MAIN and TEST
-            new TestSetup(@"Hotspots\RequestsWithExcessiveLength.cs", new RequestsWithExcessiveLength(AnalyzerConfiguration.AlwaysEnabled), RequestsWithExcessiveLengthTest.GetAdditionalReferences()),
+                // CompilationAnalysisContext
+                // S3244 - MAIN and TEST
+                new TestSetup(
+                    @"Hotspots\RequestsWithExcessiveLength.cs",
+                    new RequestsWithExcessiveLength(AnalyzerConfiguration.AlwaysEnabled),
+                    RequestsWithExcessiveLengthTest.GetAdditionalReferences()),
 
-            // CodeBlockAnalysisContext
-            // S5693 - MAIN and TEST
-            new TestSetup("GetHashCodeEqualsOverride.cs", new GetHashCodeEqualsOverride()),
+                // CodeBlockAnalysisContext
+                // S5693 - MAIN and TEST
+                new TestSetup("GetHashCodeEqualsOverride.cs", new GetHashCodeEqualsOverride()),
 
-            // SymbolAnalysisContext
-            // S2953 - MAIN only
-            new TestSetup("DisposeNotImplementingDispose.cs", new DisposeNotImplementingDispose()),
-            // S1694 - MAIN only
-            new TestSetup("ClassShouldNotBeAbstract.cs", new ClassShouldNotBeAbstract()),
-        });
+                // SymbolAnalysisContext
+                // S2953 - MAIN only
+                new TestSetup("DisposeNotImplementingDispose.cs", new DisposeNotImplementingDispose()),
+                // S1694 - MAIN only
+                new TestSetup("ClassShouldNotBeAbstract.cs", new ClassShouldNotBeAbstract()),
+            });
 
         [TestMethod]
         public void WhenShouldAnalysisBeDisabledReturnsTrue_NoIssueReported()
         {
             SonarAnalysisContext.ShouldExecuteRegisteredAction = (diags, tree) => false;
-
             try
             {
                 foreach (var testCase in testCases)
                 {
                     // ToDo: We should find a way to ack the fact the action was not run
-                    OldVerifier.VerifyNoIssueReported(testCase.Path,
-                                                   testCase.Analyzer,
-                                                   ParseOptionsHelper.FromCSharp8,
-                                                   testCase.AdditionalReferences);
+                    testCase.Verifier
+                        .WithOptions(ParseOptionsHelper.FromCSharp8)
+                        .VerifyNoIssueReported();
                 }
             }
             finally
@@ -119,10 +125,9 @@ namespace SonarAnalyzer.UnitTest.Helpers
             foreach (var testCase in testCases)
             {
                 // ToDo: We test that a rule is enabled only by checking the issues are reported
-                OldVerifier.VerifyAnalyzer(testCase.Path,
-                                        testCase.Analyzer,
-                                        ParseOptionsHelper.FromCSharp8,
-                                        testCase.AdditionalReferences);
+                testCase.Verifier
+                    .WithOptions(ParseOptionsHelper.FromCSharp8)
+                    .Verify();
             }
         }
 
@@ -135,20 +140,18 @@ namespace SonarAnalyzer.UnitTest.Helpers
                 var hasTestScope = testCase.Analyzer.SupportedDiagnostics.Any(d => d.CustomTags.Contains(DiagnosticDescriptorBuilder.TestSourceScopeTag));
                 if (hasTestScope)
                 {
-                    OldVerifier.VerifyAnalyzer(testCase.Path,
-                                            testCase.Analyzer,
-                                            ParseOptionsHelper.FromCSharp8,
-                                            testCase.AdditionalReferences,
-                                            sonarProjectConfig);
+                    testCase.Verifier
+                        .WithOptions(ParseOptionsHelper.FromCSharp8)
+                        .WithSonarProjectConfigPath(sonarProjectConfig)
+                        .Verify();
                 }
                 else
                 {
                     // MAIN-only
-                    OldVerifier.VerifyNoIssueReported(testCase.Path,
-                                                   testCase.Analyzer,
-                                                   ParseOptionsHelper.FromCSharp8,
-                                                   testCase.AdditionalReferences,
-                                                   sonarProjectConfig);
+                    testCase.Verifier
+                        .WithOptions(ParseOptionsHelper.FromCSharp8)
+                        .WithSonarProjectConfigPath(sonarProjectConfig)
+                        .VerifyNoIssueReported();
                 }
             }
         }
@@ -163,19 +166,17 @@ namespace SonarAnalyzer.UnitTest.Helpers
                 if (hasProductScope)
                 {
                     // MAIN-only and MAIN & TEST rules
-                    OldVerifier.VerifyNoIssueReported(testCase.Path,
-                                                   testCase.Analyzer,
-                                                   ParseOptionsHelper.FromCSharp8,
-                                                   testCase.AdditionalReferences,
-                                                   sonarProjectConfig);
+                    testCase.Verifier
+                        .WithOptions(ParseOptionsHelper.FromCSharp8)
+                        .WithSonarProjectConfigPath(sonarProjectConfig)
+                        .VerifyNoIssueReported();
                 }
                 else
                 {
-                    OldVerifier.VerifyAnalyzer(testCase.Path,
-                                            testCase.Analyzer,
-                                            ParseOptionsHelper.FromCSharp8,
-                                            testCase.AdditionalReferences,
-                                            sonarProjectConfig);
+                    testCase.Verifier
+                        .WithOptions(ParseOptionsHelper.FromCSharp8)
+                        .WithSonarProjectConfigPath(sonarProjectConfig)
+                        .Verify();
                 }
             }
         }
@@ -189,20 +190,18 @@ namespace SonarAnalyzer.UnitTest.Helpers
                 var hasProductScope = testCase.Analyzer.SupportedDiagnostics.Any(d => d.CustomTags.Contains(DiagnosticDescriptorBuilder.MainSourceScopeTag));
                 if (hasProductScope)
                 {
-                    OldVerifier.VerifyAnalyzer(testCase.Path,
-                                            testCase.Analyzer,
-                                            ParseOptionsHelper.FromCSharp8,
-                                            testCase.AdditionalReferences,
-                                            sonarProjectConfig);
+                    testCase.Verifier
+                        .WithOptions(ParseOptionsHelper.FromCSharp8)
+                        .WithSonarProjectConfigPath(sonarProjectConfig)
+                        .Verify();
                 }
                 else
                 {
                     // TEST-only rule
-                    OldVerifier.VerifyNoIssueReported(testCase.Path,
-                                                   testCase.Analyzer,
-                                                   ParseOptionsHelper.FromCSharp8,
-                                                   testCase.AdditionalReferences,
-                                                   sonarProjectConfig);
+                    testCase.Verifier
+                        .WithOptions(ParseOptionsHelper.FromCSharp8)
+                        .WithSonarProjectConfigPath(sonarProjectConfig)
+                        .VerifyNoIssueReported();
                 }
             }
         }
@@ -214,9 +213,11 @@ namespace SonarAnalyzer.UnitTest.Helpers
 
             try
             {
-                SonarAnalysisContext.ShouldExecuteRegisteredAction = (diags, tree) => tree.FilePath.EndsWith(new FileInfo(testCases[0].Path).Name, StringComparison.OrdinalIgnoreCase);
-                OldVerifier.VerifyNonConcurrentAnalyzer(testCases[0].Path, testCases[0].Analyzer);
-                OldVerifier.VerifyNoIssueReported(testCases[2].Path, testCases[2].Analyzer);
+                var testCase = testCases[0];
+                var testCase2 = testCases[2];
+                SonarAnalysisContext.ShouldExecuteRegisteredAction = (diags, tree) => tree.FilePath.EndsWith(new FileInfo(testCase.Path).Name, StringComparison.OrdinalIgnoreCase);
+                testCase.Verifier.WithConcurrentAnalysis(false).Verify();
+                testCase2.Verifier.VerifyNoIssueReported();
             }
             finally
             {
@@ -250,17 +251,15 @@ namespace SonarAnalyzer.UnitTest.Helpers
                         // special logic for rules with SyntaxNodeAnalysisContext
                         if (testCase.Analyzer is AnonymousDelegateEventUnsubscribe || testCase.Analyzer is TestMethodShouldContainAssertion)
                         {
-                            OldVerifier.VerifyNoIssueReported(testCase.Path,
-                                                           testCase.Analyzer,
-                                                           ParseOptionsHelper.FromCSharp8,
-                                                           testCase.AdditionalReferences);
+                            testCase.Verifier
+                                .WithOptions(ParseOptionsHelper.FromCSharp8)
+                                .VerifyNoIssueReported();
                         }
                         else
                         {
-                            OldVerifier.VerifyAnalyzer(testCase.Path,
-                                                    testCase.Analyzer,
-                                                    ParseOptionsHelper.FromCSharp8,
-                                                    testCase.AdditionalReferences);
+                            testCase.Verifier
+                                .WithOptions(ParseOptionsHelper.FromCSharp8)
+                                .Verify();
                         }
                     }
                 }
@@ -331,8 +330,10 @@ namespace SonarAnalyzer.UnitTest.Helpers
 
             var sut = new SonarAnalysisContext(new DummyContext(), Enumerable.Empty<DiagnosticDescriptor>());
 
-            sut.Invoking(x => x.ProjectConfiguration(options)).Should().Throw<InvalidOperationException>()
-                .WithMessage("File SonarProjectConfig.xml has been added as an AdditionalFile but could not be read and parsed.");
+            sut.Invoking(x => x.ProjectConfiguration(options))
+               .Should()
+               .Throw<InvalidOperationException>()
+               .WithMessage("File SonarProjectConfig.xml has been added as an AdditionalFile but could not be read and parsed.");
         }
 
         [TestMethod]
@@ -342,8 +343,10 @@ namespace SonarAnalyzer.UnitTest.Helpers
 
             var sut = new SonarAnalysisContext(new DummyContext(), Enumerable.Empty<DiagnosticDescriptor>());
 
-            sut.Invoking(x => x.ProjectConfiguration(options)).Should().Throw<InvalidOperationException>()
-                .WithMessage("File SonarProjectConfig.xml has been added as an AdditionalFile but could not be read and parsed.");
+            sut.Invoking(x => x.ProjectConfiguration(options))
+               .Should()
+               .Throw<InvalidOperationException>()
+               .WithMessage("File SonarProjectConfig.xml has been added as an AdditionalFile but could not be read and parsed.");
         }
 
         [TestMethod]
