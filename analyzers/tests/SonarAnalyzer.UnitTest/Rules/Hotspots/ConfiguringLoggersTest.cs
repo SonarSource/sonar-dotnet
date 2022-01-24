@@ -81,12 +81,6 @@ namespace SonarAnalyzer.UnitTest.Rules
                 .Verify();
 
         [TestMethod]
-        public void ConfiguringLoggers_AspNetCore6_CS() =>
-            builderCS.AddPaths(@"Hotspots\ConfiguringLoggers_AspNetCore6.cs")
-                .AddReferences(AspNetCoreLoggingReferences(Constants.DotNetCore600Version))
-                .Verify();
-
-        [TestMethod]
         public void ConfiguringLoggers_AspNetCoreLatest_CS() =>
             builderCS.AddPaths(@"Hotspots\ConfiguringLoggers_AspNetCore6.cs")
                 .AddReferences(AspNetCoreLoggingReferences(Constants.NuGetLatestVersion))
