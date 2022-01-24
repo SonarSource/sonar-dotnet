@@ -53,7 +53,7 @@ namespace SonarAnalyzer.UnitTest.Helpers
 
             public TestSetup(string testCase, SonarDiagnosticAnalyzer analyzer, IEnumerable<MetadataReference> additionalReferences)
             {
-                Path = System.IO.Path.Combine("TestCases", testCase);
+                Path = testCase;
                 Analyzer = analyzer;
                 AdditionalReferences = additionalReferences.Concat(MetadataReferenceFacade.SystemComponentModelPrimitives)
                                                            .Concat(NetStandardMetadataReference.Netstandard)
