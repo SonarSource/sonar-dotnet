@@ -34,7 +34,7 @@ namespace SonarAnalyzer.Rules.CSharp
 {
     internal sealed class PublicMethodArgumentsShouldBeCheckedForNull : ISymbolicExecutionAnalyzer
     {
-        internal const string DiagnosticId = "S3900";
+        private const string DiagnosticId = "S3900";
         private const string MessageFormat = "Refactor this {0}.";
         private const string Constructor = "constructor to avoid using members of parameter '{0}' because it could be null";
         private const string Method = "method to add validation of parameter '{0}' before using it";
@@ -43,8 +43,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
         public IEnumerable<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(S3900);
 
-        public ISymbolicExecutionAnalysisContext CreateContext(SonarExplodedGraph explodedGraph, SyntaxNodeAnalysisContext context) =>
-            new AnalysisContext(explodedGraph, context);
+        public ISymbolicExecutionAnalysisContext CreateContext(SonarExplodedGraph explodedGraph, SyntaxNodeAnalysisContext context) => new AnalysisContext(explodedGraph, context);
 
         private static void CollectMemberAccesses(MemberAccessingEventArgs args, ISet<IdentifierNameSyntax> identifiers, SemanticModel semanticModel)
         {

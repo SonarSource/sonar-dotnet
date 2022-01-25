@@ -32,27 +32,26 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class PublicMethodArgumentsShouldBeCheckedForNullTest
     {
-        private static readonly DiagnosticDescriptor[] OnlyDiagnostics = new[] { PublicMethodArgumentsShouldBeCheckedForNull.S3900 };
+        private readonly VerifierBuilder builder = new VerifierBuilder().AddAnalyzer(() => new SymbolicExecutionRunner())
+                                                       .WithOnlyDiagnostics(PublicMethodArgumentsShouldBeCheckedForNull.S3900)
+                                                       .WithBasePath(@"SymbolicExecution\Sonar");
 
         [DataTestMethod]
         [DataRow(ProjectType.Product)]
         [DataRow(ProjectType.Test)]
         public void PublicMethodArgumentsShouldBeCheckedForNull_CS(ProjectType projectType) =>
-            OldVerifier.VerifyAnalyzer(
-                @"TestCases\SymbolicExecution\Sonar\PublicMethodArgumentsShouldBeCheckedForNull.cs",
-                new SymbolicExecutionRunner(),
-                ParseOptionsHelper.FromCSharp8,
-                TestHelper.ProjectTypeReference(projectType).Concat(MetadataReferenceFacade.NETStandard21),
-                onlyDiagnostics: OnlyDiagnostics);
+            builder.AddReferences(TestHelper.ProjectTypeReference(projectType).Concat(MetadataReferenceFacade.NETStandard21))
+                .AddPaths("PublicMethodArgumentsShouldBeCheckedForNull.cs")
+                .WithOptions(ParseOptionsHelper.FromCSharp8)
+                .Verify();
 
 #if NET
         [TestMethod]
         public void PublicMethodArgumentsShouldBeCheckedForNull_CSharp9() =>
-            OldVerifier.VerifyAnalyzerFromCSharp9Library(
-                @"TestCases\SymbolicExecution\Sonar\PublicMethodArgumentsShouldBeCheckedForNull.CSharp9.cs",
-                new SymbolicExecutionRunner(),
-                NuGetMetadataReference.MicrosoftAspNetCoreMvcCore(Constants.NuGetLatestVersion),
-                onlyDiagnostics: OnlyDiagnostics);
+            builder.AddPaths("PublicMethodArgumentsShouldBeCheckedForNull.CSharp9.cs")
+                .AddReferences(NuGetMetadataReference.MicrosoftAspNetCoreMvcCore(Constants.NuGetLatestVersion))
+                .WithOptions(ParseOptionsHelper.FromCSharp9)
+                .Verify();
 #endif
     }
 }
