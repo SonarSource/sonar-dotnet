@@ -20,6 +20,7 @@
 
 using System.Collections.Generic;
 using Microsoft.CodeAnalysis;
+using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.UnitTest.MetadataReferences;
@@ -36,20 +37,28 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class UsingCookies
     {
+        private readonly VerifierBuilder builderCS = new VerifierBuilder()
+            .AddAnalyzer(() => new CS.UsingCookies(AnalyzerConfiguration.AlwaysEnabled))
+            .WithBasePath(@"Hotspots\");
+
+        private readonly VerifierBuilder builderVB = new VerifierBuilder()
+            .AddAnalyzer(() => new VB.UsingCookies(AnalyzerConfiguration.AlwaysEnabled))
+            .WithBasePath(@"Hotspots\");
+
 #if NETFRAMEWORK // HttpCookie is available only when targeting .Net Framework
         [TestMethod]
         public void UsingCookies_CS_Net46() =>
-            OldVerifier.VerifyAnalyzer(
-                @"TestCases\Hotspots\UsingCookies_Net46.cs",
-                new CS.UsingCookies(AnalyzerConfiguration.AlwaysEnabled),
-                GetAdditionalReferencesForNet46());
+            builderCS
+                .AddPaths("UsingCookies_Net46.cs")
+                .AddReferences(GetAdditionalReferencesForNet46())
+                .Verify();
 
         [TestMethod]
         public void UsingCookies_VB_Net46() =>
-            OldVerifier.VerifyAnalyzer(
-                @"TestCases\Hotspots\UsingCookies_Net46.vb",
-                new VB.UsingCookies(AnalyzerConfiguration.AlwaysEnabled),
-                GetAdditionalReferencesForNet46());
+            builderVB
+                .AddPaths("UsingCookies_Net46.vb")
+                .AddReferences(GetAdditionalReferencesForNet46())
+                .Verify();
 
         internal static IEnumerable<MetadataReference> GetAdditionalReferencesForNet46() =>
             FrameworkMetadataReference.SystemWeb;
@@ -57,24 +66,47 @@ namespace SonarAnalyzer.UnitTest.Rules
 #else
         [TestMethod]
         public void UsingCookies_CS_NetCore() =>
-            OldVerifier.VerifyAnalyzer(
-                @"TestCases\Hotspots\UsingCookies_NetCore.cs",
-                new CS.UsingCookies(AnalyzerConfiguration.AlwaysEnabled),
-                GetAdditionalReferencesForNetCore(Constants.DotNetCore220Version));
+            builderCS
+                .AddPaths("UsingCookies_NetCore.cs")
+                .AddReferences(GetAdditionalReferencesForNetCore(Constants.DotNetCore220Version))
+                .Verify();
+
+        [TestMethod]
+        public void UsingCookies_CS_NetCore_DotnetCoreLatest() =>
+            builderCS
+                .AddPaths("UsingCookies_NetCore.cs")
+                .AddReferences(GetAdditionalReferencesForNetCore(Constants.NuGetLatestVersion))
+                .Verify();
 
         [TestMethod]
         public void UsingCookies_CSharp10() =>
-            OldVerifier.VerifyAnalyzerFromCSharp10Library(
-                @"TestCases\Hotspots\UsingCookies_NetCore.CSharp10.cs",
-                new CS.UsingCookies(AnalyzerConfiguration.AlwaysEnabled),
-                GetAdditionalReferencesForNetCore(Constants.DotNetCore220Version));
+            builderCS
+                .AddPaths("UsingCookies_NetCore.CSharp10.cs")
+                .AddReferences(GetAdditionalReferencesForNetCore(Constants.DotNetCore220Version))
+                .WithLanguageVersion(LanguageVersion.CSharp10)
+                .Verify();
+
+        [TestMethod]
+        public void UsingCookies_CSharp10_DotnetCoreLatest() =>
+            builderCS
+                .AddPaths("UsingCookies_NetCore.CSharp10.cs")
+                .AddReferences(GetAdditionalReferencesForNetCore(Constants.NuGetLatestVersion))
+                .WithLanguageVersion(LanguageVersion.CSharp10)
+                .Verify();
 
         [TestMethod]
         public void UsingCookies_VB_NetCore() =>
-            OldVerifier.VerifyAnalyzer(
-                @"TestCases\Hotspots\UsingCookies_NetCore.vb",
-                new VB.UsingCookies(AnalyzerConfiguration.AlwaysEnabled),
-                GetAdditionalReferencesForNetCore(Constants.DotNetCore220Version));
+            builderVB
+                .AddPaths("UsingCookies_NetCore.vb")
+                .AddReferences(GetAdditionalReferencesForNetCore(Constants.DotNetCore220Version))
+                .Verify();
+
+        [TestMethod]
+        public void UsingCookies_VB_NetCore_DotnetCoreLatest() =>
+            builderVB
+                .AddPaths("UsingCookies_NetCore.vb")
+                .AddReferences(GetAdditionalReferencesForNetCore(Constants.NuGetLatestVersion))
+                .Verify();
 
         internal static IEnumerable<MetadataReference> GetAdditionalReferencesForNetCore(string packageVersion) =>
             NuGetMetadataReference.MicrosoftAspNetCoreHttpAbstractions(packageVersion)
