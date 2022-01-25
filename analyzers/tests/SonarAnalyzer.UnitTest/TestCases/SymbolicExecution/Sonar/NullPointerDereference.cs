@@ -1038,3 +1038,33 @@ namespace Repro_3395
         }
     }
 }
+
+// https://github.com/SonarSource/sonar-dotnet/issues/5285
+public class Repro_5289
+{
+    public void A(ref string s)
+    {
+        s = "not null";
+    }
+
+    public void B(int i)
+    {
+        // empty
+    }
+
+    public void C(double[] a)
+    {
+        if (a == null)
+        {
+            B(0);
+        }
+
+        string s = null;
+        A(ref s);
+
+        if (a != null)
+        {
+            B(a.Length); // Noncompliant FP, the unrelated "A(ref s)" call breaks constraint on "a" variable
+        }
+    }
+}
