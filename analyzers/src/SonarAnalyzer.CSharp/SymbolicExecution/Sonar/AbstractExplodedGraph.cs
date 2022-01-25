@@ -36,7 +36,6 @@ namespace SonarAnalyzer.SymbolicExecution.Sonar
         internal const int MaxInternalStateCount = 10000;
         private const int MaxProgramPointExecutionCount = 2;
 
-        private readonly List<ExplodedGraphNode> nodes = new List<ExplodedGraphNode>();
         private readonly Dictionary<ProgramPoint, ProgramPoint> programPoints = new Dictionary<ProgramPoint, ProgramPoint>();
         private readonly Queue<ExplodedGraphNode> workList = new Queue<ExplodedGraphNode>();
         private readonly HashSet<ExplodedGraphNode> nodesAlreadyInGraph = new HashSet<ExplodedGraphNode>();
@@ -93,8 +92,6 @@ namespace SonarAnalyzer.SymbolicExecution.Sonar
 
                 steps++;
                 var node = this.workList.Dequeue();
-                this.nodes.Add(node);
-
                 var programPoint = node.ProgramPoint;
 
                 if (programPoint.Block is ExitBlock)
