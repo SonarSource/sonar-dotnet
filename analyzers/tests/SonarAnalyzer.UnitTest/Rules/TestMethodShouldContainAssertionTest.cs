@@ -202,6 +202,7 @@ public class Foo
                 .AddReferences(NuGetMetadataReference.NFluent(nFluentVersion))
                 .AddReferences(NuGetMetadataReference.Shouldly(shouldlyVersion))
                 .AddReferences(MetadataReferenceFacade.SystemData)
+                .AddReferences(MetadataReferenceFacade.SystemNetHttp)
                 .AddReferences(MetadataReferenceFacade.SystemXml)
                 .AddReferences(MetadataReferenceFacade.SystemXmlLinq)
                 .AddReferences(MetadataReferenceFacade.SystemThreadingTasks);
