@@ -30,6 +30,8 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
 {
     internal class RoslynSymbolicExecution
     {
+        internal const int MaxStepCount = 2000;
+
         private readonly ControlFlowGraph cfg;
         private readonly SymbolicCheck[] checks;
         private readonly Queue<ExplodedNode> queue = new();
@@ -48,9 +50,14 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
         public void Execute()
         {
             // ToDo: Forbid running twice
+            var steps = 0;
             queue.Enqueue(new ExplodedNode(cfg.EntryBlock, ProgramState.Empty));
             while (queue.Any())
             {
+                if (steps++ > MaxStepCount)
+                {
+                    return;
+                }
                 var current = queue.Dequeue();
                 var successors = current.Operation == null ? ProcessBranching(current) : ProcessOperation(current);
                 foreach (var node in successors)
