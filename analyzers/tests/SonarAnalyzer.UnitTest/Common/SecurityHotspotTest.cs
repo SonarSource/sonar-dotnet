@@ -123,7 +123,7 @@ namespace SonarAnalyzer.UnitTest.Common
                 nameof(ExecutingSqlQueries) => ExecutingSqlQueriesTest.GetReferencesNetCore(Constants.DotNetCore220Version),
                 nameof(LooseFilePermissions) => NuGetMetadataReference.MonoPosixNetStandard(),
                 nameof(PermissiveCors) => PermissiveCorsTest.AdditionalReferences,
-                nameof(UsingCookies) => UsingCookies.GetAdditionalReferencesForNetCore(Constants.DotNetCore220Version),
+                nameof(UsingCookies) => UsingCookies.GetAspNetCoreReferences(Constants.DotNetCore220Version),
 #else
                 nameof(ControllingPermissions) => ControllingPermissionsTest.AdditionalReferences,
                 nameof(ExecutingSqlQueries) => ExecutingSqlQueriesTest.GetReferencesNet46(Constants.NuGetLatestVersion),

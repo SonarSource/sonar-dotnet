@@ -68,47 +68,32 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void UsingCookies_CS_NetCore() =>
             builderCS
                 .AddPaths("UsingCookies_NetCore.cs")
-                .AddReferences(GetAdditionalReferencesForNetCore(Constants.DotNetCore220Version))
+                .AddReferences(GetAspNetCoreReferences(Constants.DotNetCore220Version))
                 .Verify();
 
         [TestMethod]
         public void UsingCookies_CS_NetCore_DotnetCoreLatest() =>
             builderCS
                 .AddPaths("UsingCookies_NetCore.cs")
-                .AddReferences(GetAdditionalReferencesForNetCore(Constants.NuGetLatestVersion))
-                .Verify();
-
-        [TestMethod]
-        public void UsingCookies_CSharp10() =>
-            builderCS
-                .AddPaths("UsingCookies_NetCore.CSharp10.cs")
-                .AddReferences(GetAdditionalReferencesForNetCore(Constants.DotNetCore220Version))
-                .WithLanguageVersion(LanguageVersion.CSharp10)
+                .AddReferences(GetAspNetCoreReferences(Constants.NuGetLatestVersion))
                 .Verify();
 
         [TestMethod]
         public void UsingCookies_CSharp10_DotnetCoreLatest() =>
             builderCS
                 .AddPaths("UsingCookies_NetCore.CSharp10.cs")
-                .AddReferences(GetAdditionalReferencesForNetCore(Constants.NuGetLatestVersion))
+                .AddReferences(GetAspNetCoreReferences(Constants.NuGetLatestVersion))
                 .WithLanguageVersion(LanguageVersion.CSharp10)
-                .Verify();
-
-        [TestMethod]
-        public void UsingCookies_VB_NetCore() =>
-            builderVB
-                .AddPaths("UsingCookies_NetCore.vb")
-                .AddReferences(GetAdditionalReferencesForNetCore(Constants.DotNetCore220Version))
                 .Verify();
 
         [TestMethod]
         public void UsingCookies_VB_NetCore_DotnetCoreLatest() =>
             builderVB
                 .AddPaths("UsingCookies_NetCore.vb")
-                .AddReferences(GetAdditionalReferencesForNetCore(Constants.NuGetLatestVersion))
+                .AddReferences(GetAspNetCoreReferences(Constants.NuGetLatestVersion))
                 .Verify();
 
-        internal static IEnumerable<MetadataReference> GetAdditionalReferencesForNetCore(string packageVersion) =>
+        internal static IEnumerable<MetadataReference> GetAspNetCoreReferences(string packageVersion) =>
             NuGetMetadataReference.MicrosoftAspNetCoreHttpAbstractions(packageVersion)
                 .Concat(NuGetMetadataReference.MicrosoftAspNetCoreHttpFeatures(packageVersion))
                 .Concat(NuGetMetadataReference.MicrosoftExtensionsPrimitives(packageVersion));
