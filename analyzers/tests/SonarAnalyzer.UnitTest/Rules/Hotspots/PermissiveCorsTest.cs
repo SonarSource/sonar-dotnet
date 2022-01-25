@@ -38,13 +38,13 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         private readonly VerifierBuilder builder = new VerifierBuilder()
             .AddAnalyzer(() => new PermissiveCors(AnalyzerConfiguration.AlwaysEnabled))
-            .WithBasePath(@"Hotspots\");
+            .WithBasePath(@"Hotspots\")
+            .AddReferences(AdditionalReferences);
 #if NET
         [TestMethod]
         public void PermissiveCors_CS() =>
             builder
                 .AddPaths("PermissiveCors.Net.cs")
-                .AddReferences(AdditionalReferences)
                 .WithLanguageVersion(LanguageVersion.CSharp9)
                 .Verify();
 
@@ -52,7 +52,6 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void PermissiveCors_CSharp10() =>
             builder
                 .AddPaths("PermissiveCors.CSharp10.cs")
-                .AddReferences(AdditionalReferences)
                 .WithLanguageVersion(LanguageVersion.CSharp10)
                 .Verify();
 
@@ -60,7 +59,6 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void PermissiveCors_CSharpPreview() =>
             builder
                 .AddPaths("PermissiveCors.CSharp.Preview.cs")
-                .AddReferences(AdditionalReferences)
                 .WithLanguageVersion(LanguageVersion.Preview)
                 .Verify();
 
@@ -81,10 +79,10 @@ namespace SonarAnalyzer.UnitTest.Rules
 #else
         [TestMethod]
         public void PermissiveCors_AspNet_WebApi() =>
-            OldVerifier.VerifyAnalyzer(@"TestCases\Hotspots\PermissiveCors.NetFramework.cs",
-                                    new PermissiveCors(AnalyzerConfiguration.AlwaysEnabled),
-                                    ParseOptionsHelper.FromCSharp9,
-                                    AdditionalReferences);
+            builder
+                .AddPaths("PermissiveCors.NetFramework.cs")
+                .WithOptions(ParseOptionsHelper.FromCSharp9)
+                .Verify();
 
         private static IEnumerable<MetadataReference> AdditionalReferences =>
             NuGetMetadataReference.MicrosoftNetHttpHeaders(Constants.NuGetLatestVersion)
