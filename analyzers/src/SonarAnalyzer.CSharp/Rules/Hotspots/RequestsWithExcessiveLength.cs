@@ -58,7 +58,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 ? attribute
                 : null;
 
-        protected override SyntaxNode GetMethodLocalFunctionOrClassDeclaration(AttributeSyntax attribute, SemanticModel semanticModel) =>
+        protected override SyntaxNode GetMethodLocalFunctionOrClassDeclaration(AttributeSyntax attribute) =>
             attribute.FirstAncestorOrSelf<SyntaxNode>(node => node is MemberDeclarationSyntax || LocalFunctionStatementSyntaxWrapper.IsInstance(node));
 
         protected override string AttributeName(AttributeSyntax attribute) =>

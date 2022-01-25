@@ -36,8 +36,8 @@ namespace SonarAnalyzer.Rules
         where TSyntaxKind : struct
         where TAttributeSyntax : SyntaxNode
     {
-        protected const string DiagnosticId = "S5693";
         protected const string MultipartBodyLengthLimit = "MultipartBodyLengthLimit";
+        private const string DiagnosticId = "S5693";
         private const string RequestSizeLimit = "RequestSizeLimit";
         private const string RequestSizeLimitAttribute = RequestSizeLimit + Attribute;
         private const string DisableRequestSizeLimit = "DisableRequestSizeLimit";
@@ -56,7 +56,7 @@ namespace SonarAnalyzer.Rules
 
         protected abstract TAttributeSyntax IsInvalidRequestFormLimits(TAttributeSyntax attribute, SemanticModel semanticModel);
         protected abstract TAttributeSyntax IsInvalidRequestSizeLimit(TAttributeSyntax attribute, SemanticModel semanticModel);
-        protected abstract SyntaxNode GetMethodLocalFunctionOrClassDeclaration(TAttributeSyntax attribute, SemanticModel semanticModel);
+        protected abstract SyntaxNode GetMethodLocalFunctionOrClassDeclaration(TAttributeSyntax attribute);
         protected abstract string AttributeName(TAttributeSyntax attribute);
 
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
@@ -116,12 +116,12 @@ namespace SonarAnalyzer.Rules
             var requestFormLimits = IsInvalidRequestFormLimits(attribute, context.SemanticModel);
 
             if ((requestSizeLimit != null || requestFormLimits != null)
-                && GetMethodLocalFunctionOrClassDeclaration(attribute, context.SemanticModel) is { } declaration)
+                && GetMethodLocalFunctionOrClassDeclaration(attribute) is { } declaration)
             {
                 attributesOverTheLimit.AddOrUpdate(
                     declaration,
                     new Attributes(requestFormLimits, requestSizeLimit),
-                    (declaration, attributes) => new Attributes(requestFormLimits, requestSizeLimit, attributes));
+                    (_, attributes) => new Attributes(requestFormLimits, requestSizeLimit, attributes));
             }
         }
 
@@ -184,7 +184,7 @@ namespace SonarAnalyzer.Rules
             int.TryParse(value, out var val) && val > limit;
 
         // This struct is used as the same attributes can not be applied multiple times to the same declaration.
-        private struct Attributes
+        private readonly struct Attributes
         {
             private readonly TAttributeSyntax requestForm;
             private readonly TAttributeSyntax requestSize;
