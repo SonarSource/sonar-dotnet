@@ -46,20 +46,6 @@ namespace SonarAnalyzer.UnitTest.TestFramework
         [Obsolete("Use VerifierBuilder instead.")]
         public static void VerifyCSharpAnalyzer(string snippet,
                                         SonarDiagnosticAnalyzer diagnosticAnalyzer,
-                                        IEnumerable<MetadataReference> additionalReferences) =>
-            new VerifierBuilder()
-                .AddAnalyzer(() => diagnosticAnalyzer)
-                .AddReferences(additionalReferences)
-                .AddSnippet(snippet)
-                .WithConcurrentAnalysis(false)
-                .Verify();
-
-        /// <summary>
-        /// Verify analyzer from C# on a snippet in non-concurrent execution mode.
-        /// </summary>
-        [Obsolete("Use VerifierBuilder instead.")]
-        public static void VerifyCSharpAnalyzer(string snippet,
-                                        SonarDiagnosticAnalyzer diagnosticAnalyzer,
                                         CompilationErrorBehavior checkMode,
                                         IEnumerable<MetadataReference> additionalReferences = null) =>
             new VerifierBuilder()
@@ -92,22 +78,6 @@ namespace SonarAnalyzer.UnitTest.TestFramework
                 .WithOutputKind(outputKind)
                 .WithOnlyDiagnostics(onlyDiagnostics ?? Array.Empty<DiagnosticDescriptor>())
                 .WithSonarProjectConfigPath(sonarProjectConfigPath)
-                .Verify();
-
-        /// <summary>
-        /// Verify analyzer from VB.NET on a snippet in non-concurrent execution mode.
-        /// </summary>
-        [Obsolete("Use VerifierBuilder instead.")]
-        public static void VerifyVisualBasicAnalyzer(string snippet,
-                                                     DiagnosticAnalyzer diagnosticAnalyzer,
-                                                     CompilationErrorBehavior checkMode = CompilationErrorBehavior.Default,
-                                                     IEnumerable<MetadataReference> additionalReferences = null) =>
-            new VerifierBuilder()
-                .AddAnalyzer(() => diagnosticAnalyzer)
-                .AddReferences(additionalReferences ?? Enumerable.Empty<MetadataReference>())
-                .AddSnippet(snippet)
-                .WithConcurrentAnalysis(false)
-                .WithErrorBehavior(checkMode)
                 .Verify();
 
         /// <summary>

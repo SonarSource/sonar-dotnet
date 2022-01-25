@@ -28,15 +28,16 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class ParametersCorrectOrderTest
     {
+        private readonly VerifierBuilder builderCS = new VerifierBuilder<CS.ParametersCorrectOrder>();
+        private readonly VerifierBuilder builderVB = new VerifierBuilder<VB.ParametersCorrectOrder>();
+
         [TestMethod]
         public void ParametersCorrectOrder_CS() =>
-            OldVerifier.VerifyAnalyzer(@"TestCases\ParametersCorrectOrder.cs",
-                new CS.ParametersCorrectOrder(),
-                ParseOptionsHelper.FromCSharp8);
+            builderCS.AddPaths("ParametersCorrectOrder.cs").WithOptions(ParseOptionsHelper.FromCSharp8).Verify();
 
         [TestMethod]
         public void ParametersCorrectOrder_InvalidCode_CS() =>
-            OldVerifier.VerifyCSharpAnalyzer(@"
+            builderCS.AddSnippet(@"
 public class Foo
 {
     public void Bar()
@@ -45,21 +46,20 @@ public class Foo
         new ()
         new System. ()
     }
-}", new CS.ParametersCorrectOrder(), CompilationErrorBehavior.Ignore);
+}").WithErrorBehavior(CompilationErrorBehavior.Ignore).Verify();
 
         [TestMethod]
         public void ParametersCorrectOrder_VB() =>
-            OldVerifier.VerifyAnalyzer(@"TestCases\ParametersCorrectOrder.vb",
-                new VB.ParametersCorrectOrder());
+            builderVB.AddPaths("ParametersCorrectOrder.vb").Verify();
 
         [TestMethod]
         public void ParametersCorrectOrder_InvalidCode_VB() =>
-            OldVerifier.VerifyVisualBasicAnalyzer(@"
+            builderVB.AddSnippet(@"
 Public Class Foo
     Public Sub Bar()
         Dim x = New ()
         Dim y = New System. ()
     End Sub
-End Class", new VB.ParametersCorrectOrder(), CompilationErrorBehavior.Ignore);
+End Class").WithErrorBehavior(CompilationErrorBehavior.Ignore).Verify();
     }
 }

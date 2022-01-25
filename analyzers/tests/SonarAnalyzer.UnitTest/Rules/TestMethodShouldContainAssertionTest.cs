@@ -19,9 +19,7 @@
  */
 
 using System.Collections.Generic;
-using System.Linq;
 using Microsoft.CodeAnalysis;
-using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.Rules.CSharp;
 using SonarAnalyzer.UnitTest.MetadataReferences;
@@ -32,6 +30,8 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class TestMethodShouldContainAssertionTest
     {
+        private const string Latest = Constants.NuGetLatestVersion; // Rename only
+
         private static class FluentAssertionVersions
         {
             public const string Ver1 = "1.6.0";
@@ -60,26 +60,24 @@ namespace SonarAnalyzer.UnitTest.Rules
 
         [DataTestMethod]
         [DataRow(MsTestVersions.Ver1)]
-        [DataRow(Constants.NuGetLatestVersion)]
+        [DataRow(Latest)]
         public void TestMethodShouldContainAssertion_MSTest(string testFwkVersion) =>
-            builder.AddPaths("TestMethodShouldContainAssertion.MsTest.cs", "TestMethodShouldContainAssertion.MsTest.AnotherFile.cs")
-                .AddReferences(AdditionalTestReferences(NuGetMetadataReference.MSTestTestFramework(testFwkVersion)))
+            WithTestReferences(NuGetMetadataReference.MSTestTestFramework(testFwkVersion))
+                .AddPaths("TestMethodShouldContainAssertion.MsTest.cs", "TestMethodShouldContainAssertion.MsTest.AnotherFile.cs")
                 .Verify();
 
         [DataTestMethod]
-        [DataRow(NUnitVersions.Ver3, Constants.NuGetLatestVersion, Constants.NuGetLatestVersion)]
-        [DataRow(Constants.NuGetLatestVersion, FluentAssertionVersions.Ver5, Constants.NuGetLatestVersion)]
-        [DataRow(Constants.NuGetLatestVersion, Constants.NuGetLatestVersion, Constants.NuGetLatestVersion)]
+        [DataRow(NUnitVersions.Ver3, Latest, Latest)]
+        [DataRow(Latest, FluentAssertionVersions.Ver5, Latest)]
+        [DataRow(Latest, Latest, Latest)]
         public void TestMethodShouldContainAssertion_NUnit(string testFwkVersion, string fluentVersion, string nSubstituteVersion) =>
-            builder.AddPaths("TestMethodShouldContainAssertion.NUnit.cs")
-                .AddReferences(AdditionalTestReferences(NuGetMetadataReference.NUnit(testFwkVersion), fluentVersion, nSubstituteVersion))
-                .Verify();
+            WithTestReferences(NuGetMetadataReference.NUnit(testFwkVersion), fluentVersion, nSubstituteVersion).AddPaths("TestMethodShouldContainAssertion.NUnit.cs").Verify();
 
         [DataTestMethod]
         [DataRow(NUnitVersions.Ver25)]
         [DataRow(NUnitVersions.Ver27)]
         public void TestMethodShouldContainAssertion_NUnit_V2Specific(string testFwkVersion) =>
-            builder.AddSnippet(@"
+            WithTestReferences(NuGetMetadataReference.NUnit(testFwkVersion)).AddSnippet(@"
 using System;
 using NUnit.Framework;
 
@@ -113,29 +111,23 @@ public class Foo
     {
         var x = System.IO.File.Open("""", System.IO.FileMode.Open);
     }
-}")
-            .AddReferences(AdditionalTestReferences(NuGetMetadataReference.NUnit(testFwkVersion)))
-            .Verify();
+}").Verify();
 
         [DataTestMethod]
-        [DataRow(XUnitVersions.Ver2, Constants.NuGetLatestVersion, Constants.NuGetLatestVersion)]
-        [DataRow(Constants.NuGetLatestVersion, Constants.NuGetLatestVersion, Constants.NuGetLatestVersion)]
+        [DataRow(XUnitVersions.Ver2, Latest, Latest)]
+        [DataRow(Latest, Latest, Latest)]
         public void TestMethodShouldContainAssertion_Xunit(string testFwkVersion, string fluentVersion, string nSubstituteVersion) =>
-            builder.AddPaths("TestMethodShouldContainAssertion.Xunit.cs")
-                .AddReferences(AdditionalTestReferences(NuGetMetadataReference.XunitFramework(testFwkVersion), fluentVersion, nSubstituteVersion))
-                .Verify();
+            WithTestReferences(NuGetMetadataReference.XunitFramework(testFwkVersion), fluentVersion, nSubstituteVersion).AddPaths("TestMethodShouldContainAssertion.Xunit.cs").Verify();
 
         [TestMethod]
         public void TestMethodShouldContainAssertion_Xunit_Legacy() =>
-            builder.AddPaths("TestMethodShouldContainAssertion.Xunit.Legacy.cs")
-                .AddReferences(AdditionalTestReferences(NuGetMetadataReference.XunitFrameworkV1))
-                .Verify();
+            WithTestReferences(NuGetMetadataReference.XunitFrameworkV1).AddPaths("TestMethodShouldContainAssertion.Xunit.Legacy.cs").Verify();
 
         [DataTestMethod]
         [DataRow(NUnitVersions.Ver25, FluentAssertionVersions.Ver1)]
         [DataRow(NUnitVersions.Ver25, FluentAssertionVersions.Ver4)]
         public void TestMethodShouldContainAssertion_NUnit_FluentAssertionsLegacy(string testFwkVersion, string fluentVersion) =>
-            builder.AddSnippet(@"
+            WithTestReferences(NuGetMetadataReference.NUnit(testFwkVersion), fluentVersion).AddSnippet(@"
 using System;
 using FluentAssertions;
 using NUnit.Framework;
@@ -162,13 +154,11 @@ public class Foo
         Action act = () => { throw new Exception(); };
         act.ShouldNotThrow<Exception>();
     }
-}")
-            .AddReferences(AdditionalTestReferences(NuGetMetadataReference.NUnit(testFwkVersion), fluentVersion))
-            .Verify();
+}").Verify();
 
         [TestMethod]
         public void TestMethodShouldContainAssertion_NUnit_NFluentLegacy() =>
-           builder.AddSnippet(@"
+           WithTestReferences(NuGetMetadataReference.NUnit(NUnitVersions.Ver25), nFluentVersion: "1.3.1").AddSnippet(@"
 using System;
 using NFluent;
 using NUnit.Framework;
@@ -181,42 +171,40 @@ public class Foo
     {
         throw new NFluent.FluentCheckException(""You failed me!"");
     }
-}")
-            .AddReferences(AdditionalTestReferences(NuGetMetadataReference.NUnit(NUnitVersions.Ver25), nFluentVersion: "1.3.1"))
-            .Verify();
+}").Verify();
 
         [TestMethod]
         public void TestMethodShouldContainAssertion_CustomAssertionMethod() =>
-            builder.AddPaths("TestMethodShouldContainAssertion.Custom.cs")
-                .AddReferences(NuGetMetadataReference.MSTestTestFramework(Constants.NuGetLatestVersion))
-                .Verify();
+            builder.AddPaths("TestMethodShouldContainAssertion.Custom.cs").AddReferences(NuGetMetadataReference.MSTestTestFramework(Latest)).Verify();
 
 #if NET
+
         [TestMethod]
         public void TestMethodShouldContainAssertion_CSharp9() =>
             builder.AddPaths("TestMethodShouldContainAssertion.CSharp9.cs")
-                .AddReferences(NuGetMetadataReference.MSTestTestFrameworkV1
-                    .Concat(NuGetMetadataReference.XunitFramework(Constants.NuGetLatestVersion))
-                    .Concat(NuGetMetadataReference.NUnit(Constants.NuGetLatestVersion)))
-                .WithLanguageVersion(LanguageVersion.CSharp9)
+                .AddReferences(NuGetMetadataReference.MSTestTestFrameworkV1)
+                .AddReferences(NuGetMetadataReference.XunitFramework(Latest))
+                .AddReferences(NuGetMetadataReference.NUnit(Latest))
+                .WithOptions(ParseOptionsHelper.FromCSharp9)
                 .Verify();
+
 #endif
 
-        public static IEnumerable<MetadataReference> AdditionalTestReferences(IEnumerable<MetadataReference> testFrameworkReference,
-                                                                              string fluentVersion = Constants.NuGetLatestVersion,
-                                                                              string nSubstituteVersion = Constants.NuGetLatestVersion,
-                                                                              string nFluentVersion = Constants.NuGetLatestVersion,
-                                                                              string shouldlyVersion = Constants.NuGetLatestVersion) =>
-            testFrameworkReference
-                .Concat(NuGetMetadataReference.FluentAssertions(fluentVersion))
-                .Concat(NuGetMetadataReference.NSubstitute(nSubstituteVersion))
-                .Concat(NuGetMetadataReference.NFluent(nFluentVersion))
-                .Concat(NuGetMetadataReference.Shouldly(shouldlyVersion))
-                .Concat(MetadataReferenceFacade.SystemData)
-                .Concat(MetadataReferenceFacade.SystemXml)
-                .Concat(MetadataReferenceFacade.SystemXmlLinq)
-                .Concat(MetadataReferenceFacade.SystemThreadingTasks)
-                .Concat(MetadataReferenceFacade.SystemNetHttp)
-                .ToArray();
+        internal static VerifierBuilder WithTestReferences(IEnumerable<MetadataReference> testFrameworkReference,
+                                                                              string fluentVersion = Latest,
+                                                                              string nSubstituteVersion = Latest,
+                                                                              string nFluentVersion = Latest,
+                                                                              string shouldlyVersion = Latest) =>
+            new VerifierBuilder<TestMethodShouldContainAssertion>()
+                .AddReferences(testFrameworkReference)
+                .AddReferences(NuGetMetadataReference.FluentAssertions(fluentVersion))
+                .AddReferences(NuGetMetadataReference.NSubstitute(nSubstituteVersion))
+                .AddReferences(NuGetMetadataReference.NFluent(nFluentVersion))
+                .AddReferences(NuGetMetadataReference.Shouldly(shouldlyVersion))
+                .AddReferences(MetadataReferenceFacade.SystemData)
+                .AddReferences(MetadataReferenceFacade.SystemNetHttp)
+                .AddReferences(MetadataReferenceFacade.SystemXml)
+                .AddReferences(MetadataReferenceFacade.SystemXmlLinq)
+                .AddReferences(MetadataReferenceFacade.SystemThreadingTasks);
     }
 }

@@ -75,7 +75,7 @@ namespace SonarAnalyzer.UnitTest.Helpers
                 new TestSetup(
                     "TestMethodShouldContainAssertion.NUnit.cs",
                     new TestMethodShouldContainAssertion(),
-                    TestMethodShouldContainAssertionTest.AdditionalTestReferences(NuGetMetadataReference.NUnit(Constants.NuGetLatestVersion))),
+                    TestMethodShouldContainAssertionTest.WithTestReferences(NuGetMetadataReference.NUnit(Constants.NuGetLatestVersion)).References),    // ToDo: Reuse the entire builder in TestSetup
 
                 // SyntaxTreeAnalysisContext
                 // S3244 - MAIN and TEST

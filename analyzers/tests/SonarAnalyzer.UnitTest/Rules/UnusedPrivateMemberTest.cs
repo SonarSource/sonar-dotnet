@@ -18,8 +18,7 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System;
-using System.Collections.Generic;
+using System.Collections.Immutable;
 using System.Linq;
 using FluentAssertions;
 using FluentAssertions.Extensions;
@@ -35,9 +34,11 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public partial class UnusedPrivateMemberTest
     {
+        private readonly VerifierBuilder builder = new VerifierBuilder<UnusedPrivateMember>();
+
         [TestMethod]
         public void UnusedPrivateMember_DebuggerDisplay_Attribute() =>
-            OldVerifier.VerifyCSharpAnalyzer(@"
+            builder.AddSnippet(@"
 // https://github.com/SonarSource/sonar-dotnet/issues/1195
 [System.Diagnostics.DebuggerDisplay(""{field1}"", Name = ""{Property1} {Property3}"", Type = ""{Method1()}"")]
 public class MethodUsages
@@ -54,12 +55,11 @@ public class MethodUsages
     {
         var x = Property3;
     }
-}
-", new UnusedPrivateMember());
+}").Verify();
 
         [TestMethod]
         public void UnusedPrivateMember_Members_With_Attributes_Are_Not_Removable() =>
-            OldVerifier.VerifyCSharpAnalyzer(@"
+            builder.AddSnippet(@"
 using System;
 public class FieldUsages
 {
@@ -74,12 +74,11 @@ public class FieldUsages
 
     [Obsolete]
     private class Class1 { }
-}
-", new UnusedPrivateMember());
+}").Verify();
 
         [TestMethod]
         public void UnusedPrivateMember_Assembly_Level_Attributes() =>
-            OldVerifier.VerifyCSharpAnalyzer(@"
+            builder.AddSnippet(@"
 [assembly: System.Reflection.AssemblyCompany(Foo.Constants.AppCompany)]
 public static class Foo
 {
@@ -87,18 +86,11 @@ public static class Foo
     {
         public const string AppCompany = ""foo"";
     }
-}
-", new UnusedPrivateMember());
+}").Verify();
 
         [TestMethod]
         public void UnusedPrivateMemberWithPartialClasses() =>
-            OldVerifier.VerifyAnalyzer(
-                new[]
-                {
-                    @"TestCases\UnusedPrivateMember.part1.cs",
-                    @"TestCases\UnusedPrivateMember.part2.cs"
-                },
-                new UnusedPrivateMember());
+            builder.AddPaths("UnusedPrivateMember.part1.cs", "UnusedPrivateMember.part2.cs").Verify();
 
         [TestMethod]
         public void UnusedPrivateMember_Methods_EventHandler() =>
@@ -106,7 +98,7 @@ public static class Foo
             // could be added through XAML and no warning will be generated if the
             // method is removed, which could lead to serious problems that are hard
             // to diagnose.
-            OldVerifier.VerifyCSharpAnalyzer(@"
+            builder.AddSnippet(@"
 using System;
 public class NewClass
 {
@@ -115,12 +107,11 @@ public class NewClass
 public partial class PartialClass
 {
     private void Handler(object sender, EventArgs e) { } // intentional False Negative
-}
-", new UnusedPrivateMember());
+}").Verify();
 
         [TestMethod]
         public void UnusedPrivateMember_Unity3D_Ignored() =>
-            OldVerifier.VerifyCSharpAnalyzer(@"
+            builder.AddSnippet(@"
 // https://github.com/SonarSource/sonar-dotnet/issues/159
 public class UnityMessages1 : UnityEngine.MonoBehaviour
 {
@@ -152,12 +143,11 @@ namespace UnityEditor
 {
     public class AssetPostprocessor { }
     public class AssetModificationProcessor { }
-}
-", new UnusedPrivateMember());
+}").Verify();
 
         [TestMethod]
         public void EntityFrameworkMigration_Ignored() =>
-            OldVerifier.VerifyCSharpAnalyzer(@"
+            builder.AddSnippet(@"
 namespace EntityFrameworkMigrations
 {
     using Microsoft.EntityFrameworkCore.Migrations;
@@ -168,92 +158,72 @@ namespace EntityFrameworkMigrations
 
         protected override void Up(MigrationBuilder migrationBuilder) { }
     }
-}
-", new UnusedPrivateMember(), additionalReferences: GetEntityFrameworkCoreReferences(Constants.NuGetLatestVersion));
+}").AddReferences(EntityFrameworkCoreReferences(Constants.NuGetLatestVersion)).Verify();
 
         [DataTestMethod]
         [DataRow(ProjectType.Product)]
         [DataRow(ProjectType.Test)]
         public void UnusedPrivateMember(ProjectType projectType) =>
-            OldVerifier.VerifyAnalyzer(
-                @"TestCases\UnusedPrivateMember.cs",
-                new UnusedPrivateMember(),
-                TestHelper.ProjectTypeReference(projectType));
+            builder.AddPaths("UnusedPrivateMember.cs").AddReferences(TestHelper.ProjectTypeReference(projectType)).Verify();
 
         [TestMethod]
         public void UnusedPrivateMember_FromCSharp7() =>
-            OldVerifier.VerifyAnalyzer(
-                @"TestCases\UnusedPrivateMember.CSharp7.cs",
-                new UnusedPrivateMember(),
-                ParseOptionsHelper.FromCSharp7);
+            builder.AddPaths("UnusedPrivateMember.CSharp7.cs").WithOptions(ParseOptionsHelper.FromCSharp7).Verify();
 
         [TestMethod]
         public void UnusedPrivateMember_FromCSharp8() =>
-            OldVerifier.VerifyAnalyzer(
-                @"TestCases\UnusedPrivateMember.CSharp8.cs",
-                new UnusedPrivateMember(),
-                ParseOptionsHelper.FromCSharp8,
-                MetadataReferenceFacade.NETStandard21.Concat(MetadataReferenceFacade.MicrosoftExtensionsDependencyInjectionAbstractions));
+            builder.AddPaths("UnusedPrivateMember.CSharp8.cs")
+                .WithOptions(ParseOptionsHelper.FromCSharp8)
+                .AddReferences(MetadataReferenceFacade.NETStandard21)
+                .AddReferences(MetadataReferenceFacade.MicrosoftExtensionsDependencyInjectionAbstractions)
+                .Verify();
 
 #if NET
+
         [TestMethod]
         public void UnusedPrivateMember_FromCSharp9() =>
-            OldVerifier.VerifyAnalyzerFromCSharp9Library(
-                new[]
-                {
-                    @"TestCases\UnusedPrivateMember.CSharp9.cs",
-                    @"TestCases\UnusedPrivateMember.CSharp9.Second.cs"
-                },
-                new UnusedPrivateMember());
+            builder.AddPaths("UnusedPrivateMember.CSharp9.cs", "UnusedPrivateMember.CSharp9.Second.cs").WithOptions(ParseOptionsHelper.FromCSharp9).Verify();
 
         [TestMethod]
         public void UnusedPrivateMember_FromCSharp9_TopLevelStatements() =>
-            OldVerifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\UnusedPrivateMember.CSharp9.TopLevelStatements.cs", new UnusedPrivateMember());
+            builder.AddPaths("UnusedPrivateMember.CSharp9.TopLevelStatements.cs").WithTopLevelStatements().Verify();
 
         [TestMethod]
         public void UnusedPrivateMember_FromCSharp10() =>
-            OldVerifier.VerifyAnalyzerFromCSharp10Library(@"TestCases\UnusedPrivateMember.CSharp10.cs", new UnusedPrivateMember());
+            builder.AddPaths("UnusedPrivateMember.CSharp10.cs").WithOptions(ParseOptionsHelper.FromCSharp10).Verify();
 
         [TestMethod]
         public void UnusedPrivateMember_FromCSharpPreview() =>
-            OldVerifier.VerifyAnalyzerCSharpPreviewLibrary(@"TestCases\UnusedPrivateMember.CSharpPreview.cs", new UnusedPrivateMember());
+            builder.AddPaths("UnusedPrivateMember.CSharpPreview.cs").WithOptions(ParseOptionsHelper.CSharpPreview).Verify();
+
 #endif
 
         [TestMethod]
         public void UnusedPrivateMember_CodeFix() =>
-            OldVerifier.VerifyCodeFix<UnusedPrivateMemberCodeFix>(
-                @"TestCases\UnusedPrivateMember.cs",
-                @"TestCases\UnusedPrivateMember.Fixed.cs",
-                @"TestCases\UnusedPrivateMember.Fixed.Batch.cs",
-                new UnusedPrivateMember());
+            builder.AddPaths("UnusedPrivateMember.cs")
+                .WithCodeFix<UnusedPrivateMemberCodeFix>()
+                .WithCodeFixedPath("UnusedPrivateMember.Fixed.cs")
+                .WithCodeFixedPathBatch("UnusedPrivateMember.Fixed.Batch.cs")
+                .VerifyCodeFix();
 
         [TestMethod]
         public void UnusedPrivateMember_UsedInGeneratedFile() =>
-            OldVerifier.VerifyAnalyzer(
-                new[]
-                {
-                    @"TestCases\UnusedPrivateMember.CalledFromGenerated.cs",
-                    @"TestCases\UnusedPrivateMember.Generated.cs"
-                },
-                new UnusedPrivateMember());
+            builder.AddPaths("UnusedPrivateMember.CalledFromGenerated.cs", "UnusedPrivateMember.Generated.cs").Verify();
 
         [TestMethod]
-        public void UnusedPrivateMember_Performance()
-        {
-            Action verifyAnalyzer = () => OldVerifier.VerifyAnalyzer(new[] {@"TestCases\UnusedPrivateMember.Performance.cs"},
-                                                                  new UnusedPrivateMember(),
-                                                                  GetEntityFrameworkCoreReferences("5.0.12")); // Latest before 6.0.0 for .NET 6 that has Linq versioning collision issue
-
+        public void UnusedPrivateMember_Performance() =>
             // Once the NuGet packages are downloaded, the time to execute the analyzer on the given file is
             // about ~1 sec. It was reduced from ~11 min by skipping Guids when processing ObjectCreationExpression.
             // The threshold is set here to 30 seconds to avoid flaky builds due to slow build agents or network connections.
-            verifyAnalyzer.ExecutionTime().Should().BeLessOrEqualTo(30.Seconds());
-        }
+            builder.AddPaths("UnusedPrivateMember.Performance.cs")
+                .AddReferences(EntityFrameworkCoreReferences("5.0.12"))   // The latest before 6.0.0 for .NET 6 that has Linq versioning collision issue
+                .Invoking(x => x.Verify())
+                .ExecutionTime().Should().BeLessOrEqualTo(30.Seconds());
 
-        private static IEnumerable<MetadataReference> GetEntityFrameworkCoreReferences(string entityFrameworkVersion) =>
-            Enumerable.Empty<MetadataReference>()
-                      .Concat(NetStandardMetadataReference.Netstandard)
-                      .Concat(NuGetMetadataReference.MicrosoftEntityFrameworkCoreSqlServer(entityFrameworkVersion))
-                      .Concat(NuGetMetadataReference.MicrosoftEntityFrameworkCoreRelational(entityFrameworkVersion));
+        private static ImmutableArray<MetadataReference> EntityFrameworkCoreReferences(string entityFrameworkVersion) =>
+            NetStandardMetadataReference.Netstandard
+                .Concat(NuGetMetadataReference.MicrosoftEntityFrameworkCoreSqlServer(entityFrameworkVersion))
+                .Concat(NuGetMetadataReference.MicrosoftEntityFrameworkCoreRelational(entityFrameworkVersion))
+                .ToImmutableArray();
     }
 }

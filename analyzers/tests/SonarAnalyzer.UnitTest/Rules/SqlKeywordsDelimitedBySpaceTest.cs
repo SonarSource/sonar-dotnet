@@ -18,9 +18,6 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System.Collections.Generic;
-using System.Linq;
-using Microsoft.CodeAnalysis;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.Rules.CSharp;
 using SonarAnalyzer.UnitTest.MetadataReferences;
@@ -31,54 +28,42 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class SqlKeywordsDelimitedBySpaceTest
     {
+        private readonly VerifierBuilder builder = new VerifierBuilder<SqlKeywordsDelimitedBySpace>().AddReferences(NuGetMetadataReference.SystemDataSqlClient());
+
         [TestMethod]
         public void SqlKeywordsDelimitedBySpace() =>
-            OldVerifier.VerifyAnalyzer(
-                @"TestCases\SqlKeywordsDelimitedBySpace.cs",
-                new SqlKeywordsDelimitedBySpace(),
-                ParseOptionsHelper.FromCSharp8,
-                GetAdditionalReferences());
+            builder.AddPaths("SqlKeywordsDelimitedBySpace.cs").WithOptions(ParseOptionsHelper.FromCSharp8).Verify();
 
         [TestMethod]
         public void SqlKeywordsDelimitedBySpace_UsingInsideNamespace() =>
-            OldVerifier.VerifyNonConcurrentAnalyzer(
-                @"TestCases\SqlKeywordsDelimitedBySpace_InsideNamespace.cs",
-                new SqlKeywordsDelimitedBySpace(),
-                GetAdditionalReferences());
+            builder.AddPaths("SqlKeywordsDelimitedBySpace_InsideNamespace.cs").WithConcurrentAnalysis(false).Verify();
 
         [TestMethod]
         public void SqlKeywordsDelimitedBySpace_DefaultNamespace() =>
-            OldVerifier.VerifyNoIssueReportedInTest(
-                @"TestCases\SqlKeywordsDelimitedBySpace_DefaultNamespace.cs",
-                new SqlKeywordsDelimitedBySpace(),
-                GetAdditionalReferences());
+            builder.AddPaths("SqlKeywordsDelimitedBySpace_DefaultNamespace.cs").AddTestReference().VerifyNoIssueReported();
 
 #if NET
 
         [TestMethod]
         public void SqlKeywordsDelimitedBySpace_CSharp10_GlobalUsings() =>
-            OldVerifier.VerifyAnalyzerFromCSharp10Library(
-                new[]
-                {
-                    @"TestCases\SqlKeywordsDelimitedBySpace.CSharp10.GlobalUsing.cs",
-                    @"TestCases\SqlKeywordsDelimitedBySpace.CSharp10.GlobalUsingConsumer.cs"
-                },
-                new SqlKeywordsDelimitedBySpace(),
-                GetAdditionalReferences());
+            builder.AddPaths("SqlKeywordsDelimitedBySpace.CSharp10.GlobalUsing.cs", "SqlKeywordsDelimitedBySpace.CSharp10.GlobalUsingConsumer.cs")
+                .WithOptions(ParseOptionsHelper.FromCSharp10)
+                .WithConcurrentAnalysis(false)
+                .Verify();
 
         [TestMethod]
         public void SqlKeywordsDelimitedBySpace_CSharp10_FileScopesNamespace() =>
-            OldVerifier.VerifyAnalyzerFromCSharp10Library(
-                new[] { @"TestCases\SqlKeywordsDelimitedBySpace.CSharp10.FileScopedNamespaceDeclaration.cs", },
-                new SqlKeywordsDelimitedBySpace(),
-                GetAdditionalReferences());
+            builder.AddPaths("SqlKeywordsDelimitedBySpace.CSharp10.FileScopedNamespaceDeclaration.cs")
+                .WithOptions(ParseOptionsHelper.FromCSharp10)
+                .WithConcurrentAnalysis(false)
+                .Verify();
 
         [TestMethod]
         public void SqlKeywordsDelimitedBySpace_CSharp10() =>
-            OldVerifier.VerifyAnalyzerFromCSharp10Library(
-                new[] { @"TestCases\SqlKeywordsDelimitedBySpace.CSharp10.cs", },
-                new SqlKeywordsDelimitedBySpace(),
-                GetAdditionalReferences());
+            builder.AddPaths("SqlKeywordsDelimitedBySpace.CSharp10.cs")
+                .WithOptions(ParseOptionsHelper.FromCSharp10)
+                .Verify();
+
 #endif
 
         [DataRow("System.Data")]
@@ -92,20 +77,18 @@ namespace SonarAnalyzer.UnitTest.Rules
         [DataRow("NHibernate")]
         [DataRow("PetaPoco")]
         [DataTestMethod]
-        public void SqlKeywordsDelimitedBySpace_DotnetFramework(string sqlNamespace)
-        {
-            var references = MetadataReferenceFacade.SystemData
-                .Concat(NuGetMetadataReference.Dapper())
-                .Concat(NuGetMetadataReference.EntityFramework())
-                .Concat(NuGetMetadataReference.MicrosoftDataSqliteCore())
-                .Concat(NuGetMetadataReference.MicrosoftSqlServerCompact())
-                .Concat(NuGetMetadataReference.NHibernate())
-                .Concat(NuGetMetadataReference.PetaPocoCompiled())
-                .Concat(NuGetMetadataReference.SystemDataOdbc())
-                .Concat(NuGetMetadataReference.SystemDataSqlClient())
-                .Concat(NuGetMetadataReference.SystemDataSQLiteCore());
-
-            OldVerifier.VerifyCSharpAnalyzer($@"
+        public void SqlKeywordsDelimitedBySpace_DotnetFramework(string sqlNamespace) =>
+            builder
+                .AddReferences(MetadataReferenceFacade.SystemData)
+                .AddReferences(NuGetMetadataReference.Dapper())
+                .AddReferences(NuGetMetadataReference.EntityFramework())
+                .AddReferences(NuGetMetadataReference.MicrosoftDataSqliteCore())
+                .AddReferences(NuGetMetadataReference.MicrosoftSqlServerCompact())
+                .AddReferences(NuGetMetadataReference.NHibernate())
+                .AddReferences(NuGetMetadataReference.PetaPocoCompiled())
+                .AddReferences(NuGetMetadataReference.SystemDataOdbc())
+                .AddReferences(NuGetMetadataReference.SystemDataSQLiteCore())
+                .AddSnippet($@"
 using {sqlNamespace};
 namespace TestNamespace
 {{
@@ -115,25 +98,20 @@ namespace TestNamespace
             ""WHERE col ="" + // Noncompliant
             ""val"";
     }}
-}}
-",
-                new SqlKeywordsDelimitedBySpace(), references.ToArray());
-        }
+}}").Verify();
 
         [DataRow("System.Data.SqlClient")]
         [DataRow("System.Data.OracleClient")]
         [DataRow("Microsoft.EntityFrameworkCore")]
         [DataRow("ServiceStack.OrmLite")]
         [DataTestMethod]
-        public void SqlKeywordsDelimitedBySpace_DotnetCore(string sqlNamespace)
-        {
-            var references = MetadataReferenceFacade.SystemData
-                .Concat(NuGetMetadataReference.MicrosoftEntityFrameworkCore("2.2.0"))
-                .Concat(NuGetMetadataReference.ServiceStackOrmLite())
-                .Concat(NuGetMetadataReference.SystemDataSqlClient())
-                .Concat(NuGetMetadataReference.SystemDataOracleClient());
-
-            OldVerifier.VerifyCSharpAnalyzer($@"
+        public void SqlKeywordsDelimitedBySpace_DotnetCore(string sqlNamespace) =>
+            builder
+                .AddReferences(MetadataReferenceFacade.SystemData)
+                .AddReferences(NuGetMetadataReference.MicrosoftEntityFrameworkCore("2.2.0"))
+                .AddReferences(NuGetMetadataReference.ServiceStackOrmLite())
+                .AddReferences(NuGetMetadataReference.SystemDataOracleClient())
+                .AddSnippet($@"
 using {sqlNamespace};
 namespace TestNamespace
 {{
@@ -143,12 +121,6 @@ namespace TestNamespace
             ""WHERE col ="" + // Noncompliant
             ""val"";
     }}
-}}
-",
-                new SqlKeywordsDelimitedBySpace(), references.ToArray());
-        }
-
-        private static IEnumerable<MetadataReference> GetAdditionalReferences() =>
-            NuGetMetadataReference.SystemDataSqlClient();
+}}").Verify();
     }
 }
