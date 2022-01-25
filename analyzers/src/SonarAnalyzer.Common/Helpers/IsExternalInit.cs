@@ -18,8 +18,6 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-#if NETFRAMEWORK
-
 using System.ComponentModel;
 
 namespace System.Runtime.CompilerServices
@@ -28,5 +26,3 @@ namespace System.Runtime.CompilerServices
     [EditorBrowsable(EditorBrowsableState.Never)]
     internal static class IsExternalInit { }
 }
-
-#endif
