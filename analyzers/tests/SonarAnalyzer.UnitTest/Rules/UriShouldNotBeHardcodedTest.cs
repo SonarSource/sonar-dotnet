@@ -18,8 +18,10 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Linq;
+using Microsoft.CodeAnalysis;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.UnitTest.MetadataReferences;
 using SonarAnalyzer.UnitTest.TestFramework;
@@ -31,43 +33,47 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class UriShouldNotBeHardcodedTest
     {
+        private readonly VerifierBuilder builderCS = new VerifierBuilder<CS.UriShouldNotBeHardcoded>();
+        private readonly VerifierBuilder builderVB = new VerifierBuilder<VB.UriShouldNotBeHardcoded>();
+
         [TestMethod]
         public void UriShouldNotBeHardcoded_CSharp_General() =>
-            OldVerifier.VerifyAnalyzer(@"TestCases\UriShouldNotBeHardcoded.cs",
-                                    new CS.UriShouldNotBeHardcoded());
+            builderCS.AddPaths("UriShouldNotBeHardcoded.cs").Verify();
 
 #if NETFRAMEWORK // HttpContext is available only when targeting .Net Framework
         [DataTestMethod]
         [DataRow("3.0.20105.1")]
         [DataRow(Constants.NuGetLatestVersion)]
         public void UriShouldNotBeHardcoded_CSharp_VirtualPath_AspNet(string aspNetMvcVersion) =>
-            OldVerifier.VerifyAnalyzer(@"TestCases\UriShouldNotBeHardcoded.AspNet.cs",
-                                    new CS.UriShouldNotBeHardcoded(),
-                                    MetadataReferenceFacade.SystemWeb.Concat(NuGetMetadataReference.MicrosoftAspNetMvc(aspNetMvcVersion)));
+            builderCS
+                .AddPaths("UriShouldNotBeHardcoded.AspNet.cs")
+                .AddReferences(MetadataReferenceFacade.SystemWeb.Concat(NuGetMetadataReference.MicrosoftAspNetMvc(aspNetMvcVersion)))
+                .Verify();
 #endif
 
         [DataTestMethod]
         [DataRow("2.0.4", "2.0.3", "2.1.1")]
         [DataRow(Constants.NuGetLatestVersion, Constants.NuGetLatestVersion, Constants.NuGetLatestVersion)]
         public void UriShouldNotBeHardcoded_CSharp_VirtualPath_AspNetCore(string aspNetCoreMvcVersion, string aspNetCoreRoutingVersion, string netHttpHeadersVersion) =>
-            OldVerifier.VerifyAnalyzer(@"TestCases\UriShouldNotBeHardcoded.AspNetCore.cs",
-                new CS.UriShouldNotBeHardcoded(),
-                // for VirtualFileResult
-                NuGetMetadataReference.MicrosoftAspNetCoreMvcCore(aspNetCoreMvcVersion)
+            builderCS
+                .AddPaths("UriShouldNotBeHardcoded.AspNetCore.cs")
+                .AddReferences(AddtionalReferences(aspNetCoreMvcVersion, aspNetCoreRoutingVersion, netHttpHeadersVersion))
+                .Verify();
+
+        [TestMethod]
+        public void UriShouldNotBeHardcoded_VB() =>
+            builderVB.AddPaths("UriShouldNotBeHardcoded.vb").Verify();
+
+        private static IEnumerable<MetadataReference> AddtionalReferences(string aspNetCoreMvcVersion, string aspNetCoreRoutingVersion, string netHttpHeadersVersion) =>
+            NuGetMetadataReference.MicrosoftAspNetCoreMvcCore(aspNetCoreMvcVersion)
                     // for Controller
                     .Concat(NuGetMetadataReference.MicrosoftAspNetCoreMvcViewFeatures(aspNetCoreMvcVersion))
+                    // for IActionResult
+                    .Concat(NuGetMetadataReference.MicrosoftAspNetCoreMvcAbstractions(aspNetCoreMvcVersion))
                     // for IRouter and VirtualPathData
                     .Concat(NuGetMetadataReference.MicrosoftAspNetCoreRoutingAbstractions(aspNetCoreRoutingVersion))
                     // for IRouteBuilder
                     .Concat(NuGetMetadataReference.MicrosoftAspNetCoreRouting(aspNetCoreRoutingVersion))
-                    // for IActionResult
-                    .Concat(NuGetMetadataReference.MicrosoftAspNetCoreMvcAbstractions(aspNetCoreMvcVersion))
-                    .Concat(NuGetMetadataReference.MicrosoftNetHttpHeaders(netHttpHeadersVersion))
-                    .ToImmutableArray());
-
-        [TestMethod]
-        public void UriShouldNotBeHardcoded_VB() =>
-            OldVerifier.VerifyAnalyzer(@"TestCases\UriShouldNotBeHardcoded.vb",
-                                    new VB.UriShouldNotBeHardcoded());
+                    .Concat(NuGetMetadataReference.MicrosoftNetHttpHeaders(netHttpHeadersVersion));
     }
 }
