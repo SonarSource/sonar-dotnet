@@ -29,7 +29,7 @@ namespace SonarAnalyzer.Rules
         where TExpressionSyntax : SyntaxNode
         where TIdentifierNameSyntax : SyntaxNode
     {
-        protected const string DiagnosticId = "S2077";
+        private const string DiagnosticId = "S2077";
         private const string AssignmentWithFormattingMessage = "SQL Query is dynamically formatted and assigned to {0}.";
         private const string AssignmentMessage = "SQL query is assigned to {0}.";
         private const string MessageFormat = "Make sure using a dynamically formatted SQL query is safe here.";
@@ -38,11 +38,12 @@ namespace SonarAnalyzer.Rules
 
         private readonly KnownType[] constructorsForFirstArgument =
             {
-                KnownType.Microsoft_EntityFrameworkCore_RawSqlString,
-                KnownType.System_Data_SqlClient_SqlCommand,
-                KnownType.System_Data_SqlClient_SqlDataAdapter,
                 KnownType.System_Data_Odbc_OdbcCommand,
                 KnownType.System_Data_Odbc_OdbcDataAdapter,
+                KnownType.System_Data_SqlClient_SqlCommand,
+                KnownType.System_Data_SqlClient_SqlDataAdapter,
+                KnownType.System_Data_Sqlite_SqliteCommand,
+                KnownType.System_Data_Sqlite_SQLiteDataAdapter,
                 KnownType.System_Data_SqlServerCe_SqlCeCommand,
                 KnownType.System_Data_SqlServerCe_SqlCeDataAdapter,
                 KnownType.System_Data_OracleClient_OracleCommand,
@@ -51,52 +52,58 @@ namespace SonarAnalyzer.Rules
                 KnownType.MySql_Data_MySqlClient_MySqlDataAdapter,
                 KnownType.MySql_Data_MySqlClient_MySqlScript,
                 KnownType.Microsoft_Data_Sqlite_SqliteCommand,
-                KnownType.System_Data_Sqlite_SqliteCommand,
-                KnownType.System_Data_Sqlite_SQLiteDataAdapter,
+                KnownType.Microsoft_EntityFrameworkCore_RawSqlString
             };
 
         private readonly KnownType[] constructorsForSecondArgument =
             {
-                KnownType.MySql_Data_MySqlClient_MySqlScript,
+                KnownType.MySql_Data_MySqlClient_MySqlScript
             };
 
         private readonly MemberDescriptor[] invocationsForFirstTwoArguments =
             {
-                new MemberDescriptor(KnownType.Microsoft_EntityFrameworkCore_RelationalDatabaseFacadeExtensions, "ExecuteSqlCommandAsync"),
-                new MemberDescriptor(KnownType.Microsoft_EntityFrameworkCore_RelationalDatabaseFacadeExtensions, "ExecuteSqlCommand"),
-                new MemberDescriptor(KnownType.Microsoft_EntityFrameworkCore_RelationalQueryableExtensions, "FromSql"),
+                new(KnownType.Microsoft_EntityFrameworkCore_RelationalDatabaseFacadeExtensions, "ExecuteSqlCommandAsync"),
+                new(KnownType.Microsoft_EntityFrameworkCore_RelationalDatabaseFacadeExtensions, "ExecuteSqlCommand"),
+                new(KnownType.Microsoft_EntityFrameworkCore_RelationalQueryableExtensions, "FromSql")
+            };
+
+        private readonly MemberDescriptor[] invocationsForFirstTwoArgumentsAfterV2 =
+            {
+                new(KnownType.Microsoft_EntityFrameworkCore_RelationalDatabaseFacadeExtensions, "ExecuteSqlRaw"),
+                new(KnownType.Microsoft_EntityFrameworkCore_RelationalDatabaseFacadeExtensions, "ExecuteSqlRawAsync"),
+                new(KnownType.Microsoft_EntityFrameworkCore_RelationalQueryableExtensions, "FromSqlRaw")
             };
 
         private readonly MemberDescriptor[] invocationsForFirstArgument =
             {
-                new MemberDescriptor(KnownType.System_Data_Sqlite_SqliteCommand, "Execute"),
+                new(KnownType.System_Data_Sqlite_SqliteCommand, "Execute")
             };
 
         private readonly MemberDescriptor[] invocationsForSecondArgument =
             {
-                new MemberDescriptor(KnownType.MySql_Data_MySqlClient_MySqlHelper, "ExecuteDataRow"),
-                new MemberDescriptor(KnownType.MySql_Data_MySqlClient_MySqlHelper, "ExecuteDataRowAsync"),
-                new MemberDescriptor(KnownType.MySql_Data_MySqlClient_MySqlHelper, "ExecuteDataset"),
-                new MemberDescriptor(KnownType.MySql_Data_MySqlClient_MySqlHelper, "ExecuteDatasetAsync"),
-                new MemberDescriptor(KnownType.MySql_Data_MySqlClient_MySqlHelper, "ExecuteNonQuery"),
-                new MemberDescriptor(KnownType.MySql_Data_MySqlClient_MySqlHelper, "ExecuteNonQueryAsync"),
-                new MemberDescriptor(KnownType.MySql_Data_MySqlClient_MySqlHelper, "ExecuteReader"),
-                new MemberDescriptor(KnownType.MySql_Data_MySqlClient_MySqlHelper, "ExecuteReaderAsync"),
-                new MemberDescriptor(KnownType.MySql_Data_MySqlClient_MySqlHelper, "ExecuteScalar"),
-                new MemberDescriptor(KnownType.MySql_Data_MySqlClient_MySqlHelper, "ExecuteScalarAsync"),
-                new MemberDescriptor(KnownType.MySql_Data_MySqlClient_MySqlHelper, "UpdateDataSet"),
-                new MemberDescriptor(KnownType.MySql_Data_MySqlClient_MySqlHelper, "UpdateDataSetAsync"),
+                new(KnownType.MySql_Data_MySqlClient_MySqlHelper, "ExecuteDataRow"),
+                new(KnownType.MySql_Data_MySqlClient_MySqlHelper, "ExecuteDataRowAsync"),
+                new(KnownType.MySql_Data_MySqlClient_MySqlHelper, "ExecuteDataset"),
+                new(KnownType.MySql_Data_MySqlClient_MySqlHelper, "ExecuteDatasetAsync"),
+                new(KnownType.MySql_Data_MySqlClient_MySqlHelper, "ExecuteNonQuery"),
+                new(KnownType.MySql_Data_MySqlClient_MySqlHelper, "ExecuteNonQueryAsync"),
+                new(KnownType.MySql_Data_MySqlClient_MySqlHelper, "ExecuteReader"),
+                new(KnownType.MySql_Data_MySqlClient_MySqlHelper, "ExecuteReaderAsync"),
+                new(KnownType.MySql_Data_MySqlClient_MySqlHelper, "ExecuteScalar"),
+                new(KnownType.MySql_Data_MySqlClient_MySqlHelper, "ExecuteScalarAsync"),
+                new(KnownType.MySql_Data_MySqlClient_MySqlHelper, "UpdateDataSet"),
+                new(KnownType.MySql_Data_MySqlClient_MySqlHelper, "UpdateDataSetAsync")
             };
 
         private readonly MemberDescriptor[] properties =
             {
-                new MemberDescriptor(KnownType.System_Data_Odbc_OdbcCommand, "CommandText"),
-                new MemberDescriptor(KnownType.System_Data_OracleClient_OracleCommand, "CommandText"),
-                new MemberDescriptor(KnownType.System_Data_SqlClient_SqlCommand, "CommandText"),
-                new MemberDescriptor(KnownType.System_Data_SqlServerCe_SqlCeCommand, "CommandText"),
-                new MemberDescriptor(KnownType.MySql_Data_MySqlClient_MySqlCommand, "CommandText"),
-                new MemberDescriptor(KnownType.Microsoft_Data_Sqlite_SqliteCommand, "CommandText"),
-                new MemberDescriptor(KnownType.System_Data_Sqlite_SqliteCommand, "CommandText"),
+                new(KnownType.System_Data_Odbc_OdbcCommand, "CommandText"),
+                new(KnownType.System_Data_OracleClient_OracleCommand, "CommandText"),
+                new(KnownType.System_Data_SqlClient_SqlCommand, "CommandText"),
+                new(KnownType.System_Data_Sqlite_SqliteCommand, "CommandText"),
+                new(KnownType.System_Data_SqlServerCe_SqlCeCommand, "CommandText"),
+                new(KnownType.Microsoft_Data_Sqlite_SqliteCommand, "CommandText"),
+                new(KnownType.MySql_Data_MySqlClient_MySqlCommand, "CommandText")
             };
 
         protected abstract TExpressionSyntax GetArgumentAtIndex(InvocationContext context, int index);
@@ -113,10 +120,12 @@ namespace SonarAnalyzer.Rules
             var inv = Language.Tracker.Invocation;
             inv.Track(input,
                 inv.MatchMethod(invocationsForFirstTwoArguments),
-                inv.And(
-                    MethodHasRawSqlQueryParameter(),
-                    inv.Or(ArgumentAtIndexIsTracked(0), ArgumentAtIndexIsTracked(1))
-                ),
+                inv.And(MethodHasRawSqlQueryParameter(), inv.Or(ArgumentAtIndexIsTracked(0), ArgumentAtIndexIsTracked(1))),
+                inv.ExceptWhen(inv.ArgumentAtIndexIsConstant(0)));
+
+            inv.Track(input,
+                inv.MatchMethod(invocationsForFirstTwoArgumentsAfterV2),
+                inv.Or(ArgumentAtIndexIsTracked(0), ArgumentAtIndexIsTracked(1)),
                 inv.ExceptWhen(inv.ArgumentAtIndexIsConstant(0)));
 
             TrackInvocations(input, invocationsForFirstArgument, FirstArgumentIndex);
@@ -161,7 +170,7 @@ namespace SonarAnalyzer.Rules
             t.Track(input,
                 t.MatchConstructor(objectCreationTypes),
                 t.ArgumentAtIndexIs(argumentIndex, KnownType.System_String),
-                    c => IsTracked(GetArgumentAtIndex(c, argumentIndex), c),
+                c => IsTracked(GetArgumentAtIndex(c, argumentIndex), c),
                 t.ExceptWhen(t.ArgumentAtIndexIsConst(argumentIndex)));
         }
 

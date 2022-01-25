@@ -29,7 +29,7 @@ namespace SonarAnalyzer.Helpers.Trackers
     public class VisualBasicInvocationTracker : InvocationTracker<SyntaxKind>
     {
         protected override ILanguageFacade<SyntaxKind> Language => VisualBasicFacade.Instance;
-        protected override SyntaxKind[] TrackedSyntaxKinds { get; } = new[] { SyntaxKind.InvocationExpression };
+        protected override SyntaxKind[] TrackedSyntaxKinds { get; } = { SyntaxKind.InvocationExpression };
 
         public override Condition ArgumentAtIndexIsConstant(int index) =>
             context => ((InvocationExpressionSyntax)context.Node).ArgumentList is { } argumentList

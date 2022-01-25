@@ -85,7 +85,7 @@ namespace SonarAnalyzer.UnitTest.Common
                 "UsingCookies" => "UsingCookies_Net46",
                 "LooseFilePermissions" => "LooseFilePermissions.Windows",
 #else
-                "ExecutingSqlQueries" => "ExecutingSqlQueries_NetCore",
+                "ExecutingSqlQueries" => "ExecutingSqlQueries_EntityFrameworkCoreLatest",
                 "UsingCookies" => "UsingCookies_NetCore",
                 "LooseFilePermissions" => "LooseFilePermissions.Unix",
                 "PermissiveCors" => "PermissiveCors.Net",
@@ -120,7 +120,7 @@ namespace SonarAnalyzer.UnitTest.Common
                 nameof(UsingRegularExpressions) => MetadataReferenceFacade.RegularExpressions,
 #if NET
                 nameof(DisablingCsrfProtection) => DisablingCsrfProtectionTest.AdditionalReferences(),
-                nameof(ExecutingSqlQueries) => ExecutingSqlQueriesTest.GetReferencesNetCore(Constants.DotNetCore220Version),
+                nameof(ExecutingSqlQueries) => ExecutingSqlQueriesTest.GetReferencesEntityFrameworkNetCore(Constants.NuGetLatestVersion),
                 nameof(LooseFilePermissions) => NuGetMetadataReference.MonoPosixNetStandard(),
                 nameof(PermissiveCors) => PermissiveCorsTest.AdditionalReferences,
                 nameof(UsingCookies) => UsingCookies.GetAdditionalReferencesForNetCore(Constants.DotNetCore220Version),

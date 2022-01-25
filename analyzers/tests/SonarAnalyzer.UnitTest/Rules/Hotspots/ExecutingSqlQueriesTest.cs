@@ -33,22 +33,25 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class ExecutingSqlQueriesTest
     {
+        private readonly VerifierBuilder builderCS = new VerifierBuilder().AddAnalyzer(() => new CS.ExecutingSqlQueries(AnalyzerConfiguration.AlwaysEnabled)).WithBasePath("Hotspots");
+        private readonly VerifierBuilder builderVB = new VerifierBuilder().AddAnalyzer(() => new VB.ExecutingSqlQueries(AnalyzerConfiguration.AlwaysEnabled)).WithBasePath("Hotspots");
+
 #if NETFRAMEWORK // System.Data.OracleClient.dll is not available on .Net Core
 
         [TestMethod]
         public void ExecutingSqlQueries_CS_Net46() =>
-            OldVerifier.VerifyAnalyzer(
-                @"TestCases\Hotspots\ExecutingSqlQueries_Net46.cs",
-                new CS.ExecutingSqlQueries(AnalyzerConfiguration.AlwaysEnabled),
-                GetReferencesNet46(Constants.NuGetLatestVersion));
+            builderCS
+                .AddPaths(@"ExecutingSqlQueries_Net46.cs")
+                .AddReferences(GetReferencesNet46(Constants.NuGetLatestVersion))
+                .Verify();
 
         [TestMethod]
         public void ExecutingSqlQueries_VB_Net46() =>
-            OldVerifier.VerifyAnalyzer(
-                @"TestCases\Hotspots\ExecutingSqlQueries_Net46.vb",
-                new VB.ExecutingSqlQueries(AnalyzerConfiguration.AlwaysEnabled),
-                ParseOptionsHelper.FromVisualBasic15,
-                GetReferencesNet46(Constants.NuGetLatestVersion));
+            builderVB
+                .AddPaths(@"ExecutingSqlQueries_Net46.vb")
+                .WithOptions(ParseOptionsHelper.FromVisualBasic15)
+                .AddReferences(GetReferencesNet46(Constants.NuGetLatestVersion))
+                .Verify();
 
         internal static IEnumerable<MetadataReference> GetReferencesNet46(string sqlServerCeVersion) =>
             NetStandardMetadataReference.Netstandard
@@ -62,36 +65,55 @@ namespace SonarAnalyzer.UnitTest.Rules
 #else
 
         [TestMethod]
-        public void ExecutingSqlQueries_CS_NetCore() =>
-            OldVerifier.VerifyAnalyzer(
-                @"TestCases\Hotspots\ExecutingSqlQueries_NetCore.cs",
-                new CS.ExecutingSqlQueries(AnalyzerConfiguration.AlwaysEnabled),
-                ParseOptionsHelper.FromCSharp8,
-                GetReferencesNetCore(Constants.DotNetCore220Version));
+        public void ExecutingSqlQueries_CS_EntityFrameworkCore2() =>
+            builderCS
+                .AddPaths(@"ExecutingSqlQueries_EntityFrameworkCore2.cs")
+                .WithOptions(ParseOptionsHelper.FromCSharp8)
+                .AddReferences(GetReferencesEntityFrameworkNetCore("2.2.6"))
+                .Verify();
+
+        [TestMethod]
+        public void ExecutingSqlQueries_CS_EntityFrameworkCoreLatest() =>
+            builderCS
+                .AddPaths(@"ExecutingSqlQueries_EntityFrameworkCoreLatest.cs")
+                .WithOptions(ParseOptionsHelper.FromCSharp8)
+                .AddReferences(GetReferencesEntityFrameworkNetCore(Constants.NuGetLatestVersion))
+                .Verify();
 
         [TestMethod]
         public void ExecutingSqlQueries_CSharp9() =>
-            OldVerifier.VerifyAnalyzerFromCSharp9Console(
-                @"TestCases\Hotspots\ExecutingSqlQueries.CSharp9.cs",
-                new CS.ExecutingSqlQueries(AnalyzerConfiguration.AlwaysEnabled),
-                GetReferencesNetCore(Constants.DotNetCore220Version).Concat(NuGetMetadataReference.MicrosoftDataSqliteCore()));
+            builderCS
+                .AddPaths(@"ExecutingSqlQueries.CSharp9.cs")
+                .WithTopLevelStatements()
+                .AddReferences(GetReferencesEntityFrameworkNetCore(Constants.DotNetCore220Version).Concat(NuGetMetadataReference.MicrosoftDataSqliteCore()))
+                .Verify();
 
         [TestMethod]
         public void ExecutingSqlQueries_CSharp10() =>
-            OldVerifier.VerifyAnalyzerFromCSharp10Console(
-                @"TestCases\Hotspots\ExecutingSqlQueries.CSharp10.cs",
-                new CS.ExecutingSqlQueries(AnalyzerConfiguration.AlwaysEnabled),
-                GetReferencesNetCore(Constants.DotNetCore220Version).Concat(NuGetMetadataReference.MicrosoftDataSqliteCore()));
+            builderCS
+                .AddPaths(@"ExecutingSqlQueries.CSharp10.cs")
+                .WithOptions(ParseOptionsHelper.FromCSharp10)
+                .WithTopLevelStatements()
+                .AddReferences(GetReferencesEntityFrameworkNetCore(Constants.DotNetCore220Version).Concat(NuGetMetadataReference.MicrosoftDataSqliteCore()))
+                .Verify();
 
         [TestMethod]
-        public void ExecutingSqlQueries_VB_NetCore() =>
-            OldVerifier.VerifyAnalyzer(
-                @"TestCases\Hotspots\ExecutingSqlQueries_NetCore.vb",
-                new VB.ExecutingSqlQueries(AnalyzerConfiguration.AlwaysEnabled),
-                ParseOptionsHelper.FromVisualBasic15,
-                GetReferencesNetCore(Constants.DotNetCore220Version));
+        public void ExecutingSqlQueries_VB_EntityFrameworkCore2() =>
+            builderVB
+                .AddPaths(@"ExecutingSqlQueries_EntityFrameworkCore2.vb")
+                .WithOptions(ParseOptionsHelper.FromVisualBasic15)
+                .AddReferences(GetReferencesEntityFrameworkNetCore(Constants.DotNetCore220Version))
+                .Verify();
 
-        internal static IEnumerable<MetadataReference> GetReferencesNetCore(string entityFrameworkVersion) =>
+        [TestMethod]
+        public void ExecutingSqlQueries_VB_EntityFrameworkCoreLatest() =>
+            builderVB
+                .AddPaths(@"ExecutingSqlQueries_EntityFrameworkCoreLatest.vb")
+                .WithOptions(ParseOptionsHelper.FromVisualBasic15)
+                .AddReferences(GetReferencesEntityFrameworkNetCore(Constants.NuGetLatestVersion))
+                .Verify();
+
+        internal static IEnumerable<MetadataReference> GetReferencesEntityFrameworkNetCore(string entityFrameworkVersion) =>
             Enumerable.Empty<MetadataReference>()
                       .Concat(NuGetMetadataReference.MicrosoftEntityFrameworkCore(entityFrameworkVersion))
                       .Concat(NuGetMetadataReference.MicrosoftEntityFrameworkCoreRelational(entityFrameworkVersion));
