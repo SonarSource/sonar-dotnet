@@ -33,60 +33,69 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class ConfiguringLoggersTest
     {
+        private readonly VerifierBuilder builderCS = new VerifierBuilder().AddAnalyzer(() => new CS.ConfiguringLoggers(AnalyzerConfiguration.AlwaysEnabled));
+        private readonly VerifierBuilder builderVB = new VerifierBuilder().AddAnalyzer(() => new VB.ConfiguringLoggers(AnalyzerConfiguration.AlwaysEnabled));
+
         [TestMethod]
         public void ConfiguringLoggers_Log4Net_CS() =>
-            OldVerifier.VerifyAnalyzer(@"TestCases\Hotspots\ConfiguringLoggers_Log4Net.cs",
-                new CS.ConfiguringLoggers(AnalyzerConfiguration.AlwaysEnabled),
-                Log4NetReferences);
+            builderCS.AddPaths(@"Hotspots\ConfiguringLoggers_Log4Net.cs")
+                .AddReferences(Log4NetReferences)
+                .Verify();
 
         [TestMethod]
         public void ConfiguringLoggers_Log4Net_VB() =>
-            OldVerifier.VerifyAnalyzer(@"TestCases\Hotspots\ConfiguringLoggers_Log4Net.vb",
-                new VB.ConfiguringLoggers(AnalyzerConfiguration.AlwaysEnabled),
-                Log4NetReferences);
+            builderVB.AddPaths(@"Hotspots\ConfiguringLoggers_Log4Net.vb")
+                .AddReferences(Log4NetReferences)
+                .Verify();
 
         [TestMethod]
         public void ConfiguringLoggers_NLog_CS() =>
-            OldVerifier.VerifyAnalyzer(@"TestCases\Hotspots\ConfiguringLoggers_NLog.cs",
-                new CS.ConfiguringLoggers(AnalyzerConfiguration.AlwaysEnabled),
-                NLogReferences);
+            builderCS.AddPaths(@"Hotspots\ConfiguringLoggers_NLog.cs")
+                .AddReferences(NLogReferences)
+                .Verify();
 
         [TestMethod]
         public void ConfiguringLoggers_NLog_VB() =>
-            OldVerifier.VerifyAnalyzer(@"TestCases\Hotspots\ConfiguringLoggers_NLog.vb",
-                new VB.ConfiguringLoggers(AnalyzerConfiguration.AlwaysEnabled),
-                NLogReferences);
+            builderVB.AddPaths(@"Hotspots\ConfiguringLoggers_NLog.vb")
+                .AddReferences(NLogReferences)
+                .Verify();
 
         [TestMethod]
         public void ConfiguringLoggers_Serilog_CS() =>
-            OldVerifier.VerifyAnalyzer(@"TestCases\Hotspots\ConfiguringLoggers_Serilog.cs",
-                new CS.ConfiguringLoggers(AnalyzerConfiguration.AlwaysEnabled),
-                SeriLogReferences);
+            builderCS.AddPaths(@"Hotspots\ConfiguringLoggers_Serilog.cs")
+                .AddReferences(SeriLogReferences)
+                .Verify();
 
         [TestMethod]
         public void ConfiguringLoggers_Serilog_VB() =>
-            OldVerifier.VerifyAnalyzer(@"TestCases\Hotspots\ConfiguringLoggers_Serilog.vb",
-                new VB.ConfiguringLoggers(AnalyzerConfiguration.AlwaysEnabled),
-                SeriLogReferences);
+            builderVB.AddPaths(@"Hotspots\ConfiguringLoggers_Serilog.vb")
+                .AddReferences(SeriLogReferences)
+                .Verify();
 
 #if NET
         [TestMethod]
-        public void ConfiguringLoggers_AspNetCore_CS() =>
-            OldVerifier.VerifyNonConcurrentAnalyzer(@"TestCases\Hotspots\ConfiguringLoggers_AspNetCore.cs",
-                                    new CS.ConfiguringLoggers(AnalyzerConfiguration.AlwaysEnabled),
-                                    AspNetCoreLoggingReferences);
+        public void ConfiguringLoggers_AspNetCore2_CS() =>
+            builderCS.AddPaths(@"Hotspots\ConfiguringLoggers_AspNetCore.cs")
+                .AddReferences(AspNetCore2LoggingReferences)
+                .WithConcurrentAnalysis(false)
+                .Verify();
+
+        [TestMethod]
+        public void ConfiguringLoggers_AspNetCoreLatest_CS() =>
+            builderCS.AddPaths(@"Hotspots\ConfiguringLoggers_AspNetCore6.cs")
+                .AddReferences(AspNetCoreLoggingReferences(Constants.NuGetLatestVersion))
+                .Verify();
 
         [TestMethod]
         public void ConfiguringLoggers_AspNetCore_VB() =>
-            OldVerifier.VerifyAnalyzer(@"TestCases\Hotspots\ConfiguringLoggers_AspNetCore.vb",
-                                    new VB.ConfiguringLoggers(AnalyzerConfiguration.AlwaysEnabled),
-                                    AspNetCoreLoggingReferences);
+            builderVB.AddPaths(@"Hotspots\ConfiguringLoggers_AspNetCore.vb")
+                .AddReferences(AspNetCore2LoggingReferences)
+                .Verify();
 #endif
 
         internal static IEnumerable<MetadataReference> Log4NetReferences =>
             // See: https://github.com/SonarSource/sonar-dotnet/issues/3548
-            NuGetMetadataReference.Log4Net("2.0.8", "net45-full")
-            .Concat(MetadataReferenceFacade.SystemXml);
+            NuGetMetadataReference.Log4Net("2.0.8", "net45-full").Concat(MetadataReferenceFacade.SystemXml);
 
         private static IEnumerable<MetadataReference> NLogReferences =>
             NuGetMetadataReference.NLog(Constants.NuGetLatestVersion);
@@ -95,16 +104,33 @@ namespace SonarAnalyzer.UnitTest.Rules
             NuGetMetadataReference.SerilogPackages(Constants.NuGetLatestVersion);
 
 #if NET
-        private static IEnumerable<MetadataReference> AspNetCoreLoggingReferences =>
-            NetStandardMetadataReference.Netstandard
-                                        .Concat(NuGetMetadataReference.MicrosoftAspNetCore(Constants.DotNetCore220Version))
-                                        .Concat(NuGetMetadataReference.MicrosoftAspNetCoreHosting(Constants.DotNetCore220Version))
-                                        .Concat(NuGetMetadataReference.MicrosoftAspNetCoreHostingAbstractions(Constants.DotNetCore220Version))
-                                        .Concat(NuGetMetadataReference.MicrosoftAspNetCoreHttpAbstractions(Constants.DotNetCore220Version))
-                                        .Concat(NuGetMetadataReference.MicrosoftExtensionsConfigurationAbstractions(Constants.DotNetCore220Version))
-                                        .Concat(NuGetMetadataReference.MicrosoftExtensionsOptions(Constants.DotNetCore220Version))
-                                        .Concat(NuGetMetadataReference.MicrosoftExtensionsLoggingPackages(Constants.DotNetCore220Version))
-                                        .Concat(new[] {CoreMetadataReference.MicrosoftExtensionsDependencyInjectionAbstractions});
+        private static IEnumerable<MetadataReference> AspNetCore2LoggingReferences =>
+            Enumerable.Empty<MetadataReference>()
+                .Concat(NuGetMetadataReference.MicrosoftAspNetCore(Constants.DotNetCore220Version))
+                .Concat(NuGetMetadataReference.MicrosoftAspNetCoreHosting(Constants.DotNetCore220Version))
+                .Concat(NuGetMetadataReference.MicrosoftAspNetCoreHostingAbstractions(Constants.DotNetCore220Version))
+                .Concat(NuGetMetadataReference.MicrosoftAspNetCoreHttpAbstractions(Constants.DotNetCore220Version))
+                .Concat(NuGetMetadataReference.MicrosoftExtensionsConfigurationAbstractions(Constants.DotNetCore220Version))
+                .Concat(NuGetMetadataReference.MicrosoftExtensionsOptions(Constants.DotNetCore220Version))
+                .Concat(NuGetMetadataReference.MicrosoftExtensionsLoggingPackages(Constants.DotNetCore220Version))
+                .Concat(new[] {CoreMetadataReference.MicrosoftExtensionsDependencyInjectionAbstractions});
+
+        private static IEnumerable<MetadataReference> AspNetCoreLoggingReferences(string version) =>
+            new[]
+                {
+                    AspNetCoreMetadataReference.MicrosoftAspNetCoreDiagnostics,
+                    AspNetCoreMetadataReference.MicrosoftAspNetCoreHostingAbstractions,
+                    AspNetCoreMetadataReference.MicrosoftAspNetCoreHostingWebHostBuilderExtensions,
+                    AspNetCoreMetadataReference.MicrosoftAspNetCoreHttpAbstractions,
+                    AspNetCoreMetadataReference.MicrosoftExtensionsHostingAbstractions,
+                    AspNetCoreMetadataReference.MicrosoftAspNetCoreWebHost,
+                    AspNetCoreMetadataReference.MicrosoftAspNetCoreEventSourceLoggerFactoryExtensions
+                }
+                .Concat(NuGetMetadataReference.MicrosoftExtensionsConfigurationAbstractions(version))
+                .Concat(NuGetMetadataReference.MicrosoftExtensionsOptions(version))
+                .Concat(NuGetMetadataReference.MicrosoftExtensionsLoggingPackages(version))
+                .Concat(NuGetMetadataReference.MicrosoftExtensionsDependencyInjectionAbstractions(version));
+
 #endif
     }
 }
