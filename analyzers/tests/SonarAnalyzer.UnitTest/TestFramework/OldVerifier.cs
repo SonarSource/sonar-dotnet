@@ -147,7 +147,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework
                 .WithConcurrentAnalysis(false)
                 .WithOptions(ParseOptionsHelper.CSharpPreview)
                 .Verify();
-
+        //FIXME: Remove after rebase
         [Obsolete("Use VerifierBuilder instead.")]
         public static void VerifyNonConcurrentAnalyzer(string path,
                                                        DiagnosticAnalyzer diagnosticAnalyzer,
@@ -172,57 +172,6 @@ namespace SonarAnalyzer.UnitTest.TestFramework
                 .AddReferences(additionalReferences ?? Enumerable.Empty<MetadataReference>())
                 .AddPaths(RemoveTestCasesPrefix(path))
                 .WithConcurrentAnalysis(false)
-                .WithOptions(options.IsDefault ? ImmutableArray<ParseOptions>.Empty : options)
-                .WithErrorBehavior(checkMode)
-                .WithOutputKind(outputKind)
-                .WithOnlyDiagnostics(onlyDiagnostics ?? Array.Empty<DiagnosticDescriptor>())
-                .Verify();
-
-        [Obsolete("Use VerifierBuilder instead.")]
-        public static void VerifyNonConcurrentAnalyzer(IEnumerable<string> paths,
-                                                       DiagnosticAnalyzer diagnosticAnalyzer,
-                                                       IEnumerable<MetadataReference> additionalReferences) =>
-            new VerifierBuilder()
-                .AddAnalyzer(() => diagnosticAnalyzer)
-                .AddReferences(additionalReferences ?? Enumerable.Empty<MetadataReference>())
-                .AddPaths(RemoveTestCasesPrefix(paths))
-                .WithConcurrentAnalysis(false)
-                .Verify();
-
-        [Obsolete("Use VerifierBuilder instead.")]
-        public static void VerifyNonConcurrentAnalyzer(IEnumerable<string> paths,
-                                                       DiagnosticAnalyzer diagnosticAnalyzer,
-                                                       ImmutableArray<ParseOptions> options = default,
-                                                       IEnumerable<MetadataReference> additionalReferences = null) =>
-            new VerifierBuilder()
-                .AddAnalyzer(() => diagnosticAnalyzer)
-                .AddReferences(additionalReferences ?? Enumerable.Empty<MetadataReference>())
-                .AddPaths(RemoveTestCasesPrefix(paths))
-                .WithConcurrentAnalysis(false)
-                .WithOptions(options.IsDefault ? ImmutableArray<ParseOptions>.Empty : options)
-                .Verify();
-
-        [Obsolete("Use VerifierBuilder instead.")]
-        public static void VerifyAnalyzer(IEnumerable<string> paths,
-                                          DiagnosticAnalyzer diagnosticAnalyzer,
-                                          IEnumerable<MetadataReference> additionalReferences) =>
-            new VerifierBuilder()
-                .AddAnalyzer(() => diagnosticAnalyzer)
-                .AddReferences(additionalReferences ?? Enumerable.Empty<MetadataReference>())
-                .AddPaths(RemoveTestCasesPrefix(paths))
-                .Verify();
-
-        [Obsolete("Use VerifierBuilder instead.")]
-        public static void VerifyAnalyzer(string path,
-                                          DiagnosticAnalyzer[] diagnosticAnalyzers,
-                                          ImmutableArray<ParseOptions> options = default,
-                                          CompilationErrorBehavior checkMode = CompilationErrorBehavior.Default,
-                                          OutputKind outputKind = OutputKind.DynamicallyLinkedLibrary,
-                                          IEnumerable<MetadataReference> additionalReferences = null,
-                                          DiagnosticDescriptor[] onlyDiagnostics = null) =>
-            diagnosticAnalyzers.Aggregate(new VerifierBuilder(), (builder, analyzer) => builder.AddAnalyzer(() => analyzer))
-                .AddReferences(additionalReferences ?? Enumerable.Empty<MetadataReference>())
-                .AddPaths(RemoveTestCasesPrefix(path))
                 .WithOptions(options.IsDefault ? ImmutableArray<ParseOptions>.Empty : options)
                 .WithErrorBehavior(checkMode)
                 .WithOutputKind(outputKind)
@@ -297,18 +246,6 @@ namespace SonarAnalyzer.UnitTest.TestFramework
                 .AddReferences(additionalReferences ?? Enumerable.Empty<MetadataReference>())
                 .AddPaths(RemoveTestCasesPrefix(paths))
                 .WithOptions(options.IsDefault ? ImmutableArray<ParseOptions>.Empty : options)
-                .Verify();
-
-        [Obsolete("Use VerifierBuilder instead.")]
-        public static void VerifyAnalyzer(string path,
-                                          DiagnosticAnalyzer diagnosticAnalyzer,
-                                          CompilationErrorBehavior checkMode,
-                                          IEnumerable<MetadataReference> additionalReferences = null) =>
-            new VerifierBuilder()
-                .AddAnalyzer(() => diagnosticAnalyzer)
-                .AddReferences(additionalReferences ?? Enumerable.Empty<MetadataReference>())
-                .AddPaths(RemoveTestCasesPrefix(path))
-                .WithErrorBehavior(checkMode)
                 .Verify();
 
         public static void VerifyNonConcurrentUtilityAnalyzer<TMessage>(IEnumerable<string> paths,

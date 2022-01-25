@@ -30,23 +30,23 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class SerializationConstructorsShouldBeSecuredTest
     {
+        private readonly VerifierBuilder builder = new VerifierBuilder<SerializationConstructorsShouldBeSecured>().AddReferences(MetadataReferenceFacade.SystemSecurityPermissions);
+
         [TestMethod]
         public void SerializationConstructorsShouldBeSecured() =>
-            OldVerifier.VerifyNonConcurrentAnalyzer(@"TestCases\SerializationConstructorsShouldBeSecured.cs",
-                                    new SerializationConstructorsShouldBeSecured(),
-                                    GetAdditionalReferences());
+            builder.AddPaths("SerializationConstructorsShouldBeSecured.cs").WithConcurrentAnalysis(false).Verify();
 
 #if NET
+
         [TestMethod]
         public void SerializationConstructorsShouldBeSecured_CSharp9() =>
-            OldVerifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\SerializationConstructorsShouldBeSecured.CSharp9.cs",
-                                    new SerializationConstructorsShouldBeSecured(),
-                                    GetAdditionalReferences());
+            builder.AddPaths("SerializationConstructorsShouldBeSecured.CSharp9.cs").WithConcurrentAnalysis(false).WithOptions(ParseOptionsHelper.FromCSharp9).Verify();
+
 #endif
 
         [TestMethod]
         public void SerializationConstructorsShouldBeSecured_InvalidCode() =>
-            OldVerifier.VerifyCSharpAnalyzer(@"
+            builder.AddSnippet(@"
 [Serializable]
     public partial class InvalidCode : ISerializable
     {
@@ -57,26 +57,14 @@ namespace SonarAnalyzer.UnitTest.Rules
         protected (SerializationInfo info, StreamingContext context) { }
 
         public void GetObjectData(SerializationInfo info, StreamingContext context) { }
-    }", new SerializationConstructorsShouldBeSecured(), CompilationErrorBehavior.Ignore);
+    }").WithErrorBehavior(CompilationErrorBehavior.Ignore).Verify();
 
         [TestMethod]
         public void SerializationConstructorsShouldBeSecured_NoAssemblyAttribute() =>
-            OldVerifier.VerifyAnalyzer(@"TestCases\SerializationConstructorsShouldBeSecured_NoAssemblyAttribute.cs",
-                                    new SerializationConstructorsShouldBeSecured(),
-                                    GetAdditionalReferences());
+            builder.AddPaths("SerializationConstructorsShouldBeSecured_NoAssemblyAttribute.cs").Verify();
 
         [TestMethod]
         public void SerializationConstructorsShouldBeSecured_PartialClasses() =>
-            OldVerifier.VerifyNonConcurrentAnalyzer(
-                                    new[]
-                                    {
-                                        @"TestCases\SerializationConstructorsShouldBeSecured_Part1.cs",
-                                        @"TestCases\SerializationConstructorsShouldBeSecured_Part2.cs",
-                                    },
-                                    new SerializationConstructorsShouldBeSecured(),
-                                    GetAdditionalReferences());
-
-        private static IEnumerable<MetadataReference> GetAdditionalReferences() =>
-            MetadataReferenceFacade.SystemSecurityPermissions;
+            builder.AddPaths("SerializationConstructorsShouldBeSecured_Part1.cs", "SerializationConstructorsShouldBeSecured_Part2.cs").WithConcurrentAnalysis(false).Verify();
     }
 }

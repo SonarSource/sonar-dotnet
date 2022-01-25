@@ -27,18 +27,23 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class NativeMethodsShouldBeWrappedTest
     {
+        private readonly VerifierBuilder builder = new VerifierBuilder<NativeMethodsShouldBeWrapped>();
+
         [TestMethod]
         public void NativeMethodsShouldBeWrapped() =>
-            OldVerifier.VerifyAnalyzer(@"TestCases\NativeMethodsShouldBeWrapped.cs", new NativeMethodsShouldBeWrapped(), CompilationErrorBehavior.Ignore);
+            builder.AddPaths("NativeMethodsShouldBeWrapped.cs").WithErrorBehavior(CompilationErrorBehavior.Ignore).Verify();
 
 #if NET
+
         [TestMethod]
         public void NativeMethodsShouldBeWrapped_CSharp9() =>
-            OldVerifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\NativeMethodsShouldBeWrapped.CSharp9.cs", new NativeMethodsShouldBeWrapped());
+            builder.AddPaths("NativeMethodsShouldBeWrapped.CSharp9.cs").WithOptions(ParseOptionsHelper.FromCSharp9).Verify();
+
 #endif
 
         [TestMethod]
-        public void NativeMethodsShouldBeWrapped_InvalidCode() => OldVerifier.VerifyCSharpAnalyzer(@"
+        public void NativeMethodsShouldBeWrapped_InvalidCode() =>
+            builder.AddSnippet(@"
 public class InvalidSyntax
 {
     extern public void Extern1
@@ -56,6 +61,6 @@ public class InvalidSyntax
     {
         Extern3(x);
     }
-}", new NativeMethodsShouldBeWrapped(), CompilationErrorBehavior.Ignore);
+}").WithErrorBehavior(CompilationErrorBehavior.Ignore).Verify();
     }
 }

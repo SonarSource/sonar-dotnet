@@ -18,10 +18,11 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System.Collections.Generic;
+using System;
 using System.Collections.Immutable;
 using System.Linq;
 using Microsoft.CodeAnalysis;
+using Microsoft.CodeAnalysis.Diagnostics;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using SonarAnalyzer.Helpers;
@@ -34,129 +35,93 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class XmlExternalEntityShouldNotBeParsedTest
     {
-        [DataRow(NetFrameworkVersion.After452, @"TestCases\XmlExternalEntityShouldNotBeParsed_XmlDocument.cs")]
-        [DataRow(NetFrameworkVersion.Probably35, @"TestCases\XmlExternalEntityShouldNotBeParsed_XmlDocument_Net35.cs")]
-        [DataRow(NetFrameworkVersion.Between4And451, @"TestCases\XmlExternalEntityShouldNotBeParsed_XmlDocument_Net4.cs")]
-        [DataRow(NetFrameworkVersion.Unknown, @"TestCases\XmlExternalEntityShouldNotBeParsed_XmlDocument_UnknownFrameworkVersion.cs")]
+        private readonly VerifierBuilder builder = new VerifierBuilder()
+            .AddReferences(MetadataReferenceFacade.SystemXml)
+            .AddReferences(MetadataReferenceFacade.SystemData)
+            .AddReferences(MetadataReferenceFacade.SystemXmlLinq)
+            .AddReferences(NuGetMetadataReference.MicrosoftWebXdt());
+
+        [DataRow(NetFrameworkVersion.After452, "XmlExternalEntityShouldNotBeParsed_XmlDocument.cs")]
+        [DataRow(NetFrameworkVersion.Probably35, "XmlExternalEntityShouldNotBeParsed_XmlDocument_Net35.cs")]
+        [DataRow(NetFrameworkVersion.Between4And451, "XmlExternalEntityShouldNotBeParsed_XmlDocument_Net4.cs")]
+        [DataRow(NetFrameworkVersion.Unknown, "XmlExternalEntityShouldNotBeParsed_XmlDocument_UnknownFrameworkVersion.cs")]
         [DataTestMethod]
         public void XmlExternalEntityShouldNotBeParsed_XmlDocument(NetFrameworkVersion version, string testFilePath) =>
-            OldVerifier.VerifyAnalyzer(testFilePath,
-                new XmlExternalEntityShouldNotBeParsed(GetVersionProviderMock(version)),
-                MetadataReferenceFacade.SystemXml
-                    .Concat(MetadataReferenceFacade.SystemData)
-                    .Concat(MetadataReferenceFacade.SystemXmlLinq)
-                    .Concat(NuGetMetadataReference.MicrosoftWebXdt())
-                    .ToArray());
+            WithAnalyzer(version).AddPaths(testFilePath).Verify();
 
 #if NET
+
         [TestMethod]
         public void XmlExternalEntityShouldNotBeParsed_XmlDocument_CSharp9() =>
-            OldVerifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\XmlExternalEntityShouldNotBeParsed_XmlDocument_CSharp9.cs",
-                new XmlExternalEntityShouldNotBeParsed(GetVersionProviderMock(NetFrameworkVersion.After452)),
-                MetadataReferenceFacade.SystemXml
-                    .Concat(MetadataReferenceFacade.SystemData)
-                    .Concat(MetadataReferenceFacade.SystemXmlLinq)
-                    .Concat(NuGetMetadataReference.MicrosoftWebXdt())
-                    .ToArray());
+            WithAnalyzer(NetFrameworkVersion.After452).AddPaths("XmlExternalEntityShouldNotBeParsed_XmlDocument_CSharp9.cs").WithTopLevelStatements().Verify();
+
 #endif
 
-        [DataRow(NetFrameworkVersion.After452, @"TestCases\XmlExternalEntityShouldNotBeParsed_XmlTextReader.cs")]
-        [DataRow(NetFrameworkVersion.Probably35, @"TestCases\XmlExternalEntityShouldNotBeParsed_XmlTextReader_Net35.cs")]
-        [DataRow(NetFrameworkVersion.Between4And451, @"TestCases\XmlExternalEntityShouldNotBeParsed_XmlTextReader_Net4.cs")]
-        [DataRow(NetFrameworkVersion.Unknown, @"TestCases\XmlExternalEntityShouldNotBeParsed_XmlTextReader_UnknownFrameworkVersion.cs")]
+        [DataRow(NetFrameworkVersion.After452, "XmlExternalEntityShouldNotBeParsed_XmlTextReader.cs")]
+        [DataRow(NetFrameworkVersion.Probably35, "XmlExternalEntityShouldNotBeParsed_XmlTextReader_Net35.cs")]
+        [DataRow(NetFrameworkVersion.Between4And451, "XmlExternalEntityShouldNotBeParsed_XmlTextReader_Net4.cs")]
+        [DataRow(NetFrameworkVersion.Unknown, "XmlExternalEntityShouldNotBeParsed_XmlTextReader_UnknownFrameworkVersion.cs")]
         [DataTestMethod]
         public void XmlExternalEntityShouldNotBeParsed_XmlTextReader(NetFrameworkVersion version, string testFilePath) =>
-            OldVerifier.VerifyAnalyzer(testFilePath, new XmlExternalEntityShouldNotBeParsed(GetVersionProviderMock(version)),
-                ParseOptionsHelper.FromCSharp8,
-                MetadataReferenceFacade.SystemXml.ToArray());
+            WithAnalyzer(version).AddPaths(testFilePath).WithOptions(ParseOptionsHelper.FromCSharp8).Verify();
 
 #if NET
+
         [TestMethod]
         public void XmlExternalEntityShouldNotBeParsed_XmlTextReader_CSharp9() =>
-            OldVerifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\XmlExternalEntityShouldNotBeParsed_XmlTextReader_CSharp9.cs",
-                new XmlExternalEntityShouldNotBeParsed(GetVersionProviderMock(NetFrameworkVersion.After452)),
-                MetadataReferenceFacade.SystemXml.ToArray());
+            WithAnalyzer(NetFrameworkVersion.After452).AddPaths("XmlExternalEntityShouldNotBeParsed_XmlTextReader_CSharp9.cs").WithTopLevelStatements().Verify();
 
         [TestMethod]
         public void XmlExternalEntityShouldNotBeParsed_XmlTextReader_CSharp10() =>
-            OldVerifier.VerifyAnalyzerFromCSharp10Library(
-                @"TestCases\XmlExternalEntityShouldNotBeParsed_XmlTextReader_CSharp10.cs",
-                new XmlExternalEntityShouldNotBeParsed(GetVersionProviderMock(NetFrameworkVersion.After452)),
-                MetadataReferenceFacade.SystemXml.ToArray());
+            WithAnalyzer(NetFrameworkVersion.After452).AddPaths("XmlExternalEntityShouldNotBeParsed_XmlTextReader_CSharp10.cs").WithOptions(ParseOptionsHelper.FromCSharp10).Verify();
+
 #endif
 
-        [DataRow(NetFrameworkVersion.After452, @"TestCases\XmlExternalEntityShouldNotBeParsed_AlwaysSafe.cs")]
-        [DataRow(NetFrameworkVersion.Unknown, @"TestCases\XmlExternalEntityShouldNotBeParsed_AlwaysSafe.cs")]
+        [DataRow(NetFrameworkVersion.After452, "XmlExternalEntityShouldNotBeParsed_AlwaysSafe.cs")]
+        [DataRow(NetFrameworkVersion.Unknown, "XmlExternalEntityShouldNotBeParsed_AlwaysSafe.cs")]
         [DataTestMethod]
         public void XmlExternalEntityShouldNotBeParsed_AlwaysSafe(NetFrameworkVersion version, string testFilePath) =>
-            VerifyRule(version, testFilePath);
+            WithAnalyzer(version).AddPaths(testFilePath).Verify();
 
-        [DataRow(NetFrameworkVersion.Probably35, @"TestCases\XmlExternalEntityShouldNotBeParsed_XmlReader_Net35.cs")]
-        [DataRow(NetFrameworkVersion.Between4And451, @"TestCases\XmlExternalEntityShouldNotBeParsed_XmlReader_Net4.cs")]
-        [DataRow(NetFrameworkVersion.After452, @"TestCases\XmlExternalEntityShouldNotBeParsed_XmlReader_Net452.cs")]
-        [DataRow(NetFrameworkVersion.Unknown, @"TestCases\XmlExternalEntityShouldNotBeParsed_XmlReader_Net452.cs")]
+        [DataRow(NetFrameworkVersion.Probably35, "XmlExternalEntityShouldNotBeParsed_XmlReader_Net35.cs")]
+        [DataRow(NetFrameworkVersion.Between4And451, "XmlExternalEntityShouldNotBeParsed_XmlReader_Net4.cs")]
+        [DataRow(NetFrameworkVersion.After452, "XmlExternalEntityShouldNotBeParsed_XmlReader_Net452.cs")]
+        [DataRow(NetFrameworkVersion.Unknown, "XmlExternalEntityShouldNotBeParsed_XmlReader_Net452.cs")]
         [DataTestMethod]
         public void XmlExternalEntityShouldNotBeParsed_XmlReader(NetFrameworkVersion version, string testFilePath) =>
-            VerifyRule(version, testFilePath);
+            WithAnalyzer(version).AddPaths(testFilePath).Verify();
 
 #if NET
+
         [TestMethod]
         public void XmlExternalEntityShouldNotBeParsed_XmlReader_CSharp9() =>
-            OldVerifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\XmlExternalEntityShouldNotBeParsed_XmlReader_CSharp9.cs",
-                                                      new XmlExternalEntityShouldNotBeParsed(GetVersionProviderMock(NetFrameworkVersion.After452)),
-                                                      MetadataReferenceFacade.SystemXml
-                                                          .Concat(MetadataReferenceFacade.SystemData)
-                                                          .Concat(MetadataReferenceFacade.SystemXmlLinq)
-                                                          .ToArray());
+            WithAnalyzer(NetFrameworkVersion.After452).AddPaths("XmlExternalEntityShouldNotBeParsed_XmlReader_CSharp9.cs").WithTopLevelStatements().Verify();
 
         [TestMethod]
         public void XmlExternalEntityShouldNotBeParsed_XPathDocument_CSharp9() =>
-            OldVerifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\XmlExternalEntityShouldNotBeParsed_XPathDocument_CSharp9.cs",
-                                                      new XmlExternalEntityShouldNotBeParsed(GetVersionProviderMock(NetFrameworkVersion.After452)),
-                                                      MetadataReferenceFacade.SystemXml
-                                                          .Concat(MetadataReferenceFacade.SystemData)
-                                                          .Concat(MetadataReferenceFacade.SystemXmlLinq)
-                                                          .ToArray());
+            WithAnalyzer(NetFrameworkVersion.After452).AddPaths("XmlExternalEntityShouldNotBeParsed_XPathDocument_CSharp9.cs").WithTopLevelStatements().Verify();
+
 #endif
 
-        [DataRow(NetFrameworkVersion.Probably35, @"TestCases\XmlExternalEntityShouldNotBeParsed_XPathDocument_Net35.cs")]
-        [DataRow(NetFrameworkVersion.Between4And451, @"TestCases\XmlExternalEntityShouldNotBeParsed_XPathDocument_Net4.cs")]
-        [DataRow(NetFrameworkVersion.After452, @"TestCases\XmlExternalEntityShouldNotBeParsed_XPathDocument_Net452.cs")]
-        [DataRow(NetFrameworkVersion.Unknown, @"TestCases\XmlExternalEntityShouldNotBeParsed_XPathDocument_Net452.cs")]
+        [DataRow(NetFrameworkVersion.Probably35, "XmlExternalEntityShouldNotBeParsed_XPathDocument_Net35.cs")]
+        [DataRow(NetFrameworkVersion.Between4And451, "XmlExternalEntityShouldNotBeParsed_XPathDocument_Net4.cs")]
+        [DataRow(NetFrameworkVersion.After452, "XmlExternalEntityShouldNotBeParsed_XPathDocument_Net452.cs")]
+        [DataRow(NetFrameworkVersion.Unknown, "XmlExternalEntityShouldNotBeParsed_XPathDocument_Net452.cs")]
         [DataTestMethod]
         public void XmlExternalEntityShouldNotBeParsed_XPathDocument(NetFrameworkVersion version, string testFilePath) =>
-            VerifyRule(version, testFilePath);
+            WithAnalyzer(version).AddPaths(testFilePath).Verify();
 
         [TestMethod]
         public void XmlExternalEntityShouldNotBeParsed_NoCrashOnExternalParameterUse() =>
-            OldVerifier.VerifyAnalyzer(
-                new[]
-                {
-                    @"TestCases\XmlExternalEntityShouldNotBeParsed_XmlReader_ExternalParameter.cs",
-                    @"TestCases\XmlExternalEntityShouldNotBeParsed_XmlReader_ParameterProvider.cs"
-                },
-                new XmlExternalEntityShouldNotBeParsed(GetVersionProviderMock(NetFrameworkVersion.After452)),
-                MetadataReferenceFacade.SystemXml);
+            WithAnalyzer(NetFrameworkVersion.After452)
+                .AddPaths("XmlExternalEntityShouldNotBeParsed_XmlReader_ExternalParameter.cs", "XmlExternalEntityShouldNotBeParsed_XmlReader_ParameterProvider.cs")
+                .Verify();
 
-        private static void VerifyRule(NetFrameworkVersion version, string testFilePath, OutputKind outputKind = OutputKind.DynamicallyLinkedLibrary, ImmutableArray<ParseOptions> options = default) =>
-            OldVerifier.VerifyAnalyzer(testFilePath,
-                new XmlExternalEntityShouldNotBeParsed(GetVersionProviderMock(version)),
-                options,
-                CompilationErrorBehavior.Default,
-                outputKind,
-                MetadataReferenceFacade.SystemXml
-                    .Concat(MetadataReferenceFacade.SystemData)
-                    .Concat(MetadataReferenceFacade.SystemXmlLinq)
-                    .ToArray());
-
-        private static INetFrameworkVersionProvider GetVersionProviderMock(NetFrameworkVersion version)
+        private VerifierBuilder WithAnalyzer(NetFrameworkVersion version)
         {
-            var versionProviderMock = new Mock<INetFrameworkVersionProvider>();
-            versionProviderMock
-                .Setup(vp => vp.GetDotNetFrameworkVersion(It.IsAny<Compilation>()))
-                .Returns(version);
-
-            return versionProviderMock.Object;
+            var fxVersion = new Mock<INetFrameworkVersionProvider>();
+            fxVersion.Setup(vp => vp.GetDotNetFrameworkVersion(It.IsAny<Compilation>())).Returns(version);
+            return builder.AddAnalyzer(() => new XmlExternalEntityShouldNotBeParsed(fxVersion.Object));
         }
     }
 }

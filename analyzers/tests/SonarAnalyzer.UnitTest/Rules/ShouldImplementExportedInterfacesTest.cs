@@ -29,34 +29,27 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class ShouldImplementExportedInterfacesTest
     {
+        private readonly VerifierBuilder builderCS = new VerifierBuilder<CS.ShouldImplementExportedInterfaces>().AddReferences(MetadataReferenceFacade.SystemComponentModelComposition);
+        private readonly VerifierBuilder builderVB = new VerifierBuilder<VB.ShouldImplementExportedInterfaces>().AddReferences(MetadataReferenceFacade.SystemComponentModelComposition);
+
         [TestMethod]
         public void ShouldImplementExportedInterfaces_CS() =>
-            OldVerifier.VerifyAnalyzer(@"TestCases\ShouldImplementExportedInterfaces.cs",
-                                    new CS.ShouldImplementExportedInterfaces(),
-                                    MetadataReferenceFacade.SystemComponentModelComposition);
+            builderCS.AddPaths("ShouldImplementExportedInterfaces.cs").Verify();
 
 #if NET
+
         [TestMethod]
         public void ShouldImplementExportedInterfaces_CSharp9() =>
-            OldVerifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\ShouldImplementExportedInterfaces.CSharp9.cs",
-                                                      new CS.ShouldImplementExportedInterfaces(),
-                                                      MetadataReferenceFacade.SystemComponentModelComposition);
+            builderCS.AddPaths("ShouldImplementExportedInterfaces.CSharp9.cs").WithOptions(ParseOptionsHelper.FromCSharp9).Verify();
+
 #endif
 
         [TestMethod]
         public void ShouldImplementExportedInterfaces_VB() =>
-            OldVerifier.VerifyAnalyzer(@"TestCases\ShouldImplementExportedInterfaces.vb",
-                                    new VB.ShouldImplementExportedInterfaces(),
-                                    MetadataReferenceFacade.SystemComponentModelComposition);
+            builderVB.AddPaths("ShouldImplementExportedInterfaces.vb").Verify();
 
         [TestMethod]
         public void ShouldImplementExportedInterfaces_Partial() =>
-            OldVerifier.VerifyAnalyzer(new[]
-                {
-                    @"TestCases\ShouldImplementExportedInterfaces_Part1.cs",
-                    @"TestCases\ShouldImplementExportedInterfaces_Part2.cs",
-                },
-                new CS.ShouldImplementExportedInterfaces(),
-                MetadataReferenceFacade.SystemComponentModelComposition);
+            builderCS.AddPaths("ShouldImplementExportedInterfaces_Part1.cs", "ShouldImplementExportedInterfaces_Part2.cs").Verify();
     }
 }
