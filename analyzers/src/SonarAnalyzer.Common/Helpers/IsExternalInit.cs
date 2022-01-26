@@ -22,7 +22,10 @@ using System.ComponentModel;
 
 namespace System.Runtime.CompilerServices
 {
-    // This empty class needs to exist when C# 9 init-only setters are used in project targeting net48.
+    // This empty class needs to exist when C# 9 init-only setters are used in project targeting .NET Framework.
+    // https://docs.microsoft.com/en-us/dotnet/api/system.runtime.compilerservices.isexternalinit?view=net-6.0
+    // It is used only by compiler to track metadata. It does not affect MSIL, CLR nor runtime.
+    // https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/proposals/csharp-9.0/init#metadata-encoding
     [EditorBrowsable(EditorBrowsableState.Never)]
     internal static class IsExternalInit { }
 }
