@@ -57,7 +57,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void UriShouldNotBeHardcoded_CSharp_VirtualPath_AspNetCore(string aspNetCoreMvcVersion, string aspNetCoreRoutingVersion, string netHttpHeadersVersion) =>
             builderCS
                 .AddPaths("UriShouldNotBeHardcoded.AspNetCore.cs")
-                .AddReferences(AddtionalReferences(aspNetCoreMvcVersion, aspNetCoreRoutingVersion, netHttpHeadersVersion))
+                .AddReferences(AdditionalReferences(aspNetCoreMvcVersion, aspNetCoreRoutingVersion, netHttpHeadersVersion))
                 .Verify();
 
         [TestMethod]
