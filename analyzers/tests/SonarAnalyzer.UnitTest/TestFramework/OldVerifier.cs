@@ -147,17 +147,6 @@ namespace SonarAnalyzer.UnitTest.TestFramework
                 .WithConcurrentAnalysis(false)
                 .WithOptions(ParseOptionsHelper.CSharpPreview)
                 .Verify();
-        //FIXME: Remove after rebase
-        [Obsolete("Use VerifierBuilder instead.")]
-        public static void VerifyNonConcurrentAnalyzer(string path,
-                                                       DiagnosticAnalyzer diagnosticAnalyzer,
-                                                       IEnumerable<MetadataReference> additionalReferences) =>
-            new VerifierBuilder()
-                .AddAnalyzer(() => diagnosticAnalyzer)
-                .AddReferences(additionalReferences ?? Enumerable.Empty<MetadataReference>())
-                .AddPaths(RemoveTestCasesPrefix(path))
-                .WithConcurrentAnalysis(false)
-                .Verify();
 
         [Obsolete("Use VerifierBuilder instead.")]
         public static void VerifyNonConcurrentAnalyzer(string path,
