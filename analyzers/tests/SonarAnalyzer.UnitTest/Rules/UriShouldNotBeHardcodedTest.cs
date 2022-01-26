@@ -64,7 +64,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void UriShouldNotBeHardcoded_VB() =>
             builderVB.AddPaths("UriShouldNotBeHardcoded.vb").Verify();
 
-        private static IEnumerable<MetadataReference> AddtionalReferences(string aspNetCoreMvcVersion, string aspNetCoreRoutingVersion, string netHttpHeadersVersion) =>
+        private static IEnumerable<MetadataReference> AdditionalReferences(string aspNetCoreMvcVersion, string aspNetCoreRoutingVersion, string netHttpHeadersVersion) =>
             NuGetMetadataReference.MicrosoftAspNetCoreMvcCore(aspNetCoreMvcVersion)
                     // for Controller
                     .Concat(NuGetMetadataReference.MicrosoftAspNetCoreMvcViewFeatures(aspNetCoreMvcVersion))
