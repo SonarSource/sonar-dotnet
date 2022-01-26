@@ -26,7 +26,7 @@ using StyleCop.Analyzers.Lightup;
 
 namespace SonarAnalyzer.SymbolicExecution.Roslyn
 {
-    public sealed class ProgramState
+    public sealed record ProgramState
     {
         public static readonly ProgramState Empty = new();
 
@@ -43,20 +43,14 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
             SymbolValue = ImmutableDictionary<ISymbol, SymbolicValue>.Empty;
         }
 
-        private ProgramState(ProgramState original)
-        {
-            OperationValue = original.OperationValue;
-            SymbolValue = original.SymbolValue;
-        }
-
         public ProgramState SetOperationValue(IOperationWrapperSonar operation, SymbolicValue value) =>
             SetOperationValue(operation.Instance, value);
 
         public ProgramState SetOperationValue(IOperation operation, SymbolicValue value) =>
-            new(this) { OperationValue = OperationValue.SetItem(operation, value) };
+            this with { OperationValue = OperationValue.SetItem(operation, value) };
 
         public ProgramState SetSymbolValue(ISymbol symbol, SymbolicValue value) =>
-            new(this) { SymbolValue = SymbolValue.SetItem(symbol, value) };
+            this with { SymbolValue = SymbolValue.SetItem(symbol, value) };
 
         public IEnumerable<ISymbol> SymbolsWith(SymbolicConstraint constraint) =>
             SymbolValue.Where(x => x.Value != null && x.Value.HasConstraint(constraint)).Select(x => x.Key);
