@@ -20,6 +20,7 @@
 
 using System.Collections.Generic;
 using Microsoft.CodeAnalysis;
+using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Rules.CSharp;
@@ -35,27 +36,31 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class PermissiveCorsTest
     {
+        private readonly VerifierBuilder builder = new VerifierBuilder()
+            .AddAnalyzer(() => new PermissiveCors(AnalyzerConfiguration.AlwaysEnabled))
+            .WithBasePath(@"Hotspots\")
+            .AddReferences(AdditionalReferences);
 #if NET
         [TestMethod]
         public void PermissiveCors_CS() =>
-            OldVerifier.VerifyAnalyzerFromCSharp9Library(
-                @"TestCases\Hotspots\PermissiveCors.Net.cs",
-                new PermissiveCors(AnalyzerConfiguration.AlwaysEnabled),
-                AdditionalReferences);
+            builder
+                .AddPaths("PermissiveCors.Net.cs")
+                .WithLanguageVersion(LanguageVersion.CSharp9)
+                .Verify();
 
         [TestMethod]
         public void PermissiveCors_CSharp10() =>
-            OldVerifier.VerifyAnalyzerFromCSharp10Library(
-                @"TestCases\Hotspots\PermissiveCors.CSharp10.cs",
-                new PermissiveCors(AnalyzerConfiguration.AlwaysEnabled),
-                AdditionalReferences);
+            builder
+                .AddPaths("PermissiveCors.CSharp10.cs")
+                .WithLanguageVersion(LanguageVersion.CSharp10)
+                .Verify();
 
         [TestMethod]
         public void PermissiveCors_CSharpPreview() =>
-            OldVerifier.VerifyAnalyzerCSharpPreviewLibrary(
-                @"TestCases\Hotspots\PermissiveCors.CSharp.Preview.cs",
-                new PermissiveCors(AnalyzerConfiguration.AlwaysEnabled),
-                AdditionalReferences);
+            builder
+                .AddPaths("PermissiveCors.CSharp.Preview.cs")
+                .WithLanguageVersion(LanguageVersion.Preview)
+                .Verify();
 
         internal static IEnumerable<MetadataReference> AdditionalReferences =>
             new[]
@@ -74,10 +79,10 @@ namespace SonarAnalyzer.UnitTest.Rules
 #else
         [TestMethod]
         public void PermissiveCors_AspNet_WebApi() =>
-            OldVerifier.VerifyAnalyzer(@"TestCases\Hotspots\PermissiveCors.NetFramework.cs",
-                                    new PermissiveCors(AnalyzerConfiguration.AlwaysEnabled),
-                                    ParseOptionsHelper.FromCSharp9,
-                                    AdditionalReferences);
+            builder
+                .AddPaths("PermissiveCors.NetFramework.cs")
+                .WithOptions(ParseOptionsHelper.FromCSharp9)
+                .Verify();
 
         private static IEnumerable<MetadataReference> AdditionalReferences =>
             NuGetMetadataReference.MicrosoftNetHttpHeaders(Constants.NuGetLatestVersion)
