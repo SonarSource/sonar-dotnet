@@ -20,29 +20,19 @@
 
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace SonarAnalyzer.Helpers
 {
     public static class DictionaryExtensions
     {
-        public static TValue GetValueOrDefault<TKey, TValue>(this IDictionary<TKey, TValue> dictionary, TKey key)
-        {
-            return dictionary.GetValueOrDefault(key, default(TValue));
-        }
+        public static TValue GetValueOrDefault<TKey, TValue>(this IDictionary<TKey, TValue> dictionary, TKey key) =>
+            dictionary.GetValueOrDefault(key, default);
 
-        public static TValue GetValueOrDefault<TKey, TValue>(this IDictionary<TKey, TValue> dictionary, TKey key,
-            TValue defaultValue)
-        {
-            if (dictionary.TryGetValue(key, out var result))
-            {
-                return result;
-            }
+        public static TValue GetValueOrDefault<TKey, TValue>(this IDictionary<TKey, TValue> dictionary, TKey key, TValue defaultValue) =>
+            dictionary.TryGetValue(key, out var result) ? result : defaultValue;
 
-            return defaultValue;
-        }
-
-        public static TValue GetOrAdd<TKey, TValue>(this IDictionary<TKey, TValue> dictionary, TKey key,
-            Func<TKey, TValue> factory)
+        public static TValue GetOrAdd<TKey, TValue>(this IDictionary<TKey, TValue> dictionary, TKey key, Func<TKey, TValue> factory)
         {
             if (!dictionary.TryGetValue(key, out var value))
             {
@@ -58,25 +48,14 @@ namespace SonarAnalyzer.Helpers
             {
                 return true;
             }
-
-            if (dict1 == null ||
-                dict2 == null ||
-                dict1.Count != dict2.Count)
+            else
             {
-                return false;
+                var valueComparer = EqualityComparer<TValue>.Default;
+                return dict1 is not null
+                    && dict2 is not null
+                    && dict1.Count == dict2.Count
+                    && dict1.All(x => dict2.TryGetValue(x.Key, out var value2) && valueComparer.Equals(x.Value, value2));
             }
-
-            var valueComparer = EqualityComparer<TValue>.Default;
-
-            foreach (var kvp in dict1)
-            {
-                if (!dict2.TryGetValue(kvp.Key, out var value2) ||
-                    !valueComparer.Equals(kvp.Value, value2))
-                {
-                    return false;
-                }
-            }
-            return true;
         }
     }
 }
