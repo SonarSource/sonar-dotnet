@@ -34,56 +34,56 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class RequestsWithExcessiveLengthTest
     {
+        private readonly VerifierBuilder builderCS = new VerifierBuilder()
+                                                     .AddAnalyzer(() => new CS.RequestsWithExcessiveLength(AnalyzerConfiguration.AlwaysEnabled))
+                                                     .WithBasePath(@"Hotspots")
+                                                     .AddReferences(GetAdditionalReferences());
+
+        private readonly VerifierBuilder builderVB = new VerifierBuilder()
+                                                     .AddAnalyzer(() => new VB.RequestsWithExcessiveLength(AnalyzerConfiguration.AlwaysEnabled))
+                                                     .WithBasePath(@"Hotspots")
+                                                     .AddReferences(GetAdditionalReferences());
+
         [TestMethod]
         public void RequestsWithExcessiveLength_CS() =>
-            OldVerifier.VerifyAnalyzer(
-                @"TestCases\Hotspots\RequestsWithExcessiveLength.cs",
-                new CS.RequestsWithExcessiveLength(AnalyzerConfiguration.AlwaysEnabled),
-                GetAdditionalReferences());
+            builderCS.AddPaths(@"RequestsWithExcessiveLength.cs").Verify();
 
         [TestMethod]
         public void RequestsWithExcessiveLength_CS_CustomValues() =>
-            OldVerifier.VerifyAnalyzer(
-                @"TestCases\Hotspots\RequestsWithExcessiveLength_CustomValues.cs",
-                new CS.RequestsWithExcessiveLength(AnalyzerConfiguration.AlwaysEnabled) { FileUploadSizeLimit = 42 },
-                GetAdditionalReferences());
+            new VerifierBuilder()
+                .AddAnalyzer(() => new CS.RequestsWithExcessiveLength(AnalyzerConfiguration.AlwaysEnabled) { FileUploadSizeLimit = 42 })
+                .AddPaths(@"Hotspots\RequestsWithExcessiveLength_CustomValues.cs")
+                .AddReferences(GetAdditionalReferences())
+                .Verify();
 
 #if NET
         [TestMethod]
         public void RequestsWithExcessiveLength_Csharp9() =>
-            OldVerifier.VerifyAnalyzerFromCSharp9Library(
-                @"TestCases\Hotspots\RequestsWithExcessiveLength.CSharp9.cs",
-                new CS.RequestsWithExcessiveLength(AnalyzerConfiguration.AlwaysEnabled),
-                GetAdditionalReferences());
+            builderCS.AddPaths(@"RequestsWithExcessiveLength.CSharp9.cs").WithOptions(ParseOptionsHelper.FromCSharp9).Verify();
 
         [TestMethod]
         public void RequestsWithExcessiveLength_Csharp10() =>
-            OldVerifier.VerifyAnalyzerFromCSharp10Library(
-                @"TestCases\Hotspots\RequestsWithExcessiveLength.CSharp10.cs",
-                new CS.RequestsWithExcessiveLength(AnalyzerConfiguration.AlwaysEnabled),
-                GetAdditionalReferences());
+            builderCS.AddPaths(@"RequestsWithExcessiveLength.CSharp10.cs").WithOptions(ParseOptionsHelper.FromCSharp10).Verify();
 
         [TestMethod]
         public void RequestsWithExcessiveLength_CsharpPreview() =>
-            OldVerifier.VerifyAnalyzerCSharpPreviewLibrary(
-                @"TestCases\Hotspots\RequestsWithExcessiveLength.CSharp.Preview.cs",
-                new CS.RequestsWithExcessiveLength(AnalyzerConfiguration.AlwaysEnabled),
-                GetAdditionalReferences());
+            builderCS
+                .AddPaths(@"RequestsWithExcessiveLength.CSharp.Preview.cs")
+                .WithConcurrentAnalysis(false)
+                .WithOptions(ParseOptionsHelper.CSharpPreview).Verify();
 #endif
 
         [TestMethod]
         public void RequestsWithExcessiveLength_VB() =>
-            OldVerifier.VerifyAnalyzer(
-                @"TestCases\Hotspots\RequestsWithExcessiveLength.vb",
-                new VB.RequestsWithExcessiveLength(AnalyzerConfiguration.AlwaysEnabled),
-                GetAdditionalReferences());
+            builderVB.AddPaths(@"RequestsWithExcessiveLength.vb").Verify();
 
         [TestMethod]
         public void RequestsWithExcessiveLength_VB_CustomValues() =>
-            OldVerifier.VerifyAnalyzer(
-                @"TestCases\Hotspots\RequestsWithExcessiveLength_CustomValues.vb",
-                new VB.RequestsWithExcessiveLength(AnalyzerConfiguration.AlwaysEnabled) { FileUploadSizeLimit = 42 },
-                GetAdditionalReferences());
+            new VerifierBuilder()
+                .AddAnalyzer(() => new VB.RequestsWithExcessiveLength(AnalyzerConfiguration.AlwaysEnabled) { FileUploadSizeLimit = 42 })
+                .AddPaths(@"Hotspots\RequestsWithExcessiveLength_CustomValues.vb")
+                .AddReferences(GetAdditionalReferences())
+                .Verify();
 
         [DataTestMethod]
         [DataRow(@"TestCases\WebConfig\RequestsWithExcessiveLength\Values\ContentLength")]
@@ -112,8 +112,8 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         public void RequestsWithExcessiveLength_CS_CorruptAndNonExistingWebConfigs_ShouldNotFail()
         {
-            var root = @"TestCases\WebConfig\RequestsWithExcessiveLength\Corrupt";
-            var missingDirectory = @"TestCases\WebConfig\RequestsWithExcessiveLength\NonExistingDirectory";
+            const string root = @"TestCases\WebConfig\RequestsWithExcessiveLength\Corrupt";
+            const string missingDirectory = @"TestCases\WebConfig\RequestsWithExcessiveLength\NonExistingDirectory";
             var corruptFilePath = GetWebConfigPath(root);
             var nonExistingFilePath = GetWebConfigPath(missingDirectory);
             DiagnosticVerifier.VerifyExternalFile(
@@ -128,8 +128,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         private static Compilation CreateCompilation() => SolutionBuilder.Create().AddProject(AnalyzerLanguage.CSharp).GetCompilation();
 
         internal static IEnumerable<MetadataReference> GetAdditionalReferences() =>
-            NetStandardMetadataReference.Netstandard
-                                        .Concat(NuGetMetadataReference.MicrosoftAspNetCoreMvcCore(Constants.NuGetLatestVersion))
-                                        .Concat(NuGetMetadataReference.MicrosoftAspNetCoreMvcViewFeatures(Constants.NuGetLatestVersion));
+            NuGetMetadataReference.MicrosoftAspNetCoreMvcCore(Constants.NuGetLatestVersion)
+                .Concat(NuGetMetadataReference.MicrosoftAspNetCoreMvcViewFeatures(Constants.NuGetLatestVersion));
     }
 }
