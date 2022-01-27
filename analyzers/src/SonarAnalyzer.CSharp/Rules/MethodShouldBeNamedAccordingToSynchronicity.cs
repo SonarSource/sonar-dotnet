@@ -88,7 +88,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private static bool HasAsyncReturnType(IMethodSymbol methodSymbol) =>
             methodSymbol.ReturnType is ITypeParameterSymbol typeParameter
-                ? typeParameter.ConstraintTypes.Any(x => IsAsyncType(x))
+                ? typeParameter.ConstraintTypes.Any(IsAsyncType)
                 : (methodSymbol.ReturnType as INamedTypeSymbol)?.ConstructedFrom is { } returnSymbol
                   && !returnSymbol.Is(KnownType.Void)
                   && IsAsyncType(returnSymbol);
