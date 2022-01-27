@@ -139,7 +139,6 @@ else
             validator.ValidateExecutionNotCompleted();
         }
 
-
         [TestMethod]
         public void EndNotifications_MultipleBranches()
         {
