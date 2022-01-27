@@ -29,7 +29,7 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class MethodShouldBeNamedAccordingToSynchronicityTest
     {
-        private readonly VerifierBuilder builder = new VerifierBuilder().AddAnalyzer(() => new MethodShouldBeNamedAccordingToSynchronicity());
+        private readonly VerifierBuilder builder = new VerifierBuilder<MethodShouldBeNamedAccordingToSynchronicity>();
 
         [TestMethod]
         [DataRow("4.0.0")]
