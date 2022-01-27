@@ -42,13 +42,11 @@ namespace SonarAnalyzer.Rules
         private const string AbsoluteDiskUri = @"^[A-Za-z]:(/|\\)";
         private const string AbsoluteMappedDiskUri = @"^\\\\\w[ \w\.]*";
 
-        protected static readonly Regex UriRegex =
-            new Regex($"{UriScheme}|{AbsoluteDiskUri}|{AbsoluteMappedDiskUri}",
-                RegexOptions.Compiled);
+        protected static readonly Regex UriRegex = new($"{UriScheme}|{AbsoluteDiskUri}|{AbsoluteMappedDiskUri}", RegexOptions.Compiled);
 
-        protected static readonly Regex PathDelimiterRegex = new Regex(@"^(\\|/)$", RegexOptions.Compiled);
+        protected static readonly Regex PathDelimiterRegex = new(@"^(\\|/)$", RegexOptions.Compiled);
 
-        protected static readonly ISet<string> checkedVariableNames =
+        protected static readonly ISet<string> CheckedVariableNames =
             new HashSet<string>
             {
                 "FILE",
@@ -88,7 +86,8 @@ namespace SonarAnalyzer.Rules
 
         protected override void Initialize(SonarAnalysisContext context)
         {
-            context.RegisterSyntaxNodeActionInNonGenerated(GeneratedCodeRecognizer,
+            context.RegisterSyntaxNodeActionInNonGenerated(
+                GeneratedCodeRecognizer,
                 c =>
                 {
                     var stringLiteral = (TLiteralExpressionSyntax)c.Node;
@@ -100,7 +99,8 @@ namespace SonarAnalyzer.Rules
                 },
                 StringLiteralSyntaxKind);
 
-            context.RegisterSyntaxNodeActionInNonGenerated(GeneratedCodeRecognizer,
+            context.RegisterSyntaxNodeActionInNonGenerated(
+                GeneratedCodeRecognizer,
                 c =>
                 {
                     var addExpression = (TBinaryExpressionSyntax)c.Node;
@@ -142,16 +142,16 @@ namespace SonarAnalyzer.Rules
                     : null;
 
                 return methodSymbol != null &&
-                    argumentIndex.Value < methodSymbol.Parameters.Length &&
-                    methodSymbol.Parameters[argumentIndex.Value].Name.SplitCamelCaseToWords()
-                         .Any(name => checkedVariableNames.Contains(name));
+                    argumentIndex.Value < methodSymbol.Parameters.Length
+                    && methodSymbol.Parameters[argumentIndex.Value].Name.SplitCamelCaseToWords()
+                        .Any(name => CheckedVariableNames.Contains(name));
             }
 
             var variableDeclarator = expression.FirstAncestorOrSelf<TVariableDeclaratorSyntax>();
-            return variableDeclarator != null &&
-                GetDeclaratorIdentifierName(variableDeclarator)
-                    .SplitCamelCaseToWords()
-                    .Any(name => checkedVariableNames.Contains(name));
+            return variableDeclarator != null
+                   && GetDeclaratorIdentifierName(variableDeclarator)
+                        .SplitCamelCaseToWords()
+                        .Any(name => CheckedVariableNames.Contains(name));
         }
 
         private bool IsPathDelimiter(TExpressionSyntax expression)

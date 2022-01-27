@@ -32,14 +32,17 @@ namespace SonarAnalyzer.Rules.VisualBasic
         : UriShouldNotBeHardcodedBase<ExpressionSyntax, LiteralExpressionSyntax,
             SyntaxKind, BinaryExpressionSyntax, ArgumentSyntax, VariableDeclaratorSyntax>
     {
-        private static readonly DiagnosticDescriptor rule =
+        private static readonly DiagnosticDescriptor Rule =
             DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(rule);
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
         protected override SyntaxKind StringLiteralSyntaxKind => SyntaxKind.StringLiteralExpression;
 
-        protected override SyntaxKind[] StringConcatenateExpressions => new[] {
-            SyntaxKind.AddExpression,
-            SyntaxKind.ConcatenateExpression };
+        protected override SyntaxKind[] StringConcatenateExpressions =>
+            new[]
+            {
+                SyntaxKind.AddExpression,
+                SyntaxKind.ConcatenateExpression
+            };
 
         protected override GeneratedCodeRecognizer GeneratedCodeRecognizer => VisualBasicGeneratedCodeRecognizer.Instance;
 
@@ -50,8 +53,8 @@ namespace SonarAnalyzer.Rules.VisualBasic
         protected override ExpressionSyntax GetRightNode(BinaryExpressionSyntax binaryExpression) => binaryExpression.Right;
 
         protected override bool IsInvocationOrObjectCreation(SyntaxNode node) =>
-            node.IsKind(SyntaxKind.InvocationExpression) ||
-            node.IsKind(SyntaxKind.ObjectCreationExpression);
+            node.IsKind(SyntaxKind.InvocationExpression)
+            || node.IsKind(SyntaxKind.ObjectCreationExpression);
 
         protected override int? GetArgumentIndex(ArgumentSyntax argument) =>
             (argument?.Parent as ArgumentListSyntax)?.Arguments.IndexOf(argument);
