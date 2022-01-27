@@ -26,33 +26,33 @@ using StyleCop.Analyzers.Lightup;
 
 namespace SonarAnalyzer.SymbolicExecution.Roslyn
 {
-    public sealed class ProgramState
+    public sealed record ProgramState
     {
-        public static readonly ProgramState Empty = new(ImmutableDictionary<IOperation, SymbolicValue>.Empty, ImmutableDictionary<ISymbol, SymbolicValue>.Empty);
+        public static readonly ProgramState Empty = new();
 
-        private readonly ImmutableDictionary<IOperation, SymbolicValue> operationValue;     // Current SymbolicValue result of a given operation
-        private readonly ImmutableDictionary<ISymbol, SymbolicValue> symbolValue;
+        private ImmutableDictionary<IOperation, SymbolicValue> OperationValue { get; init; }     // Current SymbolicValue result of a given operation
+        private ImmutableDictionary<ISymbol, SymbolicValue> SymbolValue { get; init; }
 
         public SymbolicValue this[IOperationWrapperSonar operation] => this[operation.Instance];
-        public SymbolicValue this[IOperation operation] => operationValue.TryGetValue(operation, out var value) ? value : null;
-        public SymbolicValue this[ISymbol symbol] => symbolValue.TryGetValue(symbol, out var value) ? value : null;
+        public SymbolicValue this[IOperation operation] => OperationValue.TryGetValue(operation, out var value) ? value : null;
+        public SymbolicValue this[ISymbol symbol] => SymbolValue.TryGetValue(symbol, out var value) ? value : null;
 
-        private ProgramState(ImmutableDictionary<IOperation, SymbolicValue> operationValue, ImmutableDictionary<ISymbol, SymbolicValue> symbolValue)
+        private ProgramState()
         {
-            this.operationValue = operationValue;
-            this.symbolValue = symbolValue;
+            OperationValue = ImmutableDictionary<IOperation, SymbolicValue>.Empty;
+            SymbolValue = ImmutableDictionary<ISymbol, SymbolicValue>.Empty;
         }
 
         public ProgramState SetOperationValue(IOperationWrapperSonar operation, SymbolicValue value) =>
             SetOperationValue(operation.Instance, value);
 
         public ProgramState SetOperationValue(IOperation operation, SymbolicValue value) =>
-            new(operationValue.SetItem(operation, value), symbolValue);
+            this with { OperationValue = OperationValue.SetItem(operation, value) };
 
         public ProgramState SetSymbolValue(ISymbol symbol, SymbolicValue value) =>
-            new(operationValue, symbolValue.SetItem(symbol, value));
+            this with { SymbolValue = SymbolValue.SetItem(symbol, value) };
 
         public IEnumerable<ISymbol> SymbolsWith(SymbolicConstraint constraint) =>
-            symbolValue.Where(x => x.Value != null && x.Value.HasConstraint(constraint)).Select(x => x.Key);
+            SymbolValue.Where(x => x.Value != null && x.Value.HasConstraint(constraint)).Select(x => x.Key);
     }
 }
