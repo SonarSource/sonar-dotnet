@@ -33,10 +33,10 @@ namespace SonarAnalyzer.UnitTest.TestFramework.Tests
             SourceText.From(code).Lines[lineNumber];
 
         private static void VerifyIssueLocations(IReadOnlyCollection<IIssueLocation> result,
-            IEnumerable<bool> expectedIsPrimary,
-            IEnumerable<int> expectedLineNumbers,
-            IEnumerable<string> expectedMessages,
-            IEnumerable<string> expectedIssueIds)
+                                                 IEnumerable<bool> expectedIsPrimary,
+                                                 IEnumerable<int> expectedLineNumbers,
+                                                 IEnumerable<string> expectedMessages,
+                                                 IEnumerable<string> expectedIssueIds)
         {
             result.Select(l => l.IsPrimary).Should().Equal(expectedIsPrimary);
             result.Select(l => l.LineNumber).Should().Equal(expectedLineNumbers);
