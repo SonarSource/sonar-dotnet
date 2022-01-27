@@ -55,10 +55,12 @@ namespace SonarAnalyzer.UnitTest.Common
 
                 if (IsTestValid(analyzerName))
                 {
-                    OldVerifier.VerifyNoIssueReported(@$"TestCases\Hotspots\{GetTestCaseFileName(analyzerName)}{language.FileExtension}",
-                        analyzer,
-                        parseOptions,
-                        GetAdditionalReferences(analyzerName));
+                    new VerifierBuilder()
+                        .AddPaths(@$"Hotspots\{GetTestCaseFileName(analyzerName)}{language.FileExtension}")
+                        .AddAnalyzer(() => analyzer)
+                        .WithOptions(parseOptions)
+                        .AddReferences(GetAdditionalReferences(analyzerName, Constants.NuGetLatestVersion))
+                        .VerifyNoIssueReported();
                 }
             }
         }
@@ -93,18 +95,17 @@ namespace SonarAnalyzer.UnitTest.Common
                 _ => analyzerName
             };
 
-        private static bool IsTestValid(string analyzerName)
-        {
+        private static bool IsTestValid(string analyzerName) =>
+
 #if NETFRAMEWORK
-            return analyzerName != nameof(DisablingCsrfProtection)
-                   && analyzerName != nameof(PermissiveCors);
+            analyzerName != nameof(DisablingCsrfProtection)
+            && analyzerName != nameof(PermissiveCors);
 #else
             // IdentityModel is not available on .Net Core
-            return analyzerName != nameof(ControllingPermissions);
+            analyzerName != nameof(ControllingPermissions);
 #endif
-        }
 
-        private static IEnumerable<MetadataReference> GetAdditionalReferences(string analyzerName) =>
+        private static IEnumerable<MetadataReference> GetAdditionalReferences(string analyzerName, string version) =>
             analyzerName switch
             {
                 nameof(ClearTextProtocolsAreSensitive) => ClearTextProtocolsAreSensitiveTest.AdditionalReferences,
@@ -112,7 +113,7 @@ namespace SonarAnalyzer.UnitTest.Common
                 nameof(CookieShouldBeSecure) => CookieShouldBeSecureTest.AdditionalReferences,
                 nameof(ConfiguringLoggers) => ConfiguringLoggersTest.Log4NetReferences,
                 nameof(DeliveringDebugFeaturesInProduction) => DeliveringDebugFeaturesInProductionTest.AdditionalReferencesForAspNetCore2,
-                nameof(DisablingRequestValidation) => NuGetMetadataReference.MicrosoftAspNetMvc(Constants.NuGetLatestVersion),
+                nameof(DisablingRequestValidation) => NuGetMetadataReference.MicrosoftAspNetMvc(version),
                 nameof(DoNotHardcodeCredentials) => DoNotHardcodeCredentialsTest.AdditionalReferences,
                 nameof(DoNotUseRandom) => MetadataReferenceFacade.SystemSecurityCryptography,
                 nameof(ExpandingArchives) => ExpandingArchivesTest.AdditionalReferences,
@@ -120,13 +121,13 @@ namespace SonarAnalyzer.UnitTest.Common
                 nameof(UsingRegularExpressions) => MetadataReferenceFacade.RegularExpressions,
 #if NET
                 nameof(DisablingCsrfProtection) => DisablingCsrfProtectionTest.AdditionalReferences(),
-                nameof(ExecutingSqlQueries) => ExecutingSqlQueriesTest.GetReferencesEntityFrameworkNetCore(Constants.NuGetLatestVersion),
+                nameof(ExecutingSqlQueries) => ExecutingSqlQueriesTest.GetReferencesEntityFrameworkNetCore(version),
                 nameof(LooseFilePermissions) => NuGetMetadataReference.MonoPosixNetStandard(),
                 nameof(PermissiveCors) => PermissiveCorsTest.AdditionalReferences,
-                nameof(UsingCookies) => UsingCookies.GetAspNetCoreReferences(Constants.DotNetCore220Version),
+                nameof(UsingCookies) => UsingCookies.GetAspNetCoreReferences(version),
 #else
                 nameof(ControllingPermissions) => ControllingPermissionsTest.AdditionalReferences,
-                nameof(ExecutingSqlQueries) => ExecutingSqlQueriesTest.GetReferencesNet46(Constants.NuGetLatestVersion),
+                nameof(ExecutingSqlQueries) => ExecutingSqlQueriesTest.GetReferencesNet46(version),
                 nameof(UsingCookies) => UsingCookies.GetAdditionalReferencesForNet46(),
 #endif
                 _ => MetadataReferenceFacade.SystemNetHttp
