@@ -35,7 +35,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework
     /// <summary>
     /// Immutable builder that holds all parameters for rule verification.
     /// </summary>
-    internal class VerifierBuilder
+    internal record VerifierBuilder
     {
         // All properties are (and should be) immutable.
         public ImmutableArray<Func<DiagnosticAnalyzer>> Analyzers { get; init; } = ImmutableArray<Func<DiagnosticAnalyzer>>.Empty;
@@ -56,43 +56,20 @@ namespace SonarAnalyzer.UnitTest.TestFramework
         public ImmutableArray<string> Snippets { get; init; } = ImmutableArray<string>.Empty;
         public string SonarProjectConfigPath { get; init; }
 
-        public VerifierBuilder() { }
-
-        private VerifierBuilder(VerifierBuilder original)
-        {
-            Analyzers = original.Analyzers;
-            AutogenerateConcurrentFiles = original.AutogenerateConcurrentFiles;
-            BasePath = original.BasePath;
-            CodeFix = original.CodeFix;
-            CodeFixedPath = original.CodeFixedPath;
-            CodeFixedPathBatch = original.CodeFixedPathBatch;
-            CodeFixTitle = original.CodeFixTitle;
-            ConcurrentAnalysis = original.ConcurrentAnalysis;
-            ErrorBehavior = original.ErrorBehavior;
-            OnlyDiagnostics = original.OnlyDiagnostics;
-            OutputKind = original.OutputKind;
-            Paths = original.Paths;
-            ParseOptions = original.ParseOptions;
-            ProtobufPath = original.ProtobufPath;
-            References = original.References;
-            Snippets = original.Snippets;
-            SonarProjectConfigPath = original.SonarProjectConfigPath;
-        }
-
         /// <summary>
         /// This method solves complicated scenarios. Use 'new VerifierBuilder&lt;TAnalyzer&gt;()' for single analyzer cases with no rule parameters.
         /// </summary>
         public VerifierBuilder AddAnalyzer(Func<DiagnosticAnalyzer> createConfiguredAnalyzer) =>
-            new(this) { Analyzers = Analyzers.Append(createConfiguredAnalyzer).ToImmutableArray() };
+            this with { Analyzers = Analyzers.Append(createConfiguredAnalyzer).ToImmutableArray() };
 
         public VerifierBuilder AddPaths(params string[] paths) =>
-            new(this) { Paths = Paths.Concat(paths).ToImmutableArray() };
+            this with { Paths = Paths.Concat(paths).ToImmutableArray() };
 
         public VerifierBuilder AddReferences(IEnumerable<MetadataReference> references) =>
-            new(this) { References = References.Concat(references).ToImmutableArray() };
+            this with { References = References.Concat(references).ToImmutableArray() };
 
         public VerifierBuilder AddSnippet(string snippet) =>
-            new(this) { Snippets = Snippets.Append(snippet).ToImmutableArray() };
+            this with { Snippets = Snippets.Append(snippet).ToImmutableArray() };
 
         /// <summary>
         /// Add a test reference to change the project type to Test project.
@@ -101,35 +78,35 @@ namespace SonarAnalyzer.UnitTest.TestFramework
             AddReferences(NuGetMetadataReference.MSTestTestFrameworkV1);
 
         public VerifierBuilder WithAutogenerateConcurrentFiles(bool autogenerateConcurrentFiles) =>
-            new(this) { AutogenerateConcurrentFiles = autogenerateConcurrentFiles };
+            this with { AutogenerateConcurrentFiles = autogenerateConcurrentFiles };
 
         /// <summary>
         /// Path infix relative to TestCases directory.
         /// </summary>
         /// <remarks>If we ever need to change the root outside the .\TestCases directory, add WithRootPath(..) while WithBasePath(..) would still append another part after the root path.</remarks>
         public VerifierBuilder WithBasePath(string basePath) =>
-            new(this) { BasePath = basePath };
+            this with { BasePath = basePath };
 
         public VerifierBuilder WithCodeFix<TCodeFix>() where TCodeFix : SonarCodeFix, new() =>
-            new(this) { CodeFix = () => new TCodeFix() };
+            this with { CodeFix = () => new TCodeFix() };
 
         public VerifierBuilder WithCodeFixedPath(string codeFixedPath) =>
-            new(this) { CodeFixedPath = codeFixedPath };
+            this with { CodeFixedPath = codeFixedPath };
 
         /// <summary>
         /// Optional alternative fixed file for cases when FixAllProvider produces different results than applying all code fixes on the same original document.
         /// </summary>
         public VerifierBuilder WithCodeFixedPathBatch(string codeFixedPathBatch) =>
-            new(this) { CodeFixedPathBatch = codeFixedPathBatch };
+            this with { CodeFixedPathBatch = codeFixedPathBatch };
 
         public VerifierBuilder WithCodeFixTitle(string codeFixTitle) =>
-            new(this) { CodeFixTitle = codeFixTitle };
+            this with { CodeFixTitle = codeFixTitle };
 
         public VerifierBuilder WithConcurrentAnalysis(bool concurrentAnalysis) =>
-            new(this) { ConcurrentAnalysis = concurrentAnalysis };
+            this with { ConcurrentAnalysis = concurrentAnalysis };
 
         public VerifierBuilder WithErrorBehavior(CompilationErrorBehavior errorBehavior) =>
-            new(this) { ErrorBehavior = errorBehavior };
+            this with { ErrorBehavior = errorBehavior };
 
         public VerifierBuilder WithLanguageVersion(CS.LanguageVersion languageVersion) =>
             WithOptions(ImmutableArray.Create<ParseOptions>(new CS.CSharpParseOptions(languageVersion)));
@@ -138,19 +115,19 @@ namespace SonarAnalyzer.UnitTest.TestFramework
             WithOptions(ImmutableArray.Create<ParseOptions>(new VB.VisualBasicParseOptions(languageVersion)));
 
         public VerifierBuilder WithOnlyDiagnostics(params DiagnosticDescriptor[] onlyDiagnostics) =>
-            new(this) { OnlyDiagnostics = onlyDiagnostics.ToImmutableArray() };
+            this with { OnlyDiagnostics = onlyDiagnostics.ToImmutableArray() };
 
         public VerifierBuilder WithOptions(ImmutableArray<ParseOptions> parseOptions) =>
-            new(this) { ParseOptions = parseOptions };
+            this with { ParseOptions = parseOptions };
 
         public VerifierBuilder WithOutputKind(OutputKind outputKind) =>
-            new(this) { OutputKind = outputKind };
+            this with { OutputKind = outputKind };
 
         public VerifierBuilder WithProtobufPath(string protobufPath) =>
-            new(this) { ProtobufPath = protobufPath };
+            this with { ProtobufPath = protobufPath };
 
         public VerifierBuilder WithSonarProjectConfigPath(string sonarProjectConfigPath) =>
-            new(this) { SonarProjectConfigPath = sonarProjectConfigPath };
+            this with { SonarProjectConfigPath = sonarProjectConfigPath };
 
         public VerifierBuilder WithTopLevelStatements()
         {
@@ -171,7 +148,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework
             new(this);
     }
 
-    internal class VerifierBuilder<TAnalyzer> : VerifierBuilder
+    internal record VerifierBuilder<TAnalyzer> : VerifierBuilder
         where TAnalyzer : DiagnosticAnalyzer, new()
     {
         public VerifierBuilder() =>
