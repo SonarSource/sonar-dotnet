@@ -18,10 +18,14 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System;
+using System.Linq;
 using FluentAssertions;
 using Microsoft.CodeAnalysis;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using SonarAnalyzer.Helpers;
 using SonarAnalyzer.SymbolicExecution.Constraints;
+using SonarAnalyzer.SymbolicExecution.Roslyn;
 using SonarAnalyzer.UnitTest.TestFramework.SymbolicExecution;
 
 namespace SonarAnalyzer.UnitTest.SymbolicExecution.Roslyn
@@ -123,6 +127,16 @@ else
             var validator = SETestContext.CreateCS("var a = true;").Validator;
             validator.ValidateExitReachCount(1);
             validator.ValidateExecutionCompleted();
+        }
+
+        [TestMethod]
+        public void EndNotifications_MaxStepCountReached()
+        {
+            // var x = true; produces 3 operations
+            var code = Enumerable.Range(1, RoslynSymbolicExecution.MaxStepCount / 3 + 1).Select(x => $"var x{x} = true;").JoinStr(Environment.NewLine);
+            var validator = SETestContext.CreateCS(code).Validator;
+            validator.ValidateExitReachCount(0);
+            validator.ValidateExecutionNotCompleted();
         }
 
         [TestMethod]

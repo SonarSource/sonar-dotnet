@@ -93,6 +93,9 @@ namespace SonarAnalyzer.UnitTest.TestFramework.SymbolicExecution
         public void ValidateExecutionCompleted() =>
             executionCompletedCount.Should().Be(1);
 
+        public void ValidateExecutionNotCompleted() =>
+            executionCompletedCount.Should().Be(0);
+
         public void ValidatePostProcessCount(int expected) =>
             postProcessed.Should().HaveCount(expected);
 
