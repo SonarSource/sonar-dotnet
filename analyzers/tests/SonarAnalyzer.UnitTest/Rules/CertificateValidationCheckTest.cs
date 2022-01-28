@@ -31,14 +31,12 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class CertificateValidationCheckTest
     {
-        private readonly VerifierBuilder builderCS = new VerifierBuilder<CS.CertificateValidationCheck>()
+        private static readonly VerifierBuilder WithReferences = new VerifierBuilder()
             .AddReferences(MetadataReferenceFacade.SystemNetHttp)
             .AddReferences(MetadataReferenceFacade.SystemSecurityCryptography)
             .AddReferences(NetStandardMetadataReference.Netstandard);
-        private readonly VerifierBuilder builderVB = new VerifierBuilder<VB.CertificateValidationCheck>()
-            .AddReferences(MetadataReferenceFacade.SystemNetHttp)
-            .AddReferences(MetadataReferenceFacade.SystemSecurityCryptography)
-            .AddReferences(NetStandardMetadataReference.Netstandard);
+        private readonly VerifierBuilder builderCS = WithReferences.AddAnalyzer(() => new CS.CertificateValidationCheck());
+        private readonly VerifierBuilder builderVB = WithReferences.AddAnalyzer(() => new VB.CertificateValidationCheck());
 
         [TestMethod]
         public void CertificateValidationCheck_CS() =>
