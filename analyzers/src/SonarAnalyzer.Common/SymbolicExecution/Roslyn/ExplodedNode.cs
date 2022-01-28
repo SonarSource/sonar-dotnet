@@ -62,5 +62,10 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
             other is not null
             && other.programPointHash == programPointHash
             && other.State.Equals(State);
+
+        public override string ToString() =>
+            Operation is null
+                ? $"Block #{Block.Ordinal}, Branching{Environment.NewLine}{State}"
+                : $"Block #{Block.Ordinal}, Operation #{index}, {Operation.Instance.Serialize()}{Environment.NewLine}{State}";
     }
 }
