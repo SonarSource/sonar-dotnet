@@ -20,8 +20,9 @@
 
 using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using SonarAnalyzer.Helpers;
 
-namespace SonarAnalyzer.Helpers.UnitTest
+namespace SonarAnalyzer.UnitTest.Helpers
 {
     [TestClass]
     public class HashCodeTest

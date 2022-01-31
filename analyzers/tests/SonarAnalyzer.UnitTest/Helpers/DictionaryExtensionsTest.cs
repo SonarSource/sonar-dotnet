@@ -21,8 +21,9 @@
 using System.Collections.Generic;
 using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using SonarAnalyzer.Helpers;
 
-namespace SonarAnalyzer.Helpers.UnitTest
+namespace SonarAnalyzer.UnitTest.Helpers
 {
     [TestClass]
     public class DictionaryExtensionsTest
@@ -31,15 +32,9 @@ namespace SonarAnalyzer.Helpers.UnitTest
         public void DictionaryEquals_Different()
         {
             var empty = new Dictionary<string, string>();
-            var original = new Dictionary<string, string>();
-            var differentKeys = new Dictionary<string, string>();
-            var differentValues = new Dictionary<string, string>();
-            original.Add("a", "a");
-            original.Add("b", "b");
-            differentKeys.Add("a", "a");
-            differentKeys.Add("c", "c");
-            differentValues.Add("a", "a");
-            differentValues.Add("b", "xxxx");
+            var original = new Dictionary<string, string> { { "a", "a" }, { "b", "b" } };
+            var differentKeys = new Dictionary<string, string> { { "a", "a" }, { "c", "c" } };
+            var differentValues = new Dictionary<string, string> { { "a", "a" }, { "b", "xxxx" } };
 
             DictionaryExtensions.DictionaryEquals(null, empty).Should().BeFalse();
             DictionaryExtensions.DictionaryEquals(empty, null).Should().BeFalse();
@@ -51,12 +46,8 @@ namespace SonarAnalyzer.Helpers.UnitTest
         [TestMethod]
         public void DictionaryEquals_SameContent()
         {
-            var dict1 = new Dictionary<string, string>();
-            var dict2 = new Dictionary<string, string>();
-            dict1.Add("a", "a");
-            dict1.Add("b", "b");
-            dict2.Add("a", "a");
-            dict2.Add("b", "b");
+            var dict1 = new Dictionary<string, string> { { "a", "a" }, { "b", "b" } };
+            var dict2 = new Dictionary<string, string> { { "a", "a" }, { "b", "b" } };
             dict1.DictionaryEquals(dict1).Should().BeTrue();
             dict1.DictionaryEquals(dict2).Should().BeTrue();
         }

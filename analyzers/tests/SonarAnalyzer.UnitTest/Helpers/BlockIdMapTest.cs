@@ -22,7 +22,7 @@ using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.CFG.Sonar;
 
-namespace SonarAnalyzer.Helpers.UnitTest
+namespace SonarAnalyzer.UnitTest.Helpers
 {
     [TestClass]
     public class BlockIdMapTest
