@@ -47,6 +47,15 @@ namespace SonarAnalyzer.UnitTest.SymbolicExecution.Roslyn
         }
 
         [TestMethod]
+        public void Execute_SecondRun_Throws()
+        {
+            var cfg = TestHelper.CompileCfgBodyCS();
+            var se = new RoslynSymbolicExecution(cfg, new[] { new ValidatorTestCheck() });
+            se.Execute();
+            se.Invoking(x => x.Execute()).Should().Throw<InvalidOperationException>().WithMessage("Engine can be executed only once.");
+        }
+
+        [TestMethod]
         public void SequentialInput_CS()
         {
             var context = SETestContext.CreateCS("var a = true; var b = false; b = !b; a = (b);");
