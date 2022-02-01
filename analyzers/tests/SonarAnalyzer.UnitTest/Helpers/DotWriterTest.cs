@@ -19,14 +19,11 @@
  */
 
 using System;
-using System.IO;
-using System.Text;
 using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.CFG;
-using SonarAnalyzer.UnitTest.Helpers;
 
-namespace SonarAnalyzer.Helpers.UnitTest
+namespace SonarAnalyzer.UnitTest.Helpers
 {
     [TestClass]
     public class DotWriterTest

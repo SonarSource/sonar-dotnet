@@ -20,41 +20,21 @@
 
 using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using SonarAnalyzer.CFG.Sonar;
+using SonarAnalyzer.Helpers;
 
 namespace SonarAnalyzer.UnitTest.Helpers
 {
     [TestClass]
-    public class BlockIdMapTest
+    public class HashCodeTest
     {
-        private BlockIdProvider blockId;
-
-        [TestInitialize]
-        public void TestInitialize()
-        {
-            this.blockId = new BlockIdProvider();
-        }
-
         [TestMethod]
-        public void Get_Returns_Same_Id_For_Same_Block()
+        public void Combine_Null()
         {
-            var block = new TemporaryBlock();
+            var two = HashCode.Combine<object, object>(null, null);
+            var three = HashCode.Combine<object, object, object>(null, null, null);
 
-            this.blockId.Get(block).Should().Be("0");
-            this.blockId.Get(block).Should().Be("0");
-            this.blockId.Get(block).Should().Be("0");
-        }
-
-        [TestMethod]
-        public void Get_Returns_Different_Id_For_Different_Block()
-        {
-            var id1 = this.blockId.Get(new TemporaryBlock());
-            var id2 = this.blockId.Get(new TemporaryBlock());
-            var id3 = this.blockId.Get(new TemporaryBlock());
-
-            id1.Should().Be("0");
-            id2.Should().Be("1");
-            id3.Should().Be("2");
+            two.Should().NotBe(0);
+            three.Should().NotBe(0).And.NotBe(two);
         }
     }
 }
