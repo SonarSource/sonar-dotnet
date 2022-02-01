@@ -48,8 +48,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void EmptyNamespace_CodeFix() =>
             builder.AddPaths("EmptyNamespace.cs")
                 .WithCodeFix<EmptyNamespaceCodeFix>()
-                .WithCodeFixedPath("EmptyNamespace.Fixed.cs")
-                .WithCodeFixedPathBatch("EmptyNamespace.Fixed.Batch.cs")
+                .WithCodeFixedPaths("EmptyNamespace.Fixed.cs", "EmptyNamespace.Fixed.Batch.cs")
                 .VerifyCodeFix();
     }
 }

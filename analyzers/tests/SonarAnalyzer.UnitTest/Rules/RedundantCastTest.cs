@@ -46,7 +46,7 @@ namespace SonarAnalyzer.UnitTest.Rules
 
         [TestMethod]
         public void RedundantCast_CodeFix() =>
-            builder.AddPaths("RedundantCast.cs").WithCodeFix<RedundantCastCodeFix>().WithCodeFixedPath("RedundantCast.Fixed.cs").VerifyCodeFix();
+            builder.AddPaths("RedundantCast.cs").WithCodeFix<RedundantCastCodeFix>().WithCodeFixedPaths("RedundantCast.Fixed.cs").VerifyCodeFix();
 
         [TestMethod]
         public void RedundantCast_DefaultLiteral() =>

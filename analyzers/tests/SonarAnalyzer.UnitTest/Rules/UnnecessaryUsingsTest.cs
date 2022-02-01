@@ -68,8 +68,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void UnnecessaryUsings_CodeFix() =>
             builder.AddPaths("UnnecessaryUsings.cs")
                 .WithCodeFix<UnnecessaryUsingsCodeFix>()
-                .WithCodeFixedPath("UnnecessaryUsings.Fixed.cs")
-                .WithCodeFixedPathBatch("UnnecessaryUsings.Fixed.Batch.cs")
+                .WithCodeFixedPaths("UnnecessaryUsings.Fixed.cs", "UnnecessaryUsings.Fixed.Batch.cs")
                 .VerifyCodeFix();
 
         [TestMethod]
