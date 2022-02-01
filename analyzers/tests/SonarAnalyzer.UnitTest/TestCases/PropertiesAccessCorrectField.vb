@@ -695,6 +695,32 @@ Namespace Tests.Diagnostics
         End Property
     End Class
 
+    Public Class A
+        Private _chargeId as Integer
 
+        Protected Overridable Property ChargeId As Integer
+            Get
+                Return _chargeId
+            End Get
+            Set(value As Integer)
+                If (value <> _chargeId)
+                    _chargeId = value ' strictly speaking, we're doing other validation, but a scenario where auto properties aren't a solution
+                End If
+            End Set
+        End Property
+    End Class
+
+    Public Class B
+        Inherits A
+
+        Protected Overrides Property ChargeId As Integer
+            Get ' Noncompliant FP
+                Return If(true, MyBase.ChargeId, 1234)
+            End Get
+            Set(value As Integer) ' Noncompliant FP
+                MyBase.ChargeId = value
+            End Set
+        End Property
+    End Class
 
 End Namespace

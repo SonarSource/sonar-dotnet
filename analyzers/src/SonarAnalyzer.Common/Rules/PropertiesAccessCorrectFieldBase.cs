@@ -31,7 +31,7 @@ namespace SonarAnalyzer.Rules
 {
     public abstract class PropertiesAccessCorrectFieldBase : SonarDiagnosticAnalyzer
     {
-        protected const string DiagnosticId = "S4275";
+        private const string DiagnosticId = "S4275";
         private const string MessageFormat = "Refactor this {0} so that it actually refers to the field '{1}'.";
 
         private readonly DiagnosticDescriptor rule;
