@@ -28,30 +28,25 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class CollectionsShouldImplementGenericInterfaceTest
     {
+        private readonly VerifierBuilder builder = new VerifierBuilder<CollectionsShouldImplementGenericInterface>()
+            .AddReferences(MetadataReferenceFacade.SystemCollections)
+            .WithErrorBehavior(CompilationErrorBehavior.Ignore);    // It would be too tedious to implement all those interfaces
+
         [TestMethod]
         public void CollectionsShouldImplementGenericInterface() =>
-            OldVerifier.VerifyAnalyzer(
-                @"TestCases\CollectionsShouldImplementGenericInterface.cs",
-                new CollectionsShouldImplementGenericInterface(),
-                CompilationErrorBehavior.Ignore,     // It would be too tedious to implement all those interfaces
-                MetadataReferenceFacade.SystemCollections);
+            builder.AddPaths("CollectionsShouldImplementGenericInterface.cs").Verify();
 
 #if NET
+
         [TestMethod]
         public void CollectionsShouldImplementGenericInterface_Csharp9() =>
-            OldVerifier.VerifyAnalyzerFromCSharp9Library(
-                @"TestCases\CollectionsShouldImplementGenericInterface.CSharp9.cs",
-                new CollectionsShouldImplementGenericInterface(),
-                CompilationErrorBehavior.Ignore,     // It would be too tedious to implement all those interfaces
-                MetadataReferenceFacade.SystemCollections);
+            builder.AddPaths("CollectionsShouldImplementGenericInterface.CSharp9.cs").WithOptions(ParseOptionsHelper.FromCSharp9).Verify();
 
         [TestMethod]
         public void CollectionsShouldImplementGenericInterface_Csharp10() =>
-            OldVerifier.VerifyAnalyzerFromCSharp10Library(
-                @"TestCases\CollectionsShouldImplementGenericInterface.CSharp10.cs",
-                new CollectionsShouldImplementGenericInterface(),
-                CompilationErrorBehavior.Ignore,     // It would be too tedious to implement all those interfaces
-                MetadataReferenceFacade.SystemCollections);
+            builder.AddPaths("CollectionsShouldImplementGenericInterface.CSharp10.cs").WithOptions(ParseOptionsHelper.FromCSharp10).Verify();
+
 #endif
+
     }
 }

@@ -18,10 +18,7 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System.Collections.Generic;
-using System.Linq;
 using FluentAssertions;
-using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.Rules.CSharp;
@@ -33,52 +30,47 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class UnnecessaryUsingsTest
     {
+        private readonly VerifierBuilder builder = new VerifierBuilder<UnnecessaryUsings>()
+            .AddReferences(MetadataReferenceFacade.MicrosoftWin32Primitives)
+            .AddReferences(MetadataReferenceFacade.SystemSecurityCryptography);
+
         [TestMethod]
         public void UnnecessaryUsings() =>
-            new VerifierBuilder<UnnecessaryUsings>()
-                .AddPaths("UnnecessaryUsings.cs", "UnnecessaryUsings2.cs", "UnnecessaryUsingsFNRepro.cs")
-                .AddReferences(GetAdditionalReferences())
-                .WithAutogenerateConcurrentFiles(false)
-                .Verify();
+            builder.AddPaths("UnnecessaryUsings.cs", "UnnecessaryUsings2.cs", "UnnecessaryUsingsFNRepro.cs").WithAutogenerateConcurrentFiles(false).Verify();
 
 #if NET
 
         [TestMethod]
         public void UnnecessaryUsings_CSharp10_GlobalUsings() =>
-            OldVerifier.VerifyAnalyzerFromCSharp10Console(
-                new[] { @"TestCases\UnnecessaryUsings.CSharp10.Global.cs", @"TestCases\UnnecessaryUsings.CSharp10.Consumer.cs" },
-                new UnnecessaryUsings());
+            builder.AddPaths("UnnecessaryUsings.CSharp10.Global.cs", "UnnecessaryUsings.CSharp10.Consumer.cs").WithTopLevelStatements().WithOptions(ParseOptionsHelper.FromCSharp10).Verify();
 
         [TestMethod]
         public void UnnecessaryUsings_CSharp10_FileScopedNamespace() =>
-            OldVerifier.VerifyAnalyzerFromCSharp10Library(
-                new[] { @"TestCases\UnnecessaryUsings.CSharp10.FileScopedNamespace.cs" },
-                new UnnecessaryUsings());
+            builder.AddPaths("UnnecessaryUsings.CSharp10.FileScopedNamespace.cs").WithOptions(ParseOptionsHelper.FromCSharp10).WithConcurrentAnalysis(false).Verify();
 
         [TestMethod]
         public void UnnecessaryUsings_CSharp9() =>
-            OldVerifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\UnnecessaryUsings.CSharp9.cs", new UnnecessaryUsings());
+            builder.AddPaths("UnnecessaryUsings.CSharp9.cs").WithTopLevelStatements().Verify();
 
         [TestMethod]
         public void UnnecessaryUsings_TupleDeconstruct_NetCore() =>
-            OldVerifier.VerifyAnalyzer(@"TestCases\UnnecessaryUsings.TupleDeconstruct.NetCore.cs", new UnnecessaryUsings());
+            builder.AddPaths("UnnecessaryUsings.TupleDeconstruct.NetCore.cs").Verify();
 
 #elif NETFRAMEWORK
 
         [TestMethod]
         public void UnnecessaryUsings_TupleDeconstruct_NetFx() =>
-            OldVerifier.VerifyAnalyzer(@"TestCases\UnnecessaryUsings.TupleDeconstruct.NetFx.cs", new UnnecessaryUsings());
+            builder.AddPaths("UnnecessaryUsings.TupleDeconstruct.NetFx.cs").Verify();
 
 #endif
 
         [TestMethod]
         public void UnnecessaryUsings_CodeFix() =>
-            OldVerifier.VerifyCodeFix<UnnecessaryUsingsCodeFix>(
-                @"TestCases\UnnecessaryUsings.cs",
-                @"TestCases\UnnecessaryUsings.Fixed.cs",
-                @"TestCases\UnnecessaryUsings.Fixed.Batch.cs",
-                new UnnecessaryUsings(),
-                additionalReferences: GetAdditionalReferences());
+            builder.AddPaths("UnnecessaryUsings.cs")
+                .WithCodeFix<UnnecessaryUsingsCodeFix>()
+                .WithCodeFixedPath("UnnecessaryUsings.Fixed.cs")
+                .WithCodeFixedPathBatch("UnnecessaryUsings.Fixed.Batch.cs")
+                .VerifyCodeFix();
 
         [TestMethod]
         public void EquivalentNameSyntax_Equals_Object()
@@ -104,8 +96,5 @@ namespace SonarAnalyzer.UnitTest.Rules
             main.Equals(null).Should().BeFalse();
             main.Equals(different).Should().BeFalse();
         }
-
-        private static IEnumerable<MetadataReference> GetAdditionalReferences() =>
-            MetadataReferenceFacade.MicrosoftWin32Primitives.Concat(MetadataReferenceFacade.SystemSecurityCryptography);
     }
 }

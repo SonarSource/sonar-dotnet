@@ -27,24 +27,29 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class EmptyNamespaceTest
     {
+        private readonly VerifierBuilder builder = new VerifierBuilder<EmptyNamespace>();
+
         [TestMethod]
         public void EmptyNamespace() =>
-            OldVerifier.VerifyAnalyzer(@"TestCases\EmptyNamespace.cs", new EmptyNamespace());
+            builder.AddPaths("EmptyNamespace.cs").Verify();
 
 #if NET
+
         [TestMethod]
         public void EmptyNamespace_CSharp10() =>
-            OldVerifier.VerifyAnalyzerFromCSharp10Library(
-                new[] { @"TestCases\EmptyNamespace.CSharp10.Empty.cs", @"TestCases\EmptyNamespace.CSharp10.NotEmpty.cs" },
-                new EmptyNamespace());
+            builder.AddPaths("EmptyNamespace.CSharp10.Empty.cs", "EmptyNamespace.CSharp10.NotEmpty.cs")
+                .WithOptions(ParseOptionsHelper.FromCSharp10)
+                .WithConcurrentAnalysis(false)
+                .Verify();
+
 #endif
 
         [TestMethod]
         public void EmptyNamespace_CodeFix() =>
-            OldVerifier.VerifyCodeFix<EmptyNamespaceCodeFix>(
-                @"TestCases\EmptyNamespace.cs",
-                @"TestCases\EmptyNamespace.Fixed.cs",
-                @"TestCases\EmptyNamespace.Fixed.Batch.cs",
-                new EmptyNamespace());
+            builder.AddPaths("EmptyNamespace.cs")
+                .WithCodeFix<EmptyNamespaceCodeFix>()
+                .WithCodeFixedPath("EmptyNamespace.Fixed.cs")
+                .WithCodeFixedPathBatch("EmptyNamespace.Fixed.Batch.cs")
+                .VerifyCodeFix();
     }
 }

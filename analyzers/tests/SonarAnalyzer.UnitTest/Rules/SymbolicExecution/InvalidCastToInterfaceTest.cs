@@ -18,9 +18,6 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System.Linq;
-using Microsoft.CodeAnalysis;
-using Microsoft.CodeAnalysis.Diagnostics;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.Helpers;
 using SonarAnalyzer.Rules.CSharp;
@@ -33,36 +30,32 @@ namespace SonarAnalyzer.UnitTest.Rules.SymbolicExecution
     [TestClass]
     public class InvalidCastToInterfaceTest
     {
-        private static readonly DiagnosticDescriptor[] OnlyDiagnostics = new[] { InvalidCastToInterfaceSymbolicExecution.S1944 };
+        private readonly VerifierBuilder builder = new VerifierBuilder<SymbolicExecutionRunner>()
+            .AddAnalyzer(() => new InvalidCastToInterface())
+            .WithBasePath(@"SymbolicExecution\Sonar")
+            .WithOnlyDiagnostics(InvalidCastToInterfaceSymbolicExecution.S1944);
 
         [DataTestMethod]
         [DataRow(ProjectType.Product)]
         [DataRow(ProjectType.Test)]
         public void InvalidCastToInterface(ProjectType projectType) =>
-            OldVerifier.VerifyAnalyzer(
-                @"TestCases\SymbolicExecution\Sonar\InvalidCastToInterface.cs",
-                Analyzers(),
-                additionalReferences: TestHelper.ProjectTypeReference(projectType).Concat(MetadataReferenceFacade.NETStandard21),
-                options: ParseOptionsHelper.FromCSharp8,
-                onlyDiagnostics: OnlyDiagnostics);
+            builder.AddPaths("InvalidCastToInterface.cs")
+                .AddReferences(TestHelper.ProjectTypeReference(projectType))
+                .AddReferences(MetadataReferenceFacade.NETStandard21)
+                .WithOptions(ParseOptionsHelper.FromCSharp8)
+                .Verify();
 
 #if NET
+
         [TestMethod]
         public void InvalidCastToInterface_CSharp9() =>
-            OldVerifier.VerifyAnalyzerFromCSharp9Console(
-                @"TestCases\SymbolicExecution\Sonar\InvalidCastToInterface.CSharp9.cs",
-                Analyzers(),
-                onlyDiagnostics: OnlyDiagnostics);
+            builder.AddPaths("InvalidCastToInterface.CSharp9.cs").WithTopLevelStatements().Verify();
 
         [TestMethod]
         public void InvalidCastToInterface_CSharp10() =>
-            OldVerifier.VerifyAnalyzerFromCSharp10Library(
-                @"TestCases\SymbolicExecution\Sonar\InvalidCastToInterface.CSharp10.cs",
-                Analyzers(),
-                onlyDiagnostics: OnlyDiagnostics);
+            builder.AddPaths("InvalidCastToInterface.CSharp10.cs").WithOptions(ParseOptionsHelper.FromCSharp10).Verify();
+
 #endif
 
-        private static DiagnosticAnalyzer[] Analyzers() =>
-            new DiagnosticAnalyzer[] { new SymbolicExecutionRunner(), new InvalidCastToInterface() };
     }
 }

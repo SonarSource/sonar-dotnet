@@ -33,81 +33,71 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class ClassAndMethodNameTest
     {
+        private readonly VerifierBuilder builderCS = new VerifierBuilder<CS.ClassAndMethodName>();
+
         [TestMethod]
         public void ClassName_CS() =>
-            OldVerifier.VerifyNonConcurrentAnalyzer(
-                new[]
-                {
-                    @"TestCases\ClassName.cs",
-                    @"TestCases\ClassName.Partial.cs",
-                },
-                new CS.ClassAndMethodName(),
-                ParseOptionsHelper.FromCSharp8,
-                MetadataReferenceFacade.NETStandard21);
+            builderCS.AddPaths("ClassName.cs", "ClassName.Partial.cs")
+                .AddReferences(MetadataReferenceFacade.NETStandard21)
+                .WithConcurrentAnalysis(false)
+                .WithOptions(ParseOptionsHelper.FromCSharp8)
+                .Verify();
 
         [TestMethod]
         public void ClassName_InTestProject_CS() =>
-            OldVerifier.VerifyAnalyzer(@"TestCases\ClassName.Tests.cs", new CS.ClassAndMethodName(), ParseOptionsHelper.FromCSharp8, NuGetMetadataReference.MSTestTestFrameworkV1);
+            builderCS.AddPaths("ClassName.Tests.cs").AddTestReference().WithOptions(ParseOptionsHelper.FromCSharp8).Verify();
 
 #if NET
+
         [TestMethod]
         public void ClassName_TopLevelStatement_CS() =>
-            OldVerifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\ClassName.TopLevelStatement.cs", new CS.ClassAndMethodName());
+            builderCS.AddPaths("ClassName.TopLevelStatement.cs").WithTopLevelStatements().Verify();
 
         [TestMethod]
         public void ClassName_TopLevelStatement_InTestProject_CS() =>
-            OldVerifier.VerifyAnalyzerFromCSharp9ConsoleInTest(@"TestCases\ClassName.TopLevelStatement.Test.cs", new CS.ClassAndMethodName());
+            builderCS.AddPaths("ClassName.TopLevelStatement.Test.cs").AddTestReference().WithTopLevelStatements().Verify();
 
         [TestMethod]
         public void RecordName_CS() =>
-            OldVerifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\RecordName.cs", new CS.ClassAndMethodName());
+            builderCS.AddPaths("RecordName.cs").WithOptions(ParseOptionsHelper.FromCSharp9).Verify();
 
         [TestMethod]
         public void RecordName_InTestProject_CS() =>
-            OldVerifier.VerifyAnalyzerFromCSharp9LibraryInTest(@"TestCases\RecordName.cs", new CS.ClassAndMethodName());
+            builderCS.AddPaths("RecordName.cs").AddTestReference().WithOptions(ParseOptionsHelper.FromCSharp9).Verify();
 
         [TestMethod]
         public void RecordStructName_CS() =>
-            OldVerifier.VerifyAnalyzerFromCSharp10Library(@"TestCases\RecordStructName.cs", new CS.ClassAndMethodName());
+            builderCS.AddPaths("RecordStructName.cs").WithOptions(ParseOptionsHelper.FromCSharp10).Verify();
 
         [TestMethod]
         public void RecordStructName_InTestProject_CS() =>
-            OldVerifier.VerifyAnalyzerFromCSharp10LibraryInTest(@"TestCases\RecordStructName.cs", new CS.ClassAndMethodName());
+            builderCS.AddPaths("RecordStructName.cs").AddTestReference().WithOptions(ParseOptionsHelper.FromCSharp10).Verify();
+
+        [TestMethod]
+        public void MethodName_CSharp9() =>
+            builderCS.AddPaths("MethodName.CSharp9.cs").WithOptions(ParseOptionsHelper.FromCSharp9).Verify();
+
+        [TestMethod]
+        public void MethodName_InTestProject_CSharp9() =>
+            builderCS.AddPaths("MethodName.CSharp9.cs").AddTestReference().WithOptions(ParseOptionsHelper.FromCSharp9).Verify();
+
+        [TestMethod]
+        public void MethodName_CSharpPreview() =>
+            builderCS.AddPaths("MethodName.CSharpPreview.cs").WithOptions(ParseOptionsHelper.CSharpPreview).Verify();
+
 #endif
 
         [DataTestMethod]
         [DataRow(ProjectType.Product)]
         [DataRow(ProjectType.Test)]
         public void ClassName_VB(ProjectType projectType) =>
-            OldVerifier.VerifyAnalyzer(@"TestCases\ClassName.vb", new VB.ClassName(), TestHelper.ProjectTypeReference(projectType));
+            new VerifierBuilder<VB.ClassName>().AddPaths("ClassName.vb").AddReferences(TestHelper.ProjectTypeReference(projectType)).Verify();
 
         [DataTestMethod]
         [DataRow(ProjectType.Product)]
         [DataRow(ProjectType.Test)]
         public void MethodName(ProjectType projectType) =>
-            OldVerifier.VerifyAnalyzer(
-                new[]
-                {
-                    @"TestCases\MethodName.cs",
-                    @"TestCases\MethodName.Partial.cs",
-                },
-                new CS.ClassAndMethodName(),
-                ParseOptionsHelper.FromCSharp8,
-                TestHelper.ProjectTypeReference(projectType));
-
-#if NET
-        [TestMethod]
-        public void MethodName_CSharp9() =>
-            OldVerifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\MethodName.CSharp9.cs", new CS.ClassAndMethodName());
-
-        [TestMethod]
-        public void MethodName_InTestProject_CSharp9() =>
-            OldVerifier.VerifyAnalyzerFromCSharp9LibraryInTest(@"TestCases\MethodName.CSharp9.cs", new CS.ClassAndMethodName());
-
-        [TestMethod]
-        public void MethodName_CSharpPreview() =>
-            OldVerifier.VerifyAnalyzerCSharpPreviewLibrary(@"TestCases\MethodName.CSharpPreview.cs", new CS.ClassAndMethodName());
-#endif
+            builderCS.AddPaths("MethodName.cs", "MethodName.Partial.cs").AddReferences(TestHelper.ProjectTypeReference(projectType)).WithOptions(ParseOptionsHelper.FromCSharp8).Verify();
 
         [TestMethod]
         public void TestSplitToParts() =>
@@ -120,7 +110,7 @@ namespace SonarAnalyzer.UnitTest.Rules
                 ("Ff9F", new[] { "Ff", "9", "F" }),
                 ("你好", new[] { "你", "好" }),
                 ("FFf", new[] { "F", "Ff" }),
-                ("",  Array.Empty<string>()),
+                (string.Empty,  Array.Empty<string>()),
                 ("FF9d", new[] { "FF", "9", "d" }),
                 ("y2x5__w7", new[] { "y", "2", "x", "5", "_", "_", "w", "7" }),
                 ("3%c#account", new[] { "3", "%", "c", "#", "account" }),
