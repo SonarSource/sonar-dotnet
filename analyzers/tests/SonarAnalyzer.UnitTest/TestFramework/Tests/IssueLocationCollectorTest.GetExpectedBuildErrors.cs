@@ -30,7 +30,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework.Tests
         [TestMethod]
         public void GetExpectedBuildErrors_No_Comments()
         {
-            var code = @"public class Foo
+            const string code = @"public class Foo
 {
     public void Bar(object o)
     {
@@ -45,7 +45,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework.Tests
         [TestMethod]
         public void GetExpectedBuildErrors_ExpectedErrors()
         {
-            var code = @"public class Foo
+            const string code = @"public class Foo
 {
     public void Bar(object o) // Error [CS1234]
     {
@@ -53,30 +53,30 @@ namespace SonarAnalyzer.UnitTest.TestFramework.Tests
         Console.WriteLine(o);
     }
 }";
-            var expectedErrors = IssueLocationCollector.GetExpectedBuildErrors(SourceText.From(code).Lines);
+            var expectedErrors = IssueLocationCollector.GetExpectedBuildErrors(SourceText.From(code).Lines).ToList();
 
             expectedErrors.Should().HaveCount(2);
 
-            expectedErrors.Select(l => l.IsPrimary).Should().Equal(new[] { true, true });
-            expectedErrors.Select(l => l.LineNumber).Should().Equal(new[] { 3, 6 });
+            expectedErrors.Select(l => l.IsPrimary).Should().Equal(true, true);
+            expectedErrors.Select(l => l.LineNumber).Should().Equal(3, 6);
         }
 
         [TestMethod]
         public void GetExpectedBuildErrors_Multiple_ExpectedErrors()
         {
-            var code = @"public class Foo
+            const string code = @"public class Foo
 {
     public void Bar(object o) // Error [CS1234,CS2345,CS3456]
     {
     }
 }";
-            var expectedErrors = IssueLocationCollector.GetExpectedBuildErrors(SourceText.From(code).Lines);
+            var expectedErrors = IssueLocationCollector.GetExpectedBuildErrors(SourceText.From(code).Lines).ToList();
 
             expectedErrors.Should().HaveCount(3);
 
-            expectedErrors.Select(l => l.IsPrimary).Should().Equal(new[] { true, true, true });
-            expectedErrors.Select(l => l.LineNumber).Should().Equal(new[] { 3, 3, 3 });
-            expectedErrors.Select(l => l.IssueId).Should().Equal(new[] { "CS1234", "CS2345", "CS3456" });
+            expectedErrors.Select(l => l.IsPrimary).Should().Equal(true, true, true);
+            expectedErrors.Select(l => l.LineNumber).Should().Equal(3, 3, 3);
+            expectedErrors.Select(l => l.IssueId).Should().Equal("CS1234", "CS2345", "CS3456");
         }
     }
 }

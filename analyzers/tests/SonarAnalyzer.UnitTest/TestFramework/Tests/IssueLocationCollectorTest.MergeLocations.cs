@@ -19,7 +19,6 @@
  */
 
 using System;
-using System.Linq;
 using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using IssueLocation = SonarAnalyzer.UnitTest.TestFramework.IssueLocationCollector.IssueLocation;
@@ -29,14 +28,8 @@ namespace SonarAnalyzer.UnitTest.TestFramework.Tests
     public partial class IssueLocationCollectorTest
     {
         [TestMethod]
-        public void MergeLocations_No_Issues()
-        {
-            var result = IssueLocationCollector.MergeLocations(
-                Enumerable.Empty<IssueLocation>(),
-                Enumerable.Empty<IssueLocation>());
-
-            result.Should().BeEmpty();
-        }
+        public void MergeLocations_No_Issues() =>
+            IssueLocationCollector.MergeLocations(Array.Empty<IssueLocation>(), Array.Empty<IssueLocation>()).Should().BeEmpty();
 
         [TestMethod]
         public void MergeLocations_Issues_Same_Line()
@@ -87,23 +80,11 @@ namespace SonarAnalyzer.UnitTest.TestFramework.Tests
         }
 
         [TestMethod]
-        public void MergeLocations_Empty_Issues_NonEmpty_PreciseLocations()
-        {
-            var result = IssueLocationCollector.MergeLocations(
-                Enumerable.Empty<IssueLocation>(),
-                new[] { new IssueLocation { LineNumber = 3 } });
-
-            result.Should().ContainSingle();
-        }
+        public void MergeLocations_Empty_Issues_NonEmpty_PreciseLocations() =>
+            IssueLocationCollector.MergeLocations(Array.Empty<IssueLocation>(), new[] { new IssueLocation { LineNumber = 3 } }).Should().ContainSingle();
 
         [TestMethod]
-        public void MergeLocations_NonEmpty_Issues_Empty_PreciseLocations()
-        {
-            var result = IssueLocationCollector.MergeLocations(
-                new[] { new IssueLocation { LineNumber = 3 } },
-                Enumerable.Empty<IssueLocation>());
-
-            result.Should().ContainSingle();
-        }
+        public void MergeLocations_NonEmpty_Issues_Empty_PreciseLocations() =>
+            IssueLocationCollector.MergeLocations(new[] { new IssueLocation { LineNumber = 3 } }, Array.Empty<IssueLocation>()).Should().ContainSingle();
     }
 }
