@@ -28,17 +28,22 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class DoNotDecreaseMemberVisibilityTest
     {
+        private readonly VerifierBuilder builder = new VerifierBuilder<DoNotDecreaseMemberVisibility>().WithConcurrentAnalysis(false);
+
         [TestMethod]
         public void DoNotDecreaseMemberVisibility() =>
-            OldVerifier.VerifyNonConcurrentAnalyzer(new[] { @"TestCases\DoNotDecreaseMemberVisibility.cs", @"TestCases\DoNotDecreaseMemberVisibility2.cs", },
-                                    new DoNotDecreaseMemberVisibility(),
-                                    ParseOptionsHelper.FromCSharp8,
-                                    MetadataReferenceFacade.NETStandard21);
+            builder.AddPaths("DoNotDecreaseMemberVisibility.cs", "DoNotDecreaseMemberVisibility2.cs")
+                .AddReferences(MetadataReferenceFacade.NETStandard21)
+                .WithOptions(ParseOptionsHelper.FromCSharp8)
+                .Verify();
 
 #if NET
+
         [TestMethod]
         public void DoNotDecreaseMemberVisibility_CSharp9() =>
-            OldVerifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\DoNotDecreaseMemberVisibility.CSharp9.cs", new DoNotDecreaseMemberVisibility());
+            builder.AddPaths("DoNotDecreaseMemberVisibility.CSharp9.cs").WithOptions(ParseOptionsHelper.FromCSharp9).Verify();
+
 #endif
+
     }
 }

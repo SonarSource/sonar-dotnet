@@ -27,35 +27,22 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class MarkAssemblyWithNeutralResourcesLanguageAttributeTest
     {
+        private readonly VerifierBuilder builder = new VerifierBuilder<MarkAssemblyWithNeutralResourcesLanguageAttribute>().WithConcurrentAnalysis(false);
+
         [TestMethod]
         public void MarkAssemblyWithNeutralResourcesLanguageAttribute_HasResx_HasAttribute_Compliant() =>
-            new VerifierBuilder<MarkAssemblyWithNeutralResourcesLanguageAttribute>()
-                .AddPaths("MarkAssemblyWithNeutralResourcesLanguageAttribute.cs", @"Resources\SomeResources.Designer.cs", @"Resources\AnotherResources.Designer.cs")
-                .WithAutogenerateConcurrentFiles(false)
-                .Verify();
+            builder.AddPaths("MarkAssemblyWithNeutralResourcesLanguageAttribute.cs", @"Resources\SomeResources.Designer.cs", @"Resources\AnotherResources.Designer.cs").Verify();
 
         [TestMethod]
         public void MarkAssemblyWithNeutralResourcesLanguageAttribute_NoResx_HasAttribute_Compliant() =>
-            OldVerifier.VerifyNonConcurrentAnalyzer(
-                @"TestCases\MarkAssemblyWithNeutralResourcesLanguageAttribute.cs",
-                new MarkAssemblyWithNeutralResourcesLanguageAttribute());
+            builder.AddPaths("MarkAssemblyWithNeutralResourcesLanguageAttribute.cs").Verify();
 
         [TestMethod]
         public void MarkAssemblyWithNeutralResourcesLanguageAttribute_HasResx_HasInvalidAttribute_Noncompliant() =>
-            OldVerifier.VerifyNonConcurrentAnalyzer(
-                new[]
-                {
-                    @"TestCases\MarkAssemblyWithNeutralResourcesLanguageAttributeNonCompliant.Invalid.cs",
-                    @"TestCases\Resources\SomeResources.Designer.cs"
-                }, new MarkAssemblyWithNeutralResourcesLanguageAttribute());
+            builder.AddPaths("MarkAssemblyWithNeutralResourcesLanguageAttributeNonCompliant.Invalid.cs", @"Resources\SomeResources.Designer.cs").Verify();
 
         [TestMethod]
         public void MarkAssemblyWithNeutralResourcesLanguageAttribute_HasResx_NoAttribute_Noncompliant() =>
-            OldVerifier.VerifyNonConcurrentAnalyzer(
-                new[]
-                {
-                    @"TestCases\MarkAssemblyWithNeutralResourcesLanguageAttributeNonCompliant.cs",
-                    @"TestCases\Resources\SomeResources.Designer.cs"
-                }, new MarkAssemblyWithNeutralResourcesLanguageAttribute());
+            builder.AddPaths("MarkAssemblyWithNeutralResourcesLanguageAttributeNonCompliant.cs", @"Resources\SomeResources.Designer.cs").Verify();
     }
 }

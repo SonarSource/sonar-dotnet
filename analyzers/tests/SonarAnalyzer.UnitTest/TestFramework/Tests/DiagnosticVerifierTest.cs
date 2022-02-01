@@ -28,243 +28,183 @@ namespace SonarAnalyzer.UnitTest.TestFramework.Tests
     [TestClass]
     public class DiagnosticVerifierTest
     {
-        [TestMethod]
-        public void PrimaryIssueNotExpected()
-        {
-            Action action =
-                () => OldVerifier.VerifyCSharpAnalyzer(@"
-public class UnexpectedSecondary
-    {
-        public void Test(bool a, bool b)
-        {
-            // Secondary@+1
-            if (a == a)
-            { }
-        }
-    }",
-                    new BinaryOperationWithIdenticalExpressions());
+        private readonly VerifierBuilder builder = new VerifierBuilder<BinaryOperationWithIdenticalExpressions>();
 
-            action.Should().Throw<UnexpectedDiagnosticException>().WithMessage(
-                "CSharp*: Unexpected primary issue on line 7, span (6,21)-(6,22) with message 'Correct one of the identical expressions on both sides of operator '=='.'." + Environment.NewLine +
+        [TestMethod]
+        public void PrimaryIssueNotExpected() =>
+            VerifyThrows<UnexpectedDiagnosticException>(@"
+public class UnexpectedSecondary
+{
+    public void Test(bool a, bool b)
+    {
+        // Secondary@+1
+        if (a == a)
+        { }
+    }
+}",
+                "CSharp*: Unexpected primary issue on line 7, span (6,17)-(6,18) with message 'Correct one of the identical expressions on both sides of operator '=='.'." + Environment.NewLine +
                 "See output to see all actual diagnostics raised on the file");
-        }
 
         [TestMethod]
-        public void SecondaryIssueNotExpected()
-        {
-            Action action =
-                () => OldVerifier.VerifyCSharpAnalyzer(@"
+        public void SecondaryIssueNotExpected() =>
+            VerifyThrows<UnexpectedDiagnosticException>(@"
 public class UnexpectedSecondary
+{
+    public void Test(bool a, bool b)
     {
-        public void Test(bool a, bool b)
-        {
-            if (a == a) // Noncompliant
-            { }
-        }
-    }",
-                    new BinaryOperationWithIdenticalExpressions());
-
-            action.Should().Throw<UnexpectedDiagnosticException>().WithMessage(
-                "CSharp*: Unexpected secondary issue on line 6, span (5,16)-(5,17) with message ''." + Environment.NewLine +
+        if (a == a) // Noncompliant
+        { }
+    }
+}",
+                "CSharp*: Unexpected secondary issue on line 6, span (5,12)-(5,13) with message ''." + Environment.NewLine +
                 "See output to see all actual diagnostics raised on the file");
-        }
 
         [TestMethod]
-        public void UnexpectedSecondaryIssueWrongId()
-        {
-            Action action =
-                () => OldVerifier.VerifyCSharpAnalyzer(@"
+        public void UnexpectedSecondaryIssueWrongId() =>
+            VerifyThrows<UnexpectedDiagnosticException>(@"
 public class UnexpectedSecondary
+{
+    public void Test(bool a, bool b)
     {
-        public void Test(bool a, bool b)
-        {
-            // Secondary@+1 [myWrongId]
-            if (a == a) // Noncompliant [myId]
-            { }
-        }
-    }",
-                    new BinaryOperationWithIdenticalExpressions());
-
-            action.Should().Throw<UnexpectedDiagnosticException>().WithMessage(
-                "CSharp*: Unexpected secondary issue [myId] on line 7, span (6,16)-(6,17) with message ''." + Environment.NewLine +
+        // Secondary@+1 [myWrongId]
+        if (a == a) // Noncompliant [myId]
+        { }
+    }
+}",
+                "CSharp*: Unexpected secondary issue [myId] on line 7, span (6,12)-(6,13) with message ''." + Environment.NewLine +
                 "See output to see all actual diagnostics raised on the file");
-        }
 
         [TestMethod]
-        public void SecondaryIssueUnexpectedMessage()
-        {
-            Action action =
-                () => OldVerifier.VerifyCSharpAnalyzer(@"
+        public void SecondaryIssueUnexpectedMessage() =>
+            VerifyThrows<UnexpectedDiagnosticException>(@"
 public class UnexpectedSecondary
+{
+    public void Test(bool a, bool b)
     {
-        public void Test(bool a, bool b)
-        {
-            // Secondary@+1 {{Wrong message}}
-            if (a == a) // Noncompliant
-            { }
-        }
-    }",
-                    new BinaryOperationWithIdenticalExpressions());
-
-            action.Should().Throw<UnexpectedDiagnosticException>().WithMessage(
+        // Secondary@+1 {{Wrong message}}
+        if (a == a) // Noncompliant
+        { }
+    }
+}",
                 @"CSharp*: Expected secondary message on line 7 does not match actual message." + Environment.NewLine +
                 "Expected: 'Wrong message'" + Environment.NewLine +
                 "Actual  : ''");
-        }
 
         [TestMethod]
-        public void SecondaryIssueUnexpectedStartPosition()
-        {
-            Action action =
-                () => OldVerifier.VerifyCSharpAnalyzer(@"
+        public void SecondaryIssueUnexpectedStartPosition() =>
+            VerifyThrows<UnexpectedDiagnosticException>(@"
 public class UnexpectedSecondary
+{
+    public void Test(bool a, bool b)
     {
-        public void Test(bool a, bool b)
-        {
-            if (a == a)
-//                   ^ {{Correct one of the identical expressions on both sides of operator '=='.}}
-//            ^ Secondary@-1
-            { }
-        }
-    }",
-                    new BinaryOperationWithIdenticalExpressions());
-
-            action.Should().Throw<UnexpectedDiagnosticException>()
-                  .WithMessage("CSharp*: Expected secondary issue on line 6 to start on column 14 but got column 16.");
-        }
+        if (a == a)
+//               ^ {{Correct one of the identical expressions on both sides of operator '=='.}}
+//        ^ Secondary@-1
+        { }
+    }
+}",
+                "CSharp*: Expected secondary issue on line 6 to start on column 10 but got column 12.");
 
         [TestMethod]
-        public void SecondaryIssueUnexpectedLength()
-        {
-            Action action =
-                () => OldVerifier.VerifyCSharpAnalyzer(@"
+        public void SecondaryIssueUnexpectedLength() =>
+            VerifyThrows<UnexpectedDiagnosticException>(@"
 public class UnexpectedSecondary
+{
+    public void Test(bool a, bool b)
     {
-        public void Test(bool a, bool b)
-        {
-            if (a == a)
-//                   ^ {{Correct one of the identical expressions on both sides of operator '=='.}}
-//              ^^^^ Secondary@-1
-            { }
-        }
-    }",
-                    new BinaryOperationWithIdenticalExpressions());
-
-            action.Should().Throw<UnexpectedDiagnosticException>()
-                  .WithMessage("CSharp*: Expected secondary issue on line 6 to have a length of 4 but got a length of 1.");
-        }
+        if (a == a)
+//               ^ {{Correct one of the identical expressions on both sides of operator '=='.}}
+//          ^^^^ Secondary@-1
+        { }
+    }
+}",
+                "CSharp*: Expected secondary issue on line 6 to have a length of 4 but got a length of 1.");
 
         [TestMethod]
-        public void ValidVerification()
-        {
-            Action action =
-                () => OldVerifier.VerifyCSharpAnalyzer(@"
+        public void ValidVerification() =>
+            builder.AddSnippet(@"
 public class UnexpectedSecondary
+{
+    public void Test(bool a, bool b)
     {
-        public void Test(bool a, bool b)
-        {
-            // Secondary@+1
-            if (a == a) // Noncompliant
-            { }
-        }
-    }",
-                    new BinaryOperationWithIdenticalExpressions());
-
-            action.Should().NotThrow<UnexpectedDiagnosticException>();
-        }
+        // Secondary@+1
+        if (a == a) // Noncompliant
+        { }
+    }
+}").Invoking(x => x.Verify()).Should().NotThrow();
 
         [TestMethod]
-        public void BuildError()
-        {
-            Action action =
-                () => OldVerifier.VerifyCSharpAnalyzer(@"
+        public void BuildError() =>
+            VerifyThrows<UnexpectedDiagnosticException>(@"
 public class UnexpectedBuildError
 {",
-                    new BinaryOperationWithIdenticalExpressions());
-
-            action.Should().Throw<UnexpectedDiagnosticException>()
-                  .WithMessage("CSharp*: Unexpected build error [CS1513]: } expected on line 3");
-        }
+                "CSharp*: Unexpected build error [CS1513]: } expected on line 3");
 
         [TestMethod]
-        public void UnexpectedRemainingOpeningCurlyBrace()
-        {
-            Action action =
-                () => OldVerifier.VerifyCSharpAnalyzer(@"
+        public void UnexpectedRemainingOpeningCurlyBrace() =>
+            VerifyThrows<AssertFailedException>(@"
 public class UnexpectedRemainingCurlyBrace
+{
+    public void Test(bool a, bool b)
     {
-        public void Test(bool a, bool b)
-        {
-            if (a == a) // Noncompliant {Wrong format message}
-            { }
-        }
-    }",
-                    new BinaryOperationWithIdenticalExpressions());
-
-            action.Should().Throw<AssertFailedException>()
-                  .WithMessage("Unexpected '{' or '}' found on line: 5. Either correctly use the '{{message}}' format or remove the curly braces on the line of the expected issue");
-        }
+        if (a == a) // Noncompliant {Wrong format message}
+        { }
+    }
+}",
+                "Unexpected '{' or '}' found on line: 5. Either correctly use the '{{message}}' format or remove the curly braces on the line of the expected issue");
 
         [TestMethod]
-        public void UnexpectedRemainingClosingCurlyBrace()
-        {
-            Action action =
-                () => OldVerifier.VerifyCSharpAnalyzer(@"
+        public void UnexpectedRemainingClosingCurlyBrace() =>
+            VerifyThrows<AssertFailedException>(@"
 public class UnexpectedRemainingCurlyBrace
+{
+    public void Test(bool a, bool b)
     {
-        public void Test(bool a, bool b)
-        {
-            if (a == a) // Noncompliant (Another Wrong format message}
-            { }
-        }
-    }",
-                    new BinaryOperationWithIdenticalExpressions());
-
-            action.Should().Throw<AssertFailedException>()
-                  .WithMessage("Unexpected '{' or '}' found on line: 5. Either correctly use the '{{message}}' format or remove the curly braces on the line of the expected issue");
-        }
+        if (a == a) // Noncompliant (Another Wrong format message}
+        { }
+    }
+}",
+                "Unexpected '{' or '}' found on line: 5. Either correctly use the '{{message}}' format or remove the curly braces on the line of the expected issue");
 
         [TestMethod]
-        public void ExpectedIssuesNotRaised()
-        {
-            Action action =
-                () => OldVerifier.VerifyCSharpAnalyzer(@"
+        public void ExpectedIssuesNotRaised() =>
+            VerifyThrows<AssertFailedException>(@"
 public class ExpectedIssuesNotRaised
+{
+    public void Test(bool a, bool b) // Noncompliant [MyId0]
     {
-        public void Test(bool a, bool b) // Noncompliant [MyId0]
-        {
-            if (a == b) // Noncompliant
-            { } // Secondary [MyId1]
-        }
-    }",
-                    new BinaryOperationWithIdenticalExpressions());
-
-            action.Should().Throw<AssertFailedException>().WithMessage(
+        if (a == b) // Noncompliant
+        { } // Secondary [MyId1]
+    }
+}",
                 @"CSharp*: Issue(s) expected but not raised in file(s):" + Environment.NewLine +
                 "File: snippet1.cs" + Environment.NewLine +
                 "Line: 4, Type: primary, Id: 'MyId0'" + Environment.NewLine +
                 "Line: 6, Type: primary, Id: ''" + Environment.NewLine +
                 "Line: 7, Type: secondary, Id: 'MyId1'");
-        }
 
         [TestMethod]
-        public void ExpectedIssuesNotRaised_MultipleFiles()
-        {
-            Action action =
-                () => OldVerifier.VerifyNonConcurrentAnalyzer(new[] { @"TestCases\DiagnosticsVerifier\ExpectedIssuesNotRaised.cs", @"TestCases\DiagnosticsVerifier\ExpectedIssuesNotRaised2.cs" },
-                    new BinaryOperationWithIdenticalExpressions());
+        public void ExpectedIssuesNotRaised_MultipleFiles() =>
+            builder.WithBasePath("DiagnosticsVerifier")
+                .AddPaths("ExpectedIssuesNotRaised.cs", "ExpectedIssuesNotRaised2.cs")
+                .WithConcurrentAnalysis(false)
+                .Invoking(x => x.Verify())
+                .Should().Throw<AssertFailedException>().WithMessage(
+                    @"CSharp*: Issue(s) expected but not raised in file(s):" + Environment.NewLine +
+                    "File: ExpectedIssuesNotRaised.cs" + Environment.NewLine +
+                    "Line: 3, Type: primary, Id: 'MyId0'" + Environment.NewLine +
+                    "Line: 5, Type: primary, Id: ''" + Environment.NewLine +
+                    "Line: 6, Type: secondary, Id: 'MyId1'" + Environment.NewLine +
+                    Environment.NewLine +
+                    "File: ExpectedIssuesNotRaised2.cs" + Environment.NewLine +
+                    "Line: 3, Type: primary, Id: 'MyId0'" + Environment.NewLine +
+                    "Line: 5, Type: primary, Id: ''" + Environment.NewLine +
+                    "Line: 6, Type: secondary, Id: 'MyId1'");
 
-            action.Should().Throw<AssertFailedException>().WithMessage(
-                @"CSharp*: Issue(s) expected but not raised in file(s):" + Environment.NewLine +
-                "File: ExpectedIssuesNotRaised.cs" + Environment.NewLine +
-                "Line: 3, Type: primary, Id: 'MyId0'" + Environment.NewLine +
-                "Line: 5, Type: primary, Id: ''" + Environment.NewLine +
-                "Line: 6, Type: secondary, Id: 'MyId1'" + Environment.NewLine +
-                Environment.NewLine +
-                "File: ExpectedIssuesNotRaised2.cs" + Environment.NewLine +
-                "Line: 3, Type: primary, Id: 'MyId0'" + Environment.NewLine +
-                "Line: 5, Type: primary, Id: ''" + Environment.NewLine +
-                "Line: 6, Type: secondary, Id: 'MyId1'");
-        }
+        private void VerifyThrows<TException>(string snippet, string expectedMessage) where TException : Exception =>
+            builder.AddSnippet(snippet)
+                .WithConcurrentAnalysis(false)
+                .Invoking(x => x.Verify())
+                .Should().Throw<TException>().WithMessage(expectedMessage);
     }
 }

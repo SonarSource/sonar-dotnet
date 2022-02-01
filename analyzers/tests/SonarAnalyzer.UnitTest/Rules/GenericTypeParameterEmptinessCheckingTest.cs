@@ -28,28 +28,25 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class GenericTypeParameterEmptinessCheckingTest
     {
+        private readonly VerifierBuilder builder = new VerifierBuilder<GenericTypeParameterEmptinessChecking>().AddReferences(MetadataReferenceFacade.SystemCollections);
+
         [TestMethod]
         public void GenericTypeParameterEmptinessChecking() =>
-            OldVerifier.VerifyAnalyzer(
-                @"TestCases\GenericTypeParameterEmptinessChecking.cs",
-                new GenericTypeParameterEmptinessChecking(),
-                CompilationErrorBehavior.Ignore,
-                MetadataReferenceFacade.SystemCollections);
+            builder.AddPaths("GenericTypeParameterEmptinessChecking.cs").WithErrorBehavior(CompilationErrorBehavior.Ignore).Verify();
 
 #if NET
+
         [TestMethod]
         public void GenericTypeParameterEmptinessChecking_CSharp9() =>
-            OldVerifier.VerifyAnalyzerFromCSharp9Console(
-                @"TestCases\GenericTypeParameterEmptinessChecking.CSharp9.cs",
-                new GenericTypeParameterEmptinessChecking(),
-                MetadataReferenceFacade.SystemCollections);
+            builder.AddPaths("GenericTypeParameterEmptinessChecking.CSharp9.cs").WithTopLevelStatements().Verify();
+
 #endif
 
         [TestMethod]
         public void GenericTypeParameterEmptinessChecking_CodeFix() =>
-            OldVerifier.VerifyCodeFix<GenericTypeParameterEmptinessCheckingCodeFix>(
-                @"TestCases\GenericTypeParameterEmptinessChecking.cs",
-                @"TestCases\GenericTypeParameterEmptinessChecking.Fixed.cs",
-                new GenericTypeParameterEmptinessChecking());
+            builder.AddPaths("GenericTypeParameterEmptinessChecking.cs")
+                .WithCodeFix<GenericTypeParameterEmptinessCheckingCodeFix>()
+                .WithCodeFixedPath("GenericTypeParameterEmptinessChecking.Fixed.cs")
+                .VerifyCodeFix();
     }
 }

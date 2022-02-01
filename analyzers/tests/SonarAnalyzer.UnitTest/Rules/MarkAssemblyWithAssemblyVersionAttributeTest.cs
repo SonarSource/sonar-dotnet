@@ -57,24 +57,20 @@ namespace SonarAnalyzer.UnitTest.Rules
                 .Verify();
 
         [TestMethod]
-        public void MarkAssemblyWithAssemblyVersionAttributeNoncompliant_CS()
-        {
-            Action action = () => builderCS.AddPaths("MarkAssemblyWithAssemblyVersionAttributeNoncompliant.cs").WithConcurrentAnalysis(false).Verify();
-            action.Should().Throw<UnexpectedDiagnosticException>().WithMessage("*Provide an 'AssemblyVersion' attribute for assembly 'project0'.*");
-        }
+        public void MarkAssemblyWithAssemblyVersionAttributeNoncompliant_CS() =>
+            builderCS.AddPaths("MarkAssemblyWithAssemblyVersionAttributeNoncompliant.cs")
+                .WithConcurrentAnalysis(false)
+                .Invoking(x => x.Verify())
+                .Should().Throw<UnexpectedDiagnosticException>().WithMessage("*Provide an 'AssemblyVersion' attribute for assembly 'project0'.*");
 
         [TestMethod]
-        public void MarkAssemblyWithAssemblyVersionAttributeNoncompliant_NoTargets_ShouldNotRaise_CS()
-        {
-            Action action = () => builderCS
-                                  .AddPaths("MarkAssemblyWithAssemblyVersionAttributeNoncompliant.cs")
-                                  .WithConcurrentAnalysis(false)
-                                  .AddReferences(NuGetMetadataReference.MicrosoftBuildNoTargets())
-                                  .Verify();
-
-            // False positive. No assembly gets generated when Microsoft.Build.NoTargets is referenced.
-            action.Should().Throw<UnexpectedDiagnosticException>().WithMessage("*Provide an 'AssemblyVersion' attribute for assembly 'project0'.*");
-        }
+        public void MarkAssemblyWithAssemblyVersionAttributeNoncompliant_NoTargets_ShouldNotRaise_CS() =>
+            builderCS.AddPaths("MarkAssemblyWithAssemblyVersionAttributeNoncompliant.cs")
+                .AddReferences(NuGetMetadataReference.MicrosoftBuildNoTargets())
+                .WithConcurrentAnalysis(false)
+                .Invoking(x => x.Verify())
+                // False positive. No assembly gets generated when Microsoft.Build.NoTargets is referenced.
+                .Should().Throw<UnexpectedDiagnosticException>().WithMessage("*Provide an 'AssemblyVersion' attribute for assembly 'project0'.*");
 
         [TestMethod]
         public void MarkAssemblyWithAssemblyVersionAttribute_VB() =>
@@ -97,24 +93,20 @@ namespace SonarAnalyzer.UnitTest.Rules
                 .Verify();
 
         [TestMethod]
-        public void MarkAssemblyWithAssemblyVersionAttributeNoncompliant_VB()
-        {
-            Action action = () => builderVB.AddPaths("MarkAssemblyWithAssemblyVersionAttributeNoncompliant.vb").WithConcurrentAnalysis(false).Verify();
-            action.Should().Throw<UnexpectedDiagnosticException>().WithMessage("*Provide an 'AssemblyVersion' attribute for assembly 'project0'.*");
-        }
+        public void MarkAssemblyWithAssemblyVersionAttributeNoncompliant_VB() =>
+            builderVB.AddPaths("MarkAssemblyWithAssemblyVersionAttributeNoncompliant.vb")
+                .WithConcurrentAnalysis(false)
+                .Invoking(x => x.Verify())
+                .Should().Throw<UnexpectedDiagnosticException>().WithMessage("*Provide an 'AssemblyVersion' attribute for assembly 'project0'.*");
 
         [TestMethod]
-        public void MarkAssemblyWithAssemblyVersionAttributeNoncompliant_NoTargets_ShouldNotRaise_VB()
-        {
-            Action action = () => builderVB
-                                  .AddPaths("MarkAssemblyWithAssemblyVersionAttributeNoncompliant.vb")
-                                  .WithConcurrentAnalysis(false)
-                                  .AddReferences(GetAspNetCoreRazorReferences())
-                                  .Verify();
-
-            // False positive. No assembly gets generated when Microsoft.Build.NoTargets is referenced.
-            action.Should().Throw<UnexpectedDiagnosticException>().WithMessage("*Provide an 'AssemblyVersion' attribute for assembly 'project0'.*");
-        }
+        public void MarkAssemblyWithAssemblyVersionAttributeNoncompliant_NoTargets_ShouldNotRaise_VB() =>
+            builderVB.AddPaths("MarkAssemblyWithAssemblyVersionAttributeNoncompliant.vb")
+                .AddReferences(NuGetMetadataReference.MicrosoftBuildNoTargets())
+                .WithConcurrentAnalysis(false)
+                .Invoking(x => x.Verify())
+                // False positive. No assembly gets generated when Microsoft.Build.NoTargets is referenced.
+                .Should().Throw<UnexpectedDiagnosticException>().WithMessage("*Provide an 'AssemblyVersion' attribute for assembly 'project0'.*");
 
         private static IEnumerable<MetadataReference> GetAspNetCoreRazorReferences() =>
             NuGetMetadataReference.MicrosoftAspNetCoreMvcRazorRuntime(Constants.NuGetLatestVersion);
