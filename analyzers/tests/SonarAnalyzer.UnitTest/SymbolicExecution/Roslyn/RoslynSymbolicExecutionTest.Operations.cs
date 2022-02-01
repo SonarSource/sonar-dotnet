@@ -84,9 +84,43 @@ namespace SonarAnalyzer.UnitTest.SymbolicExecution.Roslyn
             validator.ValidateTag("B", x => x.HasConstraint(DummyConstraint.Dummy).Should().BeTrue());
         }
 
+        [TestMethod]
+        public void SimpleAssignment_ToLocalField_FromTrackedSymbol_CS()
+        {
+            var validator = SETestContext.CreateCS(@"field = 42; Tag(""Target"", this.field);", new LiteralDummyTestCheck()).Validator;
+            validator.Validate("Literal: 42", x => x.State[x.Operation].HasConstraint(DummyConstraint.Dummy).Should().BeTrue("it's scaffolded"));
+            validator.Validate("SimpleAssignment: field = 42", x => x.State[x.Operation].HasConstraint(DummyConstraint.Dummy).Should().BeTrue());
+            validator.ValidateTag("Target", x => x.HasConstraint(DummyConstraint.Dummy).Should().BeTrue());
+        }
+
+        [TestMethod]
+        public void SimpleAssignment_ToStaticLocalField_FromTrackedSymbol_CS()
+        {
+            var validator = SETestContext.CreateCS(@"StaticField = 42; Tag(""Target"", StaticField);", new LiteralDummyTestCheck()).Validator;
+            validator.Validate("Literal: 42", x => x.State[x.Operation].HasConstraint(DummyConstraint.Dummy).Should().BeTrue("it's scaffolded"));
+            validator.Validate("SimpleAssignment: StaticField = 42", x => x.State[x.Operation].HasConstraint(DummyConstraint.Dummy).Should().BeTrue());
+            validator.ValidateTag("Target", x => x.HasConstraint(DummyConstraint.Dummy).Should().BeTrue());
+        }
+
+        [TestMethod]
+        public void SimpleAssignment_ToStaticLocalFieldOnThis_FromTrackedSymbol_CS()
+        {
+            var validator = SETestContext.CreateCS(@"this.field = 42; Tag(""Target"", this.field);", new LiteralDummyTestCheck()).Validator;
+            validator.Validate("Literal: 42", x => x.State[x.Operation].HasConstraint(DummyConstraint.Dummy).Should().BeTrue("it's scaffolded"));
+            validator.Validate("SimpleAssignment: this.field = 42", x => x.State[x.Operation].HasConstraint(DummyConstraint.Dummy).Should().BeTrue());
+            validator.ValidateTag("Target", x => x.HasConstraint(DummyConstraint.Dummy).Should().BeTrue());
+        }
+
+        [TestMethod]
+        public void SimpleAssignment_ToStaticObjectFieldOnClass_FromTrackedSymbol_CS()
+        {
+            var validator = SETestContext.CreateCS(@"Sample.StaticField = 42; Tag(""Target"", Sample.StaticField);", new LiteralDummyTestCheck()).Validator;
+            validator.Validate("Literal: 42", x => x.State[x.Operation].HasConstraint(DummyConstraint.Dummy).Should().BeTrue("it's scaffolded"));
+            validator.Validate("SimpleAssignment: Sample.StaticField = 42", x => x.State[x.Operation].HasConstraint(DummyConstraint.Dummy).Should().BeTrue());
+            validator.ValidateTag("Target", x => x.HasConstraint(DummyConstraint.Dummy).Should().BeTrue());
+        }
+
         [DataTestMethod]
-        [DataRow(@"Sample.StaticField = 42; Tag(""Target"", Sample.StaticField);")]
-        [DataRow(@"StaticField = 42; Tag(""Target"", StaticField);")]
         [DataRow(@"Sample.StaticProperty = 42; Tag(""Target"", Sample.StaticProperty);")]
         [DataRow(@"StaticProperty = 42; Tag(""Target"", StaticProperty);")]
         [DataRow(@"var arr = new byte[] { 13 }; arr[0] = 42; Tag(""Target"", arr[0]);")]
@@ -94,11 +128,9 @@ namespace SonarAnalyzer.UnitTest.SymbolicExecution.Roslyn
         [DataRow(@"var other = new Sample(); other.Property = 42; Tag(""Target"", other.Property);")]
         [DataRow(@"this.Property = 42; Tag(""Target"", this.Property);")]
         [DataRow(@"Property = 42; Tag(""Target"", Property);")]
-        [DataRow(@"this.field = 42; Tag(""Target"", this.field);")]
-        [DataRow(@"field = 42; Tag(""Target"", this.field);")]
-        public void SimpleAssignment_ToUnsupported_FromLiteral(string snipet)
+        public void SimpleAssignment_ToUnsupported_FromLiteral(string snippet)
         {
-            var validator = SETestContext.CreateCS(snipet, new LiteralDummyTestCheck()).Validator;
+            var validator = SETestContext.CreateCS(snippet, new LiteralDummyTestCheck()).Validator;
             validator.Validate("Literal: 42", x => x.State[x.Operation].HasConstraint(DummyConstraint.Dummy).Should().BeTrue("it's scaffolded"));
             validator.ValidateTag("Target", x => (x?.HasConstraint(DummyConstraint.Dummy) ?? false).Should().BeFalse());
         }

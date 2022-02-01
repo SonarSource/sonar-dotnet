@@ -61,11 +61,9 @@ namespace SonarAnalyzer.Extensions
             return wrapper.Instance;
         }
 
-        public static OperationExecutionOrder ToExecutionOrder(this IEnumerable<IOperation> operations) =>
-            new OperationExecutionOrder(operations, false);
+        public static OperationExecutionOrder ToExecutionOrder(this IEnumerable<IOperation> operations) => new(operations, false);
 
-        public static OperationExecutionOrder ToReversedExecutionOrder(this IEnumerable<IOperation> operations) =>
-            new OperationExecutionOrder(operations, true);
+        public static OperationExecutionOrder ToReversedExecutionOrder(this IEnumerable<IOperation> operations) => new(operations, true);
 
         public static string Serialize(this IOperation operation) =>
             $"{OperationPrefix(operation)}{OperationSuffix(operation)} / {operation.Syntax.GetType().Name}: {operation.Syntax}";

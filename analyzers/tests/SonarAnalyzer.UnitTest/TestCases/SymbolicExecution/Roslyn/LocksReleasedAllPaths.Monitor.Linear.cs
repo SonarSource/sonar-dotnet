@@ -126,7 +126,7 @@ class Program
     {
         Monitor.Exit(obj);
         Console.WriteLine(arg.Length);
-        Monitor.Enter(obj); // FN
+        Monitor.Enter(obj); // Noncompliant {{Unlock this lock along all executions paths of this method.}}
     }
 
     public void Method13_LocalVar(string arg)
