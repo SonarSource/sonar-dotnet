@@ -26,9 +26,9 @@ using SonarAnalyzer.Helpers;
 
 namespace SonarAnalyzer.SymbolicExecution.Roslyn
 {
-    public class SymbolicValue
+    public class SymbolicValue : IEquatable<SymbolicValue>
     {
-        private readonly int identifier;
+        private readonly int identifier;    // This is debug information that is intentionally excluded from GetHashCode and Equals
         private readonly Lazy<Dictionary<Type, SymbolicConstraint>> constraints = new(() => new());  // SymbolicValue can have only one constraint instance of specific type at a time
 
         public SymbolicValue(SymbolicValueCounter counter) =>
@@ -61,5 +61,15 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
 
         public bool HasConstraint(SymbolicConstraint constraint) =>
             constraints.Value.TryGetValue(constraint.GetType(), out var current) && constraint == current;
+
+        public override int GetHashCode() => 0; // We can't calculate stable hash code. This class is not supposed to be used as a key in sets and dictionaries.
+
+        public override bool Equals(object obj) =>
+            Equals(obj as SymbolicValue);
+
+        public virtual bool Equals(SymbolicValue other) =>
+            other is not null
+            && other.constraints.IsValueCreated == constraints.IsValueCreated
+            && (!constraints.IsValueCreated || other.constraints.Value.DictionaryEquals(constraints.Value));
     }
 }

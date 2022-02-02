@@ -16,7 +16,7 @@ class Program
             false => other,
         };
 
-        Monitor.Enter(lockObj); // FN
+        Monitor.Enter(lockObj); // Noncompliant
         if (condition)
         {
             Monitor.Exit(lockObj);

@@ -68,7 +68,7 @@ class Program
     public void Method6(string arg)
     {
         var localObj = obj;
-        Monitor.Enter(localObj); // FN
+        Monitor.Enter(localObj); // Noncompliant
         Console.WriteLine(arg.Length);
         if (condition)
         {

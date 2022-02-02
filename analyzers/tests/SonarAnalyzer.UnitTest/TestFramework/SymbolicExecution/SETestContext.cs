@@ -18,7 +18,9 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System;
 using System.Linq;
+using SonarAnalyzer.CFG;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.SymbolicExecution.Roslyn;
 
@@ -32,6 +34,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework.SymbolicExecution
         {
             var cfg = TestHelper.CompileCfg(code, language);
             var se = new RoslynSymbolicExecution(cfg, additionalChecks.Concat(new[] { Validator }).ToArray());
+            Console.WriteLine(CfgSerializer.Serialize(cfg));
             se.Execute();
         }
 

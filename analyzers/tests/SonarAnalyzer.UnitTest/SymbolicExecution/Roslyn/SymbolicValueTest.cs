@@ -122,5 +122,50 @@ namespace SonarAnalyzer.UnitTest.SymbolicExecution.Roslyn
             sut.HasConstraint(TestConstraint.First).Should().BeTrue();
             sut.HasConstraint(TestConstraint.Second).Should().BeFalse();
         }
+
+        [TestMethod]
+        public void GetHashCode_AlwaysZero()
+        {
+            var counter = new SymbolicValueCounter();
+            new SymbolicValue(counter).GetHashCode().Should().Be(0);
+            new SymbolicValue(counter).GetHashCode().Should().Be(0);
+            var sut = new SymbolicValue(counter);
+            sut.SetConstraint(TestConstraint.First);
+            sut.GetHashCode().Should().Be(0);
+            sut.SetConstraint(BoolConstraint.True);
+            sut.GetHashCode().Should().Be(0);
+        }
+
+        [TestMethod]
+        public void Equals_ReturnsTrueForSameConstraints()
+        {
+            var counter = new SymbolicValueCounter();
+            var basicSingle = new SymbolicValue(counter);
+            var sameSingle = new SymbolicValue(counter);
+            var basicMore = new SymbolicValue(counter);
+            var sameMore = new SymbolicValue(counter);
+            var differentConstraintValue = new SymbolicValue(counter);
+            var differentConstraintType = new SymbolicValue(counter);
+            basicSingle.SetConstraint(TestConstraint.First);
+            sameSingle.SetConstraint(TestConstraint.First);
+            basicMore.SetConstraint(TestConstraint.First);
+            basicMore.SetConstraint(BoolConstraint.True);
+            sameMore.SetConstraint(TestConstraint.First);
+            sameMore.SetConstraint(BoolConstraint.True);
+            differentConstraintValue.SetConstraint(TestConstraint.Second);
+            differentConstraintType.SetConstraint(BoolConstraint.True);
+
+            basicSingle.Equals(basicSingle).Should().BeTrue();
+            basicSingle.Equals(sameSingle).Should().BeTrue();
+            basicMore.Equals(basicMore).Should().BeTrue();
+            basicMore.Equals(sameMore).Should().BeTrue();
+
+            basicSingle.Equals(basicMore).Should().BeFalse();
+            basicSingle.Equals(differentConstraintValue).Should().BeFalse();
+            basicSingle.Equals(differentConstraintType).Should().BeFalse();
+            basicSingle.Equals("different type").Should().BeFalse();
+            basicSingle.Equals((object)null).Should().BeFalse();
+            basicSingle.Equals((SymbolicValue)null).Should().BeFalse();     // Explicit cast to ensure correct overload
+        }
     }
 }

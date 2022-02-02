@@ -59,6 +59,9 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
         public IEnumerable<ISymbol> SymbolsWith(SymbolicConstraint constraint) =>
             SymbolValue.Where(x => x.Value != null && x.Value.HasConstraint(constraint)).Select(x => x.Key);
 
+        public ProgramState ResetOperations() =>
+            this with { OperationValue = ImmutableDictionary<IOperation, SymbolicValue>.Empty };
+
         public override int GetHashCode() =>
             HashCode.Combine(
                 HashCode.DictionaryContentHash(OperationValue),

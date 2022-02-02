@@ -19,6 +19,7 @@
  */
 
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using FluentAssertions;
 using Microsoft.CodeAnalysis;
@@ -61,13 +62,11 @@ else
 Tag(""End"");";
             SETestContext.CreateCS(code).Validator.ValidateTagOrder(
                 "Entry",
-                "BeforeTry",
-                "InTry",
-                "InCatch",
-                "InFinally",
-                "AfterFinally",
-                "Else",
-                "End");
+                "BeforeTry",        // Dequeue for "if" branch
+                "Else",             // Dequeue for "else" branch
+                "InTry",            // Dequeue after "if" branch
+                "End",              // Dequeue after "else" branch, reaching exit block
+                "AfterFinally");    // Dequeue after "if" branch
         }
 
         [TestMethod]
@@ -91,10 +90,8 @@ Tag(""End"")";
             SETestContext.CreateVB(code).Validator.ValidateTagOrder(
                 "Entry",
                 "BeforeTry",
-                "InTry",
-                "InFinally",
-                "AfterFinally",
                 "Else",
+                "AfterFinally",
                 "End");
         }
 
@@ -166,13 +163,8 @@ public int Method(bool a)
     else
         return 2;
 }";
-            var returnNotReached = new PreProcessTestCheck(x =>
-            {
-               x.Operation.Instance.Kind.Should().NotBe(OperationKind.Literal, "we don't support multiple branches yet");
-               return x.State;
-            });
-            var validator = SETestContext.CreateCSMethod(method, returnNotReached).Validator;
-            validator.ValidateExitReachCount(1);
+            var validator = SETestContext.CreateCSMethod(method).Validator;
+            validator.ValidateExitReachCount(1);    // Exit is reached only once, becase it is reached with the same state
             validator.ValidateExecutionCompleted();
         }
 
@@ -204,8 +196,78 @@ public System.Collections.Generic.IEnumerable<int> Method(bool a)
     var b = a;
 }";
             var validator = SETestContext.CreateCSMethod(method).Validator;
-            validator.ValidateExitReachCount(1);
+            validator.ValidateExitReachCount(2);
             validator.ValidateExecutionCompleted();
+        }
+
+        [TestMethod]
+        public void Branching_ConstraintTrackedSeparatelyInBranches()
+        {
+            const string code = @"
+bool value;
+if (boolParameter)
+{
+    value = true;
+}
+else
+{
+    value = false;
+}
+Tag(""End"", value);";
+            var validator = SETestContext.CreateCS(code, new BoolTestCheck()).Validator;
+            validator.ValidateExitReachCount(2);    // Once with True constraint, once with False constraint on "value"
+            var values = validator.TagValues("End");
+            values.Should().HaveCount(2)
+                .And.ContainSingle(x => x.HasConstraint(BoolConstraint.True))
+                .And.ContainSingle(x => x.HasConstraint(BoolConstraint.False));
+        }
+
+        [TestMethod]
+        public void Branching_VisitedProgramState_IsSkipped()
+        {
+            const string code = @"
+bool value;
+if (boolParameter)
+{
+    value = true;
+}
+else
+{
+    value = true;
+}
+Tag(""End"", value);";
+            var validator = SETestContext.CreateCS(code, new BoolTestCheck()).Validator;
+            validator.ValidateExitReachCount(1);
+            var values = validator.TagValues("End");
+            values.Should().HaveCount(1).And.ContainSingle(x => x.HasConstraint(BoolConstraint.True));
+        }
+
+        [TestMethod]
+        public void Branching_VisitedProgramState_IsImmutable()
+        {
+            const string code = @"
+bool value;
+if (boolParameter)
+{
+    value = true;
+}
+else
+{
+    value = false;
+}
+Tag(""End"", value);";
+            var captured = new List<(SymbolicValue Value, bool ExpectedHasTrueConstraint)>();
+            var postProcess = new PostProcessTestCheck(x =>
+            {
+                if (x.Operation.Instance.TrackedSymbol() is { } symbol && x.State[symbol] is { } value)
+                {
+                    captured.Add((value, value.HasConstraint(BoolConstraint.True)));
+                }
+                return x.State;
+            });
+            var validator = SETestContext.CreateCS(code, new BoolTestCheck(), postProcess).Validator;
+            validator.ValidateExitReachCount(2);
+            captured.Should().OnlyContain(x => x.Value.HasConstraint(BoolConstraint.True) == x.ExpectedHasTrueConstraint);
         }
     }
 }
