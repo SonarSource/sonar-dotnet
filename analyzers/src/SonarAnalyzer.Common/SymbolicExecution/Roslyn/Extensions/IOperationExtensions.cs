@@ -19,6 +19,7 @@
  */
 
 using Microsoft.CodeAnalysis;
+using SonarAnalyzer.Extensions;
 using StyleCop.Analyzers.Lightup;
 
 namespace SonarAnalyzer.SymbolicExecution.Roslyn
@@ -30,7 +31,10 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
             {
                 _ when IParameterReferenceOperationWrapper.IsInstance(operation) => IParameterReferenceOperationWrapper.FromOperation(operation).Parameter,
                 _ when ILocalReferenceOperationWrapper.IsInstance(operation) => ILocalReferenceOperationWrapper.FromOperation(operation).Local,
-                _ when IFieldReferenceOperationWrapper.IsInstance(operation) => IFieldReferenceOperationWrapper.FromOperation(operation).Field,
+                _ when IFieldReferenceOperationWrapper.IsInstance(operation)
+                    && IFieldReferenceOperationWrapper.FromOperation(operation) is var fieldReference
+                    && (fieldReference.Instance == null // static fields
+                        || fieldReference.Instance.IsAnyKind(OperationKindEx.InstanceReference)) => fieldReference.Field,
                 _ => null
             };
 

@@ -46,20 +46,14 @@ namespace SonarAnalyzer.UnitTest.SymbolicExecution.Roslyn
             parameterReference.TrackedSymbol().Should().Be(symbol);
         }
 
-        [TestMethod]
-        public void TrackedSymbol_FieldReference_IsFieldSymbol()
+        [DataTestMethod]
+        [DataRow(@"public class C { int a = 2; void Method() { a = 1; } }")]
+        [DataRow(@"public class C { int a = 2; void Method() { this.a = 1; } }")]
+        [DataRow(@"public class C { static int StaticField = 2; void Method() { StaticField = 1; } }")]
+        [DataRow(@"public class C { static int StaticField = 2; void Method() { C.StaticField = 1; } }")]
+        public void TrackedSymbol_FieldReference_IsFieldSymbol(string snippet)
         {
-            var graph = TestHelper.CompileCfgCS(@"public class C { int a = 2; void Method() { a = 1; } }");
-            var expressionStatement = (IExpressionStatementOperation)graph.Blocks[1].Operations[0];
-            var assignmentTarget = ((ISimpleAssignmentOperation)expressionStatement.Operation).Target;
-            var fieldReferenceSymbol = IFieldReferenceOperationWrapper.FromOperation(assignmentTarget).Field;
-            assignmentTarget.TrackedSymbol().Should().Be(fieldReferenceSymbol);
-        }
-
-        [TestMethod]
-        public void TrackedSymbol_ThisFieldReference_IsFieldSymbol()
-        {
-            var graph = TestHelper.CompileCfgCS(@"public class C { int a = 2; void Method() { this.a = 1; } }");
+            var graph = TestHelper.CompileCfgCS(snippet);
             var expressionStatement = (IExpressionStatementOperation)graph.Blocks[1].Operations[0];
             var assignmentTarget = ((ISimpleAssignmentOperation)expressionStatement.Operation).Target;
             var fieldReferenceSymbol = IFieldReferenceOperationWrapper.FromOperation(assignmentTarget).Field;

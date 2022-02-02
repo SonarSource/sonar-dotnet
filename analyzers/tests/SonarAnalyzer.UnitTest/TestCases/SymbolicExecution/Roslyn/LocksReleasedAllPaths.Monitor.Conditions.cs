@@ -306,6 +306,13 @@ class Program
         }
     }
 
+    public void SameObject_SameField(Program arg, bool condition)
+    {
+        Monitor.Enter(arg.obj); // FN, because we are not field sensitive
+        if (condition)
+            Monitor.Exit(arg.obj);
+    }
+
     public int MyProperty
     {
         set
