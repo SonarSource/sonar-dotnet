@@ -39,7 +39,7 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn.Checks
 
         // ToDo: Implement early bail-out if there's no interesting descendant node in context.Node to avoid useless SE runs
         public override bool ShouldExecute() =>
-            NodeContext.Node.DescendantNodes().OfType<IdentifierNameSyntax>().Any(x => x.Identifier.Text == "Exit");
+            NodeContext.Node.DescendantNodes().OfType<IdentifierNameSyntax>().Any(x => x.Identifier.Text.Contains("Exit"));
 
         public override ProgramState PostProcess(SymbolicContext context)
         {
@@ -54,6 +54,21 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn.Checks
                 else if (invocation.TargetMethod.Is(KnownType.System_Threading_Monitor, "Exit"))
                 {
                     return ProcessMonitorExit(context, invocation);
+                }
+                else if (invocation.TargetMethod.Is(KnownType.System_Threading_ReaderWriterLockSlim, "EnterReadLock")
+                         || invocation.TargetMethod.Is(KnownType.System_Threading_ReaderWriterLockSlim, "TryEnterReadLock")
+                         || invocation.TargetMethod.Is(KnownType.System_Threading_ReaderWriterLockSlim, "EnterWriteLock")
+                         || invocation.TargetMethod.Is(KnownType.System_Threading_ReaderWriterLockSlim, "TryEnterWriteLock")
+                         || invocation.TargetMethod.Is(KnownType.System_Threading_ReaderWriterLockSlim, "EnterUpgradeableReadLock")
+                         || invocation.TargetMethod.Is(KnownType.System_Threading_ReaderWriterLockSlim, "TryEnterUpgradeableReadLock"))
+                {
+                    return ProcessReaderWriterLockSlimEnter(context, invocation);
+                }
+                else if (invocation.TargetMethod.Is(KnownType.System_Threading_ReaderWriterLockSlim, "ExitReadLock")
+                         || invocation.TargetMethod.Is(KnownType.System_Threading_ReaderWriterLockSlim, "ExitWriteLock")
+                         || invocation.TargetMethod.Is(KnownType.System_Threading_ReaderWriterLockSlim, "ExitUpgradeableReadLock"))
+                {
+                    return ProcessReaderWriterLockSlimExit(context, invocation);
                 }
             }
             return context.State;
@@ -73,39 +88,47 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn.Checks
             }
         }
 
-        private ProgramState ProcessMonitorEnter(SymbolicContext context, IInvocationOperationWrapper invocation)
-        {
-            if (FirstArgumentSymbol(invocation) is { } symbol)
-            {
-                var state = context.State;
-                if (state[symbol] == null)
-                {
-                    state = state.SetSymbolValue(symbol, context.CreateSymbolicValue());
-                }
+        private ProgramState ProcessMonitorEnter(SymbolicContext context, IInvocationOperationWrapper invocation) =>
+            FirstArgumentSymbol(invocation) is { } symbol
+                ? ProcessAddLock(context, symbol)
+                : context.State;
 
-                state[symbol].SetConstraint(LockConstraint.Held);
-                lastSymbolLock[symbol] = context.Operation;
-                return state;
+        private ProgramState ProcessMonitorExit(SymbolicContext context, IInvocationOperationWrapper invocation) =>
+            FirstArgumentSymbol(invocation) is { } symbol
+                ? ProcessRemoveLock(context, symbol)
+                : context.State;
+
+        private ProgramState ProcessReaderWriterLockSlimEnter(SymbolicContext context, IInvocationOperationWrapper invocation) =>
+            ProcessAddLock(context, invocation.Instance.TrackedSymbol());
+
+        private ProgramState ProcessReaderWriterLockSlimExit(SymbolicContext context, IInvocationOperationWrapper invocation) =>
+            ProcessRemoveLock(context, invocation.Instance.TrackedSymbol());
+
+        private ProgramState ProcessAddLock(SymbolicContext context, ISymbol symbol)
+        {
+            var state = context.State;
+            if (state[symbol] == null)
+            {
+                state = state.SetSymbolValue(symbol, context.CreateSymbolicValue());
             }
-            return context.State;
+
+            state[symbol].SetConstraint(LockConstraint.Held);
+            lastSymbolLock[symbol] = context.Operation;
+            return state;
         }
 
-        private ProgramState ProcessMonitorExit(SymbolicContext context, IInvocationOperationWrapper invocation)
+        private ProgramState ProcessRemoveLock(SymbolicContext context, ISymbol symbol)
         {
-            if (FirstArgumentSymbol(invocation) is { } symbol)
+            var state = context.State;
+            if (state[symbol] == null)
             {
-                var state = context.State;
-                if (state[symbol] == null)
-                {
-                    // In this case the mutex has been released without being held.
-                    state = state.SetSymbolValue(symbol, context.CreateSymbolicValue());
-                }
-
-                state[symbol].SetConstraint(LockConstraint.Released);
-                releasedSymbols.Add(symbol);
-                return state;
+                // In this case the mutex has been released without being held.
+                state = state.SetSymbolValue(symbol, context.CreateSymbolicValue());
             }
-            return context.State;
+
+            state[symbol].SetConstraint(LockConstraint.Released);
+            releasedSymbols.Add(symbol);
+            return state;
         }
 
         private static ISymbol FirstArgumentSymbol(IInvocationOperationWrapper invocation) =>

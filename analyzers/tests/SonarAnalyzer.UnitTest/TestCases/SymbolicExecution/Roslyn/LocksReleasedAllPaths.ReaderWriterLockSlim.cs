@@ -165,6 +165,12 @@ class Program
         readerWriterLockSlim.ExitWriteLock();
     }
 
+    public void WrongOrder()
+    {
+        readerWriterLockSlim.ExitReadLock();
+        readerWriterLockSlim.EnterReadLock(); // Noncompliant
+    }
+
     public void Method14()
     {
         readerWriterLockSlim.EnterReadLock(); // FN, this rule doesn't care if it was released with correct API
