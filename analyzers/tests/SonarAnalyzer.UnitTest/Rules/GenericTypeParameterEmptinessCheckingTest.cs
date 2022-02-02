@@ -46,7 +46,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void GenericTypeParameterEmptinessChecking_CodeFix() =>
             builder.AddPaths("GenericTypeParameterEmptinessChecking.cs")
                 .WithCodeFix<GenericTypeParameterEmptinessCheckingCodeFix>()
-                .WithCodeFixedPath("GenericTypeParameterEmptinessChecking.Fixed.cs")
+                .WithCodeFixedPaths("GenericTypeParameterEmptinessChecking.Fixed.cs")
                 .VerifyCodeFix();
     }
 }
