@@ -31,7 +31,7 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
         public static bool HasSupportedSize(ControlFlowGraph cfg) =>
             cfg.Blocks.Length <= BlockCountMax;
 
-        public static int Hash(BasicBlock block, int index) =>
-            (int)(((uint)block.Ordinal << BitShift) + (uint)index);
+        public static int Hash(BasicBlock block, int instructionIndex) =>
+            (int)(((uint)block.Ordinal << BitShift) + (uint)instructionIndex);
     }
 }
