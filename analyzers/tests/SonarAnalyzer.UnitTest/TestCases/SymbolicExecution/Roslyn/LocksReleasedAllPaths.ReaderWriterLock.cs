@@ -165,4 +165,18 @@ class Program
         readerWriterLock.AcquireReaderLock(42); // Compliant
         readerWriterLock.ReleaseReaderLock();
     }
+
+    public void WrongOrder()
+    {
+        readerWriterLock.ReleaseReaderLock();
+        readerWriterLock.AcquireReaderLock(1); // Noncompliant
+
+        var a = new ReaderWriterLock();
+        a.ReleaseLock();
+        a.AcquireWriterLock(1); // Noncompliant
+
+        var b = new ReaderWriterLock();
+        b.ReleaseWriterLock();
+        b.AcquireWriterLock(1); // Noncompliant
+    }
 }

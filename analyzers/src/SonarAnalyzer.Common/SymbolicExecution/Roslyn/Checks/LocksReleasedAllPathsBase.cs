@@ -49,7 +49,7 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn.Checks
 
         // ToDo: Implement early bail-out if there's no interesting descendant node in context.Node to avoid useless SE runs
         public override bool ShouldExecute() =>
-            NodeContext.Node.DescendantNodes().OfType<IdentifierNameSyntax>().Any(x => x.Identifier.Text.Contains("Exit"));
+            NodeContext.Node.DescendantNodes().OfType<IdentifierNameSyntax>().Any(x => x.Identifier.Text.Contains("Exit") || x.Identifier.Text.Contains("ReleaseReaderLock"));
 
         public override ProgramState PostProcess(SymbolicContext context)
         {
@@ -64,13 +64,15 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn.Checks
                 {
                     return ProcessMonitorExit(context, invocation);
                 }
-                else if (invocation.TargetMethod.IsAny(KnownType.System_Threading_ReaderWriterLockSlim, ReaderWriterLockSlimLockMethods))
+                else if (invocation.TargetMethod.IsAny(KnownType.System_Threading_ReaderWriterLock, "AcquireReaderLock", "AcquireWriterLock")
+                         || invocation.TargetMethod.IsAny(KnownType.System_Threading_ReaderWriterLockSlim, ReaderWriterLockSlimLockMethods))
                 {
-                    return ProcessReaderWriterLockSlimEnter(context, invocation);
+                    return ProcessInvocationInstanceAcquireLock(context, invocation);
                 }
-                else if (invocation.TargetMethod.IsAny(KnownType.System_Threading_ReaderWriterLockSlim, "ExitReadLock", "ExitWriteLock", "ExitUpgradeableReadLock"))
+                else if (invocation.TargetMethod.IsAny(KnownType.System_Threading_ReaderWriterLock, "ReleaseLock", "ReleaseReaderLock", "ReleaseWriterLock")
+                         || invocation.TargetMethod.IsAny(KnownType.System_Threading_ReaderWriterLockSlim, "ExitReadLock", "ExitWriteLock", "ExitUpgradeableReadLock"))
                 {
-                    return ProcessReaderWriterLockSlimExit(context, invocation);
+                    return ProcessInvocationInstanceReleaseLock(context, invocation);
                 }
             }
             return context.State;
@@ -100,10 +102,10 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn.Checks
                 ? RemoveLock(context, symbol)
                 : context.State;
 
-        private ProgramState ProcessReaderWriterLockSlimEnter(SymbolicContext context, IInvocationOperationWrapper invocation) =>
+        private ProgramState ProcessInvocationInstanceAcquireLock(SymbolicContext context, IInvocationOperationWrapper invocation) =>
             AddLock(context, invocation.Instance.TrackedSymbol());
 
-        private ProgramState ProcessReaderWriterLockSlimExit(SymbolicContext context, IInvocationOperationWrapper invocation) =>
+        private ProgramState ProcessInvocationInstanceReleaseLock(SymbolicContext context, IInvocationOperationWrapper invocation) =>
             RemoveLock(context, invocation.Instance.TrackedSymbol());
 
         private ProgramState AddLock(SymbolicContext context, ISymbol symbol)
