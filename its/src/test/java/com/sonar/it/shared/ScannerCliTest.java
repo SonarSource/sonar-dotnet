@@ -42,7 +42,7 @@ public class ScannerCliTest {
 
   @ClassRule
   public static final Orchestrator ORCHESTRATOR = Orchestrator.builderEnv()
-    .setSonarVersion(TestUtils.replaceLtsVersion(System.getProperty("sonar.runtimeVersion", "LATEST_RELEASE")))
+    .setSonarVersion(TestUtils.replaceLtsVersion(System.getProperty("sonar.runtimeVersion", "DEV")))
     .addPlugin(TestUtils.getPluginLocation("sonar-csharp-plugin"))
     .addPlugin(TestUtils.getPluginLocation("sonar-vbnet-plugin"))
     // Fixed version for the HTML plugin as we don't want to have failures in case of changes there.

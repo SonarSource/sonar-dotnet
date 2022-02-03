@@ -218,7 +218,7 @@ public class TestUtils {
   // The term "latest" refers to the highest version number, not the most recently published version.
   public static String replaceLtsVersion(String version) {
     if (version != null && version.equals("LTS")) {
-      return "LATEST_RELEASE[7.9]";
+      return "LATEST_RELEASE[8.9]";
     }
     return version;
   }
