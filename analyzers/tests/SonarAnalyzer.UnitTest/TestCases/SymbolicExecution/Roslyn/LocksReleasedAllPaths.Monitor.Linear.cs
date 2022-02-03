@@ -137,14 +137,14 @@ class Program
         Monitor.Enter(this.obj); // Noncompliant {{Unlock this lock along all executions paths of this method.}}
     }
 
-    public void FieldReference_WithThis_Asimetric1(string arg)
+    public void FieldReference_WithThis_Mixed1(string arg)
     {
         Monitor.Exit(obj);
         Console.WriteLine(arg.Length);
         Monitor.Enter(this.obj); // Noncompliant {{Unlock this lock along all executions paths of this method.}}
     }
 
-    public void FieldReference_WithThis_Asimetric2(string arg)
+    public void FieldReference_WithThis_Mixed2(string arg)
     {
         Monitor.Exit(this.obj);
         Console.WriteLine(arg.Length);

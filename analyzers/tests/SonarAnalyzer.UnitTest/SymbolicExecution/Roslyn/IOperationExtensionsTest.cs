@@ -47,13 +47,14 @@ namespace SonarAnalyzer.UnitTest.SymbolicExecution.Roslyn
         }
 
         [DataTestMethod]
-        [DataRow(@"public class C { int a = 2; void Method() { a = 1; } }")]
-        [DataRow(@"public class C { int a = 2; void Method() { this.a = 1; } }")]
-        [DataRow(@"public class C { static int StaticField = 2; void Method() { StaticField = 1; } }")]
-        [DataRow(@"public class C { static int StaticField = 2; void Method() { C.StaticField = 1; } }")]
-        public void TrackedSymbol_FieldReference_IsFieldSymbol(string snippet)
+        [DataRow(@"field = 1")]
+        [DataRow(@"this.field = 1")]
+        [DataRow(@"StaticField = 1")]
+        [DataRow(@"C.StaticField = 1")]
+        public void TrackedSymbol_FieldReference_IsFieldSymbol(string assignment)
         {
-            var graph = TestHelper.CompileCfgCS(snippet);
+            var code = $"public class C {{ int field; static int StaticField; void Method() {{ {assignment}; }} }}";
+            var graph = TestHelper.CompileCfgCS(code);
             var expressionStatement = (IExpressionStatementOperation)graph.Blocks[1].Operations[0];
             var assignmentTarget = ((ISimpleAssignmentOperation)expressionStatement.Operation).Target;
             var fieldReferenceSymbol = IFieldReferenceOperationWrapper.FromOperation(assignmentTarget).Field;

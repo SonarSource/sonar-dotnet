@@ -33,8 +33,7 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
                 _ when ILocalReferenceOperationWrapper.IsInstance(operation) => ILocalReferenceOperationWrapper.FromOperation(operation).Local,
                 _ when IFieldReferenceOperationWrapper.IsInstance(operation)
                     && IFieldReferenceOperationWrapper.FromOperation(operation) is var fieldReference
-                    && (fieldReference.Instance == null // static fields
-                        || fieldReference.Instance.IsAnyKind(OperationKindEx.InstanceReference)) => fieldReference.Field,
+                    && IsStaticOrThis(fieldReference.Instance) => fieldReference.Field,
                 _ => null
             };
 
@@ -42,5 +41,9 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
             operation.Kind == OperationKindEx.Invocation
                 ? IInvocationOperationWrapper.FromOperation(operation)
                 : null;
+
+        private static bool IsStaticOrThis(IOperation operation) =>
+            operation == null // static fields
+            || operation.IsAnyKind(OperationKindEx.InstanceReference);
     }
 }
