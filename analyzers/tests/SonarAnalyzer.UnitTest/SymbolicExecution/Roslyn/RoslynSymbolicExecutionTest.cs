@@ -19,11 +19,13 @@
  */
 
 using System;
+using System.Linq;
 using FluentAssertions;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Operations;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
+using SonarAnalyzer.Helpers;
 using SonarAnalyzer.SymbolicExecution.Constraints;
 using SonarAnalyzer.SymbolicExecution.Roslyn;
 using SonarAnalyzer.UnitTest.TestFramework.SymbolicExecution;
@@ -161,6 +163,14 @@ namespace SonarAnalyzer.UnitTest.SymbolicExecution.Roslyn
 
             static ISymbol LocalReferenceOperationSymbol(IOperationWrapperSonar operation) =>
                 ((ILocalReferenceOperation)operation.Instance).Local;
+        }
+
+        [TestMethod]
+        public void Execute_TooManyBlocks_NotSupported()
+        {
+            var validator = SETestContext.CreateCS($"var a = true{Enumerable.Repeat(" && true", 1020).JoinStr(null)};").Validator;
+            validator.ValidateExitReachCount(0);
+            validator.ValidateExecutionNotCompleted();
         }
     }
 }

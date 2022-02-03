@@ -22,14 +22,16 @@ using System;
 using System.Linq;
 using SonarAnalyzer.CFG.Roslyn;
 using SonarAnalyzer.Extensions;
+using SonarAnalyzer.Helpers;
 using StyleCop.Analyzers.Lightup;
 
 namespace SonarAnalyzer.SymbolicExecution.Roslyn
 {
-    internal sealed class ExplodedNode
+    internal sealed class ExplodedNode : IEquatable<ExplodedNode>
     {
         private readonly IOperationWrapperSonar[] operations;
         private readonly int index;
+        private readonly int programPointHash;
 
         public ProgramState State { get; }
         public BasicBlock Block { get; }
@@ -38,15 +40,27 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
         public ExplodedNode(BasicBlock block, ProgramState state)
             : this(block, block.OperationsAndBranchValue.ToExecutionOrder().ToArray(), 0, state) { }
 
-        public ExplodedNode CreateNext(ProgramState state) =>
-            new(Block, operations, index + 1, state);
-
         private ExplodedNode(BasicBlock block, IOperationWrapperSonar[] operations, int index, ProgramState state)
         {
             Block = block;
             State = state ?? throw new ArgumentNullException(nameof(state));
             this.operations = operations;
             this.index = index;
+            programPointHash = ProgramPoint.Hash(block, index);
         }
+
+        public ExplodedNode CreateNext(ProgramState state) =>
+            new(Block, operations, index + 1, state);
+
+        public override int GetHashCode() =>
+            HashCode.Combine(programPointHash, State);
+
+        public override bool Equals(object obj) =>
+            Equals(obj as ExplodedNode);
+
+        public bool Equals(ExplodedNode other) =>
+            other is not null
+            && other.programPointHash == programPointHash
+            && other.State.Equals(State);
     }
 }

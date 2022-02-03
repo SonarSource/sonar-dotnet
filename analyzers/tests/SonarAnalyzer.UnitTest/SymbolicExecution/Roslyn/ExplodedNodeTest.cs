@@ -99,5 +99,37 @@ namespace SonarAnalyzer.UnitTest.SymbolicExecution.Roslyn
             sut = sut.CreateNext(ProgramState.Empty);
             sut.Operation.Should().BeNull();
         }
+
+        [TestMethod]
+        public void Equals_ReturnsTrueForEquivalent()
+        {
+            var block = TestHelper.CompileCfgBodyCS("var a = true;").Blocks[1];
+            var basic = new ExplodedNode(block, ProgramState.Empty);
+            var same = new ExplodedNode(block, ProgramState.Empty);
+            var differentLocation = basic.CreateNext(ProgramState.Empty);
+            var differentState = new ExplodedNode(block, ProgramState.Empty.SetOperationValue(block.Operations[0], new SymbolicValue(new SymbolicValueCounter())));
+
+            basic.Equals(same).Should().BeTrue();
+            basic.Equals(differentLocation).Should().BeFalse();
+            basic.Equals(differentState).Should().BeFalse();
+            basic.Equals("different type").Should().BeFalse();
+            basic.Equals((object)null).Should().BeFalse();
+            basic.Equals((ExplodedNode)null).Should().BeFalse();    // Explicit cast to ensure correct overload
+        }
+
+        [TestMethod]
+        public void GetHashCode_ReturnsSameForEquivalent()
+        {
+            var block = TestHelper.CompileCfgBodyCS("var a = true;").Blocks[1];
+            var basic = new ExplodedNode(block, ProgramState.Empty);
+            var same = new ExplodedNode(block, ProgramState.Empty);
+            var differentLocation = basic.CreateNext(ProgramState.Empty);
+            var differentState = new ExplodedNode(block, ProgramState.Empty.SetOperationValue(block.Operations[0], new SymbolicValue(new SymbolicValueCounter())));
+
+            basic.GetHashCode().Should().Be(basic.GetHashCode(), "value should be deterministic");
+            basic.GetHashCode().Should().Be(same.GetHashCode());
+            basic.GetHashCode().Should().NotBe(differentLocation.GetHashCode());
+            basic.GetHashCode().Should().NotBe(differentState.GetHashCode());
+        }
     }
 }

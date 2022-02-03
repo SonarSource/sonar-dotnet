@@ -50,6 +50,10 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
         public void Execute()
         {
             // ToDo: Forbid running twice
+            if (!ProgramPoint.HasSupportedSize(cfg))
+            {
+                return;
+            }
             var steps = 0;
             queue.Enqueue(new ExplodedNode(cfg.EntryBlock, ProgramState.Empty));
             while (queue.Any())
