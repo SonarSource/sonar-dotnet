@@ -69,30 +69,28 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
             && other.OperationValue.DictionaryEquals(OperationValue)
             && other.SymbolValue.DictionaryEquals(SymbolValue);
 
-        public override string ToString()
+        public override string ToString() =>
+            Equals(Empty) ? "Empty" : SerializeSymbols() + SerializeOperations();
+
+        private string SerializeSymbols() =>
+            Serialize(SymbolValue, "Symbols", x => x.ToString(), x => x?.ToString() ?? "<null>");
+
+        private string SerializeOperations() =>
+            Serialize(OperationValue, "Operations", x => x.Serialize(), x => x?.ToString() ?? "<null>");
+
+        private static string Serialize<TKey, TValue>(ImmutableDictionary<TKey, TValue> dictionary, string title, Func<TKey, string> serializeKey, Func<TValue, string> serializeValue)
         {
-            if (Equals(Empty))
+            if (dictionary.IsEmpty)
             {
-                return "Empty";
+                return null;
             }
             else
             {
                 var sb = new StringBuilder();
-                if (SymbolValue.Any())
+                sb.Append(title).AppendLine(":");
+                foreach (var kvp in dictionary.Select(x => new KeyValuePair<string, string>(serializeKey(x.Key), serializeValue(x.Value))).OrderBy(x => x.Key))
                 {
-                    sb.AppendLine("Symbols:");
-                    foreach (var kvp in SymbolValue.OrderBy(x => x.Key.ToString()))
-                    {
-                        sb.Append(kvp.Key).Append(": ").AppendLine(kvp.Value?.ToString() ?? "<null>");
-                    }
-                }
-                if (OperationValue.Any())
-                {
-                    sb.AppendLine("Operations:");
-                    foreach (var kvp in OperationValue.Select(x => new KeyValuePair<string, string>(x.Key.Serialize(), x.Value?.ToString() ?? "<null>")).OrderBy(x => x.Key))
-                    {
-                        sb.Append(kvp.Key).Append(": ").AppendLine(kvp.Value);
-                    }
+                    sb.Append(kvp.Key).Append(": ").AppendLine(kvp.Value);
                 }
                 return sb.ToString();
             }
