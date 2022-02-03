@@ -237,6 +237,7 @@ stages:
           projectName: 'SonarAnalyzer .Net'
           projectVersion: '$(SONAR_PROJECT_VERSION)'
           extraProperties: |
+            sonar.verbose=true
             sonar.cs.opencover.reportsPaths="$(Build.SourcesDirectory)/coverage/**.xml"
             sonar.cs.vstest.reportsPaths="$(Build.SourcesDirectory)/TestResults/*.trx"
             sonar.analysis.buildNumber=$(Build.BuildId)
