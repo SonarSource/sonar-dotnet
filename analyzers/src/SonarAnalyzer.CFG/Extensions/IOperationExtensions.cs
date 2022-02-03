@@ -67,6 +67,9 @@ namespace SonarAnalyzer.Extensions
         public static OperationExecutionOrder ToReversedExecutionOrder(this IEnumerable<IOperation> operations) =>
             new OperationExecutionOrder(operations, true);
 
+        public static string Serialize(this IOperation operation) =>
+            $"{OperationPrefix(operation)}{OperationSuffix(operation)} / {operation.Syntax.GetType().Name}: {operation.Syntax}";
+
         // This method is taken from Roslyn implementation
         public static IEnumerable<IOperation> DescendantsAndSelf(this IOperation operation) =>
             Descendants(operation, true);
@@ -100,5 +103,17 @@ namespace SonarAnalyzer.Extensions
                 }
             }
         }
+
+        private static string OperationPrefix(IOperation op) =>
+            op.Kind == OperationKindEx.Invalid ? "INVALID" : op.GetType().Name;
+
+        private static string OperationSuffix(IOperation op) =>
+            op switch
+            {
+                var _ when IInvocationOperationWrapper.IsInstance(op) => ": " + IInvocationOperationWrapper.FromOperation(op).TargetMethod.Name,
+                var _ when IFlowCaptureOperationWrapper.IsInstance(op) => ": #" + IFlowCaptureOperationWrapper.FromOperation(op).Id.GetHashCode(),
+                var _ when IFlowCaptureReferenceOperationWrapper.IsInstance(op) => ": #" + IFlowCaptureReferenceOperationWrapper.FromOperation(op).Id.GetHashCode(),
+                _ => null
+            };
     }
 }

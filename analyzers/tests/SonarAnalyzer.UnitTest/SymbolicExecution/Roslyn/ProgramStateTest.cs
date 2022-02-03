@@ -25,6 +25,7 @@ using Microsoft.CodeAnalysis;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.Extensions;
 using SonarAnalyzer.SymbolicExecution.Roslyn;
+using SonarAnalyzer.UnitTest.Helpers;
 using SonarAnalyzer.UnitTest.TestFramework.SymbolicExecution;
 using StyleCop.Analyzers.Lightup;
 
@@ -313,6 +314,88 @@ namespace SonarAnalyzer.UnitTest.SymbolicExecution.Roslyn
 
             mixedOrig.GetHashCode().Should().Be(mixedSame.GetHashCode());
             mixedOrig.GetHashCode().Should().NotBe(mixedDiff.GetHashCode());
+        }
+
+        [TestMethod]
+        public void ToString_Empty() =>
+            ProgramState.Empty.ToString().Should().Be("Empty");
+
+        [TestMethod]
+        public void ToString_WithSymbols()
+        {
+            var assignment = TestHelper.CompileCfgBodyCS("var a = true;").Blocks[1].Operations[0];
+            var counter = new SymbolicValueCounter();
+            var variableSymbol = assignment.Children.First().TrackedSymbol();
+            var sut = ProgramState.Empty.SetSymbolValue(variableSymbol, null);
+            sut.ToString().Should().BeIgnoringLineEndings(
+@"Symbols:
+a: <null>
+");
+
+            sut = ProgramState.Empty.SetSymbolValue(variableSymbol, new SymbolicValue(counter));
+            sut.ToString().Should().BeIgnoringLineEndings(
+@"Symbols:
+a: SV_1
+");
+
+            var valueWithConstraint = new SymbolicValue(counter);
+            valueWithConstraint.SetConstraint(TestConstraint.Second);
+            sut = sut.SetSymbolValue(variableSymbol.ContainingSymbol, valueWithConstraint);
+            sut.ToString().Should().BeIgnoringLineEndings(
+@"Symbols:
+a: SV_1
+Sample.Main(): SV_2: Second
+");
+        }
+
+        [TestMethod]
+        public void ToString_WithOperations()
+        {
+            var assignment = TestHelper.CompileCfgBodyCS("var a = true;").Blocks[1].Operations[0];
+            var counter = new SymbolicValueCounter();
+            var sut = ProgramState.Empty.SetOperationValue(assignment, null);
+            sut.ToString().Should().BeIgnoringLineEndings(
+@"Operations:
+SimpleAssignmentOperation / VariableDeclaratorSyntax: a = true: <null>
+");
+
+            sut = ProgramState.Empty.SetOperationValue(assignment, new SymbolicValue(counter));
+            sut.ToString().Should().BeIgnoringLineEndings(
+@"Operations:
+SimpleAssignmentOperation / VariableDeclaratorSyntax: a = true: SV_1
+");
+            var valueWithConstraint = new SymbolicValue(counter);
+            valueWithConstraint.SetConstraint(TestConstraint.Second);
+            sut = sut.SetOperationValue(assignment.Children.First(), valueWithConstraint);
+            sut.ToString().Should().BeIgnoringLineEndings(
+@"Operations:
+LocalReferenceOperation / VariableDeclaratorSyntax: a = true: SV_2: Second
+SimpleAssignmentOperation / VariableDeclaratorSyntax: a = true: SV_1
+");
+        }
+
+        [TestMethod]
+        public void ToString_WithAll()
+        {
+            var assignment = TestHelper.CompileCfgBodyCS("var a = true;").Blocks[1].Operations[0];
+            var counter = new SymbolicValueCounter();
+            var variableSymbol = assignment.Children.First().TrackedSymbol();
+            var valueWithConstraint = new SymbolicValue(counter);
+            valueWithConstraint.SetConstraint(TestConstraint.First);
+            var sut = ProgramState.Empty
+                .SetSymbolValue(variableSymbol, new SymbolicValue(counter))
+                .SetSymbolValue(variableSymbol.ContainingSymbol, valueWithConstraint)
+                .SetOperationValue(assignment, new SymbolicValue(counter))
+                .SetOperationValue(assignment.Children.First(), valueWithConstraint);
+
+            sut.ToString().Should().BeIgnoringLineEndings(
+@"Symbols:
+a: SV_2
+Sample.Main(): SV_1: First
+Operations:
+LocalReferenceOperation / VariableDeclaratorSyntax: a = true: SV_1: First
+SimpleAssignmentOperation / VariableDeclaratorSyntax: a = true: SV_3
+");
         }
 
         private static ISymbol[] CreateSymbols()

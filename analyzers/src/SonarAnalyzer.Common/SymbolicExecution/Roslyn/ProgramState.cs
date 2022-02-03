@@ -22,7 +22,9 @@ using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Linq;
+using System.Text;
 using Microsoft.CodeAnalysis;
+using SonarAnalyzer.Extensions;
 using SonarAnalyzer.Helpers;
 using StyleCop.Analyzers.Lightup;
 
@@ -66,5 +68,32 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
             other is not null
             && other.OperationValue.DictionaryEquals(OperationValue)
             && other.SymbolValue.DictionaryEquals(SymbolValue);
+
+        public override string ToString() =>
+            Equals(Empty) ? "Empty" : SerializeSymbols() + SerializeOperations();
+
+        private string SerializeSymbols() =>
+            Serialize(SymbolValue, "Symbols", x => x.ToString());
+
+        private string SerializeOperations() =>
+            Serialize(OperationValue, "Operations", x => x.Serialize());
+
+        private static string Serialize<TKey, TValue>(ImmutableDictionary<TKey, TValue> dictionary, string title, Func<TKey, string> serializeKey)
+        {
+            if (dictionary.IsEmpty)
+            {
+                return null;
+            }
+            else
+            {
+                var sb = new StringBuilder();
+                sb.Append(title).AppendLine(":");
+                foreach (var kvp in dictionary.Select(x => new KeyValuePair<string, string>(serializeKey(x.Key), x.Value?.ToString() ?? "<null>")).OrderBy(x => x.Key))
+                {
+                    sb.Append(kvp.Key).Append(": ").AppendLine(kvp.Value);
+                }
+                return sb.ToString();
+            }
+        }
     }
 }

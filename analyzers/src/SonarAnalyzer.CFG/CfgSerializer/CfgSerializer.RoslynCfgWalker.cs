@@ -113,20 +113,8 @@ namespace SonarAnalyzer.CFG
                 SerializeOperation(0, operation).Concat(new[] { "##########" });
 
             private static IEnumerable<string> SerializeOperation(int level, IOperation operation) =>
-                new[] { $"{level}# {OperationPrefix(operation)}{OperationSuffix(operation)} / {operation.Syntax.GetType().Name}: {operation.Syntax}" }
+                new[] { $"{level}# {operation.Serialize()}" }
                 .Concat(new IOperationWrapperSonar(operation).Children.SelectMany(x => SerializeOperation(level + 1, x)));
-
-            private static string OperationPrefix(IOperation op) =>
-                op.Kind == OperationKindEx.Invalid ? "INVALID" : op.GetType().Name;
-
-            private static string OperationSuffix(IOperation op) =>
-                op switch
-                {
-                    var _ when IInvocationOperationWrapper.IsInstance(op) => ": " + IInvocationOperationWrapper.FromOperation(op).TargetMethod.Name,
-                    var _ when IFlowCaptureOperationWrapper.IsInstance(op) => ": #" + IFlowCaptureOperationWrapper.FromOperation(op).Id.GetHashCode(),
-                    var _ when IFlowCaptureReferenceOperationWrapper.IsInstance(op) => ": #" + IFlowCaptureReferenceOperationWrapper.FromOperation(op).Id.GetHashCode(),
-                    _ => null
-                };
 
             private void WriteEdges(BasicBlock block)
             {

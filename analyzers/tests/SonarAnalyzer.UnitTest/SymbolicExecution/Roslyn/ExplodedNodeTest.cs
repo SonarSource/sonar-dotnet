@@ -131,5 +131,23 @@ namespace SonarAnalyzer.UnitTest.SymbolicExecution.Roslyn
             basic.GetHashCode().Should().NotBe(differentLocation.GetHashCode());
             basic.GetHashCode().Should().NotBe(differentState.GetHashCode());
         }
+
+        [TestMethod]
+        public void ToString_SerializeOperationAndState()
+        {
+            var cfg = TestHelper.CompileCfgBodyCS("var a = true;");
+            var state = ProgramState.Empty.SetSymbolValue(cfg.Blocks[1].Operations[0].Children.First().TrackedSymbol(), new(new()));
+
+            new ExplodedNode(cfg.Blocks[1], state).ToString().Should().BeIgnoringLineEndings(
+@"Block #1, Operation #0, LocalReferenceOperation / VariableDeclaratorSyntax: a = true
+Symbols:
+a: SV_1
+");
+            new ExplodedNode(cfg.ExitBlock, state).ToString().Should().BeIgnoringLineEndings(
+@"Block #2, Branching
+Symbols:
+a: SV_1
+");
+        }
     }
 }
