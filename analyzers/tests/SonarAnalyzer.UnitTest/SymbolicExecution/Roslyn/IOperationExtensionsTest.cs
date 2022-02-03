@@ -32,18 +32,33 @@ namespace SonarAnalyzer.UnitTest.SymbolicExecution.Roslyn
         [TestMethod]
         public void TrackedSymbol_LocalReference_IsVariableSymbol()
         {
-            var localreference = ((ISimpleAssignmentOperation)TestHelper.CompileCfgBodyCS("var a = true;").Blocks[1].Operations[0]).Target;
-            var symbol = ILocalReferenceOperationWrapper.FromOperation(localreference).Local;
-            localreference.TrackedSymbol().Should().Be(symbol);
+            var localReference = ((ISimpleAssignmentOperation)TestHelper.CompileCfgBodyCS("var a = true;").Blocks[1].Operations[0]).Target;
+            var symbol = ILocalReferenceOperationWrapper.FromOperation(localReference).Local;
+            localReference.TrackedSymbol().Should().Be(symbol);
         }
 
         [TestMethod]
         public void TrackedSymbol_ParameterReference_IsParameterSymbol()
         {
             var expressionStatement = (IExpressionStatementOperation)TestHelper.CompileCfgBodyCS("parameter = true;", "bool parameter").Blocks[1].Operations[0];
-            var paramaterReference = ((ISimpleAssignmentOperation)expressionStatement.Operation).Target;
-            var symbol = IParameterReferenceOperationWrapper.FromOperation(paramaterReference).Parameter;
-            paramaterReference.TrackedSymbol().Should().Be(symbol);
+            var parameterReference = ((ISimpleAssignmentOperation)expressionStatement.Operation).Target;
+            var symbol = IParameterReferenceOperationWrapper.FromOperation(parameterReference).Parameter;
+            parameterReference.TrackedSymbol().Should().Be(symbol);
+        }
+
+        [DataTestMethod]
+        [DataRow(@"field = 1")]
+        [DataRow(@"this.field = 1")]
+        [DataRow(@"StaticField = 1")]
+        [DataRow(@"C.StaticField = 1")]
+        public void TrackedSymbol_FieldReference_IsFieldSymbol(string assignment)
+        {
+            var code = $"public class C {{ int field; static int StaticField; void Method() {{ {assignment}; }} }}";
+            var graph = TestHelper.CompileCfgCS(code);
+            var expressionStatement = (IExpressionStatementOperation)graph.Blocks[1].Operations[0];
+            var assignmentTarget = ((ISimpleAssignmentOperation)expressionStatement.Operation).Target;
+            var fieldReferenceSymbol = IFieldReferenceOperationWrapper.FromOperation(assignmentTarget).Field;
+            assignmentTarget.TrackedSymbol().Should().Be(fieldReferenceSymbol);
         }
 
         [TestMethod]

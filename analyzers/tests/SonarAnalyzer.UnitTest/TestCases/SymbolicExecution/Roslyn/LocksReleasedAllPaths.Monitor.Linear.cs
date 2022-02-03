@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 
 class Program
 {
+    private readonly static object staticObj = new object();
     private object obj = new object();
     private object other = new object();
 
@@ -126,7 +127,42 @@ class Program
     {
         Monitor.Exit(obj);
         Console.WriteLine(arg.Length);
-        Monitor.Enter(obj); // FN
+        Monitor.Enter(obj); // Noncompliant {{Unlock this lock along all executions paths of this method.}}
+    }
+
+    public void FieldReference_WithThis(string arg)
+    {
+        Monitor.Exit(this.obj);
+        Console.WriteLine(arg.Length);
+        Monitor.Enter(this.obj); // Noncompliant {{Unlock this lock along all executions paths of this method.}}
+    }
+
+    public void FieldReference_WithThis_Mixed1(string arg)
+    {
+        Monitor.Exit(obj);
+        Console.WriteLine(arg.Length);
+        Monitor.Enter(this.obj); // Noncompliant {{Unlock this lock along all executions paths of this method.}}
+    }
+
+    public void FieldReference_WithThis_Mixed2(string arg)
+    {
+        Monitor.Exit(this.obj);
+        Console.WriteLine(arg.Length);
+        Monitor.Enter(obj); // Noncompliant {{Unlock this lock along all executions paths of this method.}}
+    }
+
+    public void StaticFieldReference(string arg)
+    {
+        Monitor.Exit(staticObj);
+        Console.WriteLine(arg.Length);
+        Monitor.Enter(staticObj); // Noncompliant {{Unlock this lock along all executions paths of this method.}}
+    }
+
+    public void StaticFieldReference_Class(string arg)
+    {
+        Monitor.Exit(Program.staticObj);
+        Console.WriteLine(arg.Length);
+        Monitor.Enter(Program.staticObj); // Noncompliant {{Unlock this lock along all executions paths of this method.}}
     }
 
     public void Method13_LocalVar(string arg)
@@ -208,6 +244,12 @@ class Program
         Monitor.Exit(obj);
         Console.WriteLine(arg.Length);
         Monitor.Enter(); // Error CS1501 No overload for method 'Enter' takes 0 arguments
+    }
+
+    public void DifferentFields(Program first, Program second)
+    {
+        Monitor.Exit(second.obj);
+        Monitor.Enter(first.obj);
     }
 
     static int Property
