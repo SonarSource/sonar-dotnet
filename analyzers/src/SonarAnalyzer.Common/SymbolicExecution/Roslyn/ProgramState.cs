@@ -73,12 +73,12 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
             Equals(Empty) ? "Empty" : SerializeSymbols() + SerializeOperations();
 
         private string SerializeSymbols() =>
-            Serialize(SymbolValue, "Symbols", x => x.ToString(), x => x?.ToString() ?? "<null>");
+            Serialize(SymbolValue, "Symbols", x => x.ToString());
 
         private string SerializeOperations() =>
-            Serialize(OperationValue, "Operations", x => x.Serialize(), x => x?.ToString() ?? "<null>");
+            Serialize(OperationValue, "Operations", x => x.Serialize());
 
-        private static string Serialize<TKey, TValue>(ImmutableDictionary<TKey, TValue> dictionary, string title, Func<TKey, string> serializeKey, Func<TValue, string> serializeValue)
+        private static string Serialize<TKey, TValue>(ImmutableDictionary<TKey, TValue> dictionary, string title, Func<TKey, string> serializeKey)
         {
             if (dictionary.IsEmpty)
             {
@@ -88,7 +88,7 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
             {
                 var sb = new StringBuilder();
                 sb.Append(title).AppendLine(":");
-                foreach (var kvp in dictionary.Select(x => new KeyValuePair<string, string>(serializeKey(x.Key), serializeValue(x.Value))).OrderBy(x => x.Key))
+                foreach (var kvp in dictionary.Select(x => new KeyValuePair<string, string>(serializeKey(x.Key), x.Value?.ToString() ?? "<null>")).OrderBy(x => x.Key))
                 {
                     sb.Append(kvp.Key).Append(": ").AppendLine(kvp.Value);
                 }
