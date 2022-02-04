@@ -168,7 +168,7 @@ namespace SonarAnalyzer.UnitTest.SymbolicExecution.Roslyn
         public void ResetOperations_IsImmutable()
         {
             var operation = TestHelper.CompileCfgBodyCS("var x = 42;").Blocks[1].Operations[0];
-            var beforeReset = ProgramState.Empty.SetOperationValue(operation, new(new()));
+            var beforeReset = ProgramState.Empty.SetOperationValue(operation, new SymbolicValue(new SymbolicValueCounter()));
             beforeReset[operation].Should().NotBeNull();
             var afterReset = beforeReset.ResetOperations();
             beforeReset[operation].Should().NotBeNull();

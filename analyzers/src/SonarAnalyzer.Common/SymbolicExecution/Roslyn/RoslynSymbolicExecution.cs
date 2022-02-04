@@ -89,7 +89,7 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
             }
             else
             {
-                // ToDo: This is a temporary simplification until we support condition-based and condition-building decisions
+                // ToDo: This is a temporary simplification until we support condition-based and condition-building decisions https://github.com/SonarSource/sonar-dotnet/issues/5308
                 foreach (var successor in node.Block.Successors.Where(x => x.Destination is not null))
                 {
                     yield return new ExplodedNode(successor.Destination, node.State);

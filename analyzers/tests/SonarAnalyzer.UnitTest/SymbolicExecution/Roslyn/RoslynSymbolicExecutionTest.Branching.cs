@@ -34,7 +34,7 @@ namespace SonarAnalyzer.UnitTest.SymbolicExecution.Roslyn
     public partial class RoslynSymbolicExecutionTest
     {
         [TestMethod]
-        public void Branching_IterateBlocksOrdinal_CS()    // ToDo: This is a temporary simplification until we support proper branching.
+        public void Branching_BlockProcessingOrder_CS()
         {
             const string code = @"
 Tag(""Entry"");
@@ -70,7 +70,7 @@ Tag(""End"");";
         }
 
         [TestMethod]
-        public void Branching_IterateBlocksOrdinal_VB()    // ToDo: This is a temporary simplification until we support proper branching.
+        public void Branching_BlockProcessingOrder_VB()
         {
             const string code = @"
 Tag(""Entry"")
@@ -164,7 +164,7 @@ public int Method(bool a)
         return 2;
 }";
             var validator = SETestContext.CreateCSMethod(method).Validator;
-            validator.ValidateExitReachCount(1);    // Exit is reached only once, becase it is reached with the same state
+            validator.ValidateExitReachCount(1);    // Exit is reached only once, because it is reached with the same state
             validator.ValidateExecutionCompleted();
         }
 
