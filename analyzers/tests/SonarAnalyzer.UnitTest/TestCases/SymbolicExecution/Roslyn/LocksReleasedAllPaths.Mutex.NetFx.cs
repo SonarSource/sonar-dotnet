@@ -15,6 +15,7 @@ public class MutexTest
     {
         // Note that Dispose() closes the underlying WaitHandle, but does not release the mutex
         var m0 = new Mutex(true, "foo", out var mutexWasCreated, mutexSecurity); // FN
+        m0.WaitOne();
         if (cond)
         {
             m0.ReleaseMutex();

@@ -84,7 +84,7 @@ namespace Mutex_Type
                     paramMutex.ReleaseMutex();
                 }
             }
-            while (paramMutex2.WaitOne(400, false)) // FN
+            while (paramMutex2.WaitOne(400, false)) // Noncompliant
             {
                 if (cond)
                 {
@@ -96,7 +96,7 @@ namespace Mutex_Type
         public void NoncompliantReleasedThenAcquiredAndReleased(Mutex paramMutex)
         {
             paramMutex.ReleaseMutex();
-            paramMutex.WaitOne(); // FN, after this acquire it's not released on all paths
+            paramMutex.WaitOne(); // Noncompliant
             if (cond)
             {
                 paramMutex.ReleaseMutex();
@@ -106,7 +106,7 @@ namespace Mutex_Type
         public void DifferentInstancesOnThis(Foo foo)
         {
             foo.instanceMutex.WaitOne(); // Compliant
-            instanceMutex.WaitOne(); // FN
+            instanceMutex.WaitOne(); // Noncompliant
             if (cond)
             {
                 instanceMutex.ReleaseMutex();
@@ -241,14 +241,13 @@ namespace Mutex_Type
             }
         }
 
-        public void CompliantReleasedThenAcquired(Mutex paramMutex)
+        public void ReleasedThenAcquired(Mutex paramMutex)
         {
-            // this scenario would be a tolerable FP
             if (cond)
             {
                 paramMutex.ReleaseMutex();
             }
-            paramMutex.WaitOne();
+            paramMutex.WaitOne(); // Noncompliant
         }
 
         public void CompliantComplex(string mutexName, bool shouldAcquire)
