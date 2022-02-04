@@ -37,6 +37,16 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn.Checks
         private readonly HashSet<ISymbol> exitHeldSymbols = new();
         private readonly Dictionary<ISymbol, IOperationWrapperSonar> lastSymbolLock = new();
 
+        private readonly string[] readerWriterLockSlimLockMethodNames =
+        {
+            "EnterReadLock",
+            "EnterUpgradeableReadLock",
+            "EnterWriteLock",
+            "TryEnterReadLock",
+            "TryEnterUpgradeableReadLock",
+            "TryEnterWriteLock"
+        };
+
         // ToDo: Implement early bail-out if there's no interesting descendant node in context.Node to avoid useless SE runs
         public override bool ShouldExecute() =>
             NodeContext.Node.DescendantNodes().OfType<IdentifierNameSyntax>().Any(x => x.Identifier.Text.Contains("Exit"));
@@ -46,8 +56,7 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn.Checks
             if (context.Operation.Instance.AsInvocation() is { } invocation)
             {
                 // ToDo: we ignore the number of parameters for now.
-                if (invocation.TargetMethod.Is(KnownType.System_Threading_Monitor, "Enter")
-                    || invocation.TargetMethod.Is(KnownType.System_Threading_Monitor, "TryEnter"))
+                if (invocation.TargetMethod.IsAny(KnownType.System_Threading_Monitor, "Enter", "TryEnter"))
                 {
                     return ProcessMonitorEnter(context, invocation);
                 }
@@ -55,18 +64,11 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn.Checks
                 {
                     return ProcessMonitorExit(context, invocation);
                 }
-                else if (invocation.TargetMethod.Is(KnownType.System_Threading_ReaderWriterLockSlim, "EnterReadLock")
-                         || invocation.TargetMethod.Is(KnownType.System_Threading_ReaderWriterLockSlim, "TryEnterReadLock")
-                         || invocation.TargetMethod.Is(KnownType.System_Threading_ReaderWriterLockSlim, "EnterWriteLock")
-                         || invocation.TargetMethod.Is(KnownType.System_Threading_ReaderWriterLockSlim, "TryEnterWriteLock")
-                         || invocation.TargetMethod.Is(KnownType.System_Threading_ReaderWriterLockSlim, "EnterUpgradeableReadLock")
-                         || invocation.TargetMethod.Is(KnownType.System_Threading_ReaderWriterLockSlim, "TryEnterUpgradeableReadLock"))
+                else if (invocation.TargetMethod.IsAny(KnownType.System_Threading_ReaderWriterLockSlim, readerWriterLockSlimLockMethodNames))
                 {
                     return ProcessReaderWriterLockSlimEnter(context, invocation);
                 }
-                else if (invocation.TargetMethod.Is(KnownType.System_Threading_ReaderWriterLockSlim, "ExitReadLock")
-                         || invocation.TargetMethod.Is(KnownType.System_Threading_ReaderWriterLockSlim, "ExitWriteLock")
-                         || invocation.TargetMethod.Is(KnownType.System_Threading_ReaderWriterLockSlim, "ExitUpgradeableReadLock"))
+                else if (invocation.TargetMethod.IsAny(KnownType.System_Threading_ReaderWriterLockSlim, "ExitReadLock", "ExitWriteLock", "ExitUpgradeableReadLock"))
                 {
                     return ProcessReaderWriterLockSlimExit(context, invocation);
                 }
@@ -90,21 +92,21 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn.Checks
 
         private ProgramState ProcessMonitorEnter(SymbolicContext context, IInvocationOperationWrapper invocation) =>
             FirstArgumentSymbol(invocation) is { } symbol
-                ? ProcessAddLock(context, symbol)
+                ? AddLock(context, symbol)
                 : context.State;
 
         private ProgramState ProcessMonitorExit(SymbolicContext context, IInvocationOperationWrapper invocation) =>
             FirstArgumentSymbol(invocation) is { } symbol
-                ? ProcessRemoveLock(context, symbol)
+                ? RemoveLock(context, symbol)
                 : context.State;
 
         private ProgramState ProcessReaderWriterLockSlimEnter(SymbolicContext context, IInvocationOperationWrapper invocation) =>
-            ProcessAddLock(context, invocation.Instance.TrackedSymbol());
+            AddLock(context, invocation.Instance.TrackedSymbol());
 
         private ProgramState ProcessReaderWriterLockSlimExit(SymbolicContext context, IInvocationOperationWrapper invocation) =>
-            ProcessRemoveLock(context, invocation.Instance.TrackedSymbol());
+            RemoveLock(context, invocation.Instance.TrackedSymbol());
 
-        private ProgramState ProcessAddLock(SymbolicContext context, ISymbol symbol)
+        private ProgramState AddLock(SymbolicContext context, ISymbol symbol)
         {
             var state = context.State;
             if (state[symbol] == null)
@@ -117,7 +119,7 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn.Checks
             return state;
         }
 
-        private ProgramState ProcessRemoveLock(SymbolicContext context, ISymbol symbol)
+        private ProgramState RemoveLock(SymbolicContext context, ISymbol symbol)
         {
             var state = context.State;
             if (state[symbol] == null)

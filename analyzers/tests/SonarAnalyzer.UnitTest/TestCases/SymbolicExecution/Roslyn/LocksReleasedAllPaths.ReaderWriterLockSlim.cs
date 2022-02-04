@@ -169,6 +169,26 @@ class Program
     {
         readerWriterLockSlim.ExitReadLock();
         readerWriterLockSlim.EnterReadLock(); // Noncompliant
+
+        var a = new ReaderWriterLockSlim();
+        a.ExitWriteLock();
+        a.EnterWriteLock(); // Noncompliant
+
+        var b = new ReaderWriterLockSlim();
+        b.ExitUpgradeableReadLock();
+        b.TryEnterReadLock(1); // Noncompliant
+
+        var c = new ReaderWriterLockSlim();
+        c.ExitReadLock();
+        c.TryEnterWriteLock(1); // Noncompliant
+
+        var d = new ReaderWriterLockSlim();
+        d.ExitReadLock();
+        d.EnterUpgradeableReadLock(); // Noncompliant
+
+        var e = new ReaderWriterLockSlim();
+        e.ExitReadLock();
+        e.TryEnterUpgradeableReadLock(1); // Noncompliant
     }
 
     public void Method14()
