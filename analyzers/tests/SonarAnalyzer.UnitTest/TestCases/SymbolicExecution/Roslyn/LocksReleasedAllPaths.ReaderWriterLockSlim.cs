@@ -8,7 +8,7 @@ class Program
 
     public void Method1()
     {
-        readerWriterLockSlim.EnterReadLock(); // FN
+        readerWriterLockSlim.EnterReadLock(); // Noncompliant
         if (condition)
         {
             readerWriterLockSlim.ExitReadLock();
@@ -17,7 +17,7 @@ class Program
 
     public void Method2()
     {
-        readerWriterLockSlim.EnterWriteLock(); // FN
+        readerWriterLockSlim.EnterWriteLock(); // Noncompliant
         if (condition)
         {
             readerWriterLockSlim.ExitWriteLock();
@@ -26,7 +26,7 @@ class Program
 
     public void Method3()
     {
-        readerWriterLockSlim.EnterUpgradeableReadLock(); // FN
+        readerWriterLockSlim.EnterUpgradeableReadLock(); // Noncompliant
         if (condition)
         {
             readerWriterLockSlim.ExitUpgradeableReadLock();
@@ -35,7 +35,7 @@ class Program
 
     public void Method4()
     {
-        if (readerWriterLockSlim.TryEnterReadLock(42)) // FN
+        if (readerWriterLockSlim.TryEnterReadLock(42)) // Noncompliant
         {
         }
         else
@@ -46,7 +46,7 @@ class Program
 
     public void Method5()
     {
-        if (readerWriterLockSlim.TryEnterReadLock(new TimeSpan(42))) // FN
+        if (readerWriterLockSlim.TryEnterReadLock(new TimeSpan(42))) // Noncompliant
         {
         }
         else
@@ -57,7 +57,7 @@ class Program
 
     public void Method6()
     {
-        if (readerWriterLockSlim.TryEnterWriteLock(42)) // FN
+        if (readerWriterLockSlim.TryEnterWriteLock(42)) // Noncompliant
         {
         }
         else
@@ -68,7 +68,7 @@ class Program
 
     public void Method7()
     {
-        if (readerWriterLockSlim.TryEnterWriteLock(new TimeSpan(42))) // FN
+        if (readerWriterLockSlim.TryEnterWriteLock(new TimeSpan(42))) // Noncompliant
         {
         }
         else
@@ -79,7 +79,7 @@ class Program
 
     public void Method8()
     {
-        if (readerWriterLockSlim.TryEnterUpgradeableReadLock(42)) // FN
+        if (readerWriterLockSlim.TryEnterUpgradeableReadLock(42)) // Noncompliant
         {
         }
         else
@@ -90,7 +90,7 @@ class Program
 
     public void Method9()
     {
-        if (readerWriterLockSlim.TryEnterUpgradeableReadLock(new TimeSpan(42))) // FN
+        if (readerWriterLockSlim.TryEnterUpgradeableReadLock(new TimeSpan(42))) // Noncompliant
         {
         }
         else
@@ -105,7 +105,7 @@ class Program
         try
         {
             readerWriterLockSlim.EnterUpgradeableReadLock();
-            readerWriterLockSlim.EnterWriteLock();
+            readerWriterLockSlim.EnterWriteLock(); // Noncompliant FP
             if (condition)
             {
                 readerWriterLockSlim.ExitWriteLock();
@@ -113,7 +113,6 @@ class Program
         }
         catch (Exception)
         {
-
             throw;
         }
         finally
@@ -193,7 +192,7 @@ class Program
 
     public void Method14()
     {
-        readerWriterLockSlim.EnterReadLock(); // FN, this rule doesn't care if it was released with correct API
+        readerWriterLockSlim.EnterReadLock(); // Noncompliant, this rule doesn't care if it was released with correct API
         if (condition)
         {
             readerWriterLockSlim.ExitWriteLock();
@@ -202,7 +201,7 @@ class Program
 
     public void Method15()
     {
-        if (readerWriterLockSlim.TryEnterReadLock(42)) // Compliant
+        if (readerWriterLockSlim.TryEnterReadLock(42)) // Noncompliant FP
         {
             readerWriterLockSlim.ExitReadLock();
         }
