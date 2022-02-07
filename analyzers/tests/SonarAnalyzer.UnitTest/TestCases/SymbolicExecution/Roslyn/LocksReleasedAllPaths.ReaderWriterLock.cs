@@ -8,7 +8,7 @@ class Program
 
     public void Method1()
     {
-        readerWriterLock.AcquireReaderLock(42); // FN
+        readerWriterLock.AcquireReaderLock(42); // Noncompliant
         if (condition)
         {
             readerWriterLock.ReleaseReaderLock();
@@ -17,7 +17,7 @@ class Program
 
     public void Method2()
     {
-        readerWriterLock.AcquireReaderLock(new TimeSpan(42)); // FN
+        readerWriterLock.AcquireReaderLock(new TimeSpan(42)); // Noncompliant
         if (condition)
         {
             readerWriterLock.ReleaseReaderLock();
@@ -164,5 +164,19 @@ class Program
     {
         readerWriterLock.AcquireReaderLock(42); // Compliant
         readerWriterLock.ReleaseReaderLock();
+    }
+
+    public void WrongOrder()
+    {
+        readerWriterLock.ReleaseReaderLock();
+        readerWriterLock.AcquireReaderLock(1); // Noncompliant
+
+        var a = new ReaderWriterLock();
+        a.ReleaseLock();
+        a.AcquireWriterLock(1); // Noncompliant
+
+        var b = new ReaderWriterLock();
+        b.ReleaseWriterLock();
+        b.AcquireWriterLock(1); // Noncompliant
     }
 }

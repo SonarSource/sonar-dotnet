@@ -415,6 +415,7 @@ namespace SonarAnalyzer.Helpers
         internal static readonly KnownType System_SystemException = new("System.SystemException");
         internal static readonly KnownType System_Text_RegularExpressions_Regex = new("System.Text.RegularExpressions.Regex");
         internal static readonly KnownType System_Text_StringBuilder = new("System.Text.StringBuilder");
+        internal static readonly KnownType System_Threading_ReaderWriterLock = new("System.Threading.ReaderWriterLock");
         internal static readonly KnownType System_Threading_ReaderWriterLockSlim = new("System.Threading.ReaderWriterLockSlim");
         internal static readonly KnownType System_Threading_Tasks_Task = new("System.Threading.Tasks.Task");
         internal static readonly KnownType System_Threading_Monitor = new("System.Threading.Monitor");
