@@ -165,6 +165,17 @@ namespace SonarAnalyzer.UnitTest.SymbolicExecution.Roslyn
             ProgramState.Empty.Invoking(x => x.SetOperationValue((IOperationWrapperSonar)null, new SymbolicValue(new SymbolicValueCounter()))).Should().Throw<NullReferenceException>();
 
         [TestMethod]
+        public void ResetOperations_IsImmutable()
+        {
+            var operation = TestHelper.CompileCfgBodyCS("var x = 42;").Blocks[1].Operations[0];
+            var beforeReset = ProgramState.Empty.SetOperationValue(operation, new SymbolicValue(new SymbolicValueCounter()));
+            beforeReset[operation].Should().NotBeNull();
+            var afterReset = beforeReset.ResetOperations();
+            beforeReset[operation].Should().NotBeNull();
+            afterReset[operation].Should().BeNull();
+        }
+
+        [TestMethod]
         public void SetSymbolValue_ReturnsValues()
         {
             var counter = new SymbolicValueCounter();
@@ -249,18 +260,21 @@ namespace SonarAnalyzer.UnitTest.SymbolicExecution.Roslyn
         {
             var counter = new SymbolicValueCounter();
             var reusedValue = new SymbolicValue(counter);
+            reusedValue.SetConstraint(TestConstraint.First);
+            var anotherValue = new SymbolicValue(counter);
+            anotherValue.SetConstraint(TestConstraint.Second);
             var operations = TestHelper.CompileCfgBodyCS("var x = 42;").Blocks[1].Operations.ToExecutionOrder().ToArray();
             var symbol = operations.Select(x => x.Instance.TrackedSymbol()).First(x => x is not null);
             var empty = ProgramState.Empty;
             var withOperationOrig = empty.SetOperationValue(operations[0], reusedValue);
             var withOperationSame = empty.SetOperationValue(operations[0], reusedValue);
-            var withOperationDiff = empty.SetOperationValue(operations[0], new SymbolicValue(counter));
+            var withOperationDiff = empty.SetOperationValue(operations[0], anotherValue);
             var withSymbolOrig = empty.SetSymbolValue(symbol, reusedValue);
             var withSymbolSame = empty.SetSymbolValue(symbol, reusedValue);
-            var withSymbolDiff = empty.SetSymbolValue(symbol, new SymbolicValue(counter));
+            var withSymbolDiff = empty.SetSymbolValue(symbol, anotherValue);
             var mixedOrig = withOperationOrig.SetSymbolValue(symbol, reusedValue);
             var mixedSame = withOperationSame.SetSymbolValue(symbol, reusedValue);
-            var mixedDiff = withOperationDiff.SetSymbolValue(symbol, new SymbolicValue(counter));
+            var mixedDiff = withOperationDiff.SetSymbolValue(symbol, anotherValue);
 
             empty.Equals((object)empty).Should().BeTrue();
             empty.Equals((object)withOperationOrig).Should().BeFalse();
@@ -291,29 +305,35 @@ namespace SonarAnalyzer.UnitTest.SymbolicExecution.Roslyn
         {
             var counter = new SymbolicValueCounter();
             var reusedValue = new SymbolicValue(counter);
+            reusedValue.SetConstraint(TestConstraint.First);
+            var anotherValue = new SymbolicValue(counter);
+            anotherValue.SetConstraint(TestConstraint.Second);
             var operations = TestHelper.CompileCfgBodyCS("var x = 42;").Blocks[1].Operations.ToExecutionOrder().ToArray();
             var symbol = operations.Select(x => x.Instance.TrackedSymbol()).First(x => x is not null);
             var empty = ProgramState.Empty;
             var withOperationOrig = empty.SetOperationValue(operations[0], reusedValue);
             var withOperationSame = empty.SetOperationValue(operations[0], reusedValue);
-            var withOperationDiff = empty.SetOperationValue(operations[0], new SymbolicValue(counter));
+            var withOperationDiff = empty.SetOperationValue(operations[0], anotherValue);
             var withSymbolOrig = empty.SetSymbolValue(symbol, reusedValue);
             var withSymbolSame = empty.SetSymbolValue(symbol, reusedValue);
-            var withSymbolDiff = empty.SetSymbolValue(symbol, new SymbolicValue(counter));
+            var withSymbolDiff = empty.SetSymbolValue(symbol, anotherValue);
             var mixedOrig = withOperationOrig.SetSymbolValue(symbol, reusedValue);
             var mixedSame = withOperationSame.SetSymbolValue(symbol, reusedValue);
-            var mixedDiff = withOperationDiff.SetSymbolValue(symbol, new SymbolicValue(counter));
+            var mixedDiff = withOperationDiff.SetSymbolValue(symbol, anotherValue);
 
             empty.GetHashCode().Should().Be(empty.GetHashCode());
 
             withOperationOrig.GetHashCode().Should().Be(withOperationSame.GetHashCode());
-            withOperationOrig.GetHashCode().Should().NotBe(withOperationDiff.GetHashCode());
+            withOperationOrig.GetHashCode().Should().Be(withOperationDiff.GetHashCode(), "SymbolicValue produces constant hash code");
+            withOperationOrig.GetHashCode().Should().NotBe(withSymbolSame.GetHashCode());
+            withOperationOrig.GetHashCode().Should().NotBe(mixedSame.GetHashCode());
 
             withSymbolOrig.GetHashCode().Should().Be(withSymbolSame.GetHashCode());
-            withSymbolOrig.GetHashCode().Should().NotBe(withSymbolDiff.GetHashCode());
+            withSymbolOrig.GetHashCode().Should().Be(withSymbolDiff.GetHashCode(), "SymbolicValue produces constant hash code");
+            withSymbolOrig.GetHashCode().Should().NotBe(mixedSame.GetHashCode());
 
             mixedOrig.GetHashCode().Should().Be(mixedSame.GetHashCode());
-            mixedOrig.GetHashCode().Should().NotBe(mixedDiff.GetHashCode());
+            mixedOrig.GetHashCode().Should().Be(mixedDiff.GetHashCode(), "SymbolicValue produces constant hash code");
         }
 
         [TestMethod]

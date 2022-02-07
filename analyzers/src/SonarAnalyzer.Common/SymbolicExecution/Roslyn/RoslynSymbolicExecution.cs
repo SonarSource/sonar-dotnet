@@ -36,6 +36,7 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
         private readonly SymbolicCheck[] checks;
         private readonly Queue<ExplodedNode> queue = new();
         private readonly SymbolicValueCounter symbolicValueCounter = new();
+        private readonly HashSet<ExplodedNode> visited = new();
 
         public RoslynSymbolicExecution(ControlFlowGraph cfg, SymbolicCheck[] checks)
         {
@@ -63,10 +64,13 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
                     return;
                 }
                 var current = queue.Dequeue();
-                var successors = current.Operation == null ? ProcessBranching(current) : ProcessOperation(current);
-                foreach (var node in successors)
+                if (visited.Add(current))
                 {
-                    queue.Enqueue(node);
+                    var successors = current.Operation == null ? ProcessBranching(current) : ProcessOperation(current);
+                    foreach (var node in successors)
+                    {
+                        queue.Enqueue(node);
+                    }
                 }
             }
 
@@ -75,7 +79,6 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
 
         private IEnumerable<ExplodedNode> ProcessBranching(ExplodedNode node)
         {
-            // ToDo: This is a temporary simplification until we support proper branching. This only continues to the next ordinal block
             if (node.Block.Kind == BasicBlockKind.Exit)
             {
                 InvokeChecks(new SymbolicContext(symbolicValueCounter, null, node.State), x => x.ExitReached);
@@ -86,7 +89,11 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
             }
             else
             {
-                yield return new ExplodedNode(cfg.Blocks[node.Block.Ordinal + 1], node.State);
+                // ToDo: This is a temporary simplification until we support condition-based and condition-building decisions https://github.com/SonarSource/sonar-dotnet/issues/5308
+                foreach (var successor in node.Block.Successors.Where(x => x.Destination is not null))
+                {
+                    yield return new ExplodedNode(successor.Destination, node.State);
+                }
             }
         }
 
@@ -100,7 +107,10 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
                 context = InvokeChecks(context, x => x.PostProcess);
                 if (context != null)
                 {
-                    yield return node.CreateNext(context.State);
+                    // When operation doesn't have a parent it is the outer statement. We need to reset operation states:
+                    // * We don't need to preserve the inner subexpression intermediate states after the outer statement.
+                    // * We don't want ProgramState to contain the path-history data, because we want to avoid exploring the same state twice.
+                    yield return node.CreateNext(node.Operation.Parent is null ? context.State.ResetOperations() : context.State);
                 }
             }
         }

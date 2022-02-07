@@ -44,9 +44,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework.SymbolicExecution
             {
                 var tagName = invocation.Arguments.First().Value.ConstantValue;
                 tagName.HasValue.Should().BeTrue("tag should have literal name");
-                var name = (string)tagName.Value;
-                tags.Any(x => x.Name == name).Should().BeFalse("tags should be unique"); // ToDo: We'll need to redesign this to graph paths for complex branching
-                tags.Add((name, context));
+                tags.Add(((string)tagName.Value, context));
             }
             return context.State;
         }
@@ -57,7 +55,8 @@ namespace SonarAnalyzer.UnitTest.TestFramework.SymbolicExecution
             return context.State;
         }
 
-        public override void ExecutionCompleted() => executionCompletedCount++;
+        public override void ExecutionCompleted() =>
+            executionCompletedCount++;
 
         public void ValidateOrder(params string[] expected) =>
             postProcessed.Select(x => TestHelper.Serialize(x.Operation)).Should().OnlyContainInOrder(expected);
@@ -68,24 +67,11 @@ namespace SonarAnalyzer.UnitTest.TestFramework.SymbolicExecution
         public void Validate(string operation, Action<SymbolicContext> action) =>
             action(postProcessed.Single(x => TestHelper.Serialize(x.Operation) == operation));
 
-        public void ValidateTag(string tag, Action<SymbolicValue> action)
-        {
-            var context = tags.Single(x => x.Name == tag).Context;
-            var invocation = (IInvocationOperation)context.Operation.Instance;
-            invocation.Arguments.Should().HaveCount(2, "Asserted argument is expected in Tag(..) invocation");
-            var symbol = Symbol(((IConversionOperation)invocation.Arguments[1].Value).Operand);
-            var value = context.State[symbol];
-            action(value);
-        }
+        public void ValidateTag(string tag, Action<SymbolicValue> action) =>
+            action(TagValues(tag).Single());
 
-        private static ISymbol Symbol(IOperation operation) =>
-            operation.TrackedSymbol() ?? operation switch
-            {
-                _ when IFieldReferenceOperationWrapper.IsInstance(operation) => IFieldReferenceOperationWrapper.FromOperation(operation).Member,
-                _ when IPropertyReferenceOperationWrapper.IsInstance(operation) => IPropertyReferenceOperationWrapper.FromOperation(operation).Member,
-                _ when IArrayElementReferenceOperationWrapper.IsInstance(operation) => IArrayElementReferenceOperationWrapper.FromOperation(operation).ArrayReference.TrackedSymbol(),
-                _ => null
-            };
+        public SymbolicValue[] TagValues(string tag) =>
+            tags.Where(x => x.Name == tag).Select(x => TagValue(x.Context)).ToArray();
 
         public void ValidateExitReachCount(int expected) =>
             exitReachedCount.Should().Be(expected);
@@ -101,5 +87,22 @@ namespace SonarAnalyzer.UnitTest.TestFramework.SymbolicExecution
 
         public void ValidateOperationValuesAreNull() =>
             postProcessed.Should().OnlyContain(x => x.State[x.Operation] == null);
+
+        private static ISymbol Symbol(IOperation operation) =>
+            operation.TrackedSymbol() ?? operation switch
+            {
+                _ when IFieldReferenceOperationWrapper.IsInstance(operation) => IFieldReferenceOperationWrapper.FromOperation(operation).Member,
+                _ when IPropertyReferenceOperationWrapper.IsInstance(operation) => IPropertyReferenceOperationWrapper.FromOperation(operation).Member,
+                _ when IArrayElementReferenceOperationWrapper.IsInstance(operation) => IArrayElementReferenceOperationWrapper.FromOperation(operation).ArrayReference.TrackedSymbol(),
+                _ => null
+            };
+
+        private static SymbolicValue TagValue(SymbolicContext context)
+        {
+            var invocation = (IInvocationOperation)context.Operation.Instance;
+            invocation.Arguments.Should().HaveCount(2, "Asserted argument is expected in Tag(..) invocation");
+            var symbol = Symbol(((IConversionOperation)invocation.Arguments[1].Value).Operand);
+            return context.State[symbol];
+        }
     }
 }

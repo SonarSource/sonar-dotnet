@@ -52,7 +52,7 @@ class Program
 
     public void Method4(bool condition)
     {
-        Monitor.Enter(obj); // FN
+        Monitor.Enter(obj); // Noncompliant
 
         if (condition)
         {
