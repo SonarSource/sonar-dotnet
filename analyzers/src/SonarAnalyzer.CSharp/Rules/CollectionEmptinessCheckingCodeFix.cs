@@ -32,9 +32,10 @@ using SonarAnalyzer.Helpers;
 namespace SonarAnalyzer.Rules.CSharp
 {
     [ExportCodeFixProvider(LanguageNames.CSharp)]
-    public sealed class CollectionEmptinessCheckingCodeFix : SonarCodeFixProvider
+    public sealed class CollectionEmptinessCheckingCodeFix : SonarCodeFix
     {
-        internal const string Title = "Use Any() instead";
+        private const string Title = "Use Any() instead";
+
         public override ImmutableArray<string> FixableDiagnosticIds => ImmutableArray.Create(CollectionEmptinessChecking.DiagnosticId);
 
         private readonly CSharpFacade language = CSharpFacade.Instance;
@@ -58,35 +59,22 @@ namespace SonarAnalyzer.Rules.CSharp
             return Task.CompletedTask;
         }
 
-        public static void Simplify(
-            SyntaxNode root,
-            ExpressionSyntax expression,
-            ExpressionSyntax countExpression,
-            CountComparisonResult comparisonResult,
-            CodeFixContext context) =>
-
+        public static void Simplify(SyntaxNode root, ExpressionSyntax expression, ExpressionSyntax countExpression, CountComparisonResult comparisonResult, CodeFixContext context) =>
             context.RegisterCodeFix(
-                CodeAction.Create(
-                    Title,
-                    c => Replacement(root, expression, countExpression, comparisonResult, context)),
+                CodeAction.Create(Title, c => Replacement(root, expression, (InvocationExpressionSyntax)countExpression, comparisonResult, context)),
                 context.Diagnostics);
 
-        private static Task<Document> Replacement(
-            SyntaxNode root,
-            ExpressionSyntax expression,
-            ExpressionSyntax countExpression,
-            CountComparisonResult comparisonResult,
-            CodeFixContext context)
+        private static Task<Document> Replacement(SyntaxNode root, ExpressionSyntax expression, InvocationExpressionSyntax count, CountComparisonResult comparison, CodeFixContext context)
         {
-            var anyExpression = countExpression.ReplaceNode(countExpression, AnyNode((InvocationExpressionSyntax)countExpression));
-            if (comparisonResult == CountComparisonResult.Empty)
-            {
-                anyExpression = SyntaxFactory.PrefixUnaryExpression(SyntaxKind.LogicalNotExpression, anyExpression);
-            }
-            return Task.FromResult(context.Document.WithSyntaxRoot(root.ReplaceNode(expression, anyExpression).WithAdditionalAnnotations(Formatter.Annotation)));
-        }
+            var memberAccess = (MemberAccessExpressionSyntax)count.Expression;
+            var name = memberAccess.WithName(SyntaxFactory.IdentifierName(nameof(Enumerable.Any)));
+            var any = SyntaxFactory.InvocationExpression(name, count.ArgumentList);
 
-        private static ExpressionSyntax AnyNode(InvocationExpressionSyntax invocation) =>
-            ((MemberAccessExpressionSyntax)invocation.Expression).WithName(SyntaxFactory.IdentifierName(nameof(Enumerable.Any)));
+            SyntaxNode replacement = comparison == CountComparisonResult.Empty
+                ? SyntaxFactory.PrefixUnaryExpression(SyntaxKind.LogicalNotExpression, any)
+                : any;
+
+            return Task.FromResult(context.Document.WithSyntaxRoot(root.ReplaceNode(expression, replacement).WithAdditionalAnnotations(Formatter.Annotation)));
+        }
     }
 }
