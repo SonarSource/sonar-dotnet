@@ -23,6 +23,7 @@ using System.Collections.Generic;
 using System.Linq;
 using FluentAssertions;
 using Microsoft.CodeAnalysis;
+using Microsoft.CodeAnalysis.Operations;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.Helpers;
 using SonarAnalyzer.SymbolicExecution.Constraints;
@@ -268,6 +269,35 @@ Tag(""End"", value);";
             var validator = SETestContext.CreateCS(code, new BoolTestCheck(), postProcess).Validator;
             validator.ValidateExitReachCount(2);
             captured.Should().OnlyContain(x => x.Value.HasConstraint(BoolConstraint.True) == x.ExpectedHasTrueConstraint);
+        }
+
+        [TestMethod]
+        public void Branching_VisitedSymbolicValue_IsImmutable()
+        {
+            const string code = @"
+var value = true;
+if (boolParameter)
+{
+    value.ToString();
+    Tag(""ToString"", value);
+}
+else
+{
+    value.GetHashCode();    // Another invocation to have same instruction count in both branches
+    Tag(""GetHashCode"", value);
+}";
+            var postProcess = new PostProcessTestCheck(x =>
+            {
+                if (x.Operation.Instance is IInvocationOperation invocation && invocation.TargetMethod.Name == "ToString")
+                {
+                    x.State[invocation.Instance.TrackedSymbol()].SetConstraint(TestConstraint.First);
+                }
+                return x.State;
+            });
+            var validator = SETestContext.CreateCS(code, new BoolTestCheck(), postProcess).Validator;
+            validator.ValidateTag("ToString", x => x.HasConstraint(TestConstraint.First).Should().BeTrue());
+            validator.ValidateTag("GetHashCode", x => x.HasConstraint<TestConstraint>().Should().BeTrue()); // FIXME: Should be False, nobody set the constraint on that path
+            validator.ValidateExitReachCount(1);    // FIXME: Should be 2. // Once for each state
         }
     }
 }
