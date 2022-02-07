@@ -47,7 +47,7 @@ namespace SonarAnalyzer.UnitTest.Rules
             new VerifierBuilder()
                 .AddAnalyzer(() => new CS.CollectionEmptinessChecking())
                 .AddPaths("CollectionEmptinessChecking.cs")
-                .WithCodeFix<CS.CollectionEmptinessCheckingFixProvider>()
+                .WithCodeFix<CS.CollectionEmptinessCheckingCodeFix>()
                 .WithCodeFixedPath(@"TestCases\CollectionEmptinessChecking.Fixed.cs")
                 .VerifyCodeFix();
     }

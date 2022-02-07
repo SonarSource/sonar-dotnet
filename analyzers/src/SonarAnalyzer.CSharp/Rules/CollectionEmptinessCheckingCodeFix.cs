@@ -32,7 +32,7 @@ using SonarAnalyzer.Helpers;
 namespace SonarAnalyzer.Rules.CSharp
 {
     [ExportCodeFixProvider(LanguageNames.CSharp)]
-    public sealed class CollectionEmptinessCheckingFixProvider : SonarCodeFixProvider
+    public sealed class CollectionEmptinessCheckingCodeFix : SonarCodeFixProvider
     {
         internal const string Title = "Use Any() instead";
         public override ImmutableArray<string> FixableDiagnosticIds => ImmutableArray.Create(CollectionEmptinessChecking.DiagnosticId);
