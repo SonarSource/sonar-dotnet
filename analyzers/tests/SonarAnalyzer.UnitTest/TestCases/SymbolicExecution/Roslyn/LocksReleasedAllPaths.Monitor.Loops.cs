@@ -8,7 +8,7 @@ class Program
 
     public void Method1()
     {
-        Monitor.Enter(obj);
+        Monitor.Enter(obj);     // Noncompliant tricky FP, as the execution should always reach number 9, but we don't track that
         for (int i = 0; i < 10; i++)
         {
             if (i == 9)
@@ -33,7 +33,7 @@ class Program
 
     public void Method3()
     {
-        Monitor.Enter(obj); // FN
+        Monitor.Enter(obj); // Noncompliant
         for (int i = 0; i < 10; i++)
         {
             if (i == 5)
@@ -50,7 +50,7 @@ class Program
 
     public void Method4()
     {
-        Monitor.Enter(obj);
+        Monitor.Enter(obj); // Noncompliant tricky FP, as the execution should always reach number 9, but we don't track that
         for (int i = 0; i < 10; i++)
         {
             if (i == 10)
@@ -67,7 +67,7 @@ class Program
 
     public void Method5()
     {
-        Monitor.Enter(obj); // FN
+        Monitor.Enter(obj); // Noncompliant
         for (int i = 0; i < 10; i++)
         {
             if (i == 9)
@@ -84,9 +84,9 @@ class Program
 
     public void Method6(bool condition, byte[] array)
     {
-        Monitor.Enter(obj); // FN
+        Monitor.Enter(obj); // Noncompliant
         foreach (var item in array)
-        {         
+        {
             if (condition)
             {
                 Monitor.Exit(obj);
@@ -96,7 +96,7 @@ class Program
 
     public void Method7(bool condition, byte[] array)
     {
-        Monitor.Enter(obj); // FN, array can be empty
+        Monitor.Enter(obj); // Noncompliant, array can be empty
         foreach (var item in array)
         {
             Monitor.Exit(obj);
@@ -105,7 +105,7 @@ class Program
 
     public void Method8(bool condition, List<byte> array)
     {
-        Monitor.Enter(obj); // FN
+        Monitor.Enter(obj); // Noncompliant
         while (array.Count < 42)
         {
             if (condition)
@@ -118,7 +118,7 @@ class Program
 
     public void Method9(bool condition, List<byte> array)
     {
-        Monitor.Enter(obj); // FN, count can be bigger than 42
+        Monitor.Enter(obj); // Noncompliant, count can be bigger than 42
         while (array.Count < 42)
         {
             Monitor.Exit(obj);

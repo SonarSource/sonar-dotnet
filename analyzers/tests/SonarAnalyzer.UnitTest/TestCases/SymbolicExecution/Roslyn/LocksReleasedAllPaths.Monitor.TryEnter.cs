@@ -7,7 +7,7 @@ class Program
 
     public void Method1()
     {
-        if (Monitor.TryEnter(obj)) // FN
+        if (Monitor.TryEnter(obj)) // Noncompliant
         {
         }
         else
@@ -18,7 +18,7 @@ class Program
 
     public void Method2()
     {
-        if (Monitor.TryEnter(obj)) // Compliant
+        if (Monitor.TryEnter(obj)) // Noncompliant FP, we don't track the boolean result yet
         {
             Monitor.Exit(obj);
         }
@@ -29,7 +29,7 @@ class Program
 
     public void Method3()
     {
-        if (Monitor.TryEnter(obj, 42)) // FN
+        if (Monitor.TryEnter(obj, 42)) // Noncompliant
         {
         }
         else
@@ -41,7 +41,7 @@ class Program
     public void Method4(bool condition)
     {
         bool isAcquired = false;
-        Monitor.TryEnter(obj, 42, ref isAcquired); // FN
+        Monitor.TryEnter(obj, 42, ref isAcquired); // Noncompliant
         if (condition)
         {
             Monitor.Exit(obj);
@@ -50,7 +50,7 @@ class Program
 
     public void Method5()
     {
-        if (Monitor.TryEnter(obj, new TimeSpan(42))) // FN
+        if (Monitor.TryEnter(obj, new TimeSpan(42))) // Noncompliant
         {
         }
         else
@@ -62,7 +62,7 @@ class Program
     public void Method6(bool condition)
     {
         bool isAcquired = false;
-        Monitor.TryEnter(obj, new TimeSpan(42), ref isAcquired); // FN
+        Monitor.TryEnter(obj, new TimeSpan(42), ref isAcquired); // Noncompliant
         if (condition)
         {
             Monitor.Exit(obj);
@@ -71,7 +71,7 @@ class Program
 
     public void Method7()
     {
-        bool isAcquired = Monitor.TryEnter(obj, 42); // FN
+        bool isAcquired = Monitor.TryEnter(obj, 42); // Noncompliant
 
         if (isAcquired)
         {
@@ -84,7 +84,7 @@ class Program
 
     public void Method8()
     {
-        bool isAcquired = Monitor.TryEnter(obj, 42); // Compliant
+        bool isAcquired = Monitor.TryEnter(obj, 42); // Noncompliant FP, isAcquired is not tracked properly yet
 
         if (isAcquired)
         {
@@ -106,7 +106,7 @@ class Program
 
     public void Method11()
     {
-        switch (Monitor.TryEnter(obj)) // Compliant
+        switch (Monitor.TryEnter(obj)) // Noncompliant FP, bool result is not tracked properly yet
         {
             case true:
                 Monitor.Exit(obj);
@@ -118,7 +118,7 @@ class Program
 
     public void Method12()
     {
-        switch (Monitor.TryEnter(obj)) // FN
+        switch (Monitor.TryEnter(obj)) // Noncompliant
         {
             case false:
                 Monitor.Exit(obj);
@@ -131,7 +131,7 @@ class Program
     public void Method13(bool condition)
     {
         bool isAcquired = false;
-        Monitor.TryEnter(obj, 42, ref isAcquired);
+        Monitor.TryEnter(obj, 42, ref isAcquired);  // Noncompliant FP, isAcquired is not tracked properly yet
         if (isAcquired)
         {
             Monitor.Exit(obj);

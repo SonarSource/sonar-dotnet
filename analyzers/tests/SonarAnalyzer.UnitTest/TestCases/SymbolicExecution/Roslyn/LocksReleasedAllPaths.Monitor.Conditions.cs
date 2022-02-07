@@ -12,7 +12,7 @@ class Program
 
     public void Method1()
     {
-        Monitor.Enter(obj); // FN
+        Monitor.Enter(obj); // Noncompliant
         if (condition)
         {
             Monitor.Exit(obj);
@@ -21,7 +21,7 @@ class Program
 
     public void Method2()
     {
-        Monitor.Enter(obj); // FN
+        Monitor.Enter(obj); // Noncompliant
         switch (condition)
         {
             case true:
@@ -35,7 +35,7 @@ class Program
     public void Method3()
     {
         bool isAcquired = false;
-        Monitor.Enter(obj, ref isAcquired); // FN
+        Monitor.Enter(obj, ref isAcquired); // Noncompliant
         if (condition)
         {
             Monitor.Exit(obj);
@@ -202,12 +202,12 @@ class Program
         }
     }
 
-    public void Method17(bool condition1)
+    public void Method17(bool anotherCondition)
     {
-        Monitor.Enter(obj);
+        Monitor.Enter(obj); // Noncompliant
         if (condition)
         {
-            if (!condition1)
+            if (!anotherCondition)
             {
                 Monitor.Exit(obj);
             }
@@ -283,7 +283,7 @@ class Program
     public void Method22()
     {
         bool isAcquired = false;
-        Monitor.Enter(obj, ref isAcquired); // Compliant
+        Monitor.Enter(obj, ref isAcquired); // Noncompliant FP, the isAcquired is not tracked
         if (isAcquired)
         {
             Monitor.Exit(obj);
@@ -292,7 +292,7 @@ class Program
 
     public void Method23(bool condition1)
     {
-        Monitor.Enter(obj); // FN
+        Monitor.Enter(obj); // Noncompliant
         if (condition)
         {
             if (!condition1)
@@ -317,7 +317,7 @@ class Program
     {
         set
         {
-            Monitor.Enter(obj); // FN
+            Monitor.Enter(obj); // Noncompliant
             if (value == 42)
             {
                 Monitor.Exit(obj);
