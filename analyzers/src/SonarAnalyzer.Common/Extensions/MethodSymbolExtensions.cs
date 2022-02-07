@@ -18,6 +18,7 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System.Linq;
 using Microsoft.CodeAnalysis;
 using Comparison = SonarAnalyzer.Helpers.ComparisonKind;
 
@@ -27,6 +28,9 @@ namespace SonarAnalyzer.Helpers
     {
         internal static bool Is(this IMethodSymbol methodSymbol, KnownType knownType, string name) =>
             methodSymbol.ContainingType.Is(knownType) && methodSymbol.Name == name;
+
+        internal static bool IsAny(this IMethodSymbol methodSymbol, KnownType knownType, params string[] names) =>
+            methodSymbol.ContainingType.Is(knownType) && names.Contains(methodSymbol.Name);
 
         public static Comparison ComparisonKind(this IMethodSymbol method) =>
             method?.MethodKind == MethodKind.UserDefinedOperator
