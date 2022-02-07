@@ -50,7 +50,10 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
 
         public void Execute()
         {
-            // ToDo: Forbid running twice
+            if (visited.Any())
+            {
+                throw new InvalidOperationException("Engine can be executed only once.");
+            }
             if (!ProgramPoint.HasSupportedSize(cfg))
             {
                 return;
