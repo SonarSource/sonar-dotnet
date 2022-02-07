@@ -37,7 +37,7 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn.Checks
         private readonly HashSet<ISymbol> exitHeldSymbols = new();
         private readonly Dictionary<ISymbol, IOperationWrapperSonar> lastSymbolLock = new();
 
-        private readonly string[] readerWriterLockSlimLockMethodNames =
+        private static readonly string[] ReaderWriterLockSlimLockMethods =
         {
             "EnterReadLock",
             "EnterUpgradeableReadLock",
@@ -64,7 +64,7 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn.Checks
                 {
                     return ProcessMonitorExit(context, invocation);
                 }
-                else if (invocation.TargetMethod.IsAny(KnownType.System_Threading_ReaderWriterLockSlim, readerWriterLockSlimLockMethodNames))
+                else if (invocation.TargetMethod.IsAny(KnownType.System_Threading_ReaderWriterLockSlim, ReaderWriterLockSlimLockMethods))
                 {
                     return ProcessReaderWriterLockSlimEnter(context, invocation);
                 }
