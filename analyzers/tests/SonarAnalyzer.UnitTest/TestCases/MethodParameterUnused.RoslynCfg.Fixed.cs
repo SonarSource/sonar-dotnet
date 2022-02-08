@@ -593,4 +593,22 @@ namespace Tests.TestCases
             }
         }
     }
+
+    // https://github.com/SonarSource/sonar-dotnet/issues/5338
+    public class Repro_5338
+    {
+        private string[] largerArray;
+
+        // This case is very similar to our MethodParameterUnused.RoslynCfg.Fixed.cs, but it reproduces on .NET build as well.
+        // https://github.com/dotnet/roslyn/issues/56644
+        private bool HasAny(string[] smallerOrEqualArray)       // Fixed
+        {
+            return largerArray.Any(smallerOrEqualArray.Contains);
+        }
+
+        private static double GetDegreeOfOverlap(string[] largerArray, string[] smallerOrEqualArray)    // Fixed
+        {
+            return (double)largerArray.Count(smallerOrEqualArray.Contains) / largerArray.Length;
+        }
+    }
 }
