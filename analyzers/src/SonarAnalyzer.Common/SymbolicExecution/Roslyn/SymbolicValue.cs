@@ -52,7 +52,7 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
             ret.Append("SV_").Append(identifier);
             if (Constraints.Any())
             {
-                ret.Append(": ").Append(Constraints.Values.JoinStr(", ", x => x.ToString()));
+                ret.Append(": ").Append(Constraints.Values.Select(x => x.ToString()).OrderBy(x => x).JoinStr(", "));
             }
             return ret.ToString();
         }
@@ -71,7 +71,8 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
         public bool HasConstraint(SymbolicConstraint constraint) =>
             Constraints.TryGetValue(constraint.GetType(), out var current) && constraint == current;
 
-        public override int GetHashCode() => 0; // We can't calculate stable hash code. This class is not supposed to be used as a key in sets and dictionaries.
+        public override int GetHashCode() =>
+            HashCode.DictionaryContentHash(Constraints);
 
         public virtual bool Equals(SymbolicValue other) =>
             other is not null && other.Constraints.DictionaryEquals(Constraints);

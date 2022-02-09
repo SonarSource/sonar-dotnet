@@ -20,7 +20,6 @@
 
 using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using SonarAnalyzer.SymbolicExecution;
 using SonarAnalyzer.SymbolicExecution.Constraints;
 using SonarAnalyzer.SymbolicExecution.Roslyn;
 using SonarAnalyzer.UnitTest.TestFramework.SymbolicExecution;
@@ -62,13 +61,13 @@ namespace SonarAnalyzer.UnitTest.SymbolicExecution.Roslyn
             sut.ToString().Should().Be("SV_2: Held");
 
             sut = sut.WithConstraint(TestConstraint.First);
-            sut.ToString().Should().Be("SV_3: Held, First");
+            sut.ToString().Should().Be("SV_3: First, Held");
 
             sut = sut.WithConstraint(TestConstraint.Second);   // Override First to Second
             sut.ToString().Should().Be("SV_4: Held, Second");
 
             sut = sut.WithConstraint(DummyConstraint.Dummy);
-            sut.ToString().Should().Be("SV_5: Held, Second, Dummy");
+            sut.ToString().Should().Be("SV_5: Dummy, Held, Second");
         }
 
         [TestMethod]
@@ -123,16 +122,18 @@ namespace SonarAnalyzer.UnitTest.SymbolicExecution.Roslyn
         }
 
         [TestMethod]
-        public void GetHashCode_AlwaysZero()
+        public void GetHashCode_ComputedFromConstraints()
         {
             var counter = new SymbolicValueCounter();
-            new SymbolicValue(counter).GetHashCode().Should().Be(0);
-            new SymbolicValue(counter).GetHashCode().Should().Be(0);
-            var sut = new SymbolicValue(counter);
-            sut = sut.WithConstraint(TestConstraint.First);
-            sut.GetHashCode().Should().Be(0);
-            sut = sut.WithConstraint(BoolConstraint.True);
-            sut.GetHashCode().Should().Be(0);
+            var empty1 = new SymbolicValue(counter);
+            var empty2 = new SymbolicValue(counter);
+            var basic = new SymbolicValue(counter).WithConstraint(TestConstraint.First);
+            var same = new SymbolicValue(counter).WithConstraint(TestConstraint.First);
+            var different = new SymbolicValue(counter).WithConstraint(BoolConstraint.True);
+            empty1.GetHashCode().Should().Be(empty2.GetHashCode()).And.Be(0);   // Hash seed for empty dictionary is zero
+            basic.GetHashCode().Should().Be(basic.GetHashCode()).And.NotBe(0);
+            basic.GetHashCode().Should().Be(same.GetHashCode());
+            basic.GetHashCode().Should().NotBe(different.GetHashCode());
         }
 
         [TestMethod]
