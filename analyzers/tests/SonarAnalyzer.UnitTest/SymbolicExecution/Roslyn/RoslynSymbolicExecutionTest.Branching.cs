@@ -292,8 +292,8 @@ else
                     : x.State);
             var validator = SETestContext.CreateCS(code, new BoolTestCheck(), postProcess).Validator;
             validator.ValidateTag("ToString", x => x.HasConstraint(TestConstraint.First).Should().BeTrue());
-            validator.ValidateTag("GetHashCode", x => x.HasConstraint<TestConstraint>().Should().BeTrue()); // FIXME: Should be False, nobody set the constraint on that path
-            validator.ValidateExitReachCount(1);    // FIXME: Should be 2. // Once for each state
+            validator.ValidateTag("GetHashCode", x => x.HasConstraint<TestConstraint>().Should().BeFalse()); // Nobody set the constraint on that path
+            validator.ValidateExitReachCount(2);    // Once for each state
         }
     }
 }

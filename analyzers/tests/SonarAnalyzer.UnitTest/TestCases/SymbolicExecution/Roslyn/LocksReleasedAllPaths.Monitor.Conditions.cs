@@ -46,8 +46,8 @@ namespace Monitor_Conditions
 
         public void Method4()
         {
-            Monitor.Enter(obj); // FN
-            Monitor.Enter(other); // FN
+            Monitor.Enter(obj);     // Noncompliant
+            Monitor.Enter(other);   // Noncompliant
             if (condition)
             {
                 Monitor.Exit(obj);
@@ -190,7 +190,7 @@ namespace Monitor_Conditions
 
         public void Method16(string arg)
         {
-            Monitor.Enter(obj); // FN
+            Monitor.Enter(obj); // Noncompliant
             if (arg.Length == 16)
             {
                 Monitor.Exit(obj);
@@ -218,7 +218,7 @@ namespace Monitor_Conditions
 
         public void Method18(bool condition1, bool condition2)
         {
-            Monitor.Enter(obj); // FN
+            Monitor.Enter(obj); // Noncompliant
             if (condition)
             {
                 switch (condition1)
@@ -245,7 +245,7 @@ namespace Monitor_Conditions
 
         public void Method19()
         {
-            Monitor.Enter(obj); // FN
+            Monitor.Enter(obj); // Noncompliant
             if (condition)
             {
                 Monitor.Exit(obj);
@@ -268,7 +268,7 @@ namespace Monitor_Conditions
 
         public void Method21(string arg)
         {
-            Monitor.Enter(obj); // FN
+            Monitor.Enter(obj); // Noncompliant
             if (arg.Length == 16)
             {
                 Monitor.Exit(obj);

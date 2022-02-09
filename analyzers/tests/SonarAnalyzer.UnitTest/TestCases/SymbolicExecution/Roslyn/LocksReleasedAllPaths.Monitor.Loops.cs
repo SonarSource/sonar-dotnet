@@ -130,7 +130,7 @@ namespace Monitor_Loops
 
         public void Method10(bool condition, List<byte> array)
         {
-            Monitor.Enter(obj); // FN
+            Monitor.Enter(obj); // Noncompliant
             do
             {
                 if (condition)
