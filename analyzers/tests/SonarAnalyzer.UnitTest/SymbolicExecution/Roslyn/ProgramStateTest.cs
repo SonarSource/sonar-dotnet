@@ -230,12 +230,9 @@ namespace SonarAnalyzer.UnitTest.SymbolicExecution.Roslyn
         public void SymbolsWith_ReturnCorrectSymbols()
         {
             var counter = new SymbolicValueCounter();
-            var value0 = new SymbolicValue(counter);
-            var value1 = new SymbolicValue(counter);
-            var value2 = new SymbolicValue(counter);
-            value0.SetConstraint(DummyConstraint.Dummy);
-            value1.SetConstraint(TestConstraint.First);
-            value2.SetConstraint(TestConstraint.First);
+            var value0 = new SymbolicValue(counter).WithConstraint(DummyConstraint.Dummy);
+            var value1 = new SymbolicValue(counter).WithConstraint(TestConstraint.First);
+            var value2 = new SymbolicValue(counter).WithConstraint(TestConstraint.First);
             var symbols = CreateSymbols();
             var sut = ProgramState.Empty
                 .SetSymbolValue(symbols[0], value0)
@@ -259,10 +256,8 @@ namespace SonarAnalyzer.UnitTest.SymbolicExecution.Roslyn
         public void Equals_ReturnsTrueForEquivalent()
         {
             var counter = new SymbolicValueCounter();
-            var reusedValue = new SymbolicValue(counter);
-            reusedValue.SetConstraint(TestConstraint.First);
-            var anotherValue = new SymbolicValue(counter);
-            anotherValue.SetConstraint(TestConstraint.Second);
+            var reusedValue = new SymbolicValue(counter).WithConstraint(TestConstraint.First);
+            var anotherValue = new SymbolicValue(counter).WithConstraint(TestConstraint.Second);
             var operations = TestHelper.CompileCfgBodyCS("var x = 42;").Blocks[1].Operations.ToExecutionOrder().ToArray();
             var symbol = operations.Select(x => x.Instance.TrackedSymbol()).First(x => x is not null);
             var empty = ProgramState.Empty;
@@ -304,10 +299,8 @@ namespace SonarAnalyzer.UnitTest.SymbolicExecution.Roslyn
         public void GetHashCode_ReturnsSameForEquivalent()
         {
             var counter = new SymbolicValueCounter();
-            var reusedValue = new SymbolicValue(counter);
-            reusedValue.SetConstraint(TestConstraint.First);
-            var anotherValue = new SymbolicValue(counter);
-            anotherValue.SetConstraint(TestConstraint.Second);
+            var reusedValue = new SymbolicValue(counter).WithConstraint(TestConstraint.First);
+            var anotherValue = new SymbolicValue(counter).WithConstraint(TestConstraint.Second);
             var operations = TestHelper.CompileCfgBodyCS("var x = 42;").Blocks[1].Operations.ToExecutionOrder().ToArray();
             var symbol = operations.Select(x => x.Instance.TrackedSymbol()).First(x => x is not null);
             var empty = ProgramState.Empty;
@@ -324,16 +317,16 @@ namespace SonarAnalyzer.UnitTest.SymbolicExecution.Roslyn
             empty.GetHashCode().Should().Be(empty.GetHashCode());
 
             withOperationOrig.GetHashCode().Should().Be(withOperationSame.GetHashCode());
-            withOperationOrig.GetHashCode().Should().Be(withOperationDiff.GetHashCode(), "SymbolicValue produces constant hash code");
+            withOperationOrig.GetHashCode().Should().NotBe(withOperationDiff.GetHashCode());
             withOperationOrig.GetHashCode().Should().NotBe(withSymbolSame.GetHashCode());
             withOperationOrig.GetHashCode().Should().NotBe(mixedSame.GetHashCode());
 
             withSymbolOrig.GetHashCode().Should().Be(withSymbolSame.GetHashCode());
-            withSymbolOrig.GetHashCode().Should().Be(withSymbolDiff.GetHashCode(), "SymbolicValue produces constant hash code");
+            withSymbolOrig.GetHashCode().Should().NotBe(withSymbolDiff.GetHashCode());
             withSymbolOrig.GetHashCode().Should().NotBe(mixedSame.GetHashCode());
 
             mixedOrig.GetHashCode().Should().Be(mixedSame.GetHashCode());
-            mixedOrig.GetHashCode().Should().Be(mixedDiff.GetHashCode(), "SymbolicValue produces constant hash code");
+            mixedOrig.GetHashCode().Should().NotBe(mixedDiff.GetHashCode());
         }
 
         [TestMethod]
@@ -358,13 +351,12 @@ a: <null>
 a: SV_1
 ");
 
-            var valueWithConstraint = new SymbolicValue(counter);
-            valueWithConstraint.SetConstraint(TestConstraint.Second);
+            var valueWithConstraint = new SymbolicValue(counter).WithConstraint(TestConstraint.Second);
             sut = sut.SetSymbolValue(variableSymbol.ContainingSymbol, valueWithConstraint);
             sut.ToString().Should().BeIgnoringLineEndings(
 @"Symbols:
 a: SV_1
-Sample.Main(): SV_2: Second
+Sample.Main(): SV_3: Second
 ");
         }
 
@@ -384,12 +376,11 @@ SimpleAssignmentOperation / VariableDeclaratorSyntax: a = true: <null>
 @"Operations:
 SimpleAssignmentOperation / VariableDeclaratorSyntax: a = true: SV_1
 ");
-            var valueWithConstraint = new SymbolicValue(counter);
-            valueWithConstraint.SetConstraint(TestConstraint.Second);
+            var valueWithConstraint = new SymbolicValue(counter).WithConstraint(TestConstraint.Second);
             sut = sut.SetOperationValue(assignment.Children.First(), valueWithConstraint);
             sut.ToString().Should().BeIgnoringLineEndings(
 @"Operations:
-LocalReferenceOperation / VariableDeclaratorSyntax: a = true: SV_2: Second
+LocalReferenceOperation / VariableDeclaratorSyntax: a = true: SV_3: Second
 SimpleAssignmentOperation / VariableDeclaratorSyntax: a = true: SV_1
 ");
         }
@@ -400,8 +391,7 @@ SimpleAssignmentOperation / VariableDeclaratorSyntax: a = true: SV_1
             var assignment = TestHelper.CompileCfgBodyCS("var a = true;").Blocks[1].Operations[0];
             var counter = new SymbolicValueCounter();
             var variableSymbol = assignment.Children.First().TrackedSymbol();
-            var valueWithConstraint = new SymbolicValue(counter);
-            valueWithConstraint.SetConstraint(TestConstraint.First);
+            var valueWithConstraint = new SymbolicValue(counter).WithConstraint(TestConstraint.First);
             var sut = ProgramState.Empty
                 .SetSymbolValue(variableSymbol, new SymbolicValue(counter))
                 .SetSymbolValue(variableSymbol.ContainingSymbol, valueWithConstraint)
@@ -410,11 +400,11 @@ SimpleAssignmentOperation / VariableDeclaratorSyntax: a = true: SV_1
 
             sut.ToString().Should().BeIgnoringLineEndings(
 @"Symbols:
-a: SV_2
-Sample.Main(): SV_1: First
+a: SV_3
+Sample.Main(): SV_2: First
 Operations:
-LocalReferenceOperation / VariableDeclaratorSyntax: a = true: SV_1: First
-SimpleAssignmentOperation / VariableDeclaratorSyntax: a = true: SV_3
+LocalReferenceOperation / VariableDeclaratorSyntax: a = true: SV_2: First
+SimpleAssignmentOperation / VariableDeclaratorSyntax: a = true: SV_4
 ");
         }
 
