@@ -287,13 +287,9 @@ else
     Tag(""GetHashCode"", value);
 }";
             var postProcess = new PostProcessTestCheck(x =>
-            {
-                if (x.Operation.Instance is IInvocationOperation invocation && invocation.TargetMethod.Name == "ToString")
-                {
-                    x.State[invocation.Instance.TrackedSymbol()].SetConstraint(TestConstraint.First);
-                }
-                return x.State;
-            });
+                x.Operation.Instance is IInvocationOperation invocation && invocation.TargetMethod.Name == "ToString"
+                    ? x.SetSymbolConstraint(invocation.Instance.TrackedSymbol(), TestConstraint.First)
+                    : x.State);
             var validator = SETestContext.CreateCS(code, new BoolTestCheck(), postProcess).Validator;
             validator.ValidateTag("ToString", x => x.HasConstraint(TestConstraint.First).Should().BeTrue());
             validator.ValidateTag("GetHashCode", x => x.HasConstraint<TestConstraint>().Should().BeTrue()); // FIXME: Should be False, nobody set the constraint on that path

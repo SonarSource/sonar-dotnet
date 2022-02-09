@@ -19,6 +19,7 @@
  */
 
 using System;
+using System.Linq;
 using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.SymbolicExecution.Roslyn;
@@ -68,7 +69,7 @@ namespace SonarAnalyzer.UnitTest.SymbolicExecution.Roslyn
         }
 
         [TestMethod]
-        public void SetOperationConstraint_WithExistingValue_ReusesProgramState()
+        public void SetOperationConstraint_WithExistingValue()
         {
             var counter = new SymbolicValueCounter();
             var operation = CreateOperation();
@@ -76,12 +77,12 @@ namespace SonarAnalyzer.UnitTest.SymbolicExecution.Roslyn
 
             var sut = new SymbolicContext(counter, operation, state);
             var result = sut.SetOperationConstraint(DummyConstraint.Dummy);
-            result.Should().Be(state);
+            result.Should().NotBe(state, "new ProgramState instance should be created");
             result[operation].HasConstraint(DummyConstraint.Dummy).Should().BeTrue();
         }
 
         [TestMethod]
-        public void SetOperationConstraint_WithNewValue_CreatesNewProgramState()
+        public void SetOperationConstraint_WithNewValue()
         {
             var counter = new SymbolicValueCounter();
             var operation = CreateOperation();
@@ -91,6 +92,34 @@ namespace SonarAnalyzer.UnitTest.SymbolicExecution.Roslyn
             var result = sut.SetOperationConstraint(DummyConstraint.Dummy);
             result.Should().NotBe(state, "new ProgramState instance should be created");
             result[operation].HasConstraint(DummyConstraint.Dummy).Should().BeTrue();
+        }
+
+        [TestMethod]
+        public void SetSymbolConstraint_WithExistringValue()
+        {
+            var counter = new SymbolicValueCounter();
+            var operation = CreateOperation();
+            var symbol = operation.Children.First().TrackedSymbol();
+            var state = ProgramState.Empty.SetSymbolValue(symbol, new SymbolicValue(counter));
+
+            var sut = new SymbolicContext(counter, operation, state);
+            var result = sut.SetSymbolConstraint(symbol, DummyConstraint.Dummy);
+            result.Should().NotBe(state, "new ProgramState instance should be created");
+            result[symbol].HasConstraint(DummyConstraint.Dummy).Should().BeTrue();
+        }
+
+        [TestMethod]
+        public void SetSymbolConstraint_WithNewValue()
+        {
+            var counter = new SymbolicValueCounter();
+            var operation = CreateOperation();
+            var symbol = operation.Children.First().TrackedSymbol();
+            var state = ProgramState.Empty;
+
+            var sut = new SymbolicContext(counter, operation, state);
+            var result = sut.SetSymbolConstraint(symbol, DummyConstraint.Dummy);
+            result.Should().NotBe(state, "new ProgramState instance should be created");
+            result[symbol].HasConstraint(DummyConstraint.Dummy).Should().BeTrue();
         }
 
         private static IOperationWrapperSonar CreateOperation() =>

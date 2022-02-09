@@ -110,29 +110,14 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn.Checks
 
         private ProgramState AddLock(SymbolicContext context, ISymbol symbol)
         {
-            var state = context.State;
-            if (state[symbol] == null)
-            {
-                state = state.SetSymbolValue(symbol, context.CreateSymbolicValue());
-            }
-
-            state[symbol].SetConstraint(LockConstraint.Held);
             lastSymbolLock[symbol] = context.Operation;
-            return state;
+            return context.SetSymbolConstraint(symbol, LockConstraint.Held);
         }
 
         private ProgramState RemoveLock(SymbolicContext context, ISymbol symbol)
         {
-            var state = context.State;
-            if (state[symbol] == null)
-            {
-                // In this case the mutex has been released without being held.
-                state = state.SetSymbolValue(symbol, context.CreateSymbolicValue());
-            }
-
-            state[symbol].SetConstraint(LockConstraint.Released);
             releasedSymbols.Add(symbol);
-            return state;
+            return context.SetSymbolConstraint(symbol, LockConstraint.Released);
         }
 
         private static ISymbol FirstArgumentSymbol(IInvocationOperationWrapper invocation) =>
