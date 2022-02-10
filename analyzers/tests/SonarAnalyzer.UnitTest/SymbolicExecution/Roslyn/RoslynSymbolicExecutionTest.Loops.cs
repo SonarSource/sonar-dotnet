@@ -18,6 +18,7 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System.Linq;
 using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.SymbolicExecution.Constraints;
@@ -47,6 +48,33 @@ Tag(""End"", value);";
             validator.TagValues("End").Should().HaveCount(2)
                 .And.ContainSingle(x => x == null)
                 .And.ContainSingle(x => x != null && x.HasConstraint(TestConstraint.First) && !x.HasConstraint(BoolConstraint.True));
+        }
+
+        [TestMethod]
+        public void Loops_InstructionVisitedMaxTwice_ForEachOriginalState()
+        {
+            const string code = @"
+var value = 42;
+bool condition;
+if(boolParameter)      // This generates two different ProgramStates, each tracks its own visits
+    condition = true;
+else
+    condition = false;
+do
+{
+    value.ToString(); // Add another constraint to 'value'
+} while (true);
+Tag(""End"", value);";
+            var validator = SETestContext.CreateCS(code, ", int[] items", new BoolTestCheck(), new AddConstraintOnInvocationCheck()).Validator;
+            validator.ValidateExitReachCount(4);
+            var states = validator.TagStates("End");
+            var condition = states.SelectMany(x => x.SymbolsWith(BoolConstraint.False)).First();    // "False" is never set for "value"
+            var value = states.SelectMany(x => x.SymbolsWith(TestConstraint.First)).First();        // "First" is never set for "condition"
+            states.Should().HaveCount(4)
+                .And.ContainSingle(x => x[condition].HasConstraint(BoolConstraint.True) && x[value].HasConstraint(TestConstraint.First) && !x[value].HasConstraint(BoolConstraint.True))
+                .And.ContainSingle(x => x[condition].HasConstraint(BoolConstraint.True) && x[value].HasConstraint(TestConstraint.First) && x[value].HasConstraint(BoolConstraint.True))
+                .And.ContainSingle(x => x[condition].HasConstraint(BoolConstraint.False) && x[value].HasConstraint(TestConstraint.First) && !x[value].HasConstraint(BoolConstraint.True))
+                .And.ContainSingle(x => x[condition].HasConstraint(BoolConstraint.False) && x[value].HasConstraint(TestConstraint.First) && x[value].HasConstraint(BoolConstraint.True));
         }
 
         [DataTestMethod]
@@ -120,6 +148,5 @@ Tag(""End"", value);";
                 .And.ContainSingle(x => x.HasConstraint(TestConstraint.First) && !x.HasConstraint(BoolConstraint.True))
                 .And.ContainSingle(x => x.HasConstraint(TestConstraint.First) && x.HasConstraint(BoolConstraint.True) && !x.HasConstraint(DummyConstraint.Dummy));
         }
-
     }
 }

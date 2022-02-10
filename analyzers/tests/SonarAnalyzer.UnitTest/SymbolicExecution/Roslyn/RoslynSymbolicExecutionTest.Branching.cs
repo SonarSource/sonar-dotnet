@@ -217,8 +217,7 @@ else
 Tag(""End"", value);";
             var validator = SETestContext.CreateCS(code, new BoolTestCheck()).Validator;
             validator.ValidateExitReachCount(2);    // Once with True constraint, once with False constraint on "value"
-            var values = validator.TagValues("End");
-            values.Should().HaveCount(2)
+            validator.TagValues("End").Should().HaveCount(2)
                 .And.ContainSingle(x => x.HasConstraint(BoolConstraint.True))
                 .And.ContainSingle(x => x.HasConstraint(BoolConstraint.False));
         }
@@ -239,8 +238,7 @@ else
 Tag(""End"", value);";
             var validator = SETestContext.CreateCS(code, new BoolTestCheck()).Validator;
             validator.ValidateExitReachCount(1);
-            var values = validator.TagValues("End");
-            values.Should().HaveCount(1).And.ContainSingle(x => x.HasConstraint(BoolConstraint.True));
+            validator.TagValues("End").Should().HaveCount(1).And.ContainSingle(x => x.HasConstraint(BoolConstraint.True));
         }
 
         [TestMethod]
