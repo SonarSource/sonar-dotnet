@@ -74,12 +74,7 @@ public class UnitTestProjectTypeProbingTest {
 
   @Test
   public void msTestProject_IsIdentifiedAsMainProject() {
-    assertThat(getIssues("UTProjectProbing:UTProjectProbing.MsTest/calculator.cs"))
-      .extracting(Issues.Issue::getRule)
-      // After the Scanner for .NET gets updated to 5.2, this should be just MAIN_AND_TEST_RULE_ID.
-      // The Scanner for .NET 5.1 does not verify the project references.
-      // https://github.com/SonarSource/sonar-dotnet/issues/4169
-      .containsExactly(MAIN_AND_TEST_RULE_ID, MAIN_RULE_ID);
+    assertThat(getIssues("UTProjectProbing:UTProjectProbing.MsTest/calculator.cs")).isEmpty();
   }
 
   @Test
@@ -104,6 +99,6 @@ public class UnitTestProjectTypeProbingTest {
 
   @Test
   public void logsContainInfo() {
-    assertThat(buildResult.getLogs()).contains("Found 7 MSBuild C# projects: 5 MAIN projects. 2 TEST projects.");
+    assertThat(buildResult.getLogs()).contains("Found 7 MSBuild C# projects: 4 MAIN projects. 3 TEST projects.");
   }
 }
