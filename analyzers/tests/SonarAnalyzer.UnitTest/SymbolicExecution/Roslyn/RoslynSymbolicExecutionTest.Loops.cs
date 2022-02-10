@@ -43,13 +43,10 @@ var value = 42;
 }}
 Tag(""End"", value);";
             var validator = SETestContext.CreateCS(code, ", int[] items", new AddConstraintOnInvocationCheck()).Validator;
-            validator.ValidateExitReachCount(5);                // FIXME: Should be 3 // No symbolic value (no constraints), First, First+True
-            validator.TagValues("End").Should().HaveCount(5)    // FIXME: Should be 3
+            validator.ValidateExitReachCount(2);
+            validator.TagValues("End").Should().HaveCount(2)
                 .And.ContainSingle(x => x == null)
-                .And.ContainSingle(x => x != null && x.HasConstraint(TestConstraint.First) && !x.HasConstraint(BoolConstraint.True))
-                .And.ContainSingle(x => x != null && x.HasConstraint(TestConstraint.First) && x.HasConstraint(BoolConstraint.True) && !x.HasConstraint(DummyConstraint.Dummy))
-                .And.ContainSingle(x => x != null && x.HasConstraint(TestConstraint.First) && x.HasConstraint(BoolConstraint.True) && x.HasConstraint(DummyConstraint.Dummy) && !x.HasConstraint(LockConstraint.Held))   // FIXME: Should go away
-                .And.ContainSingle(x => x != null && x.HasConstraint(TestConstraint.First) && x.HasConstraint(BoolConstraint.True) && x.HasConstraint(DummyConstraint.Dummy) && x.HasConstraint(LockConstraint.Held));   // FIXME: Should go away
+                .And.ContainSingle(x => x != null && x.HasConstraint(TestConstraint.First) && !x.HasConstraint(BoolConstraint.True));
         }
 
         [DataTestMethod]
@@ -66,12 +63,9 @@ do
 }} while ({condition});
 Tag(""End"", value);";
             var validator = SETestContext.CreateCS(code, new AddConstraintOnInvocationCheck()).Validator;
-            validator.ValidateExitReachCount(4);                // FIXME: Should be 2 // First, First+True
-            validator.TagValues("End").Should().HaveCount(4)    // FIXME: Should be 2
-                .And.ContainSingle(x => x.HasConstraint(TestConstraint.First) && !x.HasConstraint(BoolConstraint.True))
-                .And.ContainSingle(x => x.HasConstraint(TestConstraint.First) && x.HasConstraint(BoolConstraint.True) && !x.HasConstraint(DummyConstraint.Dummy))
-                .And.ContainSingle(x => x.HasConstraint(TestConstraint.First) && x.HasConstraint(BoolConstraint.True) && x.HasConstraint(DummyConstraint.Dummy) && !x.HasConstraint(LockConstraint.Held))   // FIXME: Should go away
-                .And.ContainSingle(x => x.HasConstraint(TestConstraint.First) && x.HasConstraint(BoolConstraint.True) && x.HasConstraint(DummyConstraint.Dummy) && x.HasConstraint(LockConstraint.Held));   // FIXME: Should go away
+            validator.ValidateExitReachCount(2);
+            validator.TagValues("End").Should().HaveCount(2)
+                .And.ContainSingle(x => x.HasConstraint(TestConstraint.First) && !x.HasConstraint(BoolConstraint.True));
         }
 
         [TestMethod]
@@ -85,12 +79,10 @@ for( ; ; )
     Tag(""Inside"", value);
 }";
             var validator = SETestContext.CreateCS(code, new AddConstraintOnInvocationCheck()).Validator;
-            validator.ValidateExitReachCount(0);        // There's no branch to 'Exit' block
-            validator.TagValues("Inside").Should().HaveCount(4)     // FIXME: Should be 2
+            validator.ValidateExitReachCount(0);                    // There's no branch to 'Exit' block
+            validator.TagValues("Inside").Should().HaveCount(2)
                 .And.ContainSingle(x => x.HasConstraint(TestConstraint.First) && !x.HasConstraint(BoolConstraint.True))
-                .And.ContainSingle(x => x.HasConstraint(TestConstraint.First) && x.HasConstraint(BoolConstraint.True) && !x.HasConstraint(DummyConstraint.Dummy))
-                .And.ContainSingle(x => x.HasConstraint(TestConstraint.First) && x.HasConstraint(BoolConstraint.True) && x.HasConstraint(DummyConstraint.Dummy) && !x.HasConstraint(LockConstraint.Held))   // FIXME: Should go away
-                .And.ContainSingle(x => x.HasConstraint(TestConstraint.First) && x.HasConstraint(BoolConstraint.True) && x.HasConstraint(DummyConstraint.Dummy) && x.HasConstraint(LockConstraint.Held));   // FIXME: Should go away
+                .And.ContainSingle(x => x.HasConstraint(TestConstraint.First) && x.HasConstraint(BoolConstraint.True) && !x.HasConstraint(DummyConstraint.Dummy));
         }
 
         [TestMethod]
@@ -103,12 +95,10 @@ value.ToString(); // Add another constraint to 'value'
 Tag(""Inside"", value);
 goto Start;";
             var validator = SETestContext.CreateCS(code, new AddConstraintOnInvocationCheck()).Validator;
-            validator.ValidateExitReachCount(0);        // There's no branch to 'Exit' block
-            validator.TagValues("Inside").Should().HaveCount(4)     // FIXME: Should be 2
+            validator.ValidateExitReachCount(0);                    // There's no branch to 'Exit' block
+            validator.TagValues("Inside").Should().HaveCount(4)
                 .And.ContainSingle(x => x.HasConstraint(TestConstraint.First) && !x.HasConstraint(BoolConstraint.True))
-                .And.ContainSingle(x => x.HasConstraint(TestConstraint.First) && x.HasConstraint(BoolConstraint.True) && !x.HasConstraint(DummyConstraint.Dummy))
-                .And.ContainSingle(x => x.HasConstraint(TestConstraint.First) && x.HasConstraint(BoolConstraint.True) && x.HasConstraint(DummyConstraint.Dummy) && !x.HasConstraint(LockConstraint.Held))   // FIXME: Should go away
-                .And.ContainSingle(x => x.HasConstraint(TestConstraint.First) && x.HasConstraint(BoolConstraint.True) && x.HasConstraint(DummyConstraint.Dummy) && x.HasConstraint(LockConstraint.Held));   // FIXME: Should go away
+                .And.ContainSingle(x => x.HasConstraint(TestConstraint.First) && x.HasConstraint(BoolConstraint.True) && !x.HasConstraint(DummyConstraint.Dummy));
         }
 
         [TestMethod]
@@ -125,12 +115,10 @@ if (value > 0)
 }
 Tag(""End"", value);";
             var validator = SETestContext.CreateCS(code, new AddConstraintOnInvocationCheck()).Validator;
-            validator.ValidateExitReachCount(4);        // FIXME: Should be 2 // First, First+True
-            validator.TagValues("End").Should().HaveCount(4)     // FIXME: Should be 2
+            validator.ValidateExitReachCount(2);
+            validator.TagValues("End").Should().HaveCount(2)
                 .And.ContainSingle(x => x.HasConstraint(TestConstraint.First) && !x.HasConstraint(BoolConstraint.True))
-                .And.ContainSingle(x => x.HasConstraint(TestConstraint.First) && x.HasConstraint(BoolConstraint.True) && !x.HasConstraint(DummyConstraint.Dummy))
-                .And.ContainSingle(x => x.HasConstraint(TestConstraint.First) && x.HasConstraint(BoolConstraint.True) && x.HasConstraint(DummyConstraint.Dummy) && !x.HasConstraint(LockConstraint.Held))   // FIXME: Should go away
-                .And.ContainSingle(x => x.HasConstraint(TestConstraint.First) && x.HasConstraint(BoolConstraint.True) && x.HasConstraint(DummyConstraint.Dummy) && x.HasConstraint(LockConstraint.Held));   // FIXME: Should go away
+                .And.ContainSingle(x => x.HasConstraint(TestConstraint.First) && x.HasConstraint(BoolConstraint.True) && !x.HasConstraint(DummyConstraint.Dummy));
         }
 
     }

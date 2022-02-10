@@ -33,7 +33,7 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
         private readonly int index;
         private readonly int programPointHash;
 
-        public ProgramState State { get; }
+        public ProgramState State { get; private set; }
         public BasicBlock Block { get; }
         public IOperationWrapperSonar Operation => index < operations.Length ? operations[index] : null;
 
@@ -51,6 +51,12 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
 
         public ExplodedNode CreateNext(ProgramState state) =>
             new(Block, operations, index + 1, state);
+
+        public int AddVisit()
+        {
+            State = State.AddVisit(programPointHash);
+            return State.GetVisitCount(programPointHash);
+        }
 
         public override int GetHashCode() =>
             HashCode.Combine(programPointHash, State);
