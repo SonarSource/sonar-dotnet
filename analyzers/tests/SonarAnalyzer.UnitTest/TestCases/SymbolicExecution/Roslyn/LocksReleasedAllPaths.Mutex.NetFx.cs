@@ -95,7 +95,7 @@ public class MutexTest
             // Enter the mutex, and hold it until the program exits.
             try
             {
-                m.WaitOne();
+                m.WaitOne(); // Noncompliant
             }
             catch (UnauthorizedAccessException ex)
             {

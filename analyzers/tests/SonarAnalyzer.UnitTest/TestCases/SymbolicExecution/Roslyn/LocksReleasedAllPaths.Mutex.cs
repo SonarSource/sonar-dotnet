@@ -281,4 +281,58 @@ namespace Mutex_Type
             }
         }
     }
+
+    public void MutextAquireByConstructor_SimpleAssignment_LiteralArgument()
+    {
+        var m = new Mutex(true, "bar", out var mutextCreated); // Noncompliant
+        if (cond)
+        {
+            m.ReleaseMutex();
+        }
+    }
+
+    public void MutextAquireByConstructor_SimpleAssignment_FieldArgument()
+    {
+        var m = new Mutex(cond, "bar", out var mutextCreated);
+        if (cond)
+        {
+            m.ReleaseMutex();
+        }
+    }
+
+    public void MutextAquireByConstructor_ReAssignment()
+    {
+        var m = new Mutex(false, "bar", out var mc1);
+        m = new Mutex(true, "bar", out var mc2); // Noncompliant
+        if (cond)
+        {
+            m.ReleaseMutex();
+        }
+    }
+
+    public void MutextAquireByConstructor_MultipleVariableDeclaration()
+    {
+        Mutex m0, m1;
+        m0 = m1 = new Mutex(true, "bar", out var mutextCreated); // FN
+
+        if (cond)
+        {
+            m0.ReleaseMutex();
+        }
+    }
+
+    public void MutextAquireByConstructor_SwitchExpression(int x)
+    {
+        var m = x switch
+                {
+                    1 => new Mutex(),
+                    2 => new Mutex(new bool()),
+                    3 => new Mutex(true, "bar", out var mutextCreated), // FN
+                };
+
+        if (cond)
+        {
+            m.ReleaseMutex();
+        }
+    }
 }

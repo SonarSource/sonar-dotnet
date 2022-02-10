@@ -55,7 +55,31 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn.Checks
 
         public override ProgramState PostProcess(SymbolicContext context)
         {
-            if (context.Operation.Instance.AsInvocation() is { } invocation)
+            if (context.Operation.Instance.AsObjectCreation() is { } objectCreation)
+            {
+                if (objectCreation.Type.Is(KnownType.System_Threading_Mutex)
+                    && objectCreation.Arguments.FirstOrDefault() is { } firstArgument
+                    && firstArgument.AsArgument() is { } initiallyOwnedArgument
+                    && initiallyOwnedArgument.Value.AsLiteral() is { } literalOperation
+                    && literalOperation.WrappedOperation.ConstantValue.Value is true
+                    && context.Operation.Parent.AsAssignment() is { } assignment)
+                {
+                    // Temporary work-around to support the Mutex constructor overcoming the engine limitations.
+                    // As this is a POC, only assignments are supported. Other syntax constructs like switch expressions or multiple variable declaration are not.
+                    //
+                    // The engine should be able to automatically:
+                    //  - Add True constrains for Literals (https://github.com/SonarSource/sonar-dotnet/issues/5380).
+                    //  - Copy the constrains to the local field and other operations as well.
+                    //  - Allow to track back the initial operation which added the constrain for issue reporting and all the intermediate steps for secondary locations.
+                    //
+                    // Note that the `Lock` constraint is added to the constructor. This, in the mature version of the engine, should be on the `True` literal parameter
+                    // which is specifying the lock behavior. Then, the rule should check for `True` constraint before adding the `Lock` one.
+                    var symbol = assignment.Target.TrackedSymbol();
+                    lastSymbolLock[symbol] = new IOperationWrapperSonar(objectCreation.WrappedOperation);
+                    return AddLock(context, objectCreation.WrappedOperation);
+                }
+            }
+            else if (context.Operation.Instance.AsInvocation() is { } invocation)
             {
                 // ToDo: we ignore the number of parameters for now.
                 if (invocation.TargetMethod.IsAny(KnownType.System_Threading_Monitor, "Enter", "TryEnter"))
@@ -90,7 +114,7 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn.Checks
 
         public override void ExecutionCompleted()
         {
-            foreach (var unreleasedSymbol in exitHeldSymbols.Intersect(releasedSymbols))
+            foreach (var unreleasedSymbol in exitHeldSymbols.Intersect(releasedSymbols).Where(x => lastSymbolLock.ContainsKey(x)))
             {
                 ReportIssue(lastSymbolLock[unreleasedSymbol]);
             }
@@ -129,6 +153,10 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn.Checks
             releasedSymbols.Add(symbol);
             return context.SetSymbolConstraint(symbol, LockConstraint.Released);
         }
+
+        // This method should be removed once the engine has support for `True/False` boolean constraints.
+        private static ProgramState AddLock(SymbolicContext context, IOperation operation) =>
+            context.State.SetOperationValue(operation, context.CreateSymbolicValue().WithConstraint(LockConstraint.Held));
 
         private static ISymbol FirstArgumentSymbol(IInvocationOperationWrapper invocation) =>
             IArgumentOperationWrapper.FromOperation(invocation.Arguments.First()).Value.TrackedSymbol();
