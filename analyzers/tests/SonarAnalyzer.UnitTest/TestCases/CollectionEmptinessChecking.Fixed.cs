@@ -15,11 +15,11 @@ namespace Tests.Diagnostics
         }
         private static bool HasContent2(List<string> l)
         {
-            return Enumerable.Any(l); // Fixed
+            return l.Any(); // Fixed
         }
         private static bool HasContent2b(List<string> l)
         {
-            return Enumerable.Any(l); // Fixed
+            return l.Any(); // Fixed
         }
         private static bool IsNotEmpty1(List<string> l)
         {
@@ -56,6 +56,34 @@ namespace Tests.Diagnostics
         private static bool IsEmptyWithCondition(List<int> numbers)
         {
             return !numbers.Any(n => n % 2 == 0); // Fixed
+        }
+        public static bool WithReferencedCondition(int[] n)
+        {
+            return !n.Any(Include); // Fixed
+        }
+        static bool Include(int n)
+        {
+            return n == 17;
+        }
+    }
+
+    public class NotAsExtension
+    {
+        bool IsEmpty(int[] n)
+        {
+            return !n.Any(); // Fixed
+        }
+        bool HasAny(int[] n)
+        {
+            return n.Any(); // Fixed
+        }
+        bool RightExpression(int[] n)
+        {
+            return n.Any(); // Fixed
+        }
+        bool WithCondition(int[] n)
+        {
+            return !n.Any(x => x != 2); // Fixed
         }
     }
 

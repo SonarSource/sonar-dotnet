@@ -66,9 +66,9 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private static Task<Document> Replacement(SyntaxNode root, ExpressionSyntax expression, InvocationExpressionSyntax count, CountComparisonResult comparison, CodeFixContext context)
         {
-            var memberAccess = (MemberAccessExpressionSyntax)count.Expression;
-            var name = memberAccess.WithName(SyntaxFactory.IdentifierName(nameof(Enumerable.Any)));
-            var any = SyntaxFactory.InvocationExpression(name, count.ArgumentList);
+            var any = NotAsExtenion(count)
+                ? AnyAsExtension(count)
+                : AnyFromExtension(count);
 
             SyntaxNode replacement = comparison == CountComparisonResult.Empty
                 ? SyntaxFactory.PrefixUnaryExpression(SyntaxKind.LogicalNotExpression, any)
@@ -76,5 +76,25 @@ namespace SonarAnalyzer.Rules.CSharp
 
             return Task.FromResult(context.Document.WithSyntaxRoot(root.ReplaceNode(expression, replacement).WithAdditionalAnnotations(Formatter.Annotation)));
         }
+
+        private static InvocationExpressionSyntax AnyFromExtension(InvocationExpressionSyntax count)
+        {
+            var memberAccess = (MemberAccessExpressionSyntax)count.Expression;
+            var name = memberAccess.WithName(SyntaxFactory.IdentifierName(nameof(Enumerable.Any)));
+            return SyntaxFactory.InvocationExpression(name, count.ArgumentList);
+        }
+
+        private static InvocationExpressionSyntax AnyAsExtension(InvocationExpressionSyntax count)
+        {
+            var identifier = (IdentifierNameSyntax)count.ArgumentList.Arguments[0].Expression;
+            var name = SyntaxFactory.MemberAccessExpression(SyntaxKind.SimpleMemberAccessExpression, identifier, SyntaxFactory.IdentifierName(nameof(Enumerable.Any)));
+            var arguments = SyntaxFactory.ArgumentList(count.ArgumentList.Arguments.RemoveAt(0));
+            return SyntaxFactory.InvocationExpression(name, arguments);
+        }
+
+        private static bool NotAsExtenion(InvocationExpressionSyntax count)
+            => count.ArgumentList.Arguments.Any()
+            && count.ArgumentList.Arguments[0].Expression is IdentifierNameSyntax
+            && ((MemberAccessExpressionSyntax)count.Expression).Expression.NameIs(nameof(Enumerable));
     }
 }

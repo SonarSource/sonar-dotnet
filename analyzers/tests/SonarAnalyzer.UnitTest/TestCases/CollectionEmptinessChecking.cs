@@ -16,12 +16,11 @@ namespace Tests.Diagnostics
         }
         private static bool HasContent2(List<string> l)
         {
-            return Enumerable.Count(l) >= 0x1; // Noncompliant
-            //                ^^^^^
+            return l.Count() >= 0x1; // Noncompliant
         }
         private static bool HasContent2b(List<string> l)
         {
-            return 1UL <= Enumerable.Count(l); // Noncompliant // Error[CS0034]
+            return 1UL <= l.Count(); // Noncompliant // Error[CS0034]
         }
         private static bool IsNotEmpty1(List<string> l)
         {
@@ -58,6 +57,35 @@ namespace Tests.Diagnostics
         private static bool IsEmptyWithCondition(List<int> numbers)
         {
             return numbers.Count(n => n % 2 == 0) == 0; // Noncompliant
+        }
+        public static bool WithReferencedCondition(int[] n)
+        {
+            return n.Count(Include) == 0; // Noncompliant
+        }
+        static bool Include(int n)
+        {
+            return n == 17;
+        }
+    }
+
+    public class NotAsExtension
+    {
+        bool IsEmpty(int[] n)
+        {
+            return Enumerable.Count(n) == 0; // Noncompliant
+            //                ^^^^^
+        }
+        bool HasAny(int[] n)
+        {
+            return Enumerable.Count(n) > 0; // Noncompliant
+        }
+        bool RightExpression(int[] n)
+        {
+            return 0 < Enumerable.Count(n); // Noncompliant
+        }
+        bool WithCondition(int [] n)
+        {
+            return Enumerable.Count(n, x => x != 2) == 0; // Noncompliant
         }
     }
 
