@@ -59,6 +59,18 @@ namespace Tests.Diagnostics
         }
     }
 
+    public class Complex
+    {
+        bool Nested(string[] words)
+        {
+            return words.Any(w => !w.Any(ch => ch == 'Q'));
+        }
+        bool Composed(int[] a, int[] b, int[] c)
+        {
+            return a.Any() && !b.Any() && c.Any();
+        }
+    }
+
     public class Compliant
     {
         bool Any(List<string> list)

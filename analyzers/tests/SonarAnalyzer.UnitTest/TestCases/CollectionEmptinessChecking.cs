@@ -61,6 +61,23 @@ namespace Tests.Diagnostics
         }
     }
 
+    public class Complex
+    {
+        bool Nested(string[] words)
+        {
+            return words.Count(w => w.Count(ch => ch == 'Q') == 0) > 0;
+            //           ^^^^^                  {{Use '.Any()' to test whether this 'IEnumerable<string>' is empty or not.}}
+            //                        ^^^^^ @-1 {{Use '.Any()' to test whether this 'IEnumerable<char>' is empty or not.}}
+        }
+        bool Composed(int[] a, int[] b, int[] c)
+        {
+            return a.Count() > 0 && b.Count() == 0 && c.Count() > 0;
+            //       ^^^^^                                        {{Use '.Any()' to test whether this 'IEnumerable<int>' is empty or not.}}
+            //                        ^^^^^                   @-1 {{Use '.Any()' to test whether this 'IEnumerable<int>' is empty or not.}}
+            //                                          ^^^^^ @-2 {{Use '.Any()' to test whether this 'IEnumerable<int>' is empty or not.}}
+        }
+    }
+
     public class Compliant
     {
         bool Any(List<string> list)
