@@ -97,14 +97,10 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn.Checks
         }
 
         private ProgramState ProcessMonitorEnter(SymbolicContext context, IInvocationOperationWrapper invocation) =>
-            FirstArgumentSymbol(invocation) is { } symbol
-                ? AddLock(context, symbol)
-                : context.State;
+            AddLock(context, FirstArgumentSymbol(invocation));
 
         private ProgramState ProcessMonitorExit(SymbolicContext context, IInvocationOperationWrapper invocation) =>
-            FirstArgumentSymbol(invocation) is { } symbol
-                ? RemoveLock(context, symbol)
-                : context.State;
+            RemoveLock(context, FirstArgumentSymbol(invocation));
 
         private ProgramState ProcessInvocationInstanceAcquireLock(SymbolicContext context, IInvocationOperationWrapper invocation) =>
             AddLock(context, invocation.Instance.TrackedSymbol());
