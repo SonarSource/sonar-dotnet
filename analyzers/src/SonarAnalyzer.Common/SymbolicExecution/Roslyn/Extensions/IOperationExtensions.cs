@@ -54,9 +54,7 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
             operation.As(OperationKindEx.SimpleAssignment, IAssignmentOperationWrapper.FromOperation);
 
         private static T? As<T>(this IOperation operation, OperationKind kind, Func<IOperation, T> fromOperation) where T : struct =>
-            operation.Kind == kind
-                ? fromOperation(operation)
-                : null;
+            operation.Kind == kind ? fromOperation(operation) : null;
 
         private static bool IsStaticOrThis(IOperation operation) =>
             operation == null // static fields
