@@ -3,312 +3,315 @@ using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 
-class Program
+namespace Monitor_Linear
 {
-    private readonly static object staticObj = new object();
-    private object obj = new object();
-    private object other = new object();
-
-    public object PublicObject = new object();
-
-    public void Method1(string arg)
+    class Program
     {
-        Monitor.Enter(obj); // Compliant
-        Console.WriteLine(arg.Length);
-        Monitor.Exit(obj);
-    }
+        private readonly static object staticObj = new object();
+        private object obj = new object();
+        private object other = new object();
 
-    public void Method2(string arg)
-    {
-        Monitor.Enter(obj); // Compliant
-        Console.WriteLine(arg.Length);
-        Monitor.Exit(other);
-    }
+        public object PublicObject = new object();
 
-    public void Method3()
-    {
-        Monitor.Enter(obj); // Compliant
-        var a = new Action(() =>
-        {
-            Monitor.Exit(obj);
-        });
-    }
-
-    public void Method4(string arg)
-    {
-        var localObj = obj;
-        Monitor.Enter(localObj); // Compliant
-        Console.WriteLine(arg.Length);
-        Monitor.Exit(localObj);
-    }
-
-    public void Method5(string arg)
-    {
-        var localObj = obj;
-        Monitor.Enter(obj); // Compliant
-        Console.WriteLine(arg.Length);
-        Monitor.Exit(localObj);
-    }
-
-    public void Method6(string arg, object paramObj)
-    {
-        paramObj = obj;
-        Monitor.Enter(paramObj); // Compliant
-        Console.WriteLine(arg.Length);
-        Monitor.Exit(paramObj);
-    }
-
-    public void Method7(string arg)
-    {
-        Monitor.Enter(obj); // Compliant
-        Console.WriteLine(arg.Length);
-        var localObj = obj;
-        Monitor.Exit(localObj);
-    }
-
-    public void Method7(string arg, object paramObj)
-    {
-        Monitor.Enter(paramObj); // Compliant
-        Console.WriteLine(arg.Length);
-        Monitor.Exit(paramObj);
-    }
-
-    public void Method8(string arg, Program p1)
-    {
-        Monitor.Enter(p1.PublicObject); // Compliant
-        Console.WriteLine(arg.Length);
-        Monitor.Exit(p1.PublicObject);
-    }
-
-    public void Method9()
-    {
-        var a = new Action(() =>
+        public void Method1(string arg)
         {
             Monitor.Enter(obj); // Compliant
-        });
-
-        Monitor.Exit(obj);
-    }
-
-    public void Method10()
-    {
-        var getObj = new Func<object>(() =>
-        {
-            return obj;
-        });
-
-        Monitor.Enter(getObj());
-        Monitor.Exit(getObj());
-    }
-
-    public void Method11()
-    {
-        var getObj = new Func<object>(() =>
-        {
-            return obj;
-        });
-
-        Monitor.Enter(obj);
-        Monitor.Exit(getObj());
-    }
-
-    public void Method12()
-    {
-        Monitor.Enter(obj); // Compliant
-        var a = new Action(() =>
-        {
+            Console.WriteLine(arg.Length);
             Monitor.Exit(obj);
-        });
+        }
 
-        a();
-    }
-
-    public void Method13(string arg)
-    {
-        Monitor.Exit(obj);
-        Console.WriteLine(arg.Length);
-        Monitor.Enter(obj); // Noncompliant {{Unlock this lock along all executions paths of this method.}}
-    }
-
-    public void FieldReference_WithThis(string arg)
-    {
-        Monitor.Exit(this.obj);
-        Console.WriteLine(arg.Length);
-        Monitor.Enter(this.obj); // Noncompliant {{Unlock this lock along all executions paths of this method.}}
-    }
-
-    public void FieldReference_WithThis_Mixed1(string arg)
-    {
-        Monitor.Exit(obj);
-        Console.WriteLine(arg.Length);
-        Monitor.Enter(this.obj); // Noncompliant {{Unlock this lock along all executions paths of this method.}}
-    }
-
-    public void FieldReference_WithThis_Mixed2(string arg)
-    {
-        Monitor.Exit(this.obj);
-        Console.WriteLine(arg.Length);
-        Monitor.Enter(obj); // Noncompliant {{Unlock this lock along all executions paths of this method.}}
-    }
-
-    public void StaticFieldReference(string arg)
-    {
-        Monitor.Exit(staticObj);
-        Console.WriteLine(arg.Length);
-        Monitor.Enter(staticObj); // Noncompliant {{Unlock this lock along all executions paths of this method.}}
-    }
-
-    public void StaticFieldReference_Class(string arg)
-    {
-        Monitor.Exit(Program.staticObj);
-        Console.WriteLine(arg.Length);
-        Monitor.Enter(Program.staticObj); // Noncompliant {{Unlock this lock along all executions paths of this method.}}
-    }
-
-    public void Method13_LocalVar(string arg)
-    {
-        var l = new object();
-
-        Monitor.Exit(l);
-        Console.WriteLine(arg.Length);
-        Monitor.Enter(l); // Noncompliant {{Unlock this lock along all executions paths of this method.}}
-    }
-
-    public void Method13_Parameter(object arg)
-    {
-        Monitor.Exit(arg);
-        Monitor.Enter(arg); // Noncompliant
-    }
-
-    public void Method14(string arg)
-    {
-        Monitor.Exit(obj);
-        Console.WriteLine(arg.Length);
-        Monitor.Enter(obj); // Compliant
-        Console.WriteLine(arg.Length);
-        Monitor.Exit(obj);
-    }
-
-    public void Method15(Program first, Program second)
-    {
-        Monitor.Enter(first.obj); // Compliant
-        Monitor.Exit(second.obj);
-    }
-
-
-    public void Method16()
-    {
-        void LocalFunc()
+        public void Method2(string arg)
         {
             Monitor.Enter(obj); // Compliant
+            Console.WriteLine(arg.Length);
+            Monitor.Exit(other);
         }
 
-        Monitor.Exit(obj);
-    }
-
-    public void Method17()
-    {
-        object LocalFunc()
+        public void Method3()
         {
-            return obj;
-        }
-
-        Monitor.Enter(LocalFunc());
-        Monitor.Exit(LocalFunc());
-    }
-
-    public void Method18()
-    {
-        object LocalFunc()
-        {
-            return obj;
-        }
-
-        Monitor.Enter(obj);
-        Monitor.Exit(LocalFunc());
-    }
-
-    public void Method19()
-    {
-        Monitor.Enter(obj); // Compliant
-        LocalFunc();
-
-        void LocalFunc()
-        {
-            Monitor.Exit(obj); // Compliant
-        }
-    }
-
-    public void WrongCallNoArgs(string arg)
-    {
-        Monitor.Exit(obj);
-        Console.WriteLine(arg.Length);
-        Monitor.Enter(); // Error CS1501 No overload for method 'Enter' takes 0 arguments
-    }
-
-    public void DifferentFields(Program first, Program second)
-    {
-        Monitor.Exit(second.obj);
-        Monitor.Enter(first.obj);
-    }
-
-    static int Property
-    {
-        get // Adds coverage for handling FlowCaptureReference operations.
-        {
-            var lockObject = new object();
-            lock (lockObject)
+            Monitor.Enter(obj); // Compliant
+            var a = new Action(() =>
             {
-                return 1;
+                Monitor.Exit(obj);
+            });
+        }
+
+        public void Method4(string arg)
+        {
+            var localObj = obj;
+            Monitor.Enter(localObj); // Compliant
+            Console.WriteLine(arg.Length);
+            Monitor.Exit(localObj);
+        }
+
+        public void Method5(string arg)
+        {
+            var localObj = obj;
+            Monitor.Enter(obj); // Compliant
+            Console.WriteLine(arg.Length);
+            Monitor.Exit(localObj);
+        }
+
+        public void Method6(string arg, object paramObj)
+        {
+            paramObj = obj;
+            Monitor.Enter(paramObj); // Compliant
+            Console.WriteLine(arg.Length);
+            Monitor.Exit(paramObj);
+        }
+
+        public void Method7(string arg)
+        {
+            Monitor.Enter(obj); // Compliant
+            Console.WriteLine(arg.Length);
+            var localObj = obj;
+            Monitor.Exit(localObj);
+        }
+
+        public void Method7(string arg, object paramObj)
+        {
+            Monitor.Enter(paramObj); // Compliant
+            Console.WriteLine(arg.Length);
+            Monitor.Exit(paramObj);
+        }
+
+        public void Method8(string arg, Program p1)
+        {
+            Monitor.Enter(p1.PublicObject); // Compliant
+            Console.WriteLine(arg.Length);
+            Monitor.Exit(p1.PublicObject);
+        }
+
+        public void Method9()
+        {
+            var a = new Action(() =>
+            {
+                Monitor.Enter(obj); // Compliant
+        });
+
+            Monitor.Exit(obj);
+        }
+
+        public void Method10()
+        {
+            var getObj = new Func<object>(() =>
+            {
+                return obj;
+            });
+
+            Monitor.Enter(getObj());
+            Monitor.Exit(getObj());
+        }
+
+        public void Method11()
+        {
+            var getObj = new Func<object>(() =>
+            {
+                return obj;
+            });
+
+            Monitor.Enter(obj);
+            Monitor.Exit(getObj());
+        }
+
+        public void Method12()
+        {
+            Monitor.Enter(obj); // Compliant
+            var a = new Action(() =>
+            {
+                Monitor.Exit(obj);
+            });
+
+            a();
+        }
+
+        public void Method13(string arg)
+        {
+            Monitor.Exit(obj);
+            Console.WriteLine(arg.Length);
+            Monitor.Enter(obj); // Noncompliant {{Unlock this lock along all executions paths of this method.}}
+        }
+
+        public void FieldReference_WithThis(string arg)
+        {
+            Monitor.Exit(this.obj);
+            Console.WriteLine(arg.Length);
+            Monitor.Enter(this.obj); // Noncompliant {{Unlock this lock along all executions paths of this method.}}
+        }
+
+        public void FieldReference_WithThis_Mixed1(string arg)
+        {
+            Monitor.Exit(obj);
+            Console.WriteLine(arg.Length);
+            Monitor.Enter(this.obj); // Noncompliant {{Unlock this lock along all executions paths of this method.}}
+        }
+
+        public void FieldReference_WithThis_Mixed2(string arg)
+        {
+            Monitor.Exit(this.obj);
+            Console.WriteLine(arg.Length);
+            Monitor.Enter(obj); // Noncompliant {{Unlock this lock along all executions paths of this method.}}
+        }
+
+        public void StaticFieldReference(string arg)
+        {
+            Monitor.Exit(staticObj);
+            Console.WriteLine(arg.Length);
+            Monitor.Enter(staticObj); // Noncompliant {{Unlock this lock along all executions paths of this method.}}
+        }
+
+        public void StaticFieldReference_Class(string arg)
+        {
+            Monitor.Exit(Program.staticObj);
+            Console.WriteLine(arg.Length);
+            Monitor.Enter(Program.staticObj); // Noncompliant {{Unlock this lock along all executions paths of this method.}}
+        }
+
+        public void Method13_LocalVar(string arg)
+        {
+            var l = new object();
+
+            Monitor.Exit(l);
+            Console.WriteLine(arg.Length);
+            Monitor.Enter(l); // Noncompliant {{Unlock this lock along all executions paths of this method.}}
+        }
+
+        public void Method13_Parameter(object arg)
+        {
+            Monitor.Exit(arg);
+            Monitor.Enter(arg); // Noncompliant
+        }
+
+        public void Method14(string arg)
+        {
+            Monitor.Exit(obj);
+            Console.WriteLine(arg.Length);
+            Monitor.Enter(obj); // Compliant
+            Console.WriteLine(arg.Length);
+            Monitor.Exit(obj);
+        }
+
+        public void Method15(Program first, Program second)
+        {
+            Monitor.Enter(first.obj); // Compliant
+            Monitor.Exit(second.obj);
+        }
+
+
+        public void Method16()
+        {
+            void LocalFunc()
+            {
+                Monitor.Enter(obj); // Compliant
+            }
+
+            Monitor.Exit(obj);
+        }
+
+        public void Method17()
+        {
+            object LocalFunc()
+            {
+                return obj;
+            }
+
+            Monitor.Enter(LocalFunc());
+            Monitor.Exit(LocalFunc());
+        }
+
+        public void Method18()
+        {
+            object LocalFunc()
+            {
+                return obj;
+            }
+
+            Monitor.Enter(obj);
+            Monitor.Exit(LocalFunc());
+        }
+
+        public void Method19()
+        {
+            Monitor.Enter(obj); // Compliant
+            LocalFunc();
+
+            void LocalFunc()
+            {
+                Monitor.Exit(obj); // Compliant
             }
         }
-    }
 
-    public abstract class Base
-    {
-        protected abstract List<Task> GetScheduledTasks();
-    }
-
-    public class Derived : Base
-    {
-        private readonly List<Task> _tasks = new List<Task>();
-        protected override List<Task> GetScheduledTasks() // Adds coverage for handling Conversion operations
+        public void WrongCallNoArgs(string arg)
         {
-            var lockTaken = false;
-            try
-            {
-                Monitor.TryEnter(_tasks, ref lockTaken);
-
-                if (lockTaken) return _tasks;
-                else throw new NotSupportedException();
-            }
-            finally
-            {
-                if (lockTaken) Monitor.Exit(_tasks);
-            }
-        }
-    }
-
-    public class PropertyReference
-    {
-        public Contex PreMovieInfoScraperAction(Contex context) // adds coverage for PropertyReference operations
-        {
-            if (string.IsNullOrEmpty(context.Movie.Year))
-            {
-                context.Movie.Year = "2022";
-            }
-
-            return context;
+            Monitor.Exit(obj);
+            Console.WriteLine(arg.Length);
+            Monitor.Enter(); // Error CS1501 No overload for method 'Enter' takes 0 arguments
         }
 
-        public class Contex
+        public void DifferentFields(Program first, Program second)
         {
-            public Movie Movie { get; }
+            Monitor.Exit(second.obj);
+            Monitor.Enter(first.obj);
         }
 
-        public class Movie
+        static int Property
         {
-            public string Year { get; set; }
+            get // Adds coverage for handling FlowCaptureReference operations.
+            {
+                var lockObject = new object();
+                lock (lockObject)
+                {
+                    return 1;
+                }
+            }
+        }
+
+        public abstract class Base
+        {
+            protected abstract List<Task> GetScheduledTasks();
+        }
+
+        public class Derived : Base
+        {
+            private readonly List<Task> _tasks = new List<Task>();
+            protected override List<Task> GetScheduledTasks() // Adds coverage for handling Conversion operations
+            {
+                var lockTaken = false;
+                try
+                {
+                    Monitor.TryEnter(_tasks, ref lockTaken);
+
+                    if (lockTaken) return _tasks;
+                    else throw new NotSupportedException();
+                }
+                finally
+                {
+                    if (lockTaken) Monitor.Exit(_tasks);
+                }
+            }
+        }
+
+        public class PropertyReference
+        {
+            public Contex PreMovieInfoScraperAction(Contex context) // adds coverage for PropertyReference operations
+            {
+                if (string.IsNullOrEmpty(context.Movie.Year))
+                {
+                    context.Movie.Year = "2022";
+                }
+
+                return context;
+            }
+
+            public class Contex
+            {
+                public Movie Movie { get; }
+            }
+
+            public class Movie
+            {
+                public string Year { get; set; }
+            }
         }
     }
 }

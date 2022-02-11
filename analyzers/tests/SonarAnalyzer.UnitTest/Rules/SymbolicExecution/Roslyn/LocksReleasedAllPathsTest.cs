@@ -29,70 +29,36 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class LocksReleasedAllPathsTest
     {
-        private readonly VerifierBuilder verifierBuilder = new VerifierBuilder<SymbolicExecutionRunner>().WithOnlyDiagnostics(LocksReleasedAllPaths.S2222).WithBasePath(@"SymbolicExecution\Roslyn");
+        private readonly VerifierBuilder verifierBuilder = new VerifierBuilder<SymbolicExecutionRunner>()
+            .AddReferences(MetadataReferenceFacade.SystemThreading)
+            .WithOnlyDiagnostics(LocksReleasedAllPaths.S2222)
+            .WithBasePath(@"SymbolicExecution\Roslyn");
 
         [TestMethod]
-        [TestCategory("Rule")]
-        public void LocksReleasedAllPaths_Monitor_Conditions_CS() =>
-            verifierBuilder.AddPaths("LocksReleasedAllPaths.Monitor.Conditions.cs").Verify();
+        public void LocksReleasedAllPaths_CS() =>
+            verifierBuilder.AddPaths(
+                "LocksReleasedAllPaths.Monitor.Conditions.cs",
+                "LocksReleasedAllPaths.Monitor.GoTo.cs",
+                "LocksReleasedAllPaths.Monitor.Linear.cs",
+                "LocksReleasedAllPaths.Monitor.Loops.cs",
+                "LocksReleasedAllPaths.Monitor.TryCatch.cs",
+                "LocksReleasedAllPaths.Monitor.TryEnter.cs",
+                "LocksReleasedAllPaths.Mutex.cs",
+                "LocksReleasedAllPaths.ReaderWriterLock.cs",
+                "LocksReleasedAllPaths.ReaderWriterLockSlim.cs",
+                "LocksReleasedAllPaths.SpinLock.cs")
+                .Verify();
 
         [TestMethod]
-        [TestCategory("Rule")]
-        public void LocksReleasedAllPaths_Monitor_Conditions_CSharp8() =>
+        public void LocksReleasedAllPaths_CSharp8() =>
             verifierBuilder.AddPaths("LocksReleasedAllPaths.Monitor.Conditions.CSharp8.cs").WithOptions(ParseOptionsHelper.FromCSharp8).Verify();
-
-        [TestMethod]
-        [TestCategory("Rule")]
-        public void LocksReleasedAllPaths_Monitor_GoTo_CS() =>
-            verifierBuilder.AddPaths("LocksReleasedAllPaths.Monitor.GoTo.cs").Verify();
-
-        [TestMethod]
-        [TestCategory("Rule")]
-        public void LocksReleasedAllPaths_Monitor_Linear_CS() =>
-            verifierBuilder.AddPaths("LocksReleasedAllPaths.Monitor.Linear.cs").Verify();
-
-        [TestMethod]
-        [TestCategory("Rule")]
-        public void LocksReleasedAllPaths_Monitor_Loops_CS() =>
-            verifierBuilder.AddPaths("LocksReleasedAllPaths.Monitor.Loops.cs").Verify();
-
-        [TestMethod]
-        [TestCategory("Rule")]
-        public void LocksReleasedAllPaths_Monitor_TryCatch_CS() =>
-            verifierBuilder.AddPaths("LocksReleasedAllPaths.Monitor.TryCatch.cs").Verify();
-
-        [TestMethod]
-        [TestCategory("Rule")]
-        public void LocksReleasedAllPaths_Monitor_TryEnter_CS() =>
-            verifierBuilder.AddPaths("LocksReleasedAllPaths.Monitor.TryEnter.cs").Verify();
-
-        [TestMethod]
-        [TestCategory("Rule")]
-        public void LocksReleasedAllPaths_Mutex_CS() =>
-            verifierBuilder.AddPaths("LocksReleasedAllPaths.Mutex.cs").WithOptions(ParseOptionsHelper.FromCSharp8).Verify();
 
 #if NETFRAMEWORK
 
         [TestMethod]
-        [TestCategory("Rule")]
-        public void LocksReleasedAllPaths_Mutex_NetFramework_CS() =>
+        public void LocksReleasedAllPaths_CS_NetFx() =>
             verifierBuilder.AddPaths("LocksReleasedAllPaths.Mutex.NetFx.cs").WithOptions(ParseOptionsHelper.FromCSharp8).Verify();
 
 #endif
-
-        [TestMethod]
-        [TestCategory("Rule")]
-        public void LocksReleasedAllPaths_ReaderWriterLock_CS() =>
-            verifierBuilder.AddPaths("LocksReleasedAllPaths.ReaderWriterLock.cs").AddReferences(MetadataReferenceFacade.SystemThreading).Verify();
-
-        [TestMethod]
-        [TestCategory("Rule")]
-        public void LocksReleasedAllPaths_ReaderWriterLockSlim_CS() =>
-            verifierBuilder.AddPaths("LocksReleasedAllPaths.ReaderWriterLockSlim.cs").Verify();
-
-        [TestMethod]
-        [TestCategory("Rule")]
-        public void LocksReleasedAllPaths_SpinLock_CS() =>
-            verifierBuilder.AddPaths("LocksReleasedAllPaths.SpinLock.cs").Verify();
     }
 }
