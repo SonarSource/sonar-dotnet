@@ -26,7 +26,7 @@ using SonarAnalyzer.Helpers;
 
 namespace SonarAnalyzer.SymbolicExecution.Roslyn
 {
-    public record SymbolicValue : IEquatable<SymbolicValue>
+    public sealed record SymbolicValue
     {
         private readonly SymbolicValueCounter counter;
         private readonly int identifier;    // This is debug information that is intentionally excluded from GetHashCode and Equals
@@ -46,16 +46,8 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
             Constraints = original.Constraints;
         }
 
-        public override string ToString()
-        {
-            var ret = new StringBuilder();
-            ret.Append("SV_").Append(identifier);
-            if (Constraints.Any())
-            {
-                ret.Append(": ").Append(Constraints.Values.Select(x => x.ToString()).OrderBy(x => x).JoinStr(", "));
-            }
-            return ret.ToString();
-        }
+        public override string ToString() =>
+            $"SV_{identifier}{SerializeConstraints()}";
 
         public SymbolicValue WithConstraint(SymbolicConstraint constraint) =>
             this with { Constraints = Constraints.SetItem(constraint.GetType(), constraint) };
@@ -74,7 +66,12 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
         public override int GetHashCode() =>
             HashCode.DictionaryContentHash(Constraints);
 
-        public virtual bool Equals(SymbolicValue other) =>
+        public bool Equals(SymbolicValue other) =>
             other is not null && other.Constraints.DictionaryEquals(Constraints);
+
+        private string SerializeConstraints() =>
+            Constraints.Any()
+                ? ": " + Constraints.Values.Select(x => x.ToString()).OrderBy(x => x).JoinStr(", ")
+                : null;
     }
 }

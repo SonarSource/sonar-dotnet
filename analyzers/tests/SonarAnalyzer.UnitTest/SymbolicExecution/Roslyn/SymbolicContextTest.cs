@@ -95,7 +95,7 @@ namespace SonarAnalyzer.UnitTest.SymbolicExecution.Roslyn
         }
 
         [TestMethod]
-        public void SetSymbolConstraint_WithExistringValue()
+        public void SetSymbolConstraint_WithExistingValue()
         {
             var counter = new SymbolicValueCounter();
             var operation = CreateOperation();
