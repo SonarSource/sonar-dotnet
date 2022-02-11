@@ -44,12 +44,6 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
         internal static IObjectCreationOperationWrapper? AsObjectCreation(this IOperation operation) =>
             operation.As(OperationKindEx.ObjectCreation, IObjectCreationOperationWrapper.FromOperation);
 
-        internal static ILiteralOperationWrapper? AsLiteral(this IOperation operation) =>
-            operation.As(OperationKindEx.Literal, ILiteralOperationWrapper.FromOperation);
-
-        internal static IArgumentOperationWrapper? AsArgument(this IOperation operation) =>
-            operation.As(OperationKindEx.Argument, IArgumentOperationWrapper.FromOperation);
-
         internal static IAssignmentOperationWrapper? AsAssignment(this IOperation operation) =>
             operation.As(OperationKindEx.SimpleAssignment, IAssignmentOperationWrapper.FromOperation);
 
