@@ -66,9 +66,9 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private static Task<Document> Replacement(SyntaxNode root, ExpressionSyntax expression, InvocationExpressionSyntax count, CountComparisonResult comparison, CodeFixContext context)
         {
-            var any = NotAsExtenion(count)
-                ? AnyAsExtension(count)
-                : AnyFromExtension(count);
+            var any = IsExtension(count)
+                ? AnyFromExtension(count)
+                : AnyAsExtension(count);
 
             SyntaxNode replacement = comparison == CountComparisonResult.Empty
                 ? SyntaxFactory.PrefixUnaryExpression(SyntaxKind.LogicalNotExpression, any)
@@ -86,15 +86,14 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private static InvocationExpressionSyntax AnyAsExtension(InvocationExpressionSyntax count)
         {
-            var identifier = (IdentifierNameSyntax)count.ArgumentList.Arguments[0].Expression;
-            var name = SyntaxFactory.MemberAccessExpression(SyntaxKind.SimpleMemberAccessExpression, identifier, SyntaxFactory.IdentifierName(nameof(Enumerable.Any)));
+            var expression = count.ArgumentList.Arguments[0].Expression;
+            var name = SyntaxFactory.MemberAccessExpression(SyntaxKind.SimpleMemberAccessExpression, expression, SyntaxFactory.IdentifierName(nameof(Enumerable.Any)));
             var arguments = SyntaxFactory.ArgumentList(count.ArgumentList.Arguments.RemoveAt(0));
             return SyntaxFactory.InvocationExpression(name, arguments);
         }
 
-        private static bool NotAsExtenion(InvocationExpressionSyntax count)
-            => count.ArgumentList.Arguments.Any()
-            && count.ArgumentList.Arguments[0].Expression is IdentifierNameSyntax
-            && ((MemberAccessExpressionSyntax)count.Expression).Expression.NameIs(nameof(Enumerable));
+        private static bool IsExtension(InvocationExpressionSyntax count) =>
+            !count.ArgumentList.Arguments.Any()
+            || !((MemberAccessExpressionSyntax)count.Expression).Expression.NameIs(nameof(Enumerable));
     }
 }

@@ -85,6 +85,10 @@ namespace Tests.Diagnostics
         {
             return !n.Any(x => x != 2); // Fixed
         }
+        bool NotAnIdentifier(string str)
+        {
+            return str.Trim().Any(); // Fixed
+        }
     }
 
     public class Complex

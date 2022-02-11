@@ -87,6 +87,10 @@ namespace Tests.Diagnostics
         {
             return Enumerable.Count(n, x => x != 2) == 0; // Noncompliant
         }
+        bool NotAnIdentifier(string str)
+        {
+            return Enumerable.Count(str.Trim()) > 0; // Noncompliant
+        }
     }
 
     public class Complex
