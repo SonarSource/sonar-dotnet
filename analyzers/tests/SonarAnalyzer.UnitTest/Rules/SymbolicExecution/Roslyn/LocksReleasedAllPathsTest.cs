@@ -31,6 +31,7 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         private readonly VerifierBuilder verifierBuilder = new VerifierBuilder<SymbolicExecutionRunner>()
             .AddReferences(MetadataReferenceFacade.SystemThreading)
+            .WithOptions(ParseOptionsHelper.FromCSharp8)
             .WithOnlyDiagnostics(LocksReleasedAllPaths.S2222)
             .WithBasePath(@"SymbolicExecution\Roslyn");
 
