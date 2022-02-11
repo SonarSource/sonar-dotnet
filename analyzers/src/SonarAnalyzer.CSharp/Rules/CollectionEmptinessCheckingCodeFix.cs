@@ -68,7 +68,7 @@ namespace SonarAnalyzer.Rules.CSharp
         {
             var any = IsExtension(count)
                 ? AnyFromExtension(count)
-                : AnyAsExtension(count);
+                : AnyFromStaticMethod(count);
 
             SyntaxNode replacement = comparison == CountComparisonResult.Empty
                 ? SyntaxFactory.PrefixUnaryExpression(SyntaxKind.LogicalNotExpression, any)
@@ -84,7 +84,7 @@ namespace SonarAnalyzer.Rules.CSharp
             return SyntaxFactory.InvocationExpression(name, count.ArgumentList);
         }
 
-        private static InvocationExpressionSyntax AnyAsExtension(InvocationExpressionSyntax count)
+        private static InvocationExpressionSyntax AnyFromStaticMethod(InvocationExpressionSyntax count)
         {
             var expression = count.ArgumentList.Arguments[0].Expression;
             var name = SyntaxFactory.MemberAccessExpression(SyntaxKind.SimpleMemberAccessExpression, expression, SyntaxFactory.IdentifierName(nameof(Enumerable.Any)));
