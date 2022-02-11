@@ -18,18 +18,12 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using Microsoft.CodeAnalysis;
-using Microsoft.CodeAnalysis.Operations;
-using SonarAnalyzer.SymbolicExecution.Constraints;
 using SonarAnalyzer.SymbolicExecution.Roslyn;
 
 namespace SonarAnalyzer.UnitTest.TestFramework.SymbolicExecution
 {
-    internal class BoolTestCheck : SymbolicCheck    // ToDo: This will be replaced with default engine behavior in MMF-2229
-    {
-        public override ProgramState PostProcess(SymbolicContext context) =>
-            context.Operation.Instance.Kind == OperationKind.Literal && ((ILiteralOperation)context.Operation.Instance).ConstantValue.Value is bool value
-                ? context.SetOperationConstraint(value ? BoolConstraint.True : BoolConstraint.False)
-                : context.State;
-    }
+    /// <summary>
+    /// Empty check implementation used to start the engine (the engine needs at least one check to start).
+    /// </summary>
+    public class EmptyTestCheck : SymbolicCheck { }
 }

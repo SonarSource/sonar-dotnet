@@ -33,7 +33,7 @@ using SonarAnalyzer.Helpers;
 using SonarAnalyzer.LiveVariableAnalysis.CSharp;
 using SonarAnalyzer.Rules.SymbolicExecution;
 using SonarAnalyzer.SymbolicExecution;
-using SonarAnalyzer.SymbolicExecution.Roslyn.Checks;
+using SonarAnalyzer.SymbolicExecution.Roslyn.RuleChecks;
 using SonarAnalyzer.SymbolicExecution.Sonar;
 using StyleCop.Analyzers.Lightup;
 

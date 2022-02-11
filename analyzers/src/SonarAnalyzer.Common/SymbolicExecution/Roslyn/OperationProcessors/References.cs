@@ -33,5 +33,10 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn.OperationProcessors
             context.State[parameterReference.Parameter] is { } symbolState
                 ? context.State.SetOperationValue(context.Operation, symbolState)
                 : context.State;
+
+        public static ProgramState Process(SymbolicContext context, IFieldReferenceOperationWrapper fieldReference) =>
+            context.State[fieldReference.Field] is { } symbolState
+                ? context.State.SetOperationValue(context.Operation, symbolState)
+                : context.State;
     }
 }

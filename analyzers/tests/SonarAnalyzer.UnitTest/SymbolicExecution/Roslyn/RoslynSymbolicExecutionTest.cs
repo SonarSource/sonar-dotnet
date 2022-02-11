@@ -135,7 +135,7 @@ namespace SonarAnalyzer.UnitTest.SymbolicExecution.Roslyn
         [TestMethod]
         public void PostProcess_OperationDoesNotHaveValuesByDefault()
         {
-            var validator = SETestContext.CreateCS("var a = true;").Validator;
+            var validator = SETestContext.CreateCS("int x = 0;").Validator;
             validator.ValidatePostProcessCount(3);
             validator.ValidateOperationValuesAreNull();
         }
@@ -143,19 +143,19 @@ namespace SonarAnalyzer.UnitTest.SymbolicExecution.Roslyn
         [TestMethod]
         public void Execute_PersistConstraints()
         {
-            var validator = SETestContext.CreateCS("var a = true;", new LiteralDummyTestCheck()).Validator;
+            var validator = SETestContext.CreateCS("var a = true;", new EmptyTestCheck()).Validator;
             validator.ValidateOrder(    // Visualize operations
                 "LocalReference: a = true (Implicit)",
                 "Literal: true",
                 "SimpleAssignment: a = true (Implicit)");
-            validator.Validate("Literal: true", x => x.State[x.Operation].HasConstraint(DummyConstraint.Dummy).Should().BeTrue());
-            validator.Validate("SimpleAssignment: a = true (Implicit)", x => x.State[x.Operation].HasConstraint(DummyConstraint.Dummy).Should().BeTrue());
+            validator.Validate("Literal: true", x => x.State[x.Operation].HasConstraint(BoolConstraint.True).Should().BeTrue());
+            validator.Validate("SimpleAssignment: a = true (Implicit)", x => x.State[x.Operation].HasConstraint(BoolConstraint.True).Should().BeTrue());
         }
 
         [TestMethod]
         public void Execute_PersistSymbols_InsideBlock()
         {
-            var validator = SETestContext.CreateCS("var first = true; var second = false; first = second;", new BoolTestCheck()).Validator;
+            var validator = SETestContext.CreateCS("var first = true; var second = false; first = second;", new EmptyTestCheck()).Validator;
             validator.ValidateOrder(    // Visualize operations
                    "LocalReference: first = true (Implicit)",
                    "Literal: true",

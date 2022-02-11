@@ -146,7 +146,7 @@ namespace SonarAnalyzer.Extensions
         private static string GetUnknownType(SyntaxKind kind)
         {
 #if DEBUG
-            throw new ArgumentException($"Unexpected type {kind}", nameof(kind));
+            throw new System.ArgumentException($"Unexpected type {kind}", nameof(kind));
 #else
             return "type";
 #endif
