@@ -124,7 +124,7 @@ Tag(""Inside"", value);
 goto Start;";
             var validator = SETestContext.CreateCS(code, new AddConstraintOnInvocationCheck()).Validator;
             validator.ValidateExitReachCount(0);                    // There's no branch to 'Exit' block
-            validator.TagValues("Inside").Should().HaveCount(4)
+            validator.TagValues("Inside").Should().HaveCount(2)
                 .And.ContainSingle(x => x.HasConstraint(TestConstraint.First) && !x.HasConstraint(BoolConstraint.True))
                 .And.ContainSingle(x => x.HasConstraint(TestConstraint.First) && x.HasConstraint(BoolConstraint.True) && !x.HasConstraint(DummyConstraint.Dummy));
         }
