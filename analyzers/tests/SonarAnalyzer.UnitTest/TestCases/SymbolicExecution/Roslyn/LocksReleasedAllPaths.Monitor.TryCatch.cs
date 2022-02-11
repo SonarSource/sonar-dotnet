@@ -1,212 +1,215 @@
 ﻿using System;
 using System.Threading;
 
-class Program
+namespace Monitor_TryCatch
 {
-    private object obj = new object();
-
-    public void Method1(string arg)
+    class Program
     {
-        Monitor.Enter(obj); // FN
-        try
-        {
-            Console.WriteLine(arg.Length);
-        }
-        catch (Exception ex)
-        {
-            Monitor.Exit(obj);
-            throw;
-        }
-    }
+        private object obj = new object();
 
-    public void Method2(string arg)
-    {
-        Monitor.Enter(obj); // FN
-        try
+        public void Method1(string arg)
         {
-            Console.WriteLine(arg.Length);
-        }
-        catch (Exception)
-        {
-            Monitor.Exit(obj);
-            throw;
-        }
-    }
-
-    public void Method3(string arg)
-    {
-        Monitor.Enter(obj); // Compliant
-        try
-        {
-            Console.WriteLine(arg.Length);
-        }
-        catch (Exception ex)
-        {
-            throw;
-        }
-        finally
-        {
-            Monitor.Exit(obj);
-        }
-    }
-
-    public void Method4(bool condition)
-    {
-        Monitor.Enter(obj); // Noncompliant
-
-        if (condition)
-        {
-            throw new Exception();
+            Monitor.Enter(obj); // FN
+            try
+            {
+                Console.WriteLine(arg.Length);
+            }
+            catch (Exception ex)
+            {
+                Monitor.Exit(obj);
+                throw;
+            }
         }
 
-        Monitor.Exit(obj);
-    }
+        public void Method2(string arg)
+        {
+            Monitor.Enter(obj); // FN
+            try
+            {
+                Console.WriteLine(arg.Length);
+            }
+            catch (Exception)
+            {
+                Monitor.Exit(obj);
+                throw;
+            }
+        }
 
-    public void Method5(string arg)
-    {
-        Monitor.Enter(obj); // Compliant
-        try
+        public void Method3(string arg)
         {
-            Console.WriteLine(arg.Length);
+            Monitor.Enter(obj); // Compliant
+            try
+            {
+                Console.WriteLine(arg.Length);
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+            finally
+            {
+                Monitor.Exit(obj);
+            }
         }
-        catch (NullReferenceException nre)
-        {
-            Monitor.Exit(obj);
-            throw;
-        }
-        Monitor.Exit(obj);
-    }
 
-    public void Method6(string arg)
-    {
-        Monitor.Enter(obj); // FN
-        try
+        public void Method4(bool condition)
         {
-            Console.WriteLine(arg.Length);
-        }
-        catch (NullReferenceException nre) when (nre.Message.Contains("Dummy string"))
-        {
-            Monitor.Exit(obj);
-            throw;
-        }
-    }
+            Monitor.Enter(obj); // Noncompliant
 
-    public void Method7(string arg)
-    {
-        Monitor.Enter(obj); // FN
-        try
-        {
-            Console.WriteLine(arg.Length);
-        }
-        catch (Exception ex) when (ex is NullReferenceException)
-        {
-            Monitor.Exit(obj);
-            throw;
-        }
-    }
+            if (condition)
+            {
+                throw new Exception();
+            }
 
-    public void Method8(string arg)
-    {
-        Monitor.Enter(obj); // Compliant
-        try
-        {
-            Console.WriteLine(arg.Length);
             Monitor.Exit(obj);
         }
-        catch (Exception)
-        {
-            Monitor.Exit(obj);
-        }
-    }
 
-    public void Method9(string arg)
-    {
-        Monitor.Enter(obj); // FN
-        try
+        public void Method5(string arg)
         {
-            Console.WriteLine(arg.Length);
+            Monitor.Enter(obj); // Compliant
+            try
+            {
+                Console.WriteLine(arg.Length);
+            }
+            catch (NullReferenceException nre)
+            {
+                Monitor.Exit(obj);
+                throw;
+            }
             Monitor.Exit(obj);
         }
-        catch (InvalidOperationException ex)
-        {
-            Monitor.Exit(obj);
-        }
-    }
 
-    public void Method10(string arg)
-    {
-        Monitor.Enter(obj); // Compliant
-        try
+        public void Method6(string arg)
         {
-            Console.WriteLine(arg.Length);
-            Monitor.Exit(obj);
+            Monitor.Enter(obj); // FN
+            try
+            {
+                Console.WriteLine(arg.Length);
+            }
+            catch (NullReferenceException nre) when (nre.Message.Contains("Dummy string"))
+            {
+                Monitor.Exit(obj);
+                throw;
+            }
         }
-        catch
-        {
-            Monitor.Exit(obj);
-        }
-    }
 
-    public void Method11(string arg)
-    {
-        Monitor.Enter(obj); // Compliant
-        try
+        public void Method7(string arg)
         {
-            Console.WriteLine(arg.Length);
-            Monitor.Exit(obj);
+            Monitor.Enter(obj); // FN
+            try
+            {
+                Console.WriteLine(arg.Length);
+            }
+            catch (Exception ex) when (ex is NullReferenceException)
+            {
+                Monitor.Exit(obj);
+                throw;
+            }
         }
-        catch(NullReferenceException nre)
-        {
-            Monitor.Exit(obj);
-        }
-        catch (Exception)
-        {
-            Monitor.Exit(obj);
-        }
-    }
 
-    public void Method12(string arg)
-    {
-        Monitor.Enter(obj); // FN
-        try
+        public void Method8(string arg)
         {
-            Console.WriteLine(arg.Length);
-            Monitor.Exit(obj);
+            Monitor.Enter(obj); // Compliant
+            try
+            {
+                Console.WriteLine(arg.Length);
+                Monitor.Exit(obj);
+            }
+            catch (Exception)
+            {
+                Monitor.Exit(obj);
+            }
         }
-        catch (NullReferenceException nre)
-        {
-        }
-        catch (Exception)
-        {
-            Monitor.Exit(obj);
-        }
-    }
 
-    public void Method13(string arg)
-    {
-        Monitor.Enter(obj);
-
-        try
+        public void Method9(string arg)
         {
-            throw new InvalidOperationException();
+            Monitor.Enter(obj); // FN
+            try
+            {
+                Console.WriteLine(arg.Length);
+                Monitor.Exit(obj);
+            }
+            catch (InvalidOperationException ex)
+            {
+                Monitor.Exit(obj);
+            }
         }
-        catch (InvalidOperationException)
-        {
-            Monitor.Exit(obj);
-        }
-    }
 
-    public void Method14(string arg)
-    {
-        Monitor.Enter(obj); // FN
-
-        try
+        public void Method10(string arg)
         {
-            throw new NotImplementedException();
+            Monitor.Enter(obj); // Compliant
+            try
+            {
+                Console.WriteLine(arg.Length);
+                Monitor.Exit(obj);
+            }
+            catch
+            {
+                Monitor.Exit(obj);
+            }
         }
-        catch (InvalidOperationException)
+
+        public void Method11(string arg)
         {
-            Monitor.Exit(obj);
+            Monitor.Enter(obj); // Compliant
+            try
+            {
+                Console.WriteLine(arg.Length);
+                Monitor.Exit(obj);
+            }
+            catch (NullReferenceException nre)
+            {
+                Monitor.Exit(obj);
+            }
+            catch (Exception)
+            {
+                Monitor.Exit(obj);
+            }
+        }
+
+        public void Method12(string arg)
+        {
+            Monitor.Enter(obj); // FN
+            try
+            {
+                Console.WriteLine(arg.Length);
+                Monitor.Exit(obj);
+            }
+            catch (NullReferenceException nre)
+            {
+            }
+            catch (Exception)
+            {
+                Monitor.Exit(obj);
+            }
+        }
+
+        public void Method13(string arg)
+        {
+            Monitor.Enter(obj);
+
+            try
+            {
+                throw new InvalidOperationException();
+            }
+            catch (InvalidOperationException)
+            {
+                Monitor.Exit(obj);
+            }
+        }
+
+        public void Method14(string arg)
+        {
+            Monitor.Enter(obj); // FN
+
+            try
+            {
+                throw new NotImplementedException();
+            }
+            catch (InvalidOperationException)
+            {
+                Monitor.Exit(obj);
+            }
         }
     }
 }

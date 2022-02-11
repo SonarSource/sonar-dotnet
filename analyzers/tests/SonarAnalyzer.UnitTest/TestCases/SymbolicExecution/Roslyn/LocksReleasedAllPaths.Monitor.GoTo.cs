@@ -1,30 +1,33 @@
 ﻿using System;
 using System.Threading;
 
-class Program
+namespace Monitor_Goto
 {
-    private object obj = new object();
-
-    public void Method1()
+    class Program
     {
-        Monitor.Enter(obj); // Compliant
+        private object obj = new object();
 
-        goto Release;
+        public void Method1()
+        {
+            Monitor.Enter(obj); // Compliant
 
-    Release:
-        Monitor.Exit(obj);
-    }
+            goto Release;
 
-    public void Method2()
-    {
-        Monitor.Enter(obj); // FN
+        Release:
+            Monitor.Exit(obj);
+        }
 
-        goto DoNotRelease;
+        public void Method2()
+        {
+            Monitor.Enter(obj); // FN
 
-    Release:
-        Monitor.Exit(obj);
+            goto DoNotRelease;
 
-    DoNotRelease:
-        return;
+        Release:
+            Monitor.Exit(obj);
+
+        DoNotRelease:
+            return;
+        }
     }
 }

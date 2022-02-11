@@ -1,100 +1,59 @@
 ﻿using System;
 using System.Threading;
 
-class Program
+namespace ReaderWriterLock_Type
 {
-    private bool condition;
-    private ReaderWriterLock readerWriterLock = new ReaderWriterLock();
-
-    public void Method1()
+    class Program
     {
-        readerWriterLock.AcquireReaderLock(42); // Noncompliant
-        if (condition)
-        {
-            readerWriterLock.ReleaseReaderLock();
-        }
-    }
+        private bool condition;
+        private ReaderWriterLock readerWriterLock = new ReaderWriterLock();
 
-    public void Method2()
-    {
-        readerWriterLock.AcquireReaderLock(new TimeSpan(42)); // Noncompliant
-        if (condition)
+        public void Method1()
         {
-            readerWriterLock.ReleaseReaderLock();
-        }
-    }
-
-    public void Method3()
-    {
-        readerWriterLock.AcquireWriterLock(42); // FN
-        if (condition)
-        {
-            readerWriterLock.ReleaseWriterLock();
-        }
-    }
-
-    public void Method4()
-    {
-        readerWriterLock.AcquireWriterLock(new TimeSpan(42)); // FN
-        if (condition)
-        {
-            readerWriterLock.ReleaseWriterLock();
-        }
-    }
-
-    public void Method5()
-    {
-        readerWriterLock.AcquireReaderLock(42);
-        try
-        {
-            var cookie = readerWriterLock.UpgradeToWriterLock(42);
+            readerWriterLock.AcquireReaderLock(42); // Noncompliant
             if (condition)
             {
-                readerWriterLock.DowngradeFromWriterLock(ref cookie);
+                readerWriterLock.ReleaseReaderLock();
             }
         }
-        catch (Exception)
-        {
 
-            throw;
-        }
-        finally
+        public void Method2()
         {
-            readerWriterLock.ReleaseReaderLock();
-        }
-    }
-
-    public void Method6()
-    {
-        try
-        {
-            readerWriterLock.AcquireReaderLock(new TimeSpan(42));
-            var cookie = readerWriterLock.UpgradeToWriterLock(new TimeSpan(42));
+            readerWriterLock.AcquireReaderLock(new TimeSpan(42)); // Noncompliant
             if (condition)
             {
-                readerWriterLock.DowngradeFromWriterLock(ref cookie);
+                readerWriterLock.ReleaseReaderLock();
             }
         }
-        catch (Exception)
-        {
 
-            throw;
-        }
-        finally
+        public void Method3()
         {
-            readerWriterLock.ReleaseReaderLock();
+            readerWriterLock.AcquireWriterLock(42); // FN
+            if (condition)
+            {
+                readerWriterLock.ReleaseWriterLock();
+            }
         }
-    }
 
-    public void Method7(string arg)
-    {
-        try
+        public void Method4()
+        {
+            readerWriterLock.AcquireWriterLock(new TimeSpan(42)); // FN
+            if (condition)
+            {
+                readerWriterLock.ReleaseWriterLock();
+            }
+        }
+
+        public void Method5()
         {
             readerWriterLock.AcquireReaderLock(42);
-            var cookie = readerWriterLock.UpgradeToWriterLock(42);
             try
             {
-                Console.WriteLine(arg.Length);
+                var cookie = readerWriterLock.UpgradeToWriterLock(42);
+                if (condition)
+                {
+                    readerWriterLock.DowngradeFromWriterLock(ref cookie);
+                }
             }
             catch (Exception)
             {
@@ -103,29 +62,20 @@ class Program
             }
             finally
             {
-                readerWriterLock.DowngradeFromWriterLock(ref cookie);
+                readerWriterLock.ReleaseReaderLock();
             }
         }
-        catch (Exception)
-        {
 
-            throw;
-        }
-        finally
+        public void Method6()
         {
-            readerWriterLock.ReleaseReaderLock();
-        }
-    }
-
-    public void Method8(string arg)
-    {
-        try
-        {
-            readerWriterLock.AcquireReaderLock(new TimeSpan(42));
-            var cookie = readerWriterLock.UpgradeToWriterLock(new TimeSpan(42));
             try
             {
-                Console.WriteLine(arg.Length);
+                readerWriterLock.AcquireReaderLock(new TimeSpan(42));
+                var cookie = readerWriterLock.UpgradeToWriterLock(new TimeSpan(42));
+                if (condition)
+                {
+                    readerWriterLock.DowngradeFromWriterLock(ref cookie);
+                }
             }
             catch (Exception)
             {
@@ -134,49 +84,102 @@ class Program
             }
             finally
             {
-                readerWriterLock.DowngradeFromWriterLock(ref cookie);
+                readerWriterLock.ReleaseReaderLock();
             }
         }
-        catch (Exception)
-        {
 
-            throw;
-        }
-        finally
+        public void Method7(string arg)
         {
+            try
+            {
+                readerWriterLock.AcquireReaderLock(42);
+                var cookie = readerWriterLock.UpgradeToWriterLock(42);
+                try
+                {
+                    Console.WriteLine(arg.Length);
+                }
+                catch (Exception)
+                {
+
+                    throw;
+                }
+                finally
+                {
+                    readerWriterLock.DowngradeFromWriterLock(ref cookie);
+                }
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+            finally
+            {
+                readerWriterLock.ReleaseReaderLock();
+            }
+        }
+
+        public void Method8(string arg)
+        {
+            try
+            {
+                readerWriterLock.AcquireReaderLock(new TimeSpan(42));
+                var cookie = readerWriterLock.UpgradeToWriterLock(new TimeSpan(42));
+                try
+                {
+                    Console.WriteLine(arg.Length);
+                }
+                catch (Exception)
+                {
+
+                    throw;
+                }
+                finally
+                {
+                    readerWriterLock.DowngradeFromWriterLock(ref cookie);
+                }
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+            finally
+            {
+                readerWriterLock.ReleaseReaderLock();
+            }
+        }
+
+        public void Method9()
+        {
+            readerWriterLock.AcquireReaderLock(new TimeSpan(42)); // Compliant because the cookie tracking is too complicated
+            LockCookie cookie = new LockCookie();
+            if (condition)
+            {
+                cookie = readerWriterLock.ReleaseLock();
+            }
+
+            readerWriterLock.RestoreLock(ref cookie);
+        }
+
+        public void Method10()
+        {
+            readerWriterLock.AcquireReaderLock(42); // Compliant
             readerWriterLock.ReleaseReaderLock();
         }
-    }
 
-    public void Method9()
-    {
-        readerWriterLock.AcquireReaderLock(new TimeSpan(42)); // Compliant because the cookie tracking is too complicated
-        LockCookie cookie = new LockCookie();
-        if (condition)
+        public void WrongOrder()
         {
-            cookie = readerWriterLock.ReleaseLock();
+            readerWriterLock.ReleaseReaderLock();
+            readerWriterLock.AcquireReaderLock(1); // Noncompliant
+
+            var a = new ReaderWriterLock();
+            a.ReleaseLock();
+            a.AcquireWriterLock(1); // Noncompliant
+
+            var b = new ReaderWriterLock();
+            b.ReleaseWriterLock();
+            b.AcquireWriterLock(1); // Noncompliant
         }
-
-        readerWriterLock.RestoreLock(ref cookie);
-    }
-
-    public void Method10()
-    {
-        readerWriterLock.AcquireReaderLock(42); // Compliant
-        readerWriterLock.ReleaseReaderLock();
-    }
-
-    public void WrongOrder()
-    {
-        readerWriterLock.ReleaseReaderLock();
-        readerWriterLock.AcquireReaderLock(1); // Noncompliant
-
-        var a = new ReaderWriterLock();
-        a.ReleaseLock();
-        a.AcquireWriterLock(1); // Noncompliant
-
-        var b = new ReaderWriterLock();
-        b.ReleaseWriterLock();
-        b.AcquireWriterLock(1); // Noncompliant
     }
 }

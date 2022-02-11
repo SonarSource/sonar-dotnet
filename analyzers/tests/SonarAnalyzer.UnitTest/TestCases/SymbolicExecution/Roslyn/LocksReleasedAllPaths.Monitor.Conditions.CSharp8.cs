@@ -1,40 +1,43 @@
 ﻿using System;
 using System.Threading;
 
-class Program
+namespace Monitor_Conditions_CSharp8
 {
-    private object obj = new object();
-    private object other = new object();
-
-    private bool condition;
-
-    public void Method1()
+    class Program
     {
-        var lockObj = condition switch
-        {
-            true => obj,
-            false => other,
-        };
+        private object obj = new object();
+        private object other = new object();
 
-        Monitor.Enter(lockObj); // Noncompliant
-        if (condition)
+        private bool condition;
+
+        public void Method1()
         {
-            Monitor.Exit(lockObj);
+            var lockObj = condition switch
+            {
+                true => obj,
+                false => other,
+            };
+
+            Monitor.Enter(lockObj); // Noncompliant
+            if (condition)
+            {
+                Monitor.Exit(lockObj);
+            }
         }
-    }
 
-    public void Method2()
-    {
-        var lockObj = condition switch
+        public void Method2()
         {
-            true => obj,
-            false => other,
-        };
+            var lockObj = condition switch
+            {
+                true => obj,
+                false => other,
+            };
 
-        Monitor.Enter(lockObj); // Compliant
-        if (!condition)
-        {
-            Monitor.Exit(other);
+            Monitor.Enter(lockObj); // Compliant
+            if (!condition)
+            {
+                Monitor.Exit(other);
+            }
         }
     }
 }
