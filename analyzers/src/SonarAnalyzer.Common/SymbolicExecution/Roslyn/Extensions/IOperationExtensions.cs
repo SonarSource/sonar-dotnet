@@ -18,6 +18,7 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System;
 using Microsoft.CodeAnalysis;
 using SonarAnalyzer.Extensions;
 using StyleCop.Analyzers.Lightup;
@@ -38,9 +39,19 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
             };
 
         internal static IInvocationOperationWrapper? AsInvocation(this IOperation operation) =>
-            operation.Kind == OperationKindEx.Invocation
-                ? IInvocationOperationWrapper.FromOperation(operation)
-                : null;
+            operation.As(OperationKindEx.Invocation, IInvocationOperationWrapper.FromOperation);
+
+        internal static IObjectCreationOperationWrapper? AsObjectCreation(this IOperation operation) =>
+            operation.As(OperationKindEx.ObjectCreation, IObjectCreationOperationWrapper.FromOperation);
+
+        internal static IAssignmentOperationWrapper? AsAssignment(this IOperation operation) =>
+            operation.As(OperationKindEx.SimpleAssignment, IAssignmentOperationWrapper.FromOperation);
+
+        internal static IArgumentOperationWrapper ToArgument(this IOperation operation) =>
+            IArgumentOperationWrapper.FromOperation(operation);
+
+        private static T? As<T>(this IOperation operation, OperationKind kind, Func<IOperation, T> fromOperation) where T : struct =>
+            operation.Kind == kind ? fromOperation(operation) : null;
 
         private static bool IsStaticOrThis(IOperation operation) =>
             operation == null // static fields

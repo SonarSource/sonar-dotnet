@@ -96,7 +96,7 @@ namespace Mutex_Type
         public void NoncompliantReleasedThenAcquiredAndReleased(Mutex paramMutex)
         {
             paramMutex.ReleaseMutex();
-            paramMutex.WaitOne(); // FN, after this acquire it's not released on all paths
+            paramMutex.WaitOne(); // Noncompliant
             if (cond)
             {
                 paramMutex.ReleaseMutex();
@@ -106,7 +106,7 @@ namespace Mutex_Type
         public void DifferentInstancesOnThis(Foo foo)
         {
             foo.instanceMutex.WaitOne(); // Compliant
-            instanceMutex.WaitOne(); // FN
+            instanceMutex.WaitOne(); // Noncompliant
             if (cond)
             {
                 instanceMutex.ReleaseMutex();
@@ -209,7 +209,7 @@ namespace Mutex_Type
             m1.ReleaseMutex();
 
             var m2 = Mutex.OpenExisting("foo");
-            if (m2.WaitOne(500))
+            if (m2.WaitOne(500)) // Noncompliant - FP
             {
                 m2.ReleaseMutex();
             }
@@ -219,7 +219,7 @@ namespace Mutex_Type
             {
                 paramMutex.ReleaseMutex();
             }
-            if (paramMutex.WaitOne(400, false))
+            if (paramMutex.WaitOne(400, false)) // Noncompliant - FP
             {
                 paramMutex.ReleaseMutex();
             }
@@ -241,14 +241,13 @@ namespace Mutex_Type
             }
         }
 
-        public void CompliantReleasedThenAcquired(Mutex paramMutex)
+        public void ReleasedThenAcquired(Mutex paramMutex)
         {
-            // this scenario would be a tolerable FP
             if (cond)
             {
                 paramMutex.ReleaseMutex();
             }
-            paramMutex.WaitOne();
+            paramMutex.WaitOne(); // Noncompliant
         }
 
         public void CompliantComplex(string mutexName, bool shouldAcquire)
@@ -279,6 +278,60 @@ namespace Mutex_Type
                     }
                     m.Dispose();
                 }
+            }
+        }
+
+        public void MutextAquireByConstructor_SimpleAssignment_LiteralArgument()
+        {
+            var m = new Mutex(true, "bar", out var mutextCreated); // Noncompliant
+            if (cond)
+            {
+                m.ReleaseMutex();
+            }
+        }
+
+        public void MutextAquireByConstructor_SimpleAssignment_FieldArgument()
+        {
+            var m = new Mutex(cond, "bar", out var mutextCreated);
+            if (cond)
+            {
+                m.ReleaseMutex();
+            }
+        }
+
+        public void MutextAquireByConstructor_ReAssignment()
+        {
+            var m = new Mutex(false, "bar", out var mc1);
+            m = new Mutex(true, "bar", out var mc2); // Noncompliant
+            if (cond)
+            {
+                m.ReleaseMutex();
+            }
+        }
+
+        public void MutextAquireByConstructor_MultipleVariableDeclaration()
+        {
+            Mutex m0, m1;
+            m0 = m1 = new Mutex(true, "bar", out var mutextCreated); // FN
+
+            if (cond)
+            {
+                m0.ReleaseMutex();
+            }
+        }
+
+        public void MutextAquireByConstructor_SwitchExpression(int x)
+        {
+            var m = x switch
+                    {
+                        1 => new Mutex(),
+                        2 => new Mutex(new bool()),
+                        3 => new Mutex(true, "bar", out var mutextCreated), // FN
+                    };
+
+            if (cond)
+            {
+                m.ReleaseMutex();
             }
         }
     }
