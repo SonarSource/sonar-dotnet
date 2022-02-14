@@ -419,6 +419,7 @@ namespace SonarAnalyzer.Helpers
         internal static readonly KnownType System_Threading_Mutex = new("System.Threading.Mutex");
         internal static readonly KnownType System_Threading_ReaderWriterLock = new("System.Threading.ReaderWriterLock");
         internal static readonly KnownType System_Threading_ReaderWriterLockSlim = new("System.Threading.ReaderWriterLockSlim");
+        internal static readonly KnownType System_Threading_SpinLock = new("System.Threading.SpinLock");
         internal static readonly KnownType System_Threading_Tasks_Task = new("System.Threading.Tasks.Task");
         internal static readonly KnownType System_Threading_Tasks_Task_T = new("System.Threading.Tasks.Task<TResult>");
         internal static readonly KnownType System_Threading_Tasks_TaskFactory = new("System.Threading.Tasks.TaskFactory");

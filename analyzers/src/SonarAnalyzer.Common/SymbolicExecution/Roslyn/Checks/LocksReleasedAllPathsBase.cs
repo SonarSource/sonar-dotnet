@@ -90,13 +90,15 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn.Checks
                 }
                 else if (invocation.TargetMethod.IsAny(KnownType.System_Threading_ReaderWriterLock, "AcquireReaderLock", "AcquireWriterLock")
                          || invocation.TargetMethod.IsAny(KnownType.System_Threading_ReaderWriterLockSlim, ReaderWriterLockSlimLockMethods)
-                         || invocation.TargetMethod.Is(KnownType.System_Threading_WaitHandle, "WaitOne"))
+                         || invocation.TargetMethod.Is(KnownType.System_Threading_WaitHandle, "WaitOne")
+                         || invocation.TargetMethod.IsAny(KnownType.System_Threading_SpinLock, "Enter", "TryEnter"))
                 {
                     return ProcessInvocationInstanceAcquireLock(context, invocation);
                 }
                 else if (invocation.TargetMethod.IsAny(KnownType.System_Threading_ReaderWriterLock, "ReleaseLock", "ReleaseReaderLock", "ReleaseWriterLock")
                          || invocation.TargetMethod.IsAny(KnownType.System_Threading_ReaderWriterLockSlim, "ExitReadLock", "ExitWriteLock", "ExitUpgradeableReadLock")
-                         || invocation.TargetMethod.Is(KnownType.System_Threading_Mutex, "ReleaseMutex"))
+                         || invocation.TargetMethod.Is(KnownType.System_Threading_Mutex, "ReleaseMutex")
+                         || invocation.TargetMethod.Is(KnownType.System_Threading_SpinLock, "Exit"))
                 {
                     return ProcessInvocationInstanceReleaseLock(context, invocation);
                 }

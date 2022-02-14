@@ -7,65 +7,65 @@ namespace SpinLock_Type
     {
         private bool condition;
 
-        public void Method1()
+        public void Enter_PartialExit()
         {
             SpinLock sl = new SpinLock(false);
             bool isAcquired = false;
-            sl.Enter(ref isAcquired); // FN
+            sl.Enter(ref isAcquired); // Noncompliant
             if (condition)
             {
                 sl.Exit();
             }
         }
 
-        public void Method2()
+        public void Enter_ThreadIdTrackingEnabled_PartialExit()
         {
             SpinLock sl = new SpinLock(true);
             bool isAcquired = false;
-            sl.Enter(ref isAcquired); // FN
+            sl.Enter(ref isAcquired); // Noncompliant
             if (condition)
             {
                 sl.Exit(true);
             }
         }
 
-        public void Method3()
+        public void TryEnter_ThreadIdTrackingDisabled_PartialExit()
         {
             SpinLock sl = new SpinLock(false);
             bool isAcquired = false;
-            sl.TryEnter(ref isAcquired);
+            sl.TryEnter(ref isAcquired); // Noncompliant
             if (condition)
             {
                 sl.Exit();
             }
         }
 
-        public void Method4()
+        public void TryEnterIntOverload_PartialExit()
         {
             SpinLock sl = new SpinLock(false);
             bool isAcquired = false;
-            sl.TryEnter(42, ref isAcquired);
+            sl.TryEnter(42, ref isAcquired); // Noncompliant
             if (condition)
             {
                 sl.Exit();
             }
         }
 
-        public void Method5()
+        public void TryEnterTimeSpanOverload_PartialExit()
         {
             SpinLock sl = new SpinLock(false);
             bool isAcquired = false;
-            sl.TryEnter(new TimeSpan(42), ref isAcquired);
+            sl.TryEnter(new TimeSpan(42), ref isAcquired); // Noncompliant
             if (condition)
             {
                 sl.Exit();
             }
         }
 
-        public void Method6(string someString)
+        public void TryCatchFinally_Compliant(string someString)
         {
             bool isAcquired = false;
-            SpinLock sl = new SpinLock(false); ;
+            SpinLock sl = new SpinLock(false);
             sl.Enter(ref isAcquired);
             try
             {
@@ -77,22 +77,22 @@ namespace SpinLock_Type
             }
         }
 
-        public void Method7()
+        public void Enter_UseReturnValueToReleaseOnlyWhenNeeded()
         {
             SpinLock sl = new SpinLock(false);
             bool isAcquired = false;
-            sl.Enter(ref isAcquired); // Compliant
+            sl.Enter(ref isAcquired); // Noncompliant, FP
             if (isAcquired)
             {
                 sl.Exit();
             }
         }
 
-        public void Method8()
+        public void TryEnter_UseReturnValueToReleaseOnlyWhenNeeded()
         {
             SpinLock sl = new SpinLock(false);
             bool isAcquired = false;
-            sl.TryEnter(ref isAcquired);
+            sl.TryEnter(ref isAcquired); // Noncompliant, FP
             if (isAcquired)
             {
                 sl.Exit();
