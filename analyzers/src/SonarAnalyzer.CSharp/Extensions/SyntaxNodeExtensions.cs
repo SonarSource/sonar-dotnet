@@ -18,7 +18,6 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System;
 using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
@@ -135,9 +134,9 @@ namespace SonarAnalyzer.Extensions
                         cfg = cfg.GetAnonymousFunctionControlFlowGraph(flowOperation);
                         cfgFlowOperations = cfg.FlowAnonymousFunctionOperations();
                     }
-                    else if (node == body)  // 'body' should always reach  LocalFunction CFG or AnonymousFunction CFG above
+                    else if (node == body)
                     {
-                        throw new InvalidOperationException($"Could not find CFG for {body.Parent.Kind()} in {body.SyntaxTree.FilePath}:{body.GetLocation().GetLineNumberToReport()}");
+                        return null;
                     }
                 }
             }

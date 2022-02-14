@@ -167,7 +167,9 @@ namespace SonarAnalyzer.Rules.CSharp
             }
             else
             {
-                return new LvaResult(declaration, body.CreateCfg(declaration.Context.SemanticModel));
+                return body.CreateCfg(declaration.Context.SemanticModel) is { } cfg
+                    ? new LvaResult(declaration, cfg)
+                    : null;
             }
         }
 
