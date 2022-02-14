@@ -22,7 +22,7 @@
   </organization>
 
   <properties>
-    <scannerMsbuild.version>5.5.2.43124</scannerMsbuild.version>
+    <scannerMsbuild.version>5.5.3.43281</scannerMsbuild.version>
     <surefire.argLine>-server</surefire.argLine>
     <maven.compiler.release>8</maven.compiler.release>
   </properties>
