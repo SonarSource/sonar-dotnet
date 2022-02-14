@@ -60,7 +60,7 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn.Checks
                 if (objectCreation.Type.Is(KnownType.System_Threading_Mutex)
                     && context.Operation.Parent.AsAssignment() is { } assignment
                     && objectCreation.Arguments.Length > 0
-                    && IArgumentOperationWrapper.FromOperation(objectCreation.Arguments.First()).Value.ConstantValue.Value is true)
+                    && objectCreation.Arguments.First().ToArgument().Value.ConstantValue.Value is true)
                 {
                     // Temporary work-around to support the Mutex constructor overcoming the engine limitations.
                     // As this is a POC, only assignments are supported. Other syntax constructs like switch expressions or multiple variable declaration are not.

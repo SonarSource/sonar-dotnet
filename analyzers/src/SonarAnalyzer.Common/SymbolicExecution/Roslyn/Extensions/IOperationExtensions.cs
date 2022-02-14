@@ -47,6 +47,9 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
         internal static IAssignmentOperationWrapper? AsAssignment(this IOperation operation) =>
             operation.As(OperationKindEx.SimpleAssignment, IAssignmentOperationWrapper.FromOperation);
 
+        internal static IArgumentOperationWrapper ToArgument(this IOperation operation) =>
+            IArgumentOperationWrapper.FromOperation(operation);
+
         private static T? As<T>(this IOperation operation, OperationKind kind, Func<IOperation, T> fromOperation) where T : struct =>
             operation.Kind == kind ? fromOperation(operation) : null;
 
