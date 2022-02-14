@@ -84,7 +84,7 @@ namespace Mutex_Type
                     paramMutex.ReleaseMutex();
                 }
             }
-            while (paramMutex2.WaitOne(400, false)) // Noncompliant
+            while (paramMutex2.WaitOne(400, false)) // FN
             {
                 if (cond)
                 {
@@ -209,7 +209,7 @@ namespace Mutex_Type
             m1.ReleaseMutex();
 
             var m2 = Mutex.OpenExisting("foo");
-            if (m2.WaitOne(500))
+            if (m2.WaitOne(500)) // Noncompliant - FP
             {
                 m2.ReleaseMutex();
             }
@@ -219,7 +219,7 @@ namespace Mutex_Type
             {
                 paramMutex.ReleaseMutex();
             }
-            if (paramMutex.WaitOne(400, false))
+            if (paramMutex.WaitOne(400, false)) // Noncompliant - FP
             {
                 paramMutex.ReleaseMutex();
             }
