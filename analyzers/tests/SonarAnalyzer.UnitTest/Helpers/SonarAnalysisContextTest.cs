@@ -369,7 +369,7 @@ namespace SonarAnalyzer.UnitTest.Helpers
         public void IsAnalysisScopeMatching_SingleDiagnostis_WithOneOrMoreScopes_SonarLint(bool expectedResult, ProjectType projectType, params string[] ruleTags)
         {
             var compilation = new SnippetCompiler("// Nothing to see here").SemanticModel.Compilation;
-            var diagnostic = new DiagnosticDescriptor("Sxxx", "Title", "Message", "Category", DiagnosticSeverity.Warning, true, customTags: ruleTags);
+            var diagnostic = TestHelper.CreateDescriptor("Sxxx", ruleTags);
             SonarAnalysisContext.IsAnalysisScopeMatching(compilation, projectType == ProjectType.Test, false, new[] { diagnostic }).Should().Be(expectedResult);
         }
 
@@ -391,7 +391,7 @@ namespace SonarAnalyzer.UnitTest.Helpers
         public void IsAnalysisScopeMatching_SingleDiagnostis_WithOneOrMoreScopes_Scanner(bool expectedResult, ProjectType projectType, params string[] ruleTags)
         {
             var compilation = new SnippetCompiler("// Nothing to see here").SemanticModel.Compilation;
-            var diagnostic = new DiagnosticDescriptor("Sxxx", "Title", "Message", "Category", DiagnosticSeverity.Warning, true, customTags: ruleTags);
+            var diagnostic = TestHelper.CreateDescriptor("Sxxx", ruleTags);
             SonarAnalysisContext.IsAnalysisScopeMatching(compilation, projectType == ProjectType.Test, true, new[] { diagnostic }).Should().Be(expectedResult);
         }
 
@@ -406,7 +406,7 @@ namespace SonarAnalyzer.UnitTest.Helpers
         public void IsAnalysisScopeMatching_MultipleDiagnostics_WithSingleScope_SonarLint(bool expectedResult, ProjectType projectType, params string[] rulesTag)
         {
             var compilation = new SnippetCompiler("// Nothing to see here").SemanticModel.Compilation;
-            var diagnostics = rulesTag.Select(x => new DiagnosticDescriptor("Sxxx", "Title", "Message", "Category", DiagnosticSeverity.Warning, true, customTags: new[] { x }));
+            var diagnostics = rulesTag.Select(x => TestHelper.CreateDescriptor("Sxxx", x));
             SonarAnalysisContext.IsAnalysisScopeMatching(compilation, projectType == ProjectType.Test, false, diagnostics).Should().Be(expectedResult);
         }
 
@@ -420,7 +420,7 @@ namespace SonarAnalyzer.UnitTest.Helpers
         public void IsAnalysisScopeMatching_MultipleDiagnostics_WithSingleScope_Scanner(bool expectedResult, ProjectType projectType, params string[] rulesTag)
         {
             var compilation = new SnippetCompiler("// Nothing to see here").SemanticModel.Compilation;
-            var diagnostics = rulesTag.Select(x => new DiagnosticDescriptor("Sxxx", "Title", "Message", "Category", DiagnosticSeverity.Warning, true, customTags: new[] { x }));
+            var diagnostics = rulesTag.Select(x => TestHelper.CreateDescriptor("Sxxx", x));
             SonarAnalysisContext.IsAnalysisScopeMatching(compilation, projectType == ProjectType.Test, true, diagnostics).Should().Be(expectedResult);
         }
 

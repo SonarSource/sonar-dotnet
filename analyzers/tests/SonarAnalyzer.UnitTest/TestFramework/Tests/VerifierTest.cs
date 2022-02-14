@@ -130,7 +130,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework.Tests
             WithSnippetCS(
 @"public class Sample
 {
-    private int a = 42;     // Noncompliant {{Dummy message}}
+    private int a = 42;     // Noncompliant {{Message for SDummy}}
     private int b = 42;     // Noncompliant
     private bool c = true;
 }").Invoking(x => x.Verify()).Should().NotThrow();
@@ -139,7 +139,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework.Tests
         public void Verify_RaiseExpectedIssues_VB() =>
             WithSnippetVB(
 @"Public Class Sample
-    Private A As Integer = 42   ' Noncompliant {{Dummy message}}
+    Private A As Integer = 42   ' Noncompliant {{Message for SDummy}}
     Private B As Integer = 42   ' Noncompliant
     Private C As Boolean = True
 End Class").Invoking(x => x.Verify()).Should().NotThrow();
@@ -152,7 +152,7 @@ End Class").Invoking(x => x.Verify()).Should().NotThrow();
     private int a = 42;     // FP
     private int b = 42;     // FP
     private bool c = true;
-}").Invoking(x => x.Verify()).Should().Throw<UnexpectedDiagnosticException>().WithMessage("CSharp7: Unexpected primary issue on line 3, span (2,20)-(2,22) with message 'Dummy message'*");
+}").Invoking(x => x.Verify()).Should().Throw<UnexpectedDiagnosticException>().WithMessage("CSharp7: Unexpected primary issue on line 3, span (2,20)-(2,22) with message 'Message for SDummy'*");
 
         [TestMethod]
         public void Verify_RaiseUnexpectedIssues_VB() =>
@@ -161,7 +161,7 @@ End Class").Invoking(x => x.Verify()).Should().NotThrow();
     Private A As Integer = 42   ' FP
     Private B As Integer = 42   ' FP
     Private C As Boolean = True
-End Class").Invoking(x => x.Verify()).Should().Throw<UnexpectedDiagnosticException>().WithMessage("VisualBasic12: Unexpected primary issue on line 2, span (1,27)-(1,29) with message 'Dummy message'*");
+End Class").Invoking(x => x.Verify()).Should().Throw<UnexpectedDiagnosticException>().WithMessage("VisualBasic12: Unexpected primary issue on line 2, span (1,27)-(1,29) with message 'Message for SDummy'*");
 
         [TestMethod]
         public void Verify_MissingExpectedIssues() =>
@@ -187,7 +187,7 @@ Line: 4, Type: primary, Id: ''
             WithSnippetCS(
 @"public class Sample
 {
-    private int a = 42;     // Noncompliant {{Dummy message}}
+    private int a = 42;     // Noncompliant {{Message for SDummy}}
                             // Noncompliant@-1
     private int b = 42;     // Noncompliant
                             // Noncompliant@-1

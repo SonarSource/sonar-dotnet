@@ -41,7 +41,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework.Tests
 
     internal abstract class DummyAnalyzer<TSyntaxKind> : DiagnosticAnalyzer where TSyntaxKind : struct
     {
-        private static readonly DiagnosticDescriptor Rule = new("SDummy", "Dummy title", "Dummy message", string.Empty, DiagnosticSeverity.Warning, true);
+        private static readonly DiagnosticDescriptor Rule = TestHelper.CreateDescriptor("SDummy");
 
         protected abstract TSyntaxKind NumericLiteralExpression { get; }
 

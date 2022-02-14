@@ -31,21 +31,19 @@ using SonarAnalyzer.CFG.Sonar;
 using SonarAnalyzer.Extensions;
 using SonarAnalyzer.Helpers;
 using SonarAnalyzer.LiveVariableAnalysis.CSharp;
-using SonarAnalyzer.Rules.CSharp;
+using SonarAnalyzer.Rules.SymbolicExecution;
 using SonarAnalyzer.SymbolicExecution;
-using SonarAnalyzer.SymbolicExecution.Roslyn;
 using SonarAnalyzer.SymbolicExecution.Roslyn.Checks;
 using SonarAnalyzer.SymbolicExecution.Sonar;
 using StyleCop.Analyzers.Lightup;
 
-namespace SonarAnalyzer.Rules.SymbolicExecution
+namespace SonarAnalyzer.Rules.CSharp
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
-    public sealed partial class SymbolicExecutionRunner : SonarDiagnosticAnalyzer
+    public sealed class SymbolicExecutionRunner : SymbolicExecutionRunnerBase
     {
-        private static readonly ImmutableDictionary<DiagnosticDescriptor, RuleFactory> AllRules = ImmutableDictionary<DiagnosticDescriptor, RuleFactory>.Empty
-            .Add(LocksReleasedAllPaths.S2222, CreateFactory<LocksReleasedAllPaths>());
-        private static readonly ImmutableArray<ISymbolicExecutionAnalyzer> SonarRules = ImmutableArray.Create<ISymbolicExecutionAnalyzer>(    // ToDo: This should be migrated to AllRules
+        // ToDo: This should be migrated to SymbolicExecutionRunnerBase.AllRules. SymbolicExecutionRunnerBase.RegisterSupportedDiagnostics can be removed afterwards as well.
+        private static readonly ImmutableArray<ISymbolicExecutionAnalyzer> SonarRules = ImmutableArray.Create<ISymbolicExecutionAnalyzer>(
             new EmptyNullableValueAccess(),
             new ObjectsShouldNotBeDisposedMoreThanOnce(),
             new PublicMethodArgumentsShouldBeCheckedForNull(),
@@ -56,22 +54,22 @@ namespace SonarAnalyzer.Rules.SymbolicExecution
             new RestrictDeserializedTypes(),
             new InitializationVectorShouldBeRandom(),
             new HashesShouldHaveUnpredictableSalt());
-        private readonly Dictionary<DiagnosticDescriptor, RuleFactory> additionalTestRules = new();
-        private ImmutableArray<DiagnosticDescriptor> supportedDiagnostics = SonarRules.SelectMany(x => x.SupportedDiagnostics).Concat(AllRules.Keys).ToImmutableArray();
 
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => supportedDiagnostics;
-        protected override bool EnableConcurrentExecution => false;
+        protected override ImmutableDictionary<DiagnosticDescriptor, RuleFactory> AllRules => ImmutableDictionary<DiagnosticDescriptor, RuleFactory>.Empty
+            .Add(LocksReleasedAllPaths.S2222, CreateFactory<LocksReleasedAllPaths>());
 
-        internal /* for testing */ void RegisterRule<TRuleCheck>(DiagnosticDescriptor descriptor) where TRuleCheck : SymbolicRuleCheck, new()
+        public SymbolicExecutionRunner()
         {
-            additionalTestRules.Add(descriptor, CreateFactory<TRuleCheck>());
-            supportedDiagnostics = supportedDiagnostics.Concat(new[] { descriptor }).ToImmutableArray();
+            foreach (var descriptor in SonarRules.SelectMany(x => x.SupportedDiagnostics))
+            {
+                RegisterSupportedDiagnostics(descriptor);
+            }
         }
 
         protected override void Initialize(SonarAnalysisContext context)
         {
             context.RegisterSyntaxNodeActionInNonGenerated(
-                c => Analyze<BaseMethodDeclarationSyntax>(context, c, x => (CSharpSyntaxNode)x.Body ?? x.ExpressionBody()),
+                c => Analyze<BaseMethodDeclarationSyntax>(context, c, x => (SyntaxNode)x.Body ?? x.ExpressionBody()),
                 SyntaxKind.ConstructorDeclaration,
                 SyntaxKind.DestructorDeclaration,
                 SyntaxKind.ConversionOperatorDeclaration,
@@ -83,7 +81,7 @@ namespace SonarAnalyzer.Rules.SymbolicExecution
                 SyntaxKind.PropertyDeclaration);
 
             context.RegisterSyntaxNodeActionInNonGenerated(
-                c => Analyze<AccessorDeclarationSyntax>(context, c, x => (CSharpSyntaxNode)x.Body ?? x.ExpressionBody()),
+                c => Analyze<AccessorDeclarationSyntax>(context, c, x => (SyntaxNode)x.Body ?? x.ExpressionBody()),
                 SyntaxKind.GetAccessorDeclaration,
                 SyntaxKind.SetAccessorDeclaration,
                 SyntaxKindEx.InitAccessorDeclaration,
@@ -104,55 +102,13 @@ namespace SonarAnalyzer.Rules.SymbolicExecution
                 SyntaxKind.ParenthesizedLambdaExpression);
         }
 
-        private void Analyze<TNode>(SonarAnalysisContext analysisContext, SyntaxNodeAnalysisContext context, Func<TNode, CSharpSyntaxNode> getBody) where TNode : SyntaxNode
-        {
-            if (getBody((TNode)context.Node) is { } body && context.SemanticModel.GetDeclaredSymbol(context.Node) is { } symbol)
-            {
-                Analyze(analysisContext, context, body, symbol);
-            }
-        }
+        protected override ControlFlowGraph CreateCfg(SemanticModel model, SyntaxNode node) =>
+            node.CreateCfg(model);
 
-        private void Analyze(SonarAnalysisContext sonarContext, SyntaxNodeAnalysisContext nodeContext, CSharpSyntaxNode body, ISymbol symbol)
-        {
-            if (body != null && !body.ContainsDiagnostics)
-            {
-                var isTestProject = sonarContext.IsTestProject(nodeContext.Compilation, nodeContext.Options);
-                var isScannerRun = sonarContext.IsScannerRun(nodeContext.Options);
-                AnalyzeSonar(nodeContext, isTestProject, isScannerRun, body, symbol);
-                if (ControlFlowGraph.IsAvailable)   // ToDo: Make this configurable for UTs when migrating other rules, see DeadStores
-                {
-                    AnalyzeRoslyn(sonarContext, nodeContext, isTestProject, isScannerRun, body, symbol);
-                }
-            }
-        }
-
-        private void AnalyzeRoslyn(SonarAnalysisContext sonarContext, SyntaxNodeAnalysisContext nodeContext, bool isTestProject, bool isScannerRun, CSharpSyntaxNode body, ISymbol symbol)
-        {
-            var checks = AllRules.Concat(additionalTestRules)
-                .Where(x => IsEnabled(nodeContext, isTestProject, isScannerRun, x.Key))
-                .GroupBy(x => x.Value.Type)                             // Multiple DiagnosticDescriptors (S2583, S2589) can share the same check type
-                .Select(x => x.First().Value.CreateInstance(sonarContext, nodeContext))   // We need just one instance in that case
-                .Where(x => x.ShouldExecute())
-                .ToArray();
-            if (checks.Any())
-            {
-                try
-                {
-                    var cfg = body.CreateCfg(nodeContext.SemanticModel);
-                    var engine = new RoslynSymbolicExecution(cfg, checks);
-                    engine.Execute();
-                }
-                catch (Exception ex)
-                {
-                    throw new SymbolicExecutionException(ex, symbol, body.GetLocation());
-                }
-            }
-        }
-
-        private void AnalyzeSonar(SyntaxNodeAnalysisContext context, bool isTestProject, bool isScannerRun, CSharpSyntaxNode body, ISymbol symbol)
+        protected override void AnalyzeSonar(SyntaxNodeAnalysisContext context, bool isTestProject, bool isScannerRun, SyntaxNode body, ISymbol symbol)
         {
             var enabledAnalyzers = SonarRules.Where(x => x.SupportedDiagnostics.Any(descriptor => IsEnabled(context, isTestProject, isScannerRun, descriptor))).ToArray();
-            if (enabledAnalyzers.Any() && CSharpControlFlowGraph.TryGet(body, context.SemanticModel, out var cfg))
+            if (enabledAnalyzers.Any() && CSharpControlFlowGraph.TryGet((CSharpSyntaxNode)body, context.SemanticModel, out var cfg))
             {
                 var lva = new SonarCSharpLiveVariableAnalysis(cfg, symbol, context.SemanticModel);
                 try
@@ -199,10 +155,5 @@ namespace SonarAnalyzer.Rules.SymbolicExecution
                 analyzerContext.Dispose();
             }
         }
-
-        // We need to rewrite this https://github.com/SonarSource/sonar-dotnet/issues/4824
-        private static bool IsEnabled(SyntaxNodeAnalysisContext context, bool isTestProject, bool isScannerRun, DiagnosticDescriptor descriptor) =>
-            SonarAnalysisContext.IsAnalysisScopeMatching(context.Compilation, isTestProject, isScannerRun, new[] { descriptor })
-            && descriptor.GetEffectiveSeverity(context.Compilation.Options) != ReportDiagnostic.Suppress;
     }
 }
