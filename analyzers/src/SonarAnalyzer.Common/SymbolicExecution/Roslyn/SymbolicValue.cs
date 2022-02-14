@@ -21,7 +21,6 @@
 using System;
 using System.Collections.Immutable;
 using System.Linq;
-using System.Text;
 using SonarAnalyzer.Helpers;
 
 namespace SonarAnalyzer.SymbolicExecution.Roslyn
