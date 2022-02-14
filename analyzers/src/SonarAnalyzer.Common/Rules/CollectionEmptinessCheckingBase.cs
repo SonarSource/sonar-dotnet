@@ -28,7 +28,7 @@ namespace SonarAnalyzer.Rules
     public abstract class CollectionEmptinessCheckingBase<TSyntaxKind> : SonarDiagnosticAnalyzer<TSyntaxKind>
         where TSyntaxKind : struct
     {
-        private const string DiagnosticId = "S1155";
+        internal const string DiagnosticId = "S1155";
 
         protected CollectionEmptinessCheckingBase() : base(DiagnosticId) { }
 

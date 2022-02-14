@@ -7,60 +7,59 @@ namespace Tests.Diagnostics
     {
         private static bool HasContent1(IEnumerable<string> l)
         {
-            return l.Count() > 0; // Noncompliant {{Use '.Any()' to test whether this 'IEnumerable<string>' is empty or not.}}
-            //       ^^^^^
+            return l.Any(); // Fixed
         }
         private static bool HasContent1b(IEnumerable<string> l)
         {
-            return 0 < l.Count(); // Noncompliant
+            return l.Any(); // Fixed
         }
         private static bool HasContent2(List<string> l)
         {
-            return l.Count() >= 0x1; // Noncompliant
+            return l.Any(); // Fixed
         }
         private static bool HasContent2b(List<string> l)
         {
-            return 1UL <= l.Count(); // Noncompliant // Error[CS0034]
+            return l.Any(); // Fixed
         }
         private static bool IsNotEmpty1(List<string> l)
         {
-            return l.Count() != 0; // Noncompliant
+            return l.Any(); // Fixed
         }
         private static bool IsNotEmpty2(List<string> l)
         {
-            return 0 != l.Count(); // Noncompliant
+            return l.Any(); // Fixed
         }
         private static bool IsEmpty1(List<string> l)
         {
-            return l.Count() == 0; // Noncompliant
+            return !l.Any(); // Fixed
         }
         private static bool IsEmpty2(List<string> l)
         {
-            return l.Count() <= 0; // Noncompliant
+            return !l.Any(); // Fixed
         }
         private static bool IsEmpty2b(List<string> l)
         {
-            return 0 >= l.Count(); // Noncompliant
+            return !l.Any(); // Fixed
         }
         private static bool IsEmpty4(List<string> l)
         {
-            return l.Count() < 1; // Noncompliant
+            return !l.Any(); // Fixed
         }
         private static bool IsEmpty4b(List<string> l)
         {
-            return 1 > l.Count(); // Noncompliant
+            return !l.Any(); // Fixed
         }
         private static bool HasContentWithCondition(List<int> numbers)
         {
-            return numbers.Count(n => n % 2 == 0) > 0; // Noncompliant
+            return numbers.Any(n => n % 2 == 0); // Fixed
         }
         private static bool IsEmptyWithCondition(List<int> numbers)
         {
-            return numbers.Count(n => n % 2 == 0) == 0; // Noncompliant
+            return !numbers.Any(n => n % 2 == 0); // Fixed
         }
         public static bool WithReferencedCondition(int[] n)
         {
-            return n.Count(Include) == 0; // Noncompliant
+            return !n.Any(Include); // Fixed
         }
         static bool Include(int n)
         {
@@ -72,24 +71,23 @@ namespace Tests.Diagnostics
     {
         bool IsEmpty(int[] n)
         {
-            return Enumerable.Count(n) == 0; // Noncompliant
-            //                ^^^^^
+            return !n.Any(); // Fixed
         }
         bool HasAny(int[] n)
         {
-            return Enumerable.Count(n) > 0; // Noncompliant
+            return n.Any(); // Fixed
         }
         bool RightExpression(int[] n)
         {
-            return 0 < Enumerable.Count(n); // Noncompliant
+            return n.Any(); // Fixed
         }
-        bool WithCondition(int [] n)
+        bool WithCondition(int[] n)
         {
-            return Enumerable.Count(n, x => x != 2) == 0; // Noncompliant
+            return !n.Any(x => x != 2); // Fixed
         }
         bool NotAnIdentifier(string str)
         {
-            return Enumerable.Count(str.Trim()) > 0; // Noncompliant
+            return str.Trim().Any(); // Fixed
         }
     }
 
@@ -97,16 +95,11 @@ namespace Tests.Diagnostics
     {
         bool Nested(string[] words)
         {
-            return words.Count(w => w.Count(ch => ch == 'Q') == 0) > 0;
-            //           ^^^^^                  {{Use '.Any()' to test whether this 'IEnumerable<string>' is empty or not.}}
-            //                        ^^^^^ @-1 {{Use '.Any()' to test whether this 'IEnumerable<char>' is empty or not.}}
+            return words.Any(w => !w.Any(ch => ch == 'Q'));
         }
         bool Composed(int[] a, int[] b, int[] c)
         {
-            return a.Count() > 0 && b.Count() == 0 && c.Count() > 0;
-            //       ^^^^^                                        {{Use '.Any()' to test whether this 'IEnumerable<int>' is empty or not.}}
-            //                        ^^^^^                   @-1 {{Use '.Any()' to test whether this 'IEnumerable<int>' is empty or not.}}
-            //                                          ^^^^^ @-2 {{Use '.Any()' to test whether this 'IEnumerable<int>' is empty or not.}}
+            return a.Any() && !b.Any() && c.Any();
         }
     }
 
