@@ -20,7 +20,6 @@
 
 using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using SonarAnalyzer.SymbolicExecution;
 using SonarAnalyzer.SymbolicExecution.Constraints;
 using SonarAnalyzer.SymbolicExecution.Roslyn;
 using SonarAnalyzer.UnitTest.TestFramework.SymbolicExecution;
@@ -55,60 +54,59 @@ namespace SonarAnalyzer.UnitTest.SymbolicExecution.Roslyn
         [TestMethod]
         public void ToString_WithConstraints()
         {
-            var sut = new SymbolicValue(new SymbolicValueCounter());
+            var sut = new SymbolicValue(new());
             sut.ToString().Should().Be("SV_1");
 
-            sut.SetConstraint(LockConstraint.Held);
-            sut.ToString().Should().Be("SV_1: Held");
+            sut = sut.WithConstraint(LockConstraint.Held);
+            sut.ToString().Should().Be("SV_2: Held");
 
-            sut.SetConstraint(TestConstraint.First);
-            sut.ToString().Should().Be("SV_1: Held, First");
+            sut = sut.WithConstraint(TestConstraint.First);
+            sut.ToString().Should().Be("SV_3: First, Held");
 
-            sut.SetConstraint(TestConstraint.Second);   // Override First to Second
-            sut.ToString().Should().Be("SV_1: Held, Second");
+            sut = sut.WithConstraint(TestConstraint.Second);   // Override First to Second
+            sut.ToString().Should().Be("SV_4: Held, Second");
 
-            sut.SetConstraint(DummyConstraint.Dummy);
-            sut.ToString().Should().Be("SV_1: Held, Second, Dummy");
+            sut = sut.WithConstraint(DummyConstraint.Dummy);
+            sut.ToString().Should().Be("SV_5: Dummy, Held, Second");
         }
 
         [TestMethod]
-        public void SetConstraint_Contains()
+        public void WithConstraint_Contains()
         {
-            var sut = new SymbolicValue(new SymbolicValueCounter());
-            sut.SetConstraint(TestConstraint.First);
+            var sut = new SymbolicValue(new()).WithConstraint(TestConstraint.First);
             sut.HasConstraint(TestConstraint.First).Should().BeTrue();
             sut.HasConstraint(TestConstraint.Second).Should().BeFalse();
             sut.HasConstraint(LockConstraint.Held).Should().BeFalse();
         }
 
         [TestMethod]
-        public void SetConstraint_Overrides()
+        public void WithConstraint_Overrides_IsImmutable()
         {
-            var sut = new SymbolicValue(new SymbolicValueCounter());
-            sut.SetConstraint(TestConstraint.First);
-            sut.SetConstraint(TestConstraint.Second);
-            sut.HasConstraint(TestConstraint.First).Should().BeFalse();
-            sut.HasConstraint(TestConstraint.Second).Should().BeTrue();
+            var one = new SymbolicValue(new()).WithConstraint(TestConstraint.First);
+            var two = one.WithConstraint(TestConstraint.Second);
+            one.HasConstraint(TestConstraint.First).Should().BeTrue();
+            two.HasConstraint(TestConstraint.First).Should().BeFalse();
+            two.HasConstraint(TestConstraint.Second).Should().BeTrue();
         }
 
         [TestMethod]
-        public void RemoveConstraint_RemovesOnlyTheSame()
+        public void WithoutConstraint_RemovesOnlyTheSame()
         {
-            var sut = new SymbolicValue(new SymbolicValueCounter());
-            sut.RemoveConstraint(TestConstraint.First);     // Do nothing
-            sut.SetConstraint(TestConstraint.First);
-            sut.RemoveConstraint(TestConstraint.Second);    // Do nothing
+            var sut = new SymbolicValue(new())
+                .WithoutConstraint(TestConstraint.First)    // Do nothing
+                .WithConstraint(TestConstraint.First)
+                .WithoutConstraint(TestConstraint.Second);  // Do nothing
             sut.HasConstraint(TestConstraint.First).Should().BeTrue();
-            sut.RemoveConstraint(TestConstraint.First);
+            sut = sut.WithoutConstraint(TestConstraint.First);
             sut.HasConstraint(TestConstraint.First).Should().BeFalse();
         }
 
         [TestMethod]
         public void HasConstraint_ByType()
         {
-            var sut = new SymbolicValue(new SymbolicValueCounter());
+            var sut = new SymbolicValue(new());
             sut.HasConstraint<TestConstraint>().Should().BeFalse();
-            sut.SetConstraint(TestConstraint.First);
+            sut = sut.WithConstraint(TestConstraint.First);
             sut.HasConstraint<TestConstraint>().Should().BeTrue();
             sut.HasConstraint<LockConstraint>().Should().BeFalse();
         }
@@ -116,44 +114,38 @@ namespace SonarAnalyzer.UnitTest.SymbolicExecution.Roslyn
         [TestMethod]
         public void HasConstraint_ByValue()
         {
-            var sut = new SymbolicValue(new SymbolicValueCounter());
+            var sut = new SymbolicValue(new());
             sut.HasConstraint(TestConstraint.First).Should().BeFalse();
-            sut.SetConstraint(TestConstraint.First);
+            sut = sut.WithConstraint(TestConstraint.First);
             sut.HasConstraint(TestConstraint.First).Should().BeTrue();
             sut.HasConstraint(TestConstraint.Second).Should().BeFalse();
         }
 
         [TestMethod]
-        public void GetHashCode_AlwaysZero()
+        public void GetHashCode_ComputedFromConstraints()
         {
             var counter = new SymbolicValueCounter();
-            new SymbolicValue(counter).GetHashCode().Should().Be(0);
-            new SymbolicValue(counter).GetHashCode().Should().Be(0);
-            var sut = new SymbolicValue(counter);
-            sut.SetConstraint(TestConstraint.First);
-            sut.GetHashCode().Should().Be(0);
-            sut.SetConstraint(BoolConstraint.True);
-            sut.GetHashCode().Should().Be(0);
+            var empty1 = new SymbolicValue(counter);
+            var empty2 = new SymbolicValue(counter);
+            var basic = new SymbolicValue(counter).WithConstraint(TestConstraint.First);
+            var same = new SymbolicValue(counter).WithConstraint(TestConstraint.First);
+            var different = new SymbolicValue(counter).WithConstraint(BoolConstraint.True);
+            empty1.GetHashCode().Should().Be(empty2.GetHashCode()).And.Be(0);   // Hash seed for empty dictionary is zero
+            basic.GetHashCode().Should().Be(basic.GetHashCode()).And.NotBe(0);
+            basic.GetHashCode().Should().Be(same.GetHashCode());
+            basic.GetHashCode().Should().NotBe(different.GetHashCode());
         }
 
         [TestMethod]
         public void Equals_ReturnsTrueForSameConstraints()
         {
             var counter = new SymbolicValueCounter();
-            var basicSingle = new SymbolicValue(counter);
-            var sameSingle = new SymbolicValue(counter);
-            var basicMore = new SymbolicValue(counter);
-            var sameMore = new SymbolicValue(counter);
-            var differentConstraintValue = new SymbolicValue(counter);
-            var differentConstraintType = new SymbolicValue(counter);
-            basicSingle.SetConstraint(TestConstraint.First);
-            sameSingle.SetConstraint(TestConstraint.First);
-            basicMore.SetConstraint(TestConstraint.First);
-            basicMore.SetConstraint(BoolConstraint.True);
-            sameMore.SetConstraint(TestConstraint.First);
-            sameMore.SetConstraint(BoolConstraint.True);
-            differentConstraintValue.SetConstraint(TestConstraint.Second);
-            differentConstraintType.SetConstraint(BoolConstraint.True);
+            var basicSingle = new SymbolicValue(counter).WithConstraint(TestConstraint.First);
+            var sameSingle = new SymbolicValue(counter).WithConstraint(TestConstraint.First);
+            var basicMore = new SymbolicValue(counter).WithConstraint(TestConstraint.First).WithConstraint(BoolConstraint.True);
+            var sameMore = new SymbolicValue(counter).WithConstraint(TestConstraint.First).WithConstraint(BoolConstraint.True);
+            var differentConstraintValue = new SymbolicValue(counter).WithConstraint(TestConstraint.Second);
+            var differentConstraintType = new SymbolicValue(counter).WithConstraint(BoolConstraint.True);
 
             basicSingle.Equals(basicSingle).Should().BeTrue();
             basicSingle.Equals(sameSingle).Should().BeTrue();

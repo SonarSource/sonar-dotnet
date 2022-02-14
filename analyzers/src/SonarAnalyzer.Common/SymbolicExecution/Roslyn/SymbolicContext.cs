@@ -19,6 +19,7 @@
  */
 
 using System;
+using Microsoft.CodeAnalysis;
 using StyleCop.Analyzers.Lightup;
 
 namespace SonarAnalyzer.SymbolicExecution.Roslyn
@@ -40,19 +41,10 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
         public SymbolicValue CreateSymbolicValue() =>
             new(symbolicValueCounter);
 
-        public ProgramState SetOperationConstraint(SymbolicConstraint constraint)
-        {
-            if (State[Operation] is { } value)
-            {
-                value.SetConstraint(constraint);
-                return State;
-            }
-            else
-            {
-                value = CreateSymbolicValue();
-                value.SetConstraint(constraint);
-                return State.SetOperationValue(Operation, value);
-            }
-        }
+        public ProgramState SetOperationConstraint(SymbolicConstraint constraint) =>
+            State.SetOperationValue(Operation, (State[Operation] ?? CreateSymbolicValue()).WithConstraint(constraint));
+
+        public ProgramState SetSymbolConstraint(ISymbol symbol, SymbolicConstraint constraint) =>
+            State.SetSymbolValue(symbol, (State[symbol] ?? CreateSymbolicValue()).WithConstraint(constraint));
     }
 }

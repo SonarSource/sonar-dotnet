@@ -32,9 +32,12 @@ namespace SonarAnalyzer.UnitTest.TestFramework.SymbolicExecution
 
         public SETestContext(string code, AnalyzerLanguage language, SymbolicCheck[] additionalChecks)
         {
+            const string Separator = "----------";
             var cfg = TestHelper.CompileCfg(code, language);
             var se = new RoslynSymbolicExecution(cfg, additionalChecks.Concat(new[] { Validator }).ToArray());
-            Console.WriteLine(CfgSerializer.Serialize(cfg));
+            Console.WriteLine(Separator);
+            Console.Write(CfgSerializer.Serialize(cfg));
+            Console.WriteLine(Separator);
             se.Execute();
         }
 
