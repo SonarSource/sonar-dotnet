@@ -28,23 +28,19 @@ namespace SonarAnalyzer.UnitTest.Rules
     public class TypeMemberVisibilityTest
     {
         [TestMethod]
-        [TestCategory("Rule")]
         public void TypeMemberVisibility_CS() =>
             OldVerifier.VerifyAnalyzer(@"TestCases\TypeMemberVisibility.cs", new TypeMemberVisibility());
 
 #if NET
         [TestMethod]
-        [TestCategory("Rule")]
         public void TypeMemberVisibility_CSharp9() =>
             OldVerifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\TypeMemberVisibility.CSharp9.cs", new TypeMemberVisibility());
 
         [TestMethod]
-        [TestCategory("Rule")]
         public void TypeMemberVisibility_CSharp10() =>
             OldVerifier.VerifyAnalyzerFromCSharp10Library(@"TestCases\TypeMemberVisibility.CSharp10.cs", new TypeMemberVisibility());
 
         [TestMethod]
-        [TestCategory("Rule")]
         public void TypeMemberVisibility_CSharpPreview() =>
             OldVerifier.VerifyAnalyzerCSharpPreviewLibrary(@"TestCases\TypeMemberVisibility.CSharpPreview.cs", new TypeMemberVisibility());
 #endif

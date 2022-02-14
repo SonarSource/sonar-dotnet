@@ -29,12 +29,10 @@ namespace SonarAnalyzer.UnitTest.Rules
     public class LoopsAndLinqTest
     {
         [TestMethod]
-        [TestCategory("Rule")]
         public void LoopsAndLinq_CS() =>
             OldVerifier.VerifyAnalyzer(@"TestCases\LoopsAndLinq.cs", new LoopsAndLinq(), MetadataReferenceFacade.SystemData);
 
         [TestMethod]
-        [TestCategory("Rule")]
         public void LoopsAndLinq_CSharp8() =>
             OldVerifier.VerifyAnalyzer(@"TestCases\LoopsAndLinq.CSharp8.cs", new LoopsAndLinq(), ParseOptionsHelper.FromCSharp8);
     }
