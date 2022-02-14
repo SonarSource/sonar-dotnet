@@ -29,7 +29,6 @@ namespace SonarAnalyzer.UnitTest.Rules
     public class UseTestableTimeProviderTest
     {
         [TestMethod]
-        [TestCategory("Rule")]
         public void UseTestableTimeProvider_CS() =>
              new VerifierBuilder()
                 .AddAnalyzer(() => new CS.UseTestableTimeProvider())
@@ -37,7 +36,6 @@ namespace SonarAnalyzer.UnitTest.Rules
                 .Verify();
 
         [TestMethod]
-        [TestCategory("Rule")]
         public void UseTestableTimeProvider_VB() =>
              new VerifierBuilder()
                 .AddAnalyzer(() => new VB.UseTestableTimeProvider())

@@ -41,7 +41,6 @@ namespace SonarAnalyzer.UnitTest.Rules
             OldVerifier.VerifyAnalyzer(@"TestCases\MemberInitializerRedundant.cs", new MemberInitializerRedundant(AnalyzerConfiguration.AlwaysEnabledWithSonarCfg), ParseOptionsHelper.FromCSharp8);
 
         [TestMethod]
-        [TestCategory("CodeFix")]
         public void MemberInitializerRedundant_CodeFix() =>
             OldVerifier.VerifyCodeFix<MemberInitializedToDefaultCodeFix>(
                 @"TestCases\MemberInitializerRedundant.cs",
