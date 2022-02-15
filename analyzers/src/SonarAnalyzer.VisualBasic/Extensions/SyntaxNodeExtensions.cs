@@ -18,9 +18,11 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.VisualBasic;
 using Microsoft.CodeAnalysis.VisualBasic.Syntax;
+using SonarAnalyzer.CFG.Roslyn;
 using SonarAnalyzer.Helpers;
 
 namespace SonarAnalyzer.Extensions
@@ -53,5 +55,30 @@ namespace SonarAnalyzer.Extensions
 
         public static string FindStringConstant(this SyntaxNode node, SemanticModel semanticModel) =>
             FindConstantValue(node, semanticModel) as string;
+
+        public static ControlFlowGraph CreateCfg(this SyntaxNode block, SemanticModel semanticModel)
+        {
+            var operation = semanticModel.GetOperation(block);
+            var rootSyntax = operation.RootOperation().Syntax;
+            var cfg = ControlFlowGraph.Create(rootSyntax, semanticModel);
+            if (block is LambdaExpressionSyntax)
+            {
+                // We need to go up and track all possible enclosing lambdas and other FlowAnonymousFunctionOperations
+                var cfgFlowOperations = cfg.FlowAnonymousFunctionOperations().ToArray();  // Avoid recomputing for ancestors that do not produce FlowAnonymousFunction
+                foreach (var node in block.AncestorsAndSelf().TakeWhile(x => x != rootSyntax).Reverse())
+                {
+                    if (cfgFlowOperations.SingleOrDefault(x => x.WrappedOperation.Syntax == node) is { WrappedOperation: not null } flowOperation)
+                    {
+                        cfg = cfg.GetAnonymousFunctionControlFlowGraph(flowOperation);
+                        cfgFlowOperations = cfg.FlowAnonymousFunctionOperations().ToArray();
+                    }
+                    else if (node == block)
+                    {
+                        return null;    // Lambda syntax is not always recognized as FlowOperation for invalid syntaxes
+                    }
+                }
+            }
+            return cfg;
+        }
     }
 }

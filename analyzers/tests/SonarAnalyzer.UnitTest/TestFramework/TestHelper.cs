@@ -53,6 +53,9 @@ namespace SonarAnalyzer.UnitTest
         public static (SyntaxTree Tree, SemanticModel Model) CompileIgnoreErrorsCS(string snippet, params MetadataReference[] additionalReferences) =>
             Compile(snippet, true, AnalyzerLanguage.CSharp, additionalReferences);
 
+        public static (SyntaxTree Tree, SemanticModel Model) CompileIgnoreErrorsVB(string snippet, params MetadataReference[] additionalReferences) =>
+            Compile(snippet, true, AnalyzerLanguage.VisualBasic, additionalReferences);
+
         public static (SyntaxTree Tree, SemanticModel Model) CompileCS(string snippet, params MetadataReference[] additionalReferences) =>
             Compile(snippet, false, AnalyzerLanguage.CSharp, additionalReferences);
 
