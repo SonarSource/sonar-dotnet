@@ -149,5 +149,18 @@ Symbols:
 a: SV_1
 ");
         }
+
+        [TestMethod]
+        public void AddVisit_ModifiesState()
+        {
+            var cfg = TestHelper.CompileCfgBodyCS("var a = true;");
+            var sut = new ExplodedNode(cfg.Blocks[1], ProgramState.Empty);
+            sut.State.Should().Be(ProgramState.Empty);
+            sut.AddVisit().Should().Be(1);
+            sut.AddVisit().Should().Be(2);
+            sut.AddVisit().Should().Be(3);
+            sut.State.Should().Be(ProgramState.Empty, "Visits doesn't change equality");
+            ReferenceEquals(sut.State, ProgramState.Empty).Should().BeFalse();
+        }
     }
 }

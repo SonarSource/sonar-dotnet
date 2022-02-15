@@ -36,6 +36,7 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
 
         private ImmutableDictionary<IOperation, SymbolicValue> OperationValue { get; init; }     // Current SymbolicValue result of a given operation
         private ImmutableDictionary<ISymbol, SymbolicValue> SymbolValue { get; init; }
+        private ImmutableDictionary<int, int> VisitCount { get; init; }
 
         public SymbolicValue this[IOperationWrapperSonar operation] => this[operation.Instance];
         public SymbolicValue this[IOperation operation] => OperationValue.TryGetValue(operation, out var value) ? value : null;
@@ -45,6 +46,7 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
         {
             OperationValue = ImmutableDictionary<IOperation, SymbolicValue>.Empty;
             SymbolValue = ImmutableDictionary<ISymbol, SymbolicValue>.Empty;
+            VisitCount = ImmutableDictionary<int, int>.Empty;
         }
 
         public ProgramState SetOperationValue(IOperationWrapperSonar operation, SymbolicValue value) =>
@@ -62,12 +64,20 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
         public ProgramState ResetOperations() =>
             this with { OperationValue = ImmutableDictionary<IOperation, SymbolicValue>.Empty };
 
+        public ProgramState AddVisit(int programPointHash) =>
+            this with { VisitCount = VisitCount.SetItem(programPointHash, GetVisitCount(programPointHash) + 1) };
+
+        public int GetVisitCount(int programPointHash) =>
+            VisitCount.TryGetValue(programPointHash, out var count) ? count : 0;
+
         public override int GetHashCode() =>
+            // VisitCount is not included, it's not part of Equals
             HashCode.Combine(
                 HashCode.DictionaryContentHash(OperationValue),
                 HashCode.DictionaryContentHash(SymbolValue));
 
         public bool Equals(ProgramState other) =>
+            // VisitCount is not compared, two ProgramState are equal if their current state is equal. No matter was historical path led to it.
             other is not null
             && other.OperationValue.DictionaryEquals(OperationValue)
             && other.SymbolValue.DictionaryEquals(SymbolValue);

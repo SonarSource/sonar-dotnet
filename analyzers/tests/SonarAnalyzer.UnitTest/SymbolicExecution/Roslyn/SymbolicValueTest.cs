@@ -80,7 +80,7 @@ namespace SonarAnalyzer.UnitTest.SymbolicExecution.Roslyn
         }
 
         [TestMethod]
-        public void WithConstraint_Overrides_IsImmutable()
+        public void WithConstraint_Overwrites_IsImmutable()
         {
             var one = new SymbolicValue(new()).WithConstraint(TestConstraint.First);
             var two = one.WithConstraint(TestConstraint.Second);

@@ -70,6 +70,9 @@ namespace SonarAnalyzer.UnitTest.TestFramework.SymbolicExecution
         public void ValidateTag(string tag, Action<SymbolicValue> action) =>
             action(TagValues(tag).Single());
 
+        public ProgramState[] TagStates(string tag) =>
+            tags.Where(x => x.Name == tag).Select(x => x.Context.State).ToArray();
+
         public SymbolicValue[] TagValues(string tag) =>
             tags.Where(x => x.Name == tag).Select(x => TagValue(x.Context)).ToArray();
 

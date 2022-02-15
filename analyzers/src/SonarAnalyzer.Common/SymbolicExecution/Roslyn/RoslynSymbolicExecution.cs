@@ -30,6 +30,7 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
     internal class RoslynSymbolicExecution
     {
         internal const int MaxStepCount = 2000;
+        private const int MaxOperationVisits = 2;
 
         private readonly ControlFlowGraph cfg;
         private readonly SymbolicCheck[] checks;
@@ -66,7 +67,7 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
                     return;
                 }
                 var current = queue.Dequeue();
-                if (visited.Add(current))
+                if (visited.Add(current) && current.AddVisit() <= MaxOperationVisits)
                 {
                     var successors = current.Operation == null ? ProcessBranching(current) : ProcessOperation(current);
                     foreach (var node in successors)
