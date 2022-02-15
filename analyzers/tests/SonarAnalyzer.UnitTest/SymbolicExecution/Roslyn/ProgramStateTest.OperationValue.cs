@@ -111,7 +111,7 @@ namespace SonarAnalyzer.UnitTest.SymbolicExecution.Roslyn
         }
 
         [TestMethod]
-        public void SetOperationValue_WithWrapper_Overrides()
+        public void SetOperationValue_WithWrapper_Overwrites()
         {
             var counter = new SymbolicValueCounter();
             var value1 = new SymbolicValue(counter);
@@ -126,7 +126,7 @@ namespace SonarAnalyzer.UnitTest.SymbolicExecution.Roslyn
         }
 
         [TestMethod]
-        public void SetOperationValue_Overrides()
+        public void SetOperationValue_Overwrites()
         {
             var counter = new SymbolicValueCounter();
             var value1 = new SymbolicValue(counter);

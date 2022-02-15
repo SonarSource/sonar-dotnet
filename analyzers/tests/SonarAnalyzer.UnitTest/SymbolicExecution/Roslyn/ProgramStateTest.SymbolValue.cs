@@ -62,7 +62,7 @@ namespace SonarAnalyzer.UnitTest.SymbolicExecution.Roslyn
         }
 
         [TestMethod]
-        public void SetSymbolValue_Overrides()
+        public void SetSymbolValue_Overwrites()
         {
             var counter = new SymbolicValueCounter();
             var value1 = new SymbolicValue(counter);

@@ -29,7 +29,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework.SymbolicExecution
 {
     internal class AddConstraintOnInvocationCheck : SymbolicCheck
     {
-        private static readonly SymbolicConstraint[] AvailableConstraints = new SymbolicConstraint[] { TestConstraint.First, BoolConstraint.True, DummyConstraint.Dummy, LockConstraint.Held };
+        private static readonly SymbolicConstraint[] AvailableConstraints = { TestConstraint.First, BoolConstraint.True, DummyConstraint.Dummy, LockConstraint.Held };
 
         public override ProgramState PostProcess(SymbolicContext context) =>
             context.Operation.Instance is IInvocationOperation invocation

@@ -95,7 +95,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework.Tests
         }
 
         [TestMethod]
-        public void WithAutogenerateConcurrentFiles_Overrides_IsImmutable()
+        public void WithAutogenerateConcurrentFiles_Overwrites_IsImmutable()
         {
             var one = Empty.WithAutogenerateConcurrentFiles(false);
             var two = one.WithAutogenerateConcurrentFiles(true);
@@ -105,7 +105,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework.Tests
         }
 
         [TestMethod]
-        public void WithBasePath_Overrides_IsImmutable()
+        public void WithBasePath_Overwrites_IsImmutable()
         {
             var one = Empty.WithBasePath("Hotspots");
             var two = one.WithBasePath("SymbolicExecution");
@@ -115,7 +115,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework.Tests
         }
 
         [TestMethod]
-        public void WithCodeFix_Overrides_IsImmutable()
+        public void WithCodeFix_Overwrites_IsImmutable()
         {
             var one = Empty.WithCodeFix<DummyCodeFixCS>();
             var two = one.WithCodeFix<DummyCodeFixVB>();
@@ -125,7 +125,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework.Tests
         }
 
         [TestMethod]
-        public void WithCodeFixedPaths_Overrides_IsImmutable()
+        public void WithCodeFixedPaths_Overwrites_IsImmutable()
         {
             var one = Empty.WithCodeFixedPaths("First");
             var two = one.WithCodeFixedPaths("Second");
@@ -142,7 +142,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework.Tests
         }
 
         [TestMethod]
-        public void WithConcurrentAnalysis_Overrides_IsImmutable()
+        public void WithConcurrentAnalysis_Overwrites_IsImmutable()
         {
             var one = Empty.WithConcurrentAnalysis(false);
             var two = one.WithConcurrentAnalysis(true);
@@ -152,7 +152,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework.Tests
         }
 
         [TestMethod]
-        public void WithCodeFixTitle_Overrides_IsImmutable()
+        public void WithCodeFixTitle_Overwrites_IsImmutable()
         {
             var one = Empty.WithCodeFixTitle("First");
             var two = one.WithCodeFixTitle("Second");
@@ -162,7 +162,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework.Tests
         }
 
         [TestMethod]
-        public void WithErrorBehavior_Overrides_IsImmutable()
+        public void WithErrorBehavior_Overwrites_IsImmutable()
         {
             var one = Empty.WithErrorBehavior(CompilationErrorBehavior.FailTest);
             var two = one.WithErrorBehavior(CompilationErrorBehavior.Ignore);
@@ -172,7 +172,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework.Tests
         }
 
         [TestMethod]
-        public void WithLanguageVersion_Overrides_IsImmutable_CS()
+        public void WithLanguageVersion_Overwrites_IsImmutable_CS()
         {
             var one = Empty.WithLanguageVersion(CS.LanguageVersion.CSharp10);
             var two = one.WithLanguageVersion(CS.LanguageVersion.CSharp7);
@@ -182,7 +182,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework.Tests
         }
 
         [TestMethod]
-        public void WithLanguageVersion_Overrides_IsImmutable_VB()
+        public void WithLanguageVersion_Overwrites_IsImmutable_VB()
         {
             var one = Empty.WithLanguageVersion(VB.LanguageVersion.VisualBasic16);
             var two = one.WithLanguageVersion(VB.LanguageVersion.VisualBasic10);
@@ -192,7 +192,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework.Tests
         }
 
         [TestMethod]
-        public void WithOnlyDiagnostics_Overrides_IsImmutable()
+        public void WithOnlyDiagnostics_Overwrites_IsImmutable()
         {
             var one = Empty.WithOnlyDiagnostics(NullPointerDereference.S2259);
             var two = one.WithOnlyDiagnostics(PublicMethodArgumentsShouldBeCheckedForNull.S3900, ConditionEvaluatesToConstant.S2583);
@@ -202,7 +202,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework.Tests
         }
 
         [TestMethod]
-        public void WithOptions_Overrides_IsImmutable()
+        public void WithOptions_Overwrites_IsImmutable()
         {
             var only7 = Empty.WithOptions(ParseOptionsHelper.OnlyCSharp7);
             var from8 = only7.WithOptions(ParseOptionsHelper.FromCSharp8);
@@ -212,7 +212,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework.Tests
         }
 
         [TestMethod]
-        public void WithOutputKind_Overrides_IsImmutable()
+        public void WithOutputKind_Overwrites_IsImmutable()
         {
             var one = Empty.WithOutputKind(OutputKind.WindowsApplication);
             var two = one.WithOutputKind(OutputKind.NetModule);
@@ -222,7 +222,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework.Tests
         }
 
         [TestMethod]
-        public void WithProtobufPath_Overrides_IsImmutable()
+        public void WithProtobufPath_Overwrites_IsImmutable()
         {
             var one = Empty.WithProtobufPath("First");
             var two = one.WithProtobufPath("Second");
@@ -232,7 +232,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework.Tests
         }
 
         [TestMethod]
-        public void WithSonarProjectConfig_Overrides_IsImmutable()
+        public void WithSonarProjectConfig_Overwrites_IsImmutable()
         {
             var one = Empty.WithSonarProjectConfigPath("First");
             var two = one.WithSonarProjectConfigPath("Second");
@@ -244,7 +244,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework.Tests
         }
 
         [TestMethod]
-        public void WithTopLevelSupport_Overrides_IsImmutable()
+        public void WithTopLevelSupport_Overwrites_IsImmutable()
         {
             var sut = Empty.WithTopLevelStatements();
             Empty.OutputKind.Should().Be(OutputKind.DynamicallyLinkedLibrary);

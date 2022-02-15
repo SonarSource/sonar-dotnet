@@ -71,13 +71,14 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
             VisitCount.TryGetValue(programPointHash, out var count) ? count : 0;
 
         public override int GetHashCode() =>
-                HashCode.Combine(   // VisitCount is not included, it's not part of Equals
-                    HashCode.DictionaryContentHash(OperationValue),
-                    HashCode.DictionaryContentHash(SymbolValue));
+            // VisitCount is not included, it's not part of Equals
+            HashCode.Combine(
+                HashCode.DictionaryContentHash(OperationValue),
+                HashCode.DictionaryContentHash(SymbolValue));
 
         public bool Equals(ProgramState other) =>
-            other is not null
             // VisitCount is not compared, two ProgramState are equal if their current state is equal. No matter was historical path led to it.
+            other is not null
             && other.OperationValue.DictionaryEquals(OperationValue)
             && other.SymbolValue.DictionaryEquals(SymbolValue);
 
