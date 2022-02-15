@@ -43,16 +43,12 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
         {
             this.cfg = cfg ?? throw new ArgumentNullException(nameof(cfg));
 
-            if (checks == null)
-            {
-                throw new ArgumentNullException(nameof(checks));
-            }
-            else if (checks.Length == 0)
+            if (checks == null || checks.Length == 0)
             {
                 throw new ArgumentException("At least one check is expected", nameof(checks));
             }
 
-            this.checks = new[] { new ConstantCheck() }.Concat(checks).ToArray(); // We can afford to use concat here since the constructor is called only once, and it has a low number of elements.
+            this.checks = new[] { new ConstantCheck() }.Concat(checks).ToArray();
         }
 
         public void Execute()

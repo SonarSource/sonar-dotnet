@@ -32,7 +32,7 @@ namespace SonarAnalyzer.UnitTest.SymbolicExecution.Roslyn
         [DataRow("false")]
         public void PreProcess_TrueLiteral_BooleanConstraint(string value)
         {
-            var expectedConstraint = GetBooleanConstraint(value);
+            var expectedConstraint = GetConstraint(value == "true");
 
             var validator = SETestContext.CreateCS($"var a = {value};", new EmptyTestCheck()).Validator;
             validator.ValidateOrder(
@@ -44,12 +44,11 @@ namespace SonarAnalyzer.UnitTest.SymbolicExecution.Roslyn
         }
 
         [TestMethod]
-        [DataRow("1", "true")]
-        [DataRow("2", "false")]
-        public void PreProcess_EqualityCheck_BooleanConstraint(string constant, string value)
+        [DataRow("1", true)]
+        [DataRow("2", false)]
+        public void PreProcess_EqualityCheck_BooleanConstraint(string constant, bool value)
         {
-            var expectedConstraint = GetBooleanConstraint(value);
-
+            var expectedConstraint = GetConstraint(value);
             var validator = SETestContext.CreateCS($"bool a = 1 == {constant};", new EmptyTestCheck()).Validator;
             validator.ValidateOrder(
                 $"LocalReference: a = 1 == {constant} (Implicit)",
@@ -64,21 +63,28 @@ namespace SonarAnalyzer.UnitTest.SymbolicExecution.Roslyn
         [TestMethod]
         public void PreProcess_EqualityCheck_ConstantPropagation()
         {
-            var validator = SETestContext.CreateCS("const int zero = 0; bool a = 1 == zero;", new EmptyTestCheck()).Validator;
+            var validator = SETestContext.CreateCS("const int zero = 0; bool f = 1 == zero, t = 0 == zero;", new EmptyTestCheck()).Validator;
             validator.ValidateOrder(
                 "LocalReference: zero = 0 (Implicit)",
                 "Literal: 0",
                 "SimpleAssignment: zero = 0 (Implicit)",
-                "LocalReference: a = 1 == zero (Implicit)",
+                "LocalReference: f = 1 == zero (Implicit)",
                 "Literal: 1",
                 "LocalReference: zero",
                 "BinaryOperator: 1 == zero",
-                "SimpleAssignment: a = 1 == zero (Implicit)");
+                "SimpleAssignment: f = 1 == zero (Implicit)",
+                "LocalReference: t = 0 == zero (Implicit)",
+                "Literal: 0",
+                "LocalReference: zero",
+                "BinaryOperator: 0 == zero",
+                "SimpleAssignment: t = 0 == zero (Implicit)");
             validator.Validate("BinaryOperator: 1 == zero", x => x.State[x.Operation].HasConstraint(BoolConstraint.False).Should().BeTrue());
-            validator.Validate("SimpleAssignment: a = 1 == zero (Implicit)", x => x.State[x.Operation].HasConstraint(BoolConstraint.False).Should().BeTrue());
+            validator.Validate("SimpleAssignment: f = 1 == zero (Implicit)", x => x.State[x.Operation].HasConstraint(BoolConstraint.False).Should().BeTrue());
+            validator.Validate("BinaryOperator: 0 == zero", x => x.State[x.Operation].HasConstraint(BoolConstraint.True).Should().BeTrue());
+            validator.Validate("SimpleAssignment: t = 0 == zero (Implicit)", x => x.State[x.Operation].HasConstraint(BoolConstraint.True).Should().BeTrue());
         }
 
-        private static BoolConstraint GetBooleanConstraint(string value) =>
-            value == "true" ? BoolConstraint.True : BoolConstraint.False;
+        private static BoolConstraint GetConstraint(bool value) =>
+            value ? BoolConstraint.True : BoolConstraint.False;
     }
 }

@@ -42,7 +42,7 @@ namespace SonarAnalyzer.UnitTest.SymbolicExecution.Roslyn
             var cfg = TestHelper.CompileCfgCS("public class Sample { public void Main() { } }");
             var check = new Mock<SymbolicCheck>().Object;
             ((Action)(() => new RoslynSymbolicExecution(null, new[] { check }))).Should().Throw<ArgumentNullException>().And.ParamName.Should().Be("cfg");
-            ((Action)(() => new RoslynSymbolicExecution(cfg, null))).Should().Throw<ArgumentNullException>().And.ParamName.Should().Be("checks");
+            ((Action)(() => new RoslynSymbolicExecution(cfg, null))).Should().Throw<ArgumentException>().WithMessage("At least one check is expected*");
             ((Action)(() => new RoslynSymbolicExecution(cfg, Array.Empty<SymbolicCheck>()))).Should().Throw<ArgumentException>().WithMessage("At least one check is expected*");
         }
 
