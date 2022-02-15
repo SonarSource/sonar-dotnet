@@ -18,16 +18,18 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System.Collections.Immutable;
 using System.Linq;
 using FluentAssertions;
 using Microsoft.CodeAnalysis;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
-using SonarAnalyzer.Rules.SymbolicExecution;
-using SonarAnalyzer.UnitTest.MetadataReferences;
+using SonarAnalyzer.Rules;
 using SonarAnalyzer.UnitTest.TestFramework;
 using SonarAnalyzer.UnitTest.TestFramework.SymbolicExecution;
+using CS = SonarAnalyzer.Rules.CSharp;
+using VB = SonarAnalyzer.Rules.VisualBasic;
 
 namespace SonarAnalyzer.UnitTest.Rules.SymbolicExecution
 {
@@ -36,15 +38,12 @@ namespace SonarAnalyzer.UnitTest.Rules.SymbolicExecution
     {
         // This test is meant to run all the symbolic execution rules together and verify different scenarios.
         [TestMethod]
-        public void VerifySymbolicExecutionRules() =>
-            OldVerifier.VerifyAnalyzer(@"TestCases\SymbolicExecution\Sonar\SymbolicExecutionRules.cs",
-                new SymbolicExecutionRunner(),
-                ParseOptionsHelper.FromCSharp8,
-                MetadataReferenceFacade.NETStandard21);
+        public void VerifySymbolicExecutionRules_CS() =>
+            new VerifierBuilder<CS.SymbolicExecutionRunner>().AddPaths(@"SymbolicExecution\Sonar\SymbolicExecutionRules.cs").WithOptions(ParseOptionsHelper.FromCSharp8).Verify();
 
         [TestMethod]
-        public void Initialize_MethodBase() =>
-            VerifyClassMain(@"
+        public void Initialize_MethodBase_CS() =>
+            VerifyClassMainCS(@"
 public Sample() // ConstructorDeclaration
 {
     string s = null;   // Noncompliant {{Message for SMain}}
@@ -85,14 +84,45 @@ public void MethodDeclaration(string s) =>
     s = null;   // Noncompliant {{Message for SMain}}");
 
         [TestMethod]
-        public void Initialize_Property() =>
-            VerifyClassMain(@"
+        public void Initialize_MethodBase_VB() =>
+            VerifyClassMainVB(@"
+Public Sub New() ' ConstructorDeclaration
+    Dim S As String = Nothing ' Noncompliant {{Message for SMain}}
+End Sub
+
+Protected Overrides Sub Finalize()  ' Destructor
+    Dim S As String = Nothing ' Noncompliant {{Message for SMain}}
+End Sub
+
+Public Shared Narrowing Operator CType(A As Sample) As Integer
+    Dim S As String = Nothing ' Noncompliant {{Message for SMain}}
+End Operator
+
+Public Shared Widening Operator CType(A As Sample) As String
+    Dim S As String = Nothing ' Noncompliant {{Message for SMain}}
+End Operator
+
+Public Shared Operator +(A As Sample, B As Sample)  ' OperatorDeclaration
+    Dim S As String = Nothing ' Noncompliant {{Message for SMain}}
+End Operator
+
+Public Sub SubDeclaration()
+    Dim S As String = Nothing ' Noncompliant {{Message for SMain}}
+End Sub
+
+Public Function FunctionDeclaration() As Integer
+    Dim S As String = Nothing ' Noncompliant {{Message for SMain}}
+End Function");
+
+        [TestMethod]
+        public void Initialize_Property_CS() =>
+            VerifyClassMainCS(@"
 private int target;
 public int Property => target = 42;     // Noncompliant {{Message for SMain}}");
 
         [TestMethod]
-        public void Initialize_Accessors() =>
-            VerifyClassMain(@"
+        public void Initialize_Accessors_CS() =>
+            VerifyClassMainCS(@"
 private string target;
 
 public string BodyProperty
@@ -132,11 +162,35 @@ public event EventHandler ArrowEvent
     remove => target = null;    // Noncompliant {{Message for SMain}}
 }");
 
+        [TestMethod]
+        public void Initialize_Accessors_VB() =>
+            VerifyClassMainVB(@"
+Public Property BodyProperty
+    Get
+        Dim S As String = Nothing ' Noncompliant {{Message for SMain}}
+    End Get
+    Set
+        Dim S As String = Nothing ' Noncompliant {{Message for SMain}}
+    End Set
+End Property
+
+Public Custom Event BlockEvent As EventHandler
+    AddHandler(value As EventHandler)
+        Dim S As String = Nothing ' Noncompliant {{Message for SMain}}
+    End AddHandler
+    RemoveHandler(value As EventHandler)
+        Dim S As String = Nothing ' Noncompliant {{Message for SMain}}
+    End RemoveHandler
+    RaiseEvent(sender As Object, e As EventArgs)
+        Dim S As String = Nothing ' Noncompliant {{Message for SMain}}
+    End RaiseEvent
+End Event");
+
 #if NET
 
         [TestMethod]
-        public void Initialize_Accessors_Init() =>
-            VerifyClassMain(@"
+        public void Initialize_Accessors_Init_CS() =>
+            VerifyClassMainCS(@"
 private string target;
 
 public string InitOnlyPropertyBlock
@@ -157,8 +211,8 @@ public string InitOnlyPropertyArrow
 #endif
 
         [TestMethod]
-        public void Initialize_AnonymousFunction() =>
-            VerifyClassMain(@"
+        public void Initialize_AnonymousFunction_CS() =>
+            VerifyClassMainCS(@"
 delegate void VoidDelegate();
 
 public void Method()
@@ -178,6 +232,27 @@ public void Method()
         string s = null;                // Noncompliant {{Message for SMain}}
     };
 }");
+
+        [TestMethod]
+        public void Initialize_AnonymousFunction_VB() =>
+            VerifyClassMainVB(@"
+Public Sub Method()
+    Dim S As String
+    Use(Function() S = Nothing)     ' Noncompliant {{Message for SBinary}} This is not an assignment but binary comparison
+    Use(Function()
+            S = Nothing             ' Noncompliant {{Message for SMain}}
+        End Function)
+    Use(Sub() S = Nothing)          ' Noncompliant {{Message for SMain}}
+    Use(Sub()
+            S = Nothing             ' Noncompliant {{Message for SMain}}
+        End Sub)
+End Sub
+
+Private Sub Use(A As Action)
+End Sub
+
+Private Sub Use(F As Func(Of Integer))
+End Sub");
 
         [TestMethod]
         public void Analyze_DoNotRunWhenContainsDiagnostics() =>
@@ -217,11 +292,15 @@ public void Method()
         string s = null;   // Noncompliant {{Message for SMain}} - this should be raised only once
     }
 }";
-            var another = new DiagnosticDescriptor("SAnother", "Title", "Message", "Category", DiagnosticSeverity.Warning, true, customTags: DiagnosticDescriptorBuilder.MainSourceScopeTag);
-            var sut = new SymbolicExecutionRunner();
+            var another = TestHelper.CreateDescriptor("SAnother", DiagnosticDescriptorBuilder.MainSourceScopeTag);
+            var sut = new CS.SymbolicExecutionRunner();
             sut.RegisterRule<MainScopeAssignmentRuleCheck>(MainScopeAssignmentRuleCheck.SMain);
             sut.RegisterRule<MainScopeAssignmentRuleCheck>(another);     // Register the same RuleCheck with another ID
-            OldVerifier.VerifyCSharpAnalyzer(code, sut, ParseOptionsHelper.FromCSharp9, onlyDiagnostics: new[] { MainScopeAssignmentRuleCheck.SMain, another });
+            new VerifierBuilder().AddAnalyzer(() => sut)
+                .AddSnippet(code)
+                .WithOptions(ParseOptionsHelper.FromCSharp9)
+                .WithOnlyDiagnostics(MainScopeAssignmentRuleCheck.SMain, another)
+                .Verify();
         }
 
         [TestMethod]
@@ -248,22 +327,23 @@ public void Method()
         public void Analyze_Severity_DoesNotExecutesWhenNone() =>
             Verify(@"string s = null;   // Compliant, SMain and SAll are suppressed by test framework, because only 'SAnother' is active
                      s.ToString();      // Compliant, should not raise S2259",
-                new DiagnosticDescriptor("SAnother", "Non-SE rule", "Message", "Category", DiagnosticSeverity.Warning, true, customTags: DiagnosticDescriptorBuilder.MainSourceScopeTag));
+                TestHelper.CreateDescriptor("SAnother", DiagnosticDescriptorBuilder.MainSourceScopeTag));
 
         [TestMethod]
         public void Analyze_ShouldExecute_ExcludesCheckFromExecution()
         {
-            var sut = new SymbolicExecutionRunner();
+            var sut = new CS.SymbolicExecutionRunner();
             sut.RegisterRule<InvocationAssignmentRuleCheck>(InvocationAssignmentRuleCheck.SInvocation);
-            OldVerifier.VerifyCSharpAnalyzer(@"
+            var builder = new VerifierBuilder().AddAnalyzer(() => sut);
+            builder.AddSnippet(@"
 public class Sample
 {
     public void Method()
     {
         string s = null;    // Nothing is raised because InvocationAssignmentRuleCheck.ShouldExecute returns false
     }
-}", sut);
-            OldVerifier.VerifyCSharpAnalyzer(@"
+}").Verify();
+            builder.AddSnippet(@"
 public class Sample
 {
     public void Method()
@@ -271,7 +351,7 @@ public class Sample
         string s = null;    // Noncompliant {{Message for SInvocation}} - because invocation is present in the method body
         Method();
     }
-}", sut);
+}").Verify();
         }
 
         [TestMethod]
@@ -285,12 +365,12 @@ public class Sample
         string s = null;    // Nothing is raised because exception is thrown on the way
     }
 }";
-            var sut = new SymbolicExecutionRunner();
+            var sut = new CS.SymbolicExecutionRunner();
             sut.RegisterRule<ThrowAssignmentRuleCheck>(ThrowAssignmentRuleCheck.SThrow);
             var compilation = SolutionBuilder.Create().AddProject(AnalyzerLanguage.CSharp).AddSnippet(code).Solution.Compile(ParseOptionsHelper.CSharpLatest.ToArray()).Single();
             var diagnostics = DiagnosticVerifier.GetDiagnosticsIgnoreExceptions(compilation, sut);
             diagnostics.Should().ContainSingle(x => x.Id == "AD0001").Which.GetMessage().Should()
-                .StartWith("Analyzer 'SonarAnalyzer.Rules.SymbolicExecution.SymbolicExecutionRunner' threw an exception of type 'SonarAnalyzer.SymbolicExecution.SymbolicExecutionException' with message 'Error processing method: Method ## Method file: snippet1.cs ## Method line: 4,4 ## Inner exception: System.InvalidOperationException: This check is not useful. ##    at SonarAnalyzer.UnitTest.TestFramework.SymbolicExecution.ThrowAssignmentRuleCheck.PostProcess(SymbolicContext context)");
+                .StartWith("Analyzer 'SonarAnalyzer.Rules.CSharp.SymbolicExecutionRunner' threw an exception of type 'SonarAnalyzer.SymbolicExecution.SymbolicExecutionException' with message 'Error processing method: Method ## Method file: snippet1.cs ## Method line: 4,4 ## Inner exception: System.InvalidOperationException: This check is not useful. ##    at SonarAnalyzer.UnitTest.TestFramework.SymbolicExecution.ThrowAssignmentRuleCheck.PostProcess(SymbolicContext context)");
         }
 
         private static void Verify(string body, params DiagnosticDescriptor[] onlyRules) =>
@@ -299,17 +379,17 @@ public class Sample
         private static void Verify(string body, ProjectType projectType, string sonarProjectConfigPath, params DiagnosticDescriptor[] onlyRules)
         {
             var code =
-$@"public void Main()
+$@"public class Sample
 {{
-    {body}
+    public void Main()
+    {{
+        {body}
+    }}
 }}";
-            VerifyClass(code, projectType, sonarProjectConfigPath, onlyRules);
+            VerifyCode<CS.SymbolicExecutionRunner>(code, projectType, ParseOptionsHelper.FromCSharp9, sonarProjectConfigPath, onlyRules);
         }
 
-        private static void VerifyClassMain(string members) =>
-            VerifyClass(members, ProjectType.Product, null, MainScopeAssignmentRuleCheck.SMain);
-
-        private static void VerifyClass(string members, ProjectType projectType, string sonarProjectConfigPath, params DiagnosticDescriptor[] onlyRules)
+        private static void VerifyClassMainCS(string members)
         {
             var code =
 $@"using System;
@@ -318,14 +398,33 @@ public class Sample
 {{
     {members}
 }}";
-            var sut = new SymbolicExecutionRunner();
+            VerifyCode<CS.SymbolicExecutionRunner>(code, ProjectType.Product, ParseOptionsHelper.FromCSharp9, null, MainScopeAssignmentRuleCheck.SMain);
+        }
+
+        private static void VerifyClassMainVB(string members)
+        {
+            var code =
+$@"Public Class Sample
+    {members}
+End Class";
+            VerifyCode<VB.SymbolicExecutionRunner>(code, ProjectType.Product, ImmutableArray<ParseOptions>.Empty, null, MainScopeAssignmentRuleCheck.SMain, BinaryRuleCheck.SBinary);
+        }
+
+        private static void VerifyCode<TRunner>(string code, ProjectType projectType, ImmutableArray<ParseOptions> parseOptions, string sonarProjectConfigPath, params DiagnosticDescriptor[] onlyRules)
+            where TRunner : SymbolicExecutionRunnerBase, new()
+        {
+            var sut = new TRunner();
+            sut.RegisterRule<BinaryRuleCheck>(BinaryRuleCheck.SBinary);
             sut.RegisterRule<AllScopeAssignmentRuleCheck>(AllScopeAssignmentRuleCheck.SAll);
             sut.RegisterRule<MainScopeAssignmentRuleCheck>(MainScopeAssignmentRuleCheck.SMain);
             sut.RegisterRule<TestScopeAssignmentRuleCheck>(TestScopeAssignmentRuleCheck.STest);
-            OldVerifier.VerifyCSharpAnalyzer(code, sut, ParseOptionsHelper.FromCSharp9,
-                additionalReferences: TestHelper.ProjectTypeReference(projectType),
-                onlyDiagnostics: onlyRules,
-                sonarProjectConfigPath: sonarProjectConfigPath);
+            new VerifierBuilder().AddAnalyzer(() => sut)
+                .AddReferences(TestHelper.ProjectTypeReference(projectType))
+                .AddSnippet(code)
+                .WithSonarProjectConfigPath(sonarProjectConfigPath)
+                .WithOptions(parseOptions)
+                .WithOnlyDiagnostics(onlyRules)
+                .Verify();
         }
     }
 }

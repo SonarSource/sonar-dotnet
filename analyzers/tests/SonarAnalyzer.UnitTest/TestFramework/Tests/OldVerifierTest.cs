@@ -46,7 +46,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework.Tests
         private class TestDuplicateLocationRule : SonarDiagnosticAnalyzer
         {
             public const string DiagnosticId = "Test42";
-            private readonly DiagnosticDescriptor rule = new DiagnosticDescriptor(DiagnosticId, "Title", "Message", "Category", DiagnosticSeverity.Warning, true, null, null, "MainSourceScope");
+            private readonly DiagnosticDescriptor rule = TestHelper.CreateDescriptor(DiagnosticId, DiagnosticDescriptorBuilder.MainSourceScopeTag);
             public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
 
             protected override void Initialize(SonarAnalysisContext context)

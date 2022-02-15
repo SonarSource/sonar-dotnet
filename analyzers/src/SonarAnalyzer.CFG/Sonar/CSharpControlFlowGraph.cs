@@ -21,13 +21,12 @@
 using System;
 using System.Diagnostics;
 using Microsoft.CodeAnalysis;
-using Microsoft.CodeAnalysis.CSharp;
 
 namespace SonarAnalyzer.CFG.Sonar
 {
     public static class CSharpControlFlowGraph
     {
-        public static bool TryGet(CSharpSyntaxNode node, SemanticModel semanticModel, out IControlFlowGraph cfg)
+        public static bool TryGet(SyntaxNode node, SemanticModel semanticModel, out IControlFlowGraph cfg)
         {
             cfg = null;
             try
@@ -57,7 +56,7 @@ namespace SonarAnalyzer.CFG.Sonar
             return cfg != null;
         }
 
-        internal /* for testing */ static IControlFlowGraph Create(CSharpSyntaxNode node, SemanticModel semanticModel) =>
+        internal /* for testing */ static IControlFlowGraph Create(SyntaxNode node, SemanticModel semanticModel) =>
             new CSharpControlFlowGraphBuilder(node, semanticModel).Build();
     }
 }

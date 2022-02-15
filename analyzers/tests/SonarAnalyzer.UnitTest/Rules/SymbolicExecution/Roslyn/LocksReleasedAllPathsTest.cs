@@ -19,7 +19,7 @@
 */
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using SonarAnalyzer.Rules.SymbolicExecution;
+using SonarAnalyzer.Rules.CSharp;
 using SonarAnalyzer.SymbolicExecution.Roslyn.Checks;
 using SonarAnalyzer.UnitTest.MetadataReferences;
 using SonarAnalyzer.UnitTest.TestFramework;

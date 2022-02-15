@@ -40,35 +40,32 @@ namespace SonarAnalyzer.UnitTest.TestFramework.SymbolicExecution
 
         public override bool ShouldExecute() =>
             true;
-
-        protected static DiagnosticDescriptor CreateDescriptor(string id, params string[] customTags) =>
-            new(id, "Title", "Message for " + id, "Category", DiagnosticSeverity.Warning, true, customTags: customTags);
     }
 
     internal class MainScopeAssignmentRuleCheck : AssignmentRuleCheck
     {
-        public static readonly DiagnosticDescriptor SMain = CreateDescriptor("SMain", DiagnosticDescriptorBuilder.MainSourceScopeTag);
+        public static readonly DiagnosticDescriptor SMain = TestHelper.CreateDescriptor("SMain", DiagnosticDescriptorBuilder.MainSourceScopeTag);
 
         protected override DiagnosticDescriptor Rule => SMain;
     }
 
     internal class TestScopeAssignmentRuleCheck : AssignmentRuleCheck
     {
-        public static readonly DiagnosticDescriptor STest = CreateDescriptor("STest", DiagnosticDescriptorBuilder.TestSourceScopeTag);
+        public static readonly DiagnosticDescriptor STest = TestHelper.CreateDescriptor("STest", DiagnosticDescriptorBuilder.TestSourceScopeTag);
 
         protected override DiagnosticDescriptor Rule => STest;
     }
 
     internal class AllScopeAssignmentRuleCheck : AssignmentRuleCheck
     {
-        public static readonly DiagnosticDescriptor SAll = CreateDescriptor("SAll", DiagnosticDescriptorBuilder.MainSourceScopeTag, DiagnosticDescriptorBuilder.TestSourceScopeTag);
+        public static readonly DiagnosticDescriptor SAll = TestHelper.CreateDescriptor("SAll", DiagnosticDescriptorBuilder.MainSourceScopeTag, DiagnosticDescriptorBuilder.TestSourceScopeTag);
 
         protected override DiagnosticDescriptor Rule => SAll;
     }
 
     internal class InvocationAssignmentRuleCheck : AssignmentRuleCheck
     {
-        public static readonly DiagnosticDescriptor SInvocation = CreateDescriptor("SInvocation", DiagnosticDescriptorBuilder.MainSourceScopeTag);
+        public static readonly DiagnosticDescriptor SInvocation = TestHelper.CreateDescriptor("SInvocation", DiagnosticDescriptorBuilder.MainSourceScopeTag);
 
         protected override DiagnosticDescriptor Rule => SInvocation;
 
@@ -79,7 +76,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework.SymbolicExecution
 
     internal class ThrowAssignmentRuleCheck : AssignmentRuleCheck
     {
-        public static readonly DiagnosticDescriptor SThrow = CreateDescriptor("SThrow", DiagnosticDescriptorBuilder.MainSourceScopeTag);
+        public static readonly DiagnosticDescriptor SThrow = TestHelper.CreateDescriptor("SThrow", DiagnosticDescriptorBuilder.MainSourceScopeTag);
 
         protected override DiagnosticDescriptor Rule => SThrow;
 

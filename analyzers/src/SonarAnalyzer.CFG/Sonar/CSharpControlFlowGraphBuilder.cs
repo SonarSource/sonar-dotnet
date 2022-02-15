@@ -41,7 +41,7 @@ namespace SonarAnalyzer.CFG.Sonar
         private static readonly object GotoDefaultEntry = new object();
         private static readonly object GotoNullEntry = new object();
 
-        public CSharpControlFlowGraphBuilder(CSharpSyntaxNode node, SemanticModel semanticModel)
+        public CSharpControlFlowGraphBuilder(SyntaxNode node, SemanticModel semanticModel)
             : base(node, semanticModel)
         {
         }
