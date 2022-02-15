@@ -20,10 +20,10 @@
 
 using System.Linq;
 using Microsoft.CodeAnalysis;
-using Microsoft.CodeAnalysis.CSharp.Syntax;
+using Microsoft.CodeAnalysis.VisualBasic.Syntax;
 using SonarAnalyzer.Helpers;
 
-namespace SonarAnalyzer.SymbolicExecution.Roslyn.RuleChecks.CSharp
+namespace SonarAnalyzer.SymbolicExecution.Roslyn.Checks.VisualBasic
 {
     public class LocksReleasedAllPaths : LocksReleasedAllPathsBase
     {
@@ -34,5 +34,6 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn.RuleChecks.CSharp
         // ToDo: Implement early bail-out if there's no interesting descendant node in context.Node to avoid useless SE runs https://github.com/SonarSource/sonar-dotnet/issues/5375
         public override bool ShouldExecute() =>
             NodeContext.Node.DescendantNodes().OfType<IdentifierNameSyntax>().Any(x => ShouldExecuteFor(x.Identifier));
+
     }
 }

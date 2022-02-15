@@ -21,7 +21,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using Microsoft.CodeAnalysis;
-using Microsoft.CodeAnalysis.CSharp.Syntax;
 using SonarAnalyzer.Helpers;
 using SonarAnalyzer.SymbolicExecution.Constraints;
 using StyleCop.Analyzers.Lightup;
@@ -46,12 +45,6 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn.RuleChecks
             "TryEnterUpgradeableReadLock",
             "TryEnterWriteLock"
         };
-
-        // ToDo: Implement early bail-out if there's no interesting descendant node in context.Node to avoid useless SE runs
-        public override bool ShouldExecute() =>
-            NodeContext.Node.DescendantNodes().OfType<IdentifierNameSyntax>().Any(x => x.Identifier.Text.Contains("Exit")
-                                                                                       || x.Identifier.Text.Contains("ReleaseMutex")
-                                                                                       || x.Identifier.Text.Contains("ReleaseReaderLock"));
 
         public override ProgramState PostProcess(SymbolicContext context)
         {
@@ -119,6 +112,9 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn.RuleChecks
                 ReportIssue(lastSymbolLock[unreleasedSymbol]);
             }
         }
+
+        protected static bool ShouldExecuteFor(SyntaxToken identifier) =>
+            identifier.Text.Contains("Exit") || identifier.Text.Contains("ReleaseMutex") || identifier.Text.Contains("ReleaseReaderLock");
 
         private ProgramState ProcessMonitorEnter(SymbolicContext context, IInvocationOperationWrapper invocation) =>
             AddLock(context, FirstArgumentSymbol(invocation));

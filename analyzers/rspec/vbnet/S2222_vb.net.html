@@ -1,0 +1,63 @@
+<p>If a lock is acquired and released within a method, then it must be released along all execution paths of that method.</p>
+<p>Failing to do so will expose the conditional locking logic to the method’s callers and hence be deadlock-prone.</p>
+<p>The types tracked by the rule are: Monitor, Mutex, ReaderWriterLock, ReaderWriterLockSlim and SpinLock from the <code>System.Threading</code>
+namespace.</p>
+<p>Note that the rule is currently in an experimental phase.</p>
+<h2>Noncompliant Code Example</h2>
+<pre>
+<code data-lang="vbnet">Class Example
+    Private obj As Object = New Object()
+
+    Public Sub DoSomethingWithMonitor()
+        Monitor.Enter(obj) ' Noncompliant
+
+        If IsInitialized() Then
+            ' ..
+            Monitor.Exit(obj)
+        End If
+    End Sub
+
+    Private lockObj As ReaderWriterLockSlim = New ReaderWriterLockSlim()
+
+    Public Sub DoSomethingWithReaderWriteLockSlim()
+        lockObj.EnterReadLock() ' Noncompliant
+        If IsInitialized() Then
+            ' ..
+            lockObj.ExitReadLock()
+        End If
+    End Sub
+End Class</code>
+</pre>
+<h2>Compliant Solution</h2>
+<pre>
+<code data-lang="vbnet">Class Example
+    Private obj As Object = New Object()
+
+    Public Sub DoSomethingWithMonitor()
+        SyncLock obj ' is easier to use than explicit Monitor calls
+            If IsInitialized() Then
+            End If
+        End SyncLock
+    End Sub
+
+    Private lockObj As ReaderWriterLockSlim = New ReaderWriterLockSlim()
+
+    Public Sub DoSomethingWithReaderWriteLockSlim()
+        lockObj.EnterReadLock()
+
+        Try
+            If IsInitialized() Then
+            End If
+        Finally
+            lockObj.ExitReadLock()
+        End Try
+    End Sub
+End Class</code>
+</pre>
+<h2>See</h2>
+<ul>
+  <li> <a href="https://cwe.mitre.org/data/definitions/459.html">MITRE, CWE-459</a> - Incomplete Cleanup </li>
+  <li> <a
+  href="https://docs.microsoft.com/en-us/dotnet/standard/threading/overview-of-synchronization-primitives#synchronization-of-access-to-a-shared-resource">Synchronization of access to a shared resource</a>. </li>
+</ul>
+

@@ -1866,6 +1866,39 @@
   <data name="S2178_Type" xml:space="preserve">
     <value>CODE_SMELL</value>
   </data>
+  <data name="S2222_Category" xml:space="preserve">
+    <value>Critical Bug</value>
+  </data>
+  <data name="S2222_Description" xml:space="preserve">
+    <value>If a lock is acquired and released within a method, then it must be released along all execution paths of that method.</value>
+  </data>
+  <data name="S2222_IsActivatedByDefault" xml:space="preserve">
+    <value>False</value>
+  </data>
+  <data name="S2222_Remediation" xml:space="preserve">
+    <value>Constant/Issue</value>
+  </data>
+  <data name="S2222_RemediationCost" xml:space="preserve">
+    <value>20min</value>
+  </data>
+  <data name="S2222_Scope" xml:space="preserve">
+    <value>Main</value>
+  </data>
+  <data name="S2222_Severity" xml:space="preserve">
+    <value>Critical</value>
+  </data>
+  <data name="S2222_Status" xml:space="preserve">
+    <value>ready</value>
+  </data>
+  <data name="S2222_Tags" xml:space="preserve">
+    <value>cwe,multi-threading</value>
+  </data>
+  <data name="S2222_Title" xml:space="preserve">
+    <value>Locks should be released</value>
+  </data>
+  <data name="S2222_Type" xml:space="preserve">
+    <value>BUG</value>
+  </data>
   <data name="S2234_Category" xml:space="preserve">
     <value>Major Code Smell</value>
   </data>
