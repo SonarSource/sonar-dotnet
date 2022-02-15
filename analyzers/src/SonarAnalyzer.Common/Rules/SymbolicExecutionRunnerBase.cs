@@ -34,17 +34,14 @@ namespace SonarAnalyzer.Rules
     public abstract class SymbolicExecutionRunnerBase : SonarDiagnosticAnalyzer
     {
         private readonly Dictionary<DiagnosticDescriptor, RuleFactory> additionalTestRules = new();
-        private ImmutableArray<DiagnosticDescriptor> supportedDiagnostics;
+        private ImmutableArray<DiagnosticDescriptor> additionalSupportedDiagnostics = ImmutableArray<DiagnosticDescriptor>.Empty;
 
         protected abstract ImmutableDictionary<DiagnosticDescriptor, RuleFactory> AllRules { get; }
         protected abstract ControlFlowGraph CreateCfg(SemanticModel model, SyntaxNode node);
         protected abstract void AnalyzeSonar(SyntaxNodeAnalysisContext context, bool isTestProject, bool isScannerRun, SyntaxNode body, ISymbol symbol);
 
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => supportedDiagnostics;
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => additionalSupportedDiagnostics.AddRange(AllRules.Keys);
         protected override bool EnableConcurrentExecution => false;
-
-        protected SymbolicExecutionRunnerBase() =>
-            supportedDiagnostics = AllRules.Keys.ToImmutableArray();
 
         internal /* for testing */ void RegisterRule<TRuleCheck>(DiagnosticDescriptor descriptor) where TRuleCheck : SymbolicRuleCheck, new()
         {
@@ -53,7 +50,7 @@ namespace SonarAnalyzer.Rules
         }
 
         protected void RegisterSupportedDiagnostics(DiagnosticDescriptor descriptor) =>
-            supportedDiagnostics = supportedDiagnostics.Add(descriptor);
+            additionalSupportedDiagnostics = additionalSupportedDiagnostics.Add(descriptor);
 
         protected static RuleFactory CreateFactory<TRuleCheck>() where TRuleCheck : SymbolicRuleCheck, new() =>
             new RuleFactory<TRuleCheck>();
@@ -73,7 +70,7 @@ namespace SonarAnalyzer.Rules
 
         protected void Analyze(SonarAnalysisContext sonarContext, SyntaxNodeAnalysisContext nodeContext, SyntaxNode body, ISymbol symbol)
         {
-            if (body != null && !body.ContainsDiagnostics)
+            if (body is { ContainsDiagnostics: false })
             {
                 var isTestProject = sonarContext.IsTestProject(nodeContext.Compilation, nodeContext.Options);
                 var isScannerRun = sonarContext.IsScannerRun(nodeContext.Options);
