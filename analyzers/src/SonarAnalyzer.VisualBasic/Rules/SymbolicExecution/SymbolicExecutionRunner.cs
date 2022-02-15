@@ -30,7 +30,7 @@ using SonarAnalyzer.Helpers;
 namespace SonarAnalyzer.Rules.VisualBasic
 {
     [DiagnosticAnalyzer(LanguageNames.VisualBasic)]
-    public sealed class SymbolicExecutionRunner : SymbolicExecutionRunnerBase
+    public class SymbolicExecutionRunner : SymbolicExecutionRunnerBase
     {
         protected override ImmutableDictionary<DiagnosticDescriptor, RuleFactory> AllRules => ImmutableDictionary<DiagnosticDescriptor, RuleFactory>.Empty;
 
