@@ -64,13 +64,13 @@ namespace SonarAnalyzer.Extensions
             if (block is LambdaExpressionSyntax)
             {
                 // We need to go up and track all possible enclosing lambdas and other FlowAnonymousFunctionOperations
-                var cfgFlowOperations = cfg.FlowAnonymousFunctionOperations();  // Avoid recomputing for ancestors that do not produce FlowAnonymousFunction
+                var cfgFlowOperations = cfg.FlowAnonymousFunctionOperations().ToArray();  // Avoid recomputing for ancestors that do not produce FlowAnonymousFunction
                 foreach (var node in block.AncestorsAndSelf().TakeWhile(x => x != rootSyntax).Reverse())
                 {
-                    if (cfgFlowOperations.SingleOrDefault(x => x.WrappedOperation.Syntax == node) is var flowOperation && flowOperation.WrappedOperation != null)
+                    if (cfgFlowOperations.SingleOrDefault(x => x.WrappedOperation.Syntax == node) is { WrappedOperation: not null } flowOperation)
                     {
                         cfg = cfg.GetAnonymousFunctionControlFlowGraph(flowOperation);
-                        cfgFlowOperations = cfg.FlowAnonymousFunctionOperations();
+                        cfgFlowOperations = cfg.FlowAnonymousFunctionOperations().ToArray();
                     }
                     else if (node == block)
                     {

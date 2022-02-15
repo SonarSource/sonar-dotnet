@@ -103,7 +103,7 @@ namespace SonarAnalyzer.UnitTest.Extensions
         [TestMethod]
         public void CreateCfg_MethodBody_ReturnsCfg_CS()
         {
-            var code = @"
+            const string code = @"
 public class Sample
 {
     public void Main()
@@ -120,7 +120,7 @@ public class Sample
         [TestMethod]
         public void CreateCfg_MethodBlock_ReturnsCfg_VB()
         {
-            var code = @"
+            const string code = @"
 Public Class Sample
     Public Sub Main()
         Dim X As Integer = 42
@@ -135,7 +135,7 @@ End Class";
         [TestMethod]
         public void CreateCfg_AnyNode_ReturnsCfg_CS()
         {
-            var code = @"
+            const string code = @"
 public class Sample
 {
     public void Main()
@@ -152,7 +152,7 @@ public class Sample
         [TestMethod]
         public void CreateCfg_AnyNode_ReturnsCfg_VB()
         {
-            var code = @"
+            const string code = @"
 Public Class Sample
     Public Sub Main()
         Main()
@@ -167,7 +167,7 @@ End Class";
         [TestMethod]
         public void CreateCfg_LambdaInsideQuery_CS()
         {
-            var code = @"
+            const string code = @"
 using System;
 using System.Linq;
 public class Sample
@@ -186,7 +186,7 @@ public class Sample
         [TestMethod]
         public void CreateCfg_LambdaInsideQuery_VB()
         {
-            var code = @"
+            const string code = @"
 Public Class Sample
     Public Sub Main(Values() As Integer)
         Dim Result As IEnumerable(Of Lazy(Of Integer)) = From Value In Values Select New Lazy(Of Integer)(Function() Value)
@@ -202,7 +202,7 @@ End Class
         [TestMethod]
         public void CreateCfg_NestingChain_CS()
         {
-            var code = @"
+            const string code = @"
 using System;
 using System.Linq;
 public class Sample
@@ -255,7 +255,7 @@ public class Sample
         [TestMethod]
         public void CreateCfg_NestingChain_VB()
         {
-            var code = @"
+            const string code = @"
 Public Class Sample
     Public Sub Main(Values() As Integer)
         Dim OuterMultiLineSub As Action =
@@ -290,7 +290,7 @@ End Class";
         [TestMethod]
         public void CreateCfg_UndefinedSymbol_ReturnsCfg_CS()
         {
-            var code = @"
+            const string code = @"
 public class Sample
 {
     public void Main()
@@ -306,7 +306,7 @@ public class Sample
         [TestMethod]
         public void CreateCfg_UndefinedSymbol_ReturnsNull_VB()
         {
-            var code = @"
+            const string code = @"
 Public Class Sample
     Public Sub Main()
         Undefined(Function() 42)
