@@ -26,7 +26,7 @@ using Microsoft.CodeAnalysis.VisualBasic.Syntax;
 using SonarAnalyzer.CFG.Roslyn;
 using SonarAnalyzer.Extensions;
 using SonarAnalyzer.Helpers;
-using SonarAnalyzer.SymbolicExecution.Roslyn.Checks.VisualBasic;
+using SonarAnalyzer.SymbolicExecution.Roslyn.RuleChecks.VisualBasic;
 
 namespace SonarAnalyzer.Rules.VisualBasic
 {

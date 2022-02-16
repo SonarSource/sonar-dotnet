@@ -23,7 +23,7 @@ using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.VisualBasic.Syntax;
 using SonarAnalyzer.Helpers;
 
-namespace SonarAnalyzer.SymbolicExecution.Roslyn.Checks.VisualBasic
+namespace SonarAnalyzer.SymbolicExecution.Roslyn.RuleChecks.VisualBasic
 {
     public class LocksReleasedAllPaths : LocksReleasedAllPathsBase
     {
