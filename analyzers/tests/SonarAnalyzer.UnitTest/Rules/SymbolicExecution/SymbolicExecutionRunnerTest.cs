@@ -26,6 +26,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
 using SonarAnalyzer.Rules;
+using SonarAnalyzer.SymbolicExecution.Roslyn;
 using SonarAnalyzer.UnitTest.TestFramework;
 using SonarAnalyzer.UnitTest.TestFramework.SymbolicExecution;
 using CS = SonarAnalyzer.Rules.CSharp;
@@ -293,7 +294,7 @@ End Sub");
     }
 }";
             var another = TestHelper.CreateDescriptor("SAnother", DiagnosticDescriptorBuilder.MainSourceScopeTag);
-            var sut = new CS.SymbolicExecutionRunner();
+            var sut = new ConfigurableSERunnerCS();
             sut.RegisterRule<MainScopeAssignmentRuleCheck>(MainScopeAssignmentRuleCheck.SMain);
             sut.RegisterRule<MainScopeAssignmentRuleCheck>(another);     // Register the same RuleCheck with another ID
             new VerifierBuilder().AddAnalyzer(() => sut)
@@ -332,7 +333,7 @@ End Sub");
         [TestMethod]
         public void Analyze_ShouldExecute_ExcludesCheckFromExecution()
         {
-            var sut = new CS.SymbolicExecutionRunner();
+            var sut = new ConfigurableSERunnerCS();
             sut.RegisterRule<InvocationAssignmentRuleCheck>(InvocationAssignmentRuleCheck.SInvocation);
             var builder = new VerifierBuilder().AddAnalyzer(() => sut);
             builder.AddSnippet(@"
@@ -365,12 +366,12 @@ public class Sample
         string s = null;    // Nothing is raised because exception is thrown on the way
     }
 }";
-            var sut = new CS.SymbolicExecutionRunner();
+            var sut = new ConfigurableSERunnerCS();
             sut.RegisterRule<ThrowAssignmentRuleCheck>(ThrowAssignmentRuleCheck.SThrow);
             var compilation = SolutionBuilder.Create().AddProject(AnalyzerLanguage.CSharp).AddSnippet(code).Solution.Compile(ParseOptionsHelper.CSharpLatest.ToArray()).Single();
             var diagnostics = DiagnosticVerifier.GetDiagnosticsIgnoreExceptions(compilation, sut);
             diagnostics.Should().ContainSingle(x => x.Id == "AD0001").Which.GetMessage().Should()
-                .StartWith("Analyzer 'SonarAnalyzer.Rules.CSharp.SymbolicExecutionRunner' threw an exception of type 'SonarAnalyzer.SymbolicExecution.SymbolicExecutionException' with message 'Error processing method: Method ## Method file: snippet1.cs ## Method line: 4,4 ## Inner exception: System.InvalidOperationException: This check is not useful. ##    at SonarAnalyzer.UnitTest.TestFramework.SymbolicExecution.ThrowAssignmentRuleCheck.PostProcess(SymbolicContext context)");
+                .StartWith("Analyzer 'SonarAnalyzer.UnitTest.Rules.SymbolicExecution.SymbolicExecutionRunnerTest+ConfigurableSERunnerCS' threw an exception of type 'SonarAnalyzer.SymbolicExecution.SymbolicExecutionException' with message 'Error processing method: Method ## Method file: snippet1.cs ## Method line: 4,4 ## Inner exception: System.InvalidOperationException: This check is not useful. ##    at SonarAnalyzer.UnitTest.TestFramework.SymbolicExecution.ThrowAssignmentRuleCheck.PostProcess(SymbolicContext context)");
         }
 
         private static void Verify(string body, params DiagnosticDescriptor[] onlyRules) =>
@@ -386,7 +387,7 @@ $@"public class Sample
         {body}
     }}
 }}";
-            VerifyCode<CS.SymbolicExecutionRunner>(code, projectType, ParseOptionsHelper.FromCSharp9, sonarProjectConfigPath, onlyRules);
+            VerifyCode<TestSERunnerCS>(code, projectType, ParseOptionsHelper.FromCSharp9, sonarProjectConfigPath, onlyRules);
         }
 
         private static void VerifyClassMainCS(string members)
@@ -398,7 +399,7 @@ public class Sample
 {{
     {members}
 }}";
-            VerifyCode<CS.SymbolicExecutionRunner>(code, ProjectType.Product, ParseOptionsHelper.FromCSharp9, null, MainScopeAssignmentRuleCheck.SMain);
+            VerifyCode<TestSERunnerCS>(code, ProjectType.Product, ParseOptionsHelper.FromCSharp9, null, MainScopeAssignmentRuleCheck.SMain);
         }
 
         private static void VerifyClassMainVB(string members)
@@ -407,24 +408,45 @@ public class Sample
 $@"Public Class Sample
     {members}
 End Class";
-            VerifyCode<VB.SymbolicExecutionRunner>(code, ProjectType.Product, ImmutableArray<ParseOptions>.Empty, null, MainScopeAssignmentRuleCheck.SMain, BinaryRuleCheck.SBinary);
+            VerifyCode<TestSERunnerVB>(code, ProjectType.Product, ImmutableArray<ParseOptions>.Empty, null, MainScopeAssignmentRuleCheck.SMain, BinaryRuleCheck.SBinary);
         }
 
         private static void VerifyCode<TRunner>(string code, ProjectType projectType, ImmutableArray<ParseOptions> parseOptions, string sonarProjectConfigPath, params DiagnosticDescriptor[] onlyRules)
-            where TRunner : SymbolicExecutionRunnerBase, new()
-        {
-            var sut = new TRunner();
-            sut.RegisterRule<BinaryRuleCheck>(BinaryRuleCheck.SBinary);
-            sut.RegisterRule<AllScopeAssignmentRuleCheck>(AllScopeAssignmentRuleCheck.SAll);
-            sut.RegisterRule<MainScopeAssignmentRuleCheck>(MainScopeAssignmentRuleCheck.SMain);
-            sut.RegisterRule<TestScopeAssignmentRuleCheck>(TestScopeAssignmentRuleCheck.STest);
-            new VerifierBuilder().AddAnalyzer(() => sut)
+            where TRunner : SymbolicExecutionRunnerBase, new() =>
+            new VerifierBuilder<TRunner>()
                 .AddReferences(TestHelper.ProjectTypeReference(projectType))
                 .AddSnippet(code)
                 .WithSonarProjectConfigPath(sonarProjectConfigPath)
                 .WithOptions(parseOptions)
                 .WithOnlyDiagnostics(onlyRules)
                 .Verify();
+
+        private class TestSERunnerCS : CS.SymbolicExecutionRunner
+        {
+            protected override ImmutableDictionary<DiagnosticDescriptor, RuleFactory> AllRules => ImmutableDictionary<DiagnosticDescriptor, RuleFactory>.Empty
+                .Add(BinaryRuleCheck.SBinary, CreateFactory<BinaryRuleCheck>())
+                .Add(AllScopeAssignmentRuleCheck.SAll, CreateFactory<AllScopeAssignmentRuleCheck>())
+                .Add(MainScopeAssignmentRuleCheck.SMain, CreateFactory<MainScopeAssignmentRuleCheck>())
+                .Add(TestScopeAssignmentRuleCheck.STest, CreateFactory<TestScopeAssignmentRuleCheck>());
+        }
+
+        private class TestSERunnerVB : VB.SymbolicExecutionRunner
+        {
+            protected override ImmutableDictionary<DiagnosticDescriptor, RuleFactory> AllRules => ImmutableDictionary<DiagnosticDescriptor, RuleFactory>.Empty
+                .Add(BinaryRuleCheck.SBinary, CreateFactory<BinaryRuleCheck>())
+                .Add(AllScopeAssignmentRuleCheck.SAll, CreateFactory<AllScopeAssignmentRuleCheck>())
+                .Add(MainScopeAssignmentRuleCheck.SMain, CreateFactory<MainScopeAssignmentRuleCheck>())
+                .Add(TestScopeAssignmentRuleCheck.STest, CreateFactory<TestScopeAssignmentRuleCheck>());
+        }
+
+        private class ConfigurableSERunnerCS : CS.SymbolicExecutionRunner
+        {
+            private ImmutableDictionary<DiagnosticDescriptor, RuleFactory> allRules = ImmutableDictionary<DiagnosticDescriptor, RuleFactory>.Empty;
+
+            protected override ImmutableDictionary<DiagnosticDescriptor, RuleFactory> AllRules => allRules;
+
+            public void RegisterRule<TRuleCheck>(DiagnosticDescriptor descriptor) where TRuleCheck : SymbolicRuleCheck, new() =>
+                allRules = allRules.Add(descriptor, CreateFactory<TRuleCheck>());
         }
     }
 }

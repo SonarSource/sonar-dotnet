@@ -40,9 +40,9 @@ using StyleCop.Analyzers.Lightup;
 namespace SonarAnalyzer.Rules.CSharp
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
-    public sealed class SymbolicExecutionRunner : SymbolicExecutionRunnerBase
+    public class SymbolicExecutionRunner : SymbolicExecutionRunnerBase
     {
-        // ToDo: This should be migrated to SymbolicExecutionRunnerBase.AllRules. SymbolicExecutionRunnerBase.RegisterSupportedDiagnostics can be removed afterwards as well.
+        // ToDo: This should be migrated to SymbolicExecutionRunnerBase.AllRules.
         private static readonly ImmutableArray<ISymbolicExecutionAnalyzer> SonarRules = ImmutableArray.Create<ISymbolicExecutionAnalyzer>(
             new EmptyNullableValueAccess(),
             new ObjectsShouldNotBeDisposedMoreThanOnce(),
@@ -58,13 +58,7 @@ namespace SonarAnalyzer.Rules.CSharp
         protected override ImmutableDictionary<DiagnosticDescriptor, RuleFactory> AllRules => ImmutableDictionary<DiagnosticDescriptor, RuleFactory>.Empty
             .Add(LocksReleasedAllPaths.S2222, CreateFactory<LocksReleasedAllPaths>());
 
-        public SymbolicExecutionRunner()
-        {
-            foreach (var descriptor in SonarRules.SelectMany(x => x.SupportedDiagnostics))
-            {
-                RegisterSupportedDiagnostics(descriptor);
-            }
-        }
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => base.SupportedDiagnostics.Concat(SonarRules.SelectMany(x => x.SupportedDiagnostics)).ToImmutableArray();
 
         protected override void Initialize(SonarAnalysisContext context)
         {

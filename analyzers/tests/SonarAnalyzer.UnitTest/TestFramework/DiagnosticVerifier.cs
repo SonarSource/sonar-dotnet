@@ -262,6 +262,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework
             var expectedIssue = expectedIssues
                 .Where(issueFilter)
                 .OrderBy(x => x.Start == null ? 0 : Math.Abs(location.GetLineSpan().StartLinePosition.Character - x.Start.Value))
+                .ThenBy(x => x.Message == message ? 0 : 1)  // Prefer issue with explicit matching message when possible. There can be more with different messages
                 .FirstOrDefault(issue => issue.LineNumber == lineNumber);
             var issueType = IssueType(isPrimary);
 

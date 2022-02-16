@@ -19,7 +19,6 @@
  */
 
 using System;
-using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Linq;
 using Microsoft.CodeAnalysis;
@@ -33,24 +32,12 @@ namespace SonarAnalyzer.Rules
 {
     public abstract class SymbolicExecutionRunnerBase : SonarDiagnosticAnalyzer
     {
-        private readonly Dictionary<DiagnosticDescriptor, RuleFactory> additionalTestRules = new();
-        private ImmutableArray<DiagnosticDescriptor> additionalSupportedDiagnostics = ImmutableArray<DiagnosticDescriptor>.Empty;
-
         protected abstract ImmutableDictionary<DiagnosticDescriptor, RuleFactory> AllRules { get; }
         protected abstract ControlFlowGraph CreateCfg(SemanticModel model, SyntaxNode node);
         protected abstract void AnalyzeSonar(SyntaxNodeAnalysisContext context, bool isTestProject, bool isScannerRun, SyntaxNode body, ISymbol symbol);
 
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => additionalSupportedDiagnostics.AddRange(AllRules.Keys);
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => AllRules.Keys.ToImmutableArray();
         protected override bool EnableConcurrentExecution => false;
-
-        internal /* for testing */ void RegisterRule<TRuleCheck>(DiagnosticDescriptor descriptor) where TRuleCheck : SymbolicRuleCheck, new()
-        {
-            RegisterSupportedDiagnostics(descriptor);
-            additionalTestRules.Add(descriptor, CreateFactory<TRuleCheck>());
-        }
-
-        protected void RegisterSupportedDiagnostics(DiagnosticDescriptor descriptor) =>
-            additionalSupportedDiagnostics = additionalSupportedDiagnostics.Add(descriptor);
 
         protected static RuleFactory CreateFactory<TRuleCheck>() where TRuleCheck : SymbolicRuleCheck, new() =>
             new RuleFactory<TRuleCheck>();
@@ -84,7 +71,7 @@ namespace SonarAnalyzer.Rules
 
         private void AnalyzeRoslyn(SonarAnalysisContext sonarContext, SyntaxNodeAnalysisContext nodeContext, bool isTestProject, bool isScannerRun, SyntaxNode body, ISymbol symbol)
         {
-            var checks = AllRules.Concat(additionalTestRules)
+            var checks = AllRules
                 .Where(x => IsEnabled(nodeContext, isTestProject, isScannerRun, x.Key))
                 .GroupBy(x => x.Value.Type)                             // Multiple DiagnosticDescriptors (S2583, S2589) can share the same check type
                 .Select(x => x.First().Value.CreateInstance(sonarContext, nodeContext))   // We need just one instance in that case
