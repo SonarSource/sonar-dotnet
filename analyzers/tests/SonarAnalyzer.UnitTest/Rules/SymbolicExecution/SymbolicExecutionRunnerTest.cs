@@ -371,7 +371,7 @@ public class Sample
             var compilation = SolutionBuilder.Create().AddProject(AnalyzerLanguage.CSharp).AddSnippet(code).Solution.Compile(ParseOptionsHelper.CSharpLatest.ToArray()).Single();
             var diagnostics = DiagnosticVerifier.GetDiagnosticsIgnoreExceptions(compilation, sut);
             diagnostics.Should().ContainSingle(x => x.Id == "AD0001").Which.GetMessage().Should()
-                .StartWith("Analyzer 'SonarAnalyzer.UnitTest.Rules.SymbolicExecution.SymbolicExecutionRunnerTest+CustomSERunnerCS' threw an exception of type 'SonarAnalyzer.SymbolicExecution.SymbolicExecutionException' with message 'Error processing method: Method ## Method file: snippet1.cs ## Method line: 4,4 ## Inner exception: System.InvalidOperationException: This check is not useful. ##    at SonarAnalyzer.UnitTest.TestFramework.SymbolicExecution.ThrowAssignmentRuleCheck.PostProcess(SymbolicContext context)");
+                .StartWith("Analyzer 'SonarAnalyzer.UnitTest.Rules.SymbolicExecution.SymbolicExecutionRunnerTest+ConfigurableSERunnerCS' threw an exception of type 'SonarAnalyzer.SymbolicExecution.SymbolicExecutionException' with message 'Error processing method: Method ## Method file: snippet1.cs ## Method line: 4,4 ## Inner exception: System.InvalidOperationException: This check is not useful. ##    at SonarAnalyzer.UnitTest.TestFramework.SymbolicExecution.ThrowAssignmentRuleCheck.PostProcess(SymbolicContext context)");
         }
 
         private static void Verify(string body, params DiagnosticDescriptor[] onlyRules) =>
