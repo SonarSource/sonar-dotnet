@@ -21,20 +21,6 @@ namespace Monitor_TryCatch
             }
         }
 
-        public void Method2(string arg)
-        {
-            Monitor.Enter(obj); // FN
-            try
-            {
-                Console.WriteLine(arg.Length);
-            }
-            catch (Exception)
-            {
-                Monitor.Exit(obj);
-                throw;
-            }
-        }
-
         public void Method3(string arg)
         {
             Monitor.Enter(obj); // Compliant

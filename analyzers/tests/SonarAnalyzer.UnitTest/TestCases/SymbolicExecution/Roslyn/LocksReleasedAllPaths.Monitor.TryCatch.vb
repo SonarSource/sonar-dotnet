@@ -17,16 +17,6 @@ Namespace Monitor_TryCatch
             End Try
         End Sub
 
-        Public Sub Method2(Arg As String)
-            Monitor.Enter(Obj) ' FN
-            Try
-                Console.WriteLine(Arg.Length)
-            Catch ex As Exception
-                Monitor.Exit(Obj)
-                Throw
-            End Try
-        End Sub
-
         Public Sub Method3(Arg As String)
             Monitor.Enter(Obj) ' Compliant
             Try
