@@ -293,7 +293,7 @@ namespace Monitor_Linear
 
         public class PropertyReference
         {
-            public Contex PreMovieInfoScraperAction(Contex context) // adds coverage for PropertyReference operations
+            public Context PreMovieInfoScraperAction(Context context) // adds coverage for PropertyReference operations
             {
                 if (string.IsNullOrEmpty(context.Movie.Year))
                 {
@@ -303,7 +303,7 @@ namespace Monitor_Linear
                 return context;
             }
 
-            public class Contex
+            public class Context
             {
                 public Movie Movie { get; }
             }

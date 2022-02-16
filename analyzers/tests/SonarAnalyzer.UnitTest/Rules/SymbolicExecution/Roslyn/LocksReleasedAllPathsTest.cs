@@ -18,26 +18,26 @@
 * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
+using Microsoft.CodeAnalysis;
+using Microsoft.CodeAnalysis.Diagnostics;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using SonarAnalyzer.Rules.CSharp;
-using SonarAnalyzer.SymbolicExecution.Roslyn.RuleChecks;
 using SonarAnalyzer.UnitTest.MetadataReferences;
 using SonarAnalyzer.UnitTest.TestFramework;
+using Checks = SonarAnalyzer.SymbolicExecution.Roslyn.RuleChecks;
+using CS = SonarAnalyzer.Rules.CSharp;
+using VB = SonarAnalyzer.Rules.VisualBasic;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
     [TestClass]
     public class LocksReleasedAllPathsTest
     {
-        private readonly VerifierBuilder verifierBuilder = new VerifierBuilder<SymbolicExecutionRunner>()
-            .AddReferences(MetadataReferenceFacade.SystemThreading)
-            .WithOptions(ParseOptionsHelper.FromCSharp8)
-            .WithOnlyDiagnostics(LocksReleasedAllPaths.S2222)
-            .WithBasePath(@"SymbolicExecution\Roslyn");
+        private readonly VerifierBuilder builderCS = CreateVerifier<CS.SymbolicExecutionRunner>(Checks.CSharp.LocksReleasedAllPaths.S2222).WithOptions(ParseOptionsHelper.FromCSharp8);
+        private readonly VerifierBuilder builderVB = CreateVerifier<VB.SymbolicExecutionRunner>(Checks.VisualBasic.LocksReleasedAllPaths.S2222);
 
         [TestMethod]
         public void LocksReleasedAllPaths_CS() =>
-            verifierBuilder.AddPaths(
+            builderCS.AddPaths(
                 "LocksReleasedAllPaths.Monitor.Conditions.cs",
                 "LocksReleasedAllPaths.Monitor.GoTo.cs",
                 "LocksReleasedAllPaths.Monitor.Linear.cs",
@@ -51,15 +51,38 @@ namespace SonarAnalyzer.UnitTest.Rules
                 .Verify();
 
         [TestMethod]
+        public void LocksReleasedAllPaths_VB() =>
+            builderVB.AddPaths(
+                "LocksReleasedAllPaths.Monitor.Conditions.vb",
+                "LocksReleasedAllPaths.Monitor.GoTo.vb",
+                "LocksReleasedAllPaths.Monitor.Linear.vb",
+                "LocksReleasedAllPaths.Monitor.Loops.vb",
+                "LocksReleasedAllPaths.Monitor.TryCatch.vb",
+                "LocksReleasedAllPaths.Monitor.TryEnter.vb",
+                "LocksReleasedAllPaths.Mutex.vb",
+                "LocksReleasedAllPaths.ReaderWriterLock.vb",
+                "LocksReleasedAllPaths.ReaderWriterLockSlim.vb",
+                "LocksReleasedAllPaths.SpinLock.vb")
+                .Verify();
+
+        [TestMethod]
         public void LocksReleasedAllPaths_CSharp8() =>
-            verifierBuilder.AddPaths("LocksReleasedAllPaths.Monitor.Conditions.CSharp8.cs").WithOptions(ParseOptionsHelper.FromCSharp8).Verify();
+            builderCS.AddPaths("LocksReleasedAllPaths.Monitor.Conditions.CSharp8.cs").WithOptions(ParseOptionsHelper.FromCSharp8).Verify();
 
 #if NETFRAMEWORK
 
         [TestMethod]
         public void LocksReleasedAllPaths_CS_NetFx() =>
-            verifierBuilder.AddPaths("LocksReleasedAllPaths.Mutex.NetFx.cs").WithOptions(ParseOptionsHelper.FromCSharp8).Verify();
+            builderCS.AddPaths("LocksReleasedAllPaths.Mutex.NetFx.cs").WithOptions(ParseOptionsHelper.FromCSharp8).Verify();
 
 #endif
+
+        private static VerifierBuilder CreateVerifier<TAnalyzer>(DiagnosticDescriptor onlyDiagnostics) where TAnalyzer : DiagnosticAnalyzer, new() =>
+            new VerifierBuilder<TAnalyzer>()
+            .WithOnlyDiagnostics(onlyDiagnostics)
+            .AddReferences(MetadataReferenceFacade.SystemThreading)
+            .WithBasePath(@"SymbolicExecution\Roslyn")
+            .WithConcurrentAnalysis(false);
+
     }
 }

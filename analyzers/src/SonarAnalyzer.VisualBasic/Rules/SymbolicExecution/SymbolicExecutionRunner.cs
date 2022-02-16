@@ -26,13 +26,15 @@ using Microsoft.CodeAnalysis.VisualBasic.Syntax;
 using SonarAnalyzer.CFG.Roslyn;
 using SonarAnalyzer.Extensions;
 using SonarAnalyzer.Helpers;
+using SonarAnalyzer.SymbolicExecution.Roslyn.RuleChecks.VisualBasic;
 
 namespace SonarAnalyzer.Rules.VisualBasic
 {
     [DiagnosticAnalyzer(LanguageNames.VisualBasic)]
     public sealed class SymbolicExecutionRunner : SymbolicExecutionRunnerBase
     {
-        protected override ImmutableDictionary<DiagnosticDescriptor, RuleFactory> AllRules => ImmutableDictionary<DiagnosticDescriptor, RuleFactory>.Empty;
+        protected override ImmutableDictionary<DiagnosticDescriptor, RuleFactory> AllRules => ImmutableDictionary<DiagnosticDescriptor, RuleFactory>.Empty
+            .Add(LocksReleasedAllPaths.S2222, CreateFactory<LocksReleasedAllPaths>());
 
         protected override void Initialize(SonarAnalysisContext context)
         {
