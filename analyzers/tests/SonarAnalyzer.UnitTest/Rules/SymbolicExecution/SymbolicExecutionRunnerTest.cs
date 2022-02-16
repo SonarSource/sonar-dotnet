@@ -294,7 +294,7 @@ End Sub");
     }
 }";
             var another = TestHelper.CreateDescriptor("SAnother", DiagnosticDescriptorBuilder.MainSourceScopeTag);
-            var sut = new CustomSERunnerCS();
+            var sut = new ConfigurableSERunnerCS();
             sut.RegisterRule<MainScopeAssignmentRuleCheck>(MainScopeAssignmentRuleCheck.SMain);
             sut.RegisterRule<MainScopeAssignmentRuleCheck>(another);     // Register the same RuleCheck with another ID
             new VerifierBuilder().AddAnalyzer(() => sut)
@@ -333,7 +333,7 @@ End Sub");
         [TestMethod]
         public void Analyze_ShouldExecute_ExcludesCheckFromExecution()
         {
-            var sut = new CustomSERunnerCS();
+            var sut = new ConfigurableSERunnerCS();
             sut.RegisterRule<InvocationAssignmentRuleCheck>(InvocationAssignmentRuleCheck.SInvocation);
             var builder = new VerifierBuilder().AddAnalyzer(() => sut);
             builder.AddSnippet(@"
@@ -366,7 +366,7 @@ public class Sample
         string s = null;    // Nothing is raised because exception is thrown on the way
     }
 }";
-            var sut = new CustomSERunnerCS();
+            var sut = new ConfigurableSERunnerCS();
             sut.RegisterRule<ThrowAssignmentRuleCheck>(ThrowAssignmentRuleCheck.SThrow);
             var compilation = SolutionBuilder.Create().AddProject(AnalyzerLanguage.CSharp).AddSnippet(code).Solution.Compile(ParseOptionsHelper.CSharpLatest.ToArray()).Single();
             var diagnostics = DiagnosticVerifier.GetDiagnosticsIgnoreExceptions(compilation, sut);
@@ -439,7 +439,7 @@ End Class";
                 .Add(TestScopeAssignmentRuleCheck.STest, CreateFactory<TestScopeAssignmentRuleCheck>());
         }
 
-        private class CustomSERunnerCS : CS.SymbolicExecutionRunner
+        private class ConfigurableSERunnerCS : CS.SymbolicExecutionRunner
         {
             private ImmutableDictionary<DiagnosticDescriptor, RuleFactory> allRules = ImmutableDictionary<DiagnosticDescriptor, RuleFactory>.Empty;
 
