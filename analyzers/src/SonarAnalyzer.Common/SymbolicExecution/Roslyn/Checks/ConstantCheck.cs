@@ -19,14 +19,23 @@
  */
 
 using Microsoft.CodeAnalysis;
-using SonarAnalyzer.Helpers;
+using SonarAnalyzer.SymbolicExecution.Constraints;
 
-namespace SonarAnalyzer.SymbolicExecution.Roslyn.RuleChecks
+namespace SonarAnalyzer.SymbolicExecution.Roslyn.Checks
 {
-    public class LocksReleasedAllPaths : LocksReleasedAllPathsBase
+    internal class ConstantCheck : SymbolicCheck
     {
-        public static readonly DiagnosticDescriptor S2222 = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
+        public override ProgramState PreProcess(SymbolicContext context) =>
+            GetConstraint(context.Operation.Instance) is { } constraint
+                ? context.SetOperationConstraint(constraint)
+                : context.State;
 
-        protected override DiagnosticDescriptor Rule => S2222;
+        private static SymbolicConstraint GetConstraint(IOperation operation) =>
+            operation.ConstantValue.Value switch
+            {
+                true => BoolConstraint.True,
+                false => BoolConstraint.False,
+                _ => null
+            };
     }
 }

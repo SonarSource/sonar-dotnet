@@ -22,6 +22,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using SonarAnalyzer.CFG.Roslyn;
+using SonarAnalyzer.SymbolicExecution.Roslyn.Checks;
 using SonarAnalyzer.SymbolicExecution.Roslyn.OperationProcessors;
 using StyleCop.Analyzers.Lightup;
 
@@ -41,11 +42,13 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
         public RoslynSymbolicExecution(ControlFlowGraph cfg, SymbolicCheck[] checks)
         {
             this.cfg = cfg ?? throw new ArgumentNullException(nameof(cfg));
-            this.checks = checks ?? throw new ArgumentNullException(nameof(checks));
-            if (!checks.Any())
+
+            if (checks == null || checks.Length == 0)
             {
                 throw new ArgumentException("At least one check is expected", nameof(checks));
             }
+
+            this.checks = new[] { new ConstantCheck() }.Concat(checks).ToArray();
         }
 
         public void Execute()
@@ -121,10 +124,11 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
         private static ProgramState ProcessOperation(SymbolicContext context) =>
             context.Operation.Instance.Kind switch
             {
-                OperationKindEx.SimpleAssignment => SimpleAssignment.Process(context, ISimpleAssignmentOperationWrapper.FromOperation(context.Operation.Instance)),
+                OperationKindEx.Conversion => Conversion.Process(context, IConversionOperationWrapper.FromOperation(context.Operation.Instance)),
+                OperationKindEx.FieldReference => References.Process(context, IFieldReferenceOperationWrapper.FromOperation(context.Operation.Instance)),
                 OperationKindEx.LocalReference => References.Process(context, ILocalReferenceOperationWrapper.FromOperation(context.Operation.Instance)),
                 OperationKindEx.ParameterReference => References.Process(context, IParameterReferenceOperationWrapper.FromOperation(context.Operation.Instance)),
-                OperationKindEx.Conversion => Conversion.Process(context, IConversionOperationWrapper.FromOperation(context.Operation.Instance)),
+                OperationKindEx.SimpleAssignment => SimpleAssignment.Process(context, ISimpleAssignmentOperationWrapper.FromOperation(context.Operation.Instance)),
                 _ => context.State
             };
 

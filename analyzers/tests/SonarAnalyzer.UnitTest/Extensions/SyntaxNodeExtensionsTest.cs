@@ -95,7 +95,7 @@ namespace SonarAnalyzer.UnitTest.Extensions
         [TestMethod]
         public void GetDeclarationTypeName_UnknownType() =>
 #if DEBUG
-            Assert.ThrowsException<ArgumentException>(() => SyntaxNodeExtensionsCS.GetDeclarationTypeName(SyntaxFactory.Block()), "Unexpected type Block\r\nParameter name: kind");
+            Assert.ThrowsException<System.ArgumentException>(() => SyntaxNodeExtensionsCS.GetDeclarationTypeName(SyntaxFactory.Block()), "Unexpected type Block\r\nParameter name: kind");
 #else
             SyntaxNodeExtensionsCS.GetDeclarationTypeName(SyntaxFactory.Block()).Should().Be("type");
 #endif

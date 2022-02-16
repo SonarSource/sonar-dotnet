@@ -65,7 +65,7 @@ do
     value.ToString(); // Add another constraint to 'value'
 } while (true);
 Tag(""End"", value);";
-            var validator = SETestContext.CreateCS(code, ", int[] items", new BoolTestCheck(), new AddConstraintOnInvocationCheck()).Validator;
+            var validator = SETestContext.CreateCS(code, ", int[] items", new AddConstraintOnInvocationCheck()).Validator;
             validator.ValidateExitReachCount(4);
             var states = validator.TagStates("End");
             var condition = states.SelectMany(x => x.SymbolsWith(BoolConstraint.False)).First();    // "False" is never set for "value"

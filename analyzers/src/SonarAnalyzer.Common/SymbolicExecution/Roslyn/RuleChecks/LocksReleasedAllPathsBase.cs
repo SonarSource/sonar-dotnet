@@ -26,7 +26,7 @@ using SonarAnalyzer.Helpers;
 using SonarAnalyzer.SymbolicExecution.Constraints;
 using StyleCop.Analyzers.Lightup;
 
-namespace SonarAnalyzer.SymbolicExecution.Roslyn.Checks
+namespace SonarAnalyzer.SymbolicExecution.Roslyn.RuleChecks
 {
     public abstract class LocksReleasedAllPathsBase : SymbolicRuleCheck
     {

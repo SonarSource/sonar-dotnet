@@ -89,6 +89,7 @@ namespace SonarAnalyzer.UnitTest.SymbolicExecution.Roslyn
         [DataRow(@"StaticField = 42; Tag(""Target"", StaticField);", "SimpleAssignment: StaticField = 42")]
         [DataRow(@"field = 42; Tag(""Target"", field);", "SimpleAssignment: field = 42")]
         [DataRow(@"this.field = 42; Tag(""Target"", this.field);", "SimpleAssignment: this.field = 42")]
+        [DataRow(@"field = 42; var a = field; Tag(""Target"", field);",  "SimpleAssignment: a = field (Implicit)")]
         public void SimpleAssignment_Fields(string snippet, string operation)
         {
             var validator = SETestContext.CreateCS(snippet, new LiteralDummyTestCheck()).Validator;
