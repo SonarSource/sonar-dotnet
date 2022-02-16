@@ -66,8 +66,35 @@ Tag(""End"");";
                 "Else",             // Dequeue for "else" branch
                 "InTry",            // Dequeue after "if" branch
                 "End",              // Dequeue after "else" branch, reaching exit block
+                "InFinally",        // Dequeue after the "try body"
                 "AfterFinally");    // Dequeue after "if" branch
         }
+
+//         [TestMethod]
+//         public void Branching_Test()
+//         {
+//             const string code = @"
+// Tag(""Entry"");
+// var x = 3;
+// if (x != 1)
+// {
+//     Tag(""1"");
+//     if (x != 2)
+//     {
+//         Tag(""2"");
+//     }
+//     else
+//     {
+//         Tag(""-2"");
+//     }
+// }
+// else
+// {
+//     Tag(""-1"");
+// }
+// Tag(""End"");";
+//             SETestContext.CreateCS(code).Validator.ValidateTagOrder("Entry", "1", "-1", "End", "2", "-2");
+//         }
 
         [TestMethod]
         public void Branching_BlockProcessingOrder_VB()
@@ -75,10 +102,11 @@ Tag(""End"");";
             const string code = @"
 Tag(""Entry"")
 If BoolParameter Then
+    Tag(""BeforeTry"")
     Try
-        Tag(""BeforeTry"")
-    Catch
         Tag(""InTry"")
+    Catch
+        Tag(""InCatch"")
     Finally
         Tag(""InFinally"")
     End Try
@@ -91,8 +119,10 @@ Tag(""End"")";
                 "Entry",
                 "BeforeTry",
                 "Else",
-                "AfterFinally",
-                "End");
+                "InTry",
+                "End",
+                "InFinally",
+                "AfterFinally");
         }
 
         [TestMethod]
@@ -322,7 +352,7 @@ Tag(""AfterFinally"");
 Tag(""BeforeTry"");
 try
 {
-    Tag(""InFirstTry"");
+    Tag(""InOuterTry"");
     try
     {
         Tag(""InNestedTry"");
@@ -340,10 +370,89 @@ Tag(""AfterFinally"");
 ";
             SETestContext.CreateCS(code).Validator.ValidateTagOrder(
                 "BeforeTry",
-                "InFirstTry",
+                "InOuterTry",
                 "InNestedTry",
                 "InNestedFinally",
                 "InFinally",
+                "AfterFinally");
+        }
+
+        [TestMethod]
+        public void Finally_Nested_InstructionAfterFinally()
+        {
+            const string code = @"
+Tag(""BeforeTry"");
+try
+{
+    Tag(""InFirstTry"");
+    try
+    {
+        Tag(""InNestedTry"");
+    }
+    finally
+    {
+        true.ToString();
+        Tag(""InNestedFinally"");
+    }
+    Tag(""AfterNestedFinally"");
+}
+finally
+{
+    Tag(""InFinally"");
+}
+Tag(""AfterFinally"");
+";
+            SETestContext.CreateCS(code).Validator.ValidateTagOrder(
+                "BeforeTry",
+                "InFirstTry",
+                "InNestedTry",
+                "InNestedFinally",
+                "AfterNestedFinally",
+                "InFinally",
+                "AfterFinally");
+        }
+
+        [TestMethod]
+        public void Finally_BranchInNested()
+        {
+            const string code = @"
+Tag(""BeforeTry"");
+try
+{
+    Tag(""InFirstTry"");
+    try
+    {
+        Tag(""InNestedTry"");
+        if (1 == 2)
+        {
+            Tag(""1"");
+        }
+        else
+        {
+            Tag(""2"");
+        }
+    }
+    finally
+    {
+        Tag(""InNestedFinally"");
+    }
+    Tag(""AfterNestedFinally"");
+}
+finally
+{
+    Tag(""InFinally"");
+}
+Tag(""AfterFinally"");
+";
+            SETestContext.CreateCS(code).Validator.ValidateTagOrder(
+                "BeforeTry",
+                "InFirstTry",
+                "InNestedTry",
+                "InNestedFinally",
+                "1",
+                "2",
+                "InFinally",
+                "AfterNestedFinally",
                 "AfterFinally");
         }
     }
