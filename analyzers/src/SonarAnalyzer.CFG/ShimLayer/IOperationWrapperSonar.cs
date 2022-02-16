@@ -22,7 +22,7 @@ using System;
 using System.Collections.Generic;
 using System.Reflection;
 using Microsoft.CodeAnalysis;
-using SonarAnalyzer.CFG.Helpers;
+using SonarAnalyzer.CFG;
 
 namespace StyleCop.Analyzers.Lightup
 {
@@ -42,11 +42,11 @@ namespace StyleCop.Analyzers.Lightup
         private SemanticModel semanticModel;
 
         public IOperation Instance { get; }
-        public IOperation Parent => parent ??= (IOperation)ParentProperty.GetValue(Instance);
-        public IEnumerable<IOperation> Children => children ??= (IEnumerable<IOperation>)ChildrenProperty.GetValue(Instance);
-        public string Language => language ??= (string)LanguageProperty.GetValue(Instance);
-        public bool IsImplicit => isImplicit ??= (bool)IsImplicitProperty.GetValue(Instance);
-        public SemanticModel SemanticModel => semanticModel ??= (SemanticModel)SemanticModelProperty.GetValue(Instance);
+        public IOperation Parent => ParentProperty.ReadCached(Instance, ref parent);
+        public IEnumerable<IOperation> Children => ChildrenProperty.ReadCached(Instance, ref children);
+        public string Language => LanguageProperty.ReadCached(Instance, ref language);
+        public bool IsImplicit => IsImplicitProperty.ReadCached(Instance, ref isImplicit);
+        public SemanticModel SemanticModel => SemanticModelProperty.ReadCached(Instance, ref semanticModel);
 
         static IOperationWrapperSonar()
         {

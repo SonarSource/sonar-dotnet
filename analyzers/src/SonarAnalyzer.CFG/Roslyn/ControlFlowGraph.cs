@@ -32,7 +32,7 @@ namespace SonarAnalyzer.CFG.Roslyn
 {
     public class ControlFlowGraph
     {
-        private static readonly ConditionalWeakTable<object, ControlFlowGraph> InstanceCache = new ConditionalWeakTable<object, ControlFlowGraph>();
+        private static readonly ConditionalWeakTable<object, ControlFlowGraph> InstanceCache = new();
         private static readonly PropertyInfo BlocksProperty;
         private static readonly PropertyInfo LocalFunctionsProperty;
         private static readonly PropertyInfo OriginalOperationProperty;
@@ -43,18 +43,18 @@ namespace SonarAnalyzer.CFG.Roslyn
         private static readonly MethodInfo GetLocalFunctionControlFlowGraphMethod;
 
         private readonly object instance;
-        private readonly Lazy<ImmutableArray<BasicBlock>> blocks;
-        private readonly Lazy<ImmutableArray<IMethodSymbol>> localFunctions;
-        private readonly Lazy<ControlFlowGraph> parent;
-        private readonly Lazy<IOperation> originalOperation;
-        private readonly Lazy<ControlFlowRegion> root;
+        private ImmutableArray<BasicBlock> blocks;
+        private ImmutableArray<IMethodSymbol> localFunctions;
+        private ControlFlowGraph parent;
+        private IOperation originalOperation;
+        private ControlFlowRegion root;
 
         public static bool IsAvailable { get; }
-        public ImmutableArray<BasicBlock> Blocks => blocks.Value;
-        public ImmutableArray<IMethodSymbol> LocalFunctions => localFunctions.Value;
-        public IOperation OriginalOperation => originalOperation.Value;
-        public ControlFlowGraph Parent => parent.Value;
-        public ControlFlowRegion Root => root.Value;
+        public ImmutableArray<BasicBlock> Blocks => BlocksProperty.ReadCached(instance, BasicBlock.Wrap, ref blocks);
+        public ImmutableArray<IMethodSymbol> LocalFunctions => LocalFunctionsProperty.ReadCached<IMethodSymbol>(instance, ref localFunctions);
+        public IOperation OriginalOperation => OriginalOperationProperty.ReadCached(instance, ref originalOperation);
+        public ControlFlowGraph Parent => ParentProperty.ReadCached(instance, Wrap, ref parent);
+        public ControlFlowRegion Root => RootProperty.ReadCached(instance, ControlFlowRegion.Wrap, ref root);
         public BasicBlock EntryBlock => Blocks[Root.FirstBlockOrdinal];
         public BasicBlock ExitBlock => Blocks[Root.LastBlockOrdinal];
 
@@ -78,11 +78,6 @@ namespace SonarAnalyzer.CFG.Roslyn
         private ControlFlowGraph(object instance)
         {
             this.instance = instance ?? throw new ArgumentNullException(nameof(instance));
-            blocks = BlocksProperty.ReadImmutableArray(instance, BasicBlock.Wrap);
-            localFunctions = LocalFunctionsProperty.ReadImmutableArray<IMethodSymbol>(instance);
-            originalOperation = OriginalOperationProperty.ReadValue<IOperation>(instance);
-            parent = ParentProperty.ReadValue(instance, Wrap);
-            root = RootProperty.ReadValue(instance, ControlFlowRegion.Wrap);
             Debug.Assert(EntryBlock.Kind == BasicBlockKind.Entry, "Roslyn CFG Entry block is not the first one");
             Debug.Assert(ExitBlock.Kind == BasicBlockKind.Exit, "Roslyn CFG Exit block is not the last one");
         }
