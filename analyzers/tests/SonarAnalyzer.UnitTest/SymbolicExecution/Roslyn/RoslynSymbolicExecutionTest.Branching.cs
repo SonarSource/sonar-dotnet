@@ -292,5 +292,59 @@ else
             validator.ValidateTag("GetHashCode", x => x.HasConstraint(TestConstraint.First).Should().BeFalse()); // Nobody set the constraint on that path
             validator.ValidateExitReachCount(2);    // Once for each state
         }
+
+        [TestMethod]
+        public void Finally_Simple()
+        {
+            const string code = @"
+Tag(""BeforeTry"");
+try
+{
+    Tag(""InTry"");
+}
+finally
+{
+    Tag(""InFinally"");
+}
+Tag(""AfterFinally"");
+";
+            SETestContext.CreateCS(code).Validator.ValidateTagOrder(
+                "BeforeTry",
+                "InTry",
+                "InFinally",
+                "AfterFinally");
+        }
+
+        [TestMethod]
+        public void Finally_Nested()
+        {
+            const string code = @"
+Tag(""BeforeTry"");
+try
+{
+    Tag(""InFirstTry"");
+    try
+    {
+        Tag(""InNestedTry"");
+    }
+    finally
+    {
+        Tag(""InNestedFinally"");
+    }
+}
+finally
+{
+    Tag(""InFinally"");
+}
+Tag(""AfterFinally"");
+";
+            SETestContext.CreateCS(code).Validator.ValidateTagOrder(
+                "BeforeTry",
+                "InFirstTry",
+                "InNestedTry",
+                "InNestedFinally",
+                "InFinally",
+                "AfterFinally");
+        }
     }
 }
