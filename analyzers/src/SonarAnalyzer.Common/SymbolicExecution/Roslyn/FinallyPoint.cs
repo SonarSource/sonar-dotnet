@@ -30,14 +30,16 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
 
         public bool IsFinallyBlock => finallyIndex < branch.FinallyRegions.Length;
         public int BlockIndex => IsFinallyBlock ? branch.FinallyRegions[finallyIndex].FirstBlockOrdinal : branch.Destination.Ordinal;
+        public FinallyPoint Previous { get; }
 
-        public FinallyPoint(ControlFlowBranch branch, int finallyIndex = 0)
+        public FinallyPoint(FinallyPoint previous, ControlFlowBranch branch, int finallyIndex = 0)
         {
+            Previous = previous;
             this.branch = branch ?? throw new ArgumentNullException(nameof(branch));
             this.finallyIndex = finallyIndex;
         }
 
         public FinallyPoint CreateNext() =>
-            new(branch, finallyIndex + 1);
+            new(Previous, branch, finallyIndex + 1);
     }
 }

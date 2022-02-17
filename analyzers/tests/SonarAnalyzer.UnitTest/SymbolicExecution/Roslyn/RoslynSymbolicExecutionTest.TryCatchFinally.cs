@@ -284,5 +284,38 @@ Tag(""UnreachableAfterFinally"");";
                 "InTry",
                 "InFinally");
         }
+
+        [TestMethod]
+        public void Finally_NestedFinally()
+        {
+            const string code = @"
+Tag(""BeforeOuterTry"");
+try
+{
+    Tag(""InOuterTry"");
+}
+finally
+{
+    Tag(""InOuterFinally"");
+    try
+    {
+        Tag(""InInnerTry"");
+    }
+    finally
+    {
+        Tag(""InInnerFinally"");
+    }
+    Tag(""AfterInnerFinally"");
+}
+Tag(""AfterOuterFinally"");";
+            SETestContext.CreateCS(code).Validator.ValidateTagOrder(
+                "BeforeOuterTry",
+                "InOuterTry",
+                "InOuterFinally",
+                "InInnerTry",
+                "InInnerFinally",
+                "AfterInnerFinally",
+                "AfterOuterFinally");
+        }
     }
 }

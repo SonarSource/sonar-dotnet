@@ -33,7 +33,7 @@ namespace SonarAnalyzer.UnitTest.SymbolicExecution.Roslyn
     {
         [TestMethod]
         public void Constructor_Null_Throws() =>
-            ((Func<FinallyPoint>)(() => new FinallyPoint(null))).Should().Throw<ArgumentNullException>().And.ParamName.Should().Be("branch");
+            ((Func<FinallyPoint>)(() => new FinallyPoint(null, null))).Should().Throw<ArgumentNullException>().And.ParamName.Should().Be("branch");
 
         [TestMethod]
         public void CreateNext_ReturnsAllFinally_AndThenDestination()
@@ -55,7 +55,7 @@ finally
     true.ToString();
 }";
             var cfg = TestHelper.CompileCfgBodyCS(code);
-            var sut = new FinallyPoint(cfg.Blocks[1].FallThroughSuccessor);
+            var sut = new FinallyPoint(null, cfg.Blocks[1].FallThroughSuccessor);
             sut.BlockIndex.Should().Be(2);   // Inner finally
 
             sut = sut.CreateNext();
