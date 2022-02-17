@@ -35,18 +35,18 @@ namespace StyleCop.Analyzers.Lightup
         private static readonly PropertyInfo IsImplicitProperty;
         private static readonly PropertyInfo SemanticModelProperty;
 
-        private readonly Lazy<IOperation> parent;
-        private readonly Lazy<IEnumerable<IOperation>> children;
-        private readonly Lazy<string> language;
-        private readonly Lazy<bool> isImplicit;
-        private readonly Lazy<SemanticModel> semanticModel;
+        private IOperation parent;
+        private IEnumerable<IOperation> children;
+        private string language;
+        private bool? isImplicit;
+        private SemanticModel semanticModel;
 
         public IOperation Instance { get; }
-        public IOperation Parent => parent.Value;
-        public IEnumerable<IOperation> Children => children.Value;
-        public string Language => language.Value;
-        public bool IsImplicit => isImplicit.Value;
-        public SemanticModel SemanticModel => semanticModel.Value;
+        public IOperation Parent => parent ??= (IOperation)ParentProperty.GetValue(Instance);
+        public IEnumerable<IOperation> Children => children ??= (IEnumerable<IOperation>)ChildrenProperty.GetValue(Instance);
+        public string Language => language ??= (string)LanguageProperty.GetValue(Instance);
+        public bool IsImplicit => isImplicit ??= (bool)IsImplicitProperty.GetValue(Instance);
+        public SemanticModel SemanticModel => semanticModel ??= (SemanticModel)SemanticModelProperty.GetValue(Instance);
 
         static IOperationWrapperSonar()
         {
@@ -58,15 +58,8 @@ namespace StyleCop.Analyzers.Lightup
             SemanticModelProperty = type.GetProperty(nameof(SemanticModel));
         }
 
-        public IOperationWrapperSonar(IOperation instance)
-        {
+        public IOperationWrapperSonar(IOperation instance) =>
             Instance = instance ?? throw new ArgumentNullException(nameof(instance));
-            parent = ParentProperty.ReadValue<IOperation>(instance);
-            children = ChildrenProperty.ReadValue<IEnumerable<IOperation>>(instance);
-            language = LanguageProperty.ReadValue<string>(instance);
-            isImplicit = IsImplicitProperty.ReadValue<bool>(instance);
-            semanticModel = SemanticModelProperty.ReadValue<SemanticModel>(instance);
-        }
 
         public override int GetHashCode() =>
             Instance.GetHashCode();
