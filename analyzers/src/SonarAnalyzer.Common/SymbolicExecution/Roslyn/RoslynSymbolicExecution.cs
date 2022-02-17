@@ -95,15 +95,12 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
             }
             else
             {
-                foreach (var successor in node.Block.Successors.SelectMany(x => x.FinallyRegions).Select(x => cfg.Blocks[x.FirstBlockOrdinal]))
-                {
-                    yield return new ExplodedNode(successor, node.State);
-                }
-
                 // ToDo: This is a temporary simplification until we support condition-based and condition-building decisions https://github.com/SonarSource/sonar-dotnet/issues/5308
                 foreach (var successor in node.Block.Successors.Where(x => x.Destination is not null))
                 {
-                    yield return new ExplodedNode(successor.Destination, node.State);
+                    yield return successor.FinallyRegions.Any() // When exiting finally region(s), redirect to 1st finally instead of the normal destination
+                        ? new ExplodedNode(cfg.Blocks[successor.FinallyRegions.First().FirstBlockOrdinal], node.State)
+                        : new ExplodedNode(successor.Destination, node.State);
                 }
             }
         }
