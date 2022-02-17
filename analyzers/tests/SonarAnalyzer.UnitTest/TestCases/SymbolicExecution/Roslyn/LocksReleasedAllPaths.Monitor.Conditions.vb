@@ -200,6 +200,15 @@ Namespace Monitor_Conditions
             End Set
         End Property
 
+        Public Sub Lambda()
+            Dim l = Function(value)
+                Monitor.Enter(Obj) ' FN, lambdas are not supported yet
+                If value = 42 Then Monitor.Exit(Obj)
+                Return value
+            End Function
+
+        End Sub
+
     End Class
 
 End Namespace

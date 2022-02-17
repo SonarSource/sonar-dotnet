@@ -326,5 +326,30 @@ namespace Monitor_Conditions
                 }
             }
         }
+
+        public void Lambda(bool condition)
+        {
+            Action action = () =>
+            {
+                Monitor.Enter(obj); // // FN, lambdas are not yet supported
+                if (condition)
+                    Monitor.Exit(obj);
+            };
+
+            void LocalFunction()
+            {
+                Monitor.Enter(other); // FN, local functions are not yet supported
+                if (condition)
+                    Monitor.Exit(other);
+            }
+
+            static void StaticLocalFunction()
+            {
+                var l = new object();
+                Monitor.Enter(l); // FN, local functions are not yet supported
+                if (1 == 2)
+                    Monitor.Exit(l);
+            }
+        }
     }
 }

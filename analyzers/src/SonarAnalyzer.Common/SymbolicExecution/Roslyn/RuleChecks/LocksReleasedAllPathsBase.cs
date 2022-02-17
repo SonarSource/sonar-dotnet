@@ -46,6 +46,8 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn.RuleChecks
             "TryEnterWriteLock"
         };
 
+        protected abstract void Visit(SyntaxNode node, LockAcquireReleaseCollector collector);
+
         public override ProgramState PostProcess(SymbolicContext context)
         {
             if (context.Operation.Instance.AsObjectCreation() is { } objectCreation)
@@ -113,8 +115,12 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn.RuleChecks
             }
         }
 
-        protected static bool ShouldExecuteFor(SyntaxToken identifier) =>
-            identifier.Text.Contains("Exit") || identifier.Text.Contains("ReleaseMutex") || identifier.Text.Contains("ReleaseReaderLock");
+        public override bool ShouldExecute()
+        {
+            var collector = new LockAcquireReleaseCollector();
+            Visit(NodeContext.Node, collector);
+            return collector.LockAcquiredAndReleased;
+        }
 
         private ProgramState ProcessMonitorEnter(SymbolicContext context, IInvocationOperationWrapper invocation) =>
             AddLock(context, FirstArgumentSymbol(invocation));
@@ -156,5 +162,52 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn.RuleChecks
 
         private static ISymbol FirstArgumentSymbol(IInvocationOperationWrapper invocation) =>
             IArgumentOperationWrapper.FromOperation(invocation.Arguments.First()).Value.TrackedSymbol();
+
+        protected sealed class LockAcquireReleaseCollector
+        {
+            private static readonly HashSet<string> LockTypes = new() { "Mutex" }; // For some APIs ctor can directly acquire the lock (e.g. Mutex).
+
+            private static readonly HashSet<string> LockMethods = new(ReaderWriterLockSlimLockMethods)
+            {
+                "AcquireReaderLock",
+                "AcquireWriterLock",
+                "Enter",
+                "TryEnter",
+                "WaitOne"
+            };
+
+            private static readonly HashSet<string> ReleaseMethods = new()
+            {
+                "Exit",
+                "ExitReadLock",
+                "ExitUpgradeableReadLock",
+                "ExitWriteLock",
+                "ReleaseLock",
+                "ReleaseMutex",
+                "ReleaseReaderLock",
+                "ReleaseWriterLock"
+            };
+
+            private bool lockAcquired;
+            private bool lockReleased;
+
+            public bool LockAcquiredAndReleased =>
+                lockAcquired && lockReleased;
+
+            public void RegisterIdentifier(string name)
+            {
+                lockAcquired |= IsLockType(name) || IsLockMethod(name);
+                lockReleased |= IsReleaseMethod(name);
+            }
+
+            private static bool IsLockType(string name) =>
+                LockTypes.Contains(name);
+
+            private static bool IsLockMethod(string name) =>
+                LockMethods.Contains(name);
+
+            private static bool IsReleaseMethod(string name) =>
+                ReleaseMethods.Contains(name);
+        }
     }
 }

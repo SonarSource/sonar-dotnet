@@ -83,6 +83,5 @@ namespace SonarAnalyzer.UnitTest.Rules
             .AddReferences(MetadataReferenceFacade.SystemThreading)
             .WithBasePath(@"SymbolicExecution\Roslyn")
             .WithConcurrentAnalysis(false);
-
     }
 }
