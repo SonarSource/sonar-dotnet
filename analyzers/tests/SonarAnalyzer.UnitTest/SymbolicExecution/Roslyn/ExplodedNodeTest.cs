@@ -167,7 +167,7 @@ a: SV_1
         public void CreateNext_PreservesFinallyBlock()
         {
             var cfg = TestHelper.CompileCfgBodyCS("var value = 42;");
-            var finallyPoint = new FinallyPoint(cfg, cfg.Blocks[0].FallThroughSuccessor);
+            var finallyPoint = new FinallyPoint(cfg.Blocks[0].FallThroughSuccessor);
             var sut = new ExplodedNode(cfg.Blocks[1], ProgramState.Empty, finallyPoint);
             sut.FinallyPoint.Should().NotBeNull();
             sut = sut.CreateNext(ProgramState.Empty);

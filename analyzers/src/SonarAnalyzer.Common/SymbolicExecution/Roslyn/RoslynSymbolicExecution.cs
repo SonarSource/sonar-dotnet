@@ -98,7 +98,7 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
                     if (successor.Destination is not null)
                     {
                         yield return successor.FinallyRegions.Any() // When exiting finally region(s), redirect to 1st finally instead of the normal destination
-                            ? FromFinally(new FinallyPoint(cfg, successor))
+                            ? FromFinally(new FinallyPoint(successor))
                             : new ExplodedNode(successor.Destination, node.State, node.FinallyPoint);
                     }
                     else if (successor.Source.EnclosingRegion.Kind == ControlFlowRegionKind.Finally)    // Redirect from finally back to the original place (or outer finally on the same branch)
@@ -109,7 +109,7 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
             }
 
             ExplodedNode FromFinally(FinallyPoint finallyPoint) =>
-                new ExplodedNode(finallyPoint.Block, node.State, finallyPoint.IsFinallyBlock ? finallyPoint : null);
+                new ExplodedNode(cfg.Blocks[finallyPoint.BlockIndex], node.State, finallyPoint.IsFinallyBlock ? finallyPoint : null);
         }
 
         private IEnumerable<ExplodedNode> ProcessOperation(ExplodedNode node)

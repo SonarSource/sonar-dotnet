@@ -28,18 +28,16 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
         private readonly ControlFlowBranch branch;
         private readonly int finallyIndex;
 
-        public ControlFlowGraph Cfg { get; }
         public bool IsFinallyBlock => finallyIndex < branch.FinallyRegions.Length;
-        public BasicBlock Block => Cfg.Blocks[IsFinallyBlock ? branch.FinallyRegions[finallyIndex].FirstBlockOrdinal : branch.Destination.Ordinal];
+        public int BlockIndex => IsFinallyBlock ? branch.FinallyRegions[finallyIndex].FirstBlockOrdinal : branch.Destination.Ordinal;
 
-        public FinallyPoint(ControlFlowGraph cfg, ControlFlowBranch branch, int finallyIndex = 0)
+        public FinallyPoint(ControlFlowBranch branch, int finallyIndex = 0)
         {
-            Cfg = cfg ?? throw new ArgumentNullException(nameof(cfg));
             this.branch = branch ?? throw new ArgumentNullException(nameof(branch));
             this.finallyIndex = finallyIndex;
         }
 
         public FinallyPoint CreateNext() =>
-            new(Cfg, branch, finallyIndex + 1);
+            new(branch, finallyIndex + 1);
     }
 }

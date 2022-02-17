@@ -32,12 +32,8 @@ namespace SonarAnalyzer.UnitTest.SymbolicExecution.Roslyn
     public class FinallyPointTest
     {
         [TestMethod]
-        public void Constructor_Null_Throws()
-        {
-            var cfg = TestHelper.CompileCfgBodyCS();
-            ((Func<FinallyPoint>)(() => new FinallyPoint(null, null))).Should().Throw<ArgumentNullException>().And.ParamName.Should().Be("cfg");
-            ((Func<FinallyPoint>)(() => new FinallyPoint(cfg, null))).Should().Throw<ArgumentNullException>().And.ParamName.Should().Be("branch");
-        }
+        public void Constructor_Null_Throws() =>
+            ((Func<FinallyPoint>)(() => new FinallyPoint(null))).Should().Throw<ArgumentNullException>().And.ParamName.Should().Be("branch");
 
         [TestMethod]
         public void CreateNext_ReturnsAllFinally_AndThenDestination()
@@ -59,14 +55,14 @@ finally
     true.ToString();
 }";
             var cfg = TestHelper.CompileCfgBodyCS(code);
-            var sut = new FinallyPoint(cfg, cfg.Blocks[1].FallThroughSuccessor);
-            sut.Block.Ordinal.Should().Be(2);   // Inner finally
+            var sut = new FinallyPoint(cfg.Blocks[1].FallThroughSuccessor);
+            sut.BlockIndex.Should().Be(2);   // Inner finally
 
             sut = sut.CreateNext();
-            sut.Block.Ordinal.Should().Be(3);   // Outer finally
+            sut.BlockIndex.Should().Be(3);   // Outer finally
 
             sut = sut.CreateNext();
-            sut.Block.Ordinal.Should().Be(4);   // Exit block (destination of the original successor)
+            sut.BlockIndex.Should().Be(4);   // Exit block (destination of the original successor)
         }
     }
 }
