@@ -241,5 +241,48 @@ Tag(""AfterFinally"");";
                 "InFinally",
                 "AfterFinally");
         }
+
+        [TestMethod]
+        public void Finally_ThrowInTry()
+        {
+            const string code = @"
+Tag(""BeforeTry"");
+try
+{
+    Tag(""InTry"");
+    throw new System.Exception();
+    Tag(""UnreachableInTry"");
+}
+finally
+{
+    Tag(""InFinally"");
+}
+Tag(""UnreachableAfterFinally"");";
+            SETestContext.CreateCS(code).Validator.ValidateTagOrder(
+                "BeforeTry",
+                "InTry");   // ToDo: MMF-2393 There should be also InFinally
+        }
+
+        [TestMethod]
+        public void Finally_ThrowInFinally()
+        {
+            const string code = @"
+Tag(""BeforeTry"");
+try
+{
+    Tag(""InTry"");
+}
+finally
+{
+    Tag(""InFinally"");
+    throw new System.Exception();
+    Tag(""UnreachableInFinally"");
+}
+Tag(""UnreachableAfterFinally"");";
+            SETestContext.CreateCS(code).Validator.ValidateTagOrder(
+                "BeforeTry",
+                "InTry",
+                "InFinally");
+        }
     }
 }

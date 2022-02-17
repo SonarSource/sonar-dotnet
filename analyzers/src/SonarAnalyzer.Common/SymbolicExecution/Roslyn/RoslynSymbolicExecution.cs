@@ -86,7 +86,7 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
             {
                 InvokeChecks(new SymbolicContext(symbolicValueCounter, null, node.State), x => x.ExitReached);
             }
-            else if (node.Block.ContainsThrow())    // FIXME: This is going to be fun
+            else if (node.Block.ContainsThrow())
             {
                 yield return new ExplodedNode(cfg.ExitBlock, node.State, null);
             }
