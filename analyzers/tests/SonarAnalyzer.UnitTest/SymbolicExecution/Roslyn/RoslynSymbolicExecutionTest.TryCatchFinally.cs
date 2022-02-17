@@ -38,8 +38,7 @@ finally
 {
     Tag(""InFinally"");
 }
-Tag(""AfterFinally"");
-";
+Tag(""AfterFinally"");";
             SETestContext.CreateCS(code).Validator.ValidateTagOrder(
                 "BeforeTry",
                 "InTry",
@@ -48,84 +47,86 @@ Tag(""AfterFinally"");
         }
 
         [TestMethod]
-        public void Finally_Nested()
+        public void Finally_Nested_ExitingTwoFinallyOnSameBranch()
         {
             const string code = @"
-Tag(""BeforeTry"");
+Tag(""BeforeOuterTry"");
 try
 {
     Tag(""InOuterTry"");
     try
     {
-        Tag(""InNestedTry"");
+        Tag(""InInnerTry"");
     }
     finally
     {
-        Tag(""InNestedFinally"");
+        true.ToString();    // Put some operations in the way
+        Tag(""InInnerFinally"");
     }
 }
 finally
 {
-    Tag(""InFinally"");
+    true.ToString();    // Put some operations in the way
+    true.ToString();
+    Tag(""InOuterFinally"");
 }
-Tag(""AfterFinally"");
-";
+Tag(""AfterOuterFinally"");";
             SETestContext.CreateCS(code).Validator.ValidateTagOrder(
-                "BeforeTry",
+                "BeforeOuterTry",
                 "InOuterTry",
-                "InNestedTry",
-                "InNestedFinally",
-                "InFinally",
-                "AfterFinally");
+                "InInnerTry",
+                "AfterOuterFinally",    // FIXME: Incorrect order, should be third
+                "InInnerFinally",       // FIXME: Incorrect order, should be first
+                "InOuterFinally");      // FIXME: Incorrect order, should be second
         }
 
         [TestMethod]
         public void Finally_Nested_InstructionAfterFinally()
         {
             const string code = @"
-Tag(""BeforeTry"");
+Tag(""BeforeOuterTry"");
 try
 {
-    Tag(""InFirstTry"");
+    Tag(""InOuterTry"");
     try
     {
-        Tag(""InNestedTry"");
+        Tag(""InInnerTry"");
     }
     finally
     {
-        true.ToString();
-        Tag(""InNestedFinally"");
+        true.ToString();    // Put some operations in the way
+        Tag(""InInnerFinally"");
     }
-    Tag(""AfterNestedFinally"");
+    Tag(""AfterInnerFinally"");
 }
 finally
 {
-    Tag(""InFinally"");
+    true.ToString();    // Put some operations in the way
+    Tag(""InOuterFinally"");
 }
-Tag(""AfterFinally"");
-";
+Tag(""AfterOuterFinally"");";
             SETestContext.CreateCS(code).Validator.ValidateTagOrder(
-                "BeforeTry",
-                "InFirstTry",
-                "InNestedTry",
-                "InNestedFinally",
-                "AfterNestedFinally",
-                "InFinally",
-                "AfterFinally");
+                "BeforeOuterTry",
+                "InOuterTry",
+                "InInnerTry",
+                "AfterInnerFinally",    // FIXME: Wrong order, should be one below
+                "InInnerFinally",       // FIXME: Wrong order, should be one above
+                "AfterOuterFinally",    // FIXME: Wrong order, should be one below
+                "InOuterFinally");      // FIXME: Wrong order, should be one above
         }
 
         [TestMethod]
         public void Finally_BranchInNested()
         {
             const string code = @"
-Tag(""BeforeTry"");
+Tag(""BeforeOuterTry"");
 try
 {
-    Tag(""InFirstTry"");
+    Tag(""InOuterTry"");
     try
     {
-        Tag(""InNestedTry"");
-        if (1 == 2)
+        Tag(""InInnerTry"");
+        if (boolParameter)
         {
             Tag(""1"");
         }
@@ -136,26 +137,53 @@ try
     }
     finally
     {
-        Tag(""InNestedFinally"");
+        Tag(""InInnerFinally"");
     }
-    Tag(""AfterNestedFinally"");
 }
 finally
 {
-    Tag(""InFinally"");
+    Tag(""InOuterFinally"");
 }
-Tag(""AfterFinally"");
-";
+Tag(""AfterOuterFinally"");";
             SETestContext.CreateCS(code).Validator.ValidateTagOrder(
-                "BeforeTry",
-                "InFirstTry",
-                "InNestedTry",
-                "InNestedFinally",
+                "BeforeOuterTry",
+                "InOuterTry",
+                "InInnerTry",
                 "1",
                 "2",
-                "InFinally",
-                "AfterNestedFinally",
-                "AfterFinally");
+                "InInnerFinally",
+                "InOuterFinally",
+                "AfterOuterFinally");
+        }
+
+        [TestMethod]
+        public void Finally_BranchAfterFinally()
+        {
+            const string code = @"
+Tag(""BeforeTry"");
+try
+{
+    Tag(""InTry"");
+}
+finally
+{
+    true.ToString();    // Put some operations in the way
+    Tag(""InFinally"");
+}
+if (boolParameter)  // No operation between the finally and this. This will create a single follow up block with BranchValue
+{
+    Tag(""1"");
+}
+else
+{
+    Tag(""2"");
+}";
+            SETestContext.CreateCS(code).Validator.ValidateTagOrder(
+                "BeforeTry",
+                "InTry",
+                "1",
+                "2",
+                "InFinally");    // FIXME: Wrong order, should be before "1" and "2"
         }
     }
 }
