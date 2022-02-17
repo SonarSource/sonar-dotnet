@@ -68,7 +68,7 @@ Namespace ReaderWriterLockSlim_Type
         Public Sub Method10()
             Try
                 rwLockSlim.EnterUpgradeableReadLock()
-                rwLockSlim.EnterWriteLock() ' Noncompliant FP
+                rwLockSlim.EnterWriteLock() ' Compliant
                 If Condition Then rwLockSlim.ExitWriteLock()
             Catch ex As Exception
                 Throw

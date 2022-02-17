@@ -259,7 +259,7 @@ namespace Mutex_Type
                 m = Mutex.OpenExisting(mutexName);
                 if (shouldAcquire)
                 {
-                    m.WaitOne();
+                    m.WaitOne();    // Noncompliant FP because we don't track the bool condition
                     acquired = true;
                 }
             }

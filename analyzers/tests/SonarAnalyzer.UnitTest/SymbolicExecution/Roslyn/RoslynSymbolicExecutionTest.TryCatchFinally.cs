@@ -42,9 +42,8 @@ Tag(""AfterFinally"");";
             SETestContext.CreateCS(code).Validator.ValidateTagOrder(
                 "BeforeTry",
                 "InTry",
-                "InFinally"
-                //FIXME: Restore "AfterFinally"
-                );
+                "InFinally",
+                "AfterFinally");
         }
 
         [TestMethod]
@@ -76,10 +75,9 @@ Tag(""AfterOuterFinally"");";
                 "BeforeOuterTry",
                 "InOuterTry",
                 "InInnerTry",
-                "InInnerFinally"
-                // FIXME: "InOuterFinally"     // FIXME: Should return from finally
-                // FIXME: "AfterOuterFinally",    // FIXME: Should return from finally
-                );
+                "InInnerFinally",
+                "InOuterFinally",
+                "AfterOuterFinally");
         }
 
         [TestMethod]
@@ -111,11 +109,10 @@ Tag(""AfterOuterFinally"");";
                 "BeforeOuterTry",
                 "InOuterTry",
                 "InInnerTry",
-                "InInnerFinally"
-                // FIXME: "AfterInnerFinally",    // FIXME: Should return from finally
-                // FIXME: "InOuterFinally"
-                // FIXME: "AfterOuterFinally",
-                );
+                "InInnerFinally",
+                "AfterInnerFinally",
+                "InOuterFinally",
+                "AfterOuterFinally");
         }
 
         [TestMethod]
@@ -154,10 +151,9 @@ Tag(""AfterOuterFinally"");";
                 "InInnerTry",
                 "1",
                 "2",
-                "InInnerFinally"
-                // FIXME: "InOuterFinally",
-                // FIXME: "AfterOuterFinally"
-                );
+                "InInnerFinally",
+                "InOuterFinally",
+                "AfterOuterFinally");
         }
 
         [TestMethod]
@@ -185,9 +181,41 @@ else
             SETestContext.CreateCS(code).Validator.ValidateTagOrder(
                 "BeforeTry",
                 "InTry",
-                // FIXME: "1",
-                // FIXME: "2",
-                "InFinally");
+                "InFinally",
+                "1",
+                "2");
+        }
+        [TestMethod]
+        public void Finally_BranchInFinally()
+        {
+            const string code = @"
+Tag(""BeforeTry"");
+try
+{
+    Tag(""InTry"");
+}
+finally
+{
+    Tag(""InFinallyBeforeCondition"");
+    if (boolParameter)
+    {
+        Tag(""1"");
+    }
+    else
+    {
+        Tag(""2"");
+    }
+    Tag(""InFinallyAfterCondition"");
+}
+Tag(""AfterFinally"");";
+            SETestContext.CreateCS(code).Validator.ValidateTagOrder(
+                "BeforeTry",
+                "InTry",
+                "InFinallyBeforeCondition",
+                "1",
+                "2",
+                "InFinallyAfterCondition",
+                "AfterFinally");
         }
     }
 }

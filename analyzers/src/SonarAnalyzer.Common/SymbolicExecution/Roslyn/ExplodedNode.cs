@@ -35,22 +35,24 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
 
         public ProgramState State { get; private set; }
         public BasicBlock Block { get; }
+        public FinallyPoint FinallyPoint { get; }
         public IOperationWrapperSonar Operation => index < operations.Length ? operations[index] : null;
 
-        public ExplodedNode(BasicBlock block, ProgramState state)
-            : this(block, block.OperationsAndBranchValue.ToExecutionOrder().ToArray(), 0, state) { }
+        public ExplodedNode(BasicBlock block, ProgramState state, FinallyPoint finallyPoint)
+            : this(block, block.OperationsAndBranchValue.ToExecutionOrder().ToArray(), 0, state, finallyPoint) { }
 
-        private ExplodedNode(BasicBlock block, IOperationWrapperSonar[] operations, int index, ProgramState state)
+        private ExplodedNode(BasicBlock block, IOperationWrapperSonar[] operations, int index, ProgramState state, FinallyPoint finallyPoint)
         {
             Block = block;
             State = state ?? throw new ArgumentNullException(nameof(state));
+            FinallyPoint = finallyPoint;
             this.operations = operations;
             this.index = index;
             programPointHash = ProgramPoint.Hash(block, index);
         }
 
         public ExplodedNode CreateNext(ProgramState state) =>
-            new(Block, operations, index + 1, state);
+            new(Block, operations, index + 1, state, FinallyPoint);
 
         public int AddVisit()
         {

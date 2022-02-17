@@ -35,14 +35,14 @@ namespace SonarAnalyzer.UnitTest.SymbolicExecution.Roslyn
         public void Constructor_NullState_Throws()
         {
             var cfg = TestHelper.CompileCfgBodyCS();
-            ((Action)(() => new ExplodedNode(cfg.EntryBlock, null))).Should().Throw<ArgumentNullException>().And.ParamName.Should().Be("state");
+            ((Action)(() => new ExplodedNode(cfg.EntryBlock, null, null))).Should().Throw<ArgumentNullException>().And.ParamName.Should().Be("state");
         }
 
         [TestMethod]
         public void CreateNext_NullState_Throws()
         {
             var cfg = TestHelper.CompileCfgBodyCS();
-            var validNode = new ExplodedNode(cfg.EntryBlock, ProgramState.Empty);
+            var validNode = new ExplodedNode(cfg.EntryBlock, ProgramState.Empty, null);
             ((Action)(() => validNode.CreateNext(null))).Should().Throw<ArgumentNullException>().And.ParamName.Should().Be("state");
         }
 
@@ -50,7 +50,7 @@ namespace SonarAnalyzer.UnitTest.SymbolicExecution.Roslyn
         public void FromBasicBlock_Empty_HasNullOperations()
         {
             var cfg = TestHelper.CompileCfgBodyCS();
-            var sut = new ExplodedNode(cfg.EntryBlock, ProgramState.Empty);
+            var sut = new ExplodedNode(cfg.EntryBlock, ProgramState.Empty, null);
             sut.Operation.Should().BeNull();
         }
 
@@ -64,7 +64,7 @@ namespace SonarAnalyzer.UnitTest.SymbolicExecution.Roslyn
                  "Literal: 42",
                  "SimpleAssignment: value = 42 (Implicit)");
 
-            var current = new ExplodedNode(block, ProgramState.Empty);
+            var current = new ExplodedNode(block, ProgramState.Empty, null);
             TestHelper.Serialize(current.Operation).Should().Be("LocalReference: value = 42 (Implicit)");
 
             current = current.CreateNext(ProgramState.Empty);
@@ -87,7 +87,7 @@ namespace SonarAnalyzer.UnitTest.SymbolicExecution.Roslyn
                 "Literal: 42",
                 "SimpleAssignment: Value As Integer = 42 (Implicit)");
 
-            var sut = new ExplodedNode(block, ProgramState.Empty);
+            var sut = new ExplodedNode(block, ProgramState.Empty, null);
             TestHelper.Serialize(sut.Operation).Should().Be("LocalReference: Value (Implicit)");
 
             sut = sut.CreateNext(ProgramState.Empty);
@@ -104,10 +104,10 @@ namespace SonarAnalyzer.UnitTest.SymbolicExecution.Roslyn
         public void Equals_ReturnsTrueForEquivalent()
         {
             var block = TestHelper.CompileCfgBodyCS("var a = true;").Blocks[1];
-            var basic = new ExplodedNode(block, ProgramState.Empty);
-            var same = new ExplodedNode(block, ProgramState.Empty);
+            var basic = new ExplodedNode(block, ProgramState.Empty, null);
+            var same = new ExplodedNode(block, ProgramState.Empty, null);
             var differentLocation = basic.CreateNext(ProgramState.Empty);
-            var differentState = new ExplodedNode(block, ProgramState.Empty.SetOperationValue(block.Operations[0], new SymbolicValue(new SymbolicValueCounter())));
+            var differentState = new ExplodedNode(block, ProgramState.Empty.SetOperationValue(block.Operations[0], new SymbolicValue(new SymbolicValueCounter())), null);
 
             basic.Equals(same).Should().BeTrue();
             basic.Equals(differentLocation).Should().BeFalse();
@@ -121,10 +121,10 @@ namespace SonarAnalyzer.UnitTest.SymbolicExecution.Roslyn
         public void GetHashCode_ReturnsSameForEquivalent()
         {
             var block = TestHelper.CompileCfgBodyCS("var a = true;").Blocks[1];
-            var basic = new ExplodedNode(block, ProgramState.Empty);
-            var same = new ExplodedNode(block, ProgramState.Empty);
+            var basic = new ExplodedNode(block, ProgramState.Empty, null);
+            var same = new ExplodedNode(block, ProgramState.Empty, null);
             var differentLocation = basic.CreateNext(ProgramState.Empty);
-            var differentState = new ExplodedNode(block, ProgramState.Empty.SetOperationValue(block.Operations[0], new SymbolicValue(new SymbolicValueCounter())));
+            var differentState = new ExplodedNode(block, ProgramState.Empty.SetOperationValue(block.Operations[0], new SymbolicValue(new SymbolicValueCounter())), null);
 
             basic.GetHashCode().Should().Be(basic.GetHashCode(), "value should be deterministic");
             basic.GetHashCode().Should().Be(same.GetHashCode());
@@ -138,12 +138,12 @@ namespace SonarAnalyzer.UnitTest.SymbolicExecution.Roslyn
             var cfg = TestHelper.CompileCfgBodyCS("var a = true;");
             var state = ProgramState.Empty.SetSymbolValue(cfg.Blocks[1].Operations[0].Children.First().TrackedSymbol(), new(new()));
 
-            new ExplodedNode(cfg.Blocks[1], state).ToString().Should().BeIgnoringLineEndings(
+            new ExplodedNode(cfg.Blocks[1], state, null).ToString().Should().BeIgnoringLineEndings(
 @"Block #1, Operation #0, LocalReferenceOperation / VariableDeclaratorSyntax: a = true
 Symbols:
 a: SV_1
 ");
-            new ExplodedNode(cfg.ExitBlock, state).ToString().Should().BeIgnoringLineEndings(
+            new ExplodedNode(cfg.ExitBlock, state, null).ToString().Should().BeIgnoringLineEndings(
 @"Block #2, Branching
 Symbols:
 a: SV_1
@@ -154,13 +154,24 @@ a: SV_1
         public void AddVisit_ModifiesState()
         {
             var cfg = TestHelper.CompileCfgBodyCS("var a = true;");
-            var sut = new ExplodedNode(cfg.Blocks[1], ProgramState.Empty);
+            var sut = new ExplodedNode(cfg.Blocks[1], ProgramState.Empty, null);
             sut.State.Should().Be(ProgramState.Empty);
             sut.AddVisit().Should().Be(1);
             sut.AddVisit().Should().Be(2);
             sut.AddVisit().Should().Be(3);
             sut.State.Should().Be(ProgramState.Empty, "Visits doesn't change equality");
             ReferenceEquals(sut.State, ProgramState.Empty).Should().BeFalse();
+        }
+
+        [TestMethod]
+        public void CreateNext_PreservesFinallyBlock()
+        {
+            var cfg = TestHelper.CompileCfgBodyCS("var value = 42;");
+            var finallyPoint = new FinallyPoint(cfg, cfg.Blocks[0].FallThroughSuccessor);
+            var sut = new ExplodedNode(cfg.Blocks[1], ProgramState.Empty, finallyPoint);
+            sut.FinallyPoint.Should().NotBeNull();
+            sut = sut.CreateNext(ProgramState.Empty);
+            sut.FinallyPoint.Should().NotBeNull();
         }
     }
 }

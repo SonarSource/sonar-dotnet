@@ -107,7 +107,7 @@ namespace ReaderWriterLockSlim_Type
             try
             {
                 readerWriterLockSlim.EnterUpgradeableReadLock();
-                readerWriterLockSlim.EnterWriteLock(); // Noncompliant FP
+                readerWriterLockSlim.EnterWriteLock(); // Compliant
                 if (condition)
                 {
                     readerWriterLockSlim.ExitWriteLock();
