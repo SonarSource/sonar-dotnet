@@ -18,12 +18,12 @@ Namespace ReaderWriterLock_Type
         End Sub
 
         Public Sub Method3()
-            rwLock.AcquireWriterLock(42) ' FN
+            rwLock.AcquireWriterLock(42) ' Noncompliant
             If Condition Then rwLock.ReleaseWriterLock()
         End Sub
 
         Public Sub Method4()
-            rwLock.AcquireWriterLock(New TimeSpan(42)) ' FN
+            rwLock.AcquireWriterLock(New TimeSpan(42)) ' Noncompliant
             If Condition Then rwLock.ReleaseWriterLock()
         End Sub
 
@@ -88,7 +88,7 @@ Namespace ReaderWriterLock_Type
         End Sub
 
         Public Sub Method9()
-            rwLock.AcquireReaderLock(New TimeSpan(42)) ' Compliant because the cookie tracking is too complicated
+            rwLock.AcquireReaderLock(New TimeSpan(42)) ' Noncompliant
             Dim Cookie As New LockCookie()
             If Condition Then Cookie = rwLock.ReleaseLock()
             rwLock.RestoreLock(Cookie)

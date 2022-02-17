@@ -28,7 +28,7 @@ namespace ReaderWriterLock_Type
 
         public void Method3()
         {
-            readerWriterLock.AcquireWriterLock(42); // FN
+            readerWriterLock.AcquireWriterLock(42); // Noncompliant
             if (condition)
             {
                 readerWriterLock.ReleaseWriterLock();
@@ -37,7 +37,7 @@ namespace ReaderWriterLock_Type
 
         public void Method4()
         {
-            readerWriterLock.AcquireWriterLock(new TimeSpan(42)); // FN
+            readerWriterLock.AcquireWriterLock(new TimeSpan(42)); // Noncompliant
             if (condition)
             {
                 readerWriterLock.ReleaseWriterLock();
@@ -152,7 +152,7 @@ namespace ReaderWriterLock_Type
 
         public void Method9()
         {
-            readerWriterLock.AcquireReaderLock(new TimeSpan(42)); // Compliant because the cookie tracking is too complicated
+            readerWriterLock.AcquireReaderLock(new TimeSpan(42)); // Noncompliant
             LockCookie cookie = new LockCookie();
             if (condition)
             {
