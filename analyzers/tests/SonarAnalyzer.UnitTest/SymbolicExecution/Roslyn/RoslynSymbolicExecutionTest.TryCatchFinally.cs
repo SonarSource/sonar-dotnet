@@ -185,6 +185,7 @@ else
                 "1",
                 "2");
         }
+
         [TestMethod]
         public void Finally_BranchInFinally()
         {
@@ -215,6 +216,29 @@ Tag(""AfterFinally"");";
                 "1",
                 "2",
                 "InFinallyAfterCondition",
+                "AfterFinally");
+        }
+
+        [TestMethod]
+        public void Finally_WrappedInLocalLifetimeRegion()
+        {
+            const string code = @"
+Tag(""BeforeTry"");
+try
+{
+    Tag(""InTry"");
+}
+finally
+{
+    var local = true;   // This creates LocalLifeTime region
+    Tag(""InFinally"");
+    // Here is Block#4 outside the LocalLifeTime region
+}
+Tag(""AfterFinally"");";
+            SETestContext.CreateCS(code).Validator.ValidateTagOrder(
+                "BeforeTry",
+                "InTry",
+                "InFinally",
                 "AfterFinally");
         }
     }

@@ -101,7 +101,6 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
                             ? FromFinally(new FinallyPoint(cfg, successor))
                             : new ExplodedNode(successor.Destination, node.State, node.FinallyPoint);
                     }
-                    // FIXME: What if there's other region in the way?
                     else if (successor.Source.EnclosingRegion.Kind == ControlFlowRegionKind.Finally)    // Redirect from finally back to the original place (or outer finally on the same branch)
                     {
                         yield return FromFinally(node.FinallyPoint.CreateNext());
