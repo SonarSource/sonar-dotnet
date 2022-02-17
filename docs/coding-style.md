@@ -27,6 +27,8 @@ Static fields and properties should be placed before instance ones.
 
 Static methods are preferred to be after instance methods.
 
+Individual members must be separated by empty line, except sequence of constants, fields and abstract members. These should not be separated by empty lines.
+
 ## Naming conventions
 
 Single variable lambdas should use `x` as the variable name (based on lambda calculus λx). Multi variable lambdas should use descriptive names, where `x` can be used for the main iterated item like `(x, index) => ...`. Name `c` can be used for context of Roslyn callback.
@@ -45,23 +47,31 @@ Variable name `sut` (System Under Test) is recommended in unit tests that really
 * Dot before an invocation `.Method()` is placed at the beginning of a line.
 * The comma separating arguments is placed at the end of a line.
 * Method declaration parameters should be on the same line. If S103 is violated, parameters should be placed each on a separate line; the first parameter should be on the same line with the declaration; the other parameters should be aligned with the first parameter.
-```
-public void MethodWithManyParameters(int firstParameter,
-                                     string secondParameter,
-                                     Function<int, string, string> complexParameter);
-```
+    ```
+    public void MethodWithManyParameters(int firstParameter,
+                                         string secondParameter,
+                                         Function<int, string, string> complexParameter);
+    ```
+* Long ternary operator statements should have `?` and `:` on separate lines, aligned with a left-most single indendation.
+    ```
+    object.Property is SomeType something
+    && something.AnotherProperty is OtherType other
+    && other.Value == 42
+        ? object.Parent.Value
+        : object;
+    ```
 * Method invocation arguments should be placed on the same line only when they are few and simple. Otherwise, they should be placed on separate lines. The first argument should be on a separate line, aligned with a left-most single indendation.
-```
-object.MethodName(
-    firstArgument,
-    x => x.Bar(),
-    thirdArgument.Property);
-```
+    ```
+    object.MethodName(
+        firstArgument,
+        x => x.Bar(),
+        thirdArgument.Property);
+    ```
   * Exception from this rule: chained LINQ queries where the alignment of parameter expressions should be right-most.
-```
-someEnumerable.Select(x => x.Foo).Where(x => x.Condition1
-                                             && x.Condition2);
-```
+    ```
+    someEnumerable.Where(x => x.Condition1
+                              && x.Condition2);
+    ```
 * Expression body of arrow property should be on the same line, as the property declaration. It should be on next line only when S103 is violated.
 * Expression body of method should be on the same line only for trivial cases: literal or simple identifier. Member access, indexer, invocation and other complex structures should be on the next line.
 
@@ -72,6 +82,7 @@ someEnumerable.Select(x => x.Foo).Where(x => x.Condition1
   * when it helps to understand overall structure of the method,
   * especially when each branch ends with a `return` statement.
 * Explicit `else` is not used after input validation.
+* Each compiler directive outside method body (namely `#if`/`#endif`) should be preceded and followed by an empty line.
 
 ## Comments
 
