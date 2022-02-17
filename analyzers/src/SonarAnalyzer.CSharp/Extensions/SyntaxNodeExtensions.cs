@@ -30,6 +30,11 @@ namespace SonarAnalyzer.Extensions
 {
     internal static partial class SyntaxNodeExtensions
     {
+        private static readonly ControlFlowGraphCache CfgCache = new();
+
+        public static ControlFlowGraph CreateCfg(this SyntaxNode body, SemanticModel model) =>
+            CfgCache.FindOrCreate(body.Parent, model);
+
         public static bool ContainsConditionalConstructs(this SyntaxNode node) =>
             node != null &&
             node.DescendantNodes()
@@ -113,36 +118,6 @@ namespace SonarAnalyzer.Extensions
             return current;
         }
 
-        public static ControlFlowGraph CreateCfg(this SyntaxNode body, SemanticModel semanticModel)
-        {
-            var operation = semanticModel.GetOperation(body.Parent);
-            var rootSyntax = operation.RootOperation().Syntax;
-            var cfg = ControlFlowGraph.Create(rootSyntax, semanticModel);
-            if (body.Parent.IsAnyKind(SyntaxKindEx.LocalFunctionStatement, SyntaxKind.SimpleLambdaExpression, SyntaxKind.AnonymousMethodExpression, SyntaxKind.ParenthesizedLambdaExpression))
-            {
-                // We need to go up and track all possible enclosing lambdas, local functions and other FlowAnonymousFunctionOperations
-                var cfgFlowOperations = cfg.FlowAnonymousFunctionOperations().ToArray();  // Avoid recomputing for ancestors that do not produce FlowAnonymousFunction
-                foreach (var node in body.Parent.AncestorsAndSelf().TakeWhile(x => x != rootSyntax).Reverse())
-                {
-                    if (node.IsKind(SyntaxKindEx.LocalFunctionStatement))
-                    {
-                        cfg = cfg.GetLocalFunctionControlFlowGraph(node);
-                        cfgFlowOperations = cfg.FlowAnonymousFunctionOperations().ToArray();
-                    }
-                    else if (cfgFlowOperations.SingleOrDefault(x => x.WrappedOperation.Syntax == node) is { WrappedOperation: not null } flowOperation)
-                    {
-                        cfg = cfg.GetAnonymousFunctionControlFlowGraph(flowOperation);
-                        cfgFlowOperations = cfg.FlowAnonymousFunctionOperations().ToArray();
-                    }
-                    else if (node == body)
-                    {
-                        return null;
-                    }
-                }
-            }
-            return cfg;
-        }
-
         private static string GetUnknownType(SyntaxKind kind)
         {
 #if DEBUG
@@ -150,6 +125,15 @@ namespace SonarAnalyzer.Extensions
 #else
             return "type";
 #endif
+        }
+
+        private sealed class ControlFlowGraphCache : ControlFlowGraphCacheBase
+        {
+            protected override bool IsLocalFunction(SyntaxNode node) =>
+                node.IsKind(SyntaxKindEx.LocalFunctionStatement);
+
+            protected override bool HasNestedCfg(SyntaxNode node) =>
+                node.IsAnyKind(SyntaxKindEx.LocalFunctionStatement, SyntaxKind.SimpleLambdaExpression, SyntaxKind.AnonymousMethodExpression, SyntaxKind.ParenthesizedLambdaExpression);
         }
     }
 }
