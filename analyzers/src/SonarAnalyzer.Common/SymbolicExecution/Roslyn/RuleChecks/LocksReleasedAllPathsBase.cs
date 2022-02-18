@@ -56,19 +56,11 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn.RuleChecks
                 if (objectCreation.Type.Is(KnownType.System_Threading_Mutex)
                     && context.Operation.Parent.AsAssignment() is { } assignment
                     && objectCreation.Arguments.Length > 0
-                    && objectCreation.Arguments.First().ToArgument().Value.ConstantValue.Value is true)
+                    && objectCreation.Arguments.First().ToArgument().Value is { } firstArgument
+                    && context.State[firstArgument] is { } firstArgumentValue
+                    && firstArgumentValue.HasConstraint(BoolConstraint.True)
+                    && assignment.Target.TrackedSymbol() is { } symbol)
                 {
-                    // Temporary work-around to support the Mutex constructor overcoming the engine limitations.
-                    // As this is a POC, only assignments are supported. Other syntax constructs like switch expressions or multiple variable declaration are not.
-                    //
-                    // The engine should be able to automatically:
-                    //  - Add True constrains for Literals (https://github.com/SonarSource/sonar-dotnet/issues/5380).
-                    //  - Copy the constrains to the local field and other operations as well.
-                    //  - Allow to track back the initial operation which added the constrain for issue reporting and all the intermediate steps for secondary locations.
-                    //
-                    // Note that the `Lock` constraint is added to the constructor. This, in the mature version of the engine, should be on the `True` literal parameter
-                    // which is specifying the lock behavior. Then, the rule should check for `True` constraint before adding the `Lock` one.
-                    var symbol = assignment.Target.TrackedSymbol();
                     lastSymbolLock[symbol] = new IOperationWrapperSonar(objectCreation.WrappedOperation);
                     return AddLock(context, objectCreation.WrappedOperation);
                 }
