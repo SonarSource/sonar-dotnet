@@ -25,7 +25,6 @@ using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
-using SonarAnalyzer.Extensions;
 using SonarAnalyzer.Helpers;
 using StyleCop.Analyzers.Lightup;
 
@@ -43,7 +42,7 @@ namespace SonarAnalyzer.Metrics.CSharp
             return walker.ExecutableLineNumbers.ToImmutableArray();
         }
 
-        private class ExecutableLinesWalker : CSharpSyntaxWalker
+        private sealed class ExecutableLinesWalker : SafeCSharpSyntaxWalker
         {
             private readonly SemanticModel semanticModel;
 
@@ -52,8 +51,7 @@ namespace SonarAnalyzer.Metrics.CSharp
                 this.semanticModel = semanticModel;
             }
 
-            public HashSet<int> ExecutableLineNumbers { get; }
-                 = new HashSet<int>();
+            public HashSet<int> ExecutableLineNumbers { get; } = new();
 
             public override void DefaultVisit(SyntaxNode node)
             {

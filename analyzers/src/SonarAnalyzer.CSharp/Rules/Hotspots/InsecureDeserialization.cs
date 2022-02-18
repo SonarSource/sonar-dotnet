@@ -149,10 +149,10 @@ namespace SonarAnalyzer.Rules.CSharp
         /// This walker is responsible to visit all constructor declarations and check if parameters are used in a
         /// conditional structure or not.
         /// </summary>
-        private sealed class ConstructorDeclarationWalker : CSharpSyntaxWalker
+        private sealed class ConstructorDeclarationWalker : SafeCSharpSyntaxWalker
         {
             private readonly SemanticModel semanticModel;
-            private readonly List<ConstructorInfo> constructorsInfo = new List<ConstructorInfo>();
+            private readonly List<ConstructorInfo> constructorsInfo = new();
 
             private bool visitedFirstLevel;
 
@@ -237,7 +237,7 @@ namespace SonarAnalyzer.Rules.CSharp
         /// This walker is responsible to visit all conditional structures and check if a list of parameters
         /// are used or not.
         /// </summary>
-        private sealed class ConditionalsWalker : CSharpSyntaxWalker
+        private sealed class ConditionalsWalker : SafeCSharpSyntaxWalker
         {
             private readonly SemanticModel semanticModel;
             private readonly ISet<string> parameterNames;

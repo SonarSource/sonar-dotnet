@@ -20,17 +20,22 @@
 
 using System;
 using Microsoft.CodeAnalysis;
-using Microsoft.CodeAnalysis.VisualBasic;
+using Microsoft.CodeAnalysis.CSharp;
+using SonarAnalyzer.Common;
 
 namespace SonarAnalyzer.Helpers
 {
-    public static class VisualBasicSyntaxWalkerHelper
+    public class SafeCSharpSyntaxWalker : CSharpSyntaxWalker, ISafeSyntaxWalker
     {
-        public static bool SafeVisit(this VisualBasicSyntaxWalker syntaxWalker, SyntaxNode syntaxNode)
+        protected SafeCSharpSyntaxWalker() { }
+
+        protected SafeCSharpSyntaxWalker(SyntaxWalkerDepth depth) : base(depth) { }
+
+        public bool SafeVisit(SyntaxNode syntaxNode)
         {
             try
             {
-                syntaxWalker.Visit(syntaxNode);
+                Visit(syntaxNode);
                 return true;
             }
             catch (InsufficientExecutionStackException)

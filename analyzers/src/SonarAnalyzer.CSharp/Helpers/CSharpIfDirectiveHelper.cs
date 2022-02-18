@@ -24,7 +24,6 @@ using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
-using SonarAnalyzer.Extensions;
 
 namespace SonarAnalyzer.Helpers
 {
@@ -114,7 +113,7 @@ namespace SonarAnalyzer.Helpers
         /// Collects all of the #if, #else, #elsif and #endif directives occuring in the
         /// syntax tree up to the specified node
         /// </summary>
-        private class BranchingDirectiveCollector : CSharpSyntaxWalker
+        private sealed class BranchingDirectiveCollector : SafeCSharpSyntaxWalker
         {
             private readonly SyntaxNode terminatingNode;
             private bool found;

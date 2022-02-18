@@ -25,7 +25,6 @@ using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
-using SonarAnalyzer.Extensions;
 using SonarAnalyzer.Helpers;
 using StyleCop.Analyzers.Lightup;
 
@@ -77,18 +76,18 @@ namespace SonarAnalyzer.Rules.CSharp
                     .FirstOrDefault();
         }
 
-        private class PropertyWalker : CSharpSyntaxWalker
+        private sealed class PropertyWalker : SafeCSharpSyntaxWalker
         {
             private readonly SemanticModel semanticModel;
-            private readonly List<Location> locations = new List<Location>();
+            private readonly List<Location> locations = new();
 
-            private static readonly HashSet<SyntaxKind> returnStatements = new HashSet<SyntaxKind>
+            private static readonly HashSet<SyntaxKind> ReturnStatements = new()
             {
                 SyntaxKind.ReturnStatement,
                 SyntaxKind.ArrowExpressionClause,
             };
 
-            public IEnumerable<Location> Locations => this.locations;
+            public IEnumerable<Location> Locations => locations;
 
             public PropertyWalker(SemanticModel semanticModel)
             {
@@ -127,7 +126,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
             private static bool IsReturn(SyntaxNode node)
             {
-                return node != null && node.IsAnyKind(returnStatements);
+                return node != null && node.IsAnyKind(ReturnStatements);
             }
         }
     }

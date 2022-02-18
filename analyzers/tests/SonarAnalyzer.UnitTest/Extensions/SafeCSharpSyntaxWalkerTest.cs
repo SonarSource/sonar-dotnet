@@ -18,21 +18,19 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using FluentAssertions;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using SonarAnalyzer.Extensions;
+using SonarAnalyzer.Helpers;
 
 namespace SonarAnalyzer.UnitTest.Extensions
 {
     [TestClass]
-    public class CSharpSyntaxWalkerExtensionsTest
+    public class SafeCSharpSyntaxWalkerTest
     {
         [TestMethod]
-        public void GivenSyntaxNodeWithReasonableDepth_SafeVisit_ReturnsTrue()
-        {
-            var result = new Walker().SafeVisit(SyntaxFactory.ParseSyntaxTree("void Method() { }").GetRoot());
-            Assert.IsTrue(result);
-        }
+        public void GivenSyntaxNodeWithReasonableDepth_SafeVisit_ReturnsTrue() =>
+            new Walker().SafeVisit(SyntaxFactory.ParseSyntaxTree("void Method() { }").GetRoot()).Should().BeTrue();
 
         [TestMethod]
         public void GivenSyntaxNodeWithHighDepth_SafeVisit_ReturnsFalse()
@@ -53,9 +51,9 @@ namespace SonarAnalyzer.UnitTest.Extensions
 
             method = method.AddBodyStatements(node);
 
-            Assert.IsFalse(new Walker().SafeVisit(method));
+            new Walker().SafeVisit(method).Should().BeFalse();
         }
 
-        private class Walker : CSharpSyntaxWalker { }
+        private class Walker : SafeCSharpSyntaxWalker { }
     }
 }
