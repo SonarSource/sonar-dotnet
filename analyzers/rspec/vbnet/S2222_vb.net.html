@@ -5,7 +5,7 @@ namespace.</p>
 <p>Note that the rule is currently in an experimental phase.</p>
 <h2>Noncompliant Code Example</h2>
 <pre>
-<code data-lang="vbnet">Class Example
+Class Example
     Private obj As Object = New Object()
 
     Public Sub DoSomethingWithMonitor()
@@ -26,11 +26,11 @@ namespace.</p>
             lockObj.ExitReadLock()
         End If
     End Sub
-End Class</code>
+End Class
 </pre>
 <h2>Compliant Solution</h2>
 <pre>
-<code data-lang="vbnet">Class Example
+Class Example
     Private obj As Object = New Object()
 
     Public Sub DoSomethingWithMonitor()
@@ -52,7 +52,7 @@ End Class</code>
             lockObj.ExitReadLock()
         End Try
     End Sub
-End Class</code>
+End Class
 </pre>
 <h2>See</h2>
 <ul>
