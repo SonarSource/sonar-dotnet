@@ -5,14 +5,32 @@ things.</p>
 <pre>
 public void doSomething(int param1, int param2, int param3, string param4, long param5)
 {
-...
+    // ...
 }
 </pre>
 <h2>Compliant Solution</h2>
 <pre>
 public void doSomething(int param1, int param2, int param3, string param4)
 {
-...
+    // ...
+}
+</pre>
+<h2>Exceptions</h2>
+<pre>
+public class BaseClass
+{
+    public BaseClass(int param1)
+    {
+        // ...
+    }
+}
+
+public class DerivedClass : BaseClass
+{
+    public DerivedClass(int param1, int param2, int param3, string param4, long param5) : base(param1) // Compliant, the parameters intended for the base class constructor do not count in the sum of the parameter list.
+    {
+        // ...
+    }
 }
 </pre>
 

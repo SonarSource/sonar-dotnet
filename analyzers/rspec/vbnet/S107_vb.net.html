@@ -21,4 +21,22 @@ Public Function Bar(ByVal p1 As Integer, ByVal p2 As Integer, ByVal p3 As Intege
   ' ...
 End Function
 </pre>
+<h2>Exceptions</h2>
+<pre>
+Public Class BaseClass
+    Public Sub New(Param1 As Integer)
+        ' ...
+    End Sub
+End Class
+
+Public Class DerivedClass
+    Inherits BaseClass
+
+    Public Sub New(Param1 As Integer, Param2 As Integer, Param3 As Integer, Param4 As Integer, Param5 As Long)
+        MyBase.New(Param1) ' Compliant, the parameters intended for the base class constructor do not count in the sum of the parameter list.
+        ' ...
+    End Sub
+
+End Class
+</pre>
 
