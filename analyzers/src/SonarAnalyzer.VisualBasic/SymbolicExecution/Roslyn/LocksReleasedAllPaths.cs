@@ -31,7 +31,8 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn.RuleChecks.VisualBasic
 
         protected override DiagnosticDescriptor Rule => S2222;
 
-        protected override ISafeSyntaxWalker GetSyntaxWalker(LockAcquireReleaseCollector collector) => new LockAcquireReleaseWalker(collector);
+        protected override ISafeSyntaxWalker CreateSyntaxWalker(LockAcquireReleaseCollector collector) =>
+            new LockAcquireReleaseWalker(collector);
 
         private sealed class LockAcquireReleaseWalker : SafeVisualBasicSyntaxWalker
         {

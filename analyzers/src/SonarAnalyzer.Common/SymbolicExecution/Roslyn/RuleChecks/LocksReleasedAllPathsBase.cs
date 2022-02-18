@@ -47,7 +47,7 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn.RuleChecks
             "TryEnterWriteLock"
         };
 
-        protected abstract ISafeSyntaxWalker GetSyntaxWalker(LockAcquireReleaseCollector collector);
+        protected abstract ISafeSyntaxWalker CreateSyntaxWalker(LockAcquireReleaseCollector collector);
 
         public override ProgramState PostProcess(SymbolicContext context)
         {
@@ -119,7 +119,7 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn.RuleChecks
         public override bool ShouldExecute()
         {
             var collector = new LockAcquireReleaseCollector();
-            var walker = GetSyntaxWalker(collector);
+            var walker = CreateSyntaxWalker(collector);
             foreach (var child in NodeContext.Node.ChildNodes())
             {
                 walker.SafeVisit(child);
@@ -170,7 +170,7 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn.RuleChecks
 
         protected sealed class LockAcquireReleaseCollector
         {
-            private static readonly HashSet<string> LockTypes = new() { "Mutex" }; // For some APIs ctor can directly acquire the lock (e.g. Mutex).
+            private static readonly string LockType = "Mutex"; // For some APIs ctor can directly acquire the lock (e.g. Mutex).
 
             private static readonly HashSet<string> LockMethods = new(ReaderWriterLockSlimLockMethods)
             {
@@ -201,7 +201,7 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn.RuleChecks
 
             public void RegisterIdentifier(string name)
             {
-                lockAcquired = lockAcquired || LockTypes.Contains(name) || LockMethods.Contains(name);
+                lockAcquired = lockAcquired || name == LockType || LockMethods.Contains(name);
                 lockReleased = lockReleased || ReleaseMethods.Contains(name);
             }
         }
