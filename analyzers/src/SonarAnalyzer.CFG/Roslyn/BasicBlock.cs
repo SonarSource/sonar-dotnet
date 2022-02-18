@@ -63,10 +63,10 @@ namespace SonarAnalyzer.CFG.Roslyn
         public ControlFlowConditionKind ConditionKind => ConditionKindProperty.ReadCached(instance, ref conditionKind);
         public ControlFlowRegion EnclosingRegion => EnclosingRegionProperty.ReadCached(instance, ControlFlowRegion.Wrap, ref enclosingRegion);
         public ControlFlowBranch FallThroughSuccessor => FallThroughSuccessorProperty.ReadCached(instance, ControlFlowBranch.Wrap, ref fallThroughSuccessor);
-        public bool IsReachable => IsReachableProperty.ReadCached<bool>(instance, ref isReachable);
-        public BasicBlockKind Kind => KindProperty.ReadCached<BasicBlockKind>(instance, ref kind);
+        public bool IsReachable => IsReachableProperty.ReadCached(instance, ref isReachable);
+        public BasicBlockKind Kind => KindProperty.ReadCached(instance, ref kind);
         public ImmutableArray<IOperation> Operations => OperationsProperty.ReadCached(instance, ref operations);
-        public int Ordinal => OrdinalProperty.ReadCached<int>(instance, ref ordinal);
+        public int Ordinal => OrdinalProperty.ReadCached(instance, ref ordinal);
         public ImmutableArray<ControlFlowBranch> Predecessors => PredecessorsProperty.ReadCached(instance, ControlFlowBranch.Wrap, ref predecessors);
         public ImmutableArray<ControlFlowBranch> Successors => successors.Value;
         public ImmutableArray<BasicBlock> SuccessorBlocks => successorBlocks.Value;
