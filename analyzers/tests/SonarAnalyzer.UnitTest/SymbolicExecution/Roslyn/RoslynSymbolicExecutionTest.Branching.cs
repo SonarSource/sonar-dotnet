@@ -66,6 +66,7 @@ Tag(""End"");";
                 "Else",             // Dequeue for "else" branch
                 "InTry",            // Dequeue after "if" branch
                 "End",              // Dequeue after "else" branch, reaching exit block
+                "InFinally",        // Dequeue after the "try body"
                 "AfterFinally");    // Dequeue after "if" branch
         }
 
@@ -75,10 +76,11 @@ Tag(""End"");";
             const string code = @"
 Tag(""Entry"")
 If BoolParameter Then
+    Tag(""BeforeTry"")
     Try
-        Tag(""BeforeTry"")
-    Catch
         Tag(""InTry"")
+    Catch
+        Tag(""InCatch"")
     Finally
         Tag(""InFinally"")
     End Try
@@ -91,8 +93,10 @@ Tag(""End"")";
                 "Entry",
                 "BeforeTry",
                 "Else",
-                "AfterFinally",
-                "End");
+                "InTry",
+                "End",
+                "InFinally",
+                "AfterFinally");
         }
 
         [TestMethod]

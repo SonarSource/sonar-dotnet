@@ -62,7 +62,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework.SymbolicExecution
             postProcessed.Select(x => TestHelper.Serialize(x.Operation)).Should().OnlyContainInOrder(expected);
 
         public void ValidateTagOrder(params string[] expected) =>
-            tags.Select(x => x.Name).Should().BeEquivalentTo(expected);
+            tags.Select(x => x.Name).Should().OnlyContainInOrder(expected);
 
         public void Validate(string operation, Action<SymbolicContext> action) =>
             action(postProcessed.Single(x => TestHelper.Serialize(x.Operation) == operation));

@@ -42,12 +42,10 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
         public RoslynSymbolicExecution(ControlFlowGraph cfg, SymbolicCheck[] checks)
         {
             this.cfg = cfg ?? throw new ArgumentNullException(nameof(cfg));
-
             if (checks == null || checks.Length == 0)
             {
                 throw new ArgumentException("At least one check is expected", nameof(checks));
             }
-
             this.checks = new[] { new ConstantCheck() }.Concat(checks).ToArray();
         }
 
@@ -62,7 +60,7 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
                 return;
             }
             var steps = 0;
-            queue.Enqueue(new ExplodedNode(cfg.EntryBlock, ProgramState.Empty));
+            queue.Enqueue(new ExplodedNode(cfg.EntryBlock, ProgramState.Empty, null));
             while (queue.Any())
             {
                 if (steps++ > MaxStepCount)
@@ -79,7 +77,6 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
                     }
                 }
             }
-
             NotifyExecutionCompleted();
         }
 
@@ -91,16 +88,28 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
             }
             else if (node.Block.ContainsThrow())
             {
-                yield return new ExplodedNode(cfg.ExitBlock, node.State);
+                yield return new ExplodedNode(cfg.ExitBlock, node.State, null);
             }
             else
             {
                 // ToDo: This is a temporary simplification until we support condition-based and condition-building decisions https://github.com/SonarSource/sonar-dotnet/issues/5308
-                foreach (var successor in node.Block.Successors.Where(x => x.Destination is not null))
+                foreach (var successor in node.Block.Successors)
                 {
-                    yield return new ExplodedNode(successor.Destination, node.State);
+                    if (successor.Destination is not null)
+                    {
+                        yield return successor.FinallyRegions.Any() // When exiting finally region(s), redirect to 1st finally instead of the normal destination
+                            ? FromFinally(new FinallyPoint(node.FinallyPoint, successor))
+                            : new ExplodedNode(successor.Destination, node.State, node.FinallyPoint);
+                    }
+                    else if (successor.Source.EnclosingRegion.Kind == ControlFlowRegionKind.Finally)    // Redirect from finally back to the original place (or outer finally on the same branch)
+                    {
+                        yield return FromFinally(node.FinallyPoint.CreateNext());
+                    }
                 }
             }
+
+            ExplodedNode FromFinally(FinallyPoint finallyPoint) =>
+                new ExplodedNode(cfg.Blocks[finallyPoint.BlockIndex], node.State, finallyPoint.IsFinallyBlock ? finallyPoint : finallyPoint.Previous);
         }
 
         private IEnumerable<ExplodedNode> ProcessOperation(ExplodedNode node)
@@ -142,7 +151,6 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
                 {
                     return null;
                 }
-
                 context = EnsureContext(context, newState);
             }
             return context;
