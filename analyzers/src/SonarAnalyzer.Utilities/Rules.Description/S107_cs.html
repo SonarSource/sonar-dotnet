@@ -27,7 +27,7 @@ public class BaseClass
 
 public class DerivedClass : BaseClass
 {
-    public ExtensionClass(int param1, int param2, int param3, string param4, long param5) : base(param1) // Compliant, the parameters intended for the base class constructor do not count in the sum of the parameter list.
+    public DerivedClass(int param1, int param2, int param3, string param4, long param5) : base(param1) // Compliant, the parameters intended for the base class constructor do not count in the sum of the parameter list.
     {
         // ...
     }
