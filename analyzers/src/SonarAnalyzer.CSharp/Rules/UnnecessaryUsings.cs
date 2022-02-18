@@ -26,7 +26,7 @@ using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
-using SonarAnalyzer.Extensions;
+using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
 using StyleCop.Analyzers.Lightup;
 
@@ -67,7 +67,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 },
                 SyntaxKind.CompilationUnit);
 
-        private static void VisitContent(CSharpSyntaxWalker visitor, SyntaxList<MemberDeclarationSyntax> members, IEnumerable<SyntaxTrivia> trivias)
+        private static void VisitContent(ISafeSyntaxWalker visitor, SyntaxList<MemberDeclarationSyntax> members, IEnumerable<SyntaxTrivia> trivias)
         {
             var comments = trivias.Where(trivia => trivia.IsAnyKind(SyntaxKind.SingleLineDocumentationCommentTrivia, SyntaxKind.MultiLineDocumentationCommentTrivia));
 
@@ -93,9 +93,9 @@ namespace SonarAnalyzer.Rules.CSharp
             }
         }
 
-        private class CSharpRemovableUsingWalker : CSharpSyntaxWalker
+        private sealed class CSharpRemovableUsingWalker : SafeCSharpSyntaxWalker
         {
-            public readonly HashSet<INamespaceSymbol> NecessaryNamespaces = new HashSet<INamespaceSymbol>();
+            public readonly HashSet<INamespaceSymbol> NecessaryNamespaces = new();
 
             private readonly SyntaxNodeAnalysisContext context;
             private readonly IImmutableSet<EquivalentNameSyntax> usingDirectivesFromParent;

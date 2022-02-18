@@ -27,7 +27,7 @@ using StyleCop.Analyzers.Lightup;
 
 namespace SonarAnalyzer.Rules.CSharp
 {
-    internal class ParameterValidationInMethodWalker : CSharpSyntaxWalker
+    internal class ParameterValidationInMethodWalker : SafeCSharpSyntaxWalker
     {
         private static readonly ISet<SyntaxKind> SubMethodEquivalents =
             new HashSet<SyntaxKind>
@@ -38,11 +38,11 @@ namespace SonarAnalyzer.Rules.CSharp
             };
 
         private readonly SemanticModel semanticModel;
-        private readonly List<Location> argumentExceptionLocations = new List<Location>();
+        private readonly List<Location> argumentExceptionLocations = new();
 
         private bool keepWalking = true;
 
-        public IEnumerable<Location> ArgumentExceptionLocations => this.argumentExceptionLocations;
+        public IEnumerable<Location> ArgumentExceptionLocations => argumentExceptionLocations;
 
         public ParameterValidationInMethodWalker(SemanticModel semanticModel)
         {

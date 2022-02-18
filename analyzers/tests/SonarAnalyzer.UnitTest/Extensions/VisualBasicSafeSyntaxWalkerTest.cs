@@ -18,44 +18,37 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using Microsoft.CodeAnalysis.CSharp;
+using System.Linq;
+using FluentAssertions;
+using Microsoft.CodeAnalysis.VisualBasic;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using SonarAnalyzer.Extensions;
+using SonarAnalyzer.Helpers;
 
 namespace SonarAnalyzer.UnitTest.Extensions
 {
     [TestClass]
-    public class CSharpSyntaxWalkerExtensionsTest
+    public class VisualBasicSafeSyntaxWalkerTest
     {
         [TestMethod]
         public void GivenSyntaxNodeWithReasonableDepth_SafeVisit_ReturnsTrue()
         {
-            var result = new Walker().SafeVisit(SyntaxFactory.ParseSyntaxTree("void Method() { }").GetRoot());
+            var result = new Walker().SafeVisit(SyntaxFactory.ParseSyntaxTree("Public Function Main(Arg as Boolean) As Boolean").GetRoot());
             Assert.IsTrue(result);
         }
 
         [TestMethod]
         public void GivenSyntaxNodeWithHighDepth_SafeVisit_ReturnsFalse()
         {
-            var method = SyntaxFactory.MethodDeclaration(SyntaxFactory.PredefinedType(SyntaxFactory.Token(SyntaxKind.VoidKeyword)), "Method");
+            var code = $@"
+Public Class Sample
+    Public Function Main(Arg as Boolean) As Boolean
+        Return Arg {Enumerable.Repeat("AndAlso Arg", 4000).JoinStr(" ")}
+    End Function
+End Class";
 
-            var condition = SyntaxFactory.BinaryExpression(SyntaxKind.NotEqualsExpression,
-                                                           SyntaxFactory.LiteralExpression(SyntaxKind.StringLiteralExpression, SyntaxFactory.Literal("a")),
-                                                           SyntaxFactory.LiteralExpression(SyntaxKind.StringLiteralExpression, SyntaxFactory.Literal("b")));
-
-            var ifStatement = SyntaxFactory.IfStatement(condition, SyntaxFactory.Block());
-
-            var node = ifStatement;
-            for (var index = 0; index < 5000; index++)
-            {
-                node = SyntaxFactory.IfStatement(condition, SyntaxFactory.Block().AddStatements(node));
-            }
-
-            method = method.AddBodyStatements(node);
-
-            Assert.IsFalse(new Walker().SafeVisit(method));
+            new Walker().SafeVisit(VisualBasicSyntaxTree.ParseText(code).GetCompilationUnitRoot()).Should().BeFalse();
         }
 
-        private class Walker : CSharpSyntaxWalker { }
+        private class Walker : SafeVisualBasicSyntaxWalker { }
     }
 }

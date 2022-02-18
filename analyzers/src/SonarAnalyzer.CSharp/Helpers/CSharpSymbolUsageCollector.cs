@@ -35,7 +35,7 @@ namespace SonarAnalyzer.Helpers
     /// Collects all symbol usages from a class declaration. Ignores symbols whose names are not present
     /// in the knownSymbolNames collection for performance reasons.
     /// </summary>
-    internal class CSharpSymbolUsageCollector : CSharpSyntaxWalker
+    internal class CSharpSymbolUsageCollector : SafeCSharpSyntaxWalker
     {
         [Flags]
         private enum SymbolAccess { None = 0, Read = 1, Write = 2, ReadWrite = Read | Write }
@@ -54,8 +54,8 @@ namespace SonarAnalyzer.Helpers
 
         public ISet<ISymbol> UsedSymbols { get; } = new HashSet<ISymbol>();
         public IDictionary<ISymbol, SymbolUsage> FieldSymbolUsages { get; } = new Dictionary<ISymbol, SymbolUsage>();
-        public HashSet<string> DebuggerDisplayValues { get; } = new HashSet<string>();
-        public Dictionary<IPropertySymbol, AccessorAccess> PropertyAccess { get; } = new Dictionary<IPropertySymbol, AccessorAccess>();
+        public HashSet<string> DebuggerDisplayValues { get; } = new();
+        public Dictionary<IPropertySymbol, AccessorAccess> PropertyAccess { get; } = new();
 
         public CSharpSymbolUsageCollector(Compilation compilation, IEnumerable<ISymbol> knownSymbols)
         {

@@ -39,9 +39,9 @@ namespace SonarAnalyzer.Metrics.VisualBasic
             return walker.ExecutableLines.ToImmutableArray();
         }
 
-        private class ExecutableLinesWalker : VisualBasicSyntaxWalker
+        private class ExecutableLinesWalker : SafeVisualBasicSyntaxWalker
         {
-            private readonly HashSet<int> executableLineNumbers = new HashSet<int>();
+            private readonly HashSet<int> executableLineNumbers = new();
             private readonly SemanticModel semanticModel;
 
             public ExecutableLinesWalker(SemanticModel semanticModel)

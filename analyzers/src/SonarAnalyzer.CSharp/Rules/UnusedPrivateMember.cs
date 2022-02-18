@@ -271,7 +271,7 @@ namespace SonarAnalyzer.Rules.CSharp
             }
         }
 
-        private static bool VisitDeclaringReferences(ISymbol symbol, CSharpSyntaxWalker visitor, Compilation compilation, bool includeGeneratedFile)
+        private static bool VisitDeclaringReferences(ISymbol symbol, ISafeSyntaxWalker visitor, Compilation compilation, bool includeGeneratedFile)
         {
             var syntaxReferencesToVisit = includeGeneratedFile
                 ? symbol.DeclaringSyntaxReferences
@@ -295,13 +295,13 @@ namespace SonarAnalyzer.Rules.CSharp
         /// Collects private or internal member symbols that could potentially be removed if they are not used.
         /// Members that are overridden, overridable, have specific use, etc. are not removable.
         /// </summary>
-        private class CSharpRemovableSymbolWalker : CSharpSyntaxWalker
+        private class CSharpRemovableSymbolWalker : SafeCSharpSyntaxWalker
         {
             private readonly Func<SyntaxNode, SemanticModel> getSemanticModel;
 
-            public BidirectionalDictionary<ISymbol, SyntaxNode> FieldLikeSymbols { get; } = new BidirectionalDictionary<ISymbol, SyntaxNode>();
-            public HashSet<ISymbol> InternalSymbols { get; } = new HashSet<ISymbol>();
-            public HashSet<ISymbol> PrivateSymbols { get; } = new HashSet<ISymbol>();
+            public BidirectionalDictionary<ISymbol, SyntaxNode> FieldLikeSymbols { get; } = new();
+            public HashSet<ISymbol> InternalSymbols { get; } = new();
+            public HashSet<ISymbol> PrivateSymbols { get; } = new();
 
             public CSharpRemovableSymbolWalker(Func<SyntaxTree, bool, SemanticModel> getSemanticModel) =>
                 this.getSemanticModel = node => getSemanticModel(node.SyntaxTree, false);

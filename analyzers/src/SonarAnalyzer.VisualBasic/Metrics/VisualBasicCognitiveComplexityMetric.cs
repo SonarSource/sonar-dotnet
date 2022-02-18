@@ -38,10 +38,9 @@ namespace SonarAnalyzer.Metrics.VisualBasic
             return new CognitiveComplexity(walker.State.Complexity, walker.State.IncrementLocations.ToImmutableArray());
         }
 
-        private class CognitiveWalker : VisualBasicSyntaxWalker
+        private class CognitiveWalker : SafeVisualBasicSyntaxWalker
         {
-            public CognitiveComplexityWalkerState<MethodStatementSyntax> State { get; }
-                 = new CognitiveComplexityWalkerState<MethodStatementSyntax>();
+            public CognitiveComplexityWalkerState<MethodStatementSyntax> State { get; } = new();
 
             public override void VisitBinaryConditionalExpression(BinaryConditionalExpressionSyntax node)
             {
