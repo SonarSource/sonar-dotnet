@@ -103,7 +103,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
                 ? variableDeclarator.Initializer?.Value.RemoveParentheses() ?? (variableDeclarator.AsClause as AsNewClauseSyntax)?.NewExpression
                 : null;
 
-        private class InvocationWalker : VisualBasicSyntaxWalker
+        private class InvocationWalker : SafeVisualBasicSyntaxWalker
         {
             private readonly EndInvokeContext context;
 

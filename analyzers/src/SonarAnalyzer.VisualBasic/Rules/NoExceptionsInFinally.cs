@@ -41,7 +41,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
                     }
                 }, SyntaxKind.FinallyBlock);
 
-        private class ThrowInFinallyWalker : VisualBasicSyntaxWalker
+        private class ThrowInFinallyWalker : SafeVisualBasicSyntaxWalker
         {
             private readonly SyntaxNodeAnalysisContext context;
             private readonly DiagnosticDescriptor rule;

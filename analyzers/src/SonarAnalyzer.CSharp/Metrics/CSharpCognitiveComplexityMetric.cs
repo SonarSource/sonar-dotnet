@@ -26,6 +26,7 @@ using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Extensions;
+using SonarAnalyzer.Helpers;
 using StyleCop.Analyzers.Lightup;
 
 namespace SonarAnalyzer.Metrics.CSharp
@@ -43,12 +44,11 @@ namespace SonarAnalyzer.Metrics.CSharp
             return new CognitiveComplexity(walker.State.Complexity, walker.State.IncrementLocations.ToImmutableArray());
         }
 
-        private class CognitiveWalker : CSharpSyntaxWalker
+        private sealed class CognitiveWalker : SafeCSharpSyntaxWalker
         {
             private readonly bool onlyGlobalStatements;
 
-            public CognitiveComplexityWalkerState<MethodDeclarationSyntax> State { get; }
-                = new CognitiveComplexityWalkerState<MethodDeclarationSyntax>();
+            public CognitiveComplexityWalkerState<MethodDeclarationSyntax> State { get; } = new();
 
             public CognitiveWalker(bool onlyGlobalStatements) =>
                 this.onlyGlobalStatements = onlyGlobalStatements;

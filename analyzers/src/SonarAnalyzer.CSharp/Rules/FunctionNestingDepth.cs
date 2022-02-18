@@ -23,7 +23,6 @@ using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
-using SonarAnalyzer.Extensions;
 using SonarAnalyzer.Helpers;
 using StyleCop.Analyzers.Lightup;
 
@@ -51,7 +50,7 @@ namespace SonarAnalyzer.Rules.CSharp
             SyntaxKind.RemoveAccessorDeclaration,
             SyntaxKind.GlobalStatement);
 
-        private class NestingDepthWalker : CSharpSyntaxWalker
+        private sealed class NestingDepthWalker : SafeCSharpSyntaxWalker
         {
             private readonly NestingDepthCounter counter;
 

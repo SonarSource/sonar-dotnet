@@ -104,21 +104,18 @@ namespace SonarAnalyzer.Rules.CSharp
                 fieldDeclaration.AttributeLists.Count == 0;
         }
 
-        private class FieldAccessCollector : CSharpSyntaxWalker
+        private class FieldAccessCollector : SafeCSharpSyntaxWalker
         {
             // Contains statements that READ field values. First grouped by field symbol (that is read),
             // then by method/property/ctor symbol (that contains the statements)
-            private readonly Dictionary<IFieldSymbol, Lookup<ISymbol, SyntaxNode>> readsByField =
-                new Dictionary<IFieldSymbol, Lookup<ISymbol, SyntaxNode>>();
+            private readonly Dictionary<IFieldSymbol, Lookup<ISymbol, SyntaxNode>> readsByField = new();
 
             // Contains statements that WRITE field values. First grouped by field symbol (that is written),
             // then by method/property/ctor symbol (that contains the statements)
-            private readonly Dictionary<IFieldSymbol, Lookup<ISymbol, SyntaxNode>> writesByField =
-                new Dictionary<IFieldSymbol, Lookup<ISymbol, SyntaxNode>>();
+            private readonly Dictionary<IFieldSymbol, Lookup<ISymbol, SyntaxNode>> writesByField = new();
 
             // Contains all method/property invocations grouped by the statement that contains them.
-            private readonly Lookup<SyntaxNode, ISymbol> invocations =
-                new Lookup<SyntaxNode, ISymbol>();
+            private readonly Lookup<SyntaxNode, ISymbol> invocations = new();
 
             private readonly SemanticModel semanticModel;
             private readonly IDictionary<IFieldSymbol, VariableDeclaratorSyntax> privateFields;

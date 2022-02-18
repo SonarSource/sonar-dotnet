@@ -18,14 +18,15 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+extern alias csharp;
+using csharp::SonarAnalyzer.Helpers;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using SonarAnalyzer.Extensions;
 
 namespace SonarAnalyzer.UnitTest.Extensions
 {
     [TestClass]
-    public class CSharpSyntaxWalkerExtensionsTest
+    public class CSharpSafeSyntaxWalkerTest
     {
         [TestMethod]
         public void GivenSyntaxNodeWithReasonableDepth_SafeVisit_ReturnsTrue()
@@ -56,6 +57,6 @@ namespace SonarAnalyzer.UnitTest.Extensions
             Assert.IsFalse(new Walker().SafeVisit(method));
         }
 
-        private class Walker : CSharpSyntaxWalker { }
+        private class Walker : SafeCSharpSyntaxWalker { }
     }
 }

@@ -104,7 +104,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
                 return true;
             }
 
-            private class VbLoopwalker : VisualBasicSyntaxWalker
+            private class VbLoopwalker : SafeVisualBasicSyntaxWalker
             {
                 private readonly LoopWalker walker;
 

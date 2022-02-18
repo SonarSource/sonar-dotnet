@@ -105,7 +105,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 ? equalsValueClause.Value.RemoveParentheses()
                 : null;
 
-        private class InvocationWalker : CSharpSyntaxWalker
+        private class InvocationWalker : SafeCSharpSyntaxWalker
         {
             private readonly EndInvokeContext context;
 

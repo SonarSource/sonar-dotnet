@@ -26,7 +26,6 @@ using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
-using SonarAnalyzer.Extensions;
 using SonarAnalyzer.Helpers;
 using StyleCop.Analyzers.Lightup;
 
@@ -282,7 +281,7 @@ namespace SonarAnalyzer.Rules.CSharp
             }
         }
 
-        private class CheckedWalker : CSharpSyntaxWalker
+        private sealed class CheckedWalker : SafeCSharpSyntaxWalker
         {
             private readonly SyntaxNodeAnalysisContext context;
 

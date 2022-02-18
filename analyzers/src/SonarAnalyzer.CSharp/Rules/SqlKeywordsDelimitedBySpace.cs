@@ -111,7 +111,7 @@ namespace SonarAnalyzer.Rules.CSharp
             usings.Select(usingDirective => usingDirective.Name)
                 .Any(name => SqlNamespaces.Any(sn => SyntaxFactory.AreEquivalent(name, sn)));
 
-        private class StringConcatenationWalker : CSharpSyntaxWalker
+        private class StringConcatenationWalker : SafeCSharpSyntaxWalker
         {
             private readonly SyntaxNodeAnalysisContext context;
 

@@ -26,7 +26,6 @@ using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.Common;
-using SonarAnalyzer.Extensions;
 using SonarAnalyzer.Helpers;
 using StyleCop.Analyzers.Lightup;
 
@@ -140,7 +139,7 @@ namespace SonarAnalyzer.Rules.CSharp
         private static IEnumerable<INamedTypeSymbol> GetConstraintTypes(ITypeParameterSymbol typeParameter) =>
             typeParameter.ConstraintTypes.OfType<INamedTypeSymbol>().SelectMany(ExpandGenericTypes);
 
-        private class TypeDependencyCollector : CSharpSyntaxWalker
+        private sealed class TypeDependencyCollector : SafeCSharpSyntaxWalker
         {
             private readonly SemanticModel model;
             private readonly TypeDeclarationSyntax originalTypeDeclaration;

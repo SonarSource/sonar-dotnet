@@ -25,7 +25,6 @@ using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using SonarAnalyzer.Common;
-using SonarAnalyzer.Extensions;
 using SonarAnalyzer.Helpers;
 using StyleCop.Analyzers.Lightup;
 
@@ -55,12 +54,11 @@ namespace SonarAnalyzer.Metrics.CSharp
             return new CyclomaticComplexity(walker.IncrementLocations.ToImmutableArray());
         }
 
-        private class CyclomaticWalker : CSharpSyntaxWalker
+        private sealed class CyclomaticWalker : SafeCSharpSyntaxWalker
         {
             private readonly bool onlyGlobalStatements;
 
-            public List<SecondaryLocation> IncrementLocations { get; }
-                = new List<SecondaryLocation>();
+            public List<SecondaryLocation> IncrementLocations { get; } = new();
 
             public CyclomaticWalker(bool onlyGlobalStatements) =>
                 this.onlyGlobalStatements = onlyGlobalStatements;
