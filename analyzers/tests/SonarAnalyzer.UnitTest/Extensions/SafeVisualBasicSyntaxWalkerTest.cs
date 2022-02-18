@@ -27,14 +27,11 @@ using SonarAnalyzer.Helpers;
 namespace SonarAnalyzer.UnitTest.Extensions
 {
     [TestClass]
-    public class VisualBasicSafeSyntaxWalkerTest
+    public class SafeVisualBasicSyntaxWalkerTest
     {
         [TestMethod]
-        public void GivenSyntaxNodeWithReasonableDepth_SafeVisit_ReturnsTrue()
-        {
-            var result = new Walker().SafeVisit(SyntaxFactory.ParseSyntaxTree("Public Function Main(Arg as Boolean) As Boolean").GetRoot());
-            Assert.IsTrue(result);
-        }
+        public void GivenSyntaxNodeWithReasonableDepth_SafeVisit_ReturnsTrue() =>
+            new Walker().SafeVisit(SyntaxFactory.ParseSyntaxTree("Public Function Main(Arg as Boolean) As Boolean").GetRoot()).Should().BeTrue();
 
         [TestMethod]
         public void GivenSyntaxNodeWithHighDepth_SafeVisit_ReturnsFalse()
