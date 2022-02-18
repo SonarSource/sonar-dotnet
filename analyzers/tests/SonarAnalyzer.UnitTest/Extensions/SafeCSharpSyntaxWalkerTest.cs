@@ -51,7 +51,7 @@ namespace SonarAnalyzer.UnitTest.Extensions
 
             method = method.AddBodyStatements(node);
 
-            new Walker().SafeVisit(method).Should().BeTrue();
+            new Walker().SafeVisit(method).Should().BeFalse();
         }
 
         private class Walker : SafeCSharpSyntaxWalker { }
