@@ -19,12 +19,9 @@
  */
 
 using System;
-using System.Linq;
 using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using SonarAnalyzer.Extensions;
 using SonarAnalyzer.SymbolicExecution.Roslyn;
-using SonarAnalyzer.UnitTest.Helpers;
 
 namespace SonarAnalyzer.UnitTest.SymbolicExecution.Roslyn
 {
@@ -32,8 +29,12 @@ namespace SonarAnalyzer.UnitTest.SymbolicExecution.Roslyn
     public class FinallyPointTest
     {
         [TestMethod]
-        public void Constructor_Null_Throws() =>
-            ((Func<FinallyPoint>)(() => new FinallyPoint(null, null))).Should().Throw<ArgumentNullException>().And.ParamName.Should().Be("branch");
+        public void Constructor_Null_Throws()
+        {
+            var cfg = TestHelper.CompileCfgBodyCS();
+            var previous = new FinallyPoint(null, cfg.EntryBlock.FallThroughSuccessor);
+            ((Func<FinallyPoint>)(() => new FinallyPoint(previous, null))).Should().Throw<ArgumentNullException>().And.ParamName.Should().Be("branch");
+        }
 
         [TestMethod]
         public void CreateNext_ReturnsAllFinally_AndThenDestination()
