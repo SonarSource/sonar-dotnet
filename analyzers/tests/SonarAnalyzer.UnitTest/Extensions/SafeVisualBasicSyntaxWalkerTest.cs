@@ -39,7 +39,7 @@ namespace SonarAnalyzer.UnitTest.Extensions
             var code = $@"
 Public Class Sample
     Public Function Main(Arg as Boolean) As Boolean
-        Return Arg {Enumerable.Repeat("AndAlso Arg", 4000).JoinStr(" ")}
+        Return Arg {Enumerable.Repeat("AndAlso Arg", 5000).JoinStr(" ")}
     End Function
 End Class";
 

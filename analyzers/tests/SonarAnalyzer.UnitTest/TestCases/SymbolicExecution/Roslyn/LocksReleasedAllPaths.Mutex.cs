@@ -290,6 +290,16 @@ namespace Mutex_Type
             }
         }
 
+        public void MutextAquireByConstructor_SimpleAssignment_Array()
+        {
+            Mutex[] arr = new Mutex[2];
+            arr[0] = new Mutex(true, "bar", out var mutextCreated); // FN, untracked symbol
+            if (cond)
+            {
+                arr[0].ReleaseMutex();
+            }
+        }
+
         public void MutextAquireByConstructor_SimpleAssignment_FieldArgument()
         {
             var m = new Mutex(cond, "bar", out var mutextCreated);
