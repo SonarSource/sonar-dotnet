@@ -31,7 +31,7 @@ namespace SonarAnalyzer.CFG.Roslyn
 {
     public class BasicBlock
     {
-        private static readonly ConditionalWeakTable<object, BasicBlock> InstanceCache = new ConditionalWeakTable<object, BasicBlock>();
+        private static readonly ConditionalWeakTable<object, BasicBlock> InstanceCache = new();
         private static readonly PropertyInfo BranchValueProperty;
         private static readonly PropertyInfo ConditionalSuccessorProperty;
         private static readonly PropertyInfo ConditionKindProperty;
@@ -43,30 +43,31 @@ namespace SonarAnalyzer.CFG.Roslyn
         private static readonly PropertyInfo OrdinalProperty;
         private static readonly PropertyInfo PredecessorsProperty;
 
-        private readonly Lazy<IOperation> branchValue;
-        private readonly Lazy<ControlFlowBranch> conditionalSuccessor;
-        private readonly Lazy<ControlFlowConditionKind> conditionKind;
-        private readonly Lazy<ControlFlowRegion> enclosingRegion;
-        private readonly Lazy<ControlFlowBranch> fallThroughSuccessor;
-        private readonly Lazy<bool> isReachable;
-        private readonly Lazy<BasicBlockKind> kind;
-        private readonly Lazy<ImmutableArray<IOperation>> operations;
-        private readonly Lazy<int> ordinal;
-        private readonly Lazy<ImmutableArray<ControlFlowBranch>> predecessors;
+        private readonly object instance;
         private readonly Lazy<ImmutableArray<ControlFlowBranch>> successors;
         private readonly Lazy<ImmutableArray<BasicBlock>> successorBlocks;
         private readonly Lazy<ImmutableArray<IOperation>> operationsAndBranchValue;
+        private IOperation branchValue;
+        private ControlFlowBranch conditionalSuccessor;
+        private ControlFlowConditionKind? conditionKind;
+        private ControlFlowRegion enclosingRegion;
+        private ControlFlowBranch fallThroughSuccessor;
+        private bool? isReachable;
+        private BasicBlockKind? kind;
+        private ImmutableArray<IOperation> operations;
+        private int? ordinal;
+        private ImmutableArray<ControlFlowBranch> predecessors;
 
-        public IOperation BranchValue => branchValue.Value;
-        public ControlFlowBranch ConditionalSuccessor => conditionalSuccessor.Value;
-        public ControlFlowConditionKind ConditionKind => conditionKind.Value;
-        public ControlFlowRegion EnclosingRegion => enclosingRegion.Value;
-        public ControlFlowBranch FallThroughSuccessor => fallThroughSuccessor.Value;
-        public bool IsReachable => isReachable.Value;
-        public BasicBlockKind Kind => kind.Value;
-        public ImmutableArray<IOperation> Operations => operations.Value;
-        public int Ordinal => ordinal.Value;
-        public ImmutableArray<ControlFlowBranch> Predecessors => predecessors.Value;
+        public IOperation BranchValue => BranchValueProperty.ReadCached(instance, ref branchValue);
+        public ControlFlowBranch ConditionalSuccessor => ConditionalSuccessorProperty.ReadCached(instance, ControlFlowBranch.Wrap, ref conditionalSuccessor);
+        public ControlFlowConditionKind ConditionKind => ConditionKindProperty.ReadCached(instance, ref conditionKind);
+        public ControlFlowRegion EnclosingRegion => EnclosingRegionProperty.ReadCached(instance, ControlFlowRegion.Wrap, ref enclosingRegion);
+        public ControlFlowBranch FallThroughSuccessor => FallThroughSuccessorProperty.ReadCached(instance, ControlFlowBranch.Wrap, ref fallThroughSuccessor);
+        public bool IsReachable => IsReachableProperty.ReadCached(instance, ref isReachable);
+        public BasicBlockKind Kind => KindProperty.ReadCached(instance, ref kind);
+        public ImmutableArray<IOperation> Operations => OperationsProperty.ReadCached(instance, ref operations);
+        public int Ordinal => OrdinalProperty.ReadCached(instance, ref ordinal);
+        public ImmutableArray<ControlFlowBranch> Predecessors => PredecessorsProperty.ReadCached(instance, ControlFlowBranch.Wrap, ref predecessors);
         public ImmutableArray<ControlFlowBranch> Successors => successors.Value;
         public ImmutableArray<BasicBlock> SuccessorBlocks => successorBlocks.Value;
         public ImmutableArray<IOperation> OperationsAndBranchValue => operationsAndBranchValue.Value;
@@ -90,41 +91,22 @@ namespace SonarAnalyzer.CFG.Roslyn
 
         private BasicBlock(object instance)
         {
-            _ = instance ?? throw new ArgumentNullException(nameof(instance));
-            branchValue = BranchValueProperty.ReadValue<IOperation>(instance);
-            conditionalSuccessor = ConditionalSuccessorProperty.ReadValue(instance, ControlFlowBranch.Wrap);
-            conditionKind = ConditionKindProperty.ReadValue<ControlFlowConditionKind>(instance);
-            enclosingRegion = EnclosingRegionProperty.ReadValue(instance, ControlFlowRegion.Wrap);
-            fallThroughSuccessor = FallThroughSuccessorProperty.ReadValue(instance, ControlFlowBranch.Wrap);
-            isReachable = IsReachableProperty.ReadValue<bool>(instance);
-            kind = KindProperty.ReadValue<BasicBlockKind>(instance);
-            operations = OperationsProperty.ReadImmutableArray<IOperation>(instance);
-            ordinal = OrdinalProperty.ReadValue<int>(instance);
-            predecessors = PredecessorsProperty.ReadImmutableArray(instance, ControlFlowBranch.Wrap);
+            this.instance = instance ?? throw new ArgumentNullException(nameof(instance));
             successors = new Lazy<ImmutableArray<ControlFlowBranch>>(() =>
             {
                 // since Roslyn does not differentiate between pattern types in CFG, it builds unreachable block for missing
                 // pattern match even when discard pattern option is presented. In this case we explicitly exclude this branch
                 if (SwitchExpressionArmSyntaxWrapper.IsInstance(BranchValue?.Syntax) && DiscardPatternSyntaxWrapper.IsInstance(((SwitchExpressionArmSyntaxWrapper)BranchValue.Syntax).Pattern))
                 {
-                    return FallThroughSuccessor != null ? ImmutableArray.Create(FallThroughSuccessor) : ImmutableArray<ControlFlowBranch>.Empty;
+                    return FallThroughSuccessor is null ? ImmutableArray<ControlFlowBranch>.Empty : ImmutableArray.Create(FallThroughSuccessor);
                 }
                 else
                 {
-                    return ImmutableArray.CreateRange(new[] { FallThroughSuccessor, ConditionalSuccessor }.Where(x => x != null));
+                    return new[] { FallThroughSuccessor, ConditionalSuccessor }.Where(x => x != null).ToImmutableArray();
                 }
             });
             successorBlocks = new Lazy<ImmutableArray<BasicBlock>>(() => Successors.Select(x => x.Destination).Where(x => x != null).ToImmutableArray());
-            operationsAndBranchValue = new Lazy<ImmutableArray<IOperation>>(() =>
-            {
-                if (BranchValue == null)
-                {
-                    return Operations;
-                }
-                var builder = Operations.ToBuilder();
-                builder.Add(BranchValue);
-                return builder.ToImmutable();
-            });
+            operationsAndBranchValue = new Lazy<ImmutableArray<IOperation>>(() => BranchValue is null ? Operations : Operations.Add(BranchValue));
         }
 
         public bool ContainsThrow() =>
