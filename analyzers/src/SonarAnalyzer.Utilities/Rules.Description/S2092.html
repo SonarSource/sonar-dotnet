@@ -28,13 +28,13 @@ HttpCookie myCookie = new HttpCookie("Sensitive cookie");
 <h2>Compliant Solution</h2>
 <p>Set the <code>HttpCookie.Secure</code> property to <code>true</code>:</p>
 <pre>
-HttpCookie myCookie = new HttpCookie("Sensitive cookie");
-myCookie.Secure = true; // Compliant
+<code data-lang="csharp">HttpCookie myCookie = new HttpCookie("Sensitive cookie");
+myCookie.Secure = true; // Compliant</code>
 </pre>
 <p>Or change the default flag values for the whole application by editing the <a
 href="https://docs.microsoft.com/en-us/previous-versions/dotnet/netframework-4.0/ms228262(v=vs.100)">Web.config configuration file</a>:</p>
 <pre>
-&lt;httpCookies httpOnlyCookies="true" requireSSL="true" /&gt;
+<code data-lang="csharp">&lt;httpCookies httpOnlyCookies="true" requireSSL="true" /&gt;</code>
 </pre>
 <ul>
   <li> the <code>requireSSL</code> attribute corresponds programmatically to the <code>Secure</code> field. </li>
@@ -42,7 +42,7 @@ href="https://docs.microsoft.com/en-us/previous-versions/dotnet/netframework-4.0
 </ul>
 <h2>See</h2>
 <ul>
-  <li> <a href="https://owasp.org/Top10/A03_2021-Injection/">OWASP Top 10 2021 Category A4</a> - Insecure Design </li>
+  <li> <a href="https://owasp.org/Top10/A04_2021-Insecure_Design/">OWASP Top 10 2021 Category A4</a> - Insecure Design </li>
   <li> <a href="https://owasp.org/Top10/A05_2021-Security_Misconfiguration/">OWASP Top 10 2021 Category A5</a> - Security Misconfiguration </li>
   <li> <a href="https://www.owasp.org/index.php/Top_10-2017_A3-Sensitive_Data_Exposure">OWASP Top 10 2017 Category A3</a> - Sensitive Data Exposure
   </li>

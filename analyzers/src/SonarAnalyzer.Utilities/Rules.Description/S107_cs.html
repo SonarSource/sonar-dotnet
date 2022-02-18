@@ -3,16 +3,34 @@ things.</p>
 <h2>Noncompliant Code Example</h2>
 <p>With a maximum number of 4 parameters:</p>
 <pre>
-public void doSomething(int param1, int param2, int param3, string param4, long param5)
+<code data-lang="csharp">public void doSomething(int param1, int param2, int param3, string param4, long param5)
 {
 ...
-}
+}</code>
 </pre>
 <h2>Compliant Solution</h2>
 <pre>
-public void doSomething(int param1, int param2, int param3, string param4)
+<code data-lang="csharp">public void doSomething(int param1, int param2, int param3, string param4)
 {
 ...
+}</code>
+</pre>
+<h2>Exceptions</h2>
+<pre>
+<code data-lang="csharp">public class BaseClass
+{
+	public BaseClass(int param1)
+	{
+	...
+	}
 }
+
+public class ExtensionClass : BaseClass
+{
+	public ExtensionClass(int param1, int param2, int param3, string param4, long param5) : base(param1) // Compliant, the parameters intended for the base class constructor do not count in the sum of the parameter list.
+	{
+	...
+	}
+}</code>
 </pre>
 
