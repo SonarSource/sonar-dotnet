@@ -21,6 +21,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using Microsoft.CodeAnalysis;
+using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
 using SonarAnalyzer.SymbolicExecution.Constraints;
 using StyleCop.Analyzers.Lightup;
@@ -45,6 +46,8 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn.RuleChecks
             "TryEnterUpgradeableReadLock",
             "TryEnterWriteLock"
         };
+
+        protected abstract ISafeSyntaxWalker CreateSyntaxWalker(LockAcquireReleaseCollector collector);
 
         public override ProgramState PostProcess(SymbolicContext context)
         {
@@ -113,8 +116,16 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn.RuleChecks
             }
         }
 
-        protected static bool ShouldExecuteFor(SyntaxToken identifier) =>
-            identifier.Text.Contains("Exit") || identifier.Text.Contains("ReleaseMutex") || identifier.Text.Contains("ReleaseReaderLock");
+        public override bool ShouldExecute()
+        {
+            var collector = new LockAcquireReleaseCollector();
+            var walker = CreateSyntaxWalker(collector);
+            foreach (var child in NodeContext.Node.ChildNodes())
+            {
+                walker.SafeVisit(child);
+            }
+            return collector.LockAcquiredAndReleased;
+        }
 
         private ProgramState ProcessMonitorEnter(SymbolicContext context, IInvocationOperationWrapper invocation) =>
             AddLock(context, FirstArgumentSymbol(invocation));
@@ -156,5 +167,43 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn.RuleChecks
 
         private static ISymbol FirstArgumentSymbol(IInvocationOperationWrapper invocation) =>
             IArgumentOperationWrapper.FromOperation(invocation.Arguments.First()).Value.TrackedSymbol();
+
+        protected sealed class LockAcquireReleaseCollector
+        {
+            private static readonly string LockType = "Mutex"; // For some APIs ctor can directly acquire the lock (e.g. Mutex).
+
+            private static readonly HashSet<string> LockMethods = new(ReaderWriterLockSlimLockMethods)
+            {
+                "AcquireReaderLock",
+                "AcquireWriterLock",
+                "Enter",
+                "TryEnter",
+                "WaitOne"
+            };
+
+            private static readonly HashSet<string> ReleaseMethods = new()
+            {
+                "Exit",
+                "ExitReadLock",
+                "ExitUpgradeableReadLock",
+                "ExitWriteLock",
+                "ReleaseLock",
+                "ReleaseMutex",
+                "ReleaseReaderLock",
+                "ReleaseWriterLock"
+            };
+
+            private bool lockAcquired;
+            private bool lockReleased;
+
+            public bool LockAcquiredAndReleased =>
+                lockAcquired && lockReleased;
+
+            public void RegisterIdentifier(string name)
+            {
+                lockAcquired = lockAcquired || name == LockType || LockMethods.Contains(name);
+                lockReleased = lockReleased || ReleaseMethods.Contains(name);
+            }
+        }
     }
 }

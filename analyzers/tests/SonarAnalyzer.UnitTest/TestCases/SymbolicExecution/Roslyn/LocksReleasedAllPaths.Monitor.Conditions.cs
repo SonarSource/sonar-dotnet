@@ -10,6 +10,8 @@ namespace Monitor_Conditions
 
         public object PublicObject = new object();
 
+        delegate void VoidDelegate();
+
         private bool condition;
 
         public void Method1()
@@ -325,6 +327,45 @@ namespace Monitor_Conditions
                     Monitor.Exit(obj);
                 }
             }
+        }
+
+        public void Lambda(bool condition)
+        {
+            Action parenthesizedLambda = () =>
+            {
+                Monitor.Enter(obj); // Noncompliant
+                if (condition)
+                    Monitor.Exit(obj);
+            };
+
+            Action<int> simpleLambda = x =>
+            {
+                Monitor.Enter(obj); // Noncompliant
+                if (condition)
+                    Monitor.Exit(obj);
+            };
+
+            void LocalFunction()
+            {
+                Monitor.Enter(other); // FN, local functions are not yet supported
+                if (condition)
+                    Monitor.Exit(other);
+            }
+
+            static void StaticLocalFunction()
+            {
+                var l = new object();
+                Monitor.Enter(l); // FN, local functions are not yet supported
+                if (1 == 2)
+                    Monitor.Exit(l);
+            }
+
+            VoidDelegate anonymousMethod = delegate
+            {
+                Monitor.Enter(other); // Noncompliant
+                if (condition)
+                    Monitor.Exit(other);
+            };
         }
     }
 }

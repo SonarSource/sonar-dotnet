@@ -18,10 +18,11 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
+using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
+using StyleCop.Analyzers.Lightup;
 
 namespace SonarAnalyzer.SymbolicExecution.Roslyn.RuleChecks.CSharp
 {
@@ -31,8 +32,34 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn.RuleChecks.CSharp
 
         protected override DiagnosticDescriptor Rule => S2222;
 
-        // ToDo: Implement early bail-out if there's no interesting descendant node in context.Node to avoid useless SE runs https://github.com/SonarSource/sonar-dotnet/issues/5375
-        public override bool ShouldExecute() =>
-            NodeContext.Node.DescendantNodes().OfType<IdentifierNameSyntax>().Any(x => ShouldExecuteFor(x.Identifier));
+        protected override ISafeSyntaxWalker CreateSyntaxWalker(LockAcquireReleaseCollector collector) =>
+            new LockAcquireReleaseWalker(collector);
+
+        private sealed class LockAcquireReleaseWalker : SafeCSharpSyntaxWalker
+        {
+            private readonly LockAcquireReleaseCollector collector;
+
+            public LockAcquireReleaseWalker(LockAcquireReleaseCollector collector) =>
+                this.collector = collector;
+
+            public override void Visit(SyntaxNode node)
+            {
+                if (collector.LockAcquiredAndReleased
+                    // Lambda expressions, anonymous methods and local functions are analyzed separately.
+                    || node is AnonymousFunctionExpressionSyntax
+                    || LocalFunctionStatementSyntaxWrapper.IsInstance(node))
+                {
+                    return;
+                }
+
+                base.Visit(node);
+            }
+
+            public override void VisitIdentifierName(IdentifierNameSyntax node)
+            {
+                collector.RegisterIdentifier(node.Identifier.ValueText);
+                base.VisitIdentifierName(node);
+            }
+        }
     }
 }
