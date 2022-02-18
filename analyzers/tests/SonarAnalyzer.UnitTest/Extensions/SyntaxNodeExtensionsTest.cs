@@ -20,8 +20,11 @@
 
 extern alias csharp;
 extern alias vbnet;
+
+using System;
 using System.Linq;
 using FluentAssertions;
+using FluentAssertions.Extensions;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.Operations;
@@ -328,6 +331,68 @@ End Class";
             var lambda = tree.GetRoot().DescendantNodes().OfType<CS.ParenthesizedLambdaExpressionSyntax>().Single();
 
             SyntaxNodeExtensionsCS.CreateCfg(lambda.Body, model).Should().NotBeNull();
+        }
+
+        [TestMethod]
+        public void CreateCfg_Performance_UsesCache_CS()
+        {
+            const string code = @"
+using System;
+public class Sample
+{
+    public void Main(string noiseToHaveMoreOperations)
+    {
+        noiseToHaveMoreOperations.ToString();
+        noiseToHaveMoreOperations.ToString();
+        noiseToHaveMoreOperations.ToString();
+        void LocalFunction()
+        {
+            noiseToHaveMoreOperations.ToString();
+            noiseToHaveMoreOperations.ToString();
+            noiseToHaveMoreOperations.ToString();
+            Action a = () => 42.ToString();
+        }
+    }
+}";
+            var (tree, model) = TestHelper.CompileCS(code);
+            var lambda = tree.GetRoot().DescendantNodes().OfType<CS.ParenthesizedLambdaExpressionSyntax>().Single();
+            Action a = () =>
+                {
+                    for (var i = 0; i < 10000; i++)
+                    {
+                        SyntaxNodeExtensionsCS.CreateCfg(lambda, model);
+                    }
+                };
+            a.ExecutionTime().Should().BeLessThan(1.Seconds());     // Takes roughly 0.2 sec on CI
+        }
+
+        [TestMethod]
+        public void CreateCfg_Performance_UsesCache_VB()
+        {
+            const string code = @"
+Public Class Sample
+    Public Sub Main(NoiseToHaveMoreOperations As String)
+        NoiseToHaveMoreOperations.ToString()
+        NoiseToHaveMoreOperations.ToString()
+        NoiseToHaveMoreOperations.ToString()
+        Dim Outer As Action = Sub()
+                                  NoiseToHaveMoreOperations.ToString()
+                                  NoiseToHaveMoreOperations.ToString()
+                                  NoiseToHaveMoreOperations.ToString()
+                                  Dim Inner As Action = Sub() NoiseToHaveMoreOperations.ToString()
+                              End Sub
+    End Sub
+End Class";
+            var (tree, model) = TestHelper.CompileVB(code);
+            var lambda = tree.GetRoot().DescendantNodes().OfType<VB.SingleLineLambdaExpressionSyntax>().Single();
+            Action a = () =>
+            {
+                for (var i = 0; i < 10000; i++)
+                {
+                    SyntaxNodeExtensionsCS.CreateCfg(lambda, model);
+                }
+            };
+            a.ExecutionTime().Should().BeLessThan(1.Seconds());     // Takes roughly 0.4 sec on CI
         }
 
         private static SyntaxToken GetFirstTokenOfKind(SyntaxTree syntaxTree, SyntaxKind kind) =>
