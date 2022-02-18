@@ -2,14 +2,14 @@
 <h2>Noncompliant Code Example</h2>
 <p>With the default threshold value of 3</p>
 <pre>
-If ((condition1 AndAlso condition2) OrElse (condition3 AndAlso condition4)) AndAlso condition5) Then  'Noncompliant
+<code data-lang="vbnet">If ((condition1 AndAlso condition2) OrElse (condition3 AndAlso condition4)) AndAlso condition5) Then  'Noncompliant
   ...
-End If
+End If</code>
 </pre>
 <h2>Compliant Solution</h2>
 <pre>
-If ((MyFirstCondition() OrElse MySecondCondition()) AndAlso MyLastCondition()) Then
+<code data-lang="vbnet">If ((MyFirstCondition() OrElse MySecondCondition()) AndAlso MyLastCondition()) Then
   ...
-End If
+End If</code>
 </pre>
 

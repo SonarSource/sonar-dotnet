@@ -6,16 +6,16 @@ set such fields during the deserialization process.</p>
 <code>System.Runtime.Serialization.OnDeserializedAttribute</code> are not present.</p>
 <h2>Noncompliant Code Example</h2>
 <pre>
-[Serializable]
+<code data-lang="text">[Serializable]
 public class Foo
 {
     [OptionalField(VersionAdded = 2)]
     int optionalField = 5;
-}
+}</code>
 </pre>
 <h2>Compliant Solution</h2>
 <pre>
-[Serializable]
+<code data-lang="text">[Serializable]
 public class Foo
 {
     [OptionalField(VersionAdded = 2)]
@@ -32,6 +32,6 @@ public class Foo
     {
         // Set optionalField if dependent on other deserialized values.
     }
-}
+}</code>
 </pre>
 

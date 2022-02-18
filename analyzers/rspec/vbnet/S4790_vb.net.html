@@ -37,7 +37,7 @@ End Class
 </pre>
 <h2>Compliant Solution</h2>
 <pre>
-Imports System.Security.Cryptography
+<code data-lang="vbnet">Imports System.Security.Cryptography
 
 Sub ComputeHash()
     Dim sha256 = New SHA256CryptoServiceProvider() ' Compliant
@@ -45,7 +45,7 @@ Sub ComputeHash()
     Dim sha512 = New SHA512CryptoServiceProvider() ' Compliant
 
     ' ...
-End Sub
+End Sub</code>
 </pre>
 <h2>See</h2>
 <ul>

@@ -6,7 +6,7 @@ that performs these extra steps and verifications.</p>
 <p>This rule raises an issue when a native method is declared <code>public</code> or its wrapper is too trivial.</p>
 <h2>Noncompliant Code Example</h2>
 <pre>
-using System;
+<code data-lang="text">using System;
 using System.Runtime.InteropServices;
 
 namespace MyLibrary
@@ -16,11 +16,11 @@ namespace MyLibrary
     [DllImport("mynativelib")]
     extern public static void Bar(string s, int x); // Noncompliant
   }
-}
+}</code>
 </pre>
 <h2>Compliant Solution</h2>
 <pre>
-using System;
+<code data-lang="text">using System;
 using System.Runtime.InteropServices;
 
 namespace MyLibrary
@@ -38,6 +38,6 @@ namespace MyLibrary
       }
     }
   }
-}
+}</code>
 </pre>
 

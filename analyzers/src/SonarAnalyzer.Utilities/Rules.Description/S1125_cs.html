@@ -1,7 +1,7 @@
 <p>Redundant Boolean literals should be removed from expressions to improve readability.</p>
 <h2>Noncompliant Code Example</h2>
 <pre>
-if (booleanMethod() == true) { /* ... */ }
+<code data-lang="csharp">if (booleanMethod() == true) { /* ... */ }
 if (booleanMethod() == false) { /* ... */ }
 if (booleanMethod() || false) { /* ... */ }
 doSomething(!false);
@@ -16,11 +16,11 @@ booleanVariable = booleanMethod() ? exp : false;
 for (var x = 0; true; x++)
 {
  ...
-}
+}</code>
 </pre>
 <h2>Compliant Solution</h2>
 <pre>
-if (booleanMethod()) { /* ... */ }
+<code data-lang="csharp">if (booleanMethod()) { /* ... */ }
 if (!booleanMethod()) { /* ... */ }
 if (booleanMethod()) { /* ... */ }
 doSomething(true);
@@ -35,6 +35,6 @@ booleanVariable = booleanMethod() &amp;&amp; exp;
 for (var x = 0; ; x++)
 {
  ...
-}
+}</code>
 </pre>
 

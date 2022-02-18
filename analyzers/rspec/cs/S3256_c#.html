@@ -3,14 +3,14 @@ checking for <code>string.Length == 0</code>. <code>string.IsNullOrEmpty()</code
 error-prone, manual null- and emptiness-checking.</p>
 <h2>Noncompliant Code Example</h2>
 <pre>
-"".Equals(name); // Noncompliant
+<code data-lang="csharp">"".Equals(name); // Noncompliant
 !name.Equals(""); // Noncompliant
-name.Equals(string.Empty); // Noncompliant
+name.Equals(string.Empty); // Noncompliant</code>
 </pre>
 <h2>Compliant Solution</h2>
 <pre>
-name != null &amp;&amp; name.Length &gt; 0 // Compliant but more error prone
+<code data-lang="csharp">name != null &amp;&amp; name.Length &gt; 0 // Compliant but more error prone
 !string.IsNullOrEmpty(name)
-string.IsNullOrEmpty(name)
+string.IsNullOrEmpty(name)</code>
 </pre>
 

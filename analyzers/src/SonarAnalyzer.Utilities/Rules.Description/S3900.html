@@ -4,7 +4,7 @@ general, checking against <code>null</code> is recommended defensive programming
 dereferenced.</p>
 <h2>Noncompliant Code Example</h2>
 <pre>
-public class MyClass
+<code data-lang="csharp">public class MyClass
 {
     private MyOtherClass other;
 
@@ -22,11 +22,11 @@ public class MyClass
     {
         this.other = other.Clone(); // Noncompliant
     }
-}
+}</code>
 </pre>
 <h2>Compliant Solution</h2>
 <pre>
-public class MyClass
+<code data-lang="csharp">public class MyClass
 {
     private MyOtherClass other;
 
@@ -50,7 +50,7 @@ public class MyClass
             this.other = other.Clone();
         }
     }
-}
+}</code>
 </pre>
 <h2>Exceptions</h2>
 <p>To create a custom null validation method declare an attribute with name <code>ValidatedNotNullAttribute</code> and mark the parameter that is

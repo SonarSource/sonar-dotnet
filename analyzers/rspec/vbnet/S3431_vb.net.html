@@ -3,15 +3,15 @@ the <code>ExpectedException</code> attribute since an exception could be thrown 
 <p>This rule detects MSTest and NUnit <code>ExpectedException</code> attribute.</p>
 <h2>Noncompliant Code Example</h2>
 <pre>
-&lt;TestMethod&gt;
+<code data-lang="vbnet">&lt;TestMethod&gt;
 &lt;ExpectedException(GetType(ArgumentNullException))&gt; ' Noncompliant
 Public Sub TestNullArg()
   '...
-End Sub
+End Sub</code>
 </pre>
 <h2>Compliant Solution</h2>
 <pre>
-&lt;TestMethod&gt;
+<code data-lang="vbnet">&lt;TestMethod&gt;
 Public Sub TestNullArg()
     Dim CallFailed As Boolean = False
     Try
@@ -20,14 +20,14 @@ Public Sub TestNullArg()
         CallFailed = true
     End Try
     Assert.IsTrue(CallFailed, "Expected call to MyMethod to fail with ArgumentNullException")
-End Sub
+End Sub</code>
 </pre>
 <p>or</p>
 <pre>
-&lt;TestMethod&gt;
+<code data-lang="vbnet">&lt;TestMethod&gt;
 Public Sub TestNullArg()
     Assert.ThrowsException(Of ArgumentNullException)(Sub() ... )
-End Sub
+End Sub</code>
 </pre>
 <h2>Exceptions</h2>
 <p>This rule ignores one-line test methods, since it is obvious in such methods where the exception is expected to be thrown.</p>

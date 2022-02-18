@@ -2,7 +2,7 @@
 method.</p>
 <h2>Noncompliant Code Example</h2>
 <pre>
-public class Utilities
+<code data-lang="text">public class Utilities
 {
     public int MagicNum // Noncompliant
     {
@@ -29,11 +29,11 @@ public class Utilities
     {
         return a + b;
     }
-}
+}</code>
 </pre>
 <h2>Compliant Solution</h2>
 <pre>
-public class Utilities
+<code data-lang="text">public class Utilities
 {
     public static int MagicNum
     {
@@ -60,7 +60,7 @@ public class Utilities
     {
         return a + b;
     }
-}
+}</code>
 </pre>
 <h2>Exceptions</h2>
 <p>Methods with the following names are excluded because they can’t be made <code>static</code>:</p>

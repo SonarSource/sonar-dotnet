@@ -6,23 +6,23 @@ defined in the object’s type, so using it in such cases is just confusing.</p>
 rules.</p>
 <h2>Noncompliant Code Example</h2>
 <pre>
-sealed class MyClass
+<code data-lang="csharp">sealed class MyClass
 {
   public void Method()
   {
     ...
     GC.SuppressFinalize(this); //Noncompliant
   }
-}
+}</code>
 </pre>
 <h2>Compliant Solution</h2>
 <pre>
-sealed class MyClass
+<code data-lang="csharp">sealed class MyClass
 {
   public void Method()
   {
     ...
   }
-}
+}</code>
 </pre>
 

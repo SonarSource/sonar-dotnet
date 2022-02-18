@@ -2,19 +2,19 @@
 <p>For just one or two cases however, the code will be more readable with <code>if</code> statements.</p>
 <h2>Noncompliant Code Example</h2>
 <pre>
-Select Case variable
+<code data-lang="vbnet">Select Case variable
     Case 0
         doSomething()
     Case Else
         doSomethingElse()
-End Select
+End Select</code>
 </pre>
 <h2>Compliant Solution</h2>
 <pre>
-If variable = 0 Then
+<code data-lang="vbnet">If variable = 0 Then
     doSomething()
 Else
     doSomethingElse()
-End If
+End If</code>
 </pre>
 

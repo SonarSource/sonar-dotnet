@@ -5,7 +5,7 @@ culture (<code>CultureInfo.InvariantCulture</code>).</p>
 setting the locale property (<code>DataTable.Locale</code> or <code>DataSet.Locale</code>).</p>
 <h2>Noncompliant Code Example</h2>
 <pre>
-using System;
+<code data-lang="csharp">using System;
 using System.Data;
 
 namespace MyLibrary
@@ -24,11 +24,11 @@ namespace MyLibrary
             return table;
         }
     }
-}
+}</code>
 </pre>
 <h2>Compliant Solution</h2>
 <pre>
-using System;
+<code data-lang="csharp">using System;
 using System.Data;
 using System.Globalization;
 
@@ -49,6 +49,6 @@ namespace MyLibrary
             return table;
         }
     }
-}
+}</code>
 </pre>
 

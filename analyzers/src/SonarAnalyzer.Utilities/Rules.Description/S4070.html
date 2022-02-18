@@ -2,7 +2,7 @@
 a power of 2 or a combination of the other defined values.</p>
 <h2>Noncompliant Code Example</h2>
 <pre>
-using System;
+<code data-lang="csharp">using System;
 
 namespace MyLibrary
 {
@@ -14,11 +14,11 @@ namespace MyLibrary
         Orange  = 3,
         Yellow  = 4
     }
-}
+}</code>
 </pre>
 <h2>Compliant Solution</h2>
 <pre>
-using System;
+<code data-lang="csharp">using System;
 
 namespace MyLibrary
 {
@@ -41,6 +41,6 @@ namespace MyLibrary
         Friday = 16,
         All = Monday| Tuesday | Wednesday | Thursday | Friday    // Compliant - combination of other values
     }
-}
+}</code>
 </pre>
 

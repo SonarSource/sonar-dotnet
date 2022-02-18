@@ -37,28 +37,28 @@ public ActionResult Welcome(string name)
 <h2>Compliant Solution</h2>
 <p>At Controller level:</p>
 <pre>
-[ValidateInput(true)]
+<code data-lang="text">[ValidateInput(true)]
 public ActionResult Welcome(string name)
 {
   ...
-}
+}</code>
 </pre>
 <p>or</p>
 <pre>
-public ActionResult Welcome(string name)
+<code data-lang="text">public ActionResult Welcome(string name)
 {
   ...
-}
+}</code>
 </pre>
 <p>At application level, configured in the Web.config file:</p>
 <pre>
-&lt;configuration&gt;
+<code data-lang="text">&lt;configuration&gt;
    &lt;system.web&gt;
       &lt;pages validateRequest="true" /&gt;
       ...
       &lt;httpRuntime requestValidationMode="4.5" /&gt;
    &lt;/system.web&gt;
-&lt;/configuration&gt;
+&lt;/configuration&gt;</code>
 </pre>
 <h2>See</h2>
 <ul>

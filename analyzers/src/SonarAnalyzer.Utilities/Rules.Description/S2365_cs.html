@@ -4,7 +4,7 @@ that callers are not surprised by the unexpectedly poor performance.</p>
 <p>This rule detects calls to <code>ToList</code>, <code>ToArray</code> and array <code>Clone</code>.</p>
 <h2>Noncompliant Code Example</h2>
 <pre>
-private List&lt;string&gt; _foo = new List&lt;string&gt; { "a", "b", "c" };
+<code data-lang="csharp">private List&lt;string&gt; _foo = new List&lt;string&gt; { "a", "b", "c" };
 public IEnumerable&lt;string&gt; Foo  // Noncompliant
 {
     get
@@ -20,11 +20,11 @@ public IEnumerable&lt;string&gt; Bar // Noncompliant
     {
         return (string[])_bar.Clone();
     }
-}
+}</code>
 </pre>
 <h2>Compliant Solution</h2>
 <pre>
-private List&lt;string&gt; _foo = new List&lt;string&gt; { "a", "b", "c" };
+<code data-lang="csharp">private List&lt;string&gt; _foo = new List&lt;string&gt; { "a", "b", "c" };
 private string[] _bar = new string[] { "a", "b", "c" };
 
 public IEnumerable&lt;string&gt; GetFoo()
@@ -35,6 +35,6 @@ public IEnumerable&lt;string&gt; GetFoo()
 public IEnumerable&lt;string&gt; GetBar()
 {
     return (string[])_bar.Clone();
-}
+}</code>
 </pre>
 

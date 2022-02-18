@@ -2,18 +2,18 @@
 side-effects.</p>
 <h2>Noncompliant Code Example</h2>
 <pre>
-if (string.IsNullOrEmpty(result = str.Substring(index, length))) // Noncompliant
+<code data-lang="csharp">if (string.IsNullOrEmpty(result = str.Substring(index, length))) // Noncompliant
 {
   //...
-}
+}</code>
 </pre>
 <h2>Compliant Solution</h2>
 <pre>
-var result = str.Substring(index, length);
+<code data-lang="csharp">var result = str.Substring(index, length);
 if (string.IsNullOrEmpty(result))
 {
   //...
-}
+}</code>
 </pre>
 <h2>Exceptions</h2>
 <p>Assignments inside lambda and delegate expressions are allowed.</p>

@@ -4,7 +4,7 @@ value field, such as a <code>struct</code>, cannot.</p>
 sometimes but not others.</p>
 <h2>Noncompliant Code Example</h2>
 <pre>
-interface IPoint
+<code data-lang="csharp">interface IPoint
 {
   int X { get; set; }
   int Y { get; set; }
@@ -23,11 +23,11 @@ class PointManager&lt;T&gt; where T: IPoint
     point.X = newX; //Noncompliant; if point is a struct, then nothing happened
     Console.WriteLine(point.X);
   }
-}
+}</code>
 </pre>
 <h2>Compliant Solution</h2>
 <pre>
-interface IPoint
+<code data-lang="csharp">interface IPoint
 {
   int X { get; set; }
   int Y { get; set; }
@@ -45,11 +45,11 @@ class PointManager&lt;T&gt; where T : IPoint
   {
     Console.WriteLine(point.X);
   }
-}
+}</code>
 </pre>
 <p>or</p>
 <pre>
-interface IPoint
+<code data-lang="csharp">interface IPoint
 {
   int X { get; set; }
   int Y { get; set; }
@@ -68,6 +68,6 @@ class PointManager&lt;T&gt; where T : class, IPoint
     point.X = newX;  // this assignment is guaranteed to work
     Console.WriteLine(point.X);
   }
-}
+}</code>
 </pre>
 

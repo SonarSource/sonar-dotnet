@@ -2,16 +2,16 @@
 bugs, particularly when the initial value and stop conditions are hard-coded.</p>
 <h2>Noncompliant Code Example</h2>
 <pre>
-for (int i = 10; i &lt; 10; i++)  // Noncompliant
+<code data-lang="csharp">for (int i = 10; i &lt; 10; i++)  // Noncompliant
 {
     // ...
-}
+}</code>
 </pre>
 <h2>Compliant Solution</h2>
 <pre>
-for (int i = 0; i &lt; 10; i++)
+<code data-lang="csharp">for (int i = 0; i &lt; 10; i++)
 {
     // ...
-}
+}</code>
 </pre>
 

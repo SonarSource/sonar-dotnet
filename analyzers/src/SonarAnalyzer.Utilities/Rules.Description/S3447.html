@@ -7,7 +7,7 @@ the compiler will raise an error on such code. Unfortunately, it raises the erro
 omitted, not the source of the problem, the method declaration.</p>
 <h2>Noncompliant Code Example</h2>
 <pre>
-class MyClass
+<code data-lang="csharp">class MyClass
 {
     public void DoStuff([Optional] ref int i) // Noncompliant
     {
@@ -18,11 +18,11 @@ class MyClass
     {
         new MyClass().DoStuff(); // This doesn't compile, CS7036 shows
     }
-}
+}</code>
 </pre>
 <h2>Compliant Solution</h2>
 <pre>
-class MyClass
+<code data-lang="csharp">class MyClass
 {
   public void DoStuff(ref int i)
   {
@@ -34,6 +34,6 @@ class MyClass
     var i = 42;
     new MyClass().DoStuff(ref i);
   }
-}
+}</code>
 </pre>
 

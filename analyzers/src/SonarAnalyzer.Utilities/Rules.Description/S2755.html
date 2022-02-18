@@ -16,7 +16,7 @@ href="https://www.owasp.org/index.php/Server_Side_Request_Forgery">server-side r
 <h2>Noncompliant Code Example</h2>
 <p>System.Xml.XmlDocument</p>
 <pre>
-// .NET Framework &lt; 4.5.2
+<code data-lang="csharp">// .NET Framework &lt; 4.5.2
 XmlDocument parser = new XmlDocument(); // Noncompliant: XmlDocument is not safe by default
 parser.LoadXml("xxe.xml");
 
@@ -25,11 +25,11 @@ or
 // .NET Framework 4.5.2+
 XmlDocument parser = new XmlDocument();
 parser.XmlResolver = new XmlUrlResolver(); // Noncompliant: XmlDocument.XmlResolver configured with XmlUrlResolver that makes it unsafe
-parser.LoadXml("xxe.xml");
+parser.LoadXml("xxe.xml");</code>
 </pre>
 <p>System.Xml.XmlTextReader</p>
 <pre>
-// .NET Framework &lt; 4.5.2
+<code data-lang="csharp">// .NET Framework &lt; 4.5.2
 XmlTextReader reader = new XmlTextReader("xxe.xml"); // Noncompliant: XmlTextReady is not safe by default
 while (reader.Read())
 { ... }
@@ -40,40 +40,40 @@ or
 XmlTextReader reader = new XmlTextReader("xxe.xml");
 reader.XmlResolver = new XmlUrlResolver(); // Noncompliant: XmlTextRead.XmlResolver configured with XmlUrlResolver that makes it unsafe
 while (reader.Read())
-{ ... }
+{ ... }</code>
 </pre>
 <p>System.Xml.XmlReader</p>
 <pre>
-// .NET Framework 4.5.2+
+<code data-lang="csharp">// .NET Framework 4.5.2+
 XmlReaderSettings settings = new XmlReaderSettings();
 settings.DtdProcessing = DtdProcessing.Parse;
 settings.XmlResolver = new XmlUrlResolver();
 XmlReader reader = XmlReader.Create("xxe.xml", settings); // Noncompliant: XmlReader is safe by default and becomes unsafe if DtdProcessing = Parse and XmlResolver is not null
 while (reader.Read())
-{ ... }
+{ ... }</code>
 </pre>
 <p>System.Xml.XPath.XPathDocument</p>
 <pre>
-// prior to .NET 4.5.2
+<code data-lang="csharp">// prior to .NET 4.5.2
 XPathDocument doc = new XPathDocument("example.xml"); // Noncompliant
 XPathNavigator nav = doc.CreateNavigator();
-string xml = nav.InnerXml.ToString();
+string xml = nav.InnerXml.ToString();</code>
 </pre>
 <h2>Compliant Solution</h2>
 <p>System.Xml.XmlDocument</p>
 <pre>
-XmlDocument parser = new XmlDocument();
+<code data-lang="csharp">XmlDocument parser = new XmlDocument();
 parser.XmlResolver = null; // Compliant: XmlResolver has been set to null
 parser.LoadXml("xxe.xml");
 
 or
 
 XmlDocument parser = new XmlDocument(); // Compliant: XmlDocument is safe by default in  .NET Framework 4.5.2+ because XmlResolver is set by default to null
-parser.LoadXml("xxe.xml");
+parser.LoadXml("xxe.xml");</code>
 </pre>
 <p>System.Xml.XmlTextReader</p>
 <pre>
-// .NET 4.5.2+
+<code data-lang="csharp">// .NET 4.5.2+
 XmlTextReader reader = new XmlTextReader("xxe.xml"); // Compliant: XmlTextReader is safe by default in  .NET Framework 4.5.2+ because XmlResolver is set by default to null
 while (reader.Read())
 { ... }
@@ -84,21 +84,21 @@ reader.DtdProcessing = DtdProcessing.Prohibit; // Compliant: XmlTextReader is sa
 
 // &lt; .NET 4.0
 XmlTextReader reader = new XmlTextReader(stream);
-reader.ProhibitDtd = true; // Compliant: default is false
+reader.ProhibitDtd = true; // Compliant: default is false</code>
 </pre>
 <p>System.Xml.XmlReader</p>
 <pre>
-XmlReader reader = XmlReader.Create("xxe.xml"); // Compliant: XmlReader is safe by default
+<code data-lang="csharp">XmlReader reader = XmlReader.Create("xxe.xml"); // Compliant: XmlReader is safe by default
 while (reader.Read())
-{ ... }
+{ ... }</code>
 </pre>
 <p>System.Xml.XPath.XPathDocument</p>
 <pre>
-// prior to .NET 4.5.2
+<code data-lang="csharp">// prior to .NET 4.5.2
 XmlReader reader = XmlReader.Create("example.xml");
 XPathDocument doc = new XPathDocument(reader); // Compliant: XPathDocument is safe when being given a safe XmlReader
 XPathNavigator nav = doc.CreateNavigator();
-string xml = nav.InnerXml.ToString();
+string xml = nav.InnerXml.ToString();</code>
 </pre>
 <h2>See</h2>
 <ul>

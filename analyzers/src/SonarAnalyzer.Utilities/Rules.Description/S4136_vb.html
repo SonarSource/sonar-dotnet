@@ -2,19 +2,19 @@
 available options.</p>
 <h2>Noncompliant Code Example</h2>
 <pre>
-Interface IMyInterface
+<code data-lang="vbnet">Interface IMyInterface
     Function DoTheThing() As Integer
     Function DoTheOtherThing() As String // Noncompliant
     Function DoTheThing(ByVal Path As String) As Integer
-End Interface
+End Interface</code>
 </pre>
 <h2>Compliant Solution</h2>
 <pre>
-Interface IMyInterface
+<code data-lang="vbnet">Interface IMyInterface
     Function DoTheThing() As Integer
     Function DoTheThing(ByVal Path As String) As Integer
     Function DoTheOtherThing() As String
-End Interface
+End Interface</code>
 </pre>
 <h2>Exceptions</h2>
 <p>As it is common practice to group method declarations by implemented interface, no issue will be raised for interface implementations if grouped

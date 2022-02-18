@@ -3,7 +3,7 @@ classes that directly extend <code>object</code> because those methods are based
 that use those <code>base</code> methods will ever be equal or have the same hash.</p>
 <h2>Noncompliant Code Example</h2>
 <pre>
-public class Point
+<code data-lang="text">public class Point
 {
   private readonly int x;
   public MyClass(int x)
@@ -14,11 +14,11 @@ public class Point
   {
     return x.GetHashCode() ^ base.GetHashCode(); //Noncompliant
   }
-}
+}</code>
 </pre>
 <h2>Compliant Solution</h2>
 <pre>
-public class Point
+<code data-lang="text">public class Point
 {
   private readonly int x;
   public MyClass(int x)
@@ -29,7 +29,7 @@ public class Point
   {
     return x.GetHashCode();
   }
-}
+}</code>
 </pre>
 <h2>Exceptions</h2>
 <p>This rule doesn’t report on guard conditions checking for reference equality.</p>

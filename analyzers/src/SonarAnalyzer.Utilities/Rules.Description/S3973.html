@@ -3,22 +3,22 @@ and good practice, such lines are indented. In the absence of both curly braces 
 unclear and perhaps not actually what is executed. Additionally, such code is highly likely to be confusing to maintainers.</p>
 <h2>Noncompliant Code Example</h2>
 <pre>
-if (condition)  // Noncompliant
+<code data-lang="csharp">if (condition)  // Noncompliant
 DoTheThing();
 
 DoTheOtherThing();
 SomethingElseEntirely();
 
-Foo();
+Foo();</code>
 </pre>
 <h2>Compliant Solution</h2>
 <pre>
-if (condition)
+<code data-lang="csharp">if (condition)
   DoTheThing();
 
 DoTheOtherThing();
 SomethingElseEntirely();
 
-Foo();
+Foo();</code>
 </pre>
 

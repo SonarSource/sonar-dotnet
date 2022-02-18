@@ -4,7 +4,7 @@ should be extracted into a dedicated procedure.</p>
 <h2>Noncompliant Code Example</h2>
 <p>With the default threshold of 3:</p>
 <pre>
-Select Case number
+<code data-lang="vbnet">Select Case number
     Case 1 To 5 ' Noncompliant: 4 statements in the case
         MethodCall1("")
         MethodCall2("")
@@ -12,11 +12,11 @@ Select Case number
         MethodCall4("")
     Case Else
         ' ...
-End Select
+End Select</code>
 </pre>
 <h2>Compliant Solution</h2>
 <pre>
-Select Case number
+<code data-lang="vbnet">Select Case number
     Case 1 To 5
         DoSomething()
     Case Else
@@ -28,6 +28,6 @@ Sub DoSomething()
     MethodCall2("")
     MethodCall3("")
     MethodCall4("")
-End Sub
+End Sub</code>
 </pre>
 

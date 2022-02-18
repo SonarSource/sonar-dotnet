@@ -36,26 +36,26 @@ End Function
 <h2>Compliant Solution</h2>
 <p>At Controller level:</p>
 <pre>
-&lt;ValidateInput(True)&gt;
+<code data-lang="vbnet">&lt;ValidateInput(True)&gt;
 Public Function Welcome(Name As String) As ActionResult
   ...
-End Function
+End Function</code>
 </pre>
 <p>or</p>
 <pre>
-Public Function Welcome(Name As String) As ActionResult
+<code data-lang="vbnet">Public Function Welcome(Name As String) As ActionResult
   ...
-End Function
+End Function</code>
 </pre>
 <p>At application level, configured in the Web.config file:</p>
 <pre>
-&lt;configuration&gt;
+<code data-lang="vbnet">&lt;configuration&gt;
    &lt;system.web&gt;
       &lt;pages validateRequest="true" /&gt;
       ...
       &lt;httpRuntime requestValidationMode="4.5" /&gt;
    &lt;/system.web&gt;
-&lt;/configuration&gt;
+&lt;/configuration&gt;</code>
 </pre>
 <h2>See</h2>
 <ul>

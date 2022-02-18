@@ -54,11 +54,11 @@ var tmp = Environment.GetEnvironmentVariable("TMP"); // Sensitive
 </pre>
 <h2>Compliant Solution</h2>
 <pre>
-var randomPath = Path.Combine(Path.GetTempPath(), Path.GetRandomFileName());
+<code data-lang="csharp">var randomPath = Path.Combine(Path.GetTempPath(), Path.GetRandomFileName());
 
 // Creates a new file with write, non inheritable permissions which is deleted on close.
 using var fileStream = new FileStream(randomPath, FileMode.CreateNew, FileAccess.Write, FileShare.None, 4096, FileOptions.DeleteOnClose);
-using var writer = new StreamWriter(fileStream);
+using var writer = new StreamWriter(fileStream);</code>
 </pre>
 <h2>See</h2>
 <ul>

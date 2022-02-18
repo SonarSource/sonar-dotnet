@@ -4,18 +4,18 @@
 there is at least one whitespace character after.</p>
 <h2>Noncompliant Code Example</h2>
 <pre>
-int target = -5;
+<code data-lang="text">int target = -5;
 int num = 3;
 
 target =- num;  // Noncompliant; target = -3. Is that really what's meant?
-target =+ num; // Noncompliant; target = 3
+target =+ num; // Noncompliant; target = 3</code>
 </pre>
 <h2>Compliant Solution</h2>
 <pre>
-int target = -5;
+<code data-lang="text">int target = -5;
 int num = 3;
 
 target = -num;  // Compliant; intent to assign inverse value of num is clear
-target += num;
+target += num;</code>
 </pre>
 

@@ -2,7 +2,7 @@
 <code>default</code> clause will be invoked. Such <code>case</code>s simply clutter the code, and should be removed.</p>
 <h2>Noncompliant Code Example</h2>
 <pre>
-switch(ch)
+<code data-lang="csharp">switch(ch)
 {
   case 'a' :
     HandleA();
@@ -14,11 +14,11 @@ switch(ch)
   default:
     HandleTheRest();
     break;
-}
+}</code>
 </pre>
 <h2>Compliant Solution</h2>
 <pre>
-switch(ch)
+<code data-lang="csharp">switch(ch)
 {
   case 'a' :
     HandleA();
@@ -29,6 +29,6 @@ switch(ch)
   default:
     HandleTheRest();
     break;
-}
+}</code>
 </pre>
 

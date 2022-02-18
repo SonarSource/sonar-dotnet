@@ -7,14 +7,14 @@
 <p>Such redundant declarations should be removed because they needlessly clutter the code and can be confusing.</p>
 <h2>Noncompliant Code Example</h2>
 <pre>
-public class MyClass : Object  // Noncompliant
+<code data-lang="csharp">public class MyClass : Object  // Noncompliant
 
-enum MyEnum : int  // Noncompliant
+enum MyEnum : int  // Noncompliant</code>
 </pre>
 <h2>Compliant Solution</h2>
 <pre>
-public class MyClass
+<code data-lang="csharp">public class MyClass
 
-enum MyEnum
+enum MyEnum</code>
 </pre>
 

@@ -2,7 +2,7 @@
 statement. It is safer and more readable to use structured loops instead.</p>
 <h2>Noncompliant Code Example</h2>
 <pre>
-Module Module1
+<code data-lang="text">Module Module1
     Sub Main()
         Dim i = 1
 
@@ -16,16 +16,16 @@ Module Module1
             i = i + 1
         Loop
     End Sub
-End Module
+End Module</code>
 </pre>
 <h2>Compliant Solution</h2>
 <pre>
-Module Module1
+<code data-lang="text">Module Module1
     Sub Main()
         For i = 1 To 9            ' Compliant
             Console.WriteLine(i)
         Next
     End Sub
-End Module
+End Module</code>
 </pre>
 

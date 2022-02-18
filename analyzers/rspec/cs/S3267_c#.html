@@ -1,7 +1,7 @@
 <p>When a loop is filtering, selecting or aggregating, those functions can be handled with a clearer, more concise LINQ expression instead.</p>
 <h2>Noncompliant Code Example</h2>
 <pre>
-var result = new List&lt;string&gt;();
+<code data-lang="csharp">var result = new List&lt;string&gt;();
 foreach (var element in collection)  // Noncompliant
 {
   if (condition(element))
@@ -17,11 +17,11 @@ foreach (var element in collection2) // Noncompliant
   {
     result.Add(someValue);
   }
-}
+}</code>
 </pre>
 <h2>Compliant Solution</h2>
 <pre>
-var result = new List&lt;string&gt;();
+<code data-lang="csharp">var result = new List&lt;string&gt;();
 
 foreach (var element in collection.Where(x =&gt; condition(x)))
 {
@@ -31,6 +31,6 @@ foreach (var element in collection.Where(x =&gt; condition(x)))
 foreach (var someValue in collection2.Select(x =&gt; x.Property).Where(y =&gt; y != null))
 {
   result.Add(someValue);
-}
+}</code>
 </pre>
 

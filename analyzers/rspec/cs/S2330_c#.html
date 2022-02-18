@@ -5,7 +5,7 @@ be used with care, since assigning an instance of <code>B</code> into an array o
 to be thrown at runtime.</p>
 <h2>Noncompliant Code Example</h2>
 <pre>
-abstract class Fruit { }
+<code data-lang="csharp">abstract class Fruit { }
 class Apple : Fruit { }
 class Orange : Fruit { }
 
@@ -25,11 +25,11 @@ class Program
       fruits[i] = new Orange(); // Will throw an ArrayTypeMismatchException
     }
   }
-}
+}</code>
 </pre>
 <h2>Compliant Solution</h2>
 <pre>
-abstract class Fruit { }
+<code data-lang="csharp">abstract class Fruit { }
 class Apple : Fruit { }
 class Orange : Fruit { }
 
@@ -48,6 +48,6 @@ class Program
       fruits[i] = new Orange();
     }
   }
-}
+}</code>
 </pre>
 

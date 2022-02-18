@@ -10,16 +10,16 @@ a sub-type. I.e. this is the inversion of covariance. The most notable example o
 the assignment of an <code>Action&lt;object&gt;</code> instance to a <code>Action&lt;string&gt;</code> variable, for instance.</p>
 <h2>Noncompliant Code Example</h2>
 <pre>
-interface IConsumer&lt;T&gt;  // Noncompliant
+<code data-lang="csharp">interface IConsumer&lt;T&gt;  // Noncompliant
 {
     bool Eat(T fruit);
-}
+}</code>
 </pre>
 <h2>Compliant Solution</h2>
 <pre>
-interface IConsumer&lt;in T&gt;
+<code data-lang="csharp">interface IConsumer&lt;in T&gt;
 {
     bool Eat(T fruit);
-}
+}</code>
 </pre>
 

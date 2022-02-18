@@ -15,7 +15,7 @@ collections should be used instead of the older, non-generic, ones. Finally when
 </ul>
 <h2>Noncompliant Code Example</h2>
 <pre>
-using System;
+<code data-lang="csharp">using System;
 using System.Collections;
 
 namespace MyLibrary
@@ -23,11 +23,11 @@ namespace MyLibrary
   public class MyCollection : CollectionBase  // Noncompliant
   {
   }
-}
+}</code>
 </pre>
 <h2>Compliant Solution</h2>
 <pre>
-using System;
+<code data-lang="csharp">using System;
 using System.Collections;
 
 namespace MyLibrary
@@ -35,6 +35,6 @@ namespace MyLibrary
   public class MyCollection : Collection&lt;T&gt;
   {
   }
-}
+}</code>
 </pre>
 

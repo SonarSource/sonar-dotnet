@@ -3,7 +3,7 @@ memory, usually in order to use C or C++ libraries. If such a pointer is not sec
 <code>readonly</code>, it can lead to a vulnerability allowing access to arbitrary locations.</p>
 <h2>Noncompliant Code Example</h2>
 <pre>
-using System;
+<code data-lang="csharp">using System;
 
 namespace MyLibrary
 {
@@ -12,11 +12,11 @@ namespace MyLibrary
     public IntPtr myPointer;  // Noncompliant
     protected UIntPtr myOtherPointer; // Noncompliant
   }
-}
+}</code>
 </pre>
 <h2>Compliant Solution</h2>
 <pre>
-using System;
+<code data-lang="csharp">using System;
 
 namespace MyLibrary
 {
@@ -25,6 +25,6 @@ namespace MyLibrary
     private IntPtr myPointer;
     protected readonly UIntPtr myOtherPointer;
   }
-}
+}</code>
 </pre>
 

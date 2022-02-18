@@ -74,7 +74,7 @@ time, which improves performance.</p>
 </table>
 <h2>Noncompliant Code Example</h2>
 <pre>
-namespace myLib
+<code data-lang="csharp">namespace myLib
 {
   public class Foo
   {
@@ -82,11 +82,11 @@ namespace myLib
     static readonly int y = x + 4; // Noncompliant
     static readonly string s = "Bar";  // Noncompliant
   }
-}
+}</code>
 </pre>
 <h2>Compliant Solution</h2>
 <pre>
-namespace myLib
+<code data-lang="csharp">namespace myLib
 {
   public class Foo
   {
@@ -94,6 +94,6 @@ namespace myLib
     const int y = x + 4;
     const string s = "Bar";
   }
-}
+}</code>
 </pre>
 

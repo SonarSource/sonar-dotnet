@@ -18,7 +18,7 @@ converted to an <code>is</code> call. Simplifying the calls also make <code>null
 </ul>
 <h2>Noncompliant Code Example</h2>
 <pre>
-class Fruit { }
+<code data-lang="csharp">class Fruit { }
 sealed class Apple : Fruit { }
 
 class Program
@@ -46,11 +46,11 @@ class Program
     {
     }
   }
-}
+}</code>
 </pre>
 <h2>Compliant Solution</h2>
 <pre>
-class Fruit { }
+<code data-lang="csharp">class Fruit { }
 sealed class Apple : Fruit { }
 
 class Program
@@ -72,7 +72,7 @@ class Program
     {
     }
   }
-}
+}</code>
 </pre>
 <h2>Exceptions</h2>
 <p>Calling <code>GetType</code> on an object of <code>Nullable&lt;T&gt;</code> type returns the underlying generic type parameter <code>T</code>, thus

@@ -2,7 +2,7 @@
 <p>On the other hand, constants can be referenced from many places, but only need to be updated in a single place.</p>
 <h2>Noncompliant Code Example</h2>
 <pre>
-Public Class Foo
+<code data-lang="vbnet">Public Class Foo
 
     Private Name As String = "foobar" ' Noncompliant
 
@@ -14,11 +14,11 @@ Public Class Foo
 
     End Sub
 
-End Class
+End Class</code>
 </pre>
 <h2>Compliant Solution</h2>
 <pre>
-Public Class Foo
+<code data-lang="vbnet">Public Class Foo
 
     Private Const Foobar As String = "foobar"
 
@@ -32,7 +32,7 @@ Public Class Foo
 
     End Sub
 
-End Class
+End Class</code>
 </pre>
 <h2>Exceptions</h2>
 <p>The following are ignored:</p>

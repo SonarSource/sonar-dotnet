@@ -3,7 +3,7 @@ it bubble up automatically, but with more code and the additional detriment of l
 <p>Such clauses should either be eliminated or populated with the appropriate logic.</p>
 <h2>Noncompliant Code Example</h2>
 <pre>
-string s = "";
+<code data-lang="text">string s = "";
 try
 {
   s = File.ReadAllText(fileName);
@@ -11,11 +11,11 @@ try
 catch (Exception e)  // Noncompliant
 {
   throw;
-}
+}</code>
 </pre>
 <h2>Compliant Solution</h2>
 <pre>
-string s = "";
+<code data-lang="text">string s = "";
 try
 {
   s = File.ReadAllText(fileName);
@@ -24,11 +24,11 @@ catch (Exception e) // Compliant
 {
   logger.LogError(e);
   throw;
-}
+}</code>
 </pre>
 <p>or</p>
 <pre>
-string s = File.ReadAllText(fileName);
+<code data-lang="text">string s = File.ReadAllText(fileName);</code>
 </pre>
 <h2>Exceptions</h2>
 <p>This rule will not generate issues for <code>catch</code> blocks with just <code>throw</code> inside if they are followed by a <code>catch</code>

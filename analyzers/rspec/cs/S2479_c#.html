@@ -11,15 +11,15 @@ character use their encoded version (ex: ASCII <code>\n,\t,</code>…​ or Unic
 <p>No issue will be raised on the simple space character. Unicode <code>U+0020</code>, ASCII 32.</p>
 <h2>Noncompliant Code Example</h2>
 <pre>
-string tabInside = "A	B";  // Noncompliant, contains a tabulation
+<code data-lang="csharp">string tabInside = "A	B";  // Noncompliant, contains a tabulation
 string zeroWidthSpaceInside = "foo​bar"; // Noncompliant, it contains a U+200B character inside
-Console.WriteLine(zeroWidthSpaceInside); // Prints "foo?bar"
+Console.WriteLine(zeroWidthSpaceInside); // Prints "foo?bar"</code>
 </pre>
 <h2>Compliant Solution</h2>
 <pre>
-string tabInside = "A\tB";  // Compliant, uses escaped value
+<code data-lang="csharp">string tabInside = "A\tB";  // Compliant, uses escaped value
 string zeroWidthSpaceInside = "foo\u200Bbar";  // Compliant, uses escaped value
-Console.WriteLine(zeroWidthSpaceInside); // Prints "foo?bar"
+Console.WriteLine(zeroWidthSpaceInside); // Prints "foo?bar"</code>
 </pre>
 <h2>Exceptions</h2>
 <p>Verbatim string literals have no escape character mechanism.</p>

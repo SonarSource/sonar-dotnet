@@ -5,7 +5,7 @@ directly, if you introduce a new base class that overrides <code>Equals</code>, 
 <p>This rule raises an issue if <code>base.Equals()</code> is used but <code>base</code> is not <code>object</code>.</p>
 <h2>Noncompliant Code Example</h2>
 <pre>
-class Base
+<code data-lang="text">class Base
 {
   private int baseField;
 
@@ -33,11 +33,11 @@ class Derived : Base
 
     return this.derivedField == ((Derived)other).derivedField;
   }
-}
+}</code>
 </pre>
 <h2>Compliant Solution</h2>
 <pre>
-class Base
+<code data-lang="text">class Base
 {
   private int baseField;
 
@@ -65,6 +65,6 @@ class Derived : Base
 
     return base.Equals(other) &amp;&amp; this.derivedField == ((Derived)other).derivedField;
   }
-}
+}</code>
 </pre>
 

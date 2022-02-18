@@ -4,27 +4,27 @@
 the class declaration to prevent subclassing.</p>
 <h2>Noncompliant Code Example</h2>
 <pre>
-public class StringUtils // Noncompliant
+<code data-lang="csharp">public class StringUtils // Noncompliant
 {
   public static string Concatenate(string s1, string s2)
   {
     return s1 + s2;
   }
-}
+}</code>
 </pre>
 <h2>Compliant Solution</h2>
 <pre>
-public static class StringUtils
+<code data-lang="csharp">public static class StringUtils
 {
   public static string Concatenate(string s1, string s2)
   {
     return s1 + s2;
   }
-}
+}</code>
 </pre>
 <p>or</p>
 <pre>
-public class StringUtils
+<code data-lang="csharp">public class StringUtils
 {
   protected StringUtils()
   {
@@ -33,6 +33,6 @@ public class StringUtils
   {
     return s1 + s2;
   }
-}
+}</code>
 </pre>
 

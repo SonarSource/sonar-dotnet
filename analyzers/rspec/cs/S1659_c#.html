@@ -1,7 +1,7 @@
 <p>Declaring multiple variable on one line is difficult to read.</p>
 <h2>Noncompliant Code Example</h2>
 <pre>
-class MyClass
+<code data-lang="csharp">class MyClass
 {
   private int a, b; // Noncompliant
 
@@ -9,11 +9,11 @@ class MyClass
   {
     int c, d; // Noncompliant
   }
-}
+}</code>
 </pre>
 <h2>Compliant Solution</h2>
 <pre>
-class MyClass
+<code data-lang="csharp">class MyClass
 {
   private int a;
   private int b;
@@ -23,6 +23,6 @@ class MyClass
     int c;
     int d;
   }
-}
+}</code>
 </pre>
 

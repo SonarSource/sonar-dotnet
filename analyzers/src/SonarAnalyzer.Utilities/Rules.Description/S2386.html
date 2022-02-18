@@ -4,21 +4,21 @@ reducing the accessibility of the field or by changing the return type to an imm
 <code>System.Collections.Generic.ICollection&lt;T&gt;</code>.</p>
 <h2>Noncompliant Code Example</h2>
 <pre>
-public class A
+<code data-lang="csharp">public class A
 {
   public static string[] strings1 = {"first","second"};  // Noncompliant
   public static List&lt;String&gt; strings3 = new List&lt;String&gt;();  // Noncompliant
   // ...
-}
+}</code>
 </pre>
 <h2>Compliant Solution</h2>
 <pre>
-public class A
+<code data-lang="csharp">public class A
 {
   protected static string[] strings1 = {"first","second"};
   protected static List&lt;String&gt; strings3 = new List&lt;String&gt;();
   // ...
-}
+}</code>
 </pre>
 <h2>Exceptions</h2>
 <p>No issue is reported:</p>

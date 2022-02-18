@@ -32,13 +32,13 @@ Dim url As String = "scheme://user:Admin123@domain.com" ' Sensitive
 </pre>
 <h2>Compliant Solution</h2>
 <pre>
-Dim username As String = "admin"
+<code data-lang="vbnet">Dim username As String = "admin"
 Dim password As String = GetEncryptedPassword()
 Dim usernamePassword As String = String.Format("user={0}&amp;password={1}", GetEncryptedUsername(), GetEncryptedPassword())
 Dim url As String = $"scheme://{username}:{password}@domain.com"
 
 Dim url2 As String= "http://guest:guest@domain.com" ' Compliant
-Const Password_Property As String = "custom.password" ' Compliant
+Const Password_Property As String = "custom.password" ' Compliant</code>
 </pre>
 <h2>Exceptions</h2>
 <ul>

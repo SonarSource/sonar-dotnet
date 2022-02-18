@@ -6,7 +6,7 @@ handle the iteration.</p>
 keyword.</p>
 <h2>Noncompliant Code Example</h2>
 <pre>
-public static IEnumerable&lt;TSource&gt; TakeWhile&lt;TSource&gt;(this IEnumerable&lt;TSource&gt; source, Func&lt;TSource, bool&gt; predicate) // Noncompliant
+<code data-lang="text">public static IEnumerable&lt;TSource&gt; TakeWhile&lt;TSource&gt;(this IEnumerable&lt;TSource&gt; source, Func&lt;TSource, bool&gt; predicate) // Noncompliant
 {
     if (source == null) { throw new ArgumentNullException(nameof(source)); }
     if (predicate == null) { throw new ArgumentNullException(nameof(predicate)); }
@@ -16,11 +16,11 @@ public static IEnumerable&lt;TSource&gt; TakeWhile&lt;TSource&gt;(this IEnumerab
         if (!predicate(element)) { break; }
         yield return element;
     }
-}
+}</code>
 </pre>
 <h2>Compliant Solution</h2>
 <pre>
-public static IEnumerable&lt;TSource&gt; TakeWhile&lt;TSource&gt;(this IEnumerable&lt;TSource&gt; source, Func&lt;TSource, bool&gt; predicate)
+<code data-lang="text">public static IEnumerable&lt;TSource&gt; TakeWhile&lt;TSource&gt;(this IEnumerable&lt;TSource&gt; source, Func&lt;TSource, bool&gt; predicate)
 {
     if (source == null) { throw new ArgumentNullException(nameof(source)); }
     if (predicate == null) { throw new ArgumentNullException(nameof(predicate)); }
@@ -34,6 +34,6 @@ private static IEnumerable&lt;TSource&gt; TakeWhileIterator&lt;TSource&gt;(IEnum
         if (!predicate(element)) break;
         yield return element;
     }
-}
+}</code>
 </pre>
 

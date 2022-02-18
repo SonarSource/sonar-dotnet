@@ -2,7 +2,7 @@
 implicit <code>Exit Select</code> as its last instruction. It therefore is redundant to explicitly add one.</p>
 <h2>Noncompliant Code Example</h2>
 <pre>
-Module Module1
+<code data-lang="vbnet">Module Module1
   Sub Main()
     Dim x = 0
     Select Case x
@@ -14,11 +14,11 @@ Module Module1
         Exit Select                ' Noncompliant
     End Select
   End Sub
-End Module
+End Module</code>
 </pre>
 <h2>Compliant Solution</h2>
 <pre>
-Module Module1
+<code data-lang="vbnet">Module Module1
   Sub Main()
     Dim x = 0
     Select Case x
@@ -28,6 +28,6 @@ Module Module1
         Console.WriteLine("Not 0")
     End Select
   End Sub
-End Module
+End Module</code>
 </pre>
 

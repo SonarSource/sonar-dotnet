@@ -3,7 +3,7 @@
 <code>if-else</code> or ternary conditional operator.</p>
 <h2>Noncompliant Code Example</h2>
 <pre>
-switch (variable)
+<code data-lang="csharp">switch (variable)
 {
   case 0:
     doSomething();
@@ -17,11 +17,11 @@ var foo = variable switch
 {
   0 =&gt; doSomething(),
   _ =&gt; doSomethingElse(),
-}
+}</code>
 </pre>
 <h2>Compliant Solution</h2>
 <pre>
-if (variable == 0)
+<code data-lang="csharp">if (variable == 0)
 {
   doSomething();
 }
@@ -32,6 +32,6 @@ else
 
 var foo = variable == 0
   ? doSomething()
-  : doSomethingElse();
+  : doSomethingElse();</code>
 </pre>
 

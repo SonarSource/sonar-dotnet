@@ -5,25 +5,25 @@ implicitly returned when execution exits the function’s scope.</p>
 <p><code>Return</code> statement should be used instead as they are easier to read and understand.</p>
 <h2>Noncompliant Code Example</h2>
 <pre>
-Public Function FunctionName() As Integer
+<code data-lang="vbnet">Public Function FunctionName() As Integer
     FunctionName = 42 ' Noncompliant
 End Function
 
 Public Function FunctionNameFromVariable() As Integer
     Dim Value As Integer = 42
     FunctionNameFromVariable = Value ' Noncompliant
-End Function
+End Function</code>
 </pre>
 <h2>Compliant Solution</h2>
 <pre>
-Public Function FunctionName() As Integer
+<code data-lang="vbnet">Public Function FunctionName() As Integer
     Return 42
 End Function
 
 Public Function FunctionNameFromVariable() As Integer
     Dim Value As Integer = 42
     Return Value
-End Function
+End Function</code>
 </pre>
 <h2>See</h2>
 <ul>

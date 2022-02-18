@@ -24,21 +24,21 @@ href="https://docs.microsoft.com/en-us/dotnet/api/system.runtime.serialization.n
 href="https://docs.microsoft.com/en-us/dotnet/api/system.runtime.serialization.formatters.soap.soapformatter?view=netframework-4.8">SoapFormatter</a>
 serializers:</p>
 <pre>
-var myBinaryFormatter = new BinaryFormatter();
-myBinaryFormatter.Deserialize(stream); // Noncompliant: a binder is not used to limit types during deserialization
+<code data-lang="csharp">var myBinaryFormatter = new BinaryFormatter();
+myBinaryFormatter.Deserialize(stream); // Noncompliant: a binder is not used to limit types during deserialization</code>
 </pre>
 <p><a
 href="https://docs.microsoft.com/en-us/dotnet/api/system.web.script.serialization.javascriptserializer?view=netframework-4.8">JavaScriptSerializer</a>
 should not use SimpleTypeResolver or other weak resolvers:</p>
 <pre>
-JavaScriptSerializer serializer1 = new JavaScriptSerializer(new SimpleTypeResolver()); // Noncompliant: SimpleTypeResolver is unsecure (every types is resolved)
-serializer1.Deserialize&lt;ExpectedType&gt;(json);
+<code data-lang="csharp">JavaScriptSerializer serializer1 = new JavaScriptSerializer(new SimpleTypeResolver()); // Noncompliant: SimpleTypeResolver is unsecure (every types is resolved)
+serializer1.Deserialize&lt;ExpectedType&gt;(json);</code>
 </pre>
 <p><a href="https://docs.microsoft.com/en-us/dotnet/api/system.web.ui.losformatter?view=netframework-4.8">LosFormatter</a> should not be used without
 MAC verification:</p>
 <pre>
-LosFormatter formatter = new LosFormatter(); // Noncompliant
-formatter.Deserialize(fs);
+<code data-lang="csharp">LosFormatter formatter = new LosFormatter(); // Noncompliant
+formatter.Deserialize(fs);</code>
 </pre>
 <h2>Compliant Solution</h2>
 <p><a
@@ -50,7 +50,7 @@ href="https://docs.microsoft.com/en-us/dotnet/api/system.runtime.serialization.f
 serializers should use a binder implementing a whitelist approach to limit types during deserialization (at least one exception should be thrown or a
 null value returned):</p>
 <pre>
-sealed class CustomBinder : SerializationBinder
+<code data-lang="csharp">sealed class CustomBinder : SerializationBinder
 {
    public override Type BindToType(string assemblyName, string typeName)
    {
@@ -64,14 +64,14 @@ sealed class CustomBinder : SerializationBinder
 
 var myBinaryFormatter = new BinaryFormatter();
 myBinaryFormatter.Binder = new CustomBinder();
-myBinaryFormatter.Deserialize(stream);
+myBinaryFormatter.Deserialize(stream);</code>
 </pre>
 <p><a
 href="https://docs.microsoft.com/en-us/dotnet/api/system.web.script.serialization.javascriptserializer?view=netframework-4.8">JavaScriptSerializer</a>
 should use a resolver implementing a whitelist to limit types during deserialization (at least one exception should be thrown or a null value
 returned):</p>
 <pre>
-public class CustomSafeTypeResolver : JavaScriptTypeResolver
+<code data-lang="csharp">public class CustomSafeTypeResolver : JavaScriptTypeResolver
 {
    public override Type ResolveType(string id)
    {
@@ -83,13 +83,13 @@ public class CustomSafeTypeResolver : JavaScriptTypeResolver
 }
 
 JavaScriptSerializer serializer = new JavaScriptSerializer(new CustomSafeTypeResolver()); // Compliant
-serializer.Deserialize&lt;ExpectedType&gt;(json);
+serializer.Deserialize&lt;ExpectedType&gt;(json);</code>
 </pre>
 <p><a href="https://docs.microsoft.com/en-us/dotnet/api/system.web.ui.losformatter?view=netframework-4.8">LosFormatter</a> serializer with MAC
 verification:</p>
 <pre>
-LosFormatter formatter = new LosFormatter(true, secret); // Compliant
-formatter.Deserialize(fs);
+<code data-lang="csharp">LosFormatter formatter = new LosFormatter(true, secret); // Compliant
+formatter.Deserialize(fs);</code>
 </pre>
 <h2>See</h2>
 <ul>

@@ -19,7 +19,7 @@ use-cases:</p>
 <p>This rule will not raise issues for ciphers that are considered weak (no matter the key size) like <code>DES</code>, <code>Blowfish</code>.</p>
 <h2>Noncompliant Code Example</h2>
 <pre>
-using System;
+<code data-lang="csharp">using System;
 using System.Security.Cryptography;
 
 namespace MyLibrary
@@ -41,7 +41,7 @@ namespace MyLibrary
             // ...
         }
     }
-}
+}</code>
 </pre>
 <p>KeySize property of DSACryptoServiceProvider and RSACryptoServiceProvider does not change the value of underlying KeySize for the algorithm.
 Property setter is ignored without error and KeySize can be changed only by using constructor overload. See:</p>
@@ -55,7 +55,7 @@ Property setter is ignored without error and KeySize can be changed only by usin
 </ul>
 <h2>Compliant Solution</h2>
 <pre>
-using System;
+<code data-lang="csharp">using System;
 using System.Security.Cryptography;
 
 namespace MyLibrary
@@ -72,7 +72,7 @@ namespace MyLibrary
             // ...
         }
     }
-}
+}</code>
 </pre>
 <h2>See</h2>
 <ul>

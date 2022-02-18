@@ -10,15 +10,15 @@ is not.</p>
 </ul>
 <h2>Noncompliant Code Example</h2>
 <pre>
-[TestFixture]
+<code data-lang="csharp">[TestFixture]
 public class SomeClassTest { } // Noncompliant - no test
 
 [TestClass]
-public class SomeOtherClassTest { } // Noncompliant - no test
+public class SomeOtherClassTest { } // Noncompliant - no test</code>
 </pre>
 <h2>Compliant Solution</h2>
 <pre>
-[TestFixture]
+<code data-lang="csharp">[TestFixture]
 public class SomeClassTest
 {
     [Test]
@@ -30,7 +30,7 @@ public class SomeOtherClassTest
 {
     [TestMethod]
     public void SomeMethodShouldReturnTrue() { }
-}
+}</code>
 </pre>
 <h2>Exceptions</h2>
 <ul>

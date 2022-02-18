@@ -24,32 +24,32 @@ hidden web request and as web browsers automatically include cookies, the action
 </ul>
 <h2>Noncompliant Code Example</h2>
 <pre>
-public void ConfigureServices(IServiceCollection services)
+<code data-lang="csharp">public void ConfigureServices(IServiceCollection services)
 {
     // ...
     services.AddControllersWithViews(options =&gt; options.Filters.Add(new IgnoreAntiforgeryTokenAttribute())); // Sensitive
     // ...
-}
+}</code>
 </pre>
 <pre>
-[HttpPost, IgnoreAntiforgeryToken] // Sensitive
-public IActionResult ChangeEmail(ChangeEmailModel model) =&gt; View("~/Views/...");
+<code data-lang="csharp">[HttpPost, IgnoreAntiforgeryToken] // Sensitive
+public IActionResult ChangeEmail(ChangeEmailModel model) =&gt; View("~/Views/...");</code>
 </pre>
 <h2>Compliant Solution</h2>
 <pre>
-public void ConfigureServices(IServiceCollection services)
+<code data-lang="csharp">public void ConfigureServices(IServiceCollection services)
 {
     // ...
     services.AddControllersWithViews(options =&gt; options.Filters.Add(new AutoValidateAntiforgeryTokenAttribute()));
     // or
     services.AddControllersWithViews(options =&gt; options.Filters.Add(new ValidateAntiForgeryTokenAttribute()));
     // ...
-}
+}</code>
 </pre>
 <pre>
-[HttpPost]
+<code data-lang="csharp">[HttpPost]
 [AutoValidateAntiforgeryToken]
-public IActionResult ChangeEmail(ChangeEmailModel model) =&gt; View("~/Views/...");
+public IActionResult ChangeEmail(ChangeEmailModel model) =&gt; View("~/Views/...");</code>
 </pre>
 <h2>See</h2>
 <ul>

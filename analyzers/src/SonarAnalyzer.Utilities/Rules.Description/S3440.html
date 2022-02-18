@@ -2,14 +2,14 @@
 assignment.</p>
 <h2>Noncompliant Code Example</h2>
 <pre>
-if (x != a)  // Noncompliant; why bother?
+<code data-lang="text">if (x != a)  // Noncompliant; why bother?
 {
     x = a;
-}
+}</code>
 </pre>
 <h2>Compliant Solution</h2>
 <pre>
-x = a;
+<code data-lang="text">x = a;</code>
 </pre>
 <h2>Exceptions</h2>
 <p>Properties and checks inside setters are excluded from this rule because they could have side effects and removing the check could lead to

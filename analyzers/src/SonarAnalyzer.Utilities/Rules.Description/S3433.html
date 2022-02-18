@@ -4,7 +4,7 @@ mstest), <code>[Fact]</code> or <code>[Theory]</code> (for xunit) or <code>[Test
 and therefore not executed. Neither are <code>async</code> <code>void</code> methods, or methods with generics anywhere in their signatures.</p>
 <h2>Noncompliant Code Example</h2>
 <pre>
-[TestMethod]
+<code data-lang="text">[TestMethod]
 void TestNullArg()  // Noncompliant; method is not public
 {  /* ... */  }
 
@@ -14,13 +14,13 @@ public async void MyIgnoredTestMethod()  // Noncompliant; this is an 'async void
 
 [TestMethod]
 public void MyIgnoredGenericTestMethod&lt;T&gt;(T foo)  // Noncompliant; method has generics in its signature
-{ /* ... */ }
+{ /* ... */ }</code>
 </pre>
 <h2>Compliant Solution</h2>
 <pre>
-[TestMethod]
+<code data-lang="text">[TestMethod]
 public void TestNullArg()
-{  /* ... */  }
+{  /* ... */  }</code>
 </pre>
 <h2>Exceptions</h2>
 <p>Accessibility is ignored for xUnit <code>Fact</code> test methods, since they do not need to be <code>public</code>.</p>

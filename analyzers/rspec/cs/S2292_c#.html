@@ -2,7 +2,7 @@
 cleaner and more readable code.</p>
 <h2>Noncompliant Code Example</h2>
 <pre>
-public class Car
+<code data-lang="csharp">public class Car
 {
   private string _make;
   public string Make // Noncompliant
@@ -10,13 +10,13 @@ public class Car
     get { return _make; }
     set { _make = value; }
   }
-}
+}</code>
 </pre>
 <h2>Compliant Solution</h2>
 <pre>
-public class Car
+<code data-lang="csharp">public class Car
 {
   public string Make { get; set; }
-}
+}</code>
 </pre>
 

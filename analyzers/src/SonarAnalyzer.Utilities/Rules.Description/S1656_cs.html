@@ -2,16 +2,16 @@
 and some other value or variable was intended for the assignment instead.</p>
 <h2>Noncompliant Code Example</h2>
 <pre>
-public void SetName(string name)
+<code data-lang="csharp">public void SetName(string name)
 {
   name = name;
-}
+}</code>
 </pre>
 <h2>Compliant Solution</h2>
 <pre>
-public void SetName(string name)
+<code data-lang="csharp">public void SetName(string name)
 {
   this.name = name;
-}
+}</code>
 </pre>
 

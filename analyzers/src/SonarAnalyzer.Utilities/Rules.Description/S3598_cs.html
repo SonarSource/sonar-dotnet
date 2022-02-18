@@ -3,21 +3,21 @@ not even an underlying empty confirmation message. These are fire-and-forget met
 type therefore does not make sense.</p>
 <h2>Noncompliant Code Example</h2>
 <pre>
-[ServiceContract]
+<code data-lang="text">[ServiceContract]
 interface IMyService
 {
   [OperationContract(IsOneWay = true)]
   int SomethingHappened(int parameter); // Noncompliant
-}
+}</code>
 </pre>
 <h2>Compliant Solution</h2>
 <pre>
-[ServiceContract]
+<code data-lang="text">[ServiceContract]
 interface IMyService
 {
   [OperationContract(IsOneWay = true)]
   void SomethingHappened(int parameter);
-}
+}</code>
 </pre>
 <h2>Exceptions</h2>
 <p>The rule doesn’t report if <code>OperationContractAttribute.AsyncPattern</code> is set to <code>true</code>.</p>

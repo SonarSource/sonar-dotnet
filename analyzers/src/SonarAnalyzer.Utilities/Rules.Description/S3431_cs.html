@@ -3,16 +3,16 @@ the <code>ExpectedException</code> attribute since an exception could be thrown 
 <p>This rule detects MSTest and NUnit <code>ExpectedException</code> attribute.</p>
 <h2>Noncompliant Code Example</h2>
 <pre>
-[TestMethod]
+<code data-lang="csharp">[TestMethod]
 [ExpectedException(typeof(ArgumentNullException))]  // Noncompliant
 public void TestNullArg()
 {
   //...
-}
+}</code>
 </pre>
 <h2>Compliant Solution</h2>
 <pre>
-[TestMethod]
+<code data-lang="csharp">[TestMethod]
 public void TestNullArg()
 {
   bool callFailed = false;
@@ -25,15 +25,15 @@ public void TestNullArg()
     callFailed = true;
   }
   Assert.IsTrue(callFailed, "Expected call to MyMethod to fail with ArgumentNullException");
-}
+}</code>
 </pre>
 <p>or</p>
 <pre>
-[TestMethod]
+<code data-lang="csharp">[TestMethod]
 public void TestNullArg()
 {
   Assert.ThrowsException&lt;ArgumentNullException&gt;(() =&gt; /*...*/);
-}
+}</code>
 </pre>
 <h2>Exceptions</h2>
 <p>This rule ignores one-line test methods, since it is obvious in such methods where the exception is expected to be thrown.</p>

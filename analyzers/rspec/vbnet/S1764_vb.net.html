@@ -4,7 +4,7 @@ value on both sides of an operator yields predictable results, and should be sim
 <p>This rule ignores <code>*</code>, <code>+</code>, <code>&amp;</code>, <code>&lt;&lt;</code>, and <code>&gt;&gt;</code>.</p>
 <h2>Noncompliant Code Example</h2>
 <pre>
-If (a = a) Then
+<code data-lang="vbnet">If (a = a) Then
   doZ()
 End If
 
@@ -19,7 +19,7 @@ Dim k = 5 - 5
 
 Dim i = 42
 i /= i
-i -= i
+i -= i</code>
 </pre>
 <h2>Exceptions</h2>
 <p>This rule ignores <code>*</code>, <code>+</code>, and <code>=</code>.</p>

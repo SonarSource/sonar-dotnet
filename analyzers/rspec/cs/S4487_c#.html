@@ -2,7 +2,7 @@
 most probably indicates a serious error in the code.</p>
 <h2>Noncompliant Code Example</h2>
 <pre>
-public class Rectangle
+<code data-lang="csharp">public class Rectangle
 {
   private readonly int length;
   private readonly int width;  // width is written but never read
@@ -20,11 +20,11 @@ public class Rectangle
       return length * length;
     }
   }
-}
+}</code>
 </pre>
 <h2>Compliant Solution</h2>
 <pre>
-public class Rectangle
+<code data-lang="csharp">public class Rectangle
 {
   private readonly int length;
   private readonly int width;
@@ -42,7 +42,7 @@ public class Rectangle
       return length * width;
     }
   }
-}
+}</code>
 </pre>
 <h2>See</h2>
 <ul>

@@ -4,7 +4,7 @@ clause contains too many statements this highly decreases the readability of the
 <h2>Noncompliant Code Example</h2>
 <p>With the default threshold of 3:</p>
 <pre>
-switch (myVariable)
+<code data-lang="csharp">switch (myVariable)
 {
     case 0: // Noncompliant: 5 statements in the case
         methodCall1("");
@@ -14,11 +14,11 @@ switch (myVariable)
         break;
     case 1:
         ...
-}
+}</code>
 </pre>
 <h2>Compliant Solution</h2>
 <pre>
-switch (myVariable)
+<code data-lang="csharp">switch (myVariable)
 {
     case 0:
         DoSomething()
@@ -33,6 +33,6 @@ private void DoSomething()
     methodCall2("");
     methodCall3("");
     methodCall4("");
-}
+}</code>
 </pre>
 

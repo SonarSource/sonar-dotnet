@@ -2,7 +2,7 @@
 typically indicates that the method has too many responsibilities, and should be refactored into smaller methods.</p>
 <h2>Noncompliant Code Example</h2>
 <pre>
-public void Evaluate()
+<code data-lang="csharp">public void Evaluate()
 {
     /* ... */
     {     // Noncompliant - nested code block '{' ... '}'
@@ -12,11 +12,11 @@ public void Evaluate()
           stack.push(result);
     }
     /* ... */
-}
+}</code>
 </pre>
 <h2>Compliant Solution</h2>
 <pre>
-public void Evaluate()
+<code data-lang="csharp">public void Evaluate()
 {
     /* ... */
     StackAdd();
@@ -29,7 +29,7 @@ private void StackAdd()
       int b = stack.pop();
       int result = a + b;
       stack.push(result);
-}
+}</code>
 </pre>
 <h2>Exceptions</h2>
 <p>The usage of a code block after a "case" is allowed for this rule.</p>

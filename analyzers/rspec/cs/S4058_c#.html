@@ -4,7 +4,7 @@ clearer and easier to maintain.</p>
 <p>This rule raises an issue when a string comparison operation doesn’t use the overload that takes a <code>StringComparison</code> parameter.</p>
 <h2>Noncompliant Code Example</h2>
 <pre>
-using System;
+<code data-lang="csharp">using System;
 
 namespace MyLibrary
 {
@@ -15,11 +15,11 @@ namespace MyLibrary
       return string.Compare(name1, name2) == 0; // Noncompliant
     }
   }
-}
+}</code>
 </pre>
 <h2>Compliant Solution</h2>
 <pre>
-using System;
+<code data-lang="csharp">using System;
 
 namespace MyLibrary
 {
@@ -30,6 +30,6 @@ namespace MyLibrary
       return string.Compare(name1, name2, StringComparison.OrdinalIgnoreCase) == 0;
     }
   }
-}
+}</code>
 </pre>
 

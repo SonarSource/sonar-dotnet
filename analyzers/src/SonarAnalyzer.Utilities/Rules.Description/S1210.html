@@ -7,14 +7,14 @@ from the base comparison operator implementations. Additionally, it is best prac
 operators.</p>
 <h2>Noncompliant Code Example</h2>
 <pre>
-public class Foo: IComparable  // Noncompliant
+<code data-lang="csharp">public class Foo: IComparable  // Noncompliant
 {
   public int CompareTo(object obj) { /* ... */ }
-}
+}</code>
 </pre>
 <h2>Compliant Solution</h2>
 <pre>
-public class Foo: IComparable
+<code data-lang="csharp">public class Foo: IComparable
 {
   public int CompareTo(object obj) { /* ... */ }
   public override bool Equals(object obj)
@@ -47,6 +47,6 @@ public class Foo: IComparable
   {
     return !(left == right);
   }
-}
+}</code>
 </pre>
 

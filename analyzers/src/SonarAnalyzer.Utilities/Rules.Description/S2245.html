@@ -35,12 +35,12 @@ return BitConverter.ToString(data); // Check if this value is used for hashing o
 </pre>
 <h2>Compliant Solution</h2>
 <pre>
-using System.Security.Cryptography;
+<code data-lang="csharp">using System.Security.Cryptography;
 ...
 var randomGenerator = RandomNumberGenerator.Create(); // Compliant for security-sensitive use cases
 byte[] data = new byte[16];
 randomGenerator.GetBytes(data);
-return BitConverter.ToString(data);
+return BitConverter.ToString(data);</code>
 </pre>
 <h2>See</h2>
 <ul>

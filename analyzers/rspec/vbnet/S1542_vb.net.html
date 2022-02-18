@@ -10,24 +10,24 @@ expression.</p>
 <h2>Noncompliant Code Example</h2>
 <p>With the default regular expression <code>^([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$</code></p>
 <pre>
-Module Module1
+<code data-lang="vbnet">Module Module1
   Sub bad_subroutine()                      ' Noncompliant
   End Sub
 
   Public Function Bad_Function() As Integer ' Noncompliant
     Return 42
   End Function
-End Module
+End Module</code>
 </pre>
 <h2>Compliant Solution</h2>
 <pre>
-Module Module1
+<code data-lang="vbnet">Module Module1
   Sub GoodSubroutine()                      ' Compliant
   End Sub
 
   Public Function GoodFunction() As Integer ' Compliant
     Return 42
   End Function
-End Module
+End Module</code>
 </pre>
 

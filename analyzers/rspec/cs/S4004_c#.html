@@ -6,7 +6,7 @@ to remove all the elements (e.g. <code>System.Collections.List&lt;T&gt;.Clear</c
 <code>System.Collections.Generic.ICollection&lt;T&gt;</code>.</p>
 <h2>Noncompliant Code Example</h2>
 <pre>
-using System;
+<code data-lang="text">using System;
 using System.Collections;
 
 namespace MyLibrary
@@ -21,11 +21,11 @@ namespace MyLibrary
       set { strings = value; } // Noncompliant
     }
   }
-}
+}</code>
 </pre>
 <h2>Compliant Solution</h2>
 <pre>
-using System;
+<code data-lang="text">using System;
 using System.Collections;
 
 namespace MyLibrary
@@ -39,7 +39,7 @@ namespace MyLibrary
       get { return strings; }
     }
   }
-}
+}</code>
 </pre>
 <h2>Exceptions</h2>
 <p>This rule does not raise issues for</p>

@@ -2,18 +2,18 @@
 <p>This rule only reports on empty catch clauses that catch generic <code>Exception</code>s.</p>
 <h2>Noncompliant Code Example</h2>
 <pre>
-string text = "";
+<code data-lang="csharp">string text = "";
 try
 {
     text = File.ReadAllText(fileName);
 }
 catch (Exception exc) // Noncompliant
 {
-}
+}</code>
 </pre>
 <h2>Compliant Solution</h2>
 <pre>
-string text = "";
+<code data-lang="csharp">string text = "";
 try
 {
     text = File.ReadAllText(fileName);
@@ -21,7 +21,7 @@ try
 catch (Exception exc)
 {
     logger.Log(exc);
-}
+}</code>
 </pre>
 <h2>Exceptions</h2>
 <p>When a block contains a comment, it is not considered to be empty.</p>

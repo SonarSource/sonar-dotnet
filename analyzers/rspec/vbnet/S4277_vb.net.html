@@ -4,7 +4,7 @@ will most likely result in unexpected behaviours.</p>
 <p>This rule raises an issue when a constructor of a class marked shared with a <code>PartCreationPolicyAttribute</code> is invoked.</p>
 <h2>Noncompliant Code Example</h2>
 <pre>
-&lt;Export(GetType(IFooBar))&gt;
+<code data-lang="vbnet">&lt;Export(GetType(IFooBar))&gt;
 &lt;PartCreationPolicy(CreationPolicy.[Shared])&gt;
 Public Class FooBar
     Inherits IFooBar
@@ -14,11 +14,11 @@ Public Class Program
     Public Shared Sub Main()
         Dim fooBar = New FooBar() ' Noncompliant
     End Sub
-End Class
+End Class</code>
 </pre>
 <h2>Compliant Solution</h2>
 <pre>
-&lt;Export(GetType(IFooBar))&gt;
+<code data-lang="vbnet">&lt;Export(GetType(IFooBar))&gt;
 &lt;PartCreationPolicy(CreationPolicy.[Shared])&gt;
 Public Class FooBar
     Inherits IFooBar
@@ -28,6 +28,6 @@ Public Class Program
     Public Shared Sub Main()
         Dim fooBar = serviceProvider.GetService(Of IFooBar)()
     End Sub
-End Class
+End Class</code>
 </pre>
 

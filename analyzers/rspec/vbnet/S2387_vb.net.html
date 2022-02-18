@@ -2,7 +2,7 @@
 best, chaos at worst.</p>
 <h2>Noncompliant Code Example</h2>
 <pre>
-Public Class Fruit
+<code data-lang="vbnet">Public Class Fruit
 
     Protected Ripe As Season
     Protected Flesh As Color
@@ -19,11 +19,11 @@ Public Class Raspberry
 
     ' ...
 
-End Class
+End Class</code>
 </pre>
 <h2>Compliant Solution</h2>
 <pre>
-Public Class Fruit
+<code data-lang="vbnet">Public Class Fruit
 
     Protected Ripe As Season
     Protected Flesh As Color
@@ -40,7 +40,7 @@ Public Class Raspberry
 
     ' ...
 
-End Class
+End Class</code>
 </pre>
 <h2>Exceptions</h2>
 <p>This rule ignores same-name fields that are <code>Shared</code> in both the parent and child classes. It also ignores <code>Private</code> parent

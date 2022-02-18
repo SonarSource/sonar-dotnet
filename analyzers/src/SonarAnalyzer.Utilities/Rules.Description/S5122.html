@@ -80,15 +80,15 @@ public HttpResponseMessage Get() =&gt; new HttpResponseMessage()
 <h2>Compliant Solution</h2>
 <h3>ASP.NET Core MVC</h3>
 <pre>
-[HttpGet]
+<code data-lang="csharp">[HttpGet]
 public string Get()
 {
     Response.Headers.Add("Access-Control-Allow-Origin", "https://trustedwebsite.com"); // Safe
     Response.Headers.Add(HeaderNames.AccessControlAllowOrigin, "https://trustedwebsite.com"); // Safe
-}
+}</code>
 </pre>
 <pre>
-public void ConfigureServices(IServiceCollection services)
+<code data-lang="csharp">public void ConfigureServices(IServiceCollection services)
 {
     services.AddCors(options =&gt;
     {
@@ -104,11 +104,11 @@ public void ConfigureServices(IServiceCollection services)
     });
 
     services.AddControllers();
-}
+}</code>
 </pre>
 <h3>ASP.Net MVC</h3>
 <pre>
-public class HomeController : ApiController
+<code data-lang="csharp">public class HomeController : ApiController
 {
     public HttpResponseMessage Get()
     {
@@ -118,14 +118,14 @@ public class HomeController : ApiController
         response.Headers.Add(HeaderNames.AccessControlAllowOrigin, "https://trustedwebsite.com");
         response.AppendHeader(HeaderNames.AccessControlAllowOrigin, "https://trustedwebsite.com");
     }
-}
+}</code>
 </pre>
 <pre>
-[EnableCors(origins: "https://trustedwebsite.com", headers: "*", methods: "GET")]
+<code data-lang="csharp">[EnableCors(origins: "https://trustedwebsite.com", headers: "*", methods: "GET")]
 public HttpResponseMessage Get() =&gt; new HttpResponseMessage()
 {
     Content = new StringContent("content")
-};
+};</code>
 </pre>
 <h2>See</h2>
 <ul>

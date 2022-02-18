@@ -2,22 +2,22 @@
 check is redundant.</p>
 <h2>Noncompliant Code Example</h2>
 <pre>
-If (x IsNot Nothing And TypeOf x Is MyClass)
+<code data-lang="vbnet">If (x IsNot Nothing And TypeOf x Is MyClass)
     ' ...
 End If
 
 If (x Is Nothing Or TypeOf x IsNot MyClass)
     ' ...
-End If
+End If</code>
 </pre>
 <h2>Compliant Solution</h2>
 <pre>
-If (TypeOf x Is MyClass)
+<code data-lang="vbnet">If (TypeOf x Is MyClass)
     ' ...
 End If
 
 If (TypeOf x IsNot MyClass)
     ' ...
-End If
+End If</code>
 </pre>
 

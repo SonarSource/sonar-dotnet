@@ -11,7 +11,7 @@
 </ul>
 <h2>Noncompliant Code Example</h2>
 <pre>
-var l = new List&lt;int&gt;() {}; // Noncompliant, {} can be removed
+<code data-lang="text">var l = new List&lt;int&gt;() {}; // Noncompliant, {} can be removed
 var o = new object() {}; // Noncompliant, {} can be removed
 
 var ints = new int[] {1, 2, 3}; // Noncompliant, int can be omitted
@@ -30,11 +30,11 @@ class Class
     {
         MyEvent += new EventHandler((a,b)=&gt;{ }); // Noncompliant, needlessly verbose
     }
-}
+}</code>
 </pre>
 <h2>Compliant Solution</h2>
 <pre>
-var l = new List&lt;int&gt;();
+<code data-lang="text">var l = new List&lt;int&gt;();
 var o = new object();
 
 var ints = new [] {1, 2, 3};
@@ -53,6 +53,6 @@ class Class
     {
         MyEvent += (a,b)=&gt;{ };
     }
-}
+}</code>
 </pre>
 

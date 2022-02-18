@@ -19,13 +19,13 @@ tests.All(c =&gt; { c.myfield = "foo"; return true; });
 <p>Such code should be rewritten as a normal loop.</p>
 <h2>Noncompliant Code Example</h2>
 <pre>
-coll.Where(i =&gt; i &gt; 5).Select(i =&gt; i*i); // Noncompliant
-"this string".Equals("other string"); // Noncompliant
+<code data-lang="csharp">coll.Where(i =&gt; i &gt; 5).Select(i =&gt; i*i); // Noncompliant
+"this string".Equals("other string"); // Noncompliant</code>
 </pre>
 <h2>Compliant Solution</h2>
 <pre>
-var res = coll.Where(i =&gt; i &gt; 5).Select(i =&gt; i*i);
-var isEqual = "this string".Equals("other string");
+<code data-lang="csharp">var res = coll.Where(i =&gt; i &gt; 5).Select(i =&gt; i*i);
+var isEqual = "this string".Equals("other string");</code>
 </pre>
 <h2>Exceptions</h2>
 <p>This rule doesn’t report issues on method calls with <code>out</code> or <code>ref</code> arguments.</p>

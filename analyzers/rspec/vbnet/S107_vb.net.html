@@ -3,22 +3,22 @@ things.</p>
 <h2>Noncompliant Code Example</h2>
 <p>With a maximum number of 3 parameters:</p>
 <pre>
-Public Sub Foo(ByVal p1 As Integer, ByVal p2 As Integer, ByVal p3 As Integer, ByVal p4 As Integer) ' Noncompliant
+<code data-lang="vbnet">Public Sub Foo(ByVal p1 As Integer, ByVal p2 As Integer, ByVal p3 As Integer, ByVal p4 As Integer) ' Noncompliant
   ' ...
 End Sub
 
 Public Function Bar(ByVal p1 As Integer, ByVal p2 As Integer, ByVal p3 As Integer, ByVal p4 As Integer) ' Noncompliant
   ' ...
-End Function
+End Function</code>
 </pre>
 <h2>Compliant Solution</h2>
 <pre>
-Public Sub Foo(ByVal p1 As Integer, ByVal p2 As Integer, ByVal p3 As Integer)
+<code data-lang="vbnet">Public Sub Foo(ByVal p1 As Integer, ByVal p2 As Integer, ByVal p3 As Integer)
   ' ...
 End Sub
 
 Public Function Bar(ByVal p1 As Integer, ByVal p2 As Integer, ByVal p3 As Integer)
   ' ...
-End Function
+End Function</code>
 </pre>
 

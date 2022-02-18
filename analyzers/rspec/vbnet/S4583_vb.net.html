@@ -9,7 +9,7 @@ called. This is why you should always pair <code>BeginInvoke</code> with an <cod
 <h2>Noncompliant Code Example</h2>
 <p>BeginInvoke without callback</p>
 <pre>
-Public Delegate Function AsyncMethodCaller() As String
+<code data-lang="vbnet">Public Delegate Function AsyncMethodCaller() As String
 
 Public Class Sample
 
@@ -20,11 +20,11 @@ Public Class Sample
         Dim Result As IAsyncResult = Caller.BeginInvoke(Nothing, Nothing) ' Noncompliant - Not paired With EndInvoke
     End Sub
 
-End Class
+End Class</code>
 </pre>
 <p>BeginInvoke with callback</p>
 <pre>
-Public Delegate Function AsyncMethodCaller() As String
+<code data-lang="vbnet">Public Delegate Function AsyncMethodCaller() As String
 
 Public Class Sample
 
@@ -36,12 +36,12 @@ Public Class Sample
                                                                           End Sub), Nothing) ' Noncompliant - Not paired With EndInvoke
     End Sub
 
-End Class
+End Class</code>
 </pre>
 <h2>Compliant Solution</h2>
 <p>BeginInvoke without callback</p>
 <pre>
-Public Delegate Function AsyncMethodCaller() As String
+<code data-lang="vbnet">Public Delegate Function AsyncMethodCaller() As String
 
 Public Class Sample
 
@@ -54,11 +54,11 @@ Public Class Sample
         Return Caller.EndInvoke(Result)
     End Function
 
-End Class
+End Class</code>
 </pre>
 <p>BeginInvoke with callback</p>
 <pre>
-Public Delegate Function AsyncMethodCaller() As String
+<code data-lang="vbnet">Public Delegate Function AsyncMethodCaller() As String
 
 Public Class Sample
 
@@ -73,7 +73,7 @@ Public Class Sample
                                                                           End Sub), Nothing)
     End Sub
 
-End Class
+End Class</code>
 </pre>
 <h2>See</h2>
 <p><a href="https://docs.microsoft.com/en-us/dotnet/standard/asynchronous-programming-patterns/calling-synchronous-methods-asynchronously">Calling

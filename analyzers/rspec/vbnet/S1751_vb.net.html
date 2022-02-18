@@ -5,7 +5,7 @@ expects to find such a use of a loop statement. If the initial intention of the 
 <code>break</code> or <code>throw</code> statements in a more appropriate way.</p>
 <h2>Noncompliant Code Example</h2>
 <pre>
-For i As Integer = 0 To 10   'noncompliant, loop only executes once
+<code data-lang="vbnet">For i As Integer = 0 To 10   'noncompliant, loop only executes once
   foo(i)
   Exit For
 Next
@@ -17,11 +17,11 @@ For i As Integer = 0 To 10   'noncompliant, loop only executes once
     foo(i)
     Return
   End If
-Next
+Next</code>
 </pre>
 <h2>Compliant Solution</h2>
 <pre>
-For i As Integer = 0 To 10
+<code data-lang="vbnet">For i As Integer = 0 To 10
   foo(i)
 Next
 ...
@@ -31,6 +31,6 @@ For i As Integer = 0 To 10
   Else
     foo(i)
   End If
-Next
+Next</code>
 </pre>
 

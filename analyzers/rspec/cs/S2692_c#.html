@@ -7,7 +7,7 @@
 tested against <code>&gt; 0</code></p>
 <h2>Noncompliant Code Example</h2>
 <pre>
-string color = "blue";
+<code data-lang="csharp">string color = "blue";
 string name = "ishmael";
 
 List&lt;string&gt; strings = new List&lt;string&gt;();
@@ -33,11 +33,11 @@ if (name.IndexOf("ae") &gt; 0) // Noncompliant
 if (Array.IndexOf(stringArray, color) &gt; 0) // Noncompliant
 {
   // ...
-}
+}</code>
 </pre>
 <h2>Compliant Solution</h2>
 <pre>
-string color = "blue";
+<code data-lang="csharp">string color = "blue";
 string name = "ishmael";
 
 List&lt;string&gt; strings = new List&lt;string&gt; ();
@@ -63,6 +63,6 @@ if (name.Contains("ae"))
 if (Array.IndexOf(stringArray, color) &gt;= 0)
 {
   // ...
-}
+}</code>
 </pre>
 

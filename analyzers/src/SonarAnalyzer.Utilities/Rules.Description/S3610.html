@@ -3,11 +3,11 @@
 time.</p>
 <h2>Noncompliant Code Example</h2>
 <pre>
-int? nullable = 42;
+<code data-lang="csharp">int? nullable = 42;
 bool comparison = nullable.GetType() == typeof(Nullable&lt;int&gt;); // Noncompliant, always false
 comparison = nullable.GetType() != typeof(Nullable&lt;int&gt;); // Noncompliant, always true
 
 nullable = null;
-comparison = nullable.GetType() != typeof(Nullable&lt;int&gt;); // Noncompliant, calling GetType on a null always throws an exception
+comparison = nullable.GetType() != typeof(Nullable&lt;int&gt;); // Noncompliant, calling GetType on a null always throws an exception</code>
 </pre>
 

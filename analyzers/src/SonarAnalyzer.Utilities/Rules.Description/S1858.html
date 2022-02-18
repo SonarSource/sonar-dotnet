@@ -8,19 +8,19 @@ invoking <code>ToString()</code> when the compiler would do it implicitly is als
 </ul>
 <h2>Noncompliant Code Example</h2>
 <pre>
-var s = "foo";
+<code data-lang="csharp">var s = "foo";
 var t = "fee fie foe " + s.ToString();  // Noncompliant
 var someObject = new object();
 var u = "" + someObject.ToString(); // Noncompliant
-var v = string.Format("{0}", someObject.ToString()); // Noncompliant
+var v = string.Format("{0}", someObject.ToString()); // Noncompliant</code>
 </pre>
 <h2>Compliant Solution</h2>
 <pre>
-var s = "foo";
+<code data-lang="csharp">var s = "foo";
 var t = "fee fie foe " + s;
 var someObject = new object();
 var u = "" + someObject;
-var v = string.Format("{0}", someObject);
+var v = string.Format("{0}", someObject);</code>
 </pre>
 <h2>Exceptions</h2>
 <p>The rule does not report on value types, where leaving off the <code>ToString()</code> call would result in automatic boxing.</p>

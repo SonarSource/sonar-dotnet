@@ -2,16 +2,16 @@
 should be moved to the loop’s increment clause if at all possible.</p>
 <h2>Noncompliant Code Example</h2>
 <pre>
-for (i = 0; i &lt; 10; j++) // Noncompliant
+<code data-lang="csharp">for (i = 0; i &lt; 10; j++) // Noncompliant
 {
   // ...
-}
+}</code>
 </pre>
 <h2>Compliant Solution</h2>
 <pre>
-for (i = 0; i &lt; 10; i++)
+<code data-lang="csharp">for (i = 0; i &lt; 10; i++)
 {
   // ...
-}
+}</code>
 </pre>
 

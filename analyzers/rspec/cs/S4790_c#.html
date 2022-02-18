@@ -23,9 +23,9 @@ var hashProvider4 = HashAlgorithm.Create("SHA1"); // Sensitive
 </pre>
 <h2>Compliant Solution</h2>
 <pre>
-var hashProvider1 = new SHA512Managed(); // Compliant
+<code data-lang="csharp">var hashProvider1 = new SHA512Managed(); // Compliant
 var hashProvider2 = (HashAlgorithm)CryptoConfig.CreateFromName("SHA512Managed"); // Compliant
-var hashProvider3 = HashAlgorithm.Create("SHA512Managed"); // Compliant
+var hashProvider3 = HashAlgorithm.Create("SHA512Managed"); // Compliant</code>
 </pre>
 <h2>See</h2>
 <ul>

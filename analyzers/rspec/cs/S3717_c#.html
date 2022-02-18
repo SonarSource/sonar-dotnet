@@ -4,10 +4,10 @@ required by base classes or interfaces, but which are not appropriate to the cur
 <p>This rule raises an exception when <code>NotImplementedException</code> is thrown.</p>
 <h2>Noncompliant Code Example</h2>
 <pre>
-void doTheThing()
+<code data-lang="text">void doTheThing()
 {
     throw new NotImplementedException();
-}
+}</code>
 </pre>
 <h2>Exceptions</h2>
 <p>Exceptions derived from <code>NotImplementedException</code> are ignored.</p>

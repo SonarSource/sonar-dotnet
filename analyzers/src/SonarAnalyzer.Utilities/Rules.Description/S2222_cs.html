@@ -5,7 +5,7 @@ namespace.</p>
 <p>Note that the rule is currently in an experimental phase.</p>
 <h2>Noncompliant Code Example</h2>
 <pre>
-class MyClass
+<code data-lang="csharp">class MyClass
 {
   private object obj = new object();
 
@@ -30,11 +30,11 @@ class MyClass
       lockObj.ExitReadLock();
     }
   }
-}
+}</code>
 </pre>
 <h2>Compliant Solution</h2>
 <pre>
-class MyClass
+<code data-lang="csharp">class MyClass
 {
   private object obj = new object();
 
@@ -64,7 +64,7 @@ class MyClass
       lockObj.ExitReadLock();
     }
   }
-}
+}</code>
 </pre>
 <h2>See</h2>
 <ul>

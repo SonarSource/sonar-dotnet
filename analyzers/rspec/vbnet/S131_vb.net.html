@@ -2,23 +2,23 @@
 <p>This clause should either take appropriate action or contain a suitable comment as to why no action is taken.</p>
 <h2>Noncompliant Code Example</h2>
 <pre>
-Select Case param ' Noncompliant - Case Else clause is missing
+<code data-lang="vbnet">Select Case param ' Noncompliant - Case Else clause is missing
   Case 0
     DoSomething()
   Case 1
     DoSomethingElse()
-End Select
+End Select</code>
 </pre>
 <h2>Compliant Solution</h2>
 <pre>
-Select Case param
+<code data-lang="vbnet">Select Case param
   Case 0
     DoSomething()
   Case 1
     DoSomethingElse()
   Case Else ' Compliant
     DoSomethingElse()
-End Select
+End Select</code>
 </pre>
 <h2>See</h2>
 <ul>

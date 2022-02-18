@@ -2,7 +2,7 @@
 <p>On the other hand, constants can be referenced from many places, but only need to be updated in a single place.</p>
 <h2>Noncompliant Code Example</h2>
 <pre>
-public class Foo
+<code data-lang="csharp">public class Foo
 {
     private string name = "foobar"; // Noncompliant
 
@@ -12,11 +12,11 @@ public class Foo
     {
         var something = value ?? "foobar"; // Noncompliant
     }
-}
+}</code>
 </pre>
 <h2>Compliant Solution</h2>
 <pre>
-public class Foo
+<code data-lang="csharp">public class Foo
 {
     private const string Foobar = "foobar";
 
@@ -28,7 +28,7 @@ public class Foo
     {
         var something = value ?? Foobar;
     }
-}
+}</code>
 </pre>
 <h2>Exceptions</h2>
 <p>The following are ignored:</p>

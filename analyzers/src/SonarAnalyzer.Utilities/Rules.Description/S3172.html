@@ -2,7 +2,7 @@
 <p>Subtracting a chain of delegates from another one might yield unexpected results as shown hereunder - and is likely to be a bug.</p>
 <h2>Noncompliant Code Example</h2>
 <pre>
-MyDelegate first, second, third, fourth;
+<code data-lang="csharp">MyDelegate first, second, third, fourth;
 first = () =&gt; Console.Write("1");
 second = () =&gt; Console.Write("2");
 third = () =&gt; Console.Write("3");
@@ -21,12 +21,12 @@ MyDelegate chain23 = chain1234 - chain14; // Noncompliant; (first + fourth) does
 // (but note that "1234" contains both the "1" and "4" subsequences)
 chain23 = chain1234 - (first + fourth); // Noncompliant
 
-chain23(); // will print "1234"!
+chain23(); // will print "1234"!</code>
 </pre>
 <h2>Compliant Solution</h2>
 <pre>
-MyDelegate chain23 = chain1234 - first - fourth; // Compliant - "1" is first removed, followed by "4"
+<code data-lang="csharp">MyDelegate chain23 = chain1234 - first - fourth; // Compliant - "1" is first removed, followed by "4"
 
-chain23(); // will print "23"
+chain23(); // will print "23"</code>
 </pre>
 

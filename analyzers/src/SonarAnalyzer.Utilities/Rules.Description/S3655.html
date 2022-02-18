@@ -3,27 +3,27 @@ property, but <code>.Value</code> throws an <code>InvalidOperationException</cod
 nullable type should always be tested before <code>.Value</code> is accessed.</p>
 <h2>Noncompliant Code Example</h2>
 <pre>
-int? nullable = null;
+<code data-lang="text">int? nullable = null;
 ...
-UseValue(nullable.Value); // Noncompliant
+UseValue(nullable.Value); // Noncompliant</code>
 </pre>
 <h2>Compliant Solution</h2>
 <pre>
-int? nullable = null;
+<code data-lang="text">int? nullable = null;
 ...
 if (nullable.HasValue)
 {
   UseValue(nullable.Value);
-}
+}</code>
 </pre>
 <p>or</p>
 <pre>
-int? nullable = null;
+<code data-lang="text">int? nullable = null;
 ...
 if (nullable != null)
 {
   UseValue(nullable.Value);
-}
+}</code>
 </pre>
 <h2>See</h2>
 <ul>

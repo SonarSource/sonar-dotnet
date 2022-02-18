@@ -2,7 +2,7 @@
 made and something different should be executed, or there shouldn’t be a <code>Select Case</code> / <code>If</code> chain at all.</p>
 <h2>Noncompliant Code Example</h2>
 <pre>
-Dim b As Integer = If(a &gt; 12, 4, 4)
+<code data-lang="vbnet">Dim b As Integer = If(a &gt; 12, 4, 4)
 
 If b = 0 Then
     DoTheThing()
@@ -19,7 +19,7 @@ Select Case i
         DoSomething()
     Case Else
         DoSomething()
-End Select
+End Select</code>
 </pre>
 <h2>Exceptions</h2>
 <p>This rule does not apply to <code>If</code> chains without <code>Else</code>-s, or to <code>Select Case</code>-es without <code>Case Else</code>

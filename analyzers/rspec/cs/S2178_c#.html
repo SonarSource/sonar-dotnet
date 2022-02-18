@@ -2,14 +2,14 @@
 evaluated under the wrong circumstances.</p>
 <h2>Noncompliant Code Example</h2>
 <pre>
-if (GetTrue() | GetFalse()) // Noncompliant; both sides evaluated
+<code data-lang="csharp">if (GetTrue() | GetFalse()) // Noncompliant; both sides evaluated
 {
-}
+}</code>
 </pre>
 <h2>Compliant Solution</h2>
 <pre>
-if (GetTrue() || GetFalse()) // true short-circuit logic
+<code data-lang="csharp">if (GetTrue() || GetFalse()) // true short-circuit logic
 {
-}
+}</code>
 </pre>
 

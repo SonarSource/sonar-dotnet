@@ -9,11 +9,11 @@ same anymore.</p>
 ignored.</p>
 <h2>Noncompliant Code Example</h2>
 <pre>
-Debug.Assert(list.Remove("dog"));
+<code data-lang="csharp">Debug.Assert(list.Remove("dog"));</code>
 </pre>
 <h2>Compliant Solution</h2>
 <pre>
-bool result = list.Remove("dog");
-Debug.Assert(result);
+<code data-lang="csharp">bool result = list.Remove("dog");
+Debug.Assert(result);</code>
 </pre>
 

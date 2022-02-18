@@ -3,7 +3,7 @@ Unfortunately, when you omit them from the <code>base</code> call in an override
 ignoring the value the caller passed in. The result will likely not be what the caller expected.</p>
 <h2>Noncompliant Code Example</h2>
 <pre>
-public class BaseClass
+<code data-lang="text">public class BaseClass
 {
     public virtual void MyMethod(int i = 1)
     {
@@ -24,11 +24,11 @@ public class DerivedClass : BaseClass
         DerivedClass dc = new DerivedClass();
         dc.MyMethod(12);  // prints 1
     }
-}
+}</code>
 </pre>
 <h2>Compliant Solution</h2>
 <pre>
-public class BaseClass
+<code data-lang="text">public class BaseClass
 {
     public virtual void MyMethod(int i = 1)
     {
@@ -49,6 +49,6 @@ public class DerivedClass : BaseClass
         DerivedClass dc = new DerivedClass();
         dc.MyMethod(12);  // prints 12
     }
-}
+}</code>
 </pre>
 

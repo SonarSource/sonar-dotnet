@@ -12,16 +12,16 @@ strongly discouraged.</p>
 <p>This rule raises an issue when an LDAP connection is created with <code>AuthenticationTypes.Anonymous</code> or
 <code>AuthenticationTypes.None</code>.</p>
 <pre>
-DirectoryEntry myDirectoryEntry = new DirectoryEntry(adPath);
+<code data-lang="csharp">DirectoryEntry myDirectoryEntry = new DirectoryEntry(adPath);
 myDirectoryEntry.AuthenticationType = AuthenticationTypes.None; // Noncompliant
 
-DirectoryEntry myDirectoryEntry = new DirectoryEntry(adPath, "u", "p", AuthenticationTypes.None); // Noncompliant
+DirectoryEntry myDirectoryEntry = new DirectoryEntry(adPath, "u", "p", AuthenticationTypes.None); // Noncompliant</code>
 </pre>
 <h2>Compliant Solution</h2>
 <pre>
-DirectoryEntry myDirectoryEntry = new DirectoryEntry(myADSPath); // Compliant; default DirectoryEntry.AuthenticationType property value is "Secure" since .NET Framework 2.0
+<code data-lang="csharp">DirectoryEntry myDirectoryEntry = new DirectoryEntry(myADSPath); // Compliant; default DirectoryEntry.AuthenticationType property value is "Secure" since .NET Framework 2.0
 
-DirectoryEntry myDirectoryEntry = new DirectoryEntry(myADSPath, "u", "p", AuthenticationTypes.Secure);
+DirectoryEntry myDirectoryEntry = new DirectoryEntry(myADSPath, "u", "p", AuthenticationTypes.Secure);</code>
 </pre>
 <h2>See</h2>
 <ul>

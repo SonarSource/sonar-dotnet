@@ -32,13 +32,13 @@ string url = "scheme://user:Admin123@domain.com"; // Sensitive
 </pre>
 <h2>Compliant Solution</h2>
 <pre>
-string username = "admin";
+<code data-lang="csharp">string username = "admin";
 string password = GetEncryptedPassword();
 string usernamePassword = string.Format("user={0}&amp;password={1}", GetEncryptedUsername(), GetEncryptedPassword());
 string url = $"scheme://{username}:{password}@domain.com";
 
 string url2 = "http://guest:guest@domain.com"; // Compliant
-const string Password_Property = "custom.password"; // Compliant
+const string Password_Property = "custom.password"; // Compliant</code>
 </pre>
 <h2>Exceptions</h2>
 <ul>

@@ -2,7 +2,7 @@
 information. Therefore, it should become a local variable in the relevant methods to prevent any misunderstanding.</p>
 <h2>Noncompliant Code Example</h2>
 <pre>
-public class Foo
+<code data-lang="csharp">public class Foo
 {
   private int singularField;
 
@@ -12,11 +12,11 @@ public class Foo
 
     if (singularField == 0) { /* ... */ }
   }
-}
+}</code>
 </pre>
 <h2>Compliant Solution</h2>
 <pre>
-public class Foo
+<code data-lang="csharp">public class Foo
 {
   public void DoSomething(int x)
   {
@@ -24,6 +24,6 @@ public class Foo
 
     if (localVariable == 0) { /* ... */ }
   }
-}
+}</code>
 </pre>
 

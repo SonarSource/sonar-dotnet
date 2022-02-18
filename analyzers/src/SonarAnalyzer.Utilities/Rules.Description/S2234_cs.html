@@ -3,7 +3,7 @@ the names match, but are passed in a different order than the method arguments, 
 to unexpected results.</p>
 <h2>Noncompliant Code Example</h2>
 <pre>
-public double Divide(int divisor, int dividend)
+<code data-lang="csharp">public double Divide(int divisor, int dividend)
 {
     return divisor/dividend;
 }
@@ -15,11 +15,11 @@ public void DoTheThing()
 
     double result = Divide(dividend, divisor);  // Noncompliant; operation succeeds, but result is unexpected
     //...
-}
+}</code>
 </pre>
 <h2>Compliant Solution</h2>
 <pre>
-public double Divide(int divisor, int dividend)
+<code data-lang="csharp">public double Divide(int divisor, int dividend)
 {
     return divisor/dividend;
 }
@@ -31,6 +31,6 @@ public void DoTheThing()
 
     double result = Divide(divisor, dividend);
     //...
-}
+}</code>
 </pre>
 

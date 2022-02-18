@@ -3,8 +3,8 @@ and only if they are the same object instance. Overloading the operator to do an
 callers. On the other hand, overloading it to do exactly that is pointless; that’s what <code>==</code> does by default.</p>
 <h2>Noncompliant Code Example</h2>
 <pre>
-public static bool operator== (MyType x, MyType y) // Noncompliant
-{
+<code data-lang="text">public static bool operator== (MyType x, MyType y) // Noncompliant
+{</code>
 </pre>
 <h2>Exceptions</h2>
 <ul>

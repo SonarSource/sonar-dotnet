@@ -6,7 +6,7 @@ and an inner method to handle the iterator block with the <code>async/await</cod
 <code>await</code> keyword.</p>
 <h2>Noncompliant Code Example</h2>
 <pre>
-public static async Task SkipLinesAsync(this TextReader reader, int linesToSkip) // Noncompliant
+<code data-lang="text">public static async Task SkipLinesAsync(this TextReader reader, int linesToSkip) // Noncompliant
 {
     if (reader == null) { throw new ArgumentNullException(nameof(reader)); }
     if (linesToSkip &lt; 0) { throw new ArgumentOutOfRangeException(nameof(linesToSkip)); }
@@ -16,11 +16,11 @@ public static async Task SkipLinesAsync(this TextReader reader, int linesToSkip)
         var line = await reader.ReadLineAsync().ConfigureAwait(false);
         if (line == null) { break; }
     }
-}
+}</code>
 </pre>
 <h2>Compliant Solution</h2>
 <pre>
-public static Task SkipLinesAsync(this TextReader reader, int linesToSkip)
+<code data-lang="text">public static Task SkipLinesAsync(this TextReader reader, int linesToSkip)
 {
     if (reader == null) { throw new ArgumentNullException(nameof(reader)); }
     if (linesToSkip &lt; 0) { throw new ArgumentOutOfRangeException(nameof(linesToSkip)); }
@@ -35,6 +35,6 @@ private static async Task SkipLinesInternalAsync(this TextReader reader, int lin
         var line = await reader.ReadLineAsync().ConfigureAwait(false);
         if (line == null) { break; }
     }
-}
+}</code>
 </pre>
 

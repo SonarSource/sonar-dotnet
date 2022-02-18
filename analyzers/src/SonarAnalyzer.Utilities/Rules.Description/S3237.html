@@ -3,29 +3,29 @@ parameter holds the value the accessor was called with. Not using the <code>valu
 could cause unexpected results at runtime.</p>
 <h2>Noncompliant Code Example</h2>
 <pre>
-private int count;
+<code data-lang="csharp">private int count;
 public int Count
 {
   get { return count; }
   set { count = 42; } // Noncompliant
-}
+}</code>
 </pre>
 <h2>Compliant Solution</h2>
 <pre>
-private int count;
+<code data-lang="csharp">private int count;
 public int Count
 {
   get { return count; }
   set { count = value; }
-}
+}</code>
 </pre>
 <p>or</p>
 <pre>
-public int Count
+<code data-lang="csharp">public int Count
 {
   get { return count; }
   set { throw new InvalidOperationException(); }
-}
+}</code>
 </pre>
 <h2>Exceptions</h2>
 <p>This rule doesn’t raise an issue when the setter is empty and part of the implementation of an <code>interface</code> . The assumption is that this

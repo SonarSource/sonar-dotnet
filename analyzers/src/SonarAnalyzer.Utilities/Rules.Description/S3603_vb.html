@@ -3,7 +3,7 @@ result, otherwise the call to the method should be equal to no-operation. So <co
 the method doesn’t do any meaningful task.</p>
 <h2>Noncompliant Code Example</h2>
 <pre>
-Class Person
+<code data-lang="vbnet">Class Person
     Private age As Integer
 
     &lt;Pure&gt; ' Noncompliant. In this case the method makes a possibly visible state change
@@ -11,16 +11,16 @@ Class Person
         ...
         Me.age = age
     End Sub
-End Class
+End Class</code>
 </pre>
 <h2>Compliant Solution</h2>
 <pre>
-Class Person
+<code data-lang="vbnet">Class Person
     Private age As Integer
 
     Private Sub ConfigureAge(ByVal age As Integer)
         Me.age = age
     End Sub
-End Class
+End Class</code>
 </pre>
 

@@ -3,7 +3,7 @@ That’s because maintainers may be confused about which members are being used 
 references updated.</p>
 <h2>Noncompliant Code Example</h2>
 <pre>
-class Outer
+<code data-lang="text">class Outer
 {
   public static int A;
 
@@ -15,11 +15,11 @@ class Outer
       get { return A; }  // Returns inner A. Was that intended?
     }
   }
-}
+}</code>
 </pre>
 <p>After a rename</p>
 <pre>
-class Outer
+<code data-lang="text">class Outer
 {
   public static int A;
 
@@ -31,11 +31,11 @@ class Outer
       get { return A; }  // Still compiles and runs but functionality has changed
     }
   }
-}
+}</code>
 </pre>
 <h2>Compliant Solution</h2>
 <pre>
-class Outer
+<code data-lang="text">class Outer
 {
   public static int A;
 
@@ -47,6 +47,6 @@ class Outer
       get { return InnerA; }
     }
   }
-}
+}</code>
 </pre>
 

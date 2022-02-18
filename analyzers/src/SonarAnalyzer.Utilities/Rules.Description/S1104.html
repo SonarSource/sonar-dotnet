@@ -9,14 +9,14 @@ protection (security) features such as Link Demands.</p>
 <p>Note that due to optimizations on simple properties, public fields provide only very little performance gain.</p>
 <h2>Noncompliant Code Example</h2>
 <pre>
-public class Foo
+<code data-lang="csharp">public class Foo
 {
     public int instanceData = 32; // Noncompliant
-}
+}</code>
 </pre>
 <h2>Compliant Solution</h2>
 <pre>
-public class Foo
+<code data-lang="csharp">public class Foo
 {
     private int instanceData = 32;
 
@@ -25,7 +25,7 @@ public class Foo
         get { return instanceData; }
 	set { instanceData = value ; }
     }
-}
+}</code>
 </pre>
 <h2>Exceptions</h2>
 <p>Fields marked as <code>readonly</code> or <code>const</code> are ignored by this rule.</p>

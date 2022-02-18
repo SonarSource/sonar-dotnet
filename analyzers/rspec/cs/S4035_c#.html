@@ -7,7 +7,7 @@ to make a meaningful comparison. Therefore that implicit contract is now broken.
 <code>Equals</code> is neither <code>virtual</code> nor <code>abstract</code>.</p>
 <h2>Noncompliant Code Example</h2>
 <pre>
-using System;
+<code data-lang="csharp">using System;
 
 namespace MyLibrary
 {
@@ -56,11 +56,11 @@ namespace MyLibrary
     // called and Equals would return false because it correctly recognizes that a and b are
     // different types. If a and b have the same base properties they will  be returned as equal.
   }
-}
+}</code>
 </pre>
 <h2>Compliant Solution</h2>
 <pre>
-using System;
+<code data-lang="csharp">using System;
 
 namespace MyLibrary
 {
@@ -71,7 +71,7 @@ namespace MyLibrary
             // Your code here
         }
     }
-}
+}</code>
 </pre>
 <h2>See</h2>
 <p><a href="https://msdn.microsoft.com/en-us/library/ms132151(v=vs.110).aspx">IEqualityComparer&lt;T&gt; Interface</a></p>

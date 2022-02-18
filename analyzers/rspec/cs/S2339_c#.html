@@ -8,19 +8,19 @@ are uncommon, and therefore it is generally better to avoid constant members.</p
 <p>This rule only reports issues on public constant fields, which can be reached from outside the defining assembly.</p>
 <h2>Noncompliant Code Example</h2>
 <pre>
-public class Foo
+<code data-lang="csharp">public class Foo
 {
     public const double Version = 1.0;           // Noncompliant
-}
+}</code>
 </pre>
 <h2>Compliant Solution</h2>
 <pre>
-public class Foo
+<code data-lang="csharp">public class Foo
 {
     public static double Version
     {
       get { return 1.0; }
     }
-}
+}</code>
 </pre>
 

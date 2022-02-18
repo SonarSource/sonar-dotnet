@@ -6,16 +6,16 @@
 </ul>
 <h2>Noncompliant Code Example</h2>
 <pre>
-u8a = ++u8b + u8c--;
-foo = bar++ / 4;
+<code data-lang="text">u8a = ++u8b + u8c--;
+foo = bar++ / 4;</code>
 </pre>
 <h2>Compliant Solution</h2>
 <p>The following sequence is clearer and therefore safer:</p>
 <pre>
-++u8b;
+<code data-lang="text">++u8b;
 u8a = u8b + u8c;
 u8c--;
 foo = bar / 4;
-bar++;
+bar++;</code>
 </pre>
 

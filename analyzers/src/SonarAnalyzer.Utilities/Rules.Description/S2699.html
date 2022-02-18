@@ -12,22 +12,22 @@ code under test.</p>
 </ul>
 <h2>Noncompliant Code Example</h2>
 <pre>
-[TestMethod]
+<code data-lang="csharp">[TestMethod]
 public void MyMethod_WhenSomething_ExpectsSomething()
 {
     var myClass = new Class();
     var result = myClass.GetFoo();
-}
+}</code>
 </pre>
 <h2>Compliant Solution</h2>
 <pre>
-[TestMethod]
+<code data-lang="csharp">[TestMethod]
 public void MyMethod_WhenSomething_ExpectsSomething()
 {
     var myClass = new Class();
     var result = myClass.GetFoo();
     Assert.IsTrue(result);
-}
+}</code>
 </pre>
 <h2>Exceptions</h2>
 <p>To create a custom assertion method declare an attribute with name <code>AssertionMethodAttribute</code> and mark the method with it:</p>

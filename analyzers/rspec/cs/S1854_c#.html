@@ -3,13 +3,13 @@ only to then overwrite it or throw it away, could indicate a serious error in th
 Therefore all calculated values should be used.</p>
 <h2>Noncompliant Code Example</h2>
 <pre>
-i = a + b; // Noncompliant; calculation result not used before value is overwritten
-i = compute();
+<code data-lang="text">i = a + b; // Noncompliant; calculation result not used before value is overwritten
+i = compute();</code>
 </pre>
 <h2>Compliant Solution</h2>
 <pre>
-i = a + b;
-i += compute();
+<code data-lang="text">i = a + b;
+i += compute();</code>
 </pre>
 <h2>Exceptions</h2>
 <p>No issue is reported when</p>

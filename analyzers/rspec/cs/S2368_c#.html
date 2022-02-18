@@ -3,16 +3,16 @@ use them. Moreover, what exactly to pass to such parameters is not intuitive. Th
 internally.</p>
 <h2>Noncompliant Code Example</h2>
 <pre>
-public class Program
+<code data-lang="csharp">public class Program
 {
     public void WriteMatrix(int[][] matrix) // Non-Compliant
     {
     }
-}
+}</code>
 </pre>
 <h2>Compliant Solution</h2>
 <pre>
-public class Matrix
+<code data-lang="csharp">public class Matrix
 {
     // ...
 }
@@ -22,6 +22,6 @@ public class Program
     public void WriteMatrix(Matrix matrix) // Compliant
     {
     }
-}
+}</code>
 </pre>
 

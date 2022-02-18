@@ -10,35 +10,35 @@ expression.</p>
 <h2>Noncompliant Code Example</h2>
 <p>With the default regular expression for non-flags enums: <code>^([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$</code></p>
 <pre>
-public enum foo // Noncompliant
+<code data-lang="csharp">public enum foo // Noncompliant
 {
     FooValue = 0
-}
+}</code>
 </pre>
 <p>With the default regular expression for flags enums: <code>^([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?s$</code></p>
 <pre>
-[Flags]
+<code data-lang="csharp">[Flags]
 public enum Option // Noncompliant
 {
     None = 0,
     Option1 = 1,
     Option2 = 2
-}
+}</code>
 </pre>
 <h2>Compliant Solution</h2>
 <pre>
-public enum Foo
+<code data-lang="csharp">public enum Foo
 {
     FooValue = 0
-}
+}</code>
 </pre>
 <pre>
-[Flags]
+<code data-lang="csharp">[Flags]
 public enum Options
 {
     None = 0,
     Option1 = 1,
     Option2 = 2
-}
+}</code>
 </pre>
 

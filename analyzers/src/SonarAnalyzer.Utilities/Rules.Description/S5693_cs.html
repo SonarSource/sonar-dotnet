@@ -57,7 +57,7 @@ public class MyController : Controller
 </pre>
 <h2>Compliant Solution</h2>
 <pre>
-using Microsoft.AspNetCore.Mvc;
+<code data-lang="csharp">using Microsoft.AspNetCore.Mvc;
 
 public class MyController : Controller
 {
@@ -74,11 +74,11 @@ public class MyController : Controller
     {
     // ...
     }
-}
+}</code>
 </pre>
 <p>In Web.config:</p>
 <pre>
-&lt;configuration&gt;
+<code data-lang="csharp">&lt;configuration&gt;
     &lt;system.web&gt;
         &lt;httpRuntime maxRequestLength="8192" executionTimeout="3600" /&gt;
         &lt;!-- Compliant: maxRequestLength is exprimed in KB, so 8192KB = 8MB  --&gt;
@@ -91,7 +91,7 @@ public class MyController : Controller
             &lt;/requestFiltering&gt;
         &lt;/security&gt;
     &lt;/system.webServer&gt;
-&lt;/configuration&gt;
+&lt;/configuration&gt;</code>
 </pre>
 <h2>See</h2>
 <ul>

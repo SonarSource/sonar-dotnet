@@ -10,15 +10,15 @@ same lock for another unrelated purpose.</p>
 </ul>
 <h2>Noncompliant Code Example</h2>
 <pre>
-Public Sub MyLockingMethod()
+<code data-lang="vbnet">Public Sub MyLockingMethod()
     SyncLock Me 'Noncompliant
         ' ...
     End SyncLock
-End Sub
+End Sub</code>
 </pre>
 <h2>Compliant Solution</h2>
 <pre>
-Class MyClass
+<code data-lang="vbnet">Class MyClass
     Dim lockObj As New Object()
 
     Public Sub MyLockingMethod()
@@ -26,7 +26,7 @@ Class MyClass
             ' ...
         End SyncLock
     End Sub
-End Class
+End Class</code>
 </pre>
 <h2>See</h2>
 <p><a href="https://docs.microsoft.com/en-us/dotnet/standard/threading/managed-threading-best-practices">Microsoft Documentation: Managed Threading

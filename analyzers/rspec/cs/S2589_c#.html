@@ -2,7 +2,7 @@
 because it does not match the programmer’s intent, then it’s a bug and the expression should be fixed.</p>
 <h2>Noncompliant Code Example</h2>
 <pre>
-public void Sample(bool b, bool c, string s)
+<code data-lang="csharp">public void Sample(bool b, bool c, string s)
 {
     var a = true;
     if (a) // Noncompliant
@@ -23,11 +23,11 @@ public void Sample(bool b, bool c, string s)
     string d = null;
     var v1 = d ?? "value"; // Noncompliant, d is always null
     var v2 = s ?? d; // Noncompliant, d is always null and the produced value is always equal to s. The condition to check the value of s is gratuitous.
-}
+}</code>
 </pre>
 <h2>Compliant Solution</h2>
 <pre>
-public void Sample(bool b, bool c, string s)
+<code data-lang="csharp">public void Sample(bool b, bool c, string s)
 {
     var a = true;
     if (Foo(a))
@@ -47,7 +47,7 @@ public void Sample(bool b, bool c, string s)
 
     var v1 = "value";
     var v2 = s;
-}
+}</code>
 </pre>
 <h2>See</h2>
 <ul>

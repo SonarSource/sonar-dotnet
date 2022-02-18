@@ -3,18 +3,18 @@ the characters in a string, and when accessing a character in a string via an ar
 should be omitted.</p>
 <h2>Noncompliant Code Example</h2>
 <pre>
-string str = "some string";
+<code data-lang="csharp">string str = "some string";
 foreach (var c in str.ToCharArray()) // Noncompliant
 {
   // ...
-}
+}</code>
 </pre>
 <h2>Compliant Solution</h2>
 <pre>
-string str = "some string";
+<code data-lang="csharp">string str = "some string";
 foreach (var c in str)
 {
   // ...
-}
+}</code>
 </pre>
 

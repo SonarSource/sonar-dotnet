@@ -6,10 +6,10 @@ in the run of your program that caused a lot of long-lived objects to die.</p>
 <p>This rule raises an issue when <code>GC.Collect</code> is invoked.</p>
 <h2>Noncompliant Code Example</h2>
 <pre>
-static void Main(string[] args)
+<code data-lang="csharp">static void Main(string[] args)
 {
   // ...
   GC.Collect(2, GCCollectionMode.Optimized); // Noncompliant
-}
+}</code>
 </pre>
 

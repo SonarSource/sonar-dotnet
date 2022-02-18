@@ -8,7 +8,7 @@ regarding these parameters:</p>
 <p>This rule raises an issue when any of these guidelines is not met.</p>
 <h2>Noncompliant Code Example</h2>
 <pre>
-using System;
+<code data-lang="text">using System;
 
 namespace MyLibrary
 {
@@ -21,11 +21,11 @@ namespace MyLibrary
         ThresholdReached?.Invoke(null, e); // Noncompliant
     }
   }
-}
+}</code>
 </pre>
 <h2>Compliant Solution</h2>
 <pre>
-using System;
+<code data-lang="text">using System;
 
 namespace MyLibrary
 {
@@ -38,6 +38,6 @@ namespace MyLibrary
         ThresholdReached?.Invoke(this, e);
     }
   }
-}
+}</code>
 </pre>
 

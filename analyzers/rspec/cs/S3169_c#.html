@@ -4,16 +4,16 @@ sorting will be executed, but only the result of the last sort will be kept.</p>
 <p>Instead, use <code>ThenBy</code> for each call after the first.</p>
 <h2>Noncompliant Code Example</h2>
 <pre>
-var x = personList
+<code data-lang="csharp">var x = personList
   .OrderBy(person =&gt; person.Age)
   .OrderBy(person =&gt; person.Name)  // Noncompliant
-  .ToList();  // x is sorted by Name, not sub-sorted
+  .ToList();  // x is sorted by Name, not sub-sorted</code>
 </pre>
 <h2>Compliant Solution</h2>
 <pre>
-var x = personList
+<code data-lang="csharp">var x = personList
   .OrderBy(person =&gt; person.Age)
   .ThenBy(person =&gt; person.Name)
-  .ToList();
+  .ToList();</code>
 </pre>
 

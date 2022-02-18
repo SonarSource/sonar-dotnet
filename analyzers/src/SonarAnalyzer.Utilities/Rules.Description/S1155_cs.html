@@ -10,7 +10,7 @@ However, there are some cases where special attention should be paid:</p>
 </ul>
 <h2>Noncompliant Code Example</h2>
 <pre>
-private static bool HasContent(IEnumerable&lt;string&gt; strings)
+<code data-lang="csharp">private static bool HasContent(IEnumerable&lt;string&gt; strings)
 {
   return strings.Count() &gt; 0;  // Noncompliant
 }
@@ -23,11 +23,11 @@ private static bool HasContent2(IEnumerable&lt;string&gt; strings)
 private static bool IsEmpty(IEnumerable&lt;string&gt; strings)
 {
   return strings.Count() == 0;  // Noncompliant
-}
+}</code>
 </pre>
 <h2>Compliant Solution</h2>
 <pre>
-private static bool HasContent(IEnumerable&lt;string&gt; strings)
+<code data-lang="csharp">private static bool HasContent(IEnumerable&lt;string&gt; strings)
 {
   return strings.Any();
 }
@@ -40,6 +40,6 @@ private static bool HasContent2(IEnumerable&lt;string&gt; strings)
 private static bool IsEmpty(IEnumerable&lt;string&gt; strings)
 {
   return !strings.Any();
-}
+}</code>
 </pre>
 

@@ -3,7 +3,7 @@ can easily be converted to a <code>null</code> test, and any behavior being carr
 of the conditional.</p>
 <h2>Noncompliant Code Example</h2>
 <pre>
-public int GetLengthPlusTwo(string str)
+<code data-lang="csharp">public int GetLengthPlusTwo(string str)
 {
     int length = 2;
     try
@@ -15,11 +15,11 @@ public int GetLengthPlusTwo(string str)
         log.info("argument was null");
     }
     return length;
-}
+}</code>
 </pre>
 <h2>Compliant Solution</h2>
 <pre>
-public int GetLengthPlusTwo(string str)
+<code data-lang="csharp">public int GetLengthPlusTwo(string str)
 {
     int length = 2;
 
@@ -32,7 +32,7 @@ public int GetLengthPlusTwo(string str)
         log.info("argument was null");
     }
     return length;
-}
+}</code>
 </pre>
 <h2>See</h2>
 <ul>

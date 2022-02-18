@@ -3,22 +3,22 @@ as to why it’s obsolete or on what to use instead will lead maintainers to was
 warning is encountered.</p>
 <h2>Noncompliant Code Example</h2>
 <pre>
-public class Car
+<code data-lang="csharp">public class Car
 {
 
   [Obsolete]  // Noncompliant
   public void CrankEngine(int turnsOfCrank)
   { ... }
-}
+}</code>
 </pre>
 <h2>Compliant Solution</h2>
 <pre>
-public class Car
+<code data-lang="csharp">public class Car
 {
 
   [Obsolete("Replaced by the automatic starter")]
   public void CrankEngine(int turnsOfCrank)
   { ... }
-}
+}</code>
 </pre>
 

@@ -8,7 +8,7 @@ there’s still a danger if the class is not <code>final</code>. In that case, t
 of another object in a constructor</p>
 <h2>Noncompliant Code Example</h2>
 <pre>
-public class Monument
+<code data-lang="csharp">public class Monument
 {
   public static readonly List&lt;Monument&gt; ALL_MONUMENTS = new List&lt;Monument&gt;();
   // ...
@@ -20,7 +20,7 @@ public class Monument
     this.location = location;
     // ...
   }
-}
+}</code>
 </pre>
 <h2>Exceptions</h2>
 <p>This rule ignores instances of assigning <code>this</code> directly to a <code>static</code> field of the same class because that case is covered

@@ -4,17 +4,17 @@ of <code>Equals</code> and <code>GetHashCode</code>.</p>
 <p>NOTE: In some cases it might be dangerous to add or remove empty overrides, as they might be breaking changes.</p>
 <h2>Noncompliant Code Example</h2>
 <pre>
-public override void Method() // Noncompliant
+<code data-lang="csharp">public override void Method() // Noncompliant
 {
   base.Method();
-}
+}</code>
 </pre>
 <h2>Compliant Solution</h2>
 <pre>
-public override void Method()
+<code data-lang="csharp">public override void Method()
 {
   //do something else
-}
+}</code>
 </pre>
 <h2>Exceptions</h2>
 <p>If there is an attribute in any level of the overriding chain, then the overridden member is ignored.</p>

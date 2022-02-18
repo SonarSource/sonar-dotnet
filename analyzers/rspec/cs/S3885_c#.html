@@ -4,11 +4,11 @@ a dll other than the one you expected.</p>
 called.</p>
 <h2>Noncompliant Code Example</h2>
 <pre>
-static void Main(string[] args)
+<code data-lang="csharp">static void Main(string[] args)
 {
     Assembly.LoadFrom(...); // Noncompliant
     Assembly.LoadFile(...); // Noncompliant
     Assembly.LoadWithPartialName(...); // Noncompliant + deprecated
-}
+}</code>
 </pre>
 

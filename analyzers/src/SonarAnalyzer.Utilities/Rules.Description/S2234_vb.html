@@ -3,7 +3,7 @@ However, when the names match but are passed in a different order than the metho
 likely lead to unexpected results.</p>
 <h2>Noncompliant Code Example</h2>
 <pre>
-Public Function Divide(ByVal divisor As Integer, ByVal dividend As Integer) As Double
+<code data-lang="vbnet">Public Function Divide(ByVal divisor As Integer, ByVal dividend As Integer) As Double
     Return divisor / dividend
 End Function
 
@@ -13,11 +13,11 @@ Public Sub DoTheThing()
 
     Dim result = Divide(dividend, divisor)  ' Noncompliant; operation succeeds, but result is unexpected
     '...
-End Sub
+End Sub</code>
 </pre>
 <h2>Compliant Solution</h2>
 <pre>
-Public Function Divide(ByVal divisor As Integer, ByVal dividend As Integer) As Double
+<code data-lang="vbnet">Public Function Divide(ByVal divisor As Integer, ByVal dividend As Integer) As Double
     Return divisor / dividend
 End Function
 
@@ -27,6 +27,6 @@ Public Sub DoTheThing()
 
     Dim result = Divide(divisor, dividend)
     '...
-End Sub
+End Sub</code>
 </pre>
 

@@ -3,7 +3,7 @@
 <h2>Noncompliant Code Example</h2>
 <p>With a "Maximum number of case" set to 4</p>
 <pre>
-Public Class TooManyCase
+<code data-lang="vbnet">Public Class TooManyCase
 
     Public Function SelectCase(Ch As Char) As Integer
         Select Case Ch
@@ -22,11 +22,11 @@ Public Class TooManyCase
         End Select
     End Function
 
-End Class
+End Class</code>
 </pre>
 <h2>Compliant Solution</h2>
 <pre>
-Public Class TooManyCase
+<code data-lang="vbnet">Public Class TooManyCase
 
     Private fMatching As New Dictionary(Of Char, Integer) From {
             {"a"c, 1}, {"b"c, 2}, {"c"c, 2}, {"d"c, 3},
@@ -42,7 +42,7 @@ Public Class TooManyCase
         End If
     End Function
 
-End Class
+End Class</code>
 </pre>
 <h2>Exceptions</h2>
 <p>This rule ignores <code>Select Case</code>s over <code>Enum</code>s and empty, fall-through cases.</p>

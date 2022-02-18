@@ -5,7 +5,7 @@ critical, missing functionality, the loss of which will lead to unexpected resul
 <p>This rule raises an issue for partial methods for which no implementation can be found in the assembly.</p>
 <h2>Noncompliant Code Example</h2>
 <pre>
-partial class C
+<code data-lang="csharp">partial class C
 {
   partial void M(); //Noncompliant
 
@@ -13,6 +13,6 @@ partial class C
   {
     M(); //Noncompliant. Will be removed.
   }
-}
+}</code>
 </pre>
 

@@ -1,7 +1,7 @@
 <p>The <code>default</code> clause should take appropriate action. Having an empty <code>default</code> is a waste of keystrokes.</p>
 <h2>Noncompliant Code Example</h2>
 <pre>
-enum Fruit
+<code data-lang="csharp">enum Fruit
 {
   Apple,
   Orange,
@@ -18,11 +18,11 @@ void PrintName(Fruit fruit)
     default:  //Noncompliant
       break;
   }
-}
+}</code>
 </pre>
 <h2>Compliant Solution</h2>
 <pre>
-enum Fruit
+<code data-lang="csharp">enum Fruit
 {
   Apple,
   Orange,
@@ -39,11 +39,11 @@ void PrintName(Fruit fruit)
     default:
       throw new NotSupportedException();
   }
-}
+}</code>
 </pre>
 <p>or</p>
 <pre>
-void PrintName(Fruit fruit)
+<code data-lang="csharp">void PrintName(Fruit fruit)
 {
   switch(fruit)
   {
@@ -51,7 +51,7 @@ void PrintName(Fruit fruit)
       Console.WriteLine("apple");
       break;
   }
-}
+}</code>
 </pre>
 <h2>Exceptions</h2>
 <p><code>default</code> clauses containing only a comment are ignored with the assumption that they are empty on purpose and the comment documents

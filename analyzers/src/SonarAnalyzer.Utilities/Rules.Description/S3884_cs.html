@@ -5,7 +5,7 @@ already been set.</p>
 code.</p>
 <h2>Noncompliant Code Example</h2>
 <pre>
-[DllImport("ole32.dll")]
+<code data-lang="text">[DllImport("ole32.dll")]
 static extern int CoSetProxyBlanket([MarshalAs(UnmanagedType.IUnknown)]object pProxy, uint dwAuthnSvc, uint dwAuthzSvc,
 	[MarshalAs(UnmanagedType.LPWStr)] string pServerPrincName, uint dwAuthnLevel, uint dwImpLevel, IntPtr pAuthInfo,
 	uint dwCapabilities);
@@ -59,7 +59,7 @@ static void Main(string[] args)
 
 	var hres2 = CoInitializeSecurity(IntPtr.Zero, -1, IntPtr.Zero, IntPtr.Zero, RpcAuthnLevel.None,
 		RpcImpLevel.Impersonate, IntPtr.Zero, EoAuthnCap.None, IntPtr.Zero); // Noncompliant
-}
+}</code>
 </pre>
 <h2>See</h2>
 <ul>

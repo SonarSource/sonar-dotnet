@@ -4,7 +4,7 @@ declarations overlap in non-obvious ways, so that slight changes in the argument
 non-<code>params</code> method too.</p>
 <h2>Noncompliant Code Example</h2>
 <pre>
-public class MyClass
+<code data-lang="csharp">public class MyClass
 {
     private void Format(string a, params object[] b) { }
 
@@ -14,6 +14,6 @@ public class MyClass
 // ...
 MyClass myClass = new MyClass();
 
-myClass.Format("", null, null); // Noncompliant, resolves to the first Format with params, but was that intended?
+myClass.Format("", null, null); // Noncompliant, resolves to the first Format with params, but was that intended?</code>
 </pre>
 

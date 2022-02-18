@@ -6,7 +6,7 @@ available at that time such as <code>ArrayList</code>. The <code>foreach</code> 
 conversions.</p>
 <h2>Noncompliant Code Example</h2>
 <pre>
-public class Fruit { }
+<code data-lang="csharp">public class Fruit { }
 public class Orange : Fruit { }
 public class Apple : Fruit { }
 
@@ -30,11 +30,11 @@ class MyTest
       ...
     }
   }
-}
+}</code>
 </pre>
 <h2>Compliant Solution</h2>
 <pre>
-var fruitBasket = new List&lt;Orange&gt;();
+<code data-lang="csharp">var fruitBasket = new List&lt;Orange&gt;();
 fruitBasket.Add(new Orange());
 fruitBasket.Add(new Orange());
 // fruitBasket.Add(new Apple());  // uncommenting this line won't compile
@@ -42,11 +42,11 @@ fruitBasket.Add(new Orange());
 foreach (Orange orange in fruitBasket)
 {
   ...
-}
+}</code>
 </pre>
 <p>or</p>
 <pre>
-var fruitBasket = new List&lt;Fruit&gt;();
+<code data-lang="csharp">var fruitBasket = new List&lt;Fruit&gt;();
 fruitBasket.Add(new Orange());
 fruitBasket.Add(new Orange());
 fruitBasket.Add(new Apple());
@@ -54,7 +54,7 @@ fruitBasket.Add(new Apple());
 foreach (Orange orange in fruitBasket.OfType&lt;Orange&gt;())
 {
   ...
-}
+}</code>
 </pre>
 <h2>Exceptions</h2>
 <p>The rule ignores iterations on collections of <code>object</code>s. This includes legacy code that uses <code>ArrayList</code>. Furthermore, the

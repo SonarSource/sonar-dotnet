@@ -2,23 +2,23 @@
 above the field or fields required for its initialization will yield unexpected results.</p>
 <h2>Noncompliant Code Example</h2>
 <pre>
-class MyClass
+<code data-lang="text">class MyClass
 {
   public static int X = Y; // Noncompliant; Y at this time is still assigned default(int), i.e. 0
   public static int Y = 42;
-}
+}</code>
 </pre>
 <h2>Compliant Solution</h2>
 <pre>
-class MyClass
+<code data-lang="text">class MyClass
 {
   public static int Y = 42;
   public static int X = Y;
-}
+}</code>
 </pre>
 <p>or</p>
 <pre>
-class MyClass
+<code data-lang="text">class MyClass
 {
   public static int X;
   public static int Y = 42;
@@ -27,6 +27,6 @@ class MyClass
   {
     X = Y;
   }
-}
+}</code>
 </pre>
 

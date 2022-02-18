@@ -6,7 +6,7 @@ declaring type contains a corresponding overload that takes a <code>System.Uri</
 a <code>System.Uri</code> argument.</p>
 <h2>Noncompliant Code Example</h2>
 <pre>
-using System;
+<code data-lang="text">using System;
 
 namespace MyLibrary
 {
@@ -23,11 +23,11 @@ namespace MyLibrary
         ReadResource("http://www.mysite.com", "foo-resource", true); // Noncompliant
       }
    }
-}
+}</code>
 </pre>
 <h2>Compliant Solution</h2>
 <pre>
-using System;
+<code data-lang="text">using System;
 
 namespace MyLibrary
 {
@@ -44,6 +44,6 @@ namespace MyLibrary
         ReadResource(new Uri("http://www.mysite.com"), "foo-resource", true);
       }
    }
-}
+}</code>
 </pre>
 

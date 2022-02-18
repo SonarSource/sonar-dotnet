@@ -17,38 +17,38 @@
 <p><a href="https://docs.microsoft.com/en-us/dotnet/api/system.security.cryptography.aesmanaged?view=netframework-4.8">AesManaged</a> object with
 insecure mode:</p>
 <pre>
-AesManaged aes4 = new AesManaged
+<code data-lang="csharp">AesManaged aes4 = new AesManaged
 {
   KeySize = 128,
   BlockSize = 128,
   Mode = CipherMode.ECB, // Noncompliant
   Padding = PaddingMode.PKCS7
-};
+};</code>
 </pre>
 <p><a
 href="https://docs.microsoft.com/en-us/dotnet/api/system.security.cryptography.rsacryptoserviceprovider?view=netframework-4.8">RSACryptoServiceProvider</a>
 object without OAEP padding:</p>
 <pre>
-RSACryptoServiceProvider RSA1 = new RSACryptoServiceProvider();
-encryptedData = RSA1.Encrypt(dataToEncrypt, false); // Noncompliant: OAEP Padding is not used (second parameter set to false)
+<code data-lang="csharp">RSACryptoServiceProvider RSA1 = new RSACryptoServiceProvider();
+encryptedData = RSA1.Encrypt(dataToEncrypt, false); // Noncompliant: OAEP Padding is not used (second parameter set to false)</code>
 </pre>
 <h2>Compliant Solution</h2>
 <p>AES with GCM mode with <a href="https://www.bouncycastle.org/">bouncycastle</a> library:</p>
 <pre>
-GcmBlockCipher blockCipher = new GcmBlockCipher(new AesEngine()); // Compliant
-blockCipher.Init(true, new AeadParameters(new KeyParameter(secretKey), 128, iv, null));
+<code data-lang="csharp">GcmBlockCipher blockCipher = new GcmBlockCipher(new AesEngine()); // Compliant
+blockCipher.Init(true, new AeadParameters(new KeyParameter(secretKey), 128, iv, null));</code>
 </pre>
 <p>AES with GCM mode with <a href="https://docs.microsoft.com/en-us/dotnet/api/system.security.cryptography.aesgcm?view=netcore-3.0">AesGcm</a>
 object:</p>
 <pre>
-var aesGcm = new AesGcm(key); // Compliant
+<code data-lang="csharp">var aesGcm = new AesGcm(key); // Compliant</code>
 </pre>
 <p>RSA with OAEP padding with <a
 href="https://docs.microsoft.com/en-us/dotnet/api/system.security.cryptography.rsacryptoserviceprovider?view=netframework-4.8">RSACryptoServiceProvider</a>
 object:</p>
 <pre>
-RSACryptoServiceProvider RSA2 = new RSACryptoServiceProvider();
-encryptedData = RSA2.Encrypt(dataToEncrypt, true); // Compliant: OAEP Padding is used (second parameter set to true)
+<code data-lang="csharp">RSACryptoServiceProvider RSA2 = new RSACryptoServiceProvider();
+encryptedData = RSA2.Encrypt(dataToEncrypt, true); // Compliant: OAEP Padding is used (second parameter set to true)</code>
 </pre>
 <h2>See</h2>
 <ul>

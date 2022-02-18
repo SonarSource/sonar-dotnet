@@ -9,7 +9,7 @@ data type conversions. Specifying <code>Option Strict Off</code> will allow:</p>
 <p><code>Option Strict</code> can be set in project properties or overridden in individual source files.</p>
 <h2>Noncompliant Code Example</h2>
 <pre>
-Option Strict Off    ' Noncompliant
+<code data-lang="text">Option Strict Off    ' Noncompliant
 
 Public Class KnownType
 
@@ -24,11 +24,11 @@ Public Module MainMod
         Return Arg.Title                        ' "Title" might not exist in "Arg"
     End Function
 
-End Module
+End Module</code>
 </pre>
 <h2>Compliant Solution</h2>
 <pre>
-Option Strict On
+<code data-lang="text">Option Strict On
 
 Public Class KnownType
 
@@ -43,7 +43,7 @@ Public Module MainMod
         Return Arg.Name
     End Function
 
-End Module
+End Module</code>
 </pre>
 <h2>See</h2>
 <ul>

@@ -6,7 +6,7 @@ the omission of curly braces means the lines will be unconditionally executed on
 look fine in your editor but are confusing when you change the size of tabs.</p>
 <h2>Noncompliant Code Example</h2>
 <pre>
-if (condition)
+<code data-lang="csharp">if (condition)
   FirstActionInBlock();
   SecondAction();  // Noncompliant; executed unconditionally
 ThirdAction();
@@ -19,11 +19,11 @@ if(condition) FirstActionInBlock();  // Noncompliant
 string str = null;
 for (int i = 0; i &lt; array.Length; i++)
   str = array[i];
-  DoTheThing(str);  // Noncompliant; executed only on last array element
+  DoTheThing(str);  // Noncompliant; executed only on last array element</code>
 </pre>
 <h2>Compliant Solution</h2>
 <pre>
-if (condition)
+<code data-lang="csharp">if (condition)
 {
   FirstActionInBlock();
   SecondAction();
@@ -35,7 +35,7 @@ for (int i = 0; i &lt; array.Length; i++)
 {
   str = array[i];
   DoTheThing(str);
-}
+}</code>
 </pre>
 <h2>See</h2>
 <ul>

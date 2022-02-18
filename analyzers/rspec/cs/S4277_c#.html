@@ -4,7 +4,7 @@ will most likely result in unexpected behaviours.</p>
 <p>This rule raises an issue when a constructor of a class marked shared with a <code>PartCreationPolicyAttribute</code> is invoked.</p>
 <h2>Noncompliant Code Example</h2>
 <pre>
-[Export(typeof(IFooBar))]
+<code data-lang="text">[Export(typeof(IFooBar))]
 [PartCreationPolicy(CreationPolicy.Shared)]
 public class FooBar : IFooBar
 {
@@ -16,11 +16,11 @@ public class Program
     {
         var fooBar = new FooBar(); // Noncompliant;
     }
-}
+}</code>
 </pre>
 <h2>Compliant Solution</h2>
 <pre>
-[Export(typeof(IFooBar))]
+<code data-lang="text">[Export(typeof(IFooBar))]
 [PartCreationPolicy(CreationPolicy.Shared)]
 public class FooBar : IFooBar
 {
@@ -32,6 +32,6 @@ public class Program
     {
         var fooBar = serviceProvider.GetService&lt;IFooBar&gt;();
     }
-}
+}</code>
 </pre>
 

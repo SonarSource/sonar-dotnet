@@ -31,7 +31,7 @@ Next
 </pre>
 <h2>Compliant Solution</h2>
 <pre>
-Const ThresholdRatio As Double = 10
+<code data-lang="vbnet">Const ThresholdRatio As Double = 10
 Const ThresholdSize As Integer = 1024 * 1024 * 1024 ' 1 GB
 Const ThresholdEntries As Integer = 10000
 Dim TotalSizeArchive, TotalEntryArchive, TotalEntrySize, Cnt As Integer
@@ -51,7 +51,7 @@ Using ZipToOpen As New FileStream("ZipBomb.zip", FileMode.Open), Archive As New 
         If TotalSizeArchive &gt; ThresholdSize Then Exit For       ' The uncompressed data size Is too much for the application resource capacity
         If TotalEntryArchive &gt; ThresholdEntries Then Exit For   ' Too much entries in this archive, can lead to inodes exhaustion of the system
     Next
-End Using
+End Using</code>
 </pre>
 <h2>See</h2>
 <ul>

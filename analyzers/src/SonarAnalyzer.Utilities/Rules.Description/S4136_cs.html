@@ -2,21 +2,21 @@
 available options.</p>
 <h2>Noncompliant Code Example</h2>
 <pre>
-interface IMyInterface
+<code data-lang="csharp">interface IMyInterface
 {
   int DoTheThing(); // Noncompliant - overloaded method declarations are not grouped together
   string DoTheOtherThing();
   int DoTheThing(string s);
-}
+}</code>
 </pre>
 <h2>Compliant Solution</h2>
 <pre>
-interface IMyInterface
+<code data-lang="csharp">interface IMyInterface
 {
   int DoTheThing();
   int DoTheThing(string s);
   string DoTheOtherThing();
-}
+}</code>
 </pre>
 <h2>Exceptions</h2>
 <p>As it is common practice to group method declarations by implemented interface, no issue will be raised for implicit and explicit interface

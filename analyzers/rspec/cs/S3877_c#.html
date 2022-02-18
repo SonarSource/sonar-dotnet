@@ -15,13 +15,13 @@ exception from such a method is likely to break callers' code unexpectedly.</p>
 </ul>
 <h2>Noncompliant Code Example</h2>
 <pre>
-public override string ToString()
+<code data-lang="csharp">public override string ToString()
 {
   if (string.IsNullOrEmpty(Name))
   {
     throw new ArgumentException("...");  // Noncompliant
   }
-  //...
+  //...</code>
 </pre>
 <h2>Exceptions</h2>
 <p><code>System.NotImplementedException</code> and its derivatives are ignored.</p>

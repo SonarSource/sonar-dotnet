@@ -9,12 +9,12 @@ expression.</p>
 <h2>Noncompliant Code Example</h2>
 <p>With the default regular expression: <code>^([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?(\.([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2}))*$</code></p>
 <pre>
-Namespace foo  ' Noncompliant
-End Namespace
+<code data-lang="vbnet">Namespace foo  ' Noncompliant
+End Namespace</code>
 </pre>
 <h2>Compliant Solution</h2>
 <pre>
-Namespace Foo  ' Compliant
-End Namespace
+<code data-lang="vbnet">Namespace Foo  ' Compliant
+End Namespace</code>
 </pre>
 

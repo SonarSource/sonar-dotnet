@@ -5,7 +5,7 @@ inaccessible.</p>
 and does not provide an alternate, externally visible method with the same name.</p>
 <h2>Noncompliant Code Example</h2>
 <pre>
-public interface IMyInterface
+<code data-lang="csharp">public interface IMyInterface
 {
     void MyMethod();
 }
@@ -30,11 +30,11 @@ public class Bar : Foo, IMyInterface
         // Can't access base.MyMethod()
         // ((IMyInterface)this).MyMethod() would be a recursive call
     }
-}
+}</code>
 </pre>
 <h2>Compliant Solution</h2>
 <pre>
-public interface IMyInterface
+<code data-lang="csharp">public interface IMyInterface
 {
     void MyMethod();
 }
@@ -59,7 +59,7 @@ public class Bar : Foo, IMyInterface
         // Do something
         base.MyMethod();
     }
-}
+}</code>
 </pre>
 <h2>Exceptions</h2>
 <p>This rule does not report a violation for an explicit implementation of <code>IDisposable.Dispose</code> when an externally visible

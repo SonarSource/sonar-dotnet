@@ -3,7 +3,7 @@ bitwise operations can be used on them to combine the values. This is a good way
 <code>enum</code>s are used this way, it is a best practice to mark the <code>enum</code> with the <code>FlagsAttribute</code>.</p>
 <h2>Noncompliant Code Example</h2>
 <pre>
-enum Permissions
+<code data-lang="csharp">enum Permissions
 {
   None = 0,
   Read = 1,
@@ -12,11 +12,11 @@ enum Permissions
 }
 // ...
 
-var x = Permissions.Read | Permissions.Write;  // Noncompliant; enum is not marked with [Flags]
+var x = Permissions.Read | Permissions.Write;  // Noncompliant; enum is not marked with [Flags]</code>
 </pre>
 <h2>Compliant Solution</h2>
 <pre>
-[Flags]
+<code data-lang="csharp">[Flags]
 enum Permissions
 {
   None = 0,
@@ -26,6 +26,6 @@ enum Permissions
 }
 // ...
 
-var x = Permissions.Read | Permissions.Write;
+var x = Permissions.Read | Permissions.Write;</code>
 </pre>
 

@@ -2,7 +2,7 @@
 and it’s not supposed to be". <code>const</code> should be used in these situations in the interests of code clarity.</p>
 <h2>Noncompliant Code Example</h2>
 <pre>
-public bool Seek(int[] input)
+<code data-lang="csharp">public bool Seek(int[] input)
 {
   int target = 32;  // Noncompliant
   foreach (int i in input)
@@ -13,11 +13,11 @@ public bool Seek(int[] input)
     }
   }
   return false;
-}
+}</code>
 </pre>
 <h2>Compliant Solution</h2>
 <pre>
-public bool Seek(int[] input)
+<code data-lang="csharp">public bool Seek(int[] input)
 {
   const int target = 32;
   foreach (int i in input)
@@ -28,6 +28,6 @@ public bool Seek(int[] input)
     }
   }
   return false;
-}
+}</code>
 </pre>
 

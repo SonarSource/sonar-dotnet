@@ -3,7 +3,7 @@
 <p>This rule raises an issue when a string in the <code>throw</code> statement contains the name of one of the method parameters.</p>
 <h2>Noncompliant Code Example</h2>
 <pre>
-void DoSomething(int someParameter, string anotherParam)
+<code data-lang="text">void DoSomething(int someParameter, string anotherParam)
 {
     if (someParameter &lt; 0)
     {
@@ -13,11 +13,11 @@ void DoSomething(int someParameter, string anotherParam)
     {
         throw new Exception("anotherParam should not be null"); // Noncompliant
     }
-}
+}</code>
 </pre>
 <h2>Compliant Solution</h2>
 <pre>
-void DoSomething(int someParameter)
+<code data-lang="text">void DoSomething(int someParameter)
 {
     if (someParameter &lt; 0)
     {
@@ -27,7 +27,7 @@ void DoSomething(int someParameter)
     {
         throw new Exception($"{nameof(anotherParam)} should not be null");
     }
-}
+}</code>
 </pre>
 <h2>Exceptions</h2>
 <ul>

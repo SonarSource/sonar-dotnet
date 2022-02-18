@@ -4,7 +4,7 @@ control passes out of the block’s scope. The exception to this rule is when yo
 <code>using</code> or avoid returning the <code>IDisposable</code>.</p>
 <h2>Noncompliant Code Example</h2>
 <pre>
-public FileStream WriteToFile(string path, string text)
+<code data-lang="text">public FileStream WriteToFile(string path, string text)
 {
   using (var fs = File.Create(path)) // Noncompliant
   {
@@ -12,16 +12,16 @@ public FileStream WriteToFile(string path, string text)
     fs.Write(bytes, 0, bytes.Length);
     return fs;
   }
-}
+}</code>
 </pre>
 <h2>Compliant Solution</h2>
 <pre>
-public FileStream WriteToFile(string path, string text)
+<code data-lang="text">public FileStream WriteToFile(string path, string text)
 {
   var fs = File.Create(path);
   var bytes = Encoding.UTF8.GetBytes(text);
   fs.Write(bytes, 0, bytes.Length);
   return fs;
-}
+}</code>
 </pre>
 

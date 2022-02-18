@@ -4,22 +4,22 @@
 errors.</p>
 <h2>Noncompliant Code Example</h2>
 <pre>
-Public Sub DoSomething(obj As Object)
+<code data-lang="vbnet">Public Sub DoSomething(obj As Object)
   If obj Is Nothing Then
     ' Noncompliant
     Throw New NullReferenceException("obj")
   End If
   ' ...
-End Sub
+End Sub</code>
 </pre>
 <h2>Compliant Solution</h2>
 <pre>
-Public Sub DoSomething(obj As Object)
+<code data-lang="vbnet">Public Sub DoSomething(obj As Object)
   If obj Is Nothing Then
     Throw New ArgumentNullException("obj")
   End If
   ' ...
-End Sub
+End Sub</code>
 </pre>
 <h2>See</h2>
 <ul>

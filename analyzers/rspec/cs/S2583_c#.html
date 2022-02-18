@@ -2,7 +2,7 @@
 be used in production.</p>
 <h2>Noncompliant Code Example</h2>
 <pre>
-public void Sample(bool b)
+<code data-lang="csharp">public void Sample(bool b)
 {
     bool a = false;
     if (a) // Noncompliant
@@ -21,11 +21,11 @@ public void Sample(bool b)
 
     var d = "xxx";
     var res = d ?? "value"; // Noncompliant, d is always not null, "value" is never used
-}
+}</code>
 </pre>
 <h2>Compliant Solution</h2>
 <pre>
-public void Sample(bool b)
+<code data-lang="csharp">public void Sample(bool b)
 {
     bool a = false;
     if (Foo(a))
@@ -44,7 +44,7 @@ public void Sample(bool b)
 
     var d = "xxx";
     var res = d;
-}
+}</code>
 </pre>
 <h2>Exceptions</h2>
 <p>This rule will not raise an issue in either of these cases:</p>

@@ -2,24 +2,24 @@
 state, since there is no way to check that the bit <code>0</code> is set.</p>
 <h2>Noncompliant Code Example</h2>
 <pre>
-[Flags]
+<code data-lang="csharp">[Flags]
 enum FruitType
 {
     Void = 0,        // Non-Compliant
     Banana = 1,
     Orange = 2,
     Strawberry = 4
-}
+}</code>
 </pre>
 <h2>Compliant Solution</h2>
 <pre>
-[Flags]
+<code data-lang="csharp">[Flags]
 enum FruitType
 {
     None = 0,        // Compliant
     Banana = 1,
     Orange = 2,
     Strawberry = 4
-}
+}</code>
 </pre>
 

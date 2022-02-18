@@ -7,21 +7,21 @@
 <p>This rule raises an issue whenever a <code>delegate</code> declaration doesn’t match that signature.</p>
 <h2>Noncompliant Code Example</h2>
 <pre>
-public delegate void AlarmEventHandler(object s);
+<code data-lang="text">public delegate void AlarmEventHandler(object s);
 
 public class Foo
 {
     public event AlarmEventHandler AlarmEvent; // Noncompliant
-}
+}</code>
 </pre>
 <h2>Compliant Solution</h2>
 <pre>
-public delegate void AlarmEventHandler(object sender, AlarmEventArgs e);
+<code data-lang="text">public delegate void AlarmEventHandler(object sender, AlarmEventArgs e);
 
 public class Foo
 {
     public event AlarmEventHandler AlarmEvent; // Compliant
-}
+}</code>
 </pre>
 <h2>See</h2>
 <p><a href="https://msdn.microsoft.com/en-us/library/edzehd2t.aspx">Handling and Raising Events</a></p>

@@ -2,12 +2,12 @@
 actually meant to be called once, or misleading if done on purpose.</p>
 <h2>Noncompliant Code Example</h2>
 <pre>
-Dim b As Boolean = False
-Dim c As Boolean = Not Not b 'Noncompliant
+<code data-lang="vbnet">Dim b As Boolean = False
+Dim c As Boolean = Not Not b 'Noncompliant</code>
 </pre>
 <h2>Compliant Solution</h2>
 <pre>
-Dim b As Boolean = False
-Dim c As Boolean = b 'Compliant
+<code data-lang="vbnet">Dim b As Boolean = False
+Dim c As Boolean = b 'Compliant</code>
 </pre>
 

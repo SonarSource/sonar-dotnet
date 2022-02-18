@@ -7,22 +7,22 @@
 <p>This rule raises an issue when a parameterless instantiation of the <code>Guid</code> struct is found.</p>
 <h2>Noncompliant Code Example</h2>
 <pre>
-public void Foo()
+<code data-lang="text">public void Foo()
 {
     var g1 = new Guid(); // Noncompliant - what's the intent?
     Guid g2 = new(); // Noncompliant
 
     var g3 = default(Guid); // Noncompliant
     Guid g4 = default; // Noncompliant
-}
+}</code>
 </pre>
 <h2>Compliant Solution</h2>
 <pre>
-public void Foo(byte[] bytes)
+<code data-lang="text">public void Foo(byte[] bytes)
 {
     var g1 = Guid.Empty;
     var g2 = Guid.NewGuid();
     var g3 = new Guid(bytes);
-}
+}</code>
 </pre>
 

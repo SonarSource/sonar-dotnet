@@ -2,7 +2,7 @@
 contract.</p>
 <h2>Noncompliant Code Example</h2>
 <pre>
-public override string ToString ()
+<code data-lang="csharp">public override string ToString ()
 {
   if (this.collection.Count == 0)
   {
@@ -12,11 +12,11 @@ public override string ToString ()
   {
     // ...
   }
-}
+}</code>
 </pre>
 <h2>Compliant Solution</h2>
 <pre>
-public override string ToString ()
+<code data-lang="csharp">public override string ToString ()
 {
   if (this.collection.Count == 0)
   {
@@ -26,7 +26,7 @@ public override string ToString ()
   {
     // ...
   }
-}
+}</code>
 </pre>
 <h2>See</h2>
 <ul>

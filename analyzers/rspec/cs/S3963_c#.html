@@ -3,7 +3,7 @@ performance cost because the compiler generates a check before each <code>static
 <p>Instead, inline initialization is highly recommended.</p>
 <h2>Noncompliant Code Example</h2>
 <pre>
-namespace myLib
+<code data-lang="csharp">namespace myLib
 {
   public class Foo
   {
@@ -17,11 +17,11 @@ namespace myLib
       s = sm.GetString("mystring");
     }
   }
-}
+}</code>
 </pre>
 <h2>Compliant Solution</h2>
 <pre>
-namespace myLib
+<code data-lang="csharp">namespace myLib
 {
   public class Foo
   {
@@ -34,6 +34,6 @@ namespace myLib
       return sm.GetString("mystring");
     }
   }
-}
+}</code>
 </pre>
 

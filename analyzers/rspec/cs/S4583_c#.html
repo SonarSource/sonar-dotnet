@@ -9,7 +9,7 @@ called. This is why you should always pair <code>BeginInvoke</code> with an <cod
 <h2>Noncompliant Code Example</h2>
 <p>BeginInvoke without callback</p>
 <pre>
-public delegate string AsyncMethodCaller();
+<code data-lang="text">public delegate string AsyncMethodCaller();
 
 public static void Main()
 {
@@ -18,11 +18,11 @@ public static void Main()
 
     // Initiate the asynchronous call.
     IAsyncResult result = caller.BeginInvoke(null, null); // Noncompliant - not paired with EndInvoke
-}
+}</code>
 </pre>
 <p>BeginInvoke with callback</p>
 <pre>
-public delegate string AsyncMethodCaller();
+<code data-lang="text">public delegate string AsyncMethodCaller();
 
 public static void Main()
 {
@@ -32,12 +32,12 @@ public static void Main()
     IAsyncResult result = caller.BeginInvoke(
         new AsyncCallback((IAsyncResult ar) =&gt; {}),
         null); // Noncompliant - not paired with EndInvoke
-}
+}</code>
 </pre>
 <h2>Compliant Solution</h2>
 <p>BeginInvoke without callback</p>
 <pre>
-public delegate string AsyncMethodCaller();
+<code data-lang="text">public delegate string AsyncMethodCaller();
 
 public static void Main()
 {
@@ -47,11 +47,11 @@ public static void Main()
     IAsyncResult result = caller.BeginInvoke(null, null);
 
     string returnValue = caller.EndInvoke(result);
-}
+}</code>
 </pre>
 <p>BeginInvoke with callback</p>
 <pre>
-public delegate string AsyncMethodCaller();
+<code data-lang="text">public delegate string AsyncMethodCaller();
 
 public static void Main()
 {
@@ -64,7 +64,7 @@ public static void Main()
                 // Call EndInvoke to retrieve the results.
                 string returnValue = caller.EndInvoke(ar);
             }), null);
-}
+}</code>
 </pre>
 <h2>See</h2>
 <p><a href="https://docs.microsoft.com/en-us/dotnet/standard/asynchronous-programming-patterns/calling-synchronous-methods-asynchronously">Calling

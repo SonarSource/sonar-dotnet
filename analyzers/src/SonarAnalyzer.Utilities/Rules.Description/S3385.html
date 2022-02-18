@@ -8,7 +8,7 @@ could result in a <code>NullReferenceException</code>.</p>
 condition.</p>
 <h2>Noncompliant Code Example</h2>
 <pre>
-Public Class Sample
+<code data-lang="vbnet">Public Class Sample
   Dim condition As Boolean
 
   Public Sub MySub()
@@ -28,11 +28,11 @@ Public Class Sample
     MyFunction = 42
     Exit Function              ' Noncompliant
   End Function
-End Class
+End Class</code>
 </pre>
 <h2>Compliant Solution</h2>
 <pre>
-Public Class Sample
+<code data-lang="vbnet">Public Class Sample
   Dim condition As Boolean
 
   Public Sub MySub()
@@ -48,6 +48,6 @@ Public Class Sample
     ' ...
     Return 42
   End Function
-End Class
+End Class</code>
 </pre>
 

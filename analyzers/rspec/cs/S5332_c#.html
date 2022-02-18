@@ -64,13 +64,13 @@ using var telnet = new MyTelnet.Client("host", port); // Noncompliant, rule rais
 </pre>
 <h2>Compliant Solution</h2>
 <pre>
-var urlHttps = "https://example.com";
+<code data-lang="csharp">var urlHttps = "https://example.com";
 var urlSftp = "sftp://anonymous@example.com";
-var urlSsh = "ssh://anonymous@example.com";
+var urlSsh = "ssh://anonymous@example.com";</code>
 </pre>
 <pre>
-using var smtp = new SmtpClient("host", 25) { EnableSsl = true };
-using var ssh = new MySsh.Client("host", port);
+<code data-lang="csharp">using var smtp = new SmtpClient("host", 25) { EnableSsl = true };
+using var ssh = new MySsh.Client("host", port);</code>
 </pre>
 <h2>Exceptions</h2>
 <p>No issue is reported for the following cases because they are not considered sensitive:</p>

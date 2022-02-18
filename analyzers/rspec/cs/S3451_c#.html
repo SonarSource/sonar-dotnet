@@ -3,7 +3,7 @@
 was used in confusion instead of <code>[DefaultParameterValue]</code>.</p>
 <h2>Noncompliant Code Example</h2>
 <pre>
-class MyClass
+<code data-lang="csharp">class MyClass
 {
     public void DoStuff([Optional][DefaultValue(4)]int i, int j = 5)  // Noncompliant
     {
@@ -14,11 +14,11 @@ class MyClass
     {
         new MyClass().DoStuff(); // prints 0
     }
-}
+}</code>
 </pre>
 <h2>Compliant Solution</h2>
 <pre>
-class MyClass
+<code data-lang="csharp">class MyClass
 {
     public void DoStuff([Optional][DefaultParameterValue(4)]int i, int j = 5)
     {
@@ -29,6 +29,6 @@ class MyClass
     {
         new MyClass().DoStuff(); // prints 4
     }
-}
+}</code>
 </pre>
 

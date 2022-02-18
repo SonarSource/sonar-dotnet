@@ -4,23 +4,23 @@ will likely not be what you expect. If the result of <code>int</code> division i
 before the assignment. Instead, at least one operand should be cast or promoted to the final type before the operation takes place.</p>
 <h2>Noncompliant Code Example</h2>
 <pre>
-static void Main()
+<code data-lang="csharp">static void Main()
 {
   decimal dec = 3/2; // Noncompliant
   Method(3/2); // Noncompliant
 }
 
-static void Method(float f) { }
+static void Method(float f) { }</code>
 </pre>
 <h2>Compliant Solution</h2>
 <pre>
-static void Main()
+<code data-lang="csharp">static void Main()
 {
   decimal dec = (decimal)3/2;
   Method(3.0F/2);
 }
 
-static void Method(float f) { }
+static void Method(float f) { }</code>
 </pre>
 <h2>See</h2>
 <ul>

@@ -2,20 +2,20 @@
 replaced with a setter method.</p>
 <h2>Noncompliant Code Example</h2>
 <pre>
-Module Module1
+<code data-lang="text">Module Module1
     WriteOnly Property Foo() As Integer ' Non-Compliant
         Set(ByVal value As Integer)
             ' ... some code ...
         End Set
     End Property
-End Module
+End Module</code>
 </pre>
 <h2>Compliant Solution</h2>
 <pre>
-Module Module1
+<code data-lang="text">Module Module1
     Sub SetFoo(ByVal value As Integer)  ' Compliant
         ' ... some code ...
     End Sub
-End Module
+End Module</code>
 </pre>
 

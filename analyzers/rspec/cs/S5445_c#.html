@@ -22,23 +22,23 @@ will raise an&nbsp;<code>IOException</code> if it is used to create more than 65
 </ul>
 <h2>Noncompliant Code Example</h2>
 <pre>
-var tempPath = Path.GetTempFileName();  // Noncompliant
+<code data-lang="csharp">var tempPath = Path.GetTempFileName();  // Noncompliant
 
 using (var writer = new StreamWriter(tempPath))
 {
     writer.WriteLine("content");
-}
+}</code>
 </pre>
 <h2>Compliant Solution</h2>
 <pre>
-var randomPath = Path.Combine(Path.GetTempPath(), Path.GetRandomFileName());
+<code data-lang="csharp">var randomPath = Path.Combine(Path.GetTempPath(), Path.GetRandomFileName());
 
 // Creates a new file with write, non inheritable permissions which is deleted on close.
 using (var fileStream = new FileStream(randomPath, FileMode.CreateNew, FileAccess.Write, FileShare.None, 4096, FileOptions.DeleteOnClose))
 using (var writer = new StreamWriter(fileStream))
 {
     writer.WriteLine("content");
-}
+}</code>
 </pre>
 <h2>See</h2>
 <ul>

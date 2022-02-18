@@ -5,17 +5,17 @@ collections won’t handle class instances correctly.</p>
 overridden.</p>
 <h2>Noncompliant Code Example</h2>
 <pre>
-class MyClass   // Noncompliant - should also override "GetHashCode()"
+<code data-lang="csharp">class MyClass   // Noncompliant - should also override "GetHashCode()"
 {
     public override bool Equals(object obj)
     {
         // ...
     }
-}
+}</code>
 </pre>
 <h2>Compliant Solution</h2>
 <pre>
-class MyClass
+<code data-lang="csharp">class MyClass
 {
     public override bool Equals(object obj)
     {
@@ -26,7 +26,7 @@ class MyClass
     {
         // ...
     }
-}
+}</code>
 </pre>
 <h2>See</h2>
 <ul>

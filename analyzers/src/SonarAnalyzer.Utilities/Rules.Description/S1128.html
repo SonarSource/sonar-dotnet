@@ -8,7 +8,7 @@
 </ul>
 <h2>Noncompliant Code Example</h2>
 <pre>
-using System.Collections.Generic; // Noncompliant - unnecessary using
+<code data-lang="csharp">using System.Collections.Generic; // Noncompliant - unnecessary using
 
 namespace Foo
 {
@@ -19,11 +19,11 @@ namespace Foo
             File.ReadAllLines(path);
         }
     }
-}
+}</code>
 </pre>
 <h2>Compliant Solution</h2>
 <pre>
-using System.IO;
+<code data-lang="csharp">using System.IO;
 
 namespace Foo
 {
@@ -34,6 +34,6 @@ namespace Foo
             File.ReadAllLines(path);
         }
     }
-}
+}</code>
 </pre>
 

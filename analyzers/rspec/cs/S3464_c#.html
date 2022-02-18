@@ -2,7 +2,7 @@
 try to instantiate the class.</p>
 <h2>Noncompliant Code Example</h2>
 <pre>
-class C1&lt;T&gt;
+<code data-lang="text">class C1&lt;T&gt;
 {
 }
 class C2&lt;T&gt; : C1&lt;C2&lt;C2&lt;T&gt;&gt;&gt; // Noncompliant
@@ -10,6 +10,6 @@ class C2&lt;T&gt; : C1&lt;C2&lt;C2&lt;T&gt;&gt;&gt; // Noncompliant
 }
 
 ...
-var c2 = new C2&lt;int&gt;();
+var c2 = new C2&lt;int&gt;();</code>
 </pre>
 

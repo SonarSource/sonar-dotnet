@@ -4,7 +4,7 @@ operator in a useful way.</p>
 <p>Instead, 0 and powers of two (i.e. 1, 2, 4, 8, 16, …​) should be used to explicitly initialize all the members.</p>
 <h2>Noncompliant Code Example</h2>
 <pre>
-[Flags]
+<code data-lang="csharp">[Flags]
 enum FruitType    // Noncompliant
 {
   None,
@@ -20,11 +20,11 @@ class Program
         // Will display only Strawberry!
         Console.WriteLine(bananaAndStrawberry.ToString());
     }
-}
+}</code>
 </pre>
 <h2>Compliant Solution</h2>
 <pre>
-[Flags]
+<code data-lang="csharp">[Flags]
 enum FruitType
 {
   None = 0,
@@ -40,7 +40,7 @@ class Program
         // Will display Banana and Strawberry, as expected.
         Console.WriteLine(bananaAndStrawberry.ToString());
     }
-}
+}</code>
 </pre>
 <h2>Exceptions</h2>
 <p>The default initialization of 0, 1, 2, 3, 4, …​ matches 0, 1, 2, 4, 8 …​ in the first three values, so no issue is reported if the first three

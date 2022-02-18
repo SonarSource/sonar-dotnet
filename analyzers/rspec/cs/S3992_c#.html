@@ -3,19 +3,19 @@ default is to make the content of the assembly visible to COM clients.</p>
 <p>Note that COM visibility can be overridden for individual types and members.</p>
 <h2>Noncompliant Code Example</h2>
 <pre>
-using System;
+<code data-lang="text">using System;
 
 namespace MyLibrary  // Noncompliant
 {
-}
+}</code>
 </pre>
 <h2>Compliant Solution</h2>
 <pre>
-using System;
+<code data-lang="text">using System;
 
 [assembly: System.Runtime.InteropServices.ComVisible(false)]
 namespace MyLibrary
 {
-}
+}</code>
 </pre>
 

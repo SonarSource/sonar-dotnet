@@ -4,9 +4,9 @@ turned off, so you can pass anything to a shift operator and have it compile. An
 then a <code>RuntimeBinderException</code> will be raised.</p>
 <h2>Noncompliant Code Example</h2>
 <pre>
-dynamic d = 5;
+<code data-lang="text">dynamic d = 5;
 var x = d &gt;&gt; 5.4; // Noncompliant
 x = d &gt;&gt; null; // Noncompliant
-x &lt;&lt;= new object(); // Noncompliant
+x &lt;&lt;= new object(); // Noncompliant</code>
 </pre>
 

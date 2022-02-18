@@ -6,14 +6,14 @@ it is what was intended, this is the sort of thing that’s difficult to get rig
 <code>Optional</code> parameters are covered by {rule:csharpsquid:S3447}.</p>
 <h2>Noncompliant Code Example</h2>
 <pre>
-public void GetReply(
+<code data-lang="csharp">public void GetReply(
          ref MyClass input, // Noncompliant
          out string reply)  // Noncompliant
-{ ... }
+{ ... }</code>
 </pre>
 <h2>Compliant Solution</h2>
 <pre>
-public string GetReply(MyClass input)
+<code data-lang="csharp">public string GetReply(MyClass input)
 { ... }
 
 public bool TryGetReply(MyClass input, out string reply)
@@ -23,7 +23,7 @@ public ReplyData GetReply(MyClass input)
 { ... }
 
 internal void GetReply(ref MyClass input, out string reply)
-{ ... }
+{ ... }</code>
 </pre>
 <h2>Exceptions</h2>
 <p>This rule will not raise issues for:</p>

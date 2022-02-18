@@ -7,7 +7,7 @@ second operand. That is, the actual shift count is 0 to 31 bits.</p>
 second operand. That is, the actual shift count is 0 to 63 bits.</p>
 <h2>Noncompliant Code Example</h2>
 <pre>
-public void Main()
+<code data-lang="csharp">public void Main()
 {
     short s = 1;
     short shortShift1 = (short)(s &lt;&lt; 0); // Noncompliant
@@ -21,11 +21,11 @@ public void Main()
     long lg = 1;
     long longShift1 = lg &lt;&lt; 0; // Noncompliant
     long longShift2 = lg &lt;&lt; 64; // Noncompliant, this is equivalent to shifting by 1
-}
+}</code>
 </pre>
 <h2>Compliant Solution</h2>
 <pre>
-public void Main()
+<code data-lang="csharp">public void Main()
 {
     short s = 1;
     short shortShift1 = s;
@@ -39,7 +39,7 @@ public void Main()
     long lg = 1;
     var longShift1 = lg;
     var longShift2 = lg &lt;&lt; 1;
-}
+}</code>
 </pre>
 <h2>Exceptions</h2>
 <p>This rule doesn’t raise an issue when the shift by zero is obviously for cosmetic reasons:</p>

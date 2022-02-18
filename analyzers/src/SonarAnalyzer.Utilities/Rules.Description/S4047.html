@@ -4,7 +4,7 @@ cumbersome down casting and should therefore be preferred.</p>
 <p>This rule raises an issue when a method contains a <code>ref</code> parameter of type <code>System.Object</code>.</p>
 <h2>Noncompliant Code Example</h2>
 <pre>
-using System;
+<code data-lang="csharp">using System;
 
 namespace MyLibrary
 {
@@ -14,11 +14,11 @@ namespace MyLibrary
     {
     }
   }
-}
+}</code>
 </pre>
 <h2>Compliant Solution</h2>
 <pre>
-using System;
+<code data-lang="csharp">using System;
 
 namespace MyLibrary
 {
@@ -28,6 +28,6 @@ namespace MyLibrary
     {
     }
   }
-}
+}</code>
 </pre>
 

@@ -2,23 +2,23 @@
 <code>[DefaultParameterValue]</code> should always be used in conjunction with <code>[Optional]</code>.</p>
 <h2>Noncompliant Code Example</h2>
 <pre>
-public void MyMethod([DefaultParameterValue(5)] int j) //Noncompliant, useless
+<code data-lang="csharp">public void MyMethod([DefaultParameterValue(5)] int j) //Noncompliant, useless
 {
   Console.WriteLine(j);
-}
+}</code>
 </pre>
 <h2>Compliant Solution</h2>
 <pre>
-public void MyMethod(int j = 5)
+<code data-lang="csharp">public void MyMethod(int j = 5)
 {
   Console.WriteLine(j);
-}
+}</code>
 </pre>
 <p>or</p>
 <pre>
-public void MyMethod([DefaultParameterValue(5)][Optional] int j)
+<code data-lang="csharp">public void MyMethod([DefaultParameterValue(5)][Optional] int j)
 {
   Console.WriteLine(j);
-}
+}</code>
 </pre>
 

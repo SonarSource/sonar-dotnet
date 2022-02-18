@@ -2,17 +2,17 @@
 defined outside any named namespace are in a global namespace that cannot be referenced in code.</p>
 <h2>Noncompliant Code Example</h2>
 <pre>
-public class Foo // Noncompliant
+<code data-lang="text">public class Foo // Noncompliant
 {
 }
 
 public struct Bar // Noncompliant
 {
-}
+}</code>
 </pre>
 <h2>Compliant Solution</h2>
 <pre>
-namespace SomeSpace
+<code data-lang="text">namespace SomeSpace
 {
     public class Foo
     {
@@ -21,6 +21,6 @@ namespace SomeSpace
     public struct Bar
     {
     }
-}
+}</code>
 </pre>
 

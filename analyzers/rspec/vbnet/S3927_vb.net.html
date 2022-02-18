@@ -11,7 +11,7 @@ de/serialization.</p>
 </ul>
 <h2>Noncompliant Code Example</h2>
 <pre>
-&lt;Serializable&gt;
+<code data-lang="vbnet">&lt;Serializable&gt;
 Public Class Foo
     &lt;OnSerializing&gt;
     Public Sub OnSerializing(ByVal context As StreamingContext) ' Noncompliant should be private
@@ -32,11 +32,11 @@ Public Class Foo
     &lt;OnDeserialized&gt;
     Private Sub OnDeserialized(ByVal context As StreamingContext, ByVal str As String) ' Noncompliant should have a single parameter of type StreamingContext
     End Sub
-End Class
+End Class</code>
 </pre>
 <h2>Compliant Solution</h2>
 <pre>
-&lt;Serializable&gt;
+<code data-lang="vbnet">&lt;Serializable&gt;
 Public Class Foo
     &lt;OnSerializing&gt;
     Private Sub OnSerializing(ByVal context As StreamingContext)
@@ -53,6 +53,6 @@ Public Class Foo
     &lt;OnDeserialized&gt;
     Private Sub OnDeserialized(ByVal context As StreamingContext)
     End Sub
-End Class
+End Class</code>
 </pre>
 

@@ -8,14 +8,14 @@ culture, possibly creating problems with international characters.</p>
 who use different encodings. Such bugs can be nearly, if not completely, impossible to reproduce when it’s time to fix them.</p>
 <h2>Noncompliant Code Example</h2>
 <pre>
-var lowered = someString.ToLower(); //Noncompliant
+<code data-lang="csharp">var lowered = someString.ToLower(); //Noncompliant</code>
 </pre>
 <h2>Compliant Solution</h2>
 <pre>
-var lowered = someString.ToLower(CultureInfo.InvariantCulture);
+<code data-lang="csharp">var lowered = someString.ToLower(CultureInfo.InvariantCulture);</code>
 </pre>
 <p>or</p>
 <pre>
-var lowered = someString.ToLowerInvariant();
+<code data-lang="csharp">var lowered = someString.ToLowerInvariant();</code>
 </pre>
 

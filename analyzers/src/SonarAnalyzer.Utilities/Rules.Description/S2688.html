@@ -4,7 +4,7 @@ but probably not the ones you want.</p>
 counter-intuitively) to compare it to itself. Since <code>NaN !== NaN</code>, when <code>a !== a</code>, you know it must equal <code>NaN</code>.</p>
 <h2>Noncompliant Code Example</h2>
 <pre>
-var a = double.NaN;
+<code data-lang="csharp">var a = double.NaN;
 
 if (a == double.NaN) // Noncompliant; always false
 {
@@ -13,13 +13,13 @@ if (a == double.NaN) // Noncompliant; always false
 if (a != double.NaN)  // Noncompliant; always true
 {
   Console.WriteLine("a is not NaN"); // this statement is not necessarily true
-}
+}</code>
 </pre>
 <h2>Compliant Solution</h2>
 <pre>
-if (double.IsNaN(a))
+<code data-lang="csharp">if (double.IsNaN(a))
 {
   console.log("a is not a number");
-}
+}</code>
 </pre>
 

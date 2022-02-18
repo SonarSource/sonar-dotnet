@@ -19,13 +19,13 @@ used and that <code>ISerializable</code>&nbsp;is correctly implemented.&nbsp;Eve
 might still require serialization, for instance when crossing the boundary of an <code>AppDomain</code>.</p>
 <h2>Noncompliant Code Example</h2>
 <pre>
-public class Foo : ISerializable // Noncompliant the [Serializable] attribute is missing
+<code data-lang="text">public class Foo : ISerializable // Noncompliant the [Serializable] attribute is missing
 {
-}
+}</code>
 </pre>
 <p>or</p>
 <pre>
-public class Bar
+<code data-lang="text">public class Bar
 {
 }
 
@@ -33,11 +33,11 @@ public class Bar
 public class Foo : ISerializable // Noncompliant the serialization constructor is missing
 {
     private readonly Bar bar; // Noncompliant the field is not marked with [NonSerialized]
-}
+}</code>
 </pre>
 <h2>Compliant Solution</h2>
 <pre>
-public class Bar
+<code data-lang="text">public class Bar
 {
 }
 
@@ -84,7 +84,7 @@ public sealed class SubFoo : Foo
         base.GetObjectData(info, context);
         // ...
     }
-}
+}</code>
 </pre>
 <h2>Exceptions</h2>
 <ul>

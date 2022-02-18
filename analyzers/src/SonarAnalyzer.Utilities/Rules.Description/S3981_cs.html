@@ -3,20 +3,20 @@ equal to zero doesn’t make sense, since the result is always <code>true</code>
 <code>false</code>. Perhaps the intent was to check the non-emptiness of the collection or array instead.</p>
 <h2>Noncompliant Code Example</h2>
 <pre>
-if(collection.Count &gt;= 0){...}
+<code data-lang="csharp">if(collection.Count &gt;= 0){...}
 
 if(enumerable.Count() &lt; 0){...}
 
 if(array.Length &gt;= 0){...}
 
-bool result = array.Length &gt;=0;
+bool result = array.Length &gt;=0;</code>
 </pre>
 <h2>Compliant Solution</h2>
 <pre>
-if (list.Any()) { ... }
+<code data-lang="csharp">if (list.Any()) { ... }
 
 if (list.Count &gt; 0) { ... }
 
-if (array.Length &gt;= 42) { ... }
+if (array.Length &gt;= 42) { ... }</code>
 </pre>
 

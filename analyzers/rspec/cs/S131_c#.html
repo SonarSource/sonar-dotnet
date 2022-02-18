@@ -3,7 +3,7 @@ suitable comment as to why no action is taken. Even when the <code>switch</code>
 <code>default</code> case should still be used because there is no guarantee that the <code>enum</code> won’t be extended.</p>
 <h2>Noncompliant Code Example</h2>
 <pre>
-int foo = 42;
+<code data-lang="csharp">int foo = 42;
 switch (foo) // Noncompliant
 {
   case 0:
@@ -12,11 +12,11 @@ switch (foo) // Noncompliant
   case 42:
     Console.WriteLine("foo = 42");
     break;
-}
+}</code>
 </pre>
 <h2>Compliant Solution</h2>
 <pre>
-int foo = 42;
+<code data-lang="csharp">int foo = 42;
 switch (foo) // Compliant
 {
   case 0:
@@ -27,7 +27,7 @@ switch (foo) // Compliant
     break;
   default:
     throw new InvalidOperationException("Unexpected value foo = " + foo);
-}
+}</code>
 </pre>
 <h2>See</h2>
 <ul>

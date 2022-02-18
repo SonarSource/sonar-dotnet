@@ -5,7 +5,7 @@ Similarly, when a class overrides <code>Equals</code>, but instances are compare
 value comparison was meant instead of the reference one.</p>
 <h2>Noncompliant Code Example</h2>
 <pre>
-public interface IMyInterface
+<code data-lang="csharp">public interface IMyInterface
 {
 }
 
@@ -26,11 +26,11 @@ public class Program
             Console.WriteLine("Equal");
         }
     }
-}
+}</code>
 </pre>
 <h2>Compliant Solution</h2>
 <pre>
-public interface IMyInterface
+<code data-lang="csharp">public interface IMyInterface
 {
 }
 
@@ -51,7 +51,7 @@ public class Program
             Console.WriteLine("Equal");
         }
     }
-}
+}</code>
 </pre>
 <h2>Exceptions</h2>
 <p>The rule does not report on comparisons of <code>System.Type</code> instances and on comparisons inside <code>Equals</code> overrides.</p>

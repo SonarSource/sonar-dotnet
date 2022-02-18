@@ -7,7 +7,7 @@
 tested against <code>&gt; 0</code></p>
 <h2>Noncompliant Code Example</h2>
 <pre>
-Dim Color As String = "blue"
+<code data-lang="vbnet">Dim Color As String = "blue"
 Dim Name As String = "ishmael"
 
 Dim Strings As New List(Of String)
@@ -29,11 +29,11 @@ End If
 
 If Array.IndexOf(StringArray, Color) &gt; 0 Then ' Noncompliant
   ' ...
-End If
+End If</code>
 </pre>
 <h2>Compliant Solution</h2>
 <pre>
-Dim Color As String = "blue"
+<code data-lang="vbnet">Dim Color As String = "blue"
 Dim Name As String = "ishmael"
 
 Dim Strings As New List(Of String)
@@ -55,6 +55,6 @@ End If
 
 If Array.IndexOf(StringArray, Color) &gt;= 0 Then
   ' ...
-End If
+End If</code>
 </pre>
 

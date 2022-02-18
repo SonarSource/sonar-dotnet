@@ -6,21 +6,21 @@
 </ul>
 <h2>Noncompliant Code Example</h2>
 <pre>
-Sub DoSomething()
+<code data-lang="vbnet">Sub DoSomething()
 End Sub
 
 Function DoSomething() As String
-End Function
+End Function</code>
 </pre>
 <h2>Compliant Solution</h2>
 <pre>
-Sub DoSomething()
+<code data-lang="vbnet">Sub DoSomething()
     ' Not implemented because of reason
 End Sub
 
 Function DoSomething() As String
     Throw New NotSupportedException
-End Function
+End Function</code>
 </pre>
 <h2>Exceptions</h2>
 <p>The following methods are ignored:</p>

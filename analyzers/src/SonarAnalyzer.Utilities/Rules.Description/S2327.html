@@ -3,7 +3,7 @@ consolidate the <code>catch/finally</code> logic for cleaner, more readable code
 any <code>try</code> block.</p>
 <h2>Noncompliant Code Example</h2>
 <pre>
-try
+<code data-lang="text">try
 {
   DoTheFirstThing(a, b);
 }
@@ -30,11 +30,11 @@ try  // Compliant; catch handles exception differently
 catch (InvalidOperationException ex)
 {
   LogAndDie(ex);
-}
+}</code>
 </pre>
 <h2>Compliant Solution</h2>
 <pre>
-try
+<code data-lang="text">try
 {
   DoTheFirstThing(a, b);
   DoSomeOtherStuff();
@@ -52,6 +52,6 @@ try  // Compliant; catch handles exception differently
 catch (InvalidOperationException ex)
 {
   LogAndDie(ex);
-}
+}</code>
 </pre>
 

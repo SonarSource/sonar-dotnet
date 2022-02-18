@@ -3,7 +3,7 @@ instances of the class.</p>
 <p>Instead remove the field’s <code>static</code> modifier, or initialize it statically.</p>
 <h2>Noncompliant Code Example</h2>
 <pre>
-public class Person
+<code data-lang="csharp">public class Person
 {
   private static DateTime dateOfBirth;
   private static int expectedFingers;
@@ -13,11 +13,11 @@ public class Person
     dateOfBirth = birthday;  // Noncompliant; now everyone has this birthday
     expectedFingers = 10;  // Noncompliant
   }
-}
+}</code>
 </pre>
 <h2>Compliant Solution</h2>
 <pre>
-public class Person
+<code data-lang="csharp">public class Person
 {
   private DateTime dateOfBirth;
   private static int expectedFingers = 10;
@@ -26,6 +26,6 @@ public class Person
   {
     this.dateOfBirth = birthday;
   }
-}
+}</code>
 </pre>
 

@@ -3,7 +3,7 @@ Instead, initial values of parameters, caught exceptions, and foreach parameters
 before reassignment.</p>
 <h2>Noncompliant Code Example</h2>
 <pre>
-public void DoTheThing(string str, int i, List&lt;string&gt; strings)
+<code data-lang="csharp">public void DoTheThing(string str, int i, List&lt;string&gt; strings)
 {
   str = i.ToString(i);  // Noncompliant
 
@@ -11,6 +11,6 @@ public void DoTheThing(string str, int i, List&lt;string&gt; strings)
   {
     s = "hello world";  // Noncompliant
   }
-}
+}</code>
 </pre>
 

@@ -4,7 +4,7 @@
 <p>A <code>class</code> with only <code>abstract</code> methods and no inheritable behavior should be converted to an <code>interface</code>.</p>
 <h2>Noncompliant Code Example</h2>
 <pre>
-public abstract class Animal //Noncompliant; should be an interface
+<code data-lang="csharp">public abstract class Animal //Noncompliant; should be an interface
 {
   abstract void Move();
   abstract void Feed();
@@ -20,11 +20,11 @@ public abstract class Color //Noncompliant; should be concrete with a private co
   {
     return red;
   }
-}
+}</code>
 </pre>
 <h2>Compliant Solution</h2>
 <pre>
-public interface Animal
+<code data-lang="csharp">public interface Animal
 {
   void Move();
   void Feed();
@@ -59,6 +59,6 @@ public abstract class Lamp
       Glow();
     }
   }
-}
+}</code>
 </pre>
 

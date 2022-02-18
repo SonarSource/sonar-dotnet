@@ -3,7 +3,7 @@ discrete properties that match these parameters. However since this is done via 
 <p>This rule raises an issue when the string argument to <code>ConstructorArgumentAttribute</code> doesn’t match any parameter of any constructor.</p>
 <h2>Noncompliant Code Example</h2>
 <pre>
-using System;
+<code data-lang="text">using System;
 
 namespace myLibrary
 {
@@ -19,11 +19,11 @@ namespace myLibrary
     [ConstructorArgument("value2")]   // Noncompliant
     public object Value1 { get; set; }
   }
-}
+}</code>
 </pre>
 <h2>Compliant Solution</h2>
 <pre>
-using System;
+<code data-lang="text">using System;
 
 namespace myLibrary
 {
@@ -39,6 +39,6 @@ namespace myLibrary
     [ConstructorArgument("value1")]
     public object Value1 { get; set; }
   }
-}
+}</code>
 </pre>
 

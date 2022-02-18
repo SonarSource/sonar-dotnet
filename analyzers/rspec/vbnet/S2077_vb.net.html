@@ -34,9 +34,9 @@ End Sub
 </pre>
 <h2>Compliant Solution</h2>
 <pre>
-Public Sub Foo(ByVal context As DbContext, ByVal value As String)
+<code data-lang="vbnet">Public Sub Foo(ByVal context As DbContext, ByVal value As String)
     context.Database.ExecuteSqlCommand("SELECT * FROM mytable WHERE mycol=@p0", value) ' Compliant, the query is parameterized
-End Sub
+End Sub</code>
 </pre>
 <h2>See</h2>
 <ul>

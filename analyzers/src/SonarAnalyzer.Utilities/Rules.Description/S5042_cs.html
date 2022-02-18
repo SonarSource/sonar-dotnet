@@ -29,7 +29,7 @@ foreach (ZipArchiveEntry entry in archive.Entries)
 </pre>
 <h2>Compliant Solution</h2>
 <pre>
-int THRESHOLD_ENTRIES = 10000;
+<code data-lang="csharp">int THRESHOLD_ENTRIES = 10000;
 int THRESHOLD_SIZE = 1000000000; // 1 GB
 double THRESHOLD_RATIO = 10;
 int totalSizeArchive = 0;
@@ -71,7 +71,7 @@ foreach (ZipArchiveEntry entry in archive.Entries)
       // too much entries in this archive, can lead to inodes exhaustion of the system
       break;
   }
-}
+}</code>
 </pre>
 <h2>See</h2>
 <ul>

@@ -3,7 +3,7 @@ class instances and/or multiple threads in play.</p>
 <p>This rule raises an issue each time a <code>static</code> field is updated from a non-static method or property.</p>
 <h2>Noncompliant Code Example</h2>
 <pre>
-public class MyClass
+<code data-lang="csharp">public class MyClass
 {
   private static int count = 0;
 
@@ -12,6 +12,6 @@ public class MyClass
     //...
     count++;  // Noncompliant
   }
-}
+}</code>
 </pre>
 

@@ -4,12 +4,12 @@ omitted or the developer doesn’t understand the situation.</p>
 <code>AddRange</code>, <code>Equals</code>, <code>GetHashCode</code>.</p>
 <h2>Noncompliant Code Example</h2>
 <pre>
-var strings = new List&lt;string&gt;();
+<code data-lang="csharp">var strings = new List&lt;string&gt;();
 
 strings.Remove("bar");  // Noncompliant
 
 if (strings.Contains("foo")) {}  // Noncompliant
 
-foreach (var str in strings) {}  // Noncompliant
+foreach (var str in strings) {}  // Noncompliant</code>
 </pre>
 

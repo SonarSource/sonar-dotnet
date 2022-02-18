@@ -4,7 +4,7 @@ no reason to disable this mechanism even if other checks to prevent XXS attacks 
 <code>System.Web.Mvc.ValidateInputAttribute(true)</code>.</p>
 <h2>Noncompliant Code Example</h2>
 <pre>
-public class FooBarController : Controller
+<code data-lang="csharp">public class FooBarController : Controller
 {
     [HttpPost] // Noncompliant
     [ValidateInput(false)]
@@ -18,11 +18,11 @@ public class FooBarController : Controller
     {
         return Foo(input);
     }
-}
+}</code>
 </pre>
 <h2>Compliant Solution</h2>
 <pre>
-public class FooBarController : Controller
+<code data-lang="csharp">public class FooBarController : Controller
 {
     [HttpPost]
     [ValidateInput(true)] // Compliant
@@ -30,7 +30,7 @@ public class FooBarController : Controller
     {
         return Foo(input);
     }
-}
+}</code>
 </pre>
 <h2>Exceptions</h2>
 <p>Parameterless methods marked with <code>System.Web.Mvc.HttpPostAttribute</code> will not trigger this issue.</p>

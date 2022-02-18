@@ -9,31 +9,31 @@
 <h2>Noncompliant Code Example</h2>
 <p>With the default regular expression for non-flags enums: <code>^([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$</code></p>
 <pre>
-Public Enum foo ' Noncompliant
+<code data-lang="vbnet">Public Enum foo ' Noncompliant
     FooValue = 0
-End Enum
+End Enum</code>
 </pre>
 <p>With the default regular expression for flags enums: <code>^([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?s$</code></p>
 <pre>
-&lt;Flags()&gt;
+<code data-lang="vbnet">&lt;Flags()&gt;
 Public Enum Option ' Noncompliant
     None = 0,
     Option1 = 1,
     Option2 = 2
-End Enum
+End Enum</code>
 </pre>
 <h2>Compliant Solution</h2>
 <pre>
-Public Enum Foo
+<code data-lang="vbnet">Public Enum Foo
     FooValue = 0
-End Enum
+End Enum</code>
 </pre>
 <pre>
-&lt;Flags()&gt;
+<code data-lang="vbnet">&lt;Flags()&gt;
 Public Enum Options
     None = 0,
     Option1 = 1,
     Option2 = 2
-End Enum
+End Enum</code>
 </pre>
 

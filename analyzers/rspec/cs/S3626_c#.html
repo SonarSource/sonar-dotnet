@@ -2,7 +2,7 @@
 flow of program execution, but jump statements that direct the control flow to the original direction are just a waste of keystrokes.</p>
 <h2>Noncompliant Code Example</h2>
 <pre>
-void Foo()
+<code data-lang="csharp">void Foo()
 {
   goto A; // Noncompliant
   A:
@@ -18,11 +18,11 @@ void Foo()
     }
   }
   return; // Noncompliant; this is a void method
-}
+}</code>
 </pre>
 <h2>Compliant Solution</h2>
 <pre>
-void Foo()
+<code data-lang="csharp">void Foo()
 {
   while (condition1)
   {
@@ -31,6 +31,6 @@ void Foo()
       DoTheThing();
     }
   }
-}
+}</code>
 </pre>
 

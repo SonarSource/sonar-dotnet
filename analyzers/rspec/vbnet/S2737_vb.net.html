@@ -3,26 +3,26 @@ it bubble up automatically, but with more code and the additional detriment of l
 <p>Such clauses should either be eliminated or populated with the appropriate logic.</p>
 <h2>Noncompliant Code Example</h2>
 <pre>
-Dim s As String = ""
+<code data-lang="vbnet">Dim s As String = ""
 Try
     s = File.ReadAllText(fileName)
 Catch e As Exception
     Throw
-End Try
+End Try</code>
 </pre>
 <h2>Compliant Solution</h2>
 <pre>
-Dim s As String = ""
+<code data-lang="vbnet">Dim s As String = ""
 Try
     s = File.ReadAllText(fileName)
 Catch e As Exception
     logger.LogError(e)
     Throw
-End Try
+End Try</code>
 </pre>
 <p>or</p>
 <pre>
-Dim s As String = File.ReadAllText(fileName)
+<code data-lang="vbnet">Dim s As String = File.ReadAllText(fileName)</code>
 </pre>
 <h2>Exceptions</h2>
 <p>This rule will not generate issues for <code>Catch</code> blocks with just <code>Throw</code> inside if they are followed by a <code>Catch</code>

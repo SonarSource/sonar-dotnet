@@ -6,15 +6,15 @@ set such fields during the deserialization process.</p>
 <code>System.Runtime.Serialization.OnDeserializedAttribute</code> are not present.</p>
 <h2>Noncompliant Code Example</h2>
 <pre>
-&lt;Serializable&gt;
+<code data-lang="vbnet">&lt;Serializable&gt;
 Public Class Foo ' Noncompliant
     &lt;OptionalField(VersionAdded:=2)&gt;
     Private optionalField As Integer = 5
-End Class
+End Class</code>
 </pre>
 <h2>Compliant Solution</h2>
 <pre>
-&lt;Serializable&gt;
+<code data-lang="vbnet">&lt;Serializable&gt;
 Public Class Foo
     &lt;OptionalField(VersionAdded:=2)&gt;
     Private optionalField As Integer = 5
@@ -27,6 +27,6 @@ Public Class Foo
     &lt;OnDeserialized&gt;
     Private Sub OnDeserialized(ByVal context As StreamingContext)
     End Sub
-End Class
+End Class</code>
 </pre>
 

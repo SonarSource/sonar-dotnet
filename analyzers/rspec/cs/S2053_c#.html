@@ -11,7 +11,7 @@ as they should not be used to hash passwords.</p>
 </ul>
 <h2>Noncompliant Code Example</h2>
 <pre>
-public void Hash(string password)
+<code data-lang="csharp">public void Hash(string password)
 {
     var salt = Encoding.UTF8.GetBytes("Hardcoded salt");
     var fromHardcoded = new Rfc2898DeriveBytes(password, salt);     // Noncompliant, salt is hardcoded
@@ -22,14 +22,14 @@ public void Hash(string password)
     var shortSalt = new byte[8];
     RandomNumberGenerator.Create().GetBytes(shortSalt);
     var fromShort = new Rfc2898DeriveBytes(password, shortSalt);   // Noncompliant, salt is too short (should be at least 16 bytes, not 8)
-}
+}</code>
 </pre>
 <h2>Compliant Solution</h2>
 <pre>
-public DeriveBytes Hash(string password)
+<code data-lang="csharp">public DeriveBytes Hash(string password)
 {
     return new Rfc2898DeriveBytes(password, 16);
-}
+}</code>
 </pre>
 <h2>See</h2>
 <ul>

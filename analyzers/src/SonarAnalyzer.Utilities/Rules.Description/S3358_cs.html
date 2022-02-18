@@ -4,20 +4,20 @@ scratching their heads and cursing.</p>
 <p>Instead, err on the side of clarity, and use another line to express the nested operation as a separate statement.</p>
 <h2>Noncompliant Code Example</h2>
 <pre>
-public string GetReadableStatus(Job j)
+<code data-lang="csharp">public string GetReadableStatus(Job j)
 {
   return j.IsRunning ? "Running" : j.HasErrors ? "Failed" : "Succeeded";  // Noncompliant
-}
+}</code>
 </pre>
 <h2>Compliant Solution</h2>
 <pre>
-public string GetReadableStatus(Job j)
+<code data-lang="csharp">public string GetReadableStatus(Job j)
 {
   if (j.IsRunning)
   {
     return "Running";
   }
   return j.HasErrors ? "Failed" : "Succeeded";
-}
+}</code>
 </pre>
 

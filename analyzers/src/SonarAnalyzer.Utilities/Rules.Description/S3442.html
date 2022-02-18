@@ -3,22 +3,22 @@ constructors. If there is basic initialization logic that should run when an ext
 constructor, but make that constructor <code>private</code>, <code>private protected</code> or <code>protected</code>.</p>
 <h2>Noncompliant Code Example</h2>
 <pre>
-abstract class Base
+<code data-lang="csharp">abstract class Base
 {
     public Base() // Noncompliant, should be private, private protected or protected
     {
       //...
     }
-}
+}</code>
 </pre>
 <h2>Compliant Solution</h2>
 <pre>
-abstract class Base
+<code data-lang="csharp">abstract class Base
 {
     protected Base()
     {
       //...
     }
-}
+}</code>
 </pre>
 

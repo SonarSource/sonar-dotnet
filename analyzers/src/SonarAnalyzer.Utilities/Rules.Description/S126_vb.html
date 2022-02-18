@@ -5,21 +5,21 @@ should be followed by an <code>Else</code> statement.</p>
 consistent with the requirement to have a final <code>Case Else</code> clause in a <code>Select Case</code> statement.</p>
 <h2>Noncompliant Code Example</h2>
 <pre>
-If x = 0 Then
+<code data-lang="vbnet">If x = 0 Then
     DoSomething()
 ElseIf x = 1 Then
     DoSomethingElse()
-End If
+End If</code>
 </pre>
 <h2>Compliant Solution</h2>
 <pre>
-If x = 0 Then
+<code data-lang="vbnet">If x = 0 Then
     DoSomething()
 ElseIf x = 1 Then
     DoSomethingElse()
 Else
     Throw New ArgumentException("...")
-End If
+End If</code>
 </pre>
 <h2>Exceptions</h2>
 <p>None</p>

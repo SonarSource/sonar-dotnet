@@ -2,7 +2,7 @@
 <p>This rule raises an issue when a <code>private</code> method or constructor of a class/struct takes a parameter without using it.</p>
 <h2>Noncompliant Code Example</h2>
 <pre>
-private void DoSomething(int a, int b) // "b" is unused
+<code data-lang="csharp">private void DoSomething(int a, int b) // "b" is unused
 {
     Compute(a);
 }
@@ -11,11 +11,11 @@ private void DoSomething2(int a) // value of "a" is unused
 {
     a = 10;
     Compute(a);
-}
+}</code>
 </pre>
 <h2>Compliant Solution</h2>
 <pre>
-private void DoSomething(int a)
+<code data-lang="csharp">private void DoSomething(int a)
 {
     Compute(a);
 }
@@ -24,7 +24,7 @@ private void DoSomething2()
 {
     var a = 10;
     Compute(a);
-}
+}</code>
 </pre>
 <h2>Exceptions</h2>
 <p>This rule doesn’t raise any issue in the following contexts:</p>

@@ -3,24 +3,24 @@ members, but they cannot see <code>private</code> ones. Since a <code>sealed</co
 <code>protected</code> is confusingly pointless.</p>
 <h2>Noncompliant Code Example</h2>
 <pre>
-public sealed class MySealedClass
+<code data-lang="csharp">public sealed class MySealedClass
 {
     protected string name = "Fred";  // Noncompliant
     protected void SetName(string name) // Noncompliant
     {
         // ...
     }
-}
+}</code>
 </pre>
 <h2>Compliant Solution</h2>
 <pre>
-public sealed class MySealedClass
+<code data-lang="csharp">public sealed class MySealedClass
 {
     private string name = "Fred";
     public void SetName(string name)
     {
         // ...
     }
-}
+}</code>
 </pre>
 

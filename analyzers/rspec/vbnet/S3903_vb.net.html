@@ -2,20 +2,20 @@
 defined outside any named namespace are in a global namespace that cannot be referenced in code.</p>
 <h2>Noncompliant Code Example</h2>
 <pre>
-Public Class Foo
+<code data-lang="vbnet">Public Class Foo
 End Class
 
 Public Structure Bar
-End Structure
+End Structure</code>
 </pre>
 <h2>Compliant Solution</h2>
 <pre>
-Namespace SomeSpace
+<code data-lang="vbnet">Namespace SomeSpace
     Public Class Foo
     End Class
 
     Public Structure Bar
     End Structure
-End Namespace
+End Namespace</code>
 </pre>
 

@@ -12,7 +12,7 @@ language integrated queries (LINQ) can be simplified</p>
 <code>ToArray()</code> or <code>ToList()</code> in the middle of a query chain.</p>
 <h2>Noncompliant Code Example</h2>
 <pre>
-seq1.Select(element =&gt; element as T).Any(element =&gt; element != null);  // Noncompliant; use OfType
+<code data-lang="csharp">seq1.Select(element =&gt; element as T).Any(element =&gt; element != null);  // Noncompliant; use OfType
 seq2.Select(element =&gt; element as T).Any(element =&gt; element != null &amp;&amp; CheckCondition(element));  // Noncompliant; use OfType
 seq3.Where(element =&gt; element is T).Select(element =&gt; element as T); // Noncompliant; use OfType
 seq4.Where(element =&gt; element is T).Select(element =&gt; (T)element); // Noncompliant; use OfType
@@ -20,11 +20,11 @@ seq5.Where(element =&gt; [expression]).Any();  // Noncompliant; use Any([express
 
 var num = seq6.Count(); // Noncompliant
 var arr = seq.ToList().ToArray(); //Noncompliant
-var count = seq.ToList().Count(x=&gt;[condition]); //Noncompliant
+var count = seq.ToList().Count(x=&gt;[condition]); //Noncompliant</code>
 </pre>
 <h2>Compliant Solution</h2>
 <pre>
-seq1.OfType&lt;T&gt;().Any();
+<code data-lang="csharp">seq1.OfType&lt;T&gt;().Any();
 seq2.OfType&lt;T&gt;().Any(element =&gt; CheckCondition(element));
 seq3.OfType&lt;T&gt;();
 seq4.OfType&lt;T&gt;();
@@ -32,6 +32,6 @@ seq5.Any(element =&gt; [expression])
 
 var num = seq6.Count;
 var arr = seq.ToArray();
-var count = seq.Count(x=&gt;[condition]);
+var count = seq.Count(x=&gt;[condition]);</code>
 </pre>
 

@@ -6,7 +6,7 @@ similar to the <code>If...Else...End If</code> statement. This makes Visual Basi
 maintain.</p>
 <h2>Noncompliant Code Example</h2>
 <pre>
-Sub DivideByZero()
+<code data-lang="vbnet">Sub DivideByZero()
   On Error GoTo nextstep
   Dim result As Integer
   Dim num As Integer
@@ -14,11 +14,11 @@ Sub DivideByZero()
   result = num / 0
 nextstep:
   System.Console.WriteLine("Error")
-End Sub
+End Sub</code>
 </pre>
 <h2>Compliant Solution</h2>
 <pre>
-Sub DivideByZero()
+<code data-lang="vbnet">Sub DivideByZero()
   Try
     Dim result As Integer
     Dim num As Integer
@@ -27,6 +27,6 @@ Sub DivideByZero()
   Catch
     System.Console.WriteLine("Error")
   End Try
-End Sub
+End Sub</code>
 </pre>
 

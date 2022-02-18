@@ -4,22 +4,22 @@ right if their values aren’t provided explicitly. So if you define a method wi
 your callers in a bad position: they are forced to use named arguments if they want to use the method properly.</p>
 <h2>Noncompliant Code Example</h2>
 <pre>
-void TraceMessage([CallerMemberName] string memberName = "",
+<code data-lang="csharp">void TraceMessage([CallerMemberName] string memberName = "",
   [CallerFilePath] string filePath = "",
   [CallerLineNumber] int lineNumber = 0,
   string message = null)  // Noncompliant
 {
   /* ... */
-}
+}</code>
 </pre>
 <h2>Compliant Solution</h2>
 <pre>
-void TraceMessage(string message = null,
+<code data-lang="csharp">void TraceMessage(string message = null,
   [CallerMemberName] string memberName = "",
   [CallerFilePath] string filePath = "",
   [CallerLineNumber] int lineNumber = 0)
 {
   /* ... */
-}
+}</code>
 </pre>
 

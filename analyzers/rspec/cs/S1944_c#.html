@@ -4,7 +4,7 @@ are cast to their underlying value types anyway.</p>
 <p>It is much better to use the <code>as</code> operator because it will return <code>null</code> instead of throwing an exception.</p>
 <h2>Noncompliant Code Example</h2>
 <pre>
-public interface IMyInterface
+<code data-lang="csharp">public interface IMyInterface
 { /* ... */ }
 
 public class Implementer : IMyInterface
@@ -24,11 +24,11 @@ public static class Program
     int? i = null;
     var ii = (int)i; // Noncompliant, InvalidOperationException is being thrown
   }
-}
+}</code>
 </pre>
 <h2>Compliant Solution</h2>
 <pre>
-public interface IMyInterface
+<code data-lang="csharp">public interface IMyInterface
 { /* ... */ }
 
 public class Implementer : IMyInterface
@@ -51,7 +51,7 @@ public static class Program
       var ii = (int)i;
     }
   }
-}
+}</code>
 </pre>
 <h2>Exceptions</h2>
 <p>No issue is reported if the interface has no implementing class in the assembly.</p>

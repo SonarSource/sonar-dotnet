@@ -4,7 +4,7 @@ code.</p>
 unexpected behavior.</p>
 <h2>Noncompliant Code Example</h2>
 <pre>
-var list = new List&lt;int&gt;();
+<code data-lang="csharp">var list = new List&lt;int&gt;();
 
 list.AddRange(list); // Noncompliant
 list.Concat(list); // Noncompliant
@@ -24,6 +24,6 @@ set.IsSubsetOf(set); // Noncompliant; always true
 set.IsSupersetOf(set); // Noncompliant; always true
 set.Overlaps(set); // Noncompliant; always true
 set.SetEquals(set); // Noncompliant; always true
-set.SymmetricExceptWith(set); // Noncompliant; always empty
+set.SymmetricExceptWith(set); // Noncompliant; always empty</code>
 </pre>
 

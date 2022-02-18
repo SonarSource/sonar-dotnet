@@ -10,7 +10,7 @@ However, there are some cases where special attention should be paid:</p>
 </ul>
 <h2>Noncompliant Code Example</h2>
 <pre>
-Private Function HasContent(Strings As IEnumerable(Of String)) As Boolean
+<code data-lang="vbnet">Private Function HasContent(Strings As IEnumerable(Of String)) As Boolean
     Return Strings.Count() &gt; 0      ' Noncompliant
 End Function
 
@@ -20,11 +20,11 @@ End Function
 
 Private Function IsEmpty(Strings As IEnumerable(Of String)) As Boolean
     Return Strings.Count() = 0      ' Noncompliant
-End Function
+End Function</code>
 </pre>
 <h2>Compliant Solution</h2>
 <pre>
-Private Function HasContent(Strings As IEnumerable(Of String)) As Boolean
+<code data-lang="vbnet">Private Function HasContent(Strings As IEnumerable(Of String)) As Boolean
     Return Strings.Any
 End Function
 
@@ -34,6 +34,6 @@ End Function
 
 Private Function IsEmpty(Strings As IEnumerable(Of String)) As Boolean
     Return Not Strings.Any
-End Function
+End Function</code>
 </pre>
 

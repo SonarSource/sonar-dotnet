@@ -8,7 +8,7 @@
 </ul>
 <h2>Noncompliant Code Example</h2>
 <pre>
-public partial class MyClass // Noncompliant
+<code data-lang="csharp">public partial class MyClass // Noncompliant
 {
   public virtual void Method()
   {
@@ -20,11 +20,11 @@ public sealed class MyOtherClass : MyClass
   public sealed override void Method() // Noncompliant
   {
   }
-}
+}</code>
 </pre>
 <h2>Compliant Solution</h2>
 <pre>
-public class MyClass
+<code data-lang="csharp">public class MyClass
 {
   public virtual void Method()
   {
@@ -36,6 +36,6 @@ public sealed class MyOtherClass : MyClass
   public override void Method()
   {
   }
-}
+}</code>
 </pre>
 

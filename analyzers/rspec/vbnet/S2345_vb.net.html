@@ -4,7 +4,7 @@ operator in a useful way.</p>
 <p>Instead, 0 and powers of two (i.e. 1, 2, 4, 8, 16, …​) should be used to explicitly initialize all the members.</p>
 <h2>Noncompliant Code Example</h2>
 <pre>
-&lt;Flags()&gt;
+<code data-lang="text">&lt;Flags()&gt;
 Enum FruitType    ' Non-Compliant
   None
   Banana
@@ -19,11 +19,11 @@ Module Module1
     ' Will display only Strawberry!
     Console.WriteLine(bananaAndStrawberry.ToString())
   End Sub
-End Module
+End Module</code>
 </pre>
 <h2>Compliant Solution</h2>
 <pre>
-&lt;Flags()&gt;
+<code data-lang="text">&lt;Flags()&gt;
 Enum FruitType    ' Compliant
   None = 0
   Banana = 1
@@ -38,7 +38,7 @@ Module Module1
     ' Will display Banana and Strawberry, as expected.
     Console.WriteLine(bananaAndStrawberry.ToString())
   End Sub
-End Module
+End Module</code>
 </pre>
 <h2>Exceptions</h2>
 <p>The default initialization of 0, 1, 2, 3, 4, …​ matches 0, 1, 2, 4, 8 …​ in the first three values, so no issue is reported if the first three

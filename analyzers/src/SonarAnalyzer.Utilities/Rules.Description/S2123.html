@@ -1,7 +1,7 @@
 <p>A value that is incremented or decremented and then not stored is at best wasted code and at worst a bug.</p>
 <h2>Noncompliant Code Example</h2>
 <pre>
-public int PickNumber()
+<code data-lang="csharp">public int PickNumber()
 {
   int i = 0;
   int j = 0;
@@ -9,17 +9,17 @@ public int PickNumber()
   i = i++; // Noncompliant; i is still zero
 
   return j++; // Noncompliant; 0 returned
-}
+}</code>
 </pre>
 <h2>Compliant Solution</h2>
 <pre>
-public int PickNumber()
+<code data-lang="csharp">public int PickNumber()
 {
   int i = 0;
   int j = 0;
 
   i++;
   return ++j;
-}
+}</code>
 </pre>
 

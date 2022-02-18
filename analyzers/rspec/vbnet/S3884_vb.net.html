@@ -5,7 +5,7 @@ already been set.</p>
 code.</p>
 <h2>Noncompliant Code Example</h2>
 <pre>
-Public Class Noncompliant
+<code data-lang="vbnet">Public Class Noncompliant
 
     &lt;DllImport("ole32.dll")&gt;
     Public Shared Function CoSetProxyBlanket(&lt;MarshalAs(UnmanagedType.IUnknown)&gt;pProxy As Object, dwAuthnSvc as UInt32, dwAuthzSvc As UInt32, &lt;MarshalAs(UnmanagedType.LPWStr)&gt; pServerPrincName As String, dwAuthnLevel As UInt32, dwImpLevel As UInt32, pAuthInfo As IntPtr, dwCapabilities As UInt32) As Integer
@@ -56,7 +56,7 @@ Public Class Noncompliant
         Dim Hres2 As Integer = CoInitializeSecurity(IntPtr.Zero, -1, IntPtr.Zero, IntPtr.Zero, RpcAuthnLevel.None, RpcImpLevel.Impersonate, IntPtr.Zero, EoAuthnCap.None, IntPtr.Zero) ' Noncompliant
     End Sub
 
-End Class
+End Class</code>
 </pre>
 <h2>See</h2>
 <ul>

@@ -4,7 +4,7 @@ was not the initial intention of the author, the body of the loop should be fixe
 <code>throw</code> statements in a more appropriate way.</p>
 <h2>Noncompliant Code Example</h2>
 <pre>
-for (int i = 0; i &lt; 10; i++)
+<code data-lang="csharp">for (int i = 0; i &lt; 10; i++)
 {
     Console.WriteLine(i);
     break;  // Noncompliant, loop only executes once
@@ -14,11 +14,11 @@ foreach (var item in items)
 {
     return item;  // Noncompliant, loop only executes once
 }
-...
+...</code>
 </pre>
 <h2>Compliant Solution</h2>
 <pre>
-for (int i = 0; i &lt; 10; i++)
+<code data-lang="csharp">for (int i = 0; i &lt; 10; i++)
 {
     Console.WriteLine(i);
 }
@@ -28,6 +28,6 @@ if (item != null)
 {
     return item;
 }
-...
+...</code>
 </pre>
 

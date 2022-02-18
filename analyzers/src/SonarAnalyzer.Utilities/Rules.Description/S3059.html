@@ -3,7 +3,7 @@ have the chance to access the member.</p>
 <p>This rule raises an issue when a type has methods, fields, or inner types with higher visibility than the type itself has.</p>
 <h2>Noncompliant Code Example</h2>
 <pre>
-internal class MyClass
+<code data-lang="csharp">internal class MyClass
 {
     public static decimal PI = 3.14m;  // Noncompliant
 
@@ -20,11 +20,11 @@ internal class MyClass
         }
         // ...
     }
-}
+}</code>
 </pre>
 <h2>Compliant Solution</h2>
 <pre>
-public class MyClass // Class visibility upgrade makes members compliant
+<code data-lang="csharp">public class MyClass // Class visibility upgrade makes members compliant
 {
     public static decimal PI = 3.14m;
 
@@ -41,7 +41,7 @@ public class MyClass // Class visibility upgrade makes members compliant
         }
         // ...
     }
-}
+}</code>
 </pre>
 <h2>Exceptions</h2>
 <p>User defined operators need to be public:</p>

@@ -47,7 +47,7 @@ can cause deadlocks and unexpected blocking of context threads.</p>
 </table>
 <h2>Noncompliant Code Example</h2>
 <pre>
-public static class DeadlockDemo
+<code data-lang="text">public static class DeadlockDemo
 {
     private static async Task DelayAsync()
     {
@@ -62,11 +62,11 @@ public static class DeadlockDemo
         // Wait for the delay to complete.
         delayTask.Wait(); // Noncompliant
     }
-}
+}</code>
 </pre>
 <h2>Compliant Solution</h2>
 <pre>
-public static class DeadlockDemo
+<code data-lang="text">public static class DeadlockDemo
 {
     private static async Task DelayAsync()
     {
@@ -80,7 +80,7 @@ public static class DeadlockDemo
         // Wait for the delay to complete.
         await delayTask;
     }
-}
+}</code>
 </pre>
 <h2>Exceptions</h2>
 <ul>

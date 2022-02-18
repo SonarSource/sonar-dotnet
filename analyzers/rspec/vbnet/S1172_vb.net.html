@@ -3,25 +3,25 @@
 parameter without using it.</p>
 <h2>Noncompliant Code Example</h2>
 <pre>
-Private Sub DoSomething(ByVal a As Integer, ByVal b as Integer) ' "b" is unused
+<code data-lang="vbnet">Private Sub DoSomething(ByVal a As Integer, ByVal b as Integer) ' "b" is unused
     Compute(a)
 End Sub
 
 Private Function DoSomething2(ByVal a As Integer, ByVal b As Integer) As Integer ' "a" is unused
     Compute(b)
     Return b
-End Function
+End Function</code>
 </pre>
 <h2>Compliant Solution</h2>
 <pre>
-Private Sub DoSomething(ByVal a As Integer)
+<code data-lang="vbnet">Private Sub DoSomething(ByVal a As Integer)
     Compute(a)
 End Sub
 
 Private Function DoSomething2(ByVal b As Integer) As Integer
     Compute(b)
     Return b
-End Function
+End Function</code>
 </pre>
 <h2>Exceptions</h2>
 <p>This rule doesn’t raise any issue in the following contexts:</p>

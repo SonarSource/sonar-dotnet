@@ -5,21 +5,21 @@ Comments are far better placed on the previous empty line of code, where they wi
 <h2>Noncompliant Code Example</h2>
 <p>With the default comment pattern <code>^'\s*\S+\s*$</code>, which ignores single word comments:</p>
 <pre>
-Module Module1
+<code data-lang="vbnet">Module Module1
   Sub Main()
     Console.WriteLine("Hello, world!") ' Noncompliant - My first program!
     Console.WriteLine("Hello, world!") ' CompliantOneWord
   End Sub
-End Module
+End Module</code>
 </pre>
 <h2>Compliant Solution</h2>
 <pre>
-Module Module1
+<code data-lang="vbnet">Module Module1
   Sub Main()
     ' Compliant - My first program!
     Console.WriteLine("Hello, world!")
     Console.WriteLine("Hello, world!") ' CompliantOneWord
   End Sub
-End Module
+End Module</code>
 </pre>
 

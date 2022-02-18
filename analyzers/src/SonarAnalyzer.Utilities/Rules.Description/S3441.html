@@ -2,22 +2,22 @@
 property name and the assignment operator.</p>
 <h2>Noncompliant Code Example</h2>
 <pre>
-var X = 5;
+<code data-lang="csharp">var X = 5;
 
 var anon = new
 {
   X = X, //Noncompliant, the new object would have the same property without the "X =" part.
   Y = "my string"
-};
+};</code>
 </pre>
 <h2>Compliant Solution</h2>
 <pre>
-var X = 5;
+<code data-lang="csharp">var X = 5;
 
 var anon = new
 {
   X,
   Y = "my string"
-};
+};</code>
 </pre>
 

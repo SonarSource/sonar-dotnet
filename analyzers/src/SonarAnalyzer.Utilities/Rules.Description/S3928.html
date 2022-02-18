@@ -6,7 +6,7 @@
 </ul>
 <h2>Noncompliant Code Example</h2>
 <pre>
-public void Foo(Bar a, int[] b)
+<code data-lang="csharp">public void Foo(Bar a, int[] b)
 {
   throw new ArgumentException(); // Noncompliant
   throw new ArgumentException("My error message", "c"); // Noncompliant
@@ -17,11 +17,11 @@ public void Foo(Bar a, int[] b)
   throw new ArgumentOutOfRangeException("c", "My error message"); // Noncompliant
   throw new ArgumentOutOfRangeException("c", b, "My error message"); // Noncompliant
   throw new DuplicateWaitObjectException("c", "My error message");  // Noncompliant
-}
+}</code>
 </pre>
 <h2>Compliant Solution</h2>
 <pre>
-public void Foo(Bar a, Bar b)
+<code data-lang="csharp">public void Foo(Bar a, Bar b)
 {
   throw new ArgumentException("My error message", "a");
   throw new ArgumentException("My error message", "b", innerException);
@@ -32,7 +32,7 @@ public void Foo(Bar a, Bar b)
   throw new ArgumentOutOfRangeException("b", "My error message");
   throw new ArgumentOutOfRangeException("b", b, "My error message");
   throw new DuplicateWaitObjectException("b", "My error message");
-}
+}</code>
 </pre>
 <h2>Exceptions</h2>
 <p>The rule won’t raise an issue if the parameter name is not a constant value (inline declaration, nameof() or const variable).</p>

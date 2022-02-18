@@ -2,7 +2,7 @@
 derived (e.g. <code>object</code> vs <code>string</code>), the result is that the base method becomes hidden.</p>
 <h2>Noncompliant Code Example</h2>
 <pre>
-using System;
+<code data-lang="csharp">using System;
 
 namespace MyLibrary
 {
@@ -15,11 +15,11 @@ namespace MyLibrary
   {
     internal void SomeMethod(string s1, object o2) { }  // Noncompliant
   }
-}
+}</code>
 </pre>
 <h2>Compliant Solution</h2>
 <pre>
-using System;
+<code data-lang="csharp">using System;
 
 namespace MyLibrary
 {
@@ -32,6 +32,6 @@ namespace MyLibrary
   {
     internal void SomeOtherMethod(string s1, object o2) { }
   }
-}
+}</code>
 </pre>
 

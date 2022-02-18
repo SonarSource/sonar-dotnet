@@ -4,15 +4,15 @@ Attribute</code> can be used simply with <code>First</code>, but you must use th
 parent class names.</p>
 <h2>Noncompliant Code Example</h2>
 <pre>
-class AttributeOne : Attribute  // Noncompliant
+<code data-lang="text">class AttributeOne : Attribute  // Noncompliant
 {
-}
+}</code>
 </pre>
 <h2>Compliant Solution</h2>
 <pre>
-class FirstAttribute : Attribute
+<code data-lang="text">class FirstAttribute : Attribute
 {
-}
+}</code>
 </pre>
 <h2>Exceptions</h2>
 <p>If a class' direct base class doesn’t follow the convention, then no issue is reported on the class itself, regardless of whether or not it

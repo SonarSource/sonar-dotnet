@@ -4,7 +4,7 @@ supported by Windows Forms.</p>
 <p>This rule raises an issue when the entry point (<code>static void Main</code> method) of an assembly using Windows Forms is not marked as STA.</p>
 <h2>Noncompliant Code Example</h2>
 <pre>
-using System;
+<code data-lang="text">using System;
 using System.Windows.Forms;
 
 namespace MyLibrary
@@ -22,11 +22,11 @@ namespace MyLibrary
             Application.Run(form);
         }
     }
-}
+}</code>
 </pre>
 <h2>Compliant Solution</h2>
 <pre>
-using System;
+<code data-lang="text">using System;
 using System.Windows.Forms;
 
 namespace MyLibrary
@@ -45,6 +45,6 @@ namespace MyLibrary
             Application.Run(form);
         }
     }
-}
+}</code>
 </pre>
 

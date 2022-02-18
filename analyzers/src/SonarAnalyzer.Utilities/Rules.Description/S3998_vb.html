@@ -13,7 +13,7 @@ identity are:</p>
 </ul>
 <h2>Noncompliant Code Example</h2>
 <pre>
-Public Class Sample
+<code data-lang="vbnet">Public Class Sample
 
     Private myString As String = "foo"
 
@@ -22,11 +22,11 @@ Public Class Sample
         End SyncLock
     End Sub
 
-End Class
+End Class</code>
 </pre>
 <h2>Compliant Solution</h2>
 <pre>
-Public Class Sample
+<code data-lang="vbnet">Public Class Sample
 
     Private Shared ReadOnly fLock As New Object
 
@@ -35,6 +35,6 @@ Public Class Sample
         End SyncLock
     End Sub
 
-End Class
+End Class</code>
 </pre>
 

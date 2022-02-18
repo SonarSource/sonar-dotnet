@@ -5,31 +5,31 @@ polluting their projects.</p>
 the right side of the <code>Ignore</code> attribute.</p>
 <h2>Noncompliant Code Example</h2>
 <pre>
-[TestMethod]
+<code data-lang="text">[TestMethod]
 [Ignore]
 public void Test_DoTheThing()
 {
   // ...
-}
+}</code>
 </pre>
 <h2>Compliant Solution</h2>
 <pre>
-[TestMethod]
+<code data-lang="text">[TestMethod]
 [Ignore]  // renable when TCKT-1234 is fixed
 public void Test_DoTheThing()
 {
   // ...
-}
+}</code>
 </pre>
 <p>or</p>
 <pre>
-[TestMethod]
+<code data-lang="text">[TestMethod]
 [Ignore]
 [WorkItem(1234)]
 public void Test_DoTheThing()
 {
   // ...
-}
+}</code>
 </pre>
 <h2>Exceptions</h2>
 <p>The rule doesn’t raise an issue if:</p>

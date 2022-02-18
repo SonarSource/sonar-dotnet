@@ -2,21 +2,21 @@
 block, and the masked’s exception message and stack trace will be lost.</p>
 <h2>Noncompliant Code Example</h2>
 <pre>
-Try
+<code data-lang="vbnet">Try
     ' Some work which end up throwing an exception
     Throw New ArgumentException()
 Finally
     ' Clean up
     Throw New InvalidOperationException()       ' Noncompliant; will mask the ArgumentException
-End Try
+End Try</code>
 </pre>
 <h2>Compliant Solution</h2>
 <pre>
-Try
+<code data-lang="vbnet">Try
     ' Some work which end up throwing an exception
     Throw New ArgumentException()
 Finally
     ' Clean up
-End Try
+End Try</code>
 </pre>
 

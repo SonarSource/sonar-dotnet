@@ -6,15 +6,15 @@ behaviors or runtime errors. This rule statically validates the good behavior of
 <code>Trace.TraceWarning(String, Object[])</code> and <code>TraceSource.TraceInformation(String, Object[])</code>.</p>
 <h2>Noncompliant Code Example</h2>
 <pre>
-s = string.Format("{0}", arg0, arg1); // Noncompliant, arg1 is declared but not used.
+<code data-lang="csharp">s = string.Format("{0}", arg0, arg1); // Noncompliant, arg1 is declared but not used.
 s = string.Format("{0} {2}", arg0, arg1, arg2); // Noncompliant, the format item with index 1 is missing so arg1 will not be used.
-s = string.Format("foo"); // Noncompliant, there is no need to use string.Format here.
+s = string.Format("foo"); // Noncompliant, there is no need to use string.Format here.</code>
 </pre>
 <h2>Compliant Solution</h2>
 <pre>
-s = string.Format("{0}", arg0);
+<code data-lang="csharp">s = string.Format("{0}", arg0);
 s = string.Format("{0} {1}", arg0, arg2);
-s = "foo";
+s = "foo";</code>
 </pre>
 <h2>Exceptions</h2>
 <ul>

@@ -4,17 +4,17 @@
 of the class. That is, you lose all that custom information you created the exception type to pass.</p>
 <h2>Noncompliant Code Example</h2>
 <pre>
-internal class MyException : Exception   // Noncompliant
+<code data-lang="text">internal class MyException : Exception   // Noncompliant
 {
   // ...
-}
+}</code>
 </pre>
 <h2>Compliant Solution</h2>
 <pre>
-public class MyException : Exception
+<code data-lang="text">public class MyException : Exception
 {
   // ...
-}
+}</code>
 </pre>
 <h2>Exceptions</h2>
 <p>This rule ignores Exception types that are not derived directly from <code>System.Exception</code>, <code>System.SystemException</code>, or

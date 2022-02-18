@@ -3,7 +3,7 @@ something is missing from the <code>interface</code>. Instead of casting to a di
 <code>interface</code>. Otherwise there is a risk of runtime exceptions.</p>
 <h2>Noncompliant Code Example</h2>
 <pre>
-public interface IMyInterface
+<code data-lang="text">public interface IMyInterface
 {
   void DoStuff();
 }
@@ -31,7 +31,7 @@ public static class DowncastExampleProgram
       // ...
     }
   }
-}
+}</code>
 </pre>
 <h2>Exceptions</h2>
 <p>Casting to <code>object</code> doesn’t raise an issue, because it can never fail.</p>

@@ -2,7 +2,7 @@
 class fields should be renamed.</p>
 <h2>Noncompliant Code Example</h2>
 <pre>
-Public Class Fruit
+<code data-lang="vbnet">Public Class Fruit
 
     Protected PlantingSeason As String
 
@@ -17,11 +17,11 @@ Public Class Raspberry
 
     ' ...
 
-End Class
+End Class</code>
 </pre>
 <h2>Compliant Solution</h2>
 <pre>
-Public Class Fruit
+<code data-lang="vbnet">Public Class Fruit
 
     Protected PlantingSeason As String
 
@@ -36,11 +36,11 @@ Public Class Raspberry
 
     ' ...
 
-End Class
+End Class</code>
 </pre>
 <p>Or</p>
 <pre>
-Public Class Fruit
+<code data-lang="vbnet">Public Class Fruit
 
     Protected PlantingSeason As String
 
@@ -53,7 +53,7 @@ Public Class Raspberry
 
     ' Field removed, parent field will be used instead
 
-End Class
+End Class</code>
 </pre>
 <h2>Exceptions</h2>
 <p>This rule ignores same-name fields that are <code>Shared</code> in both the parent and child classes. It also ignores <code>Private</code> parent

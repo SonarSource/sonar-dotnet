@@ -6,7 +6,7 @@ generic classes.</p>
 members, then set your generic type to inherit from the base class.</p>
 <h2>Noncompliant Code Example</h2>
 <pre>
-public class LengthLimitedSingletonCollection&lt;T&gt; where T : new()
+<code data-lang="csharp">public class LengthLimitedSingletonCollection&lt;T&gt; where T : new()
 {
   protected const int MaxAllowedLength = 5;
   protected static Dictionary&lt;Type, object&gt; instances = new Dictionary&lt;Type, object&gt;(); // Noncompliant
@@ -26,11 +26,11 @@ public class LengthLimitedSingletonCollection&lt;T&gt; where T : new()
     }
     return (T)instance;
   }
-}
+}</code>
 </pre>
 <h2>Compliant Solution</h2>
 <pre>
-public class SingletonCollectionBase
+<code data-lang="csharp">public class SingletonCollectionBase
 {
   protected static Dictionary&lt;Type, object&gt; instances = new Dictionary&lt;Type, object&gt;();
 }
@@ -54,7 +54,7 @@ public class LengthLimitedSingletonCollection&lt;T&gt; : SingletonCollectionBase
     }
     return (T)instance;
   }
-}
+}</code>
 </pre>
 <h2>Exceptions</h2>
 <p>If the static field or property uses a type parameter, then the developer is assumed to understand that the static member is not shared among the

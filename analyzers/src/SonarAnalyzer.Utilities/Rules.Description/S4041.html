@@ -4,24 +4,24 @@ makes the library that much harder to use.</p>
 case-insensitive comparison.</p>
 <h2>Noncompliant Code Example</h2>
 <pre>
-using System;
+<code data-lang="csharp">using System;
 
 namespace MyLibrary
 {
   public class Text   // Noncompliant: Collides with System.Text
   {
   }
-}
+}</code>
 </pre>
 <h2>Compliant Solution</h2>
 <pre>
-using System;
+<code data-lang="csharp">using System;
 
 namespace MyLibrary
 {
   public class MyText
   {
   }
-}
+}</code>
 </pre>
 

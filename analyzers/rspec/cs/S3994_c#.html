@@ -5,7 +5,7 @@ provided in each class that contains a method with an apparent Uri passed as a <
 doesn’t declare a corresponding overload taking an <code>System.Uri</code> parameter instead.</p>
 <h2>Noncompliant Code Example</h2>
 <pre>
-using System;
+<code data-lang="text">using System;
 
 namespace MyLibrary
 {
@@ -14,11 +14,11 @@ namespace MyLibrary
 
       public void FetchResource(string uriString) { } // Noncompliant
    }
-}
+}</code>
 </pre>
 <h2>Compliant Solution</h2>
 <pre>
-using System;
+<code data-lang="text">using System;
 
 namespace MyLibrary
 {
@@ -32,6 +32,6 @@ namespace MyLibrary
 
       public void FetchResource(Uri uri) { }
    }
-}
+}</code>
 </pre>
 

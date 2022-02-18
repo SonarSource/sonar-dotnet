@@ -3,16 +3,16 @@ default is to make the content of the assembly visible to COM clients.</p>
 <p>Note that COM visibility can be overridden for individual types and members.</p>
 <h2>Noncompliant Code Example</h2>
 <pre>
-Namespace MyLibrary  ' Noncompliant
+<code data-lang="vbnet">Namespace MyLibrary  ' Noncompliant
 
-End Namespace
+End Namespace</code>
 </pre>
 <h2>Compliant Solution</h2>
 <pre>
-&lt;Assembly: Runtime.InteropServices.ComVisible(False)&gt;
+<code data-lang="vbnet">&lt;Assembly: Runtime.InteropServices.ComVisible(False)&gt;
 
 Namespace MyLibrary
 
-End Namespace
+End Namespace</code>
 </pre>
 

@@ -6,7 +6,7 @@
 </ul>
 <h2>Noncompliant Code Example</h2>
 <pre>
-using System;
+<code data-lang="csharp">using System;
 using System.Runtime.InteropServices;
 
 namespace MyLibrary
@@ -36,11 +36,11 @@ namespace MyLibrary
       Dispose(true);
     }
   }
-}
+}</code>
 </pre>
 <h2>Compliant Solution</h2>
 <pre>
-using System;
+<code data-lang="csharp">using System;
 using System.Runtime.InteropServices;
 
 namespace MyLibrary
@@ -71,7 +71,7 @@ namespace MyLibrary
       Dispose(false);
     }
   }
-}
+}</code>
 </pre>
 <h2>See</h2>
 <ul>

@@ -3,18 +3,18 @@ typically caused by accidentally double-tapping the key in question without noti
 <p>Either this is a bug, if the operator was actually meant to be called once, or misleading if done on purpose.</p>
 <h2>Noncompliant Code Example</h2>
 <pre>
-int v1 = 0;
+<code data-lang="text">int v1 = 0;
 bool v2 = false;
 
 var v3 = !!v1; // Noncompliant
-var v4 = ~~v2; // Noncompliant
+var v4 = ~~v2; // Noncompliant</code>
 </pre>
 <h2>Compliant Solution</h2>
 <pre>
-int v1 = 0;
+<code data-lang="text">int v1 = 0;
 bool v2 = false;
 
 var v3 = !v1;
-var v4 = ~v2;
+var v4 = ~v2;</code>
 </pre>
 

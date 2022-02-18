@@ -3,7 +3,7 @@ result, otherwise the call to the method should be equal to no-operation. So <co
 the method doesn’t do any meaningful task.</p>
 <h2>Noncompliant Code Example</h2>
 <pre>
-class Person
+<code data-lang="text">class Person
 {
   private int age;
   [Pure] // Noncompliant. In this case the method makes a possibly visible state change
@@ -13,11 +13,11 @@ class Person
     this.age = age;
   }
   ...
-}
+}</code>
 </pre>
 <h2>Compliant Solution</h2>
 <pre>
-class Person
+<code data-lang="text">class Person
 {
   private int age;
 
@@ -27,6 +27,6 @@ class Person
     this.age = age;
   }
   ...
-}
+}</code>
 </pre>
 

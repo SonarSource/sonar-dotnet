@@ -22,21 +22,21 @@ will raise an&nbsp;<code>IOException</code> if it is used to create more than 65
 </ul>
 <h2>Noncompliant Code Example</h2>
 <pre>
-Dim TempPath = Path.GetTempFileName() 'Noncompliant
+<code data-lang="vbnet">Dim TempPath = Path.GetTempFileName() 'Noncompliant
 
 Using Writer As New StreamWriter(TempPath)
     Writer.WriteLine("content")
-End Using
+End Using</code>
 </pre>
 <h2>Compliant Solution</h2>
 <pre>
-Dim RandomPath = Path.Combine(Path.GetTempPath(), Path.GetRandomFileName())
+<code data-lang="vbnet">Dim RandomPath = Path.Combine(Path.GetTempPath(), Path.GetRandomFileName())
 
 Using FileStream As new FileStream(RandomPath, FileMode.CreateNew, FileAccess.Write, FileShare.None, 4096, FileOptions.DeleteOnClose)
     Using Writer As New StreamWriter(FileStream)
         Writer.WriteLine("content")
     End Using
-End Using
+End Using</code>
 </pre>
 <h2>See</h2>
 <ul>

@@ -3,7 +3,7 @@ more complex and less readable.</p>
 <p>Moreover, in many cases, <code>null</code> is used as a synonym for empty.</p>
 <h2>Noncompliant Code Example</h2>
 <pre>
-public Result[] GetResults()
+<code data-lang="csharp">public Result[] GetResults()
 {
     return null; // Noncompliant
 }
@@ -23,11 +23,11 @@ public IEnumerable&lt;Result&gt; Results
     }
 }
 
-public IEnumerable&lt;Result&gt; Results =&gt; null; // Noncompliant
+public IEnumerable&lt;Result&gt; Results =&gt; null; // Noncompliant</code>
 </pre>
 <h2>Compliant Solution</h2>
 <pre>
-public Result[] GetResults()
+<code data-lang="csharp">public Result[] GetResults()
 {
     return new Result[0];
 }
@@ -47,7 +47,7 @@ public IEnumerable&lt;Result&gt; Results
     }
 }
 
-public IEnumerable&lt;Result&gt; Results =&gt; Enumerable.Empty&lt;Result&gt;();
+public IEnumerable&lt;Result&gt; Results =&gt; Enumerable.Empty&lt;Result&gt;();</code>
 </pre>
 <h2>Exceptions</h2>
 <p>Although <code>string</code> is a collection, the rule won’t report on it.</p>

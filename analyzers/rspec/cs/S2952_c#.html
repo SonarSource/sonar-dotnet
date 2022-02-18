@@ -4,7 +4,7 @@ leaks.</p>
 <p>This rule also applies for disposable ref structs.</p>
 <h2>Noncompliant Code Example</h2>
 <pre>
-public class ResourceHolder : IDisposable
+<code data-lang="csharp">public class ResourceHolder : IDisposable
 {
   private FileStream fs;
   public void OpenResource(string path)
@@ -25,11 +25,11 @@ public class ResourceHolder : IDisposable
   {
     // method added to satisfy demands of interface
   }
-}
+}</code>
 </pre>
 <h2>Compliant Solution</h2>
 <pre>
-public class ResourceHolder : IDisposable
+<code data-lang="csharp">public class ResourceHolder : IDisposable
 {
   private FileStream fs;
   public void OpenResource(string path)
@@ -45,7 +45,7 @@ public class ResourceHolder : IDisposable
   {
     this.fs.Dispose();
   }
-}
+}</code>
 </pre>
 <h2>See</h2>
 <ul>

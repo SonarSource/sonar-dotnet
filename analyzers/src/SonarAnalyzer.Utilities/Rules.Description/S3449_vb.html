@@ -4,11 +4,11 @@ turned off, so you can pass anything to a shift operator and have it compile. An
 then a <code>RuntimeBinderException</code> will be raised.</p>
 <h2>Noncompliant Code Example</h2>
 <pre>
-Dim o As Object = 5
+<code data-lang="vbnet">Dim o As Object = 5
 Dim x As Integer = 5
 
 x = o &gt;&gt; 5 ' Noncompliant
-x = x &gt;&gt; o ' Noncompliant
+x = x &gt;&gt; o ' Noncompliant</code>
 </pre>
 <h2>Exceptions</h2>
 <p>This rule does not raise when the left or the right expression is <code>Nothing</code>.</p>

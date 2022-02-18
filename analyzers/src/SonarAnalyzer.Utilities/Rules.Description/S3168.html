@@ -6,7 +6,7 @@ issues. Instead, <code>async</code> methods should return <code>Task</code>.</p>
 <p>This rule raises an issue when non-event handler methods are both <code>async</code> and <code>void</code>.</p>
 <h2>Noncompliant Code Example</h2>
 <pre>
-class HttpPrinter
+<code data-lang="csharp">class HttpPrinter
 {
   private string content;
 
@@ -23,11 +23,11 @@ class HttpPrinter
     await Task.Delay(1000);
     Console.Write(content);
   }
-}
+}</code>
 </pre>
 <h2>Compliant Solution</h2>
 <pre>
-class HttpPrinter
+<code data-lang="csharp">class HttpPrinter
 {
   private string content;
 
@@ -44,7 +44,7 @@ class HttpPrinter
     await Task.Delay(1000);
     Console.Write(content);
   }
-}
+}</code>
 </pre>
 <h2>Exceptions</h2>
 <p>Event handlers, i.e. methods with two arguments, first one matching type <code>object</code> or name <code>sender</code> and the second being or

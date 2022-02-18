@@ -6,20 +6,20 @@ behaviors or runtime errors. This rule statically validates the good behavior of
 <code>Trace.TraceWarning(String, Object[])</code> and <code>TraceSource.TraceInformation(String, Object[])</code>.</p>
 <h2>Noncompliant Code Example</h2>
 <pre>
-s = string.Format("[0}", arg0);
+<code data-lang="csharp">s = string.Format("[0}", arg0);
 s = string.Format("{{0}", arg0);
 s = string.Format("{0}}", arg0);
 s = string.Format("{-1}", arg0);
-s = string.Format("{0} {1}", arg0);
+s = string.Format("{0} {1}", arg0);</code>
 </pre>
 <h2>Compliant Solution</h2>
 <pre>
-s = string.Format("{0}", 42); // Compliant
+<code data-lang="csharp">s = string.Format("{0}", 42); // Compliant
 s = string.Format("{0,10}", 42); // Compliant
 s = string.Format("{0,-10}", 42); // Compliant
 s = string.Format("{0:0000}", 42); // Compliant
 s = string.Format("{2}-{0}-{1}", 1, 2, 3); // Compliant
-s = string.Format("no format"); // Compliant
+s = string.Format("no format"); // Compliant</code>
 </pre>
 <h2>Exceptions</h2>
 <ul>

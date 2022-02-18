@@ -3,7 +3,7 @@ best, such an exception will cause abrupt program termination. At worst, it coul
 it could allow an attacker to bypass security measures.</p>
 <h2>Noncompliant Code Example</h2>
 <pre>
-object o = null;
+<code data-lang="csharp">object o = null;
 if (condition)
 {
   M1(o.ToString()); // Noncompliant, always null
@@ -12,7 +12,7 @@ else
 {
   o = new object();
 }
-M2(o.ToString());
+M2(o.ToString());</code>
 </pre>
 <h2>Exceptions</h2>
 <p>Calls to extension methods are not reported because they can still operate on <code>null</code> values.</p>

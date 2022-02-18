@@ -4,15 +4,15 @@ values.</p>
 <p>Instead, allow such fields to be initialized to their default values or make the initialization lazy.</p>
 <h2>Noncompliant Code Example</h2>
 <pre>
-public class Foo
+<code data-lang="csharp">public class Foo
 {
   [ThreadStatic]
   public static object PerThreadObject = new object(); // Noncompliant. Will be null in all the threads except the first one.
-}
+}</code>
 </pre>
 <h2>Compliant Solution</h2>
 <pre>
-public class Foo
+<code data-lang="csharp">public class Foo
 {
   [ThreadStatic]
   public static object _perThreadObject;
@@ -27,6 +27,6 @@ public class Foo
       return _perThreadObject;
     }
   }
-}
+}</code>
 </pre>
 

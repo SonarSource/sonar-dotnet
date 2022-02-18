@@ -3,7 +3,7 @@ only set in the constructor, it could cause confusion about the field’s intend
 <code>readonly</code> to make their intended use explicit, and to prevent future maintainers from inadvertently changing their use.</p>
 <h2>Noncompliant Code Example</h2>
 <pre>
-public class Person
+<code data-lang="csharp">public class Person
 {
     private int _birthYear;  // Noncompliant
 
@@ -11,11 +11,11 @@ public class Person
     {
         _birthYear = birthYear;
     }
-}
+}</code>
 </pre>
 <h2>Compliant Solution</h2>
 <pre>
-public class Person
+<code data-lang="csharp">public class Person
 {
     private readonly int _birthYear;
 
@@ -23,7 +23,7 @@ public class Person
     {
         _birthYear = birthYear;
     }
-}
+}</code>
 </pre>
 <h2>Exceptions</h2>
 <ul>

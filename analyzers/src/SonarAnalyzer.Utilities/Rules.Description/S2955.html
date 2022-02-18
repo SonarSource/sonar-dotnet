@@ -4,35 +4,35 @@
 <code>default()</code>. If it’s not, then constraints should be added so that no value type can be passed.</p>
 <h2>Noncompliant Code Example</h2>
 <pre>
-private bool IsDefault&lt;T&gt;(T value)
+<code data-lang="csharp">private bool IsDefault&lt;T&gt;(T value)
 {
   if (value == null) // Noncompliant
   {
     // ...
   }
   // ...
-}
+}</code>
 </pre>
 <h2>Compliant Solution</h2>
 <pre>
-private bool IsDefault&lt;T&gt;(T value)
+<code data-lang="csharp">private bool IsDefault&lt;T&gt;(T value)
 {
   if(object.Equals(value, default(T)))
   {
     // ...
   }
   // ...
-}
+}</code>
 </pre>
 <p>or</p>
 <pre>
-private bool IsDefault&lt;T&gt;(T value) where T : class
+<code data-lang="csharp">private bool IsDefault&lt;T&gt;(T value) where T : class
 {
   if (value == null)
   {
     // ...
   }
   // ...
-}
+}</code>
 </pre>
 

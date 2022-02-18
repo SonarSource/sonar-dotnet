@@ -6,7 +6,7 @@
 </ul>
 <h2>Noncompliant Code Example</h2>
 <pre>
-object a = null, b = null, x;
+<code data-lang="csharp">object a = null, b = null, x;
 
 if (a != null) // Noncompliant; needlessly verbose
 {
@@ -35,11 +35,11 @@ if (a == null)  // Noncompliant
 
 var y = null ?? new object(); // Noncompliant
 
-a = a ?? new object();  // Noncompliant for C# 8
+a = a ?? new object();  // Noncompliant for C# 8</code>
 </pre>
 <h2>Compliant Solution</h2>
 <pre>
-object x;
+<code data-lang="csharp">object x;
 
 x = a ?? b;
 x = a ?? b;
@@ -47,6 +47,6 @@ x = a ?? new object();
 x = condition ? a : b;
 a ??= new object();
 var y = new object();
-a ??= new object();
+a ??= new object();</code>
 </pre>
 

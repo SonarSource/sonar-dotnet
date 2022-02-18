@@ -3,7 +3,7 @@ inheritance hierarchy, and can improve performance.</p>
 <p>This rule raises an issue when a public type inherits from <code>System.Attribute</code>, is not abstract, and is not sealed.</p>
 <h2>Noncompliant Code Example</h2>
 <pre>
-using System;
+<code data-lang="text">using System;
 
 namespace MyLibrary
 {
@@ -24,11 +24,11 @@ namespace MyLibrary
             }
         }
     }
-}
+}</code>
 </pre>
 <h2>Compliant Solution</h2>
 <pre>
-using System;
+<code data-lang="text">using System;
 
 namespace MyLibrary
 {
@@ -49,6 +49,6 @@ namespace MyLibrary
             }
         }
     }
-}
+}</code>
 </pre>
 

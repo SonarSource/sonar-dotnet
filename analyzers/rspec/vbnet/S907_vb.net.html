@@ -2,7 +2,7 @@
 as <code>If</code>, <code>For</code>, <code>While</code>, or <code>Exit</code> should be used instead.</p>
 <h2>Noncompliant Code Example</h2>
 <pre>
-    Sub GoToStatementDemo()
+<code data-lang="vbnet">    Sub GoToStatementDemo()
         Dim number As Integer = 1
         Dim sampleString As String
         ' Evaluate number and branch to appropriate label.
@@ -16,11 +16,11 @@ Line2:
 LastLine:
         ' Write "Number equals 1" in the Debug window.
         Debug.WriteLine(sampleString)
-    End Sub
+    End Sub</code>
 </pre>
 <h2>Compliant Solution</h2>
 <pre>
-    Sub GoToStatementDemo()
+<code data-lang="vbnet">    Sub GoToStatementDemo()
         Dim number As Integer = 1
         Dim sampleString As String
         ' Evaluate number and branch to appropriate label.
@@ -30,6 +30,6 @@ LastLine:
             sampleString = "Number equals 2"
         End If
         Debug.WriteLine(sampleString)
-    End Sub
+    End Sub</code>
 </pre>
 

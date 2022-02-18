@@ -12,7 +12,7 @@ is almost always an error.</p>
 <p>This rule checks for the use of direct and indirect equality/inequality tests on floats and doubles.</p>
 <h2>Noncompliant Code Example</h2>
 <pre>
-float myNumber = 3.146f;
+<code data-lang="csharp">float myNumber = 3.146f;
 if ( myNumber == 3.146f ) //Noncompliant. Because of floating point imprecision, this will be false
 {
   // ...
@@ -26,6 +26,6 @@ if (myNumber &lt;= 3.146f &amp;&amp; mNumber &gt;= 3.146f) // Noncompliant indir
 if (myNumber &lt; 4 || myNumber &gt; 4) // Noncompliant indirect inequality test
 {
   // ...
-}
+}</code>
 </pre>
 

@@ -4,19 +4,19 @@ its use can lead to runtime exceptions because <code>IIf</code> always evaluates
 <p>The newer version, <code>If()</code>, should be used instead because it short-circuits the evaluation of its parameters.</p>
 <h2>Noncompliant Code Example</h2>
 <pre>
-Public Class Foo
+<code data-lang="vbnet">Public Class Foo
     Public Sub Bar()
         Dim var As Object = IIf(Date.Now.Year = 1999, "Lets party!", "Lets party like it is 1999!") ' Noncompliant
     End Sub
-End Class
+End Class</code>
 </pre>
 <h2>Compliant Solution</h2>
 <pre>
-Public Class Foo
+<code data-lang="vbnet">Public Class Foo
     Public Sub Bar()
         Dim var As String = If(Date.Now.Year = 1999, "Lets party!", "Lets party like it is 1999!")
     End Sub
-End Class
+End Class</code>
 </pre>
 <h2>See</h2>
 <ul>

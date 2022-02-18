@@ -7,7 +7,7 @@ and separate events being created, which is rarely what’s actually intended.</
 <p>To prevent this, remove the <code>virtual</code> designation from the parent class event.</p>
 <h2>Noncompliant Code Example</h2>
 <pre>
-abstract class Car
+<code data-lang="csharp">abstract class Car
 {
   public virtual event EventHandler OnRefueled; // Noncompliant
 
@@ -37,11 +37,11 @@ class Program
     });
     r2.Refuel();
   }
-}
+}</code>
 </pre>
 <h2>Compliant Solution</h2>
 <pre>
-abstract class Car
+<code data-lang="csharp">abstract class Car
 {
   public event EventHandler OnRefueled; // Compliant
 
@@ -67,6 +67,6 @@ class Program
     });
     r2.Refuel();
   }
-}
+}</code>
 </pre>
 

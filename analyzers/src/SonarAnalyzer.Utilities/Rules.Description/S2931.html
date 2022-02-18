@@ -9,7 +9,7 @@ and therefore to be itself <code>IDisposable</code>. A class is considered to ow
 referenced by the field.</p>
 <h2>Noncompliant Code Example</h2>
 <pre>
-public class ResourceHolder   // Noncompliant; doesn't implement IDisposable
+<code data-lang="text">public class ResourceHolder   // Noncompliant; doesn't implement IDisposable
 {
   private FileStream fs;  // This member is never Disposed
   public void OpenResource(string path)
@@ -20,11 +20,11 @@ public class ResourceHolder   // Noncompliant; doesn't implement IDisposable
   {
     this.fs.Close();
   }
-}
+}</code>
 </pre>
 <h2>Compliant Solution</h2>
 <pre>
-public class ResourceHolder : IDisposable
+<code data-lang="text">public class ResourceHolder : IDisposable
 {
 &nbsp;&nbsp;private FileStream fs;
 &nbsp;&nbsp;public void OpenResource(string path)
@@ -40,7 +40,7 @@ public class ResourceHolder : IDisposable
 &nbsp;&nbsp;{
 &nbsp;&nbsp;&nbsp;&nbsp;this.fs.Dispose();
 &nbsp;&nbsp;}
-}
+}</code>
 </pre>
 <h2>See</h2>
 <ul>

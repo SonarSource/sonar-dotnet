@@ -17,37 +17,37 @@
 <p><a href="https://docs.microsoft.com/en-us/dotnet/api/system.security.cryptography.aesmanaged?view=netframework-4.8">AesManaged</a> object with
 insecure mode:</p>
 <pre>
-Dim aes4 = New AesManaged With {
+<code data-lang="vbnet">Dim aes4 = New AesManaged With {
     .KeySize = 128,
     .BlockSize = 128,
     .Mode = CipherMode.ECB, ' Noncompliant
     .Padding = PaddingMode.PKCS7
-}
+}</code>
 </pre>
 <p><a
 href="https://docs.microsoft.com/en-us/dotnet/api/system.security.cryptography.rsacryptoserviceprovider?view=netframework-4.8">RSACryptoServiceProvider</a>
 object without OAEP padding:</p>
 <pre>
-Dim RSA1 = New RSACryptoServiceProvider()
-Dim encryptedData = RSA1.Encrypt(dataToEncrypt, False) ' Noncompliant: OAEP Padding is not used (second parameter set to false)
+<code data-lang="vbnet">Dim RSA1 = New RSACryptoServiceProvider()
+Dim encryptedData = RSA1.Encrypt(dataToEncrypt, False) ' Noncompliant: OAEP Padding is not used (second parameter set to false)</code>
 </pre>
 <h2>Compliant Solution</h2>
 <p>AES with GCM mode with <a href="https://www.bouncycastle.org/">bouncycastle</a> library:</p>
 <pre>
-Dim blockCipher As GcmBlockCipher = New GcmBlockCipher(New AesFastEngine()) ' Compliant
-blockCipher.Init(True, New AeadParameters(New KeyParameter(secretKey), 128, iv, Nothing))
+<code data-lang="vbnet">Dim blockCipher As GcmBlockCipher = New GcmBlockCipher(New AesFastEngine()) ' Compliant
+blockCipher.Init(True, New AeadParameters(New KeyParameter(secretKey), 128, iv, Nothing))</code>
 </pre>
 <p>AES with GCM mode with <a href="https://docs.microsoft.com/en-us/dotnet/api/system.security.cryptography.aesgcm?view=netcore-3.0">AesGcm</a>
 object:</p>
 <pre>
-Dim aesGcm = New AesGcm(key) ' Compliant
+<code data-lang="vbnet">Dim aesGcm = New AesGcm(key) ' Compliant</code>
 </pre>
 <p>RSA with OAEP padding with <a
 href="https://docs.microsoft.com/en-us/dotnet/api/system.security.cryptography.rsacryptoserviceprovider?view=netframework-4.8">RSACryptoServiceProvider</a>
 object:</p>
 <pre>
-Dim RSA2 = New RSACryptoServiceProvider()
-Dim encryptedData = RSA2.Encrypt(dataToEncrypt, True) ' Compliant: OAEP Padding is used (second parameter set to true)
+<code data-lang="vbnet">Dim RSA2 = New RSACryptoServiceProvider()
+Dim encryptedData = RSA2.Encrypt(dataToEncrypt, True) ' Compliant: OAEP Padding is used (second parameter set to true)</code>
 </pre>
 <h2>See</h2>
 <ul>

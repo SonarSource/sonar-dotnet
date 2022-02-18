@@ -2,18 +2,18 @@
 redundant pairs of parentheses could be misleading, and should be removed.</p>
 <h2>Noncompliant Code Example</h2>
 <pre>
-If a AndAlso ((x + y &gt; 0)) Then ' Noncompliant
+<code data-lang="vbnet">If a AndAlso ((x + y &gt; 0)) Then ' Noncompliant
     ' ...
 End If
 
-Return ((x + 1))  ' Noncompliant
+Return ((x + 1))  ' Noncompliant</code>
 </pre>
 <h2>Compliant Solution</h2>
 <pre>
-If a AndAlso x + y &gt; 0 Then
+<code data-lang="vbnet">If a AndAlso x + y &gt; 0 Then
     ' ...
 End If
 
-Return (x + 1)
+Return (x + 1)</code>
 </pre>
 

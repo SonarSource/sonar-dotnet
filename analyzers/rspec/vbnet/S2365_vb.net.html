@@ -3,7 +3,7 @@ be much slower than a simple field access, contrary to the caller’s likely exp
 so that callers are not surprised by unexpectedly poor performance.</p>
 <h2>Noncompliant Code Example</h2>
 <pre>
-Module Module1
+<code data-lang="text">Module Module1
     ' Internal state
     Dim array = {"apple", "banana", "orange", "pineapple", "strawberry"}
 
@@ -13,11 +13,11 @@ Module Module1
             Return copy
         End Get
     End Property
-End Module
+End Module</code>
 </pre>
 <h2>Compliant Solution</h2>
 <pre>
-Module Module1
+<code data-lang="text">Module Module1
     ' Internal state
     Dim array = {"apple", "banana", "orange", "pineapple", "strawberry"}
 
@@ -25,6 +25,6 @@ Module Module1
         Dim copy = array.Clone
         Return copy
     End Function
-End Module
+End Module</code>
 </pre>
 

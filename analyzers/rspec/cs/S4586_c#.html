@@ -2,16 +2,16 @@
 <code>NullReferenceException</code> at runtime. This problem can be avoided by returning <code>Task.FromResult&lt;T&gt;(null)</code> instead.</p>
 <h2>Noncompliant Code Example</h2>
 <pre>
-public Task&lt;object&gt; GetFooAsync()
+<code data-lang="text">public Task&lt;object&gt; GetFooAsync()
 {
     return null; // Noncompliant
-}
+}</code>
 </pre>
 <h2>Compliant Solution</h2>
 <pre>
-public Task&lt;object&gt; GetFooAsync()
+<code data-lang="text">public Task&lt;object&gt; GetFooAsync()
 {
     return Task.FromResult&lt;object&gt;(null);
-}
+}</code>
 </pre>
 

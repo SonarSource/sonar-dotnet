@@ -3,7 +3,7 @@ Unfortunately, when you omit them from the <code>base</code> call in an override
 ignoring the value the caller passed in. The result will likely not be what the caller expected.</p>
 <h2>Noncompliant Code Example</h2>
 <pre>
-Public Class BaseClass
+<code data-lang="vbnet">Public Class BaseClass
     Public Overridable Sub MyMethod(ByVal Optional i As Integer = 1)
         Console.WriteLine(i)
     End Sub
@@ -21,11 +21,11 @@ Public Class DerivedClass
         Dim dc As DerivedClass = New DerivedClass()
         dc.MyMethod(12) ' prints 1
     End Function
-End Class
+End Class</code>
 </pre>
 <h2>Compliant Solution</h2>
 <pre>
-Public Class BaseClass
+<code data-lang="vbnet">Public Class BaseClass
     Public Overridable Sub MyMethod(ByVal Optional i As Integer = 1)
         Console.WriteLine(i)
     End Sub
@@ -43,6 +43,6 @@ Public Class DerivedClass
         Dim dc As DerivedClass = New DerivedClass()
         dc.MyMethod(12) ' prints 12
     End Function
-End Class
+End Class</code>
 </pre>
 

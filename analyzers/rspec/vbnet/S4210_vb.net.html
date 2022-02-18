@@ -4,24 +4,24 @@ supported by Windows Forms.</p>
 <p>This rule raises an issue when the entry point (<code>Shared Sub Main</code> method) of an assembly using Windows Forms is not marked as STA.</p>
 <h2>Noncompliant Code Example</h2>
 <pre>
-Imports System.Windows.Forms
+<code data-lang="vbnet">Imports System.Windows.Forms
 
 Public Class Foo
   Shared Sub Main()
     Dim winForm As Form = New Form
     Application.Run(winForm)
   End Sub
-End Class
+End Class</code>
 </pre>
 <h2>Compliant Solution</h2>
 <pre>
-Imports System.Windows.Forms
+<code data-lang="vbnet">Imports System.Windows.Forms
 
 Public Class Foo
   &lt;STAThread()&gt; Shared Sub Main()
     Dim winForm As Form = New Form
     Application.Run(winForm)
   End Sub
-End Class
+End Class</code>
 </pre>
 

@@ -2,7 +2,7 @@
 class fields should be renamed.</p>
 <h2>Noncompliant Code Example</h2>
 <pre>
-public class Fruit
+<code data-lang="csharp">public class Fruit
 {
   protected string plantingSeason;
   //...
@@ -12,11 +12,11 @@ public class Raspberry : Fruit
 {
   protected string plantingseason;  // Noncompliant
   // ...
-}
+}</code>
 </pre>
 <h2>Compliant Solution</h2>
 <pre>
-public class Fruit
+<code data-lang="csharp">public class Fruit
 {
   protected string plantingSeason;
   //...
@@ -26,11 +26,11 @@ public class Raspberry : Fruit
 {
   protected string whenToPlant;
   // ...
-}
+}</code>
 </pre>
 <p>Or</p>
 <pre>
-public class Fruit
+<code data-lang="csharp">public class Fruit
 {
   protected string plantingSeason;
   //...
@@ -40,7 +40,7 @@ public class Raspberry : Fruit
 {
   // field removed; parent field will be used instead
   // ...
-}
+}</code>
 </pre>
 <h2>Exceptions</h2>
 <p>This rule ignores same-name fields that are <code>static</code> in both the parent and child classes. It also ignores <code>private</code> parent

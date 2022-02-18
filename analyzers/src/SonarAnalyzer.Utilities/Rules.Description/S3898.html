@@ -3,18 +3,18 @@
 reflection are used to make comparisons.</p>
 <h2>Noncompliant Code Example</h2>
 <pre>
-struct MyStruct  // Noncompliant
+<code data-lang="csharp">struct MyStruct  // Noncompliant
 {
   private int i;
   public int I
   {
     //...
   }
-}
+}</code>
 </pre>
 <h2>Compliant Solution</h2>
 <pre>
-struct MyStruct : IEquatable&lt;MyStruct&gt;
+<code data-lang="csharp">struct MyStruct : IEquatable&lt;MyStruct&gt;
 {
   private int i;
   public int I
@@ -26,6 +26,6 @@ struct MyStruct : IEquatable&lt;MyStruct&gt;
   {
     throw new NotImplementedException();
   }
-}
+}</code>
 </pre>
 

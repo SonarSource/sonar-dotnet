@@ -30,13 +30,13 @@ HttpCookie myCookie = new HttpCookie("Sensitive cookie");
 <h2>Compliant Solution</h2>
 <p>Set the <code>HttpCookie.HttpOnly</code> property to <code>true</code>:</p>
 <pre>
-HttpCookie myCookie = new HttpCookie("Sensitive cookie");
-myCookie.HttpOnly = true; // Compliant: the sensitive cookie is protected against theft thanks to the HttpOnly property set to true (HttpOnly = true)
+<code data-lang="csharp">HttpCookie myCookie = new HttpCookie("Sensitive cookie");
+myCookie.HttpOnly = true; // Compliant: the sensitive cookie is protected against theft thanks to the HttpOnly property set to true (HttpOnly = true)</code>
 </pre>
 <p>Or change the default flag values for the whole application by editing the <a
 href="https://docs.microsoft.com/en-us/previous-versions/dotnet/netframework-4.0/ms228262(v=vs.100)">Web.config configuration file</a>:</p>
 <pre>
-&lt;httpCookies httpOnlyCookies="true" requireSSL="true" /&gt;
+<code data-lang="csharp">&lt;httpCookies httpOnlyCookies="true" requireSSL="true" /&gt;</code>
 </pre>
 <ul>
   <li> the <code>requireSSL</code> attribute corresponds programmatically to the <code>Secure</code> field. </li>

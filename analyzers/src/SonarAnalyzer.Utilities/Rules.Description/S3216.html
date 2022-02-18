@@ -6,10 +6,10 @@ the original calling thread.</p>
 <p>The rule does not raise for .Net Core libraries as there is no <code>SynchronizationContext</code> in .Net Core.</p>
 <h2>Noncompliant Code Example</h2>
 <pre>
-var response = await httpClient.GetAsync(url);  // Noncompliant
+<code data-lang="csharp">var response = await httpClient.GetAsync(url);  // Noncompliant</code>
 </pre>
 <h2>Compliant Solution</h2>
 <pre>
-var response = await httpClient.GetAsync(url).ConfigureAwait(false);
+<code data-lang="csharp">var response = await httpClient.GetAsync(url).ConfigureAwait(false);</code>
 </pre>
 

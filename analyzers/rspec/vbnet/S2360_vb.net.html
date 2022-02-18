@@ -10,19 +10,19 @@
 </ul>
 <h2>Noncompliant Code Example</h2>
 <pre>
-Sub Notify(ByVal Company As String, Optional ByVal Office As String = "QJZ") ' Noncompliant
+<code data-lang="text">Sub Notify(ByVal Company As String, Optional ByVal Office As String = "QJZ") ' Noncompliant
 
-End Sub
+End Sub</code>
 </pre>
 <h2>Compliant Solution</h2>
 <pre>
-Sub Notify(ByVal Company As String)
+<code data-lang="text">Sub Notify(ByVal Company As String)
   Notify(Company, "QJZ")
 End Sub
 
 Sub Notify(ByVal Company As String, ByVal Office As String)
 
-End Sub
+End Sub</code>
 </pre>
 <h2>Exceptions</h2>
 <p>The rule ignores non externally visible methods.</p>

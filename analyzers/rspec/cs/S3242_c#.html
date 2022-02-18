@@ -3,7 +3,7 @@ provided in the derived type is not requires then that limitation isn’t requir
 <p>This rule raises an issue when a method declaration includes a parameter that is a derived type and accesses only members of the base type.</p>
 <h2>Noncompliant Code Example</h2>
 <pre>
-using System;
+<code data-lang="csharp">using System;
 using System.IO;
 
 namespace MyLibrary
@@ -19,11 +19,11 @@ namespace MyLibrary
       }
     }
   }
-}
+}</code>
 </pre>
 <h2>Compliant Solution</h2>
 <pre>
-using System;
+<code data-lang="csharp">using System;
 using System.IO;
 
 namespace MyLibrary
@@ -39,6 +39,6 @@ namespace MyLibrary
       }
     }
   }
-}
+}</code>
 </pre>
 

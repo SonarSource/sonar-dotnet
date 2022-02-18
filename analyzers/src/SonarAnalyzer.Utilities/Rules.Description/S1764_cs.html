@@ -3,7 +3,7 @@ error and therefore a bug, or it is simply wasted code, and should be simplified
 operators, having the same value on both sides of an operator yields predictable results, and should be simplified.</p>
 <h2>Noncompliant Code Example</h2>
 <pre>
-if ( a == a ) // always true
+<code data-lang="csharp">if ( a == a ) // always true
 {
   doZ();
 }
@@ -24,7 +24,7 @@ int j = 5 / 5; //always 1
 int k = 5 - 5; // always 0
 
 c.Equals(c);    //always true
-Object.Equals(c, c); //always true
+Object.Equals(c, c); //always true</code>
 </pre>
 <h2>Exceptions</h2>
 <p>This rule ignores <code>*</code>, <code>+</code>, <code>=</code>, <code>&lt;&lt;</code>, and <code>&gt;&gt;</code>.</p>

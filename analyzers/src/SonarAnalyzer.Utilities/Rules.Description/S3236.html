@@ -3,7 +3,7 @@ about the caller of a method through optional parameters. But the arguments for 
 explicitly defined in the call. Thus, specifying the argument values defeats the purpose of the attributes.</p>
 <h2>Noncompliant Code Example</h2>
 <pre>
-void TraceMessage(string message,
+<code data-lang="text">void TraceMessage(string message,
   [CallerFilePath] string filePath = null,
   [CallerLineNumber] int lineNumber = 0)
 {
@@ -13,11 +13,11 @@ void TraceMessage(string message,
 void MyMethod()
 {
   TraceMessage("my message", "A.B.C.Foo.cs", 42); // Noncompliant
-}
+}</code>
 </pre>
 <h2>Compliant Solution</h2>
 <pre>
-void TraceMessage(string message,
+<code data-lang="text">void TraceMessage(string message,
   [CallerFilePath] string filePath = "",
   [CallerLineNumber] int lineNumber = 0)
 {
@@ -27,7 +27,7 @@ void TraceMessage(string message,
 void MyMethod()
 {
   TraceMessage("my message");
-}
+}</code>
 </pre>
 <h2>Exceptions</h2>
 <p><code>CallerMemberName</code> is not checked to avoid False-Positives with WPF/UWP applications.</p>

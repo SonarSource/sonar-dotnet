@@ -1,7 +1,7 @@
 <p>Redundant parentheses are simply wasted keystrokes, and should be removed.</p>
 <h2>Noncompliant Code Example</h2>
 <pre>
-[MyAttribute()] //Noncompliant
+<code data-lang="text">[MyAttribute()] //Noncompliant
 class MyClass
 {
   public int MyProperty { get; set; }
@@ -12,11 +12,11 @@ class MyClass
       MyProperty = propertyValue
     };
   }
-}
+}</code>
 </pre>
 <h2>Compliant Solution</h2>
 <pre>
-[MyAttribute]
+<code data-lang="text">[MyAttribute]
 class MyClass
 {
   public int MyProperty { get; set; }
@@ -27,6 +27,6 @@ class MyClass
       MyProperty = propertyValue
     };
   }
-}
+}</code>
 </pre>
 

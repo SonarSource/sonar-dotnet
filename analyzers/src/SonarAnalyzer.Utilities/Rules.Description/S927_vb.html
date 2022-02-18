@@ -2,7 +2,7 @@
 base declaration of the method, or the name of the parameter in the interface declaration of the method.</p>
 <h2>Noncompliant Code Example</h2>
 <pre>
-Public MustInherit Class Base
+<code data-lang="vbnet">Public MustInherit Class Base
 
     Public MustOverride Sub DoSomething(Name As String)
 
@@ -26,11 +26,11 @@ Public Class Handler
         ' ...
     End Sub
 
-End Class
+End Class</code>
 </pre>
 <h2>Compliant Solution</h2>
 <pre>
-Public MustInherit Class Base
+<code data-lang="vbnet">Public MustInherit Class Base
 
     Public MustOverride Sub DoSomething(Name As String)
 
@@ -54,6 +54,6 @@ Public Class Handler
         ' ...
     End Sub
 
-End Class
+End Class</code>
 </pre>
 

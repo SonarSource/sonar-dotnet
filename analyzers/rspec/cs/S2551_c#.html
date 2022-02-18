@@ -10,17 +10,17 @@ same lock for another unrelated purpose.</p>
 </ul>
 <h2>Noncompliant Code Example</h2>
 <pre>
-public void MyLockingMethod()
+<code data-lang="text">public void MyLockingMethod()
 {
     lock (this) // Noncompliant
     {
         // ...
     }
-}
+}</code>
 </pre>
 <h2>Compliant Solution</h2>
 <pre>
-private readonly object lockObj = new object();
+<code data-lang="text">private readonly object lockObj = new object();
 
 public void MyLockingMethod()
 {
@@ -28,7 +28,7 @@ public void MyLockingMethod()
     {
         // ...
     }
-}
+}</code>
 </pre>
 <h2>See</h2>
 <p><a href="https://docs.microsoft.com/en-us/dotnet/standard/threading/managed-threading-best-practices">Microsoft Documentation: Managed Threading

@@ -3,20 +3,20 @@
 <p><code>+</code> on the other hand can be an addition, or a concatenation, depending on the operand types.</p>
 <h2>Noncompliant Code Example</h2>
 <pre>
-Module Module1
+<code data-lang="vbnet">Module Module1
     Sub Main()
         Console.WriteLine("1" + 2) ' Noncompliant - will display "3"
     End Sub
-End Module
+End Module</code>
 </pre>
 <h2>Compliant Solution</h2>
 <pre>
-Module Module1
+<code data-lang="vbnet">Module Module1
     Sub Main()
         Console.WriteLine(1 &amp; 2)   ' Compliant - will display "12"
         Console.WriteLine(1 + 2)   ' Compliant - but will display "3"
         Console.WriteLine("1" &amp; 2) ' Compliant - will display "12"
     End Sub
-End Module
+End Module</code>
 </pre>
 

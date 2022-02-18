@@ -4,7 +4,7 @@ represents a misunderstanding of how <code>Sum</code> works.</p>
 <p>This rule raises an issue when an <code>unchecked</code> context is specified for a <code>Sum</code> on integer types.</p>
 <h2>Noncompliant Code Example</h2>
 <pre>
-void Add(List&lt;int&gt; list)
+<code data-lang="csharp">void Add(List&lt;int&gt; list)
 {
   int d = unchecked(list.Sum());  // Noncompliant
 
@@ -12,11 +12,11 @@ void Add(List&lt;int&gt; list)
   {
     int e = list.Sum();  // Noncompliant
   }
-}
+}</code>
 </pre>
 <h2>Compliant Solution</h2>
 <pre>
-void Add(List&lt;int&gt; list)
+<code data-lang="csharp">void Add(List&lt;int&gt; list)
 {
   int d = list.Sum();
 
@@ -28,7 +28,7 @@ void Add(List&lt;int&gt; list)
   {
     // exception handling...
   }
-}
+}</code>
 </pre>
 <h2>Exceptions</h2>
 <p>When the <code>Sum()</code> call is inside a <code>try-catch</code> block, no issues are reported.</p>

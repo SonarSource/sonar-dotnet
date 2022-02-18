@@ -6,24 +6,24 @@ assembly, but if executed from a unit test project it could return the unit test
 contains the specified type.</p>
 <h2>Noncompliant Code Example</h2>
 <pre>
-public class Example
+<code data-lang="text">public class Example
 {
    public static void Main()
    {
       Assembly assem = Assembly.GetExecutingAssembly(); // Noncompliant
       Console.WriteLine("Assembly name: {0}", assem.FullName);
    }
-}
+}</code>
 </pre>
 <h2>Compliant Solution</h2>
 <pre>
-public class Example
+<code data-lang="text">public class Example
 {
    public static void Main()
    {
       Assembly assem = typeof(Example).Assembly; // Here we use the type of the current class
       Console.WriteLine("Assembly name: {0}", assem.FullName);
    }
-}
+}</code>
 </pre>
 

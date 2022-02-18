@@ -12,10 +12,10 @@ This works well, but it creates a new <code>string</code> for each call to the <
 <p>Using these methods gives the same result while avoiding the creation of additional <code>String</code> instances.</p>
 <h2>Noncompliant Code Example</h2>
 <pre>
-str.Substring(StartIndex).IndexOf(char1); // Noncompliant; a new string is going to be created by "Substring"
+<code data-lang="csharp">str.Substring(StartIndex).IndexOf(char1); // Noncompliant; a new string is going to be created by "Substring"</code>
 </pre>
 <h2>Compliant Solution</h2>
 <pre>
-str.IndexOf(char1, startIndex) - startIndex;
+<code data-lang="csharp">str.IndexOf(char1, startIndex) - startIndex;</code>
 </pre>
 

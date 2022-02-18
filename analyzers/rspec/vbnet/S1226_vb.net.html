@@ -2,20 +2,20 @@
 Instead, initial values of parameters should be, if not treated as <code>readonly</code> then at least read before reassignment.</p>
 <h2>Noncompliant Code Example</h2>
 <pre>
-Module Module1
+<code data-lang="vbnet">Module Module1
     Sub Foo(ByVal a As Integer)
         a = 42                  ' Noncompliant
     End Sub
-End Module
+End Module</code>
 </pre>
 <h2>Compliant Solution</h2>
 <pre>
-Module Module1
+<code data-lang="vbnet">Module Module1
     Sub Foo(ByVal a As Integer)
         Dim tmp = a
         tmp = 42
     End Sub
-End Module
+End Module</code>
 </pre>
 <h2>Exceptions</h2>
 <p><code>ByRef</code> parameters are ignored.</p>

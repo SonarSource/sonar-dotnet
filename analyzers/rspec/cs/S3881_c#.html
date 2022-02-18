@@ -19,7 +19,7 @@ Solution</strong> section for examples.</p>
 </ul>
 <h2>Noncompliant Code Example</h2>
 <pre>
-public class Foo1 : IDisposable // Noncompliant - provide protected overridable implementation of Dispose(bool) on Foo or mark the type as sealed.
+<code data-lang="csharp">public class Foo1 : IDisposable // Noncompliant - provide protected overridable implementation of Dispose(bool) on Foo or mark the type as sealed.
 {
     public void Dispose() // Noncompliant - should contain only a call to Dispose(true) and then GC.SuppressFinalize(this)
     {
@@ -59,11 +59,11 @@ public class Foo3 : IDisposable
     {
         // Cleanup
     }
-}{code}
+}{code}</code>
 </pre>
 <h2>Compliant Solution</h2>
 <pre>
-// Sealed class
+<code data-lang="csharp">// Sealed class
 public sealed class Foo1 : IDisposable
 {
     public void Dispose()
@@ -116,7 +116,7 @@ public class Foo4 : DisposableBase
         // Do not forget to call base
         base.Dispose(disposing);
     }
-}
+}</code>
 </pre>
 <h2>See</h2>
 <p>Refer to</p>

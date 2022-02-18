@@ -3,7 +3,7 @@ when only a single <code>public</code> parameterless constructor is defined in a
 would generate it automatically. Similarly, empty <code>static</code> constructors and empty destructors are also wasted keystrokes.</p>
 <h2>Noncompliant Code Example</h2>
 <pre>
-class X
+<code data-lang="csharp">class X
 {
   public X() { } // Noncompliant
   static X() { }  // Noncompliant
@@ -18,11 +18,11 @@ class Y : X
   {
     /* does something with the parameter */
   }
-}
+}</code>
 </pre>
 <h2>Compliant Solution</h2>
 <pre>
-class X
+<code data-lang="csharp">class X
 {
   ...
 }
@@ -33,6 +33,6 @@ class Y : X
   {
     /* does something with the parameter */
   }
-}
+}</code>
 </pre>
 

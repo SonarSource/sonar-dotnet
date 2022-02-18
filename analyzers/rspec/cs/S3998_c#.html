@@ -13,7 +13,7 @@ identity are:</p>
 </ul>
 <h2>Noncompliant Code Example</h2>
 <pre>
-public class Sample
+<code data-lang="text">public class Sample
 {
     string myString = "foo";
 
@@ -21,11 +21,11 @@ public class Sample
     {
         lock (myString) { } // Noncompliant
     }
-}
+}</code>
 </pre>
 <h2>Compliant Solution</h2>
 <pre>
-public class Sample
+<code data-lang="text">public class Sample
 {
     private readonly static string thisLock = new object();
 
@@ -33,6 +33,6 @@ public class Sample
     {
         lock (thisLock) { }
     }
-}
+}</code>
 </pre>
 

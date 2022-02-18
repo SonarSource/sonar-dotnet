@@ -6,26 +6,26 @@ are not vulnerable to well-known attacks like brute force attacks for example.</
 <p>For <a href="https://docs.microsoft.com/en-us/dotnet/api/system.security.cryptography?view=netcore-3.1">System.Security.Cryptography</a> library,
 these old cryptographic algorithms should no longer be used for any reason:</p>
 <pre>
-var tripleDES1 = new TripleDESCryptoServiceProvider(); // Noncompliant: Triple DES is vulnerable to meet-in-the-middle attack
+<code data-lang="csharp">var tripleDES1 = new TripleDESCryptoServiceProvider(); // Noncompliant: Triple DES is vulnerable to meet-in-the-middle attack
 
 var simpleDES = new DESCryptoServiceProvider(); // Noncompliant: DES works with 56-bit keys allow attacks via exhaustive search
 
-var RC2 = new RC2CryptoServiceProvider(); // Noncompliant: RC2 is vulnerable to a related-key attack
+var RC2 = new RC2CryptoServiceProvider(); // Noncompliant: RC2 is vulnerable to a related-key attack</code>
 </pre>
 <p>For Bouncycastle library, <a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2016-1000339">AESFastEngine has a side channel leak</a>, it
 is possible to gain information about the key used to initialize the cipher:</p>
 <pre>
-AesFastEngine aesFast = new AesFastEngine(); // Noncompliant
+<code data-lang="csharp">AesFastEngine aesFast = new AesFastEngine(); // Noncompliant</code>
 </pre>
 <h2>Compliant Solution</h2>
 <p>For <a href="https://docs.microsoft.com/en-us/dotnet/api/system.security.cryptography?view=netcore-3.1">System.Security.Cryptography</a> library,
 it’s recommended to use <code>AesCryptoServiceProvider</code>:</p>
 <pre>
-var AES = new AesCryptoServiceProvider(); // Compliant
+<code data-lang="csharp">var AES = new AesCryptoServiceProvider(); // Compliant</code>
 </pre>
 <p>For Bouncycastle library, it’s recommended to use <code>AESEngine</code>:</p>
 <pre>
-var AES = new AESEngine(); // Compliant
+<code data-lang="csharp">var AES = new AESEngine(); // Compliant</code>
 </pre>
 <h2>See</h2>
 <ul>

@@ -26,19 +26,19 @@ calling <code>ConfigureAwait(false)</code> on it, or by calling <code>.AsTask()<
 </ul>
 <h2>Noncompliant Code Example</h2>
 <pre>
-ValueTask&lt;int&gt; vt = SomeValueTaskReturningMethodAsync();
+<code data-lang="text">ValueTask&lt;int&gt; vt = SomeValueTaskReturningMethodAsync();
 int result = await vt;
 int result2 = await vt; // Noncompliant, variable is awaited multiple times
 
-int value = SomeValueTaskReturningMethodAsync().GetAwaiter().GetResult(); // Noncompliant, uses GetAwaiter().GetResult() when it's not known to be done
+int value = SomeValueTaskReturningMethodAsync().GetAwaiter().GetResult(); // Noncompliant, uses GetAwaiter().GetResult() when it's not known to be done</code>
 </pre>
 <h2>Compliant Solution</h2>
 <pre>
-int result = await SomeValueTaskReturningMethodAsync();
+<code data-lang="text">int result = await SomeValueTaskReturningMethodAsync();
 
 int result = await SomeValueTaskReturningMethodAsync().ConfigureAwait(false);
 
-Task&lt;int&gt; t = SomeValueTaskReturningMethodAsync().AsTask();
+Task&lt;int&gt; t = SomeValueTaskReturningMethodAsync().AsTask();</code>
 </pre>
 <h2>Exceptions</h2>
 <p>This rule does not raise any issue when a <code>ValueTask / ValueTask&lt;TResult&gt;</code> is awaited multiple time in a loop.</p>

@@ -4,25 +4,25 @@
 errors.</p>
 <h2>Noncompliant Code Example</h2>
 <pre>
-public void DoSomething(object obj)
+<code data-lang="csharp">public void DoSomething(object obj)
 {
   if (obj == null)
   {
     throw new NullReferenceException("obj");  // Noncompliant
   }
   // ...
-}
+}</code>
 </pre>
 <h2>Compliant Solution</h2>
 <pre>
-public void DoSomething(object obj)
+<code data-lang="csharp">public void DoSomething(object obj)
 {
   if (obj == null)
   {
     throw new ArgumentNullException("obj");
   }
   // ...
-}
+}</code>
 </pre>
 <h2>See</h2>
 <ul>

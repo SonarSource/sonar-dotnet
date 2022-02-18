@@ -4,17 +4,17 @@ allowing it to be used where an <code>IEquatable</code> is called for.</p>
 <p><strong>Note</strong>: Classes that implement <code>IEquatable&lt;T&gt;</code> should also be <code>sealed</code>.</p>
 <h2>Noncompliant Code Example</h2>
 <pre>
-class MyClass  // Noncompliant
+<code data-lang="csharp">class MyClass  // Noncompliant
 {
   public bool Equals(MyClass other)
   {
     //...
   }
-}
+}</code>
 </pre>
 <h2>Compliant Solution</h2>
 <pre>
-sealed class MyClass : IEquatable&lt;MyClass&gt;
+<code data-lang="csharp">sealed class MyClass : IEquatable&lt;MyClass&gt;
 {
   public override bool Equals(object other)
   {
@@ -25,6 +25,6 @@ sealed class MyClass : IEquatable&lt;MyClass&gt;
   {
     //...
   }
-}
+}</code>
 </pre>
 

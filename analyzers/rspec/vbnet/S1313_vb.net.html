@@ -32,8 +32,8 @@ Dim address = IPAddress.Parse(ip)
 </pre>
 <h2>Compliant Solution</h2>
 <pre>
-Dim ip = ConfigurationManager.AppSettings("myapplication.ip") ' Compliant
-Dim address = IPAddress.Parse(ip)
+<code data-lang="vbnet">Dim ip = ConfigurationManager.AppSettings("myapplication.ip") ' Compliant
+Dim address = IPAddress.Parse(ip)</code>
 </pre>
 <h2>Exceptions</h2>
 <p>No issue is reported for the following cases because they are not considered sensitive:</p>

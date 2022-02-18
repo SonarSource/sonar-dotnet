@@ -5,18 +5,18 @@ should be followed by an <code>else</code> statement.</p>
 consistent with the requirement to have a final <code>default</code> clause in a <code>switch</code> statement.</p>
 <h2>Noncompliant Code Example</h2>
 <pre>
-if (x == 0)
+<code data-lang="csharp">if (x == 0)
 {
     DoSomething();
 }
 else if (x == 1)
 {
     DoSomethingElse();
-}
+}</code>
 </pre>
 <h2>Compliant Solution</h2>
 <pre>
-if (x == 0)
+<code data-lang="csharp">if (x == 0)
 {
     DoSomething();
 }
@@ -27,7 +27,7 @@ else if (x == 1)
 else
 {
     throw new InvalidOperationException();
-}
+}</code>
 </pre>
 <h2>Exceptions</h2>
 <p>None</p>

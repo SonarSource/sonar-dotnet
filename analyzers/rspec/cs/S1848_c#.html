@@ -4,12 +4,12 @@ lead to an unexpected behavior in production.</p>
 called directly.</p>
 <h2>Noncompliant Code Example</h2>
 <pre>
-if (x &lt; 0)
-  new ArgumentException("x must be nonnegative");
+<code data-lang="csharp">if (x &lt; 0)
+  new ArgumentException("x must be nonnegative");</code>
 </pre>
 <h2>Compliant Solution</h2>
 <pre>
-if (x &lt; 0)
-  throw new ArgumentException("x must be nonnegative");
+<code data-lang="csharp">if (x &lt; 0)
+  throw new ArgumentException("x must be nonnegative");</code>
 </pre>
 

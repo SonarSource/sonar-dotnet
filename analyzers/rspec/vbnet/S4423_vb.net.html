@@ -8,21 +8,21 @@ href="https://docs.microsoft.com/en-us/windows-server/security/tls/tls-registry-
 policy.</p>
 <h2>Noncompliant Code Example</h2>
 <pre>
-ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls ' Noncompliant; legacy version TLSv1 is enabled
+<code data-lang="vbnet">ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls ' Noncompliant; legacy version TLSv1 is enabled</code>
 </pre>
 <p>For <a href="https://docs.microsoft.com/en-us/dotnet/api/system.net.http.httpclient">System.Net.Http.HttpClient</a></p>
 <pre>
-Dim Handler As New HttpClientHandler With {.SslProtocols = SslProtocols.Tls} ' Noncompliant; legacy version TLSv1 Is enabled
+<code data-lang="vbnet">Dim Handler As New HttpClientHandler With {.SslProtocols = SslProtocols.Tls} ' Noncompliant; legacy version TLSv1 Is enabled</code>
 </pre>
 <h2>Compliant Solution</h2>
 <pre>
-ServicePointManager.SecurityProtocol = SecurityProtocolType.SystemDefault  ' Compliant; choice Of the SSL/TLS versions rely On the OS configuration
-ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12 Or SecurityProtocolType.Tls13  ' Compliant
+<code data-lang="vbnet">ServicePointManager.SecurityProtocol = SecurityProtocolType.SystemDefault  ' Compliant; choice Of the SSL/TLS versions rely On the OS configuration
+ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12 Or SecurityProtocolType.Tls13  ' Compliant</code>
 </pre>
 <p>For <a href="https://docs.microsoft.com/en-us/dotnet/api/system.net.http.httpclient">System.Net.Http.HttpClient</a></p>
 <pre>
-Dim HandlerA As New HttpClientHandler With {.SslProtocols = SslProtocols.Tls12} ' Compliant
-Dim HandlerB As New HttpClientHandler With {.SslProtocols = SslProtocols.None}  ' Compliant; choice Of the TLS versions rely On the OS configuration
+<code data-lang="vbnet">Dim HandlerA As New HttpClientHandler With {.SslProtocols = SslProtocols.Tls12} ' Compliant
+Dim HandlerB As New HttpClientHandler With {.SslProtocols = SslProtocols.None}  ' Compliant; choice Of the TLS versions rely On the OS configuration</code>
 </pre>
 <h2>See</h2>
 <ul>

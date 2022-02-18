@@ -3,7 +3,7 @@
 and returns a value that is not an array.</p>
 <h2>Noncompliant Code Example</h2>
 <pre>
-using System;
+<code data-lang="csharp">using System;
 
 namespace MyLibrary
 {
@@ -16,11 +16,11 @@ namespace MyLibrary
             return name;
         }
     }
-}
+}</code>
 </pre>
 <h2>Compliant Solution</h2>
 <pre>
-using System;
+<code data-lang="csharp">using System;
 
 namespace MyLibrary
 {
@@ -36,7 +36,7 @@ namespace MyLibrary
             }
         }
     }
-}
+}</code>
 </pre>
 <h2>Exceptions</h2>
 <p>The rule doesn’t raise an issue when the method:</p>

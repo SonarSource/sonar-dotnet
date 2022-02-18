@@ -2,7 +2,7 @@
 mistakes.</p>
 <h2>Noncompliant Code Example</h2>
 <pre>
-class MyClass
+<code data-lang="csharp">class MyClass
 {
   private int field; // Noncompliant, shouldn't it be initialized? This way the value is always default(int), 0.
   private int Property { get; set; }  // Noncompliant
@@ -11,11 +11,11 @@ class MyClass
     Console.WriteLine(field); //Will always print 0
     Console.WriteLine(Property); //Will always print 0
   }
-}
+}</code>
 </pre>
 <h2>Compliant Solution</h2>
 <pre>
-class MyClass
+<code data-lang="csharp">class MyClass
 {
   private int field = 1;
   private int Property { get; set; } = 42;
@@ -25,6 +25,6 @@ class MyClass
     Console.WriteLine(field);
     Console.WriteLine(Property);
   }
-}
+}</code>
 </pre>
 

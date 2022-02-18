@@ -4,38 +4,38 @@ suited for storing non-changing data shared by many consumers. To enforce this i
 converted to constants.</p>
 <h2>Noncompliant Code Example</h2>
 <pre>
-public class Math
+<code data-lang="csharp">public class Math
 {
   public static double Pi = 3.14;  // Noncompliant
-}
+}</code>
 </pre>
 <p>or</p>
 <pre>
-public class Shape
+<code data-lang="csharp">public class Shape
 {
   public static Shape Empty = new EmptyShape();  // Noncompliant
 
   private class EmptyShape : Shape
   {
   }
-}
+}</code>
 </pre>
 <h2>Compliant Solution</h2>
 <pre>
-public class Math
+<code data-lang="csharp">public class Math
 {
   public const double Pi = 3.14;
-}
+}</code>
 </pre>
 <p>or</p>
 <pre>
-public class Shape
+<code data-lang="csharp">public class Shape
 {
   public static readonly Shape Empty = new EmptyShape();
 
   private class EmptyShape : Shape
   {
   }
-}
+}</code>
 </pre>
 

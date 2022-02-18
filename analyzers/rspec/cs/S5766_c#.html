@@ -103,7 +103,7 @@ public class InternalUrl : IDeserializationCallback
 type to control deserialization, perform the same checks inside regular constructors than in the special constructor <code>SerializationInfo info,
 StreamingContext context</code> used during deserialization:</p>
 <pre>
-[Serializable]
+<code data-lang="csharp">[Serializable]
 public class InternalUrl : ISerializable
 {
     private string url;
@@ -137,14 +137,14 @@ public class InternalUrl : ISerializable
     {
         info.AddValue("url", url);
     }
-}
+}</code>
 </pre>
 <p>When using <a
 href="https://docs.microsoft.com/fr-fr/dotnet/api/system.runtime.serialization.ideserializationcallback?view=netframework-4.8">IDeserializationCallback</a>
 type to control deserialization, perform the same checks inside regular constructors than after deserialization with
 <code>IDeserializationCallback.OnDeserialization</code> method:</p>
 <pre>
-[Serializable]
+<code data-lang="csharp">[Serializable]
 public class InternalUrl : IDeserializationCallback
 {
     private string url;
@@ -171,7 +171,7 @@ public class InternalUrl : IDeserializationCallback
         {
         }
     }
-}
+}</code>
 </pre>
 <h2>See</h2>
 <ul>

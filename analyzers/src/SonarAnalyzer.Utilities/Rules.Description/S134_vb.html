@@ -4,7 +4,7 @@ statements are key ingredients for making what’s known as "Spaghetti code".</p
 <h2>Noncompliant Code Example</h2>
 <p>With the default threshold of 3:</p>
 <pre>
-If condition1 ' Compliant - depth = 1
+<code data-lang="vbnet">If condition1 ' Compliant - depth = 1
   ' ...
   If condition2 ' Compliant - depth = 2
     ' ...
@@ -18,6 +18,6 @@ If condition1 ' Compliant - depth = 1
       End If
     Next
   End If
-End If
+End If</code>
 </pre>
 

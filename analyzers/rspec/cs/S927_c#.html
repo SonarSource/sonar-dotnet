@@ -3,7 +3,7 @@ base declaration of the method, or the name of the parameter in the interface de
 definition.</p>
 <h2>Noncompliant Code Example</h2>
 <pre>
-partial class Point
+<code data-lang="csharp">partial class Point
 {
   partial void MoveVertically(int z);
 }
@@ -30,11 +30,11 @@ class Foo : IFoo
   void Bar(int z) // Noncompliant, parameter name should be i
   {
   }
-}
+}</code>
 </pre>
 <h2>Compliant Solution</h2>
 <pre>
-partial class Point
+<code data-lang="csharp">partial class Point
 {
   partial void MoveVertically(int z);
 }
@@ -61,6 +61,6 @@ class Foo : IFoo
   void Bar(int i)
   {
   }
-}
+}</code>
 </pre>
 

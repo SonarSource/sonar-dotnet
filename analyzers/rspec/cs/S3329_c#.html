@@ -4,7 +4,7 @@ key the same plaintext doesn’t always produce the same ciphertext. The IV does
 <p>To generate Initialization Vectors, NIST recommends to use a secure random number generator.</p>
 <h2>Noncompliant Code Example</h2>
 <pre>
-public void Encrypt(byte[] key, byte[] data, MemoryStream target)
+<code data-lang="csharp">public void Encrypt(byte[] key, byte[] data, MemoryStream target)
 {
     byte[] initializationVector = new byte[] { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16 };
 
@@ -13,11 +13,11 @@ public void Encrypt(byte[] key, byte[] data, MemoryStream target)
 
     using var cryptoStream = new CryptoStream(target, encryptor, CryptoStreamMode.Write);
     cryptoStream.Write(data);
-}
+}</code>
 </pre>
 <h2>Compliant Solution</h2>
 <pre>
-public byte[] Encrypt(byte[] key, byte[] data, MemoryStream target)
+<code data-lang="csharp">public byte[] Encrypt(byte[] key, byte[] data, MemoryStream target)
 {
     using var aes = new AesCryptoServiceProvider();
     var encryptor = aes.CreateEncryptor(key, aes.IV); // aes.IV is automatically generated to random secure value
@@ -26,7 +26,7 @@ public byte[] Encrypt(byte[] key, byte[] data, MemoryStream target)
     cryptoStream.Write(data);
 
     return aes.IV;
-}
+}</code>
 </pre>
 <h2>See</h2>
 <ul>

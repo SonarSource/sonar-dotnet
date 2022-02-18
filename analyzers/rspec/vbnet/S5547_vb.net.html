@@ -6,26 +6,26 @@ are not vulnerable to well-known attacks like brute force attacks for example.</
 <p>For <a href="https://docs.microsoft.com/en-us/dotnet/api/system.security.cryptography?view=netcore-3.1">System.Security.Cryptography</a> library,
 these old cryptographic algorithms should no longer be used for any reason:</p>
 <pre>
-Dim TripleDES1 As new TripleDESCryptoServiceProvider() ' Noncompliant: Triple DES is vulnerable to meet-in-the-middle attack
+<code data-lang="vbnet">Dim TripleDES1 As new TripleDESCryptoServiceProvider() ' Noncompliant: Triple DES is vulnerable to meet-in-the-middle attack
 
 Dim SimpleDES As New DESCryptoServiceProvider() ' Noncompliant: DES works with 56-bit keys allow attacks via exhaustive search
 
-Dim RC2 As new RC2CryptoServiceProvider() ' Noncompliant: RC2 is vulnerable to a related-key attack
+Dim RC2 As new RC2CryptoServiceProvider() ' Noncompliant: RC2 is vulnerable to a related-key attack</code>
 </pre>
 <p>For Bouncycastle library, <a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2016-1000339">AESFastEngine has a side channel leak</a>, it
 is possible to gain information about the key used to initialize the cipher:</p>
 <pre>
-Dim AesFast As new AesFastEngine() ' Noncompliant
+<code data-lang="vbnet">Dim AesFast As new AesFastEngine() ' Noncompliant</code>
 </pre>
 <h2>Compliant Solution</h2>
 <p>For <a href="https://docs.microsoft.com/en-us/dotnet/api/system.security.cryptography?view=netcore-3.1">System.Security.Cryptography</a> library,
 it’s recommended to use <code>AesCryptoServiceProvider</code>:</p>
 <pre>
-Dim AES As new AesCryptoServiceProvider() ' Compliant
+<code data-lang="vbnet">Dim AES As new AesCryptoServiceProvider() ' Compliant</code>
 </pre>
 <p>For Bouncycastle library, it’s recommended to use <code>AESEngine</code>:</p>
 <pre>
-Dim AES As new AESEngine() ' Compliant
+<code data-lang="vbnet">Dim AES As new AESEngine() ' Compliant</code>
 </pre>
 <h2>See</h2>
 <ul>

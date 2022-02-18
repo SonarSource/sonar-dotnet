@@ -3,7 +3,7 @@ method.</p>
 <p>It is valid to throw exceptions from indexed property getters and from property setters, which are not detected by this rule.</p>
 <h2>Noncompliant Code Example</h2>
 <pre>
-Module Module1
+<code data-lang="text">Module Module1
     Public Property Foo() As Integer
         Get
             Throw New Exception  ' Non-Compliant
@@ -12,15 +12,15 @@ Module Module1
             ' ... some code ...
         End Set
     End Property
-End Module
+End Module</code>
 </pre>
 <h2>Compliant Solution</h2>
 <pre>
-Module Module1
+<code data-lang="text">Module Module1
     Sub SetFoo(ByVal value As Integer)         ' Compliant
         ' ... some code ...
     End Sub
-End Module
+End Module</code>
 </pre>
 <h2>Exceptions</h2>
 <p>No issue is raised when the thrown exception derives from or is of type <code>NotImplementedException</code>, <code>NotSupportedException</code> or

@@ -4,7 +4,7 @@ programming languages, while the <code>params</code> keyword works the same way 
 that uses the <code>VarArgs</code> calling convention.</p>
 <h2>Noncompliant Code Example</h2>
 <pre>
-using System;
+<code data-lang="csharp">using System;
 
 namespace MyLibrary
 {
@@ -20,11 +20,11 @@ namespace MyLibrary
             }
         }
     }
-}
+}</code>
 </pre>
 <h2>Compliant Solution</h2>
 <pre>
-using System;
+<code data-lang="csharp">using System;
 
 [assembly: CLSCompliant(true)]
 namespace MyLibrary
@@ -39,7 +39,7 @@ namespace MyLibrary
             }
         }
     }
-}
+}</code>
 </pre>
 <h2>Exceptions</h2>
 <p>Interop methods using <code>VarArgs</code> calling convention do not raise an issue.</p>

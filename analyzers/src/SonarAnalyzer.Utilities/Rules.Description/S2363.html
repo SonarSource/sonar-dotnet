@@ -10,14 +10,14 @@ with the provided regular expression.</p>
 <h2>Noncompliant Code Example</h2>
 <p>With the default regular expression <code>^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$</code>:</p>
 <pre>
-Class Foo
+<code data-lang="vbnet">Class Foo
     Private Shared ReadOnly Foo As Integer  ' Noncompliant
-End Class
+End Class</code>
 </pre>
 <h2>Compliant Solution</h2>
 <pre>
-Class Foo
+<code data-lang="vbnet">Class Foo
     Private Shared ReadOnly foo As Integer  ' Compliant
-End Class
+End Class</code>
 </pre>
 

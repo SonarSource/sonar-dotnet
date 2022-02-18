@@ -9,20 +9,20 @@
 <p>TLS libraries provide built-in certificate validation functions that should be used.</p>
 <h2>Noncompliant Code Example</h2>
 <pre>
-ServicePointManager.ServerCertificateValidationCallback +=
+<code data-lang="csharp">ServicePointManager.ServerCertificateValidationCallback +=
     (sender, certificate, chain, errors) =&gt; {
         return true; // Noncompliant: trust all certificates
-    };
+    };</code>
 </pre>
 <h2>Compliant Solution</h2>
 <pre>
-ServicePointManager.ServerCertificateValidationCallback +=
+<code data-lang="csharp">ServicePointManager.ServerCertificateValidationCallback +=
     (sender, certificate, chain, errors) =&gt;
     {
         if (development) return true; // for development, trust all certificates
         return errors == SslPolicyErrors.None
             &amp;&amp; validCerts.Contains(certificate.GetCertHashString()); // Compliant: trust only some certificates
-    };
+    };</code>
 </pre>
 <h2>See</h2>
 <ul>

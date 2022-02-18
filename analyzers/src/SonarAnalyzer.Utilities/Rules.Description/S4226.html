@@ -2,7 +2,7 @@
 <p>This rule raises an issue when an extension is declared in the same namespace as the class it is extending.</p>
 <h2>Noncompliant Code Example</h2>
 <pre>
-namespace MyLibrary
+<code data-lang="csharp">namespace MyLibrary
 {
     public class Foo
     {
@@ -16,12 +16,12 @@ namespace MyLibrary
             // ...
         }
     }
-}
+}</code>
 </pre>
 <h2>Compliant Solution</h2>
 <p>Using separate namespace:</p>
 <pre>
-namespace MyLibrary
+<code data-lang="csharp">namespace MyLibrary
 {
     public class Foo
     {
@@ -38,11 +38,11 @@ namespace Helpers
             // ...
         }
     }
-}
+}</code>
 </pre>
 <p>Merging the method in the class:</p>
 <pre>
-namespace MyLibrary
+<code data-lang="csharp">namespace MyLibrary
 {
     public class Foo
     {
@@ -52,6 +52,6 @@ namespace MyLibrary
             // ...
         }
     }
-}
+}</code>
 </pre>
 

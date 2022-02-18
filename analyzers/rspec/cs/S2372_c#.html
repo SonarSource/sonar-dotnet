@@ -3,23 +3,23 @@ method.</p>
 <p>It is valid to throw exceptions from indexed property getters and from property setters, which are not detected by this rule.</p>
 <h2>Noncompliant Code Example</h2>
 <pre>
-public int Foo
+<code data-lang="csharp">public int Foo
 {
     get
     {
         throw new Exception(); // Noncompliant
     }
-}
+}</code>
 </pre>
 <h2>Compliant Solution</h2>
 <pre>
-public int Foo
+<code data-lang="csharp">public int Foo
 {
     get
     {
         return 42;
     }
-}
+}</code>
 </pre>
 <h2>Exceptions</h2>
 <p>No issue is raised when the thrown exception derives from or is of type <code>NotImplementedException</code>, <code>NotSupportedException</code> or

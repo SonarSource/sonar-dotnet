@@ -1,16 +1,16 @@
 <p>Declaring multiple variable on one line is difficult to read.</p>
 <h2>Noncompliant Code Example</h2>
 <pre>
-Module Module1
+<code data-lang="vbnet">Module Module1
   Public Const AAA As Integer = 5, BBB = 42, CCC As String = "foo"  ' Noncompliant
-End Module
+End Module</code>
 </pre>
 <h2>Compliant Solution</h2>
 <pre>
-Module Module1
+<code data-lang="vbnet">Module Module1
   Public Const AAA As Integer = 5
   Public Const BBB = 42
   Public Const CCC as String = "foo"
-End Module
+End Module</code>
 </pre>
 

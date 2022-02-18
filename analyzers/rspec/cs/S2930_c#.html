@@ -41,7 +41,7 @@ aliased, returned, or passed to other methods.</p>
 <p>on both private fields and local variables.</p>
 <h2>Noncompliant Code Example</h2>
 <pre>
-public class ResourceHolder
+<code data-lang="csharp">public class ResourceHolder
 {
   private FileStream fs; // Noncompliant; Dispose or Close are never called
 
@@ -56,11 +56,11 @@ public class ResourceHolder
     var bytes = Encoding.UTF8.GetBytes(text);
     fs.Write(bytes, 0, bytes.Length);
   }
-}
+}</code>
 </pre>
 <h2>Compliant Solution</h2>
 <pre>
-public class ResourceHolder : IDisposable
+<code data-lang="csharp">public class ResourceHolder : IDisposable
 {
   private FileStream fs;
 
@@ -82,7 +82,7 @@ public class ResourceHolder : IDisposable
       fs.Write(bytes, 0, bytes.Length);
     }
   }
-}
+}</code>
 </pre>
 <h2>Exceptions</h2>
 <p><code>IDisposable</code> variables returned from a method or passed to other methods are ignored, as are local <code>IDisposable</code>s that are

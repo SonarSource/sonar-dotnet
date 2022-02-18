@@ -7,7 +7,7 @@ interface, is declared in an assembly that allows partially trusted callers and 
 not secured by a security check, but one or more of the regular constructors in the type is secured.</p>
 <h2>Noncompliant Code Example</h2>
 <pre>
-using System;
+<code data-lang="csharp">using System;
 using System.IO;
 using System.Runtime.Serialization;
 using System.Runtime.Serialization.Formatters.Binary;
@@ -38,11 +38,11 @@ namespace MyLibrary
            info.AddValue("n", n);
         }
     }
-}
+}</code>
 </pre>
 <h2>Compliant Solution</h2>
 <pre>
-using System;
+<code data-lang="csharp">using System;
 using System.IO;
 using System.Runtime.Serialization;
 using System.Runtime.Serialization.Formatters.Binary;
@@ -74,7 +74,7 @@ namespace MyLibrary
            info.AddValue("n", n);
         }
     }
-}
+}</code>
 </pre>
 <h2>See</h2>
 <ul>

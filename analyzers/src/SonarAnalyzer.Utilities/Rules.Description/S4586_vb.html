@@ -2,14 +2,14 @@
 <code>NullReferenceException</code> at runtime. This problem can be avoided by returning <code>Task.FromResult(Of T)(Nothing)</code> instead.</p>
 <h2>Noncompliant Code Example</h2>
 <pre>
-Public Function GetFooAsync() As Task(Of Object)
+<code data-lang="vbnet">Public Function GetFooAsync() As Task(Of Object)
     Return Nothing
-End Function
+End Function</code>
 </pre>
 <h2>Compliant Solution</h2>
 <pre>
-Public Function GetFooAsync() As Task(Of Object)
+<code data-lang="vbnet">Public Function GetFooAsync() As Task(Of Object)
     Return Task.FromResult(Of Object)(Nothing)
-End Function
+End Function</code>
 </pre>
 

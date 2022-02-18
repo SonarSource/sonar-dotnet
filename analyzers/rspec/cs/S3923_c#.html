@@ -2,7 +2,7 @@
 and something different should be executed, or there shouldn’t be a <code>switch</code>/<code>if</code> chain at all.</p>
 <h2>Noncompliant Code Example</h2>
 <pre>
-if (b == 0)  // Noncompliant
+<code data-lang="csharp">if (b == 0)  // Noncompliant
 {
     DoTheThing();
 }
@@ -26,7 +26,7 @@ switch (i) // Noncompliant
         break;
     default:
         DoSomething();
-}
+}</code>
 </pre>
 <h2>Exceptions</h2>
 <p>This rule does not apply to <code>if</code> chains without <code>else</code>-s, or to <code>switch</code>-es without <code>default</code>

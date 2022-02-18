@@ -2,7 +2,7 @@
 <p>Ideally, every loop should have a single termination condition.</p>
 <h2>Noncompliant Code Example</h2>
 <pre>
-int i = 0;
+<code data-lang="csharp">int i = 0;
 while (true)
 {
   if (i == 10)
@@ -12,15 +12,15 @@ while (true)
 
   Console.WriteLine(i);
   i++;
-}
+}</code>
 </pre>
 <h2>Compliant Solution</h2>
 <pre>
-int i = 0;
+<code data-lang="csharp">int i = 0;
 while (i != 10) // Compliant
 {
   Console.WriteLine(i);
   i++;
-}
+}</code>
 </pre>
 

@@ -2,7 +2,7 @@
 block, and the masked’s exception message and stack trace will be lost.</p>
 <h2>Noncompliant Code Example</h2>
 <pre>
-try
+<code data-lang="csharp">try
 {
   /* some work which end up throwing an exception */
   throw new ArgumentException();
@@ -11,11 +11,11 @@ finally
 {
   /* clean up */
   throw new InvalidOperationException();       // Noncompliant; will mask the ArgumentException
-}
+}</code>
 </pre>
 <h2>Compliant Solution</h2>
 <pre>
-try
+<code data-lang="csharp">try
 {
   /* some work which end up throwing an exception */
   throw new ArgumentException();
@@ -23,6 +23,6 @@ try
 finally
 {
   /* clean up */                       // Compliant
-}
+}</code>
 </pre>
 

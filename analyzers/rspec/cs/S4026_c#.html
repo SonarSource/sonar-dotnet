@@ -4,7 +4,7 @@ This improves lookup performance for the first resource loaded.</p>
 <code>System.Resources.NeutralResourcesLanguageAttribute</code> applied to it.</p>
 <h2>Noncompliant Code Example</h2>
 <pre>
-using System;
+<code data-lang="text">using System;
 
 public class MyClass // Noncompliant
 {
@@ -23,11 +23,11 @@ public class MyClass // Noncompliant
       string name = Console.ReadLine();
       Console.WriteLine("{0} {1}!", greeting, name);
    }
-}
+}</code>
 </pre>
 <h2>Compliant Solution</h2>
 <pre>
-using System;
+<code data-lang="text">using System;
 
 [assembly:NeutralResourcesLanguageAttribute("en")]
 public class MyClass
@@ -47,6 +47,6 @@ public class MyClass
       string name = Console.ReadLine();
       Console.WriteLine("{0} {1}!", greeting, name);
    }
-}
+}</code>
 </pre>
 

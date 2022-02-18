@@ -2,7 +2,7 @@
 reset with the second syntax, making debugging a lot harder.</p>
 <h2>Noncompliant Code Example</h2>
 <pre>
-try
+<code data-lang="csharp">try
 {}
 catch(ExceptionType1 exc)
 {
@@ -12,11 +12,11 @@ catch(ExceptionType1 exc)
 catch (ExceptionType2 exc)
 {
   throw new Exception("My custom message", exc);  // Compliant; stack trace preserved
-}
+}</code>
 </pre>
 <h2>Compliant Solution</h2>
 <pre>
-try
+<code data-lang="csharp">try
 {}
 catch(ExceptionType1 exc)
 {
@@ -26,6 +26,6 @@ catch(ExceptionType1 exc)
 catch (ExceptionType2 exc)
 {
   throw new Exception("My custom message", exc);
-}
+}</code>
 </pre>
 

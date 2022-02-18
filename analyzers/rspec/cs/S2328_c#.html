@@ -3,7 +3,7 @@ non-<code>readonly</code> fields and those fields change after the object is sto
 <code>Hashtable</code>. Any subsequent test to see if the object is in the <code>Hashtable</code> will return a false negative.</p>
 <h2>Noncompliant Code Example</h2>
 <pre>
-public class Person
+<code data-lang="csharp">public class Person
 {
   public int age;
   public string name;
@@ -14,11 +14,11 @@ public class Person
     hash += this.age.GetHashCode(); // Noncompliant
     hash += this.name.GetHashCode(); // Noncompliant
     return hash;
-  }
+  }</code>
 </pre>
 <h2>Compliant Solution</h2>
 <pre>
-public class Person
+<code data-lang="csharp">public class Person
 {
   public readonly DateTime birthday;
   public string name;
@@ -28,6 +28,6 @@ public class Person
     int hash = 12;
     hash += this.birthday.GetHashCode();
     return hash;
-  }
+  }</code>
 </pre>
 

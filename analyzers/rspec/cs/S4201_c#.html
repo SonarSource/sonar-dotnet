@@ -2,14 +2,14 @@
 redundant.</p>
 <h2>Noncompliant Code Example</h2>
 <pre>
-if (x != null &amp;&amp; x is MyClass) { ... }  // Noncompliant
+<code data-lang="csharp">if (x != null &amp;&amp; x is MyClass) { ... }  // Noncompliant
 
-if (x == null || !(x is MyClass)) { ... } // Noncompliant
+if (x == null || !(x is MyClass)) { ... } // Noncompliant</code>
 </pre>
 <h2>Compliant Solution</h2>
 <pre>
-if (x is MyClass) { ... }
+<code data-lang="csharp">if (x is MyClass) { ... }
 
-if (!(x is MyClass)) { ... }
+if (!(x is MyClass)) { ... }</code>
 </pre>
 

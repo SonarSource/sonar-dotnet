@@ -3,12 +3,12 @@ field value. Altering or bypassing the accessibility of classes, methods, or fie
 errors.</p>
 <h2>Noncompliant Code Example</h2>
 <pre>
-using System.Reflection;
+<code data-lang="csharp">using System.Reflection;
 
 Type dynClass = Type.GetType("MyInternalClass");
 // Noncompliant. Using BindingFlags.NonPublic will return non-public members
 BindingFlags bindingAttr = BindingFlags.NonPublic | BindingFlags.Static;
 MethodInfo dynMethod = dynClass.GetMethod("mymethod", bindingAttr);
-object result = dynMethod.Invoke(dynClass, null);
+object result = dynMethod.Invoke(dynClass, null);</code>
 </pre>
 

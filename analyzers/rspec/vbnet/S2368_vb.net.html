@@ -3,15 +3,15 @@ use them. Moreover, what exactly to pass to such parameters is not intuitive. Th
 internally.</p>
 <h2>Noncompliant Code Example</h2>
 <pre>
-Module Module1
+<code data-lang="text">Module Module1
     Sub WriteMatrix(ByVal matrix As Integer()()) ' Non-Compliant
         ' ...
     End Sub
-End Module
+End Module</code>
 </pre>
 <h2>Compliant Solution</h2>
 <pre>
-Class Matrix
+<code data-lang="text">Class Matrix
     ' ...
 End Class
 
@@ -19,6 +19,6 @@ Module Module1
     Sub WriteMatrix(ByVal matrix As Matrix)      ' Compliant
         ' ...
     End Sub
-End Module
+End Module</code>
 </pre>
 

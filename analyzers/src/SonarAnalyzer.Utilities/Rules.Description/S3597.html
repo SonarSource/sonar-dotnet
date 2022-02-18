@@ -6,19 +6,19 @@ inside <code>ServiceContract</code> classes or interfaces; thus, this rule also 
 type of <code>OperationContract</code> methods.</p>
 <h2>Noncompliant Code Example</h2>
 <pre>
-[ServiceContract]
+<code data-lang="csharp">[ServiceContract]
 interface IMyService // Noncompliant
 {
   int MyServiceMethod();
-}
+}</code>
 </pre>
 <h2>Compliant Solution</h2>
 <pre>
-[ServiceContract]
+<code data-lang="csharp">[ServiceContract]
 interface IMyService
 {
   [OperationContract]
   int MyServiceMethod();
-}
+}</code>
 </pre>
 

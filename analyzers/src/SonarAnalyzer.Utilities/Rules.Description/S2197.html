@@ -2,23 +2,23 @@
 equality with a positive number (or a negative one) could result in unexpected results.</p>
 <h2>Noncompliant Code Example</h2>
 <pre>
-public bool IsOdd(int x)
+<code data-lang="csharp">public bool IsOdd(int x)
 {
   return x % 2 == 1;  // Noncompliant; if x is an odd negative, x % 2 == -1
-}
+}</code>
 </pre>
 <h2>Compliant Solution</h2>
 <pre>
-public bool IsOdd(int x)
+<code data-lang="csharp">public bool IsOdd(int x)
 {
   return x %2 != 0;
-}
+}</code>
 </pre>
 <p>or</p>
 <pre>
-public bool IsOdd(uint x)
+<code data-lang="csharp">public bool IsOdd(uint x)
 {
   return x %2 == 1;
-}
+}</code>
 </pre>
 

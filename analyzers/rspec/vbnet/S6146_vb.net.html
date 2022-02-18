@@ -4,7 +4,7 @@ to unexpected runtime errors due to typos in variable names.</p>
 <p><code>Option Explicit</code> can be set in project properties or overridden in individual source files.</p>
 <h2>Noncompliant Code Example</h2>
 <pre>
-Option Explicit Off ' Noncompliant
+<code data-lang="text">Option Explicit Off ' Noncompliant
 
 Module MainMod
 
@@ -19,11 +19,11 @@ Module MainMod
         ' ...
     End Sub
 
-End Module
+End Module</code>
 </pre>
 <h2>Compliant Solution</h2>
 <pre>
-Option Explicit On
+<code data-lang="text">Option Explicit On
 
 Module MainMod
 
@@ -38,7 +38,7 @@ Module MainMod
         ' ...
     End Sub
 
-End Module
+End Module</code>
 </pre>
 <h2>See</h2>
 <ul>

@@ -2,16 +2,16 @@
 events using the present and past tense.</p>
 <h2>Noncompliant Code Example</h2>
 <pre>
-Class Foo
+<code data-lang="vbnet">Class Foo
     Event BeforeClose() ' Noncompliant
     Event AfterClose()  ' Noncompliant
-End Class
+End Class</code>
 </pre>
 <h2>Compliant Solution</h2>
 <pre>
-Class Foo
+<code data-lang="vbnet">Class Foo
     Event Closing()     ' Compliant
     Event Closed()      ' Compliant
-End Class
+End Class</code>
 </pre>
 

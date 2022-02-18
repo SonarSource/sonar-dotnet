@@ -41,10 +41,10 @@ public void Bar(SqlConnection connection, string param)
 </pre>
 <h2>Compliant Solution</h2>
 <pre>
-public void Foo(DbContext context, string query, string param)
+<code data-lang="csharp">public void Foo(DbContext context, string query, string param)
 {
     context.Database.ExecuteSqlCommand("SELECT * FROM mytable WHERE mycol=@p0", param); // Compliant, it's a parametrized safe query
-}
+}</code>
 </pre>
 <h2>See</h2>
 <ul>

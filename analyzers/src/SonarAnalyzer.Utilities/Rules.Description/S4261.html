@@ -3,7 +3,7 @@
 Conversely methods which do not return such Tasks should not have an "Async" suffix in their names.</p>
 <h2>Noncompliant Code Example</h2>
 <pre>
-using System;
+<code data-lang="csharp">using System;
 using  System.Threading.Tasks;
 
 namespace myLibrary
@@ -14,11 +14,11 @@ namespace myLibrary
     public Task Read(byte [] buffer, int offset, int count, // Noncompliant
                                 CancellationToken cancellationToken)
   }
-}
+}</code>
 </pre>
 <h2>Compliant Solution</h2>
 <pre>
-using System;
+<code data-lang="csharp">using System;
 using  System.Threading.Tasks;
 
 namespace myLibrary
@@ -28,7 +28,7 @@ namespace myLibrary
   {
     public Task ReadAsync(byte [] buffer, int offset, int count, CancellationToken cancellationToken)
   }
-}
+}</code>
 </pre>
 <h2>Exceptions</h2>
 <p>This rule doesn’t raise an issue when the method is an override or part of the implementation of an interface since it can not be renamed.</p>

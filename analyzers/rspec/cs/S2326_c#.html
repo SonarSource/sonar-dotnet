@@ -2,22 +2,22 @@
 parameters should be removed.</p>
 <h2>Noncompliant Code Example</h2>
 <pre>
-public class MoreMath&lt;T&gt;   // Noncompliant; &lt;T&gt; is ignored
+<code data-lang="text">public class MoreMath&lt;T&gt;   // Noncompliant; &lt;T&gt; is ignored
 {
   public int Add&lt;T&gt;(int a, int b) // Noncompliant; &lt;T&gt; is ignored
   {
     return a + b;
   }
-}
+}</code>
 </pre>
 <h2>Compliant Solution</h2>
 <pre>
-public class MoreMath
+<code data-lang="text">public class MoreMath
 {
   public int Add (int a, int b)
   {
     return a + b;
   }
-}
+}</code>
 </pre>
 

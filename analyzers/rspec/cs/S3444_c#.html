@@ -8,7 +8,7 @@ ambiguity and be able to access the member. Instead, it is better to resolve the
 </ul>
 <h2>Noncompliant Code Example</h2>
 <pre>
-public interface IBase1
+<code data-lang="csharp">public interface IBase1
 {
   string SomeProperty { get; set; }
 }
@@ -35,11 +35,11 @@ public class MyClass : IDerived
     Console.WriteLine(((IBase2)myClass).SomeProperty); // Writes "Hello" as expected
     Console.WriteLine(((IDerived)myClass).SomeProperty); // Error CS0229 Ambiguity between 'IBase1.SomeProperty' and 'IBase2.SomeProperty'
   }
-}
+}</code>
 </pre>
 <h2>Compliant Solution</h2>
 <pre>
-public interface IDerived : IBase1, IBase2
+<code data-lang="csharp">public interface IDerived : IBase1, IBase2
 {
   new string SomeProperty { get; set; }
 }
@@ -57,11 +57,11 @@ public class MyClass : IDerived
     Console.WriteLine(((IBase2)myClass).SomeProperty); // Writes "Hello" as expected
     Console.WriteLine(((IDerived)myClass).SomeProperty); // Writes "Hello" as expected
   }
-}
+}</code>
 </pre>
 <p>or</p>
 <pre>
-public interface IBase1
+<code data-lang="csharp">public interface IBase1
 {
   string SomePropertyOne { get; set; }
 }
@@ -73,6 +73,6 @@ public interface IBase2
 
 public interface IDerived : IBase1, IBase2
 {
-}
+}</code>
 </pre>
 

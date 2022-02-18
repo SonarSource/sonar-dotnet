@@ -2,7 +2,7 @@
 replaced with a setter method.</p>
 <h2>Noncompliant Code Example</h2>
 <pre>
-class Program
+<code data-lang="csharp">class Program
 {
     public int Foo  //Non-Compliant
     {
@@ -11,11 +11,11 @@ class Program
             // ... some code ...
         }
     }
-}
+}</code>
 </pre>
 <h2>Compliant Solution</h2>
 <pre>
-class Program
+<code data-lang="csharp">class Program
 {
     private int foo;
 
@@ -24,13 +24,13 @@ class Program
         // ... some code ...
         foo = value;
     }
-}
+}</code>
 </pre>
 <p>or</p>
 <pre>
-class Program
+<code data-lang="csharp">class Program
 {
   public int Foo { get; set; } // Compliant
-}
+}</code>
 </pre>
 

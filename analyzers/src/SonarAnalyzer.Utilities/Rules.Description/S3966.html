@@ -8,17 +8,17 @@ implementation still do it. Thus it is safer to not dispose an object twice when
 <code>using</code> is used with a direct call to <code>Dispose()</code>.</p>
 <h2>Noncompliant Code Example</h2>
 <pre>
-using (var d = new Disposable()) // Noncompliant
+<code data-lang="csharp">using (var d = new Disposable()) // Noncompliant
 {
     d.Dispose();
-}
+}</code>
 </pre>
 <pre>
-using var d = new Disposable();
-d.Dispose(); // Noncompliant {{Refactor this code to make sure 'd' is disposed only once.}}
+<code data-lang="csharp">using var d = new Disposable();
+d.Dispose(); // Noncompliant {{Refactor this code to make sure 'd' is disposed only once.}}</code>
 </pre>
 <h2>Compliant Solution</h2>
 <pre>
-using var d = new Disposable();
+<code data-lang="csharp">using var d = new Disposable();</code>
 </pre>
 

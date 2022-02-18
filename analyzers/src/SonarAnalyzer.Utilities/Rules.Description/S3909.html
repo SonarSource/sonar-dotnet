@@ -3,7 +3,7 @@ the older, non generic, interfaces.</p>
 <p>This rule raises an issue when a public type implements <code>System.Collections.IEnumerable</code>.</p>
 <h2>Noncompliant Code Example</h2>
 <pre>
-using System;
+<code data-lang="csharp">using System;
 using System.Collections;
 
 public class MyData
@@ -21,11 +21,11 @@ public class MyList : CollectionBase // Noncompliant
   }
 
   // ...
-}
+}</code>
 </pre>
 <h2>Compliant Solution</h2>
 <pre>
-using System;
+<code data-lang="csharp">using System;
 using System.Collections.ObjectModel;
 
 public class MyData
@@ -38,6 +38,6 @@ public class MyData
 public class MyList : Collection&lt;MyData&gt;
 {
   // Implementation...
-}
+}</code>
 </pre>
 

@@ -3,7 +3,7 @@ should be used instead to make the code more readable and maintainable.</p>
 <h2>Noncompliant Code Example</h2>
 <p>With a "Maximum number of case" set to 4</p>
 <pre>
-public class TooManyCase
+<code data-lang="csharp">public class TooManyCase
 {
     public int switchCase(char ch)
     {
@@ -25,11 +25,11 @@ public class TooManyCase
                 return 6;
         }
     }
-}
+}</code>
 </pre>
 <h2>Compliant Solution</h2>
 <pre>
-using System.Collections.Generic;
+<code data-lang="csharp">using System.Collections.Generic;
 
 public class TooManyCase
 {
@@ -48,7 +48,7 @@ public class TooManyCase
             return 6;
         }
     }
-}
+}</code>
 </pre>
 <h2>Exceptions</h2>
 <p>This rule ignores <code>switch</code>es over <code>Enum</code>s and empty, fall-through cases.</p>

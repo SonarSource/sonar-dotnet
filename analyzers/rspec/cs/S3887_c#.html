@@ -5,34 +5,34 @@ misleading, and you’re likely to not be getting the behavior you expect.</p>
 <p>This rule raises an issue when a non-private, <code>readonly</code> field is an array or collection.</p>
 <h2>Noncompliant Code Example</h2>
 <pre>
-public class MyClass
+<code data-lang="text">public class MyClass
 {
   public readonly string[] strings;  // Noncompliant
 
-  // ...
+  // ...</code>
 </pre>
 <h2>Compliant Solution</h2>
 <pre>
-public class MyClass
+<code data-lang="text">public class MyClass
 {
   public string[] strings;
 
-  // ...
+  // ...</code>
 </pre>
 <p>or</p>
 <pre>
-public class MyClass
+<code data-lang="text">public class MyClass
 {
   public readonly ImmutableArray&lt;string&gt; strings;
 
-  // ...
+  // ...</code>
 </pre>
 <p>or</p>
 <pre>
-public class MyClass
+<code data-lang="text">public class MyClass
 {
   private readonly string[] strings;
 
-  // ...
+  // ...</code>
 </pre>
 

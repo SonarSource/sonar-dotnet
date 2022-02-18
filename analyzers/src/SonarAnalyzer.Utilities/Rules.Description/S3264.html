@@ -1,7 +1,7 @@
 <p>Events that are not invoked anywhere are dead code, and there’s no good reason to keep them in the source.</p>
 <h2>Noncompliant Code Example</h2>
 <pre>
-class UninvokedEventSample
+<code data-lang="csharp">class UninvokedEventSample
 {
     private event Action&lt;object, EventArgs&gt; Happened; //Noncompliant
 
@@ -17,6 +17,6 @@ class UninvokedEventSample
             // Happened(this, null); // the event is never triggered, because this line is commented out.
         }
     }
-}
+}</code>
 </pre>
 

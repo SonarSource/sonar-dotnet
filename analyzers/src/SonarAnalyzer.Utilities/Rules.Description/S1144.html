@@ -3,16 +3,16 @@ unnecessary, inoperative code that should be removed. Cleaning out dead code dec
 understand the program and preventing bugs from being introduced.</p>
 <h2>Noncompliant Code Example</h2>
 <pre>
-public class Foo
+<code data-lang="csharp">public class Foo
 {
     private void UnusedPrivateMethod() {...} // Noncompliant
 
     private class UnusedClass {...} // Noncompliant
-}
+}</code>
 </pre>
 <h2>Compliant Solution</h2>
 <pre>
-public class Foo
+<code data-lang="csharp">public class Foo
 {
     public Foo()
     {
@@ -25,7 +25,7 @@ public class Foo
     }
 
     private class UsedClass {...}
-}
+}</code>
 </pre>
 <h2>Exceptions</h2>
 <p>This rule doesn’t raise issues on:</p>
