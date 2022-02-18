@@ -21,6 +21,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using Microsoft.CodeAnalysis;
+using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
 using SonarAnalyzer.SymbolicExecution.Constraints;
 using StyleCop.Analyzers.Lightup;
@@ -46,7 +47,7 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn.RuleChecks
             "TryEnterWriteLock"
         };
 
-        protected abstract void Visit(SyntaxNode node, LockAcquireReleaseCollector collector);
+        protected abstract ISafeSyntaxWalker GetSyntaxWalker(LockAcquireReleaseCollector collector);
 
         public override ProgramState PostProcess(SymbolicContext context)
         {
@@ -118,7 +119,11 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn.RuleChecks
         public override bool ShouldExecute()
         {
             var collector = new LockAcquireReleaseCollector();
-            Visit(NodeContext.Node, collector);
+            var walker = GetSyntaxWalker(collector);
+            foreach (var child in NodeContext.Node.ChildNodes())
+            {
+                walker.SafeVisit(child);
+            }
             return collector.LockAcquiredAndReleased;
         }
 
@@ -196,18 +201,9 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn.RuleChecks
 
             public void RegisterIdentifier(string name)
             {
-                lockAcquired |= IsLockType(name) || IsLockMethod(name);
-                lockReleased |= IsReleaseMethod(name);
+                lockAcquired = lockAcquired || LockTypes.Contains(name) || LockMethods.Contains(name);
+                lockReleased = lockReleased || ReleaseMethods.Contains(name);
             }
-
-            private static bool IsLockType(string name) =>
-                LockTypes.Contains(name);
-
-            private static bool IsLockMethod(string name) =>
-                LockMethods.Contains(name);
-
-            private static bool IsReleaseMethod(string name) =>
-                ReleaseMethods.Contains(name);
         }
     }
 }

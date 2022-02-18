@@ -19,8 +19,8 @@
  */
 
 using Microsoft.CodeAnalysis;
-using Microsoft.CodeAnalysis.VisualBasic;
 using Microsoft.CodeAnalysis.VisualBasic.Syntax;
+using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
 
 namespace SonarAnalyzer.SymbolicExecution.Roslyn.RuleChecks.VisualBasic
@@ -31,20 +31,14 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn.RuleChecks.VisualBasic
 
         protected override DiagnosticDescriptor Rule => S2222;
 
-        protected override void Visit(SyntaxNode node, LockAcquireReleaseCollector collector)
-        {
-            var walker = new LockAcquireReleaseWalker(collector);
-            walker.SafeVisit(NodeContext.Node);
-        }
+        protected override ISafeSyntaxWalker GetSyntaxWalker(LockAcquireReleaseCollector collector) => new LockAcquireReleaseWalker(collector);
 
-        private sealed class LockAcquireReleaseWalker : VisualBasicSyntaxWalker
+        private sealed class LockAcquireReleaseWalker : SafeVisualBasicSyntaxWalker
         {
             private readonly LockAcquireReleaseCollector collector;
 
-            public LockAcquireReleaseWalker(LockAcquireReleaseCollector collector)
-            {
+            public LockAcquireReleaseWalker(LockAcquireReleaseCollector collector) =>
                 this.collector = collector;
-            }
 
             public override void Visit(SyntaxNode node)
             {
