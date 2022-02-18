@@ -57,10 +57,10 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn.RuleChecks
                     && context.Operation.Parent.AsAssignment() is { } assignment
                     && objectCreation.Arguments.Length > 0
                     && objectCreation.Arguments.First().ToArgument().Value is { } firstArgument
-                    && context.State[firstArgument] is { } firstArgumentState
-                    && firstArgumentState.HasConstraint(BoolConstraint.True))
+                    && context.State[firstArgument] is { } firstArgumentValue
+                    && firstArgumentValue.HasConstraint(BoolConstraint.True)
+                    && assignment.Target.TrackedSymbol() is { } symbol)
                 {
-                    var symbol = assignment.Target.TrackedSymbol();
                     lastSymbolLock[symbol] = new IOperationWrapperSonar(objectCreation.WrappedOperation);
                     return AddLock(context, objectCreation.WrappedOperation);
                 }
