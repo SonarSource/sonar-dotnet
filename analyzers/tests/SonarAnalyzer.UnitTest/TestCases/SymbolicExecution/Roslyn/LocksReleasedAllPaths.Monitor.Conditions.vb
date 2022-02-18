@@ -202,13 +202,10 @@ Namespace Monitor_Conditions
 
         Public Sub Lambda()
             Dim l = Function(value)
-                Monitor.Enter(Obj) ' FN, lambdas are not supported yet
+                Monitor.Enter(Obj) ' Noncompliant
                 If value = 42 Then Monitor.Exit(Obj)
                 Return value
             End Function
-
         End Sub
-
     End Class
-
 End Namespace

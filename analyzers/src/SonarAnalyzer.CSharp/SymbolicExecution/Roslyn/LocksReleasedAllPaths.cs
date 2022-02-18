@@ -19,9 +19,8 @@
  */
 
 using Microsoft.CodeAnalysis;
-using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
-using SonarAnalyzer.Extensions;
+using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
 using StyleCop.Analyzers.Lightup;
 
@@ -33,26 +32,20 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn.RuleChecks.CSharp
 
         protected override DiagnosticDescriptor Rule => S2222;
 
-        protected override void Visit(SyntaxNode node, LockAcquireReleaseCollector collector)
-        {
-            var walker = new LockAcquireReleaseWalker(collector);
-            walker.SafeVisit(NodeContext.Node);
-        }
+        protected override ISafeSyntaxWalker GetSyntaxWalker(LockAcquireReleaseCollector collector) => new LockAcquireReleaseWalker(collector);
 
-        private sealed class LockAcquireReleaseWalker : CSharpSyntaxWalker
+        private sealed class LockAcquireReleaseWalker : SafeCSharpSyntaxWalker
         {
             private readonly LockAcquireReleaseCollector collector;
 
-            public LockAcquireReleaseWalker(LockAcquireReleaseCollector collector)
-            {
+            public LockAcquireReleaseWalker(LockAcquireReleaseCollector collector) =>
                 this.collector = collector;
-            }
 
             public override void Visit(SyntaxNode node)
             {
                 if (collector.LockAcquiredAndReleased
-                    // Lambda expressions and local functions are analyzed separately.
-                    || node is LambdaExpressionSyntax or ParenthesizedLambdaExpressionSyntax
+                    // Lambda expressions, anonymous methods and local functions are analyzed separately.
+                    || node is AnonymousFunctionExpressionSyntax
                     || LocalFunctionStatementSyntaxWrapper.IsInstance(node))
                 {
                     return;
