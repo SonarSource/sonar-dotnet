@@ -208,5 +208,71 @@ namespace ReaderWriterLockSlim_Type
                 readerWriterLockSlim.ExitReadLock();
             }
         }
+
+        public void EarlyExit()
+        {
+            if (readerWriterLockSlim.TryEnterReadLock(0) == false) // Noncompliant FP - https://github.com/SonarSource/sonar-dotnet/issues/5415
+            {
+                return;
+            }
+
+            try
+            {
+            }
+            finally
+            {
+                readerWriterLockSlim.ExitReadLock();
+            }
+        }
+
+        public void EarlyExit_UnaryOperator()
+        {
+            if (!readerWriterLockSlim.TryEnterReadLock(0)) // Noncompliant FP - https://github.com/SonarSource/sonar-dotnet/issues/5415
+            {
+                return;
+            }
+
+            try
+            {
+            }
+            finally
+            {
+                readerWriterLockSlim.ExitReadLock();
+            }
+        }
+
+        public void Throw_Finally(object param)
+        {
+            readerWriterLockSlim.EnterReadLock(); // Noncompliant FP, there are multiple ocurrences on peach. Should be handled by throw implementation.
+            try
+            {
+                if (param == null)
+                    throw new ObjectDisposedException("");
+
+                return;
+            }
+            finally
+            {
+                readerWriterLockSlim.ExitReadLock();
+            }
+        }
+
+        public void IsReadLockHeld()
+        {
+            readerWriterLockSlim.EnterReadLock(); // Noncompliant FP, https://github.com/SonarSource/sonar-dotnet/issues/5416
+            if (readerWriterLockSlim.IsReadLockHeld)
+            {
+                readerWriterLockSlim.ExitReadLock();
+            }
+        }
+
+        public void IsWriteLockHeld()
+        {
+            readerWriterLockSlim.EnterWriteLock(); // Noncompliant FP, https://github.com/SonarSource/sonar-dotnet/issues/5416
+            if (readerWriterLockSlim.IsWriteLockHeld)
+            {
+                readerWriterLockSlim.ExitWriteLock();
+            }
+        }
     }
 }
