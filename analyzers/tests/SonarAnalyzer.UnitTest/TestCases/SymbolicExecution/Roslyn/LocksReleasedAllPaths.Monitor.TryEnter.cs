@@ -139,5 +139,47 @@ namespace Monitor_TryEnter
                 Monitor.Exit(obj);
             }
         }
+
+        public void TryEnterInsideIf_Finally()
+        {
+            if (Monitor.TryEnter(obj, 500)) // Noncompliant FP - there are multiple occurences of this on peach. https://github.com/SonarSource/sonar-dotnet/issues/5415
+            {
+                try
+                {
+                }
+                finally
+                {
+                    Monitor.Exit(obj);
+                }
+            }
+        }
+
+        public void TryEnterInsideIf_Finally_WithVar()
+        {
+            bool lockTaken = false;
+            try
+            {
+                lockTaken = Monitor.TryEnter(obj); // Noncompliant FP - there are multiple occurences of this on peach. https://github.com/SonarSource/sonar-dotnet/issues/5415
+            }
+            finally
+            {
+                if (lockTaken)
+                    Monitor.Exit(obj);
+            }
+        }
+
+        public void TryEnter_EarlyExit()
+        {
+            if (Monitor.TryEnter(obj) == false) // Noncompliant FP - there are multiple occurences of this on peach. https://github.com/SonarSource/sonar-dotnet/issues/5415
+                return;
+
+            try
+            {
+            }
+            finally
+            {
+                Monitor.Exit(obj);
+            }
+        }
     }
 }
