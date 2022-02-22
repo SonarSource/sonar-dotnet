@@ -36,13 +36,17 @@ namespace SonarAnalyzer.Rules.CSharp
         private const string DiagnosticId = "S2187";
         private const string MessageFormat = "Add some tests to this {0}.";
 
-        private static readonly ImmutableArray<KnownType> HandledGlobalSetupAndCleanUpAttributes =
+        private static readonly ImmutableArray<KnownType> HandledSetupAndCleanUpAttributes =
             ImmutableArray.Create(
                 // Only applies to MSTest.
                 // NUnit has equivalent attributes, but they can only be applied to classes
                 // marked with [SetupFixture], which cannot contain tests.
                 KnownType.Microsoft_VisualStudio_TestTools_UnitTesting_AssemblyInitializeAttribute,
-                KnownType.Microsoft_VisualStudio_TestTools_UnitTesting_AssemblyCleanupAttribute);
+                KnownType.Microsoft_VisualStudio_TestTools_UnitTesting_AssemblyCleanupAttribute,
+                KnownType.Microsoft_VisualStudio_TestTools_UnitTesting_ClassCleanupAttribute,
+                KnownType.Microsoft_VisualStudio_TestTools_UnitTesting_ClassInitializeAttribute,
+                KnownType.Microsoft_VisualStudio_TestTools_UnitTesting_TestCleanupAttribute,
+                KnownType.Microsoft_VisualStudio_TestTools_UnitTesting_TestInitializeAttribute);
 
         private static readonly DiagnosticDescriptor Rule =
             DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
@@ -89,6 +93,6 @@ namespace SonarAnalyzer.Rules.CSharp
             || HasSetupOrCleanupAttributes(classSymbol);
 
         private static bool HasSetupOrCleanupAttributes(INamedTypeSymbol classSymbol) =>
-            classSymbol.GetMembers().OfType<IMethodSymbol>().Any(m => m.GetAttributes(HandledGlobalSetupAndCleanUpAttributes).Any());
+            classSymbol.GetMembers().OfType<IMethodSymbol>().Any(m => m.GetAttributes(HandledSetupAndCleanUpAttributes).Any());
     }
 }

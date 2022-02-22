@@ -113,6 +113,74 @@ namespace TestSetupAndCleanupAttributes
         {
         }
     }
+
+    // Reproducers for https://github.com/SonarSource/sonar-dotnet/issues/5394
+
+    [TestClass]
+    public class SetupAttributes4
+    {
+        [TestInitialize]
+        public static void BeforeTests(TestContext context)
+        {
+        }
+    }
+
+    [TestClass]
+    public static class SetupAttributes5
+    {
+        [TestCleanup]
+        public static void AfterTests()
+        {
+        }
+    }
+
+
+    [TestClass]
+    public static class SetupAttributes6
+    {
+        [TestInitialize]
+        public static void BeforeTests(TestContext context)
+        {
+        }
+
+        [TestCleanup]
+        public static void AfterTests()
+        {
+        }
+    }
+
+    [TestClass]
+    public class SetupAttributes7
+    {
+        [ClassInitializeAttribute]
+        public static void BeforeTests(TestContext context)
+        {
+        }
+    }
+
+    [TestClass]
+    public static class SetupAttributes8
+    {
+        [ClassCleanupAttribute]
+        public static void AfterTests()
+        {
+        }
+    }
+
+
+    [TestClass]
+    public static class SetupAttributes9
+    {
+        [ClassInitializeAttribute]
+        public static void BeforeTests(TestContext context)
+        {
+        }
+
+        [ClassCleanupAttribute]
+        public static void AfterTests()
+        {
+        }
+    }
 }
 
 namespace DerivedAttributes
