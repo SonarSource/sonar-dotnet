@@ -144,5 +144,21 @@ public interface IInterface
     IInterface() {} // Error [CS0526]
 }
 ", new UnusedPrivateMember(), CompilationErrorBehavior.Ignore);
+
+        [TestMethod]
+        public void UnusedPrivateMember_RecordPositionalConstructor() =>
+            builder.AddSnippet(@"
+// https://github.com/SonarSource/sonar-dotnet/issues/5381
+public abstract record Foo
+{
+    Foo(string value) // Noncompliant
+    {
+        Value = value;
+    }
+
+    public string Value { get; }
+
+    public sealed record Bar(string Value) : Foo(Value);
+}").WithOptions(ParseOptionsHelper.FromCSharp10).Verify();
     }
 }
