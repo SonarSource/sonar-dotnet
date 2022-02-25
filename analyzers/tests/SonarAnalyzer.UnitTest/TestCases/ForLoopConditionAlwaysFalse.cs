@@ -54,6 +54,11 @@ namespace Tests.Diagnostics
             var z = 0;
             for (int i = 0; i < z; i++) { } // FN - we only check for literals in the condition
             for (; z < 0; z++) { } // FN - we only check for initializers inside the loop statement
+
+            // Reproducer for https://github.com/SonarSource/sonar-dotnet/issues/5428
+            for (float n = 0.0F; n > -0.1F; n -= 0.005F) { } // Noncompliant FP
+            for (double n = 0.0; n > -0.1; n -= 0.005) { } // Noncompliant FP
+            for (var n = 0.0; n > -0.1; n -= 0.005) { } // Noncompliant FP
         }
     }
 }
