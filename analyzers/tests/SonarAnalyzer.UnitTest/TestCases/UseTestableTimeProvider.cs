@@ -8,12 +8,18 @@ public class DateTimeAsProvider
         //        ^^^^^^^^^^^^
         var utc = DateTime.UtcNow; // Noncompliant
         var today = DateTime.Today; // Noncompliant
+
+        var offsetNow = DateTimeOffset.Now; // Noncompliant
+        var offsetUTC = DateTimeOffset.UtcNow; // Noncompliant
     }
 
     public void CompliantAre()
     {
         var other = DateTime.DaysInMonth(2000, 2); // Compliant
         var noSystemDateTime = NotSystem.DateTime.Now; // Compliant
+
+        var otherOffset = DateTimeOffset.MaxValue; // Compliant
+        var noSystemDateTimeOffset = NotSystem.DateTimeOffset.Now; // Compliant
     }
 }
 
@@ -22,5 +28,10 @@ namespace NotSystem
     public class DateTime
     {
         public static DateTime Now => new DateTime();
+    }
+
+    public class DateTimeOffset
+    {
+        public static DateTimeOffset Now => new DateTimeOffset();
     }
 }
