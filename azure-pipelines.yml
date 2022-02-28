@@ -467,7 +467,7 @@ stages:
           CSharp:
             testClasses: 'com.sonar.it.csharp.Tests'
           Others:
-            testClasses: 'com.sonar.it.vbnet.Tests,com.sonar.it.shared.ScannerCliTest'
+            testClasses: 'com.sonar.it.vbnet.Tests,com.sonar.it.shared.Tests'
       steps:
       - task: DownloadSecureFile@1
         displayName: 'Download Maven settings'
