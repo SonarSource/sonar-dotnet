@@ -60,7 +60,7 @@ public class Tests {
   @ClassRule
   public static final Orchestrator ORCHESTRATOR = Orchestrator.builderEnv()
     .setSonarVersion(TestUtils.replaceLtsVersion(System.getProperty("sonar.runtimeVersion", "DEV")))
-    .addPlugin(TestUtils.getPluginLocation("sonar-vbnet-plugin"))
+    .addPlugin(TestUtils.getPluginLocation("sonar-vbnet-plugin")) // Do not add C# here, use shared project instead
     .restoreProfileAtStartup(FileLocation.of("profiles/vbnet_no_rule.xml"))
     .restoreProfileAtStartup(FileLocation.of("profiles/vbnet_class_name.xml"))
     .build();

@@ -76,7 +76,7 @@ public class Tests {
   @ClassRule
   public static final Orchestrator ORCHESTRATOR = Orchestrator.builderEnv()
     .setSonarVersion(TestUtils.replaceLtsVersion(System.getProperty("sonar.runtimeVersion", "DEV")))
-    .addPlugin(TestUtils.getPluginLocation("sonar-csharp-plugin"))
+    .addPlugin(TestUtils.getPluginLocation("sonar-csharp-plugin")) // Do not add VB.NET here, use shared project instead
     .setEdition(Edition.DEVELOPER)
     .restoreProfileAtStartup(FileLocation.of("profiles/no_rule.xml"))
     .restoreProfileAtStartup(FileLocation.of("profiles/class_name.xml"))
@@ -97,7 +97,7 @@ public class Tests {
   }
 
   @BeforeClass
-  public static void deleteLocalCache(){
+  public static void deleteLocalCache() {
     TestUtils.deleteLocalCache();
   }
 
