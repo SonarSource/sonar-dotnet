@@ -60,7 +60,6 @@ public class Tests {
   @ClassRule
   public static final Orchestrator ORCHESTRATOR = Orchestrator.builderEnv()
     .setSonarVersion(TestUtils.replaceLtsVersion(System.getProperty("sonar.runtimeVersion", "DEV")))
-    .addPlugin(TestUtils.getPluginLocation("sonar-csharp-plugin"))
     .addPlugin(TestUtils.getPluginLocation("sonar-vbnet-plugin"))
     .restoreProfileAtStartup(FileLocation.of("profiles/vbnet_no_rule.xml"))
     .restoreProfileAtStartup(FileLocation.of("profiles/vbnet_class_name.xml"))
@@ -75,7 +74,7 @@ public class Tests {
   }
 
   @BeforeClass
-  public static void deleteLocalCache(){
+  public static void deleteLocalCache() {
     TestUtils.deleteLocalCache();
   }
 
