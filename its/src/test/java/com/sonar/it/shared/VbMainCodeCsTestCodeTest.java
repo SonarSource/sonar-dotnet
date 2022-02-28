@@ -17,9 +17,8 @@
  * along with this program; if not, write to the Free Software Foundation,
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
-package com.sonar.it.vbnet;
+package com.sonar.it.shared;
 
-import com.sonar.it.shared.TestUtils;
 import com.sonar.orchestrator.Orchestrator;
 import com.sonar.orchestrator.build.BuildResult;
 import java.util.List;
@@ -29,8 +28,8 @@ import org.junit.Test;
 import org.junit.rules.TemporaryFolder;
 import org.sonarqube.ws.Issues;
 
-import static com.sonar.it.vbnet.Tests.ORCHESTRATOR;
-import static com.sonar.it.vbnet.Tests.getMeasureAsInt;
+import static com.sonar.it.shared.Tests.ORCHESTRATOR;
+import static com.sonar.it.shared.Tests.getMeasureAsInt;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class VbMainCodeCsTestCodeTest {
@@ -48,7 +47,7 @@ public class VbMainCodeCsTestCodeTest {
   @BeforeClass
   public static void init() throws Exception {
     TestUtils.reset(orchestrator);
-    buildResult = Tests.analyzeProject(temp, PROJECT, "vbnet_class_name");
+    buildResult = Tests.analyzeProject(temp, PROJECT, null);
   }
 
   @Test
@@ -59,8 +58,7 @@ public class VbMainCodeCsTestCodeTest {
       .containsExactlyInAnyOrder(
         SONAR_RULES_PREFIX + "S117",
         SONAR_RULES_PREFIX + "S1481",
-        SONAR_RULES_PREFIX + "S6145"
-      );
+        SONAR_RULES_PREFIX + "S6145");
   }
 
   @Test
@@ -73,13 +71,12 @@ public class VbMainCodeCsTestCodeTest {
 
     assertThat(buildResult.getLogsLines(l -> l.contains("INFO"))).contains(
       "INFO: Found 1 MSBuild VB.NET project: 1 MAIN project.",
-      "INFO: Found 1 MSBuild C# project: 1 TEST project."
-    );
+      "INFO: Found 1 MSBuild C# project: 1 TEST project.");
     TestUtils.verifyNoGuiWarnings(ORCHESTRATOR, buildResult);
   }
 
   @Test
-  public void metrics_are_imported_only_for_main_proj()throws Exception {
+  public void metrics_are_imported_only_for_main_proj() throws Exception {
     assertThat(getMeasureAsInt("VbMainCsTest:VbMain", "files")).isEqualTo(1);
     assertThat(getMeasureAsInt("VbMainCsTest:VbMain", "lines")).isEqualTo(11);
     assertThat(getMeasureAsInt("VbMainCsTest:VbMain", "ncloc")).isEqualTo(8);

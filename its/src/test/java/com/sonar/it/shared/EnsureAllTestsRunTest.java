@@ -17,20 +17,19 @@
  * along with this program; if not, write to the Free Software Foundation,
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
-package com.sonar.it.vbnet;
+package com.sonar.it.shared;
 
-import com.sonar.it.shared.EnsureAllTestsRunBase;
 import org.junit.Test;
 
 public class EnsureAllTestsRunTest extends EnsureAllTestsRunBase {
 
-  private static final String PACKAGE_NAME = "com.sonar.it.vbnet";
+  private static final String PACKAGE_NAME = "com.sonar.it.shared";
 
   private static final String TEST_SUITE_CLASS = PACKAGE_NAME + ".Tests";
 
   /**
    * In order for the tests to run when executing "mvn verify", all test classes need to be mentioned in the
-   * "@SuiteClasses" annotation on {@link com.sonar.it.vbnet.Tests}
+   * "@SuiteClasses" annotation on {@link Tests}
    */
   @Test
   public void testClassesAreListedInTestsSuite() {

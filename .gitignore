@@ -51,9 +51,12 @@ packages/
 # Roslyn
 *.sln.ide/
 
-# SonarQube
+# Sonar
 .sonar/
 .sonarqube/
+
+# Product of its\projects\ScannerCli
+.scannerwork/
 
 # MSTest test results
 [Tt]est[Rr]esult*/
@@ -78,3 +81,5 @@ analyzers/its/diff/
 
 /analyzers/its/**/packages.lock.json
 
+/its/projects/WebApplication/.scannerwork/report-task.txt
+/its/projects/WebApplication/.scannerwork/.sonar_lock

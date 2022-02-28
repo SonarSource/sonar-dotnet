@@ -19,16 +19,13 @@
  */
 package com.sonar.it.shared;
 
-import com.sonar.orchestrator.Orchestrator;
 import com.sonar.orchestrator.build.BuildResult;
 import com.sonar.orchestrator.build.SonarScanner;
-import com.sonar.orchestrator.container.Edition;
-import com.sonar.orchestrator.locator.MavenLocation;
 import java.io.File;
 import org.junit.Before;
-import org.junit.ClassRule;
 import org.junit.Test;
 
+import static com.sonar.it.shared.Tests.ORCHESTRATOR;
 import static org.assertj.core.api.Assertions.assertThat;
 
 /**
@@ -39,17 +36,6 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class ScannerCliTest {
   private static final String RAZOR_PAGES_PROJECT = "WebApplication";
   private static final String HTML_IN_MAIN_AND_CSHARP_IN_TEST_SUBFOLDERS = "ScannerCli";
-
-  @ClassRule
-  public static final Orchestrator ORCHESTRATOR = Orchestrator.builderEnv()
-    .setSonarVersion(TestUtils.replaceLtsVersion(System.getProperty("sonar.runtimeVersion", "DEV")))
-    .addPlugin(TestUtils.getPluginLocation("sonar-csharp-plugin"))
-    .addPlugin(TestUtils.getPluginLocation("sonar-vbnet-plugin"))
-    // Fixed version for the HTML plugin as we don't want to have failures in case of changes there.
-    .addPlugin(MavenLocation.of("org.sonarsource.html", "sonar-html-plugin", "3.2.0.2082"))
-    .setEdition(Edition.DEVELOPER)
-    .activateLicense()
-    .build();
 
   @Before
   public void init() {
@@ -65,8 +51,7 @@ public class ScannerCliTest {
     assertThat(result.getLogsLines(l -> l.contains("WARN")))
       .containsExactlyInAnyOrder(
         "WARN: Your project contains C# files which cannot be analyzed with the scanner you are using. To analyze C# or VB.NET, you must use the SonarScanner for .NET 5.x or higher, see https://redirect.sonarsource.com/doc/install-configure-scanner-msbuild.html",
-        "WARN: Your project contains VB.NET files which cannot be analyzed with the scanner you are using. To analyze C# or VB.NET, you must use the SonarScanner for .NET 5.x or higher, see https://redirect.sonarsource.com/doc/install-configure-scanner-msbuild.html"
-      );
+        "WARN: Your project contains VB.NET files which cannot be analyzed with the scanner you are using. To analyze C# or VB.NET, you must use the SonarScanner for .NET 5.x or higher, see https://redirect.sonarsource.com/doc/install-configure-scanner-msbuild.html");
     // The HTML plugin works
     assertThat(TestUtils.getMeasureAsInt(ORCHESTRATOR, RAZOR_PAGES_PROJECT, "violations")).isEqualTo(2);
     TestUtils.verifyNoGuiWarnings(ORCHESTRATOR, result);
@@ -81,8 +66,7 @@ public class ScannerCliTest {
 
     assertThat(result.getLogsLines(l -> l.contains("WARN")))
       .containsExactlyInAnyOrder(
-        "WARN: Your project contains C# files which cannot be analyzed with the scanner you are using. To analyze C# or VB.NET, you must use the SonarScanner for .NET 5.x or higher, see https://redirect.sonarsource.com/doc/install-configure-scanner-msbuild.html"
-      );
+        "WARN: Your project contains C# files which cannot be analyzed with the scanner you are using. To analyze C# or VB.NET, you must use the SonarScanner for .NET 5.x or higher, see https://redirect.sonarsource.com/doc/install-configure-scanner-msbuild.html");
     // The HTML plugin works
     assertThat(TestUtils.getMeasureAsInt(ORCHESTRATOR, HTML_IN_MAIN_AND_CSHARP_IN_TEST_SUBFOLDERS, "violations")).isEqualTo(2);
     TestUtils.verifyNoGuiWarnings(ORCHESTRATOR, result);
@@ -97,8 +81,7 @@ public class ScannerCliTest {
 
     assertThat(result.getLogsLines(l -> l.contains("WARN")))
       .containsExactlyInAnyOrder(
-        "WARN: Your project contains C# files which cannot be analyzed with the scanner you are using. To analyze C# or VB.NET, you must use the SonarScanner for .NET 5.x or higher, see https://redirect.sonarsource.com/doc/install-configure-scanner-msbuild.html"
-      );
+        "WARN: Your project contains C# files which cannot be analyzed with the scanner you are using. To analyze C# or VB.NET, you must use the SonarScanner for .NET 5.x or higher, see https://redirect.sonarsource.com/doc/install-configure-scanner-msbuild.html");
     TestUtils.verifyNoGuiWarnings(ORCHESTRATOR, result);
   }
 
