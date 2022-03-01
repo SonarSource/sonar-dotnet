@@ -246,10 +246,10 @@
                     <!-- ITs requires the SonarAnalyzer-VERSION.zip to be present so don't remove these lines -->
                     <copy todir="${sonarAnalyzer.workDirectory}/SonarAnalyzer.CSharp">
                       <fileset dir="${project.build.directory}/../../analyzers/packaging/binaries/">
+                        <include name="Google.Protobuf.dll"/>
                         <include name="SonarAnalyzer.dll"/>
                         <include name="SonarAnalyzer.CFG.dll"/>
                         <include name="SonarAnalyzer.CSharp.dll"/>
-                        <include name="Google.Protobuf.dll"/>
                       </fileset>
                       <fileset dir="${project.build.directory}/../..">
                         <include name="THIRD-PARTY-NOTICES.txt"/>

@@ -25,7 +25,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\SonarAnalyzer.CFG\SonarAnalyzer.CFG.csproj" />
+    <!-- We need to update NuGet and JAR packaging after changing references -->
     <ProjectReference Include="..\SonarAnalyzer.Common\SonarAnalyzer.Common.csproj" />
   </ItemGroup>
 
@@ -50,10 +50,10 @@
 
   <Target Name="CopyBinaries" AfterTargets="Build" DependsOnTargets="SignDlls" Condition=" '$(TargetFramework)' == 'NET46' ">
     <ItemGroup>
+      <BinariesToCopy Include="$(OutputPath)\Google.Protobuf.dll" />
       <BinariesToCopy Include="$(OutputPath)\SonarAnalyzer.dll" />
       <BinariesToCopy Include="$(OutputPath)\SonarAnalyzer.CFG.dll" />
       <BinariesToCopy Include="$(OutputPath)\SonarAnalyzer.CSharp.dll" />
-      <BinariesToCopy Include="$(OutputPath)\Google.Protobuf.dll" />
     </ItemGroup>
     <Copy SourceFiles="@(BinariesToCopy)" DestinationFolder="$(BinariesFolder)" />
   </Target>
