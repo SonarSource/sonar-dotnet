@@ -12,6 +12,19 @@
 "endColumn":  85
 }
 }
+},
+{
+"id":  "S6354",
+"message":  "Use a testable (date) time provider instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.TestKit\TestScheduler.cs",
+"region":  {
+"startLine":  34,
+"startColumn":  20,
+"endLine":  34,
+"endColumn":  41
+}
+}
 }
 ]
 }
