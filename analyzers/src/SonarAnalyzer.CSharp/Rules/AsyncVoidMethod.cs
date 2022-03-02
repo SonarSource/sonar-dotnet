@@ -35,7 +35,6 @@ namespace SonarAnalyzer.Rules.CSharp
         private const string DiagnosticId = "S3168";
         private const string MessageFormat = "Return 'Task' instead.";
         private const string MsTestV1AssemblyName = "Microsoft.VisualStudio.QualityTools.UnitTestFramework";
-        private const int EventNameFirstCharacterPosition = 2;
 
         private static readonly DiagnosticDescriptor Rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
 
@@ -87,7 +86,7 @@ namespace SonarAnalyzer.Rules.CSharp
         private static bool IsNamedAsEventHandler(ISymbol symbol) =>
             symbol.Name.Length > 2
             && symbol.Name.StartsWith("On")
-            && char.IsUpper(symbol.Name[EventNameFirstCharacterPosition]);
+            && char.IsUpper(symbol.Name[2]);
 
         private static bool HasAnyMsTestV1AllowedAttribute(IMethodSymbol methodSymbol) =>
             methodSymbol.GetAttributes().Any(x =>

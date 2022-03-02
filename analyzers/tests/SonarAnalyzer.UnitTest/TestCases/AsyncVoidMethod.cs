@@ -150,7 +150,7 @@ namespace Tests.Diagnostics
             var _timer = new System.Threading.Timer(RunOnceAsync);
         }
 
-        private async void RunOnceAsync(object _) // Noncompliant FP
+        private async void RunOnceAsync(object _) // Noncompliant FP, cannot change signature because it's used as a delegate
         {
         }
     }
