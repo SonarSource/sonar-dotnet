@@ -35,9 +35,9 @@ namespace SonarAnalyzer.Rules.CSharp
         private const string DiagnosticId = "S3168";
         private const string MessageFormat = "Return 'Task' instead.";
         private const string MsTestV1AssemblyName = "Microsoft.VisualStudio.QualityTools.UnitTestFramework";
+        private const int EventNameFirstCharacterPosition = 2;
 
         private static readonly DiagnosticDescriptor Rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
 
         private static readonly ImmutableArray<KnownType> AllowedAsyncVoidMsTestAttributes =
             ImmutableArray.Create(
@@ -47,6 +47,8 @@ namespace SonarAnalyzer.Rules.CSharp
                 KnownType.Microsoft_VisualStudio_TestTools_UnitTesting_ClassInitializeAttribute,
                 KnownType.Microsoft_VisualStudio_TestTools_UnitTesting_TestCleanupAttribute,
                 KnownType.Microsoft_VisualStudio_TestTools_UnitTesting_TestInitializeAttribute);
+
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
 
         protected override void Initialize(SonarAnalysisContext context) =>
             context.RegisterSyntaxNodeActionInNonGenerated(
@@ -85,7 +87,7 @@ namespace SonarAnalyzer.Rules.CSharp
         private static bool IsNamedAsEventHandler(ISymbol symbol) =>
             symbol.Name.Length > 2
             && symbol.Name.StartsWith("On")
-            && char.IsUpper(symbol.Name[2]);
+            && char.IsUpper(symbol.Name[EventNameFirstCharacterPosition]);
 
         private static bool HasAnyMsTestV1AllowedAttribute(IMethodSymbol methodSymbol) =>
             methodSymbol.GetAttributes().Any(x =>
