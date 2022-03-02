@@ -32,12 +32,11 @@ namespace SonarAnalyzer.Rules.CSharp
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
     public sealed class InvocationResolvesToOverrideWithParams : SonarDiagnosticAnalyzer
     {
-        internal const string DiagnosticId = "S3220";
+        private const string DiagnosticId = "S3220";
         private const string MessageFormat = "Review this call, which partially matches an overload without 'params'. The partial match is '{0}'.";
 
-        private static readonly DiagnosticDescriptor rule =
-            DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(rule);
+        private static readonly DiagnosticDescriptor Rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
 
         protected override void Initialize(SonarAnalysisContext context)
         {
@@ -60,12 +59,12 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private static void CheckCall(SyntaxNode node, ArgumentListSyntax argumentList, SyntaxNodeAnalysisContext context)
         {
-            if (argumentList == null ||
-                argumentList.Arguments.Count == 0 ||
-                !(context.SemanticModel.GetSymbolInfo(node).Symbol is IMethodSymbol invokedMethodSymbol) ||
-                !invokedMethodSymbol.Parameters.Any() ||
-                !invokedMethodSymbol.Parameters.Last().IsParams ||
-                IsInvocationWithExplicitArray(argumentList, invokedMethodSymbol, context.SemanticModel))
+            if (argumentList == null
+                || argumentList.Arguments.Count == 0
+                || context.SemanticModel.GetSymbolInfo(node).Symbol is not IMethodSymbol invokedMethodSymbol
+                || !invokedMethodSymbol.Parameters.Any()
+                || !invokedMethodSymbol.Parameters.Last().IsParams
+                || IsInvocationWithExplicitArray(argumentList, invokedMethodSymbol, context.SemanticModel))
             {
                 return;
             }
@@ -96,14 +95,13 @@ namespace SonarAnalyzer.Rules.CSharp
             if (otherMethod != null)
             {
                 context.ReportIssue(Diagnostic.Create(
-                    rule,
+                    Rule,
                     node.GetLocation(),
                     otherMethod.ToMinimalDisplayString(context.SemanticModel, node.SpanStart)));
             }
         }
 
-        private static bool IsInvocationWithExplicitArray(ArgumentListSyntax argumentList, IMethodSymbol invokedMethodSymbol,
-            SemanticModel semanticModel)
+        private static bool IsInvocationWithExplicitArray(ArgumentListSyntax argumentList, IMethodSymbol invokedMethodSymbol, SemanticModel semanticModel)
         {
             var methodParameterLookup = new CSharpMethodParameterLookup(argumentList, invokedMethodSymbol);
 
@@ -123,7 +121,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 }
 
                 var argType = semanticModel.GetTypeInfo(argument.Expression).Type;
-                if (!(argType is IArrayTypeSymbol))
+                if (argType is not IArrayTypeSymbol)
                 {
                     return false;
                 }
@@ -132,8 +130,7 @@ namespace SonarAnalyzer.Rules.CSharp
             return allParameterMatches.Count(p => p.IsParams) == 1;
         }
 
-        private static bool ArgumentsMatchParameters(ArgumentListSyntax argumentList, List<INamedTypeSymbol> argumentTypes,
-            IMethodSymbol possibleOtherMethod, SemanticModel semanticModel)
+        private static bool ArgumentsMatchParameters(ArgumentListSyntax argumentList, List<INamedTypeSymbol> argumentTypes, IMethodSymbol possibleOtherMethod, SemanticModel semanticModel)
         {
             var methodParameterLookup = new CSharpMethodParameterLookup(argumentList, possibleOtherMethod);
 
