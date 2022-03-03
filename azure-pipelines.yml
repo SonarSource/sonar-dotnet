@@ -28,5 +28,15 @@ stages:
   jobs:
     - job: print
       displayName: 'Print variables'
+
       steps:
-      - powershell: Write-Host "$isBugFix, $isReleaseBranch"
+      - powershell: Write-Host "IsBugFix: $(isBugFix), IsReleaseBranch: $(isReleaseBranch)"
+
+      - powershell: Write-Host "A"
+        condition: eq(variables.isReleaseBranch, 'True')
+
+      - powershell: Write-Host "B"
+        condition: eq(variables.isReleaseBranch, 'True')
+
+      - powershell: Write-Host "C"
+        condition: startsWith(variables['Build.SourceBranch'], 'refs/heads/branch-')
