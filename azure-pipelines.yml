@@ -322,6 +322,8 @@ stages:
         env:
           WS_PRODUCTNAME: '$(WHITESOURCE_PRODUCTNAME)'
           WS_APIKEY: '$(WHITESOURCE_APIKEY)'
+          BUILD_NUMBER: '$(Build.BuildId)'
+          GIT_SHA: '$(Build.SourceVersion)'
 
     - job: runIntegrationTestsJob
       displayName: '.NET ITs'
