@@ -30,8 +30,6 @@ stages:
       displayName: 'Print variables'
 
       steps:
-      - powershell: Write-Host "IsBugFix: $(isBugFix), IsReleaseBranch: $(isReleaseBranch)"
-
       - powershell: Write-Host "A"
         condition: eq(variables.isReleaseBranch, 'True')
 
