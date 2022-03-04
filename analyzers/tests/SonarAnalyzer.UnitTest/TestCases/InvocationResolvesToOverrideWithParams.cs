@@ -138,3 +138,25 @@ namespace Tests.Diagnostics
         }
     }
 }
+
+// Reproducer for https://github.com/SonarSource/sonar-dotnet/issues/5430
+namespace Repro5430
+{
+    public class SomeClass
+    {
+        private SomeClass(int a, string b) { }
+        public SomeClass(int a, params string[] bs) { }
+
+        private void SomeMethod(int a, string b) { }
+        public void SomeMethod(int a, params string[] bs) { }
+    }
+
+    public class OtherClass
+    {
+        public void SomeOtherMethod()
+        {
+            var x = new SomeClass(42, "SomeString"); // Noncompliant FP
+            x.SomeMethod(42, "SomeString"); // Noncompliant FP
+        }
+    }
+}
