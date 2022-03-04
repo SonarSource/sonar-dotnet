@@ -13,6 +13,9 @@ Public Class DateTimeAsProvider
         Dim offsetUTC As DateTimeOffset = DateTimeOffset.UtcNow ' Noncompliant
     End Sub
 
+    ''' <see cref="DateTimeOffset.UtcNow"/>
+    ' Noncompliant@-1
+
     Public Sub CompliantAre()
         Dim other As Integer = DateTime.DaysInMonth(2000, 2) ' Compliant
         Dim noSystemDateTime As NotSystem.DateTime = NotSystem.DateTime.Now ' Compliant
