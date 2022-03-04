@@ -141,4 +141,17 @@ namespace Tests.Diagnostics
             await Task.Run(() => Console.WriteLine("test"));
         }
     }
+
+    // https://github.com/SonarSource/sonar-dotnet/issues/5432
+    public class Reproducer5432
+    {
+        public void SomeMethod()
+        {
+            var _timer = new System.Threading.Timer(RunOnceAsync);
+        }
+
+        private async void RunOnceAsync(object _) // Noncompliant FP, cannot change signature because it's used as a delegate
+        {
+        }
+    }
 }

@@ -37,7 +37,6 @@ namespace SonarAnalyzer.Rules.CSharp
         private const string MsTestV1AssemblyName = "Microsoft.VisualStudio.QualityTools.UnitTestFramework";
 
         private static readonly DiagnosticDescriptor Rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
 
         private static readonly ImmutableArray<KnownType> AllowedAsyncVoidMsTestAttributes =
             ImmutableArray.Create(
@@ -47,6 +46,8 @@ namespace SonarAnalyzer.Rules.CSharp
                 KnownType.Microsoft_VisualStudio_TestTools_UnitTesting_ClassInitializeAttribute,
                 KnownType.Microsoft_VisualStudio_TestTools_UnitTesting_TestCleanupAttribute,
                 KnownType.Microsoft_VisualStudio_TestTools_UnitTesting_TestInitializeAttribute);
+
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
 
         protected override void Initialize(SonarAnalysisContext context) =>
             context.RegisterSyntaxNodeActionInNonGenerated(
