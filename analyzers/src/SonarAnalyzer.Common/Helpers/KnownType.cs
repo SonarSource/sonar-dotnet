@@ -228,6 +228,7 @@ namespace SonarAnalyzer.Helpers
         internal static readonly KnownType System_Data_SqlServerCe_SqlCeCommand = new("System.Data.SqlServerCe.SqlCeCommand");
         internal static readonly KnownType System_Data_SqlServerCe_SqlCeDataAdapter = new("System.Data.SqlServerCe.SqlCeDataAdapter");
         internal static readonly KnownType System_DateTime = new(SpecialType.System_DateTime, "DateTime");
+        internal static readonly KnownType System_DateTimeOffset = new("System.DateTimeOffset");
         internal static readonly KnownType System_Decimal = new(SpecialType.System_Decimal, "decimal");
         internal static readonly KnownType System_Delegate = new("System.Delegate");
         internal static readonly KnownType System_Diagnostics_CodeAnalysis_ExcludeFromCodeCoverageAttribute = new("System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverageAttribute");

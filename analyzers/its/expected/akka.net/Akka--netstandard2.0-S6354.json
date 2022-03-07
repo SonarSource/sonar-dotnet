@@ -17,6 +17,45 @@
 "id":  "S6354",
 "message":  "Use a testable (date) time provider instead.",
 "location":  {
+"uri":  "sources\akka.net\src\core\Akka\Actor\Scheduler\DateTimeNowTimeProvider.cs",
+"region":  {
+"startLine":  22,
+"startColumn":  50,
+"endLine":  22,
+"endColumn":  71
+}
+}
+},
+{
+"id":  "S6354",
+"message":  "Use a testable (date) time provider instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Actor\Scheduler\HashedWheelTimerScheduler.cs",
+"region":  {
+"startLine":  268,
+"startColumn":  54,
+"endLine":  268,
+"endColumn":  72
+}
+}
+},
+{
+"id":  "S6354",
+"message":  "Use a testable (date) time provider instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Actor\Scheduler\IDateTimeNowTimeProvider.cs",
+"region":  {
+"startLine":  13,
+"startColumn":  82,
+"endLine":  13,
+"endColumn":  88
+}
+}
+},
+{
+"id":  "S6354",
+"message":  "Use a testable (date) time provider instead.",
+"location":  {
 "uri":  "sources\akka.net\src\core\Akka\Dispatch\Mailbox.cs",
 "region":  {
 "startLine":  535,

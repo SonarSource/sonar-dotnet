@@ -31,8 +31,10 @@ namespace SonarAnalyzer.Rules
         private const string DiagnosticId = "S6354";
         private const string MessageFormat = "Use a testable (date) time provider instead.";
 
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
         private readonly DiagnosticDescriptor rule;
+        private readonly ImmutableArray<KnownType> trackedTypes = ImmutableArray.Create(KnownType.System_DateTime, KnownType.System_DateTimeOffset);
+
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
 
         protected abstract ILanguageFacade<TSyntaxKind> Language { get; }
 
@@ -44,15 +46,15 @@ namespace SonarAnalyzer.Rules
             {
                 if (IsDateTimeProviderProperty(Language.Syntax.NodeIdentifier(c.Node).Value.Text)
                     && c.SemanticModel.GetSymbolInfo(c.Node).Symbol is IPropertySymbol property
-                    && property.IsInType(KnownType.System_DateTime))
+                    && property.IsInType(trackedTypes))
                 {
                     c.ReportIssue(Diagnostic.Create(rule, c.Node.Parent.GetLocation()));
                 }
             },
             Language.SyntaxKind.IdentifierName);
 
-        private bool IsDateTimeProviderProperty(string name)
-            => nameof(DateTime.Now).Equals(name, Language.NameComparison)
+        private bool IsDateTimeProviderProperty(string name) =>
+            nameof(DateTime.Now).Equals(name, Language.NameComparison)
             || nameof(DateTime.UtcNow).Equals(name, Language.NameComparison)
             || nameof(DateTime.Today).Equals(name, Language.NameComparison);
     }
