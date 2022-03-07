@@ -42,11 +42,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 // NUnit has equivalent attributes, but they can only be applied to classes
                 // marked with [SetupFixture], which cannot contain tests.
                 KnownType.Microsoft_VisualStudio_TestTools_UnitTesting_AssemblyInitializeAttribute,
-                KnownType.Microsoft_VisualStudio_TestTools_UnitTesting_AssemblyCleanupAttribute,
-                KnownType.Microsoft_VisualStudio_TestTools_UnitTesting_ClassCleanupAttribute,
-                KnownType.Microsoft_VisualStudio_TestTools_UnitTesting_ClassInitializeAttribute,
-                KnownType.Microsoft_VisualStudio_TestTools_UnitTesting_TestCleanupAttribute,
-                KnownType.Microsoft_VisualStudio_TestTools_UnitTesting_TestInitializeAttribute);
+                KnownType.Microsoft_VisualStudio_TestTools_UnitTesting_AssemblyCleanupAttribute);
 
         private static readonly DiagnosticDescriptor Rule =
             DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);

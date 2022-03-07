@@ -114,10 +114,8 @@ namespace TestSetupAndCleanupAttributes
         }
     }
 
-    // Reproducers for https://github.com/SonarSource/sonar-dotnet/issues/5394
-
     [TestClass]
-    public class SetupAttributes4
+    public class SetupAttributes4 // Noncompliant
     {
         [TestInitialize]
         public static void BeforeTests(TestContext context)
@@ -126,7 +124,7 @@ namespace TestSetupAndCleanupAttributes
     }
 
     [TestClass]
-    public static class SetupAttributes5
+    public static class SetupAttributes5 // Noncompliant
     {
         [TestCleanup]
         public static void AfterTests()
@@ -136,7 +134,7 @@ namespace TestSetupAndCleanupAttributes
 
 
     [TestClass]
-    public static class SetupAttributes6
+    public static class SetupAttributes6 // Noncompliant
     {
         [TestInitialize]
         public static void BeforeTests(TestContext context)
@@ -150,7 +148,7 @@ namespace TestSetupAndCleanupAttributes
     }
 
     [TestClass]
-    public class SetupAttributes7
+    public class SetupAttributes7 // Noncompliant
     {
         [ClassInitializeAttribute]
         public static void BeforeTests(TestContext context)
@@ -159,7 +157,7 @@ namespace TestSetupAndCleanupAttributes
     }
 
     [TestClass]
-    public static class SetupAttributes8
+    public static class SetupAttributes8 // Noncompliant
     {
         [ClassCleanupAttribute]
         public static void AfterTests()
@@ -169,7 +167,7 @@ namespace TestSetupAndCleanupAttributes
 
 
     [TestClass]
-    public static class SetupAttributes9
+    public static class SetupAttributes9 // Noncompliant
     {
         [ClassInitializeAttribute]
         public static void BeforeTests(TestContext context)
