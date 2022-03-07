@@ -296,5 +296,120 @@ else
             validator.ValidateTag("GetHashCode", x => x.HasConstraint(TestConstraint.First).Should().BeFalse()); // Nobody set the constraint on that path
             validator.ValidateExitReachCount(2);    // Once for each state
         }
+
+        [TestMethod]
+        public void Branching_TrueConstraint_VisitsIfBranch()
+        {
+            const string code = @"
+var value = true;
+if (value)
+{
+    Tag(""If"");
+}
+else
+{
+    Tag(""Else"");
+}
+Tag(""End"");";
+            SETestContext.CreateCS(code, new EmptyTestCheck()).Validator.ValidateTagOrder(
+                "If",
+                "Else", // FIXME: Should not be here
+                "End");
+        }
+
+        [TestMethod]
+        public void Branching_TrueConstraintNegated_VisitsElseBranch()
+        {
+            const string code = @"
+var value = true;
+if (!value)
+{
+    Tag(""If"");
+}
+else
+{
+    Tag(""Else"");
+}
+Tag(""End"");";
+            SETestContext.CreateCS(code, new EmptyTestCheck()).Validator.ValidateTagOrder(
+                "If",   // FIXME: Should not be here
+                "Else",
+                "End");
+        }
+
+        [TestMethod]
+        public void Branching_FalseConstraint_VisitsElseBranch()
+        {
+            const string code = @"
+var value = false;
+if (value)
+{
+    Tag(""If"");
+}
+else
+{
+    Tag(""Else"");
+}
+Tag(""End"");";
+            SETestContext.CreateCS(code, new EmptyTestCheck()).Validator.ValidateTagOrder(
+                "If",   // FIXME: Should not be here
+                "Else",
+                "End");
+        }
+
+        [TestMethod]
+        public void Branching_NoConstraint_VisitsBothBranches()
+        {
+            const string code = @"
+var value = boolParameter; // Unknown constraints
+if (value)
+{
+    Tag(""If"");
+}
+else
+{
+    Tag(""Else"");
+}
+Tag(""End"");";
+            SETestContext.CreateCS(code, new EmptyTestCheck()).Validator.ValidateTagOrder(
+                "If",
+                "Else",
+                "End");
+        }
+
+        [TestMethod]
+        public void Branching_BoolConstraints_ComplexCase()
+        {
+            const string code = @"
+var isTrue = true;
+var isFalse = false;
+var isChanding = boolParameter;
+if (isTrue && isTrue && !isFalse)
+{
+    if (isFalse || !isTrue)
+    {
+        Tag(""UnreachableIf"");
+    }
+    else if (isFalse)
+    {
+        Tag(""UnreachableElseIf"");
+    }
+    else
+    {
+        Tag(""Reachable"");
+    }
+}
+else
+{
+    Tag(""UnreachableElse"");
+}
+Tag(""End"");";
+            SETestContext.CreateCS(code, new EmptyTestCheck()).Validator.ValidateTagOrder(
+                "UnreachableElse",      // FIXME: Should not be here
+                "UnreachableIf",        // FIXME: Should not be here
+                "End",
+                "UnreachableElseIf",    // FIXME: Should not be here
+                "Reachable");
+        }
     }
 }
