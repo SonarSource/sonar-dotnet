@@ -118,31 +118,31 @@ namespace TestSetupAndCleanupAttributes
     public class SetupAttributes4 // Noncompliant
     {
         [TestInitialize]
-        public static void BeforeTests(TestContext context)
+        public void BeforeTests(TestContext context)
         {
         }
     }
 
     [TestClass]
-    public static class SetupAttributes5 // Noncompliant
+    public class SetupAttributes5 // Noncompliant
     {
         [TestCleanup]
-        public static void AfterTests()
+        public void AfterTests()
         {
         }
     }
 
 
     [TestClass]
-    public static class SetupAttributes6 // Noncompliant
+    public class SetupAttributes6 // Noncompliant
     {
         [TestInitialize]
-        public static void BeforeTests(TestContext context)
+        public void BeforeTests(TestContext context)
         {
         }
 
         [TestCleanup]
-        public static void AfterTests()
+        public void AfterTests()
         {
         }
     }
@@ -151,31 +151,31 @@ namespace TestSetupAndCleanupAttributes
     public class SetupAttributes7 // Noncompliant
     {
         [ClassInitializeAttribute]
-        public static void BeforeTests(TestContext context)
+        public void BeforeTests(TestContext context)
         {
         }
     }
 
     [TestClass]
-    public static class SetupAttributes8 // Noncompliant
+    public class SetupAttributes8 // Noncompliant
     {
         [ClassCleanupAttribute]
-        public static void AfterTests()
+        public void AfterTests()
         {
         }
     }
 
 
     [TestClass]
-    public static class SetupAttributes9 // Noncompliant
+    public class SetupAttributes9 // Noncompliant
     {
         [ClassInitializeAttribute]
-        public static void BeforeTests(TestContext context)
+        public void BeforeTests(TestContext context)
         {
         }
 
         [ClassCleanupAttribute]
-        public static void AfterTests()
+        public void AfterTests()
         {
         }
     }
