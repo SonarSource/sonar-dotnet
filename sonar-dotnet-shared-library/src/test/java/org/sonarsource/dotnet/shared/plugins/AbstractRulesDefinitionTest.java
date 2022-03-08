@@ -20,19 +20,25 @@
 package org.sonarsource.dotnet.shared.plugins;
 
 import org.junit.Test;
+import org.sonar.api.SonarEdition;
+import org.sonar.api.SonarQubeSide;
+import org.sonar.api.SonarRuntime;
+import org.sonar.api.internal.SonarRuntimeImpl;
+import org.sonar.api.utils.Version;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class AbstractRulesDefinitionTest {
   @Test
   public void constructor_with_null() {
-    TestRulesDefinition test = new TestRulesDefinition();
+    SonarRuntime sonarRuntime = SonarRuntimeImpl.forSonarQube(Version.create(8, 9), SonarQubeSide.SCANNER, SonarEdition.COMMUNITY);
+    TestRulesDefinition test = new TestRulesDefinition(sonarRuntime);
     assertThat(test).isNotNull();
   }
 
   private static class TestRulesDefinition extends AbstractRulesDefinition {
-    TestRulesDefinition() {
-      super("test", "test", "test", "test");
+    TestRulesDefinition(SonarRuntime runtime) {
+      super("test", "test", "test", "test", runtime);
     }
 
     @Override

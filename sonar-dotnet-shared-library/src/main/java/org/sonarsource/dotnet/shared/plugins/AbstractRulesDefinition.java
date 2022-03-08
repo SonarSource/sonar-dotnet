@@ -20,6 +20,7 @@
 package org.sonarsource.dotnet.shared.plugins;
 
 import com.google.gson.Gson;
+import com.google.gson.annotations.SerializedName;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -28,10 +29,12 @@ import java.util.Collection;
 import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
+import org.sonar.api.SonarRuntime;
 import org.sonar.api.rules.RuleType;
 import org.sonar.api.scanner.ScannerSide;
 import org.sonar.api.server.rule.RulesDefinition;
 import org.sonar.api.server.rule.RulesDefinitionXmlLoader;
+import org.sonar.api.utils.Version;
 
 @ScannerSide
 public abstract class AbstractRulesDefinition implements RulesDefinition {
@@ -42,11 +45,14 @@ public abstract class AbstractRulesDefinition implements RulesDefinition {
   private final String languageKey;
   private final String rulesXmlFilePath;
 
-  protected AbstractRulesDefinition(String repositoryKey, String repositoryName, String languageKey, String rulesXmlFilePath) {
+  private final boolean isOwaspByVersionSupported;
+
+  protected AbstractRulesDefinition(String repositoryKey, String repositoryName, String languageKey, String rulesXmlFilePath, SonarRuntime sonarRuntime) {
     this.repositoryKey = repositoryKey;
     this.repositoryName = repositoryName;
     this.languageKey = languageKey;
     this.rulesXmlFilePath = rulesXmlFilePath;
+    this.isOwaspByVersionSupported = sonarRuntime.getApiVersion().isGreaterThanOrEqual(Version.create(9, 3));
   }
 
   @Override
@@ -69,7 +75,7 @@ public abstract class AbstractRulesDefinition implements RulesDefinition {
 
     Set<NewRule> hotspotRules = getHotspotRules(allRuleMetadata);
 
-    allRuleMetadata.forEach(AbstractRulesDefinition::updateSecurityStandards);
+    allRuleMetadata.forEach(this::updateSecurityStandards);
     hotspotRules.forEach(rule -> rule.setType(RuleType.SECURITY_HOTSPOT));
   }
 
@@ -81,9 +87,14 @@ public abstract class AbstractRulesDefinition implements RulesDefinition {
       .collect(Collectors.toSet());
   }
 
-  private static void updateSecurityStandards(NewRule rule, RuleMetadata ruleMetadata) {
-    for (String s : ruleMetadata.securityStandards.OWASP) {
+  private void updateSecurityStandards(NewRule rule, RuleMetadata ruleMetadata) {
+    for (String s : ruleMetadata.securityStandards.OWASP_2017) {
       rule.addOwaspTop10(RulesDefinition.OwaspTop10.valueOf(s));
+    }
+    if (isOwaspByVersionSupported) {
+      for (String s : ruleMetadata.securityStandards.OWASP_2021) {
+        rule.addOwaspTop10(RulesDefinition.OwaspTop10Version.Y2021, RulesDefinition.OwaspTop10.valueOf(s));
+      }
     }
     rule.addCwe(ruleMetadata.securityStandards.CWE);
   }
@@ -108,18 +119,18 @@ public abstract class AbstractRulesDefinition implements RulesDefinition {
     String type;
     SecurityStandards securityStandards = new SecurityStandards();
 
-    String getKey() {
-      return sqKey;
-    }
     boolean isSecurityHotspot() {
       return SECURITY_HOTSPOT.equals(type);
     }
   }
 
-  // for deserialization purposes
-  @SuppressWarnings("squid:S00116")
   private static class SecurityStandards {
     int[] CWE = {};
-    String[] OWASP = {};
+
+    @SerializedName("OWASP Top 10 2021")
+    String[] OWASP_2021 = {};
+
+    @SerializedName("OWASP")
+    String[] OWASP_2017 = {};
   }
 }
