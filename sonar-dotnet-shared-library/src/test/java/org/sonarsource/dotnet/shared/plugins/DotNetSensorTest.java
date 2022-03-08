@@ -21,8 +21,11 @@ package org.sonarsource.dotnet.shared.plugins;
 
 import java.io.File;
 import java.nio.file.Path;
+import java.util.Arrays;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 import org.junit.Before;
 import org.junit.Rule;
@@ -36,8 +39,6 @@ import org.sonar.api.batch.rule.internal.ActiveRulesBuilder;
 import org.sonar.api.batch.rule.internal.NewActiveRule;
 import org.sonar.api.batch.sensor.internal.DefaultSensorDescriptor;
 import org.sonar.api.batch.sensor.internal.SensorContextTester;
-import org.sonar.api.internal.google.common.collect.ImmutableList;
-import org.sonar.api.internal.google.common.collect.ImmutableMap;
 import org.sonar.api.notifications.AnalysisWarnings;
 import org.sonar.api.rule.RuleKey;
 import org.sonar.api.scanner.sensor.ProjectSensor;
@@ -127,9 +128,10 @@ public class DotNetSensorTest {
     verify(analysisWarnings, never()).addUnique(any());
     verify(reportPathCollector).protobufDirs();
     verifyNoInteractions(protobufDataImporter);
-    ImmutableMap<String, List<RuleKey>> expectedMap = ImmutableMap.of(
-      "sonaranalyzer-" + LANG_KEY, ImmutableList.of(RuleKey.of(REPO_KEY, "S1186"), RuleKey.of(REPO_KEY, "[parameters_key]")),
-      "foo", ImmutableList.of(RuleKey.of("roslyn.foo", "custom-roslyn")));
+    Map<String, List<RuleKey>> expectedMap = new HashMap<String, List<RuleKey>>() {{
+      put("sonaranalyzer-" + LANG_KEY, Arrays.asList(RuleKey.of(REPO_KEY, "S1186"), RuleKey.of(REPO_KEY, "[parameters_key]")));
+      put("foo", Collections.singletonList(RuleKey.of("roslyn.foo", "custom-roslyn")));
+    }};
     verify(roslynDataImporter).importRoslynReports(eq(Collections.singletonList(new RoslynReport(null, workDir.getRoot()))), eq(tester), eq(expectedMap),
       any(RealPathProvider.class));
   }

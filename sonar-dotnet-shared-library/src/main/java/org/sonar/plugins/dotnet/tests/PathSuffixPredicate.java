@@ -21,7 +21,6 @@ package org.sonar.plugins.dotnet.tests;
 
 import org.sonar.api.batch.fs.FilePredicate;
 import org.sonar.api.batch.fs.InputFile;
-import org.sonar.api.internal.google.common.annotations.VisibleForTesting;
 
 class PathSuffixPredicate implements FilePredicate {
   private final String pathSuffix;
@@ -35,7 +34,9 @@ class PathSuffixPredicate implements FilePredicate {
     return inputFile.uri().getPath().endsWith(pathSuffix);
   }
 
-  @VisibleForTesting
+  /**
+   * visible for testing
+   */
   String getPathSuffix() {
     return pathSuffix;
   }

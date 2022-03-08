@@ -23,7 +23,6 @@ import java.io.File;
 import java.util.Set;
 import java.util.function.Predicate;
 import org.sonar.api.config.Configuration;
-import org.sonar.api.internal.google.common.annotations.VisibleForTesting;
 import org.sonar.api.notifications.AnalysisWarnings;
 import org.sonar.api.scanner.ScannerSide;
 import org.sonar.api.utils.log.Logger;
@@ -58,7 +57,9 @@ public class CoverageAggregator {
     this.visualStudioCoverageXmlReportParser = new VisualStudioCoverageXmlReportParser(fileService);
   }
 
-  @VisibleForTesting
+  /**
+   * visible for testing
+   */
   CoverageAggregator(CoverageConfiguration coverageConf,
                      Configuration configuration,
                      CoverageCache coverageCache,
@@ -80,7 +81,9 @@ public class CoverageAggregator {
     return hasCoverageProperty(configuration::hasKey);
   }
 
-  @VisibleForTesting
+  /**
+   * visible for testing
+   */
   boolean hasCoverageProperty(Predicate<String> hasKeyPredicate) {
     return hasNCover3ReportPaths(hasKeyPredicate)
       || hasOpenCoverReportPaths(hasKeyPredicate)

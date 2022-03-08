@@ -26,7 +26,9 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
+import java.util.Arrays;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import org.apache.commons.io.FileUtils;
@@ -44,8 +46,6 @@ import org.sonar.api.batch.fs.internal.DefaultInputFile;
 import org.sonar.api.batch.fs.internal.TestInputFileBuilder;
 import org.sonar.api.batch.sensor.internal.SensorContextTester;
 import org.sonar.api.internal.SonarRuntimeImpl;
-import org.sonar.api.internal.google.common.collect.ImmutableList;
-import org.sonar.api.internal.google.common.collect.ImmutableMap;
 import org.sonar.api.rule.RuleKey;
 import org.sonar.api.utils.Version;
 import org.sonar.api.utils.log.LogTester;
@@ -136,18 +136,19 @@ public class RoslynDataImporterTest {
 
   @Test
   public void failWithDuplicateRuleKey() {
-    Map<String, List<RuleKey>> activeRules = ImmutableMap.of(
-      "sonaranalyzer-cs", ImmutableList.of(RuleKey.of("csharpsquid", "[parameters_key]")),
-      "foo", ImmutableList.of(RuleKey.of("roslyn.foo", "[parameters_key]")));
+    Map<String, List<RuleKey>> activeRules = new HashMap<String, List<RuleKey>>() {{
+      put("sonaranalyzer-cs", Collections.singletonList(RuleKey.of("csharpsquid", "[parameters_key]")));
+      put("foo", Collections.singletonList(RuleKey.of("roslyn.foo", "[parameters_key]")));
+    }};
 
-    exception.expectMessage("Rule keys must be unique, but \"[parameters_key]\" is defined in both the \"csharpsquid\" and \"roslyn.foo\" rule repositories.");
+    exception.expectMessage("Rule keys must be unique, but \"[parameters_key]\" is defined in both the \"roslyn.foo\" and \"csharpsquid\" rule repositories.");
     roslynDataImporter.importRoslynReports(Collections.singletonList(new RoslynReport(null, workDir.resolve("roslyn-report.json"))), tester, activeRules, String::toString);
   }
 
   @Test
   public void internalIssuesFromExternalRepositoriesWithInvalidLocationShouldNotFail() throws IOException {
     final String repositoryName = "roslyn.stylecop.analyzers.cs";
-    Map<String, List<RuleKey>> activeRules = ImmutableMap.of(repositoryName, ImmutableList.of(RuleKey.of(repositoryName, "SA1629")));
+    Map<String, List<RuleKey>> activeRules = Collections.singletonMap(repositoryName, Collections.singletonList(RuleKey.of(repositoryName, "SA1629")));
 
     Path reportPath = updateCodeFilePathsInReport("roslyn-report-invalid-location.json", true);
 
@@ -190,7 +191,7 @@ public class RoslynDataImporterTest {
   }
 
   private void assertInvalidLocationFail(String repositoryName) throws IOException {
-    Map<String, List<RuleKey>> activeRules = ImmutableMap.of(repositoryName, ImmutableList.of(RuleKey.of(repositoryName, "SA1629")));
+    Map<String, List<RuleKey>> activeRules = Collections.singletonMap(repositoryName, Collections.singletonList(RuleKey.of(repositoryName, "SA1629")));
 
     Path reportPath = updateCodeFilePathsInReport("roslyn-report-invalid-location.json", true);
 
@@ -201,9 +202,10 @@ public class RoslynDataImporterTest {
   }
 
   private static Map<String, List<RuleKey>> createActiveRules() {
-    return ImmutableMap.of(
-      "sonaranalyzer-cs", ImmutableList.of(RuleKey.of("csharpsquid", "S1186"), RuleKey.of("csharpsquid", "[parameters_key]")),
-      "foo", ImmutableList.of(RuleKey.of("roslyn.foo", "custom-roslyn")));
+    return new HashMap<String, List<RuleKey>>() {{
+      put("sonaranalyzer-cs", Arrays.asList(RuleKey.of("csharpsquid", "S1186"), RuleKey.of("csharpsquid", "[parameters_key]")));
+      put("foo", Collections.singletonList(RuleKey.of("roslyn.foo", "custom-roslyn")));
+    }};
   }
 
   // Updates the file paths in the roslyn report to point to real cs file in the resources.
