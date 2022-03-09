@@ -143,7 +143,7 @@ namespace SonarAnalyzer.UnitTest.SymbolicExecution.Roslyn
         [TestMethod]
         public void Execute_PersistConstraints()
         {
-            var validator = SETestContext.CreateCS("var a = true;", new EmptyTestCheck()).Validator;
+            var validator = SETestContext.CreateCS("var a = true;").Validator;
             validator.ValidateOrder(    // Visualize operations
                 "LocalReference: a = true (Implicit)",
                 "Literal: true",
@@ -155,7 +155,7 @@ namespace SonarAnalyzer.UnitTest.SymbolicExecution.Roslyn
         [TestMethod]
         public void Execute_PersistSymbols_InsideBlock()
         {
-            var validator = SETestContext.CreateCS("var first = true; var second = false; first = second;", new EmptyTestCheck()).Validator;
+            var validator = SETestContext.CreateCS("var first = true; var second = false; first = second;").Validator;
             validator.ValidateOrder(    // Visualize operations
                    "LocalReference: first = true (Implicit)",
                    "Literal: true",
