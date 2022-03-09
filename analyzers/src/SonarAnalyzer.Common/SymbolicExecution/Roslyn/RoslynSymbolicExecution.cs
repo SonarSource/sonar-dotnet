@@ -22,6 +22,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using SonarAnalyzer.CFG.Roslyn;
+using SonarAnalyzer.SymbolicExecution.Constraints;
 using SonarAnalyzer.SymbolicExecution.Roslyn.Checks;
 using SonarAnalyzer.SymbolicExecution.Roslyn.OperationProcessors;
 using StyleCop.Analyzers.Lightup;
@@ -92,14 +93,13 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
             }
             else
             {
-                // ToDo: This is a temporary simplification until we support condition-based and condition-building decisions https://github.com/SonarSource/sonar-dotnet/issues/5308
-                foreach (var successor in node.Block.Successors)
+                foreach (var successor in node.Block.Successors.Where(x => IsReachable(node, x)))
                 {
                     if (successor.Destination is not null)
                     {
                         yield return successor.FinallyRegions.Any() // When exiting finally region(s), redirect to 1st finally instead of the normal destination
                             ? FromFinally(new FinallyPoint(node.FinallyPoint, successor))
-                            : new ExplodedNode(successor.Destination, node.State, node.FinallyPoint);
+                            : new(successor.Destination, node.State, node.FinallyPoint);
                     }
                     else if (successor.Source.EnclosingRegion.Kind == ControlFlowRegionKind.Finally)    // Redirect from finally back to the original place (or outer finally on the same branch)
                     {
@@ -109,7 +109,7 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
             }
 
             ExplodedNode FromFinally(FinallyPoint finallyPoint) =>
-                new ExplodedNode(cfg.Blocks[finallyPoint.BlockIndex], node.State, finallyPoint.IsFinallyBlock ? finallyPoint : finallyPoint.Previous);
+                new(cfg.Blocks[finallyPoint.BlockIndex], node.State, finallyPoint.IsFinallyBlock ? finallyPoint : finallyPoint.Previous);
         }
 
         private IEnumerable<ExplodedNode> ProcessOperation(ExplodedNode node)
@@ -167,5 +167,16 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
 
         private SymbolicContext EnsureContext(SymbolicContext current, ProgramState newState) =>
             current.State == newState ? current : new SymbolicContext(symbolicValueCounter, current.Operation, newState);
+
+        private static bool IsReachable(ExplodedNode node, ControlFlowBranch branch) =>
+            node.Block.ConditionKind != ControlFlowConditionKind.None
+            && node.Block.BranchValue?.TrackedSymbol() is { } branchSymbol
+            && node.State[branchSymbol] is { } sv
+            && sv.HasConstraint<BoolConstraint>()
+                ? IsReachable(branch, node.Block.ConditionKind == ControlFlowConditionKind.WhenTrue, sv.HasConstraint(BoolConstraint.True))
+                : true;    // Unconditional or we don't know the value and need to explore both paths
+
+        private static bool IsReachable(ControlFlowBranch branch, bool condition, bool constraint) =>
+            branch.IsConditionalSuccessor ? condition == constraint : condition != constraint;
     }
 }

@@ -313,7 +313,6 @@ else
 Tag(""End"");";
             SETestContext.CreateCS(code, new EmptyTestCheck()).Validator.ValidateTagOrder(
                 "If",
-                "Else", // FIXME: Should not be here
                 "End");
         }
 
@@ -332,7 +331,6 @@ else
 }
 Tag(""End"");";
             SETestContext.CreateCS(code, new EmptyTestCheck()).Validator.ValidateTagOrder(
-                "If",   // FIXME: Should not be here
                 "Else",
                 "End");
         }
@@ -352,8 +350,26 @@ else
 }
 Tag(""End"");";
             SETestContext.CreateCS(code, new EmptyTestCheck()).Validator.ValidateTagOrder(
-                "If",   // FIXME: Should not be here
                 "Else",
+                "End");
+        }
+
+        [TestMethod]
+        public void Branching_FalseConstraintNegated_VisitsIfBranch()
+        {
+            const string code = @"
+var value = false;
+if (!value)
+{
+    Tag(""If"");
+}
+else
+{
+    Tag(""Else"");
+}
+Tag(""End"");";
+            SETestContext.CreateCS(code, new EmptyTestCheck()).Validator.ValidateTagOrder(
+                "If",
                 "End");
         }
 
@@ -405,11 +421,8 @@ else
 }
 Tag(""End"");";
             SETestContext.CreateCS(code, new EmptyTestCheck()).Validator.ValidateTagOrder(
-                "UnreachableElse",      // FIXME: Should not be here
-                "UnreachableIf",        // FIXME: Should not be here
-                "End",
-                "UnreachableElseIf",    // FIXME: Should not be here
-                "Reachable");
+                "Reachable",
+                "End");
         }
     }
 }
