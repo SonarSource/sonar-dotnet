@@ -216,7 +216,7 @@ namespace SonarAnalyzer.UnitTest.SymbolicExecution.Roslyn
                 .And.ContainSingle(x => x.HasConstraint(TestConstraint.Second) && x.HasConstraint(BoolConstraint.False));
         }
 
-        private ProgramState[] DecorateIntLiteral(SymbolicContext context, SymbolicConstraint first, SymbolicConstraint second) =>
+        private static ProgramState[] DecorateIntLiteral(SymbolicContext context, SymbolicConstraint first, SymbolicConstraint second) =>
             context.Operation.Instance.Kind == OperationKind.Literal && context.Operation.Instance.ConstantValue.Value is int
                 ? new[] { context.SetOperationConstraint(first), context.SetOperationConstraint(second) }
                 : new[] { context.State };
