@@ -149,5 +149,20 @@ Tag(""End"", value);";
                 .And.ContainSingle(x => x.HasConstraint(TestConstraint.First) && !x.HasConstraint(BoolConstraint.True))
                 .And.ContainSingle(x => x.HasConstraint(TestConstraint.First) && x.HasConstraint(BoolConstraint.True) && !x.HasConstraint(DummyConstraint.Dummy));
         }
+
+        [DataTestMethod]
+        [DataRow("for (var i = 0; condition; i++)")]
+        [DataRow("while (condition)")]
+        public void Loops_FalseConditionNotExecuted(string loop)
+        {
+            var code = $@"
+var condition = false;
+{loop}
+{{
+    Tag(""Loop"");
+}}
+Tag(""End"");";
+            SETestContext.CreateCS(code).Validator.ValidateTagOrder("End");
+        }
     }
 }

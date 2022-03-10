@@ -311,7 +311,7 @@ else
     Tag(""Else"");
 }
 Tag(""End"");";
-            SETestContext.CreateCS(code, new EmptyTestCheck()).Validator.ValidateTagOrder(
+            SETestContext.CreateCS(code).Validator.ValidateTagOrder(
                 "If",
                 "End");
         }
@@ -330,7 +330,7 @@ else
     Tag(""Else"");
 }
 Tag(""End"");";
-            SETestContext.CreateCS(code, new EmptyTestCheck()).Validator.ValidateTagOrder(
+            SETestContext.CreateCS(code).Validator.ValidateTagOrder(
                 "Else",
                 "End");
         }
@@ -349,7 +349,7 @@ else
     Tag(""Else"");
 }
 Tag(""End"");";
-            SETestContext.CreateCS(code, new EmptyTestCheck()).Validator.ValidateTagOrder(
+            SETestContext.CreateCS(code).Validator.ValidateTagOrder(
                 "Else",
                 "End");
         }
@@ -368,7 +368,7 @@ else
     Tag(""Else"");
 }
 Tag(""End"");";
-            SETestContext.CreateCS(code, new EmptyTestCheck()).Validator.ValidateTagOrder(
+            SETestContext.CreateCS(code).Validator.ValidateTagOrder(
                 "If",
                 "End");
         }
@@ -387,7 +387,27 @@ else
     Tag(""Else"");
 }
 Tag(""End"");";
-            SETestContext.CreateCS(code, new EmptyTestCheck()).Validator.ValidateTagOrder(
+            SETestContext.CreateCS(code).Validator.ValidateTagOrder(
+                "If",
+                "Else",
+                "End");
+        }
+
+        [TestMethod]
+        public void Branching_OtherConstraint_VisitsBothBranches()
+        {
+            const string code = @"
+if (boolParameter)
+{
+    Tag(""If"");
+}
+else
+{
+    Tag(""Else"");
+}
+Tag(""End"");";
+            var check = new PostProcessTestCheck(x => x.Operation.Instance.TrackedSymbol() is { } symbol ? x.SetSymbolConstraint(symbol, DummyConstraint.Dummy) : x.State);
+            SETestContext.CreateCS(code, check).Validator.ValidateTagOrder(
                 "If",
                 "Else",
                 "End");
@@ -399,7 +419,6 @@ Tag(""End"");";
             const string code = @"
 var isTrue = true;
 var isFalse = false;
-var isChanding = boolParameter;
 if (isTrue && isTrue && !isFalse)
 {
     if (isFalse || !isTrue)
@@ -420,8 +439,51 @@ else
     Tag(""UnreachableElse"");
 }
 Tag(""End"");";
-            SETestContext.CreateCS(code, new EmptyTestCheck()).Validator.ValidateTagOrder(
+            SETestContext.CreateCS(code).Validator.ValidateTagOrder(
                 "Reachable",
+                "End");
+        }
+
+        [TestMethod]
+        public void Branching_TrueLiteral_VisitsIfBranch_NotSupported()
+        {
+            const string code = @"
+if (true)
+{
+    Tag(""If"");
+}
+else
+{
+    Tag(""Else"");
+}
+Tag(""End"");";
+            SETestContext.CreateCS(code).Validator.ValidateTagOrder(
+                "If",
+                "Else", // ToDo: This should not be here, branch operation symbolic value is not persisted yet
+                "End");
+        }
+
+        [TestMethod]
+        public void Branching_TrueConstraint_SwitchStatement_BinaryOperationNotSupported()
+        {
+            const string code = @"
+var isTrue = true;
+switch (isTrue)
+{
+    case true:
+        Tag(""True"");
+        break;
+    case false:
+        Tag(""False"");
+        break;
+    default:
+        Tag(""Default"");
+}
+Tag(""End"");";
+            SETestContext.CreateCS(code).Validator.ValidateTagOrder(
+                "True",
+                "False",    // This should not be here, switch statement produces BinaryOperatin with isTrue==true
+                "Default",  // This should not be here, switch statement produces BinaryOperatin with isTrue==true
                 "End");
         }
     }
