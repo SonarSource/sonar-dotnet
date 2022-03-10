@@ -28,8 +28,10 @@ import org.sonar.api.batch.fs.internal.FileMetadata;
 import org.sonar.api.batch.fs.internal.TestInputFileBuilder;
 import org.sonar.api.batch.sensor.highlighting.TypeOfText;
 import org.sonar.api.batch.sensor.internal.SensorContextTester;
+import org.sonar.api.notifications.AnalysisWarnings;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.Mockito.mock;
 import static org.sonarsource.dotnet.shared.plugins.ProtobufDataImporter.HIGHLIGHT_FILENAME;
 
 public class HighlightImporterTest {
@@ -44,7 +46,7 @@ public class HighlightImporterTest {
     SensorContextTester tester = SensorContextTester.create(TEST_DATA_DIR);
 
     DefaultInputFile inputFile = new TestInputFileBuilder("dummyKey", TEST_FILE_PATH)
-      .setMetadata(new FileMetadata().readMetadata(new FileReader(TEST_FILE)))
+      .setMetadata(new FileMetadata(mock(AnalysisWarnings.class)).readMetadata(new FileReader(TEST_FILE)))
       .build();
     tester.fileSystem().add(inputFile);
 

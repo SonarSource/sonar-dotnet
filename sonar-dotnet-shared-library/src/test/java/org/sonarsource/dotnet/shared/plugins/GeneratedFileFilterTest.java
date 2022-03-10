@@ -29,6 +29,7 @@ import org.sonar.api.batch.fs.InputFile;
 import org.sonar.api.config.PropertyDefinitions;
 import org.sonar.api.config.internal.MapSettings;
 import org.sonar.api.internal.SonarRuntimeImpl;
+import org.sonar.api.utils.System2;
 import org.sonar.api.utils.Version;
 import org.sonar.api.utils.log.LogTester;
 import org.sonar.api.utils.log.LoggerLevel;
@@ -53,7 +54,7 @@ public class GeneratedFileFilterTest {
       ".cs",
       SonarRuntimeImpl.forSonarQube(Version.create(7, 9), SonarQubeSide.SERVER, SonarEdition.COMMUNITY)) {
     };
-    MapSettings settings = new MapSettings(new PropertyDefinitions(definitions.create()));
+    MapSettings settings = new MapSettings(new PropertyDefinitions(mock(System2.class), definitions.create()));
     defaultConfiguration = new AbstractLanguageConfiguration(settings.asConfig(), "cs") {
     };
   }

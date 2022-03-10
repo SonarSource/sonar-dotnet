@@ -37,6 +37,7 @@ import org.sonar.api.issue.NoSonarFilter;
 import org.sonar.api.measures.CoreMetrics;
 import org.sonar.api.measures.FileLinesContext;
 import org.sonar.api.measures.FileLinesContextFactory;
+import org.sonar.api.notifications.AnalysisWarnings;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.ArgumentMatchers.any;
@@ -63,7 +64,7 @@ public class MetricsImporterTest {
   @Test
   public void test_metrics_get_imported() throws FileNotFoundException {
     DefaultInputFile inputFile = new TestInputFileBuilder("dummyKey", TEST_FILE_PATH)
-      .setMetadata(new FileMetadata().readMetadata(new FileReader(TEST_FILE)))
+      .setMetadata(new FileMetadata(mock(AnalysisWarnings.class)).readMetadata(new FileReader(TEST_FILE)))
       .build();
     tester.fileSystem().add(inputFile);
 

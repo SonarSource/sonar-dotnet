@@ -39,6 +39,7 @@ import org.sonar.api.batch.bootstrap.ProjectBuilder.Context;
 import org.sonar.api.batch.bootstrap.ProjectDefinition;
 import org.sonar.api.batch.bootstrap.ProjectReactor;
 import org.sonar.api.batch.fs.InputFile;
+import org.sonar.api.config.Configuration;
 import org.sonar.api.utils.log.LogTester;
 import org.sonar.api.utils.log.LoggerLevel;
 import org.sonarsource.dotnet.protobuf.SonarAnalyzer.FileMetadataInfo;
@@ -74,6 +75,11 @@ public class AbstractGlobalProtobufFileProcessorTest {
       @Override
       public ProjectReactor projectReactor() {
         return new ProjectReactor(rootProject);
+      }
+
+      @Override
+      public Configuration config() {
+        return null;
       }
     };
     underTest = new AbstractGlobalProtobufFileProcessor("foo") {

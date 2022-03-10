@@ -30,7 +30,7 @@ import org.sonar.api.batch.fs.internal.DefaultInputFile;
 import org.sonar.api.batch.fs.internal.TestInputFileBuilder;
 import org.sonar.api.batch.sensor.internal.DefaultSensorDescriptor;
 import org.sonar.api.batch.sensor.internal.SensorContextTester;
-import org.sonar.api.config.Settings;
+import org.sonar.api.config.internal.MapSettings;
 import org.sonar.api.utils.log.LogTester;
 import org.sonar.api.utils.log.LoggerLevel;
 
@@ -51,7 +51,7 @@ public class FileTypeSensorTest {
   @Rule
   public TemporaryFolder temp = new TemporaryFolder();
 
-  private Settings settingsMock;
+  private MapSettings settingsMock;
   private SensorContextTester tester;
   private ProjectTypeCollector projectTypeCollectorMock;
   private DotNetPluginMetadata pluginMetadataMock;
@@ -59,7 +59,7 @@ public class FileTypeSensorTest {
 
   @Before
   public void prepare() throws Exception {
-    settingsMock = mock(Settings.class);
+    settingsMock = mock(MapSettings.class);
     tester = SensorContextTester.create(new File("src/test/resources"));
     tester.fileSystem().setWorkDir(temp.newFolder().toPath());
     tester.setSettings(settingsMock);

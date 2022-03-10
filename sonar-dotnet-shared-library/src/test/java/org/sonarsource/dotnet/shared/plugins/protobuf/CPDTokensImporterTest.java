@@ -31,10 +31,12 @@ import org.sonar.api.batch.fs.internal.FileMetadata;
 import org.sonar.api.batch.fs.internal.TestInputFileBuilder;
 import org.sonar.api.batch.sensor.cpd.internal.TokensLine;
 import org.sonar.api.batch.sensor.internal.SensorContextTester;
+import org.sonar.api.notifications.AnalysisWarnings;
 import org.sonar.api.utils.log.LogTester;
 import org.sonar.api.utils.log.LoggerLevel;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.Mockito.mock;
 import static org.sonarsource.dotnet.shared.plugins.ProtobufDataImporter.CPDTOKENS_FILENAME;
 
 public class CPDTokensImporterTest {
@@ -59,7 +61,7 @@ public class CPDTokensImporterTest {
   @Test
   public void test_copy_paste_tokens_get_imported() throws FileNotFoundException {
     DefaultInputFile inputFile = new TestInputFileBuilder("dummyKey", TEST_FILE_PATH)
-      .setMetadata(new FileMetadata().readMetadata(new FileReader(TEST_FILE)))
+      .setMetadata(new FileMetadata(mock(AnalysisWarnings.class)).readMetadata(new FileReader(TEST_FILE)))
       .build();
     tester.fileSystem().add(inputFile);
 
@@ -72,7 +74,7 @@ public class CPDTokensImporterTest {
   @Test
   public void ignore_repeated_files() throws FileNotFoundException {
     DefaultInputFile inputFile = new TestInputFileBuilder("dummyKey", TEST_FILE_PATH)
-      .setMetadata(new FileMetadata().readMetadata(new FileReader(TEST_FILE)))
+      .setMetadata(new FileMetadata(mock(AnalysisWarnings.class)).readMetadata(new FileReader(TEST_FILE)))
       .build();
     tester.fileSystem().add(inputFile);
 
