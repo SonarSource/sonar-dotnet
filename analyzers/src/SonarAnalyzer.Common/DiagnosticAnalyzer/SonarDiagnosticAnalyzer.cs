@@ -50,7 +50,7 @@ namespace SonarAnalyzer.Helpers
             {
                 return result;
             }
-            return false;
+            return true;
         }
     }
 

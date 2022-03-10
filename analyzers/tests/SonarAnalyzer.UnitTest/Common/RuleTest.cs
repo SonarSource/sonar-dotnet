@@ -95,17 +95,18 @@ namespace SonarAnalyzer.UnitTest.Common
         }
 
         [TestMethod]
-        public void Verify_ConcurrentExecutionDisabledByDefault()
+        public void Verify_ConcurrentExecutionIsEnabledByDefault()
         {
             var reader = new ConcurrentExecutionReader();
             reader.IsConcurrentExecutionEnabled.Should().BeNull();
             VerifyNoExceptionThrown("TestCases\\AsyncVoidMethod.cs", new[] { reader });
-            reader.IsConcurrentExecutionEnabled.Should().BeFalse();
+            reader.IsConcurrentExecutionEnabled.Should().BeTrue();
         }
 
         [DataTestMethod]
         [DataRow("true")]
         [DataRow("tRUE")]
+        [DataRow("loremipsum")]
         public void Verify_ConcurrentExecutionIsExplicitlyEnabled(string value)
         {
             using var scope = new EnvironmentVariableScope(false);
@@ -119,7 +120,6 @@ namespace SonarAnalyzer.UnitTest.Common
         [TestMethod]
         [DataRow("false")]
         [DataRow("fALSE")]
-        [DataRow("loremipsum")]
         public void Verify_ConcurrentExecutionIsExplicitlyDisabled(string value)
         {
             using var scope = new EnvironmentVariableScope(false);
