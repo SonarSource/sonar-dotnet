@@ -168,13 +168,38 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
         private SymbolicContext EnsureContext(SymbolicContext current, ProgramState newState) =>
             current.State == newState ? current : new SymbolicContext(symbolicValueCounter, current.Operation, newState);
 
-        private static bool IsReachable(ExplodedNode node, ControlFlowBranch branch) =>
-            node.Block.ConditionKind != ControlFlowConditionKind.None
-            && node.Block.BranchValue?.TrackedSymbol() is { } branchSymbol
-            && node.State[branchSymbol] is { } sv
-            && sv.HasConstraint<BoolConstraint>()
-                ? IsReachable(branch, node.Block.ConditionKind == ControlFlowConditionKind.WhenTrue, sv.HasConstraint(BoolConstraint.True))
-                : true;    // Unconditional or we don't know the value and need to explore both paths
+        private static bool IsReachable(ExplodedNode node, ControlFlowBranch branch) {
+            if (node.Block.ConditionKind != ControlFlowConditionKind.None)
+            {
+                if (node.Block.BranchValue?.TrackedSymbol() is { } branchSymbol)
+                {
+                    if (node.State[branchSymbol] is { } sv)
+                    {
+                        if (sv.HasConstraint<BoolConstraint>())
+                        {
+                            return IsReachable(branch, node.Block.ConditionKind == ControlFlowConditionKind.WhenTrue, sv.HasConstraint(BoolConstraint.True));
+                        }
+                        else
+                        {
+                            return true;
+                        }
+                    }
+                    else
+                    {
+                        return true;
+                    }
+                }
+                else
+                {
+                    return true;
+                }
+            }
+            else
+            {
+                return true;
+            }
+        }
+
 
         private static bool IsReachable(ControlFlowBranch branch, bool condition, bool constraint) =>
             branch.IsConditionalSuccessor ? condition == constraint : condition != constraint;
