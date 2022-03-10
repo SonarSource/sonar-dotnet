@@ -20,11 +20,16 @@
 package org.sonar.plugins.csharp;
 
 import org.junit.Test;
+import org.sonar.api.SonarEdition;
+import org.sonar.api.SonarQubeSide;
+import org.sonar.api.SonarRuntime;
+import org.sonar.api.internal.SonarRuntimeImpl;
 import org.sonar.api.rules.RuleType;
 import org.sonar.api.server.debt.DebtRemediationFunction;
 import org.sonar.api.server.rule.RulesDefinition;
 import org.sonar.api.server.rule.RulesDefinition.Context;
 import org.sonar.api.server.rule.RulesDefinition.Rule;
+import org.sonar.api.utils.Version;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -32,12 +37,14 @@ public class CSharpSonarRulesDefinitionTest {
   private static final String SECURITY_HOTSPOT_RULE_KEY = "S5766";
   private static final String VULNERABILITY_RULE_KEY = "S4426";
 
+  private static final SonarRuntime SONAR_RUNTIME = SonarRuntimeImpl.forSonarQube(Version.create(9, 3), SonarQubeSide.SCANNER, SonarEdition.COMMUNITY);
+
   @Test
   public void test() {
     Context context = new Context();
     assertThat(context.repositories()).isEmpty();
 
-    CSharpSonarRulesDefinition csharpRulesDefinition = new CSharpSonarRulesDefinition();
+    CSharpSonarRulesDefinition csharpRulesDefinition = new CSharpSonarRulesDefinition(SONAR_RUNTIME);
     csharpRulesDefinition.define(context);
 
     assertThat(context.repositories()).hasSize(1);
@@ -51,7 +58,7 @@ public class CSharpSonarRulesDefinitionTest {
 
   @Test
   public void test_security_hotspot() {
-    CSharpSonarRulesDefinition definition = new CSharpSonarRulesDefinition();
+    CSharpSonarRulesDefinition definition = new CSharpSonarRulesDefinition(SONAR_RUNTIME);
     RulesDefinition.Context context = new RulesDefinition.Context();
     definition.define(context);
     RulesDefinition.Repository repository = context.repository("csharpsquid");
@@ -63,31 +70,42 @@ public class CSharpSonarRulesDefinitionTest {
 
   @Test
   public void test_security_hotspot_has_correct_type_and_security_standards() {
-    CSharpSonarRulesDefinition definition = new CSharpSonarRulesDefinition();
+    CSharpSonarRulesDefinition definition = new CSharpSonarRulesDefinition(SONAR_RUNTIME);
     RulesDefinition.Context context = new RulesDefinition.Context();
     definition.define(context);
     RulesDefinition.Repository repository = context.repository("csharpsquid");
 
     RulesDefinition.Rule rule = repository.rule(SECURITY_HOTSPOT_RULE_KEY);
     assertThat(rule.type()).isEqualTo(RuleType.SECURITY_HOTSPOT);
-    assertThat(rule.securityStandards()).containsExactlyInAnyOrder("cwe:502", "owaspTop10:a8");
+    assertThat(rule.securityStandards()).containsExactlyInAnyOrder("cwe:502", "owaspTop10:a8", "owaspTop10-2021:a8");
   }
 
   @Test
   public void test_security_standards_with_vulnerability() {
-    CSharpSonarRulesDefinition definition = new CSharpSonarRulesDefinition();
+    CSharpSonarRulesDefinition definition = new CSharpSonarRulesDefinition(SONAR_RUNTIME);
     RulesDefinition.Context context = new RulesDefinition.Context();
     definition.define(context);
     RulesDefinition.Repository repository = context.repository("csharpsquid");
 
     RulesDefinition.Rule rule = repository.rule(VULNERABILITY_RULE_KEY);
     assertThat(rule.type()).isEqualTo(RuleType.VULNERABILITY);
+    assertThat(rule.securityStandards()).containsExactlyInAnyOrder("cwe:326", "owaspTop10:a3", "owaspTop10:a6", "owaspTop10-2021:a2");
+  }
+
+  @Test
+  public void test_security_standards_before_9_3() {
+    SonarRuntime sonarRuntime = SonarRuntimeImpl.forSonarQube(Version.create(9, 2), SonarQubeSide.SCANNER, SonarEdition.COMMUNITY);
+    RulesDefinition.Context context = new RulesDefinition.Context();
+    new CSharpSonarRulesDefinition(sonarRuntime).define(context);
+    RulesDefinition.Repository repository = context.repository("csharpsquid");
+
+    RulesDefinition.Rule rule = repository.rule(VULNERABILITY_RULE_KEY);
     assertThat(rule.securityStandards()).containsExactlyInAnyOrder("cwe:326", "owaspTop10:a3", "owaspTop10:a6");
   }
 
   @Test
   public void test_all_rules_have_status_set(){
-    CSharpSonarRulesDefinition definition = new CSharpSonarRulesDefinition();
+    CSharpSonarRulesDefinition definition = new CSharpSonarRulesDefinition(SONAR_RUNTIME);
     RulesDefinition.Context context = new RulesDefinition.Context();
     definition.define(context);
     RulesDefinition.Repository repository = context.repository("csharpsquid");
