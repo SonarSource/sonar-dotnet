@@ -69,7 +69,10 @@ namespace SonarAnalyzer.UnitTest
         }
 
         public static ControlFlowGraph CompileCfgBodyCS(string body = null, string additionalParameters = null) =>
-            CompileCfg($"public class Sample {{ public void Main({additionalParameters}) {{ {body} }} }}", AnalyzerLanguage.CSharp);
+            CompileCfgBodyCS(out _, body, additionalParameters);
+
+        public static ControlFlowGraph CompileCfgBodyCS(out ISymbol methodSymbol, string body = null, string additionalParameters = null) =>
+            CompileCfg($"public class Sample {{ public void Main({additionalParameters}) {{ {body} }} }}", AnalyzerLanguage.CSharp, out methodSymbol);
 
         public static ControlFlowGraph CompileCfgBodyVB(string body = null) =>
             CompileCfg(
@@ -79,13 +82,21 @@ $@"Public Class Sample
     End Sub
 End Class", AnalyzerLanguage.VisualBasic);
 
-        public static ControlFlowGraph CompileCfgCS(string snippet, bool ignoreErrors = false) =>
-            CompileCfg(snippet, AnalyzerLanguage.CSharp, ignoreErrors);
+        public static ControlFlowGraph CompileCfgCS(out ISymbol methodSymbol, string snippet, bool ignoreErrors = false) =>
+            CompileCfg(snippet, AnalyzerLanguage.CSharp, out methodSymbol, ignoreErrors);
 
-        public static ControlFlowGraph CompileCfg(string snippet, AnalyzerLanguage language, bool ignoreErrors = false)
+        public static ControlFlowGraph CompileCfgCS(string snippet, bool ignoreErrors = false) =>
+            CompileCfgCS(out _, snippet, ignoreErrors);
+
+        public static ControlFlowGraph CompileCfg(string snippet, AnalyzerLanguage language, bool ignoreErrors = false) =>
+            CompileCfg(snippet, language, out _, ignoreErrors);
+
+        public static ControlFlowGraph CompileCfg(string snippet, AnalyzerLanguage language, out ISymbol methodsymbol, bool ignoreErrors = false)
         {
             var (tree, semanticModel) = Compile(snippet, ignoreErrors, language);
             var method = tree.GetRoot().DescendantNodes().First(IsMethod);
+            methodsymbol = semanticModel.GetDeclaredSymbol(method);
+
             return ControlFlowGraph.Create(method, semanticModel);
 
             bool IsMethod(SyntaxNode node) =>

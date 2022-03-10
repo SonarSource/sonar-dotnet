@@ -83,7 +83,7 @@ namespace SonarAnalyzer.Rules
                 {
                     if (CreateCfg(nodeContext.SemanticModel, body) is { } cfg)
                     {
-                        var engine = new RoslynSymbolicExecution(cfg, checks);
+                        var engine = new RoslynSymbolicExecution(cfg, checks, symbol);
                         engine.Execute();
                     }
                 }

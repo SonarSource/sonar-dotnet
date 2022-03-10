@@ -21,8 +21,11 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Microsoft.CodeAnalysis;
+using SonarAnalyzer.CFG.LiveVariableAnalysis;
 using SonarAnalyzer.CFG.Roslyn;
 using SonarAnalyzer.SymbolicExecution.Constraints;
+using SonarAnalyzer.Helpers;
 using SonarAnalyzer.SymbolicExecution.Roslyn.Checks;
 using SonarAnalyzer.SymbolicExecution.Roslyn.OperationProcessors;
 using StyleCop.Analyzers.Lightup;
@@ -39,15 +42,24 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
         private readonly Queue<ExplodedNode> queue = new();
         private readonly SymbolicValueCounter symbolicValueCounter = new();
         private readonly HashSet<ExplodedNode> visited = new();
+        private readonly RoslynLiveVariableAnalysis lva;
+        private readonly IEnumerable<IParameterSymbol> nonInDeclarationParameters;
 
-        public RoslynSymbolicExecution(ControlFlowGraph cfg, SymbolicCheck[] checks)
+        public RoslynSymbolicExecution(ControlFlowGraph cfg, SymbolicCheck[] checks, ISymbol declaration)
         {
             this.cfg = cfg ?? throw new ArgumentNullException(nameof(cfg));
+            if (declaration == null)
+            {
+                throw new ArgumentNullException(nameof(declaration));
+            }
             if (checks == null || checks.Length == 0)
             {
                 throw new ArgumentException("At least one check is expected", nameof(checks));
             }
             this.checks = new(new[] { new ConstantCheck() }.Concat(checks).ToArray());
+            lva = new RoslynLiveVariableAnalysis(cfg, declaration);
+            var declarationParameters = declaration.GetParameters();
+            nonInDeclarationParameters = declarationParameters.Where(p => p.RefKind != RefKind.None);
         }
 
         public void Execute()
@@ -89,10 +101,12 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
             }
             else if (node.Block.ContainsThrow())
             {
+                node = new ExplodedNode(cfg.ExitBlock, CleanStateAfterBlock(node.State, node.Block), null);
                 yield return new(cfg.ExitBlock, node.State, null);
             }
             else
             {
+                node = new ExplodedNode(node.Block, CleanStateAfterBlock(node.State, node.Block), node.FinallyPoint);
                 foreach (var successor in node.Block.Successors.Where(x => IsReachable(node, x)))
                 {
                     if (ProcessBranch(node, successor) is { } newNode)
@@ -187,6 +201,15 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
                 OperationKindEx.SimpleAssignment => SimpleAssignment.Process(context, ISimpleAssignmentOperationWrapper.FromOperation(context.Operation.Instance)),
                 _ => context.State
             };
+
+        private ProgramState CleanStateAfterBlock(ProgramState programState, BasicBlock block)
+        {
+            var liveVariables = lva.LiveOut(block).Union(nonInDeclarationParameters); // LVA excludes out and ref parameters
+
+            // ToDo: Remove the IFieldSymbol check when SLVS-1136 is fixed
+            return programState.RemoveSymbols(
+                symbol => symbol is not IFieldSymbol && !liveVariables.Contains(symbol));
+        }
 
         private static bool IsReachable(ExplodedNode node, ControlFlowBranch branch) =>
             node.Block.ConditionKind != ControlFlowConditionKind.None

@@ -38,6 +38,7 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
         private ImmutableDictionary<ISymbol, SymbolicValue> SymbolValue { get; init; }
         private ImmutableDictionary<int, int> VisitCount { get; init; }
         private ImmutableDictionary<CaptureId, IOperation> CaptureOperation { get; init; }
+        private ImmutableHashSet<ISymbol> PreservedSymbols { get; init; }
 
         public SymbolicValue this[IOperationWrapperSonar operation] => this[operation.Instance];
         public SymbolicValue this[IOperation operation] => OperationValue.TryGetValue(ResolveCapture(operation), out var value) ? value : null;
@@ -50,6 +51,7 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
             SymbolValue = ImmutableDictionary<ISymbol, SymbolicValue>.Empty;
             VisitCount = ImmutableDictionary<int, int>.Empty;
             CaptureOperation = ImmutableDictionary<CaptureId, IOperation>.Empty;
+            PreservedSymbols = ImmutableHashSet<ISymbol>.Empty;
         }
 
         public ProgramState SetOperationValue(IOperationWrapperSonar operation, SymbolicValue value) =>
@@ -95,8 +97,14 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
                 ? captured
                 : operation;
 
+        public ProgramState RemoveSymbols(Func<ISymbol, bool> predicate) =>
+            this with { SymbolValue = SymbolValue.Where(kv => !predicate(kv.Key) || PreservedSymbols.Contains(kv.Key)).ToImmutableDictionary() };
+
         public ProgramState AddVisit(int programPointHash) =>
             this with { VisitCount = VisitCount.SetItem(programPointHash, GetVisitCount(programPointHash) + 1) };
+
+        public ProgramState Preserve(ISymbol symbol) =>
+            this with { PreservedSymbols = PreservedSymbols.Add(symbol) };
 
         public int GetVisitCount(int programPointHash) =>
             VisitCount.TryGetValue(programPointHash, out var count) ? count : 0;
