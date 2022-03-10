@@ -30,7 +30,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework.SymbolicExecution
 
         protected override DiagnosticDescriptor Rule => SBinary;
 
-        public override ProgramState PostProcess(SymbolicContext context)
+        protected override ProgramState PostProcessSimple(SymbolicContext context)
         {
             if (context.Operation.Instance.Kind == OperationKind.Binary)
             {

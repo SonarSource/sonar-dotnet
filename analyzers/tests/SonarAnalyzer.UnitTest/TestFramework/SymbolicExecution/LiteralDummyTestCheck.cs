@@ -25,7 +25,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework.SymbolicExecution
 {
     internal class LiteralDummyTestCheck : SymbolicCheck
     {
-        public override ProgramState PreProcess(SymbolicContext context) =>
+        protected override ProgramState PreProcessSimple(SymbolicContext context) =>
             context.Operation.Instance.Kind == OperationKind.Literal
                 ? context.SetOperationConstraint(DummyConstraint.Dummy)
                 : context.State;

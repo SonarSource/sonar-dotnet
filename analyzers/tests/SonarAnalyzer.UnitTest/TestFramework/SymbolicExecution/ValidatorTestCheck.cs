@@ -37,18 +37,6 @@ namespace SonarAnalyzer.UnitTest.TestFramework.SymbolicExecution
         private int exitReachedCount;
         private int executionCompletedCount;
 
-        public override ProgramState PostProcess(SymbolicContext context)
-        {
-            postProcessed.Add(context);
-            if (context.Operation.Instance is IInvocationOperation invocation && invocation.TargetMethod.Name == "Tag")
-            {
-                var tagName = invocation.Arguments.First().Value.ConstantValue;
-                tagName.HasValue.Should().BeTrue("tag should have literal name");
-                tags.Add(((string)tagName.Value, context));
-            }
-            return context.State;
-        }
-
         public override ProgramState ExitReached(SymbolicContext context)
         {
             exitReachedCount++;
@@ -90,6 +78,18 @@ namespace SonarAnalyzer.UnitTest.TestFramework.SymbolicExecution
 
         public void ValidateOperationValuesAreNull() =>
             postProcessed.Should().OnlyContain(x => x.State[x.Operation] == null);
+
+        protected override ProgramState PostProcessSimple(SymbolicContext context)
+        {
+            postProcessed.Add(context);
+            if (context.Operation.Instance is IInvocationOperation invocation && invocation.TargetMethod.Name == "Tag")
+            {
+                var tagName = invocation.Arguments.First().Value.ConstantValue;
+                tagName.HasValue.Should().BeTrue("tag should have literal name");
+                tags.Add(((string)tagName.Value, context));
+            }
+            return context.State;
+        }
 
         private static ISymbol Symbol(IOperation operation) =>
             operation.TrackedSymbol() ?? operation switch

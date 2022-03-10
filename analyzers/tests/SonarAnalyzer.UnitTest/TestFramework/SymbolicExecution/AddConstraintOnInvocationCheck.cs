@@ -31,7 +31,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework.SymbolicExecution
     {
         private static readonly SymbolicConstraint[] AvailableConstraints = { TestConstraint.First, BoolConstraint.True, DummyConstraint.Dummy, LockConstraint.Held };
 
-        public override ProgramState PostProcess(SymbolicContext context) =>
+        protected override ProgramState PostProcessSimple(SymbolicContext context) =>
             context.Operation.Instance is IInvocationOperation invocation
             && invocation.Instance.TrackedSymbol() is { } symbol
             && AvailableConstraints.FirstOrDefault(x => context.State[symbol] is null || !context.State[symbol].HasConstraint(x)) is { } nextConstraint

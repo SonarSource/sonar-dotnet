@@ -18,6 +18,8 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System;
+
 namespace SonarAnalyzer.SymbolicExecution.Roslyn
 {
     /// <summary>
@@ -25,14 +27,43 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
     /// </summary>
     public class SymbolicCheck
     {
+        protected static readonly ProgramState[] EmptyStates =  Array.Empty<ProgramState>();
+
         protected SymbolicCheck() { } // Avoid abstract class, fixes S1694
 
-        public virtual ProgramState PreProcess(SymbolicContext context) => context.State;
+        /// <summary>
+        /// Override this if you need to return multiple states.
+        /// </summary>
+        public virtual ProgramState[] PreProcess(SymbolicContext context) =>
+            PreProcessSimple(context) is { } newState ? new[] { newState } : EmptyStates;
 
-        public virtual ProgramState PostProcess(SymbolicContext context) => context.State;
+        /// <summary>
+        /// Override this if you need to return multiple states.
+        /// </summary>
+        public virtual ProgramState[] PostProcess(SymbolicContext context) =>
+            PostProcessSimple(context) is { } newState ? new[] { newState } : EmptyStates;
 
-        public virtual ProgramState ExitReached(SymbolicContext context) => context.State;
+        /// <summary>
+        /// Method is invoked for each execution flow that reaches exit block. Once for each unique state after LVA cleanup.
+        /// </summary>
+        public virtual ProgramState ExitReached(SymbolicContext context) =>
+            context.State;
 
+        /// <summary>
+        /// Method is invoked once for analyzed CFG.
+        /// </summary>
         public virtual void ExecutionCompleted() { }
+
+        /// <summary>
+        /// Override this if you need to return a single state or null to stop the execution.
+        /// </summary>
+        protected virtual ProgramState PreProcessSimple(SymbolicContext context) =>
+            context.State;
+
+        /// <summary>
+        /// Override this if you need to return a single state or null to stop the execution.
+        /// </summary>
+        protected virtual ProgramState PostProcessSimple(SymbolicContext context) =>
+            context.State;
     }
 }
