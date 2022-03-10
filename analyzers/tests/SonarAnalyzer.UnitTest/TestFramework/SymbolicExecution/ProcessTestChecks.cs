@@ -19,27 +19,44 @@
  */
 
 using SonarAnalyzer.SymbolicExecution.Roslyn;
-using ProcessFunc = System.Func<SonarAnalyzer.SymbolicExecution.Roslyn.SymbolicContext, SonarAnalyzer.SymbolicExecution.Roslyn.ProgramState>;
+using ProcessFunc = System.Func<SonarAnalyzer.SymbolicExecution.Roslyn.SymbolicContext, SonarAnalyzer.SymbolicExecution.Roslyn.ProgramState[]>;
+using ProcessFuncSimple = System.Func<SonarAnalyzer.SymbolicExecution.Roslyn.SymbolicContext, SonarAnalyzer.SymbolicExecution.Roslyn.ProgramState>;
 
 namespace SonarAnalyzer.UnitTest.TestFramework.SymbolicExecution
 {
     internal class PreProcessTestCheck : SymbolicCheck
     {
-        private readonly ProcessFunc preProcess;
+        private readonly ProcessFuncSimple processSingle;
+        private readonly ProcessFunc process;
 
-        public PreProcessTestCheck(ProcessFunc preProcess) =>
-            this.preProcess = preProcess;
+        public PreProcessTestCheck(ProcessFuncSimple processSingle) =>
+            this.processSingle = processSingle;
 
-        public override ProgramState PreProcess(SymbolicContext context) => preProcess(context);
+        public PreProcessTestCheck(ProcessFunc process) =>
+            this.process = process;
+
+        protected override ProgramState PreProcessSimple(SymbolicContext context) =>
+            processSingle is null ? base.PreProcessSimple(context) : processSingle(context);
+
+        public override ProgramState[] PreProcess(SymbolicContext context) =>
+            process is null ? base.PreProcess(context) : process(context);
     }
 
     internal class PostProcessTestCheck : SymbolicCheck
     {
-        private readonly ProcessFunc postProcess;
+        private readonly ProcessFuncSimple processSingle;
+        private readonly ProcessFunc process;
 
-        public PostProcessTestCheck(ProcessFunc postProcess) =>
-            this.postProcess = postProcess;
+        public PostProcessTestCheck(ProcessFuncSimple processSingle) =>
+            this.processSingle = processSingle;
 
-        public override ProgramState PostProcess(SymbolicContext context) => postProcess(context);
+        public PostProcessTestCheck(ProcessFunc process) =>
+            this.process = process;
+
+        protected override ProgramState PostProcessSimple(SymbolicContext context) =>
+            processSingle is null ? base.PostProcessSimple(context) : processSingle(context);
+
+        public override ProgramState[] PostProcess(SymbolicContext context) =>
+            process is null ? base.PostProcess(context) : process(context);
     }
 }

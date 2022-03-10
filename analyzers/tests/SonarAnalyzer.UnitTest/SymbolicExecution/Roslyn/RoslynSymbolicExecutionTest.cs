@@ -26,6 +26,7 @@ using Microsoft.CodeAnalysis.Operations;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using SonarAnalyzer.Helpers;
+using SonarAnalyzer.SymbolicExecution;
 using SonarAnalyzer.SymbolicExecution.Constraints;
 using SonarAnalyzer.SymbolicExecution.Roslyn;
 using SonarAnalyzer.UnitTest.TestFramework.SymbolicExecution;
@@ -181,5 +182,43 @@ namespace SonarAnalyzer.UnitTest.SymbolicExecution.Roslyn
             validator.ValidateExitReachCount(0);
             validator.ValidateExecutionNotCompleted();
         }
+
+        [TestMethod]
+        public void Execute_CheckProducesMoreStates_PreProcess()
+        {
+            var check = new PreProcessTestCheck(x => DecorateIntLiteral(x, TestConstraint.First, TestConstraint.Second));
+            SETestContext.CreateCS(@"var i = 42; Tag(""I"", i);", check).Validator.TagValues("I").Should()
+                .HaveCount(2)
+                .And.ContainSingle(x => x.HasConstraint(TestConstraint.First))
+                .And.ContainSingle(x => x.HasConstraint(TestConstraint.Second));
+        }
+
+        [TestMethod]
+        public void Execute_CheckProducesMoreStates_PostProcess()
+        {
+            var check = new PostProcessTestCheck(x => DecorateIntLiteral(x, TestConstraint.First, TestConstraint.Second));
+            SETestContext.CreateCS(@"var i = 42; Tag(""I"", i);", check).Validator.TagValues("I").Should()
+                .HaveCount(2)
+                .And.ContainSingle(x => x.HasConstraint(TestConstraint.First))
+                .And.ContainSingle(x => x.HasConstraint(TestConstraint.Second));
+        }
+
+        [TestMethod]
+        public void Execute_CheckProducesMoreStates_Both()
+        {
+            var preProcess = new PreProcessTestCheck(x => DecorateIntLiteral(x, TestConstraint.First, TestConstraint.Second));
+            var postProcess = new PostProcessTestCheck(x => DecorateIntLiteral(x, BoolConstraint.True, BoolConstraint.False));
+            SETestContext.CreateCS(@"var i = 42; Tag(""I"", i);", preProcess, postProcess).Validator.TagValues("I").Should()
+                .HaveCount(4)
+                .And.ContainSingle(x => x.HasConstraint(TestConstraint.First) && x.HasConstraint(BoolConstraint.True))
+                .And.ContainSingle(x => x.HasConstraint(TestConstraint.First) && x.HasConstraint(BoolConstraint.False))
+                .And.ContainSingle(x => x.HasConstraint(TestConstraint.Second) && x.HasConstraint(BoolConstraint.True))
+                .And.ContainSingle(x => x.HasConstraint(TestConstraint.Second) && x.HasConstraint(BoolConstraint.False));
+        }
+
+        private ProgramState[] DecorateIntLiteral(SymbolicContext context, SymbolicConstraint first, SymbolicConstraint second) =>
+            context.Operation.Instance.Kind == OperationKind.Literal && context.Operation.Instance.ConstantValue.Value is int
+                ? new[] { context.SetOperationConstraint(first), context.SetOperationConstraint(second) }
+                : new[] { context.State };
     }
 }
