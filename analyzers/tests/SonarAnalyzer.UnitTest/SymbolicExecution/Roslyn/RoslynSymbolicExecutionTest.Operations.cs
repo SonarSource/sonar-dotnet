@@ -170,5 +170,17 @@ namespace SonarAnalyzer.UnitTest.SymbolicExecution.Roslyn
                 @"ExpressionStatement: Tag(""b"", b);");
             validator.ValidateTag("b", x => x.HasConstraint(DummyConstraint.Dummy).Should().BeTrue());
         }
+
+        [TestMethod]
+        public void Argument_Ref_ResetsConstraints_CS() =>
+            SETestContext.CreateCS(@"var b = true; Main(boolParameter, ref b); Tag(""B"", b);", ", ref bool outParam").Validator.ValidateTag("B", x => x.Should().BeNull());
+
+        [TestMethod]
+        public void Argument_Out_ResetsConstraints_CS() =>
+            SETestContext.CreateCS(@"var b = true; Main(boolParameter, out b); Tag(""B"", b); outParam = false;", ", out bool outParam").Validator.ValidateTag("B", x => x.Should().BeNull());
+
+        [TestMethod]
+        public void Argument_ByRef_ResetConstraints_VB() =>
+            SETestContext.CreateVB(@"Dim B As Boolean = True : Main(BoolParameter, B) : Tag(""B"", B)", ", ByRef ByRefParam As Boolean").Validator.ValidateTag("B", x => x.Should().BeNull());
     }
 }
