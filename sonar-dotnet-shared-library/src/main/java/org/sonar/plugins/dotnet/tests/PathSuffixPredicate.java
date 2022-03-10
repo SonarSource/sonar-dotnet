@@ -34,9 +34,7 @@ class PathSuffixPredicate implements FilePredicate {
     return inputFile.uri().getPath().endsWith(pathSuffix);
   }
 
-  /**
-   * visible for testing
-   */
+  // visible for testing
   String getPathSuffix() {
     return pathSuffix;
   }

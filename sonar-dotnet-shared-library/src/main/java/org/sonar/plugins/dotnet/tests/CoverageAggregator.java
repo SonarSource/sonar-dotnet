@@ -57,9 +57,7 @@ public class CoverageAggregator {
     this.visualStudioCoverageXmlReportParser = new VisualStudioCoverageXmlReportParser(fileService);
   }
 
-  /**
-   * visible for testing
-   */
+  // visible for testing
   CoverageAggregator(CoverageConfiguration coverageConf,
                      Configuration configuration,
                      CoverageCache coverageCache,
@@ -81,9 +79,7 @@ public class CoverageAggregator {
     return hasCoverageProperty(configuration::hasKey);
   }
 
-  /**
-   * visible for testing
-   */
+   // visible for testing
   boolean hasCoverageProperty(Predicate<String> hasKeyPredicate) {
     return hasNCover3ReportPaths(hasKeyPredicate)
       || hasOpenCoverReportPaths(hasKeyPredicate)
