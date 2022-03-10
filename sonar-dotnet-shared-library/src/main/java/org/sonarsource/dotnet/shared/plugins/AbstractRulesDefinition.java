@@ -88,26 +88,33 @@ public abstract class AbstractRulesDefinition implements RulesDefinition {
   }
 
   private void updateSecurityStandards(NewRule rule, RuleMetadata ruleMetadata) {
-    for (String s : ruleMetadata.securityStandards.OWASP_2017) {
+    for (String s : ruleMetadata.securityStandards.owasp2017) {
       rule.addOwaspTop10(RulesDefinition.OwaspTop10.valueOf(s));
     }
     if (isOwaspByVersionSupported) {
-      for (String s : ruleMetadata.securityStandards.OWASP_2021) {
+      for (String s : ruleMetadata.securityStandards.owasp2021) {
         rule.addOwaspTop10(RulesDefinition.OwaspTop10Version.Y2021, RulesDefinition.OwaspTop10.valueOf(s));
       }
     }
-    rule.addCwe(ruleMetadata.securityStandards.CWE);
+    rule.addCwe(ruleMetadata.securityStandards.cwe);
   }
 
   private RuleMetadata readRuleMetadata(String ruleKey) {
     String resourcePath = getRuleJson(ruleKey);
-    try (InputStream stream = AbstractRulesDefinition.class.getResourceAsStream(resourcePath)) {
+    try (InputStream stream = getResourceAsStream(resourcePath)) {
       return  stream != null
         ? GSON.fromJson(new InputStreamReader(stream, StandardCharsets.UTF_8), RuleMetadata.class)
         : new RuleMetadata();
     } catch (IOException e) {
       throw new IllegalStateException("Failed to read: " + resourcePath, e);
     }
+  }
+
+  /**
+   * method is extracted for testability of this class
+   */
+  InputStream getResourceAsStream(String resourcePath) {
+    return AbstractRulesDefinition.class.getResourceAsStream(resourcePath);
   }
 
   protected abstract String getRuleJson(String ruleKey);
@@ -125,12 +132,13 @@ public abstract class AbstractRulesDefinition implements RulesDefinition {
   }
 
   private static class SecurityStandards {
-    int[] CWE = {};
+    @SerializedName("CWE")
+    int[] cwe = {};
 
     @SerializedName("OWASP Top 10 2021")
-    String[] OWASP_2021 = {};
+    String[] owasp2021 = {};
 
     @SerializedName("OWASP")
-    String[] OWASP_2017 = {};
+    String[] owasp2017 = {};
   }
 }

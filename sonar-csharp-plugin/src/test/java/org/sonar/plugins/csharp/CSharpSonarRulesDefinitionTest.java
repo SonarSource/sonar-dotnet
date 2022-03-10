@@ -93,7 +93,7 @@ public class CSharpSonarRulesDefinitionTest {
   }
 
   @Test
-  public void test_security_standards_befor_9_3() {
+  public void test_security_standards_before_9_3() {
     SonarRuntime sonarRuntime = SonarRuntimeImpl.forSonarQube(Version.create(9, 2), SonarQubeSide.SCANNER, SonarEdition.COMMUNITY);
     RulesDefinition.Context context = new RulesDefinition.Context();
     new CSharpSonarRulesDefinition(sonarRuntime).define(context);

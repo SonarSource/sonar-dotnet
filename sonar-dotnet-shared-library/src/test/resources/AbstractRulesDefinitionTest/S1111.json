@@ -1,0 +1,28 @@
+{
+  "title": "bla bla",
+  "type": "SECURITY_HOTSPOT",
+  "status": "ready",
+  "tags": [
+    "cwe",
+    "owasp-a10",
+    "sans-top25-porous",
+    "owasp-a3"
+  ],
+  "defaultSeverity": "Critical",
+  "ruleSpecification": "RSPEC-1111",
+  "sqKey": "S1111",
+  "scope": "Main",
+  "securityStandards": {
+    "CWE": [
+      117,
+      532
+    ],
+    "OWASP": [
+      "A3",
+      "A10"
+    ],
+    "OWASP Top 10 2021": [
+      "A9"
+    ]
+  }
+}
