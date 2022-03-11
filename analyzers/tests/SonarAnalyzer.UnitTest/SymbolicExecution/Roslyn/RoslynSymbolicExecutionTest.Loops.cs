@@ -32,7 +32,7 @@ namespace SonarAnalyzer.UnitTest.SymbolicExecution.Roslyn
         [DataRow("for (var i = 0; i < items.Length; i++)")]
         [DataRow("foreach (var i in items)")]
         [DataRow("while (value > 0)")]
-        [DataRow("while (true)")]
+        [DataRow("while (boolParameter)")]
         public void Loops_InstructionVisitedMaxTwice(string loop)
         {
             var code = $@"
@@ -63,7 +63,7 @@ else
 do
 {
     value.ToString(); // Add another constraint to 'value'
-} while (true);
+} while (boolParameter);
 Tag(""End"", value);";
             var validator = SETestContext.CreateCS(code, ", int[] items", new AddConstraintOnInvocationCheck()).Validator;
             validator.ValidateExitReachCount(4);
@@ -77,10 +77,8 @@ Tag(""End"", value);";
                 .And.ContainSingle(x => x[condition].HasConstraint(BoolConstraint.False) && x[value].HasConstraint(TestConstraint.First) && x[value].HasConstraint(BoolConstraint.True));
         }
 
-        [DataTestMethod]
-        [DataRow("value > 0")]
-        [DataRow("true")]
-        public void DoLoop_InstructionVisitedMaxTwice(string condition)
+        [TestMethod]
+        public void DoLoop_InstructionVisitedMaxTwice()
         {
             var code = $@"
 var value = 42;
@@ -88,7 +86,7 @@ do
 {{
     value.ToString(); // Add another constraint to 'value'
     value--;
-}} while ({condition});
+}} while (value > 0);
 Tag(""End"", value);";
             var validator = SETestContext.CreateCS(code, new AddConstraintOnInvocationCheck()).Validator;
             validator.ValidateExitReachCount(2);
@@ -97,18 +95,20 @@ Tag(""End"", value);";
                 .And.ContainSingle(x => x.HasConstraint(TestConstraint.First) && x.HasConstraint(BoolConstraint.True) && !x.HasConstraint(DummyConstraint.Dummy));
         }
 
-        [TestMethod]
-        public void InfiniteLoopWithNoExitBranch_InstructionVisitedMaxTwice()
+        [DataTestMethod]
+        [DataRow("for( ; ; )")]
+        [DataRow("while (true)")]
+        public void InfiniteLoopWithNoExitBranch_InstructionVisitedMaxTwice(string loop)
         {
-            const string code = @"
+            var code = @$"
 var value = 42;
-for( ; ; )
-{
+{loop}
+{{
     value.ToString(); // Add another constraint to 'value'
     Tag(""Inside"", value);
-}";
+}}";
             var validator = SETestContext.CreateCS(code, new AddConstraintOnInvocationCheck()).Validator;
-            validator.ValidateExitReachCount(0);                    // There's no branch to 'Exit' block
+            validator.ValidateExitReachCount(0);                    // There's no branch to 'Exit' block, or the exist is never reached
             validator.TagValues("Inside").Should().HaveCount(2)
                 .And.ContainSingle(x => x.HasConstraint(TestConstraint.First) && !x.HasConstraint(BoolConstraint.True))
                 .And.ContainSingle(x => x.HasConstraint(TestConstraint.First) && x.HasConstraint(BoolConstraint.True) && !x.HasConstraint(DummyConstraint.Dummy));

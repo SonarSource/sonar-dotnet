@@ -445,7 +445,7 @@ Tag(""End"");";
         }
 
         [TestMethod]
-        public void Branching_TrueLiteral_VisitsIfBranch_NotSupported()
+        public void Branching_TrueLiteral_VisitsIfBranch()
         {
             const string code = @"
 if (true)
@@ -459,7 +459,6 @@ else
 Tag(""End"");";
             SETestContext.CreateCS(code).Validator.ValidateTagOrder(
                 "If",
-                "Else", // ToDo: This should not be here, branch operation symbolic value is not persisted yet
                 "End");
         }
 
