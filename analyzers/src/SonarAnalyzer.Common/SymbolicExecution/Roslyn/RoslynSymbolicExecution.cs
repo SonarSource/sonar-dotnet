@@ -24,8 +24,8 @@ using System.Linq;
 using Microsoft.CodeAnalysis;
 using SonarAnalyzer.CFG.LiveVariableAnalysis;
 using SonarAnalyzer.CFG.Roslyn;
-using SonarAnalyzer.SymbolicExecution.Constraints;
 using SonarAnalyzer.Helpers;
+using SonarAnalyzer.SymbolicExecution.Constraints;
 using SonarAnalyzer.SymbolicExecution.Roslyn.Checks;
 using SonarAnalyzer.SymbolicExecution.Roslyn.OperationProcessors;
 using StyleCop.Analyzers.Lightup;
@@ -106,8 +106,9 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
             }
             else
             {
+                var reachableSuccessors = node.Block.Successors.Where(x => IsReachable(node, x)).ToList();
                 node = new ExplodedNode(node.Block, CleanStateAfterBlock(node.State, node.Block), node.FinallyPoint);
-                foreach (var successor in node.Block.Successors.Where(x => IsReachable(node, x)))
+                foreach (var successor in reachableSuccessors)
                 {
                     if (ProcessBranch(node, successor) is { } newNode)
                     {
