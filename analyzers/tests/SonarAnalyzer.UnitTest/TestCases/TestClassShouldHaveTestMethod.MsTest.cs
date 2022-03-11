@@ -43,6 +43,15 @@ namespace Tests.Diagnostics
     [TestClass]
     public abstract class MyCommonCode1
     {
+        [TestInitialize]
+        public void BeforeTests(TestContext context)
+        {
+        }
+
+        [TestCleanup]
+        public void AfterTests()
+        {
+        }
     }
 
     [TestClass]
@@ -175,6 +184,19 @@ namespace TestSetupAndCleanupAttributes
         }
 
         [ClassCleanupAttribute]
+        public void AfterTests()
+        {
+        }
+    }
+
+    public class NoTestClassAttribute
+    {
+        [TestInitialize]
+        public void BeforeTests(TestContext context)
+        {
+        }
+
+        [TestCleanup]
         public void AfterTests()
         {
         }
