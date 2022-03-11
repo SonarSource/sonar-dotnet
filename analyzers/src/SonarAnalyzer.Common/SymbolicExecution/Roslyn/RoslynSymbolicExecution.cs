@@ -170,7 +170,7 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
 
         private static bool IsReachable(ExplodedNode node, ControlFlowBranch branch) =>
             node.Block.ConditionKind != ControlFlowConditionKind.None
-            && node.Block.BranchValue?.TrackedSymbol() is { } branchSymbol
+            && node.Block.BranchValue.TrackedSymbol() is { } branchSymbol
             && node.State[branchSymbol] is { } sv
             && sv.HasConstraint<BoolConstraint>()
                 ? IsReachable(branch, node.Block.ConditionKind == ControlFlowConditionKind.WhenTrue, sv.HasConstraint(BoolConstraint.True))
