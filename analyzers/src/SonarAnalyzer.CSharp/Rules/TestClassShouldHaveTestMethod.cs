@@ -36,7 +36,7 @@ namespace SonarAnalyzer.Rules.CSharp
         private const string DiagnosticId = "S2187";
         private const string MessageFormat = "Add some tests to this {0}.";
 
-        private static readonly ImmutableArray<KnownType> HandledGlobalSetupAndCleanUpAttributes =
+        private static readonly ImmutableArray<KnownType> HandledSetupAndCleanUpAttributes =
             ImmutableArray.Create(
                 // Only applies to MSTest.
                 // NUnit has equivalent attributes, but they can only be applied to classes
@@ -89,6 +89,6 @@ namespace SonarAnalyzer.Rules.CSharp
             || HasSetupOrCleanupAttributes(classSymbol);
 
         private static bool HasSetupOrCleanupAttributes(INamedTypeSymbol classSymbol) =>
-            classSymbol.GetMembers().OfType<IMethodSymbol>().Any(m => m.GetAttributes(HandledGlobalSetupAndCleanUpAttributes).Any());
+            classSymbol.GetMembers().OfType<IMethodSymbol>().Any(m => m.GetAttributes(HandledSetupAndCleanUpAttributes).Any());
     }
 }
