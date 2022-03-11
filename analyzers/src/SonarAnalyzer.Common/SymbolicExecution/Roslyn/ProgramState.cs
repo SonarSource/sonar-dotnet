@@ -114,6 +114,7 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
             HashCode.Combine(
                 HashCode.DictionaryContentHash(OperationValue),
                 HashCode.DictionaryContentHash(SymbolValue),
+                HashCode.DictionaryContentHash(SymbolValue)) + PreservedSymbols.Aggregate(0, (seed, x) => seed + x.GetHashCode());
                 HashCode.DictionaryContentHash(CaptureOperation));
 
         public bool Equals(ProgramState other) =>
@@ -121,7 +122,9 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
             other is not null
             && other.OperationValue.DictionaryEquals(OperationValue)
             && other.SymbolValue.DictionaryEquals(SymbolValue)
-            && other.CaptureOperation.DictionaryEquals(CaptureOperation);
+            && other.CaptureOperation.DictionaryEquals(CaptureOperation)
+            && other.PreservedSymbols.Count == PreservedSymbols.Count
+            && other.PreservedSymbols.All(x => PreservedSymbols.Contains(x));
 
         public override string ToString() =>
             Equals(Empty) ? "Empty" : SerializeSymbols() + SerializeOperations() + SerializeCaptures();
@@ -131,6 +134,24 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
 
         private string SerializeOperations() =>
             Serialize(OperationValue, "Operations", x => x.Serialize(), x => x.ToString());
+
+        private string SerializePreservedSymbols()
+        {
+            if (PreservedSymbols.IsEmpty)
+            {
+                return null;
+            }
+            else
+            {
+                var sb = new StringBuilder();
+                sb.Append("PreservedSymbols").AppendLine(":");
+                foreach (var symbol in PreservedSymbols)
+                {
+                    sb.AppendLine(symbol.ToString());
+                }
+                return sb.ToString();
+            }
+        }
 
         private string SerializeCaptures() =>
             Serialize(CaptureOperation, "Captures", x => "#" + x.GetHashCode(), x => x.Serialize());

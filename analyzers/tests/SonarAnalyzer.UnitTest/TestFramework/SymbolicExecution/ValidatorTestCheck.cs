@@ -38,6 +38,20 @@ namespace SonarAnalyzer.UnitTest.TestFramework.SymbolicExecution
         private int executionCompletedCount;
 
         public override void ExitReached(SymbolicContext context) =>
+            if (context.Operation.Instance is IInvocationOperation invocation)
+            {
+                if (invocation.TargetMethod.Name == "Tag")
+                {
+                    var tagName = invocation.Arguments.First().Value.ConstantValue;
+                    tagName.HasValue.Should().BeTrue("tag should have literal name");
+                    tags.Add(((string)tagName.Value, context));
+                }
+                else if (invocation.TargetMethod.Name == "Preserve")
+                {
+                    var converstion = IConversionOperationWrapper.FromOperation(invocation.Arguments.First().Value);
+                    var symbol = converstion.Operand.TrackedSymbol();
+                    return context.State.Preserve(symbol);
+                }
             exitReachedCount++;
 
         public override void ExecutionCompleted() =>

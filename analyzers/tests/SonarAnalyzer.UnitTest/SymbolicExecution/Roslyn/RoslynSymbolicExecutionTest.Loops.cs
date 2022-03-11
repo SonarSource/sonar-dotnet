@@ -33,7 +33,7 @@ namespace SonarAnalyzer.UnitTest.SymbolicExecution.Roslyn
         [DataRow("foreach (var i in items)")]
         [DataRow("while (value > 0)")]
         [DataRow("while (Condition)")]
-        public void Loops_InstructionVisitedMaxTwice(string loop)
+        public void Loops_InstructionVisitedOnlyOnce(string loop)
         {
             var code = $@"
 var value = 42;
@@ -51,7 +51,7 @@ Tag(""End"", value);";
         }
 
         [TestMethod]
-        public void Loops_InstructionVisitedMaxTwice_ForEachOriginalState()
+        public void Loops_InstructionVisitedOnlyOnce_EvenWithMultipleStates()
         {
             const string code = @"
 var value = 42;
@@ -132,7 +132,7 @@ goto Start;";
         }
 
         [TestMethod]
-        public void GoTo_InstructionVisitedMaxTwice()
+        public void GoTo_InstructionVisitedOnlyOnce()
         {
             const string code = @"
 var value = 42;

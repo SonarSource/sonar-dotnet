@@ -227,6 +227,48 @@ Tag(""End"", value);";
         }
 
         [TestMethod]
+        public void Branching_MultipleExistsIfSymbolIsPreserved()
+        {
+            const string code = @"
+bool value;
+if (boolParameter)
+{
+    value = true;
+}
+else
+{
+    value = false;
+}
+Preserve(value);
+Tag(""End"", value);";
+            var validator = SETestContext.CreateCS(code, new EmptyTestCheck()).Validator;
+            validator.ValidateExitReachCount(2);    // Once with True constraint, once with False constraint on "value"
+            validator.TagValues("End").Should().HaveCount(2)
+                .And.ContainSingle(x => x.HasConstraint(BoolConstraint.True))
+                .And.ContainSingle(x => x.HasConstraint(BoolConstraint.False));
+        }
+
+        [TestMethod]
+        public void Branching_FieldSymbolsAreNotCleaned()
+        {
+            const string code = @"
+if (boolParameter)
+{
+    boolField = true;
+}
+else
+{
+    boolField = false;
+}
+Tag(""End"", boolField);";
+            var validator = SETestContext.CreateCS(code, new EmptyTestCheck()).Validator;
+            validator.ValidateExitReachCount(2);    // Once with True constraint, once with False constraint on "value"
+            validator.TagValues("End").Should().HaveCount(2)
+                .And.ContainSingle(x => x.HasConstraint(BoolConstraint.True))
+                .And.ContainSingle(x => x.HasConstraint(BoolConstraint.False));
+        }
+
+        [TestMethod]
         public void Branching_VisitedProgramState_IsSkipped()
         {
             const string code = @"

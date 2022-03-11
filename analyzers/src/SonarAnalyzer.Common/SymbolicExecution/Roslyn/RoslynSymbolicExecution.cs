@@ -206,7 +206,6 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
         {
             var liveVariables = lva.LiveOut(block).Union(nonInDeclarationParameters); // LVA excludes out and ref parameters
 
-            // ToDo: Remove the IFieldSymbol check when SLVS-1136 is fixed
             return programState.RemoveSymbols(
                 symbol => symbol is not IFieldSymbol && !liveVariables.Contains(symbol));
         }

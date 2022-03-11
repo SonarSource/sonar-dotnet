@@ -56,6 +56,7 @@ public class Sample
     public static int StaticProperty {{get; set;}}
     public int Property {{get; set;}}
     private int field;
+    private bool boolField;
 
     private bool Condition => Environment.ProcessorCount == 42;  // Something that cannot have constraint
 
@@ -65,6 +66,7 @@ public class Sample
     }}
 
     private void Tag(string name, object arg = null) {{ }}
+    private void Preserve(object arg) {{ }}
 }}";
             return new(code, AnalyzerLanguage.CSharp, additionalChecks);
         }
