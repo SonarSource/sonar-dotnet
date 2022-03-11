@@ -61,7 +61,7 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
                 return;
             }
             var steps = 0;
-            queue.Enqueue(new ExplodedNode(cfg.EntryBlock, ProgramState.Empty, null));
+            queue.Enqueue(new(cfg.EntryBlock, ProgramState.Empty, null));
             while (queue.Any())
             {
                 if (steps++ > MaxStepCount)
