@@ -172,7 +172,14 @@ namespace StyleCop.Analyzers.Lightup
                         Expression.New(constructor, Expression.Convert(Expression.Call(instance, property.GetMethod), typeof(object))),
                         operationParameter);
                 return expression.Compile();
-
+            }
+            else if (typeof(TProperty).IsEnum && property.PropertyType.IsEnum)
+            {
+                Expression<Func<TOperation, TProperty>> expression =
+                    Expression.Lambda<Func<TOperation, TProperty>>(
+                        Expression.Convert(Expression.Call(instance, property.GetMethod), typeof(TProperty)),
+                        operationParameter);
+                return expression.Compile();
             }
             else if (!typeof(TProperty).GetTypeInfo().IsAssignableFrom(property.PropertyType.GetTypeInfo()))
             {
