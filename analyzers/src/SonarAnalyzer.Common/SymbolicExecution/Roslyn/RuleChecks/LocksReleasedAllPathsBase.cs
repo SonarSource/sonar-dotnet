@@ -49,11 +49,8 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn.RuleChecks
 
         protected abstract ISafeSyntaxWalker CreateSyntaxWalker(LockAcquireReleaseCollector collector);
 
-        public override ProgramState ExitReached(SymbolicContext context)
-        {
+        public override void ExitReached(SymbolicContext context) =>
             exitHeldSymbols.AddRange(context.State.SymbolsWith(LockConstraint.Held));
-            return base.ExitReached(context);
-        }
 
         public override void ExecutionCompleted()
         {

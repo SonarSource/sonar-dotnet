@@ -37,11 +37,8 @@ namespace SonarAnalyzer.UnitTest.TestFramework.SymbolicExecution
         private int exitReachedCount;
         private int executionCompletedCount;
 
-        public override ProgramState ExitReached(SymbolicContext context)
-        {
+        public override void ExitReached(SymbolicContext context) =>
             exitReachedCount++;
-            return context.State;
-        }
 
         public override void ExecutionCompleted() =>
             executionCompletedCount++;

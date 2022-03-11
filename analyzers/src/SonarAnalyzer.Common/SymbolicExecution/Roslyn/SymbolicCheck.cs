@@ -46,8 +46,7 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
         /// <summary>
         /// Method is invoked for each execution flow that reaches exit block. Once for each unique state after LVA cleanup.
         /// </summary>
-        public virtual ProgramState ExitReached(SymbolicContext context) =>
-            context.State;
+        public virtual void ExitReached(SymbolicContext context) { }
 
         /// <summary>
         /// Method is invoked once for analyzed CFG.
