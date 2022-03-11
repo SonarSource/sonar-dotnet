@@ -89,7 +89,7 @@ namespace SonarAnalyzer.UnitTest.SymbolicExecution.Roslyn
         [DataRow(@"StaticField = 42; Tag(""Target"", StaticField);", "SimpleAssignment: StaticField = 42")]
         [DataRow(@"field = 42; Tag(""Target"", field);", "SimpleAssignment: field = 42")]
         [DataRow(@"this.field = 42; Tag(""Target"", this.field);", "SimpleAssignment: this.field = 42")]
-        [DataRow(@"field = 42; var a = field; Tag(""Target"", field);",  "SimpleAssignment: a = field (Implicit)")]
+        [DataRow(@"field = 42; var a = field; Tag(""Target"", field);", "SimpleAssignment: a = field (Implicit)")]
         public void SimpleAssignment_Fields(string snippet, string operation)
         {
             var validator = SETestContext.CreateCS(snippet, new LiteralDummyTestCheck()).Validator;
@@ -182,5 +182,207 @@ namespace SonarAnalyzer.UnitTest.SymbolicExecution.Roslyn
         [TestMethod]
         public void Argument_ByRef_ResetConstraints_VB() =>
             SETestContext.CreateVB(@"Dim B As Boolean = True : Main(BoolParameter, B) : Tag(""B"", B)", ", ByRef ByRefParam As Boolean").Validator.ValidateTag("B", x => x.Should().BeNull());
+
+        [TestMethod]
+        public void Binary_BoolOperands_Equals_CS()
+        {
+            const string code = @"
+var isTrue = true;
+var isFalse = false;
+
+if (isTrue == true)
+    Tag(""True"");
+else
+    Tag(""True Unreachable"");
+
+if (isFalse == false)
+    Tag(""False"");
+else
+    Tag(""False Unreachable"");
+
+if (isTrue == isFalse)
+    Tag(""Variables Unreachable"");
+else
+    Tag(""Variables"");";
+            SETestContext.CreateCS(code).Validator.ValidateTagOrder("True", "False", "Variables");
+        }
+
+        [TestMethod]
+        public void Binary_BoolOperands_Equals_VB()
+        {
+            const string code = @"
+Dim IsTrue = True
+Dim IsFalse = False
+
+If IsTrue = True Then
+    Tag(""True"")
+Else
+    Tag(""True Unreachable"")
+End If
+
+If IsFalse = False Then
+    Tag(""False"")
+Else
+    Tag(""False Unreachable"")
+End If
+
+If IsTrue = IsFalse Then
+    Tag(""Variables Unreachable"")
+Else
+    Tag(""Variables"")
+End If";
+            SETestContext.CreateVB(code).Validator.ValidateTagOrder("True", "False", "Variables");
+        }
+
+        [TestMethod]
+        public void Binary_BoolOperands_NotEquals_CS()
+        {
+            const string code = @"
+var isTrue = true;
+var isFalse = false;
+
+if (isTrue != true)
+    Tag(""True Unreachable"");
+else
+    Tag(""True"");
+
+if (isFalse != false)
+    Tag(""False Unreachable"");
+else
+    Tag(""False"");
+
+if (isTrue != isFalse)
+    Tag(""Variables"");
+else
+    Tag(""Variables Unreachable"");";
+            SETestContext.CreateCS(code).Validator.ValidateTagOrder("True", "False", "Variables");
+        }
+
+        [TestMethod]
+        public void Binary_BoolOperands_NotEquals_VB()
+        {
+            const string code = @"
+Dim IsTrue = True
+Dim IsFalse = False
+
+If IsTrue <> True Then
+    Tag(""True Unreachable"")
+Else
+    Tag(""True"")
+End If
+
+If IsFalse <> False Then
+    Tag(""False Unreachable"")
+Else
+    Tag(""False"")
+End If
+
+If IsTrue <> IsFalse Then
+    Tag(""Variables"")
+Else
+    Tag(""Variables Unreachable"")
+End If";
+            SETestContext.CreateVB(code).Validator.ValidateTagOrder(
+                "True",
+                "False",
+                "Variables");
+        }
+
+        [TestMethod]
+        public void Binary_BoolOperands_And()
+        {
+            const string code = @"
+var isTrue = true;
+var isFalse = false;
+
+if (isTrue & true)
+    Tag(""True & True"");
+else
+    Tag(""True & True Unreachable"");
+
+if (false & isTrue)
+    Tag(""False & True Unreachable"");
+else
+    Tag(""False & True"");
+
+if (false & isFalse)
+    Tag(""False & False Unreachable"");
+else
+    Tag(""False & False"");
+
+if (isTrue && true)
+    Tag(""True && True"");
+else
+    Tag(""True && True Unreachable"");
+
+if (isFalse && true)
+    Tag(""False && True Unreachable"");
+else
+    Tag(""False && True"");";
+            SETestContext.CreateCS(code).Validator.ValidateTagOrder("True & True", "False & True", "False & False", "True && True", "False && True");
+        }
+
+        [TestMethod]
+        public void Binary_BoolOperands_Or()
+        {
+            const string code = @"
+var isTrue = true;
+var isFalse = false;
+
+if (isTrue | true)
+    Tag(""True | True"");
+else
+    Tag(""True | True Unreachable"");
+
+if (false | isTrue)
+    Tag(""False | True"");
+else
+    Tag(""False | True Unreachable"");
+
+if (false | isFalse)
+    Tag(""False | False Unreachable"");
+else
+    Tag(""False | False"");
+
+if (isTrue || true)
+    Tag(""True || True"");
+else
+    Tag(""True || True Unreachable"");
+
+if (isFalse || true)
+    Tag(""False || True"");
+else
+    Tag(""False || True Unreachable"");";
+            SETestContext.CreateCS(code).Validator.ValidateTagOrder("True | True", "False | True", "False | False", "True || True", "False || True");
+        }
+
+        [TestMethod]
+        public void Binary_BoolOperands_Xor()
+        {
+            const string code = @"
+var isTrue = true;
+var isFalse = false;
+
+if (isTrue ^ true)
+    Tag(""True ^ True Unreachable"");
+else
+    Tag(""True ^ True"");
+
+if (false ^ isTrue)
+    Tag(""False ^ True"");
+else
+    Tag(""False ^ True Unreachable"");
+
+if (isTrue ^ false)
+    Tag(""True ^ False"");
+else
+    Tag(""True ^ False Unreachable"");
+
+if (false ^ isFalse)
+    Tag(""False ^ False Unreachable"");
+else
+    Tag(""False ^ False"");";
+            SETestContext.CreateCS(code).Validator.ValidateTagOrder("True ^ True", "False ^ True", "True ^ False", "False ^ False");
+        }
     }
 }

@@ -138,6 +138,7 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
             context.Operation.Instance.Kind switch
             {
                 OperationKindEx.Argument => Invocation.Process(context, IArgumentOperationWrapper.FromOperation(context.Operation.Instance)),
+                OperationKindEx.Binary => Binary.Process(context, IBinaryOperationWrapper.FromOperation(context.Operation.Instance)),
                 OperationKindEx.Conversion => Conversion.Process(context, IConversionOperationWrapper.FromOperation(context.Operation.Instance)),
                 OperationKindEx.FieldReference => References.Process(context, IFieldReferenceOperationWrapper.FromOperation(context.Operation.Instance)),
                 OperationKindEx.LocalReference => References.Process(context, ILocalReferenceOperationWrapper.FromOperation(context.Operation.Instance)),
