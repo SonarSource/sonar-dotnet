@@ -84,6 +84,18 @@ namespace SonarAnalyzer.UnitTest.SymbolicExecution.Roslyn
             validator.Validate("SimpleAssignment: t = 0 == zero (Implicit)", x => x.State[x.Operation].HasConstraint(BoolConstraint.True).Should().BeTrue());
         }
 
+        [TestMethod]
+        public void PreProcess_OptionalArgument_DoesNotSetConstraint()
+        {
+            const string code = @"
+public void Main(bool arg = true)
+{
+    Tag(""Arg"", arg);
+}
+private void Tag(string name, object arg) { }";
+            SETestContext.CreateCSMethod(code, new EmptyTestCheck()).Validator.ValidateTag("Arg", x => x.Should().BeNull());
+        }
+
         private static BoolConstraint GetConstraint(bool value) =>
             value ? BoolConstraint.True : BoolConstraint.False;
     }

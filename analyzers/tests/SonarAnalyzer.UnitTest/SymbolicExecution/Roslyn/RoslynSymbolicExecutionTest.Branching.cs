@@ -296,5 +296,195 @@ else
             validator.ValidateTag("GetHashCode", x => x.HasConstraint(TestConstraint.First).Should().BeFalse()); // Nobody set the constraint on that path
             validator.ValidateExitReachCount(2);    // Once for each state
         }
+
+        [TestMethod]
+        public void Branching_TrueConstraint_VisitsIfBranch()
+        {
+            const string code = @"
+var value = true;
+if (value)
+{
+    Tag(""If"");
+}
+else
+{
+    Tag(""Else"");
+}
+Tag(""End"");";
+            SETestContext.CreateCS(code).Validator.ValidateTagOrder(
+                "If",
+                "End");
+        }
+
+        [TestMethod]
+        public void Branching_TrueConstraintNegated_VisitsElseBranch()
+        {
+            const string code = @"
+var value = true;
+if (!value)
+{
+    Tag(""If"");
+}
+else
+{
+    Tag(""Else"");
+}
+Tag(""End"");";
+            SETestContext.CreateCS(code).Validator.ValidateTagOrder(
+                "Else",
+                "End");
+        }
+
+        [TestMethod]
+        public void Branching_FalseConstraint_VisitsElseBranch()
+        {
+            const string code = @"
+var value = false;
+if (value)
+{
+    Tag(""If"");
+}
+else
+{
+    Tag(""Else"");
+}
+Tag(""End"");";
+            SETestContext.CreateCS(code).Validator.ValidateTagOrder(
+                "Else",
+                "End");
+        }
+
+        [TestMethod]
+        public void Branching_FalseConstraintNegated_VisitsIfBranch()
+        {
+            const string code = @"
+var value = false;
+if (!value)
+{
+    Tag(""If"");
+}
+else
+{
+    Tag(""Else"");
+}
+Tag(""End"");";
+            SETestContext.CreateCS(code).Validator.ValidateTagOrder(
+                "If",
+                "End");
+        }
+
+        [TestMethod]
+        public void Branching_NoConstraint_VisitsBothBranches()
+        {
+            const string code = @"
+var value = boolParameter; // Unknown constraints
+if (value)
+{
+    Tag(""If"");
+}
+else
+{
+    Tag(""Else"");
+}
+Tag(""End"");";
+            SETestContext.CreateCS(code).Validator.ValidateTagOrder(
+                "If",
+                "Else",
+                "End");
+        }
+
+        [TestMethod]
+        public void Branching_OtherConstraint_VisitsBothBranches()
+        {
+            const string code = @"
+if (boolParameter)
+{
+    Tag(""If"");
+}
+else
+{
+    Tag(""Else"");
+}
+Tag(""End"");";
+            var check = new PostProcessTestCheck(x => x.Operation.Instance.TrackedSymbol() is { } symbol ? x.SetSymbolConstraint(symbol, DummyConstraint.Dummy) : x.State);
+            SETestContext.CreateCS(code, check).Validator.ValidateTagOrder(
+                "If",
+                "Else",
+                "End");
+        }
+
+        [TestMethod]
+        public void Branching_BoolConstraints_ComplexCase()
+        {
+            const string code = @"
+var isTrue = true;
+var isFalse = false;
+if (isTrue && isTrue && !isFalse)
+{
+    if (isFalse || !isTrue)
+    {
+        Tag(""UnreachableIf"");
+    }
+    else if (isFalse)
+    {
+        Tag(""UnreachableElseIf"");
+    }
+    else
+    {
+        Tag(""Reachable"");
+    }
+}
+else
+{
+    Tag(""UnreachableElse"");
+}
+Tag(""End"");";
+            SETestContext.CreateCS(code).Validator.ValidateTagOrder(
+                "Reachable",
+                "End");
+        }
+
+        [TestMethod]
+        public void Branching_TrueLiteral_VisitsIfBranch_NotSupported()
+        {
+            const string code = @"
+if (true)
+{
+    Tag(""If"");
+}
+else
+{
+    Tag(""Else"");
+}
+Tag(""End"");";
+            SETestContext.CreateCS(code).Validator.ValidateTagOrder(
+                "If",
+                "Else", // ToDo: This should not be here, branch operation symbolic value is not persisted yet
+                "End");
+        }
+
+        [TestMethod]
+        public void Branching_TrueConstraint_SwitchStatement_BinaryOperationNotSupported()
+        {
+            const string code = @"
+var isTrue = true;
+switch (isTrue)
+{
+    case true:
+        Tag(""True"");
+        break;
+    case false:
+        Tag(""False"");
+        break;
+    default:
+        Tag(""Default"");
+}
+Tag(""End"");";
+            SETestContext.CreateCS(code).Validator.ValidateTagOrder(
+                "True",
+                "False",    // This should not be here, switch statement produces BinaryOperatin with isTrue==true
+                "Default",  // This should not be here, switch statement produces BinaryOperatin with isTrue==true
+                "End");
+        }
     }
 }
