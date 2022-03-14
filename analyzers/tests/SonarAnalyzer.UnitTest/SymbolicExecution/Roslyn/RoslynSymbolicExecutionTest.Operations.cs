@@ -22,6 +22,7 @@ using FluentAssertions;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Operations;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using SonarAnalyzer.SymbolicExecution.Constraints;
 using SonarAnalyzer.UnitTest.TestFramework.SymbolicExecution;
 
 namespace SonarAnalyzer.UnitTest.SymbolicExecution.Roslyn
@@ -428,6 +429,27 @@ Tag(""End"");";
                 "If",
                 "Else",
                 "End");
+        }
+
+        [TestMethod]
+        public void Binary_UnexpectedOperator_VisitsBothBranches()
+        {
+            var code = $@"
+if (a > b)      // Both, 'a' and 'b' have bool constraint (weird) and we do not produce bool constraint for '>' binary operator, because it doesn't make sense.
+{{
+    Tag(""If"");
+}}
+else
+{{
+    Tag(""Else"");
+}}
+Tag(""End"");";
+            var check = new PostProcessTestCheck(x => x.Operation.Instance.Kind == OperationKind.ParameterReference ? x.SetOperationConstraint(BoolConstraint.True) : x.State);
+            SETestContext.CreateCS(code, ", int a, int b", check).Validator.ValidateTagOrder(
+                "If",
+                "Else",
+                "End");
+
         }
     }
 }
