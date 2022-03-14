@@ -115,7 +115,7 @@ else
     Tag(""ElseFirst"", first);
     Tag(""ElseSecond"", second);
 }";
-            var validator = SETestContext.CreateCS(code, new EmptyTestCheck()).Validator;
+            var validator = SETestContext.CreateCS(code).Validator;
             validator.ValidateTag("IfFirst", x => x.HasConstraint(BoolConstraint.True).Should().BeTrue());
             validator.ValidateTag("IfSecond", x => x.HasConstraint(BoolConstraint.False).Should().BeTrue());
             validator.ValidateTag("ElseFirst", x => x.HasConstraint(BoolConstraint.True).Should().BeTrue());
@@ -218,7 +218,7 @@ else
     value = false;
 }
 Tag(""End"", value);";
-            var validator = SETestContext.CreateCS(code, new EmptyTestCheck()).Validator;
+            var validator = SETestContext.CreateCS(code).Validator;
             validator.ValidateExitReachCount(2);    // Once with True constraint, once with False constraint on "value"
             validator.TagValues("End").Should().HaveCount(2)
                 .And.ContainSingle(x => x.HasConstraint(BoolConstraint.True))
@@ -239,7 +239,7 @@ else
     value = true;
 }
 Tag(""End"", value);";
-            var validator = SETestContext.CreateCS(code, new EmptyTestCheck()).Validator;
+            var validator = SETestContext.CreateCS(code).Validator;
             validator.ValidateExitReachCount(1);
             validator.TagValues("End").Should().HaveCount(1).And.ContainSingle(x => x.HasConstraint(BoolConstraint.True));
         }
@@ -267,7 +267,7 @@ Tag(""End"", value);";
                 }
                 return x.State;
             });
-            var validator = SETestContext.CreateCS(code, new EmptyTestCheck(), postProcess).Validator;
+            var validator = SETestContext.CreateCS(code, postProcess).Validator;
             validator.ValidateExitReachCount(2);
             captured.Should().OnlyContain(x => x.Value.HasConstraint(BoolConstraint.True) == x.ExpectedHasTrueConstraint);
         }

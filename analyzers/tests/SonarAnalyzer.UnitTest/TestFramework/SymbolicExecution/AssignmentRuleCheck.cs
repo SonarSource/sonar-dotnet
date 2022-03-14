@@ -29,7 +29,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework.SymbolicExecution
 {
     internal abstract class AssignmentRuleCheck : SymbolicRuleCheck
     {
-        public override ProgramState PostProcess(SymbolicContext context)
+        protected override ProgramState PostProcessSimple(SymbolicContext context)
         {
             if (context.Operation.Instance.Kind == OperationKind.SimpleAssignment)
             {
@@ -80,6 +80,6 @@ namespace SonarAnalyzer.UnitTest.TestFramework.SymbolicExecution
 
         protected override DiagnosticDescriptor Rule => SThrow;
 
-        public override ProgramState PostProcess(SymbolicContext context) => throw new InvalidOperationException("This check is not useful.");
+        protected override ProgramState PostProcessSimple(SymbolicContext context) => throw new InvalidOperationException("This check is not useful.");
     }
 }

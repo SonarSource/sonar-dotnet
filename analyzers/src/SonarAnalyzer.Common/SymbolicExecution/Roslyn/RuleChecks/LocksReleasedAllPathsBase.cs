@@ -49,7 +49,29 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn.RuleChecks
 
         protected abstract ISafeSyntaxWalker CreateSyntaxWalker(LockAcquireReleaseCollector collector);
 
-        public override ProgramState PostProcess(SymbolicContext context)
+        public override void ExitReached(SymbolicContext context) =>
+            exitHeldSymbols.AddRange(context.State.SymbolsWith(LockConstraint.Held));
+
+        public override void ExecutionCompleted()
+        {
+            foreach (var unreleasedSymbol in exitHeldSymbols.Intersect(releasedSymbols).Where(x => lastSymbolLock.ContainsKey(x)))
+            {
+                ReportIssue(lastSymbolLock[unreleasedSymbol]);
+            }
+        }
+
+        public override bool ShouldExecute()
+        {
+            var collector = new LockAcquireReleaseCollector();
+            var walker = CreateSyntaxWalker(collector);
+            foreach (var child in NodeContext.Node.ChildNodes())
+            {
+                walker.SafeVisit(child);
+            }
+            return collector.LockAcquiredAndReleased;
+        }
+
+        protected override ProgramState PostProcessSimple(SymbolicContext context)
         {
             if (context.Operation.Instance.AsObjectCreation() is { } objectCreation)
             {
@@ -92,31 +114,6 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn.RuleChecks
                 }
             }
             return context.State;
-        }
-
-        public override ProgramState ExitReached(SymbolicContext context)
-        {
-            exitHeldSymbols.AddRange(context.State.SymbolsWith(LockConstraint.Held));
-            return base.ExitReached(context);
-        }
-
-        public override void ExecutionCompleted()
-        {
-            foreach (var unreleasedSymbol in exitHeldSymbols.Intersect(releasedSymbols).Where(x => lastSymbolLock.ContainsKey(x)))
-            {
-                ReportIssue(lastSymbolLock[unreleasedSymbol]);
-            }
-        }
-
-        public override bool ShouldExecute()
-        {
-            var collector = new LockAcquireReleaseCollector();
-            var walker = CreateSyntaxWalker(collector);
-            foreach (var child in NodeContext.Node.ChildNodes())
-            {
-                walker.SafeVisit(child);
-            }
-            return collector.LockAcquiredAndReleased;
         }
 
         private ProgramState ProcessMonitorEnter(SymbolicContext context, IInvocationOperationWrapper invocation) =>

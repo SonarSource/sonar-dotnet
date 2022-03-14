@@ -85,7 +85,7 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
         {
             if (node.Block.Kind == BasicBlockKind.Exit)
             {
-                InvokeChecks(new SymbolicContext(symbolicValueCounter, null, node.State), x => x.ExitReached);
+                InvokeExitReached(node);
             }
             else if (node.Block.ContainsThrow())
             {
@@ -117,19 +117,16 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
 
         private IEnumerable<ExplodedNode> ProcessOperation(ExplodedNode node)
         {
-            var context = new SymbolicContext(symbolicValueCounter, node.Operation, node.State);
-            context = InvokeChecks(context, x => x.PreProcess);
-            if (context != null)
+            foreach (var preProcessed in InvokeChecks(new(symbolicValueCounter, node.Operation, node.State), x => x.PreProcess))
             {
-                context = EnsureContext(context, ProcessOperation(context));
-                context = InvokeChecks(context, x => x.PostProcess);
-                if (context != null)
+                var processed = EnsureContext(preProcessed, ProcessOperation(preProcessed));
+                foreach (var postProcessed in InvokeChecks(processed, x => x.PostProcess))
                 {
                     // When operation doesn't have a parent it is the outer statement. We need to reset operation states:
                     // * We don't need to preserve the inner subexpression intermediate states after the outer statement.
                     // * We don't want ProgramState to contain the path-history data, because we want to avoid exploring the same state twice.
                     // When the operation is a BranchValue, we need to preserve it to evaluate branching. The state will be reset after branching.
-                    yield return node.CreateNext(node.Operation.Parent is null && node.Block.BranchValue != node.Operation.Instance ? context.State.ResetOperations() : context.State);
+                    yield return node.CreateNext(node.Operation.Parent is null && node.Block.BranchValue != node.Operation.Instance ? postProcessed.State.ResetOperations() : postProcessed.State);
                 }
             }
         }
@@ -146,19 +143,24 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
                 _ => context.State
             };
 
-        private SymbolicContext InvokeChecks(SymbolicContext context, Func<SymbolicCheck, Func<SymbolicContext, ProgramState>> checkDelegate)
+        private void InvokeExitReached(ExplodedNode node)
         {
+            var context = new SymbolicContext(symbolicValueCounter, null, node.State);
+            foreach (var check in checks)
+            {
+                check.ExitReached(context);
+            }
+        }
+
+        private SymbolicContext[] InvokeChecks(SymbolicContext context, Func<SymbolicCheck, Func<SymbolicContext, ProgramState[]>> checkDelegate)
+        {
+            var contexts = new[] { context };
             foreach (var check in checks)
             {
                 var checkMethod = checkDelegate(check);
-                var newState = checkMethod(context);
-                if (newState == null)
-                {
-                    return null;
-                }
-                context = EnsureContext(context, newState);
+                contexts = contexts.SelectMany(x => checkMethod(x).Select(newState => EnsureContext(x, newState))).ToArray();
             }
-            return context;
+            return contexts;
         }
 
         private void NotifyExecutionCompleted()

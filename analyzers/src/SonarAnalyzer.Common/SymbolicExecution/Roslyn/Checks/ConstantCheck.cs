@@ -25,7 +25,7 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn.Checks
 {
     internal class ConstantCheck : SymbolicCheck
     {
-        public override ProgramState PreProcess(SymbolicContext context) =>
+        protected override ProgramState PreProcessSimple(SymbolicContext context) =>
             GetConstraint(context.Operation.Instance) is { } constraint
                 ? context.SetOperationConstraint(constraint)
                 : context.State;

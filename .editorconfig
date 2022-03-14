@@ -227,6 +227,8 @@ dotnet_naming_style.I_style.capitalization = pascal_case
 # Rules
 # ----------------------------------------------------------------------------------------------------------------------
 
+dotnet_diagnostic.CA1822.severity = warning # Increase visibility for Member 'xxx' does not access instance data and can be marked as static
+
 # This should be removed in https://github.com/SonarSource/sonar-dotnet/issues/3364
 # RS1010: Provide an explicit argument for optional parameter 'equivalenceKey', which is non-null and unique across all code actions created by this fixer.
 dotnet_diagnostic.RS1010.severity = none

@@ -34,7 +34,7 @@ namespace SonarAnalyzer.UnitTest.SymbolicExecution.Roslyn
         {
             var expectedConstraint = GetConstraint(value == "true");
 
-            var validator = SETestContext.CreateCS($"var a = {value};", new EmptyTestCheck()).Validator;
+            var validator = SETestContext.CreateCS($"var a = {value};").Validator;
             validator.ValidateOrder(
                 $"LocalReference: a = {value} (Implicit)",
                 $"Literal: {value}",
@@ -49,7 +49,7 @@ namespace SonarAnalyzer.UnitTest.SymbolicExecution.Roslyn
         public void PreProcess_EqualityCheck_BooleanConstraint(string constant, bool value)
         {
             var expectedConstraint = GetConstraint(value);
-            var validator = SETestContext.CreateCS($"bool a = 1 == {constant};", new EmptyTestCheck()).Validator;
+            var validator = SETestContext.CreateCS($"bool a = 1 == {constant};").Validator;
             validator.ValidateOrder(
                 $"LocalReference: a = 1 == {constant} (Implicit)",
                 "Literal: 1",
@@ -63,7 +63,7 @@ namespace SonarAnalyzer.UnitTest.SymbolicExecution.Roslyn
         [TestMethod]
         public void PreProcess_EqualityCheck_ConstantPropagation()
         {
-            var validator = SETestContext.CreateCS("const int zero = 0; bool f = 1 == zero, t = 0 == zero;", new EmptyTestCheck()).Validator;
+            var validator = SETestContext.CreateCS("const int zero = 0; bool f = 1 == zero, t = 0 == zero;").Validator;
             validator.ValidateOrder(
                 "LocalReference: zero = 0 (Implicit)",
                 "Literal: 0",
@@ -93,7 +93,7 @@ public void Main(bool arg = true)
     Tag(""Arg"", arg);
 }
 private void Tag(string name, object arg) { }";
-            SETestContext.CreateCSMethod(code, new EmptyTestCheck()).Validator.ValidateTag("Arg", x => x.Should().BeNull());
+            SETestContext.CreateCSMethod(code).Validator.ValidateTag("Arg", x => x.Should().BeNull());
         }
 
         private static BoolConstraint GetConstraint(bool value) =>
