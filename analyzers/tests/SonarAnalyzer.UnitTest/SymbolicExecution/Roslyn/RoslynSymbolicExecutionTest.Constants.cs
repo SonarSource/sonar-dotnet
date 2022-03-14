@@ -93,7 +93,7 @@ public void Main(bool arg = true)
     Tag(""Arg"", arg);
 }
 private void Tag(string name, object arg) { }";
-            SETestContext.CreateCSMethod(code, new EmptyTestCheck()).Validator.ValidateTag("Arg", x => x.Should().BeNull());
+            SETestContext.CreateCSMethod(code).Validator.ValidateTag("Arg", x => x.Should().BeNull());
         }
 
         private static BoolConstraint GetConstraint(bool value) =>
