@@ -46,12 +46,6 @@ namespace SonarAnalyzer.UnitTest.TestFramework.SymbolicExecution
                     tagName.HasValue.Should().BeTrue("tag should have literal name");
                     tags.Add(((string)tagName.Value, context));
                 }
-                else if (invocation.TargetMethod.Name == "Preserve")
-                {
-                    var converstion = IConversionOperationWrapper.FromOperation(invocation.Arguments.First().Value);
-                    var symbol = converstion.Operand.TrackedSymbol();
-                    return context.State.Preserve(symbol);
-                }
             exitReachedCount++;
 
         public override void ExecutionCompleted() =>

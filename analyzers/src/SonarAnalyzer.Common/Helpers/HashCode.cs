@@ -34,6 +34,9 @@ namespace SonarAnalyzer.Helpers
         public static int DictionaryContentHash<TKey, TValue>(IDictionary<TKey, TValue> dictionary) =>
             dictionary.Aggregate(0, (seed, kvp) => Combine(seed, kvp.Key, kvp.Value));
 
+        public static int EnumerableContentHash<TValue>(IEnumerable<TValue> enumerable) =>
+            enumerable.Aggregate(0, (seed, x) => seed + x.GetHashCode());
+
         public static int Combine<T1, T2>(T1 a, T2 b) =>
             (int)Seed
                 .AddHash((uint)(a?.GetHashCode() ?? 0))

@@ -200,8 +200,8 @@ public System.Collections.Generic.IEnumerable<int> Method(bool a)
 
     var b = a;
 }";
-            var validator = SETestContext.CreateCSMethod(method).Validator;
-            validator.ValidateExitReachCount(1);
+            var validator = SETestContext.CreateCSMethod(method, new PreserveTestCheck("b")).Validator;
+            validator.ValidateExitReachCount(2);
             validator.ValidateExecutionCompleted();
         }
 
@@ -219,30 +219,8 @@ else
     value = false;
 }
 Tag(""End"", value);";
-            var validator = SETestContext.CreateCS(code).Validator;
-            validator.ValidateExitReachCount(1);    // The exit is only reached once as the symbolicValue is removed when value is not used anymore.
-            validator.TagValues("End").Should().HaveCount(2)
-                .And.ContainSingle(x => x.HasConstraint(BoolConstraint.True))
-                .And.ContainSingle(x => x.HasConstraint(BoolConstraint.False));
-        }
-
-        [TestMethod]
-        public void Branching_MultipleExistsIfSymbolIsPreserved()
-        {
-            const string code = @"
-bool value;
-if (boolParameter)
-{
-    value = true;
-}
-else
-{
-    value = false;
-}
-Preserve(value);
-Tag(""End"", value);";
-            var validator = SETestContext.CreateCS(code, new EmptyTestCheck()).Validator;
-            validator.ValidateExitReachCount(2);    // Once with True constraint, once with False constraint on "value"
+            var validator = SETestContext.CreateCS(code, new PreserveTestCheck("value")).Validator;
+            validator.ValidateExitReachCount(2);
             validator.TagValues("End").Should().HaveCount(2)
                 .And.ContainSingle(x => x.HasConstraint(BoolConstraint.True))
                 .And.ContainSingle(x => x.HasConstraint(BoolConstraint.False));
@@ -311,7 +289,6 @@ Tag(""End"", value);";
                 return x.State;
             });
             var validator = SETestContext.CreateCS(code, postProcess).Validator;
-            validator.ValidateExitReachCount(1);
             captured.Should().OnlyContain(x => x.Value.HasConstraint(BoolConstraint.True) == x.ExpectedHasTrueConstraint);
         }
 
@@ -337,7 +314,7 @@ else
             var validator = SETestContext.CreateCS(code, postProcess).Validator;
             validator.ValidateTag("ToString", x => x.HasConstraint(TestConstraint.First).Should().BeTrue());
             validator.ValidateTag("GetHashCode", x => x.HasConstraint(TestConstraint.First).Should().BeFalse()); // Nobody set the constraint on that path
-            validator.ValidateExitReachCount(1);    // Once as the states are cleaned after the variables are not used anymore.
+            validator.ValidateExitReachCount(1);    // Once as the states are cleaned by LVA.
         }
 
         [TestMethod]

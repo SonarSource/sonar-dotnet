@@ -33,7 +33,7 @@ namespace SonarAnalyzer.UnitTest.SymbolicExecution.Roslyn
         [DataRow("foreach (var i in items)")]
         [DataRow("while (value > 0)")]
         [DataRow("while (Condition)")]
-        public void Loops_InstructionVisitedOnlyOnce(string loop)
+        public void Loops_InstructionVisitedMaxTwice(string loop)
         {
             var code = $@"
 var value = 42;
@@ -43,15 +43,15 @@ var value = 42;
     value--;
 }}
 Tag(""End"", value);";
-            var validator = SETestContext.CreateCS(code, ", int[] items", new AddConstraintOnInvocationCheck()).Validator;
-            validator.ValidateExitReachCount(1);
+            var validator = SETestContext.CreateCS(code, ", int[] items", new AddConstraintOnInvocationCheck(), new PreserveTestCheck("value")).Validator;
+            validator.ValidateExitReachCount(2);
             validator.TagValues("End").Should().HaveCount(2)
                 .And.ContainSingle(x => x == null)
                 .And.ContainSingle(x => x != null && x.HasConstraint(TestConstraint.First) && !x.HasConstraint(BoolConstraint.True));
         }
 
         [TestMethod]
-        public void Loops_InstructionVisitedOnlyOnce_EvenWithMultipleStates()
+        public void Loops_InstructionVisitedMaxTwice_EvenWithMultipleStates()
         {
             const string code = @"
 var value = 42;
@@ -132,7 +132,7 @@ goto Start;";
         }
 
         [TestMethod]
-        public void GoTo_InstructionVisitedOnlyOnce()
+        public void GoTo_InstructionVisitedMaxTwice()
         {
             const string code = @"
 var value = 42;

@@ -66,7 +66,6 @@ public class Sample
     }}
 
     private void Tag(string name, object arg = null) {{ }}
-    private void Preserve(object arg) {{ }}
 }}";
             return new(code, AnalyzerLanguage.CSharp, additionalChecks);
         }

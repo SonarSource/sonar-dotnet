@@ -97,8 +97,8 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
                 ? captured
                 : operation;
 
-        public ProgramState RemoveSymbols(Func<ISymbol, bool> predicate) =>
-            this with { SymbolValue = SymbolValue.Where(kv => !predicate(kv.Key) || PreservedSymbols.Contains(kv.Key)).ToImmutableDictionary() };
+        public ProgramState RemoveSymbols(Func<ISymbol, bool> remove) =>
+            this with { SymbolValue = SymbolValue.Where(kv => PreservedSymbols.Contains(kv.Key) || !remove(kv.Key)).ToImmutableDictionary() };
 
         public ProgramState AddVisit(int programPointHash) =>
             this with { VisitCount = VisitCount.SetItem(programPointHash, GetVisitCount(programPointHash) + 1) };
@@ -114,7 +114,7 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
             HashCode.Combine(
                 HashCode.DictionaryContentHash(OperationValue),
                 HashCode.DictionaryContentHash(SymbolValue),
-                HashCode.DictionaryContentHash(SymbolValue)) + PreservedSymbols.Aggregate(0, (seed, x) => seed + x.GetHashCode());
+                HashCode.EnumerableContentHash(PreservedSymbols));
                 HashCode.DictionaryContentHash(CaptureOperation));
 
         public bool Equals(ProgramState other) =>
@@ -134,24 +134,6 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
 
         private string SerializeOperations() =>
             Serialize(OperationValue, "Operations", x => x.Serialize(), x => x.ToString());
-
-        private string SerializePreservedSymbols()
-        {
-            if (PreservedSymbols.IsEmpty)
-            {
-                return null;
-            }
-            else
-            {
-                var sb = new StringBuilder();
-                sb.Append("PreservedSymbols").AppendLine(":");
-                foreach (var symbol in PreservedSymbols)
-                {
-                    sb.AppendLine(symbol.ToString());
-                }
-                return sb.ToString();
-            }
-        }
 
         private string SerializeCaptures() =>
             Serialize(CaptureOperation, "Captures", x => "#" + x.GetHashCode(), x => x.Serialize());

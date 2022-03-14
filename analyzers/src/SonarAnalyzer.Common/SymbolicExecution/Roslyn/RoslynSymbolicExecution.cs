@@ -48,18 +48,14 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
         public RoslynSymbolicExecution(ControlFlowGraph cfg, SymbolicCheck[] checks, ISymbol declaration)
         {
             this.cfg = cfg ?? throw new ArgumentNullException(nameof(cfg));
-            if (declaration == null)
-            {
-                throw new ArgumentNullException(nameof(declaration));
-            }
             if (checks == null || checks.Length == 0)
             {
                 throw new ArgumentException("At least one check is expected", nameof(checks));
             }
+            _ = declaration ?? throw new ArgumentNullException(nameof(declaration));
             this.checks = new(new[] { new ConstantCheck() }.Concat(checks).ToArray());
             lva = new RoslynLiveVariableAnalysis(cfg, declaration);
-            var declarationParameters = declaration.GetParameters();
-            nonInDeclarationParameters = declarationParameters.Where(p => p.RefKind != RefKind.None);
+            nonInDeclarationParameters = declaration.GetParameters().Where(p => p.RefKind != RefKind.None);
         }
 
         public void Execute()
@@ -101,13 +97,13 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
             }
             else if (node.Block.ContainsThrow())
             {
-                node = new ExplodedNode(cfg.ExitBlock, CleanStateAfterBlock(node.State, node.Block), null);
+                node = new ExplodedNode(cfg.ExitBlock, CleanUnusedState(node.State, node.Block), null);
                 yield return new(cfg.ExitBlock, node.State, null);
             }
             else
             {
                 var reachableSuccessors = node.Block.Successors.Where(x => IsReachable(node, x)).ToList();
-                node = new ExplodedNode(node.Block, CleanStateAfterBlock(node.State, node.Block), node.FinallyPoint);
+                node = new ExplodedNode(node.Block, CleanUnusedState(node.State, node.Block), node.FinallyPoint);
                 foreach (var successor in reachableSuccessors)
                 {
                     if (ProcessBranch(node, successor) is { } newNode)
@@ -203,12 +199,10 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
                 _ => context.State
             };
 
-        private ProgramState CleanStateAfterBlock(ProgramState programState, BasicBlock block)
+        private ProgramState CleanUnusedState(ProgramState programState, BasicBlock block)
         {
             var liveVariables = lva.LiveOut(block).Union(nonInDeclarationParameters); // LVA excludes out and ref parameters
-
-            return programState.RemoveSymbols(
-                symbol => symbol is not IFieldSymbol && !liveVariables.Contains(symbol));
+            return programState.RemoveSymbols(x => x is not IFieldSymbol && !liveVariables.Contains(x));
         }
 
         private static bool IsReachable(ExplodedNode node, ControlFlowBranch branch) =>

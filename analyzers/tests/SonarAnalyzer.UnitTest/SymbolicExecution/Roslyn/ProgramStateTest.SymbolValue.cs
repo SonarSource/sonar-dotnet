@@ -123,24 +123,24 @@ namespace SonarAnalyzer.UnitTest.SymbolicExecution.Roslyn
         [TestMethod]
         public void Preserve_PreservedSymbolCannotBeDeleted()
         {
-            var counter = new SymbolicValueCounter();
-            var symbolicValue = new SymbolicValue(counter).WithConstraint(DummyConstraint.Dummy);
+            var symbolicValue = new SymbolicValue(new()).WithConstraint(DummyConstraint.Dummy);
             var symbol = CreateSymbols().First();
-            var sut = ProgramState.Empty.SetSymbolValue(symbol, symbolicValue);
-            sut = sut.Preserve(symbol);
-            sut = sut.RemoveSymbols(x => SymbolEqualityComparer.Default.Equals(x, symbol));
+            var sut = ProgramState.Empty.SetSymbolValue(symbol, symbolicValue)
+                .Preserve(symbol)
+                .RemoveSymbols(x => true);
             sut.SymbolsWith(DummyConstraint.Dummy).Should().Contain(symbol);
         }
 
         [TestMethod]
-        public void RemoveSymbols_RemovesTheSymbol()
+        public void RemoveSymbols_RemovesTheSymbolMatchingThePredicate()
         {
-            var counter = new SymbolicValueCounter();
-            var symbolicValue = new SymbolicValue(counter).WithConstraint(DummyConstraint.Dummy);
-            var symbol = CreateSymbols().First();
-            var sut = ProgramState.Empty.SetSymbolValue(symbol, symbolicValue);
-            sut = sut.RemoveSymbols(x => SymbolEqualityComparer.Default.Equals(x, symbol));
-            sut.SymbolsWith(DummyConstraint.Dummy).Should().BeEmpty();
+            var symbolicValue = new SymbolicValue(new()).WithConstraint(DummyConstraint.Dummy);
+            var symbols = CreateSymbols().ToArray();
+            var sut = ProgramState.Empty.SetSymbolValue(symbols[0], symbolicValue)
+                .SetSymbolValue(symbols[1], symbolicValue)
+                .SetSymbolValue(symbols[2], symbolicValue)
+                .RemoveSymbols(x => !SymbolEqualityComparer.Default.Equals(x, symbols[1]));
+            sut.SymbolsWith(DummyConstraint.Dummy).Should().Contain(symbols[1]);
         }
 
         [TestMethod]
