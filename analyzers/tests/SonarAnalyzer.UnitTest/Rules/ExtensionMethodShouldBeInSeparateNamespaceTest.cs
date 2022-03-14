@@ -27,19 +27,29 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class ExtensionMethodShouldBeInSeparateNamespaceTest
     {
+        private readonly VerifierBuilder builder = new VerifierBuilder<ExtensionMethodShouldBeInSeparateNamespace>();
+
         [TestMethod]
         public void ExtensionMethodShouldBeInSeparateNamespace() =>
-            OldVerifier.VerifyAnalyzer(@"TestCases\ExtensionMethodShouldBeInSeparateNamespace.cs", new ExtensionMethodShouldBeInSeparateNamespace());
+            builder
+                .AddPaths("ExtensionMethodShouldBeInSeparateNamespace.cs", "ExtensionMethodShouldBeInSeparateNamespace.GeneratedCode.cs")
+                .Verify();
 
 #if NET
+
         [TestMethod]
         public void ExtensionMethodShouldBeInSeparateNamespace_CSharp9() =>
-            OldVerifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\ExtensionMethodShouldBeInSeparateNamespace.CSharp9.cs", new ExtensionMethodShouldBeInSeparateNamespace());
+            builder.AddPaths("ExtensionMethodShouldBeInSeparateNamespace.CSharp9.cs").WithTopLevelStatements().Verify();
 
         [TestMethod]
         public void ExtensionMethodShouldBeInSeparateNamespace_CSharp10() =>
-            OldVerifier.VerifyAnalyzerFromCSharp10Library(@"TestCases\ExtensionMethodShouldBeInSeparateNamespace.CSharp10.cs", new ExtensionMethodShouldBeInSeparateNamespace());
+            builder
+                .AddPaths("ExtensionMethodShouldBeInSeparateNamespace.CSharp10.cs")
+                .WithConcurrentAnalysis(false)
+                .WithOptions(ParseOptionsHelper.FromCSharp10)
+                .Verify();
 
 #endif
+
     }
 }

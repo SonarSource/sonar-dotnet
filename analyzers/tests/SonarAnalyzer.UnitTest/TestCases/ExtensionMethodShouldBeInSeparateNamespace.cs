@@ -106,3 +106,8 @@ namespace OtherPackageNamespace
     }
 
 }
+
+internal static class GenClassExtensions
+{
+    public static void SetSyncLaterError(this GenClass foo) { } // Noncompliant - FP, see: https://github.com/SonarSource/sonar-dotnet/issues/5457
+}
