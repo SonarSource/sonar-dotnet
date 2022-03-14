@@ -186,4 +186,18 @@ namespace Tests.Diagnostics
             Console.WriteLine(Random);
         }
     }
+
+    [Serializable]
+    public class SerializableClass
+    {
+        private int field; // Noncompliant - FP, see: https://github.com/SonarSource/sonar-dotnet/issues/5451
+
+        private int Prop { get; set; } // Noncompliant - FP, see: https://github.com/SonarSource/sonar-dotnet/issues/5451
+
+        public void Print()
+        {
+            Console.WriteLine(field);
+            Console.WriteLine(Prop);
+        }
+    }
 }
