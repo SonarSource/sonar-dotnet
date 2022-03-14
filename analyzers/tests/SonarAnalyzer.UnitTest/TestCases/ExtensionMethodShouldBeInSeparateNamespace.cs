@@ -109,5 +109,5 @@ namespace OtherPackageNamespace
 
 internal static class GenClassExtensions
 {
-    public static void SetSyncLaterError(this GenClass foo) { } // Noncompliant - FP, see: https://github.com/SonarSource/sonar-dotnet/issues/5457
+    public static void SetSyncLaterError(this GenClass foo) { } // Compliant, see: https://github.com/SonarSource/sonar-dotnet/issues/5457
 }
