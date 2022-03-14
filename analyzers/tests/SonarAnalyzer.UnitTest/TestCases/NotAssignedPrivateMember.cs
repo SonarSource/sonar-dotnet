@@ -190,9 +190,9 @@ namespace Tests.Diagnostics
     [Serializable]
     public class SerializableClass
     {
-        private int field; // Noncompliant - FP, see: https://github.com/SonarSource/sonar-dotnet/issues/5451
+        private int field; // Compliant, see: https://github.com/SonarSource/sonar-dotnet/issues/5451
 
-        private int Prop { get; set; } // Noncompliant - FP, see: https://github.com/SonarSource/sonar-dotnet/issues/5451
+        private int Prop { get; set; } // Compliant, see: https://github.com/SonarSource/sonar-dotnet/issues/5451
 
         public void Print()
         {
