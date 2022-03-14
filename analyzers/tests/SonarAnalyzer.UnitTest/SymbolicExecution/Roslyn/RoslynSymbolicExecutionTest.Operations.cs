@@ -384,5 +384,50 @@ else
     Tag(""False ^ False"");";
             SETestContext.CreateCS(code).Validator.ValidateTagOrder("True ^ True", "False ^ True", "True ^ False", "False ^ False");
         }
+
+        [DataTestMethod]
+        [DataRow("boolParameter & isTrue")]
+        [DataRow("isTrue & boolParameter")]
+        public void Binary_NoConstraint_VisitsBothBranches(string condition)
+        {
+            var code = $@"
+bool isTrue = true;
+if ({condition})
+{{
+    Tag(""If"");
+}}
+else
+{{
+    Tag(""Else"");
+}}
+Tag(""End"");";
+            SETestContext.CreateCS(code).Validator.ValidateTagOrder(
+                "If",
+                "Else",
+                "End");
+        }
+
+        [DataTestMethod]
+        [DataRow("boolParameter & isTrue")]
+        [DataRow("isTrue & boolParameter")]
+        public void Binary_OtherConstraint_VisitsBothBranches(string condition)
+        {
+            var code = $@"
+bool isTrue = true;
+if ({condition})
+{{
+    Tag(""If"");
+}}
+else
+{{
+    Tag(""Else"");
+}}
+Tag(""End"");";
+            var check = new PostProcessTestCheck(x => x.Operation.Instance.Kind == OperationKind.ParameterReference ? x.SetOperationConstraint(DummyConstraint.Dummy) : x.State);
+            SETestContext.CreateCS(code, check).Validator.ValidateTagOrder(
+                "If",
+                "Else",
+                "End");
+        }
     }
 }
