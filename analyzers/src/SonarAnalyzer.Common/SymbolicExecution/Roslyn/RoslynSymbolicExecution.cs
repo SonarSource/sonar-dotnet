@@ -61,7 +61,7 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
                 return;
             }
             var steps = 0;
-            queue.Enqueue(new ExplodedNode(cfg.EntryBlock, ProgramState.Empty, null));
+            queue.Enqueue(new(cfg.EntryBlock, ProgramState.Empty, null));
             while (queue.Any())
             {
                 if (steps++ > MaxStepCount)
@@ -89,7 +89,7 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
             }
             else if (node.Block.ContainsThrow())
             {
-                yield return new ExplodedNode(cfg.ExitBlock, node.State, null);
+                yield return CreateNode(cfg.ExitBlock, null);
             }
             else
             {
@@ -99,7 +99,7 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
                     {
                         yield return successor.FinallyRegions.Any() // When exiting finally region(s), redirect to 1st finally instead of the normal destination
                             ? FromFinally(new FinallyPoint(node.FinallyPoint, successor))
-                            : new(successor.Destination, node.State, node.FinallyPoint);
+                            : CreateNode(successor.Destination, node.FinallyPoint);
                     }
                     else if (successor.Source.EnclosingRegion.Kind == ControlFlowRegionKind.Finally)    // Redirect from finally back to the original place (or outer finally on the same branch)
                     {
@@ -109,7 +109,10 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
             }
 
             ExplodedNode FromFinally(FinallyPoint finallyPoint) =>
-                new(cfg.Blocks[finallyPoint.BlockIndex], node.State, finallyPoint.IsFinallyBlock ? finallyPoint : finallyPoint.Previous);
+                CreateNode(cfg.Blocks[finallyPoint.BlockIndex], finallyPoint.IsFinallyBlock ? finallyPoint : finallyPoint.Previous);
+
+            ExplodedNode CreateNode(BasicBlock block, FinallyPoint finallyPoint) =>
+                new(block, node.State.ResetOperations(), finallyPoint);
         }
 
         private IEnumerable<ExplodedNode> ProcessOperation(ExplodedNode node)
@@ -125,7 +128,8 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
                     // When operation doesn't have a parent it is the outer statement. We need to reset operation states:
                     // * We don't need to preserve the inner subexpression intermediate states after the outer statement.
                     // * We don't want ProgramState to contain the path-history data, because we want to avoid exploring the same state twice.
-                    yield return node.CreateNext(node.Operation.Parent is null ? context.State.ResetOperations() : context.State);
+                    // When the operation is a BranchValue, we need to preserve it to evaluate branching. The state will be reset after branching.
+                    yield return node.CreateNext(node.Operation.Parent is null && node.Block.BranchValue != node.Operation.Instance ? context.State.ResetOperations() : context.State);
                 }
             }
         }
@@ -170,8 +174,7 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
 
         private static bool IsReachable(ExplodedNode node, ControlFlowBranch branch) =>
             node.Block.ConditionKind != ControlFlowConditionKind.None
-            && node.Block.BranchValue.TrackedSymbol() is { } branchSymbol
-            && node.State[branchSymbol] is { } sv
+            && node.State[node.Block.BranchValue] is { } sv
             && sv.HasConstraint<BoolConstraint>()
                 ? IsReachable(branch, node.Block.ConditionKind == ControlFlowConditionKind.WhenTrue, sv.HasConstraint(BoolConstraint.True))
                 : true;    // Unconditional or we don't know the value and need to explore both paths
