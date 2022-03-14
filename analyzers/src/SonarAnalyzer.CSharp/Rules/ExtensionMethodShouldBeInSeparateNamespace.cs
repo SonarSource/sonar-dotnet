@@ -32,11 +32,9 @@ namespace SonarAnalyzer.Rules.CSharp
     public sealed class ExtensionMethodShouldBeInSeparateNamespace : SonarDiagnosticAnalyzer
     {
         private const string DiagnosticId = "S4226";
-        private const string MessageFormat = "Either move this extension to another namespace or move the method " +
-            "inside the class itself.";
+        private const string MessageFormat = "Either move this extension to another namespace or move the method inside the class itself.";
 
-        private static readonly DiagnosticDescriptor Rule =
-            DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
+        private static readonly DiagnosticDescriptor Rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
 
         protected override void Initialize(SonarAnalysisContext context) =>
@@ -46,9 +44,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     var methodDeclaration = (MethodDeclarationSyntax)c.Node;
 
                     if (methodDeclaration.IsExtensionMethod()
-                        && c.SemanticModel.GetDeclaredSymbol(methodDeclaration) is { } methodSymbol
-                        && methodSymbol.IsExtensionMethod
-                        && methodSymbol.Parameters.Length > 0
+                        && c.SemanticModel.GetDeclaredSymbol(methodDeclaration) is { IsExtensionMethod: true, Parameters: { Length: > 0 } } methodSymbol
                         && methodSymbol.Parameters[0].Type.Kind != SymbolKind.ErrorType
                         && methodSymbol.Parameters[0].Type.IsClass()
                         && methodSymbol.ContainingNamespace.Equals(methodSymbol.Parameters[0].Type.ContainingNamespace))
