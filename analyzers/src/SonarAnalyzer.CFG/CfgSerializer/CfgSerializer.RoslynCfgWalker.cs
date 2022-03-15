@@ -127,7 +127,11 @@ namespace SonarAnalyzer.CFG
                 }
                 if (region.Locals.Any())
                 {
-                    sb.Append(": ").Append(string.Join(", ", region.Locals.Select(x => x.Name ?? "N/A")));
+                    sb.Append(", Locals: ").Append(string.Join(", ", region.Locals.Select(x => x.Name ?? "N/A")));
+                }
+                if (region.CaptureIds.Any())
+                {
+                    sb.Append(", Captures: ").Append(string.Join(", ", region.CaptureIds.Select(x => "#" + x.GetHashCode())));  // Same as IOperationExtension.SerializeSuffix
                 }
                 return sb.ToString();
             }
