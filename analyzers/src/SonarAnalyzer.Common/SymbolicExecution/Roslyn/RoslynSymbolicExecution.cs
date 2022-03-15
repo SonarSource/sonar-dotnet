@@ -43,7 +43,6 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
         private readonly SymbolicValueCounter symbolicValueCounter = new();
         private readonly HashSet<ExplodedNode> visited = new();
         private readonly RoslynLiveVariableAnalysis lva;
-        private readonly IEnumerable<IParameterSymbol> nonInDeclarationParameters;
 
         public RoslynSymbolicExecution(ControlFlowGraph cfg, SymbolicCheck[] checks, ISymbol declaration)
         {
@@ -55,7 +54,6 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
             _ = declaration ?? throw new ArgumentNullException(nameof(declaration));
             this.checks = new(new[] { new ConstantCheck() }.Concat(checks).ToArray());
             lva = new RoslynLiveVariableAnalysis(cfg, declaration);
-            nonInDeclarationParameters = declaration.GetParameters().Where(p => p.RefKind != RefKind.None);
         }
 
         public void Execute()
@@ -201,8 +199,8 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
 
         private ProgramState CleanUnusedState(ProgramState programState, BasicBlock block)
         {
-            var liveVariables = lva.LiveOut(block).Concat(nonInDeclarationParameters).ToHashSet(); // LVA excludes out and ref parameters
-            return programState.RemoveSymbols(x => x is not IFieldSymbol && !liveVariables.Contains(x));
+            var liveVariables = lva.LiveOut(block);
+            return programState.RemoveSymbols(x => (x is ILocalSymbol or IParameterSymbol { RefKind:RefKind.None }) && !liveVariables.Contains(x));
         }
 
         private static bool IsReachable(ExplodedNode node, ControlFlowBranch branch) =>

@@ -254,9 +254,46 @@ Tag(""End"", field);";
                     }
                 }
                 return x.State;
-
             });
             var validator = SETestContext.CreateCS(code, postProcess).Validator;
+            validator.ValidateExitReachCount(2);    // Once with First constraint, once with Second constraint on "value"
+            validator.TagValues("End").Should().HaveCount(2)
+                .And.ContainSingle(x => x.HasConstraint(TestConstraint.First))
+                .And.ContainSingle(x => x.HasConstraint(TestConstraint.Second));
+        }
+
+        [DataTestMethod]
+        [DataRow("out", "outParam")]
+        [DataRow("ref", "refParam")]
+        public void Branching_RefAndOutParameters_NotCleared(string paramType, string paramName)
+        {
+            string code = $@"
+if (boolParameter)
+{{
+    {paramName} = 1;
+}}
+else
+{{
+    {paramName} = 2;
+}}
+Tag(""End"", {paramName});";
+
+            var postProcess = new PostProcessTestCheck(x =>
+            {
+                if (x.Operation.Instance.Kind == OperationKind.Literal && x.Operation.Instance.ConstantValue.Value is int value)
+                {
+                    if (value == 1)
+                    {
+                        return x.SetOperationConstraint(TestConstraint.First);
+                    }
+                    else if (value == 2)
+                    {
+                        return x.SetOperationConstraint(TestConstraint.Second);
+                    }
+                }
+                return x.State;
+            });
+            var validator = SETestContext.CreateCS(code, $", {paramType} int {paramName}", postProcess).Validator;
             validator.ValidateExitReachCount(2);    // Once with First constraint, once with Second constraint on "value"
             validator.TagValues("End").Should().HaveCount(2)
                 .And.ContainSingle(x => x.HasConstraint(TestConstraint.First))
