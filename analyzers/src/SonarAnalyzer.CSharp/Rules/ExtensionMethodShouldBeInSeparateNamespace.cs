@@ -47,7 +47,8 @@ namespace SonarAnalyzer.Rules.CSharp
                         && c.SemanticModel.GetDeclaredSymbol(methodDeclaration) is { IsExtensionMethod: true, Parameters: { Length: > 0 } } methodSymbol
                         && methodSymbol.Parameters[0].Type.Kind != SymbolKind.ErrorType
                         && methodSymbol.Parameters[0].Type.IsClass()
-                        && methodSymbol.ContainingNamespace.Equals(methodSymbol.Parameters[0].Type.ContainingNamespace))
+                        && methodSymbol.ContainingNamespace.Equals(methodSymbol.Parameters[0].Type.ContainingNamespace)
+                        && !methodSymbol.Parameters[0].Type.HasAttribute(KnownType.System_CodeDom_Compiler_GeneratedCodeAttribute))
                     {
                         c.ReportIssue(Diagnostic.Create(Rule, methodDeclaration.Identifier.GetLocation()));
                     }
