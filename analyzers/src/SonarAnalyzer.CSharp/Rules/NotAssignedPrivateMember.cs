@@ -113,7 +113,8 @@ namespace SonarAnalyzer.Rules.CSharp
         private static bool TypeDefinitionShouldBeSkipped(ITypeSymbol namedType) =>
             !namedType.IsClassOrStruct()
             || HasStructLayoutAttribute(namedType)
-            || namedType.ContainingType != null;
+            || namedType.ContainingType != null
+            || namedType.HasAttribute(KnownType.System_SerializableAttribute);
 
         private static bool HasStructLayoutAttribute(ISymbol namedTypeSymbol) =>
             namedTypeSymbol.HasAttribute(KnownType.System_Runtime_InteropServices_StructLayoutAttribute);
