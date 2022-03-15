@@ -201,7 +201,7 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
 
         private ProgramState CleanUnusedState(ProgramState programState, BasicBlock block)
         {
-            var liveVariables = lva.LiveOut(block).Union(nonInDeclarationParameters); // LVA excludes out and ref parameters
+            var liveVariables = lva.LiveOut(block).Concat(nonInDeclarationParameters).ToHashSet(); // LVA excludes out and ref parameters
             return programState.RemoveSymbols(x => x is not IFieldSymbol && !liveVariables.Contains(x));
         }
 

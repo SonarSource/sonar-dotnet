@@ -232,18 +232,35 @@ Tag(""End"", value);";
             const string code = @"
 if (boolParameter)
 {
-    boolField = true;
+    field = 1;
 }
 else
 {
-    boolField = false;
+    field = 2;
 }
-Tag(""End"", boolField);";
-            var validator = SETestContext.CreateCS(code, new EmptyTestCheck()).Validator;
-            validator.ValidateExitReachCount(2);    // Once with True constraint, once with False constraint on "value"
+Tag(""End"", field);";
+
+            var postProcess = new PostProcessTestCheck(x =>
+            {
+                if (x.Operation.Instance.Kind == OperationKind.Literal && x.Operation.Instance.ConstantValue.Value is int value)
+                {
+                    if (value == 1)
+                    {
+                        return x.SetOperationConstraint(TestConstraint.First);
+                    }
+                    else if (value == 2)
+                    {
+                       return x.SetOperationConstraint(TestConstraint.Second);
+                    }
+                }
+                return x.State;
+
+            });
+            var validator = SETestContext.CreateCS(code, postProcess).Validator;
+            validator.ValidateExitReachCount(2);    // Once with First constraint, once with Second constraint on "value"
             validator.TagValues("End").Should().HaveCount(2)
-                .And.ContainSingle(x => x.HasConstraint(BoolConstraint.True))
-                .And.ContainSingle(x => x.HasConstraint(BoolConstraint.False));
+                .And.ContainSingle(x => x.HasConstraint(TestConstraint.First))
+                .And.ContainSingle(x => x.HasConstraint(TestConstraint.Second));
         }
 
         [TestMethod]

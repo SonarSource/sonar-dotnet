@@ -56,7 +56,6 @@ public class Sample
     public static int StaticProperty {{get; set;}}
     public int Property {{get; set;}}
     private int field;
-    private bool boolField;
 
     private bool Condition => Environment.ProcessorCount == 42;  // Something that cannot have constraint
 

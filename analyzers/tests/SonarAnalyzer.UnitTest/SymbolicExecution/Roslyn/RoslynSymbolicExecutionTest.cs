@@ -178,6 +178,57 @@ namespace SonarAnalyzer.UnitTest.SymbolicExecution.Roslyn
         }
 
         [TestMethod]
+        public void Execute_UnusedVariable_ClearedAfterBlock()
+        {
+            const string code = @"
+bool first;
+if(boolParameter)
+  first = true;
+else
+  first = false;
+Tag(""BeforeLastUse""); 
+bool second = first;
+if(boolParameter)
+boolParameter.ToString();
+Tag(""AfterLastUse"");
+bool third = second;
+if(boolParameter)
+boolParameter.ToString();
+Tag(""END"");
+";
+            ISymbol firstSymbol = null;
+            ISymbol secondSymbol = null;
+            var postProcess = new PostProcessTestCheck(x =>
+            {
+                if (x.Operation.Instance.TrackedSymbol() is { } symbol)
+                {
+                    if (symbol.Name.Equals("first"))
+                    {
+                        firstSymbol = symbol;
+                    }
+                    else if (symbol.Name.Equals("second"))
+                    {
+                        secondSymbol = symbol;
+                    }
+                }
+                return x.State;
+            });
+            var validator = SETestContext.CreateCS(code, postProcess).Validator;
+            validator.ValidateTagOrder(
+                "BeforeLastUse",
+                "BeforeLastUse",
+                "AfterLastUse",
+                "AfterLastUse",
+                "END");
+            var beforeLastUseStates = validator.TagStates("BeforeLastUse");
+            beforeLastUseStates.Should().HaveCount(2);
+            beforeLastUseStates.All(x => x[firstSymbol] != null).Should().BeTrue();
+            var afterLastUseStates = validator.TagStates("AfterLastUse");
+            afterLastUseStates.Should().HaveCount(2);
+            afterLastUseStates.All(x => x[firstSymbol] == null && x[secondSymbol] != null).Should().BeTrue();
+        }
+
+        [TestMethod]
         public void Execute_TooManyBlocks_NotSupported()
         {
             var validator = SETestContext.CreateCS($"var a = true{Enumerable.Repeat(" && true", 1020).JoinStr(null)};").Validator;
