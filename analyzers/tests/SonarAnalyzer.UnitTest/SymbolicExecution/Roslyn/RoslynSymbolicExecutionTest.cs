@@ -220,5 +220,9 @@ namespace SonarAnalyzer.UnitTest.SymbolicExecution.Roslyn
             context.Operation.Instance.Kind == OperationKind.Literal && context.Operation.Instance.ConstantValue.Value is int
                 ? new[] { context.SetOperationConstraint(first), context.SetOperationConstraint(second) }
                 : new[] { context.State };
+
+        [TestMethod]
+        public void Execute_LocalScopeRegion_AssignDefaultBoolConstraint() =>
+            SETestContext.CreateVB(@"Dim B As Boolean : Tag(""B"", B)").Validator.ValidateTag("B", x => x.HasConstraint(BoolConstraint.False).Should().BeTrue());
     }
 }
