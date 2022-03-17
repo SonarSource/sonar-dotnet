@@ -928,19 +928,13 @@ End Class";
 
             public Context(string code, AnalyzerLanguage language, string localFunctionName = null)
             {
-                IMethodSymbol originalDeclaration;
                 Cfg = TestHelper.CompileCfg(code, language, code.Contains("// Error CS"));
-                if (localFunctionName == null)
+                if (localFunctionName != null)
                 {
-                    originalDeclaration = (IMethodSymbol)Cfg.OriginalOperation.SemanticModel.GetDeclaredSymbol(Cfg.OriginalOperation.Syntax);
-                }
-                else
-                {
-                    originalDeclaration = Cfg.LocalFunctions.Single(x => x.Name == localFunctionName);
-                    Cfg = Cfg.GetLocalFunctionControlFlowGraph(originalDeclaration);
+                    Cfg = Cfg.GetLocalFunctionControlFlowGraph(Cfg.LocalFunctions.Single(x => x.Name == localFunctionName));
                 }
                 Console.WriteLine(CfgSerializer.Serialize(Cfg));
-                Lva = new RoslynLiveVariableAnalysis(Cfg, originalDeclaration);
+                Lva = new RoslynLiveVariableAnalysis(Cfg);
             }
 
             public void ValidateAllEmpty()

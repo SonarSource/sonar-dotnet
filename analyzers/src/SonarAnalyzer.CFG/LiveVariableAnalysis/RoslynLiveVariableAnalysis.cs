@@ -31,7 +31,7 @@ namespace SonarAnalyzer.CFG.LiveVariableAnalysis
     {
         protected override BasicBlock ExitBlock => Cfg.ExitBlock;
 
-        public RoslynLiveVariableAnalysis(ControlFlowGraph cfg, ISymbol originalDeclaration) : base(cfg, originalDeclaration) =>
+        public RoslynLiveVariableAnalysis(ControlFlowGraph cfg) : base(cfg, OriginalDeclaration(cfg.OriginalOperation)) =>
             Analyze();
 
         public ISymbol ParameterOrLocalSymbol(IOperation operation)
@@ -150,6 +150,34 @@ namespace SonarAnalyzer.CFG.LiveVariableAnalysis
                     yield return region.NestedRegions.Single(x => x.Kind == ControlFlowRegionKind.Filter);
                 }
             }
+        }
+
+        private static ISymbol OriginalDeclaration(IOperation originalOperation)
+        {
+            ISymbol symbol;
+            if (originalOperation.IsAnyKind(OperationKindEx.MethodBody, OperationKindEx.Block, OperationKindEx.ConstructorBody))
+            {
+                var operationWrapper = new IOperationWrapperSonar(originalOperation);
+                var syntax = originalOperation.Syntax;
+                if (syntax.IsKind(SyntaxKindEx.ArrowExpressionClause))
+                {
+                    syntax = syntax.Parent;
+                }
+
+                symbol = operationWrapper.SemanticModel.GetDeclaredSymbol(syntax);
+            }
+            else
+            {
+                symbol = originalOperation switch
+                {
+                    var _ when ILocalFunctionOperationWrapper.IsInstance(originalOperation) => ILocalFunctionOperationWrapper.FromOperation(originalOperation).Symbol,
+                    var _ when IFlowAnonymousFunctionOperationWrapper.IsInstance(originalOperation) => IFlowAnonymousFunctionOperationWrapper.FromOperation(originalOperation).Symbol,
+                    var _ when IAnonymousFunctionOperationWrapper.IsInstance(originalOperation) => IAnonymousFunctionOperationWrapper.FromOperation(originalOperation).Symbol,
+                    _ => null
+                };
+            }
+
+            return symbol;
         }
 
         private class RoslynState : State
