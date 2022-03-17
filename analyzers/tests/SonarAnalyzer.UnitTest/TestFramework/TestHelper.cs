@@ -96,7 +96,6 @@ End Class", AnalyzerLanguage.VisualBasic);
             var (tree, semanticModel) = Compile(snippet, ignoreErrors, language);
             var method = tree.GetRoot().DescendantNodes().First(IsMethod);
             methodsymbol = semanticModel.GetDeclaredSymbol(method);
-
             return ControlFlowGraph.Create(method, semanticModel);
 
             bool IsMethod(SyntaxNode node) =>

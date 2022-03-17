@@ -220,7 +220,7 @@ else
 }
 Tag(""End"", value);";
             var validator = SETestContext.CreateCS(code, new PreserveTestCheck("value")).Validator;
-            validator.ValidateExitReachCount(2);
+            validator.ValidateExitReachCount(2); // Once with True constraint, once with False constraint on "value"
             validator.TagValues("End").Should().HaveCount(2)
                 .And.ContainSingle(x => x.HasConstraint(BoolConstraint.True))
                 .And.ContainSingle(x => x.HasConstraint(BoolConstraint.False));

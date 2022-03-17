@@ -140,7 +140,7 @@ namespace SonarAnalyzer.UnitTest.SymbolicExecution.Roslyn
                 .SetSymbolValue(symbols[1], symbolicValue)
                 .SetSymbolValue(symbols[2], symbolicValue)
                 .RemoveSymbols(x => !SymbolEqualityComparer.Default.Equals(x, symbols[1]));
-            sut.SymbolsWith(DummyConstraint.Dummy).Should().Contain(symbols[1]);
+            sut.SymbolsWith(DummyConstraint.Dummy).Should().Contain(symbols[1]).And.HaveCount(1);
         }
 
         [TestMethod]

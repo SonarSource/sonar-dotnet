@@ -35,7 +35,7 @@ namespace SonarAnalyzer.Helpers
             dictionary.Aggregate(0, (seed, kvp) => Combine(seed, kvp.Key, kvp.Value));
 
         public static int EnumerableContentHash<TValue>(IEnumerable<TValue> enumerable) =>
-            enumerable.Aggregate(0, (seed, x) => seed + x.GetHashCode());
+            enumerable.Aggregate(0, (seed, x) => Combine(seed, x));
 
         public static int Combine<T1, T2>(T1 a, T2 b) =>
             (int)Seed

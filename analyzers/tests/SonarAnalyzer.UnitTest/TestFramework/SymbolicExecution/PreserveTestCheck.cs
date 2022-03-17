@@ -18,27 +18,21 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using Microsoft.CodeAnalysis.Operations;
 using SonarAnalyzer.SymbolicExecution.Roslyn;
 
 namespace SonarAnalyzer.UnitTest.TestFramework.SymbolicExecution
 {
-    /// <summary>
-    /// Empty check implementation used to start the engine (the engine needs at least one check to start).
-    /// </summary>
     public class PreserveTestCheck : SymbolicCheck
     {
         private readonly string symbolName;
 
-        public PreserveTestCheck(string symbolName)
-        {
+        public PreserveTestCheck(string symbolName) =>
             this.symbolName = symbolName;
-        }
 
         protected override ProgramState PreProcessSimple(SymbolicContext context) =>
             context.Operation.Instance.TrackedSymbol() is { } symbol
-            && symbol.Name.Equals(symbolName)
+            && symbol.Name == symbolName
                 ? context.State.Preserve(symbol)
-                : base.PreProcessSimple(context);
+                : context.State;
     }
 }
