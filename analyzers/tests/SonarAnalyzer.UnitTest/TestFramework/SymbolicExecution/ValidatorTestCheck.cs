@@ -38,14 +38,6 @@ namespace SonarAnalyzer.UnitTest.TestFramework.SymbolicExecution
         private int executionCompletedCount;
 
         public override void ExitReached(SymbolicContext context) =>
-            if (context.Operation.Instance is IInvocationOperation invocation)
-            {
-                if (invocation.TargetMethod.Name == "Tag")
-                {
-                    var tagName = invocation.Arguments.First().Value.ConstantValue;
-                    tagName.HasValue.Should().BeTrue("tag should have literal name");
-                    tags.Add(((string)tagName.Value, context));
-                }
             exitReachedCount++;
 
         public override void ExecutionCompleted() =>

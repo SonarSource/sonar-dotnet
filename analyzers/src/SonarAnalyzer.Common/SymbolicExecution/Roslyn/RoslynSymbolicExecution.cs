@@ -200,7 +200,7 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
         private ProgramState CleanUnusedState(ProgramState programState, BasicBlock block)
         {
             var liveVariables = lva.LiveOut(block);
-            return programState.RemoveSymbols(x => (x is ILocalSymbol or IParameterSymbol { RefKind:RefKind.None }) && !liveVariables.Contains(x));
+            return programState.RemoveSymbols(x => (x is ILocalSymbol or IParameterSymbol { RefKind: RefKind.None }) && !liveVariables.Contains(x));
         }
 
         private static bool IsReachable(ExplodedNode node, ControlFlowBranch branch) =>

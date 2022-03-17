@@ -35,10 +35,10 @@ namespace SonarAnalyzer.UnitTest.TestFramework.SymbolicExecution
             this.symbolName = symbolName;
         }
 
-        public override ProgramState PreProcess(SymbolicContext context) =>
+        protected override ProgramState PreProcessSimple(SymbolicContext context) =>
             context.Operation.Instance.TrackedSymbol() is { } symbol
             && symbol.Name.Equals(symbolName)
                 ? context.State.Preserve(symbol)
-                : base.PreProcess(context);
+                : base.PreProcessSimple(context);
     }
 }

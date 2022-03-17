@@ -267,7 +267,7 @@ Tag(""End"", field);";
         [DataRow("ref", "refParam")]
         public void Branching_RefAndOutParameters_NotCleared(string paramType, string paramName)
         {
-            string code = $@"
+            var code = $@"
 if (boolParameter)
 {{
     {paramName} = 1;
@@ -342,7 +342,7 @@ Tag(""End"", value);";
                 }
                 return x.State;
             });
-            var validator = SETestContext.CreateCS(code, postProcess).Validator;
+            SETestContext.CreateCS(code, postProcess);
             captured.Should().OnlyContain(x => x.Value.HasConstraint(BoolConstraint.True) == x.ExpectedHasTrueConstraint);
         }
 
