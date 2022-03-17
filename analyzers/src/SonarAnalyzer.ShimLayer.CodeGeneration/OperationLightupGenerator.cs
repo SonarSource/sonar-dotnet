@@ -1040,7 +1040,6 @@ namespace StyleCop.Analyzers.CodeGeneration
                 this.IsSkipped = this.Type switch
                 {
                     "ArgumentKind" => true,
-                    "BinaryOperatorKind" => true,
                     "BranchKind" => true,
                     "CaseKind" => true,
                     "CommonConversion" => true,

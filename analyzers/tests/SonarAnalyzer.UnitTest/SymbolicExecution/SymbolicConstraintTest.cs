@@ -36,6 +36,13 @@ namespace SonarAnalyzer.UnitTest.SymbolicExecution.Sonar.Constraints
         }
 
         [TestMethod]
+        public void BoolConstraint_From()
+        {
+            BoolConstraint.From(true).Should().Be(BoolConstraint.True);
+            BoolConstraint.From(false).Should().Be(BoolConstraint.False);
+        }
+
+        [TestMethod]
         public void ByteArrayConstraint_ToString()
         {
             ByteArrayConstraint.Constant.ToString().Should().Be("Constant");

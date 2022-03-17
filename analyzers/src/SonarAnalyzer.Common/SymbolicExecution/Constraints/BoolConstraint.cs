@@ -32,5 +32,8 @@ namespace SonarAnalyzer.SymbolicExecution.Constraints
             this == True ? nameof(True) : nameof(False);
 
         private BoolConstraint() { }
+
+        public static BoolConstraint From(bool value) =>
+            value ? True : False;
     }
 }
