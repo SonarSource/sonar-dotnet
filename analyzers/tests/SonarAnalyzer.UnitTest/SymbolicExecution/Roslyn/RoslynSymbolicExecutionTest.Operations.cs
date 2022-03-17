@@ -24,6 +24,7 @@ using Microsoft.CodeAnalysis.Operations;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.SymbolicExecution.Constraints;
 using SonarAnalyzer.UnitTest.TestFramework.SymbolicExecution;
+using StyleCop.Analyzers.Lightup;
 
 namespace SonarAnalyzer.UnitTest.SymbolicExecution.Roslyn
 {
@@ -449,6 +450,24 @@ Tag(""End"");";
                 "If",
                 "Else",
                 "End");
+        }
+
+        [TestMethod]
+        public void FlowCapture_SetsCapture()
+        {
+            var assertions = 0;
+            var collector = new PostProcessTestCheck(x =>
+            {
+                if (x.Operation.Instance.Kind == OperationKind.FlowCaptureReference)
+                {
+                    var capture = IFlowCaptureReferenceOperationWrapper.FromOperation(x.Operation.Instance);
+                    x.State.ResolveCapture(capture.WrappedOperation).Kind.Should().Be(OperationKind.LocalReference);
+                    assertions++;
+                }
+                return x.State;
+            });
+            SETestContext.CreateCS("string a = null; a ??= arg;", ", string arg", collector);
+            assertions.Should().Be(3);  // Block #3 transitive capture, Block #3 BranchValue, Block #4
         }
     }
 }

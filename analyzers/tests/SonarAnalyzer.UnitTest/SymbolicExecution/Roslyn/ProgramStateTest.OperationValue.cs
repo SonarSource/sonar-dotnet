@@ -19,6 +19,7 @@
  */
 
 using System;
+using System.Linq;
 using FluentAssertions;
 using Microsoft.CodeAnalysis;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -166,11 +167,25 @@ namespace SonarAnalyzer.UnitTest.SymbolicExecution.Roslyn
 
         [TestMethod]
         public void SetOperationValue_NullOperation_Throws() =>
-            ProgramState.Empty.Invoking(x => x.SetOperationValue((IOperation)null, new SymbolicValue(new SymbolicValueCounter()))).Should().Throw<ArgumentNullException>();
+            ProgramState.Empty.Invoking(x => x.SetOperationValue((IOperation)null, new(new()))).Should().Throw<NullReferenceException>();
 
         [TestMethod]
         public void SetOperationValue_WithWrapper_NullOperation_Throws() =>
-            ProgramState.Empty.Invoking(x => x.SetOperationValue((IOperationWrapperSonar)null, new SymbolicValue(new SymbolicValueCounter()))).Should().Throw<NullReferenceException>();
+            ProgramState.Empty.Invoking(x => x.SetOperationValue((IOperationWrapperSonar)null, new(new()))).Should().Throw<NullReferenceException>();
+
+        [TestMethod]
+        public void SetOperationValue_OnCaptureReference_SetsValueToCapturedOperation()
+        {
+            var value = new SymbolicValue(new());
+            var cfg = TestHelper.CompileCfgBodyCS("a ??= b;", "object a, object b");
+            var capture = IFlowCaptureOperationWrapper.FromOperation(cfg.Blocks[1].Operations[0]);
+            var captureReference = IFlowCaptureReferenceOperationWrapper.FromOperation(cfg.Blocks[3].Operations[0].Children.First());
+            captureReference.Id.Should().Be(capture.Id);
+            var sut = ProgramState.Empty
+                .SetCapture(capture.Id, capture.Value)
+                .SetOperationValue(captureReference.WrappedOperation, value);
+            sut[capture.Value].Should().Be(value);
+        }
 
         [TestMethod]
         public void ResetOperations_IsImmutable()
@@ -178,9 +193,34 @@ namespace SonarAnalyzer.UnitTest.SymbolicExecution.Roslyn
             var operation = TestHelper.CompileCfgBodyCS("var x = 42;").Blocks[1].Operations[0];
             var beforeReset = ProgramState.Empty.SetOperationValue(operation, new SymbolicValue(new SymbolicValueCounter()));
             beforeReset[operation].Should().NotBeNull();
+
             var afterReset = beforeReset.ResetOperations();
             beforeReset[operation].Should().NotBeNull();
             afterReset[operation].Should().BeNull();
+        }
+
+        [TestMethod]
+        public void ResetOperations_PreservesCaptured()
+        {
+            var counter = new SymbolicValueCounter();
+            var operations = TestHelper.CompileCfgBodyCS("var x = 0; x = 1; x = 42; x = 100;").Blocks[1].Operations;
+            var beforeReset = ProgramState.Empty
+                .SetOperationValue(operations[0], new(counter))
+                .SetOperationValue(operations[1], new(counter))
+                .SetOperationValue(operations[2], new(counter))
+                .SetOperationValue(operations[3], new(counter))
+                .SetCapture(new CaptureId(1), operations[1])
+                .SetCapture(new CaptureId(2), operations[2]);
+            beforeReset[operations[0]].Should().NotBeNull();
+            beforeReset[operations[1]].Should().NotBeNull();
+            beforeReset[operations[2]].Should().NotBeNull();
+            beforeReset[operations[3]].Should().NotBeNull();
+
+            var afterReset = beforeReset.ResetOperations();
+            afterReset[operations[0]].Should().BeNull();
+            afterReset[operations[1]].Should().NotBeNull();
+            afterReset[operations[2]].Should().NotBeNull();
+            afterReset[operations[3]].Should().BeNull();
         }
     }
 }

@@ -26,6 +26,7 @@ using SonarAnalyzer.Extensions;
 using SonarAnalyzer.SymbolicExecution.Roslyn;
 using SonarAnalyzer.UnitTest.Helpers;
 using SonarAnalyzer.UnitTest.TestFramework.SymbolicExecution;
+using StyleCop.Analyzers.Lightup;
 
 namespace SonarAnalyzer.UnitTest.SymbolicExecution.Roslyn
 {
@@ -47,6 +48,9 @@ namespace SonarAnalyzer.UnitTest.SymbolicExecution.Roslyn
             var withSymbolOrig = empty.SetSymbolValue(symbol, reusedValue);
             var withSymbolSame = empty.SetSymbolValue(symbol, reusedValue);
             var withSymbolDiff = empty.SetSymbolValue(symbol, anotherValue);
+            var withCaptureOrig = empty.SetCapture(new CaptureId(0), operations[0].Instance);
+            var withCaptureSame = empty.SetCapture(new CaptureId(0), operations[0].Instance);
+            var withCaptureDiff = empty.SetCapture(new CaptureId(0), operations[1].Instance);
             var mixedOrig = withOperationOrig.SetSymbolValue(symbol, reusedValue);
             var mixedSame = withOperationSame.SetSymbolValue(symbol, reusedValue);
             var mixedDiff = withOperationDiff.SetSymbolValue(symbol, anotherValue);
@@ -62,12 +66,21 @@ namespace SonarAnalyzer.UnitTest.SymbolicExecution.Roslyn
             withOperationOrig.Equals(withOperationDiff).Should().BeFalse();
             withOperationOrig.Equals(empty).Should().BeFalse();
             withOperationOrig.Equals(withSymbolDiff).Should().BeFalse();
+            withOperationOrig.Equals(withCaptureDiff).Should().BeFalse();
 
             withSymbolOrig.Equals(withSymbolOrig).Should().BeTrue();
             withSymbolOrig.Equals(withSymbolSame).Should().BeTrue();
             withSymbolOrig.Equals(withSymbolDiff).Should().BeFalse();
             withSymbolOrig.Equals(empty).Should().BeFalse();
             withSymbolOrig.Equals(withOperationDiff).Should().BeFalse();
+            withSymbolOrig.Equals(withCaptureDiff).Should().BeFalse();
+
+            withCaptureOrig.Equals(withCaptureOrig).Should().BeTrue();
+            withCaptureOrig.Equals(withCaptureSame).Should().BeTrue();
+            withCaptureOrig.Equals(withCaptureDiff).Should().BeFalse();
+            withCaptureOrig.Equals(empty).Should().BeFalse();
+            withCaptureOrig.Equals(withOperationDiff).Should().BeFalse();
+            withCaptureOrig.Equals(withSymbolDiff).Should().BeFalse();
 
             mixedOrig.Equals(mixedOrig).Should().BeTrue();
             mixedOrig.Equals(mixedSame).Should().BeTrue();
@@ -90,6 +103,9 @@ namespace SonarAnalyzer.UnitTest.SymbolicExecution.Roslyn
             var withSymbolOrig = empty.SetSymbolValue(symbol, reusedValue);
             var withSymbolSame = empty.SetSymbolValue(symbol, reusedValue);
             var withSymbolDiff = empty.SetSymbolValue(symbol, anotherValue);
+            var withCaptureOrig = empty.SetCapture(new CaptureId(0), operations[0].Instance);
+            var withCaptureSame = empty.SetCapture(new CaptureId(0), operations[0].Instance);
+            var withCaptureDiff = empty.SetCapture(new CaptureId(0), operations[1].Instance);
             var mixedOrig = withOperationOrig.SetSymbolValue(symbol, reusedValue);
             var mixedSame = withOperationSame.SetSymbolValue(symbol, reusedValue);
             var mixedDiff = withOperationDiff.SetSymbolValue(symbol, anotherValue);
@@ -104,6 +120,9 @@ namespace SonarAnalyzer.UnitTest.SymbolicExecution.Roslyn
             withSymbolOrig.GetHashCode().Should().Be(withSymbolSame.GetHashCode());
             withSymbolOrig.GetHashCode().Should().NotBe(withSymbolDiff.GetHashCode());
             withSymbolOrig.GetHashCode().Should().NotBe(mixedSame.GetHashCode());
+
+            withCaptureOrig.GetHashCode().Should().Be(withCaptureSame.GetHashCode());
+            withCaptureOrig.GetHashCode().Should().NotBe(withCaptureDiff.GetHashCode());
 
             mixedOrig.GetHashCode().Should().Be(mixedSame.GetHashCode());
             mixedOrig.GetHashCode().Should().NotBe(mixedDiff.GetHashCode());
@@ -160,6 +179,22 @@ SimpleAssignmentOperation / VariableDeclaratorSyntax: a = true: SV_1
         }
 
         [TestMethod]
+        public void ToString_WithCaptures()
+        {
+            var assignment = TestHelper.CompileCfgBodyCS("var a = true;").Blocks[1].Operations[0];
+            var sut = ProgramState.Empty.SetCapture(new CaptureId(42), assignment);
+            sut.ToString().Should().BeIgnoringLineEndings(
+@"Captures:
+#42: SimpleAssignmentOperation / VariableDeclaratorSyntax: a = true
+");
+            sut.SetCapture(new CaptureId(24), assignment).ToString().Should().BeIgnoringLineEndings(
+@"Captures:
+#24: SimpleAssignmentOperation / VariableDeclaratorSyntax: a = true
+#42: SimpleAssignmentOperation / VariableDeclaratorSyntax: a = true
+");
+        }
+
+        [TestMethod]
         public void ToString_WithAll()
         {
             var assignment = TestHelper.CompileCfgBodyCS("var a = true;").Blocks[1].Operations[0];
@@ -170,7 +205,9 @@ SimpleAssignmentOperation / VariableDeclaratorSyntax: a = true: SV_1
                 .SetSymbolValue(variableSymbol, new SymbolicValue(counter))
                 .SetSymbolValue(variableSymbol.ContainingSymbol, valueWithConstraint)
                 .SetOperationValue(assignment, new SymbolicValue(counter))
-                .SetOperationValue(assignment.Children.First(), valueWithConstraint);
+                .SetOperationValue(assignment.Children.First(), valueWithConstraint)
+                .SetCapture(new CaptureId(0), assignment)
+                .SetCapture(new CaptureId(1), assignment.Children.First());
 
             sut.ToString().Should().BeIgnoringLineEndings(
 @"Symbols:
@@ -179,6 +216,9 @@ Sample.Main(): SV_2: First
 Operations:
 LocalReferenceOperation / VariableDeclaratorSyntax: a = true: SV_2: First
 SimpleAssignmentOperation / VariableDeclaratorSyntax: a = true: SV_4
+Captures:
+#0: SimpleAssignmentOperation / VariableDeclaratorSyntax: a = true
+#1: LocalReferenceOperation / VariableDeclaratorSyntax: a = true
 ");
         }
 

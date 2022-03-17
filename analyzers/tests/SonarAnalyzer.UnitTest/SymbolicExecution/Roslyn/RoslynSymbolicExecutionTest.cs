@@ -19,6 +19,7 @@
  */
 
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using FluentAssertions;
 using Microsoft.CodeAnalysis;
@@ -214,6 +215,27 @@ namespace SonarAnalyzer.UnitTest.SymbolicExecution.Roslyn
                 .And.ContainSingle(x => x.HasConstraint(TestConstraint.First) && x.HasConstraint(BoolConstraint.False))
                 .And.ContainSingle(x => x.HasConstraint(TestConstraint.Second) && x.HasConstraint(BoolConstraint.True))
                 .And.ContainSingle(x => x.HasConstraint(TestConstraint.Second) && x.HasConstraint(BoolConstraint.False));
+        }
+
+        [TestMethod]
+        public void Execute_ClearsCapturesAfterBranching()
+        {
+            var allReferences = new List<IOperation>();
+            var collector = new PostProcessTestCheck(x =>
+            {
+                if (x.Operation.Instance.Kind == OperationKind.FlowCaptureReference)
+                {
+                    allReferences.Add(x.Operation.Instance);
+                }
+                return x.State;
+            });
+            var validator = SETestContext.CreateCS(@"string a = null; a ??= arg; Tag(""End"");", ", string arg", collector).Validator;
+            allReferences.Should().HaveCount(3);
+            var state = validator.TagStates("End").Single();
+            foreach (var reference in allReferences)
+            {
+                state.ResolveCapture(reference).Should().Be(reference); // Not resolved, because the captures were cleared before entering the block with Tag("End")
+            }
         }
 
         private static ProgramState[] DecorateIntLiteral(SymbolicContext context, SymbolicConstraint first, SymbolicConstraint second) =>

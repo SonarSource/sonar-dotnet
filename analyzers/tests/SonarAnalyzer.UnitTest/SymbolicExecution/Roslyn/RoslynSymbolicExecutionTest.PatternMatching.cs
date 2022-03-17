@@ -20,6 +20,7 @@
 
 using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using SonarAnalyzer.SymbolicExecution.Constraints;
 using SonarAnalyzer.UnitTest.TestFramework.SymbolicExecution;
 
 namespace SonarAnalyzer.UnitTest.SymbolicExecution.Roslyn
@@ -27,7 +28,7 @@ namespace SonarAnalyzer.UnitTest.SymbolicExecution.Roslyn
     public partial class RoslynSymbolicExecutionTest
     {
         [TestMethod]
-        public void Patterns_TrueConstraint_SwitchExpression_NotSupported()
+        public void IsPattern_TrueConstraint_SwitchExpressionFromSymbol_VisitsOnlyOneBranch()
         {
             const string code = @"
 var isTrue = true;
@@ -37,7 +38,68 @@ var value = isTrue switch
     false => false
 };
 Tag(""Value"", value);";
-            SETestContext.CreateCS(code).Validator.ValidateTag("Value", x => x.Should().BeNull()); // Should have BoolConstraint.True instead
+            SETestContext.CreateCS(code).Validator.ValidateTag("Value", x => x.HasConstraint(BoolConstraint.True).Should().BeTrue());
+        }
+
+        [TestMethod]
+        public void IsPattern_TrueConstraint_SwitchExpressionFromOperation_VisitsOnlyOneBranch()
+        {
+            const string code = @"
+var isTrue = true;
+var value = (isTrue == true) switch
+{
+    true => true,
+    false => false
+};
+Tag(""Value"", value);";
+            SETestContext.CreateCS(code).Validator.ValidateTag("Value", x => x.HasConstraint(BoolConstraint.True).Should().BeTrue());
+        }
+
+        [TestMethod]
+        public void IsPattern_FalseConstraint_SwitchExpressionFromSymbol_VisitsOnlyOneBranch()
+        {
+            const string code = @"
+var isFalse = false;
+var value = isFalse switch
+{
+    true => true,
+    false => false
+};
+Tag(""Value"", value);";
+            SETestContext.CreateCS(code).Validator.ValidateTag("Value", x => x.HasConstraint(BoolConstraint.False).Should().BeTrue());
+        }
+
+        [TestMethod]
+        public void IsPattern_NoConstraint_SwitchExpression_VisitsBothBranches()
+        {
+            const string code = @"
+var value = boolParameter switch
+{
+    true => true,
+    false => false
+};
+Tag(""Value"", value);";
+            SETestContext.CreateCS(code).Validator.TagValues("Value").Should()
+                .HaveCount(2)
+                .And.ContainSingle(x => x.HasConstraint(BoolConstraint.True))
+                .And.ContainSingle(x => x.HasConstraint(BoolConstraint.False));
+        }
+
+        [TestMethod]
+        public void IsPattern_OtherPattern_VisitsBothBranches()
+        {
+            const string code = @"
+var value = arg switch
+{
+    string => true,
+    null => true,
+    _ => false
+};
+Tag(""Value"", value);";
+            SETestContext.CreateCS(code, ", object arg").Validator.TagValues("Value").Should()
+                .HaveCount(2)
+                .And.ContainSingle(x => x.HasConstraint(BoolConstraint.True))
+                .And.ContainSingle(x => x.HasConstraint(BoolConstraint.False));
         }
     }
 }
