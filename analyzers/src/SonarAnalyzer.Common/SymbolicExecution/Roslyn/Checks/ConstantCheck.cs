@@ -34,7 +34,7 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn.Checks
         public static SymbolicConstraint ConstraintFromType(ITypeSymbol type) =>
             ConstraintFromValue(DefaultValue(type));
 
-        public static SymbolicConstraint ConstraintFromValue(object value) =>
+        private static SymbolicConstraint ConstraintFromValue(object value) =>
             value switch
             {
                 // Update DefaultValue when adding new types
