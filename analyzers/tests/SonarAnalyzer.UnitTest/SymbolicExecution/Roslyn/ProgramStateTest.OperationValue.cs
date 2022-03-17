@@ -128,12 +128,12 @@ namespace SonarAnalyzer.UnitTest.SymbolicExecution.Roslyn
         [TestMethod]
         public void SetOperationValue_NullValue_RemovesSymbol()
         {
-            var value1 = new SymbolicValue(new SymbolicValueCounter());
+            var value = new SymbolicValue(new());
             var operation = new IOperationWrapperSonar(TestHelper.CompileCfgBodyCS("var x = 42;").Blocks[1].Operations[0]);
             var sut = ProgramState.Empty;
 
-            sut[operation].Should().BeNull();
-            sut = sut.SetOperationValue(operation, value1);
+            sut = sut.SetOperationValue(operation, value);
+            sut[operation].Should().NotBeNull();
             sut = sut.SetOperationValue(operation, null);
             sut[operation].Should().BeNull();
         }
