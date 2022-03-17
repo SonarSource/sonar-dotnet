@@ -481,8 +481,6 @@ switch (isTrue)
 Tag(""End"");";
             SETestContext.CreateCS(code).Validator.ValidateTagOrder(
                 "True",
-                "False",    // This should not be here, switch statement produces BinaryOperatin with isTrue==true
-                "Default",  // This should not be here, switch statement produces BinaryOperatin with isTrue==true
                 "End");
         }
     }
