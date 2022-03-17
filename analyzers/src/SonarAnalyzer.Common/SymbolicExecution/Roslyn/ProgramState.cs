@@ -53,10 +53,14 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
             SetOperationValue(operation.Instance, value);
 
         public ProgramState SetOperationValue(IOperation operation, SymbolicValue value) =>
-            this with { OperationValue = OperationValue.SetItem(operation, value) };
+            value == null
+                ? this with { OperationValue = OperationValue.Remove(operation) }
+                : this with { OperationValue = OperationValue.SetItem(operation, value) };
 
         public ProgramState SetSymbolValue(ISymbol symbol, SymbolicValue value) =>
-            this with { SymbolValue = SymbolValue.SetItem(symbol, value) };
+            value == null
+                ? this with { SymbolValue = SymbolValue.Remove(symbol) }
+                : this with { SymbolValue = SymbolValue.SetItem(symbol, value) };
 
         public IEnumerable<ISymbol> SymbolsWith(SymbolicConstraint constraint) =>
             SymbolValue.Where(x => x.Value != null && x.Value.HasConstraint(constraint)).Select(x => x.Key);

@@ -120,10 +120,7 @@ namespace SonarAnalyzer.UnitTest.SymbolicExecution.Roslyn
             var counter = new SymbolicValueCounter();
             var variableSymbol = assignment.Children.First().TrackedSymbol();
             var sut = ProgramState.Empty.SetSymbolValue(variableSymbol, null);
-            sut.ToString().Should().BeIgnoringLineEndings(
-@"Symbols:
-a: <null>
-");
+            sut.ToString().Should().Be("Empty");
 
             sut = ProgramState.Empty.SetSymbolValue(variableSymbol, new SymbolicValue(counter));
             sut.ToString().Should().BeIgnoringLineEndings(
@@ -146,10 +143,7 @@ Sample.Main(): SV_3: Second
             var assignment = TestHelper.CompileCfgBodyCS("var a = true;").Blocks[1].Operations[0];
             var counter = new SymbolicValueCounter();
             var sut = ProgramState.Empty.SetOperationValue(assignment, null);
-            sut.ToString().Should().BeIgnoringLineEndings(
-@"Operations:
-SimpleAssignmentOperation / VariableDeclaratorSyntax: a = true: <null>
-");
+            sut.ToString().Should().Be("Empty");
 
             sut = ProgramState.Empty.SetOperationValue(assignment, new SymbolicValue(counter));
             sut.ToString().Should().BeIgnoringLineEndings(

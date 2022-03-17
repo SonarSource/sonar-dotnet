@@ -77,6 +77,19 @@ namespace SonarAnalyzer.UnitTest.SymbolicExecution.Roslyn
         }
 
         [TestMethod]
+        public void SetSymbolValue_NullValue_RemovesSymbol()
+        {
+            var value = new SymbolicValue(new());
+            var symbol = CreateSymbols().First();
+            var sut = ProgramState.Empty;
+
+            sut = sut.SetSymbolValue(symbol, value);
+            sut[symbol].Should().NotBeNull();
+            sut = sut.SetSymbolValue(symbol, null);
+            sut[symbol].Should().BeNull();
+        }
+
+        [TestMethod]
         public void SetSymbolValue_NullSymbol_Throws() =>
             ProgramState.Empty.Invoking(x => x.SetSymbolValue(null, new SymbolicValue(new SymbolicValueCounter()))).Should().Throw<ArgumentNullException>();
 
