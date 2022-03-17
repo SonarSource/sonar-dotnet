@@ -157,11 +157,6 @@ namespace SonarAnalyzer.CFG.LiveVariableAnalysis
         {
             if (originalOperation.IsAnyKind(OperationKindEx.MethodBody, OperationKindEx.Block, OperationKindEx.ConstructorBody))
             {
-                if (originalOperation.Syntax.IsKind(SyntaxKindEx.ArrowExpressionClause))
-                {
-
-                }
-
                 var syntax = originalOperation.Syntax.IsKind(SyntaxKindEx.ArrowExpressionClause) ? originalOperation.Syntax.Parent : originalOperation.Syntax;
                 return new IOperationWrapperSonar(originalOperation).SemanticModel.GetDeclaredSymbol(syntax);
             }
@@ -169,9 +164,9 @@ namespace SonarAnalyzer.CFG.LiveVariableAnalysis
             {
                 return originalOperation switch
                 {
-                    var _ when ILocalFunctionOperationWrapper.IsInstance(originalOperation) => ILocalFunctionOperationWrapper.FromOperation(originalOperation).Symbol,
                     var _ when IAnonymousFunctionOperationWrapper.IsInstance(originalOperation) => IAnonymousFunctionOperationWrapper.FromOperation(originalOperation).Symbol,
                     var _ when IFlowAnonymousFunctionOperationWrapper.IsInstance(originalOperation) => IFlowAnonymousFunctionOperationWrapper.FromOperation(originalOperation).Symbol,
+                    var _ when ILocalFunctionOperationWrapper.IsInstance(originalOperation) => ILocalFunctionOperationWrapper.FromOperation(originalOperation).Symbol,
                     _ => throw new NotSupportedException($"Operations of kind: {originalOperation.Kind} are not supported.")
                 };
             }
