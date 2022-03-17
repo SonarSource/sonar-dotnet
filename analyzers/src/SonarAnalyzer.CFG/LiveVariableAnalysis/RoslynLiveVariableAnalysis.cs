@@ -18,6 +18,7 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using Microsoft.CodeAnalysis;
@@ -154,30 +155,26 @@ namespace SonarAnalyzer.CFG.LiveVariableAnalysis
 
         private static ISymbol OriginalDeclaration(IOperation originalOperation)
         {
-            ISymbol symbol;
             if (originalOperation.IsAnyKind(OperationKindEx.MethodBody, OperationKindEx.Block, OperationKindEx.ConstructorBody))
             {
-                var operationWrapper = new IOperationWrapperSonar(originalOperation);
-                var syntax = originalOperation.Syntax;
-                if (syntax.IsKind(SyntaxKindEx.ArrowExpressionClause))
+                if (originalOperation.Syntax.IsKind(SyntaxKindEx.ArrowExpressionClause))
                 {
-                    syntax = syntax.Parent;
+
                 }
 
-                symbol = operationWrapper.SemanticModel.GetDeclaredSymbol(syntax);
+                var syntax = originalOperation.Syntax.IsKind(SyntaxKindEx.ArrowExpressionClause) ? originalOperation.Syntax.Parent : originalOperation.Syntax;
+                return new IOperationWrapperSonar(originalOperation).SemanticModel.GetDeclaredSymbol(syntax);
             }
             else
             {
-                symbol = originalOperation switch
+                return originalOperation switch
                 {
                     var _ when ILocalFunctionOperationWrapper.IsInstance(originalOperation) => ILocalFunctionOperationWrapper.FromOperation(originalOperation).Symbol,
-                    var _ when IFlowAnonymousFunctionOperationWrapper.IsInstance(originalOperation) => IFlowAnonymousFunctionOperationWrapper.FromOperation(originalOperation).Symbol,
                     var _ when IAnonymousFunctionOperationWrapper.IsInstance(originalOperation) => IAnonymousFunctionOperationWrapper.FromOperation(originalOperation).Symbol,
-                    _ => null
+                    var _ when IFlowAnonymousFunctionOperationWrapper.IsInstance(originalOperation) => IFlowAnonymousFunctionOperationWrapper.FromOperation(originalOperation).Symbol,
+                    _ => throw new NotSupportedException($"Operations of kind: {originalOperation.Kind} are not supported.")
                 };
             }
-
-            return symbol;
         }
 
         private class RoslynState : State

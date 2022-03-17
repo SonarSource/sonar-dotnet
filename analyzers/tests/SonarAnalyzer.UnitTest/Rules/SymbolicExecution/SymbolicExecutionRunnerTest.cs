@@ -76,22 +76,6 @@ public static int operator +(Sample a, Sample b)  // OperatorDeclaration
     return 0;
 }
 
-private string target;
-public string this[int index] => target = null; // Noncompliant {{Message for SMain}}
-
-public string this[string index]
-{
-    get
-    {
-        return target = null;   // Noncompliant {{Message for SMain}}
-    }
-}
-
-public string this[float index]
-{
-    get => target = null;   // Noncompliant {{Message for SMain}}
-}
-
 public void MethodDeclaration()
 {
     string s = null;   // Noncompliant {{Message for SMain}}
@@ -138,6 +122,12 @@ private int target;
 public int Property => target = 42;     // Noncompliant {{Message for SMain}}");
 
         [TestMethod]
+        public void Initialize_Indexer_CS() =>
+            VerifyClassMainCS(@"
+private string target;
+public string this[int index] => target = null; // Noncompliant {{Message for SMain}}");
+
+        [TestMethod]
         public void Initialize_Accessors_CS() =>
             VerifyClassMainCS(@"
 private string target;
@@ -177,7 +167,29 @@ public event EventHandler ArrowEvent
 {
     add => target = null;       // Noncompliant {{Message for SMain}}
     remove => target = null;    // Noncompliant {{Message for SMain}}
-}");
+}
+
+public string this[string index]
+{
+    get
+    {
+        string s = null;   // Noncompliant {{Message for SMain}}
+        return s;
+    }
+
+    set
+    {
+        string s = null;   // Noncompliant {{Message for SMain}}
+    }
+}
+
+public string this[float index]
+{
+    get => target = null;   // Noncompliant {{Message for SMain}}
+    set => target = value;  // Noncompliant {{Message for SMain}}
+}
+
+");
 
         [TestMethod]
         public void Initialize_Accessors_VB() =>
