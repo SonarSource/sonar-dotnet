@@ -126,6 +126,10 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
                         state = state.SetSymbolValue(local, new SymbolicValue(symbolicValueCounter).WithConstraint(constraint));
                     }
                 }
+                foreach (var capture in branch.LeavingRegions.SelectMany(x => x.CaptureIds))
+                {
+                    state = state.RemoveCapture(capture);
+                }
             }
             return state.ResetOperations();
         }
@@ -153,6 +157,8 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
                 OperationKindEx.Binary => Binary.Process(context, IBinaryOperationWrapper.FromOperation(context.Operation.Instance)),
                 OperationKindEx.Conversion => Conversion.Process(context, IConversionOperationWrapper.FromOperation(context.Operation.Instance)),
                 OperationKindEx.FieldReference => References.Process(context, IFieldReferenceOperationWrapper.FromOperation(context.Operation.Instance)),
+                OperationKindEx.FlowCapture => FlowCapture.Process(context, IFlowCaptureOperationWrapper.FromOperation(context.Operation.Instance)),
+                OperationKindEx.IsPattern => Pattern.Process(context, IIsPatternOperationWrapper.FromOperation(context.Operation.Instance)),
                 OperationKindEx.LocalReference => References.Process(context, ILocalReferenceOperationWrapper.FromOperation(context.Operation.Instance)),
                 OperationKindEx.ParameterReference => References.Process(context, IParameterReferenceOperationWrapper.FromOperation(context.Operation.Instance)),
                 OperationKindEx.SimpleAssignment => SimpleAssignment.Process(context, ISimpleAssignmentOperationWrapper.FromOperation(context.Operation.Instance)),
