@@ -220,6 +220,10 @@ namespace SonarAnalyzer.UnitTest.SymbolicExecution.Roslyn
         [TestMethod]
         public void Execute_ClearsCapturesAfterBranching()
         {
+            const string code = @"
+string a = null;
+a ??= arg;
+Tag(""End"");";
             var allReferences = new List<IOperation>();
             var collector = new PostProcessTestCheck(x =>
             {
@@ -229,7 +233,7 @@ namespace SonarAnalyzer.UnitTest.SymbolicExecution.Roslyn
                 }
                 return x.State;
             });
-            var validator = SETestContext.CreateCS(@"string a = null; a ??= arg; Tag(""End"");", ", string arg", collector).Validator;
+            var validator = SETestContext.CreateCS(code, ", string arg", collector).Validator;
             allReferences.Should().HaveCount(3);
             var state = validator.TagStates("End").Single();
             foreach (var reference in allReferences)
