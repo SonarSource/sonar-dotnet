@@ -114,7 +114,8 @@ var value = arg switch
     _ => false
 };
 Tag(""Value"", value);";
-            SETestContext.CreateCS(code, ", object arg").Validator.TagValues("Value").Should()
+            var check = new PostProcessTestCheck(x => x.Operation.Instance.Kind == OperationKind.ParameterReference ? x.SetOperationConstraint(DummyConstraint.Dummy) : x.State);
+            SETestContext.CreateCS(code, ", object arg", check).Validator.TagValues("Value").Should()
                 .HaveCount(2)
                 .And.ContainSingle(x => x.HasConstraint(BoolConstraint.True))
                 .And.ContainSingle(x => x.HasConstraint(BoolConstraint.False));
