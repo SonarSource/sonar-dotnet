@@ -22,6 +22,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using FluentAssertions;
+using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Operations;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.Helpers;
@@ -482,6 +483,85 @@ Tag(""End"");";
             SETestContext.CreateCS(code).Validator.ValidateTagOrder(
                 "True",
                 "End");
+        }
+
+        [TestMethod]
+        public void Branching_BoolSymbol_LearnsBoolConstraint()
+        {
+            const string code = @"
+if (boolParameter)          // True constraint is learned
+{
+    Tag(""True"", boolParameter);
+    if (boolParameter)      // True constraint is known
+    {
+        Tag(""TrueTrue"");
+    }
+    else
+    {
+        Tag(""TrueFalse Unreachable"");
+    }
+}
+else                        // False constraint is learned
+{
+    Tag(""False"", boolParameter);
+    if (boolParameter)      // False constraint is known
+    {
+        Tag(""FalseTrue Unreachable"");
+    }
+    else
+    {
+        Tag(""FalseFalse"");
+    }
+};
+Tag(""End"");";
+            var validator = SETestContext.CreateCS(code).Validator;
+            validator.ValidateTagOrder(
+                "True",
+                "False",
+                "TrueTrue",
+                "TrueFalse Unreachable",    // FIXME: Should not be here
+                "FalseTrue Unreachable",    // FIXME: Should not be here
+                "FalseFalse",
+                "End");
+            validator.ValidateTag("True", x => x.Should().BeNull());    // FIXME: x.HasConstraint(BoolConstraint.True).Should().BeTrue();
+            validator.ValidateTag("False", x => x.Should().BeNull());   // FIXME: x.HasConstraint(BoolConstraint.False).Should().BeTrue();
+        }
+
+        [TestMethod]
+        public void Branching_BoolOperation_LearnsBoolConstraint()
+        {
+            const string code = @"
+if (collection.IsReadOnly)
+{
+    Tag(""If"", collection);
+}
+Tag(""End"", collection);";
+            var check = new PostProcessTestCheck(x => x.Operation.Instance.Kind == OperationKind.PropertyReference
+                                                      && x.State[x.Operation] is not null
+                                                      && x.State[x.Operation].HasConstraint(BoolConstraint.True)
+                                                          ? x.SetSymbolConstraint(x.Operation.Instance.AsPropertyReference().Value.Instance.TrackedSymbol(), DummyConstraint.Dummy)
+                                                          : x.State);
+            var validator = SETestContext.CreateCS(code, ", ICollection<object> collection", check).Validator;
+            validator.ValidateTag("If", x => x.Should().BeNull());  // FIXME: x.HasConstraint(DummyConstraint.Dummy).Should().BeTrue()
+            validator.TagStates("End").Should().HaveCount(1);       // FIXME: 2
+        }
+
+        [TestMethod]
+        public void Branching_BoolExpression_LearnsBoolConstraint_NotSupported()
+        {
+            const string code = @"
+if (boolParameter == true)
+{
+    Tag(""BoolParameter"", boolParameter);
+}
+bool value;
+if (value = boolParameter)
+{
+    Tag(""Value"", value);
+}";
+            var validator = SETestContext.CreateCS(code).Validator;
+            validator.ValidateTag("BoolParameter", x => x.Should().BeNull());
+            validator.ValidateTag("Value", x => x.Should().BeNull());
         }
     }
 }
