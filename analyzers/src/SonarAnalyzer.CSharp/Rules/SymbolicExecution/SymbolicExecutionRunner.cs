@@ -75,6 +75,10 @@ namespace SonarAnalyzer.Rules.CSharp
                 SyntaxKind.PropertyDeclaration);
 
             context.RegisterSyntaxNodeActionInNonGenerated(
+                c => Analyze<IndexerDeclarationSyntax>(context, c, x => x.ExpressionBody?.Expression),
+                SyntaxKind.IndexerDeclaration);
+
+            context.RegisterSyntaxNodeActionInNonGenerated(
                 c => Analyze<AccessorDeclarationSyntax>(context, c, x => (SyntaxNode)x.Body ?? x.ExpressionBody()),
                 SyntaxKind.GetAccessorDeclaration,
                 SyntaxKind.SetAccessorDeclaration,

@@ -103,7 +103,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 }
                 else if (node.CreateCfg(context.SemanticModel) is { } cfg)
                 {
-                    var lva = new RoslynLiveVariableAnalysis(cfg, symbol);
+                    var lva = new RoslynLiveVariableAnalysis(cfg);
                     var checker = new RoslynChecker(context, lva);
                     checker.Analyze(cfg.Blocks);
                 }

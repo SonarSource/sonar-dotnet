@@ -168,7 +168,7 @@ namespace SonarAnalyzer.Rules.CSharp
             else
             {
                 return body.CreateCfg(declaration.Context.SemanticModel) is { } cfg
-                    ? new LvaResult(declaration, cfg)
+                    ? new LvaResult(cfg)
                     : null;
             }
         }
@@ -299,9 +299,9 @@ namespace SonarAnalyzer.Rules.CSharp
                 CapturedVariables = lva.CapturedVariables;
             }
 
-            public LvaResult(MethodContext declaration, ControlFlowGraph cfg)
+            public LvaResult(ControlFlowGraph cfg)
             {
-                var lva = new RoslynLiveVariableAnalysis(cfg, declaration.Symbol);
+                var lva = new RoslynLiveVariableAnalysis(cfg);
                 LiveInEntryBlock = lva.LiveIn(cfg.EntryBlock).OfType<IParameterSymbol>().ToImmutableArray();
                 CapturedVariables = lva.CapturedVariables;
             }

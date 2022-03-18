@@ -18,6 +18,7 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using Microsoft.CodeAnalysis;
@@ -31,7 +32,7 @@ namespace SonarAnalyzer.CFG.LiveVariableAnalysis
     {
         protected override BasicBlock ExitBlock => Cfg.ExitBlock;
 
-        public RoslynLiveVariableAnalysis(ControlFlowGraph cfg, ISymbol originalDeclaration) : base(cfg, originalDeclaration) =>
+        public RoslynLiveVariableAnalysis(ControlFlowGraph cfg) : base(cfg, OriginalDeclaration(cfg.OriginalOperation)) =>
             Analyze();
 
         public ISymbol ParameterOrLocalSymbol(IOperation operation)
@@ -149,6 +150,24 @@ namespace SonarAnalyzer.CFG.LiveVariableAnalysis
                 {
                     yield return region.NestedRegions.Single(x => x.Kind == ControlFlowRegionKind.Filter);
                 }
+            }
+        }
+
+        private static ISymbol OriginalDeclaration(IOperation originalOperation)
+        {
+            if (originalOperation.IsAnyKind(OperationKindEx.MethodBody, OperationKindEx.Block, OperationKindEx.ConstructorBody))
+            {
+                var syntax = originalOperation.Syntax.IsKind(SyntaxKindEx.ArrowExpressionClause) ? originalOperation.Syntax.Parent : originalOperation.Syntax;
+                return new IOperationWrapperSonar(originalOperation).SemanticModel.GetDeclaredSymbol(syntax);
+            }
+            else
+            {
+                return originalOperation switch
+                {
+                    var _ when IAnonymousFunctionOperationWrapper.IsInstance(originalOperation) => IAnonymousFunctionOperationWrapper.FromOperation(originalOperation).Symbol,
+                    var _ when ILocalFunctionOperationWrapper.IsInstance(originalOperation) => ILocalFunctionOperationWrapper.FromOperation(originalOperation).Symbol,
+                    _ => throw new NotSupportedException($"Operations of kind: {originalOperation.Kind} are not supported.")
+                };
             }
         }
 

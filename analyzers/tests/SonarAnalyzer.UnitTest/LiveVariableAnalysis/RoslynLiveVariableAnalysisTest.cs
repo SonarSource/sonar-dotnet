@@ -18,10 +18,13 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+extern alias csharp;
 using System;
 using System.Linq;
+using csharp::SonarAnalyzer.Extensions;
 using FluentAssertions;
 using Microsoft.CodeAnalysis;
+using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.CFG;
 using SonarAnalyzer.CFG.LiveVariableAnalysis;
@@ -864,6 +867,48 @@ public class Sample
             context.ValidateEntry(new Captured("intParameter"));
         }
 
+        [TestMethod]
+        public void PropertyWithWriteOnly()
+        {
+            var code = @"
+public class Sample
+{
+    public int Property => 42;
+}";
+            new Context(code, SyntaxKind.NumericLiteralExpression).ValidateAllEmpty();
+        }
+
+        [TestMethod]
+        public void AnonyomousFunctionWriteOnly()
+        {
+            var code = @"
+using System;
+public class Sample
+{
+    public Func<int> Method(int captureMe) =>
+        () =>
+        {
+            return captureMe;
+        };
+}";
+            new Context(code, SyntaxKind.Block).ValidateAllEmpty();
+        }
+
+        [TestMethod]
+        public void ConstructorWriteOnly()
+        {
+            var code = @"
+using System;
+public class Sample
+{
+    public Sample()
+    {
+        var variable = 42;
+    }
+}";
+            new Context(code, SyntaxKind.Block).ValidateAllEmpty();
+        }
+
         private static Context CreateContextCS(string methodBody, string localFunctionName = null, string additionalParameters = null)
         {
             additionalParameters = additionalParameters == null ? null : ", " + additionalParameters;
@@ -928,19 +973,21 @@ End Class";
 
             public Context(string code, AnalyzerLanguage language, string localFunctionName = null)
             {
-                IMethodSymbol originalDeclaration;
                 Cfg = TestHelper.CompileCfg(code, language, code.Contains("// Error CS"));
-                if (localFunctionName == null)
+                if (localFunctionName != null)
                 {
-                    originalDeclaration = (IMethodSymbol)Cfg.OriginalOperation.SemanticModel.GetDeclaredSymbol(Cfg.OriginalOperation.Syntax);
-                }
-                else
-                {
-                    originalDeclaration = Cfg.LocalFunctions.Single(x => x.Name == localFunctionName);
-                    Cfg = Cfg.GetLocalFunctionControlFlowGraph(originalDeclaration);
+                    Cfg = Cfg.GetLocalFunctionControlFlowGraph(Cfg.LocalFunctions.Single(x => x.Name == localFunctionName));
                 }
                 Console.WriteLine(CfgSerializer.Serialize(Cfg));
-                Lva = new RoslynLiveVariableAnalysis(Cfg, originalDeclaration);
+                Lva = new RoslynLiveVariableAnalysis(Cfg);
+            }
+
+            public Context(string code, SyntaxKind syntaxKind)
+            {
+                var (tree, model) = TestHelper.Compile(code, false, AnalyzerLanguage.CSharp);
+                var node = tree.GetRoot().DescendantNodes().First(x => x.RawKind == (int)syntaxKind);
+                Cfg = node.CreateCfg(model);
+                Lva = new RoslynLiveVariableAnalysis(Cfg);
             }
 
             public void ValidateAllEmpty()
