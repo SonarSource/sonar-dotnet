@@ -47,6 +47,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework.SymbolicExecution
         public static SETestContext CreateCS(string methodBody, string additionalParameters, params SymbolicCheck[] additionalChecks)
         {
             var code = $@"
+using System;
 using System.Collections.Generic;
 
 public class Sample
@@ -55,6 +56,8 @@ public class Sample
     public static int StaticProperty {{get; set;}}
     public int Property {{get; set;}}
     private int field;
+
+    private bool Condition => Environment.ProcessorCount == 42;  // Something that cannot have constraint
 
     public void Main(bool boolParameter{additionalParameters})
     {{
@@ -80,6 +83,8 @@ public class Sample
         {
             var code = $@"
 Public Class Sample
+
+    Private Readonly Property Condition As Boolean = Environment.ProcessorCount = 42    ' Something that cannot have constraint
 
     Public Sub Main(BoolParameter As Boolean{additionalParameters})
         {methodBody}

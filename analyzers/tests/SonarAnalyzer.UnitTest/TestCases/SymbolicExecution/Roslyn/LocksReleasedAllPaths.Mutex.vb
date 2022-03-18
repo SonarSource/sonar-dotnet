@@ -11,20 +11,20 @@ Namespace Mutex_Type
 
         Public Sub Noncompliant(ParamMutex As Mutex, ParamMutex2 As Mutex, Foo As Foo)
             Dim m0WasCreated, m2WasCreated As Boolean
-            Dim m0 = New Mutex(True, "bar", m0WasCreated) ' FN
+            Dim m0 = New Mutex(True, "bar", m0WasCreated) ' Noncompliant
 
             Dim m1 = New Mutex(False)
-            m1.WaitOne() ' FN
+            m1.WaitOne() ' Noncompliant
 
             Dim m2 = New Mutex(False, "qix", m2WasCreated)
-            m2.WaitOne() ' FN
+            m2.WaitOne() ' Noncompliant
 
             Dim m3 = Mutex.OpenExisting("x")
-            m3.WaitOne() ' FN
+            m3.WaitOne() ' Noncompliant
 
             Foo.InstanceMutex.WaitOne() ' FN
 
-            Foo.StaticMutex.WaitOne() ' FN
+            Foo.StaticMutex.WaitOne() ' Noncompliant
 
             If Cond Then
                 m0.ReleaseMutex()
@@ -42,32 +42,32 @@ Namespace Mutex_Type
             m3.Dispose()
 
             ' 'true' means it owns the mutex if no exception gets thrown
-            Using mutexInUsing As New Mutex(True, "foo") ' FN
+            Using mutexInUsing As New Mutex(True, "foo") ' Noncompliant
                 If Cond Then mutexInUsing.ReleaseMutex()
             End Using
 
             Dim mutexInOutVar As Mutex
             If Mutex.TryOpenExisting("y", mutexInOutVar) Then
-                mutexInOutVar.WaitOne() ' FN
+                mutexInOutVar.WaitOne() ' Noncompliant
                 If Cond Then mutexInOutVar.ReleaseMutex()
             End If
 
             Dim m = New Mutex(False)
-            Dim mIsAcquired = m.WaitOne(200, True) ' FN
+            Dim mIsAcquired = m.WaitOne(200, True) ' Noncompliant
             If mIsAcquired Then
                 ' here it should be released
             Else
                 m.ReleaseMutex() ' this Is a programming Error
             End If
 
-            Dim paramMutexIsAcquired = ParamMutex.WaitOne(400, False) ' FN
+            Dim paramMutexIsAcquired = ParamMutex.WaitOne(400, False) ' Noncompliant
             If paramMutexIsAcquired Then
                 If Cond Then
                 Else
                     ParamMutex.ReleaseMutex()
                 End If
             End If
-            While ParamMutex2.WaitOne(400, False) ' FN
+            While ParamMutex2.WaitOne(400, False) ' Noncompliant
                 If Cond Then ParamMutex2.ReleaseMutex()
             End While
         End Sub

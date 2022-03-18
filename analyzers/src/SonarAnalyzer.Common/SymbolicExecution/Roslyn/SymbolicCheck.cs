@@ -31,6 +31,9 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
 
         protected SymbolicCheck() { } // Avoid abstract class, fixes S1694
 
+        public virtual ProgramState ConditionEvaluated(SymbolicContext context) =>
+            context.State;
+
         /// <summary>
         /// Override this if you need to return multiple states.
         /// </summary>

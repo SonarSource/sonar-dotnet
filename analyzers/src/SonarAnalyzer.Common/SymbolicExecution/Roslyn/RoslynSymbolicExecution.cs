@@ -138,12 +138,22 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
                         state = state.SetSymbolConstraint(local, symbolicValueCounter, constraint);
                     }
                 }
+                if (branch.Source.BranchValue is { } branchValue && branch.Source.ConditionalSuccessor is not null) // This branching was conditional
+                {
+                    var constraint = BoolConstraint.From((branch.Source.ConditionKind == ControlFlowConditionKind.WhenTrue) == branch.IsConditionalSuccessor);
+                    state = state.SetOperationConstraint(branchValue, symbolicValueCounter, constraint);
+                    if (branchValue.TrackedSymbol() is { } symbol)
+                    {
+                        state = state.SetSymbolConstraint(symbol, symbolicValueCounter, constraint);
+                    }
+                    state = InvokeConditionEvaluated(new IOperationWrapperSonar(branchValue), state);
+                }
                 foreach (var capture in branch.LeavingRegions.SelectMany(x => x.CaptureIds))
                 {
                     state = state.RemoveCapture(capture);
                 }
             }
-            return state.ResetOperations();
+            return state?.ResetOperations();
         }
 
         private IEnumerable<ExplodedNode> ProcessOperation(ExplodedNode node)

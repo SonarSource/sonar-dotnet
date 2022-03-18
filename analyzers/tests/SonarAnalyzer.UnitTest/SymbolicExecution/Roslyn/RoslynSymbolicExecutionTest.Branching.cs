@@ -39,7 +39,7 @@ namespace SonarAnalyzer.UnitTest.SymbolicExecution.Roslyn
         {
             const string code = @"
 Tag(""Entry"");
-if (boolParameter)
+if (Condition)
 {
     Tag(""BeforeTry"");
     try
@@ -76,7 +76,7 @@ Tag(""End"");";
         {
             const string code = @"
 Tag(""Entry"")
-If BoolParameter Then
+If Condition Then
     Tag(""BeforeTry"")
     Try
         Tag(""InTry"")
@@ -153,7 +153,7 @@ public int Method(bool a)
         return 2;
 }";
             var validator = SETestContext.CreateCSMethod(method).Validator;
-            validator.ValidateExitReachCount(1);
+            validator.ValidateExitReachCount(2);
             validator.ValidateExecutionCompleted();
         }
 
@@ -169,7 +169,7 @@ public int Method(bool a)
         return 2;
 }";
             var validator = SETestContext.CreateCSMethod(method).Validator;
-            validator.ValidateExitReachCount(1);    // Exit is reached only once, because it is reached with the same state
+            validator.ValidateExitReachCount(2);    // Exit is reached only once, because it is reached with the same state
             validator.ValidateExecutionCompleted();
         }
 
@@ -185,7 +185,7 @@ public System.Collections.Generic.IEnumerable<int> Method(bool a)
     yield return 2;
 }";
             var validator = SETestContext.CreateCSMethod(method).Validator;
-            validator.ValidateExitReachCount(1);
+            validator.ValidateExitReachCount(2);
             validator.ValidateExecutionCompleted();
         }
 
@@ -231,7 +231,7 @@ Tag(""End"", value);";
         {
             const string code = @"
 bool value;
-if (boolParameter)
+if (Condition)
 {
     value = true;
 }
@@ -391,6 +391,7 @@ Tag(""End"");";
             SETestContext.CreateCS(code).Validator.ValidateTagOrder(
                 "If",
                 "Else",
+                "End",
                 "End");
         }
 
@@ -411,6 +412,7 @@ Tag(""End"");";
             SETestContext.CreateCS(code, check).Validator.ValidateTagOrder(
                 "If",
                 "Else",
+                "End",
                 "End");
         }
 
@@ -519,12 +521,11 @@ Tag(""End"");";
                 "True",
                 "False",
                 "TrueTrue",
-                "TrueFalse Unreachable",    // FIXME: Should not be here
-                "FalseTrue Unreachable",    // FIXME: Should not be here
                 "FalseFalse",
+                "End",
                 "End");
-            validator.ValidateTag("True", x => x.Should().BeNull());    // FIXME: x.HasConstraint(BoolConstraint.True).Should().BeTrue();
-            validator.ValidateTag("False", x => x.Should().BeNull());   // FIXME: x.HasConstraint(BoolConstraint.False).Should().BeTrue();
+            validator.ValidateTag("True", x => x.HasConstraint(BoolConstraint.True).Should().BeTrue());
+            validator.ValidateTag("False", x => x.HasConstraint(BoolConstraint.False).Should().BeTrue());
         }
 
         [TestMethod]
@@ -536,14 +537,12 @@ if (collection.IsReadOnly)
     Tag(""If"", collection);
 }
 Tag(""End"", collection);";
-            var check = new PostProcessTestCheck(x => x.Operation.Instance.Kind == OperationKind.PropertyReference
-                                                      && x.State[x.Operation] is not null
-                                                      && x.State[x.Operation].HasConstraint(BoolConstraint.True)
-                                                          ? x.SetSymbolConstraint(x.Operation.Instance.AsPropertyReference().Value.Instance.TrackedSymbol(), DummyConstraint.Dummy)
-                                                          : x.State);
+            var check = new ConditionEvaluatedTestCheck(x => x.State[x.Operation].HasConstraint(BoolConstraint.True)
+                                                                 ? x.SetSymbolConstraint(x.Operation.Instance.AsPropertyReference().Value.Instance.TrackedSymbol(), DummyConstraint.Dummy)
+                                                                 : x.State);
             var validator = SETestContext.CreateCS(code, ", ICollection<object> collection", check).Validator;
-            validator.ValidateTag("If", x => x.Should().BeNull());  // FIXME: x.HasConstraint(DummyConstraint.Dummy).Should().BeTrue()
-            validator.TagStates("End").Should().HaveCount(1);       // FIXME: 2
+            validator.ValidateTag("If", x => x.HasConstraint(DummyConstraint.Dummy).Should().BeTrue());
+            validator.TagStates("End").Should().HaveCount(2);
         }
 
         [TestMethod]
