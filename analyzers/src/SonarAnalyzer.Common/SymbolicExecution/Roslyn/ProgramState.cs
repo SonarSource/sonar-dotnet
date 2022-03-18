@@ -114,7 +114,7 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
             HashCode.Combine(
                 HashCode.DictionaryContentHash(OperationValue),
                 HashCode.DictionaryContentHash(SymbolValue),
-                HashCode.EnumerableContentHash(PreservedSymbols));
+                HashCode.EnumerableContentHash(PreservedSymbols),
                 HashCode.DictionaryContentHash(CaptureOperation));
 
         public bool Equals(ProgramState other) =>

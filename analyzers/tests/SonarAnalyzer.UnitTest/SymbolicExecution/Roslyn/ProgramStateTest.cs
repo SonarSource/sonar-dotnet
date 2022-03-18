@@ -211,7 +211,7 @@ SimpleAssignmentOperation / VariableDeclaratorSyntax: a = true: SV_1
 #42: SimpleAssignmentOperation / VariableDeclaratorSyntax: a = true
 ");
         }
-        
+
         [TestMethod]
         public void ToString_WithAll()
         {
@@ -223,7 +223,7 @@ SimpleAssignmentOperation / VariableDeclaratorSyntax: a = true: SV_1
                 .SetSymbolValue(variableSymbol, new SymbolicValue(counter))
                 .SetSymbolValue(variableSymbol.ContainingSymbol, valueWithConstraint)
                 .SetOperationValue(assignment, new SymbolicValue(counter))
-                .SetOperationValue(assignment.Children.First(), valueWithConstraint).Preserve(variableSymbol);
+                .SetOperationValue(assignment.Children.First(), valueWithConstraint).Preserve(variableSymbol)
                 .SetCapture(new CaptureId(0), assignment)
                 .SetCapture(new CaptureId(1), assignment.Children.First());
 

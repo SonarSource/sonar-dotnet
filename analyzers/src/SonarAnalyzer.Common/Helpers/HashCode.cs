@@ -48,6 +48,13 @@ namespace SonarAnalyzer.Helpers
                 .AddHash((uint)(b?.GetHashCode() ?? 0))
                 .AddHash((uint)(c?.GetHashCode() ?? 0));
 
+        public static int Combine<T1, T2, T3, T4>(T1 a, T2 b, T3 c, T4 d) =>
+            (int)Seed
+                .AddHash((uint)(a?.GetHashCode() ?? 0))
+                .AddHash((uint)(b?.GetHashCode() ?? 0))
+                .AddHash((uint)(c?.GetHashCode() ?? 0))
+                .AddHash((uint)(d?.GetHashCode() ?? 0));
+
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         private static uint AddHash(this uint hash, uint value) =>
             RotateLeft(hash + value * PreMultiplier) * PostMultiplier;
