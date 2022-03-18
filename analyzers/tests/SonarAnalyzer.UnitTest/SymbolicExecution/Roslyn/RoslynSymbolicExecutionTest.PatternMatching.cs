@@ -19,6 +19,7 @@
  */
 
 using FluentAssertions;
+using Microsoft.CodeAnalysis;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.SymbolicExecution.Constraints;
 using SonarAnalyzer.UnitTest.TestFramework.SymbolicExecution;
@@ -80,6 +81,23 @@ var value = boolParameter switch
 };
 Tag(""Value"", value);";
             SETestContext.CreateCS(code).Validator.TagValues("Value").Should()
+                .HaveCount(2)
+                .And.ContainSingle(x => x.HasConstraint(BoolConstraint.True))
+                .And.ContainSingle(x => x.HasConstraint(BoolConstraint.False));
+        }
+
+        [TestMethod]
+        public void IsPattern_OtherConstraint_SwitchExpression_VisitsBothBranches()
+        {
+            const string code = @"
+var value = boolParameter switch
+{
+    true => true,
+    false => false
+};
+Tag(""Value"", value);";
+            var check = new PostProcessTestCheck(x => x.Operation.Instance.Kind == OperationKind.ParameterReference ? x.SetOperationConstraint(DummyConstraint.Dummy) : x.State);
+            SETestContext.CreateCS(code, check).Validator.TagValues("Value").Should()
                 .HaveCount(2)
                 .And.ContainSingle(x => x.HasConstraint(BoolConstraint.True))
                 .And.ContainSingle(x => x.HasConstraint(BoolConstraint.False));
