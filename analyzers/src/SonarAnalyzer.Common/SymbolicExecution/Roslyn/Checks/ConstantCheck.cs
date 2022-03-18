@@ -19,6 +19,7 @@
  */
 
 using Microsoft.CodeAnalysis;
+using SonarAnalyzer.Helpers;
 using SonarAnalyzer.SymbolicExecution.Constraints;
 
 namespace SonarAnalyzer.SymbolicExecution.Roslyn.Checks
@@ -26,16 +27,23 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn.Checks
     internal class ConstantCheck : SymbolicCheck
     {
         protected override ProgramState PreProcessSimple(SymbolicContext context) =>
-            GetConstraint(context.Operation.Instance) is { } constraint
+            ConstraintFromValue(context.Operation.Instance.ConstantValue.Value) is { } constraint
                 ? context.SetOperationConstraint(constraint)
                 : context.State;
 
-        private static SymbolicConstraint GetConstraint(IOperation operation) =>
-            operation.ConstantValue.Value switch
+        public static SymbolicConstraint ConstraintFromType(ITypeSymbol type) =>
+            ConstraintFromValue(DefaultValue(type));
+
+        private static SymbolicConstraint ConstraintFromValue(object value) =>
+            value switch
             {
+                // Update DefaultValue when adding new types
                 true => BoolConstraint.True,
                 false => BoolConstraint.False,
                 _ => null
             };
+
+        private static object DefaultValue(ITypeSymbol type) =>
+            type.Is(KnownType.System_Boolean) ? false : null;
     }
 }

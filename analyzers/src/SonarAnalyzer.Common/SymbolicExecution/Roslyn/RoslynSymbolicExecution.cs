@@ -89,7 +89,7 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
             }
             else if (node.Block.ContainsThrow())
             {
-                yield return CreateNode(cfg.ExitBlock, null);
+                yield return CreateNode(cfg.ExitBlock, null, null);
             }
             else
             {
@@ -98,21 +98,36 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
                     if (successor.Destination is not null)
                     {
                         yield return successor.FinallyRegions.Any() // When exiting finally region(s), redirect to 1st finally instead of the normal destination
-                            ? FromFinally(new FinallyPoint(node.FinallyPoint, successor))
-                            : CreateNode(successor.Destination, node.FinallyPoint);
+                            ? FromFinally(successor, new FinallyPoint(node.FinallyPoint, successor))
+                            : CreateNode(successor.Destination, successor, node.FinallyPoint);
                     }
                     else if (successor.Source.EnclosingRegion.Kind == ControlFlowRegionKind.Finally)    // Redirect from finally back to the original place (or outer finally on the same branch)
                     {
-                        yield return FromFinally(node.FinallyPoint.CreateNext());
+                        yield return FromFinally(successor, node.FinallyPoint.CreateNext());
                     }
                 }
             }
 
-            ExplodedNode FromFinally(FinallyPoint finallyPoint) =>
-                CreateNode(cfg.Blocks[finallyPoint.BlockIndex], finallyPoint.IsFinallyBlock ? finallyPoint : finallyPoint.Previous);
+            ExplodedNode FromFinally(ControlFlowBranch branch, FinallyPoint finallyPoint) =>
+                CreateNode(cfg.Blocks[finallyPoint.BlockIndex], branch, finallyPoint.IsFinallyBlock ? finallyPoint : finallyPoint.Previous);
 
-            ExplodedNode CreateNode(BasicBlock block, FinallyPoint finallyPoint) =>
-                new(block, node.State.ResetOperations(), finallyPoint);
+            ExplodedNode CreateNode(BasicBlock block, ControlFlowBranch branch, FinallyPoint finallyPoint) =>
+                new(block, ProcessBranch(branch, node.State), finallyPoint);
+        }
+
+        private ProgramState ProcessBranch(ControlFlowBranch branch, ProgramState state)
+        {
+            if (branch is not null)
+            {
+                foreach (var local in branch.EnteringRegions.SelectMany(x => x.Locals))
+                {
+                    if (ConstantCheck.ConstraintFromType(local.Type) is { } constraint)
+                    {
+                        state = state.SetSymbolValue(local, new SymbolicValue(symbolicValueCounter).WithConstraint(constraint));
+                    }
+                }
+            }
+            return state.ResetOperations();
         }
 
         private IEnumerable<ExplodedNode> ProcessOperation(ExplodedNode node)

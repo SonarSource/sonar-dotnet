@@ -200,7 +200,7 @@ public System.Collections.Generic.IEnumerable<int> Method(bool a)
     var b = a;
 }";
             var validator = SETestContext.CreateCSMethod(method).Validator;
-            validator.ValidateExitReachCount(1);
+            validator.ValidateExitReachCount(2);
             validator.ValidateExecutionCompleted();
         }
 

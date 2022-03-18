@@ -20,6 +20,7 @@
 
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using Microsoft.CodeAnalysis;
 using SonarAnalyzer.CFG.Roslyn;
 using SonarAnalyzer.Extensions;
@@ -81,7 +82,7 @@ namespace SonarAnalyzer.CFG
 
             private void Visit(ControlFlowGraph cfg, ControlFlowRegion region)
             {
-                writer.WriteSubGraphStart(region.Kind + " region" + (region.ExceptionType == null ? null : " " + region.ExceptionType));
+                writer.WriteSubGraphStart(SerializeRegion(region));
                 foreach (var nested in region.NestedRegions)
                 {
                     Visit(cfg, nested);
@@ -116,6 +117,21 @@ namespace SonarAnalyzer.CFG
                 new[] { $"{level}# {operation.Serialize()}" }
                 .Concat(new IOperationWrapperSonar(operation).Children.SelectMany(x => SerializeOperation(level + 1, x)));
 
+            private static string SerializeRegion(ControlFlowRegion region)
+            {
+                var sb = new StringBuilder();
+                sb.Append(region.Kind.ToString()).Append(" region");
+                if (region.ExceptionType is not null)
+                {
+                    sb.Append(": ").Append(region.ExceptionType);
+                }
+                if (region.Locals.Any())
+                {
+                    sb.Append(": ").Append(string.Join(", ", region.Locals.Select(x => x.Name ?? "N/A")));
+                }
+                return sb.ToString();
+            }
+
             private void WriteEdges(BasicBlock block)
             {
                 foreach (var predecessor in block.Predecessors)
@@ -128,7 +144,7 @@ namespace SonarAnalyzer.CFG
                     var semantics = predecessor.Semantics == ControlFlowBranchSemantics.Regular ? null : predecessor.Semantics.ToString();
                     writer.WriteEdge(BlockId(predecessor.Source), BlockId(block), $"{semantics} {condition}".Trim());
                 }
-                if (block.FallThroughSuccessor is {Destination: null })
+                if (block.FallThroughSuccessor is { Destination: null })
                 {
                     writer.WriteEdge(BlockId(block), "NoDestination_" + BlockId(block), block.FallThroughSuccessor.Semantics.ToString());
                 }
