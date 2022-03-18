@@ -873,10 +873,9 @@ public class Sample
             var code = @"
 public class Sample
 {
-    private int target;
-    public int Property => target = 42;
+    public int Property => 42;
 }";
-            new Context(code, SyntaxKind.SimpleAssignmentExpression).ValidateAllEmpty();
+            new Context(code, SyntaxKind.NumericLiteralExpression).ValidateAllEmpty();
         }
 
         [TestMethod]
@@ -986,8 +985,8 @@ End Class";
             public Context(string code, SyntaxKind syntaxKind)
             {
                 var (tree, model) = TestHelper.Compile(code, false, AnalyzerLanguage.CSharp);
-                var method = tree.GetRoot().DescendantNodes().First(x => x.RawKind == (int)syntaxKind);
-                Cfg = method.CreateCfg(model);
+                var node = tree.GetRoot().DescendantNodes().First(x => x.RawKind == (int)syntaxKind);
+                Cfg = node.CreateCfg(model);
                 Lva = new RoslynLiveVariableAnalysis(Cfg);
             }
 
