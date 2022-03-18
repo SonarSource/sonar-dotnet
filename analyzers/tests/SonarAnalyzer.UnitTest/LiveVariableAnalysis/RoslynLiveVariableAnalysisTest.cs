@@ -22,6 +22,7 @@ using System;
 using System.Linq;
 using FluentAssertions;
 using Microsoft.CodeAnalysis;
+using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.CFG;
 using SonarAnalyzer.CFG.LiveVariableAnalysis;
@@ -864,6 +865,22 @@ public class Sample
             context.ValidateEntry(new Captured("intParameter"));
         }
 
+        [TestMethod]
+        public void PropertyWithoutVariables()
+        {
+            var code = @"
+public class Sample
+{
+    private int target;
+    public int Property => target = 42;
+}";
+            var (tree, model) = TestHelper.Compile(code, false, AnalyzerLanguage.CSharp);
+            var method = tree.GetRoot().DescendantNodes().First(x => x.RawKind == (int)SyntaxKind.SimpleAssignmentExpression);
+            var cfg = ControlFlowGraph.Create(method.Parent, model);
+            var lva = new RoslynLiveVariableAnalysis(cfg);
+            new Context(cfg, lva).ValidateAllEmpty();
+        }
+
         private static Context CreateContextCS(string methodBody, string localFunctionName = null, string additionalParameters = null)
         {
             additionalParameters = additionalParameters == null ? null : ", " + additionalParameters;
@@ -935,6 +952,12 @@ End Class";
                 }
                 Console.WriteLine(CfgSerializer.Serialize(Cfg));
                 Lva = new RoslynLiveVariableAnalysis(Cfg);
+            }
+
+            public Context(ControlFlowGraph cfg, RoslynLiveVariableAnalysis lva)
+            {
+                Cfg = cfg;
+                Lva = lva;
             }
 
             public void ValidateAllEmpty()
