@@ -165,7 +165,6 @@ namespace SonarAnalyzer.CFG.LiveVariableAnalysis
                 return originalOperation switch
                 {
                     var _ when IAnonymousFunctionOperationWrapper.IsInstance(originalOperation) => IAnonymousFunctionOperationWrapper.FromOperation(originalOperation).Symbol,
-                    var _ when IFlowAnonymousFunctionOperationWrapper.IsInstance(originalOperation) => IFlowAnonymousFunctionOperationWrapper.FromOperation(originalOperation).Symbol,
                     var _ when ILocalFunctionOperationWrapper.IsInstance(originalOperation) => ILocalFunctionOperationWrapper.FromOperation(originalOperation).Symbol,
                     _ => throw new NotSupportedException($"Operations of kind: {originalOperation.Kind} are not supported.")
                 };

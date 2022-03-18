@@ -18,8 +18,10 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+extern alias csharp;
 using System;
 using System.Linq;
+using csharp::SonarAnalyzer.Extensions;
 using FluentAssertions;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
@@ -866,7 +868,7 @@ public class Sample
         }
 
         [TestMethod]
-        public void PropertyWithoutVariables()
+        public void PropertyWithWriteOnly()
         {
             var code = @"
 public class Sample
@@ -874,11 +876,38 @@ public class Sample
     private int target;
     public int Property => target = 42;
 }";
-            var (tree, model) = TestHelper.Compile(code, false, AnalyzerLanguage.CSharp);
-            var method = tree.GetRoot().DescendantNodes().First(x => x.RawKind == (int)SyntaxKind.SimpleAssignmentExpression);
-            var cfg = ControlFlowGraph.Create(method.Parent, model);
-            var lva = new RoslynLiveVariableAnalysis(cfg);
-            new Context(cfg, lva).ValidateAllEmpty();
+            new Context(code, SyntaxKind.SimpleAssignmentExpression).ValidateAllEmpty();
+        }
+
+        [TestMethod]
+        public void AnonyomousFunctionWriteOnly()
+        {
+            var code = @"
+using System;
+public class Sample
+{
+    public Func<int> Method(int captureMe) =>
+        () =>
+        {
+            return captureMe;
+        };
+}";
+            new Context(code, SyntaxKind.Block).ValidateAllEmpty();
+        }
+
+        [TestMethod]
+        public void ConstructorWriteOnly()
+        {
+            var code = @"
+using System;
+public class Sample
+{
+    public Sample()
+    {
+        var variable = 42;
+    }
+}";
+            new Context(code, SyntaxKind.Block).ValidateAllEmpty();
         }
 
         private static Context CreateContextCS(string methodBody, string localFunctionName = null, string additionalParameters = null)
@@ -954,10 +983,12 @@ End Class";
                 Lva = new RoslynLiveVariableAnalysis(Cfg);
             }
 
-            public Context(ControlFlowGraph cfg, RoslynLiveVariableAnalysis lva)
+            public Context(string code, SyntaxKind syntaxKind)
             {
-                Cfg = cfg;
-                Lva = lva;
+                var (tree, model) = TestHelper.Compile(code, false, AnalyzerLanguage.CSharp);
+                var method = tree.GetRoot().DescendantNodes().First(x => x.RawKind == (int)syntaxKind);
+                Cfg = method.CreateCfg(model);
+                Lva = new RoslynLiveVariableAnalysis(Cfg);
             }
 
             public void ValidateAllEmpty()
