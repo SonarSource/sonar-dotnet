@@ -32,9 +32,11 @@ namespace SonarAnalyzer.UnitTest.Helpers
         {
             var two = HashCode.Combine<object, object>(null, null);
             var three = HashCode.Combine<object, object, object>(null, null, null);
+            var four = HashCode.Combine<object, object, object, object>(null, null, null, null);
 
             two.Should().NotBe(0);
             three.Should().NotBe(0).And.NotBe(two);
+            four.Should().NotBe(0).And.NotBe(three).And.NotBe(two);
         }
     }
 }

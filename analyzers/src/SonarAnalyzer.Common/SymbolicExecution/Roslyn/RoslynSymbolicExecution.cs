@@ -24,7 +24,6 @@ using System.Linq;
 using Microsoft.CodeAnalysis;
 using SonarAnalyzer.CFG.LiveVariableAnalysis;
 using SonarAnalyzer.CFG.Roslyn;
-using SonarAnalyzer.Helpers;
 using SonarAnalyzer.SymbolicExecution.Constraints;
 using SonarAnalyzer.SymbolicExecution.Roslyn.Checks;
 using SonarAnalyzer.SymbolicExecution.Roslyn.OperationProcessors;
