@@ -123,7 +123,7 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
                 {
                     if (ConstantCheck.ConstraintFromType(local.Type) is { } constraint)
                     {
-                        state = state.SetSymbolValue(local, new SymbolicValue(symbolicValueCounter).WithConstraint(constraint));
+                        state = state.SetSymbolConstraint(local, symbolicValueCounter, constraint);
                     }
                 }
                 foreach (var capture in branch.LeavingRegions.SelectMany(x => x.CaptureIds))

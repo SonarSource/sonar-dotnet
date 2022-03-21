@@ -25,18 +25,18 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn.OperationProcessors
     internal static class References
     {
         public static ProgramState Process(SymbolicContext context, ILocalReferenceOperationWrapper localReference) =>
-            context.State[localReference.Local] is { } symbolState
-                ? context.State.SetOperationValue(context.Operation, symbolState)
+            context.State[localReference.Local] is { } value
+                ? context.State.SetOperationValue(context.Operation, value)
                 : context.State;
 
         public static ProgramState Process(SymbolicContext context, IParameterReferenceOperationWrapper parameterReference) =>
-            context.State[parameterReference.Parameter] is { } symbolState
-                ? context.State.SetOperationValue(context.Operation, symbolState)
+            context.State[parameterReference.Parameter] is { } value
+                ? context.State.SetOperationValue(context.Operation, value)
                 : context.State;
 
         public static ProgramState Process(SymbolicContext context, IFieldReferenceOperationWrapper fieldReference) =>
-            context.State[fieldReference.Field] is { } symbolState
-                ? context.State.SetOperationValue(context.Operation, symbolState)
+            context.State[fieldReference.Field] is { } value
+                ? context.State.SetOperationValue(context.Operation, value)
                 : context.State;
     }
 }

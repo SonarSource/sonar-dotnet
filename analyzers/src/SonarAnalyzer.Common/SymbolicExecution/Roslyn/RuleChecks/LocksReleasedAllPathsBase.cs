@@ -152,7 +152,7 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn.RuleChecks
 
         // This method should be removed once the engine has support for `True/False` boolean constraints.
         private static ProgramState AddLock(SymbolicContext context, IOperation operation) =>
-            context.State.SetOperationValue(operation, context.CreateSymbolicValue().WithConstraint(LockConstraint.Held));
+            context.State.SetOperationConstraint(operation, context.SymbolicValueCounter, LockConstraint.Held);
 
         private static ISymbol FirstArgumentSymbol(IInvocationOperationWrapper invocation) =>
             IArgumentOperationWrapper.FromOperation(invocation.Arguments.First()).Value.TrackedSymbol();
