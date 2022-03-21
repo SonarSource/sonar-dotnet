@@ -26,25 +26,24 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
 {
     public class SymbolicContext
     {
-        private readonly SymbolicValueCounter symbolicValueCounter;
-
+        public SymbolicValueCounter SymbolicValueCounter { get; }
         public IOperationWrapperSonar Operation { get; }
         public ProgramState State { get; }
 
         public SymbolicContext(SymbolicValueCounter symbolicValueCounter, IOperationWrapperSonar operation, ProgramState state)
         {
-            this.symbolicValueCounter = symbolicValueCounter ?? throw new ArgumentNullException(nameof(symbolicValueCounter));
+            SymbolicValueCounter = symbolicValueCounter ?? throw new ArgumentNullException(nameof(symbolicValueCounter));
             Operation = operation; // Operation can be null for the branch nodes.
             State = state ?? throw new ArgumentNullException(nameof(state));
         }
 
         public SymbolicValue CreateSymbolicValue() =>
-            new(symbolicValueCounter);
+            new(SymbolicValueCounter);
 
         public ProgramState SetOperationConstraint(SymbolicConstraint constraint) =>
-            State.SetOperationValue(Operation, (State[Operation] ?? CreateSymbolicValue()).WithConstraint(constraint));
+            State.SetOperationConstraint(Operation, SymbolicValueCounter, constraint);
 
         public ProgramState SetSymbolConstraint(ISymbol symbol, SymbolicConstraint constraint) =>
-            State.SetSymbolValue(symbol, (State[symbol] ?? CreateSymbolicValue()).WithConstraint(constraint));
+            State.SetSymbolConstraint(symbol, SymbolicValueCounter, constraint);
     }
 }
