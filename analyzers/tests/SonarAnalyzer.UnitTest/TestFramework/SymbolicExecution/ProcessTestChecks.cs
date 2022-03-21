@@ -18,45 +18,79 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System;
+using Microsoft.CodeAnalysis;
 using SonarAnalyzer.SymbolicExecution.Roslyn;
 using ProcessFunc = System.Func<SonarAnalyzer.SymbolicExecution.Roslyn.SymbolicContext, SonarAnalyzer.SymbolicExecution.Roslyn.ProgramState[]>;
 using ProcessFuncSimple = System.Func<SonarAnalyzer.SymbolicExecution.Roslyn.SymbolicContext, SonarAnalyzer.SymbolicExecution.Roslyn.ProgramState>;
 
 namespace SonarAnalyzer.UnitTest.TestFramework.SymbolicExecution
 {
-    internal class PreProcessTestCheck : SymbolicCheck
+    internal class PreProcessTestCheck : ProcessTestCheckBase
     {
-        private readonly ProcessFuncSimple processSingle;
-        private readonly ProcessFunc process;
+        public PreProcessTestCheck(ProcessFuncSimple processSimple) : base(OperationKind.None, processSimple) { }
 
-        public PreProcessTestCheck(ProcessFuncSimple processSingle) =>
-            this.processSingle = processSingle;
+        public PreProcessTestCheck(OperationKind kind, ProcessFuncSimple processSimple) : base(kind, processSimple) { }
 
-        public PreProcessTestCheck(ProcessFunc process) =>
-            this.process = process;
+        public PreProcessTestCheck(ProcessFunc process) : base(process) { }
 
         protected override ProgramState PreProcessSimple(SymbolicContext context) =>
-            processSingle is null ? base.PreProcessSimple(context) : processSingle(context);
+            ProcessSimple(context);
 
         public override ProgramState[] PreProcess(SymbolicContext context) =>
-            process is null ? base.PreProcess(context) : process(context);
+            Process(context);
     }
 
-    internal class PostProcessTestCheck : SymbolicCheck
+    internal class PostProcessTestCheck : ProcessTestCheckBase
     {
-        private readonly ProcessFuncSimple processSingle;
-        private readonly ProcessFunc process;
+        public PostProcessTestCheck(ProcessFuncSimple processSimple) : base(OperationKind.None, processSimple) { }
 
-        public PostProcessTestCheck(ProcessFuncSimple processSingle) =>
-            this.processSingle = processSingle;
+        public PostProcessTestCheck(OperationKind kind, ProcessFuncSimple processSimple) : base(kind, processSimple) { }
 
-        public PostProcessTestCheck(ProcessFunc process) =>
-            this.process = process;
+        public PostProcessTestCheck(ProcessFunc process) : base(process) { }
 
         protected override ProgramState PostProcessSimple(SymbolicContext context) =>
-            processSingle is null ? base.PostProcessSimple(context) : processSingle(context);
+            ProcessSimple(context);
 
         public override ProgramState[] PostProcess(SymbolicContext context) =>
-            process is null ? base.PostProcess(context) : process(context);
+            Process(context);
+    }
+
+    internal class ProcessTestCheckBase : SymbolicCheck
+    {
+        private readonly ProcessFuncSimple processSimple;
+        private readonly ProcessFunc process;
+        private readonly OperationKind kind;
+
+        protected ProcessTestCheckBase(OperationKind kind, ProcessFuncSimple processSimple)
+        {
+            this.kind = kind;
+            this.processSimple = processSimple;
+        }
+
+        protected ProcessTestCheckBase(ProcessFunc process) =>
+            this.process = process;
+
+        protected ProgramState ProcessSimple(SymbolicContext context) =>
+            processSimple is not null && MatchesKind(context) ? processSimple(context) : context.State;
+
+        protected ProgramState[] Process(SymbolicContext context)
+        {
+            if (process is not null && MatchesKind(context))
+            {
+                return process(context);
+            }
+            else if (ProcessSimple(context) is { } newState)
+            {
+                return new[] { newState };
+            }
+            else
+            {
+                return Array.Empty<ProgramState>();
+            }
+        }
+
+        protected bool MatchesKind(SymbolicContext context) =>
+            kind == OperationKind.None || context.Operation.Instance.Kind == kind;
     }
 }

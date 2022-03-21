@@ -89,33 +89,45 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
             }
             else if (node.Block.ContainsThrow())
             {
-                yield return CreateNode(cfg.ExitBlock, null, null);
+                yield return new(cfg.ExitBlock, node.State, null);
             }
             else
             {
                 foreach (var successor in node.Block.Successors.Where(x => IsReachable(node, x)))
                 {
-                    if (successor.Destination is not null)
+                    if (ProcessBranch(node, successor) is { } newNode)
                     {
-                        yield return successor.FinallyRegions.Any() // When exiting finally region(s), redirect to 1st finally instead of the normal destination
-                            ? FromFinally(successor, new FinallyPoint(node.FinallyPoint, successor))
-                            : CreateNode(successor.Destination, successor, node.FinallyPoint);
-                    }
-                    else if (successor.Source.EnclosingRegion.Kind == ControlFlowRegionKind.Finally)    // Redirect from finally back to the original place (or outer finally on the same branch)
-                    {
-                        yield return FromFinally(successor, node.FinallyPoint.CreateNext());
+                        yield return newNode;
                     }
                 }
             }
-
-            ExplodedNode FromFinally(ControlFlowBranch branch, FinallyPoint finallyPoint) =>
-                CreateNode(cfg.Blocks[finallyPoint.BlockIndex], branch, finallyPoint.IsFinallyBlock ? finallyPoint : finallyPoint.Previous);
-
-            ExplodedNode CreateNode(BasicBlock block, ControlFlowBranch branch, FinallyPoint finallyPoint) =>
-                new(block, ProcessBranch(branch, node.State), finallyPoint);
         }
 
-        private ProgramState ProcessBranch(ControlFlowBranch branch, ProgramState state)
+        private ExplodedNode ProcessBranch(ExplodedNode node, ControlFlowBranch branch)
+        {
+            if (branch.Destination is not null)
+            {
+                return branch.FinallyRegions.Any() // When exiting finally region(s), redirect to 1st finally instead of the normal destination
+                    ? FromFinally(new FinallyPoint(node.FinallyPoint, branch))
+                    : CreateNode(branch.Destination, node.FinallyPoint);
+            }
+            else if (branch.Source.EnclosingRegion.Kind == ControlFlowRegionKind.Finally)    // Redirect from finally back to the original place (or outer finally on the same branch)
+            {
+                return FromFinally(node.FinallyPoint.CreateNext());
+            }
+            else
+            {
+                return null;    // We don't know where to continue
+            }
+
+            ExplodedNode FromFinally(FinallyPoint finallyPoint) =>
+                CreateNode(cfg.Blocks[finallyPoint.BlockIndex], finallyPoint.IsFinallyBlock ? finallyPoint : finallyPoint.Previous);
+
+            ExplodedNode CreateNode(BasicBlock block, FinallyPoint finallyPoint) =>
+                ProcessBranchState(branch, node.State) is { } newState ? new(block, newState, finallyPoint) : null;
+        }
+
+        private ProgramState ProcessBranchState(ControlFlowBranch branch, ProgramState state)
         {
             if (branch is not null)
             {
