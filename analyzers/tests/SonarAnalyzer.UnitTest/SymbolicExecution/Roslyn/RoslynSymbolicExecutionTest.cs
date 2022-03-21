@@ -204,6 +204,23 @@ Tag(""AfterLastUse"");
         }
 
         [TestMethod]
+        public void Execute_CapturedVariable_NotCleared()
+        {
+            const string code = @"
+void LocalFunction()
+{
+boolParameter = false;
+var misc = true;
+  if(misc)
+    misc.ToString();
+Tag(""LocalFunctionEnd"", boolParameter);
+}";
+            var validator = SETestContext.CreateCSForLocalFunction(code, null, "LocalFunction").Validator;
+            validator.TagValues("LocalFunctionEnd").Should().HaveCount(1)
+                .And.ContainSingle(x => x.HasConstraint(BoolConstraint.False));
+        }
+
+        [TestMethod]
         public void Execute_TooManyBlocks_NotSupported()
         {
             var validator = SETestContext.CreateCS($"var a = true{Enumerable.Repeat(" && true", 1020).JoinStr(null)};").Validator;
