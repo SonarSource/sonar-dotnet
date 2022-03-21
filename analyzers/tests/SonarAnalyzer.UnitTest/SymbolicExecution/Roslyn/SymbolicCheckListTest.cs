@@ -21,6 +21,7 @@
 using System;
 using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Moq;
 using SonarAnalyzer.SymbolicExecution.Roslyn;
 using SonarAnalyzer.UnitTest.TestFramework.SymbolicExecution;
 
@@ -36,34 +37,36 @@ namespace SonarAnalyzer.UnitTest.SymbolicExecution.Roslyn
         [TestMethod]
         public void Notifications_ExecutedForAll()
         {
-            var a = new FlagTestCheck();
-            var b = new FlagTestCheck();
+            var a = new Mock<SymbolicCheck>();
+            var b = new Mock<SymbolicCheck>();
             var context = new SymbolicContext(new(), null, ProgramState.Empty);
-            var sut = new SymbolicCheckList(new[] { a, b });
+            a.Setup(x => x.PreProcess(context)).Returns(new[] { context.State });
+            a.Setup(x => x.PostProcess(context)).Returns(new[] { context.State });
+            var sut = new SymbolicCheckList(new[] { a.Object, b.Object });
 
-            a.WasExitReached.Should().BeFalse();
-            b.WasExitReached.Should().BeFalse();
+            a.Verify(x => x.ExitReached(context), Times.Never);
+            b.Verify(x => x.ExitReached(context), Times.Never);
             sut.ExitReached(context);
-            a.WasExitReached.Should().BeTrue();
-            b.WasExitReached.Should().BeTrue();
+            a.Verify(x => x.ExitReached(context), Times.Once);
+            b.Verify(x => x.ExitReached(context), Times.Once);
 
-            a.WasExecutionCompleted.Should().BeFalse();
-            b.WasExecutionCompleted.Should().BeFalse();
+            a.Verify(x => x.ExecutionCompleted(), Times.Never);
+            b.Verify(x => x.ExecutionCompleted(), Times.Never);
             sut.ExecutionCompleted();
-            a.WasExecutionCompleted.Should().BeTrue();
-            b.WasExecutionCompleted.Should().BeTrue();
+            a.Verify(x => x.ExecutionCompleted(), Times.Once);
+            b.Verify(x => x.ExecutionCompleted(), Times.Once);
 
-            a.WasPreProcessed.Should().BeFalse();
-            b.WasPreProcessed.Should().BeFalse();
+            a.Verify(x => x.PreProcess(context), Times.Never);
+            b.Verify(x => x.PreProcess(context), Times.Never);
             sut.PreProcess(context);
-            a.WasPreProcessed.Should().BeTrue();
-            b.WasPreProcessed.Should().BeTrue();
+            a.Verify(x => x.PreProcess(context), Times.Once);
+            b.Verify(x => x.PreProcess(context), Times.Once);
 
-            a.WasPostProcessed.Should().BeFalse();
-            b.WasPostProcessed.Should().BeFalse();
+            a.Verify(x => x.PostProcess(context), Times.Never);
+            b.Verify(x => x.PostProcess(context), Times.Never);
             sut.PostProcess(context);
-            a.WasPostProcessed.Should().BeTrue();
-            b.WasPostProcessed.Should().BeTrue();
+            a.Verify(x => x.PostProcess(context), Times.Once);
+            b.Verify(x => x.PostProcess(context), Times.Once);
         }
 
         [TestMethod]
@@ -80,32 +83,6 @@ namespace SonarAnalyzer.UnitTest.SymbolicExecution.Roslyn
             var empty = new PostProcessTestCheck(x => Array.Empty<ProgramState>());
             var sut = new SymbolicCheckList(new[] { empty });
             sut.PostProcess(new(new(), null, ProgramState.Empty)).Should().HaveCount(0);
-        }
-
-        private class FlagTestCheck : SymbolicCheck
-        {
-            public bool WasExitReached { get; private set; }
-            public bool WasExecutionCompleted { get; private set; }
-            public bool WasPreProcessed { get; private set; }
-            public bool WasPostProcessed { get; private set; }
-
-            public override void ExitReached(SymbolicContext context) =>
-                WasExitReached = true;
-
-            public override void ExecutionCompleted() =>
-                WasExecutionCompleted = true;
-
-            public override ProgramState[] PreProcess(SymbolicContext context)
-            {
-                WasPreProcessed = true;
-                return base.PreProcess(context);
-            }
-
-            public override ProgramState[] PostProcess(SymbolicContext context)
-            {
-                WasPostProcessed = true;
-                return base.PostProcess(context);
-            }
         }
     }
 }
