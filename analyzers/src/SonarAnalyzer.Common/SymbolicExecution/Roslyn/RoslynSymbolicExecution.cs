@@ -146,7 +146,7 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
                     {
                         state = state.SetSymbolConstraint(symbol, symbolicValueCounter, constraint);
                     }
-                    state = InvokeConditionEvaluated(new IOperationWrapperSonar(branchValue), state);
+                    state = checks.ConditionEvaluated(new(symbolicValueCounter, new IOperationWrapperSonar(branchValue), state));
                 }
                 foreach (var capture in branch.LeavingRegions.SelectMany(x => x.CaptureIds))
                 {
