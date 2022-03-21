@@ -232,34 +232,12 @@ Tag(""End"", value);";
             const string code = @"
 if (boolParameter)
 {
-    field = 1;
-}
-else
-{
-    field = 2;
-}
-Tag(""End"", field);";
+    field = 42;
+}";
 
-            var postProcess = new PostProcessTestCheck(x =>
-            {
-                if (x.Operation.Instance.Kind == OperationKind.Literal && x.Operation.Instance.ConstantValue.Value is int value)
-                {
-                    if (value == 1)
-                    {
-                        return x.SetOperationConstraint(TestConstraint.First);
-                    }
-                    else if (value == 2)
-                    {
-                       return x.SetOperationConstraint(TestConstraint.Second);
-                    }
-                }
-                return x.State;
-            });
+            var postProcess = new PostProcessTestCheck(OperationKind.Literal, x => x.SetOperationConstraint(DummyConstraint.Dummy));
             var validator = SETestContext.CreateCS(code, postProcess).Validator;
-            validator.ValidateExitReachCount(2);    // Once with First constraint, once with Second constraint on "value"
-            validator.TagValues("End").Should().HaveCount(2)
-                .And.ContainSingle(x => x.HasConstraint(TestConstraint.First))
-                .And.ContainSingle(x => x.HasConstraint(TestConstraint.Second));
+            validator.ValidateExitReachCount(2);    // Once with the constraint and once without it.
         }
 
         [DataTestMethod]
@@ -270,34 +248,20 @@ Tag(""End"", field);";
             var code = $@"
 if (boolParameter)
 {{
-    {paramName} = 1;
+    {paramName} = 42;
 }}
 else
 {{
-    {paramName} = 2;
-}}
-Tag(""End"", {paramName});";
+    {paramName} = 24;
+}}";
 
-            var postProcess = new PostProcessTestCheck(x =>
-            {
-                if (x.Operation.Instance.Kind == OperationKind.Literal && x.Operation.Instance.ConstantValue.Value is int value)
-                {
-                    if (value == 1)
-                    {
-                        return x.SetOperationConstraint(TestConstraint.First);
-                    }
-                    else if (value == 2)
-                    {
-                        return x.SetOperationConstraint(TestConstraint.Second);
-                    }
-                }
-                return x.State;
-            });
+            var postProcess = new PostProcessTestCheck(
+                OperationKind.Literal,
+                x => x.Operation.Instance.Kind == OperationKind.Literal && x.Operation.Instance.ConstantValue.Value is int value && value == 42
+                    ? x.SetOperationConstraint(DummyConstraint.Dummy)
+                    : x.State);
             var validator = SETestContext.CreateCS(code, $", {refKind} int {paramName}", postProcess).Validator;
-            validator.ValidateExitReachCount(2);    // Once with First constraint, once with Second constraint on "value"
-            validator.TagValues("End").Should().HaveCount(2)
-                .And.ContainSingle(x => x.HasConstraint(TestConstraint.First))
-                .And.ContainSingle(x => x.HasConstraint(TestConstraint.Second));
+            validator.ValidateExitReachCount(2);    // Once with the constraint and once without it.
         }
 
         [TestMethod]
