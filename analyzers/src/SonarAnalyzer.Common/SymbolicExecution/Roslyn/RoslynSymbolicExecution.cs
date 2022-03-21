@@ -43,16 +43,15 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
         private readonly HashSet<ExplodedNode> visited = new();
         private readonly RoslynLiveVariableAnalysis lva;
 
-        public RoslynSymbolicExecution(ControlFlowGraph cfg, SymbolicCheck[] checks, ISymbol declaration)
+        public RoslynSymbolicExecution(ControlFlowGraph cfg, SymbolicCheck[] checks)
         {
             this.cfg = cfg ?? throw new ArgumentNullException(nameof(cfg));
             if (checks == null || checks.Length == 0)
             {
                 throw new ArgumentException("At least one check is expected", nameof(checks));
             }
-            _ = declaration ?? throw new ArgumentNullException(nameof(declaration));
             this.checks = new(new[] { new ConstantCheck() }.Concat(checks).ToArray());
-            lva = new RoslynLiveVariableAnalysis(cfg, declaration);
+            lva = new RoslynLiveVariableAnalysis(cfg);
         }
 
         public void Execute()

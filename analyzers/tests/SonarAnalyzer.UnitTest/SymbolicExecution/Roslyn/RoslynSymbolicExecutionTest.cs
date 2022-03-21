@@ -41,19 +41,17 @@ namespace SonarAnalyzer.UnitTest.SymbolicExecution.Roslyn
         [TestMethod]
         public void Constructor_Throws()
         {
-            var cfg = TestHelper.CompileCfgCS(out var methodSymbol, "public class Sample { public void Main() { } }");
+            var cfg = TestHelper.CompileCfgCS("public class Sample { public void Main() { } }");
             var check = new Mock<SymbolicCheck>().Object;
-            ((Action)(() => new RoslynSymbolicExecution(null, new[] { check }, methodSymbol))).Should().Throw<ArgumentNullException>().And.ParamName.Should().Be("cfg");
-            ((Action)(() => new RoslynSymbolicExecution(cfg, null, methodSymbol))).Should().Throw<ArgumentException>().WithMessage("At least one check is expected*");
-            ((Action)(() => new RoslynSymbolicExecution(cfg, Array.Empty<SymbolicCheck>(), methodSymbol))).Should().Throw<ArgumentException>().WithMessage("At least one check is expected*");
-            ((Action)(() => new RoslynSymbolicExecution(cfg, new[] { check }, null))).Should().Throw<ArgumentNullException>().And.ParamName.Should().Be("declaration");
+            ((Action)(() => new RoslynSymbolicExecution(null, new[] { check }))).Should().Throw<ArgumentNullException>().And.ParamName.Should().Be("cfg");
+            ((Action)(() => new RoslynSymbolicExecution(cfg, null))).Should().Throw<ArgumentException>().WithMessage("At least one check is expected*");
+            ((Action)(() => new RoslynSymbolicExecution(cfg, Array.Empty<SymbolicCheck>()))).Should().Throw<ArgumentException>().WithMessage("At least one check is expected*");
         }
 
         [TestMethod]
         public void Execute_SecondRun_Throws()
         {
-            var cfg = TestHelper.CompileCfgBodyCS(out var methodSymbol);
-            var se = new RoslynSymbolicExecution(cfg, new[] { new ValidatorTestCheck() }, methodSymbol);
+            var se = new RoslynSymbolicExecution(TestHelper.CompileCfgBodyCS(), new[] { new ValidatorTestCheck() });
             se.Execute();
             se.Invoking(x => x.Execute()).Should().Throw<InvalidOperationException>().WithMessage("Engine can be executed only once.");
         }
