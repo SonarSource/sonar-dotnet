@@ -179,51 +179,28 @@ namespace SonarAnalyzer.UnitTest.SymbolicExecution.Roslyn
         public void Execute_UnusedVariable_ClearedAfterBlock()
         {
             const string code = @"
-bool first;
-if(boolParameter)
-  first = true;
-else
-  first = false;
+var first = boolParameter ? true : false;
 Tag(""BeforeLastUse""); 
 bool second = first;
 if(boolParameter)
-boolParameter.ToString();
+    boolParameter.ToString();
 Tag(""AfterLastUse"");
-bool third = second;
-if(boolParameter)
-boolParameter.ToString();
-Tag(""END"");
 ";
             ISymbol firstSymbol = null;
-            ISymbol secondSymbol = null;
             var postProcess = new PostProcessTestCheck(x =>
             {
                 if (x.Operation.Instance.TrackedSymbol() is { } symbol)
                 {
-                    if (symbol.Name.Equals("first"))
+                    if (symbol.Name == "first")
                     {
                         firstSymbol = symbol;
-                    }
-                    else if (symbol.Name.Equals("second"))
-                    {
-                        secondSymbol = symbol;
                     }
                 }
                 return x.State;
             });
             var validator = SETestContext.CreateCS(code, postProcess).Validator;
-            validator.ValidateTagOrder(
-                "BeforeLastUse",
-                "BeforeLastUse",
-                "AfterLastUse",
-                "AfterLastUse",
-                "END");
-            var beforeLastUseStates = validator.TagStates("BeforeLastUse");
-            beforeLastUseStates.Should().HaveCount(2);
-            beforeLastUseStates.All(x => x[firstSymbol] != null).Should().BeTrue();
-            var afterLastUseStates = validator.TagStates("AfterLastUse");
-            afterLastUseStates.Should().HaveCount(2);
-            afterLastUseStates.All(x => x[firstSymbol] == null && x[secondSymbol] != null).Should().BeTrue();
+            validator.TagStates("BeforeLastUse").Should().HaveCount(2).And.OnlyContain(x => x[firstSymbol] != null);
+            validator.TagStates("AfterLastUse").Should().HaveCount(1).And.OnlyContain(x => x[firstSymbol] == null);
         }
 
         [TestMethod]

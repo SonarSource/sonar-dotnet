@@ -123,8 +123,7 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
             && other.OperationValue.DictionaryEquals(OperationValue)
             && other.SymbolValue.DictionaryEquals(SymbolValue)
             && other.CaptureOperation.DictionaryEquals(CaptureOperation)
-            && other.PreservedSymbols.Count == PreservedSymbols.Count
-            && other.PreservedSymbols.All(x => PreservedSymbols.Contains(x));
+            && other.PreservedSymbols.SetEquals(PreservedSymbols);
 
         public override string ToString() =>
             Equals(Empty) ? "Empty" : SerializeSymbols() + SerializeOperations() + SerializeCaptures();

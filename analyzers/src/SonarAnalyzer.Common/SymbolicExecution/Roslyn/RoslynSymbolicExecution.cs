@@ -24,6 +24,7 @@ using System.Linq;
 using Microsoft.CodeAnalysis;
 using SonarAnalyzer.CFG.LiveVariableAnalysis;
 using SonarAnalyzer.CFG.Roslyn;
+using SonarAnalyzer.Helpers;
 using SonarAnalyzer.SymbolicExecution.Constraints;
 using SonarAnalyzer.SymbolicExecution.Roslyn.Checks;
 using SonarAnalyzer.SymbolicExecution.Roslyn.OperationProcessors;
@@ -93,7 +94,6 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
             }
             else if (node.Block.ContainsThrow())
             {
-                node = new ExplodedNode(cfg.ExitBlock, CleanUnusedState(node.State, node.Block), null);
                 yield return new(cfg.ExitBlock, node.State, null);
             }
             else
@@ -197,7 +197,7 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
 
         private ProgramState CleanUnusedState(ProgramState programState, BasicBlock block)
         {
-            var liveVariables = lva.LiveOut(block);
+            var liveVariables = lva.LiveOut(block).ToHashSet();
             return programState.RemoveSymbols(x => (x is ILocalSymbol or IParameterSymbol { RefKind: RefKind.None }) && !liveVariables.Contains(x));
         }
 

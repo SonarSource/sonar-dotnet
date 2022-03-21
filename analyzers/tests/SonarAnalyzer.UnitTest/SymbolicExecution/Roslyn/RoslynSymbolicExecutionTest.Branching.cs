@@ -265,7 +265,7 @@ Tag(""End"", field);";
         [DataTestMethod]
         [DataRow("out", "outParam")]
         [DataRow("ref", "refParam")]
-        public void Branching_RefAndOutParameters_NotCleared(string paramType, string paramName)
+        public void Branching_RefAndOutParameters_NotCleared(string refKind, string paramName)
         {
             var code = $@"
 if (boolParameter)
@@ -293,7 +293,7 @@ Tag(""End"", {paramName});";
                 }
                 return x.State;
             });
-            var validator = SETestContext.CreateCS(code, $", {paramType} int {paramName}", postProcess).Validator;
+            var validator = SETestContext.CreateCS(code, $", {refKind} int {paramName}", postProcess).Validator;
             validator.ValidateExitReachCount(2);    // Once with First constraint, once with Second constraint on "value"
             validator.TagValues("End").Should().HaveCount(2)
                 .And.ContainSingle(x => x.HasConstraint(TestConstraint.First))

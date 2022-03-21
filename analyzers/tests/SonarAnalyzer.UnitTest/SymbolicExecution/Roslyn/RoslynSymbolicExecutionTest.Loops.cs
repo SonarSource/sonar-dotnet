@@ -55,7 +55,7 @@ Tag(""End"", value);";
         {
             const string code = @"
 var value = 42;
-bool condition;
+bool condition = false;
 if (Condition)      // This generates two different ProgramStates, each tracks its own visits
     condition = true;
 else
@@ -64,10 +64,9 @@ do
 {
     value.ToString(); // Add another constraint to 'value'
 } while (Condition);
-Tag(""HoldRef"", condition);
 Tag(""End"", value);";
-            var validator = SETestContext.CreateCS(code, ", int[] items", new AddConstraintOnInvocationCheck()).Validator;
-            validator.ValidateExitReachCount(1);
+            var validator = SETestContext.CreateCS(code, ", int[] items", new AddConstraintOnInvocationCheck(), new PreserveTestCheck("condition")).Validator;
+            validator.ValidateExitReachCount(2);
             var states = validator.TagStates("End");
             var condition = states.SelectMany(x => x.SymbolsWith(BoolConstraint.False)).First();    // "False" is never set for "value"
             var value = states.SelectMany(x => x.SymbolsWith(TestConstraint.First)).First();        // "First" is never set for "condition"

@@ -121,7 +121,7 @@ namespace SonarAnalyzer.UnitTest.SymbolicExecution.Roslyn
         }
 
         [TestMethod]
-        public void Preserve_PreservedSymbolCannotBeDeleted()
+        public void Preserve_PreservedSymbolCannotBeRemoved()
         {
             var symbolicValue = new SymbolicValue(new()).WithConstraint(DummyConstraint.Dummy);
             var symbol = CreateSymbols().First();
@@ -132,7 +132,7 @@ namespace SonarAnalyzer.UnitTest.SymbolicExecution.Roslyn
         }
 
         [TestMethod]
-        public void RemoveSymbols_RemovesTheSymbolMatchingThePredicate()
+        public void RemoveSymbols_RemovesSymbolsMatchingThePredicate()
         {
             var symbolicValue = new SymbolicValue(new()).WithConstraint(DummyConstraint.Dummy);
             var symbols = CreateSymbols().ToArray();
