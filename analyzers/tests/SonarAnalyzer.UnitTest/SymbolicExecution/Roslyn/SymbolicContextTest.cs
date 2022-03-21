@@ -122,6 +122,23 @@ namespace SonarAnalyzer.UnitTest.SymbolicExecution.Roslyn
             result[symbol].HasConstraint(DummyConstraint.Dummy).Should().BeTrue();
         }
 
+        [TestMethod]
+        public void WithState_SameState_ReturnsThis()
+        {
+            var state = ProgramState.Empty;
+            var sut = new SymbolicContext(new(), null, state);
+            sut.WithState(state).Should().Be(sut);
+        }
+
+        [TestMethod]
+        public void WithState_DifferentState_ReturnsNew()
+        {
+            var state = ProgramState.Empty;
+            var sut = new SymbolicContext(new(), null, state);
+            var newState = state.SetOperationValue(CreateOperation(), sut.CreateSymbolicValue());
+            sut.WithState(newState).Should().NotBe(sut);
+        }
+
         private static IOperationWrapperSonar CreateOperation() =>
             new(TestHelper.CompileCfgBodyCS("var value = 42;").Blocks[1].Operations[0]);
     }

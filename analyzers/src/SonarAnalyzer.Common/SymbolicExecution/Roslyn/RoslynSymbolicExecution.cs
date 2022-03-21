@@ -35,7 +35,7 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
         private const int MaxOperationVisits = 2;
 
         private readonly ControlFlowGraph cfg;
-        private readonly SymbolicCheck[] checks;
+        private readonly SymbolicCheckList checks;
         private readonly Queue<ExplodedNode> queue = new();
         private readonly SymbolicValueCounter symbolicValueCounter = new();
         private readonly HashSet<ExplodedNode> visited = new();
@@ -47,7 +47,7 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
             {
                 throw new ArgumentException("At least one check is expected", nameof(checks));
             }
-            this.checks = new[] { new ConstantCheck() }.Concat(checks).ToArray();
+            this.checks = new(new[] { new ConstantCheck() }.Concat(checks).ToArray());
         }
 
         public void Execute()
@@ -78,14 +78,14 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
                     }
                 }
             }
-            NotifyExecutionCompleted();
+            checks.ExecutionCompleted();
         }
 
         private IEnumerable<ExplodedNode> ProcessBranching(ExplodedNode node)
         {
             if (node.Block.Kind == BasicBlockKind.Exit)
             {
-                InvokeExitReached(node);
+                checks.ExitReached(new(symbolicValueCounter, null, node.State));
             }
             else if (node.Block.ContainsThrow())
             {
@@ -148,10 +148,10 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
 
         private IEnumerable<ExplodedNode> ProcessOperation(ExplodedNode node)
         {
-            foreach (var preProcessed in InvokeChecks(new(symbolicValueCounter, node.Operation, node.State), x => x.PreProcess))
+            foreach (var preProcessed in checks.PreProcess(new(symbolicValueCounter, node.Operation, node.State)))
             {
-                var processed = EnsureContext(preProcessed, ProcessOperation(preProcessed));
-                foreach (var postProcessed in InvokeChecks(processed, x => x.PostProcess))
+                var processed = preProcessed.WithState(ProcessOperation(preProcessed));
+                foreach (var postProcessed in checks.PostProcess(processed))
                 {
                     // When operation doesn't have a parent it is the outer statement. We need to reset operation states:
                     // * We don't need to preserve the inner subexpression intermediate states after the outer statement.
@@ -176,37 +176,6 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
                 OperationKindEx.SimpleAssignment => SimpleAssignment.Process(context, ISimpleAssignmentOperationWrapper.FromOperation(context.Operation.Instance)),
                 _ => context.State
             };
-
-        private void InvokeExitReached(ExplodedNode node)
-        {
-            var context = new SymbolicContext(symbolicValueCounter, null, node.State);
-            foreach (var check in checks)
-            {
-                check.ExitReached(context);
-            }
-        }
-
-        private SymbolicContext[] InvokeChecks(SymbolicContext context, Func<SymbolicCheck, Func<SymbolicContext, ProgramState[]>> checkDelegate)
-        {
-            var contexts = new[] { context };
-            foreach (var check in checks)
-            {
-                var checkMethod = checkDelegate(check);
-                contexts = contexts.SelectMany(x => checkMethod(x).Select(newState => EnsureContext(x, newState))).ToArray();
-            }
-            return contexts;
-        }
-
-        private void NotifyExecutionCompleted()
-        {
-            foreach (var check in checks)
-            {
-                check.ExecutionCompleted();
-            }
-        }
-
-        private SymbolicContext EnsureContext(SymbolicContext current, ProgramState newState) =>
-            current.State == newState ? current : new SymbolicContext(symbolicValueCounter, current.Operation, newState);
 
         private static bool IsReachable(ExplodedNode node, ControlFlowBranch branch) =>
             node.Block.ConditionKind != ControlFlowConditionKind.None
