@@ -46,7 +46,6 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
             return context.State;
         }
 
-
         public void ExitReached(SymbolicContext context)
         {
             foreach (var check in checks)

@@ -562,5 +562,19 @@ if (value = boolParameter)
             validator.ValidateTag("BoolParameter", x => x.Should().BeNull());
             validator.ValidateTag("Value", x => x.Should().BeNull());
         }
+
+        [TestMethod]
+        public void Branching_ConditionEvaluated()
+        {
+            const string code = @"
+Tag(""Begin"");
+if (boolParameter)
+{
+    Tag(""If"");
+}
+Tag(""End"");";
+            var check = new ConditionEvaluatedTestCheck(x => x.State[x.Operation].HasConstraint(BoolConstraint.True) ? null : x.State);
+            SETestContext.CreateCS(code, check).Validator.ValidateTagOrder("Begin", "End");
+        }
     }
 }

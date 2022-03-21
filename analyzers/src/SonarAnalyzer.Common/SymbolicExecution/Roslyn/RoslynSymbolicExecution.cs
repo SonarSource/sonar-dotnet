@@ -148,9 +148,12 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
                     }
                     state = checks.ConditionEvaluated(new(symbolicValueCounter, new IOperationWrapperSonar(branchValue), state));
                 }
-                foreach (var capture in branch.LeavingRegions.SelectMany(x => x.CaptureIds))
+                if (state is not null)
                 {
-                    state = state.RemoveCapture(capture);
+                    foreach (var capture in branch.LeavingRegions.SelectMany(x => x.CaptureIds))
+                    {
+                        state = state.RemoveCapture(capture);
+                    }
                 }
             }
             return state?.ResetOperations();
