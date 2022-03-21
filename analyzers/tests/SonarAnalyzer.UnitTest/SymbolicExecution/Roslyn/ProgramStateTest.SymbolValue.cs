@@ -118,5 +118,25 @@ namespace SonarAnalyzer.UnitTest.SymbolicExecution.Roslyn
             var sut = ProgramState.Empty.SetSymbolValue(symbol, null);
             sut.SymbolsWith(DummyConstraint.Dummy).Should().BeEmpty();
         }
+
+        [TestMethod]
+        public void SetSymbolConstraint_NoValue_CreatesNewValue()
+        {
+            var symbol = CreateSymbols().First();
+            var sut = ProgramState.Empty.SetSymbolConstraint(symbol, new(), DummyConstraint.Dummy);
+            sut[symbol].HasConstraint(DummyConstraint.Dummy).Should().BeTrue();
+        }
+
+        [TestMethod]
+        public void SetSymbolConstraint_ExistingValue_PreservesOtherConstraints()
+        {
+            var symbol = CreateSymbols().First();
+            var counter = new SymbolicValueCounter();
+            var sut = ProgramState.Empty
+                .SetSymbolValue(symbol, new SymbolicValue(counter).WithConstraint(TestConstraint.First))
+                .SetSymbolConstraint(symbol, counter, DummyConstraint.Dummy);
+            sut[symbol].HasConstraint(TestConstraint.First).Should().BeTrue("original constraints of different type should be preserved");
+            sut[symbol].HasConstraint(DummyConstraint.Dummy).Should().BeTrue();
+        }
     }
 }
