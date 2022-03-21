@@ -104,7 +104,7 @@ namespace SonarAnalyzer.UnitTest.SymbolicExecution.Roslyn
         [TestMethod]
         public void PreProcess_Null_StopsExecution()
         {
-            var stopper = new PreProcessTestCheck(x => x.Operation.Instance.Kind == OperationKind.Unary ? null : x.State);
+            var stopper = new PreProcessTestCheck(OperationKind.Unary, x => null);
             var context = SETestContext.CreateCS("var a = true; var b = false; b = !b; a = (b);", stopper);
             context.Validator.ValidateOrder(
                 "LocalReference: a = true (Implicit)",
@@ -120,7 +120,7 @@ namespace SonarAnalyzer.UnitTest.SymbolicExecution.Roslyn
         [TestMethod]
         public void PostProcess_Null_StopsExecution()
         {
-            var stopper = new PostProcessTestCheck(x => x.Operation.Instance.Kind == OperationKind.Unary ? null : x.State);
+            var stopper = new PostProcessTestCheck(OperationKind.Unary, x => null);
             var context = SETestContext.CreateCS("var a = true; var b = false; b = !b; a = (b);", stopper);
             context.Validator.ValidateOrder(
                 "LocalReference: a = true (Implicit)",
