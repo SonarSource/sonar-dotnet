@@ -98,9 +98,7 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
             }
             else
             {
-                var reachableSuccessors = node.Block.Successors.Where(x => IsReachable(node, x)).ToList();
-                node = new ExplodedNode(node.Block, CleanUnusedState(node.State, node.Block), node.FinallyPoint);
-                foreach (var successor in reachableSuccessors)
+                foreach (var successor in node.Block.Successors.Where(x => IsReachable(node, x)))
                 {
                     if (ProcessBranch(node, successor) is { } newNode)
                     {
@@ -161,7 +159,7 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
             {
                 state = state.RemoveCapture(capture);
             }
-            return state.ResetOperations();
+            return CleanUnusedState(state, branch.Source).ResetOperations();
         }
 
         private IEnumerable<ExplodedNode> ProcessOperation(ExplodedNode node)
