@@ -184,18 +184,11 @@ Tag(""BeforeLastUse"");
 bool second = first;
 if(boolParameter)
     boolParameter.ToString();
-Tag(""AfterLastUse"");
-";
+Tag(""AfterLastUse"");";
             ISymbol firstSymbol = null;
             var postProcess = new PostProcessTestCheck(x =>
             {
-                if (x.Operation.Instance.TrackedSymbol() is { } symbol)
-                {
-                    if (symbol.Name == "first")
-                    {
-                        firstSymbol = symbol;
-                    }
-                }
+                firstSymbol ??= x.Operation.Instance.TrackedSymbol() is { Name: "first" } symbol ? symbol : null;
                 return x.State;
             });
             var validator = SETestContext.CreateCS(code, postProcess).Validator;
@@ -204,20 +197,18 @@ Tag(""AfterLastUse"");
         }
 
         [TestMethod]
-        public void Execute_CapturedVariable_NotCleared()
+        public void Execute_OuterMethodParameter_NotCleared()
         {
             const string code = @"
 void LocalFunction()
 {
 boolParameter = false;
 var misc = true;
-  if(misc)
+if(misc)
     misc.ToString();
-Tag(""LocalFunctionEnd"", boolParameter);
+Tag(""LocalFunctionEnd"");
 }";
-            var validator = SETestContext.CreateCSForLocalFunction(code, null, "LocalFunction").Validator;
-            validator.TagValues("LocalFunctionEnd").Should().HaveCount(1)
-                .And.ContainSingle(x => x.HasConstraint(BoolConstraint.False));
+            SETestContext.CreateCS(code, null, "LocalFunction").Validator.TagStates("LocalFunctionEnd").Should().HaveCount(1);
         }
 
         [TestMethod]
@@ -294,5 +285,36 @@ Tag(""End"");";
         [TestMethod]
         public void Execute_LocalScopeRegion_AssignDefaultBoolConstraint() =>
             SETestContext.CreateVB(@"Dim B As Boolean : Tag(""B"", B)").Validator.ValidateTag("B", x => x.HasConstraint(BoolConstraint.False).Should().BeTrue());
+
+        [TestMethod]
+        public void Execute_FieldSymbolsAreNotCleaned()
+        {
+            const string code = @"
+if (boolParameter)
+{
+    field = 42;
+}";
+
+            var postProcess = new PostProcessTestCheck(OperationKind.Literal, x => x.SetOperationConstraint(DummyConstraint.Dummy));
+            var validator = SETestContext.CreateCS(code, postProcess).Validator;
+            validator.ValidateExitReachCount(2);    // Once with the constraint and once without it.
+        }
+
+        [DataTestMethod]
+        [DataRow("out", "outParam")]
+        [DataRow("ref", "refParam")]
+        public void Execute_RefAndOutParameters_NotCleared(string refKind, string paramName)
+        {
+            var code = $@"
+{paramName} = int.MinValue;
+if (boolParameter)
+{{
+    {paramName} = 42;
+}}";
+
+            var postProcess = new PostProcessTestCheck(OperationKind.Literal, x => x.SetOperationConstraint(DummyConstraint.Dummy));
+            var validator = SETestContext.CreateCS(code, $", {refKind} int {paramName}", postProcess).Validator;
+            validator.ValidateExitReachCount(2);    // Once with the constraint and once without it.
+        }
     }
 }

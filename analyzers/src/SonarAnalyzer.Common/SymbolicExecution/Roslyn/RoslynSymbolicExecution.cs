@@ -159,7 +159,10 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
             {
                 state = state.RemoveCapture(capture);
             }
-            return CleanUnusedState(state, branch.Source).ResetOperations();
+
+            var liveVariables = lva.LiveOut(branch.Source).ToHashSet();
+            return state.RemoveSymbols(x => lva.IsLocal(x) && (x is ILocalSymbol or IParameterSymbol { RefKind: RefKind.None }) && !liveVariables.Contains(x))
+                .ResetOperations();
         }
 
         private IEnumerable<ExplodedNode> ProcessOperation(ExplodedNode node)
@@ -192,12 +195,6 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
                 OperationKindEx.SimpleAssignment => SimpleAssignment.Process(context, ISimpleAssignmentOperationWrapper.FromOperation(context.Operation.Instance)),
                 _ => context.State
             };
-
-        private ProgramState CleanUnusedState(ProgramState programState, BasicBlock block)
-        {
-            var liveVariables = lva.LiveOut(block).ToHashSet();
-            return programState.RemoveSymbols(x => lva.IsLocal(x) && (x is ILocalSymbol or IParameterSymbol { RefKind: RefKind.None }) && !liveVariables.Contains(x));
-        }
 
         private static bool IsReachable(ExplodedNode node, ControlFlowBranch branch) =>
             node.Block.ConditionKind != ControlFlowConditionKind.None

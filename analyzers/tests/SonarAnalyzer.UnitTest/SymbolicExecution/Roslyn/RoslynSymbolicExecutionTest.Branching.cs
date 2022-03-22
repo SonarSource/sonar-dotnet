@@ -227,44 +227,6 @@ Tag(""End"", value);";
         }
 
         [TestMethod]
-        public void Branching_FieldSymbolsAreNotCleaned()
-        {
-            const string code = @"
-if (boolParameter)
-{
-    field = 42;
-}";
-
-            var postProcess = new PostProcessTestCheck(OperationKind.Literal, x => x.SetOperationConstraint(DummyConstraint.Dummy));
-            var validator = SETestContext.CreateCS(code, postProcess).Validator;
-            validator.ValidateExitReachCount(2);    // Once with the constraint and once without it.
-        }
-
-        [DataTestMethod]
-        [DataRow("out", "outParam")]
-        [DataRow("ref", "refParam")]
-        public void Branching_RefAndOutParameters_NotCleared(string refKind, string paramName)
-        {
-            var code = $@"
-if (boolParameter)
-{{
-    {paramName} = 42;
-}}
-else
-{{
-    {paramName} = 24;
-}}";
-
-            var postProcess = new PostProcessTestCheck(
-                OperationKind.Literal,
-                x => x.Operation.Instance.Kind == OperationKind.Literal && x.Operation.Instance.ConstantValue.Value is int value && value == 42
-                    ? x.SetOperationConstraint(DummyConstraint.Dummy)
-                    : x.State);
-            var validator = SETestContext.CreateCS(code, $", {refKind} int {paramName}", postProcess).Validator;
-            validator.ValidateExitReachCount(2);    // Once with the constraint and once without it.
-        }
-
-        [TestMethod]
         public void Branching_VisitedProgramState_IsSkipped()
         {
             const string code = @"

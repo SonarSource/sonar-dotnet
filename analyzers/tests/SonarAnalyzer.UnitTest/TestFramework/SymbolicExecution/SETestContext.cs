@@ -33,11 +33,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework.SymbolicExecution
         public SETestContext(string code, AnalyzerLanguage language, SymbolicCheck[] additionalChecks, string localFunctionName = null)
         {
             const string Separator = "----------";
-            var cfg = TestHelper.CompileCfg(code, language);
-            if (localFunctionName != null)
-            {
-                cfg = cfg.GetLocalFunctionControlFlowGraph(cfg.LocalFunctions.Single(x => x.Name == localFunctionName));
-            }
+            var cfg = TestHelper.CompileCfg(code, language, localFunctionName: localFunctionName);
             var se = new RoslynSymbolicExecution(cfg, additionalChecks.Concat(new[] { Validator }).ToArray());
             Console.WriteLine(Separator);
             Console.Write(CfgSerializer.Serialize(cfg));
@@ -46,34 +42,15 @@ namespace SonarAnalyzer.UnitTest.TestFramework.SymbolicExecution
         }
 
         public static SETestContext CreateCS(string methodBody, params SymbolicCheck[] additionalChecks) =>
-            CreateCS(methodBody, null, additionalChecks);
+            CreateCS(methodBody, null, null, additionalChecks);
 
-        public static SETestContext CreateCS(string methodBody, string additionalParameters, params SymbolicCheck[] additionalChecks)
-        {
-            var code = $@"
+        public static SETestContext CreateCS(string methodBody, string additionalParameters, params SymbolicCheck[] additionalChecks) =>
+            CreateCS(methodBody, additionalParameters, null, additionalChecks);
 using System;
-using System.Collections.Generic;
-
-public class Sample
-{{
-    public static int StaticField;
-    public static int StaticProperty {{get; set;}}
-    public int Property {{get; set;}}
-    private int field;
-
     private bool Condition => Environment.ProcessorCount == 42;  // Something that cannot have constraint
 
-    public void Main(bool boolParameter{additionalParameters})
-    {{
-        {methodBody}
-    }}
 
-    private void Tag(string name, object arg = null) {{ }}
-}}";
-            return new(code, AnalyzerLanguage.CSharp, additionalChecks);
-        }
-
-        public static SETestContext CreateCSForLocalFunction(string methodBody, string additionalParameters, string localFunctionName, params SymbolicCheck[] additionalChecks)
+        public static SETestContext CreateCS(string methodBody, string additionalParameters, string localFunctionName, params SymbolicCheck[] additionalChecks)
         {
             var code = $@"
 using System.Collections.Generic;
