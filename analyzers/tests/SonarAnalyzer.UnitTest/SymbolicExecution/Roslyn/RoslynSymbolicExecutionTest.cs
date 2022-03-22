@@ -202,13 +202,14 @@ Tag(""AfterLastUse"");";
             const string code = @"
 void LocalFunction()
 {
-boolParameter = false;
-var misc = true;
-if(misc)
-    misc.ToString();
-Tag(""LocalFunctionEnd"");
+    boolParameter = false;
+    var misc = true;
+    if(misc)
+        misc.ToString();
+    Tag(""LocalFunctionEnd"");
 }";
-            SETestContext.CreateCS(code, null, "LocalFunction").Validator.TagStates("LocalFunctionEnd").Should().HaveCount(1);
+            SETestContext.CreateCS(code, null, "LocalFunction").Validator.TagStates("LocalFunctionEnd").Should().HaveCount(1)
+                .And.OnlyContain(x => x.SymbolsWith(BoolConstraint.False).Count() == 1);
         }
 
         [TestMethod]
@@ -287,7 +288,7 @@ Tag(""End"");";
             SETestContext.CreateVB(@"Dim B As Boolean : Tag(""B"", B)").Validator.ValidateTag("B", x => x.HasConstraint(BoolConstraint.False).Should().BeTrue());
 
         [TestMethod]
-        public void Execute_FieldSymbolsAreNotCleaned()
+        public void Execute_FieldSymbolsAreNotRemovedByLva()
         {
             const string code = @"
 if (boolParameter)
@@ -303,7 +304,7 @@ if (boolParameter)
         [DataTestMethod]
         [DataRow("out", "outParam")]
         [DataRow("ref", "refParam")]
-        public void Execute_RefAndOutParameters_NotCleared(string refKind, string paramName)
+        public void Execute_RefAndOutParameters_NotRemovedByLva(string refKind, string paramName)
         {
             var code = $@"
 {paramName} = int.MinValue;
