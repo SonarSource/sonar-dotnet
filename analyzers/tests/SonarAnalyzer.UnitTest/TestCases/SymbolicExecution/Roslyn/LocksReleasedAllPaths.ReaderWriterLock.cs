@@ -181,5 +181,93 @@ namespace ReaderWriterLock_Type
             b.ReleaseWriterLock();
             b.AcquireWriterLock(1); // Noncompliant
         }
+
+        public void IsReaderLockHeld()
+        {
+            readerWriterLock.AcquireReaderLock(42); // Noncompliant FP, https://github.com/SonarSource/sonar-dotnet/issues/5416
+            if (readerWriterLock.IsReaderLockHeld)
+            {
+                readerWriterLock.ReleaseReaderLock();
+            }
+        }
+
+        public void IsReaderLockHeld_NoLocking()
+        {
+            if (readerWriterLock.IsReaderLockHeld)    // FN
+            {
+                if (condition)
+                {
+                    readerWriterLock.ReleaseReaderLock();
+                }
+            }
+        }
+
+        public void IsReaderLockHeld_NoLocking_Compliant()
+        {
+            if (readerWriterLock.IsReaderLockHeld)
+            {
+                readerWriterLock.ReleaseReaderLock();
+            }
+        }
+
+        public void IsReaderLockHeld_Noncompliant()
+        {
+            readerWriterLock.AcquireReaderLock(42); // Noncompliant
+            if (readerWriterLock.IsReaderLockHeld)
+            {
+                if (condition)
+                {
+                    readerWriterLock.ReleaseReaderLock();
+                }
+            }
+        }
+
+        public void IsReaderLockHeld_Noncompliant(bool arg)
+        {
+            if (arg)
+            {
+                readerWriterLock.AcquireReaderLock(42); // Noncompliant
+            }
+            if (readerWriterLock.IsReaderLockHeld)
+            {
+                if (condition)
+                {
+                    readerWriterLock.ReleaseReaderLock();
+                }
+            }
+        }
+
+        public void IsReaderLockHeld_Unreachable()
+        {
+            readerWriterLock.AcquireReaderLock(42); // Noncompliant, ends up unreleased on If path, and released on Else path
+            if (readerWriterLock.IsReaderLockHeld)
+            {
+                //
+            }
+            else
+            {
+                readerWriterLock.ReleaseReaderLock();
+            }
+        }
+
+        public void IsWriterLockHeld()
+        {
+            readerWriterLock.AcquireWriterLock(42); // Noncompliant FP, https://github.com/SonarSource/sonar-dotnet/issues/5416
+            if (readerWriterLock.IsWriterLockHeld)
+            {
+                readerWriterLock.ReleaseWriterLock();
+            }
+        }
+
+        public void IsWriterLockHeld_Noncompliant()
+        {
+            if (readerWriterLock.IsWriterLockHeld)  // FN
+            {
+                if (condition)
+                {
+                    readerWriterLock.ReleaseWriterLock();
+                }
+            }
+        }
     }
 }

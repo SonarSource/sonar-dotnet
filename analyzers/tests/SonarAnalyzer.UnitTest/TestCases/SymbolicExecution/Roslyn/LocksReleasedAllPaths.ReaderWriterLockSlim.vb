@@ -141,6 +141,55 @@ Namespace ReaderWriterLockSlim_Type
             End If
         End Sub
 
+        Public Sub IsReadLockHeld()
+            rwLockSlim.EnterReadLock()          ' Noncompliant FP, https://github.com/SonarSource/sonar-dotnet/issues/5416
+            If rwLockSlim.IsReadLockHeld Then rwLockSlim.ExitReadLock()
+        End Sub
+
+        Public Sub IsReadLockHeld_NoLocking()
+            If rwLockSlim.IsReadLockHeld Then   'FN
+                If Condition Then rwLockSlim.ExitReadLock()
+            End If
+        End Sub
+
+        Public Sub IsReadLockHeld_NoLocking_Compliant()
+            If rwLockSlim.IsReadLockHeld Then rwLockSlim.ExitReadLock()
+        End Sub
+
+        Public Sub IsReadLockHeld_Noncompliant()
+            rwLockSlim.EnterReadLock()          ' Noncompliant
+            If rwLockSlim.IsReadLockHeld Then
+                If Condition Then rwLockSlim.ExitReadLock()
+            End If
+        End Sub
+
+        Public Sub IsReadLockHeld_Noncompliant(Arg As Boolean)
+            If Arg Then rwLockSlim.EnterReadLock()  ' Noncompliant
+            If rwLockSlim.IsReadLockHeld Then
+                If Condition Then rwLockSlim.ExitReadLock()
+            End If
+        End Sub
+
+        Public Sub IsReadLockHeld_Unreachable()
+            rwLockSlim.EnterReadLock()              ' Noncompliant, ends up unreleased on If path, and released on Else path
+            If rwLockSlim.IsReadLockHeld Then
+                ' Nothing
+            Else
+                rwLockSlim.ExitReadLock()
+            End If
+        End Sub
+
+        Public Sub IsWriteLockHeld()
+            rwLockSlim.EnterWriteLock()             ' Noncompliant FP, https://github.com/SonarSource/sonar-dotnet/issues/5416
+            If rwLockSlim.IsWriteLockHeld Then rwLockSlim.ExitWriteLock()
+        End Sub
+
+        Public Sub IsWriteLockHeld_Noncompliant()
+            If rwLockSlim.IsWriteLockHeld Then      ' FN
+                If Condition Then rwLockSlim.ExitWriteLock()
+            End If
+        End Sub
+
     End Class
 
 End Namespace

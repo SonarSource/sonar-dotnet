@@ -266,12 +266,82 @@ namespace ReaderWriterLockSlim_Type
             }
         }
 
+        public void IsReadLockHeld_NoLocking()
+        {
+            if (readerWriterLockSlim.IsReadLockHeld)    // FN
+            {
+                if (condition)
+                {
+                    readerWriterLockSlim.ExitReadLock();
+                }
+            }
+        }
+
+        public void IsReadLockHeld_NoLocking_Compliant()
+        {
+            if (readerWriterLockSlim.IsReadLockHeld)
+            {
+                readerWriterLockSlim.ExitReadLock();
+            }
+        }
+
+        public void IsReadLockHeld_Noncompliant()
+        {
+            readerWriterLockSlim.EnterReadLock(); // Noncompliant
+            if (readerWriterLockSlim.IsReadLockHeld)
+            {
+                if (condition)
+                {
+                    readerWriterLockSlim.ExitReadLock();
+                }
+            }
+        }
+
+        public void IsReadLockHeld_Noncompliant(bool arg)
+        {
+            if (arg)
+            {
+                readerWriterLockSlim.EnterReadLock(); // Noncompliant
+            }
+            if (readerWriterLockSlim.IsReadLockHeld)
+            {
+                if (condition)
+                {
+                    readerWriterLockSlim.ExitReadLock();
+                }
+            }
+        }
+
+        public void IsReadLockHeld_Unreachable()
+        {
+            readerWriterLockSlim.EnterReadLock(); // Noncompliant, ends up unreleased on If path, and released on Else path
+            if (readerWriterLockSlim.IsReadLockHeld)
+            {
+                //
+            }
+            else
+            {
+                readerWriterLockSlim.ExitReadLock();
+            }
+        }
+
         public void IsWriteLockHeld()
         {
             readerWriterLockSlim.EnterWriteLock(); // Noncompliant FP, https://github.com/SonarSource/sonar-dotnet/issues/5416
             if (readerWriterLockSlim.IsWriteLockHeld)
             {
                 readerWriterLockSlim.ExitWriteLock();
+            }
+        }
+
+        public void IsWriterLockHeld_Noncompliant()
+        {
+            if (readerWriterLockSlim.IsWriteLockHeld)  // FN
+            {
+                if (condition)
+                {
+                    readerWriterLockSlim.ExitWriteLock();
+                }
             }
         }
     }
