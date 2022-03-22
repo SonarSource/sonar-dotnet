@@ -113,12 +113,12 @@ Namespace ReaderWriterLock_Type
         End Sub
 
         Public Sub IsReaderLockHeld()
-            rwLock.AcquireReaderLock(42)       ' Noncompliant FP, https://github.com/SonarSource/sonar-dotnet/issues/5416
+            rwLock.AcquireReaderLock(42)       ' Compliant, https://github.com/SonarSource/sonar-dotnet/issues/5416
             If rwLock.IsReaderLockHeld Then rwLock.ReleaseReaderLock()
         End Sub
 
         Public Sub IsReaderLockHeld_NoLocking()
-            If rwLock.IsReaderLockHeld Then     'FN
+            If rwLock.IsReaderLockHeld Then     'Noncompliant
                 If Condition Then rwLock.ReleaseReaderLock()
             End If
         End Sub
@@ -128,22 +128,22 @@ Namespace ReaderWriterLock_Type
         End Sub
 
         Public Sub IsReaderLockHeld_Noncompliant()
-            rwLock.AcquireReaderLock(42)    ' Noncompliant
-            If rwLock.IsReaderLockHeld Then
+            rwLock.AcquireReaderLock(42)
+            If rwLock.IsReaderLockHeld Then ' Noncompliant
                 If Condition Then rwLock.ReleaseReaderLock()
             End If
         End Sub
 
         Public Sub IsReaderLockHeld_Noncompliant(Arg As Boolean)
-            If Arg Then rwLock.AcquireReaderLock(42)    ' Noncompliant
-            If rwLock.IsReaderLockHeld Then
+            If Arg Then rwLock.AcquireReaderLock(42)
+            If rwLock.IsReaderLockHeld Then             ' Noncompliant
                 If Condition Then rwLock.ReleaseReaderLock()
             End If
         End Sub
 
         Public Sub IsReaderLockHeld_Unreachable()
-            rwLock.AcquireReaderLock(42)        ' Noncompliant, ends up unreleased on If path, and released on Else path
-            If rwLock.IsReaderLockHeld Then
+            rwLock.AcquireReaderLock(42)
+            If rwLock.IsReaderLockHeld Then     ' Noncompliant, ends up unreleased on If path, and released on Else path
                 ' Nothing
             Else
                 rwLock.ReleaseReaderLock()
@@ -151,12 +151,12 @@ Namespace ReaderWriterLock_Type
         End Sub
 
         Public Sub IsWriterLockHeld()
-            rwLock.AcquireWriterLock(42)        ' Noncompliant FP, https://github.com/SonarSource/sonar-dotnet/issues/5416
+            rwLock.AcquireWriterLock(42)        ' Compliant, https://github.com/SonarSource/sonar-dotnet/issues/5416
             If rwLock.IsWriterLockHeld Then rwLock.ReleaseWriterLock()
         End Sub
 
         Public Sub IsWriterLockHeld_Noncompliant()
-            If rwLock.IsWriterLockHeld Then     ' FN
+            If rwLock.IsWriterLockHeld Then     ' Noncompliant
                 If Condition Then rwLock.ReleaseWriterLock()
             End If
         End Sub

@@ -184,8 +184,8 @@ namespace ReaderWriterLock_Type
 
         public void IsReaderLockHeld()
         {
-            readerWriterLock.AcquireReaderLock(42); // Noncompliant FP, https://github.com/SonarSource/sonar-dotnet/issues/5416
-            if (readerWriterLock.IsReaderLockHeld)
+            readerWriterLock.AcquireReaderLock(42);
+            if (readerWriterLock.IsReaderLockHeld)  // Compliant, https://github.com/SonarSource/sonar-dotnet/issues/5416
             {
                 readerWriterLock.ReleaseReaderLock();
             }
@@ -193,7 +193,7 @@ namespace ReaderWriterLock_Type
 
         public void IsReaderLockHeld_NoLocking()
         {
-            if (readerWriterLock.IsReaderLockHeld)    // FN
+            if (readerWriterLock.IsReaderLockHeld)    // Noncompliant
             {
                 if (condition)
                 {
@@ -212,8 +212,8 @@ namespace ReaderWriterLock_Type
 
         public void IsReaderLockHeld_Noncompliant()
         {
-            readerWriterLock.AcquireReaderLock(42); // Noncompliant
-            if (readerWriterLock.IsReaderLockHeld)
+            readerWriterLock.AcquireReaderLock(42);
+            if (readerWriterLock.IsReaderLockHeld)  // Noncompliant
             {
                 if (condition)
                 {
@@ -226,9 +226,9 @@ namespace ReaderWriterLock_Type
         {
             if (arg)
             {
-                readerWriterLock.AcquireReaderLock(42); // Noncompliant
+                readerWriterLock.AcquireReaderLock(42);
             }
-            if (readerWriterLock.IsReaderLockHeld)
+            if (readerWriterLock.IsReaderLockHeld)  // Noncompliant
             {
                 if (condition)
                 {
@@ -239,8 +239,8 @@ namespace ReaderWriterLock_Type
 
         public void IsReaderLockHeld_Unreachable()
         {
-            readerWriterLock.AcquireReaderLock(42); // Noncompliant, ends up unreleased on If path, and released on Else path
-            if (readerWriterLock.IsReaderLockHeld)
+            readerWriterLock.AcquireReaderLock(42);
+            if (readerWriterLock.IsReaderLockHeld)  // Noncompliant, ends up unreleased on If path, and released on Else path
             {
                 //
             }
@@ -252,8 +252,8 @@ namespace ReaderWriterLock_Type
 
         public void IsWriterLockHeld()
         {
-            readerWriterLock.AcquireWriterLock(42); // Noncompliant FP, https://github.com/SonarSource/sonar-dotnet/issues/5416
-            if (readerWriterLock.IsWriterLockHeld)
+            readerWriterLock.AcquireWriterLock(42);
+            if (readerWriterLock.IsWriterLockHeld)   // Compliant, https://github.com/SonarSource/sonar-dotnet/issues/5416
             {
                 readerWriterLock.ReleaseWriterLock();
             }
@@ -261,7 +261,7 @@ namespace ReaderWriterLock_Type
 
         public void IsWriterLockHeld_Noncompliant()
         {
-            if (readerWriterLock.IsWriterLockHeld)  // FN
+            if (readerWriterLock.IsWriterLockHeld)  // Noncompliant
             {
                 if (condition)
                 {

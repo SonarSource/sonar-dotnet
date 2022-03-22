@@ -142,12 +142,12 @@ Namespace ReaderWriterLockSlim_Type
         End Sub
 
         Public Sub IsReadLockHeld()
-            rwLockSlim.EnterReadLock()          ' Noncompliant FP, https://github.com/SonarSource/sonar-dotnet/issues/5416
+            rwLockSlim.EnterReadLock()          ' Compliant, https://github.com/SonarSource/sonar-dotnet/issues/5416
             If rwLockSlim.IsReadLockHeld Then rwLockSlim.ExitReadLock()
         End Sub
 
         Public Sub IsReadLockHeld_NoLocking()
-            If rwLockSlim.IsReadLockHeld Then   'FN
+            If rwLockSlim.IsReadLockHeld Then   'Noncompliant
                 If Condition Then rwLockSlim.ExitReadLock()
             End If
         End Sub
@@ -157,22 +157,22 @@ Namespace ReaderWriterLockSlim_Type
         End Sub
 
         Public Sub IsReadLockHeld_Noncompliant()
-            rwLockSlim.EnterReadLock()          ' Noncompliant
-            If rwLockSlim.IsReadLockHeld Then
+            rwLockSlim.EnterReadLock()
+            If rwLockSlim.IsReadLockHeld Then   ' Noncompliant
                 If Condition Then rwLockSlim.ExitReadLock()
             End If
         End Sub
 
         Public Sub IsReadLockHeld_Noncompliant(Arg As Boolean)
-            If Arg Then rwLockSlim.EnterReadLock()  ' Noncompliant
-            If rwLockSlim.IsReadLockHeld Then
+            If Arg Then rwLockSlim.EnterReadLock()
+            If rwLockSlim.IsReadLockHeld Then       ' Noncompliant
                 If Condition Then rwLockSlim.ExitReadLock()
             End If
         End Sub
 
         Public Sub IsReadLockHeld_Unreachable()
-            rwLockSlim.EnterReadLock()              ' Noncompliant, ends up unreleased on If path, and released on Else path
-            If rwLockSlim.IsReadLockHeld Then
+            rwLockSlim.EnterReadLock()
+            If rwLockSlim.IsReadLockHeld Then       ' Noncompliant, ends up unreleased on If path, and released on Else path
                 ' Nothing
             Else
                 rwLockSlim.ExitReadLock()
@@ -180,12 +180,12 @@ Namespace ReaderWriterLockSlim_Type
         End Sub
 
         Public Sub IsWriteLockHeld()
-            rwLockSlim.EnterWriteLock()             ' Noncompliant FP, https://github.com/SonarSource/sonar-dotnet/issues/5416
+            rwLockSlim.EnterWriteLock()             ' Compliant, https://github.com/SonarSource/sonar-dotnet/issues/5416
             If rwLockSlim.IsWriteLockHeld Then rwLockSlim.ExitWriteLock()
         End Sub
 
         Public Sub IsWriteLockHeld_Noncompliant()
-            If rwLockSlim.IsWriteLockHeld Then      ' FN
+            If rwLockSlim.IsWriteLockHeld Then      ' Noncompliant
                 If Condition Then rwLockSlim.ExitWriteLock()
             End If
         End Sub
