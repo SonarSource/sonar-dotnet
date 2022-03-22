@@ -32,22 +32,19 @@ namespace SonarAnalyzer.Rules.CSharp
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
     public sealed class MethodShouldNotOnlyReturnConstant : SonarDiagnosticAnalyzer
     {
-        internal const string DiagnosticId = "S3400";
+        private const string DiagnosticId = "S3400";
         private const string MessageFormat = "Remove this method and declare a constant for this value.";
 
-        private static readonly DiagnosticDescriptor rule =
-            DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(rule);
+        private static readonly DiagnosticDescriptor Rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
 
-        protected override void Initialize(SonarAnalysisContext context)
-        {
+        protected override void Initialize(SonarAnalysisContext context) =>
             context.RegisterSyntaxNodeActionInNonGenerated(
                 c =>
                 {
                     var methodDeclaration = (MethodDeclarationSyntax)c.Node;
-
-                    if (methodDeclaration.ParameterList?.Parameters.Count > 0 ||
-                        IsVirtual(methodDeclaration))
+                    if (methodDeclaration.ParameterList?.Parameters.Count > 0
+                        || IsVirtual(methodDeclaration))
                     {
                         return;
                     }
@@ -60,30 +57,26 @@ namespace SonarAnalyzer.Rules.CSharp
 
                     var methodSymbol = c.SemanticModel.GetDeclaredSymbol(methodDeclaration);
 
-                    if (methodSymbol != null &&
-                        methodSymbol.GetInterfaceMember() == null &&
-                        methodSymbol.GetOverriddenMember() == null)
+                    if (methodSymbol != null
+                        && methodSymbol.GetInterfaceMember() == null
+                        && methodSymbol.GetOverriddenMember() == null)
                     {
-                        c.ReportIssue(Diagnostic.Create(rule, methodDeclaration.Identifier.GetLocation()));
+                        c.ReportIssue(Diagnostic.Create(Rule, methodDeclaration.Identifier.GetLocation()));
                     }
                 },
                 SyntaxKind.MethodDeclaration);
-        }
 
-        private bool IsVirtual(MethodDeclarationSyntax methodDeclaration)
-        {
-            return methodDeclaration.Modifiers.Any(m => m.IsKind(SyntaxKind.VirtualKeyword));
-        }
+        private static bool IsVirtual(BaseMethodDeclarationSyntax methodDeclaration) =>
+            methodDeclaration.Modifiers.Any(m => m.IsKind(SyntaxKind.VirtualKeyword));
 
-        private ExpressionSyntax GetSingleExpressionOrDefault(MethodDeclarationSyntax methodDeclaration)
+        private static ExpressionSyntax GetSingleExpressionOrDefault(MethodDeclarationSyntax methodDeclaration)
         {
             if (methodDeclaration.ExpressionBody != null)
             {
                 return methodDeclaration.ExpressionBody.Expression;
             }
 
-            if (methodDeclaration.Body != null &&
-                methodDeclaration.Body.Statements.Count == 1)
+            if (methodDeclaration.Body is { Statements: { Count: 1 } })
             {
                 return (methodDeclaration.Body.Statements[0] as ReturnStatementSyntax)?.Expression;
             }
@@ -91,7 +84,7 @@ namespace SonarAnalyzer.Rules.CSharp
             return null;
         }
 
-        private bool IsConstantExpression(ExpressionSyntax expression, SemanticModel semanticModel)
+        private static bool IsConstantExpression(ExpressionSyntax expression, SemanticModel semanticModel)
         {
             if (expression == null)
             {
@@ -99,9 +92,9 @@ namespace SonarAnalyzer.Rules.CSharp
             }
 
             var noParenthesesExpression = expression.RemoveParentheses();
-            return noParenthesesExpression is LiteralExpressionSyntax &&
-                !noParenthesesExpression.IsNullLiteral() &&
-                semanticModel.GetConstantValue(noParenthesesExpression).HasValue;
+            return noParenthesesExpression is LiteralExpressionSyntax
+                   && !noParenthesesExpression.IsNullLiteral()
+                   && semanticModel.GetConstantValue(noParenthesesExpression).HasValue;
         }
     }
 }
