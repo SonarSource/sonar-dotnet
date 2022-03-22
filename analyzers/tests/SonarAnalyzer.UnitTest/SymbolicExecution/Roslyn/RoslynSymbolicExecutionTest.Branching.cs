@@ -169,7 +169,7 @@ public int Method(bool a)
         return 2;
 }";
             var validator = SETestContext.CreateCSMethod(method).Validator;
-            validator.ValidateExitReachCount(2);    // Exit is reached only once, because it is reached with the same state
+            validator.ValidateExitReachCount(2);
             validator.ValidateExecutionCompleted();
         }
 
