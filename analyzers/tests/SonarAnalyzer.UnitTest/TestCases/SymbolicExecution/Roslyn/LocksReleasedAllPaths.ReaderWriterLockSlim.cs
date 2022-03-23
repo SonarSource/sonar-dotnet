@@ -344,5 +344,16 @@ namespace ReaderWriterLockSlim_Type
                 }
             }
         }
+
+        public void IsUpgradeableReadLockHeld_Noncompliant()
+        {
+            if (readerWriterLockSlim.IsUpgradeableReadLockHeld) // Noncompliant
+            {
+                if (condition)
+                {
+                    readerWriterLockSlim.ExitReadLock();
+                }
+            }
+        }
     }
 }

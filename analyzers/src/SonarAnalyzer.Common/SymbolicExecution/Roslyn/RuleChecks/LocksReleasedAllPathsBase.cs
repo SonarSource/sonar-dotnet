@@ -52,6 +52,7 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn.RuleChecks
             "IsReaderLockHeld",
             "IsWriteLockHeld",
             "IsWriterLockHeld",
+            "IsUpgradeableReadLockHeld",
         };
 
         protected abstract ISafeSyntaxWalker CreateSyntaxWalker(LockAcquireReleaseCollector collector);

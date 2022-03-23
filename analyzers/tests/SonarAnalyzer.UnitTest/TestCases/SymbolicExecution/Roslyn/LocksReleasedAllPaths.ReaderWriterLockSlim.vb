@@ -190,6 +190,12 @@ Namespace ReaderWriterLockSlim_Type
             End If
         End Sub
 
+        Public Sub IsUpgradeableReadLockHeld_Noncompliant()
+            If rwLockSlim.IsUpgradeableReadLockHeld Then    ' Noncompliant
+                If Condition Then rwLockSlim.ExitReadLock()
+            End If
+        End Sub
+
     End Class
 
 End Namespace
