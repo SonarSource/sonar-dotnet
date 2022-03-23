@@ -193,7 +193,7 @@ Tag(""AfterLastUse"");";
             });
             var validator = SETestContext.CreateCS(code, postProcess).Validator;
             validator.TagStates("BeforeLastUse").Should().HaveCount(2).And.OnlyContain(x => x[firstSymbol] != null);
-            validator.TagStates("AfterLastUse").Should().HaveCount(1).And.OnlyContain(x => x[firstSymbol] == null);
+            validator.TagStates("AfterLastUse").Should().HaveCount(2).And.OnlyContain(x => x[firstSymbol] == null); // Once emtpy and once with the learned boolParameter true
         }
 
         [TestMethod]
