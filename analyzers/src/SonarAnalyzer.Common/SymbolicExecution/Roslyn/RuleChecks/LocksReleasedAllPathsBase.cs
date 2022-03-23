@@ -86,41 +86,21 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn.RuleChecks
                 return new[] { PostProcessSimple(context) };
             }
 
-            if (invocation.TargetMethod.IsAny(KnownType.System_Threading_Monitor, "Enter")
-                && invocation.Arguments.Length == 2
-                && invocation.TargetMethod.Parameters[1].IsType(KnownType.System_Boolean))
+            if (IsInvocationWithBoolRefParam(invocation, KnownType.System_Threading_Monitor, 2, 1, "Enter", "TryEnter"))
             {
-                return CreateTwoStates(context, ArgumentSymbol(invocation, 0), ArgumentSymbol(invocation, 1));
+                return HeldAndNotHeldStates(context, ArgumentSymbol(invocation, 0), ArgumentSymbol(invocation, 1));
             }
-            else if (invocation.TargetMethod.IsAny(KnownType.System_Threading_Monitor, "TryEnter")
-                     && invocation.Arguments.Length == 2
-                     && invocation.TargetMethod.Parameters[1].IsType(KnownType.System_Boolean))
+            else if (IsInvocationWithBoolRefParam(invocation, KnownType.System_Threading_Monitor, 3, 2, "TryEnter"))
             {
-                return CreateTwoStates(context, ArgumentSymbol(invocation, 0), ArgumentSymbol(invocation, 1));
+                return HeldAndNotHeldStates(context, ArgumentSymbol(invocation, 0), ArgumentSymbol(invocation, 2));
             }
-            else if (invocation.TargetMethod.IsAny(KnownType.System_Threading_Monitor, "TryEnter")
-                     && invocation.Arguments.Length == 3
-                     && invocation.TargetMethod.Parameters[2].IsType(KnownType.System_Boolean))
+            else if (IsInvocationWithBoolRefParam(invocation, KnownType.System_Threading_SpinLock, 1, 0, "Enter", "TryEnter"))
             {
-                return CreateTwoStates(context, ArgumentSymbol(invocation, 0), ArgumentSymbol(invocation, 2));
+                return HeldAndNotHeldStates(context, invocation.Instance.TrackedSymbol(), ArgumentSymbol(invocation, 0));
             }
-            else if (invocation.TargetMethod.IsAny(KnownType.System_Threading_SpinLock, "Enter")
-                     && invocation.Arguments.Length == 1
-                     && invocation.TargetMethod.Parameters[0].IsType(KnownType.System_Boolean))
+            else if (IsInvocationWithBoolRefParam(invocation, KnownType.System_Threading_SpinLock, 2, 1, "TryEnter"))
             {
-                return CreateTwoStates(context, invocation.Instance.TrackedSymbol(), ArgumentSymbol(invocation, 0));
-            }
-            else if (invocation.TargetMethod.IsAny(KnownType.System_Threading_SpinLock, "TryEnter")
-                     && invocation.Arguments.Length == 1
-                     && invocation.TargetMethod.Parameters[0].IsType(KnownType.System_Boolean))
-            {
-                return CreateTwoStates(context, invocation.Instance.TrackedSymbol(), ArgumentSymbol(invocation, 0));
-            }
-            else if (invocation.TargetMethod.IsAny(KnownType.System_Threading_SpinLock, "TryEnter")
-                     && invocation.Arguments.Length == 2
-                     && invocation.TargetMethod.Parameters[1].IsType(KnownType.System_Boolean))
-            {
-                return CreateTwoStates(context, invocation.Instance.TrackedSymbol(), ArgumentSymbol(invocation, 1));
+                return HeldAndNotHeldStates(context, invocation.Instance.TrackedSymbol(), ArgumentSymbol(invocation, 1));
             }
             else
             {
@@ -128,7 +108,12 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn.RuleChecks
             }
         }
 
-        private ProgramState[] CreateTwoStates(SymbolicContext context, ISymbol lockSymbol, ISymbol refParameter)
+        private static bool IsInvocationWithBoolRefParam(IInvocationOperationWrapper invocation, KnownType type, int numberOfArguments, int refParameterPosition, params string[] methodNames) =>
+            invocation.TargetMethod.IsAny(type, methodNames)
+            && invocation.Arguments.Length == numberOfArguments
+            && invocation.TargetMethod.Parameters[refParameterPosition].IsType(KnownType.System_Boolean);
+
+        private ProgramState[] HeldAndNotHeldStates(SymbolicContext context, ISymbol lockSymbol, ISymbol refParameter)
         {
             ProgramState lockHeldState;
             ProgramState lockNotHeldState;
