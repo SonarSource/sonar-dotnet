@@ -32,7 +32,7 @@ namespace SonarAnalyzer.UnitTest.SymbolicExecution.Roslyn
         [DataRow("for (var i = 0; i < items.Length; i++)")]
         [DataRow("foreach (var i in items)")]
         [DataRow("while (value > 0)")]
-        [DataRow("while (boolParameter)")]
+        [DataRow("while (Condition)")]
         public void Loops_InstructionVisitedMaxTwice(string loop)
         {
             var code = $@"
@@ -56,14 +56,14 @@ Tag(""End"", value);";
             const string code = @"
 var value = 42;
 bool condition;
-if(boolParameter)      // This generates two different ProgramStates, each tracks its own visits
+if (Condition)      // This generates two different ProgramStates, each tracks its own visits
     condition = true;
 else
     condition = false;
 do
 {
     value.ToString(); // Add another constraint to 'value'
-} while (boolParameter);
+} while (Condition);
 Tag(""End"", value);";
             var validator = SETestContext.CreateCS(code, ", int[] items", new AddConstraintOnInvocationCheck()).Validator;
             validator.ValidateExitReachCount(4);

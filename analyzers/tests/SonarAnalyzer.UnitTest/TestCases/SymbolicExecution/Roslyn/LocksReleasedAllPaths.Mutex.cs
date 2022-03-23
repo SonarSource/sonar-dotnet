@@ -12,20 +12,20 @@ namespace Mutex_Type
 
         public void Noncompliant(Mutex paramMutex, Mutex paramMutex2, Foo foo)
         {
-            var m0 = new Mutex(true, "bar", out var m0WasCreated); // FN
+            var m0 = new Mutex(true, "bar", out var m0WasCreated); // Noncompliant
 
             var m1 = new Mutex(false);
-            m1.WaitOne(); // FN
+            m1.WaitOne(); // Noncompliant
 
             var m2 = new Mutex(false, "qix", out var m2WasCreated);
-            m2.WaitOne(); // FN
+            m2.WaitOne(); // Noncompliant
 
             var m3 = Mutex.OpenExisting("x");
-            m3.WaitOne(); // FN
+            m3.WaitOne(); // Noncompliant
 
             foo.instanceMutex.WaitOne(); // FN
 
-            Foo.staticMutex.WaitOne(); // FN
+            Foo.staticMutex.WaitOne(); // Noncompliant
 
             if (cond)
             {
@@ -44,7 +44,7 @@ namespace Mutex_Type
             m3.Dispose();
 
             // 'true' means it owns the mutex if no exception gets thrown
-            using (var mutexInUsing = new Mutex(true, "foo")) // FN
+            using (var mutexInUsing = new Mutex(true, "foo")) // Noncompliant
             {
                 if (cond)
                 {
@@ -54,7 +54,7 @@ namespace Mutex_Type
 
             if (Mutex.TryOpenExisting("y", out var mutexInOutVar))
             {
-                mutexInOutVar.WaitOne(); // FN
+                mutexInOutVar.WaitOne(); // Noncompliant
                 if (cond)
                 {
                     mutexInOutVar.ReleaseMutex();
@@ -62,7 +62,7 @@ namespace Mutex_Type
             }
 
             var m = new Mutex(false);
-            var mIsAcquired = m.WaitOne(200, true); // FN
+            var mIsAcquired = m.WaitOne(200, true); // Noncompliant
             if (mIsAcquired)
             {
                 // here it should be released
@@ -72,7 +72,7 @@ namespace Mutex_Type
                 m.ReleaseMutex(); // this is a programming error
             }
 
-            var paramMutexIsAcquired = paramMutex.WaitOne(400, false); // FN
+            var paramMutexIsAcquired = paramMutex.WaitOne(400, false); // Noncompliant
             if (paramMutexIsAcquired)
             {
                 if (cond)
@@ -84,7 +84,7 @@ namespace Mutex_Type
                     paramMutex.ReleaseMutex();
                 }
             }
-            while (paramMutex2.WaitOne(400, false)) // FN
+            while (paramMutex2.WaitOne(400, false)) // Noncompliant
             {
                 if (cond)
                 {

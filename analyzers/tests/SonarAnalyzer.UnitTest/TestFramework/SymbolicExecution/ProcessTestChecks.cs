@@ -93,4 +93,15 @@ namespace SonarAnalyzer.UnitTest.TestFramework.SymbolicExecution
         protected bool MatchesKind(SymbolicContext context) =>
             kind == OperationKind.None || context.Operation.Instance.Kind == kind;
     }
+
+    internal class ConditionEvaluatedTestCheck : SymbolicCheck
+    {
+        private readonly ProcessFuncSimple conditionEvaluated;
+
+        public ConditionEvaluatedTestCheck(ProcessFuncSimple conditionEvaluated) =>
+            this.conditionEvaluated = conditionEvaluated;
+
+        public override ProgramState ConditionEvaluated(SymbolicContext context) =>
+            conditionEvaluated(context);
+    }
 }

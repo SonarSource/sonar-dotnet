@@ -30,6 +30,22 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
         public SymbolicCheckList(SymbolicCheck[] checks) =>
             this.checks = checks ?? throw new ArgumentNullException(nameof(checks));
 
+        public ProgramState ConditionEvaluated(SymbolicContext context)
+        {
+            foreach (var check in checks)
+            {
+                if (check.ConditionEvaluated(context) is { } newState)
+                {
+                    context = context.WithState(newState);
+                }
+                else
+                {
+                    return null;
+                }
+            }
+            return context.State;
+        }
+
         public void ExitReached(SymbolicContext context)
         {
             foreach (var check in checks)

@@ -126,7 +126,7 @@ try
     try
     {
         Tag(""InInnerTry"");
-        if (boolParameter)
+        if (Condition)
         {
             Tag(""1"");
         }
@@ -198,7 +198,7 @@ try
 finally
 {
     Tag(""InFinallyBeforeCondition"");
-    if (boolParameter)
+    if (Condition)
     {
         Tag(""1"");
     }

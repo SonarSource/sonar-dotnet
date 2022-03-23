@@ -129,19 +129,30 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
 
         private ProgramState ProcessBranchState(ControlFlowBranch branch, ProgramState state)
         {
-            if (branch is not null)
+            foreach (var local in branch.EnteringRegions.SelectMany(x => x.Locals))
             {
-                foreach (var local in branch.EnteringRegions.SelectMany(x => x.Locals))
+                if (ConstantCheck.ConstraintFromType(local.Type) is { } constraint)
                 {
-                    if (ConstantCheck.ConstraintFromType(local.Type) is { } constraint)
-                    {
-                        state = state.SetSymbolConstraint(local, symbolicValueCounter, constraint);
-                    }
+                    state = state.SetSymbolConstraint(local, symbolicValueCounter, constraint);
                 }
-                foreach (var capture in branch.LeavingRegions.SelectMany(x => x.CaptureIds))
+            }
+            if (branch.Source.BranchValue is { } branchValue && branch.Source.ConditionalSuccessor is not null) // This branching was conditional
+            {
+                var constraint = BoolConstraint.From((branch.Source.ConditionKind == ControlFlowConditionKind.WhenTrue) == branch.IsConditionalSuccessor);
+                state = state.SetOperationConstraint(branchValue, symbolicValueCounter, constraint);
+                if (branchValue.TrackedSymbol() is { } symbol)
                 {
-                    state = state.RemoveCapture(capture);
+                    state = state.SetSymbolConstraint(symbol, symbolicValueCounter, constraint);
                 }
+                state = checks.ConditionEvaluated(new(symbolicValueCounter, new IOperationWrapperSonar(branchValue), state));
+                if (state is null)
+                {
+                    return null;
+                }
+            }
+            foreach (var capture in branch.LeavingRegions.SelectMany(x => x.CaptureIds))
+            {
+                state = state.RemoveCapture(capture);
             }
             return state.ResetOperations();
         }
