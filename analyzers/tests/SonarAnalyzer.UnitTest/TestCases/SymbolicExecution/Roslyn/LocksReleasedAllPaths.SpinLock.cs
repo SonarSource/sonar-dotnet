@@ -81,7 +81,7 @@ namespace SpinLock_Type
         {
             SpinLock sl = new SpinLock(false);
             bool isAcquired = false;
-            sl.Enter(ref isAcquired); // Noncompliant, FP
+            sl.Enter(ref isAcquired);
             if (isAcquired)
             {
                 sl.Exit();
@@ -92,7 +92,7 @@ namespace SpinLock_Type
         {
             SpinLock sl = new SpinLock(false);
             bool isAcquired = false;
-            sl.TryEnter(ref isAcquired); // Noncompliant, FP
+            sl.TryEnter(ref isAcquired);
             if (isAcquired)
             {
                 sl.Exit();

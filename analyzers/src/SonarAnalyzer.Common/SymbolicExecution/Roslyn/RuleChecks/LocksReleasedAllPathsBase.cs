@@ -104,6 +104,24 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn.RuleChecks
             {
                 return CreateTwoStates(context, ArgumentSymbol(invocation, 0), ArgumentSymbol(invocation, 2));
             }
+            else if (invocation.TargetMethod.IsAny(KnownType.System_Threading_SpinLock, "Enter")
+                     && invocation.Arguments.Length == 1
+                     && invocation.TargetMethod.Parameters[0].IsType(KnownType.System_Boolean))
+            {
+                return CreateTwoStates(context, invocation.Instance.TrackedSymbol(), ArgumentSymbol(invocation, 0));
+            }
+            else if (invocation.TargetMethod.IsAny(KnownType.System_Threading_SpinLock, "TryEnter")
+                     && invocation.Arguments.Length == 1
+                     && invocation.TargetMethod.Parameters[0].IsType(KnownType.System_Boolean))
+            {
+                return CreateTwoStates(context, invocation.Instance.TrackedSymbol(), ArgumentSymbol(invocation, 0));
+            }
+            else if (invocation.TargetMethod.IsAny(KnownType.System_Threading_SpinLock, "TryEnter")
+                     && invocation.Arguments.Length == 2
+                     && invocation.TargetMethod.Parameters[1].IsType(KnownType.System_Boolean))
+            {
+                return CreateTwoStates(context, invocation.Instance.TrackedSymbol(), ArgumentSymbol(invocation, 1));
+            }
             else
             {
                 return new[] { PostProcessSimple(context) };
