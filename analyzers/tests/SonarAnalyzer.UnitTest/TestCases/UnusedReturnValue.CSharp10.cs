@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 int MyMethod() { return 42; } // Noncompliant {{Change return type to 'void'; not a single caller uses the returned value.}}
 int MyMethod2() { return 42; }
 
-async Task MyAsyncMethod() { return; } // Noncompliant FP
+async Task MyAsyncMethod() { return; }
 
 MyMethod();
 MyAsyncMethod();

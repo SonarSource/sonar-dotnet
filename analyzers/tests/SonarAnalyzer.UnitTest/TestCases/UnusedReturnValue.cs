@@ -28,7 +28,7 @@ namespace Tests.Diagnostics
         private int MyMethod2() { return 42; }
         private int MyMethod3() { return 42; }
         private void MyMethod4() { return; }
-        private async Task MyAsyncMethod() { return; } // Noncompliant FP
+        private async Task MyAsyncMethod() { return; }
 
         public void Test()
         {
