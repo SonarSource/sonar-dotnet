@@ -355,5 +355,44 @@ namespace ReaderWriterLockSlim_Type
                 }
             }
         }
+
+        public void IsReadLockHeld_UntrackedValue(Program untracked)
+        {
+            if (untracked.readerWriterLockSlim.IsReadLockHeld)    // We do not track fields of other instances
+            {
+                if (condition)
+                {
+                    readerWriterLockSlim.ExitReadLock();
+                }
+            }
+        }
+
+        public void OtherBoolProperty_Coverage(int? arg)
+        {
+            if (arg.HasValue)
+            {
+                readerWriterLockSlim.EnterReadLock();
+                readerWriterLockSlim.ExitReadLock();
+            }
+        }
+
+        public void SameProperty_AnotherType_Coverage()
+        {
+            var somethingElse = new SomethingElse();
+            if (somethingElse.IsReadLockHeld)
+            {
+                if (condition)
+                {
+                    somethingElse.ExitReadLock();
+                }
+            }
+        }
+
+        private class SomethingElse
+        {
+            public bool IsReadLockHeld { get; }
+
+            public void ExitReadLock() { }
+        }
     }
 }
