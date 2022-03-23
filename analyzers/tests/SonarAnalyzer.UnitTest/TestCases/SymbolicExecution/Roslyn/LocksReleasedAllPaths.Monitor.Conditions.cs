@@ -287,7 +287,7 @@ namespace Monitor_Conditions
         public void Method22()
         {
             bool isAcquired = false;
-            Monitor.Enter(obj, ref isAcquired); // Noncompliant FP, the isAcquired is not tracked
+            Monitor.Enter(obj, ref isAcquired);
             if (isAcquired)
             {
                 Monitor.Exit(obj);
@@ -307,6 +307,19 @@ namespace Monitor_Conditions
             else
             {
                 Monitor.Exit(obj);
+            }
+        }
+
+        public void Method24(bool condition)
+        {
+            bool isAcquired = false;
+            var somethingElse = new object();
+            Monitor.Enter(obj, ref isAcquired);
+            if (!isAcquired)
+            {
+                Monitor.Enter(somethingElse); // Noncompliant
+                if (condition)
+                    Monitor.Exit(somethingElse);
             }
         }
 

@@ -79,20 +79,32 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn.RuleChecks
             return collector.LockAcquiredAndReleased;
         }
 
-        public override ProgramState ConditionEvaluated(SymbolicContext context)
+        public override ProgramState[] PostProcess(SymbolicContext context)
         {
-            if (context.Operation.Instance.AsPropertyReference() is { } property
-                && IsLockHeldProperties.Contains(property.Property.Name)
-                && property.Property.ContainingType.IsAny(KnownType.System_Threading_ReaderWriterLock, KnownType.System_Threading_ReaderWriterLockSlim)
-                && property.Instance.TrackedSymbol() is { } lockSymbol)
+            if (context.Operation.Instance.AsInvocation() is { } invocation
+                && invocation.TargetMethod.IsAny(KnownType.System_Threading_Monitor, "Enter")
+                && invocation.Arguments.Length == 2)
             {
-                return context.State[context.Operation].HasConstraint(BoolConstraint.True)  // Is it a branch with the Lock held?
-                    ? AddLock(context, lockSymbol)
-                    : RemoveLock(context, lockSymbol);
+                var refParameter = IArgumentOperationWrapper.FromOperation(invocation.Arguments[1]).Value.TrackedSymbol();
+                var refParamSymbolicValue = context.State[refParameter];
+                var lockHeldState = AddLock(context, FirstArgumentSymbol(invocation));
+                ProgramState lockNotHeldState;
+                if (refParamSymbolicValue == null)
+                {
+                    lockHeldState = lockHeldState.SetSymbolConstraint(refParameter, new(), BoolConstraint.True);
+                    lockNotHeldState = context.State.SetSymbolConstraint(refParameter, new(), BoolConstraint.False);
+                }
+                else
+                {
+                    lockHeldState = lockHeldState.SetSymbolValue(refParameter, refParamSymbolicValue.WithConstraint(BoolConstraint.True));
+                    lockNotHeldState = lockHeldState.SetSymbolValue(refParameter, refParamSymbolicValue.WithConstraint(BoolConstraint.False));
+                }
+
+                return new[] { lockHeldState, lockNotHeldState };
             }
             else
             {
-                return context.State;
+                return new[] { PostProcessSimple(context) };
             }
         }
 
