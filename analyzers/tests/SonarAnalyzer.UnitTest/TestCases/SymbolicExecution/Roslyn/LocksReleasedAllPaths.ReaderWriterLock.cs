@@ -250,6 +250,17 @@ namespace ReaderWriterLock_Type
             }
         }
 
+        public void IsReaderLockHeld_WriteLockReleased_OutOfScope()
+        {
+            if (readerWriterLock.IsReaderLockHeld)    // Noncompliant, this rule doesn't care about lock type mismatch
+            {
+                if (condition)
+                {
+                    readerWriterLock.ReleaseWriterLock();
+                }
+            }
+        }
+
         public void IsWriterLockHeld()
         {
             readerWriterLock.AcquireWriterLock(42);

@@ -325,6 +325,17 @@ namespace ReaderWriterLockSlim_Type
             }
         }
 
+        public void IsReadLockHeld_WriteLockReleased_OutOfScope()
+        {
+            if (readerWriterLockSlim.IsReadLockHeld)    // Noncompliant, this rule doesn't care about lock type mismatch
+            {
+                if (condition)
+                {
+                    readerWriterLockSlim.ExitWriteLock();
+                }
+            }
+        }
+
         public void IsWriteLockHeld()
         {
             readerWriterLockSlim.EnterWriteLock();  // Compliant, https://github.com/SonarSource/sonar-dotnet/issues/5416
