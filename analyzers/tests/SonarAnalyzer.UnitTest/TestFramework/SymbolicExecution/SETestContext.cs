@@ -52,17 +52,21 @@ namespace SonarAnalyzer.UnitTest.TestFramework.SymbolicExecution
             var code = $@"
 using System;
 using System.Collections.Generic;
+
 public class Sample
 {{
     public static int StaticField;
     public static int StaticProperty {{get; set;}}
     public int Property {{get; set;}}
     private int field;
+
     private bool Condition => Environment.ProcessorCount == 42;  // Something that cannot have constraint
+
     public void Main(bool boolParameter{additionalParameters})
     {{
         {methodBody}
     }}
+
     private void Tag(string name, object arg = null) {{ }}
 }}";
             return new(code, AnalyzerLanguage.CSharp, additionalChecks, localFunctionName);
@@ -82,12 +86,16 @@ public class Sample
         {
             var code = $@"
 Public Class Sample
+
     Private Readonly Property Condition As Boolean = Environment.ProcessorCount = 42    ' Something that cannot have constraint
+
     Public Sub Main(BoolParameter As Boolean{additionalParameters})
         {methodBody}
     End Sub
+
     Private Sub Tag(Name As String, Optional Arg As Object = Nothing)
     End Sub
+
 End Class";
             return new(code, AnalyzerLanguage.VisualBasic, additionalChecks);
         }
