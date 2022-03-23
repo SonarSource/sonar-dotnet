@@ -81,11 +81,28 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn.RuleChecks
 
         public override ProgramState[] PostProcess(SymbolicContext context)
         {
-            if (context.Operation.Instance.AsInvocation() is { } invocation
-                && invocation.TargetMethod.IsAny(KnownType.System_Threading_Monitor, "Enter")
-                && invocation.Arguments.Length == 2)
+            if (context.Operation.Instance.AsInvocation() is not { } invocation)
+            {
+                return new[] { PostProcessSimple(context) };
+            }
+
+            if (invocation.TargetMethod.IsAny(KnownType.System_Threading_Monitor, "Enter")
+                && invocation.Arguments.Length == 2
+                && invocation.TargetMethod.Parameters[1].IsType(KnownType.System_Boolean))
             {
                 return CreateTwoStates(context, ArgumentSymbol(invocation, 0), ArgumentSymbol(invocation, 1));
+            }
+            else if (invocation.TargetMethod.IsAny(KnownType.System_Threading_Monitor, "TryEnter")
+                     && invocation.Arguments.Length == 2
+                     && invocation.TargetMethod.Parameters[1].IsType(KnownType.System_Boolean))
+            {
+                return CreateTwoStates(context, ArgumentSymbol(invocation, 0), ArgumentSymbol(invocation, 1));
+            }
+            else if (invocation.TargetMethod.IsAny(KnownType.System_Threading_Monitor, "TryEnter")
+                     && invocation.Arguments.Length == 3
+                     && invocation.TargetMethod.Parameters[2].IsType(KnownType.System_Boolean))
+            {
+                return CreateTwoStates(context, ArgumentSymbol(invocation, 0), ArgumentSymbol(invocation, 2));
             }
             else
             {
