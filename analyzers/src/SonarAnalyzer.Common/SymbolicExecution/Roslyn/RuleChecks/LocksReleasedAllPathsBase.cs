@@ -85,27 +85,32 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn.RuleChecks
                 && invocation.TargetMethod.IsAny(KnownType.System_Threading_Monitor, "Enter")
                 && invocation.Arguments.Length == 2)
             {
-                var refParameter = IArgumentOperationWrapper.FromOperation(invocation.Arguments[1]).Value.TrackedSymbol();
-                var refParamSymbolicValue = context.State[refParameter];
-                var lockHeldState = AddLock(context, FirstArgumentSymbol(invocation));
-                ProgramState lockNotHeldState;
-                if (refParamSymbolicValue == null)
-                {
-                    lockHeldState = lockHeldState.SetSymbolConstraint(refParameter, new(), BoolConstraint.True);
-                    lockNotHeldState = context.State.SetSymbolConstraint(refParameter, new(), BoolConstraint.False);
-                }
-                else
-                {
-                    lockHeldState = lockHeldState.SetSymbolValue(refParameter, refParamSymbolicValue.WithConstraint(BoolConstraint.True));
-                    lockNotHeldState = lockHeldState.SetSymbolValue(refParameter, refParamSymbolicValue.WithConstraint(BoolConstraint.False));
-                }
-
-                return new[] { lockHeldState, lockNotHeldState };
+                return CreateTwoStates(context, ArgumentSymbol(invocation, 0), ArgumentSymbol(invocation, 1));
             }
             else
             {
                 return new[] { PostProcessSimple(context) };
             }
+        }
+
+        private ProgramState[] CreateTwoStates(SymbolicContext context, ISymbol lockSymbol, ISymbol refParameter)
+        {
+            ProgramState lockHeldState;
+            ProgramState lockNotHeldState;
+            var refParamSymbolicValue = context.State[refParameter];
+            lockHeldState = AddLock(context, lockSymbol);
+            if (refParamSymbolicValue == null)
+            {
+                lockHeldState = lockHeldState.SetSymbolConstraint(refParameter, new(), BoolConstraint.True);
+                lockNotHeldState = context.State.SetSymbolConstraint(refParameter, new(), BoolConstraint.False);
+            }
+            else
+            {
+                lockHeldState = lockHeldState.SetSymbolValue(refParameter, refParamSymbolicValue.WithConstraint(BoolConstraint.True));
+                lockNotHeldState = lockHeldState.SetSymbolValue(refParameter, refParamSymbolicValue.WithConstraint(BoolConstraint.False));
+            }
+
+            return new[] { lockHeldState, lockNotHeldState };
         }
 
         protected override ProgramState PostProcessSimple(SymbolicContext context)
@@ -154,10 +159,10 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn.RuleChecks
         }
 
         private ProgramState ProcessMonitorEnter(SymbolicContext context, IInvocationOperationWrapper invocation) =>
-            AddLock(context, FirstArgumentSymbol(invocation));
+            AddLock(context, ArgumentSymbol(invocation, 0));
 
         private ProgramState ProcessMonitorExit(SymbolicContext context, IInvocationOperationWrapper invocation) =>
-            RemoveLock(context, FirstArgumentSymbol(invocation));
+            RemoveLock(context, ArgumentSymbol(invocation, 0));
 
         private ProgramState ProcessInvocationInstanceAcquireLock(SymbolicContext context, IInvocationOperationWrapper invocation) =>
             AddLock(context, invocation.Instance.TrackedSymbol());
@@ -191,8 +196,8 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn.RuleChecks
         private static ProgramState AddLock(SymbolicContext context, IOperation operation) =>
             context.State.SetOperationConstraint(operation, context.SymbolicValueCounter, LockConstraint.Held);
 
-        private static ISymbol FirstArgumentSymbol(IInvocationOperationWrapper invocation) =>
-            IArgumentOperationWrapper.FromOperation(invocation.Arguments.First()).Value.TrackedSymbol();
+        private static ISymbol ArgumentSymbol(IInvocationOperationWrapper invocation, int argumentPosition) =>
+            IArgumentOperationWrapper.FromOperation(invocation.Arguments[argumentPosition]).Value.TrackedSymbol();
 
         protected sealed class LockAcquireReleaseCollector
         {
