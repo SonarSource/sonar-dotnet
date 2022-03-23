@@ -153,7 +153,7 @@ public int Method(bool a)
         return 2;
 }";
             var validator = SETestContext.CreateCSMethod(method).Validator;
-            validator.ValidateExitReachCount(2);
+            validator.ValidateExitReachCount(1);
             validator.ValidateExecutionCompleted();
         }
 
@@ -169,7 +169,7 @@ public int Method(bool a)
         return 2;
 }";
             var validator = SETestContext.CreateCSMethod(method).Validator;
-            validator.ValidateExitReachCount(2);
+            validator.ValidateExitReachCount(1);
             validator.ValidateExecutionCompleted();
         }
 
@@ -185,7 +185,7 @@ public System.Collections.Generic.IEnumerable<int> Method(bool a)
     yield return 2;
 }";
             var validator = SETestContext.CreateCSMethod(method).Validator;
-            validator.ValidateExitReachCount(2);
+            validator.ValidateExitReachCount(1);
             validator.ValidateExecutionCompleted();
         }
 
@@ -200,7 +200,7 @@ public System.Collections.Generic.IEnumerable<int> Method(bool a)
 
     var b = a;
 }";
-            var validator = SETestContext.CreateCSMethod(method).Validator;
+            var validator = SETestContext.CreateCSMethod(method, new PreserveTestCheck("b")).Validator;
             validator.ValidateExitReachCount(2);
             validator.ValidateExecutionCompleted();
         }
@@ -219,8 +219,8 @@ else
     value = false;
 }
 Tag(""End"", value);";
-            var validator = SETestContext.CreateCS(code).Validator;
-            validator.ValidateExitReachCount(2);    // Once with True constraint, once with False constraint on "value"
+            var validator = SETestContext.CreateCS(code, new PreserveTestCheck("value")).Validator;
+            validator.ValidateExitReachCount(2); // Once with True constraint, once with False constraint on "value"
             validator.TagValues("End").Should().HaveCount(2)
                 .And.ContainSingle(x => x.HasConstraint(BoolConstraint.True))
                 .And.ContainSingle(x => x.HasConstraint(BoolConstraint.False));
@@ -268,8 +268,7 @@ Tag(""End"", value);";
                 }
                 return x.State;
             });
-            var validator = SETestContext.CreateCS(code, postProcess).Validator;
-            validator.ValidateExitReachCount(2);
+            SETestContext.CreateCS(code, postProcess);
             captured.Should().OnlyContain(x => x.Value.HasConstraint(BoolConstraint.True) == x.ExpectedHasTrueConstraint);
         }
 
@@ -295,7 +294,7 @@ else
             var validator = SETestContext.CreateCS(code, postProcess).Validator;
             validator.ValidateTag("ToString", x => x.HasConstraint(TestConstraint.First).Should().BeTrue());
             validator.ValidateTag("GetHashCode", x => x.HasConstraint(TestConstraint.First).Should().BeFalse()); // Nobody set the constraint on that path
-            validator.ValidateExitReachCount(2);    // Once for each state
+            validator.ValidateExitReachCount(1);    // Once as the states are cleaned by LVA.
         }
 
         [TestMethod]
@@ -391,7 +390,6 @@ Tag(""End"");";
             SETestContext.CreateCS(code).Validator.ValidateTagOrder(
                 "If",
                 "Else",
-                "End",
                 "End");
         }
 
@@ -412,7 +410,6 @@ Tag(""End"");";
             SETestContext.CreateCS(code, check).Validator.ValidateTagOrder(
                 "If",
                 "Else",
-                "End",
                 "End");
         }
 
@@ -522,7 +519,6 @@ Tag(""End"");";
                 "False",
                 "TrueTrue",
                 "FalseFalse",
-                "End",
                 "End");
             validator.ValidateTag("True", x => x.HasConstraint(BoolConstraint.True).Should().BeTrue());
             validator.ValidateTag("False", x => x.HasConstraint(BoolConstraint.False).Should().BeTrue());

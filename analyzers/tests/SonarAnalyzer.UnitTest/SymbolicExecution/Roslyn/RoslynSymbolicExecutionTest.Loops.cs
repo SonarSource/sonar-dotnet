@@ -43,7 +43,7 @@ var value = 42;
     value--;
 }}
 Tag(""End"", value);";
-            var validator = SETestContext.CreateCS(code, ", int[] items", new AddConstraintOnInvocationCheck()).Validator;
+            var validator = SETestContext.CreateCS(code, ", int[] items", new AddConstraintOnInvocationCheck(), new PreserveTestCheck("value")).Validator;
             validator.ValidateExitReachCount(2);
             validator.TagValues("End").Should().HaveCount(2)
                 .And.ContainSingle(x => x == null)
@@ -51,7 +51,7 @@ Tag(""End"", value);";
         }
 
         [TestMethod]
-        public void Loops_InstructionVisitedMaxTwice_ForEachOriginalState()
+        public void Loops_InstructionVisitedMaxTwice_EvenWithMultipleStates()
         {
             const string code = @"
 var value = 42;
@@ -65,7 +65,7 @@ do
     value.ToString(); // Add another constraint to 'value'
 } while (Condition);
 Tag(""End"", value);";
-            var validator = SETestContext.CreateCS(code, ", int[] items", new AddConstraintOnInvocationCheck()).Validator;
+            var validator = SETestContext.CreateCS(code, ", int[] items", new AddConstraintOnInvocationCheck(), new PreserveTestCheck("condition"), new PreserveTestCheck("value")).Validator;
             validator.ValidateExitReachCount(4);
             var states = validator.TagStates("End");
             var condition = states.SelectMany(x => x.SymbolsWith(BoolConstraint.False)).First();    // "False" is never set for "value"
@@ -89,7 +89,7 @@ do
 }} while (value > 0);
 Tag(""End"", value);";
             var validator = SETestContext.CreateCS(code, new AddConstraintOnInvocationCheck()).Validator;
-            validator.ValidateExitReachCount(2);
+            validator.ValidateExitReachCount(1);
             validator.TagValues("End").Should().HaveCount(2)
                 .And.ContainSingle(x => x.HasConstraint(TestConstraint.First) && !x.HasConstraint(BoolConstraint.True))
                 .And.ContainSingle(x => x.HasConstraint(TestConstraint.First) && x.HasConstraint(BoolConstraint.True) && !x.HasConstraint(DummyConstraint.Dummy));
@@ -144,7 +144,7 @@ if (value > 0)
 }
 Tag(""End"", value);";
             var validator = SETestContext.CreateCS(code, new AddConstraintOnInvocationCheck()).Validator;
-            validator.ValidateExitReachCount(2);
+            validator.ValidateExitReachCount(1);
             validator.TagValues("End").Should().HaveCount(2)
                 .And.ContainSingle(x => x.HasConstraint(TestConstraint.First) && !x.HasConstraint(BoolConstraint.True))
                 .And.ContainSingle(x => x.HasConstraint(TestConstraint.First) && x.HasConstraint(BoolConstraint.True) && !x.HasConstraint(DummyConstraint.Dummy));

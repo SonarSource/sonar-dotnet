@@ -39,21 +39,24 @@ namespace SonarAnalyzer.UnitTest.SymbolicExecution.Roslyn
             var counter = new SymbolicValueCounter();
             var reusedValue = new SymbolicValue(counter).WithConstraint(TestConstraint.First);
             var anotherValue = new SymbolicValue(counter).WithConstraint(TestConstraint.Second);
-            var operations = TestHelper.CompileCfgBodyCS("var x = 42;").Blocks[1].Operations.ToExecutionOrder().ToArray();
-            var symbol = operations.Select(x => x.Instance.TrackedSymbol()).First(x => x is not null);
+            var operations = TestHelper.CompileCfgBodyCS("var x = 42; var y = 42;").Blocks[1].Operations.ToExecutionOrder().ToArray();
+            var symbols = operations.Select(x => x.Instance.TrackedSymbol()).Where(x => x is not null).ToArray();
             var empty = ProgramState.Empty;
             var withOperationOrig = empty.SetOperationValue(operations[0], reusedValue);
             var withOperationSame = empty.SetOperationValue(operations[0], reusedValue);
             var withOperationDiff = empty.SetOperationValue(operations[0], anotherValue);
-            var withSymbolOrig = empty.SetSymbolValue(symbol, reusedValue);
-            var withSymbolSame = empty.SetSymbolValue(symbol, reusedValue);
-            var withSymbolDiff = empty.SetSymbolValue(symbol, anotherValue);
+            var withSymbolOrig = empty.SetSymbolValue(symbols[0], reusedValue);
+            var withSymbolSame = empty.SetSymbolValue(symbols[0], reusedValue);
+            var withSymbolDiff = empty.SetSymbolValue(symbols[0], anotherValue);
             var withCaptureOrig = empty.SetCapture(new CaptureId(0), operations[0].Instance);
             var withCaptureSame = empty.SetCapture(new CaptureId(0), operations[0].Instance);
             var withCaptureDiff = empty.SetCapture(new CaptureId(0), operations[1].Instance);
-            var mixedOrig = withOperationOrig.SetSymbolValue(symbol, reusedValue);
-            var mixedSame = withOperationSame.SetSymbolValue(symbol, reusedValue);
-            var mixedDiff = withOperationDiff.SetSymbolValue(symbol, anotherValue);
+            var withPreservedSymbolOrig = empty.Preserve(symbols[0]);
+            var withPreservedSymbolSame = empty.Preserve(symbols[0]);
+            var withPreservedSymbolDiff = empty.Preserve(symbols[1]);
+            var mixedOrig = withOperationOrig.SetSymbolValue(symbols[0], reusedValue);
+            var mixedSame = withOperationSame.SetSymbolValue(symbols[0], reusedValue);
+            var mixedDiff = withOperationDiff.SetSymbolValue(symbols[0], anotherValue);
 
             empty.Equals((object)empty).Should().BeTrue();
             empty.Equals((object)withOperationOrig).Should().BeFalse();
@@ -67,6 +70,7 @@ namespace SonarAnalyzer.UnitTest.SymbolicExecution.Roslyn
             withOperationOrig.Equals(empty).Should().BeFalse();
             withOperationOrig.Equals(withSymbolDiff).Should().BeFalse();
             withOperationOrig.Equals(withCaptureDiff).Should().BeFalse();
+            withOperationOrig.Equals(withPreservedSymbolDiff).Should().BeFalse();
 
             withSymbolOrig.Equals(withSymbolOrig).Should().BeTrue();
             withSymbolOrig.Equals(withSymbolSame).Should().BeTrue();
@@ -74,6 +78,7 @@ namespace SonarAnalyzer.UnitTest.SymbolicExecution.Roslyn
             withSymbolOrig.Equals(empty).Should().BeFalse();
             withSymbolOrig.Equals(withOperationDiff).Should().BeFalse();
             withSymbolOrig.Equals(withCaptureDiff).Should().BeFalse();
+            withSymbolOrig.Equals(withPreservedSymbolDiff).Should().BeFalse();
 
             withCaptureOrig.Equals(withCaptureOrig).Should().BeTrue();
             withCaptureOrig.Equals(withCaptureSame).Should().BeTrue();
@@ -81,6 +86,12 @@ namespace SonarAnalyzer.UnitTest.SymbolicExecution.Roslyn
             withCaptureOrig.Equals(empty).Should().BeFalse();
             withCaptureOrig.Equals(withOperationDiff).Should().BeFalse();
             withCaptureOrig.Equals(withSymbolDiff).Should().BeFalse();
+            withPreservedSymbolOrig.Equals(withPreservedSymbolOrig).Should().BeTrue();
+            withPreservedSymbolOrig.Equals(withPreservedSymbolSame).Should().BeTrue();
+            withPreservedSymbolOrig.Equals(withPreservedSymbolDiff).Should().BeFalse();
+            withPreservedSymbolOrig.Equals(empty).Should().BeFalse();
+            withPreservedSymbolOrig.Equals(withOperationDiff).Should().BeFalse();
+            withPreservedSymbolOrig.Equals(withSymbolDiff).Should().BeFalse();
 
             mixedOrig.Equals(mixedOrig).Should().BeTrue();
             mixedOrig.Equals(mixedSame).Should().BeTrue();
@@ -94,21 +105,24 @@ namespace SonarAnalyzer.UnitTest.SymbolicExecution.Roslyn
             var counter = new SymbolicValueCounter();
             var reusedValue = new SymbolicValue(counter).WithConstraint(TestConstraint.First);
             var anotherValue = new SymbolicValue(counter).WithConstraint(TestConstraint.Second);
-            var operations = TestHelper.CompileCfgBodyCS("var x = 42;").Blocks[1].Operations.ToExecutionOrder().ToArray();
-            var symbol = operations.Select(x => x.Instance.TrackedSymbol()).First(x => x is not null);
+            var operations = TestHelper.CompileCfgBodyCS("var x = 42; var y = 42;").Blocks[1].Operations.ToExecutionOrder().ToArray();
+            var symbols = operations.Select(x => x.Instance.TrackedSymbol()).Where(x => x is not null).ToArray();
             var empty = ProgramState.Empty;
             var withOperationOrig = empty.SetOperationValue(operations[0], reusedValue);
             var withOperationSame = empty.SetOperationValue(operations[0], reusedValue);
             var withOperationDiff = empty.SetOperationValue(operations[0], anotherValue);
-            var withSymbolOrig = empty.SetSymbolValue(symbol, reusedValue);
-            var withSymbolSame = empty.SetSymbolValue(symbol, reusedValue);
-            var withSymbolDiff = empty.SetSymbolValue(symbol, anotherValue);
+            var withSymbolOrig = empty.SetSymbolValue(symbols[0], reusedValue);
+            var withSymbolSame = empty.SetSymbolValue(symbols[0], reusedValue);
+            var withSymbolDiff = empty.SetSymbolValue(symbols[0], anotherValue);
             var withCaptureOrig = empty.SetCapture(new CaptureId(0), operations[0].Instance);
             var withCaptureSame = empty.SetCapture(new CaptureId(0), operations[0].Instance);
             var withCaptureDiff = empty.SetCapture(new CaptureId(0), operations[1].Instance);
-            var mixedOrig = withOperationOrig.SetSymbolValue(symbol, reusedValue);
-            var mixedSame = withOperationSame.SetSymbolValue(symbol, reusedValue);
-            var mixedDiff = withOperationDiff.SetSymbolValue(symbol, anotherValue);
+            var withPreservedSymbolOrig = empty.Preserve(symbols[0]);
+            var withPreservedSymbolSame = empty.Preserve(symbols[0]);
+            var withPreservedSymbolDiff = empty.Preserve(symbols[1]);
+            var mixedOrig = withOperationOrig.SetSymbolValue(symbols[0], reusedValue);
+            var mixedSame = withOperationSame.SetSymbolValue(symbols[0], reusedValue);
+            var mixedDiff = withOperationDiff.SetSymbolValue(symbols[0], anotherValue);
 
             empty.GetHashCode().Should().Be(empty.GetHashCode());
 
@@ -123,6 +137,10 @@ namespace SonarAnalyzer.UnitTest.SymbolicExecution.Roslyn
 
             withCaptureOrig.GetHashCode().Should().Be(withCaptureSame.GetHashCode());
             withCaptureOrig.GetHashCode().Should().NotBe(withCaptureDiff.GetHashCode());
+
+            withPreservedSymbolOrig.GetHashCode().Should().Be(withPreservedSymbolSame.GetHashCode());
+            withPreservedSymbolOrig.GetHashCode().Should().NotBe(withPreservedSymbolDiff.GetHashCode());
+            withPreservedSymbolOrig.GetHashCode().Should().NotBe(mixedSame.GetHashCode());
 
             mixedOrig.GetHashCode().Should().Be(mixedSame.GetHashCode());
             mixedOrig.GetHashCode().Should().NotBe(mixedDiff.GetHashCode());
@@ -205,7 +223,7 @@ SimpleAssignmentOperation / VariableDeclaratorSyntax: a = true: SV_1
                 .SetSymbolValue(variableSymbol, new SymbolicValue(counter))
                 .SetSymbolValue(variableSymbol.ContainingSymbol, valueWithConstraint)
                 .SetOperationValue(assignment, new SymbolicValue(counter))
-                .SetOperationValue(assignment.Children.First(), valueWithConstraint)
+                .SetOperationValue(assignment.Children.First(), valueWithConstraint).Preserve(variableSymbol)
                 .SetCapture(new CaptureId(0), assignment)
                 .SetCapture(new CaptureId(1), assignment.Children.First());
 

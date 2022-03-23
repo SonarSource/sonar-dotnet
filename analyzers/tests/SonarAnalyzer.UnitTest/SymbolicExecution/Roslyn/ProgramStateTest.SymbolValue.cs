@@ -21,6 +21,7 @@
 using System;
 using System.Linq;
 using FluentAssertions;
+using Microsoft.CodeAnalysis;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.SymbolicExecution.Roslyn;
 using SonarAnalyzer.UnitTest.TestFramework.SymbolicExecution;
@@ -117,6 +118,29 @@ namespace SonarAnalyzer.UnitTest.SymbolicExecution.Roslyn
             var symbol = CreateSymbols().First();
             var sut = ProgramState.Empty.SetSymbolValue(symbol, null);
             sut.SymbolsWith(DummyConstraint.Dummy).Should().BeEmpty();
+        }
+
+        [TestMethod]
+        public void Preserve_PreservedSymbolCannotBeRemoved()
+        {
+            var symbolicValue = new SymbolicValue(new()).WithConstraint(DummyConstraint.Dummy);
+            var symbol = CreateSymbols().First();
+            var sut = ProgramState.Empty.SetSymbolValue(symbol, symbolicValue)
+                .Preserve(symbol)
+                .RemoveSymbols(x => true);
+            sut.SymbolsWith(DummyConstraint.Dummy).Should().Contain(symbol);
+        }
+
+        [TestMethod]
+        public void RemoveSymbols_RemovesSymbolsMatchingThePredicate()
+        {
+            var symbolicValue = new SymbolicValue(new()).WithConstraint(DummyConstraint.Dummy);
+            var symbols = CreateSymbols().ToArray();
+            var sut = ProgramState.Empty.SetSymbolValue(symbols[0], symbolicValue)
+                .SetSymbolValue(symbols[1], symbolicValue)
+                .SetSymbolValue(symbols[2], symbolicValue)
+                .RemoveSymbols(x => !SymbolEqualityComparer.Default.Equals(x, symbols[1]));
+            sut.SymbolsWith(DummyConstraint.Dummy).Should().Contain(symbols[1]).And.HaveCount(1);
         }
 
         [TestMethod]

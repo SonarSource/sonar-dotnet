@@ -82,11 +82,16 @@ End Class", AnalyzerLanguage.VisualBasic);
         public static ControlFlowGraph CompileCfgCS(string snippet, bool ignoreErrors = false) =>
             CompileCfg(snippet, AnalyzerLanguage.CSharp, ignoreErrors);
 
-        public static ControlFlowGraph CompileCfg(string snippet, AnalyzerLanguage language, bool ignoreErrors = false)
+        public static ControlFlowGraph CompileCfg(string snippet, AnalyzerLanguage language, bool ignoreErrors = false, string localFunctionName = null)
         {
             var (tree, semanticModel) = Compile(snippet, ignoreErrors, language);
             var method = tree.GetRoot().DescendantNodes().First(IsMethod);
-            return ControlFlowGraph.Create(method, semanticModel);
+            var cfg = ControlFlowGraph.Create(method, semanticModel);
+            if (localFunctionName != null)
+            {
+                cfg = cfg.GetLocalFunctionControlFlowGraph(cfg.LocalFunctions.Single(x => x.Name == localFunctionName));
+            }
+            return cfg;
 
             bool IsMethod(SyntaxNode node) =>
                 language == AnalyzerLanguage.CSharp

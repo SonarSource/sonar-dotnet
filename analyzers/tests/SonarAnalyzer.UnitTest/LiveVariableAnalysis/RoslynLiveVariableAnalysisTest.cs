@@ -973,11 +973,7 @@ End Class";
 
             public Context(string code, AnalyzerLanguage language, string localFunctionName = null)
             {
-                Cfg = TestHelper.CompileCfg(code, language, code.Contains("// Error CS"));
-                if (localFunctionName != null)
-                {
-                    Cfg = Cfg.GetLocalFunctionControlFlowGraph(Cfg.LocalFunctions.Single(x => x.Name == localFunctionName));
-                }
+                Cfg = TestHelper.CompileCfg(code, language, code.Contains("// Error CS"), localFunctionName);
                 Console.WriteLine(CfgSerializer.Serialize(Cfg));
                 Lva = new RoslynLiveVariableAnalysis(Cfg);
             }

@@ -38,6 +38,7 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
         private ImmutableDictionary<ISymbol, SymbolicValue> SymbolValue { get; init; }
         private ImmutableDictionary<int, int> VisitCount { get; init; }
         private ImmutableDictionary<CaptureId, IOperation> CaptureOperation { get; init; }
+        private ImmutableHashSet<ISymbol> PreservedSymbols { get; init; }
 
         public SymbolicValue this[IOperationWrapperSonar operation] => this[operation.Instance];
         public SymbolicValue this[IOperation operation] => OperationValue.TryGetValue(ResolveCapture(operation), out var value) ? value : null;
@@ -50,6 +51,7 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
             SymbolValue = ImmutableDictionary<ISymbol, SymbolicValue>.Empty;
             VisitCount = ImmutableDictionary<int, int>.Empty;
             CaptureOperation = ImmutableDictionary<CaptureId, IOperation>.Empty;
+            PreservedSymbols = ImmutableHashSet<ISymbol>.Empty;
         }
 
         public ProgramState SetOperationValue(IOperationWrapperSonar operation, SymbolicValue value) =>
@@ -95,8 +97,14 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
                 ? captured
                 : operation;
 
+        public ProgramState RemoveSymbols(Func<ISymbol, bool> remove) =>
+            this with { SymbolValue = SymbolValue.Where(kv => PreservedSymbols.Contains(kv.Key) || !remove(kv.Key)).ToImmutableDictionary() };
+
         public ProgramState AddVisit(int programPointHash) =>
             this with { VisitCount = VisitCount.SetItem(programPointHash, GetVisitCount(programPointHash) + 1) };
+
+        public ProgramState Preserve(ISymbol symbol) =>
+            this with { PreservedSymbols = PreservedSymbols.Add(symbol) };
 
         public int GetVisitCount(int programPointHash) =>
             VisitCount.TryGetValue(programPointHash, out var count) ? count : 0;
@@ -106,6 +114,7 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
             HashCode.Combine(
                 HashCode.DictionaryContentHash(OperationValue),
                 HashCode.DictionaryContentHash(SymbolValue),
+                HashCode.EnumerableContentHash(PreservedSymbols),
                 HashCode.DictionaryContentHash(CaptureOperation));
 
         public bool Equals(ProgramState other) =>
@@ -113,7 +122,8 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
             other is not null
             && other.OperationValue.DictionaryEquals(OperationValue)
             && other.SymbolValue.DictionaryEquals(SymbolValue)
-            && other.CaptureOperation.DictionaryEquals(CaptureOperation);
+            && other.CaptureOperation.DictionaryEquals(CaptureOperation)
+            && other.PreservedSymbols.SetEquals(PreservedSymbols);
 
         public override string ToString() =>
             Equals(Empty) ? "Empty" : SerializeSymbols() + SerializeOperations() + SerializeCaptures();

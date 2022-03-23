@@ -84,7 +84,7 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn.RuleChecks
                     && assignment.Target.TrackedSymbol() is { } symbol)
                 {
                     lastSymbolLock[symbol] = new IOperationWrapperSonar(objectCreation.WrappedOperation);
-                    return AddLock(context, objectCreation.WrappedOperation);
+                    return AddLock(context, objectCreation.WrappedOperation).Preserve(symbol);
                 }
             }
             else if (context.Operation.Instance.AsInvocation() is { } invocation)
@@ -136,7 +136,7 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn.RuleChecks
             }
 
             lastSymbolLock[symbol] = context.Operation;
-            return context.SetSymbolConstraint(symbol, LockConstraint.Held);
+            return context.SetSymbolConstraint(symbol, LockConstraint.Held).Preserve(symbol);
         }
 
         private ProgramState RemoveLock(SymbolicContext context, ISymbol symbol)
@@ -147,7 +147,7 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn.RuleChecks
             }
 
             releasedSymbols.Add(symbol);
-            return context.SetSymbolConstraint(symbol, LockConstraint.Released);
+            return context.SetSymbolConstraint(symbol, LockConstraint.Released).Preserve(symbol);
         }
 
         // This method should be removed once the engine has support for `True/False` boolean constraints.

@@ -21,7 +21,10 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Microsoft.CodeAnalysis;
+using SonarAnalyzer.CFG.LiveVariableAnalysis;
 using SonarAnalyzer.CFG.Roslyn;
+using SonarAnalyzer.Helpers;
 using SonarAnalyzer.SymbolicExecution.Constraints;
 using SonarAnalyzer.SymbolicExecution.Roslyn.Checks;
 using SonarAnalyzer.SymbolicExecution.Roslyn.OperationProcessors;
@@ -39,6 +42,7 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
         private readonly Queue<ExplodedNode> queue = new();
         private readonly SymbolicValueCounter symbolicValueCounter = new();
         private readonly HashSet<ExplodedNode> visited = new();
+        private readonly RoslynLiveVariableAnalysis lva;
 
         public RoslynSymbolicExecution(ControlFlowGraph cfg, SymbolicCheck[] checks)
         {
@@ -48,6 +52,7 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
                 throw new ArgumentException("At least one check is expected", nameof(checks));
             }
             this.checks = new(new[] { new ConstantCheck() }.Concat(checks).ToArray());
+            lva = new RoslynLiveVariableAnalysis(cfg);
         }
 
         public void Execute()
@@ -154,7 +159,9 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
             {
                 state = state.RemoveCapture(capture);
             }
-            return state.ResetOperations();
+            var liveVariables = lva.LiveOut(branch.Source).ToHashSet();
+            return state.RemoveSymbols(x => lva.IsLocal(x) && (x is ILocalSymbol or IParameterSymbol { RefKind: RefKind.None }) && !liveVariables.Contains(x))
+                .ResetOperations();
         }
 
         private IEnumerable<ExplodedNode> ProcessOperation(ExplodedNode node)

@@ -18,25 +18,20 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using FluentAssertions;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using SonarAnalyzer.Helpers;
+using SonarAnalyzer.SymbolicExecution.Roslyn;
 
-namespace SonarAnalyzer.UnitTest.Helpers
+namespace SonarAnalyzer.UnitTest.TestFramework.SymbolicExecution
 {
-    [TestClass]
-    public class HashCodeTest
+    public class PreserveTestCheck : SymbolicCheck
     {
-        [TestMethod]
-        public void Combine_Null()
-        {
-            var two = HashCode.Combine<object, object>(null, null);
-            var three = HashCode.Combine<object, object, object>(null, null, null);
-            var four = HashCode.Combine<object, object, object, object>(null, null, null, null);
+        private readonly string symbolName;
 
-            two.Should().NotBe(0);
-            three.Should().NotBe(0).And.NotBe(two);
-            four.Should().NotBe(0).And.NotBe(three).And.NotBe(two);
-        }
+        public PreserveTestCheck(string symbolName) =>
+            this.symbolName = symbolName;
+
+        protected override ProgramState PreProcessSimple(SymbolicContext context) =>
+            context.Operation.Instance.TrackedSymbol() is { } symbol && symbol.Name == symbolName
+                ? context.State.Preserve(symbol)
+                : context.State;
     }
 }

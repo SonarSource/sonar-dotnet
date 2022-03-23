@@ -34,6 +34,9 @@ namespace SonarAnalyzer.Helpers
         public static int DictionaryContentHash<TKey, TValue>(IDictionary<TKey, TValue> dictionary) =>
             dictionary.Aggregate(0, (seed, kvp) => Combine(seed, kvp.Key, kvp.Value));
 
+        public static int EnumerableContentHash<TValue>(IEnumerable<TValue> enumerable) =>
+            enumerable.Aggregate(0, (seed, x) => Combine(seed, x));
+
         public static int Combine<T1, T2>(T1 a, T2 b) =>
             (int)Seed
                 .AddHash((uint)(a?.GetHashCode() ?? 0))
@@ -44,6 +47,13 @@ namespace SonarAnalyzer.Helpers
                 .AddHash((uint)(a?.GetHashCode() ?? 0))
                 .AddHash((uint)(b?.GetHashCode() ?? 0))
                 .AddHash((uint)(c?.GetHashCode() ?? 0));
+
+        public static int Combine<T1, T2, T3, T4>(T1 a, T2 b, T3 c, T4 d) =>
+            (int)Seed
+                .AddHash((uint)(a?.GetHashCode() ?? 0))
+                .AddHash((uint)(b?.GetHashCode() ?? 0))
+                .AddHash((uint)(c?.GetHashCode() ?? 0))
+                .AddHash((uint)(d?.GetHashCode() ?? 0));
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         private static uint AddHash(this uint hash, uint value) =>

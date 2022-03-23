@@ -51,8 +51,7 @@ namespace SonarAnalyzer.UnitTest.SymbolicExecution.Roslyn
         [TestMethod]
         public void Execute_SecondRun_Throws()
         {
-            var cfg = TestHelper.CompileCfgBodyCS();
-            var se = new RoslynSymbolicExecution(cfg, new[] { new ValidatorTestCheck() });
+            var se = new RoslynSymbolicExecution(TestHelper.CompileCfgBodyCS(), new[] { new ValidatorTestCheck() });
             se.Execute();
             se.Invoking(x => x.Execute()).Should().Throw<InvalidOperationException>().WithMessage("Engine can be executed only once.");
         }
@@ -177,6 +176,43 @@ namespace SonarAnalyzer.UnitTest.SymbolicExecution.Roslyn
         }
 
         [TestMethod]
+        public void Execute_UnusedVariable_ClearedAfterBlock()
+        {
+            const string code = @"
+var first = boolParameter ? true : false;
+Tag(""BeforeLastUse""); 
+bool second = first;
+if(boolParameter)
+    boolParameter.ToString();
+Tag(""AfterLastUse"");";
+            ISymbol firstSymbol = null;
+            var postProcess = new PostProcessTestCheck(x =>
+            {
+                firstSymbol ??= x.Operation.Instance.TrackedSymbol() is { Name: "first" } symbol ? symbol : null;
+                return x.State;
+            });
+            var validator = SETestContext.CreateCS(code, postProcess).Validator;
+            validator.TagStates("BeforeLastUse").Should().HaveCount(2).And.OnlyContain(x => x[firstSymbol] != null);
+            validator.TagStates("AfterLastUse").Should().HaveCount(2).And.OnlyContain(x => x[firstSymbol] == null); // Once emtpy and once with the learned boolParameter true
+        }
+
+        [TestMethod]
+        public void Execute_OuterMethodParameter_NotCleared()
+        {
+            const string code = @"
+void LocalFunction()
+{
+    boolParameter = false;
+    var misc = true;
+    if(misc)
+        misc.ToString();
+    Tag(""LocalFunctionEnd"");
+}";
+            SETestContext.CreateCS(code, null, "LocalFunction").Validator.TagStates("LocalFunctionEnd").Should().HaveCount(1)
+                .And.OnlyContain(x => x.SymbolsWith(BoolConstraint.False).Count() == 1);
+        }
+
+        [TestMethod]
         public void Execute_TooManyBlocks_NotSupported()
         {
             var validator = SETestContext.CreateCS($"var a = true{Enumerable.Repeat(" && true", 1020).JoinStr(null)};").Validator;
@@ -250,5 +286,36 @@ Tag(""End"");";
         [TestMethod]
         public void Execute_LocalScopeRegion_AssignDefaultBoolConstraint() =>
             SETestContext.CreateVB(@"Dim B As Boolean : Tag(""B"", B)").Validator.ValidateTag("B", x => x.HasConstraint(BoolConstraint.False).Should().BeTrue());
+
+        [TestMethod]
+        public void Execute_FieldSymbolsAreNotRemovedByLva()
+        {
+            const string code = @"
+if (boolParameter)
+{
+    field = 42;
+}";
+
+            var postProcess = new PostProcessTestCheck(OperationKind.Literal, x => x.SetOperationConstraint(DummyConstraint.Dummy));
+            var validator = SETestContext.CreateCS(code, postProcess).Validator;
+            validator.ValidateExitReachCount(2);    // Once with the constraint and once without it.
+        }
+
+        [DataTestMethod]
+        [DataRow("out", "outParam")]
+        [DataRow("ref", "refParam")]
+        public void Execute_RefAndOutParameters_NotRemovedByLva(string refKind, string paramName)
+        {
+            var code = $@"
+{paramName} = int.MinValue;
+if (boolParameter)
+{{
+    {paramName} = 42;
+}}";
+
+            var postProcess = new PostProcessTestCheck(OperationKind.Literal, x => x.SetOperationConstraint(DummyConstraint.Dummy));
+            var validator = SETestContext.CreateCS(code, $", {refKind} int {paramName}", postProcess).Validator;
+            validator.ValidateExitReachCount(2);    // Once with the constraint and once without it.
+        }
     }
 }
