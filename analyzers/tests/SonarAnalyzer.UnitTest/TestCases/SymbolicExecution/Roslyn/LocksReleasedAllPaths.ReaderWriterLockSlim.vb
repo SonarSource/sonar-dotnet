@@ -141,6 +141,61 @@ Namespace ReaderWriterLockSlim_Type
             End If
         End Sub
 
+        Public Sub IsReadLockHeld()
+            rwLockSlim.EnterReadLock()          ' Compliant, https://github.com/SonarSource/sonar-dotnet/issues/5416
+            If rwLockSlim.IsReadLockHeld Then rwLockSlim.ExitReadLock()
+        End Sub
+
+        Public Sub IsReadLockHeld_NoLocking()
+            If rwLockSlim.IsReadLockHeld Then   'Noncompliant
+                If Condition Then rwLockSlim.ExitReadLock()
+            End If
+        End Sub
+
+        Public Sub IsReadLockHeld_NoLocking_Compliant()
+            If rwLockSlim.IsReadLockHeld Then rwLockSlim.ExitReadLock()
+        End Sub
+
+        Public Sub IsReadLockHeld_Noncompliant()
+            rwLockSlim.EnterReadLock()
+            If rwLockSlim.IsReadLockHeld Then   ' Noncompliant
+                If Condition Then rwLockSlim.ExitReadLock()
+            End If
+        End Sub
+
+        Public Sub IsReadLockHeld_Noncompliant(Arg As Boolean)
+            If Arg Then rwLockSlim.EnterReadLock()
+            If rwLockSlim.IsReadLockHeld Then       ' Noncompliant
+                If Condition Then rwLockSlim.ExitReadLock()
+            End If
+        End Sub
+
+        Public Sub IsReadLockHeld_Unreachable()
+            rwLockSlim.EnterReadLock()
+            If rwLockSlim.IsReadLockHeld Then       ' Noncompliant, ends up unreleased on If path, and released on Else path
+                ' Nothing
+            Else
+                rwLockSlim.ExitReadLock()
+            End If
+        End Sub
+
+        Public Sub IsWriteLockHeld()
+            rwLockSlim.EnterWriteLock()             ' Compliant, https://github.com/SonarSource/sonar-dotnet/issues/5416
+            If rwLockSlim.IsWriteLockHeld Then rwLockSlim.ExitWriteLock()
+        End Sub
+
+        Public Sub IsWriteLockHeld_Noncompliant()
+            If rwLockSlim.IsWriteLockHeld Then      ' Noncompliant
+                If Condition Then rwLockSlim.ExitWriteLock()
+            End If
+        End Sub
+
+        Public Sub IsUpgradeableReadLockHeld_Noncompliant()
+            If rwLockSlim.IsUpgradeableReadLockHeld Then    ' Noncompliant
+                If Condition Then rwLockSlim.ExitReadLock()
+            End If
+        End Sub
+
     End Class
 
 End Namespace

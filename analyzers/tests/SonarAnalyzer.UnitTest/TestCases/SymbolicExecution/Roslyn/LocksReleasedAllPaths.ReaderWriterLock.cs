@@ -181,5 +181,104 @@ namespace ReaderWriterLock_Type
             b.ReleaseWriterLock();
             b.AcquireWriterLock(1); // Noncompliant
         }
+
+        public void IsReaderLockHeld()
+        {
+            readerWriterLock.AcquireReaderLock(42);
+            if (readerWriterLock.IsReaderLockHeld)  // Compliant, https://github.com/SonarSource/sonar-dotnet/issues/5416
+            {
+                readerWriterLock.ReleaseReaderLock();
+            }
+        }
+
+        public void IsReaderLockHeld_NoLocking()
+        {
+            if (readerWriterLock.IsReaderLockHeld)    // Noncompliant
+            {
+                if (condition)
+                {
+                    readerWriterLock.ReleaseReaderLock();
+                }
+            }
+        }
+
+        public void IsReaderLockHeld_NoLocking_Compliant()
+        {
+            if (readerWriterLock.IsReaderLockHeld)
+            {
+                readerWriterLock.ReleaseReaderLock();
+            }
+        }
+
+        public void IsReaderLockHeld_Noncompliant()
+        {
+            readerWriterLock.AcquireReaderLock(42);
+            if (readerWriterLock.IsReaderLockHeld)  // Noncompliant
+            {
+                if (condition)
+                {
+                    readerWriterLock.ReleaseReaderLock();
+                }
+            }
+        }
+
+        public void IsReaderLockHeld_Noncompliant(bool arg)
+        {
+            if (arg)
+            {
+                readerWriterLock.AcquireReaderLock(42);
+            }
+            if (readerWriterLock.IsReaderLockHeld)  // Noncompliant
+            {
+                if (condition)
+                {
+                    readerWriterLock.ReleaseReaderLock();
+                }
+            }
+        }
+
+        public void IsReaderLockHeld_Unreachable()
+        {
+            readerWriterLock.AcquireReaderLock(42);
+            if (readerWriterLock.IsReaderLockHeld)  // Noncompliant, ends up unreleased on If path, and released on Else path
+            {
+                //
+            }
+            else
+            {
+                readerWriterLock.ReleaseReaderLock();
+            }
+        }
+
+        public void IsReaderLockHeld_WriteLockReleased_OutOfScope()
+        {
+            if (readerWriterLock.IsReaderLockHeld)    // Noncompliant, this rule doesn't care about lock type mismatch
+            {
+                if (condition)
+                {
+                    readerWriterLock.ReleaseWriterLock();
+                }
+            }
+        }
+
+        public void IsWriterLockHeld()
+        {
+            readerWriterLock.AcquireWriterLock(42);
+            if (readerWriterLock.IsWriterLockHeld)   // Compliant, https://github.com/SonarSource/sonar-dotnet/issues/5416
+            {
+                readerWriterLock.ReleaseWriterLock();
+            }
+        }
+
+        public void IsWriterLockHeld_Noncompliant()
+        {
+            if (readerWriterLock.IsWriterLockHeld)  // Noncompliant
+            {
+                if (condition)
+                {
+                    readerWriterLock.ReleaseWriterLock();
+                }
+            }
+        }
     }
 }

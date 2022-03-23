@@ -259,20 +259,151 @@ namespace ReaderWriterLockSlim_Type
 
         public void IsReadLockHeld()
         {
-            readerWriterLockSlim.EnterReadLock(); // Noncompliant FP, https://github.com/SonarSource/sonar-dotnet/issues/5416
+            readerWriterLockSlim.EnterReadLock();
+            if (readerWriterLockSlim.IsReadLockHeld)    // Compliant, https://github.com/SonarSource/sonar-dotnet/issues/5416
+            {
+                readerWriterLockSlim.ExitReadLock();
+            }
+        }
+
+        public void IsReadLockHeld_NoLocking()
+        {
+            if (readerWriterLockSlim.IsReadLockHeld)    // Noncompliant
+            {
+                if (condition)
+                {
+                    readerWriterLockSlim.ExitReadLock();
+                }
+            }
+        }
+
+        public void IsReadLockHeld_NoLocking_Compliant()
+        {
             if (readerWriterLockSlim.IsReadLockHeld)
             {
                 readerWriterLockSlim.ExitReadLock();
             }
         }
 
+        public void IsReadLockHeld_Noncompliant()
+        {
+            readerWriterLockSlim.EnterReadLock();
+            if (readerWriterLockSlim.IsReadLockHeld)    // Noncompliant
+            {
+                if (condition)
+                {
+                    readerWriterLockSlim.ExitReadLock();
+                }
+            }
+        }
+
+        public void IsReadLockHeld_Noncompliant(bool arg)
+        {
+            if (arg)
+            {
+                readerWriterLockSlim.EnterReadLock();
+            }
+            if (readerWriterLockSlim.IsReadLockHeld)    // Noncompliant
+            {
+                if (condition)
+                {
+                    readerWriterLockSlim.ExitReadLock();
+                }
+            }
+        }
+
+        public void IsReadLockHeld_Unreachable()
+        {
+            readerWriterLockSlim.EnterReadLock();
+            if (readerWriterLockSlim.IsReadLockHeld)    // Noncompliant, ends up unreleased on If path, and released on Else path
+            {
+                //
+            }
+            else
+            {
+                readerWriterLockSlim.ExitReadLock();
+            }
+        }
+
+        public void IsReadLockHeld_WriteLockReleased_OutOfScope()
+        {
+            if (readerWriterLockSlim.IsReadLockHeld)    // Noncompliant, this rule doesn't care about lock type mismatch
+            {
+                if (condition)
+                {
+                    readerWriterLockSlim.ExitWriteLock();
+                }
+            }
+        }
+
         public void IsWriteLockHeld()
         {
-            readerWriterLockSlim.EnterWriteLock(); // Noncompliant FP, https://github.com/SonarSource/sonar-dotnet/issues/5416
+            readerWriterLockSlim.EnterWriteLock();  // Compliant, https://github.com/SonarSource/sonar-dotnet/issues/5416
             if (readerWriterLockSlim.IsWriteLockHeld)
             {
                 readerWriterLockSlim.ExitWriteLock();
             }
+        }
+
+        public void IsWriterLockHeld_Noncompliant()
+        {
+            if (readerWriterLockSlim.IsWriteLockHeld)  // Noncompliant
+            {
+                if (condition)
+                {
+                    readerWriterLockSlim.ExitWriteLock();
+                }
+            }
+        }
+
+        public void IsUpgradeableReadLockHeld_Noncompliant()
+        {
+            if (readerWriterLockSlim.IsUpgradeableReadLockHeld) // Noncompliant
+            {
+                if (condition)
+                {
+                    readerWriterLockSlim.ExitReadLock();
+                }
+            }
+        }
+
+        public void IsReadLockHeld_UntrackedValue(Program untracked)
+        {
+            if (untracked.readerWriterLockSlim.IsReadLockHeld)    // We do not track fields of other instances
+            {
+                if (condition)
+                {
+                    readerWriterLockSlim.ExitReadLock();
+                }
+            }
+        }
+
+        public void OtherBoolProperty_Coverage(int? arg)
+        {
+            if (arg.HasValue)
+            {
+                readerWriterLockSlim.EnterReadLock();
+                readerWriterLockSlim.ExitReadLock();
+            }
+        }
+
+        public void SameProperty_AnotherType_Coverage()
+        {
+            var somethingElse = new SomethingElse();
+            if (somethingElse.IsReadLockHeld)
+            {
+                if (condition)
+                {
+                    somethingElse.ExitReadLock();
+                }
+            }
+        }
+
+        private class SomethingElse
+        {
+            public bool IsReadLockHeld { get; }
+
+            public void ExitReadLock() { }
         }
     }
 }
