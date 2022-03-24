@@ -189,8 +189,8 @@ Namespace Monitor_Conditions
         End Sub
 
         Public Sub Method24(Condition As Boolean)
-            Dim isAcquired As Boolean = False
-            Dim somethingElse = New Object()
+            Dim IsAcquired As Boolean
+            Dim somethingElse As New Object()
             Monitor.Enter(Obj, isAcquired)
 
             If Not isAcquired Then

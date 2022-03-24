@@ -104,7 +104,7 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn.RuleChecks
             }
             else
             {
-                return new[] { PostProcessSimple(context) };
+                return base.PostProcess(context);
             }
         }
 
@@ -211,30 +211,17 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn.RuleChecks
         private static ISymbol ArgumentSymbol(IInvocationOperationWrapper invocation, int argumentPosition) =>
             IArgumentOperationWrapper.FromOperation(invocation.Arguments[argumentPosition]).Value.TrackedSymbol();
 
-        private static bool IsInvocationWithBoolRefParam(IInvocationOperationWrapper invocation, KnownType type, int numberOfArguments, int refParameterPosition, params string[] methodNames) =>
+        private static bool IsInvocationWithBoolRefParam(IInvocationOperationWrapper invocation, KnownType type, int parameterCount, int refParameterIndex, params string[] methodNames) =>
             invocation.TargetMethod.IsAny(type, methodNames)
-            && invocation.Arguments.Length == numberOfArguments
-            && invocation.TargetMethod.Parameters[refParameterPosition].IsType(KnownType.System_Boolean);
+            && invocation.Arguments.Length == parameterCount
+            && invocation.TargetMethod.Parameters[refParameterIndex].IsType(KnownType.System_Boolean);
 
-        private ProgramState[] HeldAndNotHeldStates(SymbolicContext context, ISymbol lockSymbol, ISymbol refParameter)
-        {
-            ProgramState lockHeldState;
-            ProgramState lockNotHeldState;
-            var refParamSymbolicValue = context.State[refParameter];
-            lockHeldState = AddLock(context, lockSymbol);
-            if (refParamSymbolicValue == null)
+        private ProgramState[] HeldAndNotHeldStates(SymbolicContext context, ISymbol lockSymbol, ISymbol refParameter) =>
+            new[]
             {
-                lockHeldState = lockHeldState.SetSymbolConstraint(refParameter, new(), BoolConstraint.True);
-                lockNotHeldState = context.State.SetSymbolConstraint(refParameter, new(), BoolConstraint.False);
-            }
-            else
-            {
-                lockHeldState = lockHeldState.SetSymbolValue(refParameter, refParamSymbolicValue.WithConstraint(BoolConstraint.True));
-                lockNotHeldState = lockHeldState.SetSymbolValue(refParameter, refParamSymbolicValue.WithConstraint(BoolConstraint.False));
-            }
-
-            return new[] { lockHeldState, lockNotHeldState };
-        }
+                AddLock(context, lockSymbol).SetSymbolConstraint(refParameter, context.SymbolicValueCounter, BoolConstraint.True),
+                context.State.SetSymbolConstraint(refParameter, context.SymbolicValueCounter, BoolConstraint.False)
+            };
 
         protected sealed class LockAcquireReleaseCollector
         {
