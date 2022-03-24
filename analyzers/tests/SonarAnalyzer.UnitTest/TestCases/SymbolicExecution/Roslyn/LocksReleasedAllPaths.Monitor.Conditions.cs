@@ -323,6 +323,27 @@ namespace Monitor_Conditions
             }
         }
 
+        public void Method25()
+        {
+            bool isAcquired = false;
+            Monitor.Enter(lockTaken: ref isAcquired, obj: obj ); // Noncompliant
+            if (condition)
+            {
+                Monitor.Exit(obj);
+            }
+        }
+
+
+        public void Method26()
+        {
+            bool isAcquired = false;
+            Monitor.Enter(lockTaken: ref isAcquired, obj: obj);
+            if (isAcquired)
+            {
+                Monitor.Exit(obj);
+            }
+        }
+
         public void SameObject_SameField(Program arg, bool condition)
         {
             Monitor.Enter(arg.obj); // FN, because we are not field sensitive

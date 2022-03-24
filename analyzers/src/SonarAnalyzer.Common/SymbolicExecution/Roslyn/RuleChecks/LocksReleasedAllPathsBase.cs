@@ -88,19 +88,19 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn.RuleChecks
 
             if (IsInvocationWithBoolRefParam(invocation, KnownType.System_Threading_Monitor, 2, 1, "Enter", "TryEnter"))
             {
-                return HeldAndNotHeldStates(context, ArgumentSymbol(invocation, 0), ArgumentSymbol(invocation, 1));
+                return HeldAndNotHeldStates(context, ArgumentSymbol(invocation, 0, "obj"), ArgumentSymbol(invocation, 1 , "lockTaken"));
             }
             else if (IsInvocationWithBoolRefParam(invocation, KnownType.System_Threading_Monitor, 3, 2, "TryEnter"))
             {
-                return HeldAndNotHeldStates(context, ArgumentSymbol(invocation, 0), ArgumentSymbol(invocation, 2));
+                return HeldAndNotHeldStates(context, ArgumentSymbol(invocation, 0, "obj"), ArgumentSymbol(invocation, 2, "lockTaken"));
             }
             else if (IsInvocationWithBoolRefParam(invocation, KnownType.System_Threading_SpinLock, 1, 0, "Enter", "TryEnter"))
             {
-                return HeldAndNotHeldStates(context, invocation.Instance.TrackedSymbol(), ArgumentSymbol(invocation, 0));
+                return HeldAndNotHeldStates(context, invocation.Instance.TrackedSymbol(), ArgumentSymbol(invocation, 0, "lockTaken"));
             }
             else if (IsInvocationWithBoolRefParam(invocation, KnownType.System_Threading_SpinLock, 2, 1, "TryEnter"))
             {
-                return HeldAndNotHeldStates(context, invocation.Instance.TrackedSymbol(), ArgumentSymbol(invocation, 1));
+                return HeldAndNotHeldStates(context, invocation.Instance.TrackedSymbol(), ArgumentSymbol(invocation, 1, "lockTaken"));
             }
             else
             {
@@ -171,10 +171,10 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn.RuleChecks
         }
 
         private ProgramState ProcessMonitorEnter(SymbolicContext context, IInvocationOperationWrapper invocation) =>
-            AddLock(context, ArgumentSymbol(invocation, 0));
+            AddLock(context, ArgumentSymbol(invocation, 0, "obj"));
 
         private ProgramState ProcessMonitorExit(SymbolicContext context, IInvocationOperationWrapper invocation) =>
-            RemoveLock(context, ArgumentSymbol(invocation, 0));
+            RemoveLock(context, ArgumentSymbol(invocation, 0, "obj"));
 
         private ProgramState ProcessInvocationInstanceAcquireLock(SymbolicContext context, IInvocationOperationWrapper invocation) =>
             AddLock(context, invocation.Instance.TrackedSymbol());
@@ -208,8 +208,26 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn.RuleChecks
         private static ProgramState AddLock(SymbolicContext context, IOperation operation) =>
             context.State.SetOperationConstraint(operation, context.SymbolicValueCounter, LockConstraint.Held);
 
-        private static ISymbol ArgumentSymbol(IInvocationOperationWrapper invocation, int argumentPosition) =>
-            IArgumentOperationWrapper.FromOperation(invocation.Arguments[argumentPosition]).Value.TrackedSymbol();
+        private static ISymbol ArgumentSymbol(IInvocationOperationWrapper invocation, int argumentIndex, string parameterName)
+        {
+            if (IArgumentOperationWrapper.FromOperation(invocation.Arguments[argumentIndex]) is { } argumentOperation
+                && argumentOperation.Parameter.Name == parameterName)
+            {
+                return argumentOperation.Value.TrackedSymbol();
+            }
+            else
+            {
+                for (int i = 0; i < invocation.Arguments.Length; i++)
+                {
+                    if (IArgumentOperationWrapper.FromOperation(invocation.Arguments[i]) is { } namedArgumentOperation
+                        && namedArgumentOperation.Parameter.Name == parameterName)
+                    {
+                        return namedArgumentOperation.Value.TrackedSymbol();
+                    }
+                }
+            }
+            return null;
+        }
 
         private static bool IsInvocationWithBoolRefParam(IInvocationOperationWrapper invocation, KnownType type, int parameterCount, int refParameterIndex, params string[] methodNames) =>
             invocation.TargetMethod.IsAny(type, methodNames)
