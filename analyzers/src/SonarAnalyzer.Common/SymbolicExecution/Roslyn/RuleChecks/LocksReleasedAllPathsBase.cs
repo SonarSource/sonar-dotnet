@@ -79,34 +79,10 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn.RuleChecks
             return collector.LockAcquiredAndReleased;
         }
 
-        public override ProgramState[] PostProcess(SymbolicContext context)
-        {
-            if (context.Operation.Instance.AsInvocation() is not { } invocation)
-            {
-                return new[] { PostProcessSimple(context) };
-            }
-
-            if (IsInvocationWithBoolRefParam(invocation, KnownType.System_Threading_Monitor, 2, 1, "Enter", "TryEnter"))
-            {
-                return HeldAndNotHeldStates(context, ArgumentSymbol(invocation, 0, "obj"), ArgumentSymbol(invocation, 1 , "lockTaken"));
-            }
-            else if (IsInvocationWithBoolRefParam(invocation, KnownType.System_Threading_Monitor, 3, 2, "TryEnter"))
-            {
-                return HeldAndNotHeldStates(context, ArgumentSymbol(invocation, 0, "obj"), ArgumentSymbol(invocation, 2, "lockTaken"));
-            }
-            else if (IsInvocationWithBoolRefParam(invocation, KnownType.System_Threading_SpinLock, 1, 0, "Enter", "TryEnter"))
-            {
-                return HeldAndNotHeldStates(context, invocation.Instance.TrackedSymbol(), ArgumentSymbol(invocation, 0, "lockTaken"));
-            }
-            else if (IsInvocationWithBoolRefParam(invocation, KnownType.System_Threading_SpinLock, 2, 1, "TryEnter"))
-            {
-                return HeldAndNotHeldStates(context, invocation.Instance.TrackedSymbol(), ArgumentSymbol(invocation, 1, "lockTaken"));
-            }
-            else
-            {
-                return base.PostProcess(context);
-            }
-        }
+        public override ProgramState[] PostProcess(SymbolicContext context) =>
+            context.Operation.Instance.Kind == OperationKindEx.Invocation && FindRefParam(context) is { } refParamContext
+                ? HeldAndNotHeldStates(refParamContext)
+                : base.PostProcess(context);
 
         public override ProgramState ConditionEvaluated(SymbolicContext context)
         {
@@ -217,7 +193,7 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn.RuleChecks
             }
             else
             {
-                for (int i = 0; i < invocation.Arguments.Length; i++)
+                for (var i = 0; i < invocation.Arguments.Length; i++)
                 {
                     if (IArgumentOperationWrapper.FromOperation(invocation.Arguments[i]) is { } namedArgumentOperation
                         && namedArgumentOperation.Parameter.Name == parameterName)
@@ -229,16 +205,49 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn.RuleChecks
             return null;
         }
 
+        private static RefParamContext FindRefParam(SymbolicContext context) =>
+            InvocationWithLockObjectAndBoolRefParam(context, KnownType.System_Threading_Monitor, 2, 1, "obj", "lockTaken", "Enter", "TryEnter")
+            ?? InvocationWithLockObjectAndBoolRefParam(context, KnownType.System_Threading_Monitor, 3, 2, "obj", "lockTaken", "TryEnter")
+            ?? InvocationWithBoolRefParam(context, KnownType.System_Threading_SpinLock, 1, 0, "lockTaken", "Enter", "TryEnter")
+            ?? InvocationWithBoolRefParam(context, KnownType.System_Threading_SpinLock, 2, 1, "lockTaken", "TryEnter");
+
+        private static RefParamContext InvocationWithLockObjectAndBoolRefParam(SymbolicContext context,
+                                                                               KnownType type,
+                                                                               int parameterCount,
+                                                                               int refParameterIndex,
+                                                                               string lockObjectParameterName,
+                                                                               string refParameterName,
+                                                                               params string[] methodNames) =>
+            context.Operation.Instance.AsInvocation() is { } invocation
+            && IsInvocationWithBoolRefParam(invocation, type, parameterCount, refParameterIndex, methodNames)
+            && ArgumentSymbol(invocation, 0, lockObjectParameterName) is { } lockObject
+            && ArgumentSymbol(invocation, refParameterIndex, refParameterName) is { } refParameter
+                ? new RefParamContext(context, lockObject, refParameter)
+                : null;
+
+        private static RefParamContext InvocationWithBoolRefParam(SymbolicContext context,
+                                                                  KnownType type,
+                                                                  int parameterCount,
+                                                                  int refParameterIndex,
+                                                                  string refParameterName,
+                                                                  params string[] methodNames) =>
+            context.Operation.Instance.AsInvocation() is { } invocation
+            && IsInvocationWithBoolRefParam(invocation, type, parameterCount, refParameterIndex, methodNames)
+            && invocation.Instance.TrackedSymbol() is { } lockObject
+            && ArgumentSymbol(invocation, refParameterIndex, refParameterName) is { } refParameter
+                ? new RefParamContext(context, lockObject, refParameter)
+                : null;
+
         private static bool IsInvocationWithBoolRefParam(IInvocationOperationWrapper invocation, KnownType type, int parameterCount, int refParameterIndex, params string[] methodNames) =>
             invocation.TargetMethod.IsAny(type, methodNames)
-            && invocation.Arguments.Length == parameterCount
+            && invocation.TargetMethod.Parameters.Length == parameterCount
             && invocation.TargetMethod.Parameters[refParameterIndex].IsType(KnownType.System_Boolean);
 
-        private ProgramState[] HeldAndNotHeldStates(SymbolicContext context, ISymbol lockSymbol, ISymbol refParameter) =>
+        private ProgramState[] HeldAndNotHeldStates(RefParamContext context) =>
             new[]
             {
-                AddLock(context, lockSymbol).SetSymbolConstraint(refParameter, context.SymbolicValueCounter, BoolConstraint.True),
-                context.State.SetSymbolConstraint(refParameter, context.SymbolicValueCounter, BoolConstraint.False)
+                AddLock(context.SymbolicContext, context.LockSymbol).SetSymbolConstraint(context.RefParamSymbol, context.SymbolicContext.SymbolicValueCounter, BoolConstraint.True),
+                context.SymbolicContext.State.SetSymbolConstraint(context.RefParamSymbol, context.SymbolicContext.SymbolicValueCounter, BoolConstraint.False)
             };
 
         protected sealed class LockAcquireReleaseCollector
@@ -278,5 +287,7 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn.RuleChecks
                 lockReleased = lockReleased || ReleaseMethods.Contains(name);
             }
         }
+
+        private sealed record RefParamContext(SymbolicContext SymbolicContext, ISymbol LockSymbol, ISymbol RefParamSymbol) { }
     }
 }
