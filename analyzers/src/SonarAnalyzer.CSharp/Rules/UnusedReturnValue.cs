@@ -95,7 +95,7 @@ namespace SonarAnalyzer.Rules.CSharp
             }
 
             var localFunctionSymbol = (IMethodSymbol)context.SemanticModel.GetDeclaredSymbol(localFunctionSyntax);
-            if (localFunctionSymbol.ReturnsVoid)
+            if (localFunctionSymbol.ReturnsVoid || localFunctionSymbol.IsAsync)
             {
                 return;
             }
@@ -137,6 +137,6 @@ namespace SonarAnalyzer.Rules.CSharp
                     .SelectMany(container => container.Node.DescendantNodes(CSharpRemovableDeclarationCollector.IsNodeContainerTypeDeclaration)
                         .OfType<MethodDeclarationSyntax>()
                         .Select(x => new NodeSymbolAndSemanticModel<MethodDeclarationSyntax, IMethodSymbol>(container.SemanticModel, x, container.SemanticModel.GetDeclaredSymbol(x))))
-                        .Where(x => x.Symbol is { ReturnsVoid: false } && CSharpRemovableDeclarationCollector.IsRemovable(x.Symbol, Accessibility.Private));
+                        .Where(x => x.Symbol is { ReturnsVoid: false, IsAsync: false } && CSharpRemovableDeclarationCollector.IsRemovable(x.Symbol, Accessibility.Private));
     }
 }

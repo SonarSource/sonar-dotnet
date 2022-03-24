@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace Tests.Diagnostics
 {
@@ -27,11 +28,13 @@ namespace Tests.Diagnostics
         private int MyMethod2() { return 42; }
         private int MyMethod3() { return 42; }
         private void MyMethod4() { return; }
+        private async Task MyAsyncMethod() { return; }
 
         public void Test()
         {
             MyMethod();
             MyMethod4();
+            MyAsyncMethod();
             var i = MyMethod2();
             Action<int> a = (x) => MyMethod();
             Func<int> f = () => MyMethod3();
