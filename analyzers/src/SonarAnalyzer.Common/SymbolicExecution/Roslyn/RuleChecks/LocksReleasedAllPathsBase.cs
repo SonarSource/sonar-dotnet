@@ -108,6 +108,23 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn.RuleChecks
             }
         }
 
+        public override ProgramState ConditionEvaluated(SymbolicContext context)
+        {
+            if (context.Operation.Instance.AsPropertyReference() is { } property
+                && IsLockHeldProperties.Contains(property.Property.Name)
+                && property.Property.ContainingType.IsAny(KnownType.System_Threading_ReaderWriterLock, KnownType.System_Threading_ReaderWriterLockSlim)
+                && property.Instance.TrackedSymbol() is { } lockSymbol)
+            {
+                return context.State[context.Operation].HasConstraint(BoolConstraint.True)  // Is it a branch with the Lock held?
+                    ? AddLock(context, lockSymbol)
+                    : RemoveLock(context, lockSymbol);
+            }
+            else
+            {
+                return context.State;
+            }
+        }
+
         protected override ProgramState PostProcessSimple(SymbolicContext context)
         {
             if (context.Operation.Instance.AsObjectCreation() is { } objectCreation)
