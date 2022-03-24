@@ -1870,7 +1870,7 @@
     <value>Critical Bug</value>
   </data>
   <data name="S2222_Description" xml:space="preserve">
-    <value>If a lock is acquired and released within a method, then it must be released along all execution paths of that method.</value>
+    <value>If a lock is known to be held or acquired, and then released within a method, then it must be released along all execution paths of that method.</value>
   </data>
   <data name="S2222_IsActivatedByDefault" xml:space="preserve">
     <value>False</value>
