@@ -81,7 +81,11 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn.RuleChecks
 
         public override ProgramState[] PostProcess(SymbolicContext context) =>
             context.Operation.Instance.Kind == OperationKindEx.Invocation && FindRefParam(context) is { } refParamContext
-                ? HeldAndNotHeldStates(refParamContext)
+                ? new[]
+                  {
+                      refParamContext.SetRefConstraint(AddLock(refParamContext.SymbolicContext, refParamContext.LockSymbol), BoolConstraint.True),
+                      refParamContext.SetRefConstraint(refParamContext.SymbolicContext.State, BoolConstraint.False),
+                  }
                 : base.PostProcess(context);
 
         public override ProgramState ConditionEvaluated(SymbolicContext context)
@@ -184,75 +188,51 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn.RuleChecks
         private static ProgramState AddLock(SymbolicContext context, IOperation operation) =>
             context.State.SetOperationConstraint(operation, context.SymbolicValueCounter, LockConstraint.Held);
 
-        private static ISymbol ArgumentSymbol(IInvocationOperationWrapper invocation, int argumentIndex, string parameterName)
+        private static ISymbol ArgumentSymbol(IInvocationOperationWrapper invocation, int argumentIndex, string parameterName) =>
+            invocation.Arguments[argumentIndex].ToArgument() is var argument
+            && argument.Parameter.Name == parameterName
+                ? argument.Value.TrackedSymbol()
+                : invocation.Arguments.SingleOrDefault(x => x.ToArgument() is var namedArgument && namedArgument.Parameter.Name == parameterName).ToArgument().Value.TrackedSymbol();
+
+        private static RefParamContext FindRefParam(SymbolicContext context) =>
+            BoolRefParamFromArgument(context, KnownType.System_Threading_Monitor, "obj", "Enter", "TryEnter")
+            ?? BoolRefParamFromArgument(context, KnownType.System_Threading_Monitor, "obj", "TryEnter")
+            ?? BoolRefParamFromInstance(context, KnownType.System_Threading_SpinLock, "Enter", "TryEnter")
+            ?? BoolRefParamFromInstance(context, KnownType.System_Threading_SpinLock, "TryEnter");
+
+        private static RefParamContext BoolRefParamFromArgument(SymbolicContext context, KnownType type, string lockObjectParameterName, params string[] methodNames) =>
+            context.Operation.Instance.AsInvocation() is { } invocation
+            && InvocationBoolRefSymbol(invocation, type, methodNames) is { } refParameter
+            && ArgumentSymbol(invocation, 0, lockObjectParameterName) is { } lockObject
+                ? new RefParamContext(context, lockObject, refParameter)
+                : null;
+
+        private static RefParamContext BoolRefParamFromInstance(SymbolicContext context, KnownType type, params string[] methodNames) =>
+            context.Operation.Instance.AsInvocation() is { } invocation
+            && InvocationBoolRefSymbol(invocation, type, methodNames) is { } refParameter
+            && invocation.Instance.TrackedSymbol() is { } lockObject
+                ? new RefParamContext(context, lockObject, refParameter)
+                : null;
+
+        private static ISymbol InvocationBoolRefSymbol(IInvocationOperationWrapper invocation, KnownType type, params string[] methodNames)
         {
-            if (IArgumentOperationWrapper.FromOperation(invocation.Arguments[argumentIndex]) is { } argumentOperation
-                && argumentOperation.Parameter.Name == parameterName)
+            if (invocation.TargetMethod.IsAny(type, methodNames))
             {
-                return argumentOperation.Value.TrackedSymbol();
-            }
-            else
-            {
-                for (var i = 0; i < invocation.Arguments.Length; i++)
+                for (var i = 0; i < invocation.TargetMethod.Parameters.Length; i++)
                 {
-                    if (IArgumentOperationWrapper.FromOperation(invocation.Arguments[i]) is { } namedArgumentOperation
-                        && namedArgumentOperation.Parameter.Name == parameterName)
+                    if (invocation.TargetMethod.Parameters[i].IsType(KnownType.System_Boolean)
+                        && invocation.TargetMethod.Parameters[i].Name == "lockTaken")
                     {
-                        return namedArgumentOperation.Value.TrackedSymbol();
+                        return ArgumentSymbol(invocation, i, "lockTaken");
                     }
                 }
             }
             return null;
         }
 
-        private static RefParamContext FindRefParam(SymbolicContext context) =>
-            InvocationWithLockObjectAndBoolRefParam(context, KnownType.System_Threading_Monitor, 2, 1, "obj", "lockTaken", "Enter", "TryEnter")
-            ?? InvocationWithLockObjectAndBoolRefParam(context, KnownType.System_Threading_Monitor, 3, 2, "obj", "lockTaken", "TryEnter")
-            ?? InvocationWithBoolRefParam(context, KnownType.System_Threading_SpinLock, 1, 0, "lockTaken", "Enter", "TryEnter")
-            ?? InvocationWithBoolRefParam(context, KnownType.System_Threading_SpinLock, 2, 1, "lockTaken", "TryEnter");
-
-        private static RefParamContext InvocationWithLockObjectAndBoolRefParam(SymbolicContext context,
-                                                                               KnownType type,
-                                                                               int parameterCount,
-                                                                               int refParameterIndex,
-                                                                               string lockObjectParameterName,
-                                                                               string refParameterName,
-                                                                               params string[] methodNames) =>
-            context.Operation.Instance.AsInvocation() is { } invocation
-            && IsInvocationWithBoolRefParam(invocation, type, parameterCount, refParameterIndex, methodNames)
-            && ArgumentSymbol(invocation, 0, lockObjectParameterName) is { } lockObject
-            && ArgumentSymbol(invocation, refParameterIndex, refParameterName) is { } refParameter
-                ? new RefParamContext(context, lockObject, refParameter)
-                : null;
-
-        private static RefParamContext InvocationWithBoolRefParam(SymbolicContext context,
-                                                                  KnownType type,
-                                                                  int parameterCount,
-                                                                  int refParameterIndex,
-                                                                  string refParameterName,
-                                                                  params string[] methodNames) =>
-            context.Operation.Instance.AsInvocation() is { } invocation
-            && IsInvocationWithBoolRefParam(invocation, type, parameterCount, refParameterIndex, methodNames)
-            && invocation.Instance.TrackedSymbol() is { } lockObject
-            && ArgumentSymbol(invocation, refParameterIndex, refParameterName) is { } refParameter
-                ? new RefParamContext(context, lockObject, refParameter)
-                : null;
-
-        private static bool IsInvocationWithBoolRefParam(IInvocationOperationWrapper invocation, KnownType type, int parameterCount, int refParameterIndex, params string[] methodNames) =>
-            invocation.TargetMethod.IsAny(type, methodNames)
-            && invocation.TargetMethod.Parameters.Length == parameterCount
-            && invocation.TargetMethod.Parameters[refParameterIndex].IsType(KnownType.System_Boolean);
-
-        private ProgramState[] HeldAndNotHeldStates(RefParamContext context) =>
-            new[]
-            {
-                AddLock(context.SymbolicContext, context.LockSymbol).SetSymbolConstraint(context.RefParamSymbol, context.SymbolicContext.SymbolicValueCounter, BoolConstraint.True),
-                context.SymbolicContext.State.SetSymbolConstraint(context.RefParamSymbol, context.SymbolicContext.SymbolicValueCounter, BoolConstraint.False)
-            };
-
         protected sealed class LockAcquireReleaseCollector
         {
-            private static readonly string LockType = "Mutex"; // For some APIs ctor can directly acquire the lock (e.g. Mutex).
+            private const string LockType = "Mutex"; // For some APIs ctor can directly acquire the lock (e.g. Mutex).
 
             private static readonly HashSet<string> LockMethods = new(ReaderWriterLockSlimLockMethods)
             {
@@ -288,6 +268,10 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn.RuleChecks
             }
         }
 
-        private sealed record RefParamContext(SymbolicContext SymbolicContext, ISymbol LockSymbol, ISymbol RefParamSymbol) { }
+        private sealed record RefParamContext(SymbolicContext SymbolicContext, ISymbol LockSymbol, ISymbol RefParamSymbol)
+        {
+            public ProgramState SetRefConstraint(ProgramState state, SymbolicConstraint constraint) =>
+                state.SetSymbolConstraint(RefParamSymbol, SymbolicContext.SymbolicValueCounter, constraint);
+        }
     }
 }
