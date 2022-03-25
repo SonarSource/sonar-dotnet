@@ -136,7 +136,7 @@ Namespace ReaderWriterLockSlim_Type
         End Sub
 
         Public Sub Method15()
-            If rwLockSlim.TryEnterReadLock(42) Then ' Noncompliant FP
+            If rwLockSlim.TryEnterReadLock(42) Then
                 rwLockSlim.ExitReadLock()
             End If
         End Sub

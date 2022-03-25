@@ -20,7 +20,7 @@ namespace Monitor_TryEnter
 
         public void Method2()
         {
-            if (Monitor.TryEnter(obj)) // Noncompliant FP, we don't track the boolean result yet
+            if (Monitor.TryEnter(obj))
             {
                 Monitor.Exit(obj);
             }
@@ -86,7 +86,7 @@ namespace Monitor_TryEnter
 
         public void Method8()
         {
-            bool isAcquired = Monitor.TryEnter(obj, 42); // Noncompliant FP, isAcquired is not tracked properly yet
+            bool isAcquired = Monitor.TryEnter(obj, 42);
 
             if (isAcquired)
             {
@@ -108,7 +108,7 @@ namespace Monitor_TryEnter
 
         public void Method11()
         {
-            switch (Monitor.TryEnter(obj)) // Noncompliant FP, bool result is not tracked properly yet
+            switch (Monitor.TryEnter(obj))
             {
                 case true:
                     Monitor.Exit(obj);
@@ -162,7 +162,7 @@ namespace Monitor_TryEnter
 
         public void TryEnterInsideIf_Finally()
         {
-            if (Monitor.TryEnter(obj, 500)) // Noncompliant FP - there are multiple occurences of this on peach. https://github.com/SonarSource/sonar-dotnet/issues/5415
+            if (Monitor.TryEnter(obj, 500)) // Compliant https://github.com/SonarSource/sonar-dotnet/issues/5415
             {
                 try
                 {
@@ -179,7 +179,7 @@ namespace Monitor_TryEnter
             bool lockTaken = false;
             try
             {
-                lockTaken = Monitor.TryEnter(obj); // Noncompliant FP - there are multiple occurences of this on peach. https://github.com/SonarSource/sonar-dotnet/issues/5415
+                lockTaken = Monitor.TryEnter(obj); // Compliant https://github.com/SonarSource/sonar-dotnet/issues/5415
             }
             finally
             {
@@ -190,7 +190,7 @@ namespace Monitor_TryEnter
 
         public void TryEnter_EarlyExit()
         {
-            if (Monitor.TryEnter(obj) == false) // Noncompliant FP - there are multiple occurences of this on peach. https://github.com/SonarSource/sonar-dotnet/issues/5415
+            if (Monitor.TryEnter(obj) == false)
                 return;
 
             try

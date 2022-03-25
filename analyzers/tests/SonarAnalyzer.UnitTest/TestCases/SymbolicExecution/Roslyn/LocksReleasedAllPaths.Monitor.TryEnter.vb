@@ -15,7 +15,7 @@ Namespace Monitor_TryEnter
         End Sub
 
         Public Sub Method2()
-            If Monitor.TryEnter(Obj) Then ' Noncompliant FP, we don't track the boolean result yet
+            If Monitor.TryEnter(Obj) Then
                 Monitor.Exit(Obj)
             Else
             End If
@@ -56,7 +56,7 @@ Namespace Monitor_TryEnter
         End Sub
 
         Public Sub Method8()
-            Dim IsAcquired As Boolean = Monitor.TryEnter(Obj, 42) ' Noncompliant FP, isAcquired Is Not tracked properly yet
+            Dim IsAcquired As Boolean = Monitor.TryEnter(Obj, 42)
             If IsAcquired Then Monitor.Exit(Obj)
         End Sub
 

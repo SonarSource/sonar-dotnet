@@ -79,14 +79,29 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn.RuleChecks
             return collector.LockAcquiredAndReleased;
         }
 
-        public override ProgramState[] PostProcess(SymbolicContext context) =>
-            context.Operation.Instance.Kind == OperationKindEx.Invocation && FindRefParam(context) is { } refParamContext
-                ? new[]
-                  {
+        public override ProgramState[] PostProcess(SymbolicContext context)
+        {
+            if (FindRefParam(context) is { } refParamContext)
+            {
+                return new[]
+                {
                       refParamContext.SetRefConstraint(BoolConstraint.True, AddLock(refParamContext.SymbolicContext, refParamContext.LockSymbol)),
                       refParamContext.SetRefConstraint(BoolConstraint.False, refParamContext.SymbolicContext.State),
-                  }
-                : base.PostProcess(context);
+                };
+            }
+            else if (FindLockSymbolIfConditionalReturnValue(context) is { } lockSymbol)
+            {
+                return new[]
+                {
+                    AddLock(context, lockSymbol).SetOperationConstraint(context.Operation, context.SymbolicValueCounter, BoolConstraint.True),
+                    context.SetOperationConstraint(BoolConstraint.False)
+                };
+            }
+            else
+            {
+                return base.PostProcess(context);
+            }
+        }
 
         public override ProgramState ConditionEvaluated(SymbolicContext context)
         {
@@ -194,6 +209,24 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn.RuleChecks
             && argument.Parameter.Name == parameterName
                 ? argument.Value.TrackedSymbol()
                 : invocation.Arguments.SingleOrDefault(x => x.ToArgument().Parameter.Name == parameterName)?.ToArgument().Value.TrackedSymbol();
+
+        private static ISymbol FindLockSymbolIfConditionalReturnValue(SymbolicContext context)
+        {
+            if (context.Operation.Instance.AsInvocation() is  { } invocation
+                && invocation.TargetMethod.ReturnType.Is(KnownType.System_Boolean))
+            {
+                if (invocation.TargetMethod.IsAny(KnownType.System_Threading_Monitor, "TryEnter"))
+                {
+                    return ArgumentSymbol(invocation, 0);
+                }
+                else if (invocation.TargetMethod.IsAny(KnownType.System_Threading_WaitHandle, "WaitOne")
+                         || invocation.TargetMethod.IsAny(KnownType.System_Threading_ReaderWriterLockSlim, "TryEnterReadLock", "TryEnterUpgradeableReadLock", "TryEnterWriteLock"))
+                {
+                    return invocation.Instance.TrackedSymbol();
+                }
+            }
+            return null;
+        }
 
         private static RefParamContext FindRefParam(SymbolicContext context) =>
             BoolRefParamFromArgument(context, KnownType.System_Threading_Monitor, "Enter", "TryEnter")
