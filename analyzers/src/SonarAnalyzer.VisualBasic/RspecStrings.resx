@@ -1873,7 +1873,7 @@
     <value>If a lock is known to be held or acquired, and then released within a method, then it must be released along all execution paths of that method.</value>
   </data>
   <data name="S2222_IsActivatedByDefault" xml:space="preserve">
-    <value>False</value>
+    <value>True</value>
   </data>
   <data name="S2222_Remediation" xml:space="preserve">
     <value>Constant/Issue</value>

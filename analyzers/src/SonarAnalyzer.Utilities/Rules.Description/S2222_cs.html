@@ -1,9 +1,8 @@
 <p>If a lock is known to be held or acquired, and then released within a method, then it must be released along all execution paths of that
 method.</p>
 <p>Failing to do so will expose the conditional locking logic to the method’s callers and hence be deadlock-prone.</p>
-<p>The types tracked by the rule are: Monitor, Mutex, ReaderWriterLock, ReaderWriterLockSlim and SpinLock from the <code>System.Threading</code>
-namespace.</p>
-<p>Note that the rule is currently in an experimental phase.</p>
+<p>The types tracked by the rule are: <code>Monitor</code>, <code>Mutex</code>, <code>ReaderWriterLock</code>, <code>ReaderWriterLockSlim</code> and
+<code>SpinLock</code> from the <code>System.Threading</code> namespace.</p>
 <h2>Noncompliant Code Example</h2>
 <pre>
 class MyClass
