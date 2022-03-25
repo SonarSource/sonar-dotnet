@@ -80,7 +80,19 @@ Namespace Monitor_TryEnter
 
         Public Sub Method13()
             Dim IsAcquired As Boolean
-            Monitor.TryEnter(Obj, 42, IsAcquired)  ' Noncompliant FP, isAcquired Is Not tracked properly yet
+            Monitor.TryEnter(Obj, 42, IsAcquired)
+            If IsAcquired Then Monitor.Exit(Obj)
+        End Sub
+
+        Public Sub Method14(Condition As Boolean)
+            Dim IsAcquired As Boolean
+            Monitor.TryEnter(Obj, IsAcquired) ' Noncompliant
+            If Condition Then Monitor.Exit(Obj)
+        End Sub
+
+        Public Sub Method15()
+            Dim IsAcquired As Boolean
+            Monitor.TryEnter(Obj, IsAcquired)
             If IsAcquired Then Monitor.Exit(Obj)
         End Sub
 

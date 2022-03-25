@@ -55,14 +55,14 @@ Namespace SpinLock_Type
         Public Sub Enter_UseReturnValueToReleaseOnlyWhenNeeded()
             Dim sl As New SpinLock(False)
             Dim IsAcquired As Boolean
-            sl.Enter(IsAcquired) ' Noncompliant, FP
+            sl.Enter(IsAcquired)
             If IsAcquired Then sl.Exit()
         End Sub
 
         Public Sub TryEnter_UseReturnValueToReleaseOnlyWhenNeeded()
             Dim sl As New SpinLock(False)
             Dim IsAcquired As Boolean
-            sl.TryEnter(IsAcquired) ' Noncompliant, FP
+            sl.TryEnter(IsAcquired)
             If IsAcquired Then sl.Exit()
         End Sub
 

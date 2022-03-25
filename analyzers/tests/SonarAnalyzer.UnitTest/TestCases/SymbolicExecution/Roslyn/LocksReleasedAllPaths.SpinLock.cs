@@ -6,6 +6,7 @@ namespace SpinLock_Type
     class Program
     {
         private bool condition;
+        public SpinLock spinLock;
 
         public void Enter_PartialExit()
         {
@@ -81,7 +82,7 @@ namespace SpinLock_Type
         {
             SpinLock sl = new SpinLock(false);
             bool isAcquired = false;
-            sl.Enter(ref isAcquired); // Noncompliant, FP
+            sl.Enter(ref isAcquired);
             if (isAcquired)
             {
                 sl.Exit();
@@ -92,7 +93,7 @@ namespace SpinLock_Type
         {
             SpinLock sl = new SpinLock(false);
             bool isAcquired = false;
-            sl.TryEnter(ref isAcquired); // Noncompliant, FP
+            sl.TryEnter(ref isAcquired);
             if (isAcquired)
             {
                 sl.Exit();
@@ -105,6 +106,16 @@ namespace SpinLock_Type
             bool isAcquired = false;
             sl.Enter(ref isAcquired); // Compliant
             sl.Exit();
+        }
+
+        public void Enter_PartialExitWithProperty(Program arg)
+        {
+            bool isAcquired = false;
+            arg.spinLock.Enter(ref isAcquired); // FN
+            if (condition)
+            {
+                arg.spinLock.Exit();
+            }
         }
     }
 }

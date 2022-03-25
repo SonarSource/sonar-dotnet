@@ -175,7 +175,7 @@ Namespace Monitor_Conditions
 
         Public Sub Method22()
             Dim IsAcquired As Boolean
-            Monitor.Enter(Obj, IsAcquired) ' Noncompliant FP, the isAcquired is not tracked
+            Monitor.Enter(Obj, IsAcquired)
             If IsAcquired Then Monitor.Exit(Obj)
         End Sub
 
@@ -185,6 +185,17 @@ Namespace Monitor_Conditions
                 If Not AnotherCondition Then Monitor.Exit(Obj)
             Else
                 Monitor.Exit(Obj)
+            End If
+        End Sub
+
+        Public Sub Method24(Condition As Boolean)
+            Dim IsAcquired As Boolean
+            Dim somethingElse As New Object()
+            Monitor.Enter(Obj, isAcquired)
+
+            If Not isAcquired Then
+                Monitor.Enter(somethingElse) ' Noncompliant
+                If Condition Then Monitor.Exit(somethingElse)
             End If
         End Sub
 

@@ -133,7 +133,27 @@ namespace Monitor_TryEnter
         public void Method13(bool condition)
         {
             bool isAcquired = false;
-            Monitor.TryEnter(obj, 42, ref isAcquired);  // Noncompliant FP, isAcquired is not tracked properly yet
+            Monitor.TryEnter(obj, 42, ref isAcquired);
+            if (isAcquired)
+            {
+                Monitor.Exit(obj);
+            }
+        }
+
+        public void Method14(bool condition)
+        {
+            bool isAcquired = false;
+            Monitor.TryEnter(obj, ref isAcquired); // Noncompliant
+            if (condition)
+            {
+                Monitor.Exit(obj);
+            }
+        }
+
+        public void Method15(bool condition)
+        {
+            bool isAcquired = false;
+            Monitor.TryEnter(obj, ref isAcquired);
             if (isAcquired)
             {
                 Monitor.Exit(obj);
