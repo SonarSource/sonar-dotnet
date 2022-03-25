@@ -81,6 +81,11 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn.RuleChecks
 
         public override ProgramState[] PostProcess(SymbolicContext context)
         {
+            if (context.Operation.Instance.Kind != OperationKindEx.Invocation)
+            {
+                return base.PostProcess(context);
+            }
+
             if (FindRefParam(context) is { } refParamContext)
             {
                 return new[]
@@ -212,7 +217,7 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn.RuleChecks
 
         private static ISymbol FindLockSymbolWithConditionalReturnValue(SymbolicContext context)
         {
-            if (context.Operation.Instance.AsInvocation() is  { } invocation
+            if (context.Operation.Instance.AsInvocation().Value is var invocation
                 && invocation.TargetMethod.ReturnType.Is(KnownType.System_Boolean))
             {
                 if (invocation.TargetMethod.IsAny(KnownType.System_Threading_Monitor, "TryEnter"))
