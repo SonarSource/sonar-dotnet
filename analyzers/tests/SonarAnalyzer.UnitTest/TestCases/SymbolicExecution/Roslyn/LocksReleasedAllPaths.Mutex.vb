@@ -9,7 +9,7 @@ Namespace Mutex_Type
         Public InstanceMutex As Mutex
         Public Shared StaticMutex As Mutex
 
-        Public Sub Noncompliant(ParamMutex As Mutex, ParamMutex2 As Mutex, Foo As Foo)
+        Public Sub Noncompliant(Foo As Foo)
             Dim m0WasCreated, m2WasCreated As Boolean
             Dim m0 = New Mutex(True, "bar", m0WasCreated) ' Noncompliant
 
@@ -40,6 +40,9 @@ Namespace Mutex_Type
             m1.Dispose()
             m2.Dispose()
             m3.Dispose()
+        End Sub
+
+        Public Sub Noncompliant2(ParamMutex As Mutex, ParamMutex2 As Mutex)
 
             ' 'true' means it owns the mutex if no exception gets thrown
             Using mutexInUsing As New Mutex(True, "foo") ' Noncompliant
@@ -160,14 +163,14 @@ Namespace Mutex_Type
             m1.ReleaseMutex()
 
             Dim m2 = Mutex.OpenExisting("foo")
-            If m2.WaitOne(500) Then ' Noncompliant - FP
+            If m2.WaitOne(500) Then
                 m2.ReleaseMutex()
             End If
 
             Dim isAcquired = ParamMutex.WaitOne(400, False)
             If isAcquired Then ParamMutex.ReleaseMutex()
 
-            If ParamMutex.WaitOne(400, False) Then ' Noncompliant - FP
+            If ParamMutex.WaitOne(400, False) Then
                 ParamMutex.ReleaseMutex()
             End If
 

@@ -10,7 +10,7 @@ namespace Mutex_Type
         public Mutex instanceMutex;
         public static Mutex staticMutex;
 
-        public void Noncompliant(Mutex paramMutex, Mutex paramMutex2, Foo foo)
+        public void Noncompliant(Foo foo)
         {
             var m0 = new Mutex(true, "bar", out var m0WasCreated); // Noncompliant
 
@@ -45,7 +45,10 @@ namespace Mutex_Type
             m1.Dispose();
             m2.Dispose();
             m3.Dispose();
+        }
 
+        public void Noncompliant2(Mutex paramMutex, Mutex paramMutex2)
+        {
             // 'true' means it owns the mutex if no exception gets thrown
             using (var mutexInUsing = new Mutex(true, "foo")) // Noncompliant
             {
@@ -212,7 +215,7 @@ namespace Mutex_Type
             m1.ReleaseMutex();
 
             var m2 = Mutex.OpenExisting("foo");
-            if (m2.WaitOne(500)) // Noncompliant - FP
+            if (m2.WaitOne(500))
             {
                 m2.ReleaseMutex();
             }
@@ -222,7 +225,7 @@ namespace Mutex_Type
             {
                 paramMutex.ReleaseMutex();
             }
-            if (paramMutex.WaitOne(400, false)) // Noncompliant - FP
+            if (paramMutex.WaitOne(400, false))
             {
                 paramMutex.ReleaseMutex();
             }

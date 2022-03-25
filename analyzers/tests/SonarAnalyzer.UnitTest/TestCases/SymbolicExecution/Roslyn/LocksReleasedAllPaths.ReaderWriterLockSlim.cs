@@ -203,7 +203,7 @@ namespace ReaderWriterLockSlim_Type
 
         public void Method15()
         {
-            if (readerWriterLockSlim.TryEnterReadLock(42)) // Noncompliant FP
+            if (readerWriterLockSlim.TryEnterReadLock(42))
             {
                 readerWriterLockSlim.ExitReadLock();
             }
@@ -211,7 +211,7 @@ namespace ReaderWriterLockSlim_Type
 
         public void EarlyExit()
         {
-            if (readerWriterLockSlim.TryEnterReadLock(0) == false) // Noncompliant FP - https://github.com/SonarSource/sonar-dotnet/issues/5415
+            if (readerWriterLockSlim.TryEnterReadLock(0) == false) // Compliant https://github.com/SonarSource/sonar-dotnet/issues/5415
             {
                 return;
             }
@@ -227,7 +227,7 @@ namespace ReaderWriterLockSlim_Type
 
         public void EarlyExit_UnaryOperator()
         {
-            if (!readerWriterLockSlim.TryEnterReadLock(0)) // Noncompliant FP - https://github.com/SonarSource/sonar-dotnet/issues/5415
+            if (!readerWriterLockSlim.TryEnterReadLock(0)) // Compliant https://github.com/SonarSource/sonar-dotnet/issues/5415
             {
                 return;
             }
