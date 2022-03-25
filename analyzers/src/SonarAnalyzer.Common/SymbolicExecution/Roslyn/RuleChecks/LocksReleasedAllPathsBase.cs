@@ -89,7 +89,7 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn.RuleChecks
                       refParamContext.SetRefConstraint(BoolConstraint.False, refParamContext.SymbolicContext.State),
                 };
             }
-            else if (FindLockSymbolIfConditionalReturnValue(context) is { } lockSymbol)
+            else if (FindLockSymbolWithConditionalReturnValue(context) is { } lockSymbol)
             {
                 return new[]
                 {
@@ -210,7 +210,7 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn.RuleChecks
                 ? argument.Value.TrackedSymbol()
                 : invocation.Arguments.SingleOrDefault(x => x.ToArgument().Parameter.Name == parameterName)?.ToArgument().Value.TrackedSymbol();
 
-        private static ISymbol FindLockSymbolIfConditionalReturnValue(SymbolicContext context)
+        private static ISymbol FindLockSymbolWithConditionalReturnValue(SymbolicContext context)
         {
             if (context.Operation.Instance.AsInvocation() is  { } invocation
                 && invocation.TargetMethod.ReturnType.Is(KnownType.System_Boolean))
