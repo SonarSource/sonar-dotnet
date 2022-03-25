@@ -200,14 +200,14 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn.RuleChecks
             ?? BoolRefParamFromInstance(context, KnownType.System_Threading_SpinLock, "Enter", "TryEnter");
 
         private static RefParamContext BoolRefParamFromArgument(SymbolicContext context, KnownType type, params string[] methodNames) =>
-            context.Operation.Instance.AsInvocation() is { } invocation
+            context.Operation.Instance.AsInvocation().Value is var invocation
             && InvocationBoolRefSymbol(invocation, type, methodNames) is { } refParameter
             && ArgumentSymbol(invocation, 0) is { } lockObject
                 ? new RefParamContext(context, lockObject, refParameter)
                 : null;
 
         private static RefParamContext BoolRefParamFromInstance(SymbolicContext context, KnownType type, params string[] methodNames) =>
-            context.Operation.Instance.AsInvocation() is { } invocation
+            context.Operation.Instance.AsInvocation().Value is var invocation
             && InvocationBoolRefSymbol(invocation, type, methodNames) is { } refParameter
             && invocation.Instance.TrackedSymbol() is { } lockObject
                 ? new RefParamContext(context, lockObject, refParameter)
