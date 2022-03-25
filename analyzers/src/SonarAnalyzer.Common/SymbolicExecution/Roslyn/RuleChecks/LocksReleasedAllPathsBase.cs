@@ -81,31 +81,26 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn.RuleChecks
 
         public override ProgramState[] PostProcess(SymbolicContext context)
         {
-            if (context.Operation.Instance.Kind != OperationKindEx.Invocation)
+            if (context.Operation.Instance.Kind == OperationKindEx.Invocation)
             {
-                return base.PostProcess(context);
-            }
-
-            if (FindRefParam(context) is { } refParamContext)
-            {
-                return new[]
+                if (FindRefParam(context) is { } refParamContext)
                 {
+                    return new[]
+                    {
                       refParamContext.SetRefConstraint(BoolConstraint.True, AddLock(refParamContext.SymbolicContext, refParamContext.LockSymbol)),
                       refParamContext.SetRefConstraint(BoolConstraint.False, refParamContext.SymbolicContext.State),
-                };
-            }
-            else if (FindLockSymbolWithConditionalReturnValue(context) is { } lockSymbol)
-            {
-                return new[]
+                    };
+                }
+                else if (FindLockSymbolWithConditionalReturnValue(context) is { } lockSymbol)
                 {
-                    AddLock(context, lockSymbol).SetOperationConstraint(context.Operation, context.SymbolicValueCounter, BoolConstraint.True),
-                    context.SetOperationConstraint(BoolConstraint.False)
-                };
+                    return new[]
+                    {
+                        AddLock(context, lockSymbol).SetOperationConstraint(context.Operation, context.SymbolicValueCounter, BoolConstraint.True),
+                        context.SetOperationConstraint(BoolConstraint.False)
+                    };
+                }
             }
-            else
-            {
-                return base.PostProcess(context);
-            }
+            return base.PostProcess(context);
         }
 
         public override ProgramState ConditionEvaluated(SymbolicContext context)
