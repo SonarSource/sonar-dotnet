@@ -190,7 +190,8 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn.RuleChecks
 
         private static ISymbol ArgumentSymbol(IInvocationOperationWrapper invocation, int parameterIndex) =>
             invocation.TargetMethod.Parameters[parameterIndex].Name is var parameterName
-            && invocation.Arguments[parameterIndex].ToArgument() is var argument && argument.Parameter.Name == parameterName
+            && invocation.Arguments[parameterIndex].ToArgument() is var argument
+            && argument.Parameter.Name == parameterName
                 ? argument.Value.TrackedSymbol()
                 : invocation.Arguments.SingleOrDefault(x => x.ToArgument().Parameter.Name == parameterName)?.ToArgument().Value.TrackedSymbol();
 
