@@ -18,7 +18,6 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Linq;
 using Microsoft.CodeAnalysis;
@@ -35,6 +34,7 @@ namespace SonarAnalyzer.Rules.CSharp
     {
         private const string DiagnosticId = "S2743";
         private const string MessageFormat = "A static field in a generic type is not shared among instances of different close constructed types.";
+
         private static readonly DiagnosticDescriptor Rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
 
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
@@ -50,22 +50,16 @@ namespace SonarAnalyzer.Rules.CSharp
                     {
                         return;
                     }
-                    var typeParameterNames = typeDeclaration.TypeParameterList.Parameters.Select(p => p.Identifier.ToString()).ToArray();
-                    var fields = typeDeclaration.Members
-                        .OfType<FieldDeclarationSyntax>()
-                        .Where(f => f.Modifiers.Any(SyntaxKind.StaticKeyword));
-
+                    var typeParameterNames = typeDeclaration.TypeParameterList.Parameters.Select(x => x.Identifier.ToString()).ToArray();
+                    var fields = typeDeclaration.Members.OfType<FieldDeclarationSyntax>().Where(f => f.Modifiers.Any(SyntaxKind.StaticKeyword));
                     foreach (var field in fields.Where(field => !HasGenericType(field.Declaration.Type, typeParameterNames, c)))
                     {
                         field.Declaration.Variables.ToList().ForEach(variable => CheckMember(variable, variable.Identifier.GetLocation(), typeParameterNames, c));
                     }
-
-                    var properties = typeDeclaration.Members
-                        .OfType<PropertyDeclarationSyntax>()
-                        .Where(p => p.Modifiers.Any(SyntaxKind.StaticKeyword))
-                        .ToList();
-
-                    properties.ForEach(property => CheckMember(property, property.Identifier.GetLocation(), typeParameterNames, c));
+                    foreach (var property in typeDeclaration.Members.OfType<PropertyDeclarationSyntax>().Where(x => x.Modifiers.Any(SyntaxKind.StaticKeyword)))
+                    {
+                        CheckMember(property, property.Identifier.GetLocation(), typeParameterNames, c);
+                    }
                 },
                 SyntaxKind.ClassDeclaration,
                 SyntaxKindEx.RecordClassDeclaration);
@@ -81,8 +75,6 @@ namespace SonarAnalyzer.Rules.CSharp
         private static bool HasGenericType(SyntaxNode root, string[] typeParameterNames, SyntaxNodeAnalysisContext context) =>
             root.DescendantNodesAndSelf()
                 .OfType<IdentifierNameSyntax>()
-                .Where(x => typeParameterNames.Contains(x.Identifier.Value))
-                .Select(x => context.SemanticModel.GetSymbolInfo(x).Symbol)
-                .Any(x => x != null && x.Kind == SymbolKind.TypeParameter);
+                .Any(x => typeParameterNames.Contains(x.Identifier.Value) && context.SemanticModel.GetSymbolInfo(x).Symbol is { Kind: SymbolKind.TypeParameter });
     }
 }

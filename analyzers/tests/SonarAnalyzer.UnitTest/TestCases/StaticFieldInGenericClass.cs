@@ -74,6 +74,7 @@ namespace Tests.TestCases
     // https://github.com/SonarSource/sonar-dotnet/issues/5238
     public class Wrapper<T> where T : class
     {
+        public static T EmptyProp { get; set; }
         public static readonly T Empty = CreateEmpty();
         private static T singleton;
 
