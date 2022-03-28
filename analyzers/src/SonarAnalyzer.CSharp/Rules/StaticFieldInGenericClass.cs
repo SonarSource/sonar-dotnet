@@ -79,7 +79,7 @@ namespace SonarAnalyzer.Rules.CSharp
         }
 
         private static bool HasGenericType(SyntaxNode root, string[] typeParameterNames, SyntaxNodeAnalysisContext context) =>
-            root.DescendantNodes()
+            root.DescendantNodesAndSelf()
                 .OfType<IdentifierNameSyntax>()
                 .Where(x => typeParameterNames.Contains(x.Identifier.Value))
                 .Select(x => context.SemanticModel.GetSymbolInfo(x).Symbol)

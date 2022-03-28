@@ -74,8 +74,8 @@ namespace Tests.TestCases
     // https://github.com/SonarSource/sonar-dotnet/issues/5238
     public class Wrapper<T> where T : class
     {
-        public static readonly T Empty = CreateEmpty(); // Noncompliant FP
-        private static T singleton;                     // Noncompliant FP
+        public static readonly T Empty = CreateEmpty();
+        private static T singleton;
 
         private static T CreateEmpty() => null;
     }
