@@ -31,7 +31,7 @@ using StyleCop.Analyzers.Lightup;
 namespace SonarAnalyzer.Rules.CSharp
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
-    public sealed class MethodsShouldNotHaveIdenticalImplementations : MethodsShouldNotHaveIdenticalImplementationsBase<IMethodDeclaration, SyntaxKind>
+    public sealed class MethodsShouldNotHaveIdenticalImplementations : MethodsShouldNotHaveIdenticalImplementationsBase<SyntaxKind, IMethodDeclaration>
     {
         protected override ILanguageFacade<SyntaxKind> Language => CSharpFacade.Instance;
 
@@ -40,8 +40,8 @@ namespace SonarAnalyzer.Rules.CSharp
             SyntaxKind.ClassDeclaration,
             SyntaxKindEx.RecordClassDeclaration,
             SyntaxKind.StructDeclaration,
-            SyntaxKind.InterfaceDeclaration,
             SyntaxKindEx.RecordStructDeclaration,
+            SyntaxKind.InterfaceDeclaration,
             SyntaxKind.CompilationUnit
         };
 
@@ -57,7 +57,8 @@ namespace SonarAnalyzer.Rules.CSharp
             && HaveSameParameters<ParameterSyntax>(firstMethod.ParameterList.Parameters, secondMethod.ParameterList.Parameters)
             && firstMethod.Body.IsEquivalentTo(secondMethod.Body, false);
 
-        protected override SyntaxToken GetMethodIdentifier(IMethodDeclaration method) => method.Identifier;
+        protected override SyntaxToken GetMethodIdentifier(IMethodDeclaration method) =>
+            method.Identifier;
 
         protected override bool IsExcludedFromBeingExamined(ISymbol nodeContainingSymbol) =>
             base.IsExcludedFromBeingExamined(nodeContainingSymbol) && !nodeContainingSymbol.IsTopLevelMain();

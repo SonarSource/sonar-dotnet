@@ -19,31 +19,26 @@
  */
 
 using System.Collections.Generic;
-using System.Collections.Immutable;
 using System.Linq;
 using Microsoft.CodeAnalysis;
 using SonarAnalyzer.Helpers;
 
 namespace SonarAnalyzer.Rules
 {
-    public abstract class MethodsShouldNotHaveIdenticalImplementationsBase<TMethodDeclarationSyntax, TLanguageKindEnum> : SonarDiagnosticAnalyzer
-        where TLanguageKindEnum : struct
+    public abstract class MethodsShouldNotHaveIdenticalImplementationsBase<TSyntaxKind, TMethodDeclarationSyntax> : SonarDiagnosticAnalyzer<TSyntaxKind>
+        where TSyntaxKind : struct
     {
         private const string DiagnosticId = "S4144";
-        private const string MessageFormat = "Update this method so that its implementation is not identical to '{0}'.";
 
-        private readonly DiagnosticDescriptor rule;
-        protected abstract ILanguageFacade<TLanguageKindEnum> Language { get; }
-        protected abstract TLanguageKindEnum[] SyntaxKinds { get; }
+        protected abstract TSyntaxKind[] SyntaxKinds { get; }
 
         protected abstract IEnumerable<TMethodDeclarationSyntax> GetMethodDeclarations(SyntaxNode node);
         protected abstract SyntaxToken GetMethodIdentifier(TMethodDeclarationSyntax method);
         protected abstract bool AreDuplicates(TMethodDeclarationSyntax firstMethod, TMethodDeclarationSyntax secondMethod);
 
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
+        protected override string MessageFormat => "Update this method so that its implementation is not identical to '{0}'.";
 
-        protected MethodsShouldNotHaveIdenticalImplementationsBase() =>
-            rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, Language.RspecResources);
+        protected MethodsShouldNotHaveIdenticalImplementationsBase() : base(DiagnosticId) { }
 
         protected override void Initialize(SonarAnalysisContext context) =>
             context.RegisterSyntaxNodeActionInNonGenerated(Language.GeneratedCodeRecognizer,
@@ -92,6 +87,6 @@ namespace SonarAnalyzer.Rules
             || (leftParameters != null
                 && rightParameters != null
                 && leftParameters.Value.Count == rightParameters.Value.Count
-                && leftParameters.Value.Zip(rightParameters.Value, (p1, p2) => new { p1, p2 }).All(tuple => tuple.p1.IsEquivalentTo(tuple.p2)));
+                && leftParameters.Value.Select((left, index) => left.IsEquivalentTo(rightParameters.Value[index])).All(x => x));
     }
 }

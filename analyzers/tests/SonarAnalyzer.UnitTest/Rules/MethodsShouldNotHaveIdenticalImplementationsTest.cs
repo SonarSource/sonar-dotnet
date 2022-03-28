@@ -35,7 +35,9 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         public void MethodsShouldNotHaveIdenticalImplementations() =>
             builderCS.AddPaths("MethodsShouldNotHaveIdenticalImplementations.cs").WithOptions(ParseOptionsHelper.FromCSharp8).Verify();
+
 #if NET
+
         [TestMethod]
         public void MethodsShouldNotHaveIdenticalImplementations_CSharp9() =>
             builderCS.AddPaths("MethodsShouldNotHaveIdenticalImplementations.CSharp9.cs").WithTopLevelStatements().Verify();
@@ -43,6 +45,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         public void MethodsShouldNotHaveIdenticalImplementations_CSharp10() =>
             builderCS.AddPaths("MethodsShouldNotHaveIdenticalImplementations.CSharp10.cs").WithLanguageVersion(LanguageVersion.CSharp10).Verify();
+
 #endif
 
         [TestMethod]
