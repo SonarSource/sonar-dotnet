@@ -28,12 +28,20 @@ namespace Tests.Diagnostics
         private int MyMethod2() { return 42; }
         private int MyMethod3() { return 42; }
         private void MyMethod4() { return; }
+        private int MyMethod5(int neverUsedVal) => neverUsedVal; // Noncompliant
+        private int MyMethod6(int neverUsedVal) // Noncompliant
+        {
+            return neverUsedVal;
+        }
+
         private async Task MyAsyncMethod() { return; }
 
         public void Test()
         {
             MyMethod();
             MyMethod4();
+            MyMethod5(1);
+            MyMethod6(1);
             MyAsyncMethod();
             var i = MyMethod2();
             Action<int> a = (x) => MyMethod();
@@ -96,15 +104,6 @@ namespace Tests.Diagnostics
             static int GetNumberStatic3() { return 42; }
 
             static int GetNumberStaticExpression() => 42; // Noncompliant
-        }
-    }
-
-    // https://github.com/SonarSource/sonar-dotnet/issues/3247
-    public class UnusedValueIsParameter
-    {
-        private int NeverUsed(int neverUsedVal) // FN - the returned value is not used
-        {
-            return neverUsedVal;
         }
     }
 }
