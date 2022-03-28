@@ -91,17 +91,22 @@ namespace Tests.Diagnostics
 
             myEnumerable.Select(GetNumber4);
 
+            GetNumber5(1);
+            GetNumberStatic4(1);
+
             int GetNumber1() { return 42; } // Noncompliant {{Change return type to 'void'; not a single caller uses the returned value.}}
 //          ^^^
             int GetNumber2() { return 42; } // Compliant - unused local functions are outside the scope of this rule
             int GetNumber3() { return 42; }
             int GetNumber4(string myParam) { return 42; }
+            int GetNumber5(int neverUsedVal) { return neverUsedVal; } // Noncompliant
 
             void VoidFunction() { return; }
 
             static int GetNumberStatic1() { return 42; } // Noncompliant
             static int GetNumberStatic2() { return 42; } // Compliant -  local functions are outside the scope of this rule
             static int GetNumberStatic3() { return 42; }
+            static int GetNumberStatic4(int neverUsedVal) { return neverUsedVal; } // Noncompliant
 
             static int GetNumberStaticExpression() => 42; // Noncompliant
         }
