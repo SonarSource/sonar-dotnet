@@ -18,6 +18,7 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System;
 using System.Collections.Immutable;
 using System.Linq;
 using Microsoft.CodeAnalysis;
@@ -35,40 +36,41 @@ namespace SonarAnalyzer.Rules.CSharp
         internal const string DiagnosticId = "S3963";
         private const string MessageFormat = "Initialize all 'static fields' inline and remove the 'static constructor'.";
 
-        private static readonly DiagnosticDescriptor rule =
-            DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(rule);
+        private static readonly DiagnosticDescriptor Rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
+
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
 
         protected override void Initialize(SonarAnalysisContext context)
         {
             context.RegisterSyntaxNodeActionInNonGenerated(
                 c =>
                 {
-                    var constructorDeclaration = (ConstructorDeclarationSyntax)c.Node;
-                    if (!constructorDeclaration.Modifiers.Any(SyntaxKind.StaticKeyword) ||
-                        (constructorDeclaration.Body == null && constructorDeclaration.ExpressionBody() == null))
+                    var constructor = (ConstructorDeclarationSyntax)c.Node;
+                    if (!constructor.Modifiers.Any(SyntaxKind.StaticKeyword)
+                        || (constructor.Body == null && constructor.ExpressionBody() == null))
                     {
                         return;
                     }
-
-                    var currentType = c.SemanticModel.GetDeclaredSymbol(constructorDeclaration).ContainingType;
-                    if (currentType == null)
+                    if (c.SemanticModel.GetDeclaredSymbol(constructor).ContainingType is { } currentType)
                     {
-                        return;
-                    }
+                        var bodyDescendantNodes = constructor.Body?.DescendantNodes().ToArray()
+                            ?? constructor.ExpressionBody()?.DescendantNodes().ToArray()
+                            ?? Array.Empty<SyntaxNode>();
 
-                    var bodyDescendantNodes = constructorDeclaration.Body?.DescendantNodes()
-                        ?? constructorDeclaration.ExpressionBody()?.DescendantNodes()
-                        ?? Enumerable.Empty<SyntaxNode>();
-
-                    var hasFieldAssignment = bodyDescendantNodes
-                        .OfType<AssignmentExpressionSyntax>()
-                        .Select(x => c.SemanticModel.GetSymbolInfo(x.Left).Symbol)
-                        .OfType<IFieldSymbol>()
-                        .Any(fs => fs.ContainingType.Equals(currentType));
-                    if (hasFieldAssignment)
-                    {
-                        c.ReportIssue(Diagnostic.Create(rule, constructorDeclaration.GetLocation()));
+                        var assignedFieldCount = bodyDescendantNodes
+                            .OfType<AssignmentExpressionSyntax>()
+                            .Select(x => c.SemanticModel.GetSymbolInfo(x.Left).Symbol)
+                            .OfType<IFieldSymbol>()
+                            .Where(x => x.ContainingType.Equals(currentType))
+                            .Select(x => x.Name)
+                            .Distinct()
+                            .Count();
+                        var hasIfOrSwitch = bodyDescendantNodes.Any(x => x.IsAnyKind(SyntaxKind.IfStatement, SyntaxKind.SwitchStatement));
+                        if ((hasIfOrSwitch && assignedFieldCount <= 1)
+                            || (!hasIfOrSwitch && assignedFieldCount > 0))
+                        {
+                            c.ReportIssue(Diagnostic.Create(Rule, constructor.GetLocation()));
+                        }
                     }
                 }, SyntaxKind.ConstructorDeclaration);
         }
