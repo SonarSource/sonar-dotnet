@@ -56,8 +56,8 @@ namespace SonarAnalyzer.Rules.CSharp
                     }
 
                     var methodSymbol = c.SemanticModel.GetDeclaredSymbol(methodDeclaration);
-
                     if (methodSymbol != null
+                        && !methodSymbol.ContainingType.IsInterface()
                         && methodSymbol.GetInterfaceMember() == null
                         && methodSymbol.GetOverriddenMember() == null)
                     {
