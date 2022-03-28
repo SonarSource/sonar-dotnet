@@ -35,11 +35,8 @@ namespace SonarAnalyzer.Rules.VisualBasic
 
         protected override SyntaxKind[] SyntaxKinds => new[] { SyntaxKind.ClassBlock, SyntaxKind.StructureBlock };
 
-        protected override IEnumerable<MethodBlockSyntax> GetMethodDeclarations(SyntaxNode node)
-        {
-            var classDeclaration = (ClassBlockSyntax)node;
-            return classDeclaration.Members.OfType<MethodBlockSyntax>();
-        }
+        protected override IEnumerable<MethodBlockSyntax> GetMethodDeclarations(SyntaxNode node) =>
+            ((TypeBlockSyntax)node).Members.OfType<MethodBlockSyntax>();
 
         protected override bool AreDuplicates(MethodBlockSyntax firstMethod, MethodBlockSyntax secondMethod) =>
             firstMethod.Statements.Count > 1

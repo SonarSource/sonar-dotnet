@@ -29,19 +29,18 @@ namespace SonarAnalyzer.Rules
     public abstract class MethodsShouldNotHaveIdenticalImplementationsBase<TMethodDeclarationSyntax, TLanguageKindEnum> : SonarDiagnosticAnalyzer
         where TLanguageKindEnum : struct
     {
-        protected const string DiagnosticId = "S4144";
+        private const string DiagnosticId = "S4144";
         private const string MessageFormat = "Update this method so that its implementation is not identical to '{0}'.";
 
         private readonly DiagnosticDescriptor rule;
         protected abstract ILanguageFacade<TLanguageKindEnum> Language { get; }
         protected abstract TLanguageKindEnum[] SyntaxKinds { get; }
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
 
         protected abstract IEnumerable<TMethodDeclarationSyntax> GetMethodDeclarations(SyntaxNode node);
         protected abstract SyntaxToken GetMethodIdentifier(TMethodDeclarationSyntax method);
         protected abstract bool AreDuplicates(TMethodDeclarationSyntax firstMethod, TMethodDeclarationSyntax secondMethod);
-        protected virtual bool IsExcludedFromBeingExamined(ISymbol nodeContainingSymbol) =>
-            nodeContainingSymbol.Kind != SymbolKind.NamedType;
+
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
 
         protected MethodsShouldNotHaveIdenticalImplementationsBase() =>
             rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, Language.RspecResources);
@@ -84,20 +83,15 @@ namespace SonarAnalyzer.Rules
                 },
                 SyntaxKinds);
 
+        protected virtual bool IsExcludedFromBeingExamined(ISymbol nodeContainingSymbol) =>
+            nodeContainingSymbol.Kind != SymbolKind.NamedType;
+
         protected static bool HaveSameParameters<TSyntax>(SeparatedSyntaxList<TSyntax>? leftParameters, SeparatedSyntaxList<TSyntax>? rightParameters)
-            where TSyntax : SyntaxNode
-        {
-            if (leftParameters == null && rightParameters == null)
-            {
-                return true;
-            }
-
-            if (leftParameters == null || rightParameters == null || leftParameters.Value.Count != rightParameters.Value.Count)
-            {
-                return false;
-            }
-
-            return leftParameters.Value.Zip(rightParameters.Value, (p1, p2) => new { p1, p2 }).All(tuple => tuple.p1.IsEquivalentTo(tuple.p2, false));
-        }
+            where TSyntax : SyntaxNode =>
+            (leftParameters == null && rightParameters == null)
+            || (leftParameters != null
+                && rightParameters != null
+                && leftParameters.Value.Count == rightParameters.Value.Count
+                && leftParameters.Value.Zip(rightParameters.Value, (p1, p2) => new { p1, p2 }).All(tuple => tuple.p1.IsEquivalentTo(tuple.p2)));
     }
 }
