@@ -29,7 +29,7 @@ Namespace Monitor_TryCatch
         End Sub
 
         Public Sub Method4()
-            Monitor.Enter(Obj) ' Noncompliant
+            Monitor.Enter(Obj) ' FN, we don't run for methods with throw until MMF-2393
             If Condition Then Throw New Exception()
             Monitor.Exit(Obj)
         End Sub

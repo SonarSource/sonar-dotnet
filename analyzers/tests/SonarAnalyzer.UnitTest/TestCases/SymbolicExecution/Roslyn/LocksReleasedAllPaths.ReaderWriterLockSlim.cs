@@ -243,7 +243,7 @@ namespace ReaderWriterLockSlim_Type
 
         public void Throw_Finally(object param)
         {
-            readerWriterLockSlim.EnterReadLock(); // Noncompliant FP, there are multiple ocurrences on peach. Should be handled by throw implementation.
+            readerWriterLockSlim.EnterReadLock(); // Compliant
             try
             {
                 if (param == null)
