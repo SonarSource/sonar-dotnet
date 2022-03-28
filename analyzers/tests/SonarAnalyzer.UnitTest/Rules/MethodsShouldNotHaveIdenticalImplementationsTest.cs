@@ -18,6 +18,7 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.UnitTest.TestFramework;
 using CS = SonarAnalyzer.Rules.CSharp;
@@ -28,29 +29,24 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class MethodsShouldNotHaveIdenticalImplementationsTest
     {
+        private readonly VerifierBuilder builderCS = new VerifierBuilder<CS.MethodsShouldNotHaveIdenticalImplementations>();
+        private readonly VerifierBuilder builderVB = new VerifierBuilder<VB.MethodsShouldNotHaveIdenticalImplementations>();
+
         [TestMethod]
         public void MethodsShouldNotHaveIdenticalImplementations() =>
-            OldVerifier.VerifyAnalyzer(
-                @"TestCases\MethodsShouldNotHaveIdenticalImplementations.cs",
-                new CS.MethodsShouldNotHaveIdenticalImplementations(),
-                ParseOptionsHelper.FromCSharp8);
-
+            builderCS.AddPaths("MethodsShouldNotHaveIdenticalImplementations.cs").WithOptions(ParseOptionsHelper.FromCSharp8).Verify();
 #if NET
         [TestMethod]
         public void MethodsShouldNotHaveIdenticalImplementations_CSharp9() =>
-            OldVerifier.VerifyAnalyzerFromCSharp9Console(
-                @"TestCases\MethodsShouldNotHaveIdenticalImplementations.CSharp9.cs",
-                new CS.MethodsShouldNotHaveIdenticalImplementations());
+            builderCS.AddPaths("MethodsShouldNotHaveIdenticalImplementations.CSharp9.cs").WithTopLevelStatements().Verify();
 
         [TestMethod]
         public void MethodsShouldNotHaveIdenticalImplementations_CSharp10() =>
-            OldVerifier.VerifyAnalyzerFromCSharp10Library(
-                @"TestCases\MethodsShouldNotHaveIdenticalImplementations.CSharp10.cs",
-                new CS.MethodsShouldNotHaveIdenticalImplementations());
+            builderCS.AddPaths("MethodsShouldNotHaveIdenticalImplementations.CSharp10.cs").WithLanguageVersion(LanguageVersion.CSharp10).Verify();
 #endif
 
         [TestMethod]
         public void MethodsShouldNotHaveIdenticalImplementations_VB() =>
-            OldVerifier.VerifyAnalyzer(@"TestCases\MethodsShouldNotHaveIdenticalImplementations.vb", new VB.MethodsShouldNotHaveIdenticalImplementations());
+            builderVB.AddPaths("MethodsShouldNotHaveIdenticalImplementations.vb").Verify();
     }
 }
