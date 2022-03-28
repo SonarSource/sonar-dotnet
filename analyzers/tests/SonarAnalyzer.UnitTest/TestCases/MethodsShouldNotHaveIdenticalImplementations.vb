@@ -108,4 +108,17 @@ Namespace Tests.Diagnostics
 
     End Class
 
+    Structure SomeStruct
+        Private Sub Foo1()
+'                   ^^^^ Secondary
+            Dim s As String = "test"
+            Console.WriteLine("Result: {0}", s)
+        End Sub
+
+        Private Sub Foo2() ' Noncompliant
+            Dim s As String = "test"
+            Console.WriteLine("Result: {0}", s)
+        End Sub
+    End Structure
+
 End Namespace

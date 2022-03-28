@@ -76,13 +76,13 @@ public record SamplePositional(string Value)
 
 interface SomeInterface
 {
-    void Foo1() // FN
+    void Foo1() // Secondary
     {
         string s = "test";
         Console.WriteLine("Result: {0}", s);
     }
 
-    void Foo2() // FN
+    void Foo2() // Noncompliant
     {
         string s = "test";
         Console.WriteLine("Result: {0}", s);
