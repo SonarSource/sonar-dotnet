@@ -70,4 +70,13 @@ namespace Tests.TestCases
 
         public static string sProp1 { get; set; } // FN
     }
+
+    // https://github.com/SonarSource/sonar-dotnet/issues/5238
+    public class Wrapper<T> where T : class
+    {
+        public static readonly T Empty = CreateEmpty(); // Noncompliant FP
+        private static T singleton;                     // Noncompliant FP
+
+        private static T CreateEmpty() => null;
+    }
 }
