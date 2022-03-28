@@ -76,7 +76,7 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn.RuleChecks
             {
                 walker.SafeVisit(child);
             }
-            return collector.LockAcquiredAndReleased;
+            return collector.LockAcquiredAndReleased && !collector.ContainsThrow;
         }
 
         public override ProgramState[] PostProcess(SymbolicContext context)
@@ -280,6 +280,8 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn.RuleChecks
 
             private bool lockAcquired;
             private bool lockReleased;
+
+            public bool ContainsThrow { get; set; } // ToDo: Should be removed in MMF-2393
 
             public bool LockAcquiredAndReleased =>
                 lockAcquired && lockReleased;

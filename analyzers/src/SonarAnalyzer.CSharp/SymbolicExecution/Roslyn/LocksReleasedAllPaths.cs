@@ -60,6 +60,12 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn.RuleChecks.CSharp
                 collector.RegisterIdentifier(node.Identifier.ValueText);
                 base.VisitIdentifierName(node);
             }
+
+            public override void VisitThrowStatement(ThrowStatementSyntax node)
+            {
+                collector.ContainsThrow = true;
+                base.VisitThrowStatement(node);
+            }
         }
     }
 }
