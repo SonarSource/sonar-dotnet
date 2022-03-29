@@ -68,7 +68,7 @@ namespace Tests.TestCases
     {
         private static Dictionary<string, T[]> Dict2;
 
-        public static string sProp1 { get; set; } // FN
+        public static string sProp1 { get; set; } // Noncompliant
     }
 
     // https://github.com/SonarSource/sonar-dotnet/issues/5238

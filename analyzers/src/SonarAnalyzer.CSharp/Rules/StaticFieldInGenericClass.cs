@@ -62,7 +62,8 @@ namespace SonarAnalyzer.Rules.CSharp
                     }
                 },
                 SyntaxKind.ClassDeclaration,
-                SyntaxKindEx.RecordClassDeclaration);
+                SyntaxKindEx.RecordClassDeclaration,
+                SyntaxKind.StructDeclaration);
 
         private static void CheckMember(SyntaxNode root, Location location, string[] typeParameterNames, SyntaxNodeAnalysisContext context)
         {

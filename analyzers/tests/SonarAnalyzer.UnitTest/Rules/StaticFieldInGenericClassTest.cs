@@ -27,18 +27,23 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class StaticFieldInGenericClassTest
     {
+        private readonly VerifierBuilder builder = new VerifierBuilder<StaticFieldInGenericClass>();
+
         [TestMethod]
         public void StaticFieldInGenericClass() =>
-            OldVerifier.VerifyAnalyzer(@"TestCases\StaticFieldInGenericClass.cs", new StaticFieldInGenericClass());
+            builder.AddPaths("StaticFieldInGenericClass.cs").Verify();
 
 #if NET
+
         [TestMethod]
         public void StaticFieldInGenericClass_CSharp9() =>
-            OldVerifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\StaticFieldInGenericClass.CSharp9.cs", new StaticFieldInGenericClass());
+            builder.AddPaths("StaticFieldInGenericClass.CSharp9.cs").WithOptions(ParseOptionsHelper.FromCSharp9).Verify();
 
         [TestMethod]
         public void StaticFieldInGenericClass_CSharp10() =>
-            OldVerifier.VerifyAnalyzerFromCSharp10Library(@"TestCases\StaticFieldInGenericClass.CSharp10.cs", new StaticFieldInGenericClass());
+            builder.AddPaths("StaticFieldInGenericClass.CSharp10.cs").WithOptions(ParseOptionsHelper.FromCSharp10).Verify();
+
 #endif
+
     }
 }
