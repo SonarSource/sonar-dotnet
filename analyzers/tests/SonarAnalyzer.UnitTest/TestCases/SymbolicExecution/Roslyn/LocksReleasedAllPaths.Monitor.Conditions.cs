@@ -401,5 +401,25 @@ namespace Monitor_Conditions
                     Monitor.Exit(other);
             };
         }
+
+        public void IsEntered_Compliant()
+        {
+            Monitor.Enter(obj);
+            if (Monitor.IsEntered(obj))
+            {
+                Monitor.Exit(obj);
+            }
+        }
+
+        public void IsEntered_Acquired()
+        {
+            if (Monitor.IsEntered(obj)) // Noncompliant
+            {
+                if (condition)
+                {
+                    Monitor.Exit(obj);
+                }
+            }
+        }
     }
 }

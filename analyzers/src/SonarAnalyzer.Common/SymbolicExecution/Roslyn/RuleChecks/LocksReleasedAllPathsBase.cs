@@ -107,17 +107,34 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn.RuleChecks
         {
             if (context.Operation.Instance.AsPropertyReference() is { } property
                 && IsLockHeldProperties.Contains(property.Property.Name)
-                && property.Property.ContainingType.IsAny(KnownType.System_Threading_ReaderWriterLock, KnownType.System_Threading_ReaderWriterLockSlim)
-                && property.Instance.TrackedSymbol() is { } lockSymbol)
+                && property.Property.ContainingType.IsAny(KnownType.System_Threading_ReaderWriterLock, KnownType.System_Threading_ReaderWriterLockSlim))
             {
-                return context.State[context.Operation].HasConstraint(BoolConstraint.True)  // Is it a branch with the Lock held?
-                    ? AddLock(context, lockSymbol)
-                    : RemoveLock(context, lockSymbol);
+                return ProcessCondition(property.Instance.TrackedSymbol());
+            }
+            else if (context.Operation.Instance.AsInvocation() is { } invocation
+                     && invocation.TargetMethod.Is(KnownType.System_Threading_Monitor, "IsEntered"))
+            {
+                return ProcessCondition(ArgumentSymbol(invocation, 0));
             }
             else
             {
                 return context.State;
             }
+
+            ProgramState ProcessCondition(ISymbol lockSymbol)
+            {
+                if (lockSymbol is null)
+                {
+                    return context.State;
+                }
+                else
+                {
+                    return context.State[context.Operation].HasConstraint(BoolConstraint.True)  // Is it a branch with the Lock held?
+                        ? AddLock(context, lockSymbol)
+                        : RemoveLock(context, lockSymbol);
+                }
+            }
+
         }
 
         protected override ProgramState PostProcessSimple(SymbolicContext context)
@@ -288,7 +305,7 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn.RuleChecks
 
             public void RegisterIdentifier(string name)
             {
-                lockAcquired = lockAcquired || name == LockType || LockMethods.Contains(name) || IsLockHeldProperties.Contains(name);
+                lockAcquired = lockAcquired || name == LockType || LockMethods.Contains(name) || IsLockHeldProperties.Contains(name) || name == "IsEntered";
                 lockReleased = lockReleased || ReleaseMethods.Contains(name);
             }
         }
