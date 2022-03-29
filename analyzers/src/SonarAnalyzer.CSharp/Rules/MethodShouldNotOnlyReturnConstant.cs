@@ -55,8 +55,7 @@ namespace SonarAnalyzer.Rules.CSharp
                         return;
                     }
 
-                    var methodSymbol = c.SemanticModel.GetDeclaredSymbol(methodDeclaration);
-                    if (methodSymbol != null
+                    if (c.SemanticModel.GetDeclaredSymbol(methodDeclaration) is { } methodSymbol
                         && !methodSymbol.ContainingType.IsInterface()
                         && methodSymbol.GetInterfaceMember() == null
                         && methodSymbol.GetOverriddenMember() == null)
@@ -84,17 +83,9 @@ namespace SonarAnalyzer.Rules.CSharp
             return null;
         }
 
-        private static bool IsConstantExpression(ExpressionSyntax expression, SemanticModel semanticModel)
-        {
-            if (expression == null)
-            {
-                return false;
-            }
-
-            var noParenthesesExpression = expression.RemoveParentheses();
-            return noParenthesesExpression is LiteralExpressionSyntax
-                   && !noParenthesesExpression.IsNullLiteral()
-                   && semanticModel.GetConstantValue(noParenthesesExpression).HasValue;
-        }
+        private static bool IsConstantExpression(ExpressionSyntax expression, SemanticModel semanticModel) =>
+            expression.RemoveParentheses() is LiteralExpressionSyntax noParenthesesExpression
+            && !noParenthesesExpression.IsNullLiteral()
+            && semanticModel.GetConstantValue(noParenthesesExpression).HasValue;
     }
 }
