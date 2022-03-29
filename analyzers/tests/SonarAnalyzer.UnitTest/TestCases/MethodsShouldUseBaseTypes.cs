@@ -893,7 +893,7 @@ namespace MultiConditionalAccess
             var length = ex?.BaseMethod()?.ToString()?.Length;
         }
 
-        public void Handler(IReadOnlyDictionary<string, object> data) // Noncompliant - FP, the fix will raise S4017. See: https://github.com/SonarSource/sonar-dotnet/issues/5443
+        public void Handler(IReadOnlyDictionary<string, object> data) // See: https://github.com/SonarSource/sonar-dotnet/issues/5443
         {
             var _ = data.ToDictionary(x => x.Key, x => x.Value);
         }

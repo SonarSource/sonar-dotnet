@@ -33,21 +33,20 @@ namespace SonarAnalyzer.Rules.CSharp
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
     public sealed class MethodsShouldUseBaseTypes : SonarDiagnosticAnalyzer
     {
-        internal const string DiagnosticId = "S3242";
+        private const string DiagnosticId = "S3242";
         private const string MessageFormat = "Consider using more general type '{0}' instead of '{1}'.";
 
-        private static readonly DiagnosticDescriptor rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(rule);
+        private static readonly DiagnosticDescriptor Rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
 
         protected override void Initialize(SonarAnalysisContext context) =>
             context.RegisterSyntaxNodeActionInNonGenerated(
-                c => FindViolations((BaseMethodDeclarationSyntax)c.Node, c.SemanticModel)
-                        .ForEach(d => c.ReportIssue(d)),
+                c => FindViolations((BaseMethodDeclarationSyntax)c.Node, c.SemanticModel).ForEach(d => c.ReportIssue(d)),
                 SyntaxKind.MethodDeclaration);
 
         private static List<Diagnostic> FindViolations(BaseMethodDeclarationSyntax methodDeclaration, SemanticModel semanticModel)
         {
-            if (!(semanticModel.GetDeclaredSymbol(methodDeclaration) is IMethodSymbol methodSymbol) ||
+            if (semanticModel.GetDeclaredSymbol(methodDeclaration) is not { } methodSymbol ||
                 methodSymbol.Parameters.Length == 0 ||
                 methodSymbol.IsOverride ||
                 methodSymbol.IsVirtual ||
@@ -72,7 +71,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
             foreach (var identifierReference in parameterUsesInMethod)
             {
-                var key = identifierReference.Identifier.ValueText ?? "";
+                var key = identifierReference.Identifier.ValueText ?? string.Empty;
 
                 if (!parametersToCheck.TryGetValue(key, out var paramData) ||
                     !paramData.ShouldReportOn)
@@ -80,15 +79,15 @@ namespace SonarAnalyzer.Rules.CSharp
                     continue;
                 }
 
-                if (identifierReference.Parent is EqualsValueClauseSyntax ||
-                    identifierReference.Parent is AssignmentExpressionSyntax)
+                if (identifierReference.Parent is EqualsValueClauseSyntax or AssignmentExpressionSyntax)
                 {
                     paramData.ShouldReportOn = false;
                     continue;
                 }
 
                 var symbolUsedAs = FindParameterUseAsType(identifierReference, semanticModel);
-                if (symbolUsedAs != null)
+                if (symbolUsedAs != null
+                    && !IsNestedGeneric(symbolUsedAs)) // In order to avoid triggering S4017: Refactor this method to remove the nested type argument.
                 {
                     paramData.AddUsage(symbolUsedAs);
                 }
@@ -99,6 +98,10 @@ namespace SonarAnalyzer.Rules.CSharp
                 .WhereNotNull()
                 .ToList();
         }
+
+        private static bool IsNestedGeneric(ISymbol symbol) =>
+            symbol is INamedTypeSymbol { IsGenericType: true } namedTypeSymbol
+            && namedTypeSymbol.TypeArguments.Any(argument => argument is INamedTypeSymbol { IsGenericType: true });
 
         private static bool IsTrackedParameter(IParameterSymbol parameterSymbol)
         {
@@ -268,7 +271,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
                 return Equals(mostGeneralType, parameterSymbol.Type) || IsIgnoredBaseType(mostGeneralType.GetSymbolType())
                     ? null
-                    : Diagnostic.Create(rule, parameterSymbol.Locations.First(), mostGeneralType.ToDisplayString(), parameterSymbol.Type.ToDisplayString());
+                    : Diagnostic.Create(Rule, parameterSymbol.Locations.First(), mostGeneralType.ToDisplayString(), parameterSymbol.Type.ToDisplayString());
             }
 
             private static bool IsIgnoredBaseType(ITypeSymbol typeSymbol) =>
