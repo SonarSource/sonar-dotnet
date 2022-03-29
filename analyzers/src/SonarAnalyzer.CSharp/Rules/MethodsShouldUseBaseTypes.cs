@@ -308,18 +308,19 @@ namespace SonarAnalyzer.Rules.CSharp
 
             private bool DerivesOrImplementsAll(ITypeSymbol type)
             {
-                return type != null
-                       && usedAs.Keys.All(type.DerivesOrImplements)
+                return usedAs.Keys.All(type.DerivesOrImplements)
                        && IsConsistentAccessibility(type.GetEffectiveAccessibility());
 
                 bool IsConsistentAccessibility(Accessibility baseTypeAccessibility) =>
                     methodAccessibility switch
                     {
-                        Accessibility.NotApplicable => false,
                         Accessibility.Private => true,
+                        // ProtectedAndInternal corresponds to `private protected`.
+                        Accessibility.ProtectedAndInternal => baseTypeAccessibility is not Accessibility.Private,
+                        // ProtectedOrInternal corresponds to `protected internal`.
+                        Accessibility.ProtectedOrInternal => baseTypeAccessibility is Accessibility.Public or Accessibility.Internal or Accessibility.ProtectedOrInternal,
                         Accessibility.Protected => baseTypeAccessibility == Accessibility.Public || baseTypeAccessibility == methodAccessibility,
                         Accessibility.Internal => baseTypeAccessibility == Accessibility.Public || baseTypeAccessibility == methodAccessibility,
-                        Accessibility.ProtectedAndInternal => baseTypeAccessibility == Accessibility.Public,
                         Accessibility.Public => baseTypeAccessibility == Accessibility.Public,
                         _ => false
                     };

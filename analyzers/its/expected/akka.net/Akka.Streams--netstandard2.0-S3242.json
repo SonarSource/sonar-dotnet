@@ -3083,6 +3083,19 @@
 },
 {
 "id":  "S3242",
+"message":  "Consider using more general type 'Akka.Streams.Inlet' instead of 'Akka.Streams.Inlet<T>'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Stage\GraphStage.cs",
+"region":  {
+"startLine":  906,
+"startColumn":  56,
+"endLine":  906,
+"endColumn":  61
+}
+}
+},
+{
+"id":  "S3242",
 "message":  "Consider using more general type 'Akka.Streams.InPort' instead of 'Akka.Streams.Inlet<T>'.",
 "location":  {
 "uri":  "sources\akka.net\src\core\Akka.Streams\Stage\GraphStage.cs",
@@ -3156,6 +3169,19 @@
 "startColumn":  42,
 "endLine":  1256,
 "endColumn":  48
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'Akka.Streams.Outlet' instead of 'Akka.Streams.Outlet<T>'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Stage\GraphStage.cs",
+"region":  {
+"startLine":  1303,
+"startColumn":  58,
+"endLine":  1303,
+"endColumn":  64
 }
 }
 },

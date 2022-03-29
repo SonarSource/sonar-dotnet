@@ -897,5 +897,10 @@ namespace MultiConditionalAccess
         {
             var _ = data.ToDictionary(x => x.Key, x => x.Value);
         }
+
+        public void Handler(List<string> data) // Noncompliant
+        {
+            var _ = data.ToDictionary(x => x, x => x);
+        }
     }
 }

@@ -67,7 +67,11 @@ internal class Bar
 
         [TestMethod]
         public void MethodsShouldUseBaseTypes() =>
-            builder.AddPaths("MethodsShouldUseBaseTypes.cs", "MethodsShouldUseBaseTypes2.cs").WithAutogenerateConcurrentFiles(false).Verify();
+            builder.AddPaths("MethodsShouldUseBaseTypes.cs").WithAutogenerateConcurrentFiles(false).Verify();
+
+        [TestMethod]
+        public void MethodsShouldUseBaseTypes_CSharp8() =>
+            builder.AddPaths("MethodsShouldUseBaseTypes.CSharp8.cs").WithAutogenerateConcurrentFiles(false).WithOptions(ParseOptionsHelper.FromCSharp8).Verify();
 
 #if NET
         [TestMethod]
