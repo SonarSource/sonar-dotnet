@@ -2,19 +2,6 @@
 "issues":  [
 {
 "id":  "S3242",
-"message":  "Consider using more general type 'System.Collections.Generic.IEnumerable<System.Collections.Generic.KeyValuePair<string, string[]>>' instead of 'System.Collections.Generic.IDictionary<string, string[]>'.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence\Journal\EventAdapters.cs",
-"region":  {
-"startLine":  309,
-"startColumn":  141,
-"endLine":  309,
-"endColumn":  156
-}
-}
-},
-{
-"id":  "S3242",
 "message":  "Consider using more general type 'System.Exception' instead of 'Akka.Pattern.IllegalStateException'.",
 "location":  {
 "uri":  "sources\akka.net\src\core\Akka.Persistence\Journal\ReplayFilter.cs",

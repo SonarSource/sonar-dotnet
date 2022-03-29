@@ -2,19 +2,6 @@
 "issues":  [
 {
 "id":  "S3242",
-"message":  "Consider using more general type 'System.Collections.Generic.IEnumerable<System.Collections.Generic.KeyValuePair<long, Akka.DistributedData.IReplicatedData>>' instead of 'System.Collections.Immutable.ImmutableSortedDictionary<long, Akka.DistributedData.IReplicatedData>'.",
-"location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\DeltaPropagationSelector.cs",
-"region":  {
-"startLine":  178,
-"startColumn":  62,
-"endLine":  178,
-"endColumn":  69
-}
-}
-},
-{
-"id":  "S3242",
 "message":  "Consider using more general type 'Akka.DistributedData.IKey' instead of 'Akka.DistributedData.IKey<T>'.",
 "location":  {
 "uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Dsl.cs",
@@ -132,19 +119,6 @@
 },
 {
 "id":  "S3242",
-"message":  "Consider using more general type 'System.Collections.Generic.IEnumerable<System.Collections.Generic.KeyValuePair<Akka.Cluster.UniqueAddress, Akka.DistributedData.IPruningState>>' instead of 'System.Collections.Immutable.IImmutableDictionary<Akka.Cluster.UniqueAddress, Akka.DistributedData.IPruningState>'.",
-"location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Internal\Internal.cs",
-"region":  {
-"startLine":  528,
-"startColumn":  111,
-"endLine":  528,
-"endColumn":  112
-}
-}
-},
-{
-"id":  "S3242",
 "message":  "Consider using more general type 'System.Collections.Generic.IDictionary<TKey, TValue>' instead of 'System.Collections.Immutable.ImmutableDictionary<TKey, TValue>.Builder'.",
 "location":  {
 "uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\ORDictionary.cs",
@@ -223,6 +197,32 @@
 },
 {
 "id":  "S3242",
+"message":  "Consider using more general type 'System.Collections.Generic.IReadOnlyDictionary<string, Akka.DistributedData.Internal.Delta>' instead of 'System.Collections.Immutable.ImmutableDictionary<string, Akka.DistributedData.Internal.Delta>'.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Replicator.cs",
+"region":  {
+"startLine":  992,
+"startColumn":  113,
+"endLine":  992,
+"endColumn":  119
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'System.Collections.Generic.IReadOnlyDictionary<string, Google.Protobuf.ByteString>' instead of 'System.Collections.Immutable.IImmutableDictionary<string, Google.Protobuf.ByteString>'.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Replicator.cs",
+"region":  {
+"startLine":  1112,
+"startColumn":  77,
+"endLine":  1112,
+"endColumn":  89
+}
+}
+},
+{
+"id":  "S3242",
 "message":  "Consider using more general type 'System.Collections.Generic.IReadOnlyDictionary<string, Akka.DistributedData.Internal.DataEnvelope>' instead of 'System.Collections.Immutable.IImmutableDictionary<string, Akka.DistributedData.Internal.DataEnvelope>'.",
 "location":  {
 "uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Replicator.cs",
@@ -231,19 +231,6 @@
 "startColumn":  79,
 "endLine":  1159,
 "endColumn":  90
-}
-}
-},
-{
-"id":  "S3242",
-"message":  "Consider using more general type 'System.Collections.Generic.IEnumerable<System.Collections.Generic.KeyValuePair<object, Akka.DistributedData.VersionVector>>' instead of 'System.Collections.Immutable.ImmutableDictionary<object, Akka.DistributedData.VersionVector>'.",
-"location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Serialization\ReplicatedDataSerializer.cs",
-"region":  {
-"startLine":  358,
-"startColumn":  94,
-"endLine":  358,
-"endColumn":  99
 }
 }
 },
