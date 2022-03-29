@@ -102,6 +102,25 @@ namespace Tests.Diagnostics
         }
     }
 
+    public class ReproIfMultiReducable
+    {
+        private static readonly string Key;
+        private static readonly string Value;
+
+        static ReproIfMultiReducable()  // FN
+        {
+            if (RuntimeInformation.IsWindows())
+            {
+                Key = "Key A";
+            }
+            else
+            {
+                Key = "Key B";
+            }
+            Value = "Value";
+        }
+    }
+
     public class ReproSwitchSingle
     {
         private static readonly string Key;
