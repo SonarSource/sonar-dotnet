@@ -100,6 +100,26 @@ namespace SpinLock_Type
             }
         }
 
+        // https://github.com/SonarSource/sonar-dotnet/issues/5522
+        public void TryEnter_Finally_ForEach(object[] args)
+        {
+            bool lockTaken = false;
+            try
+            {
+                spinLock.TryEnter(ref lockTaken);   // Noncompliant FP
+                foreach (var arg in args)
+                {
+                }
+            }
+            finally
+            {
+                if (lockTaken)
+                {
+                    spinLock.Exit(false);
+                }
+            }
+        }
+
         public void Method9()
         {
             SpinLock sl = new SpinLock(false);
