@@ -56,9 +56,15 @@ namespace Tests.Diagnostics
             for (; z < 0; z++) { } // FN - we only check for initializers inside the loop statement
 
             // Reproducer for https://github.com/SonarSource/sonar-dotnet/issues/5428
-            for (float n = 0.0F; n > -0.1F; n -= 0.005F) { } // Noncompliant FP
-            for (double n = 0.0; n > -0.1; n -= 0.005) { } // Noncompliant FP
-            for (var n = 0.0; n > -0.1; n -= 0.005) { } // Noncompliant FP
+            for (float n = 0.0F; n > -0.1F; n -= 0.005F) { } // Compliant
+            for (double n = 0.0; n > -0.1; n -= 0.005) { } // Compliant
+            for (var n = 0.0; n > -0.1; n -= 0.005) { } // Compliant
+
+            for (float n = -0.16F; n == -0.23F;) { } // Noncompliant
+            for (double n = -0.42; n != -0.42;) { } // Noncompliant
+            for (var n = 0.0; n <= -0.1; n -= 0.005) { } // Noncompliant
+
+            for (var i = 9; i < 4 - 2;) { } // FN
         }
     }
 }

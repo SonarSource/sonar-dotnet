@@ -36,7 +36,7 @@ namespace SonarAnalyzer.Rules.CSharp
         private const string DiagnosticId = "S2252";
         private const string MessageFormat = "This loop will never execute.";
 
-        private static readonly CSharpExpressionNumericConverter ExpressionNumericConverter = new CSharpExpressionNumericConverter();
+        private static readonly CSharpExpressionNumericConverter ExpressionNumericConverter = new();
 
         private static readonly ISet<SyntaxKind> ConditionsToCheck = new HashSet<SyntaxKind>
         {
@@ -82,23 +82,23 @@ namespace SonarAnalyzer.Rules.CSharp
                 return false;
             }
 
-            var loopVariableDeclarationMapping = GetVariableDeclarationMapping(forNode.Declaration);
-            var loopInitializerMapping = GetLoopInitializerMapping(forNode.Initializers);
+            var loopVariableDeclarationMapping = VariableDeclarationMapping(forNode.Declaration);
+            var loopInitializerMapping = LoopInitializerMapping(forNode.Initializers);
 
-            var variableNameToIntegerMapping = loopVariableDeclarationMapping
+            var variableNameToDoubleMapping = loopVariableDeclarationMapping
                 .Union(loopInitializerMapping)
                 .ToDictionary(d => d.Key, d => d.Value);
 
             var binaryCondition = (BinaryExpressionSyntax)condition;
-            if (GetIntValue(variableNameToIntegerMapping, binaryCondition.Left, out var leftValue)
-                && GetIntValue(variableNameToIntegerMapping, binaryCondition.Right, out var rightValue))
+            if (DoubleValue(variableNameToDoubleMapping, binaryCondition.Left, out var leftValue)
+                && DoubleValue(variableNameToDoubleMapping, binaryCondition.Right, out var rightValue))
             {
                 return !ConditionIsTrue(condition.Kind(), leftValue, rightValue);
             }
             return false;
         }
 
-        private static bool ConditionIsTrue(SyntaxKind syntaxKind, int leftValue, int rightValue) =>
+        private static bool ConditionIsTrue(SyntaxKind syntaxKind, double leftValue, double rightValue) =>
             syntaxKind switch
             {
                 SyntaxKind.GreaterThanExpression => leftValue > rightValue,
@@ -120,45 +120,37 @@ namespace SonarAnalyzer.Rules.CSharp
                 && prefixUnaryExpression.OperatorToken.IsKind(SyntaxKind.ExclamationToken);
         }
 
-        /// <summary>
-        /// We try to retrieve the integer value of an expression. If the expression is an integer literal, we return its value, otherwise if
-        /// the expression is an identifier, we attempt to retrieve the integer value the variable was initialized with if it exists.
-        /// </summary>
-        /// <param name="variableNameToIntegerValue">A dictionary mapping variable names to the integer value they were initialized with if it exists</param>
-        /// <param name="expression">The expression for which we want to retrieve the integer value</param>
-        /// <param name="intValue">The output parameter that will hold the integer value if it is found</param>
-        /// <returns>true if an integer value was found for the expression, false otherwise</returns>
-        private static bool GetIntValue(IDictionary<string, int> variableNameToIntegerValue, ExpressionSyntax expression, out int intValue)
+        private static bool DoubleValue(IDictionary<string, double> variableNameToDoubleValue, ExpressionSyntax expression, out double doubleValue)
         {
-            if (ExpressionNumericConverter.TryGetConstantIntValue(expression, out intValue)
+            if (ExpressionNumericConverter.TryGetConstantDoubleValue(expression, out doubleValue)
                 || (expression is SimpleNameSyntax simpleName
-                    && variableNameToIntegerValue.TryGetValue(simpleName.Identifier.ValueText, out intValue)))
+                    && variableNameToDoubleValue.TryGetValue(simpleName.Identifier.ValueText, out doubleValue)))
             {
                 return true;
             }
 
-            intValue = default(int);
+            doubleValue = default;
             return false;
         }
 
         /// <summary>
-        /// Retrieves the mapping of variable names to their integer value from the variable declaration part of a for loop.
+        /// Retrieves the mapping of variable names to their double value from the variable declaration part of a for loop.
         /// This will find the mapping for such cases:
         /// <code>
         /// for (var i = 0;;) {}
         /// </code>
         /// </summary>
-        private static IDictionary<string, int> GetVariableDeclarationMapping(VariableDeclarationSyntax variableDeclarationSyntax)
+        private static IDictionary<string, double> VariableDeclarationMapping(VariableDeclarationSyntax variableDeclarationSyntax)
         {
-            var loopInitializerValues = new Dictionary<string, int>();
+            var loopInitializerValues = new Dictionary<string, double>();
             if (variableDeclarationSyntax != null)
             {
                 foreach (var variableDeclaration in variableDeclarationSyntax.Variables)
                 {
                     if (variableDeclaration.Initializer is EqualsValueClauseSyntax initializer
-                        && ExpressionNumericConverter.TryGetConstantIntValue(initializer.Value, out var intValue))
+                        && ExpressionNumericConverter.TryGetConstantDoubleValue(initializer.Value, out var doubleValue))
                     {
-                        loopInitializerValues.Add(variableDeclaration.Identifier.ValueText, intValue);
+                        loopInitializerValues.Add(variableDeclaration.Identifier.ValueText, doubleValue);
                     }
                 }
             }
@@ -166,16 +158,16 @@ namespace SonarAnalyzer.Rules.CSharp
         }
 
         /// <summary>
-        /// Retrieves the mapping of variable names to their integer value from the initializer part of a for loop.
+        /// Retrieves the mapping of variable names to their double value from the initializer part of a for loop.
         /// This will find the mapping for such cases:
         /// <code>
         /// int i;
         /// for (i = 0;;) {}
         /// </code>
         /// </summary>
-        private static IDictionary<string, int> GetLoopInitializerMapping(IEnumerable<ExpressionSyntax> initializers)
+        private static IDictionary<string, double> LoopInitializerMapping(IEnumerable<ExpressionSyntax> initializers)
         {
-            var loopInitializerValues = new Dictionary<string, int>();
+            var loopInitializerValues = new Dictionary<string, double>();
             if (initializers != null)
             {
                 foreach (var initializer in initializers)
@@ -183,9 +175,9 @@ namespace SonarAnalyzer.Rules.CSharp
                     if (initializer.IsKind(SyntaxKind.SimpleAssignmentExpression)
                         && initializer is AssignmentExpressionSyntax assignment
                         && assignment.Left is SimpleNameSyntax simpleName
-                        && ExpressionNumericConverter.TryGetConstantIntValue(assignment.Right, out var intValue))
+                        && ExpressionNumericConverter.TryGetConstantDoubleValue(assignment.Right, out var doubleValue))
                     {
-                        loopInitializerValues.Add(simpleName.Identifier.ValueText, intValue);
+                        loopInitializerValues.Add(simpleName.Identifier.ValueText, doubleValue);
                     }
                 }
             }
