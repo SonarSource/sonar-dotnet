@@ -112,7 +112,7 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn.RuleChecks
                 return ProcessCondition(property.Instance.TrackedSymbol());
             }
             else if (context.Operation.Instance.AsInvocation() is { } invocation
-                && invocation.TargetMethod.Is(KnownType.System_Threading_Monitor, "IsEntered"))
+                     && invocation.TargetMethod.Is(KnownType.System_Threading_Monitor, "IsEntered"))
             {
                 return ProcessCondition(ArgumentSymbol(invocation, 0));
             }
