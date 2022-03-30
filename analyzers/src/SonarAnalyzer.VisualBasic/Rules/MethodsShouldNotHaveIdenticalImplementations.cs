@@ -29,17 +29,14 @@ using SonarAnalyzer.Helpers;
 namespace SonarAnalyzer.Rules.VisualBasic
 {
     [DiagnosticAnalyzer(LanguageNames.VisualBasic)]
-    public sealed class MethodsShouldNotHaveIdenticalImplementations : MethodsShouldNotHaveIdenticalImplementationsBase<MethodBlockSyntax, SyntaxKind>
+    public sealed class MethodsShouldNotHaveIdenticalImplementations : MethodsShouldNotHaveIdenticalImplementationsBase<SyntaxKind, MethodBlockSyntax>
     {
         protected override ILanguageFacade<SyntaxKind> Language => VisualBasicFacade.Instance;
 
-        protected override SyntaxKind[] SyntaxKinds => new[] { SyntaxKind.ClassBlock };
+        protected override SyntaxKind[] SyntaxKinds => new[] { SyntaxKind.ClassBlock, SyntaxKind.StructureBlock };
 
-        protected override IEnumerable<MethodBlockSyntax> GetMethodDeclarations(SyntaxNode node)
-        {
-            var classDeclaration = (ClassBlockSyntax)node;
-            return classDeclaration.Members.OfType<MethodBlockSyntax>();
-        }
+        protected override IEnumerable<MethodBlockSyntax> GetMethodDeclarations(SyntaxNode node) =>
+            ((TypeBlockSyntax)node).Members.OfType<MethodBlockSyntax>();
 
         protected override bool AreDuplicates(MethodBlockSyntax firstMethod, MethodBlockSyntax secondMethod) =>
             firstMethod.Statements.Count > 1

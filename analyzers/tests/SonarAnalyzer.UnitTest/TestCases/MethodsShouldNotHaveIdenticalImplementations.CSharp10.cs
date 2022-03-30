@@ -2,19 +2,21 @@
 
 public record struct Sample
 {
-    public void Method1() // FN
+    public void Method1()
+//              ^^^^^^^ Secondary
+//              ^^^^^^^ Secondary@-1
     {
         string s = "test";
         Console.WriteLine("Result: {0}", s);
     }
 
-    public void Method2() // FN
+    public void Method2() // Noncompliant
     {
         string s = "test";
         Console.WriteLine("Result: {0}", s);
     }
 
-    public void Method3() // FN
+    public void Method3() // Noncompliant
     {
         string s = "test";
         Console.WriteLine("Result: {0}", s);
@@ -36,13 +38,13 @@ public record struct Sample
 
 public record struct SamplePositional(string Value)
 {
-    public void Method1() // FN
+    public void Method1() // Secondary
     {
         string s = "test";
         Console.WriteLine("Result: {0}", s);
     }
 
-    public void Method2() // FN
+    public void Method2() // Noncompliant
     {
         string s = "test";
         Console.WriteLine("Result: {0}", s);
