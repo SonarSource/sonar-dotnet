@@ -28,12 +28,20 @@ namespace Tests.Diagnostics
         private int MyMethod2() { return 42; }
         private int MyMethod3() { return 42; }
         private void MyMethod4() { return; }
+        private int MyMethod5(int neverUsedVal) => neverUsedVal; // Noncompliant
+        private int MyMethod6(int neverUsedVal) // Noncompliant
+        {
+            return neverUsedVal;
+        }
+
         private async Task MyAsyncMethod() { return; }
 
         public void Test()
         {
             MyMethod();
             MyMethod4();
+            MyMethod5(1);
+            MyMethod6(1);
             MyAsyncMethod();
             var i = MyMethod2();
             Action<int> a = (x) => MyMethod();
@@ -83,28 +91,24 @@ namespace Tests.Diagnostics
 
             myEnumerable.Select(GetNumber4);
 
+            GetNumber5(1);
+            GetNumberStatic4(1);
+
             int GetNumber1() { return 42; } // Noncompliant {{Change return type to 'void'; not a single caller uses the returned value.}}
 //          ^^^
             int GetNumber2() { return 42; } // Compliant - unused local functions are outside the scope of this rule
             int GetNumber3() { return 42; }
             int GetNumber4(string myParam) { return 42; }
+            int GetNumber5(int neverUsedVal) { return neverUsedVal; } // Noncompliant
 
             void VoidFunction() { return; }
 
             static int GetNumberStatic1() { return 42; } // Noncompliant
             static int GetNumberStatic2() { return 42; } // Compliant -  local functions are outside the scope of this rule
             static int GetNumberStatic3() { return 42; }
+            static int GetNumberStatic4(int neverUsedVal) { return neverUsedVal; } // Noncompliant
 
             static int GetNumberStaticExpression() => 42; // Noncompliant
-        }
-    }
-
-    // https://github.com/SonarSource/sonar-dotnet/issues/3247
-    public class UnusedValueIsParameter
-    {
-        private int NeverUsed(int neverUsedVal) // FN - the returned value is not used
-        {
-            return neverUsedVal;
         }
     }
 }
