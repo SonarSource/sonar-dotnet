@@ -21,3 +21,10 @@ record StaticFieldInGenericPositionalRecord<T>(int Property)
 
     public static T Prop3 { get; set; }
 }
+
+public interface IStatic<T>
+{
+    public static string Field;                 // Noncompliant
+    public static string Prop { get; set; }     // Noncompliant
+    public static T Empty;                      // Compliant
+}
