@@ -350,5 +350,19 @@ namespace Mutex_Type
                 m.ReleaseMutex();
             }
         }
+
+        public void NullTrackingCondition()
+        {
+            if (instanceMutex != null)
+            {
+                instanceMutex.WaitOne();    // Noncompliant FP
+            }
+
+
+            if (instanceMutex != null)
+            {
+                instanceMutex.ReleaseMutex();
+            }
+        }
     }
 }

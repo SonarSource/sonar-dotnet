@@ -120,6 +120,30 @@ namespace SpinLock_Type
             }
         }
 
+        public void TryEnter_NestedFinally()
+        {
+            bool lockTaken = false;
+            try
+            {
+                spinLock.TryEnter(ref lockTaken);   // Noncompliant FP
+                try
+                {
+                    Console.Write("X");
+                }
+                finally
+                {
+                    Console.Write("X");
+                }
+            }
+            finally
+            {
+                if (lockTaken)
+                {
+                    spinLock.Exit(false);
+                }
+            }
+        }
+
         public void Method9()
         {
             SpinLock sl = new SpinLock(false);
