@@ -120,16 +120,16 @@ namespace SonarAnalyzer.Rules.CSharp
                 && prefixUnaryExpression.OperatorToken.IsKind(SyntaxKind.ExclamationToken);
         }
 
-        private static bool DoubleValue(IDictionary<string, double> variableNameToDoubleValue, ExpressionSyntax expression, out double doubleValue)
+        private static bool DoubleValue(IDictionary<string, double> variableNameToDoubleValue, ExpressionSyntax expression, out double parsedValue)
         {
-            if (ExpressionNumericConverter.TryGetConstantDoubleValue(expression, out doubleValue)
+            if (ExpressionNumericConverter.TryGetConstantDoubleValue(expression, out parsedValue)
                 || (expression is SimpleNameSyntax simpleName
-                    && variableNameToDoubleValue.TryGetValue(simpleName.Identifier.ValueText, out doubleValue)))
+                    && variableNameToDoubleValue.TryGetValue(simpleName.Identifier.ValueText, out parsedValue)))
             {
                 return true;
             }
 
-            doubleValue = default;
+            parsedValue = default;
             return false;
         }
 
