@@ -68,6 +68,16 @@ namespace Tests.TestCases
     {
         private static Dictionary<string, T[]> Dict2;
 
-        public static string sProp1 { get; set; } // FN
+        public static string sProp1 { get; set; } // Noncompliant
+    }
+
+    // https://github.com/SonarSource/sonar-dotnet/issues/5238
+    public class Wrapper<T> where T : class
+    {
+        public static T EmptyProp { get; set; }
+        public static readonly T Empty = CreateEmpty();
+        private static T singleton;
+
+        private static T CreateEmpty() => null;
     }
 }
