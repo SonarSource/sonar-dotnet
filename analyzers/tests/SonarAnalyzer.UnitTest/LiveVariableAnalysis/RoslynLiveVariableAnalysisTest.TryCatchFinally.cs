@@ -786,6 +786,38 @@ Method(2);";
         }
 
         [TestMethod]
+        public void Finally_Nested_NoInstructionBetweenFinally_LiveIn()
+        {
+            var code = @"
+var outer = 42;
+var inner = 42;
+try
+{
+    try
+    {
+        Method(0);
+    }
+    finally
+    {
+        Method(inner);
+    }
+    // No action here, finally branch is crossing both regions
+}
+finally
+{
+    Method(outer);
+}
+Method(2);";
+            var context = CreateContextCS(code);
+            context.ValidateEntry();
+            context.Validate("Method(0);", new LiveIn("inner", "outer"), new LiveOut("inner", "outer"));
+            context.Validate("Method(inner);", new LiveIn("inner" /*FIXME:, "outer"), new LiveOut("outer"*/));
+            context.Validate("Method(outer);", new LiveIn("outer"));
+            context.Validate("Method(2);");
+            context.ValidateExit();
+        }
+
+        [TestMethod]
         public void Finally_InvalidSyntax_LiveIn()
         {
             /*    Entry 0
