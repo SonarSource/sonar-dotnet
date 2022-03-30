@@ -85,20 +85,20 @@ namespace SonarAnalyzer.Rules.CSharp
             var loopVariableDeclarationMapping = VariableDeclarationMapping(forNode.Declaration);
             var loopInitializerMapping = LoopInitializerMapping(forNode.Initializers);
 
-            var variableNameToDoubleMapping = loopVariableDeclarationMapping
+            var variableNameToDecimalMapping = loopVariableDeclarationMapping
                 .Union(loopInitializerMapping)
                 .ToDictionary(d => d.Key, d => d.Value);
 
             var binaryCondition = (BinaryExpressionSyntax)condition;
-            if (DoubleValue(variableNameToDoubleMapping, binaryCondition.Left, out var leftValue)
-                && DoubleValue(variableNameToDoubleMapping, binaryCondition.Right, out var rightValue))
+            if (DecimalValue(variableNameToDecimalMapping, binaryCondition.Left, out var leftValue)
+                && DecimalValue(variableNameToDecimalMapping, binaryCondition.Right, out var rightValue))
             {
                 return !ConditionIsTrue(condition.Kind(), leftValue, rightValue);
             }
             return false;
         }
 
-        private static bool ConditionIsTrue(SyntaxKind syntaxKind, double leftValue, double rightValue) =>
+        private static bool ConditionIsTrue(SyntaxKind syntaxKind, decimal leftValue, decimal rightValue) =>
             syntaxKind switch
             {
                 SyntaxKind.GreaterThanExpression => leftValue > rightValue,
@@ -120,11 +120,11 @@ namespace SonarAnalyzer.Rules.CSharp
                 && prefixUnaryExpression.OperatorToken.IsKind(SyntaxKind.ExclamationToken);
         }
 
-        private static bool DoubleValue(IDictionary<string, double> variableNameToDoubleValue, ExpressionSyntax expression, out double parsedValue)
+        private static bool DecimalValue(IDictionary<string, decimal> variableNameToDecimalValue, ExpressionSyntax expression, out decimal parsedValue)
         {
-            if (ExpressionNumericConverter.TryGetConstantDoubleValue(expression, out parsedValue)
+            if (ExpressionNumericConverter.TryGetConstantDecimalValue(expression, out parsedValue)
                 || (expression is SimpleNameSyntax simpleName
-                    && variableNameToDoubleValue.TryGetValue(simpleName.Identifier.ValueText, out parsedValue)))
+                    && variableNameToDecimalValue.TryGetValue(simpleName.Identifier.ValueText, out parsedValue)))
             {
                 return true;
             }
@@ -134,23 +134,23 @@ namespace SonarAnalyzer.Rules.CSharp
         }
 
         /// <summary>
-        /// Retrieves the mapping of variable names to their double value from the variable declaration part of a for loop.
+        /// Retrieves the mapping of variable names to their decimal value from the variable declaration part of a for loop.
         /// This will find the mapping for such cases:
         /// <code>
         /// for (var i = 0;;) {}
         /// </code>
         /// </summary>
-        private static IDictionary<string, double> VariableDeclarationMapping(VariableDeclarationSyntax variableDeclarationSyntax)
+        private static IDictionary<string, decimal> VariableDeclarationMapping(VariableDeclarationSyntax variableDeclarationSyntax)
         {
-            var loopInitializerValues = new Dictionary<string, double>();
+            var loopInitializerValues = new Dictionary<string, decimal>();
             if (variableDeclarationSyntax != null)
             {
                 foreach (var variableDeclaration in variableDeclarationSyntax.Variables)
                 {
-                    if (variableDeclaration.Initializer is EqualsValueClauseSyntax initializer
-                        && ExpressionNumericConverter.TryGetConstantDoubleValue(initializer.Value, out var doubleValue))
+                    if (variableDeclaration.Initializer is { } initializer
+                        && ExpressionNumericConverter.TryGetConstantDecimalValue(initializer.Value, out var decimalValue))
                     {
-                        loopInitializerValues.Add(variableDeclaration.Identifier.ValueText, doubleValue);
+                        loopInitializerValues.Add(variableDeclaration.Identifier.ValueText, decimalValue);
                     }
                 }
             }
@@ -158,26 +158,25 @@ namespace SonarAnalyzer.Rules.CSharp
         }
 
         /// <summary>
-        /// Retrieves the mapping of variable names to their double value from the initializer part of a for loop.
+        /// Retrieves the mapping of variable names to their decimal value from the initializer part of a for loop.
         /// This will find the mapping for such cases:
         /// <code>
         /// int i;
         /// for (i = 0;;) {}
         /// </code>
         /// </summary>
-        private static IDictionary<string, double> LoopInitializerMapping(IEnumerable<ExpressionSyntax> initializers)
+        private static IDictionary<string, decimal> LoopInitializerMapping(IEnumerable<ExpressionSyntax> initializers)
         {
-            var loopInitializerValues = new Dictionary<string, double>();
+            var loopInitializerValues = new Dictionary<string, decimal>();
             if (initializers != null)
             {
                 foreach (var initializer in initializers)
                 {
                     if (initializer.IsKind(SyntaxKind.SimpleAssignmentExpression)
-                        && initializer is AssignmentExpressionSyntax assignment
-                        && assignment.Left is SimpleNameSyntax simpleName
-                        && ExpressionNumericConverter.TryGetConstantDoubleValue(assignment.Right, out var doubleValue))
+                        && initializer is AssignmentExpressionSyntax { Left: SimpleNameSyntax simpleName } assignment
+                        && ExpressionNumericConverter.TryGetConstantDecimalValue(assignment.Right, out var decimalValue))
                     {
-                        loopInitializerValues.Add(simpleName.Identifier.ValueText, doubleValue);
+                        loopInitializerValues.Add(simpleName.Identifier.ValueText, decimalValue);
                     }
                 }
             }

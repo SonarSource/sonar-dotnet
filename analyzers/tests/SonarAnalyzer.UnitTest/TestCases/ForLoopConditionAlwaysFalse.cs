@@ -59,10 +59,12 @@ namespace Tests.Diagnostics
             for (float n = 0.0F; n > -0.1F; n -= 0.005F) { } // Compliant
             for (double n = 0.0; n > -0.1; n -= 0.005) { } // Compliant
             for (var n = 0.0; n > -0.1; n -= 0.005) { } // Compliant
+            for (decimal n = 0.0M; n > -0.1M; n -= 0.005M) { } // Compliant
 
             for (float n = -0.16F; n == -0.23F;) { } // Noncompliant
             for (double n = -0.42; n != -0.42;) { } // Noncompliant
             for (var n = 0.0; n <= -0.1; n -= 0.005) { } // Noncompliant
+            for (decimal n = 0.0M; n <= -0.1M; n -= 0.005M) { } // Noncompliant
 
             for (var i = 9; i < 4 - 2;) { } // FN
         }
