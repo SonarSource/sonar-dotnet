@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S3963",
+"message":  "Initialize all 'static fields' inline and remove the 'static constructor'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\Cluster.cs",
+"region":  {
+"startLine":  66,
+"startColumn":  9,
+"endLine":  81,
+"endColumn":  10
+}
+}
+}
+]
+}

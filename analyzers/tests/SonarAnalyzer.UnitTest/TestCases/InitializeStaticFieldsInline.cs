@@ -63,4 +63,100 @@ namespace Tests.Diagnostics
 
         static bool Initialize() => true;
     }
+
+    // https://github.com/SonarSource/sonar-dotnet/issues/4832
+    public class ReproIfSingle
+    {
+        private static readonly string Key;
+
+        static ReproIfSingle()  // Noncompliant
+        {
+            if (RuntimeInformation.IsWindows())
+            {
+                Key = "Key A";
+            }
+            else
+            {
+                Key = "Key B";
+            }
+        }
+    }
+
+    public class ReproIfMulti
+    {
+        private static readonly string Key;
+        private static readonly string Value;
+
+        static ReproIfMulti()  // Compliant, because there are multiple variables assigned conditionally. Not easy to inline.
+        {
+            if (RuntimeInformation.IsWindows())
+            {
+                Key = "Key A";
+                Value = "Value A";
+            }
+            else
+            {
+                Key = "Key B";
+                Value = "Value B";
+            }
+        }
+    }
+
+    public class ReproIfMultiReducable
+    {
+        private static readonly string Key;
+        private static readonly string Value;
+
+        static ReproIfMultiReducable()  // FN
+        {
+            if (RuntimeInformation.IsWindows())
+            {
+                Key = "Key A";
+            }
+            else
+            {
+                Key = "Key B";
+            }
+            Value = "Value";
+        }
+    }
+
+    public class ReproSwitchSingle
+    {
+        private static readonly string Key;
+
+        static ReproSwitchSingle()    // Noncompliant
+        {
+            switch (RuntimeInformation.IsWindows())
+            {
+                case true:
+                    Key = "Key A";
+                    break;
+                default:
+                    Key = "Key B";
+                    break;
+            }
+        }
+    }
+
+    public class ReproSwitchMulti
+    {
+        private static readonly string Key;
+        private static readonly string Value;
+
+        static ReproSwitchMulti()    // Compliant, because there are multiple variable assigned conditionally. Not easy to inline.
+        {
+            switch (RuntimeInformation.IsWindows())
+            {
+                case true:
+                    Key = "Key A";
+                    Value = "Value A";
+                    break;
+                default:
+                    Key = "Key B";
+                    Value = "Value B";
+                    break;
+            }
+        }
+    }
 }
