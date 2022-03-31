@@ -145,13 +145,16 @@ public interface IInterface
 }
 ", new UnusedPrivateMember(), CompilationErrorBehavior.Ignore);
 
+#if NET
+
         [TestMethod]
         public void UnusedPrivateMember_RecordPositionalConstructor() =>
-            builder.AddSnippet(@"
+            builder.AddSnippet(
+@"
 // https://github.com/SonarSource/sonar-dotnet/issues/5381
 public abstract record Foo
 {
-    Foo(string value) // Noncompliant
+    Foo(string value)
     {
         Value = value;
     }
@@ -159,6 +162,18 @@ public abstract record Foo
     public string Value { get; }
 
     public sealed record Bar(string Value) : Foo(Value);
-}").WithOptions(ParseOptionsHelper.FromCSharp10).Verify();
+}").WithOptions(ParseOptionsHelper.FromCSharp9).Verify();
+
+        [TestMethod]
+        public void UnusedPrivateMember_NonExistentRecordPositionalConstructor() =>
+        builder.AddSnippet(
+@"
+public abstract record Foo
+{
+    public sealed record Bar(string Value) : RandomRecord(Value);
+}").WithOptions(ParseOptionsHelper.FromCSharp10).WithErrorBehavior(CompilationErrorBehavior.Ignore).Verify();
+
+#endif
+
     }
 }
