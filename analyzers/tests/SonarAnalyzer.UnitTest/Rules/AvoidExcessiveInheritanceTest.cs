@@ -28,37 +28,64 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class AvoidExcessiveInheritanceTest
     {
+        private readonly VerifierBuilder defaultBuilder = new VerifierBuilder<AvoidExcessiveInheritance>();
+
         [TestMethod]
         public void AvoidExcessiveInheritance_DefaultValues() =>
-            OldVerifier.VerifyNonConcurrentAnalyzer(@"TestCases\AvoidExcessiveInheritance_DefaultValues.cs",
-                new AvoidExcessiveInheritance());
+            defaultBuilder.AddPaths(
+                "AvoidExcessiveInheritance_DefaultValues.cs",
+                "AvoidExcessiveInheritance_DefaultValues2.cs")
+                .WithAutogenerateConcurrentFiles(false)
+                .Verify();
 
 #if NET
+
         [TestMethod]
         public void AvoidExcessiveInheritance_DefaultValues_Records() =>
-            OldVerifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\AvoidExcessiveInheritance_DefaultValues.Records.cs",
-                new AvoidExcessiveInheritance());
+            defaultBuilder.AddPaths(
+                "AvoidExcessiveInheritance_DefaultValues.Records.cs",
+                "AvoidExcessiveInheritance_DefaultValues.Records2.cs")
+                .WithOptions(ParseOptionsHelper.FromCSharp9)
+                .WithAutogenerateConcurrentFiles(false)
+                .Verify();
+
 #endif
 
         [TestMethod]
         public void AvoidExcessiveInheritance_CustomValuesFullyNamedFilteredClass() =>
-            OldVerifier.VerifyNonConcurrentAnalyzer(@"TestCases\AvoidExcessiveInheritance_CustomValues.cs",
-                new AvoidExcessiveInheritance { MaximumDepth = 2, FilteredClasses = "Tests.Diagnostics.SecondSubClass" });
+            new VerifierBuilder()
+                .AddAnalyzer(() => CreateAnalyzerWithFilter("Tests.Diagnostics.SecondSubClass"))
+                .AddPaths("AvoidExcessiveInheritance_CustomValues.cs")
+                .WithAutogenerateConcurrentFiles(false)
+                .Verify();
 
         [TestMethod]
         public void AvoidExcessiveInheritance_CustomValuesWilcardFilteredClass() =>
-            OldVerifier.VerifyNonConcurrentAnalyzer(@"TestCases\AvoidExcessiveInheritance_CustomValues.cs",
-                new AvoidExcessiveInheritance { MaximumDepth = 2, FilteredClasses = "Tests.Diagnostics.*SubClass" });
+            new VerifierBuilder()
+                .AddAnalyzer(() => CreateAnalyzerWithFilter("Tests.Diagnostics.*SubClass"))
+                .AddPaths("AvoidExcessiveInheritance_CustomValues.cs")
+                .WithAutogenerateConcurrentFiles(false)
+                .Verify();
 
 #if NET
+
         [TestMethod]
         public void AvoidExcessiveInheritance_CustomValuesWilcardFilteredRecord() =>
-            OldVerifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\AvoidExcessiveInheritance_CustomValues.Records.cs",
-                new AvoidExcessiveInheritance { MaximumDepth = 2, FilteredClasses = "Tests.Diagnostics.*SubRecord" });
+            new VerifierBuilder()
+                .AddAnalyzer(() => CreateAnalyzerWithFilter("Tests.Diagnostics.*SubRecord"))
+                .AddPaths("AvoidExcessiveInheritance_CustomValues.Records.cs")
+                .WithOptions(ParseOptionsHelper.FromCSharp9)
+                .WithAutogenerateConcurrentFiles(false)
+                .Verify();
+
 #endif
 
         [TestMethod]
         public void FilteredClasses_ByDefault_ShouldBeEmpty() =>
             new AvoidExcessiveInheritance().FilteredClasses.Should().BeEmpty();
+
+        private static AvoidExcessiveInheritance CreateAnalyzerWithFilter(string filter) =>
+            new AvoidExcessiveInheritance { MaximumDepth = 2, FilteredClasses = filter };
+
     }
 }
