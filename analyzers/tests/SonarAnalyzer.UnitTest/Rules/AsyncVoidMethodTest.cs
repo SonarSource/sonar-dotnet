@@ -28,51 +28,59 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class AsyncVoidMethodTest
     {
+        private readonly VerifierBuilder builder = new VerifierBuilder<AsyncVoidMethod>();
+
         [TestMethod]
         public void AsyncVoidMethod() =>
-            OldVerifier.VerifyAnalyzer(@"TestCases\AsyncVoidMethod.cs", new AsyncVoidMethod());
+            builder.AddPaths("AsyncVoidMethod.cs")
+                .Verify();
 
 #if NET
         [TestMethod]
         public void AsyncVoidMethod_CSharp9() =>
-            OldVerifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\AsyncVoidMethod.CSharp9.cs", new AsyncVoidMethod());
+            builder.AddPaths("AsyncVoidMethod.CSharp9.cs")
+                .WithOptions(ParseOptionsHelper.FromCSharp9)
+                .Verify();
 
         [TestMethod]
         public void AsyncVoidMethod_CSharpPreview() =>
-            OldVerifier.VerifyAnalyzerCSharpPreviewLibrary(@"TestCases\AsyncVoidMethod.CSharpPreview.cs", new AsyncVoidMethod());
+            builder.AddPaths("AsyncVoidMethod.CSharpPreview.cs")
+                .WithLanguageVersion(Microsoft.CodeAnalysis.CSharp.LanguageVersion.Preview)
+                .Verify();
 
         [TestMethod]
         public void AsyncVoidMethod_CSharp10() =>
-            OldVerifier.VerifyAnalyzerFromCSharp10Library(
-                @"TestCases\AsyncVoidMethod.CSharp10.cs",
-                new AsyncVoidMethod(),
-                NuGetMetadataReference.MicrosoftVisualStudioQualityToolsUnitTestFramework);
+            builder.AddPaths("AsyncVoidMethod.CSharp10.cs")
+                .WithOptions(ParseOptionsHelper.FromCSharp10)
+                .AddReferences(NuGetMetadataReference.MicrosoftVisualStudioQualityToolsUnitTestFramework)
+                .Verify();
 
         [DataTestMethod]
         [DataRow("1.1.11")]
         [DataRow(Constants.NuGetLatestVersion)]
         public void AsyncVoidMethod_MsTestV2_CSharpPreview(string testFwkVersion) =>
-            OldVerifier.VerifyAnalyzerCSharpPreviewLibrary(
+            builder.AddPaths(
                 // The first version of the framework is not compatible with Net 6 so we need to test only v2 with preview features
-                @"TestCases\AsyncVoidMethod_MsTestV2_CSharp.Preview.cs",
-                new AsyncVoidMethod(),
-                NuGetMetadataReference.MSTestTestFramework(testFwkVersion));
+                "AsyncVoidMethod_MsTestV2_CSharp.Preview.cs")
+                .WithLanguageVersion(Microsoft.CodeAnalysis.CSharp.LanguageVersion.Preview)
+                .AddReferences(NuGetMetadataReference.MSTestTestFramework(testFwkVersion))
+                .WithConcurrentAnalysis(false)
+                .Verify();
+
 #endif
 
         [DataTestMethod]
         [DataRow("1.1.11")]
         [DataRow(Constants.NuGetLatestVersion)]
         public void AsyncVoidMethod_MsTestV2(string testFwkVersion) =>
-            OldVerifier.VerifyAnalyzer(
-                @"TestCases\AsyncVoidMethod_MsTestV2.cs",
-                new AsyncVoidMethod(),
-                NuGetMetadataReference.MSTestTestFramework(testFwkVersion));
+            builder.AddPaths("AsyncVoidMethod_MsTestV2.cs")
+                .AddReferences(NuGetMetadataReference.MSTestTestFramework(testFwkVersion))
+                .Verify();
 
         [TestMethod]
         public void AsyncVoidMethod_MsTestV1() =>
-            OldVerifier.VerifyAnalyzer(
-                @"TestCases\AsyncVoidMethod_MsTestV1.cs",
-                new AsyncVoidMethod(),
-                NuGetMetadataReference.MicrosoftVisualStudioQualityToolsUnitTestFramework);
+            builder.AddPaths("AsyncVoidMethod_MsTestV1.cs")
+                .AddReferences(NuGetMetadataReference.MicrosoftVisualStudioQualityToolsUnitTestFramework)
+                .Verify();
     }
 }
