@@ -40,11 +40,9 @@ namespace SonarAnalyzer.Rules.CSharp
         private const string MessageFormat = "This {0} has {1} parents which is greater than {2} authorized.";
         private const string FilteredClassesDefaultValue = "";
         private const int MaximumDepthDefaultValue = 5;
+        private static readonly DiagnosticDescriptor Rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager, false);
         private string filteredClasses = FilteredClassesDefaultValue;
         private ICollection<Regex> filters = new List<Regex>();
-
-        private static readonly DiagnosticDescriptor Rule =
-            DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager, false);
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
 
         [RuleParameter("max", PropertyType.Integer, "Maximum depth of the inheritance tree. (Number)", MaximumDepthDefaultValue)]
@@ -113,7 +111,7 @@ namespace SonarAnalyzer.Rules.CSharp
             return new Regex(regexPattern, RegexOptions.Compiled);
         }
 
-        private class ObjectTypeInfo
+        private sealed class ObjectTypeInfo
         {
             public SyntaxToken Identifier { get; }
 
