@@ -30,10 +30,15 @@ namespace SonarAnalyzer.CFG.LiveVariableAnalysis
 {
     public sealed class RoslynLiveVariableAnalysis : LiveVariableAnalysisBase<ControlFlowGraph, BasicBlock>
     {
+        private readonly Graph graph;
+
         protected override BasicBlock ExitBlock => Cfg.ExitBlock;
 
-        public RoslynLiveVariableAnalysis(ControlFlowGraph cfg) : base(cfg, OriginalDeclaration(cfg.OriginalOperation)) =>
+        public RoslynLiveVariableAnalysis(ControlFlowGraph cfg) : base(cfg, OriginalDeclaration(cfg.OriginalOperation))
+        {
+            graph = new Graph(cfg);
             Analyze();
+        }
 
         public ISymbol ParameterOrLocalSymbol(IOperation operation)
         {
@@ -49,37 +54,8 @@ namespace SonarAnalyzer.CFG.LiveVariableAnalysis
         protected override IEnumerable<BasicBlock> ReversedBlocks() =>
             Cfg.Blocks.Reverse();
 
-        protected override IEnumerable<BasicBlock> Successors(BasicBlock block)
-        {
-            foreach (var successor in block.Successors)
-            {
-                if (successor.Destination != null && successor.FinallyRegions.Any())
-                {   // When exiting finally region, redirect to finally instead of the normal destination
-                    foreach (var finallyRegion in successor.FinallyRegions)
-                    {
-                        yield return Cfg.Blocks[finallyRegion.FirstBlockOrdinal];
-                    }
-                }
-                else if (successor.Destination != null)
-                {
-                    yield return successor.Destination;
-                }
-                else if (successor.Source.EnclosingRegion.Kind == ControlFlowRegionKind.Finally)
-                {   // Redirect exit from throw and finally to following blocks.
-                    foreach (var trySuccessor in TryRegionSuccessors(block.EnclosingRegion))
-                    {
-                        yield return trySuccessor.Destination;
-                    }
-                }
-            }
-            if (block.IsEnclosedIn(ControlFlowRegionKind.Try))
-            {
-                foreach (var catchOrFilterRegion in block.Successors.SelectMany(CatchOrFilterRegions))
-                {
-                    yield return Cfg.Blocks[catchOrFilterRegion.FirstBlockOrdinal];
-                }
-            }
-        }
+        protected override IEnumerable<BasicBlock> Successors(BasicBlock block) =>
+            graph[block].Successors;
 
         protected override IEnumerable<BasicBlock> Predecessors(BasicBlock block)
         {
@@ -303,6 +279,88 @@ namespace SonarAnalyzer.CFG.LiveVariableAnalysis
                     return null;
                 }
             }
+        }
+
+        private class Graph
+        {
+            private readonly ControlFlowGraph cfg;
+            private readonly Dictionary<int, Node> nodes = new();
+
+            public Node this[BasicBlock block] => nodes[block.Ordinal];
+
+            public Graph(ControlFlowGraph cfg)
+            {
+                this.cfg = cfg;
+                foreach (var block in cfg.Blocks)
+                {
+                    nodes.Add(block.Ordinal, new());
+                }
+                foreach (var block in cfg.Blocks)
+                {
+                    Process(block);
+                }
+            }
+
+            private void Process(BasicBlock block)
+            {
+                foreach (var successor in block.Successors)
+                {
+                    if (successor.Destination != null)
+                    {
+                        ProcessDirectDestination(successor);
+                    }
+                    else if (successor.Source.EnclosingRegion is { Kind: ControlFlowRegionKind.Finally } finallyRegion)
+                    {
+                        ProcessFinallyRegion(successor.Source, finallyRegion);
+                    }
+                }
+                if (block.IsEnclosedIn(ControlFlowRegionKind.Try))
+                {
+                    foreach (var catchOrFilterRegion in block.Successors.SelectMany(CatchOrFilterRegions))
+                    {
+                        AddBranch(block, cfg.Blocks[catchOrFilterRegion.FirstBlockOrdinal]);
+                    }
+                }
+            }
+
+            private void ProcessDirectDestination(ControlFlowBranch branch)
+            {
+                if (branch.FinallyRegions.Any())
+                {   // When exiting finally region, redirect to finally instead of the normal destination
+                    foreach (var finallyRegion in branch.FinallyRegions)    // FIXME: All of them or just the first one?
+                    {
+                        AddBranch(branch.Source, cfg.Blocks[finallyRegion.FirstBlockOrdinal]);
+                    }
+                }
+                else
+                {
+                    AddBranch(branch.Source, branch.Destination);
+                }
+            }
+
+            private void ProcessFinallyRegion(BasicBlock source, ControlFlowRegion finallyRegion)
+            {
+                // Redirect exit from throw and finally to following blocks.
+                foreach (var trySuccessor in TryRegionSuccessors(source.EnclosingRegion))
+                {
+                    AddBranch(source, trySuccessor.Destination);
+                }
+            }
+
+            private IEnumerable<ControlFlowBranch> TryRegionSuccessors(ControlFlowRegion finallyRegion) =>
+                TryRegion(finallyRegion).Blocks(cfg).SelectMany(x => x.Successors).Where(x => x.FinallyRegions.Contains(finallyRegion));
+
+            private void AddBranch(BasicBlock source, BasicBlock destination)
+            {
+                nodes[source.Ordinal].Successors.Add(destination);
+                nodes[destination.Ordinal].Predecessors.Add(source);
+            }
+        }
+
+        private class Node
+        {
+            public readonly List<BasicBlock> Predecessors = new();
+            public readonly List<BasicBlock> Successors = new();
         }
     }
 }
