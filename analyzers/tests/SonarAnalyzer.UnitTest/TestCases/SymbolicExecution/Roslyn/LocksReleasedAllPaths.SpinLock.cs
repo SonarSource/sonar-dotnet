@@ -120,6 +120,7 @@ namespace SpinLock_Type
             }
         }
 
+        // https://github.com/SonarSource/sonar-dotnet/issues/5522
         public void TryEnter_NestedFinally()
         {
             bool lockTaken = false;
