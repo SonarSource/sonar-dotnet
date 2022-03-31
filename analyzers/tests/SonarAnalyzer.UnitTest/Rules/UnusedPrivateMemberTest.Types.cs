@@ -19,7 +19,6 @@
  */
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using SonarAnalyzer.Rules.CSharp;
 using SonarAnalyzer.UnitTest.TestFramework;
 
 namespace SonarAnalyzer.UnitTest.Rules
@@ -28,7 +27,7 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         public void UnusedPrivateMember_Types_Accessibility() =>
-            OldVerifier.VerifyCSharpAnalyzer(@"
+            builder.AddSnippet(@"
 public class PrivateTypes
 {
     private class InnerPrivateClass // Noncompliant {{Remove the unused private type 'InnerPrivateClass'.}}
@@ -56,22 +55,22 @@ public class NonPrivateTypes
     protected internal struct ProtectedInternalStruct { }
     public struct PublicStruct { }
 }
-", new UnusedPrivateMember());
+").Verify();
 
         [TestMethod]
         public void UnusedPrivateMember_Types_InternalsVisibleTo() =>
-            OldVerifier.VerifyCSharpAnalyzer(@"
+            builder.AddSnippet(@"
 [assembly:System.Runtime.CompilerServices.InternalsVisibleTo("""")]
 public class PrivateTypes
 {
     private class PrivateClass { } // Noncompliant
     internal class InternalClass { } // Compliant, internal types are not reported when InternalsVisibleTo is present
 }
-", new UnusedPrivateMember());
+").Verify();
 
         [TestMethod]
         public void UnusedPrivateMember_Types_Internals() =>
-            OldVerifier.VerifyCSharpAnalyzer(@"
+            builder.AddSnippet(@"
 // https://github.com/SonarSource/sonar-dotnet/issues/1225
 // https://github.com/SonarSource/sonar-dotnet/issues/904
 using System;
@@ -89,11 +88,11 @@ public class Sample
     {
         public const int X = 5;
     }
-}", new UnusedPrivateMember());
+}").Verify();
 
         [TestMethod]
         public void UnusedPrivateMember_Types_DirectReferences() =>
-            OldVerifier.VerifyCSharpAnalyzer(@"
+            builder.AddSnippet(@"
 using System.Linq;
 public class PrivateTypes
 {
@@ -118,11 +117,11 @@ public class PrivateTypes
         o.OfType<PrivateClass4>();
     }
 }
-", new UnusedPrivateMember());
+").Verify();
 
         [TestMethod]
         public void UnusedPrivateMember_SupportTypeKinds() =>
-            OldVerifier.VerifyCSharpAnalyzer(@"
+            builder.AddSnippet(@"
 public class PrivateTypes
 {
     private class MyPrivateClass { } // Noncompliant
@@ -151,6 +150,6 @@ public class PrivateTypes
 
     public static int PerformCalculation(int x, int y) => x + y;
 }
-", new UnusedPrivateMember());
+").Verify();
     }
 }
