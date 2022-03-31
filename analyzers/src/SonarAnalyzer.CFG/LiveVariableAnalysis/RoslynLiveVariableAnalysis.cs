@@ -85,7 +85,8 @@ namespace SonarAnalyzer.CFG.LiveVariableAnalysis
             {
                 if (successor.Destination != null)
                 {
-                    BuildBranchesDirect(successor);
+                    // When exiting finally region, redirect to finally instead of the normal destination
+                    AddBranch(successor.Source, successor.FinallyRegions.Any() ? Cfg.Blocks[successor.FinallyRegions.First().FirstBlockOrdinal] : successor.Destination);
                 }
                 else if (successor.Source.EnclosingRegion is { Kind: ControlFlowRegionKind.Finally } finallyRegion)
                 {
@@ -101,21 +102,6 @@ namespace SonarAnalyzer.CFG.LiveVariableAnalysis
             }
         }
 
-        private void BuildBranchesDirect(ControlFlowBranch branch)
-        {
-            if (branch.FinallyRegions.Any())
-            {   // When exiting finally region, redirect to finally instead of the normal destination
-                foreach (var finallyRegion in branch.FinallyRegions)    // FIXME: All of them or just the first one?
-                {
-                    AddBranch(branch.Source, Cfg.Blocks[finallyRegion.FirstBlockOrdinal]);
-                }
-            }
-            else
-            {
-                AddBranch(branch.Source, branch.Destination);
-            }
-        }
-
         private void BuildBranchesFinally(BasicBlock source, ControlFlowRegion finallyRegion)
         {
             // Redirect exit from throw and finally to following blocks.
@@ -125,17 +111,17 @@ namespace SonarAnalyzer.CFG.LiveVariableAnalysis
             }
         }
 
-        private IEnumerable<ControlFlowBranch> TryRegionSuccessors(ControlFlowRegion finallyRegion) =>
-            TryRegion(finallyRegion).Blocks(Cfg).SelectMany(x => x.Successors).Where(x => x.FinallyRegions.Contains(finallyRegion));
-
         private void AddBranch(BasicBlock source, BasicBlock destination)
         {
             blockSuccessors[source.Ordinal].Add(destination);
             blockPredecessors[destination.Ordinal].Add(source);
         }
 
-        private static ControlFlowRegion TryRegion(ControlFlowRegion finallyRegion) =>
-            finallyRegion.EnclosingRegion.NestedRegions.Single(x => x.Kind == ControlFlowRegionKind.Try);
+        private IEnumerable<ControlFlowBranch> TryRegionSuccessors(ControlFlowRegion finallyRegion)
+        {
+            var tryRegion = finallyRegion.EnclosingRegion.NestedRegions.Single(x => x.Kind == ControlFlowRegionKind.Try);
+            return tryRegion.Blocks(Cfg).SelectMany(x => x.Successors).Where(x => x.FinallyRegions.Contains(finallyRegion));
+        }
 
         private static IEnumerable<ControlFlowRegion> CatchOrFilterRegions(ControlFlowBranch trySuccessor) =>
             trySuccessor.Semantics == ControlFlowBranchSemantics.Throw
