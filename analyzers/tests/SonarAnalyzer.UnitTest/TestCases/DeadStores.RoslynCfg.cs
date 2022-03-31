@@ -1389,7 +1389,7 @@ namespace Tests.Diagnostics
             var counter = 0;
             while (counter < 5)
             {
-                counter++;  // Noncompliant FP related to LVA
+                counter++;  // Compliant
                 try
                 {
                     SomethingThatCanThrow();
