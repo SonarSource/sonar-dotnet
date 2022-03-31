@@ -86,6 +86,5 @@ namespace SonarAnalyzer.UnitTest.Rules
 
         private static AvoidExcessiveInheritance CreateAnalyzerWithFilter(string filter) =>
             new AvoidExcessiveInheritance { MaximumDepth = 2, FilteredClasses = filter };
-
     }
 }
