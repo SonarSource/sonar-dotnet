@@ -145,162 +145,6 @@
 },
 {
 "id":  "S3242",
-"message":  "Consider using more general type 'Akka.Streams.Dsl.IUnzipWithCreator<TIn, (TOut0, TOut1), Akka.Streams.Dsl.UnzipWith<TIn, TOut0, TOut1>>' instead of 'Akka.Streams.Dsl.UnzipWithCreator<TIn, TOut0, TOut1>'.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\UnzipWith.cs",
-"region":  {
-"startLine":  167,
-"startColumn":  149,
-"endLine":  167,
-"endColumn":  156
-}
-}
-},
-{
-"id":  "S3242",
-"message":  "Consider using more general type 'Akka.Streams.Dsl.IUnzipWithCreator<TIn, (TOut0, TOut1, TOut2), Akka.Streams.Dsl.UnzipWith<TIn, TOut0, TOut1, TOut2>>' instead of 'Akka.Streams.Dsl.UnzipWithCreator<TIn, TOut0, TOut1, TOut2>'.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\UnzipWith.cs",
-"region":  {
-"startLine":  181,
-"startColumn":  177,
-"endLine":  181,
-"endColumn":  184
-}
-}
-},
-{
-"id":  "S3242",
-"message":  "Consider using more general type 'Akka.Streams.Dsl.IUnzipWithCreator<TIn, (TOut0, TOut1, TOut2, TOut3), Akka.Streams.Dsl.UnzipWith<TIn, TOut0, TOut1, TOut2, TOut3>>' instead of 'Akka.Streams.Dsl.UnzipWithCreator<TIn, TOut0, TOut1, TOut2, TOut3>'.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\UnzipWith.cs",
-"region":  {
-"startLine":  196,
-"startColumn":  205,
-"endLine":  196,
-"endColumn":  212
-}
-}
-},
-{
-"id":  "S3242",
-"message":  "Consider using more general type 'Akka.Streams.Dsl.IUnzipWithCreator<TIn, (TOut0, TOut1, TOut2, TOut3, TOut4), Akka.Streams.Dsl.UnzipWith<TIn, TOut0, TOut1, TOut2, TOut3, TOut4>>' instead of 'Akka.Streams.Dsl.UnzipWithCreator<TIn, TOut0, TOut1, TOut2, TOut3, TOut4>'.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\UnzipWith.cs",
-"region":  {
-"startLine":  212,
-"startColumn":  233,
-"endLine":  212,
-"endColumn":  240
-}
-}
-},
-{
-"id":  "S3242",
-"message":  "Consider using more general type 'Akka.Streams.Dsl.IUnzipWithCreator<TIn, (TOut0, TOut1, TOut2, TOut3, TOut4, TOut5), Akka.Streams.Dsl.UnzipWith<TIn, TOut0, TOut1, TOut2, TOut3, TOut4, TOut5>>' instead of 'Akka.Streams.Dsl.UnzipWithCreator<TIn, TOut0, TOut1, TOut2, TOut3, TOut4, TOut5>'.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\UnzipWith.cs",
-"region":  {
-"startLine":  229,
-"startColumn":  261,
-"endLine":  229,
-"endColumn":  268
-}
-}
-},
-{
-"id":  "S3242",
-"message":  "Consider using more general type 'Akka.Streams.Dsl.IUnzipWithCreator<TIn, (TOut0, TOut1, TOut2, TOut3, TOut4, TOut5, TOut6), Akka.Streams.Dsl.UnzipWith<TIn, TOut0, TOut1, TOut2, TOut3, TOut4, TOut5, TOut6>>' instead of 'Akka.Streams.Dsl.UnzipWithCreator<TIn, TOut0, TOut1, TOut2, TOut3, TOut4, TOut5, TOut6>'.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\UnzipWith.cs",
-"region":  {
-"startLine":  247,
-"startColumn":  289,
-"endLine":  247,
-"endColumn":  296
-}
-}
-},
-{
-"id":  "S3242",
-"message":  "Consider using more general type 'Akka.Streams.IGraph<Akka.Streams.BidiShape<TIn1, TOut1, TIn2, TOut2>>' instead of 'Akka.Streams.IGraph<Akka.Streams.BidiShape<TIn1, TOut1, TIn2, TOut2>, TMat>'.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\BidiFlow.cs",
-"region":  {
-"startLine":  31,
-"startColumn":  63,
-"endLine":  31,
-"endColumn":  68
-}
-}
-},
-{
-"id":  "S3242",
-"message":  "Consider using more general type 'Akka.Streams.IGraph<Akka.Streams.FlowShape<TOut, TOut2>>' instead of 'Akka.Streams.IGraph<Akka.Streams.FlowShape<TOut, TOut2>, TMat2>'.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Flow.cs",
-"region":  {
-"startLine":  90,
-"startColumn":  115,
-"endLine":  90,
-"endColumn":  119
-}
-}
-},
-{
-"id":  "S3242",
-"message":  "Consider using more general type 'Akka.Streams.IGraph<Akka.Streams.SinkShape<TOut>>' instead of 'Akka.Streams.IGraph<Akka.Streams.SinkShape<TOut>, TMat2>'.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Flow.cs",
-"region":  {
-"startLine":  265,
-"startColumn":  93,
-"endLine":  265,
-"endColumn":  97
-}
-}
-},
-{
-"id":  "S3242",
-"message":  "Consider using more general type 'Akka.Streams.IGraph<Akka.Streams.BidiShape<TOut, TOut2, TIn2, TIn>>' instead of 'Akka.Streams.IGraph<Akka.Streams.BidiShape<TOut, TOut2, TIn2, TIn>, TMat2>'.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Flow.cs",
-"region":  {
-"startLine":  337,
-"startColumn":  138,
-"endLine":  337,
-"endColumn":  142
-}
-}
-},
-{
-"id":  "S3242",
-"message":  "Consider using more general type 'Akka.Streams.IGraph<Akka.Streams.FlowShape<TOut, TIn>>' instead of 'Akka.Streams.IGraph<Akka.Streams.FlowShape<TOut, TIn>, TMat2>'.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Flow.cs",
-"region":  {
-"startLine":  359,
-"startColumn":  105,
-"endLine":  359,
-"endColumn":  109
-}
-}
-},
-{
-"id":  "S3242",
-"message":  "Consider using more general type 'Akka.Streams.IGraph<Akka.Streams.FlowShape<TIn, TOut>>' instead of 'Akka.Streams.IGraph<Akka.Streams.FlowShape<TIn, TOut>, TMat>'.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Flow.cs",
-"region":  {
-"startLine":  476,
-"startColumn":  107,
-"endLine":  476,
-"endColumn":  112
-}
-}
-},
-{
-"id":  "S3242",
 "message":  "Consider using more general type 'Akka.Streams.Dsl.IFlow<TOut, TMat>' instead of 'Akka.Streams.Dsl.Flow<TIn, TOut, TMat>'.",
 "location":  {
 "uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\FlowOperations.cs",
@@ -1237,19 +1081,6 @@
 },
 {
 "id":  "S3242",
-"message":  "Consider using more general type 'Akka.Streams.IGraph<Akka.Streams.FlowShape<TIn2, TOut>, TMat>' instead of 'Akka.Streams.Dsl.Flow<TIn2, TOut, TMat>'.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\FlowOperations.cs",
-"region":  {
-"startLine":  2304,
-"startColumn":  41,
-"endLine":  2304,
-"endColumn":  45
-}
-}
-},
-{
-"id":  "S3242",
 "message":  "Consider using more general type 'Akka.Streams.OutPort' instead of 'Akka.Streams.Outlet<T1>'.",
 "location":  {
 "uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\GraphDsl.cs",
@@ -1375,162 +1206,6 @@
 "startColumn":  85,
 "endLine":  162,
 "endColumn":  86
-}
-}
-},
-{
-"id":  "S3242",
-"message":  "Consider using more general type 'Akka.Streams.IGraph<Akka.Streams.SinkShape<TIn>>' instead of 'Akka.Streams.IGraph<Akka.Streams.SinkShape<TIn>, TMat>'.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Sink.cs",
-"region":  {
-"startLine":  194,
-"startColumn":  84,
-"endLine":  194,
-"endColumn":  89
-}
-}
-},
-{
-"id":  "S3242",
-"message":  "Consider using more general type 'Akka.Streams.IGraph<Akka.Streams.SinkShape<TOut>, Akka.NotUsed>' instead of 'Akka.Streams.Dsl.Sink<TOut, Akka.NotUsed>'.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Sink.cs",
-"region":  {
-"startLine":  326,
-"startColumn":  152,
-"endLine":  326,
-"endColumn":  157
-}
-}
-},
-{
-"id":  "S3242",
-"message":  "Consider using more general type 'Akka.Streams.IGraph<Akka.Streams.SinkShape<TOut>, Akka.NotUsed>' instead of 'Akka.Streams.Dsl.Sink<TOut, Akka.NotUsed>'.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Sink.cs",
-"region":  {
-"startLine":  326,
-"startColumn":  179,
-"endLine":  326,
-"endColumn":  185
-}
-}
-},
-{
-"id":  "S3242",
-"message":  "Consider using more general type 'Akka.Streams.IGraph<Akka.Streams.SinkShape<TIn>>' instead of 'Akka.Streams.IGraph<Akka.Streams.SinkShape<TIn>, TMat>'.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Sink.cs",
-"region":  {
-"startLine":  561,
-"startColumn":  89,
-"endLine":  561,
-"endColumn":  94
-}
-}
-},
-{
-"id":  "S3242",
-"message":  "Consider using more general type 'Akka.Streams.IGraph<Akka.Streams.SinkShape<TOut>>' instead of 'Akka.Streams.IGraph<Akka.Streams.SinkShape<TOut>, TMat2>'.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Source.cs",
-"region":  {
-"startLine":  75,
-"startColumn":  98,
-"endLine":  75,
-"endColumn":  102
-}
-}
-},
-{
-"id":  "S3242",
-"message":  "Consider using more general type 'Akka.Streams.IGraph<Akka.Streams.FlowShape<TOut, TOut2>>' instead of 'Akka.Streams.IGraph<Akka.Streams.FlowShape<TOut, TOut2>, TMat2>'.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Source.cs",
-"region":  {
-"startLine":  228,
-"startColumn":  112,
-"endLine":  228,
-"endColumn":  116
-}
-}
-},
-{
-"id":  "S3242",
-"message":  "Consider using more general type 'Akka.Streams.IGraph<Akka.Streams.SourceShape<T>, Akka.NotUsed>' instead of 'Akka.Streams.Dsl.Source<T, Akka.NotUsed>'.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Source.cs",
-"region":  {
-"startLine":  375,
-"startColumn":  76,
-"endLine":  375,
-"endColumn":  81
-}
-}
-},
-{
-"id":  "S3242",
-"message":  "Consider using more general type 'Akka.Streams.IGraph<Akka.Streams.SourceShape<T>, Akka.NotUsed>' instead of 'Akka.Streams.Dsl.Source<T, Akka.NotUsed>'.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Source.cs",
-"region":  {
-"startLine":  375,
-"startColumn":  102,
-"endLine":  375,
-"endColumn":  108
-}
-}
-},
-{
-"id":  "S3242",
-"message":  "Consider using more general type 'Akka.Streams.IGraph<Akka.Streams.SourceShape<T>>' instead of 'Akka.Streams.IGraph<Akka.Streams.SourceShape<T>, TMat>'.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Source.cs",
-"region":  {
-"startLine":  517,
-"startColumn":  87,
-"endLine":  517,
-"endColumn":  93
-}
-}
-},
-{
-"id":  "S3242",
-"message":  "Consider using more general type 'Akka.Streams.IGraph<Akka.Streams.SourceShape<T>, Akka.NotUsed>' instead of 'Akka.Streams.Dsl.Source<T, Akka.NotUsed>'.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Source.cs",
-"region":  {
-"startLine":  759,
-"startColumn":  83,
-"endLine":  759,
-"endColumn":  88
-}
-}
-},
-{
-"id":  "S3242",
-"message":  "Consider using more general type 'Akka.Streams.IGraph<Akka.Streams.SourceShape<T>, Akka.NotUsed>' instead of 'Akka.Streams.Dsl.Source<T, Akka.NotUsed>'.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Source.cs",
-"region":  {
-"startLine":  759,
-"startColumn":  109,
-"endLine":  759,
-"endColumn":  115
-}
-}
-},
-{
-"id":  "S3242",
-"message":  "Consider using more general type 'Akka.Streams.IGraph<Akka.Streams.SourceShape<T>, TMat2>' instead of 'Akka.Streams.Dsl.Source<T, TMat2>'.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Source.cs",
-"region":  {
-"startLine":  784,
-"startColumn":  140,
-"endLine":  784,
-"endColumn":  146
 }
 }
 },
@@ -3317,32 +2992,6 @@
 },
 {
 "id":  "S3242",
-"message":  "Consider using more general type 'Akka.Streams.IGraph<Akka.Streams.FlowShape<Akka.IO.ByteString, Akka.IO.ByteString>, TMat>' instead of 'Akka.Streams.Dsl.Flow<Akka.IO.ByteString, Akka.IO.ByteString, TMat>'.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Tcp.cs",
-"region":  {
-"startLine":  106,
-"startColumn":  77,
-"endLine":  106,
-"endColumn":  84
-}
-}
-},
-{
-"id":  "S3242",
-"message":  "Consider using more general type 'Akka.Streams.IGraph<Akka.Streams.FlowShape<Akka.IO.ByteString, Akka.IO.ByteString>, Akka.NotUsed>' instead of 'Akka.Streams.Dsl.Flow<Akka.IO.ByteString, Akka.IO.ByteString, Akka.NotUsed>'.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Tcp.cs",
-"region":  {
-"startLine":  219,
-"startColumn":  92,
-"endLine":  219,
-"endColumn":  99
-}
-}
-},
-{
-"id":  "S3242",
 "message":  "Consider using more general type 'Akka.Streams.Dsl.IFlow<TIn, TMat>' instead of 'Akka.Streams.Dsl.Source<TIn, TMat>'.",
 "location":  {
 "uri":  "sources\akka.net\src\core\Akka.Streams\Extra\Implicits.cs",
@@ -3421,32 +3070,6 @@
 },
 {
 "id":  "S3242",
-"message":  "Consider using more general type 'System.Collections.Generic.IEnumerable<Akka.Streams.Stage.IGraphStageWithMaterializedValue<Akka.Streams.Shape, object>>' instead of 'System.Collections.Generic.IList<Akka.Streams.Stage.IGraphStageWithMaterializedValue<Akka.Streams.Shape, object>>'.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\GraphAssembly.cs",
-"region":  {
-"startLine":  64,
-"startColumn":  143,
-"endLine":  64,
-"endColumn":  149
-}
-}
-},
-{
-"id":  "S3242",
-"message":  "Consider using more general type 'Akka.Streams.IGraph<Akka.Streams.SinkShape<TIn>, TMat>' instead of 'Akka.Streams.Dsl.Sink<TIn, TMat>'.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Sinks.cs",
-"region":  {
-"startLine":  1019,
-"startColumn":  61,
-"endLine":  1019,
-"endColumn":  65
-}
-}
-},
-{
-"id":  "S3242",
 "message":  "Consider using more general type 'Akka.Streams.Implementation.IModule' instead of 'Akka.Streams.Implementation.Module'.",
 "location":  {
 "uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\StreamLayout.cs",
@@ -3455,6 +3078,19 @@
 "startColumn":  53,
 "endLine":  1193,
 "endColumn":  59
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'Akka.Streams.Inlet' instead of 'Akka.Streams.Inlet<T>'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Stage\GraphStage.cs",
+"region":  {
+"startLine":  906,
+"startColumn":  56,
+"endLine":  906,
+"endColumn":  61
 }
 }
 },
@@ -3533,6 +3169,19 @@
 "startColumn":  42,
 "endLine":  1256,
 "endColumn":  48
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'Akka.Streams.Outlet' instead of 'Akka.Streams.Outlet<T>'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Stage\GraphStage.cs",
+"region":  {
+"startLine":  1303,
+"startColumn":  58,
+"endLine":  1303,
+"endColumn":  64
 }
 }
 },

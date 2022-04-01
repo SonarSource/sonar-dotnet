@@ -15,32 +15,6 @@
 },
 {
 "id":  "S3242",
-"message":  "Consider using more general type 'System.Collections.Generic.ICollection<System.Func<Nancy.NancyContext, string, Nancy.Response>>' instead of 'System.Collections.Generic.IList<System.Func<Nancy.NancyContext, string, Nancy.Response>>'.",
-"location":  {
-"uri":  "sources\Nancy\src\Nancy\Conventions\StaticContentsConventionsExtensions.cs",
-"region":  {
-"startLine":  18,
-"startColumn":  90,
-"endLine":  18,
-"endColumn":  101
-}
-}
-},
-{
-"id":  "S3242",
-"message":  "Consider using more general type 'System.Collections.Generic.ICollection<System.Func<Nancy.NancyContext, string, Nancy.Response>>' instead of 'System.Collections.Generic.IList<System.Func<Nancy.NancyContext, string, Nancy.Response>>'.",
-"location":  {
-"uri":  "sources\Nancy\src\Nancy\Conventions\StaticContentsConventionsExtensions.cs",
-"region":  {
-"startLine":  29,
-"startColumn":  85,
-"endLine":  29,
-"endColumn":  96
-}
-}
-},
-{
-"id":  "S3242",
 "message":  "Consider using more general type 'Nancy.IObjectSerializer' instead of 'Nancy.DefaultObjectSerializer'.",
 "location":  {
 "uri":  "sources\Nancy\src\Nancy\Diagnostics\DiagnosticsHook.cs",
@@ -88,32 +62,6 @@
 "startColumn":  89,
 "endLine":  144,
 "endColumn":  95
-}
-}
-},
-{
-"id":  "S3242",
-"message":  "Consider using more general type 'System.Collections.Generic.IEnumerable<System.Collections.Generic.KeyValuePair<string, object>>' instead of 'System.Collections.Generic.IDictionary<string, object>'.",
-"location":  {
-"uri":  "sources\Nancy\src\Nancy\Routing\Trie\Nodes\TrieNode.cs",
-"region":  {
-"startLine":  202,
-"startColumn":  133,
-"endLine":  202,
-"endColumn":  146
-}
-}
-},
-{
-"id":  "S3242",
-"message":  "Consider using more general type 'System.Collections.Generic.IEnumerable<System.Collections.Generic.KeyValuePair<string, object>>' instead of 'System.Collections.Generic.IDictionary<string, object>'.",
-"location":  {
-"uri":  "sources\Nancy\src\Nancy\Routing\Trie\Nodes\TrieNode.cs",
-"region":  {
-"startLine":  242,
-"startColumn":  177,
-"endLine":  242,
-"endColumn":  190
 }
 }
 },

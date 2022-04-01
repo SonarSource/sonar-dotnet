@@ -33,26 +33,25 @@ namespace SonarAnalyzer.Rules.CSharp
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
     public sealed class MethodsShouldUseBaseTypes : SonarDiagnosticAnalyzer
     {
-        internal const string DiagnosticId = "S3242";
+        private const string DiagnosticId = "S3242";
         private const string MessageFormat = "Consider using more general type '{0}' instead of '{1}'.";
 
-        private static readonly DiagnosticDescriptor rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(rule);
+        private static readonly DiagnosticDescriptor Rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
 
         protected override void Initialize(SonarAnalysisContext context) =>
             context.RegisterSyntaxNodeActionInNonGenerated(
-                c => FindViolations((BaseMethodDeclarationSyntax)c.Node, c.SemanticModel)
-                        .ForEach(d => c.ReportIssue(d)),
+                c => FindViolations((BaseMethodDeclarationSyntax)c.Node, c.SemanticModel).ForEach(d => c.ReportIssue(d)),
                 SyntaxKind.MethodDeclaration);
 
         private static List<Diagnostic> FindViolations(BaseMethodDeclarationSyntax methodDeclaration, SemanticModel semanticModel)
         {
-            if (!(semanticModel.GetDeclaredSymbol(methodDeclaration) is IMethodSymbol methodSymbol) ||
-                methodSymbol.Parameters.Length == 0 ||
-                methodSymbol.IsOverride ||
-                methodSymbol.IsVirtual ||
-                methodSymbol.GetInterfaceMember() != null ||
-                methodSymbol.IsEventHandler())
+            if (semanticModel.GetDeclaredSymbol(methodDeclaration) is not { } methodSymbol
+                || methodSymbol.Parameters.Length == 0
+                || methodSymbol.IsOverride
+                || methodSymbol.IsVirtual
+                || methodSymbol.GetInterfaceMember() != null
+                || methodSymbol.IsEventHandler())
             {
                 return Enumerable.Empty<Diagnostic>().ToList();
             }
@@ -72,23 +71,21 @@ namespace SonarAnalyzer.Rules.CSharp
 
             foreach (var identifierReference in parameterUsesInMethod)
             {
-                var key = identifierReference.Identifier.ValueText ?? "";
-
-                if (!parametersToCheck.TryGetValue(key, out var paramData) ||
-                    !paramData.ShouldReportOn)
+                var key = identifierReference.Identifier.ValueText ?? string.Empty;
+                if (!parametersToCheck.TryGetValue(key, out var paramData) || !paramData.ShouldReportOn)
                 {
                     continue;
                 }
 
-                if (identifierReference.Parent is EqualsValueClauseSyntax ||
-                    identifierReference.Parent is AssignmentExpressionSyntax)
+                if (identifierReference.Parent is EqualsValueClauseSyntax or AssignmentExpressionSyntax)
                 {
                     paramData.ShouldReportOn = false;
                     continue;
                 }
 
                 var symbolUsedAs = FindParameterUseAsType(identifierReference, semanticModel);
-                if (symbolUsedAs != null)
+                if (symbolUsedAs != null
+                    && !IsNestedGeneric(symbolUsedAs)) // In order to avoid triggering "S4017: Refactor this method to remove the nested type argument."
                 {
                     paramData.AddUsage(symbolUsedAs);
                 }
@@ -100,13 +97,17 @@ namespace SonarAnalyzer.Rules.CSharp
                 .ToList();
         }
 
+        private static bool IsNestedGeneric(ISymbol symbol) =>
+            symbol is INamedTypeSymbol { IsGenericType: true } namedTypeSymbol
+            && namedTypeSymbol.TypeArguments.Any(argument => argument is INamedTypeSymbol { IsGenericType: true });
+
         private static bool IsTrackedParameter(IParameterSymbol parameterSymbol)
         {
             var type = parameterSymbol.Type;
 
-            return !type.DerivesFrom(KnownType.System_Array) &&
-                   !type.IsValueType &&
-                   !type.Is(KnownType.System_String);
+            return !type.DerivesFrom(KnownType.System_Array)
+                   && !type.IsValueType
+                   && !type.Is(KnownType.System_String);
         }
 
         private static SyntaxNode GetFirstNonParenthesizedParent(SyntaxNode node) =>
@@ -115,33 +116,18 @@ namespace SonarAnalyzer.Rules.CSharp
         private static ITypeSymbol FindParameterUseAsType(SyntaxNode identifier, SemanticModel semanticModel)
         {
             var callSite = semanticModel.GetEnclosingSymbol(identifier.SpanStart)?.ContainingAssembly;
-
             var identifierParent = GetFirstNonParenthesizedParent(identifier);
 
-            if (identifierParent is ConditionalAccessExpressionSyntax conditionalAccess)
-            {
-                return HandleConditionalAccess(conditionalAccess, identifier, semanticModel, callSite);
-            }
-            else if (identifierParent is MemberAccessExpressionSyntax)
-            {
-                return GetFirstNonParenthesizedParent(identifierParent) is InvocationExpressionSyntax invocationExpression
-                    ? HandleInvocation(identifier, semanticModel.GetSymbolInfo(invocationExpression).Symbol, semanticModel, callSite)
-                    : HandlePropertyOrField(identifier, semanticModel.GetSymbolInfo(identifierParent).Symbol, callSite);
-            }
-            else if (identifierParent is ArgumentSyntax)
-            {
-                return semanticModel.GetTypeInfo(identifier).ConvertedType;
-            }
-            else if (identifierParent is ElementAccessExpressionSyntax)
-            {
-                return HandlePropertyOrField(identifier, semanticModel.GetSymbolInfo(identifierParent).Symbol, callSite);
-            }
-            else
-            {
-                // nothing to do
-            }
-
-            return null;
+            return identifierParent switch
+                   {
+                       ConditionalAccessExpressionSyntax conditionalAccess => HandleConditionalAccess(conditionalAccess, identifier, semanticModel, callSite),
+                       MemberAccessExpressionSyntax => GetFirstNonParenthesizedParent(identifierParent) is InvocationExpressionSyntax invocationExpression
+                                                           ? HandleInvocation(identifier, semanticModel.GetSymbolInfo(invocationExpression).Symbol, semanticModel, callSite)
+                                                           : HandlePropertyOrField(identifier, semanticModel.GetSymbolInfo(identifierParent).Symbol, callSite),
+                       ArgumentSyntax => semanticModel.GetTypeInfo(identifier).ConvertedType,
+                       ElementAccessExpressionSyntax => HandlePropertyOrField(identifier, semanticModel.GetSymbolInfo(identifierParent).Symbol, callSite),
+                       _ => null
+                   };
         }
 
         private static ITypeSymbol HandleConditionalAccess(ConditionalAccessExpressionSyntax conditionalAccess, SyntaxNode identifier, SemanticModel semanticModel, IAssemblySymbol callSite)
@@ -150,24 +136,18 @@ namespace SonarAnalyzer.Rules.CSharp
                 ? subsequentConditionalAccess.Expression
                 : conditionalAccess.WhenNotNull;
 
-            if (conditionalAccessExpression is MemberBindingExpressionSyntax binding
-                && binding.Name != null)
-            {
-                return HandlePropertyOrField(identifier, semanticModel.GetSymbolInfo(binding.Name).Symbol, callSite);
-            }
-
-            if (conditionalAccessExpression is InvocationExpressionSyntax invocationExpression
-                && invocationExpression.Expression is MemberBindingExpressionSyntax memberBinding)
-            {
-                return HandleInvocation(identifier, semanticModel.GetSymbolInfo(memberBinding).Symbol, semanticModel, callSite);
-            }
-
-            return null;
+            return conditionalAccessExpression switch
+                   {
+                       MemberBindingExpressionSyntax { Name: { } } binding => HandlePropertyOrField(identifier, semanticModel.GetSymbolInfo(binding.Name).Symbol, callSite),
+                       InvocationExpressionSyntax { Expression: MemberBindingExpressionSyntax memberBinding } => HandleInvocation(identifier, semanticModel.GetSymbolInfo(memberBinding).Symbol,
+                           semanticModel, callSite),
+                       _ => null
+                   };
         }
 
         private static ITypeSymbol HandlePropertyOrField(SyntaxNode identifier, ISymbol symbol, IAssemblySymbol callSite)
         {
-            if (!(symbol is IPropertySymbol propertySymbol))
+            if (symbol is not IPropertySymbol propertySymbol)
             {
                 return FindOriginatingSymbol(symbol, callSite);
             }
@@ -182,10 +162,9 @@ namespace SonarAnalyzer.Rules.CSharp
             return FindOriginatingSymbol(propertyAccessor, callSite);
         }
 
-        private static ITypeSymbol HandleInvocation(SyntaxNode invokedOn, ISymbol invocationSymbol,
-            SemanticModel semanticModel, IAssemblySymbol callSite)
+        private static ITypeSymbol HandleInvocation(SyntaxNode invokedOn, ISymbol invocationSymbol, SemanticModel semanticModel, IAssemblySymbol callSite)
         {
-            if (!(invocationSymbol is IMethodSymbol methodSymbol))
+            if (invocationSymbol is not IMethodSymbol methodSymbol)
             {
                 return null;
             }
@@ -195,7 +174,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 : FindOriginatingSymbol(invocationSymbol, callSite);
         }
 
-        private static INamedTypeSymbol FindOriginatingSymbol(ISymbol accessedMember, IAssemblySymbol usageSite)
+        private static INamedTypeSymbol FindOriginatingSymbol(ISymbol accessedMember, ISymbol usageSite)
         {
             if (accessedMember == null)
             {
@@ -203,13 +182,12 @@ namespace SonarAnalyzer.Rules.CSharp
             }
 
             var originatingInterface = accessedMember.GetInterfaceMember()?.ContainingType;
-            if (originatingInterface != null &&
-                IsNotInternalOrSameAssembly(originatingInterface))
+            if (originatingInterface != null && IsNotInternalOrSameAssembly(originatingInterface))
             {
                 return originatingInterface;
             }
 
-            var originatingType = SymbolHelper.GetOverriddenMember(accessedMember)?.ContainingType;
+            var originatingType = accessedMember.GetOverriddenMember()?.ContainingType;
             return originatingType != null && IsNotInternalOrSameAssembly(originatingType)
                 ? originatingType
                 : accessedMember.ContainingType;
@@ -220,18 +198,18 @@ namespace SonarAnalyzer.Rules.CSharp
             // Since the check for the attribute must be done in CompilationEnd thus making
             // the rule unusable in Visual Studio, we will not suggest such classes and will
             // generate some False Negatives.
-            bool IsNotInternalOrSameAssembly(INamedTypeSymbol namedTypeSymbol) =>
+            bool IsNotInternalOrSameAssembly(ISymbol namedTypeSymbol) =>
                 namedTypeSymbol.ContainingAssembly.Equals(usageSite)
                 || namedTypeSymbol.GetEffectiveAccessibility() != Accessibility.Internal;
         }
 
-        private class ParameterData
+        private sealed class ParameterData
         {
             public bool ShouldReportOn { get; set; } = true;
 
             private readonly IParameterSymbol parameterSymbol;
             private readonly Accessibility methodAccessibility;
-            private readonly Dictionary<ITypeSymbol, int> usedAs = new Dictionary<ITypeSymbol, int>();
+            private readonly Dictionary<ITypeSymbol, int> usedAs = new();
 
             public ParameterData(IParameterSymbol parameterSymbol, Accessibility methodAccessibility)
             {
@@ -268,7 +246,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
                 return Equals(mostGeneralType, parameterSymbol.Type) || IsIgnoredBaseType(mostGeneralType.GetSymbolType())
                     ? null
-                    : Diagnostic.Create(rule, parameterSymbol.Locations.First(), mostGeneralType.ToDisplayString(), parameterSymbol.Type.ToDisplayString());
+                    : Diagnostic.Create(Rule, parameterSymbol.Locations.First(), mostGeneralType.ToDisplayString(), parameterSymbol.Type.ToDisplayString());
             }
 
             private static bool IsIgnoredBaseType(ITypeSymbol typeSymbol) =>
@@ -322,49 +300,30 @@ namespace SonarAnalyzer.Rules.CSharp
                     return typeSymbol;
                 }
 
-                ITypeSymbol FindMostGeneralAccessibleInterfaceOrSelf(ITypeSymbol typeSymbol)
-                {
-                    foreach (var @interface in typeSymbol.Interfaces)
-                    {
-                        if (DerivesOrImplementsAll(@interface))
-                        {
-                            return FindMostGeneralAccessibleInterfaceOrSelf(@interface);
-                        }
-                    }
-
-                    return typeSymbol;
-                }
+                ITypeSymbol FindMostGeneralAccessibleInterfaceOrSelf(ITypeSymbol typeSymbol) =>
+                    typeSymbol.Interfaces.FirstOrDefault(DerivesOrImplementsAll) is { } @interface
+                        ? FindMostGeneralAccessibleInterfaceOrSelf(@interface)
+                        : typeSymbol;
             }
 
             private bool DerivesOrImplementsAll(ITypeSymbol type)
             {
-                return type != null &&
-                    usedAs.Keys.All(type.DerivesOrImplements) &&
-                    IsConsistentAccessibility(type.GetEffectiveAccessibility());
+                return usedAs.Keys.All(type.DerivesOrImplements)
+                       && IsConsistentAccessibility(type.GetEffectiveAccessibility());
 
-                bool IsConsistentAccessibility(Accessibility baseTypeAccessibility)
-                {
-                    switch (methodAccessibility)
+                bool IsConsistentAccessibility(Accessibility baseTypeAccessibility) =>
+                    methodAccessibility switch
                     {
-                        case Accessibility.NotApplicable:
-                            return false;
-
-                        case Accessibility.Private:
-                            return true;
-
-                        case Accessibility.Protected:
-                        case Accessibility.Internal:
-                            return baseTypeAccessibility == Accessibility.Public ||
-                                baseTypeAccessibility == methodAccessibility;
-
-                        case Accessibility.ProtectedAndInternal:
-                        case Accessibility.Public:
-                            return baseTypeAccessibility == Accessibility.Public;
-
-                        default:
-                            return false;
-                    }
-                }
+                        Accessibility.Private => true,
+                        // ProtectedAndInternal corresponds to `private protected`.
+                        Accessibility.ProtectedAndInternal => baseTypeAccessibility is not Accessibility.Private,
+                        // ProtectedOrInternal corresponds to `protected internal`.
+                        Accessibility.ProtectedOrInternal => baseTypeAccessibility is Accessibility.Public or Accessibility.Internal or Accessibility.ProtectedOrInternal,
+                        Accessibility.Protected => baseTypeAccessibility == Accessibility.Public || baseTypeAccessibility == methodAccessibility,
+                        Accessibility.Internal => baseTypeAccessibility == Accessibility.Public || baseTypeAccessibility == methodAccessibility,
+                        Accessibility.Public => baseTypeAccessibility == Accessibility.Public,
+                        _ => false
+                    };
             }
         }
     }

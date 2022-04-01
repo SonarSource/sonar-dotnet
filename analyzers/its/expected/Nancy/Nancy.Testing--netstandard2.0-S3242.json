@@ -28,19 +28,6 @@
 },
 {
 "id":  "S3242",
-"message":  "Consider using more general type 'System.Collections.Generic.IEnumerable<System.Collections.Generic.KeyValuePair<string, string>>' instead of 'System.Collections.Generic.IDictionary<string, string>'.",
-"location":  {
-"uri":  "sources\Nancy\src\Nancy.Testing\BrowserContextExtensions.cs",
-"region":  {
-"startLine":  112,
-"startColumn":  99,
-"endLine":  112,
-"endColumn":  106
-}
-}
-},
-{
-"id":  "S3242",
 "message":  "Consider using more general type 'System.Collections.Generic.IEnumerable<byte>' instead of 'Nancy.Testing.BrowserResponseBodyWrapper'.",
 "location":  {
 "uri":  "sources\Nancy\src\Nancy.Testing\BrowserResponseBodyWrapperExtensions.cs",

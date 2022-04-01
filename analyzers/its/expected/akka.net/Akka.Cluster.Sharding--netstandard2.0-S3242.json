@@ -2,19 +2,6 @@
 "issues":  [
 {
 "id":  "S3242",
-"message":  "Consider using more general type 'System.Collections.Generic.IEnumerable<System.Collections.Generic.KeyValuePair<Akka.Actor.IActorRef, System.Collections.Immutable.IImmutableList<string>>>' instead of 'System.Collections.Immutable.IImmutableDictionary<Akka.Actor.IActorRef, System.Collections.Immutable.IImmutableList<string>>'.",
-"location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\Internal\AbstractLeastShardAllocationStrategy.cs",
-"region":  {
-"startLine":  128,
-"startColumn":  119,
-"endLine":  128,
-"endColumn":  142
-}
-}
-},
-{
-"id":  "S3242",
 "message":  "Consider using more general type 'Akka.Cluster.Sharding.Shard.StateChange' instead of 'Akka.Cluster.Sharding.Shard.EntityStarted'.",
 "location":  {
 "uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\Serialization\ClusterShardingMessageSerializer.cs",

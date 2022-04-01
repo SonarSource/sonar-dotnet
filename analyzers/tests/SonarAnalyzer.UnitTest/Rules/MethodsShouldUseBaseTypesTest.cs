@@ -67,7 +67,13 @@ internal class Bar
 
         [TestMethod]
         public void MethodsShouldUseBaseTypes() =>
-            builder.AddPaths("MethodsShouldUseBaseTypes.cs", "MethodsShouldUseBaseTypes2.cs").WithAutogenerateConcurrentFiles(false).Verify();
+            // There are two files provided (identical) in order to be able to test the rule behavior in concurrent environment.
+            // The rule is executed concurrently if there are at least 2 syntax trees.
+            builder.AddPaths("MethodsShouldUseBaseTypes.cs", "MethodsShouldUseBaseTypes.Concurrent.cs").WithAutogenerateConcurrentFiles(false).Verify();
+
+        [TestMethod]
+        public void MethodsShouldUseBaseTypes_CSharp8() =>
+            builder.AddPaths("MethodsShouldUseBaseTypes.CSharp8.cs").WithAutogenerateConcurrentFiles(false).WithOptions(ParseOptionsHelper.FromCSharp8).Verify();
 
 #if NET
         [TestMethod]
