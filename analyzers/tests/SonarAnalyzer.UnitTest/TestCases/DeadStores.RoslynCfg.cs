@@ -579,7 +579,7 @@ namespace Tests.Diagnostics
         {
             foreach(var outer in args)
             {
-                var value = 42;     // Noncompliant FP
+                var value = 42;
                 foreach (var inner in args)
                 {
                     Console.WriteLine("Something else");
@@ -607,7 +607,7 @@ namespace Tests.Diagnostics
                 foreach (var inner in args)
                 {
                     if (inner == null)
-                        ret = true;     // Noncompliant FP
+                        ret = true;
                 }
                 Use(ret);
             }
@@ -621,7 +621,7 @@ namespace Tests.Diagnostics
                 foreach (var arg in args)
                 {
                     if (arg == null)
-                        ret = true;     // Noncompliant FP
+                        ret = true;
                 }
                 Use(ret);
             }
