@@ -62,7 +62,7 @@ namespace SonarAnalyzer.UnitTest.Rules
                 .Verify();
 
         [TestMethod]
-        public void AvoidExcessiveInheritance_CustomValuesWilcardFilteredClass() =>
+        public void AvoidExcessiveInheritance_CustomValuesWildcardFilteredClass() =>
             new VerifierBuilder()
                 .AddAnalyzer(() => CreateAnalyzerWithFilter("Tests.Diagnostics.*SubClass"))
                 .AddPaths("AvoidExcessiveInheritance_CustomValues.cs")
@@ -72,7 +72,7 @@ namespace SonarAnalyzer.UnitTest.Rules
 #if NET
 
         [TestMethod]
-        public void AvoidExcessiveInheritance_CustomValuesWilcardFilteredRecord() =>
+        public void AvoidExcessiveInheritance_CustomValuesWildcardFilteredRecord() =>
             new VerifierBuilder()
                 .AddAnalyzer(() => CreateAnalyzerWithFilter("Tests.Diagnostics.*SubRecord"))
                 .AddPaths("AvoidExcessiveInheritance_CustomValues.Records.cs")
@@ -87,6 +87,6 @@ namespace SonarAnalyzer.UnitTest.Rules
             new AvoidExcessiveInheritance().FilteredClasses.Should().BeEmpty();
 
         private static AvoidExcessiveInheritance CreateAnalyzerWithFilter(string filter) =>
-            new AvoidExcessiveInheritance { MaximumDepth = 2, FilteredClasses = filter };
+            new() { MaximumDepth = 2, FilteredClasses = filter };
     }
 }
