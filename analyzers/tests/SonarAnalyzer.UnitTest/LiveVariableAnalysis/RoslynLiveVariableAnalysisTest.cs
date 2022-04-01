@@ -36,6 +36,14 @@ namespace SonarAnalyzer.UnitTest.LiveVariableAnalysis
     [TestClass]
     public partial class RoslynLiveVariableAnalysisTest
     {
+        private enum ExpectedKind
+        {
+            None,
+            LiveIn,
+            LiveOut,
+            Captured
+        }
+
         [TestMethod]
         public void WriteOnly()
         {
@@ -1016,6 +1024,17 @@ End Class";
             return new Context(code, AnalyzerLanguage.VisualBasic);
         }
 
+        private static Expected LiveIn(params string[] names) =>
+            new(names, ExpectedKind.LiveIn);
+
+        private static Expected LiveOut(params string[] names) =>
+            new(names, ExpectedKind.LiveOut);
+
+        private static Expected Captured(params string[] names) =>
+            new(names, ExpectedKind.Captured);
+
+        private record Expected(string[] Names, ExpectedKind Kind);
+
         private class Context
         {
             public readonly RoslynLiveVariableAnalysis Lva;
@@ -1043,15 +1062,18 @@ End Class";
             {
                 foreach (var block in Cfg.Blocks)
                 {
-                    Validate(block, null, new Expected[] { });
+                    Validate(block, null, Array.Empty<Expected>());
                 }
             }
 
             public void ValidateEntry(params Expected[] expected) =>
                 Validate(Cfg.EntryBlock, null, expected);
 
-            public void ValidateExit(params Captured[] expected) =>
+            public void ValidateExit(params Expected[] expected)
+            {
+                expected.All(x => x.Kind == ExpectedKind.Captured).Should().BeTrue("Exit block should expect only Captured variables.");
                 Validate(Cfg.ExitBlock, null, expected);
+            }
 
             public void Validate(string withSyntax, params Expected[] expected)
             {
@@ -1067,37 +1089,14 @@ End Class";
 
             public void Validate(BasicBlock block, string blockSuffix, params Expected[] expected)
             {
-                // This is not very nice from OOP perspective, but it makes UTs above easy to read.
-                var expectedLiveIn = expected.OfType<LiveIn>().SingleOrDefault() ?? new LiveIn();
-                var expectedLiveOut = expected.OfType<LiveOut>().SingleOrDefault() ?? new LiveOut();
-                var expectedCaptured = expected.OfType<Captured>().SingleOrDefault() ?? new Captured();
+                var empty = new Expected(Array.Empty<string>(), ExpectedKind.None);
+                var expectedLiveIn = expected.SingleOrDefault(x => x.Kind == ExpectedKind.LiveIn) ?? empty;
+                var expectedLiveOut = expected.SingleOrDefault(x => x.Kind == ExpectedKind.LiveOut) ?? empty;
+                var expectedCaptured = expected.SingleOrDefault(x => x.Kind == ExpectedKind.Captured) ?? empty;
                 Lva.LiveIn(block).Select(x => x.Name).Should().BeEquivalentTo(expectedLiveIn.Names, $"{block.Kind} #{block.Ordinal} {blockSuffix}");
                 Lva.LiveOut(block).Select(x => x.Name).Should().BeEquivalentTo(expectedLiveOut.Names, $"{block.Kind} #{block.Ordinal} {blockSuffix}");
                 Lva.CapturedVariables.Select(x => x.Name).Should().BeEquivalentTo(expectedCaptured.Names, $"{block.Kind} #{block.Ordinal} {blockSuffix}");
             }
-        }
-
-        private abstract class Expected
-        {
-            public readonly string[] Names;
-
-            protected Expected(string[] names) =>
-                Names = names;
-        }
-
-        private class LiveIn : Expected
-        {
-            public LiveIn(params string[] names) : base(names) { }
-        }
-
-        private class LiveOut : Expected
-        {
-            public LiveOut(params string[] names) : base(names) { }
-        }
-
-        private class Captured : Expected
-        {
-            public Captured(params string[] names) : base(names) { }
         }
     }
 }
