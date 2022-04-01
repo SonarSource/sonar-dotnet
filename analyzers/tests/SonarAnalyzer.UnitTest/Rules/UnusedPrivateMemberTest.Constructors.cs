@@ -19,7 +19,6 @@
  */
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using SonarAnalyzer.Rules.CSharp;
 using SonarAnalyzer.UnitTest.TestFramework;
 
 namespace SonarAnalyzer.UnitTest.Rules
@@ -28,7 +27,7 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         public void UnusedPrivateMember_Constructor_Accessibility() =>
-            OldVerifier.VerifyCSharpAnalyzer(@"
+            builder.AddSnippet(@"
 public class PrivateConstructors
 {
     private PrivateConstructors(int i) { var x = 5; } // Noncompliant {{Remove the unused private constructor 'PrivateConstructors'.}}
@@ -64,11 +63,11 @@ public class NonPrivateMembers
         public InnerPublicClass(char c) { var x = 5; }
     }
 }
-", new UnusedPrivateMember());
+").Verify();
 
         [TestMethod]
         public void UnusedPrivateMember_Constructor_DirectReferences() =>
-            OldVerifier.VerifyCSharpAnalyzer(@"
+            builder.AddSnippet(@"
 public abstract class PrivateConstructors
 {
     public class Constructor1
@@ -94,11 +93,11 @@ public abstract class PrivateConstructors
         static Constructor4() { var x = 5; }
     }
 }
-", new UnusedPrivateMember());
+").Verify();
 
         [TestMethod]
         public void UnusedPrivateMember_Constructor_Inheritance() =>
-            OldVerifier.VerifyCSharpAnalyzer(@"
+            builder.AddSnippet(@"
 public class Inheritance
 {
     private abstract class BaseClass1
@@ -122,28 +121,30 @@ public class Inheritance
         public DerivedClass2() { }
     }
 }
-", new UnusedPrivateMember());
+").Verify();
 
         [TestMethod]
         public void UnusedPrivateMember_Empty_Constructors() =>
-            OldVerifier.VerifyCSharpAnalyzer(@"
+            builder.AddSnippet(@"
 public class PrivateConstructors
 {
     private PrivateConstructors(int i) { } // Compliant, empty ctors are reported from another rule
 }
-", new UnusedPrivateMember());
+").Verify();
 
         [TestMethod]
         public void UnusedPrivateMember_Illegal_Interface_Constructor() =>
             // While typing code in IDE, we can end up in a state where an interface has a constructor defined.
             // Even though this results in a compiler error (CS0526), IDE will still trigger rules on the interface.
-            OldVerifier.VerifyCSharpAnalyzer(@"
+            builder.AddSnippet(@"
 public interface IInterface
 {
     // UnusedPrivateMember rule does not trigger AD0001 error from NullReferenceException
     IInterface() {} // Error [CS0526]
 }
-", new UnusedPrivateMember(), CompilationErrorBehavior.Ignore);
+").WithErrorBehavior(CompilationErrorBehavior.Ignore).Verify();
+
+#if NET
 
         [TestMethod]
         public void UnusedPrivateMember_RecordPositionalConstructor() =>
@@ -151,7 +152,7 @@ public interface IInterface
 // https://github.com/SonarSource/sonar-dotnet/issues/5381
 public abstract record Foo
 {
-    Foo(string value) // Noncompliant
+    Foo(string value)
     {
         Value = value;
     }
@@ -159,6 +160,17 @@ public abstract record Foo
     public string Value { get; }
 
     public sealed record Bar(string Value) : Foo(Value);
-}").WithOptions(ParseOptionsHelper.FromCSharp10).Verify();
+}").WithOptions(ParseOptionsHelper.FromCSharp9).Verify();
+
+        [TestMethod]
+        public void UnusedPrivateMember_NonExistentRecordPositionalConstructor() =>
+        builder.AddSnippet(@"
+public abstract record Foo
+{
+    public sealed record Bar(string Value) : RandomRecord(Value); // Error [CS0115] no suitable method found to override
+}").WithOptions(ParseOptionsHelper.FromCSharp10).WithErrorBehavior(CompilationErrorBehavior.Ignore).Verify();
+
+#endif
+
     }
 }

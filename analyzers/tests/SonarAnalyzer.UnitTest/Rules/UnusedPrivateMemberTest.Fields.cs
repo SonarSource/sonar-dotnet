@@ -19,7 +19,6 @@
  */
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using SonarAnalyzer.Rules.CSharp;
 using SonarAnalyzer.UnitTest.TestFramework;
 
 namespace SonarAnalyzer.UnitTest.Rules
@@ -28,7 +27,7 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         public void UnusedPrivateMember_Field_Accessibility() =>
-            OldVerifier.VerifyCSharpAnalyzer(@"
+            builder.AddSnippet(@"
 public class PrivateMembers
 {
     private int privateField; // Noncompliant {{Remove the unused private field 'privateField'.}}
@@ -71,11 +70,11 @@ public class NonPrivateMembers
         public static int publicStaticField;
     }
 }
-", new UnusedPrivateMember());
+").Verify();
 
         [TestMethod]
         public void UnusedPrivateMember_Field_MultipleDeclarations() =>
-            OldVerifier.VerifyCSharpAnalyzer(@"
+            builder.AddSnippet(@"
 public class PrivateMembers
 {
     private int x, y, z; // Noncompliant {{Remove the unused private field 'x'.}}
@@ -87,11 +86,11 @@ public class PrivateMembers
 
     public int Method1() => b;
 }
-", new UnusedPrivateMember());
+").Verify();
 
         [TestMethod]
         public void UnusedPrivateMember_Fields_DirectReferences() =>
-            OldVerifier.VerifyCSharpAnalyzer(@"
+            builder.AddSnippet(@"
 using System;
 public class FieldUsages
 {
@@ -131,6 +130,6 @@ public class FieldUsages
         return null;
     }
 }
-", new UnusedPrivateMember());
+").Verify();
     }
 }

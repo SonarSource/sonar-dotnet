@@ -19,7 +19,6 @@
  */
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using SonarAnalyzer.Rules.CSharp;
 using SonarAnalyzer.UnitTest.TestFramework;
 
 namespace SonarAnalyzer.UnitTest.Rules
@@ -28,7 +27,7 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         public void UnusedPrivateMember_Property_Accessibility() =>
-            OldVerifier.VerifyCSharpAnalyzer(@"
+            builder.AddSnippet(@"
 public class PrivateMembers
 {
     private int PrivateProperty { get; set; } // Noncompliant {{Remove the unused private property 'PrivateProperty'.}}
@@ -82,11 +81,11 @@ public class InterfaceImpl : IInterface
 {
     int IInterface.InterfaceProperty { get { return 0; } set { } }
 }
-", new UnusedPrivateMember());
+").Verify();
 
         [TestMethod]
         public void UnusedPrivateMember_Properties_DirectReferences() =>
-            OldVerifier.VerifyCSharpAnalyzer(@"
+            builder.AddSnippet(@"
 using System;
 public class PropertyUsages
 {
@@ -138,6 +137,6 @@ public class PropertyUsages
         this[""5""] = 10;
     }
 }
-", new UnusedPrivateMember());
+").Verify();
     }
 }

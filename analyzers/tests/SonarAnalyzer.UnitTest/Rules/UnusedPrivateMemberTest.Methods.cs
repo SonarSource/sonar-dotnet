@@ -19,7 +19,6 @@
  */
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using SonarAnalyzer.Rules.CSharp;
 using SonarAnalyzer.UnitTest.TestFramework;
 
 namespace SonarAnalyzer.UnitTest.Rules
@@ -28,7 +27,7 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         public void UnusedPrivateMember_Method_Accessibility() =>
-            OldVerifier.VerifyCSharpAnalyzer(@"
+            builder.AddSnippet(@"
 public class PrivateMembers
 {
     private int PrivateMethod() { return 0; } // Noncompliant {{Remove the unused private method 'PrivateMethod'.}}
@@ -81,11 +80,11 @@ public class InterfaceImpl : IInterface
 {
     int IInterface.InterfaceMethod() => 0;
 }
-", new UnusedPrivateMember());
+").Verify();
 
         [TestMethod]
         public void UnusedPrivateMember_Methods_DirectReferences() =>
-            OldVerifier.VerifyCSharpAnalyzer(@"
+            builder.AddSnippet(@"
 using System;
 using System.Linq;
 public class MethodUsages
@@ -131,11 +130,11 @@ public class MethodUsages
         new[] { 1, 2, 3 }.Select(Method12);
     }
 }
-", new UnusedPrivateMember());
+").Verify();
 
         [TestMethod]
         public void UnusedPrivateMember_Methods_Main() =>
-            OldVerifier.VerifyCSharpAnalyzer(@"
+            builder.AddSnippet(@"
 using System.Threading.Tasks;
 public class NewClass1
 {
@@ -162,6 +161,6 @@ public class NewClass5
 {
     static async Task<string> Main(string[] args) { return ""a""; } // Noncompliant
 }
-", new UnusedPrivateMember());
+").Verify();
     }
 }

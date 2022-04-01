@@ -38,7 +38,13 @@ namespace SonarAnalyzer.Helpers
     internal class CSharpSymbolUsageCollector : SafeCSharpSyntaxWalker
     {
         [Flags]
-        private enum SymbolAccess { None = 0, Read = 1, Write = 2, ReadWrite = Read | Write }
+        private enum SymbolAccess
+        {
+            None = 0,
+            Read = 1,
+            Write = 2,
+            ReadWrite = Read | Write
+        }
 
         private static readonly ISet<SyntaxKind> IncrementKinds = new HashSet<SyntaxKind>
         {
@@ -82,6 +88,11 @@ namespace SonarAnalyzer.Helpers
                                             .Where(a => knownSymbolNames.Contains(a.AttributeClass.Name))
                                             .Select(a => a.AttributeClass));
                 }
+                else if (node.IsKind(SyntaxKindEx.PrimaryConstructorBaseType)
+                         && knownSymbolNames.Contains(((PrimaryConstructorBaseTypeSyntaxWrapper)node).Type.GetName()))
+                {
+                    UsedSymbols.UnionWith(GetSymbols(node));
+                }
                 base.Visit(node);
             }
         }
@@ -108,7 +119,6 @@ namespace SonarAnalyzer.Helpers
                     }
                 }
             }
-
             base.VisitAssignmentExpression(node);
 
             static int GetTupleCount(ExpressionSyntax assignmentLeft)
@@ -119,8 +129,8 @@ namespace SonarAnalyzer.Helpers
                     result = ((TupleExpressionSyntaxWrapper)assignmentLeft).Arguments.Count;
                 }
                 else if (DeclarationExpressionSyntaxWrapper.IsInstance(assignmentLeft)
-                    && (DeclarationExpressionSyntaxWrapper)assignmentLeft is { } leftDeclaration
-                    && ParenthesizedVariableDesignationSyntaxWrapper.IsInstance(leftDeclaration.Designation))
+                         && (DeclarationExpressionSyntaxWrapper)assignmentLeft is { } leftDeclaration
+                         && ParenthesizedVariableDesignationSyntaxWrapper.IsInstance(leftDeclaration.Designation))
                 {
                     result = ((ParenthesizedVariableDesignationSyntaxWrapper)leftDeclaration.Designation).Variables.Count;
                 }
@@ -147,7 +157,6 @@ namespace SonarAnalyzer.Helpers
 
                 DebuggerDisplayValues.UnionWith(arguments);
             }
-
             base.VisitAttribute(node);
 
             static bool IsValueNameOrType(AttributeArgumentSyntax a) =>
@@ -166,7 +175,6 @@ namespace SonarAnalyzer.Helpers
                 UsedSymbols.UnionWith(symbols);
                 TryStorePropertyAccess(node, symbols);
             }
-
             base.VisitIdentifierName(node);
         }
 
@@ -176,7 +184,6 @@ namespace SonarAnalyzer.Helpers
             {
                 UsedSymbols.UnionWith(GetSymbols(node));
             }
-
             base.VisitObjectCreationExpression(node);
         }
 
@@ -186,7 +193,6 @@ namespace SonarAnalyzer.Helpers
             {
                 UsedSymbols.UnionWith(GetSymbols(node));
             }
-
             base.VisitGenericName(node);
         }
 
@@ -198,7 +204,6 @@ namespace SonarAnalyzer.Helpers
                 UsedSymbols.UnionWith(symbols);
                 TryStorePropertyAccess(node, symbols);
             }
-
             base.VisitElementAccessExpression(node);
         }
 
@@ -207,7 +212,6 @@ namespace SonarAnalyzer.Helpers
             // In this case (":base()") we cannot check at the syntax level if the constructor name is in the list
             // of known names so we have to check for symbols.
             UsedSymbols.UnionWith(GetSymbols(node));
-
             base.VisitConstructorInitializer(node);
         }
 
@@ -225,7 +229,6 @@ namespace SonarAnalyzer.Helpers
                     UsedSymbols.Add(implicitlyCalledConstructor);
                 }
             }
-
             base.VisitConstructorDeclaration(node);
         }
 
@@ -240,7 +243,6 @@ namespace SonarAnalyzer.Helpers
                     usage.Initializer = node;
                 }
             }
-
             base.VisitVariableDeclarator(node);
         }
 
@@ -312,8 +314,8 @@ namespace SonarAnalyzer.Helpers
 
             static ISymbol GetOriginalDefinition(ISymbol candidateSymbol) =>
                 candidateSymbol is IMethodSymbol methodSymbol && methodSymbol.MethodKind == MethodKind.ReducedExtension
-                    ? (methodSymbol.ReducedFrom?.OriginalDefinition)
-                    : (candidateSymbol?.OriginalDefinition);
+                    ? methodSymbol.ReducedFrom?.OriginalDefinition
+                    : candidateSymbol?.OriginalDefinition;
         }
 
         private void TryStorePropertyAccess(ExpressionSyntax node, IEnumerable<ISymbol> identifierSymbols)
