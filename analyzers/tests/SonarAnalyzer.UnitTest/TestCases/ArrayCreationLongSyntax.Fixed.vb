@@ -15,6 +15,7 @@
         Next
 
         myObjects = {} ' Fixed
+        myObjects = New UnknownType() {1, 2, 3}     ' Error BC30002: Type 'UnknownType' is not defined
     End Sub
 
 End Module
