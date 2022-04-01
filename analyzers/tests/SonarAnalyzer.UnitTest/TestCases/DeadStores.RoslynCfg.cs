@@ -335,11 +335,11 @@ namespace Tests.Diagnostics
             {
                 Use(used);
             }
-            for(var i = 0; i < 10; i++)
+            for (var i = 0; i < 10; i++)
             {
                 Console.Write("-");
             }
-            for(var i = 0; i < 10; i++)
+            for (var i = 0; i < 10; i++)
             {
                 Use(i);
             }
@@ -522,7 +522,7 @@ namespace Tests.Diagnostics
         public int UsedAsOutInstance()
         {
             var list = new List<int>(); // Noncompliant
-            if(InvokeOut(out list))
+            if (InvokeOut(out list))
             {
                 return list.Count;
             }
@@ -563,6 +563,68 @@ namespace Tests.Diagnostics
             }
 
             return null;
+        }
+
+        private void ForEach_AssignedBefore_UsedAfter(string[] args)
+        {
+            var value = 42;
+            foreach (var arg in args)
+            {
+                Console.WriteLine("Something else");
+            }
+            Use(value);
+        }
+
+        private void ForEach_AssignedBefore_UsedAfterNested(string[] args)
+        {
+            foreach(var outer in args)
+            {
+                var value = 42;     // Noncompliant FP
+                foreach (var inner in args)
+                {
+                    Console.WriteLine("Something else");
+                }
+                Use(value);
+            }
+        }
+
+        private int ForEach_AssignedIn_UsedAfter(string[] args)
+        {
+            var value = -1;
+            foreach (var arg in args)
+            {
+                if (arg == null)
+                    value = 0;
+            }
+            return value;
+        }
+
+        private void ForEach_AssignedIn_UsedAfter_Nested(string[] args)
+        {
+            foreach(var outer in args)
+            {
+                var ret = false;
+                foreach (var inner in args)
+                {
+                    if (inner == null)
+                        ret = true;     // Noncompliant FP
+                }
+                Use(ret);
+            }
+        }
+
+        private void ForEach_NestedLock_AssignedIn_UsedAfter(string[] args)
+        {
+            lock (args)
+            {
+                var ret = false;
+                foreach (var arg in args)
+                {
+                    if (arg == null)
+                        ret = true;     // Noncompliant FP
+                }
+                Use(ret);
+            }
         }
 
         public void Unused()
