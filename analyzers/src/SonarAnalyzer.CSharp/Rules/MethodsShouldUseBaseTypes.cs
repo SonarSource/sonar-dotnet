@@ -85,7 +85,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
                 var symbolUsedAs = FindParameterUseAsType(identifierReference, semanticModel);
                 if (symbolUsedAs != null
-                    && !IsNestedGeneric(symbolUsedAs)) // In order to avoid triggering S4017: Refactor this method to remove the nested type argument.
+                    && !IsNestedGeneric(symbolUsedAs)) // In order to avoid triggering "S4017: Refactor this method to remove the nested type argument."
                 {
                     paramData.AddUsage(symbolUsedAs);
                 }
