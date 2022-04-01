@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace AppendedNamespaceForConcurrencyTest.Something
+namespace Something
 {
     internal interface IFoo
     {
@@ -21,7 +21,7 @@ namespace AppendedNamespaceForConcurrencyTest.Something
 }
 
 // Test that rule doesn't suggest base with inconsistent accessibility
-namespace AppendedNamespaceForConcurrencyTest.Test_25
+namespace InconsistentAccessibility
 {
     public class Bar
     {
