@@ -811,9 +811,35 @@ Method(2);";
             var context = CreateContextCS(code);
             context.ValidateEntry();
             context.Validate("Method(0);", new LiveIn("inner", "outer"), new LiveOut("inner", "outer"));
-            context.Validate("Method(inner);", new LiveIn("inner" /*FIXME:, "outer"), new LiveOut("outer"*/));
+            context.Validate("Method(inner);", new LiveIn("inner", "outer"), new LiveOut("outer"));
             context.Validate("Method(outer);", new LiveIn("outer"));
             context.Validate("Method(2);");
+            context.ValidateExit();
+        }
+
+        [TestMethod]
+        public void Finally_ForEach_LiveIn()
+        {
+            var code = @"
+var outer = 42;
+try
+{
+    Method(0);
+    foreach (var arg in args)   // Produces implicit finally
+    {
+    }
+    // No action here, finally branch is crossing both regions
+}
+finally
+{
+    Method(outer);
+}
+Method(1);";
+            var context = CreateContextCS(code, null, "object[] args");
+            context.ValidateEntry(new LiveIn("args"), new LiveOut("args"));
+            context.Validate("Method(0);", new LiveIn("outer", "args"), new LiveOut("outer", "args"));
+            context.Validate("Method(outer);", new LiveIn("outer"));
+            context.Validate("Method(1);");
             context.ValidateExit();
         }
 
