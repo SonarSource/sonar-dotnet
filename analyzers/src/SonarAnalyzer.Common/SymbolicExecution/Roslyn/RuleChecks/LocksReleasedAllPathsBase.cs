@@ -134,7 +134,6 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn.RuleChecks
                         : RemoveLock(context, lockSymbol);
                 }
             }
-
         }
 
         protected override ProgramState PostProcessSimple(SymbolicContext context)
