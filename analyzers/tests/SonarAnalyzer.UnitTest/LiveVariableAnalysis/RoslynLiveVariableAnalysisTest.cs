@@ -784,6 +784,31 @@ foreach(var i in new int[] {1, 2, 3})
         }
 
         [TestMethod]
+        public void NestedImplicitFinally_LiveIn()
+        {
+            const string code = @"
+lock(args)
+{
+    var value = 42;
+    Method(0);
+    foreach (var inner in args)
+    {
+        Method(1);
+        if (inner == null)
+            value = 0;
+    }
+    Method(value);
+}
+Method(2);";
+            var context = CreateContextCS(code, null, "string[] args");
+            context.Validate("Method(0);", new LiveIn("args", null /*FIXME: "value"*/), new LiveOut("args", null /*FIXME: "value"*/));
+            context.Validate("Method(1);", new LiveIn(new string[] { null }/*FIXME: "value"*/), new LiveOut(new string[] { null } /*FIXME:"value"*/));
+            context.Validate("Method(value);", new LiveIn(null, "value"), new LiveOut(new string[] { null }));
+            context.Validate("Method(2);");
+            context.ValidateExit();
+        }
+
+        [TestMethod]
         public void Loop_Propagates_LiveIn_LiveOut()
         {
             var code = @"
