@@ -13,6 +13,11 @@ namespace Tests.Diagnostics
             await Task.Run(() => Console.WriteLine("test"));
         }
 
+        public virtual async void MyVirtualMethod() // Compliant as it is virtual
+        {
+            await Task.Run(() => Console.WriteLine("test"));
+        }
+
         async void MyMethod(object sender, EventArgs args)
         {
             await Task.Run(() => Console.WriteLine("test"));
