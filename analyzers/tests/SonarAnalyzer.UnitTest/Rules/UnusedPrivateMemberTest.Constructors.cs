@@ -167,7 +167,7 @@ public abstract record Foo
         builder.AddSnippet(@"
 public abstract record Foo
 {
-    public sealed record Bar(string Value) : RandomRecord(Value);
+    public sealed record Bar(string Value) : RandomRecord(Value); // Error [CS0115] no suitable method found to override
 }").WithOptions(ParseOptionsHelper.FromCSharp10).WithErrorBehavior(CompilationErrorBehavior.Ignore).Verify();
 
 #endif

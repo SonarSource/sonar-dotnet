@@ -89,8 +89,7 @@ namespace SonarAnalyzer.Helpers
                                             .Select(a => a.AttributeClass));
                 }
                 else if (node.IsKind(SyntaxKindEx.PrimaryConstructorBaseType)
-                         && ((PrimaryConstructorBaseTypeSyntaxWrapper)node).Type.GetName() is var typeName
-                         && knownSymbolNames.Contains(typeName))
+                         && knownSymbolNames.Contains(((PrimaryConstructorBaseTypeSyntaxWrapper)node).Type.GetName()))
                 {
                     UsedSymbols.UnionWith(GetSymbols(node));
                 }
