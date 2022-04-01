@@ -37,11 +37,11 @@ namespace SonarAnalyzer.UnitTest.Rules
 
         [TestMethod]
         public void MethodShouldNotOnlyReturnConstant_CSharp8() =>
-            builder.AddPaths(@"MethodShouldNotOnlyReturnConstant.CSharp8.cs").WithOptions(ParseOptionsHelper.FromCSharp8).Verify();
+            builder.AddPaths("MethodShouldNotOnlyReturnConstant.CSharp8.cs").WithOptions(ParseOptionsHelper.FromCSharp8).Verify();
 
         [TestMethod]
         public void MethodShouldNotOnlyReturnConstant_CSharpPreview() =>
-            builder.AddPaths(@"MethodShouldNotOnlyReturnConstant.CSharpPreview.cs").WithOptions(ParseOptionsHelper.CSharpPreview).Verify();
+            builder.AddPaths("MethodShouldNotOnlyReturnConstant.CSharpPreview.cs").WithOptions(ParseOptionsHelper.CSharpPreview).Verify();
 
 #endif
 
