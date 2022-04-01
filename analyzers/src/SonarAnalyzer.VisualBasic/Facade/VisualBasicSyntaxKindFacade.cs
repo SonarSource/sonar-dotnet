@@ -37,6 +37,7 @@ namespace SonarAnalyzer.Helpers.Facade
         };
         public SyntaxKind ConstructorDeclaration => SyntaxKind.ConstructorBlock;
         public SyntaxKind EnumDeclaration => SyntaxKind.EnumStatement;
+        public SyntaxKind FieldDeclaration => SyntaxKind.FieldDeclaration;
         public SyntaxKind IdentifierName => SyntaxKind.IdentifierName;
         public SyntaxKind IdentifierToken => SyntaxKind.IdentifierToken;
         public SyntaxKind InvocationExpression => SyntaxKind.InvocationExpression;

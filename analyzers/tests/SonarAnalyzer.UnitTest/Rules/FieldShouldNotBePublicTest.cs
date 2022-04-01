@@ -28,18 +28,23 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class FieldShouldNotBePublicTest
     {
+        private readonly VerifierBuilder builderCS = new VerifierBuilder<CS.FieldShouldNotBePublic>();
+        private readonly VerifierBuilder builderVB = new VerifierBuilder<VB.FieldShouldNotBePublic>();
+
         [TestMethod]
         public void FieldShouldNotBePublic_CS() =>
-            OldVerifier.VerifyAnalyzer(@"TestCases\FieldShouldNotBePublic.cs", new CS.FieldShouldNotBePublic());
+            builderCS.AddPaths("FieldShouldNotBePublic.cs").Verify();
 
 #if NET
+
         [TestMethod]
         public void FieldShouldNotBePublic_CS_CSharp9() =>
-            OldVerifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\FieldShouldNotBePublic.CSharp9.cs", new CS.FieldShouldNotBePublic());
+            builderCS.AddPaths("FieldShouldNotBePublic.CSharp9.cs").WithOptions(ParseOptionsHelper.FromCSharp9).Verify();
+
 #endif
 
         [TestMethod]
         public void FieldShouldNotBePublic_VB() =>
-            OldVerifier.VerifyAnalyzer(@"TestCases\FieldShouldNotBePublic.vb", new VB.FieldShouldNotBePublic());
+            builderVB.AddPaths("FieldShouldNotBePublic.vb").Verify();
     }
 }
