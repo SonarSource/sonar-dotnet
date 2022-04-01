@@ -90,12 +90,12 @@ namespace SonarAnalyzer.Rules.CSharp
                 .SelectMany(container => container.Node.DescendantNodes()
                     .Where(x => x.IsKind(SyntaxKind.InvocationExpression))
                     .Cast<InvocationExpressionSyntax>()
-                    .Select(x => new NodeSymbolAndSemanticModel<InvocationExpressionSyntax, IMethodSymbol>(container.SemanticModel, x, container.SemanticModel.GetSymbolInfo(x).Symbol as IMethodSymbol)))
+                    .Select(x => new NodeSymbolAndModel<InvocationExpressionSyntax, IMethodSymbol>(container.Model, x, container.Model.GetSymbolInfo(x).Symbol as IMethodSymbol)))
                  .Where(x => x.Symbol != null && IsDelegateInvocation(x.Symbol));
 
             var invokedEventSymbols = delegateInvocations
-                .Select(x => new NodeAndSemanticModel<ExpressionSyntax>(x.SemanticModel, GetEventExpressionFromInvocation(x.Node, x.Symbol)))
-                .Select(x => new NodeSymbolAndSemanticModel<ExpressionSyntax, IEventSymbol>(x.SemanticModel, x.Node, x.SemanticModel.GetSymbolInfo(x.Node).Symbol as IEventSymbol))
+                .Select(x => new NodeAndModel<ExpressionSyntax>(x.Model, GetEventExpressionFromInvocation(x.Node, x.Symbol)))
+                .Select(x => new NodeSymbolAndModel<ExpressionSyntax, IEventSymbol>(x.Model, x.Node, x.Model.GetSymbolInfo(x.Node).Symbol as IEventSymbol))
                 .Where(x => x.Symbol != null)
                 .Select(x => x.Symbol.OriginalDefinition);
 
@@ -108,25 +108,25 @@ namespace SonarAnalyzer.Rules.CSharp
                 .SelectMany(container => container.Node.DescendantNodes()
                     .Where(x => x.IsKind(SyntaxKind.Argument))
                     .Cast<ArgumentSyntax>()
-                    .Select(x => new NodeAndSemanticModel<SyntaxNode>(container.SemanticModel, x.Expression)));
+                    .Select(x => new NodeAndModel<SyntaxNode>(container.Model, x.Expression)));
 
             var equalsValue = removableDeclarationCollector.TypeDeclarations
                 .SelectMany(container => container.Node.DescendantNodes()
                     .OfType<EqualsValueClauseSyntax>()
-                    .Select(x => new NodeAndSemanticModel<SyntaxNode>(container.SemanticModel, x.Value)));
+                    .Select(x => new NodeAndModel<SyntaxNode>(container.Model, x.Value)));
 
             var assignment = removableDeclarationCollector.TypeDeclarations
                 .SelectMany(container => container.Node.DescendantNodes()
                     .Where(x => x.IsKind(SyntaxKind.SimpleAssignmentExpression))
                     .Cast<AssignmentExpressionSyntax>()
-                    .Select(x => new NodeAndSemanticModel<SyntaxNode>(container.SemanticModel, x.Right)));
+                    .Select(x => new NodeAndModel<SyntaxNode>(container.Model, x.Right)));
 
             var allNodes = arguments.Concat(equalsValue).Concat(assignment);
 
             var usedSymbols = new List<ISymbol>();
             foreach (var node in allNodes)
             {
-                if (node.SemanticModel.GetSymbolInfo(node.Node).Symbol is IEventSymbol symbol)
+                if (node.Model.GetSymbolInfo(node.Node).Symbol is IEventSymbol symbol)
                 {
                     usedSymbols.Add(symbol.OriginalDefinition);
                 }

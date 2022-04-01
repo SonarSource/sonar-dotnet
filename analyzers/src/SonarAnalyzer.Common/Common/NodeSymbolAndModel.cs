@@ -22,13 +22,13 @@ using Microsoft.CodeAnalysis;
 
 namespace SonarAnalyzer.Common
 {
-    public class NodeSymbolAndSemanticModel<TSyntax, TSymbol> : NodeAndSemanticModel<TSyntax>
+    public class NodeSymbolAndModel<TSyntax, TSymbol> : NodeAndModel<TSyntax>
         where TSyntax : SyntaxNode
         where TSymbol : ISymbol
     {
         public TSymbol Symbol { get; }
 
-        public NodeSymbolAndSemanticModel(SemanticModel semanticModel, TSyntax node, TSymbol symbol) : base(semanticModel, node) =>
+        public NodeSymbolAndModel(SemanticModel model, TSyntax node, TSymbol symbol) : base(model, node) =>
             Symbol = symbol;
     }
 }

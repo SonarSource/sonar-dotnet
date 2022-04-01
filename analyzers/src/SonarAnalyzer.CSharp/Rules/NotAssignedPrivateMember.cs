@@ -28,7 +28,7 @@ using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
 using StyleCop.Analyzers.Lightup;
-using MemberUsage = SonarAnalyzer.Common.NodeSymbolAndSemanticModel<Microsoft.CodeAnalysis.CSharp.Syntax.SimpleNameSyntax, Microsoft.CodeAnalysis.ISymbol>;
+using MemberUsage = SonarAnalyzer.Common.NodeSymbolAndModel<Microsoft.CodeAnalysis.CSharp.Syntax.SimpleNameSyntax, Microsoft.CodeAnalysis.ISymbol>;
 
 namespace SonarAnalyzer.Rules.CSharp
 {
@@ -97,7 +97,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 },
                 SymbolKind.NamedType);
 
-        private static List<NodeSymbolAndSemanticModel<SyntaxNode, ISymbol>> GetCandidateDeclarations(CSharpRemovableDeclarationCollector removableDeclarationCollector)
+        private static List<NodeSymbolAndModel<SyntaxNode, ISymbol>> GetCandidateDeclarations(CSharpRemovableDeclarationCollector removableDeclarationCollector)
         {
             var candidateFields = removableDeclarationCollector.GetRemovableFieldLikeDeclarations(new HashSet<SyntaxKind> { SyntaxKind.FieldDeclaration }, MaxAccessibility)
                                                                .Where(tuple => !IsInitializedOrFixed((VariableDeclaratorSyntax)tuple.Node)
@@ -144,14 +144,14 @@ namespace SonarAnalyzer.Rules.CSharp
                     .Where(node => node.IsKind(SyntaxKind.IdentifierName))
                     .Cast<IdentifierNameSyntax>()
                     .Where(x => symbolNames.Contains(x.Identifier.ValueText))
-                    .Select(x => new MemberUsage(container.SemanticModel, x, container.SemanticModel.GetSymbolInfo(x).Symbol)));
+                    .Select(x => new MemberUsage(container.Model, x, container.Model.GetSymbolInfo(x).Symbol)));
 
             var generic = removableDeclarationCollector.TypeDeclarations
                 .SelectMany(container => container.Node.DescendantNodes()
                     .Where(node => node.IsKind(SyntaxKind.GenericName))
                     .Cast<GenericNameSyntax>()
                     .Where(x => symbolNames.Contains(x.Identifier.ValueText))
-                    .Select(x => new MemberUsage(container.SemanticModel, x, container.SemanticModel.GetSymbolInfo(x).Symbol)));
+                    .Select(x => new MemberUsage(container.Model, x, container.Model.GetSymbolInfo(x).Symbol)));
 
             return identifiers.Concat(generic)
                 .Where(tuple => tuple.Symbol is IFieldSymbol || tuple.Symbol is IPropertySymbol)

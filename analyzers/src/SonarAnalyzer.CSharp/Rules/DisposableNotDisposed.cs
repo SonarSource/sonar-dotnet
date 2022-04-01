@@ -85,13 +85,13 @@ namespace SonarAnalyzer.Rules.CSharp
                         TrackInitializedLocalsAndPrivateFields(
                             namedTypeSymbol,
                             typeDeclarationAndSemanticModel.Node,
-                            typeDeclarationAndSemanticModel.SemanticModel,
+                            typeDeclarationAndSemanticModel.Model,
                             trackedNodesAndSymbols);
 
                         TrackAssignmentsToLocalsAndPrivateFields(
                             namedTypeSymbol,
                             typeDeclarationAndSemanticModel.Node,
-                            typeDeclarationAndSemanticModel.SemanticModel,
+                            typeDeclarationAndSemanticModel.Model,
                             trackedNodesAndSymbols);
                     }
 
@@ -102,11 +102,11 @@ namespace SonarAnalyzer.Rules.CSharp
                         {
                             ExcludeDisposedAndClosedLocalsAndPrivateFields(
                                 typeDeclarationAndSemanticModel.Node,
-                                typeDeclarationAndSemanticModel.SemanticModel,
+                                typeDeclarationAndSemanticModel.Model,
                                 excludedSymbols);
                             ExcludeReturnedPassedAndAliasedLocalsAndPrivateFields(
                                 typeDeclarationAndSemanticModel.Node,
-                                typeDeclarationAndSemanticModel.SemanticModel,
+                                typeDeclarationAndSemanticModel.Model,
                                 excludedSymbols);
                         }
 
@@ -118,8 +118,8 @@ namespace SonarAnalyzer.Rules.CSharp
                 },
                 SymbolKind.NamedType);
 
-        private static NodeAndSemanticModel<SyntaxNode> CreateNodeAndSemanticModelObject(SyntaxReference syntaxReference, SymbolAnalysisContext c) =>
-            new (c.Compilation.GetSemanticModel(syntaxReference.SyntaxTree), syntaxReference.GetSyntax());
+        private static NodeAndModel<SyntaxNode> CreateNodeAndSemanticModelObject(SyntaxReference syntaxReference, SymbolAnalysisContext c) =>
+            new(c.Compilation.GetSemanticModel(syntaxReference.SyntaxTree), syntaxReference.GetSyntax());
 
         private static void TrackInitializedLocalsAndPrivateFields(INamedTypeSymbol namedType,
                                                                    SyntaxNode typeDeclaration,

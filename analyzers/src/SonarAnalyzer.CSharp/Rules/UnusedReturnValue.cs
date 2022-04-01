@@ -28,7 +28,7 @@ using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
 using StyleCop.Analyzers.Lightup;
-using NodeSymbolAndSemanticModel = SonarAnalyzer.Common.NodeSymbolAndSemanticModel<Microsoft.CodeAnalysis.CSharp.Syntax.InvocationExpressionSyntax, Microsoft.CodeAnalysis.IMethodSymbol>;
+using NodeSymbolAndModel = SonarAnalyzer.Common.NodeSymbolAndModel<Microsoft.CodeAnalysis.CSharp.Syntax.InvocationExpressionSyntax, Microsoft.CodeAnalysis.IMethodSymbol>;
 
 namespace SonarAnalyzer.Rules.CSharp
 {
@@ -108,9 +108,9 @@ namespace SonarAnalyzer.Rules.CSharp
             }
         }
 
-        private static bool IsReturnValueUsed(NodeSymbolAndSemanticModel matchingInvocation) =>
+        private static bool IsReturnValueUsed(NodeSymbolAndModel matchingInvocation) =>
             !IsExpressionStatement(matchingInvocation.Node.Parent)
-            && !IsActionLambda(matchingInvocation.Node.Parent, matchingInvocation.SemanticModel);
+            && !IsActionLambda(matchingInvocation.Node.Parent, matchingInvocation.Model);
 
         private static bool IsActionLambda(SyntaxNode node, SemanticModel semanticModel) =>
             node is LambdaExpressionSyntax lambda
@@ -119,24 +119,24 @@ namespace SonarAnalyzer.Rules.CSharp
         private static bool IsExpressionStatement(SyntaxNode node) =>
             node is ExpressionStatementSyntax;
 
-        private static IEnumerable<NodeSymbolAndSemanticModel> GetLocalMatchingInvocations(SyntaxNode containingMethod, IMethodSymbol invocationSymbol, SemanticModel semanticModel) =>
+        private static IEnumerable<NodeSymbolAndModel> GetLocalMatchingInvocations(SyntaxNode containingMethod, IMethodSymbol invocationSymbol, SemanticModel semanticModel) =>
             containingMethod.DescendantNodes()
                 .OfType<InvocationExpressionSyntax>()
                 .Where(x => semanticModel.GetSymbolInfo(x.Expression).Symbol is IMethodSymbol methodSymbol && invocationSymbol.Equals(methodSymbol))
-                .Select(x => new NodeSymbolAndSemanticModel(semanticModel, x, invocationSymbol))
+                .Select(x => new NodeSymbolAndModel(semanticModel, x, invocationSymbol))
                 .ToList();
 
-        private static IEnumerable<NodeSymbolAndSemanticModel> FilterInvocations(NodeAndSemanticModel<BaseTypeDeclarationSyntax> container) =>
+        private static IEnumerable<NodeSymbolAndModel> FilterInvocations(NodeAndModel<BaseTypeDeclarationSyntax> container) =>
             container.Node.DescendantNodes()
                 .OfType<InvocationExpressionSyntax>()
-                .Select(x => new NodeSymbolAndSemanticModel(container.SemanticModel, x, container.SemanticModel.GetSymbolInfo(x).Symbol as IMethodSymbol))
+                .Select(x => new NodeSymbolAndModel(container.Model, x, container.Model.GetSymbolInfo(x).Symbol as IMethodSymbol))
                 .Where(x => x.Symbol != null);
 
-        private static IEnumerable<NodeSymbolAndSemanticModel<MethodDeclarationSyntax, IMethodSymbol>> CollectRemovableMethods(CSharpRemovableDeclarationCollector removableDeclarationCollector) =>
+        private static IEnumerable<NodeSymbolAndModel<MethodDeclarationSyntax, IMethodSymbol>> CollectRemovableMethods(CSharpRemovableDeclarationCollector removableDeclarationCollector) =>
                 removableDeclarationCollector.TypeDeclarations
                     .SelectMany(container => container.Node.DescendantNodes(CSharpRemovableDeclarationCollector.IsNodeContainerTypeDeclaration)
                         .OfType<MethodDeclarationSyntax>()
-                        .Select(x => new NodeSymbolAndSemanticModel<MethodDeclarationSyntax, IMethodSymbol>(container.SemanticModel, x, container.SemanticModel.GetDeclaredSymbol(x))))
+                        .Select(x => new NodeSymbolAndModel<MethodDeclarationSyntax, IMethodSymbol>(container.Model, x, container.Model.GetDeclaredSymbol(x))))
                         .Where(x => x.Symbol is { ReturnsVoid: false, IsAsync: false } && CSharpRemovableDeclarationCollector.IsRemovable(x.Symbol, Accessibility.Private));
     }
 }
