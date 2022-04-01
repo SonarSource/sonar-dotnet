@@ -34,7 +34,8 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void AvoidExcessiveInheritance_DefaultValues() =>
             defaultBuilder.AddPaths(
                 "AvoidExcessiveInheritance_DefaultValues.cs",
-                "AvoidExcessiveInheritance_DefaultValues2.cs")
+                // The test cases are duplicated to make sure the rules can execute in a concurrent manner.
+                "AvoidExcessiveInheritance_DefaultValues.Concurrent.cs")
                 .WithAutogenerateConcurrentFiles(false)
                 .Verify();
 
@@ -44,7 +45,8 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void AvoidExcessiveInheritance_DefaultValues_Records() =>
             defaultBuilder.AddPaths(
                 "AvoidExcessiveInheritance_DefaultValues.Records.cs",
-                "AvoidExcessiveInheritance_DefaultValues.Records2.cs")
+                // The test cases are duplicated to make sure the rules can execute in a concurrent manner.
+                "AvoidExcessiveInheritance_DefaultValues.Records.Concurrent.cs")
                 .WithOptions(ParseOptionsHelper.FromCSharp9)
                 .WithAutogenerateConcurrentFiles(false)
                 .Verify();
