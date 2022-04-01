@@ -29,6 +29,15 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         public void ForLoopConditionAlwaysFalse() =>
-            OldVerifier.VerifyAnalyzer(@"TestCases\ForLoopConditionAlwaysFalse.cs", new ForLoopConditionAlwaysFalse());
+            new VerifierBuilder<ForLoopConditionAlwaysFalse>().AddPaths("ForLoopConditionAlwaysFalse.cs").Verify();
+
+#if NET
+
+        [TestMethod]
+        public void ForLoopConditionAlwaysFalse_CSharp9() =>
+            new VerifierBuilder<ForLoopConditionAlwaysFalse>().AddPaths("ForLoopConditionAlwaysFalse.CSharp9.cs").WithOptions(ParseOptionsHelper.FromCSharp9).Verify();
+
+#endif
+
     }
 }

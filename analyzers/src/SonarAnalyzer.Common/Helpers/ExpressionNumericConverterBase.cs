@@ -42,6 +42,9 @@ namespace SonarAnalyzer.Helpers
         public bool TryGetConstantDoubleValue(SyntaxNode expression, out double value) =>
             TryGetConstantValue(null, expression, Convert.ToDouble, (multiplier, v) => multiplier * v, out value);
 
+        public bool TryGetConstantDecimalValue(SyntaxNode expression, out decimal value) =>
+            TryGetConstantValue(null, expression, Convert.ToDecimal, (multiplier, v) => multiplier * v, out value);
+
         private bool TryGetConstantValue<T>(SemanticModel semanticModel, SyntaxNode expression, Func<object, T> converter, Func<int, T, T> multiplierCalculator, out T value)
             where T : struct
         {
