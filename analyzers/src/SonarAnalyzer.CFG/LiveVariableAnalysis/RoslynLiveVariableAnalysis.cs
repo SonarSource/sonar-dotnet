@@ -60,6 +60,9 @@ namespace SonarAnalyzer.CFG.LiveVariableAnalysis
             return IsLocal(candidate) ? candidate : null;
         }
 
+        public override bool IsLocal(ISymbol symbol) =>
+            originalDeclaration.Equals(symbol?.ContainingSymbol);
+
         protected override IEnumerable<BasicBlock> ReversedBlocks() =>
             Cfg.Blocks.Reverse();
 
@@ -76,9 +79,6 @@ namespace SonarAnalyzer.CFG.LiveVariableAnalysis
             return ret;
         }
 
-        public override bool IsLocal(ISymbol symbol) =>
-            originalDeclaration.Equals(symbol?.ContainingSymbol);
-
         private void BuildBranches(BasicBlock block)
         {
             foreach (var successor in block.Successors)
@@ -90,7 +90,7 @@ namespace SonarAnalyzer.CFG.LiveVariableAnalysis
                 }
                 else if (successor.Source.EnclosingRegion is { Kind: ControlFlowRegionKind.Finally } finallyRegion)
                 {
-                    BuildBranchesFinally(successor.Source, finallyRegion);
+                    BuildBranchesFinally(successor.Source);
                 }
             }
             if (block.IsEnclosedIn(ControlFlowRegionKind.Try))
@@ -102,7 +102,7 @@ namespace SonarAnalyzer.CFG.LiveVariableAnalysis
             }
         }
 
-        private void BuildBranchesFinally(BasicBlock source, ControlFlowRegion finallyRegion)
+        private void BuildBranchesFinally(BasicBlock source)
         {
             // Redirect exit from throw and finally to following blocks.
             foreach (var trySuccessor in TryRegionSuccessors(source.EnclosingRegion))
@@ -161,7 +161,7 @@ namespace SonarAnalyzer.CFG.LiveVariableAnalysis
             }
         }
 
-        private class RoslynState : State
+        private sealed class RoslynState : State
         {
             private readonly RoslynLiveVariableAnalysis owner;
             private readonly ISet<ISymbol> capturedLocalFunctions = new HashSet<ISymbol>();
