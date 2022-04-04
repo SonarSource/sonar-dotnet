@@ -49,8 +49,8 @@ namespace SonarAnalyzer.Rules
             typeDeclarations
                 .Select(typeDeclaration => new
                 {
-                    typeDeclaration.NodeAndSemanticModel.Model,
-                    DescendantNodes = typeDeclaration.NodeAndSemanticModel.Node.DescendantNodes().ToList()
+                    typeDeclaration.NodeAndModel.Model,
+                    DescendantNodes = typeDeclaration.NodeAndModel.Node.DescendantNodes().ToList()
                 })
                 .Any(descendants =>
                     IsAnyConstructorToCurrentType(descendants.DescendantNodes, namedType, descendants.Model)
@@ -125,12 +125,12 @@ namespace SonarAnalyzer.Rules
 
         protected class ConstructorContext
         {
-            public NodeAndModel<TBaseTypeSyntax> NodeAndSemanticModel { get; }
+            public NodeAndModel<TBaseTypeSyntax> NodeAndModel { get; }
             public Diagnostic Diagnostic { get; }
 
-            public ConstructorContext(NodeAndModel<TBaseTypeSyntax> nodeAndSemanticModel, Diagnostic diagnostic)
+            public ConstructorContext(NodeAndModel<TBaseTypeSyntax> nodeAndModel, Diagnostic diagnostic)
             {
-                NodeAndSemanticModel = nodeAndSemanticModel;
+                NodeAndModel = nodeAndModel;
                 Diagnostic = diagnostic;
             }
         }

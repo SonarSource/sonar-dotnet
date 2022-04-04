@@ -76,7 +76,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     }
 
                     var typesDeclarationsAndSemanticModels = namedTypeSymbol.DeclaringSyntaxReferences
-                                                                            .Select(x => CreateNodeAndSemanticModelObject(x, c))
+                                                                            .Select(x => CreateNodeAndModel(x, c))
                                                                             .ToList();
 
                     var trackedNodesAndSymbols = new HashSet<NodeAndSymbol>();
@@ -118,7 +118,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 },
                 SymbolKind.NamedType);
 
-        private static NodeAndModel<SyntaxNode> CreateNodeAndSemanticModelObject(SyntaxReference syntaxReference, SymbolAnalysisContext c) =>
+        private static NodeAndModel<SyntaxNode> CreateNodeAndModel(SyntaxReference syntaxReference, SymbolAnalysisContext c) =>
             new(c.Compilation.GetSemanticModel(syntaxReference.SyntaxTree), syntaxReference.GetSyntax());
 
         private static void TrackInitializedLocalsAndPrivateFields(INamedTypeSymbol namedType,
