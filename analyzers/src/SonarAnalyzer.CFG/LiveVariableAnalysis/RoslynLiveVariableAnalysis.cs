@@ -90,7 +90,7 @@ namespace SonarAnalyzer.CFG.LiveVariableAnalysis
                 }
                 else if (successor.Source.EnclosingRegion is { Kind: ControlFlowRegionKind.Finally } finallyRegion)
                 {
-                    BuildBranchesFinally(successor.Source);
+                    BuildBranchesFinally(successor.Source, finallyRegion);
                 }
             }
             if (block.IsEnclosedIn(ControlFlowRegionKind.Try))
@@ -102,7 +102,7 @@ namespace SonarAnalyzer.CFG.LiveVariableAnalysis
             }
         }
 
-        private void BuildBranchesFinally(BasicBlock source)
+        private void BuildBranchesFinally(BasicBlock source, ControlFlowRegion finallyRegion)
         {
             foreach (var trySuccessor in TryRegionSuccessors(source.EnclosingRegion))
             {
