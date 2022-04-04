@@ -67,9 +67,9 @@ namespace SonarAnalyzer.UnitTest.Common
         {
             var analyzers = RuleFinder.GetAnalyzers(AnalyzerLanguage.CSharp).ToArray();
 
-            VerifyNoExceptionThrown(@"TestCasesForRuleFailure\InvalidSyntax.cs", analyzers, CompilationErrorBehavior.Ignore);
-            VerifyNoExceptionThrown(@"TestCasesForRuleFailure\SpecialCases.cs", analyzers, CompilationErrorBehavior.Ignore);
-            VerifyNoExceptionThrown(@"TestCasesForRuleFailure\PerformanceTestCases.cs", analyzers, CompilationErrorBehavior.Ignore);
+            VerifyNoExceptionThrown(@"TestCases\RuleFailure\InvalidSyntax.cs", analyzers, CompilationErrorBehavior.Ignore);
+            VerifyNoExceptionThrown(@"TestCases\RuleFailure\SpecialCases.cs", analyzers, CompilationErrorBehavior.Ignore);
+            VerifyNoExceptionThrown(@"TestCases\RuleFailure\PerformanceTestCases.cs", analyzers, CompilationErrorBehavior.Ignore);
         }
 
         [TestMethod]
@@ -77,8 +77,8 @@ namespace SonarAnalyzer.UnitTest.Common
         {
             var analyzers = RuleFinder.GetAnalyzers(AnalyzerLanguage.VisualBasic).ToArray();
 
-            VerifyNoExceptionThrown(@"TestCasesForRuleFailure\InvalidSyntax.vb", analyzers, CompilationErrorBehavior.Ignore);
-            VerifyNoExceptionThrown(@"TestCasesForRuleFailure\SpecialCases.vb", analyzers, CompilationErrorBehavior.Ignore);
+            VerifyNoExceptionThrown(@"TestCases\RuleFailure\InvalidSyntax.vb", analyzers, CompilationErrorBehavior.Ignore);
+            VerifyNoExceptionThrown(@"TestCases\RuleFailure\SpecialCases.vb", analyzers, CompilationErrorBehavior.Ignore);
         }
 
         [TestMethod]
@@ -310,7 +310,7 @@ namespace SonarAnalyzer.UnitTest.Common
             private static readonly DiagnosticDescriptor Rule = DiagnosticDescriptorBuilder.GetUtilityDescriptor("S9999", "Rule test");
 
             public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
-            public bool? IsConcurrentExecutionEnabled { get; private set; }
+            public new bool? IsConcurrentExecutionEnabled { get; private set; }
 
             protected override void Initialize(SonarAnalysisContext context) =>
                 IsConcurrentExecutionEnabled = EnableConcurrentExecution;
