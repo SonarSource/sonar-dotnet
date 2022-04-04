@@ -51,14 +51,14 @@ namespace SonarAnalyzer.UnitTest.LiveVariableAnalysis
         Method(0);
 {suffix}";
             var context = CreateContextCS(code);
-            context.ValidateEntry(new LiveIn("boolParameter"), new LiveOut("boolParameter"));
-            context.Validate<ISimpleAssignmentOperation>("ms = new MemoryStream()", new LiveIn("boolParameter"), new LiveOut("boolParameter", "ms"));
-            context.Validate("Method(ms.Capacity);", new LiveIn("boolParameter", "ms"), new LiveOut("ms"));
-            context.Validate("Method(0);", new LiveIn("ms"), new LiveOut("ms"));
+            context.ValidateEntry(LiveIn("boolParameter"), LiveOut("boolParameter"));
+            context.Validate<ISimpleAssignmentOperation>("ms = new MemoryStream()", LiveIn("boolParameter"), LiveOut("boolParameter", "ms"));
+            context.Validate("Method(ms.Capacity);", LiveIn("boolParameter", "ms"), LiveOut("ms"));
+            context.Validate("Method(0);", LiveIn("ms"), LiveOut("ms"));
             context.ValidateExit();
             // Finally region
-            context.Validate<IIsNullOperation>("ms = new MemoryStream()", new LiveIn("ms"), new LiveOut("ms"));    // Null check
-            context.Validate<IInvocationOperation>("ms = new MemoryStream()", new LiveIn("ms"));                   // Actual Dispose
+            context.Validate<IIsNullOperation>("ms = new MemoryStream()", LiveIn("ms"), LiveOut("ms"));     // Null check
+            context.Validate<IInvocationOperation>("ms = new MemoryStream()", LiveIn("ms"));                // Actual Dispose
             context.Validate(context.Cfg.Blocks[6], null, new Expected[] { });
         }
 
@@ -79,16 +79,16 @@ using (var msOuter = new MemoryStream())
 }}
 Method(2);";
             var context = CreateContextCS(code);
-            context.ValidateEntry(new LiveIn("boolParameter"), new LiveOut("boolParameter"));
-            context.Validate("Method(0);", new LiveIn("msOuter", "msInner"), new LiveOut("msOuter", "msInner"));
-            context.Validate("Method(1);", new LiveIn("msOuter"), new LiveOut("msOuter"));
+            context.ValidateEntry(LiveIn("boolParameter"), LiveOut("boolParameter"));
+            context.Validate("Method(0);", LiveIn("msOuter", "msInner"), LiveOut("msOuter", "msInner"));
+            context.Validate("Method(1);", LiveIn("msOuter"), LiveOut("msOuter"));
             context.Validate("Method(2);");
             context.ValidateExit();
             // Finally region
-            context.Validate<IIsNullOperation>("msInner = new MemoryStream()", new LiveIn("msInner", "msOuter"), new LiveOut("msInner", "msOuter"));   // Null check
-            context.Validate<IInvocationOperation>("msInner = new MemoryStream()", new LiveIn("msInner", "msOuter"), new LiveOut("msOuter"));          // Actual Dispose
-            context.Validate<IIsNullOperation>("msOuter = new MemoryStream()", new LiveIn("msOuter"), new LiveOut("msOuter"));     // Null check
-            context.Validate<IInvocationOperation>("msOuter = new MemoryStream()", new LiveIn("msOuter"));                         // Actual Dispose
+            context.Validate<IIsNullOperation>("msInner = new MemoryStream()", LiveIn("msInner", "msOuter"), LiveOut("msInner", "msOuter"));   // Null check
+            context.Validate<IInvocationOperation>("msInner = new MemoryStream()", LiveIn("msInner", "msOuter"), LiveOut("msOuter"));          // Actual Dispose
+            context.Validate<IIsNullOperation>("msOuter = new MemoryStream()", LiveIn("msOuter"), LiveOut("msOuter"));  // Null check
+            context.Validate<IInvocationOperation>("msOuter = new MemoryStream()", LiveIn("msOuter"));                  // Actual Dispose
         }
 
         [TestMethod]
@@ -107,16 +107,16 @@ if (boolParameter)
 }}
 Method(2);";
             var context = CreateContextCS(code);
-            context.ValidateEntry(new LiveIn("boolParameter"), new LiveOut("boolParameter"));
-            context.Validate("Method(0);", new LiveIn("boolParameter", "msOuter", "msInner"), new LiveOut("msOuter", "msInner"));
-            context.Validate("Method(1);", new LiveIn("msOuter", "msInner"), new LiveOut("msOuter", "msInner"));
-            context.Validate("Method(2);", new LiveIn("msOuter"), new LiveOut("msOuter"));
+            context.ValidateEntry(LiveIn("boolParameter"), LiveOut("boolParameter"));
+            context.Validate("Method(0);", LiveIn("boolParameter", "msOuter", "msInner"), LiveOut("msOuter", "msInner"));
+            context.Validate("Method(1);", LiveIn("msOuter", "msInner"), LiveOut("msOuter", "msInner"));
+            context.Validate("Method(2);", LiveIn("msOuter"), LiveOut("msOuter"));
             context.ValidateExit();
             // Finally region
-            context.Validate<IIsNullOperation>("msInner = new MemoryStream()", new LiveIn("msInner", "msOuter"), new LiveOut("msInner", "msOuter"));   // Null check
-            context.Validate<IInvocationOperation>("msInner = new MemoryStream()", new LiveIn("msInner", "msOuter"), new LiveOut("msOuter"));          // Actual Dispose
-            context.Validate<IIsNullOperation>("msOuter = new MemoryStream()", new LiveIn("msOuter"), new LiveOut("msOuter"));     // Null check
-            context.Validate<IInvocationOperation>("msOuter = new MemoryStream()", new LiveIn("msOuter"));                         // Actual Dispose
+            context.Validate<IIsNullOperation>("msInner = new MemoryStream()", LiveIn("msInner", "msOuter"), LiveOut("msInner", "msOuter"));   // Null check
+            context.Validate<IInvocationOperation>("msInner = new MemoryStream()", LiveIn("msInner", "msOuter"), LiveOut("msOuter"));          // Actual Dispose
+            context.Validate<IIsNullOperation>("msOuter = new MemoryStream()", LiveIn("msOuter"), LiveOut("msOuter"));      // Null check
+            context.Validate<IInvocationOperation>("msOuter = new MemoryStream()", LiveIn("msOuter"));                      // Actual Dispose
         }
 
         [TestMethod]
@@ -133,9 +133,9 @@ catch
 }
 Method(1);";
             var context = CreateContextCS(code);
-            context.ValidateEntry(new LiveIn("intParameter"), new LiveOut("intParameter"));
-            context.Validate("Method(0);", new LiveIn("intParameter"), new LiveOut("intParameter"));
-            context.Validate("Method(intParameter);", new LiveIn("intParameter"));
+            context.ValidateEntry(LiveIn("intParameter"), LiveOut("intParameter"));
+            context.Validate("Method(0);", LiveIn("intParameter"), LiveOut("intParameter"));
+            context.Validate("Method(intParameter);", LiveIn("intParameter"));
             context.Validate("Method(1);");
             context.ValidateExit();
         }
@@ -155,9 +155,9 @@ catch
 }
 Method(1);";
             var context = CreateContextCS(code);
-            context.ValidateEntry(new LiveIn("intParameter"), new LiveOut("intParameter"));
-            context.Validate("t = true || true", new LiveIn("intParameter"), new LiveOut("intParameter"));
-            context.Validate("Method(intParameter);", new LiveIn("intParameter"));
+            context.ValidateEntry(LiveIn("intParameter"), LiveOut("intParameter"));
+            context.Validate("t = true || true", LiveIn("intParameter"), LiveOut("intParameter"));
+            context.Validate("Method(intParameter);", LiveIn("intParameter"));
             context.Validate("Method(1);");
             context.ValidateExit();
         }
@@ -176,10 +176,10 @@ catch
 }
 Method(intParameter);";
             var context = CreateContextCS(code);
-            context.ValidateEntry(new LiveIn("intParameter"), new LiveOut("intParameter"));
-            context.Validate("Method(0);", new LiveIn("intParameter"), new LiveOut("intParameter"));
-            context.Validate("Method(1);", new LiveIn("intParameter"), new LiveOut("intParameter"));
-            context.Validate("Method(intParameter);", new LiveIn("intParameter"));
+            context.ValidateEntry(LiveIn("intParameter"), LiveOut("intParameter"));
+            context.Validate("Method(0);", LiveIn("intParameter"), LiveOut("intParameter"));
+            context.Validate("Method(1);", LiveIn("intParameter"), LiveOut("intParameter"));
+            context.Validate("Method(intParameter);", LiveIn("intParameter"));
             context.ValidateExit();
         }
 
@@ -207,11 +207,11 @@ Method(intParameter); // Unreachable";
             var context = CreateContextCS(code);
             // LVA doesn't care if it's reachable. Blocks still should have LiveIn and LiveOut
             context.ValidateEntry();    // intParameter is used only in unreachable path => not visible here
-            context.Validate("Method(usedInTry);", new LiveIn("usedInTry", "usedInCatch"), new LiveOut("usedInCatch"));     // Doesn't see usedInTryUnreachable nor intParameter
-            context.Validate("Method(usedInTryUnreachable);", new LiveIn("intParameter", "usedInTryUnreachable", "usedInCatch"), new LiveOut("intParameter", "usedInCatch"));
-            context.Validate("Method(usedInCatch);", new LiveIn("usedInCatch"));                                            // Doesn't see usedInCatchUnreachable nor intParameter
-            context.Validate("Method(usedInCatchUnreachable);", new LiveIn("intParameter", "usedInCatchUnreachable"), new LiveOut("intParameter"));
-            context.Validate("Method(intParameter);", new LiveIn("intParameter"));
+            context.Validate("Method(usedInTry);", LiveIn("usedInTry", "usedInCatch"), LiveOut("usedInCatch"));         // Doesn't see usedInTryUnreachable nor intParameter
+            context.Validate("Method(usedInTryUnreachable);", LiveIn("intParameter", "usedInTryUnreachable", "usedInCatch"), LiveOut("intParameter", "usedInCatch"));
+            context.Validate("Method(usedInCatch);", LiveIn("usedInCatch"));                                            // Doesn't see usedInCatchUnreachable nor intParameter
+            context.Validate("Method(usedInCatchUnreachable);", LiveIn("intParameter", "usedInCatchUnreachable"), LiveOut("intParameter"));
+            context.Validate("Method(intParameter);", LiveIn("intParameter"));
             context.ValidateExit();
         }
 
@@ -234,12 +234,12 @@ catch
 }
 Method(intParameter);";
             var context = CreateContextCS(code);
-            context.ValidateEntry(new LiveIn("intParameter", "boolParameter"), new LiveOut("intParameter", "boolParameter"));
-            context.Validate("Method(0);", new LiveIn("intParameter", "boolParameter"), new LiveOut("intParameter", "boolParameter"));
-            context.Validate("Method(1);", new LiveIn("intParameter", "boolParameter"), new LiveOut("intParameter"));
-            context.Validate("boolParameter", new LiveIn("intParameter", "boolParameter"), new LiveOut("intParameter"));
-            context.Validate("Method(2);", new LiveIn("intParameter"), new LiveOut("intParameter"));
-            context.Validate("Method(intParameter);", new LiveIn("intParameter"));
+            context.ValidateEntry(LiveIn("intParameter", "boolParameter"), LiveOut("intParameter", "boolParameter"));
+            context.Validate("Method(0);", LiveIn("intParameter", "boolParameter"), LiveOut("intParameter", "boolParameter"));
+            context.Validate("Method(1);", LiveIn("intParameter", "boolParameter"), LiveOut("intParameter"));
+            context.Validate("boolParameter", LiveIn("intParameter", "boolParameter"), LiveOut("intParameter"));
+            context.Validate("Method(2);", LiveIn("intParameter"), LiveOut("intParameter"));
+            context.Validate("Method(intParameter);", LiveIn("intParameter"));
             context.ValidateExit();
         }
 
@@ -258,10 +258,10 @@ catch
 }
 Method(intParameter);";
             var context = CreateContextCS(code);
-            context.ValidateEntry(new LiveIn("intParameter"), new LiveOut("intParameter"));
-            context.Validate("Method(0);", new LiveIn("intParameter"), new LiveOut("intParameter"));
+            context.ValidateEntry(LiveIn("intParameter"), LiveOut("intParameter"));
+            context.Validate("Method(0);", LiveIn("intParameter"), LiveOut("intParameter"));
             context.Validate("Method(1);");
-            context.Validate("Method(intParameter);", new LiveIn("intParameter"));
+            context.Validate("Method(intParameter);", LiveIn("intParameter"));
             context.ValidateExit();
         }
 
@@ -312,10 +312,10 @@ catch
 Method(2);";
             var context = CreateContextCS(code);
             context.ValidateEntry();
-            context.Validate("Method(0);", new LiveIn("inner", "outer"), new LiveOut("inner", "outer"));
-            context.Validate("Method(inner);", new LiveIn("inner", "outer"), new LiveOut("outer"));
-            context.Validate("Method(1);", new LiveIn("outer"), new LiveOut("outer"));
-            context.Validate("Method(outer);", new LiveIn("outer"));
+            context.Validate("Method(0);", LiveIn("inner", "outer"), LiveOut("inner", "outer"));
+            context.Validate("Method(inner);", LiveIn("inner", "outer"), LiveOut("outer"));
+            context.Validate("Method(1);", LiveIn("outer"), LiveOut("outer"));
+            context.Validate("Method(outer);", LiveIn("outer"));
             context.Validate("Method(2);");
             context.ValidateExit();
         }
@@ -349,9 +349,9 @@ catch
 }
 Method(intParameter);";
             var context = CreateContextCS(code);
-            context.ValidateEntry(new LiveIn("intParameter"), new LiveOut("intParameter"));
-            context.Validate("Method(0);", new LiveIn("intParameter"), new LiveOut("intParameter"));
-            context.Validate("Method(intParameter);", new LiveIn("intParameter"));
+            context.ValidateEntry(LiveIn("intParameter"), LiveOut("intParameter"));
+            context.Validate("Method(0);", LiveIn("intParameter"), LiveOut("intParameter"));
+            context.Validate("Method(intParameter);", LiveIn("intParameter"));
             context.ValidateExit();
         }
 
@@ -376,10 +376,10 @@ goto A;
 B:
 Method(1);";
             var context = CreateContextCS(code);
-            context.ValidateEntry(new LiveIn("boolParameter", "intParameter"), new LiveOut("boolParameter", "intParameter"));
-            context.Validate("Method(intParameter);", new LiveIn("boolParameter", "intParameter", "variableUsedInCatch"), new LiveOut("boolParameter", "intParameter", "variableUsedInCatch"));
-            context.Validate("Method(0);", new LiveIn("boolParameter", "intParameter", "variableUsedInCatch"), new LiveOut("boolParameter", "intParameter", "variableUsedInCatch"));
-            context.Validate("Method(variableUsedInCatch);", new LiveIn("boolParameter", "intParameter", "variableUsedInCatch"), new LiveOut("boolParameter", "intParameter", "variableUsedInCatch"));
+            context.ValidateEntry(LiveIn("boolParameter", "intParameter"), LiveOut("boolParameter", "intParameter"));
+            context.Validate("Method(intParameter);", LiveIn("boolParameter", "intParameter", "variableUsedInCatch"), LiveOut("boolParameter", "intParameter", "variableUsedInCatch"));
+            context.Validate("Method(0);", LiveIn("boolParameter", "intParameter", "variableUsedInCatch"), LiveOut("boolParameter", "intParameter", "variableUsedInCatch"));
+            context.Validate("Method(variableUsedInCatch);", LiveIn("boolParameter", "intParameter", "variableUsedInCatch"), LiveOut("boolParameter", "intParameter", "variableUsedInCatch"));
             context.Validate("Method(1);");
         }
 
@@ -400,10 +400,10 @@ catch (Exception ex)
 }
 Method(1);";
             var context = CreateContextCS(code);
-            context.ValidateEntry(new LiveIn("boolParameter"), new LiveOut("boolParameter"));
-            context.Validate("Method(0);", new LiveIn("boolParameter"), new LiveOut("boolParameter"));
-            context.Validate("boolParameter", new LiveIn("boolParameter"), new LiveOut("ex"));     // ex doesn't live in here, becase this blocks starts with SimpleAssignmentOperation: (Exception ex)
-            context.Validate("Method(ex.HResult);", new LiveIn("ex"));
+            context.ValidateEntry(LiveIn("boolParameter"), LiveOut("boolParameter"));
+            context.Validate("Method(0);", LiveIn("boolParameter"), LiveOut("boolParameter"));
+            context.Validate("boolParameter", LiveIn("boolParameter"), LiveOut("ex"));     // ex doesn't live in here, becase this blocks starts with SimpleAssignmentOperation: (Exception ex)
+            context.Validate("Method(ex.HResult);", LiveIn("ex"));
             context.Validate("Method(1);");
             context.ValidateExit();
         }
@@ -425,10 +425,10 @@ catch (Exception ex)
 }
 Method(usedAfter);";
             var context = CreateContextCS(code);
-            context.ValidateEntry(new LiveIn("intParameter"), new LiveOut("intParameter"));
-            context.Validate("Method(usedInTry);", new LiveIn("usedInTry", "usedAfter", "usedInCatch", "intParameter"), new LiveOut("usedAfter", "usedInCatch", "intParameter"));
-            context.Validate("Method(intParameter, usedInCatch, ex.HResult);", new LiveIn("intParameter", "usedInCatch", "usedAfter"), new LiveOut("usedAfter"));
-            context.Validate("Method(usedAfter);", new LiveIn("usedAfter"));
+            context.ValidateEntry(LiveIn("intParameter"), LiveOut("intParameter"));
+            context.Validate("Method(usedInTry);", LiveIn("usedInTry", "usedAfter", "usedInCatch", "intParameter"), LiveOut("usedAfter", "usedInCatch", "intParameter"));
+            context.Validate("Method(intParameter, usedInCatch, ex.HResult);", LiveIn("intParameter", "usedInCatch", "usedAfter"), LiveOut("usedAfter"));
+            context.Validate("Method(usedAfter);", LiveIn("usedAfter"));
             context.ValidateExit();
         }
 
@@ -449,10 +449,10 @@ catch (Exception ex) when (ex.InnerException == null)
 }
 Method(usedAfter);";
             var context = CreateContextCS(code);
-            context.ValidateEntry(new LiveIn("intParameter"), new LiveOut("intParameter"));
-            context.Validate("Method(usedInTry);", new LiveIn("usedInTry", "usedAfter", "usedInCatch", "intParameter"), new LiveOut("usedAfter", "usedInCatch", "intParameter"));
-            context.Validate("Method(intParameter, usedInCatch, ex.HResult);", new LiveIn("intParameter", "usedInCatch", "usedAfter", "ex"), new LiveOut("usedAfter"));
-            context.Validate("Method(usedAfter);", new LiveIn("usedAfter"));
+            context.ValidateEntry(LiveIn("intParameter"), LiveOut("intParameter"));
+            context.Validate("Method(usedInTry);", LiveIn("usedInTry", "usedAfter", "usedInCatch", "intParameter"), LiveOut("usedAfter", "usedInCatch", "intParameter"));
+            context.Validate("Method(intParameter, usedInCatch, ex.HResult);", LiveIn("intParameter", "usedInCatch", "usedAfter", "ex"), LiveOut("usedAfter"));
+            context.Validate("Method(usedAfter);", LiveIn("usedAfter"));
             context.ValidateExit();
         }
 
@@ -470,9 +470,9 @@ catch (Exception ex) when (boolParameter)
 }
 Method(1);";
             var context = CreateContextCS(code);
-            context.ValidateEntry(new LiveIn("boolParameter", "intParameter"), new LiveOut("boolParameter", "intParameter"));
-            context.Validate("Method(0);", new LiveIn("boolParameter", "intParameter"), new LiveOut("boolParameter", "intParameter"));
-            context.Validate("Method(intParameter);", new LiveIn("intParameter"));
+            context.ValidateEntry(LiveIn("boolParameter", "intParameter"), LiveOut("boolParameter", "intParameter"));
+            context.Validate("Method(0);", LiveIn("boolParameter", "intParameter"), LiveOut("boolParameter", "intParameter"));
+            context.Validate("Method(intParameter);", LiveIn("intParameter"));
             context.Validate("Method(1);");
             context.ValidateExit();
         }
@@ -499,14 +499,14 @@ catch (Exception ex)
 }
 Method(usedAfter);";
             var context = CreateContextCS(code);
-            context.ValidateEntry(new LiveIn("intParameter"), new LiveOut("intParameter"));
+            context.ValidateEntry(LiveIn("intParameter"), LiveOut("intParameter"));
             context.Validate("Method(usedInTry);",
-                new LiveIn("usedInTry", "usedAfter", "usedInCatchA", "usedInCatchB", "intParameter"),
-                new LiveOut("usedAfter", "usedInCatchA", "usedInCatchB", "intParameter"));
+                LiveIn("usedInTry", "usedAfter", "usedInCatchA", "usedInCatchB", "intParameter"),
+                LiveOut("usedAfter", "usedInCatchA", "usedInCatchB", "intParameter"));
             // ex doesn't live in here, because the blocks starts with SimpleAssignmentOperation: (Exception ex)
-            context.Validate("Method(intParameter, usedInCatchA, ex.HResult);", new LiveIn("intParameter", "usedInCatchA", "usedAfter"), new LiveOut("usedAfter"));
-            context.Validate("Method(intParameter, usedInCatchB, ex.HResult);", new LiveIn("intParameter", "usedInCatchB", "usedAfter"), new LiveOut("usedAfter"));
-            context.Validate("Method(usedAfter);", new LiveIn("usedAfter"));
+            context.Validate("Method(intParameter, usedInCatchA, ex.HResult);", LiveIn("intParameter", "usedInCatchA", "usedAfter"), LiveOut("usedAfter"));
+            context.Validate("Method(intParameter, usedInCatchB, ex.HResult);", LiveIn("intParameter", "usedInCatchB", "usedAfter"), LiveOut("usedAfter"));
+            context.Validate("Method(usedAfter);", LiveIn("usedAfter"));
             context.ValidateExit();
         }
 
@@ -528,9 +528,9 @@ catch
 Method(2);";
             var context = CreateContextCS(code);
             context.ValidateEntry();
-            context.Validate("Method(0);"/*Should be:, new LiveOut("variable")*/);
-            context.Validate("Method(1);", new LiveOut("variable"));
-            context.Validate("Method(variable);", new LiveIn("variable"));
+            context.Validate("Method(0);"/*Should be:, LiveOut("variable")*/);
+            context.Validate("Method(1);", LiveOut("variable"));
+            context.Validate("Method(variable);", LiveIn("variable"));
             context.Validate("Method(2);");
         }
 
@@ -558,11 +558,11 @@ while (variable < 5)
 Method(5);";
             var context = CreateContextCS(code);
             context.ValidateEntry();
-            context.Validate("Method(0);", new LiveOut("variable"));
-            context.Validate("Method(1);", new LiveIn("variable"), new LiveOut("variable"));
-            context.Validate("Method(2);", new LiveIn("variable"), new LiveOut("variable"));
-            context.Validate("Method(3);", new LiveIn("variable"), new LiveOut("variable"));
-            context.Validate("Method(4);", new LiveIn("variable"), new LiveOut("variable"));
+            context.Validate("Method(0);", LiveOut("variable"));
+            context.Validate("Method(1);", LiveIn("variable"), LiveOut("variable"));
+            context.Validate("Method(2);", LiveIn("variable"), LiveOut("variable"));
+            context.Validate("Method(3);", LiveIn("variable"), LiveOut("variable"));
+            context.Validate("Method(4);", LiveIn("variable"), LiveOut("variable"));
             context.Validate("Method(5);");
         }
 
@@ -580,9 +580,9 @@ finally
 }
 Method(1);";
             var context = CreateContextCS(code);
-            context.ValidateEntry(new LiveIn("intParameter"), new LiveOut("intParameter"));
-            context.Validate("Method(0);", new LiveIn("intParameter"), new LiveOut("intParameter"));
-            context.Validate("Method(intParameter);", new LiveIn("intParameter"));
+            context.ValidateEntry(LiveIn("intParameter"), LiveOut("intParameter"));
+            context.Validate("Method(0);", LiveIn("intParameter"), LiveOut("intParameter"));
+            context.Validate("Method(intParameter);", LiveIn("intParameter"));
             context.Validate("Method(1);");
             context.ValidateExit();
         }
@@ -601,10 +601,10 @@ finally
 }
 Method(intParameter);";
             var context = CreateContextCS(code);
-            context.ValidateEntry(new LiveIn("intParameter"), new LiveOut("intParameter"));
-            context.Validate("Method(0);", new LiveIn("intParameter"), new LiveOut("intParameter"));
-            context.Validate("Method(1);", new LiveIn("intParameter"), new LiveOut("intParameter"));
-            context.Validate("Method(intParameter);", new LiveIn("intParameter"));
+            context.ValidateEntry(LiveIn("intParameter"), LiveOut("intParameter"));
+            context.Validate("Method(0);", LiveIn("intParameter"), LiveOut("intParameter"));
+            context.Validate("Method(1);", LiveIn("intParameter"), LiveOut("intParameter"));
+            context.Validate("Method(intParameter);", LiveIn("intParameter"));
             context.ValidateExit();
         }
 
@@ -623,10 +623,10 @@ finally
 }
 Method(intParameter);";
             var context = CreateContextCS(code);
-            context.ValidateEntry(new LiveIn("intParameter"), new LiveOut("intParameter"));
-            context.Validate("Method(0);", new LiveIn("intParameter"), new LiveOut("intParameter"));
-            context.Validate("Method(1);", new LiveIn("intParameter"), new LiveOut("intParameter"));
-            context.Validate("Method(intParameter);", new LiveIn("intParameter"));
+            context.ValidateEntry(LiveIn("intParameter"), LiveOut("intParameter"));
+            context.Validate("Method(0);", LiveIn("intParameter"), LiveOut("intParameter"));
+            context.Validate("Method(1);", LiveIn("intParameter"), LiveOut("intParameter"));
+            context.Validate("Method(intParameter);", LiveIn("intParameter"));
             context.ValidateExit();
         }
 
@@ -646,12 +646,12 @@ finally
 }
 Method(intParameter); // Unreachable";
             var context = CreateContextCS(code);
-            context.ValidateEntry(new LiveIn("intParameter"), new LiveOut("intParameter"));
-            context.Validate("Method(0);", new LiveIn("intParameter"), new LiveOut("intParameter"));
-            context.Validate("Method(1);", new LiveIn("intParameter"), new LiveOut("intParameter"));
+            context.ValidateEntry(LiveIn("intParameter"), LiveOut("intParameter"));
+            context.Validate("Method(0);", LiveIn("intParameter"), LiveOut("intParameter"));
+            context.Validate("Method(1);", LiveIn("intParameter"), LiveOut("intParameter"));
             // LVA doesn't care if it's reachable. Blocks still should have LiveIn and LiveOut
-            context.Validate("Method(2);", new LiveIn("intParameter"), new LiveOut("intParameter"));
-            context.Validate("Method(intParameter);", new LiveIn("intParameter"));
+            context.Validate("Method(2);", LiveIn("intParameter"), LiveOut("intParameter"));
+            context.Validate("Method(intParameter);", LiveIn("intParameter"));
             context.ValidateExit();
         }
 
@@ -670,11 +670,11 @@ finally
 }
 Method(intParameter); // Unreachable";
             var context = CreateContextCS(code);
-            context.ValidateEntry(new LiveIn("intParameter"), new LiveOut("intParameter"));
-            context.Validate("Method(0);", new LiveIn("intParameter"), new LiveOut("intParameter"));
-            context.Validate("Method(1);", new LiveIn("intParameter"), new LiveOut("intParameter"));
+            context.ValidateEntry(LiveIn("intParameter"), LiveOut("intParameter"));
+            context.Validate("Method(0);", LiveIn("intParameter"), LiveOut("intParameter"));
+            context.Validate("Method(1);", LiveIn("intParameter"), LiveOut("intParameter"));
             // LVA doesn't care if it's reachable. Blocks still should have LiveIn and LiveOut
-            context.Validate("Method(intParameter);", new LiveIn("intParameter"));
+            context.Validate("Method(intParameter);", LiveIn("intParameter"));
             context.ValidateExit();
         }
 
@@ -697,12 +697,12 @@ finally
 }
 Method(intParameter);";
             var context = CreateContextCS(code);
-            context.ValidateEntry(new LiveIn("intParameter", "boolParameter"), new LiveOut("intParameter", "boolParameter"));
-            context.Validate("Method(0);", new LiveIn("intParameter", "boolParameter"), new LiveOut("intParameter", "boolParameter"));
-            context.Validate("Method(1);", new LiveIn("intParameter", "boolParameter"), new LiveOut("intParameter"));
-            context.Validate("boolParameter", new LiveIn("intParameter", "boolParameter"), new LiveOut("intParameter"));
-            context.Validate("Method(2);", new LiveIn("intParameter"), new LiveOut("intParameter"));
-            context.Validate("Method(intParameter);", new LiveIn("intParameter"));
+            context.ValidateEntry(LiveIn("intParameter", "boolParameter"), LiveOut("intParameter", "boolParameter"));
+            context.Validate("Method(0);", LiveIn("intParameter", "boolParameter"), LiveOut("intParameter", "boolParameter"));
+            context.Validate("Method(1);", LiveIn("intParameter", "boolParameter"), LiveOut("intParameter"));
+            context.Validate("boolParameter", LiveIn("intParameter", "boolParameter"), LiveOut("intParameter"));
+            context.Validate("Method(2);", LiveIn("intParameter"), LiveOut("intParameter"));
+            context.Validate("Method(intParameter);", LiveIn("intParameter"));
             context.ValidateExit();
         }
 
@@ -724,9 +724,9 @@ finally
 Method(2);";
             var context = CreateContextCS(code);
             context.ValidateEntry();
-            context.Validate("Method(0);"/*Should be:, new LiveOut("variable")*/);
-            context.Validate("Method(1);"/*Should be:, new LiveIn("variable"), new LiveOut("variable")*/);
-            context.Validate("Method(variable);", new LiveIn("variable"));
+            context.Validate("Method(0);"/*Should be:, LiveOut("variable")*/);
+            context.Validate("Method(1);"/*Should be:, LiveIn("variable"), LiveOut("variable")*/);
+            context.Validate("Method(variable);", LiveIn("variable"));
             context.Validate("Method(2);");
         }
 
@@ -777,10 +777,10 @@ finally
 Method(2);";
             var context = CreateContextCS(code);
             context.ValidateEntry();
-            context.Validate("Method(0);", new LiveIn("inner", "outer"), new LiveOut("inner", "outer"));
-            context.Validate("Method(inner);", new LiveIn("inner", "outer"), new LiveOut("outer"));
-            context.Validate("Method(1);", new LiveIn("outer"), new LiveOut("outer"));
-            context.Validate("Method(outer);", new LiveIn("outer"));
+            context.Validate("Method(0);", LiveIn("inner", "outer"), LiveOut("inner", "outer"));
+            context.Validate("Method(inner);", LiveIn("inner", "outer"), LiveOut("outer"));
+            context.Validate("Method(1);", LiveIn("outer"), LiveOut("outer"));
+            context.Validate("Method(outer);", LiveIn("outer"));
             context.Validate("Method(2);");
             context.ValidateExit();
         }
@@ -810,9 +810,9 @@ finally
 Method(2);";
             var context = CreateContextCS(code);
             context.ValidateEntry();
-            context.Validate("Method(0);", new LiveIn("inner", "outer"), new LiveOut("inner", "outer"));
-            context.Validate("Method(inner);", new LiveIn("inner", "outer"), new LiveOut("outer"));
-            context.Validate("Method(outer);", new LiveIn("outer"));
+            context.Validate("Method(0);", LiveIn("inner", "outer"), LiveOut("inner", "outer"));
+            context.Validate("Method(inner);", LiveIn("inner", "outer"), LiveOut("outer"));
+            context.Validate("Method(outer);", LiveIn("outer"));
             context.Validate("Method(2);");
             context.ValidateExit();
         }
@@ -836,9 +836,9 @@ finally
 }
 Method(1);";
             var context = CreateContextCS(code, null, "object[] args");
-            context.ValidateEntry(new LiveIn("args"), new LiveOut("args"));
-            context.Validate("Method(0);", new LiveIn("outer", "args"), new LiveOut("outer", "args"));
-            context.Validate("Method(outer);", new LiveIn("outer"));
+            context.ValidateEntry(LiveIn("args"), LiveOut("args"));
+            context.Validate("Method(0);", LiveIn("outer", "args"), LiveOut("outer", "args"));
+            context.Validate("Method(outer);", LiveIn("outer"));
             context.Validate("Method(1);");
             context.ValidateExit();
         }
@@ -872,9 +872,9 @@ finally
 }
 Method(intParameter);";
             var context = CreateContextCS(code);
-            context.ValidateEntry(new LiveIn("intParameter"), new LiveOut("intParameter"));
-            context.Validate("Method(0);", new LiveIn("intParameter"), new LiveOut("intParameter"));
-            context.Validate("Method(intParameter);", new LiveIn("intParameter"));
+            context.ValidateEntry(LiveIn("intParameter"), LiveOut("intParameter"));
+            context.Validate("Method(0);", LiveIn("intParameter"), LiveOut("intParameter"));
+            context.Validate("Method(intParameter);", LiveIn("intParameter"));
             context.ValidateExit();
         }
 
@@ -898,10 +898,10 @@ goto A;
 B:
 Method(2);";
             var context = CreateContextCS(code);
-            context.ValidateEntry(new LiveIn("boolParameter", "intParameter"), new LiveOut("boolParameter", "intParameter"));
-            context.Validate("Method(intParameter);", new LiveIn("boolParameter", "intParameter"), new LiveOut("boolParameter", "intParameter"));
-            context.Validate("Method(0);", new LiveIn("boolParameter", "intParameter"), new LiveOut("boolParameter", "intParameter"));
-            context.Validate("Method(1);", new LiveIn("boolParameter", "intParameter"), new LiveOut("boolParameter", "intParameter"));
+            context.ValidateEntry(LiveIn("boolParameter", "intParameter"), LiveOut("boolParameter", "intParameter"));
+            context.Validate("Method(intParameter);", LiveIn("boolParameter", "intParameter"), LiveOut("boolParameter", "intParameter"));
+            context.Validate("Method(0);", LiveIn("boolParameter", "intParameter"), LiveOut("boolParameter", "intParameter"));
+            context.Validate("Method(1);", LiveIn("boolParameter", "intParameter"), LiveOut("boolParameter", "intParameter"));
             context.Validate("Method(2);");
         }
 
@@ -926,10 +926,10 @@ goto A;
 B:
 Method(2);";
             var context = CreateContextCS(code);
-            context.ValidateEntry(new LiveIn("boolParameter", "intParameter"), new LiveOut("boolParameter", "intParameter"));
-            context.Validate("Method(intParameter);", new LiveIn("boolParameter", "intParameter"), new LiveOut("boolParameter", "intParameter"));
-            context.Validate("Method(0);", new LiveIn("boolParameter", "intParameter"), new LiveOut("boolParameter", "intParameter"));
-            context.Validate("Method(1);", new LiveIn("boolParameter", "intParameter"), new LiveOut("boolParameter", "intParameter"));
+            context.ValidateEntry(LiveIn("boolParameter", "intParameter"), LiveOut("boolParameter", "intParameter"));
+            context.Validate("Method(intParameter);", LiveIn("boolParameter", "intParameter"), LiveOut("boolParameter", "intParameter"));
+            context.Validate("Method(0);", LiveIn("boolParameter", "intParameter"), LiveOut("boolParameter", "intParameter"));
+            context.Validate("Method(1);", LiveIn("boolParameter", "intParameter"), LiveOut("boolParameter", "intParameter"));
             context.Validate("Method(2);");
         }
 
@@ -951,9 +951,9 @@ finally
 Method(2);";
             var context = CreateContextCS(code);
             context.ValidateEntry();
-            context.Validate("Method(0);"/*Should be:, new LiveOut("variable")*/);
-            context.Validate("Method(1);", new LiveOut("variable"));
-            context.Validate("Method(variable);", new LiveIn("variable"));
+            context.Validate("Method(0);"/*Should be:, LiveOut("variable")*/);
+            context.Validate("Method(1);", LiveOut("variable"));
+            context.Validate("Method(variable);", LiveIn("variable"));
             context.Validate("Method(2);");
         }
 
@@ -980,10 +980,10 @@ finally
 Method(usedAfter);";
             var context = CreateContextCS(code);
             context.ValidateEntry();
-            context.Validate("Method(usedInTry);", new LiveIn("usedInTry", "usedInCatch", "usedInFinally", "usedAfter"), new LiveOut("usedInCatch", "usedInFinally", "usedAfter"));
-            context.Validate("Method(usedInCatch);", new LiveIn("usedInCatch", "usedInFinally", "usedAfter"), new LiveOut("usedInFinally", "usedAfter"));
-            context.Validate("Method(usedInFinally);", new LiveIn("usedInFinally", "usedAfter"), new LiveOut("usedAfter"));
-            context.Validate("Method(usedAfter);", new LiveIn("usedAfter"));
+            context.Validate("Method(usedInTry);", LiveIn("usedInTry", "usedInCatch", "usedInFinally", "usedAfter"), LiveOut("usedInCatch", "usedInFinally", "usedAfter"));
+            context.Validate("Method(usedInCatch);", LiveIn("usedInCatch", "usedInFinally", "usedAfter"), LiveOut("usedInFinally", "usedAfter"));
+            context.Validate("Method(usedInFinally);", LiveIn("usedInFinally", "usedAfter"), LiveOut("usedAfter"));
+            context.Validate("Method(usedAfter);", LiveIn("usedAfter"));
             context.ValidateExit();
         }
     }
