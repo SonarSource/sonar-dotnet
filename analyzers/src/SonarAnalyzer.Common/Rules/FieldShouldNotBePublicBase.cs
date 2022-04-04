@@ -19,64 +19,46 @@
  */
 
 using System.Collections.Generic;
-using System.Collections.Immutable;
 using System.Linq;
 using Microsoft.CodeAnalysis;
 using SonarAnalyzer.Helpers;
 
 namespace SonarAnalyzer.Rules
 {
-    public abstract class FieldShouldNotBePublicBase : SonarDiagnosticAnalyzer
-    {
-        protected const string DiagnosticId = "S2357";
-        protected const string MessageFormat = "Make '{0}' private.";
-
-        protected static bool FieldIsRelevant(IFieldSymbol fieldSymbol)
-        {
-            return fieldSymbol != null &&
-                   !fieldSymbol.IsStatic &&
-                   !fieldSymbol.IsConst &&
-                   fieldSymbol.GetEffectiveAccessibility() == Accessibility.Public &&
-                   fieldSymbol.ContainingType.IsClass();
-        }
-
-        protected abstract GeneratedCodeRecognizer GeneratedCodeRecognizer { get; }
-    }
-
-    public abstract class FieldShouldNotBePublicBase<TLanguageKindEnum, TFieldDeclarationSyntax, TVariableSyntax> : FieldShouldNotBePublicBase
-        where TLanguageKindEnum : struct
+    public abstract class FieldShouldNotBePublicBase<TSyntaxKind, TFieldDeclarationSyntax, TVariableSyntax> : SonarDiagnosticAnalyzer<TSyntaxKind>
+        where TSyntaxKind : struct
         where TFieldDeclarationSyntax : SyntaxNode
         where TVariableSyntax : SyntaxNode
     {
-        protected sealed override void Initialize(SonarAnalysisContext context)
-        {
+        private const string DiagnosticId = "S2357";
+
+        protected abstract IEnumerable<TVariableSyntax> Variables(TFieldDeclarationSyntax fieldDeclaration);
+
+        protected override string MessageFormat => "Make '{0}' private.";
+
+        protected FieldShouldNotBePublicBase() : base(DiagnosticId) { }
+
+        protected static bool FieldIsRelevant(IFieldSymbol fieldSymbol) =>
+            fieldSymbol is { IsStatic: false, IsConst: false }
+            && fieldSymbol.GetEffectiveAccessibility() == Accessibility.Public
+            && fieldSymbol.ContainingType.IsClass();
+
+        protected sealed override void Initialize(SonarAnalysisContext context) =>
             context.RegisterSyntaxNodeActionInNonGenerated(
-                GeneratedCodeRecognizer,
+                Language.GeneratedCodeRecognizer,
                 c =>
                 {
                     var fieldDeclaration = (TFieldDeclarationSyntax)c.Node;
-                    var variables = GetVariables(fieldDeclaration);
+                    var variables = Variables(fieldDeclaration);
 
-                    foreach (var variable in variables
-                        .Select(variableDeclaratorSyntax => new
-                        {
-                            Syntax = variableDeclaratorSyntax,
-                            Symbol = c.SemanticModel.GetDeclaredSymbol(variableDeclaratorSyntax) as IFieldSymbol
-                        })
-                        .Where(f => FieldIsRelevant(f.Symbol)))
+                    foreach (var variable in variables.Select(x => new Pair(x, c.SemanticModel.GetDeclaredSymbol(x) as IFieldSymbol)).Where(x => FieldIsRelevant(x.Symbol)))
                     {
-                        var identifier = GetIdentifier(variable.Syntax);
-                        c.ReportIssue(Diagnostic.Create(SupportedDiagnostics[0], identifier.GetLocation(),
-                            identifier.ValueText));
+                        var identifier = Language.Syntax.NodeIdentifier(variable.Node);
+                        c.ReportIssue(Diagnostic.Create(Rule, identifier.Value.GetLocation(), identifier.Value.ValueText));
                     }
                 },
-                SyntaxKindsOfInterest.ToArray());
-        }
+                Language.SyntaxKind.FieldDeclaration);
 
-        public abstract ImmutableArray<TLanguageKindEnum> SyntaxKindsOfInterest { get; }
-
-        protected abstract IEnumerable<TVariableSyntax> GetVariables(TFieldDeclarationSyntax fieldDeclaration);
-
-        protected abstract SyntaxToken GetIdentifier(TVariableSyntax variable);
+        private sealed record Pair(TVariableSyntax Node, IFieldSymbol Symbol);
     }
 }

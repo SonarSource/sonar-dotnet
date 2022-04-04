@@ -19,7 +19,6 @@
  */
 
 using System.Collections.Generic;
-using System.Collections.Immutable;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
@@ -31,19 +30,9 @@ namespace SonarAnalyzer.Rules.CSharp
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
     public sealed class FieldShouldNotBePublic : FieldShouldNotBePublicBase<SyntaxKind, FieldDeclarationSyntax, VariableDeclaratorSyntax>
     {
-        private static readonly DiagnosticDescriptor Rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
-        private static readonly ImmutableArray<SyntaxKind> KindsOfInterest = ImmutableArray.Create(SyntaxKind.FieldDeclaration);
+        protected override ILanguageFacade<SyntaxKind> Language => CSharpFacade.Instance;
 
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
-
-        public override ImmutableArray<SyntaxKind> SyntaxKindsOfInterest => KindsOfInterest;
-
-        protected override SyntaxToken GetIdentifier(VariableDeclaratorSyntax variable) =>
-            variable.Identifier;
-
-        protected override IEnumerable<VariableDeclaratorSyntax> GetVariables(FieldDeclarationSyntax fieldDeclaration) =>
+        protected override IEnumerable<VariableDeclaratorSyntax> Variables(FieldDeclarationSyntax fieldDeclaration) =>
             fieldDeclaration.Declaration.Variables;
-
-        protected override GeneratedCodeRecognizer GeneratedCodeRecognizer => CSharpGeneratedCodeRecognizer.Instance;
     }
 }

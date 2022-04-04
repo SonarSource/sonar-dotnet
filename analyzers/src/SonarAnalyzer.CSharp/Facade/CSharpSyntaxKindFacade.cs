@@ -42,6 +42,7 @@ namespace SonarAnalyzer.Helpers.Facade
         };
         public SyntaxKind ConstructorDeclaration => SyntaxKind.ConstructorDeclaration;
         public SyntaxKind EnumDeclaration => SyntaxKind.EnumDeclaration;
+        public SyntaxKind FieldDeclaration => SyntaxKind.FieldDeclaration;
         public SyntaxKind IdentifierName => SyntaxKind.IdentifierName;
         public SyntaxKind IdentifierToken => SyntaxKind.IdentifierToken;
         public SyntaxKind InvocationExpression => SyntaxKind.InvocationExpression;
