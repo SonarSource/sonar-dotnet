@@ -73,7 +73,7 @@ namespace SonarAnalyzer.LiveVariableAnalysis.CSharp
             return ret;
         }
 
-        private class SonarState : State
+        private sealed class SonarState : State
         {
             private readonly SonarCSharpLiveVariableAnalysis owner;
             private readonly SemanticModel semanticModel;

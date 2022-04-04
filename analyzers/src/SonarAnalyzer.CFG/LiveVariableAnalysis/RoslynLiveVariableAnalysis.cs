@@ -30,10 +30,24 @@ namespace SonarAnalyzer.CFG.LiveVariableAnalysis
 {
     public sealed class RoslynLiveVariableAnalysis : LiveVariableAnalysisBase<ControlFlowGraph, BasicBlock>
     {
+        private readonly Dictionary<int, List<BasicBlock>> blockPredecessors = new();
+        private readonly Dictionary<int, List<BasicBlock>> blockSuccessors = new();
+
         protected override BasicBlock ExitBlock => Cfg.ExitBlock;
 
-        public RoslynLiveVariableAnalysis(ControlFlowGraph cfg) : base(cfg, OriginalDeclaration(cfg.OriginalOperation)) =>
+        public RoslynLiveVariableAnalysis(ControlFlowGraph cfg) : base(cfg, OriginalDeclaration(cfg.OriginalOperation))
+        {
+            foreach (var ordinal in cfg.Blocks.Select(x => x.Ordinal))
+            {
+                blockPredecessors.Add(ordinal, new());
+                blockSuccessors.Add(ordinal, new());
+            }
+            foreach (var block in cfg.Blocks)
+            {
+                BuildBranches(block);
+            }
             Analyze();
+        }
 
         public ISymbol ParameterOrLocalSymbol(IOperation operation)
         {
@@ -46,76 +60,17 @@ namespace SonarAnalyzer.CFG.LiveVariableAnalysis
             return IsLocal(candidate) ? candidate : null;
         }
 
+        public override bool IsLocal(ISymbol symbol) =>
+            originalDeclaration.Equals(symbol?.ContainingSymbol);
+
         protected override IEnumerable<BasicBlock> ReversedBlocks() =>
             Cfg.Blocks.Reverse();
 
-        protected override IEnumerable<BasicBlock> Successors(BasicBlock block)
-        {
-            foreach (var successor in block.Successors)
-            {
-                if (successor.Destination != null && successor.FinallyRegions.Any())
-                {   // When exiting finally region, redirect to finally instead of the normal destination
-                    foreach (var finallyRegion in successor.FinallyRegions)
-                    {
-                        yield return Cfg.Blocks[finallyRegion.FirstBlockOrdinal];
-                    }
-                }
-                else if (successor.Destination != null)
-                {
-                    yield return successor.Destination;
-                }
-                else if (successor.Source.EnclosingRegion.Kind == ControlFlowRegionKind.Finally)
-                {   // Redirect exit from throw and finally to following blocks.
-                    foreach (var trySuccessor in TryRegionSuccessors(block.EnclosingRegion))
-                    {
-                        yield return trySuccessor.Destination;
-                    }
-                }
-            }
-            if (block.IsEnclosedIn(ControlFlowRegionKind.Try))
-            {
-                foreach (var catchOrFilterRegion in block.Successors.SelectMany(CatchOrFilterRegions))
-                {
-                    yield return Cfg.Blocks[catchOrFilterRegion.FirstBlockOrdinal];
-                }
-            }
-        }
+        protected override IEnumerable<BasicBlock> Predecessors(BasicBlock block) =>
+            blockPredecessors[block.Ordinal];
 
-        protected override IEnumerable<BasicBlock> Predecessors(BasicBlock block)
-        {
-            if (block.Predecessors.Any())
-            {
-                foreach (var predecessor in block.Predecessors)
-                {
-                    // When exiting finally region, redirect predecessor to the source of StructuredEceptionHandling branches
-                    if (predecessor.FinallyRegions.Any())
-                    {
-                        foreach (var structuredExceptionHandling in StructuredExceptionHandlinBranches(predecessor.FinallyRegions))
-                        {
-                            yield return structuredExceptionHandling.Source;
-                        }
-                    }
-                    else
-                    {
-                        yield return predecessor.Source;
-                    }
-                }
-            }
-            else if (block.EnclosingNonLocalLifetimeRegion() is var enclosingRegion
-                && enclosingRegion.Kind == ControlFlowRegionKind.Finally
-                && block.Ordinal == block.EnclosingRegion.FirstBlockOrdinal)
-            {
-                // Link first block of FinallyRegion to the source of all branches exiting that FinallyRegion
-                foreach (var trySuccessor in TryRegionSuccessors(enclosingRegion))
-                {
-                    yield return trySuccessor.Source;
-                }
-            }
-
-            IEnumerable<ControlFlowBranch> StructuredExceptionHandlinBranches(IEnumerable<ControlFlowRegion> finallyRegions) =>
-                finallyRegions.Select(x => Cfg.Blocks[x.LastBlockOrdinal].Successors.SingleOrDefault(x => x.Semantics == ControlFlowBranchSemantics.StructuredExceptionHandling))
-                    .Where(x => x != null);
-        }
+        protected override IEnumerable<BasicBlock> Successors(BasicBlock block) =>
+            blockSuccessors[block.Ordinal];
 
         protected override State ProcessBlock(BasicBlock block)
         {
@@ -124,8 +79,43 @@ namespace SonarAnalyzer.CFG.LiveVariableAnalysis
             return ret;
         }
 
-        public override bool IsLocal(ISymbol symbol) =>
-            originalDeclaration.Equals(symbol?.ContainingSymbol);
+        private void BuildBranches(BasicBlock block)
+        {
+            foreach (var successor in block.Successors)
+            {
+                if (successor.Destination != null)
+                {
+                    // When exiting finally region, redirect to finally instead of the normal destination
+                    AddBranch(successor.Source, successor.FinallyRegions.Any() ? Cfg.Blocks[successor.FinallyRegions.First().FirstBlockOrdinal] : successor.Destination);
+                }
+                else if (successor.Source.EnclosingRegion is { Kind: ControlFlowRegionKind.Finally } finallyRegion)
+                {
+                    BuildBranchesFinally(successor.Source);
+                }
+            }
+            if (block.IsEnclosedIn(ControlFlowRegionKind.Try))
+            {
+                foreach (var catchOrFilterRegion in block.Successors.SelectMany(CatchOrFilterRegions))
+                {
+                    AddBranch(block, Cfg.Blocks[catchOrFilterRegion.FirstBlockOrdinal]);
+                }
+            }
+        }
+
+        private void BuildBranchesFinally(BasicBlock source)
+        {
+            // Redirect exit from throw and finally to following blocks.
+            foreach (var trySuccessor in TryRegionSuccessors(source.EnclosingRegion))
+            {
+                AddBranch(source, trySuccessor.Destination);
+            }
+        }
+
+        private void AddBranch(BasicBlock source, BasicBlock destination)
+        {
+            blockSuccessors[source.Ordinal].Add(destination);
+            blockPredecessors[destination.Ordinal].Add(source);
+        }
 
         private IEnumerable<ControlFlowBranch> TryRegionSuccessors(ControlFlowRegion finallyRegion)
         {
@@ -171,7 +161,7 @@ namespace SonarAnalyzer.CFG.LiveVariableAnalysis
             }
         }
 
-        private class RoslynState : State
+        private sealed class RoslynState : State
         {
             private readonly RoslynLiveVariableAnalysis owner;
             private readonly ISet<ISymbol> capturedLocalFunctions = new HashSet<ISymbol>();
