@@ -30,7 +30,7 @@ namespace SonarAnalyzer.Rules
         where TFieldDeclarationSyntax : SyntaxNode
         where TVariableSyntax : SyntaxNode
     {
-        protected const string DiagnosticId = "S2357";
+        private const string DiagnosticId = "S2357";
 
         protected abstract IEnumerable<TVariableSyntax> Variables(TFieldDeclarationSyntax fieldDeclaration);
 
