@@ -60,7 +60,7 @@ Variable name `sut` (System Under Test) is recommended in unit tests that really
         ? object.Parent.Value
         : object;
     ```
-* Chained invocations and member accesses violating S103 can have a chain of properties and property-like methods (e.g. `GetRoot()`) on the first line. Every other `.Invocation()` or `.Member` should be on a separate line, aligned with a left-most single indendation.
+* Chained invocations and member accesses violating S103 can have a chain of properties on the first line. Every other `.Invocation()` or `.Member` should be on a separate line, aligned with a left-most single indendation.
     ```
     object.Property.GetRoot().Children
         .Select(x => x.Something)
