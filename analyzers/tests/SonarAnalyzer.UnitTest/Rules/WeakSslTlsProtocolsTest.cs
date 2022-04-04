@@ -18,9 +18,6 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System.Collections.Generic;
-using System.Linq;
-using Microsoft.CodeAnalysis;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.UnitTest.MetadataReferences;
 using SonarAnalyzer.UnitTest.TestFramework;
@@ -32,20 +29,18 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class WeakSslTlsProtocolsTest
     {
+        private readonly VerifierBuilder builderCS = WithReferences(new VerifierBuilder<CS.WeakSslTlsProtocols>());
+        private readonly VerifierBuilder builderVB = WithReferences(new VerifierBuilder<VB.WeakSslTlsProtocols>());
+
         [TestMethod]
         public void WeakSslTlsProtocols_CSharp() =>
-            OldVerifier.VerifyAnalyzer(@"TestCases\WeakSslTlsProtocols.cs",
-                                    new CS.WeakSslTlsProtocols(),
-                                    ParseOptionsHelper.FromCSharp8,
-                                    GetAdditionalReferences());
+            builderCS.AddPaths("WeakSslTlsProtocols.cs").WithOptions(ParseOptionsHelper.FromCSharp8).Verify();
 
         [TestMethod]
         public void WeakSslTlsProtocols_VB() =>
-            OldVerifier.VerifyAnalyzer(@"TestCases\WeakSslTlsProtocols.vb",
-                                    new VB.WeakSslTlsProtocols(),
-                                    GetAdditionalReferences());
+            builderVB.AddPaths("WeakSslTlsProtocols.vb").Verify();
 
-        private static IEnumerable<MetadataReference> GetAdditionalReferences() =>
-           MetadataReferenceFacade.SystemNetHttp.Concat(MetadataReferenceFacade.SystemSecurityCryptography);
+        private static VerifierBuilder WithReferences(VerifierBuilder builder) =>
+            builder.AddReferences(MetadataReferenceFacade.SystemNetHttp).AddReferences(MetadataReferenceFacade.SystemSecurityCryptography);
     }
 }

@@ -20,7 +20,6 @@
 
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
-using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.Extensions;
 using SonarAnalyzer.Helpers;
@@ -28,17 +27,11 @@ using SonarAnalyzer.Helpers;
 namespace SonarAnalyzer.Rules.CSharp
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
-    public sealed class WeakSslTlsProtocols : WeakSslTlsProtocolsBase<SyntaxKind, IdentifierNameSyntax>
+    public sealed class WeakSslTlsProtocols : WeakSslTlsProtocolsBase<SyntaxKind>
     {
-        protected override GeneratedCodeRecognizer GeneratedCodeRecognizer { get; } = CSharpGeneratedCodeRecognizer.Instance;
+        protected override ILanguageFacade<SyntaxKind> Language => CSharpFacade.Instance;
 
-        protected override SyntaxKind SyntaxKind { get; } = SyntaxKind.IdentifierName;
-
-        protected override DiagnosticDescriptor Rule { get; } = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
-
-        protected override string GetIdentifierText(IdentifierNameSyntax identifierNameSyntax) =>
-            identifierNameSyntax.Identifier.Text;
-
-        protected override bool IsPartOfBinaryNegationOrCondition(SyntaxNode node) => node.IsPartOfBinaryNegationOrCondition();
+        protected override bool IsPartOfBinaryNegationOrCondition(SyntaxNode node) =>
+            node.IsPartOfBinaryNegationOrCondition();
     }
 }
