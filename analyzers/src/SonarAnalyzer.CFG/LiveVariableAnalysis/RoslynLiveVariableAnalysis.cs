@@ -90,7 +90,7 @@ namespace SonarAnalyzer.CFG.LiveVariableAnalysis
                 }
                 else if (successor.Source.EnclosingRegion is { Kind: ControlFlowRegionKind.Finally } finallyRegion)
                 {
-                    BuildBranchesFinally(successor.Source);
+                    BuildBranchesFinally(successor.Source, finallyRegion);
                 }
             }
             if (block.IsEnclosedIn(ControlFlowRegionKind.Try))
@@ -102,12 +102,15 @@ namespace SonarAnalyzer.CFG.LiveVariableAnalysis
             }
         }
 
-        private void BuildBranchesFinally(BasicBlock source)
+        private void BuildBranchesFinally(BasicBlock source, ControlFlowRegion finallyRegion)
         {
-            // Redirect exit from throw and finally to following blocks.
             foreach (var trySuccessor in TryRegionSuccessors(source.EnclosingRegion))
             {
-                AddBranch(source, trySuccessor.Destination);
+                // Redirect exit from finally to the next block
+                var destination = trySuccessor.FinallyRegions.SkipWhile(x => x != finallyRegion).Skip(1).FirstOrDefault() is { } nextOuterFinally
+                    ? Cfg.Blocks[nextOuterFinally.FirstBlockOrdinal]    // Outer finally that directly follows this finally
+                    : trySuccessor.Destination;                         // Normal block directly after this finally
+                AddBranch(source, destination);
             }
         }
 

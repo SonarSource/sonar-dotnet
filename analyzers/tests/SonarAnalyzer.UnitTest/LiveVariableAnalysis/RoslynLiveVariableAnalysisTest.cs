@@ -784,6 +784,56 @@ foreach(var i in new int[] {1, 2, 3})
         }
 
         [TestMethod]
+        public void NestedImplicitFinally_Lock_ForEach_LiveIn()
+        {
+            const string code = @"
+lock(args)
+{
+    var value = 42;
+    Method(0);
+    foreach (var inner in args)
+    {
+        Method(1);
+        if (inner == null)
+            value = 0;
+    }
+    Method(value);
+}
+Method(2);";
+            var context = CreateContextCS(code, null, "string[] args");
+            context.Validate("Method(0);", new LiveIn("args", null), new LiveOut("args", "value", null));   // The null-named symbol is implicit `bool LockTaken` from the lock(args) statement
+            context.Validate("Method(1);", new LiveIn("value", null), new LiveOut("value", null));
+            context.Validate("Method(value);", new LiveIn(null, "value"), new LiveOut(new string[] { null }));
+            context.Validate("Method(2);");
+            context.ValidateExit();
+        }
+
+        [TestMethod]
+        public void NestedImplicitFinally_ForEach_ForEach_LiveIn()
+        {
+            const string code = @"
+foreach (var outer in args)
+{
+    var value = 42;
+    Method(0);
+    foreach (var inner in args)
+    {
+        Method(1);
+        if (inner == null)
+            value = 0;
+    }
+    Method(value);
+}
+Method(2);";
+            var context = CreateContextCS(code, null, "string[] args");
+            context.Validate("Method(0);", new LiveIn("args"), new LiveOut("args", "value"));
+            context.Validate("Method(1);", new LiveIn("args", "value"), new LiveOut("args", "value"));
+            context.Validate("Method(value);", new LiveIn("args", "value"), new LiveOut("args"));
+            context.Validate("Method(2);");
+            context.ValidateExit();
+        }
+
+        [TestMethod]
         public void Loop_Propagates_LiveIn_LiveOut()
         {
             var code = @"
@@ -973,8 +1023,11 @@ End Class";
 
             public Context(string code, AnalyzerLanguage language, string localFunctionName = null)
             {
+                const string Separator = "----------";
                 Cfg = TestHelper.CompileCfg(code, language, code.Contains("// Error CS"), localFunctionName);
+                Console.WriteLine(Separator);
                 Console.WriteLine(CfgSerializer.Serialize(Cfg));
+                Console.WriteLine(Separator);
                 Lva = new RoslynLiveVariableAnalysis(Cfg);
             }
 

@@ -28,5 +28,14 @@ namespace SonarAnalyzer.Extensions
     {
         public static IEnumerable<BasicBlock> Blocks(this ControlFlowRegion region, ControlFlowGraph cfg) =>
             cfg.Blocks.Where((_, i) => region.FirstBlockOrdinal <= i && i <= region.LastBlockOrdinal);
+
+        public static ControlFlowRegion EnclosingNonLocalLifetimeRegion(this ControlFlowRegion region)
+        {
+            while (region.EnclosingRegion != null && region.Kind == ControlFlowRegionKind.LocalLifetime)
+            {
+                region = region.EnclosingRegion;
+            }
+            return region;
+        }
     }
 }
