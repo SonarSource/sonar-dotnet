@@ -42,12 +42,10 @@ namespace SonarAnalyzer.Rules.VisualBasic
             context.RegisterSyntaxNodeActionInNonGenerated(c =>
                 {
                     var arrayCreation = (ArrayCreationExpressionSyntax)c.Node;
-                    if (arrayCreation.Initializer == null || HasSizeSpecifier(arrayCreation))
-                    {
-                        return;
-                    }
-                    var arrayType = c.SemanticModel.GetTypeInfo(arrayCreation).Type as IArrayTypeSymbol;
-                    if (arrayType?.ElementType == null || arrayType.ElementType is IErrorTypeSymbol)
+                    if (arrayCreation.Initializer == null
+                        || HasSizeSpecifier(arrayCreation)
+                        || c.SemanticModel.GetTypeInfo(arrayCreation).Type is not IArrayTypeSymbol arrayType
+                        || arrayType.ElementType is null or IErrorTypeSymbol)
                     {
                         return;
                     }
