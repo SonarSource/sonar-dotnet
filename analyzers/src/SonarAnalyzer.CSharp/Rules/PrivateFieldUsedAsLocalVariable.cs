@@ -104,7 +104,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 fieldDeclaration.AttributeLists.Count == 0;
         }
 
-        private class FieldAccessCollector : SafeCSharpSyntaxWalker
+        private sealed class FieldAccessCollector : SafeCSharpSyntaxWalker
         {
             // Contains statements that READ field values. First grouped by field symbol (that is read),
             // then by method/property/ctor symbol (that contains the statements)
@@ -280,8 +280,6 @@ namespace SonarAnalyzer.Rules.CSharp
             }
         }
 
-        private class Lookup<TKey, TElement> : Dictionary<TKey, HashSet<TElement>>
-        {
-        }
+        private sealed class Lookup<TKey, TElement> : Dictionary<TKey, HashSet<TElement>> { }
     }
 }
