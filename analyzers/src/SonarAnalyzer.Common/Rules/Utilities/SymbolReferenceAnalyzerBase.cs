@@ -33,40 +33,23 @@ namespace SonarAnalyzer.Rules
         private const string Title = "Symbol reference calculator";
         private const int TokenCountThreshold = 40_000;
 
-        private readonly ISet<SymbolKind> declarationKinds = new HashSet<SymbolKind>
-        {
-            SymbolKind.Event,
-            SymbolKind.Field,
-            SymbolKind.Local,
-            SymbolKind.Method,
-            SymbolKind.NamedType,
-            SymbolKind.Parameter,
-            SymbolKind.Property,
-            SymbolKind.TypeParameter
-        };
+        protected sealed override string FileName => "symrefs.pb";
 
         protected abstract SyntaxNode GetBindableParent(SyntaxToken token);
 
-        protected sealed override string FileName => "symrefs.pb";
+        protected abstract IEnumerable<ReferenceInfo> CreateDeclarationReferenceInfo(SyntaxNode node, SemanticModel model);
+
+        protected abstract IEnumerable<SyntaxNode> GetDeclarations(SyntaxNode node);
 
         protected SymbolReferenceAnalyzerBase() : base(DiagnosticId, Title) { }
 
         protected sealed override SymbolReferenceInfo CreateMessage(SyntaxTree syntaxTree, SemanticModel semanticModel)
         {
-            var allReferences = new List<SymRefInfo>();
-            var tokens = syntaxTree.GetRoot().DescendantTokens();
-            foreach (var token in tokens)
-            {
-                if (GetSymRefInfo(token, semanticModel) is { } reference)
-                {
-                    allReferences.Add(reference);
-                }
-            }
-
             var symbolReferenceInfo = new SymbolReferenceInfo { FilePath = syntaxTree.FilePath };
-            foreach (var allReference in allReferences.GroupBy(r => r.Symbol))
+
+            foreach (var references in GetReferences(syntaxTree.GetRoot(), semanticModel).GroupBy(x => x.Symbol))
             {
-                if (GetSymbolReference(allReference.ToArray(), syntaxTree) is { } reference)
+                if (GetSymbolReference(references.ToArray(), syntaxTree) is { } reference)
                 {
                     symbolReferenceInfo.Reference.Add(reference);
                 }
@@ -79,86 +62,85 @@ namespace SonarAnalyzer.Rules
             base.ShouldGenerateMetrics(tree)
             && !HasTooManyTokens(tree);
 
-        protected virtual SyntaxToken? GetSetKeyword(ISymbol valuePropertySymbol) => null;
-
-        protected static bool IsValuePropertyParameter(ISymbol symbol) =>
-            symbol is IParameterSymbol {IsImplicitlyDeclared: true, Name: "value"};
-
-        private SymbolReferenceInfo.Types.SymbolReference GetSymbolReference(SymRefInfo[] allReference, SyntaxTree tree)
+        private IEnumerable<ReferenceInfo> GetReferences(SyntaxNode root, SemanticModel model)
         {
-            TextSpan declarationSpan;
-            if (allReference.FirstOrDefault(r => r.IsDeclaration) is { } declaration)
+            var references = new List<ReferenceInfo>();
+            var knownIdentifiers = new HashSet<string>();
+
+            foreach (var declaration in GetDeclarations(root))
             {
-                declarationSpan = declaration.IdentifierToken.Span;
-            }
-            else
-            {
-                if (allReference.FirstOrDefault() is { } reference && GetSetKeyword(reference.Symbol) is { } setKeyword)
+                var declarationReferences = CreateDeclarationReferenceInfo(declaration, model);
+                if (declarationReferences == null)
                 {
-                    declarationSpan = setKeyword.Span;
+                    continue;
                 }
-                else
+
+                foreach (var reference in declarationReferences.Where(x => references.All(y => x.Node != y.Node)))
                 {
-                    return null;
+                    references.Add(reference);
+                    knownIdentifiers.Add(reference.Identifier.ValueText);
                 }
             }
 
-            var sr = new SymbolReferenceInfo.Types.SymbolReference { Declaration = GetTextRange(Location.Create(tree, declarationSpan).GetLineSpan()) };
-            foreach (var reference in allReference.Where(r => !r.IsDeclaration).Select(r => r.IdentifierToken))
+            foreach (var identifier in root.DescendantTokens().Where(x => Language.Syntax.IsKind(x, Language.SyntaxKind.IdentifierToken)))
             {
-                sr.Reference.Add(GetTextRange(Location.Create(tree, reference.Span).GetLineSpan()));
+                if (knownIdentifiers.Contains(identifier.Text)
+                    && GetBindableParent(identifier) is { } parent
+                    && references.All(x => x.Node != parent)
+                    && GetReferenceSymbol(parent, model) is { } symbol)
+                {
+                    references.Add(new ReferenceInfo(parent, identifier, symbol, false));
+                }
             }
-            return sr;
+
+            return references;
         }
 
-        private SymRefInfo GetSymRefInfo(SyntaxToken token, SemanticModel semanticModel)
-        {
-            if (!Language.Syntax.IsKind(token, Language.SyntaxKind.IdentifierToken))
+        private static ISymbol GetReferenceSymbol(SyntaxNode node, SemanticModel model) =>
+            model.GetSymbolInfo(node).Symbol switch
             {
-                // For the time being, we only handle identifier tokens.
-                // We could also handle keywords, such as this, base
+                IMethodSymbol { MethodKind: MethodKind.Constructor, IsImplicitlyDeclared: true } constructor => constructor.ContainingType,
+                var symbol => symbol
+            };
+
+        private static SymbolReferenceInfo.Types.SymbolReference GetSymbolReference(ReferenceInfo[] references, SyntaxTree tree)
+        {
+            var declarationSpan = GetDeclarationSpan(references);
+            if (!declarationSpan.HasValue)
+            {
                 return null;
             }
 
-            if (semanticModel.GetDeclaredSymbol(token.Parent) is { } declaredSymbol)
+            var symbolReference = new SymbolReferenceInfo.Types.SymbolReference { Declaration = GetTextRange(Location.Create(tree, declarationSpan.Value).GetLineSpan()) };
+            foreach (var reference in references.Where(x => !x.IsDeclaration).Select(x => x.Identifier))
             {
-                return declarationKinds.Contains(declaredSymbol.Kind)
-                    ? new SymRefInfo(token, declaredSymbol, true)
-                    : null;
+                symbolReference.Reference.Add(GetTextRange(Location.Create(tree, reference.Span).GetLineSpan()));
             }
-
-            if (GetBindableParent(token) is { } node)
-            {
-                var symbol = semanticModel.GetSymbolInfo(node).Symbol;
-                if (symbol == null)
-                {
-                    return null;
-                }
-                else if (symbol.DeclaringSyntaxReferences.Any() || IsValuePropertyParameter(symbol))
-                {
-                    return new SymRefInfo(token, symbol);
-                }
-                else if (symbol is IMethodSymbol ctorSymbol && ctorSymbol.MethodKind == MethodKind.Constructor && ctorSymbol.IsImplicitlyDeclared)
-                {
-                    return new SymRefInfo(token, ctorSymbol.ContainingType);
-                }
-            }
-
-            return null;
+            return symbolReference;
         }
+
+        private static TextSpan? GetDeclarationSpan(IEnumerable<ReferenceInfo> references) =>
+            references.FirstOrDefault(x => x.IsDeclaration) is { } declaration
+                ? declaration.Identifier.Span
+                : null;
 
         private static bool HasTooManyTokens(SyntaxTree syntaxTree) =>
             syntaxTree.GetRoot().DescendantTokens().Count() > TokenCountThreshold;
 
-        private class SymRefInfo
+        protected sealed class ReferenceInfo
         {
-            public SyntaxToken IdentifierToken { get; }
             public ISymbol Symbol { get; }
+
+            public SyntaxNode Node { get; }
+
+            public SyntaxToken Identifier { get; }
+
             public bool IsDeclaration { get; }
 
-            public SymRefInfo(SyntaxToken identifierToken, ISymbol symbol, bool isDeclaration = false)
+            public ReferenceInfo(SyntaxNode node, SyntaxToken identifier, ISymbol symbol, bool isDeclaration)
             {
-                IdentifierToken = identifierToken;
+                Node = node;
+                Identifier = identifier;
                 Symbol = symbol;
                 IsDeclaration = isDeclaration;
             }
