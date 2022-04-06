@@ -62,9 +62,10 @@ namespace SonarAnalyzer.Rules.CSharp
                         return;
                     }
 
+                    var methodNames = typeDeclaration.Members.OfType<MethodDeclarationSyntax>().Select(x => x.Identifier.ValueText).ToHashSet();
                     var privateFields = GetPrivateFields(c.SemanticModel, typeDeclaration);
 
-                    var collector = new FieldAccessCollector(c.SemanticModel, privateFields);
+                    var collector = new FieldAccessCollector(c.SemanticModel, privateFields, methodNames);
 
                     if (!collector.SafeVisit(typeDeclaration))
                     {
@@ -120,10 +121,13 @@ namespace SonarAnalyzer.Rules.CSharp
             private readonly SemanticModel semanticModel;
             private readonly IDictionary<IFieldSymbol, VariableDeclaratorSyntax> privateFields;
 
-            public FieldAccessCollector(SemanticModel semanticModel, IDictionary<IFieldSymbol, VariableDeclaratorSyntax> privateFields)
+            private readonly HashSet<string> methodNames;
+
+            public FieldAccessCollector(SemanticModel semanticModel, IDictionary<IFieldSymbol, VariableDeclaratorSyntax> privateFields, HashSet<string> methodNames)
             {
                 this.semanticModel = semanticModel;
                 this.privateFields = privateFields;
+                this.methodNames = methodNames;
             }
 
             public bool IsRemovableField(IFieldSymbol fieldSymbol)
@@ -191,33 +195,40 @@ namespace SonarAnalyzer.Rules.CSharp
 
             public override void VisitIdentifierName(IdentifierNameSyntax node)
             {
-                var memberReference = GetTopmostSyntaxWithTheSameSymbol(node);
-                if (memberReference.Symbol == null)
+                if (privateFields.Keys.Any(x => x.Name == node.Identifier.ValueText))
                 {
-                    return;
-                }
-
-                var enclosingSymbol = semanticModel.GetEnclosingSymbol(memberReference.Node.SpanStart);
-
-                if (memberReference.Symbol is IFieldSymbol fieldSymbol
-                    && privateFields.ContainsKey(fieldSymbol))
-                {
-                    ClassifyFieldReference(enclosingSymbol, memberReference);
-                }
-                else if (memberReference.Symbol is IMethodSymbol)
-                {
-                    var pseudoStatement = GetParentPseudoStatement(memberReference);
-                    if (pseudoStatement != null)
+                    var memberReference = GetTopmostSyntaxWithTheSameSymbol(node);
+                    if (memberReference.Symbol is IFieldSymbol fieldSymbol
+                        && privateFields.ContainsKey(fieldSymbol))
                     {
-                        var invocationsInPseudoStatement = invocations.GetOrAdd(pseudoStatement, x => new HashSet<ISymbol>());
-                        invocationsInPseudoStatement.Add(memberReference.Symbol);
+                        ClassifyFieldReference(semanticModel.GetEnclosingSymbol(memberReference.Node.SpanStart), memberReference);
                     }
                 }
+                base.VisitIdentifierName(node);
+            }
+
+            public override void VisitInvocationExpression(InvocationExpressionSyntax node)
+            {
+                if (node.GetMethodCallIdentifier() is { } methodCallIdentifier
+                    && methodNames.Contains(methodCallIdentifier.ValueText))
+                {
+                    var memberReference = GetTopmostSyntaxWithTheSameSymbol(node);
+                    if (memberReference.Symbol is IMethodSymbol)
+                    {
+                        var pseudoStatement = GetParentPseudoStatement(memberReference);
+                        if (pseudoStatement != null)
+                        {
+                            var invocationsInPseudoStatement = invocations.GetOrAdd(pseudoStatement, x => new HashSet<ISymbol>());
+                            invocationsInPseudoStatement.Add(memberReference.Symbol);
+                        }
+                    }
+                }
+                base.VisitInvocationExpression(node);
             }
 
             // A PseudoStatement is a Statement or an ArrowExpressionClauseSyntax (which denotes an expression-bodied member).
             private static SyntaxNode GetParentPseudoStatement(NodeAndSymbol memberReference) =>
-                memberReference.Node.Ancestors().FirstOrDefault(a => a is StatementSyntax || a is ArrowExpressionClauseSyntax);
+                memberReference.Node.Ancestors().FirstOrDefault(a => a is StatementSyntax or ArrowExpressionClauseSyntax);
 
             /// <summary>
             /// Stores the statement that contains the provided field reference in one of the "reads" or "writes" collections,
@@ -262,22 +273,19 @@ namespace SonarAnalyzer.Rules.CSharp
                     && assignmentExpression.Left == syntaxNode;
             }
 
-            private NodeAndSymbol GetTopmostSyntaxWithTheSameSymbol(SyntaxNode identifier)
-            {
+            private NodeAndSymbol GetTopmostSyntaxWithTheSameSymbol(SyntaxNode identifier) =>
                 // All of the cases below could be parts of invocation or other expressions
-                switch (identifier.Parent)
+                identifier.Parent switch
                 {
-                    case MemberAccessExpressionSyntax memberAccess when memberAccess.Name == identifier:
-                        // this.identifier or a.identifier or ((a)).identifier, but not identifier.other
-                        return new NodeAndSymbol(memberAccess.GetSelfOrTopParenthesizedExpression(), semanticModel.GetSymbolInfo(memberAccess).Symbol);
-                    case MemberBindingExpressionSyntax memberBinding when memberBinding.Name == identifier:
-                        // this?.identifier or a?.identifier or ((a))?.identifier, but not identifier?.other
-                        return new NodeAndSymbol(memberBinding.Parent.GetSelfOrTopParenthesizedExpression(), semanticModel.GetSymbolInfo(memberBinding).Symbol);
-                    default:
-                        // identifier or ((identifier))
-                        return new NodeAndSymbol(identifier.GetSelfOrTopParenthesizedExpression(), semanticModel.GetSymbolInfo(identifier).Symbol);
-                }
-            }
+                    // this.identifier or a.identifier or ((a)).identifier, but not identifier.other
+                    MemberAccessExpressionSyntax memberAccess when memberAccess.Name == identifier =>
+                        new NodeAndSymbol(memberAccess.GetSelfOrTopParenthesizedExpression(), semanticModel.GetSymbolInfo(memberAccess).Symbol),
+                    // this?.identifier or a?.identifier or ((a))?.identifier, but not identifier?.other
+                    MemberBindingExpressionSyntax memberBinding when memberBinding.Name == identifier =>
+                        new NodeAndSymbol(memberBinding.Parent.GetSelfOrTopParenthesizedExpression(), semanticModel.GetSymbolInfo(memberBinding).Symbol),
+                    // identifier or ((identifier))
+                    _ => new NodeAndSymbol(identifier.GetSelfOrTopParenthesizedExpression(), semanticModel.GetSymbolInfo(identifier).Symbol)
+                };
         }
 
         private sealed class Lookup<TKey, TElement> : Dictionary<TKey, HashSet<TElement>> { }
