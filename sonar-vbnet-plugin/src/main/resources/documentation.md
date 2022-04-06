@@ -38,7 +38,7 @@ dotnet_diagnostic.Sxxx.severity = none
 Currently an error will be thrown when an issue is raised on a line of code containing the following pattern `\s+error\s*:` (i.e. one or more spaces, the string 'error', zero or more spaces and a ':' ) . This is a well known problem on the Microsoft side (see [issue](https://github.com/dotnet/roslyn/issues/5724/)). In order to work around this problem, analysis will skip issues reported on any line where the pattern is detected.
 
 ## Related Pages
-* [Investigating the performance of .NET Analysis](https://community.sonarsource.com/t/the-sonarsource-guide-for-investigating-the-performance-of-net-analysis/47279)
+* [Investigating the performance of .NET Analysis](https://community.sonarsource.com/t/47279)
 * [Importing External Issues](/analysis/external-issues/) (VSTest, NUnit, MSTest, xUnit)
 * [Excluding External Roslyn Issues](/analysis/external-issues/) (See "Notes on external .NET issues")
 * [Test Coverage & Execution](/analysis/coverage/) (Visual Studio Code Coverage, dotCover, OpenCover, NCover 3)

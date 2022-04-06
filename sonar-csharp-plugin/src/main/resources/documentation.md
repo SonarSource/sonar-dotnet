@@ -34,7 +34,7 @@ dotnet_diagnostic.Sxxx.severity = none
 ```
 
 ## Related Pages
-* [Investigating the performance of .NET Analysis](https://community.sonarsource.com/t/the-sonarsource-guide-for-investigating-the-performance-of-net-analysis/47279)
+* [Investigating the performance of .NET Analysis](https://community.sonarsource.com/t/47279)
 * [Importing External Issues](/analysis/external-issues/) (VSTest, NUnit, MSTest, xUnit)
 * [Excluding External Roslyn Issues](/analysis/external-issues/) (See "Notes on external .NET issues")
 * [Test Coverage & Execution](/analysis/coverage/) (Visual Studio Code Coverage, dotCover, OpenCover)

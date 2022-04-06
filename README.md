@@ -33,8 +33,8 @@ languages in [SonarQube](http://www.sonarqube.org/), [SonarCloud](https://sonarc
 ### Integration with SonarQube and SonarCloud
 
 * [Analyze projects with SonarScanner for .NET](https://redirect.sonarsource.com/doc/install-configure-scanner-msbuild.html)
-* [Importing code coverage](https://community.sonarsource.com/t/coverage-test-data-generate-reports-for-c-vb-net/9871)
-* [SonarQube and the code coverage](https://community.sonarsource.com/t/sonarqube-and-the-code-coverage/4725)
+* [Importing code coverage](https://community.sonarsource.com/t/9871)
+* [SonarQube and the code coverage](https://community.sonarsource.com/t/4725)
 
 ## Do you have a question or feedback?
 
