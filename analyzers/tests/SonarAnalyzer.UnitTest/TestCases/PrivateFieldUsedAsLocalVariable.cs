@@ -214,6 +214,30 @@ namespace Tests.Diagnostics
         {
             get { return F37 ?? (F37 = "5"); }
         }
+
+        private int F38 = 0;
+        private int F39 = 0; // Noncompliant
+
+        public int SetValueInProperty { set { F39 = 42; } }
+
+        void SetValueInMethod()
+        {
+            F38 = 42;
+        }
+
+        void M16()
+        {
+            F38 = 5;
+            SetValueInMethod();
+            Use(F38);
+        }
+
+        void M17()
+        {
+            F39 = 5;
+            SetValueInProperty = 42;
+            Use(F39);
+        }
     }
 
     public partial class SomePartialClass
