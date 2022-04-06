@@ -76,14 +76,38 @@ namespace SonarAnalyzer.UnitTest.Rules
         [DataTestMethod]
         [DataRow(ProjectType.Product)]
         [DataRow(ProjectType.Test)]
+        public void Verify_Event_VB(ProjectType projectType) =>
+            Verify("Event.vb", projectType, 4, 2, 5, 8);
+
+        [DataTestMethod]
+        [DataRow(ProjectType.Product)]
+        [DataRow(ProjectType.Test)]
         public void Verify_Field_CS(ProjectType projectType) =>
             Verify("Field.cs", projectType, 4, 3, 7, 8);
 
         [DataTestMethod]
         [DataRow(ProjectType.Product)]
         [DataRow(ProjectType.Test)]
+        public void Verify_Field_VB(ProjectType projectType) =>
+            Verify("Field.vb", projectType, 4, 3, 6, 7);
+
+        [DataTestMethod]
+        [DataRow(ProjectType.Product)]
+        [DataRow(ProjectType.Test)]
+        public void Verify_Function_VB(ProjectType projectType) =>
+            Verify("Function.vb", projectType, 3, 3, 8);
+
+        [DataTestMethod]
+        [DataRow(ProjectType.Product)]
+        [DataRow(ProjectType.Test)]
         public void Verify_Tuples_CS(ProjectType projectType) =>
             Verify("Tuples.cs", projectType, 4, 7, 8);
+
+        [DataTestMethod]
+        [DataRow(ProjectType.Product)]
+        [DataRow(ProjectType.Test)]
+        public void Verify_Tuples_VB(ProjectType projectType) =>
+            Verify("Tuples.vb", projectType, 6, 4, 8);
 
         [DataTestMethod]
         [DataRow(ProjectType.Product)]
@@ -106,14 +130,35 @@ namespace SonarAnalyzer.UnitTest.Rules
         [DataTestMethod]
         [DataRow(ProjectType.Product)]
         [DataRow(ProjectType.Test)]
+        public void Verify_NamedType_VB(ProjectType projectType) =>
+            Verify("NamedType.vb", projectType, 4, 3, 6, 6);
+
+        [DataTestMethod]
+        [DataRow(ProjectType.Product)]
+        [DataRow(ProjectType.Test)]
         public void Verify_Parameter_CS(ProjectType projectType) =>
             Verify("Parameter.cs", projectType, 4, 4, 6, 7);
 
         [DataTestMethod]
         [DataRow(ProjectType.Product)]
         [DataRow(ProjectType.Test)]
+        public void Verify_Parameter_VB(ProjectType projectType) =>
+            Verify("Parameter.vb", projectType, 4, 6, 7, 8);
+
+        [DataTestMethod]
+        [DataRow(ProjectType.Product)]
+        [DataRow(ProjectType.Test)]
         public void Verify_Property_CS(ProjectType projectType) =>
             Verify("Property.cs", projectType, 4, 3, 7, 8);
+
+        [DataTestMethod]
+        [DataRow(ProjectType.Product)]
+        [DataRow(ProjectType.Test)]
+        public void Verify_Property_VB(ProjectType projectType)
+        {
+            Verify("Property.vb", projectType, 4, 3); // This is not correct, the property defined at line 3 is referenced on lines 6 and 7.
+            Verify("Property.vb", projectType, 4, 6, 6, 7); // This is not correct, the `name` local variable is not actually used.
+        }
 
         [DataTestMethod]
         [DataRow(ProjectType.Product)]
@@ -126,6 +171,12 @@ namespace SonarAnalyzer.UnitTest.Rules
         [DataRow(ProjectType.Test)]
         public void Verify_TypeParameter_CS(ProjectType projectType) =>
             Verify("TypeParameter.cs", projectType, 5, 2, 4, 6);
+
+        [DataTestMethod]
+        [DataRow(ProjectType.Product)]
+        [DataRow(ProjectType.Test)]
+        public void Verify_TypeParameter_VB(ProjectType projectType) =>
+            Verify("TypeParameter.vb", projectType, 5, 2, 4, 5);
 
         [DataTestMethod]
         [DataRow(true)]
