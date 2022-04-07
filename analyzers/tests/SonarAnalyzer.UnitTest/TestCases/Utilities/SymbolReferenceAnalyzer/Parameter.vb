@@ -1,9 +1,7 @@
-﻿Imports System
-
-Public Class Sample
+﻿Public Class Sample
 
     Public Sub Method(
-                      ByVal a As String) ' Needs to be on a separate line to have a simple test scaffolding
+                      a As String) ' Needs to be on a separate line to have a simple test scaffolding
         Dim b as String = a
         a = "value"
     End Sub

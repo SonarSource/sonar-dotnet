@@ -3,7 +3,7 @@
     Public Property Name As String
 
     Public Sub Method()
-        Dim name As String = Name
+        Dim n As String = Name
         Name = "John"
     End Sub
 

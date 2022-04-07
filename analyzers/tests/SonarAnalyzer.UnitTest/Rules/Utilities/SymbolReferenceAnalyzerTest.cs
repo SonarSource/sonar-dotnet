@@ -60,11 +60,17 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void Verify_Method_PreciseLocation_VB(ProjectType projectType) =>
             Verify("Method.vb", projectType, references =>
             {
-                references.Select(x => x.Declaration.StartLine).Should().BeEquivalentTo(1, 3, 6);   // class 'Sample' on line 1, method 'Method' on line 3, method 'Go' on line 6
-                var methodDeclaration = references.Single(x => x.Declaration.StartLine == 3);
-                methodDeclaration.Declaration.Should().BeEquivalentTo(new TextRange { StartLine = 3, EndLine = 3, StartOffset = 15, EndOffset = 21 });
-                methodDeclaration.Reference.Should().HaveCount(1);
-                methodDeclaration.Reference.Single().Should().BeEquivalentTo(new TextRange { StartLine = 7, EndLine = 7, StartOffset = 8, EndOffset = 14 });
+                references.Select(x => x.Declaration.StartLine).Should().BeEquivalentTo(1, 3, 6, 10);   // class 'Sample' on line 1, method 'Method' on line 3, method 'Go' on line 6
+
+                var procedureDeclaration = references.Single(x => x.Declaration.StartLine == 3);
+                procedureDeclaration.Declaration.Should().BeEquivalentTo(new TextRange { StartLine = 3, EndLine = 3, StartOffset = 15, EndOffset = 21 });
+                procedureDeclaration.Reference.Should().HaveCount(1);
+                procedureDeclaration.Reference.Single().Should().BeEquivalentTo(new TextRange { StartLine = 11, EndLine = 11, StartOffset = 8, EndOffset = 14 });
+
+                var functionDeclaration = references.Single(x => x.Declaration.StartLine == 6);
+                functionDeclaration.Declaration.Should().BeEquivalentTo(new TextRange { StartLine = 6, EndLine = 6, StartOffset = 13, EndOffset = 23 });
+                functionDeclaration.Reference.Should().HaveCount(1);
+                functionDeclaration.Reference.Single().Should().BeEquivalentTo(new TextRange { StartLine = 12, EndLine = 12, StartOffset = 8, EndOffset = 18 });
             });
 
         [DataTestMethod]
@@ -77,7 +83,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [DataRow(ProjectType.Product)]
         [DataRow(ProjectType.Test)]
         public void Verify_Event_VB(ProjectType projectType) =>
-            Verify("Event.vb", projectType, 4, 2, 5, 8);
+            Verify("Event.vb", projectType, 4, 3, 6, 8, 11);
 
         [DataTestMethod]
         [DataRow(ProjectType.Product)]
@@ -90,12 +96,6 @@ namespace SonarAnalyzer.UnitTest.Rules
         [DataRow(ProjectType.Test)]
         public void Verify_Field_VB(ProjectType projectType) =>
             Verify("Field.vb", projectType, 4, 3, 6, 7);
-
-        [DataTestMethod]
-        [DataRow(ProjectType.Product)]
-        [DataRow(ProjectType.Test)]
-        public void Verify_Function_VB(ProjectType projectType) =>
-            Verify("Function.vb", projectType, 3, 3, 8);
 
         [DataTestMethod]
         [DataRow(ProjectType.Product)]
@@ -131,7 +131,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [DataRow(ProjectType.Product)]
         [DataRow(ProjectType.Test)]
         public void Verify_NamedType_VB(ProjectType projectType) =>
-            Verify("NamedType.vb", projectType, 4, 3, 6, 6);
+            Verify("NamedType.vb", projectType, 5, 1, 4, 4, 5);
 
         [DataTestMethod]
         [DataRow(ProjectType.Product)]
@@ -143,7 +143,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [DataRow(ProjectType.Product)]
         [DataRow(ProjectType.Test)]
         public void Verify_Parameter_VB(ProjectType projectType) =>
-            Verify("Parameter.vb", projectType, 4, 6, 7, 8);
+            Verify("Parameter.vb", projectType, 4, 4, 5, 6);
 
         [DataTestMethod]
         [DataRow(ProjectType.Product)]
@@ -154,11 +154,8 @@ namespace SonarAnalyzer.UnitTest.Rules
         [DataTestMethod]
         [DataRow(ProjectType.Product)]
         [DataRow(ProjectType.Test)]
-        public void Verify_Property_VB(ProjectType projectType)
-        {
-            Verify("Property.vb", projectType, 4, 3); // This is not correct, the property defined at line 3 is referenced on lines 6 and 7.
-            Verify("Property.vb", projectType, 4, 6, 6, 7); // This is not correct, the `name` local variable is not actually used.
-        }
+        public void Verify_Property_VB(ProjectType projectType) =>
+            Verify("Property.vb", projectType, 4, 3, 6, 7);
 
         [DataTestMethod]
         [DataRow(ProjectType.Product)]
