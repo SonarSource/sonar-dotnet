@@ -214,6 +214,30 @@ namespace Tests.Diagnostics
         {
             get { return F37 ?? (F37 = "5"); }
         }
+
+        private int InvocationWithSideEffect = 0;
+        private int PropertyWithSideEffect = 0; // Noncompliant FP
+
+        public int SetValueInProperty { set { PropertyWithSideEffect = 42; } }
+
+        void MethodWithSideEffect()
+        {
+            InvocationWithSideEffect = 42;
+        }
+
+        void M16()
+        {
+            InvocationWithSideEffect = 5;
+            MethodWithSideEffect();
+            Use(InvocationWithSideEffect);
+        }
+
+        void M17()
+        {
+            PropertyWithSideEffect = 5;
+            SetValueInProperty = 42;
+            Use(PropertyWithSideEffect);
+        }
     }
 
     public partial class SomePartialClass
