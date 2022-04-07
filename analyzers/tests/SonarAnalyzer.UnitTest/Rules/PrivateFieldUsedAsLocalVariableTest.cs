@@ -46,7 +46,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void PrivateFieldUsedAsLocalVariable_CSharp10() =>
             builder.AddPaths("PrivateFieldUsedAsLocalVariable.CSharp10.cs")
                 .WithOptions(ParseOptionsHelper.FromCSharp10)
-            .Verify();
+                .Verify();
 
 #endif
 

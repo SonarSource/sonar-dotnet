@@ -215,28 +215,28 @@ namespace Tests.Diagnostics
             get { return F37 ?? (F37 = "5"); }
         }
 
-        private int F38 = 0;
-        private int F39 = 0; // Noncompliant
+        private int InvocationWithSideEffect = 0;
+        private int PropertyWithSideEffect = 0; // Noncompliant FP
 
-        public int SetValueInProperty { set { F39 = 42; } }
+        public int SetValueInProperty { set { PropertyWithSideEffect = 42; } }
 
-        void SetValueInMethod()
+        void MethodWithSideEffect()
         {
-            F38 = 42;
+            InvocationWithSideEffect = 42;
         }
 
         void M16()
         {
-            F38 = 5;
-            SetValueInMethod();
-            Use(F38);
+            InvocationWithSideEffect = 5;
+            MethodWithSideEffect();
+            Use(InvocationWithSideEffect);
         }
 
         void M17()
         {
-            F39 = 5;
+            PropertyWithSideEffect = 5;
             SetValueInProperty = 42;
-            Use(F39);
+            Use(PropertyWithSideEffect);
         }
     }
 

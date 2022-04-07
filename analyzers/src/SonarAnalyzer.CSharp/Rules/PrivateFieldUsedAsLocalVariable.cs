@@ -210,18 +210,13 @@ namespace SonarAnalyzer.Rules.CSharp
             public override void VisitInvocationExpression(InvocationExpressionSyntax node)
             {
                 if (node.GetMethodCallIdentifier() is { } methodCallIdentifier
-                    && methodNames.Contains(methodCallIdentifier.ValueText))
+                    && methodNames.Contains(methodCallIdentifier.ValueText)
+                    && GetTopmostSyntaxWithTheSameSymbol(node) is var memberReference
+                    && memberReference.Symbol is IMethodSymbol
+                    && GetParentPseudoStatement(memberReference) is { } pseudoStatement)
                 {
-                    var memberReference = GetTopmostSyntaxWithTheSameSymbol(node);
-                    if (memberReference.Symbol is IMethodSymbol)
-                    {
-                        var pseudoStatement = GetParentPseudoStatement(memberReference);
-                        if (pseudoStatement != null)
-                        {
-                            var invocationsInPseudoStatement = invocations.GetOrAdd(pseudoStatement, x => new HashSet<ISymbol>());
-                            invocationsInPseudoStatement.Add(memberReference.Symbol);
-                        }
-                    }
+                    invocations.GetOrAdd(pseudoStatement, _ => new HashSet<ISymbol>())
+                        .Add(memberReference.Symbol);
                 }
                 base.VisitInvocationExpression(node);
             }
