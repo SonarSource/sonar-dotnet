@@ -24,17 +24,19 @@ using SonarAnalyzer.Helpers;
 
 namespace SonarAnalyzer.Rules
 {
-    public abstract class DangerousGetHandleShouldNotBeCalledBase<TInvocation> : DoNotCallMethodsBase<TInvocation>
+    public abstract class DangerousGetHandleShouldNotBeCalledBase<TSyntaxKind, TInvocation> : DoNotCallMethodsBase<TSyntaxKind, TInvocation>
+        where TSyntaxKind : struct
         where TInvocation : SyntaxNode
     {
-        internal const string DiagnosticId = "S3869";
-        protected const string MessageFormat = "Refactor the code to remove this use of '{0}'.";
+        private const string DiagnosticId = "S3869";
 
-        private readonly IEnumerable<MemberDescriptor> invalidMethods = new List<MemberDescriptor>
+        protected override string MessageFormat => "Refactor the code to remove this use of '{0}'.";
+
+        protected override IEnumerable<MemberDescriptor> CheckedMethods { get; } = new List<MemberDescriptor>
         {
             new MemberDescriptor(KnownType.System_Runtime_InteropServices_SafeHandle, "DangerousGetHandle")
         };
 
-        internal override IEnumerable<MemberDescriptor> CheckedMethods => invalidMethods;
+        protected DangerousGetHandleShouldNotBeCalledBase() : base(DiagnosticId) { }
     }
 }

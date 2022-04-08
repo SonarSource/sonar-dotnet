@@ -19,7 +19,6 @@
  */
 
 using System.Collections.Generic;
-using System.Collections.Immutable;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
@@ -30,15 +29,11 @@ namespace SonarAnalyzer.Rules.CSharp
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
     public sealed class NormalizeStringsToUppercase : DoNotCallMethodsCSharpBase
     {
-        internal const string DiagnosticId = "S4040";
-        private const string MessageFormat = "Change this normalization to 'ToUpperInvariant()'.";
+        private const string DiagnosticId = "S4040";
 
-        private static readonly DiagnosticDescriptor rule =
-            DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
+        protected override string MessageFormat => "Change this normalization to 'ToUpperInvariant()'.";
 
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(rule);
-
-        private static readonly List<MemberDescriptor> checkedMethods = new List<MemberDescriptor>
+        protected override IEnumerable<MemberDescriptor> CheckedMethods { get; } = new List<MemberDescriptor>
         {
             new MemberDescriptor(KnownType.System_Char, "ToLower"),
             new MemberDescriptor(KnownType.System_String, "ToLower"),
@@ -46,7 +41,7 @@ namespace SonarAnalyzer.Rules.CSharp
             new MemberDescriptor(KnownType.System_String, "ToLowerInvariant"),
         };
 
-        internal override IEnumerable<MemberDescriptor> CheckedMethods => checkedMethods;
+        public NormalizeStringsToUppercase() : base(DiagnosticId) { }
 
         protected override bool ShouldReportOnMethodCall(InvocationExpressionSyntax invocation,
             SemanticModel semanticModel, MemberDescriptor memberDescriptor)

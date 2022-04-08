@@ -19,7 +19,6 @@
  */
 
 using System.Collections.Generic;
-using System.Collections.Immutable;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.Helpers;
@@ -29,18 +28,15 @@ namespace SonarAnalyzer.Rules.CSharp
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
     public sealed class DoNotCallAssemblyGetExecutingAssemblyMethod : DoNotCallMethodsCSharpBase
     {
-        internal const string DiagnosticId = "S3902";
-        private const string MessageFormat = "Replace this call to 'Assembly.GetExecutingAssembly()' with 'Type.Assembly'.";
+        private const string DiagnosticId = "S3902";
 
-        private static readonly DiagnosticDescriptor Rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
+        protected override string MessageFormat => "Replace this call to 'Assembly.GetExecutingAssembly()' with 'Type.Assembly'.";
 
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
-
-        private static readonly IEnumerable<MemberDescriptor> CheckedMethodsList = new List<MemberDescriptor>
+        protected override IEnumerable<MemberDescriptor> CheckedMethods { get; } = new List<MemberDescriptor>
         {
             new MemberDescriptor(KnownType.System_Reflection_Assembly, "GetExecutingAssembly")
         };
 
-        internal override IEnumerable<MemberDescriptor> CheckedMethods => CheckedMethodsList;
+        public DoNotCallAssemblyGetExecutingAssemblyMethod() : base(DiagnosticId) { }
     }
 }

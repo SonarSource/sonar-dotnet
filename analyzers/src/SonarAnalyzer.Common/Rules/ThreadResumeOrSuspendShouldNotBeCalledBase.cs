@@ -24,18 +24,20 @@ using SonarAnalyzer.Helpers;
 
 namespace SonarAnalyzer.Rules
 {
-    public abstract class ThreadResumeOrSuspendShouldNotBeCalledBase<TInvocation> : DoNotCallMethodsBase<TInvocation>
+    public abstract class ThreadResumeOrSuspendShouldNotBeCalledBase<TSyntaxKind, TInvocation> : DoNotCallMethodsBase<TSyntaxKind, TInvocation>
+        where TSyntaxKind : struct
         where TInvocation : SyntaxNode
     {
-        internal const string DiagnosticId = "S3889";
-        protected const string MessageFormat = "Refactor the code to remove this use of '{0}'.";
+        private const string DiagnosticId = "S3889";
 
-        private readonly IEnumerable<MemberDescriptor> invalidMethods = new List<MemberDescriptor>
+        protected override string MessageFormat => "Refactor the code to remove this use of '{0}'.";
+
+        protected override IEnumerable<MemberDescriptor> CheckedMethods { get; } = new List<MemberDescriptor>
         {
             new MemberDescriptor(KnownType.System_Threading_Thread, "Suspend"),
             new MemberDescriptor(KnownType.System_Threading_Thread, "Resume")
         };
 
-        internal override IEnumerable<MemberDescriptor> CheckedMethods => invalidMethods;
+        protected ThreadResumeOrSuspendShouldNotBeCalledBase() : base(DiagnosticId) { }
     }
 }

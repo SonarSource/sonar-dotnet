@@ -26,15 +26,22 @@ using SonarAnalyzer.Helpers;
 
 namespace SonarAnalyzer.Rules
 {
-    public abstract class DoNotCallMethodsBase<TInvocationExpressionSyntax> : SonarDiagnosticAnalyzer
+    public abstract class DoNotCallMethodsBase<TSyntaxKind, TInvocationExpressionSyntax> : SonarDiagnosticAnalyzer<TSyntaxKind>
+        where TSyntaxKind : struct
         where TInvocationExpressionSyntax : SyntaxNode
     {
-        internal abstract IEnumerable<MemberDescriptor> CheckedMethods { get; }
+        protected abstract IEnumerable<MemberDescriptor> CheckedMethods { get; }
 
         protected abstract SyntaxToken? GetMethodCallIdentifier(TInvocationExpressionSyntax invocation);
 
-        protected virtual bool ShouldReportOnMethodCall(TInvocationExpressionSyntax invocation,
-            SemanticModel semanticModel, MemberDescriptor memberDescriptor) => true;
+        protected virtual bool ShouldReportOnMethodCall(TInvocationExpressionSyntax invocation, SemanticModel semanticModel, MemberDescriptor memberDescriptor) => true;
+
+        protected virtual bool IsInValidContext(TInvocationExpressionSyntax invocationSyntax, SemanticModel semanticModel) => true;
+
+        protected DoNotCallMethodsBase(string diagnosticId) : base(diagnosticId) { }
+
+        protected override void Initialize(SonarAnalysisContext context) =>
+            context.RegisterSyntaxNodeActionInNonGenerated(Language.GeneratedCodeRecognizer, AnalyzeInvocation, Language.SyntaxKind.InvocationExpression);
 
         protected void AnalyzeInvocation(SyntaxNodeAnalysisContext analysisContext)
         {
@@ -70,14 +77,8 @@ namespace SonarAnalyzer.Rules
             }
         }
 
-        protected virtual bool IsInValidContext(TInvocationExpressionSyntax invocationSyntax,
-            SemanticModel semanticModel) => true;
-
-        private MemberDescriptor FindDisallowedMethodSignature(SyntaxToken identifier, ISymbol methodCallSymbol)
-        {
-            return CheckedMethods
-                .Where(method => method.Name.Equals(identifier.ValueText))
+        private MemberDescriptor FindDisallowedMethodSignature(SyntaxToken identifier, ISymbol methodCallSymbol) =>
+            CheckedMethods.Where(method => method.Name.Equals(identifier.ValueText))
                 .FirstOrDefault(m => methodCallSymbol.ContainingType.ConstructedFrom.Is(m.ContainingType));
-        }
     }
 }

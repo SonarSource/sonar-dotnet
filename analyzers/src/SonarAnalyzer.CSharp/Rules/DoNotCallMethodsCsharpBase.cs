@@ -25,12 +25,13 @@ using SonarAnalyzer.Helpers;
 
 namespace SonarAnalyzer.Rules.CSharp
 {
-    public abstract class DoNotCallMethodsCSharpBase : DoNotCallMethodsBase<InvocationExpressionSyntax>
+    public abstract class DoNotCallMethodsCSharpBase : DoNotCallMethodsBase<SyntaxKind, InvocationExpressionSyntax>
     {
-        protected sealed override void Initialize(SonarAnalysisContext context) =>
-            context.RegisterSyntaxNodeActionInNonGenerated(AnalyzeInvocation, SyntaxKind.InvocationExpression);
+        protected override ILanguageFacade<SyntaxKind> Language => CSharpFacade.Instance;
 
         protected sealed override SyntaxToken? GetMethodCallIdentifier(InvocationExpressionSyntax invocation) =>
             invocation.GetMethodCallIdentifier();
+
+        protected DoNotCallMethodsCSharpBase(string diagnosticId) : base(diagnosticId) { }
     }
 }
