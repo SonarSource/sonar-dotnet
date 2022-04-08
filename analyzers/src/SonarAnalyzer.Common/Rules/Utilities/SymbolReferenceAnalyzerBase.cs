@@ -67,7 +67,7 @@ namespace SonarAnalyzer.Rules
 
         private IEnumerable<ReferenceInfo> GetReferences(SyntaxNode root, SemanticModel model)
         {
-            var references = new List<ReferenceInfo>();
+            var references = new HashSet<ReferenceInfo>();
             var knownIdentifiers = new HashSet<string>(IdentifierComparer);
 
             foreach (var declaration in GetDeclarations(root))
@@ -78,7 +78,7 @@ namespace SonarAnalyzer.Rules
                     continue;
                 }
 
-                foreach (var reference in declarationReferences.Where(x => references.All(y => x.Node != y.Node)))
+                foreach (var reference in declarationReferences)
                 {
                     references.Add(reference);
                     knownIdentifiers.Add(reference.Identifier.ValueText);
@@ -130,23 +130,6 @@ namespace SonarAnalyzer.Rules
         private static bool HasTooManyTokens(SyntaxTree syntaxTree) =>
             syntaxTree.GetRoot().DescendantTokens().Count() > TokenCountThreshold;
 
-        protected sealed class ReferenceInfo
-        {
-            public ISymbol Symbol { get; }
-
-            public SyntaxNode Node { get; }
-
-            public SyntaxToken Identifier { get; }
-
-            public bool IsDeclaration { get; }
-
-            public ReferenceInfo(SyntaxNode node, SyntaxToken identifier, ISymbol symbol, bool isDeclaration)
-            {
-                Node = node;
-                Identifier = identifier;
-                Symbol = symbol;
-                IsDeclaration = isDeclaration;
-            }
-        }
+        protected sealed record ReferenceInfo(SyntaxNode Node, SyntaxToken Identifier, ISymbol Symbol, bool IsDeclaration);
     }
 }
