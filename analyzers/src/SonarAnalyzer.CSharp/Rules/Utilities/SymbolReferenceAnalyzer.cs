@@ -18,6 +18,7 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using Microsoft.CodeAnalysis;
@@ -61,6 +62,8 @@ namespace SonarAnalyzer.Rules.CSharp
             walker.SafeVisit(node);
             return walker.Declarations;
         }
+
+        protected override StringComparer IdentifierComparer { get; } = StringComparer.Ordinal;
 
         private static IEnumerable<ReferenceInfo> CreateDeclarationReferenceInfo(VariableDeclarationSyntax declaration, SemanticModel model) =>
             declaration.Variables.Select(x => CreateDeclarationReferenceInfo(x, x.Identifier, model));

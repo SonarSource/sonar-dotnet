@@ -18,6 +18,7 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using Microsoft.CodeAnalysis;
@@ -40,6 +41,8 @@ namespace SonarAnalyzer.Rules
         protected abstract IEnumerable<ReferenceInfo> CreateDeclarationReferenceInfo(SyntaxNode node, SemanticModel model);
 
         protected abstract IEnumerable<SyntaxNode> GetDeclarations(SyntaxNode node);
+
+        protected abstract StringComparer IdentifierComparer { get; }
 
         protected SymbolReferenceAnalyzerBase() : base(DiagnosticId, Title) { }
 
@@ -65,7 +68,7 @@ namespace SonarAnalyzer.Rules
         private IEnumerable<ReferenceInfo> GetReferences(SyntaxNode root, SemanticModel model)
         {
             var references = new List<ReferenceInfo>();
-            var knownIdentifiers = new HashSet<string>();
+            var knownIdentifiers = new HashSet<string>(IdentifierComparer);
 
             foreach (var declaration in GetDeclarations(root))
             {
