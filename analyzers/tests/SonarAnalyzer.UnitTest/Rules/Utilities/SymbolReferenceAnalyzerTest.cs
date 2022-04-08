@@ -60,11 +60,17 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void Verify_Method_PreciseLocation_VB(ProjectType projectType) =>
             Verify("Method.vb", projectType, references =>
             {
-                references.Select(x => x.Declaration.StartLine).Should().BeEquivalentTo(1, 3, 6);   // class 'Sample' on line 1, method 'Method' on line 3, method 'Go' on line 6
-                var methodDeclaration = references.Single(x => x.Declaration.StartLine == 3);
-                methodDeclaration.Declaration.Should().BeEquivalentTo(new TextRange { StartLine = 3, EndLine = 3, StartOffset = 15, EndOffset = 21 });
-                methodDeclaration.Reference.Should().HaveCount(1);
-                methodDeclaration.Reference.Single().Should().BeEquivalentTo(new TextRange { StartLine = 7, EndLine = 7, StartOffset = 8, EndOffset = 14 });
+                references.Select(x => x.Declaration.StartLine).Should().BeEquivalentTo(1, 3, 6, 10);
+
+                var procedureDeclaration = references.Single(x => x.Declaration.StartLine == 3);
+                procedureDeclaration.Declaration.Should().BeEquivalentTo(new TextRange { StartLine = 3, EndLine = 3, StartOffset = 15, EndOffset = 21 });
+                procedureDeclaration.Reference.Should().HaveCount(1);
+                procedureDeclaration.Reference.Single().Should().BeEquivalentTo(new TextRange { StartLine = 11, EndLine = 11, StartOffset = 8, EndOffset = 14 });
+
+                var functionDeclaration = references.Single(x => x.Declaration.StartLine == 6);
+                functionDeclaration.Declaration.Should().BeEquivalentTo(new TextRange { StartLine = 6, EndLine = 6, StartOffset = 13, EndOffset = 23 });
+                functionDeclaration.Reference.Should().HaveCount(1);
+                functionDeclaration.Reference.Single().Should().BeEquivalentTo(new TextRange { StartLine = 12, EndLine = 12, StartOffset = 8, EndOffset = 18 });
             });
 
         [DataTestMethod]
@@ -76,14 +82,32 @@ namespace SonarAnalyzer.UnitTest.Rules
         [DataTestMethod]
         [DataRow(ProjectType.Product)]
         [DataRow(ProjectType.Test)]
+        public void Verify_Event_VB(ProjectType projectType) =>
+            Verify("Event.vb", projectType, 4, 3, 6, 8, 11);
+
+        [DataTestMethod]
+        [DataRow(ProjectType.Product)]
+        [DataRow(ProjectType.Test)]
         public void Verify_Field_CS(ProjectType projectType) =>
             Verify("Field.cs", projectType, 4, 3, 7, 8);
 
         [DataTestMethod]
         [DataRow(ProjectType.Product)]
         [DataRow(ProjectType.Test)]
+        public void Verify_Field_VB(ProjectType projectType) =>
+            Verify("Field.vb", projectType, 4, 3, 6, 7);
+
+        [DataTestMethod]
+        [DataRow(ProjectType.Product)]
+        [DataRow(ProjectType.Test)]
         public void Verify_Tuples_CS(ProjectType projectType) =>
             Verify("Tuples.cs", projectType, 4, 7, 8);
+
+        [DataTestMethod]
+        [DataRow(ProjectType.Product)]
+        [DataRow(ProjectType.Test)]
+        public void Verify_Tuples_VB(ProjectType projectType) =>
+            Verify("Tuples.vb", projectType, 6, 4, 8);
 
         [DataTestMethod]
         [DataRow(ProjectType.Product)]
@@ -106,14 +130,32 @@ namespace SonarAnalyzer.UnitTest.Rules
         [DataTestMethod]
         [DataRow(ProjectType.Product)]
         [DataRow(ProjectType.Test)]
+        public void Verify_NamedType_VB(ProjectType projectType) =>
+            Verify("NamedType.vb", projectType, 5, 1, 4, 4, 5);
+
+        [DataTestMethod]
+        [DataRow(ProjectType.Product)]
+        [DataRow(ProjectType.Test)]
         public void Verify_Parameter_CS(ProjectType projectType) =>
             Verify("Parameter.cs", projectType, 4, 4, 6, 7);
 
         [DataTestMethod]
         [DataRow(ProjectType.Product)]
         [DataRow(ProjectType.Test)]
+        public void Verify_Parameter_VB(ProjectType projectType) =>
+            Verify("Parameter.vb", projectType, 4, 4, 5, 6);
+
+        [DataTestMethod]
+        [DataRow(ProjectType.Product)]
+        [DataRow(ProjectType.Test)]
         public void Verify_Property_CS(ProjectType projectType) =>
             Verify("Property.cs", projectType, 4, 3, 7, 8);
+
+        [DataTestMethod]
+        [DataRow(ProjectType.Product)]
+        [DataRow(ProjectType.Test)]
+        public void Verify_Property_VB(ProjectType projectType) =>
+            Verify("Property.vb", projectType, 4, 3, 6, 7);
 
         [DataTestMethod]
         [DataRow(ProjectType.Product)]
@@ -126,6 +168,12 @@ namespace SonarAnalyzer.UnitTest.Rules
         [DataRow(ProjectType.Test)]
         public void Verify_TypeParameter_CS(ProjectType projectType) =>
             Verify("TypeParameter.cs", projectType, 5, 2, 4, 6);
+
+        [DataTestMethod]
+        [DataRow(ProjectType.Product)]
+        [DataRow(ProjectType.Test)]
+        public void Verify_TypeParameter_VB(ProjectType projectType) =>
+            Verify("TypeParameter.vb", projectType, 5, 2, 4, 5);
 
         [DataTestMethod]
         [DataRow(true)]
