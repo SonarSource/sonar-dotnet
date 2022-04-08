@@ -21,6 +21,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using FluentAssertions;
 using Microsoft.CodeAnalysis;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -37,9 +38,7 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class TokenTypeAnalyzerTest
     {
-        private const string Root = @"TestCases\Utilities\TokenTypeAnalyzer\";
-
-        public TestContext TestContext { get; set; } // Set automatically by MsTest
+        private const string BasePath = @"Utilities\TokenTypeAnalyzer\";
 
         [DataTestMethod]
         [DataRow(ProjectType.Product)]
@@ -122,9 +121,9 @@ namespace SonarAnalyzer.UnitTest.Rules
                 tokenInfo.Where(token => token.TokenType == TokenType.TypeName).Should().BeEmpty();
             });
 
-        private void Verify(string fileName, ProjectType projectType, Action<IReadOnlyList<TokenTypeInfo.Types.TokenInfo>> verifyTokenInfo)
+        private static void Verify(string fileName, ProjectType projectType, Action<IReadOnlyList<TokenTypeInfo.Types.TokenInfo>> verifyTokenInfo, [CallerMemberName] string testName = "")
         {
-            var testRoot = Root + TestContext.TestName;
+            var testRoot = BasePath + testName;
             var language = AnalyzerLanguage.FromPath(fileName);
             UtilityAnalyzerBase analyzer = language.LanguageName switch
             {
@@ -132,23 +131,25 @@ namespace SonarAnalyzer.UnitTest.Rules
                 LanguageNames.VisualBasic => new TestTokenTypeAnalyzer_VB(testRoot, projectType == ProjectType.Test),
                 _ => throw new UnexpectedLanguageException(language)
             };
-            OldVerifier.VerifyNonConcurrentUtilityAnalyzer<TokenTypeInfo>(
-                new[] { Root + fileName },
-                analyzer,
-                @$"{testRoot}\token-type.pb",
-                TestHelper.CreateSonarProjectConfig(testRoot, projectType),
-                messages =>
-                {
-                    messages.Should().HaveCount(1);
-                    var info = messages.Single();
-                    info.FilePath.Should().Be(fileName);
-                    verifyTokenInfo(info.TokenInfo);
-                },
-                ParseOptionsHelper.Latest(language));
+
+            new VerifierBuilder()
+                .AddAnalyzer(() => analyzer)
+                .AddPaths(fileName)
+                .WithBasePath(BasePath)
+                .WithOptions(ParseOptionsHelper.Latest(language))
+                .WithSonarProjectConfigPath(TestHelper.CreateSonarProjectConfig(testRoot, projectType))
+                .WithProtobufPath(@$"{testRoot}\token-type.pb")
+                .VerifyUtilityAnalyzer<TokenTypeInfo>(messages =>
+                    {
+                        messages.Should().HaveCount(1);
+                        var info = messages.Single();
+                        info.FilePath.Should().Be(fileName);
+                        verifyTokenInfo(info.TokenInfo);
+                    });
         }
 
         // We need to set protected properties and this class exists just to enable the analyzer without bothering with additional files with parameters
-        private class TestTokenTypeAnalyzer_CS : CS.TokenTypeAnalyzer
+        private sealed class TestTokenTypeAnalyzer_CS : CS.TokenTypeAnalyzer
         {
             public TestTokenTypeAnalyzer_CS(string outPath, bool isTestProject)
             {
@@ -158,7 +159,7 @@ namespace SonarAnalyzer.UnitTest.Rules
             }
         }
 
-        private class TestTokenTypeAnalyzer_VB : VB.TokenTypeAnalyzer
+        private sealed class TestTokenTypeAnalyzer_VB : VB.TokenTypeAnalyzer
         {
             public TestTokenTypeAnalyzer_VB(string outPath, bool isTestProject)
             {

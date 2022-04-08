@@ -66,7 +66,7 @@ namespace SonarAnalyzer.Rules
             private readonly SyntaxToken token;
             private readonly SemanticModel semanticModel;
             private readonly bool skipIdentifiers;
-            private readonly List<TokenTypeInfo.Types.TokenInfo> spans = new List<TokenTypeInfo.Types.TokenInfo>();
+            private readonly List<TokenTypeInfo.Types.TokenInfo> spans = new();
             private static readonly ISet<MethodKind> ConstructorKinds = new HashSet<MethodKind>
             {
                 MethodKind.Constructor,
