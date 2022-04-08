@@ -27,14 +27,23 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class DoNotCallAssemblyGetExecutingAssemblyTest
     {
+        private readonly VerifierBuilder builder = new VerifierBuilder<DoNotCallAssemblyGetExecutingAssemblyMethod>();
+
         [TestMethod]
         public void DoNotCallAssemblyGetExecutingAssembly() =>
-            OldVerifier.VerifyAnalyzer(@"TestCases\DoNotCallAssemblyGetExecutingAssembly.cs", new DoNotCallAssemblyGetExecutingAssemblyMethod());
+            builder.AddPaths("DoNotCallAssemblyGetExecutingAssembly.cs")
+                .Verify();
 
 #if NET
+
         [TestMethod]
         public void DoNotCallAssemblyGetExecutingAssembly_CSharp9() =>
-            OldVerifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\DoNotCallAssemblyGetExecutingAssembly.CSharp9.cs", new DoNotCallAssemblyGetExecutingAssemblyMethod());
+            builder.AddPaths("DoNotCallAssemblyGetExecutingAssembly.CSharp9.cs")
+                .WithOptions(ParseOptionsHelper.FromCSharp9)
+                .WithTopLevelStatements()
+                .Verify();
+
 #endif
+
     }
 }

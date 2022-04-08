@@ -29,11 +29,13 @@ namespace SonarAnalyzer.UnitTest.Rules
     public class ThreadResumeOrSuspendShouldNotBeCalledTest
     {
         [TestMethod]
-        public void ThreadResumeOrSuspendShouldNotBeCalled() => OldVerifier.VerifyAnalyzer(@"TestCases\ThreadResumeOrSuspendShouldNotBeCalled.cs",
-                new CS.ThreadResumeOrSuspendShouldNotBeCalled());
+        public void ThreadResumeOrSuspendShouldNotBeCalled() =>
+            new VerifierBuilder<CS.ThreadResumeOrSuspendShouldNotBeCalled>().AddPaths("ThreadResumeOrSuspendShouldNotBeCalled.cs")
+                .Verify();
 
         [TestMethod]
-        public void ThreadResumeOrSuspendShouldNotBeCalled_VB() => OldVerifier.VerifyAnalyzer(@"TestCases\ThreadResumeOrSuspendShouldNotBeCalled.vb",
-                new VB.ThreadResumeOrSuspendShouldNotBeCalled());
+        public void ThreadResumeOrSuspendShouldNotBeCalled_VB() =>
+            new VerifierBuilder<VB.ThreadResumeOrSuspendShouldNotBeCalled>().AddPaths("ThreadResumeOrSuspendShouldNotBeCalled.vb")
+                .Verify();
     }
 }
