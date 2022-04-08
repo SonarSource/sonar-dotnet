@@ -60,7 +60,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void Verify_Method_PreciseLocation_VB(ProjectType projectType) =>
             Verify("Method.vb", projectType, references =>
             {
-                references.Select(x => x.Declaration.StartLine).Should().BeEquivalentTo(1, 3, 6, 10);   // class 'Sample' on line 1, method 'Method' on line 3, method 'Go' on line 6
+                references.Select(x => x.Declaration.StartLine).Should().BeEquivalentTo(1, 3, 6, 10);
 
                 var procedureDeclaration = references.Single(x => x.Declaration.StartLine == 3);
                 procedureDeclaration.Declaration.Should().BeEquivalentTo(new TextRange { StartLine = 3, EndLine = 3, StartOffset = 15, EndOffset = 21 });
