@@ -39,7 +39,7 @@ namespace SonarAnalyzer.Rules.CSharp
             new MemberDescriptor(KnownType.System_GC, "SuppressFinalize")
         };
 
-        public DoNotCallGCSuppressFinalize() : base (DiagnosticId) { }
+        public DoNotCallGCSuppressFinalize() : base(DiagnosticId) { }
 
         protected override bool ShouldReportOnMethodCall(InvocationExpressionSyntax invocation, SemanticModel semanticModel, MemberDescriptor memberDescriptor)
         {
