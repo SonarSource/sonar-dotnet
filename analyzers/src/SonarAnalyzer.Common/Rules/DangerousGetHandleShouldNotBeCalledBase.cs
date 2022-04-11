@@ -34,7 +34,7 @@ namespace SonarAnalyzer.Rules
 
         protected override IEnumerable<MemberDescriptor> CheckedMethods { get; } = new List<MemberDescriptor>
         {
-            new MemberDescriptor(KnownType.System_Runtime_InteropServices_SafeHandle, "DangerousGetHandle")
+            new(KnownType.System_Runtime_InteropServices_SafeHandle, "DangerousGetHandle")
         };
 
         protected DangerousGetHandleShouldNotBeCalledBase() : base(DiagnosticId) { }

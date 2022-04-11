@@ -34,7 +34,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
         protected override IEnumerable<MemberDescriptor> CheckedMethods { get; } = new List<MemberDescriptor>
         {
-            new MemberDescriptor(KnownType.System_GC, "Collect"),
+            new(KnownType.System_GC, "Collect"),
         };
 
         public DoNotCallGCCollectMethod() : base(DiagnosticId) { }

@@ -34,7 +34,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
         protected override IEnumerable<MemberDescriptor> CheckedMethods { get; } = new List<MemberDescriptor>
         {
-            new MemberDescriptor(KnownType.System_Reflection_Assembly, "GetExecutingAssembly")
+            new(KnownType.System_Reflection_Assembly, "GetExecutingAssembly")
         };
 
         public DoNotCallAssemblyGetExecutingAssemblyMethod() : base(DiagnosticId) { }

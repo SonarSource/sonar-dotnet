@@ -36,7 +36,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
         protected override IEnumerable<MemberDescriptor> CheckedMethods { get; } = new List<MemberDescriptor>
         {
-            new MemberDescriptor(KnownType.System_GC, "SuppressFinalize")
+            new(KnownType.System_GC, "SuppressFinalize")
         };
 
         public DoNotCallGCSuppressFinalize() : base(DiagnosticId) { }

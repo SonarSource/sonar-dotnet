@@ -35,16 +35,15 @@ namespace SonarAnalyzer.Rules.CSharp
 
         protected override IEnumerable<MemberDescriptor> CheckedMethods { get; } = new List<MemberDescriptor>
         {
-            new MemberDescriptor(KnownType.System_Char, "ToLower"),
-            new MemberDescriptor(KnownType.System_String, "ToLower"),
-            new MemberDescriptor(KnownType.System_Char, "ToLowerInvariant"),
-            new MemberDescriptor(KnownType.System_String, "ToLowerInvariant"),
+            new(KnownType.System_Char, "ToLower"),
+            new(KnownType.System_String, "ToLower"),
+            new(KnownType.System_Char, "ToLowerInvariant"),
+            new(KnownType.System_String, "ToLowerInvariant"),
         };
 
         public NormalizeStringsToUppercase() : base(DiagnosticId) { }
 
-        protected override bool ShouldReportOnMethodCall(InvocationExpressionSyntax invocation,
-            SemanticModel semanticModel, MemberDescriptor memberDescriptor)
+        protected override bool ShouldReportOnMethodCall(InvocationExpressionSyntax invocation, SemanticModel semanticModel, MemberDescriptor memberDescriptor)
         {
             var identifier = GetMethodCallIdentifier(invocation).Value.ValueText; // never null when we get here
             if (identifier == "ToLowerInvariant")
@@ -55,9 +54,9 @@ namespace SonarAnalyzer.Rules.CSharp
             // ToLower and ToLowerInvariant are extension methods for string but not for char
             var isExtensionMethod = memberDescriptor.ContainingType == KnownType.System_String;
 
-            return invocation.ArgumentList != null &&
-                invocation.ArgumentList.Arguments.Count == (isExtensionMethod ? 1 : 2) &&
-                invocation.ArgumentList.Arguments[isExtensionMethod ? 0 : 1].Expression.ToString() == "CultureInfo.InvariantCulture";
+            return invocation.ArgumentList != null
+                && invocation.ArgumentList.Arguments.Count == (isExtensionMethod ? 1 : 2)
+                && invocation.ArgumentList.Arguments[isExtensionMethod ? 0 : 1].Expression.ToString() == "CultureInfo.InvariantCulture";
         }
     }
 }

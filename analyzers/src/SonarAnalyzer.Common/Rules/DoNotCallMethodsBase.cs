@@ -43,7 +43,7 @@ namespace SonarAnalyzer.Rules
         protected override void Initialize(SonarAnalysisContext context) =>
             context.RegisterSyntaxNodeActionInNonGenerated(Language.GeneratedCodeRecognizer, AnalyzeInvocation, Language.SyntaxKind.InvocationExpression);
 
-        protected void AnalyzeInvocation(SyntaxNodeAnalysisContext analysisContext)
+        private void AnalyzeInvocation(SyntaxNodeAnalysisContext analysisContext)
         {
             var invocation = (TInvocationExpressionSyntax)analysisContext.Node;
 

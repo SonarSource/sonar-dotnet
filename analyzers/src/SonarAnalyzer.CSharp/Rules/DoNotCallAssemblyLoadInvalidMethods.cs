@@ -34,9 +34,9 @@ namespace SonarAnalyzer.Rules.CSharp
 
         protected override IEnumerable<MemberDescriptor> CheckedMethods { get; } = new List<MemberDescriptor>
         {
-            new MemberDescriptor(KnownType.System_Reflection_Assembly, "LoadFrom"),
-            new MemberDescriptor(KnownType.System_Reflection_Assembly, "LoadFile"),
-            new MemberDescriptor(KnownType.System_Reflection_Assembly, "LoadWithPartialName")
+            new(KnownType.System_Reflection_Assembly, "LoadFrom"),
+            new(KnownType.System_Reflection_Assembly, "LoadFile"),
+            new(KnownType.System_Reflection_Assembly, "LoadWithPartialName")
         };
 
         public DoNotCallAssemblyLoadInvalidMethods() : base(DiagnosticId) { }

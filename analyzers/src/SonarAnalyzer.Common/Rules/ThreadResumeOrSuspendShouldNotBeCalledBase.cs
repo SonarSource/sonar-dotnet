@@ -34,8 +34,8 @@ namespace SonarAnalyzer.Rules
 
         protected override IEnumerable<MemberDescriptor> CheckedMethods { get; } = new List<MemberDescriptor>
         {
-            new MemberDescriptor(KnownType.System_Threading_Thread, "Suspend"),
-            new MemberDescriptor(KnownType.System_Threading_Thread, "Resume")
+            new(KnownType.System_Threading_Thread, "Suspend"),
+            new(KnownType.System_Threading_Thread, "Resume")
         };
 
         protected ThreadResumeOrSuspendShouldNotBeCalledBase() : base(DiagnosticId) { }

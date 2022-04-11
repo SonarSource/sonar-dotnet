@@ -36,8 +36,8 @@ namespace SonarAnalyzer.Rules.CSharp
 
         protected override IEnumerable<MemberDescriptor> CheckedMethods { get; } = new List<MemberDescriptor>
         {
-            new MemberDescriptor(KnownType.System_Environment, "Exit"),
-            new MemberDescriptor(KnownType.System_Windows_Forms_Application, "Exit")
+            new(KnownType.System_Environment, "Exit"),
+            new(KnownType.System_Windows_Forms_Application, "Exit")
         };
 
         public DoNotCallExitMethods() : base(DiagnosticId) { }
