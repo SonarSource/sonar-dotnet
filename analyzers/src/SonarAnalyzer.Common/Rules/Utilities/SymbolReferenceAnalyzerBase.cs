@@ -18,11 +18,11 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Text;
+using SonarAnalyzer.Helpers;
 using SonarAnalyzer.Protobuf;
 
 namespace SonarAnalyzer.Rules
@@ -47,10 +47,11 @@ namespace SonarAnalyzer.Rules
         protected sealed override SymbolReferenceInfo CreateMessage(SyntaxTree syntaxTree, SemanticModel semanticModel)
         {
             var symbolReferenceInfo = new SymbolReferenceInfo { FilePath = syntaxTree.FilePath };
+            var references = GetReferences(syntaxTree.GetRoot(), semanticModel);
 
-            foreach (var references in GetReferences(syntaxTree.GetRoot(), semanticModel).GroupBy(x => x.Symbol))
+            foreach (var symbol in references.Keys)
             {
-                if (GetSymbolReference(references.ToArray(), syntaxTree) is { } reference)
+                if (GetSymbolReference(references[symbol], syntaxTree) is { } reference)
                 {
                     symbolReferenceInfo.Reference.Add(reference);
                 }
@@ -63,10 +64,11 @@ namespace SonarAnalyzer.Rules
             base.ShouldGenerateMetrics(tree)
             && !HasTooManyTokens(tree);
 
-        private IEnumerable<ReferenceInfo> GetReferences(SyntaxNode root, SemanticModel model)
+        private Dictionary<ISymbol, List<ReferenceInfo>> GetReferences(SyntaxNode root, SemanticModel model)
         {
-            var references = new HashSet<ReferenceInfo>();
+            var references = new Dictionary<ISymbol, List<ReferenceInfo>>();
             var knownIdentifiers = new HashSet<string>(Language.NameComparer);
+            var knownNodes = new List<SyntaxNode>();
             var declarations = GetDeclarations(root);
 
             for (var i = 0; i < declarations.Count; i++)
@@ -79,21 +81,28 @@ namespace SonarAnalyzer.Rules
 
                 for (var j = 0; j < declarationReferences.Length; j++)
                 {
-                    references.Add(declarationReferences[j]);
-                    knownIdentifiers.Add(declarationReferences[j].Identifier.ValueText);
+                    var currentDeclaration = declarationReferences[j];
+                    if (currentDeclaration.Symbol != null)
+                    {
+                        var list = references.GetOrAdd(currentDeclaration.Symbol, _ => new List<ReferenceInfo>());
+                        list.Add(currentDeclaration);
+                        knownNodes.Add(currentDeclaration.Node);
+                        knownIdentifiers.Add(currentDeclaration.Identifier.ValueText);
+                    }
                 }
             }
 
-            var identifiers = root.DescendantTokens().Where(x => Language.Syntax.IsKind(x, Language.SyntaxKind.IdentifierToken)).ToArray();
-            for (var i = 0; i < identifiers.Length; i++)
+            foreach (var token in root.DescendantTokens())
             {
-                var identifier = identifiers[i];
-                if (knownIdentifiers.Contains(identifier.Text)
-                    && GetBindableParent(identifier) is { } parent
-                    && references.All(x => x.Node != parent)
-                    && GetReferenceSymbol(parent, model) is { } symbol)
+                if (Language.Syntax.IsKind(token, Language.SyntaxKind.IdentifierToken)
+                    && knownIdentifiers.Contains(token.Text)
+                    && GetBindableParent(token) is { } parent
+                    && !knownNodes.Contains(parent)
+                    && GetReferenceSymbol(parent, model) is { } symbol
+                    && references.ContainsKey(symbol)
+                    && references[symbol] is { } symbolRefs)
                 {
-                    references.Add(new ReferenceInfo(parent, identifier, symbol, false));
+                    symbolRefs.Add(new ReferenceInfo(parent, token, symbol, false));
                 }
             }
 
@@ -107,7 +116,7 @@ namespace SonarAnalyzer.Rules
                 var symbol => symbol
             };
 
-        private static SymbolReferenceInfo.Types.SymbolReference GetSymbolReference(ReferenceInfo[] references, SyntaxTree tree)
+        private static SymbolReferenceInfo.Types.SymbolReference GetSymbolReference(List<ReferenceInfo> references, SyntaxTree tree)
         {
             var declarationSpan = GetDeclarationSpan(references);
             if (!declarationSpan.HasValue)
@@ -116,7 +125,7 @@ namespace SonarAnalyzer.Rules
             }
 
             var symbolReference = new SymbolReferenceInfo.Types.SymbolReference { Declaration = GetTextRange(Location.Create(tree, declarationSpan.Value).GetLineSpan()) };
-            for (var i = 0; i < references.Length; i++)
+            for (var i = 0; i < references.Count; i++)
             {
                 var reference = references[i];
                 if (!reference.IsDeclaration)
@@ -127,10 +136,17 @@ namespace SonarAnalyzer.Rules
             return symbolReference;
         }
 
-        private static TextSpan? GetDeclarationSpan(IEnumerable<ReferenceInfo> references) =>
-            references.FirstOrDefault(x => x.IsDeclaration) is { } declaration
-                ? declaration.Identifier.Span
-                : null;
+        private static TextSpan? GetDeclarationSpan(List<ReferenceInfo> references)
+        {
+            for (var i = 0; i < references.Count; i++)
+            {
+                if (references[i].IsDeclaration)
+                {
+                    return references[i].Identifier.Span;
+                }
+            }
+            return null;
+        }
 
         private static bool HasTooManyTokens(SyntaxTree syntaxTree) =>
             syntaxTree.GetRoot().DescendantTokens().Count() > TokenCountThreshold;
