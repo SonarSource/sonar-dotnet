@@ -63,8 +63,9 @@ namespace SonarAnalyzer.UnitTest.Rules
 
                 var procedureDeclaration = references.Single(x => x.Declaration.StartLine == 3);
                 procedureDeclaration.Declaration.Should().BeEquivalentTo(new TextRange { StartLine = 3, EndLine = 3, StartOffset = 15, EndOffset = 21 });
-                procedureDeclaration.Reference.Should().HaveCount(1);
-                procedureDeclaration.Reference.Single().Should().BeEquivalentTo(new TextRange { StartLine = 11, EndLine = 11, StartOffset = 8, EndOffset = 14 });
+                procedureDeclaration.Reference.Should().HaveCount(2);
+                procedureDeclaration.Reference[0].Should().BeEquivalentTo(new TextRange { StartLine = 11, EndLine = 11, StartOffset = 8, EndOffset = 14 });
+                procedureDeclaration.Reference[1].Should().BeEquivalentTo(new TextRange { StartLine = 11, EndLine = 11, StartOffset = 8, EndOffset = 14 });
 
                 var functionDeclaration = references.Single(x => x.Declaration.StartLine == 6);
                 functionDeclaration.Declaration.Should().BeEquivalentTo(new TextRange { StartLine = 6, EndLine = 6, StartOffset = 13, EndOffset = 23 });
@@ -160,7 +161,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [DataRow(ProjectType.Product)]
         [DataRow(ProjectType.Test)]
         public void Verify_Property_VB(ProjectType projectType) =>
-            Verify("Property.vb", projectType, 4, 3, 6, 7);
+            Verify("Property.vb", projectType, 5, 3, 6, 7, 8);
 
         [DataTestMethod]
         [DataRow(ProjectType.Product)]

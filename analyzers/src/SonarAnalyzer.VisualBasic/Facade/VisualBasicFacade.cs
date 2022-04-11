@@ -38,7 +38,7 @@ namespace SonarAnalyzer.Helpers
 
         public AssignmentFinder AssignmentFinder => AssignmentFinderLazy.Value;
         public StringComparison NameComparison => StringComparison.OrdinalIgnoreCase;
-        public StringComparer StringComparer => StringComparer.OrdinalIgnoreCase;
+        public StringComparer NameComparer => StringComparer.OrdinalIgnoreCase;
         public GeneratedCodeRecognizer GeneratedCodeRecognizer => VisualBasicGeneratedCodeRecognizer.Instance;
         public IExpressionNumericConverter ExpressionNumericConverter => ExpressionNumericConverterLazy.Value;
         public SyntaxFacade<SyntaxKind> Syntax => SyntaxLazy.Value;

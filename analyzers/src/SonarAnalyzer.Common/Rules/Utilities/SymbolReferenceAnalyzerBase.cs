@@ -66,7 +66,7 @@ namespace SonarAnalyzer.Rules
         private IEnumerable<ReferenceInfo> GetReferences(SyntaxNode root, SemanticModel model)
         {
             var references = new HashSet<ReferenceInfo>();
-            var knownIdentifiers = new HashSet<string>(Language.StringComparer);
+            var knownIdentifiers = new HashSet<string>(Language.NameComparer);
 
             foreach (var declaration in GetDeclarations(root))
             {
