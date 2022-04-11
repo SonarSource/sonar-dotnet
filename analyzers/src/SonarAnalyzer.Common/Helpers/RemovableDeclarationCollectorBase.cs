@@ -22,7 +22,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Microsoft.CodeAnalysis;
 using SonarAnalyzer.Common;
-using NodeSymbolAndSemanticModel = SonarAnalyzer.Common.NodeSymbolAndSemanticModel<Microsoft.CodeAnalysis.SyntaxNode, Microsoft.CodeAnalysis.ISymbol>;
+using NodeSymbolAndModel = SonarAnalyzer.Common.NodeSymbolAndModel<Microsoft.CodeAnalysis.SyntaxNode, Microsoft.CodeAnalysis.ISymbol>;
 
 namespace SonarAnalyzer.Helpers
 {
@@ -35,13 +35,13 @@ namespace SonarAnalyzer.Helpers
         private readonly Compilation compilation;
         private readonly INamedTypeSymbol namedType;
 
-        private IEnumerable<NodeAndSemanticModel<TOwnerOfSubnodes>> typeDeclarations;
+        private IEnumerable<NodeAndModel<TOwnerOfSubnodes>> typeDeclarations;
 
-        public abstract IEnumerable<NodeSymbolAndSemanticModel> GetRemovableFieldLikeDeclarations(ISet<TSyntaxKind> kinds, Accessibility maxAccessibility);
+        public abstract IEnumerable<NodeSymbolAndModel> GetRemovableFieldLikeDeclarations(ISet<TSyntaxKind> kinds, Accessibility maxAccessibility);
         internal abstract TOwnerOfSubnodes GetOwnerOfSubnodes(TDeclaration node);
-        protected abstract IEnumerable<SyntaxNode> SelectMatchingDeclarations(NodeAndSemanticModel<TOwnerOfSubnodes> container, ISet<TSyntaxKind> kinds);
+        protected abstract IEnumerable<SyntaxNode> SelectMatchingDeclarations(NodeAndModel<TOwnerOfSubnodes> container, ISet<TSyntaxKind> kinds);
 
-        public IEnumerable<NodeAndSemanticModel<TOwnerOfSubnodes>> TypeDeclarations
+        public IEnumerable<NodeAndModel<TOwnerOfSubnodes>> TypeDeclarations
         {
             get
             {
@@ -50,8 +50,8 @@ namespace SonarAnalyzer.Helpers
                     typeDeclarations = namedType.DeclaringSyntaxReferences
                         .Select(x => x.GetSyntax())
                         .OfType<TDeclaration>()
-                        .Select(x => new NodeAndSemanticModel<TOwnerOfSubnodes>(compilation.GetSemanticModel(x.SyntaxTree), GetOwnerOfSubnodes(x)))
-                        .Where(x => x.SemanticModel != null);
+                        .Select(x => new NodeAndModel<TOwnerOfSubnodes>(compilation.GetSemanticModel(x.SyntaxTree), GetOwnerOfSubnodes(x)))
+                        .Where(x => x.Model != null);
                 }
                 return typeDeclarations;
             }
@@ -63,9 +63,9 @@ namespace SonarAnalyzer.Helpers
             this.compilation = compilation;
         }
 
-        public IEnumerable<NodeSymbolAndSemanticModel> GetRemovableDeclarations(ISet<TSyntaxKind> kinds, Accessibility maxAccessibility) =>
+        public IEnumerable<NodeSymbolAndModel> GetRemovableDeclarations(ISet<TSyntaxKind> kinds, Accessibility maxAccessibility) =>
             TypeDeclarations.SelectMany(container => SelectMatchingDeclarations(container, kinds)
-                                        .Select(x => SelectNodeTuple(x, container.SemanticModel)))
+                                        .Select(x => SelectNodeTuple(x, container.Model)))
                                         .Where(x => IsRemovable(x.Symbol, maxAccessibility));
 
         public static bool IsRemovable(IMethodSymbol methodSymbol, Accessibility maxAccessibility) =>
@@ -86,7 +86,7 @@ namespace SonarAnalyzer.Helpers
             && symbol.GetInterfaceMember() == null
             && symbol.GetOverriddenMember() == null;
 
-        protected static NodeSymbolAndSemanticModel SelectNodeTuple(SyntaxNode node, SemanticModel semanticModel) =>
-            new NodeSymbolAndSemanticModel(semanticModel, node, semanticModel.GetDeclaredSymbol(node));
+        protected static NodeSymbolAndModel SelectNodeTuple(SyntaxNode node, SemanticModel semanticModel) =>
+            new(semanticModel, node, semanticModel.GetDeclaredSymbol(node));
     }
 }

@@ -49,12 +49,12 @@ namespace SonarAnalyzer.Rules
             typeDeclarations
                 .Select(typeDeclaration => new
                 {
-                    typeDeclaration.NodeAndSemanticModel.SemanticModel,
-                    DescendantNodes = typeDeclaration.NodeAndSemanticModel.Node.DescendantNodes().ToList()
+                    typeDeclaration.NodeAndModel.Model,
+                    DescendantNodes = typeDeclaration.NodeAndModel.Node.DescendantNodes().ToList()
                 })
                 .Any(descendants =>
-                    IsAnyConstructorToCurrentType(descendants.DescendantNodes, namedType, descendants.SemanticModel)
-                    || IsAnyNestedTypeExtendingCurrentType(descendants.DescendantNodes, namedType, descendants.SemanticModel));
+                    IsAnyConstructorToCurrentType(descendants.DescendantNodes, namedType, descendants.Model)
+                    || IsAnyNestedTypeExtendingCurrentType(descendants.DescendantNodes, namedType, descendants.Model));
 
         private void CheckClassWithOnlyUnusedPrivateConstructors(SymbolAnalysisContext context)
         {
@@ -125,12 +125,12 @@ namespace SonarAnalyzer.Rules
 
         protected class ConstructorContext
         {
-            public NodeAndSemanticModel<TBaseTypeSyntax> NodeAndSemanticModel { get; }
+            public NodeAndModel<TBaseTypeSyntax> NodeAndModel { get; }
             public Diagnostic Diagnostic { get; }
 
-            public ConstructorContext(NodeAndSemanticModel<TBaseTypeSyntax> nodeAndSemanticModel, Diagnostic diagnostic)
+            public ConstructorContext(NodeAndModel<TBaseTypeSyntax> nodeAndModel, Diagnostic diagnostic)
             {
-                NodeAndSemanticModel = nodeAndSemanticModel;
+                NodeAndModel = nodeAndModel;
                 Diagnostic = diagnostic;
             }
         }

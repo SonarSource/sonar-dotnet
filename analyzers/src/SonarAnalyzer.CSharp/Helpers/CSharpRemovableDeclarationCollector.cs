@@ -32,18 +32,18 @@ namespace SonarAnalyzer.Helpers
     {
         public CSharpRemovableDeclarationCollector(INamedTypeSymbol namedType, Compilation compilation) : base(namedType, compilation) { }
 
-        protected override IEnumerable<SyntaxNode> SelectMatchingDeclarations(NodeAndSemanticModel<BaseTypeDeclarationSyntax> container, ISet<SyntaxKind> kinds) =>
+        protected override IEnumerable<SyntaxNode> SelectMatchingDeclarations(NodeAndModel<BaseTypeDeclarationSyntax> container, ISet<SyntaxKind> kinds) =>
             container.Node.DescendantNodes(IsNodeContainerTypeDeclaration).Where(node => kinds.Contains(node.Kind()));
 
-        public override IEnumerable<NodeSymbolAndSemanticModel<SyntaxNode, ISymbol>> GetRemovableFieldLikeDeclarations(ISet<SyntaxKind> kinds, Accessibility maxAccessibility)
+        public override IEnumerable<NodeSymbolAndModel<SyntaxNode, ISymbol>> GetRemovableFieldLikeDeclarations(ISet<SyntaxKind> kinds, Accessibility maxAccessibility)
         {
             var fieldLikeNodes = TypeDeclarations
                 .SelectMany(typeDeclaration => SelectMatchingDeclarations(typeDeclaration, kinds)
-                    .Select(node => new NodeAndSemanticModel<BaseFieldDeclarationSyntax>(typeDeclaration.SemanticModel, (BaseFieldDeclarationSyntax)node)));
+                    .Select(node => new NodeAndModel<BaseFieldDeclarationSyntax>(typeDeclaration.Model, (BaseFieldDeclarationSyntax)node)));
 
             return fieldLikeNodes
                 .SelectMany(fieldLikeNode => fieldLikeNode.Node.Declaration.Variables
-                    .Select(variable => SelectNodeTuple(variable, fieldLikeNode.SemanticModel))
+                    .Select(variable => SelectNodeTuple(variable, fieldLikeNode.Model))
                     .Where(tuple => IsRemovable(tuple.Symbol, maxAccessibility)));
         }
 

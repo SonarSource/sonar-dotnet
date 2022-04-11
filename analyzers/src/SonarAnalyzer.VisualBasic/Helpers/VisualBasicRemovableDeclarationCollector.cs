@@ -24,7 +24,7 @@ using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.VisualBasic;
 using Microsoft.CodeAnalysis.VisualBasic.Syntax;
 using SonarAnalyzer.Common;
-using NodeSymbolAndSemanticModel = SonarAnalyzer.Common.NodeSymbolAndSemanticModel<Microsoft.CodeAnalysis.SyntaxNode, Microsoft.CodeAnalysis.ISymbol>;
+using NodeSymbolAndModel = SonarAnalyzer.Common.NodeSymbolAndModel<Microsoft.CodeAnalysis.SyntaxNode, Microsoft.CodeAnalysis.ISymbol>;
 
 namespace SonarAnalyzer.Helpers
 {
@@ -38,18 +38,18 @@ namespace SonarAnalyzer.Helpers
         public static bool IsNodeContainerTypeDeclaration(SyntaxNode node) =>
             IsNodeStructOrClassDeclaration(node) || node.IsKind(SyntaxKind.InterfaceBlock);
 
-        protected override IEnumerable<SyntaxNode> SelectMatchingDeclarations(NodeAndSemanticModel<TypeBlockSyntax> container, ISet<SyntaxKind> kinds) =>
+        protected override IEnumerable<SyntaxNode> SelectMatchingDeclarations(NodeAndModel<TypeBlockSyntax> container, ISet<SyntaxKind> kinds) =>
             container.Node.DescendantNodes(IsNodeContainerTypeDeclaration).Where(node => kinds.Contains(node.Kind()));
 
-        public override IEnumerable<NodeSymbolAndSemanticModel> GetRemovableFieldLikeDeclarations(ISet<SyntaxKind> kinds, Accessibility maxAccessibility)
+        public override IEnumerable<NodeSymbolAndModel> GetRemovableFieldLikeDeclarations(ISet<SyntaxKind> kinds, Accessibility maxAccessibility)
         {
             var fieldLikeNodes = TypeDeclarations
                 .SelectMany(typeDeclaration => SelectMatchingDeclarations(typeDeclaration, kinds)
-                    .Select(x => new NodeAndSemanticModel<FieldDeclarationSyntax>(typeDeclaration.SemanticModel, (FieldDeclarationSyntax)x)));
+                    .Select(x => new NodeAndModel<FieldDeclarationSyntax>(typeDeclaration.Model, (FieldDeclarationSyntax)x)));
 
             return fieldLikeNodes
                 .SelectMany(fieldLikeNode => fieldLikeNode.Node.Declarators.SelectMany(x => x.Names)
-                    .Select(name => SelectNodeTuple(name, fieldLikeNode.SemanticModel))
+                    .Select(name => SelectNodeTuple(name, fieldLikeNode.Model))
                     .Where(x => IsRemovable(x.Symbol, maxAccessibility)));
         }
 

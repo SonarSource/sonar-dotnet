@@ -28,8 +28,8 @@ using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.Extensions;
 using SonarAnalyzer.Helpers;
 using StyleCop.Analyzers.Lightup;
-using FieldTuple = SonarAnalyzer.Common.NodeSymbolAndSemanticModel<Microsoft.CodeAnalysis.CSharp.Syntax.VariableDeclaratorSyntax, Microsoft.CodeAnalysis.IFieldSymbol>;
-using TypeDeclarationTuple = SonarAnalyzer.Common.NodeAndSemanticModel<Microsoft.CodeAnalysis.CSharp.Syntax.TypeDeclarationSyntax>;
+using FieldTuple = SonarAnalyzer.Common.NodeSymbolAndModel<Microsoft.CodeAnalysis.CSharp.Syntax.VariableDeclaratorSyntax, Microsoft.CodeAnalysis.IFieldSymbol>;
+using TypeDeclarationTuple = SonarAnalyzer.Common.NodeAndModel<Microsoft.CodeAnalysis.CSharp.Syntax.TypeDeclarationSyntax>;
 
 namespace SonarAnalyzer.Rules.CSharp
 {
@@ -97,7 +97,7 @@ namespace SonarAnalyzer.Rules.CSharp
                         .Select(reference => reference.GetSyntax())
                         .OfType<TypeDeclarationSyntax>()
                         .Select(x => new TypeDeclarationTuple(c.Compilation.GetSemanticModel(x.SyntaxTree), x))
-                        .Where(x => x.SemanticModel != null);
+                        .Where(x => x.Model != null);
 
                     var fieldCollector = new ReadonlyFieldCollector(partialDeclarations);
 
@@ -165,7 +165,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
                 private IEnumerable<FieldTuple> GetAllFields(FieldDeclarationSyntax fieldDeclaration) =>
                     fieldDeclaration.Declaration.Variables
-                        .Select(x => new FieldTuple(partialTypeDeclaration.SemanticModel, x, partialTypeDeclaration.SemanticModel.GetDeclaredSymbol(x) as IFieldSymbol));
+                        .Select(x => new FieldTuple(partialTypeDeclaration.Model, x, partialTypeDeclaration.Model.GetDeclaredSymbol(x) as IFieldSymbol));
 
                 public void CollectFields()
                 {
@@ -255,7 +255,7 @@ namespace SonarAnalyzer.Rules.CSharp
                         return;
                     }
 
-                    var fieldSymbol = partialTypeDeclaration.SemanticModel.GetSymbolInfo(topExpression).Symbol as IFieldSymbol;
+                    var fieldSymbol = partialTypeDeclaration.Model.GetSymbolInfo(topExpression).Symbol as IFieldSymbol;
                     if (fieldSymbol?.Type == null
                         || !fieldSymbol.Type.IsValueType)
                     {
@@ -291,7 +291,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
                 private void ProcessAssignedExpression(ExpressionSyntax expression)
                 {
-                    var fieldSymbol = partialTypeDeclaration.SemanticModel.GetSymbolInfo(expression).Symbol as IFieldSymbol;
+                    var fieldSymbol = partialTypeDeclaration.Model.GetSymbolInfo(expression).Symbol as IFieldSymbol;
                     ProcessExpressionOnField(expression, fieldSymbol);
                 }
 
@@ -308,7 +308,7 @@ namespace SonarAnalyzer.Rules.CSharp
                         return;
                     }
 
-                    if (partialTypeDeclaration.SemanticModel.GetEnclosingSymbol(expression.SpanStart) is not IMethodSymbol methodSymbol)
+                    if (partialTypeDeclaration.Model.GetEnclosingSymbol(expression.SpanStart) is not IMethodSymbol methodSymbol)
                     {
                         readonlyFieldCollector.excludedFields.Add(fieldSymbol);
                         return;

@@ -108,7 +108,7 @@ namespace SonarAnalyzer.Rules.CSharp
                             return true;
                         }
 
-                        return IsSymbolFirstSetInCfg(memberSymbol, constructor.Node, constructor.SemanticModel);
+                        return IsSymbolFirstSetInCfg(memberSymbol, constructor.Node, constructor.Model);
                     }))
                 {
                     c.ReportIssue(Diagnostic.Create(Rule, initializedMembers[memberSymbol].GetLocation(), InstanceMemberMessage));
@@ -136,7 +136,7 @@ namespace SonarAnalyzer.Rules.CSharp
             {
                 // there can be only one static constructor
                 // all module initializers are executed when the type is created, so it is enough if ANY initializes the member
-                if (initializerDeclarations.Any(x => IsSymbolFirstSetInCfg(memberSymbol, x.Node, x.SemanticModel)))
+                if (initializerDeclarations.Any(x => IsSymbolFirstSetInCfg(memberSymbol, x.Node, x.Model)))
                 {
                     c.ReportIssue(Diagnostic.Create(Rule, initializedMembers[memberSymbol].GetLocation(), StaticMemberMessage));
                 }
@@ -189,13 +189,13 @@ namespace SonarAnalyzer.Rules.CSharp
             return allMembers;
         }
 
-        private static List<NodeSymbolAndSemanticModel<TSyntax, IMethodSymbol>> GetInitializerDeclarations<TSyntax>(SyntaxNodeAnalysisContext context, List<IMethodSymbol> constructorSymbols)
+        private static List<NodeSymbolAndModel<TSyntax, IMethodSymbol>> GetInitializerDeclarations<TSyntax>(SyntaxNodeAnalysisContext context, List<IMethodSymbol> constructorSymbols)
             where TSyntax : SyntaxNode =>
             constructorSymbols
-                .Select(x => new NodeSymbolAndSemanticModel<TSyntax, IMethodSymbol>(null, x.DeclaringSyntaxReferences.FirstOrDefault()?.GetSyntax() as TSyntax, x))
+                .Select(x => new NodeSymbolAndModel<TSyntax, IMethodSymbol>(null, x.DeclaringSyntaxReferences.FirstOrDefault()?.GetSyntax() as TSyntax, x))
                 .Where(x => x.Node != null)
-                .Select(x => new NodeSymbolAndSemanticModel<TSyntax, IMethodSymbol>(x.Node.EnsureCorrectSemanticModelOrDefault(context.SemanticModel), x.Node, x.Symbol))
-                .Where(x => x.SemanticModel != null)
+                .Select(x => new NodeSymbolAndModel<TSyntax, IMethodSymbol>(x.Node.EnsureCorrectSemanticModelOrDefault(context.SemanticModel), x.Node, x.Symbol))
+                .Where(x => x.Model != null)
                 .ToList();
 
         private static IEnumerable<DeclarationTuple<IPropertySymbol>> GetInitializedPropertyDeclarations(TypeDeclarationSyntax declaration,

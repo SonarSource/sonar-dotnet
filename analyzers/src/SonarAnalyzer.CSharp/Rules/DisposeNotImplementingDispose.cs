@@ -84,7 +84,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 .Where(method => MethodIsDisposeImplementation(method, disposeMethod)))
             {
                 var methodDeclarations = method.DeclaringSyntaxReferences
-                    .Select(x => new NodeAndSemanticModel<MethodDeclarationSyntax>(compilation.GetSemanticModel(x.SyntaxTree), x.GetSyntax() as MethodDeclarationSyntax))
+                    .Select(x => new NodeAndModel<MethodDeclarationSyntax>(compilation.GetSemanticModel(x.SyntaxTree), x.GetSyntax() as MethodDeclarationSyntax))
                     .Where(x => x.Node != null);
 
                 var methodDeclaration = methodDeclarations.FirstOrDefault(m => m.Node.HasBodyOrExpressionBody());
@@ -96,7 +96,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 var invocations = methodDeclaration.Node.DescendantNodes().OfType<InvocationExpressionSyntax>();
                 foreach (var invocation in invocations)
                 {
-                    CollectDisposeMethodsCalledFromDispose(invocation, methodDeclaration.SemanticModel, disposeMethodsCalledFromDispose);
+                    CollectDisposeMethodsCalledFromDispose(invocation, methodDeclaration.Model, disposeMethodsCalledFromDispose);
                 }
             }
         }
