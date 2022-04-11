@@ -31,49 +31,53 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class MetricsAnalyzerTest
     {
-        private const string Root = @"TestCases\Utilities\MetricsAnalyzer\";
+        private const string BasePath = @"Utilities\MetricsAnalyzer\";
 
         [DataTestMethod]
         public void VerifyMetrics()
         {
-            const string testRoot = Root + nameof(VerifyMetrics);
+            const string testRoot = BasePath + nameof(VerifyMetrics);
 
-            OldVerifier.VerifyNonConcurrentUtilityAnalyzer<MetricsInfo>(
-                new[] { Root + "AllMetrics.cs" },
-                new TestMetricsAnalyzer(testRoot, false),
-                @$"{testRoot}\metrics.pb",
-                TestHelper.CreateSonarProjectConfig(testRoot, ProjectType.Product),
-                messages =>
-                {
-                    messages.Should().HaveCount(1);
-                    var metrics = messages.Single();
-                    metrics.FilePath.Should().Be("AllMetrics.cs");
-                    metrics.ClassCount.Should().Be(4);
-                    metrics.CodeLine.Should().HaveCount(24);
-                    metrics.CognitiveComplexity.Should().Be(1);
-                    metrics.Complexity.Should().Be(2);
-                    metrics.ExecutableLines.Should().HaveCount(5);
-                    metrics.FunctionCount.Should().Be(1);
-                    metrics.NoSonarComment.Should().HaveCount(1);
-                    metrics.NonBlankComment.Should().HaveCount(1);
-                    metrics.StatementCount.Should().Be(5);
-                },
-                ParseOptionsHelper.CSharpLatest);
+            new VerifierBuilder()
+                .AddAnalyzer(() => new TestMetricsAnalyzer(testRoot, false))
+                .AddPaths("AllMetrics.cs")
+                .WithBasePath(BasePath)
+                .WithOptions(ParseOptionsHelper.CSharpLatest)
+                .WithSonarProjectConfigPath(TestHelper.CreateSonarProjectConfig(testRoot, ProjectType.Product))
+                .WithProtobufPath(@$"{testRoot}\metrics.pb")
+                .VerifyUtilityAnalyzer<MetricsInfo>(messages =>
+                    {
+                        messages.Should().HaveCount(1);
+                        var metrics = messages.Single();
+                        metrics.FilePath.Should().Be("AllMetrics.cs");
+                        metrics.ClassCount.Should().Be(4);
+                        metrics.CodeLine.Should().HaveCount(24);
+                        metrics.CognitiveComplexity.Should().Be(1);
+                        metrics.Complexity.Should().Be(2);
+                        metrics.ExecutableLines.Should().HaveCount(5);
+                        metrics.FunctionCount.Should().Be(1);
+                        metrics.NoSonarComment.Should().HaveCount(1);
+                        metrics.NonBlankComment.Should().HaveCount(1);
+                        metrics.StatementCount.Should().Be(5);
+                    });
         }
 
         [TestMethod]
         public void Verify_NotRunForTestProject()
         {
-            const string testRoot = Root + nameof(Verify_NotRunForTestProject);
-            OldVerifier.VerifyUtilityAnalyzerIsNotRun(
-                Root + "AllMetrics.cs",
-                new TestMetricsAnalyzer(testRoot, true),
-                @$"{testRoot}\metrics.pb",
-                ParseOptionsHelper.CSharpLatest);
+            const string testRoot = BasePath + nameof(Verify_NotRunForTestProject);
+
+            new VerifierBuilder()
+                .AddAnalyzer(() => new TestMetricsAnalyzer(testRoot, true))
+                .AddPaths("AllMetrics.cs")
+                .WithBasePath(BasePath)
+                .WithOptions(ParseOptionsHelper.CSharpLatest)
+                .WithProtobufPath(@$"{testRoot}\metrics.pb")
+                .VerifyUtilityAnalyzerProducesEmptyProtobuf();
         }
 
         // We need to set protected properties and this class exists just to enable the analyzer without bothering with additional files with parameters
-        private class TestMetricsAnalyzer : MetricsAnalyzer
+        private sealed class TestMetricsAnalyzer : MetricsAnalyzer
         {
             public TestMetricsAnalyzer(string outPath, bool isTestProject)
             {

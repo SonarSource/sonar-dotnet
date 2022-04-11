@@ -21,6 +21,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using FluentAssertions;
 using Microsoft.CodeAnalysis;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -37,9 +38,7 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class SymbolReferenceAnalyzerTest
     {
-        private const string Root = @"TestCases\Utilities\SymbolReferenceAnalyzer\";
-
-        public TestContext TestContext { get; set; } // Set automatically by MsTest
+        private const string BasePath = @"Utilities\SymbolReferenceAnalyzer\";
 
         [DataTestMethod]
         [DataRow(ProjectType.Product)]
@@ -187,7 +186,7 @@ namespace SonarAnalyzer.UnitTest.Rules
             // In TokenThreshold.cs there are 40009 tokens which is more than the current limit of 40000
             Verify("TokenThreshold.cs", ProjectType.Product, _ => { }, false);
 
-        private void Verify(string fileName, ProjectType projectType, int expectedDeclarationCount, int assertedDeclarationLine, params int[] assertedDeclarationLineReferences) =>
+        private static void Verify(string fileName, ProjectType projectType, int expectedDeclarationCount, int assertedDeclarationLine, params int[] assertedDeclarationLineReferences) =>
             Verify(fileName, projectType, references =>
                 {
                     references.Where(x => x.Declaration != null).Should().HaveCount(expectedDeclarationCount);
@@ -195,12 +194,13 @@ namespace SonarAnalyzer.UnitTest.Rules
                     declarationReferences.Select(x => x.StartLine).Should().BeEquivalentTo(assertedDeclarationLineReferences);
                 });
 
-        private void Verify(string fileName,
-                            ProjectType projectType,
-                            Action<IReadOnlyList<SymbolReferenceInfo.Types.SymbolReference>> verifyReference,
-                            bool isMessageExpected = true)
+        private static void Verify(string fileName,
+                                   ProjectType projectType,
+                                   Action<IReadOnlyList<SymbolReferenceInfo.Types.SymbolReference>> verifyReference,
+                                   bool isMessageExpected = true,
+                                   [CallerMemberName] string testName = "")
         {
-            var testRoot = Root + TestContext.TestName;
+            var testRoot = BasePath + testName;
             var language = AnalyzerLanguage.FromPath(fileName);
             UtilityAnalyzerBase analyzer = language.LanguageName switch
             {
@@ -208,27 +208,29 @@ namespace SonarAnalyzer.UnitTest.Rules
                 LanguageNames.VisualBasic => new TestSymbolReferenceAnalyzer_VB(testRoot, projectType == ProjectType.Test),
                 _ => throw new UnexpectedLanguageException(language)
             };
-            OldVerifier.VerifyNonConcurrentUtilityAnalyzer<SymbolReferenceInfo>(
-                new[] { Root + fileName },
-                analyzer,
-                @$"{testRoot}\symrefs.pb",
-                TestHelper.CreateSonarProjectConfig(testRoot, projectType),
-                messages =>
-                {
-                    messages.Should().HaveCount(isMessageExpected ? 1 : 0);
 
-                    if (isMessageExpected)
+            new VerifierBuilder()
+                .AddAnalyzer(() => analyzer)
+                .AddPaths(fileName)
+                .WithBasePath(BasePath)
+                .WithOptions(ParseOptionsHelper.Latest(language))
+                .WithSonarProjectConfigPath(TestHelper.CreateSonarProjectConfig(testRoot, projectType))
+                .WithProtobufPath(@$"{testRoot}\symrefs.pb")
+                .VerifyUtilityAnalyzer<SymbolReferenceInfo>(messages =>
                     {
-                        var info = messages.Single();
-                        info.FilePath.Should().Be(fileName);
-                        verifyReference(info.Reference);
-                    }
-                },
-                ParseOptionsHelper.Latest(language));
+                        messages.Should().HaveCount(isMessageExpected ? 1 : 0);
+
+                        if (isMessageExpected)
+                        {
+                            var info = messages.Single();
+                            info.FilePath.Should().Be(fileName);
+                            verifyReference(info.Reference);
+                        }
+                    });
         }
 
         // We need to set protected properties and this class exists just to enable the analyzer without bothering with additional files with parameters
-        private class TestSymbolReferenceAnalyzer_CS : CS.SymbolReferenceAnalyzer
+        private sealed class TestSymbolReferenceAnalyzer_CS : CS.SymbolReferenceAnalyzer
         {
             public TestSymbolReferenceAnalyzer_CS(string outPath, bool isTestProject)
             {
@@ -238,7 +240,7 @@ namespace SonarAnalyzer.UnitTest.Rules
             }
         }
 
-        private class TestSymbolReferenceAnalyzer_VB : VB.SymbolReferenceAnalyzer
+        private sealed class TestSymbolReferenceAnalyzer_VB : VB.SymbolReferenceAnalyzer
         {
             public TestSymbolReferenceAnalyzer_VB(string outPath, bool isTestProject)
             {

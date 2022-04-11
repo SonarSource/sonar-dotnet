@@ -22,11 +22,9 @@ using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Linq;
-using Google.Protobuf;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.Helpers;
-using SonarAnalyzer.Rules;
 
 namespace SonarAnalyzer.UnitTest.TestFramework
 {
@@ -236,33 +234,6 @@ namespace SonarAnalyzer.UnitTest.TestFramework
                 .AddPaths(RemoveTestCasesPrefix(paths))
                 .WithOptions(options.IsDefault ? ImmutableArray<ParseOptions>.Empty : options)
                 .Verify();
-
-        public static void VerifyNonConcurrentUtilityAnalyzer<TMessage>(IEnumerable<string> paths,
-                                                                        UtilityAnalyzerBase diagnosticAnalyzer,
-                                                                        string protobufPath,
-                                                                        string sonarProjectConfigPath,
-                                                                        Action<IReadOnlyList<TMessage>> verifyProtobuf,
-                                                                        ImmutableArray<ParseOptions> options = default)
-            where TMessage : IMessage<TMessage>, new() =>
-            new VerifierBuilder()
-                .AddAnalyzer(() => diagnosticAnalyzer)
-                .AddPaths(RemoveTestCasesPrefix(paths))
-                .WithOptions(options.IsDefault ? ImmutableArray<ParseOptions>.Empty : options)
-                .WithSonarProjectConfigPath(sonarProjectConfigPath)
-                .WithProtobufPath(protobufPath)
-                .VerifyUtilityAnalyzer(verifyProtobuf);
-
-        [Obsolete("Use VerifierBuilder instead.")]
-        public static void VerifyUtilityAnalyzerIsNotRun(string path,
-                                                         UtilityAnalyzerBase diagnosticAnalyzer,
-                                                         string protobufPath,
-                                                         ImmutableArray<ParseOptions> options = default) =>
-            new VerifierBuilder()
-                .AddAnalyzer(() => diagnosticAnalyzer)
-                .AddPaths(RemoveTestCasesPrefix(path))
-                .WithOptions(options.IsDefault ? ImmutableArray<ParseOptions>.Empty : options)
-                .WithProtobufPath(protobufPath)
-                .VerifyUtilityAnalyzerProducesEmptyProtobuf();
 
         [Obsolete("Use VerifierBuilder instead.")]
         public static void VerifyNoIssueReportedInTest(string path,

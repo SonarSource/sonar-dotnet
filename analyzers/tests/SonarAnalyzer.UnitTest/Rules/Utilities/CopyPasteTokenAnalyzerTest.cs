@@ -21,6 +21,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using FluentAssertions;
 using Microsoft.CodeAnalysis;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -37,9 +38,8 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class CopyPasteTokenAnalyzerTest
     {
-        private const string Root = @"TestCases\Utilities\CopyPasteTokenAnalyzer\";
-
-        public TestContext TestContext { get; set; } // Set automatically by MsTest
+        private const string BasePath = @"Utilities\CopyPasteTokenAnalyzer\";
+        private readonly VerifierBuilder verifierBuilder = new VerifierBuilder().WithBasePath(BasePath);
 
         [TestMethod]
         public void Verify_Unique_CS() =>
@@ -72,22 +72,23 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         public void Verify_Duplicated_CS_GlobalUsings()
         {
-            var testRoot = Root + TestContext.TestName;
-            var fileName = "Duplicated.CSharp10.cs";
-            OldVerifier.VerifyNonConcurrentUtilityAnalyzer<CopyPasteTokenInfo>(
-                new[] { Root + fileName },
-                new TestCopyPasteTokenAnalyzer_CS(testRoot, false),
-                @$"{testRoot}\token-cpd.pb",
-                TestHelper.CreateSonarProjectConfig(testRoot, ProjectType.Product),
-                messages =>
-                {
-                    messages.Should().HaveCount(1);
-                    var info = messages.Single();
-                    info.FilePath.Should().Be(fileName);
-                    info.TokenInfo.Should().HaveCount(39);
-                    info.TokenInfo.Where(x => x.TokenValue == "$num").Should().HaveCount(2);
-                },
-                options: ParseOptionsHelper.FromCSharp10);
+            const string testRoot = BasePath + nameof(Verify_NotRunForTestProject_CS);
+            const string fileName = "Duplicated.CSharp10.cs";
+
+            verifierBuilder
+                .AddAnalyzer(() => new TestCopyPasteTokenAnalyzer_CS(testRoot, false))
+                .AddPaths(fileName)
+                .WithOptions(ParseOptionsHelper.FromCSharp10)
+                .WithSonarProjectConfigPath(TestHelper.CreateSonarProjectConfig(testRoot, ProjectType.Product))
+                .WithProtobufPath(@$"{testRoot}\token-cpd.pb")
+                .VerifyUtilityAnalyzer<CopyPasteTokenInfo>(messages =>
+                    {
+                        messages.Should().HaveCount(1);
+                        var info = messages.Single();
+                        info.FilePath.Should().Be(fileName);
+                        info.TokenInfo.Should().HaveCount(39);
+                        info.TokenInfo.Where(x => x.TokenValue == "$num").Should().HaveCount(2);
+                    });
         }
 
         [TestMethod]
@@ -101,15 +102,17 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         public void Verify_NotRunForTestProject_CS()
         {
-            var testRoot = Root + TestContext.TestName;
-            OldVerifier.VerifyUtilityAnalyzerIsNotRun(Root + "DuplicatedDifferentLiterals.cs",
-                                                      new TestCopyPasteTokenAnalyzer_CS(testRoot, true),
-                                                      @$"{testRoot}\token-cpd.pb");
+            const string testRoot = BasePath + nameof(Verify_NotRunForTestProject_CS);
+            verifierBuilder
+                .AddAnalyzer(() => new TestCopyPasteTokenAnalyzer_CS(testRoot, true))
+                .AddPaths("DuplicatedDifferentLiterals.cs")
+                .WithProtobufPath(@$"{testRoot}\token-cpd.pb")
+                .VerifyUtilityAnalyzerProducesEmptyProtobuf();
         }
 
-        private void Verify(string fileName, Action<IReadOnlyList<CopyPasteTokenInfo.Types.TokenInfo>> verifyTokenInfo)
+        private void Verify(string fileName, Action<IReadOnlyList<CopyPasteTokenInfo.Types.TokenInfo>> verifyTokenInfo, [CallerMemberName] string testName = "")
         {
-            var testRoot = Root + TestContext.TestName;
+            var testRoot = BasePath + testName;
             var language = AnalyzerLanguage.FromPath(fileName);
             UtilityAnalyzerBase analyzer = language.LanguageName switch
             {
@@ -117,23 +120,24 @@ namespace SonarAnalyzer.UnitTest.Rules
                 LanguageNames.VisualBasic => new TestCopyPasteTokenAnalyzer_VB(testRoot, false),
                 _ => throw new UnexpectedLanguageException(language)
             };
-            OldVerifier.VerifyNonConcurrentUtilityAnalyzer<CopyPasteTokenInfo>(
-                new[] { Root + fileName },
-                analyzer,
-                @$"{testRoot}\token-cpd.pb",
-                TestHelper.CreateSonarProjectConfig(testRoot, ProjectType.Product),
-                messages =>
-                {
-                    messages.Should().HaveCount(1);
-                    var info = messages.Single();
-                    info.FilePath.Should().Be(fileName);
-                    verifyTokenInfo(info.TokenInfo);
-                },
-                ParseOptionsHelper.Latest(language));
+
+            verifierBuilder
+                .AddAnalyzer(() => analyzer)
+                .AddPaths(fileName)
+                .WithOptions(ParseOptionsHelper.Latest(language))
+                .WithSonarProjectConfigPath(TestHelper.CreateSonarProjectConfig(testRoot, ProjectType.Product))
+                .WithProtobufPath(@$"{testRoot}\token-cpd.pb")
+                .VerifyUtilityAnalyzer<CopyPasteTokenInfo>(messages =>
+                    {
+                        messages.Should().HaveCount(1);
+                        var info = messages.Single();
+                        info.FilePath.Should().Be(fileName);
+                        verifyTokenInfo(info.TokenInfo);
+                    });
         }
 
         // We need to set protected properties and this class exists just to enable the analyzer without bothering with additional files with parameters
-        private class TestCopyPasteTokenAnalyzer_CS : CS.CopyPasteTokenAnalyzer
+        private sealed class TestCopyPasteTokenAnalyzer_CS : CS.CopyPasteTokenAnalyzer
         {
             public TestCopyPasteTokenAnalyzer_CS(string outPath, bool isTestProject)
             {
@@ -143,7 +147,7 @@ namespace SonarAnalyzer.UnitTest.Rules
             }
         }
 
-        private class TestCopyPasteTokenAnalyzer_VB : VB.CopyPasteTokenAnalyzer
+        private sealed class TestCopyPasteTokenAnalyzer_VB : VB.CopyPasteTokenAnalyzer
         {
             public TestCopyPasteTokenAnalyzer_VB(string outPath, bool isTestProject)
             {
