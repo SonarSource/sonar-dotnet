@@ -37,7 +37,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
         protected override SyntaxNode GetBindableParent(SyntaxToken token) =>
             token.GetBindableParent();
 
-        protected override IEnumerable<ReferenceInfo> CreateDeclarationReferenceInfo(SyntaxNode node, SemanticModel model) =>
+        protected override ReferenceInfo[] CreateDeclarationReferenceInfo(SyntaxNode node, SemanticModel model) =>
             node switch
             {
                 TypeStatementSyntax typeStatement => new[] { CreateDeclarationReferenceInfo(node, typeStatement.Identifier, model) },
@@ -52,21 +52,21 @@ namespace SonarAnalyzer.Rules.VisualBasic
                 _ => null
             };
 
-        protected override IEnumerable<SyntaxNode> GetDeclarations(SyntaxNode node)
+        protected override IList<SyntaxNode> GetDeclarations(SyntaxNode node)
         {
             var walker = new DeclarationsFinder();
             walker.SafeVisit(node);
             return walker.Declarations;
         }
 
-        private static IEnumerable<ReferenceInfo> CreateDeclarationReferenceInfo(LocalDeclarationStatementSyntax declaration, SemanticModel model) =>
-            declaration.Declarators.SelectMany(x => CreateDeclarationReferenceInfo(x, model));
+        private static ReferenceInfo[] CreateDeclarationReferenceInfo(LocalDeclarationStatementSyntax declaration, SemanticModel model) =>
+            declaration.Declarators.SelectMany(x => CreateDeclarationReferenceInfo(x, model)).ToArray();
 
-        private static IEnumerable<ReferenceInfo> CreateDeclarationReferenceInfo(FieldDeclarationSyntax fieldDeclaration, SemanticModel model) =>
-            fieldDeclaration.Declarators.SelectMany(x => CreateDeclarationReferenceInfo(x, model));
+        private static ReferenceInfo[] CreateDeclarationReferenceInfo(FieldDeclarationSyntax fieldDeclaration, SemanticModel model) =>
+            fieldDeclaration.Declarators.SelectMany(x => CreateDeclarationReferenceInfo(x, model)).ToArray();
 
-        private static IEnumerable<ReferenceInfo> CreateDeclarationReferenceInfo(VariableDeclaratorSyntax variableDeclarator, SemanticModel model) =>
-            variableDeclarator.Names.Select(x => CreateDeclarationReferenceInfo(x, x.Identifier, model));
+        private static ReferenceInfo[] CreateDeclarationReferenceInfo(VariableDeclaratorSyntax variableDeclarator, SemanticModel model) =>
+            variableDeclarator.Names.Select(x => CreateDeclarationReferenceInfo(x, x.Identifier, model)).ToArray();
 
         private static ReferenceInfo CreateDeclarationReferenceInfo(SyntaxNode node, SyntaxToken identifier, SemanticModel model) =>
             new(node, identifier, model.GetDeclaredSymbol(node), true);

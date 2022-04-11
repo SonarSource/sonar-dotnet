@@ -38,7 +38,7 @@ namespace SonarAnalyzer.Rules.CSharp
         protected override SyntaxNode GetBindableParent(SyntaxToken token) =>
             token.GetBindableParent();
 
-        protected override IEnumerable<ReferenceInfo> CreateDeclarationReferenceInfo(SyntaxNode node, SemanticModel model) =>
+        protected override ReferenceInfo[] CreateDeclarationReferenceInfo(SyntaxNode node, SemanticModel model) =>
             node switch
             {
                 BaseTypeDeclarationSyntax typeDeclaration => new[] { CreateDeclarationReferenceInfo(node, typeDeclaration.Identifier, model) },
@@ -55,15 +55,15 @@ namespace SonarAnalyzer.Rules.CSharp
                 _ => null
             };
 
-        protected override IEnumerable<SyntaxNode> GetDeclarations(SyntaxNode node)
+        protected override IList<SyntaxNode> GetDeclarations(SyntaxNode node)
         {
             var walker = new DeclarationsFinder();
             walker.SafeVisit(node);
             return walker.Declarations;
         }
 
-        private static IEnumerable<ReferenceInfo> CreateDeclarationReferenceInfo(VariableDeclarationSyntax declaration, SemanticModel model) =>
-            declaration.Variables.Select(x => CreateDeclarationReferenceInfo(x, x.Identifier, model));
+        private static ReferenceInfo[] CreateDeclarationReferenceInfo(VariableDeclarationSyntax declaration, SemanticModel model) =>
+            declaration.Variables.Select(x => CreateDeclarationReferenceInfo(x, x.Identifier, model)).ToArray();
 
         private static ReferenceInfo CreateDeclarationReferenceInfo(SyntaxNode node, SyntaxToken identifier, SemanticModel model) =>
             new(node, identifier, model.GetDeclaredSymbol(node), true);

@@ -38,9 +38,9 @@ namespace SonarAnalyzer.Rules
 
         protected abstract SyntaxNode GetBindableParent(SyntaxToken token);
 
-        protected abstract IEnumerable<ReferenceInfo> CreateDeclarationReferenceInfo(SyntaxNode node, SemanticModel model);
+        protected abstract ReferenceInfo[] CreateDeclarationReferenceInfo(SyntaxNode node, SemanticModel model);
 
-        protected abstract IEnumerable<SyntaxNode> GetDeclarations(SyntaxNode node);
+        protected abstract IList<SyntaxNode> GetDeclarations(SyntaxNode node);
 
         protected SymbolReferenceAnalyzerBase() : base(DiagnosticId, Title) { }
 
@@ -67,24 +67,27 @@ namespace SonarAnalyzer.Rules
         {
             var references = new HashSet<ReferenceInfo>();
             var knownIdentifiers = new HashSet<string>(Language.NameComparer);
+            var declarations = GetDeclarations(root);
 
-            foreach (var declaration in GetDeclarations(root))
+            for (var i = 0; i < declarations.Count; i++)
             {
-                var declarationReferences = CreateDeclarationReferenceInfo(declaration, model);
+                var declarationReferences = CreateDeclarationReferenceInfo(declarations[i], model);
                 if (declarationReferences == null)
                 {
                     continue;
                 }
 
-                foreach (var reference in declarationReferences)
+                for (var j = 0; j < declarationReferences.Length; j++)
                 {
-                    references.Add(reference);
-                    knownIdentifiers.Add(reference.Identifier.ValueText);
+                    references.Add(declarationReferences[j]);
+                    knownIdentifiers.Add(declarationReferences[j].Identifier.ValueText);
                 }
             }
 
-            foreach (var identifier in root.DescendantTokens().Where(x => Language.Syntax.IsKind(x, Language.SyntaxKind.IdentifierToken)))
+            var identifiers = root.DescendantTokens().Where(x => Language.Syntax.IsKind(x, Language.SyntaxKind.IdentifierToken)).ToArray();
+            for (var i = 0; i < identifiers.Length; i++)
             {
+                var identifier = identifiers[i];
                 if (knownIdentifiers.Contains(identifier.Text)
                     && GetBindableParent(identifier) is { } parent
                     && references.All(x => x.Node != parent)
@@ -113,9 +116,13 @@ namespace SonarAnalyzer.Rules
             }
 
             var symbolReference = new SymbolReferenceInfo.Types.SymbolReference { Declaration = GetTextRange(Location.Create(tree, declarationSpan.Value).GetLineSpan()) };
-            foreach (var reference in references.Where(x => !x.IsDeclaration).Select(x => x.Identifier))
+            for (var i = 0; i < references.Length; i++)
             {
-                symbolReference.Reference.Add(GetTextRange(Location.Create(tree, reference.Span).GetLineSpan()));
+                var reference = references[i];
+                if (!reference.IsDeclaration)
+                {
+                    symbolReference.Reference.Add(GetTextRange(Location.Create(tree, reference.Identifier.Span).GetLineSpan()));
+                }
             }
             return symbolReference;
         }
