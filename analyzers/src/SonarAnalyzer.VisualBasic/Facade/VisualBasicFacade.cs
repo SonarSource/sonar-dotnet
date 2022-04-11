@@ -29,15 +29,16 @@ namespace SonarAnalyzer.Helpers
 {
     internal sealed class VisualBasicFacade : ILanguageFacade<SyntaxKind>
     {
-        private static readonly Lazy<VisualBasicFacade> Singleton = new Lazy<VisualBasicFacade>(() => new VisualBasicFacade());
-        private static readonly Lazy<AssignmentFinder> AssignmentFinderLazy = new Lazy<AssignmentFinder>(() => new VisualBasicAssignmentFinder());
-        private static readonly Lazy<IExpressionNumericConverter> ExpressionNumericConverterLazy = new Lazy<IExpressionNumericConverter>(() => new VisualBasicExpressionNumericConverter());
-        private static readonly Lazy<SyntaxFacade<SyntaxKind>> SyntaxLazy = new Lazy<SyntaxFacade<SyntaxKind>>(() => new VisualBasicSyntaxFacade());
-        private static readonly Lazy<ISyntaxKindFacade<SyntaxKind>> SyntaxKindLazy = new Lazy<ISyntaxKindFacade<SyntaxKind>>(() => new VisualBasicSyntaxKindFacade());
-        private static readonly Lazy<ITrackerFacade<SyntaxKind>> TrackerLazy = new Lazy<ITrackerFacade<SyntaxKind>>(() => new VisualBasicTrackerFacade());
+        private static readonly Lazy<VisualBasicFacade> Singleton = new(() => new VisualBasicFacade());
+        private static readonly Lazy<AssignmentFinder> AssignmentFinderLazy = new(() => new VisualBasicAssignmentFinder());
+        private static readonly Lazy<IExpressionNumericConverter> ExpressionNumericConverterLazy = new(() => new VisualBasicExpressionNumericConverter());
+        private static readonly Lazy<SyntaxFacade<SyntaxKind>> SyntaxLazy = new(() => new VisualBasicSyntaxFacade());
+        private static readonly Lazy<ISyntaxKindFacade<SyntaxKind>> SyntaxKindLazy = new(() => new VisualBasicSyntaxKindFacade());
+        private static readonly Lazy<ITrackerFacade<SyntaxKind>> TrackerLazy = new(() => new VisualBasicTrackerFacade());
 
         public AssignmentFinder AssignmentFinder => AssignmentFinderLazy.Value;
         public StringComparison NameComparison => StringComparison.OrdinalIgnoreCase;
+        public StringComparer StringComparer => StringComparer.OrdinalIgnoreCase;
         public GeneratedCodeRecognizer GeneratedCodeRecognizer => VisualBasicGeneratedCodeRecognizer.Instance;
         public IExpressionNumericConverter ExpressionNumericConverter => ExpressionNumericConverterLazy.Value;
         public SyntaxFacade<SyntaxKind> Syntax => SyntaxLazy.Value;

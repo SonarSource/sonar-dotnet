@@ -29,6 +29,7 @@ namespace SonarAnalyzer.Helpers
     {
         AssignmentFinder AssignmentFinder { get; }
         StringComparison NameComparison { get; }
+        StringComparer StringComparer { get; }
         GeneratedCodeRecognizer GeneratedCodeRecognizer { get; }
         IExpressionNumericConverter ExpressionNumericConverter { get; }
         ResourceManager RspecResources { get; }

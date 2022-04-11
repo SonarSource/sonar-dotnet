@@ -42,8 +42,6 @@ namespace SonarAnalyzer.Rules
 
         protected abstract IEnumerable<SyntaxNode> GetDeclarations(SyntaxNode node);
 
-        protected abstract StringComparer IdentifierComparer { get; }
-
         protected SymbolReferenceAnalyzerBase() : base(DiagnosticId, Title) { }
 
         protected sealed override SymbolReferenceInfo CreateMessage(SyntaxTree syntaxTree, SemanticModel semanticModel)
@@ -68,7 +66,7 @@ namespace SonarAnalyzer.Rules
         private IEnumerable<ReferenceInfo> GetReferences(SyntaxNode root, SemanticModel model)
         {
             var references = new HashSet<ReferenceInfo>();
-            var knownIdentifiers = new HashSet<string>(IdentifierComparer);
+            var knownIdentifiers = new HashSet<string>(Language.StringComparer);
 
             foreach (var declaration in GetDeclarations(root))
             {
