@@ -43,16 +43,17 @@ namespace SonarAnalyzer.Rules.CSharp
 
         protected override bool ShouldReportOnMethodCall(InvocationExpressionSyntax invocation, SemanticModel semanticModel, MemberDescriptor memberDescriptor)
         {
-            var methodDeclaration = invocation.FirstAncestorOrSelf<MethodDeclarationSyntax>();
-            if (methodDeclaration == null)
+            if (invocation.FirstAncestorOrSelf<MethodDeclarationSyntax>() is not { } methodDeclaration
+                || (methodDeclaration.Identifier.ValueText != "Dispose"
+                    && methodDeclaration.Identifier.ValueText != "DisposeAsync"))
             {
                 // We want to report on all calls not made from a method
                 return true;
             }
 
-            var methodSymbol = semanticModel.GetDeclaredSymbol(methodDeclaration);
-            return !methodSymbol.IsIDisposableDispose()
-                && !methodSymbol.IsIAsyncDisposableDisposeAsync();
+            return semanticModel.GetDeclaredSymbol(methodDeclaration) is var methodSymbol
+                   && !methodSymbol.IsIDisposableDispose()
+                   && !methodSymbol.IsIAsyncDisposableDisposeAsync();
         }
     }
 }

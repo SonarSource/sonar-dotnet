@@ -18,7 +18,6 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using SonarAnalyzer.Helpers;
@@ -28,9 +27,6 @@ namespace SonarAnalyzer.Rules.CSharp
     public abstract class DoNotCallMethodsCSharpBase : DoNotCallMethodsBase<SyntaxKind, InvocationExpressionSyntax>
     {
         protected override ILanguageFacade<SyntaxKind> Language => CSharpFacade.Instance;
-
-        protected sealed override SyntaxToken? GetMethodCallIdentifier(InvocationExpressionSyntax invocation) =>
-            invocation.GetMethodCallIdentifier();
 
         protected DoNotCallMethodsCSharpBase(string diagnosticId) : base(diagnosticId) { }
     }

@@ -30,8 +30,5 @@ namespace SonarAnalyzer.Rules.CSharp
     public sealed class ThreadResumeOrSuspendShouldNotBeCalled : ThreadResumeOrSuspendShouldNotBeCalledBase<SyntaxKind, InvocationExpressionSyntax>
     {
         protected override ILanguageFacade<SyntaxKind> Language => CSharpFacade.Instance;
-
-        protected override SyntaxToken? GetMethodCallIdentifier(InvocationExpressionSyntax invocation) =>
-            invocation.GetMethodCallIdentifier();
     }
 }

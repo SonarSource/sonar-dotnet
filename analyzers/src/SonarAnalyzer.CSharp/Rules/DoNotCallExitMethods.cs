@@ -48,6 +48,7 @@ namespace SonarAnalyzer.Rules.CSharp
             !invocationSyntax
                 .Ancestors()
                 .OfType<BaseMethodDeclarationSyntax>()
+                .Where(x => x.GetIdentifierOrDefault()?.ValueText == "Main")
                 .Select(m => semanticModel.GetDeclaredSymbol(m))
                 .Select(s => s.IsMainMethod())
                 .FirstOrDefault();
