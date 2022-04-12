@@ -28,25 +28,34 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class DoNotCallAssemblyLoadInvalidMethodsTest
     {
+        private readonly VerifierBuilder builder = new VerifierBuilder<DoNotCallAssemblyLoadInvalidMethods>();
+
         [TestMethod]
         public void DoNotCallAssemblyLoadInvalidMethods() =>
-            OldVerifier.VerifyAnalyzer(@"TestCases\DoNotCallAssemblyLoadInvalidMethods.cs",
-                                    new DoNotCallAssemblyLoadInvalidMethods(),
-                                    MetadataReferenceFacade.SystemSecurityPermissions);
+            builder.AddPaths("DoNotCallAssemblyLoadInvalidMethods.cs")
+                .AddReferences(MetadataReferenceFacade.SystemSecurityPermissions)
+                .Verify();
 
 #if NET
+
         [TestMethod]
         public void DoNotCallAssemblyLoadInvalidMethods_CSharp9() =>
-            OldVerifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\DoNotCallAssemblyLoadInvalidMethods.CSharp9.cs",
-                                    new DoNotCallAssemblyLoadInvalidMethods(),
-                                    MetadataReferenceFacade.SystemSecurityPermissions);
+            builder.AddPaths("DoNotCallAssemblyLoadInvalidMethods.CSharp9.cs")
+                .WithOptions(ParseOptionsHelper.FromCSharp9)
+                .WithTopLevelStatements()
+                .AddReferences(MetadataReferenceFacade.SystemSecurityPermissions)
+                .Verify();
+
 #endif
 
 #if NETFRAMEWORK // The overloads with Evidence are obsolete on .Net Framework 4.8 and not available on .Net Core
+
         [TestMethod]
         public void DoNotCallAssemblyLoadInvalidMethods_EvidenceParameter() =>
-            OldVerifier.VerifyAnalyzer(@"TestCases\DoNotCallAssemblyLoadInvalidMethods.Evidence.cs",
-                                    new DoNotCallAssemblyLoadInvalidMethods());
+            builder.AddPaths("DoNotCallAssemblyLoadInvalidMethods.Evidence.cs")
+                .Verify();
+
 #endif
+
     }
 }

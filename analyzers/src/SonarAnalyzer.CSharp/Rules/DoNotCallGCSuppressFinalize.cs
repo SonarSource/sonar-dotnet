@@ -19,7 +19,6 @@
  */
 
 using System.Collections.Generic;
-using System.Collections.Immutable;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
@@ -32,17 +31,15 @@ namespace SonarAnalyzer.Rules.CSharp
     public sealed class DoNotCallGCSuppressFinalize : DoNotCallMethodsCSharpBase
     {
         private const string DiagnosticId = "S3971";
-        private const string MessageFormat = "Do not call 'GC.SuppressFinalize'.";
 
-        private static readonly DiagnosticDescriptor Rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
+        protected override string MessageFormat => "Do not call 'GC.SuppressFinalize'.";
 
-        private static readonly IEnumerable<MemberDescriptor> CheckedMethodList = new List<MemberDescriptor>
+        protected override IEnumerable<MemberDescriptor> CheckedMethods { get; } = new List<MemberDescriptor>
         {
-            new MemberDescriptor(KnownType.System_GC, "SuppressFinalize")
+            new(KnownType.System_GC, "SuppressFinalize")
         };
 
-        internal override IEnumerable<MemberDescriptor> CheckedMethods => CheckedMethodList;
+        public DoNotCallGCSuppressFinalize() : base(DiagnosticId) { }
 
         protected override bool ShouldReportOnMethodCall(InvocationExpressionSyntax invocation, SemanticModel semanticModel, MemberDescriptor memberDescriptor)
         {

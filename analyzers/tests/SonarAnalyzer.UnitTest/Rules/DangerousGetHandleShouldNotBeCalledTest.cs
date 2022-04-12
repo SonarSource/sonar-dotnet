@@ -29,22 +29,30 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class DangerousGetHandleShouldNotBeCalledTest
     {
+        private readonly VerifierBuilder builderCS = new VerifierBuilder<CS.DangerousGetHandleShouldNotBeCalled>();
+        private readonly VerifierBuilder builderVB = new VerifierBuilder<VB.DangerousGetHandleShouldNotBeCalled>();
+
         [TestMethod]
         public void DangerousGetHandleShouldNotBeCalled_CS() =>
-            OldVerifier.VerifyAnalyzer(@"TestCases\DangerousGetHandleShouldNotBeCalled.cs",
-                new CS.DangerousGetHandleShouldNotBeCalled(),
-                MetadataReferenceFacade.MicrosoftWin32Registry);
+            builderCS.AddPaths("DangerousGetHandleShouldNotBeCalled.cs")
+                .AddReferences(MetadataReferenceFacade.MicrosoftWin32Registry)
+                .Verify();
+
 #if NET
+
         [TestMethod]
         public void DangerousGetHandleShouldNotBeCalled_CS_CSharp9() =>
-            OldVerifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\DangerousGetHandleShouldNotBeCalled.CSharp9.cs",
-                new CS.DangerousGetHandleShouldNotBeCalled(),
-                MetadataReferenceFacade.MicrosoftWin32Registry);
+            builderCS.AddPaths("DangerousGetHandleShouldNotBeCalled.CSharp9.cs")
+                .AddReferences(MetadataReferenceFacade.MicrosoftWin32Registry)
+                .WithOptions(ParseOptionsHelper.FromCSharp9)
+                .WithTopLevelStatements()
+                .Verify();
+
 #endif
 
         [TestMethod]
         public void DangerousGetHandleShouldNotBeCalled_VB() =>
-            OldVerifier.VerifyAnalyzer(@"TestCases\DangerousGetHandleShouldNotBeCalled.vb",
-                new VB.DangerousGetHandleShouldNotBeCalled());
+            builderVB.AddPaths("DangerousGetHandleShouldNotBeCalled.vb")
+                .Verify();
     }
 }

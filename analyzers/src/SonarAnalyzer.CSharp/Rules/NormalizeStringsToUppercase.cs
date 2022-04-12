@@ -19,7 +19,6 @@
  */
 
 using System.Collections.Generic;
-using System.Collections.Immutable;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
@@ -30,26 +29,21 @@ namespace SonarAnalyzer.Rules.CSharp
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
     public sealed class NormalizeStringsToUppercase : DoNotCallMethodsCSharpBase
     {
-        internal const string DiagnosticId = "S4040";
-        private const string MessageFormat = "Change this normalization to 'ToUpperInvariant()'.";
+        private const string DiagnosticId = "S4040";
 
-        private static readonly DiagnosticDescriptor rule =
-            DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
+        protected override string MessageFormat => "Change this normalization to 'ToUpperInvariant()'.";
 
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(rule);
-
-        private static readonly List<MemberDescriptor> checkedMethods = new List<MemberDescriptor>
+        protected override IEnumerable<MemberDescriptor> CheckedMethods { get; } = new List<MemberDescriptor>
         {
-            new MemberDescriptor(KnownType.System_Char, "ToLower"),
-            new MemberDescriptor(KnownType.System_String, "ToLower"),
-            new MemberDescriptor(KnownType.System_Char, "ToLowerInvariant"),
-            new MemberDescriptor(KnownType.System_String, "ToLowerInvariant"),
+            new(KnownType.System_Char, "ToLower"),
+            new(KnownType.System_String, "ToLower"),
+            new(KnownType.System_Char, "ToLowerInvariant"),
+            new(KnownType.System_String, "ToLowerInvariant"),
         };
 
-        internal override IEnumerable<MemberDescriptor> CheckedMethods => checkedMethods;
+        public NormalizeStringsToUppercase() : base(DiagnosticId) { }
 
-        protected override bool ShouldReportOnMethodCall(InvocationExpressionSyntax invocation,
-            SemanticModel semanticModel, MemberDescriptor memberDescriptor)
+        protected override bool ShouldReportOnMethodCall(InvocationExpressionSyntax invocation, SemanticModel semanticModel, MemberDescriptor memberDescriptor)
         {
             var identifier = GetMethodCallIdentifier(invocation).Value.ValueText; // never null when we get here
             if (identifier == "ToLowerInvariant")
@@ -60,9 +54,9 @@ namespace SonarAnalyzer.Rules.CSharp
             // ToLower and ToLowerInvariant are extension methods for string but not for char
             var isExtensionMethod = memberDescriptor.ContainingType == KnownType.System_String;
 
-            return invocation.ArgumentList != null &&
-                invocation.ArgumentList.Arguments.Count == (isExtensionMethod ? 1 : 2) &&
-                invocation.ArgumentList.Arguments[isExtensionMethod ? 0 : 1].Expression.ToString() == "CultureInfo.InvariantCulture";
+            return invocation.ArgumentList != null
+                && invocation.ArgumentList.Arguments.Count == (isExtensionMethod ? 1 : 2)
+                && invocation.ArgumentList.Arguments[isExtensionMethod ? 0 : 1].Expression.ToString() == "CultureInfo.InvariantCulture";
         }
     }
 }

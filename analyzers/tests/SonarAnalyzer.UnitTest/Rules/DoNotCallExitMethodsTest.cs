@@ -28,16 +28,24 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class DoNotCallExitMethodsTest
     {
+        private readonly VerifierBuilder builder = new VerifierBuilder<DoNotCallExitMethods>();
+
         [TestMethod]
         public void DoNotCallExitMethods() =>
-            OldVerifier.VerifyAnalyzer(@"TestCases\DoNotCallExitMethods.cs",
-                new DoNotCallExitMethods(),
-                MetadataReferenceFacade.SystemWindowsForms);
+            builder.AddPaths("DoNotCallExitMethods.cs")
+                .AddReferences(MetadataReferenceFacade.SystemWindowsForms)
+                .Verify();
 
 #if NET
+
         [TestMethod]
         public void DoNotCallExitMethods_CSharp9() =>
-            OldVerifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\DoNotCallExitMethods.CSharp9.cs", new DoNotCallExitMethods());
+            builder.AddPaths("DoNotCallExitMethods.CSharp9.cs")
+                .WithOptions(ParseOptionsHelper.FromCSharp9)
+                .WithTopLevelStatements()
+                .Verify();
+
 #endif
+
     }
 }

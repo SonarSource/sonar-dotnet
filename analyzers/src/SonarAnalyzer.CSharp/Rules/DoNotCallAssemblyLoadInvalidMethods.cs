@@ -19,7 +19,6 @@
  */
 
 using System.Collections.Generic;
-using System.Collections.Immutable;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.Helpers;
@@ -29,19 +28,17 @@ namespace SonarAnalyzer.Rules.CSharp
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
     public sealed class DoNotCallAssemblyLoadInvalidMethods : DoNotCallMethodsCSharpBase
     {
-        internal const string DiagnosticId = "S3885";
-        private const string MessageFormat = "Replace this call to '{0}' with 'Assembly.Load'.";
+        private const string DiagnosticId = "S3885";
 
-        private static readonly DiagnosticDescriptor rule =
-            DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(rule);
+        protected override string MessageFormat => "Replace this call to '{0}' with 'Assembly.Load'.";
 
-        private static readonly IEnumerable<MemberDescriptor> checkedMethods = new List<MemberDescriptor>
+        protected override IEnumerable<MemberDescriptor> CheckedMethods { get; } = new List<MemberDescriptor>
         {
-            new MemberDescriptor(KnownType.System_Reflection_Assembly, "LoadFrom"),
-            new MemberDescriptor(KnownType.System_Reflection_Assembly, "LoadFile"),
-            new MemberDescriptor(KnownType.System_Reflection_Assembly, "LoadWithPartialName")
+            new(KnownType.System_Reflection_Assembly, "LoadFrom"),
+            new(KnownType.System_Reflection_Assembly, "LoadFile"),
+            new(KnownType.System_Reflection_Assembly, "LoadWithPartialName")
         };
-        internal override IEnumerable<MemberDescriptor> CheckedMethods => checkedMethods;
+
+        public DoNotCallAssemblyLoadInvalidMethods() : base(DiagnosticId) { }
     }
 }

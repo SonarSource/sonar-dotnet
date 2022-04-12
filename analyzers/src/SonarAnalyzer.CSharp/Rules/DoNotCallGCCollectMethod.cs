@@ -19,7 +19,6 @@
  */
 
 using System.Collections.Generic;
-using System.Collections.Immutable;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.Helpers;
@@ -29,19 +28,15 @@ namespace SonarAnalyzer.Rules.CSharp
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
     public sealed class DoNotCallGCCollectMethod : DoNotCallMethodsCSharpBase
     {
-        internal const string DiagnosticId = "S1215";
-        private const string MessageFormat = "Refactor the code to remove this use of '{0}'.";
+        private const string DiagnosticId = "S1215";
 
-        private static readonly DiagnosticDescriptor rule =
-            DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
+        protected override string MessageFormat => "Refactor the code to remove this use of '{0}'.";
 
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(rule);
-
-        private static readonly IEnumerable<MemberDescriptor> checkedMethods = new List<MemberDescriptor>
+        protected override IEnumerable<MemberDescriptor> CheckedMethods { get; } = new List<MemberDescriptor>
         {
-            new MemberDescriptor(KnownType.System_GC, "Collect"),
+            new(KnownType.System_GC, "Collect"),
         };
 
-        internal override IEnumerable<MemberDescriptor> CheckedMethods => checkedMethods;
+        public DoNotCallGCCollectMethod() : base(DiagnosticId) { }
     }
 }

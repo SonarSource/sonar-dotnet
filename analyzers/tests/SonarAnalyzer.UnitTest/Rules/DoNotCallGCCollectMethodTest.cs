@@ -27,14 +27,23 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class DoNotCallGCCollectMethodTest
     {
+        private readonly VerifierBuilder builder = new VerifierBuilder<DoNotCallGCCollectMethod>();
+
         [TestMethod]
         public void DoNotCallGCCollectMethod() =>
-            OldVerifier.VerifyAnalyzer(@"TestCases\DoNotCallGCCollectMethod.cs", new DoNotCallGCCollectMethod());
+            builder.AddPaths("DoNotCallGCCollectMethod.cs")
+                .Verify();
 
 #if NET
+
         [TestMethod]
         public void DoNotCallGCCollectMethod_CSharp9() =>
-            OldVerifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\DoNotCallGCCollectMethod.CSharp9.cs", new DoNotCallGCCollectMethod());
+            builder.AddPaths("DoNotCallGCCollectMethod.CSharp9.cs")
+                .WithOptions(ParseOptionsHelper.FromCSharp9)
+                .WithTopLevelStatements()
+                .Verify();
+
 #endif
+
     }
 }

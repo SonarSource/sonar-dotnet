@@ -29,6 +29,7 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         public void NormalizeStringsToUppercase() =>
-            OldVerifier.VerifyAnalyzer(@"TestCases\NormalizeStringsToUppercase.cs", new NormalizeStringsToUppercase());
+            new VerifierBuilder<NormalizeStringsToUppercase>().AddPaths("NormalizeStringsToUppercase.cs")
+                .Verify();
     }
 }

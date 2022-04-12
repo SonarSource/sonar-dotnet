@@ -19,7 +19,6 @@
  */
 
 using System.Collections.Generic;
-using System.Collections.Immutable;
 using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
@@ -33,20 +32,15 @@ namespace SonarAnalyzer.Rules.CSharp
     public sealed class DoNotCallExitMethods : DoNotCallMethodsCSharpBase
     {
         private const string DiagnosticId = "S1147";
-        private const string MessageFormat = "Remove this call to '{0}' or ensure it is really required.";
+        protected override string MessageFormat => "Remove this call to '{0}' or ensure it is really required.";
 
-        private static readonly DiagnosticDescriptor rule =
-            DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
-
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(rule);
-
-        private static readonly IEnumerable<MemberDescriptor> checkedMethods = new List<MemberDescriptor>
+        protected override IEnumerable<MemberDescriptor> CheckedMethods { get; } = new List<MemberDescriptor>
         {
-            new MemberDescriptor(KnownType.System_Environment, "Exit"),
-            new MemberDescriptor(KnownType.System_Windows_Forms_Application, "Exit")
+            new(KnownType.System_Environment, "Exit"),
+            new(KnownType.System_Windows_Forms_Application, "Exit")
         };
 
-        internal override IEnumerable<MemberDescriptor> CheckedMethods => checkedMethods;
+        public DoNotCallExitMethods() : base(DiagnosticId) { }
 
         protected override bool IsInValidContext(InvocationExpressionSyntax invocationSyntax,
             SemanticModel semanticModel) =>

@@ -27,18 +27,28 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class DoNotCallGCSuppressFinalizeTest
     {
+        private readonly VerifierBuilder builder = new VerifierBuilder<DoNotCallGCSuppressFinalize>();
+
         [TestMethod]
         public void DoNotCallGCSuppressFinalize() =>
-            OldVerifier.VerifyAnalyzer(@"TestCases\DoNotCallGCSuppressFinalize.cs", new DoNotCallGCSuppressFinalize());
+            builder.AddPaths("DoNotCallGCSuppressFinalize.cs")
+                .Verify();
 
 #if NET
+
         [TestMethod]
         public void DoNotCallGCSuppressFinalize_NetCore() =>
-            OldVerifier.VerifyAnalyzer(@"TestCases\DoNotCallGCSuppressFinalize.NetCore.cs", new DoNotCallGCSuppressFinalize(), ParseOptionsHelper.FromCSharp8);
+            builder.AddPaths("DoNotCallGCSuppressFinalize.NetCore.cs")
+                .WithOptions(ParseOptionsHelper.FromCSharp8)
+                .Verify();
 
         [TestMethod]
         public void DoNotCallGCSuppressFinalize_Net5() =>
-            OldVerifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\DoNotCallGCSuppressFinalize.Net5.cs", new DoNotCallGCSuppressFinalize());
+            builder.AddPaths("DoNotCallGCSuppressFinalize.Net5.cs")
+                .WithOptions(ParseOptionsHelper.FromCSharp9)
+                .Verify();
+
 #endif
+
     }
 }
