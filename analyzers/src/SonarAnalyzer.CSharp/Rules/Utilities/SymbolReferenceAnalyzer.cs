@@ -18,6 +18,7 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System.Collections.Generic;
 using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
@@ -25,6 +26,7 @@ using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.Extensions;
 using SonarAnalyzer.Helpers;
+using StyleCop.Analyzers.Lightup;
 
 namespace SonarAnalyzer.Rules.CSharp
 {
@@ -36,11 +38,68 @@ namespace SonarAnalyzer.Rules.CSharp
         protected override SyntaxNode GetBindableParent(SyntaxToken token) =>
             token.GetBindableParent();
 
-        protected override SyntaxToken? GetSetKeyword(ISymbol valuePropertySymbol) =>
-            IsValuePropertyParameter(valuePropertySymbol)
-            && valuePropertySymbol.ContainingSymbol is IMethodSymbol methodSymbol
-            && methodSymbol.DeclaringSyntaxReferences.FirstOrDefault()?.GetSyntax() is AccessorDeclarationSyntax accessor
-                ? accessor.Keyword
-                : null;
+        protected override ReferenceInfo[] CreateDeclarationReferenceInfo(SyntaxNode node, SemanticModel model) =>
+            node switch
+            {
+                BaseTypeDeclarationSyntax typeDeclaration => new[] { CreateDeclarationReferenceInfo(node, typeDeclaration.Identifier, model) },
+                VariableDeclarationSyntax variableDeclaration => CreateDeclarationReferenceInfo(variableDeclaration, model),
+                MethodDeclarationSyntax methodDeclaration => new[] { CreateDeclarationReferenceInfo(node, methodDeclaration.Identifier, model) },
+                ParameterSyntax parameterSyntax => new[] { CreateDeclarationReferenceInfo(node, parameterSyntax.Identifier, model) },
+                LocalDeclarationStatementSyntax localDeclarationStatement => CreateDeclarationReferenceInfo(localDeclarationStatement.Declaration, model),
+                PropertyDeclarationSyntax propertyDeclaration => new[] { CreateDeclarationReferenceInfo(node, propertyDeclaration.Identifier, model) },
+                TypeParameterSyntax typeParameterSyntax => new[] { CreateDeclarationReferenceInfo(node, typeParameterSyntax.Identifier, model) },
+                var localFunction when LocalFunctionStatementSyntaxWrapper.IsInstance(localFunction) =>
+                    new[] { CreateDeclarationReferenceInfo(node, ((LocalFunctionStatementSyntaxWrapper)localFunction).Identifier, model) },
+                var singleVariableDesignation when SingleVariableDesignationSyntaxWrapper.IsInstance(singleVariableDesignation) =>
+                    new[] { CreateDeclarationReferenceInfo(node, ((SingleVariableDesignationSyntaxWrapper)singleVariableDesignation).Identifier, model) },
+                _ => null
+            };
+
+        protected override IList<SyntaxNode> GetDeclarations(SyntaxNode node)
+        {
+            var walker = new DeclarationsFinder();
+            walker.SafeVisit(node);
+            return walker.Declarations;
+        }
+
+        private static ReferenceInfo[] CreateDeclarationReferenceInfo(VariableDeclarationSyntax declaration, SemanticModel model) =>
+            declaration.Variables.Select(x => CreateDeclarationReferenceInfo(x, x.Identifier, model)).ToArray();
+
+        private static ReferenceInfo CreateDeclarationReferenceInfo(SyntaxNode node, SyntaxToken identifier, SemanticModel model) =>
+            new(node, identifier, model.GetDeclaredSymbol(node), true);
+
+        private sealed class DeclarationsFinder : SafeCSharpSyntaxWalker
+        {
+            private readonly ISet<ushort> declarationKinds = new HashSet<SyntaxKind>
+            {
+                SyntaxKind.ClassDeclaration,
+                SyntaxKind.DelegateDeclaration,
+                SyntaxKind.EnumDeclaration,
+                SyntaxKind.EventDeclaration,
+                SyntaxKind.InterfaceDeclaration,
+                SyntaxKind.LocalDeclarationStatement,
+                SyntaxKind.MethodDeclaration,
+                SyntaxKind.Parameter,
+                SyntaxKind.PropertyDeclaration,
+                SyntaxKind.StructDeclaration,
+                SyntaxKind.TypeParameter,
+                SyntaxKind.VariableDeclaration,
+                SyntaxKindEx.LocalFunctionStatement,
+                SyntaxKindEx.RecordClassDeclaration,
+                SyntaxKindEx.RecordStructDeclaration,
+                SyntaxKindEx.SingleVariableDesignation
+            }.Cast<ushort>().ToHashSet();
+
+            public readonly List<SyntaxNode> Declarations = new();
+
+            public override void Visit(SyntaxNode node)
+            {
+                if (declarationKinds.Contains((ushort)node.RawKind))
+                {
+                    Declarations.Add(node);
+                }
+                base.Visit(node);
+            }
+        }
     }
 }

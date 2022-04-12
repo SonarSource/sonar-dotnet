@@ -46,11 +46,11 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void Verify_Method_PreciseLocation_CS(ProjectType projectType) =>
             Verify("Method.cs", projectType, references =>
             {
-                references.Select(x => x.Declaration.StartLine).Should().BeEquivalentTo(1, 3, 5);   // class 'Sample' on line 1, method 'Method' on line 3, method 'Go' on line 5
+                references.Select(x => x.Declaration.StartLine).Should().BeEquivalentTo(1, 3, 5, 7);   // class 'Sample' on line 1, method 'Method' on line 3, method 'method' on line 5 and method 'Go' on line 7
                 var methodDeclaration = references.Single(x => x.Declaration.StartLine == 3);
                 methodDeclaration.Declaration.Should().BeEquivalentTo(new TextRange { StartLine = 3, EndLine = 3, StartOffset = 16, EndOffset = 22 });
                 methodDeclaration.Reference.Should().HaveCount(1);
-                methodDeclaration.Reference.Single().Should().BeEquivalentTo(new TextRange { StartLine = 6, EndLine = 6, StartOffset = 8, EndOffset = 14 });
+                methodDeclaration.Reference.Single().Should().BeEquivalentTo(new TextRange { StartLine = 9, EndLine = 9, StartOffset = 8, EndOffset = 14 });
             });
 
         [DataTestMethod]
@@ -63,8 +63,9 @@ namespace SonarAnalyzer.UnitTest.Rules
 
                 var procedureDeclaration = references.Single(x => x.Declaration.StartLine == 3);
                 procedureDeclaration.Declaration.Should().BeEquivalentTo(new TextRange { StartLine = 3, EndLine = 3, StartOffset = 15, EndOffset = 21 });
-                procedureDeclaration.Reference.Should().HaveCount(1);
-                procedureDeclaration.Reference.Single().Should().BeEquivalentTo(new TextRange { StartLine = 11, EndLine = 11, StartOffset = 8, EndOffset = 14 });
+                procedureDeclaration.Reference.Should().HaveCount(2);
+                procedureDeclaration.Reference[0].Should().BeEquivalentTo(new TextRange { StartLine = 11, EndLine = 11, StartOffset = 8, EndOffset = 14 });
+                procedureDeclaration.Reference[1].Should().BeEquivalentTo(new TextRange { StartLine = 13, EndLine = 13, StartOffset = 8, EndOffset = 14 });
 
                 var functionDeclaration = references.Single(x => x.Declaration.StartLine == 6);
                 functionDeclaration.Declaration.Should().BeEquivalentTo(new TextRange { StartLine = 6, EndLine = 6, StartOffset = 13, EndOffset = 23 });
@@ -93,6 +94,12 @@ namespace SonarAnalyzer.UnitTest.Rules
         [DataTestMethod]
         [DataRow(ProjectType.Product)]
         [DataRow(ProjectType.Test)]
+        public void Verify_MissingDeclaration_CS(ProjectType projectType) =>
+            Verify("MissingDeclaration.cs", projectType, 1, 3);
+
+        [DataTestMethod]
+        [DataRow(ProjectType.Product)]
+        [DataRow(ProjectType.Test)]
         public void Verify_Field_VB(ProjectType projectType) =>
             Verify("Field.vb", projectType, 4, 3, 6, 7);
 
@@ -106,7 +113,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [DataRow(ProjectType.Product)]
         [DataRow(ProjectType.Test)]
         public void Verify_Tuples_VB(ProjectType projectType) =>
-            Verify("Tuples.vb", projectType, 6, 4, 8);
+            Verify("Tuples.vb", projectType, 4, 4, 8);
 
         [DataTestMethod]
         [DataRow(ProjectType.Product)]
@@ -118,13 +125,13 @@ namespace SonarAnalyzer.UnitTest.Rules
         [DataRow(ProjectType.Product)]
         [DataRow(ProjectType.Test)]
         public void Verify_Method_CS(ProjectType projectType) =>
-            Verify("Method.cs", projectType, 3, 3, 6);
+            Verify("Method.cs", projectType, 4, 3, 9);
 
         [DataTestMethod]
         [DataRow(ProjectType.Product)]
         [DataRow(ProjectType.Test)]
         public void Verify_NamedType_CS(ProjectType projectType) =>
-            Verify("NamedType.cs", projectType, 4, 3, 7, 7); // 'var' and type name on the same line
+            Verify("NamedType.cs", projectType, 4, 3, 7);
 
         [DataTestMethod]
         [DataRow(ProjectType.Product)]
@@ -148,19 +155,13 @@ namespace SonarAnalyzer.UnitTest.Rules
         [DataRow(ProjectType.Product)]
         [DataRow(ProjectType.Test)]
         public void Verify_Property_CS(ProjectType projectType) =>
-            Verify("Property.cs", projectType, 4, 3, 7, 8);
+            Verify("Property.cs", projectType, 5, 3, 9, 10);
 
         [DataTestMethod]
         [DataRow(ProjectType.Product)]
         [DataRow(ProjectType.Test)]
         public void Verify_Property_VB(ProjectType projectType) =>
-            Verify("Property.vb", projectType, 4, 3, 6, 7);
-
-        [DataTestMethod]
-        [DataRow(ProjectType.Product)]
-        [DataRow(ProjectType.Test)]
-        public void Verify_Setter_CS(ProjectType projectType) =>
-            Verify("Setter.cs", projectType, 4, 6, 8);
+            Verify("Property.vb", projectType, 5, 3, 6, 7, 8);
 
         [DataTestMethod]
         [DataRow(ProjectType.Product)]
@@ -173,13 +174,6 @@ namespace SonarAnalyzer.UnitTest.Rules
         [DataRow(ProjectType.Test)]
         public void Verify_TypeParameter_VB(ProjectType projectType) =>
             Verify("TypeParameter.vb", projectType, 5, 2, 4, 5);
-
-        [DataTestMethod]
-        [DataRow(true)]
-        [DataRow(false)]
-        public void GetSetKeyword_ReturnsNull_VB(bool isTestProject) =>
-            // This path is unreachable for VB code
-            new TestSymbolReferenceAnalyzer_VB(null, isTestProject).TestGetSetKeyword(null).Should().BeNull();
 
         [TestMethod]
         public void Verify_TokenThreshold() =>
@@ -248,9 +242,6 @@ namespace SonarAnalyzer.UnitTest.Rules
                 OutPath = outPath;
                 IsTestProject = isTestProject;
             }
-
-            public object TestGetSetKeyword(ISymbol valuePropertySymbol) =>
-                GetSetKeyword(valuePropertySymbol);
         }
     }
 }

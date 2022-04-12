@@ -2,6 +2,11 @@
 {
     public void Method() { }
 
-    public void Go() =>
+    public void method() { }
+
+    public void Go()
+    {
         Method();
+        method();
+    }
 }

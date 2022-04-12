@@ -10,6 +10,7 @@
     Public Sub Go()
         Method()
         MyFunction()
+        mEthOd() ' Different case, same method
     End Sub
 
 End Class
