@@ -17,7 +17,8 @@ namespace Tests.Diagnostics
 
     public record struct MutableInitializedWithMutable
     {
-        public readonly ISet<string> isetInitializaedWithHashSet = new HashSet<string> { "a", "b" };                          // Noncompliant
+        public readonly ISet<string> isetInitializaedWithHashSet = new HashSet<string> { "a", "b" };                          // Noncompliant {{Use an immutable collection or reduce the accessibility of the non-private readonly field 'isetInitializaedWithHashSet'.}}
+        //              ^^^^^^^^^^^^
         public readonly IList<string> iListInitializaedWithList = new List<string> { "a", "b" };                              // Noncompliant
         public readonly IDictionary<string, string> iDictionaryInitializaedWithDictionary = new Dictionary<string, string>(); // Noncompliant
     }
