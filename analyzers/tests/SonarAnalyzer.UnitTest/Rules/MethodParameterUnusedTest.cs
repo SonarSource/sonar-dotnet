@@ -83,7 +83,7 @@ public class Sample
             var compilation2 = compilation1.WithAssemblyName("Different-Compilation-Reusing-Same-Nodes");
             // Modified compilation should not reuse cached CFG, because symbols from method would not be equal to symbols from the other CFG.
             Analyze(compilation1).Should().BeEmpty();
-            Analyze(compilation2).Should().HaveCount(1);    // FIXME: This should be empty
+            Analyze(compilation2).Should().BeEmpty();
 
             ImmutableArray<Diagnostic> Analyze(Compilation compilation) =>
                 compilation.WithAnalyzers(roslynCS.Analyzers.Select(x => x()).ToImmutableArray()).GetAllDiagnosticsAsync(default).Result;

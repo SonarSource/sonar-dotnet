@@ -412,7 +412,7 @@ public class Sample
             var cfg1 = SyntaxNodeExtensionsCS.CreateCfg(method1.Body, compilation1.GetSemanticModel(method1.SyntaxTree));
             var cfg2 = SyntaxNodeExtensionsCS.CreateCfg(method2.Body, compilation2.GetSemanticModel(method2.SyntaxTree));
 
-            ReferenceEquals(cfg1, cfg2).Should().BeTrue("Different compilations should not reuse cache. They do not share semantic model and symbols.");  // FIXME: Should be False instead
+            ReferenceEquals(cfg1, cfg2).Should().BeFalse("Different compilations should not reuse cache. They do not share semantic model and symbols.");
         }
 
         private static SyntaxToken GetFirstTokenOfKind(SyntaxTree syntaxTree, SyntaxKind kind) =>
