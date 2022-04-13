@@ -18,11 +18,14 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.Extensions;
 using SonarAnalyzer.Helpers;
+using StyleCop.Analyzers.Lightup;
 
 namespace SonarAnalyzer.Rules.CSharp
 {
@@ -45,7 +48,16 @@ namespace SonarAnalyzer.Rules.CSharp
                 token.IsKind(SyntaxKind.IdentifierToken);
 
             protected override bool IsKeyword(SyntaxToken token) =>
-                SyntaxFacts.IsKeywordKind(token.Kind());
+                SyntaxFacts.IsKeywordKind(token.Kind())
+                || IsVarKeyword(token);
+
+            private static bool IsVarKeyword(SyntaxToken token) =>
+                token.Text == "var"
+                && GetParent(token) is var parent
+                && (parent is VariableDeclarationSyntax
+                    || DeclarationExpressionSyntaxWrapper.IsInstance(parent)
+                    || (parent is ForEachStatementSyntax forEachStatementSyntax && forEachStatementSyntax.Type == token.Parent)
+                    || (parent is ForStatementSyntax forStatementSyntax && forStatementSyntax.Declaration.Type == token.Parent));
 
             protected override bool IsRegularComment(SyntaxTrivia trivia) =>
                 trivia.IsAnyKind(SyntaxKind.SingleLineCommentTrivia, SyntaxKind.MultiLineCommentTrivia);
@@ -61,6 +73,24 @@ namespace SonarAnalyzer.Rules.CSharp
                     SyntaxKind.InterpolatedVerbatimStringStartToken,
                     SyntaxKind.InterpolatedStringTextToken,
                     SyntaxKind.InterpolatedStringEndToken);
+
+            protected override bool IsTypeName(SyntaxToken token) =>
+                GetParent(token) is BaseTypeDeclarationSyntax
+                    or ConstructorDeclarationSyntax
+                    or ObjectCreationExpressionSyntax
+                    or TypeParameterSyntax
+                    or GenericNameSyntax
+                    or AttributeSyntax;
+
+            private static SyntaxNode GetParent(SyntaxToken token)
+            {
+                var parent = token.Parent;
+                while (parent is IdentifierNameSyntax or QualifiedNameSyntax)
+                {
+                    parent = parent.Parent;
+                }
+                return parent;
+            }
 
             protected override bool IsDocComment(SyntaxTrivia trivia) =>
                 trivia.IsAnyKind(SyntaxKind.SingleLineDocumentationCommentTrivia, SyntaxKind.MultiLineDocumentationCommentTrivia);

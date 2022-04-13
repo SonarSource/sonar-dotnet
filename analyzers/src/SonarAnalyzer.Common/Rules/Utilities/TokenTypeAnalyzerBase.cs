@@ -89,6 +89,7 @@ namespace SonarAnalyzer.Rules
             protected abstract bool IsIdentifier(SyntaxToken token);
             protected abstract bool IsNumericLiteral(SyntaxToken token);
             protected abstract bool IsStringLiteral(SyntaxToken token);
+            protected abstract bool IsTypeName(SyntaxToken token);
 
             protected TokenClassifierBase(SyntaxToken token, SemanticModel semanticModel, bool skipIdentifiers)
             {
@@ -161,7 +162,11 @@ namespace SonarAnalyzer.Rules
 
             private void ClassifyIdentifier()
             {
-                if (semanticModel.GetDeclaredSymbol(token.Parent) is { } declaration)
+                if (IsTypeName(token))
+                {
+                    CollectClassified(TokenType.TypeName);
+                }
+                else if (semanticModel.GetDeclaredSymbol(token.Parent) is { } declaration)
                 {
                     ClassifyIdentifier(declaration);
                 }

@@ -21,6 +21,7 @@
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Diagnostics;
 using Microsoft.CodeAnalysis.VisualBasic;
+using Microsoft.CodeAnalysis.VisualBasic.Syntax;
 using SonarAnalyzer.Extensions;
 using SonarAnalyzer.Helpers;
 
@@ -59,6 +60,23 @@ namespace SonarAnalyzer.Rules.VisualBasic
                     SyntaxKind.CharacterLiteralToken,
                     SyntaxKind.InterpolatedStringTextToken,
                     SyntaxKind.EndOfInterpolatedStringToken);
+
+            protected override bool IsTypeName(SyntaxToken token) =>
+                GetParent(token) is TypeStatementSyntax
+                    or ObjectCreationExpressionSyntax
+                    or TypeParameterSyntax
+                    or GenericNameSyntax
+                    or AttributeSyntax;
+
+            private static SyntaxNode GetParent(SyntaxToken token)
+            {
+                var parent = token.Parent;
+                while (parent is IdentifierNameSyntax or QualifiedNameSyntax)
+                {
+                    parent = parent.Parent;
+                }
+                return parent;
+            }
 
             protected override bool IsDocComment(SyntaxTrivia trivia) =>
                 trivia.IsKind(SyntaxKind.DocumentationCommentTrivia);
