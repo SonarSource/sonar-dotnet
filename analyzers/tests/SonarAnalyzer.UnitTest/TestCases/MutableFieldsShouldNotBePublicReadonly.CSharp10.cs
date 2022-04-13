@@ -17,22 +17,25 @@ namespace Tests.Diagnostics
 
     public record struct MutableInitializedWithMutable
     {
-        public readonly ISet<string> isetInitializaedWithHashSet = new HashSet<string> { "a", "b" }; // FN
-        public readonly IList<string> iListInitializaedWithList = new List<string> { "a", "b" }; // FN
-        public readonly IDictionary<string, string> iDictionaryInitializaedWithDictionary = new Dictionary<string, string>(); // FN
+        public readonly ISet<string> isetInitializaedWithHashSet = new HashSet<string> { "a", "b" };                          // Noncompliant
+        public readonly IList<string> iListInitializaedWithList = new List<string> { "a", "b" };                              // Noncompliant
+        public readonly IDictionary<string, string> iDictionaryInitializaedWithDictionary = new Dictionary<string, string>(); // Noncompliant
     }
 
     public record struct MutableInitializedWithMutablePositional(string Property)
     {
-        public readonly ISet<string> isetInitializaedWithHashSet = new HashSet<string> { "a", "b" }; // FN
-        public readonly IList<string> iListInitializaedWithList = new List<string> { "a", "b" }; // FN
-        public readonly IDictionary<string, string> iDictionaryInitializaedWithDictionary = new Dictionary<string, string>(); // FN
+        public readonly ISet<string> isetInitializaedWithHashSet = new HashSet<string> { "a", "b" };                          // Noncompliant
+                                                                                                                              // Noncompliant@-1 FP Duplicate. see MutableFieldsShouldNotBePublicStatic.CSharp9.cs for details
+        public readonly IList<string> iListInitializaedWithList = new List<string> { "a", "b" };                              // Noncompliant
+                                                                                                                              // Noncompliant@-1 FP Duplicate
+        public readonly IDictionary<string, string> iDictionaryInitializaedWithDictionary = new Dictionary<string, string>(); // Noncompliant
+                                                                                                                              // Noncompliant@-1 FP Duplicate
     }
 
     public struct MutableInitializedWithMutableStruct
     {
-        public readonly ISet<string> isetInitializaedWithHashSet = new HashSet<string> { "a", "b" }; // Noncompliant
-        public readonly IList<string> iListInitializaedWithList = new List<string> { "a", "b" }; // Noncompliant
+        public readonly ISet<string> isetInitializaedWithHashSet = new HashSet<string> { "a", "b" };                          // Noncompliant
+        public readonly IList<string> iListInitializaedWithList = new List<string> { "a", "b" };                              // Noncompliant
         public readonly IDictionary<string, string> iDictionaryInitializaedWithDictionary = new Dictionary<string, string>(); // Noncompliant
     }
 }
