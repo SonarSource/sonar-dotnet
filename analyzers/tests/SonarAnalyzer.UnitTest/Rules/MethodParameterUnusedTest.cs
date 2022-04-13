@@ -18,6 +18,11 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System.Collections.Immutable;
+using System.Linq;
+using FluentAssertions;
+using Microsoft.CodeAnalysis;
+using Microsoft.CodeAnalysis.Diagnostics;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.UnitTest.MetadataReferences;
@@ -63,6 +68,26 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         public void MethodParameterUnused_CSharp8_CS() =>
             roslynCS.AddPaths("MethodParameterUnused.CSharp8.cs").WithOptions(ParseOptionsHelper.FromCSharp8).AddReferences(MetadataReferenceFacade.NETStandard21).Verify();
+
+        [TestMethod]
+        public void MethodParameterUnused_DoubleCompilation_CS()
+        {
+            // https://github.com/SonarSource/sonar-dotnet/issues/5491
+            const string code = @"
+public class Sample
+{
+    private void Method(int arg) =>
+        arg.ToString();
+}";
+            var compilation1 = roslynCS.AddSnippet(code).WithLanguageVersion(Microsoft.CodeAnalysis.CSharp.LanguageVersion.CSharp7).Build().Compile(false).Single();
+            var compilation2 = compilation1.WithAssemblyName("Different-Compilation-Reusing-Same-Nodes");
+            // Modified compilation should not reuse cached CFG, because symbols from method would not be equal to symbols from the other CFG.
+            Analyze(compilation1).Should().BeEmpty();
+            Analyze(compilation2).Should().HaveCount(1);    // FIXME: This should be empty
+
+            ImmutableArray<Diagnostic> Analyze(Compilation compilation) =>
+                compilation.WithAnalyzers(roslynCS.Analyzers.Select(x => x()).ToImmutableArray()).GetAllDiagnosticsAsync(default).Result;
+        }
 
         [TestMethod]
         public void MethodParameterUnused_VB() =>

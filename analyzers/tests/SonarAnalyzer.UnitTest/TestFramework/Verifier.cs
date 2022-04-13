@@ -154,7 +154,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework
             }
         }
 
-        private IEnumerable<Compilation> Compile(bool concurrentAnalysis) =>
+        public IEnumerable<Compilation> Compile(bool concurrentAnalysis) =>
             CreateProject(concurrentAnalysis).Solution.Compile(builder.ParseOptions.ToArray());
 
         private ProjectBuilder CreateProject(bool concurrentAnalysis)
