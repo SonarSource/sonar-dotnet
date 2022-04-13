@@ -38,6 +38,9 @@ namespace Tests.Diagnostics
 
     public record WhenNonReadonlyAlwaysReportPositional(string Property, int Value)
     {
+        // On positional records the anaylzer gets called twice for the same SyntaxNode and so two similar diagnostics are reported
+        // Csaba already created an issue on roslyn for that https://github.com/dotnet/roslyn/issues/53136
+        // The issue is already resolved and so its expected that the "FP Duplicate" diagnostics will fail in some future Roslyn release
         public static ISet<string> iSetInitializaedWithImmutableSet = ImmutableHashSet.Create("a", "b");    // Noncompliant
                                                                                                             // Noncompliant@-1 FP Duplicate
         public static IList<string> iListInitializaedWithImmutableArray = ImmutableArray.Create("a", "b");  // Noncompliant
