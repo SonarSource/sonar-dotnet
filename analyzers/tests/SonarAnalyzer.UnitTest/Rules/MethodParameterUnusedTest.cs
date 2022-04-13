@@ -30,51 +30,51 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class MethodParameterUnusedTest
     {
+        private readonly VerifierBuilder sonarCS = new VerifierBuilder().AddAnalyzer(() => new CS.MethodParameterUnused(AnalyzerConfiguration.AlwaysEnabledWithSonarCfg));
+        private readonly VerifierBuilder roslynCS = new VerifierBuilder<CS.MethodParameterUnused>();   // Default constructor uses Roslyn CFG
+
         [TestMethod]
         public void MethodParameterUnused_CS_SonarCfg() =>
-            OldVerifier.VerifyAnalyzer(@"TestCases\MethodParameterUnused.SonarCfg.cs", new CS.MethodParameterUnused(AnalyzerConfiguration.AlwaysEnabledWithSonarCfg));
+            sonarCS.AddPaths("MethodParameterUnused.SonarCfg.cs").Verify();
 
         [TestMethod]
         public void MethodParameterUnused_CS_RoslynCfg() =>
-            OldVerifier.VerifyAnalyzer(@"TestCases\MethodParameterUnused.RoslynCfg.cs", new CS.MethodParameterUnused());   // Default constructor uses Roslyn CFG
+            roslynCS.AddPaths("MethodParameterUnused.RoslynCfg.cs").Verify();
 
 #if NETFRAMEWORK
 
         [TestMethod]
         public void MethodParameterUnused_CS_RoslynCfg_NetFx() =>
-            OldVerifier.VerifyAnalyzer(@"TestCases\MethodParameterUnused.RoslynCfg.NetFx.cs", new CS.MethodParameterUnused());
+            roslynCS.AddPaths("MethodParameterUnused.RoslynCfg.NetFx.cs").Verify();
 
 #endif
 
         [TestMethod]
         public void MethodParameterUnused_CodeFix_CS() =>
-            OldVerifier.VerifyCodeFix<CS.MethodParameterUnusedCodeFix>(
-                @"TestCases\MethodParameterUnused.RoslynCfg.cs",
-                @"TestCases\MethodParameterUnused.RoslynCfg.Fixed.cs",
-                new CS.MethodParameterUnused());
+            roslynCS.AddPaths("MethodParameterUnused.RoslynCfg.cs")
+                .WithCodeFix<CS.MethodParameterUnusedCodeFix>()
+                .WithCodeFixedPaths("MethodParameterUnused.RoslynCfg.Fixed.cs")
+                .VerifyCodeFix();
 
         [TestMethod]
         public void MethodParameterUnused_CSharp7_CS() =>
-            OldVerifier.VerifyNoIssueReported(@"TestCases\MethodParameterUnused.CSharp7.cs",
-                                           new CS.MethodParameterUnused(),
-                                           ParseOptionsHelper.FromCSharp7,
-                                           NuGetMetadataReference.SystemValueTuple("4.5.0"));
+            roslynCS.AddPaths("MethodParameterUnused.CSharp7.cs").WithOptions(ParseOptionsHelper.FromCSharp7).AddReferences(NuGetMetadataReference.SystemValueTuple("4.5.0")).VerifyNoIssueReported();
 
         [TestMethod]
         public void MethodParameterUnused_CSharp8_CS() =>
-            OldVerifier.VerifyAnalyzer(@"TestCases\MethodParameterUnused.CSharp8.cs",
-                                    new CS.MethodParameterUnused(),
-                                    ParseOptionsHelper.FromCSharp8,
-                                    MetadataReferenceFacade.NETStandard21);
+            roslynCS.AddPaths("MethodParameterUnused.CSharp8.cs").WithOptions(ParseOptionsHelper.FromCSharp8).AddReferences(MetadataReferenceFacade.NETStandard21).Verify();
 
         [TestMethod]
         public void MethodParameterUnused_VB() =>
-            OldVerifier.VerifyAnalyzer(@"TestCases\MethodParameterUnused.vb", new VB.MethodParameterUnused());
+            new VerifierBuilder<VB.MethodParameterUnused>().AddPaths("MethodParameterUnused.vb").Verify();
 
 #if NET
+
         [TestMethod]
         public void MethodParameterUnused_CSharp10_RoslynCfg() =>
-            OldVerifier.VerifyAnalyzerFromCSharp10Library(@"TestCases\MethodParameterUnused.CSharp10.cs", new CS.MethodParameterUnused());
+            roslynCS.AddPaths("MethodParameterUnused.CSharp10.cs").WithOptions(ParseOptionsHelper.FromCSharp10).Verify();
+
 #endif
+
     }
 }
