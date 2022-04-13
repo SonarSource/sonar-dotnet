@@ -6,24 +6,25 @@ public class Sample
 {
     int field;
 
-    public Sample() { }
+    public Sample()
+    {
+        var var = string.Empty;
+        (var, var z) = ("a", 'x');
+    }
 
     public void Go(int value)
     {
-        var g = new Generic<int>();
+        var var = new Generic<int>();
         var alias = new AliasName();
-        dynamic d = g;
+        dynamic dynamic = var;
         value = 42;
-
-        var y = string.Empty;
-        (y, var z) = ("a", 'x');
-
-        foreach (var var in Enumerable.Range(0, 10)) { }
     }
 
     public void ValueAsVariableForCoverage()
     {
         string value = null;
+
+        foreach (var var in Enumerable.Range(0, 10)) { }
     }
 
     public int Property
