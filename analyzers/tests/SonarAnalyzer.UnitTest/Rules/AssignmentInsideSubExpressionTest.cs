@@ -27,18 +27,23 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class AssignmentInsideSubExpressionTest
     {
+        private readonly VerifierBuilder builder = new VerifierBuilder<AssignmentInsideSubExpression>();
+
         [TestMethod]
         public void AssignmentInsideSubExpression() =>
-            OldVerifier.VerifyAnalyzer(@"TestCases\AssignmentInsideSubExpression.cs", new AssignmentInsideSubExpression(), ParseOptionsHelper.FromCSharp8);
+            builder.AddPaths("AssignmentInsideSubExpression.cs").WithOptions(ParseOptionsHelper.FromCSharp8).Verify();
 
 #if NET
+
         [TestMethod]
         public void AssignmentInsideSubExpression_CSharp9() =>
-            OldVerifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\AssignmentInsideSubExpression.CSharp9.cs", new AssignmentInsideSubExpression());
+            builder.AddPaths("AssignmentInsideSubExpression.CSharp9.cs").WithTopLevelStatements().Verify();
 
         [TestMethod]
         public void AssignmentInsideSubExpression_CSharp10() =>
-            OldVerifier.VerifyAnalyzerFromCSharp10Console(@"TestCases\AssignmentInsideSubExpression.CSharp10.cs", new AssignmentInsideSubExpression());
+            builder.AddPaths("AssignmentInsideSubExpression.CSharp10.cs").WithTopLevelStatements().WithOptions(ParseOptionsHelper.FromCSharp10).Verify();
+
 #endif
+
     }
 }
