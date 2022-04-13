@@ -29,6 +29,7 @@ namespace SonarAnalyzer.CFG.Roslyn
 {
     public abstract class ControlFlowGraphCacheBase
     {
+        // We need to cache per compilation to avoid reusing CFGs when compilation object is altered by VS configuration changes
         private readonly ConditionalWeakTable<Compilation, Dictionary<SyntaxNode, Wrapper>> compilationCache = new();
 
         protected abstract bool HasNestedCfg(SyntaxNode node);
