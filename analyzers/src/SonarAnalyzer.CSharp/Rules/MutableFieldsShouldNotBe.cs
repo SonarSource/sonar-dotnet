@@ -26,6 +26,7 @@ using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.Helpers;
+using StyleCop.Analyzers.Lightup;
 
 namespace SonarAnalyzer.Rules
 {
@@ -57,31 +58,30 @@ namespace SonarAnalyzer.Rules
              rule = DiagnosticDescriptorBuilder.GetDescriptor(diagnosticId, messageFormat, RspecStrings.ResourceManager);
 
         protected sealed override void Initialize(SonarAnalysisContext context) =>
-            context.RegisterSyntaxNodeActionInNonGenerated(CheckForIssue, SyntaxKind.ClassDeclaration, SyntaxKind.StructDeclaration);
-
-        private void CheckForIssue(SyntaxNodeAnalysisContext analysisContext)
-        {
-            var typeDeclaration = (TypeDeclarationSyntax)analysisContext.Node;
-            var fieldDeclarations = typeDeclaration.Members.OfType<FieldDeclarationSyntax>();
-
-            var assignmentsImmutability = FieldAssignmentImmutability(typeDeclaration, fieldDeclarations, analysisContext.SemanticModel);
-
-            foreach (var fieldDeclaration in fieldDeclarations)
+            context.RegisterSyntaxNodeActionInNonGenerated(c =>
             {
-                if (HasAllInvalidModifiers(fieldDeclaration)
-                    && fieldDeclaration.Declaration.Variables.Count > 0
-                    && analysisContext.SemanticModel.GetDeclaredSymbol(fieldDeclaration.Declaration.Variables[0]) is IFieldSymbol { Type: not null } fieldSymbol
-                    && fieldSymbol.GetEffectiveAccessibility() == Accessibility.Public
-                    && !IsImmutableOrValidMutableType(fieldSymbol.Type)
-                    // The field seems to be violating the rule but we should exclude the cases where the field is read-only
-                    // and all initializations to this field are immutable
-                    && CollectInvalidFieldVariables(fieldDeclaration, assignmentsImmutability, analysisContext.SemanticModel).ToList() is {Count: > 0} incorrectFieldVariables)
+                var typeDeclaration = (TypeDeclarationSyntax)c.Node;
+                var fieldDeclarations = typeDeclaration.Members.OfType<FieldDeclarationSyntax>();
+
+                var assignmentsImmutability = FieldAssignmentImmutability(typeDeclaration, fieldDeclarations, c.SemanticModel);
+
+                foreach (var fieldDeclaration in fieldDeclarations)
                 {
-                    var pluralizeSuffix = incorrectFieldVariables.Count > 1 ? "s" : string.Empty;
-                    analysisContext.ReportIssue(Diagnostic.Create(rule, fieldDeclaration.Declaration.Type.GetLocation(), pluralizeSuffix, incorrectFieldVariables.ToSentence(quoteWords: true)));
+                    if (HasAllInvalidModifiers(fieldDeclaration)
+                        && fieldDeclaration.Declaration.Variables.Count > 0
+                        && c.SemanticModel.GetDeclaredSymbol(fieldDeclaration.Declaration.Variables[0]) is IFieldSymbol { Type: not null } fieldSymbol
+                        && fieldSymbol.GetEffectiveAccessibility() == Accessibility.Public
+                        && !IsImmutableOrValidMutableType(fieldSymbol.Type)
+                        // The field seems to be violating the rule but we should exclude the cases where the field is read-only
+                        // and all initializations to this field are immutable
+                        && CollectInvalidFieldVariables(fieldDeclaration, assignmentsImmutability, c.SemanticModel).ToList() is { Count: > 0 } incorrectFieldVariables)
+                    {
+                        var pluralizeSuffix = incorrectFieldVariables.Count > 1 ? "s" : string.Empty;
+                        c.ReportIssue(Diagnostic.Create(rule, fieldDeclaration.Declaration.Type.GetLocation(), pluralizeSuffix, incorrectFieldVariables.ToSentence(quoteWords: true)));
+                    }
                 }
-            }
-        }
+            },
+            SyntaxKind.ClassDeclaration, SyntaxKind.StructDeclaration, SyntaxKindEx.RecordClassDeclaration, SyntaxKindEx.RecordStructDeclaration);
 
         private bool HasAllInvalidModifiers(FieldDeclarationSyntax fieldDeclaration) =>
             fieldDeclaration.Modifiers.Count(m => InvalidModifiers.Contains(m.Kind())) == InvalidModifiers.Count;
