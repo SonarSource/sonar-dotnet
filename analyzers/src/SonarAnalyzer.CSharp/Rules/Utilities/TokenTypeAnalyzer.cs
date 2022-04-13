@@ -48,6 +48,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
             protected override bool IsKeyword(SyntaxToken token) =>
                 SyntaxFacts.IsKeywordKind(token.Kind())
+                || IsDynamic(token)
                 || IsVarKeyword(token);
 
             private static bool IsVarKeyword(SyntaxToken token) =>
@@ -57,6 +58,10 @@ namespace SonarAnalyzer.Rules.CSharp
                     || DeclarationExpressionSyntaxWrapper.IsInstance(parent)
                     || (parent is ForEachStatementSyntax forEachStatementSyntax && forEachStatementSyntax.Type == token.Parent)
                     || (parent is ForStatementSyntax forStatementSyntax && forStatementSyntax.Declaration.Type == token.Parent));
+
+            private static bool IsDynamic(SyntaxToken token) =>
+                token.Text == "dynamic"
+                && GetParent(token) is VariableDeclarationSyntax;
 
             protected override bool IsRegularComment(SyntaxTrivia trivia) =>
                 trivia.IsAnyKind(SyntaxKind.SingleLineCommentTrivia, SyntaxKind.MultiLineCommentTrivia);
