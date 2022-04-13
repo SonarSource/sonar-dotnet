@@ -118,9 +118,9 @@ namespace SonarAnalyzer.Rules
                 }
             }
 
-            private void CollectClassified(TokenType tokenType, TextSpan span)
+            private void CollectClassified(TokenType tokenType)
             {
-                if (string.IsNullOrWhiteSpace(token.SyntaxTree.GetText().GetSubText(span).ToString()))
+                if (string.IsNullOrWhiteSpace(token.ValueText))
                 {
                     return;
                 }
@@ -128,23 +128,30 @@ namespace SonarAnalyzer.Rules
                 spans.Add(new TokenTypeInfo.Types.TokenInfo
                 {
                     TokenType = tokenType,
-                    TextRange = GetTextRange(Location.Create(token.SyntaxTree, span).GetLineSpan())
+                    TextRange = GetTextRange(Location.Create(token.SyntaxTree, token.Span).GetLineSpan())
                 });
             }
+
+            private void CollectComment(TextSpan span) =>
+                spans.Add(new TokenTypeInfo.Types.TokenInfo
+                          {
+                              TokenType = TokenType.Comment,
+                              TextRange = GetTextRange(Location.Create(token.SyntaxTree, span).GetLineSpan())
+                          });
 
             private void ClassifyToken()
             {
                 if (IsKeyword(token))
                 {
-                    CollectClassified(TokenType.Keyword, token.Span);
+                    CollectClassified(TokenType.Keyword);
                 }
                 else if (IsStringLiteral(token))
                 {
-                    CollectClassified(TokenType.StringLiteral, token.Span);
+                    CollectClassified(TokenType.StringLiteral);
                 }
                 else if (IsNumericLiteral(token))
                 {
-                    CollectClassified(TokenType.NumericLiteral, token.Span);
+                    CollectClassified(TokenType.NumericLiteral);
                 }
                 else if (IsIdentifier(token) && !skipIdentifiers)
                 {
@@ -172,23 +179,23 @@ namespace SonarAnalyzer.Rules
                 }
                 else if (symbol is IMethodSymbol ctorSymbol && ConstructorKinds.Contains(ctorSymbol.MethodKind))
                 {
-                    CollectClassified(TokenType.TypeName, token.Span);
+                    CollectClassified(TokenType.TypeName);
                 }
                 else if (token.ToString() == "var" && VarSymbolKinds.Contains(symbol.Kind))
                 {
-                    CollectClassified(TokenType.Keyword, token.Span);
+                    CollectClassified(TokenType.Keyword);
                 }
                 else if (token.ToString() == "value" && symbol.Kind == SymbolKind.Parameter && symbol.IsImplicitlyDeclared)
                 {
-                    CollectClassified(TokenType.Keyword, token.Span);
+                    CollectClassified(TokenType.Keyword);
                 }
-                else if (symbol.Kind == SymbolKind.NamedType || symbol.Kind == SymbolKind.TypeParameter)
+                else if (symbol.Kind is SymbolKind.NamedType or SymbolKind.TypeParameter)
                 {
-                    CollectClassified(TokenType.TypeName, token.Span);
+                    CollectClassified(TokenType.TypeName);
                 }
                 else if (symbol.Kind == SymbolKind.DynamicType)
                 {
-                    CollectClassified(TokenType.Keyword, token.Span);
+                    CollectClassified(TokenType.Keyword);
                 }
             }
 
@@ -196,17 +203,14 @@ namespace SonarAnalyzer.Rules
             {
                 if (IsRegularComment(trivia))
                 {
-                    CollectClassified(TokenType.Comment, trivia.Span);
+                    CollectComment(trivia.Span);
                 }
                 else if (IsDocComment(trivia))
                 {
-                    ClassifyDocComment(trivia);
+                    CollectComment(trivia.FullSpan);
                 }
                 // Handle preprocessor directives here
             }
-
-            private void ClassifyDocComment(SyntaxTrivia trivia) =>
-                CollectClassified(TokenType.Comment, trivia.FullSpan);
         }
     }
 }
