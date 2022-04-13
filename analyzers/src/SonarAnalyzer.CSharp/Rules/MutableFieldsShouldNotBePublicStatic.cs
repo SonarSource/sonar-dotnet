@@ -26,7 +26,7 @@ using Microsoft.CodeAnalysis.Diagnostics;
 namespace SonarAnalyzer.Rules.CSharp
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
-    public class MutableFieldsShouldNotBePublicStatic : MutableFieldsShouldNotBe
+    public sealed class MutableFieldsShouldNotBePublicStatic : MutableFieldsShouldNotBe
     {
         private const string DiagnosticId = "S2386";
         private const string MessageFormat = "Use an immutable collection or reduce the accessibility of the public static field{0} {1}.";
