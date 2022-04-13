@@ -47,7 +47,14 @@ namespace SonarAnalyzer.Rules
                 KnownType.System_Collections_Immutable_IImmutableStack_T,
                 KnownType.System_Collections_Immutable_IImmutableQueue_T);
 
+        private readonly DiagnosticDescriptor rule;
+
         protected abstract ISet<SyntaxKind> InvalidModifiers { get; }
+
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
+
+        protected MutableFieldsShouldNotBe(string diagnosticId, string messageFormat) =>
+             rule = DiagnosticDescriptorBuilder.GetDescriptor(diagnosticId, messageFormat, RspecStrings.ResourceManager);
 
         protected sealed override void Initialize(SonarAnalysisContext context) =>
             context.RegisterSyntaxNodeActionInNonGenerated(CheckForIssue, SyntaxKind.ClassDeclaration, SyntaxKind.StructDeclaration);
@@ -71,11 +78,7 @@ namespace SonarAnalyzer.Rules
                     && CollectInvalidFieldVariables(fieldDeclaration, assignmentsImmutability, analysisContext.SemanticModel).ToList() is {Count: > 0} incorrectFieldVariables)
                 {
                     var pluralizeSuffix = incorrectFieldVariables.Count > 1 ? "s" : string.Empty;
-                    analysisContext.ReportIssue(
-                        Diagnostic.Create(SupportedDiagnostics[0],
-                        fieldDeclaration.Declaration.Type.GetLocation(),
-                        pluralizeSuffix,
-                        incorrectFieldVariables.ToSentence(quoteWords: true)));
+                    analysisContext.ReportIssue(Diagnostic.Create(rule, fieldDeclaration.Declaration.Type.GetLocation(), pluralizeSuffix, incorrectFieldVariables.ToSentence(quoteWords: true)));
                 }
             }
         }
