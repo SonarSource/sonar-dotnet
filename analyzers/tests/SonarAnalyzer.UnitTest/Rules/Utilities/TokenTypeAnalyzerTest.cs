@@ -72,10 +72,10 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void Verify_Identifiers_CS(ProjectType projectType) =>
             Verify("Identifiers.cs", projectType, info =>
             {
-                info.Should().HaveCount(39);
-                info.Count(x => x.TokenType == TokenType.Keyword).Should().Be(29);
-                info.Count(x => x.TokenType == TokenType.TypeName).Should().Be(7);
-                info.Count(x => x.TokenType == TokenType.NumericLiteral).Should().Be(1);
+                info.Should().HaveCount(46);
+                info.Count(x => x.TokenType == TokenType.Keyword).Should().Be(33);
+                info.Count(x => x.TokenType == TokenType.TypeName).Should().Be(8);
+                info.Count(x => x.TokenType == TokenType.NumericLiteral).Should().Be(3);
                 info.Count(x => x.TokenType == TokenType.StringLiteral).Should().Be(2);
             });
 

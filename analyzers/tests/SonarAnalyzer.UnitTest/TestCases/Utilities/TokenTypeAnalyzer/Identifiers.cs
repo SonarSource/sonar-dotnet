@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using AliasName = System.Exception;
 
 public class Sample
@@ -16,6 +17,8 @@ public class Sample
 
         var y = string.Empty;
         (y, var z) = ("a", 'x');
+
+        foreach (var var in Enumerable.Range(0, 10)) { }
     }
 
     public void ValueAsVariableForCoverage()
