@@ -35,7 +35,7 @@ namespace SonarAnalyzer.Extensions
         /// record R(int i);
         /// </example>
         /// <seealso href="https://github.com/dotnet/roslyn/issues/50989"/>
-        internal static bool IsRedundantPositionalRecordContext(this SyntaxNodeAnalysisContext context)
-            => context.ContainingSymbol.Kind == SymbolKind.Method;
+        internal static bool IsRedundantPositionalRecordContext(this SyntaxNodeAnalysisContext context) =>
+            context.ContainingSymbol.Kind == SymbolKind.Method;
     }
 }
