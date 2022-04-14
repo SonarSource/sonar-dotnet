@@ -38,8 +38,8 @@ namespace Tests.Diagnostics
 
     public record WhenNonReadonlyAlwaysReportPositional(string Property, int Value)
     {
-        public static ISet<string> iSetInitializaedWithImmutableSet = ImmutableHashSet.Create("a", "b");    // Noncompliant
-        public static IList<string> iListInitializaedWithImmutableArray = ImmutableArray.Create("a", "b");  // Noncompliant
-        public static IList<string> iListInitializaedWithImmutableList = ImmutableList.Create("a", "b");    // Noncompliant
+        public static ISet<string> iSetInitializaedWithImmutableSet = ImmutableHashSet.Create("a", "b");   // Noncompliant
+        public static IList<string> iListInitializaedWithImmutableArray = ImmutableArray.Create("a", "b"); // Noncompliant
+        public static IList<string> iListInitializaedWithImmutableList = ImmutableList.Create("a", "b");   // Noncompliant
     }
 }
