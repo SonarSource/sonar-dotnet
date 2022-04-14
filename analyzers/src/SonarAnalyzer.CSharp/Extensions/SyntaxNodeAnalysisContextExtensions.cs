@@ -26,9 +26,16 @@ namespace SonarAnalyzer.Extensions
     internal static class SyntaxNodeAnalysisContextExtensions
     {
         /// <summary>
-        /// Roslyn invokes the analzyer twice for positional records and we need to differentiate between the calls.
+        /// Roslyn invokes the analzyer twice for positional records.
         /// The first invocation is for the class declaration and the second for the ctor represented by the positional parameter list.
         /// </summary>
+        /// <returns>
+        /// Returns <see langword="true"/> for the invocation on the class declaration and
+        /// <see langword="false"/> for the ctor invocation.
+        /// </returns>
+        /// <example>
+        /// record R(int i);
+        /// </example>
         /// <seealso href="https://github.com/dotnet/roslyn/issues/50989"/>
         internal static bool IsRedundantPositionalRecordContext(this SyntaxNodeAnalysisContext context)
             => context.ContainingSymbol.Kind == SymbolKind.Method;
