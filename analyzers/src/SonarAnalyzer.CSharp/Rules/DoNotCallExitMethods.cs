@@ -25,6 +25,7 @@ using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.Helpers;
+using StyleCop.Analyzers.Lightup;
 
 namespace SonarAnalyzer.Rules.CSharp
 {
@@ -43,11 +44,13 @@ namespace SonarAnalyzer.Rules.CSharp
         public DoNotCallExitMethods() : base(DiagnosticId) { }
 
         protected override bool IsInValidContext(InvocationExpressionSyntax invocationSyntax, SemanticModel semanticModel) =>
-            // Do not report if call is inside Main or TopLevelStatement.
-            !invocationSyntax.Ancestors().OfType<GlobalStatementSyntax>().Any()
-            && !invocationSyntax.Ancestors().OfType<BaseMethodDeclarationSyntax>().Where(x => x.GetIdentifierOrDefault()?.ValueText == "Main")
-                .Select(m => semanticModel.GetDeclaredSymbol(m))
-                .Select(s => s.IsMainMethod())
-                .FirstOrDefault();
+            // Do not report if call is inside Main or is a TopLevelStatement.
+            invocationSyntax.Ancestors().OfType<GlobalStatementSyntax>().Any()
+                ? invocationSyntax.Ancestors()
+                      .Any(x => x.IsAnyKind(SyntaxKindEx.LocalFunctionStatement, SyntaxKind.ParenthesizedLambdaExpression, SyntaxKind.SimpleLambdaExpression, SyntaxKind.AnonymousMethodExpression))
+                : !invocationSyntax.Ancestors().OfType<BaseMethodDeclarationSyntax>().Where(x => x.GetIdentifierOrDefault()?.ValueText == "Main")
+                      .Select(m => semanticModel.GetDeclaredSymbol(m))
+                      .Select(s => s.IsMainMethod())
+                      .FirstOrDefault();
     }
 }
