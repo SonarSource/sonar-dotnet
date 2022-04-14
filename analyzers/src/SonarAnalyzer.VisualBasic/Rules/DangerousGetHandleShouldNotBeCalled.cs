@@ -30,8 +30,5 @@ namespace SonarAnalyzer.Rules.VisualBasic
     public sealed class DangerousGetHandleShouldNotBeCalled : DangerousGetHandleShouldNotBeCalledBase<SyntaxKind, InvocationExpressionSyntax>
     {
         protected override ILanguageFacade<SyntaxKind> Language => VisualBasicFacade.Instance;
-
-        protected override SyntaxToken? GetMethodCallIdentifier(InvocationExpressionSyntax invocation) =>
-            invocation.GetMethodCallIdentifier();
     }
 }

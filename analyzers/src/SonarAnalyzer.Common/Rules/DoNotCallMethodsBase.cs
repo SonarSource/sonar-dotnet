@@ -32,8 +32,6 @@ namespace SonarAnalyzer.Rules
     {
         protected abstract IEnumerable<MemberDescriptor> CheckedMethods { get; }
 
-        protected abstract SyntaxToken? GetMethodCallIdentifier(TInvocationExpressionSyntax invocation);
-
         protected virtual bool ShouldReportOnMethodCall(TInvocationExpressionSyntax invocation, SemanticModel semanticModel, MemberDescriptor memberDescriptor) => true;
 
         protected virtual bool IsInValidContext(TInvocationExpressionSyntax invocationSyntax, SemanticModel semanticModel) => true;
@@ -45,40 +43,17 @@ namespace SonarAnalyzer.Rules
 
         private void AnalyzeInvocation(SyntaxNodeAnalysisContext analysisContext)
         {
-            var invocation = (TInvocationExpressionSyntax)analysisContext.Node;
-
-            if (!IsInValidContext(invocation, analysisContext.SemanticModel))
+            if ((TInvocationExpressionSyntax)analysisContext.Node is var invocation
+                && Language.Syntax.InvocationIdentifier(invocation) is { } identifier
+                && CheckedMethods.Where(x => x.Name.Equals(identifier.ValueText)) is var nameMatch
+                && nameMatch.Any()
+                && analysisContext.SemanticModel.GetSymbolInfo(identifier.Parent).Symbol is { } methodCallSymbol
+                && nameMatch.FirstOrDefault(x => methodCallSymbol.ContainingType.ConstructedFrom.Is(x.ContainingType)) is { } disallowedMethodSignature
+                && IsInValidContext(invocation, analysisContext.SemanticModel)
+                && ShouldReportOnMethodCall(invocation, analysisContext.SemanticModel, disallowedMethodSignature))
             {
-                return;
-            }
-
-            var identifier = GetMethodCallIdentifier(invocation);
-            if (identifier == null)
-            {
-                return;
-            }
-
-            var methodCallSymbol = analysisContext.SemanticModel.GetSymbolInfo(identifier.Value.Parent).Symbol;
-            if (methodCallSymbol == null)
-            {
-                return;
-            }
-
-            var disallowedMethodSignature = FindDisallowedMethodSignature(identifier.Value, methodCallSymbol);
-            if (disallowedMethodSignature == null)
-            {
-                return;
-            }
-
-            if (ShouldReportOnMethodCall(invocation, analysisContext.SemanticModel, disallowedMethodSignature))
-            {
-                analysisContext.ReportIssue(Diagnostic.Create(SupportedDiagnostics[0], identifier.Value.GetLocation(),
-                    disallowedMethodSignature.ToString()));
+                analysisContext.ReportIssue(Diagnostic.Create(SupportedDiagnostics[0], identifier.GetLocation(), disallowedMethodSignature.ToString()));
             }
         }
-
-        private MemberDescriptor FindDisallowedMethodSignature(SyntaxToken identifier, ISymbol methodCallSymbol) =>
-            CheckedMethods.Where(method => method.Name.Equals(identifier.ValueText))
-                .FirstOrDefault(m => methodCallSymbol.ContainingType.ConstructedFrom.Is(m.ContainingType));
     }
 }
