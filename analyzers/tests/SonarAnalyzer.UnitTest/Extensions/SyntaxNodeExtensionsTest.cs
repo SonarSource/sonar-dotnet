@@ -395,6 +395,26 @@ End Class";
             a.ExecutionTime().Should().BeLessThan(1.Seconds());     // Takes roughly 0.4 sec on CI
         }
 
+        [TestMethod]
+        public void CreateCfg_SameNode_DifferentCompilation_DoesNotCache()
+        {
+            // https://github.com/SonarSource/sonar-dotnet/issues/5491
+            const string code = @"
+public class Sample
+{
+    private void Method()
+    { }
+}";
+            var compilation1 = TestHelper.CompileCS(code).Model.Compilation;
+            var compilation2 = compilation1.WithAssemblyName("Different-Compilation-Reusing-Same-Nodes");
+            var method1 = compilation1.SyntaxTrees.Single().GetRoot().DescendantNodes().OfType<CS.MethodDeclarationSyntax>().Single();
+            var method2 = compilation2.SyntaxTrees.Single().GetRoot().DescendantNodes().OfType<CS.MethodDeclarationSyntax>().Single();
+            var cfg1 = SyntaxNodeExtensionsCS.CreateCfg(method1.Body, compilation1.GetSemanticModel(method1.SyntaxTree));
+            var cfg2 = SyntaxNodeExtensionsCS.CreateCfg(method2.Body, compilation2.GetSemanticModel(method2.SyntaxTree));
+
+            ReferenceEquals(cfg1, cfg2).Should().BeFalse("Different compilations should not reuse cache. They do not share semantic model and symbols.");
+        }
+
         private static SyntaxToken GetFirstTokenOfKind(SyntaxTree syntaxTree, SyntaxKind kind) =>
             syntaxTree.GetRoot().DescendantTokens().First(token => token.IsKind(kind));
     }

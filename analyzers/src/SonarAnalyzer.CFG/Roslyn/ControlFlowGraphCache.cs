@@ -18,6 +18,7 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System.Collections.Concurrent;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using Microsoft.CodeAnalysis;
@@ -28,7 +29,8 @@ namespace SonarAnalyzer.CFG.Roslyn
 {
     public abstract class ControlFlowGraphCacheBase
     {
-        private readonly ConditionalWeakTable<SyntaxNode, Wrapper> cache = new();
+        // We need to cache per compilation to avoid reusing CFGs when compilation object is altered by VS configuration changes
+        private readonly ConditionalWeakTable<Compilation, ConcurrentDictionary<SyntaxNode, Wrapper>> compilationCache = new();
 
         protected abstract bool HasNestedCfg(SyntaxNode node);
         protected abstract bool IsLocalFunction(SyntaxNode node);
@@ -36,7 +38,12 @@ namespace SonarAnalyzer.CFG.Roslyn
         public ControlFlowGraph FindOrCreate(SyntaxNode declaration, SemanticModel model)
         {
             var rootSyntax = model.GetOperation(declaration).RootOperation().Syntax;
-            var wrapper = cache.GetValue(rootSyntax, x => new Wrapper(ControlFlowGraph.Create(x, model)));
+            var nodeCache = compilationCache.GetValue(model.Compilation, x => new());
+            if (!nodeCache.TryGetValue(rootSyntax, out var wrapper))
+            {
+                wrapper = new(ControlFlowGraph.Create(rootSyntax, model));
+                nodeCache[rootSyntax] = wrapper;
+            }
             if (HasNestedCfg(declaration))
             {
                 // We need to go up and track all possible enclosing lambdas, local functions and other FlowAnonymousFunctionOperations
