@@ -25,6 +25,7 @@ using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
+using SonarAnalyzer.Extensions;
 using SonarAnalyzer.Helpers;
 using StyleCop.Analyzers.Lightup;
 
@@ -60,9 +61,12 @@ namespace SonarAnalyzer.Rules
         protected sealed override void Initialize(SonarAnalysisContext context) =>
             context.RegisterSyntaxNodeActionInNonGenerated(c =>
             {
+                if (c.IsRedundantPositionalRecordContext())
+                {
+                    return;
+                }
                 var typeDeclaration = (TypeDeclarationSyntax)c.Node;
                 var fieldDeclarations = typeDeclaration.Members.OfType<FieldDeclarationSyntax>();
-
                 var assignmentsImmutability = FieldAssignmentImmutability(typeDeclaration, fieldDeclarations, c.SemanticModel);
 
                 foreach (var fieldDeclaration in fieldDeclarations)
