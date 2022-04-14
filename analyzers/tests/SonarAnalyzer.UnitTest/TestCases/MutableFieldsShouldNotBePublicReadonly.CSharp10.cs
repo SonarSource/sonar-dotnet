@@ -26,11 +26,8 @@ namespace Tests.Diagnostics
     public record struct MutableInitializedWithMutablePositional(string Property)
     {
         public readonly ISet<string> isetInitializaedWithHashSet = new HashSet<string> { "a", "b" };                          // Noncompliant
-                                                                                                                              // Noncompliant@-1 FP Duplicate. see MutableFieldsShouldNotBePublicStatic.CSharp9.cs for details
         public readonly IList<string> iListInitializaedWithList = new List<string> { "a", "b" };                              // Noncompliant
-                                                                                                                              // Noncompliant@-1 FP Duplicate
         public readonly IDictionary<string, string> iDictionaryInitializaedWithDictionary = new Dictionary<string, string>(); // Noncompliant
-                                                                                                                              // Noncompliant@-1 FP Duplicate
     }
 
     public struct MutableInitializedWithMutableStruct

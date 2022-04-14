@@ -39,11 +39,8 @@ namespace Tests.Diagnostics
     public record struct WhenNonReadonlyAlwaysReportPositional(string Property)
     {
         public static ISet<string> iSetInitializaedWithImmutableSet = ImmutableHashSet.Create("a", "b");   // Noncompliant
-                                                                                                           // Noncompliant@-1 FP Duplicate. see MutableFieldsShouldNotBePublicStatic.CSharp9.cs for details
         public static IList<string> iListInitializaedWithImmutableArray = ImmutableArray.Create("a", "b"); // Noncompliant
-                                                                                                           // Noncompliant@-1 FP Duplicate
         public static IList<string> iListInitializaedWithImmutableList = ImmutableList.Create("a", "b");   // Noncompliant
-                                                                                                           // Noncompliant@-1 FP Duplicate
     }
 
     public struct WhenNonReadonlyAlwaysReportStruct
