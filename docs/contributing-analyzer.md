@@ -17,28 +17,33 @@ In general, it is best to run commands from the Visual Studio Developer Command 
     - ASP.NET and web development
     - .NET desktop development
     - Visual Studio extension development
-1. Ensure to install Individual components:
+1. Ensure to install *Individual components*:
     - .NET Framework 4.8 SDK
     - .NET Framework 4.8 Targeting pack
+    - .NET Framework 4.7.2 Targeting pack
+    - .NET Framework 4.6 Targeting pack
     - .NET SDK
     - .NET Compiler Platform SDK
 1. Install also:
-    - .NET Core 3.1 SDK
-    - .NET 3.5 SDK (SP1)
+    - [.NET Core 3.1 SDK](https://dotnet.microsoft.com/en-us/download/dotnet)
+    - .NET 3.5 SDK (SP1) TODO: Add link to dotNetFx35setup.exe
+    - Install Visual Studio 2019 and check these SDKs in the *individual components* tab
+        - .NET framework 4 targeting pack
+        - .NET framework 4.5 targeting pack
 1. The following environment variables must be set:
-    - **JAVA_HOME**
-    - **MSBUILD_PATH** - path to the MSBuild.exe executable (MSBuild 16)
+    - **JAVA_HOME** (e.g. `C:\Program Files\Java\jdk-11.0.2`)
+    - **MSBUILD_PATH** - path to the MSBuild.exe executable (MSBuild 16 e.g. `C:\Program Files\Microsoft Visual Studio\2022\Community\MSBuild\Current\Bin\MSBuild.exe`)
     - **NUGET_PATH** - path to the nuget.exe executable (related to the [plugin integration tests](./contributing-plugin.md#integration-tests))
-    - **ORCHESTRATOR_CONFIG_URL** - url to orchestrator.properties file (for integration tests) in uri form (i.e. file:///c:/something/orchestrator.properties)
-    - **RULE_API_PATH** - path to folder containing the rule api jar
+    - **ORCHESTRATOR_CONFIG_URL** - url to orchestrator.properties file (for integration tests) in uri form (i.e. file:///c:/something/orchestrator.properties). TODO: where to get the file, where to place it and document to put that variable in "user" instead of "system"
+    - **RULE_API_PATH** - path to folder containing the rule api jar. The rule api jar can be found at [repox.jfrog](https://repox.jfrog.io/ui/artifactSearchResults?name=rule-api&type=artifacts)
     - **PATH** - the system **PATH** variable must contain:
-        - the path to the dotnet core installation folder
-        - the path to the MSBuild bin folder
-        - the path to the visual studo installer folder (for vswhere.exe)
-        - the path to the nuget executable folder (e.g. C:\Program Files\nuget)
-        - the path to the JDK bin folder
+        - the path to the dotnet core installation folder (System: `C:\Program Files\dotnet\`)
+        - the path to the MSBuild bin folder (System: `C:\Program Files\Microsoft Visual Studio\2022\Community\MSBuild\Current\Bin`)
+        - the path to the visual studo installer folder (for vswhere.exe) (System: `C:\Program Files (x86)\Microsoft Visual Studio\Installer`)
+        - the path to the nuget executable folder ((System: `C:\Program Files\nuget`)
+        - the path to the JDK bin folder (System: `C:\Program Files\Java\jdk-11.0.2\bin`)
         - %M2_HOME%\bin
-        - the path to the SonarScanner for .NET folder and to the Scanner CLI
+        - the path to the SonarScanner for .NET folder and to the Scanner CLI ([SonarScanner download](https://github.com/SonarSource/sonar-scanner-msbuild/releases))
 1. Open `analyzers/SonarAnalyzer.sln`
 
 ## Running Tests
