@@ -28,6 +28,7 @@ using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.Common;
+using SonarAnalyzer.Extensions;
 using SonarAnalyzer.Helpers;
 using StyleCop.Analyzers.Lightup;
 
@@ -61,32 +62,29 @@ namespace SonarAnalyzer.Rules.CSharp
             set
             {
                 filteredClasses = value;
-                filters = filteredClasses.Split(',')
-                    .Select(WildcardPatternToRegularExpression)
-                    .ToList();
+                filters = filteredClasses.Split(',').Select(WildcardPatternToRegularExpression).ToList();
             }
         }
 
         protected override void Initialize(ParameterLoadingAnalysisContext context) =>
-            context.RegisterSyntaxNodeActionInNonGenerated(
-                c =>
+            context.RegisterSyntaxNodeActionInNonGenerated(c =>
                 {
+                    if (c.IsRedundantPositionalRecordContext())
+                    {
+                        return;
+                    }
                     var objectTypeInfo = new ObjectTypeInfo(c.Node, c.SemanticModel);
-                    // For records we are triggered twice and we need to differentiate between the calls by checking the containing symbol kind
-                    // See: https://github.com/dotnet/roslyn/issues/50989
-                    if (objectTypeInfo.Symbol == null || c.ContainingSymbol.Kind != SymbolKind.NamedType)
+                    if (objectTypeInfo.Symbol == null)
                     {
                         return;
                     }
 
                     var thisTypeRootNamespace = GetRootNamespace(objectTypeInfo.Symbol);
-
                     var baseTypesCount = objectTypeInfo.Symbol.BaseType.GetSelfAndBaseTypes()
                         .TakeWhile(s => GetRootNamespace(s) == thisTypeRootNamespace)
                         .Select(nts => nts.OriginalDefinition.ToDisplayString())
                         .TakeWhile(className => filters.All(regex => !regex.IsMatch(className)))
                         .Count();
-
                     if (baseTypesCount > MaximumDepth)
                     {
                         c.ReportIssue(Diagnostic.Create(Rule, objectTypeInfo.Identifier.GetLocation(), objectTypeInfo.Name, baseTypesCount, MaximumDepth));

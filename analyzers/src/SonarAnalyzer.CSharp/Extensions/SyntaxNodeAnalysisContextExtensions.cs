@@ -18,25 +18,24 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System.Collections.Generic;
 using Microsoft.CodeAnalysis;
-using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.Diagnostics;
 
-namespace SonarAnalyzer.Rules.CSharp
+namespace SonarAnalyzer.Extensions
 {
-    [DiagnosticAnalyzer(LanguageNames.CSharp)]
-    public sealed class MutableFieldsShouldNotBePublicReadonly : MutableFieldsShouldNotBe
+    internal static class SyntaxNodeAnalysisContextExtensions
     {
-        private const string DiagnosticId = "S3887";
-        private const string MessageFormat = "Use an immutable collection or reduce the accessibility of the non-private readonly field{0} {1}.";
-
-        public MutableFieldsShouldNotBePublicReadonly() : base(DiagnosticId, MessageFormat) { }
-
-        protected override ISet<SyntaxKind> InvalidModifiers { get; } = new HashSet<SyntaxKind>
-        {
-            SyntaxKind.PublicKeyword,
-            SyntaxKind.ReadOnlyKeyword
-        };
+        /// <summary>
+        /// Roslyn invokes the analzyer twice for positional records. The first invocation is for the class declaration and the second for the ctor represented by the positional parameter list.
+        /// </summary>
+        /// <returns>
+        /// Returns <see langword="true"/> for the invocation on the class declaration and <see langword="false"/> for the ctor invocation.
+        /// </returns>
+        /// <example>
+        /// record R(int i);
+        /// </example>
+        /// <seealso href="https://github.com/dotnet/roslyn/issues/50989"/>
+        internal static bool IsRedundantPositionalRecordContext(this SyntaxNodeAnalysisContext context) =>
+            context.ContainingSymbol.Kind == SymbolKind.Method;
     }
 }

@@ -19,22 +19,19 @@
  */
 
 using System.Collections.Generic;
-using System.Collections.Immutable;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.Diagnostics;
-using SonarAnalyzer.Helpers;
 
 namespace SonarAnalyzer.Rules.CSharp
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
-    public class MutableFieldsShouldNotBePublicStatic : MutableFieldsShouldNotBe
+    public sealed class MutableFieldsShouldNotBePublicStatic : MutableFieldsShouldNotBe
     {
         private const string DiagnosticId = "S2386";
         private const string MessageFormat = "Use an immutable collection or reduce the accessibility of the public static field{0} {1}.";
 
-        private static readonly DiagnosticDescriptor Rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
+        public MutableFieldsShouldNotBePublicStatic() : base(DiagnosticId, MessageFormat) { }
 
         protected override ISet<SyntaxKind> InvalidModifiers { get; } = new HashSet<SyntaxKind>
         {

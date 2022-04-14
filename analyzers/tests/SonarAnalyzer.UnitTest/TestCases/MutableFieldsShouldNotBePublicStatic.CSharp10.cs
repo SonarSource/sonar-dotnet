@@ -8,22 +8,23 @@ namespace Tests.Diagnostics
 {
     public record struct WhenNonReadonlyAlwaysReport
     {
-        public static ISet<string> iSetInitializaedWithImmutableSet = ImmutableHashSet.Create("a", "b"); // FN
-        public static IList<string> iListInitializaedWithImmutableArray = ImmutableArray.Create("a", "b"); // FN
-        public static IList<string> iListInitializaedWithImmutableList = ImmutableList.Create("a", "b"); // FN
-        public static IDictionary<string, string> iDictionaryInitializaedWithImmutableDictionary = ImmutableDictionary.Create<string, string>(); // FN
-        public static IList<string> iList = null; // FN
-        public static ISet<string> isetInitializaedWithHashSet = new HashSet<string> { "a", "b" }; // FN
-        public static IList<string> iListInitializaedWithList = new List<string> { "a", "b" }; // FN
-        public static IDictionary<string, string> iDictionaryInitializaedWithDictionary = new Dictionary<string, string>(); // FN
-        public static string[] strings; // FN
-        public static Array array; // FN
-        public static List<string> listString; // FN
-        public static LinkedList<string> linkedListString; // FN
-        public static SortedList<string, string> sortedListString; // FN
-        public static ObservableCollection<string> observableCollectionString; // FN
-        public static ICollection<string> iCollectionString; // FN
-        public static IList<string> iListString; // FN
+        public static ISet<string> iSetInitializaedWithImmutableSet = ImmutableHashSet.Create("a", "b");   // Noncompliant {{Use an immutable collection or reduce the accessibility of the public static field 'iSetInitializaedWithImmutableSet'.}}
+        //            ^^^^^^^^^^^^
+        public static IList<string> iListInitializaedWithImmutableArray = ImmutableArray.Create("a", "b"); // Noncompliant
+        public static IList<string> iListInitializaedWithImmutableList = ImmutableList.Create("a", "b");   // Noncompliant
+        public static IDictionary<string, string> iDictionaryInitializaedWithImmutableDictionary = ImmutableDictionary.Create<string, string>(); // Noncompliant
+        public static IList<string> iList = null;                                                                                                // Noncompliant
+        public static ISet<string> isetInitializaedWithHashSet = new HashSet<string> { "a", "b" };                                               // Noncompliant
+        public static IList<string> iListInitializaedWithList = new List<string> { "a", "b" };                                                   // Noncompliant
+        public static IDictionary<string, string> iDictionaryInitializaedWithDictionary = new Dictionary<string, string>();                      // Noncompliant
+        public static string[] strings;                                        // Noncompliant
+        public static Array array;                                             // Noncompliant
+        public static List<string> listString;                                 // Noncompliant
+        public static LinkedList<string> linkedListString;                     // Noncompliant
+        public static SortedList<string, string> sortedListString;             // Noncompliant
+        public static ObservableCollection<string> observableCollectionString; // Noncompliant
+        public static ICollection<string> iCollectionString;                   // Noncompliant
+        public static IList<string> iListString;                               // Noncompliant
     }
 
     public record struct WhenReadonlyAndInitializedToImmutable
@@ -37,15 +38,15 @@ namespace Tests.Diagnostics
 
     public record struct WhenNonReadonlyAlwaysReportPositional(string Property)
     {
-        public static ISet<string> iSetInitializaedWithImmutableSet = ImmutableHashSet.Create("a", "b"); // FN
-        public static IList<string> iListInitializaedWithImmutableArray = ImmutableArray.Create("a", "b"); // FN
-        public static IList<string> iListInitializaedWithImmutableList = ImmutableList.Create("a", "b"); // FN
+        public static ISet<string> iSetInitializaedWithImmutableSet = ImmutableHashSet.Create("a", "b");   // Noncompliant
+        public static IList<string> iListInitializaedWithImmutableArray = ImmutableArray.Create("a", "b"); // Noncompliant
+        public static IList<string> iListInitializaedWithImmutableList = ImmutableList.Create("a", "b");   // Noncompliant
     }
 
     public struct WhenNonReadonlyAlwaysReportStruct
     {
-        public static ISet<string> iSetInitializaedWithImmutableSet = ImmutableHashSet.Create("a", "b"); // Noncompliant
+        public static ISet<string> iSetInitializaedWithImmutableSet = ImmutableHashSet.Create("a", "b");   // Noncompliant
         public static IList<string> iListInitializaedWithImmutableArray = ImmutableArray.Create("a", "b"); // Noncompliant
-        public static IList<string> iListInitializaedWithImmutableList = ImmutableList.Create("a", "b"); // Noncompliant
+        public static IList<string> iListInitializaedWithImmutableList = ImmutableList.Create("a", "b");   // Noncompliant
     }
 }
