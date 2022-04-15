@@ -18,9 +18,6 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-#if NET
-using System.Linq;
-#endif
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.Rules.CSharp;
 using SonarAnalyzer.UnitTest.MetadataReferences;
@@ -31,41 +28,44 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class TestClassShouldHaveTestMethodTest
     {
+        private readonly VerifierBuilder builder = new VerifierBuilder<TestClassShouldHaveTestMethod>();
+
         [DataTestMethod]
         [DataRow("2.5.7.10213")]
         [DataRow(Constants.NuGetLatestVersion)]
         public void TestClassShouldHaveTestMethod_NUnit(string testFwkVersion) =>
-            OldVerifier.VerifyAnalyzer(
-                @"TestCases\TestClassShouldHaveTestMethod.NUnit.cs",
-                new TestClassShouldHaveTestMethod(),
-                NuGetMetadataReference.NUnit(testFwkVersion));
+            builder
+                .AddPaths("TestClassShouldHaveTestMethod.NUnit.cs")
+                .AddReferences(NuGetMetadataReference.NUnit(testFwkVersion))
+                .Verify();
 
         [DataTestMethod]
         [DataRow("3.0.0")]
         [DataRow(Constants.NuGetLatestVersion)]
         public void TestClassShouldHaveTestMethod_NUnit3(string testFwkVersion) =>
-            OldVerifier.VerifyAnalyzer(
-                @"TestCases\TestClassShouldHaveTestMethod.NUnit3.cs",
-                new TestClassShouldHaveTestMethod(),
-                NuGetMetadataReference.NUnit(testFwkVersion));
+            builder
+                .AddPaths("TestClassShouldHaveTestMethod.NUnit3.cs")
+                .AddReferences(NuGetMetadataReference.NUnit(testFwkVersion))
+                .Verify();
 
         [DataTestMethod]
         [DataRow("1.1.11")]
         [DataRow(Constants.NuGetLatestVersion)]
         public void TestClassShouldHaveTestMethod_MSTest(string testFwkVersion) =>
-            OldVerifier.VerifyAnalyzer(
-                @"TestCases\TestClassShouldHaveTestMethod.MsTest.cs",
-                new TestClassShouldHaveTestMethod(),
-                NuGetMetadataReference.MSTestTestFramework(testFwkVersion));
+            builder
+                .AddPaths("TestClassShouldHaveTestMethod.MsTest.cs")
+                .AddReferences(NuGetMetadataReference.MSTestTestFramework(testFwkVersion))
+                .Verify();
 
 #if NET
         [DataTestMethod]
         public void TestClassShouldHaveTestMethod_CSharp9() =>
-            OldVerifier.VerifyAnalyzerFromCSharp9Library(
-                @"TestCases\TestClassShouldHaveTestMethod.CSharp9.cs",
-                new TestClassShouldHaveTestMethod(),
-                NuGetMetadataReference.MSTestTestFramework(Constants.NuGetLatestVersion)
-                    .Concat(NuGetMetadataReference.NUnit(Constants.NuGetLatestVersion)));
+            builder
+                .WithOptions(ParseOptionsHelper.FromCSharp9)
+                .AddPaths("TestClassShouldHaveTestMethod.CSharp9.cs")
+                .AddReferences(NuGetMetadataReference.MSTestTestFramework(Constants.NuGetLatestVersion))
+                .AddReferences(NuGetMetadataReference.NUnit(Constants.NuGetLatestVersion))
+                .Verify();
 #endif
     }
 }
