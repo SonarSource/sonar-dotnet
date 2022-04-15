@@ -36,7 +36,8 @@ namespace SonarAnalyzer.Helpers
                 KnownType.NUnit_Framework_TestAttribute,
                 KnownType.NUnit_Framework_TestCaseAttribute,
                 KnownType.NUnit_Framework_TestCaseSourceAttribute,
-                KnownType.NUnit_Framework_TheoryAttribute);
+                KnownType.NUnit_Framework_TheoryAttribute,
+                KnownType.NUnit_Framework_ITestBuilderInterface);
 
         public static readonly ImmutableArray<KnownType> KnownTestMethodAttributesOfxUnit = ImmutableArray.Create(
                 KnownType.Xunit_FactAttribute,
@@ -89,7 +90,7 @@ namespace SonarAnalyzer.Helpers
             classSymbol.AnyAttributeDerivesFromAny(KnownTestClassAttributes);
 
         public static bool IsTestMethod(this IMethodSymbol method) =>
-            method.AnyAttributeDerivesFromAny(KnownTestMethodAttributes);
+            method.AnyAttributeDerivesFromOrImplementsAny(KnownTestMethodAttributes);
 
         public static bool HasExpectedExceptionAttribute(this IMethodSymbol method) =>
             method.GetAttributes().Any(a => a.AttributeClass.IsAny(KnownExpectedExceptionAttributes));

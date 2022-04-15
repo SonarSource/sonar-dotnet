@@ -41,6 +41,15 @@ namespace SonarAnalyzer.UnitTest.Rules
                 NuGetMetadataReference.NUnit(testFwkVersion));
 
         [DataTestMethod]
+        [DataRow("3.0.0")]
+        [DataRow(Constants.NuGetLatestVersion)]
+        public void TestClassShouldHaveTestMethod_NUnit3(string testFwkVersion) =>
+            OldVerifier.VerifyAnalyzer(
+                @"TestCases\TestClassShouldHaveTestMethod.NUnit3.cs",
+                new TestClassShouldHaveTestMethod(),
+                NuGetMetadataReference.NUnit(testFwkVersion));
+
+        [DataTestMethod]
         [DataRow("1.1.11")]
         [DataRow(Constants.NuGetLatestVersion)]
         public void TestClassShouldHaveTestMethod_MSTest(string testFwkVersion) =>
