@@ -46,13 +46,15 @@ namespace SonarAnalyzer.Rules.CSharp
             SyntaxKind.ConversionOperatorDeclaration,
             SyntaxKind.DestructorDeclaration,
             SyntaxKind.InterfaceDeclaration,
+            SyntaxKindEx.LocalFunctionStatement,
             SyntaxKind.MethodDeclaration,
             SyntaxKind.OperatorDeclaration,
             SyntaxKind.ParenthesizedLambdaExpression,
             SyntaxKind.PropertyDeclaration,
+            SyntaxKindEx.RecordClassDeclaration,
+            SyntaxKindEx.RecordStructDeclaration,
             SyntaxKind.SimpleLambdaExpression,
             SyntaxKind.StructDeclaration,
-            SyntaxKindEx.LocalFunctionStatement,
         }.ToImmutableHashSet();
 
         protected override void VisitInvocation(EndInvokeContext context) =>
