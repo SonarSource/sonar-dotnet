@@ -112,7 +112,8 @@ namespace SonarAnalyzer.Rules.CSharp
                 SyntaxKind.ClassDeclaration,
                 SyntaxKind.StructDeclaration,
                 SyntaxKind.InterfaceDeclaration,
-                SyntaxKindEx.RecordClassDeclaration);
+                SyntaxKindEx.RecordClassDeclaration,
+                SyntaxKindEx.RecordStructDeclaration);
 
         private static bool IsTrackedType(INamedTypeSymbol namedType) =>
             namedType.TypeKind != TypeKind.Enum && !namedType.IsAny(IgnoredTypes);
