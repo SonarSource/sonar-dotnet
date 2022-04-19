@@ -119,6 +119,7 @@ namespace SonarAnalyzer.Helpers
         internal static readonly KnownType NUnit_Framework_AssertionException = new("NUnit.Framework.AssertionException");
         internal static readonly KnownType NUnit_Framework_ExpectedExceptionAttribute = new("NUnit.Framework.ExpectedExceptionAttribute");
         internal static readonly KnownType NUnit_Framework_IgnoreAttribute = new("NUnit.Framework.IgnoreAttribute");
+        internal static readonly KnownType NUnit_Framework_ITestBuilderInterface = new("NUnit.Framework.Interfaces.ITestBuilder");
         internal static readonly KnownType NUnit_Framework_TestAttribute = new("NUnit.Framework.TestAttribute");
         internal static readonly KnownType NUnit_Framework_TestCaseAttribute = new("NUnit.Framework.TestCaseAttribute");
         internal static readonly KnownType NUnit_Framework_TestCaseSourceAttribute = new("NUnit.Framework.TestCaseSourceAttribute");

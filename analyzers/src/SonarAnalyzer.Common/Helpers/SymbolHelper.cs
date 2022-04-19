@@ -217,6 +217,9 @@ namespace SonarAnalyzer.Helpers
         internal static bool AnyAttributeDerivesFromAny(this ISymbol symbol, ImmutableArray<KnownType> attributeTypes) =>
             symbol?.GetAttributes().Any(a => a.AttributeClass.DerivesFromAny(attributeTypes)) ?? false;
 
+        internal static bool AnyAttributeDerivesFromOrImplementsAny(this ISymbol symbol, ImmutableArray<KnownType> attributeTypesOrInterfaces) =>
+            symbol?.GetAttributes().Any(a => a.AttributeClass.DerivesOrImplementsAny(attributeTypesOrInterfaces)) ?? false;
+
         internal static bool IsKnownType(this SyntaxNode syntaxNode, KnownType knownType, SemanticModel semanticModel)
         {
             var symbolType = semanticModel.GetSymbolInfo(syntaxNode).Symbol.GetSymbolType();
