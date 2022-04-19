@@ -373,11 +373,10 @@ public class A // Compliant, types referenced by the nameof expression are not c
 ").Verify();
 
 #if NET
+
         [TestMethod]
-        public void AvoidExcessiveClassCoupling_CSharp9() => withThreshold1
-            .AddPaths("AvoidExcessiveClassCoupling.CSharp9.cs")
-            .WithOptions(ParseOptionsHelper.FromCSharp9)
-            .Verify();
+        public void AvoidExcessiveClassCoupling_CSharp9() =>
+            withThreshold1.AddPaths("AvoidExcessiveClassCoupling.CSharp9.cs").WithOptions(ParseOptionsHelper.FromCSharp9).Verify();
 
         [TestMethod]
         public void AvoidExcessiveClassCoupling_InRecord_Enums_Not_Counted() =>
@@ -421,10 +420,10 @@ public class Types // Compliant, pointers are not counted
 ").WithOptions(ParseOptionsHelper.FromCSharp9).Verify();
 
         [TestMethod]
-        public void AvoidExcessiveClassCoupling_CSharp10() => withThreshold1
-            .AddPaths("AvoidExcessiveClassCoupling.CSharp10.cs")
-            .WithOptions(ParseOptionsHelper.FromCSharp10)
-            .Verify();
+        public void AvoidExcessiveClassCoupling_CSharp10() =>
+            withThreshold1.AddPaths("AvoidExcessiveClassCoupling.CSharp10.cs").WithOptions(ParseOptionsHelper.FromCSharp10).Verify();
+
 #endif
+
     }
 }
