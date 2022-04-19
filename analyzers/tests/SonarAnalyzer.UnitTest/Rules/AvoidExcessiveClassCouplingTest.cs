@@ -27,25 +27,27 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class AvoidExcessiveClassCouplingTest
     {
+        private readonly VerifierBuilder builderWithThreshold0 = new VerifierBuilder().AddAnalyzer(() => new AvoidExcessiveClassCoupling { Threshold = 0 });
+        private readonly VerifierBuilder builderWithThreshold1 = new VerifierBuilder().AddAnalyzer(() => new AvoidExcessiveClassCoupling { Threshold = 1 });
+
         [TestMethod]
         public void AvoidExcessiveClassCoupling() =>
-            OldVerifier.VerifyAnalyzer(@"TestCases\AvoidExcessiveClassCoupling.cs", new AvoidExcessiveClassCoupling { Threshold = 1 });
+            builderWithThreshold1.AddPaths("AvoidExcessiveClassCoupling.cs").Verify();
 
         [TestMethod]
         public void AvoidExcessiveClassCoupling_Generic_No_Constraints() =>
-            OldVerifier.VerifyCSharpAnalyzer(@"
+            builderWithThreshold0.AddSnippet(@"
 using System;
 using System.Collections.Generic;
 public class Generics1 // Noncompliant {{Split this class into smaller and more specialized ones to reduce its dependencies on other types from 1 to the maximum authorized 0 or less.}}
 {
     public void Foo<T, V>(IDictionary<T, V> dictionary) { } // +1 for dictionary
 }
-",
-                new AvoidExcessiveClassCoupling { Threshold = 0 });
+").Verify();
 
         [TestMethod]
         public void AvoidExcessiveClassCoupling_Generic_With_Constraints() =>
-            OldVerifier.VerifyCSharpAnalyzer(@"
+            builderWithThreshold0.AddSnippet(@"
 using System;
 using System.Collections.Generic;
 public class Generics1 // Noncompliant {{Split this class into smaller and more specialized ones to reduce its dependencies on other types from 4 to the maximum authorized 0 or less.}}
@@ -56,12 +58,11 @@ public class Generics1 // Noncompliant {{Split this class into smaller and more 
     {
     }
 }
-",
-                new AvoidExcessiveClassCoupling { Threshold = 0 });
+").Verify();
 
         [TestMethod]
         public void AvoidExcessiveClassCoupling_Generic_Bounded() =>
-            OldVerifier.VerifyCSharpAnalyzer(@"
+            builderWithThreshold0.AddSnippet(@"
 using System;
 using System.Collections.Generic;
 public class Generics1 // Noncompliant {{Split this class into smaller and more specialized ones to reduce its dependencies on other types from 3 to the maximum authorized 0 or less.}}
@@ -70,12 +71,11 @@ public class Generics1 // Noncompliant {{Split this class into smaller and more 
     {
     }
 }
-",
-                new AvoidExcessiveClassCoupling { Threshold = 0 });
+").Verify();
 
         [TestMethod]
         public void AvoidExcessiveClassCoupling_Generic_Bounded_Deep_Nesting() =>
-            OldVerifier.VerifyCSharpAnalyzer(@"
+            builderWithThreshold0.AddSnippet(@"
 using System;
 using System.Collections.Generic;
 public class Generics1 // Noncompliant {{Split this class into smaller and more specialized ones to reduce its dependencies on other types from 6 to the maximum authorized 0 or less.}}
@@ -85,79 +85,72 @@ public class Generics1 // Noncompliant {{Split this class into smaller and more 
     {
     }
 }
-",
-                new AvoidExcessiveClassCoupling { Threshold = 0 });
+").Verify();
 
         [TestMethod]
         public void AvoidExcessiveClassCoupling_Task_Not_Counted() =>
-            OldVerifier.VerifyCSharpAnalyzer(@"
+            builderWithThreshold0.AddSnippet(@"
 using System.Threading.Tasks;
 public class Tasks // Compliant, Task types are not counted
 {
     public void Foo<T>(Task task1, Task<T> task2) { }
 }
-",
-                new AvoidExcessiveClassCoupling { Threshold = 0 });
+").Verify();
 
         [TestMethod]
         public void AvoidExcessiveClassCoupling_Action_Not_Counted() =>
-            OldVerifier.VerifyCSharpAnalyzer(@"
+            builderWithThreshold0.AddSnippet(@"
 using System;
 public class Actions // Compliant, Action types are not counted
 {
     public void Foo<T>(Action action1, Action<T> action2, Action<T, T> action3, Action<T, T, T> action4, Action<T, T, T, T> action5) { }
 }
-",
-                new AvoidExcessiveClassCoupling { Threshold = 0 });
+").Verify();
 
         [TestMethod]
         public void AvoidExcessiveClassCoupling_Func_Not_Counted() =>
-            OldVerifier.VerifyCSharpAnalyzer(@"
+            builderWithThreshold0.AddSnippet(@"
 using System;
 public class Functions // Compliant, Func types are not counted
 {
     public void Foo<T>(Func<T> func1, Func<T, T> func2, Func<T, T, T> func3, Func<T, T, T, T> func4) { }
 }
-",
-                new AvoidExcessiveClassCoupling { Threshold = 0 });
+").Verify();
 
         [TestMethod]
         public void AvoidExcessiveClassCoupling_Pointers_Not_Counted() =>
-            OldVerifier.VerifyCSharpAnalyzer(@"
+            builderWithThreshold0.AddSnippet(@"
 using System;
 public class Pointers // Compliant, pointers are not counted
 {
     public void Foo(int* pointer) { } // Error [CS0214]
 }
-",
-                new AvoidExcessiveClassCoupling { Threshold = 0 });
+").Verify();
 
         [TestMethod]
         public void AvoidExcessiveClassCoupling_Enums_Not_Counted() =>
-            OldVerifier.VerifyCSharpAnalyzer(@"
+            builderWithThreshold0.AddSnippet(@"
 using System;
 public class Pointers // Compliant, enums are not counted
 {
     public ConsoleColor Foo(ConsoleColor c) { return ConsoleColor.Black; }
 }
-",
-                new AvoidExcessiveClassCoupling { Threshold = 0 });
+").Verify();
 
         [TestMethod]
         public void AvoidExcessiveClassCoupling_Lazy_Not_Counted() =>
-            OldVerifier.VerifyCSharpAnalyzer(@"
+            builderWithThreshold0.AddSnippet(@"
 using System;
 using System.Collections.Generic;
 public class Lazyness // Noncompliant {{Split this class into smaller and more specialized ones to reduce its dependencies on other types from 1 to the maximum authorized 0 or less.}}
 {
     public void Foo(Lazy<IEnumerable<int>> lazy) { } // +1 IEnumerable
 }
-",
-                new AvoidExcessiveClassCoupling { Threshold = 0 });
+").Verify();
 
         [TestMethod]
         public void AvoidExcessiveClassCoupling_Fields_Are_Counted() =>
-            OldVerifier.VerifyCSharpAnalyzer(@"
+            builderWithThreshold0.AddSnippet(@"
 using System.Collections.Generic;
 public class Fields // Noncompliant {{Split this class into smaller and more specialized ones to reduce its dependencies on other types from 5 to the maximum authorized 0 or less.}}
 {
@@ -169,12 +162,11 @@ public class Fields // Noncompliant {{Split this class into smaller and more spe
     // static
     public static IEqualityComparer<int> c5;
 }
-",
-                new AvoidExcessiveClassCoupling { Threshold = 0 });
+").Verify();
 
         [TestMethod]
         public void AvoidExcessiveClassCoupling_Properties_Are_Counted() =>
-            OldVerifier.VerifyCSharpAnalyzer(@"
+            builderWithThreshold0.AddSnippet(@"
 using System.Collections.Generic;
 public class Properties // Noncompliant {{Split this class into smaller and more specialized ones to reduce its dependencies on other types from 9 to the maximum authorized 0 or less.}}
 {
@@ -201,12 +193,11 @@ public class Properties // Noncompliant {{Split this class into smaller and more
     // expression body
     public object C7 => new Dictionary<int, int>();
 }
-",
-                new AvoidExcessiveClassCoupling { Threshold = 0 });
+").Verify();
 
         [TestMethod]
         public void AvoidExcessiveClassCoupling_Indexers_Are_Counted() =>
-            OldVerifier.VerifyCSharpAnalyzer(@"
+            builderWithThreshold0.AddSnippet(@"
 using System.Collections.Generic;
 public class Indexers // Noncompliant {{Split this class into smaller and more specialized ones to reduce its dependencies on other types from 6 to the maximum authorized 0 or less.}}
 {
@@ -218,12 +209,11 @@ public class Indexers // Noncompliant {{Split this class into smaller and more s
     // parameters
     public int this[IEqualityComparer<int> i, Stack<int> j] { get { return 0; } } // +1 IEqualityComparer, +1 Stack
 }
-",
-                new AvoidExcessiveClassCoupling { Threshold = 0 });
+").Verify();
 
         [TestMethod]
         public void AvoidExcessiveClassCoupling_Events_Are_Counted() =>
-            OldVerifier.VerifyCSharpAnalyzer(@"
+            builderWithThreshold0.AddSnippet(@"
 using System;
 using System.Collections.Generic;
 public class Events // Noncompliant {{Split this class into smaller and more specialized ones to reduce its dependencies on other types from 9 to the maximum authorized 0 or less.}}
@@ -248,12 +238,11 @@ public class Events // Noncompliant {{Split this class into smaller and more spe
         }
     }
 }
-",
-                new AvoidExcessiveClassCoupling { Threshold = 0 });
+").Verify();
 
         [TestMethod]
         public void AvoidExcessiveClassCoupling_Methods_Are_Counted() =>
-            OldVerifier.VerifyCSharpAnalyzer(@"
+            builderWithThreshold0.AddSnippet(@"
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -278,12 +267,11 @@ public class Methods // Noncompliant {{Split this class into smaller and more sp
     private object M9() => new List<int>(); // +1 List
     private void M10() => Debug.Write(1); // +1 Debug
 }
-",
-                new AvoidExcessiveClassCoupling { Threshold = 0 });
+").Verify();
 
         [TestMethod]
         public void AvoidExcessiveClassCoupling_Inner_Classes_And_Structs_Are_Not_Counted() =>
-            OldVerifier.VerifyCSharpAnalyzer(@"
+            builderWithThreshold0.AddSnippet(@"
 using System;
 using System.Collections.Generic;
 public class OuterClass // Noncompliant {{Split this class into smaller and more specialized ones to reduce its dependencies on other types from 1 to the maximum authorized 0 or less.}}
@@ -304,12 +292,11 @@ public struct OuterStruct // Noncompliant {{Split this struct into smaller and m
         private void M1(ICollection<int> l1) { } // +1 ICollection
     }
 }
-",
-                new AvoidExcessiveClassCoupling { Threshold = 0 });
+").Verify();
 
         [TestMethod]
         public void AvoidExcessiveClassCoupling_Interface_Declaration() =>
-            OldVerifier.VerifyCSharpAnalyzer(@"
+            builderWithThreshold0.AddSnippet(@"
 using System;
 using System.Collections.Generic;
 public interface I // Noncompliant {{Split this interface into smaller and more specialized ones to reduce its dependencies on other types from 1 to the maximum authorized 0 or less.}}
@@ -317,24 +304,22 @@ public interface I // Noncompliant {{Split this interface into smaller and more 
     void M1(IList<int> l1); // +1 IList
     // interfaces cannot contain other types
 }
-",
-                new AvoidExcessiveClassCoupling { Threshold = 0 });
+").Verify();
 
         [TestMethod]
         public void AvoidExcessiveClassCoupling_Self_Reference() =>
-            OldVerifier.VerifyCSharpAnalyzer(@"
+            builderWithThreshold0.AddSnippet(@"
 using System;
 using System.Collections.Generic;
 public class Self // Compliant, self references are not counted
 {
     void M1(Self other) { }
 }
-",
-                new AvoidExcessiveClassCoupling { Threshold = 0 });
+").Verify();
 
         [TestMethod]
         public void AvoidExcessiveClassCoupling_Base_Classes_Interfaces_NotCounted() =>
-            OldVerifier.VerifyCSharpAnalyzer(@"
+            builderWithThreshold0.AddSnippet(@"
 using System;
 using System.Collections.Generic;
 public class Base {}
@@ -343,12 +328,11 @@ public class Self // Noncompliant {{Split this class into smaller and more speci
 {
     public object Clone() { return null; }
 }
-",
-                new AvoidExcessiveClassCoupling { Threshold = 0 });
+").Verify();
 
         [TestMethod]
         public void AvoidExcessiveClassCoupling_Catch_Statements() =>
-            OldVerifier.VerifyCSharpAnalyzer(@"
+            builderWithThreshold0.AddSnippet(@"
 using System;
 using System.Collections.Generic;
 public class Self // Noncompliant {{Split this class into smaller and more specialized ones to reduce its dependencies on other types from 2 to the maximum authorized 0 or less.}}
@@ -359,12 +343,11 @@ public class Self // Noncompliant {{Split this class into smaller and more speci
         try { } catch (Exception e) when (e is InvalidOperationException) { } // +1 InvalidOperationException
     }
 }
-",
-                new AvoidExcessiveClassCoupling { Threshold = 0 });
+").Verify();
 
         [TestMethod]
         public void AvoidExcessiveClassCoupling_Attributes() =>
-            OldVerifier.VerifyCSharpAnalyzer(@"
+            builderWithThreshold0.AddSnippet(@"
 using System;
 [Serializable]
 public class Self // Compliant, attributes are not counted
@@ -374,12 +357,11 @@ public class Self // Compliant, attributes are not counted
     {
     }
 }
-",
-                new AvoidExcessiveClassCoupling { Threshold = 0 });
+").Verify();
 
         [TestMethod]
         public void AvoidExcessiveClassCoupling_Nameof() =>
-            OldVerifier.VerifyCSharpAnalyzer(@"
+            builderWithThreshold0.AddSnippet(@"
 public class A // Compliant, types referenced by the nameof expression are not counted
 {
     public A()
@@ -388,27 +370,28 @@ public class A // Compliant, types referenced by the nameof expression are not c
         var s2 = nameof(System.Action);
     }
 }
-",
-                new AvoidExcessiveClassCoupling { Threshold = 0 });
+").Verify();
 
 #if NET
         [TestMethod]
-        public void AvoidExcessiveClassCoupling_CSharp9() =>
-            OldVerifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\AvoidExcessiveClassCoupling.CSharp9.cs", new AvoidExcessiveClassCoupling { Threshold = 1 });
+        public void AvoidExcessiveClassCoupling_CSharp9() => builderWithThreshold1
+            .AddPaths("AvoidExcessiveClassCoupling.CSharp9.cs")
+            .WithOptions(ParseOptionsHelper.FromCSharp9)
+            .Verify();
 
         [TestMethod]
         public void AvoidExcessiveClassCoupling_InRecord_Enums_Not_Counted() =>
-            OldVerifier.VerifyCSharpAnalyzer(@"
+            builderWithThreshold0.AddSnippet(@"
 using System;
 public record Pointers // Compliant, enums are not counted
 {
     public ConsoleColor Foo(ConsoleColor c) { return ConsoleColor.Black; }
 }
-", new AvoidExcessiveClassCoupling { Threshold = 0 }, ParseOptionsHelper.FromCSharp9);
+").WithOptions(ParseOptionsHelper.FromCSharp9).Verify();
 
         [TestMethod]
         public void AvoidExcessiveClassCoupling_Base_Records_Interfaces_NotCounted() =>
-            OldVerifier.VerifyCSharpAnalyzer(@"
+            builderWithThreshold0.AddSnippet(@"
 using System;
 using System.Runtime.Serialization;
 public record Base {}
@@ -419,11 +402,11 @@ public record Self // Noncompliant
     {
     }
 }
-", new AvoidExcessiveClassCoupling { Threshold = 0 }, ParseOptionsHelper.FromCSharp9);
+").WithOptions(ParseOptionsHelper.FromCSharp9).Verify();
 
         [TestMethod]
         public void AvoidExcessiveClassCoupling_Primitive_Types_Not_Counted() =>
-            OldVerifier.VerifyCSharpAnalyzer(@"
+            builderWithThreshold0.AddSnippet(@"
 using System;
 public class Types // Compliant, pointers are not counted
 {
@@ -435,11 +418,13 @@ public class Types // Compliant, pointers are not counted
         double d2, string s1,
         object o1) { }
 }
-", new AvoidExcessiveClassCoupling { Threshold = 0 }, ParseOptionsHelper.FromCSharp9);
+").WithOptions(ParseOptionsHelper.FromCSharp9).Verify();
 
         [TestMethod]
-        public void AvoidExcessiveClassCoupling_CSharp10() =>
-            OldVerifier.VerifyAnalyzerFromCSharp10Library(@"TestCases\AvoidExcessiveClassCoupling.CSharp10.cs", new AvoidExcessiveClassCoupling { Threshold = 1 });
+        public void AvoidExcessiveClassCoupling_CSharp10() => builderWithThreshold1
+            .AddPaths("AvoidExcessiveClassCoupling.CSharp10.cs")
+            .WithOptions(ParseOptionsHelper.FromCSharp10)
+            .Verify();
 #endif
     }
 }
