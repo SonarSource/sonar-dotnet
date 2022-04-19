@@ -42,11 +42,6 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private static readonly DiagnosticDescriptor Rule =
             DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager, isEnabledByDefault: false);
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
-
-        [RuleParameter("max", PropertyType.Integer, "Maximum number of types a single type is allowed to depend upon", ThresholdDefaultValue)]
-        public int Threshold { get; set; } = ThresholdDefaultValue;
-
         private static readonly ImmutableArray<KnownType> IgnoredTypes =
             ImmutableArray.Create(
                 KnownType.Void,
@@ -81,22 +76,24 @@ namespace SonarAnalyzer.Rules.CSharp
                 KnownType.System_Func_T1_T2_T3_T4_TResult,
                 KnownType.System_Lazy);
 
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
+
+        [RuleParameter("max", PropertyType.Integer, "Maximum number of types a single type is allowed to depend upon", ThresholdDefaultValue)]
+        public int Threshold { get; set; } = ThresholdDefaultValue;
+
         protected override void Initialize(ParameterLoadingAnalysisContext context) =>
             context.RegisterSyntaxNodeActionInNonGenerated(
                 c =>
                 {
                     var typeDeclaration = (TypeDeclarationSyntax)c.Node;
-
                     if (typeDeclaration.Identifier.IsMissing || c.IsRedundantPositionalRecordContext())
                     {
                         return;
                     }
 
                     var type = c.SemanticModel.GetDeclaredSymbol(typeDeclaration);
-
                     var collector = new TypeDependencyCollector(c.SemanticModel, typeDeclaration);
                     collector.SafeVisit(typeDeclaration);
-
                     var dependentTypes = collector.DependentTypes
                         .SelectMany(ExpandGenericTypes)
                         .Distinct()
