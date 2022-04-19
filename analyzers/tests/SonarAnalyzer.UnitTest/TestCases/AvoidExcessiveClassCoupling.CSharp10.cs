@@ -9,7 +9,8 @@ namespace Tests.Diagnostics
     public struct MyStruct { }
 
     public record struct FirstRecordStruct { }
-    public record struct SecondRecordStruct // FN
+    public record struct SecondRecordStruct // Noncompliant {{Split this record into smaller and more specialized ones to reduce its dependencies on other types from 6 to the maximum authorized 1 or less.}}
+    //                   ^^^^^^^^^^^^^^^^^^
     {
         private FirstRecordStruct field1 = new FirstRecordStruct(); // +1
         private MyStruct field2 = new MyStruct(); // +1
@@ -24,7 +25,7 @@ namespace Tests.Diagnostics
         public void BarMethod(Stream s) { } // +1
     }
 
-    public record struct PositionalRecordStruct(int Parameter) // FN
+    public record struct PositionalRecordStruct(int Parameter) // Noncompliant
     {
         private FirstRecordStruct field1 = new FirstRecordStruct(); // +1
         private MyStruct field2 = new MyStruct(); // +1
@@ -39,11 +40,11 @@ namespace Tests.Diagnostics
         public void BarMethod(Stream s) { } // +1
     }
 
-    public record struct OutterRecordStruct
+    public record struct OutterRecordStruct // Noncompliant
     {
         InnerRecordStruct whatever = new InnerRecordStruct();
 
-        public record struct InnerRecordStruct // FN
+        public record struct InnerRecordStruct // Noncompliant
         {
             public Stream stream = new FileStream("", FileMode.Open);
         }
