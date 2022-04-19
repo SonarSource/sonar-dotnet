@@ -118,12 +118,6 @@ namespace Tests.Diagnostics
             caller.BeginInvoke("FooStruct", 42, null, null); // Noncompliant
         }
 
-        private static void BeginInvokeOnDelegateWithoutCallback()
-        {
-            var caller = new AsyncMethodCaller(AsyncMethod);
-            caller.BeginInvoke(name: "delegate", 42, @object: null, callback: null); // Noncompliant {{Pair this "BeginInvoke" with an "EndInvoke".}}
-        }
-
         private void BeginInvokeAndEndInvokeOnDelegateWithLambdaCallback1()
         {
             var caller = new AsyncMethodCaller(AsyncMethod);
