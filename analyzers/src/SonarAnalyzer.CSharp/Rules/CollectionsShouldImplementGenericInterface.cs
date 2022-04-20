@@ -24,6 +24,7 @@ using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
+using SonarAnalyzer.Extensions;
 using SonarAnalyzer.Helpers;
 using StyleCop.Analyzers.Lightup;
 
@@ -55,8 +56,12 @@ namespace SonarAnalyzer.Rules.CSharp
         {
             context.RegisterSyntaxNodeActionInNonGenerated(c =>
                 {
-                    var typeDeclaration = c.Node as BaseTypeDeclarationSyntax;
+                    if (c.IsRedundantPositionalRecordContext())
+                    {
+                        return;
+                    }
 
+                    var typeDeclaration = (BaseTypeDeclarationSyntax)c.Node;
                     var implementedTypes = typeDeclaration?.BaseList?.Types;
                     if (implementedTypes == null)
                     {
