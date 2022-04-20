@@ -17,22 +17,23 @@ namespace Tests.Diagnostics
     // Noncompliant@-1 {{Refactor this collection to implement 'System.Collections.Generic.ICollection<T>'.}}
 
     class TestClass_06 : IEnumerable, ICollection<string> { }
-    class TestClass_07 : IEnumerable, IList<string> { }
-    class TestClass_08 : IEnumerable, IEnumerable<string> { }
-    class TestClass_09 : Collection<string>, IEnumerable { }
-    class TestClass_10<T> : IEnumerable, IList<T> { }
+    class TestClass_07 : ICollection<string>, IEnumerable { }
+    class TestClass_08 : IEnumerable, IList<string> { }
+    class TestClass_09 : IEnumerable, IEnumerable<string> { }
+    class TestClass_10 : Collection<string>, IEnumerable { }
+    class TestClass_11<T> : IEnumerable, IList<T> { }
 
-    class TestClass_11<T> : IEnumerable, ICollection, ICollection<T> { }
+    class TestClass_12<T> : IEnumerable, ICollection, ICollection<T> { }
 
-    class TestClass_12 : IEnumerable, IList, IEnumerable<string> { }
+    class TestClass_13 : IEnumerable, IList, IEnumerable<string> { }
 
-    class TestClass_13 { }
+    class TestClass_14 { }
 
-    class TestClass_14 : Exception { }
+    class TestClass_15 : Exception { }
 
-    class TestClass_15 : IEqualityComparer { }
+    class TestClass_16 : IEqualityComparer { }
 
-    class TestClass_16 : IList, InvalidType { } // Noncompliant
+    class TestClass_17 : IList, InvalidType { } // Noncompliant
 
     struct TestStruct_01 : IList { } // Noncompliant
 
