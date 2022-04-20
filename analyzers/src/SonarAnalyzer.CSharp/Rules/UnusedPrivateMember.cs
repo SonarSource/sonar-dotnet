@@ -43,6 +43,8 @@ namespace SonarAnalyzer.Rules.CSharp
         private const string S4487DiagnosticId = "S4487";
         private const string S4487MessageFormat = "Remove this unread {0} field '{1}' or refactor the code to use its value.";
 
+        private const string Private = "private";
+
         private static readonly DiagnosticDescriptor RuleS1144 = DiagnosticDescriptorBuilder.GetDescriptor(S1144DiagnosticId, S1144MessageFormat, RspecStrings.ResourceManager, fadeOutCode: true);
         private static readonly DiagnosticDescriptor RuleS4487 = DiagnosticDescriptorBuilder.GetDescriptor(S4487DiagnosticId, S4487MessageFormat, RspecStrings.ResourceManager, fadeOutCode: true);
         private static readonly ImmutableArray<KnownType> IgnoredTypes =
@@ -99,7 +101,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 && new CSharpSymbolUsageCollector(context.Compilation, privateSymbols) is var usageCollector
                 && VisitDeclaringReferences(namedType, usageCollector, context.Compilation, includeGeneratedFile: true))
             {
-                var diagnostics = GetDiagnosticsForUnusedPrivateMembers(usageCollector, privateSymbols, "private", fieldLikeSymbols)
+                var diagnostics = GetDiagnosticsForUnusedPrivateMembers(usageCollector, privateSymbols, Private, fieldLikeSymbols)
                                         .Concat(GetDiagnosticsForUsedButUnreadFields(usageCollector, privateSymbols));
                 foreach (var diagnostic in diagnostics)
                 {
@@ -132,16 +134,8 @@ namespace SonarAnalyzer.Rules.CSharp
                 foreach (var declaration in syntaxReference.GetSyntax().ChildNodes().OfType<BaseTypeDeclarationSyntax>().ToList())
                 {
                     var semanticModel = compilation.GetSemanticModel(declaration.SyntaxTree);
-                    if (semanticModel.GetDeclaredSymbol(declaration) is not { } declarationSymbol)
-                    {
-                        return false;
-                    }
-
-                    if (RetrieveRemovableSymbols(declarationSymbol, compilation) is not { } symbolsCollector)
-                    {
-                        return false;
-                    }
-
+                    var declarationSymbol = semanticModel.GetDeclaredSymbol(declaration);
+                    var symbolsCollector = RetrieveRemovableSymbols(declarationSymbol, compilation);
                     CopyRetrievedSymbols(symbolsCollector, privateSymbols, internalSymbols, fieldLikeSymbols);
                 }
             }
@@ -193,7 +187,7 @@ namespace SonarAnalyzer.Rules.CSharp
             unreadFields.Select(usage => Diagnostic.Create(RuleS4487, usage.Declaration.GetLocation(), GetFieldAccessibilityForMessage(usage.Symbol), usage.Symbol.Name));
 
         private static string GetFieldAccessibilityForMessage(ISymbol symbol) =>
-            symbol.DeclaredAccessibility == Accessibility.Private ? "private" : "private class";
+            symbol.DeclaredAccessibility == Accessibility.Private ? Private : "private class";
 
         private static IEnumerable<Diagnostic> GetDiagnosticsForMembers(ICollection<ISymbol> unusedSymbols,
                                                                         string accessibility,
@@ -247,14 +241,14 @@ namespace SonarAnalyzer.Rules.CSharp
                 && property.SetMethod != null
                 && GetAccessorSyntax(property.SetMethod) is { } setter)
             {
-                return Diagnostic.Create(RuleS1144, setter.GetLocation(), "private", "set accessor in property", property.Name);
+                return Diagnostic.Create(RuleS1144, setter.GetLocation(), Private, "set accessor in property", property.Name);
             }
             else if (access == AccessorAccess.Set
                      && property.GetMethod != null
                      && GetAccessorSyntax(property.GetMethod) is { } getter
                      && getter.HasBodyOrExpressionBody())
             {
-                return Diagnostic.Create(RuleS1144, getter.GetLocation(), "private", "get accessor in property", property.Name);
+                return Diagnostic.Create(RuleS1144, getter.GetLocation(), Private, "get accessor in property", property.Name);
             }
             else
             {

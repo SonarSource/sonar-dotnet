@@ -36,7 +36,7 @@ namespace SonarAnalyzer.Common
         {
             if (aToB.ContainsKey(a) || bToA.ContainsKey(b))
             {
-                throw new ArgumentException("An element with the same key already exists in the BidirectionalDictionary");
+                throw new ArgumentException("An element with the same key already exists in the BidirectionalDictionary.");
             }
 
             aToB.Add(a, b);
