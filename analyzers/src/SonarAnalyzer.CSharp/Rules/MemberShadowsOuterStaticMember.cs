@@ -47,8 +47,8 @@ namespace SonarAnalyzer.Rules.CSharp
                 {
                     var innerClassSymbol = (INamedTypeSymbol)c.Symbol;
                     var containerClassSymbol = innerClassSymbol.ContainingType;
-                    if (!innerClassSymbol.IsClass() ||
-                        !containerClassSymbol.IsClass())
+                    if (!innerClassSymbol.IsClassOrStruct() ||
+                        !containerClassSymbol.IsClassOrStruct())
                     {
                         return;
                     }
@@ -56,33 +56,25 @@ namespace SonarAnalyzer.Rules.CSharp
                     var members = innerClassSymbol.GetMembers().Where(member => !member.IsImplicitlyDeclared);
                     foreach (var member in members)
                     {
-                        if (member is IPropertySymbol property)
+                        switch (member)
                         {
-                            CheckProperty(c, containerClassSymbol, property);
-                            continue;
-                        }
-
-                        if (member is IFieldSymbol field)
-                        {
-                            CheckField(c, containerClassSymbol, field);
-                            continue;
-                        }
-
-                        if (member is IEventSymbol @event)
-                        {
-                            CheckEvent(c, containerClassSymbol, @event);
-                            continue;
-                        }
-
-                        if (member is IMethodSymbol method)
-                        {
-                            CheckMethod(c, containerClassSymbol, method);
-                            continue;
-                        }
-
-                        if (member is INamedTypeSymbol namedType)
-                        {
-                            CheckNamedType(c, containerClassSymbol, namedType);
+                            case IPropertySymbol property:
+                                CheckProperty(c, containerClassSymbol, property);
+                                break;
+                            case IFieldSymbol field:
+                                CheckField(c, containerClassSymbol, field);
+                                break;
+                            case IEventSymbol @event:
+                                CheckEvent(c, containerClassSymbol, @event);
+                                break;
+                            case IMethodSymbol method:
+                                CheckMethod(c, containerClassSymbol, method);
+                                break;
+                            case INamedTypeSymbol namedType:
+                                CheckNamedType(c, containerClassSymbol, namedType);
+                                break;
+                            default:
+                                continue;
                         }
                     }
                 },
@@ -119,22 +111,17 @@ namespace SonarAnalyzer.Rules.CSharp
             }
         }
 
-        private static void CheckMethod(SymbolAnalysisContext context, INamedTypeSymbol containerClassSymbol, IMethodSymbol method)
-        {
-            CheckEventOrMethod(method, containerClassSymbol, context,
-                e =>
+        private static void CheckMethod(SymbolAnalysisContext context, INamedTypeSymbol containerClassSymbol, IMethodSymbol method) =>
+            CheckEventOrMethod(method, containerClassSymbol, context, m =>
                 {
-                    var reference = e.DeclaringSyntaxReferences.FirstOrDefault();
+                    var reference = m.DeclaringSyntaxReferences.FirstOrDefault();
                     var syntax = reference?.GetSyntax() as MethodDeclarationSyntax;
                     return syntax?.Identifier.GetLocation();
                 },
                 "method");
-        }
 
-        private static void CheckEvent(SymbolAnalysisContext context, INamedTypeSymbol containerClassSymbol, IEventSymbol @event)
-        {
-            CheckEventOrMethod(@event, containerClassSymbol, context,
-                e =>
+        private static void CheckEvent(SymbolAnalysisContext context, INamedTypeSymbol containerClassSymbol, IEventSymbol @event) =>
+            CheckEventOrMethod(@event, containerClassSymbol, context, e =>
                 {
                     var reference = e.DeclaringSyntaxReferences.FirstOrDefault();
                     if (reference == null)
@@ -151,22 +138,17 @@ namespace SonarAnalyzer.Rules.CSharp
                     return eventSyntax?.Identifier.GetLocation();
                 },
                 "event");
-        }
 
-        private static void CheckField(SymbolAnalysisContext context, INamedTypeSymbol containerClassSymbol, IFieldSymbol field)
-        {
-            CheckFieldOrProperty(field, containerClassSymbol, context,
-                f =>
-                {
-                    var reference = f.DeclaringSyntaxReferences.FirstOrDefault();
-                    var syntax = reference?.GetSyntax() as VariableDeclaratorSyntax;
-                    return syntax?.Identifier.GetLocation();
-                },
+        private static void CheckField(SymbolAnalysisContext context, INamedTypeSymbol containerClassSymbol, IFieldSymbol field) =>
+            CheckFieldOrProperty(field, containerClassSymbol, context, f =>
+                 {
+                     var reference = f.DeclaringSyntaxReferences.FirstOrDefault();
+                     var syntax = reference?.GetSyntax() as VariableDeclaratorSyntax;
+                     return syntax?.Identifier.GetLocation();
+                 },
                 "field");
-        }
 
-        private static void CheckProperty(SymbolAnalysisContext context, INamedTypeSymbol containerClassSymbol, IPropertySymbol property)
-        {
+        private static void CheckProperty(SymbolAnalysisContext context, INamedTypeSymbol containerClassSymbol, IPropertySymbol property) =>
             CheckFieldOrProperty(property, containerClassSymbol, context, p =>
             {
                 var reference = p.DeclaringSyntaxReferences.FirstOrDefault();
@@ -174,16 +156,18 @@ namespace SonarAnalyzer.Rules.CSharp
                 {
                     return null;
                 }
-                if (!(reference.GetSyntax() is PropertyDeclarationSyntax syntax))
+                if (reference.GetSyntax() is not PropertyDeclarationSyntax syntax)
                 {
                     return null;
                 }
                 return syntax.Identifier.GetLocation();
             }, "property");
-        }
 
-        private static void CheckFieldOrProperty<T>(T propertyOrField, INamedTypeSymbol containerClassSymbol,
-            SymbolAnalysisContext context, Func<T, Location> locationSelector, string memberType) where T : ISymbol
+        private static void CheckFieldOrProperty<T>(T propertyOrField,
+                                                    INamedTypeSymbol containerClassSymbol,
+                                                    SymbolAnalysisContext context,
+                                                    Func<T, Location> locationSelector,
+                                                    string memberType) where T : ISymbol
         {
             var shadowsProperty = GetSelfAndOuterClasses(containerClassSymbol)
                 .SelectMany(c => c.GetMembers(propertyOrField.Name))
@@ -204,14 +188,18 @@ namespace SonarAnalyzer.Rules.CSharp
             }
         }
 
-        private static void CheckEventOrMethod<T>(T eventOrMethod, INamedTypeSymbol containerClassSymbol,
-            SymbolAnalysisContext context, Func<T, Location> locationSelector, string memberType) where T : ISymbol
+        private static void CheckEventOrMethod<T>(T eventOrMethod,
+                                                  INamedTypeSymbol containerClassSymbol,
+                                                  SymbolAnalysisContext context,
+                                                  Func<T, Location> locationSelector,
+                                                  string memberType) where T : ISymbol
         {
-            var shadowsMethod = GetSelfAndOuterClasses(containerClassSymbol)
-                .SelectMany(c=> c.GetMembers(eventOrMethod.Name))
+            var selfAndOutterClasses = GetSelfAndOuterClasses(containerClassSymbol);
+            var shadowsMethod = selfAndOutterClasses
+                .SelectMany(c => c.GetMembers(eventOrMethod.Name))
                 .OfType<IMethodSymbol>()
                 .Any(method => method.IsStatic);
-            var shadowsEvent = GetSelfAndOuterClasses(containerClassSymbol)
+            var shadowsEvent = selfAndOutterClasses
                 .SelectMany(c => c.GetMembers(eventOrMethod.Name))
                 .OfType<IEventSymbol>()
                 .Any(@event => @event.IsStatic);
@@ -226,11 +214,11 @@ namespace SonarAnalyzer.Rules.CSharp
             }
         }
 
-        private static IEnumerable<INamedTypeSymbol> GetSelfAndOuterClasses(INamedTypeSymbol symbol)
+        private static IReadOnlyList<INamedTypeSymbol> GetSelfAndOuterClasses(INamedTypeSymbol symbol)
         {
             var classes = new List<INamedTypeSymbol>();
             var currentClass = symbol;
-            while(currentClass.IsClass())
+            while (currentClass.IsClassOrStruct())
             {
                 classes.Add(currentClass);
                 currentClass = currentClass.ContainingType;
