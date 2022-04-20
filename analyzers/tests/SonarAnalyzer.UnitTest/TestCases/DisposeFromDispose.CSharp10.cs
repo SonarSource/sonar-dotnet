@@ -25,7 +25,7 @@ record struct R2 : IDisposable
 
     public void OpenResource(string path) => this.Fs = new FileStream(path, FileMode.Open);
     public void CloseResource() => this.Fs.Close();
-    public void CleanUp() => this.Fs.Dispose(); // Compliant. Properties are not not considered.
+    public void CleanUp() => this.Fs.Dispose(); // FN. Properties are not considered.
     public void Dispose() { }
 }
 
