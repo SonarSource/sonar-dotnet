@@ -39,6 +39,7 @@ namespace SonarAnalyzer.Rules.CSharp
             SyntaxKind.EnumDeclaration,
             SyntaxKind.InterfaceDeclaration,
             SyntaxKindEx.RecordClassDeclaration,
+            SyntaxKindEx.RecordStructDeclaration,
         };
 
         protected override SyntaxToken GetTypeIdentifier(SyntaxNode declaration) =>
@@ -51,6 +52,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 SyntaxKind.NamespaceDeclaration,
                 SyntaxKind.InterfaceDeclaration,
                 SyntaxKindEx.RecordClassDeclaration,
+                SyntaxKindEx.RecordStructDeclaration,
                 SyntaxKindEx.FileScopedNamespaceDeclaration);
     }
 }
