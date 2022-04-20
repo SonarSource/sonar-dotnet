@@ -18,8 +18,8 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System.Collections.Immutable;
 using Microsoft.CodeAnalysis;
+using SonarAnalyzer.Extensions;
 using SonarAnalyzer.Helpers;
 
 namespace SonarAnalyzer.Rules
@@ -30,7 +30,6 @@ namespace SonarAnalyzer.Rules
         protected const string DiagnosticId = "S3903";
 
         protected abstract TSyntaxKind[] SyntaxKinds { get; }
-
         protected abstract bool IsInnerTypeOrWithinNamespace(SyntaxNode declaration, SemanticModel semanticModel);
         protected abstract SyntaxToken GetTypeIdentifier(SyntaxNode declaration);
 
@@ -43,8 +42,7 @@ namespace SonarAnalyzer.Rules
               c =>
               {
                   var declaration = c.Node;
-
-                  if (c.ContainingSymbol.Kind != SymbolKind.NamedType
+                  if (c.IsRedundantPositionalRecordContext()
                       || IsInnerTypeOrWithinNamespace(declaration, c.SemanticModel))
                   {
                       return;
