@@ -18,6 +18,7 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System;
 using System.Collections.Immutable;
 using System.Linq;
 using Microsoft.CodeAnalysis;
@@ -35,13 +36,13 @@ namespace SonarAnalyzer.Rules.CSharp
         internal const string DiagnosticId = "S2952";
         private const string MessageFormat = "Move this 'Dispose' call into this class' own 'Dispose' method.";
 
-        private const string DisposeMethodName = "Dispose";
+        private const string DisposeMethodName = nameof(IDisposable.Dispose);
         private const string DisposeMethodExplicitName = "System.IDisposable.Dispose";
 
-        private static readonly DiagnosticDescriptor rule =
+        private static readonly DiagnosticDescriptor Rule =
             DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
 
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(rule);
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
 
         protected override void Initialize(SonarAnalysisContext context)
         {
@@ -50,14 +51,14 @@ namespace SonarAnalyzer.Rules.CSharp
                 {
                     var invocation = (InvocationExpressionSyntax)c.Node;
                     var languageVersion = c.Compilation.GetLanguageVersion();
-                    if (invocation.Expression is MemberAccessExpressionSyntax memberAccess &&
-                        c.SemanticModel.GetSymbolInfo(memberAccess.Expression).Symbol is IFieldSymbol invocationTarget &&
-                        invocationTarget.IsNonStaticNonPublicDisposableField(languageVersion) &&
-                        IsDisposeMethodCalled(invocation, c.SemanticModel, languageVersion) &&
-                        IsDisposableClassOrStruct(invocationTarget.ContainingType, languageVersion) &&
-                        !IsCalledInsideDispose(invocation, c.SemanticModel))
+                    if (invocation.Expression is MemberAccessExpressionSyntax memberAccess
+                        && c.SemanticModel.GetSymbolInfo(memberAccess.Expression).Symbol is IFieldSymbol invocationTarget
+                        && invocationTarget.IsNonStaticNonPublicDisposableField(languageVersion)
+                        && IsDisposeMethodCalled(invocation, c.SemanticModel, languageVersion)
+                        && IsDisposableClassOrStruct(invocationTarget.ContainingType, languageVersion)
+                        && !IsCalledInsideDispose(invocation, c.SemanticModel))
                     {
-                        c.ReportIssue(Diagnostic.Create(rule, GetLocation(invocation)));
+                        c.ReportIssue(Diagnostic.Create(Rule, GetLocation(memberAccess)));
                     }
                 },
                 SyntaxKind.InvocationExpression);
@@ -68,16 +69,15 @@ namespace SonarAnalyzer.Rules.CSharp
         /// Starting C# 8, "ref structs" (which cannot implement an interface) can also be disposable.
         /// </summary>
         private static bool IsDisposableClassOrStruct(INamedTypeSymbol type, LanguageVersion languageVersion) =>
-            ImplementsDisposable(type) ||
-            type.IsDisposableRefStruct(languageVersion);
+            ImplementsDisposable(type)
+            || type.IsDisposableRefStruct(languageVersion);
 
         private static bool IsCalledInsideDispose(InvocationExpressionSyntax invocation, SemanticModel semanticModel) =>
-            semanticModel.GetEnclosingSymbol(invocation.SpanStart) is IMethodSymbol enclosingMethodSymbol &&
-            IsMethodMatchingDisposeMethodName(enclosingMethodSymbol);
+            semanticModel.GetEnclosingSymbol(invocation.SpanStart) is IMethodSymbol enclosingMethodSymbol
+            && IsMethodMatchingDisposeMethodName(enclosingMethodSymbol);
 
-        private Location GetLocation(InvocationExpressionSyntax invocation) =>
-            // We already did the type check before
-            ((MemberAccessExpressionSyntax)invocation.Expression).Name.GetLocation();
+        private Location GetLocation(MemberAccessExpressionSyntax invocation) =>
+            invocation.Name.GetLocation();
 
         /// <summary>
         /// Verifies that the invocation is calling the correct Dispose() method on an disposable object.
@@ -87,25 +87,25 @@ namespace SonarAnalyzer.Rules.CSharp
         /// </remarks>
         private static bool IsDisposeMethodCalled(InvocationExpressionSyntax invocation, SemanticModel semanticModel, LanguageVersion languageVersion)
         {
-            if (!(semanticModel.GetSymbolInfo(invocation).Symbol is IMethodSymbol methodSymbol) ||
-                !methodSymbol.IsDisposeMethod())
+            if (semanticModel.GetSymbolInfo(invocation).Symbol is not IMethodSymbol methodSymbol
+                || !methodSymbol.IsDisposeMethod())
             {
                 return false;
             }
 
-            var disposeMethodSignature = semanticModel.Compilation.GetTypeMethod(SpecialType.System_IDisposable, "Dispose");
+            var disposeMethodSignature = semanticModel.Compilation.GetTypeMethod(SpecialType.System_IDisposable, DisposeMethodName);
             if (disposeMethodSignature == null)
             {
                 return false;
             }
 
-            return methodSymbol.Equals(methodSymbol.ContainingType.FindImplementationForInterfaceMember(disposeMethodSignature)) ||
-                methodSymbol.ContainingType.IsDisposableRefStruct(languageVersion);
+            return methodSymbol.Equals(methodSymbol.ContainingType.FindImplementationForInterfaceMember(disposeMethodSignature))
+                || methodSymbol.ContainingType.IsDisposableRefStruct(languageVersion);
         }
 
         private static bool IsMethodMatchingDisposeMethodName(IMethodSymbol enclosingMethodSymbol) =>
-            enclosingMethodSymbol.Name == DisposeMethodName ||
-            enclosingMethodSymbol.ExplicitInterfaceImplementations.Any() && enclosingMethodSymbol.Name == DisposeMethodExplicitName;
+            enclosingMethodSymbol.Name == DisposeMethodName
+            || (enclosingMethodSymbol.ExplicitInterfaceImplementations.Any() && enclosingMethodSymbol.Name == DisposeMethodExplicitName);
 
         private static bool ImplementsDisposable(INamedTypeSymbol containingType) =>
             containingType.Implements(KnownType.System_IDisposable);
