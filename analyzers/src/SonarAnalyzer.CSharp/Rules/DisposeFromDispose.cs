@@ -39,8 +39,7 @@ namespace SonarAnalyzer.Rules.CSharp
         private const string DisposeMethodName = nameof(IDisposable.Dispose);
         private const string DisposeMethodExplicitName = "System.IDisposable.Dispose";
 
-        private static readonly DiagnosticDescriptor Rule =
-            DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
+        private static readonly DiagnosticDescriptor Rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
 
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
 
@@ -58,7 +57,7 @@ namespace SonarAnalyzer.Rules.CSharp
                         && IsDisposableClassOrStruct(invocationTarget.ContainingType, languageVersion)
                         && !IsCalledInsideDispose(invocation, c.SemanticModel))
                     {
-                        c.ReportIssue(Diagnostic.Create(Rule, GetLocation(memberAccess)));
+                        c.ReportIssue(Diagnostic.Create(Rule, memberAccess.Name.GetLocation()));
                     }
                 },
                 SyntaxKind.InvocationExpression);
@@ -69,15 +68,11 @@ namespace SonarAnalyzer.Rules.CSharp
         /// Starting C# 8, "ref structs" (which cannot implement an interface) can also be disposable.
         /// </summary>
         private static bool IsDisposableClassOrStruct(INamedTypeSymbol type, LanguageVersion languageVersion) =>
-            ImplementsDisposable(type)
-            || type.IsDisposableRefStruct(languageVersion);
+            ImplementsDisposable(type) || type.IsDisposableRefStruct(languageVersion);
 
         private static bool IsCalledInsideDispose(InvocationExpressionSyntax invocation, SemanticModel semanticModel) =>
             semanticModel.GetEnclosingSymbol(invocation.SpanStart) is IMethodSymbol enclosingMethodSymbol
             && IsMethodMatchingDisposeMethodName(enclosingMethodSymbol);
-
-        private Location GetLocation(MemberAccessExpressionSyntax invocation) =>
-            invocation.Name.GetLocation();
 
         /// <summary>
         /// Verifies that the invocation is calling the correct Dispose() method on an disposable object.
@@ -85,23 +80,12 @@ namespace SonarAnalyzer.Rules.CSharp
         /// <remarks>
         /// Disposable ref structs do not implement the IDisposable interface and are supported starting C# 8.
         /// </remarks>
-        private static bool IsDisposeMethodCalled(InvocationExpressionSyntax invocation, SemanticModel semanticModel, LanguageVersion languageVersion)
-        {
-            if (semanticModel.GetSymbolInfo(invocation).Symbol is not IMethodSymbol methodSymbol
-                || !methodSymbol.IsDisposeMethod())
-            {
-                return false;
-            }
-
-            var disposeMethodSignature = semanticModel.Compilation.GetTypeMethod(SpecialType.System_IDisposable, DisposeMethodName);
-            if (disposeMethodSignature == null)
-            {
-                return false;
-            }
-
-            return methodSymbol.Equals(methodSymbol.ContainingType.FindImplementationForInterfaceMember(disposeMethodSignature))
-                || methodSymbol.ContainingType.IsDisposableRefStruct(languageVersion);
-        }
+        private static bool IsDisposeMethodCalled(InvocationExpressionSyntax invocation, SemanticModel semanticModel, LanguageVersion languageVersion) =>
+            semanticModel.GetSymbolInfo(invocation).Symbol is IMethodSymbol methodSymbol
+                && methodSymbol.IsDisposeMethod()
+                && semanticModel.Compilation.GetTypeMethod(SpecialType.System_IDisposable, DisposeMethodName) is { } disposeMethodSignature
+                && (methodSymbol.Equals(methodSymbol.ContainingType.FindImplementationForInterfaceMember(disposeMethodSignature))
+                    || methodSymbol.ContainingType.IsDisposableRefStruct(languageVersion));
 
         private static bool IsMethodMatchingDisposeMethodName(IMethodSymbol enclosingMethodSymbol) =>
             enclosingMethodSymbol.Name == DisposeMethodName
