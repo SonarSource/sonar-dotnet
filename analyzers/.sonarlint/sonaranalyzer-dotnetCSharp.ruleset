@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RuleSet xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Name="SonarQube - SonarAnalyzer .Net C# QP for .NET Analyzers" Description="This rule set was automatically generated from SonarQube https://sonarcloud.io/profiles/show?key=AWT63_RpV-oLu4FdMlyI" ToolsVersion="14.0">
+<RuleSet xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" Name="SonarQube - SonarAnalyzer .Net C# QP for .NET Analyzers" Description="This rule set was automatically generated from SonarQube https://sonarcloud.io/profiles/show?key=AWT63_RpV-oLu4FdMlyI" ToolsVersion="14.0">
   <Rules AnalyzerId="SonarAnalyzer.CSharp" RuleNamespace="SonarAnalyzer.CSharp">
     <Rule Id="S100" Action="Info" />
     <Rule Id="S1006" Action="Warning" />
@@ -101,6 +101,7 @@
     <Rule Id="S2201" Action="Warning" />
     <Rule Id="S2219" Action="Info" />
     <Rule Id="S2221" Action="Info" />
+    <Rule Id="S2222" Action="Warning" />
     <Rule Id="S2223" Action="Warning" />
     <Rule Id="S2225" Action="Warning" />
     <Rule Id="S2228" Action="None" />
@@ -169,6 +170,7 @@
     <Rule Id="S3010" Action="Warning" />
     <Rule Id="S3011" Action="Warning" />
     <Rule Id="S3052" Action="Info" />
+    <Rule Id="S3059" Action="None" />
     <Rule Id="S3060" Action="Warning" />
     <Rule Id="S3168" Action="Warning" />
     <Rule Id="S3169" Action="Warning" />
@@ -194,11 +196,13 @@
     <Rule Id="S3254" Action="Info" />
     <Rule Id="S3256" Action="Info" />
     <Rule Id="S3257" Action="Info" />
+    <Rule Id="S3260" Action="Info" />
     <Rule Id="S3261" Action="Info" />
     <Rule Id="S3262" Action="Warning" />
     <Rule Id="S3263" Action="Warning" />
     <Rule Id="S3264" Action="Warning" />
     <Rule Id="S3265" Action="Warning" />
+    <Rule Id="S3267" Action="Warning" />
     <Rule Id="S3329" Action="Warning" />
     <Rule Id="S3343" Action="Warning" />
     <Rule Id="S3346" Action="Warning" />
@@ -357,6 +361,7 @@
     <Rule Id="S5547" Action="Warning" />
     <Rule Id="S5659" Action="Warning" />
     <Rule Id="S5773" Action="Warning" />
+    <Rule Id="S6354" Action="None" />
     <Rule Id="S818" Action="Info" />
     <Rule Id="S881" Action="Warning" />
     <Rule Id="S907" Action="Warning" />
