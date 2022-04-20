@@ -42,8 +42,7 @@ namespace SonarAnalyzer.Rules
               c =>
               {
                   var declaration = c.Node;
-                  if (c.IsRedundantPositionalRecordContext()
-                      || IsInnerTypeOrWithinNamespace(declaration, c.SemanticModel))
+                  if (c.IsRedundantPositionalRecordContext() || IsInnerTypeOrWithinNamespace(declaration, c.SemanticModel))
                   {
                       return;
                   }
