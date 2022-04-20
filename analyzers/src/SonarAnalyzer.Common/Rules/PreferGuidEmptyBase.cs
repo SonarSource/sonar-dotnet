@@ -62,21 +62,18 @@ namespace SonarAnalyzer.Rules
                 Language.SyntaxKind.DefaultExpressions);
         }
 
-        private bool NotAllowedGuidCtorArguments(SyntaxNode ctorNode, SemanticModel semanticModel)
+        private bool IsInvalidCtor(SyntaxNode ctorNode, SemanticModel semanticModel)
         {
             var arguments = Language.Syntax.ArgumentExpressions(ctorNode).ToArray();
             return arguments.Length == 0 || CreatesGuidEmpty(arguments, semanticModel);
         }
 
-        private bool NoParameter(SyntaxNode defaultExpression) =>
-            !defaultExpression.Ancestors()
-                .Any(node => Language.Syntax.IsKind(node, Language.SyntaxKind.Parameter));
+        private bool IsInParameter(SyntaxNode defaultExpression) =>
+            !defaultExpression.Ancestors().Any(x => Language.Syntax.IsKind(x, Language.SyntaxKind.Parameter));
 
-        private static bool CreatesGuidEmpty(SyntaxNode[] arguments, SemanticModel semanticModel) =>
+        private static bool CreatesEmptyGuid(SyntaxNode[] arguments, SemanticModel semanticModel) =>
             arguments.Length == 1
-            && semanticModel.GetConstantValue(arguments[0]) is { HasValue: true } optional
-            && optional.Value is string str
-            && Guid.TryParse(str, out var guid)
+            && Guid.TryParse(semanticModel.GetConstantValue(arguments[0]).Value as string, out var guid)
             && guid == Guid.Empty;
         }
 }
