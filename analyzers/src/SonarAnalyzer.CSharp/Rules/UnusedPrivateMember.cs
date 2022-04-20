@@ -95,8 +95,9 @@ namespace SonarAnalyzer.Rules.CSharp
             var privateSymbols = new HashSet<ISymbol>();
             var fieldLikeSymbols = new BidirectionalDictionary<ISymbol, SyntaxNode>();
             if (GatherSymbols((INamedTypeSymbol)context.Symbol, context.Compilation, privateSymbols, removableInternalTypes, fieldLikeSymbols)
-               && new CSharpSymbolUsageCollector(context.Compilation, privateSymbols) is var usageCollector
-               && VisitDeclaringReferences(namedType, usageCollector, context.Compilation, includeGeneratedFile: true))
+                && privateSymbols.Any()
+                && new CSharpSymbolUsageCollector(context.Compilation, privateSymbols) is var usageCollector
+                && VisitDeclaringReferences(namedType, usageCollector, context.Compilation, includeGeneratedFile: true))
             {
                 var diagnostics = GetDiagnosticsForUnusedPrivateMembers(usageCollector, privateSymbols, "private", fieldLikeSymbols)
                                         .Concat(GetDiagnosticsForUsedButUnreadFields(usageCollector, privateSymbols));
@@ -554,7 +555,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 containingTypeAccessibility == Accessibility.Private
                 || (checkInternal && containingTypeAccessibility == Accessibility.Internal)
                 || !modifiers.Any(x => x.IsAnyKind(SyntaxKind.PrivateKeyword, SyntaxKind.PublicKeyword, SyntaxKind.InternalKeyword, SyntaxKind.ProtectedKeyword))
-                || modifiers.Any(x => x.IsAnyKind(SyntaxKind.PrivateKeyword, SyntaxKind.InternalKeyword));
+                || modifiers.Any(SyntaxKind.PrivateKeyword);
         }
     }
 }
