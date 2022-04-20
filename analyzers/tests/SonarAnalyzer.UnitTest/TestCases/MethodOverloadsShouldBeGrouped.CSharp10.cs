@@ -1,12 +1,14 @@
 ﻿record struct R1
 {
-    void a() { } // FN
+    void a() { } // Noncompliant {{All 'a' method overloads should be adjacent.}}
+    //   ^
 
     void a(int a, char b) { }
 
     record B { }
 
-    void a(string a) { } // FN
+    void a(string a) { } // Secondary {{Non-adjacent overload}}
+    //   ^
 }
 
 record struct R2
@@ -22,7 +24,7 @@ record struct R2
 
 record struct R3
 {
-    public R3() { } // FN
+    public R3() { } // Noncompliant
 
     public R3(int a) { }
 
@@ -30,18 +32,18 @@ record struct R3
 
     void a() { }
 
-    public R3(double a) { } // FN
+    public R3(double a) { } // Secondary
 }
 
 record struct PositionalR1(string Parameter)
 {
-    void a() { } // FN
+    void a() { } // Noncompliant
 
     void a(int a, char b) { }
 
     record B { }
 
-    void a(string a) { } // FN
+    void a(string a) { } // Secondary
 }
 
 record struct PositionalR2(string Parameter)
@@ -57,7 +59,7 @@ record struct PositionalR2(string Parameter)
 
 record struct PositionalR3(string Parameter)
 {
-    public PositionalR3(): this("a") { } // FN
+    public PositionalR3(): this("a") { } // Noncompliant
 
     public PositionalR3(int a) : this("a") { }
 
@@ -65,5 +67,5 @@ record struct PositionalR3(string Parameter)
 
     void a() { }
 
-    public PositionalR3(double a) : this("a") { } // FN
+    public PositionalR3(double a) : this("a") { } // Secondary
 }
