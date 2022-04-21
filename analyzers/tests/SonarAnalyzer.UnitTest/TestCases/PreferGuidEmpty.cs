@@ -23,7 +23,7 @@ class Compliant
         Guid? nullable = default; // Compliant, not equivalent to Guid.Empty.
         var nullableOfT = default(Guid?); // Compliant
         var guidAsParameter = new NullableGuidClass(default); // Compliant
-        instance.Method(default); // Compliant
+        guidAsParameter.Method(default); // Compliant
     }
 
     void NotInitialized(string str)

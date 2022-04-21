@@ -2,8 +2,8 @@
 
 class Compliant
 {
-    Guid? NullableField; // Compliant
-    readonly Guid? ReadonlyNullableField; // Compliant
+    Guid? nullableField; // Compliant
+    readonly Guid? readonlyNullableField; // Compliant
     Guid Property { get; set; } // Compliant
 
     void Empty()
@@ -22,11 +22,11 @@ class Compliant
     {
         Guid? nullable = default; // Compliant, not equivalent to Guid.Empty.
         var nullableOfT = default(Guid?); // Compliant
-        var instance = new NullableGuidClass(default); // Compliant
-        instance.Method(default); // Compliant
+        var guidAsParameter = new NullableGuidClass(default); // Compliant
+        guidAsParameter.Method(default); // Compliant
     }
 
-    void NotInitiated(string str)
+    void NotInitialized(string str)
     {
         Guid parsed; // Compliant
         Guid.TryParse(str, out parsed);
