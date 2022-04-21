@@ -40,6 +40,6 @@ namespace SonarAnalyzer.Helpers.Facade
         abstract TSyntaxKind SimpleMemberAccessExpression { get; }
         abstract TSyntaxKind StringLiteralExpression { get; }
         abstract TSyntaxKind[] TypeDeclaration { get; }
-        abstract TSyntaxKind[] DefaultExpressions{ get; }
+        abstract TSyntaxKind[] DefaultExpressions { get; }
     }
 }
