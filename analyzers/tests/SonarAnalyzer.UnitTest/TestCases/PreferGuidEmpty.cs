@@ -26,7 +26,7 @@ class Compliant
         instance.Method(default); // Compliant
     }
 
-    void NotInitiated(string str)
+    void NotInitialized(string str)
     {
         Guid parsed; // Compliant
         Guid.TryParse(str, out parsed);
