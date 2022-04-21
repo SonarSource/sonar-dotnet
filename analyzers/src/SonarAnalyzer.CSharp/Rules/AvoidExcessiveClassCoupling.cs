@@ -36,12 +36,10 @@ namespace SonarAnalyzer.Rules.CSharp
     public sealed class AvoidExcessiveClassCoupling : ParameterLoadingDiagnosticAnalyzer
     {
         private const string DiagnosticId = "S1200";
-        private const string MessageFormat = "Split this {0} into smaller and more specialized ones to reduce its " +
-            "dependencies on other types from {1} to the maximum authorized {2} or less.";
+        private const string MessageFormat = "Split this {0} into smaller and more specialized ones to reduce its dependencies on other types from {1} to the maximum authorized {2} or less.";
         private const int ThresholdDefaultValue = 30;
 
-        private static readonly DiagnosticDescriptor Rule =
-            DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager, isEnabledByDefault: false);
+        private static readonly DiagnosticDescriptor Rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager, isEnabledByDefault: false);
         private static readonly ImmutableArray<KnownType> IgnoredTypes =
             ImmutableArray.Create(
                 KnownType.Void,
@@ -102,8 +100,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
                     if (dependentTypes.Count > Threshold)
                     {
-                        c.ReportIssue(Diagnostic.Create(Rule, typeDeclaration.Identifier.GetLocation(),
-                            typeDeclaration.Keyword.ValueText, dependentTypes.Count, Threshold));
+                        c.ReportIssue(Diagnostic.Create(Rule, typeDeclaration.Identifier.GetLocation(), typeDeclaration.Keyword.ValueText, dependentTypes.Count, Threshold));
                     }
                 },
                 SyntaxKind.ClassDeclaration,
@@ -272,8 +269,8 @@ namespace SonarAnalyzer.Rules.CSharp
                 // We don't use the helper method CSharpSyntaxHelper.IsNameof because it will do some extra
                 // semantic checks to ensure this is the real `nameof` and not a user made method.
                 // Here we prefer to favor fast results over accuracy (at worst we have FNs not FPs).
-                var isNameof = node.Expression.IsKind(SyntaxKind.IdentifierName) &&
-                    ((IdentifierNameSyntax)node.Expression).Identifier.ToString() == CSharpSyntaxHelper.NameOfKeywordText;
+                var isNameof = node.Expression.IsKind(SyntaxKind.IdentifierName)
+                    && ((IdentifierNameSyntax)node.Expression).Identifier.ToString() == CSharpSyntaxHelper.NameOfKeywordText;
 
                 if (!isNameof)
                 {
