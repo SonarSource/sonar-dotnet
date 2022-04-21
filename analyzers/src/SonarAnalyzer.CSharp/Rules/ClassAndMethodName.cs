@@ -49,18 +49,17 @@ namespace SonarAnalyzer.Rules.CSharp
         private static readonly DiagnosticDescriptor TypeNameRule =
             DiagnosticDescriptorBuilder.GetDescriptor(TypeNameDiagnosticId, MessageFormat, RspecStrings.ResourceManager);
 
-        private static readonly Dictionary<SyntaxKind, string> TypeKindNameMapping =
-            new()
-            {
-                { SyntaxKind.StructDeclaration, "struct" },
-                { SyntaxKind.ClassDeclaration, "class" },
-                { SyntaxKind.InterfaceDeclaration, "interface" },
-                { SyntaxKindEx.RecordClassDeclaration, "record" },
-                { SyntaxKindEx.RecordStructDeclaration, "record struct" },
-                { SyntaxKind.MethodDeclaration, "method" },
-                { SyntaxKind.PropertyDeclaration, "property" },
-                { SyntaxKindEx.LocalFunctionStatement, "local function" },
-            };
+        private static readonly Dictionary<SyntaxKind, string> TypeKindNameMapping = new()
+        {
+            { SyntaxKind.StructDeclaration, "struct" },
+            { SyntaxKind.ClassDeclaration, "class" },
+            { SyntaxKind.InterfaceDeclaration, "interface" },
+            { SyntaxKindEx.RecordClassDeclaration, "record" },
+            { SyntaxKindEx.RecordStructDeclaration, "record struct" },
+            { SyntaxKind.MethodDeclaration, "method" },
+            { SyntaxKind.PropertyDeclaration, "property" },
+            { SyntaxKindEx.LocalFunctionStatement, "local function" },
+        };
 
         private static readonly ImmutableArray<KnownType> ComRelatedTypes =
             ImmutableArray.Create(
