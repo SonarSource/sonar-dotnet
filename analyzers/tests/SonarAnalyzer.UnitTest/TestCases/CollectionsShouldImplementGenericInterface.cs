@@ -38,4 +38,7 @@ namespace Tests.Diagnostics
     struct TestStruct_01 : IList { } // Noncompliant
 
     struct TestStruct_02 : IEnumerable { } // Noncompliant
+
+    class BaseClassEnumerable : IEnumerable<int> { }
+    class Derived : BaseClassEnumerable, IEnumerable { } // Noncompliant FP: Interfaces in base classes are ignored.
 }
