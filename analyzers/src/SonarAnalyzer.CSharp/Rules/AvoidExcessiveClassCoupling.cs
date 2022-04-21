@@ -26,6 +26,7 @@ using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.Common;
+using SonarAnalyzer.Extensions;
 using SonarAnalyzer.Helpers;
 using StyleCop.Analyzers.Lightup;
 
@@ -35,17 +36,10 @@ namespace SonarAnalyzer.Rules.CSharp
     public sealed class AvoidExcessiveClassCoupling : ParameterLoadingDiagnosticAnalyzer
     {
         private const string DiagnosticId = "S1200";
-        private const string MessageFormat = "Split this {0} into smaller and more specialized ones to reduce its " +
-            "dependencies on other types from {1} to the maximum authorized {2} or less.";
+        private const string MessageFormat = "Split this {0} into smaller and more specialized ones to reduce its dependencies on other types from {1} to the maximum authorized {2} or less.";
         private const int ThresholdDefaultValue = 30;
 
-        private static readonly DiagnosticDescriptor Rule =
-            DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager, isEnabledByDefault: false);
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
-
-        [RuleParameter("max", PropertyType.Integer, "Maximum number of types a single type is allowed to depend upon", ThresholdDefaultValue)]
-        public int Threshold { get; set; } = ThresholdDefaultValue;
-
+        private static readonly DiagnosticDescriptor Rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager, isEnabledByDefault: false);
         private static readonly ImmutableArray<KnownType> IgnoredTypes =
             ImmutableArray.Create(
                 KnownType.Void,
@@ -80,22 +74,23 @@ namespace SonarAnalyzer.Rules.CSharp
                 KnownType.System_Func_T1_T2_T3_T4_TResult,
                 KnownType.System_Lazy);
 
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
+
+        [RuleParameter("max", PropertyType.Integer, "Maximum number of types a single type is allowed to depend upon", ThresholdDefaultValue)]
+        public int Threshold { get; set; } = ThresholdDefaultValue;
+
         protected override void Initialize(ParameterLoadingAnalysisContext context) =>
-            context.RegisterSyntaxNodeActionInNonGenerated(
-                c =>
+            context.RegisterSyntaxNodeActionInNonGenerated(c =>
                 {
                     var typeDeclaration = (TypeDeclarationSyntax)c.Node;
-
-                    if (typeDeclaration.Identifier.IsMissing || c.ContainingSymbol.Kind != SymbolKind.NamedType)
+                    if (typeDeclaration.Identifier.IsMissing || c.IsRedundantPositionalRecordContext())
                     {
                         return;
                     }
 
                     var type = c.SemanticModel.GetDeclaredSymbol(typeDeclaration);
-
                     var collector = new TypeDependencyCollector(c.SemanticModel, typeDeclaration);
                     collector.SafeVisit(typeDeclaration);
-
                     var dependentTypes = collector.DependentTypes
                         .SelectMany(ExpandGenericTypes)
                         .Distinct()
@@ -105,14 +100,14 @@ namespace SonarAnalyzer.Rules.CSharp
 
                     if (dependentTypes.Count > Threshold)
                     {
-                        c.ReportIssue(Diagnostic.Create(Rule, typeDeclaration.Identifier.GetLocation(),
-                            typeDeclaration.Keyword.ValueText, dependentTypes.Count, Threshold));
+                        c.ReportIssue(Diagnostic.Create(Rule, typeDeclaration.Identifier.GetLocation(), typeDeclaration.Keyword.ValueText, dependentTypes.Count, Threshold));
                     }
                 },
                 SyntaxKind.ClassDeclaration,
                 SyntaxKind.StructDeclaration,
                 SyntaxKind.InterfaceDeclaration,
-                SyntaxKindEx.RecordClassDeclaration);
+                SyntaxKindEx.RecordClassDeclaration,
+                SyntaxKindEx.RecordStructDeclaration);
 
         private static bool IsTrackedType(INamedTypeSymbol namedType) =>
             namedType.TypeKind != TypeKind.Enum && !namedType.IsAny(IgnoredTypes);
@@ -274,8 +269,8 @@ namespace SonarAnalyzer.Rules.CSharp
                 // We don't use the helper method CSharpSyntaxHelper.IsNameof because it will do some extra
                 // semantic checks to ensure this is the real `nameof` and not a user made method.
                 // Here we prefer to favor fast results over accuracy (at worst we have FNs not FPs).
-                var isNameof = node.Expression.IsKind(SyntaxKind.IdentifierName) &&
-                    ((IdentifierNameSyntax)node.Expression).Identifier.ToString() == CSharpSyntaxHelper.NameOfKeywordText;
+                var isNameof = node.Expression.IsKind(SyntaxKind.IdentifierName)
+                    && ((IdentifierNameSyntax)node.Expression).Identifier.ToString() == CSharpSyntaxHelper.NameOfKeywordText;
 
                 if (!isNameof)
                 {
