@@ -8,7 +8,8 @@
 <h2>Noncompliant Code Example</h2>
 <pre>
 Public Sub Foo()
-    Dim G As New Guid   ' Noncompliant - what's the intent?
+    Dim G1 As New Guid           ' Noncompliant - what's the intent?
+    Dim G2 As Guid = Nothing  ' Noncompliant
 End Sub
 </pre>
 <h2>Compliant Solution</h2>
