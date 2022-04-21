@@ -43,8 +43,8 @@ class Compliant
 
 class NonCompliant
 {
-    Guid Field; // FN
-    readonly Guid ReadonlyField; // FN
+    Guid field; // FN
+    readonly Guid readonlyField; // FN
     Guid Property { get; set; }
 
     void DefaultCtor()
