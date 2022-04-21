@@ -2,8 +2,8 @@
 
 class Compliant
 {
-    Guid? NullableField; // Compliant
-    readonly Guid? ReadonlyNullableField; // Compliant
+    Guid? nullableField; // Compliant
+    readonly Guid? readonlyNullableField; // Compliant
     Guid Property { get; set; } // Compliant
 
     void Empty()
