@@ -41,6 +41,7 @@ namespace SonarAnalyzer.Helpers.Facade
             SyntaxKind.NotEqualsExpression,
         };
         public SyntaxKind ConstructorDeclaration => SyntaxKind.ConstructorDeclaration;
+        public SyntaxKind[] DefaultExpressions => new[] { SyntaxKind.DefaultExpression, SyntaxKindEx.DefaultLiteralExpression };
         public SyntaxKind EnumDeclaration => SyntaxKind.EnumDeclaration;
         public SyntaxKind FieldDeclaration => SyntaxKind.FieldDeclaration;
         public SyntaxKind IdentifierName => SyntaxKind.IdentifierName;
@@ -62,6 +63,5 @@ namespace SonarAnalyzer.Helpers.Facade
             SyntaxKindEx.RecordClassDeclaration,
             SyntaxKindEx.RecordStructDeclaration,
         };
-        public SyntaxKind[] DefaultExpressions => new[] { SyntaxKind.DefaultExpression, SyntaxKindEx.DefaultLiteralExpression };
     }
 }
