@@ -166,11 +166,7 @@ namespace SonarAnalyzer.Rules
                 {
                     CollectClassified(TokenType.TypeName);
                 }
-                else if (semanticModel.GetDeclaredSymbol(token.Parent) is { } declaration)
-                {
-                    ClassifyIdentifier(declaration);
-                }
-                else if (GetBindableParent(token) is { }  parent && semanticModel.GetSymbolInfo(parent).Symbol is { } symbol)
+                else if (GetBindableParent(token) is { } parent && semanticModel.GetSymbolInfo(parent).Symbol is { } symbol)
                 {
                     ClassifyIdentifier(symbol);
                 }
