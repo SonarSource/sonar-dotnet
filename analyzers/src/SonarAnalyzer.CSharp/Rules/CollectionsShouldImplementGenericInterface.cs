@@ -20,6 +20,7 @@
 
 using System.Collections.Generic;
 using System.Collections.Immutable;
+using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
@@ -36,17 +37,15 @@ namespace SonarAnalyzer.Rules.CSharp
         internal const string DiagnosticId = "S3909";
         private const string MessageFormat = "Refactor this collection to implement '{0}'.";
 
-        private static readonly DiagnosticDescriptor Rule =
-            DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
+        private static readonly DiagnosticDescriptor Rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
 
-        private static readonly Dictionary<string, KnownType> NongenericToGenericMapping =
-            new()
-            {
-                { KnownType.System_Collections_ICollection.TypeName, KnownType.System_Collections_Generic_ICollection_T },
-                { KnownType.System_Collections_IList.TypeName, KnownType.System_Collections_Generic_IList_T },
-                { KnownType.System_Collections_IEnumerable.TypeName, KnownType.System_Collections_Generic_IEnumerable_T },
-                { KnownType.System_Collections_CollectionBase.TypeName, KnownType.System_Collections_ObjectModel_Collection_T },
-            };
+        private static readonly Dictionary<string, KnownType> NongenericToGenericMapping = new()
+        {
+            { KnownType.System_Collections_ICollection.TypeName, KnownType.System_Collections_Generic_ICollection_T },
+            { KnownType.System_Collections_IList.TypeName, KnownType.System_Collections_Generic_IList_T },
+            { KnownType.System_Collections_IEnumerable.TypeName, KnownType.System_Collections_Generic_IEnumerable_T },
+            { KnownType.System_Collections_CollectionBase.TypeName, KnownType.System_Collections_ObjectModel_Collection_T },
+        };
 
         private static readonly ImmutableArray<KnownType> GenericTypes = NongenericToGenericMapping.Values.ToImmutableArray();
 
@@ -62,33 +61,25 @@ namespace SonarAnalyzer.Rules.CSharp
                     }
 
                     var typeDeclaration = (BaseTypeDeclarationSyntax)c.Node;
-                    var implementedTypes = typeDeclaration?.BaseList?.Types;
+                    var implementedTypes = typeDeclaration.BaseList?.Types;
                     if (implementedTypes == null)
                     {
                         return;
                     }
 
                     List<Diagnostic> issues = null;
-                    foreach (var typeSyntax in implementedTypes)
+                    var containingType = (INamedTypeSymbol)c.ContainingSymbol;
+                    foreach (var typeSymbol in containingType.Interfaces.Concat(new[] { containingType.BaseType }).WhereNotNull())
                     {
-                        var typeSymbol = c.SemanticModel.GetSymbolInfo(typeSyntax.Type).Symbol?.GetSymbolType();
-                        if (typeSymbol == null)
-                        {
-                            continue;
-                        }
-
                         if (typeSymbol.OriginalDefinition.IsAny(GenericTypes))
                         {
                             return;
                         }
 
-                        var suggestedGenericType = SuggestGenericCollectionType(typeSymbol);
-                        if (suggestedGenericType != null)
+                        if (SuggestGenericCollectionType(typeSymbol) is { } suggestedGenericType)
                         {
                             issues ??= new();
-                            issues.Add(Diagnostic.Create(Rule,
-                                        typeDeclaration.Identifier.GetLocation(),
-                                        suggestedGenericType));
+                            issues.Add(Diagnostic.Create(Rule, typeDeclaration.Identifier.GetLocation(), suggestedGenericType));
                         }
                     }
 

@@ -67,8 +67,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 KnownType.System_Runtime_InteropServices_ComImportAttribute,
                 KnownType.System_Runtime_InteropServices_InterfaceTypeAttribute);
 
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } =
-            ImmutableArray.Create(MethodNameRule, TypeNameRule);
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(MethodNameRule, TypeNameRule);
 
         internal static IEnumerable<string> SplitToParts(string name)
         {
