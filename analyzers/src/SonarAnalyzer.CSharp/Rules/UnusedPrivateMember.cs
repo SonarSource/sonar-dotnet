@@ -82,7 +82,12 @@ namespace SonarAnalyzer.Rules.CSharp
                                 usageCollector.SafeVisit(syntaxTree.GetRoot());
                             }
 
-                            var diagnostics = GetDiagnosticsForUnusedPrivateMembers(usageCollector, removableInternalTypes.ToHashSet(), SyntaxConstants.Internal, new BidirectionalDictionary<ISymbol, SyntaxNode>());
+                            var diagnostics = GetDiagnosticsForUnusedPrivateMembers(
+                                usageCollector,
+                                removableInternalTypes.ToHashSet(),
+                                SyntaxConstants.Internal,
+                                new BidirectionalDictionary<ISymbol, SyntaxNode>());
+
                             cc.ReportDiagnosticIfNonGenerated(diagnostics);
                         });
                 });
