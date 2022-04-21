@@ -65,23 +65,29 @@ Class NonCompliant
 End Class
 
 Structure GuidAssignmentStruct
+
     Private Shared ReadOnly StaticField As Guid ' FP
     Private Field As Guid ' Compliant, structs Do Not allow assigned instance values
     Private ReadOnly ReadOnlyField As Guid ' Compliant, structs Do Not allow assigned instance values
+
 End Structure
 
 Class GuidClass
+
     Public Sub New(param As Guid)
     End Sub
 
     Public Sub Method(param As Guid)
     End Sub
+
 End Class
 
 Class NullableGuidClass
+
     Public Sub New(param As Guid?)
     End Sub
 
     Public Sub Method(param As Guid?)
     End Sub
+
 End Class
