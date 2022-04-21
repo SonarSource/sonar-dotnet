@@ -5,39 +5,32 @@ using System.Collections.ObjectModel;
 
 namespace Tests.Diagnostics
 {
-    class TestClass_01 : CollectionBase { } // Noncompliant {{Refactor this collection to implement 'System.Collections.ObjectModel.Collection<T>'.}}
-//        ^^^^^^^^^^^^
-    class TestClass_02 : IList { } // Noncompliant {{Refactor this collection to implement 'System.Collections.Generic.IList<T>'.}}
+    class TestClass_CollectionBase : CollectionBase { } // Noncompliant {{Refactor this collection to implement 'System.Collections.ObjectModel.Collection<T>'.}}
+    //    ^^^^^^^^^^^^^^^^^^^^^^^^
+    class TestClass_IList : IList { }                   // Noncompliant {{Refactor this collection to implement 'System.Collections.Generic.IList<T>'.}}
+    class TestClass_IEnumerable : IEnumerable { }       // Noncompliant {{Refactor this collection to implement 'System.Collections.Generic.IEnumerable<T>'.}}
+    class TestClass_ICollection : ICollection { }       // Noncompliant {{Refactor this collection to implement 'System.Collections.Generic.ICollection<T>'.}}
 
-    class TestClass_03 : IEnumerable { } // Noncompliant {{Refactor this collection to implement 'System.Collections.Generic.IEnumerable<T>'.}}
-
-    class TestClass_04 : ICollection { } // Noncompliant {{Refactor this collection to implement 'System.Collections.Generic.ICollection<T>'.}}
-
-    class TestClass_05 : IEnumerable, ICollection { } // Noncompliant {{Refactor this collection to implement 'System.Collections.Generic.IEnumerable<T>'.}}
+    class TestClass_TwoInterfaces : IEnumerable, ICollection { } // Noncompliant {{Refactor this collection to implement 'System.Collections.Generic.IEnumerable<T>'.}}
     // Noncompliant@-1 {{Refactor this collection to implement 'System.Collections.Generic.ICollection<T>'.}}
 
-    class TestClass_06 : IEnumerable, ICollection<string> { }
-    class TestClass_07 : ICollection<string>, IEnumerable { }
-    class TestClass_08 : IEnumerable, IList<string> { }
-    class TestClass_09 : IEnumerable, IEnumerable<string> { }
-    class TestClass_10 : Collection<string>, IEnumerable { }
-    class TestClass_11<T> : IEnumerable, IList<T> { }
+    class TestClass_NonGenericAndGenericCollection : IEnumerable, ICollection<string> { }
+    class TestClass_GenericAndNonGeneric : ICollection<string>, IEnumerable { }
+    class TestClass_NonGenericAndIList : IEnumerable, IList<string> { }
+    class TestClass_NonGenericAndGeneric : IEnumerable, IEnumerable<string> { }
+    class TestClass_GenericBaseAndNonGeneric : Collection<string>, IEnumerable { }
+    class TestClass_WithTypeParameter_1<T> : IEnumerable, IList<T> { }
+    class TestClass_WithTypeParameter_2<T> : IEnumerable, ICollection, ICollection<T> { }
 
-    class TestClass_12<T> : IEnumerable, ICollection, ICollection<T> { }
+    class TestClass_MultipleInterfaces : IEnumerable, IList, IEnumerable<string> { }
+    class TestClass_NoInterfaces { }
 
-    class TestClass_13 : IEnumerable, IList, IEnumerable<string> { }
+    class TestClass_UnrelatedBaseClass : Exception { }
+    class TestClass_UnrelatedInterface : IEqualityComparer { }
+    class TestClass_WithCompilerError : IList, InvalidType { } // Noncompliant
 
-    class TestClass_14 { }
-
-    class TestClass_15 : Exception { }
-
-    class TestClass_16 : IEqualityComparer { }
-
-    class TestClass_17 : IList, InvalidType { } // Noncompliant
-
-    struct TestStruct_01 : IList { } // Noncompliant
-
-    struct TestStruct_02 : IEnumerable { } // Noncompliant
+    struct TestStruct_NongenericIList : IList { }              // Noncompliant
+    struct TestStruct_NonGenericIEnumerable : IEnumerable { }  // Noncompliant
 
     class BaseClassEnumerable : IEnumerable<int> { }
     class Derived : BaseClassEnumerable, IEnumerable { } // Noncompliant FP: Interfaces in base classes are ignored.
