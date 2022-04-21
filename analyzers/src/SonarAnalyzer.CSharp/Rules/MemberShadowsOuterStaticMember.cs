@@ -88,10 +88,10 @@ namespace SonarAnalyzer.Rules.CSharp
                 return;
             }
 
-            var memberType = namedType.TypeKind switch { TypeKind.Class => "class", TypeKind.Delegate => "delegate" };
+            var namedTypeName = namedType.TypeKind switch { TypeKind.Class => "class", TypeKind.Delegate => "delegate" };
             foreach (var identifier in namedType.GetIdentifiers())
             {
-                context.ReportDiagnosticIfNonGenerated(Diagnostic.Create(Rule, identifier.GetLocation(), memberType));
+                context.ReportDiagnosticIfNonGenerated(Diagnostic.Create(Rule, identifier.GetLocation(), namedTypeName));
             }
         }
 
