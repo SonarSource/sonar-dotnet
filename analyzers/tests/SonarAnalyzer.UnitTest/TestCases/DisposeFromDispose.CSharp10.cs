@@ -19,10 +19,19 @@ record struct R1 : IDisposable
     public void Dispose() { }
 }
 
+record struct R2 : IDisposable
+{
+    private FileStream Fs { get; set; }
+
+    public void OpenResource(string path) => this.Fs = new FileStream(path, FileMode.Open);
+    public void CloseResource() => this.Fs.Close();
+    public void CleanUp() => this.Fs.Dispose(); // FN. Properties are not considered.
+    public void Dispose() { }
+}
 
 public record struct PositionalRecordStruct(FileStream fs) : IDisposable
 {
     public void CloseResource() => this.fs.Close();
-    public void CleanUp() => this.fs.Dispose(); // FN
+    public void CleanUp() => this.fs.Dispose(); // Compliant. FileStream fs is a public property
     public void Dispose() { }
 }
