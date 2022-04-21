@@ -110,13 +110,9 @@ namespace SonarAnalyzer.Rules.CSharp
                 .OfType<IFieldSymbol>()
                 .Any(field => field.IsStatic || field.IsConst);
 
-            if (shadowsProperty || shadowsField)
+            if ((shadowsProperty || shadowsField) && propertyOrField.GetFirstIdentifier()?.GetLocation() is { } location)
             {
-                var location = propertyOrField.GetFirstIdentifier()?.GetLocation();
-                if (location != null)
-                {
-                    context.ReportDiagnosticIfNonGenerated(Diagnostic.Create(Rule, location, memberType));
-                }
+                context.ReportDiagnosticIfNonGenerated(Diagnostic.Create(Rule, location, memberType));
             }
         }
 
@@ -135,13 +131,9 @@ namespace SonarAnalyzer.Rules.CSharp
                 .OfType<IEventSymbol>()
                 .Any(@event => @event.IsStatic);
 
-            if (shadowsMethod || shadowsEvent)
+            if ((shadowsMethod || shadowsEvent) && eventOrMethod.GetFirstIdentifier()?.GetLocation() is { } location)
             {
-                var location = eventOrMethod.GetFirstIdentifier()?.GetLocation();
-                if (location != null)
-                {
-                    context.ReportDiagnosticIfNonGenerated(Diagnostic.Create(Rule, location, memberType));
-                }
+                context.ReportDiagnosticIfNonGenerated(Diagnostic.Create(Rule, location, memberType));
             }
         }
 
