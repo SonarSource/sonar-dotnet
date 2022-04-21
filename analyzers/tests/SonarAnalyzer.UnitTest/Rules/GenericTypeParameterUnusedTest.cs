@@ -27,24 +27,27 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class GenericTypeParameterUnusedTest
     {
+        private readonly VerifierBuilder builder = new VerifierBuilder<GenericTypeParameterUnused>();
+
         [TestMethod]
         public void GenericTypeParameterUnused() =>
-            OldVerifier.VerifyAnalyzer(new[] { @"TestCases\GenericTypeParameterUnused.cs", @"TestCases\GenericTypeParameterUnused.Partial.cs" },
-                                    new GenericTypeParameterUnused(),
-                                    ParseOptionsHelper.FromCSharp8);
+            builder.AddPaths("GenericTypeParameterUnused.cs", "GenericTypeParameterUnused.Partial.cs").WithOptions(ParseOptionsHelper.FromCSharp8).Verify();
 
 #if NET
+
         [TestMethod]
         public void GenericTypeParameterUnused_CSharp9() =>
-            OldVerifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\GenericTypeParameterUnused.CSharp9.cs", new GenericTypeParameterUnused());
+            builder.AddPaths("GenericTypeParameterUnused.CSharp9.cs").WithTopLevelStatements().Verify();
 
         [TestMethod]
         public void GenericTypeParameterUnused_CSharp10() =>
-            OldVerifier.VerifyAnalyzerFromCSharp10Library(@"TestCases\GenericTypeParameterUnused.CSharp10.cs", new GenericTypeParameterUnused());
+            builder.AddPaths("GenericTypeParameterUnused.CSharp10.cs").WithOptions(ParseOptionsHelper.FromCSharp10).Verify();
 
         [TestMethod]
         public void GenericTypeParameterUnused_CSharpPreview() =>
-            OldVerifier.VerifyAnalyzerCSharpPreviewLibrary(@"TestCases\GenericTypeParameterUnused.CSharpPreview.cs", new GenericTypeParameterUnused());
+            builder.AddPaths("GenericTypeParameterUnused.CSharpPreview.cs").WithOptions(ParseOptionsHelper.CSharpPreview).Verify();
+
 #endif
+
     }
 }

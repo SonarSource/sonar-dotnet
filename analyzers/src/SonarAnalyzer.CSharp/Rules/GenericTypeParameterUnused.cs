@@ -37,61 +37,52 @@ namespace SonarAnalyzer.Rules.CSharp
         private const string MessageFormat = "'{0}' is not used in the {1}.";
 
         private static readonly DiagnosticDescriptor Rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
+        private static readonly ISet<SyntaxKind> MethodModifiersToSkip = new HashSet<SyntaxKind>
+        {
+            SyntaxKind.AbstractKeyword,
+            SyntaxKind.VirtualKeyword,
+            SyntaxKind.OverrideKeyword
+        };
 
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
 
-        protected override void Initialize(SonarAnalysisContext context) =>
-            context.RegisterCompilationStartAction(analysisContext =>
-            {
-                analysisContext.RegisterSyntaxNodeAction(c =>
+        protected override void Initialize(SonarAnalysisContext context)
+        {
+            context.RegisterSyntaxNodeActionInNonGenerated(c =>
+                {
+                    if (c.SemanticModel.GetDeclaredSymbol(c.Node) is { } declarationSymbol)
+                    {
+                        CheckGenericTypeParameters(declarationSymbol, c);
+                    }
+                },
+                SyntaxKind.MethodDeclaration,
+                SyntaxKindEx.LocalFunctionStatement);
+
+            context.RegisterSyntaxNodeActionInNonGenerated(c =>
+                 {
+                     if (c.ContainingSymbol.Kind == SymbolKind.NamedType)
                      {
-                         var declarationSymbol = c.SemanticModel.GetDeclaredSymbol(c.Node);
-                         if (declarationSymbol == null)
-                         {
-                             return;
-                         }
-
-                         CheckGenericTypeParameters(declarationSymbol, c);
-                     },
-                     SyntaxKind.MethodDeclaration,
-                     SyntaxKindEx.LocalFunctionStatement);
-
-                analysisContext.RegisterSyntaxNodeAction(c =>
-                     {
-                         if (c.ContainingSymbol.Kind != SymbolKind.NamedType)
-                         {
-                             return;
-                         }
-
                          CheckGenericTypeParameters(c.ContainingSymbol, c);
-                     },
-                     SyntaxKind.ClassDeclaration,
-                     SyntaxKindEx.RecordClassDeclaration,
-                     SyntaxKindEx.RecordStructDeclaration,
-                     SyntaxKind.StructDeclaration);
-            });
+                     }
+                 },
+                 SyntaxKind.ClassDeclaration,
+                 SyntaxKindEx.RecordClassDeclaration,
+                 SyntaxKindEx.RecordStructDeclaration,
+                 SyntaxKind.StructDeclaration);
+        }
 
         private static void CheckGenericTypeParameters(ISymbol symbol, SyntaxNodeAnalysisContext c)
         {
-            var helper = CreateParametersInfo(c.Node, c.SemanticModel);
-            if (helper.Parameters == null || helper.Parameters.Parameters.Count == 0)
+            var info = CreateParametersInfo(c.Node, c.SemanticModel);
+            if (info?.Parameters is null || info.Parameters.Parameters.Count == 0)
             {
                 return;
             }
-
-            var declarations = symbol.DeclaringSyntaxReferences
-                                     .Select(reference => reference.GetSyntax());
-
-            var typeParameterNames = helper.Parameters.Parameters.Select(typeParameter => typeParameter.Identifier.Text).ToArray();
-
-            var usedTypeParameters = GetUsedTypeParameters(declarations, typeParameterNames, c);
-
-            foreach (var typeParameter in typeParameterNames.Where(typeParameter => !usedTypeParameters.Contains(typeParameter)))
+            var typeParameterNames = info.Parameters.Parameters.Select(x => x.Identifier.Text).ToArray();
+            var usedTypeParameters = GetUsedTypeParameters(symbol.DeclaringSyntaxReferences.Select(x => x.GetSyntax()), typeParameterNames, c);
+            foreach (var typeParameter in typeParameterNames.Where(x => !usedTypeParameters.Contains(x)))
             {
-                c.ReportIssue(Diagnostic.Create(Rule,
-                                                               helper.Parameters.Parameters.First(tp => tp.Identifier.Text == typeParameter).GetLocation(),
-                                                               typeParameter,
-                                                               helper.ContainerName));
+                c.ReportIssue(Diagnostic.Create(Rule, info.Parameters.Parameters.First(x => x.Identifier.Text == typeParameter).GetLocation(), typeParameter, info.ContainerName));
             }
         }
 
@@ -99,63 +90,28 @@ namespace SonarAnalyzer.Rules.CSharp
             node switch
             {
                 TypeDeclarationSyntax typeDeclaration => new ParametersInfo(typeDeclaration.TypeParameterList, "class"),
-
-                MethodDeclarationSyntax methodDeclaration when IsMethodCandidate(methodDeclaration, semanticModel)
-                    => new ParametersInfo(methodDeclaration.TypeParameterList, "method"),
-
-                var wrapper when LocalFunctionStatementSyntaxWrapper.IsInstance(wrapper)
-                    => new ParametersInfo(((LocalFunctionStatementSyntaxWrapper)node).TypeParameterList, "local function"),
-
-                var wrapper when RecordDeclarationSyntaxWrapper.IsInstance(wrapper)
-                    => new ParametersInfo(((RecordDeclarationSyntaxWrapper)node).TypeParameterList, "record"),
-
-                _ => default
+                MethodDeclarationSyntax methodDeclaration when IsMethodCandidate(methodDeclaration, semanticModel) => new ParametersInfo(methodDeclaration.TypeParameterList, "method"),
+                var wrapper when LocalFunctionStatementSyntaxWrapper.IsInstance(wrapper) => new ParametersInfo(((LocalFunctionStatementSyntaxWrapper)node).TypeParameterList, "local function"),
+                var wrapper when RecordDeclarationSyntaxWrapper.IsInstance(wrapper) => new ParametersInfo(((RecordDeclarationSyntaxWrapper)node).TypeParameterList, "record"),
+                _ => null
             };
 
-        private readonly struct ParametersInfo
-        {
-            public TypeParameterListSyntax Parameters { get; }
-
-            public string ContainerName { get; }
-
-            public ParametersInfo(TypeParameterListSyntax parameters, string name)
-            {
-                Parameters = parameters;
-                ContainerName = name;
-            }
-        }
-
-        private static bool IsMethodCandidate(MethodDeclarationSyntax methodDeclaration, SemanticModel semanticModel)
-        {
-            var syntaxValid = !methodDeclaration.Modifiers.Any(modifier => MethodModifiersToSkip.Contains(modifier.Kind()))
-                              && methodDeclaration.ExplicitInterfaceSpecifier == null
-                              && methodDeclaration.HasBodyOrExpressionBody();
-
-            if (!syntaxValid)
-            {
-                return false;
-            }
-
-            var methodSymbol = semanticModel.GetDeclaredSymbol(methodDeclaration);
-
-            return methodSymbol != null && methodSymbol.IsChangeable();
-        }
+        private static bool IsMethodCandidate(MethodDeclarationSyntax methodDeclaration, SemanticModel semanticModel) =>
+            !methodDeclaration.Modifiers.Any(x => MethodModifiersToSkip.Contains(x.Kind()))
+            && methodDeclaration.ExplicitInterfaceSpecifier is null
+            && methodDeclaration.HasBodyOrExpressionBody()
+            && semanticModel.GetDeclaredSymbol(methodDeclaration) is { } methodSymbol
+            && methodSymbol.IsChangeable();
 
         private static List<string> GetUsedTypeParameters(IEnumerable<SyntaxNode> declarations, string[] typeParameterNames, SyntaxNodeAnalysisContext context) =>
-            declarations.SelectMany(declaration => declaration.DescendantNodes())
-                        .OfType<IdentifierNameSyntax>()
-                        .Where(identifier => !(identifier.Parent is TypeParameterConstraintClauseSyntax))
-                        .Where(identifier => typeParameterNames.Contains(identifier.Identifier.ValueText))
-                        .Select(identifier => identifier.EnsureCorrectSemanticModelOrDefault(context.SemanticModel)?.GetSymbolInfo(identifier).Symbol)
-                        .Where(symbol => symbol is {Kind: SymbolKind.TypeParameter})
-                        .Select(symbol => symbol.Name)
-                        .ToList();
+            declarations.SelectMany(x => x.DescendantNodes())
+                .OfType<IdentifierNameSyntax>()
+                .Where(x => x.Parent is not TypeParameterConstraintClauseSyntax && typeParameterNames.Contains(x.Identifier.ValueText))
+                .Select(x => x.EnsureCorrectSemanticModelOrDefault(context.SemanticModel)?.GetSymbolInfo(x).Symbol)
+                .Where(x => x is { Kind: SymbolKind.TypeParameter })
+                .Select(x => x.Name)
+                .ToList();
 
-        private static readonly ISet<SyntaxKind> MethodModifiersToSkip = new HashSet<SyntaxKind>
-        {
-            SyntaxKind.AbstractKeyword,
-            SyntaxKind.VirtualKeyword,
-            SyntaxKind.OverrideKeyword
-        };
+        private sealed record ParametersInfo(TypeParameterListSyntax Parameters, string ContainerName);
     }
 }
