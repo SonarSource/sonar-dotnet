@@ -58,8 +58,8 @@ namespace SonarAnalyzer.UnitTest.Common
             sut.Add(4, 14);
             sut.Add(5, 15);
 
-            sut.AKeys.Should().OnlyContain(x => x == 1 || x == 2 || x == 3 || x == 4 || x == 5);
-            sut.BKeys.Should().OnlyContain(x => x == 11 || x == 12 || x == 13 || x == 14 || x == 15);
+            sut.AKeys.Should().BeEquivalentTo(1, 2, 3, 4, 5);
+            sut.BKeys.Should().BeEquivalentTo(11, 12, 13, 14, 15);
         }
 
         [TestMethod]

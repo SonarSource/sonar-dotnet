@@ -24,6 +24,7 @@ using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
+using SonarAnalyzer.Constants;
 using SonarAnalyzer.Helpers;
 
 namespace SonarAnalyzer.Rules.CSharp
@@ -67,7 +68,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 return;
             }
 
-            var reportMessage = string.Format(MessageFormatStaticClass, utilityClass.IsSealed ? "private" : "protected");
+            var reportMessage = string.Format(MessageFormatStaticClass, utilityClass.IsSealed ? SyntaxConstants.Private : SyntaxConstants.Protected);
 
             foreach (var syntaxReference in utilityClass.DeclaringSyntaxReferences)
             {
@@ -85,7 +86,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 return;
             }
 
-            var reportMessage = string.Format(MessageFormatConstructor, utilityClass.IsSealed ? "private" : "protected");
+            var reportMessage = string.Format(MessageFormatConstructor, utilityClass.IsSealed ? SyntaxConstants.Private : SyntaxConstants.Protected);
 
             foreach (var constructor in utilityClass.GetMembers()
                                                     .Where(IsConstructor)

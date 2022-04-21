@@ -19,6 +19,7 @@
  */
 
 using System;
+using System.Collections.Generic;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Diagnostics;
 
@@ -53,8 +54,24 @@ namespace SonarAnalyzer.Helpers
         public static void ReportDiagnosticIfNonGenerated(this CompilationAnalysisContext context, Diagnostic diagnostic) =>
             context.ReportDiagnosticIfNonGenerated(CSharpGeneratedCodeRecognizer.Instance, diagnostic);
 
+        public static void ReportDiagnosticIfNonGenerated(this CompilationAnalysisContext context, IEnumerable<Diagnostic> diagnostics)
+        {
+            foreach (var diagnostic in diagnostics)
+            {
+                context.ReportDiagnosticIfNonGenerated(CSharpGeneratedCodeRecognizer.Instance, diagnostic);
+            }
+        }
+
         public static void ReportDiagnosticIfNonGenerated(this SymbolAnalysisContext context, Diagnostic diagnostic) =>
             context.ReportDiagnosticIfNonGenerated(CSharpGeneratedCodeRecognizer.Instance, diagnostic);
+
+        public static void ReportDiagnosticIfNonGenerated(this SymbolAnalysisContext context, IEnumerable<Diagnostic> diagnostics)
+        {
+            foreach (var diagnostic in diagnostics)
+            {
+                context.ReportDiagnosticIfNonGenerated(CSharpGeneratedCodeRecognizer.Instance, diagnostic);
+            }
+        }
 
         internal static bool ShouldAnalyze(this SyntaxTree tree, AnalyzerOptions options, Compilation compilation) =>
             DiagnosticAnalyzerContextHelper.ShouldAnalyze(CSharpGeneratedCodeRecognizer.Instance, tree, compilation, options);
