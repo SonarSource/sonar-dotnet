@@ -28,7 +28,8 @@ namespace SonarAnalyzer.Helpers
     {
         #region TypeKind
 
-        public static bool IsInterface(this ITypeSymbol self) => self is { TypeKind: TypeKind.Interface };
+        public static bool IsInterface(this ITypeSymbol self) => 
+            self is { TypeKind: TypeKind.Interface };
 
         public static bool IsClass(this ITypeSymbol self) => self is { TypeKind: TypeKind.Class };
 
