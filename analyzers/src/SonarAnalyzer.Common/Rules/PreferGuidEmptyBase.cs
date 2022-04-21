@@ -40,7 +40,7 @@ namespace SonarAnalyzer.Rules
                 Language.GeneratedCodeRecognizer,
                 c =>
                 {
-                    if (NotAllowedGuidCtorArguments(c.Node, c.SemanticModel)
+                    if (IsInvalidCtor(c.Node, c.SemanticModel)
                         && c.SemanticModel.GetSymbolInfo(c.Node).Symbol is IMethodSymbol methodSymbol
                         && methodSymbol.ContainingType.Is(KnownType.System_Guid))
                     {
@@ -53,7 +53,7 @@ namespace SonarAnalyzer.Rules
                 Language.GeneratedCodeRecognizer,
                 c =>
                 {
-                    if (NoParameter(c.Node)
+                    if (!IsInParameter(c.Node)
                         && c.SemanticModel.GetTypeInfo(c.Node).ConvertedType.Is(KnownType.System_Guid))
                     {
                         c.ReportIssue(Diagnostic.Create(Rule, c.Node.GetLocation()));
@@ -65,11 +65,11 @@ namespace SonarAnalyzer.Rules
         private bool IsInvalidCtor(SyntaxNode ctorNode, SemanticModel semanticModel)
         {
             var arguments = Language.Syntax.ArgumentExpressions(ctorNode).ToArray();
-            return arguments.Length == 0 || CreatesGuidEmpty(arguments, semanticModel);
+            return arguments.Length == 0 || CreatesEmptyGuid(arguments, semanticModel);
         }
 
         private bool IsInParameter(SyntaxNode defaultExpression) =>
-            !defaultExpression.Ancestors().Any(x => Language.Syntax.IsKind(x, Language.SyntaxKind.Parameter));
+            defaultExpression.Ancestors().Any(x => Language.Syntax.IsKind(x, Language.SyntaxKind.Parameter));
 
         private static bool CreatesEmptyGuid(SyntaxNode[] arguments, SemanticModel semanticModel) =>
             arguments.Length == 1

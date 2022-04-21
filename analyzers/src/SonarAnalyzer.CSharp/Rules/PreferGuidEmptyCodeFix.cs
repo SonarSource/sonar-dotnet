@@ -32,7 +32,7 @@ using SonarAnalyzer.Helpers;
 namespace SonarAnalyzer.Rules.CSharp
 {
     [ExportCodeFixProvider(LanguageNames.CSharp)]
-    public sealed class PreferGuidEmptyCodeFix : SonarCodeFixProvider
+    public sealed class PreferGuidEmptyCodeFix : SonarCodeFix
     {
         internal const string Title = "Use Guid.Empty instead";
 
