@@ -118,6 +118,27 @@ namespace SonarAnalyzer.Extensions
             return current;
         }
 
+        /// <summary>
+        /// Returns the Identifier token of the <paramref name="node"/>. For nodes with more than one identifier (e.g. <see cref="VariableDeclarationSyntax"/>) <see langword="null"/> is returned.
+        /// </summary>
+        /// <returns>The idenifier token or <see langword="null"/> if the node does have more than one or no Identifier.</returns>
+        public static SyntaxToken? GetIdentifier(this SyntaxNode node) =>
+            node switch
+            {
+                PropertyDeclarationSyntax x => x.Identifier,
+                VariableDeclaratorSyntax x => x.Identifier,
+                EventDeclarationSyntax x => x.Identifier,
+                ParameterSyntax x => x.Identifier,
+                MethodDeclarationSyntax x => x.Identifier,
+                BaseTypeDeclarationSyntax x => x.Identifier,
+                DelegateDeclarationSyntax x => x.Identifier,
+                TypeParameterSyntax x => x.Identifier,
+                FromClauseSyntax x => x.Identifier,
+                QueryContinuationSyntax x => x.Identifier,
+                JoinIntoClauseSyntax x => x.Identifier,
+                _ => null,
+            };
+
         private static string GetUnknownType(SyntaxKind kind)
         {
 #if DEBUG

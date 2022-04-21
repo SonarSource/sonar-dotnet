@@ -19,6 +19,7 @@
  */
 
 using System.Collections.Generic;
+using System.Collections.Immutable;
 using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
@@ -96,13 +97,17 @@ namespace SonarAnalyzer.Extensions
         /// </summary>
         /// <returns>The idenifier token or <see langword="null"/> if there is no DeclaringSyntaxReference or the <see cref="SyntaxNode"/> does not have an Identifier.</returns>
         public static SyntaxToken? GetFirstIdentifier(this ISymbol symbol) =>
-            symbol.DeclaringSyntaxReferences.FirstOrDefault()?.GetSyntax() switch
-            {
-                PropertyDeclarationSyntax x => x.Identifier,
-                VariableDeclaratorSyntax x => x.Identifier,
-                EventDeclarationSyntax x => x.Identifier,
-                MethodDeclarationSyntax m => m.Identifier,
-                _ => null,
-            };
+            symbol.DeclaringSyntaxReferences.FirstOrDefault()?.GetSyntax().GetIdentifier();
+
+        /// <summary>
+        /// Returns the Identifier tokens of all declaring <see cref="SyntaxReference"/>s.
+        /// For e.g. an <see cref="INamedTypeSymbol"/> this can be a list of partial <see cref="ClassDeclarationSyntax.Identifier"/>.
+        /// </summary>
+        public static ImmutableArray<SyntaxToken> GetIdentifiers(this ISymbol symbol) =>
+            (from r in symbol.DeclaringSyntaxReferences
+             select r.GetSyntax().GetIdentifier() into i
+             where i != null
+             select (SyntaxToken)i)
+            .ToImmutableArray();
     }
 }
