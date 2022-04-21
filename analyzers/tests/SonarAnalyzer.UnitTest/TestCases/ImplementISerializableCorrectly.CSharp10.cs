@@ -7,27 +7,33 @@ namespace Tests.Diagnostics
     {
     }
 
-    public struct SerializableStruct_NoAttribute : ISerializable // FN
+    public struct SerializableStruct_NoAttribute : ISerializable    // Noncompliant {{Update this implementation of 'ISerializable' to conform to the recommended serialization pattern.}}
+                                                                    // Secondary@-1 {{Add 'System.SerializableAttribute' attribute on 'SerializableStruct_NoAttribute' because it implements 'ISerializable'.}}
+                                                                    // Secondary@-2 {{Add a 'private' constructor 'SerializableStruct_NoAttribute(SerializationInfo, StreamingContext)'.}}
     {
-        private readonly NonSerializedType field = null; // FN, should be marked with [NonSerialized]
+        private readonly NonSerializedType field = null; // Should be marked with [NonSerialized]
 
         public SerializableStruct_NoAttribute() { }
 
         public void GetObjectData(SerializationInfo info, StreamingContext context) { }
     }
 
-    public record struct SerializableRecordStruct_NoAttribute : ISerializable // FN
+    public record struct SerializableRecordStruct_NoAttribute : ISerializable // Noncompliant
+                                                                              // Secondary@-1
+                                                                              // Secondary@-2
     {
-        private readonly NonSerializedType field = null; // FN, should be marked with [NonSerialized]
+        private readonly NonSerializedType field = null; // Should be marked with [NonSerialized]
 
         public SerializableRecordStruct_NoAttribute() { }
 
         public void GetObjectData(SerializationInfo info, StreamingContext context) { }
     }
 
-    public record struct SerializablePositionalRecordStruct_NoAttribute(string Property) : ISerializable // FN
+    public record struct SerializablePositionalRecordStruct_NoAttribute(string Property) : ISerializable // Noncompliant
+                                                                                                         // Secondary@-1
+                                                                                                         // Secondary@-2
     {
-        private readonly NonSerializedType field = null; // FN, should be marked with [NonSerialized]
+        private readonly NonSerializedType field = null; // Should be marked with [NonSerialized]
 
         public SerializablePositionalRecordStruct_NoAttribute() : this ("SomeString") { }
 

@@ -82,7 +82,9 @@ namespace SonarAnalyzer.Rules.CSharp
                     }
                 },
                 SyntaxKind.ClassDeclaration,
-                SyntaxKindEx.RecordClassDeclaration);
+                SyntaxKindEx.RecordClassDeclaration,
+                SyntaxKindEx.RecordStructDeclaration,
+                SyntaxKind.StructDeclaration);
 
         private static IEnumerable<SecondaryLocation> CheckSerializableAttribute(SyntaxToken typeKeyword, INamedTypeSymbol typeSymbol)
         {
