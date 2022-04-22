@@ -46,16 +46,13 @@ namespace SonarAnalyzer.Rules.CSharp
         protected override MemberInfo CreateMemberInfo(SyntaxNodeAnalysisContext c, MemberDeclarationSyntax member) =>
             member switch
             {
-                { } when !IsValidMemberForOverload(member) => null,
                 ConstructorDeclarationSyntax constructor => new MemberInfo(c, member, constructor.Identifier, constructor.IsStatic(), false, true),
+                MethodDeclarationSyntax { ExplicitInterfaceSpecifier: { } } => null, // Skip explicit interface implementations
                 MethodDeclarationSyntax method => new MemberInfo(c, member, method.Identifier, method.IsStatic(), method.Modifiers.Any(SyntaxKind.AbstractKeyword), true),
                 _ => null,
             };
 
         protected override IEnumerable<MemberDeclarationSyntax> GetMemberDeclarations(SyntaxNode node) =>
             ((TypeDeclarationSyntax)node).Members;
-
-        private static bool IsValidMemberForOverload(MemberDeclarationSyntax member) =>
-            (member as MethodDeclarationSyntax)?.ExplicitInterfaceSpecifier == null;
     }
 }
