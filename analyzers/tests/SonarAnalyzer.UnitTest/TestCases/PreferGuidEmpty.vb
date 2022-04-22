@@ -66,7 +66,7 @@ End Class
 
 Structure GuidAssignmentStruct
 
-    Private Shared ReadOnly StaticField As Guid ' FP
+    Private Shared ReadOnly StaticField As Guid
     Private Field As Guid                                 ' Compliant, structs Do Not allow assigned instance values
     Private ReadOnly ReadOnlyField As Guid ' Compliant, structs Do Not allow assigned instance values
 
