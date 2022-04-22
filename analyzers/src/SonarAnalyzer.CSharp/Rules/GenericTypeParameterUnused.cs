@@ -66,7 +66,9 @@ namespace SonarAnalyzer.Rules.CSharp
                          CheckGenericTypeParameters(c.ContainingSymbol, c);
                      },
                      SyntaxKind.ClassDeclaration,
-                     SyntaxKindEx.RecordClassDeclaration);
+                     SyntaxKindEx.RecordClassDeclaration,
+                     SyntaxKindEx.RecordStructDeclaration,
+                     SyntaxKind.StructDeclaration);
             });
 
         private static void CheckGenericTypeParameters(ISymbol symbol, SyntaxNodeAnalysisContext c)
@@ -96,7 +98,7 @@ namespace SonarAnalyzer.Rules.CSharp
         private static ParametersInfo CreateParametersInfo(SyntaxNode node, SemanticModel semanticModel) =>
             node switch
             {
-                ClassDeclarationSyntax classDeclaration => new ParametersInfo(classDeclaration.TypeParameterList, "class"),
+                TypeDeclarationSyntax typeDeclaration => new ParametersInfo(typeDeclaration.TypeParameterList, "class"),
 
                 MethodDeclarationSyntax methodDeclaration when IsMethodCandidate(methodDeclaration, semanticModel)
                     => new ParametersInfo(methodDeclaration.TypeParameterList, "method"),

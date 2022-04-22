@@ -20,7 +20,7 @@ public record struct R : Interface
     }
 }
 
-public record struct R<T> // FN
+public record struct R<T> // Noncompliant
 {
 }
 
@@ -28,6 +28,6 @@ public record struct R2<T>(T X) // Compliant
 {
 }
 
-public record struct R3<T>(int X) // FN
+public record struct R3<T>(int X) // Noncompliant
 {
 }
