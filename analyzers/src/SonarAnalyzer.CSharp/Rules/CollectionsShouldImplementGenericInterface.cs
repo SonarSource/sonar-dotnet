@@ -55,14 +55,9 @@ namespace SonarAnalyzer.Rules.CSharp
         {
             context.RegisterSyntaxNodeActionInNonGenerated(c =>
                 {
-                    if (c.IsRedundantPositionalRecordContext())
-                    {
-                        return;
-                    }
-
                     var typeDeclaration = (BaseTypeDeclarationSyntax)c.Node;
                     var implementedTypes = typeDeclaration.BaseList?.Types;
-                    if (implementedTypes == null)
+                    if (implementedTypes == null || c.IsRedundantPositionalRecordContext())
                     {
                         return;
                     }
