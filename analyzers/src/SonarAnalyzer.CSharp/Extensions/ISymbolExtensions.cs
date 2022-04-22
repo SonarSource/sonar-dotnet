@@ -23,6 +23,7 @@ using System.Collections.Immutable;
 using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
+using SonarAnalyzer.Helpers;
 using SonarAnalyzer.SymbolicExecution;
 using SonarAnalyzer.SymbolicExecution.Sonar;
 using SonarAnalyzer.SymbolicExecution.Sonar.Constraints;
@@ -97,7 +98,7 @@ namespace SonarAnalyzer.Extensions
         /// </summary>
         /// <returns>The idenifier token or <see langword="null"/> if there is no DeclaringSyntaxReference or the <see cref="SyntaxNode"/> does not have an Identifier.</returns>
         public static SyntaxToken? GetFirstIdentifier(this ISymbol symbol) =>
-            symbol.DeclaringSyntaxReferences.FirstOrDefault()?.GetSyntax().GetIdentifier();
+            symbol.DeclaringSyntaxReferences.FirstOrDefault()?.GetSyntax().NodeIdentifier();
 
         /// <summary>
         /// Returns the Identifier tokens of all declaring <see cref="SyntaxReference"/>s.
@@ -105,9 +106,13 @@ namespace SonarAnalyzer.Extensions
         /// </summary>
         public static ImmutableArray<SyntaxToken> GetIdentifiers(this ISymbol symbol) =>
             (from r in symbol.DeclaringSyntaxReferences
-             select r.GetSyntax().GetIdentifier() into i
+             select r.GetSyntax().NodeIdentifier() into i
              where i != null
              select (SyntaxToken)i)
             .ToImmutableArray();
+
+        /// <inheritdoc cref="Helpers.Facade.SyntaxFacade{TSyntaxKind}.NodeIdentifier"/>
+        private static SyntaxToken? NodeIdentifier(this SyntaxNode node)
+            => CSharpFacade.Instance.Syntax.NodeIdentifier(node);
     }
 }

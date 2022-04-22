@@ -75,6 +75,7 @@ namespace SonarAnalyzer.Helpers.Facade
                 _ => throw InvalidOperation(node, nameof(NodeExpression))
             };
 
+        /// <inheritdoc />
         public override SyntaxToken? NodeIdentifier(SyntaxNode node) =>
             RemoveParentheses(node) switch
             {
