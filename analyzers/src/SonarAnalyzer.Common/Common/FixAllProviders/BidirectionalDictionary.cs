@@ -28,25 +28,29 @@ namespace SonarAnalyzer.Common
         private readonly IDictionary<TA, TB> aToB = new Dictionary<TA, TB>();
         private readonly IDictionary<TB, TA> bToA = new Dictionary<TB, TA>();
 
+        public ICollection<TA> AKeys => aToB.Keys;
+
+        public ICollection<TB> BKeys => bToA.Keys;
+
         public void Add(TA a, TB b)
         {
-            if (this.aToB.ContainsKey(a) || this.bToA.ContainsKey(b))
+            if (aToB.ContainsKey(a) || bToA.ContainsKey(b))
             {
-                throw new ArgumentException("An element with the same key already exists in the BidirectionalDictionary");
+                throw new ArgumentException("An element with the same key already exists in the BidirectionalDictionary.");
             }
 
-            this.aToB.Add(a, b);
-            this.bToA.Add(b, a);
+            aToB.Add(a, b);
+            bToA.Add(b, a);
         }
 
-        public TB GetByA(TA a)
-        {
-            return this.aToB[a];
-        }
+        public TB GetByA(TA a) => aToB[a];
 
-        public TA GetByB(TB b)
-        {
-            return this.bToA[b];
-        }
+        public TA GetByB(TB b) => bToA[b];
+
+        public bool ContainsKeyByA(TA a) =>
+            aToB.ContainsKey(a);
+
+        public bool ContainsKeyByB(TB b) =>
+            bToA.ContainsKey(b);
     }
 }

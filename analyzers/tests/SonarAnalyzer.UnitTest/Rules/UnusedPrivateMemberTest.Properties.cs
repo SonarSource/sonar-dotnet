@@ -136,6 +136,8 @@ public class PropertyUsages
         var x = this[""5""];
         this[""5""] = 10;
     }
+
+    private int Property12 { get; set; } = 42; // FN
 }
 ").Verify();
     }

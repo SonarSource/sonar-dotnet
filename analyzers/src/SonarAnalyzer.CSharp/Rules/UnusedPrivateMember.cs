@@ -28,6 +28,7 @@ using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.Common;
+using SonarAnalyzer.Constants;
 using SonarAnalyzer.Extensions;
 using SonarAnalyzer.Helpers;
 using StyleCop.Analyzers.Lightup;
@@ -65,47 +66,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     // or not.
                     var removableInternalTypes = new ConcurrentBag<ISymbol>();
 
-                    c.RegisterSymbolAction(
-                        cc =>
-                        {
-                            var namedType = (INamedTypeSymbol)cc.Symbol;
-
-                            if (namedType.ContainingType != null
-                                // We skip top level statements since they cannot have fields. Other declared types are analyzed separately.
-                                || namedType.IsTopLevelProgram()
-                                || namedType.DerivesFromAny(IgnoredTypes))
-                            {
-                                return;
-                            }
-
-                            // Collect symbols of private members that could potentially be removed
-                            var removableSymbolsCollector = new CSharpRemovableSymbolWalker(c.Compilation.GetSemanticModel);
-                            if (!VisitDeclaringReferences(namedType, removableSymbolsCollector, c.Compilation, includeGeneratedFile: false))
-                            {
-                                return;
-                            }
-
-                            // Keep the removable internal types for when the compilation ends
-                            foreach (var internalSymbol in removableSymbolsCollector.InternalSymbols.OfType<INamedTypeSymbol>())
-                            {
-                                removableInternalTypes.Add(internalSymbol);
-                            }
-
-                            var usageCollector = new CSharpSymbolUsageCollector(c.Compilation, removableSymbolsCollector.PrivateSymbols);
-                            if (!VisitDeclaringReferences(namedType, usageCollector, c.Compilation, includeGeneratedFile: true))
-                            {
-                                return;
-                            }
-
-                            var diagnostics = GetDiagnosticsForUnusedPrivateMembers(usageCollector, removableSymbolsCollector.PrivateSymbols, "private", removableSymbolsCollector.FieldLikeSymbols)
-                                                    .Concat(GetDiagnosticsForUsedButUnreadFields(usageCollector, removableSymbolsCollector.PrivateSymbols));
-                            foreach (var diagnostic in diagnostics)
-                            {
-                                cc.ReportDiagnosticIfNonGenerated(diagnostic);
-                            }
-                        },
-                        SymbolKind.NamedType);
-
+                    c.RegisterSymbolAction(cc => NamedSymbolAction(cc, removableInternalTypes), SymbolKind.NamedType);
                     c.RegisterCompilationEndAction(
                         cc =>
                         {
@@ -121,13 +82,62 @@ namespace SonarAnalyzer.Rules.CSharp
                                 usageCollector.SafeVisit(syntaxTree.GetRoot());
                             }
 
-                            var diagnostics = GetDiagnosticsForUnusedPrivateMembers(usageCollector, removableInternalTypes.ToHashSet(), "internal", new BidirectionalDictionary<ISymbol, SyntaxNode>());
-                            foreach (var diagnostic in diagnostics)
-                            {
-                                cc.ReportDiagnosticIfNonGenerated(diagnostic);
-                            }
+                            var diagnostics = GetDiagnosticsForUnusedPrivateMembers(
+                                usageCollector,
+                                removableInternalTypes.ToHashSet(),
+                                SyntaxConstants.Internal,
+                                new BidirectionalDictionary<ISymbol, SyntaxNode>());
+
+                            cc.ReportDiagnosticIfNonGenerated(diagnostics);
                         });
                 });
+
+        private static void NamedSymbolAction(SymbolAnalysisContext context, ConcurrentBag<ISymbol> removableInternalTypes)
+        {
+            var namedType = (INamedTypeSymbol)context.Symbol;
+            var privateSymbols = new HashSet<ISymbol>();
+            var fieldLikeSymbols = new BidirectionalDictionary<ISymbol, SyntaxNode>();
+            if (GatherSymbols((INamedTypeSymbol)context.Symbol, context.Compilation, privateSymbols, removableInternalTypes, fieldLikeSymbols)
+                && privateSymbols.Any()
+                && new CSharpSymbolUsageCollector(context.Compilation, privateSymbols) is var usageCollector
+                && VisitDeclaringReferences(namedType, usageCollector, context.Compilation, includeGeneratedFile: true))
+            {
+                var diagnostics = GetDiagnosticsForUnusedPrivateMembers(usageCollector, privateSymbols, SyntaxConstants.Private, fieldLikeSymbols)
+                                        .Concat(GetDiagnosticsForUsedButUnreadFields(usageCollector, privateSymbols));
+                context.ReportDiagnosticIfNonGenerated(diagnostics);
+            }
+        }
+
+        private static bool GatherSymbols(INamedTypeSymbol namedType,
+                                          Compilation compilation,
+                                          HashSet<ISymbol> privateSymbols,
+                                          ConcurrentBag<ISymbol> internalSymbols,
+                                          BidirectionalDictionary<ISymbol, SyntaxNode> fieldLikeSymbols)
+        {
+            if (namedType.ContainingType != null
+                // We skip top level statements since they cannot have fields. Other declared types are analyzed separately.
+                || namedType.IsTopLevelProgram()
+                || namedType.DerivesFromAny(IgnoredTypes)
+                // Collect symbols of private members that could potentially be removed
+                || RetrieveRemovableSymbols(namedType, compilation) is not { } removableSymbolsCollector)
+            {
+                return false;
+            }
+
+            CopyRetrievedSymbols(removableSymbolsCollector, privateSymbols, internalSymbols, fieldLikeSymbols);
+
+            // Collect symbols of private members that could potentially be removed for the nested classes
+            foreach (var declaration in namedType.DeclaringSyntaxReferences.Where(r => !r.SyntaxTree.IsGenerated(CSharpGeneratedCodeRecognizer.Instance, compilation))
+                                                                           .SelectMany(x => x.GetSyntax().ChildNodes().OfType<BaseTypeDeclarationSyntax>()))
+            {
+                var semanticModel = compilation.GetSemanticModel(declaration.SyntaxTree);
+                var declarationSymbol = semanticModel.GetDeclaredSymbol(declaration);
+                var symbolsCollector = RetrieveRemovableSymbols(declarationSymbol, compilation);
+                CopyRetrievedSymbols(symbolsCollector, privateSymbols, internalSymbols, fieldLikeSymbols);
+            }
+
+            return true;
+        }
 
         private static IEnumerable<Diagnostic> GetDiagnosticsForUnusedPrivateMembers(CSharpSymbolUsageCollector usageCollector,
                                                                                      ISet<ISymbol> removableSymbols,
@@ -173,7 +183,7 @@ namespace SonarAnalyzer.Rules.CSharp
             unreadFields.Select(usage => Diagnostic.Create(RuleS4487, usage.Declaration.GetLocation(), GetFieldAccessibilityForMessage(usage.Symbol), usage.Symbol.Name));
 
         private static string GetFieldAccessibilityForMessage(ISymbol symbol) =>
-            symbol.DeclaredAccessibility == Accessibility.Private ? "private" : "private class";
+            symbol.DeclaredAccessibility == Accessibility.Private ? SyntaxConstants.Private : "private class";
 
         private static IEnumerable<Diagnostic> GetDiagnosticsForMembers(ICollection<ISymbol> unusedSymbols,
                                                                         string accessibility,
@@ -224,17 +234,17 @@ namespace SonarAnalyzer.Rules.CSharp
         {
             var access = propertyAccessorAccess[property];
             if (access == AccessorAccess.Get
-                && property.SetMethod != null
+                && property.SetMethod is { }
                 && GetAccessorSyntax(property.SetMethod) is { } setter)
             {
-                return Diagnostic.Create(RuleS1144, setter.GetLocation(), "private", "set accessor in property", property.Name);
+                return Diagnostic.Create(RuleS1144, setter.GetLocation(), SyntaxConstants.Private, "set accessor in property", property.Name);
             }
             else if (access == AccessorAccess.Set
-                && property.GetMethod != null
-                && GetAccessorSyntax(property.GetMethod) is { } getter
-                && getter.HasBodyOrExpressionBody())
+                     && property.GetMethod is { }
+                     && GetAccessorSyntax(property.GetMethod) is { } getter
+                     && getter.HasBodyOrExpressionBody())
             {
-                return Diagnostic.Create(RuleS1144, getter.GetLocation(), "private", "get accessor in property", property.Name);
+                return Diagnostic.Create(RuleS1144, getter.GetLocation(), SyntaxConstants.Private, "get accessor in property", property.Name);
             }
             else
             {
@@ -248,28 +258,15 @@ namespace SonarAnalyzer.Rules.CSharp
         private static string GetMemberName(ISymbol symbol) =>
             symbol.IsConstructor() ? symbol.ContainingType.Name : symbol.Name;
 
-        private static string GetMemberType(ISymbol symbol)
-        {
-            if (symbol.IsConstructor())
-            {
-                return "constructor";
-            }
-
-            switch (symbol.Kind)
-            {
-                case SymbolKind.Event:
-                case SymbolKind.Field:
-                case SymbolKind.Method:
-                case SymbolKind.Property:
-                    return symbol.Kind.ToString().ToLowerInvariant();
-
-                case SymbolKind.NamedType:
-                    return "type";
-
-                default:
-                    return "member";
-            }
-        }
+        private static string GetMemberType(ISymbol symbol) =>
+            symbol.IsConstructor()
+                ? "constructor"
+                : symbol.Kind switch
+                  {
+                      SymbolKind.Event or SymbolKind.Field or SymbolKind.Method or SymbolKind.Property => symbol.Kind.ToString().ToLowerInvariant(),
+                      SymbolKind.NamedType => "type",
+                      _ => "member",
+                  };
 
         private static bool VisitDeclaringReferences(ISymbol symbol, ISafeSyntaxWalker visitor, Compilation compilation, bool includeGeneratedFile)
         {
@@ -277,41 +274,70 @@ namespace SonarAnalyzer.Rules.CSharp
                 ? symbol.DeclaringSyntaxReferences
                 : symbol.DeclaringSyntaxReferences.Where(r => !IsGenerated(r));
 
-            foreach (var reference in syntaxReferencesToVisit)
-            {
-                if (!visitor.SafeVisit(reference.GetSyntax()))
-                {
-                    return false;
-                }
-            }
-
-            return true;
+            return syntaxReferencesToVisit.All(x => visitor.SafeVisit(x.GetSyntax()));
 
             bool IsGenerated(SyntaxReference syntaxReference) =>
                 syntaxReference.SyntaxTree.IsGenerated(CSharpGeneratedCodeRecognizer.Instance, compilation);
+        }
+
+        private static CSharpRemovableSymbolWalker RetrieveRemovableSymbols(INamedTypeSymbol namedType, Compilation compilation)
+        {
+            var removableSymbolsCollector = new CSharpRemovableSymbolWalker(compilation.GetSemanticModel, namedType.DeclaredAccessibility);
+            if (!VisitDeclaringReferences(namedType, removableSymbolsCollector, compilation, includeGeneratedFile: false))
+            {
+                return null;
+            }
+
+            return removableSymbolsCollector;
+        }
+
+        private static void CopyRetrievedSymbols(CSharpRemovableSymbolWalker removableSymbolCollector,
+                                                 HashSet<ISymbol> privateSymbols,
+                                                 ConcurrentBag<ISymbol> internalSymbols,
+                                                 BidirectionalDictionary<ISymbol, SyntaxNode> fieldLikeSymbols)
+        {
+            privateSymbols.AddRange(removableSymbolCollector.PrivateSymbols);
+
+            // Keep the removable internal types for when the compilation ends
+            foreach (var internalSymbol in removableSymbolCollector.InternalSymbols)
+            {
+                internalSymbols.Add(internalSymbol);
+            }
+
+            foreach (var keyValuePair in removableSymbolCollector.FieldLikeSymbols)
+            {
+                if (!fieldLikeSymbols.ContainsKeyByA(keyValuePair.Key))
+                {
+                    fieldLikeSymbols.Add(keyValuePair.Key, keyValuePair.Value);
+                }
+            }
         }
 
         /// <summary>
         /// Collects private or internal member symbols that could potentially be removed if they are not used.
         /// Members that are overridden, overridable, have specific use, etc. are not removable.
         /// </summary>
-        private class CSharpRemovableSymbolWalker : SafeCSharpSyntaxWalker
+        private sealed class CSharpRemovableSymbolWalker : SafeCSharpSyntaxWalker
         {
             private readonly Func<SyntaxNode, SemanticModel> getSemanticModel;
+            private readonly Accessibility containingTypeAccessibility;
 
-            public BidirectionalDictionary<ISymbol, SyntaxNode> FieldLikeSymbols { get; } = new();
+            public Dictionary<ISymbol, SyntaxNode> FieldLikeSymbols { get; } = new();
             public HashSet<ISymbol> InternalSymbols { get; } = new();
             public HashSet<ISymbol> PrivateSymbols { get; } = new();
 
-            public CSharpRemovableSymbolWalker(Func<SyntaxTree, bool, SemanticModel> getSemanticModel) =>
+            public CSharpRemovableSymbolWalker(Func<SyntaxTree, bool, SemanticModel> getSemanticModel, Accessibility containingTypeAccessibility)
+            {
                 this.getSemanticModel = node => getSemanticModel(node.SyntaxTree, false);
+                this.containingTypeAccessibility = containingTypeAccessibility;
+            }
 
             // This override is needed because VisitRecordDeclaration is not available due to the Roslyn version.
             public override void Visit(SyntaxNode node)
             {
-                if (node.IsKind(SyntaxKindEx.RecordClassDeclaration))
+                if (node.IsAnyKind(SyntaxKindEx.RecordClassDeclaration, SyntaxKindEx.RecordStructDeclaration))
                 {
-                    ConditionalStore(GetDeclaredSymbol(node), IsRemovableType);
+                    VisitBaseTypeDeclaration(node);
                 }
 
                 base.Visit(node);
@@ -319,13 +345,14 @@ namespace SonarAnalyzer.Rules.CSharp
 
             public override void VisitClassDeclaration(ClassDeclarationSyntax node)
             {
-                ConditionalStore(GetDeclaredSymbol(node), IsRemovableType);
+                VisitBaseTypeDeclaration(node);
                 base.VisitClassDeclaration(node);
             }
 
             public override void VisitConstructorDeclaration(ConstructorDeclarationSyntax node)
             {
-                if (!IsEmptyConstructor(node))
+                if (!IsEmptyConstructor(node)
+                    && IsPrivateOrInPrivateType(node.Modifiers))
                 {
                     ConditionalStore((IMethodSymbol)GetDeclaredSymbol(node), IsRemovableMethod);
                 }
@@ -335,62 +362,90 @@ namespace SonarAnalyzer.Rules.CSharp
 
             public override void VisitDelegateDeclaration(DelegateDeclarationSyntax node)
             {
-                ConditionalStore(GetDeclaredSymbol(node), IsRemovableType);
+                if (IsPrivateOrInPrivateType(node.Modifiers, true))
+                {
+                    ConditionalStore(GetDeclaredSymbol(node), IsRemovableType);
+                }
+
                 base.VisitDelegateDeclaration(node);
             }
 
             public override void VisitEnumDeclaration(EnumDeclarationSyntax node)
             {
-                ConditionalStore(GetDeclaredSymbol(node), IsRemovableType);
+                VisitBaseTypeDeclaration(node);
                 base.VisitEnumDeclaration(node);
             }
 
             public override void VisitEventDeclaration(EventDeclarationSyntax node)
             {
-                ConditionalStore(GetDeclaredSymbol(node), IsRemovableMember);
+                if (IsPrivateOrInPrivateType(node.Modifiers))
+                {
+                    ConditionalStore(GetDeclaredSymbol(node), IsRemovableMember);
+                }
+
                 base.VisitEventDeclaration(node);
             }
 
             public override void VisitEventFieldDeclaration(EventFieldDeclarationSyntax node)
             {
-                StoreRemovableVariableDeclarations(node);
+                if (IsPrivateOrInPrivateType(node.Modifiers))
+                {
+                    StoreRemovableVariableDeclarations(node);
+                }
+
                 base.VisitEventFieldDeclaration(node);
             }
 
             public override void VisitFieldDeclaration(FieldDeclarationSyntax node)
             {
-                StoreRemovableVariableDeclarations(node);
+                if (IsPrivateOrInPrivateType(node.Modifiers))
+                {
+                    StoreRemovableVariableDeclarations(node);
+                }
+
                 base.VisitFieldDeclaration(node);
             }
 
             public override void VisitIndexerDeclaration(IndexerDeclarationSyntax node)
             {
-                ConditionalStore(GetDeclaredSymbol(node), IsRemovableMember);
+                if (IsPrivateOrInPrivateType(node.Modifiers))
+                {
+                    ConditionalStore(GetDeclaredSymbol(node), IsRemovableMember);
+                }
+
                 base.VisitIndexerDeclaration(node);
             }
 
             public override void VisitInterfaceDeclaration(InterfaceDeclarationSyntax node)
             {
-                ConditionalStore(GetDeclaredSymbol(node), IsRemovableType);
+                VisitBaseTypeDeclaration(node);
                 base.VisitInterfaceDeclaration(node);
             }
 
             public override void VisitMethodDeclaration(MethodDeclarationSyntax node)
             {
-                var symbol = (IMethodSymbol)GetDeclaredSymbol(node);
-                ConditionalStore(symbol.PartialDefinitionPart ?? symbol, IsRemovableMethod);
+                if (IsPrivateOrInPrivateType(node.Modifiers))
+                {
+                    var symbol = (IMethodSymbol)GetDeclaredSymbol(node);
+                    ConditionalStore(symbol.PartialDefinitionPart ?? symbol, IsRemovableMethod);
+                }
+
                 base.VisitMethodDeclaration(node);
             }
 
             public override void VisitPropertyDeclaration(PropertyDeclarationSyntax node)
             {
-                ConditionalStore(GetDeclaredSymbol(node), IsRemovableMember);
+                if (IsPrivateOrInPrivateType(node.Modifiers))
+                {
+                    ConditionalStore(GetDeclaredSymbol(node), IsRemovableMember);
+                }
+
                 base.VisitPropertyDeclaration(node);
             }
 
             public override void VisitStructDeclaration(StructDeclarationSyntax node)
             {
-                ConditionalStore(GetDeclaredSymbol(node), IsRemovableType);
+                VisitBaseTypeDeclaration(node);
                 base.VisitStructDeclaration(node);
             }
 
@@ -403,7 +458,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     {
                         PrivateSymbols.Add(symbol);
                     }
-                    else
+                    else if (symbol is INamedTypeSymbol)
                     {
                         InternalSymbols.Add(symbol);
                     }
@@ -428,7 +483,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
             private static bool IsEmptyConstructor(BaseMethodDeclarationSyntax constructorDeclaration) =>
                 !constructorDeclaration.HasBodyOrExpressionBody()
-                || (constructorDeclaration.Body != null && constructorDeclaration.Body.Statements.Count == 0);
+                || (constructorDeclaration.Body is { } && constructorDeclaration.Body.Statements.Count == 0);
 
             private static bool IsDeclaredInPartialClass(ISymbol methodSymbol)
             {
@@ -451,9 +506,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 && !methodSymbol.IsSerializationConstructor();
 
             private static bool IsRemovable(ISymbol symbol) =>
-                symbol != null
-                && !symbol.IsImplicitlyDeclared
-                && !symbol.IsVirtual
+                symbol is { IsImplicitlyDeclared: false, IsVirtual: false }
                 && !symbol.GetAttributes().Any()
                 && !symbol.ContainingType.IsInterface()
                 && symbol.GetInterfaceMember() == null
@@ -463,13 +516,25 @@ namespace SonarAnalyzer.Rules.CSharp
                 symbol.GetEffectiveAccessibility() == Accessibility.Private
                 && IsRemovable(symbol);
 
-            private static bool IsRemovableType(ISymbol typeSymbol)
+            private static bool IsRemovableType(ISymbol typeSymbol) =>
+                typeSymbol.GetEffectiveAccessibility() is var accessibility
+                && typeSymbol.ContainingType is { }
+                && (accessibility is Accessibility.Private or Accessibility.Internal)
+                && IsRemovable(typeSymbol);
+
+            private void VisitBaseTypeDeclaration(SyntaxNode node)
             {
-                var accessibility = typeSymbol.GetEffectiveAccessibility();
-                return typeSymbol.ContainingType != null
-                       && (accessibility == Accessibility.Private || accessibility == Accessibility.Internal)
-                       && IsRemovable(typeSymbol);
+                if (IsPrivateOrInPrivateType(((BaseTypeDeclarationSyntax)node).Modifiers, true))
+                {
+                    ConditionalStore(GetDeclaredSymbol(node), IsRemovableType);
+                }
             }
+
+            private bool IsPrivateOrInPrivateType(SyntaxTokenList modifiers, bool checkInternal = false) =>
+                containingTypeAccessibility == Accessibility.Private
+                || (checkInternal && containingTypeAccessibility == Accessibility.Internal)
+                || !modifiers.Any(x => x.IsAnyKind(SyntaxKind.PrivateKeyword, SyntaxKind.PublicKeyword, SyntaxKind.InternalKeyword, SyntaxKind.ProtectedKeyword))
+                || modifiers.Any(SyntaxKind.PrivateKeyword);
         }
     }
 }

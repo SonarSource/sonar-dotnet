@@ -27,6 +27,7 @@ using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.Common;
+using SonarAnalyzer.Constants;
 using SonarAnalyzer.Helpers;
 using StyleCop.Analyzers.Lightup;
 
@@ -162,7 +163,7 @@ namespace SonarAnalyzer.Rules.CSharp
         {
             var serializationConstructor = typeSymbol.Constructors.FirstOrDefault(KnownMethods.IsSerializationConstructor);
 
-            var accessibility = typeSymbol.IsSealed ? "private" : "protected";
+            var accessibility = typeSymbol.IsSealed ? SyntaxConstants.Private : SyntaxConstants.Protected;
 
             if (serializationConstructor == null)
             {

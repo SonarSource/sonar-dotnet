@@ -12,9 +12,9 @@ namespace Tests.Diagnostics
 
         private nint Value { get; init; } = 42;
 
-        private nint UnusedValue { get; init; } = 42; // FN
+        private nint UnusedValue { get; init; } // Noncompliant
 
-        public RecordStruct Create() => new() {Value = 1};
+        public RecordStruct Create() => new() { Value = 1 };
 
         private interface IFoo // Noncompliant
         {
@@ -35,9 +35,10 @@ namespace Tests.Diagnostics
             _ = new Nested2("name", 2);
         }
 
-        private record struct UnusedNested1(string Name, int CategoryId); // FN
-        internal record struct UnusedNested2(string Name, int CategoryId); // FN
+        private record struct UnusedNested1(string Name, int CategoryId); // Noncompliant
+        internal record struct UnusedNested2(string Name, int CategoryId); // Noncompliant
         public record struct UnusedNested3(string Name, int CategoryId);
+        record struct UnusedNested4(string Name, int CategoryId); // Noncompliant
 
         private int usedInPatternMatching = 1;
 
@@ -76,7 +77,7 @@ namespace Tests.Diagnostics
         private int b = 42;
         public int B() => b;
 
-        private record struct UnusedNested(string Name, int CategoryId) { } // FN
+        private record struct UnusedNested(string Name, int CategoryId) { } // Noncompliant
     }
 
     // https://github.com/SonarSource/sonar-dotnet/issues/2752

@@ -23,5 +23,8 @@ namespace SonarAnalyzer.Constants
     public static class SyntaxConstants
     {
         public static readonly string Discard = "_";
+        public static readonly string Private = "private";
+        public static readonly string Protected = "protected";
+        public static readonly string Internal = "internal";
     }
 }
