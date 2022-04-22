@@ -86,7 +86,7 @@ namespace SonarAnalyzer.Rules.CSharp
         // Symbol should be checked for null in the caller.
         private static IEnumerable<TSyntax> DeclarationOrImplementation<TSyntax>(TypeDeclarationSyntax typeDeclaration, IMethodSymbol symbol) =>
             symbol.PartialImplementationPart is not null
-            && symbol.PartialImplementationPart.DeclaringSyntaxReferences.FirstOrDefault()?.GetSyntax() is { } partialImplementation
+            && symbol.PartialImplementationPart.DeclaringSyntaxReferences.First().GetSyntax() is var partialImplementation
             && typeDeclaration.DescendantNodes().Any(x => x.Equals(partialImplementation))
                 ? new[] { partialImplementation }.Cast<TSyntax>()
                 : symbol.DeclaringSyntaxReferences.Select(x => x.GetSyntax()).Cast<TSyntax>();
