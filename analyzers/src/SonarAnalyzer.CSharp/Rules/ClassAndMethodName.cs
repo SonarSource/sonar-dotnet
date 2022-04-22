@@ -27,6 +27,7 @@ using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
+using SonarAnalyzer.Extensions;
 using SonarAnalyzer.Helpers;
 using StyleCop.Analyzers.Lightup;
 
@@ -48,25 +49,24 @@ namespace SonarAnalyzer.Rules.CSharp
         private static readonly DiagnosticDescriptor TypeNameRule =
             DiagnosticDescriptorBuilder.GetDescriptor(TypeNameDiagnosticId, MessageFormat, RspecStrings.ResourceManager);
 
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } =
-            ImmutableArray.Create(MethodNameRule, TypeNameRule);
-
-        private static readonly Dictionary<SyntaxKind, string> TypeKindNameMapping =
-            new Dictionary<SyntaxKind, string>
-            {
-                { SyntaxKind.StructDeclaration, "struct" },
-                { SyntaxKind.ClassDeclaration, "class" },
-                { SyntaxKind.InterfaceDeclaration, "interface" },
-                { SyntaxKindEx.RecordClassDeclaration, "record" },
-                { SyntaxKind.MethodDeclaration, "method" },
-                { SyntaxKind.PropertyDeclaration, "property" },
-                { SyntaxKindEx.LocalFunctionStatement, "local function" },
-            };
+        private static readonly Dictionary<SyntaxKind, string> TypeKindNameMapping = new()
+        {
+            { SyntaxKind.StructDeclaration, "struct" },
+            { SyntaxKind.ClassDeclaration, "class" },
+            { SyntaxKind.InterfaceDeclaration, "interface" },
+            { SyntaxKindEx.RecordClassDeclaration, "record" },
+            { SyntaxKindEx.RecordStructDeclaration, "record struct" },
+            { SyntaxKind.MethodDeclaration, "method" },
+            { SyntaxKind.PropertyDeclaration, "property" },
+            { SyntaxKindEx.LocalFunctionStatement, "local function" },
+        };
 
         private static readonly ImmutableArray<KnownType> ComRelatedTypes =
             ImmutableArray.Create(
                 KnownType.System_Runtime_InteropServices_ComImportAttribute,
                 KnownType.System_Runtime_InteropServices_InterfaceTypeAttribute);
+
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(MethodNameRule, TypeNameRule);
 
         internal static IEnumerable<string> SplitToParts(string name)
         {
@@ -118,7 +118,7 @@ namespace SonarAnalyzer.Rules.CSharp
         {
             context.RegisterSyntaxNodeActionInNonGenerated(c =>
                 {
-                    if (c.ContainingSymbol.Kind != SymbolKind.NamedType)
+                    if (c.IsRedundantPositionalRecordContext())
                     {
                         return;
                     }
@@ -128,10 +128,10 @@ namespace SonarAnalyzer.Rules.CSharp
                 SyntaxKind.ClassDeclaration,
                 SyntaxKind.InterfaceDeclaration,
                 SyntaxKind.StructDeclaration,
-                SyntaxKindEx.RecordClassDeclaration);
+                SyntaxKindEx.RecordClassDeclaration,
+                SyntaxKindEx.RecordStructDeclaration);
 
-            context.RegisterSyntaxNodeActionInNonGenerated(
-                c =>
+            context.RegisterSyntaxNodeActionInNonGenerated(c =>
                 {
                     var identifier = GetDeclarationIdentifier(c.Node);
                     CheckMemberName(c.Node, identifier, c);

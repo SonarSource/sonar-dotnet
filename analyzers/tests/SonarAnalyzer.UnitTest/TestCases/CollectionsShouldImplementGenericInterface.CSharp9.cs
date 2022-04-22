@@ -5,11 +5,10 @@ using System.Collections.ObjectModel;
 
 namespace Tests.Diagnostics
 {
-    record TestRecord_01 : CollectionBase { } // FN
+    record TestRecord_01 : CollectionBase { } // Noncompliant {{Refactor this collection to implement 'System.Collections.ObjectModel.Collection<T>'.}}
+    //     ^^^^^^^^^^^^^
 
-    record TestRecord_02 : IList { } // FN
-
-    record TestRecord_03 : IEnumerable { } // FN
-
-    record TestRecord_04 : ICollection { } // FN
+    record TestRecord_02 : IList { }       // Noncompliant
+    record TestRecord_03 : IEnumerable { } // Noncompliant
+    record TestRecord_04 : ICollection { } // Noncompliant
 }

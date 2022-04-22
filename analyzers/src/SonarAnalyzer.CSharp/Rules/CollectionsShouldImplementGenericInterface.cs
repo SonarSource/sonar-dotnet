@@ -20,11 +20,14 @@
 
 using System.Collections.Generic;
 using System.Collections.Immutable;
+using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
+using SonarAnalyzer.Extensions;
 using SonarAnalyzer.Helpers;
+using StyleCop.Analyzers.Lightup;
 
 namespace SonarAnalyzer.Rules.CSharp
 {
@@ -34,64 +37,56 @@ namespace SonarAnalyzer.Rules.CSharp
         internal const string DiagnosticId = "S3909";
         private const string MessageFormat = "Refactor this collection to implement '{0}'.";
 
-        private static readonly DiagnosticDescriptor rule =
-            DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(rule);
+        private static readonly DiagnosticDescriptor Rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
 
-        private static readonly Dictionary<string, KnownType> nongenericToGenericMapping =
-            new Dictionary<string, KnownType>
-            {
-                [KnownType.System_Collections_ICollection.TypeName] = KnownType.System_Collections_Generic_ICollection_T,
-                [KnownType.System_Collections_IList.TypeName] = KnownType.System_Collections_Generic_IList_T,
-                [KnownType.System_Collections_IEnumerable.TypeName] = KnownType.System_Collections_Generic_IEnumerable_T,
-                [KnownType.System_Collections_CollectionBase.TypeName] = KnownType.System_Collections_ObjectModel_Collection_T,
-            };
+        private static readonly Dictionary<string, KnownType> NongenericToGenericMapping = new()
+        {
+            { KnownType.System_Collections_ICollection.TypeName, KnownType.System_Collections_Generic_ICollection_T },
+            { KnownType.System_Collections_IList.TypeName, KnownType.System_Collections_Generic_IList_T },
+            { KnownType.System_Collections_IEnumerable.TypeName, KnownType.System_Collections_Generic_IEnumerable_T },
+            { KnownType.System_Collections_CollectionBase.TypeName, KnownType.System_Collections_ObjectModel_Collection_T },
+        };
 
-        private static readonly ImmutableArray<KnownType> genericTypes = nongenericToGenericMapping.Values.ToImmutableArray();
+        private static readonly ImmutableArray<KnownType> GenericTypes = NongenericToGenericMapping.Values.ToImmutableArray();
+
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
 
         protected override void Initialize(SonarAnalysisContext context)
         {
             context.RegisterSyntaxNodeActionInNonGenerated(c =>
                 {
-                    var classDeclaration = c.Node as ClassDeclarationSyntax;
-
-                    var implementedTypes = classDeclaration?.BaseList?.Types;
-                    if (implementedTypes == null)
+                    var typeDeclaration = (BaseTypeDeclarationSyntax)c.Node;
+                    var implementedTypes = typeDeclaration.BaseList?.Types;
+                    if (implementedTypes == null || c.IsRedundantPositionalRecordContext())
                     {
                         return;
                     }
 
-                    var issues = new List<Diagnostic>();
-                    foreach (var typeSyntax in implementedTypes)
+                    List<Diagnostic> issues = null;
+                    var containingType = (INamedTypeSymbol)c.ContainingSymbol;
+                    foreach (var typeSymbol in containingType.Interfaces.Concat(new[] { containingType.BaseType }).WhereNotNull())
                     {
-                        var typeSymbol = c.SemanticModel.GetSymbolInfo(typeSyntax.Type).Symbol?.GetSymbolType();
-                        if (typeSymbol == null)
-                        {
-                            continue;
-                        }
-
-                        if (typeSymbol.OriginalDefinition.IsAny(genericTypes))
+                        if (typeSymbol.OriginalDefinition.IsAny(GenericTypes))
                         {
                             return;
                         }
 
-                        var suggestedGenericType = SuggestGenericCollectionType(typeSymbol);
-                        if (suggestedGenericType != null)
+                        if (SuggestGenericCollectionType(typeSymbol) is { } suggestedGenericType)
                         {
-                            issues.Add(Diagnostic.Create(rule,
-                                        classDeclaration.Identifier.GetLocation(),
-                                        suggestedGenericType));
+                            issues ??= new();
+                            issues.Add(Diagnostic.Create(Rule, typeDeclaration.Identifier.GetLocation(), suggestedGenericType));
                         }
                     }
 
-                    issues.ForEach(d => c.ReportIssue(d));
+                    issues?.ForEach(d => c.ReportIssue(d));
                 },
-                SyntaxKind.ClassDeclaration);
+                SyntaxKind.ClassDeclaration,
+                SyntaxKind.StructDeclaration,
+                SyntaxKindEx.RecordClassDeclaration,
+                SyntaxKindEx.RecordStructDeclaration);
         }
 
-        private static string SuggestGenericCollectionType(ITypeSymbol typeSymbol)
-        {
-            return nongenericToGenericMapping.GetValueOrDefault(typeSymbol.ToDisplayString())?.TypeName;
-        }
+        private static string SuggestGenericCollectionType(ITypeSymbol typeSymbol) =>
+            NongenericToGenericMapping.GetValueOrDefault(typeSymbol.ToDisplayString())?.TypeName;
     }
 }
