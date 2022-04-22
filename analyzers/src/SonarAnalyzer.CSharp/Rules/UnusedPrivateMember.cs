@@ -19,7 +19,6 @@
  */
 
 using System;
-using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Linq;
@@ -64,7 +63,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     // Collect potentially removable internal types from the project to evaluate when
                     // the compilation is over, depending on whether InternalsVisibleTo attribute is present
                     // or not.
-                    var removableInternalTypes = new ConcurrentBag<ISymbol>();
+                    var removableInternalTypes = new HashSet<ISymbol>();
 
                     c.RegisterSymbolAction(cc => NamedSymbolAction(cc, removableInternalTypes), SymbolKind.NamedType);
                     c.RegisterCompilationEndAction(
@@ -92,7 +91,7 @@ namespace SonarAnalyzer.Rules.CSharp
                         });
                 });
 
-        private static void NamedSymbolAction(SymbolAnalysisContext context, ConcurrentBag<ISymbol> removableInternalTypes)
+        private static void NamedSymbolAction(SymbolAnalysisContext context, HashSet<ISymbol> removableInternalTypes)
         {
             var namedType = (INamedTypeSymbol)context.Symbol;
             var privateSymbols = new HashSet<ISymbol>();
@@ -111,7 +110,7 @@ namespace SonarAnalyzer.Rules.CSharp
         private static bool GatherSymbols(INamedTypeSymbol namedType,
                                           Compilation compilation,
                                           HashSet<ISymbol> privateSymbols,
-                                          ConcurrentBag<ISymbol> internalSymbols,
+                                          HashSet<ISymbol> internalSymbols,
                                           BidirectionalDictionary<ISymbol, SyntaxNode> fieldLikeSymbols)
         {
             if (namedType.ContainingType != null
@@ -293,7 +292,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private static void CopyRetrievedSymbols(CSharpRemovableSymbolWalker removableSymbolCollector,
                                                  HashSet<ISymbol> privateSymbols,
-                                                 ConcurrentBag<ISymbol> internalSymbols,
+                                                 HashSet<ISymbol> internalSymbols,
                                                  BidirectionalDictionary<ISymbol, SyntaxNode> fieldLikeSymbols)
         {
             privateSymbols.AddRange(removableSymbolCollector.PrivateSymbols);
