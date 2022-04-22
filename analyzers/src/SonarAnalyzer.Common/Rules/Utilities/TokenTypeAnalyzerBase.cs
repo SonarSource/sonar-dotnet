@@ -164,6 +164,15 @@ namespace SonarAnalyzer.Rules
 
             private void ClassifyIdentifier()
             {
+                // The code re-work was stopped midway due to the lack of time.
+                // The main idea is to filter the tokens as much as possible at the syntax level.
+                // - to detect all the declarations at the syntax level
+                // - the var keyword
+                // - the dynamic keyword
+                // - to ignore all the syntax nodes that will not produce tokens (for each, for, ...)
+                // - to create a list of possible identifier names based on compilationStartContext.Compilation.GlobalNamespace.GetAllNamedTypes()
+                //   and filter the identifiers based on that before retrieving the symbols.
+                // - the last Log call will dump all the syntax nodes for which we retrieved symbols without a need.
                 if (IsIgnoredSyntax(token))
                 {
                     return;
