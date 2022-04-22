@@ -28,16 +28,20 @@ namespace SonarAnalyzer.Helpers
     {
         #region TypeKind
 
-        public static bool IsInterface(this ITypeSymbol self) => 
+        public static bool IsInterface(this ITypeSymbol self) =>
             self is { TypeKind: TypeKind.Interface };
 
-        public static bool IsClass(this ITypeSymbol self) => self is { TypeKind: TypeKind.Class };
+        public static bool IsClass(this ITypeSymbol self) =>
+            self is { TypeKind: TypeKind.Class };
 
-        public static bool IsStruct(this ITypeSymbol self) => self is { TypeKind: TypeKind.Struct };
+        public static bool IsStruct(this ITypeSymbol self) =>
+            self is { TypeKind: TypeKind.Struct };
 
-        public static bool IsClassOrStruct(this ITypeSymbol self) => self.IsStruct() || self.IsClass();
+        public static bool IsClassOrStruct(this ITypeSymbol self) =>
+            self.IsStruct() || self.IsClass();
 
-        public static bool Is(this ITypeSymbol self, TypeKind typeKind) => self is { } && self.TypeKind == typeKind;
+        public static bool Is(this ITypeSymbol self, TypeKind typeKind) =>
+            self is { } && self.TypeKind == typeKind;
 
         #endregion TypeKind
 
@@ -118,23 +122,17 @@ namespace SonarAnalyzer.Helpers
             namedType.TypeArguments.Length == 1 &&
             namedType.TypeArguments[0].Is(KnownType.System_Boolean);
 
-        public static bool Implements(this ITypeSymbol typeSymbol, KnownType type)
-        {
-            return typeSymbol != null &&
-                typeSymbol.AllInterfaces.Any(symbol => symbol.ConstructedFrom.Is(type));
-        }
+        public static bool Implements(this ITypeSymbol typeSymbol, KnownType type) =>
+            typeSymbol is { }
+            && typeSymbol.AllInterfaces.Any(symbol => symbol.ConstructedFrom.Is(type));
 
-        public static bool Implements(this ITypeSymbol typeSymbol, ITypeSymbol type)
-        {
-            return typeSymbol != null &&
-                typeSymbol.AllInterfaces.Any(symbol => symbol.ConstructedFrom.Equals(type));
-        }
+        public static bool Implements(this ITypeSymbol typeSymbol, ITypeSymbol type) =>
+            typeSymbol is { }
+            && typeSymbol.AllInterfaces.Any(symbol => symbol.ConstructedFrom.Equals(type));
 
-        public static bool ImplementsAny(this ITypeSymbol typeSymbol, ImmutableArray<KnownType> types)
-        {
-            return typeSymbol != null &&
-                typeSymbol.AllInterfaces.Any(symbol => symbol.ConstructedFrom.IsAny(types));
-        }
+        public static bool ImplementsAny(this ITypeSymbol typeSymbol, ImmutableArray<KnownType> types) =>
+            typeSymbol is { }
+            && typeSymbol.AllInterfaces.Any(symbol => symbol.ConstructedFrom.IsAny(types));
 
         public static bool DerivesFrom(this ITypeSymbol typeSymbol, KnownType type)
         {
@@ -181,11 +179,8 @@ namespace SonarAnalyzer.Helpers
             return false;
         }
 
-        public static bool DerivesOrImplements(this ITypeSymbol type, KnownType baseType)
-        {
-            return type.Implements(baseType) ||
-                type.DerivesFrom(baseType);
-        }
+        public static bool DerivesOrImplements(this ITypeSymbol type, KnownType baseType) =>
+            type.Implements(baseType) || type.DerivesFrom(baseType);
 
         public static bool DerivesOrImplements(this ITypeSymbol type, ITypeSymbol baseType) =>
             type.Implements(baseType) || type.DerivesFrom(baseType);
