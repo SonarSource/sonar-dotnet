@@ -43,8 +43,8 @@ class Compliant
 
 class NonCompliant
 {
-    Guid field; // FN
-    readonly Guid readonlyField; // FN
+    Guid field;
+    readonly Guid readonlyField;
     Guid Property { get; set; }
 
     void DefaultCtor()
@@ -71,17 +71,17 @@ class NonCompliant
 
 struct GuidAssignmentStruct
 {
-    static readonly Guid Static; // FN
+    static readonly Guid Static;
     Guid Field; // Compliant, structs do not allow assigned instance values
     readonly Guid ReadOnly; // Compliant, structs do not allow assigned instance values
 }
 class GuidClass
 {
-	public GuidClass(Guid param){ }
-	public void Method(Guid param){ }
+    public GuidClass(Guid param) { }
+    public void Method(Guid param) { }
 }
 class NullableGuidClass
 {
-	public NullableGuidClass(Guid? param){ }
-	public void Method(Guid? param){ }
+    public NullableGuidClass(Guid? param) { }
+    public void Method(Guid? param) { }
 }
