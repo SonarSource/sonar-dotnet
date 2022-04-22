@@ -70,7 +70,7 @@ class NonCompliant
 
 struct GuidAssignmentStruct
 {
-    static readonly Guid Static; // FN
+    static readonly Guid Static; 
     Guid Field; // Compliant, structs do not allow assigned instance values
     readonly Guid ReadOnly; // Compliant, structs do not allow assigned instance values
 }
