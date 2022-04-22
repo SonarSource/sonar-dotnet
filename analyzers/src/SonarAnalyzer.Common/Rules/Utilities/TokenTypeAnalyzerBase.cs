@@ -19,6 +19,7 @@
  */
 
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Text;
@@ -178,6 +179,7 @@ namespace SonarAnalyzer.Rules
                 }
                 else
                 {
+                    Log(@"C:\tmp\token-type\logs-redundant.txt");
                 }
             }
 
@@ -221,6 +223,9 @@ namespace SonarAnalyzer.Rules
                 }
                 // Handle preprocessor directives here
             }
+
+            private void Log(string path) =>
+                File.AppendAllText(path, $"{token.Text} {token.Span} {token.SyntaxTree.FilePath}\n");
         }
     }
 }
