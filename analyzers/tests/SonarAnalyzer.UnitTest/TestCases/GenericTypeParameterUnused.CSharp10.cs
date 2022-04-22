@@ -20,7 +20,7 @@ public record struct R : Interface
     }
 }
 
-public record struct R<T> // Noncompliant
+public record struct R<T> // Noncompliant {{'T' is not used in the record.}}
 {
 }
 

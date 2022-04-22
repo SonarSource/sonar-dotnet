@@ -24,7 +24,7 @@ public record R : Interface
     }
 }
 
-public record R<T> // Noncompliant
+public record R<T> // Noncompliant {{'T' is not used in the record.}}
 {
 }
 

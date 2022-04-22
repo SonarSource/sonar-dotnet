@@ -89,7 +89,8 @@ namespace SonarAnalyzer.Rules.CSharp
         private static ParametersInfo CreateParametersInfo(SyntaxNode node, SemanticModel semanticModel) =>
             node switch
             {
-                TypeDeclarationSyntax typeDeclaration => new ParametersInfo(typeDeclaration.TypeParameterList, "class"),
+                ClassDeclarationSyntax classDeclaration => new ParametersInfo(classDeclaration.TypeParameterList, "class"),
+                StructDeclarationSyntax structDeclaration => new ParametersInfo(structDeclaration.TypeParameterList, "struct"),
                 MethodDeclarationSyntax methodDeclaration when IsMethodCandidate(methodDeclaration, semanticModel) => new ParametersInfo(methodDeclaration.TypeParameterList, "method"),
                 var wrapper when LocalFunctionStatementSyntaxWrapper.IsInstance(wrapper) => new ParametersInfo(((LocalFunctionStatementSyntaxWrapper)node).TypeParameterList, "local function"),
                 var wrapper when RecordDeclarationSyntaxWrapper.IsInstance(wrapper) => new ParametersInfo(((RecordDeclarationSyntaxWrapper)node).TypeParameterList, "record"),

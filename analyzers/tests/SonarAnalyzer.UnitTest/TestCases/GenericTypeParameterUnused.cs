@@ -188,7 +188,7 @@ namespace Tests.Diagnostics
         }
     }
 
-    public struct StructUnused<T>   // Noncompliant
+    public struct StructUnused<T>   // Noncompliant {{'T' is not used in the struct.}}
     {
     }
 }
