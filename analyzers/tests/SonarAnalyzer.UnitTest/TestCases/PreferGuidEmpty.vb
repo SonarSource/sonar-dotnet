@@ -39,8 +39,8 @@ End Class
 
 Class NonCompliant
 
-    Private Field As Guid ' FN
-    Private ReadOnly ReadonlyField As Guid ' FN
+    Private Field As Guid
+    Private ReadOnly ReadonlyField As Guid
     Property Prop As Guid
 
     Sub DefaultCtor()
