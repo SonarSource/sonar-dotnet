@@ -86,6 +86,16 @@ namespace SonarAnalyzer.Rules.CSharp
                     or GenericNameSyntax
                     or AttributeSyntax;
 
+            protected override bool IsIgnoredSyntax(SyntaxToken token) =>
+                GetParent(token) is not { } parent
+                || parent is VariableDeclaratorSyntax
+                    or MethodDeclarationSyntax
+                    or ParameterSyntax
+                    or ForEachStatementSyntax
+                    or ForStatementSyntax
+                    or PropertyDeclarationSyntax
+                || SingleVariableDesignationSyntaxWrapper.IsInstance(parent);
+
             private static SyntaxNode GetParent(SyntaxToken token)
             {
                 var parent = token.Parent;
