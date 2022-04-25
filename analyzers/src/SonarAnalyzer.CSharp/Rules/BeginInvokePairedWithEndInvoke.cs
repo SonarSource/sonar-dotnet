@@ -40,8 +40,6 @@ namespace SonarAnalyzer.Rules.CSharp
         protected override ISet<SyntaxKind> ParentDeclarationKinds { get; } = new HashSet<SyntaxKind>
         {
             SyntaxKind.AnonymousMethodExpression,
-            SyntaxKind.ClassDeclaration,
-            SyntaxKind.CompilationUnit,
             SyntaxKind.ConstructorDeclaration,
             SyntaxKind.ConversionOperatorDeclaration,
             SyntaxKind.DestructorDeclaration,
@@ -51,10 +49,7 @@ namespace SonarAnalyzer.Rules.CSharp
             SyntaxKind.OperatorDeclaration,
             SyntaxKind.ParenthesizedLambdaExpression,
             SyntaxKind.PropertyDeclaration,
-            SyntaxKindEx.RecordClassDeclaration,
-            SyntaxKindEx.RecordStructDeclaration,
             SyntaxKind.SimpleLambdaExpression,
-            SyntaxKind.StructDeclaration,
         }.ToImmutableHashSet();
 
         protected override void VisitInvocation(EndInvokeContext context) =>

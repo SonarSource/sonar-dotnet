@@ -83,14 +83,12 @@ namespace SonarAnalyzer.Rules
             }
         }
 
-        private bool ParentMethodContainsEndInvoke(SyntaxNode node, SemanticModel semantic)
-        {
-            var parentContext = node.AncestorsAndSelf().FirstOrDefault(IsParentDeclaration);
-            return IsParentDeclarationWithEndInvoke(parentContext, semantic);
-        }
+        private bool ParentMethodContainsEndInvoke(SyntaxNode node, SemanticModel model)
+            => node.AncestorsAndSelf().FirstOrDefault(IsParentDeclaration) is { } parentContext
+               && IsParentDeclarationWithEndInvoke(parentContext, model);
 
-        private bool IsParentDeclaration(SyntaxNode node) =>
-            ParentDeclarationKinds.Contains(Language.Syntax.Kind(node));
+        private bool IsParentDeclaration(SyntaxNode node)
+            => node is not null && ParentDeclarationKinds.Contains(Language.Syntax.Kind(node));
 
         protected class EndInvokeContext
         {
@@ -108,8 +106,7 @@ namespace SonarAnalyzer.Rules
             }
 
             public bool Visit(SyntaxNode node) =>
-                !ContainsEndInvoke  // Stop visiting once we found it
-                && (node == Root || !rule.ParentDeclarationKinds.Contains(rule.Language.Syntax.Kind(node)));
+                !ContainsEndInvoke;  // Stop visiting once we found it
 
             public bool VisitInvocationExpression(SyntaxNode node)
             {
