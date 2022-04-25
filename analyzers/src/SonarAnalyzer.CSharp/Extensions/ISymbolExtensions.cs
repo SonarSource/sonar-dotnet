@@ -105,14 +105,29 @@ namespace SonarAnalyzer.Extensions
         /// For e.g. an <see cref="INamedTypeSymbol"/> this can be a list of partial <see cref="ClassDeclarationSyntax.Identifier"/>.
         /// </summary>
         public static ImmutableArray<SyntaxToken> GetIdentifiers(this ISymbol symbol) =>
-            (from r in symbol.DeclaringSyntaxReferences
-             select r.GetSyntax().NodeIdentifier() into i
-             where i != null
-             select (SyntaxToken)i)
+            symbol.DeclaringSyntaxReferences
+            .Select(r => r.GetSyntax().NodeIdentifier())
+            .WhereNotNull()
             .ToImmutableArray();
 
         /// <inheritdoc cref="Helpers.Facade.SyntaxFacade{TSyntaxKind}.NodeIdentifier"/>
-        private static SyntaxToken? NodeIdentifier(this SyntaxNode node)
-            => CSharpFacade.Instance.Syntax.NodeIdentifier(node);
+        public static SyntaxToken? NodeIdentifier(this SyntaxNode node)
+            => node.RemoveParentheses() switch
+            {
+                AttributeArgumentSyntax attribute => attribute.NameColon?.Name.Identifier,
+                BaseTypeDeclarationSyntax baseType => baseType.Identifier,
+                DelegateDeclarationSyntax delegateDeclaration => delegateDeclaration.Identifier,
+                EnumMemberDeclarationSyntax enumMember => enumMember.Identifier,
+                EventDeclarationSyntax @event => @event.Identifier,
+                InvocationExpressionSyntax invocation => NodeIdentifier(invocation.Expression),
+                MemberAccessExpressionSyntax memberAccess => memberAccess.Name.Identifier,
+                MemberBindingExpressionSyntax memberBinding => memberBinding.Name.Identifier,
+                MethodDeclarationSyntax method => method.Identifier,
+                ParameterSyntax parameter => parameter.Identifier,
+                PropertyDeclarationSyntax property => property.Identifier,
+                SimpleNameSyntax simpleName => simpleName.Identifier,
+                VariableDeclaratorSyntax variable => variable.Identifier,
+                _ => null,
+            };
     }
 }

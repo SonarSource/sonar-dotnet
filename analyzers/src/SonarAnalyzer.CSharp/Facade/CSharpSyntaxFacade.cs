@@ -77,23 +77,7 @@ namespace SonarAnalyzer.Helpers.Facade
 
         /// <inheritdoc />
         public override SyntaxToken? NodeIdentifier(SyntaxNode node) =>
-            RemoveParentheses(node) switch
-            {
-                AttributeArgumentSyntax attribute => attribute.NameColon?.Name.Identifier,
-                BaseTypeDeclarationSyntax baseType => baseType.Identifier,
-                DelegateDeclarationSyntax delegateDeclaration => delegateDeclaration.Identifier,
-                EnumMemberDeclarationSyntax enumMember => enumMember.Identifier,
-                EventDeclarationSyntax @event => @event.Identifier,
-                InvocationExpressionSyntax invocation => NodeIdentifier(invocation.Expression),
-                MemberAccessExpressionSyntax memberAccess => memberAccess.Name.Identifier,
-                MemberBindingExpressionSyntax memberBinding => memberBinding.Name.Identifier,
-                MethodDeclarationSyntax method => method.Identifier,
-                ParameterSyntax parameter => parameter.Identifier,
-                PropertyDeclarationSyntax property => property.Identifier,
-                SimpleNameSyntax simpleName => simpleName.Identifier,
-                VariableDeclaratorSyntax variable => variable.Identifier,
-                _ => null,
-            };
+            node.NodeIdentifier();
 
         public override string NodeStringTextValue(SyntaxNode node) =>
             node switch
