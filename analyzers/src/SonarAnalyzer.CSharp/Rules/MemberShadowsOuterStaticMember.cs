@@ -88,10 +88,10 @@ namespace SonarAnalyzer.Rules.CSharp
                 return;
             }
 
-            var namedTypeName = namedType.TypeKind == TypeKind.Delegate ? "delegate" : "class";
+            var kindName = namedType.TypeKind == TypeKind.Delegate ? "delegate" : "class";
             foreach (var identifier in namedType.DeclaringReferenceIdentifiers())
             {
-                context.ReportDiagnosticIfNonGenerated(Diagnostic.Create(Rule, identifier.GetLocation(), namedTypeName));
+                context.ReportDiagnosticIfNonGenerated(Diagnostic.Create(Rule, identifier.GetLocation(), kindName));
             }
         }
 
@@ -121,7 +121,7 @@ namespace SonarAnalyzer.Rules.CSharp
                                                   SymbolAnalysisContext context,
                                                   string memberType) where T : ISymbol
         {
-            if (eventOrMethod is IMethodSymbol { MethodKind: MethodKind.PropertyGet or MethodKind.PropertySet or MethodKind.EventAdd or MethodKind.EventRemove})
+            if (eventOrMethod is IMethodSymbol { MethodKind: MethodKind.PropertyGet or MethodKind.PropertySet or MethodKind.EventAdd or MethodKind.EventRemove })
             {
                 return;
             }
