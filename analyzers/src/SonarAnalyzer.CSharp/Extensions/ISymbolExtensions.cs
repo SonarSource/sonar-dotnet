@@ -97,7 +97,7 @@ namespace SonarAnalyzer.Extensions
         /// For e.g. an <see cref="IPropertySymbol"/> this is <see cref="PropertyDeclarationSyntax.Identifier"/>.
         /// </summary>
         /// <returns>The idenifier token or <see langword="null"/> if there is no DeclaringSyntaxReference or the <see cref="SyntaxNode"/> does not have an Identifier.</returns>
-        public static SyntaxToken? GetFirstIdentifier(this ISymbol symbol) =>
+        public static SyntaxToken? FirstDeclaringReferenceIdentifier(this ISymbol symbol) =>
             symbol.DeclaringSyntaxReferences.FirstOrDefault()?.GetSyntax().NodeIdentifier();
 
         /// <summary>
