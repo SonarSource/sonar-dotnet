@@ -31,15 +31,17 @@ namespace SonarAnalyzer.Helpers
         /// Sequence of upper case letters is considered as single word.
         ///
         /// For example:
-        /// thisIsAName => this is a name
-        /// ThisIsSMTPName => this is smtp name
-        /// bin2hex => bin hex
-        /// HTML => html
-        /// SOME_value => some value
-        /// PEHeader => pe header
+        /// <list type="bullet">
+        /// <item>"thisIsAName" => ["THIS", "IS", "A", "NAME"]</item>
+        /// <item>"ThisIsSMTPName" => ["THIS", "IS", "SMTP", "NAME"]</item>
+        /// <item>"bin2hex" => ["BIN", "HEX"]</item>
+        /// <item>"HTML" => ["HTML"]</item>
+        /// <item>"SOME_value" => ["SOME", "VALUE"]</item>
+        /// <item>"PEHeader" => ["PE", "HEADER"]</item>
+        /// </list>
         /// </summary>
         /// <param name="name">A string containing words.</param>
-        /// <returns>A list of words (all lowercase) contained in the string.</returns>
+        /// <returns>A list of words (all uppercase) contained in the string.</returns>
         public static IEnumerable<string> SplitCamelCaseToWords(this string name)
         {
             bool IsFollowedByLower(int i) => i + 1 < name.Length && char.IsLower(name[i + 1]);
