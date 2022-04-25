@@ -42,10 +42,6 @@ namespace SonarAnalyzer.Helpers.Facade
         public abstract SyntaxToken? InvocationIdentifier(SyntaxNode invocation);
         public abstract SyntaxNode NodeExpression(SyntaxNode node);
 
-        /// <summary>
-        /// Returns the Identifier token of the <paramref name="node"/>. For nodes with more than one identifier (e.g. <see cref="VariableDeclarationSyntax"/>) <see langword="null"/> is returned.
-        /// </summary>
-        /// <returns>The idenifier token or <see langword="null"/> if the node does have more than one or no Identifier.</returns>
         public abstract SyntaxToken? NodeIdentifier(SyntaxNode node);
         public abstract SyntaxNode RemoveConditionalAcesss(SyntaxNode node);
         public abstract SyntaxNode RemoveParentheses(SyntaxNode node);
