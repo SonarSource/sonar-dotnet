@@ -63,7 +63,7 @@ End Class";
             var nodes = Parse_VB(VbSourceInputToString);
             nodes.OfType<VB.MemberAccessExpressionSyntax>().Single().GetName().Should().Be("ToString");
             nodes.OfType<VB.IdentifierNameSyntax>().Select(x => x.GetName()).Should().BeEquivalentTo("Input", "ToString");
-            nodes.OfType<VB.InvocationExpressionSyntax>().Single().GetName().Should().BeEmpty();
+            nodes.OfType<VB.InvocationExpressionSyntax>().Single().GetName().Should().Be("ToString");
         }
 
         [TestMethod]

@@ -121,6 +121,11 @@ namespace SonarAnalyzer.Rules.CSharp
                                                   SymbolAnalysisContext context,
                                                   string memberType) where T : ISymbol
         {
+            if (eventOrMethod is IMethodSymbol { MethodKind: MethodKind.PropertyGet or MethodKind.PropertySet or MethodKind.EventAdd or MethodKind.EventRemove})
+            {
+                return;
+            }
+
             var selfAndOutterClasses = GetSelfAndOuterClasses(containerClassSymbol);
             var shadowsMethod = selfAndOutterClasses
                 .SelectMany(c => c.GetMembers(eventOrMethod.Name))
