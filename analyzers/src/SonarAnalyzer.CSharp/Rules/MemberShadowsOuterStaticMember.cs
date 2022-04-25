@@ -110,7 +110,9 @@ namespace SonarAnalyzer.Rules.CSharp
                 .OfType<IFieldSymbol>()
                 .Any(field => field.IsStatic || field.IsConst);
 
-            if ((shadowsProperty || shadowsField) && propertyOrField.FirstDeclaringReferenceIdentifier()?.GetLocation() is { Kind: LocationKind.SourceFile } location)
+            if ((shadowsProperty || shadowsField)
+                && propertyOrField.FirstDeclaringReferenceIdentifier() is { } identifier
+                && identifier.GetLocation() is { Kind: LocationKind.SourceFile } location)
             {
                 context.ReportDiagnosticIfNonGenerated(Diagnostic.Create(Rule, location, memberType));
             }
