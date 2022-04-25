@@ -104,19 +104,19 @@ namespace SonarAnalyzer.Extensions
         public static SyntaxToken? NodeIdentifier(this SyntaxNode node)
             => node.RemoveParentheses() switch
             {
-                AttributeArgumentSyntax attribute => attribute.NameColon?.Name.Identifier,
-                BaseTypeDeclarationSyntax baseType => baseType.Identifier,
-                DelegateDeclarationSyntax delegateDeclaration => delegateDeclaration.Identifier,
-                EnumMemberDeclarationSyntax enumMember => enumMember.Identifier,
-                EventDeclarationSyntax @event => @event.Identifier,
-                InvocationExpressionSyntax invocation => NodeIdentifier(invocation.Expression),
-                MemberAccessExpressionSyntax memberAccess => memberAccess.Name.Identifier,
-                MemberBindingExpressionSyntax memberBinding => memberBinding.Name.Identifier,
-                MethodDeclarationSyntax method => method.Identifier,
-                ParameterSyntax parameter => parameter.Identifier,
-                PropertyDeclarationSyntax property => property.Identifier,
-                SimpleNameSyntax simpleName => simpleName.Identifier,
-                VariableDeclaratorSyntax variable => variable.Identifier,
+                AttributeArgumentSyntax x => x.NameColon?.Name.Identifier,
+                BaseTypeDeclarationSyntax x => x.Identifier,
+                DelegateDeclarationSyntax x => x.Identifier,
+                EnumMemberDeclarationSyntax x => x.Identifier,
+                EventDeclarationSyntax x => x.Identifier,
+                InvocationExpressionSyntax x => NodeIdentifier(x.Expression),
+                MemberAccessExpressionSyntax x => x.Name.Identifier,
+                MemberBindingExpressionSyntax x => x.Name.Identifier,
+                MethodDeclarationSyntax x => x.Identifier,
+                ParameterSyntax x => x.Identifier,
+                PropertyDeclarationSyntax x => x.Identifier,
+                SimpleNameSyntax x => x.Identifier,
+                VariableDeclaratorSyntax x => x.Identifier,
                 _ => null,
             };
     }
