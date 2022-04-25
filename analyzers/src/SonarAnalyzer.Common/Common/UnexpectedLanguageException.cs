@@ -19,11 +19,10 @@
  */
 
 using System;
-using SonarAnalyzer.Common;
 
-namespace SonarAnalyzer.UnitTest.TestFramework
+namespace SonarAnalyzer.Common
 {
-    public class UnexpectedLanguageException : Exception
+    public sealed class UnexpectedLanguageException : Exception
     {
         public UnexpectedLanguageException(AnalyzerLanguage language) : base($"Unexpected language: {language}") { }
     }

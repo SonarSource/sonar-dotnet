@@ -22,15 +22,15 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Reflection;
 using System.Resources;
+using Microsoft.CodeAnalysis;
 using SonarAnalyzer.Common;
 
 namespace SonarAnalyzer.RuleDescriptors
 {
     public sealed class RuleDetail
     {
-        private static readonly Assembly SonarAnalyzerUtilitiesAssembly = typeof(RuleDetail).Assembly;
+        private static readonly string RspecRoot = Path.Combine(Path.GetDirectoryName(typeof(RuleDetail).Assembly.Location), $@"..\..\..\..\..\rspec");
         private static readonly HashSet<string> BackwardsCompatibleTypes = new()
         {
             "BUG",
@@ -76,20 +76,13 @@ namespace SonarAnalyzer.RuleDescriptors
 
         private static string HtmlDescription(AnalyzerLanguage language, string id)
         {
-            if (SonarAnalyzerUtilitiesAssembly.GetManifestResourceNames().FirstOrDefault(MatchesRule) is { } resourceName)
+            var suffix = language.LanguageName switch
             {
-                using var stream = SonarAnalyzerUtilitiesAssembly.GetManifestResourceStream(resourceName);
-                using var reader = new StreamReader(stream);
-                return reader.ReadToEnd();
-            }
-            else
-            {
-                throw new InvalidDataException($"Could not locate resource for rule {id}");
-            }
-
-            bool MatchesRule(string resource) =>
-                resource.EndsWith($"SonarAnalyzer.Rules.Description.{id}.html", StringComparison.OrdinalIgnoreCase)
-                || resource.EndsWith($"SonarAnalyzer.Rules.Description.{id}{language.ResourceSuffix}.html", StringComparison.OrdinalIgnoreCase);
+                LanguageNames.CSharp => $@"cs\{id}_c#.html",
+                LanguageNames.VisualBasic => $@"vbnet\{id}_vb.net.html",
+                _ => throw new UnexpectedLanguageException(language)
+            };
+            return File.ReadAllText(Path.Combine(RspecRoot, suffix));
         }
     }
 }
