@@ -178,13 +178,8 @@ namespace SonarAnalyzer.Helpers
             }
         }
 
-        public static string GetName(this ExpressionSyntax expression) =>
-            expression switch
-            {
-                MemberAccessExpressionSyntax memberAccess => memberAccess.Name.Identifier.ValueText,
-                IdentifierNameSyntax identifierName => identifierName.Identifier.ValueText,
-                _ => string.Empty
-            };
+        public static string GetName(this ExpressionSyntax expression)
+            => expression.GetIdentifier()?.ValueText;
 
         public static bool NameIs(this ExpressionSyntax expression, string name) =>
             expression.GetName().Equals(name, StringComparison.InvariantCultureIgnoreCase);
