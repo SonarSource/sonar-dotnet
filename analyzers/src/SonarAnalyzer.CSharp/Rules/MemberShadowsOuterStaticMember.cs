@@ -100,11 +100,11 @@ namespace SonarAnalyzer.Rules.CSharp
                                                     string memberType) where T : ISymbol
         {
             var selfAndOutterClasses = GetSelfAndOuterClasses(containerClassSymbol);
-            var shadowsOthMember = selfAndOutterClasses
+            var shadowsOtherMember = selfAndOutterClasses
                 .SelectMany(x => x.GetMembers(member.Name))
                 .Any(x => x.IsStatic || x is IFieldSymbol { IsConst: true });
 
-            if (shadowsOthMember
+            if (shadowsOtherMember
                 && member.FirstDeclaringReferenceIdentifier() is { } identifier
                 && identifier.GetLocation() is { Kind: LocationKind.SourceFile } location)
             {
