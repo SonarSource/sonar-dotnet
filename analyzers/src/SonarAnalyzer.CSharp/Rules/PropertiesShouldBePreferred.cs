@@ -19,8 +19,10 @@
  */
 
 using System;
+using System.Collections;
 using System.Collections.Immutable;
 using System.Linq;
+using System.Threading.Tasks;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.Diagnostics;
@@ -67,7 +69,8 @@ namespace SonarAnalyzer.Rules.CSharp
                 },
                 SyntaxKind.ClassDeclaration,
                 SyntaxKind.InterfaceDeclaration,
-                SyntaxKindEx.RecordClassDeclaration);
+                SyntaxKindEx.RecordClassDeclaration,
+                SyntaxKindEx.RecordStructDeclaration);
 
         private static bool HasCandidateSignature(IMethodSymbol method) =>
             method.IsPubliclyAccessible()
@@ -85,7 +88,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private static bool HasCandidateName(IMethodSymbol method)
         {
-            if (method.Name == "GetEnumerator" || method.Name == "GetAwaiter")
+            if (method.Name is nameof(IEnumerable.GetEnumerator) or nameof(Task.GetAwaiter))
             {
                 return false;
             }
