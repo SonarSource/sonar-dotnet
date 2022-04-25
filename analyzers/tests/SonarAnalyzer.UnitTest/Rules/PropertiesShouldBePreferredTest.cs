@@ -28,24 +28,27 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class PropertiesShouldBePreferredTest
     {
+        private readonly VerifierBuilder builder = new VerifierBuilder<PropertiesShouldBePreferred>().AddReferences(MetadataReferenceFacade.SystemThreadingTasks);
+
         [TestMethod]
         public void PropertiesShouldBePreferred() =>
-            OldVerifier.VerifyAnalyzer(@"TestCases\PropertiesShouldBePreferred.cs",
-                                    new PropertiesShouldBePreferred(),
-                                    MetadataReferenceFacade.SystemThreadingTasks);
+            builder.AddPaths("PropertiesShouldBePreferred.cs").Verify();
 
 #if NET
+
         [TestMethod]
         public void PropertiesShouldBePreferred_CSharp9() =>
-            OldVerifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\PropertiesShouldBePreferred.CSharp9.cs", new PropertiesShouldBePreferred());
+            builder.AddPaths("PropertiesShouldBePreferred.CSharp9.cs").WithOptions(ParseOptionsHelper.FromCSharp9).Verify();
 
         [TestMethod]
         public void PropertiesShouldBePreferred_CSharp10() =>
-            OldVerifier.VerifyAnalyzerFromCSharp10Library(@"TestCases\PropertiesShouldBePreferred.CSharp10.cs", new PropertiesShouldBePreferred());
+            builder.AddPaths("PropertiesShouldBePreferred.CSharp10.cs").WithOptions(ParseOptionsHelper.FromCSharp10).Verify();
 
         [TestMethod]
         public void PropertiesShouldBePreferred_CSharpPreview() =>
-            OldVerifier.VerifyAnalyzerCSharpPreviewLibrary(@"TestCases\PropertiesShouldBePreferred.CSharpPreview.cs", new PropertiesShouldBePreferred());
+            builder.AddPaths("PropertiesShouldBePreferred.CSharpPreview.cs").WithOptions(ParseOptionsHelper.CSharpPreview).Verify();
+
 #endif
+
     }
 }
