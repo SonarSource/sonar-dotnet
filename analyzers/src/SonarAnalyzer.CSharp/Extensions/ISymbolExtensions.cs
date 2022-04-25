@@ -92,14 +92,14 @@ namespace SonarAnalyzer.Extensions
             return root.DescendantNodes();
         }
 
-        public static SyntaxToken? FirstDeclaringReferenceIdentifier(this ISymbol symbol) =>
-            symbol.DeclaringSyntaxReferences.FirstOrDefault()?.GetSyntax().NodeIdentifier();
+        public static SyntaxToken? FirstDeclaringReferenceIdentifier(this ISymbol symbol)
+            => symbol.DeclaringReferenceIdentifiers().FirstOrDefault();
 
-        public static ImmutableArray<SyntaxToken> DeclaringReferenceIdentifiers(this ISymbol symbol) =>
-            symbol.DeclaringSyntaxReferences
-            .Select(r => r.GetSyntax().NodeIdentifier())
-            .WhereNotNull()
-            .ToImmutableArray();
+        public static ImmutableArray<SyntaxToken> DeclaringReferenceIdentifiers(this ISymbol symbol)
+            => symbol.DeclaringSyntaxReferences
+               .Select(r => r.GetSyntax().NodeIdentifier())
+               .WhereNotNull()
+               .ToImmutableArray();
 
         public static SyntaxToken? NodeIdentifier(this SyntaxNode node)
             => node.RemoveParentheses() switch
