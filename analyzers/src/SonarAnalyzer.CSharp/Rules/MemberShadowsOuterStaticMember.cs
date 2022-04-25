@@ -56,16 +56,16 @@ namespace SonarAnalyzer.Rules.CSharp
                         switch (member)
                         {
                             case IPropertySymbol property:
-                                CheckFieldOrProperty(property, containerClassSymbol, c, "property");
+                                CheckFieldPropertyEventOrMethod(property, containerClassSymbol, c, "property");
                                 break;
                             case IFieldSymbol field:
-                                CheckFieldOrProperty(field, containerClassSymbol, c, "field");
+                                CheckFieldPropertyEventOrMethod(field, containerClassSymbol, c, "field");
                                 break;
                             case IEventSymbol @event:
-                                CheckEventOrMethod(@event, containerClassSymbol, c, "event");
+                                CheckFieldPropertyEventOrMethod(@event, containerClassSymbol, c, "event");
                                 break;
                             case IMethodSymbol method:
-                                CheckEventOrMethod(method, containerClassSymbol, c, "method");
+                                CheckFieldPropertyEventOrMethod(method, containerClassSymbol, c, "method");
                                 break;
                             case INamedTypeSymbol namedType:
                                 CheckNamedType(c, containerClassSymbol, namedType);
@@ -95,41 +95,18 @@ namespace SonarAnalyzer.Rules.CSharp
             }
         }
 
-        private static void CheckFieldOrProperty<T>(T propertyOrField,
+        private static void CheckFieldPropertyEventOrMethod<T>(T propertyOrField,
                                                     INamedTypeSymbol containerClassSymbol,
                                                     SymbolAnalysisContext context,
                                                     string memberType) where T : ISymbol
         {
             var selfAndOutterClasses = GetSelfAndOuterClasses(containerClassSymbol);
-            var shadowsPropertyOrField = selfAndOutterClasses
+            var shadowsOthMember = selfAndOutterClasses
                 .SelectMany(x => x.GetMembers(propertyOrField.Name))
                 .Any(x => IsStaticOrConst(x));
 
-            if (shadowsPropertyOrField
+            if (shadowsOthMember
                 && propertyOrField.FirstDeclaringReferenceIdentifier() is { } identifier
-                && identifier.GetLocation() is { Kind: LocationKind.SourceFile } location)
-            {
-                context.ReportDiagnosticIfNonGenerated(Diagnostic.Create(Rule, location, memberType));
-            }
-        }
-
-        private static void CheckEventOrMethod<T>(T eventOrMethod,
-                                                  INamedTypeSymbol containerClassSymbol,
-                                                  SymbolAnalysisContext context,
-                                                  string memberType) where T : ISymbol
-        {
-            if (eventOrMethod is IMethodSymbol { MethodKind: MethodKind.PropertyGet or MethodKind.PropertySet or MethodKind.EventAdd or MethodKind.EventRemove })
-            {
-                return;
-            }
-
-            var selfAndOutterClasses = GetSelfAndOuterClasses(containerClassSymbol);
-            var shadowsMethodOrEvent = selfAndOutterClasses
-                .SelectMany(x => x.GetMembers(eventOrMethod.Name))
-                .Any(x => IsStaticOrConst(x));
-
-            if (shadowsMethodOrEvent
-                && eventOrMethod.FirstDeclaringReferenceIdentifier() is { } identifier
                 && identifier.GetLocation() is { Kind: LocationKind.SourceFile } location)
             {
                 context.ReportDiagnosticIfNonGenerated(Diagnostic.Create(Rule, location, memberType));
