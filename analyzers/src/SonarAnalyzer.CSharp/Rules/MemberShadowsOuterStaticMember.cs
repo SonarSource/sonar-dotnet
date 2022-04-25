@@ -89,7 +89,7 @@ namespace SonarAnalyzer.Rules.CSharp
             }
 
             var namedTypeName = namedType.TypeKind switch { TypeKind.Class => "class", TypeKind.Delegate => "delegate" };
-            foreach (var identifier in namedType.GetIdentifiers())
+            foreach (var identifier in namedType.DeclaringReferenceIdentifiers())
             {
                 context.ReportDiagnosticIfNonGenerated(Diagnostic.Create(Rule, identifier.GetLocation(), namedTypeName));
             }

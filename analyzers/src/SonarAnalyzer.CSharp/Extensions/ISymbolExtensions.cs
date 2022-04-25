@@ -104,7 +104,7 @@ namespace SonarAnalyzer.Extensions
         /// Returns the Identifier tokens of all declaring <see cref="SyntaxReference"/>s.
         /// For e.g. an <see cref="INamedTypeSymbol"/> this can be a list of partial <see cref="ClassDeclarationSyntax.Identifier"/>.
         /// </summary>
-        public static ImmutableArray<SyntaxToken> GetIdentifiers(this ISymbol symbol) =>
+        public static ImmutableArray<SyntaxToken> DeclaringReferenceIdentifiers(this ISymbol symbol) =>
             symbol.DeclaringSyntaxReferences
             .Select(r => r.GetSyntax().NodeIdentifier())
             .WhereNotNull()
