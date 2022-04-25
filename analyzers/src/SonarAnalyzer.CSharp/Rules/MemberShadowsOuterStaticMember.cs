@@ -103,7 +103,7 @@ namespace SonarAnalyzer.Rules.CSharp
             var selfAndOutterClasses = GetSelfAndOuterClasses(containerClassSymbol);
             var shadowsOthMember = selfAndOutterClasses
                 .SelectMany(x => x.GetMembers(propertyOrField.Name))
-                .Any(x => IsStaticOrConst(x));
+                .Any(x => x.IsStatic || x is IFieldSymbol { IsConst: true });
 
             if (shadowsOthMember
                 && propertyOrField.FirstDeclaringReferenceIdentifier() is { } identifier
@@ -124,12 +124,5 @@ namespace SonarAnalyzer.Rules.CSharp
             }
             return classes;
         }
-
-        private static bool IsStaticOrConst(ISymbol symbol)
-            => symbol switch
-            {
-                IFieldSymbol field => field.IsStatic || field.IsConst,
-                { } x => x.IsStatic,
-            };
     }
 }
