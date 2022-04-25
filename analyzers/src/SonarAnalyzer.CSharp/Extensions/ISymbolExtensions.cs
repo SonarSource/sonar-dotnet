@@ -92,25 +92,15 @@ namespace SonarAnalyzer.Extensions
             return root.DescendantNodes();
         }
 
-        /// <summary>
-        /// Returns the Identifier token of the first declaring <see cref="SyntaxReference"/>.
-        /// For e.g. an <see cref="IPropertySymbol"/> this is <see cref="PropertyDeclarationSyntax.Identifier"/>.
-        /// </summary>
-        /// <returns>The idenifier token or <see langword="null"/> if there is no DeclaringSyntaxReference or the <see cref="SyntaxNode"/> does not have an Identifier.</returns>
         public static SyntaxToken? FirstDeclaringReferenceIdentifier(this ISymbol symbol) =>
             symbol.DeclaringSyntaxReferences.FirstOrDefault()?.GetSyntax().NodeIdentifier();
 
-        /// <summary>
-        /// Returns the Identifier tokens of all declaring <see cref="SyntaxReference"/>s.
-        /// For e.g. an <see cref="INamedTypeSymbol"/> this can be a list of partial <see cref="ClassDeclarationSyntax.Identifier"/>.
-        /// </summary>
         public static ImmutableArray<SyntaxToken> DeclaringReferenceIdentifiers(this ISymbol symbol) =>
             symbol.DeclaringSyntaxReferences
             .Select(r => r.GetSyntax().NodeIdentifier())
             .WhereNotNull()
             .ToImmutableArray();
 
-        /// <inheritdoc cref="Helpers.Facade.SyntaxFacade{TSyntaxKind}.NodeIdentifier"/>
         public static SyntaxToken? NodeIdentifier(this SyntaxNode node)
             => node.RemoveParentheses() switch
             {
