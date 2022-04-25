@@ -165,14 +165,14 @@ namespace SonarAnalyzer.Helpers
             }
         }
 
-        public static SimpleNameSyntax GetIdentifier(this ExpressionSyntax expression)
+        public static SyntaxToken? GetIdentifier(this SyntaxNode node)
         {
-            switch (expression?.Kind())
+            switch (node?.Kind())
             {
                 case SyntaxKind.SimpleMemberAccessExpression:
-                    return ((MemberAccessExpressionSyntax)expression).Name;
+                    return ((MemberAccessExpressionSyntax)node).Name.Identifier;
                 case SyntaxKind.IdentifierName:
-                    return (IdentifierNameSyntax)expression;
+                    return ((IdentifierNameSyntax)node).Identifier;
                 default:
                     return null;
             }

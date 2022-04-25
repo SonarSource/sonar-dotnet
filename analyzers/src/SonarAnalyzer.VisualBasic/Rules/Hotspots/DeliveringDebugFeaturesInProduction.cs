@@ -48,7 +48,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
 
         private bool IsDevelopmentCheck(SyntaxNode node, SemanticModel semanticModel) =>
             FindCondition(node).RemoveParentheses() is InvocationExpressionSyntax condition
-            && IsValidationMethod(semanticModel, condition, condition.Expression.GetIdentifier()?.Identifier.ValueText);
+            && IsValidationMethod(semanticModel, condition, condition.Expression.GetIdentifier()?.ValueText);
 
         private static ExpressionSyntax FindCondition(SyntaxNode node) =>
             node switch

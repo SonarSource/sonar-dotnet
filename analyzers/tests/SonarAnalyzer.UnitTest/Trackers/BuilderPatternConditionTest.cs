@@ -215,6 +215,6 @@ End Class";
         private static SyntaxNode FindMethodInvocation_VB(SyntaxTree tree, string name) =>
             tree.GetRoot().DescendantNodes()
                 .OfType<VBSyntax.InvocationExpressionSyntax>()
-                .Single(x => x.Expression.GetIdentifier()?.Identifier.ValueText == name);
+                .Single(x => x.Expression.GetIdentifier()?.ValueText == name);
     }
 }
