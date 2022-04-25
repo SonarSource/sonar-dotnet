@@ -110,7 +110,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 .OfType<IFieldSymbol>()
                 .Any(field => field.IsStatic || field.IsConst);
 
-            if ((shadowsProperty || shadowsField) && propertyOrField.FirstDeclaringReferenceIdentifier()?.GetLocation() is { } location)
+            if ((shadowsProperty || shadowsField) && propertyOrField.FirstDeclaringReferenceIdentifier()?.GetLocation() is { Kind: LocationKind.SourceFile } location)
             {
                 context.ReportDiagnosticIfNonGenerated(Diagnostic.Create(Rule, location, memberType));
             }
@@ -136,7 +136,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 .OfType<IEventSymbol>()
                 .Any(@event => @event.IsStatic);
 
-            if ((shadowsMethod || shadowsEvent) && eventOrMethod.FirstDeclaringReferenceIdentifier()?.GetLocation() is { } location)
+            if ((shadowsMethod || shadowsEvent) && eventOrMethod.FirstDeclaringReferenceIdentifier()?.GetLocation() is { Kind: LocationKind.SourceFile } location)
             {
                 context.ReportDiagnosticIfNonGenerated(Diagnostic.Create(Rule, location, memberType));
             }
