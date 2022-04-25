@@ -307,6 +307,26 @@ stages:
         inputs:
           artifact: DotnetTestResultsNet6
           targetPath: 'TestResults'
+          
+      - powershell: |
+          # In order to speed up our build we chose to run the tests and compute the code coverage in parallel.
+          # This might result in different paths in the coverage reports, and in order to be able to properly import
+          # the coverage data we need to normalize the path.
+          # e.g.
+          #   the machine that computes the coverage has the base path `C:\ProgramData\vsts-agent\1\s`
+          #   and the one that imports it `C:\ProgramData\vsts-agent\2\s`
+          function Update-Coverage-BasePaths {
+            param (
+              $path
+            )
+            $localPath = (Get-Location).Path
+            $pattern = 'C:\\ProgramData\\vsts-agent\\\d+\\s'
+            (Get-Content -path $path -Raw) -replace $pattern,$localPath | Set-Content $path
+          }
+
+          Update-Coverage-BasePaths 'coverage\net48.xml'
+          Update-Coverage-BasePaths 'coverage\net6.0.xml'
+        displayName: Fix coverage paths
 
       - task: SonarCloudAnalyze@1
         displayName: 'Code Analysis - End'
