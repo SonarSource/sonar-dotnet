@@ -64,7 +64,7 @@ namespace SonarAnalyzer.Rules.CSharp
                             case IEventSymbol @event:
                                 CheckFieldPropertyEventOrMethod(@event, containerClassSymbol, c, "event");
                                 break;
-                            case IMethodSymbol method:
+                            case IMethodSymbol { MethodKind: MethodKind.DeclareMethod or MethodKind.Ordinary } method:
                                 CheckFieldPropertyEventOrMethod(method, containerClassSymbol, c, "method");
                                 break;
                             case INamedTypeSymbol namedType:
@@ -94,18 +94,18 @@ namespace SonarAnalyzer.Rules.CSharp
             }
         }
 
-        private static void CheckFieldPropertyEventOrMethod<T>(T propertyOrField,
+        private static void CheckFieldPropertyEventOrMethod<T>(T member,
                                                     INamedTypeSymbol containerClassSymbol,
                                                     SymbolAnalysisContext context,
                                                     string memberType) where T : ISymbol
         {
             var selfAndOutterClasses = GetSelfAndOuterClasses(containerClassSymbol);
             var shadowsOthMember = selfAndOutterClasses
-                .SelectMany(x => x.GetMembers(propertyOrField.Name))
+                .SelectMany(x => x.GetMembers(member.Name))
                 .Any(x => x.IsStatic || x is IFieldSymbol { IsConst: true });
 
             if (shadowsOthMember
-                && propertyOrField.FirstDeclaringReferenceIdentifier() is { } identifier
+                && member.FirstDeclaringReferenceIdentifier() is { } identifier
                 && identifier.GetLocation() is { Kind: LocationKind.SourceFile } location)
             {
                 context.ReportDiagnosticIfNonGenerated(Diagnostic.Create(Rule, location, memberType));
