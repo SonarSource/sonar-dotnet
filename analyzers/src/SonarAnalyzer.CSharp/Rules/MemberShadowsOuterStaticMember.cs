@@ -101,16 +101,11 @@ namespace SonarAnalyzer.Rules.CSharp
                                                     string memberType) where T : ISymbol
         {
             var selfAndOutterClasses = GetSelfAndOuterClasses(containerClassSymbol);
-            var shadowsProperty = selfAndOutterClasses
+            var shadowsPropertyOrField = selfAndOutterClasses
                 .SelectMany(x => x.GetMembers(propertyOrField.Name))
-                .OfType<IPropertySymbol>()
-                .Any(x => x.IsStatic);
-            var shadowsField = selfAndOutterClasses
-                .SelectMany(x => x.GetMembers(propertyOrField.Name))
-                .OfType<IFieldSymbol>()
-                .Any(x => x.IsStatic || x.IsConst);
+                .Any(x => IsStaticOrConst(x));
 
-            if ((shadowsProperty || shadowsField)
+            if (shadowsPropertyOrField
                 && propertyOrField.FirstDeclaringReferenceIdentifier() is { } identifier
                 && identifier.GetLocation() is { Kind: LocationKind.SourceFile } location)
             {
@@ -129,16 +124,13 @@ namespace SonarAnalyzer.Rules.CSharp
             }
 
             var selfAndOutterClasses = GetSelfAndOuterClasses(containerClassSymbol);
-            var shadowsMethod = selfAndOutterClasses
+            var shadowsMethodOrEvent = selfAndOutterClasses
                 .SelectMany(x => x.GetMembers(eventOrMethod.Name))
-                .OfType<IMethodSymbol>()
-                .Any(x => x.IsStatic);
-            var shadowsEvent = selfAndOutterClasses
-                .SelectMany(x => x.GetMembers(eventOrMethod.Name))
-                .OfType<IEventSymbol>()
-                .Any(x => x.IsStatic);
+                .Any(x => IsStaticOrConst(x));
 
-            if ((shadowsMethod || shadowsEvent) && eventOrMethod.FirstDeclaringReferenceIdentifier()?.GetLocation() is { Kind: LocationKind.SourceFile } location)
+            if (shadowsMethodOrEvent
+                && eventOrMethod.FirstDeclaringReferenceIdentifier() is { } identifier
+                && identifier.GetLocation() is { Kind: LocationKind.SourceFile } location)
             {
                 context.ReportDiagnosticIfNonGenerated(Diagnostic.Create(Rule, location, memberType));
             }
@@ -155,5 +147,12 @@ namespace SonarAnalyzer.Rules.CSharp
             }
             return classes;
         }
+
+        private static bool IsStaticOrConst(ISymbol symbol)
+            => symbol switch
+            {
+                IFieldSymbol field => field.IsStatic || field.IsConst,
+                { } x => x.IsStatic,
+            };
     }
 }
