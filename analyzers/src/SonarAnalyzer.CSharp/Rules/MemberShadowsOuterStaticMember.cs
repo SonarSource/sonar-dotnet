@@ -79,9 +79,9 @@ namespace SonarAnalyzer.Rules.CSharp
         private static void CheckNamedType(SymbolAnalysisContext context, INamedTypeSymbol containerClassSymbol, INamedTypeSymbol namedType)
         {
             var shadowsClassOrDelegate = GetSelfAndOuterClasses(containerClassSymbol)
-                .SelectMany(c => c.GetMembers(namedType.Name))
+                .SelectMany(x => x.GetMembers(namedType.Name))
                 .OfType<INamedTypeSymbol>()
-                .Any(nt => nt.Is(TypeKind.Class) || nt.Is(TypeKind.Delegate));
+                .Any(x => x.Is(TypeKind.Class) || x.Is(TypeKind.Delegate));
 
             if (!shadowsClassOrDelegate)
             {
@@ -102,13 +102,13 @@ namespace SonarAnalyzer.Rules.CSharp
         {
             var selfAndOutterClasses = GetSelfAndOuterClasses(containerClassSymbol);
             var shadowsProperty = selfAndOutterClasses
-                .SelectMany(c => c.GetMembers(propertyOrField.Name))
+                .SelectMany(x => x.GetMembers(propertyOrField.Name))
                 .OfType<IPropertySymbol>()
-                .Any(prop => prop.IsStatic);
+                .Any(x => x.IsStatic);
             var shadowsField = selfAndOutterClasses
-                .SelectMany(c => c.GetMembers(propertyOrField.Name))
+                .SelectMany(x => x.GetMembers(propertyOrField.Name))
                 .OfType<IFieldSymbol>()
-                .Any(field => field.IsStatic || field.IsConst);
+                .Any(x => x.IsStatic || x.IsConst);
 
             if ((shadowsProperty || shadowsField)
                 && propertyOrField.FirstDeclaringReferenceIdentifier() is { } identifier
@@ -130,13 +130,13 @@ namespace SonarAnalyzer.Rules.CSharp
 
             var selfAndOutterClasses = GetSelfAndOuterClasses(containerClassSymbol);
             var shadowsMethod = selfAndOutterClasses
-                .SelectMany(c => c.GetMembers(eventOrMethod.Name))
+                .SelectMany(x => x.GetMembers(eventOrMethod.Name))
                 .OfType<IMethodSymbol>()
-                .Any(method => method.IsStatic);
+                .Any(x => x.IsStatic);
             var shadowsEvent = selfAndOutterClasses
-                .SelectMany(c => c.GetMembers(eventOrMethod.Name))
+                .SelectMany(x => x.GetMembers(eventOrMethod.Name))
                 .OfType<IEventSymbol>()
-                .Any(@event => @event.IsStatic);
+                .Any(x => x.IsStatic);
 
             if ((shadowsMethod || shadowsEvent) && eventOrMethod.FirstDeclaringReferenceIdentifier()?.GetLocation() is { Kind: LocationKind.SourceFile } location)
             {
