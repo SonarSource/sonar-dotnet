@@ -2,6 +2,12 @@
   "version": 1,
   "dependencies": {
     ".NETFramework,Version=v4.8": {
+      "coverlet.msbuild": {
+        "type": "Direct",
+        "requested": "[3.1.2, )",
+        "resolved": "3.1.2",
+        "contentHash": "QhM0fnDtmIMImY7oxyQ/kh1VYtRxPyRVeLwRUGuUvI6Xp83pSYG9gerK8WgJj4TzUl7ISziADUGtIWKhtlbkbQ=="
+      },
       "FluentAssertions": {
         "type": "Direct",
         "requested": "[5.10.3, )",
@@ -460,6 +466,12 @@
       }
     },
     "net6.0": {
+      "coverlet.msbuild": {
+        "type": "Direct",
+        "requested": "[3.1.2, )",
+        "resolved": "3.1.2",
+        "contentHash": "QhM0fnDtmIMImY7oxyQ/kh1VYtRxPyRVeLwRUGuUvI6Xp83pSYG9gerK8WgJj4TzUl7ISziADUGtIWKhtlbkbQ=="
+      },
       "FluentAssertions": {
         "type": "Direct",
         "requested": "[5.10.3, )",

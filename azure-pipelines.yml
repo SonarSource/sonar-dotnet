@@ -165,7 +165,7 @@ stages:
           CreateFolder("coverage")
           CreateFolder("TestResults")
 
-          & OpenCover.Console.exe -target:"dotnet.exe" -targetargs:"test analyzers\tests\SonarAnalyzer.UnitTest\bin\$(BuildConfiguration)\net48\SonarAnalyzer.UnitTest.dll -l trx -l console;verbosity=detailed" -returntargetcode -filter:"+[SonarAnalyzer.CFG]* +[SonarAnalyzer]* +[SonarAnalyzer.CSharp]* +[SonarAnalyzer.Utilities]* +[SonarAnalyzer.VisualBasic]*" -output:coverage/net48.xml -safemode:off -excludebyattribute:*.ExcludeFromCodeCoverageAttribute
+          & dotnet test analyzers\SonarAnalyzer.sln --configuration $(buildConfiguration) -p:CollectCoverage=true -p:CoverletOutput="./../../../coverage/" -r "./TestResults" -p:CoverletOutputFormat=opencover --no-build --no-restore -l trx
           Test-ExitCode "ERROR: Unit tests for net48 FAILED."
         displayName: '.Net UTs'
 
@@ -197,7 +197,11 @@ stages:
           CreateFolder("coverage")
           CreateFolder("TestResults")
 
-          & OpenCover.Console.exe -target:"dotnet.exe" -targetargs:"test analyzers\tests\SonarAnalyzer.UnitTest\bin\$(BuildConfiguration)\net6.0\SonarAnalyzer.UnitTest.dll -l trx -l console;verbosity=detailed" -returntargetcode -filter:"+[SonarAnalyzer.CFG]* +[SonarAnalyzer]* +[SonarAnalyzer.CSharp]* +[SonarAnalyzer.Utilities]* +[SonarAnalyzer.VisualBasic]*" -output:coverage/net6.0.xml -safemode:off -excludebyattribute:*.ExcludeFromCodeCoverageAttribute
+          & dotnet test analyzers\SonarAnalyzer.sln --configuration $(buildConfiguration) -p:CollectCoverage=true -p:CoverletOutput="./../../../coverage/" -r "./TestResults" -p:CoverletOutputFormat=opencover --no-build --no-restore -l trx
+          ls
+          ls coverage
+          ls analyzers
+          echo "COVERAGE FINISHED"
           Test-ExitCode "ERROR: Unit tests for net6.0 FAILED."
         displayName: '.Net UTs'
 
