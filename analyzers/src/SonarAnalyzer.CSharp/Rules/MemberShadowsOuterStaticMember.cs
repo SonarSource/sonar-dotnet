@@ -56,16 +56,16 @@ namespace SonarAnalyzer.Rules.CSharp
                         switch (member)
                         {
                             case IPropertySymbol property:
-                                CheckFieldPropertyEventOrMethod(property, containerClassSymbol, c, "property");
+                                CheckMember(property, containerClassSymbol, c, "property");
                                 break;
                             case IFieldSymbol field:
-                                CheckFieldPropertyEventOrMethod(field, containerClassSymbol, c, "field");
+                                CheckMember(field, containerClassSymbol, c, "field");
                                 break;
                             case IEventSymbol @event:
-                                CheckFieldPropertyEventOrMethod(@event, containerClassSymbol, c, "event");
+                                CheckMember(@event, containerClassSymbol, c, "event");
                                 break;
                             case IMethodSymbol { MethodKind: MethodKind.DeclareMethod or MethodKind.Ordinary } method:
-                                CheckFieldPropertyEventOrMethod(method, containerClassSymbol, c, "method");
+                                CheckMember(method, containerClassSymbol, c, "method");
                                 break;
                             case INamedTypeSymbol namedType:
                                 CheckNamedType(c, containerClassSymbol, namedType);
@@ -94,10 +94,7 @@ namespace SonarAnalyzer.Rules.CSharp
             }
         }
 
-        private static void CheckFieldPropertyEventOrMethod<T>(T member,
-                                                    INamedTypeSymbol containerClassSymbol,
-                                                    SymbolAnalysisContext context,
-                                                    string memberType) where T : ISymbol
+        private static void CheckMember(ISymbol member, INamedTypeSymbol containerClassSymbol, SymbolAnalysisContext context, string memberType)
         {
             var selfAndOutterClasses = GetSelfAndOuterClasses(containerClassSymbol);
             var shadowsOtherMember = selfAndOutterClasses
