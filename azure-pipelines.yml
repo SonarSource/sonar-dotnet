@@ -162,9 +162,6 @@ stages:
       - powershell: |
           . .\scripts\utils.ps1
 
-          CreateFolder("coverage")
-          CreateFolder("TestResults")
-
           & dotnet test analyzers\SonarAnalyzer.sln --configuration $(buildConfiguration) -p:CollectCoverage=true -p:CoverletOutput="./../../../coverage/" -r "./TestResults" -p:CoverletOutputFormat=opencover --no-build --no-restore -l trx
           Test-ExitCode "ERROR: Unit tests for net48 FAILED."
         displayName: '.Net UTs'
@@ -194,14 +191,7 @@ stages:
       - powershell: |
           . .\scripts\utils.ps1
 
-          CreateFolder("coverage")
-          CreateFolder("TestResults")
-
           & dotnet test analyzers\SonarAnalyzer.sln --configuration $(buildConfiguration) -p:CollectCoverage=true -p:CoverletOutput="./../../../coverage/" -r "./TestResults" -p:CoverletOutputFormat=opencover --no-build --no-restore -l trx
-          ls
-          ls coverage
-          ls analyzers
-          echo "COVERAGE FINISHED"
           Test-ExitCode "ERROR: Unit tests for net6.0 FAILED."
         displayName: '.Net UTs'
 
