@@ -168,20 +168,24 @@ namespace SonarAnalyzer.Helpers
         public static SyntaxToken? GetIdentifier(this SyntaxNode node) =>
             node?.RemoveParentheses() switch
             {
-                MemberAccessExpressionSyntax x => x.Name.Identifier,
+                ClassStatementSyntax x => x.Identifier,
                 IdentifierNameSyntax x => x.Identifier,
+                MemberAccessExpressionSyntax x => x.Name.Identifier,
+                MethodBlockSyntax x => x.SubOrFunctionStatement?.GetIdentifier(),
+                MethodStatementSyntax x => x.Identifier,
                 EnumStatementSyntax x => x.Identifier,
                 EnumMemberDeclarationSyntax x => x.Identifier,
                 InvocationExpressionSyntax x => x.Expression?.GetIdentifier(),
                 ModifiedIdentifierSyntax x => x.Identifier,
-                ParameterSyntax x => x.Identifier.Identifier,
+                PredefinedTypeSyntax x => x.Keyword,
+                ParameterSyntax x => x.Identifier?.GetIdentifier(),
                 PropertyStatementSyntax x => x.Identifier,
                 SimpleArgumentSyntax x => x.NameColonEquals?.Name.Identifier,
                 SimpleNameSyntax x => x.Identifier,
                 _ => null,
             };
 
-        public static string GetName(this ExpressionSyntax expression) =>
+        public static string GetName(this SyntaxNode expression) =>
             expression.GetIdentifier()?.ValueText ?? string.Empty;
 
         public static bool NameIs(this ExpressionSyntax expression, string name) =>
