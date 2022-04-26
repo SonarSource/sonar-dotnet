@@ -28,6 +28,7 @@ using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Constants;
+using SonarAnalyzer.Extensions;
 using SonarAnalyzer.Helpers;
 using StyleCop.Analyzers.Lightup;
 
@@ -44,10 +45,9 @@ namespace SonarAnalyzer.Rules.CSharp
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
 
         protected override void Initialize(SonarAnalysisContext context) =>
-            context.RegisterSyntaxNodeActionInNonGenerated(
-                c =>
+            context.RegisterSyntaxNodeActionInNonGenerated(c =>
                 {
-                    if (c.ContainingSymbol.Kind != SymbolKind.NamedType)
+                    if (c.IsRedundantPositionalRecordContext())
                     {
                         return;
                     }
@@ -77,7 +77,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private static IEnumerable<SecondaryLocation> CheckSerializableAttribute(SyntaxToken typeKeyword, INamedTypeSymbol typeSymbol)
         {
-            if (!HasSerializableAttribute(typeSymbol) && !typeSymbol.IsAbstract)
+            if (!typeSymbol.IsAbstract && !HasSerializableAttribute(typeSymbol))
             {
                 yield return new(typeKeyword.GetLocation(), $"Add 'System.SerializableAttribute' attribute on '{typeSymbol.Name}' because it implements 'ISerializable'.");
             }
@@ -165,9 +165,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 .Any(x => x.IsKind(SyntaxKind.SimpleMemberAccessExpression) && x.Expression.IsKind(SyntaxKind.BaseExpression) && x.Name.Identifier.ValueText == nameof(ISerializable.GetObjectData));
 
         private static bool IsCallingBaseConstructor(IMethodSymbol constructorSymbol) =>
-            (ConstructorDeclarationSyntax)constructorSymbol.DeclaringSyntaxReferences.FirstOrDefault()?.GetSyntax() is { } constructorDeclaration
-            && constructorDeclaration.Initializer?.ThisOrBaseKeyword is { } baseKeyword
-            && baseKeyword.IsKind(SyntaxKind.BaseKeyword);
+            constructorSymbol.DeclaringSyntaxReferences.FirstOrDefault()?.GetSyntax() is ConstructorDeclarationSyntax { Initializer: { ThisOrBaseKeyword: { RawKind: (int)SyntaxKind.BaseKeyword } } };
 
         private static bool ImplementsISerializable(ITypeSymbol typeSymbol) =>
             typeSymbol != null
