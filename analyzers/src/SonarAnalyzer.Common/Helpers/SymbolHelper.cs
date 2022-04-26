@@ -278,6 +278,6 @@ namespace SonarAnalyzer.Helpers
             };
 
         public static bool IsRecord(this ITypeSymbol typeSymbol)
-            => IsRecordPropertyInfo?.GetValue(typeSymbol) is true;
+            => ITypeSymbolIsRecord?.GetValue(typeSymbol) is true;
     }
 }
