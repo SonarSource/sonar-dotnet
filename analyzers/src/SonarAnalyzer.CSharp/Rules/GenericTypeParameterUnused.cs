@@ -61,7 +61,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
             context.RegisterSyntaxNodeActionInNonGenerated(c =>
                  {
-                     if (c.IsRedundantPositionalRecordContext())
+                     if (!c.IsRedundantPositionalRecordContext())
                      {
                          CheckGenericTypeParameters(c, c.ContainingSymbol);
                      }
