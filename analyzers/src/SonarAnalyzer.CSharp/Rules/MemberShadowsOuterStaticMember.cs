@@ -40,8 +40,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
 
-        protected override void Initialize(SonarAnalysisContext context)
-        {
+        protected override void Initialize(SonarAnalysisContext context) =>
             context.RegisterSymbolAction(c =>
                 {
                     var innerClassSymbol = (INamedTypeSymbol)c.Symbol;
@@ -51,7 +50,15 @@ namespace SonarAnalyzer.Rules.CSharp
                         return;
                     }
 
-                    foreach (var member in innerClassSymbol.GetMembers().Where(x => !x.IsImplicitlyDeclared))
+                    var members = innerClassSymbol.GetMembers().Where(x => !x.IsImplicitlyDeclared).ToList();
+                    if (!members.Any())
+                    {
+                        return;
+                    }
+
+                    var selfAndOuterNamedTypes = SelfAndOuterNamedTypes(containerClassSymbol);
+
+                    foreach (var member in members)
                     {
                         switch (member)
                         {
@@ -59,20 +66,19 @@ namespace SonarAnalyzer.Rules.CSharp
                             case IFieldSymbol:
                             case IEventSymbol:
                             case IMethodSymbol { MethodKind: MethodKind.DeclareMethod or MethodKind.Ordinary }:
-                                CheckMember(c, containerClassSymbol, member);
+                                CheckMember(c, selfAndOuterNamedTypes, member);
                                 break;
                             case INamedTypeSymbol namedType:
-                                CheckNamedType(c, containerClassSymbol, namedType);
+                                CheckNamedType(c, selfAndOuterNamedTypes, namedType);
                                 break;
                         }
                     }
                 },
                 SymbolKind.NamedType);
-        }
 
-        private static void CheckNamedType(SymbolAnalysisContext context, INamedTypeSymbol containerClassSymbol, INamedTypeSymbol namedType)
+        private static void CheckNamedType(SymbolAnalysisContext context, IReadOnlyList<INamedTypeSymbol> selfAndOuterNamedTypes, INamedTypeSymbol namedType)
         {
-            var shadowsClassOrDelegate = GetSelfAndOuterClasses(containerClassSymbol)
+            var shadowsClassOrDelegate = selfAndOuterNamedTypes
                 .SelectMany(x => x.GetMembers(namedType.Name))
                 .Any(x => x is INamedTypeSymbol symbol && symbol.TypeKind
                     is TypeKind.Class
@@ -91,10 +97,9 @@ namespace SonarAnalyzer.Rules.CSharp
             }
         }
 
-        private static void CheckMember(SymbolAnalysisContext context, INamedTypeSymbol containerClassSymbol, ISymbol member)
+        private static void CheckMember(SymbolAnalysisContext context, IReadOnlyList<INamedTypeSymbol> selfAndOuterNamedTypes, ISymbol member)
         {
-            var selfAndOutterClasses = GetSelfAndOuterClasses(containerClassSymbol);
-            var shadowsOtherMember = selfAndOutterClasses
+            var shadowsOtherMember = selfAndOuterNamedTypes
                 .SelectMany(x => x.GetMembers(member.Name))
                 .Any(x => x.IsStatic || x is IFieldSymbol { IsConst: true });
 
@@ -106,7 +111,7 @@ namespace SonarAnalyzer.Rules.CSharp
             }
         }
 
-        private static IReadOnlyList<INamedTypeSymbol> GetSelfAndOuterClasses(INamedTypeSymbol symbol)
+        private static IReadOnlyList<INamedTypeSymbol> SelfAndOuterNamedTypes(INamedTypeSymbol symbol)
         {
             var classes = new List<INamedTypeSymbol>();
             var currentClass = symbol;
