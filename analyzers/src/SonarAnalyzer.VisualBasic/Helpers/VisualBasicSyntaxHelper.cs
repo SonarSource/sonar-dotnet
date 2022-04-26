@@ -165,8 +165,8 @@ namespace SonarAnalyzer.Helpers
             }
         }
 
-        public static SyntaxToken? GetIdentifier(this SyntaxNode node)
-            => node?.RemoveParentheses() switch
+        public static SyntaxToken? GetIdentifier(this SyntaxNode node) =>
+            node?.RemoveParentheses() switch
             {
                 MemberAccessExpressionSyntax x => x.Name.Identifier,
                 IdentifierNameSyntax x => x.Identifier,
@@ -181,8 +181,8 @@ namespace SonarAnalyzer.Helpers
                 _ => null,
             };
 
-        public static string GetName(this ExpressionSyntax expression)
-            => expression.GetIdentifier()?.ValueText ?? string.Empty;
+        public static string GetName(this ExpressionSyntax expression) =>
+            expression.GetIdentifier()?.ValueText ?? string.Empty;
 
         public static bool NameIs(this ExpressionSyntax expression, string name) =>
             expression.GetName().Equals(name, StringComparison.InvariantCultureIgnoreCase);
