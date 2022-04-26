@@ -24,6 +24,7 @@ using System.IO;
 using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Diagnostics;
+using SonarAnalyzer.Extensions;
 using SonarAnalyzer.Helpers;
 
 namespace SonarAnalyzer.Rules.CSharp
@@ -86,27 +87,11 @@ namespace SonarAnalyzer.Rules.CSharp
                     foreach (var hidingInfo in hidingInfos)
                     {
                         var syntax = hidingInfo.ParameterToReportOn.DeclaringSyntaxReferences.FirstOrDefault()?.GetSyntax();
-                        if (syntax == null)
+                        if (syntax == null || hidingInfo.HidingMethod.ImplementationSyntax() is not { } hidingMethodSyntax)
                         {
                             continue;
                         }
-
-                        var hidingMethod = hidingInfo.HidingMethod;
-                        if (hidingMethod.PartialImplementationPart != null)
-                        {
-                            hidingMethod = hidingMethod.PartialImplementationPart;
-                        }
-
-                        var hidingMethodSyntax = hidingMethod.DeclaringSyntaxReferences.FirstOrDefault()?.GetSyntax();
-                        if (hidingMethodSyntax == null)
-                        {
-                            continue;
-                        }
-
-                        var defaultCanBeUsed =
-                            IsMoreParameterAvailableInConflicting(hidingInfo) ||
-                            !MethodsUsingSameParameterNames(hidingInfo);
-
+                        var defaultCanBeUsed = IsMoreParameterAvailableInConflicting(hidingInfo) || !MethodsUsingSameParameterNames(hidingInfo);
                         var isOtherFile = syntax.SyntaxTree.FilePath != hidingMethodSyntax.SyntaxTree.FilePath;
 
                         c.ReportDiagnosticIfNonGenerated(Diagnostic.Create(rule, syntax.GetLocation(),

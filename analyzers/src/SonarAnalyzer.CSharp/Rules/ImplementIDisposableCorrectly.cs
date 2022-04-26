@@ -255,25 +255,18 @@ namespace SonarAnalyzer.Rules.CSharp
 
             private static bool HasArgumentValues(InvocationExpressionSyntax invocation, params string[] arguments) =>
                 invocation.HasExactlyNArguments(arguments.Length)
-                && invocation.ArgumentList.Arguments
-                             .Select((a, index) => a.Expression.ToString() == arguments[index])
-                             .All(matching => matching);
+                && invocation.ArgumentList.Arguments.Select((x, index) => x.Expression.ToString() == arguments[index]).All(x => x);
 
             private static bool HasStatementsCount(BaseMethodDeclarationSyntax methodDeclaration, int expectedStatementsCount) =>
                 methodDeclaration.Body?.Statements.Count == expectedStatementsCount
                 || (methodDeclaration.ExpressionBody() != null && expectedStatementsCount == 1); // Expression body has only one statement
 
             private static IEnumerable<SyntaxNode> FindMethodDeclarations(INamedTypeSymbol typeSymbol, Func<IMethodSymbol, bool> predicate) =>
-                typeSymbol.GetMembers()
-                          .OfType<IMethodSymbol>()
-                          .Where(predicate)
-                          .SelectMany(symbol => symbol.PartialImplementationPart?.DeclaringSyntaxReferences ?? symbol.DeclaringSyntaxReferences)
-                          .Select(reference => reference.GetSyntax());
+                typeSymbol.GetMembers().OfType<IMethodSymbol>().Where(predicate).Select(x => x.ImplementationSyntax());
 
-            private static IEnumerable<SyntaxNode> FindMethodImplementationOrAbstractDeclaration(
-                INamedTypeSymbol typeSymbol,
-                Func<IMethodSymbol, bool> predicate,
-                TypeDeclarationSyntax typeDeclarationSyntax) =>
+            private static IEnumerable<SyntaxNode> FindMethodImplementationOrAbstractDeclaration(INamedTypeSymbol typeSymbol,
+                                                                                                 Func<IMethodSymbol, bool> predicate,
+                                                                                                 TypeDeclarationSyntax typeDeclarationSyntax) =>
                 FindMethodDeclarations(typeSymbol, predicate)
                     .OfType<BaseMethodDeclarationSyntax>()
                     // We want to skip the partial method declarations when reporting secondary issues since the messages are relevant only for implementation part.
