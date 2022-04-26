@@ -70,7 +70,7 @@ namespace Tests.TestCases
             public static int InnerOnlyProperty { get; set; }
         }
 
-        struct InnerStruct
+        struct InnerStruct1
         {
             class SomeName      // Noncompliant
             {
@@ -80,6 +80,20 @@ namespace Tests.TestCases
 
             public static int MyProperty { get; set; }  // Noncompliant
             public static int InnerOnlyProperty { get; set; }
+        }
+
+        struct InnerStruct2
+        {
+            struct SomeName       // Noncompliant
+            {
+            }
+        }
+
+        struct InnerStruct3
+        {
+            struct InnerStruct1   // Noncompliant
+            {
+            }
         }
     }
 }
