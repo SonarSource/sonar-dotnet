@@ -79,10 +79,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private static void CheckNamedType(SymbolAnalysisContext context, IReadOnlyList<ISymbol> outterMembersOfSameName, INamedTypeSymbol namedType)
         {
-            var shadowsNamedType = outterMembersOfSameName
-                .Any(x => x is INamedTypeSymbol symbol && symbol.TypeKind is TypeKind.Class or TypeKind.Struct or TypeKind.Delegate or TypeKind.Enum);
-
-            if (!shadowsNamedType)
+            if (!outterMembersOfSameName.Any(x => x is INamedTypeSymbol symbol && symbol.TypeKind is TypeKind.Class or TypeKind.Struct or TypeKind.Delegate or TypeKind.Enum))
             {
                 return;
             }
@@ -95,10 +92,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private static void CheckMember(SymbolAnalysisContext context, IReadOnlyList<ISymbol> outterMembersOfSameName, ISymbol member)
         {
-            var shadowsOtherMember = outterMembersOfSameName
-                .Any(x => x.IsStatic || x is IFieldSymbol { IsConst: true });
-
-            if (shadowsOtherMember
+            if (outterMembersOfSameName.Any(x => x.IsStatic || x is IFieldSymbol { IsConst: true })
                 && member.FirstDeclaringReferenceIdentifier() is { } identifier
                 && identifier.GetLocation() is { Kind: LocationKind.SourceFile } location)
             {
