@@ -272,6 +272,7 @@ namespace SonarAnalyzer.Helpers
                 { Kind: SymbolKind.Method } => "method",
                 INamedTypeSymbol { TypeKind: TypeKind.Class } namedType => namedType.IsRecord() ? "record" : "class",
                 INamedTypeSymbol { TypeKind: TypeKind.Delegate } => "delegate",
+                INamedTypeSymbol { TypeKind: TypeKind.Enum } => "enum",
                 INamedTypeSymbol { TypeKind: TypeKind.Struct } namedType => namedType.IsRecord() ? "record struct" : "struct",
                 { Kind: SymbolKind.Property } => "property",
             };
