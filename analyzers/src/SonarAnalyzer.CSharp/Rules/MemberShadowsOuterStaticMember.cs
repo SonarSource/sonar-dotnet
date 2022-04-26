@@ -102,14 +102,14 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private static IReadOnlyList<INamedTypeSymbol> SelfAndOuterNamedTypes(INamedTypeSymbol symbol)
         {
-            var classes = new List<INamedTypeSymbol>();
-            var currentClass = symbol;
-            while (currentClass.IsClassOrStruct())
+            var namedTypes = new List<INamedTypeSymbol>();
+            var current = symbol;
+            while (current.IsClassOrStruct())
             {
-                classes.Add(currentClass);
-                currentClass = currentClass.ContainingType;
+                namedTypes.Add(current);
+                current = current.ContainingType;
             }
-            return classes;
+            return namedTypes;
         }
     }
 }
