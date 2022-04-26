@@ -58,35 +58,31 @@ namespace SonarAnalyzer.Rules.CSharp
 
                     var selfAndOuterNamedTypes = SelfAndOuterNamedTypes(containerClassSymbol);
 
-                    foreach (var member in members)
+                    foreach (var innerMember in members)
                     {
-                        switch (member)
+                        var outterMembersOfSameName = selfAndOuterNamedTypes.SelectMany(x => x.GetMembers(innerMember.Name)).ToList();
+                        switch (innerMember)
                         {
                             case IPropertySymbol:
                             case IFieldSymbol:
                             case IEventSymbol:
                             case IMethodSymbol { MethodKind: MethodKind.DeclareMethod or MethodKind.Ordinary }:
-                                CheckMember(c, selfAndOuterNamedTypes, member);
+                                CheckMember(c, outterMembersOfSameName, innerMember);
                                 break;
                             case INamedTypeSymbol namedType:
-                                CheckNamedType(c, selfAndOuterNamedTypes, namedType);
+                                CheckNamedType(c, outterMembersOfSameName, namedType);
                                 break;
                         }
                     }
                 },
                 SymbolKind.NamedType);
 
-        private static void CheckNamedType(SymbolAnalysisContext context, IReadOnlyList<INamedTypeSymbol> selfAndOuterNamedTypes, INamedTypeSymbol namedType)
+        private static void CheckNamedType(SymbolAnalysisContext context, IReadOnlyList<ISymbol> outterMembersOfSameName, INamedTypeSymbol namedType)
         {
-            var shadowsClassOrDelegate = selfAndOuterNamedTypes
-                .SelectMany(x => x.GetMembers(namedType.Name))
-                .Any(x => x is INamedTypeSymbol symbol && symbol.TypeKind
-                    is TypeKind.Class
-                    or TypeKind.Struct
-                    or TypeKind.Delegate
-                    or TypeKind.Enum);
+            var shadowsNamedType = outterMembersOfSameName
+                .Any(x => x is INamedTypeSymbol symbol && symbol.TypeKind is TypeKind.Class or TypeKind.Struct or TypeKind.Delegate or TypeKind.Enum);
 
-            if (!shadowsClassOrDelegate)
+            if (!shadowsNamedType)
             {
                 return;
             }
@@ -97,10 +93,9 @@ namespace SonarAnalyzer.Rules.CSharp
             }
         }
 
-        private static void CheckMember(SymbolAnalysisContext context, IReadOnlyList<INamedTypeSymbol> selfAndOuterNamedTypes, ISymbol member)
+        private static void CheckMember(SymbolAnalysisContext context, IReadOnlyList<ISymbol> outterMembersOfSameName, ISymbol member)
         {
-            var shadowsOtherMember = selfAndOuterNamedTypes
-                .SelectMany(x => x.GetMembers(member.Name))
+            var shadowsOtherMember = outterMembersOfSameName
                 .Any(x => x.IsStatic || x is IFieldSymbol { IsConst: true });
 
             if (shadowsOtherMember
