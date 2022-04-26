@@ -55,17 +55,11 @@ namespace SonarAnalyzer.Rules.CSharp
                     {
                         switch (member)
                         {
-                            case IPropertySymbol property:
-                                CheckMember(property, containerClassSymbol, c, "property");
-                                break;
-                            case IFieldSymbol field:
-                                CheckMember(field, containerClassSymbol, c, "field");
-                                break;
-                            case IEventSymbol @event:
-                                CheckMember(@event, containerClassSymbol, c, "event");
-                                break;
-                            case IMethodSymbol { MethodKind: MethodKind.DeclareMethod or MethodKind.Ordinary } method:
-                                CheckMember(method, containerClassSymbol, c, "method");
+                            case IPropertySymbol:
+                            case IFieldSymbol:
+                            case IEventSymbol:
+                            case IMethodSymbol { MethodKind: MethodKind.DeclareMethod or MethodKind.Ordinary }:
+                                CheckMember(c, containerClassSymbol, member);
                                 break;
                             case INamedTypeSymbol namedType:
                                 CheckNamedType(c, containerClassSymbol, namedType);
@@ -87,14 +81,13 @@ namespace SonarAnalyzer.Rules.CSharp
                 return;
             }
 
-            var kindName = namedType.TypeKind == TypeKind.Delegate ? "delegate" : "class";
             foreach (var identifier in namedType.DeclaringReferenceIdentifiers())
             {
-                context.ReportDiagnosticIfNonGenerated(Diagnostic.Create(Rule, identifier.GetLocation(), kindName));
+                context.ReportDiagnosticIfNonGenerated(Diagnostic.Create(Rule, identifier.GetLocation(), namedType.GetClassification()));
             }
         }
 
-        private static void CheckMember(ISymbol member, INamedTypeSymbol containerClassSymbol, SymbolAnalysisContext context, string memberType)
+        private static void CheckMember(SymbolAnalysisContext context, INamedTypeSymbol containerClassSymbol, ISymbol member)
         {
             var selfAndOutterClasses = GetSelfAndOuterClasses(containerClassSymbol);
             var shadowsOtherMember = selfAndOutterClasses
@@ -105,7 +98,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 && member.FirstDeclaringReferenceIdentifier() is { } identifier
                 && identifier.GetLocation() is { Kind: LocationKind.SourceFile } location)
             {
-                context.ReportDiagnosticIfNonGenerated(Diagnostic.Create(Rule, location, memberType));
+                context.ReportDiagnosticIfNonGenerated(Diagnostic.Create(Rule, location, member.GetClassification()));
             }
         }
 

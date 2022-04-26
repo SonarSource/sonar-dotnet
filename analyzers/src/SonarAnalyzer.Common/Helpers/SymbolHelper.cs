@@ -22,12 +22,15 @@ using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Linq;
+using System.Reflection;
 using Microsoft.CodeAnalysis;
 
 namespace SonarAnalyzer.Helpers
 {
     internal static class SymbolHelper
     {
+        private static readonly PropertyInfo IsRecordPropertyInfo = typeof(ITypeSymbol).GetProperty("IsRecord");
+
         public static IEnumerable<INamedTypeSymbol> GetAllNamedTypes(this INamespaceSymbol @namespace)
         {
             if (@namespace == null)
@@ -81,7 +84,7 @@ namespace SonarAnalyzer.Helpers
         public static T GetOverriddenMember<T>(this T symbol)
             where T : class, ISymbol
         {
-            if (!(symbol is {IsOverride: true}))
+            if (!(symbol is { IsOverride: true }))
             {
                 return null;
             }
@@ -118,7 +121,7 @@ namespace SonarAnalyzer.Helpers
 
         public static bool IsExtensionOn(this IMethodSymbol methodSymbol, KnownType type)
         {
-            if (!(methodSymbol is {IsExtensionMethod: true}))
+            if (!(methodSymbol is { IsExtensionMethod: true }))
             {
                 return false;
             }
@@ -259,5 +262,21 @@ namespace SonarAnalyzer.Helpers
             symbol.Kind == SymbolKind.Method
             || symbol.Kind == SymbolKind.Property
             || symbol.Kind == SymbolKind.Event;
+
+        // https://github.com/dotnet/roslyn/blob/main/src/Workspaces/Core/Portable/Classification/ClassificationExtensions.cs
+        public static string GetClassification(this ISymbol symbol)
+            => symbol switch
+            {
+                { Kind: SymbolKind.Event } => "event",
+                { Kind: SymbolKind.Field } => "field",
+                { Kind: SymbolKind.Method } => "method",
+                INamedTypeSymbol { TypeKind: TypeKind.Class } namedType => namedType.IsRecord() ? "record" : "class",
+                INamedTypeSymbol { TypeKind: TypeKind.Delegate } => "delegate",
+                INamedTypeSymbol { TypeKind: TypeKind.Struct } namedType => namedType.IsRecord() ? "record struct" : "struct",
+                { Kind: SymbolKind.Property } => "property",
+            };
+
+        public static bool IsRecord(this ITypeSymbol typeSymbol)
+            => IsRecordPropertyInfo?.GetValue(typeSymbol) is true;
     }
 }

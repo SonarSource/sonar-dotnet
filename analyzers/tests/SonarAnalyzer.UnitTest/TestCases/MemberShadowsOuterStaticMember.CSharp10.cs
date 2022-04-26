@@ -8,10 +8,10 @@ record struct OuterRecordStruct
 
     class InnerClass
     {
-        class SomeName      // Noncompliant {{Rename this class to not shadow the outer class' member with the same name.}}
-        //    ^^^^^^^^
+        record struct SomeName // Noncompliant {{Rename this record struct to not shadow the outer class' member with the same name.}}
+        //            ^^^^^^^^
         {
-            private int F;  // Noncompliant {{Rename this field to not shadow the outer class' member with the same name.}}
+            private int F;     // Noncompliant {{Rename this field to not shadow the outer class' member with the same name.}}
             //          ^
             private int InnerOnlyField;
         }
@@ -22,9 +22,9 @@ record struct OuterRecordStruct
 
     record struct InnerRecordStruct
     {
-        class SomeName      // Noncompliant
+        record SomeName        // Noncompliant {{Rename this record to not shadow the outer class' member with the same name.}}
         {
-            private int F;  // Noncompliant
+            private int F;     // Noncompliant
             private int InnerOnlyField;
         }
 
