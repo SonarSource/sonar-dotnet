@@ -74,7 +74,11 @@ namespace SonarAnalyzer.Rules.CSharp
         {
             var shadowsClassOrDelegate = GetSelfAndOuterClasses(containerClassSymbol)
                 .SelectMany(x => x.GetMembers(namedType.Name))
-                .Any(x => x is INamedTypeSymbol symbol && symbol.TypeKind is TypeKind.Class or TypeKind.Struct or TypeKind.Delegate);
+                .Any(x => x is INamedTypeSymbol symbol && symbol.TypeKind
+                    is TypeKind.Class
+                    or TypeKind.Struct
+                    or TypeKind.Delegate
+                    or TypeKind.Enum);
 
             if (!shadowsClassOrDelegate)
             {
