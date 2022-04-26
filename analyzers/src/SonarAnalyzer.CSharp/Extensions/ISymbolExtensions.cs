@@ -97,7 +97,7 @@ namespace SonarAnalyzer.Extensions
 
         public static ImmutableArray<SyntaxToken> DeclaringReferenceIdentifiers(this ISymbol symbol)
             => symbol.DeclaringSyntaxReferences
-               .Select(r => r.GetSyntax().NodeIdentifier())
+               .Select(x => x.GetSyntax().NodeIdentifier())
                .WhereNotNull()
                .ToImmutableArray();
 

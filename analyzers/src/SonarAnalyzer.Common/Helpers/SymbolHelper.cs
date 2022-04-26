@@ -29,7 +29,7 @@ namespace SonarAnalyzer.Helpers
 {
     internal static class SymbolHelper
     {
-        private static readonly PropertyInfo IsRecordPropertyInfo = typeof(ITypeSymbol).GetProperty("IsRecord");
+        private static readonly PropertyInfo ITypeSymbolIsRecord = typeof(ITypeSymbol).GetProperty("IsRecord");
 
         public static IEnumerable<INamedTypeSymbol> GetAllNamedTypes(this INamespaceSymbol @namespace)
         {
