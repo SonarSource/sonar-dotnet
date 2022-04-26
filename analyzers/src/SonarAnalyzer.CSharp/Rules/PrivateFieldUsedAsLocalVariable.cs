@@ -38,8 +38,7 @@ namespace SonarAnalyzer.Rules.CSharp
         private const string DiagnosticId = "S1450";
         private const string MessageFormat = "Remove the field '{0}' and declare it as a local variable in the relevant methods.";
 
-        private static readonly DiagnosticDescriptor Rule =
-            DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
+        private static readonly DiagnosticDescriptor Rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
 
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
 
@@ -54,40 +53,31 @@ namespace SonarAnalyzer.Rules.CSharp
             context.RegisterSyntaxNodeActionInNonGenerated(c =>
                 {
                     var typeDeclaration = (TypeDeclarationSyntax)c.Node;
-
-                    if (c.ContainingSymbol.Kind != SymbolKind.NamedType
-                        || typeDeclaration.Modifiers.Any(SyntaxKind.PartialKeyword))
+                    if (c.IsRedundantPositionalRecordContext() || typeDeclaration.Modifiers.Any(SyntaxKind.PartialKeyword))
                     {
                         return;
                     }
 
                     var methodNames = typeDeclaration.Members.OfType<MethodDeclarationSyntax>().Select(x => x.Identifier.ValueText).ToHashSet();
                     var privateFields = GetPrivateFields(c.SemanticModel, typeDeclaration);
-
                     var collector = new FieldAccessCollector(c.SemanticModel, privateFields, methodNames);
-
                     if (!collector.SafeVisit(typeDeclaration))
                     {
                         // We couldn't finish the exploration so we cannot take any decision
                         return;
                     }
 
-                    privateFields.Keys
-                        .Where(collector.IsRemovableField)
-                        .Select(CreateDiagnostic)
-                        .ToList()
-                        .ForEach(d => c.ReportIssue(d));
-
-                    Diagnostic CreateDiagnostic(IFieldSymbol fieldSymbol) =>
-                        Diagnostic.Create(Rule, privateFields[fieldSymbol].GetLocation(), fieldSymbol.Name);
+                    foreach (var fieldSymbol in privateFields.Keys.Where(collector.IsRemovableField))
+                    {
+                        c.ReportIssue(Diagnostic.Create(Rule, privateFields[fieldSymbol].GetLocation(), fieldSymbol.Name));
+                    }
                 },
                 SyntaxKind.ClassDeclaration,
                 SyntaxKind.StructDeclaration,
                 SyntaxKindEx.RecordClassDeclaration,
                 SyntaxKindEx.RecordStructDeclaration);
 
-        private static IDictionary<IFieldSymbol, VariableDeclaratorSyntax> GetPrivateFields(SemanticModel semanticModel,
-            TypeDeclarationSyntax typeDeclaration)
+        private static IDictionary<IFieldSymbol, VariableDeclaratorSyntax> GetPrivateFields(SemanticModel semanticModel, TypeDeclarationSyntax typeDeclaration)
         {
             return typeDeclaration.Members
                 .OfType<FieldDeclarationSyntax>()
