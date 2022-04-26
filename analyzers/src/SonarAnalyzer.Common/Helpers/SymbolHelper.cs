@@ -264,17 +264,17 @@ namespace SonarAnalyzer.Helpers
             || symbol.Kind == SymbolKind.Event;
 
         // https://github.com/dotnet/roslyn/blob/main/src/Workspaces/Core/Portable/Classification/ClassificationExtensions.cs
-        public static string GetClassification(this ISymbol symbol)
-            => symbol switch
+        public static string GetClassification(this ISymbol symbol) =>
+            symbol switch
             {
                 { Kind: SymbolKind.Event } => "event",
                 { Kind: SymbolKind.Field } => "field",
                 { Kind: SymbolKind.Method } => "method",
-                INamedTypeSymbol { TypeKind: TypeKind.Class } namedType => namedType.IsRecord() ? "record" : "class",
-                INamedTypeSymbol { TypeKind: TypeKind.Delegate } => "delegate",
-                INamedTypeSymbol { TypeKind: TypeKind.Enum } => "enum",
-                INamedTypeSymbol { TypeKind: TypeKind.Struct } namedType => namedType.IsRecord() ? "record struct" : "struct",
                 { Kind: SymbolKind.Property } => "property",
+                INamedTypeSymbol { TypeKind: TypeKind.Delegate } => "delegate",
+                INamedTypeSymbol { TypeKind: TypeKind.Class } namedType => namedType.IsRecord() ? "record" : "class",
+                INamedTypeSymbol { TypeKind: TypeKind.Struct } namedType => namedType.IsRecord() ? "record struct" : "struct",
+                INamedTypeSymbol { TypeKind: TypeKind.Enum } => "enum",
             };
 
         public static bool IsRecord(this ITypeSymbol typeSymbol)
