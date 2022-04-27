@@ -75,9 +75,7 @@ namespace SonarAnalyzer.Rules.CSharp
             {
                 var location = GetLocationWithToken(baseTypeSyntax, typeDeclaration.BaseList.Types);
                 context.ReportIssue(
-                    Diagnostic.Create(Rule, location,
-                                      ImmutableDictionary<string, string>.Empty.Add(RedundantIndexKey, "0"),
-                                      MessageObjectBase));
+                    Diagnostic.Create(Rule, location, DiagnosticsProperties(redundantIndex: 0), MessageObjectBase));
             }
 
             ReportRedundantInterfaces(context, typeDeclaration);
@@ -110,9 +108,7 @@ namespace SonarAnalyzer.Rules.CSharp
             }
 
             context.ReportIssue(
-                Diagnostic.Create(Rule, enumDeclaration.BaseList.GetLocation(),
-                                  ImmutableDictionary<string, string>.Empty.Add(RedundantIndexKey, "0"),
-                                  MessageEnum));
+                Diagnostic.Create(Rule, enumDeclaration.BaseList.GetLocation(), DiagnosticsProperties(redundantIndex: 0), MessageEnum));
         }
 
         private static void ReportRedundantInterfaces(SyntaxNodeAnalysisContext context, BaseTypeDeclarationSyntax typeDeclaration)
@@ -145,8 +141,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     collidingDeclaration.ToMinimalDisplayString(context.SemanticModel, baseType.Type.SpanStart),
                     interfaceType.ToMinimalDisplayString(context.SemanticModel, baseType.Type.SpanStart));
 
-                context.ReportIssue(Diagnostic.Create(Rule, location,
-                    ImmutableDictionary<string, string>.Empty.Add(RedundantIndexKey, i.ToString(CultureInfo.InvariantCulture)), message));
+                context.ReportIssue(Diagnostic.Create(Rule, location, DiagnosticsProperties(redundantIndex: i), message));
             }
         }
 
@@ -229,5 +224,12 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private static bool IsBaseListNullOrEmpty(BaseTypeDeclarationSyntax baseTypeDeclaration) =>
             baseTypeDeclaration.BaseList == null || !baseTypeDeclaration.BaseList.Types.Any();
+
+        private static ImmutableDictionary<string, string> DiagnosticsProperties(int redundantIndex)
+        {
+            var builder = ImmutableDictionary.CreateBuilder<string, string>();
+            builder.Add(RedundantIndexKey, redundantIndex.ToString());
+            return builder.ToImmutable();
+        }
     }
 }
