@@ -37,37 +37,41 @@ namespace SonarAnalyzer.Rules.CSharp
         private const string MessageFormat = "Move this field's initializer into a static constructor.";
 
         private static readonly DiagnosticDescriptor Rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
+        private static readonly SyntaxKind[] EnclosingTypes =
+        {
+            SyntaxKind.ClassDeclaration,
+            SyntaxKind.InterfaceDeclaration,
+            SyntaxKind.StructDeclaration,
+            SyntaxKindEx.RecordClassDeclaration,
+            SyntaxKindEx.RecordStructDeclaration,
+        };
 
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
 
         protected override void Initialize(SonarAnalysisContext context) =>
-            context.RegisterSyntaxNodeActionInNonGenerated(
-                c =>
+            context.RegisterSyntaxNodeActionInNonGenerated(c =>
                 {
                     var fieldDeclaration = (FieldDeclarationSyntax)c.Node;
                     if (!fieldDeclaration.Modifiers.Any(SyntaxKind.StaticKeyword))
                     {
                         return;
                     }
-                    var variables = fieldDeclaration.Declaration.Variables.Where(v => v.Initializer != null).ToArray();
+                    var variables = fieldDeclaration.Declaration.Variables.Where(x => x.Initializer != null).ToArray();
                     if (variables.Length == 0)
                     {
                         return;
                     }
                     var containingType = c.SemanticModel.GetDeclaredSymbol(variables[0]).ContainingType;
-                    var typeDeclaration = fieldDeclaration.FirstAncestorOrSelf<TypeDeclarationSyntax>(
-                        x => x.IsAnyKind(SyntaxKind.ClassDeclaration, SyntaxKind.InterfaceDeclaration, SyntaxKind.StructDeclaration, SyntaxKindEx.RecordClassDeclaration));
+                    var typeDeclaration = fieldDeclaration.FirstAncestorOrSelf<TypeDeclarationSyntax>(x => x.IsAnyKind(EnclosingTypes));
 
                     foreach (var variable in variables)
                     {
                         var identifierFieldMappings = IdentifierFieldMappings(variable, containingType, c.SemanticModel);
                         var identifierTypeMappings = IdentifierTypeMappings(identifierFieldMappings);
                         var usedTypeDeclarations = identifierTypeMappings.Select(x => x.TypeDeclaration);
-                        var sameTypeIdentifiersAfterThis = identifierTypeMappings
-                            .Where(x => x.TypeDeclaration == typeDeclaration)
-                            .Where(x => !x.Field.IsConst)
-                            .Where(x => x.Field.DeclaringSyntaxReferences.First().Span.Start > variable.SpanStart);
-
+                        var sameTypeIdentifiersAfterThis = identifierTypeMappings.Where(x => x.TypeDeclaration == typeDeclaration
+                                                                                             && !x.Field.IsConst
+                                                                                             && x.Field.DeclaringSyntaxReferences.First().Span.Start > variable.SpanStart);
                         if (usedTypeDeclarations.Any(x => x != typeDeclaration) || sameTypeIdentifiersAfterThis.Any())
                         {
                             c.ReportIssue(Diagnostic.Create(Rule, variable.Initializer.GetLocation()));
