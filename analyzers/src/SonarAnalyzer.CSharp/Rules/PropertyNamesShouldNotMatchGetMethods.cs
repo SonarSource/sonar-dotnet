@@ -27,6 +27,7 @@ using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.Helpers;
+using StyleCop.Analyzers.Lightup;
 
 namespace SonarAnalyzer.Rules.CSharp
 {
@@ -41,7 +42,7 @@ namespace SonarAnalyzer.Rules.CSharp
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
 
         protected override void Initialize(SonarAnalysisContext context) =>
-            context.RegisterSyntaxNodeActionInNonGenerated(                c =>
+            context.RegisterSyntaxNodeActionInNonGenerated(c =>
                 {
                     if (!(c.SemanticModel.GetDeclaredSymbol(c.Node) is INamedTypeSymbol classSymbol))
                     {
@@ -63,7 +64,12 @@ namespace SonarAnalyzer.Rules.CSharp
                             additionalLocations: new[] { methodIdentifier.GetLocation() },
                             messageArgs: new[] { propertyIdentifier.ValueText, methodIdentifier.ValueText }));
                     }
-                }, SyntaxKind.ClassDeclaration);
+                },
+                SyntaxKind.ClassDeclaration,
+                SyntaxKind.InterfaceDeclaration,
+                SyntaxKindEx.RecordClassDeclaration,
+                SyntaxKindEx.RecordStructDeclaration,
+                SyntaxKind.StructDeclaration);
 
         private static IEnumerable<Tuple<SyntaxToken, SyntaxToken>> CollidingMembers(IEnumerable<IPropertySymbol> properties, IEnumerable<IMethodSymbol> methods)
         {
