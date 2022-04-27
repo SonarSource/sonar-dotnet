@@ -19,8 +19,11 @@
  */
 
 using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.Collections.Immutable;
 using System.Diagnostics.CodeAnalysis;
+using System.Linq;
 using System.Runtime.Serialization;
 
 namespace SonarAnalyzer.Common
@@ -39,20 +42,15 @@ namespace SonarAnalyzer.Common
         }
 
         public static MultiValueDictionary<TKey, TValue> Create<TUnderlying>()
-            where TUnderlying : ICollection<TValue>, new()
-        {
-            return new MultiValueDictionary<TKey, TValue>
+            where TUnderlying : ICollection<TValue>, new() =>
+            new MultiValueDictionary<TKey, TValue>
             {
                 UnderlyingCollectionFactory = () => new TUnderlying()
             };
-        }
 
         private Func<ICollection<TValue>> UnderlyingCollectionFactory { get; set; } = () => new List<TValue>();
 
-        public void Add(TKey key, TValue value)
-        {
-            AddWithKey(key, value);
-        }
+        public void Add(TKey key, TValue value) => AddWithKey(key, value);
 
         public void AddWithKey(TKey key, TValue value)
         {
@@ -99,6 +97,61 @@ namespace SonarAnalyzer.Common
                 dictionary.Add(keySelector(item), elementSelector(item));
             }
             return dictionary;
+        }
+
+        public static ILookup<TKey, TElement> ToLookup<TSource, TKey, TElement>(this IEnumerable<TSource> source,
+                                                                                Func<TSource, TKey> keySelector,
+                                                                                Func<TSource, IEnumerable<TElement>> elementsSelector) =>
+            new Lookup<TKey, TElement>(source.ToDictionary(keySelector, elementsSelector));
+
+        public static ILookup<TKey, TElement> ToLookup<TKey, TElement>(this IReadOnlyDictionary<TKey, IEnumerable<TElement>> source) =>
+            new Lookup<TKey, TElement>(source);
+
+        private sealed class Lookup<TKey, TElement> : ILookup<TKey, TElement>
+        {
+            public Lookup(IReadOnlyDictionary<TKey, IEnumerable<TElement>> source)
+            {
+                Source = source;
+            }
+            private IReadOnlyDictionary<TKey, IEnumerable<TElement>> Source { get; }
+
+            public IEnumerable<TElement> this[TKey key] => Source[key];
+
+            public int Count => Source.Count;
+
+            public bool Contains(TKey key) => Source.ContainsKey(key);
+            public IEnumerator<IGrouping<TKey, TElement>> GetEnumerator() => new Enumerator(this);
+            IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
+
+            private readonly struct Enumerator : IEnumerator<IGrouping<TKey, TElement>>
+            {
+                public Enumerator(Lookup<TKey, TElement> lookup)
+                {
+                    DictEnumerator = lookup.Source.GetEnumerator();
+                }
+                private IEnumerator<KeyValuePair<TKey, IEnumerable<TElement>>> DictEnumerator { get; }
+
+                public IGrouping<TKey, TElement> Current => new Grouping(DictEnumerator.Current.Key, DictEnumerator.Current.Value);
+
+                public void Dispose() => DictEnumerator.Dispose();
+                public bool MoveNext() => DictEnumerator.MoveNext();
+                public void Reset() => DictEnumerator.Reset();
+                object IEnumerator.Current => Current;
+
+                private readonly struct Grouping : IGrouping<TKey, TElement>
+                {
+                    public Grouping(TKey key, IEnumerable<TElement> value)
+                    {
+                        Key = key;
+                        Value = value;
+                    }
+
+                    public TKey Key { get; }
+                    private IEnumerable<TElement> Value { get; }
+                    public IEnumerator<TElement> GetEnumerator() => Value.GetEnumerator();
+                    IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
+                }
+            }
         }
     }
 
