@@ -28,11 +28,11 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class PropertiesShouldBePreferredTest
     {
-        private readonly VerifierBuilder builder = new VerifierBuilder<PropertiesShouldBePreferred>().AddReferences(MetadataReferenceFacade.SystemThreadingTasks);
+        private readonly VerifierBuilder builder = new VerifierBuilder<PropertiesShouldBePreferred>();
 
         [TestMethod]
         public void PropertiesShouldBePreferred() =>
-            builder.AddPaths("PropertiesShouldBePreferred.cs").Verify();
+            builder.AddPaths("PropertiesShouldBePreferred.cs").AddReferences(MetadataReferenceFacade.SystemThreadingTasks).Verify();
 
 #if NET
 
