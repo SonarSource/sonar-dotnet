@@ -44,14 +44,12 @@ namespace SonarAnalyzer.Helpers
         /// <returns>A list of words (all uppercase) contained in the string.</returns>
         public static IEnumerable<string> SplitCamelCaseToWords(this string name)
         {
-            bool IsFollowedByLower(int i) => i + 1 < name.Length && char.IsLower(name[i + 1]);
-
             if (name == null)
             {
                 yield break;
             }
 
-            var currentWord = new StringBuilder();
+            var currentWord = new StringBuilder(capacity: name.Length);
             var hasLower = false;
 
             for (var i = 0; i < name.Length; i++)
@@ -85,6 +83,8 @@ namespace SonarAnalyzer.Helpers
             {
                 yield return currentWord.ToString();
             }
+
+            bool IsFollowedByLower(int i) => i + 1 < name.Length && char.IsLower(name[i + 1]);
         }
     }
 }
