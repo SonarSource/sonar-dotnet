@@ -92,7 +92,6 @@ namespace SonarAnalyzer.Common
             this IEnumerable<TSource> source,
             Func<TSource, TKey> keySelector,
             Func<TSource, ICollection<TElement>> elementSelector)
-            where TSource : Tuple<TKey, ICollection<TElement>>
         {
             var dictionary = new MultiValueDictionary<TKey, TElement>();
             foreach (var item in source)

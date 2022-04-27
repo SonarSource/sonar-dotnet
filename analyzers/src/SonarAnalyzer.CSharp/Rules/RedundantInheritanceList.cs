@@ -18,8 +18,6 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System;
-using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Globalization;
 using System.Linq;
@@ -29,6 +27,7 @@ using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
 using Microsoft.CodeAnalysis.Text;
 using SonarAnalyzer.Common;
+using SonarAnalyzer.Extensions;
 using SonarAnalyzer.Helpers;
 using StyleCop.Analyzers.Lightup;
 
@@ -53,20 +52,23 @@ namespace SonarAnalyzer.Rules.CSharp
         {
             context.RegisterSyntaxNodeActionInNonGenerated(CheckEnum, SyntaxKind.EnumDeclaration);
             context.RegisterSyntaxNodeActionInNonGenerated(CheckInterface, SyntaxKind.InterfaceDeclaration);
-            context.RegisterSyntaxNodeActionInNonGenerated(CheckClassAndRecord, SyntaxKind.ClassDeclaration, SyntaxKind.StructDeclaration, SyntaxKindEx.RecordClassDeclaration);
+            context.RegisterSyntaxNodeActionInNonGenerated(CheckClassAndRecord,
+                                                           SyntaxKind.ClassDeclaration,
+                                                           SyntaxKind.StructDeclaration,
+                                                           SyntaxKindEx.RecordClassDeclaration,
+                                                           SyntaxKindEx.RecordStructDeclaration);
         }
 
         private static void CheckClassAndRecord(SyntaxNodeAnalysisContext context)
         {
             var typeDeclaration = (TypeDeclarationSyntax)context.Node;
-            if (context.ContainingSymbol.Kind != SymbolKind.NamedType
-                || IsBaseListNullOrEmpty(typeDeclaration))
+            if (context.IsRedundantPositionalRecordContext() || IsBaseListNullOrEmpty(typeDeclaration))
             {
                 return;
             }
 
             var baseTypeSyntax = typeDeclaration.BaseList.Types.First().Type;
-            if (!(context.SemanticModel.GetSymbolInfo(baseTypeSyntax).Symbol is ITypeSymbol baseTypeSymbol))
+            if (context.SemanticModel.GetSymbolInfo(baseTypeSyntax).Symbol is not ITypeSymbol baseTypeSymbol)
             {
                 return;
             }
@@ -129,7 +131,7 @@ namespace SonarAnalyzer.Rules.CSharp
             for (var i = 0; i < baseList.Types.Count; i++)
             {
                 var baseType = baseList.Types[i];
-                if (!(context.SemanticModel.GetSymbolInfo(baseType.Type).Symbol is INamedTypeSymbol interfaceType)
+                if (context.SemanticModel.GetSymbolInfo(baseType.Type).Symbol is not INamedTypeSymbol interfaceType
                     || !interfaceType.IsInterface())
                 {
                     continue;
@@ -146,8 +148,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     interfaceType.ToMinimalDisplayString(context.SemanticModel, baseType.Type.SpanStart));
 
                 context.ReportIssue(Diagnostic.Create(Rule, location,
-                    ImmutableDictionary<string, string>.Empty.Add(RedundantIndexKey, i.ToString(CultureInfo.InvariantCulture)),
-                    message));
+                    ImmutableDictionary<string, string>.Empty.Add(RedundantIndexKey, i.ToString(CultureInfo.InvariantCulture)), message));
             }
         }
 
@@ -156,8 +157,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     .Select(baseType => semanticModel.GetSymbolInfo(baseType.Type).Symbol as INamedTypeSymbol)
                     .WhereNotNull()
                     .Distinct()
-                    .Select(symbol => new Tuple<INamedTypeSymbol, ICollection<INamedTypeSymbol>>(symbol, symbol.AllInterfaces))
-                    .ToMultiValueDictionary(kv => kv.Item1, kv => kv.Item2);
+                    .ToMultiValueDictionary(x => x, x => x.AllInterfaces);
 
         private static bool TryGetCollidingDeclaration(INamedTypeSymbol declaredType,
                                                        INamedTypeSymbol interfaceType,
