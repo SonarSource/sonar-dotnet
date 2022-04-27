@@ -30,7 +30,8 @@ namespace SonarAnalyzer.RuleDescriptors
 {
     public sealed class RuleDetail
     {
-        private static readonly string RspecRoot = Path.Combine(Path.GetDirectoryName(typeof(RuleDetail).Assembly.Location), $@"..\..\..\..\..\rspec");
+        // RspecRoot points to .\analyzers\rspec
+        private static readonly string RspecRoot = Path.GetFullPath(Path.Combine(Path.GetDirectoryName(typeof(RuleDetail).Assembly.Location), $@"..\..\..\..\..\rspec"));
         private static readonly HashSet<string> BackwardsCompatibleTypes = new()
         {
             "BUG",
