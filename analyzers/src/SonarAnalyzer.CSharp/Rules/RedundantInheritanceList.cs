@@ -74,8 +74,7 @@ namespace SonarAnalyzer.Rules.CSharp
             if (baseTypeSymbol.Is(KnownType.System_Object))
             {
                 var location = GetLocationWithToken(baseTypeSyntax, typeDeclaration.BaseList.Types);
-                context.ReportIssue(
-                    Diagnostic.Create(Rule, location, DiagnosticsProperties(redundantIndex: 0), MessageObjectBase));
+                context.ReportIssue(Diagnostic.Create(Rule, location, DiagnosticsProperties(redundantIndex: 0), MessageObjectBase));
             }
 
             ReportRedundantInterfaces(context, typeDeclaration);
@@ -107,8 +106,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 return;
             }
 
-            context.ReportIssue(
-                Diagnostic.Create(Rule, enumDeclaration.BaseList.GetLocation(), DiagnosticsProperties(redundantIndex: 0), MessageEnum));
+            context.ReportIssue(Diagnostic.Create(Rule, enumDeclaration.BaseList.GetLocation(), DiagnosticsProperties(redundantIndex: 0), MessageEnum));
         }
 
         private static void ReportRedundantInterfaces(SyntaxNodeAnalysisContext context, BaseTypeDeclarationSyntax typeDeclaration)
