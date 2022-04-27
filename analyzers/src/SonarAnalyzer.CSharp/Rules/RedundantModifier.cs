@@ -55,25 +55,27 @@ namespace SonarAnalyzer.Rules.CSharp
         {
             context.RegisterSyntaxNodeActionInNonGenerated(
                 CheckSealedMemberInSealedClass,
-                SyntaxKind.MethodDeclaration,
-                SyntaxKind.PropertyDeclaration,
-                SyntaxKind.IndexerDeclaration,
                 SyntaxKind.EventDeclaration,
-                SyntaxKind.EventFieldDeclaration);
+                SyntaxKind.EventFieldDeclaration,
+                SyntaxKind.IndexerDeclaration,
+                SyntaxKind.MethodDeclaration,
+                SyntaxKind.PropertyDeclaration);
 
             context.RegisterSyntaxNodeActionInNonGenerated(
                 CheckTypeDeclarationForRedundantPartial,
                 SyntaxKind.ClassDeclaration,
                 SyntaxKind.InterfaceDeclaration,
-                SyntaxKind.StructDeclaration,
-                SyntaxKindEx.RecordClassDeclaration);
+                SyntaxKindEx.RecordClassDeclaration,
+                SyntaxKindEx.RecordStructDeclaration,
+                SyntaxKind.StructDeclaration);
 
             context.RegisterSyntaxNodeActionInNonGenerated(
                 CheckForUnnecessaryUnsafeBlocks,
                 SyntaxKind.ClassDeclaration,
-                SyntaxKind.StructDeclaration,
                 SyntaxKind.InterfaceDeclaration,
-                SyntaxKindEx.RecordClassDeclaration);
+                SyntaxKindEx.RecordClassDeclaration,
+                SyntaxKindEx.RecordStructDeclaration,
+                SyntaxKind.StructDeclaration);
 
             context.RegisterSyntaxNodeActionInNonGenerated(c =>
                 {
@@ -82,10 +84,10 @@ namespace SonarAnalyzer.Rules.CSharp
                         new CheckedWalker(c).SafeVisit(c.Node);
                     }
                 },
-                SyntaxKind.CheckedStatement,
-                SyntaxKind.UncheckedStatement,
                 SyntaxKind.CheckedExpression,
-                SyntaxKind.UncheckedExpression);
+                SyntaxKind.CheckedStatement,
+                SyntaxKind.UncheckedExpression,
+                SyntaxKind.UncheckedStatement);
         }
 
         private static void CheckForUnnecessaryUnsafeBlocks(SyntaxNodeAnalysisContext context)
