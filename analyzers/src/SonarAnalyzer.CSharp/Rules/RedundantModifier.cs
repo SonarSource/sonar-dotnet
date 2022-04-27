@@ -231,7 +231,7 @@ namespace SonarAnalyzer.Rules.CSharp
         {
             if (Modifiers((MemberDeclarationSyntax)context.Node) is var modifiers
                 && modifiers.Any(SyntaxKind.SealedKeyword)
-                && context.ContainingSymbol is { IsSealed: true, ContainingType: { IsSealed: true } })
+                && context.ContainingSymbol.ContainingType is { IsSealed: true })
             {
                 var keyword = modifiers.First(m => m.IsKind(SyntaxKind.SealedKeyword));
                 context.ReportIssue(Diagnostic.Create(Rule, keyword.GetLocation(), "sealed", "redundant"));
