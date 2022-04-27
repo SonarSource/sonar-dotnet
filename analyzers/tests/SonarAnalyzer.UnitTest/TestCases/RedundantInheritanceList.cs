@@ -158,5 +158,6 @@ namespace Tests.Diagnostics
     {
     }
 
-    struct RedunantInterfaceImpl : IA, IBase { } // FN
+    struct RedunantInterfaceImpl : IA, IBase { } // Noncompliant {{'IA' implements 'IBase' so 'IBase' can be removed from the inheritance list.}}
+    //                               ^^^^^^^
 }
