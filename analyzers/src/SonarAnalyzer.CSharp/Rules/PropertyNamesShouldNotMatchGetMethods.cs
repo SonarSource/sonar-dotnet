@@ -44,25 +44,15 @@ namespace SonarAnalyzer.Rules.CSharp
         protected override void Initialize(SonarAnalysisContext context) =>
             context.RegisterSyntaxNodeActionInNonGenerated(c =>
                 {
-                    if (!(c.SemanticModel.GetDeclaredSymbol(c.Node) is INamedTypeSymbol classSymbol))
-                    {
-                        return;
-                    }
-
-                    var classMembers = classSymbol.GetMembers().Where(SymbolHelper.IsPubliclyAccessible);
-                    var properties = classMembers.OfType<IPropertySymbol>().Where(property => !property.IsOverride);
-                    var methods = classMembers.OfType<IMethodSymbol>().ToList();
+                    var classMembers = ((INamedTypeSymbol)c.ContainingSymbol).GetMembers().Where(SymbolHelper.IsPubliclyAccessible);
+                    var properties = classMembers.OfType<IPropertySymbol>().Where(property => !property.IsOverride).ToArray();
+                    var methods = classMembers.OfType<IMethodSymbol>().ToArray();
 
                     foreach (var collidingMembers in CollidingMembers(properties, methods))
                     {
                         var propertyIdentifier = collidingMembers.Item1;
                         var methodIdentifier = collidingMembers.Item2;
-
-                        c.ReportIssue(Diagnostic.Create(
-                            Rule,
-                            propertyIdentifier.GetLocation(),
-                            additionalLocations: new[] { methodIdentifier.GetLocation() },
-                            messageArgs: new[] { propertyIdentifier.ValueText, methodIdentifier.ValueText }));
+                        c.ReportIssue(Diagnostic.Create(Rule, propertyIdentifier.GetLocation(), new[] { methodIdentifier.GetLocation() }, propertyIdentifier.ValueText, methodIdentifier.ValueText));
                     }
                 },
                 SyntaxKind.ClassDeclaration,
@@ -71,24 +61,16 @@ namespace SonarAnalyzer.Rules.CSharp
                 SyntaxKindEx.RecordStructDeclaration,
                 SyntaxKind.StructDeclaration);
 
-        private static IEnumerable<Tuple<SyntaxToken, SyntaxToken>> CollidingMembers(IEnumerable<IPropertySymbol> properties, IEnumerable<IMethodSymbol> methods)
+        private static IEnumerable<Tuple<SyntaxToken, SyntaxToken>> CollidingMembers(IPropertySymbol[] properties, IMethodSymbol[] methods)
         {
             foreach (var property in properties)
             {
-                var collidingMethod = methods.FirstOrDefault(method => AreCollidingNames(property.Name, method.Name));
-                if (collidingMethod == null)
+                if (methods.FirstOrDefault(x => AreCollidingNames(property.Name, x.Name)) is { } collidingMethod
+                    && collidingMethod.DeclaringSyntaxReferences.FirstOrDefault()?.GetSyntax() is MethodDeclarationSyntax methodSyntax
+                    && property.DeclaringSyntaxReferences.FirstOrDefault()?.GetSyntax() is PropertyDeclarationSyntax propertySyntax)
                 {
-                    continue;
+                    yield return new Tuple<SyntaxToken, SyntaxToken>(propertySyntax.Identifier, methodSyntax.Identifier);
                 }
-
-                var methodSyntax = collidingMethod.DeclaringSyntaxReferences.FirstOrDefault()?.GetSyntax() as MethodDeclarationSyntax;
-
-                if (!(property.DeclaringSyntaxReferences.FirstOrDefault()?.GetSyntax() is PropertyDeclarationSyntax propertySyntax) || methodSyntax == null)
-                {
-                    continue;
-                }
-
-                yield return new Tuple<SyntaxToken, SyntaxToken>(propertySyntax.Identifier, methodSyntax.Identifier);
             }
         }
 
