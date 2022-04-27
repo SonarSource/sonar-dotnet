@@ -92,6 +92,10 @@ namespace SonarAnalyzer.UnitTest.TestFramework
 
         public void Verify()    // This should never has any arguments
         {
+            if (codeFix != null)
+            {
+                throw new InvalidOperationException($"Cannot use {nameof(Verify)} with {nameof(builder.CodeFix)} set.");
+            }
             foreach (var compilation in Compile(builder.ConcurrentAnalysis))
             {
                 DiagnosticVerifier.Verify(compilation, analyzers, builder.ErrorBehavior, builder.SonarProjectConfigPath, onlyDiagnosticIds);

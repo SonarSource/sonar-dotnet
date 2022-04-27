@@ -38,7 +38,7 @@ namespace SonarAnalyzer.UnitTest.Rules
             builder.AddPaths("RedundantModifier.cs")
                 .WithCodeFix<RedundantModifierCodeFix>()
                 .WithCodeFixedPaths("RedundantModifier.Fixed.cs")
-                .Verify();
+                .VerifyCodeFix();
 
 #if NET
 
@@ -52,7 +52,7 @@ namespace SonarAnalyzer.UnitTest.Rules
                 .WithCodeFix<RedundantModifierCodeFix>()
                 .WithCodeFixedPaths("RedundantModifier.CSharp9.Fixed.cs")
                 .WithOptions(ParseOptionsHelper.FromCSharp9)
-                .Verify();
+                .VerifyCodeFix();
 
         [TestMethod]
         public void RedundantModifier_CSharp10() =>
@@ -64,7 +64,7 @@ namespace SonarAnalyzer.UnitTest.Rules
                 .WithCodeFix<RedundantModifierCodeFix>()
                 .WithCodeFixedPaths("RedundantModifier.CSharp10.Fixed.cs")
                 .WithOptions(ParseOptionsHelper.FromCSharp10)
-                .Verify();
+                .VerifyCodeFix();
 
 #endif
 

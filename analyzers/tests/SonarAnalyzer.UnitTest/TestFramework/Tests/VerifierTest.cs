@@ -126,6 +126,15 @@ namespace SonarAnalyzer.UnitTest.TestFramework.Tests
                 .Invoking(x => x.Build()).Should().Throw<ArgumentException>().WithMessage("DummyAnalyzerCS does not inherit from UtilityAnalyzerBase.");
 
         [TestMethod]
+        public void Verify_ThrowsWithCodeFixSet()
+        {
+            var originalPath = WriteFile("File.cs", null);
+            var fixedPath = WriteFile("File.Fixed.cs", null);
+            DummyCS.AddPaths(originalPath).WithCodeFix<DummyCodeFixCS>().WithCodeFixedPaths(fixedPath).Invoking(x => x.Verify())
+                .Should().Throw<InvalidOperationException>().WithMessage("Cannot use Verify with CodeFix set.");
+        }
+
+        [TestMethod]
         public void Verify_RaiseExpectedIssues_CS() =>
             WithSnippetCS(
 @"public class Sample
