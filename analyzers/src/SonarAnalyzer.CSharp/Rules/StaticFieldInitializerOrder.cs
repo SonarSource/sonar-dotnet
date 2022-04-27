@@ -36,8 +36,7 @@ namespace SonarAnalyzer.Rules.CSharp
         private const string DiagnosticId = "S3263";
         private const string MessageFormat = "Move this field's initializer into a static constructor.";
 
-        private static readonly DiagnosticDescriptor Rule =
-            DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
+        private static readonly DiagnosticDescriptor Rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
 
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
 
@@ -50,34 +49,26 @@ namespace SonarAnalyzer.Rules.CSharp
                     {
                         return;
                     }
-
-                    var variables = fieldDeclaration.Declaration.Variables.Where(v => v.Initializer != null).ToList();
-                    if (variables.Count == 0)
+                    var variables = fieldDeclaration.Declaration.Variables.Where(v => v.Initializer != null).ToArray();
+                    if (variables.Length == 0)
                     {
                         return;
                     }
-
                     var containingType = c.SemanticModel.GetDeclaredSymbol(variables[0]).ContainingType;
-
                     var typeDeclaration = fieldDeclaration.FirstAncestorOrSelf<TypeDeclarationSyntax>(
-                        sn => sn.IsAnyKind(SyntaxKind.ClassDeclaration, SyntaxKind.InterfaceDeclaration, SyntaxKind.StructDeclaration, SyntaxKindEx.RecordClassDeclaration));
+                        x => x.IsAnyKind(SyntaxKind.ClassDeclaration, SyntaxKind.InterfaceDeclaration, SyntaxKind.StructDeclaration, SyntaxKindEx.RecordClassDeclaration));
 
                     foreach (var variable in variables)
                     {
-                        var identifierFieldMappings = GetIdentifierFieldMappings(variable, containingType, c.SemanticModel);
-                        var identifierTypeMappings = GetIdentifierTypeMappings(identifierFieldMappings);
-
-                        var usedTypeDeclarations = identifierTypeMappings
-                            .Select(mapping => mapping.TypeDeclaration);
-                        var isAnyInDifferentType = usedTypeDeclarations.Any(cl => cl != typeDeclaration);
-
+                        var identifierFieldMappings = IdentifierFieldMappings(variable, containingType, c.SemanticModel);
+                        var identifierTypeMappings = IdentifierTypeMappings(identifierFieldMappings);
+                        var usedTypeDeclarations = identifierTypeMappings.Select(x => x.TypeDeclaration);
                         var sameTypeIdentifiersAfterThis = identifierTypeMappings
-                            .Where(mapping => mapping.TypeDeclaration == typeDeclaration)
-                            .Where(mapping => !mapping.Identifier.Field.IsConst)
-                            .Where(mapping => mapping.Identifier.Field.DeclaringSyntaxReferences.First().Span.Start > variable.SpanStart);
-                        var isAnyAfterInSameType = sameTypeIdentifiersAfterThis.Any();
+                            .Where(x => x.TypeDeclaration == typeDeclaration)
+                            .Where(x => !x.Field.IsConst)
+                            .Where(x => x.Field.DeclaringSyntaxReferences.First().Span.Start > variable.SpanStart);
 
-                        if (isAnyInDifferentType || isAnyAfterInSameType)
+                        if (usedTypeDeclarations.Any(x => x != typeDeclaration) || sameTypeIdentifiersAfterThis.Any())
                         {
                             c.ReportIssue(Diagnostic.Create(Rule, variable.Initializer.GetLocation()));
                         }
@@ -85,59 +76,30 @@ namespace SonarAnalyzer.Rules.CSharp
                 },
                 SyntaxKind.FieldDeclaration);
 
-        private static List<IdentifierTypeDeclarationMapping> GetIdentifierTypeMappings(IEnumerable<IdentifierFieldMapping> identifierFieldMappings) =>
-            identifierFieldMappings
-                .Select(i => new IdentifierTypeDeclarationMapping
+        private static IdentifierTypeDeclarationMapping[] IdentifierTypeMappings(IEnumerable<IFieldSymbol> identifierFields) =>
+            identifierFields
+                .Select(x => new IdentifierTypeDeclarationMapping(x, GetTypeDeclaration(x)))
+                .Where(x => x.TypeDeclaration != null)
+                .ToArray();
+
+        private static IEnumerable<IFieldSymbol> IdentifierFieldMappings(VariableDeclaratorSyntax variable, INamedTypeSymbol containingType, SemanticModel semanticModel)
+        {
+            foreach (var identifier in variable.Initializer.DescendantNodes().OfType<IdentifierNameSyntax>())
+            {
+                if (containingType.MemberNames.Contains(identifier.Identifier.ValueText)
+                    && semanticModel.GetSymbolInfo(identifier).Symbol is IFieldSymbol { IsConst: false, IsStatic: true } field
+                    && containingType.Equals(field.ContainingType)
+                    && semanticModel.GetEnclosingSymbol(identifier.SpanStart) is IFieldSymbol enclosingSymbol
+                    && enclosingSymbol.ContainingType.Equals(field.ContainingType))
                 {
-                    Identifier = i,
-                    TypeDeclaration = GetTypeDeclaration(i.Field)
-                })
-                .Where(mapping => mapping.TypeDeclaration != null)
-                .ToList();
-
-        private static IEnumerable<IdentifierFieldMapping> GetIdentifierFieldMappings(VariableDeclaratorSyntax variable, INamedTypeSymbol containingType, SemanticModel semanticModel) =>
-            variable.Initializer.DescendantNodes()
-                .OfType<IdentifierNameSyntax>()
-                .Select(identifier =>
-                {
-                    if (!containingType.MemberNames.Contains(identifier.Identifier.ValueText))
-                    {
-                        return new IdentifierFieldMapping();
-                    }
-
-                    var field = semanticModel.GetSymbolInfo(identifier).Symbol as IFieldSymbol;
-
-                    return new IdentifierFieldMapping
-                    {
-                        Field = field,
-                        IsRelevant = field is { IsConst: false, IsStatic: true }
-                                     && containingType.Equals(field.ContainingType)
-                                     && semanticModel.GetEnclosingSymbol(identifier.SpanStart) is IFieldSymbol enclosingSymbol
-                                     && enclosingSymbol.ContainingType.Equals(field.ContainingType)
-                    };
-                })
-                .Where(identifier => identifier.IsRelevant);
-
-        private static TypeDeclarationSyntax GetTypeDeclaration(IFieldSymbol field)
-        {
-            var reference = field.DeclaringSyntaxReferences.FirstOrDefault();
-            return reference?.SyntaxTree == null
-                ? null
-                : reference.GetSyntax().FirstAncestorOrSelf<TypeDeclarationSyntax>();
+                    yield return field;
+                }
+            }
         }
 
-        private struct IdentifierFieldMapping
-        {
-            public IFieldSymbol Field { get; set; }
+        private static TypeDeclarationSyntax GetTypeDeclaration(IFieldSymbol field) =>
+            field.DeclaringSyntaxReferences.FirstOrDefault()?.GetSyntax().FirstAncestorOrSelf<TypeDeclarationSyntax>();
 
-            public bool IsRelevant { get; set; }
-        }
-
-        private struct IdentifierTypeDeclarationMapping
-        {
-            public IdentifierFieldMapping Identifier { get; set; }
-
-            public TypeDeclarationSyntax TypeDeclaration { get; set; }
-        }
+        private sealed record IdentifierTypeDeclarationMapping(IFieldSymbol Field, TypeDeclarationSyntax TypeDeclaration);
     }
 }
