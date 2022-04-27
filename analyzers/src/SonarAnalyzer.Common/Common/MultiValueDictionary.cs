@@ -99,6 +99,9 @@ namespace SonarAnalyzer.Common
             return dictionary;
         }
 
+        public static ILookup<TSource, TElement> ToLookup<TSource, TElement>(this IEnumerable<TSource> source, Func<TSource, IEnumerable<TElement>> elementsSelector) =>
+            source.ToLookup(x => x, elementsSelector);
+
         public static ILookup<TKey, TElement> ToLookup<TSource, TKey, TElement>(this IEnumerable<TSource> source,
                                                                                 Func<TSource, TKey> keySelector,
                                                                                 Func<TSource, IEnumerable<TElement>> elementsSelector) =>

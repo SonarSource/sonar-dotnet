@@ -148,7 +148,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     .Select(baseType => semanticModel.GetSymbolInfo(baseType.Type).Symbol as INamedTypeSymbol)
                     .WhereNotNull()
                     .Distinct()
-                    .ToLookup(x => x, x => x.AllInterfaces.AsEnumerable());
+                    .ToLookup(x => x.AllInterfaces.AsEnumerable());
 
         private static bool TryGetCollidingDeclaration(INamedTypeSymbol declaredType,
                                                        INamedTypeSymbol interfaceType,
