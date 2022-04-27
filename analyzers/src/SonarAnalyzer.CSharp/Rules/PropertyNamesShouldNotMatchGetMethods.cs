@@ -34,17 +34,14 @@ namespace SonarAnalyzer.Rules.CSharp
     public sealed class PropertyNamesShouldNotMatchGetMethods : SonarDiagnosticAnalyzer
     {
         internal const string DiagnosticId = "S4059";
-        private const string MessageFormat = "Change either the name of property '{0}' or the name of " +
-            "method '{1}' to make them distinguishable.";
+        private const string MessageFormat = "Change either the name of property '{0}' or the name of method '{1}' to make them distinguishable.";
 
-        private static readonly DiagnosticDescriptor rule =
-            DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
+        private static readonly DiagnosticDescriptor Rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
+
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(rule);
 
-        protected override void Initialize(SonarAnalysisContext context)
-        {
-            context.RegisterSyntaxNodeActionInNonGenerated(
-                c =>
+        protected override void Initialize(SonarAnalysisContext context) =>
+            context.RegisterSyntaxNodeActionInNonGenerated(                c =>
                 {
                     if (!(c.SemanticModel.GetDeclaredSymbol(c.Node) is INamedTypeSymbol classSymbol))
                     {
@@ -55,22 +52,20 @@ namespace SonarAnalyzer.Rules.CSharp
                     var properties = classMembers.OfType<IPropertySymbol>().Where(property => !property.IsOverride);
                     var methods = classMembers.OfType<IMethodSymbol>().ToList();
 
-                    foreach (var collidingMembers in GetCollidingMembers(properties, methods))
+                    foreach (var collidingMembers in CollidingMembers(properties, methods))
                     {
                         var propertyIdentifier = collidingMembers.Item1;
                         var methodIdentifier = collidingMembers.Item2;
 
                         c.ReportIssue(Diagnostic.Create(
-                            rule,
+                            Rule,
                             propertyIdentifier.GetLocation(),
                             additionalLocations: new[] { methodIdentifier.GetLocation() },
                             messageArgs: new[] { propertyIdentifier.ValueText, methodIdentifier.ValueText }));
                     }
                 }, SyntaxKind.ClassDeclaration);
-        }
 
-        private static IEnumerable<Tuple<SyntaxToken, SyntaxToken>> GetCollidingMembers(
-            IEnumerable<IPropertySymbol> properties, IEnumerable<IMethodSymbol> methods)
+        private static IEnumerable<Tuple<SyntaxToken, SyntaxToken>> CollidingMembers(IEnumerable<IPropertySymbol> properties, IEnumerable<IMethodSymbol> methods)
         {
             foreach (var property in properties)
             {
@@ -80,8 +75,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     continue;
                 }
 
-                var methodSyntax = collidingMethod.DeclaringSyntaxReferences.FirstOrDefault()?.GetSyntax()
-                    as MethodDeclarationSyntax;
+                var methodSyntax = collidingMethod.DeclaringSyntaxReferences.FirstOrDefault()?.GetSyntax() as MethodDeclarationSyntax;
 
                 if (!(property.DeclaringSyntaxReferences.FirstOrDefault()?.GetSyntax() is PropertyDeclarationSyntax propertySyntax) || methodSyntax == null)
                 {
@@ -92,10 +86,7 @@ namespace SonarAnalyzer.Rules.CSharp
             }
         }
 
-        private static bool AreCollidingNames(string propertyName, string methodName)
-        {
-            return methodName.Equals(propertyName, StringComparison.OrdinalIgnoreCase) ||
-                methodName.Equals("Get" + propertyName, StringComparison.OrdinalIgnoreCase);
-        }
+        private static bool AreCollidingNames(string propertyName, string methodName) =>
+            methodName.Equals(propertyName, StringComparison.OrdinalIgnoreCase) || methodName.Equals("Get" + propertyName, StringComparison.OrdinalIgnoreCase);
     }
 }
