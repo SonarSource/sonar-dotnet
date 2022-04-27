@@ -1,9 +1,9 @@
 ﻿record struct StaticFieldInGenericRecordStruct<T>
     where T : class
 {
-    internal static string field; // FN
+    internal static string field; // Noncompliant
 
-    public static string Prop1 { get; set; } // FN
+    public static string Prop1 { get; set; } // Noncompliant
 
     public string Prop2 { get; set; } = "";
 
@@ -13,9 +13,9 @@
 record struct StaticFieldInGenericPositionalRecordStruct<T>(int Property)
     where T : class
 {
-    internal static string field; // FN
+    internal static string field; // Noncompliant
 
-    public static string Prop1 { get; set; } // FN
+    public static string Prop1 { get; set; } // Noncompliant
 
     public string Prop2 { get; set; } = "";
 
