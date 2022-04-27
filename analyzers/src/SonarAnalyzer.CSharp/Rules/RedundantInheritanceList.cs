@@ -143,30 +143,28 @@ namespace SonarAnalyzer.Rules.CSharp
             }
         }
 
-        private static MultiValueDictionary<INamedTypeSymbol, INamedTypeSymbol> GetImplementedInterfaceMappings(BaseListSyntax baseList, SemanticModel semanticModel) =>
+        private static ILookup<INamedTypeSymbol, INamedTypeSymbol> GetImplementedInterfaceMappings(BaseListSyntax baseList, SemanticModel semanticModel) =>
             baseList.Types
                     .Select(baseType => semanticModel.GetSymbolInfo(baseType.Type).Symbol as INamedTypeSymbol)
                     .WhereNotNull()
                     .Distinct()
-                    .ToMultiValueDictionary(x => x, x => x.AllInterfaces);
+                    .ToLookup(x => x, x => x.AllInterfaces.AsEnumerable());
 
         private static bool TryGetCollidingDeclaration(INamedTypeSymbol declaredType,
                                                        INamedTypeSymbol interfaceType,
-                                                       MultiValueDictionary<INamedTypeSymbol, INamedTypeSymbol> interfaceMappings,
+                                                       ILookup<INamedTypeSymbol, INamedTypeSymbol> interfaceMappings,
                                                        out INamedTypeSymbol collidingDeclaration)
         {
-            var collisionMapping = interfaceMappings
-                .Where(x => x.Key.IsInterface())
-                .FirstOrDefault(x => x.Value.Contains(interfaceType));
+            var collisionMapping = interfaceMappings.FirstOrDefault(x => x.Key.IsInterface() && x.Contains(interfaceType));
 
-            if (collisionMapping.Key != null)
+            if (collisionMapping?.Key != null)
             {
                 collidingDeclaration = collisionMapping.Key;
                 return true;
             }
 
             var baseClassMapping = interfaceMappings.FirstOrDefault(x => x.Key.IsClass());
-            if (baseClassMapping.Key == null)
+            if (baseClassMapping?.Key == null)
             {
                 collidingDeclaration = null;
                 return false;
