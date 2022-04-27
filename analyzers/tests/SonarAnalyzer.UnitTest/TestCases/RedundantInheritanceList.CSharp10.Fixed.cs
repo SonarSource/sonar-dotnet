@@ -1,11 +1,11 @@
 ﻿using System;
 
-record Record { } // Fixed
-
-record struct RedunantInterfaceImpl : IContract, IBaseContract { } // FN
-
-record struct RedunantInterfaceImplPositionalRecord(int SomeProperty) : IContract, IBaseContract { } // FN
+interface IBaseContract { }
 
 interface IContract : IBaseContract { }
 
-interface IBaseContract { }
+record Record { } // Fixed
+
+record struct RedunantInterfaceImpl : IContract { } // Fixed
+
+record struct RedunantInterfaceImplPositionalRecord(int SomeProperty) : IContract { } // Fixed
