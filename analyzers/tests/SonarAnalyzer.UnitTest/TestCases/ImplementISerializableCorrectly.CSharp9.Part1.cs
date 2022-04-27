@@ -20,10 +20,18 @@ namespace Tests.Diagnostics
     }
 
     [Serializable]
-    public record SerializableRecord_PositionalNonserializable(NonSerializedType PositionalNonserializableField) : ISerializable    // FN, should raise similar rule not to put non-serializable parameters here. It cannot be annotated with [NonSerialized]
+    public record SerializableRecord_PositionalNonserializable(NonSerializedType PositionalNonserializableField) : ISerializable    // FN
     {
         public SerializableRecord_PositionalNonserializable() : this((NonSerializedType)null) { }
         protected SerializableRecord_PositionalNonserializable(SerializationInfo info, StreamingContext context) : this((NonSerializedType)null) { }
+        public virtual void GetObjectData(SerializationInfo info, StreamingContext context) { }
+    }
+
+    [Serializable]
+    public record SerializableRecord_PositionalNonserializable_AttributeOnField([field:NonSerialized]NonSerializedType PositionalNonserializableField) : ISerializable  // Compliant
+    {
+        public SerializableRecord_PositionalNonserializable_AttributeOnField() : this((NonSerializedType)null) { }
+        protected SerializableRecord_PositionalNonserializable_AttributeOnField(SerializationInfo info, StreamingContext context) : this((NonSerializedType)null) { }
         public virtual void GetObjectData(SerializationInfo info, StreamingContext context) { }
     }
 

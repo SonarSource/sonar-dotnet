@@ -35,3 +35,9 @@ public record R2<T>(T X) // Compliant
 public record R3<T>(int X) // Noncompliant
 {
 }
+
+public interface IUsedInBody<T>
+{
+    object WithDefaultImplementation() =>
+        default(T);
+}

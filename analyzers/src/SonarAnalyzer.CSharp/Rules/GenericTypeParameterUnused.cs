@@ -67,6 +67,7 @@ namespace SonarAnalyzer.Rules.CSharp
                      }
                  },
                  SyntaxKind.ClassDeclaration,
+                 SyntaxKind.InterfaceDeclaration,
                  SyntaxKindEx.RecordClassDeclaration,
                  SyntaxKindEx.RecordStructDeclaration,
                  SyntaxKind.StructDeclaration);
@@ -90,6 +91,7 @@ namespace SonarAnalyzer.Rules.CSharp
         private static ParametersInfo CreateParametersInfo(SyntaxNodeAnalysisContext c) =>
             c.Node switch
             {
+                InterfaceDeclarationSyntax interfaceDeclaration => new ParametersInfo(interfaceDeclaration.TypeParameterList, "interface"),
                 ClassDeclarationSyntax classDeclaration => new ParametersInfo(classDeclaration.TypeParameterList, "class"),
                 StructDeclarationSyntax structDeclaration => new ParametersInfo(structDeclaration.TypeParameterList, "struct"),
                 MethodDeclarationSyntax methodDeclaration when IsMethodCandidate(methodDeclaration, c.SemanticModel) => new ParametersInfo(methodDeclaration.TypeParameterList, "method"),

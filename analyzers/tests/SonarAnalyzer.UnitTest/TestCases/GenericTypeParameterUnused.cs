@@ -191,4 +191,30 @@ namespace Tests.Diagnostics
     public struct StructUnused<T>   // Noncompliant {{'T' is not used in the struct.}}
     {
     }
+
+    public interface IUsedAsReturnType<T>
+    {
+        T Create();
+    }
+
+    public interface IUsedAsProperty<T>
+    {
+        T Value { get; set; }
+    }
+
+    public interface IUsedAsArgument<T>
+    {
+        object Create(T arg);
+    }
+
+    public interface IUnusedEmpty<T>    // Noncompliant {{'T' is not used in the interface.}}
+    {
+    }
+
+    public interface IUnused<T>         // Noncompliant
+    {
+        object Create();
+        object Create(object arg);
+        object Value { get; set; }
+    }
 }
