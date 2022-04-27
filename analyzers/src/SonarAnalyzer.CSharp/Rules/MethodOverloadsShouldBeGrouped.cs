@@ -47,6 +47,7 @@ namespace SonarAnalyzer.Rules.CSharp
             member switch
             {
                 ConstructorDeclarationSyntax constructor => new MemberInfo(c, member, constructor.Identifier, constructor.IsStatic(), false, true),
+                MethodDeclarationSyntax { ExplicitInterfaceSpecifier: { } } => null, // Skip explicit interface implementations
                 MethodDeclarationSyntax method => new MemberInfo(c, member, method.Identifier, method.IsStatic(), method.Modifiers.Any(SyntaxKind.AbstractKeyword), true),
                 _ => null,
             };
