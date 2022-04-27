@@ -66,13 +66,9 @@ namespace SonarAnalyzer.Rules.CSharp
 
                     foreach (var variable in variables)
                     {
-                        var identifierFieldMappings = IdentifierFieldMappings(variable, containingType, c.SemanticModel);
-                        var identifierTypeMappings = IdentifierTypeMappings(identifierFieldMappings);
-                        var usedTypeDeclarations = identifierTypeMappings.Select(x => x.TypeDeclaration);
-                        var sameTypeIdentifiersAfterThis = identifierTypeMappings.Where(x => x.TypeDeclaration == typeDeclaration
-                                                                                             && !x.Field.IsConst
-                                                                                             && x.Field.DeclaringSyntaxReferences.First().Span.Start > variable.SpanStart);
-                        if (usedTypeDeclarations.Any(x => x != typeDeclaration) || sameTypeIdentifiersAfterThis.Any())
+                        if (IdentifierFields(variable, containingType, c.SemanticModel)
+                                .Select(x => new IdentifierTypeDeclarationMapping(x, GetTypeDeclaration(x)))
+                                .Any(x => x.TypeDeclaration is not null && (x.TypeDeclaration != typeDeclaration || x.Field.DeclaringSyntaxReferences.First().Span.Start > variable.SpanStart)))
                         {
                             c.ReportIssue(Diagnostic.Create(Rule, variable.Initializer.GetLocation()));
                         }
@@ -80,13 +76,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 },
                 SyntaxKind.FieldDeclaration);
 
-        private static IdentifierTypeDeclarationMapping[] IdentifierTypeMappings(IEnumerable<IFieldSymbol> identifierFields) =>
-            identifierFields
-                .Select(x => new IdentifierTypeDeclarationMapping(x, GetTypeDeclaration(x)))
-                .Where(x => x.TypeDeclaration != null)
-                .ToArray();
-
-        private static IEnumerable<IFieldSymbol> IdentifierFieldMappings(VariableDeclaratorSyntax variable, INamedTypeSymbol containingType, SemanticModel semanticModel)
+        private static IEnumerable<IFieldSymbol> IdentifierFields(VariableDeclaratorSyntax variable, INamedTypeSymbol containingType, SemanticModel semanticModel)
         {
             foreach (var identifier in variable.Initializer.DescendantNodes().OfType<IdentifierNameSyntax>())
             {
