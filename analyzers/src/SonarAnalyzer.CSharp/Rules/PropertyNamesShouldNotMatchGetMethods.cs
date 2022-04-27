@@ -44,9 +44,13 @@ namespace SonarAnalyzer.Rules.CSharp
         protected override void Initialize(SonarAnalysisContext context) =>
             context.RegisterSyntaxNodeActionInNonGenerated(c =>
                 {
-                    var classMembers = ((INamedTypeSymbol)c.ContainingSymbol).GetMembers().Where(SymbolHelper.IsPubliclyAccessible);
-                    var properties = classMembers.OfType<IPropertySymbol>().Where(property => !property.IsOverride).ToArray();
-                    var methods = classMembers.OfType<IMethodSymbol>().ToArray();
+                    if (c.SemanticModel.GetDeclaredSymbol(c.Node) is not INamedTypeSymbol typeSymbol)
+                    {
+                        return;
+                    }
+                    var typeMembers = typeSymbol.GetMembers().Where(SymbolHelper.IsPubliclyAccessible);
+                    var properties = typeMembers.OfType<IPropertySymbol>().Where(property => !property.IsOverride).ToArray();
+                    var methods = typeMembers.OfType<IMethodSymbol>().ToArray();
 
                     foreach (var collidingMembers in CollidingMembers(properties, methods))
                     {
