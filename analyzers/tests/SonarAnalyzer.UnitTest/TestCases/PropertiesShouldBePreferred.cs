@@ -62,7 +62,7 @@ namespace MyLibrary
 
     public struct SomeStruct
     {
-        string GetStuff() { return ""; } // FN
+        public string GetStuff() { return ""; } // Noncompliant
     }
 
     public interface IFoo
