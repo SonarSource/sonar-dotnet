@@ -66,13 +66,11 @@ namespace SonarAnalyzer.Rules.CSharp
             {
                 return;
             }
-
             var baseTypeSyntax = typeDeclaration.BaseList.Types.First().Type;
             if (context.SemanticModel.GetSymbolInfo(baseTypeSyntax).Symbol is not ITypeSymbol baseTypeSymbol)
             {
                 return;
             }
-
             if (baseTypeSymbol.Is(KnownType.System_Object))
             {
                 var location = GetLocationWithToken(baseTypeSyntax, typeDeclaration.BaseList.Types);
@@ -165,8 +163,8 @@ namespace SonarAnalyzer.Rules.CSharp
                                                        out INamedTypeSymbol collidingDeclaration)
         {
             var collisionMapping = interfaceMappings
-                .Where(i => i.Key.IsInterface())
-                .FirstOrDefault(v => v.Value.Contains(interfaceType));
+                .Where(x => x.Key.IsInterface())
+                .FirstOrDefault(x => x.Value.Contains(interfaceType));
 
             if (collisionMapping.Key != null)
             {
@@ -174,7 +172,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 return true;
             }
 
-            var baseClassMapping = interfaceMappings.FirstOrDefault(i => i.Key.IsClass());
+            var baseClassMapping = interfaceMappings.FirstOrDefault(x => x.Key.IsClass());
             if (baseClassMapping.Key == null)
             {
                 collidingDeclaration = null;
@@ -188,7 +186,7 @@ namespace SonarAnalyzer.Rules.CSharp
         private static bool CanInterfaceBeRemovedBasedOnMembers(INamedTypeSymbol declaredType, INamedTypeSymbol interfaceType)
         {
             var allMembersOfInterface = interfaceType.AllInterfaces.Concat(new[] { interfaceType })
-                .SelectMany(i => i.GetMembers())
+                .SelectMany(x => x.GetMembers())
                 .ToList();
 
             if (!allMembersOfInterface.Any())
@@ -201,7 +199,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 var classMember = declaredType.FindImplementationForInterfaceMember(interfaceMember);
                 if (classMember != null
                     && (classMember.ContainingType.Equals(declaredType)
-                    || !classMember.ContainingType.Interfaces.SelectMany(i => i.AllInterfaces.Concat(new[] { i })).Contains(interfaceType)))
+                    || !classMember.ContainingType.Interfaces.SelectMany(x => x.AllInterfaces.Concat(new[] { x })).Contains(interfaceType)))
                 {
                     return false;
                 }
