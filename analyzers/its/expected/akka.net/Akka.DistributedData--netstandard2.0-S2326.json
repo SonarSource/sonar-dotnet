@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S2326",
+"message":  "'T' is not used in the interface.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Key.cs",
+"region":  {
+"startLine":  27,
+"startColumn":  27,
+"endLine":  27,
+"endColumn":  32
+}
+}
+}
+]
+}

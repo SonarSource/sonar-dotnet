@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S2326",
+"message":  "'TIn' is not used in the interface.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Stage\Stage.cs",
+"region":  {
+"startLine":  35,
+"startColumn":  29,
+"endLine":  35,
+"endColumn":  35
+}
+}
+},
+{
+"id":  "S2326",
+"message":  "'TOut' is not used in the interface.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Stage\Stage.cs",
+"region":  {
+"startLine":  35,
+"startColumn":  37,
+"endLine":  35,
+"endColumn":  45
+}
+}
+}
+]
+}
