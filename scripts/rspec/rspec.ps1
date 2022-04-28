@@ -97,31 +97,6 @@ function GetRules($lang) {
     }
 }
 
-# Copies the downloaded RSPEC html files for all rules in the specified language
-# to 'SonarAnalyzer.Utilities\Rules.Description'. If a rule is present in the otherLanguageRules
-# collection, a language suffix will be added to the target file name, so that the VB.NET and
-# C# files could have different html resources.
-function CopyResources($lang, $rules, $otherLanguageRules) {
-    $descriptionsFolder = "${sonaranalyzerPath}\\src\\SonarAnalyzer.Utilities\\Rules.Description"
-    $rspecFolder = GetRspecDownloadPath $lang
-
-    $source_suffix = "_" + $ruleapiLanguageMap.Get_Item($lang)
-
-    foreach ($rule in $rules) {
-        $suffix = ""
-        if ($otherLanguageRules -contains $rule) {
-            $suffix = "_$($resourceLanguageMap.Get_Item($lang))"
-
-            $sharedLanguageDescription = "${descriptionsFolder}\\${rule}.html"
-            if (Test-Path $sharedLanguageDescription) {
-                Remove-Item $sharedLanguageDescription -Force
-            }
-        }
-
-        Copy-Item "${rspecFolder}\\${rule}${source_suffix}.html" "${descriptionsFolder}\\${rule}${suffix}.html"
-    }
-}
-
 function UpdateTestEntry($rule) {
     $ruleType = $rule.type
     if (!$ruleType) {
@@ -135,7 +110,8 @@ function UpdateTestEntry($rule) {
         Set-Content "${ruleTypeTestCase}" -Encoding UTF8
 }
 
-function GetRulesInfo($lang, $rules) {
+function GetRulesInfo($lang) {
+    $rules = GetRules $lang
     $rspecFolder = GetRspecDownloadPath $lang
     $suffix = $ruleapiLanguageMap.Get_Item($lang)
 
@@ -357,13 +333,8 @@ else {
 Write-Host "Ran rule-api, will move back to root"
 popd
 
-$csRules = GetRules "cs"
-$vbRules = GetRules "vbnet"
-
-CopyResources "cs" $csRules $vbRules
-CopyResources "vbnet" $vbRules $csRules
-$csRuleData = GetRulesInfo "cs" $csRules
-$vbRuleData = GetRulesInfo "vbnet" $vbRules
+$csRuleData = GetRulesInfo "cs"
+$vbRuleData = GetRulesInfo "vbnet"
 
 if ($className -And $ruleKey) {
     if ($language -eq "cs") {

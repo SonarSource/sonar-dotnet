@@ -16,11 +16,4 @@
   <ItemGroup>
     <Compile Include="..\Signing.cs" Link="Properties\Signing.cs" />
   </ItemGroup>
-
-  <ItemGroup>
-    <EmbeddedResource Include="Rules.Description\*.html">
-      <SonarQubeExclude>true</SonarQubeExclude>
-    </EmbeddedResource>
-  </ItemGroup>
-
 </Project>
