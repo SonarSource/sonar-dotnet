@@ -58,8 +58,8 @@ class NonCompliant
         Guid defaultValue = default; // Noncompliant
         var defaultOfGuid = default(Guid); // Noncompliant
         Property = default; // Noncompliant
-        var instance = new GuidClass(default); // Noncompliant
-        instance.Method(default); // Noncompliant
+        var guidAsParameter = new GuidClass(default); // Noncompliant
+        guidAsParameter.Method(default); // Noncompliant
     }
 
     void EmptyString()
