@@ -55,6 +55,7 @@ Class NonCompliant
         Dim instance As New GuidClass(Nothing) ' Noncompliant
         instance.Method(Nothing) ' Noncompliant
         Prop = Nothing ' Noncompliant
+        Field = Nothing ' Noncompliant
     End Sub
 
     Sub EmptyString()

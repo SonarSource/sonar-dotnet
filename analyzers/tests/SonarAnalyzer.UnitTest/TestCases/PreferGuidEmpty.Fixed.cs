@@ -52,13 +52,14 @@ class NonCompliant
         var ctor = Guid.Empty; // Fixed
     }
 
-    void DefaultInintiation()
+    void DefaultInitialization()
     {
         Guid defaultValue = Guid.Empty; // Fixed
         var defaultOfGuid = Guid.Empty; // Fixed
         Property = Guid.Empty; // Fixed
-        var instance = new GuidClass(Guid.Empty); // Fixed
-        instance.Method(Guid.Empty); // Fixed
+        var guidAsParameter = new GuidClass(Guid.Empty); // Fixed
+        guidAsParameter.Method(Guid.Empty); // Fixed
+        field = Guid.Empty; // Fixed
     }
 
     void EmptyString()

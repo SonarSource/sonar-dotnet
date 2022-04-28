@@ -60,6 +60,7 @@ class NonCompliant
         Property = default; // Noncompliant
         var guidAsParameter = new GuidClass(default); // Noncompliant
         guidAsParameter.Method(default); // Noncompliant
+        field = default; // Noncompliant
     }
 
     void EmptyString()
