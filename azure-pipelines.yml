@@ -196,10 +196,10 @@ stages:
       - powershell: |
           . .\scripts\utils.ps1
 
-          CreateFolder("coverage")
+          CreateFolder("coverage2")
           CreateFolder("TestResults")
 
-          dotnet test analyzers\SonarAnalyzer.sln --configuration $(BuildConfiguration) -p:CollectCoverage=true -p:CoverletOutput="$(Build.SourcesDirectory)\coverage\net6.0.xml" -r "./TestResults" -p:CoverletOutputFormat=opencover --no-build --no-restore -l trx
+          dotnet test analyzers\SonarAnalyzer.sln --configuration $(BuildConfiguration) -p:CollectCoverage=true -p:CoverletOutput="$(Build.SourcesDirectory)\coverage2\net6.0.xml" -r "./TestResults" -p:CoverletOutputFormat=opencover --no-build --no-restore -l trx
           ls
           ls $(Build.SourcesDirectory)/coverage
           Test-ExitCode "ERROR: Unit tests for net6.0 FAILED."
