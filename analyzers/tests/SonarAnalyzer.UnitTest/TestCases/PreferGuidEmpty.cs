@@ -53,7 +53,7 @@ class NonCompliant
         //         ^^^^^^^^^^
     }
 
-    void DefaultInintiation()
+    void DefaultInitialization()
     {
         Guid defaultValue = default; // Noncompliant
         var defaultOfGuid = default(Guid); // Noncompliant
