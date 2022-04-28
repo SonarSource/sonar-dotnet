@@ -24,6 +24,7 @@ using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using SonarAnalyzer.Extensions;
+using StyleCop.Analyzers.Lightup;
 
 namespace SonarAnalyzer.Helpers.Facade
 {
@@ -58,7 +59,9 @@ namespace SonarAnalyzer.Helpers.Facade
             {
                 ObjectCreationExpressionSyntax objectCreation => objectCreation.ArgumentList?.Arguments.Select(x => x.Expression),
                 null => Enumerable.Empty<SyntaxNode>(),
-                _ => throw InvalidOperation(node, nameof(ArgumentExpressions))
+                _ => ImplicitObjectCreationExpressionSyntaxWrapper.IsInstance(node)
+                ? Enumerable.Empty<SyntaxNode>()
+                : throw InvalidOperation(node, nameof(ArgumentExpressions))
             };
 
         public override SyntaxNode BinaryExpressionLeft(SyntaxNode binaryExpression) =>

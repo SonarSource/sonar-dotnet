@@ -27,6 +27,7 @@ namespace SonarAnalyzer.Helpers.Facade
         abstract TSyntaxKind[] ClassAndRecordDeclaration { get; }
         abstract TSyntaxKind[] ComparisonKinds { get; }
         abstract TSyntaxKind ConstructorDeclaration { get; }
+        abstract TSyntaxKind[] DefaultExpressions { get; }
         abstract TSyntaxKind EnumDeclaration { get; }
         abstract TSyntaxKind FieldDeclaration { get; }
         abstract TSyntaxKind IdentifierName { get; }
@@ -40,6 +41,5 @@ namespace SonarAnalyzer.Helpers.Facade
         abstract TSyntaxKind SimpleMemberAccessExpression { get; }
         abstract TSyntaxKind StringLiteralExpression { get; }
         abstract TSyntaxKind[] TypeDeclaration { get; }
-        abstract TSyntaxKind[] DefaultExpressions { get; }
     }
 }

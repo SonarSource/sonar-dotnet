@@ -30,12 +30,16 @@ namespace SonarAnalyzer.UnitTest.Rules
         private readonly VerifierBuilder builderVB = new VerifierBuilder<VB.PreferGuidEmpty>();
 
         [TestMethod]
-        [TestCategory("Rule")]
         public void PreferGuidEmpty_CS() =>
             builderCS.AddPaths("PreferGuidEmpty.cs").Verify();
 
+#if NET
         [TestMethod]
-        [TestCategory("Rule")]
+        public void PreferGuidEmpty_CSharp9() =>
+            builderCS.WithOptions(ParseOptionsHelper.FromCSharp9).AddPaths("PreferGuidEmpty.CSharp9.cs").Verify();
+#endif
+
+        [TestMethod]
         public void PreferGuidEmpty_VB() =>
             builderVB.AddPaths("PreferGuidEmpty.vb").Verify();
 
