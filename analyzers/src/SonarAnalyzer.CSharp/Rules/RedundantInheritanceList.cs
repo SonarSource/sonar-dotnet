@@ -18,6 +18,7 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System;
 using System.Collections.Immutable;
 using System.Globalization;
 using System.Linq;
@@ -50,63 +51,48 @@ namespace SonarAnalyzer.Rules.CSharp
 
         protected override void Initialize(SonarAnalysisContext context)
         {
-            context.RegisterSyntaxNodeActionInNonGenerated(CheckEnum, SyntaxKind.EnumDeclaration);
-            context.RegisterSyntaxNodeActionInNonGenerated(CheckInterface, SyntaxKind.InterfaceDeclaration);
-            context.RegisterSyntaxNodeActionInNonGenerated(CheckClassAndRecord,
-                                                           SyntaxKind.ClassDeclaration,
-                                                           SyntaxKind.StructDeclaration,
-                                                           SyntaxKindEx.RecordClassDeclaration,
-                                                           SyntaxKindEx.RecordStructDeclaration);
+            context.RegisterSyntaxNodeActionInNonGenerated(c =>
+            {
+                if (c.IsRedundantPositionalRecordContext() || IsBaseListNullOrEmpty((BaseTypeDeclarationSyntax)c.Node))
+                {
+                    return;
+                }
+                switch (c.Node)
+                {
+                    case EnumDeclarationSyntax { BaseList: { Types: { Count: >0 } } } x:
+                        ReportRedundantBaseType(c, x, KnownType.System_Int32, MessageEnum);
+                        break;
+                    case TypeDeclarationSyntax { BaseList: { Types: { Count: > 0 } } } x when x is not InterfaceDeclarationSyntax:
+                        ReportRedundantBaseType(c, x, KnownType.System_Object, MessageObjectBase);
+                        ReportRedundantInterfaces(c, x);
+                        break;
+                    case InterfaceDeclarationSyntax x:
+                        ReportRedundantInterfaces(c, x);
+                        break;
+                    default:
+                        throw new NotImplementedException();
+                }
+            },
+            SyntaxKind.EnumDeclaration,
+            SyntaxKind.InterfaceDeclaration,
+            SyntaxKind.ClassDeclaration,
+            SyntaxKind.StructDeclaration,
+            SyntaxKindEx.RecordClassDeclaration,
+            SyntaxKindEx.RecordStructDeclaration);
         }
 
-        private static void CheckClassAndRecord(SyntaxNodeAnalysisContext context)
+        private static void ReportRedundantBaseType(SyntaxNodeAnalysisContext context, BaseTypeDeclarationSyntax typeDeclaration, KnownType redundantType, string message)
         {
-            var typeDeclaration = (TypeDeclarationSyntax)context.Node;
-            if (context.IsRedundantPositionalRecordContext() || IsBaseListNullOrEmpty(typeDeclaration))
-            {
-                return;
-            }
             var baseTypeSyntax = typeDeclaration.BaseList.Types.First().Type;
             if (context.SemanticModel.GetSymbolInfo(baseTypeSyntax).Symbol is not ITypeSymbol baseTypeSymbol)
             {
                 return;
             }
-            if (baseTypeSymbol.Is(KnownType.System_Object))
+            if (baseTypeSymbol.Is(redundantType))
             {
                 var location = GetLocationWithToken(baseTypeSyntax, typeDeclaration.BaseList.Types);
-                context.ReportIssue(Diagnostic.Create(Rule, location, DiagnosticsProperties(redundantIndex: 0), MessageObjectBase));
+                context.ReportIssue(Diagnostic.Create(Rule, location, DiagnosticsProperties(redundantIndex: 0), message));
             }
-
-            ReportRedundantInterfaces(context, typeDeclaration);
-        }
-
-        private static void CheckInterface(SyntaxNodeAnalysisContext context)
-        {
-            var interfaceDeclaration = (InterfaceDeclarationSyntax)context.Node;
-            if (IsBaseListNullOrEmpty(interfaceDeclaration))
-            {
-                return;
-            }
-
-            ReportRedundantInterfaces(context, interfaceDeclaration);
-        }
-
-        private static void CheckEnum(SyntaxNodeAnalysisContext context)
-        {
-            var enumDeclaration = (EnumDeclarationSyntax)context.Node;
-            if (IsBaseListNullOrEmpty(enumDeclaration))
-            {
-                return;
-            }
-
-            var baseTypeSyntax = enumDeclaration.BaseList.Types.First().Type;
-            var baseTypeSymbol = context.SemanticModel.GetSymbolInfo(baseTypeSyntax).Symbol as ITypeSymbol;
-            if (!baseTypeSymbol.Is(KnownType.System_Int32))
-            {
-                return;
-            }
-
-            context.ReportIssue(Diagnostic.Create(Rule, enumDeclaration.BaseList.GetLocation(), DiagnosticsProperties(redundantIndex: 0), MessageEnum));
         }
 
         private static void ReportRedundantInterfaces(SyntaxNodeAnalysisContext context, BaseTypeDeclarationSyntax typeDeclaration)
