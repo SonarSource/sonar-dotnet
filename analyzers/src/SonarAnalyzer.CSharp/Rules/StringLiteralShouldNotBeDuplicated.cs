@@ -39,6 +39,7 @@ namespace SonarAnalyzer.Rules.CSharp
             SyntaxKind.ClassDeclaration,
             SyntaxKind.StructDeclaration,
             SyntaxKindEx.RecordClassDeclaration,
+            SyntaxKindEx.RecordStructDeclaration,
             SyntaxKind.CompilationUnit
         };
 
