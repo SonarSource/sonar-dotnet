@@ -19,6 +19,7 @@
  */
 
 using System;
+using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Globalization;
 using System.Linq;
@@ -49,28 +50,25 @@ namespace SonarAnalyzer.Rules.CSharp
 
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
 
-        protected override void Initialize(SonarAnalysisContext context)
-        {
+        protected override void Initialize(SonarAnalysisContext context) =>
             context.RegisterSyntaxNodeActionInNonGenerated(c =>
             {
-                if (c.IsRedundantPositionalRecordContext() || IsBaseListNullOrEmpty((BaseTypeDeclarationSyntax)c.Node))
+                if (c.IsRedundantPositionalRecordContext() || c.Node is not BaseTypeDeclarationSyntax { BaseList: { Types: { Count: > 0 } } })
                 {
                     return;
                 }
                 switch (c.Node)
                 {
-                    case EnumDeclarationSyntax { BaseList: { Types: { Count: >0 } } } x:
-                        ReportRedundantBaseType(c, x, KnownType.System_Int32, MessageEnum);
+                    case EnumDeclarationSyntax enumDeclaration:
+                        ReportRedundantBaseType(c, enumDeclaration, KnownType.System_Int32, MessageEnum);
                         break;
-                    case TypeDeclarationSyntax { BaseList: { Types: { Count: > 0 } } } x when x is not InterfaceDeclarationSyntax:
-                        ReportRedundantBaseType(c, x, KnownType.System_Object, MessageObjectBase);
-                        ReportRedundantInterfaces(c, x);
+                    case TypeDeclarationSyntax nonInterfaceDeclaration when nonInterfaceDeclaration is not { RawKind: (int)SyntaxKind.InterfaceDeclaration }:
+                        ReportRedundantBaseType(c, nonInterfaceDeclaration, KnownType.System_Object, MessageObjectBase);
+                        ReportRedundantInterfaces(c, nonInterfaceDeclaration);
                         break;
-                    case InterfaceDeclarationSyntax x:
-                        ReportRedundantInterfaces(c, x);
+                    case InterfaceDeclarationSyntax interfaceDeclaration:
+                        ReportRedundantInterfaces(c, interfaceDeclaration);
                         break;
-                    default:
-                        throw new NotImplementedException();
                 }
             },
             SyntaxKind.EnumDeclaration,
@@ -79,7 +77,6 @@ namespace SonarAnalyzer.Rules.CSharp
             SyntaxKind.StructDeclaration,
             SyntaxKindEx.RecordClassDeclaration,
             SyntaxKindEx.RecordStructDeclaration);
-        }
 
         private static void ReportRedundantBaseType(SyntaxNodeAnalysisContext context, BaseTypeDeclarationSyntax typeDeclaration, KnownType redundantType, string message)
         {
@@ -98,7 +95,7 @@ namespace SonarAnalyzer.Rules.CSharp
         private static void ReportRedundantInterfaces(SyntaxNodeAnalysisContext context, BaseTypeDeclarationSyntax typeDeclaration)
         {
             var declaredType = context.SemanticModel.GetDeclaredSymbol(typeDeclaration);
-            if (declaredType == null)
+            if (declaredType is null)
             {
                 return;
             }
@@ -142,27 +139,27 @@ namespace SonarAnalyzer.Rules.CSharp
                                                        out INamedTypeSymbol collidingDeclaration)
         {
             var collisionMapping = interfaceMappings.FirstOrDefault(x => x.Key.IsInterface() && x.Contains(interfaceType));
-
-            if (collisionMapping?.Key != null)
+            if (collisionMapping?.Key is not null)
             {
                 collidingDeclaration = collisionMapping.Key;
                 return true;
             }
 
             var baseClassMapping = interfaceMappings.FirstOrDefault(x => x.Key.IsClass());
-            if (baseClassMapping?.Key == null)
+            if (baseClassMapping?.Key is null)
             {
                 collidingDeclaration = null;
                 return false;
             }
 
-            collidingDeclaration = baseClassMapping.Key;
-            return CanInterfaceBeRemovedBasedOnMembers(declaredType, interfaceType);
+            var canBeRemoved = CanInterfaceBeRemovedBasedOnMembers(declaredType, interfaceType);
+            collidingDeclaration = canBeRemoved ? baseClassMapping.Key : null;
+            return canBeRemoved;
         }
 
         private static bool CanInterfaceBeRemovedBasedOnMembers(INamedTypeSymbol declaredType, INamedTypeSymbol interfaceType)
         {
-            var allMembersOfInterface = interfaceType.AllInterfaces.Concat(new[] { interfaceType })
+            var allMembersOfInterface = AllInterfacesAndSelf(interfaceType)
                 .SelectMany(x => x.GetMembers())
                 .ToList();
 
@@ -174,14 +171,17 @@ namespace SonarAnalyzer.Rules.CSharp
             foreach (var interfaceMember in allMembersOfInterface)
             {
                 var classMember = declaredType.FindImplementationForInterfaceMember(interfaceMember);
-                if (classMember != null
+                if (classMember is not null
                     && (classMember.ContainingType.Equals(declaredType)
-                    || !classMember.ContainingType.Interfaces.SelectMany(x => x.AllInterfaces.Concat(new[] { x })).Contains(interfaceType)))
+                    || !classMember.ContainingType.Interfaces.SelectMany(x => AllInterfacesAndSelf(x)).Contains(interfaceType)))
                 {
                     return false;
                 }
             }
             return true;
+
+            static IEnumerable<INamedTypeSymbol> AllInterfacesAndSelf(INamedTypeSymbol interfaceType) =>
+                interfaceType.AllInterfaces.Concat(new[] { interfaceType });
         }
 
         private static Location GetLocationWithToken(TypeSyntax type, SeparatedSyntaxList<BaseTypeSyntax> baseTypes)
@@ -203,9 +203,6 @@ namespace SonarAnalyzer.Rules.CSharp
 
             return Location.Create(type.SyntaxTree, new TextSpan(start, end - start));
         }
-
-        private static bool IsBaseListNullOrEmpty(BaseTypeDeclarationSyntax baseTypeDeclaration) =>
-            baseTypeDeclaration.BaseList == null || !baseTypeDeclaration.BaseList.Types.Any();
 
         private static ImmutableDictionary<string, string> DiagnosticsProperties(int redundantIndex)
         {
