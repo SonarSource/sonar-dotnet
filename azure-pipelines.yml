@@ -168,6 +168,7 @@ stages:
           dotnet test analyzers\SonarAnalyzer.sln --configuration $(BuildConfiguration) -f net48 -p:CollectCoverage=true -p:CoverletOutput="$(Build.SourcesDirectory)\coverage\net48.xml" -r "./TestResults" -p:CoverletOutputFormat=opencover --no-build --no-restore -l trx
           ls
           ls $(Build.SourcesDirectory)/coverage
+          Rename-Item -Path "$(Build.SourcesDirectory)/coverage/net48.net48.xml" -NewName "net48.xml"
           Test-ExitCode "ERROR: Unit tests for net48 FAILED."
         displayName: '.Net UTs'
 
@@ -202,6 +203,7 @@ stages:
           dotnet test analyzers\SonarAnalyzer.sln --configuration $(BuildConfiguration) -p:CollectCoverage=true -p:CoverletOutput="$(Build.SourcesDirectory)\coverage2\net6.0.xml" -r "./TestResults" -p:CoverletOutputFormat=opencover --no-build --no-restore -l trx
           ls
           ls $(Build.SourcesDirectory)/coverage2
+          Rename-Item -Path "$(Build.SourcesDirectory)/coverage/net6.0.net6.0.xml" -NewName "net6.0.xml"
           Test-ExitCode "ERROR: Unit tests for net6.0 FAILED."
         displayName: '.Net UTs'
 
