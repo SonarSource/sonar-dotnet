@@ -67,6 +67,7 @@ namespace SonarAnalyzer.Rules.CSharp
             "purl.org",
             "xmlns.com",
             "schemas.google.com",
+            "schemas.microsoft.com",
             "a9.com",
             "ns.adobe.com",
             "ltsc.ieee.org",

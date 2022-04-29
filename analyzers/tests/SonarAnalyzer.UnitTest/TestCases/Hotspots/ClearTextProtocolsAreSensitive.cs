@@ -169,6 +169,7 @@ namespace Tests.Diagnostics
             "http://purl.org",
             "http://xmlns.com",
             "http://schemas.google.com",
+            "http://schemas.microsoft.com",
             "http://a9.com",
             "http://ns.adobe.com",
             "http://ltsc.ieee.org",
@@ -188,6 +189,7 @@ namespace Tests.Diagnostics
             "http://subdomain.purl.org",                   // Noncompliant
             "http://subdomain.xmlns.com",                  // Noncompliant
             "http://subdomain.schemas.google.com",         // Noncompliant
+            "http://subdomain.schemas.microsoft.com",      // Noncompliant
             "http://subdomain.a9.com",                     // Noncompliant
             "http://subdomain.ns.adobe.com",               // Noncompliant
             "http://subdomain.ltsc.ieee.org",              // Noncompliant
