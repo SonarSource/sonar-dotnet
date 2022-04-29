@@ -165,13 +165,8 @@ stages:
           CreateFolder("coverage")
           CreateFolder("TestResults")
 
-          dotnet test analyzers\SonarAnalyzer.sln --configuration $(BuildConfiguration) -f net48 -p:CollectCoverage=true -p:CoverletOutput="$(Build.SourcesDirectory)\coverage\net48.xml" -r "./TestResults" -p:CoverletOutputFormat=opencover --no-build --no-restore -l trx
-          dotnet test analyzers\SonarAnalyzer.sln --configuration $(BuildConfiguration) -p:CollectCoverage=true -p:CoverletOutput="$(Build.SourcesDirectory)\coverage\net6.0.xml" -r "./TestResults" -p:CoverletOutputFormat=opencover --no-build --no-restore -l trx
-          ls
-          ls $(Build.SourcesDirectory)/coverage
+          dotnet test analyzers\SonarAnalyzer.sln --configuration $(BuildConfiguration) -f net48 -p:CollectCoverage=true -p:CoverletOutput="$(Build.SourcesDirectory)\coverage\net48.xml" -r "./TestResults" -p:CoverletOutputFormat=opencover --no-build --no-restore -l trx -v d
           Rename-Item -Path "$(Build.SourcesDirectory)/coverage/net48.net48.xml" -NewName "net48.xml"
-          Rename-Item -Path "$(Build.SourcesDirectory)/coverage/net6.0.net6.0.xml" -NewName "net6.0.xml"
-          ls $(Build.SourcesDirectory)/coverage
           Test-ExitCode "ERROR: Unit tests for net48 FAILED."
         displayName: '.Net UTs'
 
@@ -203,10 +198,8 @@ stages:
           CreateFolder("coverage")
           CreateFolder("TestResults")
 
-         # dotnet test analyzers\SonarAnalyzer.sln --configuration $(BuildConfiguration) -p:CollectCoverage=true -p:CoverletOutput="$(Build.SourcesDirectory)\coverage\net6.0.xml" -r "./TestResults" -p:CoverletOutputFormat=opencover --no-build --no-restore -l trx
-         # ls
-          ls $(Build.SourcesDirectory)/coverage
-         # Rename-Item -Path "$(Build.SourcesDirectory)/coverage/net6.0.net6.0.xml" -NewName "net6.0.xml"
+          dotnet test analyzers\SonarAnalyzer.sln --configuration $(BuildConfiguration) -f net6.0 -p:CollectCoverage=true -p:CoverletOutput="$(Build.SourcesDirectory)\coverage\net6.0.xml" -r "./TestResults" -p:CoverletOutputFormat=opencover --no-build --no-restore -l trx -v d
+          Rename-Item -Path "$(Build.SourcesDirectory)/coverage/net6.0.net6.0.xml" -NewName "net6.0.xml"
           Test-ExitCode "ERROR: Unit tests for net6.0 FAILED."
         displayName: '.Net UTs'
 
