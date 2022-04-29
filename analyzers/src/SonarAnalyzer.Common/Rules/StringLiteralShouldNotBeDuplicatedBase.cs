@@ -82,7 +82,7 @@ namespace SonarAnalyzer.Rules
                                      let literalToken = GetLiteralToken(literal)
                                      let literalValue = literalToken.ValueText
                                      where
-                                        literalToken.ValueText is { Length: >= MinimumStringLength }
+                                        literalValue is { Length: >= MinimumStringLength }
                                         && !IsMatchingMethodParameterName(literal)
                                      group literalToken by literalValue;
 
