@@ -165,10 +165,11 @@ stages:
           CreateFolder("coverage")
           CreateFolder("TestResults")
 
-          dotnet test analyzers\SonarAnalyzer.sln --configuration $(BuildConfiguration) -f net48 -p:CollectCoverage=true -p:CoverletOutput="$(Build.SourcesDirectory)/coverage/net48.xml" -r "$(Build.SourcesDirectory)/TestResults" -p:CoverletOutputFormat=opencover --no-build --no-restore -l trx
-          ls $(Build.SourcesDirectory)\TestResults\
-          ls $(Build.SourcesDirectory)
-          # Rename-Item -Path "$(Build.SourcesDirectory)/coverage/net48.net48.xml" -NewName "net48.xml"
+          # if -f is not specified, coverage is computed for all available test dlls in the bin folder.
+          dotnet --info
+          echo "START COVERAGE"
+          dotnet test analyzers\tests\SonarAnalyzer.UnitTest\SonarAnalyzer.UnitTest.csproj -f "net48" --configuration $(BuildConfiguration) -p:CollectCoverage=true -p:CoverletOutput="$(Build.SourcesDirectory)\coverage\" -r "./TestResults" -p:CoverletOutputFormat=opencover --no-build --no-restore -l trx
+          echo "END COVERAGE"
           Test-ExitCode "ERROR: Unit tests for net48 FAILED."
         displayName: '.Net UTs'
 
@@ -199,10 +200,11 @@ stages:
 
           CreateFolder("coverage")
           CreateFolder("TestResults")
-          echo $(Build.SourcesDirectory)
-          dotnet test analyzers\SonarAnalyzer.sln --configuration $(BuildConfiguration) -p:CollectCoverage=true -p:CoverletOutput="$(Build.SourcesDirectory)/coverage/net6.0.xml" -r "$(Build.SourcesDirectory)/TestResults" -p:CoverletOutputFormat=opencover --no-build --no-restore -l trx
-          ls $(Build.SourcesDirectory)\TestResults\
-          ls $(Build.SourcesDirectory)\
+
+          dotnet --info
+          echo "START COVERAGE"
+          dotnet test analyzers\tests\SonarAnalyzer.UnitTest\SonarAnalyzer.UnitTest.csproj -f "net6.0" --configuration $(BuildConfiguration) -p:CollectCoverage=true -p:CoverletOutput="$(Build.SourcesDirectory)\coverage\" -r "./TestResults" -p:CoverletOutputFormat=opencover --no-build --no-restore -l trx
+          echo "END COVERAGE"
           Test-ExitCode "ERROR: Unit tests for net6.0 FAILED."
         displayName: '.Net UTs'
 
