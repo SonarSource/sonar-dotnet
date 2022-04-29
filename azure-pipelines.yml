@@ -201,14 +201,14 @@ stages:
 
           dotnet test analyzers\SonarAnalyzer.sln --configuration $(BuildConfiguration) -p:CollectCoverage=true -p:CoverletOutput="$(Build.SourcesDirectory)\coverage2\net6.0.xml" -r "./TestResults" -p:CoverletOutputFormat=opencover --no-build --no-restore -l trx
           ls
-          ls $(Build.SourcesDirectory)/coverage
+          ls $(Build.SourcesDirectory)/coverage2
           Test-ExitCode "ERROR: Unit tests for net6.0 FAILED."
         displayName: '.Net UTs'
 
       - task: PublishPipelineArtifact@1
         displayName: 'Save coverage files'
         inputs:
-          path: 'coverage'
+          path: 'coverage2'
           artifact: DotnetCoverageNet6
 
       - task: PublishPipelineArtifact@1
