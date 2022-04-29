@@ -168,7 +168,7 @@ stages:
           ls
           ls analyzers\tests\SonarAnalyzer.UnitTest\
           dotnet --info
-          dotnet test analyzers\tests\SonarAnalyzer.UnitTest\SonarAnalyzer.UnitTest.csproj -f "net48" --configuration $(BuildConfiguration) -p:CollectCoverage=true -p:CoverletOutput="$(Build.SourcesDirectory)\coverage\" -r "./TestResults" -p:CoverletOutputFormat=opencover --no-build --no-restore -l trx
+          dotnet test analyzers\tests\SonarAnalyzer.UnitTest\SonarAnalyzer.UnitTest.csproj --configuration $(BuildConfiguration) -p:CollectCoverage=true -p:CoverletOutput="$(Build.SourcesDirectory)\coverage\" -r "./TestResults" -p:CoverletOutputFormat=opencover --no-build --no-restore -l trx
           Test-ExitCode "ERROR: Unit tests for net48 FAILED."
         displayName: '.Net UTs'
 
@@ -184,28 +184,28 @@ stages:
           path: 'TestResults'
           artifact: DotnetTestResultsNet48
 
-    - job: runUnitTestsJobNet6
-      displayName: '.NET 6 UTs'
+    #- job: runUnitTestsJobNet6
+    #  displayName: '.NET 6 UTs'
 
-      steps:
-      - task: DownloadPipelineArtifact@2
-        displayName: 'Download binaries to test'
-        inputs:
-          artifact: TestBinaries
-          targetPath: 'analyzers\tests\SonarAnalyzer.UnitTest\bin'
+    #  steps:
+    #  - task: DownloadPipelineArtifact@2
+    #    displayName: 'Download binaries to test'
+    #    inputs:
+    #      artifact: TestBinaries
+    #      targetPath: 'analyzers\tests\SonarAnalyzer.UnitTest\bin'
 
-      - powershell: |
-          . .\scripts\utils.ps1
-          Get-NetIPAddress
-          CreateFolder("coverage")
-          CreateFolder("TestResults")
-          ls
-          ls analyzers\tests\SonarAnalyzer.UnitTest\
-          dotnet --info
-          dotnet test analyzers\tests\SonarAnalyzer.UnitTest\SonarAnalyzer.UnitTest.csproj -f "net6.0" --configuration $(BuildConfiguration) -p:CollectCoverage=true -p:CoverletOutput="$(Build.SourcesDirectory)\coverage\" -r "./TestResults" -p:CoverletOutputFormat=opencover --no-build --no-restore -l trx
+    #  - powershell: |
+    #      . .\scripts\utils.ps1
+    #      Get-NetIPAddress
+    #      CreateFolder("coverage")
+    #      CreateFolder("TestResults")
+    #      ls
+    #      ls analyzers\tests\SonarAnalyzer.UnitTest\
+    #      dotnet --info
+    #      dotnet test analyzers\tests\SonarAnalyzer.UnitTest\SonarAnalyzer.UnitTest.csproj --configuration $(BuildConfiguration) -p:CollectCoverage=true -p:CoverletOutput="$(Build.SourcesDirectory)\coverage\" -r "./TestResults" -p:CoverletOutputFormat=opencover --no-build --no-restore -l trx
 
-          Test-ExitCode "ERROR: Unit tests for net6.0 FAILED."
-        displayName: '.Net UTs'
+    #      Test-ExitCode "ERROR: Unit tests for net6.0 FAILED."
+    #    displayName: '.Net UTs'
 
       - task: PublishPipelineArtifact@1
         displayName: 'Save coverage files'
