@@ -164,6 +164,7 @@ stages:
 
           CreateFolder("coverage")
           CreateFolder("TestResults")
+          Get-NetIPAddress
           ls
           ls analyzers\tests\SonarAnalyzer.UnitTest\
           dotnet --info
@@ -195,7 +196,7 @@ stages:
 
       - powershell: |
           . .\scripts\utils.ps1
-
+          Get-NetIPAddress
           CreateFolder("coverage")
           CreateFolder("TestResults")
           ls
