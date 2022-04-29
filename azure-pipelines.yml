@@ -168,7 +168,6 @@ stages:
           # if -f is not specified, coverage is computed for all available test dlls in the bin folder.
           echo "START COVERAGE"
           dotnet test analyzers\tests\SonarAnalyzer.UnitTest\SonarAnalyzer.UnitTest.csproj -f "net48" --configuration $(BuildConfiguration) -p:CollectCoverage=true -p:CoverletOutput="$(Build.SourcesDirectory)\coverage\" -r "./TestResults" -p:CoverletOutputFormat=opencover --no-build --no-restore -l trx
-          echo "END COVERAGE"
           Test-ExitCode "ERROR: Unit tests for net48 FAILED."
         displayName: '.Net UTs'
 
@@ -202,7 +201,6 @@ stages:
 
           echo "START COVERAGE"
           dotnet test analyzers\tests\SonarAnalyzer.UnitTest\SonarAnalyzer.UnitTest.csproj -f "net6.0" --configuration $(BuildConfiguration) -p:CollectCoverage=true -p:CoverletOutput="$(Build.SourcesDirectory)\coverage\" -r "./TestResults" -p:CoverletOutputFormat=opencover --no-build --no-restore -l trx
-          echo "END COVERAGE"
           Test-ExitCode "ERROR: Unit tests for net6.0 FAILED."
         displayName: '.Net UTs'
 
