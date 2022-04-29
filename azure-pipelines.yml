@@ -205,6 +205,7 @@ stages:
           echo "START COVERAGE"
           dotnet test analyzers\tests\SonarAnalyzer.UnitTest\SonarAnalyzer.UnitTest.csproj -f "net6.0" --configuration $(BuildConfiguration) -p:CollectCoverage=true -p:CoverletOutput="$(Build.SourcesDirectory)\coverage\" -r "./TestResults" -p:CoverletOutputFormat=opencover --no-build --no-restore -l trx
           echo "END COVERAGE"
+          Rename-Item $(Build.SourcesDirectory)\coverage\coverage.net6.0.opencover.xml net6.0.xml
           Test-ExitCode "ERROR: Unit tests for net6.0 FAILED."
         displayName: '.Net UTs'
 
