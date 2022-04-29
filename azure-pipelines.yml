@@ -199,7 +199,7 @@ stages:
           CreateFolder("TestResults")
 
           dotnet test analyzers\tests\SonarAnalyzer.UnitTest\SonarAnalyzer.UnitTest.csproj --configuration $(BuildConfiguration) -p:CollectCoverage=true -p:CoverletOutput="$(Build.SourcesDirectory)\coverage\" -r "./TestResults" -p:CoverletOutputFormat=opencover --no-build --no-restore -l trx
-          Rename-Item "coverage\coverage.net6.0.opencover.xml" ""net6.0.xml"
+          #Rename-Item "coverage\coverage.net6.0.opencover.xml" ""net6.0.xml"
 
           Test-ExitCode "ERROR: Unit tests for net6.0 FAILED."
         displayName: '.Net UTs'
