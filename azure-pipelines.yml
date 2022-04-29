@@ -197,12 +197,12 @@ stages:
       - powershell: |
           . .\scripts\utils.ps1
 
-          CreateFolder("coverage2")
+          CreateFolder("coverage")
           CreateFolder("TestResults")
 
-          dotnet test analyzers\SonarAnalyzer.sln --configuration $(BuildConfiguration) -p:CollectCoverage=true -p:CoverletOutput="$(Build.SourcesDirectory)\coverage2\net6.0.xml" -r "./TestResults" -p:CoverletOutputFormat=opencover --no-build --no-restore -l trx
+          dotnet test analyzers\SonarAnalyzer.sln --configuration $(BuildConfiguration) -p:CollectCoverage=true -p:CoverletOutput="$(Build.SourcesDirectory)\coverage\net6.0.xml" -r "./TestResults" -p:CoverletOutputFormat=opencover --no-build --no-restore -l trx
           ls
-          ls $(Build.SourcesDirectory)/coverage2
+          ls $(Build.SourcesDirectory)/coverage
           Rename-Item -Path "$(Build.SourcesDirectory)/coverage/net6.0.net6.0.xml" -NewName "net6.0.xml"
           Test-ExitCode "ERROR: Unit tests for net6.0 FAILED."
         displayName: '.Net UTs'
@@ -210,7 +210,7 @@ stages:
       - task: PublishPipelineArtifact@1
         displayName: 'Save coverage files'
         inputs:
-          path: 'coverage2'
+          path: 'coverage'
           artifact: DotnetCoverageNet6
 
       - task: PublishPipelineArtifact@1
