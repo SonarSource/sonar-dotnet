@@ -26,25 +26,21 @@ record struct RecordStruct
     [DebuggerDisplay("foobar", Name = "foobar", TargetTypeName = "foobar")] // Compliant - in attribute -> ignored
     record struct InnerRecordStruct
     {
-        private string name = "foobar"; // Noncompliant
-                                        // Secondary@-1
+        private string name = "foobar";
+        //                    ^^^^^^^^ Secondary
 
         public static readonly string NameReadonly = "foobar"; // Secondary
-                                                               // Secondary@-1
 
         string Name { get; } = "foobar"; // Secondary
-                                         // Secondary@-1
 
         void Method()
         {
             var x = "foobar"; // Secondary
-                              // Secondary@-1
 
             [Conditional("foobar")] // Compliant - in attribute -> ignored
             static void NestedMethod()
             {
                 var y = "foobar"; // Secondary
-                                  // Secondary@-1
             }
         }
     }

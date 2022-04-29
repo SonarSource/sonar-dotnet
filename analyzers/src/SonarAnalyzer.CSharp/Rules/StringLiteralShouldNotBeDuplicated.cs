@@ -40,14 +40,15 @@ namespace SonarAnalyzer.Rules.CSharp
             SyntaxKind.StructDeclaration,
             SyntaxKindEx.RecordClassDeclaration,
             SyntaxKindEx.RecordStructDeclaration,
-            SyntaxKind.CompilationUnit
+            SyntaxKind.CompilationUnit,
         };
 
         private SyntaxKind[] TypeDeclarationSyntaxKinds { get; } =
         {
             SyntaxKind.ClassDeclaration,
             SyntaxKind.StructDeclaration,
-            SyntaxKindEx.RecordClassDeclaration
+            SyntaxKindEx.RecordClassDeclaration,
+            SyntaxKindEx.RecordStructDeclaration,
         };
 
         protected override bool IsMatchingMethodParameterName(LiteralExpressionSyntax literalExpression) =>
