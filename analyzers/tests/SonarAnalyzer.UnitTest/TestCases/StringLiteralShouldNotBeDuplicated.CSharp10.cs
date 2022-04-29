@@ -1,5 +1,7 @@
 ﻿using System.Diagnostics;
 
+namespace Tests.Diagnostics;
+
 record struct RecordStruct
 {
     private string name = "foobar"; // Noncompliant
@@ -51,22 +53,5 @@ record struct RecordStruct
     {
         private string name = "foobar";
         //                    ^^^^^^^^ Secondary
-    }
-}
-
-namespace Tests.Diagnostics
-{
-    record struct RecordStruct
-    {
-        public const string NameConst01 = "barfoo"; // Noncompliant {{Define a constant instead of using this literal 'barfoo' 5 times.}}
-        //                                ^^^^^^^^ Secondary
-        public const string NameConst02 = "barfoo";
-        //                                ^^^^^^^^ Secondary
-        public const string NameConst03 = "barfoo";
-        //                                ^^^^^^^^ Secondary
-        public const string NameConst04 = "barfoo";
-        //                                ^^^^^^^^ Secondary
-        public const string NameConst05 = "barfoo";
-        //                                ^^^^^^^^ Secondary
     }
 }
