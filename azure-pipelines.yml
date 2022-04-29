@@ -165,7 +165,7 @@ stages:
           CreateFolder("coverage")
           CreateFolder("TestResults")
 
-          dotnet test analyzers\SonarAnalyzer.sln --configuration $(BuildConfiguration) -f net48 -p:CollectCoverage=true -p:CoverletOutput="$(Build.SourcesDirectory)\coverage\net48.xml" -r ".\TestResults" -p:CoverletOutputFormat=opencover --no-build --no-restore -l trx
+          dotnet test analyzers\SonarAnalyzer.sln --configuration $(BuildConfiguration) -f net48 -c debug -p:CollectCoverage=true -p:CoverletOutput="$(Build.SourcesDirectory)\coverage\net48.xml" -r ".\TestResults" -p:CoverletOutputFormat=opencover --no-build --no-restore -l trx
           ls $(Build.SourcesDirectory)\coverage\
           ls $(Build.SourcesDirectory)
           # Rename-Item -Path "$(Build.SourcesDirectory)/coverage/net48.net48.xml" -NewName "net48.xml"
@@ -199,7 +199,7 @@ stages:
 
           CreateFolder("coverage")
           CreateFolder("TestResults")
-          dotnet test analyzers\SonarAnalyzer.sln --configuration $(BuildConfiguration) -f net6.0 -p:CollectCoverage=true -p:CoverletOutput="$(Build.SourcesDirectory)\coverage\net6.0.xml" -r ".\TestResults" -p:CoverletOutputFormat=opencover --no-build --no-restore -l trx
+          dotnet test analyzers\SonarAnalyzer.sln --configuration $(BuildConfiguration) -c debug -f net6.0 -p:CollectCoverage=true -p:CoverletOutput="$(Build.SourcesDirectory)\coverage\net6.0.xml" -r ".\TestResults" -p:CoverletOutputFormat=opencover --no-build --no-restore -l trx
           ls "$(Build.SourcesDirectory)\coverage\"
           Test-ExitCode "ERROR: Unit tests for net6.0 FAILED."
         displayName: '.Net UTs'
