@@ -117,5 +117,10 @@
             + "cheese"      // Secondary
             + "cheese"      // Secondary
             + @"cheese";    // Secondary
+
+        private string backslash = "Filename\\" // Noncompliant
+            + @"Filename\"                      // Secondary
+            + "Filename\x5C"                    // Secondary
+            + @"Filename\";                     // Secondary
     }
 }
