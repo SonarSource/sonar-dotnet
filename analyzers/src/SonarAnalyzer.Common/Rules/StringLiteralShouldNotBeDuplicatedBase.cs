@@ -78,25 +78,24 @@ namespace SonarAnalyzer.Rules
             }
 
             var stringLiterals = RetrieveLiteralExpressions(context.Node);
-            var stringWithLiterals = from literal in stringLiterals
-                                     let literalToken = GetLiteralToken(literal)
-                                     let literalValue = literalToken.ValueText
-                                     where
-                                        literalValue is { Length: >= MinimumStringLength }
-                                        && !IsMatchingMethodParameterName(literal)
-                                     group literalToken by literalValue;
+            var duplicateValuesAndPositions = from literal in stringLiterals
+                                              let literalToken = GetLiteralToken(literal)
+                                              let literalValue = literalToken.ValueText
+                                              where
+                                                 literalValue is { Length: >= MinimumStringLength }
+                                                 && !IsMatchingMethodParameterName(literal)
+                                              group literalToken by literalValue into g
+                                              where g.Count() > Threshold
+                                              select g;
 
             // Report duplications
-            foreach (var item in stringWithLiterals)
+            foreach (var item in duplicateValuesAndPositions)
             {
                 var duplicates = item.ToList();
-                if (duplicates.Count > Math.Max(Threshold, 0))
-                {
-                    var firstToken = duplicates[0];
-                    context.ReportIssue(Diagnostic.Create(rule, firstToken.GetLocation(),
-                        duplicates.Skip(1).Select(x => x.GetLocation()),
-                        item.Key, duplicates.Count));
-                }
+                var firstToken = duplicates[0];
+                context.ReportIssue(Diagnostic.Create(rule, firstToken.GetLocation(),
+                    duplicates.Skip(1).Select(x => x.GetLocation()),
+                    item.Key, duplicates.Count));
             }
         }
     }
