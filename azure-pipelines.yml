@@ -166,7 +166,7 @@ stages:
           CreateFolder("TestResults")
 
           # if -f is not specified, coverage is computed for all available test dlls in the bin folder.
-          # dotnet test analyzers\tests\SonarAnalyzer.UnitTest\SonarAnalyzer.UnitTest.csproj -f "net48" --configuration $(BuildConfiguration) -p:CollectCoverage=true -p:CoverletOutput="$(Build.SourcesDirectory)\coverage\" -r "./TestResults" -p:CoverletOutputFormat=opencover --no-build --no-restore -l trx
+          dotnet test analyzers\tests\SonarAnalyzer.UnitTest\SonarAnalyzer.UnitTest.csproj -f "net48" --configuration $(BuildConfiguration) -p:CollectCoverage=true -p:CoverletOutput="$(Build.SourcesDirectory)\coverage\" -r "./TestResults" -p:CoverletOutputFormat=opencover --no-build --no-restore -l trx
           Test-ExitCode "ERROR: Unit tests for net48 FAILED."
         displayName: '.Net UTs'
 
@@ -199,6 +199,8 @@ stages:
           CreateFolder("TestResults")
 
           dotnet test analyzers\tests\SonarAnalyzer.UnitTest\SonarAnalyzer.UnitTest.csproj --configuration $(BuildConfiguration) -p:CollectCoverage=true -p:CoverletOutput="$(Build.SourcesDirectory)\coverage\" -r "./TestResults" -p:CoverletOutputFormat=opencover --no-build --no-restore -l trx
+          Rename("coverage\coverage.net6.0.opencover.xml", "net6.0.xml")
+
           Test-ExitCode "ERROR: Unit tests for net6.0 FAILED."
         displayName: '.Net UTs'
 
