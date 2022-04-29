@@ -68,8 +68,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 .Where(les => les.IsKind(SyntaxKind.StringLiteralExpression))
                 .Cast<LiteralExpressionSyntax>();
 
-        protected override string GetLiteralValue(LiteralExpressionSyntax literal) =>
-            literal.Token.ValueText;
+        protected override SyntaxToken GetLiteralToken(LiteralExpressionSyntax literal) => literal.Token;
 
         protected override bool IsNamedTypeOrTopLevelMain(SyntaxNodeAnalysisContext context) =>
             IsNamedType(context) || IsTopLevelMain(context);

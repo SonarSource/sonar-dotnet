@@ -18,6 +18,7 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Linq;
@@ -46,7 +47,7 @@ namespace SonarAnalyzer.Rules
         protected abstract bool IsMatchingMethodParameterName(TLiteralExpressionSyntax literalExpression);
         protected abstract bool IsInnerInstance(SyntaxNodeAnalysisContext context);
         protected abstract IEnumerable<TLiteralExpressionSyntax> RetrieveLiteralExpressions(SyntaxNode node);
-        protected abstract string GetLiteralValue(TLiteralExpressionSyntax literal);
+        protected abstract SyntaxToken GetLiteralToken(TLiteralExpressionSyntax literal);
 
         [RuleParameter("threshold", PropertyType.Integer, "Number of times a literal must be duplicated to trigger an issue.", ThresholdDefaultValue)]
         public int Threshold { get; set; } = ThresholdDefaultValue;
@@ -77,31 +78,24 @@ namespace SonarAnalyzer.Rules
             }
 
             var stringLiterals = RetrieveLiteralExpressions(context.Node);
-
-            // Collect duplications
-            var stringWithLiterals = new Dictionary<string, ImmutableList<TLiteralExpressionSyntax>>();
-            foreach (var literal in stringLiterals)
-            {
-                var stringValue = GetLiteralValue(literal);
-
-                if (stringValue != null
-                    && stringValue.Length >= MinimumStringLength
-                    && !IsMatchingMethodParameterName(literal))
-                {
-                    stringWithLiterals[stringValue] = stringWithLiterals.TryGetValue(stringValue, out var list)
-                        ? list.Add(literal)
-                        : ImmutableList.Create(literal);
-                }
-            }
+            var stringWithLiterals = from literal in stringLiterals
+                                     let literalToken = GetLiteralToken(literal)
+                                     let literalValue = literalToken.ValueText
+                                     where
+                                        literalToken.ValueText is { Length: >= MinimumStringLength }
+                                        && !IsMatchingMethodParameterName(literal)
+                                     group new { literalValue, literalToken } by literalValue;
 
             // Report duplications
             foreach (var item in stringWithLiterals)
             {
-                if (item.Value.Count > Threshold)
+                var duplicates = item.ToList();
+                if (duplicates.Count > Math.Max(Threshold, 0))
                 {
-                    context.ReportIssue(Diagnostic.Create(rule, item.Value[0].GetLocation(),
-                        item.Value.Skip(1).Select(x => x.GetLocation()),
-                        item.Key, item.Value.Count));
+                    var firstToken = duplicates[0].literalToken;
+                    context.ReportIssue(Diagnostic.Create(rule, firstToken.GetLocation(),
+                        duplicates.Skip(1).Select(x => x.literalToken.GetLocation()),
+                        item.Key, duplicates.Count));
                 }
             }
         }
