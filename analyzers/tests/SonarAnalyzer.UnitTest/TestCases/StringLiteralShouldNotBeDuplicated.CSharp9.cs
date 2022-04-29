@@ -2,7 +2,6 @@
 
 namespace Tests.Diagnostics
 {
-
     record Record
     {
         private string name = "foobar"; // Noncompliant {{Define a constant instead of using this literal 'foobar' 11 times.}}

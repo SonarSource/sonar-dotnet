@@ -5,37 +5,37 @@
         private string empty = "";
 
         public const string NameConst = "foobar"; // Noncompliant {{Define a constant instead of using this literal 'foobar' 8 times.}}
-//                                      ^^^^^^^^
+        //                              ^^^^^^^^
         public static readonly string NameReadonly = "foobar";
-//                                                   ^^^^^^^^ Secondary
+        //                                           ^^^^^^^^ Secondary
 
 
         private string name = "foobar";
-//                            ^^^^^^^^ Secondary
+        //                    ^^^^^^^^ Secondary
 
         private string[] values = new[] { "something", "something", "something" }; // Compliant - repetition below threshold
 
         private string Name { get; } = "foobar";
-//                                     ^^^^^^^^ Secondary
+        //                             ^^^^^^^^ Secondary
 
         public Program()
         {
             var x = "foobar";
-//                  ^^^^^^^^ Secondary
+            //      ^^^^^^^^ Secondary
 
             var y = "FooBar"; // Compliant - casing is different
         }
 
         public void Do(string s = "foobar")
-//                                ^^^^^^^^ Secondary
+        //                        ^^^^^^^^ Secondary
         {
             var x = s ?? "foobar";
-//                       ^^^^^^^^ Secondary
+            //           ^^^^^^^^ Secondary
 
             string GetFooBar()
             {
                 return "foobar";
-//                     ^^^^^^^^ Secondary
+                //     ^^^^^^^^ Secondary
             }
         }
 
