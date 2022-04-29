@@ -84,7 +84,7 @@ namespace SonarAnalyzer.Rules
                                      where
                                         literalToken.ValueText is { Length: >= MinimumStringLength }
                                         && !IsMatchingMethodParameterName(literal)
-                                     group new { literalValue, literalToken } by literalValue;
+                                     group literalToken by literalValue;
 
             // Report duplications
             foreach (var item in stringWithLiterals)
@@ -92,9 +92,9 @@ namespace SonarAnalyzer.Rules
                 var duplicates = item.ToList();
                 if (duplicates.Count > Math.Max(Threshold, 0))
                 {
-                    var firstToken = duplicates[0].literalToken;
+                    var firstToken = duplicates[0];
                     context.ReportIssue(Diagnostic.Create(rule, firstToken.GetLocation(),
-                        duplicates.Skip(1).Select(x => x.literalToken.GetLocation()),
+                        duplicates.Skip(1).Select(x => x.GetLocation()),
                         item.Key, duplicates.Count));
                 }
             }
