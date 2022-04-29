@@ -121,3 +121,10 @@ function CreateFolder([string] $folderName){
     }
     mkdir $folderName
 }
+
+function Rename([string] $filePath, [string] $newFileName){
+    If (Test-Path $filePath){
+        Rename-Item $filePath $newFileName
+    }
+    throw "Could not find '${$filePath}'."
+}
