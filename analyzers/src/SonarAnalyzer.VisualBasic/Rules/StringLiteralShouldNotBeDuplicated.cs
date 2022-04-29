@@ -56,6 +56,6 @@ namespace SonarAnalyzer.Rules.VisualBasic
                 .Cast<LiteralExpressionSyntax>();
 
         protected override string GetLiteralValue(LiteralExpressionSyntax literal) =>
-            literal.Token.Text;
+            literal.Token.ValueText;
     }
 }

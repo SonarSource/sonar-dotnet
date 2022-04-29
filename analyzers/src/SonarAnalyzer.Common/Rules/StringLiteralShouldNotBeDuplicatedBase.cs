@@ -82,8 +82,7 @@ namespace SonarAnalyzer.Rules
             var stringWithLiterals = new Dictionary<string, List<TLiteralExpressionSyntax>>();
             foreach (var literal in stringLiterals)
             {
-                // Remove leading and trailing double quotes
-                var stringValue = ExtractStringContent(GetLiteralValue(literal));
+                var stringValue = GetLiteralValue(literal);
 
                 if (stringValue != null
                     && stringValue.Length >= MinimumStringLength
@@ -105,12 +104,9 @@ namespace SonarAnalyzer.Rules
                 {
                     context.ReportIssue(Diagnostic.Create(rule, item.Value[0].GetLocation(),
                         item.Value.Skip(1).Select(x => x.GetLocation()),
-                        item.Key, item.Value.Count ));
+                        item.Key, item.Value.Count));
                 }
             }
         }
-
-        private static string ExtractStringContent(string literal) =>
-            literal.StartsWith("@\"") ? literal.Substring(2, literal.Length - 3) : literal.Substring(1, literal.Length - 2);
     }
 }
