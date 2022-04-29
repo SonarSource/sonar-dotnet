@@ -200,7 +200,7 @@ stages:
           CreateFolder("coverage")
           CreateFolder("TestResults")
           echo $(Build.SourcesDirectory)
-          dotnet test analyzers\SonarAnalyzer.sln --configuration $(BuildConfiguration) -f net6.0 -p:CollectCoverage=true -p:CoverletOutput="$(Build.SourcesDirectory)/coverage/net6.0.xml" -r "$(Build.SourcesDirectory)/TestResults" -p:CoverletOutputFormat=opencover --no-build --no-restore -l trx
+          dotnet test analyzers\SonarAnalyzer.sln --configuration $(BuildConfiguration) -p:CollectCoverage=true -p:CoverletOutput="$(Build.SourcesDirectory)/coverage/net6.0.xml" -r "$(Build.SourcesDirectory)/TestResults" -p:CoverletOutputFormat=opencover --no-build --no-restore -l trx
           ls $(Build.SourcesDirectory)\TestResults\
           ls $(Build.SourcesDirectory)\
           Test-ExitCode "ERROR: Unit tests for net6.0 FAILED."
