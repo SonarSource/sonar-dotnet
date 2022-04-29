@@ -79,7 +79,7 @@ namespace SonarAnalyzer.Rules
             var stringLiterals = RetrieveLiteralExpressions(context.Node);
 
             // Collect duplications
-            var stringWithLiterals = new Dictionary<string, List<TLiteralExpressionSyntax>>();
+            var stringWithLiterals = new Dictionary<string, ImmutableList<TLiteralExpressionSyntax>>();
             foreach (var literal in stringLiterals)
             {
                 var stringValue = GetLiteralValue(literal);
@@ -88,12 +88,9 @@ namespace SonarAnalyzer.Rules
                     && stringValue.Length >= MinimumStringLength
                     && !IsMatchingMethodParameterName(literal))
                 {
-                    if (!stringWithLiterals.ContainsKey(stringValue))
-                    {
-                        stringWithLiterals[stringValue] = new List<TLiteralExpressionSyntax>();
-                    }
-
-                    stringWithLiterals[stringValue].Add(literal);
+                    stringWithLiterals[stringValue] = stringWithLiterals.TryGetValue(stringValue, out var list)
+                        ? list.Add(literal)
+                        : ImmutableList.Create(literal);
                 }
             }
 
