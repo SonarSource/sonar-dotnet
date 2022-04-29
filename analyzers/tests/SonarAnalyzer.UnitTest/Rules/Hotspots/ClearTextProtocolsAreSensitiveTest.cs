@@ -32,28 +32,33 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class ClearTextProtocolsAreSensitiveTest
     {
+        private readonly VerifierBuilder builder = new VerifierBuilder().AddAnalyzer(() => new ClearTextProtocolsAreSensitive(AnalyzerConfiguration.AlwaysEnabled));
+
         [TestMethod]
         public void ClearTextProtocolsAreSensitive() =>
-            OldVerifier.VerifyAnalyzer(
-                @"TestCases\Hotspots\ClearTextProtocolsAreSensitive.cs",
-                new ClearTextProtocolsAreSensitive(AnalyzerConfiguration.AlwaysEnabled),
-                ParseOptionsHelper.FromCSharp8,
-                AdditionalReferences);
+            builder.AddPaths(@"Hotspots\ClearTextProtocolsAreSensitive.cs")
+                .AddReferences(AdditionalReferences)
+                .WithOptions(ParseOptionsHelper.FromCSharp8)
+                .Verify();
 
 #if NET
+
         [TestMethod]
         public void ClearTextProtocolsAreSensitive_CSharp9() =>
-            OldVerifier.VerifyAnalyzerFromCSharp9Console(
-                @"TestCases\Hotspots\ClearTextProtocolsAreSensitive.CSharp9.cs",
-                new ClearTextProtocolsAreSensitive(AnalyzerConfiguration.AlwaysEnabled),
-                AdditionalReferences);
+            builder.AddPaths(@"Hotspots\ClearTextProtocolsAreSensitive.CSharp9.cs")
+                .WithTopLevelStatements()
+                .AddReferences(AdditionalReferences)
+                .WithOptions(ParseOptionsHelper.FromCSharp9)
+                .Verify();
 
         [TestMethod]
         public void ClearTextProtocolsAreSensitive_CSharp10() =>
-            OldVerifier.VerifyAnalyzerFromCSharp10Console(
-                @"TestCases\Hotspots\ClearTextProtocolsAreSensitive.CSharp10.cs",
-                new ClearTextProtocolsAreSensitive(AnalyzerConfiguration.AlwaysEnabled),
-                AdditionalReferences);
+            builder.AddPaths(@"Hotspots\ClearTextProtocolsAreSensitive.CSharp10.cs")
+                .WithTopLevelStatements()
+                .AddReferences(AdditionalReferences)
+                .WithOptions(ParseOptionsHelper.FromCSharp10)
+                .Verify();
+
 #endif
 
         internal static IEnumerable<MetadataReference> AdditionalReferences =>

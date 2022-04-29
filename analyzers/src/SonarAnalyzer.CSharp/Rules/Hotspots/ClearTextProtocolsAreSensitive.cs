@@ -80,7 +80,7 @@ namespace SonarAnalyzer.Rules.CSharp
         private readonly string[] localhostAddresses = {"localhost", "127.0.0.1", "::1"};
 
         private readonly CSharpObjectInitializationTracker objectInitializationTracker =
-            new CSharpObjectInitializationTracker(constantValue => constantValue is bool value && value,
+            new(constantValue => constantValue is bool value && value,
                                                   ImmutableArray.Create(KnownType.System_Net_Mail_SmtpClient, KnownType.System_Net_FtpWebRequest),
                                                   propertyName => propertyName == EnableSslName);
 
@@ -90,7 +90,8 @@ namespace SonarAnalyzer.Rules.CSharp
         private readonly Regex telnetRegexForIdentifier;
         private readonly Regex validServerRegex;
 
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(DefaultRule, EnableSslRule);
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics =>
+            ImmutableArray.Create(DefaultRule, EnableSslRule);
 
         public ClearTextProtocolsAreSensitive() : this(AnalyzerConfiguration.Hotspot) { }
 
@@ -217,7 +218,7 @@ namespace SonarAnalyzer.Rules.CSharp
             token.Text.IndexOf("Namespace", StringComparison.OrdinalIgnoreCase) != -1;
 
         private static Regex CompileRegex(string pattern, bool ignoreCase = true) =>
-            new Regex(pattern, ignoreCase
+            new(pattern, ignoreCase
                           ? RegexOptions.Compiled | RegexOptions.IgnoreCase
                           : RegexOptions.Compiled);
     }
