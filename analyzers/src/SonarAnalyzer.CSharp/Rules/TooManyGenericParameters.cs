@@ -72,8 +72,11 @@ namespace SonarAnalyzer.Rules.CSharp
                         return;
                     }
 
-                    c.ReportIssue(Diagnostic.Create(Rule, typeDeclaration.Identifier.GetLocation(),
-                        typeDeclaration.Identifier.ValueText, typeDeclaration.GetDeclarationTypeName(), MaxNumberOfGenericParametersInClass));
+                    c.ReportIssue(Diagnostic.Create(Rule,
+                                                    typeDeclaration.Identifier.GetLocation(),
+                                                    typeDeclaration.Identifier.ValueText,
+                                                    typeDeclaration.GetDeclarationTypeName(),
+                                                    MaxNumberOfGenericParametersInClass));
                 }, TypeKinds);
 
             context.RegisterSyntaxNodeActionInNonGenerated(
@@ -97,19 +100,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 SyntaxKindEx.LocalFunctionStatement);
         }
 
-        private static string GetEnclosingTypeName(SyntaxNode node)
-        {
-            var parent = node.Parent;
-
-            while (parent is not null)
-            {
-                if (TypeKinds.Contains((SyntaxKind)parent.RawKind))
-                {
-                    return ((BaseTypeDeclarationSyntax)parent).Identifier.ValueText;
-                }
-                parent = parent.Parent;
-            }
-            return null;
-        }
+        private static string GetEnclosingTypeName(SyntaxNode node) =>
+            (node.Ancestors().FirstOrDefault(x => TypeKinds.Contains((SyntaxKind)x.RawKind)) as BaseTypeDeclarationSyntax)?.Identifier.ValueText;
     }
 }
