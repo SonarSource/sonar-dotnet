@@ -89,12 +89,11 @@ namespace SonarAnalyzer.Rules.CSharp
                         return;
                     }
 
-                    c.ReportIssue(Diagnostic.Create(
-                        Rule,
-                        methodDeclaration.Identifier.GetLocation(),
-                        $"{GetEnclosingTypeName(c.Node)}.{methodDeclaration.Identifier.ValueText}",
-                        "method",
-                        MaxNumberOfGenericParametersInMethod));
+                    c.ReportIssue(Diagnostic.Create(Rule,
+                                                    methodDeclaration.Identifier.GetLocation(),
+                                                    $"{GetEnclosingTypeName(c.Node)}.{methodDeclaration.Identifier.ValueText}",
+                                                    "method",
+                                                    MaxNumberOfGenericParametersInMethod));
                 },
                 SyntaxKind.MethodDeclaration,
                 SyntaxKindEx.LocalFunctionStatement);
