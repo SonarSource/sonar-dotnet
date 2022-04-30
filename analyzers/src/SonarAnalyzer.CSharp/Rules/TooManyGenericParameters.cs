@@ -19,6 +19,7 @@
  */
 
 using System.Collections.Immutable;
+using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
@@ -40,6 +41,14 @@ namespace SonarAnalyzer.Rules.CSharp
         private const int DefaultMaxNumberOfGenericParametersInMethod = 3;
 
         private static readonly DiagnosticDescriptor Rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager, isEnabledByDefault: false);
+        private static readonly SyntaxKind[] TypeKinds = new[]
+        {
+            SyntaxKind.ClassDeclaration,
+            SyntaxKind.StructDeclaration,
+            SyntaxKind.InterfaceDeclaration,
+            SyntaxKindEx.RecordClassDeclaration,
+            SyntaxKindEx.RecordStructDeclaration
+        };
 
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
 
@@ -65,11 +74,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
                     c.ReportIssue(Diagnostic.Create(Rule, typeDeclaration.Identifier.GetLocation(),
                         typeDeclaration.Identifier.ValueText, typeDeclaration.GetDeclarationTypeName(), MaxNumberOfGenericParametersInClass));
-                },
-                SyntaxKind.ClassDeclaration,
-                SyntaxKind.StructDeclaration,
-                SyntaxKind.InterfaceDeclaration,
-                SyntaxKindEx.RecordClassDeclaration);
+                }, TypeKinds);
 
             context.RegisterSyntaxNodeActionInNonGenerated(
                 c =>
@@ -96,26 +101,13 @@ namespace SonarAnalyzer.Rules.CSharp
         {
             var parent = node.Parent;
 
-            while (parent != null)
+            while (parent is not null)
             {
-                switch (parent.Kind())
+                if (TypeKinds.Contains((SyntaxKind)parent.RawKind))
                 {
-                    case SyntaxKind.ClassDeclaration:
-                        return ((ClassDeclarationSyntax)parent).Identifier.ValueText;
-
-                    case SyntaxKind.StructDeclaration:
-                        return ((StructDeclarationSyntax)parent).Identifier.ValueText;
-
-                    case SyntaxKind.InterfaceDeclaration:
-                        return ((InterfaceDeclarationSyntax)parent).Identifier.ValueText;
-
-                    case SyntaxKindEx.RecordClassDeclaration:
-                        return ((RecordDeclarationSyntaxWrapper)parent).Identifier.ValueText;
-
-                    default:
-                        parent = parent.Parent;
-                        break;
+                    return ((BaseTypeDeclarationSyntax)parent).Identifier.ValueText;
                 }
+                parent = parent.Parent;
             }
             return null;
         }
