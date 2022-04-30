@@ -65,7 +65,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 {
                     var typeDeclaration = (TypeDeclarationSyntax)c.Node;
 
-                    if (c.ContainingSymbol.Kind != SymbolKind.NamedType
+                    if (c.IsRedundantPositionalRecordContext()
                         || typeDeclaration.TypeParameterList == null
                         || typeDeclaration.TypeParameterList.Parameters.Count <= MaxNumberOfGenericParametersInClass)
                     {
