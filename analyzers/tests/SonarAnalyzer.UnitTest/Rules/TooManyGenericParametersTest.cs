@@ -46,7 +46,7 @@ namespace SonarAnalyzer.UnitTest.Rules
 
         [TestMethod]
         public void TooManyGenericParameters_CSharp10() =>
-            builder.AddPaths("TooManyGenericParameters.CSharp9.cs").WithTopLevelStatements().WithOptions(ParseOptionsHelper.FromCSharp10).Verify();
+            builder.AddPaths("TooManyGenericParameters.CSharp10.cs").WithConcurrentAnalysis(false).WithOptions(ParseOptionsHelper.FromCSharp10).Verify();
 #endif
     }
 }
