@@ -136,6 +136,13 @@ namespace SonarAnalyzer.Helpers
             JoinStr(enumerable, separator, x => x);
 
         /// <summary>
+        /// Concatenates the members of a <see cref="string"/> collection using the specified <paramref name="separator"/> between each member.
+        /// Any whitespace or null member of the collection will be ignored.
+        /// </summary>
+        public static string JoinIfNotWhitespace(this IEnumerable<string> enumerable, string separator) =>
+            string.Join(separator, enumerable.Where(x => !string.IsNullOrWhiteSpace(x)));
+
+        /// <summary>
         /// This is string.Join() as extension. Concatenates members of int collection using specified separator between each member.
         /// </summary>
         public static string JoinStr(this IEnumerable<int> enumerable, string separator) =>

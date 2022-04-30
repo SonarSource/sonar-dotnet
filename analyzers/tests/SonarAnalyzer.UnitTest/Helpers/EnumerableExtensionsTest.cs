@@ -132,6 +132,19 @@ namespace SonarAnalyzer.UnitTest.Helpers
         }
 
         [TestMethod]
+        public void JoinIfNotWhitespace()
+        {
+            Array.Empty<string>().JoinIfNotWhitespace(", ").Should().Be("");
+            new[] { "a" }.JoinIfNotWhitespace(", ").Should().Be("a");
+            new[] { "a", "bb", "ccc" }.JoinIfNotWhitespace(", ").Should().Be("a, bb, ccc");
+            new[] { "a", "bb", "ccc" }.JoinIfNotWhitespace(null).Should().Be("abbccc");
+            new[] { null, "a", "b" }.JoinIfNotWhitespace(".").Should().Be("a.b");
+            new[] { "a", null, "b" }.JoinIfNotWhitespace(".").Should().Be("a.b");
+            new[] { "a", "b", null }.JoinIfNotWhitespace(".").Should().Be("a.b");
+            new string[] { null, null, null }.JoinIfNotWhitespace(".").Should().Be("");
+        }
+
+        [TestMethod]
         public void WhereNotNull_Class()
         {
             var instance = new Object();
