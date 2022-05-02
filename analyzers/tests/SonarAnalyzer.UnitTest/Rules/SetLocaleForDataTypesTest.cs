@@ -28,27 +28,32 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class SetLocaleForDataTypesTest
     {
+        private readonly VerifierBuilder builder = new VerifierBuilder<SetLocaleForDataTypes>();
+
         [TestMethod]
         public void SetLocaleForDataTypes() =>
-            OldVerifier.VerifyAnalyzer(
-                @"TestCases\SetLocaleForDataTypes.cs",
-                new SetLocaleForDataTypes(),
-                MetadataReferenceFacade.SystemData);
+            builder.AddPaths("SetLocaleForDataTypes.cs")
+                .AddReferences(MetadataReferenceFacade.SystemData)
+                .Verify();
 
 #if NET
+
         [TestMethod]
         public void SetLocaleForDataTypes_CSharp9() =>
-            OldVerifier.VerifyAnalyzerFromCSharp9Console(
-                @"TestCases\SetLocaleForDataTypes.CSharp9.cs",
-                new SetLocaleForDataTypes(),
-                MetadataReferenceFacade.SystemData);
+            builder.AddPaths("SetLocaleForDataTypes.CSharp9.cs")
+                .WithTopLevelStatements()
+                .AddReferences(MetadataReferenceFacade.SystemData)
+                .WithOptions(ParseOptionsHelper.FromCSharp9)
+                .Verify();
 
         [TestMethod]
         public void SetLocaleForDataTypes_CSharp10() =>
-            OldVerifier.VerifyAnalyzerFromCSharp10Console(
-                @"TestCases\SetLocaleForDataTypes.CSharp10.cs",
-                new SetLocaleForDataTypes(),
-                MetadataReferenceFacade.SystemData);
+            builder.AddPaths("SetLocaleForDataTypes.CSharp10.cs")
+                .WithTopLevelStatements()
+                .AddReferences(MetadataReferenceFacade.SystemData)
+                .WithOptions(ParseOptionsHelper.FromCSharp10)
+                .Verify();
+
 #endif
     }
 }
