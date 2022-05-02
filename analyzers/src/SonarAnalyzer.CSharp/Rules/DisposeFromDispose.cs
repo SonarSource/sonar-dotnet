@@ -82,7 +82,7 @@ namespace SonarAnalyzer.Rules.CSharp
         /// </remarks>
         private static bool IsDisposeMethodCalled(InvocationExpressionSyntax invocation, SemanticModel semanticModel, LanguageVersion languageVersion) =>
             semanticModel.GetSymbolInfo(invocation).Symbol is IMethodSymbol methodSymbol
-            && methodSymbol.IsDisposeMethod()
+            && KnownMethods.IsIDisposableDispose(methodSymbol)
             && semanticModel.Compilation.GetTypeMethod(SpecialType.System_IDisposable, DisposeMethodName) is { } disposeMethodSignature
             && (methodSymbol.Equals(methodSymbol.ContainingType.FindImplementationForInterfaceMember(disposeMethodSignature))
                 || methodSymbol.ContainingType.IsDisposableRefStruct(languageVersion));

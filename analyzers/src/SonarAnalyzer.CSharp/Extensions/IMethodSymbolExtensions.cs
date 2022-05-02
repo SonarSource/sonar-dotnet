@@ -27,14 +27,6 @@ namespace SonarAnalyzer.Extensions
 {
     internal static class IMethodSymbolExtensions
     {
-        // The signature of the Dispose method on IDisposable
-        public static bool IsDisposeMethod(this IMethodSymbol symbol) =>
-            symbol.Name.Equals("Dispose") &&
-            symbol.Arity == 0 &&
-            symbol.Parameters.Length == 0 &&
-            symbol.ReturnsVoid &&
-            symbol.DeclaredAccessibility == Accessibility.Public;
-
         public static bool IsModuleInitializer(this IMethodSymbol methodSymbol) =>
             methodSymbol.AnyAttributeDerivesFrom(KnownType.System_Runtime_CompilerServices_ModuleInitializerAttribute);
 

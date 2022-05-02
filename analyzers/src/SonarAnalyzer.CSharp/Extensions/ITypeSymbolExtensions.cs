@@ -30,9 +30,9 @@ namespace SonarAnalyzer.Extensions
     internal static class ITypeSymbolExtensions
     {
         internal static bool IsDisposableRefStruct(this ITypeSymbol symbol, LanguageVersion languageVersion) =>
-            languageVersion.IsAtLeast(LanguageVersionEx.CSharp8) &&
-            IsRefStruct(symbol) &&
-            symbol.GetMembers("Dispose").Any(s => s is IMethodSymbol method && method.IsDisposeMethod());
+            languageVersion.IsAtLeast(LanguageVersionEx.CSharp8)
+            && IsRefStruct(symbol)
+            && symbol.GetMembers("Dispose").Any(x => x.DeclaredAccessibility == Accessibility.Public && KnownMethods.IsIDisposableDispose(x as IMethodSymbol));
 
         internal static bool IsRefStruct(this ITypeSymbol symbol) =>
             symbol != null
