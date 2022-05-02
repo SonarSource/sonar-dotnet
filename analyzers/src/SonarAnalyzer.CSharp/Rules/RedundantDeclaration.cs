@@ -117,10 +117,11 @@ namespace SonarAnalyzer.Rules.CSharp
 
             foreach (var parameter in lambda.ParameterList.Parameters)
             {
-                context.ReportIssue(Diagnostic.Create(Rule,
-                                                                     parameter.Type.GetLocation(),
-                                                                     ImmutableDictionary<string, string>.Empty.Add(DiagnosticTypeKey, RedundancyType.LambdaParameterType.ToString()),
-                                                                     "type specification"));
+                context.ReportIssue(Diagnostic.Create(
+                    Rule,
+                    parameter.Type.GetLocation(),
+                    ImmutableDictionary<string, string>.Empty.Add(DiagnosticTypeKey, RedundancyType.LambdaParameterType.ToString()),
+                    "type specification"));
             }
         }
 

@@ -19,7 +19,7 @@
  */
 
 using System;
-using System.Collections.Concurrent;
+using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Linq;
 using Microsoft.CodeAnalysis;
@@ -51,17 +51,18 @@ namespace SonarAnalyzer.Rules.CSharp
             context.RegisterCompilationStartAction(
                 compilationStartContext =>
                 {
-                    var symbolsWhereTypeIsCreated = new ConcurrentBag<NodeAndSymbol>();
-                    var symbolsWhereLocaleIsSet = new ConcurrentBag<ISymbol>();
+                    var symbolsWhereTypeIsCreated = new HashSet<NodeAndSymbol>();
+                    var symbolsWhereLocaleIsSet = new HashSet<ISymbol>();
 
-                    compilationStartContext.RegisterSyntaxNodeActionInNonGenerated(ProcessObjectCreations(symbolsWhereTypeIsCreated),
-                                                                                   SyntaxKind.ObjectCreationExpression,
-                                                                                   SyntaxKindEx.ImplicitObjectCreationExpression);
+                    compilationStartContext.RegisterSyntaxNodeActionInNonGenerated(
+                        ProcessObjectCreations(symbolsWhereTypeIsCreated),
+                        SyntaxKind.ObjectCreationExpression,
+                        SyntaxKindEx.ImplicitObjectCreationExpression);
                     compilationStartContext.RegisterSyntaxNodeActionInNonGenerated(ProcessSimpleAssignments(symbolsWhereLocaleIsSet), SyntaxKind.SimpleAssignmentExpression);
                     compilationStartContext.RegisterCompilationEndAction(ProcessCollectedSymbols(symbolsWhereTypeIsCreated, symbolsWhereLocaleIsSet));
                 });
 
-        private static Action<SyntaxNodeAnalysisContext> ProcessObjectCreations(ConcurrentBag<NodeAndSymbol> symbolsWhereTypeIsCreated) =>
+        private static Action<SyntaxNodeAnalysisContext> ProcessObjectCreations(ISet<NodeAndSymbol> symbolsWhereTypeIsCreated) =>
             c =>
             {
                 if (GetSymbolFromConstructorInvocation(c.Node, c.SemanticModel) is ITypeSymbol objectType
@@ -78,14 +79,14 @@ namespace SonarAnalyzer.Rules.CSharp
                 }
             };
 
-        private static Action<SyntaxNodeAnalysisContext> ProcessSimpleAssignments(ConcurrentBag<ISymbol> symbolsWhereLocaleIsSet) =>
+        private static Action<SyntaxNodeAnalysisContext> ProcessSimpleAssignments(ISet<ISymbol> symbolsWhereLocaleIsSet) =>
             c =>
             {
                 var assignmentExpression = (AssignmentExpressionSyntax)c.Node;
 
                 if (GetPropertySymbol(assignmentExpression, c.SemanticModel) is { } propertySymbol
-                    && propertySymbol.ContainingType.IsAny(CheckedTypes)
-                    && propertySymbol.Name == "Locale")
+                    && propertySymbol.Name == "Locale"
+                    && propertySymbol.ContainingType.IsAny(CheckedTypes))
                 {
                     var variableSymbol = GetAccessedVariable(assignmentExpression, c.SemanticModel);
                     if (variableSymbol != null)
@@ -95,8 +96,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 }
             };
 
-        private static Action<CompilationAnalysisContext> ProcessCollectedSymbols(ConcurrentBag<NodeAndSymbol> symbolsWhereTypeIsCreated,
-                                                                                  ConcurrentBag<ISymbol> symbolsWhereLocaleIsSet) =>
+        private static Action<CompilationAnalysisContext> ProcessCollectedSymbols(ICollection<NodeAndSymbol> symbolsWhereTypeIsCreated, ICollection<ISymbol> symbolsWhereLocaleIsSet) =>
             c =>
             {
                 foreach (var invalidCreation in symbolsWhereTypeIsCreated.Where(x => !symbolsWhereLocaleIsSet.Contains(x.Symbol)))

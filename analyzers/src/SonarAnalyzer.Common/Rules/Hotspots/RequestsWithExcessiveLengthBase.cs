@@ -18,7 +18,6 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.IO;
@@ -76,7 +75,7 @@ namespace SonarAnalyzer.Rules
             context.RegisterCompilationStartAction(
                 c =>
                 {
-                    var attributesOverTheLimit = new ConcurrentDictionary<SyntaxNode, Attributes>();
+                    var attributesOverTheLimit = new Dictionary<SyntaxNode, Attributes>();
 
                     c.RegisterSyntaxNodeActionInNonGenerated(
                         Language.GeneratedCodeRecognizer,
@@ -96,7 +95,7 @@ namespace SonarAnalyzer.Rules
             attributeName.Equals(RequestSizeLimit, Language.NameComparison)
             || attributeName.Equals(RequestSizeLimitAttribute, Language.NameComparison);
 
-        private void CollectAttributesOverTheLimit(SyntaxNodeAnalysisContext context, ConcurrentDictionary<SyntaxNode, Attributes> attributesOverTheLimit)
+        private void CollectAttributesOverTheLimit(SyntaxNodeAnalysisContext context, IDictionary<SyntaxNode, Attributes> attributesOverTheLimit)
         {
             if (!IsEnabled(context.Options))
             {
@@ -118,14 +117,13 @@ namespace SonarAnalyzer.Rules
             if ((requestSizeLimit != null || requestFormLimits != null)
                 && GetMethodLocalFunctionOrClassDeclaration(attribute) is { } declaration)
             {
-                attributesOverTheLimit.AddOrUpdate(
-                    declaration,
-                    new Attributes(requestFormLimits, requestSizeLimit),
-                    (_, attributes) => new Attributes(requestFormLimits, requestSizeLimit, attributes));
+                attributesOverTheLimit[declaration] = attributesOverTheLimit.TryGetValue(declaration, out var existingAttribute)
+                    ? new Attributes(requestFormLimits, requestSizeLimit, existingAttribute)
+                    : new Attributes(requestFormLimits, requestSizeLimit);
             }
         }
 
-        private void ReportOnCollectedAttributes(CompilationAnalysisContext context, ConcurrentDictionary<SyntaxNode, Attributes> attributesOverTheLimit)
+        private void ReportOnCollectedAttributes(CompilationAnalysisContext context, IDictionary<SyntaxNode, Attributes> attributesOverTheLimit)
         {
             foreach (var invalidAttributes in attributesOverTheLimit.Values)
             {
