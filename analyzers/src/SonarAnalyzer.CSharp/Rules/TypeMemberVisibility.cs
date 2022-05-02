@@ -93,7 +93,7 @@ namespace SonarAnalyzer.Rules.CSharp
                            // We skip overridden methods since they need to keep the public visibility (if present)
                            .Where(declaration => declaration.Modifiers().AnyOfKind(SyntaxKind.PublicKeyword)
                                                  && !declaration.Modifiers().AnyOfKind(SyntaxKind.OverrideKeyword)
-                                                 && !IsInterfaceImplementation(declaration, semanticModel))
+                                                 && !IsInterfaceImplementation(semanticModel, declaration))
                            .Select(declaration => declaration.Modifiers().Single(modifier => modifier.IsKind(SyntaxKind.PublicKeyword)).GetLocation())
                            .ToList();
             }
@@ -101,7 +101,7 @@ namespace SonarAnalyzer.Rules.CSharp
             return new List<Location>();
         }
 
-        private static bool IsInterfaceImplementation(MemberDeclarationSyntax declaration, SemanticModel semanticModel) =>
+        private static bool IsInterfaceImplementation(SemanticModel semanticModel, MemberDeclarationSyntax declaration) =>
             semanticModel.GetDeclaredSymbol(declaration)?.GetInterfaceMember() != null;
 
         private static BaseTypeDeclarationSyntax GetParentType(SyntaxNode node) =>
