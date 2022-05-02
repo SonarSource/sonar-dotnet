@@ -62,13 +62,15 @@ namespace SonarAnalyzer.Rules.CSharp
                     case EnumDeclarationSyntax enumDeclaration:
                         ReportRedundantBaseType(c, enumDeclaration, KnownType.System_Int32, MessageEnum);
                         break;
-                    case TypeDeclarationSyntax nonInterfaceDeclaration when nonInterfaceDeclaration is not { RawKind: (int)SyntaxKind.InterfaceDeclaration }:
-                        ReportRedundantBaseType(c, nonInterfaceDeclaration, KnownType.System_Object, MessageObjectBase);
-                        ReportRedundantInterfaces(c, nonInterfaceDeclaration);
-                        break;
                     case InterfaceDeclarationSyntax interfaceDeclaration:
                         ReportRedundantInterfaces(c, interfaceDeclaration);
                         break;
+                    case TypeDeclarationSyntax nonInterfaceDeclaration:
+                        ReportRedundantBaseType(c, nonInterfaceDeclaration, KnownType.System_Object, MessageObjectBase);
+                        ReportRedundantInterfaces(c, nonInterfaceDeclaration);
+                        break;
+                    default:
+                        throw new InvalidOperationException($"node type {c.Node?.Kind()} not supported.");
                 }
             },
             SyntaxKind.EnumDeclaration,
