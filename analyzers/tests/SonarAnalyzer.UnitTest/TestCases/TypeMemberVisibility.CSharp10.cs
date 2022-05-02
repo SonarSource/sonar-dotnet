@@ -2,7 +2,7 @@
 
 namespace Tests.Diagnostics
 {
-    internal record struct Noncompliant // FN
+    internal record struct Noncompliant // Noncompliant
     {
         public static decimal A = 3.14m;
         private decimal E = 1m;
@@ -14,7 +14,7 @@ namespace Tests.Diagnostics
         private int GetE() => 1;
     }
 
-    internal record struct NoncompliantPositionalRecord(string Property) // FN
+    internal record struct NoncompliantPositionalRecord(string Property) // Noncompliant
     {
         public static decimal A = 3.14m;
     }
