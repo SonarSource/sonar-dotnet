@@ -95,7 +95,7 @@ namespace SonarAnalyzer.Rules
             attributeName.Equals(RequestSizeLimit, Language.NameComparison)
             || attributeName.Equals(RequestSizeLimitAttribute, Language.NameComparison);
 
-        private void CollectAttributesOverTheLimit(SyntaxNodeAnalysisContext context, Dictionary<SyntaxNode, Attributes> attributesOverTheLimit)
+        private void CollectAttributesOverTheLimit(SyntaxNodeAnalysisContext context, IDictionary<SyntaxNode, Attributes> attributesOverTheLimit)
         {
             if (!IsEnabled(context.Options))
             {
@@ -123,7 +123,7 @@ namespace SonarAnalyzer.Rules
             }
         }
 
-        private void ReportOnCollectedAttributes(CompilationAnalysisContext context, Dictionary<SyntaxNode, Attributes> attributesOverTheLimit)
+        private void ReportOnCollectedAttributes(CompilationAnalysisContext context, IDictionary<SyntaxNode, Attributes> attributesOverTheLimit)
         {
             foreach (var invalidAttributes in attributesOverTheLimit.Values)
             {

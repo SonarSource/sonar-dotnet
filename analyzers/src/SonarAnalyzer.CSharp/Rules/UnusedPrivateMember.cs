@@ -298,10 +298,7 @@ namespace SonarAnalyzer.Rules.CSharp
             privateSymbols.AddRange(removableSymbolCollector.PrivateSymbols);
 
             // Keep the removable internal types for when the compilation ends
-            foreach (var internalSymbol in removableSymbolCollector.InternalSymbols)
-            {
-                internalSymbols.Add(internalSymbol);
-            }
+            internalSymbols.AddRange(removableSymbolCollector.InternalSymbols);
 
             foreach (var keyValuePair in removableSymbolCollector.FieldLikeSymbols)
             {

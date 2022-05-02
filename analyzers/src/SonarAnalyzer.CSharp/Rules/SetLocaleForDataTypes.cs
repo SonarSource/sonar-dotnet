@@ -62,7 +62,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     compilationStartContext.RegisterCompilationEndAction(ProcessCollectedSymbols(symbolsWhereTypeIsCreated, symbolsWhereLocaleIsSet));
                 });
 
-        private static Action<SyntaxNodeAnalysisContext> ProcessObjectCreations(HashSet<NodeAndSymbol> symbolsWhereTypeIsCreated) =>
+        private static Action<SyntaxNodeAnalysisContext> ProcessObjectCreations(ISet<NodeAndSymbol> symbolsWhereTypeIsCreated) =>
             c =>
             {
                 if (GetSymbolFromConstructorInvocation(c.Node, c.SemanticModel) is ITypeSymbol objectType
@@ -79,14 +79,14 @@ namespace SonarAnalyzer.Rules.CSharp
                 }
             };
 
-        private static Action<SyntaxNodeAnalysisContext> ProcessSimpleAssignments(HashSet<ISymbol> symbolsWhereLocaleIsSet) =>
+        private static Action<SyntaxNodeAnalysisContext> ProcessSimpleAssignments(ISet<ISymbol> symbolsWhereLocaleIsSet) =>
             c =>
             {
                 var assignmentExpression = (AssignmentExpressionSyntax)c.Node;
 
                 if (GetPropertySymbol(assignmentExpression, c.SemanticModel) is { } propertySymbol
-                    && propertySymbol.ContainingType.IsAny(CheckedTypes)
-                    && propertySymbol.Name == "Locale")
+                    && propertySymbol.Name == "Locale"
+                    && propertySymbol.ContainingType.IsAny(CheckedTypes))
                 {
                     var variableSymbol = GetAccessedVariable(assignmentExpression, c.SemanticModel);
                     if (variableSymbol != null)
@@ -96,7 +96,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 }
             };
 
-        private static Action<CompilationAnalysisContext> ProcessCollectedSymbols(HashSet<NodeAndSymbol> symbolsWhereTypeIsCreated, HashSet<ISymbol> symbolsWhereLocaleIsSet) =>
+        private static Action<CompilationAnalysisContext> ProcessCollectedSymbols(ICollection<NodeAndSymbol> symbolsWhereTypeIsCreated, ICollection<ISymbol> symbolsWhereLocaleIsSet) =>
             c =>
             {
                 foreach (var invalidCreation in symbolsWhereTypeIsCreated.Where(x => !symbolsWhereLocaleIsSet.Contains(x.Symbol)))
