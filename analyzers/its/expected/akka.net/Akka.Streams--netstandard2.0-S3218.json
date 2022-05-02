@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S3218",
+"message":  "Rename this field to not shadow the outer class' member with the same name.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\ActorMaterializerImpl.cs",
+"region":  {
+"startLine":  537,
+"startColumn":  35,
+"endLine":  537,
+"endColumn":  40
+}
+}
+}
+]
+}
