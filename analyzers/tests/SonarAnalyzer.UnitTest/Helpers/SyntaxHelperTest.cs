@@ -65,7 +65,7 @@ End Class";
             nodes.OfType<VB.MethodBlockSyntax>().Single().GetName().Should().Be("Method");
             nodes.OfType<VB.MethodStatementSyntax>().Single().GetName().Should().Be("Method");
             nodes.OfType<VB.ParameterSyntax>().Single().GetName().Should().Be("Input");
-            nodes.OfType<VB.PredefinedTypeSyntax>().Single().GetName().Should().Be("Object");
+            nodes.OfType<VB.PredefinedTypeSyntax>().First().GetName().Should().Be("Object");
             nodes.OfType<VB.MemberAccessExpressionSyntax>().Single().GetName().Should().Be("ToString");
             nodes.OfType<VB.IdentifierNameSyntax>().Select(x => x.GetName()).Should().BeEquivalentTo("Input", "ToString");
             nodes.OfType<VB.InvocationExpressionSyntax>().Single().GetName().Should().Be("ToString");
