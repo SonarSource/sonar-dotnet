@@ -51,10 +51,13 @@ namespace SonarAnalyzer.Rules.CSharp
                         return;
                     }
                     var typeParameterNames = typeDeclaration.TypeParameterList.Parameters.Select(x => x.Identifier.ToString()).ToArray();
-                    var fields = typeDeclaration.Members.OfType<FieldDeclarationSyntax>().Where(x => x.Modifiers.Any(SyntaxKind.StaticKeyword));
-                    foreach (var field in fields.Where(x => !HasGenericType(c, x.Declaration.Type, typeParameterNames)))
+                    var variables = typeDeclaration.Members
+                        .OfType<FieldDeclarationSyntax>()
+                        .Where(x => x.Modifiers.Any(SyntaxKind.StaticKeyword) && !HasGenericType(c, x.Declaration.Type, typeParameterNames))
+                        .SelectMany(x => x.Declaration.Variables);
+                    foreach (var variable in variables)
                     {
-                        field.Declaration.Variables.ToList().ForEach(variable => CheckMember(c, variable, variable.Identifier.GetLocation(), typeParameterNames));
+                        CheckMember(c, variable, variable.Identifier.GetLocation(), typeParameterNames);
                     }
                     foreach (var property in typeDeclaration.Members.OfType<PropertyDeclarationSyntax>().Where(x => x.Modifiers.Any(SyntaxKind.StaticKeyword)))
                     {
