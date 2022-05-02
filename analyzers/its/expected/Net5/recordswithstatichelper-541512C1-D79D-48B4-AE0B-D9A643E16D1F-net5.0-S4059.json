@@ -1,0 +1,28 @@
+{
+"issues":  [
+{
+"id":  "S4059",
+"message":  "Change either the name of property 'Pounds' or the name of method 'GetPounds' to make them distinguishable.",
+"location":  [
+{
+"uri":  "sources\Net5\Net5Samples\RecordWithStaticHelper\Program.cs",
+"region":  {
+"startLine":  13,
+"startColumn":  19,
+"endLine":  13,
+"endColumn":  25
+}
+},
+{
+"uri":  "sources\Net5\Net5Samples\RecordWithStaticHelper\Program.cs",
+"region":  {
+"startLine":  15,
+"startColumn":  26,
+"endLine":  15,
+"endColumn":  35
+}
+}
+]
+}
+]
+}

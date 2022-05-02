@@ -27,75 +27,58 @@ using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.Helpers;
+using StyleCop.Analyzers.Lightup;
 
 namespace SonarAnalyzer.Rules.CSharp
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
     public sealed class PropertyNamesShouldNotMatchGetMethods : SonarDiagnosticAnalyzer
     {
-        internal const string DiagnosticId = "S4059";
-        private const string MessageFormat = "Change either the name of property '{0}' or the name of " +
-            "method '{1}' to make them distinguishable.";
+        private const string DiagnosticId = "S4059";
+        private const string MessageFormat = "Change either the name of property '{0}' or the name of method '{1}' to make them distinguishable.";
 
-        private static readonly DiagnosticDescriptor rule =
-            DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(rule);
+        private static readonly DiagnosticDescriptor Rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
 
-        protected override void Initialize(SonarAnalysisContext context)
-        {
-            context.RegisterSyntaxNodeActionInNonGenerated(
-                c =>
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
+
+        protected override void Initialize(SonarAnalysisContext context) =>
+            context.RegisterSyntaxNodeActionInNonGenerated(c =>
                 {
-                    if (!(c.SemanticModel.GetDeclaredSymbol(c.Node) is INamedTypeSymbol classSymbol))
+                    if (c.SemanticModel.GetDeclaredSymbol(c.Node) is not INamedTypeSymbol typeSymbol)
                     {
                         return;
                     }
+                    var typeMembers = typeSymbol.GetMembers().Where(SymbolHelper.IsPubliclyAccessible);
+                    var properties = typeMembers.OfType<IPropertySymbol>().Where(property => !property.IsOverride).ToArray();
+                    var methods = typeMembers.OfType<IMethodSymbol>().ToArray();
 
-                    var classMembers = classSymbol.GetMembers().Where(SymbolHelper.IsPubliclyAccessible);
-                    var properties = classMembers.OfType<IPropertySymbol>().Where(property => !property.IsOverride);
-                    var methods = classMembers.OfType<IMethodSymbol>().ToList();
-
-                    foreach (var collidingMembers in GetCollidingMembers(properties, methods))
+                    foreach (var collidingMembers in CollidingMembers(properties, methods))
                     {
                         var propertyIdentifier = collidingMembers.Item1;
                         var methodIdentifier = collidingMembers.Item2;
-
-                        c.ReportIssue(Diagnostic.Create(
-                            rule,
-                            propertyIdentifier.GetLocation(),
-                            additionalLocations: new[] { methodIdentifier.GetLocation() },
-                            messageArgs: new[] { propertyIdentifier.ValueText, methodIdentifier.ValueText }));
+                        c.ReportIssue(Diagnostic.Create(Rule, propertyIdentifier.GetLocation(), new[] { methodIdentifier.GetLocation() }, propertyIdentifier.ValueText, methodIdentifier.ValueText));
                     }
-                }, SyntaxKind.ClassDeclaration);
-        }
+                },
+                SyntaxKind.ClassDeclaration,
+                SyntaxKind.InterfaceDeclaration,
+                SyntaxKindEx.RecordClassDeclaration,
+                SyntaxKindEx.RecordStructDeclaration,
+                SyntaxKind.StructDeclaration);
 
-        private static IEnumerable<Tuple<SyntaxToken, SyntaxToken>> GetCollidingMembers(
-            IEnumerable<IPropertySymbol> properties, IEnumerable<IMethodSymbol> methods)
+        private static IEnumerable<Tuple<SyntaxToken, SyntaxToken>> CollidingMembers(IPropertySymbol[] properties, IMethodSymbol[] methods)
         {
             foreach (var property in properties)
             {
-                var collidingMethod = methods.FirstOrDefault(method => AreCollidingNames(property.Name, method.Name));
-                if (collidingMethod == null)
+                if (methods.FirstOrDefault(x => AreCollidingNames(property.Name, x.Name)) is { } collidingMethod
+                    && collidingMethod.DeclaringSyntaxReferences.FirstOrDefault()?.GetSyntax() is MethodDeclarationSyntax methodSyntax
+                    && property.DeclaringSyntaxReferences.FirstOrDefault()?.GetSyntax() is PropertyDeclarationSyntax propertySyntax)
                 {
-                    continue;
+                    yield return new Tuple<SyntaxToken, SyntaxToken>(propertySyntax.Identifier, methodSyntax.Identifier);
                 }
-
-                var methodSyntax = collidingMethod.DeclaringSyntaxReferences.FirstOrDefault()?.GetSyntax()
-                    as MethodDeclarationSyntax;
-
-                if (!(property.DeclaringSyntaxReferences.FirstOrDefault()?.GetSyntax() is PropertyDeclarationSyntax propertySyntax) || methodSyntax == null)
-                {
-                    continue;
-                }
-
-                yield return new Tuple<SyntaxToken, SyntaxToken>(propertySyntax.Identifier, methodSyntax.Identifier);
             }
         }
 
-        private static bool AreCollidingNames(string propertyName, string methodName)
-        {
-            return methodName.Equals(propertyName, StringComparison.OrdinalIgnoreCase) ||
-                methodName.Equals("Get" + propertyName, StringComparison.OrdinalIgnoreCase);
-        }
+        private static bool AreCollidingNames(string propertyName, string methodName) =>
+            methodName.Equals(propertyName, StringComparison.OrdinalIgnoreCase) || methodName.Equals("Get" + propertyName, StringComparison.OrdinalIgnoreCase);
     }
 }

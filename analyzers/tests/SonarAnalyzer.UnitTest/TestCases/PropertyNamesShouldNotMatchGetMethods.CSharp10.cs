@@ -4,9 +4,9 @@ namespace Tests.Diagnostics
 {
     public record struct RecordStruct
     {
-        public int Foo // FN
+        public int Foo // Noncompliant
         { get; set; }
-        public int GetFoo()
+        public int GetFoo() // Secondary
         { return 1; }
 
         public DateTime Date { get; }
@@ -15,28 +15,29 @@ namespace Tests.Diagnostics
             return Date.ToString();
         }
 
-        public string Bar // FN
+        public string Bar   // Noncompliant
         { get; }
-        public int Bar() // Error [CS0102]
+        public int Bar()    // Error [CS0102]
+                            // Secondary@-1
         {
             return 42;
         }
 
-        private string Color { get; } // Compliant - property is private
+        private string Color { get; }   // Compliant - property is private
         public string GetColor() { return ""; }
 
-        public string Day { get; } // Compliant - method is private
+        public string Day { get; }      // Compliant - method is private
         private string GetDay() { return ""; }
 
-        public string GetWhatever() // FN
+        public string GetWhatever()
         {
             return "";
         }
 
-        public string SomeWeirdCase // FN
+        public string SomeWeirdCase // Noncompliant
         { get; }
 
-        public string SOMEWEIRDCASE() // FN
+        public string SOMEWEIRDCASE() // Secondary
         {
             return "";
         }
@@ -46,9 +47,9 @@ namespace Tests.Diagnostics
 
     public record struct PositionalRecordStruct
     {
-        public int Foo // FN
+        public int Foo // Noncompliant
         { get; set; }
-        public int GetFoo()
+        public int GetFoo() // Secondary
         { return 1; }
 
         public DateTime Date { get; }
@@ -57,9 +58,10 @@ namespace Tests.Diagnostics
             return Date.ToString();
         }
 
-        public string Bar // FN
+        public string Bar   // Noncompliant
         { get; }
-        public int Bar() // Error [CS0102]
+        public int Bar()    // Error [CS0102]
+                            // Secondary@-1
         {
             return 42;
         }
@@ -70,15 +72,15 @@ namespace Tests.Diagnostics
         public string Day { get; } // Compliant - method is private
         private string GetDay() { return ""; }
 
-        public string GetWhatever() // FN
+        public string GetWhatever()
         {
             return "";
         }
 
-        public string SomeWeirdCase // FN
+        public string SomeWeirdCase // Noncompliant
         { get; }
 
-        public string SOMEWEIRDCASE() // FN
+        public string SOMEWEIRDCASE() // Secondary
         {
             return "";
         }
