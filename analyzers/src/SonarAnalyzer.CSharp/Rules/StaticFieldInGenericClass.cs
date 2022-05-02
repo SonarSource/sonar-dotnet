@@ -24,6 +24,7 @@ using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
+using SonarAnalyzer.Extensions;
 using SonarAnalyzer.Helpers;
 using StyleCop.Analyzers.Lightup;
 
@@ -40,41 +41,44 @@ namespace SonarAnalyzer.Rules.CSharp
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
 
         protected override void Initialize(SonarAnalysisContext context) =>
-            context.RegisterSyntaxNodeActionInNonGenerated(
-                c =>
+            context.RegisterSyntaxNodeActionInNonGenerated(c =>
                 {
                     var typeDeclaration = (TypeDeclarationSyntax)c.Node;
-                    if (c.ContainingSymbol.Kind != SymbolKind.NamedType
+                    if (c.IsRedundantPositionalRecordContext()
                         || typeDeclaration.TypeParameterList == null
                         || typeDeclaration.TypeParameterList.Parameters.Count < 1)
                     {
                         return;
                     }
                     var typeParameterNames = typeDeclaration.TypeParameterList.Parameters.Select(x => x.Identifier.ToString()).ToArray();
-                    var fields = typeDeclaration.Members.OfType<FieldDeclarationSyntax>().Where(f => f.Modifiers.Any(SyntaxKind.StaticKeyword));
-                    foreach (var field in fields.Where(field => !HasGenericType(field.Declaration.Type, typeParameterNames, c)))
+                    var variables = typeDeclaration.Members
+                        .OfType<FieldDeclarationSyntax>()
+                        .Where(x => x.Modifiers.Any(SyntaxKind.StaticKeyword) && !HasGenericType(c, x.Declaration.Type, typeParameterNames))
+                        .SelectMany(x => x.Declaration.Variables);
+                    foreach (var variable in variables)
                     {
-                        field.Declaration.Variables.ToList().ForEach(variable => CheckMember(variable, variable.Identifier.GetLocation(), typeParameterNames, c));
+                        CheckMember(c, variable, variable.Identifier.GetLocation(), typeParameterNames);
                     }
                     foreach (var property in typeDeclaration.Members.OfType<PropertyDeclarationSyntax>().Where(x => x.Modifiers.Any(SyntaxKind.StaticKeyword)))
                     {
-                        CheckMember(property, property.Identifier.GetLocation(), typeParameterNames, c);
+                        CheckMember(c, property, property.Identifier.GetLocation(), typeParameterNames);
                     }
                 },
                 SyntaxKind.ClassDeclaration,
                 SyntaxKind.InterfaceDeclaration,
                 SyntaxKindEx.RecordClassDeclaration,
+                SyntaxKindEx.RecordStructDeclaration,
                 SyntaxKind.StructDeclaration);
 
-        private static void CheckMember(SyntaxNode root, Location location, string[] typeParameterNames, SyntaxNodeAnalysisContext context)
+        private static void CheckMember(SyntaxNodeAnalysisContext context, SyntaxNode root, Location location, string[] typeParameterNames)
         {
-            if (!HasGenericType(root, typeParameterNames, context))
+            if (!HasGenericType(context, root, typeParameterNames))
             {
                 context.ReportIssue(Diagnostic.Create(Rule, location));
             }
         }
 
-        private static bool HasGenericType(SyntaxNode root, string[] typeParameterNames, SyntaxNodeAnalysisContext context) =>
+        private static bool HasGenericType(SyntaxNodeAnalysisContext context, SyntaxNode root, string[] typeParameterNames) =>
             root.DescendantNodesAndSelf()
                 .OfType<IdentifierNameSyntax>()
                 .Any(x => typeParameterNames.Contains(x.Identifier.Value) && context.SemanticModel.GetSymbolInfo(x).Symbol is { Kind: SymbolKind.TypeParameter });
