@@ -25,6 +25,7 @@ using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
+using SonarAnalyzer.Extensions;
 using SonarAnalyzer.Helpers;
 using StyleCop.Analyzers.Lightup;
 
@@ -37,22 +38,30 @@ namespace SonarAnalyzer.Rules.CSharp
         private const string MessageFormat = "Types should not have members with visibility set higher than the type's visibility";
 
         private static readonly DiagnosticDescriptor Rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
-        private static readonly SyntaxKind[] TypeKinds = { SyntaxKind.ClassDeclaration, SyntaxKind.StructDeclaration, SyntaxKind.EnumDeclaration, SyntaxKindEx.RecordClassDeclaration };
+        private static readonly SyntaxKind[] TypeKinds =
+        {
+            SyntaxKind.ClassDeclaration,
+            SyntaxKind.EnumDeclaration,
+            SyntaxKindEx.RecordClassDeclaration,
+            SyntaxKindEx.RecordStructDeclaration,
+            SyntaxKind.StructDeclaration,
+        };
         private static readonly SyntaxKind[] MemberDeclarationKinds =
         {
             SyntaxKind.ClassDeclaration,
             SyntaxKind.ConstructorDeclaration,
             SyntaxKind.DelegateDeclaration,
+            SyntaxKind.EnumDeclaration,
             SyntaxKind.EventDeclaration,
             SyntaxKind.EventFieldDeclaration,
-            SyntaxKind.EnumDeclaration,
             SyntaxKind.FieldDeclaration,
             SyntaxKind.IndexerDeclaration,
             SyntaxKind.InterfaceDeclaration,
             SyntaxKind.MethodDeclaration,
             SyntaxKind.PropertyDeclaration,
             SyntaxKindEx.RecordClassDeclaration,
-            SyntaxKind.StructDeclaration
+            SyntaxKindEx.RecordStructDeclaration,
+            SyntaxKind.StructDeclaration,
         };
 
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(Rule);
@@ -60,17 +69,20 @@ namespace SonarAnalyzer.Rules.CSharp
         protected override void Initialize(SonarAnalysisContext context) =>
             context.RegisterSyntaxNodeActionInNonGenerated(c =>
                 {
+                    if (c.IsRedundantPositionalRecordContext())
+                    {
+                        return;
+                    }
                     var typeDeclaration = (BaseTypeDeclarationSyntax)c.Node;
-                    var secondaryLocations = GetInvalidMemberLocations(typeDeclaration, c.SemanticModel);
-                    if (c.ContainingSymbol.Kind == SymbolKind.NamedType
-                        && secondaryLocations.Any())
+                    var secondaryLocations = GetInvalidMemberLocations(c.SemanticModel, typeDeclaration);
+                    if (secondaryLocations.Any())
                     {
                         c.ReportIssue(Diagnostic.Create(Rule, typeDeclaration.Identifier.GetLocation(), secondaryLocations));
                     }
                 },
                 TypeKinds);
 
-        private static List<Location> GetInvalidMemberLocations(BaseTypeDeclarationSyntax type, SemanticModel semanticModel)
+        private static List<Location> GetInvalidMemberLocations(SemanticModel semanticModel, BaseTypeDeclarationSyntax type)
         {
             var parentType = GetParentType(type);
             if (parentType == null && type.Modifiers.AnyOfKind(SyntaxKind.InternalKeyword))
