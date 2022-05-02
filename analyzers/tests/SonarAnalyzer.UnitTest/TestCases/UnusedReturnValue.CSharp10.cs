@@ -40,7 +40,7 @@ record struct RecordStruct
         var o = SomeGenericMethod2<object>();
     }
 
-    private T SomeGenericMethod<T>() where T : class { return null; } // FN
+    private T SomeGenericMethod<T>() where T : class { return null; } // Noncompliant {{Change return type to 'void'; not a single caller uses the returned value.}}
     private T SomeGenericMethod2<T>() where T : class { return null; }
 }
 
@@ -57,6 +57,6 @@ record struct PositionalRecordStruct(int SomeProperty)
         var o = SomeGenericMethod2<object>();
     }
 
-    private T SomeGenericMethod<T>() where T : class { return null; } // FN
+    private T SomeGenericMethod<T>() where T : class { return null; } // Noncompliant {{Change return type to 'void'; not a single caller uses the returned value.}}
     private T SomeGenericMethod2<T>() where T : class { return null; }
 }
