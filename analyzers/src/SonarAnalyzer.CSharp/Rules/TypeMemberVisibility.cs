@@ -85,7 +85,7 @@ namespace SonarAnalyzer.Rules.CSharp
         private static List<Location> GetInvalidMemberLocations(SemanticModel semanticModel, BaseTypeDeclarationSyntax type)
         {
             var parentType = GetParentType(type);
-            if (parentType == null && type.Modifiers.AnyOfKind(SyntaxKind.InternalKeyword))
+            if (parentType is null && type.Modifiers.AnyOfKind(SyntaxKind.InternalKeyword))
             {
                 return type.DescendantNodes()
                            .Where(node => node.IsAnyKind(MemberDeclarationKinds))
