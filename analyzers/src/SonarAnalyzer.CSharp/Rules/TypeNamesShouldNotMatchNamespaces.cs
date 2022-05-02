@@ -59,8 +59,8 @@ namespace SonarAnalyzer.Rules.CSharp
             context.RegisterSyntaxNodeActionInNonGenerated(c =>
             {
                 if (!c.IsRedundantPositionalRecordContext()
-                        && IsDeclaredPublic(c.SemanticModel, c.Node)
                         && CSharpFacade.Instance.Syntax.NodeIdentifier(c.Node) is { } identifier
+                        && IsDeclaredPublic(c.SemanticModel, c.Node)
                         && FrameworkNamespaces.Contains(identifier.ValueText))
                 {
                     c.ReportIssue(Diagnostic.Create(Rule, identifier.GetLocation(), identifier.ValueText));
