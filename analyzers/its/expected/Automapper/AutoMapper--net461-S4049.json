@@ -41,6 +41,19 @@
 },
 {
 "id":  "S4049",
+"message":  "Consider making method 'GetTypeDefinitionIfGeneric' a property.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\Internal\TypePair.cs",
+"region":  {
+"startLine":  56,
+"startColumn":  25,
+"endLine":  56,
+"endColumn":  51
+}
+}
+},
+{
+"id":  "S4049",
 "message":  "Consider making method 'GetCurrentPath' a property.",
 "location":  {
 "uri":  "sources\Automapper\src\AutoMapper\QueryableExtensions\ProjectionBuilder.cs",
