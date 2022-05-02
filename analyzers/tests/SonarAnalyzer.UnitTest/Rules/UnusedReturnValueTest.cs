@@ -27,32 +27,31 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class UnusedReturnValueTest
     {
+        private static readonly VerifierBuilder Builder = new VerifierBuilder<UnusedReturnValue>();
+
         [TestMethod]
         public void UnusedReturnValue() =>
-            OldVerifier.VerifyAnalyzer(
-                @"TestCases\UnusedReturnValue.cs",
-                new UnusedReturnValue(),
-                ParseOptionsHelper.FromCSharp8);
+            Builder.AddPaths("UnusedReturnValue.cs").WithOptions(ParseOptionsHelper.FromCSharp8).Verify();
 
         [TestMethod]
         public void UnusedReturnValueWithPartialClasses() =>
-            OldVerifier.VerifyAnalyzer(
-                new[] { @"TestCases\UnusedReturnValue.part1.cs", @"TestCases\UnusedReturnValue.part2.cs", @"TestCases\UnusedReturnValue.External.cs" },
-                new UnusedReturnValue(),
-                ParseOptionsHelper.FromCSharp8);
+            Builder.AddPaths("UnusedReturnValue.part1.cs", "UnusedReturnValue.part2.cs", "UnusedReturnValue.External.cs").WithOptions(ParseOptionsHelper.FromCSharp8).Verify();
 
 #if NET
+
         [TestMethod]
         public void UnusedReturnValue_CSharp9() =>
-            OldVerifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\UnusedReturnValue.CSharp9.cs", new UnusedReturnValue());
+            Builder.AddPaths("UnusedReturnValue.CSharp9.cs").WithTopLevelStatements().Verify();
 
         [TestMethod]
         public void UnusedReturnValue_CSharp10() =>
-            OldVerifier.VerifyAnalyzerFromCSharp10Console(@"TestCases\UnusedReturnValue.CSharp10.cs", new UnusedReturnValue());
+            Builder.AddPaths("UnusedReturnValue.CSharp10.cs").WithTopLevelStatements().WithOptions(ParseOptionsHelper.FromCSharp10).Verify();
 
         [TestMethod]
         public void UnusedReturnValue_CSharpPreview() =>
-            OldVerifier.VerifyAnalyzerCSharpPreviewLibrary(@"TestCases\UnusedReturnValue.CSharpPreview.cs", new UnusedReturnValue());
+            Builder.AddPaths("UnusedReturnValue.CSharpPreview.cs").WithOptions(ParseOptionsHelper.CSharpPreview).Verify();
+
 #endif
+
     }
 }
