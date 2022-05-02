@@ -2,7 +2,7 @@
 "issues":  [
 {
 "id":  "S2436",
-"message":  "Reduce the number of generic parameters in the '.LocalBar' method to no more than the 3 authorized.",
+"message":  "Reduce the number of generic parameters in the 'LocalBar' method to no more than the 3 authorized.",
 "location":  {
 "uri":  "sources\Net5\Net5\Main.cs",
 "region":  {
