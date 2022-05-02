@@ -65,6 +65,9 @@ namespace Tests.Diagnostics
             using var notSet = new SmtpClient("host", 25); // Noncompliant {{EnableSsl should be set to true.}}
             using var constructorFalse = new SmtpClient("host", 25) { EnableSsl = false }; // Noncompliant
 
+            using var constructor42 = new SmtpClient("host", 25) { EnableSsl = 42 }; // Error [CS0029] Cannot implicitly convert type 'int' to 'bool'
+            // Noncompliant@-1 FP
+
             using var localhosting = new SmtpClient("localhosting", 25); // Noncompliant
             using var localhost = new SmtpClient("localhost", 25); // Compliant due to well known value
             using var loopback = new SmtpClient("127.0.0.1", 25); // Compliant due to well known value
@@ -169,6 +172,7 @@ namespace Tests.Diagnostics
             "http://purl.org",
             "http://xmlns.com",
             "http://schemas.google.com",
+            "http://schemas.microsoft.com",
             "http://a9.com",
             "http://ns.adobe.com",
             "http://ltsc.ieee.org",
@@ -188,6 +192,7 @@ namespace Tests.Diagnostics
             "http://subdomain.purl.org",                   // Noncompliant
             "http://subdomain.xmlns.com",                  // Noncompliant
             "http://subdomain.schemas.google.com",         // Noncompliant
+            "http://subdomain.schemas.microsoft.com",      // Noncompliant
             "http://subdomain.a9.com",                     // Noncompliant
             "http://subdomain.ns.adobe.com",               // Noncompliant
             "http://subdomain.ltsc.ieee.org",              // Noncompliant
