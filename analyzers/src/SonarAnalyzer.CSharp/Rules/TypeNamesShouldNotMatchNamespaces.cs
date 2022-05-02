@@ -24,6 +24,7 @@ using System.Collections.Immutable;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.Diagnostics;
+using SonarAnalyzer.Extensions;
 using SonarAnalyzer.Helpers;
 using StyleCop.Analyzers.Lightup;
 
@@ -48,7 +49,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 "Drawing", "Dynamic", "EnterpriseServices", "Globalization", "IdentityModel",
                 "InteropServices", "IO", "JScript", "Linq", "Location", "Management", "Media",
                 "Messaging", "Microsoft", "Net", "Numerics", "Printing", "Reflection", "Resources",
-                "Runtime", "security", "server", "servicemodel", "serviceprocess", "speech",
+                "Runtime", "Security", "Server", "Servicemodel", "Serviceprocess", "Speech",
                 "SqlServer", "System", "Tasks", "Text", "Threading", "Timers", "Transactions",
                 "UIAutomationClientsideProviders", "VisualBasic", "VisualC", "Web", "Win32",
                 "Windows", "Workflow", "Xaml", "XamlGeneratedNamespace", "Xml"
@@ -57,22 +58,23 @@ namespace SonarAnalyzer.Rules.CSharp
         protected override void Initialize(SonarAnalysisContext context) =>
             context.RegisterSyntaxNodeActionInNonGenerated(c =>
             {
-                if (c.ContainingSymbol.Kind == SymbolKind.NamedType
-                    && IsDeclaredPublic(c.Node, c.SemanticModel)
-                    && CSharpFacade.Instance.Syntax.NodeIdentifier(c.Node) is { } identifier
-                    && FrameworkNamespaces.Contains(identifier.ValueText))
+                if (!c.IsRedundantPositionalRecordContext()
+                        && IsDeclaredPublic(c.SemanticModel, c.Node)
+                        && CSharpFacade.Instance.Syntax.NodeIdentifier(c.Node) is { } identifier
+                        && FrameworkNamespaces.Contains(identifier.ValueText))
                 {
                     c.ReportIssue(Diagnostic.Create(Rule, identifier.GetLocation(), identifier.ValueText));
                 }
             },
             SyntaxKind.ClassDeclaration,
-            SyntaxKind.StructDeclaration,
-            SyntaxKind.InterfaceDeclaration,
-            SyntaxKind.EnumDeclaration,
             SyntaxKind.DelegateDeclaration,
-            SyntaxKindEx.RecordClassDeclaration);
+            SyntaxKind.EnumDeclaration,
+            SyntaxKind.InterfaceDeclaration,
+            SyntaxKindEx.RecordClassDeclaration,
+            SyntaxKindEx.RecordStructDeclaration,
+            SyntaxKind.StructDeclaration);
 
-        private static bool IsDeclaredPublic(SyntaxNode declaration, SemanticModel semanticModel) =>
+        private static bool IsDeclaredPublic(SemanticModel semanticModel, SyntaxNode declaration) =>
             semanticModel.GetDeclaredSymbol(declaration)?.DeclaredAccessibility == Accessibility.Public;
     }
 }
