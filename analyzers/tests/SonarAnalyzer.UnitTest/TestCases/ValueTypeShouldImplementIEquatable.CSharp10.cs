@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace Tests.Diagnostics
 {
-    record struct MyStruct // FN
+    record struct MyStruct // Compliant. Record struct implement IEquatable by definition
     {
     }
 
