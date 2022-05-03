@@ -145,9 +145,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private static bool CanInterfaceBeRemovedBasedOnMembers(INamedTypeSymbol declaredType, INamedTypeSymbol interfaceType)
         {
-            var allMembersOfInterface = AllInterfacesAndSelf(interfaceType)
-                .SelectMany(x => x.GetMembers())
-                .ToList();
+            var allMembersOfInterface = AllInterfacesAndSelf(interfaceType).SelectMany(x => x.GetMembers()).ToImmutableArray();
 
             if (!allMembersOfInterface.Any())
             {
