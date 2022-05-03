@@ -19,11 +19,14 @@
  */
 
 using System;
+using System.Collections;
 using System.Collections.Immutable;
 using System.Linq;
+using System.Threading.Tasks;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.Diagnostics;
+using SonarAnalyzer.Extensions;
 using SonarAnalyzer.Helpers;
 using StyleCop.Analyzers.Lightup;
 
@@ -40,11 +43,10 @@ namespace SonarAnalyzer.Rules.CSharp
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
 
         protected override void Initialize(SonarAnalysisContext context) =>
-            context.RegisterSyntaxNodeActionInNonGenerated(
-                c =>
+            context.RegisterSyntaxNodeActionInNonGenerated(c =>
                 {
-                    if (c.ContainingSymbol.Kind != SymbolKind.NamedType
-                        || !(c.SemanticModel.GetDeclaredSymbol(c.Node) is INamedTypeSymbol typeSymbol))
+                    if (c.IsRedundantPositionalRecordContext()
+                        || c.SemanticModel.GetDeclaredSymbol(c.Node) is not INamedTypeSymbol typeSymbol)
                     {
                         return;
                     }
@@ -52,10 +54,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     var propertyCandidates = typeSymbol
                         .GetMembers()
                         .OfType<IMethodSymbol>()
-                        .Where(HasCandidateName)
-                        .Where(HasCandidateReturnType)
-                        .Where(HasCandidateSignature)
-                        .Where(UsageAttributesAllowProperties);
+                        .Where(x => HasCandidateName(x) && HasCandidateReturnType(x) && HasCandidateSignature(x) && UsageAttributesAllowProperties(x));
 
                     foreach (var candidate in propertyCandidates)
                     {
@@ -67,7 +66,9 @@ namespace SonarAnalyzer.Rules.CSharp
                 },
                 SyntaxKind.ClassDeclaration,
                 SyntaxKind.InterfaceDeclaration,
-                SyntaxKindEx.RecordClassDeclaration);
+                SyntaxKind.StructDeclaration,
+                SyntaxKindEx.RecordClassDeclaration,
+                SyntaxKindEx.RecordStructDeclaration);
 
         private static bool HasCandidateSignature(IMethodSymbol method) =>
             method.IsPubliclyAccessible()
@@ -85,7 +86,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private static bool HasCandidateName(IMethodSymbol method)
         {
-            if (method.Name == "GetEnumerator" || method.Name == "GetAwaiter")
+            if (method.Name is nameof(IEnumerable.GetEnumerator) or nameof(Task.GetAwaiter))
             {
                 return false;
             }
