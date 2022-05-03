@@ -33,24 +33,24 @@ namespace SonarAnalyzer.UnitTest.Rules
 
         [TestMethod]
         public void MethodOverloadsShouldBeGrouped_CS() =>
-            builder.AddPaths("MethodOverloadsShouldBeGrouped.cs").Verify();
+            builderCS.AddPaths("MethodOverloadsShouldBeGrouped.cs").Verify();
 
 #if NET
         [TestMethod]
         public void MethodOverloadsShouldBeGrouped_CS_CSharp9() =>
-            builder.AddPaths("MethodOverloadsShouldBeGrouped.CSharp9.cs").WithOptions(ParseOptionsHelper.FromCSharp9).Verify();
+            builderCS.AddPaths("MethodOverloadsShouldBeGrouped.CSharp9.cs").WithOptions(ParseOptionsHelper.FromCSharp9).Verify();
 
         [TestMethod]
         public void MethodOverloadsShouldBeGrouped_CS_CSharp10() =>
-            builder.AddPaths("MethodOverloadsShouldBeGrouped.CSharp10.cs").WithOptions(ParseOptionsHelper.FromCSharp10).Verify();
+            builderCS.AddPaths("MethodOverloadsShouldBeGrouped.CSharp10.cs").WithOptions(ParseOptionsHelper.FromCSharp10).Verify();
 
         [TestMethod]
         public void MethodOverloadsShouldBeGrouped_CS_CSharpPreview() =>
-            builder.AddPaths("MethodOverloadsShouldBeGrouped.CSharpPreview.cs").WithOptions(ParseOptionsHelper.CSharpPreview).Verify();
+            builderCS.AddPaths("MethodOverloadsShouldBeGrouped.CSharpPreview.cs").WithOptions(ParseOptionsHelper.CSharpPreview).Verify();
 #endif
 
         [TestMethod]
         public void MethodOverloadsShouldBeGrouped_VB() =>
-            new VerifierBuilder<VB.MethodOverloadsShouldBeGrouped>().AddPaths("MethodOverloadsShouldBeGrouped.vb").Verify();
+            builderVB.AddPaths("MethodOverloadsShouldBeGrouped.vb").Verify();
     }
 }
