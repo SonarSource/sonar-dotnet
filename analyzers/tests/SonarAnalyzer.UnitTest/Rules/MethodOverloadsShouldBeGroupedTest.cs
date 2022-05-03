@@ -28,26 +28,29 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class MethodOverloadsShouldBeGroupedTest
     {
+        private readonly VerifierBuilder builderCS = new VerifierBuilder<CS.MethodOverloadsShouldBeGrouped>();
+        private readonly VerifierBuilder builderVB = new VerifierBuilder<VB.MethodOverloadsShouldBeGrouped>();
+
         [TestMethod]
         public void MethodOverloadsShouldBeGrouped_CS() =>
-            OldVerifier.VerifyAnalyzer(@"TestCases\MethodOverloadsShouldBeGrouped.cs", new CS.MethodOverloadsShouldBeGrouped());
+            builderCS.AddPaths("MethodOverloadsShouldBeGrouped.cs").Verify();
 
 #if NET
         [TestMethod]
         public void MethodOverloadsShouldBeGrouped_CS_CSharp9() =>
-            OldVerifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\MethodOverloadsShouldBeGrouped.CSharp9.cs", new CS.MethodOverloadsShouldBeGrouped());
+            builderCS.AddPaths("MethodOverloadsShouldBeGrouped.CSharp9.cs").WithOptions(ParseOptionsHelper.FromCSharp9).Verify();
 
         [TestMethod]
         public void MethodOverloadsShouldBeGrouped_CS_CSharp10() =>
-            OldVerifier.VerifyAnalyzerFromCSharp10Library(@"TestCases\MethodOverloadsShouldBeGrouped.CSharp10.cs", new CS.MethodOverloadsShouldBeGrouped());
+            builderCS.AddPaths("MethodOverloadsShouldBeGrouped.CSharp10.cs").WithOptions(ParseOptionsHelper.FromCSharp10).Verify();
 
         [TestMethod]
         public void MethodOverloadsShouldBeGrouped_CS_CSharpPreview() =>
-            OldVerifier.VerifyAnalyzerCSharpPreviewLibrary(@"TestCases\MethodOverloadsShouldBeGrouped.CSharpPreview.cs", new CS.MethodOverloadsShouldBeGrouped());
+            builderCS.AddPaths("MethodOverloadsShouldBeGrouped.CSharpPreview.cs").WithOptions(ParseOptionsHelper.CSharpPreview).Verify();
 #endif
 
         [TestMethod]
         public void MethodOverloadsShouldBeGrouped_VB() =>
-            OldVerifier.VerifyAnalyzer(@"TestCases\MethodOverloadsShouldBeGrouped.vb", new VB.MethodOverloadsShouldBeGrouped());
+            builderVB.AddPaths("MethodOverloadsShouldBeGrouped.vb").Verify();
     }
 }

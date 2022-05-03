@@ -39,30 +39,20 @@ namespace SonarAnalyzer.Rules.CSharp
             SyntaxKind.ClassDeclaration,
             SyntaxKind.InterfaceDeclaration,
             SyntaxKind.StructDeclaration,
-            SyntaxKindEx.RecordClassDeclaration
+            SyntaxKindEx.RecordClassDeclaration,
+            SyntaxKindEx.RecordStructDeclaration,
         };
 
-        protected override MemberInfo CreateMemberInfo(SyntaxNodeAnalysisContext c, MemberDeclarationSyntax member)
-        {
-            if (!IsValidMemberForOverload(member))
+        protected override MemberInfo CreateMemberInfo(SyntaxNodeAnalysisContext c, MemberDeclarationSyntax member) =>
+            member switch
             {
-                return null;
-            }
-            if (member is ConstructorDeclarationSyntax constructor)
-            {
-                return new MemberInfo(c, member, constructor.Identifier, constructor.IsStatic(), false, true);
-            }
-            else if (member is MethodDeclarationSyntax method)
-            {
-                return new MemberInfo(c, member, method.Identifier, method.IsStatic(), method.Modifiers.Any(SyntaxKind.AbstractKeyword), true);
-            }
-            return null;
-        }
+                ConstructorDeclarationSyntax constructor => new MemberInfo(c, member, constructor.Identifier, constructor.IsStatic(), false, true),
+                MethodDeclarationSyntax { ExplicitInterfaceSpecifier: { } } => null, // Skip explicit interface implementations
+                MethodDeclarationSyntax method => new MemberInfo(c, member, method.Identifier, method.IsStatic(), method.Modifiers.Any(SyntaxKind.AbstractKeyword), true),
+                _ => null,
+            };
 
         protected override IEnumerable<MemberDeclarationSyntax> GetMemberDeclarations(SyntaxNode node) =>
             ((TypeDeclarationSyntax)node).Members;
-
-        private static bool IsValidMemberForOverload(MemberDeclarationSyntax member) =>
-            (member as MethodDeclarationSyntax)?.ExplicitInterfaceSpecifier == null;
     }
 }

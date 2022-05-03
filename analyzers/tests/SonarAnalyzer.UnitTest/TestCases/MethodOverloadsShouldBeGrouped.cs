@@ -6,29 +6,29 @@ namespace Tests.Diagnostics
     class A
     {
         void a() { } // Noncompliant {{All 'a' method overloads should be adjacent.}}
-//           ^
+        //   ^
 
         void a(int a, char b) { }
 
         class B { }
 
         void a(string a) { } // Secondary
-//           ^
+        //   ^
 
         interface C { }
 
         void a(int a) { } // Secondary {{Non-adjacent overload}}
-//           ^
+        //   ^
 
         enum D { }
 
         void a(double a) { } // Secondary {{Non-adjacent overload}}
-//           ^
+        //   ^
 
         int myField;
 
         void a(char a) { } // Secondary {{Non-adjacent overload}}
-//           ^
+        //   ^
 
         int MyProperty
         {
@@ -36,7 +36,7 @@ namespace Tests.Diagnostics
         }
 
         void a(char a, int b) { } // Secondary {{Non-adjacent overload}}
-//           ^
+        //   ^
     }
 
     class B
@@ -83,14 +83,14 @@ namespace Tests.Diagnostics
     interface E
     {
         void DoSomething(double b); // Noncompliant {{All 'DoSomething' method overloads should be adjacent.}}
-//           ^^^^^^^^^^^
+        //   ^^^^^^^^^^^
 
         void DoSomething();
 
         void DoSomethingElse();
 
         void DoSomething(int a); // Secondary {{Non-adjacent overload}}
-//           ^^^^^^^^^^^
+        //   ^^^^^^^^^^^
     }
 
     struct F
@@ -390,5 +390,76 @@ namespace Tests.Diagnostics
         public void Something() { }
 
         public void Cancel() { } // Secondary, implements ICancel and ISecond
+    }
+
+    public interface IInterfaceSample
+    {
+        void Grouping();
+        void DoSomething();
+    }
+
+    public class Interface_InterfaceMembersTogether : IInterfaceSample
+    {
+        private void DoSomething(int nonInterfaceOverload) { } // Compliant. DoSomething is kept with the other interface implementations.
+        public void Grouping() { }
+        public void DoSomething() { }
+    }
+
+    public class Interface_OverloadsTogether : IInterfaceSample
+    {
+        public void Grouping() { } // Compliant. Interface members are not kept together, but overloads are.
+        private void DoSomething(int nonInterfaceOverload) { }
+        public void DoSomething() { }
+    }
+
+    public class Interface_OverloadsAndInterfacesMixed : IInterfaceSample
+    {
+        public void Grouping() { } // FN. Neither the interface members nor the overoads are kept together.
+        private void DoSomething(int nonInterfaceOverload) { }
+        private void Grouping(int nonInterfaceOverload) { }
+        public void DoSomething() { }
+    }
+
+    public class Interface_ExplicitImpl : IInterfaceSample
+    {
+        public void Grouping() { }
+        private void DoSomething(int nonInterfaceOverload) { }
+        private void GroupEnd() { }
+        void IInterfaceSample.DoSomething() { } // Compliant. Explicit interface members can form their own group.
+    }
+
+    public interface IOverloadInterfaceSample
+    {
+        void DoSomething();
+        void DoSomething(int overload);
+    }
+
+    public class InterfaceOverload_InterfacemembersTogether : IOverloadInterfaceSample
+    {
+        public void DoSomething(string nonInterfaceOverload) { } // Compliant. Interface members are kept separate
+        public void EndGrouping() { }
+        public void DoSomething() { }
+        public void DoSomething(int overload) { }
+    }
+
+    public class InterfaceOverload_InterfacemembersSplit : IOverloadInterfaceSample
+    {
+        public void DoSomething() { }             // Noncompliant
+        public void EndGrouping() { }
+        public void DoSomething(int overload) { } // Secondary
+    }
+
+    public class InterfaceOverload_ExplicitAndImplicit : IOverloadInterfaceSample
+    {
+        public void DoSomething() { } // Compliant. Implicit and explicit interface implementations form their own group.
+        public void EndGrouping() { }
+        void IOverloadInterfaceSample.DoSomething(int overload) { }
+    }
+
+    public class InterfaceOverload_Explicit : IOverloadInterfaceSample
+    {
+        void IOverloadInterfaceSample.DoSomething() { } // FN. Explicit overload implementations should be kept together.
+        public void EndGrouping() { }
+        void IOverloadInterfaceSample.DoSomething(int overload) { }
     }
 }
