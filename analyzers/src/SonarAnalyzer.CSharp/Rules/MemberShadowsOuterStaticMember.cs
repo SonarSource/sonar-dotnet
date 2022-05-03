@@ -18,7 +18,6 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Linq;
@@ -79,14 +78,12 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private static void CheckNamedType(SymbolAnalysisContext context, IReadOnlyList<ISymbol> outterMembersOfSameName, INamedTypeSymbol namedType)
         {
-            if (!outterMembersOfSameName.Any(x => x is INamedTypeSymbol symbol && symbol.TypeKind is TypeKind.Class or TypeKind.Struct or TypeKind.Delegate or TypeKind.Enum))
+            if (outterMembersOfSameName.Any(x => x is INamedTypeSymbol symbol && symbol.TypeKind is TypeKind.Class or TypeKind.Struct or TypeKind.Delegate or TypeKind.Enum))
             {
-                return;
-            }
-
-            foreach (var identifier in namedType.DeclaringReferenceIdentifiers())
-            {
-                context.ReportDiagnosticIfNonGenerated(Diagnostic.Create(Rule, identifier.GetLocation(), namedType.GetClassification()));
+                foreach (var identifier in namedType.DeclaringReferenceIdentifiers())
+                {
+                    context.ReportDiagnosticIfNonGenerated(Diagnostic.Create(Rule, identifier.GetLocation(), namedType.GetClassification()));
+                }
             }
         }
 
