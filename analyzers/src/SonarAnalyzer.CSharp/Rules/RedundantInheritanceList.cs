@@ -162,7 +162,7 @@ namespace SonarAnalyzer.Rules.CSharp
             {
                 if (declaredType.FindImplementationForInterfaceMember(interfaceMember) is { } classMember
                     && (classMember.ContainingType.Equals(declaredType)
-                    || !classMember.ContainingType.Interfaces.Any(x => AllInterfacesAndSelf(x).Contains(interfaceType))))
+                        || !classMember.ContainingType.Interfaces.Any(x => AllInterfacesAndSelf(x).Contains(interfaceType))))
                 {
                     return false;
                 }
@@ -175,22 +175,11 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private static Location GetLocationWithToken(TypeSyntax type, SeparatedSyntaxList<BaseTypeSyntax> baseTypes)
         {
-            int start;
-            int end;
+            var span = baseTypes.Count == 1 || baseTypes.First().Type != type
+                ? TextSpan.FromBounds(type.GetFirstToken().GetPreviousToken().Span.Start, type.Span.End)
+                : TextSpan.FromBounds(type.SpanStart, type.GetLastToken().GetNextToken().Span.End);
 
-            if (baseTypes.Count == 1
-                || baseTypes.First().Type != type)
-            {
-                start = type.GetFirstToken().GetPreviousToken().Span.Start;
-                end = type.Span.End;
-            }
-            else
-            {
-                start = type.SpanStart;
-                end = type.GetLastToken().GetNextToken().Span.End;
-            }
-
-            return Location.Create(type.SyntaxTree, new TextSpan(start, end - start));
+            return Location.Create(type.SyntaxTree, span);
         }
 
         private static ImmutableDictionary<string, string> DiagnosticsProperties(int redundantIndex)
