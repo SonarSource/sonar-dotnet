@@ -116,25 +116,25 @@ namespace SonarAnalyzer.Rules.CSharp
             }
         }
 
-        private static ILookup<INamedTypeSymbol, INamedTypeSymbol> GetImplementedInterfaceMappings(BaseListSyntax baseList, SemanticModel semanticModel) =>
+        private static MultiValueDictionary<INamedTypeSymbol, INamedTypeSymbol> GetImplementedInterfaceMappings(BaseListSyntax baseList, SemanticModel semanticModel) =>
             baseList.Types
                     .Select(baseType => semanticModel.GetSymbolInfo(baseType.Type).Symbol as INamedTypeSymbol)
                     .WhereNotNull()
                     .Distinct()
-                    .ToLookup(x => x.AllInterfaces.AsEnumerable());
+                    .ToMultiValueDictionary(x => x.AllInterfaces);
 
         private static INamedTypeSymbol CollidingDeclaration(INamedTypeSymbol declaredType,
                                                              INamedTypeSymbol interfaceType,
-                                                             ILookup<INamedTypeSymbol, INamedTypeSymbol> interfaceMappings)
+                                                             MultiValueDictionary<INamedTypeSymbol, INamedTypeSymbol> interfaceMappings)
         {
-            var collisionMapping = interfaceMappings.FirstOrDefault(x => x.Key.IsInterface() && x.Contains(interfaceType));
-            if (collisionMapping?.Key is not null)
+            var collisionMapping = interfaceMappings.FirstOrDefault(x => x.Key.IsInterface() && x.Value.Contains(interfaceType));
+            if (collisionMapping.Key is not null)
             {
                 return collisionMapping.Key;
             }
 
             var baseClassMapping = interfaceMappings.FirstOrDefault(x => x.Key.IsClass());
-            if (baseClassMapping?.Key is null)
+            if (baseClassMapping.Key is null)
             {
                 return null;
             }
