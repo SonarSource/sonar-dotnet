@@ -101,8 +101,8 @@ namespace SonarAnalyzer.Extensions
                .WhereNotNull()
                .ToImmutableArray();
 
-        public static SyntaxToken? NodeIdentifier(this SyntaxNode node)
-            => node.RemoveParentheses() switch
+        public static SyntaxToken? NodeIdentifier(this SyntaxNode node) => 
+            node.RemoveParentheses() switch
             {
                 AttributeArgumentSyntax x => x.NameColon?.Name.Identifier,
                 BaseTypeDeclarationSyntax x => x.Identifier,
