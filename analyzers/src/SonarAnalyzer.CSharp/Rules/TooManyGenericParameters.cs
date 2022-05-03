@@ -91,7 +91,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
                     c.ReportIssue(Diagnostic.Create(Rule,
                                                     methodDeclaration.Identifier.GetLocation(),
-                                                    new[] { GetEnclosingTypeName(c.Node), methodDeclaration.Identifier.ValueText }.JoinNonEmpty("."),
+                                                    new[] { EnclosingTypeName(c.Node), methodDeclaration.Identifier.ValueText }.JoinNonEmpty("."),
                                                     "method",
                                                     MaxNumberOfGenericParametersInMethod));
                 },
@@ -99,7 +99,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 SyntaxKindEx.LocalFunctionStatement);
         }
 
-        private static string GetEnclosingTypeName(SyntaxNode node) =>
+        private static string EnclosingTypeName(SyntaxNode node) =>
             (node.Ancestors().FirstOrDefault(x => TypeKinds.Contains((SyntaxKind)x.RawKind)) as BaseTypeDeclarationSyntax)?.Identifier.ValueText;
     }
 }
