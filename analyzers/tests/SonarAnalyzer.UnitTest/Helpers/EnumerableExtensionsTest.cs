@@ -140,6 +140,7 @@ namespace SonarAnalyzer.UnitTest.Helpers
             new[] { "a" }.JoinStr(", ").Should().Be("a");
             new[] { "a", "bb", "ccc" }.JoinStr(", ").Should().Be("a, bb, ccc");
             new[] { "a", "bb", "ccc" }.JoinStr(null).Should().Be("abbccc");
+            new[] { "a", "bb", "ccc" }.JoinStr("").Should().Be("abbccc");
             new[] { null, "a", "b" }.JoinStr(".").Should().Be("a.b");
             new[] { "a", null, "b" }.JoinStr(".").Should().Be("a.b");
             new[] { "a", "b", null }.JoinStr(".").Should().Be("a.b");

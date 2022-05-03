@@ -28,6 +28,7 @@ namespace SonarAnalyzer.UnitTest.Rules
     public class TooManyGenericParametersTest
     {
         private readonly VerifierBuilder builder = new VerifierBuilder<TooManyGenericParameters>();
+
         [TestMethod]
         public void TooManyGenericParameters_DefaultValues() =>
             builder.AddPaths("TooManyGenericParameters_DefaultValues.cs").Verify();
