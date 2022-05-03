@@ -37,7 +37,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void TooManyGenericParameters_CustomValues() =>
             new VerifierBuilder()
             .AddAnalyzer(() => new TooManyGenericParameters { MaxNumberOfGenericParametersInClass = 4, MaxNumberOfGenericParametersInMethod = 4 })
-            .AddPaths("TooManyGenericParameters_CustomValues.cs")
+            .AddPaths("TooManyGenericParameters.CustomValues.cs")
             .Verify();
 
 #if NET
