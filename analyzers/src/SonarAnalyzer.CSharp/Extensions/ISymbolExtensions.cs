@@ -26,8 +26,6 @@ using Microsoft.CodeAnalysis.CSharp.Syntax;
 using SonarAnalyzer.Helpers;
 using SonarAnalyzer.SymbolicExecution;
 using SonarAnalyzer.SymbolicExecution.Sonar;
-using SonarAnalyzer.SymbolicExecution.Sonar.Constraints;
-using StyleCop.Analyzers.Lightup;
 
 namespace SonarAnalyzer.Extensions
 {
@@ -101,7 +99,7 @@ namespace SonarAnalyzer.Extensions
                .WhereNotNull()
                .ToImmutableArray();
 
-        public static SyntaxToken? NodeIdentifier(this SyntaxNode node) => 
+        public static SyntaxToken? NodeIdentifier(this SyntaxNode node) =>
             node.RemoveParentheses() switch
             {
                 AttributeArgumentSyntax x => x.NameColon?.Name.Identifier,
