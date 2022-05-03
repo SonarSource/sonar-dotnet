@@ -165,26 +165,28 @@ namespace SonarAnalyzer.Helpers
             }
         }
 
-        public static SimpleNameSyntax GetIdentifier(this ExpressionSyntax expression)
-        {
-            switch (expression?.Kind())
+        public static SyntaxToken? GetIdentifier(this SyntaxNode node) =>
+            node?.RemoveParentheses() switch
             {
-                case SyntaxKind.SimpleMemberAccessExpression:
-                    return ((MemberAccessExpressionSyntax)expression).Name;
-                case SyntaxKind.IdentifierName:
-                    return (IdentifierNameSyntax)expression;
-                default:
-                    return null;
-            }
-        }
-
-        public static string GetName(this ExpressionSyntax expression) =>
-            expression switch
-            {
-                MemberAccessExpressionSyntax memberAccess => memberAccess.Name.Identifier.ValueText,
-                IdentifierNameSyntax identifierName => identifierName.Identifier.ValueText,
-                _ => string.Empty
+                ClassStatementSyntax x => x.Identifier,
+                IdentifierNameSyntax x => x.Identifier,
+                MemberAccessExpressionSyntax x => x.Name.Identifier,
+                MethodBlockSyntax x => x.SubOrFunctionStatement?.GetIdentifier(),
+                MethodStatementSyntax x => x.Identifier,
+                EnumStatementSyntax x => x.Identifier,
+                EnumMemberDeclarationSyntax x => x.Identifier,
+                InvocationExpressionSyntax x => x.Expression?.GetIdentifier(),
+                ModifiedIdentifierSyntax x => x.Identifier,
+                PredefinedTypeSyntax x => x.Keyword,
+                ParameterSyntax x => x.Identifier?.GetIdentifier(),
+                PropertyStatementSyntax x => x.Identifier,
+                SimpleArgumentSyntax x => x.NameColonEquals?.Name.Identifier,
+                SimpleNameSyntax x => x.Identifier,
+                _ => null,
             };
+
+        public static string GetName(this SyntaxNode expression) =>
+            expression.GetIdentifier()?.ValueText ?? string.Empty;
 
         public static bool NameIs(this ExpressionSyntax expression, string name) =>
             expression.GetName().Equals(name, StringComparison.InvariantCultureIgnoreCase);

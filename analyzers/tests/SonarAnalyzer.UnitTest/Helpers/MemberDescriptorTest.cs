@@ -422,7 +422,7 @@ End Namespace
 
             IEnumerable<(SyntaxNode node, string name)> GetVbNodes() =>
                 snippet.GetNodes<VBSyntax.InvocationExpressionSyntax>()
-                    .Select(n => ((SyntaxNode)n, VisualBasicSyntaxHelper.GetIdentifier(n.Expression)?.Identifier.ValueText));
+                    .Select(n => ((SyntaxNode)n, VisualBasicSyntaxHelper.GetIdentifier(n.Expression)?.ValueText));
         }
 
         private static void CheckExactMatchOnly_OverridesAreNotMatched(SnippetCompiler snippet)

@@ -76,19 +76,7 @@ namespace SonarAnalyzer.Helpers.Facade
             };
 
         public override SyntaxToken? NodeIdentifier(SyntaxNode node) =>
-            RemoveParentheses(node) switch
-            {
-                EnumStatementSyntax enumStatement => enumStatement.Identifier,
-                EnumMemberDeclarationSyntax enumMember => enumMember.Identifier,
-                InvocationExpressionSyntax invocation => NodeIdentifier(invocation.Expression),
-                MemberAccessExpressionSyntax memberAccess => memberAccess.Name.Identifier,
-                ModifiedIdentifierSyntax variable => variable.Identifier,
-                ParameterSyntax parameter => parameter.Identifier.Identifier,
-                PropertyStatementSyntax property => property.Identifier,
-                SimpleArgumentSyntax simpleArgument => simpleArgument.NameColonEquals?.Name.Identifier,
-                SimpleNameSyntax simpleName => simpleName.Identifier,
-                _ => null,
-            };
+            node.GetIdentifier();
 
         public override string NodeStringTextValue(SyntaxNode node) =>
             node switch

@@ -61,9 +61,15 @@ End Class";
         public void GetName_VB()
         {
             var nodes = Parse_VB(VbSourceInputToString);
+            nodes.OfType<VB.ClassStatementSyntax>().Single().GetName().Should().Be("Example");
+            nodes.OfType<VB.MethodBlockSyntax>().Single().GetName().Should().Be("Method");
+            nodes.OfType<VB.MethodStatementSyntax>().Single().GetName().Should().Be("Method");
+            nodes.OfType<VB.ParameterSyntax>().Single().GetName().Should().Be("Input");
+            nodes.OfType<VB.PredefinedTypeSyntax>().First().GetName().Should().Be("Object");
             nodes.OfType<VB.MemberAccessExpressionSyntax>().Single().GetName().Should().Be("ToString");
             nodes.OfType<VB.IdentifierNameSyntax>().Select(x => x.GetName()).Should().BeEquivalentTo("Input", "ToString");
-            nodes.OfType<VB.InvocationExpressionSyntax>().Single().GetName().Should().BeEmpty();
+            nodes.OfType<VB.InvocationExpressionSyntax>().Single().GetName().Should().Be("ToString");
+            nodes.OfType<VB.ReturnStatementSyntax>().Single().GetName().Should().BeEmpty();
         }
 
         [TestMethod]

@@ -19,13 +19,13 @@
  */
 
 using System.Collections.Generic;
+using System.Collections.Immutable;
 using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
+using SonarAnalyzer.Helpers;
 using SonarAnalyzer.SymbolicExecution;
 using SonarAnalyzer.SymbolicExecution.Sonar;
-using SonarAnalyzer.SymbolicExecution.Sonar.Constraints;
-using StyleCop.Analyzers.Lightup;
 
 namespace SonarAnalyzer.Extensions
 {
@@ -89,5 +89,33 @@ namespace SonarAnalyzer.Extensions
 
             return root.DescendantNodes();
         }
+
+        public static SyntaxToken? FirstDeclaringReferenceIdentifier(this ISymbol symbol) =>
+            symbol.DeclaringReferenceIdentifiers().FirstOrDefault();
+
+        public static ImmutableArray<SyntaxToken> DeclaringReferenceIdentifiers(this ISymbol symbol) =>
+            symbol.DeclaringSyntaxReferences
+               .Select(x => x.GetSyntax().NodeIdentifier())
+               .WhereNotNull()
+               .ToImmutableArray();
+
+        public static SyntaxToken? NodeIdentifier(this SyntaxNode node) =>
+            node.RemoveParentheses() switch
+            {
+                AttributeArgumentSyntax x => x.NameColon?.Name.Identifier,
+                BaseTypeDeclarationSyntax x => x.Identifier,
+                DelegateDeclarationSyntax x => x.Identifier,
+                EnumMemberDeclarationSyntax x => x.Identifier,
+                EventDeclarationSyntax x => x.Identifier,
+                InvocationExpressionSyntax x => NodeIdentifier(x.Expression),
+                MemberAccessExpressionSyntax x => x.Name.Identifier,
+                MemberBindingExpressionSyntax x => x.Name.Identifier,
+                MethodDeclarationSyntax x => x.Identifier,
+                ParameterSyntax x => x.Identifier,
+                PropertyDeclarationSyntax x => x.Identifier,
+                SimpleNameSyntax x => x.Identifier,
+                VariableDeclaratorSyntax x => x.Identifier,
+                _ => null,
+            };
     }
 }
