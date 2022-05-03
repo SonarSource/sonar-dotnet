@@ -118,32 +118,35 @@ namespace SonarAnalyzer.Helpers
                 ?.index ?? -1;
 
         /// <summary>
-        /// This is <see cref="string.Join"/> as extension. Concatenates members of collection using specified <paramref name="separator"/> between each member.
-        /// <paramref name="selector"/> is used to convert <typeparamref name="T"/> to <see cref="string"/> for concatenation. Any whitespace or <see langword="null"/>
-        /// <see cref="string"/> will be ignored.
+        /// This is string.Join() as extension. Concatenates members of collection using specified separator between each member. Selector is used to extract string value from T for concatenation.
         /// </summary>
         public static string JoinStr<T>(this IEnumerable<T> enumerable, string separator, Func<T, string> selector) =>
-            string.Join(separator, enumerable.Select(x => selector(x)).Where(x => !string.IsNullOrWhiteSpace(x)));
+            string.Join(separator, enumerable.Select(x => selector(x)));
 
         /// <summary>
-        /// This is <see cref="string.Join"/> as extension. Concatenates members of collection using specified <paramref name="separator"/> between each member.
-        /// Any whitespace or <see langword="null"/> <see cref="string"/> will be ignored.
-        /// </summary>
-        public static string JoinStr(this IEnumerable<string> enumerable, string separator) =>
-            string.Join(separator, enumerable.Where(x => !string.IsNullOrWhiteSpace(x)));
-
-        /// <summary>
-        /// This is <see cref="string.Join"/> as extension. Concatenates members of collection using specified <paramref name="separator"/> between each member.
-        /// <paramref name="selector"/> is used to convert <typeparamref name="T"/> to <see cref="int"/> for concatenation.
+        /// This is string.Join() as extension. Concatenates members of collection using specified separator between each member. Selector is used to extract integer value from T for concatenation.
         /// </summary>
         public static string JoinStr<T>(this IEnumerable<T> enumerable, string separator, Func<T, int> selector) =>
             string.Join(separator, enumerable.Select(x => selector(x)));
 
         /// <summary>
-        /// This is <see cref="string.Join"/> as extension. Concatenates members of collection using specified <paramref name="separator"/> between each member.
+        /// This is string.Join() as extension. Concatenates members of string collection using specified separator between each member.
+        /// </summary>
+        public static string JoinStr(this IEnumerable<string> enumerable, string separator) =>
+            JoinStr(enumerable, separator, x => x);
+
+        /// <summary>
+        /// Concatenates the members of a <see cref="string"/> collection using the specified <paramref name="separator"/> between each member.
+        /// Any whitespace or null member of the collection will be ignored.
+        /// </summary>
+        public static string JoinIfNotWhitespace(this IEnumerable<string> enumerable, string separator) =>
+            string.Join(separator, enumerable.Where(x => !string.IsNullOrWhiteSpace(x)));
+
+        /// <summary>
+        /// This is string.Join() as extension. Concatenates members of int collection using specified separator between each member.
         /// </summary>
         public static string JoinStr(this IEnumerable<int> enumerable, string separator) =>
-            string.Join(separator, enumerable);
+            JoinStr(enumerable, separator, x => x);
 
 
     }
