@@ -28,7 +28,8 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class MethodOverloadsShouldBeGroupedTest
     {
-        private readonly VerifierBuilder builder = new VerifierBuilder<CS.MethodOverloadsShouldBeGrouped>();
+        private readonly VerifierBuilder builderCS = new VerifierBuilder<CS.MethodOverloadsShouldBeGrouped>();
+        private readonly VerifierBuilder builderVB = new VerifierBuilder<VB.MethodOverloadsShouldBeGrouped>();
 
         [TestMethod]
         public void MethodOverloadsShouldBeGrouped_CS() =>
