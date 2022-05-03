@@ -49,7 +49,7 @@ namespace SonarAnalyzer.Helpers
                 yield break;
             }
 
-            var currentWord = new StringBuilder(capacity: name.Length);
+            var currentWord = new StringBuilder();
             var hasLower = false;
 
             for (var i = 0; i < name.Length; i++)
