@@ -161,20 +161,17 @@ namespace SonarAnalyzer.Rules.CSharp
         private static bool ContainsUnsafeParameter(SyntaxNode container, SemanticModel semanticModel) =>
             container.DescendantNodes()
                 .OfType<ParameterSyntax>()
-                .Select(x => semanticModel.GetDeclaredSymbol(x))
-                .Any(x => IsUnsafe(x?.Type));
+                .Any(x => IsUnsafe(semanticModel.GetDeclaredSymbol(x)?.Type));
 
         private static bool ContainsUnsafeInvocationReturnValue(SyntaxNode container, SemanticModel semanticModel) =>
             container.DescendantNodes()
                 .OfType<InvocationExpressionSyntax>()
-                .Select(x => semanticModel.GetSymbolInfo(x).Symbol as IMethodSymbol)
-                .Any(x => IsUnsafe(x?.ReturnType));
+                .Any(x => semanticModel.GetSymbolInfo(x).Symbol is IMethodSymbol method && IsUnsafe(method.ReturnType));
 
         private static bool ContainsUnsafeTypedIdentifier(SyntaxNode container, SemanticModel semanticModel) =>
             container.DescendantNodes()
                 .OfType<IdentifierNameSyntax>()
-                .Select(x => semanticModel.GetTypeInfo(x).Type)
-                .Any(x => IsUnsafe(x));
+                .Any(x => IsUnsafe(semanticModel.GetTypeInfo(x).Type));
 
         private static bool ContainsFixedDeclaration(SyntaxNode container) =>
             container.DescendantNodes()
@@ -208,8 +205,7 @@ namespace SonarAnalyzer.Rules.CSharp
             var typeDeclaration = (TypeDeclarationSyntax)context.Node;
             if (typeDeclaration.Modifiers.Any(SyntaxKind.PartialKeyword)
                 && context.ContainingSymbol.Kind == SymbolKind.NamedType
-                && context.SemanticModel.GetDeclaredSymbol(typeDeclaration) is { } typeSymbol
-                && typeSymbol.DeclaringSyntaxReferences.Length <= 1)
+                && context.SemanticModel.GetDeclaredSymbol(typeDeclaration) is { DeclaringSyntaxReferences: { Length: <= 1 } })
             {
                 var keyword = typeDeclaration.Modifiers.First(m => m.IsKind(SyntaxKind.PartialKeyword));
                 context.ReportIssue(Diagnostic.Create(Rule, keyword.GetLocation(), "partial", "gratuitous"));
@@ -348,13 +344,17 @@ namespace SonarAnalyzer.Rules.CSharp
 
             private void SetHasIntegralOperation(CastExpressionSyntax node)
             {
-                var expressionType = context.SemanticModel.GetTypeInfo(node.Expression).Type;
-                var castedToType = context.SemanticModel.GetTypeInfo(node.Type).Type;
-                currentContextHasIntegralOperation |= castedToType is not null && expressionType is not null && castedToType.IsAny(KnownType.IntegralNumbers);
+                if (!currentContextHasIntegralOperation)
+                {
+                    var expressionType = context.SemanticModel.GetTypeInfo(node.Expression).Type;
+                    var castedToType = context.SemanticModel.GetTypeInfo(node.Type).Type;
+                    currentContextHasIntegralOperation = castedToType is not null && expressionType is not null && castedToType.IsAny(KnownType.IntegralNumbers);
+                }
             }
 
             private void SetHasIntegralOperation(ExpressionSyntax node) =>
-                currentContextHasIntegralOperation |= context.SemanticModel.GetSymbolInfo(node).Symbol is IMethodSymbol methodSymbol && methodSymbol.ReceiverType.IsAny(KnownType.IntegralNumbers);
+                currentContextHasIntegralOperation = currentContextHasIntegralOperation
+                    || (context.SemanticModel.GetSymbolInfo(node).Symbol is IMethodSymbol methodSymbol && methodSymbol.ReceiverType.IsAny(KnownType.IntegralNumbers));
         }
     }
 }
