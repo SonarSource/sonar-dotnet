@@ -170,7 +170,6 @@ namespace SonarAnalyzer.Rules.CSharp
 
             foreach (var interfaceMember in allMembersOfInterface)
             {
-                var classMember = declaredType.FindImplementationForInterfaceMember(interfaceMember);
                 if (declaredType.FindImplementationForInterfaceMember(interfaceMember) is { } classMember
                     && (classMember.ContainingType.Equals(declaredType)
                     || !classMember.ContainingType.Interfaces.Any(x => AllInterfacesAndSelf(x).Contains(interfaceType))))
