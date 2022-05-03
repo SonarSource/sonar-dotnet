@@ -104,7 +104,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 var baseType = baseList.Types[i];
                 if (context.SemanticModel.GetSymbolInfo(baseType.Type).Symbol is INamedTypeSymbol interfaceType
                     && interfaceType.IsInterface()
-                    && TryGetCollidingDeclaration(declaredType, interfaceType, interfaceTypesWithAllInterfaces, out var collidingDeclaration))
+                    && CollidingDeclaration(declaredType, interfaceType, interfaceTypesWithAllInterfaces) is { } collidingDeclaration)
                 {
                     var location = GetLocationWithToken(baseType.Type, baseList.Types);
                     var message = string.Format(MessageAlreadyImplements,
@@ -123,28 +123,24 @@ namespace SonarAnalyzer.Rules.CSharp
                     .Distinct()
                     .ToLookup(x => x.AllInterfaces.AsEnumerable());
 
-        private static bool TryGetCollidingDeclaration(INamedTypeSymbol declaredType,
-                                                       INamedTypeSymbol interfaceType,
-                                                       ILookup<INamedTypeSymbol, INamedTypeSymbol> interfaceMappings,
-                                                       out INamedTypeSymbol collidingDeclaration)
+        private static INamedTypeSymbol CollidingDeclaration(INamedTypeSymbol declaredType,
+                                                             INamedTypeSymbol interfaceType,
+                                                             ILookup<INamedTypeSymbol, INamedTypeSymbol> interfaceMappings)
         {
             var collisionMapping = interfaceMappings.FirstOrDefault(x => x.Key.IsInterface() && x.Contains(interfaceType));
             if (collisionMapping?.Key is not null)
             {
-                collidingDeclaration = collisionMapping.Key;
-                return true;
+                return collisionMapping.Key;
             }
 
             var baseClassMapping = interfaceMappings.FirstOrDefault(x => x.Key.IsClass());
             if (baseClassMapping?.Key is null)
             {
-                collidingDeclaration = null;
-                return false;
+                return null;
             }
 
             var canBeRemoved = CanInterfaceBeRemovedBasedOnMembers(declaredType, interfaceType);
-            collidingDeclaration = canBeRemoved ? baseClassMapping.Key : null;
-            return canBeRemoved;
+            return canBeRemoved ? baseClassMapping.Key : null;
         }
 
         private static bool CanInterfaceBeRemovedBasedOnMembers(INamedTypeSymbol declaredType, INamedTypeSymbol interfaceType)
