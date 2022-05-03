@@ -45,8 +45,7 @@ namespace SonarAnalyzer.Rules.CSharp
         private const string MessageAlreadyImplements = "'{0}' implements '{1}' so '{1}' can be removed from the inheritance list.";
         private const string MessageFormat = "{0}";
 
-        private static readonly DiagnosticDescriptor Rule =
-            DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
+        private static readonly DiagnosticDescriptor Rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
 
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
 
@@ -81,11 +80,8 @@ namespace SonarAnalyzer.Rules.CSharp
         private static void ReportRedundantBaseType(SyntaxNodeAnalysisContext context, BaseTypeDeclarationSyntax typeDeclaration, KnownType redundantType, string message)
         {
             var baseTypeSyntax = typeDeclaration.BaseList.Types.First().Type;
-            if (context.SemanticModel.GetSymbolInfo(baseTypeSyntax).Symbol is not ITypeSymbol baseTypeSymbol)
-            {
-                return;
-            }
-            if (baseTypeSymbol.Is(redundantType))
+            if (context.SemanticModel.GetSymbolInfo(baseTypeSyntax).Symbol is ITypeSymbol baseTypeSymbol
+                && baseTypeSymbol.Is(redundantType))
             {
                 var location = GetLocationWithToken(baseTypeSyntax, typeDeclaration.BaseList.Types);
                 context.ReportIssue(Diagnostic.Create(Rule, location, DiagnosticsProperties(redundantIndex: 0), message));
