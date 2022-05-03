@@ -134,20 +134,20 @@ namespace SonarAnalyzer.UnitTest.Helpers
         }
 
         [TestMethod]
-        public void JoinIfNotWhitespace()
+        public void JoinIfNotEmpty()
         {
-            Array.Empty<string>().JoinStr(", ").Should().Be("");
-            new[] { "a" }.JoinStr(", ").Should().Be("a");
-            new[] { "a", "bb", "ccc" }.JoinStr(", ").Should().Be("a, bb, ccc");
-            new[] { "a", "bb", "ccc" }.JoinStr(null).Should().Be("abbccc");
-            new[] { "a", "bb", "ccc" }.JoinStr("").Should().Be("abbccc");
-            new[] { null, "a", "b" }.JoinStr(".").Should().Be("a.b");
-            new[] { "a", null, "b" }.JoinStr(".").Should().Be("a.b");
-            new[] { "a", "b", null }.JoinStr(".").Should().Be("a.b");
-            new string[] { null, null, null }.JoinStr(".").Should().Be("");
-            new string[] { "", "", "" }.JoinStr(".").Should().Be("");
-            new string[] { "", "\t", " " }.JoinStr(".").Should().Be("");
-            new string[] { "a", "\t", "b" }.JoinStr(".").Should().Be("a.b");
+            Array.Empty<string>().JoinNonEmpty(", ").Should().Be("");
+            new[] { "a" }.JoinNonEmpty(", ").Should().Be("a");
+            new[] { "a", "bb", "ccc" }.JoinNonEmpty(", ").Should().Be("a, bb, ccc");
+            new[] { "a", "bb", "ccc" }.JoinNonEmpty(null).Should().Be("abbccc");
+            new[] { "a", "bb", "ccc" }.JoinNonEmpty("").Should().Be("abbccc");
+            new[] { null, "a", "b" }.JoinNonEmpty(".").Should().Be("a.b");
+            new[] { "a", null, "b" }.JoinNonEmpty(".").Should().Be("a.b");
+            new[] { "a", "b", null }.JoinNonEmpty(".").Should().Be("a.b");
+            new string[] { null, null, null }.JoinNonEmpty(".").Should().Be("");
+            new string[] { "", "", "" }.JoinNonEmpty(".").Should().Be("");
+            new string[] { "", "\t", " " }.JoinNonEmpty(".").Should().Be("");
+            new string[] { "a", "\t", "b" }.JoinNonEmpty(".").Should().Be("a.b");
         }
 
         [TestMethod]
