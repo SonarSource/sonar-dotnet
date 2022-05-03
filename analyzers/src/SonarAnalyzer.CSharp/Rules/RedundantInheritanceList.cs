@@ -69,8 +69,6 @@ namespace SonarAnalyzer.Rules.CSharp
                         ReportRedundantBaseType(c, nonInterfaceDeclaration, KnownType.System_Object, MessageObjectBase);
                         ReportRedundantInterfaces(c, nonInterfaceDeclaration);
                         break;
-                    default:
-                        throw new InvalidOperationException($"node type {c.Node?.Kind()} not supported.");
                 }
             },
             SyntaxKind.EnumDeclaration,
@@ -173,9 +171,9 @@ namespace SonarAnalyzer.Rules.CSharp
             foreach (var interfaceMember in allMembersOfInterface)
             {
                 var classMember = declaredType.FindImplementationForInterfaceMember(interfaceMember);
-                if (classMember is not null
+                if (declaredType.FindImplementationForInterfaceMember(interfaceMember) is { } classMember
                     && (classMember.ContainingType.Equals(declaredType)
-                    || !classMember.ContainingType.Interfaces.SelectMany(x => AllInterfacesAndSelf(x)).Contains(interfaceType)))
+                    || !classMember.ContainingType.Interfaces.Any(x => AllInterfacesAndSelf(x).Contains(interfaceType))))
                 {
                     return false;
                 }
