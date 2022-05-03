@@ -18,6 +18,8 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+#pragma warning disable SA1122 // Use string.Empty for empty strings
+
 using System;
 using System.Collections.Generic;
 using FluentAssertions;
@@ -134,14 +136,17 @@ namespace SonarAnalyzer.UnitTest.Helpers
         [TestMethod]
         public void JoinIfNotWhitespace()
         {
-            Array.Empty<string>().JoinIfNotWhitespace(", ").Should().Be("");
-            new[] { "a" }.JoinIfNotWhitespace(", ").Should().Be("a");
-            new[] { "a", "bb", "ccc" }.JoinIfNotWhitespace(", ").Should().Be("a, bb, ccc");
-            new[] { "a", "bb", "ccc" }.JoinIfNotWhitespace(null).Should().Be("abbccc");
-            new[] { null, "a", "b" }.JoinIfNotWhitespace(".").Should().Be("a.b");
-            new[] { "a", null, "b" }.JoinIfNotWhitespace(".").Should().Be("a.b");
-            new[] { "a", "b", null }.JoinIfNotWhitespace(".").Should().Be("a.b");
-            new string[] { null, null, null }.JoinIfNotWhitespace(".").Should().Be("");
+            Array.Empty<string>().JoinStr(", ").Should().Be("");
+            new[] { "a" }.JoinStr(", ").Should().Be("a");
+            new[] { "a", "bb", "ccc" }.JoinStr(", ").Should().Be("a, bb, ccc");
+            new[] { "a", "bb", "ccc" }.JoinStr(null).Should().Be("abbccc");
+            new[] { null, "a", "b" }.JoinStr(".").Should().Be("a.b");
+            new[] { "a", null, "b" }.JoinStr(".").Should().Be("a.b");
+            new[] { "a", "b", null }.JoinStr(".").Should().Be("a.b");
+            new string[] { null, null, null }.JoinStr(".").Should().Be("");
+            new string[] { "", "", "" }.JoinStr(".").Should().Be("");
+            new string[] { "", "\t", " " }.JoinStr(".").Should().Be("");
+            new string[] { "a", "\t", "b" }.JoinStr(".").Should().Be("a.b");
         }
 
         [TestMethod]
@@ -151,7 +156,7 @@ namespace SonarAnalyzer.UnitTest.Helpers
             Array.Empty<object>().WhereNotNull().Should().BeEmpty();
             new object[] { null, null, null }.WhereNotNull().Should().BeEmpty();
             new object[] { 1, "a", instance }.WhereNotNull().Should().BeEquivalentTo(new object[] { 1, "a", instance });
-            new object[] { 1, "a", null }.WhereNotNull().Should().BeEquivalentTo(new object[] { 1, "a"});
+            new object[] { 1, "a", null }.WhereNotNull().Should().BeEquivalentTo(new object[] { 1, "a" });
         }
 
         [TestMethod]
@@ -175,3 +180,5 @@ namespace SonarAnalyzer.UnitTest.Helpers
         }
     }
 }
+
+#pragma warning restore SA1122 // Use string.Empty for empty strings
