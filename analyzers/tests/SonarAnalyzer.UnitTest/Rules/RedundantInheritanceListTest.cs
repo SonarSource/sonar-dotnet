@@ -41,7 +41,11 @@ namespace SonarAnalyzer.UnitTest.Rules
 
         [TestMethod]
         public void RedundantInheritanceList_CSharp9_CodeFix() =>
-            builder.AddPaths("RedundantInheritanceList.CSharp9.cs").WithCodeFixedPaths("RedundantInheritanceList.CSharp9.Fixed.cs").WithOptions(ParseOptionsHelper.FromCSharp9).Verify();
+            builder.AddPaths("RedundantInheritanceList.CSharp9.cs")
+                .WithCodeFix<RedundantInheritanceListCodeFix>()
+                .WithCodeFixedPaths("RedundantInheritanceList.CSharp9.Fixed.cs")
+                .WithOptions(ParseOptionsHelper.FromCSharp9)
+                .VerifyCodeFix();
 
         [TestMethod]
         public void RedundantInheritanceList_CSharp10() =>
@@ -49,12 +53,19 @@ namespace SonarAnalyzer.UnitTest.Rules
 
         [TestMethod]
         public void RedundantInheritanceList_CSharp10_CodeFix() =>
-            builder.AddPaths("RedundantInheritanceList.CSharp10.cs").WithCodeFixedPaths("RedundantInheritanceList.CSharp10.Fixed.cs").WithOptions(ParseOptionsHelper.FromCSharp10).Verify();
+            builder.AddPaths("RedundantInheritanceList.CSharp10.cs")
+                .WithCodeFix<RedundantInheritanceListCodeFix>()
+                .WithCodeFixedPaths("RedundantInheritanceList.CSharp10.Fixed.cs")
+                .WithOptions(ParseOptionsHelper.FromCSharp10)
+                .VerifyCodeFix();
 
 #endif
 
         [TestMethod]
         public void RedundantInheritanceList_CodeFix() =>
-            builder.AddPaths("RedundantInheritanceList.cs").WithCodeFixedPaths("RedundantInheritanceList.Fixed.cs").Verify();
+            builder.AddPaths("RedundantInheritanceList.cs")
+                .WithCodeFix<RedundantInheritanceListCodeFix>()
+                .WithCodeFixedPaths("RedundantInheritanceList.Fixed.cs")
+                .VerifyCodeFix();
     }
 }
