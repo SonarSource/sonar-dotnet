@@ -102,23 +102,17 @@ namespace SonarAnalyzer.Rules.CSharp
             for (var i = 0; i < baseList.Types.Count; i++)
             {
                 var baseType = baseList.Types[i];
-                if (context.SemanticModel.GetSymbolInfo(baseType.Type).Symbol is not INamedTypeSymbol interfaceType
-                    || !interfaceType.IsInterface())
+                if (context.SemanticModel.GetSymbolInfo(baseType.Type).Symbol is INamedTypeSymbol interfaceType
+                    && interfaceType.IsInterface()
+                    && TryGetCollidingDeclaration(declaredType, interfaceType, interfaceTypesWithAllInterfaces, out var collidingDeclaration))
                 {
-                    continue;
+                    var location = GetLocationWithToken(baseType.Type, baseList.Types);
+                    var message = string.Format(MessageAlreadyImplements,
+                        collidingDeclaration.ToMinimalDisplayString(context.SemanticModel, baseType.Type.SpanStart),
+                        interfaceType.ToMinimalDisplayString(context.SemanticModel, baseType.Type.SpanStart));
+
+                    context.ReportIssue(Diagnostic.Create(Rule, location, DiagnosticsProperties(redundantIndex: i), message));
                 }
-
-                if (!TryGetCollidingDeclaration(declaredType, interfaceType, interfaceTypesWithAllInterfaces, out var collidingDeclaration))
-                {
-                    continue;
-                }
-
-                var location = GetLocationWithToken(baseType.Type, baseList.Types);
-                var message = string.Format(MessageAlreadyImplements,
-                    collidingDeclaration.ToMinimalDisplayString(context.SemanticModel, baseType.Type.SpanStart),
-                    interfaceType.ToMinimalDisplayString(context.SemanticModel, baseType.Type.SpanStart));
-
-                context.ReportIssue(Diagnostic.Create(Rule, location, DiagnosticsProperties(redundantIndex: i), message));
             }
         }
 
