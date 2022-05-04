@@ -157,7 +157,7 @@ namespace SonarAnalyzer.Rules.CSharp
         }
 
         private static bool IsCallingBase(IMethodSymbol methodSymbol) =>
-            (methodSymbol.PartialImplementationPart ?? methodSymbol).DeclaringSyntaxReferences.FirstOrDefault()?.GetSyntax() is { } methodDeclaration
+            methodSymbol.ImplementationSyntax() is { } methodDeclaration
             && methodDeclaration.DescendantNodes()
                 .OfType<InvocationExpressionSyntax>()
                 .Select(x => x.Expression)

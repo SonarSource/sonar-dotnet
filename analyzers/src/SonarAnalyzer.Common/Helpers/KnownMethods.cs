@@ -98,6 +98,7 @@ namespace SonarAnalyzer.Helpers
             const string explicitName = "System.IDisposable.Dispose";
             return methodSymbol != null
                 && (methodSymbol.Name == nameof(IDisposable.Dispose) || methodSymbol.Name == explicitName)
+                && methodSymbol.Arity == 0
                 && methodSymbol.ReturnsVoid
                 && methodSymbol.Parameters.Length == 0;
         }

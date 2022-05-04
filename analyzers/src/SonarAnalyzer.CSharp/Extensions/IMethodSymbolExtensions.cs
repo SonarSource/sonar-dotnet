@@ -19,6 +19,7 @@
  */
 
 using System;
+using System.Linq;
 using Microsoft.CodeAnalysis;
 using SonarAnalyzer.Helpers;
 
@@ -26,22 +27,17 @@ namespace SonarAnalyzer.Extensions
 {
     internal static class IMethodSymbolExtensions
     {
-        // The signature of the Dispose method on IDisposable
-        internal static bool IsDisposeMethod(this IMethodSymbol symbol) =>
-            symbol.Name.Equals("Dispose") &&
-            symbol.Arity == 0 &&
-            symbol.Parameters.Length == 0 &&
-            symbol.ReturnsVoid &&
-            symbol.DeclaredAccessibility == Accessibility.Public;
-
-        internal static bool IsModuleInitializer(this IMethodSymbol methodSymbol) =>
+        public static bool IsModuleInitializer(this IMethodSymbol methodSymbol) =>
             methodSymbol.AnyAttributeDerivesFrom(KnownType.System_Runtime_CompilerServices_ModuleInitializerAttribute);
 
-        internal static bool IsGetTypeCall(this IMethodSymbol invokedMethod) =>
+        public static bool IsGetTypeCall(this IMethodSymbol invokedMethod) =>
             invokedMethod.Name == nameof(Type.GetType)
             && !invokedMethod.IsStatic
             && invokedMethod.ContainingType != null
             && IsObjectOrType(invokedMethod.ContainingType);
+
+        public static SyntaxNode ImplementationSyntax(this IMethodSymbol method) =>
+            (method.PartialImplementationPart ?? method).DeclaringSyntaxReferences.FirstOrDefault()?.GetSyntax();
 
         private static bool IsObjectOrType(ITypeSymbol namedType) =>
             namedType.SpecialType == SpecialType.System_Object
