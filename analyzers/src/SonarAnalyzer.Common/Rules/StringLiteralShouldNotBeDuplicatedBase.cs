@@ -77,15 +77,10 @@ namespace SonarAnalyzer.Rules
             }
 
             var stringLiterals = FindLiteralExpressions(context.Node);
-            var duplicateValuesAndPositions = from literal in stringLiterals
-                                              let literalToken = LiteralToken(literal)
-                                              let literalValue = literalToken.ValueText
-                                              where
-                                                 literalValue is { Length: >= MinimumStringLength }
-                                                 && !IsMatchingMethodParameterName(literal)
-                                              group literalToken by literalValue into g
-                                              where g.Count() > Threshold
-                                              select g;
+            var duplicateValuesAndPositions = stringLiterals.Select(x => new { literal = x, literalToken = LiteralToken(x) })
+                .Where(x => x.literalToken.ValueText is { Length: >= MinimumStringLength } && !IsMatchingMethodParameterName(x.literal))
+                .GroupBy(x => x.literalToken.ValueText, x => x.literalToken)
+                .Where(x => x.Count() > Threshold);
 
             // Report duplications
             foreach (var item in duplicateValuesAndPositions)
