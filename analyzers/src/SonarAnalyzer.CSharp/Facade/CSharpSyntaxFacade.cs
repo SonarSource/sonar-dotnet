@@ -59,9 +59,8 @@ namespace SonarAnalyzer.Helpers.Facade
             {
                 ObjectCreationExpressionSyntax objectCreation => objectCreation.ArgumentList?.Arguments.Select(x => x.Expression),
                 null => Enumerable.Empty<SyntaxNode>(),
-                _ => ImplicitObjectCreationExpressionSyntaxWrapper.IsInstance(node)
-                ? Enumerable.Empty<SyntaxNode>()
-                : throw InvalidOperation(node, nameof(ArgumentExpressions))
+                var _ when ImplicitObjectCreationExpressionSyntaxWrapper.IsInstance(node) => Enumerable.Empty<SyntaxNode>(),
+                _ => throw InvalidOperation(node, nameof(ArgumentExpressions))
             };
 
         public override SyntaxNode BinaryExpressionLeft(SyntaxNode binaryExpression) =>
