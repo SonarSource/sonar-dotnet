@@ -23,6 +23,8 @@ namespace Tests.TestCases
 
         public int nonStat = W;
 
+        public static int moreVariables = 1, withInitializers = 2;
+
         public static int M(int i) { return i; }
     }
 
@@ -98,5 +100,15 @@ namespace Tests.TestCases
         {
             X = Y;
         }
+    }
+
+    public class Derived : Base
+    {
+        public static int b = a; // Compliant: a gets initialized before b.
+    }
+
+    public class Base
+    {
+        public static int a = 1;
     }
 }
