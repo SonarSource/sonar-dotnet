@@ -46,23 +46,6 @@ namespace SonarAnalyzer.Rules.CSharp
             SyntaxKindEx.RecordStructDeclaration,
             SyntaxKind.StructDeclaration,
         };
-        private static readonly SyntaxKind[] MemberDeclarationKinds =
-        {
-            SyntaxKind.ClassDeclaration,
-            SyntaxKind.ConstructorDeclaration,
-            SyntaxKind.DelegateDeclaration,
-            SyntaxKind.EnumDeclaration,
-            SyntaxKind.EventDeclaration,
-            SyntaxKind.EventFieldDeclaration,
-            SyntaxKind.FieldDeclaration,
-            SyntaxKind.IndexerDeclaration,
-            SyntaxKind.InterfaceDeclaration,
-            SyntaxKind.MethodDeclaration,
-            SyntaxKind.PropertyDeclaration,
-            SyntaxKindEx.RecordClassDeclaration,
-            SyntaxKindEx.RecordStructDeclaration,
-            SyntaxKind.StructDeclaration,
-        };
 
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(Rule);
 
@@ -88,11 +71,10 @@ namespace SonarAnalyzer.Rules.CSharp
             if (parentType is null && type.Modifiers.AnyOfKind(SyntaxKind.InternalKeyword))
             {
                 return type.DescendantNodes()
-                           .Where(node => node.IsAnyKind(MemberDeclarationKinds))
                            .OfType<MemberDeclarationSyntax>()
-                           // We skip overridden methods since they need to keep the public visibility (if present)
                            .Where(declaration => declaration.Modifiers().AnyOfKind(SyntaxKind.PublicKeyword)
-                                                 && !declaration.Modifiers().AnyOfKind(SyntaxKind.OverrideKeyword)
+                                                 && !declaration.Modifiers().AnyOfKind(SyntaxKind.OverrideKeyword) // Overridden methods need to keep the visibility of the base declaration
+                                                 && !declaration.IsAnyKind(SyntaxKind.OperatorDeclaration, SyntaxKind.ConversionOperatorDeclaration) // Operators must be public
                                                  && !IsInterfaceImplementation(semanticModel, declaration))
                            .Select(declaration => declaration.Modifiers().Single(modifier => modifier.IsKind(SyntaxKind.PublicKeyword)).GetLocation())
                            .ToList();

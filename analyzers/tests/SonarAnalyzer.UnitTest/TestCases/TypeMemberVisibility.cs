@@ -81,8 +81,9 @@ namespace Tests.Diagnostics
             A
         }
 
-        public static implicit operator byte(Noncompliant d) => 1; // Compliant: user defined operators need to be public
+        public static implicit operator byte(Noncompliant d) => 1;                   // Compliant: user defined operators need to be public
         public static explicit operator Noncompliant(byte b) => new Noncompliant(b); // Compliant: user defined operators need to be public
+        public static Noncompliant operator +(Noncompliant b) => null;               // Compliant: user defined operators need to be public
 
         private class NestedPrivateClass
         {
