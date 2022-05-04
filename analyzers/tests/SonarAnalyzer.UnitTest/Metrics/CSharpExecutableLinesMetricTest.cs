@@ -297,7 +297,7 @@ class Program
 }", 5);
 
         [TestMethod]
-        public void ExcludeFromTestCoverage() =>
+        public void Class_Excluded() =>
             AssertLinesOfCode(
 @"using System.Diagnostics.CodeAnalysis;
 public class ComplicatedCode
@@ -328,7 +328,7 @@ public class ComplicatedCode
 public class SomeAttribute : System.Attribute { }", 19, 22);
 
         [TestMethod]
-        public void ExcludeFromTestCoverage_AttributeOnLocalFunction() =>
+        public void AttributeOnLocalFunction_Excluded() =>
             AssertLinesOfCode(
 @"using System.Diagnostics.CodeAnalysis;
 public class ComplicatedCode
@@ -356,7 +356,7 @@ public class SomeAttribute : System.Attribute { }", 8, 14);
         [DataRow("ExcludeFromCodeCoverageAttribute")]
         [DataRow("ExcludeFromCodeCoverageAttribute()")]
         [DataRow("System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverageAttribute()")]
-        public void ExcludeFromTestCoverage_Variants(string attribute) =>
+        public void ExcludeFromCodeCoverage_AttributeVariants(string attribute) =>
             AssertLinesOfCode(
 @$"using System.Diagnostics.CodeAnalysis;
 public class ComplicatedCode
@@ -370,21 +370,7 @@ public class ComplicatedCode
 }}");
 
         [TestMethod]
-        public void ExcludeClassFromTestCoverage() =>
-            AssertLinesOfCode(
-@"using System;
-using System.Diagnostics.CodeAnalysis;
-[ExcludeFromCodeCoverage]
-class Program
-{
-    static void Main(string[] args)
-    {
-        Main(null);
-    }
-}");
-
-        [TestMethod]
-        public void ExcludeRecordFromTestCoverage() =>
+        public void Record_Excluded() =>
             AssertLinesOfCode(
 @"using System.Diagnostics.CodeAnalysis;
 [ExcludeFromCodeCoverage]
@@ -397,7 +383,7 @@ record Program
 }");
 
         [TestMethod]
-        public void ExcludeRecordStructFromTestCoverage() =>
+        public void RecordStruct_Excluded() =>
             AssertLinesOfCode(
 @"using System.Diagnostics.CodeAnalysis;
 [ExcludeFromCodeCoverage]
@@ -407,10 +393,10 @@ record struct Program
     {
         Main(null);
     }
-}", 7); // Not correct should be 0
+}");
 
         [TestMethod]
-        public void ExcludeStructFromTestCoverage() =>
+        public void Struct_Excluded() =>
             AssertLinesOfCode(
 @"using System.Diagnostics.CodeAnalysis;
 namespace project_1
@@ -426,23 +412,7 @@ namespace project_1
 }");
 
         [TestMethod]
-        public void ExcludePropertyFromTestCoverage() =>
-            AssertLinesOfCode(
-@"using System.Diagnostics.CodeAnalysis;
-[ExcludeFromCodeCoverage]
-class Program
-{
-    int FooProperty
-    {
-        get
-        {
-            return 1;
-        }
-    }
-}");
-
-        [TestMethod]
-        public void Constructor_ExcludeFromCodeCoverage() =>
+        public void Constructor_Excluded() =>
             AssertLinesOfCode(
 @"using System.Diagnostics.CodeAnalysis;
 class Program
@@ -464,7 +434,7 @@ class Program
 #if NET
 
         [TestMethod]
-        public void Property_ExcludeFromCodeCoverage() =>
+        public void Property_Excluded() =>
             AssertLinesOfCode(
 @"using System.Diagnostics.CodeAnalysis;
 class EventClass
@@ -508,7 +478,7 @@ class EventClass
 #endif
 
         [TestMethod]
-        public void Event_ExcludeFromCodeCoverage() =>
+        public void Event_Excluded() =>
             AssertLinesOfCode(
 @"using System.Diagnostics.CodeAnalysis;
 class EventClass
@@ -537,7 +507,7 @@ class EventClass
 }", 15, 22, 23);
 
         [TestMethod]
-        public void PartialClasses_ExcludeFromCodeCoverage() =>
+        public void PartialClasses_Excluded() =>
             AssertLinesOfCode(
 @"using System.Diagnostics.CodeAnalysis;
 [ExcludeFromCodeCoverage]
@@ -563,7 +533,7 @@ partial class AnotherClass
 } ", 20);
 
         [TestMethod]
-        public void PartialMethods_ExcludeFromCodeCoverage() =>
+        public void PartialMethods_Excluded() =>
             AssertLinesOfCode(
 @"using System.Diagnostics.CodeAnalysis;
 partial class Program
