@@ -27,22 +27,27 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class TypeMemberVisibilityTest
     {
+        private readonly VerifierBuilder builder = new VerifierBuilder<TypeMemberVisibility>();
+
         [TestMethod]
         public void TypeMemberVisibility_CS() =>
-            OldVerifier.VerifyAnalyzer(@"TestCases\TypeMemberVisibility.cs", new TypeMemberVisibility());
+            builder.AddPaths("TypeMemberVisibility.cs").Verify();
 
 #if NET
+
         [TestMethod]
         public void TypeMemberVisibility_CSharp9() =>
-            OldVerifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\TypeMemberVisibility.CSharp9.cs", new TypeMemberVisibility());
+            builder.AddPaths("TypeMemberVisibility.CSharp9.cs").WithOptions(ParseOptionsHelper.FromCSharp9).Verify();
 
         [TestMethod]
         public void TypeMemberVisibility_CSharp10() =>
-            OldVerifier.VerifyAnalyzerFromCSharp10Library(@"TestCases\TypeMemberVisibility.CSharp10.cs", new TypeMemberVisibility());
+            builder.AddPaths("TypeMemberVisibility.CSharp10.cs").WithOptions(ParseOptionsHelper.FromCSharp10).Verify();
 
         [TestMethod]
         public void TypeMemberVisibility_CSharpPreview() =>
-            OldVerifier.VerifyAnalyzerCSharpPreviewLibrary(@"TestCases\TypeMemberVisibility.CSharpPreview.cs", new TypeMemberVisibility());
+            builder.AddPaths("TypeMemberVisibility.CSharpPreview.cs").WithOptions(ParseOptionsHelper.CSharpPreview).Verify();
+
 #endif
+
     }
 }
