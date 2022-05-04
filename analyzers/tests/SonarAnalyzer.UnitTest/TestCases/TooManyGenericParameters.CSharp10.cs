@@ -1,6 +1,4 @@
-﻿namespace Tests.Diagnostics;
-
-record struct RecordStruct
+﻿record struct RecordStruct
 {
     public void Foo<T1, T2, T3>() { }
     public void Foo<T1, T2, T3, T4>() { } // Noncompliant  {{Reduce the number of generic parameters in the 'RecordStruct.Foo' method to no more than the 3 authorized.}}
