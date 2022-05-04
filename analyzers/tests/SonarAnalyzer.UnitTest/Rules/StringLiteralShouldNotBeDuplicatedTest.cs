@@ -29,6 +29,7 @@ namespace SonarAnalyzer.UnitTest.Rules
     public class StringLiteralShouldNotBeDuplicatedTest
     {
         private readonly VerifierBuilder builderCS = new VerifierBuilder<CS.StringLiteralShouldNotBeDuplicated>();
+
         [TestMethod]
         public void StringLiteralShouldNotBeDuplicated_CS() =>
             builderCS.AddPaths("StringLiteralShouldNotBeDuplicated.cs").Verify();

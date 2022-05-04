@@ -122,5 +122,10 @@
             + @"Filename\"                      // Secondary
             + "Filename\x005C"                  // Secondary
             + "Filename\x005C";                 // Secondary
+
+        private string doubleQuotes = "Say \"hello\"" // Noncompliant {{Define a constant instead of using this literal 'Say "hello"' 4 times.}}
+            + @"Say ""hello"""                        // Secondary
+            + "Say \x0022hello\x0022"                 // Secondary
+            + "Say \"hello\"";                        // Secondary
     }
 }
