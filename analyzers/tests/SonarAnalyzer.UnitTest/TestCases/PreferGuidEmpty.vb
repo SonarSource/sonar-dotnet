@@ -1,4 +1,3 @@
-﻿Imports System
 
 Class Compliant
 
@@ -18,11 +17,11 @@ Class Compliant
 
     Sub NullableDefault()
         Dim nullable As Guid? = Nothing ' Compliant, not equivalent to Guid.Empty.
-        Dim instance As New NullableGuidClass(Nothing) ' Compliant
-        instance.Method(Nothing) ' Compliant
+        Dim guidAsParameter As New NullableGuidClass(Nothing) ' Compliant
+        guidAsParameter.Method(Nothing) ' Compliant
     End Sub
 
-    Sub NotInitiated(str As String)
+    Sub NotInitialized(str As String)
         Dim parsed As Guid ' Compliant
         Guid.TryParse(str, parsed)
     End Sub
@@ -49,17 +48,18 @@ Class NonCompliant
         Dim asignend As New Guid() ' Noncompliant
     End Sub
 
-    Sub DefaultInintiation()
+    Sub DefaultInitialization()
         Dim defaultValue As Guid = Nothing ' Noncompliant
         Dim unasignend As Guid ' FN
-        Dim instance As New GuidClass(Nothing) ' Noncompliant
-        instance.Method(Nothing) ' Noncompliant
+        Dim guidAsParameter As New GuidClass(Nothing) ' Noncompliant
+        guidAsParameter.Method(Nothing) ' Noncompliant
         Prop = Nothing ' Noncompliant
         Field = Nothing ' Noncompliant
     End Sub
 
     Sub EmptyString()
-        Dim ctor As Guid = New Guid("00000000-0000-0000-0000-000000000000") ' Noncompliant
+        Dim ctor1 As Guid = New Guid("00000000-0000-0000-0000-000000000000") ' Noncompliant
+        Dim ctor2 As New Guid("00000000-0000-0000-0000-000000000000") ' Noncompliant
         Dim parse As Guid = Guid.Parse("00000000-0000-0000-0000-000000000000") ' FN
     End Sub
 
