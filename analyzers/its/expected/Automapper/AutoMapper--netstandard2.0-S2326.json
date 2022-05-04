@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S2326",
+"message":  "'TDestination' is not used in the interface.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\Configuration\IMemberConfigurationExpression.cs",
+"region":  {
+"startLine":  269,
+"startColumn":  62,
+"endLine":  269,
+"endColumn":  74
+}
+}
+}
+]
+}

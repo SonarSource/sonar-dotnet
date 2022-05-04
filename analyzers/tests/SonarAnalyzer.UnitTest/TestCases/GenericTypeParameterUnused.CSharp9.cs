@@ -24,7 +24,7 @@ public record R : Interface
     }
 }
 
-public record R<T> // Noncompliant
+public record R<T> // Noncompliant {{'T' is not used in the record.}}
 {
 }
 
@@ -34,4 +34,10 @@ public record R2<T>(T X) // Compliant
 
 public record R3<T>(int X) // Noncompliant
 {
+}
+
+public interface IUsedInBody<T>
+{
+    object WithDefaultImplementation() =>
+        default(T);
 }

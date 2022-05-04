@@ -180,11 +180,57 @@ namespace Tests.Diagnostics
         }
     }
 
-    public struct SomeStruct<T> // FN
+    public struct SomeStruct<T> // Noncompliant
     {
         public int Add<T>(int a, int b) // Noncompliant; <T> is ignored
         {
             return a + b;
         }
+    }
+
+    public struct StructUnused<T>   // Noncompliant {{'T' is not used in the struct.}}
+    {
+    }
+
+    public interface IUsedAsReturnType<T>
+    {
+        T Create();
+    }
+
+    public interface IUsedAsProperty<T>
+    {
+        T Value { get; set; }
+    }
+
+    public interface IUsedAsArgument<T>
+    {
+        object Create(T arg);
+    }
+
+    public interface IUnusedEmpty<T>    // Noncompliant {{'T' is not used in the interface.}}
+    {
+    }
+
+    public interface IUnused<T>         // Noncompliant
+    {
+        object Create();
+        object Create(object arg);
+        object Value { get; set; }
+    }
+
+    public interface IUnusedWithVariance<out T>         // Noncompliant
+    {
+    }
+
+    public interface IUnusedWithContravariance<in T>    // Noncompliant
+    {
+    }
+
+    public interface IUsedInBaseType<T> : IEnumerable<T>
+    {
+    }
+
+    public interface IUsedInTypeConstraint<T> where T : class   // Noncompliant
+    {
     }
 }

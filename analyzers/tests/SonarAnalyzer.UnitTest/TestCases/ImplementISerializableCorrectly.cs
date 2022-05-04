@@ -147,6 +147,20 @@ namespace Tests.Diagnostics
     }
 
     [Serializable]
+    public class SerializableDerived_Not_CallingBase_GetObjectData_Coverage : Serializable   // Noncompliant
+    {
+        private Serializable serializableField;
+
+        public SerializableDerived_Not_CallingBase_GetObjectData_Coverage() { }
+        protected SerializableDerived_Not_CallingBase_GetObjectData_Coverage(SerializationInfo info, StreamingContext context) : base(info, context) { }
+        public override void GetObjectData(SerializationInfo info, StreamingContext context) // Secondary {{Invoke 'base.GetObjectData(SerializationInfo, StreamingContext)' in this method.}}
+        {
+            var somethingElse = new SerializableDerived_Not_CallingBase_GetObjectData_Coverage();
+            somethingElse.GetObjectData(info, context);
+        }
+    }
+
+    [Serializable]
     public class SerializableDerived_New_GetObjectData : Serializable
 //               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ Noncompliant
     {
@@ -169,6 +183,24 @@ namespace Tests.Diagnostics
 
         public SerializableDerived_Not_Overriding_GetObjectData() { }
         protected SerializableDerived_Not_Overriding_GetObjectData(SerializationInfo info, StreamingContext context) : base(info, context) { }
+    }
+
+    [Serializable]
+    public class SerializableDerived_Not_Overriding_GetObjectData_NonserializableFields : Serializable
+    {
+        private NonSerializedAttribute nonSerializableField;
+
+        public SerializableDerived_Not_Overriding_GetObjectData_NonserializableFields() { }
+        protected SerializableDerived_Not_Overriding_GetObjectData_NonserializableFields(SerializationInfo info, StreamingContext context) : base(info, context) { }
+    }
+
+    [Serializable]
+    public class SerializableDerived_Not_Overriding_GetObjectData_StaticFields : Serializable
+    {
+        private static Serializable staticSerializable;
+
+        public SerializableDerived_Not_Overriding_GetObjectData_StaticFields() { }
+        protected SerializableDerived_Not_Overriding_GetObjectData_StaticFields(SerializationInfo info, StreamingContext context) : base(info, context) { }
     }
 
     [Serializable]
