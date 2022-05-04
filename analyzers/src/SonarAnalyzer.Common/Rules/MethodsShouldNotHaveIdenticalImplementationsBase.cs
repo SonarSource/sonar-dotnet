@@ -49,18 +49,13 @@ namespace SonarAnalyzer.Rules
                         return;
                     }
 
-                    var methodsToHandle = GetMethodDeclarations(c.Node).ToList();
-
-                    var alreadyHandledMethods = new HashSet<TMethodDeclarationSyntax>();
+                    var methodsToHandle = new LinkedList<TMethodDeclarationSyntax>(GetMethodDeclarations(c.Node));
 
                     while (methodsToHandle.Count > 0)
                     {
-                        var method = methodsToHandle[0];
-                        methodsToHandle.Remove(method);
-                        alreadyHandledMethods.Add(method);
-
-                        var duplicates = methodsToHandle.Where(m => AreDuplicates(method, m)).ToList();
-                        alreadyHandledMethods.UnionWith(duplicates);
+                        var method = methodsToHandle.First.Value;
+                        methodsToHandle.RemoveFirst();
+                        var duplicates = methodsToHandle.Where(x => AreDuplicates(method, x)).ToList();
 
                         foreach (var duplicate in duplicates)
                         {
