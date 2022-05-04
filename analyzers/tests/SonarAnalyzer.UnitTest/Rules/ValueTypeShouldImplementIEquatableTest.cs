@@ -27,16 +27,19 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class ValueTypeShouldImplementIEquatableTest
     {
+        private readonly VerifierBuilder builder = new VerifierBuilder<ValueTypeShouldImplementIEquatable>();
+
         [TestMethod]
         public void ValueTypeShouldImplementIEquatable() =>
-            OldVerifier.VerifyAnalyzer(@"TestCases\ValueTypeShouldImplementIEquatable.cs", new ValueTypeShouldImplementIEquatable(), ParseOptionsHelper.FromCSharp8);
+            builder.AddPaths("ValueTypeShouldImplementIEquatable.cs").WithOptions(ParseOptionsHelper.FromCSharp8).Verify();
 
 #if NET
+
         [TestMethod]
         public void ValueTypeShouldImplementIEquatable_CSharp10() =>
-            OldVerifier.VerifyAnalyzerFromCSharp10Library(
-                @"TestCases\ValueTypeShouldImplementIEquatable.CSharp10.cs",
-                new ValueTypeShouldImplementIEquatable());
+            builder.AddPaths("ValueTypeShouldImplementIEquatable.CSharp10.cs").WithOptions(ParseOptionsHelper.FromCSharp10).Verify();
+
 #endif
+
     }
 }

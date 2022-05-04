@@ -30,39 +30,24 @@ namespace SonarAnalyzer.Rules.CSharp
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
     public sealed class ValueTypeShouldImplementIEquatable : SonarDiagnosticAnalyzer
     {
-        internal const string DiagnosticId = "S3898";
+        private const string DiagnosticId = "S3898";
         private const string MessageFormat = "Implement 'IEquatable<T>' in value type '{0}'.";
 
-        private static readonly DiagnosticDescriptor rule =
-            DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
+        private static readonly DiagnosticDescriptor Rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
 
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(rule);
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
 
-        protected override void Initialize(SonarAnalysisContext context)
-        {
+        protected override void Initialize(SonarAnalysisContext context) =>
             context.RegisterSyntaxNodeActionInNonGenerated(
                 c =>
                 {
                     var declaration = (StructDeclarationSyntax)c.Node;
-
-                    if (declaration.Modifiers.Any(SyntaxKind.RefKeyword))
+                    if (!declaration.Modifiers.Any(SyntaxKind.RefKeyword)
+                        && c.SemanticModel.GetDeclaredSymbol(declaration) is { } structSymbol
+                        && !structSymbol.Implements(KnownType.System_IEquatable_T))
                     {
-                        return;
+                        c.ReportIssue(Diagnostic.Create(Rule, declaration.Identifier.GetLocation(), declaration.Identifier.ValueText));
                     }
-
-                    var structSymbol = c.SemanticModel.GetDeclaredSymbol(declaration);
-                    if (structSymbol == null)
-                    {
-                        return;
-                    }
-
-                    if (!structSymbol.Implements(KnownType.System_IEquatable_T))
-                    {
-                        c.ReportIssue(Diagnostic.Create(rule, declaration.Identifier.GetLocation(),
-                            declaration.Identifier.ValueText));
-                    }
-
                 }, SyntaxKind.StructDeclaration);
-        }
     }
 }
