@@ -28,23 +28,23 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class StringLiteralShouldNotBeDuplicatedTest
     {
-        private readonly VerifierBuilder csBuilder = new VerifierBuilder<CS.StringLiteralShouldNotBeDuplicated>();
+        private readonly VerifierBuilder builderCS = new VerifierBuilder<CS.StringLiteralShouldNotBeDuplicated>();
         [TestMethod]
         public void StringLiteralShouldNotBeDuplicated_CS() =>
-            csBuilder.AddPaths("StringLiteralShouldNotBeDuplicated.cs").Verify();
+            builderCS.AddPaths("StringLiteralShouldNotBeDuplicated.cs").Verify();
 
 #if NET
         [TestMethod]
         public void StringLiteralShouldNotBeDuplicated_CSharp9() =>
-            csBuilder.AddPaths("StringLiteralShouldNotBeDuplicated.CSharp9.cs").WithOptions(ParseOptionsHelper.FromCSharp9).Verify();
+            builderCS.AddPaths("StringLiteralShouldNotBeDuplicated.CSharp9.cs").WithOptions(ParseOptionsHelper.FromCSharp9).Verify();
 
         [TestMethod]
         public void StringLiteralShouldNotBeDuplicated_TopLevelStatements() =>
-            csBuilder.AddPaths("StringLiteralShouldNotBeDuplicated.TopLevelStatements.cs").WithOptions(ParseOptionsHelper.FromCSharp9).WithTopLevelStatements().Verify();
+            builderCS.AddPaths("StringLiteralShouldNotBeDuplicated.TopLevelStatements.cs").WithOptions(ParseOptionsHelper.FromCSharp9).WithTopLevelStatements().Verify();
 
         [TestMethod]
         public void StringLiteralShouldNotBeDuplicated_CSharp10() =>
-            csBuilder.AddPaths("StringLiteralShouldNotBeDuplicated.CSharp10.cs").WithOptions(ParseOptionsHelper.FromCSharp10).WithConcurrentAnalysis(false).Verify();
+            builderCS.AddPaths("StringLiteralShouldNotBeDuplicated.CSharp10.cs").WithOptions(ParseOptionsHelper.FromCSharp10).WithConcurrentAnalysis(false).Verify();
 #endif
 
         [TestMethod]
