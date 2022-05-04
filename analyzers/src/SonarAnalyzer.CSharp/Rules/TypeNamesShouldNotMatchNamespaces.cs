@@ -41,7 +41,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
         // Based on https://msdn.microsoft.com/en-us/library/gg145045%28v=vs.110%29.aspx?f=255&MSPPError=-2147217396
         private static readonly ISet<string> FrameworkNamespaces =
-            new SortedSet<string>(StringComparer.InvariantCultureIgnoreCase)
+            new HashSet<string>(StringComparer.InvariantCultureIgnoreCase)
             {
                 "Accessibility", "Activities", "AddIn", "Build", "CodeDom", "Collections",
                 "Componentmodel", "Configuration", "CSharp", "CustomMarshalers", "Data",
@@ -59,9 +59,9 @@ namespace SonarAnalyzer.Rules.CSharp
             context.RegisterSyntaxNodeActionInNonGenerated(c =>
             {
                 if (!c.IsRedundantPositionalRecordContext()
-                    && CSharpFacade.Instance.Syntax.NodeIdentifier(c.Node) is { } identifier
-                    && IsDeclaredPublic(c.SemanticModel, c.Node)
-                    && FrameworkNamespaces.Contains(identifier.ValueText))
+                    && c.Node.NodeIdentifier() is { } identifier
+                    && FrameworkNamespaces.Contains(identifier.ValueText)
+                    && IsDeclaredPublic(c.SemanticModel, c.Node))
                 {
                     c.ReportIssue(Diagnostic.Create(Rule, identifier.GetLocation(), identifier.ValueText));
                 }
