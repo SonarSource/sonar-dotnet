@@ -1,23 +1,23 @@
-﻿internal unsafe record struct UnsafeRecordStruct // FN
+﻿internal record struct UnsafeRecordStruct // Fixed
 {
     int num;
 
-    private unsafe delegate void MyDelegate2(int i); // FN
+    private delegate void MyDelegate2(int i); // Fixed
 
-    unsafe void M() // FN
+    void M() // Fixed
     {
     }
 }
 
 public record struct Foo
 {
-    public unsafe record struct Bar // FN
+    public record struct Bar // Fixed
     {
     }
 
     unsafe interface MyInterface
     {
-        unsafe int* Method(); // FN
+        int* Method(); // Fixed
     }
 
     public static void M()
@@ -75,7 +75,7 @@ public record struct Foo
     }
 }
 
-public unsafe record struct RecordNewSyntax(string Input) // FN
+public record struct RecordNewSyntax(string Input) // Fixed
 {
     private string inputField = Input;
 }

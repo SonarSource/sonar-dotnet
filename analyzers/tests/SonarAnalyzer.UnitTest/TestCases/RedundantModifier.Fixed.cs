@@ -336,6 +336,11 @@ namespace Tests.Diagnostics
             Method();
         }
 
+        public void WithUndefinedInvocation()    // Fixed
+        {
+            Undefined();        // Error [CS0103]: The name 'Undefined' does not exist in the current context
+        }
+
         private unsafe int* Prop { get; set; }
         public unsafe void M2()
         {

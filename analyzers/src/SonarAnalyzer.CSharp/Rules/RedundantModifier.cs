@@ -37,8 +37,7 @@ namespace SonarAnalyzer.Rules.CSharp
         internal const string DiagnosticId = "S2333";
         private const string MessageFormat = "'{0}' is {1} in this context.";
 
-        private static readonly DiagnosticDescriptor Rule =
-            DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
+        private static readonly DiagnosticDescriptor Rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
 
         private static readonly ISet<SyntaxKind> UnsafeConstructKinds = new HashSet<SyntaxKind>
         {
@@ -56,38 +55,39 @@ namespace SonarAnalyzer.Rules.CSharp
         {
             context.RegisterSyntaxNodeActionInNonGenerated(
                 CheckSealedMemberInSealedClass,
-                SyntaxKind.MethodDeclaration,
-                SyntaxKind.PropertyDeclaration,
-                SyntaxKind.IndexerDeclaration,
                 SyntaxKind.EventDeclaration,
-                SyntaxKind.EventFieldDeclaration);
+                SyntaxKind.EventFieldDeclaration,
+                SyntaxKind.IndexerDeclaration,
+                SyntaxKind.MethodDeclaration,
+                SyntaxKind.PropertyDeclaration);
 
             context.RegisterSyntaxNodeActionInNonGenerated(
                 CheckTypeDeclarationForRedundantPartial,
                 SyntaxKind.ClassDeclaration,
                 SyntaxKind.InterfaceDeclaration,
-                SyntaxKind.StructDeclaration,
-                SyntaxKindEx.RecordClassDeclaration);
+                SyntaxKindEx.RecordClassDeclaration,
+                SyntaxKindEx.RecordStructDeclaration,
+                SyntaxKind.StructDeclaration);
 
             context.RegisterSyntaxNodeActionInNonGenerated(
                 CheckForUnnecessaryUnsafeBlocks,
                 SyntaxKind.ClassDeclaration,
-                SyntaxKind.StructDeclaration,
                 SyntaxKind.InterfaceDeclaration,
-                SyntaxKindEx.RecordClassDeclaration);
+                SyntaxKindEx.RecordClassDeclaration,
+                SyntaxKindEx.RecordStructDeclaration,
+                SyntaxKind.StructDeclaration);
 
-            context.RegisterSyntaxNodeActionInNonGenerated(
-                c =>
+            context.RegisterSyntaxNodeActionInNonGenerated(c =>
                 {
                     if (CheckedWalker.IsTopLevel(c.Node))
                     {
                         new CheckedWalker(c).SafeVisit(c.Node);
                     }
                 },
-                SyntaxKind.CheckedStatement,
-                SyntaxKind.UncheckedStatement,
                 SyntaxKind.CheckedExpression,
-                SyntaxKind.UncheckedExpression);
+                SyntaxKind.CheckedStatement,
+                SyntaxKind.UncheckedExpression,
+                SyntaxKind.UncheckedStatement);
         }
 
         private static void CheckForUnnecessaryUnsafeBlocks(SyntaxNodeAnalysisContext context)
@@ -99,43 +99,50 @@ namespace SonarAnalyzer.Rules.CSharp
                 return;
             }
 
-            CheckForUnnecessaryUnsafeBlocksBelow(typeDeclaration, context);
+            CheckForUnnecessaryUnsafeBlocksBelow(context, typeDeclaration);
         }
 
-        private static void CheckForUnnecessaryUnsafeBlocksBelow(TypeDeclarationSyntax typeDeclaration, SyntaxNodeAnalysisContext context)
+        private static void CheckForUnnecessaryUnsafeBlocksBelow(SyntaxNodeAnalysisContext context, TypeDeclarationSyntax typeDeclaration)
         {
-            if (TryGetUnsafeKeyword(typeDeclaration, out var unsafeKeyword))
+            var unsafeKeyword = FindUnsafeKeyword(typeDeclaration);
+            if (unsafeKeyword == default)
             {
-                MarkAllUnsafeBlockInside(typeDeclaration, context);
+                foreach (var member in typeDeclaration.Members)
+                {
+                    CheckForUnnecessaryUnsafeBlocksInMember(context, member);
+                }
+            }
+            else
+            {
+                MarkAllUnsafeBlockInside(context, typeDeclaration);
                 if (!HasUnsafeConstructInside(typeDeclaration, context.SemanticModel))
                 {
                     ReportOnUnsafeBlock(context, unsafeKeyword.GetLocation());
                 }
-                return;
             }
+        }
 
-            foreach (var member in typeDeclaration.Members)
+        private static void CheckForUnnecessaryUnsafeBlocksInMember(SyntaxNodeAnalysisContext context, MemberDeclarationSyntax member)
+        {
+            var unsafeKeyword = FindUnsafeKeyword(member);
+            if (unsafeKeyword != default)
             {
-                if (TryGetUnsafeKeyword(member, out unsafeKeyword))
+                MarkAllUnsafeBlockInside(context, member);
+                if (!HasUnsafeConstructInside(member, context.SemanticModel))
                 {
-                    MarkAllUnsafeBlockInside(member, context);
-                    if (!HasUnsafeConstructInside(member, context.SemanticModel))
-                    {
-                        ReportOnUnsafeBlock(context, unsafeKeyword.GetLocation());
-                    }
-                    continue;
+                    ReportOnUnsafeBlock(context, unsafeKeyword.GetLocation());
                 }
-
-                if (member is TypeDeclarationSyntax nestedTypeDeclaration)
-                {
-                    CheckForUnnecessaryUnsafeBlocksBelow(nestedTypeDeclaration, context);
-                    continue;
-                }
-
+            }
+            else if (member is TypeDeclarationSyntax nestedTypeDeclaration)
+            {
+                CheckForUnnecessaryUnsafeBlocksBelow(context, nestedTypeDeclaration);
+            }
+            else
+            {
                 var topLevelUnsafeBlocks = member.DescendantNodes(n => !n.IsKind(SyntaxKind.UnsafeStatement)).OfType<UnsafeStatementSyntax>();
                 foreach (var topLevelUnsafeBlock in topLevelUnsafeBlocks)
                 {
-                    MarkAllUnsafeBlockInside(topLevelUnsafeBlock, context);
+                    MarkAllUnsafeBlockInside(context, topLevelUnsafeBlock);
                     if (!HasUnsafeConstructInside(member, context.SemanticModel))
                     {
                         ReportOnUnsafeBlock(context, topLevelUnsafeBlock.UnsafeKeyword.GetLocation());
@@ -146,58 +153,42 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private static bool HasUnsafeConstructInside(SyntaxNode container, SemanticModel semanticModel) =>
             ContainsUnsafeConstruct(container)
-                || ContainsFixedDeclaration(container)
-                || ContainsUnsafeTypedIdentifier(container, semanticModel)
-                || ContainsUnsafeInvocationReturnValue(container, semanticModel)
-                || ContainsUnsafeParameter(container, semanticModel);
+            || ContainsFixedDeclaration(container)
+            || ContainsUnsafeTypedIdentifier(container, semanticModel)
+            || ContainsUnsafeInvocationReturnValue(container, semanticModel)
+            || ContainsUnsafeParameter(container, semanticModel);
 
         private static bool ContainsUnsafeParameter(SyntaxNode container, SemanticModel semanticModel) =>
             container.DescendantNodes()
-                     .OfType<ParameterSyntax>()
-                     .Select(p => semanticModel.GetDeclaredSymbol(p))
-                     .Any(p => IsUnsafe(p?.Type));
+                .OfType<ParameterSyntax>()
+                .Any(x => IsUnsafe(semanticModel.GetDeclaredSymbol(x)?.Type));
 
         private static bool ContainsUnsafeInvocationReturnValue(SyntaxNode container, SemanticModel semanticModel) =>
             container.DescendantNodes()
-                     .OfType<InvocationExpressionSyntax>()
-                     .Select(i => semanticModel.GetSymbolInfo(i).Symbol as IMethodSymbol)
-                     .Any(m => IsUnsafe(m?.ReturnType));
+                .OfType<InvocationExpressionSyntax>()
+                .Any(x => semanticModel.GetSymbolInfo(x).Symbol is IMethodSymbol method && IsUnsafe(method.ReturnType));
 
         private static bool ContainsUnsafeTypedIdentifier(SyntaxNode container, SemanticModel semanticModel) =>
             container.DescendantNodes()
-                     .OfType<IdentifierNameSyntax>()
-                     .Select(i => semanticModel.GetTypeInfo(i).Type)
-                     .Any(t => IsUnsafe(t));
+                .OfType<IdentifierNameSyntax>()
+                .Any(x => IsUnsafe(semanticModel.GetTypeInfo(x).Type));
 
         private static bool ContainsFixedDeclaration(SyntaxNode container) =>
             container.DescendantNodes()
-                     .OfType<FieldDeclarationSyntax>()
-                     .Any(fd => fd.Modifiers.Any(SyntaxKind.FixedKeyword));
+                .OfType<FieldDeclarationSyntax>()
+                .Any(x => x.Modifiers.Any(SyntaxKind.FixedKeyword));
 
         private static bool ContainsUnsafeConstruct(SyntaxNode container) =>
-            container.DescendantNodes().Any(node => UnsafeConstructKinds.Contains(node.Kind()));
+            container.DescendantNodes().Any(x => UnsafeConstructKinds.Contains(x.Kind()));
 
-        private static bool IsUnsafe(ITypeSymbol type)
+        private static bool IsUnsafe(ITypeSymbol type) =>
+            type != null
+            && (type.TypeKind == TypeKind.Pointer
+                || (type.TypeKind == TypeKind.Array && IsUnsafe(((IArrayTypeSymbol)type).ElementType)));
+
+        private static void MarkAllUnsafeBlockInside(SyntaxNodeAnalysisContext context, SyntaxNode container)
         {
-            if (type == null)
-            {
-                return false;
-            }
-
-            if (type.TypeKind == TypeKind.Pointer)
-            {
-                return true;
-            }
-
-            return type.TypeKind == TypeKind.Array &&
-                IsUnsafe(((IArrayTypeSymbol)type).ElementType);
-        }
-
-        private static void MarkAllUnsafeBlockInside(SyntaxNode container, SyntaxNodeAnalysisContext context)
-        {
-            foreach (var @unsafe in container.DescendantNodes()
-                .SelectMany(node => node.ChildTokens())
-                .Where(token => token.IsKind(SyntaxKind.UnsafeKeyword)))
+            foreach (var @unsafe in container.DescendantNodes().SelectMany(x => x.ChildTokens()).Where(x => x.IsKind(SyntaxKind.UnsafeKeyword)))
             {
                 ReportOnUnsafeBlock(context, @unsafe.GetLocation());
             }
@@ -206,75 +197,37 @@ namespace SonarAnalyzer.Rules.CSharp
         private static void ReportOnUnsafeBlock(SyntaxNodeAnalysisContext context, Location issueLocation) =>
             context.ReportIssue(Diagnostic.Create(Rule, issueLocation, "unsafe", "redundant"));
 
-        private static bool TryGetUnsafeKeyword(MemberDeclarationSyntax memberDeclaration, out SyntaxToken unsafeKeyword)
-        {
-            if (memberDeclaration is DelegateDeclarationSyntax delegateDeclaration)
-            {
-                unsafeKeyword = delegateDeclaration.Modifiers.FirstOrDefault(m => m.IsKind(SyntaxKind.UnsafeKeyword));
-                return unsafeKeyword != default;
-            }
-            else if (memberDeclaration is BasePropertyDeclarationSyntax propertyDeclaration)
-            {
-                unsafeKeyword = propertyDeclaration.Modifiers.FirstOrDefault(m => m.IsKind(SyntaxKind.UnsafeKeyword));
-                return unsafeKeyword != default;
-            }
-            else if (memberDeclaration is BaseMethodDeclarationSyntax methodDeclaration)
-            {
-                unsafeKeyword = methodDeclaration.Modifiers.FirstOrDefault(m => m.IsKind(SyntaxKind.UnsafeKeyword));
-                return unsafeKeyword != default;
-            }
-            else if (memberDeclaration is BaseFieldDeclarationSyntax fieldDeclaration)
-            {
-                unsafeKeyword = fieldDeclaration.Modifiers.FirstOrDefault(m => m.IsKind(SyntaxKind.UnsafeKeyword));
-                return unsafeKeyword != default;
-            }
-            else if (memberDeclaration is TypeDeclarationSyntax typeDeclaration)
-            {
-                unsafeKeyword = typeDeclaration.Modifiers.FirstOrDefault(m => m.IsKind(SyntaxKind.UnsafeKeyword));
-                return unsafeKeyword != default;
-            }
-            else
-            {
-                unsafeKeyword = default;
-                return false;
-            }
-        }
+        private static SyntaxToken FindUnsafeKeyword(MemberDeclarationSyntax memberDeclaration) =>
+            Modifiers(memberDeclaration).FirstOrDefault(x => x.IsKind(SyntaxKind.UnsafeKeyword));
 
         private static void CheckTypeDeclarationForRedundantPartial(SyntaxNodeAnalysisContext context)
         {
             var typeDeclaration = (TypeDeclarationSyntax)context.Node;
-
-            if (!typeDeclaration.Modifiers.Any(SyntaxKind.PartialKeyword)
-                || context.ContainingSymbol.Kind != SymbolKind.NamedType)
-            {
-                return;
-            }
-
-            if (context.SemanticModel.GetDeclaredSymbol(typeDeclaration) is { } typeSymbol
-                && typeSymbol.DeclaringSyntaxReferences.Length <= 1)
+            if (typeDeclaration.Modifiers.Any(SyntaxKind.PartialKeyword)
+                && context.ContainingSymbol.Kind == SymbolKind.NamedType
+                && context.SemanticModel.GetDeclaredSymbol(typeDeclaration) is { DeclaringSyntaxReferences: { Length: <= 1 } })
             {
                 var keyword = typeDeclaration.Modifiers.First(m => m.IsKind(SyntaxKind.PartialKeyword));
                 context.ReportIssue(Diagnostic.Create(Rule, keyword.GetLocation(), "partial", "gratuitous"));
             }
         }
 
-        private static SyntaxTokenList GetModifiers(MemberDeclarationSyntax memberDeclaration) =>
+        private static SyntaxTokenList Modifiers(MemberDeclarationSyntax memberDeclaration) =>
             memberDeclaration switch
             {
-                MethodDeclarationSyntax methodDeclaration => methodDeclaration.Modifiers,
-                PropertyDeclarationSyntax propertyDeclaration => propertyDeclaration.Modifiers,
-                IndexerDeclarationSyntax indexerDeclaration => indexerDeclaration.Modifiers,
-                EventDeclarationSyntax eventDeclaration => eventDeclaration.Modifiers,
-                EventFieldDeclarationSyntax eventFieldDeclaration => eventFieldDeclaration.Modifiers,
+                BasePropertyDeclarationSyntax propertyDeclaration => propertyDeclaration.Modifiers,
+                BaseMethodDeclarationSyntax methodDeclaration => methodDeclaration.Modifiers,
+                BaseFieldDeclarationSyntax fieldDeclaration => fieldDeclaration.Modifiers,
+                DelegateDeclarationSyntax delegateDeclaration => delegateDeclaration.Modifiers,
+                TypeDeclarationSyntax typeDeclaration => typeDeclaration.Modifiers,
                 _ => default
             };
 
         private static void CheckSealedMemberInSealedClass(SyntaxNodeAnalysisContext context)
         {
-            var memberDeclaration = (MemberDeclarationSyntax)context.Node;
-            if (GetModifiers(memberDeclaration) is var modifiers
+            if (Modifiers((MemberDeclarationSyntax)context.Node) is var modifiers
                 && modifiers.Any(SyntaxKind.SealedKeyword)
-                && context.ContainingSymbol is {IsSealed: true, ContainingType: {IsSealed: true}})
+                && context.ContainingSymbol.ContainingType is { IsSealed: true })
             {
                 var keyword = modifiers.First(m => m.IsKind(SyntaxKind.SealedKeyword));
                 context.ReportIssue(Diagnostic.Create(Rule, keyword.GetLocation(), "sealed", "redundant"));
@@ -283,8 +236,6 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private sealed class CheckedWalker : SafeCSharpSyntaxWalker
         {
-            private readonly SyntaxNodeAnalysisContext context;
-
             private static readonly ISet<SyntaxKind> BinaryOperationsForChecked = new HashSet<SyntaxKind>
             {
                 SyntaxKind.AddExpression,
@@ -310,23 +261,19 @@ namespace SonarAnalyzer.Rules.CSharp
                 SyntaxKind.PreIncrementExpression
             };
 
+            private readonly SyntaxNodeAnalysisContext context;
             private bool isCurrentContextChecked;
             private bool currentContextHasIntegralOperation;
 
             public CheckedWalker(SyntaxNodeAnalysisContext context)
             {
                 this.context = context;
-
-                if (context.Node is CheckedStatementSyntax statement)
+                isCurrentContextChecked = context.Node switch
                 {
-                    isCurrentContextChecked = statement.IsKind(SyntaxKind.CheckedStatement);
-                    return;
-                }
-
-                if (context.Node is CheckedExpressionSyntax expression)
-                {
-                    isCurrentContextChecked = expression.IsKind(SyntaxKind.CheckedExpression);
-                }
+                    CheckedStatementSyntax statement => statement.IsKind(SyntaxKind.CheckedStatement),
+                    CheckedExpressionSyntax expression => expression.IsKind(SyntaxKind.CheckedExpression),
+                    _ => false
+                };
             }
 
             public override void VisitCheckedExpression(CheckedExpressionSyntax node) =>
@@ -338,7 +285,6 @@ namespace SonarAnalyzer.Rules.CSharp
             public override void VisitAssignmentExpression(AssignmentExpressionSyntax node)
             {
                 base.VisitAssignmentExpression(node);
-
                 if (AssignmentsForChecked.Contains(node.Kind()))
                 {
                     SetHasIntegralOperation(node);
@@ -348,7 +294,6 @@ namespace SonarAnalyzer.Rules.CSharp
             public override void VisitBinaryExpression(BinaryExpressionSyntax node)
             {
                 base.VisitBinaryExpression(node);
-
                 if (BinaryOperationsForChecked.Contains(node.Kind()))
                 {
                     SetHasIntegralOperation(node);
@@ -358,7 +303,6 @@ namespace SonarAnalyzer.Rules.CSharp
             public override void VisitPrefixUnaryExpression(PrefixUnaryExpressionSyntax node)
             {
                 base.VisitPrefixUnaryExpression(node);
-
                 if (UnaryOperationsForChecked.Contains(node.Kind()))
                 {
                     SetHasIntegralOperation(node);
@@ -368,7 +312,6 @@ namespace SonarAnalyzer.Rules.CSharp
             public override void VisitCastExpression(CastExpressionSyntax node)
             {
                 base.VisitCastExpression(node);
-
                 SetHasIntegralOperation(node);
             }
 
@@ -379,40 +322,39 @@ namespace SonarAnalyzer.Rules.CSharp
                 where T : SyntaxNode
             {
                 var isThisNodeChecked = node.IsKind(checkedKind);
-
                 var originalIsCurrentContextChecked = isCurrentContextChecked;
                 var originalContextHasIntegralOperation = currentContextHasIntegralOperation;
-
                 isCurrentContextChecked = isThisNodeChecked;
                 currentContextHasIntegralOperation = false;
 
                 baseCall(node);
 
                 var isSimplyRedundant = IsCurrentNodeEmbeddedInsideSameChecked(node, isThisNodeChecked, originalIsCurrentContextChecked);
-
                 if (isSimplyRedundant || !currentContextHasIntegralOperation)
                 {
                     var keywordToReport = isThisNodeChecked ? "checked" : "unchecked";
                     context.ReportIssue(Diagnostic.Create(Rule, tokenToReport.GetLocation(), keywordToReport, "redundant"));
                 }
-
                 isCurrentContextChecked = originalIsCurrentContextChecked;
                 currentContextHasIntegralOperation = originalContextHasIntegralOperation || (currentContextHasIntegralOperation && isSimplyRedundant);
             }
 
             private bool IsCurrentNodeEmbeddedInsideSameChecked(SyntaxNode node, bool isThisNodeChecked, bool isCurrentContextChecked) =>
-                node != context.Node && isThisNodeChecked == isCurrentContextChecked;
+                isThisNodeChecked == isCurrentContextChecked && node != context.Node;
 
             private void SetHasIntegralOperation(CastExpressionSyntax node)
             {
-                var expressionType = context.SemanticModel.GetTypeInfo(node.Expression).Type;
-                var castedToType = context.SemanticModel.GetTypeInfo(node.Type).Type;
-                currentContextHasIntegralOperation |= castedToType != null && expressionType != null && castedToType.IsAny(KnownType.IntegralNumbers);
+                if (!currentContextHasIntegralOperation)
+                {
+                    var expressionType = context.SemanticModel.GetTypeInfo(node.Expression).Type;
+                    var castedToType = context.SemanticModel.GetTypeInfo(node.Type).Type;
+                    currentContextHasIntegralOperation = castedToType is not null && expressionType is not null && castedToType.IsAny(KnownType.IntegralNumbers);
+                }
             }
 
             private void SetHasIntegralOperation(ExpressionSyntax node) =>
-                currentContextHasIntegralOperation |= context.SemanticModel.GetSymbolInfo(node).Symbol is IMethodSymbol methodSymbol
-                                                      && methodSymbol.ReceiverType.IsAny(KnownType.IntegralNumbers);
+                currentContextHasIntegralOperation = currentContextHasIntegralOperation
+                    || (context.SemanticModel.GetSymbolInfo(node).Symbol is IMethodSymbol methodSymbol && methodSymbol.ReceiverType.IsAny(KnownType.IntegralNumbers));
         }
     }
 }
