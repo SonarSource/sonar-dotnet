@@ -11,7 +11,7 @@ namespace Tests.Diagnostics
                                                                     // Secondary@-1 {{Add 'System.SerializableAttribute' attribute on 'SerializableStruct_NoAttribute' because it implements 'ISerializable'.}}
                                                                     // Secondary@-2 {{Add a 'private' constructor 'SerializableStruct_NoAttribute(SerializationInfo, StreamingContext)'.}}
     {
-        private readonly NonSerializedType field = null; // Should be marked with [NonSerialized]
+        private readonly NonSerializedType field = null; // FN, should be marked with [NonSerialized]
 
         public SerializableStruct_NoAttribute() { }
 
@@ -22,7 +22,7 @@ namespace Tests.Diagnostics
                                                                               // Secondary@-1
                                                                               // Secondary@-2
     {
-        private readonly NonSerializedType field = null; // Should be marked with [NonSerialized]
+        private readonly NonSerializedType field = null; // FN, should be marked with [NonSerialized]
 
         public SerializableRecordStruct_NoAttribute() { }
 
@@ -33,7 +33,7 @@ namespace Tests.Diagnostics
                                                                                                          // Secondary@-1
                                                                                                          // Secondary@-2
     {
-        private readonly NonSerializedType field = null; // Should be marked with [NonSerialized]
+        private readonly NonSerializedType field = null; // FN, should be marked with [NonSerialized]
 
         public SerializablePositionalRecordStruct_NoAttribute() : this ("SomeString") { }
 

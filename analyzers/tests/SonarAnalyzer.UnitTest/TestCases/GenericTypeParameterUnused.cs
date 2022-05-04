@@ -217,4 +217,20 @@ namespace Tests.Diagnostics
         object Create(object arg);
         object Value { get; set; }
     }
+
+    public interface IUnusedWithVariance<out T>         // Noncompliant
+    {
+    }
+
+    public interface IUnusedWithContravariance<in T>    // Noncompliant
+    {
+    }
+
+    public interface IUsedInBaseType<T> : IEnumerable<T>
+    {
+    }
+
+    public interface IUsedInTypeConstraint<T> where T : class   // Noncompliant
+    {
+    }
 }
