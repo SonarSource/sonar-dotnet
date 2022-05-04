@@ -18,21 +18,6 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using SonarAnalyzer.Rules.CSharp;
-
-namespace SonarAnalyzer.UnitTest.Rules
-{
-    [TestClass]
-    public class IndentSingleLineFollowingConditionalTest
-    {
-        [TestMethod]
-        public void IndentSingleLineFollowingConditional() =>
-            OldVerifier.VerifyAnalyzer(@"TestCases\IndentSingleLineFollowingConditional.cs", new IndentSingleLineFollowingConditional());
-
-#if NET
-        [TestMethod]
-        public void IndentSingleLineFollowingConditional_FromCSharp9() =>
-            OldVerifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\IndentSingleLineFollowingConditional.CSharp9.cs", new IndentSingleLineFollowingConditional());
-#endif
-    }
-}
+global using FluentAssertions;
+global using Microsoft.VisualStudio.TestTools.UnitTesting;
+global using SonarAnalyzer.UnitTest.TestFramework;

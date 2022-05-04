@@ -20,7 +20,6 @@
 
 using System;
 using System.IO;
-using FluentAssertions;
 
 namespace SonarAnalyzer.UnitTest.TestFramework
 {

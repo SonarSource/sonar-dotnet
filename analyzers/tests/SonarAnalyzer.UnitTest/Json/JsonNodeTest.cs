@@ -20,9 +20,7 @@
 
 using System;
 using System.Collections;
-using FluentAssertions;
 using Microsoft.CodeAnalysis.Text;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.Json;
 using SonarAnalyzer.Json.Parsing;
 

@@ -23,11 +23,9 @@
 #define BLOCK3
 
 using System.Linq;
-using FluentAssertions;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.Helpers;
 
 namespace SonarAnalyzer.UnitTest.Helpers

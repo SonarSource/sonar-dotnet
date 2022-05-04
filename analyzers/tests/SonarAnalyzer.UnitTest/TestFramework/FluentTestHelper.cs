@@ -19,7 +19,6 @@
  */
 
 using System;
-using FluentAssertions;
 using FluentAssertions.Collections;
 using FluentAssertions.Primitives;
 

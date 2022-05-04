@@ -22,8 +22,6 @@
 
 using System;
 using System.Collections.Generic;
-using FluentAssertions;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.Helpers;
 
 namespace SonarAnalyzer.UnitTest.Helpers

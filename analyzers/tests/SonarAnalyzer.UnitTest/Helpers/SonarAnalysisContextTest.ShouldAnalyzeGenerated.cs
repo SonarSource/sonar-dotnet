@@ -21,11 +21,9 @@
 using System.Collections.Immutable;
 using System.Text;
 using System.Threading;
-using FluentAssertions;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Diagnostics;
 using Microsoft.CodeAnalysis.Text;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;

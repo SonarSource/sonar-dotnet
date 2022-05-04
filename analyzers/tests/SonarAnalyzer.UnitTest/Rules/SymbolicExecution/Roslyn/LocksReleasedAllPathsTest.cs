@@ -20,9 +20,7 @@
 
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Diagnostics;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.UnitTest.MetadataReferences;
-using SonarAnalyzer.UnitTest.TestFramework;
 using Checks = SonarAnalyzer.SymbolicExecution.Roslyn.RuleChecks;
 using CS = SonarAnalyzer.Rules.CSharp;
 using VB = SonarAnalyzer.Rules.VisualBasic;

@@ -20,8 +20,6 @@
 
 using System.IO;
 using System.Text.RegularExpressions;
-using FluentAssertions;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.Helpers;
 
 namespace SonarAnalyzer.UnitTest.Helpers

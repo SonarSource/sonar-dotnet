@@ -19,8 +19,6 @@
  */
 
 using System;
-using FluentAssertions;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 using IssueLocation = SonarAnalyzer.UnitTest.TestFramework.IssueLocationCollector.IssueLocation;
 
 namespace SonarAnalyzer.UnitTest.TestFramework.Tests

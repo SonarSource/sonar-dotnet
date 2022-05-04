@@ -19,9 +19,7 @@
  */
 
 using System.Linq;
-using FluentAssertions;
 using Microsoft.CodeAnalysis.VisualBasic;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.Helpers;
 
 namespace SonarAnalyzer.UnitTest.Extensions

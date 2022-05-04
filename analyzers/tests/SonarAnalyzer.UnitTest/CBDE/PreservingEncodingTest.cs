@@ -19,7 +19,6 @@
  */
 
 using System.Text;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.CBDE;
 
 namespace SonarAnalyzer.UnitTest.CBDE

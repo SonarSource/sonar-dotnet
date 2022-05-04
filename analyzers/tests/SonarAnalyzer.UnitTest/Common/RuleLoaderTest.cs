@@ -20,8 +20,6 @@
 
 using System.Linq;
 using System.Xml;
-using FluentAssertions;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.Common;
 
 namespace SonarAnalyzer.UnitTest.Common

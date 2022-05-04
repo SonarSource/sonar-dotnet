@@ -19,10 +19,8 @@
  */
 
 using Microsoft.CodeAnalysis;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.Rules.CSharp;
 using SonarAnalyzer.Rules.SymbolicExecution;
-using SonarAnalyzer.UnitTest.TestFramework;
 #if NETFRAMEWORK
 using System.Collections.Generic;
 using System.Linq;

@@ -23,12 +23,10 @@ extern alias vbnet;
 
 using System;
 using System.Linq;
-using FluentAssertions;
 using FluentAssertions.Extensions;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.Operations;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 using static csharp::SonarAnalyzer.Extensions.SyntaxTokenExtensions;
 using CS = Microsoft.CodeAnalysis.CSharp.Syntax;
 using SyntaxNodeExtensionsCS = csharp::SonarAnalyzer.Extensions.SyntaxNodeExtensions;

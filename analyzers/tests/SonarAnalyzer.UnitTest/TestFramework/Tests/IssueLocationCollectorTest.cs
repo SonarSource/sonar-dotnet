@@ -20,9 +20,7 @@
 
 using System.Collections.Generic;
 using System.Linq;
-using FluentAssertions;
 using Microsoft.CodeAnalysis.Text;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace SonarAnalyzer.UnitTest.TestFramework.Tests
 {

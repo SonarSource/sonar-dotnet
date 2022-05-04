@@ -20,8 +20,6 @@
 
 using System;
 using System.Collections.Generic;
-using FluentAssertions;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.Common;
 
 namespace SonarAnalyzer.UnitTest.Common

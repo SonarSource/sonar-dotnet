@@ -19,8 +19,6 @@
  */
 
 using System;
-using FluentAssertions;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.CFG;
 
 namespace SonarAnalyzer.UnitTest.Helpers

@@ -19,9 +19,7 @@
  */
 
 using System.Collections.Generic;
-using FluentAssertions;
 using Microsoft.CodeAnalysis;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using SonarAnalyzer.Helpers;
 

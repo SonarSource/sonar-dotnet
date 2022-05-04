@@ -19,8 +19,6 @@
  */
 
 using System.Linq;
-using FluentAssertions;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.CFG.Roslyn;
 
 namespace SonarAnalyzer.UnitTest.CFG.Roslyn
