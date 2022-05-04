@@ -40,8 +40,7 @@ namespace SonarAnalyzer.Rules.CSharp
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
 
         // Based on https://msdn.microsoft.com/en-us/library/gg145045%28v=vs.110%29.aspx?f=255&MSPPError=-2147217396
-        private static readonly ISet<string> FrameworkNamespaces =
-            new HashSet<string>(StringComparer.InvariantCultureIgnoreCase)
+        private static readonly ISet<string> FrameworkNamespaces = new HashSet<string>(StringComparer.InvariantCultureIgnoreCase)
             {
                 "Accessibility", "Activities", "AddIn", "Build", "CodeDom", "Collections",
                 "Componentmodel", "Configuration", "CSharp", "CustomMarshalers", "Data",
@@ -61,7 +60,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 if (!c.IsRedundantPositionalRecordContext()
                     && c.Node.NodeIdentifier() is { } identifier
                     && FrameworkNamespaces.Contains(identifier.ValueText)
-                    && IsDeclaredPublic(c.SemanticModel, c.Node))
+                    && c.SemanticModel.GetDeclaredSymbol(c.Node)?.DeclaredAccessibility == Accessibility.Public)
                 {
                     c.ReportIssue(Diagnostic.Create(Rule, identifier.GetLocation(), identifier.ValueText));
                 }
@@ -73,8 +72,5 @@ namespace SonarAnalyzer.Rules.CSharp
             SyntaxKindEx.RecordClassDeclaration,
             SyntaxKindEx.RecordStructDeclaration,
             SyntaxKind.StructDeclaration);
-
-        private static bool IsDeclaredPublic(SemanticModel semanticModel, SyntaxNode declaration) =>
-            semanticModel.GetDeclaredSymbol(declaration)?.DeclaredAccessibility == Accessibility.Public;
     }
 }
