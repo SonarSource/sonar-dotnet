@@ -55,6 +55,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
                 .Where(les => les.IsKind(SyntaxKind.StringLiteralExpression))
                 .Cast<LiteralExpressionSyntax>();
 
-        protected override SyntaxToken LiteralToken(LiteralExpressionSyntax literal) => literal.Token;
+        protected override SyntaxToken LiteralToken(LiteralExpressionSyntax literal) =>
+            literal.Token;
     }
 }
