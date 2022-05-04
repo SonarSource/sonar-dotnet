@@ -41,14 +41,6 @@ namespace SonarAnalyzer.Rules.CSharp
         private const int DefaultMaxNumberOfGenericParametersInMethod = 3;
 
         private static readonly DiagnosticDescriptor Rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager, isEnabledByDefault: false);
-        private static readonly SyntaxKind[] TypeKinds = new[]
-        {
-            SyntaxKind.ClassDeclaration,
-            SyntaxKind.StructDeclaration,
-            SyntaxKind.InterfaceDeclaration,
-            SyntaxKindEx.RecordClassDeclaration,
-            SyntaxKindEx.RecordStructDeclaration
-        };
 
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
 
@@ -77,7 +69,12 @@ namespace SonarAnalyzer.Rules.CSharp
                                                     typeDeclaration.Identifier.ValueText,
                                                     typeDeclaration.GetDeclarationTypeName(),
                                                     MaxNumberOfGenericParametersInClass));
-                }, TypeKinds);
+                },
+                SyntaxKind.ClassDeclaration,
+                SyntaxKind.StructDeclaration,
+                SyntaxKind.InterfaceDeclaration,
+                SyntaxKindEx.RecordClassDeclaration,
+                SyntaxKindEx.RecordStructDeclaration);
 
             context.RegisterSyntaxNodeActionInNonGenerated(
                 c =>

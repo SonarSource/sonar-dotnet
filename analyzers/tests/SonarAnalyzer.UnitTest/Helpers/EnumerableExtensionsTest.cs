@@ -134,7 +134,7 @@ namespace SonarAnalyzer.UnitTest.Helpers
         }
 
         [TestMethod]
-        public void JoinIfNotEmpty()
+        public void JoinNonEmpty()
         {
             Array.Empty<string>().JoinNonEmpty(", ").Should().Be("");
             new[] { "a" }.JoinNonEmpty(", ").Should().Be("a");

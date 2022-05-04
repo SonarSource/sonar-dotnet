@@ -7,7 +7,7 @@ record struct RecordStruct
     //          ^^^
 }
 
-    record struct PositionalRecordStruct(int SomeProperty)
+record struct PositionalRecordStruct(int SomeProperty)
 {
     public void Foo<T1, T2, T3>() { }
     public void Foo<T1, T2, T3, T4>() { } // Noncompliant  {{Reduce the number of generic parameters in the 'PositionalRecordStruct.Foo' method to no more than the 3 authorized.}}
