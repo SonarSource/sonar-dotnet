@@ -48,7 +48,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 "Drawing", "Dynamic", "EnterpriseServices", "Globalization", "IdentityModel",
                 "InteropServices", "IO", "JScript", "Linq", "Location", "Management", "Media",
                 "Messaging", "Microsoft", "Net", "Numerics", "Printing", "Reflection", "Resources",
-                "Runtime", "Security", "Server", "Servicemodel", "Serviceprocess", "Speech",
+                "Runtime", "Security", "Server", "ServiceModel", "ServiceProcess", "Speech",
                 "SqlServer", "System", "Tasks", "Text", "Threading", "Timers", "Transactions",
                 "UIAutomationClientsideProviders", "VisualBasic", "VisualC", "Web", "Win32",
                 "Windows", "Workflow", "Xaml", "XamlGeneratedNamespace", "Xml"
