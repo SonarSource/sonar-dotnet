@@ -50,11 +50,11 @@ namespace SonarAnalyzer.Rules.VisualBasic
         protected override bool IsInnerInstance(SyntaxNodeAnalysisContext context) =>
             context.Node.Ancestors().Any(x => x is ClassBlockSyntax || x is StructureBlockSyntax);
 
-        protected override IEnumerable<LiteralExpressionSyntax> RetrieveLiteralExpressions(SyntaxNode node) =>
+        protected override IEnumerable<LiteralExpressionSyntax> FindLiteralExpressions(SyntaxNode node) =>
             node.DescendantNodes(n => !n.IsKind(SyntaxKind.AttributeList))
                 .Where(les => les.IsKind(SyntaxKind.StringLiteralExpression))
                 .Cast<LiteralExpressionSyntax>();
 
-        protected override SyntaxToken GetLiteralToken(LiteralExpressionSyntax literal) => literal.Token;
+        protected override SyntaxToken LiteralToken(LiteralExpressionSyntax literal) => literal.Token;
     }
 }

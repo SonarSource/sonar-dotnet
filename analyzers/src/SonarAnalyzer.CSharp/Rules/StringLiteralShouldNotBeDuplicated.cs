@@ -63,12 +63,13 @@ namespace SonarAnalyzer.Rules.CSharp
                 x.IsAnyKind(TypeDeclarationSyntaxKinds)
                 || (x.IsKind(SyntaxKind.CompilationUnit) && x.ChildNodes().Any(y => y.IsKind(SyntaxKind.GlobalStatement))));
 
-        protected override IEnumerable<LiteralExpressionSyntax> RetrieveLiteralExpressions(SyntaxNode node) =>
+        protected override IEnumerable<LiteralExpressionSyntax> FindLiteralExpressions(SyntaxNode node) =>
             node.DescendantNodes(n => !n.IsKind(SyntaxKind.AttributeList))
                 .Where(les => les.IsKind(SyntaxKind.StringLiteralExpression))
                 .Cast<LiteralExpressionSyntax>();
 
-        protected override SyntaxToken GetLiteralToken(LiteralExpressionSyntax literal) => literal.Token;
+        protected override SyntaxToken LiteralToken(LiteralExpressionSyntax literal) =>
+            literal.Token;
 
         protected override bool IsNamedTypeOrTopLevelMain(SyntaxNodeAnalysisContext context) =>
             IsNamedType(context) || IsTopLevelMain(context);

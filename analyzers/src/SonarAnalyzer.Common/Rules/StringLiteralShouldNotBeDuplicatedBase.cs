@@ -45,8 +45,8 @@ namespace SonarAnalyzer.Rules
 
         protected abstract bool IsMatchingMethodParameterName(TLiteralExpressionSyntax literalExpression);
         protected abstract bool IsInnerInstance(SyntaxNodeAnalysisContext context);
-        protected abstract IEnumerable<TLiteralExpressionSyntax> RetrieveLiteralExpressions(SyntaxNode node);
-        protected abstract SyntaxToken GetLiteralToken(TLiteralExpressionSyntax literal);
+        protected abstract IEnumerable<TLiteralExpressionSyntax> FindLiteralExpressions(SyntaxNode node);
+        protected abstract SyntaxToken LiteralToken(TLiteralExpressionSyntax literal);
 
         [RuleParameter("threshold", PropertyType.Integer, "Number of times a literal must be duplicated to trigger an issue.", ThresholdDefaultValue)]
         public int Threshold { get; set; } = ThresholdDefaultValue;
@@ -76,9 +76,9 @@ namespace SonarAnalyzer.Rules
                 return;
             }
 
-            var stringLiterals = RetrieveLiteralExpressions(context.Node);
+            var stringLiterals = FindLiteralExpressions(context.Node);
             var duplicateValuesAndPositions = from literal in stringLiterals
-                                              let literalToken = GetLiteralToken(literal)
+                                              let literalToken = LiteralToken(literal)
                                               let literalValue = literalToken.ValueText
                                               where
                                                  literalValue is { Length: >= MinimumStringLength }
