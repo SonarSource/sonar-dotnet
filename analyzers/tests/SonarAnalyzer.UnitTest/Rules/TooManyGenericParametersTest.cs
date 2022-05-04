@@ -31,7 +31,7 @@ namespace SonarAnalyzer.UnitTest.Rules
 
         [TestMethod]
         public void TooManyGenericParameters_DefaultValues() =>
-            builder.AddPaths("TooManyGenericParameters_DefaultValues.cs").Verify();
+            builder.AddPaths("TooManyGenericParameters.DefaultValues.cs").Verify();
 
         [TestMethod]
         public void TooManyGenericParameters_CustomValues() =>
