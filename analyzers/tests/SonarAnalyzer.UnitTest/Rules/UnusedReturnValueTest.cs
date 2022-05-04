@@ -27,29 +27,29 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class UnusedReturnValueTest
     {
-        private static readonly VerifierBuilder Builder = new VerifierBuilder<UnusedReturnValue>();
+        private readonly VerifierBuilder builder = new VerifierBuilder<UnusedReturnValue>();
 
         [TestMethod]
         public void UnusedReturnValue() =>
-            Builder.AddPaths("UnusedReturnValue.cs").WithOptions(ParseOptionsHelper.FromCSharp8).Verify();
+            builder.AddPaths("UnusedReturnValue.cs").WithOptions(ParseOptionsHelper.FromCSharp8).Verify();
 
         [TestMethod]
         public void UnusedReturnValueWithPartialClasses() =>
-            Builder.AddPaths("UnusedReturnValue.part1.cs", "UnusedReturnValue.part2.cs", "UnusedReturnValue.External.cs").WithOptions(ParseOptionsHelper.FromCSharp8).Verify();
+            builder.AddPaths("UnusedReturnValue.part1.cs", "UnusedReturnValue.part2.cs", "UnusedReturnValue.External.cs").WithOptions(ParseOptionsHelper.FromCSharp8).Verify();
 
 #if NET
 
         [TestMethod]
         public void UnusedReturnValue_CSharp9() =>
-            Builder.AddPaths("UnusedReturnValue.CSharp9.cs").WithTopLevelStatements().Verify();
+            builder.AddPaths("UnusedReturnValue.CSharp9.cs").WithTopLevelStatements().Verify();
 
         [TestMethod]
         public void UnusedReturnValue_CSharp10() =>
-            Builder.AddPaths("UnusedReturnValue.CSharp10.cs").WithTopLevelStatements().WithOptions(ParseOptionsHelper.FromCSharp10).Verify();
+            builder.AddPaths("UnusedReturnValue.CSharp10.cs").WithTopLevelStatements().WithOptions(ParseOptionsHelper.FromCSharp10).Verify();
 
         [TestMethod]
         public void UnusedReturnValue_CSharpPreview() =>
-            Builder.AddPaths("UnusedReturnValue.CSharpPreview.cs").WithOptions(ParseOptionsHelper.CSharpPreview).Verify();
+            builder.AddPaths("UnusedReturnValue.CSharpPreview.cs").WithOptions(ParseOptionsHelper.CSharpPreview).Verify();
 
 #endif
 
