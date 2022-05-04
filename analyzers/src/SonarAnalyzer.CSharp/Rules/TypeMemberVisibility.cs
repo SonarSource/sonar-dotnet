@@ -18,7 +18,7 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System.Collections.Generic;
+using System;
 using System.Collections.Immutable;
 using System.Linq;
 using Microsoft.CodeAnalysis;
@@ -60,27 +60,27 @@ namespace SonarAnalyzer.Rules.CSharp
                     var secondaryLocations = GetInvalidMemberLocations(c.SemanticModel, typeDeclaration);
                     if (secondaryLocations.Any())
                     {
-                        c.ReportIssue(Diagnostic.Create(Rule, typeDeclaration.Identifier.GetLocation(), secondaryLocations));
+                        c.ReportIssue(Diagnostic.Create(Rule, typeDeclaration.Identifier.GetLocation(), additionalLocations: secondaryLocations));
                     }
                 },
                 TypeKinds);
 
-        private static List<Location> GetInvalidMemberLocations(SemanticModel semanticModel, BaseTypeDeclarationSyntax type)
+        private static Location[] GetInvalidMemberLocations(SemanticModel semanticModel, BaseTypeDeclarationSyntax type)
         {
             var parentType = GetParentType(type);
             if (parentType is null && type.Modifiers.AnyOfKind(SyntaxKind.InternalKeyword))
             {
                 return type.DescendantNodes()
                            .OfType<MemberDeclarationSyntax>()
-                           .Where(declaration => declaration.Modifiers().AnyOfKind(SyntaxKind.PublicKeyword)
-                                                 && !declaration.Modifiers().AnyOfKind(SyntaxKind.OverrideKeyword) // Overridden methods need to keep the visibility of the base declaration
-                                                 && !declaration.IsAnyKind(SyntaxKind.OperatorDeclaration, SyntaxKind.ConversionOperatorDeclaration) // Operators must be public
-                                                 && !IsInterfaceImplementation(semanticModel, declaration))
-                           .Select(declaration => declaration.Modifiers().Single(modifier => modifier.IsKind(SyntaxKind.PublicKeyword)).GetLocation())
-                           .ToList();
+                           .Where(x => x.Modifiers().AnyOfKind(SyntaxKind.PublicKeyword)
+                                       && !x.Modifiers().AnyOfKind(SyntaxKind.OverrideKeyword) // Overridden member need to keep the visibility of the base declaration
+                                       && !x.IsAnyKind(SyntaxKind.OperatorDeclaration, SyntaxKind.ConversionOperatorDeclaration) // Operators must be public
+                                       && !IsInterfaceImplementation(semanticModel, x))
+                           .Select(x => x.Modifiers().Single(modifier => modifier.IsKind(SyntaxKind.PublicKeyword)).GetLocation())
+                           .ToArray();
             }
 
-            return new List<Location>();
+            return Array.Empty<Location>();
         }
 
         private static bool IsInterfaceImplementation(SemanticModel semanticModel, MemberDeclarationSyntax declaration) =>
