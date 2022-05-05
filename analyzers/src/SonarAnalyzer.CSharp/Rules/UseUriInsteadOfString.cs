@@ -135,7 +135,7 @@ namespace SonarAnalyzer.Rules.CSharp
         {
             if (context.SemanticModel.GetSymbolInfo(context.Node).Symbol is IMethodSymbol invokedMethodSymbol
                 && !invokedMethodSymbol.IsInType(KnownType.System_Uri)
-                && StringUrlParamIndexes(invokedMethodSymbol) is { Count: not 0} stringUrlParams
+                && StringUrlParamIndexes(invokedMethodSymbol) is { Count: not 0 } stringUrlParams
                 && FindOverloadsThatUseUriTypeInPlaceOfString(invokedMethodSymbol, stringUrlParams).Any())
             {
                 context.ReportIssue(Diagnostic.Create(RuleS4005, context.Node.GetLocation()));
