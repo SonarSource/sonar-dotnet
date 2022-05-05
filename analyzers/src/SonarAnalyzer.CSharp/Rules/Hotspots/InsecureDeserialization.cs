@@ -18,6 +18,7 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Linq;
@@ -38,51 +39,32 @@ namespace SonarAnalyzer.Rules.CSharp
         private const string DiagnosticId = "S5766";
         private const string MessageFormat = "Make sure not performing data validation after deserialization is safe here.";
 
-        private static readonly DiagnosticDescriptor Rule =
-            DiagnosticDescriptorBuilder
-                .GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager)
-                .WithNotConfigurable();
+        private static readonly DiagnosticDescriptor Rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager).WithNotConfigurable();
 
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(Rule);
 
-        public InsecureDeserialization()
-            : base(AnalyzerConfiguration.Hotspot)
-        {
-        }
-
-        public InsecureDeserialization(IAnalyzerConfiguration analyzerConfiguration)
-            : base(analyzerConfiguration)
-        {
-        }
+        public InsecureDeserialization() : this(AnalyzerConfiguration.Hotspot) { }
+        public InsecureDeserialization(IAnalyzerConfiguration analyzerConfiguration) : base(analyzerConfiguration) { }
 
         protected override void Initialize(SonarAnalysisContext context) =>
-            context.RegisterSyntaxNodeActionInNonGenerated(VisitDeclaration, SyntaxKind.ClassDeclaration, SyntaxKindEx.RecordClassDeclaration);
-
-        private void VisitDeclaration(SyntaxNodeAnalysisContext context)
-        {
-            if (!IsEnabled(context.Options) || context.ContainingSymbol.Kind != SymbolKind.NamedType)
+            context.RegisterSyntaxNodeActionInNonGenerated(c =>
             {
-                return;
-            }
+                var declaration = (TypeDeclarationSyntax)c.Node;
+                if (!c.IsRedundantPositionalRecordContext()
+                    && IsEnabled(c.Options)
+                    && HasConstructorsWithParameters(declaration) // If there are no constructors, or if these don't have parameters, there is no validation done and the type is considered safe.
+                    && c.SemanticModel.GetDeclaredSymbol(declaration) is { } typeSymbol
+                    && HasSerializableAttribute(typeSymbol))
+                {
+                    ReportOnInsecureDeserializations(c, declaration, typeSymbol);
+                }
+            },
+            SyntaxKind.ClassDeclaration,
+            SyntaxKindEx.RecordClassDeclaration,
+            SyntaxKindEx.RecordStructDeclaration,
+            SyntaxKind.StructDeclaration);
 
-            var declaration = (TypeDeclarationSyntax)context.Node;
-            if (!HasConstructorsWithParameters(declaration))
-            {
-                // If there are no constructors, or if these don't have parameters, there is no validation done
-                // and the type is considered safe.
-                return;
-            }
-
-            var typeSymbol = context.SemanticModel.GetDeclaredSymbol(declaration);
-            if (!HasSerializableAttribute(typeSymbol))
-            {
-                return;
-            }
-
-            ReportDiagnostics(declaration, typeSymbol, context);
-        }
-
-        private static void ReportDiagnostics(TypeDeclarationSyntax declaration, ITypeSymbol typeSymbol, SyntaxNodeAnalysisContext context)
+        private static void ReportOnInsecureDeserializations(SyntaxNodeAnalysisContext context, TypeDeclarationSyntax declaration, ITypeSymbol typeSymbol)
         {
             var implementsISerializable = ImplementsISerializable(typeSymbol);
             var implementsIDeserializationCallback = ImplementsIDeserializationCallback(typeSymbol);
@@ -90,32 +72,32 @@ namespace SonarAnalyzer.Rules.CSharp
             var walker = new ConstructorDeclarationWalker(context.SemanticModel);
             walker.SafeVisit(declaration);
 
-            if (!implementsISerializable
-                && !implementsIDeserializationCallback)
+            if (!implementsISerializable && !implementsIDeserializationCallback)
             {
-                foreach (var ctorInfo in walker.GetConstructorsInfo().Where(info => info.HasConditionalConstructs))
+                foreach (var constructor in walker.GetConstructorsInfo(x => x.HasConditionalConstructs))
                 {
-                    context.ReportIssue(Diagnostic.Create(Rule, ctorInfo.GetReportLocation()));
+                    ReportIssue(context, constructor);
                 }
             }
 
-            if (implementsISerializable
-                && !walker.HasDeserializationCtorWithConditionalStatements())
+            if (implementsISerializable && !walker.HasDeserializationCtorWithConditionalStatements())
             {
-                foreach (var ctorInfo in walker.GetConstructorsInfo().Where(info => !info.IsDeserializationConstructor && info.HasConditionalConstructs))
+                foreach (var constructor in walker.GetConstructorsInfo(x => !x.IsDeserializationConstructor && x.HasConditionalConstructs))
                 {
-                    context.ReportIssue(Diagnostic.Create(Rule, ctorInfo.GetReportLocation()));
+                    ReportIssue(context, constructor);
                 }
             }
 
-            if (implementsIDeserializationCallback
-                && !OnDeserializationHasConditions(declaration, context.SemanticModel))
+            if (implementsIDeserializationCallback && !OnDeserializationHasConditions(declaration, context.SemanticModel))
             {
-                foreach (var ctorInfo in walker.GetConstructorsInfo().Where(info => info.HasConditionalConstructs))
+                foreach (var constructor in walker.GetConstructorsInfo(x => x.HasConditionalConstructs))
                 {
-                    context.ReportIssue(Diagnostic.Create(Rule, ctorInfo.GetReportLocation()));
+                    ReportIssue(context, constructor);
                 }
             }
+
+            static void ReportIssue(SyntaxNodeAnalysisContext context, ConstructorInfo constructor) =>
+                context.ReportIssue(Diagnostic.Create(Rule, constructor.GetReportLocation()));
         }
 
         private static bool OnDeserializationHasConditions(TypeDeclarationSyntax typeDeclaration, SemanticModel semanticModel) =>
@@ -126,7 +108,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 .ContainsConditionalConstructs();
 
         private static bool IsOnDeserialization(MethodDeclarationSyntax methodDeclaration, SemanticModel semanticModel) =>
-            methodDeclaration.Identifier.Text == "OnDeserialization"
+            methodDeclaration.Identifier.Text == nameof(System.Runtime.Serialization.IDeserializationCallback.OnDeserialization)
             && methodDeclaration.ParameterList.Parameters.Count == 1
             && methodDeclaration.ParameterList.Parameters[0].IsDeclarationKnownType(KnownType.System_Object, semanticModel);
 
@@ -161,10 +143,11 @@ namespace SonarAnalyzer.Rules.CSharp
                 this.semanticModel = semanticModel;
             }
 
-            public ImmutableArray<ConstructorInfo> GetConstructorsInfo() => constructorsInfo.ToImmutableArray();
+            public IEnumerable<ConstructorInfo> GetConstructorsInfo(Func<ConstructorInfo, bool> predicate) =>
+                constructorsInfo.Where(predicate);
 
             public bool HasDeserializationCtorWithConditionalStatements() =>
-                GetDeserializationConstructor() is {HasConditionalConstructs: true};
+                GetDeserializationConstructor() is { HasConditionalConstructs: true };
 
             public override void VisitConstructorDeclaration(ConstructorDeclarationSyntax node)
             {
@@ -193,7 +176,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
             public override void Visit(SyntaxNode node)
             {
-                if (node.Kind() == SyntaxKindEx.RecordClassDeclaration)
+                if (node.IsAnyKind(SyntaxKindEx.RecordClassDeclaration, SyntaxKindEx.RecordStructDeclaration))
                 {
                     if (visitedFirstLevel)
                     {

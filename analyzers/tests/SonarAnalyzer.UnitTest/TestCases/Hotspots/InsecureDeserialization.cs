@@ -472,4 +472,15 @@ namespace Tests.Diagnostics
             Name = name ?? string.Empty;
         }
     }
+
+    [Serializable]
+    public struct StructNonCompliant
+    {
+        public string Name { get; private set; }
+
+        public StructNonCompliant(string name) // Noncompliant
+        {
+            Name = name ?? string.Empty;
+        }
+    }
 }
