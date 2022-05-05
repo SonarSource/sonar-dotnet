@@ -129,6 +129,6 @@ You can see how we do it in our own repository for SonarLint Connected mode (and
 
 ## License
 
-Copyright 2014-2021 SonarSource.
+Copyright 2014-2022 SonarSource.
 
 Licensed under the [GNU Lesser General Public License, Version 3.0](http://www.gnu.org/licenses/lgpl.txt)
