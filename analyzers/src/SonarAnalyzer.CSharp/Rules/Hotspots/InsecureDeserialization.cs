@@ -38,15 +38,11 @@ namespace SonarAnalyzer.Rules.CSharp
         private const string DiagnosticId = "S5766";
         private const string MessageFormat = "Make sure not performing data validation after deserialization is safe here.";
 
-        private static readonly DiagnosticDescriptor Rule =
-            DiagnosticDescriptorBuilder
-                .GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager)
-                .WithNotConfigurable();
+        private static readonly DiagnosticDescriptor Rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager).WithNotConfigurable();
 
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(Rule);
 
-        public InsecureDeserialization()
-            : base(AnalyzerConfiguration.Hotspot)
+        public InsecureDeserialization() : base(AnalyzerConfiguration.Hotspot)
         {
         }
 
@@ -56,31 +52,30 @@ namespace SonarAnalyzer.Rules.CSharp
         }
 
         protected override void Initialize(SonarAnalysisContext context) =>
-            context.RegisterSyntaxNodeActionInNonGenerated(VisitDeclaration, SyntaxKind.ClassDeclaration, SyntaxKindEx.RecordClassDeclaration);
-
-        private void VisitDeclaration(SyntaxNodeAnalysisContext context)
-        {
-            if (!IsEnabled(context.Options) || context.ContainingSymbol.Kind != SymbolKind.NamedType)
+            context.RegisterSyntaxNodeActionInNonGenerated(c =>
             {
-                return;
-            }
+                if (!IsEnabled(c.Options) || c.IsRedundantPositionalRecordContext())
+                {
+                    return;
+                }
 
-            var declaration = (TypeDeclarationSyntax)context.Node;
-            if (!HasConstructorsWithParameters(declaration))
-            {
-                // If there are no constructors, or if these don't have parameters, there is no validation done
-                // and the type is considered safe.
-                return;
-            }
+                var declaration = (TypeDeclarationSyntax)c.Node;
+                if (!HasConstructorsWithParameters(declaration))
+                {
+                    // If there are no constructors, or if these don't have parameters, there is no validation done
+                    // and the type is considered safe.
+                    return;
+                }
 
-            var typeSymbol = context.SemanticModel.GetDeclaredSymbol(declaration);
-            if (!HasSerializableAttribute(typeSymbol))
-            {
-                return;
-            }
+                var typeSymbol = c.SemanticModel.GetDeclaredSymbol(declaration);
+                if (!HasSerializableAttribute(typeSymbol))
+                {
+                    return;
+                }
 
-            ReportDiagnostics(declaration, typeSymbol, context);
-        }
+                ReportDiagnostics(declaration, typeSymbol, c);
+            },
+            SyntaxKind.ClassDeclaration, SyntaxKindEx.RecordClassDeclaration);
 
         private static void ReportDiagnostics(TypeDeclarationSyntax declaration, ITypeSymbol typeSymbol, SyntaxNodeAnalysisContext context)
         {
@@ -164,7 +159,7 @@ namespace SonarAnalyzer.Rules.CSharp
             public ImmutableArray<ConstructorInfo> GetConstructorsInfo() => constructorsInfo.ToImmutableArray();
 
             public bool HasDeserializationCtorWithConditionalStatements() =>
-                GetDeserializationConstructor() is {HasConditionalConstructs: true};
+                GetDeserializationConstructor() is { HasConditionalConstructs: true };
 
             public override void VisitConstructorDeclaration(ConstructorDeclarationSyntax node)
             {
