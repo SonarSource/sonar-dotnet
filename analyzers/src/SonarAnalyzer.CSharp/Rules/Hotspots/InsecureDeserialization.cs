@@ -74,30 +74,30 @@ namespace SonarAnalyzer.Rules.CSharp
 
             if (!implementsISerializable && !implementsIDeserializationCallback)
             {
-                foreach (var ctorInfo in walker.GetConstructorsInfo(x => x.HasConditionalConstructs))
+                foreach (var constructor in walker.GetConstructorsInfo(x => x.HasConditionalConstructs))
                 {
-                    ReportIssue(context, ctorInfo);
+                    ReportIssue(context, constructor);
                 }
             }
 
             if (implementsISerializable && !walker.HasDeserializationCtorWithConditionalStatements())
             {
-                foreach (var ctorInfo in walker.GetConstructorsInfo(x => !x.IsDeserializationConstructor && x.HasConditionalConstructs))
+                foreach (var constructor in walker.GetConstructorsInfo(x => !x.IsDeserializationConstructor && x.HasConditionalConstructs))
                 {
-                    ReportIssue(context, ctorInfo);
+                    ReportIssue(context, constructor);
                 }
             }
 
             if (implementsIDeserializationCallback && !OnDeserializationHasConditions(declaration, context.SemanticModel))
             {
-                foreach (var ctorInfo in walker.GetConstructorsInfo(x => x.HasConditionalConstructs))
+                foreach (var constructor in walker.GetConstructorsInfo(x => x.HasConditionalConstructs))
                 {
-                    ReportIssue(context, ctorInfo);
+                    ReportIssue(context, constructor);
                 }
             }
 
-            static void ReportIssue(SyntaxNodeAnalysisContext context, ConstructorInfo ctorInfo) =>
-                context.ReportIssue(Diagnostic.Create(Rule, ctorInfo.GetReportLocation()));
+            static void ReportIssue(SyntaxNodeAnalysisContext context, ConstructorInfo constructor) =>
+                context.ReportIssue(Diagnostic.Create(Rule, constructor.GetReportLocation()));
         }
 
         private static bool OnDeserializationHasConditions(TypeDeclarationSyntax typeDeclaration, SemanticModel semanticModel) =>
