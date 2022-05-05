@@ -57,11 +57,14 @@ namespace SonarAnalyzer.Helpers.Facade
         public override IEnumerable<SyntaxNode> ArgumentExpressions(SyntaxNode node) =>
             node switch
             {
-                ObjectCreationExpressionSyntax objectCreation => objectCreation.ArgumentList?.Arguments.Select(x => x.Expression),
+                ObjectCreationExpressionSyntax objectCreation => ArgumentExpressions(objectCreation),
                 null => Enumerable.Empty<SyntaxNode>(),
                 var _ when ImplicitObjectCreationExpressionSyntaxWrapper.IsInstance(node) => Enumerable.Empty<SyntaxNode>(),
                 _ => throw InvalidOperation(node, nameof(ArgumentExpressions))
             };
+
+        private static IEnumerable<SyntaxNode> ArgumentExpressions(ObjectCreationExpressionSyntax node) =>
+            node.ArgumentList?.Arguments.Select(x => x.Expression) ?? Enumerable.Empty<SyntaxNode>();
 
         public override SyntaxNode BinaryExpressionLeft(SyntaxNode binaryExpression) =>
             Cast<BinaryExpressionSyntax>(binaryExpression).Left;

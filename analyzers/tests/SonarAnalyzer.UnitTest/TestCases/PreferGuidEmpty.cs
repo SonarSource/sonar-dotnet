@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 class Compliant
 {
@@ -38,6 +39,14 @@ class Compliant
     {
         int integer = default;
         var date = default(DateTime);
+    }
+
+    Dictionary<string, string> DoesNotCrashOnDictionaryCreation()
+    {
+        return new Dictionary<string, string>
+        {
+            ["a"] = "b"
+        };
     }
 }
 
