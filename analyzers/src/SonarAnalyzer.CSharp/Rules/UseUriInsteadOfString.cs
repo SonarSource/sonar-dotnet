@@ -133,14 +133,12 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private static void VerifyInvocationAndCreation(SyntaxNodeAnalysisContext context)
         {
-            if (context.SemanticModel.GetSymbolInfo(context.Node).Symbol is IMethodSymbol invokedMethodSymbol && !invokedMethodSymbol.IsInType(KnownType.System_Uri))
+            if (context.SemanticModel.GetSymbolInfo(context.Node).Symbol is IMethodSymbol invokedMethodSymbol
+                && !invokedMethodSymbol.IsInType(KnownType.System_Uri)
+                && StringUrlParamIndexes(invokedMethodSymbol) is { Count: not 0} stringUrlParams
+                && FindOverloadsThatUseUriTypeInPlaceOfString(invokedMethodSymbol, stringUrlParams).Any())
             {
-                var stringUrlParams = StringUrlParamIndexes(invokedMethodSymbol);
-                var methodOverloads = FindOverloadsThatUseUriTypeInPlaceOfString(invokedMethodSymbol, stringUrlParams);
-                if (stringUrlParams.Any() && methodOverloads.Any())
-                {
-                    context.ReportIssue(Diagnostic.Create(RuleS4005, context.Node.GetLocation()));
-                }
+                context.ReportIssue(Diagnostic.Create(RuleS4005, context.Node.GetLocation()));
             }
         }
 
@@ -171,14 +169,13 @@ namespace SonarAnalyzer.Rules.CSharp
         private static ISet<int> StringUrlParamIndexes(IMethodSymbol methodSymbol)
         {
             var ret = new HashSet<int>();
-            var i = 0;
-            foreach (var paramSymbol in methodSymbol.Parameters)
+            for (var i = 0; i < methodSymbol.Parameters.Length; i++)
             {
-                if (paramSymbol.Type.Is(KnownType.System_String) && NameContainsUri(paramSymbol.Name))
+                var parameter = methodSymbol.Parameters[i];
+                if (parameter.Type.Is(KnownType.System_String) && NameContainsUri(parameter.Name))
                 {
                     ret.Add(i);
                 }
-                i++;
             }
             return ret;
         }
@@ -187,8 +184,7 @@ namespace SonarAnalyzer.Rules.CSharp
             methodSymbol.ContainingType
                 .GetMembers(methodSymbol.Name)
                 .OfType<IMethodSymbol>()
-                .Where(m => m.Parameters.Length == methodSymbol.Parameters.Length)
-                .Where(m => !Equals(m, methodSymbol));
+                .Where(x => x.Parameters.Length == methodSymbol.Parameters.Length && !x.Equals(methodSymbol));
 
         private static bool UsesUriInPlaceOfStringUri(IParameterSymbol paramSymbol, IParameterSymbol originalParamSymbol, bool isStringUri) =>
             isStringUri
