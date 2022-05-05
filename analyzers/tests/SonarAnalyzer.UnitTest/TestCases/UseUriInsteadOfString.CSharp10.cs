@@ -16,7 +16,7 @@ public record struct S3994
     public S3994(string uri, bool blah) { } // Noncompliant {{Either change this parameter type to 'System.Uri' or provide an overload which takes a 'System.Uri' parameter.}}
 }
 
-public record struct WithParams(string uri) // FN
+public record struct WithParams(string uri) // Noncompliant {{Change this property type to 'System.Uri'.}}
 {
     public WithParams(string uri, bool somethingElse) : this(uri) { } // Noncompliant {{Either change this parameter type to 'System.Uri' or provide an overload which takes a 'System.Uri' parameter.}}
 }
