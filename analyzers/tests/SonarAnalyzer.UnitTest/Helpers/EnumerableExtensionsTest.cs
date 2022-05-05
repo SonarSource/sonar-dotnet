@@ -18,6 +18,8 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+#pragma warning disable SA1122 // Use string.Empty for empty strings
+
 using System;
 using System.Collections.Generic;
 using FluentAssertions;
@@ -132,13 +134,30 @@ namespace SonarAnalyzer.UnitTest.Helpers
         }
 
         [TestMethod]
+        public void JoinNonEmpty()
+        {
+            Array.Empty<string>().JoinNonEmpty(", ").Should().Be("");
+            new[] { "a" }.JoinNonEmpty(", ").Should().Be("a");
+            new[] { "a", "bb", "ccc" }.JoinNonEmpty(", ").Should().Be("a, bb, ccc");
+            new[] { "a", "bb", "ccc" }.JoinNonEmpty(null).Should().Be("abbccc");
+            new[] { "a", "bb", "ccc" }.JoinNonEmpty("").Should().Be("abbccc");
+            new[] { null, "a", "b" }.JoinNonEmpty(".").Should().Be("a.b");
+            new[] { "a", null, "b" }.JoinNonEmpty(".").Should().Be("a.b");
+            new[] { "a", "b", null }.JoinNonEmpty(".").Should().Be("a.b");
+            new string[] { null, null, null }.JoinNonEmpty(".").Should().Be("");
+            new string[] { "", "", "" }.JoinNonEmpty(".").Should().Be("");
+            new string[] { "", "\t", " " }.JoinNonEmpty(".").Should().Be("");
+            new string[] { "a", "\t", "b" }.JoinNonEmpty(".").Should().Be("a.b");
+        }
+
+        [TestMethod]
         public void WhereNotNull_Class()
         {
             var instance = new Object();
             Array.Empty<object>().WhereNotNull().Should().BeEmpty();
             new object[] { null, null, null }.WhereNotNull().Should().BeEmpty();
             new object[] { 1, "a", instance }.WhereNotNull().Should().BeEquivalentTo(new object[] { 1, "a", instance });
-            new object[] { 1, "a", null }.WhereNotNull().Should().BeEquivalentTo(new object[] { 1, "a"});
+            new object[] { 1, "a", null }.WhereNotNull().Should().BeEquivalentTo(new object[] { 1, "a" });
         }
 
         [TestMethod]
@@ -162,3 +181,5 @@ namespace SonarAnalyzer.UnitTest.Helpers
         }
     }
 }
+
+#pragma warning restore SA1122 // Use string.Empty for empty strings

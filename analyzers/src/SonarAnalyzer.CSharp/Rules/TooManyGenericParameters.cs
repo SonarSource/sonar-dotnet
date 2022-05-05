@@ -19,6 +19,7 @@
  */
 
 using System.Collections.Immutable;
+using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
@@ -56,20 +57,24 @@ namespace SonarAnalyzer.Rules.CSharp
                 {
                     var typeDeclaration = (TypeDeclarationSyntax)c.Node;
 
-                    if (c.ContainingSymbol.Kind != SymbolKind.NamedType
+                    if (c.IsRedundantPositionalRecordContext()
                         || typeDeclaration.TypeParameterList == null
                         || typeDeclaration.TypeParameterList.Parameters.Count <= MaxNumberOfGenericParametersInClass)
                     {
                         return;
                     }
 
-                    c.ReportIssue(Diagnostic.Create(Rule, typeDeclaration.Identifier.GetLocation(),
-                        typeDeclaration.Identifier.ValueText, typeDeclaration.GetDeclarationTypeName(), MaxNumberOfGenericParametersInClass));
+                    c.ReportIssue(Diagnostic.Create(Rule,
+                                                    typeDeclaration.Identifier.GetLocation(),
+                                                    typeDeclaration.Identifier.ValueText,
+                                                    typeDeclaration.GetDeclarationTypeName(),
+                                                    MaxNumberOfGenericParametersInClass));
                 },
                 SyntaxKind.ClassDeclaration,
                 SyntaxKind.StructDeclaration,
                 SyntaxKind.InterfaceDeclaration,
-                SyntaxKindEx.RecordClassDeclaration);
+                SyntaxKindEx.RecordClassDeclaration,
+                SyntaxKindEx.RecordStructDeclaration);
 
             context.RegisterSyntaxNodeActionInNonGenerated(
                 c =>
@@ -81,43 +86,17 @@ namespace SonarAnalyzer.Rules.CSharp
                         return;
                     }
 
-                    c.ReportIssue(Diagnostic.Create(
-                        Rule,
-                        methodDeclaration.Identifier.GetLocation(),
-                        $"{GetEnclosingTypeName(c.Node)}.{methodDeclaration.Identifier.ValueText}",
-                        "method",
-                        MaxNumberOfGenericParametersInMethod));
+                    c.ReportIssue(Diagnostic.Create(Rule,
+                                                    methodDeclaration.Identifier.GetLocation(),
+                                                    new[] { EnclosingTypeName(c.Node), methodDeclaration.Identifier.ValueText }.JoinNonEmpty("."),
+                                                    "method",
+                                                    MaxNumberOfGenericParametersInMethod));
                 },
                 SyntaxKind.MethodDeclaration,
                 SyntaxKindEx.LocalFunctionStatement);
         }
 
-        private static string GetEnclosingTypeName(SyntaxNode node)
-        {
-            var parent = node.Parent;
-
-            while (parent != null)
-            {
-                switch (parent.Kind())
-                {
-                    case SyntaxKind.ClassDeclaration:
-                        return ((ClassDeclarationSyntax)parent).Identifier.ValueText;
-
-                    case SyntaxKind.StructDeclaration:
-                        return ((StructDeclarationSyntax)parent).Identifier.ValueText;
-
-                    case SyntaxKind.InterfaceDeclaration:
-                        return ((InterfaceDeclarationSyntax)parent).Identifier.ValueText;
-
-                    case SyntaxKindEx.RecordClassDeclaration:
-                        return ((RecordDeclarationSyntaxWrapper)parent).Identifier.ValueText;
-
-                    default:
-                        parent = parent.Parent;
-                        break;
-                }
-            }
-            return null;
-        }
+        private static string EnclosingTypeName(SyntaxNode node) =>
+            node.Ancestors().OfType<BaseTypeDeclarationSyntax>().FirstOrDefault()?.Identifier.ValueText;
     }
 }
