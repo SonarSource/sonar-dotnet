@@ -172,11 +172,7 @@ namespace SonarAnalyzer.Rules.CSharp
             return Location.Create(type.SyntaxTree, span);
         }
 
-        private static ImmutableDictionary<string, string> DiagnosticsProperties(int redundantIndex)
-        {
-            var builder = ImmutableDictionary.CreateBuilder<string, string>();
-            builder.Add(RedundantIndexKey, redundantIndex.ToString());
-            return builder.ToImmutable();
-        }
+        private static ImmutableDictionary<string, string> DiagnosticsProperties(int redundantIndex) =>
+            ImmutableDictionary.Create<string, string>().Add(RedundantIndexKey, redundantIndex.ToString());
     }
 }
