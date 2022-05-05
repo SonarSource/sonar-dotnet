@@ -47,7 +47,8 @@ namespace SonarAnalyzer.Common
 
         private Func<ICollection<TValue>> UnderlyingCollectionFactory { get; set; } = () => new List<TValue>();
 
-        public void Add(TKey key, TValue value) => AddWithKey(key, value);
+        public void Add(TKey key, TValue value) =>
+            AddWithKey(key, value);
 
         public void AddWithKey(TKey key, TValue value)
         {
