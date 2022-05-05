@@ -33,18 +33,17 @@ namespace SonarAnalyzer.Rules
         private const string DiagnosticId = "S2257";
         private const string MessageFormat = "Make sure using a non-standard cryptographic algorithm is safe here.";
 
+        private readonly ImmutableArray<KnownType> nonInheritableClassesAndInterfaces = ImmutableArray.Create(
+            KnownType.System_Security_Cryptography_AsymmetricAlgorithm,
+            KnownType.System_Security_Cryptography_AsymmetricKeyExchangeDeformatter,
+            KnownType.System_Security_Cryptography_AsymmetricKeyExchangeFormatter,
+            KnownType.System_Security_Cryptography_AsymmetricSignatureDeformatter,
+            KnownType.System_Security_Cryptography_AsymmetricSignatureFormatter,
+            KnownType.System_Security_Cryptography_DeriveBytes,
+            KnownType.System_Security_Cryptography_HashAlgorithm,
+            KnownType.System_Security_Cryptography_ICryptoTransform,
+            KnownType.System_Security_Cryptography_SymmetricAlgorithm);
         private readonly DiagnosticDescriptor rule;
-        private readonly ImmutableArray<KnownType> nonInheritableClassesAndInterfaces =
-            ImmutableArray.Create(
-                KnownType.System_Security_Cryptography_AsymmetricAlgorithm,
-                KnownType.System_Security_Cryptography_AsymmetricKeyExchangeDeformatter,
-                KnownType.System_Security_Cryptography_AsymmetricKeyExchangeFormatter,
-                KnownType.System_Security_Cryptography_AsymmetricSignatureDeformatter,
-                KnownType.System_Security_Cryptography_AsymmetricSignatureFormatter,
-                KnownType.System_Security_Cryptography_DeriveBytes,
-                KnownType.System_Security_Cryptography_HashAlgorithm,
-                KnownType.System_Security_Cryptography_ICryptoTransform,
-                KnownType.System_Security_Cryptography_SymmetricAlgorithm);
 
         protected abstract ILanguageFacade Language { get; }
         protected abstract TSyntaxKind[] SyntaxKinds { get; }
