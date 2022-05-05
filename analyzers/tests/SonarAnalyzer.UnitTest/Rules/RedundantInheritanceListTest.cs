@@ -27,34 +27,33 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class RedundantInheritanceListTest
     {
-        private readonly VerifierBuilder builder = new VerifierBuilder<RedundantInheritanceList>();
+        private readonly VerifierBuilder rule = new VerifierBuilder<RedundantInheritanceList>();
+        private readonly VerifierBuilder codeFix = new VerifierBuilder<RedundantInheritanceList>().WithCodeFix<RedundantInheritanceListCodeFix>();
 
         [TestMethod]
         public void RedundantInheritanceList() =>
-            builder.AddPaths("RedundantInheritanceList.cs").Verify();
+            rule.AddPaths("RedundantInheritanceList.cs").Verify();
 
 #if NET
 
         [TestMethod]
         public void RedundantInheritanceList_CSharp9() =>
-            builder.AddPaths("RedundantInheritanceList.CSharp9.cs").WithOptions(ParseOptionsHelper.FromCSharp9).Verify();
+            rule.AddPaths("RedundantInheritanceList.CSharp9.cs").WithOptions(ParseOptionsHelper.FromCSharp9).Verify();
 
         [TestMethod]
         public void RedundantInheritanceList_CSharp9_CodeFix() =>
-            builder.AddPaths("RedundantInheritanceList.CSharp9.cs")
-                .WithCodeFix<RedundantInheritanceListCodeFix>()
+            codeFix.AddPaths("RedundantInheritanceList.CSharp9.cs")
                 .WithCodeFixedPaths("RedundantInheritanceList.CSharp9.Fixed.cs")
                 .WithOptions(ParseOptionsHelper.FromCSharp9)
                 .VerifyCodeFix();
 
         [TestMethod]
         public void RedundantInheritanceList_CSharp10() =>
-            builder.AddPaths("RedundantInheritanceList.CSharp10.cs").WithOptions(ParseOptionsHelper.FromCSharp10).Verify();
+            rule.AddPaths("RedundantInheritanceList.CSharp10.cs").WithOptions(ParseOptionsHelper.FromCSharp10).Verify();
 
         [TestMethod]
         public void RedundantInheritanceList_CSharp10_CodeFix() =>
-            builder.AddPaths("RedundantInheritanceList.CSharp10.cs")
-                .WithCodeFix<RedundantInheritanceListCodeFix>()
+            codeFix.AddPaths("RedundantInheritanceList.CSharp10.cs")
                 .WithCodeFixedPaths("RedundantInheritanceList.CSharp10.Fixed.cs")
                 .WithOptions(ParseOptionsHelper.FromCSharp10)
                 .VerifyCodeFix();
@@ -63,8 +62,7 @@ namespace SonarAnalyzer.UnitTest.Rules
 
         [TestMethod]
         public void RedundantInheritanceList_CodeFix() =>
-            builder.AddPaths("RedundantInheritanceList.cs")
-                .WithCodeFix<RedundantInheritanceListCodeFix>()
+            codeFix.AddPaths("RedundantInheritanceList.cs")
                 .WithCodeFixedPaths("RedundantInheritanceList.Fixed.cs")
                 .VerifyCodeFix();
     }
