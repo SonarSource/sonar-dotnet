@@ -18,7 +18,6 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.Helpers;
 using SonarAnalyzer.Rules.CSharp;
@@ -30,47 +29,45 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class UseUriInsteadOfStringTest
     {
+        private readonly VerifierBuilder builder = new VerifierBuilder<UseUriInsteadOfString>().AddReferences(MetadataReferenceFacade.SystemDrawing);
+
         [DataTestMethod]
         [DataRow(ProjectType.Product)]
         [DataRow(ProjectType.Test)]
         public void UseUriInsteadOfString(ProjectType projectType) =>
-            OldVerifier.VerifyAnalyzer(
-                @"TestCases\UseUriInsteadOfString.cs",
-                new UseUriInsteadOfString(),
-                MetadataReferenceFacade.SystemDrawing.Concat(TestHelper.ProjectTypeReference(projectType)));
+            builder.AddPaths("UseUriInsteadOfString.cs").AddReferences(TestHelper.ProjectTypeReference(projectType)).Verify();
 
 #if NET
+
         [TestMethod]
         public void UseUriInsteadOfString_CSharp9() =>
-            OldVerifier.VerifyAnalyzerFromCSharp9Console(
-                @"TestCases\UseUriInsteadOfString.CSharp9.cs",
-                new UseUriInsteadOfString(),
-                MetadataReferenceFacade.SystemDrawing);
+            builder.AddPaths("UseUriInsteadOfString.CSharp9.cs").WithTopLevelStatements().Verify();
 
         [TestMethod]
         public void UseUriInsteadOfString_CSharp10() =>
-            OldVerifier.VerifyAnalyzerFromCSharp10Library(
-                @"TestCases\UseUriInsteadOfString.CSharp10.cs",
-                new UseUriInsteadOfString(),
-                MetadataReferenceFacade.SystemDrawing);
+            builder.AddPaths("UseUriInsteadOfString.CSharp10.cs").WithOptions(ParseOptionsHelper.FromCSharp10).Verify();
+
 #endif
 
         [TestMethod]
         public void UseUriInsteadOfString_InvalidCode() =>
-            OldVerifier.VerifyCSharpAnalyzer(@"
-public class Foo
+            builder.AddSnippet(@"
+public class NoMembers
 {
 }
 
-public class Bar : Foo
+public class InvalidCode : NoMembers
 {
-    public override string UriProperty { get; set; }
-    public override string UriMethod() => "";
+    public override string UriProperty { get; set; }    // Error CS0115 'Bar.UriProperty': no suitable method found to override
+    public override string UriMethod() => """";         // Error CS0115 'Bar.UriMethod()': no suitable method found to override
 
     public void Main()
     {
         Uri.TryCreate(new object(), UriKind.Absolute, out result); // Compliant - invalid code
+        // Error@-1 CS0103 The name 'UriKind' does not exist in the current context
+        // Error@-2 CS0103 The name 'Uri' does not exist in the current context
+        // Error@-3 CS0103 The name 'result' does not exist in the current context
     }
-}", new UseUriInsteadOfString(), CompilationErrorBehavior.Ignore);
+}").Verify();
     }
 }
