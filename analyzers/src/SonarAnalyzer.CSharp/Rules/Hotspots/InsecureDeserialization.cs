@@ -71,7 +71,10 @@ namespace SonarAnalyzer.Rules.CSharp
 
                 ReportOnInsecureDeserializations(c, declaration, typeSymbol);
             },
-            SyntaxKind.ClassDeclaration, SyntaxKindEx.RecordClassDeclaration);
+            SyntaxKind.ClassDeclaration,
+            SyntaxKindEx.RecordClassDeclaration,
+            SyntaxKindEx.RecordStructDeclaration,
+            SyntaxKind.StructDeclaration);
 
         private static void ReportOnInsecureDeserializations(SyntaxNodeAnalysisContext context, TypeDeclarationSyntax declaration, ITypeSymbol typeSymbol)
         {
@@ -185,7 +188,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
             public override void Visit(SyntaxNode node)
             {
-                if (node.Kind() == SyntaxKindEx.RecordClassDeclaration)
+                if (node.IsAnyKind(SyntaxKindEx.RecordClassDeclaration, SyntaxKindEx.RecordStructDeclaration))
                 {
                     if (visitedFirstLevel)
                     {

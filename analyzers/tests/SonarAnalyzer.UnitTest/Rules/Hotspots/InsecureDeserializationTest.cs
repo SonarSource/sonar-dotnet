@@ -28,21 +28,21 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class InsecureDeserializationTest
     {
-        private readonly VerifierBuilder builder = new VerifierBuilder().AddAnalyzer(() => new InsecureDeserialization(AnalyzerConfiguration.AlwaysEnabled));
+        private readonly VerifierBuilder builder = new VerifierBuilder().AddAnalyzer(() => new InsecureDeserialization(AnalyzerConfiguration.AlwaysEnabled)).WithBasePath("Hotspots");
 
         [TestMethod]
         public void InsecureDeserialization() =>
-            builder.AddPaths(@"Hotspots\InsecureDeserialization.cs").WithOptions(ParseOptionsHelper.FromCSharp8).Verify();
+            builder.AddPaths("InsecureDeserialization.cs").WithOptions(ParseOptionsHelper.FromCSharp8).Verify();
 
 #if NET
 
         [TestMethod]
         public void InsecureDeserialization_CSharp9() =>
-            builder.AddPaths(@"Hotspots\InsecureDeserialization.CSharp9.cs").WithOptions(ParseOptionsHelper.FromCSharp9).Verify();
+            builder.AddPaths("InsecureDeserialization.CSharp9.cs").WithOptions(ParseOptionsHelper.FromCSharp9).Verify();
 
         [TestMethod]
         public void InsecureDeserialization_CSharp10() =>
-            builder.AddPaths(@"Hotspots\InsecureDeserialization.CSharp10.cs").WithOptions(ParseOptionsHelper.FromCSharp10).Verify();
+            builder.AddPaths("InsecureDeserialization.CSharp10.cs").WithOptions(ParseOptionsHelper.FromCSharp10).Verify();
 
 #endif
 
