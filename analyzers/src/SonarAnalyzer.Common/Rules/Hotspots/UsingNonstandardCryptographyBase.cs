@@ -20,7 +20,6 @@
 
 using System.Collections.Immutable;
 using Microsoft.CodeAnalysis;
-using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Extensions;
 using SonarAnalyzer.Helpers;
@@ -31,10 +30,10 @@ namespace SonarAnalyzer.Rules
         where TTypeDeclarationSyntax : SyntaxNode
         where TSyntaxKind : struct
     {
-        internal const string DiagnosticId = "S2257";
+        private const string DiagnosticId = "S2257";
+        private const string MessageFormat = "Make sure using a non-standard cryptographic algorithm is safe here.";
 
-        protected const string MessageFormat = "Make sure using a non-standard cryptographic algorithm is safe here.";
-
+        private readonly DiagnosticDescriptor rule;
         private readonly ImmutableArray<KnownType> nonInheritableClassesAndInterfaces =
             ImmutableArray.Create(
                 KnownType.System_Security_Cryptography_AsymmetricAlgorithm,
@@ -45,49 +44,31 @@ namespace SonarAnalyzer.Rules
                 KnownType.System_Security_Cryptography_DeriveBytes,
                 KnownType.System_Security_Cryptography_HashAlgorithm,
                 KnownType.System_Security_Cryptography_ICryptoTransform,
-                KnownType.System_Security_Cryptography_SymmetricAlgorithm
-            );
+                KnownType.System_Security_Cryptography_SymmetricAlgorithm);
 
-        protected abstract GeneratedCodeRecognizer GeneratedCodeRecognizer { get; }
-
+        protected abstract ILanguageFacade Language { get; }
         protected abstract TSyntaxKind[] SyntaxKinds { get; }
-
-        protected abstract DiagnosticDescriptor Rule { get; }
-
-        protected abstract Location GetLocation(TTypeDeclarationSyntax typeDeclarationSyntax);
-
+        protected abstract Location Location(TTypeDeclarationSyntax typeDeclarationSyntax);
         protected abstract bool DerivesOrImplementsAny(TTypeDeclarationSyntax typeDeclarationSyntax);
+        protected abstract INamedTypeSymbol DeclaredSymbol(TTypeDeclarationSyntax typeDeclarationSyntax, SemanticModel semanticModel);
 
-        protected abstract INamedTypeSymbol GetDeclaredSymbol(TTypeDeclarationSyntax typeDeclarationSyntax, SemanticModel semanticModel);
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
 
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(Rule);
-
-        protected UsingNonstandardCryptographyBase(IAnalyzerConfiguration analyzerConfiguration)
-            : base(analyzerConfiguration)
-        {
-        }
+        protected UsingNonstandardCryptographyBase(IAnalyzerConfiguration analyzerConfiguration) : base(analyzerConfiguration) =>
+            rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, Language.RspecResources).WithNotConfigurable();
 
         protected override void Initialize(SonarAnalysisContext context) =>
-            context.RegisterSyntaxNodeActionInNonGenerated(GeneratedCodeRecognizer, AnalyzeDeclaration, SyntaxKinds);
-
-        private void AnalyzeDeclaration(SyntaxNodeAnalysisContext analysisContext)
-        {
-            if (!IsEnabled(analysisContext.Options) || analysisContext.IsRedundantPositionalRecordContext())
-            {
-                return;
-            }
-
-            var declaration = (TTypeDeclarationSyntax)analysisContext.Node;
-            if (!DerivesOrImplementsAny(declaration))
-            {
-                return;
-            }
-
-            var classSymbol = GetDeclaredSymbol(declaration, analysisContext.SemanticModel);
-            if (classSymbol.DerivesOrImplementsAny(nonInheritableClassesAndInterfaces))
-            {
-                analysisContext.ReportIssue(Diagnostic.Create(Rule, GetLocation(declaration)));
-            }
-        }
+            context.RegisterSyntaxNodeActionInNonGenerated(Language.GeneratedCodeRecognizer, c =>
+                {
+                    var declaration = (TTypeDeclarationSyntax)c.Node;
+                    if (!c.IsRedundantPositionalRecordContext()
+                        && IsEnabled(c.Options)
+                        && DerivesOrImplementsAny(declaration)
+                        && DeclaredSymbol(declaration, c.SemanticModel).DerivesOrImplementsAny(nonInheritableClassesAndInterfaces))
+                    {
+                        c.ReportIssue(Diagnostic.Create(rule, Location(declaration)));
+                    }
+                },
+                SyntaxKinds);
     }
 }

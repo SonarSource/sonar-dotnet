@@ -30,34 +30,30 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class UsingNonstandardCryptographyTest
     {
+        private readonly VerifierBuilder builderCS = CreateBuilder().AddAnalyzer(() => new CS.UsingNonstandardCryptography(AnalyzerConfiguration.AlwaysEnabled));
+        private readonly VerifierBuilder builderVB = CreateBuilder().AddAnalyzer(() => new VB.UsingNonstandardCryptography(AnalyzerConfiguration.AlwaysEnabled));
+
         [TestMethod]
         public void UsingNonstandardCryptography_CS() =>
-            OldVerifier.VerifyAnalyzer(
-                @"TestCases\Hotspots\UsingNonstandardCryptography.cs",
-                new CS.UsingNonstandardCryptography(AnalyzerConfiguration.AlwaysEnabled),
-                MetadataReferenceFacade.SystemSecurityCryptography);
+            builderCS.AddPaths("UsingNonstandardCryptography.cs").Verify();
 
 #if NET
+
         [TestMethod]
         public void UsingNonstandardCryptography_CSharp9() =>
-            OldVerifier.VerifyAnalyzerFromCSharp9Library(
-                @"TestCases\Hotspots\UsingNonstandardCryptography.CSharp9.cs",
-                new CS.UsingNonstandardCryptography(AnalyzerConfiguration.AlwaysEnabled),
-                MetadataReferenceFacade.SystemSecurityCryptography);
+            builderCS.AddPaths("UsingNonstandardCryptography.CSharp9.cs").WithOptions(ParseOptionsHelper.FromCSharp9).Verify();
 
         [TestMethod]
         public void UsingNonstandardCryptography_CSharp10() =>
-            OldVerifier.VerifyAnalyzerFromCSharp10Library(
-                @"TestCases\Hotspots\UsingNonstandardCryptography.CSharp10.cs",
-                new CS.UsingNonstandardCryptography(AnalyzerConfiguration.AlwaysEnabled),
-                MetadataReferenceFacade.SystemSecurityCryptography);
+            builderCS.AddPaths("UsingNonstandardCryptography.CSharp10.cs").WithOptions(ParseOptionsHelper.FromCSharp10).Verify();
+
 #endif
 
         [TestMethod]
         public void UsingNonstandardCryptography_VB() =>
-            OldVerifier.VerifyAnalyzer(
-                @"TestCases\Hotspots\UsingNonstandardCryptography.vb",
-                new VB.UsingNonstandardCryptography(AnalyzerConfiguration.AlwaysEnabled),
-                MetadataReferenceFacade.SystemSecurityCryptography);
+            builderVB.AddPaths("UsingNonstandardCryptography.vb").Verify();
+
+        private static VerifierBuilder CreateBuilder() =>
+            new VerifierBuilder().AddReferences(MetadataReferenceFacade.SystemSecurityCryptography).WithBasePath("Hotspots");
     }
 }

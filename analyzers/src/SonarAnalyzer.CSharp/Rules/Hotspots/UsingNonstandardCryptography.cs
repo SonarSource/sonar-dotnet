@@ -31,7 +31,7 @@ namespace SonarAnalyzer.Rules.CSharp
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
     public sealed class UsingNonstandardCryptography : UsingNonstandardCryptographyBase<SyntaxKind, TypeDeclarationSyntax>
     {
-        protected override GeneratedCodeRecognizer GeneratedCodeRecognizer { get; } = CSharpGeneratedCodeRecognizer.Instance;
+        protected override ILanguageFacade Language => CSharpFacade.Instance;
 
         protected override SyntaxKind[] SyntaxKinds { get; } =
         {
@@ -42,22 +42,14 @@ namespace SonarAnalyzer.Rules.CSharp
             SyntaxKind.StructDeclaration
         };
 
-        protected override DiagnosticDescriptor Rule { get; } = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager).WithNotConfigurable();
+        public UsingNonstandardCryptography() : this(AnalyzerConfiguration.Hotspot) { }
 
-        public UsingNonstandardCryptography()
-            : this(AnalyzerConfiguration.Hotspot)
-        {
-        }
+        public UsingNonstandardCryptography(IAnalyzerConfiguration analyzerConfiguration) : base(analyzerConfiguration) { }
 
-        public UsingNonstandardCryptography(IAnalyzerConfiguration analyzerConfiguration)
-            : base(analyzerConfiguration)
-        {
-        }
-
-        protected override INamedTypeSymbol GetDeclaredSymbol(TypeDeclarationSyntax typeDeclarationSyntax, SemanticModel semanticModel) =>
+        protected override INamedTypeSymbol DeclaredSymbol(TypeDeclarationSyntax typeDeclarationSyntax, SemanticModel semanticModel) =>
             semanticModel.GetDeclaredSymbol(typeDeclarationSyntax);
 
-        protected override Location GetLocation(TypeDeclarationSyntax typeDeclarationSyntax) =>
+        protected override Location Location(TypeDeclarationSyntax typeDeclarationSyntax) =>
             typeDeclarationSyntax.Identifier.GetLocation();
 
         protected override bool DerivesOrImplementsAny(TypeDeclarationSyntax typeDeclarationSyntax) =>

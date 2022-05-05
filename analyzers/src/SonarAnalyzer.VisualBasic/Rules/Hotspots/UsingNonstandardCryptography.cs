@@ -30,26 +30,18 @@ namespace SonarAnalyzer.Rules.VisualBasic
     [DiagnosticAnalyzer(LanguageNames.VisualBasic)]
     public sealed class UsingNonstandardCryptography : UsingNonstandardCryptographyBase<SyntaxKind, TypeBlockSyntax>
     {
-        protected override GeneratedCodeRecognizer GeneratedCodeRecognizer { get; } = VisualBasicGeneratedCodeRecognizer.Instance;
+        protected override ILanguageFacade Language => VisualBasicFacade.Instance;
 
         protected override SyntaxKind[] SyntaxKinds { get; } = { SyntaxKind.ClassBlock, SyntaxKind.InterfaceBlock };
 
-        protected override DiagnosticDescriptor Rule { get; } = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager).WithNotConfigurable();
+        public UsingNonstandardCryptography() : this(AnalyzerConfiguration.Hotspot) { }
 
-        public UsingNonstandardCryptography()
-            : this(AnalyzerConfiguration.Hotspot)
-        {
-        }
+        public UsingNonstandardCryptography(IAnalyzerConfiguration analyzerConfiguration) : base(analyzerConfiguration) { }
 
-        public UsingNonstandardCryptography(IAnalyzerConfiguration analyzerConfiguration)
-            : base(analyzerConfiguration)
-        {
-        }
-
-        protected override INamedTypeSymbol GetDeclaredSymbol(TypeBlockSyntax typeDeclarationSyntax, SemanticModel semanticModel) =>
+        protected override INamedTypeSymbol DeclaredSymbol(TypeBlockSyntax typeDeclarationSyntax, SemanticModel semanticModel) =>
             semanticModel.GetDeclaredSymbol(typeDeclarationSyntax);
 
-        protected override Location GetLocation(TypeBlockSyntax typeDeclarationSyntax) =>
+        protected override Location Location(TypeBlockSyntax typeDeclarationSyntax) =>
             typeDeclarationSyntax switch
             {
                 ClassBlockSyntax c => c.ClassStatement.Identifier.GetLocation(),
