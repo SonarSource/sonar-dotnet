@@ -1,7 +1,5 @@
 ﻿using System.Diagnostics;
 
-namespace Tests.Diagnostics;
-
 record struct RecordStruct
 {
     private string name = "foobar"; // Noncompliant
