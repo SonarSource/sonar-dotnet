@@ -40,7 +40,7 @@ namespace SonarAnalyzer.UnitTest.Rules
 
         [TestMethod]
         public void TypeNamesShouldNotMatchNamespaces_CSharp10() =>
-            builder.AddPaths("TypeNamesShouldNotMatchNamespaces.CSharp10.cs").WithOptions(ParseOptionsHelper.FromCSharp10).WithConcurrentAnalysis(false).Verify();
+            builder.AddPaths("TypeNamesShouldNotMatchNamespaces.CSharp10.cs").WithOptions(ParseOptionsHelper.FromCSharp10).Verify();
 
 #endif
     }
