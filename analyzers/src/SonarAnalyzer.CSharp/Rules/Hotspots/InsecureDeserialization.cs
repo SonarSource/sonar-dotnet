@@ -43,33 +43,21 @@ namespace SonarAnalyzer.Rules.CSharp
 
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(Rule);
 
-        public InsecureDeserialization() : base(AnalyzerConfiguration.Hotspot)
-        {
-        }
-
-        public InsecureDeserialization(IAnalyzerConfiguration analyzerConfiguration)
-            : base(analyzerConfiguration)
-        {
-        }
+        public InsecureDeserialization() : this(AnalyzerConfiguration.Hotspot) { }
+        public InsecureDeserialization(IAnalyzerConfiguration analyzerConfiguration) : base(analyzerConfiguration) { }
 
         protected override void Initialize(SonarAnalysisContext context) =>
             context.RegisterSyntaxNodeActionInNonGenerated(c =>
             {
                 var declaration = (TypeDeclarationSyntax)c.Node;
-                if (!IsEnabled(c.Options)
-                    || c.IsRedundantPositionalRecordContext()
-                    || !HasConstructorsWithParameters(declaration)) // If there are no constructors, or if these don't have parameters, there is no validation done and the type is considered safe.
+                if (!c.IsRedundantPositionalRecordContext()
+                    && IsEnabled(c.Options)
+                    && HasConstructorsWithParameters(declaration) // If there are no constructors, or if these don't have parameters, there is no validation done and the type is considered safe.
+                    && c.SemanticModel.GetDeclaredSymbol(declaration) is { } typeSymbol
+                    && HasSerializableAttribute(typeSymbol))
                 {
-                    return;
+                    ReportOnInsecureDeserializations(c, declaration, typeSymbol);
                 }
-
-                var typeSymbol = c.SemanticModel.GetDeclaredSymbol(declaration);
-                if (!HasSerializableAttribute(typeSymbol))
-                {
-                    return;
-                }
-
-                ReportOnInsecureDeserializations(c, declaration, typeSymbol);
             },
             SyntaxKind.ClassDeclaration,
             SyntaxKindEx.RecordClassDeclaration,
