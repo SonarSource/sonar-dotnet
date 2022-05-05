@@ -121,9 +121,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     .Distinct()
                     .ToMultiValueDictionary(x => x.AllInterfaces);
 
-        private static INamedTypeSymbol CollidingDeclaration(INamedTypeSymbol declaredType,
-                                                             INamedTypeSymbol interfaceType,
-                                                             MultiValueDictionary<INamedTypeSymbol, INamedTypeSymbol> interfaceMappings)
+        private static INamedTypeSymbol CollidingDeclaration(INamedTypeSymbol declaredType, INamedTypeSymbol interfaceType, MultiValueDictionary<INamedTypeSymbol, INamedTypeSymbol> interfaceMappings)
         {
             var collisionMapping = interfaceMappings.FirstOrDefault(x => x.Key.IsInterface() && x.Value.Contains(interfaceType));
             if (collisionMapping.Key is not null)
