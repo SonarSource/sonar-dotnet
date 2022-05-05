@@ -29,6 +29,7 @@ import org.sonar.api.SonarRuntime;
 import org.sonar.api.config.PropertyDefinition;
 import org.sonar.api.internal.SonarRuntimeImpl;
 import org.sonar.api.utils.Version;
+import org.sonarsource.dotnet.shared.plugins.AnalysisWarningsSensor;
 import org.sonarsource.dotnet.shared.plugins.CodeCoverageProvider;
 import org.sonarsource.dotnet.shared.plugins.DotNetSensor;
 import org.sonarsource.dotnet.shared.plugins.EncodingPerFile;
@@ -59,6 +60,7 @@ public class VbNetPluginTest {
     List extensions = context.getExtensions();
 
     Object[] expectedExtensions = new Object[] {
+      AnalysisWarningsSensor.class,
       DotNetSensor.class,
       EncodingPerFile.class,
       FileTypeSensor.class,
@@ -71,12 +73,12 @@ public class VbNetPluginTest {
       RoslynDataImporter.class,
       RoslynProfileExporter.class,
       SonarLintProfileExporter.class,
-      VbNetPlugin.METADATA,
       VbNet.class,
-      VbNetSonarRulesDefinition.class,
+      VbNetGlobalProtobufFileProcessor.class,
       VbNetLanguageConfiguration.class,
       VbNetModuleConfiguration.class,
-      VbNetGlobalProtobufFileProcessor.class,
+      VbNetPlugin.METADATA,
+      VbNetSonarRulesDefinition.class,
       WrongEncodingFileFilter.class
     };
 

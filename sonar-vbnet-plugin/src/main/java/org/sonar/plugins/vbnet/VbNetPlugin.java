@@ -21,6 +21,7 @@ package org.sonar.plugins.vbnet;
 
 import org.sonar.api.Plugin;
 import org.sonarsource.dotnet.shared.plugins.AbstractPropertyDefinitions;
+import org.sonarsource.dotnet.shared.plugins.AnalysisWarningsSensor;
 import org.sonarsource.dotnet.shared.plugins.CodeCoverageProvider;
 import org.sonarsource.dotnet.shared.plugins.DotNetPluginMetadata;
 import org.sonarsource.dotnet.shared.plugins.DotNetSensor;
@@ -78,6 +79,7 @@ public class VbNetPlugin implements Plugin {
       GeneratedFileFilter.class,
       WrongEncodingFileFilter.class,
       // importers / exporters
+      AnalysisWarningsSensor.class,
       ProtobufDataImporter.class,
       RoslynDataImporter.class,
       RoslynProfileExporter.class,
