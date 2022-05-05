@@ -109,31 +109,31 @@ namespace SonarAnalyzer.Metrics.CSharp
                     case SyntaxKind.ClassDeclaration:
                     case SyntaxKindEx.RecordClassDeclaration:
                     case SyntaxKindEx.RecordStructDeclaration:
-                        return !HasExcludedCodeAttribute((BaseTypeDeclarationSyntax)node, x => x.AttributeLists, true);
+                        return !HasExcludedCodeAttribute(node, ((BaseTypeDeclarationSyntax)node).AttributeLists, true);
 
                     case SyntaxKind.MethodDeclaration:
                     case SyntaxKind.ConstructorDeclaration:
-                        return !HasExcludedCodeAttribute((BaseMethodDeclarationSyntax)node, x => x.AttributeLists, true);
+                        return !HasExcludedCodeAttribute(node, ((BaseMethodDeclarationSyntax)node).AttributeLists, true);
 
                     case SyntaxKind.PropertyDeclaration:
                     case SyntaxKind.EventDeclaration:
-                        return !HasExcludedCodeAttribute((BasePropertyDeclarationSyntax)node, x => x.AttributeLists, false);
+                        return !HasExcludedCodeAttribute(node, ((BasePropertyDeclarationSyntax)node).AttributeLists, false);
 
                     case SyntaxKind.AddAccessorDeclaration:
                     case SyntaxKind.RemoveAccessorDeclaration:
                     case SyntaxKind.SetAccessorDeclaration:
                     case SyntaxKind.GetAccessorDeclaration:
                     case SyntaxKindEx.InitAccessorDeclaration:
-                        return !HasExcludedCodeAttribute((AccessorDeclarationSyntax)node, ads => ads.AttributeLists, false);
+                        return !HasExcludedCodeAttribute(node, ((AccessorDeclarationSyntax)node).AttributeLists, false);
 
                     default:
                         return true;
                 }
             }
 
-            private bool HasExcludedCodeAttribute<T>(T node, Func<T, SyntaxList<AttributeListSyntax>> getAttributeLists, bool canBePartial) where T : SyntaxNode
+            private bool HasExcludedCodeAttribute(SyntaxNode node, SyntaxList<AttributeListSyntax> attributeLists, bool canBePartial)
             {
-                var hasExcludeFromCodeCoverageAttribute = getAttributeLists(node).SelectMany(x => x.Attributes).Any(IsExcludedAttribute);
+                var hasExcludeFromCodeCoverageAttribute = attributeLists.SelectMany(x => x.Attributes).Any(IsExcludedAttribute);
                 return hasExcludeFromCodeCoverageAttribute || !canBePartial
                     ? hasExcludeFromCodeCoverageAttribute
                     : model.GetDeclaredSymbol(node) is { Kind: SymbolKind.Method or SymbolKind.NamedType} symbol
