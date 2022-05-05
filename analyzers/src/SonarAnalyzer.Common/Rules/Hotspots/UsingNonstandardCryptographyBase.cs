@@ -22,6 +22,7 @@ using System.Collections.Immutable;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.Common;
+using SonarAnalyzer.Extensions;
 using SonarAnalyzer.Helpers;
 
 namespace SonarAnalyzer.Rules
@@ -71,7 +72,7 @@ namespace SonarAnalyzer.Rules
 
         private void AnalyzeDeclaration(SyntaxNodeAnalysisContext analysisContext)
         {
-            if (!IsEnabled(analysisContext.Options))
+            if (!IsEnabled(analysisContext.Options) || analysisContext.IsRedundantPositionalRecordContext())
             {
                 return;
             }
