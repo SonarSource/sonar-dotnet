@@ -136,7 +136,7 @@ namespace Tests.Diagnostics
         protected override byte[] HashFinal() => throw new NotImplementedException();
     }
 
-    public struct CustomCryptoTransformStruct : ICryptoTransform  // FN
+    public struct CustomCryptoTransformStruct : ICryptoTransform  // Noncompliant
     {
         public int InputBlockSize => throw new NotImplementedException();
 

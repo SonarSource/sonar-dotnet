@@ -24,32 +24,32 @@ using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
+using StyleCop.Analyzers.Lightup;
 
 namespace SonarAnalyzer.Rules.CSharp
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
     public sealed class UsingNonstandardCryptography : UsingNonstandardCryptographyBase<SyntaxKind, TypeDeclarationSyntax>
     {
-        protected override GeneratedCodeRecognizer GeneratedCodeRecognizer { get; } = CSharpGeneratedCodeRecognizer.Instance;
+        protected override ILanguageFacade Language => CSharpFacade.Instance;
 
-        protected override SyntaxKind[] SyntaxKinds { get; } = { SyntaxKind.ClassDeclaration, SyntaxKind.InterfaceDeclaration };
-
-        protected override DiagnosticDescriptor Rule { get; } = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager).WithNotConfigurable();
-
-        public UsingNonstandardCryptography()
-            : this(AnalyzerConfiguration.Hotspot)
+        protected override SyntaxKind[] SyntaxKinds { get; } =
         {
-        }
+            SyntaxKind.ClassDeclaration,
+            SyntaxKind.InterfaceDeclaration,
+            SyntaxKindEx.RecordClassDeclaration,
+            SyntaxKindEx.RecordStructDeclaration,
+            SyntaxKind.StructDeclaration
+        };
 
-        public UsingNonstandardCryptography(IAnalyzerConfiguration analyzerConfiguration)
-            : base(analyzerConfiguration)
-        {
-        }
+        public UsingNonstandardCryptography() : this(AnalyzerConfiguration.Hotspot) { }
 
-        protected override INamedTypeSymbol GetDeclaredSymbol(TypeDeclarationSyntax typeDeclarationSyntax, SemanticModel semanticModel) =>
+        public UsingNonstandardCryptography(IAnalyzerConfiguration analyzerConfiguration) : base(analyzerConfiguration) { }
+
+        protected override INamedTypeSymbol DeclaredSymbol(TypeDeclarationSyntax typeDeclarationSyntax, SemanticModel semanticModel) =>
             semanticModel.GetDeclaredSymbol(typeDeclarationSyntax);
 
-        protected override Location GetLocation(TypeDeclarationSyntax typeDeclarationSyntax) =>
+        protected override Location Location(TypeDeclarationSyntax typeDeclarationSyntax) =>
             typeDeclarationSyntax.Identifier.GetLocation();
 
         protected override bool DerivesOrImplementsAny(TypeDeclarationSyntax typeDeclarationSyntax) =>

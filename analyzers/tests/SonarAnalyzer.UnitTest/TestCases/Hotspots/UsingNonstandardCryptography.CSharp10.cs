@@ -3,7 +3,7 @@ using System.Security.Cryptography;
 
 namespace Tests.Diagnostics
 {
-    public record struct CustomCryptoTransform : ICryptoTransform  // FN
+    public record struct CustomCryptoTransform : ICryptoTransform  // Noncompliant
     {
         public int InputBlockSize => throw new NotImplementedException();
 
@@ -24,7 +24,7 @@ namespace Tests.Diagnostics
     {
     }
 
-    public record struct CustomCryptoTransformWithInterface : ICustomCryptoTransform  // FN
+    public record struct CustomCryptoTransformWithInterface : ICustomCryptoTransform  // Noncompliant
     {
         public int InputBlockSize => throw new NotImplementedException();
 
@@ -41,7 +41,7 @@ namespace Tests.Diagnostics
         public byte[] TransformFinalBlock(byte[] inputBuffer, int inputOffset, int inputCount) => throw new NotImplementedException();
     }
 
-    public record struct CustomCryptoTransformWithInterfacePositionalRecordStruct(string Property) : ICustomCryptoTransform  // FN
+    public record struct CustomCryptoTransformWithInterfacePositionalRecordStruct(string Property) : ICustomCryptoTransform  // Noncompliant
     {
         public int InputBlockSize => throw new NotImplementedException();
 
