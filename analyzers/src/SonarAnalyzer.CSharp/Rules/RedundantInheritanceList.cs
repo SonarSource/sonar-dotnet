@@ -82,7 +82,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 && baseTypeSymbol.Is(redundantType))
             {
                 var location = GetLocationWithToken(baseTypeSyntax, typeDeclaration.BaseList.Types);
-                context.ReportIssue(Diagnostic.Create(Rule, location, DiagnosticsProperties(redundantIndex: 0), message));
+                context.ReportIssue(Diagnostic.Create(Rule, location, DiagnosticsProperties(0), message));
             }
         }
 
@@ -109,7 +109,7 @@ namespace SonarAnalyzer.Rules.CSharp
                         collidingDeclaration.ToMinimalDisplayString(context.SemanticModel, baseType.Type.SpanStart),
                         interfaceType.ToMinimalDisplayString(context.SemanticModel, baseType.Type.SpanStart));
 
-                    context.ReportIssue(Diagnostic.Create(Rule, location, DiagnosticsProperties(redundantIndex: i), message));
+                    context.ReportIssue(Diagnostic.Create(Rule, location, DiagnosticsProperties(i), message));
                 }
             }
         }
