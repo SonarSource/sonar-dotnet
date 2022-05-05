@@ -18,6 +18,7 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Linq;
@@ -68,11 +69,11 @@ namespace SonarAnalyzer.Rules.CSharp
                     return;
                 }
 
-                ReportDiagnostics(c, declaration, typeSymbol);
+                ReportOnInsecureDeserializations(c, declaration, typeSymbol);
             },
             SyntaxKind.ClassDeclaration, SyntaxKindEx.RecordClassDeclaration);
 
-        private static void ReportDiagnostics(SyntaxNodeAnalysisContext context, TypeDeclarationSyntax declaration, ITypeSymbol typeSymbol)
+        private static void ReportOnInsecureDeserializations(SyntaxNodeAnalysisContext context, TypeDeclarationSyntax declaration, ITypeSymbol typeSymbol)
         {
             var implementsISerializable = ImplementsISerializable(typeSymbol);
             var implementsIDeserializationCallback = ImplementsIDeserializationCallback(typeSymbol);
@@ -80,32 +81,32 @@ namespace SonarAnalyzer.Rules.CSharp
             var walker = new ConstructorDeclarationWalker(context.SemanticModel);
             walker.SafeVisit(declaration);
 
-            if (!implementsISerializable
-                && !implementsIDeserializationCallback)
+            if (!implementsISerializable && !implementsIDeserializationCallback)
             {
-                foreach (var ctorInfo in walker.GetConstructorsInfo().Where(info => info.HasConditionalConstructs))
+                foreach (var ctorInfo in walker.GetConstructorsInfo(x => x.HasConditionalConstructs))
                 {
-                    context.ReportIssue(Diagnostic.Create(Rule, ctorInfo.GetReportLocation()));
+                    ReportIssue(context, ctorInfo);
                 }
             }
 
-            if (implementsISerializable
-                && !walker.HasDeserializationCtorWithConditionalStatements())
+            if (implementsISerializable && !walker.HasDeserializationCtorWithConditionalStatements())
             {
-                foreach (var ctorInfo in walker.GetConstructorsInfo().Where(info => !info.IsDeserializationConstructor && info.HasConditionalConstructs))
+                foreach (var ctorInfo in walker.GetConstructorsInfo(x => !x.IsDeserializationConstructor && x.HasConditionalConstructs))
                 {
-                    context.ReportIssue(Diagnostic.Create(Rule, ctorInfo.GetReportLocation()));
+                    ReportIssue(context, ctorInfo);
                 }
             }
 
-            if (implementsIDeserializationCallback
-                && !OnDeserializationHasConditions(declaration, context.SemanticModel))
+            if (implementsIDeserializationCallback && !OnDeserializationHasConditions(declaration, context.SemanticModel))
             {
-                foreach (var ctorInfo in walker.GetConstructorsInfo().Where(info => info.HasConditionalConstructs))
+                foreach (var ctorInfo in walker.GetConstructorsInfo(x => x.HasConditionalConstructs))
                 {
-                    context.ReportIssue(Diagnostic.Create(Rule, ctorInfo.GetReportLocation()));
+                    ReportIssue(context, ctorInfo);
                 }
             }
+
+            static void ReportIssue(SyntaxNodeAnalysisContext context, ConstructorInfo ctorInfo) =>
+                context.ReportIssue(Diagnostic.Create(Rule, ctorInfo.GetReportLocation()));
         }
 
         private static bool OnDeserializationHasConditions(TypeDeclarationSyntax typeDeclaration, SemanticModel semanticModel) =>
@@ -116,7 +117,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 .ContainsConditionalConstructs();
 
         private static bool IsOnDeserialization(MethodDeclarationSyntax methodDeclaration, SemanticModel semanticModel) =>
-            methodDeclaration.Identifier.Text == "OnDeserialization"
+            methodDeclaration.Identifier.Text == nameof(System.Runtime.Serialization.IDeserializationCallback.OnDeserialization)
             && methodDeclaration.ParameterList.Parameters.Count == 1
             && methodDeclaration.ParameterList.Parameters[0].IsDeclarationKnownType(KnownType.System_Object, semanticModel);
 
@@ -151,7 +152,8 @@ namespace SonarAnalyzer.Rules.CSharp
                 this.semanticModel = semanticModel;
             }
 
-            public ImmutableArray<ConstructorInfo> GetConstructorsInfo() => constructorsInfo.ToImmutableArray();
+            public IEnumerable<ConstructorInfo> GetConstructorsInfo(Func<ConstructorInfo, bool> predicate) =>
+                constructorsInfo.Where(predicate);
 
             public bool HasDeserializationCtorWithConditionalStatements() =>
                 GetDeserializationConstructor() is { HasConditionalConstructs: true };
