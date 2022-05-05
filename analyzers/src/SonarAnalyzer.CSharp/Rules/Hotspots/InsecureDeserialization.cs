@@ -54,16 +54,11 @@ namespace SonarAnalyzer.Rules.CSharp
         protected override void Initialize(SonarAnalysisContext context) =>
             context.RegisterSyntaxNodeActionInNonGenerated(c =>
             {
-                if (!IsEnabled(c.Options) || c.IsRedundantPositionalRecordContext())
-                {
-                    return;
-                }
-
                 var declaration = (TypeDeclarationSyntax)c.Node;
-                if (!HasConstructorsWithParameters(declaration))
+                if (!IsEnabled(c.Options)
+                    || c.IsRedundantPositionalRecordContext()
+                    || !HasConstructorsWithParameters(declaration)) // If there are no constructors, or if these don't have parameters, there is no validation done and the type is considered safe.
                 {
-                    // If there are no constructors, or if these don't have parameters, there is no validation done
-                    // and the type is considered safe.
                     return;
                 }
 
@@ -73,11 +68,11 @@ namespace SonarAnalyzer.Rules.CSharp
                     return;
                 }
 
-                ReportDiagnostics(declaration, typeSymbol, c);
+                ReportDiagnostics(c, declaration, typeSymbol);
             },
             SyntaxKind.ClassDeclaration, SyntaxKindEx.RecordClassDeclaration);
 
-        private static void ReportDiagnostics(TypeDeclarationSyntax declaration, ITypeSymbol typeSymbol, SyntaxNodeAnalysisContext context)
+        private static void ReportDiagnostics(SyntaxNodeAnalysisContext context, TypeDeclarationSyntax declaration, ITypeSymbol typeSymbol)
         {
             var implementsISerializable = ImplementsISerializable(typeSymbol);
             var implementsIDeserializationCallback = ImplementsIDeserializationCallback(typeSymbol);
