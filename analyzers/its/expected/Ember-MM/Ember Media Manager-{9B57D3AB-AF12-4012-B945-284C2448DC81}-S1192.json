@@ -3791,7 +3791,7 @@
 },
 {
 "id":  "S1192",
-"message":  "Define a constant instead of using this literal '/select,""{0}""' 4 times.",
+"message":  "Define a constant instead of using this literal '/select,"{0}"' 4 times.",
 "location":  [
 {
 "uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
@@ -5030,7 +5030,7 @@
 },
 {
 "id":  "S1192",
-"message":  "Define a constant instead of using this literal '""{0}""' 6 times.",
+"message":  "Define a constant instead of using this literal '"{0}"' 6 times.",
 "location":  [
 {
 "uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",

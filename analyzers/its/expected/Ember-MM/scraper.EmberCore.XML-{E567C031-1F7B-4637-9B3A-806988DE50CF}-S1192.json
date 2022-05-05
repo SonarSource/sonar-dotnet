@@ -3236,7 +3236,7 @@
 },
 {
 "id":  "S1192",
-"message":  "Define a constant instead of using this literal ' default=""{0}""' 4 times.",
+"message":  "Define a constant instead of using this literal ' default="{0}"' 4 times.",
 "location":  [
 {
 "uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScraperSettings.vb",
@@ -3278,7 +3278,7 @@
 },
 {
 "id":  "S1192",
-"message":  "Define a constant instead of using this literal 'ID Cannot be empty for any type but ""sep"".' 4 times.",
+"message":  "Define a constant instead of using this literal 'ID Cannot be empty for any type but "sep".' 4 times.",
 "location":  [
 {
 "uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScraperSettings.vb",
@@ -3362,7 +3362,7 @@
 },
 {
 "id":  "S1192",
-"message":  "Define a constant instead of using this literal 'Label Cannot be empty for any type but ""sep"".' 4 times.",
+"message":  "Define a constant instead of using this literal 'Label Cannot be empty for any type but "sep".' 4 times.",
 "location":  [
 {
 "uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScraperSettings.vb",

@@ -39,14 +39,16 @@ namespace SonarAnalyzer.Rules.CSharp
             SyntaxKind.ClassDeclaration,
             SyntaxKind.StructDeclaration,
             SyntaxKindEx.RecordClassDeclaration,
-            SyntaxKind.CompilationUnit
+            SyntaxKindEx.RecordStructDeclaration,
+            SyntaxKind.CompilationUnit,
         };
 
         private SyntaxKind[] TypeDeclarationSyntaxKinds { get; } =
         {
             SyntaxKind.ClassDeclaration,
             SyntaxKind.StructDeclaration,
-            SyntaxKindEx.RecordClassDeclaration
+            SyntaxKindEx.RecordClassDeclaration,
+            SyntaxKindEx.RecordStructDeclaration,
         };
 
         protected override bool IsMatchingMethodParameterName(LiteralExpressionSyntax literalExpression) =>
@@ -61,13 +63,13 @@ namespace SonarAnalyzer.Rules.CSharp
                 x.IsAnyKind(TypeDeclarationSyntaxKinds)
                 || (x.IsKind(SyntaxKind.CompilationUnit) && x.ChildNodes().Any(y => y.IsKind(SyntaxKind.GlobalStatement))));
 
-        protected override IEnumerable<LiteralExpressionSyntax> RetrieveLiteralExpressions(SyntaxNode node) =>
+        protected override IEnumerable<LiteralExpressionSyntax> FindLiteralExpressions(SyntaxNode node) =>
             node.DescendantNodes(n => !n.IsKind(SyntaxKind.AttributeList))
                 .Where(les => les.IsKind(SyntaxKind.StringLiteralExpression))
                 .Cast<LiteralExpressionSyntax>();
 
-        protected override string GetLiteralValue(LiteralExpressionSyntax literal) =>
-            literal.Token.Text;
+        protected override SyntaxToken LiteralToken(LiteralExpressionSyntax literal) =>
+            literal.Token;
 
         protected override bool IsNamedTypeOrTopLevelMain(SyntaxNodeAnalysisContext context) =>
             IsNamedType(context) || IsTopLevelMain(context);

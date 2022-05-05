@@ -5,37 +5,37 @@
         private string empty = "";
 
         public const string NameConst = "foobar"; // Noncompliant {{Define a constant instead of using this literal 'foobar' 8 times.}}
-//                                      ^^^^^^^^
+        //                              ^^^^^^^^
         public static readonly string NameReadonly = "foobar";
-//                                                   ^^^^^^^^ Secondary
+        //                                           ^^^^^^^^ Secondary
 
 
         private string name = "foobar";
-//                            ^^^^^^^^ Secondary
+        //                    ^^^^^^^^ Secondary
 
         private string[] values = new[] { "something", "something", "something" }; // Compliant - repetition below threshold
 
         private string Name { get; } = "foobar";
-//                                     ^^^^^^^^ Secondary
+        //                             ^^^^^^^^ Secondary
 
         public Program()
         {
             var x = "foobar";
-//                  ^^^^^^^^ Secondary
+            //      ^^^^^^^^ Secondary
 
             var y = "FooBar"; // Compliant - casing is different
         }
 
         public void Do(string s = "foobar")
-//                                ^^^^^^^^ Secondary
+        //                        ^^^^^^^^ Secondary
         {
             var x = s ?? "foobar";
-//                       ^^^^^^^^ Secondary
+            //           ^^^^^^^^ Secondary
 
             string GetFooBar()
             {
                 return "foobar";
-//                     ^^^^^^^^ Secondary
+                //     ^^^^^^^^ Secondary
             }
         }
 
@@ -108,7 +108,7 @@
     {
         // See https://github.com/SonarSource/sonar-dotnet/issues/2191
         private string ZZ_TRANS_PACKED_0 =
-            "\x0001\u0124\x0001\x0000\x0001\u0125\x0002\x0000\x0001\u0126\x0001\x0000\x0001\u0127\x0005\x0000" + // Noncompliant {{Define a constant instead of using this literal '\x0001\u0124\x0001\x0000\x0001\u0125\x0002\x0000\x0001\u0126\x0001\x0000\x0001\u0127\x0005\x0000' 4 times.}}
+            "\x0001\u0124\x0001\x0000\x0001\u0125\x0002\x0000\x0001\u0126\x0001\x0000\x0001\u0127\x0005\x0000" + // Noncompliant
             "\x0001\u0124\x0001\x0000\x0001\u0125\x0002\x0000\x0001\u0126\x0001\x0000\x0001\u0127\x0005\x0000" + // Secondary
             "\x0001\u0124\x0001\x0000\x0001\u0125\x0002\x0000\x0001\u0126\x0001\x0000\x0001\u0127\x0005\x0000" + // Secondary
             "\x0001\u0124\x0001\x0000\x0001\u0125\x0002\x0000\x0001\u0126\x0001\x0000\x0001\u0127\x0005\x0000";  // Secondary
@@ -117,5 +117,15 @@
             + "cheese"      // Secondary
             + "cheese"      // Secondary
             + @"cheese";    // Secondary
+
+        private string backslash = "Filename\\" // Noncompliant
+            + @"Filename\"                      // Secondary
+            + "Filename\x005C"                  // Secondary
+            + "Filename\x005C";                 // Secondary
+
+        private string doubleQuotes = "Say \"hello\"" // Noncompliant {{Define a constant instead of using this literal 'Say "hello"' 4 times.}}
+            + @"Say ""hello"""                        // Secondary
+            + "Say \x0022hello\x0022"                 // Secondary
+            + "Say \"hello\"";                        // Secondary
     }
 }

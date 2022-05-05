@@ -2,57 +2,6 @@
 "issues":  [
 {
 "id":  "S1192",
-"message":  "Define a constant instead of using this literal ']\n  ' 5 times.",
-"location":  [
-{
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\GraphAssembly.cs",
-"region":  {
-"startLine":  264,
-"startColumn":  110,
-"endLine":  264,
-"endColumn":  117
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\GraphAssembly.cs",
-"region":  {
-"startLine":  265,
-"startColumn":  89,
-"endLine":  265,
-"endColumn":  96
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\GraphAssembly.cs",
-"region":  {
-"startLine":  266,
-"startColumn":  68,
-"endLine":  266,
-"endColumn":  75
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\GraphAssembly.cs",
-"region":  {
-"startLine":  267,
-"startColumn":  68,
-"endLine":  267,
-"endColumn":  75
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\GraphAssembly.cs",
-"region":  {
-"startLine":  268,
-"startColumn":  71,
-"endLine":  268,
-"endColumn":  78
-}
-}
-]
-},
-{
-"id":  "S1192",
 "message":  "Define a constant instead of using this literal 'This stream can only read' 7 times.",
 "location":  [
 {

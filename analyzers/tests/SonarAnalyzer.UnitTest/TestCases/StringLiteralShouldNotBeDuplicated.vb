@@ -4,7 +4,7 @@
 
         Private empty As String = ""
 
-        Public const NameConst As String = "foobar" ' Noncompliant {{Define a constant instead of using this literal 'foobar' 7 times.}}
+        Public Const NameConst As String = "foobar" ' Noncompliant {{Define a constant instead of using this literal 'foobar' 7 times.}}
         '                                  ^^^^^^^^
         Public ReadOnly NameReadonly As String = "foobar"
         '                                        ^^^^^^^^ Secondary
@@ -12,7 +12,7 @@
         Private name As String = "foobar"
         '                        ^^^^^^^^ Secondary
 
-        Private values As String() = { "something", "something", "something" } ' Compliant - repetition below threshold
+        Private values As String() = {"something", "something", "something"} ' Compliant - repetition below threshold
 
         Private ReadOnly Property FirstName = "foobar"
         '                                     ^^^^^^^^ Secondary
@@ -26,14 +26,14 @@
 
         End Sub
 
-        public Sub DoSomething(Optional s As String = "foobar")
-        '                                             ^^^^^^^^ Secondary
+        Public Sub DoSomething(Optional s As String = "foobar")
+            '                                         ^^^^^^^^ Secondary
             Dim x As String = If(s, "foobar")
             '                       ^^^^^^^^ Secondary
         End Sub
 
-        public Sub Validate(fOobAR As Object)
-             If foobar Is Nothing Then Throw New System.ArgumentNullException("foobar") ' Compliant - matches one of the parameter name
+        Public Sub Validate(fOobAR As Object)
+            If fOobAR Is Nothing Then Throw New System.ArgumentNullException("foobar") ' Compliant - matches one of the parameter name
 
             DoSomething("foobar") ' Compliant - matches one of the parameter name
 
@@ -56,12 +56,12 @@
 
         Private Structure InnerStruct
 
-            private name1 As String
-            private name2 As String
-            private name3 As String
-            private name4 As String
+            Private name1 As String
+            Private name2 As String
+            Private name3 As String
+            Private name4 As String
 
-            public Sub New(s As String)
+            Public Sub New(s As String)
 
                 name1 = "foobar" ' Secondary - inner struct count with base
                 name2 = "foobar" ' Secondary
@@ -84,13 +84,13 @@
         End Sub
 
         Private Structure InnerStruct
-        
-            private name1 As String
-            private name2 As String
-            private name3 As String
-            private name4 As String
 
-            public Sub New(s As String)
+            Private name1 As String
+            Private name2 As String
+            Private name3 As String
+            Private name4 As String
+
+            Public Sub New(s As String)
                 name1 = "foobar" ' Secondary - inner struct count with base
                 name2 = "foobar" ' Secondary
                 name3 = "foobar" ' Secondary
@@ -100,5 +100,12 @@
         End Structure
 
     End Structure
+
+    Public Class SpecialChars
+        Private someString1 As String = "Say ""Hello""" ' Noncompliant {{Define a constant instead of using this literal 'Say "Hello"' 4 times.}}
+        Private someString2 As String = "Say ""Hello""" ' Secondary
+        Private someString3 As String = "Say ""Hello""" ' Secondary
+        Private someString4 As String = "Say ""Hello""" ' Secondary
+    End Class
 
 End Namespace

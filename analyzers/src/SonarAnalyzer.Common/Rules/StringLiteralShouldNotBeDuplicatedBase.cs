@@ -45,8 +45,8 @@ namespace SonarAnalyzer.Rules
 
         protected abstract bool IsMatchingMethodParameterName(TLiteralExpressionSyntax literalExpression);
         protected abstract bool IsInnerInstance(SyntaxNodeAnalysisContext context);
-        protected abstract IEnumerable<TLiteralExpressionSyntax> RetrieveLiteralExpressions(SyntaxNode node);
-        protected abstract string GetLiteralValue(TLiteralExpressionSyntax literal);
+        protected abstract IEnumerable<TLiteralExpressionSyntax> FindLiteralExpressions(SyntaxNode node);
+        protected abstract SyntaxToken LiteralToken(TLiteralExpressionSyntax literal);
 
         [RuleParameter("threshold", PropertyType.Integer, "Number of times a literal must be duplicated to trigger an issue.", ThresholdDefaultValue)]
         public int Threshold { get; set; } = ThresholdDefaultValue;
@@ -76,41 +76,21 @@ namespace SonarAnalyzer.Rules
                 return;
             }
 
-            var stringLiterals = RetrieveLiteralExpressions(context.Node);
-
-            // Collect duplications
-            var stringWithLiterals = new Dictionary<string, List<TLiteralExpressionSyntax>>();
-            foreach (var literal in stringLiterals)
-            {
-                // Remove leading and trailing double quotes
-                var stringValue = ExtractStringContent(GetLiteralValue(literal));
-
-                if (stringValue != null
-                    && stringValue.Length >= MinimumStringLength
-                    && !IsMatchingMethodParameterName(literal))
-                {
-                    if (!stringWithLiterals.ContainsKey(stringValue))
-                    {
-                        stringWithLiterals[stringValue] = new List<TLiteralExpressionSyntax>();
-                    }
-
-                    stringWithLiterals[stringValue].Add(literal);
-                }
-            }
+            var stringLiterals = FindLiteralExpressions(context.Node);
+            var duplicateValuesAndPositions = stringLiterals.Select(x => new { literal = x, literalToken = LiteralToken(x) })
+                .Where(x => x.literalToken.ValueText is { Length: >= MinimumStringLength } && !IsMatchingMethodParameterName(x.literal))
+                .GroupBy(x => x.literalToken.ValueText, x => x.literalToken)
+                .Where(x => x.Count() > Threshold);
 
             // Report duplications
-            foreach (var item in stringWithLiterals)
+            foreach (var item in duplicateValuesAndPositions)
             {
-                if (item.Value.Count > Threshold)
-                {
-                    context.ReportIssue(Diagnostic.Create(rule, item.Value[0].GetLocation(),
-                        item.Value.Skip(1).Select(x => x.GetLocation()),
-                        item.Key, item.Value.Count ));
-                }
+                var duplicates = item.ToList();
+                var firstToken = duplicates[0];
+                context.ReportIssue(Diagnostic.Create(rule, firstToken.GetLocation(),
+                    duplicates.Skip(1).Select(x => x.GetLocation()),
+                    item.Key, duplicates.Count));
             }
         }
-
-        private static string ExtractStringContent(string literal) =>
-            literal.StartsWith("@\"") ? literal.Substring(2, literal.Length - 3) : literal.Substring(1, literal.Length - 2);
     }
 }
