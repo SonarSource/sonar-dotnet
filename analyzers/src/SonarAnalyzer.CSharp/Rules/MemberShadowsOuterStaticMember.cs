@@ -77,7 +77,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private static void CheckNamedType(SymbolAnalysisContext context, IReadOnlyList<ISymbol> outterMembersOfSameName, INamedTypeSymbol namedType)
         {
-            if (outterMembersOfSameName.Any(x => x is INamedTypeSymbol symbol && symbol.TypeKind is TypeKind.Class or TypeKind.Struct or TypeKind.Delegate or TypeKind.Enum))
+            if (outterMembersOfSameName.Any(x => x is INamedTypeSymbol { TypeKind: TypeKind.Class or TypeKind.Struct or TypeKind.Delegate or TypeKind.Enum }))
             {
                 foreach (var identifier in namedType.DeclaringReferenceIdentifiers())
                 {

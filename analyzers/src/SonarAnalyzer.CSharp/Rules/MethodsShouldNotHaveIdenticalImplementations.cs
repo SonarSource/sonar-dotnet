@@ -51,8 +51,7 @@ namespace SonarAnalyzer.Rules.CSharp
             : ((TypeDeclarationSyntax)node).GetMethodDeclarations();
 
         protected override bool AreDuplicates(IMethodDeclaration firstMethod, IMethodDeclaration secondMethod) =>
-            firstMethod.Body != null
-            && firstMethod.Body.Statements.Count > 1
+            firstMethod is { Body: { Statements: { Count: > 1 } } }
             && firstMethod.Identifier.ValueText != secondMethod.Identifier.ValueText
             && HaveSameParameters<ParameterSyntax>(firstMethod.ParameterList.Parameters, secondMethod.ParameterList.Parameters)
             && firstMethod.Body.IsEquivalentTo(secondMethod.Body, false);
