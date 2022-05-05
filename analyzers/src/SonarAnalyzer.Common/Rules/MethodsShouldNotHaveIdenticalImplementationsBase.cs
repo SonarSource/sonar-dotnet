@@ -51,7 +51,7 @@ namespace SonarAnalyzer.Rules
 
                     var methodsToHandle = new LinkedList<TMethodDeclarationSyntax>(GetMethodDeclarations(c.Node));
 
-                    while (methodsToHandle.Count > 0)
+                    while (methodsToHandle.Any())
                     {
                         var method = methodsToHandle.First.Value;
                         methodsToHandle.RemoveFirst();
