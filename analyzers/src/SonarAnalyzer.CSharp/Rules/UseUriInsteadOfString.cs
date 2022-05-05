@@ -25,6 +25,7 @@ using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
+using SonarAnalyzer.Extensions;
 using SonarAnalyzer.Helpers;
 using StyleCop.Analyzers.Lightup;
 
@@ -65,7 +66,10 @@ namespace SonarAnalyzer.Rules.CSharp
                 SyntaxKind.ObjectCreationExpression,
                 SyntaxKindEx.ImplicitObjectCreationExpression);
 
-            context.RegisterSyntaxNodeActionInNonGenerated(VerifyRecordDeclaration, SyntaxKindEx.RecordClassDeclaration);
+            context.RegisterSyntaxNodeActionInNonGenerated(
+                VerifyRecordDeclaration,
+                SyntaxKindEx.RecordClassDeclaration,
+                SyntaxKindEx.RecordStructDeclaration);
         }
 
         private static void VerifyMethodDeclaration(SyntaxNodeAnalysisContext context)
@@ -121,9 +125,7 @@ namespace SonarAnalyzer.Rules.CSharp
         private static void VerifyRecordDeclaration(SyntaxNodeAnalysisContext context)
         {
             var declaration = (RecordDeclarationSyntaxWrapper)context.Node;
-
-            if (context.ContainingSymbol.Kind == SymbolKind.NamedType
-                && HasStringUriParams(declaration.ParameterList, context.SemanticModel))
+            if (!context.IsRedundantPositionalRecordContext() && HasStringUriParams(declaration.ParameterList, context.SemanticModel))
             {
                 context.ReportIssue(Diagnostic.Create(RuleS3996, declaration.SyntaxNode.GetLocation()));
             }
