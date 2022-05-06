@@ -37,11 +37,6 @@ namespace SonarAnalyzer.Rules.VisualBasic
         protected override string CallbackParameterName { get; } = "DelegateCallback";
         protected override ISet<SyntaxKind> ParentDeclarationKinds { get; } = new HashSet<SyntaxKind>
         {
-            SyntaxKind.CompilationUnit,
-            // Types
-            SyntaxKind.ClassBlock,
-            SyntaxKind.StructureBlock,
-            SyntaxKind.ModuleBlock,
             // Methods
             SyntaxKind.ConstructorBlock,
             SyntaxKind.FunctionBlock,
