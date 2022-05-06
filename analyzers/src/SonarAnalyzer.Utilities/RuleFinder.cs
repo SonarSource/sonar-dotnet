@@ -30,7 +30,7 @@ using SonarAnalyzer.Rules;
 
 namespace SonarAnalyzer.Utilities
 {
-    public static class RuleFinder
+    internal static class RuleFinder
     {
         public static IEnumerable<Assembly> PackagedRuleAssemblies { get; } = new[]
             {
@@ -39,8 +39,8 @@ namespace SonarAnalyzer.Utilities
                 Assembly.Load(typeof(Rules.Common.DoNotInstantiateSharedClassesBase).Assembly.GetName())
             };
 
-        internal static IEnumerable<Type> RuleAnalyzerTypes { get; } // Rule-only, without utility analyzers
-        internal static IEnumerable<Type> UtilityAnalyzerTypes { get; }
+        public static IEnumerable<Type> RuleAnalyzerTypes { get; } // Rule-only, without utility analyzers
+        public static IEnumerable<Type> UtilityAnalyzerTypes { get; }
 
         static RuleFinder()
         {
@@ -56,7 +56,7 @@ namespace SonarAnalyzer.Utilities
         public static IEnumerable<Type> GetAnalyzerTypes(AnalyzerLanguage language) =>
             RuleAnalyzerTypes.Where(type => GetTargetLanguages(type).IsAlso(language));
 
-        internal static IEnumerable<DiagnosticAnalyzer> GetAnalyzers(AnalyzerLanguage language)
+        public static IEnumerable<DiagnosticAnalyzer> GetAnalyzers(AnalyzerLanguage language)
         {
             var analyzerTypes = PackagedRuleAssemblies.SelectMany(assembly => assembly.GetTypes())
                                                       .Where(type => !type.IsAbstract && typeof(SonarDiagnosticAnalyzer).IsAssignableFrom(type) && GetTargetLanguages(type).IsAlso(language));
@@ -68,13 +68,13 @@ namespace SonarAnalyzer.Utilities
             }
         }
 
-        internal static IEnumerable<Type> GetParameterlessAnalyzerTypes(AnalyzerLanguage language) =>
+        public static IEnumerable<Type> GetParameterlessAnalyzerTypes(AnalyzerLanguage language) =>
             RuleAnalyzerTypes.Where(type => !IsParameterized(type) && GetTargetLanguages(type).IsAlso(language));
 
-        internal static bool IsParameterized(Type analyzerType) =>
+        public static bool IsParameterized(Type analyzerType) =>
             analyzerType.GetProperties().Any(p => p.GetCustomAttributes<RuleParameterAttribute>().Any());
 
-        internal static AnalyzerLanguage GetTargetLanguages(MemberInfo analyzerType) =>
+        public static AnalyzerLanguage GetTargetLanguages(MemberInfo analyzerType) =>
             GetLanguages(analyzerType)
             .Aggregate(AnalyzerLanguage.None, (current, lang) => lang switch
                 {
