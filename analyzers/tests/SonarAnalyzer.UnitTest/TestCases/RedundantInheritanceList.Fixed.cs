@@ -146,5 +146,5 @@ namespace Tests.Diagnostics
     {
     }
 
-    struct RedunantInterfaceImpl : IA, IBase { } // FN
+    struct RedunantInterfaceImpl : IA { } // Fixed
 }

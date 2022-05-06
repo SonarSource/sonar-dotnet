@@ -18,10 +18,8 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
-using System.Globalization;
 using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
@@ -29,6 +27,7 @@ using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
 using Microsoft.CodeAnalysis.Text;
 using SonarAnalyzer.Common;
+using SonarAnalyzer.Extensions;
 using SonarAnalyzer.Helpers;
 using StyleCop.Analyzers.Lightup;
 
@@ -44,81 +43,53 @@ namespace SonarAnalyzer.Rules.CSharp
         private const string MessageAlreadyImplements = "'{0}' implements '{1}' so '{1}' can be removed from the inheritance list.";
         private const string MessageFormat = "{0}";
 
-        private static readonly DiagnosticDescriptor Rule =
-            DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
+        private static readonly DiagnosticDescriptor Rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
 
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
 
-        protected override void Initialize(SonarAnalysisContext context)
-        {
-            context.RegisterSyntaxNodeActionInNonGenerated(CheckEnum, SyntaxKind.EnumDeclaration);
-            context.RegisterSyntaxNodeActionInNonGenerated(CheckInterface, SyntaxKind.InterfaceDeclaration);
-            context.RegisterSyntaxNodeActionInNonGenerated(CheckClassAndRecord, SyntaxKind.ClassDeclaration, SyntaxKindEx.RecordClassDeclaration);
-        }
-
-        private static void CheckClassAndRecord(SyntaxNodeAnalysisContext context)
-        {
-            var typeDeclaration = (TypeDeclarationSyntax)context.Node;
-            if (context.ContainingSymbol.Kind != SymbolKind.NamedType
-                || IsBaseListNullOrEmpty(typeDeclaration))
+        protected override void Initialize(SonarAnalysisContext context) =>
+            context.RegisterSyntaxNodeActionInNonGenerated(c =>
             {
-                return;
-            }
+                if (c.IsRedundantPositionalRecordContext() || c.Node is not BaseTypeDeclarationSyntax { BaseList: { Types: { Count: > 0 } } })
+                {
+                    return;
+                }
+                switch (c.Node)
+                {
+                    case EnumDeclarationSyntax enumDeclaration:
+                        ReportRedundantBaseType(c, enumDeclaration, KnownType.System_Int32, MessageEnum);
+                        break;
+                    case InterfaceDeclarationSyntax interfaceDeclaration:
+                        ReportRedundantInterfaces(c, interfaceDeclaration);
+                        break;
+                    case TypeDeclarationSyntax nonInterfaceDeclaration:
+                        ReportRedundantBaseType(c, nonInterfaceDeclaration, KnownType.System_Object, MessageObjectBase);
+                        ReportRedundantInterfaces(c, nonInterfaceDeclaration);
+                        break;
+                }
+            },
+            SyntaxKind.EnumDeclaration,
+            SyntaxKind.InterfaceDeclaration,
+            SyntaxKind.ClassDeclaration,
+            SyntaxKind.StructDeclaration,
+            SyntaxKindEx.RecordClassDeclaration,
+            SyntaxKindEx.RecordStructDeclaration);
 
+        private static void ReportRedundantBaseType(SyntaxNodeAnalysisContext context, BaseTypeDeclarationSyntax typeDeclaration, KnownType redundantType, string message)
+        {
             var baseTypeSyntax = typeDeclaration.BaseList.Types.First().Type;
-            if (!(context.SemanticModel.GetSymbolInfo(baseTypeSyntax).Symbol is ITypeSymbol baseTypeSymbol))
-            {
-                return;
-            }
-
-            if (baseTypeSymbol.Is(KnownType.System_Object))
+            if (context.SemanticModel.GetSymbolInfo(baseTypeSyntax).Symbol is ITypeSymbol baseTypeSymbol
+                && baseTypeSymbol.Is(redundantType))
             {
                 var location = GetLocationWithToken(baseTypeSyntax, typeDeclaration.BaseList.Types);
-                context.ReportIssue(
-                    Diagnostic.Create(Rule, location,
-                                      ImmutableDictionary<string, string>.Empty.Add(RedundantIndexKey, "0"),
-                                      MessageObjectBase));
+                context.ReportIssue(Diagnostic.Create(Rule, location, DiagnosticsProperties(0), message));
             }
-
-            ReportRedundantInterfaces(context, typeDeclaration);
-        }
-
-        private static void CheckInterface(SyntaxNodeAnalysisContext context)
-        {
-            var interfaceDeclaration = (InterfaceDeclarationSyntax)context.Node;
-            if (IsBaseListNullOrEmpty(interfaceDeclaration))
-            {
-                return;
-            }
-
-            ReportRedundantInterfaces(context, interfaceDeclaration);
-        }
-
-        private static void CheckEnum(SyntaxNodeAnalysisContext context)
-        {
-            var enumDeclaration = (EnumDeclarationSyntax)context.Node;
-            if (IsBaseListNullOrEmpty(enumDeclaration))
-            {
-                return;
-            }
-
-            var baseTypeSyntax = enumDeclaration.BaseList.Types.First().Type;
-            var baseTypeSymbol = context.SemanticModel.GetSymbolInfo(baseTypeSyntax).Symbol as ITypeSymbol;
-            if (!baseTypeSymbol.Is(KnownType.System_Int32))
-            {
-                return;
-            }
-
-            context.ReportIssue(
-                Diagnostic.Create(Rule, enumDeclaration.BaseList.GetLocation(),
-                                  ImmutableDictionary<string, string>.Empty.Add(RedundantIndexKey, "0"),
-                                  MessageEnum));
         }
 
         private static void ReportRedundantInterfaces(SyntaxNodeAnalysisContext context, BaseTypeDeclarationSyntax typeDeclaration)
         {
             var declaredType = context.SemanticModel.GetDeclaredSymbol(typeDeclaration);
-            if (declaredType == null)
+            if (declaredType is null)
             {
                 return;
             }
@@ -129,25 +100,17 @@ namespace SonarAnalyzer.Rules.CSharp
             for (var i = 0; i < baseList.Types.Count; i++)
             {
                 var baseType = baseList.Types[i];
-                if (!(context.SemanticModel.GetSymbolInfo(baseType.Type).Symbol is INamedTypeSymbol interfaceType)
-                    || !interfaceType.IsInterface())
+                if (context.SemanticModel.GetSymbolInfo(baseType.Type).Symbol is INamedTypeSymbol interfaceType
+                    && interfaceType.IsInterface()
+                    && CollidingDeclaration(declaredType, interfaceType, interfaceTypesWithAllInterfaces) is { } collidingDeclaration)
                 {
-                    continue;
+                    var location = GetLocationWithToken(baseType.Type, baseList.Types);
+                    var message = string.Format(MessageAlreadyImplements,
+                        collidingDeclaration.ToMinimalDisplayString(context.SemanticModel, baseType.Type.SpanStart),
+                        interfaceType.ToMinimalDisplayString(context.SemanticModel, baseType.Type.SpanStart));
+
+                    context.ReportIssue(Diagnostic.Create(Rule, location, DiagnosticsProperties(i), message));
                 }
-
-                if (!TryGetCollidingDeclaration(declaredType, interfaceType, interfaceTypesWithAllInterfaces, out var collidingDeclaration))
-                {
-                    continue;
-                }
-
-                var location = GetLocationWithToken(baseType.Type, baseList.Types);
-                var message = string.Format(MessageAlreadyImplements,
-                    collidingDeclaration.ToMinimalDisplayString(context.SemanticModel, baseType.Type.SpanStart),
-                    interfaceType.ToMinimalDisplayString(context.SemanticModel, baseType.Type.SpanStart));
-
-                context.ReportIssue(Diagnostic.Create(Rule, location,
-                    ImmutableDictionary<string, string>.Empty.Add(RedundantIndexKey, i.ToString(CultureInfo.InvariantCulture)),
-                    message));
             }
         }
 
@@ -156,40 +119,29 @@ namespace SonarAnalyzer.Rules.CSharp
                     .Select(baseType => semanticModel.GetSymbolInfo(baseType.Type).Symbol as INamedTypeSymbol)
                     .WhereNotNull()
                     .Distinct()
-                    .Select(symbol => new Tuple<INamedTypeSymbol, ICollection<INamedTypeSymbol>>(symbol, symbol.AllInterfaces))
-                    .ToMultiValueDictionary(kv => kv.Item1, kv => kv.Item2);
+                    .ToMultiValueDictionary(x => x.AllInterfaces);
 
-        private static bool TryGetCollidingDeclaration(INamedTypeSymbol declaredType,
-                                                       INamedTypeSymbol interfaceType,
-                                                       MultiValueDictionary<INamedTypeSymbol, INamedTypeSymbol> interfaceMappings,
-                                                       out INamedTypeSymbol collidingDeclaration)
+        private static INamedTypeSymbol CollidingDeclaration(INamedTypeSymbol declaredType, INamedTypeSymbol interfaceType, MultiValueDictionary<INamedTypeSymbol, INamedTypeSymbol> interfaceMappings)
         {
-            var collisionMapping = interfaceMappings
-                .Where(i => i.Key.IsInterface())
-                .FirstOrDefault(v => v.Value.Contains(interfaceType));
-
-            if (collisionMapping.Key != null)
+            var collisionMapping = interfaceMappings.FirstOrDefault(x => x.Key.IsInterface() && x.Value.Contains(interfaceType));
+            if (collisionMapping.Key is not null)
             {
-                collidingDeclaration = collisionMapping.Key;
-                return true;
+                return collisionMapping.Key;
             }
 
-            var baseClassMapping = interfaceMappings.FirstOrDefault(i => i.Key.IsClass());
-            if (baseClassMapping.Key == null)
+            var baseClassMapping = interfaceMappings.FirstOrDefault(x => x.Key.IsClass());
+            if (baseClassMapping.Key is null)
             {
-                collidingDeclaration = null;
-                return false;
+                return null;
             }
 
-            collidingDeclaration = baseClassMapping.Key;
-            return CanInterfaceBeRemovedBasedOnMembers(declaredType, interfaceType);
+            var canBeRemoved = CanInterfaceBeRemovedBasedOnMembers(declaredType, interfaceType);
+            return canBeRemoved ? baseClassMapping.Key : null;
         }
 
         private static bool CanInterfaceBeRemovedBasedOnMembers(INamedTypeSymbol declaredType, INamedTypeSymbol interfaceType)
         {
-            var allMembersOfInterface = interfaceType.AllInterfaces.Concat(new[] { interfaceType })
-                .SelectMany(i => i.GetMembers())
-                .ToList();
+            var allMembersOfInterface = AllInterfacesAndSelf(interfaceType).SelectMany(x => x.GetMembers()).ToImmutableArray();
 
             if (!allMembersOfInterface.Any())
             {
@@ -198,38 +150,29 @@ namespace SonarAnalyzer.Rules.CSharp
 
             foreach (var interfaceMember in allMembersOfInterface)
             {
-                var classMember = declaredType.FindImplementationForInterfaceMember(interfaceMember);
-                if (classMember != null
+                if (declaredType.FindImplementationForInterfaceMember(interfaceMember) is { } classMember
                     && (classMember.ContainingType.Equals(declaredType)
-                    || !classMember.ContainingType.Interfaces.SelectMany(i => i.AllInterfaces.Concat(new[] { i })).Contains(interfaceType)))
+                        || !classMember.ContainingType.Interfaces.Any(x => AllInterfacesAndSelf(x).Contains(interfaceType))))
                 {
                     return false;
                 }
             }
             return true;
+
+            static IEnumerable<INamedTypeSymbol> AllInterfacesAndSelf(INamedTypeSymbol interfaceType) =>
+                interfaceType.AllInterfaces.Concat(new[] { interfaceType });
         }
 
         private static Location GetLocationWithToken(TypeSyntax type, SeparatedSyntaxList<BaseTypeSyntax> baseTypes)
         {
-            int start;
-            int end;
+            var span = baseTypes.Count == 1 || baseTypes.First().Type != type
+                ? TextSpan.FromBounds(type.GetFirstToken().GetPreviousToken().Span.Start, type.Span.End)
+                : TextSpan.FromBounds(type.SpanStart, type.GetLastToken().GetNextToken().Span.End);
 
-            if (baseTypes.Count == 1
-                || baseTypes.First().Type != type)
-            {
-                start = type.GetFirstToken().GetPreviousToken().Span.Start;
-                end = type.Span.End;
-            }
-            else
-            {
-                start = type.SpanStart;
-                end = type.GetLastToken().GetNextToken().Span.End;
-            }
-
-            return Location.Create(type.SyntaxTree, new TextSpan(start, end - start));
+            return Location.Create(type.SyntaxTree, span);
         }
 
-        private static bool IsBaseListNullOrEmpty(BaseTypeDeclarationSyntax baseTypeDeclaration) =>
-            baseTypeDeclaration.BaseList == null || !baseTypeDeclaration.BaseList.Types.Any();
+        private static ImmutableDictionary<string, string> DiagnosticsProperties(int redundantIndex) =>
+            ImmutableDictionary.Create<string, string>().Add(RedundantIndexKey, redundantIndex.ToString());
     }
 }

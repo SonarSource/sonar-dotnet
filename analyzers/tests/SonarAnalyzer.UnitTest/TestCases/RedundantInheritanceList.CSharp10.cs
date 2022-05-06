@@ -1,11 +1,11 @@
 ﻿using System;
 
-record Record : Object { } // Noncompliant
-
-record struct RedunantInterfaceImpl : IContract, IBaseContract { } // FN
-
-record struct RedunantInterfaceImplPositionalRecord(int SomeProperty) : IContract, IBaseContract { } // FN
+interface IBaseContract { }
 
 interface IContract : IBaseContract { }
 
-interface IBaseContract { }
+record Record : Object { } // Noncompliant
+
+record struct RedunantInterfaceImpl : IContract, IBaseContract { } // Noncompliant
+
+record struct RedunantInterfaceImplPositionalRecord(int SomeProperty) : IContract, IBaseContract { } // Noncompliant

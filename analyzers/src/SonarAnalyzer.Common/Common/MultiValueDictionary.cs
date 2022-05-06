@@ -39,20 +39,16 @@ namespace SonarAnalyzer.Common
         }
 
         public static MultiValueDictionary<TKey, TValue> Create<TUnderlying>()
-            where TUnderlying : ICollection<TValue>, new()
-        {
-            return new MultiValueDictionary<TKey, TValue>
+            where TUnderlying : ICollection<TValue>, new() =>
+            new MultiValueDictionary<TKey, TValue>
             {
                 UnderlyingCollectionFactory = () => new TUnderlying()
             };
-        }
 
         private Func<ICollection<TValue>> UnderlyingCollectionFactory { get; set; } = () => new List<TValue>();
 
-        public void Add(TKey key, TValue value)
-        {
+        public void Add(TKey key, TValue value) =>
             AddWithKey(key, value);
-        }
 
         public void AddWithKey(TKey key, TValue value)
         {
@@ -88,11 +84,12 @@ namespace SonarAnalyzer.Common
 
     public static class MultiValueDictionaryExtensions
     {
-        public static MultiValueDictionary<TKey, TElement> ToMultiValueDictionary<TSource, TKey, TElement>(
-            this IEnumerable<TSource> source,
-            Func<TSource, TKey> keySelector,
-            Func<TSource, ICollection<TElement>> elementSelector)
-            where TSource : Tuple<TKey, ICollection<TElement>>
+        public static MultiValueDictionary<TSource, TElement> ToMultiValueDictionary<TSource, TElement>(this IEnumerable<TSource> source, Func<TSource, ICollection<TElement>> elementSelector) =>
+            source.ToMultiValueDictionary(x => x, elementSelector);
+
+        public static MultiValueDictionary<TKey, TElement> ToMultiValueDictionary<TSource, TKey, TElement>(this IEnumerable<TSource> source,
+                                                                                                           Func<TSource, TKey> keySelector,
+                                                                                                           Func<TSource, ICollection<TElement>> elementSelector)
         {
             var dictionary = new MultiValueDictionary<TKey, TElement>();
             foreach (var item in source)
