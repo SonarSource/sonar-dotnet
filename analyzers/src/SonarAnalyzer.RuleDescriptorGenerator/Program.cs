@@ -38,51 +38,19 @@ namespace SonarAnalyzer.RuleDescriptorGenerator
         {
             if (args.Length != 1)
             {
-                Write("[AnalyzerLanguage: 'cs' for C#, 'vbnet' for VB.Net]");
-                Write("All files will be created by the application");
-
-                return;
+                Console.WriteLine("[AnalyzerLanguage: 'cs' for C#, 'vbnet' for VB.Net]");
+                Console.WriteLine("All files will be created by the application");
             }
-
-            WriteXmlDescriptorFiles("rules.xml", "profile.xml", args[0]);
-        }
-
-        private static void Write(string text)
-        {
-            Console.WriteLine(text);
-        }
-
-        private static void WriteXmlDescriptorFiles(string rulePath, string profilePath, string lang)
-        {
-            var language = AnalyzerLanguage.Parse(lang);
-
-            var genericRuleDetails = RuleDetailBuilder.GetAllRuleDetails(language).ToList();
-            var ruleDetails = genericRuleDetails.Select(RuleDetail.Convert).ToList();
-
-            Directory.CreateDirectory(lang);
-
-            WriteRuleDescriptorFile(Path.Combine(lang, rulePath), ruleDetails);
-            WriteQualityProfileFile(Path.Combine(lang, profilePath), ruleDetails, language);
-        }
-
-        private static void WriteQualityProfileFile(string filePath, IEnumerable<RuleDetail> ruleDetails, AnalyzerLanguage language)
-        {
-            var root = new QualityProfileRoot(language);
-            root.Rules.AddRange(ruleDetails
-                .Where(descriptor => descriptor.IsActivatedByDefault)
-                .Select(descriptor => new QualityProfileRuleDescriptor(language)
-                {
-                    Key = descriptor.Key
-                }));
-
-            SerializeObjectToFile(filePath, root);
-        }
-
-        private static void WriteRuleDescriptorFile(string filePath, IEnumerable<RuleDetail> ruleDetails)
-        {
-            var root = new RuleDescriptorRoot();
-            root.Rules.AddRange(ruleDetails);
-            SerializeObjectToFile(filePath, root);
+            else
+            {
+                var language = AnalyzerLanguage.Parse(args[0]);
+                var genericRuleDetails = RuleDetailBuilder.GetAllRuleDetails(language).ToList();
+                var ruleDetails = genericRuleDetails.Select(RuleDetail.Convert).ToList();
+                Directory.CreateDirectory(language.ToString());
+                var root = new RuleDescriptorRoot();
+                root.Rules.AddRange(ruleDetails);
+                SerializeObjectToFile(Path.Combine(language.ToString(), "rules.xml"), root);
+            }
         }
 
         private static void SerializeObjectToFile(string filePath, object objectToSerialize)
