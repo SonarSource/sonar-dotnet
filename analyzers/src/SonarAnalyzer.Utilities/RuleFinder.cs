@@ -56,15 +56,18 @@ namespace SonarAnalyzer.Utilities
         public static IEnumerable<Type> GetAnalyzerTypes(AnalyzerLanguage language) =>
             RuleAnalyzerTypes.Where(type => TargetLanguage(type).IsAlso(language));
 
-        public static IEnumerable<DiagnosticAnalyzer> GetAnalyzers(AnalyzerLanguage language)
+        public static IEnumerable<DiagnosticAnalyzer> CreateAnalyzers(AnalyzerLanguage language, bool includeUtilityAnalyzers)
         {
-            var analyzerTypes = PackagedRuleAssemblies.SelectMany(assembly => assembly.GetTypes())
-                                                      .Where(type => !type.IsAbstract && typeof(SonarDiagnosticAnalyzer).IsAssignableFrom(type) && TargetLanguage(type).IsAlso(language));
-            foreach (var analyzerType in analyzerTypes)
+            var types = GetAnalyzerTypes(language);
+            if (includeUtilityAnalyzers)
             {
-                yield return typeof(HotspotDiagnosticAnalyzer).IsAssignableFrom(analyzerType) && analyzerType.GetConstructor(new[] { typeof(IAnalyzerConfiguration) }) != null
-                    ? (DiagnosticAnalyzer)Activator.CreateInstance(analyzerType, AnalyzerConfiguration.AlwaysEnabled)
-                    : (DiagnosticAnalyzer)Activator.CreateInstance(analyzerType);
+                types = types.Concat(UtilityAnalyzerTypes.Where(x => TargetLanguage(x).IsAlso(language)));
+            }
+            foreach (var type in types.Where(x => !x.IsAbstract))
+            {
+                yield return typeof(HotspotDiagnosticAnalyzer).IsAssignableFrom(type) && type.GetConstructor(new[] { typeof(IAnalyzerConfiguration) }) != null
+                    ? (DiagnosticAnalyzer)Activator.CreateInstance(type, AnalyzerConfiguration.AlwaysEnabled)
+                    : (DiagnosticAnalyzer)Activator.CreateInstance(type);
             }
         }
 

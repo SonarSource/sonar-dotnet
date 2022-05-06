@@ -56,7 +56,7 @@ namespace SonarAnalyzer.UnitTest.Common
         [TestMethod]
         public void RulesDoNotThrow_CS()
         {
-            var analyzers = RuleFinder.GetAnalyzers(AnalyzerLanguage.CSharp).ToArray();
+            var analyzers = RuleFinder.CreateAnalyzers(AnalyzerLanguage.CSharp, true).ToArray();
 
             VerifyNoExceptionThrown(@"TestCases\RuleFailure\InvalidSyntax.cs", analyzers, CompilationErrorBehavior.Ignore);
             VerifyNoExceptionThrown(@"TestCases\RuleFailure\SpecialCases.cs", analyzers, CompilationErrorBehavior.Ignore);
@@ -66,7 +66,7 @@ namespace SonarAnalyzer.UnitTest.Common
         [TestMethod]
         public void RulesDoNotThrow_VB()
         {
-            var analyzers = RuleFinder.GetAnalyzers(AnalyzerLanguage.VisualBasic).ToArray();
+            var analyzers = RuleFinder.CreateAnalyzers(AnalyzerLanguage.VisualBasic, true).ToArray();
 
             VerifyNoExceptionThrown(@"TestCases\RuleFailure\InvalidSyntax.vb", analyzers, CompilationErrorBehavior.Ignore);
             VerifyNoExceptionThrown(@"TestCases\RuleFailure\SpecialCases.vb", analyzers, CompilationErrorBehavior.Ignore);
