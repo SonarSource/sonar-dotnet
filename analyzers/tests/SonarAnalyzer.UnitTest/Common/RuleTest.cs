@@ -48,17 +48,8 @@ namespace SonarAnalyzer.UnitTest.Common
         {
             foreach (var codeFix in GetCodeFixTypes(RuleFinder.PackagedRuleAssemblies))
             {
-                var analyzerName = codeFix.FullName.Replace(RuleDetailBuilder.CodeFixSuffix, string.Empty);
+                var analyzerName = codeFix.FullName.Replace("CodeFix", string.Empty);
                 codeFix.Assembly.GetType(analyzerName).Should().NotBeNull("CodeFix '{0}' has no matching DiagnosticAnalyzer.", codeFix.Name);
-            }
-        }
-
-        [TestMethod]
-        public void CodeFixes_Have_Title()
-        {
-            foreach (var codeFix in GetCodeFixTypes(RuleFinder.PackagedRuleAssemblies))
-            {
-                RuleDetailBuilder.CodeFixTitles(codeFix).Should().NotBeEmpty("CodeFix '{0}' has no title field.", codeFix.Name);
             }
         }
 
