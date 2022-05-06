@@ -122,4 +122,6 @@ namespace SonarAnalyzer.Helpers
                 .ToArray();
         }
     }
+
+    public record RuleDescriptor(string Title, string Type, SourceScope Scope, bool SonarWay, string Description);
 }
