@@ -32,6 +32,8 @@ namespace SonarAnalyzer.RuleDescriptorGenerator
         [XmlElement("rule")]
         public List<RuleDetail> Rules { get; private set; }
 
+        public RuleDescriptorRoot() { }     // For serialization
+
         public RuleDescriptorRoot(IEnumerable<RuleDetail> rules) =>
             Rules = rules.ToList();
     }
