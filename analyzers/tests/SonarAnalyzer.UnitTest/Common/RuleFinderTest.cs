@@ -58,9 +58,5 @@ namespace SonarAnalyzer.UnitTest.Common
             countParameterless = RuleFinder.GetParameterlessAnalyzerTypes(AnalyzerLanguage.VisualBasic).Count();
             RuleFinder.RuleAnalyzerTypes.Should().HaveCountGreaterThan(countParameterless);
         }
-
-        [TestMethod]
-        public void GetTargetLanguagesThrowsIfTypeDoesNotHaveLanguageInfo() =>
-            Assert.ThrowsException<NotSupportedException>(() => RuleFinder.GetTargetLanguages(typeof(string)));
     }
 }

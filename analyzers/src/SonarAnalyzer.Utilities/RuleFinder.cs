@@ -54,12 +54,12 @@ namespace SonarAnalyzer.Utilities
         }
 
         public static IEnumerable<Type> GetAnalyzerTypes(AnalyzerLanguage language) =>
-            RuleAnalyzerTypes.Where(type => GetTargetLanguages(type).IsAlso(language));
+            RuleAnalyzerTypes.Where(type => TargetLanguage(type).IsAlso(language));
 
         public static IEnumerable<DiagnosticAnalyzer> GetAnalyzers(AnalyzerLanguage language)
         {
             var analyzerTypes = PackagedRuleAssemblies.SelectMany(assembly => assembly.GetTypes())
-                                                      .Where(type => !type.IsAbstract && typeof(SonarDiagnosticAnalyzer).IsAssignableFrom(type) && GetTargetLanguages(type).IsAlso(language));
+                                                      .Where(type => !type.IsAbstract && typeof(SonarDiagnosticAnalyzer).IsAssignableFrom(type) && TargetLanguage(type).IsAlso(language));
             foreach (var analyzerType in analyzerTypes)
             {
                 yield return typeof(HotspotDiagnosticAnalyzer).IsAssignableFrom(analyzerType) && analyzerType.GetConstructor(new[] { typeof(IAnalyzerConfiguration) }) != null
@@ -69,22 +69,18 @@ namespace SonarAnalyzer.Utilities
         }
 
         public static IEnumerable<Type> GetParameterlessAnalyzerTypes(AnalyzerLanguage language) =>
-            RuleAnalyzerTypes.Where(type => !IsParameterized(type) && GetTargetLanguages(type).IsAlso(language));
+            RuleAnalyzerTypes.Where(type => !IsParameterized(type) && TargetLanguage(type).IsAlso(language));
 
         public static bool IsParameterized(Type analyzerType) =>
             analyzerType.GetProperties().Any(p => p.GetCustomAttributes<RuleParameterAttribute>().Any());
 
-        public static AnalyzerLanguage GetTargetLanguages(MemberInfo analyzerType) =>
-            GetLanguages(analyzerType)
-            .Aggregate(AnalyzerLanguage.None, (current, lang) => lang switch
-                {
-                    LanguageNames.CSharp => current.AddLanguage(AnalyzerLanguage.CSharp),
-                    LanguageNames.VisualBasic => current.AddLanguage(AnalyzerLanguage.VisualBasic),
-                    _ => current
-                });
-
-        private static IEnumerable<string> GetLanguages(MemberInfo analyzerType) =>
-            analyzerType.GetCustomAttributes<DiagnosticAnalyzerAttribute>().SingleOrDefault()?.Languages
-            ?? throw new NotSupportedException($"Can not find any language for the given type {analyzerType.Name}!");
+        private static AnalyzerLanguage TargetLanguage(MemberInfo analyzerType)
+        {
+            var languages = analyzerType.GetCustomAttributes<DiagnosticAnalyzerAttribute>().SingleOrDefault()?.Languages
+                ?? throw new NotSupportedException($"Can not find any language for the given type {analyzerType.Name}!");
+            return languages.Length == 1
+                ? AnalyzerLanguage.FromName(languages.Single())
+                : throw new NotSupportedException($"Analyzer can not have multiple languages: {analyzerType.Name}");
+        }
     }
 }
