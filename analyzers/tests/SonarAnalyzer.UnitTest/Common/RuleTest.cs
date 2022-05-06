@@ -123,7 +123,7 @@ namespace SonarAnalyzer.UnitTest.Common
 
         [TestMethod]
         public void AllParameterizedRules_AreDisabledByDefault() =>
-            new RuleFinder().RuleAnalyzerTypes
+            RuleFinder.RuleAnalyzerTypes
                 .Where(RuleFinder.IsParameterized)
                 .Select(type => (DiagnosticAnalyzer)Activator.CreateInstance(type))
                 .SelectMany(analyzer => analyzer.SupportedDiagnostics)
@@ -134,7 +134,7 @@ namespace SonarAnalyzer.UnitTest.Common
         [TestMethod]
         public void AllRulesEnabledByDefault_ContainSonarWayCustomTag()
         {
-            var descriptors = new RuleFinder().RuleAnalyzerTypes.SelectMany(SupportedDiagnostics)
+            var descriptors = RuleFinder.RuleAnalyzerTypes.SelectMany(SupportedDiagnostics)
                 // Security hotspots are enabled by default, but they will report issues only
                 // when their ID is contained in SonarLint.xml
                 .Where(descriptor => !IsSecurityHotspot(descriptor));
@@ -159,7 +159,7 @@ namespace SonarAnalyzer.UnitTest.Common
         [TestMethod]
         public void DeprecatedRules_AreNotInSonarWay()
         {
-            foreach (var diagnostic in new RuleFinder().RuleAnalyzerTypes.SelectMany(SupportedDiagnostics).Where(IsDeprecated))
+            foreach (var diagnostic in RuleFinder.RuleAnalyzerTypes.SelectMany(SupportedDiagnostics).Where(IsDeprecated))
             {
                 IsSonarWay(diagnostic).Should().BeFalse($"{diagnostic.Id} is deprecated and should be removed from SonarWay.");
             }
@@ -168,7 +168,7 @@ namespace SonarAnalyzer.UnitTest.Common
         [TestMethod]
         public void AllRules_DoNotHaveUtilityTag()
         {
-            foreach (var diagnostic in new RuleFinder().RuleAnalyzerTypes.SelectMany(SupportedDiagnostics))
+            foreach (var diagnostic in RuleFinder.RuleAnalyzerTypes.SelectMany(SupportedDiagnostics))
             {
                 diagnostic.CustomTags.Should().NotContain(DiagnosticDescriptorBuilder.UtilityTag);
             }
@@ -177,7 +177,7 @@ namespace SonarAnalyzer.UnitTest.Common
         [TestMethod]
         public void UtilityAnalyzers_HaveUtilityTag()
         {
-            foreach (var diagnostic in new RuleFinder().UtilityAnalyzerTypes.SelectMany(SupportedDiagnostics))
+            foreach (var diagnostic in RuleFinder.UtilityAnalyzerTypes.SelectMany(SupportedDiagnostics))
             {
                 diagnostic.CustomTags.Should().Contain(DiagnosticDescriptorBuilder.UtilityTag);
             }
@@ -186,12 +186,12 @@ namespace SonarAnalyzer.UnitTest.Common
         [TestMethod]
         public void AllRules_SonarWayTagPresenceMatchesIsEnabledByDefault()
         {
-            var parameterized = new RuleFinder().RuleAnalyzerTypes
+            var parameterized = RuleFinder.RuleAnalyzerTypes
                 .Where(RuleFinder.IsParameterized)
                 .SelectMany(type => ((DiagnosticAnalyzer)Activator.CreateInstance(type)).SupportedDiagnostics)
                 .ToHashSet();
 
-            foreach (var diagnostic in new RuleFinder().RuleAnalyzerTypes.SelectMany(SupportedDiagnostics))
+            foreach (var diagnostic in RuleFinder.RuleAnalyzerTypes.SelectMany(SupportedDiagnostics))
             {
                 if (IsSecurityHotspot(diagnostic))
                 {
@@ -246,7 +246,7 @@ namespace SonarAnalyzer.UnitTest.Common
         }
 
         private static IEnumerable<DiagnosticDescriptor> SupportedDiagnostics(AnalyzerLanguage language) =>
-            new RuleFinder().GetAnalyzerTypes(language).SelectMany(SupportedDiagnostics);
+            RuleFinder.GetAnalyzerTypes(language).SelectMany(SupportedDiagnostics);
 
         private static IEnumerable<DiagnosticDescriptor> SupportedDiagnostics(Type type) =>
             ((DiagnosticAnalyzer)Activator.CreateInstance(type)).SupportedDiagnostics;

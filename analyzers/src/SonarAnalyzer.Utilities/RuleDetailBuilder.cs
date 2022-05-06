@@ -41,7 +41,7 @@ namespace SonarAnalyzer.Utilities
                 LanguageNames.VisualBasic => new ResourceManager("SonarAnalyzer.RspecStrings", typeof(Rules.VisualBasic.FlagsEnumZeroMember).Assembly),
                 _ => throw new InvalidOperationException("Unexpected language: " + language)
             };
-            return new RuleFinder()
+            return RuleFinder
                 .GetAnalyzerTypes(language)
                 .Select(x => (DiagnosticAnalyzer)Activator.CreateInstance(x))
                 .SelectMany(x => UniqueRuleIds(x).Select(id => new { Id = id, Type = x.GetType() }))

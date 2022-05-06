@@ -30,7 +30,7 @@ using SonarAnalyzer.Rules;
 
 namespace SonarAnalyzer.Utilities
 {
-    public class RuleFinder
+    public static class RuleFinder
     {
         public static IEnumerable<Assembly> PackagedRuleAssemblies { get; } = new[]
             {
@@ -39,10 +39,10 @@ namespace SonarAnalyzer.Utilities
                 Assembly.Load(typeof(Rules.Common.DoNotInstantiateSharedClassesBase).Assembly.GetName())
             };
 
-        internal IEnumerable<Type> RuleAnalyzerTypes { get; } // Rule-only, without utility analyzers
-        internal IEnumerable<Type> UtilityAnalyzerTypes { get; }
+        internal static IEnumerable<Type> RuleAnalyzerTypes { get; } // Rule-only, without utility analyzers
+        internal static IEnumerable<Type> UtilityAnalyzerTypes { get; }
 
-        public RuleFinder()
+        static RuleFinder()
         {
             var all = PackagedRuleAssemblies
                 .SelectMany(assembly => assembly.GetTypes())
@@ -53,7 +53,7 @@ namespace SonarAnalyzer.Utilities
             UtilityAnalyzerTypes = all.Where(x => typeof(UtilityAnalyzerBase).IsAssignableFrom(x)).ToList();
         }
 
-        public IEnumerable<Type> GetAnalyzerTypes(AnalyzerLanguage language) =>
+        public static IEnumerable<Type> GetAnalyzerTypes(AnalyzerLanguage language) =>
             RuleAnalyzerTypes.Where(type => GetTargetLanguages(type).IsAlso(language));
 
         internal static IEnumerable<DiagnosticAnalyzer> GetAnalyzers(AnalyzerLanguage language)
@@ -68,7 +68,7 @@ namespace SonarAnalyzer.Utilities
             }
         }
 
-        internal IEnumerable<Type> GetParameterlessAnalyzerTypes(AnalyzerLanguage language) =>
+        internal static IEnumerable<Type> GetParameterlessAnalyzerTypes(AnalyzerLanguage language) =>
             RuleAnalyzerTypes.Where(type => !IsParameterized(type) && GetTargetLanguages(type).IsAlso(language));
 
         internal static bool IsParameterized(Type analyzerType) =>
