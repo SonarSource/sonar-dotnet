@@ -83,8 +83,8 @@ namespace SonarAnalyzer.Rules
             }
         }
 
-        private bool ParentMethodContainsEndInvoke(SyntaxNode node, SemanticModel model)
-            => node.AncestorsAndSelf().FirstOrDefault(IsParentDeclaration) is { } parentContext
+        private bool ParentMethodContainsEndInvoke(SyntaxNode node, SemanticModel model) => 
+            node.AncestorsAndSelf().FirstOrDefault(IsParentDeclaration) is { } parentContext
                && IsParentDeclarationWithEndInvoke(parentContext, model);
 
         private bool IsParentDeclaration(SyntaxNode node)
