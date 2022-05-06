@@ -25,6 +25,7 @@ using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
+using SonarAnalyzer.Extensions;
 using SonarAnalyzer.Helpers;
 using StyleCop.Analyzers.Lightup;
 
@@ -32,26 +33,21 @@ namespace SonarAnalyzer.Metrics.CSharp
 {
     public static class CSharpExecutableLinesMetric
     {
-        private const int AttributeSuffixIndex = 9;
-
         public static ImmutableArray<int> GetLineNumbers(SyntaxTree syntaxTree, SemanticModel semanticModel)
         {
             var walker = new ExecutableLinesWalker(semanticModel);
             walker.SafeVisit(syntaxTree.GetRoot());
-
             return walker.ExecutableLineNumbers.ToImmutableArray();
         }
 
         private sealed class ExecutableLinesWalker : SafeCSharpSyntaxWalker
         {
-            private readonly SemanticModel semanticModel;
-
-            public ExecutableLinesWalker(SemanticModel semanticModel)
-            {
-                this.semanticModel = semanticModel;
-            }
+            private readonly SemanticModel model;
 
             public HashSet<int> ExecutableLineNumbers { get; } = new();
+
+            public ExecutableLinesWalker(SemanticModel model) =>
+                this.model = model;
 
             public override void DefaultVisit(SyntaxNode node)
             {
@@ -112,65 +108,40 @@ namespace SonarAnalyzer.Metrics.CSharp
                     case SyntaxKind.StructDeclaration:
                     case SyntaxKind.ClassDeclaration:
                     case SyntaxKindEx.RecordClassDeclaration:
-                        return !HasExcludedCodeAttribute((BaseTypeDeclarationSyntax)node, btdc => btdc.AttributeLists, canBePartial: true);
+                    case SyntaxKindEx.RecordStructDeclaration:
+                        return !HasExcludedCodeAttribute(node, ((BaseTypeDeclarationSyntax)node).AttributeLists, true);
 
                     case SyntaxKind.MethodDeclaration:
                     case SyntaxKind.ConstructorDeclaration:
-                        return !HasExcludedCodeAttribute((BaseMethodDeclarationSyntax)node, bmds => bmds.AttributeLists, canBePartial: true);
+                        return !HasExcludedCodeAttribute(node, ((BaseMethodDeclarationSyntax)node).AttributeLists, true);
 
                     case SyntaxKind.PropertyDeclaration:
                     case SyntaxKind.EventDeclaration:
-                        return !HasExcludedCodeAttribute((BasePropertyDeclarationSyntax)node, bpds => bpds.AttributeLists);
+                        return !HasExcludedCodeAttribute(node, ((BasePropertyDeclarationSyntax)node).AttributeLists, false);
 
                     case SyntaxKind.AddAccessorDeclaration:
                     case SyntaxKind.RemoveAccessorDeclaration:
                     case SyntaxKind.SetAccessorDeclaration:
                     case SyntaxKind.GetAccessorDeclaration:
                     case SyntaxKindEx.InitAccessorDeclaration:
-                        return !HasExcludedCodeAttribute((AccessorDeclarationSyntax)node, ads => ads.AttributeLists);
+                        return !HasExcludedCodeAttribute(node, ((AccessorDeclarationSyntax)node).AttributeLists, false);
 
                     default:
                         return true;
                 }
             }
 
-            private bool HasExcludedCodeAttribute<T>(T node,
-                                                     Func<T, SyntaxList<AttributeListSyntax>> getAttributeLists,
-                                                     bool canBePartial = false)
-                where T : SyntaxNode
+            private bool HasExcludedCodeAttribute(SyntaxNode node, SyntaxList<AttributeListSyntax> attributeLists, bool canBePartial)
             {
-                var hasExcludeFromCodeCoverageAttribute = getAttributeLists(node)
-                    .SelectMany(attributeList => attributeList.Attributes)
-                    .Any(HasExcludedAttribute);
-
-                if (!canBePartial)
-                {
-                    return hasExcludeFromCodeCoverageAttribute;
-                }
-
-                var nodeSymbol = this.semanticModel.GetDeclaredSymbol(node);
-                switch (nodeSymbol?.Kind)
-                {
-                    case SymbolKind.Method:
-                    case SymbolKind.NamedType:
-                        return hasExcludeFromCodeCoverageAttribute
-                            || nodeSymbol.HasAttribute(KnownType.System_Diagnostics_CodeAnalysis_ExcludeFromCodeCoverageAttribute);
-
-                    default:
-                        return hasExcludeFromCodeCoverageAttribute;
-                }
+                var hasExcludeFromCodeCoverageAttribute = attributeLists.SelectMany(x => x.Attributes).Any(IsExcludedAttribute);
+                return hasExcludeFromCodeCoverageAttribute || !canBePartial
+                    ? hasExcludeFromCodeCoverageAttribute
+                    : model.GetDeclaredSymbol(node) is { Kind: SymbolKind.Method or SymbolKind.NamedType} symbol
+                      && symbol.HasAttribute(KnownType.System_Diagnostics_CodeAnalysis_ExcludeFromCodeCoverageAttribute);
             }
 
-            private static bool HasExcludedAttribute(AttributeSyntax attribute)
-            {
-                var attributeName = attribute?.Name?.ToString() ?? string.Empty;
-
-                // Check the attribute name without the attribute suffix OR the full name of the attribute
-                var excludedFromCoverageAttribute = KnownType.System_Diagnostics_CodeAnalysis_ExcludeFromCodeCoverageAttribute.ShortName;
-                return attributeName.EndsWith(
-                        excludedFromCoverageAttribute.Substring(0, excludedFromCoverageAttribute.Length - AttributeSuffixIndex), StringComparison.Ordinal)
-                    || attributeName.EndsWith(excludedFromCoverageAttribute, StringComparison.Ordinal);
-            }
+            private bool IsExcludedAttribute(AttributeSyntax attribute) =>
+                attribute.IsKnownType(KnownType.System_Diagnostics_CodeAnalysis_ExcludeFromCodeCoverageAttribute, model);
         }
     }
 }
