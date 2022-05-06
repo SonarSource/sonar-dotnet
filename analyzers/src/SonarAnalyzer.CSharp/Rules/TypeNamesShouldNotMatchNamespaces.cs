@@ -24,6 +24,7 @@ using System.Collections.Immutable;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.Diagnostics;
+using SonarAnalyzer.Extensions;
 using SonarAnalyzer.Helpers;
 using StyleCop.Analyzers.Lightup;
 
@@ -39,8 +40,7 @@ namespace SonarAnalyzer.Rules.CSharp
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
 
         // Based on https://msdn.microsoft.com/en-us/library/gg145045%28v=vs.110%29.aspx?f=255&MSPPError=-2147217396
-        private static readonly ISet<string> FrameworkNamespaces =
-            new SortedSet<string>(StringComparer.InvariantCultureIgnoreCase)
+        private static readonly ISet<string> FrameworkNamespaces = new HashSet<string>(StringComparer.InvariantCultureIgnoreCase)
             {
                 "Accessibility", "Activities", "AddIn", "Build", "CodeDom", "Collections",
                 "Componentmodel", "Configuration", "CSharp", "CustomMarshalers", "Data",
@@ -48,7 +48,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 "Drawing", "Dynamic", "EnterpriseServices", "Globalization", "IdentityModel",
                 "InteropServices", "IO", "JScript", "Linq", "Location", "Management", "Media",
                 "Messaging", "Microsoft", "Net", "Numerics", "Printing", "Reflection", "Resources",
-                "Runtime", "security", "server", "servicemodel", "serviceprocess", "speech",
+                "Runtime", "Security", "Server", "ServiceModel", "ServiceProcess", "Speech",
                 "SqlServer", "System", "Tasks", "Text", "Threading", "Timers", "Transactions",
                 "UIAutomationClientsideProviders", "VisualBasic", "VisualC", "Web", "Win32",
                 "Windows", "Workflow", "Xaml", "XamlGeneratedNamespace", "Xml"
@@ -57,22 +57,20 @@ namespace SonarAnalyzer.Rules.CSharp
         protected override void Initialize(SonarAnalysisContext context) =>
             context.RegisterSyntaxNodeActionInNonGenerated(c =>
             {
-                if (c.ContainingSymbol.Kind == SymbolKind.NamedType
-                    && IsDeclaredPublic(c.Node, c.SemanticModel)
-                    && CSharpFacade.Instance.Syntax.NodeIdentifier(c.Node) is { } identifier
-                    && FrameworkNamespaces.Contains(identifier.ValueText))
+                if (!c.IsRedundantPositionalRecordContext()
+                    && c.Node.NodeIdentifier() is { } identifier
+                    && FrameworkNamespaces.Contains(identifier.ValueText)
+                    && c.SemanticModel.GetDeclaredSymbol(c.Node)?.DeclaredAccessibility == Accessibility.Public)
                 {
                     c.ReportIssue(Diagnostic.Create(Rule, identifier.GetLocation(), identifier.ValueText));
                 }
             },
             SyntaxKind.ClassDeclaration,
-            SyntaxKind.StructDeclaration,
-            SyntaxKind.InterfaceDeclaration,
-            SyntaxKind.EnumDeclaration,
             SyntaxKind.DelegateDeclaration,
-            SyntaxKindEx.RecordClassDeclaration);
-
-        private static bool IsDeclaredPublic(SyntaxNode declaration, SemanticModel semanticModel) =>
-            semanticModel.GetDeclaredSymbol(declaration)?.DeclaredAccessibility == Accessibility.Public;
+            SyntaxKind.EnumDeclaration,
+            SyntaxKind.InterfaceDeclaration,
+            SyntaxKindEx.RecordClassDeclaration,
+            SyntaxKindEx.RecordStructDeclaration,
+            SyntaxKind.StructDeclaration);
     }
 }

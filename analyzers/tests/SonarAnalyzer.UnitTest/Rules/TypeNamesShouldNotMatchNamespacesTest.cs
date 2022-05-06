@@ -27,18 +27,20 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class TypeNamesShouldNotMatchNamespacesTest
     {
+        private readonly VerifierBuilder builder = new VerifierBuilder<TypeNamesShouldNotMatchNamespaces>();
+
         [TestMethod]
         public void TypeNamesShouldNotMatchNamespaces() =>
-            OldVerifier.VerifyAnalyzer(@"TestCases\TypeNamesShouldNotMatchNamespaces.cs", new TypeNamesShouldNotMatchNamespaces());
+            builder.AddPaths("TypeNamesShouldNotMatchNamespaces.cs").Verify();
 
 #if NET
         [TestMethod]
         public void TypeNamesShouldNotMatchNamespaces_CSharp9() =>
-            OldVerifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\TypeNamesShouldNotMatchNamespaces.CSharp9.cs", new TypeNamesShouldNotMatchNamespaces());
+            builder.AddPaths("TypeNamesShouldNotMatchNamespaces.CSharp9.cs").WithOptions(ParseOptionsHelper.FromCSharp9).Verify();
 
         [TestMethod]
         public void TypeNamesShouldNotMatchNamespaces_CSharp10() =>
-            OldVerifier.VerifyAnalyzerFromCSharp10Library(@"TestCases\TypeNamesShouldNotMatchNamespaces.CSharp10.cs", new TypeNamesShouldNotMatchNamespaces());
+            builder.AddPaths("TypeNamesShouldNotMatchNamespaces.CSharp10.cs").WithOptions(ParseOptionsHelper.FromCSharp10).Verify();
 
 #endif
     }

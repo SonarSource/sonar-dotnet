@@ -1,4 +1,4 @@
-﻿namespace Tests.Diagnostics;
+﻿public record struct Web { } // Noncompliant
+public record struct IO(string Parameter) { } // Noncompliant
 
-public record struct Web { } // FN
 public record class Accessibility { } // Noncompliant
