@@ -66,7 +66,7 @@ namespace SonarAnalyzer.Utilities
         }
 
         public static bool IsParameterized(Type analyzerType) =>
-            analyzerType.GetProperties().Any(p => p.GetCustomAttributes<RuleParameterAttribute>().Any());
+            analyzerType.GetProperties().Any(x => x.GetCustomAttributes<RuleParameterAttribute>().Any());
 
         private static AnalyzerLanguage TargetLanguage(MemberInfo analyzerType)
         {
