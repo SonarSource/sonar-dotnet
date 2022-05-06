@@ -102,7 +102,7 @@
     End Structure
 
     Public Class SpecialChars
-        Private someString1 As String = "Say ""Hello""" ' Noncompliant {{Define a constant instead of using this literal 'Say "Hello"' 4 times.}}
+        Private someString1 As String = "Say ""Hello""" ' Noncompliant {{Define a constant instead of using this literal 'Say ""Hello""' 4 times.}}
         Private someString2 As String = "Say ""Hello""" ' Secondary
         Private someString3 As String = "Say ""Hello""" ' Secondary
         Private someString4 As String = "Say ""Hello""" ' Secondary
