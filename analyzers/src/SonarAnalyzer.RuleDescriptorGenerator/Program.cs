@@ -36,12 +36,7 @@ namespace SonarAnalyzer.RuleDescriptorGenerator
     {
         public static void Main(string[] args)
         {
-            if (args.Length != 1)
-            {
-                Console.WriteLine("[AnalyzerLanguage: 'cs' for C#, 'vbnet' for VB.Net]");
-                Console.WriteLine("All files will be created by the application");
-            }
-            else
+            if (args.Length == 1)
             {
                 var language = AnalyzerLanguage.Parse(args[0]);
                 var genericRuleDetails = RuleDetailBuilder.GetAllRuleDetails(language).ToList();
@@ -50,6 +45,11 @@ namespace SonarAnalyzer.RuleDescriptorGenerator
                 var root = new RuleDescriptorRoot();
                 root.Rules.AddRange(ruleDetails);
                 SerializeObjectToFile(Path.Combine(language.ToString(), "rules.xml"), root);
+            }
+            else
+            {
+                Console.WriteLine("[AnalyzerLanguage: 'cs' for C#, 'vbnet' for VB.Net]");
+                Console.WriteLine("All files will be created by the application");
             }
         }
 
