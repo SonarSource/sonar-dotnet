@@ -68,9 +68,6 @@ namespace SonarAnalyzer.Utilities
             }
         }
 
-        public static IEnumerable<Type> GetParameterlessAnalyzerTypes(AnalyzerLanguage language) =>
-            RuleAnalyzerTypes.Where(type => !IsParameterized(type) && TargetLanguage(type).IsAlso(language));
-
         public static bool IsParameterized(Type analyzerType) =>
             analyzerType.GetProperties().Any(p => p.GetCustomAttributes<RuleParameterAttribute>().Any());
 

@@ -36,13 +36,6 @@ namespace SonarAnalyzer.UnitTest.Common
             RuleFinder.PackagedRuleAssemblies.Should().HaveCount(3);
 
         [TestMethod]
-        public void GetParameterlessAnalyzerTypes()
-        {
-            RuleFinder.GetParameterlessAnalyzerTypes(AnalyzerLanguage.CSharp).Should().NotBeEmpty();
-            RuleFinder.GetParameterlessAnalyzerTypes(AnalyzerLanguage.VisualBasic).Should().NotBeEmpty();
-        }
-
-        [TestMethod]
         public void GetAnalyzerTypes()
         {
             var analyzers = RuleFinder.GetAnalyzerTypes(AnalyzerLanguage.CSharp);
@@ -52,10 +45,10 @@ namespace SonarAnalyzer.UnitTest.Common
         [TestMethod]
         public void GetAllAnalyzerTypes()
         {
-            var countParameterless = RuleFinder.GetParameterlessAnalyzerTypes(AnalyzerLanguage.CSharp).Count();
+            var countParameterless = RuleFinder.GetAnalyzerTypes(AnalyzerLanguage.CSharp).Count(x => !RuleFinder.IsParameterized(x));
             RuleFinder.RuleAnalyzerTypes.Should().HaveCountGreaterThan(countParameterless);
 
-            countParameterless = RuleFinder.GetParameterlessAnalyzerTypes(AnalyzerLanguage.VisualBasic).Count();
+            countParameterless = RuleFinder.GetAnalyzerTypes(AnalyzerLanguage.VisualBasic).Count(x => !RuleFinder.IsParameterized(x));
             RuleFinder.RuleAnalyzerTypes.Should().HaveCountGreaterThan(countParameterless);
         }
     }
