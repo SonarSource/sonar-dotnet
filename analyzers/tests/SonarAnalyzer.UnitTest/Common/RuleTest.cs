@@ -46,7 +46,7 @@ namespace SonarAnalyzer.UnitTest.Common
         [TestMethod]
         public void CodeFixes_Named_Properly()
         {
-            foreach (var codeFix in GetCodeFixTypes(RuleFinder.PackagedRuleAssemblies))
+            foreach (var codeFix in RuleFinder.CodeFixTypes)
             {
                 var analyzerName = codeFix.FullName.Replace("CodeFix", string.Empty);
                 codeFix.Assembly.GetType(analyzerName).Should().NotBeNull("CodeFix '{0}' has no matching DiagnosticAnalyzer.", codeFix.Name);
@@ -75,11 +75,7 @@ namespace SonarAnalyzer.UnitTest.Common
         [TestMethod]
         public void SonarDiagnosticAnalyzer_IsUsedInAllRules()
         {
-            var analyzers = RuleFinder.PackagedRuleAssemblies
-                .SelectMany(assembly => assembly.GetTypes())
-                .Where(t => t.IsSubclassOf(typeof(DiagnosticAnalyzer)) && t != typeof(SonarDiagnosticAnalyzer));
-
-            foreach (var analyzer in analyzers)
+            foreach (var analyzer in RuleFinder.RuleAnalyzerTypes.Concat(RuleFinder.UtilityAnalyzerTypes).Where(x => x != typeof(SonarDiagnosticAnalyzer)))
             {
                 analyzer.Should().BeAssignableTo<SonarDiagnosticAnalyzer>($"{analyzer.Name} is not a subclass of SonarDiagnosticAnalyzer");
             }
@@ -250,9 +246,6 @@ namespace SonarAnalyzer.UnitTest.Common
 
         private static IEnumerable<DiagnosticDescriptor> SupportedDiagnostics(Type type) =>
             ((DiagnosticAnalyzer)Activator.CreateInstance(type)).SupportedDiagnostics;
-
-        private static IEnumerable<Type> GetCodeFixTypes(IEnumerable<Assembly> assemblies) =>
-            assemblies.SelectMany(x => x.GetTypes()).Where(x => x.IsSubclassOf(typeof(SonarCodeFix)) && !x.IsAbstract);
 
         private static bool IsSonarWay(DiagnosticDescriptor diagnostic) =>
             diagnostic.CustomTags.Contains(DiagnosticDescriptorBuilder.SonarWayTag);

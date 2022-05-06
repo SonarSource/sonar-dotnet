@@ -18,7 +18,6 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System;
 using System.Linq;
 using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -31,10 +30,6 @@ namespace SonarAnalyzer.UnitTest.Common
     [TestClass]
     public class RuleFinderTest
     {
-        [TestMethod]
-        public void GetPackagedRuleAssembly() =>
-            RuleFinder.PackagedRuleAssemblies.Should().HaveCount(3);
-
         [TestMethod]
         public void GetAnalyzerTypes()
         {

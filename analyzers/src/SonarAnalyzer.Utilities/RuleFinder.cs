@@ -32,25 +32,19 @@ namespace SonarAnalyzer.Utilities
 {
     internal static class RuleFinder
     {
-        public static IEnumerable<Assembly> PackagedRuleAssemblies { get; } = new[]
-            {
-                Assembly.Load(typeof(Rules.CSharp.FlagsEnumZeroMember).Assembly.GetName()),
-                Assembly.Load(typeof(Rules.VisualBasic.FlagsEnumZeroMember).Assembly.GetName()),
-                Assembly.Load(typeof(Rules.Common.DoNotInstantiateSharedClassesBase).Assembly.GetName())
-            };
-
         public static IEnumerable<Type> RuleAnalyzerTypes { get; } // Rule-only, without utility analyzers
         public static IEnumerable<Type> UtilityAnalyzerTypes { get; }
+        public static IEnumerable<Type> CodeFixTypes { get; }
 
         static RuleFinder()
         {
-            var all = PackagedRuleAssemblies
-                .SelectMany(assembly => assembly.GetTypes())
-                .Where(x => x.IsSubclassOf(typeof(DiagnosticAnalyzer)) && x.GetCustomAttributes<DiagnosticAnalyzerAttribute>().Any())
-                .ToArray();
+            var allTypes = new[] { typeof(Rules.CSharp.FlagsEnumZeroMember), typeof(Rules.VisualBasic.FlagsEnumZeroMember), typeof(Rules.Common.FlagsEnumZeroMemberBase<int>) }
+                .SelectMany(x => x.Assembly.GetTypes());
+            CodeFixTypes = allTypes.Where(x => typeof(SonarCodeFix).IsAssignableFrom(x) && !x.IsAbstract);
 
-            RuleAnalyzerTypes = all.Where(x => !typeof(UtilityAnalyzerBase).IsAssignableFrom(x)).ToList();
-            UtilityAnalyzerTypes = all.Where(x => typeof(UtilityAnalyzerBase).IsAssignableFrom(x)).ToList();
+            var allAnalyzers = allTypes.Where(x => x.IsSubclassOf(typeof(DiagnosticAnalyzer)) && x.GetCustomAttributes<DiagnosticAnalyzerAttribute>().Any()).ToArray();
+            RuleAnalyzerTypes = allAnalyzers.Where(x => !typeof(UtilityAnalyzerBase).IsAssignableFrom(x)).ToList();
+            UtilityAnalyzerTypes = allAnalyzers.Where(x => typeof(UtilityAnalyzerBase).IsAssignableFrom(x)).ToList();
         }
 
         public static IEnumerable<Type> GetAnalyzerTypes(AnalyzerLanguage language) =>
