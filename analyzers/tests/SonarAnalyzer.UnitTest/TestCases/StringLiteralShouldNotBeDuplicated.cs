@@ -108,7 +108,7 @@
     {
         // See https://github.com/SonarSource/sonar-dotnet/issues/2191
         private string ZZ_TRANS_PACKED_0 =
-            "\x0001\u0124\x0001\x0000\x0001\u0125\x0002\x0000\x0001\u0126\x0001\x0000\x0001\u0127\x0005\x0000" + // Noncompliant
+            "\x0001\u0124\x0001\x0000\x0001\u0125\x0002\x0000\x0001\u0126\x0001\x0000\x0001\u0127\x0005\x0000" + // Noncompliant {{Define a constant instead of using this literal 'ĤĥĦħ' 4 times.}}
             "\x0001\u0124\x0001\x0000\x0001\u0125\x0002\x0000\x0001\u0126\x0001\x0000\x0001\u0127\x0005\x0000" + // Secondary
             "\x0001\u0124\x0001\x0000\x0001\u0125\x0002\x0000\x0001\u0126\x0001\x0000\x0001\u0127\x0005\x0000" + // Secondary
             "\x0001\u0124\x0001\x0000\x0001\u0125\x0002\x0000\x0001\u0126\x0001\x0000\x0001\u0127\x0005\x0000";  // Secondary

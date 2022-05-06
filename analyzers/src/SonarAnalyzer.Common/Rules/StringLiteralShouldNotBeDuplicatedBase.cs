@@ -87,9 +87,11 @@ namespace SonarAnalyzer.Rules
             {
                 var duplicates = item.ToList();
                 var firstToken = duplicates[0];
+                var messageText = new string(item.Key.Where(x => !char.IsControl(x)).ToArray()); // Strip of any control characters to not mess up the error message.
+                // alternative: var messageText = firstToken.Text.StripOfLeadingAndTrialingDoubleQuotes();
                 context.ReportIssue(Diagnostic.Create(rule, firstToken.GetLocation(),
                     duplicates.Skip(1).Select(x => x.GetLocation()),
-                    item.Key, duplicates.Count));
+                    messageText, duplicates.Count));
             }
         }
     }
