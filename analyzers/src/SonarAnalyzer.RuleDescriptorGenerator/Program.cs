@@ -39,11 +39,8 @@ namespace SonarAnalyzer.RuleDescriptorGenerator
             if (args.Length == 1)
             {
                 var language = AnalyzerLanguage.Parse(args[0]);
-                var genericRuleDetails = RuleDetailBuilder.GetAllRuleDetails(language).ToList();
-                var ruleDetails = genericRuleDetails.Select(RuleDetail.Convert).ToList();
+                var root = new RuleDescriptorRoot(RuleDetailBuilder.GetAllRuleDetails(language).Select(RuleDetail.Convert));
                 Directory.CreateDirectory(language.ToString());
-                var root = new RuleDescriptorRoot();
-                root.Rules.AddRange(ruleDetails);
                 SerializeObjectToFile(Path.Combine(language.ToString(), "rules.xml"), root);
             }
             else

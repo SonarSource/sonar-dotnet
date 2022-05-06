@@ -20,6 +20,7 @@
 
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
+using System.Linq;
 using System.Xml.Serialization;
 
 namespace SonarAnalyzer.RuleDescriptorGenerator
@@ -28,12 +29,10 @@ namespace SonarAnalyzer.RuleDescriptorGenerator
     [XmlRoot("rules", Namespace = "")]
     public class RuleDescriptorRoot
     {
-        public RuleDescriptorRoot()
-        {
-            Rules= new List<RuleDetail>();
-        }
-
         [XmlElement("rule")]
         public List<RuleDetail> Rules { get; private set; }
+
+        public RuleDescriptorRoot(IEnumerable<RuleDetail> rules) =>
+            Rules = rules.ToList();
     }
 }
