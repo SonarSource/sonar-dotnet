@@ -23,6 +23,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Resources;
 using Microsoft.CodeAnalysis;
+using SonarAnalyzer.Common;
 
 namespace SonarAnalyzer.Helpers
 {
@@ -34,7 +35,7 @@ namespace SonarAnalyzer.Helpers
         public static readonly string UtilityTag = "Utility";
 
         public static DiagnosticDescriptor GetUtilityDescriptor(string diagnosticId, string title) =>
-            new DiagnosticDescriptor(
+            new(
                 diagnosticId,
                 title,
                 string.Empty,
@@ -43,9 +44,22 @@ namespace SonarAnalyzer.Helpers
                 isEnabledByDefault: true,
                 customTags: BuildUtilityCustomTags());
 
+        public static DiagnosticDescriptor Create(AnalyzerLanguage language, RuleDescriptor rule, string messageFormat, bool fadeOutCode) =>
+            new(
+                rule.Id,
+                rule.Title,
+                messageFormat,
+                rule.Category,
+                fadeOutCode ? DiagnosticSeverity.Info : DiagnosticSeverity.Warning,
+                rule.SonarWay,
+                rule.Description,
+                language.HelpLink(rule.Id),
+                BuildCustomTags(language.LanguageName, rule.SonarWay, rule.Scope, fadeOutCode));
+
+        //FIXME: Add with VB: [Obsolete("Use DescriptorFactory.Create()")]
         public static DiagnosticDescriptor GetDescriptor(string diagnosticId, string messageFormat,
             ResourceManager resourceManager, bool? isEnabledByDefault = null, bool fadeOutCode = false) =>
-            new DiagnosticDescriptor(
+            new(
                 diagnosticId,
                 resourceManager.GetString($"{diagnosticId}_Title"),
                 messageFormat,
@@ -56,6 +70,7 @@ namespace SonarAnalyzer.Helpers
                 description: resourceManager.GetString($"{diagnosticId}_Description"),
                 customTags: BuildCustomTags(diagnosticId, resourceManager, fadeOutCode));
 
+        [Obsolete]
         public static string GetHelpLink(ResourceManager resourceManager, string diagnosticId) =>
             string.Format(resourceManager.GetString("HelpLinkFormat"), diagnosticId.Substring(1));
 
@@ -63,7 +78,7 @@ namespace SonarAnalyzer.Helpers
          * Indicates that the roslyn diagnostic cannot be suppressed, filtered or have its severity changed.
          */
         public static DiagnosticDescriptor WithNotConfigurable(this DiagnosticDescriptor dd) =>
-            new DiagnosticDescriptor(
+            new(
                 dd.Id,
                 dd.Title,
                 dd.MessageFormat,
@@ -74,42 +89,37 @@ namespace SonarAnalyzer.Helpers
                 dd.HelpLinkUri,
                 dd.CustomTags.Union(new[] { WellKnownDiagnosticTags.NotConfigurable }).ToArray());
 
-        private static string[] BuildCustomTags(string diagnosticId, ResourceManager resourceManager, bool fadeOutCode)
-        {
-            var tags = new List<string> { resourceManager.GetString("RoslynLanguage") };
+        [Obsolete]
+        private static string[] BuildCustomTags(string diagnosticId, ResourceManager resourceManager, bool fadeOutCode) =>
+            BuildCustomTags(
+                resourceManager.GetString("RoslynLanguage"),
+                bool.Parse(resourceManager.GetString($"{diagnosticId}_IsActivatedByDefault")),
+                (SourceScope)Enum.Parse(typeof(SourceScope), resourceManager.GetString($"{diagnosticId}_Scope")),
+                fadeOutCode);
 
-            if (bool.Parse(resourceManager.GetString($"{diagnosticId}_IsActivatedByDefault")))
+        private static string[] BuildCustomTags(string languageName, bool sonarWay, SourceScope scope, bool fadeOutCode)
+        {
+            var tags = new List<string> { languageName };
+            tags.AddRange(scope.ToCustomTags());
+            if (sonarWay)
             {
                 tags.Add(SonarWayTag);
             }
-
-            if (Enum.TryParse<SourceScope>(resourceManager.GetString($"{diagnosticId}_Scope"), out var sourceScope))
-            {
-                tags.AddRange(sourceScope.ToCustomTags());
-            }
-
             if (fadeOutCode)
             {
                 tags.Add(WellKnownDiagnosticTags.Unnecessary);
             }
-
             return tags.ToArray();
         }
 
-        private static IEnumerable<string> ToCustomTags(this SourceScope sourceScope)
-        {
-            switch (sourceScope)
+        private static IEnumerable<string> ToCustomTags(this SourceScope sourceScope) =>
+            sourceScope switch
             {
-                case SourceScope.Main:
-                    return new[] { MainSourceScopeTag };
-                case SourceScope.Tests:
-                    return new[] { TestSourceScopeTag };
-                case SourceScope.All:
-                    return new[] { MainSourceScopeTag, TestSourceScopeTag };
-                default:
-                    throw new NotSupportedException($"{sourceScope} is not supported 'SourceScope' value.");
-            }
-        }
+                SourceScope.Main => new[] { MainSourceScopeTag },
+                SourceScope.Tests => new[] { TestSourceScopeTag },
+                SourceScope.All => new[] { MainSourceScopeTag, TestSourceScopeTag },
+                _ => throw new NotSupportedException($"{sourceScope} is not supported 'SourceScope' value."),
+            };
 
         private static string[] BuildUtilityCustomTags()
         {
@@ -123,5 +133,16 @@ namespace SonarAnalyzer.Helpers
         }
     }
 
-    public record RuleDescriptor(string Title, string Type, SourceScope Scope, bool SonarWay, string Description);
+    public record RuleDescriptor(string Id, string Title, string Type, string DefaultSeverity, SourceScope Scope, bool SonarWay, string Description)
+    {
+        public string Category =>
+            DefaultSeverity + " " + Type switch
+            {
+                "BUG" => "Bug",
+                "CODE_SMELL" => "Code Smell",
+                "VULNERABILITY" => "Vulnerability",
+                "SECURITY_HOTSPOT" => "Security Hotspot",
+                _ => throw new Exception("Unexpected Type: " + Type)   // FIXME: Ugly
+            };
+    }
 }

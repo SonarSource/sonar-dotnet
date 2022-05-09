@@ -19,16 +19,13 @@
  */
 
 using Microsoft.CodeAnalysis;
+using SonarAnalyzer.Common;
 
 namespace SonarAnalyzer.Helpers
 {
     internal static class DescriptorFactory
     {
-        public static DiagnosticDescriptor Create(string id, string messageFormat)  // FIXME: Rules will call this
-        // FIXME: Will need to call refactored version of DiagnosticDescriptorBuilder.Create(RuleCatalog.Rules[id], messageFormat)
-        {
-            var rule = RuleCatalog.Rules[id];
-            return null;
-        }
+        public static DiagnosticDescriptor Create(string id, string messageFormat, bool fadeOutCode = false) =>
+            DiagnosticDescriptorBuilder.Create(AnalyzerLanguage.CSharp, RuleCatalog.Rules[id], messageFormat, fadeOutCode);
     }
 }

@@ -65,11 +65,12 @@ namespace SonarAnalyzer.Helpers
             foreach (var jsonPath in Directory.GetFiles(rspecDirectory, "*.json"))
             {
                 var id = Path.GetFileName(jsonPath).Split('_')[0];
-                if (id != "Sonar")  // "Sonar_way_profile.json
+                if (id != "Sonar")  // Avoid "Sonar_way_profile.json"
                 {
                     var data = Json.Parse(File.ReadAllText(jsonPath));
                     var description = File.ReadAllText(Path.ChangeExtension(jsonPath, ".html"));
-                    sb.AppendLine($@"{{ ""{id}"", new({Encode(data["title"])}, ""{data["type"]}"", SourceScope.{data["scope"]}, true, {Encode(description)}) }},");
+                    // FIXME: Read and parse Sonar_way_profile.json
+                    sb.AppendLine($@"{{ ""{id}"", new(""{id}"", {Encode(data["title"])}, ""{data["type"]}"", ""{data["defaultSeverity"]}"", SourceScope.{data["scope"]}, true, {Encode(description)}) }},");
                 }
             }
             sb.AppendLine(

@@ -30,6 +30,8 @@ namespace SonarAnalyzer.UnitTest.Helpers
     {
         private const string LanguageValue = "language";
 
+        // FIXME: Need more UTs
+
         [TestMethod]
         public void GetHelpLink_CSharp()
         {
