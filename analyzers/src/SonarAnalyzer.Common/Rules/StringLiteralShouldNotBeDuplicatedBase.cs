@@ -89,8 +89,14 @@ namespace SonarAnalyzer.Rules
                 var firstToken = duplicates[0];
                 context.ReportIssue(Diagnostic.Create(rule, firstToken.GetLocation(),
                     duplicates.Skip(1).Select(x => x.GetLocation()),
-                    item.Key, duplicates.Count));
+                    ExtractStringContent(firstToken), duplicates.Count));
             }
         }
+
+        private static string ExtractStringContent(SyntaxToken literalToken) =>
+             // Use literalToken.Text to get the text as written by the developer. The unescaped text (literalToken.ValueText)
+             // might contain control characters that may cause trouble when used as error message (e.g. a null-terminator).
+             // The literalToken.Text contains leading and trailing double quotes that we strip of.
+             literalToken.Text.StartsWith("@\"") ? literalToken.Text.Substring(2, literalToken.Text.Length - 3) : literalToken.Text.Substring(1, literalToken.Text.Length - 2);
     }
 }
