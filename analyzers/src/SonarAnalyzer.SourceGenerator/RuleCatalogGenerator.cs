@@ -45,6 +45,12 @@ namespace SonarAnalyzer.SourceGenerator
                 LanguageNames.VisualBasic => "vbnet",
                 _ => throw new ArgumentException($"Unexpected language: {context.Compilation.Language}")
             };
+
+
+            // FIXME: REMOVE DEBUG, just make sure that we can use it
+            Newtonsoft.Json.Linq.JObject.Parse("{}");
+
+
             context.AddSource("RuleCatalog", GenerateSource(Path.Combine(projectDir, "..", "..", "rspec", language)));
         }
 
