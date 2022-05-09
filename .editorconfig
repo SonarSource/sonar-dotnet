@@ -228,6 +228,7 @@ dotnet_naming_style.I_style.capitalization = pascal_case
 # ----------------------------------------------------------------------------------------------------------------------
 
 dotnet_diagnostic.CA1822.severity = warning # Increase visibility for Member 'xxx' does not access instance data and can be marked as static
+dotnet_diagnostic.CS8785.severity = error   # Do not hide root cause for: Generator 'xxx' failed to generate source. It will not contribute to the output and compilation errors may occur as a result. Exception was of type 'xxx' with message 'xxx'
 
 # This should be removed in https://github.com/SonarSource/sonar-dotnet/issues/3364
 # RS1010: Provide an explicit argument for optional parameter 'equivalenceKey', which is non-null and unique across all code actions created by this fixer.

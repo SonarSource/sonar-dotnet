@@ -82,7 +82,7 @@ namespace SonarAnalyzer.UnitTest.Helpers
             var result = DiagnosticDescriptorBuilder.GetDescriptor(diagnosticId, "", mockedResourceManager);
 
             // Assert
-            result.CustomTags.Should().OnlyContain(DiagnosticDescriptorBuilder.SonarWayTag, LanguageValue);
+            result.CustomTags.Should().OnlyContain(DiagnosticDescriptorBuilder.SonarWayTag, DiagnosticDescriptorBuilder.MainSourceScopeTag, LanguageValue);
         }
 
         [TestMethod]
@@ -96,7 +96,7 @@ namespace SonarAnalyzer.UnitTest.Helpers
             var result = DiagnosticDescriptorBuilder.GetDescriptor(diagnosticId, "", mockedResourceManager);
 
             // Assert
-            result.CustomTags.Should().OnlyContain(LanguageValue);
+            result.CustomTags.Should().OnlyContain(DiagnosticDescriptorBuilder.MainSourceScopeTag, LanguageValue);
         }
 
         [TestMethod]
@@ -119,6 +119,7 @@ namespace SonarAnalyzer.UnitTest.Helpers
             mockedResourceManager.Setup(x => x.GetString($"{diagnosticId}_Title")).Returns("title");
             mockedResourceManager.Setup(x => x.GetString($"{diagnosticId}_Category")).Returns("category");
             mockedResourceManager.Setup(x => x.GetString($"{diagnosticId}_Description")).Returns("description");
+            mockedResourceManager.Setup(x => x.GetString($"{diagnosticId}_Scope")).Returns("Main");
             mockedResourceManager.Setup(x => x.GetString($"{diagnosticId}_IsActivatedByDefault")).Returns(isActivatedByDefault.ToString());
 
             return mockedResourceManager.Object;
