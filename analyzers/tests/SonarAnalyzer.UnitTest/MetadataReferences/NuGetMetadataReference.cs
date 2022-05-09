@@ -43,6 +43,7 @@ namespace SonarAnalyzer.UnitTest.MetadataReferences
         public static References Log4Net(string packageVersion, string targetFramework) => Create("log4net", packageVersion, null, targetFramework);
         public static References MachineSpecifications(string packageVersion) => Create("Machine.Specifications", packageVersion);
         public static References MicrosoftAspNetCore(string packageVersion) => Create("Microsoft.AspNetCore", packageVersion);
+        public static References MicrosoftAspNetCoreApp(string packageVersion = Constants.NuGetLatestVersion) => Create("Microsoft.AspNetCore.App", packageVersion);
         public static References MicrosoftAspNetCoreDiagnostics(string packageVersion) => Create("Microsoft.AspNetCore.Diagnostics", packageVersion);
         public static References MicrosoftAspNetCoreDiagnosticsEntityFrameworkCore(string packageVersion) => Create("Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore", packageVersion);
         public static References MicrosoftAspNetCoreHosting(string packageVersion) => Create("Microsoft.AspNetCore.Hosting", packageVersion);
@@ -77,6 +78,7 @@ namespace SonarAnalyzer.UnitTest.MetadataReferences
         public static References MicrosoftExtensionsOptions(string packageVersion) => Create("Microsoft.Extensions.Options", packageVersion);
         public static References MicrosoftExtensionsPrimitives(string packageVersion) => Create("Microsoft.Extensions.Primitives", packageVersion);
         public static References MicrosoftNetHttpHeaders(string packageVersion) => Create("Microsoft.Net.Http.Headers", packageVersion);
+        public static References MicrosoftNetSdkFunctions(string packageVersion = Constants.NuGetLatestVersion) => Create("Microsoft.NET.Sdk.Functions", packageVersion);
         public static References MicrosoftNetWebApiCore(string packageVersion) => Create("Microsoft.AspNet.WebApi.Core", packageVersion);
         public static References MicrosoftSqlServerCompact(string packageVersion = "4.0.8876.1") => Create("Microsoft.SqlServer.Compact", packageVersion);
         public static References MicrosoftWebXdt(string packageVersion = "3.0.0") => Create("Microsoft.Web.Xdt", packageVersion);
