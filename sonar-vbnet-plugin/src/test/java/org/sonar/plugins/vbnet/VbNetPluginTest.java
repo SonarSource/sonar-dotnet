@@ -29,7 +29,6 @@ import org.sonar.api.SonarRuntime;
 import org.sonar.api.config.PropertyDefinition;
 import org.sonar.api.internal.SonarRuntimeImpl;
 import org.sonar.api.utils.Version;
-import org.sonarsource.dotnet.shared.plugins.AnalysisWarningsSensor;
 import org.sonarsource.dotnet.shared.plugins.CodeCoverageProvider;
 import org.sonarsource.dotnet.shared.plugins.DotNetSensor;
 import org.sonarsource.dotnet.shared.plugins.EncodingPerFile;
@@ -60,7 +59,6 @@ public class VbNetPluginTest {
     List extensions = context.getExtensions();
 
     Object[] expectedExtensions = new Object[] {
-      AnalysisWarningsSensor.class,
       DotNetSensor.class,
       EncodingPerFile.class,
       FileTypeSensor.class,

@@ -47,13 +47,11 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 public class AnalysisWarningsSensorTest {
-  private static final String LANG_KEY = "LANG_KEY";
-  private static final String SHORT_LANG_NAME = "SHORT_LANG_NAME";
 
   private static File basePath;
   private static File sonarFolder;
+  private static String absoluteBasePath;
   private static AnalysisWarnings analysisWarningsMock;
-  private static DotNetPluginMetadata pluginMetadataMock;
   private static Configuration configurationMock;
 
   @Rule
@@ -65,27 +63,25 @@ public class AnalysisWarningsSensorTest {
   @Before
   public void before() throws IOException {
     basePath = temp.newFolder();
+    absoluteBasePath = basePath.toPath().toAbsolutePath().toString();
     sonarFolder = new File(basePath, ".sonar");
     configurationMock = mock(Configuration.class);
     analysisWarningsMock = mock(AnalysisWarnings.class);
-    pluginMetadataMock = mock(DotNetPluginMetadata.class);
-    when(pluginMetadataMock.languageKey()).thenReturn(LANG_KEY);
-    when(pluginMetadataMock.shortLanguageName()).thenReturn(SHORT_LANG_NAME);
   }
 
   @Test
   public void should_describe() {
     DefaultSensorDescriptor sensorDescriptor = new DefaultSensorDescriptor();
-    AnalysisWarningsSensor sensor = new AnalysisWarningsSensor(configurationMock, pluginMetadataMock, analysisWarningsMock);
+    AnalysisWarningsSensor sensor = new AnalysisWarningsSensor(configurationMock, analysisWarningsMock);
     sensor.describe(sensorDescriptor);
 
-    assertThat(sensorDescriptor.name()).isEqualTo(SHORT_LANG_NAME + " Analysis Warnings import");
+    assertThat(sensorDescriptor.name()).isEqualTo("Analysis Warnings import");
     assertThat(sensorDescriptor.languages()).isEmpty();
   }
 
   @Test
   public void execute_noWorkingDir_doesNotCallAdd() throws IOException {
-    AnalysisWarningsSensor sensor = new AnalysisWarningsSensor(configurationMock, pluginMetadataMock, analysisWarningsMock);
+    AnalysisWarningsSensor sensor = new AnalysisWarningsSensor(configurationMock, analysisWarningsMock);
     sensor.execute(SensorContextTester.create(temp.newFolder()));
 
     verify(analysisWarningsMock, never()).addUnique(anyString());
@@ -95,7 +91,7 @@ public class AnalysisWarningsSensorTest {
   public void execute_workingDirWithoutSonarSuffix_doesNotCallAdd() throws IOException {
     when(configurationMock.get("sonar.working.directory")).thenReturn(Optional.of("wrong"));
 
-    AnalysisWarningsSensor sensor = new AnalysisWarningsSensor(configurationMock, pluginMetadataMock, analysisWarningsMock);
+    AnalysisWarningsSensor sensor = new AnalysisWarningsSensor(configurationMock, analysisWarningsMock);
     sensor.execute(SensorContextTester.create(temp.newFolder()));
 
     verify(analysisWarningsMock, never()).addUnique(anyString());
@@ -103,13 +99,15 @@ public class AnalysisWarningsSensorTest {
 
   @Test
   public void execute_missingWorkingDir_doesNotCallAdd() throws IOException {
-    when(configurationMock.get("sonar.working.directory")).thenReturn(Optional.of("wrong\\.sonar"));
+    when(configurationMock.get("sonar.working.directory")).thenReturn(Optional.of("wrong_path\\.sonar"));
 
-    AnalysisWarningsSensor sensor = new AnalysisWarningsSensor(configurationMock, pluginMetadataMock, analysisWarningsMock);
+    AnalysisWarningsSensor sensor = new AnalysisWarningsSensor(configurationMock, analysisWarningsMock);
     sensor.execute(SensorContextTester.create(temp.newFolder()));
 
     verify(analysisWarningsMock, never()).addUnique(anyString());
-    assertThat(logTester.logs()).containsExactly("Error occurred while loading analysis analysis warnings");
+    assertThat(logTester.logs()).containsExactly(
+      "Searching for analysis warnings in wrong_path",
+      "Error occurred while loading analysis analysis warnings");
   }
 
   @Test
@@ -119,11 +117,11 @@ public class AnalysisWarningsSensorTest {
 
     when(configurationMock.get("sonar.working.directory")).thenReturn(Optional.of(sonarFolder.getAbsolutePath()));
 
-    AnalysisWarningsSensor sensor = new AnalysisWarningsSensor(configurationMock, pluginMetadataMock, analysisWarningsMock);
+    AnalysisWarningsSensor sensor = new AnalysisWarningsSensor(configurationMock, analysisWarningsMock);
     sensor.execute(SensorContextTester.create(basePath));
 
     verify(analysisWarningsMock, never()).addUnique(anyString());
-    assertThat(logTester.logs()).isEmpty();
+    assertThat(logTester.logs()).containsExactly(String.format("Searching for analysis warnings in %s", absoluteBasePath));
   }
 
   @Test
@@ -132,13 +130,15 @@ public class AnalysisWarningsSensorTest {
 
     when(configurationMock.get("sonar.working.directory")).thenReturn(Optional.of(sonarFolder.getAbsolutePath()));
 
-    AnalysisWarningsSensor sensor = new AnalysisWarningsSensor(configurationMock, pluginMetadataMock, analysisWarningsMock);
+    AnalysisWarningsSensor sensor = new AnalysisWarningsSensor(configurationMock, analysisWarningsMock);
     sensor.execute(SensorContextTester.create(basePath));
 
     verify(analysisWarningsMock, times(1)).addUnique("First message");
     verify(analysisWarningsMock, times(1)).addUnique("Second message");
     verify(analysisWarningsMock, times(2)).addUnique(anyString());
-    assertThat(logTester.logs()).isEmpty();
+    assertThat(logTester.logs()).containsExactly(
+      String.format("Searching for analysis warnings in %s", absoluteBasePath),
+      String.format("Loading analysis warnings from %s\\AnalysisWarnings.AutoScan.json", absoluteBasePath));
   }
 
   @Test
@@ -148,14 +148,17 @@ public class AnalysisWarningsSensorTest {
 
     when(configurationMock.get("sonar.working.directory")).thenReturn(Optional.of(sonarFolder.getAbsolutePath()));
 
-    AnalysisWarningsSensor sensor = new AnalysisWarningsSensor(configurationMock, pluginMetadataMock, analysisWarningsMock);
+    AnalysisWarningsSensor sensor = new AnalysisWarningsSensor(configurationMock, analysisWarningsMock);
     sensor.execute(SensorContextTester.create(basePath));
 
     verify(analysisWarningsMock, times(1)).addUnique("First message");
     verify(analysisWarningsMock, times(1)).addUnique("Second message");
     verify(analysisWarningsMock, times(1)).addUnique("Scanner message");
     verify(analysisWarningsMock, times(3)).addUnique(anyString());
-    assertThat(logTester.logs()).isEmpty();
+    assertThat(logTester.logs()).containsExactly(
+      String.format("Searching for analysis warnings in %s", absoluteBasePath),
+      String.format("Loading analysis warnings from %s\\AnalysisWarnings.AutoScan.json", absoluteBasePath),
+      String.format("Loading analysis warnings from %s\\AnalysisWarnings.Scanner.json", absoluteBasePath));
   }
 
   @Test
@@ -165,10 +168,13 @@ public class AnalysisWarningsSensorTest {
     when(configurationMock.get("sonar.working.directory")).thenReturn(Optional.of(sonarFolder.getAbsolutePath()));
     doThrow(RuntimeException.class).when(analysisWarningsMock).addUnique(anyString());
 
-    AnalysisWarningsSensor sensor = new AnalysisWarningsSensor(configurationMock, pluginMetadataMock, analysisWarningsMock);
+    AnalysisWarningsSensor sensor = new AnalysisWarningsSensor(configurationMock, analysisWarningsMock);
     sensor.execute(SensorContextTester.create(basePath));
 
-    assertThat(logTester.logs()).containsExactly("Error occurred while publishing analysis warnings");
+    assertThat(logTester.logs()).containsExactly(
+      String.format("Searching for analysis warnings in %s", absoluteBasePath),
+      String.format("Loading analysis warnings from %s\\AnalysisWarnings.AutoScan.json", absoluteBasePath),
+      "Error occurred while publishing analysis warnings");
   }
 
   private void copyFile(String fileName) throws IOException {

@@ -79,6 +79,7 @@ public class CSharpPlugin implements Plugin {
       WrongEncodingFileFilter.class,
       GeneratedFileFilter.class,
       // importers / exporters
+      // Analysis warnings sensor is registered only here, without a language filter, to avoid pushing warnings multiple times.
       AnalysisWarningsSensor.class,
       ProtobufDataImporter.class,
       RoslynDataImporter.class,
