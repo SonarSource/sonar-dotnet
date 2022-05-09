@@ -21,11 +21,12 @@ package org.sonarsource.dotnet.shared.plugins;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
-import org.sonar.api.batch.sensor.Sensor;
+import org.sonar.api.batch.Phase;
 import org.sonar.api.batch.sensor.SensorContext;
 import org.sonar.api.batch.sensor.SensorDescriptor;
 import org.sonar.api.config.Configuration;
 import org.sonar.api.notifications.AnalysisWarnings;
+import org.sonar.api.scanner.sensor.ProjectSensor;
 import org.sonar.api.utils.log.Logger;
 import org.sonar.api.utils.log.Loggers;
 
@@ -41,31 +42,29 @@ import java.util.List;
 import java.util.regex.Pattern;
 import java.util.stream.Stream;
 
-public class AnalysisWarningsSensor implements Sensor {
+@Phase(name = Phase.Name.POST)
+public final class AnalysisWarningsSensor implements ProjectSensor {
 
   private static final Logger LOG = Loggers.get(AnalysisWarningsSensor.class);
   private static final String SUFFIX = ".sonar";
   private static final Gson GSON = new Gson();
 
   private static final Pattern AnalysisWarningsPattern = Pattern.compile("AnalysisWarnings\\..*\\.json");
-  private final DotNetPluginMetadata metadata;
   private final Configuration configuration;
   private final AnalysisWarnings analysisWarnings;
 
-  public AnalysisWarningsSensor(Configuration configuration, DotNetPluginMetadata metadata, AnalysisWarnings analysisWarnings){
+  public AnalysisWarningsSensor(Configuration configuration, AnalysisWarnings analysisWarnings){
     this.configuration = configuration;
-    this.metadata = metadata;
     this.analysisWarnings = analysisWarnings;
   }
 
   @Override
   public void describe(SensorDescriptor descriptor) {
-    String name = String.format("%s Analysis Warnings import", metadata.shortLanguageName());
-    descriptor.name(name);
+    descriptor.name("Analysis Warnings import");
   }
 
   @Override
-  public void execute(SensorContext sensorContext) {
+  public void execute(final SensorContext sensorContext) {
     // Working directory folder is constructed from SonarOutputDir + ".sonar". We have to remove the suffix and search for valid configuration files.
     // e.g.
     //    .sonarqube\out\AnalysisWarnings.AutoScan.json
@@ -83,6 +82,7 @@ public class AnalysisWarningsSensor implements Sensor {
   }
 
   private static Stream<Path> getFilePaths(Path outputDirectory) {
+    LOG.debug("Searching for analysis warnings in " + outputDirectory);
     try {
       return Files.find(outputDirectory, 1, (path, attributes) -> AnalysisWarningsPattern.matcher(path.toFile().getName()).matches());
     } catch (IOException exception) {
@@ -94,6 +94,7 @@ public class AnalysisWarningsSensor implements Sensor {
   private void publishMessages(Stream<Path> paths) {
     Type collectionType = new TypeToken<List<Warning>>(){}.getType();
     paths.forEach(path -> {
+      LOG.debug("Loading analysis warnings from " + path.toAbsolutePath());
       try (InputStream is = Files.newInputStream(path)) {
         List<Warning> warnings = GSON.fromJson(new InputStreamReader(is, StandardCharsets.UTF_8), collectionType);
         warnings.forEach(message -> analysisWarnings.addUnique(message.getText()));
