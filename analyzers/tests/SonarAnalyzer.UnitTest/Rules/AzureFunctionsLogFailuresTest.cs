@@ -18,6 +18,8 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System.Linq;
+using Microsoft.CodeAnalysis;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.Rules.CSharp;
 using SonarAnalyzer.UnitTest.MetadataReferences;
@@ -28,12 +30,12 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class AzureFunctionsLogFailuresTest
     {
-        private readonly VerifierBuilder builder = new VerifierBuilder<AzureFunctionsLogFailures>()
-            .AddReferences(NuGetMetadataReference.MicrosoftAspNetCoreApp())
-            .AddReferences(NuGetMetadataReference.MicrosoftNetSdkFunctions());
+#if NET
+        private readonly VerifierBuilder builder = new VerifierBuilder<AzureFunctionsLogFailures>().AddReferences(NuGetMetadataReference.MicrosoftNetSdkFunctions());
 
         [TestMethod]
         public void AzureFunctionsLogFailures_CS() =>
-            new VerifierBuilder<AzureFunctionsLogFailures>().AddPaths("AzureFunctionsLogFailures.cs").Verify();
+            builder.AddPaths("AzureFunctionsLogFailures.cs").Verify();
+#endif
     }
 }
