@@ -13,13 +13,15 @@ namespace AzureFunctions1
         [FunctionName("Function1")]
         public static async Task<IActionResult> Run([HttpTrigger(AuthorizationLevel.Function, "get", "post", Route = null)] HttpRequest req, ILogger log)
         {
-            log.LogInformation("C# HTTP trigger function processed a request.");
-
-            string name = req.Query["name"];
-
-            string requestBody = await new StreamReader(req.Body).ReadToEndAsync();
-
-            return new OkObjectResult($"{name}, {requestBody}");
+            try
+            {
+                return new EmptyResult();
+            }
+            catch // Noncompliant {{Log caught exceptions via ILogger}}
+        //  ^^^^^
+            {
+                return new EmptyResult();
+            }
         }
     }
 }

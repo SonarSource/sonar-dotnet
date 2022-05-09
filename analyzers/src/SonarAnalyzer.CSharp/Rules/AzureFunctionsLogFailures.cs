@@ -24,7 +24,6 @@ using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
-using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
 
 namespace SonarAnalyzer.Rules.CSharp
@@ -33,7 +32,7 @@ namespace SonarAnalyzer.Rules.CSharp
     public sealed class AzureFunctionsLogFailures : SonarDiagnosticAnalyzer
     {
         private const string DiagnosticId = "S6423";
-        private const string MessageFormat = "";
+        private const string MessageFormat = "Log caught exceptions via ILogger";
 
         private static readonly DiagnosticDescriptor Rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
 
@@ -42,12 +41,23 @@ namespace SonarAnalyzer.Rules.CSharp
         protected override void Initialize(SonarAnalysisContext context) =>
             context.RegisterSyntaxNodeActionInNonGenerated(c =>
                 {
-                    var node = c.Node;
-                    if (true)
+                    var catchClause = (CatchClauseSyntax)c.Node;
+                    if (IsContainingMethodAzureFunction(c.SemanticModel, catchClause))
                     {
-                        c.ReportIssue(Diagnostic.Create(Rule, node.GetLocation()));
+                        c.ReportIssue(Diagnostic.Create(Rule, catchClause.CatchKeyword.GetLocation()));
                     }
                 },
-                SyntaxKind.MethodDeclaration);
+                SyntaxKind.CatchClause);
+        private bool IsContainingMethodAzureFunction(SemanticModel model, SyntaxNode node)
+        {
+            var method = node.Ancestors().OfType<MethodDeclarationSyntax>().FirstOrDefault();
+            var symbol = model.GetDeclaredSymbol(method) as IMethodSymbol;
+            if (symbol.HasAttribute(KnownType.Microsoft_Azure_WebJobs_FunctionNameAttribute))
+            {
+                return true;
+            }
+
+            return false;
+        }
     }
 }
