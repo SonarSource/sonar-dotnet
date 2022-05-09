@@ -20,6 +20,7 @@
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.Rules.CSharp;
+using SonarAnalyzer.UnitTest.MetadataReferences;
 using SonarAnalyzer.UnitTest.TestFramework;
 
 namespace SonarAnalyzer.UnitTest.Rules
@@ -27,6 +28,10 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class AzureFunctionsLogFailuresTest
     {
+        private readonly VerifierBuilder builder = new VerifierBuilder<AzureFunctionsLogFailures>()
+            .AddReferences(NuGetMetadataReference.MicrosoftAspNetCoreApp())
+            .AddReferences(NuGetMetadataReference.MicrosoftNetSdkFunctions());
+
         [TestMethod]
         public void AzureFunctionsLogFailures_CS() =>
             new VerifierBuilder<AzureFunctionsLogFailures>().AddPaths("AzureFunctionsLogFailures.cs").Verify();
