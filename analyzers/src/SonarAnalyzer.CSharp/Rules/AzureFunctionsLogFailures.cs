@@ -48,6 +48,6 @@ namespace SonarAnalyzer.Rules.CSharp
                         c.ReportIssue(Diagnostic.Create(Rule, node.GetLocation()));
                     }
                 },
-                SyntaxKind.InvocationExpression);
+                SyntaxKind.MethodDeclaration);
     }
 }
