@@ -52,7 +52,8 @@ namespace SonarAnalyzer.Rules.CSharp
         {
             var method = node.Ancestors().OfType<MethodDeclarationSyntax>().FirstOrDefault();
             var symbol = model.GetDeclaredSymbol(method) as IMethodSymbol;
-            if (symbol.HasAttribute(KnownType.Microsoft_Azure_WebJobs_FunctionNameAttribute))
+            var functionNameAttribute = model.Compilation.GetTypeByMetadataName(KnownType.Microsoft_Azure_WebJobs_FunctionNameAttribute.TypeName);
+            if (symbol.GetAttributes().Any(a => a.AttributeClass.Equals(functionNameAttribute)))
             {
                 return true;
             }
