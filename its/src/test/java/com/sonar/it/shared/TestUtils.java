@@ -89,7 +89,7 @@ public class TestUtils {
       + "https://github.com/SonarSource/sonar-scanner-msbuild/wiki/Analysis-of-product-projects-vs.-test-projects");
   }
 
-  private static Ce.Task getAnalysisWarningsTask(Orchestrator orchestrator, BuildResult buildResult) {
+  public static Ce.Task getAnalysisWarningsTask(Orchestrator orchestrator, BuildResult buildResult) {
     String taskId = extractCeTaskId(buildResult);
     return newWsClient(orchestrator)
       .ce()
