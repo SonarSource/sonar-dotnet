@@ -87,16 +87,19 @@ namespace SonarAnalyzer.Rules
             {
                 var duplicates = item.ToList();
                 var firstToken = duplicates[0];
-                var messageText = ExtractStringContent(firstToken.Text);
+                var messageText = ExtractStringContent(firstToken);
                 context.ReportIssue(Diagnostic.Create(rule, firstToken.GetLocation(),
                     duplicates.Skip(1).Select(x => x.GetLocation()),
                     messageText, duplicates.Count));
             }
         }
 
-#pragma warning disable S109 // Magic numbers should not be used. Rationale: The numbers are offsets into the string
-        private static string ExtractStringContent(string literal) =>
-             literal.StartsWith("@\"") ? literal.Substring(2, literal.Length - 3) : literal.Substring(1, literal.Length - 2);
+#pragma warning disable S109 // Magic numbers should not be used. Rationale: The numbers are offsets to remove tghe double quotes from the string literal
+        private static string ExtractStringContent(SyntaxToken literalToken) =>
+             // Use literalToken.Text to get the text as written by the developer. The unescaped text might contain
+             // control characters that may cause trouble when used as error message (e.g. a null-terminator).
+             // The literalToken.Text contains leading and trailing double quotes that we strip of.
+             literalToken.Text.StartsWith("@\"") ? literalToken.Text.Substring(2, literalToken.Text.Length - 3) : literalToken.Text.Substring(1, literalToken.Text.Length - 2);
 #pragma warning restore S109 // Magic numbers should not be used
     }
 }
