@@ -36,6 +36,7 @@ namespace SonarAnalyzer.UnitTest.Rules
             builder.AddPaths("AzureFunctionsLogFailures.cs").WithConcurrentAnalysis(false).Verify();
 
         [DataTestMethod]
+        // Calls to LoggerExtensions.Log.. extension methods
         [DataRow(true, @"log.LogError(ex, string.Empty);")]
         [DataRow(true, @"log.LogCritical(ex, string.Empty);")]
         [DataRow(true, @"log.LogWarning(ex, string.Empty);")]
@@ -51,16 +52,19 @@ namespace SonarAnalyzer.UnitTest.Rules
         [DataRow(false, @"log.Log(LogLevel.Information, ex, string.Empty);")]
         [DataRow(false, @"log.Log(LogLevel.None, ex, string.Empty);")]
 
-        [DataRow(true, @"log.Log(LogLevel.Critical, string.Empty);")]
-        [DataRow(true, @"log.Log(exception: ex, message: string.Empty, logLevel: LogLevel.Error);")]
+        [DataRow(true, @"log.Log(LogLevel.Critical, string.Empty);")] // It is not required to pass the exception to the log call
+        [DataRow(true, @"log.Log(exception: ex, message: string.Empty, logLevel: LogLevel.Error);")] // Out of order named args
         [DataRow(true, @"log.Log(message: string.Empty, logLevel: LogLevel.Error);")]
-
+        [DataRow(true, @"log.Log(Enum.Parse<LogLevel>(""Trace""), string.Empty);")] // call is compliant, if LogLevel is not known at compile time
+        // Calls to ILogger.Log
         [DataRow(true, @"log.Log(LogLevel.Error, new EventId(), (object)null, ex, (s, e) => string.Empty);")]
         [DataRow(true, @"log.Log(eventId: new EventId(), state: (object)null, exception: ex, formatter: (s, e) => string.Empty, logLevel: LogLevel.Error);")]
         [DataRow(false, @"log.Log(eventId: new EventId(), state: (object)null, exception: ex, formatter: (s, e) => string.Empty, logLevel: LogLevel.Trace);")]
-
+        // Receiver is complicated expression
         [DataRow(true, @"((ILogger)log).Log(LogLevel.Critical, string.Empty);")]
+        [DataRow(false, @"((ILogger)log).Log(LogLevel.Trace, string.Empty);")]
         [DataRow(true, @"new Func<ILogger>(()=>log)().Log(LogLevel.Critical, string.Empty);")]
+        [DataRow(true, @"new Func<ILogger>(()=>log)().Log(LogLevel.Error, new EventId(), (object)null, ex, (s, e) => string.Empty);")]
         public void AzureFunctionsLogFailures_VerifyLoggerCalls(bool isCompliant, string loggerInvocation)
         {
             var code = @$"

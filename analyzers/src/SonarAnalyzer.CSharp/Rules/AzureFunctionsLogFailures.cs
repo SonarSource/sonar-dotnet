@@ -144,7 +144,7 @@ namespace SonarAnalyzer.Rules.CSharp
                         && LoggerExtensions.Value is { } loggerExtensions
                         && loggerExtensions.Equals(symbol.ContainingType)
                         && (symbol.Name is "LogWarning" or "LogError" or "LogCritical"
-                           || (symbol.Name is "Log" && IsPassingAnValidLogLevel(invocation, symbol))))
+                           || (symbol.Name is "Log" && IsPassingValidLogLevel(invocation, symbol))))
                     {
                         return true;
                     }
@@ -154,7 +154,7 @@ namespace SonarAnalyzer.Rules.CSharp
                             && (symbol.OriginalDefinition.Equals(loggerLog)
                                 || symbol.ContainingType.FindImplementationForInterfaceMember(loggerLog)?.Equals(symbol.OriginalDefinition) == true))
                         {
-                            return IsPassingAnValidLogLevel(invocation, symbol);
+                            return IsPassingValidLogLevel(invocation, symbol);
                         }
                     }
                 }
@@ -162,11 +162,12 @@ namespace SonarAnalyzer.Rules.CSharp
                 return false;
             }
 
-            private bool IsPassingAnValidLogLevel(InvocationExpressionSyntax invocation, IMethodSymbol symbol) =>
+            private bool IsPassingValidLogLevel(InvocationExpressionSyntax invocation, IMethodSymbol symbol) =>
                 symbol.Parameters.FirstOrDefault(x => x.Name == "logLevel") is { } logLevelParameter
                     && new CSharpMethodParameterLookup(invocation.ArgumentList, symbol).TryGetNonParamsSyntax(logLevelParameter, out var argumentSyntax)
                     && Model.GetConstantValue(argumentSyntax) is { HasValue: true, Value: int logLevel }
-                    && ValidLogLevel.Contains(logLevel);
+                        ? ValidLogLevel.Contains(logLevel)
+                        : true; // Compliant: Some non-constant value is passed as loglevel.
 
             private bool IsExpressionAnILogger(ExpressionSyntax expression) =>
                 Model.GetSymbolInfo(expression, CancellationToken).Symbol switch
