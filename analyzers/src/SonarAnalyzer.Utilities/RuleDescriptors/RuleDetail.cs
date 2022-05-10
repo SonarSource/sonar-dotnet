@@ -49,10 +49,9 @@ namespace SonarAnalyzer.RuleDescriptors
         public string Remediation { get; }
         public string RemediationCost { get; }
         public List<string> Tags { get; }
-        public List<RuleParameter> Parameters { get; } = new();
-        public List<string> CodeFixTitles { get; } = new();
+        public List<RuleParameter> Parameters { get; }
 
-        public RuleDetail(AnalyzerLanguage language, ResourceManager resources, string id)
+        public RuleDetail(AnalyzerLanguage language, ResourceManager resources, string id, IEnumerable<RuleParameter> parameters)
         {
             Key = id;
             Type = BackwardsCompatibleType(resources.GetString($"{id}_Type"));
@@ -64,6 +63,7 @@ namespace SonarAnalyzer.RuleDescriptors
             Remediation = SonarQubeRemediationFunction(resources.GetString($"{id}_Remediation"));
             RemediationCost = resources.GetString($"{id}_RemediationCost");
             Tags = resources.GetString($"{id}_Tags").Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries).ToList();
+            Parameters = parameters.ToList();
         }
 
         // SonarQube before 7.3 supports only 3 types of issues: BUG, CODE_SMELL and VULNERABILITY.
