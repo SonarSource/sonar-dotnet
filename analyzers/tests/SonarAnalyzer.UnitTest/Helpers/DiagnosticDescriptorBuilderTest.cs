@@ -178,6 +178,21 @@ namespace SonarAnalyzer.UnitTest.Helpers
             f.Should().Throw<UnexpectedValueException>().WithMessage("Unexpected Type value: Lorem Ipsum");
         }
 
+        [DataTestMethod]
+        [DataRow("Minor", "BUG", "Minor Bug")]
+        [DataRow("Major", "BUG", "Major Bug")]
+        [DataRow("Major", "CODE_SMELL", "Major Code Smell")]
+        [DataRow("Major", "VULNERABILITY", "Major Vulnerability")]
+        [DataRow("Major", "SECURITY_HOTSPOT", "Major Security Hotspot")]
+        [DataRow("Critical", "BUG", "Critical Bug")]
+        [DataRow("Blocker", "BUG", "Blocker Bug")]
+        [DataRow("Whatever Xxx", "BUG", "Whatever Xxx Bug")]
+        public void Create_ComputesCategory(string severity, string type, string expected)
+        {
+            var rule = new RuleDescriptor("Sxxxx", string.Empty, type, severity, SourceScope.Main, true, string.Empty);
+            DiagnosticDescriptorBuilder.Create(AnalyzerLanguage.CSharp, rule, "Sxxxx Message", false).Category.Should().Be(expected);
+        }
+
         private static RuleDescriptor CreateRuleDescriptor(SourceScope scope, bool sonarWay) =>
             new("Sxxxx", "Sxxxx Title", "BUG", "Major", scope, sonarWay, "Sxxxx Description");
 
