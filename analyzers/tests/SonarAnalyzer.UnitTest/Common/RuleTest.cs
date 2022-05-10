@@ -72,11 +72,38 @@ namespace SonarAnalyzer.UnitTest.Common
         }
 
         [TestMethod]
-        public void SonarDiagnosticAnalyzer_IsUsedInAllRules()
+        public void AllAnalyzers_InheritSonarDiagnosticAnalyzer()
         {
-            foreach (var analyzer in RuleFinder.RuleAnalyzerTypes.Concat(RuleFinder.UtilityAnalyzerTypes).Where(x => x != typeof(SonarDiagnosticAnalyzer)))
+            foreach (var analyzer in RuleFinder.AllAnalyzerTypes)
             {
                 analyzer.Should().BeAssignableTo<SonarDiagnosticAnalyzer>($"{analyzer.Name} is not a subclass of SonarDiagnosticAnalyzer");
+            }
+        }
+
+        [TestMethod]
+        public void CodeFixes_InheritSonarCodeFix()
+        {
+            foreach (var codeFix in RuleFinder.CodeFixTypes)
+            {
+                codeFix.Should().BeAssignableTo<SonarCodeFix>($"{codeFix.Name} is not a subclass of SonarCodeFix");
+            }
+        }
+
+        [TestMethod]
+        public void Rules_WithDiagnosticAnalyzerAttribute_AreNotAbstract()
+        {
+            foreach (var analyzer in RuleFinder.AllAnalyzerTypes)
+            {
+                analyzer.IsAbstract.Should().BeFalse();
+            }
+        }
+
+        [TestMethod]
+        public void CodeFixes_WithExportCodeFixProviderAttribute_AreNotAbstract()
+        {
+            foreach (var codeFix in RuleFinder.CodeFixTypes)
+            {
+                codeFix.IsAbstract.Should().BeFalse();
             }
         }
 

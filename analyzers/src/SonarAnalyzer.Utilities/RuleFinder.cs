@@ -23,6 +23,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using Microsoft.CodeAnalysis;
+using Microsoft.CodeAnalysis.CodeFixes;
 using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
@@ -32,23 +33,24 @@ namespace SonarAnalyzer.Utilities
 {
     internal static class RuleFinder
     {
-        public static IEnumerable<Type> RuleAnalyzerTypes { get; } // Rule-only, without utility analyzers
+        public static IEnumerable<Type> AllAnalyzerTypes { get; }       // Rules and Utility analyzers
+        public static IEnumerable<Type> RuleAnalyzerTypes { get; }      // Rules-only, without Utility analyzers
         public static IEnumerable<Type> UtilityAnalyzerTypes { get; }
         public static IEnumerable<Type> CodeFixTypes { get; }
 
         static RuleFinder()
         {
             var allTypes = new[] { typeof(Rules.CSharp.FlagsEnumZeroMember), typeof(Rules.VisualBasic.FlagsEnumZeroMember), typeof(Rules.Common.FlagsEnumZeroMemberBase<int>) }
-                .SelectMany(x => x.Assembly.GetTypes());
-            CodeFixTypes = allTypes.Where(x => typeof(SonarCodeFix).IsAssignableFrom(x) && !x.IsAbstract);
-
-            var allAnalyzers = allTypes.Where(x => x.IsSubclassOf(typeof(DiagnosticAnalyzer)) && x.GetCustomAttributes<DiagnosticAnalyzerAttribute>().Any()).ToArray();
-            RuleAnalyzerTypes = allAnalyzers.Where(x => !typeof(UtilityAnalyzerBase).IsAssignableFrom(x)).ToList();
-            UtilityAnalyzerTypes = allAnalyzers.Where(x => typeof(UtilityAnalyzerBase).IsAssignableFrom(x)).ToList();
+                .SelectMany(x => x.Assembly.GetExportedTypes())
+                .ToArray();
+            CodeFixTypes = allTypes.Where(x => typeof(CodeFixProvider).IsAssignableFrom(x) && x.GetCustomAttributes<ExportCodeFixProviderAttribute>().Any()).ToArray();
+            AllAnalyzerTypes = allTypes.Where(x => x.IsSubclassOf(typeof(DiagnosticAnalyzer)) && x.GetCustomAttributes<DiagnosticAnalyzerAttribute>().Any()).ToArray();
+            UtilityAnalyzerTypes = AllAnalyzerTypes.Where(x => typeof(UtilityAnalyzerBase).IsAssignableFrom(x)).ToList();
+            RuleAnalyzerTypes = AllAnalyzerTypes.Except(UtilityAnalyzerTypes).ToList();
         }
 
         public static IEnumerable<Type> GetAnalyzerTypes(AnalyzerLanguage language) =>
-            RuleAnalyzerTypes.Where(type => TargetLanguage(type).IsAlso(language));
+            RuleAnalyzerTypes.Where(x => TargetLanguage(x).IsAlso(language));
 
         public static IEnumerable<DiagnosticAnalyzer> CreateAnalyzers(AnalyzerLanguage language, bool includeUtilityAnalyzers)
         {
@@ -57,7 +59,7 @@ namespace SonarAnalyzer.Utilities
             {
                 types = types.Concat(UtilityAnalyzerTypes.Where(x => TargetLanguage(x).IsAlso(language)));
             }
-            foreach (var type in types.Where(x => !x.IsAbstract))
+            foreach (var type in types)
             {
                 yield return typeof(HotspotDiagnosticAnalyzer).IsAssignableFrom(type) && type.GetConstructor(new[] { typeof(IAnalyzerConfiguration) }) != null
                     ? (DiagnosticAnalyzer)Activator.CreateInstance(type, AnalyzerConfiguration.AlwaysEnabled)
