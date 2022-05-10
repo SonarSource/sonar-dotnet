@@ -58,6 +58,9 @@ namespace SonarAnalyzer.UnitTest.Rules
         [DataRow(true, @"log.Log(LogLevel.Error, new EventId(), (object)null, ex, (s, e) => string.Empty);")]
         [DataRow(true, @"log.Log(eventId: new EventId(), state: (object)null, exception: ex, formatter: (s, e) => string.Empty, logLevel: LogLevel.Error);")]
         [DataRow(false, @"log.Log(eventId: new EventId(), state: (object)null, exception: ex, formatter: (s, e) => string.Empty, logLevel: LogLevel.Trace);")]
+
+        [DataRow(true, @"((ILogger)log).Log(LogLevel.Critical, string.Empty);")]
+        [DataRow(true, @"new Func<ILogger>(()=>log)().Log(LogLevel.Critical, string.Empty);")]
         public void AzureFunctionsLogFailures_VerifyLoggerCalls(bool isCompliant, string loggerInvocation)
         {
             var code = @$"
@@ -73,7 +76,7 @@ using System;
             try {{ }}
             catch(Exception ex) // {(isCompliant ? "Compliant" : "Noncompliant")}
             {{
-                {loggerInvocation}
+                {loggerInvocation} // {(isCompliant ? string.Empty : "Secondary")}
             }}
         }}
     }}

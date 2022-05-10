@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Azure.WebJobs;
 using Microsoft.Azure.WebJobs.Extensions.Http;
 using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Logging.Abstractions;
 using System;
 using System.IO;
 using System.Threading.Tasks;
@@ -32,9 +33,58 @@ namespace AzureFunctions1
             {
                 return new EmptyResult();
             }
-            catch(Exception ex) // Compliant
+            catch (Exception ex) // Compliant
             {
                 log.LogError(ex, "");
+                return new EmptyResult();
+            }
+        }
+
+        [FunctionName("Function1")]
+        public static async Task<IActionResult> LogExceptionInWrappedLogger([HttpTrigger(AuthorizationLevel.Function, "get", "post", Route = null)] HttpRequest req, ILogger log)
+        {
+            try
+            {
+                return new EmptyResult();
+            }
+            catch (Exception ex) // Compliant
+            {
+                var nullLogger = NullLogger.Instance;
+                nullLogger.Log(LogLevel.Error, new EventId(), (object)null, ex, (s, e) => string.Empty);
+                return new EmptyResult();
+            }
+        }
+
+        private static bool True(Action a)
+        {
+            a();
+            return true;
+        }
+
+        [FunctionName("Function1")]
+        public static async Task<IActionResult> LogExceptionInExceptionFilter([HttpTrigger(AuthorizationLevel.Function, "get", "post", Route = null)] HttpRequest req, ILogger log)
+        {
+            try
+            {
+                return new EmptyResult();
+            }
+            catch (Exception ex) when (True(() => log.LogError(ex, ""))) // Compliant
+            {
+                return new EmptyResult();
+            }
+        }
+
+        [FunctionName("Function1")]
+        public static async Task<IActionResult> LogExceptionInExceptionFilterWrongLogLevel([HttpTrigger(AuthorizationLevel.Function, "get", "post", Route = null)] HttpRequest req, ILogger log)
+        {
+            try
+            {
+                return new EmptyResult();
+            }
+            catch (Exception ex) when              // Noncompliant
+                (True(() => log.LogTrace(ex, ""))) // Secondary
+                //          ^^^^^^^^^^^^^^^^^^^^
+            {
                 return new EmptyResult();
             }
         }

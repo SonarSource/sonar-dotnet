@@ -47,15 +47,15 @@ namespace SonarAnalyzer.Rules.CSharp
                     if (IsContainingMethodAzureFunction(c.SemanticModel, catchClause))
                     {
                         var iLogger = c.SemanticModel.Compilation.GetTypeByMetadataName(KnownType.Microsoft_Extensions_Logging_ILogger.TypeName);
-                        if (!CallsToILogger(c.SemanticModel, iLogger, catchClause, c.CancellationToken))
+                        if (iLogger is not null && InvalidCallsToILogger(c.SemanticModel, iLogger, catchClause, c.CancellationToken) is ImmutableArray<ExpressionSyntax> secondaryLocations)
                         {
-                            c.ReportIssue(Diagnostic.Create(Rule, catchClause.CatchKeyword.GetLocation()));
+                            c.ReportIssue(Diagnostic.Create(Rule, catchClause.CatchKeyword.GetLocation(), additionalLocations: secondaryLocations.Select(x => x.GetLocation())));
                         }
                     }
                 },
                 SyntaxKind.CatchClause);
 
-        private static bool CallsToILogger(SemanticModel semanticModel, ITypeSymbol iLogger, CatchClauseSyntax catchClause, CancellationToken cancellationToken)
+        private static ImmutableArray<ExpressionSyntax>? InvalidCallsToILogger(SemanticModel semanticModel, ITypeSymbol iLogger, CatchClauseSyntax catchClause, CancellationToken cancellationToken)
         {
             var walker = new LoggerCallWalker(semanticModel, iLogger, cancellationToken);
             if (catchClause.Block is { } block)
@@ -68,23 +68,18 @@ namespace SonarAnalyzer.Rules.CSharp
                 walker.Visit(filterExpression);
             }
 
-            return walker.HasValidLoggerCall;
+            return walker.HasValidLoggerCall
+                ? null
+                : walker.InvalidLoggerInvocations;
         }
 
         private static bool IsContainingMethodAzureFunction(SemanticModel model, SyntaxNode node)
         {
-            var method = node.Ancestors().OfType<MethodDeclarationSyntax>().FirstOrDefault();
-            if (method.AttributeLists.Any()) // FunctionName has [AttributeUsage(AttributeTargets.Method, AllowMultiple = false, Inherited = false)] so there must be an attribute
-            {
-                var methodSymbol = model.GetDeclaredSymbol(method);
-                var functionNameAttribute = model.Compilation.GetTypeByMetadataName(KnownType.Microsoft_Azure_WebJobs_FunctionNameAttribute.TypeName);
-                if (methodSymbol.GetAttributes().Any(a => a.AttributeClass.Equals(functionNameAttribute)))
-                {
-                    return true;
-                }
-            }
-
-            return false;
+            return node.Ancestors().OfType<MethodDeclarationSyntax>().FirstOrDefault() is { } method
+                && method.AttributeLists.Any() // FunctionName has [AttributeUsage(AttributeTargets.Method, AllowMultiple = false, Inherited = false)] so there must be an attribute
+                && model.GetDeclaredSymbol(method) is { } methodSymbol
+                && model.Compilation.GetTypeByMetadataName(KnownType.Microsoft_Azure_WebJobs_FunctionNameAttribute.TypeName) is { } functionNameAttribute
+                && methodSymbol.GetAttributes().Any(a => a.AttributeClass.Equals(functionNameAttribute));
         }
 
         private sealed class LoggerCallWalker : SafeCSharpSyntaxWalker
@@ -147,8 +142,9 @@ namespace SonarAnalyzer.Rules.CSharp
             {
                 if (Model.GetSymbolInfo(invocation, CancellationToken).Symbol is IMethodSymbol symbol)
                 {
-                    if (LoggerExtensions.Value is { } loggerExtensions
-                        && loggerExtensions?.Equals(symbol?.ContainingType) == true
+                    if (symbol.IsExtensionMethod
+                        && LoggerExtensions.Value is { } loggerExtensions
+                        && loggerExtensions.Equals(symbol.ContainingType)
                         && (symbol.Name is "LogWarning" or "LogError" or "LogCritical"
                            || (symbol.Name is "Log" && IsPassingAnValidLogLevel(invocation, symbol))))
                     {
@@ -156,8 +152,9 @@ namespace SonarAnalyzer.Rules.CSharp
                     }
                     else
                     {
-                        if (symbol.ContainingType.Equals(ILogger.Value)
-                            && symbol.OriginalDefinition.Equals(ILogger_Log.Value))
+                        if (ILogger_Log.Value is { } loggerLog
+                            && (symbol.OriginalDefinition.Equals(loggerLog)
+                                || symbol.ContainingType.FindImplementationForInterfaceMember(loggerLog)?.Equals(symbol.OriginalDefinition) == true))
                         {
                             return IsPassingAnValidLogLevel(invocation, symbol);
                         }
@@ -185,7 +182,8 @@ namespace SonarAnalyzer.Rules.CSharp
             private bool IsExpressionAnILogger(ExpressionSyntax expression)
             {
                 var methodSymbol = Model.GetSymbolInfo(expression, CancellationToken).Symbol as IMethodSymbol;
-                return ILoggerSymbol.Equals(methodSymbol?.ReceiverType);
+                return ILoggerSymbol.Equals(methodSymbol?.ReceiverType)
+                    || methodSymbol?.ReceiverType?.Implements(ILoggerSymbol) == true;
             }
 
             public override void VisitArgument(ArgumentSyntax node)
