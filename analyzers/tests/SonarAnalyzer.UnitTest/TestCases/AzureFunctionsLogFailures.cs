@@ -88,5 +88,21 @@ namespace AzureFunctions1
                 return new EmptyResult();
             }
         }
+
+        private static void LoggerHelper(ILogger logger) { }
+
+        [FunctionName("Function1")]
+        public static async Task<IActionResult> LoggerGetsPassedToFunction([HttpTrigger(AuthorizationLevel.Function, "get", "post", Route = null)] HttpRequest req, ILogger log)
+        {
+            try
+            {
+                return new EmptyResult();
+            }
+            catch (Exception ex)
+            {
+                LoggerHelper(log); // Compliant. We don't follow the call, but we assume some decent logging takes place, if the logger gets passed along.
+                return new EmptyResult();
+            }
+        }
     }
 }

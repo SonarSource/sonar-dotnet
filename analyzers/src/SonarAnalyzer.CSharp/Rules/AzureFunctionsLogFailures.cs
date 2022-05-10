@@ -96,18 +96,16 @@ namespace SonarAnalyzer.Rules.CSharp
             public LoggerCallWalker(SemanticModel model, ITypeSymbol iLoggerSymbol, CancellationToken cancellationToken)
             {
                 Model = model;
-                ILoggerSymbol = iLoggerSymbol;
+                ILogger = iLoggerSymbol;
                 CancellationToken = cancellationToken;
                 LoggerExtensions = new Lazy<INamedTypeSymbol>(() => Model.Compilation.GetTypeByMetadataName(KnownType.Microsoft_Extensions_Logging_LoggerExtensions.TypeName));
-                ILogger = new Lazy<INamedTypeSymbol>(() => Model.Compilation.GetTypeByMetadataName(KnownType.Microsoft_Extensions_Logging_ILogger.TypeName));
-                ILogger_Log = new Lazy<IMethodSymbol>(() => ILogger.Value?.GetMembers().OfType<IMethodSymbol>().FirstOrDefault(x => x.Name == "Log"));
+                ILogger_Log = new Lazy<IMethodSymbol>(() => ILogger.GetMembers().OfType<IMethodSymbol>().FirstOrDefault(x => x.Name == "Log"));
             }
 
             private SemanticModel Model { get; }
-            private ITypeSymbol ILoggerSymbol { get; }
+            private ITypeSymbol ILogger { get; }
             private CancellationToken CancellationToken { get; }
             private Lazy<INamedTypeSymbol> LoggerExtensions { get; }
-            private Lazy<INamedTypeSymbol> ILogger { get; }
             private Lazy<IMethodSymbol> ILogger_Log { get; }
             public bool HasValidLoggerCall { get; private set; }
             public ImmutableArray<ExpressionSyntax> InvalidLoggerInvocations => builder.ToImmutableArray();
@@ -164,27 +162,19 @@ namespace SonarAnalyzer.Rules.CSharp
                 return false;
             }
 
-            private bool IsPassingAnValidLogLevel(InvocationExpressionSyntax invocation, IMethodSymbol symbol)
-            {
-                var lookup = new CSharpMethodParameterLookup(invocation.ArgumentList, symbol);
-                var logLevelParameter = symbol.Parameters.FirstOrDefault(x => x.Name == "logLevel");
-                if (lookup.TryGetNonParamsSyntax(logLevelParameter, out var argumentSyntax))
-                {
-                    var value = Model.GetConstantValue(argumentSyntax);
-                    if (value.HasValue && value.Value is int logLevel && ValidLogLevel.Contains(logLevel))
-                    {
-                        return true;
-                    }
-                }
-                return false;
-            }
+            private bool IsPassingAnValidLogLevel(InvocationExpressionSyntax invocation, IMethodSymbol symbol) =>
+                symbol.Parameters.FirstOrDefault(x => x.Name == "logLevel") is { } logLevelParameter
+                    && new CSharpMethodParameterLookup(invocation.ArgumentList, symbol).TryGetNonParamsSyntax(logLevelParameter, out var argumentSyntax)
+                    && Model.GetConstantValue(argumentSyntax) is { HasValue: true, Value: int logLevel }
+                    && ValidLogLevel.Contains(logLevel);
 
-            private bool IsExpressionAnILogger(ExpressionSyntax expression)
-            {
-                var methodSymbol = Model.GetSymbolInfo(expression, CancellationToken).Symbol as IMethodSymbol;
-                return ILoggerSymbol.Equals(methodSymbol?.ReceiverType)
-                    || methodSymbol?.ReceiverType?.Implements(ILoggerSymbol) == true;
-            }
+            private bool IsExpressionAnILogger(ExpressionSyntax expression) =>
+                Model.GetSymbolInfo(expression, CancellationToken).Symbol switch
+                {
+                    IMethodSymbol { ReceiverType: { } receiver } => receiver.DerivesOrImplements(ILogger),
+                    IParameterSymbol { Type: { } type } => type.DerivesOrImplements(ILogger),
+                    _ => false,
+                };
 
             public override void VisitArgument(ArgumentSyntax node)
             {
