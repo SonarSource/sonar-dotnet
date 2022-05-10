@@ -105,6 +105,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 CancellationToken = cancellationToken;
                 LoggerExtensions = new Lazy<INamedTypeSymbol>(() => Model.Compilation.GetTypeByMetadataName(KnownType.Microsoft_Extensions_Logging_LoggerExtensions.TypeName));
                 ILogger = new Lazy<INamedTypeSymbol>(() => Model.Compilation.GetTypeByMetadataName(KnownType.Microsoft_Extensions_Logging_ILogger.TypeName));
+                ILogger_Log = new Lazy<IMethodSymbol>(() => ILogger.Value?.GetMembers().OfType<IMethodSymbol>().FirstOrDefault(x => x.Name == "Log"));
             }
 
             private SemanticModel Model { get; }
@@ -112,6 +113,7 @@ namespace SonarAnalyzer.Rules.CSharp
             private CancellationToken CancellationToken { get; }
             private Lazy<INamedTypeSymbol> LoggerExtensions { get; }
             private Lazy<INamedTypeSymbol> ILogger { get; }
+            private Lazy<IMethodSymbol> ILogger_Log { get; }
             public bool HasValidLoggerCall { get; private set; }
             public ImmutableArray<ExpressionSyntax> InvalidLoggerInvocations => builder.ToImmutableArray();
 
@@ -154,9 +156,8 @@ namespace SonarAnalyzer.Rules.CSharp
                     }
                     else
                     {
-                        var ilogger = ILogger.Value;
-                        // ToDo check for "is implementing ILogger.Log"
-                        if (ilogger?.Equals(symbol?.ContainingType) == true && symbol.Name == "Log")
+                        if (symbol.ContainingType.Equals(ILogger.Value)
+                            && symbol.OriginalDefinition.Equals(ILogger_Log.Value))
                         {
                             return IsPassingAnValidLogLevel(invocation, symbol);
                         }
