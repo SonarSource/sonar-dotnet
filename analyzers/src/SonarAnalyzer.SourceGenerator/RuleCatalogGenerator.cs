@@ -44,13 +44,13 @@ namespace SonarAnalyzer.SourceGenerator
             {
                 throw new NotSupportedException("Cannot find ProjectDir");
             }
-            var language = context.Compilation.Language switch
+            var language = Path.GetFileName(projectDir.TrimEnd(Path.DirectorySeparatorChar)) switch
             {
-                LanguageNames.CSharp => "cs",
-                LanguageNames.VisualBasic => "vbnet",
-                _ => throw new ArgumentException($"Unexpected language: {context.Compilation.Language}")
+                "SonarAnalyzer.CSharp" => "cs",
+                "SonarAnalyzer.VisualBasic" => "vbnet",
+                _ => throw new ArgumentException($"Unexpected projectDir: {projectDir}")
             };
-            context.AddSource("RuleCatalog", GenerateSource(RuleDescriptorArguments(Path.Combine(projectDir, "..", "..", "rspec", language))));
+            context.AddSource($"RuleCatalog.{language}.g.cs", GenerateSource(RuleDescriptorArguments(Path.Combine(projectDir, "..", "..", "rspec", language))));
         }
 
         private static IEnumerable<string[]> RuleDescriptorArguments(string rspecDirectory)
