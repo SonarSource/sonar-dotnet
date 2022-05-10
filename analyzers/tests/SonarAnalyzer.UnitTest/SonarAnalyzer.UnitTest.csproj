@@ -98,10 +98,11 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Using Include="System" />
+    <Using Include="System.Collections.Generic" />
     <Using Include="FluentAssertions" />
     <Using Include="Microsoft.VisualStudio.TestTools.UnitTesting" />
     <Using Include="SonarAnalyzer.UnitTest.TestFramework" />
-    <Using Include="System" />
   </ItemGroup>
 
 </Project>

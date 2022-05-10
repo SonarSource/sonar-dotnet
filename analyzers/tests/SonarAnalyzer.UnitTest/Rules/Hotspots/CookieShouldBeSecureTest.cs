@@ -24,7 +24,6 @@ using System.IO;
 using System.Linq;
 #endif
 
-using System.Collections.Generic;
 using Microsoft.CodeAnalysis;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Rules.CSharp;

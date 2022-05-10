@@ -20,7 +20,6 @@
 
 #if NETFRAMEWORK // IdentityModel is not available on .Net Core
 
-using System.Collections.Generic;
 using System.Linq;
 using Microsoft.CodeAnalysis;
 using SonarAnalyzer.Common;
