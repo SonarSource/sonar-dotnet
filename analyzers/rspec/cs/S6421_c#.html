@@ -1,0 +1,41 @@
+<p>The top-most level of an Azure Function code should include a try/catch block to capture and log all errors so you can monitor the health of the
+application effectively. In case a retry policy has been defined for your Azure Function, you should rethrow any errors that should result in a
+retry.</p>
+<h2>Noncompliant Code Example</h2>
+<pre>
+[FunctionName("HttpExample")]
+public static async Task&lt;IActionResult&gt; Run(
+    [HttpTrigger(AuthorizationLevel.Function, "get", "post", Route = null)] HttpRequest req)
+{
+    // Noncompliant
+    string requestBody = await new StreamReader(req.Body).ReadToEndAsync();
+    dynamic data = JsonConvert.DeserializeObject(requestBody);
+    // do stuff
+}
+</pre>
+<h2>Compliant Solution</h2>
+<pre>
+[FunctionName("HttpExample")]
+public static async Task&lt;IActionResult&gt; Run(
+    [HttpTrigger(AuthorizationLevel.Function, "get", "post", Route = null)] HttpRequest req)
+{
+    try
+    {
+        string requestBody = await new StreamReader(req.Body).ReadToEndAsync();
+        dynamic data = JsonConvert.DeserializeObject(requestBody);
+        // do stuff
+    }
+    catch (Exception ex)
+    {
+        // do stuff
+    }
+}
+</pre>
+<h2>See</h2>
+<ul>
+  <li> <a href="https://docs.microsoft.com/en-us/azure/azure-functions/functions-bindings-error-pages?tabs=csharp">Azure Functions error handling and
+  retries</a> </li>
+  <li> <a href="https://docs.microsoft.com/en-us/azure/azure-functions/functions-bindings-error-pages?tabs=csharp#retry-policies-preview">Azure
+  Functions retry policies</a> </li>
+</ul>
+
