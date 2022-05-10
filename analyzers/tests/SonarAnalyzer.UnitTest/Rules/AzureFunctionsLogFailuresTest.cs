@@ -18,8 +18,6 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System.Linq;
-using Microsoft.CodeAnalysis;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.Rules.CSharp;
 using SonarAnalyzer.UnitTest.MetadataReferences;
@@ -35,7 +33,53 @@ namespace SonarAnalyzer.UnitTest.Rules
 
         [TestMethod]
         public void AzureFunctionsLogFailures_CS() =>
-            builder.AddPaths("AzureFunctionsLogFailures.cs").Verify();
+            builder.AddPaths("AzureFunctionsLogFailures.cs").WithConcurrentAnalysis(false).Verify();
+
+        [DataTestMethod]
+        [DataRow(true, @"log.LogError(ex, string.Empty);")]
+        [DataRow(true, @"log.LogCritical(ex, string.Empty);")]
+        [DataRow(true, @"log.LogWarning(ex, string.Empty);")]
+        [DataRow(false, @"log.LogDebug(ex, string.Empty);")]
+        [DataRow(false, @"log.LogInformation(ex, string.Empty);")]
+        [DataRow(false, @"log.LogTrace(ex, string.Empty);")]
+
+        [DataRow(true, @"log.Log(LogLevel.Warning, ex, string.Empty);")]
+        [DataRow(true, @"log.Log(LogLevel.Error, ex, string.Empty);")]
+        [DataRow(true, @"log.Log(LogLevel.Critical, ex, string.Empty);")]
+        [DataRow(false, @"log.Log(LogLevel.Trace, ex, string.Empty);")]
+        [DataRow(false, @"log.Log(LogLevel.Debug, ex, string.Empty);")]
+        [DataRow(false, @"log.Log(LogLevel.Information, ex, string.Empty);")]
+        [DataRow(false, @"log.Log(LogLevel.None, ex, string.Empty);")]
+
+        [DataRow(true, @"log.Log(LogLevel.Critical, string.Empty);")]
+        [DataRow(true, @"log.Log(exception: ex, message: string.Empty, logLevel: LogLevel.Error);")]
+        [DataRow(true, @"log.Log(message: string.Empty, logLevel: LogLevel.Error);")]
+
+        [DataRow(true, @"log.Log(LogLevel.Error, new EventId(), (object)null, ex, (s, e) => string.Empty);")]
+        [DataRow(true, @"log.Log(eventId: new EventId(), state: (object)null, exception: ex, formatter: (s, e) => string.Empty, logLevel: LogLevel.Error);")]
+        [DataRow(false, @"log.Log(eventId: new EventId(), state: (object)null, exception: ex, formatter: (s, e) => string.Empty, logLevel: LogLevel.Trace);")]
+        public void AzureFunctionsLogFailures_VerifyLoggerCalls(bool isCompliant, string loggerInvocation)
+        {
+            var code = @$"
+using Microsoft.Azure.WebJobs;
+using Microsoft.Extensions.Logging;
+using System;
+
+    public static class Function1
+    {{
+        [FunctionName(""Function1"")]
+        public static void Run(ILogger log)
+        {{
+            try {{ }}
+            catch(Exception ex) // {(isCompliant ? "Compliant" : "Noncompliant")}
+            {{
+                {loggerInvocation}
+            }}
+        }}
+    }}
+";
+            builder.AddSnippet(code).Verify();
+        }
 #endif
     }
 }
