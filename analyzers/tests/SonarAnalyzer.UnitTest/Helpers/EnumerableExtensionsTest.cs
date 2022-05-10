@@ -20,7 +20,6 @@
 
 #pragma warning disable SA1122 // Use string.Empty for empty strings
 
-using System;
 using System.Collections.Generic;
 using SonarAnalyzer.Helpers;
 

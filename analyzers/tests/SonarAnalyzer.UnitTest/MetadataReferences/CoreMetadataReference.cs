@@ -20,7 +20,6 @@
 
 #if !NETFRAMEWORK
 
-using System;
 using Microsoft.CodeAnalysis;
 using static SonarAnalyzer.UnitTest.MetadataReferences.MetadataReferenceFactory;
 
