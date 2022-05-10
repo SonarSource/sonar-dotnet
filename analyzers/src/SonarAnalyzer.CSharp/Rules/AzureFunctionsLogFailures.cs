@@ -18,6 +18,7 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System;
 using System.Collections.Immutable;
 using System.Linq;
 using System.Threading;
@@ -102,11 +103,15 @@ namespace SonarAnalyzer.Rules.CSharp
                 Model = model;
                 ILoggerSymbol = iLoggerSymbol;
                 CancellationToken = cancellationToken;
+                LoggerExtensions = new Lazy<INamedTypeSymbol>(() => Model.Compilation.GetTypeByMetadataName(KnownType.Microsoft_Extensions_Logging_LoggerExtensions.TypeName));
+                ILogger = new Lazy<INamedTypeSymbol>(() => Model.Compilation.GetTypeByMetadataName(KnownType.Microsoft_Extensions_Logging_ILogger.TypeName));
             }
 
-            public SemanticModel Model { get; }
-            public ITypeSymbol ILoggerSymbol { get; }
-            public CancellationToken CancellationToken { get; }
+            private SemanticModel Model { get; }
+            private ITypeSymbol ILoggerSymbol { get; }
+            private CancellationToken CancellationToken { get; }
+            private Lazy<INamedTypeSymbol> LoggerExtensions { get; }
+            private Lazy<INamedTypeSymbol> ILogger { get; }
             public bool HasValidLoggerCall { get; private set; }
             public ImmutableArray<ExpressionSyntax> InvalidLoggerInvocations => builder.ToImmutableArray();
 
@@ -138,25 +143,23 @@ namespace SonarAnalyzer.Rules.CSharp
 
             private bool IsValidLogCall(InvocationExpressionSyntax invocation)
             {
-                var symbol = Model.GetSymbolInfo(invocation, CancellationToken).Symbol as IMethodSymbol;
-                var loggerExtensions = Model.Compilation.GetTypeByMetadataName(KnownType.Microsoft_Extensions_Logging_LoggerExtensions.TypeName);
-                if (loggerExtensions?.Equals(symbol?.ContainingType) == true)
+                if (Model.GetSymbolInfo(invocation, CancellationToken).Symbol is IMethodSymbol symbol)
                 {
-                    if (symbol.Name is "LogWarning" or "LogError" or "LogCritical")
+                    if (LoggerExtensions.Value is { } loggerExtensions
+                        && loggerExtensions?.Equals(symbol?.ContainingType) == true
+                        && (symbol.Name is "LogWarning" or "LogError" or "LogCritical"
+                           || (symbol.Name is "Log" && IsPassingAnValidLogLevel(invocation, symbol))))
                     {
                         return true;
                     }
-                    if (symbol.Name is "Log")
+                    else
                     {
-                        return IsPassingAnValidLogLevel(invocation, symbol);
-                    }
-                }
-                else
-                {
-                    var ilogger = Model.Compilation.GetTypeByMetadataName(KnownType.Microsoft_Extensions_Logging_ILogger.TypeName);
-                    if (ilogger?.Equals(symbol?.ContainingType) == true && symbol.Name == "Log")
-                    {
-                        return IsPassingAnValidLogLevel(invocation, symbol);
+                        var ilogger = ILogger.Value;
+                        // ToDo check for "is implementing ILogger.Log"
+                        if (ilogger?.Equals(symbol?.ContainingType) == true && symbol.Name == "Log")
+                        {
+                            return IsPassingAnValidLogLevel(invocation, symbol);
+                        }
                     }
                 }
 
