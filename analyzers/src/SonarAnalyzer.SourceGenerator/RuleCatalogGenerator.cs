@@ -20,6 +20,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -29,6 +30,7 @@ using Newtonsoft.Json.Linq;
 namespace SonarAnalyzer.SourceGenerator
 {
     [Generator]
+    [ExcludeFromCodeCoverage]
     public class RuleCatalogGenerator : ISourceGenerator
     {
         private const string SonarWayFileName = "Sonar_way_profile.json";
