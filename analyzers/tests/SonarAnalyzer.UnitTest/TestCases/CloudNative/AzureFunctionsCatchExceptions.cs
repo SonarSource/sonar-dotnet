@@ -5,12 +5,28 @@ using Microsoft.Azure.WebJobs;
 
 namespace Microsoft.Azure.WebJobs
 {
-    public class FunctionNameAttribute { }  // FIXME: Fake, remove before merging
+    public class FunctionNameAttribute : Attribute { public FunctionNameAttribute(string name) { } }  // FIXME: Fake, remove before merging
+}
+
+public class AnotherAttribute : Attribute
+{
+    public AnotherAttribute(string name) { }
 }
 
 public static class Functions
 {
     private const int ConstantInt = 42;
+
+    public static void NotAnAzureFunction()     // Compliant
+    {
+        DoSomething();
+    }
+
+    [Another("Something")]
+    public static void WithAnotherAttribute()   // Compliant
+    {
+        DoSomething();
+    }
 
     [FunctionName("FIXME")]
     public static void NoTryCatch_Body(int arg)         // Noncompliant {{FIXME}}
@@ -26,7 +42,7 @@ public static class Functions
     [FunctionName("FIXME")]
     public static async Task<string> NoTryCatchAsync()  // Noncompliant
     {
-        DoSomething();
+        return DoSomething();
     }
 
     [FunctionName("FIXME")]
@@ -36,17 +52,17 @@ public static class Functions
     }
 
     [FunctionName("FIXME")]
-    public static Task<int> Harmless()
+    public static async Task<int> Harmless()
     {
-        Action notInvoked = () => { DoSomething(); };  // Compliant, not invoked
+        Action notInvoked = () => { DoSomething(); };   // Compliant, not invoked
         var ret = 42 + ConstantInt;
         ret -= int.MaxValue;
         return ret;
 
-        int LocalNotInvoked() =>                        // Compliant, not invoked
+        string LocalNotInvoked() =>                        // Compliant, not invoked
             DoSomething();
 
-        int StaticLocalNotInvoked() =>                  // Compliant, not invoked
+        static string StaticLocalNotInvoked() =>                  // Compliant, not invoked
             DoSomething();
     }
 
@@ -59,7 +75,7 @@ public static class Functions
         }
     }
 
-    [FunctionName("FIXME")
+    [FunctionName("FIXME")]
     public static void TryFinally()   // Noncompliant
     {
         try
@@ -71,7 +87,7 @@ public static class Functions
         }
     }
 
-    private void DoSomething() { }
+    private static string DoSomething() => null;    // Compliant, btw
 }
 
 public static class AttributeVariants
@@ -93,11 +109,13 @@ public static class AttributeVariants
     {
         DoSomething();
     }
+
+    private static void DoSomething() { }
 }
 
 public static class CatchScenarios
 {
-    [FunctionName("FIXME")
+    [FunctionName("FIXME")]
     public static void OuterCatch()
     {
         try
@@ -110,7 +128,7 @@ public static class CatchScenarios
         }
     }
 
-    [FunctionName("FIXME")
+    [FunctionName("FIXME")]
     public static void OuterCatchNoVariable()
     {
         try
@@ -123,7 +141,7 @@ public static class CatchScenarios
         }
     }
 
-    [FunctionName("FIXME")
+    [FunctionName("FIXME")]
     public static void OuterCatchNoType()
     {
         try
@@ -136,7 +154,7 @@ public static class CatchScenarios
         }
     }
 
-    [FunctionName("FIXME")
+    [FunctionName("FIXME")]
     public static void OuterCatchSpecific()   // Noncompliant
     {
         try
@@ -149,7 +167,7 @@ public static class CatchScenarios
         }
     }
 
-    [FunctionName("FIXME")
+    [FunctionName("FIXME")]
     public static void OuterCatchSpecificAndAll()
     {
         try
@@ -165,7 +183,7 @@ public static class CatchScenarios
         }
     }
 
-    [FunctionName("FIXME")
+    [FunctionName("FIXME")]
     public static void OuterCatchSpecificAndAll_When()   // Noncompliant
     {
         try
@@ -181,7 +199,7 @@ public static class CatchScenarios
         }
     }
 
-    [FunctionName("FIXME")
+    [FunctionName("FIXME")]
     public static void OuterCatchWhen()   // Noncompliant
     {
         try
@@ -194,12 +212,12 @@ public static class CatchScenarios
         }
     }
 
-    private void DoSomething() { }
+    private static void DoSomething() { }
 }
 
 public static class NestedTry
 {
-    [FunctionName("FIXME")
+    [FunctionName("FIXME")]
     public static void NestedCatch(int arg)  // Compliant
     {
         if (arg == 42)
@@ -214,7 +232,7 @@ public static class NestedTry
         }
     }
 
-    [FunctionName("FIXME")
+    [FunctionName("FIXME")]
     public static void NestedCatch_Multi(int arg)  // Compliant
     {
         if (arg == 42)
@@ -239,7 +257,7 @@ public static class NestedTry
         }
     }
 
-    [FunctionName("FIXME")
+    [FunctionName("FIXME")]
     public static void NestedCatch_Deep(int arg)  // Compliant
     {
         if (arg == 42)
@@ -261,7 +279,7 @@ public static class NestedTry
         }
     }
 
-    [FunctionName("FIXME")
+    [FunctionName("FIXME")]
     public static void InvocationOutside_BeforeTry(int arg)   // Noncompliant
     {
         if (arg == 42)
@@ -277,7 +295,7 @@ public static class NestedTry
         }
     }
 
-    [FunctionName("FIXME")
+    [FunctionName("FIXME")]
     public static void InvocationOutside_BeforeIf(int arg)   // Noncompliant
     {
         DoSomething();
@@ -293,7 +311,7 @@ public static class NestedTry
         }
     }
 
-    [FunctionName("FIXME")
+    [FunctionName("FIXME")]
     public static void InvocationOutside_AfterTry(int arg)   // Noncompliant
     {
         if (arg == 42)
@@ -309,7 +327,7 @@ public static class NestedTry
         }
     }
 
-    [FunctionName("FIXME")
+    [FunctionName("FIXME")]
     public static void InvocationOutside_AfterIf(int arg)   // Noncompliant
     {
         if (arg == 42)
@@ -325,7 +343,7 @@ public static class NestedTry
         DoSomething();
     }
 
-    [FunctionName("FIXME")
+    [FunctionName("FIXME")]
     public static void InvocationOutside_NestedDeep(int arg)  // Noncompliant
     {
         if (arg == 42)
@@ -348,5 +366,22 @@ public static class NestedTry
         }
     }
 
-    private void DoSomething() { }
+    private static void DoSomething() { }
+}
+
+public class NonStatic
+{
+    [FunctionName("FIXME")]
+    public void InstanceMethod()         // Noncompliant, should not be decorated with the attribute anyway
+    {
+        DoSomething();
+    }
+
+    [FunctionName("FIXME")]
+    public static void StaticMethod()   // Noncompliant
+    {
+        DoSomething();
+    }
+
+    private static void DoSomething() { }
 }
