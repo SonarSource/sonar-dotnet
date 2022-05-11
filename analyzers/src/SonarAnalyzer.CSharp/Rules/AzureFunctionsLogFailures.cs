@@ -122,7 +122,8 @@ namespace SonarAnalyzer.Rules.CSharp
 
             public override void VisitInvocationExpression(InvocationExpressionSyntax node)
             {
-                if (IsExpressionAnILogger(node))
+                if (Model.GetSymbolInfo(node, CancellationToken).Symbol is IMethodSymbol { ReceiverType: { } receiver }
+                    && receiver.DerivesOrImplements(ILogger))
                 {
                     if (IsValidLogCall(node))
                     {
@@ -165,21 +166,13 @@ namespace SonarAnalyzer.Rules.CSharp
             private bool IsPassingValidLogLevel(InvocationExpressionSyntax invocation, IMethodSymbol symbol) =>
                 symbol.Parameters.FirstOrDefault(x => x.Name == "logLevel") is { } logLevelParameter
                     && CSharpFacade.Instance.MethodParameterLookup(invocation, symbol).TryGetNonParamsSyntax(logLevelParameter, out var argumentSyntax)
-                    && Model.GetConstantValue(argumentSyntax) is { HasValue: true, Value: int logLevel }
+                    && Model.GetConstantValue(argumentSyntax, CancellationToken) is { HasValue: true, Value: int logLevel }
                         ? ValidLogLevel.Contains(logLevel)
                         : true; // Compliant: Some non-constant value is passed as loglevel.
 
-            private bool IsExpressionAnILogger(ExpressionSyntax expression) =>
-                Model.GetSymbolInfo(expression, CancellationToken).Symbol switch
-                {
-                    IMethodSymbol { ReceiverType: { } receiver } => receiver.DerivesOrImplements(ILogger),
-                    IParameterSymbol { Type: { } type } => type.DerivesOrImplements(ILogger),
-                    _ => false,
-                };
-
             public override void VisitArgument(ArgumentSyntax node)
             {
-                if (IsExpressionAnILogger(node.Expression))
+                if (Model.GetTypeInfo(node.Expression).Type?.DerivesOrImplements(ILogger) == true)
                 {
                     HasValidLoggerCall = true;
                 }

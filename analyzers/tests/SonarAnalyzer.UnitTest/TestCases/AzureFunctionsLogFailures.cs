@@ -19,8 +19,8 @@ namespace AzureFunctions1
             {
                 return new EmptyResult();
             }
-            catch // Noncompliant {{Log caught exceptions via ILogger}}
-        //  ^^^^^
+            catch // Noncompliant {{Log caught exceptions via ILogger with LogLevel Warning, Error, or Critical}}
+//          ^^^^^
             {
                 return new EmptyResult();
             }
@@ -83,7 +83,7 @@ namespace AzureFunctions1
             }
             catch (Exception ex) when              // Noncompliant
                 (True(() => log.LogTrace(ex, ""))) // Secondary
-                //          ^^^^^^^^^^^^^^^^^^^^
+//                          ^^^^^^^^^^^^^^^^^^^^
             {
                 return new EmptyResult();
             }
@@ -101,6 +101,20 @@ namespace AzureFunctions1
             catch (Exception ex)
             {
                 LoggerHelper(log); // Compliant. We don't follow the call, but we assume some decent logging takes place, if the logger gets passed along.
+                return new EmptyResult();
+            }
+        }
+
+        [FunctionName("Function1")]
+        public static async Task<IActionResult> WrappedLoggerGetsPassedToFunction([HttpTrigger(AuthorizationLevel.Function, "get", "post", Route = null)] HttpRequest req, ILogger log)
+        {
+            try
+            {
+                return new EmptyResult();
+            }
+            catch (Exception ex)
+            {
+                LoggerHelper(NullLogger.Instance); // Compliant. Some ILogger is passed
                 return new EmptyResult();
             }
         }
