@@ -127,7 +127,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
             private bool IsValidLogCall(InvocationExpressionSyntax invocation, IMethodSymbol methodSymbol)
             {
-                // Check wellknown LoggerExtensions extension methods invocation
+                // Check wellknown LoggerExtensions methods invocation
                 if (methodSymbol.IsExtensionMethod
                     && LoggerExtensions.Value is { } loggerExtensions
                     && loggerExtensions.Equals(methodSymbol.ContainingType))
