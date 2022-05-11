@@ -37,6 +37,7 @@ namespace SonarAnalyzer.Rules.CSharp
         private const string MessageFormat = "Log caught exceptions via ILogger with LogLevel Warning, Error, or Critical";
 
         private static readonly DiagnosticDescriptor Rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
+        private static readonly ILanguageFacade LanguageFacade = CSharpFacade.Instance;
 
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(Rule);
 
@@ -44,10 +45,12 @@ namespace SonarAnalyzer.Rules.CSharp
             context.RegisterSyntaxNodeActionInNonGenerated(c =>
                 {
                     var catchClause = (CatchClauseSyntax)c.Node;
-                    if (IsContainingMethodAzureFunction(c.SemanticModel, catchClause, c.CancellationToken))
+                    if (AzureFunctionEntryPoint(c.SemanticModel, catchClause, c.CancellationToken) is { } entryPoint)
                     {
                         var iLogger = c.SemanticModel.Compilation.GetTypeByMetadataName(KnownType.Microsoft_Extensions_Logging_ILogger.TypeName);
-                        if (iLogger is not null && InvalidCallsToILogger(c.SemanticModel, iLogger, catchClause, c.CancellationToken) is ImmutableArray<ExpressionSyntax> secondaryLocations)
+                        if (iLogger is not null
+                            && entryPoint.Parameters.Any(p => p.Type.DerivesOrImplements(iLogger))
+                            && InvalidCallsToILogger(c.SemanticModel, iLogger, catchClause, c.CancellationToken) is ImmutableArray<ExpressionSyntax> secondaryLocations)
                         {
                             c.ReportIssue(Diagnostic.Create(Rule, catchClause.CatchKeyword.GetLocation(), additionalLocations: secondaryLocations.Select(x => x.GetLocation())));
                         }
@@ -57,7 +60,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private static ImmutableArray<ExpressionSyntax>? InvalidCallsToILogger(SemanticModel semanticModel, ITypeSymbol iLogger, CatchClauseSyntax catchClause, CancellationToken cancellationToken)
         {
-            var walker = new LoggerCallWalker(semanticModel, iLogger, cancellationToken);
+            var walker = new LoggerCallWalker(LanguageFacade, semanticModel, iLogger, cancellationToken);
             if (catchClause.Block is { } block)
             {
                 walker.Visit(block);
@@ -73,13 +76,15 @@ namespace SonarAnalyzer.Rules.CSharp
                 : walker.InvalidLoggerInvocations;
         }
 
-        private static bool IsContainingMethodAzureFunction(SemanticModel model, SyntaxNode node, CancellationToken cancellationToken)
+        private static IMethodSymbol AzureFunctionEntryPoint(SemanticModel model, SyntaxNode node, CancellationToken cancellationToken)
         {
             return node.Ancestors().OfType<MethodDeclarationSyntax>().FirstOrDefault() is { } method
                 && method.AttributeLists.Any() // FunctionName has [AttributeUsage(AttributeTargets.Method, AllowMultiple = false, Inherited = false)] so there must be an attribute
                 && model.GetDeclaredSymbol(method, cancellationToken) is { } methodSymbol
                 && model.Compilation.GetTypeByMetadataName(KnownType.Microsoft_Azure_WebJobs_FunctionNameAttribute.TypeName) is { } functionNameAttribute
-                && methodSymbol.GetAttributes().Any(a => a.AttributeClass.Equals(functionNameAttribute));
+                && methodSymbol.GetAttributes().Any(a => a.AttributeClass.Equals(functionNameAttribute))
+                ? methodSymbol
+                : null;
         }
 
         private sealed class LoggerCallWalker : SafeCSharpSyntaxWalker
@@ -93,8 +98,9 @@ namespace SonarAnalyzer.Rules.CSharp
 
             private readonly ImmutableHashSet<ExpressionSyntax>.Builder invalidIvocationsBuilder = ImmutableHashSet.CreateBuilder<ExpressionSyntax>();
 
-            public LoggerCallWalker(SemanticModel model, ITypeSymbol iLoggerSymbol, CancellationToken cancellationToken)
+            public LoggerCallWalker(ILanguageFacade languageFacade, SemanticModel model, ITypeSymbol iLoggerSymbol, CancellationToken cancellationToken)
             {
+                Language = languageFacade;
                 Model = model;
                 ILogger = iLoggerSymbol;
                 CancellationToken = cancellationToken;
@@ -102,6 +108,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 ILogger_Log = new Lazy<IMethodSymbol>(() => ILogger.GetMembers().OfType<IMethodSymbol>().FirstOrDefault(x => x.Name == "Log"));
             }
 
+            private ILanguageFacade Language { get; }
             private SemanticModel Model { get; }
             private ITypeSymbol ILogger { get; }
             private CancellationToken CancellationToken { get; }
@@ -159,13 +166,12 @@ namespace SonarAnalyzer.Rules.CSharp
                         }
                     }
                 }
-
                 return false;
             }
 
             private bool IsPassingValidLogLevel(InvocationExpressionSyntax invocation, IMethodSymbol symbol) =>
                 symbol.Parameters.FirstOrDefault(x => x.Name == "logLevel") is { } logLevelParameter
-                    && CSharpFacade.Instance.MethodParameterLookup(invocation, symbol).TryGetNonParamsSyntax(logLevelParameter, out var argumentSyntax)
+                    && Language.MethodParameterLookup(invocation, symbol).TryGetNonParamsSyntax(logLevelParameter, out var argumentSyntax)
                     && Model.GetConstantValue(argumentSyntax, CancellationToken) is { HasValue: true, Value: int logLevel }
                         ? ValidLogLevel.Contains(logLevel)
                         : true; // Compliant: Some non-constant value is passed as loglevel.
