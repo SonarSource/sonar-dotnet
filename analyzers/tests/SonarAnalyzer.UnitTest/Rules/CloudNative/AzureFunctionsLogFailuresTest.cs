@@ -25,61 +25,10 @@ using SonarAnalyzer.UnitTest.TestFramework;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
-    public class FrameworkTestClassAttribute : TestClassAttribute
-    {
-        public FrameworkTestClassAttribute(string framework)
-        {
-            Framework = framework;
-        }
-
-        public string Framework { get; }
-        public override TestMethodAttribute GetTestMethodAttribute(TestMethodAttribute testMethodAttribute)
-            => testMethodAttribute is FrameworkTestMethodAttribute
-            ? testMethodAttribute
-            : new FrameworkTestMethodAttribute(Framework);
-    }
-
-    public class FrameworkTestMethodAttribute : TestMethodAttribute
-    {
-        public FrameworkTestMethodAttribute(string framework)
-        {
-            Framework = framework;
-        }
-
-        public string Framework { get; }
-
-        private bool IsFramework
-        {
-            get
-            {
-                if (Framework == "NET")
-                {
-#if NET
-                    return true;
-#else
-                    return false;
-#endif
-                }
-                return true;
-            }
-        }
-
-        public override TestResult[] Execute(ITestMethod testMethod) =>
-            IsFramework
-            ? base.Execute(testMethod)
-            : new[]
-                {
-                    new TestResult()
-                    {
-                        Outcome = UnitTestOutcome.Inconclusive,
-                        LogOutput = $"Framework not supported. Test {testMethod.TestMethodName} skipped",
-                    }
-                };
-    }
-
-    [FrameworkTestClass("NET")]
+    [TestClass]
     public class AzureFunctionsLogFailuresTest
     {
+#if NET
         private readonly VerifierBuilder builder = new VerifierBuilder<AzureFunctionsLogFailures>().AddReferences(NuGetMetadataReference.MicrosoftNetSdkFunctions());
 
         [TestMethod]
@@ -139,5 +88,6 @@ using System;
 ";
             builder.AddSnippet(code).Verify();
         }
+#endif
     }
 }
