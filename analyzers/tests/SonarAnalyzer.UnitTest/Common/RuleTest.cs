@@ -20,7 +20,6 @@
 
 extern alias csharp;
 extern alias vbnet;
-using System.Linq;
 using System.Resources;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Diagnostics;

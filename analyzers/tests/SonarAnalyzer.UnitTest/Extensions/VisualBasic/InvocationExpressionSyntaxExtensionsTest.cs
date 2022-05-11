@@ -19,7 +19,6 @@
  */
 
 extern alias vbnet;
-using System.Linq;
 using Microsoft.CodeAnalysis.VisualBasic;
 using Microsoft.CodeAnalysis.VisualBasic.Syntax;
 using SonarAnalyzer.Helpers;

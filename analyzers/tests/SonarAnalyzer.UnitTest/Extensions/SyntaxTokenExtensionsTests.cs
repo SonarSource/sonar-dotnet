@@ -19,7 +19,6 @@
  */
 
 extern alias csharp;
-using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using static csharp::SonarAnalyzer.Extensions.SyntaxTokenExtensions;

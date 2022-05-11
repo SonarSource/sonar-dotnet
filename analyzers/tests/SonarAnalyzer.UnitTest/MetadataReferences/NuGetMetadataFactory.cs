@@ -19,7 +19,6 @@
  */
 
 using System.IO;
-using System.Linq;
 using Microsoft.CodeAnalysis;
 
 namespace SonarAnalyzer.UnitTest.MetadataReferences

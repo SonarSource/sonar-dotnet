@@ -21,7 +21,6 @@
 extern alias csharp;
 extern alias vbnet;
 
-using System.Linq;
 using FluentAssertions.Extensions;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;

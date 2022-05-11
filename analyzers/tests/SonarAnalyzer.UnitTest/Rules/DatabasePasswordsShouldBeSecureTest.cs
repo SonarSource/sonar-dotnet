@@ -21,7 +21,6 @@
 #if NET
 
 using System.IO;
-using System.Linq;
 using Microsoft.CodeAnalysis;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Rules.CSharp;

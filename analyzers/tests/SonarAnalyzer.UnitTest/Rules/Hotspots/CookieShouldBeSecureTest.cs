@@ -20,8 +20,6 @@
 
 #if NETFRAMEWORK
 using System.IO;
-#else
-using System.Linq;
 #endif
 
 using Microsoft.CodeAnalysis;

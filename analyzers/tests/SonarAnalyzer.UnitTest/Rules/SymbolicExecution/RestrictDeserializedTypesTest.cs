@@ -22,7 +22,6 @@ using Microsoft.CodeAnalysis;
 using SonarAnalyzer.Rules.CSharp;
 using SonarAnalyzer.Rules.SymbolicExecution;
 #if NETFRAMEWORK
-using System.Linq;
 using SonarAnalyzer.UnitTest.MetadataReferences;
 #endif
 

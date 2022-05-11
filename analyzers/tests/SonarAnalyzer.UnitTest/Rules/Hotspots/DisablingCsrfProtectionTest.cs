@@ -20,7 +20,6 @@
 
 #if NET
 
-using System.Linq;
 using Microsoft.CodeAnalysis;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Rules.CSharp;

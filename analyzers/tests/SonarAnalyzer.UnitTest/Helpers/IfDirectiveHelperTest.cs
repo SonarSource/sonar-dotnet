@@ -22,7 +22,6 @@
 #define BLOCK2
 #define BLOCK3
 
-using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;

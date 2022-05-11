@@ -19,7 +19,6 @@
  */
 
 using System.Diagnostics;
-using System.Linq;
 using System.Text.RegularExpressions;
 using FluentAssertions.Execution;
 using Microsoft.CodeAnalysis;

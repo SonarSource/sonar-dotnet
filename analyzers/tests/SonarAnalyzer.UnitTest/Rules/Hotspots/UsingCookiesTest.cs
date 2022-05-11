@@ -25,10 +25,6 @@ using SonarAnalyzer.UnitTest.MetadataReferences;
 using CS = SonarAnalyzer.Rules.CSharp;
 using VB = SonarAnalyzer.Rules.VisualBasic;
 
-#if NET
-using System.Linq;
-#endif
-
 namespace SonarAnalyzer.UnitTest.Rules
 {
     [TestClass]
