@@ -182,6 +182,7 @@ namespace SonarAnalyzer.Helpers
                 PropertyStatementSyntax x => x.Identifier,
                 SimpleArgumentSyntax x => x.NameColonEquals?.Name.Identifier,
                 SimpleNameSyntax x => x.Identifier,
+                QualifiedNameSyntax x => x.Right.Identifier,
                 _ => null,
             };
 

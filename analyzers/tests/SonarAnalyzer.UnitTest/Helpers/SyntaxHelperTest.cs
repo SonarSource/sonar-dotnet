@@ -32,6 +32,8 @@ namespace SonarAnalyzer.UnitTest.Helpers
 {
     string Method(object input)
     {
+        System.Exception qualified;
+        global::System.Exception global;
         return input.ToString();
     }
 }";
@@ -39,6 +41,8 @@ namespace SonarAnalyzer.UnitTest.Helpers
         private const string VbSourceInputToString =
 @"Class Example
     Function Method(Input As Object) As String
+        Dim Qualified As System.Exception
+        Dim GlobalName As Global.System.Exception
         Return Input.ToString()
     End Function
 End Class";
@@ -48,7 +52,8 @@ End Class";
         {
             var nodes = Parse_CS(CsSourceInputToString);
             nodes.OfType<CS.MemberAccessExpressionSyntax>().Single().GetName().Should().Be("ToString");
-            nodes.OfType<CS.IdentifierNameSyntax>().Select(x => x.GetName()).Should().BeEquivalentTo("input", "ToString");
+            nodes.OfType<CS.IdentifierNameSyntax>().Select(x => x.GetName()).Should().BeEquivalentTo("System", "Exception", "global", "System", "Exception", "input", "ToString");
+            nodes.OfType<CS.QualifiedNameSyntax>().Select(x => x.GetName()).Should().BeEquivalentTo("Exception", "Exception");
             nodes.OfType<CS.InvocationExpressionSyntax>().Single().GetName().Should().BeEmpty();
         }
 
@@ -62,7 +67,8 @@ End Class";
             nodes.OfType<VB.ParameterSyntax>().Single().GetName().Should().Be("Input");
             nodes.OfType<VB.PredefinedTypeSyntax>().First().GetName().Should().Be("Object");
             nodes.OfType<VB.MemberAccessExpressionSyntax>().Single().GetName().Should().Be("ToString");
-            nodes.OfType<VB.IdentifierNameSyntax>().Select(x => x.GetName()).Should().BeEquivalentTo("Input", "ToString");
+            nodes.OfType<VB.IdentifierNameSyntax>().Select(x => x.GetName()).Should().BeEquivalentTo("System", "Exception", "System", "Exception", "Input", "ToString");
+            nodes.OfType<VB.QualifiedNameSyntax>().Select(x => x.GetName()).Should().BeEquivalentTo("Exception", "Exception", "System");
             nodes.OfType<VB.InvocationExpressionSyntax>().Single().GetName().Should().Be("ToString");
             nodes.OfType<VB.ReturnStatementSyntax>().Single().GetName().Should().BeEmpty();
         }
