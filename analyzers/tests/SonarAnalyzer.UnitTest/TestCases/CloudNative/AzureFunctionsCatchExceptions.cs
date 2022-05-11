@@ -17,19 +17,19 @@ public static class Functions
 {
     private const int ConstantInt = 42;
 
-    public static void NotAnAzureFunction()     // Noncompliant FP Compliant
+    public static void NotAnAzureFunction()     // Compliant
     {
         DoSomething();
     }
 
     [Another("Something")]
-    public static void WithAnotherAttribute()   // Noncompliant FP Compliant
+    public static void WithAnotherAttribute()   // Compliant
     {
         DoSomething();
     }
 
     [FunctionName("FIXME")]
-    public static void NoTryCatch_Body(int arg)         // Noncompliant {{FIXME FIXME FIXME}}
+    public static void NoTryCatch_Body(int arg)         // Noncompliant {{Wrap Azure Function body in try/catch block.}}
     //                 ^^^^^^^^^^^^^^^
     {
         DoSomething();

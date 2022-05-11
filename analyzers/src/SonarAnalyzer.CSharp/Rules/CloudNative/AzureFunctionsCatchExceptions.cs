@@ -19,6 +19,7 @@
  */
 
 using System.Collections.Immutable;
+using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
@@ -28,11 +29,17 @@ using StyleCop.Analyzers.Lightup;
 
 namespace SonarAnalyzer.Rules.CSharp
 {
+    public static class Fixme   // FIXME: Remove temporary workaround
+    {
+        public static bool IsAzureFunction(this SyntaxNodeAnalysisContext context) =>
+            context.ContainingSymbol.GetAttributes().Any(x => x.AttributeClass.Name.Contains("FunctionName"));
+    }
+
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
     public sealed class AzureFunctionsCatchExceptions : SonarDiagnosticAnalyzer
     {
         private const string DiagnosticId = "S6421";
-        private const string MessageFormat = "FIXME FIXME FIXME";
+        private const string MessageFormat = "Wrap Azure Function body in try/catch block.";
 
         private static readonly DiagnosticDescriptor Rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
 
@@ -41,12 +48,14 @@ namespace SonarAnalyzer.Rules.CSharp
         protected override void Initialize(SonarAnalysisContext context) =>
             context.RegisterSyntaxNodeActionInNonGenerated(c =>
                 {
-                    // FIXME: If azure function
-                    var method = (MethodDeclarationSyntax)c.Node;
-                    var walker = new Walker();
-                    if (walker.SafeVisit(c.Node) && walker.HasInvocationOutsideTryCatch)
+                    if (c.IsAzureFunction())
                     {
-                        c.ReportIssue(Diagnostic.Create(Rule, method.Identifier.GetLocation()));
+                        var method = (MethodDeclarationSyntax)c.Node;
+                        var walker = new Walker();
+                        if (walker.SafeVisit(c.Node) && walker.HasInvocationOutsideTryCatch)
+                        {
+                            c.ReportIssue(Diagnostic.Create(Rule, method.Identifier.GetLocation()));
+                        }
                     }
                 },
                 SyntaxKind.MethodDeclaration);
