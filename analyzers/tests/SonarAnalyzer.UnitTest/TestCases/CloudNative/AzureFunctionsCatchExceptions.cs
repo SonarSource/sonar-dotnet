@@ -84,7 +84,7 @@ public static class Functions
     }
 
     [FunctionName("FIXME")]
-    public static void TryFinally()   // FIXME FN Non-compliant
+    public static void TryFinally()   // Noncompliant
     {
         try
         {
@@ -137,6 +137,32 @@ public static class CatchScenarios
     }
 
     [FunctionName("FIXME")]
+    public static void OuterCatchFullName()
+    {
+        try
+        {
+            var i = 42;
+            DoSomething();
+        }
+        catch (System.Exception ex)
+        {
+        }
+    }
+
+    [FunctionName("FIXME")]
+    public static void OuterCatchGlobalName()
+    {
+        try
+        {
+            var i = 42;
+            DoSomething();
+        }
+        catch (global::System.Exception ex)
+        {
+        }
+    }
+
+    [FunctionName("FIXME")]
     public static void OuterCatchNoVariable()
     {
         try
@@ -163,7 +189,7 @@ public static class CatchScenarios
     }
 
     [FunctionName("FIXME")]
-    public static void OuterCatchSpecific()   // FIXME FN Non-compliant
+    public static void OuterCatchSpecific()   // Noncompliant
     {
         try
         {
@@ -216,6 +242,19 @@ public static class CatchScenarios
             DoSomething();
         }
         catch (Exception ex) when (ex is ArgumentNullException)
+        {
+        }
+    }
+
+    [FunctionName("FIXME")]
+    public static void OuterCatchWhenAlwaysTrue()   // FIXME FN Non-compliant FP, we don't support constant condition tracking
+    {
+        try
+        {
+            var i = 42;
+            DoSomething();
+        }
+        catch (Exception ex) when (true)
         {
         }
     }

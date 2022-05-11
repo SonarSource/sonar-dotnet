@@ -18,6 +18,7 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System;
 using System.Collections.Immutable;
 using System.Linq;
 using Microsoft.CodeAnalysis;
@@ -85,10 +86,15 @@ namespace SonarAnalyzer.Rules.CSharp
 
             public override void VisitTryStatement(TryStatementSyntax node)
             {
-                // FIXME: Detect correct catch
-                //base.VisitTryStatement(node);
+                if (!node.Catches.AsEnumerable().Any(CatchesAllExceptions))
+                {
+                    base.VisitTryStatement(node);
+                }
             }
+
+            private static bool CatchesAllExceptions(CatchClauseSyntax catchClause) =>
+                catchClause.Declaration is null
+                || catchClause.Declaration.Type.NameIs(nameof(Exception));
         }
     }
 }
-
