@@ -8,18 +8,16 @@ using System;
 using System.IO;
 using System.Threading.Tasks;
 
-namespace AzureFunctions1
-{
-    public static class Function1
+public static class AzureFunctions
     {
-        [FunctionName("Function1")]
-        public static async Task<IActionResult> EmptyCatchClause([HttpTrigger(AuthorizationLevel.Function, "get", "post", Route = null)] HttpRequest req, ILogger log)
+        [FunctionName("Sample")]
+        public static async Task<IActionResult> EmptyCatchClause(ILogger log)
         {
             try
             {
                 return new EmptyResult();
             }
-            catch // Noncompliant {{Log caught exceptions via ILogger with LogLevel Warning, Error, or Critical}}
+            catch // Noncompliant {{Log exception via ILogger with LogLevel Warning, Error, or Critical}}
 //          ^^^^^
             {
                 return new EmptyResult();
@@ -73,11 +71,7 @@ namespace AzureFunctions1
             }
         }
 
-        private static bool True(Action action)
-        {
-            action();
-            return true;
-        }
+        private static bool True(Action action) => true;
 
         [FunctionName("Function1")]
         public static async Task<IActionResult> LogExceptionInExceptionFilter([HttpTrigger(AuthorizationLevel.Function, "get", "post", Route = null)] HttpRequest req, ILogger log)
