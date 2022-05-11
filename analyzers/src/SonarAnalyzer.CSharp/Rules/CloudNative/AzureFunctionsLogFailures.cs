@@ -34,7 +34,7 @@ namespace SonarAnalyzer.Rules.CSharp
     public sealed class AzureFunctionsLogFailures : SonarDiagnosticAnalyzer
     {
         private const string DiagnosticId = "S6423";
-        private const string MessageFormat = "Log caught exceptions via ILogger with LogLevel Warning, Error, or Critical";
+        private const string MessageFormat = "Log exception via ILogger with LogLevel Information, Warning, Error, or Critical";
 
         private static readonly DiagnosticDescriptor Rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
         private static readonly ILanguageFacade LanguageFacade = CSharpFacade.Instance;

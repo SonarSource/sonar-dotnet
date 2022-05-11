@@ -9,140 +9,102 @@ using System.IO;
 using System.Threading.Tasks;
 
 public static class AzureFunctions
+{
+    [FunctionName("Sample")]
+    public static void EmptyCatchClause(ILogger log)
     {
-        [FunctionName("Sample")]
-        public static async Task<IActionResult> EmptyCatchClause(ILogger log)
+        try { }
+        catch { } // Noncompliant {{Log exception via ILogger with LogLevel Information, Warning, Error, or Critical}}
+//      ^^^^^
+    }
+
+    [FunctionName("Sample")]
+    public static void LogLevelInvalid(ILogger log)
+    {
+        try { }
+        catch // Noncompliant
+//      ^^^^^
         {
-            try
-            {
-                return new EmptyResult();
-            }
-            catch // Noncompliant {{Log exception via ILogger with LogLevel Warning, Error, or Critical}}
-//          ^^^^^
-            {
-                return new EmptyResult();
-            }
-        }
-
-        [FunctionName("Function1")]
-        public static async Task<IActionResult> LogLevelInvalid([HttpTrigger(AuthorizationLevel.Function, "get", "post", Route = null)] HttpRequest req, ILogger log)
-        {
-            try
-            {
-                return new EmptyResult();
-            }
-            catch // Noncompliant
-//          ^^^^^
-            {
-                log.LogTrace(string.Empty);        // Secondary
-//              ^^^^^^^^^^^^^^^^^^^^^^^^^^
-                log.LogInformation(string.Empty);  // Secondary
-                log.LogDebug(string.Empty);        // Secondary
-                return new EmptyResult();
-            }
-        }
-
-        [FunctionName("Function1")]
-        public static async Task<IActionResult> LogExceptionInCatchClause([HttpTrigger(AuthorizationLevel.Function, "get", "post", Route = null)] HttpRequest req, ILogger log)
-        {
-            try
-            {
-                return new EmptyResult();
-            }
-            catch (Exception ex) // Compliant
-            {
-                log.LogError(ex, "");
-                return new EmptyResult();
-            }
-        }
-
-        [FunctionName("Function1")]
-        public static async Task<IActionResult> LogExceptionInWrappedLogger([HttpTrigger(AuthorizationLevel.Function, "get", "post", Route = null)] HttpRequest req, ILogger log)
-        {
-            try
-            {
-                return new EmptyResult();
-            }
-            catch (Exception ex) // Compliant
-            {
-                var nullLogger = NullLogger.Instance;
-                nullLogger.Log(LogLevel.Error, new EventId(), (object)null, ex, (s, e) => string.Empty);
-                return new EmptyResult();
-            }
-        }
-
-        private static bool True(Action action) => true;
-
-        [FunctionName("Function1")]
-        public static async Task<IActionResult> LogExceptionInExceptionFilter([HttpTrigger(AuthorizationLevel.Function, "get", "post", Route = null)] HttpRequest req, ILogger log)
-        {
-            try
-            {
-                return new EmptyResult();
-            }
-            // See https://blog.stephencleary.com/2020/06/a-new-pattern-for-exception-logging.html
-            catch (Exception ex) when (True(() => log.LogError(ex, ""))) // Compliant
-            {
-                return new EmptyResult();
-            }
-        }
-
-        [FunctionName("Function1")]
-        public static async Task<IActionResult> LogExceptionInExceptionFilterWrongLogLevel([HttpTrigger(AuthorizationLevel.Function, "get", "post", Route = null)] HttpRequest req, ILogger log)
-        {
-            try
-            {
-                return new EmptyResult();
-            }
-            catch (Exception ex) when              // Noncompliant
-                (True(() => log.LogTrace(ex, ""))) // Secondary
-//                          ^^^^^^^^^^^^^^^^^^^^
-            {
-                return new EmptyResult();
-            }
-        }
-
-        private static void LoggerHelper(ILogger logger) { }
-
-        [FunctionName("Function1")]
-        public static async Task<IActionResult> LoggerGetsPassedToFunction([HttpTrigger(AuthorizationLevel.Function, "get", "post", Route = null)] HttpRequest req, ILogger log)
-        {
-            try
-            {
-                return new EmptyResult();
-            }
-            catch (Exception ex)
-            {
-                LoggerHelper(log); // Compliant. We don't follow the call, but we assume some decent logging takes place, if the logger gets passed along.
-                return new EmptyResult();
-            }
-        }
-
-        [FunctionName("Function1")]
-        public static async Task<IActionResult> WrappedLoggerGetsPassedToFunction([HttpTrigger(AuthorizationLevel.Function, "get", "post", Route = null)] HttpRequest req, ILogger log)
-        {
-            try
-            {
-                return new EmptyResult();
-            }
-            catch (Exception ex)
-            {
-                LoggerHelper(NullLogger.Instance); // Compliant. Some ILogger is passed
-                return new EmptyResult();
-            }
-        }
-
-        [FunctionName("Function1")]
-        public static async Task<IActionResult> NoILoggerInTheEntryPoint([HttpTrigger(AuthorizationLevel.Function, "get", "post", Route = null)] HttpRequest req)
-        {
-            try
-            {
-                return new EmptyResult();
-            }
-            catch (Exception ex)
-            {
-                return new EmptyResult(); // Compliant. No (optional) ILogger parameter in the entry point.
-            }
+            log.LogTrace(string.Empty);        // Secondary
+//          ^^^^^^^^^^^^^^^^^^^^^^^^^^
+            log.LogInformation(string.Empty);  // Secondary
+            log.LogDebug(string.Empty);        // Secondary
         }
     }
+
+    [FunctionName("Sample")]
+    public static void LogExceptionInCatchClause(ILogger log)
+    {
+        try { }
+        catch (Exception ex) // Compliant
+        {
+            log.LogError(ex, "");
+        }
+    }
+
+    [FunctionName("Sample")]
+    public static void LogExceptionInWrappedLogger(ILogger log)
+    {
+        try { }
+        catch (Exception ex) // Compliant
+        {
+            var nullLogger = NullLogger.Instance;
+            nullLogger.Log(LogLevel.Error, new EventId(), (object)null, ex, (s, e) => string.Empty);
+        }
+    }
+
+    [FunctionName("Sample")]
+    public static void LogExceptionInExceptionFilter(ILogger log)
+    {
+        try { }
+        // See https://blog.stephencleary.com/2020/06/a-new-pattern-for-exception-logging.html
+        catch (Exception ex) when (True(() => log.LogError(ex, ""))) // Compliant
+        {
+        }
+    }
+
+    [FunctionName("Sample")]
+    public static void LogExceptionInExceptionFilterWrongLogLevel(ILogger log)
+    {
+        try { }
+        catch (Exception ex) when              // Noncompliant
+            (True(() => log.LogTrace(ex, ""))) // Secondary
+//                      ^^^^^^^^^^^^^^^^^^^^
+        {
+
+        }
+    }
+
+    [FunctionName("Sample")]
+    public static void LoggerGetsPassedToFunction(ILogger log)
+    {
+        try { }
+        catch (Exception ex)
+        {
+            LoggerHelper(log); // Compliant. We don't follow the call, but we assume some decent logging takes place, if the logger gets passed along.
+        }
+    }
+
+    [FunctionName("Sample")]
+    public static void WrappedLoggerGetsPassedToFunction(ILogger log)
+    {
+        try { }
+        catch (Exception ex)
+        {
+            LoggerHelper(NullLogger.Instance); // Compliant. Some ILogger is passed
+        }
+    }
+
+    [FunctionName("Sample")]
+    public static void NoILoggerInTheEntryPoint([HttpTrigger(AuthorizationLevel.Function, "get", "post", Route = null)] HttpRequest req)
+    {
+        try { }
+        catch (Exception ex) // Compliant. No (optional) ILogger parameter in the entry point.
+        {
+        }
+    }
+
+    private static bool True(Action action) => true;
+    private static void LoggerHelper(ILogger logger) { }
 }
+
