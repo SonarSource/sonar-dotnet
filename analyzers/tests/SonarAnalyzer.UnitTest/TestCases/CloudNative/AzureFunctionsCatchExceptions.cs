@@ -17,6 +17,8 @@ public static class Functions
 {
     private const int ConstantInt = 42;
 
+    delegate void VoidDelegate();
+
     public static void NotAnAzureFunction()     // Compliant
     {
         DoSomething();
@@ -54,7 +56,13 @@ public static class Functions
     [FunctionName("FIXME")]
     public static async Task<int> Harmless()
     {
-        Action notInvoked = () => { DoSomething(); };   // Compliant, not invoked
+        Action notInvokedParenthesizedLambda = () => { DoSomething(); };    // Compliant, not invoked
+        Action<int> notInvokedSimpleLambda = x => { DoSomething(); };       // Compliant, not invoked
+        VoidDelegate notInvokedAnonymousMethod = delegate                   // Compliant, not invoked
+        {
+            DoSomething();
+        };
+
         var ret = 42 + ConstantInt;
         ret -= int.MaxValue;
         return ret;

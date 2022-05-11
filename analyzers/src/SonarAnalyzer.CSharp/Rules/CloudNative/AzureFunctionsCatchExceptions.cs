@@ -70,10 +70,10 @@ namespace SonarAnalyzer.Rules.CSharp
                 {
                     switch (node.Kind())
                     {
+                        case SyntaxKind.AnonymousMethodExpression:
                         case SyntaxKind.SimpleLambdaExpression:
                         case SyntaxKind.ParenthesizedLambdaExpression:
                         case SyntaxKindEx.LocalFunctionStatement:
-                        case SyntaxKind.DelegateDeclaration:    // FIXME: Add UT
                             return;
                     }
                     base.Visit(node);
