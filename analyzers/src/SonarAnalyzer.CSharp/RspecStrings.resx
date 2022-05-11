@@ -12851,7 +12851,7 @@
     <value>Capturing and logging errors is critical to monitoring the health of your Azure Functions application.</value>
   </data>
   <data name="S6423_IsActivatedByDefault" xml:space="preserve">
-    <value>True</value>
+    <value>False</value>
   </data>
   <data name="S6423_Remediation" xml:space="preserve">
     <value>Constant/Issue</value>
