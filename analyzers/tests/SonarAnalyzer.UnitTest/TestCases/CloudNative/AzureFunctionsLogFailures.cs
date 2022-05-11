@@ -70,7 +70,16 @@ public static class AzureFunctions
             (True(() => log.LogTrace(ex, ""))) // Secondary
 //                      ^^^^^^^^^^^^^^^^^^^^
         {
+        }
+    }
 
+    [FunctionName("Sample")]
+    public static void LogExceptionInExceptionFilterCustomExtensionMethod(ILogger log)
+    {
+        try { }
+        catch (Exception ex) when              // Compliant
+            (log.LogInformationCustomExtension(""))
+        {
         }
     }
 
@@ -107,3 +116,7 @@ public static class AzureFunctions
     private static void LoggerHelper(ILogger logger) { }
 }
 
+public static class CustomLoggerExtensions
+{
+    public static bool LogInformationCustomExtension(this ILogger logger, string message) => true;
+}

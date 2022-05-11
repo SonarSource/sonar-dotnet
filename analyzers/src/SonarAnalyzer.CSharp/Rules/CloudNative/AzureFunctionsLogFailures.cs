@@ -26,6 +26,7 @@ using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
+using SonarAnalyzer.Extensions;
 using SonarAnalyzer.Helpers;
 
 namespace SonarAnalyzer.Rules.CSharp
@@ -36,6 +37,14 @@ namespace SonarAnalyzer.Rules.CSharp
         private const string DiagnosticId = "S6423";
         private const string MessageFormat = "Log exception via ILogger with LogLevel Information, Warning, Error, or Critical";
 
+        private static readonly int[] ValidLogLevel = new[]
+        {
+            2, // Information
+            3, // Warning
+            4, // Error
+            5, // Critical
+        };
+
         private static readonly DiagnosticDescriptor Rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
         private static readonly ILanguageFacade LanguageFacade = CSharpFacade.Instance;
 
@@ -45,58 +54,29 @@ namespace SonarAnalyzer.Rules.CSharp
             context.RegisterSyntaxNodeActionInNonGenerated(c =>
                 {
                     var catchClause = (CatchClauseSyntax)c.Node;
-                    if (AzureFunctionEntryPoint(c.SemanticModel, catchClause, c.CancellationToken) is { } entryPoint)
+                    if (c.AzureFunctionMethod() is { } entryPoint)
                     {
                         var iLogger = c.SemanticModel.Compilation.GetTypeByMetadataName(KnownType.Microsoft_Extensions_Logging_ILogger.TypeName);
                         if (iLogger is not null
-                            && entryPoint.Parameters.Any(p => p.Type.DerivesOrImplements(iLogger))
-                            && InvalidCallsToILogger(c.SemanticModel, iLogger, catchClause, c.CancellationToken) is ImmutableArray<ExpressionSyntax> secondaryLocations)
+                            && entryPoint.Parameters.Any(p => p.Type.DerivesOrImplements(KnownType.Microsoft_Extensions_Logging_ILogger)))
                         {
-                            c.ReportIssue(Diagnostic.Create(Rule, catchClause.CatchKeyword.GetLocation(), additionalLocations: secondaryLocations.Select(x => x.GetLocation())));
+                            var walker = new LoggerCallWalker(LanguageFacade, c.SemanticModel, iLogger, c.CancellationToken);
+
+                            walker.SafeVisit(catchClause.Block);
+                            // Exception handling in the filter clause preserves log scopes and is therefore recommended
+                            // See https://blog.stephencleary.com/2020/06/a-new-pattern-for-exception-logging.html
+                            walker.SafeVisit(catchClause.Filter?.FilterExpression);
+                            if (!walker.HasValidLoggerCall)
+                            {
+                                c.ReportIssue(Diagnostic.Create(Rule, catchClause.CatchKeyword.GetLocation(), walker.InvalidLoggerInvocations.Select(x => x.GetLocation())));
+                            }
                         }
                     }
                 },
                 SyntaxKind.CatchClause);
 
-        private static ImmutableArray<ExpressionSyntax>? InvalidCallsToILogger(SemanticModel semanticModel, ITypeSymbol iLogger, CatchClauseSyntax catchClause, CancellationToken cancellationToken)
-        {
-            var walker = new LoggerCallWalker(LanguageFacade, semanticModel, iLogger, cancellationToken);
-            if (catchClause.Block is { } block)
-            {
-                walker.Visit(block);
-            }
-
-            if (!walker.HasValidLoggerCall && catchClause.Filter?.FilterExpression is { } filterExpression)
-            {
-                walker.Visit(filterExpression);
-            }
-
-            return walker.HasValidLoggerCall
-                ? null
-                : walker.InvalidLoggerInvocations;
-        }
-
-        private static IMethodSymbol AzureFunctionEntryPoint(SemanticModel model, SyntaxNode node, CancellationToken cancellationToken)
-        {
-            return node.Ancestors().OfType<MethodDeclarationSyntax>().FirstOrDefault() is { } method
-                && method.AttributeLists.Any() // FunctionName has [AttributeUsage(AttributeTargets.Method, AllowMultiple = false, Inherited = false)] so there must be an attribute
-                && model.GetDeclaredSymbol(method, cancellationToken) is { } methodSymbol
-                && model.Compilation.GetTypeByMetadataName(KnownType.Microsoft_Azure_WebJobs_FunctionNameAttribute.TypeName) is { } functionNameAttribute
-                && methodSymbol.GetAttributes().Any(a => a.AttributeClass.Equals(functionNameAttribute))
-                ? methodSymbol
-                : null;
-        }
-
         private sealed class LoggerCallWalker : SafeCSharpSyntaxWalker
         {
-            private static readonly int[] ValidLogLevel = new[]
-            {
-                2, // Information
-                3, // Warning
-                4, // Error
-                5, // Critical
-            };
-
             private readonly ImmutableHashSet<ExpressionSyntax>.Builder invalidIvocationsBuilder = ImmutableHashSet.CreateBuilder<ExpressionSyntax>();
 
             public LoggerCallWalker(ILanguageFacade languageFacade, SemanticModel model, ITypeSymbol iLoggerSymbol, CancellationToken cancellationToken)
@@ -130,10 +110,10 @@ namespace SonarAnalyzer.Rules.CSharp
 
             public override void VisitInvocationExpression(InvocationExpressionSyntax node)
             {
-                if (Model.GetSymbolInfo(node, CancellationToken).Symbol is IMethodSymbol { ReceiverType: { } receiver }
+                if (Model.GetSymbolInfo(node, CancellationToken).Symbol is IMethodSymbol { ReceiverType: { } receiver } methodSymbol
                     && receiver.DerivesOrImplements(ILogger))
                 {
-                    if (IsValidLogCall(node))
+                    if (IsValidLogCall(node, methodSymbol))
                     {
                         HasValidLoggerCall = true;
                     }
@@ -145,29 +125,31 @@ namespace SonarAnalyzer.Rules.CSharp
                 base.VisitInvocationExpression(node);
             }
 
-            private bool IsValidLogCall(InvocationExpressionSyntax invocation)
+            private bool IsValidLogCall(InvocationExpressionSyntax invocation, IMethodSymbol methodSymbol)
             {
-                if (Model.GetSymbolInfo(invocation, CancellationToken).Symbol is IMethodSymbol symbol)
+                // Check wellknown LoggerExtensions extension methods invocation
+                if (methodSymbol.IsExtensionMethod
+                    && LoggerExtensions.Value is { } loggerExtensions
+                    && loggerExtensions.Equals(methodSymbol.ContainingType))
                 {
-                    if (symbol.IsExtensionMethod
-                        && LoggerExtensions.Value is { } loggerExtensions
-                        && loggerExtensions.Equals(symbol.ContainingType)
-                        && (symbol.Name is "LogInformation" or "LogWarning" or "LogError" or "LogCritical"
-                           || (symbol.Name is "Log" && IsPassingValidLogLevel(invocation, symbol))))
+                    return methodSymbol.Name switch
                     {
-                        return true;
-                    }
-                    else
-                    {
-                        if (ILogger_Log.Value is { } loggerLog
-                            && (symbol.OriginalDefinition.Equals(loggerLog)
-                                || symbol.ContainingType.FindImplementationForInterfaceMember(loggerLog)?.Equals(symbol.OriginalDefinition) == true))
-                        {
-                            return IsPassingValidLogLevel(invocation, symbol);
-                        }
-                    }
+                        "LogInformation" or "LogWarning" or "LogError" or "LogCritical" => true,
+                        "LogTrace" or "LogDebug" or "BeginScope" => false,
+                        "Log" => IsPassingValidLogLevel(invocation, methodSymbol),
+                        _ => true, // Some unknown extension method on LoggerExtensions was called. Avoid FPs and assume it logs something.
+                    };
                 }
-                return false;
+                // Check direct ILogger.Log invocations
+                if (ILogger_Log.Value is { } loggerLog
+                    && (methodSymbol.OriginalDefinition.Equals(loggerLog)
+                        || methodSymbol.ContainingType.FindImplementationForInterfaceMember(loggerLog)?.Equals(methodSymbol.OriginalDefinition) is true))
+                {
+                    return IsPassingValidLogLevel(invocation, methodSymbol);
+                }
+                // The invocations receiver was an ILogger, but none of the known log methods was called.
+                // We assume some kind of logging is performed by the unknown invocation to avoid FPs.
+                return true;
             }
 
             private bool IsPassingValidLogLevel(InvocationExpressionSyntax invocation, IMethodSymbol symbol) =>
