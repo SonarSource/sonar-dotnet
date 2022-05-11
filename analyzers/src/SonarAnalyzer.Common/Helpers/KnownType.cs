@@ -588,7 +588,6 @@ namespace SonarAnalyzer.Helpers
         public string TypeName { get; }
         public string ShortName => shortName.Value;
 
-
         private KnownType(string typeName) : this(SpecialType.None, typeName) { }
 
         private KnownType(SpecialType specialType, string typeName)
