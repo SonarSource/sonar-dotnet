@@ -17,19 +17,19 @@ public static class Functions
 {
     private const int ConstantInt = 42;
 
-    public static void NotAnAzureFunction()     // Compliant
+    public static void NotAnAzureFunction()     // Noncompliant FP Compliant
     {
         DoSomething();
     }
 
     [Another("Something")]
-    public static void WithAnotherAttribute()   // Compliant
+    public static void WithAnotherAttribute()   // Noncompliant FP Compliant
     {
         DoSomething();
     }
 
     [FunctionName("FIXME")]
-    public static void NoTryCatch_Body(int arg)         // Noncompliant {{FIXME}}
+    public static void NoTryCatch_Body(int arg)         // Noncompliant {{FIXME FIXME FIXME}}
     //                 ^^^^^^^^^^^^^^^
     {
         DoSomething();
@@ -59,10 +59,10 @@ public static class Functions
         ret -= int.MaxValue;
         return ret;
 
-        string LocalNotInvoked() =>                        // Compliant, not invoked
+        string LocalNotInvoked() =>                     // Compliant, not invoked
             DoSomething();
 
-        static string StaticLocalNotInvoked() =>                  // Compliant, not invoked
+        static string StaticLocalNotInvoked() =>        // Compliant, not invoked
             DoSomething();
     }
 
@@ -76,7 +76,7 @@ public static class Functions
     }
 
     [FunctionName("FIXME")]
-    public static void TryFinally()   // Noncompliant
+    public static void TryFinally()   // FIXME FN Non-compliant
     {
         try
         {
@@ -93,19 +93,19 @@ public static class Functions
 public static class AttributeVariants
 {
     [FunctionNameAttribute("ClassName")]
-    public static void ClassName()
+    public static void ClassName()          // Noncompliant
     {
         DoSomething();
     }
 
     [Microsoft.Azure.WebJobs.FunctionNameAttribute("NamespaceName")]
-    public static void NamespaceName()
+    public static void NamespaceName()      // Noncompliant
     {
         DoSomething();
     }
 
     [global::Microsoft.Azure.WebJobs.FunctionNameAttribute("GlobalName")]
-    public static void GlobalName()
+    public static void GlobalName()         // Noncompliant
     {
         DoSomething();
     }
@@ -155,7 +155,7 @@ public static class CatchScenarios
     }
 
     [FunctionName("FIXME")]
-    public static void OuterCatchSpecific()   // Noncompliant
+    public static void OuterCatchSpecific()   // FIXME FN Non-compliant
     {
         try
         {
@@ -184,7 +184,7 @@ public static class CatchScenarios
     }
 
     [FunctionName("FIXME")]
-    public static void OuterCatchSpecificAndAll_When()   // Noncompliant
+    public static void OuterCatchSpecificAndAll_When()   // FIXME FN Non-compliant
     {
         try
         {
@@ -200,7 +200,7 @@ public static class CatchScenarios
     }
 
     [FunctionName("FIXME")]
-    public static void OuterCatchWhen()   // Noncompliant
+    public static void OuterCatchWhen()   // FIXME FN Non-compliant
     {
         try
         {

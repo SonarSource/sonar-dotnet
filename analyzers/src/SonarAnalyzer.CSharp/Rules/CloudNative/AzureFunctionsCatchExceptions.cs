@@ -19,13 +19,12 @@
  */
 
 using System.Collections.Immutable;
-using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
-using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
+using StyleCop.Analyzers.Lightup;
 
 namespace SonarAnalyzer.Rules.CSharp
 {
@@ -33,7 +32,7 @@ namespace SonarAnalyzer.Rules.CSharp
     public sealed class AzureFunctionsCatchExceptions : SonarDiagnosticAnalyzer
     {
         private const string DiagnosticId = "S6421";
-        private const string MessageFormat = "";
+        private const string MessageFormat = "FIXME FIXME FIXME";
 
         private static readonly DiagnosticDescriptor Rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
 
@@ -42,12 +41,45 @@ namespace SonarAnalyzer.Rules.CSharp
         protected override void Initialize(SonarAnalysisContext context) =>
             context.RegisterSyntaxNodeActionInNonGenerated(c =>
                 {
-                    var node = c.Node;
-                    if (true)
+                    // FIXME: If azure function
+                    var method = (MethodDeclarationSyntax)c.Node;
+                    var walker = new Walker();
+                    if (walker.SafeVisit(c.Node) && walker.HasInvocationOutsideTryCatch)
                     {
-                        c.ReportIssue(Diagnostic.Create(Rule, node.GetLocation()));
+                        c.ReportIssue(Diagnostic.Create(Rule, method.Identifier.GetLocation()));
                     }
                 },
-                SyntaxKind.InvocationExpression);
+                SyntaxKind.MethodDeclaration);
+
+        private class Walker : SafeCSharpSyntaxWalker
+        {
+            public bool HasInvocationOutsideTryCatch { get; private set; }
+
+            public override void Visit(SyntaxNode node)
+            {
+                if (!HasInvocationOutsideTryCatch)  // Stop walking when we know the answer
+                {
+                    switch (node.Kind())
+                    {
+                        case SyntaxKind.SimpleLambdaExpression:
+                        case SyntaxKind.ParenthesizedLambdaExpression:
+                        case SyntaxKindEx.LocalFunctionStatement:
+                        case SyntaxKind.DelegateDeclaration:    // FIXME: Add UT
+                            return;
+                    }
+                    base.Visit(node);
+                }
+            }
+
+            public override void VisitInvocationExpression(InvocationExpressionSyntax node) =>
+                HasInvocationOutsideTryCatch = true;
+
+            public override void VisitTryStatement(TryStatementSyntax node)
+            {
+                // FIXME: Detect correct catch
+                //base.VisitTryStatement(node);
+            }
+        }
     }
 }
+
