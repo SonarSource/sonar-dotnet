@@ -118,5 +118,18 @@ namespace AzureFunctions1
                 return new EmptyResult();
             }
         }
+
+        [FunctionName("Function1")]
+        public static async Task<IActionResult> NoILoggerInTheEntryPoint([HttpTrigger(AuthorizationLevel.Function, "get", "post", Route = null)] HttpRequest req)
+        {
+            try
+            {
+                return new EmptyResult();
+            }
+            catch (Exception ex)
+            {
+                return new EmptyResult(); // Compliant. No (optional) ILogger parameter in the entry point.
+            }
+        }
     }
 }
