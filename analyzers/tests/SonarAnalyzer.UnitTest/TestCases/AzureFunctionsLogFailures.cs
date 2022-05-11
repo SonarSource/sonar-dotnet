@@ -27,6 +27,23 @@ namespace AzureFunctions1
         }
 
         [FunctionName("Function1")]
+        public static async Task<IActionResult> LogLevelInvalid([HttpTrigger(AuthorizationLevel.Function, "get", "post", Route = null)] HttpRequest req, ILogger log)
+        {
+            try
+            {
+                return new EmptyResult();
+            }
+            catch // Noncompliant {{Log caught exceptions via ILogger with LogLevel Warning, Error, or Critical}}
+//          ^^^^^
+            {
+                log.LogTrace(string.Empty);        // Secondary
+                log.LogInformation(string.Empty);  // Secondary
+                log.LogDebug(string.Empty);        // Secondary
+                return new EmptyResult();
+            }
+        }
+
+        [FunctionName("Function1")]
         public static async Task<IActionResult> LogExceptionInCatchClause([HttpTrigger(AuthorizationLevel.Function, "get", "post", Route = null)] HttpRequest req, ILogger log)
         {
             try
