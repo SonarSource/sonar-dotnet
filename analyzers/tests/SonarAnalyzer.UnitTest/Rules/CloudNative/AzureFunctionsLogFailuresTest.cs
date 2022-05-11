@@ -36,14 +36,14 @@ namespace SonarAnalyzer.UnitTest.Rules
             builder.WithBasePath("CloudNative").AddPaths("AzureFunctionsLogFailures.cs").WithConcurrentAnalysis(false).Verify();
 
         [DataTestMethod]
-        // Calls to LoggerExtensions.Log.. extension methods
+        // Calls to LoggerExtensions.LogSomething extension methods
         [DataRow(true, "log.LogError(ex, string.Empty);")]
         [DataRow(true, "log.LogCritical(ex, string.Empty);")]
         [DataRow(true, "log.LogWarning(ex, string.Empty);")]
         [DataRow(false, "log.LogDebug(ex, string.Empty);")]
         [DataRow(false, "log.LogInformation(ex, string.Empty);")]
         [DataRow(false, "log.LogTrace(ex, string.Empty);")]
-
+        // LoggerExtensions.Log with LogLevel parameter
         [DataRow(true, "log.Log(LogLevel.Warning, ex, string.Empty);")]
         [DataRow(true, "log.Log(LogLevel.Error, ex, string.Empty);")]
         [DataRow(true, "log.Log(LogLevel.Critical, ex, string.Empty);")]
@@ -51,12 +51,11 @@ namespace SonarAnalyzer.UnitTest.Rules
         [DataRow(false, "log.Log(LogLevel.Debug, ex, string.Empty);")]
         [DataRow(false, "log.Log(LogLevel.Information, ex, string.Empty);")]
         [DataRow(false, "log.Log(LogLevel.None, ex, string.Empty);")]
-
+        // Calls with complications in it
         [DataRow(true, "log.Log(LogLevel.Critical, string.Empty);")] // It is not required to pass the exception to the log call
         [DataRow(true, "log.Log(exception: ex, message: string.Empty, logLevel: LogLevel.Error);")] // Out of order named args
         [DataRow(true, "log.Log(message: string.Empty, logLevel: LogLevel.Error);")]
         [DataRow(true, @"log.Log(Enum.Parse<LogLevel>(""Trace""), string.Empty);")] // call is compliant, if LogLevel is not known at compile time
-
         // Calls to ILogger.Log
         [DataRow(true, "log.Log(LogLevel.Error, new EventId(), (object)null, ex, (s, e) => string.Empty);")]
         [DataRow(true, "log.Log(eventId: new EventId(), state: (object)null, exception: ex, formatter: (s, e) => string.Empty, logLevel: LogLevel.Error);")]
