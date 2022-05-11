@@ -25,10 +25,61 @@ using SonarAnalyzer.UnitTest.TestFramework;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
-    [TestClass]
+    public class FrameworkTestClassAttribute : TestClassAttribute
+    {
+        public FrameworkTestClassAttribute(string framework)
+        {
+            Framework = framework;
+        }
+
+        public string Framework { get; }
+        public override TestMethodAttribute GetTestMethodAttribute(TestMethodAttribute testMethodAttribute)
+            => testMethodAttribute is FrameworkTestMethodAttribute
+            ? testMethodAttribute
+            : new FrameworkTestMethodAttribute(Framework);
+    }
+
+    public class FrameworkTestMethodAttribute : TestMethodAttribute
+    {
+        public FrameworkTestMethodAttribute(string framework)
+        {
+            Framework = framework;
+        }
+
+        public string Framework { get; }
+
+        private bool IsFramework
+        {
+            get
+            {
+                if (Framework == "NET")
+                {
+#if NET
+                    return true;
+#else
+                    return false;
+#endif
+                }
+                return true;
+            }
+        }
+
+        public override TestResult[] Execute(ITestMethod testMethod) =>
+            IsFramework
+            ? base.Execute(testMethod)
+            : new[]
+                {
+                    new TestResult()
+                    {
+                        Outcome = UnitTestOutcome.Inconclusive,
+                        LogOutput = $"Framework not supported. Test {testMethod.TestMethodName} skipped",
+                    }
+                };
+    }
+
+    [FrameworkTestClass("NET")]
     public class AzureFunctionsLogFailuresTest
     {
-#if NET
         private readonly VerifierBuilder builder = new VerifierBuilder<AzureFunctionsLogFailures>().AddReferences(NuGetMetadataReference.MicrosoftNetSdkFunctions());
 
         [TestMethod]
@@ -56,7 +107,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [DataRow(true, @"log.Log(exception: ex, message: string.Empty, logLevel: LogLevel.Error);")] // Out of order named args
         [DataRow(true, @"log.Log(message: string.Empty, logLevel: LogLevel.Error);")]
         [DataRow(true, @"log.Log(Enum.Parse<LogLevel>(""Trace""), string.Empty);")] // call is compliant, if LogLevel is not known at compile time
-        // Calls to ILogger.Log
+                                                                                    // Calls to ILogger.Log
         [DataRow(true, @"log.Log(LogLevel.Error, new EventId(), (object)null, ex, (s, e) => string.Empty);")]
         [DataRow(true, @"log.Log(eventId: new EventId(), state: (object)null, exception: ex, formatter: (s, e) => string.Empty, logLevel: LogLevel.Error);")]
         [DataRow(false, @"log.Log(eventId: new EventId(), state: (object)null, exception: ex, formatter: (s, e) => string.Empty, logLevel: LogLevel.Trace);")]
@@ -87,6 +138,5 @@ using System;
 ";
             builder.AddSnippet(code).Verify();
         }
-#endif
     }
 }
