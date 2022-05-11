@@ -21,9 +21,7 @@
 extern alias csharp;
 extern alias vbnet;
 using System.Resources;
-using Microsoft.CodeAnalysis;
 using Moq;
-using SonarAnalyzer.Helpers;
 
 namespace SonarAnalyzer.UnitTest.Helpers
 {

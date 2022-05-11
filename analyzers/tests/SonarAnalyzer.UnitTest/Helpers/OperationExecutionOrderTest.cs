@@ -20,7 +20,6 @@
 
 using System.Collections;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
-using SonarAnalyzer.Helpers;
 using StyleCop.Analyzers.Lightup;
 
 namespace SonarAnalyzer.UnitTest.Helpers

@@ -20,8 +20,6 @@
 
 using System.IO;
 using System.Resources;
-using Microsoft.CodeAnalysis;
-using SonarAnalyzer.Helpers;
 
 namespace SonarAnalyzer.UnitTest.TestFramework
 {

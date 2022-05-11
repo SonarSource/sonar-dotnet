@@ -20,7 +20,6 @@
 
 using System.Text;
 using FluentAssertions.Execution;
-using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using SonarAnalyzer.CFG.Helpers;

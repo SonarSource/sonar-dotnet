@@ -19,7 +19,6 @@
  */
 
 using System.Text;
-using Microsoft.CodeAnalysis;
 using SonarAnalyzer.Common;
 
 namespace SonarAnalyzer.UnitTest.TestFramework

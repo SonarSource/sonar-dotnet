@@ -20,9 +20,7 @@
 
 using System.IO;
 using Google.Protobuf;
-using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Diagnostics;
-using SonarAnalyzer.Helpers;
 using SonarAnalyzer.Rules;
 
 namespace SonarAnalyzer.UnitTest.TestFramework.Tests

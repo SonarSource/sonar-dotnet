@@ -23,11 +23,9 @@ using System.Reflection;
 using System.Text;
 using System.Text.RegularExpressions;
 using Google.Protobuf;
-using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CodeFixes;
 using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.Common;
-using SonarAnalyzer.Helpers;
 using SonarAnalyzer.Rules;
 using SonarAnalyzer.UnitTest.Helpers;
 

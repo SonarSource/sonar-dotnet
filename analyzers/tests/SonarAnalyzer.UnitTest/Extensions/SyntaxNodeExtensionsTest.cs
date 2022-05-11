@@ -22,7 +22,6 @@ extern alias csharp;
 extern alias vbnet;
 
 using FluentAssertions.Extensions;
-using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.Operations;
 using static csharp::SonarAnalyzer.Extensions.SyntaxTokenExtensions;

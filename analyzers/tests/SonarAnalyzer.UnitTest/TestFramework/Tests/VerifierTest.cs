@@ -19,7 +19,6 @@
  */
 
 using System.IO;
-using Microsoft.CodeAnalysis;
 using SonarAnalyzer.Protobuf;
 using SonarAnalyzer.Rules.CSharp;
 using SonarAnalyzer.Rules.SymbolicExecution;

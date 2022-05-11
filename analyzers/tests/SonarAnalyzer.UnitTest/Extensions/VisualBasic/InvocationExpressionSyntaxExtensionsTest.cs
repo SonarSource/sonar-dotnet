@@ -21,7 +21,6 @@
 extern alias vbnet;
 using Microsoft.CodeAnalysis.VisualBasic;
 using Microsoft.CodeAnalysis.VisualBasic.Syntax;
-using SonarAnalyzer.Helpers;
 using vbnet::SonarAnalyzer.Extensions;
 
 namespace SonarAnalyzer.UnitTest.Extensions.VisualBasic

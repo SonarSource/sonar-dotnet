@@ -20,9 +20,7 @@
 
 using System.IO;
 using System.Text.RegularExpressions;
-using Microsoft.CodeAnalysis;
 using SonarAnalyzer.Common;
-using SonarAnalyzer.Helpers;
 using SonarAnalyzer.Rules.CSharp;
 using SonarAnalyzer.UnitTest.Helpers;
 using SonarAnalyzer.UnitTest.MetadataReferences;

@@ -18,8 +18,6 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using SonarAnalyzer.Helpers;
-
 namespace SonarAnalyzer.UnitTest.Helpers
 {
     [TestClass]
@@ -47,9 +45,7 @@ namespace SonarAnalyzer.UnitTest.Helpers
         [DataRow("   eRrOr fOo:", true)]
         [DataRow("   error in foo:", false)]
         [DataRow("   error in foo :", false)]
-        public void IsTextMatchingVbcErrorPattern_ReturnsExpected(string text, bool expectedResult)
-        {
+        public void IsTextMatchingVbcErrorPattern_ReturnsExpected(string text, bool expectedResult) =>
             VbcHelper.IsTextMatchingVbcErrorPattern(text).Should().Be(expectedResult);
-        }
     }
 }

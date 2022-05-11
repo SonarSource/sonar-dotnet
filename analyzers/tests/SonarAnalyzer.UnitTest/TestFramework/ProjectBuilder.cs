@@ -20,7 +20,6 @@
 
 using System.IO;
 using System.Text;
-using Microsoft.CodeAnalysis;
 using SonarAnalyzer.UnitTest.MetadataReferences;
 
 namespace SonarAnalyzer.UnitTest.TestFramework

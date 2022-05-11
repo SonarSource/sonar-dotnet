@@ -19,7 +19,6 @@
  */
 
 using System.Xml.Linq;
-using SonarAnalyzer.Helpers;
 
 namespace SonarAnalyzer.UnitTest.Helpers
 {

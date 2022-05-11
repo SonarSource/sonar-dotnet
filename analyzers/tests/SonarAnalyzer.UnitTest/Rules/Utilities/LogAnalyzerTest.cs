@@ -19,7 +19,6 @@
  */
 
 using System.Runtime.CompilerServices;
-using SonarAnalyzer.Helpers;
 using SonarAnalyzer.Protobuf;
 using SonarAnalyzer.UnitTest.Helpers;
 using CS = SonarAnalyzer.Rules.CSharp;

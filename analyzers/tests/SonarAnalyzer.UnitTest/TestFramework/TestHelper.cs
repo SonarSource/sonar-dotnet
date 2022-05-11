@@ -19,7 +19,6 @@
  */
 
 using System.IO;
-using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
@@ -27,7 +26,6 @@ using Microsoft.CodeAnalysis.Text;
 using Moq;
 using SonarAnalyzer.CFG.Roslyn;
 using SonarAnalyzer.Common;
-using SonarAnalyzer.Helpers;
 using SonarAnalyzer.UnitTest.MetadataReferences;
 using SonarAnalyzer.UnitTest.PackagingTests;
 using StyleCop.Analyzers.Lightup;

@@ -20,7 +20,6 @@
 
 using System.IO;
 using System.Text.RegularExpressions;
-using SonarAnalyzer.Helpers;
 
 namespace SonarAnalyzer.UnitTest.Helpers
 {

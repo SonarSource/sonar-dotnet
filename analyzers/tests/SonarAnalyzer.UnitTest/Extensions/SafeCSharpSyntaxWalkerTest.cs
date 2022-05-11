@@ -19,7 +19,6 @@
  */
 
 using Microsoft.CodeAnalysis.CSharp;
-using SonarAnalyzer.Helpers;
 
 namespace SonarAnalyzer.UnitTest.Extensions
 {

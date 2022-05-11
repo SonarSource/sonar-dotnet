@@ -21,10 +21,8 @@
 extern alias csharp;
 extern alias vbnet;
 using System.Resources;
-using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.Common;
-using SonarAnalyzer.Helpers;
 using SonarAnalyzer.UnitTest.Helpers;
 using SonarAnalyzer.Utilities;
 

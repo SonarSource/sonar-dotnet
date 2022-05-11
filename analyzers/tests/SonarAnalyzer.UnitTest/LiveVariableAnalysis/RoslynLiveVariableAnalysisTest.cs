@@ -20,7 +20,6 @@
 
 extern alias csharp;
 using csharp::SonarAnalyzer.Extensions;
-using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using SonarAnalyzer.CFG;
 using SonarAnalyzer.CFG.LiveVariableAnalysis;

@@ -21,10 +21,8 @@
 using System.Diagnostics;
 using System.Text.RegularExpressions;
 using FluentAssertions.Execution;
-using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Text;
 using SonarAnalyzer.Common;
-using SonarAnalyzer.Helpers;
 
 namespace SonarAnalyzer.UnitTest.TestFramework
 {

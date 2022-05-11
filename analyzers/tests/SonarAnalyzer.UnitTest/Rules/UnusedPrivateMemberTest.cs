@@ -19,8 +19,6 @@
  */
 
 using FluentAssertions.Extensions;
-using Microsoft.CodeAnalysis;
-using SonarAnalyzer.Helpers;
 using SonarAnalyzer.Rules.CSharp;
 using SonarAnalyzer.UnitTest.MetadataReferences;
 
