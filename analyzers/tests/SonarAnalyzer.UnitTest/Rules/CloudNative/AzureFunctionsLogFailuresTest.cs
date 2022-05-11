@@ -107,7 +107,8 @@ namespace SonarAnalyzer.UnitTest.Rules
         [DataRow(true, @"log.Log(exception: ex, message: string.Empty, logLevel: LogLevel.Error);")] // Out of order named args
         [DataRow(true, @"log.Log(message: string.Empty, logLevel: LogLevel.Error);")]
         [DataRow(true, @"log.Log(Enum.Parse<LogLevel>(""Trace""), string.Empty);")] // call is compliant, if LogLevel is not known at compile time
-                                                                                    // Calls to ILogger.Log
+
+        // Calls to ILogger.Log
         [DataRow(true, @"log.Log(LogLevel.Error, new EventId(), (object)null, ex, (s, e) => string.Empty);")]
         [DataRow(true, @"log.Log(eventId: new EventId(), state: (object)null, exception: ex, formatter: (s, e) => string.Empty, logLevel: LogLevel.Error);")]
         [DataRow(false, @"log.Log(eventId: new EventId(), state: (object)null, exception: ex, formatter: (s, e) => string.Empty, logLevel: LogLevel.Trace);")]
