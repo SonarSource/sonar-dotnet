@@ -100,6 +100,7 @@
   <ItemGroup>
     <Using Include="System" />
     <Using Include="System.Collections.Generic" />
+    <Using Include="System.Collections.Immutable" />
     <Using Include="FluentAssertions" />
     <Using Include="Microsoft.VisualStudio.TestTools.UnitTesting" />
     <Using Include="SonarAnalyzer.UnitTest.TestFramework" />
