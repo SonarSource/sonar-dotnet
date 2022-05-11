@@ -91,6 +91,7 @@ namespace SonarAnalyzer.Rules.CSharp
         {
             private static readonly int[] ValidLogLevel = new[]
             {
+                2, // Information
                 3, // Warning
                 4, // Error
                 5, // Critical
@@ -151,7 +152,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     if (symbol.IsExtensionMethod
                         && LoggerExtensions.Value is { } loggerExtensions
                         && loggerExtensions.Equals(symbol.ContainingType)
-                        && (symbol.Name is "LogWarning" or "LogError" or "LogCritical"
+                        && (symbol.Name is "LogInformation" or "LogWarning" or "LogError" or "LogCritical"
                            || (symbol.Name is "Log" && IsPassingValidLogLevel(invocation, symbol))))
                     {
                         return true;

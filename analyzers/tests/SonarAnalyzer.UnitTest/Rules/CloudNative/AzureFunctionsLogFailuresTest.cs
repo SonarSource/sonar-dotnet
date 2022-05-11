@@ -40,16 +40,16 @@ namespace SonarAnalyzer.UnitTest.Rules
         [DataRow(true, "log.LogError(ex, string.Empty);")]
         [DataRow(true, "log.LogCritical(ex, string.Empty);")]
         [DataRow(true, "log.LogWarning(ex, string.Empty);")]
+        [DataRow(true, "log.LogInformation(ex, string.Empty);")]
         [DataRow(false, "log.LogDebug(ex, string.Empty);")]
-        [DataRow(false, "log.LogInformation(ex, string.Empty);")]
         [DataRow(false, "log.LogTrace(ex, string.Empty);")]
         // LoggerExtensions.Log with LogLevel parameter
+        [DataRow(true, "log.Log(LogLevel.Information, ex, string.Empty);")]
         [DataRow(true, "log.Log(LogLevel.Warning, ex, string.Empty);")]
         [DataRow(true, "log.Log(LogLevel.Error, ex, string.Empty);")]
         [DataRow(true, "log.Log(LogLevel.Critical, ex, string.Empty);")]
         [DataRow(false, "log.Log(LogLevel.Trace, ex, string.Empty);")]
         [DataRow(false, "log.Log(LogLevel.Debug, ex, string.Empty);")]
-        [DataRow(false, "log.Log(LogLevel.Information, ex, string.Empty);")]
         [DataRow(false, "log.Log(LogLevel.None, ex, string.Empty);")]
         // Calls with complications in it
         [DataRow(true, "log.Log(LogLevel.Critical, string.Empty);")] // It is not required to pass the exception to the log call

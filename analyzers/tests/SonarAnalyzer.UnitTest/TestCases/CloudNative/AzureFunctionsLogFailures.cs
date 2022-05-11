@@ -27,7 +27,6 @@ public static class AzureFunctions
         {
             log.LogTrace(string.Empty);        // Secondary
 //          ^^^^^^^^^^^^^^^^^^^^^^^^^^
-            log.LogInformation(string.Empty);  // Secondary
             log.LogDebug(string.Empty);        // Secondary
         }
     }
