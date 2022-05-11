@@ -33,7 +33,7 @@ namespace AzureFunctions1
             {
                 return new EmptyResult();
             }
-            catch // Noncompliant {{Log caught exceptions via ILogger with LogLevel Warning, Error, or Critical}}
+            catch // Noncompliant
 //          ^^^^^
             {
                 log.LogTrace(string.Empty);        // Secondary
@@ -72,9 +72,9 @@ namespace AzureFunctions1
             }
         }
 
-        private static bool True(Action a)
+        private static bool True(Action action)
         {
-            a();
+            action();
             return true;
         }
 
@@ -85,6 +85,7 @@ namespace AzureFunctions1
             {
                 return new EmptyResult();
             }
+            // See https://blog.stephencleary.com/2020/06/a-new-pattern-for-exception-logging.html
             catch (Exception ex) when (True(() => log.LogError(ex, ""))) // Compliant
             {
                 return new EmptyResult();
