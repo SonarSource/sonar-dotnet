@@ -20,7 +20,6 @@
 
 using SonarAnalyzer.Rules.CSharp;
 using SonarAnalyzer.Rules.SymbolicExecution;
-using SonarAnalyzer.UnitTest.MetadataReferences;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {

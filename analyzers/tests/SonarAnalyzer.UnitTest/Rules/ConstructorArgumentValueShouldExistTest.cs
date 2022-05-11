@@ -21,7 +21,6 @@
 #if NET
 using CS = SonarAnalyzer.Rules.CSharp;
 #else
-using SonarAnalyzer.UnitTest.MetadataReferences;
 using CS = SonarAnalyzer.Rules.CSharp;
 using VB = SonarAnalyzer.Rules.VisualBasic;
 #endif

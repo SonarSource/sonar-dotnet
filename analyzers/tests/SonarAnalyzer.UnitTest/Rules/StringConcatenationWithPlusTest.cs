@@ -19,7 +19,6 @@
  */
 
 using SonarAnalyzer.Rules.VisualBasic;
-using SonarAnalyzer.UnitTest.MetadataReferences;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {

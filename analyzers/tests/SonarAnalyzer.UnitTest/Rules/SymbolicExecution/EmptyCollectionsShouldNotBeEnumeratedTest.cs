@@ -19,7 +19,6 @@
  */
 
 using SonarAnalyzer.Rules.CSharp;
-using SonarAnalyzer.UnitTest.MetadataReferences;
 
 namespace SonarAnalyzer.UnitTest.Rules.SymbolicExecution
 {

@@ -22,7 +22,6 @@ using System.IO;
 using System.Threading;
 using Microsoft.CodeAnalysis.CodeActions;
 using Microsoft.CodeAnalysis.CodeFixes;
-using Microsoft.CodeAnalysis.Diagnostics;
 
 namespace SonarAnalyzer.UnitTest.TestFramework
 {

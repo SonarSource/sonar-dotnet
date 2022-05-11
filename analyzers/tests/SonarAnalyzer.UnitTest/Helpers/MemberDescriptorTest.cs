@@ -20,7 +20,6 @@
 
 using Moq;
 using SonarAnalyzer.Common;
-using SonarAnalyzer.UnitTest.MetadataReferences;
 using CSharpSyntax = Microsoft.CodeAnalysis.CSharp.Syntax;
 using VBSyntax = Microsoft.CodeAnalysis.VisualBasic.Syntax;
 

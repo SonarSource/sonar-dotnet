@@ -20,7 +20,6 @@
 
 using Microsoft.CodeAnalysis.CSharp;
 using SonarAnalyzer.Common;
-using SonarAnalyzer.UnitTest.MetadataReferences;
 using CS = SonarAnalyzer.Rules.CSharp;
 using VB = SonarAnalyzer.Rules.VisualBasic;
 

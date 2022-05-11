@@ -22,10 +22,6 @@ using SonarAnalyzer.Common;
 using SonarAnalyzer.Rules.CSharp;
 using VB = SonarAnalyzer.Rules.VisualBasic;
 
-#if NET
-using SonarAnalyzer.UnitTest.MetadataReferences;
-#endif
-
 namespace SonarAnalyzer.UnitTest.Rules.Hotspots
 {
     [TestClass]

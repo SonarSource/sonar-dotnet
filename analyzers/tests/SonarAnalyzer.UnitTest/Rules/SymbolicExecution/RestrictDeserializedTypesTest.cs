@@ -21,7 +21,6 @@
 using SonarAnalyzer.Rules.CSharp;
 using SonarAnalyzer.Rules.SymbolicExecution;
 #if NETFRAMEWORK
-using SonarAnalyzer.UnitTest.MetadataReferences;
 #endif
 
 namespace SonarAnalyzer.UnitTest.Rules

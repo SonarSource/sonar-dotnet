@@ -104,9 +104,11 @@
     <Using Include="System.Linq" />
     <Using Include="FluentAssertions" />
     <Using Include="Microsoft.CodeAnalysis" />
+    <Using Include="Microsoft.CodeAnalysis.Diagnostics" />
     <Using Include="Microsoft.VisualStudio.TestTools.UnitTesting" />
     <Using Include="SonarAnalyzer.Helpers" />
-    <Using Include="SonarAnalyzer.UnitTest.TestFramework" />    
+    <Using Include="SonarAnalyzer.UnitTest.MetadataReferences" />
+    <Using Include="SonarAnalyzer.UnitTest.TestFramework" />
   </ItemGroup>
 
 </Project>

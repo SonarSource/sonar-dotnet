@@ -23,7 +23,6 @@ using System.Text.RegularExpressions;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Rules.CSharp;
 using SonarAnalyzer.UnitTest.Helpers;
-using SonarAnalyzer.UnitTest.MetadataReferences;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {

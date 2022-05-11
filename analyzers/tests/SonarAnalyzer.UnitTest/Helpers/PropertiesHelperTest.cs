@@ -19,7 +19,6 @@
  */
 
 using System.IO;
-using Microsoft.CodeAnalysis.Diagnostics;
 using Microsoft.CodeAnalysis.Text;
 using Moq;
 

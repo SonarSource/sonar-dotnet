@@ -20,7 +20,6 @@
 
 using System.Threading;
 using Microsoft.CodeAnalysis.CSharp;
-using Microsoft.CodeAnalysis.Diagnostics;
 using Microsoft.CodeAnalysis.VisualBasic;
 using SonarAnalyzer.Common;
 using CSharpSyntax = Microsoft.CodeAnalysis.CSharp.Syntax;

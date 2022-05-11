@@ -19,8 +19,6 @@
  */
 
 using Google.Protobuf;
-using Microsoft.CodeAnalysis.Diagnostics;
-using SonarAnalyzer.UnitTest.MetadataReferences;
 using CS = Microsoft.CodeAnalysis.CSharp;
 using VB = Microsoft.CodeAnalysis.VisualBasic;
 

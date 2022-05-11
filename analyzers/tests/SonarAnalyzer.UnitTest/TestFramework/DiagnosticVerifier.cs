@@ -21,7 +21,6 @@
 using System.Collections.Concurrent;
 using System.Text;
 using FluentAssertions.Execution;
-using Microsoft.CodeAnalysis.Diagnostics;
 using Microsoft.CodeAnalysis.Text;
 using SonarAnalyzer.Common;
 

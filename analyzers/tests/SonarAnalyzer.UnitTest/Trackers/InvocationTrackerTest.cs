@@ -23,10 +23,6 @@ using SonarAnalyzer.Helpers.Trackers;
 using CSharpSyntax = Microsoft.CodeAnalysis.CSharp.Syntax;
 using VBSyntax = Microsoft.CodeAnalysis.VisualBasic.Syntax;
 
-#if NET
-using SonarAnalyzer.UnitTest.MetadataReferences;
-#endif
-
 namespace SonarAnalyzer.UnitTest.Helpers
 {
     [TestClass]

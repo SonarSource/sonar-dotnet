@@ -19,7 +19,6 @@
  */
 
 using System.IO;
-using SonarAnalyzer.UnitTest.MetadataReferences;
 
 namespace SonarAnalyzer.UnitTest.Helpers
 {
