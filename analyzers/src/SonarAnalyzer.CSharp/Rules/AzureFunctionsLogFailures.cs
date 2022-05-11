@@ -34,7 +34,7 @@ namespace SonarAnalyzer.Rules.CSharp
     public sealed class AzureFunctionsLogFailures : SonarDiagnosticAnalyzer
     {
         private const string DiagnosticId = "S6423";
-        private const string MessageFormat = "Log caught exceptions via ILogger";
+        private const string MessageFormat = "Log caught exceptions via ILogger with LogLevel Warning, Error, or Critical";
 
         private static readonly DiagnosticDescriptor Rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
 
@@ -44,7 +44,7 @@ namespace SonarAnalyzer.Rules.CSharp
             context.RegisterSyntaxNodeActionInNonGenerated(c =>
                 {
                     var catchClause = (CatchClauseSyntax)c.Node;
-                    if (IsContainingMethodAzureFunction(c.SemanticModel, catchClause))
+                    if (IsContainingMethodAzureFunction(c.SemanticModel, catchClause, c.CancellationToken))
                     {
                         var iLogger = c.SemanticModel.Compilation.GetTypeByMetadataName(KnownType.Microsoft_Extensions_Logging_ILogger.TypeName);
                         if (iLogger is not null && InvalidCallsToILogger(c.SemanticModel, iLogger, catchClause, c.CancellationToken) is ImmutableArray<ExpressionSyntax> secondaryLocations)
@@ -73,11 +73,11 @@ namespace SonarAnalyzer.Rules.CSharp
                 : walker.InvalidLoggerInvocations;
         }
 
-        private static bool IsContainingMethodAzureFunction(SemanticModel model, SyntaxNode node)
+        private static bool IsContainingMethodAzureFunction(SemanticModel model, SyntaxNode node, CancellationToken cancellationToken)
         {
             return node.Ancestors().OfType<MethodDeclarationSyntax>().FirstOrDefault() is { } method
                 && method.AttributeLists.Any() // FunctionName has [AttributeUsage(AttributeTargets.Method, AllowMultiple = false, Inherited = false)] so there must be an attribute
-                && model.GetDeclaredSymbol(method) is { } methodSymbol
+                && model.GetDeclaredSymbol(method, cancellationToken) is { } methodSymbol
                 && model.Compilation.GetTypeByMetadataName(KnownType.Microsoft_Azure_WebJobs_FunctionNameAttribute.TypeName) is { } functionNameAttribute
                 && methodSymbol.GetAttributes().Any(a => a.AttributeClass.Equals(functionNameAttribute));
         }
@@ -91,7 +91,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 5, // Critical
             };
 
-            private readonly ImmutableHashSet<ExpressionSyntax>.Builder builder = ImmutableHashSet.CreateBuilder<ExpressionSyntax>();
+            private readonly ImmutableHashSet<ExpressionSyntax>.Builder invalidIvocationsBuilder = ImmutableHashSet.CreateBuilder<ExpressionSyntax>();
 
             public LoggerCallWalker(SemanticModel model, ITypeSymbol iLoggerSymbol, CancellationToken cancellationToken)
             {
@@ -108,7 +108,7 @@ namespace SonarAnalyzer.Rules.CSharp
             private Lazy<INamedTypeSymbol> LoggerExtensions { get; }
             private Lazy<IMethodSymbol> ILogger_Log { get; }
             public bool HasValidLoggerCall { get; private set; }
-            public ImmutableArray<ExpressionSyntax> InvalidLoggerInvocations => builder.ToImmutableArray();
+            public ImmutableArray<ExpressionSyntax> InvalidLoggerInvocations => invalidIvocationsBuilder.ToImmutableArray();
 
             public override void Visit(SyntaxNode node)
             {
@@ -130,7 +130,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     }
                     else
                     {
-                        builder.Add(node);
+                        invalidIvocationsBuilder.Add(node);
                     }
                 }
                 base.VisitInvocationExpression(node);
@@ -164,7 +164,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
             private bool IsPassingValidLogLevel(InvocationExpressionSyntax invocation, IMethodSymbol symbol) =>
                 symbol.Parameters.FirstOrDefault(x => x.Name == "logLevel") is { } logLevelParameter
-                    && new CSharpMethodParameterLookup(invocation.ArgumentList, symbol).TryGetNonParamsSyntax(logLevelParameter, out var argumentSyntax)
+                    && CSharpFacade.Instance.MethodParameterLookup(invocation, symbol).TryGetNonParamsSyntax(logLevelParameter, out var argumentSyntax)
                     && Model.GetConstantValue(argumentSyntax) is { HasValue: true, Value: int logLevel }
                         ? ValidLogLevel.Contains(logLevel)
                         : true; // Compliant: Some non-constant value is passed as loglevel.
