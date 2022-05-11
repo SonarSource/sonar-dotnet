@@ -37,6 +37,7 @@ namespace AzureFunctions1
 //          ^^^^^
             {
                 log.LogTrace(string.Empty);        // Secondary
+//              ^^^^^^^^^^^^^^^^^^^^^^^^^^
                 log.LogInformation(string.Empty);  // Secondary
                 log.LogDebug(string.Empty);        // Secondary
                 return new EmptyResult();
