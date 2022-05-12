@@ -29,6 +29,12 @@ using SonarAnalyzer.Helpers;
 
 namespace SonarAnalyzer.Rules.CSharp
 {
+    public static class Fixme   // FIXME: Remove temporary workaround
+    {
+        public static bool IsAzureFunction(this SyntaxNodeAnalysisContext context) =>
+            context.ContainingSymbol.GetAttributes().Any(x => x.AttributeClass.Name.Contains("FunctionName"));
+    }
+
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
     public sealed class AzureFunctionsStateless : SonarDiagnosticAnalyzer
     {
