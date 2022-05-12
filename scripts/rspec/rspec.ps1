@@ -133,9 +133,9 @@ function GenerateCsRuleClasses() {
     $csharpRuleTestCasesFolder = "${sonaranalyzerPath}\\tests\\SonarAnalyzer.UnitTest\\TestCases"
 
     $filesMap = @{
-        "CSharpRuleTemplate.cs"     = "${csharpRulesFolder}\\${className}.cs"
-        "CSharpTestTemplate.cs"     = "${csharpRuleTestsFolder}\\${className}Test.cs"
-        "CSharpTestCaseTemplate.cs" = "${csharpRuleTestCasesFolder}\\${className}.cs"
+        "Rule.CS.cs"     = "${csharpRulesFolder}\\${className}.cs"
+        "Test.CS.cs"     = "${csharpRuleTestsFolder}\\${className}Test.cs"
+        "TestCase.CS.cs" = "${csharpRuleTestCasesFolder}\\${className}.cs"
     }
     WriteClasses -filesMap $filesMap -classNameToUse $className
 }
@@ -154,11 +154,11 @@ function GenerateVbRuleClasses($language) {
         AppendVbTestCase -ruleTestsFolder $ruleTestsFolder
     }
     else {
-        $filesMap["VbNetTestTemplate.cs"] = "${ruleTestsFolder}\\${className}Test.cs"
+        $filesMap["Test.VB.cs"] = "${ruleTestsFolder}\\${className}Test.cs"
     }
 
-    $filesMap["VbNetRuleTemplate.cs"] = "${vbRulesFolder}\\${className}.cs"
-    $filesMap["VbNetTestCaseTemplate.vb"] = "${vbRuleTestCasesFolder}\\${className}.vb"
+    $filesMap["Rule.VB.cs"] = "${vbRulesFolder}\\${className}.cs"
+    $filesMap["TestCase.VB.vb"] = "${vbRuleTestCasesFolder}\\${className}.vb"
 
     WriteClasses -filesMap $filesMap
 }
@@ -206,7 +206,7 @@ function GenerateBaseClassIfSecondLanguage()
         $existingCSClassText = ReplaceTextInString -oldText $supportedDiagToken -newText $csLanguageFacadeToken -modifiableString $existingCSClassText
         $existingVBClassText = ReplaceTextInString -oldText $supportedDiagToken -newText $vbLanguageFacadeToken -modifiableString $existingVBClassText
 
-        $filesMap["CommonBaseClassTemplate.cs"] = "${commonRulesFolder}\\${className}Base.cs"
+        $filesMap["Rule.Base.cs"] = "${commonRulesFolder}\\${className}Base.cs"
 
         Set-Content -NoNewline `
                     -Path $csFilePath `
@@ -244,7 +244,7 @@ function RemoveText($textToRemove, $modifiableString)
 
 function AppendVbTestCase($ruleTestsFolder) {
     $existingClassText = Get-Content -Path "${ruleTestsFolder}\\${csClassName}Test.cs" -Raw
-    $snippetText = Get-Content -Path "${RuleTemplateFolder}\\VbNetTestSnippet.cs" -Raw
+    $snippetText = Get-Content -Path "${RuleTemplateFolder}\\TestMethod.VB.cs" -Raw
 
     $usingToken = "using SonarAnalyzer.Rules.CSharp;"
     $csUsingToken = "using CS = SonarAnalyzer.Rules.CSharp;"
