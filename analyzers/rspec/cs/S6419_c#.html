@@ -1,0 +1,51 @@
+<p>An Azure Function should be stateless as there’s no control over where and when function instances are provisioned and de-provisioned. Managing and
+storing data/state between requests can lead to inconsistencies. If, for any reason, you need to have a stateful function, consider using the Durable
+Functions extension of Azure Functions.</p>
+<h2>Noncompliant Code Example</h2>
+<pre>
+    public static class HttpExample
+    {
+        private static readonly int port = 2000;
+        private static int numOfRequests = 1;
+
+        [FunctionName("HttpExample")]
+        public static async Task&lt;IActionResult&gt; Run( [HttpTrigger(AuthorizationLevel.Anonymous, "get", Route = null)] HttpRequest request, ILogger log)
+        {
+            numOfRequests += 1; // Noncompliant
+            log.LogInformation($"Number of POST requests is {numOfRequests}.");
+
+            string responseMessage = $"HttpRequest was made on port {port}."; // Compliant, state is only read.
+
+            return new OkObjectResult(responseMessage);
+        }
+    }
+</pre>
+<h2>Compliant Solution</h2>
+<pre>
+    public static class HttpExample
+    {
+        private static readonly int port = 2000;
+
+        [FunctionName("HttpExample")]
+        public static async Task&lt;IActionResult&gt; Run( [HttpTrigger(AuthorizationLevel.Anonymous, "get", Route = null)] HttpRequest request, ILogger log)
+        {
+            // A compliant solution would be to manage the `numOfRequests` with an entity function or would use storage (e.g., Azure Blob storage, Azure Queue Storage)
+            // to share the state between functions.
+
+            string responseMessage = $"HttpRequest was made on port {port}.";
+
+            return new OkObjectResult(responseMessage);
+        }
+    }
+</pre>
+<h2>See</h2>
+<ul>
+  <li> <a href="https://docs.microsoft.com/en-us/azure/azure-functions/performance-reliability#write-functions-to-be-stateless">Improve the
+  performance and reliability of Azure Functions</a> </li>
+  <li> <a href="https://docs.microsoft.com/en-us/azure/azure-functions/durable/durable-functions-overview?tabs=csharp">Durable Functions Overview</a>
+  </li>
+  <li> <a href="https://docs.microsoft.com/en-us/azure/azure-functions/durable/durable-functions-entities?tabs=csharp">Durable Functions - Entity
+  Functions</a> </li>
+  <li> <a href="https://docs.microsoft.com/en-us/azure/azure-functions/storage-considerations">Storage considerations for Azure Functions</a> </li>
+</ul>
+
