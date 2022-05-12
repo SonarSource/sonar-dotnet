@@ -218,7 +218,7 @@ public static class CatchScenarios
     }
 
     [FunctionName("Sample")]
-    public static void OuterCatchSpecificAndAll_When()   // FIXME FN Non-compliant
+    public static void OuterCatchSpecificAndAll_When()   // Noncompliant
     {
         try
         {
@@ -234,7 +234,7 @@ public static class CatchScenarios
     }
 
     [FunctionName("Sample")]
-    public static void OuterCatchWhen()   // FIXME FN Non-compliant
+    public static void OuterCatchWhen()   // Noncompliant
     {
         try
         {
@@ -247,7 +247,7 @@ public static class CatchScenarios
     }
 
     [FunctionName("Sample")]
-    public static void OuterCatchWhenAlwaysTrue()   // FIXME FN Non-compliant FP, we don't support constant condition tracking
+    public static void OuterCatchWhenAlwaysTrue()   // Noncompliant FP, we don't support constant condition tracking
     {
         try
         {

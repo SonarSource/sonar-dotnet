@@ -94,7 +94,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
             private static bool CatchesAllExceptions(CatchClauseSyntax catchClause) =>
                 catchClause.Declaration is null
-                || catchClause.Declaration.Type.NameIs(nameof(Exception));
+                || (catchClause.Declaration.Type.NameIs(nameof(Exception)) && catchClause.Filter is null);
         }
     }
 }
