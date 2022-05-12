@@ -30,30 +30,30 @@ public static class Functions
         DoSomething();
     }
 
-    [FunctionName("FIXME")]
+    [FunctionName("Sample")]
     public static void NoTryCatch_Body(int arg)         // Noncompliant {{Wrap Azure Function body in try/catch block.}}
     //                 ^^^^^^^^^^^^^^^
     {
         DoSomething();
     }
 
-    [FunctionName("FIXME")]
+    [FunctionName("Sample")]
     public static void NoTryCatch_Arrow() =>            // Noncompliant
         DoSomething();
 
-    [FunctionName("FIXME")]
+    [FunctionName("Sample")]
     public static async Task<string> NoTryCatchAsync()  // Noncompliant
     {
         return DoSomething();
     }
 
-    [FunctionName("FIXME")]
+    [FunctionName("Sample")]
     public static void Empty()
     {
         // Compliant. Nothing to see here
     }
 
-    [FunctionName("FIXME")]
+    [FunctionName("Sample")]
     public static async Task<int> Harmless()
     {
         Action notInvokedParenthesizedLambda = () => { DoSomething(); };    // Compliant, not invoked
@@ -74,7 +74,7 @@ public static class Functions
             DoSomething();
     }
 
-    [FunctionName("FIXME")]
+    [FunctionName("Sample")]
     public static void PropertyAccess(ICollection<int> items)   // This is considered compliant for simplicity. Properties should not throw.
     {
         if (items.Count == 0)
@@ -83,7 +83,7 @@ public static class Functions
         }
     }
 
-    [FunctionName("FIXME")]
+    [FunctionName("Sample")]
     public static void TryFinally()   // Noncompliant
     {
         try
@@ -123,7 +123,7 @@ public static class AttributeVariants
 
 public static class CatchScenarios
 {
-    [FunctionName("FIXME")]
+    [FunctionName("Sample")]
     public static void OuterCatch()
     {
         try
@@ -136,7 +136,7 @@ public static class CatchScenarios
         }
     }
 
-    [FunctionName("FIXME")]
+    [FunctionName("Sample")]
     public static void OuterCatchFullName()
     {
         try
@@ -149,7 +149,7 @@ public static class CatchScenarios
         }
     }
 
-    [FunctionName("FIXME")]
+    [FunctionName("Sample")]
     public static void OuterCatchGlobalName()
     {
         try
@@ -162,7 +162,7 @@ public static class CatchScenarios
         }
     }
 
-    [FunctionName("FIXME")]
+    [FunctionName("Sample")]
     public static void OuterCatchNoVariable()
     {
         try
@@ -175,7 +175,7 @@ public static class CatchScenarios
         }
     }
 
-    [FunctionName("FIXME")]
+    [FunctionName("Sample")]
     public static void OuterCatchNoType()
     {
         try
@@ -188,7 +188,7 @@ public static class CatchScenarios
         }
     }
 
-    [FunctionName("FIXME")]
+    [FunctionName("Sample")]
     public static void OuterCatchSpecific()   // Noncompliant
     {
         try
@@ -201,7 +201,7 @@ public static class CatchScenarios
         }
     }
 
-    [FunctionName("FIXME")]
+    [FunctionName("Sample")]
     public static void OuterCatchSpecificAndAll()
     {
         try
@@ -217,7 +217,7 @@ public static class CatchScenarios
         }
     }
 
-    [FunctionName("FIXME")]
+    [FunctionName("Sample")]
     public static void OuterCatchSpecificAndAll_When()   // FIXME FN Non-compliant
     {
         try
@@ -233,7 +233,7 @@ public static class CatchScenarios
         }
     }
 
-    [FunctionName("FIXME")]
+    [FunctionName("Sample")]
     public static void OuterCatchWhen()   // FIXME FN Non-compliant
     {
         try
@@ -246,7 +246,7 @@ public static class CatchScenarios
         }
     }
 
-    [FunctionName("FIXME")]
+    [FunctionName("Sample")]
     public static void OuterCatchWhenAlwaysTrue()   // FIXME FN Non-compliant FP, we don't support constant condition tracking
     {
         try
@@ -264,7 +264,7 @@ public static class CatchScenarios
 
 public static class NestedTry
 {
-    [FunctionName("FIXME")]
+    [FunctionName("Sample")]
     public static void NestedCatch(int arg)  // Compliant
     {
         if (arg == 42)
@@ -279,7 +279,7 @@ public static class NestedTry
         }
     }
 
-    [FunctionName("FIXME")]
+    [FunctionName("Sample")]
     public static void NestedCatch_Multi(int arg)  // Compliant
     {
         if (arg == 42)
@@ -304,7 +304,7 @@ public static class NestedTry
         }
     }
 
-    [FunctionName("FIXME")]
+    [FunctionName("Sample")]
     public static void NestedCatch_Deep(int arg)  // Compliant
     {
         if (arg == 42)
@@ -326,7 +326,7 @@ public static class NestedTry
         }
     }
 
-    [FunctionName("FIXME")]
+    [FunctionName("Sample")]
     public static void InvocationOutside_BeforeTry(int arg)   // Noncompliant
     {
         if (arg == 42)
@@ -342,7 +342,7 @@ public static class NestedTry
         }
     }
 
-    [FunctionName("FIXME")]
+    [FunctionName("Sample")]
     public static void InvocationOutside_BeforeIf(int arg)   // Noncompliant
     {
         DoSomething();
@@ -358,7 +358,7 @@ public static class NestedTry
         }
     }
 
-    [FunctionName("FIXME")]
+    [FunctionName("Sample")]
     public static void InvocationOutside_AfterTry(int arg)   // Noncompliant
     {
         if (arg == 42)
@@ -374,7 +374,7 @@ public static class NestedTry
         }
     }
 
-    [FunctionName("FIXME")]
+    [FunctionName("Sample")]
     public static void InvocationOutside_AfterIf(int arg)   // Noncompliant
     {
         if (arg == 42)
@@ -390,7 +390,7 @@ public static class NestedTry
         DoSomething();
     }
 
-    [FunctionName("FIXME")]
+    [FunctionName("Sample")]
     public static void InvocationOutside_NestedDeep(int arg)  // Noncompliant
     {
         if (arg == 42)
@@ -418,13 +418,13 @@ public static class NestedTry
 
 public class NonStatic
 {
-    [FunctionName("FIXME")]
+    [FunctionName("Sample")]
     public void InstanceMethod()         // Noncompliant, should not be decorated with the attribute anyway
     {
         DoSomething();
     }
 
-    [FunctionName("FIXME")]
+    [FunctionName("Sample")]
     public static void StaticMethod()   // Noncompliant
     {
         DoSomething();
