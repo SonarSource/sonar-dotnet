@@ -122,9 +122,18 @@ namespace SonarAnalyzer.Rules.CSharp
                 base.VisitInvocationExpression(node);
             }
 
+            public override void VisitArgument(ArgumentSyntax node)
+            {
+                if (Model.GetTypeInfo(node.Expression).Type?.DerivesOrImplements(ILogger) == true)
+                {
+                    HasValidLoggerCall = true;
+                }
+                base.VisitArgument(node);
+            }
+
             private bool IsValidLogCall(InvocationExpressionSyntax invocation, IMethodSymbol methodSymbol)
             {
-                // Check wellknown LoggerExtensions methods invocation
+                // Check wellknown LoggerExtensions methods invocations
                 if (methodSymbol.IsExtensionMethod
                     && LoggerExtensions.Value is { } loggerExtensions
                     && loggerExtensions.Equals(methodSymbol.ContainingType))
@@ -155,15 +164,6 @@ namespace SonarAnalyzer.Rules.CSharp
                     && Model.GetConstantValue(argumentSyntax, CancellationToken) is { HasValue: true, Value: int logLevel }
                         ? ValidLogLevel.Contains(logLevel)
                         : true; // Compliant: Some non-constant value is passed as loglevel.
-
-            public override void VisitArgument(ArgumentSyntax node)
-            {
-                if (Model.GetTypeInfo(node.Expression).Type?.DerivesOrImplements(ILogger) == true)
-                {
-                    HasValidLoggerCall = true;
-                }
-                base.VisitArgument(node);
-            }
         }
     }
 }
