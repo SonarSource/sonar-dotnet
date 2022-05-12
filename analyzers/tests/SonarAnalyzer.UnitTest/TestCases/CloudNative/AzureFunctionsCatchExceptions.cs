@@ -75,12 +75,13 @@ public static class Functions
     }
 
     [FunctionName("Sample")]
-    public static void PropertyAccess(ICollection<int> items)   // This is considered compliant for simplicity. Properties should not throw.
+    public static void PropertyAccess(ICollection<int> items, NonStatic instance)   // This is considered compliant for simplicity. Properties should not throw.
     {
         if (items.Count == 0)
         {
             return;
         }
+        instance.Property = 42;
     }
 
     [FunctionName("Sample")]
@@ -418,6 +419,8 @@ public static class NestedTry
 
 public class NonStatic
 {
+    public int Property { get; set; }
+
     [FunctionName("Sample")]
     public void InstanceMethod()         // Noncompliant, should not be decorated with the attribute anyway
     {
