@@ -18,7 +18,6 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System;
 using System.Linq;
 using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -32,39 +31,20 @@ namespace SonarAnalyzer.UnitTest.Common
     public class RuleFinderTest
     {
         [TestMethod]
-        public void GetPackagedRuleAssembly() =>
-            RuleFinder.PackagedRuleAssemblies.Should().HaveCount(3);
-
-        [TestMethod]
-        public void GetParameterlessAnalyzerTypes()
-        {
-            new RuleFinder().GetParameterlessAnalyzerTypes(AnalyzerLanguage.CSharp)
-                .Should().NotBeEmpty();
-            new RuleFinder().GetParameterlessAnalyzerTypes(AnalyzerLanguage.VisualBasic)
-                .Should().NotBeEmpty();
-        }
-
-        [TestMethod]
         public void GetAnalyzerTypes()
         {
-            var analyzers = new RuleFinder().GetAnalyzerTypes(AnalyzerLanguage.CSharp);
+            var analyzers = RuleFinder.GetAnalyzerTypes(AnalyzerLanguage.CSharp);
             analyzers.Should().Contain(typeof(EmptyStatement));
         }
 
         [TestMethod]
         public void GetAllAnalyzerTypes()
         {
-            var finder = new RuleFinder();
+            var countParameterless = RuleFinder.GetAnalyzerTypes(AnalyzerLanguage.CSharp).Count(x => !RuleFinder.IsParameterized(x));
+            RuleFinder.RuleAnalyzerTypes.Should().HaveCountGreaterThan(countParameterless);
 
-            var countParameterless = finder.GetParameterlessAnalyzerTypes(AnalyzerLanguage.CSharp).Count();
-            finder.RuleAnalyzerTypes.Should().HaveCountGreaterThan(countParameterless);
-
-            countParameterless = finder.GetParameterlessAnalyzerTypes(AnalyzerLanguage.VisualBasic).Count();
-            finder.RuleAnalyzerTypes.Should().HaveCountGreaterThan(countParameterless);
+            countParameterless = RuleFinder.GetAnalyzerTypes(AnalyzerLanguage.VisualBasic).Count(x => !RuleFinder.IsParameterized(x));
+            RuleFinder.RuleAnalyzerTypes.Should().HaveCountGreaterThan(countParameterless);
         }
-
-        [TestMethod]
-        public void GetTargetLanguagesThrowsIfTypeDoesNotHaveLanguageInfo() =>
-            Assert.ThrowsException<NotSupportedException>(() => RuleFinder.GetTargetLanguages(typeof(string)));
     }
 }

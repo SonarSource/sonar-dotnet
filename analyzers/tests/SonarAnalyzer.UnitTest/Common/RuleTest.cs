@@ -24,7 +24,6 @@ using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Linq;
-using System.Reflection;
 using System.Resources;
 using FluentAssertions;
 using Microsoft.CodeAnalysis;
@@ -46,7 +45,7 @@ namespace SonarAnalyzer.UnitTest.Common
         [TestMethod]
         public void CodeFixes_Named_Properly()
         {
-            foreach (var codeFix in GetCodeFixTypes(RuleFinder.PackagedRuleAssemblies))
+            foreach (var codeFix in RuleFinder.CodeFixTypes)
             {
                 var analyzerName = codeFix.FullName.Replace("CodeFix", string.Empty);
                 codeFix.Assembly.GetType(analyzerName).Should().NotBeNull("CodeFix '{0}' has no matching DiagnosticAnalyzer.", codeFix.Name);
@@ -56,7 +55,7 @@ namespace SonarAnalyzer.UnitTest.Common
         [TestMethod]
         public void RulesDoNotThrow_CS()
         {
-            var analyzers = RuleFinder.GetAnalyzers(AnalyzerLanguage.CSharp).ToArray();
+            var analyzers = RuleFinder.CreateAnalyzers(AnalyzerLanguage.CSharp, true).ToArray();
 
             VerifyNoExceptionThrown(@"TestCases\RuleFailure\InvalidSyntax.cs", analyzers, CompilationErrorBehavior.Ignore);
             VerifyNoExceptionThrown(@"TestCases\RuleFailure\SpecialCases.cs", analyzers, CompilationErrorBehavior.Ignore);
@@ -66,22 +65,45 @@ namespace SonarAnalyzer.UnitTest.Common
         [TestMethod]
         public void RulesDoNotThrow_VB()
         {
-            var analyzers = RuleFinder.GetAnalyzers(AnalyzerLanguage.VisualBasic).ToArray();
+            var analyzers = RuleFinder.CreateAnalyzers(AnalyzerLanguage.VisualBasic, true).ToArray();
 
             VerifyNoExceptionThrown(@"TestCases\RuleFailure\InvalidSyntax.vb", analyzers, CompilationErrorBehavior.Ignore);
             VerifyNoExceptionThrown(@"TestCases\RuleFailure\SpecialCases.vb", analyzers, CompilationErrorBehavior.Ignore);
         }
 
         [TestMethod]
-        public void SonarDiagnosticAnalyzer_IsUsedInAllRules()
+        public void AllAnalyzers_InheritSonarDiagnosticAnalyzer()
         {
-            var analyzers = RuleFinder.PackagedRuleAssemblies
-                .SelectMany(assembly => assembly.GetTypes())
-                .Where(t => t.IsSubclassOf(typeof(DiagnosticAnalyzer)) && t != typeof(SonarDiagnosticAnalyzer));
-
-            foreach (var analyzer in analyzers)
+            foreach (var analyzer in RuleFinder.AllAnalyzerTypes)
             {
                 analyzer.Should().BeAssignableTo<SonarDiagnosticAnalyzer>($"{analyzer.Name} is not a subclass of SonarDiagnosticAnalyzer");
+            }
+        }
+
+        [TestMethod]
+        public void CodeFixes_InheritSonarCodeFix()
+        {
+            foreach (var codeFix in RuleFinder.CodeFixTypes)
+            {
+                codeFix.Should().BeAssignableTo<SonarCodeFix>($"{codeFix.Name} is not a subclass of SonarCodeFix");
+            }
+        }
+
+        [TestMethod]
+        public void Rules_WithDiagnosticAnalyzerAttribute_AreNotAbstract()
+        {
+            foreach (var analyzer in RuleFinder.AllAnalyzerTypes)
+            {
+                analyzer.IsAbstract.Should().BeFalse();
+            }
+        }
+
+        [TestMethod]
+        public void CodeFixes_WithExportCodeFixProviderAttribute_AreNotAbstract()
+        {
+            foreach (var codeFix in RuleFinder.CodeFixTypes)
+            {
+                codeFix.IsAbstract.Should().BeFalse();
             }
         }
 
@@ -123,7 +145,7 @@ namespace SonarAnalyzer.UnitTest.Common
 
         [TestMethod]
         public void AllParameterizedRules_AreDisabledByDefault() =>
-            new RuleFinder().RuleAnalyzerTypes
+            RuleFinder.RuleAnalyzerTypes
                 .Where(RuleFinder.IsParameterized)
                 .Select(type => (DiagnosticAnalyzer)Activator.CreateInstance(type))
                 .SelectMany(analyzer => analyzer.SupportedDiagnostics)
@@ -134,7 +156,7 @@ namespace SonarAnalyzer.UnitTest.Common
         [TestMethod]
         public void AllRulesEnabledByDefault_ContainSonarWayCustomTag()
         {
-            var descriptors = new RuleFinder().RuleAnalyzerTypes.SelectMany(SupportedDiagnostics)
+            var descriptors = RuleFinder.RuleAnalyzerTypes.SelectMany(SupportedDiagnostics)
                 // Security hotspots are enabled by default, but they will report issues only
                 // when their ID is contained in SonarLint.xml
                 .Where(descriptor => !IsSecurityHotspot(descriptor));
@@ -159,7 +181,7 @@ namespace SonarAnalyzer.UnitTest.Common
         [TestMethod]
         public void DeprecatedRules_AreNotInSonarWay()
         {
-            foreach (var diagnostic in new RuleFinder().RuleAnalyzerTypes.SelectMany(SupportedDiagnostics).Where(IsDeprecated))
+            foreach (var diagnostic in RuleFinder.RuleAnalyzerTypes.SelectMany(SupportedDiagnostics).Where(IsDeprecated))
             {
                 IsSonarWay(diagnostic).Should().BeFalse($"{diagnostic.Id} is deprecated and should be removed from SonarWay.");
             }
@@ -168,7 +190,7 @@ namespace SonarAnalyzer.UnitTest.Common
         [TestMethod]
         public void AllRules_DoNotHaveUtilityTag()
         {
-            foreach (var diagnostic in new RuleFinder().RuleAnalyzerTypes.SelectMany(SupportedDiagnostics))
+            foreach (var diagnostic in RuleFinder.RuleAnalyzerTypes.SelectMany(SupportedDiagnostics))
             {
                 diagnostic.CustomTags.Should().NotContain(DiagnosticDescriptorBuilder.UtilityTag);
             }
@@ -177,7 +199,7 @@ namespace SonarAnalyzer.UnitTest.Common
         [TestMethod]
         public void UtilityAnalyzers_HaveUtilityTag()
         {
-            foreach (var diagnostic in new RuleFinder().UtilityAnalyzerTypes.SelectMany(SupportedDiagnostics))
+            foreach (var diagnostic in RuleFinder.UtilityAnalyzerTypes.SelectMany(SupportedDiagnostics))
             {
                 diagnostic.CustomTags.Should().Contain(DiagnosticDescriptorBuilder.UtilityTag);
             }
@@ -186,12 +208,12 @@ namespace SonarAnalyzer.UnitTest.Common
         [TestMethod]
         public void AllRules_SonarWayTagPresenceMatchesIsEnabledByDefault()
         {
-            var parameterized = new RuleFinder().RuleAnalyzerTypes
+            var parameterized = RuleFinder.RuleAnalyzerTypes
                 .Where(RuleFinder.IsParameterized)
                 .SelectMany(type => ((DiagnosticAnalyzer)Activator.CreateInstance(type)).SupportedDiagnostics)
                 .ToHashSet();
 
-            foreach (var diagnostic in new RuleFinder().RuleAnalyzerTypes.SelectMany(SupportedDiagnostics))
+            foreach (var diagnostic in RuleFinder.RuleAnalyzerTypes.SelectMany(SupportedDiagnostics))
             {
                 if (IsSecurityHotspot(diagnostic))
                 {
@@ -246,13 +268,10 @@ namespace SonarAnalyzer.UnitTest.Common
         }
 
         private static IEnumerable<DiagnosticDescriptor> SupportedDiagnostics(AnalyzerLanguage language) =>
-            new RuleFinder().GetAnalyzerTypes(language).SelectMany(SupportedDiagnostics);
+            RuleFinder.GetAnalyzerTypes(language).SelectMany(SupportedDiagnostics);
 
         private static IEnumerable<DiagnosticDescriptor> SupportedDiagnostics(Type type) =>
             ((DiagnosticAnalyzer)Activator.CreateInstance(type)).SupportedDiagnostics;
-
-        private static IEnumerable<Type> GetCodeFixTypes(IEnumerable<Assembly> assemblies) =>
-            assemblies.SelectMany(x => x.GetTypes()).Where(x => x.IsSubclassOf(typeof(SonarCodeFix)) && !x.IsAbstract);
 
         private static bool IsSonarWay(DiagnosticDescriptor diagnostic) =>
             diagnostic.CustomTags.Contains(DiagnosticDescriptorBuilder.SonarWayTag);

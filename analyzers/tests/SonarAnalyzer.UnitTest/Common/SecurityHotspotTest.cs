@@ -66,7 +66,7 @@ namespace SonarAnalyzer.UnitTest.Common
         }
 
         private static IEnumerable<SonarDiagnosticAnalyzer> GetHotspotAnalyzers(AnalyzerLanguage language) =>
-            new RuleFinder().GetAnalyzerTypes(language)
+            RuleFinder.GetAnalyzerTypes(language)
                 .Where(type => typeof(SonarDiagnosticAnalyzer).IsAssignableFrom(type))   // Avoid IRuleFactory and SE rules
                 .Select(type => (SonarDiagnosticAnalyzer)Activator.CreateInstance(type))
                 .Where(IsSecurityHotspot);

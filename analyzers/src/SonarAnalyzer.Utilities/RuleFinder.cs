@@ -23,6 +23,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using Microsoft.CodeAnalysis;
+using Microsoft.CodeAnalysis.CodeFixes;
 using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
@@ -30,61 +31,52 @@ using SonarAnalyzer.Rules;
 
 namespace SonarAnalyzer.Utilities
 {
-    public class RuleFinder
+    internal static class RuleFinder
     {
-        public static IEnumerable<Assembly> PackagedRuleAssemblies { get; } = new[]
-            {
-                Assembly.Load(typeof(Rules.CSharp.FlagsEnumZeroMember).Assembly.GetName()),
-                Assembly.Load(typeof(Rules.VisualBasic.FlagsEnumZeroMember).Assembly.GetName()),
-                Assembly.Load(typeof(Rules.Common.DoNotInstantiateSharedClassesBase).Assembly.GetName())
-            };
+        public static IEnumerable<Type> AllAnalyzerTypes { get; }       // Rules and Utility analyzers
+        public static IEnumerable<Type> RuleAnalyzerTypes { get; }      // Rules-only, without Utility analyzers
+        public static IEnumerable<Type> UtilityAnalyzerTypes { get; }
+        public static IEnumerable<Type> CodeFixTypes { get; }
 
-        internal IEnumerable<Type> RuleAnalyzerTypes { get; } // Rule-only, without utility analyzers
-        internal IEnumerable<Type> UtilityAnalyzerTypes { get; }
-
-        public RuleFinder()
+        static RuleFinder()
         {
-            var all = PackagedRuleAssemblies
-                .SelectMany(assembly => assembly.GetTypes())
-                .Where(x => x.IsSubclassOf(typeof(DiagnosticAnalyzer)) && x.GetCustomAttributes<DiagnosticAnalyzerAttribute>().Any())
+            var allTypes = new[] { typeof(Rules.CSharp.FlagsEnumZeroMember), typeof(Rules.VisualBasic.FlagsEnumZeroMember), typeof(Rules.Common.FlagsEnumZeroMemberBase<int>) }
+                .SelectMany(x => x.Assembly.GetExportedTypes())
                 .ToArray();
-
-            RuleAnalyzerTypes = all.Where(x => !typeof(UtilityAnalyzerBase).IsAssignableFrom(x)).ToList();
-            UtilityAnalyzerTypes = all.Where(x => typeof(UtilityAnalyzerBase).IsAssignableFrom(x)).ToList();
+            CodeFixTypes = allTypes.Where(x => typeof(CodeFixProvider).IsAssignableFrom(x) && x.GetCustomAttributes<ExportCodeFixProviderAttribute>().Any()).ToArray();
+            AllAnalyzerTypes = allTypes.Where(x => x.IsSubclassOf(typeof(DiagnosticAnalyzer)) && x.GetCustomAttributes<DiagnosticAnalyzerAttribute>().Any()).ToArray();
+            UtilityAnalyzerTypes = AllAnalyzerTypes.Where(x => typeof(UtilityAnalyzerBase).IsAssignableFrom(x)).ToList();
+            RuleAnalyzerTypes = AllAnalyzerTypes.Except(UtilityAnalyzerTypes).ToList();
         }
 
-        public IEnumerable<Type> GetAnalyzerTypes(AnalyzerLanguage language) =>
-            RuleAnalyzerTypes.Where(type => GetTargetLanguages(type).IsAlso(language));
+        public static IEnumerable<Type> GetAnalyzerTypes(AnalyzerLanguage language) =>
+            RuleAnalyzerTypes.Where(x => TargetLanguage(x).IsAlso(language));
 
-        internal static IEnumerable<DiagnosticAnalyzer> GetAnalyzers(AnalyzerLanguage language)
+        public static IEnumerable<DiagnosticAnalyzer> CreateAnalyzers(AnalyzerLanguage language, bool includeUtilityAnalyzers)
         {
-            var analyzerTypes = PackagedRuleAssemblies.SelectMany(assembly => assembly.GetTypes())
-                                                      .Where(type => !type.IsAbstract && typeof(SonarDiagnosticAnalyzer).IsAssignableFrom(type) && GetTargetLanguages(type).IsAlso(language));
-            foreach (var analyzerType in analyzerTypes)
+            var types = GetAnalyzerTypes(language);
+            if (includeUtilityAnalyzers)
             {
-                yield return typeof(HotspotDiagnosticAnalyzer).IsAssignableFrom(analyzerType) && analyzerType.GetConstructor(new[] { typeof(IAnalyzerConfiguration) }) != null
-                    ? (DiagnosticAnalyzer)Activator.CreateInstance(analyzerType, AnalyzerConfiguration.AlwaysEnabled)
-                    : (DiagnosticAnalyzer)Activator.CreateInstance(analyzerType);
+                types = types.Concat(UtilityAnalyzerTypes.Where(x => TargetLanguage(x).IsAlso(language)));
+            }
+            foreach (var type in types)
+            {
+                yield return typeof(HotspotDiagnosticAnalyzer).IsAssignableFrom(type) && type.GetConstructor(new[] { typeof(IAnalyzerConfiguration) }) != null
+                    ? (DiagnosticAnalyzer)Activator.CreateInstance(type, AnalyzerConfiguration.AlwaysEnabled)
+                    : (DiagnosticAnalyzer)Activator.CreateInstance(type);
             }
         }
 
-        internal IEnumerable<Type> GetParameterlessAnalyzerTypes(AnalyzerLanguage language) =>
-            RuleAnalyzerTypes.Where(type => !IsParameterized(type) && GetTargetLanguages(type).IsAlso(language));
+        public static bool IsParameterized(Type analyzerType) =>
+            analyzerType.GetProperties().Any(x => x.GetCustomAttributes<RuleParameterAttribute>().Any());
 
-        internal static bool IsParameterized(Type analyzerType) =>
-            analyzerType.GetProperties().Any(p => p.GetCustomAttributes<RuleParameterAttribute>().Any());
-
-        internal static AnalyzerLanguage GetTargetLanguages(MemberInfo analyzerType) =>
-            GetLanguages(analyzerType)
-            .Aggregate(AnalyzerLanguage.None, (current, lang) => lang switch
-                {
-                    LanguageNames.CSharp => current.AddLanguage(AnalyzerLanguage.CSharp),
-                    LanguageNames.VisualBasic => current.AddLanguage(AnalyzerLanguage.VisualBasic),
-                    _ => current
-                });
-
-        private static IEnumerable<string> GetLanguages(MemberInfo analyzerType) =>
-            analyzerType.GetCustomAttributes<DiagnosticAnalyzerAttribute>().SingleOrDefault()?.Languages
-            ?? throw new NotSupportedException($"Can not find any language for the given type {analyzerType.Name}!");
+        private static AnalyzerLanguage TargetLanguage(MemberInfo analyzerType)
+        {
+            var languages = analyzerType.GetCustomAttributes<DiagnosticAnalyzerAttribute>().SingleOrDefault()?.Languages
+                ?? throw new NotSupportedException($"Can not find any language for the given type {analyzerType.Name}!");
+            return languages.Length == 1
+                ? AnalyzerLanguage.FromName(languages.Single())
+                : throw new NotSupportedException($"Analyzer can not have multiple languages: {analyzerType.Name}");
+        }
     }
 }
