@@ -124,7 +124,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
             public override void VisitArgument(ArgumentSyntax node)
             {
-                if (Model.GetTypeInfo(node.Expression).Type?.DerivesOrImplements(ILogger) == true)
+                if (Model.GetTypeInfo(node.Expression).Type?.DerivesOrImplements(ILogger) is true)
                 {
                     HasValidLoggerCall = true;
                 }
