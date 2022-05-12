@@ -18,8 +18,7 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using CS = SonarAnalyzer.Rules.CSharp;
-using VB = SonarAnalyzer.Rules.VisualBasic;
+using SonarAnalyzer.Rules.CSharp;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
@@ -30,36 +29,36 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void GenericReadonlyFieldPropertyAssignment() =>
             OldVerifier.VerifyAnalyzer(
                 @"TestCases\GenericReadonlyFieldPropertyAssignment.cs",
-                new CS.GenericReadonlyFieldPropertyAssignment(),
+                new GenericReadonlyFieldPropertyAssignment(),
                 ParseOptionsHelper.FromCSharp8);
 
 #if NET
         [TestMethod]
         public void GenericReadonlyFieldPropertyAssignment_CSharp9() =>
-            OldVerifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\GenericReadonlyFieldPropertyAssignment.CSharp9.cs", new CS.GenericReadonlyFieldPropertyAssignment());
+            OldVerifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\GenericReadonlyFieldPropertyAssignment.CSharp9.cs", new GenericReadonlyFieldPropertyAssignment());
 
         [TestMethod]
         public void GenericReadonlyFieldPropertyAssignment_CSharp10() =>
-            OldVerifier.VerifyAnalyzerFromCSharp10Library(@"TestCases\GenericReadonlyFieldPropertyAssignment.CSharp10.cs", new CS.GenericReadonlyFieldPropertyAssignment());
+            OldVerifier.VerifyAnalyzerFromCSharp10Library(@"TestCases\GenericReadonlyFieldPropertyAssignment.CSharp10.cs", new GenericReadonlyFieldPropertyAssignment());
 
 #endif
 
         [TestMethod]
         public void GenericReadonlyFieldPropertyAssignment_CodeFix_Remove_Statement() =>
-            OldVerifier.VerifyCodeFix<CS.GenericReadonlyFieldPropertyAssignmentCodeFix>(
+            OldVerifier.VerifyCodeFix<GenericReadonlyFieldPropertyAssignmentCodeFix>(
                 @"TestCases\GenericReadonlyFieldPropertyAssignment.cs",
                 @"TestCases\GenericReadonlyFieldPropertyAssignment.Remove.Fixed.cs",
-                new CS.GenericReadonlyFieldPropertyAssignment(),
-                CS.GenericReadonlyFieldPropertyAssignmentCodeFix.TitleRemove,
+                new GenericReadonlyFieldPropertyAssignment(),
+                GenericReadonlyFieldPropertyAssignmentCodeFix.TitleRemove,
                 ParseOptionsHelper.FromCSharp8);
 
         [TestMethod]
         public void GenericReadonlyFieldPropertyAssignment_CodeFix_Add_Generic_Type_Constraint() =>
-            OldVerifier.VerifyCodeFix<CS.GenericReadonlyFieldPropertyAssignmentCodeFix>(
+            OldVerifier.VerifyCodeFix<GenericReadonlyFieldPropertyAssignmentCodeFix>(
                 @"TestCases\GenericReadonlyFieldPropertyAssignment.cs",
                 @"TestCases\GenericReadonlyFieldPropertyAssignment.AddConstraint.Fixed.cs",
-                new CS.GenericReadonlyFieldPropertyAssignment(),
-                CS.GenericReadonlyFieldPropertyAssignmentCodeFix.TitleAddClassConstraint,
+                new GenericReadonlyFieldPropertyAssignment(),
+                GenericReadonlyFieldPropertyAssignmentCodeFix.TitleAddClassConstraint,
                 ParseOptionsHelper.FromCSharp8);
     }
 }
