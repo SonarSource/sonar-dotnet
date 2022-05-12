@@ -20,8 +20,6 @@
 
 using SonarAnalyzer.Rules.CSharp;
 using SonarAnalyzer.Rules.SymbolicExecution;
-#if NETFRAMEWORK
-#endif
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
