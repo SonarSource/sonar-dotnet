@@ -53,23 +53,20 @@ namespace SonarAnalyzer.Rules.CSharp
         protected override void Initialize(SonarAnalysisContext context) =>
             context.RegisterSyntaxNodeActionInNonGenerated(c =>
                 {
-                    var catchClause = (CatchClauseSyntax)c.Node;
-                    if (c.AzureFunctionMethod() is { } entryPoint)
+                    if (c.AzureFunctionMethod() is { } entryPoint
+                        && c.Node is CatchClauseSyntax catchClause
+                        && c.SemanticModel.Compilation.GetTypeByMetadataName(KnownType.Microsoft_Extensions_Logging_ILogger.TypeName) is { TypeKind: not TypeKind.Error } iLogger
+                        && entryPoint.Parameters.Any(p => p.Type.DerivesOrImplements(KnownType.Microsoft_Extensions_Logging_ILogger)))
                     {
-                        var iLogger = c.SemanticModel.Compilation.GetTypeByMetadataName(KnownType.Microsoft_Extensions_Logging_ILogger.TypeName);
-                        if (iLogger is not null
-                            && entryPoint.Parameters.Any(p => p.Type.DerivesOrImplements(KnownType.Microsoft_Extensions_Logging_ILogger)))
-                        {
-                            var walker = new LoggerCallWalker(LanguageFacade, c.SemanticModel, iLogger, c.CancellationToken);
+                        var walker = new LoggerCallWalker(LanguageFacade, c.SemanticModel, iLogger, c.CancellationToken);
 
-                            walker.SafeVisit(catchClause.Block);
-                            // Exception handling in the filter clause preserves log scopes and is therefore recommended
-                            // See https://blog.stephencleary.com/2020/06/a-new-pattern-for-exception-logging.html
-                            walker.SafeVisit(catchClause.Filter?.FilterExpression);
-                            if (!walker.HasValidLoggerCall)
-                            {
-                                c.ReportIssue(Diagnostic.Create(Rule, catchClause.CatchKeyword.GetLocation(), walker.InvalidLoggerInvocations.Select(x => x.GetLocation())));
-                            }
+                        walker.SafeVisit(catchClause.Block);
+                        // Exception handling in the filter clause preserves log scopes and is therefore recommended
+                        // See https://blog.stephencleary.com/2020/06/a-new-pattern-for-exception-logging.html
+                        walker.SafeVisit(catchClause.Filter?.FilterExpression);
+                        if (!walker.HasValidLoggerCall)
+                        {
+                            c.ReportIssue(Diagnostic.Create(Rule, catchClause.CatchKeyword.GetLocation(), walker.InvalidLoggerInvocationLocations));
                         }
                     }
                 },
@@ -77,7 +74,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private sealed class LoggerCallWalker : SafeCSharpSyntaxWalker
         {
-            private readonly ImmutableHashSet<ExpressionSyntax>.Builder invalidIvocationsBuilder = ImmutableHashSet.CreateBuilder<ExpressionSyntax>();
+            private readonly ImmutableHashSet<Location>.Builder invalidIvocationsBuilder = ImmutableHashSet.CreateBuilder<Location>();
 
             public LoggerCallWalker(ILanguageFacade languageFacade, SemanticModel model, ITypeSymbol iLoggerSymbol, CancellationToken cancellationToken)
             {
@@ -96,7 +93,7 @@ namespace SonarAnalyzer.Rules.CSharp
             private Lazy<INamedTypeSymbol> LoggerExtensions { get; }
             private Lazy<IMethodSymbol> ILogger_Log { get; }
             public bool HasValidLoggerCall { get; private set; }
-            public ImmutableArray<ExpressionSyntax> InvalidLoggerInvocations => invalidIvocationsBuilder.ToImmutableArray();
+            public ImmutableArray<Location> InvalidLoggerInvocationLocations => invalidIvocationsBuilder.ToImmutableArray();
 
             public override void Visit(SyntaxNode node)
             {
@@ -119,7 +116,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     }
                     else
                     {
-                        invalidIvocationsBuilder.Add(node);
+                        invalidIvocationsBuilder.Add(node.GetLocation());
                     }
                 }
                 base.VisitInvocationExpression(node);
