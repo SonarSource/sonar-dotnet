@@ -282,7 +282,7 @@ public static class LogInExceptionFilter
     }
 
     [FunctionName("Sample")]
-    public static void LogExceptionInExceptionFilterLocalLambda(ILogger log)
+    public static void LogExceptionInExceptionFilterLocalLambdaCapture(ILogger log)
     {
         Func<bool> exceptionFilter = () => { log.LogError(""); return true; };
         try { }
@@ -292,7 +292,7 @@ public static class LogInExceptionFilter
     }
 
     [FunctionName("Sample")]
-    public static void LogExceptionInExceptionFilterLocalFunctionOutsideCatch(ILogger log)
+    public static void LogExceptionInExceptionFilterLocalFunctionOutsideCatchCapturesILogger(ILogger log)
     {
         try { }
         catch (Exception ex) when (ExceptionFilter()) // Noncompliant. FP
@@ -302,7 +302,7 @@ public static class LogInExceptionFilter
         bool ExceptionFilter() { log.LogError(""); return true; }
     }
 
-    private static bool True(Action a) => true;
+    private static bool True(Action a) => true; // Takes the logging call exexutes it and returns true for the exception filter.
 }
 
 public static class CustomLoggerExtensions
