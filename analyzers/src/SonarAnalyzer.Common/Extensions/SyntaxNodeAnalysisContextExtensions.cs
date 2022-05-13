@@ -18,9 +18,7 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System.Linq;
 using Microsoft.CodeAnalysis;
-using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.Helpers;
 
@@ -46,11 +44,10 @@ namespace SonarAnalyzer.Extensions
         /// of the AzureFunction entry point.
         /// </summary>
         public static IMethodSymbol AzureFunctionMethod(this SyntaxNodeAnalysisContext context) =>
-            context.Node.Ancestors().OfType<MethodDeclarationSyntax>().FirstOrDefault() is { } method
-                && method.AttributeLists.Any() // FunctionName has [AttributeUsage(AttributeTargets.Method, AllowMultiple = false, Inherited = false)] so there must be an attribute
-                && context.SemanticModel.GetDeclaredSymbol(method, context.CancellationToken) is IMethodSymbol methodSymbol
-                && methodSymbol.HasAttribute(KnownType.Microsoft_Azure_WebJobs_FunctionNameAttribute)
-                    ? methodSymbol
-                    : null;
+            context.ContainingSymbol switch
+            {
+                IMethodSymbol method when method.HasAttribute(KnownType.Microsoft_Azure_WebJobs_FunctionNameAttribute) => method,
+                _ => null,
+            };
     }
 }
