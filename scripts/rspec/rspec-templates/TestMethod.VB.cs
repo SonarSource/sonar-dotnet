@@ -1,5 +1,4 @@
-﻿        // FIXME: Move this up
-        private readonly VerifierBuilder builderVB = new VerifierBuilder<$DiagnosticClassName$>();
+﻿        private readonly VerifierBuilder builderVB = new VerifierBuilder<VB.$DiagnosticClassName$>();    // FIXME: Move this up
 
         [TestMethod]
         public void $DiagnosticClassName$_VB() =>

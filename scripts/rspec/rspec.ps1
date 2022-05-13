@@ -251,7 +251,6 @@ function AppendVbTestCase($ruleTestsFolder) {
 
     $text = Get-Content -Path "${ruleTestsFolder}\\${csClassName}Test.cs" -Raw
     $methodVB = Get-Content -Path "${RuleTemplateFolder}\\TestMethod.VB.cs" -Raw
-    $methodVB = $methodVB.Replace("<", "<VB.")
 
     $usingTokenIdx = $text.IndexOf($usingToken)
     if ($usingTokenIdx -gt -1) {
