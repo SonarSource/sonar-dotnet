@@ -36,14 +36,13 @@ namespace SonarAnalyzer.Rules.CSharp
     public sealed class AzureFunctionsLogFailures : SonarDiagnosticAnalyzer
     {
         private const string DiagnosticId = "S6423";
-        private const string MessageFormat = "Log exception via ILogger with LogLevel Information, Warning, Error, or Critical";
+        private const string MessageFormat = "Log exception via ILogger with LogLevel Information, Warning, Error, or Critical.";
 
-        private static readonly int[] ValidLogLevel = new[]
+        private static readonly int[] InvalidLogLevel = new[]
         {
-            2, // Information
-            3, // Warning
-            4, // Error
-            5, // Critical
+            0, // Trace
+            1, // Debug
+            6, // None
         };
 
         private static readonly DiagnosticDescriptor Rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
@@ -171,7 +170,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 symbol.Parameters.FirstOrDefault(x => x.Name == "logLevel") is { } logLevelParameter
                     && Language.MethodParameterLookup(invocation, symbol).TryGetNonParamsSyntax(logLevelParameter, out var argumentSyntax)
                     && Model.GetConstantValue(argumentSyntax, CancellationToken) is { HasValue: true, Value: int logLevel }
-                        ? ValidLogLevel.Contains(logLevel)
+                        ? !InvalidLogLevel.Contains(logLevel)
                         : true; // Compliant: Some non-constant value is passed as loglevel.
         }
     }
