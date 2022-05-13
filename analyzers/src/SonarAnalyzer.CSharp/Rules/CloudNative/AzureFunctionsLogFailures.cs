@@ -76,6 +76,12 @@ namespace SonarAnalyzer.Rules.CSharp
         private sealed class LoggerCallWalker : SafeCSharpSyntaxWalker
         {
             private List<Location> invalidInvocations;
+            private ILanguageFacade Language { get; }
+            private SemanticModel Model { get; }
+            private ITypeSymbol ILogger { get; }
+            private CancellationToken CancellationToken { get; }
+            private Lazy<INamedTypeSymbol> LoggerExtensions { get; }
+            private Lazy<IMethodSymbol> ILogger_Log { get; }
 
             public LoggerCallWalker(ILanguageFacade languageFacade, SemanticModel model, ITypeSymbol iLoggerSymbol, CancellationToken cancellationToken)
             {
@@ -87,12 +93,6 @@ namespace SonarAnalyzer.Rules.CSharp
                 ILogger_Log = new Lazy<IMethodSymbol>(() => ILogger.GetMembers().OfType<IMethodSymbol>().FirstOrDefault(x => x.Name == "Log"));
             }
 
-            private ILanguageFacade Language { get; }
-            private SemanticModel Model { get; }
-            private ITypeSymbol ILogger { get; }
-            private CancellationToken CancellationToken { get; }
-            private Lazy<INamedTypeSymbol> LoggerExtensions { get; }
-            private Lazy<IMethodSymbol> ILogger_Log { get; }
             public bool HasValidLoggerCall { get; private set; }
             public IEnumerable<Location> InvalidLoggerInvocationLocations => invalidInvocations;
 
