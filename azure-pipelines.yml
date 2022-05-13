@@ -20,7 +20,7 @@ variables:
   - group: sonarsource-build-variables
   # To make sure we don`t use MsBuild 17.
   - name: MsBuildPath
-    value: 'C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\MSBuild\Current\Bin\msbuild.exe'
+    value: 'C:\Program Files\Microsoft Visual Studio\2022\Community\Msbuild\Current\Bin\msbuild.exe'
   - name: isReleaseBranch
     value: ${{ or(eq(variables['Build.SourceBranch'], 'refs/heads/master'), startsWith(variables['Build.SourceBranch'], 'refs/heads/branch-')) }}
   - name: vsVersion
