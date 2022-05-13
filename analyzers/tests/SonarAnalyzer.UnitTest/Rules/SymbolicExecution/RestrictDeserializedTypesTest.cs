@@ -19,7 +19,6 @@
  */
 
 using SonarAnalyzer.Rules.CSharp;
-using SonarAnalyzer.Rules.SymbolicExecution;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
