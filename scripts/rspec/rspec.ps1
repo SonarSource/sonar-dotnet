@@ -347,11 +347,6 @@ if ($className -And $ruleKey) {
        UpdateTestEntry $vbRuleData
        GenerateBaseClassIfSecondLanguage
     }
-
-    $vsTempFolder = "${sonaranalyzerPath}\\.vs"
-    if (Test-Path $vsTempFolder) {
-        Remove-Item -Recurse -Force $vsTempFolder
-    }
 }
 
 # Generate RspecStrings.resx using the new metadata
