@@ -154,6 +154,16 @@ public static class LogInCatchClause
     }
 
     [FunctionName("Sample")]
+    public static void CustomExtensionMethod(ILogger log)
+    {
+        try { }
+        catch (Exception ex)
+        {
+            log.LogInformationCustomExtension(""); // Compliant. Custom extension methods are considered compliant.
+        }
+    }
+
+    [FunctionName("Sample")]
     public static void NoILoggerInTheEntryPoint([HttpTrigger(AuthorizationLevel.Function, "get", "post", Route = null)] HttpRequest req)
     {
         try { }
