@@ -24,7 +24,6 @@ using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
-using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
 using StyleCop.Analyzers.Lightup;
 
@@ -72,6 +71,16 @@ namespace SonarAnalyzer.Rules.CSharp
                 c => CheckTarget(c, ((PostfixUnaryExpressionSyntax)c.Node).Operand),
                 SyntaxKind.PostDecrementExpression,
                 SyntaxKind.PostIncrementExpression);
+
+            context.RegisterSyntaxNodeActionInNonGenerated(c =>
+                {
+                    var argument = (ArgumentSyntax)c.Node;
+                    if (argument.RefOrOutKeyword != default)
+                    {
+                        CheckTarget(c, argument.Expression);
+                    }
+                },
+                SyntaxKind.Argument);
         }
 
         private static void CheckTarget(SyntaxNodeAnalysisContext context, ExpressionSyntax target)

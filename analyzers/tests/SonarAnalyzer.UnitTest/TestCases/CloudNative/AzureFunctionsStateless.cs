@@ -137,11 +137,17 @@ public static class AzureFunctionsStatic
     [FunctionName("Sample")]
     public static void RefOut()
     {
+        WithRef(ref Field);         // Noncompliant {{Do not modify a static state from Azure Function.}}
+        WithOut(out Field);         // Noncompliant
+        WithOut(value: out Field);  // Noncompliant
+        WithOut(outOfOrder: 0, value: out Field);   // Noncompliant
+        //                                ^^^^^
+
         var local = 0;
-        WithRef(ref local);         // FIXME FN Non-compliant {{Do not modify a static state from Azure Function.}}
-        WithOut(out local);         // FIXME FN Non-compliant
-        WithOut(value: out local);  // FIXME FN Non-compliant
-        WithOut(outOfOrder: local, value: out local);   // FIXME FN Non-compliant
+        WithRef(ref local);
+        WithOut(out local);
+        WithOut(value: out local);
+        WithOut(outOfOrder: 0, value: out local);
     }
 
     [FunctionName("Sample")]
