@@ -1,3 +1,6 @@
-﻿        [TestMethod]
+﻿        // FIXME: Move this up
+        private readonly VerifierBuilder builderVB = new VerifierBuilder<$DiagnosticClassName$>();
+
+        [TestMethod]
         public void $DiagnosticClassName$_VB() =>
-            new VerifierBuilder<$DiagnosticClassName$>().AddPaths("$DiagnosticClassName$.vb").Verify();
+            builderVB.AddPaths("$DiagnosticClassName$.vb").Verify();

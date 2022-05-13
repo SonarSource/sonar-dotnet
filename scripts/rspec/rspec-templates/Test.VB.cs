@@ -25,8 +25,10 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class $DiagnosticClassName$Test
     {
+        private readonly VerifierBuilder builder = new VerifierBuilder<$DiagnosticClassName$>();
+
         [TestMethod]
         public void $DiagnosticClassName$_VB() =>
-            new VerifierBuilder<$DiagnosticClassName$>().AddPaths("$DiagnosticClassName$.vb").Verify();
+            builder.AddPaths("$DiagnosticClassName$.vb").Verify();
     }
 }
