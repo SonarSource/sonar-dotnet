@@ -142,8 +142,8 @@ namespace SonarAnalyzer.Rules.CSharp
                     return methodSymbol.Name switch
                     {
                         "LogInformation" or "LogWarning" or "LogError" or "LogCritical" => true,
-                        "LogTrace" or "LogDebug" or "BeginScope" => false,
                         "Log" => IsPassingValidLogLevel(invocation, methodSymbol),
+                        "LogTrace" or "LogDebug" or "BeginScope" => false,
                         _ => true, // Some unknown extension method on LoggerExtensions was called. Avoid FPs and assume it logs something.
                     };
                 }

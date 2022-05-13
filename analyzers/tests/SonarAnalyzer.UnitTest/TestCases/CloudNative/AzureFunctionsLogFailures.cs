@@ -153,6 +153,34 @@ public static class LogInCatchClause
     private static void LoggerHelper(ILogger logger) { }
 }
 
+// https://docs.microsoft.com/en-us/azure/azure-functions/functions-dotnet-dependency-injection
+public class DependencyInjection
+{
+    private readonly ILogger logger;
+
+    // Assume ILogger service was registered in FunctionsStartup not shown here
+    public DependencyInjection(ILogger logger) => this.logger = logger;
+
+    [FunctionName("Sample")]
+    public void InjectedLoggerIsUsed()
+    {
+        try { }
+        catch
+        {
+            logger.LogError(""); // Compliant
+        }
+    }
+
+    [FunctionName("Sample")]
+    public void InjectedLoggerIsNotUsed()
+    {
+        try { }
+        catch // Noncompliant
+        {
+        }
+    }
+}
+
 // See https://blog.stephencleary.com/2020/06/a-new-pattern-for-exception-logging.html
 public static class LogInExceptionFilter
 {
