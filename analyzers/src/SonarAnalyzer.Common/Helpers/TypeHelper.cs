@@ -188,9 +188,8 @@ namespace SonarAnalyzer.Helpers
         public static bool DerivesOrImplementsAny(this ITypeSymbol type, ImmutableArray<KnownType> baseTypes) =>
             type.ImplementsAny(baseTypes) || type.DerivesFromAny(baseTypes);
 
-        public static ITypeSymbol GetSymbolType(this ISymbol symbol)
-        {
-            return symbol switch
+        public static ITypeSymbol GetSymbolType(this ISymbol symbol) =>
+            symbol switch
             {
                 ILocalSymbol x => x.Type,
                 IFieldSymbol x => x.Type,
@@ -201,6 +200,5 @@ namespace SonarAnalyzer.Helpers
                 IMethodSymbol x => x.ReturnType,
                 _ => symbol as ITypeSymbol
             };
-        }
     }
 }
