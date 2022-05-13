@@ -16,13 +16,8 @@ namespace SonarAnalyzer.Extensions
             }
             return builder.ToImmutable();
 
-            void AddAccessibleMembers(ITypeSymbol symbol)
-            {
-                foreach (var member in symbol.GetMembers().Where(x => model.IsAccessible(position, x)))
-                {
-                    builder.Add(member);
-                }
-            }
+            void AddAccessibleMembers(ITypeSymbol symbol) =>
+                builder.AddRange(symbol.GetMembers().Where(x => model.IsAccessible(position, x)));
         }
     }
 }
