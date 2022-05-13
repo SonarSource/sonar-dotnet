@@ -26,6 +26,7 @@ using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
+using StyleCop.Analyzers.Lightup;
 
 namespace SonarAnalyzer.Rules.CSharp
 {
@@ -49,7 +50,18 @@ namespace SonarAnalyzer.Rules.CSharp
         {
             context.RegisterSyntaxNodeActionInNonGenerated(
                 c => CheckTarget(c, ((AssignmentExpressionSyntax)c.Node).Left),
-                SyntaxKind.SimpleAssignmentExpression);
+                SyntaxKind.SimpleAssignmentExpression,
+                SyntaxKind.AddAssignmentExpression,
+                SyntaxKind.SubtractAssignmentExpression,
+                SyntaxKind.MultiplyAssignmentExpression,
+                SyntaxKind.DivideAssignmentExpression,
+                SyntaxKind.ModuloAssignmentExpression,
+                SyntaxKind.AndAssignmentExpression,
+                SyntaxKind.ExclusiveOrAssignmentExpression,
+                SyntaxKind.OrAssignmentExpression,
+                SyntaxKind.LeftShiftAssignmentExpression,
+                SyntaxKind.RightShiftAssignmentExpression,
+                SyntaxKindEx.CoalesceAssignmentExpression);
         }
 
         private static void CheckTarget(SyntaxNodeAnalysisContext context, ExpressionSyntax target)

@@ -129,9 +129,9 @@ public static class AzureFunctionsStatic
         var a = Field = 42;         // Noncompliant
         if ((Field = 42) == 0) { }  // Noncompliant
         if (Field++ == 0) { }       // FIXME FN Non-compliant
-        if ((Field += 1) == 0) { }  // FIXME FN Non-compliant
-        WithArg(Field++);
-        WithArg(Field += 1);
+        if ((Field += 1) == 0) { }  // Noncompliant
+        WithArg(Field++);           // FIXME FN Non-compliant
+        WithArg(Field += 1);        // Noncompliant
     }
 
     [FunctionName("Sample")]
@@ -201,17 +201,17 @@ public static class Operators
     [FunctionName("Sample")]
     public static void Assignment(object arg)
     {
-        Field += 42;        // FIXME FN Non-compliant
-        Field -= 42;        // FIXME FN Non-compliant
-        Field *= 42;        // FIXME FN Non-compliant
-        Field /= 42;        // FIXME FN Non-compliant
-        Field %= 42;        // FIXME FN Non-compliant
-        Field &= 42;        // FIXME FN Non-compliant
-        Field |= 42;        // FIXME FN Non-compliant
-        Field ^= 42;        // FIXME FN Non-compliant
-        Field >>= 42;       // FIXME FN Non-compliant
-        Field <<= 42;       // FIXME FN Non-compliant
-        FieldObj ??= arg;   // FIXME FN Non-compliant
+        Field += 42;        // Noncompliant
+        Field -= 42;        // Noncompliant
+        Field *= 42;        // Noncompliant
+        Field /= 42;        // Noncompliant
+        Field %= 42;        // Noncompliant
+        Field &= 42;        // Noncompliant
+        Field |= 42;        // Noncompliant
+        Field ^= 42;        // Noncompliant
+        Field >>= 42;       // Noncompliant
+        Field <<= 42;       // Noncompliant
+        FieldObj ??= arg;   // Noncompliant
 
         var a = FieldObj ?? arg;    // Compliant
     }
