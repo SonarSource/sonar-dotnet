@@ -39,21 +39,27 @@ namespace SonarAnalyzer.Rules.CSharp
     public sealed class AzureFunctionsStateless : SonarDiagnosticAnalyzer
     {
         private const string DiagnosticId = "S6419";
-        private const string MessageFormat = "";
+        private const string MessageFormat = "Do not modify a static state from Azure Function.";
 
         private static readonly DiagnosticDescriptor Rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
 
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(Rule);
 
-        protected override void Initialize(SonarAnalysisContext context) =>
-            context.RegisterSyntaxNodeActionInNonGenerated(c =>
-                {
-                    //var node = c.Node;
-                    //if (true)
-                    //{
-                    //    c.ReportIssue(Diagnostic.Create(Rule, node.GetLocation()));
-                    //}
-                },
-                SyntaxKind.InvocationExpression);
+        protected override void Initialize(SonarAnalysisContext context)
+        {
+            context.RegisterSyntaxNodeActionInNonGenerated(
+                c => CheckTarget(c, ((AssignmentExpressionSyntax)c.Node).Left),
+                SyntaxKind.SimpleAssignmentExpression);
+        }
+
+        private static void CheckTarget(SyntaxNodeAnalysisContext context, ExpressionSyntax target)
+        {
+            if (context.IsAzureFunction()
+                && context.SemanticModel.GetSymbolInfo(target).Symbol is { } symbol
+                && symbol.IsStatic)
+            {
+                context.ReportIssue(Diagnostic.Create(Rule, target.GetLocation()));
+            }
+        }
     }
 }

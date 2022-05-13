@@ -67,30 +67,30 @@ public static class AzureFunctionsStatic
     {
         var local = 0;
 
-        Property = 42;          // FIXME FN Non-compliant {{FIXME}}
-        Field = 42;             // FIXME FN Non-compliant {{FIXME}}
-        Array[0] = 42;          // FIXME FN Non-compliant {{FIXME}}
+        Property = 42;          // Noncompliant {{Do not modify a static state from Azure Function.}}
+        Field = 42;             // Noncompliant {{Do not modify a static state from Azure Function.}}
+        Array[0] = 42;          // FIXME FN Non-compliant {{Do not modify a static state from Azure Function.}}
 
-        Property = local;       // FIXME FN Non-compliant
-        Field = local;          // FIXME FN Non-compliant
+        Property = local;       // Noncompliant
+        Field = local;          // Noncompliant
 
-        Property = Calculate(); // FIXME FN Non-compliant
-        Field = Calculate();    // FIXME FN Non-compliant
+        Property = Calculate(); // Noncompliant
+        Field = Calculate();    // Noncompliant
 
         StaticClass.Update(42);             // Not tracked, we don't analyze cross-procedure
-        StaticClass.Field = 42;             // FIXME FN Non-compliant {{FIXME}}
-        StaticClass.Property = 42;          // FIXME FN Non-compliant {{FIXME}}
-        //          ********    FIXME
-        AzureFunctionsStatic.Array[0] = 42; // FIXME FN Non-compliant {{FIXME}}
-        //                   ***** FIXME
+        StaticClass.Field = 42;             // Noncompliant {{Do not modify a static state from Azure Function.}}
+        StaticClass.Property = 42;          // Noncompliant {{Do not modify a static state from Azure Function.}}
+//      ^^^^^^^^^^^^^^^^^^^^
+        AzureFunctionsStatic.Array[0] = 42; // FIXME FN Non-compliant {{Do not modify a static state from Azure Function.}}
+//      ***************************** FIXME
 
         InstanceClass.UpdateStatic(42);     // Not tracked, we don't analyze cross-procedure
-        InstanceClass.PropertyStatic = 42;  // FIXME FN Non-compliant
-        InstanceClass.FieldStatic = 42;     // FIXME FN Non-compliant
+        InstanceClass.PropertyStatic = 42;  // Noncompliant
+        InstanceClass.FieldStatic = 42;     // Noncompliant
 
-        Inside.Namespace.Someting.Field = 42;           // FIXME FN Non-compliant
-        global::Inside.Namespace.Someting.Field = 42;   // FIXME FN Non-compliant
-        //                                ***** FIXME
+        Inside.Namespace.Someting.Field = 42;           // Noncompliant
+        global::Inside.Namespace.Someting.Field = 42;   // Noncompliant
+//      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
         var o = new InstanceClass();
         o.UpdateInstance(42);
@@ -100,12 +100,12 @@ public static class AzureFunctionsStatic
 
     [FunctionName("Sample")]
     public static void WriteArrow() =>
-        Property = 42;      // FIXME FN Non-compliant
+        Property = 42;      // Noncompliant
 
     [FunctionName("Sample")]
     public static async Task<string> AsyncTask()
     {
-        Property = 42;      // FIXME FN Non-compliant
+        Property = 42;      // Noncompliant
         return null;
     }
 
@@ -126,10 +126,10 @@ public static class AzureFunctionsStatic
     [FunctionName("Sample")]
     public static void SideEffects()
     {
-        var a = Field = 42;         // FIXME FN Non-compliant
-        if ((Field = 42) == 0) { }    // FIXME FN Non-compliant
+        var a = Field = 42;         // Noncompliant
+        if ((Field = 42) == 0) { }  // Noncompliant
         if (Field++ == 0) { }       // FIXME FN Non-compliant
-        if ((Field += 1) == 0) { }     // FIXME FN Non-compliant
+        if ((Field += 1) == 0) { }  // FIXME FN Non-compliant
         WithArg(Field++);
         WithArg(Field += 1);
     }
@@ -138,7 +138,7 @@ public static class AzureFunctionsStatic
     public static void RefOut()
     {
         var local = 0;
-        WithRef(ref local);         // FIXME FN Non-compliant {{FIXME}}
+        WithRef(ref local);         // FIXME FN Non-compliant {{Do not modify a static state from Azure Function.}}
         WithOut(out local);         // FIXME FN Non-compliant
         WithOut(value: out local);   // FIXME FN Non-compliant
         WithOut(outOfOrder: local, value: out local);   // FIXME FN Non-compliant
@@ -148,12 +148,12 @@ public static class AzureFunctionsStatic
     public static void Nested()
     {
         // We don't care if it's used or not. It probably is when it exists.
-        Action parenthesized = () => { Property = 42; };    // FIXME FN Non-compliant
-        Action<int> b = simple => { Property = 42; };    // FIXME FN Non-compliant
+        Action parenthesized = () => { Property = 42; };    // Noncompliant
+        Action<int> b = simple => { Property = 42; };       // Noncompliant
 
         void LocalFunction()
         {
-            Property = 42;
+            Property = 42;      // Noncompliant
         }
     }
 
@@ -178,7 +178,7 @@ public class AzureFunctionsInstance
     [FunctionName("Sample")]
     public static void Write()
     {
-        StaticClass.Property = 42;  // FIXME FN Non-compliant
+        StaticClass.Property = 42;  // Noncompliant
     }
 }
 
