@@ -20,12 +20,6 @@
 
 #pragma warning disable SA1122 // Use string.Empty for empty strings
 
-using System;
-using System.Collections.Generic;
-using FluentAssertions;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using SonarAnalyzer.Helpers;
-
 namespace SonarAnalyzer.UnitTest.Helpers
 {
     [TestClass]

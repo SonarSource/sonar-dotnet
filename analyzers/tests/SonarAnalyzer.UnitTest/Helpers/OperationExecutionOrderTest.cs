@@ -19,12 +19,7 @@
  */
 
 using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
-using FluentAssertions;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using SonarAnalyzer.Helpers;
 using StyleCop.Analyzers.Lightup;
 
 namespace SonarAnalyzer.UnitTest.Helpers

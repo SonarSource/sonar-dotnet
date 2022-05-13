@@ -19,13 +19,8 @@
  */
 
 extern alias csharp;
-using System;
-using System.Linq;
 using csharp::SonarAnalyzer.Extensions;
-using FluentAssertions;
-using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.CFG;
 using SonarAnalyzer.CFG.LiveVariableAnalysis;
 using SonarAnalyzer.CFG.Roslyn;

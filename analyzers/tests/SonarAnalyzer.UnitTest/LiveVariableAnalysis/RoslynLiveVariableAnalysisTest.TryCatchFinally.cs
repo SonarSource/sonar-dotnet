@@ -19,7 +19,6 @@
  */
 
 using Microsoft.CodeAnalysis.Operations;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 using IIsNullOperation = Microsoft.CodeAnalysis.FlowAnalysis.IIsNullOperation;
 
 namespace SonarAnalyzer.UnitTest.LiveVariableAnalysis

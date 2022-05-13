@@ -18,10 +18,6 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using FluentAssertions;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using SonarAnalyzer.Helpers;
-
 namespace SonarAnalyzer.UnitTest.Helpers
 {
     [TestClass]
@@ -30,9 +26,9 @@ namespace SonarAnalyzer.UnitTest.Helpers
         [TestMethod]
         public void Combine_Null()
         {
-            var two = HashCode.Combine<object, object>(null, null);
-            var three = HashCode.Combine<object, object, object>(null, null, null);
-            var four = HashCode.Combine<object, object, object, object>(null, null, null, null);
+            var two = SonarAnalyzer.Helpers.HashCode.Combine<object, object>(null, null);
+            var three = SonarAnalyzer.Helpers.HashCode.Combine<object, object, object>(null, null, null);
+            var four = SonarAnalyzer.Helpers.HashCode.Combine<object, object, object, object>(null, null, null, null);
 
             two.Should().NotBe(0);
             three.Should().NotBe(0).And.NotBe(two);

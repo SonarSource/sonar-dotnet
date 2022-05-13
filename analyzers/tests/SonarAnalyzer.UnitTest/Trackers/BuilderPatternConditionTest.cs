@@ -18,13 +18,7 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System.Linq;
-using FluentAssertions;
-using Microsoft.CodeAnalysis;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.Common;
-using SonarAnalyzer.Helpers;
-using SonarAnalyzer.UnitTest.TestFramework;
 using BuilderPatternDescriptorCS = SonarAnalyzer.Helpers.BuilderPatternDescriptor<Microsoft.CodeAnalysis.CSharp.SyntaxKind, Microsoft.CodeAnalysis.CSharp.Syntax.InvocationExpressionSyntax>;
 using BuilderPatternDescriptorVB = SonarAnalyzer.Helpers.BuilderPatternDescriptor<Microsoft.CodeAnalysis.VisualBasic.SyntaxKind, Microsoft.CodeAnalysis.VisualBasic.Syntax.InvocationExpressionSyntax>;
 using CSharpSyntax = Microsoft.CodeAnalysis.CSharp.Syntax;

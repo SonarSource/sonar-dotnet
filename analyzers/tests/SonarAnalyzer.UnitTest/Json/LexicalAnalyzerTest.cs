@@ -19,8 +19,6 @@
  */
 
 using System.Globalization;
-using FluentAssertions;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.Json;
 using SonarAnalyzer.Json.Parsing;
 

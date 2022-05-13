@@ -19,8 +19,6 @@
  */
 
 using System.IO;
-using FluentAssertions;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.UnitTest.CFG.Sonar;
 
 namespace SonarAnalyzer.UnitTest.CBDE

@@ -20,19 +20,9 @@
 
 extern alias csharp;
 extern alias vbnet;
-using System;
-using System.Collections.Generic;
-using System.Collections.Immutable;
-using System.Linq;
 using System.Resources;
-using FluentAssertions;
-using Microsoft.CodeAnalysis;
-using Microsoft.CodeAnalysis.Diagnostics;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.Common;
-using SonarAnalyzer.Helpers;
 using SonarAnalyzer.UnitTest.Helpers;
-using SonarAnalyzer.UnitTest.TestFramework;
 using SonarAnalyzer.Utilities;
 
 using static SonarAnalyzer.UnitTest.TestHelper;

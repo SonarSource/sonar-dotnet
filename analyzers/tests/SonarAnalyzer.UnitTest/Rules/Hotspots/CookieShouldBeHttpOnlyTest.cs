@@ -20,17 +20,10 @@
 
 #if NETFRAMEWORK
 using System.IO;
-#else
-using System.Linq;
 #endif
 
-using System.Collections.Generic;
-using Microsoft.CodeAnalysis;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Rules.CSharp;
-using SonarAnalyzer.UnitTest.MetadataReferences;
-using SonarAnalyzer.UnitTest.TestFramework;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {

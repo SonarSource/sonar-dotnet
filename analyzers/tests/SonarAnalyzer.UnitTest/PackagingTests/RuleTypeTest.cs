@@ -20,13 +20,7 @@
 
 extern alias csharp;
 extern alias vbnet;
-using System.Collections.Generic;
-using System.Collections.Immutable;
-using System.Linq;
 using System.Resources;
-using FluentAssertions;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using SonarAnalyzer.UnitTest.TestFramework;
 
 namespace SonarAnalyzer.UnitTest.PackagingTests
 {

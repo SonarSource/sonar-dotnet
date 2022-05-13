@@ -18,10 +18,7 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System.Collections.Generic;
-using System.Linq;
 using System.Text;
-using Microsoft.CodeAnalysis;
 using SonarAnalyzer.Common;
 
 namespace SonarAnalyzer.UnitTest.TestFramework

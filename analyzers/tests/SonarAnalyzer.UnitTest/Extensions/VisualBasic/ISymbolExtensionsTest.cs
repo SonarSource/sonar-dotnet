@@ -19,12 +19,8 @@
  */
 
 extern alias vbnet;
-using System.Linq;
-using FluentAssertions;
-using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.VisualBasic;
 using Microsoft.CodeAnalysis.VisualBasic.Syntax;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.Common;
 using ISymbolExtensions_Common = SonarAnalyzer.Helpers.ISymbolExtensions;
 using ISymbolExtensions_VB = vbnet::SonarAnalyzer.Extensions.ISymbolExtensions;
