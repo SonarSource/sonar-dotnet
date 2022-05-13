@@ -120,6 +120,20 @@ public static class LogInCatchClause
     }
 
     [FunctionName("Sample")]
+    public static void LogExceptionFromWebApi(ILogger log)
+    {
+        try { }
+        catch (Exception ex) // Compliant. Call to unregcognized extension method from WebApi
+        {
+            var i = 100;
+            if (i == 42)
+            {
+                log.LogMetric("Metric", 5);
+            }
+        }
+    }
+
+    [FunctionName("Sample")]
     public static void LogExceptionInNestedCatch(ILogger log)
     {
         try { }

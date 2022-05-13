@@ -87,7 +87,6 @@ namespace SonarAnalyzer.Rules.CSharp
             private SemanticModel Model { get; }
             private ITypeSymbol ILogger { get; }
             private CancellationToken CancellationToken { get; }
-            private Lazy<INamedTypeSymbol> LoggerExtensions { get; }
             private Lazy<IMethodSymbol> ILogger_Log { get; }
 
             public LoggerCallWalker(ILanguageFacade languageFacade, SemanticModel model, ITypeSymbol iLoggerSymbol, CancellationToken cancellationToken)
@@ -96,7 +95,6 @@ namespace SonarAnalyzer.Rules.CSharp
                 Model = model;
                 ILogger = iLoggerSymbol;
                 CancellationToken = cancellationToken;
-                LoggerExtensions = new Lazy<INamedTypeSymbol>(() => Model.Compilation.GetTypeByMetadataName(KnownType.Microsoft_Extensions_Logging_LoggerExtensions.TypeName));
                 ILogger_Log = new Lazy<IMethodSymbol>(() => ILogger.GetMembers().OfType<IMethodSymbol>().FirstOrDefault(x => x.Name == "Log"));
             }
 
@@ -143,8 +141,7 @@ namespace SonarAnalyzer.Rules.CSharp
             {
                 // Check wellknown LoggerExtensions methods invocations
                 if (methodSymbol.IsExtensionMethod
-                    && LoggerExtensions.Value is { } loggerExtensions
-                    && loggerExtensions.Equals(methodSymbol.ContainingType))
+                    && methodSymbol.ContainingType.Is(KnownType.Microsoft_Extensions_Logging_LoggerExtensions))
                 {
                     return methodSymbol.Name switch
                     {
