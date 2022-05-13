@@ -69,7 +69,7 @@ public static class AzureFunctionsStatic
 
         Property = 42;          // Noncompliant {{Do not modify a static state from Azure Function.}}
         Field = 42;             // Noncompliant {{Do not modify a static state from Azure Function.}}
-        Array[0] = 42;          // FIXME FN Non-compliant {{Do not modify a static state from Azure Function.}}
+        Array[0] = 42;          // Noncompliant {{Do not modify a static state from Azure Function.}}
 
         Property = local;       // Noncompliant
         Field = local;          // Noncompliant
@@ -81,8 +81,8 @@ public static class AzureFunctionsStatic
         StaticClass.Field = 42;             // Noncompliant {{Do not modify a static state from Azure Function.}}
         StaticClass.Property = 42;          // Noncompliant {{Do not modify a static state from Azure Function.}}
 //      ^^^^^^^^^^^^^^^^^^^^
-        AzureFunctionsStatic.Array[0] = 42; // FIXME FN Non-compliant {{Do not modify a static state from Azure Function.}}
-//      ***************************** FIXME
+        AzureFunctionsStatic.Array[0] = 42; // Noncompliant {{Do not modify a static state from Azure Function.}}
+//      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
         InstanceClass.UpdateStatic(42);     // Not tracked, we don't analyze cross-procedure
         InstanceClass.PropertyStatic = 42;  // Noncompliant
@@ -196,8 +196,8 @@ public static class Operators
         ++Field;    // Noncompliant
         --Field;    // Noncompliant
         //^^^^^
-        Array[0]++; // FIXME FN Non-compliant
-        ++Array[0]; // FIXME FN Non-compliant
+        Array[0]++; // Noncompliant
+        ++Array[0]; // Noncompliant
 
         for (; Field < 100; Field++) { }    // Noncompliant
     }
@@ -232,9 +232,9 @@ public static class Collections
     public static void Add()
     {
         List.Add(42);       // FN
-        HSet.Add(42);        // FN
+        HSet.Add(42);       // FN
         Dict.Add(42, 42);   // FN
-        Dict[0] = 42;       // FN
+        Dict[0] = 42;       // Noncompliant
     }
 
     [FunctionName("Sample")]
@@ -242,15 +242,15 @@ public static class Collections
     {
         List.Remove(42);    // FN
         List.RemoveAt(0);   // FN
-        HSet.Remove(42);     // FN
+        HSet.Remove(42);    // FN
         Dict.Remove(42);    // FN
     }
 
     [FunctionName("Sample")]
     public static void Update()
     {
-        List[0] = 42;       // FN
-        Dict[0] = 42;       // FN
-        Array[0] = 42;      // FN
+        List[0] = 42;       // Noncompliant
+        Dict[0] = 42;       // Noncompliant
+        Array[0] = 42;      // Noncompliant
     }
 }
