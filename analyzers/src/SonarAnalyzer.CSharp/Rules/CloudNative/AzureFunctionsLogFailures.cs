@@ -53,25 +53,33 @@ namespace SonarAnalyzer.Rules.CSharp
 
         protected override void Initialize(SonarAnalysisContext context) =>
             context.RegisterSyntaxNodeActionInNonGenerated(c =>
+            {
+                if (c.AzureFunctionMethod() is { } entryPoint
+                    && c.Node is CatchClauseSyntax catchClause
+                    && c.SemanticModel.Compilation.GetTypeByMetadataName(KnownType.Microsoft_Extensions_Logging_ILogger.TypeName) is { TypeKind: not TypeKind.Error } iLogger
+                    && LoggerIsInScopeInEntryPoint(c.SemanticModel, c.Node.SpanStart, entryPoint))
                 {
-                    if (c.AzureFunctionMethod() is { } entryPoint
-                        && c.Node is CatchClauseSyntax catchClause
-                        && c.SemanticModel.Compilation.GetTypeByMetadataName(KnownType.Microsoft_Extensions_Logging_ILogger.TypeName) is { TypeKind: not TypeKind.Error } iLogger
-                        && entryPoint.Parameters.Any(p => p.Type.DerivesOrImplements(KnownType.Microsoft_Extensions_Logging_ILogger)))
-                    {
-                        var walker = new LoggerCallWalker(LanguageFacade, c.SemanticModel, iLogger, c.CancellationToken);
+                    var walker = new LoggerCallWalker(LanguageFacade, c.SemanticModel, iLogger, c.CancellationToken);
 
-                        walker.SafeVisit(catchClause.Block);
-                        // Exception handling in the filter clause preserves log scopes and is therefore recommended
-                        // See https://blog.stephencleary.com/2020/06/a-new-pattern-for-exception-logging.html
-                        walker.SafeVisit(catchClause.Filter?.FilterExpression);
-                        if (!walker.HasValidLoggerCall)
-                        {
-                            c.ReportIssue(Diagnostic.Create(Rule, catchClause.CatchKeyword.GetLocation(), walker.InvalidLoggerInvocationLocations));
-                        }
+                    walker.SafeVisit(catchClause.Block);
+                    // Exception handling in the filter clause preserves log scopes and is therefore recommended
+                    // See https://blog.stephencleary.com/2020/06/a-new-pattern-for-exception-logging.html
+                    walker.SafeVisit(catchClause.Filter?.FilterExpression);
+                    if (!walker.HasValidLoggerCall)
+                    {
+                        c.ReportIssue(Diagnostic.Create(Rule, catchClause.CatchKeyword.GetLocation(), walker.InvalidLoggerInvocationLocations));
                     }
-                },
-                SyntaxKind.CatchClause);
+                }
+            },
+            SyntaxKind.CatchClause);
+
+        private static bool LoggerIsInScopeInEntryPoint(SemanticModel semanticModel, int position, IMethodSymbol entryPoint) =>
+            entryPoint.Parameters.Any(x => x.Type.DerivesOrImplements(KnownType.Microsoft_Extensions_Logging_ILogger))
+                // Instance method entrypoints might have access to an ILogger via injected fields/properties
+                // https://docs.microsoft.com/en-us/azure/azure-functions/functions-dotnet-dependency-injection
+                || (entryPoint is { IsStatic: false, ContainingType: { } container }
+                    && container.GetAccessibleMembersAndBaseMembers(semanticModel, position)
+                        .Any(x => x.GetSymbolType()?.DerivesOrImplements(KnownType.Microsoft_Extensions_Logging_ILogger) is true));
 
         private sealed class LoggerCallWalker : SafeCSharpSyntaxWalker
         {

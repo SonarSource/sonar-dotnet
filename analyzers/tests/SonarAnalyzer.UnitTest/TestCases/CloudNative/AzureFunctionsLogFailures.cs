@@ -83,6 +83,18 @@ public static class LogInCatchClause
     }
 
     [FunctionName("Sample")]
+    public static void LogExceptionIsPassedInLambda(ILogger log)
+    {
+        try { }
+        catch (Exception ex) // FN. Any call to "log" is considered valid. Reachability is not considered.
+        {
+            DoSomething(() => log.LogError(""));
+        }
+
+        void DoSomething(Action a) => a();
+    }
+
+    [FunctionName("Sample")]
     public static void LogExceptionLoggedInUnreachableCode(ILogger log)
     {
         try { }
@@ -154,12 +166,13 @@ public static class LogInCatchClause
 }
 
 // https://docs.microsoft.com/en-us/azure/azure-functions/functions-dotnet-dependency-injection
-public class DependencyInjection
+public class DependencyInjectionField
 {
     private readonly ILogger logger;
 
-    // Assume ILogger service was registered in FunctionsStartup not shown here
-    public DependencyInjection(ILogger logger) => this.logger = logger;
+    // Scenario: ILogger service was registered in FunctionsStartup and inject via constructor injection:
+    // In FunctionsStartup: public override void Configure(IFunctionsHostBuilder builder) => builder.Services.Add<ILogger>(...);
+    // Here: public DependencyInjectionField(ILogger logger) => this.logger = logger;
 
     [FunctionName("Sample")]
     public void InjectedLoggerIsUsed()
@@ -172,12 +185,44 @@ public class DependencyInjection
     }
 
     [FunctionName("Sample")]
-    public void InjectedLoggerIsNotUsed()
+    public void InjectedLoggerFieldIsNotUsed()
     {
         try { }
-        catch // Noncompliant
-        {
-        }
+        catch { } // Noncompliant
+    }
+}
+
+public class DependencyInjectionProperty
+{
+    private ILogger Logger { get; }
+
+    [FunctionName("Sample")]
+    public void InjectedLoggerPropertyIsNotUsed()
+    {
+        try { }
+        catch { } // Noncompliant
+    }
+}
+
+public class DependencyInjectionMethod
+{
+    protected ILogger Logger() => null;
+
+    [FunctionName("Sample")]
+    public void InjectedLoggerMethodIsNotUsed()
+    {
+        try { }
+        catch { } // Noncompliant
+    }
+}
+
+public class Derived: DependencyInjectionMethod
+{
+    [FunctionName("Sample")]
+    public void InjectedLoggerFromBaseIsNotUsed()
+    {
+        try { }
+        catch { } // Noncompliant
     }
 }
 
