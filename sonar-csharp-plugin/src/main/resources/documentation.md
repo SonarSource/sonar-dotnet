@@ -34,7 +34,6 @@ dotnet_diagnostic.Sxxx.severity = none
 ```
 
 ## Related Pages
-* [Investigating the performance of .NET Analysis](https://community.sonarsource.com/t/47279)
 * [Importing External Issues](/analysis/external-issues/) (VSTest, NUnit, MSTest, xUnit)
 * [Excluding External Roslyn Issues](/analysis/external-issues/) (See "Notes on external .NET issues")
 * [Test Coverage & Execution](/analysis/coverage/) (Visual Studio Code Coverage, dotCover, OpenCover)
@@ -42,3 +41,4 @@ dotnet_diagnostic.Sxxx.severity = none
 * [SonarScanner for Azure DevOps](/analysis/scan/sonarscanner-for-azure-devops/)
 * [Analysis of product projects vs. test projects](https://github.com/SonarSource/sonar-scanner-msbuild/wiki/Analysis-of-product-projects-vs.-test-projects)
 * [Troubleshooting guide for .NET code coverage import](https://community.sonarsource.com/t/37151)
+* [Investigating the performance of .NET Analysis](https://community.sonarsource.com/t/47279)
