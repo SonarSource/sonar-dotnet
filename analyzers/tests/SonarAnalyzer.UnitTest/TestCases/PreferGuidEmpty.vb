@@ -1,3 +1,4 @@
+﻿Imports System.Collections.Generic
 
 Class Compliant
 
@@ -33,6 +34,10 @@ Class Compliant
         Dim int As Integer = Nothing ' Compliant
         Dim dat As Date = Nothing ' Compliant
     End Sub
+
+    Function DoesNotCrashOnDictionaryCreation() As Dictionary(Of String, String)
+        Return New Dictionary(Of String, String) From {{"a", "b"}, {"c", "d"}}
+    End Function
 
 End Class
 
