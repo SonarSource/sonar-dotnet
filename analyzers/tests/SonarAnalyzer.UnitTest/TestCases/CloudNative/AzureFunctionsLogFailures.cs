@@ -8,7 +8,7 @@ using System;
 using System.IO;
 using System.Threading.Tasks;
 
-public static class AzureFunctions
+public static class LogInCatchClause
 {
     [FunctionName("Sample")]
     public static void EmptyCatchClause(ILogger log)
@@ -53,33 +53,71 @@ public static class AzureFunctions
     }
 
     [FunctionName("Sample")]
-    public static void LogExceptionInExceptionFilter(ILogger log)
+    public static void LogExceptionLoggedInLocalFunction(ILogger log)
     {
         try { }
-        // See https://blog.stephencleary.com/2020/06/a-new-pattern-for-exception-logging.html
-        catch (Exception ex) when (True(() => log.LogError(ex, ""))) // Compliant
+        catch (Exception ex) // FN. Any call to "log" is considered valid. Reachability is not considered.
         {
+            void Log() => log.LogError("");
         }
     }
 
     [FunctionName("Sample")]
-    public static void LogExceptionInExceptionFilterWrongLogLevel(ILogger log)
+    public static void LogExceptionLoggedInLambda(ILogger log)
     {
         try { }
-        catch (Exception ex) when              // Noncompliant
-            (True(() => log.LogTrace(ex, ""))) // Secondary
-//                      ^^^^^^^^^^^^^^^^^^^^
+        catch (Exception ex) // FN. Any call to "log" is considered valid. Reachability is not considered.
         {
+            Action x = () => log.LogError("");
         }
     }
 
     [FunctionName("Sample")]
-    public static void LogExceptionInExceptionFilterCustomExtensionMethod(ILogger log)
+    public static void LogExceptionLoggedInAnonymousFunction(ILogger log)
     {
         try { }
-        catch (Exception ex) when              // Compliant
-            (log.LogInformationCustomExtension(""))
+        catch (Exception ex) // FN. Any call to "log" is considered valid. Reachability is not considered.
         {
+            Action x = delegate () { log.LogError(""); };
+        }
+    }
+
+    [FunctionName("Sample")]
+    public static void LogExceptionLoggedInUnreachableCode(ILogger log)
+    {
+        try { }
+        catch (Exception ex) // FN. log in unreachable code.
+        {
+            return;
+            log.LogError("");
+        }
+    }
+
+    [FunctionName("Sample")]
+    public static void LogExceptionNotEveryCodePathContainsLog(ILogger log)
+    {
+        try { }
+        catch (Exception ex) // FN. Not every code path contains a log
+        {
+            var i = 100;
+            if (i == 42)
+            {
+                log.LogError("");
+            }
+        }
+    }
+
+    [FunctionName("Sample")]
+    public static void LogExceptionInNestedCatch(ILogger log)
+    {
+        try { }
+        catch (Exception ex) // FN. The outer block should contain a log call too
+        {
+            try { }
+            catch
+            {
+                log.LogError("");
+            }
         }
     }
 
@@ -112,8 +150,64 @@ public static class AzureFunctions
         }
     }
 
-    private static bool True(Action action) => true;
     private static void LoggerHelper(ILogger logger) { }
+}
+
+// See https://blog.stephencleary.com/2020/06/a-new-pattern-for-exception-logging.html
+public static class LogInExceptionFilter
+{
+    [FunctionName("Sample")]
+    public static void LogExceptionInExceptionFilter(ILogger log)
+    {
+        try { }
+        catch (Exception ex) when (True(() => log.LogError(ex, ""))) // Compliant
+        {
+        }
+    }
+
+    [FunctionName("Sample")]
+    public static void LogExceptionInExceptionFilterWrongLogLevel(ILogger log)
+    {
+        try { }
+        catch (Exception ex) when              // Noncompliant
+            (True(() => log.LogTrace(ex, ""))) // Secondary
+//                      ^^^^^^^^^^^^^^^^^^^^
+        {
+        }
+    }
+
+    [FunctionName("Sample")]
+    public static void LogExceptionInExceptionFilterCustomExtensionMethod(ILogger log)
+    {
+        try { }
+        catch (Exception ex) when              // Compliant
+            (log.LogInformationCustomExtension(""))
+        {
+        }
+    }
+
+    [FunctionName("Sample")]
+    public static void LogExceptionInExceptionFilterLocalLambda(ILogger log)
+    {
+        Func<bool> exceptionFilter = () => { log.LogError(""); return true; };
+        try { }
+        catch (Exception ex) when (exceptionFilter()) // Noncompliant. FP
+        {
+        }
+    }
+
+    [FunctionName("Sample")]
+    public static void LogExceptionInExceptionFilterLocalFunctionOutsideCatch(ILogger log)
+    {
+        try { }
+        catch (Exception ex) when (ExceptionFilter()) // Noncompliant. FP
+        {
+        }
+
+        bool ExceptionFilter() { log.LogError(""); return true; }
+    }
+
+    private static bool True(Action a) => true;
 }
 
 public static class CustomLoggerExtensions
