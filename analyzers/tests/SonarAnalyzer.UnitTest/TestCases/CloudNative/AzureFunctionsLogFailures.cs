@@ -226,6 +226,18 @@ public class Derived: DependencyInjectionMethod
     }
 }
 
+public class GenericLogger
+{
+    private ILogger<GenericLogger> logger;
+
+    [FunctionName("Sample")]
+    public void InjectedLoggerFromBaseIsNotUsed()
+    {
+        try { }
+        catch { } // Noncompliant
+    }
+}
+
 // See https://blog.stephencleary.com/2020/06/a-new-pattern-for-exception-logging.html
 public static class LogInExceptionFilter
 {
