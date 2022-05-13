@@ -128,9 +128,9 @@ public static class AzureFunctionsStatic
     {
         var a = Field = 42;         // Noncompliant
         if ((Field = 42) == 0) { }  // Noncompliant
-        if (Field++ == 0) { }       // FIXME FN Non-compliant
+        if (Field++ == 0) { }       // Noncompliant
         if ((Field += 1) == 0) { }  // Noncompliant
-        WithArg(Field++);           // FIXME FN Non-compliant
+        WithArg(Field++);           // Noncompliant
         WithArg(Field += 1);        // Noncompliant
     }
 
@@ -140,7 +140,7 @@ public static class AzureFunctionsStatic
         var local = 0;
         WithRef(ref local);         // FIXME FN Non-compliant {{Do not modify a static state from Azure Function.}}
         WithOut(out local);         // FIXME FN Non-compliant
-        WithOut(value: out local);   // FIXME FN Non-compliant
+        WithOut(value: out local);  // FIXME FN Non-compliant
         WithOut(outOfOrder: local, value: out local);   // FIXME FN Non-compliant
     }
 
@@ -185,17 +185,21 @@ public class AzureFunctionsInstance
 public static class Operators
 {
     private static int Field;
+    private static int[] Array;
     private static object FieldObj;
 
     [FunctionName("Sample")]
     public static void Unary()
     {
-        Field++;    // FIXME FN Non-compliant
-        Field--;    // FIXME FN Non-compliant
-        ++Field;    // FIXME FN Non-compliant
-        --Field;    // FIXME FN Non-compliant
+        Field++;    // Noncompliant
+        Field--;    // Noncompliant
+        ++Field;    // Noncompliant
+        --Field;    // Noncompliant
+        //^^^^^
+        Array[0]++; // FIXME FN Non-compliant
+        ++Array[0]; // FIXME FN Non-compliant
 
-        for (; Field < 100; Field++) { }    // FIXME FN Non-compliant
+        for (; Field < 100; Field++) { }    // Noncompliant
     }
 
     [FunctionName("Sample")]

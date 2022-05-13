@@ -62,6 +62,16 @@ namespace SonarAnalyzer.Rules.CSharp
                 SyntaxKind.LeftShiftAssignmentExpression,
                 SyntaxKind.RightShiftAssignmentExpression,
                 SyntaxKindEx.CoalesceAssignmentExpression);
+
+            context.RegisterSyntaxNodeActionInNonGenerated(
+                c => CheckTarget(c, ((PrefixUnaryExpressionSyntax)c.Node).Operand),
+                SyntaxKind.PreDecrementExpression,
+                SyntaxKind.PreIncrementExpression);
+
+            context.RegisterSyntaxNodeActionInNonGenerated(
+                c => CheckTarget(c, ((PostfixUnaryExpressionSyntax)c.Node).Operand),
+                SyntaxKind.PostDecrementExpression,
+                SyntaxKind.PostIncrementExpression);
         }
 
         private static void CheckTarget(SyntaxNodeAnalysisContext context, ExpressionSyntax target)
