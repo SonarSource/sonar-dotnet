@@ -14,7 +14,7 @@ public static class LogInCatchClause
     public static void EmptyCatchClause(ILogger log)
     {
         try { }
-        catch { } // Noncompliant {{Log exception via ILogger with LogLevel Information, Warning, Error, or Critical}}
+        catch { } // Noncompliant {{Log exception via ILogger with LogLevel Information, Warning, Error, or Critical.}}
 //      ^^^^^
     }
 
