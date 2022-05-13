@@ -19,6 +19,7 @@
  */
 
 using System;
+using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Linq;
 using System.Threading;
@@ -74,7 +75,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private sealed class LoggerCallWalker : SafeCSharpSyntaxWalker
         {
-            private readonly ImmutableHashSet<Location>.Builder invalidIvocationsBuilder = ImmutableHashSet.CreateBuilder<Location>();
+            private List<Location> invalidInvocations;
 
             public LoggerCallWalker(ILanguageFacade languageFacade, SemanticModel model, ITypeSymbol iLoggerSymbol, CancellationToken cancellationToken)
             {
@@ -93,7 +94,7 @@ namespace SonarAnalyzer.Rules.CSharp
             private Lazy<INamedTypeSymbol> LoggerExtensions { get; }
             private Lazy<IMethodSymbol> ILogger_Log { get; }
             public bool HasValidLoggerCall { get; private set; }
-            public ImmutableArray<Location> InvalidLoggerInvocationLocations => invalidIvocationsBuilder.ToImmutableArray();
+            public IEnumerable<Location> InvalidLoggerInvocationLocations => invalidInvocations;
 
             public override void Visit(SyntaxNode node)
             {
@@ -116,7 +117,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     }
                     else
                     {
-                        invalidIvocationsBuilder.Add(node.GetLocation());
+                        (invalidInvocations ??= new()).Add(node.GetLocation());
                     }
                 }
                 base.VisitInvocationExpression(node);
