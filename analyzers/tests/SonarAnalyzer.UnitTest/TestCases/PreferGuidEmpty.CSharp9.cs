@@ -17,5 +17,10 @@ namespace Tests.Diagnostics
         }
 
         public Guid Get() => default; // Noncompliant
+
+        // See: https://github.com/SonarSource/sonar-dotnet/issues/5245
+        private void Test(Guid guid = default) // Compliant
+        {
+        }
     }
 }
