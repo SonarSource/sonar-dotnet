@@ -48,11 +48,11 @@ namespace SonarAnalyzer.Rules.CSharp
         protected override void Initialize(SonarAnalysisContext context) =>
             context.RegisterSyntaxNodeActionInNonGenerated(c =>
                 {
-                    var node = c.Node;
-                    if (true)
-                    {
-                        c.ReportIssue(Diagnostic.Create(Rule, node.GetLocation()));
-                    }
+                    //var node = c.Node;
+                    //if (true)
+                    //{
+                    //    c.ReportIssue(Diagnostic.Create(Rule, node.GetLocation()));
+                    //}
                 },
                 SyntaxKind.InvocationExpression);
     }

@@ -37,10 +37,19 @@ public class InstanceClass
         PropertyInstance = value;
 }
 
+namespace Inside.Namespace
+{
+    public static class Someting
+    {
+        public static int Field;
+    }
+}
+
 public static class AzureFunctionsStatic
 {
     public static int Property { get; set; }
     public static int Field;
+    public static int[] Array;
 
     [Another("Something")]
     public static void WithAnotherAttribute()   // Compliant
@@ -60,7 +69,7 @@ public static class AzureFunctionsStatic
 
         Property = 42;          // FIXME FN Non-compliant {{FIXME}}
         Field = 42;             // FIXME FN Non-compliant {{FIXME}}
-//      ^^^^^
+        Array[0] = 42;          // FIXME FN Non-compliant {{FIXME}}
 
         Property = local;       // FIXME FN Non-compliant
         Field = local;          // FIXME FN Non-compliant
@@ -68,14 +77,20 @@ public static class AzureFunctionsStatic
         Property = Calculate(); // FIXME FN Non-compliant
         Field = Calculate();    // FIXME FN Non-compliant
 
-        StaticClass.Update(42);     // Not tracked, we don't analyze cross-procedure
-        StaticClass.Field = 42;     // FIXME FN Non-compliant {{FIXME}}
-        StaticClass.Property = 42;  // FIXME FN Non-compliant {{FIXME}}
-        //          ^^^^^^^^
+        StaticClass.Update(42);             // Not tracked, we don't analyze cross-procedure
+        StaticClass.Field = 42;             // FIXME FN Non-compliant {{FIXME}}
+        StaticClass.Property = 42;          // FIXME FN Non-compliant {{FIXME}}
+        //          ********    FIXME
+        AzureFunctionsStatic.Array[0] = 42; // FIXME FN Non-compliant {{FIXME}}
+        //                   ***** FIXME
 
         InstanceClass.UpdateStatic(42);     // Not tracked, we don't analyze cross-procedure
         InstanceClass.PropertyStatic = 42;  // FIXME FN Non-compliant
         InstanceClass.FieldStatic = 42;     // FIXME FN Non-compliant
+
+        Inside.Namespace.Someting.Field = 42;           // FIXME FN Non-compliant
+        global::Inside.Namespace.Someting.Field = 42;   // FIXME FN Non-compliant
+        //                                ***** FIXME
 
         var o = new InstanceClass();
         o.UpdateInstance(42);
@@ -91,6 +106,7 @@ public static class AzureFunctionsStatic
     public static async Task<string> AsyncTask()
     {
         Property = 42;      // FIXME FN Non-compliant
+        return null;
     }
 
     [FunctionName("Sample")]
@@ -98,15 +114,24 @@ public static class AzureFunctionsStatic
     {
         var a = Property;
         var b = Field;
+        var c = Array[0];
         if (Property == 0) { }
         if (Field == 0) { }
+        if (Array[0] == 0) { }
+        WithArg(Property);
+        WithArg(Field);
+        WithArg(Array[0]);
     }
 
     [FunctionName("Sample")]
     public static void SideEffects()
     {
         var a = Field = 42;         // FIXME FN Non-compliant
-        if (Field = 42 == 0) { }    // FIXME FN Non-compliant
+        if ((Field = 42) == 0) { }    // FIXME FN Non-compliant
+        if (Field++ == 0) { }       // FIXME FN Non-compliant
+        if ((Field += 1) == 0) { }     // FIXME FN Non-compliant
+        WithArg(Field++);
+        WithArg(Field += 1);
     }
 
     [FunctionName("Sample")]
@@ -115,7 +140,7 @@ public static class AzureFunctionsStatic
         var local = 0;
         WithRef(ref local);         // FIXME FN Non-compliant {{FIXME}}
         WithOut(out local);         // FIXME FN Non-compliant
-        WithOut(value:out local);   // FIXME FN Non-compliant
+        WithOut(value: out local);   // FIXME FN Non-compliant
         WithOut(outOfOrder: local, value: out local);   // FIXME FN Non-compliant
     }
 
@@ -134,6 +159,8 @@ public static class AzureFunctionsStatic
 
     private static int Calculate() =>
         0;
+
+    private static void WithArg(int value) { }
 
     private static void WithRef(ref int value) =>
         value = 0;
@@ -172,7 +199,7 @@ public static class Operators
     }
 
     [FunctionName("Sample")]
-    public void Assignment(object arg)
+    public static void Assignment(object arg)
     {
         Field += 42;        // FIXME FN Non-compliant
         Field -= 42;        // FIXME FN Non-compliant
@@ -219,7 +246,6 @@ public static class Collections
     public static void Update()
     {
         List[0] = 42;       // FN
-        HSet[0] = 42;       // FN
         Dict[0] = 42;       // FN
         Array[0] = 42;      // FN
     }
