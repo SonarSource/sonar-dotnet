@@ -302,7 +302,7 @@ public static class LogInExceptionFilter
         bool ExceptionFilter() { log.LogError(""); return true; }
     }
 
-    private static bool True(Action a) => true; // Takes the logging call exexutes it and returns true for the exception filter.
+    private static bool True(Action a) => true; // Takes the logging call executes it and returns true for the exception filter.
 }
 
 public static class CustomLoggerExtensions
