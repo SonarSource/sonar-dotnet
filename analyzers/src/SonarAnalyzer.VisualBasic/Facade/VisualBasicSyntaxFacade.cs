@@ -53,7 +53,6 @@ namespace SonarAnalyzer.Helpers.Facade
 
         public override bool IsAnyKind(SyntaxNode node, params SyntaxKind[] syntaxKinds) => node.IsAnyKind(syntaxKinds);
 
-
         public override IEnumerable<SyntaxNode> ArgumentExpressions(SyntaxNode node) =>
             node switch
             {
