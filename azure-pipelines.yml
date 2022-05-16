@@ -172,7 +172,7 @@ stages:
           ls analyzers\tests\SonarAnalyzer.UnitTest\bin\$(BuildConfiguration)\net48\
           pwd
 
-          .\coverlet.exe .\analyzers\tests\SonarAnalyzer.UnitTest\bin\$(BuildConfiguration)\net48\SonarAnalyzer.UnitTest.dll --target "dotnet" --targetargs "test analyzers\tests\SonarAnalyzer.UnitTest\SonarAnalyzer.UnitTest.csproj --no-build --no-restore -l trx -r ./TestResults" --output "coverage/net48.xml" --format opencover
+          .\coverlet.exe .\analyzers\tests\SonarAnalyzer.UnitTest\bin\Release\net48\SonarAnalyzer.UnitTest.dll --target "dotnet" --targetargs "test analyzers\tests\SonarAnalyzer.UnitTest\SonarAnalyzer.UnitTest.csproj --no-build --no-restore -l trx -r ./TestResults" --output "coverage/net48.xml" --format opencover
           Test-ExitCode "ERROR: Unit tests for net48 FAILED."
         displayName: '.Net UTs'
 
