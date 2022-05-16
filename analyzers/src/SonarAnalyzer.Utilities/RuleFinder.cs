@@ -50,14 +50,14 @@ namespace SonarAnalyzer.Utilities
         }
 
         public static IEnumerable<Type> GetAnalyzerTypes(AnalyzerLanguage language) =>
-            RuleAnalyzerTypes.Where(x => TargetLanguage(x).IsAlso(language));
+            RuleAnalyzerTypes.Where(x => TargetLanguage(x) == language);
 
         public static IEnumerable<DiagnosticAnalyzer> CreateAnalyzers(AnalyzerLanguage language, bool includeUtilityAnalyzers)
         {
             var types = GetAnalyzerTypes(language);
             if (includeUtilityAnalyzers)
             {
-                types = types.Concat(UtilityAnalyzerTypes.Where(x => TargetLanguage(x).IsAlso(language)));
+                types = types.Concat(UtilityAnalyzerTypes.Where(x => TargetLanguage(x) == language));
             }
             foreach (var type in types)
             {

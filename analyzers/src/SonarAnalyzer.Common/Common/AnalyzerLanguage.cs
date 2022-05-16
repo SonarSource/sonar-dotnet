@@ -19,6 +19,7 @@
  */
 
 using System;
+using System.IO;
 using Microsoft.CodeAnalysis;
 
 namespace SonarAnalyzer.Common
@@ -28,10 +29,8 @@ namespace SonarAnalyzer.Common
         private const string CsLiteral = "cs";
         private const string VbLiteral = "vbnet";
 
-        public static readonly AnalyzerLanguage None = new AnalyzerLanguage("none");
         public static readonly AnalyzerLanguage CSharp = new AnalyzerLanguage(CsLiteral);
         public static readonly AnalyzerLanguage VisualBasic = new AnalyzerLanguage(VbLiteral);
-        public static readonly AnalyzerLanguage Both = new AnalyzerLanguage("both");
 
         private readonly string language;
 
@@ -50,44 +49,6 @@ namespace SonarAnalyzer.Common
                 else
                 {
                     throw new NotSupportedException($"Can't get language name for '{ToString()}'.");
-                }
-            }
-        }
-
-        public string RepositoryKey
-        {
-            get
-            {
-                if (this == CSharp)
-                {
-                    return "csharpsquid";
-                }
-                else if (this == VisualBasic)
-                {
-                    return "vbnet";
-                }
-                else
-                {
-                    throw new NotSupportedException($"Quality profile can only be queried for a single language. But was called on '{ToString()}'.");
-                }
-            }
-        }
-
-        public string DirectoryName
-        {
-            get
-            {
-                if (this == CSharp)
-                {
-                    return "CSharp";
-                }
-                else if (this == VisualBasic)
-                {
-                    return "VisualBasic";
-                }
-                else
-                {
-                    throw new NotSupportedException($"Can't get folder name for '{ToString()}'.");
                 }
             }
         }
@@ -111,54 +72,11 @@ namespace SonarAnalyzer.Common
             }
         }
 
-        public string ResourceSuffix
-        {
-            get
-            {
-                if (this == CSharp)
-                {
-                    return "_cs";
-                }
-                else if (this == VisualBasic)
-                {
-                    return "_vb";
-                }
-                else
-                {
-                    throw new NotSupportedException($"Can't get resource suffix for '{ToString()}'.");
-                }
-            }
-        }
-
         private AnalyzerLanguage(string language) =>
             this.language = language;
 
         public override string ToString() =>
             language;
-
-        public AnalyzerLanguage AddLanguage(AnalyzerLanguage other)
-        {
-            if (other == null)
-            {
-                throw new ArgumentNullException(nameof(other));
-            }
-            else if (this == None || this == other)
-            {
-                return other;
-            }
-            else
-            {
-                return Both;
-            }
-        }
-
-        public bool IsAlso(AnalyzerLanguage other)
-        {
-            _ = other ?? throw new ArgumentNullException(nameof(other));
-            return other == None
-                ? throw new NotSupportedException("IsAlso doesn't support AnalyzerLanguage.None.")
-                : this == other || this == Both;
-        }
 
         public static AnalyzerLanguage Parse(string language) =>
             language switch
@@ -169,11 +87,11 @@ namespace SonarAnalyzer.Common
             };
 
         public static AnalyzerLanguage FromPath(string path) =>
-            System.IO.Path.GetExtension(path).ToUpperInvariant() switch
+            Path.GetExtension(path).ToUpperInvariant() switch
             {
                 ".CS" => CSharp,
                 ".VB" => VisualBasic,
-                _ => None
+                _ => throw new NotSupportedException("Unsupported file extension: " + Path.GetExtension(path))
             };
 
         public static AnalyzerLanguage FromName(string name) =>
@@ -181,7 +99,7 @@ namespace SonarAnalyzer.Common
             {
                 LanguageNames.CSharp => CSharp,
                 LanguageNames.VisualBasic => VisualBasic,
-                _ => None
+                _ => throw new NotSupportedException("Unsupported language name: " + name)
             };
     }
 }

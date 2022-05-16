@@ -28,10 +28,6 @@ namespace SonarAnalyzer.UnitTest.Common
     public class RuleDetailTest
     {
         [TestMethod]
-        public void GetAllRuleDetails_UnexpectedLanguage_Throws() =>
-            ((Action)(() => RuleDetailBuilder.GetAllRuleDetails(AnalyzerLanguage.Both))).Should().Throw<NotSupportedException>();
-
-        [TestMethod]
         public void RuleParameter_Constructor_CopiesValues()
         {
             var att = new RuleParameterAttribute("key", PropertyType.Password, "Description", "Secret");
