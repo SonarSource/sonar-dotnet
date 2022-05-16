@@ -61,7 +61,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 },
                 SyntaxKind.MethodDeclaration);
 
-        private class Walker : SafeCSharpSyntaxWalker
+        private sealed class Walker : SafeCSharpSyntaxWalker
         {
             public bool HasInvocationOutsideTryCatch { get; private set; }
 
@@ -86,10 +86,15 @@ namespace SonarAnalyzer.Rules.CSharp
 
             public override void VisitTryStatement(TryStatementSyntax node)
             {
-                if (!node.Catches.AsEnumerable().Any(CatchesAllExceptions))
+                if (!node.Catches.Any(CatchesAllExceptions))
                 {
                     base.VisitTryStatement(node);
                 }
+            }
+
+            public override void VisitCatchClause(CatchClauseSyntax node)
+            {
+                // Do not visit content of "catch". It doesn't make sense to wrap logging in catch in another try/catch.
             }
 
             private static bool CatchesAllExceptions(CatchClauseSyntax catchClause) =>

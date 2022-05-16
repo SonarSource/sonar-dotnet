@@ -54,6 +54,13 @@ public static class Functions
     }
 
     [FunctionName("Sample")]
+    public static void Unreachable()                    // Noncompliant
+    {
+        return;
+        DoSomething();  // This invocation is unreachable, but still considered - this is not a SE rule.
+    }
+
+    [FunctionName("Sample")]
     public static async Task<int> Harmless()
     {
         Action notInvokedParenthesizedLambda = () => { DoSomething(); };    // Compliant, not invoked
@@ -93,6 +100,42 @@ public static class Functions
         }
         finally
         {
+        }
+    }
+
+    [FunctionName("Sample")]
+    public static void TryFinally_WithMethod()   // Noncompliant
+    {
+        try
+        {
+        }
+        finally
+        {
+            DoSomething();
+        }
+    }
+
+    [FunctionName("Sample")]
+    public static void InvocationInCatch_All()
+    {
+        try
+        {
+        }
+        catch
+        {
+            DoSomething();
+        }
+    }
+
+    [FunctionName("Sample")]
+    public static void InvocationInCatch_Specific() // Compliant, because the risky stuff is happening only in catch
+    {
+        try
+        {
+        }
+        catch (NullReferenceException)
+        {
+            DoSomething();  // This is compliant, because it can be the desired logging.
         }
     }
 
@@ -337,7 +380,7 @@ public static class NestedTry
             {
                 DoSomething();
             }
-            finally
+            catch
             {
             }
         }
@@ -353,7 +396,7 @@ public static class NestedTry
             {
                 DoSomething();
             }
-            finally
+            catch
             {
             }
         }
@@ -368,7 +411,7 @@ public static class NestedTry
             {
                 DoSomething();
             }
-            finally
+            catch
             {
             }
             DoSomething();
@@ -384,7 +427,7 @@ public static class NestedTry
             {
                 DoSomething();
             }
-            finally
+            catch
             {
             }
         }
@@ -414,6 +457,60 @@ public static class NestedTry
         }
     }
 
+    [FunctionName("Sample")]
+    public static void NestedTry_OuterSpecificInnerAll()
+    {
+        try
+        {
+            try
+            {
+                DoSomething();
+            }
+            catch
+            {
+            }
+        }
+        catch(InvalidOperationException)
+        {
+        }
+    }
+
+    [FunctionName("Sample")]
+    public static void NestedTry_InCatch()
+    {
+        try
+        {
+        }
+        catch
+        {
+            try
+            {
+                DoSomething();
+            }
+            catch
+            {
+            }
+        }
+    }
+
+    [FunctionName("Sample")]
+    public static void NestedTry_InFinally()
+    {
+        try
+        {
+        }
+        finally
+        {
+            try
+            {
+                DoSomething();
+            }
+            catch
+            {
+            }
+        }
+    }
+
     private static void DoSomething() { }
 }
 
@@ -422,7 +519,7 @@ public class NonStatic
     public int Property { get; set; }
 
     [FunctionName("Sample")]
-    public void InstanceMethod()         // Noncompliant, should not be decorated with the attribute anyway
+    public void InstanceMethod()         // Noncompliant
     {
         DoSomething();
     }
