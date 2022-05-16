@@ -18,21 +18,16 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using SonarAnalyzer.Rules.CSharp;
+using Microsoft.CodeAnalysis;
+using Microsoft.CodeAnalysis.Diagnostics;
+using Microsoft.CodeAnalysis.VisualBasic;
+using SonarAnalyzer.Helpers;
 
-namespace SonarAnalyzer.UnitTest.Rules
+namespace SonarAnalyzer.Rules.VisualBasic
 {
-    [TestClass]
-    public class NewGuidShouldNotBeUsedTest
+    [DiagnosticAnalyzer(LanguageNames.VisualBasic)]
+    public sealed class PreferGuidEmpty : PreferGuidEmptyBase<SyntaxKind>
     {
-        [TestMethod]
-        public void NewGuidShouldNotBeUsed() =>
-            OldVerifier.VerifyAnalyzer(@"TestCases\NewGuidShouldNotBeUsed.cs", new NewGuidShouldNotBeUsed());
-
-#if NET
-        [TestMethod]
-        public void NewGuidShouldNotBeUsed_CSharp9() =>
-            OldVerifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\NewGuidShouldNotBeUsed.CSharp9.cs", new NewGuidShouldNotBeUsed());
-#endif
+        protected override ILanguageFacade<SyntaxKind> Language => VisualBasicFacade.Instance;
     }
 }

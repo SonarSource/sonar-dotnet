@@ -36,6 +36,7 @@ namespace SonarAnalyzer.Helpers.Facade
             SyntaxKind.NotEqualsExpression,
         };
         public SyntaxKind ConstructorDeclaration => SyntaxKind.ConstructorBlock;
+        public SyntaxKind[] DefaultExpressions => new[] { SyntaxKind.NothingLiteralExpression };
         public SyntaxKind EnumDeclaration => SyntaxKind.EnumStatement;
         public SyntaxKind FieldDeclaration => SyntaxKind.FieldDeclaration;
         public SyntaxKind IdentifierName => SyntaxKind.IdentifierName;
@@ -44,9 +45,10 @@ namespace SonarAnalyzer.Helpers.Facade
         public SyntaxKind InterpolatedStringExpression => SyntaxKind.InterpolatedStringExpression;
         public SyntaxKind[] MethodDeclarations => new[] { SyntaxKind.FunctionStatement, SyntaxKind.SubStatement };
         public SyntaxKind[] ObjectCreationExpressions => new[] { SyntaxKind.ObjectCreationExpression };
+        public SyntaxKind Parameter => SyntaxKind.Parameter;
         public SyntaxKind ReturnStatement => SyntaxKind.ReturnStatement;
         public SyntaxKind SimpleMemberAccessExpression => SyntaxKind.SimpleMemberAccessExpression;
         public SyntaxKind StringLiteralExpression => SyntaxKind.StringLiteralExpression;
-        public SyntaxKind[] TypeDeclaration { get; } = { SyntaxKind.ClassBlock, SyntaxKind.StructureBlock, SyntaxKind.InterfaceBlock, SyntaxKind.EnumBlock };
+        public SyntaxKind[] TypeDeclaration => new[] { SyntaxKind.ClassBlock, SyntaxKind.StructureBlock, SyntaxKind.InterfaceBlock, SyntaxKind.EnumBlock };
     }
 }

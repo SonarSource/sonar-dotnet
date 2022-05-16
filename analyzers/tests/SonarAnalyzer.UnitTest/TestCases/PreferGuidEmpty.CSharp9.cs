@@ -16,11 +16,11 @@ namespace Tests.Diagnostics
             string test = default;
         }
 
+        public Guid Get() => default; // Noncompliant
+
         // See: https://github.com/SonarSource/sonar-dotnet/issues/5245
-        private void Test(Guid guid = default) // Noncompliant FP - Guid.Empty cannot be used in this case
+        private void Test(Guid guid = default) // Compliant
         {
         }
-
-        public Guid Get() => default; // Noncompliant
     }
 }
