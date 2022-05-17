@@ -21,6 +21,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using Microsoft.CodeAnalysis;
+using SonarAnalyzer.Extensions;
 using SonarAnalyzer.Helpers;
 
 namespace SonarAnalyzer.Rules
@@ -47,7 +48,7 @@ namespace SonarAnalyzer.Rules
                 {
                     var declaration = (TDeclaration)c.Node;
 
-                    if (c.ContainingSymbol.Kind == SymbolKind.NamedType
+                    if (!c.IsRedundantPositionalRecordContext()
                         && IsRecursiveInheritance(GetNamedTypeSymbol(declaration, c.SemanticModel)))
                     {
                         c.ReportIssue(Diagnostic.Create(Rule, GetLocation(declaration), GetKeyword(declaration)));
