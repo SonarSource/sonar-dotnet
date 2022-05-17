@@ -133,9 +133,9 @@ function GenerateCsRuleClasses() {
     $csharpRuleTestCasesFolder = "${sonaranalyzerPath}\\tests\\SonarAnalyzer.UnitTest\\TestCases"
 
     $filesMap = @{
-        "CSharpRuleTemplate.cs"     = "${csharpRulesFolder}\\${className}.cs"
-        "CSharpTestTemplate.cs"     = "${csharpRuleTestsFolder}\\${className}Test.cs"
-        "CSharpTestCaseTemplate.cs" = "${csharpRuleTestCasesFolder}\\${className}.cs"
+        "Rule.CS.cs"     = "${csharpRulesFolder}\\${className}.cs"
+        "Test.CS.cs"     = "${csharpRuleTestsFolder}\\${className}Test.cs"
+        "TestCase.CS.cs" = "${csharpRuleTestCasesFolder}\\${className}.cs"
     }
     WriteClasses -filesMap $filesMap -classNameToUse $className
 }
@@ -154,11 +154,11 @@ function GenerateVbRuleClasses($language) {
         AppendVbTestCase -ruleTestsFolder $ruleTestsFolder
     }
     else {
-        $filesMap["VbNetTestTemplate.cs"] = "${ruleTestsFolder}\\${className}Test.cs"
+        $filesMap["Test.VB.cs"] = "${ruleTestsFolder}\\${className}Test.cs"
     }
 
-    $filesMap["VbNetRuleTemplate.cs"] = "${vbRulesFolder}\\${className}.cs"
-    $filesMap["VbNetTestCaseTemplate.vb"] = "${vbRuleTestCasesFolder}\\${className}.vb"
+    $filesMap["Rule.VB.cs"] = "${vbRulesFolder}\\${className}.cs"
+    $filesMap["TestCase.VB.vb"] = "${vbRuleTestCasesFolder}\\${className}.vb"
 
     WriteClasses -filesMap $filesMap
 }
@@ -206,7 +206,7 @@ function GenerateBaseClassIfSecondLanguage()
         $existingCSClassText = ReplaceTextInString -oldText $supportedDiagToken -newText $csLanguageFacadeToken -modifiableString $existingCSClassText
         $existingVBClassText = ReplaceTextInString -oldText $supportedDiagToken -newText $vbLanguageFacadeToken -modifiableString $existingVBClassText
 
-        $filesMap["CommonBaseClassTemplate.cs"] = "${commonRulesFolder}\\${className}Base.cs"
+        $filesMap["Rule.Base.cs"] = "${commonRulesFolder}\\${className}Base.cs"
 
         Set-Content -NoNewline `
                     -Path $csFilePath `
@@ -243,44 +243,40 @@ function RemoveText($textToRemove, $modifiableString)
 }
 
 function AppendVbTestCase($ruleTestsFolder) {
-    $existingClassText = Get-Content -Path "${ruleTestsFolder}\\${csClassName}Test.cs" -Raw
-    $snippetText = Get-Content -Path "${RuleTemplateFolder}\\VbNetTestSnippet.cs" -Raw
-
     $usingToken = "using SonarAnalyzer.Rules.CSharp;"
-    $csUsingToken = "using CS = SonarAnalyzer.Rules.CSharp;"
-    $vbNetUsingToken = "using VB = SonarAnalyzer.Rules.VisualBasic;"
+    $usingTokenCS = "using CS = SonarAnalyzer.Rules.CSharp;"
+    $usingTokenVB = "using VB = SonarAnalyzer.Rules.VisualBasic;"
     $namespaceToken = "namespace SonarAnalyzer.UnitTest.Rules"
     $token = "    }"
-    $usingTokenIdx = $existingClassText.IndexOf($usingToken)
 
-    $newText = $existingClassText
+    $text = Get-Content -Path "${ruleTestsFolder}\\${csClassName}Test.cs" -Raw
+    $methodVB = Get-Content -Path "${RuleTemplateFolder}\\TestMethod.VB.cs" -Raw
+
+    $usingTokenIdx = $text.IndexOf($usingToken)
     if ($usingTokenIdx -gt -1) {
-        $newText = $existingClassText.Remove($usingTokenIdx, $usingToken.Length + 1)
+        $text = $text.Remove($usingTokenIdx, $usingToken.Length + 1)
     }
 
-    $idx = $newText.LastIndexOf($token)
-
+    $idx = $text.LastIndexOf($token)
     if ($idx -gt -1) {
-        $newText = $newText.Remove($idx, $token.Length).Insert($idx, "`r`n${snippetText}`r`n${token}")
+        $text = $text.Insert($idx, "`n${methodVB}")
     }
     else {
-        $newText = "${$newText}`r`n${snippetText}"
+        $text = "${$text}`n${methodVB}"
     }
 
-    $namespaceTokenIdx = $newText.IndexOf($namespaceToken);
-
+    $namespaceTokenIdx = $text.IndexOf($namespaceToken);
     if ($namespaceTokenIdx -gt -1) {
-        $newText = $newText.Insert($namespaceTokenIdx - 1, "${csUsingToken}`r`n${vbNetUsingToken}`r`n")
+        $text = $text.Insert($namespaceTokenIdx - 1, "${usingTokenCS}`n${usingTokenVB}`n")
     }
 
-    $newText = $newText.Replace("new ${csClassName}", "new CS.${csClassName}")
+    $text = $text.Replace("new ${csClassName}", "new CS.${csClassName}")
+    $text = $text.Replace("<${csClassName}>", "<CS.${csClassName}>")
+    $text = $text.Replace("builder =", "builderCS =")
+    $text = $text.Replace("builder.", "builderCS.")
 
-    $replaced = ReplaceTokens -text $newText
-
-    Set-Content -NoNewline `
-                -Path "${ruleTestsFolder}\\${csClassName}Test.cs" `
-                -Value $replaced `
-                -Encoding UTF8
+    $replaced = ReplaceTokens -text $text
+    Set-Content -NoNewline -Path "${ruleTestsFolder}\\${csClassName}Test.cs" -Value $replaced -Encoding UTF8
 }
 
 function FindCsName($rulesPath) {

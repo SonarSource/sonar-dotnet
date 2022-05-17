@@ -18,15 +18,17 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using SonarAnalyzer.Rules.CSharp;
+using SonarAnalyzer.Rules.VisualBasic;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
     [TestClass]
     public class $DiagnosticClassName$Test
     {
+        private readonly VerifierBuilder builder = new VerifierBuilder<$DiagnosticClassName$>();
+
         [TestMethod]
-        public void $DiagnosticClassName$_CS() =>
-            new VerifierBuilder<$DiagnosticClassName$>().AddPaths("$DiagnosticClassName$.cs").Verify();
+        public void $DiagnosticClassName$_VB() =>
+            builder.AddPaths("$DiagnosticClassName$.vb").Verify();
     }
 }
