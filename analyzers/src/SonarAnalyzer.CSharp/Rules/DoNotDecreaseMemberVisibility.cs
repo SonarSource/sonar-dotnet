@@ -25,6 +25,7 @@ using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
+using SonarAnalyzer.Extensions;
 using SonarAnalyzer.Helpers;
 using StyleCop.Analyzers.Lightup;
 
@@ -45,7 +46,8 @@ namespace SonarAnalyzer.Rules.CSharp
                     var classDeclaration = (TypeDeclarationSyntax)c.Node;
 
                     if (classDeclaration.Identifier.IsMissing
-                        || !(c.ContainingSymbol is ITypeSymbol {Kind: SymbolKind.NamedType, IsSealed: false} classSymbol))
+                        || c.IsRedundantPositionalRecordContext()
+                        || !(c.ContainingSymbol is ITypeSymbol { IsSealed: false } classSymbol))
                     {
                         return;
                     }
