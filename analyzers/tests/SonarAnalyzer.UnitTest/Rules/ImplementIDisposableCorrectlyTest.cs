@@ -25,27 +25,34 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class ImplementIDisposableCorrectlyTest
     {
+        private readonly VerifierBuilder builder = new VerifierBuilder<ImplementIDisposableCorrectly>();
+
         [TestMethod]
         public void ImplementIDisposableCorrectly() =>
-            OldVerifier.VerifyAnalyzer(@"TestCases\ImplementIDisposableCorrectly.cs", new ImplementIDisposableCorrectly(), ParseOptionsHelper.FromCSharp8);
+            builder.AddPaths("ImplementIDisposableCorrectly.cs")
+                .WithOptions(ParseOptionsHelper.FromCSharp8)
+                .Verify();
 
 #if NET
+
         [TestMethod]
         public void ImplementIDisposableCorrectly_FromCSharp9() =>
-            OldVerifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\ImplementIDisposableCorrectly.CSharp9.cs", new ImplementIDisposableCorrectly());
+            builder.AddPaths("ImplementIDisposableCorrectly.CSharp9.cs")
+                .WithOptions(ParseOptionsHelper.FromCSharp9)
+                .Verify();
+
 #endif
 
         [TestMethod]
         public void ImplementIDisposableCorrectly_AbstractClass() =>
-            OldVerifier.VerifyAnalyzer(@"TestCases\ImplementIDisposableCorrectly.AbstractClass.cs", new ImplementIDisposableCorrectly());
+            builder.AddPaths("ImplementIDisposableCorrectly.AbstractClass.cs")
+                .Verify();
 
         [TestMethod]
         public void ImplementIDisposableCorrectly_PartialClassesInDifferentFiles() =>
-            OldVerifier.VerifyAnalyzer(
-                new[]
-                {
-                    @"TestCases\ImplementIDisposableCorrectlyPartial1.cs",
-                    @"TestCases\ImplementIDisposableCorrectlyPartial2.cs"
-                }, new ImplementIDisposableCorrectly());
+            builder.AddPaths(
+                "ImplementIDisposableCorrectlyPartial1.cs",
+                "ImplementIDisposableCorrectlyPartial2.cs")
+                .Verify();
     }
 }
