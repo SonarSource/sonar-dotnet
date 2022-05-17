@@ -25,22 +25,31 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class DisposableTypesNeedFinalizersTest
     {
+        private readonly VerifierBuilder builder = new VerifierBuilder<DisposableTypesNeedFinalizers>();
+
         [TestMethod]
         public void DisposableTypesNeedFinalizers() =>
-            OldVerifier.VerifyAnalyzer(@"TestCases\DisposableTypesNeedFinalizers.cs", new DisposableTypesNeedFinalizers());
+            builder.AddPaths("DisposableTypesNeedFinalizers.cs")
+                .Verify();
 
 #if NET
+
         [TestMethod]
         public void DisposableTypesNeedFinalizers_CSharp9() =>
-            OldVerifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\DisposableTypesNeedFinalizers.CSharp9.cs", new DisposableTypesNeedFinalizers());
+            builder.AddPaths("DisposableTypesNeedFinalizers.CSharp9.cs")
+                .WithOptions(ParseOptionsHelper.FromCSharp9)
+                .Verify();
+
 #endif
 
         [TestMethod]
         public void DisposableTypesNeedFinalizers_InvalidCode() =>
-            OldVerifier.VerifyCSharpAnalyzer(@"
+            builder.AddSnippet(@"
 public class Foo_05 : IDisposable
 {
     private HandleRef;
-}", new DisposableTypesNeedFinalizers(), CompilationErrorBehavior.Ignore);
+}")
+                .WithErrorBehavior(CompilationErrorBehavior.Ignore)
+                .Verify();
     }
 }
