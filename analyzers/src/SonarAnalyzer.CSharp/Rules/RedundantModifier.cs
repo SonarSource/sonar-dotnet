@@ -26,6 +26,7 @@ using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
+using SonarAnalyzer.Extensions;
 using SonarAnalyzer.Helpers;
 using StyleCop.Analyzers.Lightup;
 
@@ -93,7 +94,7 @@ namespace SonarAnalyzer.Rules.CSharp
         private static void CheckForUnnecessaryUnsafeBlocks(SyntaxNodeAnalysisContext context)
         {
             var typeDeclaration = (TypeDeclarationSyntax)context.Node;
-            if (typeDeclaration.Parent is TypeDeclarationSyntax || context.ContainingSymbol.Kind != SymbolKind.NamedType)
+            if (typeDeclaration.Parent is TypeDeclarationSyntax || context.IsRedundantPositionalRecordContext())
             {
                 // only process top level type declarations
                 return;
@@ -204,8 +205,8 @@ namespace SonarAnalyzer.Rules.CSharp
         {
             var typeDeclaration = (TypeDeclarationSyntax)context.Node;
             if (typeDeclaration.Modifiers.Any(SyntaxKind.PartialKeyword)
-                && context.ContainingSymbol.Kind == SymbolKind.NamedType
-                && context.SemanticModel.GetDeclaredSymbol(typeDeclaration) is { DeclaringSyntaxReferences: { Length: <= 1 } })
+                && !context.IsRedundantPositionalRecordContext()
+                && context.SemanticModel.GetDeclaredSymbol(typeDeclaration) is { DeclaringSyntaxReferences.Length: <= 1 })
             {
                 var keyword = typeDeclaration.Modifiers.First(m => m.IsKind(SyntaxKind.PartialKeyword));
                 context.ReportIssue(Diagnostic.Create(Rule, keyword.GetLocation(), "partial", "gratuitous"));
