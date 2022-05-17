@@ -25,14 +25,25 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class DoNotHideBaseClassMethodsTest
     {
+        private readonly VerifierBuilder builder = new VerifierBuilder<DoNotHideBaseClassMethods>();
+
         [TestMethod]
         public void DoNotHideBaseClassMethods() =>
-            new VerifierBuilder<DoNotHideBaseClassMethods>().AddPaths("DoNotHideBaseClassMethods.cs", "DoNotHideBaseClassMethods2.cs").WithAutogenerateConcurrentFiles(false).Verify();
+            builder.AddPaths(
+                "DoNotHideBaseClassMethods.cs",
+                "DoNotHideBaseClassMethods2.cs")
+                .WithAutogenerateConcurrentFiles(false)
+                .Verify();
 
 #if NET
+
         [TestMethod]
         public void DoNotHideBaseClassMethods_CSharp9() =>
-            new VerifierBuilder<DoNotHideBaseClassMethods>().AddPaths("DoNotHideBaseClassMethods.CSharp9.cs").WithOptions(ParseOptionsHelper.FromCSharp9).WithConcurrentAnalysis(false).Verify();
+            builder.AddPaths("DoNotHideBaseClassMethods.CSharp9.cs")
+                .WithOptions(ParseOptionsHelper.FromCSharp9)
+                .WithConcurrentAnalysis(false)
+                .Verify();
+
 #endif
     }
 }
