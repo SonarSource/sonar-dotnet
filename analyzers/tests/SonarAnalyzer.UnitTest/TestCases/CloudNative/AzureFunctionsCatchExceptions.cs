@@ -532,3 +532,28 @@ public class NonStatic
 
     private static void DoSomething() { }
 }
+
+public class ConditionalAccess
+{
+    public int Property { get; set; }
+
+    [FunctionName("Sample")]
+    public static void OnArgument(ConditionalAccess arg)    // Noncompliant
+    {
+        arg?.DoSomething();
+    }
+
+    [FunctionName("Sample")]
+    public void OnInvocation_Method()       // Noncompliant
+    {
+        DoSomething()?.DoSomething();
+    }
+
+    [FunctionName("Sample")]
+    public void OnInvocation_Property()     // Noncompliant
+    {
+        var value = DoSomething()?.Property;
+    }
+
+    private ConditionalAccess DoSomething() => null;
+}
