@@ -1,0 +1,18 @@
+{
+  "title": "Reuse client instances rather than creating new ones with each function invocation.",
+  "type": "CODE_SMELL",
+  "status": "ready",
+  "remediation": {
+    "func": "Constant\/Issue",
+    "constantCost": "5min"
+  },
+  "tags": [
+    "bad-practice",
+    "design"
+  ],
+  "defaultSeverity": "Major",
+  "ruleSpecification": "RSPEC-6420",
+  "sqKey": "S6420",
+  "scope": "All",
+  "quickfix": "infeasible"
+}
