@@ -29,30 +29,22 @@ namespace SonarAnalyzer.UnitTest.Rules
 
         [TestMethod]
         public void ImplementIDisposableCorrectly() =>
-            builder.AddPaths("ImplementIDisposableCorrectly.cs")
-                .WithOptions(ParseOptionsHelper.FromCSharp8)
-                .Verify();
+            builder.AddPaths("ImplementIDisposableCorrectly.cs").WithOptions(ParseOptionsHelper.FromCSharp8).Verify();
 
 #if NET
 
         [TestMethod]
         public void ImplementIDisposableCorrectly_FromCSharp9() =>
-            builder.AddPaths("ImplementIDisposableCorrectly.CSharp9.cs")
-                .WithOptions(ParseOptionsHelper.FromCSharp9)
-                .Verify();
+            builder.AddPaths("ImplementIDisposableCorrectly.CSharp9.cs").WithOptions(ParseOptionsHelper.FromCSharp9).Verify();
 
 #endif
 
         [TestMethod]
         public void ImplementIDisposableCorrectly_AbstractClass() =>
-            builder.AddPaths("ImplementIDisposableCorrectly.AbstractClass.cs")
-                .Verify();
+            builder.AddPaths("ImplementIDisposableCorrectly.AbstractClass.cs").Verify();
 
         [TestMethod]
         public void ImplementIDisposableCorrectly_PartialClassesInDifferentFiles() =>
-            builder.AddPaths(
-                "ImplementIDisposableCorrectlyPartial1.cs",
-                "ImplementIDisposableCorrectlyPartial2.cs")
-                .Verify();
+            builder.AddPaths("ImplementIDisposableCorrectlyPartial1.cs", "ImplementIDisposableCorrectlyPartial2.cs").Verify();
     }
 }
