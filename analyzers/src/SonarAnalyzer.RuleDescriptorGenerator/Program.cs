@@ -19,7 +19,6 @@
  */
 
 using System;
-using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using System.Linq;
@@ -38,7 +37,12 @@ namespace SonarAnalyzer.RuleDescriptorGenerator
         {
             if (args.Length == 1)
             {
-                var language = AnalyzerLanguage.Parse(args[0]);
+                var language = args[0] switch
+                {
+                    "cs" => AnalyzerLanguage.CSharp,
+                    "vbnet" => AnalyzerLanguage.VisualBasic,
+                    _ => throw new NotSupportedException("Unsupported argument: " + args[0]),
+                };
                 var root = new RuleDescriptorRoot(RuleDetailBuilder.GetAllRuleDetails(language).Select(RuleDetail.Convert));
                 Directory.CreateDirectory(language.ToString());
                 SerializeObjectToFile(Path.Combine(language.ToString(), "rules.xml"), root);

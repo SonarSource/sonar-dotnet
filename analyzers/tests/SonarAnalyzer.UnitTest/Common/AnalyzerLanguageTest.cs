@@ -26,21 +26,10 @@ namespace SonarAnalyzer.UnitTest.Common
     public class AnalyzerLanguageTest
     {
         [TestMethod]
-        public void Parse()
+        public void ToString_ReturnsLanguageName()
         {
-            AnalyzerLanguage.Parse("cs").Should().Be(AnalyzerLanguage.CSharp);
-            AnalyzerLanguage.Parse("vbnet").Should().Be(AnalyzerLanguage.VisualBasic);
-        }
-
-        [TestMethod]
-        public void Parse_Fail() =>
-            Assert.ThrowsException<NotSupportedException>(() => AnalyzerLanguage.Parse("csharp"));
-
-        [TestMethod]
-        public void ToString_ReturnsValue()
-        {
-            AnalyzerLanguage.CSharp.ToString().Should().Be("cs");
-            AnalyzerLanguage.VisualBasic.ToString().Should().Be("vbnet");
+            AnalyzerLanguage.CSharp.ToString().Should().Be("C#");
+            AnalyzerLanguage.VisualBasic.ToString().Should().Be("Visual Basic");
         }
 
         [DataTestMethod]

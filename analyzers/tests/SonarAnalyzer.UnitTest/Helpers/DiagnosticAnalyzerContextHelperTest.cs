@@ -297,23 +297,9 @@ $@"namespace PartiallyGenerated
                                         CompilationErrorBehavior checkMode = CompilationErrorBehavior.Default,
                                         ParseOptions parseOptions = default)
         {
-            AnalyzerLanguage language;
-            if (name.EndsWith(".cs"))
-            {
-                language = AnalyzerLanguage.CSharp;
-            }
-            else if (name.EndsWith(".vb"))
-            {
-                language = AnalyzerLanguage.VisualBasic;
-            }
-            else
-            {
-                throw new ArgumentException($"Was expecting the file name to end with '.cs' or '.vb', got '{name}'.", nameof(name));
-            }
-
             var compilation = SolutionBuilder
                .Create()
-               .AddProject(language, createExtraEmptyFile: false)
+               .AddProject(AnalyzerLanguage.FromPath(name), createExtraEmptyFile: false)
                .AddSnippet(content, name)
                .GetCompilation(parseOptions);
 

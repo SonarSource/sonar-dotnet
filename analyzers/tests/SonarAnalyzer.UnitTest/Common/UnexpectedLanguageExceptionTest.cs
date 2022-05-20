@@ -27,10 +27,10 @@ namespace SonarAnalyzer.UnitTest.Common
     {
         [TestMethod]
         public void Message_CS() =>
-            new UnexpectedLanguageException(AnalyzerLanguage.CSharp).Message.Should().Be("Unexpected language: cs");
+            new UnexpectedLanguageException(AnalyzerLanguage.CSharp).Message.Should().Be("Unexpected language: C#");
 
         [TestMethod]
         public void Message_VB() =>
-            new UnexpectedLanguageException(AnalyzerLanguage.VisualBasic).Message.Should().Be("Unexpected language: vbnet");
+            new UnexpectedLanguageException(AnalyzerLanguage.VisualBasic).Message.Should().Be("Unexpected language: Visual Basic");
     }
 }
