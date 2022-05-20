@@ -267,7 +267,7 @@
                          basedir="${sonarAnalyzer.workDirectory}/SonarAnalyzer.VisualBasic"/>
                     <copy todir="${sonarAnalyzer.workDirectory}/org/sonar/plugins/vbnet">
                       <fileset
-                        dir="${project.build.directory}/../../analyzers/src/SonarAnalyzer.RuleDescriptorGenerator/bin/${analyzer.configuration}/net46/vbnet">
+                        dir="${project.build.directory}/../../analyzers/src/SonarAnalyzer.RuleDescriptorGenerator/bin/${analyzer.configuration}/net46/Visual Basic">
                         <include name="rules.xml"/>
                       </fileset>
                       <fileset dir="${project.build.directory}/../../analyzers/rspec/vbnet">
