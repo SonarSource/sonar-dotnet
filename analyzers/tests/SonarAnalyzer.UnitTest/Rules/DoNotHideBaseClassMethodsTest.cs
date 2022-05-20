@@ -29,20 +29,13 @@ namespace SonarAnalyzer.UnitTest.Rules
 
         [TestMethod]
         public void DoNotHideBaseClassMethods() =>
-            builder.AddPaths(
-                "DoNotHideBaseClassMethods.cs",
-                "DoNotHideBaseClassMethods2.cs")
-                .WithAutogenerateConcurrentFiles(false)
-                .Verify();
+            builder.AddPaths("DoNotHideBaseClassMethods.cs", "DoNotHideBaseClassMethods2.cs").WithAutogenerateConcurrentFiles(false).Verify();
 
 #if NET
 
         [TestMethod]
         public void DoNotHideBaseClassMethods_CSharp9() =>
-            builder.AddPaths("DoNotHideBaseClassMethods.CSharp9.cs")
-                .WithOptions(ParseOptionsHelper.FromCSharp9)
-                .WithConcurrentAnalysis(false)
-                .Verify();
+            builder.AddPaths("DoNotHideBaseClassMethods.CSharp9.cs").WithOptions(ParseOptionsHelper.FromCSharp9).WithConcurrentAnalysis(false).Verify();
 
 #endif
     }

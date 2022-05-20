@@ -37,7 +37,6 @@ namespace SonarAnalyzer.Rules.CSharp
         private const string MessageFormat = "Implement a finalizer that calls your 'Dispose' method.";
 
         private static readonly DiagnosticDescriptor Rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
-
         private static readonly ImmutableArray<KnownType> NativeHandles = ImmutableArray.Create(
             KnownType.System_IntPtr,
             KnownType.System_UIntPtr,
@@ -50,8 +49,7 @@ namespace SonarAnalyzer.Rules.CSharp
             {
                 var declaration = (TypeDeclarationSyntax)c.Node;
                 if (!c.IsRedundantPositionalRecordContext()
-                    && c.SemanticModel.GetDeclaredSymbol(declaration) is var classSymbol
-                    && classSymbol.Implements(KnownType.System_IDisposable)
+                    && ((ITypeSymbol)c.ContainingSymbol).Implements(KnownType.System_IDisposable)
                     && HasNativeHandleFields(declaration, c.SemanticModel)
                     && !HasFinalizer(declaration))
                 {

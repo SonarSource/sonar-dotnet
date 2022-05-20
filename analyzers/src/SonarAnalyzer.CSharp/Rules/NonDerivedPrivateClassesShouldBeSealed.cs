@@ -43,9 +43,9 @@ namespace SonarAnalyzer.Rules.CSharp
             context.RegisterSyntaxNodeActionInNonGenerated(c =>
             {
                 var typeDeclarationSyntax = (TypeDeclarationSyntax)c.Node;
-                if (IsPrivateButNotSealedType(typeDeclarationSyntax)
-                    && !HasVirtualMembers(typeDeclarationSyntax)
-                    && !c.IsRedundantPositionalRecordContext())
+                if (!c.IsRedundantPositionalRecordContext()
+                    && IsPrivateButNotSealedType(typeDeclarationSyntax)
+                    && !HasVirtualMembers(typeDeclarationSyntax))
                 {
                     var nestedPrivateTypeInfo = (INamedTypeSymbol)c.SemanticModel.GetDeclaredSymbol(c.Node);
                     if (!IsPrivateTypeInherited(nestedPrivateTypeInfo))

@@ -38,9 +38,7 @@ namespace SonarAnalyzer.UnitTest.Rules
 
         [TestMethod]
         public void DoNotDecreaseMemberVisibility_CSharp9() =>
-            builder.AddPaths("DoNotDecreaseMemberVisibility.CSharp9.cs")
-                .WithOptions(ParseOptionsHelper.FromCSharp9)
-                .Verify();
+            builder.AddPaths("DoNotDecreaseMemberVisibility.CSharp9.cs").WithOptions(ParseOptionsHelper.FromCSharp9).Verify();
 
 #endif
 

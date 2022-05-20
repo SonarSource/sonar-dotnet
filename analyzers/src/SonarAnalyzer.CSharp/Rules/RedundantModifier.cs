@@ -204,8 +204,8 @@ namespace SonarAnalyzer.Rules.CSharp
         private static void CheckTypeDeclarationForRedundantPartial(SyntaxNodeAnalysisContext context)
         {
             var typeDeclaration = (TypeDeclarationSyntax)context.Node;
-            if (typeDeclaration.Modifiers.Any(SyntaxKind.PartialKeyword)
-                && !context.IsRedundantPositionalRecordContext()
+            if (!context.IsRedundantPositionalRecordContext()
+                && typeDeclaration.Modifiers.Any(SyntaxKind.PartialKeyword)
                 && context.SemanticModel.GetDeclaredSymbol(typeDeclaration) is { DeclaringSyntaxReferences.Length: <= 1 })
             {
                 var keyword = typeDeclaration.Modifiers.First(m => m.IsKind(SyntaxKind.PartialKeyword));

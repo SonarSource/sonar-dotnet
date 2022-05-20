@@ -29,16 +29,13 @@ namespace SonarAnalyzer.UnitTest.Rules
 
         [TestMethod]
         public void DisposableTypesNeedFinalizers() =>
-            builder.AddPaths("DisposableTypesNeedFinalizers.cs")
-                .Verify();
+            builder.AddPaths("DisposableTypesNeedFinalizers.cs").Verify();
 
 #if NET
 
         [TestMethod]
         public void DisposableTypesNeedFinalizers_CSharp9() =>
-            builder.AddPaths("DisposableTypesNeedFinalizers.CSharp9.cs")
-                .WithOptions(ParseOptionsHelper.FromCSharp9)
-                .Verify();
+            builder.AddPaths("DisposableTypesNeedFinalizers.CSharp9.cs").WithOptions(ParseOptionsHelper.FromCSharp9).Verify();
 
 #endif
 
@@ -48,8 +45,6 @@ namespace SonarAnalyzer.UnitTest.Rules
 public class Foo_05 : IDisposable
 {
     private HandleRef;
-}")
-                .WithErrorBehavior(CompilationErrorBehavior.Ignore)
-                .Verify();
+}").WithErrorBehavior(CompilationErrorBehavior.Ignore).Verify();
     }
 }

@@ -52,13 +52,10 @@ namespace SonarAnalyzer.Rules.CSharp
                     }
 
                     var issueFinder = new IssueFinder(declaredSymbol, c.SemanticModel);
-
-                    declarationSyntax
-                        .Members
-                        .Select(issueFinder.FindIssue)
-                        .WhereNotNull()
-                        .ToList()
-                        .ForEach(d => c.ReportIssue(d));
+                    foreach (var diagnostic in declarationSyntax.Members.Select(issueFinder.FindIssue).WhereNotNull())
+                    {
+                        c.ReportIssue(diagnostic);
+                    }
                 },
                 SyntaxKind.ClassDeclaration,
                 SyntaxKindEx.RecordClassDeclaration);
@@ -85,7 +82,7 @@ namespace SonarAnalyzer.Rules.CSharp
             {
                 var issueLocation = (memberDeclaration as MethodDeclarationSyntax)?.Identifier.GetLocation();
 
-                if (!(semanticModel.GetDeclaredSymbol(memberDeclaration) is IMethodSymbol methodSymbol) || issueLocation == null)
+                if (semanticModel.GetDeclaredSymbol(memberDeclaration) is not IMethodSymbol methodSymbol || issueLocation == null)
                 {
                     return null;
                 }
