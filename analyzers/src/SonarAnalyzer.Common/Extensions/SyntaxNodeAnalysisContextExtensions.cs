@@ -39,15 +39,9 @@ namespace SonarAnalyzer.Extensions
         internal static bool IsRedundantPositionalRecordContext(this SyntaxNodeAnalysisContext context) =>
             context.ContainingSymbol.Kind == SymbolKind.Method;
 
-        /// <summary>
-        /// Returns the <see cref="IMethodSymbol"/> of the entry point for an AzureFunction, if <code>Node</code> of <paramref name="context"/> is part
-        /// of the AzureFunction entry point.
-        /// </summary>
         public static IMethodSymbol AzureFunctionMethod(this SyntaxNodeAnalysisContext context) =>
-            context.ContainingSymbol switch
-            {
-                IMethodSymbol method when method.HasAttribute(KnownType.Microsoft_Azure_WebJobs_FunctionNameAttribute) => method,
-                _ => null,
-            };
+            context.ContainingSymbol is IMethodSymbol method && method.HasAttribute(KnownType.Microsoft_Azure_WebJobs_FunctionNameAttribute)
+                ? method
+                : null;
     }
 }
