@@ -123,13 +123,9 @@ public static class LogInCatchClause
     public static void LogExceptionFromWebApi(ILogger log)
     {
         try { }
-        catch (Exception ex) // Compliant. Call to unrecognized extension method from WebApi
+        catch (Exception ex) // Compliant. microsoft.azure.webjobs adds an extension method "LogMetric". It is in scope when the standard AzureFunction is scaffolded in VS, but we only take extension methods comming from the logging package into account.
         {
-            var i = 100;
-            if (i == 42)
-            {
-                log.LogMetric("Metric", 5);
-            }
+            log.LogMetric("Metric", 5);
         }
     }
 
