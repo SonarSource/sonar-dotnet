@@ -186,6 +186,37 @@ public static class LogInCatchClause
         }
     }
 
+    [FunctionName("Sample")]
+    public static void LogWithLogLevelTrace(ILogger log)
+    {
+        try { }
+        catch (Exception ex) // Noncompliant
+        {
+            log.Log(LogLevel.Trace, string.Empty); // Secondary
+        }
+    }
+
+    [FunctionName("Sample")]
+    public static void LogWithLogLevelError(ILogger log)
+    {
+        try { }
+        catch (Exception ex)
+        {
+            log.Log(LogLevel.Error, string.Empty); // Compliant
+        }
+    }
+
+    [FunctionName("Sample")]
+    public static void LogWithNonConstantLogLevel(ILogger log)
+    {
+        try { }
+        catch (Exception ex)
+        {
+            var logLevel = ex.InnerException == null ? LogLevel.Debug : LogLevel.Trace;
+            log.Log(logLevel, string.Empty); // Compliant. Non-constant LogLevels are considered valid.
+        }
+    }
+
     private static void LoggerHelper(ILogger logger) { }
 }
 
@@ -240,7 +271,7 @@ public class DependencyInjectionMethod
     }
 }
 
-public class Derived: DependencyInjectionMethod
+public class Derived : DependencyInjectionMethod
 {
     [FunctionName("Sample")]
     public void InjectedLoggerFromBaseIsNotUsed()
