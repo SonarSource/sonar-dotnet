@@ -130,6 +130,16 @@ public static class LogInCatchClause
     }
 
     [FunctionName("Sample")]
+    public static void LogExceptionToUndefinedMethod(ILogger log)
+    {
+        try { }
+        catch (Exception ex) // Noncompliant.
+        {
+            log.Undefined(); // Error [CS1061] ILogger' does not contain a definition for 'Undefined'
+        }
+    }
+
+    [FunctionName("Sample")]
     public static void LogExceptionInNestedCatch(ILogger log)
     {
         try { }
