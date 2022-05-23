@@ -55,7 +55,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 if (c.AzureFunctionMethod() is { } entryPoint
                     && c.Node is CatchClauseSyntax catchClause
                     && c.SemanticModel.Compilation.GetTypeByMetadataName(KnownType.Microsoft_Extensions_Logging_ILogger.TypeName) is { TypeKind: not TypeKind.Error } iLogger
-                    && LoggerIsInScopeInEntryPoint(c.SemanticModel, c.Node.SpanStart, entryPoint))
+                    && LoggerIsInScopeInEntryPoint(c.SemanticModel, c.Node.SpanStart, entryPoint, c.CancellationToken))
                 {
                     var walker = new LoggerCallWalker(c.SemanticModel, iLogger, c.CancellationToken);
 
@@ -71,12 +71,12 @@ namespace SonarAnalyzer.Rules.CSharp
             },
             SyntaxKind.CatchClause);
 
-        private static bool LoggerIsInScopeInEntryPoint(SemanticModel semanticModel, int position, IMethodSymbol entryPoint) =>
+        private static bool LoggerIsInScopeInEntryPoint(SemanticModel semanticModel, int position, IMethodSymbol entryPoint, CancellationToken cancellationToken) =>
             entryPoint.Parameters.Any(x => x.Type.DerivesOrImplements(KnownType.Microsoft_Extensions_Logging_ILogger))
                 // Instance method entrypoints might have access to an ILogger via injected fields/properties
                 // https://docs.microsoft.com/en-us/azure/azure-functions/functions-dotnet-dependency-injection
                 || (entryPoint is { IsStatic: false, ContainingType: { } container }
-                    && container.AllAccessibleMembers(semanticModel, position)
+                    && container.AllAccessibleMembers(semanticModel, position, cancellationToken)
                         .Any(x => x.GetSymbolType()?.DerivesOrImplements(KnownType.Microsoft_Extensions_Logging_ILogger) is true));
 
         private sealed class LoggerCallWalker : SafeCSharpSyntaxWalker
