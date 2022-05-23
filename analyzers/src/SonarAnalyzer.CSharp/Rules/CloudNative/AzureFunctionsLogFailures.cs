@@ -118,7 +118,8 @@ namespace SonarAnalyzer.Rules.CSharp
                     }
                     else
                     {
-                        (invalidInvocations ??= new()).Add(node.GetLocation());
+                        invalidInvocations ??= new();
+                        invalidInvocations.Add(node.GetLocation());
                     }
                 }
                 base.VisitInvocationExpression(node);
