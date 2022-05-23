@@ -20,18 +20,20 @@
 
 using System.Collections.Immutable;
 using System.Linq;
+using System.Threading;
 using Microsoft.CodeAnalysis;
 
 namespace SonarAnalyzer.Extensions
 {
     public static class ITypeSymbolExtensions
     {
-        public static ImmutableArray<ISymbol> GetAccessibleMembersAndBaseMembers(this ITypeSymbol typeSymbol, SemanticModel model, int position)
+        public static ImmutableArray<ISymbol> GetAccessibleMembersAndBaseMembers(this ITypeSymbol typeSymbol, SemanticModel model, int position, CancellationToken cancellationToken = default)
         {
             var builder = ImmutableArray.CreateBuilder<ISymbol>();
             AddAccessibleMembers(typeSymbol);
             while ((typeSymbol = typeSymbol.BaseType) is not null)
             {
+                cancellationToken.ThrowIfCancellationRequested();
                 AddAccessibleMembers(typeSymbol);
             }
             return builder.ToImmutable();

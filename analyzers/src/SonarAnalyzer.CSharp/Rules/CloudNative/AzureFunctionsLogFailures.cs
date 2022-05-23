@@ -81,18 +81,18 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private sealed class LoggerCallWalker : SafeCSharpSyntaxWalker
         {
+            private readonly SemanticModel model;
+            private readonly ITypeSymbol iLogger;
+            private readonly CancellationToken cancellationToken;
+            private readonly Lazy<IMethodSymbol> iLoggerLog;
             private List<Location> invalidInvocations;
-            private SemanticModel Model { get; }
-            private ITypeSymbol ILogger { get; }
-            private CancellationToken CancellationToken { get; }
-            private Lazy<IMethodSymbol> ILogger_Log { get; }
 
             public LoggerCallWalker(SemanticModel model, ITypeSymbol iLoggerSymbol, CancellationToken cancellationToken)
             {
-                Model = model;
-                ILogger = iLoggerSymbol;
-                CancellationToken = cancellationToken;
-                ILogger_Log = new Lazy<IMethodSymbol>(() => ILogger.GetMembers().OfType<IMethodSymbol>().FirstOrDefault(x => x.Name == "Log"));
+                this.model = model;
+                iLogger = iLoggerSymbol;
+                this.cancellationToken = cancellationToken;
+                iLoggerLog = new Lazy<IMethodSymbol>(() => iLogger.GetMembers().OfType<IMethodSymbol>().FirstOrDefault(x => x.Name == "Log"));
             }
 
             public bool HasValidLoggerCall { get; private set; }
@@ -100,7 +100,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
             public override void Visit(SyntaxNode node)
             {
-                CancellationToken.ThrowIfCancellationRequested();
+                cancellationToken.ThrowIfCancellationRequested();
                 if (HasValidLoggerCall)
                 {
                     return;
@@ -110,8 +110,8 @@ namespace SonarAnalyzer.Rules.CSharp
 
             public override void VisitInvocationExpression(InvocationExpressionSyntax node)
             {
-                if (Model.GetSymbolInfo(node, CancellationToken).Symbol is IMethodSymbol { ReceiverType: { } receiver } methodSymbol
-                    && receiver.DerivesOrImplements(ILogger))
+                if (model.GetSymbolInfo(node, cancellationToken).Symbol is IMethodSymbol { ReceiverType: { } receiver } methodSymbol
+                    && receiver.DerivesOrImplements(iLogger))
                 {
                     if (IsValidLogCall(node, methodSymbol))
                     {
@@ -127,7 +127,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
             public override void VisitArgument(ArgumentSyntax node)
             {
-                if (Model.GetTypeInfo(node.Expression).Type?.DerivesOrImplements(ILogger) is true)
+                if (model.GetTypeInfo(node.Expression, cancellationToken).Type?.DerivesOrImplements(iLogger) is true)
                 {
                     HasValidLoggerCall = true;
                 }
@@ -149,7 +149,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     };
                 }
                 // Check direct ILogger.Log invocations
-                if (ILogger_Log.Value is { } loggerLog
+                if (iLoggerLog.Value is { } loggerLog
                     && (methodSymbol.OriginalDefinition.Equals(loggerLog)
                         || methodSymbol.ContainingType.FindImplementationForInterfaceMember(loggerLog)?.Equals(methodSymbol.OriginalDefinition) is true))
                 {
@@ -163,7 +163,7 @@ namespace SonarAnalyzer.Rules.CSharp
             private bool IsPassingValidLogLevel(InvocationExpressionSyntax invocation, IMethodSymbol symbol) =>
                 symbol.Parameters.FirstOrDefault(x => x.Name == "logLevel") is { } logLevelParameter
                     && new CSharpMethodParameterLookup(invocation, symbol).TryGetNonParamsSyntax(logLevelParameter, out var argumentSyntax)
-                    && Model.GetConstantValue(argumentSyntax, CancellationToken) is { HasValue: true, Value: int logLevel }
+                    && model.GetConstantValue(argumentSyntax, cancellationToken) is { HasValue: true, Value: int logLevel }
                         ? !InvalidLogLevel.Contains(logLevel)
                         : true; // Compliant: Some non-constant value is passed as loglevel.
         }
