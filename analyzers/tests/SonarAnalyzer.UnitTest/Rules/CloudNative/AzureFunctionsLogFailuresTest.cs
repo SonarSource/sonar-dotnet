@@ -32,7 +32,7 @@ namespace SonarAnalyzer.UnitTest.Rules
 
         [TestMethod]
         public void AzureFunctionsLogFailures_CS() =>
-            builder.AddPaths("AzureFunctionsLogFailures.cs").WithConcurrentAnalysis(false).Verify();
+            builder.AddPaths("AzureFunctionsLogFailures.cs").Verify();
 
         [DataTestMethod]
         // Calls to LoggerExtensions.LogSomething extension methods
