@@ -328,7 +328,7 @@ namespace CustomILogger
 {
     public interface ILogger { void LogError(string message); }
 
-    public class CustomLoggerStaticEntryPoint
+    public class CustomILoggerStaticEntryPoint
     {
         [FunctionName("Sample")]
         public static void CustomLoggerIsCompliant(ILogger log)
@@ -338,15 +338,155 @@ namespace CustomILogger
         }
     }
 
-    public class CustomLoggerDependencyInjection
+    public class CustomILoggerDependencyInjection
     {
         protected ILogger Logger() => null;
 
         [FunctionName("Sample")]
-        public static void CustomLoggerIsCompliant()
+        public void CustomILoggerInScopeIsMustNotBeCalled()
         {
             try { }
             catch { } // Compliant.
+        }
+    }
+}
+
+namespace CustomLogger
+{
+    public class CustomLogger : ILogger
+    {
+        public void Log<TState>(LogLevel logLevel, EventId eventId, TState state, Exception exception, Func<TState, Exception, string> formatter) { }
+        public bool IsEnabled(LogLevel logLevel) => true;
+        public IDisposable BeginScope<TState>(TState state) => null;
+
+        public void SomeOtherMethodOnCustomLogger() { }
+    }
+
+    public static class CustomLoggerExtensions
+    {
+        public static void LogTrace(this CustomLogger logger) { }
+        public static void LogError(this CustomLogger logger) { }
+        public static void SomeExtensionMethod(this CustomLogger logger) { }
+    }
+
+    public class CustomLoggerStaticEntryPoint
+    {
+        [FunctionName("Sample")]
+        public static void CustomLoggerIsCompliant()
+        {
+            try { }
+            catch
+            {
+                var logger = new CustomLogger();
+                logger.Log(LogLevel.Error, default(EventId), state: (object)null, exception: null, formatter: (o, ex) => String.Empty); // Compliant. Some ILogger.Log method is called.
+            }
+        }
+
+        [FunctionName("Sample")]
+        public static void CustomLoggerIsInScopeButNotCalled()
+        {
+            var logger = new CustomLogger();
+            try { }
+            catch { } // FN. ILogger is in scope, but locals are ignored.
+        }
+
+        [FunctionName("Sample")]
+        public static void CustomParameterLoggerIsInScopeButNotCalled(CustomLogger logger)
+        {
+            try { }
+            catch { } // Noncompliant
+        }
+
+        [FunctionName("Sample")]
+        public static void CustomParameterLoggerIsInScopeAndCalled(CustomLogger logger)
+        {
+            try { }
+            catch
+            {
+                logger.Log(LogLevel.Error, default(EventId), state: (object)null, exception: null, formatter: (o, ex) => String.Empty); // Compliant.
+            }
+        }
+
+        [FunctionName("Sample")]
+        public static void CustomParameterLoggerIsInScopeButCalledWithInsufficentLogLevel(CustomLogger logger)
+        {
+            try { }
+            catch // Noncompliant
+            {
+                logger.Log(LogLevel.Trace, default(EventId), state: (object)null, exception: null, formatter: (o, ex) => String.Empty); // Secondary
+            }
+        }
+    }
+
+    public class CustomLoggerDependencyInjection
+    {
+        private readonly CustomLogger _logger;
+
+        [FunctionName("Sample")]
+        public void CustomLoggerInScopeMustBeCalled()
+        {
+            try { }
+            catch { } // Noncompliant.
+        }
+
+        [FunctionName("Sample")]
+        public void CustomLoggerLogCalled()
+        {
+            try { }
+            catch
+            {
+                _logger.Log(LogLevel.Error, default(EventId), state: (object)null, exception: null, formatter: (o, ex) => String.Empty); // Compliant.
+            }
+        }
+
+        [FunctionName("Sample")]
+        public void CustomLoggerLogCalledWithUnsufficientLogLevel()
+        {
+            try { }
+            catch // Noncompliant
+            {
+                _logger.Log(LogLevel.Trace, default(EventId), state: (object)null, exception: null, formatter: (o, ex) => String.Empty); // Secondary
+            }
+        }
+
+        [FunctionName("Sample")]
+        public void CustomLoggerOtherMethodCalled()
+        {
+            try { }
+            catch
+            {
+                _logger.SomeOtherMethodOnCustomLogger(); // Compliant. Any other call is considered as valid logging
+            }
+        }
+
+        [FunctionName("Sample")]
+        public void CustomLoggerOtherExtensionMethodCalled()
+        {
+            try { }
+            catch
+            {
+                _logger.SomeExtensionMethod(); // Compliant. Any unknown extension method is considered as valid logging
+            }
+        }
+
+        [FunctionName("Sample")]
+        public void CustomLoggerSpecialNamedExtensionInvalidMethodCalled()
+        {
+            try { }
+            catch
+            {
+                _logger.LogTrace(); // Special named extension methods are only considered if they are defined in Microsoft.Extensions.Logging.LoggerExtensions
+            }
+        }
+
+        [FunctionName("Sample")]
+        public void CustomLoggerSpecialNamedExtensionValidMethodCalled()
+        {
+            try { }
+            catch
+            {
+                _logger.LogError(); // Compliant.
+            }
         }
     }
 }
