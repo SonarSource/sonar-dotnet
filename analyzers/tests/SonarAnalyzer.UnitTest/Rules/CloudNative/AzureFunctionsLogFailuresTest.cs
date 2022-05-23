@@ -28,11 +28,11 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class AzureFunctionsLogFailuresTest
     {
-        private readonly VerifierBuilder builder = new VerifierBuilder<AzureFunctionsLogFailures>().AddReferences(NuGetMetadataReference.MicrosoftNetSdkFunctions());
+        private readonly VerifierBuilder builder = new VerifierBuilder<AzureFunctionsLogFailures>().WithBasePath("CloudNative").AddReferences(NuGetMetadataReference.MicrosoftNetSdkFunctions());
 
         [TestMethod]
         public void AzureFunctionsLogFailures_CS() =>
-            builder.WithBasePath("CloudNative").AddPaths("AzureFunctionsLogFailures.cs").WithConcurrentAnalysis(false).Verify();
+            builder.AddPaths("AzureFunctionsLogFailures.cs").WithConcurrentAnalysis(false).Verify();
 
         [DataTestMethod]
         // Calls to LoggerExtensions.LogSomething extension methods
