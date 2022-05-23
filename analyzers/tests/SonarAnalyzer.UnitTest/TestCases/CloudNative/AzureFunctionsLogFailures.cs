@@ -123,7 +123,7 @@ public static class LogInCatchClause
     public static void LogExceptionFromWebApi(ILogger log)
     {
         try { }
-        catch (Exception ex) // Compliant. Call to unregcognized extension method from WebApi
+        catch (Exception ex) // Compliant. Call to unrecognized extension method from WebApi
         {
             var i = 100;
             if (i == 42)
