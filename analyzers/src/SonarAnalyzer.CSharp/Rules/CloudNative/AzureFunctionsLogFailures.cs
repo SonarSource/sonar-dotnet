@@ -100,12 +100,11 @@ namespace SonarAnalyzer.Rules.CSharp
 
             public override void Visit(SyntaxNode node)
             {
-                cancellationToken.ThrowIfCancellationRequested();
-                if (HasValidLoggerCall)
+                if (!HasValidLoggerCall)
                 {
-                    return;
+                    cancellationToken.ThrowIfCancellationRequested();
+                    base.Visit(node);
                 }
-                base.Visit(node);
             }
 
             public override void VisitInvocationExpression(InvocationExpressionSyntax node)
