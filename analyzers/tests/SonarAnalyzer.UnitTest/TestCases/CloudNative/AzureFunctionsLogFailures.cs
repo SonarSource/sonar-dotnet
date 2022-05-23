@@ -323,3 +323,30 @@ public static class CustomLoggerExtensions
 {
     public static bool LogInformationCustomExtension(this ILogger logger, string message) => true;
 }
+
+namespace CustomLogger
+{
+    public interface ILogger { void LogError(string message); }
+
+    public class CustomLoggerStaticEntryPoint
+    {
+        [FunctionName("Sample")]
+        public static void CustomLoggerIsCompliant(ILogger log)
+        {
+            try { }
+            catch { } // Compliant. log is not from Microsoft.Extensions.Logging
+        }
+    }
+
+    public class CustomLoggerDependencyInjection
+    {
+        protected ILogger Logger() => null;
+
+        [FunctionName("Sample")]
+        public static void CustomLoggerIsCompliant()
+        {
+            try { }
+            catch { } // Compliant.
+        }
+    }
+}

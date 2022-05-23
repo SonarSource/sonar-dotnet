@@ -46,7 +46,6 @@ namespace SonarAnalyzer.Rules.CSharp
         };
 
         private static readonly DiagnosticDescriptor Rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
-        private static readonly ILanguageFacade LanguageFacade = CSharpFacade.Instance;
 
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(Rule);
 
@@ -58,7 +57,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     && c.SemanticModel.Compilation.GetTypeByMetadataName(KnownType.Microsoft_Extensions_Logging_ILogger.TypeName) is { TypeKind: not TypeKind.Error } iLogger
                     && LoggerIsInScopeInEntryPoint(c.SemanticModel, c.Node.SpanStart, entryPoint))
                 {
-                    var walker = new LoggerCallWalker(LanguageFacade, c.SemanticModel, iLogger, c.CancellationToken);
+                    var walker = new LoggerCallWalker(c.SemanticModel, iLogger, c.CancellationToken);
 
                     walker.SafeVisit(catchClause.Block);
                     // Exception handling in the filter clause preserves log scopes and is therefore recommended
@@ -83,15 +82,13 @@ namespace SonarAnalyzer.Rules.CSharp
         private sealed class LoggerCallWalker : SafeCSharpSyntaxWalker
         {
             private List<Location> invalidInvocations;
-            private ILanguageFacade Language { get; }
             private SemanticModel Model { get; }
             private ITypeSymbol ILogger { get; }
             private CancellationToken CancellationToken { get; }
             private Lazy<IMethodSymbol> ILogger_Log { get; }
 
-            public LoggerCallWalker(ILanguageFacade languageFacade, SemanticModel model, ITypeSymbol iLoggerSymbol, CancellationToken cancellationToken)
+            public LoggerCallWalker(SemanticModel model, ITypeSymbol iLoggerSymbol, CancellationToken cancellationToken)
             {
-                Language = languageFacade;
                 Model = model;
                 ILogger = iLoggerSymbol;
                 CancellationToken = cancellationToken;
@@ -165,7 +162,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
             private bool IsPassingValidLogLevel(InvocationExpressionSyntax invocation, IMethodSymbol symbol) =>
                 symbol.Parameters.FirstOrDefault(x => x.Name == "logLevel") is { } logLevelParameter
-                    && Language.MethodParameterLookup(invocation, symbol).TryGetNonParamsSyntax(logLevelParameter, out var argumentSyntax)
+                    && new CSharpMethodParameterLookup(invocation, symbol).TryGetNonParamsSyntax(logLevelParameter, out var argumentSyntax)
                     && Model.GetConstantValue(argumentSyntax, CancellationToken) is { HasValue: true, Value: int logLevel }
                         ? !InvalidLogLevel.Contains(logLevel)
                         : true; // Compliant: Some non-constant value is passed as loglevel.

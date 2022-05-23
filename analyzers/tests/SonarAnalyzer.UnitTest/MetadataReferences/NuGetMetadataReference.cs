@@ -88,9 +88,7 @@ namespace SonarAnalyzer.UnitTest.MetadataReferences
             .Concat(MicrosoftExtensionsLoggingPackages(packageVersion))
             .Concat(MicrosoftAspNetCoreMvcAbstractions(packageVersion))
             .Concat(MicrosoftAspNetCoreMvcCore(packageVersion))
-            .Concat(MicrosoftAspNetCoreHttpAbstractions(packageVersion))
-            .Concat(MicrosoftAspNetCoreHttpFeatures(packageVersion))
-            .Concat(MicrosoftExtensionsPrimitives(packageVersion));
+            .Concat(MicrosoftAspNetCoreHttpAbstractions(packageVersion));
         public static References MicrosoftNetWebApiCore(string packageVersion) => Create("Microsoft.AspNet.WebApi.Core", packageVersion);
         public static References MicrosoftSqlServerCompact(string packageVersion = "4.0.8876.1") => Create("Microsoft.SqlServer.Compact", packageVersion);
         public static References MicrosoftWebXdt(string packageVersion = "3.0.0") => Create("Microsoft.Web.Xdt", packageVersion);
