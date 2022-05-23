@@ -76,7 +76,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 // Instance method entrypoints might have access to an ILogger via injected fields/properties
                 // https://docs.microsoft.com/en-us/azure/azure-functions/functions-dotnet-dependency-injection
                 || (entryPoint is { IsStatic: false, ContainingType: { } container }
-                    && container.GetAccessibleMembersAndBaseMembers(semanticModel, position)
+                    && container.AllAccessibleMembers(semanticModel, position)
                         .Any(x => x.GetSymbolType()?.DerivesOrImplements(KnownType.Microsoft_Extensions_Logging_ILogger) is true));
 
         private sealed class LoggerCallWalker : SafeCSharpSyntaxWalker

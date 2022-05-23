@@ -27,7 +27,7 @@ namespace SonarAnalyzer.Extensions
 {
     public static class ITypeSymbolExtensions
     {
-        public static ImmutableArray<ISymbol> GetAccessibleMembersAndBaseMembers(this ITypeSymbol typeSymbol, SemanticModel model, int position, CancellationToken cancellationToken = default)
+        public static ImmutableArray<ISymbol> AllAccessibleMembers(this ITypeSymbol typeSymbol, SemanticModel model, int position, CancellationToken cancellationToken = default)
         {
             var builder = ImmutableArray.CreateBuilder<ISymbol>();
             AddAccessibleMembers(typeSymbol);
