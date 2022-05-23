@@ -324,7 +324,7 @@ public static class CustomLoggerExtensions
     public static bool LogInformationCustomExtension(this ILogger logger, string message) => true;
 }
 
-namespace CustomLogger
+namespace CustomILogger
 {
     public interface ILogger { void LogError(string message); }
 
