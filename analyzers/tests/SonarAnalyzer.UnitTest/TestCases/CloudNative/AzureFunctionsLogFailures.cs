@@ -88,10 +88,10 @@ public static class LogInCatchClause
         try { }
         catch (Exception ex) // FN. Any call to "log" is considered valid. Reachability is not considered.
         {
-            DoSomething(() => log.LogError(""));
+            DoNothing(() => log.LogError(""));
         }
 
-        void DoSomething(Action a) => a();
+        void DoNothing(Action a) { }
     }
 
     [FunctionName("Sample")]
