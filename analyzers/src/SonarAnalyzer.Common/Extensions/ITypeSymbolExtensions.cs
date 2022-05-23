@@ -22,6 +22,7 @@ using System.Collections.Immutable;
 using System.Linq;
 using System.Threading;
 using Microsoft.CodeAnalysis;
+using SonarAnalyzer.Helpers;
 
 namespace SonarAnalyzer.Extensions
 {
@@ -30,16 +31,12 @@ namespace SonarAnalyzer.Extensions
         public static ImmutableArray<ISymbol> AllAccessibleMembers(this ITypeSymbol typeSymbol, SemanticModel model, int position, CancellationToken cancellationToken = default)
         {
             var builder = ImmutableArray.CreateBuilder<ISymbol>();
-            AddAccessibleMembers(typeSymbol);
-            while ((typeSymbol = typeSymbol.BaseType) is not null)
+            foreach (var type in typeSymbol.GetSelfAndBaseTypes())
             {
                 cancellationToken.ThrowIfCancellationRequested();
-                AddAccessibleMembers(typeSymbol);
+                builder.AddRange(type.GetMembers().Where(x => model.IsAccessible(position, x)));
             }
             return builder.ToImmutable();
-
-            void AddAccessibleMembers(ITypeSymbol symbol) =>
-                builder.AddRange(symbol.GetMembers().Where(x => model.IsAccessible(position, x)));
         }
     }
 }
