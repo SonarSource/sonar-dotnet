@@ -140,6 +140,16 @@ public static class LogInCatchClause
     }
 
     [FunctionName("Sample")]
+    public static void CallLogIsEnabled(ILogger log)
+    {
+        try { }
+        catch (Exception ex) // Noncompliant.
+        {
+            log.IsEnabled(LogLevel.Error); // Secondary
+        }
+    }
+
+    [FunctionName("Sample")]
     public static void LogExceptionInNestedCatch(ILogger log)
     {
         try { }
@@ -397,6 +407,8 @@ namespace CustomLogger
         public IDisposable BeginScope<TState>(TState state) => null;
 
         public void SomeOtherMethodOnCustomLogger() { }
+        public void Log(LogLevel logLevel, string message) { }
+        public void Log(string message) { }
     }
 
     public static class CustomLoggerExtensions
@@ -453,6 +465,36 @@ namespace CustomLogger
                 logger.Log(LogLevel.Trace, default(EventId), state: (object)null, exception: null, formatter: (o, ex) => String.Empty); // Secondary
             }
         }
+
+        [FunctionName("Sample")]
+        public static void CustomParameterLoggerIsInScopeAndSomeNonInterfaceLogMethodIsCalledWithInsufficentLogLevel(CustomLogger logger)
+        {
+            try { }
+            catch // Noncompliant
+            {
+                logger.Log(LogLevel.Trace, ""); // Secondary
+            }
+        }
+
+        [FunctionName("Sample")]
+        public static void CustomParameterLoggerIsInScopeAndSomeNonInterfaceLogMethodIsCalledWithSufficentLogLevel(CustomLogger logger)
+        {
+            try { }
+            catch
+            {
+                logger.Log(LogLevel.Error, ""); // Compliant
+            }
+        }
+
+        [FunctionName("Sample")]
+        public static void CustomParameterLoggerIsInScopeAndSomeNonInterfaceLogMethodIsCalledWithoutLogLevelArgument(CustomLogger logger)
+        {
+            try { }
+            catch
+            {
+                logger.Log(""); // Compliant
+            }
+        }
     }
 
     public class CustomLoggerDependencyInjection
@@ -493,6 +535,26 @@ namespace CustomLogger
             catch
             {
                 _logger.SomeOtherMethodOnCustomLogger(); // Compliant. Any other call is considered as valid logging
+            }
+        }
+
+        [FunctionName("Sample")]
+        public void CustomLoggerNonLoggingMethodIsEnabledFromILogger()
+        {
+            try { }
+            catch // Noncompliant
+            {
+                _logger.IsEnabled(LogLevel.Error); // Secondary
+            }
+        }
+
+        [FunctionName("Sample")]
+        public void CustomLoggerNonLoggingMethodBeginScopeFromILogger()
+        {
+            try { }
+            catch // Noncompliant
+            {
+                _logger.BeginScope((object)null); // Secondary
             }
         }
 

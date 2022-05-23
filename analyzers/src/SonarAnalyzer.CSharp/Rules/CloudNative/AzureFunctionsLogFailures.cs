@@ -134,38 +134,37 @@ namespace SonarAnalyzer.Rules.CSharp
                 base.VisitArgument(node);
             }
 
-            private bool IsValidLogCall(InvocationExpressionSyntax invocation, IMethodSymbol methodSymbol)
-            {
-                // Check wellknown LoggerExtensions methods invocations
-                if (methodSymbol.IsExtensionMethod
-                    && methodSymbol.ContainingType.Is(KnownType.Microsoft_Extensions_Logging_LoggerExtensions))
+            private bool IsValidLogCall(InvocationExpressionSyntax invocation, IMethodSymbol methodSymbol) =>
+                methodSymbol switch
                 {
-                    return methodSymbol.Name switch
-                    {
-                        "LogInformation" or "LogWarning" or "LogError" or "LogCritical" => true,
-                        "Log" => IsPassingValidLogLevel(invocation, methodSymbol),
-                        "LogTrace" or "LogDebug" or "BeginScope" => false,
-                        _ => true, // Some unknown extension method on LoggerExtensions was called. Avoid FPs and assume it logs something.
-                    };
-                }
-                // Check direct ILogger.Log invocations
-                if (iLoggerLog.Value is { } loggerLog
-                    && (methodSymbol.OriginalDefinition.Equals(loggerLog)
-                        || methodSymbol.ContainingType.FindImplementationForInterfaceMember(loggerLog)?.Equals(methodSymbol.OriginalDefinition) is true))
-                {
-                    return IsPassingValidLogLevel(invocation, methodSymbol);
-                }
-                // The invocations receiver was an ILogger, but none of the known log methods was called.
-                // We assume some kind of logging is performed by the unknown invocation to avoid FPs.
-                return true;
-            }
+                    // Check wellknown LoggerExtensions methods invocations
+                    { IsExtensionMethod: true, Name: { } name } when methodSymbol.ContainingType.Is(KnownType.Microsoft_Extensions_Logging_LoggerExtensions) =>
+                        name switch
+                        {
+                            "LogInformation" or "LogWarning" or "LogError" or "LogCritical" => true,
+                            "Log" => IsPassingValidLogLevel(invocation, methodSymbol),
+                            "LogTrace" or "LogDebug" or "BeginScope" => false,
+                            _ => true, // Some unknown extension method on LoggerExtensions was called. Avoid FPs and assume it logs something.
+                        },
+                    // Check Log invocations on the instance
+                    { ContainingType: { } container, Name: { } name } when container.DerivesOrImplements(KnownType.Microsoft_Extensions_Logging_ILogger) =>
+                        name switch
+                        {
+                            "Log" => IsPassingValidLogLevel(invocation, methodSymbol),
+                            "IsEnabled" or "BeginScope" => false,
+                            _ => true, // Some unknown method on an ILogger was called. Avoid FPs and assume it logs something.
+                        },
+                    // The invocations receiver was an ILogger, but none of the known log methods was called.
+                    // We assume some kind of logging is performed by the unknown invocation to avoid FPs.
+                    _ => true,
+                };
 
             private bool IsPassingValidLogLevel(InvocationExpressionSyntax invocation, IMethodSymbol symbol) =>
                 symbol.Parameters.FirstOrDefault(x => x.Name == "logLevel") is { } logLevelParameter
                     && new CSharpMethodParameterLookup(invocation, symbol).TryGetNonParamsSyntax(logLevelParameter, out var argumentSyntax)
                     && argumentSyntax.FindConstantValue(model) is int logLevel
                         ? !InvalidLogLevel.Contains(logLevel)
-                        : true; // Compliant: Some non-constant value is passed as loglevel.
+                        : true; // Compliant: Some non-constant value is passed as loglevel or there is no logLevel parameter
         }
     }
 }
