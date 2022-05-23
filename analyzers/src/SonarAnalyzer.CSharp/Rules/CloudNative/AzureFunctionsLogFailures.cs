@@ -162,7 +162,7 @@ namespace SonarAnalyzer.Rules.CSharp
             private bool IsPassingValidLogLevel(InvocationExpressionSyntax invocation, IMethodSymbol symbol) =>
                 symbol.Parameters.FirstOrDefault(x => x.Name == "logLevel") is { } logLevelParameter
                     && new CSharpMethodParameterLookup(invocation, symbol).TryGetNonParamsSyntax(logLevelParameter, out var argumentSyntax)
-                    && model.GetConstantValue(argumentSyntax, cancellationToken) is { HasValue: true, Value: int logLevel }
+                    && argumentSyntax.FindConstantValue(model) is int logLevel
                         ? !InvalidLogLevel.Contains(logLevel)
                         : true; // Compliant: Some non-constant value is passed as loglevel.
         }
