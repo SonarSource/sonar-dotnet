@@ -52,13 +52,12 @@ namespace SonarAnalyzer.Rules.CSharp
         protected override void Initialize(SonarAnalysisContext context) =>
             context.RegisterSyntaxNodeActionInNonGenerated(c =>
             {
+                var catchClause = (CatchClauseSyntax)c.Node;
                 if (c.AzureFunctionMethod() is { } entryPoint
-                    && c.Node is CatchClauseSyntax catchClause
                     && c.SemanticModel.Compilation.GetTypeByMetadataName(KnownType.Microsoft_Extensions_Logging_ILogger.TypeName) is { TypeKind: not TypeKind.Error } iLogger
                     && LoggerIsInScopeInEntryPoint(c.SemanticModel, c.Node.SpanStart, entryPoint, c.CancellationToken))
                 {
                     var walker = new LoggerCallWalker(c.SemanticModel, iLogger, c.CancellationToken);
-
                     walker.SafeVisit(catchClause.Block);
                     // Exception handling in the filter clause preserves log scopes and is therefore recommended
                     // See https://blog.stephencleary.com/2020/06/a-new-pattern-for-exception-logging.html
@@ -84,7 +83,6 @@ namespace SonarAnalyzer.Rules.CSharp
             private readonly SemanticModel model;
             private readonly ITypeSymbol iLogger;
             private readonly CancellationToken cancellationToken;
-            private readonly Lazy<IMethodSymbol> iLoggerLog;
             private List<Location> invalidInvocations;
 
             public LoggerCallWalker(SemanticModel model, ITypeSymbol iLoggerSymbol, CancellationToken cancellationToken)
@@ -92,7 +90,6 @@ namespace SonarAnalyzer.Rules.CSharp
                 this.model = model;
                 iLogger = iLoggerSymbol;
                 this.cancellationToken = cancellationToken;
-                iLoggerLog = new Lazy<IMethodSymbol>(() => iLogger.GetMembers().OfType<IMethodSymbol>().FirstOrDefault(x => x.Name == "Log"));
             }
 
             public bool HasValidLoggerCall { get; private set; }
