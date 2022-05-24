@@ -13,7 +13,7 @@ trigger:
 pool: 
   name: '.Net Bubble staging'
   demands:
-    - PR_NUMBER -equals 76
+    - PR_NUMBER -equals 79
 
 variables:
   - group: sonar-dotnet-variables-tmp
