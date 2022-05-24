@@ -64,6 +64,10 @@ namespace SonarAnalyzer.UnitTest.Rules
         [DataRow(false, "((ILogger)log).Log(LogLevel.Trace, string.Empty);")]
         [DataRow(true, "new Func<ILogger>(()=>log)().Log(LogLevel.Critical, string.Empty);")]
         [DataRow(true, "new Func<ILogger>(()=>log)().Log(LogLevel.Error, new EventId(), (object)null, ex, (s, e) => string.Empty);")]
+        // Non logging methods
+        [DataRow(false, "log.BeginScope(string.Empty, string.Empty);")]
+        [DataRow(false, "log.BeginScope<object>(null);")]
+        [DataRow(false, "log.IsEnabled(LogLevel.Warning);")]
         public void AzureFunctionsLogFailures_VerifyLoggerCalls(bool isCompliant, string loggerInvocation)
         {
             var code = @$"
