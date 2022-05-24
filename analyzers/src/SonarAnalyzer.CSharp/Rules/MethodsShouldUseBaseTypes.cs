@@ -47,6 +47,7 @@ namespace SonarAnalyzer.Rules.CSharp
         private static List<Diagnostic> FindViolations(BaseMethodDeclarationSyntax methodDeclaration, SemanticModel semanticModel)
         {
             if (semanticModel.GetDeclaredSymbol(methodDeclaration) is not { } methodSymbol
+                || (methodSymbol.DeclaredAccessibility == Accessibility.Public && methodSymbol.IsControllerMethod())
                 || methodSymbol.Parameters.Length == 0
                 || methodSymbol.IsOverride
                 || methodSymbol.IsVirtual
