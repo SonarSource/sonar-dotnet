@@ -31,14 +31,15 @@ namespace SonarAnalyzer.Rules.Common
         where TAttributeSyntax : SyntaxNode
         where TSyntaxKind : struct
     {
-        internal const string DiagnosticId = "S4159";
+        private const string DiagnosticId = "S4159";
         private const string ActionForInterface = "Implement";
         private const string ActionForClass = "Derive from";
 
         private readonly ImmutableArray<KnownType> exportAttributes =
             ImmutableArray.Create(
                 KnownType.System_ComponentModel_Composition_ExportAttribute,
-                KnownType.System_ComponentModel_Composition_InheritedExportAttribute);
+                KnownType.System_ComponentModel_Composition_InheritedExportAttribute,
+                KnownType.System_Composition_ExportAttribute);
 
         protected abstract SeparatedSyntaxList<TArgumentSyntax>? GetAttributeArguments(TAttributeSyntax attributeSyntax);
         protected abstract SyntaxNode GetAttributeName(TAttributeSyntax attributeSyntax);
