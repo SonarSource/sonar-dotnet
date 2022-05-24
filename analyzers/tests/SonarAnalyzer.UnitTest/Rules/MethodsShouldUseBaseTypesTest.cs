@@ -73,6 +73,11 @@ internal class Bar
         public void MethodsShouldUseBaseTypes_CSharp8() =>
             builder.AddPaths("MethodsShouldUseBaseTypes.CSharp8.cs").WithAutogenerateConcurrentFiles(false).WithOptions(ParseOptionsHelper.FromCSharp8).Verify();
 
+                [TestMethod]
+        public void MethodsShouldUseBaseTypes_Controllers() =>
+            builder.AddPaths("MethodsShouldUseBaseTypes.AspControllers.cs")
+                .AddReferences(NuGetMetadataReference.MicrosoftAspNetCoreMvcCore(Constants.NuGetLatestVersion))
+                .Verify();
 #if NET
         [TestMethod]
         public void MethodsShouldUseBaseTypes_CSharp9() =>
