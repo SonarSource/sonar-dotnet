@@ -25,7 +25,10 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class AzureFunctionsReuseClientsTest
     {
-        private readonly VerifierBuilder builder = new VerifierBuilder<AzureFunctionsReuseClients>();
+        private readonly VerifierBuilder builder = new VerifierBuilder<AzureFunctionsReuseClients>().WithBasePath("CloudNative")
+            .AddReferences(NuGetMetadataReference.MicrosoftNetSdkFunctions()
+                .Concat(NuGetMetadataReference.SystemNetHttp()
+                .Concat(MetadataReferenceFacade.SystemThreadingTasks)));
 
         [TestMethod]
         public void AzureFunctionsReuseClients_CS() =>

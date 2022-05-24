@@ -66,6 +66,8 @@ namespace SonarAnalyzer.Helpers
         internal static readonly KnownType Microsoft_AspNetCore_Mvc_RequestFormLimitsAttribute = new("Microsoft.AspNetCore.Mvc.RequestFormLimitsAttribute");
         internal static readonly KnownType Microsoft_AspNetCore_Mvc_RequestSizeLimitAttribute = new("Microsoft.AspNetCore.Mvc.RequestSizeLimitAttribute");
         internal static readonly KnownType Microsoft_AspNetCore_Razor_Hosting_RazorCompiledItemAttribute = new("Microsoft.AspNetCore.Razor.Hosting.RazorCompiledItemAttribute");
+        internal static readonly KnownType Microsoft_Azure_Documents_Client_DocumentClient = new("Microsoft.Azure.Documents.Client.DocumentClient");
+        internal static readonly KnownType Microsoft_Azure_ServiceBus_QueueClient = new("Microsoft.Azure.ServiceBus.QueueClient");
         internal static readonly KnownType Microsoft_Azure_WebJobs_Extensions_DurableTask_IDurableEntityClient = new("Microsoft.Azure.WebJobs.Extensions.DurableTask.IDurableEntityClient");
         internal static readonly KnownType Microsoft_Azure_WebJobs_Extensions_DurableTask_IDurableEntityContext = new("Microsoft.Azure.WebJobs.Extensions.DurableTask.IDurableEntityContext");
         internal static readonly KnownType Microsoft_Azure_WebJobs_Extensions_DurableTask_IDurableOrchestrationContext = new("Microsoft.Azure.WebJobs.Extensions.DurableTask.IDurableOrchestrationContext");
@@ -141,6 +143,7 @@ namespace SonarAnalyzer.Helpers
         internal static readonly KnownType Org_BouncyCastle_Crypto_Generators_DsaParametersGenerator = new("Org.BouncyCastle.Crypto.Generators.DsaParametersGenerator");
         internal static readonly KnownType Org_BouncyCastle_Crypto_Parameters_RsaKeyGenerationParameters = new("Org.BouncyCastle.Crypto.Parameters.RsaKeyGenerationParameters");
         internal static readonly KnownType Serilog_LoggerConfiguration = new("Serilog.LoggerConfiguration");
+        internal static readonly KnownType StackExchange_Redis_ConnectionMultiplexer = new("StackExchange.Redis.ConnectionMultiplexer");
         internal static readonly KnownType System_Action = new("System.Action");
         internal static readonly KnownType System_Action_T = new("System.Action<T>");
         internal static readonly KnownType System_Action_T1_T2 = new("System.Action<T1, T2>");
@@ -303,6 +306,7 @@ namespace SonarAnalyzer.Helpers
         internal static readonly KnownType System_MTAThreadAttribute = new("System.MTAThreadAttribute");
         internal static readonly KnownType System_Net_FtpWebRequest = new("System.Net.FtpWebRequest");
         internal static readonly KnownType System_Net_Http_Headers_HttpHeaders = new("System.Net.Http.Headers.HttpHeaders");
+        internal static readonly KnownType System_Net_Http_HttpClient = new("System.Net.Http.HttpClient");
         internal static readonly KnownType System_Net_Http_HttpClientHandler = new("System.Net.Http.HttpClientHandler");
         internal static readonly KnownType System_Net_Mail_SmtpClient = new("System.Net.Mail.SmtpClient");
         internal static readonly KnownType System_Net_NetworkCredential = new("System.Net.NetworkCredential");

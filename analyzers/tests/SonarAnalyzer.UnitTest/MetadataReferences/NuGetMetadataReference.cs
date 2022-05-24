@@ -128,6 +128,7 @@ namespace SonarAnalyzer.UnitTest.MetadataReferences
         public static References SystemDataOracleClient(string packageVersion = "1.0.8") => Create("System.Data.OracleClient", packageVersion);
         public static References SystemDDirectoryServices(string packageVersion = "4.7.0") => Create("System.DirectoryServices", packageVersion);
         public static References SystemDrawingCommon(string packageVersion = "4.7.0") => Create("System.Drawing.Common", packageVersion);
+        public static References SystemNetHttp(string packageVersion = Constants.NuGetLatestVersion) => Create("System.Net.Http", packageVersion);
         public static References SystemSecurityCryptographyOpenSsl(string packageVersion = "4.7.0") => Create("System.Security.Cryptography.OpenSsl", packageVersion);
         public static References SystemSecurityPermissions(string packageVersion = "4.7.0") => Create("System.Security.Permissions", packageVersion);
         public static References SystemPrivateServiceModel(string packageVersion = "4.7.0") => Create("System.Private.ServiceModel", packageVersion);

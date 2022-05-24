@@ -18,7 +18,8 @@ namespace FunctionApp1
             ILogger log)
         {
             log.LogInformation("C# HTTP trigger function processed a request.");
-            var client = new HttpClient();
+            var client = new HttpClient();  // Noncompliant {{Reuse client instances rather than creating new ones with each function invocation.}}
+//                       ^^^^^^^^^^^^^^^^
             var result = await client.GetAsync(sampleUrl);
             return new OkObjectResult(await result.Content.ReadAsStringAsync());
         }
