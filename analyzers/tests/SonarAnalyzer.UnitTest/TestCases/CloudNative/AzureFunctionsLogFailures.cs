@@ -611,3 +611,22 @@
         }
     }
 }
+
+namespace AzureFunctionLogFailuresMissingUsingTests
+{
+    using Microsoft.AspNetCore.Http;
+    using Microsoft.AspNetCore.Mvc;
+    using Microsoft.Azure.WebJobs;
+    using Microsoft.Azure.WebJobs.Extensions.Http;
+    using Microsoft.Extensions.Logging.Abstractions;
+    using System;
+    using System.IO;
+    using System.Threading.Tasks;
+
+    [FunctionName("Sample")]
+    public static void ILoggerNotImported(ILogger log)
+    {
+        try { }
+        catch { } // Compliant
+    }
+}
