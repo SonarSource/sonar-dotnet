@@ -127,5 +127,22 @@ public class Foo : Microsoft.AspNetCore.Mvc.ControllerBase
 
             AspNetMvcHelper.IsControllerMethod(publicFoo).Should().Be(false);
         }
+
+        [DataTestMethod]
+        [DataRow("2.1.3")]
+        [DataRow(Constants.NuGetLatestVersion)]
+        public void Constructors_In_Classes_IsControllerMethod_Returns_False(string aspNetMvcVersion)
+        {
+            const string code = @"
+[Microsoft.AspNetCore.Mvc.ControllerAttribute]
+public class Foo : Microsoft.AspNetCore.Mvc.ControllerBase
+{
+        public Foo() { }
+}";
+            var compilation = TestHelper.CompileCS(code, NetStandardMetadataReference.Netstandard.Union(NuGetMetadataReference.MicrosoftAspNetCoreMvcCore(aspNetMvcVersion)).ToArray());
+            var (ctor, semanticModel) = compilation.GetConstructor("Foo");
+            var methodSymbol = semanticModel.GetDeclaredSymbol(ctor) as IMethodSymbol;
+            methodSymbol.IsControllerMethod().Should().Be(false);
+        }
     }
 }

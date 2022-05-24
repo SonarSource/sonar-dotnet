@@ -50,6 +50,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 || methodSymbol.Parameters.Length == 0
                 || methodSymbol.IsOverride
                 || methodSymbol.IsVirtual
+                || methodSymbol.IsControllerMethod()
                 || methodSymbol.GetInterfaceMember() != null
                 || methodSymbol.IsEventHandler())
             {
