@@ -7,6 +7,7 @@ using Microsoft.Extensions.Logging.Abstractions;
 using System;
 using System.IO;
 using System.Threading.Tasks;
+using ILoggerAlias = Microsoft.Extensions.Logging.ILogger;
 
 public static class LogInCatchClause
 {
@@ -303,6 +304,18 @@ public class GenericLogger
 
     [FunctionName("Sample")]
     public void InjectedLoggerFromBaseIsNotUsed()
+    {
+        try { }
+        catch { } // Noncompliant
+    }
+}
+
+public class UseILoggerAlias
+{
+    private ILoggerAlias logger;
+
+    [FunctionName("Sample")]
+    public void InjectedAliasedILogger()
     {
         try { }
         catch { } // Noncompliant
