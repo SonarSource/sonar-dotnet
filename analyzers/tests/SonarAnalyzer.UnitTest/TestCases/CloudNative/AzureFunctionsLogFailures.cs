@@ -623,10 +623,26 @@ namespace AzureFunctionLogFailuresMissingUsingTests
     using System.IO;
     using System.Threading.Tasks;
 
-    [FunctionName("Sample")]
-    public static void ILoggerNotImported(ILogger log)
+    public class LoggerNotInScopeStaticFunction
     {
-        try { }
-        catch { } // Compliant
+        [FunctionName("Sample")]
+        public static void ILoggerNotImported(ILogger log) // Error [CS0246]: The type or namespace name 'ILogger'
+        {
+            try { }
+            catch { } // Compliant
+        }
+    }
+
+    public class LoggerNotInScopeInstance
+    {
+        private ILogger log; // Error [CS0246]: The type or namespace name 'ILogger'
+
+        [FunctionName("Sample")]
+        public void ILoggerNotImported()
+        {
+            try { }
+            catch { } // Compliant
+        }
+
     }
 }
