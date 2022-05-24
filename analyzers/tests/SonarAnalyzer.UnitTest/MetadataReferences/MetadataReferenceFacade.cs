@@ -276,6 +276,9 @@ namespace SonarAnalyzer.UnitTest.MetadataReferences
             NuGetMetadataReference.SystemComponentModelComposition();
 #endif
 
+        internal static References SystemCompositionAttributedModel =>
+            NuGetMetadataReference.SystemCompositionAttributedModel();
+
         internal static References SystemComponentModelPrimitives =>
 #if NETFRAMEWORK
             Enumerable.Empty<MetadataReference>();

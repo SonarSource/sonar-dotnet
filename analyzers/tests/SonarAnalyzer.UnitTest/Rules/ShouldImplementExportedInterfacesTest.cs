@@ -33,6 +33,10 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void ShouldImplementExportedInterfaces_CS() =>
             builderCS.AddPaths("ShouldImplementExportedInterfaces.cs").Verify();
 
+        [TestMethod]
+        public void ShouldImplementExportedInterfaces_SystemComposition_CS() =>
+            builderCS.AddPaths("ShouldImplementExportedInterfaces.System.Composition.cs").AddReferences(MetadataReferenceFacade.SystemCompositionAttributedModel).Verify();
+
 #if NET
 
         [TestMethod]
