@@ -26,21 +26,20 @@ namespace SonarAnalyzer.Helpers
 {
     public static class AspNetMvcHelper
     {
-        private static readonly ImmutableArray<KnownType> controllerTypes =
+        private static readonly ImmutableArray<KnownType> ControllerTypes =
             ImmutableArray.Create(
                 KnownType.Microsoft_AspNetCore_Mvc_ControllerBase,
                 KnownType.System_Web_Mvc_Controller);
 
-        private static readonly ImmutableArray<KnownType> nonActionTypes =
+        private static readonly ImmutableArray<KnownType> NonActionTypes =
             ImmutableArray.Create(
                 KnownType.Microsoft_AspNetCore_Mvc_NonActionAttribute,
                 KnownType.System_Web_Mvc_NonActionAttribute);
 
-
-        private static readonly ImmutableArray<KnownType> nonControllerAttributeTypes =
+        private static readonly ImmutableArray<KnownType> NonControllerAttributeTypes =
             ImmutableArray.Create(KnownType.Microsoft_AspNetCore_Mvc_NonControllerAttribute);
 
-        private static readonly ImmutableArray<KnownType> controllerAttributeTypes =
+        private static readonly ImmutableArray<KnownType> ControllerAttributeTypes =
             ImmutableArray.Create(KnownType.Microsoft_AspNetCore_Mvc_ControllerAttribute);
 
         /// <summary>
@@ -48,19 +47,19 @@ namespace SonarAnalyzer.Helpers
         /// controller method.
         /// </summary>
         public static bool IsControllerMethod(this IMethodSymbol methodSymbol) =>
-            methodSymbol.MethodKind == MethodKind.Ordinary &&
-            methodSymbol.GetEffectiveAccessibility() == Accessibility.Public &&
-            !methodSymbol.GetAttributes().Any(d => d.AttributeClass.IsAny(nonActionTypes)) &&
-            IsControllerType(methodSymbol.ContainingType);
+            methodSymbol.MethodKind == MethodKind.Ordinary
+            && methodSymbol.GetEffectiveAccessibility() == Accessibility.Public
+            && !methodSymbol.GetAttributes().Any(d => d.AttributeClass.IsAny(NonActionTypes))
+            && IsControllerType(methodSymbol.ContainingType);
 
         /// <summary>
         /// Returns a value indicating whether the provided type symbol is a ASP.NET MVC
         /// controller.
         /// </summary>
         private static bool IsControllerType(this INamedTypeSymbol containingType) =>
-            containingType != null &&
-            (containingType.DerivesFromAny(controllerTypes)
-                || containingType.GetAttributes(controllerAttributeTypes).Any()) &&
-            !containingType.GetAttributes(nonControllerAttributeTypes).Any();
+            containingType != null
+            && (containingType.DerivesFromAny(ControllerTypes)
+                || containingType.GetAttributes(ControllerAttributeTypes).Any())
+            && !containingType.GetAttributes(NonControllerAttributeTypes).Any();
     }
 }
