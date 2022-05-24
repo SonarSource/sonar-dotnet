@@ -131,18 +131,18 @@ public class Foo : Microsoft.AspNetCore.Mvc.ControllerBase
         [DataTestMethod]
         [DataRow("2.1.3")]
         [DataRow(Constants.NuGetLatestVersion)]
-        public void Methods_In_Classes_AreLambda_IsControllerMethod_Returns_False(string aspNetMvcVersion)
+        public void Constructors_In_Classes_IsControllerMethod_Returns_False(string aspNetMvcVersion)
         {
             const string code = @"
-[Microsoft.AspNetCore.Mvc.NonControllerAttribute]
+[Microsoft.AspNetCore.Mvc.ControllerAttribute]
 public class Foo : Microsoft.AspNetCore.Mvc.ControllerBase
 {
-    public bool PublicFoo() => true;
+        public Foo() { }
 }";
             var compilation = TestHelper.CompileCS(code, NetStandardMetadataReference.Netstandard.Union(NuGetMetadataReference.MicrosoftAspNetCoreMvcCore(aspNetMvcVersion)).ToArray());
-            var publicFoo = compilation.GetMethodSymbol("PublicFoo");
-
-            AspNetMvcHelper.IsControllerMethod(publicFoo).Should().Be(false);
+            var (ctor, semanticModel) = compilation.GetConstructor("Foo");
+            var methodSymbol = semanticModel.GetDeclaredSymbol(ctor) as IMethodSymbol;
+            methodSymbol.IsControllerMethod().Should().Be(false);
         }
     }
 }
