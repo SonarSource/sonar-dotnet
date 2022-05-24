@@ -42,6 +42,12 @@ public static class LogInCatchClause
         }
     }
 
+    public static void MissingFunctionNameAttribute(ILogger log)
+    {
+        try { }
+        catch { } // Compliant. Not an AzureFunction
+    }
+
     [FunctionName("Sample")]
     public static void LogExceptionInWrappedLogger(ILogger log)
     {
