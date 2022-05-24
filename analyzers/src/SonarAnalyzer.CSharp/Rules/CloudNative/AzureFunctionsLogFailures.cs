@@ -142,17 +142,14 @@ namespace SonarAnalyzer.Rules.CSharp
                             "LogTrace" or "LogDebug" or "BeginScope" => false,
                             _ => true, // Some unknown extension method on LoggerExtensions was called. Avoid FPs and assume it logs something.
                         },
-                    // Instance invocations
-                    { IsExtensionMethod: false } =>
+                    { IsExtensionMethod: true } => true, // Any other extension method is assumed to log something to avoid FP.
+                    _ => // Instance invocations on an ILogger instance.
                         methodSymbol.Name switch
                         {
                             "Log" => IsPassingValidLogLevel(invocation, methodSymbol),
                             "IsEnabled" or "BeginScope" => false,
                             _ => true, // Some unknown method on an ILogger was called. Avoid FPs and assume it logs something.
                         },
-                    // The invocations receiver was an ILogger, but none of the known log methods was called.
-                    // We assume some kind of logging is performed by the unknown invocation to avoid FPs.
-                    _ => true,
                 };
 
             private bool IsPassingValidLogLevel(InvocationExpressionSyntax invocation, IMethodSymbol symbol) =>
