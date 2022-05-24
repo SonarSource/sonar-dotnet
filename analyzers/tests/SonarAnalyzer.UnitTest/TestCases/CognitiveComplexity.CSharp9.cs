@@ -1,4 +1,4 @@
-﻿// Noncompliant {{Refactor this top-level file to reduce its Cognitive Complexity from 9 to the 0 allowed.}}
+﻿// Noncompliant {{Refactor this top-level file to reduce its Cognitive Complexity from 11 to the 0 allowed.}}
 using System;
 
 if (1 == 2) // Secondary  {{+1}}
@@ -14,6 +14,14 @@ else // Secondary  {{+1}}
 }
 
 void LocalFunction()
+{
+    if (true) // Secondary  {{+2 (incl 1 for nesting)}}
+    {
+        return;
+    }
+}
+
+static void StaticLocalFunction()
 {
     if (true) // Secondary  {{+2 (incl 1 for nesting)}}
     {
