@@ -143,7 +143,7 @@ namespace SonarAnalyzer.Rules.CSharp
                             _ => true, // Some unknown extension method on LoggerExtensions was called. Avoid FPs and assume it logs something.
                         },
                     // Instance invocations
-                    { IsExtensionMethod: false } when methodSymbol.ContainingType.DerivesOrImplements(KnownType.Microsoft_Extensions_Logging_ILogger) =>
+                    { IsExtensionMethod: false } =>
                         methodSymbol.Name switch
                         {
                             "Log" => IsPassingValidLogLevel(invocation, methodSymbol),
