@@ -72,6 +72,7 @@ namespace SonarAnalyzer.UnitTest.MetadataReferences
         public static References MicrosoftEntityFrameworkCoreRelational(string packageVersion) => Create("Microsoft.EntityFrameworkCore.Relational", packageVersion);
         public static References MicrosoftExtensionsConfigurationAbstractions(string packageVersion) => Create("Microsoft.Extensions.Configuration.Abstractions", packageVersion);
         public static References MicrosoftExtensionsDependencyInjectionAbstractions(string packageVersion) => Create("Microsoft.Extensions.DependencyInjection.Abstractions", packageVersion);
+        public static References MicrosoftExtensionsHttp(string packageVersion=Constants.NuGetLatestVersion) => Create("Microsoft.Extensions.Http", packageVersion);
         public static References MicrosoftExtensionsLoggingPackages(string packageVersion) =>
             Create("Microsoft.Extensions.Logging", packageVersion)
             .Concat(Create("Microsoft.Extensions.Logging.AzureAppServices", packageVersion))

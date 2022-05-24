@@ -20,6 +20,7 @@
 
 using System.Collections.Immutable;
 using System.Linq;
+using System.Threading;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
@@ -49,19 +50,42 @@ namespace SonarAnalyzer.Rules.CSharp
             context.RegisterSyntaxNodeActionInNonGenerated(c =>
                 {
                     var node = c.Node;
-                    if (CreatedResuableClient(c.SemanticModel, node) is { } knownType)
+                    if (CreatedResuableClient(c.SemanticModel, node, c.CancellationToken) is { } knownType)
                     {
-                        c.ReportIssue(Diagnostic.Create(Rule, node.GetLocation()));
+                        if (IsNotAssignedForReuse(c.SemanticModel, node, c.CancellationToken))
+                        {
+                            c.ReportIssue(Diagnostic.Create(Rule, node.GetLocation()));
+                        }
                     }
                 },
                 SyntaxKind.ObjectCreationExpression, SyntaxKindEx.ImplicitObjectCreationExpression);
 
-        private static ITypeSymbol CreatedResuableClient(SemanticModel model, SyntaxNode node) =>
+        private static bool IsNotAssignedForReuse(SemanticModel model, SyntaxNode node, CancellationToken cancellationToken)
+        {
+            if (IsAssignedToLocal(node))
+            {
+                return true;
+            }
+            if (IsUnAssigned(node))
+            {
+                return true;
+            }
+
+            return false;
+        }
+
+        private static bool IsUnAssigned(SyntaxNode node) =>
+            node.Parent is not EqualsValueClauseSyntax;
+
+        private static bool IsAssignedToLocal(SyntaxNode node) =>
+            node.Parent is EqualsValueClauseSyntax { Parent: VariableDeclaratorSyntax { Parent: VariableDeclarationSyntax { Parent: LocalDeclarationStatementSyntax or UsingStatementSyntax } } };
+
+        private static ITypeSymbol CreatedResuableClient(SemanticModel model, SyntaxNode node, CancellationToken cancellationToken) =>
             node is ObjectCreationExpressionSyntax objectCreationExpression
             && objectCreationExpression.Type is NameSyntax name
             && name.GetIdentifier()?.Identifier.Text is { } typeName
             && Clients.FirstOrDefault(x => x.ShortName == typeName) is { } knownResuableClient
-            && model.GetSymbolInfo(name).Symbol is ITypeSymbol typeSymbol
+            && model.GetSymbolInfo(name, cancellationToken).Symbol is ITypeSymbol typeSymbol
             && typeSymbol.Is(knownResuableClient)
                 ? typeSymbol
                 : null;
