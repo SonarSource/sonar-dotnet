@@ -134,8 +134,8 @@ namespace SonarAnalyzer.Rules.CSharp
                 methodSymbol switch
                 {
                     // Wellknown LoggerExtensions methods invocations
-                    { IsExtensionMethod: true, ContainingType: { } container, Name: { } name } when container.Is(KnownType.Microsoft_Extensions_Logging_LoggerExtensions) =>
-                        name switch
+                    { IsExtensionMethod: true } when methodSymbol.ContainingType.Is(KnownType.Microsoft_Extensions_Logging_LoggerExtensions) =>
+                        methodSymbol.Name switch
                         {
                             "LogInformation" or "LogWarning" or "LogError" or "LogCritical" => true,
                             "Log" => IsPassingValidLogLevel(invocation, methodSymbol),
@@ -143,8 +143,8 @@ namespace SonarAnalyzer.Rules.CSharp
                             _ => true, // Some unknown extension method on LoggerExtensions was called. Avoid FPs and assume it logs something.
                         },
                     // Instance invocations
-                    { IsExtensionMethod: false, ContainingType: { } container, Name: { } name } when container.DerivesOrImplements(KnownType.Microsoft_Extensions_Logging_ILogger) =>
-                        name switch
+                    { IsExtensionMethod: false } when methodSymbol.ContainingType.DerivesOrImplements(KnownType.Microsoft_Extensions_Logging_ILogger) =>
+                        methodSymbol.Name switch
                         {
                             "Log" => IsPassingValidLogLevel(invocation, methodSymbol),
                             "IsEnabled" or "BeginScope" => false,

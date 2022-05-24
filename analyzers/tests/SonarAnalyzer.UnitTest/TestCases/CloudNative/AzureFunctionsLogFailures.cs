@@ -610,6 +610,51 @@
             }
         }
     }
+
+    namespace ImplicitILoggerImpl
+    {
+        public class CustomLogger : ILogger
+        {
+            void ILogger.Log<TState>(LogLevel logLevel, EventId eventId, TState state, Exception exception, Func<TState, Exception, string> formatter) { }
+            bool ILogger.IsEnabled(LogLevel logLevel) => true;
+            IDisposable ILogger.BeginScope<TState>(TState state) => null;
+        }
+
+        public class CustomLoggerDependencyInjection
+        {
+            private readonly CustomLogger _logger;
+
+            [FunctionName("Sample")]
+            public void CastedToILoggerCallsLogError()
+            {
+                try { }
+                catch
+                {
+                    ((ILogger)_logger).LogError(""); // Compliant.
+                }
+            }
+
+            [FunctionName("Sample")]
+            public void CastedToILoggerCallsLogTrace()
+            {
+                try { }
+                catch // Noncompliant.
+                {
+                    ((ILogger)_logger).LogTrace(""); // Secondary
+                }
+            }
+
+            [FunctionName("Sample")]
+            public void CastedToILoggerCallsLogInstanceMethodWithLogLevelTrace()
+            {
+                try { }
+                catch // Noncompliant.
+                {
+                    ((ILogger)_logger).Log(LogLevel.Trace, default(EventId), (object)null, default(Exception), (s, ex) => string.Empty); // Secondary
+                }
+            }
+        }
+    }
 }
 
 namespace AzureFunctionLogFailuresMissingUsingTests
