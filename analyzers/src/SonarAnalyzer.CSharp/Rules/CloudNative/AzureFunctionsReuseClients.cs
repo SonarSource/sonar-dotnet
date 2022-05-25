@@ -25,6 +25,7 @@ using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
+using Microsoft.CodeAnalysis.FindSymbols;
 using SonarAnalyzer.Helpers;
 using StyleCop.Analyzers.Lightup;
 
@@ -62,11 +63,8 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private static bool IsNotAssignedForReuse(SemanticModel model, SyntaxNode node, CancellationToken cancellationToken)
         {
-            if (IsAssignedToLocal(node))
-            {
-                return true;
-            }
-            if (IsUnAssigned(node))
+            if (IsAssignedToLocal(node)
+                || IsUnAssigned(node))
             {
                 return true;
             }
@@ -75,7 +73,7 @@ namespace SonarAnalyzer.Rules.CSharp
         }
 
         private static bool IsUnAssigned(SyntaxNode node) =>
-            node.Parent is not EqualsValueClauseSyntax;
+            node.Ancestors().Any(x => x.IsKind(SyntaxKind.ExpressionStatement));
 
         private static bool IsAssignedToLocal(SyntaxNode node) =>
             node.Parent is EqualsValueClauseSyntax { Parent: VariableDeclaratorSyntax { Parent: VariableDeclarationSyntax { Parent: LocalDeclarationStatementSyntax or UsingStatementSyntax } } };

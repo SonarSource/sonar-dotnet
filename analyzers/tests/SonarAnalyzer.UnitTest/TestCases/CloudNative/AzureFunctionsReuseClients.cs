@@ -101,7 +101,7 @@ namespace DifferentAssignments
         [FunctionName("Sample")]
         public static async Task NoAssignmentAndCall()
         {
-            await (new HttpClient()).GetStringAsync(@"http://example.com"); // Noncompliant
+            await new HttpClient().GetStringAsync(@"http://example.com"); // Noncompliant
         }
     }
 }
