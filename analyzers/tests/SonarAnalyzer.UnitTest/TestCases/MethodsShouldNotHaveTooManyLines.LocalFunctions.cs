@@ -4,7 +4,7 @@ namespace Tests.Diagnostics
 {
     public class Foo
     {
-        public void Bar(int i) // Noncompliant {{This method 'Bat' has 12 lines, which is greater than the 4 lines authorized. Split it into smaller methods.}}
+        public void Bar(int i) // Compliant, because we do not count the local static functions lines.
         {
             Console.WriteLine(i);
 
