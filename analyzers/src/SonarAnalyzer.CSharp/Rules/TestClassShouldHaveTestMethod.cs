@@ -50,23 +50,12 @@ namespace SonarAnalyzer.Rules.CSharp
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
 
         protected override void Initialize(SonarAnalysisContext context) =>
-            context.RegisterSyntaxNodeActionInNonGenerated(
-                c =>
+            context.RegisterSyntaxNodeActionInNonGenerated(c =>
                 {
-                    if (c.ContainingSymbol.Kind != SymbolKind.NamedType)
-                    {
-                        return;
-                    }
-
                     var typeDeclaration = (TypeDeclarationSyntax)c.Node;
-                    if (typeDeclaration.Identifier.IsMissing)
-                    {
-                        return;
-                    }
-
-                    var typeSymbol = c.SemanticModel.GetDeclaredSymbol(typeDeclaration);
-
-                    if (typeSymbol != null
+                    if (!c.IsRedundantPositionalRecordContext()
+                        && !typeDeclaration.Identifier.IsMissing
+                        && c.SemanticModel.GetDeclaredSymbol(typeDeclaration) is { } typeSymbol
                         && IsViolatingRule(typeSymbol)
                         && !IsExceptionToTheRule(typeSymbol))
                     {

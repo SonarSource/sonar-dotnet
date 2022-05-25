@@ -11,6 +11,20 @@ namespace Tests.Diagnostics
         private sealed record PrivateRecordExtension : PrivateRecord { }
     }
 
+    public record PublicRecord
+    {
+        private record NonsealedPrivateRecord { } // Noncompliant
+
+        private record NonsealedPrivatePositionalRecord(string Property) { } // Noncompliant
+    }
+
+    public record PublicPositionalRecord
+    {
+        private record NonsealedPrivateRecord { } // Noncompliant
+
+        private record NonsealedPrivatePositionalRecord(string Property) { } // Noncompliant
+    }
+
     public partial class APartialClass
     {
         private record PrivateRecord { }

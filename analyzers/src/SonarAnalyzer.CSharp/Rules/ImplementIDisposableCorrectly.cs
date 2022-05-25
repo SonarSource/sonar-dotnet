@@ -52,7 +52,7 @@ namespace SonarAnalyzer.Rules.CSharp
         protected override void Initialize(SonarAnalysisContext context) =>
             context.RegisterSyntaxNodeActionInNonGenerated(c =>
                 {
-                    if (c.ContainingSymbol.Kind != SymbolKind.NamedType)
+                    if (c.IsRedundantPositionalRecordContext())
                     {
                         return;
                     }
@@ -76,7 +76,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 SyntaxKind.ClassDeclaration,
                 SyntaxKindEx.RecordClassDeclaration);
 
-        private class DisposableChecker
+        private sealed class DisposableChecker
         {
             private readonly SemanticModel semanticModel;
             private readonly List<SecondaryLocation> secondaryLocations = new List<SecondaryLocation>();

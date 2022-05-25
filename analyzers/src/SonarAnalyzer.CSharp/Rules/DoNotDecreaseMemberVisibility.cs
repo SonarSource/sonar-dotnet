@@ -25,6 +25,7 @@ using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
+using SonarAnalyzer.Extensions;
 using SonarAnalyzer.Helpers;
 using StyleCop.Analyzers.Lightup;
 
@@ -43,26 +44,23 @@ namespace SonarAnalyzer.Rules.CSharp
             context.RegisterSyntaxNodeActionInNonGenerated(c =>
                 {
                     var classDeclaration = (TypeDeclarationSyntax)c.Node;
-
                     if (classDeclaration.Identifier.IsMissing
-                        || !(c.ContainingSymbol is ITypeSymbol {Kind: SymbolKind.NamedType, IsSealed: false} classSymbol))
+                        || c.IsRedundantPositionalRecordContext()
+                        || !(c.ContainingSymbol is ITypeSymbol { IsSealed: false } classSymbol))
                     {
                         return;
                     }
 
                     var issueFinder = new IssueFinder(classSymbol, c.SemanticModel);
-
-                    classDeclaration
-                        .Members
-                        .Select(issueFinder.FindIssue)
-                        .WhereNotNull()
-                        .ToList()
-                        .ForEach(d => c.ReportIssue(d));
+                    foreach (var diagnostic in classDeclaration.Members.Select(issueFinder.FindIssue).WhereNotNull())
+                    {
+                        c.ReportIssue(diagnostic);
+                    }
                 },
                 SyntaxKind.ClassDeclaration,
                 SyntaxKindEx.RecordClassDeclaration);
 
-        private class IssueFinder
+        private sealed class IssueFinder
         {
             private readonly IList<IMethodSymbol> allBaseClassMethods;
             private readonly IList<IPropertySymbol> allBaseClassProperties;
@@ -90,17 +88,12 @@ namespace SonarAnalyzer.Rules.CSharp
                     return FindMethodIssue(memberDeclaration, methodSymbol);
                 }
 
-                if (memberSymbol is IPropertySymbol propertySymbol)
-                {
-                    return FindPropertyIssue(memberDeclaration, propertySymbol);
-                }
-
-                return null;
+                return memberSymbol is IPropertySymbol propertySymbol ? FindPropertyIssue(memberDeclaration, propertySymbol) : null;
             }
 
             private Diagnostic FindMethodIssue(MemberDeclarationSyntax memberDeclaration, IMethodSymbol methodSymbol)
             {
-                if (!(memberDeclaration is MethodDeclarationSyntax methodDeclaration)
+                if (memberDeclaration is not MethodDeclarationSyntax methodDeclaration
                     || methodDeclaration.Modifiers.Any(SyntaxKind.NewKeyword))
                 {
                     return null;
@@ -123,7 +116,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
             private Diagnostic FindPropertyIssue(MemberDeclarationSyntax memberDeclaration, IPropertySymbol propertySymbol)
             {
-                if (!(memberDeclaration is PropertyDeclarationSyntax propertyDeclaration)
+                if (memberDeclaration is not PropertyDeclarationSyntax propertyDeclaration
                     || propertyDeclaration.Modifiers.Any(SyntaxKind.NewKeyword))
                 {
                     return null;

@@ -25,6 +25,7 @@ using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
+using SonarAnalyzer.Extensions;
 using SonarAnalyzer.Helpers;
 using StyleCop.Analyzers.Lightup;
 
@@ -44,27 +45,29 @@ namespace SonarAnalyzer.Rules.CSharp
                 {
                     var declarationSyntax = (TypeDeclarationSyntax)c.Node;
                     if (declarationSyntax.Identifier.IsMissing
-                        || c.ContainingSymbol.Kind != SymbolKind.NamedType
+                        || c.IsRedundantPositionalRecordContext()
                         || !(c.SemanticModel.GetDeclaredSymbol(declarationSyntax) is {} declaredSymbol))
                     {
                         return;
                     }
 
                     var issueFinder = new IssueFinder(declaredSymbol, c.SemanticModel);
-
-                    declarationSyntax
-                        .Members
-                        .Select(issueFinder.FindIssue)
-                        .WhereNotNull()
-                        .ToList()
-                        .ForEach(d => c.ReportIssue(d));
+                    foreach (var diagnostic in declarationSyntax.Members.Select(issueFinder.FindIssue).WhereNotNull())
+                    {
+                        c.ReportIssue(diagnostic);
+                    }
                 },
                 SyntaxKind.ClassDeclaration,
                 SyntaxKindEx.RecordClassDeclaration);
 
-        private class IssueFinder
+        private sealed class IssueFinder
         {
-            private enum Match { Different, Identical, WeaklyDerived }
+            private enum Match
+            {
+                Different,
+                Identical,
+                WeaklyDerived
+            }
 
             private readonly IList<IMethodSymbol> allBaseTypeMethods;
             private readonly SemanticModel semanticModel;
@@ -79,7 +82,7 @@ namespace SonarAnalyzer.Rules.CSharp
             {
                 var issueLocation = (memberDeclaration as MethodDeclarationSyntax)?.Identifier.GetLocation();
 
-                if (!(semanticModel.GetDeclaredSymbol(memberDeclaration) is IMethodSymbol methodSymbol) || issueLocation == null)
+                if (semanticModel.GetDeclaredSymbol(memberDeclaration) is not IMethodSymbol methodSymbol || issueLocation == null)
                 {
                     return null;
                 }
@@ -90,13 +93,13 @@ namespace SonarAnalyzer.Rules.CSharp
 
             private static List<IMethodSymbol> GetAllBaseMethods(ITypeSymbol typeSymbol) =>
                 typeSymbol.BaseType
-                           .GetSelfAndBaseTypes()
-                           .SelectMany(t => t.GetMembers())
-                           .OfType<IMethodSymbol>()
-                           .Where(m => IsSymbolVisibleFromNamespace(m, typeSymbol.ContainingNamespace))
-                           .Where(m => m.Parameters.Length > 0)
-                           .Where(m => !string.IsNullOrEmpty(m.Name))
-                           .ToList();
+                    .GetSelfAndBaseTypes()
+                    .SelectMany(t => t.GetMembers())
+                    .OfType<IMethodSymbol>()
+                    .Where(m => IsSymbolVisibleFromNamespace(m, typeSymbol.ContainingNamespace))
+                    .Where(m => m.Parameters.Length > 0)
+                    .Where(m => !string.IsNullOrEmpty(m.Name))
+                    .ToList();
 
             private static bool IsSymbolVisibleFromNamespace(ISymbol symbol, INamespaceSymbol ns) =>
                 symbol.DeclaredAccessibility != Accessibility.Private

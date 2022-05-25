@@ -23,6 +23,7 @@ using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
+using SonarAnalyzer.Extensions;
 using SonarAnalyzer.Helpers;
 using StyleCop.Analyzers.Lightup;
 
@@ -42,7 +43,9 @@ namespace SonarAnalyzer.Rules.CSharp
             context.RegisterSyntaxNodeActionInNonGenerated(c =>
             {
                 var typeDeclarationSyntax = (TypeDeclarationSyntax)c.Node;
-                if (IsPrivateButNotSealedType(typeDeclarationSyntax) && !HasVirtualMembers(typeDeclarationSyntax))
+                if (!c.IsRedundantPositionalRecordContext()
+                    && IsPrivateButNotSealedType(typeDeclarationSyntax)
+                    && !HasVirtualMembers(typeDeclarationSyntax))
                 {
                     var nestedPrivateTypeInfo = (INamedTypeSymbol)c.SemanticModel.GetDeclaredSymbol(c.Node);
                     if (!IsPrivateTypeInherited(nestedPrivateTypeInfo))

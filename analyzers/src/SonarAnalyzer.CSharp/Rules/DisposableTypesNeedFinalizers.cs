@@ -24,6 +24,7 @@ using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
+using SonarAnalyzer.Extensions;
 using SonarAnalyzer.Helpers;
 using StyleCop.Analyzers.Lightup;
 
@@ -35,28 +36,20 @@ namespace SonarAnalyzer.Rules.CSharp
         private const string DiagnosticId = "S4002";
         private const string MessageFormat = "Implement a finalizer that calls your 'Dispose' method.";
 
-        private static readonly DiagnosticDescriptor Rule
-            = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
+        private static readonly DiagnosticDescriptor Rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
+        private static readonly ImmutableArray<KnownType> NativeHandles = ImmutableArray.Create(
+            KnownType.System_IntPtr,
+            KnownType.System_UIntPtr,
+            KnownType.System_Runtime_InteropServices_HandleRef);
 
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
-
-        private static readonly ImmutableArray<KnownType> NativeHandles =
-            ImmutableArray.Create(KnownType.System_IntPtr,
-                                  KnownType.System_UIntPtr,
-                                  KnownType.System_Runtime_InteropServices_HandleRef);
 
         protected override void Initialize(SonarAnalysisContext context) =>
             context.RegisterSyntaxNodeActionInNonGenerated(c =>
             {
-                if (c.ContainingSymbol.Kind != SymbolKind.NamedType)
-                {
-                    return;
-                }
-
                 var declaration = (TypeDeclarationSyntax)c.Node;
-                var classSymbol = c.SemanticModel.GetDeclaredSymbol(declaration);
-
-                if (classSymbol.Implements(KnownType.System_IDisposable)
+                if (!c.IsRedundantPositionalRecordContext()
+                    && ((ITypeSymbol)c.ContainingSymbol).Implements(KnownType.System_IDisposable)
                     && HasNativeHandleFields(declaration, c.SemanticModel)
                     && !HasFinalizer(declaration))
                 {
@@ -68,9 +61,9 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private static bool HasNativeHandleFields(TypeDeclarationSyntax classDeclaration, SemanticModel semanticModel) =>
             classDeclaration.Members
-                            .OfType<FieldDeclarationSyntax>()
-                            .Select(m => semanticModel.GetDeclaredSymbol(m.Declaration.Variables.FirstOrDefault())?.GetSymbolType())
-                            .Any(si => si.IsAny(NativeHandles));
+                .OfType<FieldDeclarationSyntax>()
+                .Select(m => semanticModel.GetDeclaredSymbol(m.Declaration.Variables.FirstOrDefault())?.GetSymbolType())
+                .Any(si => si.IsAny(NativeHandles));
 
         private static bool HasFinalizer(TypeDeclarationSyntax classDeclaration) =>
             classDeclaration.Members.OfType<DestructorDeclarationSyntax>().Any();
