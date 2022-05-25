@@ -90,5 +90,25 @@ using System;
 ";
             builder.AddSnippet(code).Verify();
         }
+
+        [TestMethod]
+        public void LoggerPackageIsNotReferenced()
+        {
+            var code = @"
+using Microsoft.Azure.WebJobs;
+
+public interface ILogger { }
+
+public static class Function1
+{
+    [FunctionName(""Function1"")]
+    public static void Run(ILogger log)
+    {
+        try { }
+        catch { } // Compliant. No Microsoft.Extensions.Logging.ILogger referenced and in scope.
+    }
+}";
+            new VerifierBuilder<AzureFunctionsLogFailures>().AddReferences(NuGetMetadataReference.MicrosoftAzureWebJobsCore()).AddSnippet(code).Verify();
+        }
     }
 }
