@@ -1,7 +1,13 @@
-﻿using System.Collections.Generic;
-using System.Composition;
+﻿using System.Composition;
 
-[Export(typeof(List<>))] // Compliant, FN - Foo<T> should derive from List<T>
-class Foo<T>
+public interface IContract { }
+
+[Export(typeof(IContract))] // Noncompliant
+class DoesNotImplement
+{
+}
+
+[Export(typeof(IContract))] // Compliant
+class Implements : IContract
 {
 }

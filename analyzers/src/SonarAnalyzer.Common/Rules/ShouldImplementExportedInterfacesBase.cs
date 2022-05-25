@@ -31,14 +31,15 @@ namespace SonarAnalyzer.Rules.Common
         where TAttributeSyntax : SyntaxNode
         where TSyntaxKind : struct
     {
-        internal const string DiagnosticId = "S4159";
+        private const string DiagnosticId = "S4159";
         private const string ActionForInterface = "Implement";
         private const string ActionForClass = "Derive from";
 
         private readonly ImmutableArray<KnownType> exportAttributes =
             ImmutableArray.Create(
                 KnownType.System_ComponentModel_Composition_ExportAttribute,
-                KnownType.System_ComponentModel_Composition_InheritedExportAttribute);
+                KnownType.System_ComponentModel_Composition_InheritedExportAttribute,
+                KnownType.System_Composition_ExportAttribute);
 
         protected abstract SeparatedSyntaxList<TArgumentSyntax>? GetAttributeArguments(TAttributeSyntax attributeSyntax);
         protected abstract SyntaxNode GetAttributeName(TAttributeSyntax attributeSyntax);
@@ -55,8 +56,7 @@ namespace SonarAnalyzer.Rules.Common
                 c =>
                 {
                     var attributeSyntax = (TAttributeSyntax)c.Node;
-
-                    if (!(c.SemanticModel.GetSymbolInfo(GetAttributeName(attributeSyntax)).Symbol is IMethodSymbol attributeCtorSymbol)
+                    if (c.SemanticModel.GetSymbolInfo(GetAttributeName(attributeSyntax)).Symbol is not IMethodSymbol attributeCtorSymbol
                         || !attributeCtorSymbol.ContainingType.IsAny(exportAttributes))
                     {
                         return;
@@ -64,21 +64,27 @@ namespace SonarAnalyzer.Rules.Common
 
                     var exportedType = GetExportedTypeSymbol(GetAttributeArguments(attributeSyntax), c.SemanticModel);
                     var attributeTargetType = GetAttributeTargetSymbol(attributeSyntax, c.SemanticModel);
-
-                    if (exportedType != null && attributeTargetType != null && !IsOfExportType(attributeTargetType, exportedType))
+                    if (exportedType is null
+                        || attributeTargetType is null
+                        || IsOfExportType(attributeTargetType, exportedType))
                     {
-                        var action = exportedType.IsInterface()
-                            ? ActionForInterface
-                            : ActionForClass;
+                        return;
+                    }
 
-                        c.ReportIssue(Diagnostic.Create(Rule, attributeSyntax.GetLocation(), action,
+                    var action = exportedType.IsInterface()
+                                     ? ActionForInterface
+                                     : ActionForClass;
+
+                    c.ReportIssue(
+                        Diagnostic.Create(Rule,
+                            attributeSyntax.GetLocation(),
+                            action,
                             exportedType.ToDisplayString(SymbolDisplayFormat.MinimallyQualifiedFormat),
                             attributeTargetType.ToDisplayString(SymbolDisplayFormat.MinimallyQualifiedFormat)));
-                    }
                 },
                 Language.SyntaxKind.Attribute);
 
-        private static bool IsOfExportType(ITypeSymbol type, INamedTypeSymbol exportedType) =>
+        private static bool IsOfExportType(ITypeSymbol type, ISymbol exportedType) =>
             type.GetSelfAndBaseTypes()
                 .Union(type.AllInterfaces)
                 .Any(currentType => currentType.Equals(exportedType));
@@ -101,9 +107,10 @@ namespace SonarAnalyzer.Rules.Common
                                  ?? GetArgumentFromDoubleArgumentAttribute(arguments, semanticModel);
 
             var typeOfOrGetTypeExpression = Language.Syntax.NodeExpression(argumentSyntax);
-
             var exportedTypeSyntax = GetTypeOfOrGetTypeExpression(typeOfOrGetTypeExpression);
-            return exportedTypeSyntax == null ? null : semanticModel.GetSymbolInfo(exportedTypeSyntax).Symbol as INamedTypeSymbol;
+            return exportedTypeSyntax == null
+                       ? null
+                       : semanticModel.GetSymbolInfo(exportedTypeSyntax).Symbol as INamedTypeSymbol;
         }
 
         private ITypeSymbol GetAttributeTargetSymbol(SyntaxNode syntaxNode, SemanticModel semanticModel) =>
@@ -130,6 +137,6 @@ namespace SonarAnalyzer.Rules.Common
         }
 
         private static TArgumentSyntax GetArgumentFromSingleArgumentAttribute(SeparatedSyntaxList<TArgumentSyntax> arguments) =>
-            arguments.Count != 1 ? null : arguments[0]; // Only one argument, should be typeof expression
+            arguments.Count == 1 ? arguments[0] : null; // Only one argument, should be typeof expression
     }
 }

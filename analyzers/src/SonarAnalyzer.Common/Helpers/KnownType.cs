@@ -206,6 +206,7 @@ namespace SonarAnalyzer.Helpers
         internal static readonly KnownType System_Collections_Stack = new("System.Collections.Stack");
         internal static readonly KnownType System_Collections_Specialized_NameObjectCollectionBase = new("System.Collections.Specialized.NameObjectCollectionBase");
         internal static readonly KnownType System_Collections_Specialized_NameValueCollection = new("System.Collections.Specialized.NameValueCollection");
+        internal static readonly KnownType System_Composition_ExportAttribute = new("System.Composition.ExportAttribute");
         internal static readonly KnownType System_ComponentModel_DefaultValueAttribute = new("System.ComponentModel.DefaultValueAttribute");
         internal static readonly KnownType System_ComponentModel_EditorBrowsableAttribute = new("System.ComponentModel.EditorBrowsableAttribute");
         internal static readonly KnownType System_ComponentModel_LocalizableAttribute = new("System.ComponentModel.LocalizableAttribute");
