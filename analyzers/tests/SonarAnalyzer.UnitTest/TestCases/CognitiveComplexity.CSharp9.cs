@@ -1,4 +1,4 @@
-﻿// Noncompliant {{Refactor this top-level file to reduce its Cognitive Complexity from 11 to the 0 allowed.}}
+﻿// Noncompliant {{Refactor this top-level file to reduce its Cognitive Complexity from 9 to the 0 allowed.}}
 using System;
 
 if (1 == 2) // Secondary  {{+1}}
@@ -21,9 +21,17 @@ void LocalFunction()
     }
 }
 
-static void StaticLocalFunction()
+static void StaticLocalFunction(int x)
 {
-    if (true) // Secondary  {{+2 (incl 1 for nesting)}}
+    if (x == 1) // static local functions are excluded from the complexity computation.
+    {
+        Console.WriteLine(x);
+    }
+    else if (x == 2)
+    {
+        Console.WriteLine(x);
+    }
+    else
     {
         return;
     }
