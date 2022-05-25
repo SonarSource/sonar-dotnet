@@ -37,7 +37,7 @@ namespace SonarAnalyzer.Rules.CSharp
         private const string DiagnosticId = "S6423";
         private const string MessageFormat = "Log exception via ILogger with LogLevel Information, Warning, Error, or Critical.";
 
-        private static readonly int[] InvalidLogLevel = new[]
+        private static readonly int[] InvalidLogLevel =
         {
             0, // Trace
             1, // Debug
