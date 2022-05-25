@@ -19,7 +19,6 @@ static void StaticLocalFunction() // Noncompliant {{This top level local functio
     k++;
 }
 
-
 void Compliant()
 {
     i++;
