@@ -36,6 +36,7 @@ namespace SonarAnalyzer.UnitTest.Rules
             builderCS.AddPaths(@"CognitiveComplexity.cs")
                 .WithOptions(ParseOptionsHelper.FromCSharp8)
                 .Verify();
+
         [TestMethod]
         public void CognitiveComplexity_CS_LocalFunctions() =>
         builderCS.AddPaths(@"CognitiveComplexity.LocalFunctions.cs")

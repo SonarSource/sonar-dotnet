@@ -235,7 +235,7 @@ namespace SonarAnalyzer.Metrics.CSharp
                 }
             }
 
-            private bool LocalFunctionIsStatic(LocalFunctionStatementSyntaxWrapper node) =>
+            private static bool LocalFunctionIsStatic(LocalFunctionStatementSyntaxWrapper node) =>
                 node.Modifiers.Any(SyntaxKind.StaticKeyword);
         }
     }
