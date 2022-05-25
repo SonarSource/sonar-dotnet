@@ -24,6 +24,7 @@ void LocalFunction()
 static void StaticLocalFunction(int x)
 {
     if (x == 1) // static local functions are excluded from the complexity computation.
+                // See issue https://github.com/SonarSource/sonar-dotnet/issues/5625
     {
         Console.WriteLine(x);
     }

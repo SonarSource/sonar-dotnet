@@ -18,6 +18,7 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using Microsoft.CodeAnalysis.CSharp;
 using SonarAnalyzer.UnitTest.Helpers;
 using CS = SonarAnalyzer.Rules.CSharp;
 using VB = SonarAnalyzer.Rules.VisualBasic;
@@ -27,30 +28,44 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class CognitiveComplexityTest
     {
+        private readonly VerifierBuilder builderCS = new VerifierBuilder().AddAnalyzer(() => new CS.CognitiveComplexity { Threshold = 0, PropertyThreshold = 0 });
+        private readonly VerifierBuilder builderVB = new VerifierBuilder().AddAnalyzer(() => new VB.CognitiveComplexity { Threshold = 0, PropertyThreshold = 0 });
+
         [TestMethod]
         public void CognitiveComplexity_CS() =>
-            OldVerifier.VerifyAnalyzer(@"TestCases\CognitiveComplexity.cs", new CS.CognitiveComplexity { Threshold = 0, PropertyThreshold = 0 }, ParseOptionsHelper.FromCSharp8);
+            builderCS.AddPaths(@"CognitiveComplexity.cs")
+                .WithOptions(ParseOptionsHelper.FromCSharp8)
+                .Verify();
+        [TestMethod]
+        public void CognitiveComplexity_CS_LocalFunctions() =>
+        builderCS.AddPaths(@"CognitiveComplexity.LocalFunctions.cs")
+            .WithOptions(ParseOptionsHelper.FromCSharp8)
+            .Verify();
 
 #if NET
         [TestMethod]
         public void CognitiveComplexity_CS_CSharp9() =>
-            OldVerifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\CognitiveComplexity.CSharp9.cs", new CS.CognitiveComplexity { Threshold = 0, PropertyThreshold = 0 });
+            builderCS.AddPaths(@"CognitiveComplexity.CSharp9.cs")
+                .WithTopLevelStatements()
+                .Verify();
 
         [TestMethod]
         public void CognitiveComplexity_CS_CSharp10() =>
-            OldVerifier.VerifyAnalyzerFromCSharp10Library(@"TestCases\CognitiveComplexity.CSharp10.cs", new CS.CognitiveComplexity { Threshold = 0, PropertyThreshold = 0 });
+            builderCS.AddPaths(@"CognitiveComplexity.CSharp10.cs")
+                .WithLanguageVersion(LanguageVersion.CSharp10)
+                .WithConcurrentAnalysis(false)
+                .Verify();
 #endif
 
         [TestMethod]
-        public void CognitiveComplexity_VB() =>
-            OldVerifier.VerifyAnalyzer(@"TestCases\CognitiveComplexity.vb", new VB.CognitiveComplexity { Threshold = 0, PropertyThreshold = 0 });
+        public void CognitiveComplexity_VB() => builderVB.AddPaths("CognitiveComplexity.vb").Verify();
 
         [TestMethod]
         public void CognitiveComplexity_StackOverflow_CS()
         {
             if (!TestContextHelper.IsAzureDevOpsContext) // ToDo: Test throws OOM on Azure DevOps
             {
-                OldVerifier.VerifyAnalyzer(@"TestCases\SyntaxWalker_InsufficientExecutionStackException.cs", new CS.CognitiveComplexity { Threshold = 0, PropertyThreshold = 0 });
+                builderCS.AddPaths("SyntaxWalker_InsufficientExecutionStackException.cs").Verify();
             }
         }
 
@@ -59,7 +74,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         {
             if (!TestContextHelper.IsAzureDevOpsContext) // ToDO: Test throws OOM on Azure DevOps
             {
-                OldVerifier.VerifyAnalyzer(@"TestCases\SyntaxWalker_InsufficientExecutionStackException.vb", new VB.CognitiveComplexity { Threshold = 0, PropertyThreshold = 0 });
+                builderVB.AddPaths("SyntaxWalker_InsufficientExecutionStackException.vb").Verify();
             }
         }
     }
