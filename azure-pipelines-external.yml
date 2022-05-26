@@ -4,7 +4,7 @@ variables:
   - group: sonar-dotnet-variables
   - group: sonarsource-build-variables
   - name: MsBuildPath
-    value: 'C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\MSBuild\Current\Bin\msbuild.exe'
+    value: 'C:\Program Files\Microsoft Visual Studio\2022\Community\Msbuild\Current\Bin\msbuild.exe'
   - name: vsVersion
     value: '17.0'
 
