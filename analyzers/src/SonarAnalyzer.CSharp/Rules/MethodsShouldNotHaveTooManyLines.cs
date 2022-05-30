@@ -74,7 +74,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
         protected override IEnumerable<SyntaxToken> GetMethodTokens(BaseMethodDeclarationSyntax baseMethodDeclaration) =>
             baseMethodDeclaration.ExpressionBody()?.Expression?.DescendantTokens()
-                ?? baseMethodDeclaration.Body?.Statements.SelectMany(s => s.DescendantTokens())
+                ?? baseMethodDeclaration.Body?.Statements.Where(s => !IsStaticLocalFunction(s)).SelectMany(s => s.DescendantTokens())
                 ?? Enumerable.Empty<SyntaxToken>();
 
         protected override SyntaxToken? GetMethodIdentifierToken(BaseMethodDeclarationSyntax baseMethodDeclaration) =>
@@ -115,5 +115,9 @@ namespace SonarAnalyzer.Rules.CSharp
             GetMethodTokens(wrapper).SelectMany(x => x.GetLineNumbers())
                                     .Distinct()
                                     .LongCount();
+
+        private static bool IsStaticLocalFunction(SyntaxNode node) =>
+            node.IsKind(SyntaxKindEx.LocalFunctionStatement)
+            && ((LocalFunctionStatementSyntaxWrapper)node).Modifiers.Any(SyntaxKind.StaticKeyword);
     }
 }
