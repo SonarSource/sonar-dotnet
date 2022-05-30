@@ -44,7 +44,7 @@ namespace SonarAnalyzer.Rules.CSharp
             { KnownType.System_Collections_ICollection, "System.Collections.Generic.ICollection<T>" },
             { KnownType.System_Collections_IList, "System.Collections.Generic.IList<T>" },
             { KnownType.System_Collections_IEnumerable, "System.Collections.Generic.IEnumerable<T>" },
-            { KnownType.System_Collections_CollectionBase, "System.Collections.ObjectModel.Collection<T>" },
+            { KnownType.System_Collections_CollectionBase, "System.Collections.ObjectModel.Collection<T>" }
         };
 
         private static readonly ImmutableArray<KnownType> GenericTypes = ImmutableArray.Create(

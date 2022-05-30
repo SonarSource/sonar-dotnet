@@ -55,8 +55,8 @@ namespace SonarAnalyzer.UnitTest.Helpers
         [TestMethod]
         public void Type_DerivesOrImplementsAny()
         {
-            var baseType = (KnownType)new KnownType.RegularKnownType("NS.Base");
-            var interfaceType = (KnownType)new KnownType.RegularKnownType("NS.IInterface");
+            var baseType = new KnownType("NS.Base");
+            var interfaceType = new KnownType("NS.IInterface");
 
             var derived1Type = semanticModel.GetDeclaredSymbol(derivedClassDeclaration1) as INamedTypeSymbol;
             var derived2Type = semanticModel.GetDeclaredSymbol(derivedClassDeclaration2) as INamedTypeSymbol;
@@ -71,7 +71,7 @@ namespace SonarAnalyzer.UnitTest.Helpers
         [TestMethod]
         public void Type_Is()
         {
-            var baseKnownType = (KnownType)new KnownType.RegularKnownType("NS.Base");
+            var baseKnownType = new KnownType("NS.Base");
             var baseKnownTypes = ImmutableArray.Create(new[] { baseKnownType });
 
             var baseType = semanticModel.GetDeclaredSymbol(baseClassDeclaration) as INamedTypeSymbol;
