@@ -43,11 +43,20 @@ namespace DifferentAssignments
         private static object _lock = new object();
         private static object someField;
 
-        protected HttpClient ClientProperty { get; } = new HttpClient(); // Compliant
+        protected static HttpClient ClientProperty { get; set; } = new HttpClient(); // Compliant
 
-        public FunctionApp1()
+        static FunctionApp1()
         {
             ClientProperty = new HttpClient(); // Compliant
+        }
+
+        [FunctionName("Sample")]
+        public static void Assignments()
+        {
+            client = new HttpClient(); // FN
+            ClientProperty = new HttpClient(); // FN
+            var local = new HttpClient(); // Noncompliant
+            local = new System.Net.Http.HttpClient(); // Noncompliant
         }
 
         [FunctionName("Sample")]
@@ -72,12 +81,6 @@ namespace DifferentAssignments
                     }
                 }
             }
-        }
-
-        [FunctionName("Sample")]
-        public static void SimpleAssignment()
-        {
-            client = new HttpClient(); // FN
         }
 
         [FunctionName("Sample")]
