@@ -73,7 +73,26 @@ namespace SonarAnalyzer.Rules.CSharp
                 // Instance method entry points might have access to an ILogger via injected fields/properties
                 // https://docs.microsoft.com/en-us/azure/azure-functions/functions-dotnet-dependency-injection
                 || (entryPoint is { IsStatic: false, ContainingType: { } container }
-                    && container.FirstAccessibleMemberOfType(KnownType.Microsoft_Extensions_Logging_ILogger, cancellationToken) is not null);
+                    && HasLoggerMember(container, cancellationToken) is not null);
+
+        internal static ISymbol HasLoggerMember(ITypeSymbol typeSymbol, CancellationToken cancellationToken)
+        {
+            var isOriginalType = true;
+            foreach (var type in typeSymbol.GetSelfAndBaseTypes())
+            {
+                cancellationToken.ThrowIfCancellationRequested();
+                if (type.GetMembers().FirstOrDefault(x => AccessibilityValid(x.GetEffectiveAccessibility(), isOriginalType)
+                                                          && x.GetSymbolType()?.DerivesOrImplements(KnownType.Microsoft_Extensions_Logging_ILogger) is true) is { } result)
+                {
+                    return result;
+                }
+                isOriginalType = false;
+            }
+            return null;
+
+            static bool AccessibilityValid(Accessibility accessibility, bool isOriginalType) =>
+                isOriginalType || accessibility != Accessibility.Private;
+        }
 
         private sealed class LoggerCallWalker : SafeCSharpSyntaxWalker
         {
