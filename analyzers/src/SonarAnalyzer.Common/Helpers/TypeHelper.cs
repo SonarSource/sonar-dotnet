@@ -198,7 +198,8 @@ namespace SonarAnalyzer.Helpers
                 IAliasSymbol x => x.Target as ITypeSymbol,
                 IMethodSymbol { MethodKind: MethodKind.Constructor } x => x.ContainingType,
                 IMethodSymbol x => x.ReturnType,
-                _ => symbol as ITypeSymbol
+                ITypeSymbol x => x,
+                _ => null,
             };
     }
 }
