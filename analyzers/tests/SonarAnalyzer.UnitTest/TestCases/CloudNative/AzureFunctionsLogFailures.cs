@@ -44,6 +44,18 @@
             }
         }
 
+        [FunctionName("Sample")]
+        public static void LogExceptionInCatchClauseWithErrorAndTrace(ILogger log)
+        {
+            try { }
+            catch (Exception ex) // Compliant
+            {
+                log.LogTrace(ex, "");
+                log.LogError(ex, "");
+                log.LogTrace(ex, "");
+            }
+        }
+
         public static void MissingFunctionNameAttribute(ILogger log)
         {
             try { }
