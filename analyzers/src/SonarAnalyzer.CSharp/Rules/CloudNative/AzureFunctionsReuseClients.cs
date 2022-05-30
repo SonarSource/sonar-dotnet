@@ -62,22 +62,22 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private static bool IsAssignedForReuse(SemanticModel model, SyntaxNode node, CancellationToken cancellationToken)
         {
-            if (IsAssignedToFieldProperty(model, node, cancellationToken))
-            {
-                return true;
-
-            }
-            if (IsInFieldInitializer(node))
-            {
-                return true;
-            }
             if (IsAssignedToLocal(node))
             {
                 return false;
             }
+            if (IsAssignedToFieldProperty(model, node, cancellationToken)
+                || IsInFieldInitializer(node)
+                || IsInPropertyInitializer(node))
+            {
+                return true;
+            }
 
             return false;
         }
+
+        private static bool IsInPropertyInitializer(SyntaxNode node) =>
+            node.Parent is EqualsValueClauseSyntax { Parent: PropertyDeclarationSyntax };
 
         private static bool IsAssignedToFieldProperty(SemanticModel model, SyntaxNode node, CancellationToken cancellationToken) => node.Parent is AssignmentExpressionSyntax assignment
             && assignment.Left is { } identifier

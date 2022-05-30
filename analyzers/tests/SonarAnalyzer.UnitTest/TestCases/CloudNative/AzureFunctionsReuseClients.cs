@@ -43,6 +43,13 @@ namespace DifferentAssignments
         private static object _lock = new object();
         private static object someField;
 
+        protected HttpClient ClientProperty { get; } = new HttpClient(); // Compliant
+
+        public FunctionApp1()
+        {
+            ClientProperty = new HttpClient(); // Compliant
+        }
+
         [FunctionName("Sample")]
         public static void AssignInCondition()
         {
