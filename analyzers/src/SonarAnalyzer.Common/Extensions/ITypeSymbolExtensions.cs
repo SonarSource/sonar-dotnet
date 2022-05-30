@@ -18,8 +18,6 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System;
-using System.Collections.Immutable;
 using System.Linq;
 using System.Threading;
 using Microsoft.CodeAnalysis;
@@ -36,7 +34,7 @@ namespace SonarAnalyzer.Extensions
             {
                 cancellationToken.ThrowIfCancellationRequested();
                 if (type.GetMembers().FirstOrDefault(x => AccessibilityValid(x.GetEffectiveAccessibility(), isOriginalType)
-                    && x.GetSymbolType()?.DerivesOrImplements(knownType) is true) is { } result)
+                                                                            && x.GetSymbolType()?.DerivesOrImplements(knownType) is true) is { } result)
                 {
                     return result;
                 }
@@ -45,7 +43,8 @@ namespace SonarAnalyzer.Extensions
             }
             return null;
 
-            static bool AccessibilityValid(Accessibility accessibility, bool isOriginalType) => isOriginalType || accessibility is not Accessibility.Private;
+            static bool AccessibilityValid(Accessibility accessibility, bool isOriginalType) => 
+                isOriginalType || accessibility != Accessibility.Private;
         }
     }
 }

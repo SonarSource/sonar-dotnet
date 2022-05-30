@@ -144,7 +144,7 @@
         public static void LogExceptionFromWebApi(ILogger log)
         {
             try { }
-            catch (Exception ex) // Compliant. microsoft.azure.webjobs adds an extension method "LogMetric". It is in scope when the standard AzureFunction is scaffolded in VS, but we only take extension methods comming from the logging package into account.
+            catch (Exception ex) // Compliant. Microsoft.Azure.WebJobs adds an extension method "LogMetric". It is in scope when the standard AzureFunction is scaffolded in VS, but we only take extension methods comming from the logging package into account.
             {
                 log.LogMetric("Metric", 5);
             }
