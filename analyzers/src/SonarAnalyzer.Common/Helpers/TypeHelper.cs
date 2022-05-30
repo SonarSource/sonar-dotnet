@@ -47,13 +47,14 @@ namespace SonarAnalyzer.Helpers
 
         #region TypeName
 
+        public static bool Is(this ITypeSymbol typeSymbol, KnownType type) =>
+            typeSymbol != null && IsMatch(typeSymbol, type);
+
         private static bool IsMatch(ITypeSymbol typeSymbol, KnownType type) =>
             type.Matches(typeSymbol.SpecialType)
             || type.Matches(typeSymbol.OriginalDefinition.SpecialType)
             || type.Matches(typeSymbol.ToDisplayString())
             || type.Matches(typeSymbol.OriginalDefinition.ToDisplayString());
-
-        public static bool Is(this ITypeSymbol typeSymbol, KnownType type) => typeSymbol != null && IsMatch(typeSymbol, type);
 
         public static bool IsAny(this ITypeSymbol typeSymbol, params KnownType[] types)
         {
@@ -63,7 +64,7 @@ namespace SonarAnalyzer.Helpers
             }
 
             // For is twice as fast as foreach on ImmutableArray so don't use Linq here
-            for (int i = 0; i < types.Length; i++)
+            for (var i = 0; i < types.Length; i++)
             {
                 if (IsMatch(typeSymbol, types[i]))
                 {
@@ -82,7 +83,7 @@ namespace SonarAnalyzer.Helpers
             }
 
             // For is twice as fast as foreach on ImmutableArray so don't use Linq here
-            for (int i = 0; i < types.Length; i++)
+            for (var i = 0; i < types.Length; i++)
             {
                 if (IsMatch(typeSymbol, types[i]))
                 {
@@ -93,34 +94,25 @@ namespace SonarAnalyzer.Helpers
             return false;
         }
 
-        public static bool IsType(this IParameterSymbol parameter, KnownType type)
-        {
-            return parameter != null && parameter.Type.Is(type);
-        }
+        public static bool IsType(this IParameterSymbol parameter, KnownType type) =>
+            parameter != null && parameter.Type.Is(type);
 
-        public static bool IsInType(this ISymbol symbol, KnownType type)
-        {
-            return symbol != null && symbol.ContainingType.Is(type);
-        }
+        public static bool IsInType(this ISymbol symbol, KnownType type) =>
+            symbol != null && symbol.ContainingType.Is(type);
 
-        public static bool IsInType(this ISymbol symbol, ITypeSymbol type)
-        {
-            return symbol?.ContainingType != null &&
-                symbol.ContainingType.Equals(type);
-        }
+        public static bool IsInType(this ISymbol symbol, ITypeSymbol type) =>
+            symbol?.ContainingType != null && symbol.ContainingType.Equals(type);
 
-        public static bool IsInType(this ISymbol symbol, ImmutableArray<KnownType> types)
-        {
-            return symbol != null && symbol.ContainingType.IsAny(types);
-        }
+        public static bool IsInType(this ISymbol symbol, ImmutableArray<KnownType> types) =>
+            symbol != null && symbol.ContainingType.IsAny(types);
 
         #endregion TypeName
 
         public static bool IsNullableBoolean(this ITypeSymbol type) =>
-            type is INamedTypeSymbol namedType &&
-            namedType.OriginalDefinition.Is(KnownType.System_Nullable_T) &&
-            namedType.TypeArguments.Length == 1 &&
-            namedType.TypeArguments[0].Is(KnownType.System_Boolean);
+            type is INamedTypeSymbol namedType
+            && namedType.OriginalDefinition.Is(KnownType.System_Nullable_T)
+            && namedType.TypeArguments.Length == 1
+            && namedType.TypeArguments[0].Is(KnownType.System_Boolean);
 
         public static bool Implements(this ITypeSymbol typeSymbol, KnownType type) =>
             typeSymbol is { }
