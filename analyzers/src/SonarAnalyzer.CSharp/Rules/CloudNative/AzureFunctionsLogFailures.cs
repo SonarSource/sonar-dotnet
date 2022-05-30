@@ -49,30 +49,24 @@ namespace SonarAnalyzer.Rules.CSharp
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(Rule);
 
         protected override void Initialize(SonarAnalysisContext context) =>
-            context.RegisterCompilationStartAction(startContext =>
+            context.RegisterSyntaxNodeActionInNonGenerated(c =>
             {
-                if (startContext.Compilation.GetTypeByMetadataName(KnownType.Microsoft_Extensions_Logging_ILogger.TypeName) is { TypeKind: not TypeKind.Error } iLogger)
+                var catchClause = (CatchClauseSyntax)c.Node;
+                if (c.AzureFunctionMethod() is { } entryPoint
+                    && HasLoggerInScope(c.SemanticModel, c.Node.SpanStart, entryPoint, c.CancellationToken))
                 {
-                    startContext.RegisterSyntaxNodeActionInNonGenerated(c =>
+                    var walker = new LoggerCallWalker(c.SemanticModel, c.CancellationToken);
+                    walker.SafeVisit(catchClause.Block);
+                    // Exception handling in the filter clause preserves log scopes and is therefore recommended
+                    // See https://blog.stephencleary.com/2020/06/a-new-pattern-for-exception-logging.html
+                    walker.SafeVisit(catchClause.Filter?.FilterExpression);
+                    if (!walker.HasValidLoggerCall)
                     {
-                        var catchClause = (CatchClauseSyntax)c.Node;
-                        if (c.AzureFunctionMethod() is { } entryPoint
-                            && HasLoggerInScope(c.SemanticModel, c.Node.SpanStart, entryPoint, c.CancellationToken))
-                        {
-                            var walker = new LoggerCallWalker(c.SemanticModel, iLogger, c.CancellationToken);
-                            walker.SafeVisit(catchClause.Block);
-                            // Exception handling in the filter clause preserves log scopes and is therefore recommended
-                            // See https://blog.stephencleary.com/2020/06/a-new-pattern-for-exception-logging.html
-                            walker.SafeVisit(catchClause.Filter?.FilterExpression);
-                            if (!walker.HasValidLoggerCall)
-                            {
-                                c.ReportIssue(Diagnostic.Create(Rule, catchClause.CatchKeyword.GetLocation(), walker.InvalidLoggerInvocationLocations));
-                            }
-                        }
-                    },
-                    SyntaxKind.CatchClause);
+                        c.ReportIssue(Diagnostic.Create(Rule, catchClause.CatchKeyword.GetLocation(), walker.InvalidLoggerInvocationLocations));
+                    }
                 }
-            });
+            },
+            SyntaxKind.CatchClause);
 
         private static bool HasLoggerInScope(SemanticModel semanticModel, int position, IMethodSymbol entryPoint, CancellationToken cancellationToken) =>
             entryPoint.Parameters.Any(x => x.Type.DerivesOrImplements(KnownType.Microsoft_Extensions_Logging_ILogger))
@@ -85,14 +79,12 @@ namespace SonarAnalyzer.Rules.CSharp
         private sealed class LoggerCallWalker : SafeCSharpSyntaxWalker
         {
             private readonly SemanticModel model;
-            private readonly ITypeSymbol iLogger;
             private readonly CancellationToken cancellationToken;
             private List<Location> invalidInvocations;
 
-            public LoggerCallWalker(SemanticModel model, ITypeSymbol iLoggerSymbol, CancellationToken cancellationToken)
+            public LoggerCallWalker(SemanticModel model, CancellationToken cancellationToken)
             {
                 this.model = model;
-                iLogger = iLoggerSymbol;
                 this.cancellationToken = cancellationToken;
             }
 
@@ -111,7 +103,7 @@ namespace SonarAnalyzer.Rules.CSharp
             public override void VisitInvocationExpression(InvocationExpressionSyntax node)
             {
                 if (model.GetSymbolInfo(node, cancellationToken).Symbol is IMethodSymbol { ReceiverType: { } receiver } methodSymbol
-                    && receiver.DerivesOrImplements(iLogger))
+                    && receiver.DerivesOrImplements(KnownType.Microsoft_Extensions_Logging_ILogger))
                 {
                     if (IsValidLogCall(node, methodSymbol))
                     {
@@ -128,7 +120,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
             public override void VisitArgument(ArgumentSyntax node)
             {
-                if (model.GetTypeInfo(node.Expression, cancellationToken).Type?.DerivesOrImplements(iLogger) is true)
+                if (model.GetTypeInfo(node.Expression, cancellationToken).Type?.DerivesOrImplements(KnownType.Microsoft_Extensions_Logging_ILogger) is true)
                 {
                     HasValidLoggerCall = true;
                 }
