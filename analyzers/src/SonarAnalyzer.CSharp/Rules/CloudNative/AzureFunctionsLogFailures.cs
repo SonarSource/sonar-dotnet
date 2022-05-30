@@ -81,7 +81,8 @@ namespace SonarAnalyzer.Rules.CSharp
             foreach (var type in typeSymbol.GetSelfAndBaseTypes())
             {
                 cancellationToken.ThrowIfCancellationRequested();
-                if (type.GetMembers().FirstOrDefault(x => AccessibilityValid(x.GetEffectiveAccessibility(), isOriginalType)
+                if (type.GetMembers().FirstOrDefault(x => x.Kind is SymbolKind.Field or SymbolKind.Property
+                                                          && AccessibilityValid(x.GetEffectiveAccessibility(), isOriginalType)
                                                           && x.GetSymbolType()?.DerivesOrImplements(KnownType.Microsoft_Extensions_Logging_ILogger) is true) is { } result)
                 {
                     return result;
@@ -107,9 +108,9 @@ namespace SonarAnalyzer.Rules.CSharp
             {
                 this.model = model;
                 this.cancellationToken = cancellationToken;
-        }
+            }
 
-        public override void Visit(SyntaxNode node)
+            public override void Visit(SyntaxNode node)
             {
                 if (!HasValidLoggerCall)
                 {
@@ -150,19 +151,19 @@ namespace SonarAnalyzer.Rules.CSharp
                 {
                     // Wellknown LoggerExtensions methods invocations
                     { IsExtensionMethod: true } when methodSymbol.ContainingType.Is(KnownType.Microsoft_Extensions_Logging_LoggerExtensions) => methodSymbol.Name switch
-                        {
-                            "LogInformation" or "LogWarning" or "LogError" or "LogCritical" => true,
-                            "Log" => IsPassingValidLogLevel(invocation, methodSymbol),
-                            "LogTrace" or "LogDebug" or "BeginScope" => false,
-                            _ => true, // Some unknown extension method on LoggerExtensions was called. Avoid FPs and assume it logs something.
-                        },
+                    {
+                        "LogInformation" or "LogWarning" or "LogError" or "LogCritical" => true,
+                        "Log" => IsPassingValidLogLevel(invocation, methodSymbol),
+                        "LogTrace" or "LogDebug" or "BeginScope" => false,
+                        _ => true, // Some unknown extension method on LoggerExtensions was called. Avoid FPs and assume it logs something.
+                    },
                     { IsExtensionMethod: true } => true, // Any other extension method is assumed to log something to avoid FP.
                     _ => methodSymbol.Name switch // Instance invocations on an ILogger instance.
-                        {
-                            "Log" => IsPassingValidLogLevel(invocation, methodSymbol),
-                            "IsEnabled" or "BeginScope" => false,
-                            _ => true, // Some unknown method on an ILogger was called. Avoid FPs and assume it logs something.
-                        },
+                    {
+                        "Log" => IsPassingValidLogLevel(invocation, methodSymbol),
+                        "IsEnabled" or "BeginScope" => false,
+                        _ => true, // Some unknown method on an ILogger was called. Avoid FPs and assume it logs something.
+                    },
                 };
 
             private bool IsPassingValidLogLevel(InvocationExpressionSyntax invocation, IMethodSymbol symbol) =>

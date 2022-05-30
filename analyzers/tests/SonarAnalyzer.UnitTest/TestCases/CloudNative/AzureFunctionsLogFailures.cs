@@ -286,7 +286,7 @@
 
     public class DependencyInjectionProperty
     {
-        private ILogger Logger { get; }
+        protected ILogger Logger { get; }
 
         [FunctionName("Sample")]
         public void InjectedLoggerPropertyIsNotUsed()
@@ -298,23 +298,33 @@
 
     public class DependencyInjectionMethod
     {
-        protected ILogger Logger() => null;
+        private ILogger Logger() => null;
 
         [FunctionName("Sample")]
         public void InjectedLoggerMethodIsNotUsed()
         {
             try { }
-            catch { } // Noncompliant
+            catch { } // Compliant. An ILogger retreivable via a method call is not a supported scenario.
         }
     }
 
-    public class Derived : DependencyInjectionMethod
+    public class DerivedViaProperty : DependencyInjectionProperty
     {
         [FunctionName("Sample")]
         public void InjectedLoggerFromBaseIsNotUsed()
         {
             try { }
-            catch { } // Noncompliant
+            catch { } // Noncompliant. ILogger is accessible via the property in the base class.
+        }
+    }
+
+    public class DerivedViaField : DependencyInjectionField
+    {
+        [FunctionName("Sample")]
+        public void InjectedLoggerFromBaseIsNotAccessible()
+        {
+            try { }
+            catch { } // Compliant. ILogger is a private field in the base class and not accessible.
         }
     }
 
