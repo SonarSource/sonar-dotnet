@@ -57,7 +57,7 @@ namespace SonarAnalyzer.Metrics.CSharp
             {
                 if (node.IsKind(SyntaxKindEx.LocalFunctionStatement))
                 {
-                    State.VisitWithNesting(node, base.Visit);
+                    Visit((LocalFunctionStatementSyntaxWrapper)node);
                 }
                 else if (SwitchExpressionSyntaxWrapper.IsInstance(node))
                 {
@@ -226,6 +226,14 @@ namespace SonarAnalyzer.Metrics.CSharp
 
             public override void VisitParenthesizedLambdaExpression(ParenthesizedLambdaExpressionSyntax node) =>
                 State.VisitWithNesting(node, base.VisitParenthesizedLambdaExpression);
+
+            private void Visit(LocalFunctionStatementSyntaxWrapper localFunction)
+            {
+                if (!localFunction.Modifiers.Any(SyntaxKind.StaticKeyword))
+                {
+                    State.VisitWithNesting(localFunction.SyntaxNode, base.Visit);
+                }
+            }
         }
     }
 }
