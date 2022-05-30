@@ -39,7 +39,7 @@ public class InstanceClass
 
 namespace Inside.Namespace
 {
-    public static class Someting
+    public static class Something
     {
         public static int Field;
     }
@@ -50,6 +50,7 @@ public static class AzureFunctionsStatic
     public static int Property { get; set; }
     public static int Field;
     public static int[] Array;
+    public static object FieldObj;
 
     [Another("Something")]
     public static void WithAnotherAttribute()   // Compliant
@@ -63,9 +64,10 @@ public static class AzureFunctionsStatic
     }
 
     [FunctionName("Sample")]
-    public static void Write()
+    public static void Write(int arg, object argObject)
     {
         var local = 0;
+        arg = 42;
 
         Property = 42;          // Noncompliant {{Do not modify a static state from Azure Function.}}
         Field = 42;             // Noncompliant {{Do not modify a static state from Azure Function.}}
@@ -88,14 +90,18 @@ public static class AzureFunctionsStatic
         InstanceClass.PropertyStatic = 42;  // Noncompliant
         InstanceClass.FieldStatic = 42;     // Noncompliant
 
-        Inside.Namespace.Someting.Field = 42;           // Noncompliant
-        global::Inside.Namespace.Someting.Field = 42;   // Noncompliant
-//      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        Inside.Namespace.Something.Field = 42;           // Noncompliant
+        global::Inside.Namespace.Something.Field = 42;   // Noncompliant
+//      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
         var o = new InstanceClass();
         o.UpdateInstance(42);
         o.PropertyInstance = 42;    // Compliant, not static
         o.FieldInstance = 42;
+
+        FieldObj = 42;              // Noncompliant
+        FieldObj = new object();    // Noncompliant
+        FieldObj = argObject;       // Noncompliant
     }
 
     [FunctionName("Sample")]
@@ -209,7 +215,7 @@ public static class Operators
     }
 
     [FunctionName("Sample")]
-    public static void Assignment(object arg)
+    public static void CompoundAssignment(object arg)
     {
         Field += 42;        // Noncompliant
         Field -= 42;        // Noncompliant
