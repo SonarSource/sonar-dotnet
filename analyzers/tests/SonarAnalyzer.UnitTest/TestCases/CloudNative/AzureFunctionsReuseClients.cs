@@ -41,6 +41,7 @@ namespace DifferentAssignments
         private static HttpClient client = new HttpClient(); // Compliant
         private static readonly Lazy<HttpClient> lazyClient = new Lazy<HttpClient>(() => new HttpClient()); // Compliant
         private static object _lock = new object();
+        private static object someField;
 
         [FunctionName("Sample")]
         public static void AssignInCondition()
@@ -102,6 +103,12 @@ namespace DifferentAssignments
         public static async Task NoAssignmentAndCall()
         {
             await new HttpClient().GetStringAsync(@"http://example.com"); // Noncompliant
+        }
+
+        [FunctionName("Sample")]
+        public static async Task AssignmentOfInvocationResult()
+        {
+            someField = await new HttpClient().GetStringAsync(@"http://example.com"); // Noncompliant
         }
     }
 }

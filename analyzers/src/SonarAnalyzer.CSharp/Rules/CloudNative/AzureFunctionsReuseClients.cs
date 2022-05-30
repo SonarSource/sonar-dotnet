@@ -25,7 +25,6 @@ using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
-using Microsoft.CodeAnalysis.FindSymbols;
 using SonarAnalyzer.Helpers;
 using StyleCop.Analyzers.Lightup;
 
@@ -53,7 +52,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     var node = c.Node;
                     if (CreatedResuableClient(c.SemanticModel, node, c.CancellationToken) is { } knownType)
                     {
-                        if (IsNotAssignedForReuse(c.SemanticModel, node, c.CancellationToken))
+                        if (!IsAssignedForReuse(c.SemanticModel, node, c.CancellationToken))
                         {
                             c.ReportIssue(Diagnostic.Create(Rule, node.GetLocation()));
                         }
@@ -61,19 +60,32 @@ namespace SonarAnalyzer.Rules.CSharp
                 },
                 SyntaxKind.ObjectCreationExpression, SyntaxKindEx.ImplicitObjectCreationExpression);
 
-        private static bool IsNotAssignedForReuse(SemanticModel model, SyntaxNode node, CancellationToken cancellationToken)
+        private static bool IsAssignedForReuse(SemanticModel model, SyntaxNode node, CancellationToken cancellationToken)
         {
-            if (IsAssignedToLocal(node)
-                || IsUnAssigned(node))
+            if (IsAssignedToFieldProperty(model, node, cancellationToken))
             {
                 return true;
+
+            }
+            if (IsInFieldInitializer(node))
+            {
+                return true;
+            }
+            if (IsAssignedToLocal(node))
+            {
+                return false;
             }
 
             return false;
         }
 
-        private static bool IsUnAssigned(SyntaxNode node) =>
-            node.Ancestors().Any(x => x.IsKind(SyntaxKind.ExpressionStatement));
+        private static bool IsAssignedToFieldProperty(SemanticModel model, SyntaxNode node, CancellationToken cancellationToken) => node.Parent is AssignmentExpressionSyntax assignment
+            && assignment.Left is { } identifier
+            && model.GetSymbolInfo(identifier, cancellationToken).Symbol is { } symbol
+            && symbol.Kind is SymbolKind.Field or SymbolKind.Property;
+
+        private static bool IsInFieldInitializer(SyntaxNode node) =>
+            node.Ancestors().Any(x => x.IsKind(SyntaxKind.FieldDeclaration));
 
         private static bool IsAssignedToLocal(SyntaxNode node) =>
             node.Parent is EqualsValueClauseSyntax { Parent: VariableDeclaratorSyntax { Parent: VariableDeclarationSyntax { Parent: LocalDeclarationStatementSyntax or UsingStatementSyntax } } };
