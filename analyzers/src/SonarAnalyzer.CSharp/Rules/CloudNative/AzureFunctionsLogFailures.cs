@@ -100,16 +100,16 @@ namespace SonarAnalyzer.Rules.CSharp
             private readonly CancellationToken cancellationToken;
             private List<Location> invalidInvocations;
 
+            public bool HasValidLoggerCall { get; private set; }
+            public IEnumerable<Location> InvalidLoggerInvocationLocations => invalidInvocations;
+
             public LoggerCallWalker(SemanticModel model, CancellationToken cancellationToken)
             {
                 this.model = model;
                 this.cancellationToken = cancellationToken;
-            }
+        }
 
-            public bool HasValidLoggerCall { get; private set; }
-            public IEnumerable<Location> InvalidLoggerInvocationLocations => invalidInvocations;
-
-            public override void Visit(SyntaxNode node)
+        public override void Visit(SyntaxNode node)
             {
                 if (!HasValidLoggerCall)
                 {
