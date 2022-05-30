@@ -70,9 +70,7 @@ namespace SonarAnalyzer.Rules
                 inv.MatchMethod(new MemberDescriptor(KnownType.Microsoft_AspNetCore_Http_IResponseCookies, "Append")));
 
             inv.Track(input,
-                inv.MatchMethod(
-                    new MemberDescriptor(KnownType.System_Collections_Generic_IDictionary_TKey_TValue, "Add"),
-                    new MemberDescriptor(KnownType.System_Collections_Generic_IDictionary_TKey_TValue_VB, "Add")),
+                inv.MatchMethod(new MemberDescriptor(KnownType.System_Collections_Generic_IDictionary_TKey_TValue, "Add")),
                 inv.ArgumentAtIndexIsAny(0, "Set-Cookie"),
                 inv.MethodHasParameters(2),
                 inv.IsIHeadersDictionary());

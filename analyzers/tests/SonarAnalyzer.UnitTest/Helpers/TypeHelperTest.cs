@@ -55,11 +55,8 @@ namespace SonarAnalyzer.UnitTest.Helpers
         [TestMethod]
         public void Type_DerivesOrImplementsAny()
         {
-            var ctor = typeof(KnownType).GetConstructors(System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance)
-                .Single(m => m.GetParameters().Length == 1);
-
-            var baseType = (KnownType)ctor.Invoke(new object[] { "NS.Base" });
-            var interfaceType = (KnownType)ctor.Invoke(new object[] { "NS.IInterface" });
+            var baseType = (KnownType)new KnownType.RegularKnownType("NS.Base");
+            var interfaceType = (KnownType)new KnownType.RegularKnownType("NS.IInterface");
 
             var derived1Type = semanticModel.GetDeclaredSymbol(derivedClassDeclaration1) as INamedTypeSymbol;
             var derived2Type = semanticModel.GetDeclaredSymbol(derivedClassDeclaration2) as INamedTypeSymbol;
@@ -74,10 +71,7 @@ namespace SonarAnalyzer.UnitTest.Helpers
         [TestMethod]
         public void Type_Is()
         {
-            var ctor = typeof(KnownType).GetConstructors(System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance)
-                .Single(m => m.GetParameters().Length == 1);
-
-            var baseKnownType = (KnownType)ctor.Invoke(new object[] { "NS.Base" });
+            var baseKnownType = (KnownType)new KnownType.RegularKnownType("NS.Base");
             var baseKnownTypes = ImmutableArray.Create(new[] { baseKnownType });
 
             var baseType = semanticModel.GetDeclaredSymbol(baseClassDeclaration) as INamedTypeSymbol;

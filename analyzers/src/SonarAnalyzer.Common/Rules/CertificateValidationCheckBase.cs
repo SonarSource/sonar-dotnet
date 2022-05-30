@@ -64,7 +64,6 @@ namespace SonarAnalyzer.Rules
         protected abstract SyntaxNode LocalVariableScope(TVariableSyntax variable);
         protected abstract SyntaxNode ExtractArgumentExpressionNode(SyntaxNode expression);
         protected abstract SyntaxNode SyntaxFromReference(SyntaxReference reference);
-        private protected abstract KnownType GenericDelegateType();
 
         protected override string MessageFormat => "Enable server certificate validation on this SSL/TLS connection";
 
@@ -162,13 +161,13 @@ namespace SonarAnalyzer.Rules
             }
         }
 
-        private bool IsValidationDelegateType(ITypeSymbol type)
+        private static bool IsValidationDelegateType(ITypeSymbol type)
         {
             if (type.Is(KnownType.System_Net_Security_RemoteCertificateValidationCallback))
             {
                 return true;
             }
-            if (type is INamedTypeSymbol namedSymbol && type.OriginalDefinition.Is(GenericDelegateType()))
+            if (type is INamedTypeSymbol namedSymbol && type.OriginalDefinition.Is(KnownType.System_Func_T1_T2_T3_T4_TResult))
             {
                 // HttpClientHandler.ServerCertificateCustomValidationCallback uses Func<HttpRequestMessage, X509Certificate2, X509Chain, SslPolicyErrors, bool>
                 // We're actually looking for Func<Any Sender, X509Certificate2, X509Chain, SslPolicyErrors, bool>

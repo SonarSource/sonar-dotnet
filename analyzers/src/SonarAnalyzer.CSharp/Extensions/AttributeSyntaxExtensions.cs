@@ -34,8 +34,8 @@ namespace SonarAnalyzer.Extensions
             && SymbolHelper.IsKnownType(attribute, knownType, semanticModel);
 
         private static string GetShortNameWithoutAttributeSuffix(KnownType knownType) =>
-            knownType.ShortName == nameof(Attribute) || !knownType.ShortName.EndsWith(nameof(Attribute))
-                ? knownType.ShortName
-                : knownType.ShortName.Remove(knownType.ShortName.Length - AttributeLength);
+            knownType.TypeName == nameof(Attribute) || !knownType.TypeName.EndsWith(nameof(Attribute))
+                ? knownType.TypeName
+                : knownType.TypeName.Remove(knownType.TypeName.Length - AttributeLength);
     }
 }

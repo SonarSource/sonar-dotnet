@@ -31,16 +31,14 @@ namespace SonarAnalyzer.Rules.CSharp
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
     public sealed class CompareNaN : SonarDiagnosticAnalyzer
     {
-        internal const string DiagnosticId = "S2688";
+        private const string DiagnosticId = "S2688";
         private const string MessageFormat = "Use {0}.IsNaN() instead.";
 
-        private static readonly DiagnosticDescriptor rule =
-            DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
+        private static readonly DiagnosticDescriptor Rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
 
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(rule);
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
 
-        protected override void Initialize(SonarAnalysisContext context)
-        {
+        protected override void Initialize(SonarAnalysisContext context) =>
             context.RegisterSyntaxNodeActionInNonGenerated(
                 c =>
                 {
@@ -49,7 +47,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     if (TryGetFloatingPointType(binaryExpressionSyntax.Left, c.SemanticModel, out var floatingPointType) ||
                         TryGetFloatingPointType(binaryExpressionSyntax.Right, c.SemanticModel, out floatingPointType))
                     {
-                        c.ReportIssue(Diagnostic.Create(rule, binaryExpressionSyntax.GetLocation(), floatingPointType.TypeName));
+                        c.ReportIssue(Diagnostic.Create(Rule, binaryExpressionSyntax.GetLocation(), floatingPointType.TypeName));
                     }
                 },
                 SyntaxKind.GreaterThanExpression,
@@ -58,7 +56,6 @@ namespace SonarAnalyzer.Rules.CSharp
                 SyntaxKind.LessThanOrEqualExpression,
                 SyntaxKind.EqualsExpression,
                 SyntaxKind.NotEqualsExpression);
-        }
 
         private static bool TryGetFloatingPointType(ExpressionSyntax expression, SemanticModel semanticModel, out KnownType floatingPointType)
         {

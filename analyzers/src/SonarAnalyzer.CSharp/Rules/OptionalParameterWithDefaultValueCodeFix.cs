@@ -51,8 +51,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
             var semanticModel = await context.Document.GetSemanticModelAsync().ConfigureAwait(false);
 
-            var defaultParameterValueAttributeType = semanticModel?.Compilation?.GetTypeByMetadataName(
-                KnownType.System_Runtime_InteropServices_DefaultParameterValueAttribute.TypeName);
+            var defaultParameterValueAttributeType = semanticModel?.Compilation?.GetTypeByMetadataName("System.Runtime.InteropServices.DefaultParameterValueAttribute");
             if (defaultParameterValueAttributeType == null)
             {
                 return;

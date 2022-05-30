@@ -135,7 +135,5 @@ namespace SonarAnalyzer.Rules.VisualBasic
             var syntax = reference.GetSyntax();
             return syntax is MethodStatementSyntax ? syntax.Parent : syntax;
         }
-
-        private protected override KnownType GenericDelegateType() => KnownType.System_Func_T1_T2_T3_T4_TResult_VB;
     }
 }

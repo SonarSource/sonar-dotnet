@@ -27,7 +27,7 @@ namespace SonarAnalyzer.Extensions
     internal static class ObjectCreationExpressionSyntaxExtensions
     {
         public static bool IsKnownType(this ObjectCreationExpressionSyntax objectCreation, KnownType knownType, SemanticModel semanticModel) =>
-            objectCreation.Type.GetName().EndsWith(knownType.ShortName)
+            objectCreation.Type.GetName().EndsWith(knownType.TypeName)
             && SymbolHelper.IsKnownType(objectCreation, knownType, semanticModel);
     }
 }
