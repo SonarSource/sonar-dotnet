@@ -10,6 +10,13 @@ void TopLevelLocalFunction()
     if (false) { }  // Secondary [0] {{+1}}
 }
 
+static void StaticTopLevelLocalFunction()
+{
+    if (false) { }  // Secondary [0] {{+1}} FP
+    if (false) { }  // Secondary [0] {{+1}} FP
+    if (false) { }  // Secondary [0] {{+1}} FP
+}
+
 public record FunctionComplexity
 {
     public void M1()

@@ -37,6 +37,10 @@ namespace SonarAnalyzer.UnitTest.Rules
             OldVerifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\FunctionComplexity.CSharp9.cs", new CS.FunctionComplexity { Maximum = 3 });
 
         [TestMethod]
+        public void FunctionComplexity_LocalFunctions() =>
+            OldVerifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\FunctionComplexity.LocalFunctions.cs", new CS.FunctionComplexity { Maximum = 3 });
+
+        [TestMethod]
         public void FunctionComplexity_CSharp10() =>
             OldVerifier.VerifyAnalyzerFromCSharp10Library(@"TestCases\FunctionComplexity.CSharp10.cs", new CS.FunctionComplexity { Maximum = 1 });
 #endif
