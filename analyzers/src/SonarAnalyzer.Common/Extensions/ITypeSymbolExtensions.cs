@@ -18,6 +18,7 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System;
 using System.Collections.Immutable;
 using System.Linq;
 using System.Threading;
@@ -28,15 +29,23 @@ namespace SonarAnalyzer.Extensions
 {
     public static class ITypeSymbolExtensions
     {
-        public static ImmutableArray<ISymbol> AllAccessibleMembers(this ITypeSymbol typeSymbol, SemanticModel model, int position, CancellationToken cancellationToken = default)
+        internal static ISymbol FirstAccessibleMemberOfType(this ITypeSymbol typeSymbol, KnownType knownType, CancellationToken cancellationToken = default)
         {
-            var builder = ImmutableArray.CreateBuilder<ISymbol>();
+            var isOriginalType = true;
             foreach (var type in typeSymbol.GetSelfAndBaseTypes())
             {
                 cancellationToken.ThrowIfCancellationRequested();
-                builder.AddRange(type.GetMembers().Where(x => model.IsAccessible(position, x)));
+                if (type.GetMembers().FirstOrDefault(x => AccessibilityValid(x.GetEffectiveAccessibility(), isOriginalType)
+                    && x.GetSymbolType()?.DerivesOrImplements(knownType) is true) is { } result)
+                {
+                    return result;
+                }
+
+                isOriginalType = false;
             }
-            return builder.ToImmutable();
+            return null;
+
+            static bool AccessibilityValid(Accessibility accessibility, bool isOriginalType) => isOriginalType || accessibility is not Accessibility.Private;
         }
     }
 }
