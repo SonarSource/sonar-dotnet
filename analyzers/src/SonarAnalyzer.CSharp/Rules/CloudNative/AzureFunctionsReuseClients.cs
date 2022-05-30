@@ -26,6 +26,7 @@ using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.Helpers;
+using SonarAnalyzer.Wrappers;
 using StyleCop.Analyzers.Lightup;
 
 namespace SonarAnalyzer.Rules.CSharp
@@ -90,14 +91,21 @@ namespace SonarAnalyzer.Rules.CSharp
         private static bool IsAssignedToLocal(SyntaxNode node) =>
             node.Parent is EqualsValueClauseSyntax { Parent: VariableDeclaratorSyntax { Parent: VariableDeclarationSyntax { Parent: LocalDeclarationStatementSyntax or UsingStatementSyntax } } };
 
-        private static ITypeSymbol CreatedResuableClient(SemanticModel model, SyntaxNode node, CancellationToken cancellationToken) =>
-            node is ObjectCreationExpressionSyntax objectCreationExpression
-            && objectCreationExpression.Type is NameSyntax name
-            && name.GetIdentifier()?.Identifier.Text is { } typeName
-            && Clients.FirstOrDefault(x => x.ShortName == typeName) is { } knownResuableClient
-            && model.GetSymbolInfo(name, cancellationToken).Symbol is ITypeSymbol typeSymbol
-            && typeSymbol.Is(knownResuableClient)
-                ? typeSymbol
-                : null;
+        private static ITypeSymbol CreatedResuableClient(SemanticModel model, SyntaxNode node, CancellationToken cancellationToken) => node switch
+        {
+            ObjectCreationExpressionSyntax objectCreationExpression =>
+                objectCreationExpression.Type is NameSyntax name
+                && name.GetIdentifier()?.Identifier.Text is { } typeName
+                && Clients.FirstOrDefault(x => x.ShortName == typeName) is { } knownResuableClient
+                && model.GetSymbolInfo(name, cancellationToken).Symbol is ITypeSymbol typeSymbol
+                && typeSymbol.Is(knownResuableClient)
+                    ? typeSymbol
+                    : null,
+            { RawKind: (int)SyntaxKindEx.ImplicitObjectCreationExpression } =>
+                ObjectCreationFactory.Create(node).TypeSymbol(model) is { } typeSymbol
+                && typeSymbol.IsAny(Clients)
+                    ? typeSymbol
+                    : null,
+        };
     }
 }

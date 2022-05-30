@@ -24,5 +24,17 @@
         {
             using var local = new HttpClient(); // Noncompliant
         }
+
+        [FunctionName("Sample")]
+        public static void TargetTypedNewForLocal()
+        {
+            HttpClient local = new(); // Noncompliant
+        }
+
+        [FunctionName("Sample")]
+        public static void TargetTypedNewForField()
+        {
+            client = new(); // Compliant
+        }
     }
 }

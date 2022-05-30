@@ -36,7 +36,7 @@ namespace SonarAnalyzer.UnitTest.Rules
             builder.AddPaths("AzureFunctionsReuseClients.cs").Verify();
 
         [TestMethod]
-        public void AzureFunctionsReuseClients_CS8() =>
-            builder.AddPaths("AzureFunctionsReuseClients.CSharp8.cs").WithOptions(ParseOptionsHelper.FromCSharp8).Verify();
+        public void AzureFunctionsReuseClients_CS9() =>
+            builder.AddPaths("AzureFunctionsReuseClients.CSharp9.cs").WithOptions(ParseOptionsHelper.FromCSharp9).Verify();
     }
 }
