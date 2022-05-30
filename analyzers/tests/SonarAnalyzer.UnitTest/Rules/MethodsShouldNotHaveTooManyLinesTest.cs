@@ -134,6 +134,7 @@ public class Foo
             diagnostics.Should().OnlyContain(x => x.Id == "AD0001" && x.GetMessage(null).Contains("Invalid rule parameter: maximum number of lines = ")).And.HaveCount(7);
         }
 
-        private static VerifierBuilder CreateCSBuilder(int maxLines) => new VerifierBuilder().AddAnalyzer(() => new CS.MethodsShouldNotHaveTooManyLines { Max = maxLines });
+        private static VerifierBuilder CreateCSBuilder(int maxLines) =>
+            new VerifierBuilder().AddAnalyzer(() => new CS.MethodsShouldNotHaveTooManyLines { Max = maxLines });
     }
 }
