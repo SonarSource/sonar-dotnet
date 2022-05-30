@@ -36,9 +36,9 @@ namespace SonarAnalyzer.Rules.CSharp
         private const string DiagnosticId = "S4017";
         private const string MessageFormat = "Refactor this method to remove the nested type argument.";
 
-        private static readonly DiagnosticDescriptor rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
+        private static readonly DiagnosticDescriptor Rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
 
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(rule);
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
 
         protected override void Initialize(SonarAnalysisContext context) =>
             context.RegisterSyntaxNodeActionInNonGenerated(
@@ -48,7 +48,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
                     foreach (var argument in argumentTypeSymbols)
                     {
-                        c.ReportIssue(Diagnostic.Create(rule, argument.GetLocation()));
+                        c.ReportIssue(Diagnostic.Create(Rule, argument.GetLocation()));
                     }
                 },
                 SyntaxKind.MethodDeclaration,
@@ -58,7 +58,7 @@ namespace SonarAnalyzer.Rules.CSharp
         {
             var walker = new GenericWalker(2, model);
             walker.SafeVisit(parameterSyntax);
-            return walker.MaxDepthReached;
+            return walker.IsMaxDepthReached;
         }
 
         private static IEnumerable<ParameterSyntax> GetParametersSyntaxNodes(SyntaxNode node) =>
@@ -71,7 +71,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private sealed class GenericWalker : SafeCSharpSyntaxWalker
         {
-            private static readonly ImmutableArray<KnownType> ignoredTypes =
+            private static readonly ImmutableArray<KnownType> IgnoredTypes =
                 KnownType.SystemFuncVariants
                          .Union(KnownType.SystemActionVariants)
                          .Union(new[] { KnownType.System_Linq_Expressions_Expression_T })
@@ -82,7 +82,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
             private int depth;
 
-            public bool MaxDepthReached { get; private set; }
+            public bool IsMaxDepthReached { get; private set; }
 
             public GenericWalker(int maxDepth, SemanticModel model)
             {
@@ -92,12 +92,12 @@ namespace SonarAnalyzer.Rules.CSharp
 
             public override void VisitGenericName(GenericNameSyntax node)
             {
-                if (!(model.GetSymbolInfo(node).Symbol is INamedTypeSymbol namedTypeSymbol))
+                if (model.GetSymbolInfo(node).Symbol is not INamedTypeSymbol namedTypeSymbol)
                 {
                     return;
                 }
 
-                if (namedTypeSymbol.ConstructedFrom.IsAny(ignoredTypes))
+                if (namedTypeSymbol.ConstructedFrom.IsAny(IgnoredTypes))
                 {
                     base.VisitGenericName(node);
                 }
@@ -105,7 +105,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 {
                     if (depth == maxDepth - 1)
                     {
-                        MaxDepthReached = true;
+                        IsMaxDepthReached = true;
                     }
                     else
                     {
