@@ -48,8 +48,7 @@ namespace SonarAnalyzer.Rules.CSharp
             KnownType.Microsoft_Azure_ServiceBus_SubscriptionClient,
             KnownType.Microsoft_Azure_ServiceBus_TopicClient,
             KnownType.Azure_Messaging_ServiceBus_ServiceBusClient,
-            KnownType.Azure_Messaging_ServiceBus_Administration_ServiceBusAdministrationClient,
-            KnownType.StackExchange_Redis_ConnectionMultiplexer);
+            KnownType.Azure_Messaging_ServiceBus_Administration_ServiceBusAdministrationClient);
         // ToDo: Append the list of (usefull) Azure Storage clients (there are dozens).
 
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(Rule);

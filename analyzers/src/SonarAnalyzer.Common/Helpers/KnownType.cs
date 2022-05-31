@@ -150,7 +150,6 @@ namespace SonarAnalyzer.Helpers
         internal static readonly KnownType Org_BouncyCastle_Crypto_Generators_DsaParametersGenerator = new("Org.BouncyCastle.Crypto.Generators.DsaParametersGenerator");
         internal static readonly KnownType Org_BouncyCastle_Crypto_Parameters_RsaKeyGenerationParameters = new("Org.BouncyCastle.Crypto.Parameters.RsaKeyGenerationParameters");
         internal static readonly KnownType Serilog_LoggerConfiguration = new("Serilog.LoggerConfiguration");
-        internal static readonly KnownType StackExchange_Redis_ConnectionMultiplexer = new("StackExchange.Redis.ConnectionMultiplexer");
         internal static readonly KnownType System_Action = new("System.Action");
         internal static readonly KnownType System_Action_T = new("System.Action<T>");
         internal static readonly KnownType System_Action_T1_T2 = new("System.Action<T1, T2>");
