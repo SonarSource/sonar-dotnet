@@ -24,6 +24,7 @@
             var topic = new TopicClient("connectionString", "entityPath");                           // Noncompliant
             var subscription = new SubscriptionClient("connectionString", "topic", "subscription");  // Noncompliant
             var management = new ManagementClient("connectionString");                               // Noncompliant
+
             return new UnauthorizedResult();
         }
     }
