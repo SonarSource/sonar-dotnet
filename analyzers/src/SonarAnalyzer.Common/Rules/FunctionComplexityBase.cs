@@ -33,8 +33,7 @@ namespace SonarAnalyzer.Rules
 
         protected const int DefaultValueMaximum = 10;
 
-        [RuleParameter("maximumFunctionComplexityThreshold", PropertyType.Integer,
-            "The maximum authorized complexity.", DefaultValueMaximum)]
+        [RuleParameter("maximumFunctionComplexityThreshold", PropertyType.Integer, "The maximum authorized complexity.", DefaultValueMaximum)]
         public int Maximum { get; set; } = DefaultValueMaximum;
 
         protected abstract GeneratedCodeRecognizer GeneratedCodeRecognizer { get; }
