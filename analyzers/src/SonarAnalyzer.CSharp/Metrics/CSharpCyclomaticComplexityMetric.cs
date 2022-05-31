@@ -193,7 +193,14 @@ namespace SonarAnalyzer.Metrics.CSharp
 
             public override void Visit(SyntaxNode node)
             {
-                if (SwitchExpressionArmSyntaxWrapper.IsInstance(node))
+                if (node.IsKind(SyntaxKindEx.LocalFunctionStatement))
+                {
+                    if (((LocalFunctionStatementSyntaxWrapper)node).Modifiers.Any(SyntaxKind.StaticKeyword))
+                    {
+                        return;
+                    }
+                }
+                else if (SwitchExpressionArmSyntaxWrapper.IsInstance(node))
                 {
                     var arm = (SwitchExpressionArmSyntaxWrapper)node;
                     AddLocation(arm.EqualsGreaterThanToken);
@@ -203,7 +210,6 @@ namespace SonarAnalyzer.Metrics.CSharp
                     var binaryPatternNode = (BinaryPatternSyntaxWrapper)node;
                     AddLocation(binaryPatternNode.OperatorToken);
                 }
-
                 base.Visit(node);
             }
 

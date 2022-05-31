@@ -16,9 +16,9 @@ namespace Tests.Diagnostics
 
             static void StaticLocalFunctions()
             {
-                if (false) { }  // Secondary [0] {{+1}} FP
-                if (false) { }  // Secondary [0] {{+1}} FP
-                if (false) { }  // Secondary [0] {{+1}} FP
+                if (false) { }
+                if (false) { }
+                if (false) { }
             }
         }
     }
