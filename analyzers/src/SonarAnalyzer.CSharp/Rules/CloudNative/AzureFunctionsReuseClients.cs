@@ -41,6 +41,7 @@ namespace SonarAnalyzer.Rules.CSharp
         private static readonly ImmutableArray<KnownType> Clients = ImmutableArray.Create(
             KnownType.System_Net_Http_HttpClient,
             KnownType.Microsoft_Azure_Documents_Client_DocumentClient,
+            KnownType.Microsoft_Azure_Cosmos_CosmosClient,
             KnownType.Microsoft_Azure_ServiceBus_QueueClient,
             KnownType.StackExchange_Redis_ConnectionMultiplexer);
         // ToDo: Append the list of (usefull) Azure Storage clients (there are dozens).
