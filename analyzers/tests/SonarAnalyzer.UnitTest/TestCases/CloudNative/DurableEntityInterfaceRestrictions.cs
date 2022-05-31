@@ -132,19 +132,19 @@ public class UseDurableClient
 
     public async Task Reasons()
     {
-        await client.SignalEntityAsync<IEmpty>(id, x => { });                   // Noncompliant {{FIXME Empty}}
-        await client.SignalEntityAsync<IInheritsEmptyIsEmpty>(id, x => { });    // Noncompliant {{FIXME Empty}}
+        await client.SignalEntityAsync<IEmpty>(id, x => { });                   // Noncompliant {{Use valid entity interface. IEmpty is empty.}}
+        await client.SignalEntityAsync<IInheritsEmptyIsEmpty>(id, x => { });    // Noncompliant {{Use valid entity interface. IInheritsEmptyIsEmpty is empty.}}
         await client.SignalEntityAsync<IInheritsInvalid>(id, x => { });         // FIXME Non-compliant {{FIXME}}
-        await client.SignalEntityAsync<IInvalid>(id, x => { });                 // Noncompliant {{FIXME Empty}}
-        await client.SignalEntityAsync<IMoreArguments>(id, x => { });           // Noncompliant {{FIXME: too many parameters: Method}}
-        await client.SignalEntityAsync<IReturnsInt>(id, x => { });              // Noncompliant {{FIXME: return type}}
-        await client.SignalEntityAsync<IReturnsTaskArray>(id, x => { });        // Noncompliant {{FIXME: return type}}
-        await client.SignalEntityAsync<IReturnsObject>(id, x => { });           // Noncompliant {{FIXME: return type}}
-        await client.SignalEntityAsync<IGenericInterface<int>>(id, x => { });   // Noncompliant {{FIXME generic interface}}
-        await client.SignalEntityAsync<IGenericMethod>(id, x => { });           // Noncompliant {{FIXME is generic member: Method}}
-        await client.SignalEntityAsync<IProperty>(id, x => { });                // Noncompliant {{FIXME not a method: Value}}
-        await client.SignalEntityAsync<IIndexer>(id, x => { });                 // Noncompliant {{FIXME not a method: this[]}}
-        await client.SignalEntityAsync<IEvent>(id, x => { });                   // Noncompliant {{FIXME not a method: Event}}
+        await client.SignalEntityAsync<IInvalid>(id, x => { });                 // Noncompliant {{Use valid entity interface. IInvalid is empty.}}
+        await client.SignalEntityAsync<IMoreArguments>(id, x => { });           // Noncompliant {{Use valid entity interface. IMoreArguments contains method "Method" with 2 parameters. Zero or one are allowed.}}
+        await client.SignalEntityAsync<IReturnsInt>(id, x => { });              // Noncompliant {{Use valid entity interface. IReturnsInt contains method "Method" with invalid return type. Only "void", "Task" and "Task<T>" are allowed.}}
+        await client.SignalEntityAsync<IReturnsTaskArray>(id, x => { });        // Noncompliant {{Use valid entity interface. IReturnsTaskArray contains method "Method" with invalid return type. Only "void", "Task" and "Task<T>" are allowed.}}
+        await client.SignalEntityAsync<IReturnsObject>(id, x => { });           // Noncompliant {{Use valid entity interface. IReturnsObject contains method "Method" with invalid return type. Only "void", "Task" and "Task<T>" are allowed.}}
+        await client.SignalEntityAsync<IGenericInterface<int>>(id, x => { });   // Noncompliant {{Use valid entity interface. IGenericInterface is generic.}}
+        await client.SignalEntityAsync<IGenericMethod>(id, x => { });           // Noncompliant {{Use valid entity interface. IGenericMethod contains generic method "Method".}}
+        await client.SignalEntityAsync<IProperty>(id, x => { });                // Noncompliant {{Use valid entity interface. IProperty contains property "Value". Only methods are allowed.}}
+        await client.SignalEntityAsync<IIndexer>(id, x => { });                 // Noncompliant {{Use valid entity interface. IIndexer contains property "this[]". Only methods are allowed.}}
+        await client.SignalEntityAsync<IEvent>(id, x => { });                   // Noncompliant {{Use valid entity interface. IEvent contains event "Event". Only methods are allowed.}}
     }
 }
 
@@ -160,7 +160,7 @@ public class UseDurableOrchestrationContext
 
     public void Overloads()
     {
-        context.CreateEntityProxy<IInvalid>(id);        // Noncompliant {{FIXME Empty}}
+        context.CreateEntityProxy<IInvalid>(id);        // Noncompliant {{Use valid entity interface. IInvalid is empty.}}
         context.CreateEntityProxy<IInvalid>("key");     // Noncompliant
         //      ^^^^^^^^^^^^^^^^^^^^^^^^^^^
     }

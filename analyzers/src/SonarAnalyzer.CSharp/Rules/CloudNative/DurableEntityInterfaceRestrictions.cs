@@ -33,7 +33,7 @@ namespace SonarAnalyzer.Rules
     public sealed class DurableEntityInterfaceRestrictions : SonarDiagnosticAnalyzer
     {
         private const string DiagnosticId = "S6424";
-        private const string MessageFormat = "{0}";
+        private const string MessageFormat = "Use valid entity interface. {0} {1}.";
         private const string SignalEntityAsyncName = "SignalEntityAsync";
         private const string CreateEntityProxyName = "CreateEntityProxy";
 
@@ -50,9 +50,10 @@ namespace SonarAnalyzer.Rules
                         && c.SemanticModel.GetSymbolInfo(name).Symbol is IMethodSymbol method
                         && (method.Is(KnownType.Microsoft_Azure_WebJobs_Extensions_DurableTask_IDurableEntityClient, SignalEntityAsyncName)
                             || method.Is(KnownType.Microsoft_Azure_WebJobs_Extensions_DurableTask_IDurableOrchestrationContext, CreateEntityProxyName))
-                        && InterfaceErrorMessage(method.TypeArguments.Single() as INamedTypeSymbol) is { } message) // FIXME: Null? Undefined?
+                        && method.TypeArguments.Single() is INamedTypeSymbol entityInterface
+                        && InterfaceErrorMessage(entityInterface) is { } message) // FIXME: Null? Undefined?
                     {
-                        c.ReportIssue(Diagnostic.Create(Rule, name.GetLocation(), message));
+                        c.ReportIssue(Diagnostic.Create(Rule, name.GetLocation(), entityInterface.Name, message));
                     }
                 },
                 SyntaxKind.GenericName);
@@ -65,14 +66,14 @@ namespace SonarAnalyzer.Rules
             }
             else if (entityInterface.IsGenericType)
             {
-                return "FIXME generic interface";
+                return "is generic";
             }
             else
             {
                 var members = entityInterface.GetMembers();
                 return members.Any()
                     ? members.Select(MemberErrorMessage).WhereNotNull().FirstOrDefault()
-                    : "FIXME Empty";
+                    : "is empty";
             }
         }
 
@@ -80,15 +81,15 @@ namespace SonarAnalyzer.Rules
         {
             if (member is not IMethodSymbol method)
             {
-                return "FIXME not a method: " + member.Name;
+                return $@"contains {member.Kind.ToString().ToLower()} ""{member.Name}"". Only methods are allowed";
             }
             else if (method.IsGenericMethod)
             {
-                return "FIXME is generic member: " + member.Name;
+                return $@"contains generic method ""{method.Name}""";
             }
             else if (method.Parameters.Length > 1)
             {
-                return "FIXME: too many parameters: " + member.Name;
+                return $@"contains method ""{method.Name}"" with {method.Parameters.Length} parameters. Zero or one are allowed";
             }
             else if (method.ReturnsVoid
                 || method.ReturnType.Is(KnownType.System_Threading_Tasks_Task)
@@ -98,7 +99,7 @@ namespace SonarAnalyzer.Rules
             }
             else
             {
-                return "FIXME: return type";
+                return $@"contains method ""{method.Name}"" with invalid return type. Only ""void"", ""Task"" and ""Task<T>"" are allowed";
             }
         }
     }
