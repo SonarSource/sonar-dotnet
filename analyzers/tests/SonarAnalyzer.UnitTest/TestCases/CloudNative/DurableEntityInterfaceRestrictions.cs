@@ -190,5 +190,3 @@ public class AnotherType
         client.SignalEntityAsync<IInvalid, IInvalid>(); // For coverage
     }
 }
-
-// FIXME: Defined in another assembly
