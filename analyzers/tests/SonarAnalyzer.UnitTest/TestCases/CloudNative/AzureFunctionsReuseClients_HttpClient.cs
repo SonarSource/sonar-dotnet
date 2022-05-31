@@ -54,11 +54,11 @@ namespace DifferentAssignments
         [FunctionName("Sample")]
         public static void Assignments()
         {
-            client = new HttpClient(); // FN
-            ClientProperty = new HttpClient(); // FN
-            var local = new HttpClient(); // Noncompliant
+            client = new HttpClient();                // FN
+            ClientProperty = new HttpClient();        // FN
+            var local = new HttpClient();             // Noncompliant
             local = new System.Net.Http.HttpClient(); // Noncompliant
-            var otherClient = new UriBuilder(); // Compliant
+            var otherClient = new UriBuilder();       // Compliant
         }
 
         public static void NotAnAzureFunction()
@@ -126,6 +126,42 @@ namespace DifferentAssignments
         public static async Task AssignmentOfInvocationResult()
         {
             someField = await new HttpClient().GetStringAsync(@"http://example.com"); // Noncompliant
+        }
+    }
+}
+
+namespace DependencyInjection
+{
+    using Microsoft.AspNetCore.Http;
+    using Microsoft.AspNetCore.Mvc;
+    using Microsoft.Azure.WebJobs;
+    using Microsoft.Azure.WebJobs.Extensions.Http;
+    using Microsoft.Extensions.Logging;
+    using System;
+    using System.Net.Http;
+    using System.Threading.Tasks;
+
+    public class FunctionApp1
+    {
+        private HttpClient clientField = new HttpClient();                     // Compliant
+        private HttpClient ClientProperty { get; set; } = new HttpClient();    // Compliant
+        private HttpClient ClientPropertyAccessor { get => new HttpClient(); } // FN
+
+        public FunctionApp1()
+        {
+            clientField = new HttpClient();    // Compliant
+            ClientProperty = new HttpClient(); // Compliant
+        }
+
+        [FunctionName("Sample")]
+        public void Assignments()
+        {
+            clientField = new HttpClient();           // FN
+            ClientProperty = new HttpClient();        // FN
+            var local = new HttpClient();             // Noncompliant
+            local = new System.Net.Http.HttpClient(); // Noncompliant
+            local = ClientPropertyAccessor;           // FN
+            var otherClient = new UriBuilder();       // Compliant
         }
     }
 }
