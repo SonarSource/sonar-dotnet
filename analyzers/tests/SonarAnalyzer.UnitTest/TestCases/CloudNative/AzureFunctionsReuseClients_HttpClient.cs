@@ -44,6 +44,7 @@ namespace DifferentAssignments
         private static object someField;
 
         protected static HttpClient ClientProperty { get; set; } = new HttpClient(); // Compliant
+        protected static Lazy<HttpClient> LazyClientProperty { get; set; } = new Lazy<HttpClient>(() => new HttpClient()); // Compliant
 
         static FunctionApp1()
         {

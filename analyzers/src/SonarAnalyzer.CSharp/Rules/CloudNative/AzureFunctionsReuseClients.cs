@@ -39,7 +39,7 @@ namespace SonarAnalyzer.Rules.CSharp
         private const string MessageFormat = "Reuse client instances rather than creating new ones with each function invocation.";
 
         private static readonly DiagnosticDescriptor Rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
-        private static readonly ImmutableArray<KnownType> Clients = ImmutableArray.Create(
+        private static readonly ImmutableArray<KnownType> ReusableClients = ImmutableArray.Create(
             KnownType.System_Net_Http_HttpClient,
             // ComosDb. DocumentClient is superseeded by CosmosClient
             KnownType.Microsoft_Azure_Documents_Client_DocumentClient,
@@ -66,42 +66,25 @@ namespace SonarAnalyzer.Rules.CSharp
         protected override void Initialize(SonarAnalysisContext context) =>
             context.RegisterSyntaxNodeActionInNonGenerated(c =>
             {
-                if (c.AzureFunctionMethod() is not null)
+                if (c.AzureFunctionMethod() is not null
+                    && CreatedResuableClient(c.SemanticModel, c.Node) is not null
+                    && !IsAssignedForReuse(c.SemanticModel, c.Node, c.CancellationToken))
                 {
-                    var node = c.Node;
-                    var semanticModel = c.SemanticModel;
-                    if (CreatedResuableClient(semanticModel, node) is { } knownType
-                        && !IsAssignedForReuse(semanticModel, node, c.CancellationToken))
-                    {
-                        c.ReportIssue(Diagnostic.Create(Rule, node.GetLocation()));
-                    }
+                    c.ReportIssue(Diagnostic.Create(Rule, c.Node.GetLocation()));
                 }
             },
             SyntaxKind.ObjectCreationExpression, SyntaxKindEx.ImplicitObjectCreationExpression);
 
-        private static bool IsAssignedForReuse(SemanticModel model, SyntaxNode node, CancellationToken cancellationToken)
-        {
-            if (IsAssignedToLocal(node))
-            {
-                return false;
-            }
-            if (IsInPropertyInitializer(node)
-                || IsInFieldInitializer(node)
-                || IsAssignedToFieldOrProperty(model, node, cancellationToken))
-            {
-                return true;
-            }
+        private static bool IsAssignedForReuse(SemanticModel model, SyntaxNode node, CancellationToken cancellationToken) =>
+            !IsAssignedToLocal(node)
+            && (IsInFieldOrPropertyInitializer(node)
+                || IsAssignedToFieldOrProperty(model, node, cancellationToken));
 
-            return false;
-        }
         private static bool IsAssignedToLocal(SyntaxNode node) =>
             node.Parent is EqualsValueClauseSyntax { Parent: VariableDeclaratorSyntax { Parent: VariableDeclarationSyntax { Parent: LocalDeclarationStatementSyntax or UsingStatementSyntax } } };
 
-        private static bool IsInFieldInitializer(SyntaxNode node) =>
-            node.Ancestors().Any(x => x.IsKind(SyntaxKind.FieldDeclaration));
-
-        private static bool IsInPropertyInitializer(SyntaxNode node) =>
-            node.Parent is EqualsValueClauseSyntax { Parent: PropertyDeclarationSyntax };
+        private static bool IsInFieldOrPropertyInitializer(SyntaxNode node) =>
+            node.Ancestors().Any(x => x.IsAnyKind(SyntaxKind.FieldDeclaration, SyntaxKind.PropertyDeclaration));
 
         private static bool IsAssignedToFieldOrProperty(SemanticModel model, SyntaxNode node, CancellationToken cancellationToken) =>
             node.Parent is AssignmentExpressionSyntax assignment
@@ -112,7 +95,7 @@ namespace SonarAnalyzer.Rules.CSharp
         private static KnownType CreatedResuableClient(SemanticModel model, SyntaxNode node)
         {
             var objectCreation = ObjectCreationFactory.Create(node);
-            return Clients.FirstOrDefault(x => objectCreation.IsKnownType(x, model));
+            return ReusableClients.FirstOrDefault(x => objectCreation.IsKnownType(x, model));
         }
     }
 }
