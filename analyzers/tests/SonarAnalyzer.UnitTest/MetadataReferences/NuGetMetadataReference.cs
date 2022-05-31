@@ -34,7 +34,9 @@ namespace SonarAnalyzer.UnitTest.MetadataReferences
 
         // Passed version
         public static References AzureCore(string packageVersion = Constants.NuGetLatestVersion) => Create("Azure.Core", packageVersion);
+        public static References AzureIdentity(string packageVersion = Constants.NuGetLatestVersion) => Create("Azure.Identity", packageVersion);
         public static References AzureMessagingServiceBus(string packageVersion = Constants.NuGetLatestVersion) => Create("Azure.Messaging.ServiceBus", packageVersion);
+        public static References AzureResourceManager(string packageVersion = Constants.NuGetLatestVersion) => Create("Azure.ResourceManager", packageVersion);
         public static References AzureStorageCommon(string packageVersion = Constants.NuGetLatestVersion) => Create("Azure.Storage.Common", packageVersion);
         public static References AzureStorageBlobs(string packageVersion = Constants.NuGetLatestVersion) => Create("Azure.Storage.Blobs", packageVersion);
         public static References AzureStorageFilesDataLake(string packageVersion = Constants.NuGetLatestVersion) => Create("Azure.Storage.Files.DataLake", packageVersion);

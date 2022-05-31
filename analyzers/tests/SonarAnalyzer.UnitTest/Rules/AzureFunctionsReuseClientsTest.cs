@@ -75,5 +75,13 @@ namespace SonarAnalyzer.UnitTest.Rules
                 .Concat(NuGetMetadataReference.AzureStorageFilesDataLake()))
             .AddPaths("AzureFunctionsReuseClients_Storage.cs")
             .Verify();
+
+        [TestMethod]
+        public void AzureFunctionsReuseClients_ArmClient_CS() => CommonBuilder()
+            .AddReferences(NuGetMetadataReference.AzureCore()
+                .Concat(NuGetMetadataReference.AzureIdentity())
+                .Concat(NuGetMetadataReference.AzureResourceManager()))
+            .AddPaths("AzureFunctionsReuseClients_ArmClient.cs")
+            .Verify();
     }
 }
