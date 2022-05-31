@@ -64,5 +64,16 @@ namespace SonarAnalyzer.UnitTest.Rules
             .AddReferences(NuGetMetadataReference.AzureMessagingServiceBus())
             .AddPaths("AzureFunctionsReuseClients_ServiceBusV7.cs")
             .Verify();
+
+        [TestMethod]
+        public void AzureFunctionsReuseClients_Storage_CS() => CommonBuilder()
+            .AddReferences(NuGetMetadataReference.AzureCore()
+                .Concat(NuGetMetadataReference.AzureStorageCommon())
+                .Concat(NuGetMetadataReference.AzureStorageBlobs())
+                .Concat(NuGetMetadataReference.AzureStorageQueues())
+                .Concat(NuGetMetadataReference.AzureStorageFilesShares())
+                .Concat(NuGetMetadataReference.AzureStorageFilesDataLake()))
+            .AddPaths("AzureFunctionsReuseClients_Storage.cs")
+            .Verify();
     }
 }

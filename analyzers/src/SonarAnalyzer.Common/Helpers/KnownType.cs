@@ -39,6 +39,11 @@ namespace SonarAnalyzer.Helpers
 
         internal static readonly KnownType Azure_Messaging_ServiceBus_Administration_ServiceBusAdministrationClient = new("Azure.Messaging.ServiceBus.Administration.ServiceBusAdministrationClient");
         internal static readonly KnownType Azure_Messaging_ServiceBus_ServiceBusClient = new("Azure.Messaging.ServiceBus.ServiceBusClient");
+        internal static readonly KnownType Azure_Storage_Blobs_BlobServiceClient = new("Azure.Storage.Blobs.BlobServiceClient");
+        internal static readonly KnownType Azure_Storage_Queues_QueueServiceClient = new("Azure.Storage.Queues.QueueServiceClient");
+        internal static readonly KnownType Azure_Storage_Files_Shares_ShareServiceClient = new("Azure.Storage.Files.Shares.ShareServiceClient");
+        internal static readonly KnownType Azure_Storage_Files_DataLake_DataLakeServiceClient = new("Azure.Storage.Files.DataLake.DataLakeServiceClient");
+        internal static readonly KnownType Azure_ResourceManager_ArmClient = new("Azure.ResourceManager.ArmClient");
         internal static readonly KnownType FluentAssertions_Execution_AssertionScope = new("FluentAssertions.Execution.AssertionScope");
         internal static readonly KnownType JWT_Builder_JwtBuilder = new("JWT.Builder.JwtBuilder");
         internal static readonly KnownType JWT_IJwtDecoder = new("JWT.IJwtDecoder");

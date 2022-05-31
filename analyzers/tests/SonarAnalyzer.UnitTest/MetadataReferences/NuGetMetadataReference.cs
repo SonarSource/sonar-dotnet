@@ -33,7 +33,13 @@ namespace SonarAnalyzer.UnitTest.MetadataReferences
         public static References XunitFrameworkV1 => Create("xunit", "1.9.1").Concat(Create("xunit.extensions", "1.9.1"));
 
         // Passed version
+        public static References AzureCore(string packageVersion = Constants.NuGetLatestVersion) => Create("Azure.Core", packageVersion);
         public static References AzureMessagingServiceBus(string packageVersion = Constants.NuGetLatestVersion) => Create("Azure.Messaging.ServiceBus", packageVersion);
+        public static References AzureStorageCommon(string packageVersion = Constants.NuGetLatestVersion) => Create("Azure.Storage.Common", packageVersion);
+        public static References AzureStorageBlobs(string packageVersion = Constants.NuGetLatestVersion) => Create("Azure.Storage.Blobs", packageVersion);
+        public static References AzureStorageFilesDataLake(string packageVersion = Constants.NuGetLatestVersion) => Create("Azure.Storage.Files.DataLake", packageVersion);
+        public static References AzureStorageFilesShares(string packageVersion = Constants.NuGetLatestVersion) => Create("Azure.Storage.Files.Shares", packageVersion);
+        public static References AzureStorageQueues(string packageVersion = Constants.NuGetLatestVersion) => Create("Azure.Storage.Queues", packageVersion);
         public static References BouncyCastle(string packageVersion = "1.8.5") => Create("BouncyCastle", packageVersion);
         public static References Dapper(string packageVersion = "1.50.5") => Create("Dapper", packageVersion);
         public static References EntityFramework(string packageVersion = "6.2.0") => Create("EntityFramework", packageVersion);
