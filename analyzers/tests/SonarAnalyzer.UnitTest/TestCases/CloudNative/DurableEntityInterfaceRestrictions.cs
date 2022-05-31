@@ -28,6 +28,11 @@ public interface IInheritsValidIsEmpty : IValid
     // Do not add anything => still valid
 }
 
+public interface IInheritsValidIsEmpty2 : IInheritsValidIsEmpty
+{
+    // Do not add anything => still valid - another level of nesting
+}
+
 public interface IEmpty
 {
     // This is invalid and will throw
@@ -118,7 +123,8 @@ public class UseDurableClient
     {
         await client.SignalEntityAsync<IValid>(id, x => { });
         await client.SignalEntityAsync<IInheritsEmptyWithValid>(id, x => { });
-        await client.SignalEntityAsync<IInheritsValidIsEmpty>(id, x => { });    // Noncompliant FIXME FP, doesn't see inherited members
+        await client.SignalEntityAsync<IInheritsValidIsEmpty>(id, x => { });
+        await client.SignalEntityAsync<IInheritsValidIsEmpty2>(id, x => { });
     }
 
     public async Task Overloads()
@@ -134,8 +140,8 @@ public class UseDurableClient
     {
         await client.SignalEntityAsync<IEmpty>(id, x => { });                   // Noncompliant {{Use valid entity interface. IEmpty is empty.}}
         await client.SignalEntityAsync<IInheritsEmptyIsEmpty>(id, x => { });    // Noncompliant {{Use valid entity interface. IInheritsEmptyIsEmpty is empty.}}
-        await client.SignalEntityAsync<IInheritsInvalid>(id, x => { });         // FIXME Non-compliant {{FIXME}}
-        await client.SignalEntityAsync<IInvalid>(id, x => { });                 // Noncompliant {{Use valid entity interface. IInvalid is empty.}}
+        await client.SignalEntityAsync<IInheritsInvalid>(id, x => { });         // Noncompliant {{Use valid entity interface. IInheritsInvalid contains method "Method" with 2 parameters. Zero or one are allowed.}}
+        await client.SignalEntityAsync<IInvalid>(id, x => { });                 // Noncompliant {{Use valid entity interface. IInvalid contains method "Method" with 2 parameters. Zero or one are allowed.}}
         await client.SignalEntityAsync<IMoreArguments>(id, x => { });           // Noncompliant {{Use valid entity interface. IMoreArguments contains method "Method" with 2 parameters. Zero or one are allowed.}}
         await client.SignalEntityAsync<IReturnsInt>(id, x => { });              // Noncompliant {{Use valid entity interface. IReturnsInt contains method "Method" with invalid return type. Only "void", "Task" and "Task<T>" are allowed.}}
         await client.SignalEntityAsync<IReturnsTaskArray>(id, x => { });        // Noncompliant {{Use valid entity interface. IReturnsTaskArray contains method "Method" with invalid return type. Only "void", "Task" and "Task<T>" are allowed.}}
@@ -160,7 +166,7 @@ public class UseDurableOrchestrationContext
 
     public void Overloads()
     {
-        context.CreateEntityProxy<IInvalid>(id);        // Noncompliant {{Use valid entity interface. IInvalid is empty.}}
+        context.CreateEntityProxy<IInvalid>(id);        // Noncompliant {{Use valid entity interface. IInvalid contains method "Method" with 2 parameters. Zero or one are allowed.}}
         context.CreateEntityProxy<IInvalid>("key");     // Noncompliant
         //      ^^^^^^^^^^^^^^^^^^^^^^^^^^^
     }

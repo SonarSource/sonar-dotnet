@@ -70,7 +70,7 @@ namespace SonarAnalyzer.Rules
             }
             else
             {
-                var members = entityInterface.GetMembers();
+                var members = new[] { entityInterface }.Concat(entityInterface.AllInterfaces).SelectMany(x => x.GetMembers()).ToArray();
                 return members.Any()
                     ? members.Select(MemberErrorMessage).WhereNotNull().FirstOrDefault()
                     : "is empty";
