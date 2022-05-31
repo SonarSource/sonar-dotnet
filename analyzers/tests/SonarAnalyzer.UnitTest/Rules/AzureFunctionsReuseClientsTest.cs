@@ -25,18 +25,18 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class AzureFunctionsReuseClientsTest
     {
-        private readonly VerifierBuilder builder = new VerifierBuilder<AzureFunctionsReuseClients>().WithBasePath("CloudNative")
+        private readonly VerifierBuilder builderHttpClient = new VerifierBuilder<AzureFunctionsReuseClients>().WithBasePath("CloudNative")
             .AddReferences(NuGetMetadataReference.MicrosoftNetSdkFunctions()
                 .Concat(NuGetMetadataReference.SystemNetHttp())
                 .Concat(NuGetMetadataReference.MicrosoftExtensionsHttp())
                 .Concat(MetadataReferenceFacade.SystemThreadingTasks));
 
         [TestMethod]
-        public void AzureFunctionsReuseClients_CS() =>
-            builder.AddPaths("AzureFunctionsReuseClients.cs").Verify();
+        public void AzureFunctionsReuseClients_HttpClient_CS() =>
+            builderHttpClient.AddPaths("AzureFunctionsReuseClients_HttpClient.cs").Verify();
 
         [TestMethod]
-        public void AzureFunctionsReuseClients_CS9() =>
-            builder.AddPaths("AzureFunctionsReuseClients.CSharp9.cs").WithOptions(ParseOptionsHelper.FromCSharp9).Verify();
+        public void AzureFunctionsReuseClients_HttpClient_CS9() =>
+            builderHttpClient.AddPaths("AzureFunctionsReuseClients_HttpClient.CSharp9.cs").WithOptions(ParseOptionsHelper.FromCSharp9).Verify();
     }
 }
