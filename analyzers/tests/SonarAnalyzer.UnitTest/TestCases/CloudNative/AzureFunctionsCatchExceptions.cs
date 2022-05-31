@@ -3,11 +3,6 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using Microsoft.Azure.WebJobs;
 
-namespace Microsoft.Azure.WebJobs
-{
-    public class FunctionNameAttribute : Attribute { public FunctionNameAttribute(string name) { } }  // FIXME: Fake, remove before merging
-}
-
 public class AnotherAttribute : Attribute
 {
     public AnotherAttribute(string name) { }

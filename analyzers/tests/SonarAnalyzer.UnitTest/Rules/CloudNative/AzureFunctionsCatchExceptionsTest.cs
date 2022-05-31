@@ -25,8 +25,10 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class AzureFunctionsCatchExceptionsTest
     {
+        private readonly VerifierBuilder builder = new VerifierBuilder<AzureFunctionsCatchExceptions>().WithBasePath("CloudNative").AddReferences(NuGetMetadataReference.MicrosoftNetSdkFunctions());
+
         [TestMethod]
         public void AzureFunctionsCatchExceptions_CS() =>
-            new VerifierBuilder<AzureFunctionsCatchExceptions>().WithBasePath("CloudNative").AddPaths("AzureFunctionsCatchExceptions.cs").WithOptions(ParseOptionsHelper.FromCSharp8).Verify();
+            builder.AddPaths("AzureFunctionsCatchExceptions.cs").WithOptions(ParseOptionsHelper.FromCSharp8).Verify();
     }
 }
