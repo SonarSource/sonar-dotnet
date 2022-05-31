@@ -33,7 +33,9 @@ namespace SonarAnalyzer.Rules
     public sealed class DurableEntityInterfaceRestrictions : SonarDiagnosticAnalyzer
     {
         private const string DiagnosticId = "S6424";
-        private const string MessageFormat = "";
+        private const string MessageFormat = "{0}";
+        private const string SignalEntityAsyncName = "SignalEntityAsync";
+        private const string CreateEntityProxyName = "CreateEntityProxy";
 
         private static readonly DiagnosticDescriptor Rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
 
@@ -42,12 +44,62 @@ namespace SonarAnalyzer.Rules
         protected override void Initialize(SonarAnalysisContext context) =>
             context.RegisterSyntaxNodeActionInNonGenerated(c =>
                 {
-                    var node = c.Node;
-                    if (true)
+                    var name = (GenericNameSyntax)c.Node;
+                    if (name.Identifier.ValueText is SignalEntityAsyncName or CreateEntityProxyName
+                        && name.TypeArgumentList.Arguments.Count == 1   // FIXME: Coverage
+                        && c.SemanticModel.GetSymbolInfo(name).Symbol is IMethodSymbol method
+                        && (method.Is(KnownType.Microsoft_Azure_WebJobs_Extensions_DurableTask_IDurableEntityClient, SignalEntityAsyncName)
+                            || method.Is(KnownType.Microsoft_Azure_WebJobs_Extensions_DurableTask_IDurableOrchestrationContext, CreateEntityProxyName))
+                        && InterfaceErrorMessage(method.TypeArguments.Single() as INamedTypeSymbol) is { } message) // FIXME: Null? Undefined?
                     {
-                        //c.ReportIssue(Diagnostic.Create(Rule, node.GetLocation()));
+                        c.ReportIssue(Diagnostic.Create(Rule, name.GetLocation(), message));
                     }
                 },
-                SyntaxKind.InvocationExpression);
+                SyntaxKind.GenericName);
+
+        private static string InterfaceErrorMessage(INamedTypeSymbol entityInterface)
+        {
+            if (entityInterface is null) // FIXME: Coverage
+            {
+                return null;
+            }
+            else if (entityInterface.IsGenericType)
+            {
+                return "FIXME generic interface";
+            }
+            else
+            {
+                var members = entityInterface.GetMembers();
+                return members.Any()
+                    ? members.Select(MemberErrorMessage).WhereNotNull().FirstOrDefault()
+                    : "FIXME Empty";
+            }
+        }
+
+        private static string MemberErrorMessage(ISymbol member)
+        {
+            if (member is not IMethodSymbol method)
+            {
+                return "FIXME not a method: " + member.Name;
+            }
+            else if (method.IsGenericMethod)
+            {
+                return "FIXME is generic member: " + member.Name;
+            }
+            else if (method.Parameters.Length > 1)
+            {
+                return "FIXME: too many parameters: " + member.Name;
+            }
+            else if (method.ReturnsVoid
+                || method.ReturnType.Is(KnownType.System_Threading_Tasks_Task)
+                || method.ReturnType.Is(KnownType.System_Threading_Tasks_Task_T))
+            {
+                return null;
+            }
+            else
+            {
+                return "FIXME: return type";
+            }
+        }
     }
 }

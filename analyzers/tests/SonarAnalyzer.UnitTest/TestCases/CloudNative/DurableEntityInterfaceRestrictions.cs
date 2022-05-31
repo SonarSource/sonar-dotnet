@@ -118,33 +118,33 @@ public class UseDurableClient
     {
         await client.SignalEntityAsync<IValid>(id, x => { });
         await client.SignalEntityAsync<IInheritsEmptyWithValid>(id, x => { });
-        await client.SignalEntityAsync<IInheritsValidIsEmpty>(id, x => { });
+        await client.SignalEntityAsync<IInheritsValidIsEmpty>(id, x => { });    // Noncompliant FIXME FP, doesn't see inherited members
     }
 
     public async Task Overloads()
     {
-        await client.SignalEntityAsync<IInvalid>(id, x => { });                 // FIXME Non-compliant
-        await client.SignalEntityAsync<IInvalid>("id", x => { });               // FIXME Non-compliant
-        await client.SignalEntityAsync<IInvalid>(id, DateTime.Now, x => { });   // FIXME Non-compliant
-        await client.SignalEntityAsync<IInvalid>("id", DateTime.Now, x => { }); // FIXME Non-compliant
-        //                             ******** FIXME
+        await client.SignalEntityAsync<IInvalid>(id, x => { });                 // Noncompliant
+        await client.SignalEntityAsync<IInvalid>("id", x => { });               // Noncompliant
+        await client.SignalEntityAsync<IInvalid>(id, DateTime.Now, x => { });   // Noncompliant
+        await client.SignalEntityAsync<IInvalid>("id", DateTime.Now, x => { }); // Noncompliant
+        //           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
     }
 
     public async Task Reasons()
     {
-        await client.SignalEntityAsync<IEmpty>(id, x => { });                   // FIXME Non-compliant {{FIXME}}
-        await client.SignalEntityAsync<IInheritsEmptyIsEmpty>(id, x => { });    // FIXME Non-compliant {{FIXME}}
+        await client.SignalEntityAsync<IEmpty>(id, x => { });                   // Noncompliant {{FIXME Empty}}
+        await client.SignalEntityAsync<IInheritsEmptyIsEmpty>(id, x => { });    // Noncompliant {{FIXME Empty}}
         await client.SignalEntityAsync<IInheritsInvalid>(id, x => { });         // FIXME Non-compliant {{FIXME}}
-        await client.SignalEntityAsync<IInvalid>(id, x => { });                 // FIXME Non-compliant {{FIXME}}
-        await client.SignalEntityAsync<IMoreArguments>(id, x => { });           // FIXME Non-compliant {{FIXME}}
-        await client.SignalEntityAsync<IReturnsInt>(id, x => { });              // FIXME Non-compliant {{FIXME}}
-        await client.SignalEntityAsync<IReturnsTaskArray>(id, x => { });        // FIXME Non-compliant {{FIXME}}
-        await client.SignalEntityAsync<IReturnsObject>(id, x => { });           // FIXME Non-compliant {{FIXME}}
-        await client.SignalEntityAsync<IGenericInterface<int>>(id, x => { });   // FIXME Non-compliant {{FIXME}}
-        await client.SignalEntityAsync<IGenericMethod>(id, x => { });           // FIXME Non-compliant {{FIXME}}
-        await client.SignalEntityAsync<IProperty>(id, x => { });                // FIXME Non-compliant {{FIXME}}
-        await client.SignalEntityAsync<IIndexer>(id, x => { });                 // FIXME Non-compliant {{FIXME}}
-        await client.SignalEntityAsync<IEvent>(id, x => { });                   // FIXME Non-compliant {{FIXME}}
+        await client.SignalEntityAsync<IInvalid>(id, x => { });                 // Noncompliant {{FIXME Empty}}
+        await client.SignalEntityAsync<IMoreArguments>(id, x => { });           // Noncompliant {{FIXME: too many parameters: Method}}
+        await client.SignalEntityAsync<IReturnsInt>(id, x => { });              // Noncompliant {{FIXME: return type}}
+        await client.SignalEntityAsync<IReturnsTaskArray>(id, x => { });        // Noncompliant {{FIXME: return type}}
+        await client.SignalEntityAsync<IReturnsObject>(id, x => { });           // Noncompliant {{FIXME: return type}}
+        await client.SignalEntityAsync<IGenericInterface<int>>(id, x => { });   // Noncompliant {{FIXME generic interface}}
+        await client.SignalEntityAsync<IGenericMethod>(id, x => { });           // Noncompliant {{FIXME is generic member: Method}}
+        await client.SignalEntityAsync<IProperty>(id, x => { });                // Noncompliant {{FIXME not a method: Value}}
+        await client.SignalEntityAsync<IIndexer>(id, x => { });                 // Noncompliant {{FIXME not a method: this[]}}
+        await client.SignalEntityAsync<IEvent>(id, x => { });                   // Noncompliant {{FIXME not a method: Event}}
     }
 }
 
@@ -160,8 +160,9 @@ public class UseDurableOrchestrationContext
 
     public void Overloads()
     {
-        context.CreateEntityProxy<IInvalid>(id);        // FIXME Non-compliant {{FIXME}}
-        context.CreateEntityProxy<IInvalid>("key");     // FIXME Non-compliant
+        context.CreateEntityProxy<IInvalid>(id);        // Noncompliant {{FIXME Empty}}
+        context.CreateEntityProxy<IInvalid>("key");     // Noncompliant
+        //      ^^^^^^^^^^^^^^^^^^^^^^^^^^^
     }
 }
 
