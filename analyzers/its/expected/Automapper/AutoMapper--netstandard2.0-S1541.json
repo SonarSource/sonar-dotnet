@@ -353,7 +353,7 @@
 },
 {
 "id":  "S1541",
-"message":  "The Cyclomatic Complexity of this method is 15 which is greater than 10 authorized.",
+"message":  "The Cyclomatic Complexity of this method is 11 which is greater than 10 authorized.",
 "location":  [
 {
 "uri":  "sources\Automapper\src\AutoMapper\Execution\ExpressionBuilder.cs",
@@ -461,42 +461,6 @@
 "startColumn":  27,
 "endLine":  348,
 "endColumn":  30
-}
-},
-{
-"uri":  "sources\Automapper\src\AutoMapper\Execution\ExpressionBuilder.cs",
-"region":  {
-"startLine":  358,
-"startColumn":  55,
-"endLine":  358,
-"endColumn":  57
-}
-},
-{
-"uri":  "sources\Automapper\src\AutoMapper\Execution\ExpressionBuilder.cs",
-"region":  {
-"startLine":  359,
-"startColumn":  131,
-"endLine":  359,
-"endColumn":  133
-}
-},
-{
-"uri":  "sources\Automapper\src\AutoMapper\Execution\ExpressionBuilder.cs",
-"region":  {
-"startLine":  361,
-"startColumn":  85,
-"endLine":  361,
-"endColumn":  87
-}
-},
-{
-"uri":  "sources\Automapper\src\AutoMapper\Execution\ExpressionBuilder.cs",
-"region":  {
-"startLine":  362,
-"startColumn":  23,
-"endLine":  362,
-"endColumn":  25
 }
 }
 ]
@@ -785,6 +749,129 @@
 },
 {
 "id":  "S1541",
+"message":  "The Cyclomatic Complexity of this method is 12 which is greater than 10 authorized.",
+"location":  [
+{
+"uri":  "sources\Automapper\src\AutoMapper\Execution\TypeMapPlanBuilder.cs",
+"region":  {
+"startLine":  384,
+"startColumn":  28,
+"endLine":  384,
+"endColumn":  50
+}
+},
+{
+"uri":  "sources\Automapper\src\AutoMapper\Execution\TypeMapPlanBuilder.cs",
+"region":  {
+"startLine":  384,
+"startColumn":  28,
+"endLine":  384,
+"endColumn":  50
+}
+},
+{
+"uri":  "sources\Automapper\src\AutoMapper\Execution\TypeMapPlanBuilder.cs",
+"region":  {
+"startLine":  390,
+"startColumn":  47,
+"endLine":  390,
+"endColumn":  49
+}
+},
+{
+"uri":  "sources\Automapper\src\AutoMapper\Execution\TypeMapPlanBuilder.cs",
+"region":  {
+"startLine":  391,
+"startColumn":  46,
+"endLine":  391,
+"endColumn":  48
+}
+},
+{
+"uri":  "sources\Automapper\src\AutoMapper\Execution\TypeMapPlanBuilder.cs",
+"region":  {
+"startLine":  392,
+"startColumn":  66,
+"endLine":  392,
+"endColumn":  68
+}
+},
+{
+"uri":  "sources\Automapper\src\AutoMapper\Execution\TypeMapPlanBuilder.cs",
+"region":  {
+"startLine":  393,
+"startColumn":  67,
+"endLine":  393,
+"endColumn":  69
+}
+},
+{
+"uri":  "sources\Automapper\src\AutoMapper\Execution\TypeMapPlanBuilder.cs",
+"region":  {
+"startLine":  394,
+"startColumn":  52,
+"endLine":  394,
+"endColumn":  54
+}
+},
+{
+"uri":  "sources\Automapper\src\AutoMapper\Execution\TypeMapPlanBuilder.cs",
+"region":  {
+"startLine":  395,
+"startColumn":  19,
+"endLine":  395,
+"endColumn":  21
+}
+},
+{
+"uri":  "sources\Automapper\src\AutoMapper\Execution\TypeMapPlanBuilder.cs",
+"region":  {
+"startLine":  397,
+"startColumn":  13,
+"endLine":  397,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\Automapper\src\AutoMapper\Execution\TypeMapPlanBuilder.cs",
+"region":  {
+"startLine":  401,
+"startColumn":  18,
+"endLine":  401,
+"endColumn":  20
+}
+},
+{
+"uri":  "sources\Automapper\src\AutoMapper\Execution\TypeMapPlanBuilder.cs",
+"region":  {
+"startLine":  404,
+"startColumn":  17,
+"endLine":  404,
+"endColumn":  19
+}
+},
+{
+"uri":  "sources\Automapper\src\AutoMapper\Execution\TypeMapPlanBuilder.cs",
+"region":  {
+"startLine":  404,
+"startColumn":  62,
+"endLine":  404,
+"endColumn":  64
+}
+},
+{
+"uri":  "sources\Automapper\src\AutoMapper\Execution\TypeMapPlanBuilder.cs",
+"region":  {
+"startLine":  404,
+"startColumn":  42,
+"endLine":  404,
+"endColumn":  44
+}
+}
+]
+},
+{
+"id":  "S1541",
 "message":  "The Cyclomatic Complexity of this method is 13 which is greater than 10 authorized.",
 "location":  [
 {
@@ -910,138 +997,6 @@
 "startLine":  371,
 "startColumn":  17,
 "endLine":  371,
-"endColumn":  19
-}
-}
-]
-},
-{
-"id":  "S1541",
-"message":  "The Cyclomatic Complexity of this method is 13 which is greater than 10 authorized.",
-"location":  [
-{
-"uri":  "sources\Automapper\src\AutoMapper\Execution\TypeMapPlanBuilder.cs",
-"region":  {
-"startLine":  384,
-"startColumn":  28,
-"endLine":  384,
-"endColumn":  50
-}
-},
-{
-"uri":  "sources\Automapper\src\AutoMapper\Execution\TypeMapPlanBuilder.cs",
-"region":  {
-"startLine":  384,
-"startColumn":  28,
-"endLine":  384,
-"endColumn":  50
-}
-},
-{
-"uri":  "sources\Automapper\src\AutoMapper\Execution\TypeMapPlanBuilder.cs",
-"region":  {
-"startLine":  390,
-"startColumn":  47,
-"endLine":  390,
-"endColumn":  49
-}
-},
-{
-"uri":  "sources\Automapper\src\AutoMapper\Execution\TypeMapPlanBuilder.cs",
-"region":  {
-"startLine":  391,
-"startColumn":  46,
-"endLine":  391,
-"endColumn":  48
-}
-},
-{
-"uri":  "sources\Automapper\src\AutoMapper\Execution\TypeMapPlanBuilder.cs",
-"region":  {
-"startLine":  392,
-"startColumn":  66,
-"endLine":  392,
-"endColumn":  68
-}
-},
-{
-"uri":  "sources\Automapper\src\AutoMapper\Execution\TypeMapPlanBuilder.cs",
-"region":  {
-"startLine":  393,
-"startColumn":  67,
-"endLine":  393,
-"endColumn":  69
-}
-},
-{
-"uri":  "sources\Automapper\src\AutoMapper\Execution\TypeMapPlanBuilder.cs",
-"region":  {
-"startLine":  394,
-"startColumn":  52,
-"endLine":  394,
-"endColumn":  54
-}
-},
-{
-"uri":  "sources\Automapper\src\AutoMapper\Execution\TypeMapPlanBuilder.cs",
-"region":  {
-"startLine":  395,
-"startColumn":  19,
-"endLine":  395,
-"endColumn":  21
-}
-},
-{
-"uri":  "sources\Automapper\src\AutoMapper\Execution\TypeMapPlanBuilder.cs",
-"region":  {
-"startLine":  397,
-"startColumn":  13,
-"endLine":  397,
-"endColumn":  15
-}
-},
-{
-"uri":  "sources\Automapper\src\AutoMapper\Execution\TypeMapPlanBuilder.cs",
-"region":  {
-"startLine":  401,
-"startColumn":  18,
-"endLine":  401,
-"endColumn":  20
-}
-},
-{
-"uri":  "sources\Automapper\src\AutoMapper\Execution\TypeMapPlanBuilder.cs",
-"region":  {
-"startLine":  404,
-"startColumn":  17,
-"endLine":  404,
-"endColumn":  19
-}
-},
-{
-"uri":  "sources\Automapper\src\AutoMapper\Execution\TypeMapPlanBuilder.cs",
-"region":  {
-"startLine":  404,
-"startColumn":  62,
-"endLine":  404,
-"endColumn":  64
-}
-},
-{
-"uri":  "sources\Automapper\src\AutoMapper\Execution\TypeMapPlanBuilder.cs",
-"region":  {
-"startLine":  404,
-"startColumn":  42,
-"endLine":  404,
-"endColumn":  44
-}
-},
-{
-"uri":  "sources\Automapper\src\AutoMapper\Execution\TypeMapPlanBuilder.cs",
-"region":  {
-"startLine":  413,
-"startColumn":  17,
-"endLine":  413,
 "endColumn":  19
 }
 }

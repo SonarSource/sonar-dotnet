@@ -193,14 +193,7 @@ namespace SonarAnalyzer.Metrics.CSharp
 
             public override void Visit(SyntaxNode node)
             {
-                if (node.IsKind(SyntaxKindEx.LocalFunctionStatement))
-                {
-                    if (((LocalFunctionStatementSyntaxWrapper)node).Modifiers.Any(SyntaxKind.StaticKeyword))
-                    {
-                        return;
-                    }
-                }
-                else if (SwitchExpressionArmSyntaxWrapper.IsInstance(node))
+                if (SwitchExpressionArmSyntaxWrapper.IsInstance(node))
                 {
                     var arm = (SwitchExpressionArmSyntaxWrapper)node;
                     AddLocation(arm.EqualsGreaterThanToken);
@@ -210,7 +203,11 @@ namespace SonarAnalyzer.Metrics.CSharp
                     var binaryPatternNode = (BinaryPatternSyntaxWrapper)node;
                     AddLocation(binaryPatternNode.OperatorToken);
                 }
-                base.Visit(node);
+
+                if (!IsStaticLocalFunction(node))
+                {
+                    base.Visit(node);
+                }
             }
 
             private void AddLocation(SyntaxToken node) => IncrementLocations.Add(new SecondaryLocation(node.GetLocation(), "+1"));
@@ -220,6 +217,10 @@ namespace SonarAnalyzer.Metrics.CSharp
             private static bool IsStaticLocalFunction(GlobalStatementSyntax node) =>
                 node.ChildNodes().FirstOrDefault(y => y.IsKind(SyntaxKindEx.LocalFunctionStatement)) is { } localFunction
                 && ((LocalFunctionStatementSyntaxWrapper)localFunction).Modifiers.Any(SyntaxKind.StaticKeyword);
+
+            private static bool IsStaticLocalFunction(SyntaxNode node) =>
+                node.IsKind(SyntaxKindEx.LocalFunctionStatement)
+                && ((LocalFunctionStatementSyntaxWrapper)node).Modifiers.Any(SyntaxKind.StaticKeyword);
         }
     }
 }
