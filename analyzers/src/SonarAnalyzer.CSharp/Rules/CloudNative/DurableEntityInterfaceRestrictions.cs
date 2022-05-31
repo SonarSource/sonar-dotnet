@@ -24,7 +24,6 @@ using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
-using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
 
 namespace SonarAnalyzer.Rules
@@ -46,12 +45,12 @@ namespace SonarAnalyzer.Rules
                 {
                     var name = (GenericNameSyntax)c.Node;
                     if (name.Identifier.ValueText is SignalEntityAsyncName or CreateEntityProxyName
-                        && name.TypeArgumentList.Arguments.Count == 1   // FIXME: Coverage
+                        && name.TypeArgumentList.Arguments.Count == 1
                         && c.SemanticModel.GetSymbolInfo(name).Symbol is IMethodSymbol method
                         && (method.Is(KnownType.Microsoft_Azure_WebJobs_Extensions_DurableTask_IDurableEntityClient, SignalEntityAsyncName)
                             || method.Is(KnownType.Microsoft_Azure_WebJobs_Extensions_DurableTask_IDurableOrchestrationContext, CreateEntityProxyName))
-                        && method.TypeArguments.Single() is INamedTypeSymbol entityInterface
-                        && InterfaceErrorMessage(entityInterface) is { } message) // FIXME: Null? Undefined?
+                        && method.TypeArguments.Single() is INamedTypeSymbol { TypeKind: not TypeKind.Error } entityInterface
+                        && InterfaceErrorMessage(entityInterface) is { } message)
                     {
                         c.ReportIssue(Diagnostic.Create(Rule, name.GetLocation(), entityInterface.Name, message));
                     }
@@ -60,11 +59,7 @@ namespace SonarAnalyzer.Rules
 
         private static string InterfaceErrorMessage(INamedTypeSymbol entityInterface)
         {
-            if (entityInterface is null) // FIXME: Coverage
-            {
-                return null;
-            }
-            else if (entityInterface.IsGenericType)
+            if (entityInterface.IsGenericType)
             {
                 return "is generic";
             }

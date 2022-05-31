@@ -170,6 +170,24 @@ public class UseDurableOrchestrationContext
         context.CreateEntityProxy<IInvalid>("key");     // Noncompliant
         //      ^^^^^^^^^^^^^^^^^^^^^^^^^^^
     }
+
+    public void Errors()
+    {
+        context.CreateEntityProxy<>("key");             // Error [CS0305]: Using the generic method group 'CreateEntityProxy' requires 1 type arguments
+        context.CreateEntityProxy<Undefined>("key");    // Error [CS0246]: The type or namespace name 'Undefined' could not be found
+    }
+}
+
+public class AnotherType
+{
+    public void SignalEntityAsync<T>() { }
+    public void SignalEntityAsync<TFirst, TSecond>() { }
+
+    private static void Use(AnotherType client)
+    {
+        client.SignalEntityAsync<IInvalid>();           // Compliant, wrong type
+        client.SignalEntityAsync<IInvalid, IInvalid>(); // For coverage
+    }
 }
 
 // FIXME: Defined in another assembly
