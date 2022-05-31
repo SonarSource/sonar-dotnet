@@ -66,6 +66,7 @@ namespace SonarAnalyzer.Helpers
         internal static readonly KnownType Microsoft_AspNetCore_Mvc_RequestFormLimitsAttribute = new("Microsoft.AspNetCore.Mvc.RequestFormLimitsAttribute");
         internal static readonly KnownType Microsoft_AspNetCore_Mvc_RequestSizeLimitAttribute = new("Microsoft.AspNetCore.Mvc.RequestSizeLimitAttribute");
         internal static readonly KnownType Microsoft_AspNetCore_Razor_Hosting_RazorCompiledItemAttribute = new("Microsoft.AspNetCore.Razor.Hosting.RazorCompiledItemAttribute");
+        internal static readonly KnownType Microsoft_Azure_WebJobs_FunctionNameAttribute = new("Microsoft.Azure.WebJobs.FunctionNameAttribute");
         internal static readonly KnownType Microsoft_Data_Sqlite_SqliteCommand = new("Microsoft.Data.Sqlite.SqliteCommand");
         internal static readonly KnownType Microsoft_EntityFrameworkCore_DbContextOptionsBuilder = new("Microsoft.EntityFrameworkCore.DbContextOptionsBuilder");
         internal static readonly KnownType Microsoft_EntityFrameworkCore_Migrations_Migration = new("Microsoft.EntityFrameworkCore.Migrations.Migration");
@@ -85,7 +86,9 @@ namespace SonarAnalyzer.Helpers
         internal static readonly KnownType Microsoft_Extensions_Logging_DebugLoggerFactoryExtensions = new("Microsoft.Extensions.Logging.DebugLoggerFactoryExtensions");
         internal static readonly KnownType Microsoft_Extensions_Logging_EventLoggerFactoryExtensions = new("Microsoft.Extensions.Logging.EventLoggerFactoryExtensions");
         internal static readonly KnownType Microsoft_Extensions_Logging_EventSourceLoggerFactoryExtensions = new("Microsoft.Extensions.Logging.EventSourceLoggerFactoryExtensions");
+        internal static readonly KnownType Microsoft_Extensions_Logging_ILogger = new("Microsoft.Extensions.Logging.ILogger");
         internal static readonly KnownType Microsoft_Extensions_Logging_ILoggerFactory = new("Microsoft.Extensions.Logging.ILoggerFactory");
+        internal static readonly KnownType Microsoft_Extensions_Logging_LoggerExtensions = new("Microsoft.Extensions.Logging.LoggerExtensions");
         internal static readonly KnownType Microsoft_Extensions_Primitives_StringValues = new("Microsoft.Extensions.Primitives.StringValues");
         internal static readonly KnownType Microsoft_Net_Http_Headers_HeaderNames = new("Microsoft.Net.Http.Headers.HeaderNames");
         internal static readonly KnownType Microsoft_VisualBasic_Interaction = new("Microsoft.VisualBasic.Interaction");

@@ -1,0 +1,47 @@
+<p>Capturing and logging errors is critical to monitoring the health of your Azure Functions application.</p>
+<p>Each <code>catch</code> block inside an Azure Function should log helpful details about the failure. Moreover, the logging should not be done at
+<code>Debug</code> or <code>Trace</code> level.</p>
+<p>Consider using the built-in integration with Application Insights for better monitoring of your Application.</p>
+<h2>Noncompliant Code Example</h2>
+<pre>
+[FunctionName("Foo")]
+public static async Task&lt;IActionResult&gt; Run(
+	[HttpTrigger(AuthorizationLevel.Anonymous, "get", "post", Route = null)] HttpRequest req,
+	ILogger log)
+{
+	try
+	{
+		// do stuff that can fail
+	}
+	catch (Exception ex)
+	{
+		// the failure is not logged at all OR is logged at DEBUG/TRACE level
+	}
+}
+</pre>
+<h2>Compliant Solution</h2>
+<pre>
+[FunctionName("Foo")]
+public static async Task&lt;IActionResult&gt; Run(
+	[HttpTrigger(AuthorizationLevel.Anonymous, "get", "post", Route = null)] HttpRequest req,
+	ILogger log)
+{
+	try
+	{
+		// do stuff that can fail
+	}
+	catch (Exception ex)
+	{
+		log.LogError("Give details that will help investigations", ex);
+	}
+}
+</pre>
+<h2>See</h2>
+<ul>
+  <li> <a href="https://docs.microsoft.com/en-us/azure/azure-functions/functions-bindings-error-pages?tabs=csharp">Azure Functions error handling and
+  retries</a> </li>
+  <li> <a href="https://docs.microsoft.com/en-us/azure/azure-functions/functions-monitoring">Monitor Azure Functions</a> </li>
+  <li> <a href="https://docs.microsoft.com/en-us/azure/azure-monitor/app/azure-functions-supported-features">Application Insights for Azure Functions
+  supported features</a> </li>
+</ul>
+

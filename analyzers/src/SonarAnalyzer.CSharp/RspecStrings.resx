@@ -12844,6 +12844,39 @@
   <data name="S6354_Type" xml:space="preserve">
     <value>CODE_SMELL</value>
   </data>
+  <data name="S6423_Category" xml:space="preserve">
+    <value>Major Code Smell</value>
+  </data>
+  <data name="S6423_Description" xml:space="preserve">
+    <value>Capturing and logging errors is critical to monitoring the health of your Azure Functions application.</value>
+  </data>
+  <data name="S6423_IsActivatedByDefault" xml:space="preserve">
+    <value>False</value>
+  </data>
+  <data name="S6423_Remediation" xml:space="preserve">
+    <value>Constant/Issue</value>
+  </data>
+  <data name="S6423_RemediationCost" xml:space="preserve">
+    <value>5min</value>
+  </data>
+  <data name="S6423_Scope" xml:space="preserve">
+    <value>Main</value>
+  </data>
+  <data name="S6423_Severity" xml:space="preserve">
+    <value>Major</value>
+  </data>
+  <data name="S6423_Status" xml:space="preserve">
+    <value>ready</value>
+  </data>
+  <data name="S6423_Tags" xml:space="preserve">
+    <value>error-handling</value>
+  </data>
+  <data name="S6423_Title" xml:space="preserve">
+    <value>Azure Functions should log all failures.</value>
+  </data>
+  <data name="S6423_Type" xml:space="preserve">
+    <value>CODE_SMELL</value>
+  </data>
   <data name="S818_Category" xml:space="preserve">
     <value>Minor Code Smell</value>
   </data>

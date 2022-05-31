@@ -180,41 +180,18 @@ namespace SonarAnalyzer.Helpers
         public static bool DerivesOrImplementsAny(this ITypeSymbol type, ImmutableArray<KnownType> baseTypes) =>
             type.ImplementsAny(baseTypes) || type.DerivesFromAny(baseTypes);
 
-        public static ITypeSymbol GetSymbolType(this ISymbol symbol)
-        {
-            if (symbol is ILocalSymbol localSymbol)
+        public static ITypeSymbol GetSymbolType(this ISymbol symbol) =>
+            symbol switch
             {
-                return localSymbol.Type;
-            }
-
-            if (symbol is IFieldSymbol fieldSymbol)
-            {
-                return fieldSymbol.Type;
-            }
-
-            if (symbol is IPropertySymbol propertySymbol)
-            {
-                return propertySymbol.Type;
-            }
-
-            if (symbol is IParameterSymbol parameterSymbol)
-            {
-                return parameterSymbol.Type;
-            }
-
-            if (symbol is IAliasSymbol aliasSymbol)
-            {
-                return aliasSymbol.Target as ITypeSymbol;
-            }
-
-            if (symbol is IMethodSymbol methodSymbol)
-            {
-                return methodSymbol.MethodKind == MethodKind.Constructor
-                    ? methodSymbol.ContainingType
-                    : methodSymbol.ReturnType as INamedTypeSymbol;
-            }
-
-            return symbol as ITypeSymbol;
-        }
+                ILocalSymbol x => x.Type,
+                IFieldSymbol x => x.Type,
+                IPropertySymbol x => x.Type,
+                IParameterSymbol x => x.Type,
+                IAliasSymbol x => x.Target as ITypeSymbol,
+                IMethodSymbol { MethodKind: MethodKind.Constructor } x => x.ContainingType,
+                IMethodSymbol x => x.ReturnType,
+                ITypeSymbol x => x,
+                _ => null,
+            };
     }
 }

@@ -20,6 +20,7 @@
 
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Diagnostics;
+using SonarAnalyzer.Helpers;
 
 namespace SonarAnalyzer.Extensions
 {
@@ -37,5 +38,10 @@ namespace SonarAnalyzer.Extensions
         /// <seealso href="https://github.com/dotnet/roslyn/issues/50989"/>
         internal static bool IsRedundantPositionalRecordContext(this SyntaxNodeAnalysisContext context) =>
             context.ContainingSymbol.Kind == SymbolKind.Method;
+
+        public static IMethodSymbol AzureFunctionMethod(this SyntaxNodeAnalysisContext context) =>
+            context.ContainingSymbol is IMethodSymbol method && method.HasAttribute(KnownType.Microsoft_Azure_WebJobs_FunctionNameAttribute)
+                ? method
+                : null;
     }
 }

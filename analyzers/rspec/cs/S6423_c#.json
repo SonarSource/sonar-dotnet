@@ -1,0 +1,17 @@
+{
+  "title": "Azure Functions should log all failures.",
+  "type": "CODE_SMELL",
+  "status": "ready",
+  "remediation": {
+    "func": "Constant\/Issue",
+    "constantCost": "5min"
+  },
+  "tags": [
+    "error-handling"
+  ],
+  "defaultSeverity": "Major",
+  "ruleSpecification": "RSPEC-6423",
+  "sqKey": "S6423",
+  "scope": "Main",
+  "quickfix": "unknown"
+}

@@ -28,6 +28,7 @@ namespace SonarAnalyzer.UnitTest.Helpers
         private ClassDeclarationSyntax baseClassDeclaration;
         private ClassDeclarationSyntax derivedClassDeclaration1;
         private ClassDeclarationSyntax derivedClassDeclaration2;
+        private SyntaxNode root;
         private SemanticModel semanticModel;
 
         [TestInitialize]
@@ -41,11 +42,12 @@ namespace SonarAnalyzer.UnitTest.Helpers
                 var tree = compilation.SyntaxTrees.First();
                 semanticModel = compilation.GetSemanticModel(tree);
 
-                baseClassDeclaration = tree.GetRoot().DescendantNodes().OfType<ClassDeclarationSyntax>()
+                root = tree.GetRoot();
+                baseClassDeclaration = root.DescendantNodes().OfType<ClassDeclarationSyntax>()
                     .First(m => m.Identifier.ValueText == "Base");
-                derivedClassDeclaration1 = tree.GetRoot().DescendantNodes().OfType<ClassDeclarationSyntax>()
+                derivedClassDeclaration1 = root.DescendantNodes().OfType<ClassDeclarationSyntax>()
                     .First(m => m.Identifier.ValueText == "Derived1");
-                derivedClassDeclaration2 = tree.GetRoot().DescendantNodes().OfType<ClassDeclarationSyntax>()
+                derivedClassDeclaration2 = root.DescendantNodes().OfType<ClassDeclarationSyntax>()
                     .First(m => m.Identifier.ValueText == "Derived2");
             }
         }
@@ -82,6 +84,16 @@ namespace SonarAnalyzer.UnitTest.Helpers
 
             baseType.Is(baseKnownType).Should().BeTrue();
             baseType.IsAny(baseKnownTypes).Should().BeTrue();
+        }
+
+        [TestMethod]
+        public void Type_GetSymbolType_Alias()
+        {
+            var aliasUsing = root.DescendantNodesAndSelf().OfType<UsingDirectiveSyntax>().FirstOrDefault(x => x.Alias is not null);
+            var symbol = semanticModel.GetDeclaredSymbol(aliasUsing);
+            var type = symbol.GetSymbolType();
+            symbol.ToString().Should().Be("PropertyBag");
+            type.ToString().Should().Be("System.Collections.Generic.Dictionary<string, object>");
         }
     }
 }

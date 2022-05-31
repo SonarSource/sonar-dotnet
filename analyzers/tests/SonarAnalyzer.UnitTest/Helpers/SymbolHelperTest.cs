@@ -32,6 +32,7 @@ namespace SonarAnalyzer.UnitTest.Helpers
 namespace NS
 {
   using System.Collections.Generic;
+  using PropertyBag = System.Collections.Generic.Dictionary<string, object>;
 
   public class Base
   {
