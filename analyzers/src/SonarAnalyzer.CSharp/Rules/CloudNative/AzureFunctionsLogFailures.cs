@@ -53,7 +53,7 @@ namespace SonarAnalyzer.Rules.CSharp
             {
                 var catchClause = (CatchClauseSyntax)c.Node;
                 if (c.AzureFunctionMethod() is { } entryPoint
-                    && HasLoggerInScope(entryPoint, c.CancellationToken))
+                    && HasLoggerInScope(entryPoint))
                 {
                     var walker = new LoggerCallWalker(c.SemanticModel, c.CancellationToken);
                     walker.SafeVisit(catchClause.Block);
@@ -68,31 +68,27 @@ namespace SonarAnalyzer.Rules.CSharp
             },
             SyntaxKind.CatchClause);
 
-        private static bool HasLoggerInScope(IMethodSymbol entryPoint, CancellationToken cancellationToken) =>
+        private static bool HasLoggerInScope(IMethodSymbol entryPoint) =>
             entryPoint.Parameters.Any(x => x.Type.DerivesOrImplements(KnownType.Microsoft_Extensions_Logging_ILogger))
                 // Instance method entry points might have access to an ILogger via injected fields/properties
                 // https://docs.microsoft.com/en-us/azure/azure-functions/functions-dotnet-dependency-injection
                 || (entryPoint is { IsStatic: false, ContainingType: { } container }
-                    && HasLoggerMember(container, cancellationToken) is not null);
+                    && HasLoggerMember(container));
 
-        internal static ISymbol HasLoggerMember(ITypeSymbol typeSymbol, CancellationToken cancellationToken)
+        internal static bool HasLoggerMember(ITypeSymbol typeSymbol)
         {
             var isOriginalType = true;
             foreach (var type in typeSymbol.GetSelfAndBaseTypes())
             {
-                cancellationToken.ThrowIfCancellationRequested();
-                if (type.GetMembers().FirstOrDefault(x => x.Kind is SymbolKind.Field or SymbolKind.Property
-                                                          && AccessibilityValid(x.GetEffectiveAccessibility(), isOriginalType)
-                                                          && x.GetSymbolType()?.DerivesOrImplements(KnownType.Microsoft_Extensions_Logging_ILogger) is true) is { } result)
+                if (type.GetMembers().Any(x => x.Kind is SymbolKind.Field or SymbolKind.Property
+                                               && (isOriginalType || x.GetEffectiveAccessibility() != Accessibility.Private)
+                                               && x.GetSymbolType()?.DerivesOrImplements(KnownType.Microsoft_Extensions_Logging_ILogger) is true))
                 {
-                    return result;
+                    return true;
                 }
                 isOriginalType = false;
             }
-            return null;
-
-            static bool AccessibilityValid(Accessibility accessibility, bool isOriginalType) =>
-                isOriginalType || accessibility != Accessibility.Private;
+            return false;
         }
 
         private sealed class LoggerCallWalker : SafeCSharpSyntaxWalker
@@ -139,10 +135,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
             public override void VisitArgument(ArgumentSyntax node)
             {
-                if (model.GetTypeInfo(node.Expression, cancellationToken).Type?.DerivesOrImplements(KnownType.Microsoft_Extensions_Logging_ILogger) is true)
-                {
-                    HasValidLoggerCall = true;
-                }
+                HasValidLoggerCall = HasValidLoggerCall || model.GetTypeInfo(node.Expression, cancellationToken).Type?.DerivesOrImplements(KnownType.Microsoft_Extensions_Logging_ILogger) is true;
                 base.VisitArgument(node);
             }
 
