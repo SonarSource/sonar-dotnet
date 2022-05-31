@@ -57,6 +57,7 @@ namespace DifferentAssignments
             ClientProperty = new HttpClient(); // FN
             var local = new HttpClient(); // Noncompliant
             local = new System.Net.Http.HttpClient(); // Noncompliant
+            var otherClient = new UriBuilder(); // Compliant
         }
 
         [FunctionName("Sample")]

@@ -52,12 +52,11 @@ namespace SonarAnalyzer.Rules.CSharp
             context.RegisterSyntaxNodeActionInNonGenerated(c =>
                 {
                     var node = c.Node;
-                    if (CreatedResuableClient(c.SemanticModel, node, c.CancellationToken) is { } knownType)
+                    var semanticModel = c.SemanticModel;
+                    if (CreatedResuableClient(semanticModel, node) is { } knownType
+                        && !IsAssignedForReuse(semanticModel, node, c.CancellationToken))
                     {
-                        if (!IsAssignedForReuse(c.SemanticModel, node, c.CancellationToken))
-                        {
-                            c.ReportIssue(Diagnostic.Create(Rule, node.GetLocation()));
-                        }
+                        c.ReportIssue(Diagnostic.Create(Rule, node.GetLocation()));
                     }
                 },
                 SyntaxKind.ObjectCreationExpression, SyntaxKindEx.ImplicitObjectCreationExpression);
@@ -68,45 +67,34 @@ namespace SonarAnalyzer.Rules.CSharp
             {
                 return false;
             }
-            if (IsAssignedToFieldProperty(model, node, cancellationToken)
+            if (IsInPropertyInitializer(node)
                 || IsInFieldInitializer(node)
-                || IsInPropertyInitializer(node))
+                || IsAssignedToFieldOrProperty(model, node, cancellationToken))
             {
                 return true;
             }
 
             return false;
         }
-
-        private static bool IsInPropertyInitializer(SyntaxNode node) =>
-            node.Parent is EqualsValueClauseSyntax { Parent: PropertyDeclarationSyntax };
-
-        private static bool IsAssignedToFieldProperty(SemanticModel model, SyntaxNode node, CancellationToken cancellationToken) => node.Parent is AssignmentExpressionSyntax assignment
-            && assignment.Left is { } identifier
-            && model.GetSymbolInfo(identifier, cancellationToken).Symbol is { } symbol
-            && symbol.Kind is SymbolKind.Field or SymbolKind.Property;
+        private static bool IsAssignedToLocal(SyntaxNode node) =>
+            node.Parent is EqualsValueClauseSyntax { Parent: VariableDeclaratorSyntax { Parent: VariableDeclarationSyntax { Parent: LocalDeclarationStatementSyntax or UsingStatementSyntax } } };
 
         private static bool IsInFieldInitializer(SyntaxNode node) =>
             node.Ancestors().Any(x => x.IsKind(SyntaxKind.FieldDeclaration));
 
-        private static bool IsAssignedToLocal(SyntaxNode node) =>
-            node.Parent is EqualsValueClauseSyntax { Parent: VariableDeclaratorSyntax { Parent: VariableDeclarationSyntax { Parent: LocalDeclarationStatementSyntax or UsingStatementSyntax } } };
+        private static bool IsInPropertyInitializer(SyntaxNode node) =>
+            node.Parent is EqualsValueClauseSyntax { Parent: PropertyDeclarationSyntax };
 
-        private static ITypeSymbol CreatedResuableClient(SemanticModel model, SyntaxNode node, CancellationToken cancellationToken) => node switch
+        private static bool IsAssignedToFieldOrProperty(SemanticModel model, SyntaxNode node, CancellationToken cancellationToken) =>
+            node.Parent is AssignmentExpressionSyntax assignment
+                && assignment.Left is { } identifier
+                && model.GetSymbolInfo(identifier, cancellationToken).Symbol is { } symbol
+                && symbol.Kind is SymbolKind.Field or SymbolKind.Property;
+
+        private static KnownType CreatedResuableClient(SemanticModel model, SyntaxNode node)
         {
-            ObjectCreationExpressionSyntax objectCreationExpression =>
-                objectCreationExpression.Type is NameSyntax name
-                && name.GetIdentifier()?.Identifier.Text is { } typeName
-                && Clients.FirstOrDefault(x => x.ShortName == typeName) is { } knownResuableClient
-                && model.GetSymbolInfo(name, cancellationToken).Symbol is ITypeSymbol typeSymbol
-                && typeSymbol.Is(knownResuableClient)
-                    ? typeSymbol
-                    : null,
-            { RawKind: (int)SyntaxKindEx.ImplicitObjectCreationExpression } =>
-                ObjectCreationFactory.Create(node).TypeSymbol(model) is { } typeSymbol
-                && typeSymbol.IsAny(Clients)
-                    ? typeSymbol
-                    : null,
-        };
+            var objectCreation = ObjectCreationFactory.Create(node);
+            return Clients.FirstOrDefault(x => objectCreation.IsKnownType(x, model));
+        }
     }
 }
