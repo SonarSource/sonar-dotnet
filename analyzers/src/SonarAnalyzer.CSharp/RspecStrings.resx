@@ -12943,6 +12943,39 @@
   <data name="S6423_Type" xml:space="preserve">
     <value>CODE_SMELL</value>
   </data>
+  <data name="S6424_Category" xml:space="preserve">
+    <value>Blocker Code Smell</value>
+  </data>
+  <data name="S6424_Description" xml:space="preserve">
+    <value>The recommended way to access Azure Durable Entities is Interfaces via generated proxy objects.</value>
+  </data>
+  <data name="S6424_IsActivatedByDefault" xml:space="preserve">
+    <value>True</value>
+  </data>
+  <data name="S6424_Remediation" xml:space="preserve">
+    <value>Constant/Issue</value>
+  </data>
+  <data name="S6424_RemediationCost" xml:space="preserve">
+    <value>30min</value>
+  </data>
+  <data name="S6424_Scope" xml:space="preserve">
+    <value>Main</value>
+  </data>
+  <data name="S6424_Severity" xml:space="preserve">
+    <value>Blocker</value>
+  </data>
+  <data name="S6424_Status" xml:space="preserve">
+    <value>ready</value>
+  </data>
+  <data name="S6424_Tags" xml:space="preserve">
+    <value>design</value>
+  </data>
+  <data name="S6424_Title" xml:space="preserve">
+    <value>Azure Functions: Restrictions on entity interfaces.</value>
+  </data>
+  <data name="S6424_Type" xml:space="preserve">
+    <value>CODE_SMELL</value>
+  </data>
   <data name="S818_Category" xml:space="preserve">
     <value>Minor Code Smell</value>
   </data>
