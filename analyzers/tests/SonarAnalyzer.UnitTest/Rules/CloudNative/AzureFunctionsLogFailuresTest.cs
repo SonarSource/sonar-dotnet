@@ -90,6 +90,5 @@ using System;
 ";
             builder.AddSnippet(code).Verify();
         }
-
     }
 }
