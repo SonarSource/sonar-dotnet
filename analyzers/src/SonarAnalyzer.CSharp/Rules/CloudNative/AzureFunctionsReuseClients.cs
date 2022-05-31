@@ -25,6 +25,7 @@ using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
+using SonarAnalyzer.Extensions;
 using SonarAnalyzer.Helpers;
 using SonarAnalyzer.Wrappers;
 using StyleCop.Analyzers.Lightup;
@@ -60,12 +61,15 @@ namespace SonarAnalyzer.Rules.CSharp
         protected override void Initialize(SonarAnalysisContext context) =>
             context.RegisterSyntaxNodeActionInNonGenerated(c =>
             {
-                var node = c.Node;
-                var semanticModel = c.SemanticModel;
-                if (CreatedResuableClient(semanticModel, node) is { } knownType
-                    && !IsAssignedForReuse(semanticModel, node, c.CancellationToken))
+                if (c.AzureFunctionMethod() is not null)
                 {
-                    c.ReportIssue(Diagnostic.Create(Rule, node.GetLocation()));
+                    var node = c.Node;
+                    var semanticModel = c.SemanticModel;
+                    if (CreatedResuableClient(semanticModel, node) is { } knownType
+                        && !IsAssignedForReuse(semanticModel, node, c.CancellationToken))
+                    {
+                        c.ReportIssue(Diagnostic.Create(Rule, node.GetLocation()));
+                    }
                 }
             },
             SyntaxKind.ObjectCreationExpression, SyntaxKindEx.ImplicitObjectCreationExpression);
