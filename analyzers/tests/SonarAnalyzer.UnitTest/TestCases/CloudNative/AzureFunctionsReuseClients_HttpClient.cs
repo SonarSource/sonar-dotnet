@@ -147,10 +147,16 @@ namespace DependencyInjection
         private HttpClient ClientProperty { get; set; } = new HttpClient();    // Compliant
         private HttpClient ClientPropertyAccessor { get => new HttpClient(); } // FN
 
+        public FunctionApp1(HttpClient httpClient)
+        {
+            clientField = httpClient;    // Compliant
+            ClientProperty = httpClient; // Compliant
+        }
+
         public FunctionApp1()
         {
-            clientField = new HttpClient();    // Compliant
-            ClientProperty = new HttpClient(); // Compliant
+            clientField = new HttpClient();    // FN. HttpClient should be injected. This is more related to DI than AzureFunctions and should therefore not be detected here.
+            ClientProperty = new HttpClient(); // FN
         }
 
         [FunctionName("Sample")]
