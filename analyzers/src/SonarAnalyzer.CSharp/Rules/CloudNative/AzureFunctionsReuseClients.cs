@@ -59,16 +59,16 @@ namespace SonarAnalyzer.Rules.CSharp
 
         protected override void Initialize(SonarAnalysisContext context) =>
             context.RegisterSyntaxNodeActionInNonGenerated(c =>
+            {
+                var node = c.Node;
+                var semanticModel = c.SemanticModel;
+                if (CreatedResuableClient(semanticModel, node) is { } knownType
+                    && !IsAssignedForReuse(semanticModel, node, c.CancellationToken))
                 {
-                    var node = c.Node;
-                    var semanticModel = c.SemanticModel;
-                    if (CreatedResuableClient(semanticModel, node) is { } knownType
-                        && !IsAssignedForReuse(semanticModel, node, c.CancellationToken))
-                    {
-                        c.ReportIssue(Diagnostic.Create(Rule, node.GetLocation()));
-                    }
-                },
-                SyntaxKind.ObjectCreationExpression, SyntaxKindEx.ImplicitObjectCreationExpression);
+                    c.ReportIssue(Diagnostic.Create(Rule, node.GetLocation()));
+                }
+            },
+            SyntaxKind.ObjectCreationExpression, SyntaxKindEx.ImplicitObjectCreationExpression);
 
         private static bool IsAssignedForReuse(SemanticModel model, SyntaxNode node, CancellationToken cancellationToken)
         {

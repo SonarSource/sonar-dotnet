@@ -60,6 +60,11 @@ namespace DifferentAssignments
             var otherClient = new UriBuilder(); // Compliant
         }
 
+        public static void NotAnAzureFunction()
+        {
+            var local = new HttpClient(); // Compliant
+        }
+
         [FunctionName("Sample")]
         public static void AssignInCondition()
         {
