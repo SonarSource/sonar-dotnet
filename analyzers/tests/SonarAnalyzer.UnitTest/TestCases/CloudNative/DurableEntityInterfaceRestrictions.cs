@@ -175,6 +175,7 @@ public class UseDurableOrchestrationContext
     {
         context.CreateEntityProxy<>("key");             // Error [CS0305]: Using the generic method group 'CreateEntityProxy' requires 1 type arguments
         context.CreateEntityProxy<Undefined>("key");    // Error [CS0246]: The type or namespace name 'Undefined' could not be found
+        undefined.CreateEntityProxy<IInvalid>("key");   // Error [CS0246]: The type or namespace name 'undefined' could not be found
     }
 }
 

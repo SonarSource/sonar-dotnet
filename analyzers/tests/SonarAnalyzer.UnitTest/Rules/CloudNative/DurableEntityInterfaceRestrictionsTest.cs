@@ -25,7 +25,9 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class DurableEntityInterfaceRestrictionsTest
     {
-        private readonly VerifierBuilder builder = new VerifierBuilder<DurableEntityInterfaceRestrictions>().WithBasePath("CloudNative").AddReferences(NuGetMetadataReference.MicrosoftAzureWebJobsExtensionsDurableTask());
+        private readonly VerifierBuilder builder = new VerifierBuilder<DurableEntityInterfaceRestrictions>()
+            .WithBasePath("CloudNative")
+            .AddReferences(NuGetMetadataReference.MicrosoftAzureWebJobsExtensionsDurableTask());
 
         [TestMethod]
         public void DurableEntityInterfaceRestrictions_CS() =>
