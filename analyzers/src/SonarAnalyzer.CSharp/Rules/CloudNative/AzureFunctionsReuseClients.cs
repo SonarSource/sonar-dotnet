@@ -42,7 +42,12 @@ namespace SonarAnalyzer.Rules.CSharp
             KnownType.System_Net_Http_HttpClient,
             KnownType.Microsoft_Azure_Documents_Client_DocumentClient,
             KnownType.Microsoft_Azure_Cosmos_CosmosClient,
+            KnownType.Microsoft_Azure_ServiceBus_MessageSender,
             KnownType.Microsoft_Azure_ServiceBus_QueueClient,
+            KnownType.Microsoft_Azure_ServiceBus_SessionClient,
+            KnownType.Microsoft_Azure_ServiceBus_TopicClient,
+            KnownType.Azure_Messaging_ServiceBus_ServiceBusClient,
+            KnownType.Azure_Messaging_ServiceBus_Administration_ServiceBusAdministrationClient,
             KnownType.StackExchange_Redis_ConnectionMultiplexer);
         // ToDo: Append the list of (usefull) Azure Storage clients (there are dozens).
 
