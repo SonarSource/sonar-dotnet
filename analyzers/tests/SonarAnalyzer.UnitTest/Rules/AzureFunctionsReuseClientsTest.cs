@@ -38,5 +38,16 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         public void AzureFunctionsReuseClients_HttpClient_CS9() =>
             builderHttpClient.AddPaths("AzureFunctionsReuseClients_HttpClient.CSharp9.cs").WithOptions(ParseOptionsHelper.FromCSharp9).Verify();
+
+        [TestMethod]
+        public void AzureFunctionsReuseClients_DocumentClient_CS() =>
+            new VerifierBuilder<AzureFunctionsReuseClients>().WithBasePath("CloudNative")
+            .AddReferences(NuGetMetadataReference.MicrosoftNetSdkFunctions()
+                .Concat(MetadataReferenceFacade.SystemThreadingTasks)
+                .Concat(NuGetMetadataReference.MicrosoftExtensionsHttp())
+                .Concat(NuGetMetadataReference.MicrosoftAzureDocumentDB())
+                )
+            .AddPaths("AzureFunctionsReuseClients_DocumentClient.cs")
+            .Verify();
     }
 }

@@ -60,6 +60,7 @@ namespace SonarAnalyzer.UnitTest.MetadataReferences
         public static References MicrosoftAspNetMvc(string packageVersion) => Create("Microsoft.AspNet.Mvc", packageVersion);
         public static References MicrosoftAspNetSignalRCore(string packageVersion = "2.4.1") => Create("Microsoft.AspNet.SignalR.Core", packageVersion);
         public static References MicrosoftAspNetWebApiCors(string packageVersion) => Create("Microsoft.AspNet.WebApi.Cors", packageVersion);
+        public static References MicrosoftAzureDocumentDB(string packageVersion = Constants.NuGetLatestVersion) => Create("Microsoft.Azure.DocumentDB", packageVersion);
         public static References MicrosoftAzureWebJobs(string packageVersion = Constants.NuGetLatestVersion) => Create("Microsoft.Azure.WebJobs", packageVersion);
         public static References MicrosoftAzureWebJobsCore(string packageVersion = Constants.NuGetLatestVersion) => Create("Microsoft.Azure.WebJobs.Core", packageVersion);
         public static References MicrosoftAzureWebJobsExtensionsDurableTask(string packageVersion = Constants.NuGetLatestVersion) => Create("Microsoft.Azure.WebJobs.Extensions.DurableTask", packageVersion);
