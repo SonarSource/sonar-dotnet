@@ -70,9 +70,10 @@ namespace SonarAnalyzer.Helpers
         internal static readonly KnownType Microsoft_AspNetCore_Razor_Hosting_RazorCompiledItemAttribute = new("Microsoft.AspNetCore.Razor.Hosting.RazorCompiledItemAttribute");
         internal static readonly KnownType Microsoft_Azure_Cosmos_CosmosClient = new("Microsoft.Azure.Cosmos.CosmosClient");
         internal static readonly KnownType Microsoft_Azure_Documents_Client_DocumentClient = new("Microsoft.Azure.Documents.Client.DocumentClient");
-        internal static readonly KnownType Microsoft_Azure_ServiceBus_MessageSender = new("Microsoft.Azure.ServiceBus.MessageSender");
+        internal static readonly KnownType Microsoft_Azure_ServiceBus_Management_ManagementClient = new("Microsoft.Azure.ServiceBus.Management.ManagementClient");
         internal static readonly KnownType Microsoft_Azure_ServiceBus_QueueClient = new("Microsoft.Azure.ServiceBus.QueueClient");
         internal static readonly KnownType Microsoft_Azure_ServiceBus_SessionClient = new("Microsoft.Azure.ServiceBus.SessionClient");
+        internal static readonly KnownType Microsoft_Azure_ServiceBus_SubscriptionClient = new("Microsoft.Azure.ServiceBus.SubscriptionClient");
         internal static readonly KnownType Microsoft_Azure_ServiceBus_TopicClient = new("Microsoft.Azure.ServiceBus.TopicClient");
         internal static readonly KnownType Microsoft_Azure_WebJobs_Extensions_DurableTask_IDurableEntityClient = new("Microsoft.Azure.WebJobs.Extensions.DurableTask.IDurableEntityClient");
         internal static readonly KnownType Microsoft_Azure_WebJobs_Extensions_DurableTask_IDurableEntityContext = new("Microsoft.Azure.WebJobs.Extensions.DurableTask.IDurableEntityContext");
