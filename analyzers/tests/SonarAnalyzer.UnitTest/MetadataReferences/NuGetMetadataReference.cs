@@ -25,6 +25,7 @@ namespace SonarAnalyzer.UnitTest.MetadataReferences
 {
     internal static class NuGetMetadataReference
     {
+#pragma warning disable S103 // Lines should not be too long
         // Hardcoded version
         public static References MicrosoftVisualStudioQualityToolsUnitTestFramework =>
             Create("VS.QualityTools.UnitTestFramework", "15.0.27323.2", null, "Microsoft.VisualStudio.QualityTools.UnitTestFramework.dll");
@@ -61,6 +62,7 @@ namespace SonarAnalyzer.UnitTest.MetadataReferences
         public static References MicrosoftAspNetWebApiCors(string packageVersion) => Create("Microsoft.AspNet.WebApi.Cors", packageVersion);
         public static References MicrosoftAzureWebJobs(string packageVersion = Constants.NuGetLatestVersion) => Create("Microsoft.Azure.WebJobs", packageVersion);
         public static References MicrosoftAzureWebJobsCore(string packageVersion = Constants.NuGetLatestVersion) => Create("Microsoft.Azure.WebJobs.Core", packageVersion);
+        public static References MicrosoftAzureWebJobsExtensionsDurableTask(string packageVersion = Constants.NuGetLatestVersion) => Create("Microsoft.Azure.WebJobs.Extensions.DurableTask", packageVersion);
         public static References MicrosoftAzureWebJobsExtensionsHttp(string packageVersion = Constants.NuGetLatestVersion) => Create("Microsoft.Azure.WebJobs.Extensions.Http", packageVersion);
         public static References MicrosoftBuildNoTargets(string packageVersion = "3.1.0") => Create("Microsoft.Build.NoTargets", packageVersion);
         public static References MicrosoftDataSqliteCore(string packageVersion = "2.0.0") => Create("Microsoft.Data.Sqlite.Core", packageVersion);
