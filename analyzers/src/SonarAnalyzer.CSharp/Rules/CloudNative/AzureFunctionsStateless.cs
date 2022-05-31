@@ -24,17 +24,12 @@ using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
+using SonarAnalyzer.Extensions;
 using SonarAnalyzer.Helpers;
 using StyleCop.Analyzers.Lightup;
 
 namespace SonarAnalyzer.Rules.CSharp
 {
-    public static class Fixme   // FIXME: Remove temporary workaround
-    {
-        public static bool IsAzureFunction(this SyntaxNodeAnalysisContext context) =>
-            context.ContainingSymbol.GetAttributes().Any(x => x.AttributeClass.Name.Contains("FunctionName"));
-    }
-
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
     public sealed class AzureFunctionsStateless : SonarDiagnosticAnalyzer
     {
@@ -85,7 +80,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private static void CheckTarget(SyntaxNodeAnalysisContext context, ExpressionSyntax target)
         {
-            if (context.IsAzureFunction()
+            if (context.AzureFunctionMethod() is not null
                 && context.SemanticModel.GetSymbolInfo((target as ElementAccessExpressionSyntax)?.Expression ?? target).Symbol is { } symbol
                 && symbol.IsStatic)
             {
