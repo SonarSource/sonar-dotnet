@@ -25,11 +25,13 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class AzureFunctionsReuseClientsTest
     {
-        private readonly VerifierBuilder builderHttpClient = new VerifierBuilder<AzureFunctionsReuseClients>().WithBasePath("CloudNative")
+        private static VerifierBuilder CommonBuilder() => new VerifierBuilder<AzureFunctionsReuseClients>().WithBasePath("CloudNative")
             .AddReferences(NuGetMetadataReference.MicrosoftNetSdkFunctions()
-                .Concat(NuGetMetadataReference.SystemNetHttp())
-                .Concat(NuGetMetadataReference.MicrosoftExtensionsHttp())
                 .Concat(MetadataReferenceFacade.SystemThreadingTasks));
+
+        private readonly VerifierBuilder builderHttpClient = CommonBuilder()
+            .AddReferences(NuGetMetadataReference.SystemNetHttp()
+                .Concat(NuGetMetadataReference.MicrosoftExtensionsHttp()));
 
         [TestMethod]
         public void AzureFunctionsReuseClients_HttpClient_CS() =>
@@ -40,13 +42,8 @@ namespace SonarAnalyzer.UnitTest.Rules
             builderHttpClient.AddPaths("AzureFunctionsReuseClients_HttpClient.CSharp9.cs").WithOptions(ParseOptionsHelper.FromCSharp9).Verify();
 
         [TestMethod]
-        public void AzureFunctionsReuseClients_DocumentClient_CS() =>
-            new VerifierBuilder<AzureFunctionsReuseClients>().WithBasePath("CloudNative")
-            .AddReferences(NuGetMetadataReference.MicrosoftNetSdkFunctions()
-                .Concat(MetadataReferenceFacade.SystemThreadingTasks)
-                .Concat(NuGetMetadataReference.MicrosoftExtensionsHttp())
-                .Concat(NuGetMetadataReference.MicrosoftAzureDocumentDB())
-                )
+        public void AzureFunctionsReuseClients_DocumentClient_CS() => CommonBuilder()
+            .AddReferences(NuGetMetadataReference.MicrosoftAzureDocumentDB())
             .AddPaths("AzureFunctionsReuseClients_DocumentClient.cs")
             .Verify();
     }
