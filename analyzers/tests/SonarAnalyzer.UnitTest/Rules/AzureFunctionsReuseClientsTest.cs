@@ -58,5 +58,11 @@ namespace SonarAnalyzer.UnitTest.Rules
             .AddReferences(NuGetMetadataReference.MicrosoftAzureServiceBus())
             .AddPaths("AzureFunctionsReuseClients_ServiceBusV5.cs")
             .Verify();
+
+        [TestMethod]
+        public void AzureFunctionsReuseClients_ServiceBusV7_CS() => CommonBuilder()
+            .AddReferences(NuGetMetadataReference.AzureMessagingServiceBus())
+            .AddPaths("AzureFunctionsReuseClients_ServiceBusV7.cs")
+            .Verify();
     }
 }
