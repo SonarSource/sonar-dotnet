@@ -46,5 +46,11 @@ namespace SonarAnalyzer.UnitTest.Rules
             .AddReferences(NuGetMetadataReference.MicrosoftAzureDocumentDB())
             .AddPaths("AzureFunctionsReuseClients_DocumentClient.cs")
             .Verify();
+
+        [TestMethod]
+        public void AzureFunctionsReuseClients_CosmosClient_CS() => CommonBuilder()
+            .AddReferences(NuGetMetadataReference.MicrosoftAzureCosmos())
+            .AddPaths("AzureFunctionsReuseClients_CosmosClient.cs")
+            .Verify();
     }
 }
