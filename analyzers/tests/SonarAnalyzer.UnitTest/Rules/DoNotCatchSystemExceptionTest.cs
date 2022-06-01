@@ -40,11 +40,11 @@ namespace SonarAnalyzer.UnitTest.Rules
 #if NET
         [TestMethod]
         public void DoNotCatchSystemException_CSharp9() =>
-            builder.AddPaths("DoNotCatchSystemException.CSharp9.cs").WithOptions(ParseOptionsHelper.FromCSharp9).Verify();
+            builder.AddPaths("DoNotCatchSystemException.CSharp9.cs").WithTopLevelStatements().Verify();
 
         [TestMethod]
         public void DoNotCatchSystemException_CSharp10() =>
-            builder.AddPaths("DoNotCatchSystemException.CSharp10.cs").WithOptions(ParseOptionsHelper.FromCSharp10).Verify();
+            builder.AddPaths("DoNotCatchSystemException.CSharp10.cs").WithOptions(ParseOptionsHelper.FromCSharp10).WithTopLevelStatements().Verify();
 #endif
     }
 }
