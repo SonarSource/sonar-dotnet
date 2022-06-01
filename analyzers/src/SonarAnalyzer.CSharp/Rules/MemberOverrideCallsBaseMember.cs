@@ -40,6 +40,7 @@ namespace SonarAnalyzer.Rules.CSharp
         private static readonly DiagnosticDescriptor Rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
 
         private static readonly HashSet<string> IgnoredMethodNames = new HashSet<string> { "Equals", "GetHashCode" };
+        private static readonly HashSet<string> IgnoredRecordMethodNames = new HashSet<string> { "ToString", "PrintMembers" };
 
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
 
@@ -167,7 +168,7 @@ namespace SonarAnalyzer.Rules.CSharp
             || IsRecordCompilerGenerated(methodSymbol);
 
         private static bool IsRecordCompilerGenerated(IMethodSymbol methodSymbol) =>
-            methodSymbol.Name == nameof(object.ToString)
+            IgnoredRecordMethodNames.Contains(methodSymbol.Name)
             && methodSymbol.ContainingSymbol is ITypeSymbol type
             && type.IsRecord();
 
