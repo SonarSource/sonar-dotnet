@@ -1,0 +1,17 @@
+{
+  "title": "Azure Functions should use Structured Error Handling.",
+  "type": "CODE_SMELL",
+  "status": "ready",
+  "remediation": {
+    "func": "Constant\/Issue",
+    "constantCost": "1min"
+  },
+  "tags": [
+    "error-handling"
+  ],
+  "defaultSeverity": "Major",
+  "ruleSpecification": "RSPEC-6421",
+  "sqKey": "S6421",
+  "scope": "Main",
+  "quickfix": "unknown"
+}

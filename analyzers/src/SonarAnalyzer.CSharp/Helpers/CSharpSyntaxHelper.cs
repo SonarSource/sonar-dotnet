@@ -310,6 +310,7 @@ namespace SonarAnalyzer.Helpers
             expression switch
             {
                 MemberAccessExpressionSyntax memberAccess => memberAccess.Name.Identifier.ValueText,
+                QualifiedNameSyntax qualifiedName => qualifiedName.Right.Identifier.ValueText,
                 SimpleNameSyntax simpleNameSyntax => simpleNameSyntax.Identifier.ValueText,
                 NameSyntax nameSyntax => nameSyntax.GetText().ToString(),
                 _ => string.Empty
