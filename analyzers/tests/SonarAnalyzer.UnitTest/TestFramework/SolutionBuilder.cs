@@ -69,10 +69,6 @@ namespace SonarAnalyzer.UnitTest.TestFramework
 
         private ProjectBuilder AddProject(AnalyzerLanguage language, string projectName, bool createExtraEmptyFile, OutputKind outputKind = OutputKind.DynamicallyLinkedLibrary)
         {
-            if (language != AnalyzerLanguage.CSharp && language != AnalyzerLanguage.VisualBasic)
-            {
-                throw new UnexpectedLanguageException(language);
-            }
             var project = solution.AddProject(projectName, projectName, language.LanguageName);
             var compilationOptions = project.CompilationOptions.WithOutputKind(outputKind);
             compilationOptions = language.LanguageName switch

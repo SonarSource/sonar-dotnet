@@ -19,169 +19,42 @@
  */
 
 using System;
+using System.IO;
 using Microsoft.CodeAnalysis;
 
 namespace SonarAnalyzer.Common
 {
     public sealed class AnalyzerLanguage
     {
-        private const string CsLiteral = "cs";
-        private const string VbLiteral = "vbnet";
+        public static readonly AnalyzerLanguage CSharp = new(LanguageNames.CSharp, ".cs");
+        public static readonly AnalyzerLanguage VisualBasic = new(LanguageNames.VisualBasic, ".vb");
 
-        public static readonly AnalyzerLanguage None = new AnalyzerLanguage("none");
-        public static readonly AnalyzerLanguage CSharp = new AnalyzerLanguage(CsLiteral);
-        public static readonly AnalyzerLanguage VisualBasic = new AnalyzerLanguage(VbLiteral);
-        public static readonly AnalyzerLanguage Both = new AnalyzerLanguage("both");
+        public string LanguageName { get; }
+        public string FileExtension { get; }
 
-        private readonly string language;
-
-        public string LanguageName
+        private AnalyzerLanguage(string languageName, string fileExtension)
         {
-            get
-            {
-                if (this == CSharp)
-                {
-                    return LanguageNames.CSharp;
-                }
-                else if (this == VisualBasic)
-                {
-                    return LanguageNames.VisualBasic;
-                }
-                else
-                {
-                    throw new NotSupportedException($"Can't get language name for '{ToString()}'.");
-                }
-            }
+            LanguageName = languageName;
+            FileExtension = fileExtension;
         }
-
-        public string RepositoryKey
-        {
-            get
-            {
-                if (this == CSharp)
-                {
-                    return "csharpsquid";
-                }
-                else if (this == VisualBasic)
-                {
-                    return "vbnet";
-                }
-                else
-                {
-                    throw new NotSupportedException($"Quality profile can only be queried for a single language. But was called on '{ToString()}'.");
-                }
-            }
-        }
-
-        public string DirectoryName
-        {
-            get
-            {
-                if (this == CSharp)
-                {
-                    return "CSharp";
-                }
-                else if (this == VisualBasic)
-                {
-                    return "VisualBasic";
-                }
-                else
-                {
-                    throw new NotSupportedException($"Can't get folder name for '{ToString()}'.");
-                }
-            }
-        }
-
-        public string FileExtension
-        {
-            get
-            {
-                if (this == CSharp)
-                {
-                    return ".cs";
-                }
-                else if (this == VisualBasic)
-                {
-                    return ".vb";
-                }
-                else
-                {
-                    throw new NotSupportedException($"Can't get file extension for '{ToString()}'.");
-                }
-            }
-        }
-
-        public string ResourceSuffix
-        {
-            get
-            {
-                if (this == CSharp)
-                {
-                    return "_cs";
-                }
-                else if (this == VisualBasic)
-                {
-                    return "_vb";
-                }
-                else
-                {
-                    throw new NotSupportedException($"Can't get resource suffix for '{ToString()}'.");
-                }
-            }
-        }
-
-        private AnalyzerLanguage(string language) =>
-            this.language = language;
 
         public override string ToString() =>
-            language;
-
-        public AnalyzerLanguage AddLanguage(AnalyzerLanguage other)
-        {
-            if (other == null)
-            {
-                throw new ArgumentNullException(nameof(other));
-            }
-            else if (this == None || this == other)
-            {
-                return other;
-            }
-            else
-            {
-                return Both;
-            }
-        }
-
-        public bool IsAlso(AnalyzerLanguage other)
-        {
-            _ = other ?? throw new ArgumentNullException(nameof(other));
-            return other == None
-                ? throw new NotSupportedException("IsAlso doesn't support AnalyzerLanguage.None.")
-                : this == other || this == Both;
-        }
-
-        public static AnalyzerLanguage Parse(string language) =>
-            language switch
-            {
-                CsLiteral => CSharp,
-                VbLiteral => VisualBasic,
-                _ => throw new NotSupportedException($"Argument needs to be '{CsLiteral}' or '{VbLiteral}', but found: '{language}'.")
-            };
-
-        public static AnalyzerLanguage FromPath(string path) =>
-            System.IO.Path.GetExtension(path).ToUpperInvariant() switch
-            {
-                ".CS" => CSharp,
-                ".VB" => VisualBasic,
-                _ => None
-            };
+            LanguageName;
 
         public static AnalyzerLanguage FromName(string name) =>
             name switch
             {
                 LanguageNames.CSharp => CSharp,
                 LanguageNames.VisualBasic => VisualBasic,
-                _ => None
+                _ => throw new NotSupportedException("Unsupported language name: " + name)
+            };
+
+        public static AnalyzerLanguage FromPath(string path) =>
+            Path.GetExtension(path).ToUpperInvariant() switch
+            {
+                ".CS" => CSharp,
+                ".VB" => VisualBasic,
+                _ => throw new NotSupportedException("Unsupported file extension: " + Path.GetExtension(path))
             };
     }
 }
