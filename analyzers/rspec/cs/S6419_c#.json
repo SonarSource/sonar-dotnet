@@ -1,0 +1,17 @@
+{
+  "title": "Azure Functions should be stateless.",
+  "type": "CODE_SMELL",
+  "status": "ready",
+  "remediation": {
+    "func": "Constant\/Issue",
+    "constantCost": "1h"
+  },
+  "tags": [
+    "bad-practice"
+  ],
+  "defaultSeverity": "Major",
+  "ruleSpecification": "RSPEC-6419",
+  "sqKey": "S6419",
+  "scope": "Main",
+  "quickfix": "infeasible"
+}

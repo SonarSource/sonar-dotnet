@@ -12844,6 +12844,39 @@
   <data name="S6354_Type" xml:space="preserve">
     <value>CODE_SMELL</value>
   </data>
+  <data name="S6419_Category" xml:space="preserve">
+    <value>Major Code Smell</value>
+  </data>
+  <data name="S6419_Description" xml:space="preserve">
+    <value>An Azure Function should be stateless as there’s no control over where and when function instances are provisioned and de-provisioned. Managing and storing data/state between requests can lead to inconsistencies. If, for any reason, you need to have a stateful function, consider using the Durable Functions extension of Azure Functions.</value>
+  </data>
+  <data name="S6419_IsActivatedByDefault" xml:space="preserve">
+    <value>True</value>
+  </data>
+  <data name="S6419_Remediation" xml:space="preserve">
+    <value>Constant/Issue</value>
+  </data>
+  <data name="S6419_RemediationCost" xml:space="preserve">
+    <value>1h</value>
+  </data>
+  <data name="S6419_Scope" xml:space="preserve">
+    <value>Main</value>
+  </data>
+  <data name="S6419_Severity" xml:space="preserve">
+    <value>Major</value>
+  </data>
+  <data name="S6419_Status" xml:space="preserve">
+    <value>ready</value>
+  </data>
+  <data name="S6419_Tags" xml:space="preserve">
+    <value>bad-practice</value>
+  </data>
+  <data name="S6419_Title" xml:space="preserve">
+    <value>Azure Functions should be stateless.</value>
+  </data>
+  <data name="S6419_Type" xml:space="preserve">
+    <value>CODE_SMELL</value>
+  </data>
   <data name="S6421_Category" xml:space="preserve">
     <value>Major Code Smell</value>
   </data>
