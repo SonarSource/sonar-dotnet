@@ -213,8 +213,8 @@
             <configuration>
               <rules>
                 <requireFilesSize>
-                  <maxsize>5400000</maxsize>
-                  <minsize>5200000</minsize>
+                  <maxsize>5500000</maxsize>
+                  <minsize>5300000</minsize>
                   <files>
                     <file>${project.build.directory}/${project.build.finalName}.jar</file>
                   </files>
