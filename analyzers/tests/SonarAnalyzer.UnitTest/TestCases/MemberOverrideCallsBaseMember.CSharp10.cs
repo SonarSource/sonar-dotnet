@@ -41,7 +41,7 @@ record Derived : Base
 
 namespace CompilerGeneratedMethods
 {
-    record BaseWithOverride
+    record Base
     {
         public override string ToString() => "Some custom ToString";
     }
