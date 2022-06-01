@@ -29,16 +29,20 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         public void FunctionComplexity_CS() =>
-            OldVerifier.VerifyAnalyzer(@"TestCases\FunctionComplexity.cs", new CS.FunctionComplexity { Maximum = 3 }, ParseOptionsHelper.FromCSharp8);
+            CreateCSBuilder(3).AddPaths("FunctionComplexity.cs").WithOptions(ParseOptionsHelper.FromCSharp8).Verify();
+
+        [TestMethod]
+        public void FunctionComplexity_LocalFunctions() =>
+            CreateCSBuilder(3).AddPaths("FunctionComplexity.LocalFunctions.cs").WithOptions(ParseOptionsHelper.FromCSharp8).Verify();
 
 #if NET
         [TestMethod]
         public void FunctionComplexity_CSharp9() =>
-            OldVerifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\FunctionComplexity.CSharp9.cs", new CS.FunctionComplexity { Maximum = 3 });
+            CreateCSBuilder(3).AddPaths("FunctionComplexity.CSharp9.cs").WithTopLevelStatements().Verify();
 
         [TestMethod]
         public void FunctionComplexity_CSharp10() =>
-            OldVerifier.VerifyAnalyzerFromCSharp10Library(@"TestCases\FunctionComplexity.CSharp10.cs", new CS.FunctionComplexity { Maximum = 1 });
+            CreateCSBuilder(1).AddPaths("FunctionComplexity.CSharp10.cs").WithOptions(ParseOptionsHelper.FromCSharp10).Verify();
 #endif
 
         [TestMethod]
@@ -46,12 +50,17 @@ namespace SonarAnalyzer.UnitTest.Rules
         {
             if (!TestContextHelper.IsAzureDevOpsContext) // ToDo: Test doesn't work on Azure DevOps
             {
-                OldVerifier.VerifyAnalyzer(@"TestCases\SyntaxWalker_InsufficientExecutionStackException.cs", new CS.FunctionComplexity { Maximum = 3 });
+                CreateCSBuilder(3).AddPaths("SyntaxWalker_InsufficientExecutionStackException.cs").Verify();
             }
         }
 
         [TestMethod]
         public void FunctionComplexity_VB() =>
-            OldVerifier.VerifyAnalyzer(@"TestCases\FunctionComplexity.vb", new VB.FunctionComplexity { Maximum = 3 });
+            new VerifierBuilder().AddAnalyzer(() => new VB.FunctionComplexity { Maximum = 3 })
+                .AddPaths("FunctionComplexity.vb")
+                .Verify();
+
+        private static VerifierBuilder CreateCSBuilder(int maxComplexityScore) =>
+            new VerifierBuilder().AddAnalyzer(() => new CS.FunctionComplexity { Maximum = maxComplexityScore });
     }
 }

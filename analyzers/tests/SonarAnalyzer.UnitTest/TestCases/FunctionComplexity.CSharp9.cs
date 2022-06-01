@@ -1,13 +1,20 @@
 ﻿// Noncompliant [0]
 if (false) { }  // Secondary [0] {{+1}}
-if (false) { }  // Secondary [0] {{+1}}
-if (false) { }  // Secondary [0] {{+1}}
 
 void TopLevelLocalFunction()
 {
     if (false) { }  // Secondary [0] {{+1}}
     if (false) { }  // Secondary [0] {{+1}}
     if (false) { }  // Secondary [0] {{+1}}
+}
+
+static void StaticTopLevelLocalFunction() // Compliant, static local functions do not count in the overall top level statement complexity computation.
+                                          // They are considered methods by themselves with their own complexity score.
+                                          // See: https://github.com/SonarSource/sonar-dotnet/issues/5625
+{
+    if (false) { }
+    if (false) { }
+    if (false) { }
 }
 
 public record FunctionComplexity

@@ -67,7 +67,10 @@ namespace SonarAnalyzer.Metrics.CSharp
             {
                 foreach (var globalStatement in node.Members.Where(x => x.IsKind(SyntaxKind.GlobalStatement)))
                 {
-                    base.Visit(globalStatement);
+                    if (!IsStaticLocalFunction((GlobalStatementSyntax)globalStatement))
+                    {
+                        base.Visit(globalStatement);
+                    }
                 }
 
                 if (!onlyGlobalStatements)
@@ -201,12 +204,22 @@ namespace SonarAnalyzer.Metrics.CSharp
                     AddLocation(binaryPatternNode.OperatorToken);
                 }
 
-                base.Visit(node);
+                if (!IsStaticLocalFunction(node))
+                {
+                    base.Visit(node);
+                }
             }
 
             private void AddLocation(SyntaxToken node) => IncrementLocations.Add(new SecondaryLocation(node.GetLocation(), "+1"));
 
             private static bool HasBody(SyntaxNode node) => node.ChildNodes().AnyOfKind(SyntaxKind.Block);
+
+            private static bool IsStaticLocalFunction(GlobalStatementSyntax node) =>
+                IsStaticLocalFunction(node.Statement);
+
+            private static bool IsStaticLocalFunction(SyntaxNode node) =>
+                node.IsKind(SyntaxKindEx.LocalFunctionStatement)
+                && ((LocalFunctionStatementSyntaxWrapper)node).Modifiers.Any(SyntaxKind.StaticKeyword);
         }
     }
 }
