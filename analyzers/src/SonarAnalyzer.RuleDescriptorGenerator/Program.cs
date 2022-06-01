@@ -44,8 +44,8 @@ namespace SonarAnalyzer.RuleDescriptorGenerator
                     _ => throw new NotSupportedException("Unsupported argument: " + args[0]),
                 };
                 var root = new RuleDescriptorRoot(RuleDetailBuilder.GetAllRuleDetails(language).Select(RuleDetail.Convert));
-                Directory.CreateDirectory(language.ToString());
-                SerializeObjectToFile(Path.Combine(language.ToString(), "rules.xml"), root);
+                Directory.CreateDirectory(args[0]);
+                SerializeObjectToFile(Path.Combine(args[0], "rules.xml"), root);
             }
             else
             {
