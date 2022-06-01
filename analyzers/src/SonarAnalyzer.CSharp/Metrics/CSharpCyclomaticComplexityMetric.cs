@@ -215,8 +215,7 @@ namespace SonarAnalyzer.Metrics.CSharp
             private static bool HasBody(SyntaxNode node) => node.ChildNodes().AnyOfKind(SyntaxKind.Block);
 
             private static bool IsStaticLocalFunction(GlobalStatementSyntax node) =>
-                node.ChildNodes().FirstOrDefault(y => y.IsKind(SyntaxKindEx.LocalFunctionStatement)) is { } localFunction
-                && ((LocalFunctionStatementSyntaxWrapper)localFunction).Modifiers.Any(SyntaxKind.StaticKeyword);
+                IsStaticLocalFunction(node.Statement);
 
             private static bool IsStaticLocalFunction(SyntaxNode node) =>
                 node.IsKind(SyntaxKindEx.LocalFunctionStatement)
