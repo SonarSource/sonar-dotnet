@@ -24,6 +24,7 @@ using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
+using SonarAnalyzer.Extensions;
 using SonarAnalyzer.Helpers;
 using StyleCop.Analyzers.Lightup;
 
@@ -46,7 +47,8 @@ namespace SonarAnalyzer.Rules.CSharp
 
                     if (IsSystemException(catchClause.Declaration, c.SemanticModel)
                         && IsCatchClauseEmptyOrNotPattern(catchClause)
-                        && !IsThrowTheLastStatementInTheBlock(catchClause?.Block))
+                        && !IsThrowTheLastStatementInTheBlock(catchClause?.Block)
+                        && c.AzureFunctionMethod() is null)
                     {
                         c.ReportIssue(Diagnostic.Create(Rule, GetLocation(catchClause)));
                     }

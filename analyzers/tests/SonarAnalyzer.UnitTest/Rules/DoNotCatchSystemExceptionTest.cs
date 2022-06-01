@@ -25,18 +25,26 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class DoNotCatchSystemExceptionTest
     {
+        private readonly VerifierBuilder builder = new VerifierBuilder<DoNotCatchSystemException>();
+
         [TestMethod]
         public void DoNotCatchSystemException() =>
-            OldVerifier.VerifyAnalyzer(@"TestCases\DoNotCatchSystemException.cs", new DoNotCatchSystemException());
+            builder.AddPaths("DoNotCatchSystemException.cs").Verify();
+
+        [TestMethod]
+        public void DoNotCatchSystemException_AzureFunction() => builder
+            .AddReferences(NuGetMetadataReference.MicrosoftAzureWebJobsCore())
+            .AddPaths("DoNotCatchSystemException.AzureFunction.cs")
+            .Verify();
 
 #if NET
         [TestMethod]
         public void DoNotCatchSystemException_CSharp9() =>
-            OldVerifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\DoNotCatchSystemException.CSharp9.cs", new DoNotCatchSystemException());
+            builder.AddPaths("DoNotCatchSystemException.CSharp9.cs").WithOptions(ParseOptionsHelper.FromCSharp9).Verify();
 
         [TestMethod]
         public void DoNotCatchSystemException_CSharp10() =>
-            OldVerifier.VerifyAnalyzerFromCSharp10Console(@"TestCases\DoNotCatchSystemException.CSharp10.cs", new DoNotCatchSystemException());
+            builder.AddPaths("DoNotCatchSystemException.CSharp10.cs").WithOptions(ParseOptionsHelper.FromCSharp10).Verify();
 #endif
     }
 }
