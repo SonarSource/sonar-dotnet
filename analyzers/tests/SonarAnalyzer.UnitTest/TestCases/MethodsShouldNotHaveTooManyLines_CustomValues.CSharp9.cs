@@ -3,7 +3,7 @@ i++;
 i++;
 i++;
 
-void LocalFunction() // Noncompliant {{This top level local function has 4 lines, which is greater than the 2 lines authorized.}}
+void LocalFunction() // Noncompliant {{This local function has 4 lines, which is greater than the 2 lines authorized.}}
 {
     i++;
     i++;
@@ -11,7 +11,7 @@ void LocalFunction() // Noncompliant {{This top level local function has 4 lines
     i++;
 }
 
-static void StaticLocalFunction() // Noncompliant {{This top level local function has 4 lines, which is greater than the 2 lines authorized.}}
+static void StaticLocalFunction() // Noncompliant {{This local function has 4 lines, which is greater than the 2 lines authorized.}}
 {
     int k = 1;
     k++;
@@ -25,14 +25,14 @@ void Compliant()
     i++;
 }
 
-void ABitLonger() // Noncompliant {{This top level local function has 3 lines, which is greater than the 2 lines authorized.}}
+void ABitLonger() // Noncompliant {{This local function has 3 lines, which is greater than the 2 lines authorized.}}
 {
     i++;
     i++;
     i++;
 }
 
-int Lambda(int a, int b, int c) => // Noncompliant {{This top level local function has 3 lines, which is greater than the 2 lines authorized.}}
+int Lambda(int a, int b, int c) => // Noncompliant {{This local function has 3 lines, which is greater than the 2 lines authorized.}}
     a
     + b
     + c;

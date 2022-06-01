@@ -20,6 +20,35 @@ namespace Tests.Diagnostics
                 i++;
                 i++;
             }
+
+            static void StaticLocalFunctionWithManyLines() // Noncompliant {{This static local function has 8 lines, which is greater than the 5 lines authorized.}}
+            {
+                int i = 0;
+                i++;
+                i++;
+                i++;
+                i++;
+                i++;
+                i++;
+                i++;
+            }
+        }
+
+        public void FooBar(int i) // Noncompliant {{This method 'FooBar' has 12 lines, which is greater than the 5 lines authorized. Split it into smaller methods.}}
+        {
+            Console.WriteLine(i);
+
+            void LocalFunctionWithManyLines()
+            {
+                int i = 0;
+                i++;
+                i++;
+                i++;
+                i++;
+                i++;
+                i++;
+                i++;
+            }
         }
     }
 }

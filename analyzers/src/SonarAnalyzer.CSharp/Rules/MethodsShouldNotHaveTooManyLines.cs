@@ -34,12 +34,12 @@ namespace SonarAnalyzer.Rules.CSharp
     public sealed class MethodsShouldNotHaveTooManyLines
         : MethodsShouldNotHaveTooManyLinesBase<SyntaxKind, BaseMethodDeclarationSyntax>
     {
-        private const string TopLevelFunctionMessageFormat = "This top level local function has {0} lines, which is greater than the {1} lines authorized.";
+        private const string LocalFunctionMessageFormat = "{0} local function has {1} lines, which is greater than the {2} lines authorized.";
 
         private static readonly DiagnosticDescriptor DefaultRule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager, false);
-        private static readonly DiagnosticDescriptor TopLevelRule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, TopLevelFunctionMessageFormat, RspecStrings.ResourceManager, false);
+        private static readonly DiagnosticDescriptor LocalFunctionRule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, LocalFunctionMessageFormat, RspecStrings.ResourceManager, false);
 
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(DefaultRule, TopLevelRule);
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(DefaultRule, LocalFunctionRule);
 
         protected override GeneratedCodeRecognizer GeneratedCodeRecognizer =>
             CSharpGeneratedCodeRecognizer.Instance;
@@ -57,13 +57,22 @@ namespace SonarAnalyzer.Rules.CSharp
         {
             context.RegisterSyntaxNodeActionInNonGenerated(c =>
                 {
-                    if (c.ContainingSymbol.IsTopLevelMain())
+                    var containsTopLevelMain = c.ContainingSymbol.IsTopLevelMain();
+                    if (containsTopLevelMain
+                        || ((LocalFunctionStatementSyntaxWrapper)c.Node).Modifiers.Any(SyntaxKind.StaticKeyword))
                     {
                         var wrapper = (LocalFunctionStatementSyntaxWrapper)c.Node;
                         var linesCount = CountLines(wrapper);
                         if (linesCount > Max)
                         {
-                            c.ReportIssue(Diagnostic.Create(TopLevelRule, wrapper.Identifier.GetLocation(), linesCount, Max, MethodKeyword));
+                            c.ReportIssue(
+                                Diagnostic.Create(
+                                    LocalFunctionRule,
+                                    wrapper.Identifier.GetLocation(),
+                                    containsTopLevelMain ? "This" : "This static",
+                                    linesCount,
+                                    Max,
+                                    MethodKeyword));
                         }
                     }
                 },
