@@ -39,8 +39,8 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private static readonly DiagnosticDescriptor Rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
 
-        private static readonly HashSet<string> IgnoredMethodNames = new HashSet<string> { "Equals", "GetHashCode" };
-        private static readonly HashSet<string> IgnoredRecordMethodNames = new HashSet<string> { "ToString", "PrintMembers" };
+        private static readonly string[] IgnoredMethodNames = { "Equals", "GetHashCode" };
+        private static readonly string[] IgnoredRecordMethodNames = { "ToString", "PrintMembers" };
 
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
 
