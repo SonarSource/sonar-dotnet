@@ -25,6 +25,8 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class MemberOverrideCallsBaseMemberTest
     {
+        private readonly VerifierBuilder verifier = new VerifierBuilder<MemberOverrideCallsBaseMember>();
+
         [TestMethod]
         public void MemberOverrideCallsBaseMember() =>
             OldVerifier.VerifyAnalyzer(@"TestCases\MemberOverrideCallsBaseMember.cs", new MemberOverrideCallsBaseMember());

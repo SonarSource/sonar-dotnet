@@ -18,6 +18,7 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Linq;
@@ -162,7 +163,13 @@ namespace SonarAnalyzer.Rules.CSharp
             || IgnoredMethodNames.Contains(methodSymbol.Name)
             || methodSymbol.Parameters.Any(p => p.HasExplicitDefaultValue)
             || methodSymbol.OverriddenMethod.Parameters.Any(p => p.HasExplicitDefaultValue)
-            || SymbolHelper.IsAnyAttributeInOverridingChain(methodSymbol);
+            || SymbolHelper.IsAnyAttributeInOverridingChain(methodSymbol)
+            || IsRecordCompilerGenerated(methodSymbol);
+
+        private static bool IsRecordCompilerGenerated(IMethodSymbol methodSymbol) =>
+            methodSymbol.Name == nameof(object.ToString)
+            && methodSymbol.ContainingSymbol is ITypeSymbol type
+            && type.IsRecord();
 
         private static bool HasDocumentationComment(SyntaxNode node) =>
             node.GetLeadingTrivia()
