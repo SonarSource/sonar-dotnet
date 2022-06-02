@@ -103,11 +103,9 @@ function UpdateTestEntry($rule) {
         return
     }
 
-    $fileToEdit = if ($language -eq "cs") {"CsRuleTypeMapping"} else {"VbRuleTypeMapping"}
+    $fileToEdit = if ($language -eq "cs") {"RuleTypeMappingCS"} else {"RuleTypeMappingVB"}
     $ruleTypeTestCase = "${sonaranalyzerPath}\\tests\\SonarAnalyzer.UnitTest\\PackagingTests\\$fileToEdit.cs"
-    $ruleId = $ruleKey.Substring(1)
-    (Get-Content "${ruleTypeTestCase}") -replace "//\[`"$ruleId`"\]", "[`"$ruleId`"] = `"$ruleType`"" |
-        Set-Content "${ruleTypeTestCase}" -Encoding UTF8
+    (Get-Content "${ruleTypeTestCase}") -replace "//\s*\[`"$ruleKey`"\]", "[`"$ruleKey`"] = `"$ruleType`"" | Set-Content "${ruleTypeTestCase}" -Encoding UTF8
 }
 
 function GetRulesInfo($lang) {

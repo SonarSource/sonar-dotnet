@@ -29,50 +29,38 @@ namespace SonarAnalyzer.UnitTest.PackagingTests
     {
         // Rules that have been deprecated and deleted.
         // When changing this please do not forget to notify the product teams (SQ, SC, SL).
-        private readonly HashSet<string> deletedRules = new () {"S1145", "S1697", "S4142", "S2758", "S2070", "S3693", "S4432", "S2278"};
+        private static readonly HashSet<string> DeletedRules = new() { "S1145", "S1697", "S4142", "S2758", "S2070", "S3693", "S4432", "S2278" };
 
         [TestMethod]
         public void DetectRuleTypeChanges_CS() =>
-            DetectTypeChanges(csharp::SonarAnalyzer.RspecStrings.ResourceManager,
-                              CsRuleTypeMapping.RuleTypesCs,
-                              nameof(CsRuleTypeMapping.RuleTypesCs),
-                              deletedRules);
+            DetectTypeChanges(csharp::SonarAnalyzer.RspecStrings.ResourceManager, RuleTypeMappingCS.Rules, nameof(RuleTypeMappingCS));
 
         [TestMethod]
         public void DetectRuleTypeChanges_VB() =>
-            DetectTypeChanges(vbnet::SonarAnalyzer.RspecStrings.ResourceManager,
-                              VbRuleTypeMapping.RuleTypesVb,
-                              nameof(VbRuleTypeMapping.RuleTypesVb),
-                              deletedRules);
+            DetectTypeChanges(vbnet::SonarAnalyzer.RspecStrings.ResourceManager, RuleTypeMappingVB.Rules, nameof(RuleTypeMappingVB));
 
         [AssertionMethod]
-        private static void DetectTypeChanges(ResourceManager resourceManager,
-                                              IImmutableDictionary<string, string> expectedTypes,
-                                              string expectedTypesName,
-                                              ICollection<string> deletedRules)
+        private static void DetectTypeChanges(ResourceManager resourceManager, IImmutableDictionary<string, string> expectedTypes, string expectedTypesName)
         {
             var items = Enumerable.Range(1, 10000)
-                                  .Select(i => new
+                                  .Select(x => "S" + x)
+                                  .Select(x => new
                                   {
-                                      ExpectedType = expectedTypes.GetValueOrDefault(i.ToString()),
-                                      ActualType = resourceManager.GetString($"S{i}_Type"),
-                                      RuleId = i
+                                      ExpectedType = expectedTypes.GetValueOrDefault(x),
+                                      ActualType = resourceManager.GetString($"{x}_Type"),
+                                      RuleId = x
                                   })
                                   .Where(x => x.ActualType != x.ExpectedType)
                                   .ToList();
 
-            // IMPORTANT: If this test fails, you should add the types of the new rules
-            // in the dictionaries above. It is a manual task, sorry.
-            var newRules = items.Where(x => x.ExpectedType == null);
+            // If this test fails, you should add the types of the new rules in the dictionaries above. It is a manual task, sorry.
+            var newRules = items.Where(x => x.ExpectedType is null);
             newRules.Should().BeEmpty($"you need to add the rules in {expectedTypesName}");
 
-            // IMPORTANT: Rules should not be deleted without careful consideration and prior
-            // deprecation. We need to notify the product teams (SQ, SC, SL) as well.
-            items.Should().NotContain(x => x.ActualType == null && !deletedRules.Contains($"S{x.RuleId}"), "YOU SHOULD NEVER DELETE RULES!");
+            // Rules should not be deleted without careful consideration and prior deprecation. We need to notify the product teams (SQ, SC, SL) as well.
+            items.Should().NotContain(x => x.ActualType == null && !DeletedRules.Contains($"S{x.RuleId}"), "YOU SHOULD NEVER DELETE RULES!");
 
-            // IMPORTANT: If this test fails, you should update the types of the changed rules
-            // in the dictionaries above. Also add a GitHub issue specifying the change of type
-            // and update peach and next.
+            // If this test fails, you should update the types of the changed rules in the dictionaries above. Also add a GitHub issue specifying the change of type and update peach and next.
             var changedRules = items.Where(x => x.ActualType != null && x.ExpectedType != null);
             changedRules.Should().BeEmpty($"you need to change the rules in {expectedTypesName}.");
         }

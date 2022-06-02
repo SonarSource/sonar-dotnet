@@ -157,8 +157,7 @@ End Class", AnalyzerLanguage.VisualBasic);
 
         public static bool IsSecurityHotspot(DiagnosticDescriptor diagnostic)
         {
-            var key = diagnostic.Id.Substring(1);
-            var type = CsRuleTypeMapping.RuleTypesCs.GetValueOrDefault(key) ?? VbRuleTypeMapping.RuleTypesVb.GetValueOrDefault(key);
+            var type = RuleTypeMappingCS.Rules.GetValueOrDefault(diagnostic.Id) ?? RuleTypeMappingVB.Rules.GetValueOrDefault(diagnostic.Id);
             return type == "SECURITY_HOTSPOT";
         }
 
