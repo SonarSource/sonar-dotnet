@@ -12,7 +12,6 @@ lifetime of an application.</p>
 <pre>
     public class HttpExample
     {
-
         [FunctionName("HttpExample")]
         public async Task&lt;IActionResult&gt; Run([HttpTrigger(AuthorizationLevel.Anonymous, "get", Route = null)] HttpRequest request)
         {
@@ -28,9 +27,9 @@ lifetime of an application.</p>
     public class HttpExample
     {
         [FunctionName("HttpExample")]
-        public async Task&lt;IActionResult&gt; Run([HttpTrigger(AuthorizationLevel.Anonymous, "get", Route = null)] HttpRequest request, IHttpClientFactory _clientFactory)
+        public async Task&lt;IActionResult&gt; Run([HttpTrigger(AuthorizationLevel.Anonymous, "get", Route = null)] HttpRequest request, IHttpClientFactory clientFactory)
         {
-            var httpClient = _clientFactory.CreateClient();
+            var httpClient = clientFactory.CreateClient();
             var response = await httpClient.GetAsync("https://example.com");
             // rest of the function
         }

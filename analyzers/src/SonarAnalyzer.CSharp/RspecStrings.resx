@@ -12893,7 +12893,7 @@
     <value>5min</value>
   </data>
   <data name="S6420_Scope" xml:space="preserve">
-    <value>All</value>
+    <value>Main</value>
   </data>
   <data name="S6420_Severity" xml:space="preserve">
     <value>Major</value>
@@ -12905,7 +12905,7 @@
     <value>bad-practice,design</value>
   </data>
   <data name="S6420_Title" xml:space="preserve">
-    <value>Reuse client instances rather than creating new ones with each function invocation.</value>
+    <value>Reuse client instances rather than creating new ones with each Azure Function invocation.</value>
   </data>
   <data name="S6420_Type" xml:space="preserve">
     <value>CODE_SMELL</value>
