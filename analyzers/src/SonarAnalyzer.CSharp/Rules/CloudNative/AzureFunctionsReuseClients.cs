@@ -89,7 +89,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private static bool IsAssignedToFieldOrProperty(SemanticModel model, SyntaxNode node, CancellationToken cancellationToken) =>
             node.Parent.WalkUpParentheses() is AssignmentExpressionSyntax assignment
-                && assignment.Left is { } identifier
+                && assignment.Left.GetIdentifier() is { } identifier
                 && model.GetSymbolInfo(identifier, cancellationToken).Symbol is { } symbol
                 && symbol.Kind is SymbolKind.Field or SymbolKind.Property;
 

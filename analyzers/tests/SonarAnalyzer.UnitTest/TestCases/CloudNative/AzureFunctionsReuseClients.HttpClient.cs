@@ -57,6 +57,7 @@ namespace DifferentAssignments
         public static void Assignments()
         {
             client = new HttpClient();                 // FN. The field is uncoditionally assigned on each call.
+            FunctionApp1.client = new HttpClient();    // FN
             ClientProperty = new HttpClient();         // FN
             ClientProperty = (new HttpClient());       // FN
             someField = (object)(new HttpClient());    // Noncompliant. Some trickery to confuse the analyzer.
