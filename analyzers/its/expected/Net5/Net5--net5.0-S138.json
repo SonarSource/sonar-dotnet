@@ -2,7 +2,7 @@
 "issues":  [
 {
 "id":  "S138",
-"message":  "This top level local function has 81 lines, which is greater than the 80 lines authorized.",
+"message":  "This local function has 81 lines, which is greater than the 80 lines authorized.",
 "location":  {
 "uri":  "sources\Net5\Net5\Main.cs",
 "region":  {
