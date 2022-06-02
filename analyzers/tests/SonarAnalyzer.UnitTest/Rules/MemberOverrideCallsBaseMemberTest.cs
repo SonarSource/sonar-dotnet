@@ -51,5 +51,23 @@ namespace SonarAnalyzer.UnitTest.Rules
             .WithCodeFix<MemberOverrideCallsBaseMemberCodeFix>()
             .WithCodeFixedPaths("MemberOverrideCallsBaseMember.Fixed.cs")
             .VerifyCodeFix();
+
+        [TestMethod]
+        public void MemberOverrideCallsBaseMember_ToString()
+        {
+            var toString = "public override string ToString() => base.ToString();";
+            toString +=
+#if NET
+                "// Noncompliant {{Remove this method 'ToString' to simply inherit its behavior.}}";
+#elif NETFRAMEWORK
+                "// Compliant. ToString has a [__DynamicallyInvokable] attribute in .Net framework";
+#endif
+            verifier.AddSnippet($@"
+                class Test
+                {{
+                    {toString}
+                }}
+                ").Verify();
+        }
     }
 }
