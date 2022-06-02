@@ -8,18 +8,14 @@ namespace Tests.Diagnostics
         [FunctionName("Sample")]
         public void Method()
         {
-            try
-            {
-            }
-            catch (Exception e)    // Compliant. Don't raise for AzureFunctions because it contradicts S6421.
-            {
-            }
+            try { }
+            catch (Exception e) { } // Compliant. Don't raise for AzureFunctions because it contradicts S6421.
 
             try { }
-            catch (Exception) { } // Compliant.
+            catch (Exception) { }   // Compliant.
 
             try { }
-            catch { }             // Compliant.
+            catch { }               // Compliant.
         }
     }
 }
