@@ -41,7 +41,7 @@ namespace SonarAnalyzer.Rules.CSharp
         private static readonly DiagnosticDescriptor Rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
         private static readonly ImmutableArray<KnownType> ReusableClients = ImmutableArray.Create(
             KnownType.System_Net_Http_HttpClient,
-            // ComosDb. DocumentClient is superseeded by CosmosClient
+            // ComosDb (DocumentClient is superseded by CosmosClient)
             KnownType.Microsoft_Azure_Documents_Client_DocumentClient,
             KnownType.Microsoft_Azure_Cosmos_CosmosClient,
             // Servicebus V5
