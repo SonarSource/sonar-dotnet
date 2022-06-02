@@ -25,63 +25,62 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class AzureFunctionsReuseClientsTest
     {
-        private static VerifierBuilder CommonBuilder() => new VerifierBuilder<AzureFunctionsReuseClients>().WithBasePath("CloudNative")
-            .AddReferences(NuGetMetadataReference.MicrosoftNetSdkFunctions()
-                .Concat(MetadataReferenceFacade.SystemThreadingTasks));
-
-        private readonly VerifierBuilder builderHttpClient = CommonBuilder()
-            .AddReferences(NuGetMetadataReference.SystemNetHttp()
-                .Concat(NuGetMetadataReference.MicrosoftExtensionsHttp()));
+        private readonly VerifierBuilder builder = new VerifierBuilder<AzureFunctionsReuseClients>()
+            .WithBasePath("CloudNative")
+            .AddReferences(NuGetMetadataReference.MicrosoftNetSdkFunctions())
+            .AddReferences(MetadataReferenceFacade.SystemThreadingTasks)
+            .AddReferences(NuGetMetadataReference.SystemNetHttp())
+            .AddReferences(NuGetMetadataReference.MicrosoftExtensionsHttp());
 
         [TestMethod]
         public void AzureFunctionsReuseClients_HttpClient_CS() =>
-            builderHttpClient.AddPaths("AzureFunctionsReuseClients_HttpClient.cs").Verify();
+            builder.AddPaths("AzureFunctionsReuseClients_HttpClient.cs").Verify();
 
         [TestMethod]
         public void AzureFunctionsReuseClients_HttpClient_CS9() =>
-            builderHttpClient.AddPaths("AzureFunctionsReuseClients_HttpClient.CSharp9.cs").WithOptions(ParseOptionsHelper.FromCSharp9).Verify();
+            builder.AddPaths("AzureFunctionsReuseClients_HttpClient.CSharp9.cs").WithOptions(ParseOptionsHelper.FromCSharp9).Verify();
 
         [TestMethod]
-        public void AzureFunctionsReuseClients_DocumentClient_CS() => CommonBuilder()
-            .AddReferences(NuGetMetadataReference.MicrosoftAzureDocumentDB())
-            .AddPaths("AzureFunctionsReuseClients_DocumentClient.cs")
-            .Verify();
+        public void AzureFunctionsReuseClients_DocumentClient_CS() =>
+            builder.AddReferences(NuGetMetadataReference.MicrosoftAzureDocumentDB())
+                   .AddPaths("AzureFunctionsReuseClients_DocumentClient.cs")
+                   .Verify();
 
         [TestMethod]
-        public void AzureFunctionsReuseClients_CosmosClient_CS() => CommonBuilder()
-            .AddReferences(NuGetMetadataReference.MicrosoftAzureCosmos())
-            .AddPaths("AzureFunctionsReuseClients_CosmosClient.cs")
-            .Verify();
+        public void AzureFunctionsReuseClients_CosmosClient_CS() =>
+            builder.AddReferences(NuGetMetadataReference.MicrosoftAzureCosmos())
+                   .AddPaths("AzureFunctionsReuseClients_CosmosClient.cs")
+                   .Verify();
 
         [TestMethod]
-        public void AzureFunctionsReuseClients_ServiceBusV5_CS() => CommonBuilder()
-            .AddReferences(NuGetMetadataReference.MicrosoftAzureServiceBus())
-            .AddPaths("AzureFunctionsReuseClients_ServiceBusV5.cs")
-            .Verify();
+        public void AzureFunctionsReuseClients_ServiceBusV5_CS() =>
+            builder.AddReferences(NuGetMetadataReference.MicrosoftAzureServiceBus())
+                   .AddPaths("AzureFunctionsReuseClients_ServiceBusV5.cs")
+                   .Verify();
 
         [TestMethod]
-        public void AzureFunctionsReuseClients_ServiceBusV7_CS() => CommonBuilder()
-            .AddReferences(NuGetMetadataReference.AzureMessagingServiceBus())
-            .AddPaths("AzureFunctionsReuseClients_ServiceBusV7.cs")
-            .Verify();
+        public void AzureFunctionsReuseClients_ServiceBusV7_CS() =>
+            builder.AddReferences(NuGetMetadataReference.AzureMessagingServiceBus())
+                    .AddPaths("AzureFunctionsReuseClients_ServiceBusV7.cs")
+                    .Verify();
 
         [TestMethod]
-        public void AzureFunctionsReuseClients_Storage_CS() => CommonBuilder()
-            .AddReferences(NuGetMetadataReference.AzureCore()
-                .Concat(NuGetMetadataReference.AzureStorageCommon())
-                .Concat(NuGetMetadataReference.AzureStorageBlobs())
-                .Concat(NuGetMetadataReference.AzureStorageQueues())
-                .Concat(NuGetMetadataReference.AzureStorageFilesShares())
-                .Concat(NuGetMetadataReference.AzureStorageFilesDataLake()))
-            .AddPaths("AzureFunctionsReuseClients_Storage.cs")
-            .Verify();
+        public void AzureFunctionsReuseClients_Storage_CS() =>
+            builder.AddReferences(NuGetMetadataReference.AzureCore())
+                   .AddReferences(NuGetMetadataReference.AzureStorageCommon())
+                   .AddReferences(NuGetMetadataReference.AzureStorageBlobs())
+                   .AddReferences(NuGetMetadataReference.AzureStorageQueues())
+                   .AddReferences(NuGetMetadataReference.AzureStorageFilesShares())
+                   .AddReferences(NuGetMetadataReference.AzureStorageFilesDataLake())
+                   .AddPaths("AzureFunctionsReuseClients_Storage.cs")
+                   .Verify();
 
         [TestMethod]
-        public void AzureFunctionsReuseClients_ArmClient_CS() => CommonBuilder()
-            .AddReferences(NuGetMetadataReference.AzureCore()
-                .Concat(NuGetMetadataReference.AzureIdentity())
-                .Concat(NuGetMetadataReference.AzureResourceManager()))
-            .AddPaths("AzureFunctionsReuseClients_ArmClient.cs")
-            .Verify();
+        public void AzureFunctionsReuseClients_ArmClient_CS() =>
+            builder.AddReferences(NuGetMetadataReference.AzureCore())
+                   .AddReferences(NuGetMetadataReference.AzureIdentity())
+                   .AddReferences(NuGetMetadataReference.AzureResourceManager())
+                   .AddPaths("AzureFunctionsReuseClients_ArmClient.cs")
+                   .Verify();
     }
 }
