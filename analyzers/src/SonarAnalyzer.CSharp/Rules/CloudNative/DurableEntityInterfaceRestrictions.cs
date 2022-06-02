@@ -33,6 +33,7 @@ namespace SonarAnalyzer.Rules
     {
         private const string DiagnosticId = "S6424";
         private const string MessageFormat = "Use valid entity interface. {0} {1}.";
+        private const string SignalEntityName = "SignalEntity";
         private const string SignalEntityAsyncName = "SignalEntityAsync";
         private const string CreateEntityProxyName = "CreateEntityProxy";
 
@@ -44,11 +45,10 @@ namespace SonarAnalyzer.Rules
             context.RegisterSyntaxNodeActionInNonGenerated(c =>
                 {
                     var name = (GenericNameSyntax)c.Node;
-                    if (name.Identifier.ValueText is SignalEntityAsyncName or CreateEntityProxyName
+                    if (name.Identifier.ValueText is SignalEntityName or SignalEntityAsyncName or CreateEntityProxyName
                         && name.TypeArgumentList.Arguments.Count == 1
                         && c.SemanticModel.GetSymbolInfo(name).Symbol is IMethodSymbol method
-                        && (method.Is(KnownType.Microsoft_Azure_WebJobs_Extensions_DurableTask_IDurableEntityClient, SignalEntityAsyncName)
-                            || method.Is(KnownType.Microsoft_Azure_WebJobs_Extensions_DurableTask_IDurableOrchestrationContext, CreateEntityProxyName))
+                        && IsRestrictedMethod(method)
                         && method.TypeArguments.Single() is INamedTypeSymbol { TypeKind: not TypeKind.Error } entityInterface
                         && InterfaceErrorMessage(entityInterface) is { } message)
                     {
@@ -56,6 +56,11 @@ namespace SonarAnalyzer.Rules
                     }
                 },
                 SyntaxKind.GenericName);
+
+        private static bool IsRestrictedMethod(IMethodSymbol method) =>
+            method.Is(KnownType.Microsoft_Azure_WebJobs_Extensions_DurableTask_IDurableEntityContext, SignalEntityName)
+            || method.Is(KnownType.Microsoft_Azure_WebJobs_Extensions_DurableTask_IDurableEntityClient, SignalEntityAsyncName)
+            || method.Is(KnownType.Microsoft_Azure_WebJobs_Extensions_DurableTask_IDurableOrchestrationContext, CreateEntityProxyName);
 
         private static string InterfaceErrorMessage(INamedTypeSymbol entityInterface)
         {
@@ -86,15 +91,15 @@ namespace SonarAnalyzer.Rules
             {
                 return $@"contains method ""{method.Name}"" with {method.Parameters.Length} parameters. Zero or one are allowed";
             }
-            else if (method.ReturnsVoid
+            else if (!(method.ReturnsVoid
                 || method.ReturnType.Is(KnownType.System_Threading_Tasks_Task)
-                || method.ReturnType.Is(KnownType.System_Threading_Tasks_Task_T))
+                || method.ReturnType.Is(KnownType.System_Threading_Tasks_Task_T)))
             {
-                return null;
+                return $@"contains method ""{method.Name}"" with invalid return type. Only ""void"", ""Task"" and ""Task<T>"" are allowed";
             }
             else
             {
-                return $@"contains method ""{method.Name}"" with invalid return type. Only ""void"", ""Task"" and ""Task<T>"" are allowed";
+                return null;
             }
         }
     }

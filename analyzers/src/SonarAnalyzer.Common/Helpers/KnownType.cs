@@ -67,6 +67,7 @@ namespace SonarAnalyzer.Helpers
         internal static readonly KnownType Microsoft_AspNetCore_Mvc_RequestSizeLimitAttribute = new("Microsoft.AspNetCore.Mvc.RequestSizeLimitAttribute");
         internal static readonly KnownType Microsoft_AspNetCore_Razor_Hosting_RazorCompiledItemAttribute = new("Microsoft.AspNetCore.Razor.Hosting.RazorCompiledItemAttribute");
         internal static readonly KnownType Microsoft_Azure_WebJobs_Extensions_DurableTask_IDurableEntityClient = new("Microsoft.Azure.WebJobs.Extensions.DurableTask.IDurableEntityClient");
+        internal static readonly KnownType Microsoft_Azure_WebJobs_Extensions_DurableTask_IDurableEntityContext = new("Microsoft.Azure.WebJobs.Extensions.DurableTask.IDurableEntityContext");
         internal static readonly KnownType Microsoft_Azure_WebJobs_Extensions_DurableTask_IDurableOrchestrationContext = new("Microsoft.Azure.WebJobs.Extensions.DurableTask.IDurableOrchestrationContext");
         internal static readonly KnownType Microsoft_Azure_WebJobs_FunctionNameAttribute = new("Microsoft.Azure.WebJobs.FunctionNameAttribute");
         internal static readonly KnownType Microsoft_Data_Sqlite_SqliteCommand = new("Microsoft.Data.Sqlite.SqliteCommand");

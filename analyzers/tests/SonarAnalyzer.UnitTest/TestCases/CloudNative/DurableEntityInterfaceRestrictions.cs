@@ -18,6 +18,11 @@ public interface IValid
     Task<string> TaskStrArg(int count);
 }
 
+public interface IEmpty
+{
+    // This is invalid and will throw
+}
+
 public interface IInheritsEmptyWithValid : IEmpty
 {
     void Valid();
@@ -31,11 +36,6 @@ public interface IInheritsValidIsEmpty : IValid
 public interface IInheritsValidIsEmpty2 : IInheritsValidIsEmpty
 {
     // Do not add anything => still valid - another level of nesting
-}
-
-public interface IEmpty
-{
-    // This is invalid and will throw
 }
 
 public interface IInheritsEmptyIsEmpty : IEmpty
@@ -107,16 +107,15 @@ public interface IEvent
     event EventHandler<EventArgs> Event;
 }
 
-public class UseDurableClient
+public class UseDurableEntityClient
 {
-    private readonly IDurableClient client;
+    private readonly IDurableEntityClient client;
     private readonly EntityId id;
 
     public async Task UnrelatedMethods()
     {
-        await client.ReadEntityStateAsync<IInvalid>(id);
-        await client.StartNewAsync<IInvalid>("name", null);
-        await client.SignalEntityAsync(id, "name");             // Always compliant, same name but not generic
+        await client.ReadEntityStateAsync<IInvalid>(id);    // T is a type of the returned data. It's not an entity interface.
+        await client.SignalEntityAsync(id, "name");         // Always compliant, same name but not generic
     }
 
     public async Task Compliant()
@@ -152,6 +151,11 @@ public class UseDurableClient
         await client.SignalEntityAsync<IIndexer>(id, x => { });                 // Noncompliant {{Use valid entity interface. IIndexer contains property "this[]". Only methods are allowed.}}
         await client.SignalEntityAsync<IEvent>(id, x => { });                   // Noncompliant {{Use valid entity interface. IEvent contains event "Event". Only methods are allowed.}}
     }
+
+    public async Task FromDurableClient(IDurableClient inheritedClient)
+    {
+        await inheritedClient.SignalEntityAsync<IInvalid>(id, x => { });                 // Noncompliant
+    }
 }
 
 public class UseDurableOrchestrationContext
@@ -176,6 +180,20 @@ public class UseDurableOrchestrationContext
         context.CreateEntityProxy<>("key");             // Error [CS0305]: Using the generic method group 'CreateEntityProxy' requires 1 type arguments
         context.CreateEntityProxy<Undefined>("key");    // Error [CS0246]: The type or namespace name 'Undefined' could not be found
         undefined.CreateEntityProxy<IInvalid>("key");   // Error [CS0246]: The type or namespace name 'undefined' could not be found
+    }
+}
+
+public class UseDurableEntityContext
+{
+    private readonly IDurableEntityContext context;
+    private readonly EntityId id;
+
+    public void Overloads()
+    {
+        context.SignalEntity<IInvalid>(id, x => { });                 // Noncompliant
+        context.SignalEntity<IInvalid>("id", x => { });               // Noncompliant
+        context.SignalEntity<IInvalid>(id, DateTime.Now, x => { });   // Noncompliant
+        context.SignalEntity<IInvalid>("id", DateTime.Now, x => { }); // Noncompliant
     }
 }
 

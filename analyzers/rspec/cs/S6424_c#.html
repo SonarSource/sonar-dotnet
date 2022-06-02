@@ -8,8 +8,8 @@
   <li> Entity interface methods must return void, Task, or Task&lt;T&gt;. </li>
 </ul>
 <p>If any of these rules are violated, an <code>InvalidOperationException</code> is thrown at runtime when the interface is used as a type argument to
-<code>IDurableClient.SignalEntityAsync&lt;T&gt;</code> or <code>IDurableOrchestrationContext.CreateEntityProxy&lt;T&gt;</code>. The exception message
-explains which rule was broken.</p>
+<code>IDurableEntityContext.SignalEntity&lt;TEntityInterface&gt;</code>, <code>IDurableEntityClient.SignalEntityAsync&lt;TEntityInterface&gt;</code>
+or <code>IDurableOrchestrationContext.CreateEntityProxy&lt;TEntityInterface&gt;</code>. The exception message explains which rule was broken.</p>
 <p>This rule raises an issue in case any of the restrictions above is not respected.</p>
 <h2>Noncompliant Code Example</h2>
 <pre>
