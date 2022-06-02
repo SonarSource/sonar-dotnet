@@ -1,0 +1,73 @@
+<p>Making blocking calls to <code>async</code> methods transforms something that was intended to be asynchronous into a synchronous block. Doing so
+inside an Azure Function can lead to thread exhaustion.</p>
+<table>
+  <colgroup>
+    <col style="width: 33.3333%;">
+    <col style="width: 33.3333%;">
+    <col style="width: 33.3334%;">
+  </colgroup>
+  <thead>
+    <tr>
+      <th>To Do This …</th>
+      <th>Instead of This …</th>
+      <th>Use This</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><p>Retrieve the result of a background task</p></td>
+      <td><p><code>Task.Wait</code>, <code>Task.Result</code> or <code>Task.GetAwaiter.GetResult</code></p></td>
+      <td><p><code>await</code></p></td>
+    </tr>
+    <tr>
+      <td><p>Wait for any task to complete</p></td>
+      <td><p><code>Task.WaitAny</code></p></td>
+      <td><p><code>await Task.WhenAny</code></p></td>
+    </tr>
+    <tr>
+      <td><p>Retrieve the results of multiple tasks</p></td>
+      <td><p><code>Task.WaitAll</code></p></td>
+      <td><p><code>await Task.WhenAll</code></p></td>
+    </tr>
+    <tr>
+      <td><p>Wait a period of time</p></td>
+      <td><p><code>Thread.Sleep</code></p></td>
+      <td><p><code>await Task.Delay</code></p></td>
+    </tr>
+  </tbody>
+</table>
+<h2>Noncompliant Code Example</h2>
+<pre>
+public static class AvoidBlockingCalls
+{
+	[FunctionName("Foo")]
+	public static async Task&lt;IActionResult&gt; Foo([HttpTrigger(AuthorizationLevel.Function, "get", "post", Route = null)] HttpRequest req)
+	{
+		// This can lead to thread exhaustion
+		string requestBody = new StreamReader(req.Body).ReadToEndAsync().Result;
+
+		// do stuff...
+	}
+}
+</pre>
+<h2>Compliant Solution</h2>
+<pre>
+public static class AvoidBlockingCalls
+{
+	[FunctionName("Foo")]
+	public static async Task&lt;IActionResult&gt; Foo([HttpTrigger(AuthorizationLevel.Function, "get", "post", Route = null)] HttpRequest req)
+	{
+		string requestBody = await new StreamReader(req.Body).ReadToEndAsync();
+
+		// do stuff...
+	}
+}
+</pre>
+<h2>See</h2>
+<ul>
+  <li> <a href="https://msdn.microsoft.com/en-us/magazine/jj991977.aspx">Async/Await - Best Practices in Asynchronous Programming</a> </li>
+  <li> <a href="https://docs.microsoft.com/en-us/azure/azure-functions/performance-reliability#use-async-code-but-avoid-blocking-calls">Improve the
+  performance and reliability of Azure Functions - Scalability best practices</a> </li>
+  <li> {rule:csharpsquid:S4462} - a more generic rule about detecting blocking calls to <code>async</code> methods. </li>
+</ul>
+
