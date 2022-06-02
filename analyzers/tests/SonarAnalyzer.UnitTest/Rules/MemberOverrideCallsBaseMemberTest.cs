@@ -60,7 +60,7 @@ namespace SonarAnalyzer.UnitTest.Rules
 #if NET
                 "// Noncompliant {{Remove this method 'ToString' to simply inherit its behavior.}}";
 #elif NETFRAMEWORK
-                "// Compliant. ToString has a [__DynamicallyInvokable] attribute in .Net framework";
+                "// FN. ToString has a [__DynamicallyInvokable] attribute in .Net framework";
 #endif
             verifier.AddSnippet($@"
                 class Test
