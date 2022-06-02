@@ -16,11 +16,10 @@ namespace FunctionApp1
             [HttpTrigger(AuthorizationLevel.Function, "get", "post", Route = null)] HttpRequest req,
             ILogger log)
         {
-            log.LogInformation("C# HTTP trigger function processed a request.");
             var client = new HttpClient();  // Noncompliant {{Reuse client instances rather than creating new ones with each function invocation.}}
 //                       ^^^^^^^^^^^^^^^^
             var result = await client.GetAsync("");
-            return new OkObjectResult(await result.Content.ReadAsStringAsync());
+            return new OkObjectResult("");
         }
     }
 }
