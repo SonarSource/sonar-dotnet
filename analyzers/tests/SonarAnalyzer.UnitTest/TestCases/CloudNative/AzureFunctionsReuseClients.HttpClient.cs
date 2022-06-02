@@ -148,6 +148,7 @@ namespace DependencyInjection
         private HttpClient clientField = new HttpClient();                     // Compliant
         private HttpClient ClientProperty { get; set; } = new HttpClient();    // Compliant
         private HttpClient ClientPropertyAccessor { get => new HttpClient(); } // FN
+        private HttpClient ClientPropertyAccessorArrow => new HttpClient();    // FN
 
         public FunctionApp1(HttpClient httpClient)
         {
