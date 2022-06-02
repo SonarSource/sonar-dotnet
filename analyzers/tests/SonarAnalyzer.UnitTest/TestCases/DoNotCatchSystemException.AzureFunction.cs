@@ -11,12 +11,15 @@ namespace Tests.Diagnostics
             try
             {
             }
-            catch (Exception e) // Compliant. Don't raise for AzureFunctions because it contradicts S6421 https://sonarsource.github.io/rspec/#/rspec/S6421/csharp
+            catch (Exception e)    // Compliant. Don't raise for AzureFunctions because it contradicts S6421.
             {
             }
 
             try { }
-            catch { } // Compliant.
+            catch (Exception) { } // Compliant.
+
+            try { }
+            catch { }             // Compliant.
         }
     }
 }
