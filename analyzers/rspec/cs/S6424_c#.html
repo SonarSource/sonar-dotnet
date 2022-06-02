@@ -1,7 +1,7 @@
 <p>The recommended way to access Azure Durable Entities is Interfaces via generated proxy objects.</p>
 <p>The following restrictions, during interface design, are enforced:</p>
 <ul>
-  <li> Entity interfaces must be defined in the same assembly as the entity class. </li>
+  <li> Entity interfaces must be defined in the same assembly as the entity class. This is not detected by the rule. </li>
   <li> Entity interfaces must only define methods. </li>
   <li> Entity interfaces must not contain generic parameters. </li>
   <li> Entity interface methods must not have more than one parameter. </li>
