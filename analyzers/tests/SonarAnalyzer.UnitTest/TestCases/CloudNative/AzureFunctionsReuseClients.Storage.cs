@@ -12,7 +12,7 @@
         [FunctionName("Sample")]
         public static void Run()
         {
-            // The compilant clients usually pick up parameters from the request to pass to the constructor. They can not be made reusable.
+            // The compliant clients usually pick up parameters from the request to pass to the constructor. They can not be made reusable.
             var blobService = new BlobServiceClient("connectionString");                    // Noncompliant
             var blobContainer = new BlobContainerClient("connectionString", "container");   // Compliant
             var blob = new BlobClient("connectionString", "container", "blob");             // Compliant
