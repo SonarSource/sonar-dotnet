@@ -11,8 +11,6 @@ namespace FunctionApp1
 {
     public static class Function1
     {
-        const string sampleUrl = @"http://example.com";
-
         [FunctionName("DefaultSample")]
         public static async Task<IActionResult> Run(
             [HttpTrigger(AuthorizationLevel.Function, "get", "post", Route = null)] HttpRequest req,
@@ -21,7 +19,7 @@ namespace FunctionApp1
             log.LogInformation("C# HTTP trigger function processed a request.");
             var client = new HttpClient();  // Noncompliant {{Reuse client instances rather than creating new ones with each function invocation.}}
 //                       ^^^^^^^^^^^^^^^^
-            var result = await client.GetAsync(sampleUrl);
+            var result = await client.GetAsync("");
             return new OkObjectResult(await result.Content.ReadAsStringAsync());
         }
     }
