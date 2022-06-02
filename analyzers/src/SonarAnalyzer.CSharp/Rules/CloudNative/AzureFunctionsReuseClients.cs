@@ -78,11 +78,11 @@ namespace SonarAnalyzer.Rules.CSharp
             SyntaxKind.ObjectCreationExpression, SyntaxKindEx.ImplicitObjectCreationExpression);
 
         private static bool IsAssignedForReuse(SemanticModel model, SyntaxNode node, CancellationToken cancellationToken) =>
-            !IsAssignedToLocal(node)
+            !IsInVariableDeclaration(node)
             && (IsInFieldOrPropertyInitializer(node)
                 || IsAssignedToFieldOrProperty(model, node, cancellationToken));
 
-        private static bool IsAssignedToLocal(SyntaxNode node) =>
+        private static bool IsInVariableDeclaration(SyntaxNode node) =>
             node.Parent is EqualsValueClauseSyntax { Parent: VariableDeclaratorSyntax { Parent: VariableDeclarationSyntax { Parent: LocalDeclarationStatementSyntax or UsingStatementSyntax } } };
 
         private static bool IsInFieldOrPropertyInitializer(SyntaxNode node) =>
