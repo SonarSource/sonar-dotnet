@@ -14,40 +14,17 @@
         private static HttpClient field;
 
         [FunctionName("Sample")]
-        public static void NullConditionalAssignment()
+        public static void DifferentAssigments()
         {
-            field ??= new HttpClient(); // Compliant
-        }
+            field ??= new HttpClient();                       // Compliant
 
-        [FunctionName("Sample")]
-        public static void NullConditionalAssignmentToLocal()
-        {
             var local = default(HttpClient);
-            local ??= new HttpClient(); // Noncompliant
-        }
+            local ??= new HttpClient();                       // Noncompliant
 
-        [FunctionName("Sample")]
-        public static void AssignmentToDiscard()
-        {
-            _ = new HttpClient(); // Noncompliant
-        }
-
-        [FunctionName("Sample")]
-        public static void WrapInUsingDeclaration()
-        {
-            using var local = new HttpClient(); // Noncompliant
-        }
-
-        [FunctionName("Sample")]
-        public static void TargetTypedNewForLocal()
-        {
-            HttpClient local = new(); // Noncompliant
-        }
-
-        [FunctionName("Sample")]
-        public static void TargetTypedNewForField()
-        {
-            field = new(); // Compliant
+            _ = new HttpClient();                             // Noncompliant
+            using var localUsingStatement = new HttpClient(); // Noncompliant
+            HttpClient targetTypedNew = new();                // Noncompliant
+            field = new();                                    // Compliant
         }
     }
 }
