@@ -11,12 +11,25 @@
 
     public class FunctionApp1
     {
-        private static HttpClient client;
+        private static HttpClient field;
 
         [FunctionName("Sample")]
         public static void NullConditionalAssignment()
         {
-            client ??= new HttpClient(); // Compliant
+            field ??= new HttpClient(); // Compliant
+        }
+
+        [FunctionName("Sample")]
+        public static void NullConditionalAssignmentToLocal()
+        {
+            var local = default(HttpClient);
+            local ??= new HttpClient(); // Noncompliant
+        }
+
+        [FunctionName("Sample")]
+        public static void AssignmentToDiscard()
+        {
+            _ = new HttpClient(); // Noncompliant
         }
 
         [FunctionName("Sample")]
@@ -34,7 +47,7 @@
         [FunctionName("Sample")]
         public static void TargetTypedNewForField()
         {
-            client = new(); // Compliant
+            field = new(); // Compliant
         }
     }
 }
