@@ -58,7 +58,7 @@ namespace SonarAnalyzer.Rules.CSharp
             KnownType.Azure_Storage_Queues_QueueServiceClient,
             KnownType.Azure_Storage_Files_Shares_ShareServiceClient,
             KnownType.Azure_Storage_Files_DataLake_DataLakeServiceClient,
-            // Ressource manager
+            // Resource manager
             KnownType.Azure_ResourceManager_ArmClient);
 
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(Rule);
