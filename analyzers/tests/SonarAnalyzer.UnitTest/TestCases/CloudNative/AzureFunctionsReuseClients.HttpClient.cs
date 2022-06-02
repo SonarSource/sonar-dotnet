@@ -165,8 +165,8 @@ namespace DependencyInjection
         [FunctionName("Sample")]
         public void Assignments()
         {
-            clientField = new HttpClient();           // FN
-            ClientProperty = new HttpClient();        // FN
+            clientField = new HttpClient();           // Noncompliant
+            ClientProperty = new HttpClient();        // Noncompliant
             var local = new HttpClient();             // Noncompliant
             local = new System.Net.Http.HttpClient(); // Noncompliant
             local = ClientPropertyAccessor;           // FN

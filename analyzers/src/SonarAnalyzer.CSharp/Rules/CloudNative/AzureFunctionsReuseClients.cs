@@ -79,7 +79,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private static bool IsAssignedForReuse(SemanticModel model, SyntaxNode node, CancellationToken cancellationToken) =>
             !IsInVariableDeclaration(node)
-            && (IsInFieldOrPropertyInitializer(node) || IsAssignedToFieldOrProperty(model, node, cancellationToken));
+            && (IsInFieldOrPropertyInitializer(node) || IsAssignedStaticToFieldOrProperty(model, node, cancellationToken));
 
         private static bool IsInVariableDeclaration(SyntaxNode node) =>
             node.Parent is EqualsValueClauseSyntax { Parent: VariableDeclaratorSyntax { Parent: VariableDeclarationSyntax { Parent: LocalDeclarationStatementSyntax or UsingStatementSyntax } } };
@@ -87,10 +87,14 @@ namespace SonarAnalyzer.Rules.CSharp
         private static bool IsInFieldOrPropertyInitializer(SyntaxNode node) =>
             node.Ancestors().Any(x => x.IsAnyKind(SyntaxKind.FieldDeclaration, SyntaxKind.PropertyDeclaration));
 
-        private static bool IsAssignedToFieldOrProperty(SemanticModel model, SyntaxNode node, CancellationToken cancellationToken) =>
+        private static bool IsAssignedStaticToFieldOrProperty(SemanticModel model, SyntaxNode node, CancellationToken cancellationToken) =>
             node.Parent.WalkUpParentheses() is AssignmentExpressionSyntax assignment
                 && assignment.Left.GetIdentifier() is { } identifier
-                && model.GetSymbolInfo(identifier, cancellationToken).Symbol is { Kind: SymbolKind.Field or SymbolKind.Property };
+                && model.GetSymbolInfo(identifier, cancellationToken).Symbol is
+                {
+                    Kind: SymbolKind.Field or SymbolKind.Property,
+                    IsStatic: true,
+                };
 
         private static bool IsResuableClient(SemanticModel model, SyntaxNode node)
         {
