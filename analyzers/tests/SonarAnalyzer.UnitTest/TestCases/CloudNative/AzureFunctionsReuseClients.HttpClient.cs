@@ -53,8 +53,11 @@ namespace DifferentAssignments
             someField = (object)(new HttpClient());         // Noncompliant. Some trickery to confuse the analyzer.
             someField = (new HttpClient() as object);       // Noncompliant
             client = PassThrough(new HttpClient());         // Noncompliant
+            PassThrough(new HttpClient());                  // Noncompliant
             var local = new HttpClient();                   // Noncompliant
             local = new System.Net.Http.HttpClient();       // Noncompliant
+            PassThrough(local = new HttpClient());          // Noncompliant
+            PassThrough(client = new HttpClient());         // Compliant
             var otherClient = new UriBuilder();             // Compliant
         }
 
