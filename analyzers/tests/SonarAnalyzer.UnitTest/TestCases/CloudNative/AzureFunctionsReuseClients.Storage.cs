@@ -1,26 +1,16 @@
 ﻿namespace FunctionApp1
 {
-    using System;
-    using Microsoft.AspNetCore.Http;
-    using Microsoft.AspNetCore.Mvc;
-    using Microsoft.Azure.WebJobs;
-    using Microsoft.Azure.WebJobs.Extensions.Http;
-    using Microsoft.Extensions.Logging;
-    using System.Threading.Tasks;
     using Azure.Storage.Blobs;
     using Azure.Storage.Blobs.Specialized;
     using Azure.Storage.Files.DataLake;
     using Azure.Storage.Files.Shares;
     using Azure.Storage.Queues;
+    using Microsoft.Azure.WebJobs;
 
     public static class Function1
     {
-        const string sampleUrl = @"http://example.com";
-
-        [FunctionName("DefaultSample")]
-        public static async Task<IActionResult> Run(
-            [HttpTrigger(AuthorizationLevel.Function, "get", "post", Route = null)] HttpRequest req,
-            ILogger log)
+        [FunctionName("Sample")]
+        public static void Run()
         {
             // The compilant clients usually pick up parameters from the request to pass to the constructor. They can not be made reusable.
             var blobService = new BlobServiceClient("connectionString");                    // Noncompliant
@@ -43,8 +33,6 @@
             var dataLakeFile = new DataLakeFileClient("connectionString", "fileSystemName", "filePath");               // Compliant
             var dataLakePath = new DataLakePathClient("connectionString", "fileSystemName", "path");                   // Compliant
             var dataLakeFileSystem = new DataLakeFileSystemClient("connectionString", "fileSystemName");               // Compliant
-
-            return new UnauthorizedResult();
         }
     }
 }
