@@ -119,6 +119,15 @@ namespace SonarAnalyzer.Extensions
             return current;
         }
 
+        public static SyntaxNode WalkUpParentheses(this SyntaxNode expression)
+        {
+            while (expression != null && expression.IsKind(SyntaxKind.ParenthesizedExpression))
+            {
+                expression = expression.Parent;
+            }
+            return expression;
+        }
+
         private static string GetUnknownType(SyntaxKind kind)
         {
 #if DEBUG

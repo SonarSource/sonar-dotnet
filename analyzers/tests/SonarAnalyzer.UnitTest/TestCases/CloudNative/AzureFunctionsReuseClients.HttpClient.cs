@@ -40,11 +40,14 @@ namespace DifferentAssignments
     {
         private static HttpClient client = new HttpClient(); // Compliant
         private static readonly Lazy<HttpClient> lazyClient = new Lazy<HttpClient>(() => new HttpClient()); // Compliant
+        private static HttpClient parenthesesInInitialzer = (new HttpClient()); // Compliant
+        private static object castInInitialzer = (object)(new HttpClient());    // Compliant
         private static object _lock = new object();
         private static object someField;
 
         protected static HttpClient ClientProperty { get; set; } = new HttpClient(); // Compliant
         protected static Lazy<HttpClient> LazyClientProperty { get; set; } = new Lazy<HttpClient>(() => new HttpClient()); // Compliant
+
 
         static FunctionApp1()
         {
@@ -56,6 +59,7 @@ namespace DifferentAssignments
         {
             client = new HttpClient();                // FN
             ClientProperty = new HttpClient();        // FN
+            ClientProperty = (new HttpClient());      // FN
             var local = new HttpClient();             // Noncompliant
             local = new System.Net.Http.HttpClient(); // Noncompliant
             var otherClient = new UriBuilder();       // Compliant
