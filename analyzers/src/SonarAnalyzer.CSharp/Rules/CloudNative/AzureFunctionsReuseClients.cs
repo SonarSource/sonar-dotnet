@@ -69,7 +69,7 @@ namespace SonarAnalyzer.Rules.CSharp
             context.RegisterSyntaxNodeActionInNonGenerated(c =>
             {
                 if (c.AzureFunctionMethod() is not null
-                    && CreatedResuableClient(c.SemanticModel, c.Node) is not null
+                    && IsResuableClient(c.SemanticModel, c.Node)
                     && !IsAssignedForReuse(c.SemanticModel, c.Node, c.CancellationToken))
                 {
                     c.ReportIssue(Diagnostic.Create(Rule, c.Node.GetLocation()));
@@ -94,10 +94,10 @@ namespace SonarAnalyzer.Rules.CSharp
                 && model.GetSymbolInfo(identifier, cancellationToken).Symbol is { } symbol
                 && symbol.Kind is SymbolKind.Field or SymbolKind.Property;
 
-        private static KnownType CreatedResuableClient(SemanticModel model, SyntaxNode node)
+        private static bool IsResuableClient(SemanticModel model, SyntaxNode node)
         {
             var objectCreation = ObjectCreationFactory.Create(node);
-            return ReusableClients.FirstOrDefault(x => objectCreation.IsKnownType(x, model));
+            return ReusableClients.Any(x => objectCreation.IsKnownType(x, model));
         }
     }
 }
