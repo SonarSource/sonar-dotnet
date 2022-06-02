@@ -288,7 +288,6 @@ namespace Tests.Diagnostics
 
     struct StructTest
     {
-
         public override bool Equals(object obj) => // Compliant
             base.Equals(obj);
 

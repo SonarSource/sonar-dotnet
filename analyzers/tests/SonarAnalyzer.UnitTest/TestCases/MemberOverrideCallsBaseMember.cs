@@ -68,9 +68,6 @@ namespace Tests.Diagnostics
         {
             return base.GetHashCode();
         }
-
-        public override string ToString() { return base.ToString(); } // Noncompliant {{Remove this method 'ToString' to simply inherit its behavior.}}
-//      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
     }
 
     class Derived : Base
@@ -319,9 +316,6 @@ namespace Tests.Diagnostics
 
     struct StructTest
     {
-        public override string ToString() =>       // Noncompliant
-            base.ToString();
-
         public override bool Equals(object obj) => // Compliant
             base.Equals(obj);
 
