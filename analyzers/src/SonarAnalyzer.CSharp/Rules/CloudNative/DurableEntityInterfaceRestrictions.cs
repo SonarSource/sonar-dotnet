@@ -64,7 +64,11 @@ namespace SonarAnalyzer.Rules
 
         private static string InterfaceErrorMessage(INamedTypeSymbol entityInterface)
         {
-            if (entityInterface.IsGenericType)
+            if (entityInterface.TypeKind != TypeKind.Interface)
+            {
+                return "is not an interface";
+            }
+            else if (entityInterface.IsGenericType)
             {
                 return "is generic";
             }
