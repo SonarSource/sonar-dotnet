@@ -25,6 +25,10 @@
             using var localUsingStatement = new HttpClient(); // Noncompliant
             HttpClient targetTypedNew = new();                // Noncompliant
             field = new();                                    // Compliant
+
+            PassThrough(field = new());                       // Compliant
         }
+
+        private static HttpClient PassThrough(HttpClient httpClient) => httpClient;
     }
 }
