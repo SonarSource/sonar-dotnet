@@ -18,6 +18,7 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Linq;
@@ -38,7 +39,8 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private static readonly DiagnosticDescriptor Rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
 
-        private static readonly HashSet<string> IgnoredMethodNames = new HashSet<string> { "Equals", "GetHashCode" };
+        private static readonly string[] IgnoredMethodNames = { "Equals", "GetHashCode" };
+        private static readonly string[] IgnoredRecordMethodNames = { "ToString", "PrintMembers" };
 
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
 
@@ -162,7 +164,13 @@ namespace SonarAnalyzer.Rules.CSharp
             || IgnoredMethodNames.Contains(methodSymbol.Name)
             || methodSymbol.Parameters.Any(p => p.HasExplicitDefaultValue)
             || methodSymbol.OverriddenMethod.Parameters.Any(p => p.HasExplicitDefaultValue)
-            || SymbolHelper.IsAnyAttributeInOverridingChain(methodSymbol);
+            || SymbolHelper.IsAnyAttributeInOverridingChain(methodSymbol)
+            || IsRecordCompilerGenerated(methodSymbol);
+
+        private static bool IsRecordCompilerGenerated(IMethodSymbol methodSymbol) =>
+            IgnoredRecordMethodNames.Contains(methodSymbol.Name)
+            && methodSymbol.ContainingSymbol is ITypeSymbol type
+            && type.IsRecord();
 
         private static bool HasDocumentationComment(SyntaxNode node) =>
             node.GetLeadingTrivia()

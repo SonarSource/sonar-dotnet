@@ -25,29 +25,49 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class MemberOverrideCallsBaseMemberTest
     {
+        private readonly VerifierBuilder verifier = new VerifierBuilder<MemberOverrideCallsBaseMember>();
+
         [TestMethod]
         public void MemberOverrideCallsBaseMember() =>
-            OldVerifier.VerifyAnalyzer(@"TestCases\MemberOverrideCallsBaseMember.cs", new MemberOverrideCallsBaseMember());
+            verifier.AddPaths("MemberOverrideCallsBaseMember.cs").Verify();
 
 #if NET
         [TestMethod]
-        public void MemberOverrideCallsBaseMember_CSharp9() =>
-            OldVerifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\MemberOverrideCallsBaseMember.CSharp9.cs", new MemberOverrideCallsBaseMember());
+        public void MemberOverrideCallsBaseMember_CSharp10() =>
+            verifier.AddPaths("MemberOverrideCallsBaseMember.CSharp10.cs").WithOptions(ParseOptionsHelper.FromCSharp10).Verify();
 
         [TestMethod]
-        public void MemberOverrideCallsBaseMember_CSharp9_CodeFix() =>
-            OldVerifier.VerifyCodeFix<MemberOverrideCallsBaseMemberCodeFix>(
-                @"TestCases\MemberOverrideCallsBaseMember.CSharp9.cs",
-                @"TestCases\MemberOverrideCallsBaseMember.CSharp9.Fixed.cs",
-                new MemberOverrideCallsBaseMember(),
-                ParseOptionsHelper.FromCSharp9);
+        public void MemberOverrideCallsBaseMember_CSharp10_CodeFix() => verifier
+            .AddPaths("MemberOverrideCallsBaseMember.CSharp10.cs")
+            .WithOptions(ParseOptionsHelper.FromCSharp10)
+            .WithCodeFix<MemberOverrideCallsBaseMemberCodeFix>()
+            .WithCodeFixedPaths("MemberOverrideCallsBaseMember.CSharp10.Fixed.cs")
+            .VerifyCodeFix();
 #endif
 
         [TestMethod]
-        public void MemberOverrideCallsBaseMember_CodeFix() =>
-            OldVerifier.VerifyCodeFix<MemberOverrideCallsBaseMemberCodeFix>(
-                @"TestCases\MemberOverrideCallsBaseMember.cs",
-                @"TestCases\MemberOverrideCallsBaseMember.Fixed.cs",
-                new MemberOverrideCallsBaseMember());
+        public void MemberOverrideCallsBaseMember_CodeFix() => verifier
+            .AddPaths("MemberOverrideCallsBaseMember.cs")
+            .WithCodeFix<MemberOverrideCallsBaseMemberCodeFix>()
+            .WithCodeFixedPaths("MemberOverrideCallsBaseMember.Fixed.cs")
+            .VerifyCodeFix();
+
+        [TestMethod]
+        public void MemberOverrideCallsBaseMember_ToString()
+        {
+            var toString = "public override string ToString() => base.ToString();";
+            toString +=
+#if NET
+                "// Noncompliant {{Remove this method 'ToString' to simply inherit its behavior.}}";
+#elif NETFRAMEWORK
+                "// FN. ToString has a [__DynamicallyInvokable] attribute in .Net framework";
+#endif
+            verifier.AddSnippet($@"
+                class Test
+                {{
+                    {toString}
+                }}
+                ").Verify();
+        }
     }
 }

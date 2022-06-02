@@ -13,6 +13,7 @@
     public virtual int MyProperty11 { get; init; }
     public virtual int MyProperty12 { get; init; }
     public virtual int MyProperty13 { get; init; }
+    public virtual void Method() { }
 }
 
 record Derived : Base
@@ -33,4 +34,39 @@ record Derived : Base
     public override int MyProperty12 { get => base.MyProperty5; init => base.MyProperty5 = value; }
     public override int MyProperty13 { get; init => base.MyProperty13 = value; } // Error [CS0501] 'member function' must declare a body because it is not marked abstract, extern, or partial
     public override int MyProperty14 { get => base.MyProperty14; init => base.MyProperty14 = value; } // Error [CS0115, CS0117, CS0117] no suitable method found to override, 'Base' does not contain a definition for 'MyProperty14'
+}
+
+namespace CompilerGeneratedMethods
+{
+    record Base
+    {
+        public override string ToString() => "Some custom ToString";
+    }
+
+    record Derived : Base
+    {
+        public override string ToString() =>
+            base.ToString(); // Compliant. Without the override the compiler generates a ToString instead of calling base.ToString
+
+        protected override bool PrintMembers(System.Text.StringBuilder builder) =>
+            base.PrintMembers(builder); // Compliant. The generated PrintMembers implementation would add the properties of Derived to the builder.
+
+        public override bool Equals(Base other) // Error CS0111 Type 'Derived' already defines a member called 'Equals' with the same parameter types
+            => base.Equals(other);
+
+        public override int GetHashCode() =>
+            base.GetHashCode(); // Compliant.
+    }
+
+    record Underived
+    {
+        public override string ToString() =>
+            base.ToString(); // Compliant. Prevents the compiler from generating a custom ToString method.
+    }
+
+    record struct RecordStruct
+    {
+        public override string ToString() =>
+            base.ToString(); // Compliant. Prevents the compiler from generating a custom ToString method.
+    }
 }
