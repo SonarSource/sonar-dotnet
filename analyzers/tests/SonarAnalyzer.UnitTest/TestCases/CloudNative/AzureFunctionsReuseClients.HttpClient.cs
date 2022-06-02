@@ -48,7 +48,6 @@ namespace DifferentAssignments
         protected static HttpClient ClientProperty { get; set; } = new HttpClient(); // Compliant
         protected static Lazy<HttpClient> LazyClientProperty { get; set; } = new Lazy<HttpClient>(() => new HttpClient()); // Compliant
 
-
         static FunctionApp1()
         {
             ClientProperty = new HttpClient(); // Compliant
@@ -57,12 +56,15 @@ namespace DifferentAssignments
         [FunctionName("Sample")]
         public static void Assignments()
         {
-            client = new HttpClient();                // FN
-            ClientProperty = new HttpClient();        // FN
-            ClientProperty = (new HttpClient());      // FN
-            var local = new HttpClient();             // Noncompliant
-            local = new System.Net.Http.HttpClient(); // Noncompliant
-            var otherClient = new UriBuilder();       // Compliant
+            client = new HttpClient();                 // FN. The field is uncoditionally assigned on each call.
+            ClientProperty = new HttpClient();         // FN
+            ClientProperty = (new HttpClient());       // FN
+            someField = (object)(new HttpClient());    // Noncompliant. Some trickery to confuse the analyzer.
+            someField = (new HttpClient() as object);  // Noncompliant
+            client = PassThrough(new HttpClient());    // Noncompliant
+            var local = new HttpClient();              // Noncompliant
+            local = new System.Net.Http.HttpClient();  // Noncompliant
+            var otherClient = new UriBuilder();        // Compliant
         }
 
         public static void NotAnAzureFunction()
@@ -131,6 +133,8 @@ namespace DifferentAssignments
         {
             someField = await new HttpClient().GetStringAsync(@"http://example.com"); // Noncompliant
         }
+
+        private static HttpClient PassThrough(HttpClient httpClient) => httpClient;
     }
 }
 
