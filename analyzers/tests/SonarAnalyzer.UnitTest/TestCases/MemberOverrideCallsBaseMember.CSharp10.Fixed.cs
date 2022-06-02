@@ -13,6 +13,7 @@
     public virtual int MyProperty11 { get; init; }
     public virtual int MyProperty12 { get; init; }
     public virtual int MyProperty13 { get; init; }
+    public virtual void Method() { }
 }
 
 record Derived : Base
@@ -37,7 +38,7 @@ record Derived : Base
 
 namespace CompilerGeneratedMethods
 {
-    record BaseWithOverride
+    record Base
     {
         public override string ToString() => "Some custom ToString";
     }
@@ -49,6 +50,12 @@ namespace CompilerGeneratedMethods
 
         protected override bool PrintMembers(System.Text.StringBuilder builder) =>
             base.PrintMembers(builder); // Compliant. The generated PrintMembers implementation would add the properties of Derived to the builder.
+
+        public override bool Equals(Base other) // Error CS0111 Type 'Derived' already defines a member called 'Equals' with the same parameter types
+            => base.Equals(other);
+
+        public override int GetHashCode() =>
+            base.GetHashCode(); // Compliant.
     }
 
     record Underived
