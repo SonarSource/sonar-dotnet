@@ -1,13 +1,14 @@
-﻿namespace FunctionApp1
-{
-    using Microsoft.AspNetCore.Http;
-    using Microsoft.AspNetCore.Mvc;
-    using Microsoft.Azure.WebJobs;
-    using Microsoft.Azure.WebJobs.Extensions.Http;
-    using Microsoft.Extensions.Logging;
-    using System.Net.Http;
-    using System.Threading.Tasks;
+﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.Azure.WebJobs;
+using Microsoft.Azure.WebJobs.Extensions.Http;
+using Microsoft.Extensions.Logging;
+using System;
+using System.Net.Http;
+using System.Threading.Tasks;
 
+namespace FunctionApp1
+{
     public static class Function1
     {
         const string sampleUrl = @"http://example.com";
@@ -27,15 +28,6 @@
 }
 namespace DifferentAssignments
 {
-    using Microsoft.AspNetCore.Http;
-    using Microsoft.AspNetCore.Mvc;
-    using Microsoft.Azure.WebJobs;
-    using Microsoft.Azure.WebJobs.Extensions.Http;
-    using Microsoft.Extensions.Logging;
-    using System;
-    using System.Net.Http;
-    using System.Threading.Tasks;
-
     public class FunctionApp1
     {
         private static HttpClient client = new HttpClient(); // Compliant
