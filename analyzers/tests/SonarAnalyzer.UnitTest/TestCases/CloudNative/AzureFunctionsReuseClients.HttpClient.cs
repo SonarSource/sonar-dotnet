@@ -45,10 +45,10 @@ namespace DifferentAssignments
         [FunctionName("Sample")]
         public static void Assignments()
         {
-            client = new HttpClient();                 // FN. The field is uncoditionally assigned on each call.
-            FunctionApp1.client = new HttpClient();    // FN
-            ClientProperty = new HttpClient();         // FN
-            ClientProperty = (new HttpClient());       // FN
+            client = new HttpClient();                 // Compliant. The field is uncoditionally assigned on each call, but we don't do SymbolicExecution analysis
+            FunctionApp1.client = new HttpClient();    // Compliant
+            ClientProperty = new HttpClient();         // Compliant
+            ClientProperty = (new HttpClient());       // Compliant
             someField = (object)(new HttpClient());    // Noncompliant. Some trickery to confuse the analyzer.
             someField = (new HttpClient() as object);  // Noncompliant
             client = PassThrough(new HttpClient());    // Noncompliant
