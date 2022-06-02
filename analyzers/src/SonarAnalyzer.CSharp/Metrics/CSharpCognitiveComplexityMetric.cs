@@ -39,7 +39,14 @@ namespace SonarAnalyzer.Metrics.CSharp
         public static CognitiveComplexity GetComplexity(SyntaxNode node, bool onlyGlobalStatements)
         {
             var walker = new CognitiveWalker(onlyGlobalStatements);
-            walker.SafeVisit(node);
+            if (node.IsKind(SyntaxKindEx.LocalFunctionStatement))
+            {
+                walker.VisitLocalFunction((LocalFunctionStatementSyntaxWrapper)node, true);
+            }
+            else
+            {
+                walker.SafeVisit(node);
+            }
 
             return new CognitiveComplexity(walker.State.Complexity, walker.State.IncrementLocations.ToImmutableArray());
         }
@@ -57,7 +64,7 @@ namespace SonarAnalyzer.Metrics.CSharp
             {
                 if (node.IsKind(SyntaxKindEx.LocalFunctionStatement))
                 {
-                    Visit((LocalFunctionStatementSyntaxWrapper)node);
+                    VisitLocalFunction((LocalFunctionStatementSyntaxWrapper)node, false);
                 }
                 else if (SwitchExpressionSyntaxWrapper.IsInstance(node))
                 {
@@ -227,9 +234,9 @@ namespace SonarAnalyzer.Metrics.CSharp
             public override void VisitParenthesizedLambdaExpression(ParenthesizedLambdaExpressionSyntax node) =>
                 State.VisitWithNesting(node, base.VisitParenthesizedLambdaExpression);
 
-            private void Visit(LocalFunctionStatementSyntaxWrapper localFunction)
+            public void VisitLocalFunction(LocalFunctionStatementSyntaxWrapper localFunction, bool visitStaticLocalFunctions)
             {
-                if (!localFunction.Modifiers.Any(SyntaxKind.StaticKeyword))
+                if (visitStaticLocalFunctions || !localFunction.Modifiers.Any(SyntaxKind.StaticKeyword))
                 {
                     State.VisitWithNesting(localFunction.SyntaxNode, base.Visit);
                 }

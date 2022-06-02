@@ -90,6 +90,16 @@ namespace SonarAnalyzer.Rules.CSharp
                c => CheckComplexity<FieldDeclarationSyntax>(c, f => f, f => f.Declaration.Variables[0].Identifier.GetLocation(),
                    CSharpCognitiveComplexityMetric.GetComplexity, "field", Threshold),
                SyntaxKind.FieldDeclaration);
+
+            context.RegisterSyntaxNodeActionInNonGenerated(c =>
+            {
+                if (((LocalFunctionStatementSyntaxWrapper)c.Node).Modifiers.Any(SyntaxKind.StaticKeyword))
+                {
+                   CheckComplexity<SyntaxNode>(c, m => m, m => ((LocalFunctionStatementSyntaxWrapper)m).Identifier.GetLocation(),
+                       CSharpCognitiveComplexityMetric.GetComplexity, "static local function", Threshold);
+                }
+            },
+            SyntaxKindEx.LocalFunctionStatement);
         }
     }
 }

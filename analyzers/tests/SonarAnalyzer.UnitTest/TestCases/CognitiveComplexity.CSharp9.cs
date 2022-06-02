@@ -21,18 +21,20 @@ void LocalFunction()
     }
 }
 
-static void StaticLocalFunction(int x)
+// Static local functions are excluded from the complexity computation of method
+// that they are nested in. They have their own complexity score as independent methods.
+// See issue https://github.com/SonarSource/sonar-dotnet/issues/5625
+static void StaticLocalFunction(int x) // Noncompliant {{Refactor this static local function to reduce its Cognitive Complexity from 4 to the 0 allowed.}}
 {
-    if (x == 1) // static local functions are excluded from the complexity computation.
-                // See issue https://github.com/SonarSource/sonar-dotnet/issues/5625
+    if (x == 1) // Secondary  {{+2 (incl 1 for nesting)}}
     {
         Console.WriteLine(x);
     }
-    else if (x == 2)
+    else if (x == 2) // Secondary  {{+1}}
     {
         Console.WriteLine(x);
     }
-    else
+    else // Secondary  {{+1}}
     {
         return;
     }
