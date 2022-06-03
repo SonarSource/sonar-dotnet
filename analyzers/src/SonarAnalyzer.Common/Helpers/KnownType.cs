@@ -37,6 +37,13 @@ namespace SonarAnalyzer.Helpers
 
         internal static readonly KnownType Void = new(SpecialType.System_Void, "void");
 
+        internal static readonly KnownType Azure_Messaging_ServiceBus_Administration_ServiceBusAdministrationClient = new("Azure.Messaging.ServiceBus.Administration.ServiceBusAdministrationClient");
+        internal static readonly KnownType Azure_Messaging_ServiceBus_ServiceBusClient = new("Azure.Messaging.ServiceBus.ServiceBusClient");
+        internal static readonly KnownType Azure_Storage_Blobs_BlobServiceClient = new("Azure.Storage.Blobs.BlobServiceClient");
+        internal static readonly KnownType Azure_Storage_Queues_QueueServiceClient = new("Azure.Storage.Queues.QueueServiceClient");
+        internal static readonly KnownType Azure_Storage_Files_Shares_ShareServiceClient = new("Azure.Storage.Files.Shares.ShareServiceClient");
+        internal static readonly KnownType Azure_Storage_Files_DataLake_DataLakeServiceClient = new("Azure.Storage.Files.DataLake.DataLakeServiceClient");
+        internal static readonly KnownType Azure_ResourceManager_ArmClient = new("Azure.ResourceManager.ArmClient");
         internal static readonly KnownType FluentAssertions_Execution_AssertionScope = new("FluentAssertions.Execution.AssertionScope");
         internal static readonly KnownType JWT_Builder_JwtBuilder = new("JWT.Builder.JwtBuilder");
         internal static readonly KnownType JWT_IJwtDecoder = new("JWT.IJwtDecoder");
@@ -66,6 +73,13 @@ namespace SonarAnalyzer.Helpers
         internal static readonly KnownType Microsoft_AspNetCore_Mvc_RequestFormLimitsAttribute = new("Microsoft.AspNetCore.Mvc.RequestFormLimitsAttribute");
         internal static readonly KnownType Microsoft_AspNetCore_Mvc_RequestSizeLimitAttribute = new("Microsoft.AspNetCore.Mvc.RequestSizeLimitAttribute");
         internal static readonly KnownType Microsoft_AspNetCore_Razor_Hosting_RazorCompiledItemAttribute = new("Microsoft.AspNetCore.Razor.Hosting.RazorCompiledItemAttribute");
+        internal static readonly KnownType Microsoft_Azure_Cosmos_CosmosClient = new("Microsoft.Azure.Cosmos.CosmosClient");
+        internal static readonly KnownType Microsoft_Azure_Documents_Client_DocumentClient = new("Microsoft.Azure.Documents.Client.DocumentClient");
+        internal static readonly KnownType Microsoft_Azure_ServiceBus_Management_ManagementClient = new("Microsoft.Azure.ServiceBus.Management.ManagementClient");
+        internal static readonly KnownType Microsoft_Azure_ServiceBus_QueueClient = new("Microsoft.Azure.ServiceBus.QueueClient");
+        internal static readonly KnownType Microsoft_Azure_ServiceBus_SessionClient = new("Microsoft.Azure.ServiceBus.SessionClient");
+        internal static readonly KnownType Microsoft_Azure_ServiceBus_SubscriptionClient = new("Microsoft.Azure.ServiceBus.SubscriptionClient");
+        internal static readonly KnownType Microsoft_Azure_ServiceBus_TopicClient = new("Microsoft.Azure.ServiceBus.TopicClient");
         internal static readonly KnownType Microsoft_Azure_WebJobs_Extensions_DurableTask_IDurableEntityClient = new("Microsoft.Azure.WebJobs.Extensions.DurableTask.IDurableEntityClient");
         internal static readonly KnownType Microsoft_Azure_WebJobs_Extensions_DurableTask_IDurableEntityContext = new("Microsoft.Azure.WebJobs.Extensions.DurableTask.IDurableEntityContext");
         internal static readonly KnownType Microsoft_Azure_WebJobs_Extensions_DurableTask_IDurableOrchestrationContext = new("Microsoft.Azure.WebJobs.Extensions.DurableTask.IDurableOrchestrationContext");
@@ -303,6 +317,7 @@ namespace SonarAnalyzer.Helpers
         internal static readonly KnownType System_MTAThreadAttribute = new("System.MTAThreadAttribute");
         internal static readonly KnownType System_Net_FtpWebRequest = new("System.Net.FtpWebRequest");
         internal static readonly KnownType System_Net_Http_Headers_HttpHeaders = new("System.Net.Http.Headers.HttpHeaders");
+        internal static readonly KnownType System_Net_Http_HttpClient = new("System.Net.Http.HttpClient");
         internal static readonly KnownType System_Net_Http_HttpClientHandler = new("System.Net.Http.HttpClientHandler");
         internal static readonly KnownType System_Net_Mail_SmtpClient = new("System.Net.Mail.SmtpClient");
         internal static readonly KnownType System_Net_NetworkCredential = new("System.Net.NetworkCredential");

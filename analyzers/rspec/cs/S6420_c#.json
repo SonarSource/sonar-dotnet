@@ -1,0 +1,18 @@
+{
+  "title": "Reuse client instances rather than creating new ones with each Azure Function invocation.",
+  "type": "CODE_SMELL",
+  "status": "ready",
+  "remediation": {
+    "func": "Constant\/Issue",
+    "constantCost": "5min"
+  },
+  "tags": [
+    "bad-practice",
+    "design"
+  ],
+  "defaultSeverity": "Major",
+  "ruleSpecification": "RSPEC-6420",
+  "sqKey": "S6420",
+  "scope": "Main",
+  "quickfix": "infeasible"
+}

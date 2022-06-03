@@ -33,6 +33,15 @@ namespace SonarAnalyzer.UnitTest.MetadataReferences
         public static References XunitFrameworkV1 => Create("xunit", "1.9.1").Concat(Create("xunit.extensions", "1.9.1"));
 
         // Passed version
+        public static References AzureCore(string packageVersion = Constants.NuGetLatestVersion) => Create("Azure.Core", packageVersion);
+        public static References AzureIdentity(string packageVersion = Constants.NuGetLatestVersion) => Create("Azure.Identity", packageVersion);
+        public static References AzureMessagingServiceBus(string packageVersion = Constants.NuGetLatestVersion) => Create("Azure.Messaging.ServiceBus", packageVersion);
+        public static References AzureResourceManager(string packageVersion = Constants.NuGetLatestVersion) => Create("Azure.ResourceManager", packageVersion);
+        public static References AzureStorageCommon(string packageVersion = Constants.NuGetLatestVersion) => Create("Azure.Storage.Common", packageVersion);
+        public static References AzureStorageBlobs(string packageVersion = Constants.NuGetLatestVersion) => Create("Azure.Storage.Blobs", packageVersion);
+        public static References AzureStorageFilesDataLake(string packageVersion = Constants.NuGetLatestVersion) => Create("Azure.Storage.Files.DataLake", packageVersion);
+        public static References AzureStorageFilesShares(string packageVersion = Constants.NuGetLatestVersion) => Create("Azure.Storage.Files.Shares", packageVersion);
+        public static References AzureStorageQueues(string packageVersion = Constants.NuGetLatestVersion) => Create("Azure.Storage.Queues", packageVersion);
         public static References BouncyCastle(string packageVersion = "1.8.5") => Create("BouncyCastle", packageVersion);
         public static References Dapper(string packageVersion = "1.50.5") => Create("Dapper", packageVersion);
         public static References EntityFramework(string packageVersion = "6.2.0") => Create("EntityFramework", packageVersion);
@@ -60,6 +69,9 @@ namespace SonarAnalyzer.UnitTest.MetadataReferences
         public static References MicrosoftAspNetMvc(string packageVersion) => Create("Microsoft.AspNet.Mvc", packageVersion);
         public static References MicrosoftAspNetSignalRCore(string packageVersion = "2.4.1") => Create("Microsoft.AspNet.SignalR.Core", packageVersion);
         public static References MicrosoftAspNetWebApiCors(string packageVersion) => Create("Microsoft.AspNet.WebApi.Cors", packageVersion);
+        public static References MicrosoftAzureCosmos(string packageVersion = Constants.NuGetLatestVersion) => Create("Microsoft.Azure.Cosmos", packageVersion);
+        public static References MicrosoftAzureDocumentDB(string packageVersion = Constants.NuGetLatestVersion) => Create("Microsoft.Azure.DocumentDB", packageVersion);
+        public static References MicrosoftAzureServiceBus(string packageVersion = Constants.NuGetLatestVersion) => Create("Microsoft.Azure.ServiceBus", packageVersion);
         public static References MicrosoftAzureWebJobs(string packageVersion = Constants.NuGetLatestVersion) => Create("Microsoft.Azure.WebJobs", packageVersion);
         public static References MicrosoftAzureWebJobsCore(string packageVersion = Constants.NuGetLatestVersion) => Create("Microsoft.Azure.WebJobs.Core", packageVersion);
         public static References MicrosoftAzureWebJobsExtensionsDurableTask(string packageVersion = Constants.NuGetLatestVersion) => Create("Microsoft.Azure.WebJobs.Extensions.DurableTask", packageVersion);
@@ -72,6 +84,7 @@ namespace SonarAnalyzer.UnitTest.MetadataReferences
         public static References MicrosoftEntityFrameworkCoreRelational(string packageVersion) => Create("Microsoft.EntityFrameworkCore.Relational", packageVersion);
         public static References MicrosoftExtensionsConfigurationAbstractions(string packageVersion) => Create("Microsoft.Extensions.Configuration.Abstractions", packageVersion);
         public static References MicrosoftExtensionsDependencyInjectionAbstractions(string packageVersion) => Create("Microsoft.Extensions.DependencyInjection.Abstractions", packageVersion);
+        public static References MicrosoftExtensionsHttp(string packageVersion = Constants.NuGetLatestVersion) => Create("Microsoft.Extensions.Http", packageVersion);
         public static References MicrosoftExtensionsLoggingPackages(string packageVersion) =>
             Create("Microsoft.Extensions.Logging", packageVersion)
             .Concat(Create("Microsoft.Extensions.Logging.AzureAppServices", packageVersion))
@@ -128,6 +141,7 @@ namespace SonarAnalyzer.UnitTest.MetadataReferences
         public static References SystemDataOracleClient(string packageVersion = "1.0.8") => Create("System.Data.OracleClient", packageVersion);
         public static References SystemDDirectoryServices(string packageVersion = "4.7.0") => Create("System.DirectoryServices", packageVersion);
         public static References SystemDrawingCommon(string packageVersion = "4.7.0") => Create("System.Drawing.Common", packageVersion);
+        public static References SystemNetHttp(string packageVersion = Constants.NuGetLatestVersion) => Create("System.Net.Http", packageVersion);
         public static References SystemSecurityCryptographyOpenSsl(string packageVersion = "4.7.0") => Create("System.Security.Cryptography.OpenSsl", packageVersion);
         public static References SystemSecurityPermissions(string packageVersion = "4.7.0") => Create("System.Security.Permissions", packageVersion);
         public static References SystemPrivateServiceModel(string packageVersion = "4.7.0") => Create("System.Private.ServiceModel", packageVersion);
