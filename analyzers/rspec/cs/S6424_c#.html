@@ -1,0 +1,85 @@
+<p>The recommended way to access Azure Durable Entities is Interfaces via generated proxy objects.</p>
+<p>The following restrictions, during interface design, are enforced:</p>
+<ul>
+  <li> Entity interfaces must be defined in the same assembly as the entity class. This is not detected by the rule. </li>
+  <li> Entity interfaces must only define methods. </li>
+  <li> Entity interfaces must not contain generic parameters. </li>
+  <li> Entity interface methods must not have more than one parameter. </li>
+  <li> Entity interface methods must return void, Task, or Task&lt;T&gt;. </li>
+</ul>
+<p>If any of these rules are violated, an <code>InvalidOperationException</code> is thrown at runtime when the interface is used as a type argument to
+<code>IDurableEntityContext.SignalEntity&lt;TEntityInterface&gt;</code>, <code>IDurableEntityClient.SignalEntityAsync&lt;TEntityInterface&gt;</code>
+or <code>IDurableOrchestrationContext.CreateEntityProxy&lt;TEntityInterface&gt;</code>. The exception message explains which rule was broken.</p>
+<p>This rule raises an issue in case any of the restrictions above is not respected.</p>
+<h2>Noncompliant Code Example</h2>
+<pre>
+namespace Foo // Noncompliant, must be defined in the same assembly as the entity class that implements it
+{
+    public interface ICounter&lt;T&gt; // Noncompliant, interfaces cannot contain generic parameters
+    {
+        string Name { get; set; } // Noncompliant, interface must only define methods
+        void Add(int amount, int secondParameter); // Noncompliant, methods must not have more than one parameter
+        int Get(); // Noncompliant, methods must return void, Task, or Task&lt;T&gt;
+    }
+}
+
+namespace Bar
+{
+    public class Counter : ICounter
+    {
+        // do stuff
+    }
+
+    public static class AddToCounterFromQueue
+    {
+        [FunctionName("AddToCounterFromQueue")]
+        public static Task Run(
+            [QueueTrigger("durable-function-trigger")] string input,
+            [DurableClient] IDurableEntityClient client)
+        {
+            var entityId = new EntityId("Counter", "myCounter");
+            int amount = int.Parse(input);
+            return client.SignalEntityAsync&lt;ICounter&gt;(entityId, proxy =&gt; proxy.Add(amount, 10));
+        }
+    }
+}
+</pre>
+<h2>Compliant Solution</h2>
+<pre>
+namespace Bar
+{
+    public interface ICounter
+    {
+        void Add(int amount);
+        Task&lt;int&gt; Get();
+    }
+}
+
+namespace Bar
+{
+    public class Counter : ICounter
+    {
+        // do stuff
+    }
+
+    public static class AddToCounterFromQueue
+    {
+        [FunctionName("AddToCounterFromQueue")]
+        public static Task Run(
+            [QueueTrigger("durable-function-trigger")] string input,
+            [DurableClient] IDurableEntityClient client)
+        {
+            var entityId = new EntityId("Counter", "myCounter");
+            int amount = int.Parse(input);
+            return client.SignalEntityAsync&lt;ICounter&gt;(entityId, proxy =&gt; proxy.Add(amount));
+        }
+    }
+}
+</pre>
+<h2>See</h2>
+<ul>
+  <li> <a
+  href="https://docs.microsoft.com/en-us/azure/azure-functions/durable/durable-functions-dotnet-entities#restrictions-on-entity-interfaces">Restrictions on Entity Interfaces</a> </li>
+  <li> <a href="https://docs.microsoft.com/en-us/azure/azure-functions/durable/durable-functions-entities?tabs=csharp">Durable Entities</a> </li>
+</ul>
+

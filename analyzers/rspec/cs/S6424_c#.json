@@ -1,0 +1,17 @@
+{
+  "title": "Azure Functions: Restrictions on entity interfaces.",
+  "type": "CODE_SMELL",
+  "status": "ready",
+  "remediation": {
+    "func": "Constant\/Issue",
+    "constantCost": "30min"
+  },
+  "tags": [
+    "design"
+  ],
+  "defaultSeverity": "Blocker",
+  "ruleSpecification": "RSPEC-6424",
+  "sqKey": "S6424",
+  "scope": "Main",
+  "quickfix": "infeasible"
+}
