@@ -52,7 +52,7 @@ namespace SonarAnalyzer.UnitTest.Rules
             CreateCSBuilder(2).AddSnippet(@"
 int i = 1; i++;
 
-void LocalFunction() // Noncompliant {{This top level local function has 4 lines, which is greater than the 2 lines authorized.}}
+void LocalFunction() // Noncompliant {{This local function has 4 lines, which is greater than the 2 lines authorized.}}
 {
     i++;
     i++;
