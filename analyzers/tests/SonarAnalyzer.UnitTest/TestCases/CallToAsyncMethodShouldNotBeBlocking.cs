@@ -42,7 +42,7 @@ namespace Tests.Diagnostics
             GetNameAsync().GetAwaiter().GetResult(); // Noncompliant
         }
 
-        public void WaitExamples()
+        public void WaitExamples(UnrelatedType unrelated)
         {
             GetFooAsync().Wait(); // Noncompliant {{Replace this use of 'Task.Wait' with 'await'.}}
 //          ^^^^^^^^^^^^^^^^^^
@@ -53,6 +53,8 @@ namespace Tests.Diagnostics
 
             // FP - the following cases should be valid
             GetNameAsync().Wait(); // Noncompliant
+
+            unrelated.Wait();   // Compliant
         }
 
         private void WaitAnyExamples()
@@ -329,5 +331,10 @@ namespace Tests.Diagnostics
         {
             var x = GetFooAsync().Result; // Noncompliant {{Replace this use of 'Task.Result' with 'await'. Calls to "async" methods should not be blocking in Azure Functions.}}
         }
+    }
+
+    public class UnrelatedType
+    {
+        public void Wait() { }
     }
 }

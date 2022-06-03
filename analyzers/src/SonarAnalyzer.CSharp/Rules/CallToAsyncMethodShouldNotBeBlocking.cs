@@ -102,9 +102,11 @@ namespace SonarAnalyzer.Rules.CSharp
 
             var possibleMemberAccesses = InvalidMemberAccess[memberAccessNameName];
             var memberAccessSymbol = context.SemanticModel.GetSymbolInfo(simpleMemberAccess).Symbol;
-            if (memberAccessSymbol?.ContainingType is not null
-                && memberAccessSymbol.ContainingType.ConstructedFrom.IsAny(possibleMemberAccesses)
-                && simpleMemberAccess.FirstAncestorOrSelf<BaseMethodDeclarationSyntax>() is { } enclosingMethod)
+            if (memberAccessSymbol?.ContainingType == null || !memberAccessSymbol.ContainingType.ConstructedFrom.IsAny(possibleMemberAccesses))
+            {
+                return;
+            }
+            if (simpleMemberAccess.FirstAncestorOrSelf<BaseMethodDeclarationSyntax>() is { } enclosingMethod)
             {
                 if (memberAccessNameName == SleepName && !enclosingMethod.Modifiers.Any(SyntaxKind.AsyncKeyword))
                 {
