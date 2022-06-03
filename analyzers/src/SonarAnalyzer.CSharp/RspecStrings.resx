@@ -12909,7 +12909,7 @@
   </data>
   <data name="S6420_Type" xml:space="preserve">
     <value>CODE_SMELL</value>
-  </data>
+  </data>  
   <data name="S6421_Category" xml:space="preserve">
     <value>Major Code Smell</value>
   </data>
@@ -12941,39 +12941,6 @@
     <value>Azure Functions should use Structured Error Handling.</value>
   </data>
   <data name="S6421_Type" xml:space="preserve">
-    <value>CODE_SMELL</value>
-  </data>
-  <data name="S6420_Category" xml:space="preserve">
-    <value>Major Code Smell</value>
-  </data>
-  <data name="S6420_Description" xml:space="preserve">
-    <value>To avoid holding more connections than necessary and to avoid potentially exhausting the number of available sockets when using HttpClient, DocumentClient, QueueClient, ConnectionMultiplexer or Azure Storage clients, consider:</value>
-  </data>
-  <data name="S6420_IsActivatedByDefault" xml:space="preserve">
-    <value>True</value>
-  </data>
-  <data name="S6420_Remediation" xml:space="preserve">
-    <value>Constant/Issue</value>
-  </data>
-  <data name="S6420_RemediationCost" xml:space="preserve">
-    <value>5min</value>
-  </data>
-  <data name="S6420_Scope" xml:space="preserve">
-    <value>All</value>
-  </data>
-  <data name="S6420_Severity" xml:space="preserve">
-    <value>Major</value>
-  </data>
-  <data name="S6420_Status" xml:space="preserve">
-    <value>ready</value>
-  </data>
-  <data name="S6420_Tags" xml:space="preserve">
-    <value>bad-practice,design</value>
-  </data>
-  <data name="S6420_Title" xml:space="preserve">
-    <value>Reuse client instances rather than creating new ones with each function invocation.</value>
-  </data>
-  <data name="S6420_Type" xml:space="preserve">
     <value>CODE_SMELL</value>
   </data>
   <data name="S6422_Category" xml:space="preserve">
