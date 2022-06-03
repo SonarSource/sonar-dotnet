@@ -46,23 +46,22 @@ namespace SonarAnalyzer.UnitTest.PackagingTests
                                   .Select(x => "S" + x)
                                   .Select(x => new
                                   {
-                                      ExpectedType = expectedTypes.GetValueOrDefault(x),
+                                      RuleId = x,
                                       ActualType = resourceManager.GetString($"{x}_Type"),
-                                      RuleId = x
+                                      ExpectedType = expectedTypes.GetValueOrDefault(x)
                                   })
                                   .Where(x => x.ActualType != x.ExpectedType)
                                   .ToList();
 
-            // If this test fails, you should add the types of the new rules in the dictionaries above. It is a manual task, sorry.
             var newRules = items.Where(x => x.ExpectedType is null);
             newRules.Should().BeEmpty($"you need to add the rules in {expectedTypesName}");
 
-            // Rules should not be deleted without careful consideration and prior deprecation. We need to notify the product teams (SQ, SC, SL) as well.
-            items.Should().NotContain(x => x.ActualType == null && !DeletedRules.Contains($"S{x.RuleId}"), "YOU SHOULD NEVER DELETE RULES!");
+            items.Should().NotContain(
+                x => x.ActualType == null && !DeletedRules.Contains($"S{x.RuleId}"),
+                "YOU SHOULD NEVER DELETE RULES! Rules should not be deleted without careful consideration and prior deprecation. We need to notify the product teams (SQ, SC, SL) as well.");
 
-            // If this test fails, you should update the types of the changed rules in the dictionaries above. Also add a GitHub issue specifying the change of type and update peach and next.
             var changedRules = items.Where(x => x.ActualType != null && x.ExpectedType != null);
-            changedRules.Should().BeEmpty($"you need to change the rules in {expectedTypesName}.");
+            changedRules.Should().BeEmpty($"you need to change the rule types in {expectedTypesName}.");
         }
     }
 }
