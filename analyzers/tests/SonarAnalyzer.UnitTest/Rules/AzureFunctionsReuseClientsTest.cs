@@ -37,50 +37,50 @@ namespace SonarAnalyzer.UnitTest.Rules
             builder.AddPaths("AzureFunctionsReuseClients.HttpClient.cs").Verify();
 
         [TestMethod]
-        public void AzureFunctionsReuseClients_HttpClient_CSharp9() =>
+        public void AzureFunctionsReuseClients_HttpClient_CS9() =>
             builder.AddPaths("AzureFunctionsReuseClients.HttpClient.CSharp9.cs").WithOptions(ParseOptionsHelper.FromCSharp9).Verify();
 
         [TestMethod]
         public void AzureFunctionsReuseClients_DocumentClient_CS() =>
-            builder.AddReferences(NuGetMetadataReference.MicrosoftAzureDocumentDB())
-                   .AddPaths("AzureFunctionsReuseClients.DocumentClient.cs")
-                   .Verify();
+            builder.AddPaths("AzureFunctionsReuseClients.DocumentClient.cs")
+                .AddReferences(NuGetMetadataReference.MicrosoftAzureDocumentDB())
+                .Verify();
 
         [TestMethod]
         public void AzureFunctionsReuseClients_CosmosClient_CS() =>
-            builder.AddReferences(NuGetMetadataReference.MicrosoftAzureCosmos())
-                   .AddPaths("AzureFunctionsReuseClients.CosmosClient.cs")
-                   .Verify();
+            builder.AddPaths("AzureFunctionsReuseClients.CosmosClient.cs")
+                .AddReferences(NuGetMetadataReference.MicrosoftAzureCosmos())
+                .Verify();
 
         [TestMethod]
         public void AzureFunctionsReuseClients_ServiceBusV5_CS() =>
-            builder.AddReferences(NuGetMetadataReference.MicrosoftAzureServiceBus())
-                   .AddPaths("AzureFunctionsReuseClients.ServiceBusV5.cs")
-                   .Verify();
+            builder.AddPaths("AzureFunctionsReuseClients.ServiceBusV5.cs")
+                .AddReferences(NuGetMetadataReference.MicrosoftAzureServiceBus())
+                .Verify();
 
         [TestMethod]
         public void AzureFunctionsReuseClients_ServiceBusV7_CS() =>
-            builder.AddReferences(NuGetMetadataReference.AzureMessagingServiceBus())
-                    .AddPaths("AzureFunctionsReuseClients.ServiceBusV7.cs")
-                    .Verify();
+            builder.AddPaths("AzureFunctionsReuseClients.ServiceBusV7.cs")
+                .AddReferences(NuGetMetadataReference.AzureMessagingServiceBus())
+                .Verify();
 
         [TestMethod]
         public void AzureFunctionsReuseClients_Storage_CS() =>
-            builder.AddReferences(NuGetMetadataReference.AzureCore())
-                   .AddReferences(NuGetMetadataReference.AzureStorageCommon())
-                   .AddReferences(NuGetMetadataReference.AzureStorageBlobs())
-                   .AddReferences(NuGetMetadataReference.AzureStorageQueues())
-                   .AddReferences(NuGetMetadataReference.AzureStorageFilesShares())
-                   .AddReferences(NuGetMetadataReference.AzureStorageFilesDataLake())
-                   .AddPaths("AzureFunctionsReuseClients.Storage.cs")
-                   .Verify();
+            builder.AddPaths("AzureFunctionsReuseClients.Storage.cs")
+                .AddReferences(NuGetMetadataReference.AzureCore())
+                .AddReferences(NuGetMetadataReference.AzureStorageCommon())
+                .AddReferences(NuGetMetadataReference.AzureStorageBlobs())
+                .AddReferences(NuGetMetadataReference.AzureStorageQueues())
+                .AddReferences(NuGetMetadataReference.AzureStorageFilesShares())
+                .AddReferences(NuGetMetadataReference.AzureStorageFilesDataLake())
+                .Verify();
 
         [TestMethod]
         public void AzureFunctionsReuseClients_ArmClient_CS() =>
-            builder.AddReferences(NuGetMetadataReference.AzureCore())
-                   .AddReferences(NuGetMetadataReference.AzureIdentity())
-                   .AddReferences(NuGetMetadataReference.AzureResourceManager())
-                   .AddPaths("AzureFunctionsReuseClients.ArmClient.cs")
-                   .Verify();
+            builder.AddPaths("AzureFunctionsReuseClients.ArmClient.cs")
+                .AddReferences(NuGetMetadataReference.AzureCore())
+                .AddReferences(NuGetMetadataReference.AzureIdentity())
+                .AddReferences(NuGetMetadataReference.AzureResourceManager())
+                .Verify();
     }
 }

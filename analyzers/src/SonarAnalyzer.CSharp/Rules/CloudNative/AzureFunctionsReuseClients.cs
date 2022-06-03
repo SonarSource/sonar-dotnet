@@ -69,7 +69,7 @@ namespace SonarAnalyzer.Rules.CSharp
             context.RegisterSyntaxNodeActionInNonGenerated(c =>
             {
                 if (c.AzureFunctionMethod() is not null
-                    && IsResuableClient(c.SemanticModel, c.Node)
+                    && IsResuableClient(c)
                     && !IsAssignedForReuse(c))
                 {
                     c.ReportIssue(Diagnostic.Create(Rule, c.Node.GetLocation()));
@@ -77,9 +77,9 @@ namespace SonarAnalyzer.Rules.CSharp
             },
             SyntaxKind.ObjectCreationExpression, SyntaxKindEx.ImplicitObjectCreationExpression);
 
-        private static bool IsAssignedForReuse(SemanticModel model, SyntaxNode node, CancellationToken cancellationToken) =>
-            !IsInVariableDeclaration(node)
-            && (IsInFieldOrPropertyInitializer(node) || IsAssignedStaticToFieldOrProperty(model, node, cancellationToken));
+        private static bool IsAssignedForReuse(SyntaxNodeAnalysisContext context) =>
+            !IsInVariableDeclaration(context.Node)
+            && (IsInFieldOrPropertyInitializer(context.Node) || IsAssignedStaticToFieldOrProperty(context.SemanticModel, context.Node, context.CancellationToken));
 
         private static bool IsInVariableDeclaration(SyntaxNode node) =>
             node.Parent is EqualsValueClauseSyntax { Parent: VariableDeclaratorSyntax { Parent: VariableDeclarationSyntax { Parent: LocalDeclarationStatementSyntax or UsingStatementSyntax } } };
@@ -96,10 +96,10 @@ namespace SonarAnalyzer.Rules.CSharp
                     IsStatic: true,
                 };
 
-        private static bool IsResuableClient(SemanticModel model, SyntaxNode node)
+        private static bool IsResuableClient(SyntaxNodeAnalysisContext context)
         {
-            var objectCreation = ObjectCreationFactory.Create(node);
-            return ReusableClients.Any(x => objectCreation.IsKnownType(x, model));
+            var objectCreation = ObjectCreationFactory.Create(context.Node);
+            return ReusableClients.Any(x => objectCreation.IsKnownType(x, context.SemanticModel));
         }
     }
 }
