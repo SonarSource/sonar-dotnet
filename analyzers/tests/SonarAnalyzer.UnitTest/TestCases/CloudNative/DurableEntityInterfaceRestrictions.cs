@@ -153,9 +153,13 @@ public class UseDurableEntityClient
         await client.SignalEntityAsync<IProperty>(id, x => { });                // Noncompliant {{Use valid entity interface. IProperty contains property "Value". Only methods are allowed.}}
         await client.SignalEntityAsync<IIndexer>(id, x => { });                 // Noncompliant {{Use valid entity interface. IIndexer contains property "this[]". Only methods are allowed.}}
         await client.SignalEntityAsync<IEvent>(id, x => { });                   // Noncompliant {{Use valid entity interface. IEvent contains event "Event". Only methods are allowed.}}
-        await client.SignalEntityAsync<IEvent>(id, x => { });                   // Noncompliant {{Use valid entity interface. IEvent contains event "Event". Only methods are allowed.}}
         await client.SignalEntityAsync<NotInterfaceClass>(id, x => { });        // Noncompliant {{Use valid entity interface. NotInterfaceClass is not an interface.}}
         await client.SignalEntityAsync<NotInterfaceStruct>(id, x => { });       // Noncompliant {{Use valid entity interface. NotInterfaceStruct is not an interface.}}
+    }
+
+    public async Task WithTypeParameter<T>()
+    {
+        await client.SignalEntityAsync<T>(id, x => { });    // Compliant, we can't tell what T is
     }
 
     public async Task FromDurableClient(IDurableClient inheritedClient)
