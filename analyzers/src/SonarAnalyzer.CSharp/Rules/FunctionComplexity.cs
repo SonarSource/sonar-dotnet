@@ -81,7 +81,7 @@ namespace SonarAnalyzer.Rules.CSharp
             {
                 if (((LocalFunctionStatementSyntaxWrapper)c.Node).Modifiers.Any(SyntaxKind.StaticKeyword))
                 {
-                    CheckComplexity<SyntaxNode>(c, d => ((LocalFunctionStatementSyntaxWrapper)d).Identifier.GetLocation(), "static local method");
+                    CheckComplexity<SyntaxNode>(c, d => ((LocalFunctionStatementSyntaxWrapper)d).Identifier.GetLocation(), "static local function");
                 }
             },
             SyntaxKindEx.LocalFunctionStatement);
