@@ -23,6 +23,7 @@ namespace FunctionApp1
         }
     }
 }
+
 namespace DifferentAssignments
 {
     public class FunctionApp1
@@ -45,14 +46,14 @@ namespace DifferentAssignments
         [FunctionName("Sample")]
         public static void Assignments()
         {
-            client = new HttpClient();                      // Compliant. The field is uncoditionally assigned on each call, but we don't do SymbolicExecution analysis
+            client = new HttpClient();                      // Compliant. The field is unconditionally assigned on each call, but we don't do SymbolicExecution analysis
             FunctionApp1.client = new HttpClient();         // Compliant
             ClientProperty = new HttpClient();              // Compliant
             FunctionApp1.ClientProperty = new HttpClient(); // Compliant
             ClientProperty = (new HttpClient());            // Compliant
-            someField = (object)(new HttpClient());         // Noncompliant. Some trickery to confuse the analyzer.
-            someField = (new HttpClient() as object);       // Noncompliant
-            client = PassThrough(new HttpClient());         // Noncompliant
+            someField = (object)(new HttpClient());         // Noncompliant FP. Some trickery to confuse the analyzer.
+            someField = (new HttpClient() as object);       // Noncompliant FP
+            client = PassThrough(new HttpClient());         // Noncompliant FP
             PassThrough(new HttpClient());                  // Noncompliant
             var local = new HttpClient();                   // Noncompliant
             local = new System.Net.Http.HttpClient();       // Noncompliant

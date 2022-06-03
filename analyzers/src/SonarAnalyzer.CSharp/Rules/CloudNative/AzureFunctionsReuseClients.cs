@@ -70,7 +70,7 @@ namespace SonarAnalyzer.Rules.CSharp
             {
                 if (c.AzureFunctionMethod() is not null
                     && IsResuableClient(c.SemanticModel, c.Node)
-                    && !IsAssignedForReuse(c.SemanticModel, c.Node, c.CancellationToken))
+                    && !IsAssignedForReuse(c))
                 {
                     c.ReportIssue(Diagnostic.Create(Rule, c.Node.GetLocation()));
                 }

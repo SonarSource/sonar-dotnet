@@ -119,9 +119,9 @@ namespace SonarAnalyzer.Extensions
             return current;
         }
 
-        public static SyntaxNode WalkUpParentheses(this SyntaxNode expression)
+        public static SyntaxNode WalkUpParentheses(this SyntaxNode node)
         {
-            while (expression != null && expression.IsKind(SyntaxKind.ParenthesizedExpression))
+            while (expression is not null && expression.IsKind(SyntaxKind.ParenthesizedExpression))
             {
                 expression = expression.Parent;
             }
