@@ -1,0 +1,17 @@
+{
+  "title": "Calls to \"async\" methods should not be blocking in Azure Functions",
+  "type": "CODE_SMELL",
+  "status": "ready",
+  "remediation": {
+    "func": "Constant\/Issue",
+    "constantCost": "10min"
+  },
+  "tags": [
+    "async-await"
+  ],
+  "defaultSeverity": "Blocker",
+  "ruleSpecification": "RSPEC-6422",
+  "sqKey": "S6422",
+  "scope": "Main",
+  "quickfix": "infeasible"
+}

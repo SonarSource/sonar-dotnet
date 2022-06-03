@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
+using Microsoft.Azure.WebJobs;
 
 namespace Tests.Diagnostics
 {
@@ -18,7 +19,9 @@ namespace Tests.Diagnostics
         {
             return Task.Run(() => "George");
         }
+
         void nop(int i) { }
+
         public void ResultExamples()
         {
             var x = GetFooAsync().Result; // Noncompliant {{Replace this use of 'Task.Result' with 'await'.}}
@@ -39,7 +42,7 @@ namespace Tests.Diagnostics
             GetNameAsync().GetAwaiter().GetResult(); // Noncompliant
         }
 
-        public void WaitExamples()
+        public void WaitExamples(UnrelatedType unrelated)
         {
             GetFooAsync().Wait(); // Noncompliant {{Replace this use of 'Task.Wait' with 'await'.}}
 //          ^^^^^^^^^^^^^^^^^^
@@ -50,6 +53,8 @@ namespace Tests.Diagnostics
 
             // FP - the following cases should be valid
             GetNameAsync().Wait(); // Noncompliant
+
+            unrelated.Wait();   // Compliant
         }
 
         private void WaitAnyExamples()
@@ -320,5 +325,16 @@ namespace Tests.Diagnostics
             public static Task WhenAll(params Task[] tasks) { return null; }
             public static Task When(params Task[] tasks) { return null; }
         }
+
+        [FunctionName("Sample")]
+        public static void S6422_AzureFunction()
+        {
+            var x = GetFooAsync().Result; // Noncompliant {{Replace this use of 'Task.Result' with 'await'. Do not perform blocking operations in Azure Functions.}}
+        }
+    }
+
+    public class UnrelatedType
+    {
+        public void Wait() { }
     }
 }

@@ -25,14 +25,19 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class CallToAsyncMethodShouldNotBeBlockingTest
     {
+        private readonly VerifierBuilder builder = new VerifierBuilder<CallToAsyncMethodShouldNotBeBlocking>();
+
         [TestMethod]
         public void CallToAsyncMethodShouldNotBeBlocking() =>
-            OldVerifier.VerifyAnalyzer(@"TestCases\CallToAsyncMethodShouldNotBeBlocking.cs", new CallToAsyncMethodShouldNotBeBlocking());
+            builder.AddPaths("CallToAsyncMethodShouldNotBeBlocking.cs").AddReferences(NuGetMetadataReference.MicrosoftNetSdkFunctions()).Verify();
 
 #if NET
+
         [TestMethod]
         public void CallToAsyncMethodShouldNotBeBlocking_CSharp9() =>
-            OldVerifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\CallToAsyncMethodShouldNotBeBlocking.CSharp9.cs", new CallToAsyncMethodShouldNotBeBlocking());
+            builder.AddPaths("CallToAsyncMethodShouldNotBeBlocking.CSharp9.cs").WithTopLevelStatements().Verify();
+
 #endif
+
     }
 }

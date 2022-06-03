@@ -44,7 +44,7 @@ namespace SonarAnalyzer.Rules.CSharp
         protected override void Initialize(SonarAnalysisContext context) =>
             context.RegisterSyntaxNodeActionInNonGenerated(c =>
                 {
-                    if (c.AzureFunctionMethod() is not null)
+                    if (c.IsAzureFunction())
                     {
                         var method = (MethodDeclarationSyntax)c.Node;
                         var walker = new Walker();

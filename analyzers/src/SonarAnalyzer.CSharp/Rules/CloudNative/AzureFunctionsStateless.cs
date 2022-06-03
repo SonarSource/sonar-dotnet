@@ -79,7 +79,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private static void CheckTarget(SyntaxNodeAnalysisContext context, ExpressionSyntax target)
         {
-            if (context.AzureFunctionMethod() is not null
+            if (context.IsAzureFunction()
                 && context.SemanticModel.GetSymbolInfo((target as ElementAccessExpressionSyntax)?.Expression ?? target).Symbol is { } symbol
                 && symbol.IsStatic)
             {

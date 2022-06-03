@@ -11837,7 +11837,7 @@
     <value>Blocker Code Smell</value>
   </data>
   <data name="S4462_Description" xml:space="preserve">
-    <value>Making blocking calls to async methods transforms something that was intended to be asynchronous into a synchronous block. Doing so can cause deadlocks and unexpected blocking of context threads.</value>
+    <value>Making blocking calls to async methods transforms code that was intended to be asynchronous into a blocking operation. Doing so can cause deadlocks and unexpected blocking of context threads.</value>
   </data>
   <data name="S4462_IsActivatedByDefault" xml:space="preserve">
     <value>False</value>
@@ -12908,6 +12908,39 @@
     <value>Azure Functions should use Structured Error Handling.</value>
   </data>
   <data name="S6421_Type" xml:space="preserve">
+    <value>CODE_SMELL</value>
+  </data>
+  <data name="S6422_Category" xml:space="preserve">
+    <value>Blocker Code Smell</value>
+  </data>
+  <data name="S6422_Description" xml:space="preserve">
+    <value>Making blocking calls to async methods transforms code that was intended to be asynchronous into a blocking operation. Doing so inside an Azure Function can lead to thread exhaustion.</value>
+  </data>
+  <data name="S6422_IsActivatedByDefault" xml:space="preserve">
+    <value>True</value>
+  </data>
+  <data name="S6422_Remediation" xml:space="preserve">
+    <value>Constant/Issue</value>
+  </data>
+  <data name="S6422_RemediationCost" xml:space="preserve">
+    <value>10min</value>
+  </data>
+  <data name="S6422_Scope" xml:space="preserve">
+    <value>Main</value>
+  </data>
+  <data name="S6422_Severity" xml:space="preserve">
+    <value>Blocker</value>
+  </data>
+  <data name="S6422_Status" xml:space="preserve">
+    <value>ready</value>
+  </data>
+  <data name="S6422_Tags" xml:space="preserve">
+    <value>async-await</value>
+  </data>
+  <data name="S6422_Title" xml:space="preserve">
+    <value>Calls to "async" methods should not be blocking in Azure Functions</value>
+  </data>
+  <data name="S6422_Type" xml:space="preserve">
     <value>CODE_SMELL</value>
   </data>
   <data name="S6423_Category" xml:space="preserve">
