@@ -24,6 +24,7 @@ using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
+using SonarAnalyzer.Extensions;
 using SonarAnalyzer.Helpers;
 using StyleCop.Analyzers.Lightup;
 
@@ -44,9 +45,10 @@ namespace SonarAnalyzer.Rules.CSharp
                 {
                     var catchClause = (CatchClauseSyntax)c.Node;
 
-                    if (IsSystemException(catchClause.Declaration, c.SemanticModel)
+                    if (c.AzureFunctionMethod() is null
                         && IsCatchClauseEmptyOrNotPattern(catchClause)
-                        && !IsThrowTheLastStatementInTheBlock(catchClause?.Block))
+                        && IsSystemException(catchClause.Declaration, c.SemanticModel)
+                        && !IsThrowTheLastStatementInTheBlock(catchClause.Block))
                     {
                         c.ReportIssue(Diagnostic.Create(Rule, GetLocation(catchClause)));
                     }
@@ -68,18 +70,7 @@ namespace SonarAnalyzer.Rules.CSharp
         private static bool IsThrowTheLastStatementInTheBlock(BlockSyntax block)
         {
             var lastStatement = block?.DescendantNodes()?.LastOrDefault();
-
-            while (!Equals(lastStatement, block) && lastStatement != null)
-            {
-                if (lastStatement is ThrowStatementSyntax)
-                {
-                    return true;
-                }
-
-                lastStatement = lastStatement.Parent;
-            }
-
-            return false;
+            return lastStatement != null && lastStatement.AncestorsAndSelf().TakeWhile(x => !Equals(x, block)).Any(x => x is ThrowStatementSyntax);
         }
 
         private static Location GetLocation(CatchClauseSyntax catchClause) =>
