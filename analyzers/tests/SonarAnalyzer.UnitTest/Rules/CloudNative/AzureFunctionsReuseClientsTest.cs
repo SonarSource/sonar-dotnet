@@ -20,7 +20,7 @@
 
 using SonarAnalyzer.Rules.CSharp;
 
-namespace SonarAnalyzer.UnitTest.Rules
+namespace SonarAnalyzer.UnitTest.Rules.CloudNative
 {
     [TestClass]
     public class AzureFunctionsReuseClientsTest
@@ -37,7 +37,7 @@ namespace SonarAnalyzer.UnitTest.Rules
             builder.AddPaths("AzureFunctionsReuseClients.HttpClient.cs").Verify();
 
         [TestMethod]
-        public void AzureFunctionsReuseClients_HttpClient_CS9() =>
+        public void AzureFunctionsReuseClients_HttpClient_CSharp9() =>
             builder.AddPaths("AzureFunctionsReuseClients.HttpClient.CSharp9.cs").WithOptions(ParseOptionsHelper.FromCSharp9).Verify();
 
         [TestMethod]
