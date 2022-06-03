@@ -11,7 +11,7 @@ void LocalFunction() // Noncompliant {{This local function has 4 lines, which is
     i++;
 }
 
-static void StaticLocalFunction() // Noncompliant {{This local function has 4 lines, which is greater than the 2 lines authorized.}}
+static void StaticLocalFunction() // Noncompliant {{This static local function has 4 lines, which is greater than the 2 lines authorized.}}
 {
     int k = 1;
     k++;

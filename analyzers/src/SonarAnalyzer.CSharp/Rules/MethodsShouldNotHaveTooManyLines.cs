@@ -57,8 +57,7 @@ namespace SonarAnalyzer.Rules.CSharp
         {
             context.RegisterSyntaxNodeActionInNonGenerated(c =>
                 {
-                    var containsTopLevelMain = c.ContainingSymbol.IsTopLevelMain();
-                    if (containsTopLevelMain
+                    if (c.ContainingSymbol.IsTopLevelMain()
                         || ((LocalFunctionStatementSyntaxWrapper)c.Node).Modifiers.Any(SyntaxKind.StaticKeyword))
                     {
                         var wrapper = (LocalFunctionStatementSyntaxWrapper)c.Node;
@@ -69,7 +68,7 @@ namespace SonarAnalyzer.Rules.CSharp
                                 Diagnostic.Create(
                                     LocalFunctionRule,
                                     wrapper.Identifier.GetLocation(),
-                                    containsTopLevelMain ? "This" : "This static",
+                                    wrapper.Modifiers.Any(SyntaxKind.StaticKeyword) ? "This static" : "This",
                                     linesCount,
                                     Max,
                                     MethodKeyword));
