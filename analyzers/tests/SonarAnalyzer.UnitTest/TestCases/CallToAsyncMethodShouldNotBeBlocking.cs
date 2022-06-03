@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
+using Microsoft.Azure.WebJobs;
 
 namespace Tests.Diagnostics
 {
@@ -18,7 +19,9 @@ namespace Tests.Diagnostics
         {
             return Task.Run(() => "George");
         }
+
         void nop(int i) { }
+
         public void ResultExamples()
         {
             var x = GetFooAsync().Result; // Noncompliant {{Replace this use of 'Task.Result' with 'await'.}}
@@ -319,6 +322,12 @@ namespace Tests.Diagnostics
         {
             public static Task WhenAll(params Task[] tasks) { return null; }
             public static Task When(params Task[] tasks) { return null; }
+        }
+
+        [FunctionName("Sample")]
+        public static void S6422_AzureFunction()
+        {
+            var x = GetFooAsync().Result; // Noncompliant {{Replace this use of 'Task.Result' with 'await'. Calls to "async" methods should not be blocking in Azure Functions.}}
         }
     }
 }

@@ -39,6 +39,9 @@ namespace SonarAnalyzer.Extensions
         internal static bool IsRedundantPositionalRecordContext(this SyntaxNodeAnalysisContext context) =>
             context.ContainingSymbol.Kind == SymbolKind.Method;
 
+        public static bool IsAzureFunction(this SyntaxNodeAnalysisContext context) =>
+            context.AzureFunctionMethod() is not null;
+
         public static IMethodSymbol AzureFunctionMethod(this SyntaxNodeAnalysisContext context) =>
             context.ContainingSymbol is IMethodSymbol method && method.HasAttribute(KnownType.Microsoft_Azure_WebJobs_FunctionNameAttribute)
                 ? method
