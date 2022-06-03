@@ -329,7 +329,7 @@ namespace Tests.Diagnostics
         [FunctionName("Sample")]
         public static void S6422_AzureFunction()
         {
-            var x = GetFooAsync().Result; // Noncompliant {{Replace this use of 'Task.Result' with 'await'. Calls to "async" methods should not be blocking in Azure Functions.}}
+            var x = GetFooAsync().Result; // Noncompliant {{Replace this use of 'Task.Result' with 'await'. Do not perform blocking operations in Azure Functions.}}
         }
     }
 

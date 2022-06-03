@@ -1,5 +1,5 @@
-<p>Making blocking calls to <code>async</code> methods transforms something that was intended to be asynchronous into a synchronous block. Doing so
-can cause deadlocks and unexpected blocking of context threads.</p>
+<p>Making blocking calls to <code>async</code> methods transforms code that was intended to be asynchronous into a blocking operation. Doing so can
+cause deadlocks and unexpected blocking of context threads.</p>
 <p>According to the MSDN documentation:</p>
 <blockquote>
   <p>The root cause of this deadlock is due to the way <code>await</code> handles contexts. By default, when an incomplete <code>Task</code> is

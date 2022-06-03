@@ -11837,7 +11837,7 @@
     <value>Blocker Code Smell</value>
   </data>
   <data name="S4462_Description" xml:space="preserve">
-    <value>Making blocking calls to async methods transforms something that was intended to be asynchronous into a synchronous block. Doing so can cause deadlocks and unexpected blocking of context threads.</value>
+    <value>Making blocking calls to async methods transforms code that was intended to be asynchronous into a blocking operation. Doing so can cause deadlocks and unexpected blocking of context threads.</value>
   </data>
   <data name="S4462_IsActivatedByDefault" xml:space="preserve">
     <value>False</value>
@@ -12914,7 +12914,7 @@
     <value>Blocker Code Smell</value>
   </data>
   <data name="S6422_Description" xml:space="preserve">
-    <value>Making blocking calls to async methods transforms something that was intended to be asynchronous into a synchronous block. Doing so inside an Azure Function can lead to thread exhaustion.</value>
+    <value>Making blocking calls to async methods transforms code that was intended to be asynchronous into a blocking operation. Doing so inside an Azure Function can lead to thread exhaustion.</value>
   </data>
   <data name="S6422_IsActivatedByDefault" xml:space="preserve">
     <value>True</value>
