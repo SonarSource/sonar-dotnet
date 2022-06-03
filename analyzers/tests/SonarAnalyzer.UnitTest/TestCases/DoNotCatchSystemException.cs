@@ -88,3 +88,24 @@ namespace Tests.Diagnostics
         }
     }
 }
+
+namespace AzureFunction
+{
+    using Microsoft.Azure.WebJobs;
+
+    class Program
+    {
+        [FunctionName("Sample")]
+        public void Method()
+        {
+            try { }
+            catch (Exception e) { } // Compliant. Don't raise for AzureFunctions because it contradicts S6421.
+
+            try { }
+            catch (Exception) { }   // Compliant.
+
+            try { }
+            catch { }               // Compliant.
+        }
+    }
+}

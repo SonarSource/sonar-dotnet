@@ -29,13 +29,7 @@ namespace SonarAnalyzer.UnitTest.Rules
 
         [TestMethod]
         public void DoNotCatchSystemException() =>
-            builder.AddPaths("DoNotCatchSystemException.cs").Verify();
-
-        [TestMethod]
-        public void DoNotCatchSystemException_AzureFunction() => builder
-            .AddReferences(NuGetMetadataReference.MicrosoftAzureWebJobsCore())
-            .AddPaths("DoNotCatchSystemException.AzureFunction.cs")
-            .Verify();
+            builder.AddReferences(NuGetMetadataReference.MicrosoftAzureWebJobsCore()).AddPaths("DoNotCatchSystemException.cs").Verify();
 
 #if NET
         [TestMethod]
