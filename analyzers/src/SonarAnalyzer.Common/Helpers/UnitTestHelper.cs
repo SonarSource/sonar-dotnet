@@ -120,11 +120,12 @@ namespace SonarAnalyzer.Helpers
                     method.GetAttributes().Any(att => att.AttributeClass.Is(known)));
 
         private static bool IsAnyTestCaseAttributeWithExpectedResult(AttributeData a) =>
-            IsTestCaseAttributeWithExpectedResult(a)
+            IsTestAttributeWithExpectedResult(a)
             || a.AttributeClass.Is(KnownType.NUnit_Framework_TestCaseSourceAttribute);
 
-        private static bool IsTestCaseAttributeWithExpectedResult(AttributeData a) =>
-            a.AttributeClass.Is(KnownType.NUnit_Framework_TestCaseAttribute)
+        private static bool IsTestAttributeWithExpectedResult(AttributeData a) =>
+            (a.AttributeClass.Is(KnownType.NUnit_Framework_TestCaseAttribute)
+            || a.AttributeClass.Is(KnownType.NUnit_Framework_TestAttribute))
             && a.NamedArguments.Any(arg => arg.Key == "ExpectedResult");
     }
 }

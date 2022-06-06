@@ -137,6 +137,12 @@
         public void Test17() // Don't raise on skipped test methods
         {
         }
+
+        [Test(ExpectedResult = 69)]
+        public int TestViaExpectedResult() // Compliant, assertion via expected result
+        {
+            return 69;
+        }
     }
 
     [TestFixture]
