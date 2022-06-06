@@ -39,6 +39,12 @@ namespace SonarAnalyzer.UnitTest.Rules
                                         .Concat(NuGetMetadataReference.MicrosoftAspNetCoreRoutingAbstractions(aspnetCoreVersion)))
                 .Verify();
 
+        [TestMethod]
+        public void MemberShouldBeStatic_WinForms() =>
+            builder.AddPaths("MemberShouldBeStatic.WinForms.cs")
+                .AddReferences(MetadataReferenceFacade.SystemWindowsForms)
+                .Verify();
+
 #if NET
         [TestMethod]
         public void MemberShouldBeStatic_CSharp9() =>
