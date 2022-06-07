@@ -138,10 +138,10 @@
         {
         }
 
-        [Test(ExpectedResult = 69)]
+        [Test(ExpectedResult = 42)]
         public int TestViaExpectedResult() // Compliant, assertion via expected result
         {
-            return 69;
+            return 42;
         }
     }
 
