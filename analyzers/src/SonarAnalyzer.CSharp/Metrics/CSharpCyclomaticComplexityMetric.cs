@@ -49,7 +49,14 @@ namespace SonarAnalyzer.Metrics.CSharp
         public static CyclomaticComplexity GetComplexity(SyntaxNode syntaxNode, bool onlyGlobalStatements)
         {
             var walker = new CyclomaticWalker(onlyGlobalStatements);
-            walker.SafeVisit(syntaxNode);
+            if (syntaxNode.IsKind(SyntaxKindEx.LocalFunctionStatement))
+            {
+                walker.VisitLocalFunction((LocalFunctionStatementSyntaxWrapper)syntaxNode);
+            }
+            else
+            {
+                walker.SafeVisit(syntaxNode);
+            }
 
             return new CyclomaticComplexity(walker.IncrementLocations.ToImmutableArray());
         }
@@ -67,7 +74,7 @@ namespace SonarAnalyzer.Metrics.CSharp
             {
                 foreach (var globalStatement in node.Members.Where(x => x.IsKind(SyntaxKind.GlobalStatement)))
                 {
-                    if (!IsStaticLocalFunction((GlobalStatementSyntax)globalStatement))
+                    if (!IsStaticLocalFunction(globalStatement))
                     {
                         base.Visit(globalStatement);
                     }
@@ -191,6 +198,12 @@ namespace SonarAnalyzer.Metrics.CSharp
                 base.VisitCaseSwitchLabel(node);
             }
 
+            public void VisitLocalFunction(LocalFunctionStatementSyntaxWrapper node)
+            {
+                AddLocation(node.Identifier);
+                base.Visit(node.SyntaxNode);
+            }
+
             public override void Visit(SyntaxNode node)
             {
                 if (SwitchExpressionArmSyntaxWrapper.IsInstance(node))
@@ -213,9 +226,6 @@ namespace SonarAnalyzer.Metrics.CSharp
             private void AddLocation(SyntaxToken node) => IncrementLocations.Add(new SecondaryLocation(node.GetLocation(), "+1"));
 
             private static bool HasBody(SyntaxNode node) => node.ChildNodes().AnyOfKind(SyntaxKind.Block);
-
-            private static bool IsStaticLocalFunction(GlobalStatementSyntax node) =>
-                IsStaticLocalFunction(node.Statement);
 
             private static bool IsStaticLocalFunction(SyntaxNode node) =>
                 node.IsKind(SyntaxKindEx.LocalFunctionStatement)

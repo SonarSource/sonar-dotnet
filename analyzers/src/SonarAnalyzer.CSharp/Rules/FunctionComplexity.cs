@@ -77,6 +77,15 @@ namespace SonarAnalyzer.Rules.CSharp
                 c => CheckComplexity<DestructorDeclarationSyntax>(c, d => d.Identifier.GetLocation(), "destructor"),
                 SyntaxKind.DestructorDeclaration);
 
+            context.RegisterSyntaxNodeActionInNonGenerated(c =>
+            {
+                if (((LocalFunctionStatementSyntaxWrapper)c.Node).Modifiers.Any(SyntaxKind.StaticKeyword))
+                {
+                    CheckComplexity<SyntaxNode>(c, d => ((LocalFunctionStatementSyntaxWrapper)d).Identifier.GetLocation(), "static local function");
+                }
+            },
+            SyntaxKindEx.LocalFunctionStatement);
+
             context.RegisterSyntaxNodeActionInNonGenerated(
                 c => CheckComplexity<AccessorDeclarationSyntax>(c, a => a.Keyword.GetLocation(), "accessor"),
                 SyntaxKind.GetAccessorDeclaration,
