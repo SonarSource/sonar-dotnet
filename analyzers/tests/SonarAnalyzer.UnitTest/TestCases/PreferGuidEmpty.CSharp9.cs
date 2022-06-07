@@ -5,6 +5,8 @@ namespace Tests.Diagnostics
 {
     public class Program
     {
+        public static readonly Guid Global = new("54972F01-2A74-4D09-AA7C-359E9C5A5B5A"); // Compliant
+
         public void Foo()
         {
             Guid g1 = new(); // Noncompliant
