@@ -64,10 +64,9 @@ namespace SonarAnalyzer.Metrics.VisualBasic
                 var attributeName = attribute?.Name?.ToString() ?? string.Empty;
 
                 // Check the attribute name without the attribute suffix OR the full name of the attribute
-                return attributeName.EndsWith(
-                        KnownType.System_Diagnostics_CodeAnalysis_ExcludeFromCodeCoverageAttribute.ShortName.Substring(0,
-                            KnownType.System_Diagnostics_CodeAnalysis_ExcludeFromCodeCoverageAttribute.ShortName.Length - 9), StringComparison.Ordinal) ||
-                    attributeName.EndsWith(KnownType.System_Diagnostics_CodeAnalysis_ExcludeFromCodeCoverageAttribute.ShortName, StringComparison.Ordinal);
+                var excludeCoverageName = KnownType.System_Diagnostics_CodeAnalysis_ExcludeFromCodeCoverageAttribute.TypeName;
+                return attributeName.EndsWith(excludeCoverageName.Substring(0, excludeCoverageName.Length - 9), StringComparison.Ordinal)
+                    || attributeName.EndsWith(excludeCoverageName, StringComparison.Ordinal);
             }
 
             private bool FindExecutableLines(SyntaxNode node)

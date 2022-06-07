@@ -41,13 +41,12 @@ namespace SonarAnalyzer.Helpers
 
             bool HasMainParameters() =>
                 methodSymbol.Parameters.Length == 0
-                || (methodSymbol.Parameters.Length == 1 && methodSymbol.Parameters[0].Type.IsAny(KnownType.System_String_Array, KnownType.System_String_Array_VB));
+                || (methodSymbol.Parameters.Length == 1 && methodSymbol.Parameters[0].Type.Is(KnownType.System_String_Array));
 
             bool HasMainReturnType() =>
                 methodSymbol.ReturnsVoid
                 || methodSymbol.ReturnType.IsAny(KnownType.System_Int32, KnownType.System_Threading_Tasks_Task)
-                || (
-                    methodSymbol.ReturnType.OriginalDefinition.Is(KnownType.System_Threading_Tasks_Task_T)
+                || (methodSymbol.ReturnType.OriginalDefinition.Is(KnownType.System_Threading_Tasks_Task_T)
                     && ((methodSymbol.ReturnType as INamedTypeSymbol)?.TypeArguments.FirstOrDefault().Is(KnownType.System_Int32) ?? false));
         }
 

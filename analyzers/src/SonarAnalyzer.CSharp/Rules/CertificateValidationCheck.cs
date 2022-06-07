@@ -119,7 +119,5 @@ namespace SonarAnalyzer.Rules.CSharp
 
         protected override SyntaxNode SyntaxFromReference(SyntaxReference reference) =>
             reference.GetSyntax();   // VB.NET has more complicated logic
-
-        private protected override KnownType GenericDelegateType() => KnownType.System_Func_T1_T2_T3_T4_TResult;
     }
 }

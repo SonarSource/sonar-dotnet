@@ -48,13 +48,7 @@ namespace SonarAnalyzer.Helpers
         #region TypeName
 
         public static bool Is(this ITypeSymbol typeSymbol, KnownType type) =>
-            typeSymbol != null && IsMatch(typeSymbol, type);
-
-        private static bool IsMatch(ITypeSymbol typeSymbol, KnownType type) =>
-            type.Matches(typeSymbol.SpecialType)
-            || type.Matches(typeSymbol.OriginalDefinition.SpecialType)
-            || type.Matches(typeSymbol.ToDisplayString())
-            || type.Matches(typeSymbol.OriginalDefinition.ToDisplayString());
+            typeSymbol != null && type.Matches(typeSymbol);
 
         public static bool IsAny(this ITypeSymbol typeSymbol, params KnownType[] types)
         {
@@ -66,7 +60,7 @@ namespace SonarAnalyzer.Helpers
             // For is twice as fast as foreach on ImmutableArray so don't use Linq here
             for (var i = 0; i < types.Length; i++)
             {
-                if (IsMatch(typeSymbol, types[i]))
+                if (types[i].Matches(typeSymbol))
                 {
                     return true;
                 }
@@ -85,7 +79,7 @@ namespace SonarAnalyzer.Helpers
             // For is twice as fast as foreach on ImmutableArray so don't use Linq here
             for (var i = 0; i < types.Length; i++)
             {
-                if (IsMatch(typeSymbol, types[i]))
+                if (types[i].Matches(typeSymbol))
                 {
                     return true;
                 }
@@ -118,7 +112,7 @@ namespace SonarAnalyzer.Helpers
             typeSymbol is { }
             && typeSymbol.AllInterfaces.Any(symbol => symbol.ConstructedFrom.Is(type));
 
-        public static bool Implements(this ITypeSymbol typeSymbol, ITypeSymbol type) =>
+        private static bool Implements(this ITypeSymbol typeSymbol, ISymbol type) =>
             typeSymbol is { }
             && typeSymbol.AllInterfaces.Any(symbol => symbol.ConstructedFrom.Equals(type));
 

@@ -36,7 +36,7 @@ namespace SonarAnalyzer.Helpers
         }
 
         public override string ToString() =>
-            $"{ContainingType.ShortName}.{Name}";
+            $"{ContainingType.TypeName}.{Name}";
 
         public bool IsMatch(string memberName, ITypeSymbol containingType, StringComparison nameComparison) =>
             HasSameName(memberName, Name, nameComparison)

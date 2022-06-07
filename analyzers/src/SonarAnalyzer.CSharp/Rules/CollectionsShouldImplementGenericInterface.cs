@@ -34,25 +34,28 @@ namespace SonarAnalyzer.Rules.CSharp
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
     public sealed class CollectionsShouldImplementGenericInterface : SonarDiagnosticAnalyzer
     {
-        internal const string DiagnosticId = "S3909";
+        private const string DiagnosticId = "S3909";
         private const string MessageFormat = "Refactor this collection to implement '{0}'.";
 
         private static readonly DiagnosticDescriptor Rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
 
-        private static readonly Dictionary<string, KnownType> NongenericToGenericMapping = new()
+        private static readonly Dictionary<KnownType, string> NonGenericToGenericMapping = new()
         {
-            { KnownType.System_Collections_ICollection.TypeName, KnownType.System_Collections_Generic_ICollection_T },
-            { KnownType.System_Collections_IList.TypeName, KnownType.System_Collections_Generic_IList_T },
-            { KnownType.System_Collections_IEnumerable.TypeName, KnownType.System_Collections_Generic_IEnumerable_T },
-            { KnownType.System_Collections_CollectionBase.TypeName, KnownType.System_Collections_ObjectModel_Collection_T },
+            { KnownType.System_Collections_ICollection, "System.Collections.Generic.ICollection<T>" },
+            { KnownType.System_Collections_IList, "System.Collections.Generic.IList<T>" },
+            { KnownType.System_Collections_IEnumerable, "System.Collections.Generic.IEnumerable<T>" },
+            { KnownType.System_Collections_CollectionBase, "System.Collections.ObjectModel.Collection<T>" },
         };
 
-        private static readonly ImmutableArray<KnownType> GenericTypes = NongenericToGenericMapping.Values.ToImmutableArray();
+        private static readonly ImmutableArray<KnownType> GenericTypes = ImmutableArray.Create(
+            KnownType.System_Collections_Generic_ICollection_T,
+            KnownType.System_Collections_Generic_IList_T,
+            KnownType.System_Collections_Generic_IEnumerable_T,
+            KnownType.System_Collections_ObjectModel_Collection_T);
 
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
 
-        protected override void Initialize(SonarAnalysisContext context)
-        {
+        protected override void Initialize(SonarAnalysisContext context) =>
             context.RegisterSyntaxNodeActionInNonGenerated(c =>
                 {
                     var typeDeclaration = (BaseTypeDeclarationSyntax)c.Node;
@@ -84,9 +87,8 @@ namespace SonarAnalyzer.Rules.CSharp
                 SyntaxKind.StructDeclaration,
                 SyntaxKindEx.RecordClassDeclaration,
                 SyntaxKindEx.RecordStructDeclaration);
-        }
 
         private static string SuggestGenericCollectionType(ITypeSymbol typeSymbol) =>
-            NongenericToGenericMapping.GetValueOrDefault(typeSymbol.ToDisplayString())?.TypeName;
+            NonGenericToGenericMapping.FirstOrDefault(pair => pair.Key.Matches(typeSymbol)).Value;
     }
 }

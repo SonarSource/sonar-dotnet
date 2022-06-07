@@ -51,8 +51,7 @@ namespace SonarAnalyzer.Rules.CSharp
             }
 
             var semanticModel = await context.Document.GetSemanticModelAsync().ConfigureAwait(false);
-            var optionalAttribute = semanticModel?.Compilation?.GetTypeByMetadataName(
-                KnownType.System_Runtime_InteropServices_OptionalAttribute.TypeName);
+            var optionalAttribute = semanticModel?.Compilation?.GetTypeByMetadataName("System.Runtime.InteropServices.OptionalAttribute");
             if (optionalAttribute == null)
             {
                 return;

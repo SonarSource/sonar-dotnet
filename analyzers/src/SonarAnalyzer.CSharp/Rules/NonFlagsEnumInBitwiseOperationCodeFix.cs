@@ -56,7 +56,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 return;
             }
 
-            var flagsAttributeType = semanticModel.Compilation.GetTypeByMetadataName(KnownType.System_FlagsAttribute.TypeName);
+            var flagsAttributeType = semanticModel.Compilation.GetTypeByMetadataName("System.FlagsAttribute");
             if (flagsAttributeType == null)
             {
                 return;

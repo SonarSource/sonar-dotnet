@@ -64,7 +64,7 @@ namespace SonarAnalyzer.Wrappers
                 objectCreation = objectCreationExpressionSyntax;
 
             public bool IsKnownType(KnownType knownType, SemanticModel semanticModel) =>
-                objectCreation.Type.GetName().EndsWith(knownType.ShortName) && objectCreation.IsKnownType(knownType, semanticModel);
+                objectCreation.Type.GetName().EndsWith(knownType.TypeName) && objectCreation.IsKnownType(knownType, semanticModel);
 
             public string TypeAsString(SemanticModel semanticModel) =>
                 objectCreation.Type.ToString();
