@@ -27,6 +27,7 @@ using Microsoft.CodeAnalysis.CodeFixes;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Formatting;
+using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
 
 namespace SonarAnalyzer.Rules.CSharp
@@ -51,7 +52,7 @@ namespace SonarAnalyzer.Rules.CSharp
             }
 
             var semanticModel = await context.Document.GetSemanticModelAsync().ConfigureAwait(false);
-            var optionalAttribute = semanticModel?.Compilation.GetTypeByMetadataName(KnownType.System_Runtime_InteropServices_OptionalAttribute.FullName);
+            var optionalAttribute = semanticModel?.Compilation.GetTypeByMetadataName(KnownType.System_Runtime_InteropServices_OptionalAttribute);
             if (optionalAttribute == null)
             {
                 return;
@@ -60,26 +61,22 @@ namespace SonarAnalyzer.Rules.CSharp
             context.RegisterCodeFix(
                 CodeAction.Create(
                     Title,
-                    c =>
+                    _ =>
                     {
-                        var newRoot = root.ReplaceNode(
-                            attributeList,
-                            GetNewAttributeList(attributeList, optionalAttribute, semanticModel));
+                        var newRoot = root.ReplaceNode(attributeList, GetNewAttributeList(attributeList, optionalAttribute, semanticModel));
                         return Task.FromResult(context.Document.WithSyntaxRoot(newRoot));
                     }),
                 context.Diagnostics);
         }
 
-        private static AttributeListSyntax GetNewAttributeList(AttributeListSyntax attributeList, ITypeSymbol optionalAttribute,
-            SemanticModel semanticModel)
+        private static AttributeListSyntax GetNewAttributeList(AttributeListSyntax attributeList, ISymbol optionalAttribute, SemanticModel semanticModel)
         {
             var attributeName = optionalAttribute.ToMinimalDisplayString(semanticModel, attributeList.SpanStart);
             attributeName = attributeName.Remove(attributeName.IndexOf("Attribute", System.StringComparison.Ordinal));
 
-            return attributeList.AddAttributes(
-                SyntaxFactory.Attribute(
-                    SyntaxFactory.ParseName(attributeName)))
-                    .WithAdditionalAnnotations(Formatter.Annotation);
+            return attributeList
+                .AddAttributes(SyntaxFactory.Attribute(SyntaxFactory.ParseName(attributeName)))
+                .WithAdditionalAnnotations(Formatter.Annotation);
         }
     }
 }

@@ -21,6 +21,7 @@
 using System;
 using System.Linq;
 using Microsoft.CodeAnalysis;
+using SonarAnalyzer.Common;
 
 namespace SonarAnalyzer.Helpers
 {
@@ -40,7 +41,7 @@ namespace SonarAnalyzer.Helpers
             }
 
             /// See https://docs.microsoft.com/en-us/previous-versions/dotnet/netframework-4.0/ee471421(v=vs.100)
-            var debuggerSymbol = compilation.GetTypeByMetadataName("System.Diagnostics.Debugger");
+            var debuggerSymbol = compilation.GetTypeByMetadataName(KnownType.System_Diagnostics_Debugger);
 
             var mscorlibAssembly = debuggerSymbol?.ContainingAssembly;
             if (mscorlibAssembly == null ||

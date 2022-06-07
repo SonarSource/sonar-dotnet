@@ -27,6 +27,7 @@ using Microsoft.CodeAnalysis.CodeFixes;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Formatting;
+using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
 
 namespace SonarAnalyzer.Rules.CSharp
@@ -34,7 +35,7 @@ namespace SonarAnalyzer.Rules.CSharp
     [ExportCodeFixProvider(LanguageNames.CSharp)]
     public sealed class ForeachLoopExplicitConversionCodeFix : SonarCodeFix
     {
-        internal const string Title = "Filter collection for the expected type";
+        private const string Title = "Filter collection for the expected type";
         public override ImmutableArray<string> FixableDiagnosticIds { get; } =
             ImmutableArray.Create(ForeachLoopExplicitConversion.DiagnosticId);
 
@@ -49,7 +50,7 @@ namespace SonarAnalyzer.Rules.CSharp
             }
 
             var semanticModel = context.Document.GetSemanticModelAsync(context.CancellationToken).ConfigureAwait(false).GetAwaiter().GetResult();
-            var enumerableHelperType = semanticModel.Compilation.GetTypeByMetadataName(ofTypeExtensionClass);
+            var enumerableHelperType = semanticModel.Compilation.GetTypeByMetadataName(KnownType.System_Linq_Enumerable);
 
             if (enumerableHelperType != null)
             {
@@ -67,15 +68,13 @@ namespace SonarAnalyzer.Rules.CSharp
             return Task.CompletedTask;
         }
 
-        private const string ofTypeExtensionClass = "System.Linq.Enumerable";
-
         private static SyntaxNode CalculateNewRoot(SyntaxNode root, ForEachStatementSyntax foreachSyntax, SemanticModel semanticModel)
         {
             var collection = foreachSyntax.Expression;
             var typeName = foreachSyntax.Type.ToString();
             var invocationToAdd = GetOfTypeInvocation(typeName, collection);
             var namedTypes = semanticModel.LookupNamespacesAndTypes(foreachSyntax.SpanStart).OfType<INamedTypeSymbol>();
-            var isUsingAlreadyThere = namedTypes.Any(nt => nt.ToDisplayString() == ofTypeExtensionClass);
+            var isUsingAlreadyThere = namedTypes.Any(KnownType.System_Linq_Enumerable.Matches);
 
             if (isUsingAlreadyThere)
             {

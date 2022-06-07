@@ -21,6 +21,7 @@
 using System;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Diagnostics;
+using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
 
 namespace SonarAnalyzer.Rules
@@ -71,7 +72,7 @@ namespace SonarAnalyzer.Rules
 
         protected bool IsConvertibleToInt(TExpressionSyntax expression, SemanticModel semanticModel)
         {
-            var intType = semanticModel.Compilation.GetTypeByMetadataName("System.Int32");
+            var intType = semanticModel.Compilation.GetTypeByMetadataName(KnownType.System_Int32);
             if (intType == null)
             {
                 return false;
