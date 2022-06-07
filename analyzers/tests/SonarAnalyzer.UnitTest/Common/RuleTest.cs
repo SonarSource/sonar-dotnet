@@ -241,6 +241,24 @@ namespace SonarAnalyzer.UnitTest.Common
         public void OnlySecurityHotspots_AreNotConfigurable_VB() =>
             OnlySecurityHotspots_AreNotConfigurable(AnalyzerLanguage.VisualBasic);
 
+        [TestMethod]
+        public void RulesAreInNamespace_CS()
+        {
+            foreach (var type in RuleFinder.GetAnalyzerTypes(AnalyzerLanguage.CSharp))
+            {
+                type.Namespace.Should().Be("SonarAnalyzer.Rules.CSharp", $"rule {type.FullName} will not be recognized by the ParseBuildOutput tool on Peach.");
+            }
+        }
+
+        [TestMethod]
+        public void RulesAreInNamespace_VB()
+        {
+            foreach (var type in RuleFinder.GetAnalyzerTypes(AnalyzerLanguage.VisualBasic))
+            {
+                type.Namespace.Should().Be("SonarAnalyzer.Rules.VisualBasic", $"rule {type.FullName} will not be recognized by the ParseBuildOutput tool on Peach.");
+            }
+        }
+
         [AssertionMethod]
         private static void OnlySecurityHotspots_AreNotConfigurable(AnalyzerLanguage language)
         {
