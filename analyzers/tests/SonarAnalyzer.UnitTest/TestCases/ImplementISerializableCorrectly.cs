@@ -4,6 +4,23 @@ using Tests.Diagnostics;
 
 namespace Tests.Diagnostics
 {
+    public class NoExtraFieldsOrProperties : System.Collections.Generic.Dictionary<string, object> // Compliant, no extra fields/properties to serialize
+    {
+        public static readonly string StaticField = "Ignored";
+        public static string StaticProperty { get; } = "Ignored";
+        public string MethodsAre() { return "Ignored"; }
+    }
+
+    public class WithFieldDefined : NoExtraFieldsOrProperties // Noncompliant
+    {
+        public string Field;
+    }
+
+    public class WithPropertyDefined : NoExtraFieldsOrProperties // Noncompliant
+    {
+        public string Property { get; set; }
+    }
+
     [Serializable]
     public class Serializable : ISerializable
     {

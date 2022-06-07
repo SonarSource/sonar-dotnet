@@ -54,7 +54,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
                     var typeDeclarationSyntax = (TypeDeclarationSyntax)c.Node;
                     var typeSymbol = (INamedTypeSymbol)c.ContainingSymbol;
-                    if (!ImplementsISerializable(typeSymbol))
+                    if (!ImplementsISerializable(typeSymbol) || DefinesNoMembersComparedToBase(typeSymbol))
                     {
                         return;
                     }
@@ -172,6 +172,13 @@ namespace SonarAnalyzer.Rules.CSharp
             && typeSymbol.IsPubliclyAccessible()
             && typeSymbol.AllInterfaces.Any(IsOrImplementsISerializable);
 
+        private static bool DefinesNoMembersComparedToBase(INamedTypeSymbol typeSymbol) =>
+            BaseImplementsISerializable(typeSymbol)
+            && !typeSymbol.GetMembers().Any(x => SerializableMemberOfContainingType(x, typeSymbol));
+
+        private static bool BaseImplementsISerializable(INamedTypeSymbol typeSymbol) =>
+            typeSymbol.GetSelfAndBaseTypes().Skip(1).Any(ImplementsISerializable);
+
         private static bool HasSerializableAttribute(ISymbol symbol) =>
             symbol.HasAttribute(KnownType.System_SerializableAttribute);
 
@@ -185,5 +192,10 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private static bool IsExplicitImplementation(IMethodSymbol methodSymbol) =>
             methodSymbol.ExplicitInterfaceImplementations.Any(KnownMethods.IsGetObjectData);
+
+        private static bool SerializableMemberOfContainingType(ISymbol symbol, INamedTypeSymbol type) =>
+            !symbol.IsStatic
+            && symbol is not IMethodSymbol
+            && symbol.ContainingType == type;
     }
 }
