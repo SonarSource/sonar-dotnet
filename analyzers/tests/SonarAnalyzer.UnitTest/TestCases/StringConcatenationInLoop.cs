@@ -27,5 +27,18 @@ namespace Tests.Diagnostics
                 s = s ?? "b";
             }
         }
+
+        void MarkDisabled(IList<MyObject> objects)
+        {
+            foreach (var obj in objects)
+            {
+                obj.Name += " - DISABLED"; // Noncompliant, FP See: https://github.com/SonarSource/sonar-dotnet/issues/5521
+            }
+        }
+    }
+
+    class MyObject
+    {
+        public string Name { get; set; }
     }
 }
