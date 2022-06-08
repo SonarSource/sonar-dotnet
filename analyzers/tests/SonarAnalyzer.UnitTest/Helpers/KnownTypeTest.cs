@@ -28,13 +28,15 @@ public class KnownTypeTest
 {
     [TestMethod]
     public void Matches_TypeSymbolIsNull_ThrowsArgumentNullException() =>
-        new KnownType.RegularKnownType("typeName").Invoking(x => x.Matches(null)).Should().Throw<ArgumentNullException>();
+        new KnownType("typeName").Invoking(x => x.Matches(null)).Should().Throw<ArgumentNullException>();
 
     [DataTestMethod]
     [DataRow("System.Action", true, "System.Action", false)]
     [DataRow("System.DateTime", false, "System.Action", false)]
     [DataRow("System.Collections.ArrayList", true, "System.Collections.ArrayList", false)]
     [DataRow("System.Threading.Timer", false, "System.Timers.Timer", false)]
+    [DataRow("string", true, "System.String", false)]
+    [DataRow("byte", true, "System.Byte", false)]
     [DataRow("string[]", true, "System.String", true)]
     [DataRow("System.String[]", true, "System.String", true)]
     [DataRow("byte[]", true, "System.Byte", true)]
@@ -51,7 +53,7 @@ public class KnownTypeTest
     [DataRow("System.Action", false, "System.Action", false, "T")]
     [DataRow("System.Action<T>", false, "System.Action", true, "T")]
     public void Matches_TypeSymbol_CS(string symbolName, bool expectedMatch, string fullTypeName, bool isArray, params string[] genericParameters) =>
-        new KnownType.RegularKnownType(fullTypeName, genericParameters) { IsArray = isArray }
+        new KnownType(fullTypeName, genericParameters) { IsArray = isArray }
             .Matches(GetSymbol_CS(symbolName))
             .Should().Be(expectedMatch);
 
@@ -60,27 +62,11 @@ public class KnownTypeTest
     [DataRow("System.Collections.Generic.IDictionary(Of TKey, TValue)", false, "System.Collections.Generic.IDictionary", false, "TKey")]
     [DataRow("System.Collections.Generic.IDictionary(Of TKey, TValue)", true, "System.Collections.Generic.IDictionary", false, "TKey", "TValue")]
     [DataRow("System.Collections.Generic.IDictionary(Of TKey, TValue)", false, "System.Collections.Generic.IDictionary", false, "TValue", "TKey")]
-    [DataRow("string()", true, "System.String", true)]
-    [DataRow("string()", false, "System.Byte", true)]
+    [DataRow("String()", true, "System.String", true)]
+    [DataRow("String()", false, "System.Byte", true)]
     public void Matches_TypeSymbol_VB(string symbolName, bool expectedMatch, string fullTypeName, bool isArray, params string[] genericParameters) =>
-        new KnownType.RegularKnownType(fullTypeName, genericParameters) { IsArray = isArray }
+        new KnownType(fullTypeName, genericParameters) { IsArray = isArray }
             .Matches(GetSymbol_VB(symbolName))
-            .Should().Be(expectedMatch);
-
-    [DataTestMethod]
-    [DataRow("string", true, SpecialType.System_String, "string")]
-    [DataRow("byte", false, SpecialType.System_String, "string")]
-    public void Matches_TypeSymbol_SpecialType_CSharp(string expectedSymbol, bool expectedMatch, SpecialType specialType, string typeName) =>
-        new KnownType.SpecialKnownType(specialType, typeName)
-            .Matches(GetSymbol_CS(expectedSymbol))
-            .Should().Be(expectedMatch);
-
-    [DataTestMethod]
-    [DataRow("string", true, SpecialType.System_String, "string")]
-    [DataRow("byte", false, SpecialType.System_String, "string")]
-    public void Matches_TypeSymbol_SpecialType_VisualBasic(string expectedSymbol, bool expectedMatch, SpecialType specialType, string typeName) =>
-        new KnownType.SpecialKnownType(specialType, typeName)
-            .Matches(GetSymbol_VB(expectedSymbol))
             .Should().Be(expectedMatch);
 
     private static ITypeSymbol GetSymbol_CS(string type)

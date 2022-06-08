@@ -20,95 +20,76 @@
 
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using Microsoft.CodeAnalysis;
 
 namespace SonarAnalyzer.Helpers
 {
-    internal abstract partial class KnownType
+    [DebuggerDisplay("{FullName}, Array: {IsArray}, Parameters: {string.Join(\",\", genericParameters)}", Name = "{TypeName}")]
+    internal sealed partial class KnownType
     {
-        public string TypeName { get; private init; }
+        private readonly IList<string> namespaceParts;
+        private readonly string[] genericParameters;
 
-        internal abstract bool Matches(ITypeSymbol symbol);
+        public string TypeName { get; }
+        public string FullName { get; }
+        public bool IsArray { get; init; }
 
-        internal sealed class RegularKnownType : KnownType
+        public KnownType(string fullName, params string[] genericParameters)
         {
-            private readonly IList<string> namespaceParts;
-            private readonly string[] genericParameters;
-
-            public bool IsArray { get; init; }
-
-            internal RegularKnownType(string fullTypeName, params string[] genericParameters)
-            {
-                this.genericParameters = genericParameters ?? Array.Empty<string>();
-
-                var parts = fullTypeName.Split('.');
-                TypeName = parts[parts.Length - 1];
-                namespaceParts = new ArraySegment<string>(parts, 0, parts.Length - 1);
-            }
-
-            internal override bool Matches(ITypeSymbol symbol) =>
-                IsMatch(symbol)
-                || IsMatch(symbol.OriginalDefinition);
-
-            private bool IsMatch(ITypeSymbol symbol)
-            {
-                _ = symbol ?? throw new ArgumentNullException(nameof(symbol));
-                if (IsArray)
-                {
-                    if (symbol is IArrayTypeSymbol array)
-                    {
-                        symbol = array.ElementType;
-                    }
-                    else
-                    {
-                        return false;
-                    }
-                }
-                return symbol.Name == TypeName
-                       && NamespaceMatches(symbol)
-                       && GenericParametersMatch(symbol);
-            }
-
-            private bool GenericParametersMatch(ISymbol symbol) =>
-                symbol is INamedTypeSymbol namedType
-                    ? namedType.TypeParameters.Select(x => x.Name).SequenceEqual(genericParameters)
-                    : !genericParameters.Any();
-
-            private bool NamespaceMatches(ISymbol symbol)
-            {
-                // For performance reason we want to avoid building full namespace as a string to compare it with the expected value.
-                var currentNamespace = symbol.ContainingNamespace;
-                var index = namespaceParts.Count - 1;
-
-                while (currentNamespace != null && !string.IsNullOrEmpty(currentNamespace.Name) && index >= 0)
-                {
-                    if (currentNamespace.Name != namespaceParts[index])
-                    {
-                        return false;
-                    }
-
-                    currentNamespace = currentNamespace.ContainingNamespace;
-                    index--;
-                }
-
-                return index == -1 && string.IsNullOrEmpty(currentNamespace?.Name);
-            }
+            var parts = fullName.Split('.');
+            namespaceParts = new ArraySegment<string>(parts, 0, parts.Length - 1);
+            this.genericParameters = genericParameters;
+            FullName = fullName;
+            TypeName = parts[parts.Length - 1];
         }
 
-        internal sealed class SpecialKnownType : KnownType
-        {
-            private readonly SpecialType specialType;
+        public bool Matches(ITypeSymbol symbol) =>
+            IsMatch(symbol) || IsMatch(symbol.OriginalDefinition);
 
-            public SpecialKnownType(SpecialType specialType, string typeName)
+        private bool IsMatch(ITypeSymbol symbol)
+        {
+            _ = symbol ?? throw new ArgumentNullException(nameof(symbol));
+            if (IsArray)
             {
-                this.specialType = specialType;
-                TypeName = typeName;
+                if (symbol is IArrayTypeSymbol array)
+                {
+                    symbol = array.ElementType;
+                }
+                else
+                {
+                    return false;
+                }
             }
 
-            internal override bool Matches(ITypeSymbol symbol) =>
-                symbol.SpecialType == specialType
-                || symbol.OriginalDefinition.SpecialType == specialType;
+            return symbol.Name == TypeName
+                   && NamespaceMatches(symbol)
+                   && GenericParametersMatch(symbol);
+        }
+
+        private bool GenericParametersMatch(ISymbol symbol) =>
+                symbol is INamedTypeSymbol namedType
+                    ? namedType.TypeParameters.Select(x => x.Name).SequenceEqual(genericParameters)
+                    : genericParameters.Length == 0;
+
+        private bool NamespaceMatches(ISymbol symbol)
+        {
+            var currentNamespace = symbol.ContainingNamespace;
+            var index = namespaceParts.Count - 1;
+
+            while (currentNamespace != null && !string.IsNullOrEmpty(currentNamespace.Name) && index >= 0)
+            {
+                if (currentNamespace.Name != namespaceParts[index])
+                {
+                    return false;
+                }
+
+                currentNamespace = currentNamespace.ContainingNamespace;
+                index--;
+            }
+
+            return index == -1 && string.IsNullOrEmpty(currentNamespace?.Name);
         }
     }
 }

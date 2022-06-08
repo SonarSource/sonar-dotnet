@@ -18,6 +18,7 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Linq;
 using Microsoft.CodeAnalysis;
@@ -35,6 +36,20 @@ namespace SonarAnalyzer.Rules.CSharp
         private const string MessageFormat = "Use {0}.IsNaN() instead.";
 
         private static readonly DiagnosticDescriptor Rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
+        private static readonly Dictionary<KnownType, string> KnownTypeAliasMap = new()
+        {
+            { KnownType.System_Byte, "byte" },
+            { KnownType.System_Char, "byte" },
+            { KnownType.System_Double, "double" },
+            { KnownType.System_Int16, "short" },
+            { KnownType.System_Int32, "int" },
+            { KnownType.System_Int64, "long" },
+            { KnownType.System_SByte, "sbyte" },
+            { KnownType.System_Single, "float" },
+            { KnownType.System_UInt16, "ushort" },
+            { KnownType.System_UInt32, "uint" },
+            { KnownType.System_UInt64, "ulong" },
+        };
 
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
 
@@ -44,10 +59,10 @@ namespace SonarAnalyzer.Rules.CSharp
                 {
                     var binaryExpressionSyntax = (BinaryExpressionSyntax)c.Node;
 
-                    if (TryGetFloatingPointType(binaryExpressionSyntax.Left, c.SemanticModel, out var floatingPointType) ||
-                        TryGetFloatingPointType(binaryExpressionSyntax.Right, c.SemanticModel, out floatingPointType))
+                    if (TryGetFloatingPointType(binaryExpressionSyntax.Left, c.SemanticModel, out var floatingPointType)
+                        || TryGetFloatingPointType(binaryExpressionSyntax.Right, c.SemanticModel, out floatingPointType))
                     {
-                        c.ReportIssue(Diagnostic.Create(Rule, binaryExpressionSyntax.GetLocation(), floatingPointType.TypeName));
+                        c.ReportIssue(Diagnostic.Create(Rule, binaryExpressionSyntax.GetLocation(), KnownTypeAliasMap[floatingPointType]));
                     }
                 },
                 SyntaxKind.GreaterThanExpression,
