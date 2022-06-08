@@ -32,9 +32,8 @@ namespace SonarAnalyzer.UnitTest.SymbolicExecution.Roslyn
         [TestMethod]
         public void Equals_ReturnsTrueForEquivalent()
         {
-            var counter = new SymbolicValueCounter();
-            var reusedValue = new SymbolicValue(counter).WithConstraint(TestConstraint.First);
-            var anotherValue = new SymbolicValue(counter).WithConstraint(TestConstraint.Second);
+            var reusedValue = new SymbolicValue().WithConstraint(TestConstraint.First);
+            var anotherValue = new SymbolicValue().WithConstraint(TestConstraint.Second);
             var operations = TestHelper.CompileCfgBodyCS("var x = 42; var y = 42;").Blocks[1].Operations.ToExecutionOrder().ToArray();
             var symbols = operations.Select(x => x.Instance.TrackedSymbol()).Where(x => x is not null).ToArray();
             var empty = ProgramState.Empty;
@@ -98,9 +97,8 @@ namespace SonarAnalyzer.UnitTest.SymbolicExecution.Roslyn
         [TestMethod]
         public void GetHashCode_ReturnsSameForEquivalent()
         {
-            var counter = new SymbolicValueCounter();
-            var reusedValue = new SymbolicValue(counter).WithConstraint(TestConstraint.First);
-            var anotherValue = new SymbolicValue(counter).WithConstraint(TestConstraint.Second);
+            var reusedValue = new SymbolicValue().WithConstraint(TestConstraint.First);
+            var anotherValue = new SymbolicValue().WithConstraint(TestConstraint.Second);
             var operations = TestHelper.CompileCfgBodyCS("var x = 42; var y = 42;").Blocks[1].Operations.ToExecutionOrder().ToArray();
             var symbols = operations.Select(x => x.Instance.TrackedSymbol()).Where(x => x is not null).ToArray();
             var empty = ProgramState.Empty;
@@ -150,23 +148,22 @@ namespace SonarAnalyzer.UnitTest.SymbolicExecution.Roslyn
         public void ToString_WithSymbols()
         {
             var assignment = TestHelper.CompileCfgBodyCS("var a = true;").Blocks[1].Operations[0];
-            var counter = new SymbolicValueCounter();
             var variableSymbol = assignment.Children.First().TrackedSymbol();
             var sut = ProgramState.Empty.SetSymbolValue(variableSymbol, null);
             sut.ToString().Should().Be("Empty");
 
-            sut = ProgramState.Empty.SetSymbolValue(variableSymbol, new SymbolicValue(counter));
+            sut = ProgramState.Empty.SetSymbolValue(variableSymbol, new());
             sut.ToString().Should().BeIgnoringLineEndings(
 @"Symbols:
-a: SV_1
+a: No constraints
 ");
 
-            var valueWithConstraint = new SymbolicValue(counter).WithConstraint(TestConstraint.Second);
+            var valueWithConstraint = new SymbolicValue().WithConstraint(TestConstraint.Second);
             sut = sut.SetSymbolValue(variableSymbol.ContainingSymbol, valueWithConstraint);
             sut.ToString().Should().BeIgnoringLineEndings(
 @"Symbols:
-a: SV_1
-Sample.Main(): SV_3: Second
+a: No constraints
+Sample.Main(): Second
 ");
         }
 
@@ -174,21 +171,20 @@ Sample.Main(): SV_3: Second
         public void ToString_WithOperations()
         {
             var assignment = TestHelper.CompileCfgBodyCS("var a = true;").Blocks[1].Operations[0];
-            var counter = new SymbolicValueCounter();
             var sut = ProgramState.Empty.SetOperationValue(assignment, null);
             sut.ToString().Should().Be("Empty");
 
-            sut = ProgramState.Empty.SetOperationValue(assignment, new SymbolicValue(counter));
+            sut = ProgramState.Empty.SetOperationValue(assignment, new());
             sut.ToString().Should().BeIgnoringLineEndings(
 @"Operations:
-SimpleAssignmentOperation / VariableDeclaratorSyntax: a = true: SV_1
+SimpleAssignmentOperation / VariableDeclaratorSyntax: a = true: No constraints
 ");
-            var valueWithConstraint = new SymbolicValue(counter).WithConstraint(TestConstraint.Second);
+            var valueWithConstraint = new SymbolicValue().WithConstraint(TestConstraint.Second);
             sut = sut.SetOperationValue(assignment.Children.First(), valueWithConstraint);
             sut.ToString().Should().BeIgnoringLineEndings(
 @"Operations:
-LocalReferenceOperation / VariableDeclaratorSyntax: a = true: SV_3: Second
-SimpleAssignmentOperation / VariableDeclaratorSyntax: a = true: SV_1
+LocalReferenceOperation / VariableDeclaratorSyntax: a = true: Second
+SimpleAssignmentOperation / VariableDeclaratorSyntax: a = true: No constraints
 ");
         }
 
@@ -212,24 +208,23 @@ SimpleAssignmentOperation / VariableDeclaratorSyntax: a = true: SV_1
         public void ToString_WithAll()
         {
             var assignment = TestHelper.CompileCfgBodyCS("var a = true;").Blocks[1].Operations[0];
-            var counter = new SymbolicValueCounter();
             var variableSymbol = assignment.Children.First().TrackedSymbol();
-            var valueWithConstraint = new SymbolicValue(counter).WithConstraint(TestConstraint.First);
+            var valueWithConstraint = new SymbolicValue().WithConstraint(TestConstraint.First);
             var sut = ProgramState.Empty
-                .SetSymbolValue(variableSymbol, new SymbolicValue(counter))
+                .SetSymbolValue(variableSymbol, new())
                 .SetSymbolValue(variableSymbol.ContainingSymbol, valueWithConstraint)
-                .SetOperationValue(assignment, new SymbolicValue(counter))
+                .SetOperationValue(assignment, new())
                 .SetOperationValue(assignment.Children.First(), valueWithConstraint).Preserve(variableSymbol)
                 .SetCapture(new CaptureId(0), assignment)
                 .SetCapture(new CaptureId(1), assignment.Children.First());
 
             sut.ToString().Should().BeIgnoringLineEndings(
 @"Symbols:
-a: SV_3
-Sample.Main(): SV_2: First
+a: No constraints
+Sample.Main(): First
 Operations:
-LocalReferenceOperation / VariableDeclaratorSyntax: a = true: SV_2: First
-SimpleAssignmentOperation / VariableDeclaratorSyntax: a = true: SV_4
+LocalReferenceOperation / VariableDeclaratorSyntax: a = true: First
+SimpleAssignmentOperation / VariableDeclaratorSyntax: a = true: No constraints
 Captures:
 #0: SimpleAssignmentOperation / VariableDeclaratorSyntax: a = true
 #1: LocalReferenceOperation / VariableDeclaratorSyntax: a = true

@@ -95,7 +95,7 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn.RuleChecks
                 {
                     return new[]
                     {
-                        AddLock(context, lockSymbol).SetOperationConstraint(context.Operation, context.SymbolicValueCounter, BoolConstraint.True),
+                        AddLock(context, lockSymbol).SetOperationConstraint(context.Operation, BoolConstraint.True),
                         context.SetOperationConstraint(BoolConstraint.False)
                     };
                 }
@@ -217,7 +217,7 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn.RuleChecks
 
         // This method should be removed once the engine has support for `True/False` boolean constraints.
         private static ProgramState AddLock(SymbolicContext context, IOperation operation) =>
-            context.State.SetOperationConstraint(operation, context.SymbolicValueCounter, LockConstraint.Held);
+            context.State.SetOperationConstraint(operation, LockConstraint.Held);
 
         private static ISymbol ArgumentSymbol(IInvocationOperationWrapper invocation, int parameterIndex) =>
             invocation.TargetMethod.Parameters[parameterIndex].Name is var parameterName
@@ -312,7 +312,7 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn.RuleChecks
         private sealed record RefParamContext(SymbolicContext SymbolicContext, ISymbol LockSymbol, ISymbol RefParamSymbol)
         {
             public ProgramState SetRefConstraint(SymbolicConstraint constraint, ProgramState state) =>
-                state.SetSymbolConstraint(RefParamSymbol, SymbolicContext.SymbolicValueCounter, constraint);
+                state.SetSymbolConstraint(RefParamSymbol, constraint);
         }
     }
 }
