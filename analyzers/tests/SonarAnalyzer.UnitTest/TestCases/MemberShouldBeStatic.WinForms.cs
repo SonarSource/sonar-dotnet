@@ -13,7 +13,7 @@ namespace MemberShouldBeStatic
 
         private void MethodWith3Argument(object sender, MyEventArgs e, string other) { Handle(); } // Noncompliant
         
-        private void SenderArgumentNotObject(string input, MyEventArgs e) { Handle(); }// Noncompliant
+        private void SenderArgumentNotObject(string input, MyEventArgs e) { Handle(); } // Noncompliant
 
         private void EventArgs_Handler(object sender, EventArgs e) { Handle(); } // Compliant
 
