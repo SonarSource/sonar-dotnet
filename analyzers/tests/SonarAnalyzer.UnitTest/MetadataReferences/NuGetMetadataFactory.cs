@@ -41,6 +41,7 @@ namespace SonarAnalyzer.UnitTest.MetadataReferences
             "net47",
             "net461",
             "netstandard1.6",
+            "netstandard1.5",
             "netstandard1.3",
             "netstandard1.1",
             "netstandard1.0",

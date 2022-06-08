@@ -86,11 +86,27 @@ namespace Tests.Diagnostics
             context.Set<User>().FromSqlRaw(concatenated); // Noncompliant [3]
             context.Set<User>().FromSqlRaw(interpolated); // Noncompliant [9]
         }
+
+        public void Foo(BloggingContext context, string query)
+        {
+            var a = context.Blogs.FromSqlRaw($"{query}"); // Noncompliant
+            var b = context.Blogs.FromSqlInterpolated($"{query}"); // Compliant, FN See: https://github.com/SonarSource/sonar-dotnet/issues/5636
+        }
     }
 
     class User
     {
         string Id { get; set; }
         string Name { get; set; }
+    }
+
+    public class BloggingContext : DbContext
+    {
+        public DbSet<Blog> Blogs { get; set; }
+    }
+
+    public class Blog
+    {
+        public string Url { get; set; }
     }
 }
