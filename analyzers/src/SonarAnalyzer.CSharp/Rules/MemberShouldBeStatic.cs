@@ -166,8 +166,7 @@ namespace SonarAnalyzer.Rules.CSharp
             && methodSymbol.ContainingType.DerivesFromAny(WebControllerTypes);
 
         private static bool IsWindowsFormsEventHandler(ISymbol symbol) =>
-            symbol is IMethodSymbol methodSymbol
-            && methodSymbol.Parameters.Length == 2
+            symbol is IMethodSymbol { Parameters.Length: 2 } methodSymbol
             && methodSymbol.Parameters[0].Type.Is(KnownType.System_Object)
             && methodSymbol.Parameters[1].Type.DerivesFrom(KnownType.System_EventArgs)
             && methodSymbol.ContainingType.Implements(KnownType.System_Windows_Forms_IContainerControl);
