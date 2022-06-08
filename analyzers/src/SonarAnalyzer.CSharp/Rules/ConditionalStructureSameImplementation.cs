@@ -32,11 +32,11 @@ namespace SonarAnalyzer.Rules.CSharp
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
     public sealed class ConditionalStructureSameImplementation : ConditionalStructureSameImplementationBase
     {
-        private static readonly DiagnosticDescriptor rule =
-            DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(rule);
+        private static readonly DiagnosticDescriptor Rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
 
-        private static readonly ISet<SyntaxKind> ignoredStatementsInSwitch = new HashSet<SyntaxKind>
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
+
+        private static readonly ISet<SyntaxKind> IgnoredStatementsInSwitch = new HashSet<SyntaxKind>
         {
             SyntaxKind.BreakStatement,
             SyntaxKind.ReturnStatement,
@@ -78,8 +78,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
                     var precedingSection = switchSection
                         .GetPrecedingSections()
-                        .FirstOrDefault(
-                            preceding => CSharpEquivalenceChecker.AreEquivalent(switchSection.Statements, preceding.Statements));
+                        .FirstOrDefault(preceding => CSharpEquivalenceChecker.AreEquivalent(switchSection.Statements, preceding.Statements));
 
                     if (precedingSection != null)
                     {
@@ -89,42 +88,33 @@ namespace SonarAnalyzer.Rules.CSharp
                 SyntaxKind.SwitchSection);
         }
 
-        private static IEnumerable<StatementSyntax> GetStatements(SwitchSectionSyntax switchSection)
-        {
-            return Enumerable.Empty<StatementSyntax>()
-                .Union(switchSection.Statements.OfType<BlockSyntax>().SelectMany(block => block.Statements))
-                .Union(switchSection.Statements.Where(s => !s.IsKind(SyntaxKind.Block)));
-        }
+        private static IEnumerable<StatementSyntax> GetStatements(SwitchSectionSyntax switchSection) =>
+            Enumerable.Empty<StatementSyntax>()
+                      .Union(switchSection.Statements.OfType<BlockSyntax>().SelectMany(block => block.Statements))
+                      .Union(switchSection.Statements.Where(s => !s.IsKind(SyntaxKind.Block)));
 
-        private static void CheckStatement(SyntaxNodeAnalysisContext context, StatementSyntax statement,
-            IEnumerable<StatementSyntax> precedingStatements)
+        private static void CheckStatement(SyntaxNodeAnalysisContext context, SyntaxNode statement, IEnumerable<StatementSyntax> precedingStatements)
         {
             if (statement.ChildNodes().Count() < 2)
             {
                 return;
             }
 
-            var precedingStatement = precedingStatements
-                .FirstOrDefault(preceding => CSharpEquivalenceChecker.AreEquivalent(statement, preceding));
-
+            var precedingStatement = precedingStatements.FirstOrDefault(preceding => CSharpEquivalenceChecker.AreEquivalent(statement, preceding));
             if (precedingStatement != null)
             {
                 ReportSyntaxNode(context, statement, precedingStatement, "branch");
             }
         }
 
-        private static void ReportSyntaxNode(SyntaxNodeAnalysisContext context, SyntaxNode node, SyntaxNode precedingNode, string errorMessageDiscriminator)
-        {
+        private static void ReportSyntaxNode(SyntaxNodeAnalysisContext context, SyntaxNode node, SyntaxNode precedingNode, string errorMessageDiscriminator) =>
             context.ReportIssue(Diagnostic.Create(
-                rule,
+                Rule,
                 node.GetLocation(),
                 additionalLocations: new[] { precedingNode.GetLocation() },
                 messageArgs: new object[] { precedingNode.GetLineNumberToReport(), errorMessageDiscriminator }));
-        }
 
-        private static bool IsApprovedStatement(StatementSyntax statement)
-        {
-            return !statement.IsAnyKind(ignoredStatementsInSwitch);
-        }
+        private static bool IsApprovedStatement(StatementSyntax statement) =>
+            !statement.IsAnyKind(IgnoredStatementsInSwitch);
     }
 }
