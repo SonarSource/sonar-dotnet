@@ -26,16 +26,19 @@ namespace SonarAnalyzer.Common
 {
     public sealed class AnalyzerLanguage
     {
-        public static readonly AnalyzerLanguage CSharp = new(LanguageNames.CSharp, ".cs");
-        public static readonly AnalyzerLanguage VisualBasic = new(LanguageNames.VisualBasic, ".vb");
+        public static readonly AnalyzerLanguage CSharp = new(LanguageNames.CSharp, ".cs", "https://rules.sonarsource.com/csharp/RSPEC-{0}");
+        public static readonly AnalyzerLanguage VisualBasic = new(LanguageNames.VisualBasic, ".vb", "https://rules.sonarsource.com/vbnet/RSPEC-{0}");
+
+        private readonly string helpLinkFormat;
 
         public string LanguageName { get; }
         public string FileExtension { get; }
 
-        private AnalyzerLanguage(string languageName, string fileExtension)
+        private AnalyzerLanguage(string languageName, string fileExtension, string helpLinkFormat)
         {
             LanguageName = languageName;
             FileExtension = fileExtension;
+            this.helpLinkFormat = helpLinkFormat;
         }
 
         public override string ToString() =>
@@ -56,5 +59,9 @@ namespace SonarAnalyzer.Common
                 ".VB" => VisualBasic,
                 _ => throw new NotSupportedException("Unsupported file extension: " + Path.GetExtension(path))
             };
+
+        public string HelpLink(string id) =>
+            string.Format(helpLinkFormat, id.Substring(1));
+
     }
 }
