@@ -48,18 +48,21 @@ namespace SonarAnalyzer.SourceGenerator
             {
                 throw new NotSupportedException("Cannot find ProjectDir");
             }
-            var (rspecDirectory, classSuffix) = Path.GetFileName(projectDir.TrimEnd(Path.DirectorySeparatorChar)) switch
+            var (directorySuffix, classSuffix) = Path.GetFileName(projectDir.TrimEnd(Path.DirectorySeparatorChar)) switch
             {
                 "SonarAnalyzer.CSharp" => ("cs", "CS"),
                 "SonarAnalyzer.VisualBasic" => ("vbnet", "VB"),
                 _ => throw new ArgumentException($"Unexpected projectDir: {projectDir}")
             };
-            context.AddSource($"RuleCatalog.{classSuffix}.g.cs", GenerateSource(classSuffix, RuleDescriptorArguments(Path.Combine(projectDir, "..", "..", "rspec", rspecDirectory))));
+            var rspecDirectory = Path.Combine(projectDir, "..", "..", "rspec", directorySuffix);
+            var sonarWay = ParseSonarWay(File.ReadAllText(Path.Combine(rspecDirectory, SonarWayFileName)));
+
+
+            context.AddSource($"RuleCatalog.{classSuffix}.g.cs", GenerateSource(classSuffix, RuleDescriptorArguments(rspecDirectory, sonarWay)));
         }
 
-        private static IEnumerable<string[]> RuleDescriptorArguments(string rspecDirectory)
+        private static IEnumerable<string[]> RuleDescriptorArguments(string rspecDirectory, HashSet<string> sonarWay)
         {
-            var sonarWay = new HashSet<string>(JObject.Parse(File.ReadAllText(Path.Combine(rspecDirectory, SonarWayFileName)))["ruleKeys"].Values<string>());
             foreach (var jsonPath in Directory.GetFiles(rspecDirectory, "*.json").Where(x => Path.GetFileName(x) != SonarWayFileName))
             {
                 var json = JObject.Parse(File.ReadAllText(jsonPath));
@@ -78,7 +81,7 @@ namespace SonarAnalyzer.SourceGenerator
             }
         }
 
-        private static string GenerateSource(string classSuffix, IEnumerable<string[]> rules)
+        private static string GenerateSource(string classSuffix, IEnumerable<string[]> rulesArguments)
         {
             var sb = new StringBuilder();
             sb.AppendLine(
@@ -92,7 +95,7 @@ namespace SonarAnalyzer.Helpers
     {{
         public static Dictionary<string, RuleDescriptor> Rules {{ get; }} = new()
         {{");
-            foreach (var arguments in rules)
+            foreach (var arguments in rulesArguments)
             {
                 sb.AppendLine($@"{{ {arguments[0]}, new({string.Join(", ", arguments)}) }},");
             }
@@ -122,5 +125,8 @@ namespace SonarAnalyzer.Helpers
                 throw new NotSupportedException($"Description of rule {id} does not contain any HTML <p>paragraphs</p>.");
             }
         }
+
+        private static HashSet<string> ParseSonarWay(string json) =>
+            new(JObject.Parse(json)["ruleKeys"].Values<string>());
     }
 }

@@ -175,7 +175,7 @@ namespace SonarAnalyzer.UnitTest.Helpers
         public void Create_UnexpectedType_Throws()
         {
             var rule = new RuleDescriptor("Sxxxx", string.Empty, "Lorem Ipsum", string.Empty, SourceScope.Main, true, string.Empty);
-            Func<DiagnosticDescriptor> f = () => DiagnosticDescriptorBuilder.Create(AnalyzerLanguage.CSharp, rule, string.Empty, false);
+            var f = () => DiagnosticDescriptorBuilder.Create(AnalyzerLanguage.CSharp, rule, string.Empty, false);
             f.Should().Throw<UnexpectedValueException>().WithMessage("Unexpected Type value: Lorem Ipsum");
         }
 

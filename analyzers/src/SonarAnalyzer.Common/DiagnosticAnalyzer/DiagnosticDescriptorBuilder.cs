@@ -35,18 +35,16 @@ namespace SonarAnalyzer.Helpers
         public static readonly string TestSourceScopeTag = "TestSourceScope";
 
         public static DiagnosticDescriptor GetUtilityDescriptor(string diagnosticId, string title) =>
-            new(
-                diagnosticId,
+            new(diagnosticId,
                 title,
                 string.Empty,
                 string.Empty,
                 DiagnosticSeverity.Warning,
                 isEnabledByDefault: true,
-                customTags: BuildUtilityCustomTags());
+                customTags: BuildUtilityTags());
 
         public static DiagnosticDescriptor Create(AnalyzerLanguage language, RuleDescriptor rule, string messageFormat, bool fadeOutCode) =>
-            new(
-                rule.Id,
+            new(rule.Id,
                 rule.Title,
                 messageFormat,
                 rule.Category,
@@ -59,8 +57,7 @@ namespace SonarAnalyzer.Helpers
         [Obsolete("Use DescriptorFactory.Create()")]
         public static DiagnosticDescriptor GetDescriptor(string diagnosticId, string messageFormat,
             ResourceManager resourceManager, bool? isEnabledByDefault = null, bool fadeOutCode = false) =>
-            new(
-                diagnosticId,
+            new(diagnosticId,
                 resourceManager.GetString($"{diagnosticId}_Title"),
                 messageFormat,
                 resourceManager.GetString($"{diagnosticId}_Category"),
@@ -78,8 +75,7 @@ namespace SonarAnalyzer.Helpers
         /// Indicates that the Roslyn diagnostic cannot be suppressed, filtered or have its severity changed.
         /// </summary>
         public static DiagnosticDescriptor WithNotConfigurable(this DiagnosticDescriptor dd) =>
-            new(
-                dd.Id,
+            new(dd.Id,
                 dd.Title,
                 dd.MessageFormat,
                 dd.Category,
@@ -89,7 +85,7 @@ namespace SonarAnalyzer.Helpers
                 dd.HelpLinkUri,
                 dd.CustomTags.Union(new[] { WellKnownDiagnosticTags.NotConfigurable }).ToArray());
 
-        [Obsolete]
+        [Obsolete]  // Will be removed with obsolete GetDescriptor method
         private static string[] BuildTags(string diagnosticId, ResourceManager resourceManager, bool fadeOutCode) =>
             BuildTags(
                 resourceManager.GetString("RoslynLanguage"),
@@ -121,7 +117,7 @@ namespace SonarAnalyzer.Helpers
                 _ => throw new NotSupportedException($"{sourceScope} is not supported 'SourceScope' value."),
             };
 
-        private static string[] BuildUtilityCustomTags()
+        private static string[] BuildUtilityTags()
         {
             return SourceScope.All.ToTags().Concat(new[] { UtilityTag })
 #if !DEBUG
@@ -131,21 +127,5 @@ namespace SonarAnalyzer.Helpers
 #endif
                 .ToArray();
         }
-    }
-
-    public record RuleDescriptor(string Id, string Title, string Type, string DefaultSeverity, SourceScope Scope, bool SonarWay, string Description)
-    {
-        public string Category =>
-            $"{DefaultSeverity} {ReadableType}";
-
-        private string ReadableType =>
-            Type switch
-            {
-                "BUG" => "Bug",
-                "CODE_SMELL" => "Code Smell",
-                "VULNERABILITY" => "Vulnerability",
-                "SECURITY_HOTSPOT" => "Security Hotspot",
-                _ => throw new UnexpectedValueException(nameof(Type), Type)
-            };
     }
 }
