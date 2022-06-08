@@ -20,6 +20,28 @@ Namespace Tests.Diagnostics
 
             str = str & "a"
         End Sub
+
+        Public Sub MarkDisabled(objects as IList(Of MyObject))
+            For Each obj As MyObject In objects
+                obj.Name += " - DISABLED" ' Noncompliant, FP See: https://github.com/SonarSource/sonar-dotnet/issues/5521
+            Next
+        End Sub
+
+    End Class
+
+    Public Class MyObject
+
+        Private _name As String
+
+        Public Property Name() As String
+            Get
+                Return _name
+            End Get
+            Set(ByVal value As String)
+                _name = value
+            End Set
+        End Property
+
     End Class
 End Namespace
 
