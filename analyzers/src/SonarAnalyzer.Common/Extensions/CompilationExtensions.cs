@@ -21,7 +21,7 @@
 using Microsoft.CodeAnalysis;
 using SonarAnalyzer.Helpers;
 
-namespace SonarAnalyzer.Common;
+namespace SonarAnalyzer.Extensions;
 
 internal static class CompilationExtensions
 {
