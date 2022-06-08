@@ -133,6 +133,7 @@ namespace SonarAnalyzer.UnitTest.MetadataReferences
         public static References SystemCollectionsImmutable(string packageVersion) => Create("System.Collections.Immutable", packageVersion);
         public static References SystemConfigurationConfigurationManager(string packageVersion = "4.7.0") => Create("System.Configuration.ConfigurationManager", packageVersion);
         public static References SystemComponentModelComposition(string packageVersion = "4.7.0") => Create("System.ComponentModel.Composition", packageVersion);
+        public static References SystemComponentModelTypeConverter(string packageVersion = "4.3.0") => Create("System.ComponentModel.TypeConverter", packageVersion);
         public static References SystemCompositionAttributedModel(string packageVersion = "6.0.0") => Create("System.Composition.AttributedModel", packageVersion);
         public static References SystemDataSqlServerCe(string packageVersion) => Create("Microsoft.SqlServer.Compact", packageVersion);
         public static References SystemDataOdbc(string packageVersion = "4.5.0") => Create("System.Data.Odbc", packageVersion);

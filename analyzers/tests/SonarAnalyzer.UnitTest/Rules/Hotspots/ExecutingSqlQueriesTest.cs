@@ -63,7 +63,7 @@ namespace SonarAnalyzer.UnitTest.Rules
             builderCS
                 .AddPaths(@"ExecutingSqlQueries_EntityFrameworkCore2.cs")
                 .WithOptions(ParseOptionsHelper.FromCSharp8)
-                .AddReferences(GetReferencesEntityFrameworkNetCore("2.2.6"))
+                .AddReferences(GetReferencesEntityFrameworkNetCore("2.2.6").Concat(NuGetMetadataReference.SystemComponentModelTypeConverter()))
                 .Verify();
 
         [TestMethod]
