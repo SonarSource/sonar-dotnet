@@ -18,10 +18,11 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+extern alias csharp;
+extern alias vbnet;
 using System.IO;
-using FluentAssertions;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using SonarAnalyzer.Helpers;
+using RuleCatalogCS = csharp::SonarAnalyzer.Helpers.RuleCatalog;
+using RuleCatalogVB = vbnet::SonarAnalyzer.Helpers.RuleCatalog;
 
 namespace SonarAnalyzer.UnitTest.Helpers
 {
@@ -40,10 +41,10 @@ namespace SonarAnalyzer.UnitTest.Helpers
         [DataRow("S103", "CODE_SMELL")]
         [DataRow("S1048", "BUG")]
         [DataRow("S1313", "SECURITY_HOTSPOT")]
-        public void Category_IsGenerated(string id, string expected)
+        public void Type_IsGenerated(string id, string expected)
         {
-            RuleCatalogCS.Rules[id].Category.Should().Be(expected);
-            RuleCatalogVB.Rules[id].Category.Should().Be(expected);
+            RuleCatalogCS.Rules[id].Type.Should().Be(expected);
+            RuleCatalogVB.Rules[id].Type.Should().Be(expected);
         }
 
         [DataTestMethod]
@@ -82,7 +83,7 @@ namespace SonarAnalyzer.UnitTest.Helpers
         {
             rule.Id.Should().Be("S103");
             rule.Title.Should().Be("Lines should not be too long");
-            rule.Category.Should().Be("CODE_SMELL");
+            rule.Type.Should().Be("CODE_SMELL");
             rule.DefaultSeverity.Should().Be("Major");
             rule.Scope.Should().Be(SourceScope.All);
             rule.SonarWay.Should().BeFalse();

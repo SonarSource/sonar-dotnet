@@ -27,6 +27,6 @@ namespace SonarAnalyzer.Helpers
     {
         public static DiagnosticDescriptor Create(string id, string messageFormat, bool fadeOutCode = false) =>
             // RuleCatalog class is created from SonarAnalyzer.SourceGenerator
-            DiagnosticDescriptorBuilder.Create(AnalyzerLanguage.VisualBasic, RuleCatalogVB.Rules[id], messageFormat, fadeOutCode);
+            DiagnosticDescriptorBuilder.Create(AnalyzerLanguage.VisualBasic, RuleCatalog.Rules[id], messageFormat, fadeOutCode);
     }
 }
