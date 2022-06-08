@@ -27,7 +27,7 @@ namespace SonarAnalyzer.Rules
     public abstract class DeclareTypesInNamespacesBase<TSyntaxKind> : SonarDiagnosticAnalyzer<TSyntaxKind>
         where TSyntaxKind : struct
     {
-        protected const string DiagnosticId = "S3903";
+        private const string DiagnosticId = "S3903";
 
         protected abstract TSyntaxKind[] SyntaxKinds { get; }
         protected abstract bool IsInnerTypeOrWithinNamespace(SyntaxNode declaration, SemanticModel semanticModel);
