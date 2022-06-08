@@ -116,7 +116,7 @@ namespace SonarAnalyzer.Helpers
             {
                 var text = match.Groups["Text"].Value;
                 text = Regex.Replace(text, "<[^>]*>", string.Empty);
-                text = text.Replace("\n\r", " ").Replace("\n", " ").Replace("\r", " ");
+                text = text.Replace("\n", " ").Replace("\r", " ");
                 text = Regex.Replace(text, @"\s{2,}", " ");
                 return WebUtility.HtmlDecode(text);
             }
