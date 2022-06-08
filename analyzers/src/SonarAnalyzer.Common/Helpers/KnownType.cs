@@ -250,6 +250,7 @@ namespace SonarAnalyzer.Helpers
         internal static readonly KnownType System_Diagnostics_ConditionalAttribute = new("System.Diagnostics.ConditionalAttribute");
         internal static readonly KnownType System_Diagnostics_Contracts_PureAttribute = new("System.Diagnostics.Contracts.PureAttribute");
         internal static readonly KnownType System_Diagnostics_Debug = new("System.Diagnostics.Debug");
+        internal static readonly KnownType System_Diagnostics_Debugger = new("System.Diagnostics.Debugger");
         internal static readonly KnownType System_Diagnostics_DebuggerDisplayAttribute = new("System.Diagnostics.DebuggerDisplayAttribute");
         internal static readonly KnownType System_Diagnostics_Process = new("System.Diagnostics.Process");
         internal static readonly KnownType System_Diagnostics_ProcessStartInfo = new("System.Diagnostics.ProcessStartInfo");

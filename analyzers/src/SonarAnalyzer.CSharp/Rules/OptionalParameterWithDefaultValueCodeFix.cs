@@ -26,6 +26,7 @@ using Microsoft.CodeAnalysis.CodeActions;
 using Microsoft.CodeAnalysis.CodeFixes;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
+using SonarAnalyzer.Extensions;
 using SonarAnalyzer.Helpers;
 
 namespace SonarAnalyzer.Rules.CSharp
@@ -33,7 +34,7 @@ namespace SonarAnalyzer.Rules.CSharp
     [ExportCodeFixProvider(LanguageNames.CSharp)]
     public sealed class OptionalParameterWithDefaultValueCodeFix : SonarCodeFix
     {
-        internal const string Title = "Change to '[DefaultParameterValue]'";
+        private const string Title = "Change to '[DefaultParameterValue]'";
         public override ImmutableArray<string> FixableDiagnosticIds =>
             ImmutableArray.Create(OptionalParameterWithDefaultValue.DiagnosticId);
 
@@ -51,7 +52,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
             var semanticModel = await context.Document.GetSemanticModelAsync().ConfigureAwait(false);
 
-            var defaultParameterValueAttributeType = semanticModel?.Compilation.GetTypeByMetadataName(KnownType.System_Runtime_InteropServices_DefaultParameterValueAttribute.FullName);
+            var defaultParameterValueAttributeType = semanticModel?.Compilation.GetTypeByMetadataName(KnownType.System_Runtime_InteropServices_DefaultParameterValueAttribute);
             if (defaultParameterValueAttributeType == null)
             {
                 return;
@@ -60,10 +61,9 @@ namespace SonarAnalyzer.Rules.CSharp
             context.RegisterCodeFix(
                 CodeAction.Create(
                     Title,
-                    c =>
+                    _ =>
                     {
-                        var attributeName = defaultParameterValueAttributeType
-                            .ToMinimalDisplayString(semanticModel, attribute.SpanStart);
+                        var attributeName = defaultParameterValueAttributeType.ToMinimalDisplayString(semanticModel, attribute.SpanStart);
                         attributeName = attributeName.Remove(attributeName.IndexOf("Attribute", System.StringComparison.Ordinal));
 
                         var newAttribute = attribute.WithName(SyntaxFactory.ParseName(attributeName));

@@ -144,7 +144,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 return true;
             }
 
-            var enumerableType = semanticModel.Compilation.GetTypeByMetadataName("System.Linq.Enumerable");
+            var enumerableType = semanticModel.Compilation.GetTypeByMetadataName(KnownType.System_Linq_Enumerable);
             if (enumerableType == null)
             {
                 return false;
