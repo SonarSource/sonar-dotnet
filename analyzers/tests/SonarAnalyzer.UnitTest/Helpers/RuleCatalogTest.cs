@@ -21,8 +21,9 @@
 extern alias csharp;
 extern alias vbnet;
 using System.IO;
-using RuleCatalogCS = csharp::SonarAnalyzer.Helpers.RuleCatalog;
-using RuleCatalogVB = vbnet::SonarAnalyzer.Helpers.RuleCatalog;
+using SonarAnalyzer.Common;
+using RuleCatalogCS = csharp::SonarAnalyzer.RuleCatalog;
+using RuleCatalogVB = vbnet::SonarAnalyzer.RuleCatalog;
 
 namespace SonarAnalyzer.UnitTest.Helpers
 {

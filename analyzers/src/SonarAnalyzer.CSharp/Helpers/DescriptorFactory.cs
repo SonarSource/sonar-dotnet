@@ -20,8 +20,9 @@
 
 using Microsoft.CodeAnalysis;
 using SonarAnalyzer.Common;
+using SonarAnalyzer.Helpers;
 
-namespace SonarAnalyzer.Helpers
+namespace SonarAnalyzer
 {
     internal static class DescriptorFactory
     {

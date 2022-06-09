@@ -18,9 +18,7 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using SonarAnalyzer.Common;
-
-namespace SonarAnalyzer.Helpers
+namespace SonarAnalyzer.Common
 {
     public record RuleDescriptor(string Id, string Title, string Type, string DefaultSeverity, SourceScope Scope, bool SonarWay, string Description)
     {

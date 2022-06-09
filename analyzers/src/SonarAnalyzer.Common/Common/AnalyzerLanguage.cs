@@ -62,6 +62,5 @@ namespace SonarAnalyzer.Common
 
         public string HelpLink(string id) =>
             string.Format(helpLinkFormat, id.Substring(1));
-
     }
 }
