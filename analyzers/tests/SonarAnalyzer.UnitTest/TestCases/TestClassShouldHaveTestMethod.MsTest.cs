@@ -260,7 +260,7 @@ namespace Inheritance
     }
 
     [TestClass]
-    public class C : B // Noncompliant, FP See: https://github.com/SonarSource/sonar-dotnet/issues/5507
+    public class C : B // See: https://github.com/SonarSource/sonar-dotnet/issues/5507
     {
     }
 }

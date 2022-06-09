@@ -65,19 +65,34 @@ namespace SonarAnalyzer.Rules.CSharp
                 SyntaxKind.ClassDeclaration,
                 SyntaxKindEx.RecordClassDeclaration);
 
-        private static bool HasAnyTestMethod(INamedTypeSymbol classSymbol) =>
-            classSymbol.GetMembers().OfType<IMethodSymbol>().Any(m => m.IsTestMethod());
+        private static bool HasAnyTestMethod(INamespaceOrTypeSymbol symbol) =>
+            symbol.GetMembers().OfType<IMethodSymbol>().Any(m => m.IsTestMethod());
 
-        private static bool IsViolatingRule(INamedTypeSymbol classSymbol) =>
-            classSymbol.IsTestClass()
-            && !HasAnyTestMethod(classSymbol);
+        private static bool IsViolatingRule(INamedTypeSymbol symbol) =>
+            symbol.IsTestClass()
+            && !HasAnyTestMethod(symbol);
 
-        private static bool IsExceptionToTheRule(INamedTypeSymbol classSymbol) =>
-            classSymbol.IsAbstract
-            || (classSymbol.BaseType.IsAbstract && HasAnyTestMethod(classSymbol.BaseType))
-            || HasSetupOrCleanupAttributes(classSymbol);
+        private static bool IsExceptionToTheRule(ITypeSymbol symbol) =>
+            symbol.IsAbstract
+            || HasBaseTypeWithTestMethods(symbol)
+            || HasSetupOrCleanupAttributes(symbol);
 
-        private static bool HasSetupOrCleanupAttributes(INamedTypeSymbol classSymbol) =>
-            classSymbol.GetMembers().OfType<IMethodSymbol>().Any(m => m.GetAttributes(HandledSetupAndCleanUpAttributes).Any());
+        private static bool HasBaseTypeWithTestMethods(ITypeSymbol symbol)
+        {
+            var baseType = symbol.BaseType;
+            while (baseType != null)
+            {
+                if (baseType.IsAbstract && HasAnyTestMethod(baseType))
+                {
+                    return true;
+                }
+
+                baseType = baseType.BaseType;
+            }
+            return false;
+        }
+
+        private static bool HasSetupOrCleanupAttributes(INamespaceOrTypeSymbol symbol) =>
+            symbol.GetMembers().OfType<IMethodSymbol>().Any(m => m.GetAttributes(HandledSetupAndCleanUpAttributes).Any());
     }
 }
