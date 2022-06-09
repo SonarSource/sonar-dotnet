@@ -25,10 +25,8 @@ namespace SonarAnalyzer.UnitTest.Rules.SymbolicExecution
     [TestClass]
     public class EmptyCollectionsShouldNotBeEnumeratedTest
     {
-        private static readonly DiagnosticDescriptor[] OnlyDiagnostics = { EmptyCollectionsShouldNotBeEnumerated.S4158 };
-
         private static readonly VerifierBuilder Builder = new VerifierBuilder<SymbolicExecutionRunner>()
-            .WithOnlyDiagnostics(OnlyDiagnostics)
+            .WithOnlyDiagnostics(EmptyCollectionsShouldNotBeEnumerated.S4158)
             .WithBasePath(@"SymbolicExecution\Sonar")
             .WithConcurrentAnalysis(false);
 
