@@ -25,33 +25,31 @@ namespace SonarAnalyzer.UnitTest.Rules.SymbolicExecution
     [TestClass]
     public class EmptyCollectionsShouldNotBeEnumeratedTest
     {
-        private static readonly DiagnosticDescriptor[] OnlyDiagnostics = new[] { EmptyCollectionsShouldNotBeEnumerated.S4158 };
+        private static readonly VerifierBuilder Builder = new VerifierBuilder<SymbolicExecutionRunner>()
+            .WithOnlyDiagnostics(EmptyCollectionsShouldNotBeEnumerated.S4158)
+            .WithBasePath(@"SymbolicExecution\Sonar")
+            .WithConcurrentAnalysis(false);
 
         [DataTestMethod]
         [DataRow(ProjectType.Product)]
         [DataRow(ProjectType.Test)]
         public void EmptyCollectionsShouldNotBeEnumerated_CS(ProjectType projectType) =>
-            OldVerifier.VerifyAnalyzer(
-                @"TestCases\SymbolicExecution\Sonar\EmptyCollectionsShouldNotBeEnumerated.cs",
-                new SymbolicExecutionRunner(),
-                ParseOptionsHelper.FromCSharp8,
-                TestHelper.ProjectTypeReference(projectType).Concat(MetadataReferenceFacade.NETStandard21),
-                onlyDiagnostics: OnlyDiagnostics);
+            Builder
+                .AddReferences(TestHelper.ProjectTypeReference(projectType).Concat(MetadataReferenceFacade.NETStandard21))
+                .AddPaths("EmptyCollectionsShouldNotBeEnumerated.cs")
+                .WithOptions(ParseOptionsHelper.FromCSharp8)
+                .Verify();
 
 #if NET
+
         [TestMethod]
         public void EmptyCollectionsShouldNotBeEnumerated_CSharp9() =>
-            OldVerifier.VerifyAnalyzerFromCSharp9Console(
-                @"TestCases\SymbolicExecution\Sonar\EmptyCollectionsShouldNotBeEnumerated.CSharp9.cs",
-                new SymbolicExecutionRunner(),
-                onlyDiagnostics: OnlyDiagnostics);
+            Builder.AddPaths("EmptyCollectionsShouldNotBeEnumerated.CSharp9.cs").WithTopLevelStatements().Verify();
 
         [TestMethod]
         public void EmptyCollectionsShouldNotBeEnumerated_CSharp10() =>
-            OldVerifier.VerifyAnalyzerFromCSharp10Library(
-                @"TestCases\SymbolicExecution\Sonar\EmptyCollectionsShouldNotBeEnumerated.CSharp10.cs",
-                new SymbolicExecutionRunner(),
-                onlyDiagnostics: OnlyDiagnostics);
+            Builder.AddPaths("EmptyCollectionsShouldNotBeEnumerated.CSharp10.cs").WithOptions(ParseOptionsHelper.FromCSharp10).Verify();
+
 #endif
     }
 }

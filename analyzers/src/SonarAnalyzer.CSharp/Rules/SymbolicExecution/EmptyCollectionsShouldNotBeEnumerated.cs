@@ -37,7 +37,7 @@ namespace SonarAnalyzer.Rules.CSharp
 {
     internal sealed class EmptyCollectionsShouldNotBeEnumerated : ISymbolicExecutionAnalyzer
     {
-        internal const string DiagnosticId = "S4158";
+        private const string DiagnosticId = "S4158";
         private const string MessageFormat = "Remove this call, the collection is known to be empty here.";
 
         internal static readonly DiagnosticDescriptor S4158 = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
@@ -52,7 +52,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 KnownType.System_Collections_ObjectModel_ObservableCollection_T,
                 KnownType.System_Array);
 
-        private static readonly HashSet<string> AddMethods = new HashSet<string>
+        private static readonly HashSet<string> AddMethods = new()
         {
             nameof(List<object>.Add),
             nameof(List<object>.AddRange),
@@ -65,7 +65,7 @@ namespace SonarAnalyzer.Rules.CSharp
             "TryAdd" // This is a .NetCore 2.0+ method on Dictionary
         };
 
-        private static readonly HashSet<string> IgnoredMethods = new HashSet<string>
+        private static readonly HashSet<string> IgnoredMethods = new()
         {
             nameof(List<object>.GetHashCode),
             nameof(List<object>.Equals),
@@ -87,13 +87,12 @@ namespace SonarAnalyzer.Rules.CSharp
 
         public IEnumerable<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(S4158);
 
-        public ISymbolicExecutionAnalysisContext CreateContext(SonarExplodedGraph explodedGraph, SyntaxNodeAnalysisContext context) =>
-            new AnalysisContext(explodedGraph);
+        public ISymbolicExecutionAnalysisContext CreateContext(SonarExplodedGraph explodedGraph, SyntaxNodeAnalysisContext context) => new AnalysisContext(explodedGraph);
 
         private sealed class AnalysisContext : ISymbolicExecutionAnalysisContext
         {
-            private readonly HashSet<SyntaxNode> emptyCollections = new HashSet<SyntaxNode>();
-            private readonly HashSet<SyntaxNode> nonEmptyCollections = new HashSet<SyntaxNode>();
+            private readonly HashSet<SyntaxNode> emptyCollections = new();
+            private readonly HashSet<SyntaxNode> nonEmptyCollections = new();
 
             public AnalysisContext(SonarExplodedGraph explodedGraph) =>
                 explodedGraph.AddExplodedGraphCheck(new EmptyCollectionAccessedCheck(explodedGraph, this));
@@ -116,7 +115,7 @@ namespace SonarAnalyzer.Rules.CSharp
         {
             private readonly AnalysisContext context;
 
-            public EmptyCollectionAccessedCheck(SonarExplodedGraph explodedGraph, AnalysisContext context) : base(explodedGraph) =>
+            public EmptyCollectionAccessedCheck(AbstractExplodedGraph explodedGraph, AnalysisContext context) : base(explodedGraph) =>
                 this.context = context;
 
             public override ProgramState PreProcessInstruction(ProgramPoint programPoint, ProgramState programState)
