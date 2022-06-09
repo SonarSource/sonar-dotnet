@@ -14,6 +14,7 @@ namespace Tests.TestCases
         private void doSomething(int i) { throw new NotSupportedException(); }
         private void doSomethingDifferent() { throw new NotSupportedException(); }
         private void doSomething2() { throw new NotSupportedException(); }
+
         public void Test_SingleLine()
         {
             var i = 5;
@@ -130,6 +131,31 @@ namespace Tests.TestCases
                     doTheRest();
                     break;
             }
+        }
+
+        public int SwitchDifferentBranchDifferentOverloads(object o)
+        {
+            int result = 1;
+            switch (o)
+            {
+                case float a: // Secondary
+                    result++;
+                    result = ValueConverter.ToInt32(a);
+                    break;
+                case bool a: // Noncompliant - FP See: https://github.com/SonarSource/sonar-dotnet/issues/5587
+                    result++;
+                    result = ValueConverter.ToInt32(a);
+                    break;
+                default:
+                    throw new InvalidOperationException("Unsupported array type");
+            }
+            return result;
+        }
+
+        public static class ValueConverter
+        {
+            public static int ToInt32(float f) => 0;
+            public static int ToInt32(bool b) => 0;
         }
     }
 }

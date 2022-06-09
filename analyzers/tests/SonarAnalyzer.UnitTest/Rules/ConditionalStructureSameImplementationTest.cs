@@ -26,24 +26,23 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class ConditionalStructureSameImplementationTest
     {
+        private readonly VerifierBuilder csBuilder = new VerifierBuilder<CS.ConditionalStructureSameImplementation>();
+        private readonly VerifierBuilder vbBuilder = new VerifierBuilder<VB.ConditionalStructureSameImplementation>();
+
         [TestMethod]
         public void ConditionalStructureSameImplementation_If_CSharp() =>
-            OldVerifier.VerifyAnalyzer(@"TestCases\ConditionalStructureSameImplementation_If.cs",
-                new CS.ConditionalStructureSameImplementation());
+            csBuilder.AddPaths("ConditionalStructureSameImplementation_If.cs").Verify();
 
         [TestMethod]
         public void ConditionalStructureSameImplementation_Switch_CSharp() =>
-            OldVerifier.VerifyAnalyzer(@"TestCases\ConditionalStructureSameImplementation_Switch.cs",
-                new CS.ConditionalStructureSameImplementation());
+            csBuilder.AddPaths("ConditionalStructureSameImplementation_Switch.cs").Verify();
 
         [TestMethod]
         public void ConditionalStructureSameImplementation_If_VisualBasic() =>
-            OldVerifier.VerifyAnalyzer(@"TestCases\ConditionalStructureSameImplementation_If.vb",
-                new VB.ConditionalStructureSameImplementation());
+            vbBuilder.AddPaths("ConditionalStructureSameImplementation_If.vb").Verify();
 
         [TestMethod]
         public void ConditionalStructureSameImplementation_Switch_VisualBasic() =>
-            OldVerifier.VerifyAnalyzer(@"TestCases\ConditionalStructureSameImplementation_Switch.vb",
-                new VB.ConditionalStructureSameImplementation());
+            vbBuilder.AddPaths("ConditionalStructureSameImplementation_Switch.vb").Verify();
     }
 }
