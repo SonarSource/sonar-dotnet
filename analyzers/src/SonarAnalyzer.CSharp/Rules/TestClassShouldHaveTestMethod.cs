@@ -74,23 +74,8 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private static bool IsExceptionToTheRule(ITypeSymbol symbol) =>
             symbol.IsAbstract
-            || HasBaseTypeWithTestMethods(symbol)
+            || symbol.GetSelfAndBaseTypes().Any(HasAnyTestMethod)
             || HasSetupOrCleanupAttributes(symbol);
-
-        private static bool HasBaseTypeWithTestMethods(ITypeSymbol symbol)
-        {
-            var baseType = symbol.BaseType;
-            while (baseType != null)
-            {
-                if (baseType.IsAbstract && HasAnyTestMethod(baseType))
-                {
-                    return true;
-                }
-
-                baseType = baseType.BaseType;
-            }
-            return false;
-        }
 
         private static bool HasSetupOrCleanupAttributes(INamespaceOrTypeSymbol symbol) =>
             symbol.GetMembers().OfType<IMethodSymbol>().Any(m => m.GetAttributes(HandledSetupAndCleanUpAttributes).Any());
