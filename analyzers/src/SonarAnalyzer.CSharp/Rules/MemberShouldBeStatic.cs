@@ -105,7 +105,8 @@ namespace SonarAnalyzer.Rules.CSharp
                 || methodOrPropertySymbol.GetAttributes().Any(IsIgnoredAttribute)
                 || IsEmptyMethod(declaration)
                 || IsAutoProperty(methodOrPropertySymbol)
-                || IsPublicControllerMethod(methodOrPropertySymbol))
+                || IsPublicControllerMethod(methodOrPropertySymbol)
+                || IsWindowsFormsEventHandler(methodOrPropertySymbol))
             {
                 return;
             }
@@ -163,6 +164,12 @@ namespace SonarAnalyzer.Rules.CSharp
             symbol is IMethodSymbol methodSymbol
             && methodSymbol.GetEffectiveAccessibility() == Accessibility.Public
             && methodSymbol.ContainingType.DerivesFromAny(WebControllerTypes);
+
+        private static bool IsWindowsFormsEventHandler(ISymbol symbol) =>
+            symbol is IMethodSymbol { Parameters.Length: 2 } methodSymbol
+            && methodSymbol.Parameters[0].Type.Is(KnownType.System_Object)
+            && methodSymbol.Parameters[1].Type.DerivesFrom(KnownType.System_EventArgs)
+            && methodSymbol.ContainingType.Implements(KnownType.System_Windows_Forms_IContainerControl);
 
         private static bool HasInstanceReferences(IEnumerable<SyntaxNode> nodes, SemanticModel semanticModel) =>
             nodes.OfType<ExpressionSyntax>()
