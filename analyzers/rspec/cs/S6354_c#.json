@@ -1,5 +1,5 @@
 {
-  "title": "Use a testable date\/time provider.",
+  "title": "Use a testable date\/time provider",
   "type": "CODE_SMELL",
   "status": "ready",
   "remediation": {

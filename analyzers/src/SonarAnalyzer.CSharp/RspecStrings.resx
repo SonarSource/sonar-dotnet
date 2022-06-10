@@ -12839,7 +12839,7 @@
     <value />
   </data>
   <data name="S6354_Title" xml:space="preserve">
-    <value>Use a testable date/time provider.</value>
+    <value>Use a testable date/time provider</value>
   </data>
   <data name="S6354_Type" xml:space="preserve">
     <value>CODE_SMELL</value>
@@ -12872,7 +12872,7 @@
     <value>bad-practice</value>
   </data>
   <data name="S6419_Title" xml:space="preserve">
-    <value>Azure Functions should be stateless.</value>
+    <value>Azure Functions should be stateless</value>
   </data>
   <data name="S6419_Type" xml:space="preserve">
     <value>CODE_SMELL</value>
@@ -12905,11 +12905,11 @@
     <value>bad-practice,design</value>
   </data>
   <data name="S6420_Title" xml:space="preserve">
-    <value>Reuse client instances rather than creating new ones with each Azure Function invocation.</value>
+    <value>Reuse client instances rather than creating new ones with each Azure Function invocation</value>
   </data>
   <data name="S6420_Type" xml:space="preserve">
     <value>CODE_SMELL</value>
-  </data>  
+  </data>
   <data name="S6421_Category" xml:space="preserve">
     <value>Major Code Smell</value>
   </data>
@@ -12938,7 +12938,7 @@
     <value>error-handling</value>
   </data>
   <data name="S6421_Title" xml:space="preserve">
-    <value>Azure Functions should use Structured Error Handling.</value>
+    <value>Azure Functions should use Structured Error Handling</value>
   </data>
   <data name="S6421_Type" xml:space="preserve">
     <value>CODE_SMELL</value>
@@ -13004,7 +13004,7 @@
     <value>error-handling</value>
   </data>
   <data name="S6423_Title" xml:space="preserve">
-    <value>Azure Functions should log all failures.</value>
+    <value>Azure Functions should log all failures</value>
   </data>
   <data name="S6423_Type" xml:space="preserve">
     <value>CODE_SMELL</value>
@@ -13037,7 +13037,7 @@
     <value>design</value>
   </data>
   <data name="S6424_Title" xml:space="preserve">
-    <value>Azure Functions: Restrictions on entity interfaces.</value>
+    <value>Azure Functions: Restrictions on entity interfaces</value>
   </data>
   <data name="S6424_Type" xml:space="preserve">
     <value>CODE_SMELL</value>

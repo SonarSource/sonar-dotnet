@@ -1,5 +1,5 @@
 {
-  "title": "Azure Functions should use Structured Error Handling.",
+  "title": "Azure Functions should use Structured Error Handling",
   "type": "CODE_SMELL",
   "status": "ready",
   "remediation": {

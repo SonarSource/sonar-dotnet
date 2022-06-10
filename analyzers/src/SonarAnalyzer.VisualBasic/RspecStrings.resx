@@ -5464,7 +5464,7 @@
     <value />
   </data>
   <data name="S6354_Title" xml:space="preserve">
-    <value>Use a testable date/time provider.</value>
+    <value>Use a testable date/time provider</value>
   </data>
   <data name="S6354_Type" xml:space="preserve">
     <value>CODE_SMELL</value>

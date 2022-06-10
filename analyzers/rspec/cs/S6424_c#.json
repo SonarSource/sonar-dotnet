@@ -1,5 +1,5 @@
 {
-  "title": "Azure Functions: Restrictions on entity interfaces.",
+  "title": "Azure Functions: Restrictions on entity interfaces",
   "type": "CODE_SMELL",
   "status": "ready",
   "remediation": {
