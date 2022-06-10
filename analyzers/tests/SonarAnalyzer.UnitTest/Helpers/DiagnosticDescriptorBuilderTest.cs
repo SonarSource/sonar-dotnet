@@ -22,6 +22,7 @@ extern alias csharp;
 extern alias vbnet;
 using System.Resources;
 using Moq;
+using SonarAnalyzer.Common;
 
 namespace SonarAnalyzer.UnitTest.Helpers
 {
@@ -80,7 +81,7 @@ namespace SonarAnalyzer.UnitTest.Helpers
             var result = DiagnosticDescriptorBuilder.GetDescriptor(diagnosticId, "", mockedResourceManager);
 
             // Assert
-            result.CustomTags.Should().OnlyContain(DiagnosticDescriptorBuilder.SonarWayTag, LanguageValue);
+            result.CustomTags.Should().OnlyContain(DiagnosticDescriptorBuilder.SonarWayTag, DiagnosticDescriptorBuilder.MainSourceScopeTag, LanguageValue);
         }
 
         [TestMethod]
@@ -94,7 +95,7 @@ namespace SonarAnalyzer.UnitTest.Helpers
             var result = DiagnosticDescriptorBuilder.GetDescriptor(diagnosticId, "", mockedResourceManager);
 
             // Assert
-            result.CustomTags.Should().OnlyContain(LanguageValue);
+            result.CustomTags.Should().OnlyContain(DiagnosticDescriptorBuilder.MainSourceScopeTag, LanguageValue);
         }
 
         [TestMethod]
@@ -108,6 +109,94 @@ namespace SonarAnalyzer.UnitTest.Helpers
 #endif
         }
 
+        [TestMethod]
+        public void Create_ConfiguresProperties_CS()
+        {
+            var result = DiagnosticDescriptorBuilder.Create(AnalyzerLanguage.CSharp, CreateRuleDescriptor(SourceScope.Main, true), "Sxxxx Message", false);
+
+            result.Id.Should().Be("Sxxxx");
+            result.Title.ToString().Should().Be("Sxxxx Title");
+            result.MessageFormat.ToString().Should().Be("Sxxxx Message");
+            result.Category.Should().Be("Major Bug");
+            result.DefaultSeverity.Should().Be(DiagnosticSeverity.Warning);
+            result.IsEnabledByDefault.Should().BeTrue();
+            result.Description.ToString().Should().Be("Sxxxx Description");
+            result.HelpLinkUri.Should().Be("https://rules.sonarsource.com/csharp/RSPEC-xxxx");
+            result.CustomTags.Should().OnlyContain(LanguageNames.CSharp, DiagnosticDescriptorBuilder.MainSourceScopeTag, DiagnosticDescriptorBuilder.SonarWayTag);
+        }
+
+        [TestMethod]
+        public void Create_ConfiguresProperties_VB()
+        {
+            var result = DiagnosticDescriptorBuilder.Create(AnalyzerLanguage.VisualBasic, CreateRuleDescriptor(SourceScope.Main, true), "Sxxxx Message", false);
+
+            result.Id.Should().Be("Sxxxx");
+            result.Title.ToString().Should().Be("Sxxxx Title");
+            result.MessageFormat.ToString().Should().Be("Sxxxx Message");
+            result.Category.Should().Be("Major Bug");
+            result.DefaultSeverity.Should().Be(DiagnosticSeverity.Warning);
+            result.IsEnabledByDefault.Should().BeTrue();
+            result.Description.ToString().Should().Be("Sxxxx Description");
+            result.HelpLinkUri.Should().Be("https://rules.sonarsource.com/vbnet/RSPEC-xxxx");
+            result.CustomTags.Should().OnlyContain(LanguageNames.VisualBasic, DiagnosticDescriptorBuilder.MainSourceScopeTag, DiagnosticDescriptorBuilder.SonarWayTag);
+        }
+
+        [TestMethod]
+        public void Create_FadeOutCode_HasUnnecessaryTag_HasInfoSeverity()
+        {
+            var result = DiagnosticDescriptorBuilder.Create(AnalyzerLanguage.CSharp, CreateRuleDescriptor(SourceScope.Main, true), "Sxxxx Message", true);
+
+            result.DefaultSeverity.Should().Be(DiagnosticSeverity.Info);
+            result.CustomTags.Should().Contain(WellKnownDiagnosticTags.Unnecessary);
+        }
+
+        [TestMethod]
+        public void Create_HasCorrectSonarWayTag()
+        {
+            CreateTags(true).Should().Contain(DiagnosticDescriptorBuilder.SonarWayTag);
+            CreateTags(false).Should().NotContain(DiagnosticDescriptorBuilder.SonarWayTag);
+
+            static IEnumerable<string> CreateTags(bool sonarWay) =>
+                DiagnosticDescriptorBuilder.Create(AnalyzerLanguage.CSharp, CreateRuleDescriptor(SourceScope.Main, sonarWay), "Sxxxx Message", false).CustomTags;
+        }
+
+        [TestMethod]
+        public void Create_HasCorrectScopeTags()
+        {
+            CreateTags(SourceScope.Main).Should().Contain(DiagnosticDescriptorBuilder.MainSourceScopeTag).And.NotContain(DiagnosticDescriptorBuilder.TestSourceScopeTag);
+            CreateTags(SourceScope.Tests).Should().Contain(DiagnosticDescriptorBuilder.TestSourceScopeTag).And.NotContain(DiagnosticDescriptorBuilder.MainSourceScopeTag);
+            CreateTags(SourceScope.All).Should().Contain(DiagnosticDescriptorBuilder.MainSourceScopeTag, DiagnosticDescriptorBuilder.TestSourceScopeTag);
+
+            static IEnumerable<string> CreateTags(SourceScope scope) =>
+                DiagnosticDescriptorBuilder.Create(AnalyzerLanguage.CSharp, CreateRuleDescriptor(scope, true), "Sxxxx Message", false).CustomTags;
+        }
+
+        [TestMethod]
+        public void Create_UnexpectedType_Throws()
+        {
+            var rule = new RuleDescriptor("Sxxxx", string.Empty, "Lorem Ipsum", string.Empty, SourceScope.Main, true, string.Empty);
+            var f = () => DiagnosticDescriptorBuilder.Create(AnalyzerLanguage.CSharp, rule, string.Empty, false);
+            f.Should().Throw<UnexpectedValueException>().WithMessage("Unexpected Type value: Lorem Ipsum");
+        }
+
+        [DataTestMethod]
+        [DataRow("Minor", "BUG", "Minor Bug")]
+        [DataRow("Major", "BUG", "Major Bug")]
+        [DataRow("Major", "CODE_SMELL", "Major Code Smell")]
+        [DataRow("Major", "VULNERABILITY", "Major Vulnerability")]
+        [DataRow("Major", "SECURITY_HOTSPOT", "Major Security Hotspot")]
+        [DataRow("Critical", "BUG", "Critical Bug")]
+        [DataRow("Blocker", "BUG", "Blocker Bug")]
+        [DataRow("Whatever Xxx", "BUG", "Whatever Xxx Bug")]
+        public void Create_ComputesCategory(string severity, string type, string expected)
+        {
+            var rule = new RuleDescriptor("Sxxxx", string.Empty, type, severity, SourceScope.Main, true, string.Empty);
+            DiagnosticDescriptorBuilder.Create(AnalyzerLanguage.CSharp, rule, "Sxxxx Message", false).Category.Should().Be(expected);
+        }
+
+        private static RuleDescriptor CreateRuleDescriptor(SourceScope scope, bool sonarWay) =>
+            new("Sxxxx", "Sxxxx Title", "BUG", "Major", scope, sonarWay, "Sxxxx Description");
+
         private static ResourceManager CreateMockedResourceManager(string diagnosticId, bool isActivatedByDefault)
         {
             var mockedResourceManager = new Mock<ResourceManager>();
@@ -117,6 +206,7 @@ namespace SonarAnalyzer.UnitTest.Helpers
             mockedResourceManager.Setup(x => x.GetString($"{diagnosticId}_Title")).Returns("title");
             mockedResourceManager.Setup(x => x.GetString($"{diagnosticId}_Category")).Returns("category");
             mockedResourceManager.Setup(x => x.GetString($"{diagnosticId}_Description")).Returns("description");
+            mockedResourceManager.Setup(x => x.GetString($"{diagnosticId}_Scope")).Returns("Main");
             mockedResourceManager.Setup(x => x.GetString($"{diagnosticId}_IsActivatedByDefault")).Returns(isActivatedByDefault.ToString());
 
             return mockedResourceManager.Object;

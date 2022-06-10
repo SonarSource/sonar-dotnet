@@ -8,6 +8,9 @@
     <LangVersion>10.0</LangVersion>
     <RunAnalyzersDuringBuild>false</RunAnalyzersDuringBuild>
     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+    <!-- Store output of Source Generators in obj\debug\net46\generated for easier debugging -->
+    <EmitCompilerGeneratedFiles>true</EmitCompilerGeneratedFiles>
+    <CompilerGeneratedFilesOutputPath>$(IntermediateOutputPath)generated</CompilerGeneratedFilesOutputPath>
   </PropertyGroup>
 
   <ItemGroup>

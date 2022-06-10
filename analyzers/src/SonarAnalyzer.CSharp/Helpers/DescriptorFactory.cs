@@ -18,12 +18,16 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-namespace SonarAnalyzer.Helpers
+using Microsoft.CodeAnalysis;
+using SonarAnalyzer.Common;
+using SonarAnalyzer.Helpers;
+
+namespace SonarAnalyzer
 {
-    public enum SourceScope
+    internal static class DescriptorFactory
     {
-        Main,
-        Tests,
-        All
+        public static DiagnosticDescriptor Create(string id, string messageFormat, bool fadeOutCode = false) =>
+            // RuleCatalog class is created from SonarAnalyzer.SourceGenerator
+            DiagnosticDescriptorBuilder.Create(AnalyzerLanguage.CSharp, RuleCatalog.Rules[id], messageFormat, fadeOutCode);
     }
 }

@@ -70,6 +70,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "AnalysisConfig", "AnalysisC
 		StyleCopAnalyzers.targets = StyleCopAnalyzers.targets
 	EndProjectSection
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SonarAnalyzer.SourceGenerators", "src\SonarAnalyzer.SourceGenerators\SonarAnalyzer.SourceGenerators.csproj", "{76D6EBB8-D2B0-41C1-8880-027EC78CB7FF}"
+EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
 		src\SonarAnalyzer.Shared\SonarAnalyzer.Shared.projitems*{7cfa8fa5-8842-4e89-bb90-39d5c0f20ba8}*SharedItemsImports = 5
@@ -133,6 +135,10 @@ Global
 		{684F0AD7-BBC9-40C8-9E54-D9C2B57560D9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{684F0AD7-BBC9-40C8-9E54-D9C2B57560D9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{684F0AD7-BBC9-40C8-9E54-D9C2B57560D9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{76D6EBB8-D2B0-41C1-8880-027EC78CB7FF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{76D6EBB8-D2B0-41C1-8880-027EC78CB7FF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{76D6EBB8-D2B0-41C1-8880-027EC78CB7FF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{76D6EBB8-D2B0-41C1-8880-027EC78CB7FF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

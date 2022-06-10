@@ -23,30 +23,41 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Resources;
 using Microsoft.CodeAnalysis;
+using SonarAnalyzer.Common;
 
 namespace SonarAnalyzer.Helpers
 {
     public static class DiagnosticDescriptorBuilder
     {
         public static readonly string SonarWayTag = "SonarWay";
+        public static readonly string UtilityTag = "Utility";
         public static readonly string MainSourceScopeTag = "MainSourceScope";
         public static readonly string TestSourceScopeTag = "TestSourceScope";
-        public static readonly string UtilityTag = "Utility";
 
         public static DiagnosticDescriptor GetUtilityDescriptor(string diagnosticId, string title) =>
-            new DiagnosticDescriptor(
-                diagnosticId,
+            new(diagnosticId,
                 title,
                 string.Empty,
                 string.Empty,
                 DiagnosticSeverity.Warning,
                 isEnabledByDefault: true,
-                customTags: BuildUtilityCustomTags());
+                customTags: BuildUtilityTags());
 
+        public static DiagnosticDescriptor Create(AnalyzerLanguage language, RuleDescriptor rule, string messageFormat, bool fadeOutCode) =>
+            new(rule.Id,
+                rule.Title,
+                messageFormat,
+                rule.Category,
+                fadeOutCode ? DiagnosticSeverity.Info : DiagnosticSeverity.Warning,
+                rule.SonarWay,
+                rule.Description,
+                language.HelpLink(rule.Id),
+                BuildTags(language.LanguageName, rule.SonarWay, rule.Scope, fadeOutCode));
+
+        [Obsolete("Use DescriptorFactory.Create()")]
         public static DiagnosticDescriptor GetDescriptor(string diagnosticId, string messageFormat,
             ResourceManager resourceManager, bool? isEnabledByDefault = null, bool fadeOutCode = false) =>
-            new DiagnosticDescriptor(
-                diagnosticId,
+            new(diagnosticId,
                 resourceManager.GetString($"{diagnosticId}_Title"),
                 messageFormat,
                 resourceManager.GetString($"{diagnosticId}_Category"),
@@ -54,17 +65,17 @@ namespace SonarAnalyzer.Helpers
                 isEnabledByDefault ?? bool.Parse(resourceManager.GetString($"{diagnosticId}_IsActivatedByDefault")),
                 helpLinkUri: GetHelpLink(resourceManager, diagnosticId),
                 description: resourceManager.GetString($"{diagnosticId}_Description"),
-                customTags: BuildCustomTags(diagnosticId, resourceManager, fadeOutCode));
+                customTags: BuildTags(diagnosticId, resourceManager, fadeOutCode));
 
+        [Obsolete]
         public static string GetHelpLink(ResourceManager resourceManager, string diagnosticId) =>
             string.Format(resourceManager.GetString("HelpLinkFormat"), diagnosticId.Substring(1));
 
-        /**
-         * Indicates that the roslyn diagnostic cannot be suppressed, filtered or have its severity changed.
-         */
+        /// <summary>
+        /// Indicates that the Roslyn diagnostic cannot be suppressed, filtered or have its severity changed.
+        /// </summary>
         public static DiagnosticDescriptor WithNotConfigurable(this DiagnosticDescriptor dd) =>
-            new DiagnosticDescriptor(
-                dd.Id,
+            new(dd.Id,
                 dd.Title,
                 dd.MessageFormat,
                 dd.Category,
@@ -74,46 +85,41 @@ namespace SonarAnalyzer.Helpers
                 dd.HelpLinkUri,
                 dd.CustomTags.Union(new[] { WellKnownDiagnosticTags.NotConfigurable }).ToArray());
 
-        private static string[] BuildCustomTags(string diagnosticId, ResourceManager resourceManager, bool fadeOutCode)
-        {
-            var tags = new List<string> { resourceManager.GetString("RoslynLanguage") };
+        [Obsolete]  // Will be removed with obsolete GetDescriptor method
+        private static string[] BuildTags(string diagnosticId, ResourceManager resourceManager, bool fadeOutCode) =>
+            BuildTags(
+                resourceManager.GetString("RoslynLanguage"),
+                bool.Parse(resourceManager.GetString($"{diagnosticId}_IsActivatedByDefault")),
+                (SourceScope)Enum.Parse(typeof(SourceScope), resourceManager.GetString($"{diagnosticId}_Scope")),
+                fadeOutCode);
 
-            if (bool.Parse(resourceManager.GetString($"{diagnosticId}_IsActivatedByDefault")))
+        private static string[] BuildTags(string languageName, bool sonarWay, SourceScope scope, bool fadeOutCode)
+        {
+            var tags = new List<string> { languageName };
+            tags.AddRange(scope.ToTags());
+            if (sonarWay)
             {
                 tags.Add(SonarWayTag);
             }
-
-            if (Enum.TryParse<SourceScope>(resourceManager.GetString($"{diagnosticId}_Scope"), out var sourceScope))
-            {
-                tags.AddRange(sourceScope.ToCustomTags());
-            }
-
             if (fadeOutCode)
             {
                 tags.Add(WellKnownDiagnosticTags.Unnecessary);
             }
-
             return tags.ToArray();
         }
 
-        private static IEnumerable<string> ToCustomTags(this SourceScope sourceScope)
-        {
-            switch (sourceScope)
+        private static IEnumerable<string> ToTags(this SourceScope sourceScope) =>
+            sourceScope switch
             {
-                case SourceScope.Main:
-                    return new[] { MainSourceScopeTag };
-                case SourceScope.Tests:
-                    return new[] { TestSourceScopeTag };
-                case SourceScope.All:
-                    return new[] { MainSourceScopeTag, TestSourceScopeTag };
-                default:
-                    throw new NotSupportedException($"{sourceScope} is not supported 'SourceScope' value.");
-            }
-        }
+                SourceScope.Main => new[] { MainSourceScopeTag },
+                SourceScope.Tests => new[] { TestSourceScopeTag },
+                SourceScope.All => new[] { MainSourceScopeTag, TestSourceScopeTag },
+                _ => throw new NotSupportedException($"{sourceScope} is not supported 'SourceScope' value."),
+            };
 
-        private static string[] BuildUtilityCustomTags()
+        private static string[] BuildUtilityTags()
         {
-            return SourceScope.All.ToCustomTags().Concat(new[] { UtilityTag })
+            return SourceScope.All.ToTags().Concat(new[] { UtilityTag })
 #if !DEBUG
                 // Allow to configure the analyzers in debug mode only.
                 // This allows to run test selectively (for example to test only one rule)
