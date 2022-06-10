@@ -54,7 +54,7 @@ namespace SonarAnalyzer.Rules
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
 
         protected StringLiteralShouldNotBeDuplicatedBase() =>
-            rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, Language.RspecResources, false);
+            rule = Language.CreateDescriptor(DiagnosticId, MessageFormat, isEnabledByDefault: false);
 
         protected override void Initialize(ParameterLoadingAnalysisContext context) =>
             // Ideally we would like to report at assembly/project level for the primary and all string instances for secondary

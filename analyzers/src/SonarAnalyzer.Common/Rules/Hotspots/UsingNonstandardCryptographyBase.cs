@@ -54,7 +54,7 @@ namespace SonarAnalyzer.Rules
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
 
         protected UsingNonstandardCryptographyBase(IAnalyzerConfiguration analyzerConfiguration) : base(analyzerConfiguration) =>
-            rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, Language.RspecResources).WithNotConfigurable();
+            rule = Language.CreateDescriptor(DiagnosticId, MessageFormat).WithNotConfigurable();
 
         protected override void Initialize(SonarAnalysisContext context) =>
             context.RegisterSyntaxNodeActionInNonGenerated(Language.GeneratedCodeRecognizer, c =>

@@ -19,7 +19,6 @@
  */
 
 using System;
-using System.Resources;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.VisualBasic;
 using Microsoft.CodeAnalysis.VisualBasic.Syntax;
@@ -44,11 +43,13 @@ namespace SonarAnalyzer.Helpers
         public SyntaxFacade<SyntaxKind> Syntax => SyntaxLazy.Value;
         public ISyntaxKindFacade<SyntaxKind> SyntaxKind => SyntaxKindLazy.Value;
         public ITrackerFacade<SyntaxKind> Tracker => TrackerLazy.Value;
-        public ResourceManager RspecResources => RspecStrings.ResourceManager;
 
         public static VisualBasicFacade Instance => Singleton.Value;
 
         private VisualBasicFacade() { }
+
+        public DiagnosticDescriptor CreateDescriptor(string id, string messageFormat, bool? isEnabledByDefault = null, bool fadeOutCode = false) =>
+            DescriptorFactory.Create(id, messageFormat, isEnabledByDefault, fadeOutCode);
 
         public IMethodParameterLookup MethodParameterLookup(SyntaxNode invocation, IMethodSymbol methodSymbol) =>
             new VisualBasicMethodParameterLookup((InvocationExpressionSyntax)invocation, methodSymbol);

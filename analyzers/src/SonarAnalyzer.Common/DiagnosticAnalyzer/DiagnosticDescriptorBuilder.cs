@@ -43,13 +43,13 @@ namespace SonarAnalyzer.Helpers
                 isEnabledByDefault: true,
                 customTags: BuildUtilityTags());
 
-        public static DiagnosticDescriptor Create(AnalyzerLanguage language, RuleDescriptor rule, string messageFormat, bool fadeOutCode) =>
+        public static DiagnosticDescriptor Create(AnalyzerLanguage language, RuleDescriptor rule, string messageFormat, bool? isEnabledByDefault, bool fadeOutCode) =>
             new(rule.Id,
                 rule.Title,
                 messageFormat,
                 rule.Category,
                 fadeOutCode ? DiagnosticSeverity.Info : DiagnosticSeverity.Warning,
-                rule.SonarWay,
+                isEnabledByDefault ?? rule.SonarWay,
                 rule.Description,
                 language.HelpLink(rule.Id),
                 BuildTags(language.LanguageName, rule.SonarWay, rule.Scope, fadeOutCode));

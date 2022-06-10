@@ -65,6 +65,6 @@ namespace SonarAnalyzer.Rules
             );
 
         protected InsecureEncryptionAlgorithmBase() =>
-            Rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, Language.RspecResources);
+            Rule = Language.CreateDescriptor(DiagnosticId, MessageFormat);
     }
 }

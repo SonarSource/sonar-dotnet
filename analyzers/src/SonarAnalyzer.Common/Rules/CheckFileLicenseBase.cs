@@ -50,7 +50,7 @@ namespace SonarAnalyzer.Rules
         public bool IsRegularExpression { get; set; } = bool.Parse(IsRegularExpressionDefaultValue);
 
         protected CheckFileLicenseBase() =>
-            rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, Language.RspecResources);
+            rule = Language.CreateDescriptor(DiagnosticId, MessageFormat, isEnabledByDefault: false);
 
         protected override void Initialize(ParameterLoadingAnalysisContext context) =>
             context.RegisterSyntaxTreeActionInNonGenerated(Language.GeneratedCodeRecognizer, c =>

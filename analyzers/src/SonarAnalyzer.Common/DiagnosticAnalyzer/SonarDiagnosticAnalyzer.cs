@@ -62,7 +62,7 @@ namespace SonarAnalyzer.Helpers
         protected DiagnosticDescriptor Rule { get; }
 
         protected SonarDiagnosticAnalyzer(string diagnosticId) =>
-           Rule = DiagnosticDescriptorBuilder.GetDescriptor(diagnosticId, MessageFormat, Language.RspecResources);
+           Rule = Language.CreateDescriptor(diagnosticId, MessageFormat);
 
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(Rule);
     }

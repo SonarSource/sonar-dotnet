@@ -112,7 +112,7 @@ namespace SonarAnalyzer.UnitTest.Helpers
         [TestMethod]
         public void Create_ConfiguresProperties_CS()
         {
-            var result = DiagnosticDescriptorBuilder.Create(AnalyzerLanguage.CSharp, CreateRuleDescriptor(SourceScope.Main, true), "Sxxxx Message", false);
+            var result = DiagnosticDescriptorBuilder.Create(AnalyzerLanguage.CSharp, CreateRuleDescriptor(SourceScope.Main, true), "Sxxxx Message", null, false);
 
             result.Id.Should().Be("Sxxxx");
             result.Title.ToString().Should().Be("Sxxxx Title");
@@ -128,7 +128,7 @@ namespace SonarAnalyzer.UnitTest.Helpers
         [TestMethod]
         public void Create_ConfiguresProperties_VB()
         {
-            var result = DiagnosticDescriptorBuilder.Create(AnalyzerLanguage.VisualBasic, CreateRuleDescriptor(SourceScope.Main, true), "Sxxxx Message", false);
+            var result = DiagnosticDescriptorBuilder.Create(AnalyzerLanguage.VisualBasic, CreateRuleDescriptor(SourceScope.Main, true), "Sxxxx Message", null, false);
 
             result.Id.Should().Be("Sxxxx");
             result.Title.ToString().Should().Be("Sxxxx Title");
@@ -144,7 +144,7 @@ namespace SonarAnalyzer.UnitTest.Helpers
         [TestMethod]
         public void Create_FadeOutCode_HasUnnecessaryTag_HasInfoSeverity()
         {
-            var result = DiagnosticDescriptorBuilder.Create(AnalyzerLanguage.CSharp, CreateRuleDescriptor(SourceScope.Main, true), "Sxxxx Message", true);
+            var result = DiagnosticDescriptorBuilder.Create(AnalyzerLanguage.CSharp, CreateRuleDescriptor(SourceScope.Main, true), "Sxxxx Message", null, true);
 
             result.DefaultSeverity.Should().Be(DiagnosticSeverity.Info);
             result.CustomTags.Should().Contain(WellKnownDiagnosticTags.Unnecessary);
@@ -157,7 +157,7 @@ namespace SonarAnalyzer.UnitTest.Helpers
             CreateTags(false).Should().NotContain(DiagnosticDescriptorBuilder.SonarWayTag);
 
             static IEnumerable<string> CreateTags(bool sonarWay) =>
-                DiagnosticDescriptorBuilder.Create(AnalyzerLanguage.CSharp, CreateRuleDescriptor(SourceScope.Main, sonarWay), "Sxxxx Message", false).CustomTags;
+                DiagnosticDescriptorBuilder.Create(AnalyzerLanguage.CSharp, CreateRuleDescriptor(SourceScope.Main, sonarWay), "Sxxxx Message", null, false).CustomTags;
         }
 
         [TestMethod]
@@ -168,14 +168,14 @@ namespace SonarAnalyzer.UnitTest.Helpers
             CreateTags(SourceScope.All).Should().Contain(DiagnosticDescriptorBuilder.MainSourceScopeTag, DiagnosticDescriptorBuilder.TestSourceScopeTag);
 
             static IEnumerable<string> CreateTags(SourceScope scope) =>
-                DiagnosticDescriptorBuilder.Create(AnalyzerLanguage.CSharp, CreateRuleDescriptor(scope, true), "Sxxxx Message", false).CustomTags;
+                DiagnosticDescriptorBuilder.Create(AnalyzerLanguage.CSharp, CreateRuleDescriptor(scope, true), "Sxxxx Message", null, false).CustomTags;
         }
 
         [TestMethod]
         public void Create_UnexpectedType_Throws()
         {
             var rule = new RuleDescriptor("Sxxxx", string.Empty, "Lorem Ipsum", string.Empty, SourceScope.Main, true, string.Empty);
-            var f = () => DiagnosticDescriptorBuilder.Create(AnalyzerLanguage.CSharp, rule, string.Empty, false);
+            var f = () => DiagnosticDescriptorBuilder.Create(AnalyzerLanguage.CSharp, rule, string.Empty, null, false);
             f.Should().Throw<UnexpectedValueException>().WithMessage("Unexpected Type value: Lorem Ipsum");
         }
 
@@ -191,7 +191,7 @@ namespace SonarAnalyzer.UnitTest.Helpers
         public void Create_ComputesCategory(string severity, string type, string expected)
         {
             var rule = new RuleDescriptor("Sxxxx", string.Empty, type, severity, SourceScope.Main, true, string.Empty);
-            DiagnosticDescriptorBuilder.Create(AnalyzerLanguage.CSharp, rule, "Sxxxx Message", false).Category.Should().Be(expected);
+            DiagnosticDescriptorBuilder.Create(AnalyzerLanguage.CSharp, rule, "Sxxxx Message", null, false).Category.Should().Be(expected);
         }
 
         private static RuleDescriptor CreateRuleDescriptor(SourceScope scope, bool sonarWay) =>

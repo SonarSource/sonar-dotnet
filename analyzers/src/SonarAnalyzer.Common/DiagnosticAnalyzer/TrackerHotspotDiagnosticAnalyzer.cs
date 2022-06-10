@@ -36,7 +36,7 @@ namespace SonarAnalyzer.Helpers
 
         protected TrackerHotspotDiagnosticAnalyzer(IAnalyzerConfiguration configuration, string diagnosticId, string messageFormat) : base(configuration)
         {
-            Rule = DiagnosticDescriptorBuilder.GetDescriptor(diagnosticId, messageFormat, Language.RspecResources);
+            Rule = Language.CreateDescriptor(diagnosticId, messageFormat);
             if (configuration == AnalyzerConfiguration.Hotspot)
             {
                 Rule = Rule.WithNotConfigurable();
