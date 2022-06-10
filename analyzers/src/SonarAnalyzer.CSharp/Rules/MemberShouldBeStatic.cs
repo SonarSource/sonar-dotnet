@@ -95,15 +95,17 @@ namespace SonarAnalyzer.Rules.CSharp
             where TDeclarationSyntax : MemberDeclarationSyntax
         {
             var declaration = (TDeclarationSyntax)context.Node;
-            var methodOrPropertySymbol = context.SemanticModel.GetDeclaredSymbol(declaration);
+            if (IsEmptyMethod(declaration))
+            {
+                return;
+            }
 
-            if (methodOrPropertySymbol == null
+            if (context.SemanticModel.GetDeclaredSymbol(declaration) is not { } methodOrPropertySymbol
                 || IsStaticVirtualAbstractOrOverride()
                 || MethodNameWhitelist.Contains(methodOrPropertySymbol.Name)
                 || IsOverrideInterfaceOrNew()
                 || IsExcludedByEnclosingType()
                 || methodOrPropertySymbol.GetAttributes().Any(IsIgnoredAttribute)
-                || IsEmptyMethod(declaration)
                 || IsAutoProperty(methodOrPropertySymbol)
                 || IsPublicControllerMethod(methodOrPropertySymbol)
                 || IsWindowsFormsEventHandler(methodOrPropertySymbol))
@@ -140,7 +142,7 @@ namespace SonarAnalyzer.Rules.CSharp
             !attribute.AttributeClass.Is(KnownType.System_Diagnostics_CodeAnalysis_SuppressMessageAttribute);
 
         private static bool IsEmptyMethod(MemberDeclarationSyntax node) =>
-            node is MethodDeclarationSyntax { Body: { Statements: { Count: 0 } }, ExpressionBody: null };
+            node is MethodDeclarationSyntax { Body.Statements.Count: 0, ExpressionBody: null };
 
         private static bool IsNewMethod(ISymbol symbol) =>
             symbol.DeclaringSyntaxReferences
