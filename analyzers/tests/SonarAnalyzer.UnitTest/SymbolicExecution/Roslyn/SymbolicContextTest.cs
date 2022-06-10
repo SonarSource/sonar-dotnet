@@ -30,48 +30,32 @@ namespace SonarAnalyzer.UnitTest.SymbolicExecution.Roslyn
         [TestMethod]
         public void NullArgument_Throws()
         {
-            var counter = new SymbolicValueCounter();
             var operation = CreateOperation();
-
-            ((Func<SymbolicContext>)(() => new SymbolicContext(null, operation, ProgramState.Empty))).Should().Throw<ArgumentNullException>().And.ParamName.Should().Be("symbolicValueCounter");
-            ((Func<SymbolicContext>)(() => new SymbolicContext(counter, operation, null))).Should().Throw<ArgumentNullException>().And.ParamName.Should().Be("state");
+            ((Func<SymbolicContext>)(() => new SymbolicContext(operation, null))).Should().Throw<ArgumentNullException>().And.ParamName.Should().Be("state");
         }
 
         [TestMethod]
         public void NullOperation_SetsOperationToNull() =>
-            new SymbolicContext(new SymbolicValueCounter(), null, ProgramState.Empty).Operation.Should().Be(null);
+            new SymbolicContext(null, ProgramState.Empty).Operation.Should().Be(null);
 
         [TestMethod]
         public void PropertiesArePersisted()
         {
-            var counter = new SymbolicValueCounter();
             var operation = CreateOperation();
-            var state = ProgramState.Empty.SetOperationValue(operation, new SymbolicValue(counter));
+            var state = ProgramState.Empty.SetOperationValue(operation, new());
 
-            var sut = new SymbolicContext(counter, operation, state);
+            var sut = new SymbolicContext(operation, state);
             sut.Operation.Should().Be(operation);
             sut.State.Should().Be(state);
         }
 
         [TestMethod]
-        public void CreateSymbolicValue_UsesSymbolicValueCounter()
-        {
-            var counter = new SymbolicValueCounter();
-            counter.NextIdentifier().Should().Be(1);    // Skip first values
-            counter.NextIdentifier().Should().Be(2);
-            var sut = new SymbolicContext(counter, CreateOperation(), ProgramState.Empty);
-            sut.CreateSymbolicValue().ToString().Should().Be("SV_3");
-            counter.NextIdentifier().Should().Be(4);
-        }
-
-        [TestMethod]
         public void SetOperationConstraint_WithExistingValue()
         {
-            var counter = new SymbolicValueCounter();
             var operation = CreateOperation();
-            var state = ProgramState.Empty.SetOperationValue(operation, new SymbolicValue(counter));
+            var state = ProgramState.Empty.SetOperationValue(operation, new());
 
-            var sut = new SymbolicContext(counter, operation, state);
+            var sut = new SymbolicContext(operation, state);
             var result = sut.SetOperationConstraint(DummyConstraint.Dummy);
             result.Should().NotBe(state, "new ProgramState instance should be created");
             result[operation].HasConstraint(DummyConstraint.Dummy).Should().BeTrue();
@@ -80,11 +64,10 @@ namespace SonarAnalyzer.UnitTest.SymbolicExecution.Roslyn
         [TestMethod]
         public void SetOperationConstraint_WithNewValue()
         {
-            var counter = new SymbolicValueCounter();
             var operation = CreateOperation();
             var state = ProgramState.Empty;
 
-            var sut = new SymbolicContext(counter, operation, state);
+            var sut = new SymbolicContext(operation, state);
             var result = sut.SetOperationConstraint(DummyConstraint.Dummy);
             result.Should().NotBe(state, "new ProgramState instance should be created");
             result[operation].HasConstraint(DummyConstraint.Dummy).Should().BeTrue();
@@ -93,12 +76,11 @@ namespace SonarAnalyzer.UnitTest.SymbolicExecution.Roslyn
         [TestMethod]
         public void SetSymbolConstraint_WithExistingValue()
         {
-            var counter = new SymbolicValueCounter();
             var operation = CreateOperation();
             var symbol = operation.Children.First().TrackedSymbol();
-            var state = ProgramState.Empty.SetSymbolValue(symbol, new SymbolicValue(counter));
+            var state = ProgramState.Empty.SetSymbolValue(symbol, new());
 
-            var sut = new SymbolicContext(counter, operation, state);
+            var sut = new SymbolicContext(operation, state);
             var result = sut.SetSymbolConstraint(symbol, DummyConstraint.Dummy);
             result.Should().NotBe(state, "new ProgramState instance should be created");
             result[symbol].HasConstraint(DummyConstraint.Dummy).Should().BeTrue();
@@ -107,12 +89,11 @@ namespace SonarAnalyzer.UnitTest.SymbolicExecution.Roslyn
         [TestMethod]
         public void SetSymbolConstraint_WithNewValue()
         {
-            var counter = new SymbolicValueCounter();
             var operation = CreateOperation();
             var symbol = operation.Children.First().TrackedSymbol();
             var state = ProgramState.Empty;
 
-            var sut = new SymbolicContext(counter, operation, state);
+            var sut = new SymbolicContext(operation, state);
             var result = sut.SetSymbolConstraint(symbol, DummyConstraint.Dummy);
             result.Should().NotBe(state, "new ProgramState instance should be created");
             result[symbol].HasConstraint(DummyConstraint.Dummy).Should().BeTrue();
@@ -122,7 +103,7 @@ namespace SonarAnalyzer.UnitTest.SymbolicExecution.Roslyn
         public void WithState_SameState_ReturnsThis()
         {
             var state = ProgramState.Empty;
-            var sut = new SymbolicContext(new(), null, state);
+            var sut = new SymbolicContext(null, state);
             sut.WithState(state).Should().Be(sut);
         }
 
@@ -130,8 +111,8 @@ namespace SonarAnalyzer.UnitTest.SymbolicExecution.Roslyn
         public void WithState_DifferentState_ReturnsNew()
         {
             var state = ProgramState.Empty;
-            var sut = new SymbolicContext(new(), null, state);
-            var newState = state.SetOperationValue(CreateOperation(), sut.CreateSymbolicValue());
+            var sut = new SymbolicContext(null, state);
+            var newState = state.SetOperationValue(CreateOperation(), new());
             sut.WithState(newState).Should().NotBe(sut);
         }
 

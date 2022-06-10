@@ -103,7 +103,7 @@ namespace SonarAnalyzer.UnitTest.SymbolicExecution.Roslyn
             var basic = new ExplodedNode(block, ProgramState.Empty, null);
             var same = new ExplodedNode(block, ProgramState.Empty, null);
             var differentLocation = basic.CreateNext(ProgramState.Empty);
-            var differentState = new ExplodedNode(block, ProgramState.Empty.SetOperationValue(block.Operations[0], new SymbolicValue(new SymbolicValueCounter())), null);
+            var differentState = new ExplodedNode(block, ProgramState.Empty.SetOperationValue(block.Operations[0], new()), null);
 
             basic.Equals(same).Should().BeTrue();
             basic.Equals(differentLocation).Should().BeFalse();
@@ -120,7 +120,7 @@ namespace SonarAnalyzer.UnitTest.SymbolicExecution.Roslyn
             var basic = new ExplodedNode(block, ProgramState.Empty, null);
             var same = new ExplodedNode(block, ProgramState.Empty, null);
             var differentLocation = basic.CreateNext(ProgramState.Empty);
-            var differentState = new ExplodedNode(block, ProgramState.Empty.SetOperationValue(block.Operations[0], new SymbolicValue(new SymbolicValueCounter())), null);
+            var differentState = new ExplodedNode(block, ProgramState.Empty.SetOperationValue(block.Operations[0], new()), null);
 
             basic.GetHashCode().Should().Be(basic.GetHashCode(), "value should be deterministic");
             basic.GetHashCode().Should().Be(same.GetHashCode());
@@ -132,17 +132,17 @@ namespace SonarAnalyzer.UnitTest.SymbolicExecution.Roslyn
         public void ToString_SerializeOperationAndState()
         {
             var cfg = TestHelper.CompileCfgBodyCS("var a = true;");
-            var state = ProgramState.Empty.SetSymbolValue(cfg.Blocks[1].Operations[0].Children.First().TrackedSymbol(), new(new()));
+            var state = ProgramState.Empty.SetSymbolValue(cfg.Blocks[1].Operations[0].Children.First().TrackedSymbol(), new());
 
             new ExplodedNode(cfg.Blocks[1], state, null).ToString().Should().BeIgnoringLineEndings(
 @"Block #1, Operation #0, LocalReferenceOperation / VariableDeclaratorSyntax: a = true
 Symbols:
-a: SV_1
+a: No constraints
 ");
             new ExplodedNode(cfg.ExitBlock, state, null).ToString().Should().BeIgnoringLineEndings(
 @"Block #2, Branching
 Symbols:
-a: SV_1
+a: No constraints
 ");
         }
 

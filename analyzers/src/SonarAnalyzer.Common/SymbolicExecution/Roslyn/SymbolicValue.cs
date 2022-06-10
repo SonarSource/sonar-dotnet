@@ -27,26 +27,11 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
 {
     public sealed record SymbolicValue
     {
-        private readonly SymbolicValueCounter counter;
-        private readonly int identifier;    // This is debug information that is intentionally excluded from GetHashCode and Equals
         // SymbolicValue can have only one constraint instance of specific type at a time
         private ImmutableDictionary<Type, SymbolicConstraint> Constraints { get; init; } = ImmutableDictionary<Type, SymbolicConstraint>.Empty;
 
-        public SymbolicValue(SymbolicValueCounter counter)
-        {
-            this.counter = counter;
-            identifier = counter.NextIdentifier();
-        }
-
-        protected SymbolicValue(SymbolicValue original) // Custom record copying constructor
-        {
-            counter = original.counter;
-            identifier = counter.NextIdentifier();
-            Constraints = original.Constraints;
-        }
-
         public override string ToString() =>
-            $"SV_{identifier}{SerializeConstraints()}";
+            SerializeConstraints();
 
         public SymbolicValue WithConstraint(SymbolicConstraint constraint) =>
             this with { Constraints = Constraints.SetItem(constraint.GetType(), constraint) };
@@ -70,7 +55,7 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
 
         private string SerializeConstraints() =>
             Constraints.Any()
-                ? ": " + Constraints.Values.Select(x => x.ToString()).OrderBy(x => x).JoinStr(", ")
-                : null;
+                ? Constraints.Values.Select(x => x.ToString()).OrderBy(x => x).JoinStr(", ")
+                : "No constraints";
     }
 }
