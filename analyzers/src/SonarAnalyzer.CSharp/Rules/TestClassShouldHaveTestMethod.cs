@@ -65,19 +65,19 @@ namespace SonarAnalyzer.Rules.CSharp
                 SyntaxKind.ClassDeclaration,
                 SyntaxKindEx.RecordClassDeclaration);
 
-        private static bool HasAnyTestMethod(INamedTypeSymbol classSymbol) =>
-            classSymbol.GetMembers().OfType<IMethodSymbol>().Any(m => m.IsTestMethod());
+        private static bool HasAnyTestMethod(INamespaceOrTypeSymbol symbol) =>
+            symbol.GetMembers().OfType<IMethodSymbol>().Any(m => m.IsTestMethod());
 
-        private static bool IsViolatingRule(INamedTypeSymbol classSymbol) =>
-            classSymbol.IsTestClass()
-            && !HasAnyTestMethod(classSymbol);
+        private static bool IsViolatingRule(INamedTypeSymbol symbol) =>
+            symbol.IsTestClass()
+            && !HasAnyTestMethod(symbol);
 
-        private static bool IsExceptionToTheRule(INamedTypeSymbol classSymbol) =>
-            classSymbol.IsAbstract
-            || (classSymbol.BaseType.IsAbstract && HasAnyTestMethod(classSymbol.BaseType))
-            || HasSetupOrCleanupAttributes(classSymbol);
+        private static bool IsExceptionToTheRule(ITypeSymbol symbol) =>
+            symbol.IsAbstract
+            || symbol.GetSelfAndBaseTypes().Any(HasAnyTestMethod)
+            || HasSetupOrCleanupAttributes(symbol);
 
-        private static bool HasSetupOrCleanupAttributes(INamedTypeSymbol classSymbol) =>
-            classSymbol.GetMembers().OfType<IMethodSymbol>().Any(m => m.GetAttributes(HandledSetupAndCleanUpAttributes).Any());
+        private static bool HasSetupOrCleanupAttributes(INamespaceOrTypeSymbol symbol) =>
+            symbol.GetMembers().OfType<IMethodSymbol>().Any(m => m.GetAttributes(HandledSetupAndCleanUpAttributes).Any());
     }
 }

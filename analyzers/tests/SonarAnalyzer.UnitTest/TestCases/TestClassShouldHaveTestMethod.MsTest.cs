@@ -242,3 +242,25 @@ namespace DerivedAttributes
         public void Foo() { }
     }
 }
+
+namespace Inheritance
+{
+    [TestClass]
+    public abstract class A
+    {
+        [TestMethod]
+        public void Test()
+        {
+        }
+    }
+
+    [TestClass]
+    public abstract class B : A
+    {
+    }
+
+    [TestClass]
+    public class C : B // See: https://github.com/SonarSource/sonar-dotnet/issues/5507
+    {
+    }
+}
