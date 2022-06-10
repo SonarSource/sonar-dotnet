@@ -28,6 +28,32 @@
 },
 {
 "id":  "S3928",
+"message":  "The parameter name 'Can't deserialize key/value pair in ORDictionary delta - too many pairs on the wire' is not declared in the argument list.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Serialization\ReplicatedDataSerializer.cs",
+"region":  {
+"startLine":  1015,
+"startColumn":  39,
+"endLine":  1016,
+"endColumn":  124
+}
+}
+},
+{
+"id":  "S3928",
+"message":  "The parameter name 'Can't deserialize key/value pair in ORDictionary delta - too many pairs on the wire' is not declared in the argument list.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Serialization\ReplicatedDataSerializer.cs",
+"region":  {
+"startLine":  1030,
+"startColumn":  39,
+"endLine":  1031,
+"endColumn":  124
+}
+}
+},
+{
+"id":  "S3928",
 "message":  "The parameter name 'Timeouts must fit in a 32-bit unsigned int' is not declared in the argument list.",
 "location":  {
 "uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Serialization\ReplicatorMessageSerializer.cs",
