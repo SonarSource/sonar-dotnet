@@ -30,11 +30,6 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
         // SymbolicValue can have only one constraint instance of specific type at a time
         private ImmutableDictionary<Type, SymbolicConstraint> Constraints { get; init; } = ImmutableDictionary<Type, SymbolicConstraint>.Empty;
 
-        public SymbolicValue() { }
-
-        protected SymbolicValue(SymbolicValue original) => // Custom record copying constructor
-            Constraints = original.Constraints;
-
         public override string ToString() =>
             SerializeConstraints();
 
