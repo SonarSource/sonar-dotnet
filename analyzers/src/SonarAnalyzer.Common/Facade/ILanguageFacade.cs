@@ -19,7 +19,6 @@
  */
 
 using System;
-using System.Resources;
 using Microsoft.CodeAnalysis;
 using SonarAnalyzer.Helpers.Facade;
 
