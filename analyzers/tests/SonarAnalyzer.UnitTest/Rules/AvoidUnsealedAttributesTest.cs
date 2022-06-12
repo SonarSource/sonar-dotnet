@@ -20,14 +20,12 @@
 
 using SonarAnalyzer.Rules.CSharp;
 
-namespace SonarAnalyzer.UnitTest.Rules
+namespace SonarAnalyzer.UnitTest.Rules;
+
+[TestClass]
+public class AvoidUnsealedAttributesTest
 {
-    [TestClass]
-    public class AvoidUnsealedAttributesTest
-    {
-        [TestMethod]
-        public void AvoidUnsealedAttributes() =>
-            OldVerifier.VerifyAnalyzer(@"TestCases\AvoidUnsealedAttributes.cs",
-                new AvoidUnsealedAttributes());
-    }
+    [TestMethod]
+    public void AvoidUnsealedAttributes() =>
+        new VerifierBuilder<AvoidUnsealedAttributes>().AddPaths("AvoidUnsealedAttributes.cs").Verify();
 }
