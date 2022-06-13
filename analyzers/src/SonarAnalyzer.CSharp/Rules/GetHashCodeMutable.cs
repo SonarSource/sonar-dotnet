@@ -37,7 +37,7 @@ namespace SonarAnalyzer.Rules.CSharp
         private const string IssueMessage = "Refactor 'GetHashCode' to not reference mutable fields.";
         private const string SecondaryMessageFormat = "Remove this use of '{0}' or make it 'readonly'.";
 
-        private static readonly DiagnosticDescriptor Rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, IssueMessage, RspecStrings.ResourceManager);
+        private static readonly DiagnosticDescriptor Rule = DescriptorFactory.Create(DiagnosticId, IssueMessage);
 
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
 

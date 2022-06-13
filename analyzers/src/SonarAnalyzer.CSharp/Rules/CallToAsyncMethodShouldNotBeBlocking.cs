@@ -39,8 +39,8 @@ namespace SonarAnalyzer.Rules.CSharp
         private const string SleepName = "Sleep";
         private const string AzureFunctionSuffix = @" Do not perform blocking operations in Azure Functions.";
 
-        private static readonly DiagnosticDescriptor RuleS4462 = DiagnosticDescriptorBuilder.GetDescriptor("S4462", MessageFormat, RspecStrings.ResourceManager);
-        private static readonly DiagnosticDescriptor RuleS6422 = DiagnosticDescriptorBuilder.GetDescriptor("S6422", MessageFormat + AzureFunctionSuffix, RspecStrings.ResourceManager);
+        private static readonly DiagnosticDescriptor RuleS4462 = DescriptorFactory.Create("S4462", MessageFormat);
+        private static readonly DiagnosticDescriptor RuleS6422 = DescriptorFactory.Create("S6422", MessageFormat + AzureFunctionSuffix);
 
         private static readonly Dictionary<string, ImmutableArray<KnownType>> InvalidMemberAccess = new()
         {

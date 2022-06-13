@@ -35,7 +35,7 @@ namespace SonarAnalyzer.Rules.CSharp
     {
         private const string S3949DiagnosticId = "S3949";
         private const string S3949MessageFormat = "{0}";
-        private static readonly DiagnosticDescriptor RuleS3949 = DiagnosticDescriptorBuilder.GetDescriptor(S3949DiagnosticId, S3949MessageFormat, RspecStrings.ResourceManager, fadeOutCode: true);
+        private static readonly DiagnosticDescriptor RuleS3949 = DescriptorFactory.Create(S3949DiagnosticId, S3949MessageFormat, fadeOutCode: true);
         private readonly ImmutableDictionary<string, DiagnosticDescriptor> ruleIdToDiagDescriptor = ImmutableDictionary<string, DiagnosticDescriptor>.Empty.Add("S3949", RuleS3949);
         private readonly bool unitTest;
         private readonly Action<string> onCbdeExecution;
