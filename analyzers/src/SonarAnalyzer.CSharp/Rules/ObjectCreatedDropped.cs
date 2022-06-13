@@ -40,8 +40,7 @@ public sealed class ObjectCreatedDropped : SonarDiagnosticAnalyzer
     protected override void Initialize(SonarAnalysisContext context) =>
         context.RegisterSyntaxNodeActionInNonGenerated(c =>
             {
-                if (c.Node is ObjectCreationExpressionSyntax creation
-                    && creation.Parent is ExpressionStatementSyntax)
+                if (c.Node is ObjectCreationExpressionSyntax creation && creation.Parent is ExpressionStatementSyntax)
                 {
                     c.ReportIssue(Diagnostic.Create(Rule, creation.GetLocation(), creation.Type));
                 }
