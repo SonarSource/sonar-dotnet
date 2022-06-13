@@ -69,6 +69,15 @@ public class KnownTypeTest
             .Matches(GetSymbol_VB(symbolName))
             .Should().Be(expectedMatch);
 
+    [DataTestMethod]
+    [DataRow("System.String", "System.String", false)]
+    [DataRow("System.String[]", "System.String", true)]
+    [DataRow("System.Action<T>", "System.Action", false, "T")]
+    [DataRow("System.Action<T1, T2>", "System.Action", false, "T1", "T2")]
+    [DataRow("System.Action<T1, T2>[]", "System.Action", true, "T1", "T2")]
+    public void DebuggerDisplay(string expectedResult, string fullTypeName, bool isArray, params string[] genericParameters) =>
+        new KnownType(fullTypeName, genericParameters) { IsArray = isArray }.DebuggerDisplay.Should().Be(expectedResult);
+
     private static ITypeSymbol GetSymbol_CS(string type)
     {
         var (tree, model) = TestHelper.CompileCS($@"

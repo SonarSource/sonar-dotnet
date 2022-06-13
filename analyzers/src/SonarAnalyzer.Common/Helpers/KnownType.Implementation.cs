@@ -22,11 +22,12 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Text;
 using Microsoft.CodeAnalysis;
 
 namespace SonarAnalyzer.Helpers
 {
-    [DebuggerDisplay("{FullName}, Array: {IsArray}, Parameters: {string.Join(\",\", genericParameters)}", Name = "{TypeName}")]
+    [DebuggerDisplay("{DebuggerDisplay}")]
     internal sealed partial class KnownType
     {
         private readonly IList<string> namespaceParts;
@@ -35,6 +36,25 @@ namespace SonarAnalyzer.Helpers
         public string TypeName { get; }
         public string FullName { get; }
         public bool IsArray { get; init; }
+
+        internal string DebuggerDisplay
+        {
+            get
+            {
+                var sb = new StringBuilder(FullName);
+                if (genericParameters.Length > 0)
+                {
+                    sb.Append('<').Append(genericParameters.JoinStr(", ")).Append('>');
+                }
+
+                if (IsArray)
+                {
+                    sb.Append("[]");
+                }
+
+                return sb.ToString();
+            }
+        }
 
         public KnownType(string fullName, params string[] genericParameters)
         {
