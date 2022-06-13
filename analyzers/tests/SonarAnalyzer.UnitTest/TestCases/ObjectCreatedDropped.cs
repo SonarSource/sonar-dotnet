@@ -35,7 +35,24 @@ namespace Tests.TestCases
 
             var xx = func();
 
+            new Guid(); // Noncompliant, struct
+
+            new SomeDisposable(); // Noncompliant
+
             return new object();
         }
+
+        void Disposing()
+        {
+            using (new SomeDisposable()) // Compliant
+            {
+
+            }
+        }
+
+    }
+    class SomeDisposable : IDisposable
+    {
+        public void Dispose() { }
     }
 }
