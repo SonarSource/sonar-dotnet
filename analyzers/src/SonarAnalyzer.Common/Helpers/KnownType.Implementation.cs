@@ -20,12 +20,14 @@
 
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using Microsoft.CodeAnalysis;
 
 namespace SonarAnalyzer.Helpers
 {
+    [DebuggerDisplay("{DebuggerDisplay}")]
     internal sealed partial class KnownType
     {
         private readonly IList<string> namespaceParts;
@@ -34,6 +36,25 @@ namespace SonarAnalyzer.Helpers
         public string TypeName { get; }
         public string FullName { get; }
         public bool IsArray { get; init; }
+
+        internal string DebuggerDisplay
+        {
+            get
+            {
+                var sb = new StringBuilder(FullName);
+                if (genericParameters.Length > 0)
+                {
+                    sb.Append('<').Append(genericParameters.JoinStr(", ")).Append('>');
+                }
+
+                if (IsArray)
+                {
+                    sb.Append("[]");
+                }
+
+                return sb.ToString();
+            }
+        }
 
         public KnownType(string fullName, params string[] genericParameters)
         {
@@ -46,20 +67,6 @@ namespace SonarAnalyzer.Helpers
 
         public bool Matches(ITypeSymbol symbol) =>
             IsMatch(symbol) || IsMatch(symbol.OriginalDefinition);
-
-        public override string ToString()
-        {
-            var sb = new StringBuilder().Append(FullName);
-            if (genericParameters.Length > 0)
-            {
-                sb.Append('<').Append(string.Join(", ", genericParameters)).Append('>');
-            }
-            if (IsArray)
-            {
-                sb.Append("[]");
-            }
-            return sb.ToString();
-        }
 
         private bool IsMatch(ITypeSymbol symbol)
         {

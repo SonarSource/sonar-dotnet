@@ -75,8 +75,8 @@ public class KnownTypeTest
     [DataRow("System.Action<T>", "System.Action", false, "T")]
     [DataRow("System.Action<T1, T2>", "System.Action", false, "T1", "T2")]
     [DataRow("System.Action<T1, T2>[]", "System.Action", true, "T1", "T2")]
-    public void ToString(string expectedResult, string fullTypeName, bool isArray, params string[] genericParameters)
-        => new KnownType(fullTypeName, genericParameters) { IsArray = isArray }.ToString().Should().Be(expectedResult);
+    public void DebuggerDisplay(string expectedResult, string fullTypeName, bool isArray, params string[] genericParameters) =>
+        new KnownType(fullTypeName, genericParameters) { IsArray = isArray }.DebuggerDisplay.Should().Be(expectedResult);
 
     private static ITypeSymbol GetSymbol_CS(string type)
     {
