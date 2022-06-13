@@ -62,22 +62,12 @@ namespace SonarAnalyzer.UnitTest.Common
         }
 
         [TestMethod]
-        public void RulesDoNotEndWithDot_CS()
-        {
-            foreach (var rule in csharp::SonarAnalyzer.RuleCatalog.Rules.Values)
-            {
-                rule.Title.Should().NotEndWith(".", @$"Rule {rule.Id} title ""{rule.Title}"" should not end with a dot.");
-            }
-        }
+        public void RulesDoNotEndWithDot_CS() =>
+            VerifyRulesDoNotEndWithDot(csharp::SonarAnalyzer.RuleCatalog.Rules.Values);
 
         [TestMethod]
-        public void RulesDoNotEndWithDot_VB()
-        {
-            foreach (var rule in vbnet::SonarAnalyzer.RuleCatalog.Rules.Values)
-            {
-                rule.Title.Should().NotEndWith(".", @$"Rule {rule.Id} title ""{rule.Title}"" should not end with a dot.");
-            }
-        }
+        public void RulesDoNotEndWithDot_VB() =>
+            VerifyRulesDoNotEndWithDot(vbnet::SonarAnalyzer.RuleCatalog.Rules.Values);
 
         [TestMethod]
         public void AllAnalyzers_InheritSonarDiagnosticAnalyzer()
@@ -290,6 +280,14 @@ namespace SonarAnalyzer.UnitTest.Common
                 {
                     diagnostic.CustomTags.Should().NotContain(WellKnownDiagnosticTags.NotConfigurable, diagnostic.Id + " is not a Security Hotspot and should be configurable");
                 }
+            }
+        }
+
+        private static void VerifyRulesDoNotEndWithDot(IEnumerable<RuleDescriptor> rules)
+        {
+            foreach (var rule in rules)
+            {
+                rule.Title.Should().NotEndWith(".", @$"Rule {rule.Id} title ""{rule.Title}"" should not end with a dot.");
             }
         }
 
