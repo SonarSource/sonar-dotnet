@@ -41,6 +41,7 @@ namespace SonarAnalyzer.Helpers.Facade
         public abstract SyntaxNode BinaryExpressionRight(SyntaxNode binaryExpression);
         public abstract IEnumerable<SyntaxNode> EnumMembers(SyntaxNode @enum);
         public abstract SyntaxToken? InvocationIdentifier(SyntaxNode invocation);
+        public abstract string Name(SyntaxNode node);
         public abstract SyntaxNode NodeExpression(SyntaxNode node);
         public abstract SyntaxToken? NodeIdentifier(SyntaxNode node);
         public abstract SyntaxNode RemoveConditionalAcesss(SyntaxNode node);

@@ -18,21 +18,16 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using SonarAnalyzer.Rules.CSharp;
+using Microsoft.CodeAnalysis;
+using Microsoft.CodeAnalysis.CSharp;
+using Microsoft.CodeAnalysis.Diagnostics;
 
-namespace SonarAnalyzer.UnitTest.Rules;
+namespace SonarAnalyzer.Helpers;
 
-[TestClass]
-public class ObjectCreatedDroppedTest
+[DiagnosticAnalyzer(LanguageNames.CSharp)]
+public abstract class CSharpOnlyAnalyzer : SonarDiagnosticAnalyzer<SyntaxKind>
 {
-    [TestMethod]
-    public void ObjectCreatedDropped() =>
-        new VerifierBuilder<ObjectCreatedDropped>().AddPaths("ObjectCreatedDropped.cs").Verify();
+    protected sealed override ILanguageFacade<SyntaxKind> Language => CSharpFacade.Instance;
 
-    [TestMethod]
-    public void ObjectCreatedDropped_CSharp9() =>
-        new VerifierBuilder<ObjectCreatedDropped>()
-        .WithOptions(ParseOptionsHelper.FromCSharp9)
-        .AddPaths("ObjectCreatedDropped.CSharp9.cs")
-        .Verify();
+    protected CSharpOnlyAnalyzer(string diagnosticId) : base(diagnosticId) { }
 }

@@ -76,6 +76,13 @@ namespace SonarAnalyzer.Helpers.Facade
         public override SyntaxToken? InvocationIdentifier(SyntaxNode invocation) =>
             invocation == null ? null : Cast<InvocationExpressionSyntax>(invocation).GetMethodCallIdentifier();
 
+        public override string Name(SyntaxNode node) =>
+            node switch
+            {
+                ObjectCreationExpressionSyntax x => x.Type.GetName(),
+                _ => string.Empty
+            };
+
         public override SyntaxNode NodeExpression(SyntaxNode node) =>
             node switch
             {

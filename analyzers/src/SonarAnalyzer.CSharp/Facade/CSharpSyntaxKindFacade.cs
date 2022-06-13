@@ -43,6 +43,7 @@ namespace SonarAnalyzer.Helpers.Facade
         public SyntaxKind ConstructorDeclaration => SyntaxKind.ConstructorDeclaration;
         public SyntaxKind[] DefaultExpressions => new[] { SyntaxKind.DefaultExpression, SyntaxKindEx.DefaultLiteralExpression };
         public SyntaxKind EnumDeclaration => SyntaxKind.EnumDeclaration;
+        public SyntaxKind ExpressionStatement => SyntaxKind.ExpressionStatement;
         public SyntaxKind FieldDeclaration => SyntaxKind.FieldDeclaration;
         public SyntaxKind IdentifierName => SyntaxKind.IdentifierName;
         public SyntaxKind IdentifierToken => SyntaxKind.IdentifierToken;

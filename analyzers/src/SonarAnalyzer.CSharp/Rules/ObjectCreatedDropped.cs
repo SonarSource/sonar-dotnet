@@ -18,38 +18,28 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System.Collections.Immutable;
 using Microsoft.CodeAnalysis;
-using Microsoft.CodeAnalysis.CSharp;
-using Microsoft.CodeAnalysis.CSharp.Syntax;
-using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.Helpers;
 
-namespace SonarAnalyzer.Rules.CSharp
+namespace SonarAnalyzer.Rules.CSharp;
+
+public sealed class ObjectCreatedDropped : CSharpOnlyAnalyzer
 {
-    [DiagnosticAnalyzer(LanguageNames.CSharp)]
-    public sealed class ObjectCreatedDropped : SonarDiagnosticAnalyzer
-    {
-        internal const string DiagnosticId = "S1848";
-        private const string MessageFormat = "Either remove this useless object instantiation of class '{0}' or use it.";
+    private const string DiagnosticId = "S1848";
 
-        private static readonly DiagnosticDescriptor rule =
-            DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
+    protected override string MessageFormat => "Either remove this useless object instantiation of class '{0}' or use it.";
 
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(rule);
+    public ObjectCreatedDropped() : base(DiagnosticId) { }
 
-        protected override void Initialize(SonarAnalysisContext context)
-        {
-            context.RegisterSyntaxNodeActionInNonGenerated(
-                c =>
+    protected override void Initialize(SonarAnalysisContext context) =>
+        context.RegisterSyntaxNodeActionInNonGenerated(
+            Language.GeneratedCodeRecognizer,
+            c =>
+            {
+                if (Language.Syntax.IsKind(c.Node.Parent, Language.SyntaxKind.ExpressionStatement))
                 {
-                    var objectCreation = (ObjectCreationExpressionSyntax)c.Node;
-                    if (objectCreation.Parent is ExpressionStatementSyntax parent)
-                    {
-                        c.ReportIssue(Diagnostic.Create(rule, objectCreation.GetLocation(), objectCreation.Type));
-                    }
-                },
-                SyntaxKind.ObjectCreationExpression);
-        }
-    }
+                    c.ReportIssue(Diagnostic.Create(Rule, c.Node.GetLocation(), Language.Syntax.Name(c.Node)));
+                }
+            },
+            Language.SyntaxKind.ObjectCreationExpressions);
 }
