@@ -37,7 +37,7 @@ namespace SonarAnalyzer.Rules.SymbolicExecution
         internal const string DiagnosticId = "S3329";
         private const string MessageFormat = "Use a dynamically-generated, random IV.";
 
-        internal static readonly DiagnosticDescriptor S3329 = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
+        internal static readonly DiagnosticDescriptor S3329 = DescriptorFactory.Create(DiagnosticId, MessageFormat);
 
         public IEnumerable<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(S3329);
 

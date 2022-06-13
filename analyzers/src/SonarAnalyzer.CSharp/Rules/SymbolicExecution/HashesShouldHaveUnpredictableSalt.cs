@@ -39,7 +39,7 @@ namespace SonarAnalyzer.Rules.SymbolicExecution
         private const string MakeSaltUnpredictableMessage = "Make this salt unpredictable.";
         private const string MakeThisSaltLongerMessage = "Make this salt at least 16 bytes.";
 
-        internal static readonly DiagnosticDescriptor S2053 = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
+        internal static readonly DiagnosticDescriptor S2053 = DescriptorFactory.Create(DiagnosticId, MessageFormat);
 
         public IEnumerable<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(S2053);
 

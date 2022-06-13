@@ -35,7 +35,7 @@ namespace SonarAnalyzer.Rules.CSharp
         private const string MessageFormat = "This {0} overrides '{1}' and should therefore also override '{2}'.";
 
         private static readonly DiagnosticDescriptor rule =
-            DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
+            DescriptorFactory.Create(DiagnosticId, MessageFormat);
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(rule);
 
         protected override void Initialize(SonarAnalysisContext context)

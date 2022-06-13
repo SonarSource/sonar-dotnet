@@ -35,7 +35,7 @@ namespace SonarAnalyzer.Rules.CSharp
         private const string MessageFormat = "Review this subtraction of a chain of delegates: it may not work as you expect.";
 
         private static readonly DiagnosticDescriptor rule =
-            DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
+            DescriptorFactory.Create(DiagnosticId, MessageFormat);
 
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(rule);
 

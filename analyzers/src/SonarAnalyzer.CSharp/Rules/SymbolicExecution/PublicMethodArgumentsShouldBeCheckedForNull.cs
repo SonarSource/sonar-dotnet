@@ -39,7 +39,7 @@ namespace SonarAnalyzer.Rules.CSharp
         private const string Constructor = "constructor to avoid using members of parameter '{0}' because it could be null";
         private const string Method = "method to add validation of parameter '{0}' before using it";
 
-        public static readonly DiagnosticDescriptor S3900 = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
+        public static readonly DiagnosticDescriptor S3900 = DescriptorFactory.Create(DiagnosticId, MessageFormat);
 
         public IEnumerable<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(S3900);
 

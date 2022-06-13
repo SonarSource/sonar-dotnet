@@ -45,7 +45,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 KnownType.Microsoft_VisualStudio_TestTools_UnitTesting_AssemblyCleanupAttribute);
 
         private static readonly DiagnosticDescriptor Rule =
-            DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
+            DescriptorFactory.Create(DiagnosticId, MessageFormat);
 
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
 

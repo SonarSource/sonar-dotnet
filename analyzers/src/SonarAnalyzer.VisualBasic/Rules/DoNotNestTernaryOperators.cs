@@ -33,7 +33,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
     {
         private const string MessageFormat = "Extract this nested If operator into independent If...Then...Else statements.";
         private static readonly DiagnosticDescriptor rule =
-            DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
+            DescriptorFactory.Create(DiagnosticId, MessageFormat);
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
 
         protected override void Initialize(SonarAnalysisContext context)

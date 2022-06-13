@@ -35,7 +35,7 @@ namespace SonarAnalyzer.Rules.CSharp
         private const string MessageFormat = "Implement this method or throw 'NotSupportedException' instead.";
 
         private static readonly DiagnosticDescriptor rule =
-            DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
+            DescriptorFactory.Create(DiagnosticId, MessageFormat);
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(rule);
 
         protected override void Initialize(SonarAnalysisContext context)

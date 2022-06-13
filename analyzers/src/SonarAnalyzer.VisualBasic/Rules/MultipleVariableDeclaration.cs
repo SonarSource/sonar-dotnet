@@ -36,7 +36,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
         FieldDeclarationSyntax, LocalDeclarationStatementSyntax>
     {
         private static readonly DiagnosticDescriptor rule =
-            DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
+            DescriptorFactory.Create(DiagnosticId, MessageFormat);
 
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(rule);
 

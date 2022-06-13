@@ -36,7 +36,7 @@ namespace SonarAnalyzer.Rules.CSharp
         private const string MessageFormat = "Provide an implementation for: {0}.";
 
         private static readonly DiagnosticDescriptor Rule =
-            DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
+            DescriptorFactory.Create(DiagnosticId, MessageFormat);
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
 
         private static class MethodName

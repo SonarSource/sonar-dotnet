@@ -31,7 +31,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
     public sealed class OptionalParameterNotPassedToBaseCall : OptionalParameterNotPassedToBaseCallBase<InvocationExpressionSyntax>
     {
         private static readonly DiagnosticDescriptor rule =
-            DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
+            DescriptorFactory.Create(DiagnosticId, MessageFormat);
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
 
         protected override DiagnosticDescriptor Rule => rule;

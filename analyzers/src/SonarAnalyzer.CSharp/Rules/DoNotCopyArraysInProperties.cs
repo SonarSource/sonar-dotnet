@@ -37,7 +37,7 @@ namespace SonarAnalyzer.Rules.CSharp
         private const string MessageFormat = "Refactor '{0}' into a method, properties should not copy collections.";
 
         private static readonly DiagnosticDescriptor s2365 =
-            DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
+            DescriptorFactory.Create(DiagnosticId, MessageFormat);
 
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(s2365);
 

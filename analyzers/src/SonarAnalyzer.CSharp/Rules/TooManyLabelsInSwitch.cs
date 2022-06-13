@@ -30,7 +30,7 @@ namespace SonarAnalyzer.Rules.CSharp
     public class TooManyLabelsInSwitch : TooManyLabelsInSwitchBase<SyntaxKind, SwitchStatementSyntax>
     {
         protected override DiagnosticDescriptor Rule { get; } =
-            DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager,
+            DescriptorFactory.Create(DiagnosticId, MessageFormat,
                 isEnabledByDefault: false);
 
         private const string MessageFormat = "Consider reworking this 'switch' to reduce the number of 'case's" +

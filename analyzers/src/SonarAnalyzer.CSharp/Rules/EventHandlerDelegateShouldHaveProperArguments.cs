@@ -39,7 +39,7 @@ namespace SonarAnalyzer.Rules.CSharp
         private const string NonNullSenderMessage = "Make the sender on this static event invocation null.";
 
         private static readonly DiagnosticDescriptor rule =
-            DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
+            DescriptorFactory.Create(DiagnosticId, MessageFormat);
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(rule);
 
         private static readonly ImmutableArray<KnownType> EventHandlerTypes =

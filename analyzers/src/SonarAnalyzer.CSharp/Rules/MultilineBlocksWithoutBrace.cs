@@ -37,7 +37,7 @@ namespace SonarAnalyzer.Rules.CSharp
             "This line will not be executed {0}; only the first line of this {2}-line block will be. The rest will execute {1}.";
 
         private static readonly DiagnosticDescriptor rule =
-            DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
+            DescriptorFactory.Create(DiagnosticId, MessageFormat);
 
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(rule);
 

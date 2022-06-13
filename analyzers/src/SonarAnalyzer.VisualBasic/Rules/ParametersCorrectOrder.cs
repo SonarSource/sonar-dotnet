@@ -32,7 +32,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
     public sealed class ParametersCorrectOrder : ParametersCorrectOrderBase<ArgumentSyntax>
     {
         private static readonly DiagnosticDescriptor rule =
-            DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
+            DescriptorFactory.Create(DiagnosticId, MessageFormat);
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
 
         protected override void Initialize(SonarAnalysisContext context)

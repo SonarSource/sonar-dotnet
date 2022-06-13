@@ -40,7 +40,7 @@ namespace SonarAnalyzer.Rules.CSharp
         internal const string DiagnosticId = "S3966";
         private const string MessageFormat = "Refactor this code to make sure '{0}' is disposed only once.";
 
-        internal static readonly DiagnosticDescriptor S3966 = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
+        internal static readonly DiagnosticDescriptor S3966 = DescriptorFactory.Create(DiagnosticId, MessageFormat);
 
         public IEnumerable<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(S3966);
 

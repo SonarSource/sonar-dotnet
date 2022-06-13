@@ -35,7 +35,7 @@ namespace SonarAnalyzer.Rules.CSharp
         private const string MessageFormat = "Refactor this delegate to use 'System.EventHandler<TEventArgs>'.";
 
         private static readonly DiagnosticDescriptor rule =
-            DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
+            DescriptorFactory.Create(DiagnosticId, MessageFormat);
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(rule);
 
         private static readonly ImmutableArray<KnownType> allowedTypes =

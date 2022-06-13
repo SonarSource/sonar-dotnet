@@ -33,7 +33,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
         private static readonly SyntaxList<StatementSyntax> ThrowBlock = new SyntaxList<StatementSyntax>().Add(SyntaxFactory.ThrowStatement());
 
         protected override DiagnosticDescriptor Rule { get; } =
-            DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
+            DescriptorFactory.Create(DiagnosticId, MessageFormat);
 
         protected override bool ContainsOnlyThrow(CatchBlockSyntax currentCatch) =>
             VisualBasicEquivalenceChecker.AreEquivalent(currentCatch.Statements, ThrowBlock);

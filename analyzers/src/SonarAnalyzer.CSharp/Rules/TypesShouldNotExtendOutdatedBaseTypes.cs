@@ -34,7 +34,7 @@ namespace SonarAnalyzer.Rules.CSharp
         private const string MessageFormat = "Refactor this type not to derive from an outdated type '{0}'.";
 
         private static readonly DiagnosticDescriptor Rule =
-            DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
+            DescriptorFactory.Create(DiagnosticId, MessageFormat);
 
         private static readonly ImmutableArray<KnownType> OutdatedTypes =
             ImmutableArray.Create(

@@ -44,7 +44,7 @@ namespace SonarAnalyzer.Rules.CSharp
         private const string SecondaryMessageFormat = "This value enables external entities in XML parsing.";
 
         private static readonly DiagnosticDescriptor Rule =
-            DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
+            DescriptorFactory.Create(DiagnosticId, MessageFormat);
 
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(Rule);
 

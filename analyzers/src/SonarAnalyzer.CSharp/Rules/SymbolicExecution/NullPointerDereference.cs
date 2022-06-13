@@ -40,7 +40,7 @@ namespace SonarAnalyzer.Rules.CSharp
         internal const string DiagnosticId = "S2259";
         private const string MessageFormat = "'{0}' is null on at least one execution path.";
 
-        internal static readonly DiagnosticDescriptor S2259 = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
+        internal static readonly DiagnosticDescriptor S2259 = DescriptorFactory.Create(DiagnosticId, MessageFormat);
 
         public IEnumerable<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(S2259);
 
