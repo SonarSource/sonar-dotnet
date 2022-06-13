@@ -44,10 +44,8 @@ namespace SonarAnalyzer.Rules.Common
 
         public sealed override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
 
-        protected ProvideDeserializationMethodsForOptionalFieldsBase()
-        {
-            rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, Language.RspecResources);
-        }
+        protected ProvideDeserializationMethodsForOptionalFieldsBase() =>
+            rule = Language.CreateDescriptor(DiagnosticId, MessageFormat);
 
         protected sealed override void Initialize(SonarAnalysisContext context) =>
             context.RegisterSymbolAction(

@@ -36,6 +36,6 @@ namespace SonarAnalyzer.Rules
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
 
         protected ConditionalStructureSameConditionBase() =>
-            rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, Language.RspecResources);
+            rule = Language.CreateDescriptor(DiagnosticId, MessageFormat);
     }
 }

@@ -26,8 +26,8 @@ namespace SonarAnalyzer
 {
     internal static class DescriptorFactory
     {
-        public static DiagnosticDescriptor Create(string id, string messageFormat, bool fadeOutCode = false) =>
+        public static DiagnosticDescriptor Create(string id, string messageFormat, bool? isEnabledByDefault = null, bool fadeOutCode = false) =>
             // RuleCatalog class is created from SonarAnalyzer.SourceGenerator
-            DiagnosticDescriptorBuilder.Create(AnalyzerLanguage.VisualBasic, RuleCatalog.Rules[id], messageFormat, fadeOutCode);
+            DiagnosticDescriptorBuilder.Create(AnalyzerLanguage.VisualBasic, RuleCatalog.Rules[id], messageFormat, isEnabledByDefault, fadeOutCode);
     }
 }

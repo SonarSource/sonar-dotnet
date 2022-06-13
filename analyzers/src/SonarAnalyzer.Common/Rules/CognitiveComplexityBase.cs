@@ -48,7 +48,7 @@ namespace SonarAnalyzer.Rules
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
 
         protected CognitiveComplexityBase() =>
-            rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, Language.RspecResources, isEnabledByDefault: false);
+            rule = Language.CreateDescriptor(DiagnosticId, MessageFormat, isEnabledByDefault: false);
 
         protected void CheckComplexity<TSyntax>(SyntaxNodeAnalysisContext context,
                                                 Func<TSyntax, SyntaxNode> nodeSelector,

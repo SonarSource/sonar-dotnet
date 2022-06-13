@@ -19,7 +19,6 @@
  */
 
 using System;
-using System.Resources;
 using Microsoft.CodeAnalysis;
 using SonarAnalyzer.Helpers.Facade;
 
@@ -32,7 +31,8 @@ namespace SonarAnalyzer.Helpers
         StringComparer NameComparer { get; }
         GeneratedCodeRecognizer GeneratedCodeRecognizer { get; }
         IExpressionNumericConverter ExpressionNumericConverter { get; }
-        ResourceManager RspecResources { get; }
+
+        DiagnosticDescriptor CreateDescriptor(string id, string messageFormat, bool? isEnabledByDefault = null, bool fadeOutCode = false);
         IMethodParameterLookup MethodParameterLookup(SyntaxNode invocation, IMethodSymbol methodSymbol);
     }
 

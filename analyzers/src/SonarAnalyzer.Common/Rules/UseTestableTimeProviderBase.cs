@@ -39,7 +39,7 @@ namespace SonarAnalyzer.Rules
         protected abstract ILanguageFacade<TSyntaxKind> Language { get; }
 
         protected UseTestableTimeProviderBase() =>
-            rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, Language.RspecResources);
+            rule = Language.CreateDescriptor(DiagnosticId, MessageFormat);
 
         protected sealed override void Initialize(SonarAnalysisContext context) =>
             context.RegisterSyntaxNodeActionInNonGenerated(Language.GeneratedCodeRecognizer, c =>

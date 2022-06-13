@@ -42,7 +42,7 @@ namespace SonarAnalyzer.Rules
         public int Maximum { get; set; } = DefaultValueMaximum;
 
         protected FunctionNestingDepthBase() =>
-            rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, Language.RspecResources, isEnabledByDefault: false);
+            rule = Language.CreateDescriptor(DiagnosticId, MessageFormat, isEnabledByDefault: false);
 
         protected class NestingDepthCounter
         {

@@ -47,7 +47,7 @@ namespace SonarAnalyzer.Rules
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
 
         protected ExpressionComplexityBase() =>
-            rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, Language.RspecResources, isEnabledByDefault: false);
+            rule = Language.CreateDescriptor(DiagnosticId, MessageFormat, isEnabledByDefault: false);
 
         protected sealed override void Initialize(ParameterLoadingAnalysisContext context) =>
             context.RegisterSyntaxTreeActionInNonGenerated(Language.GeneratedCodeRecognizer, c =>

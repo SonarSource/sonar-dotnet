@@ -66,7 +66,7 @@ namespace SonarAnalyzer.Rules
 
         protected RequestsWithExcessiveLengthBase(IAnalyzerConfiguration analyzerConfiguration)
         {
-            rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, Language.RspecResources).WithNotConfigurable();
+            rule = Language.CreateDescriptor(DiagnosticId, MessageFormat).WithNotConfigurable();
             this.analyzerConfiguration = analyzerConfiguration;
         }
 
