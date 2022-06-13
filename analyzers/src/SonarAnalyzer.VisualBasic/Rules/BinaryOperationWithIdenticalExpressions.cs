@@ -30,10 +30,9 @@ namespace SonarAnalyzer.Rules.VisualBasic
     [DiagnosticAnalyzer(LanguageNames.VisualBasic)]
     public sealed class BinaryOperationWithIdenticalExpressions : BinaryOperationWithIdenticalExpressionsBase
     {
-        private static readonly DiagnosticDescriptor rule =
-            DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, "{0}", RspecStrings.ResourceManager);
+        private static readonly DiagnosticDescriptor Rule = DescriptorFactory.Create(DiagnosticId, "{0}");
 
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(rule);
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
 
         private static readonly SyntaxKind[] SyntaxKindsToCheckBinary =
         {
@@ -78,7 +77,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
             if (VisualBasicEquivalenceChecker.AreEquivalent(left.RemoveParentheses(), right.RemoveParentheses()))
             {
                 var message = string.Format(OperatorMessageFormat, operatorToken);
-                context.ReportIssue(Diagnostic.Create(rule, context.Node.GetLocation(), message));
+                context.ReportIssue(Diagnostic.Create(Rule, context.Node.GetLocation(), message));
             }
         }
     }

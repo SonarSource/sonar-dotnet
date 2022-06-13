@@ -43,11 +43,8 @@ namespace SonarAnalyzer.Rules.CSharp
         private const string MessageFormatNonUnderscore = "consider using '{0}'";
         private const string MessageFormatUnderscore = "trim underscores from the name";
 
-        private static readonly DiagnosticDescriptor MethodNameRule =
-            DiagnosticDescriptorBuilder.GetDescriptor(MethodNameDiagnosticId, MessageFormat, RspecStrings.ResourceManager);
-
-        private static readonly DiagnosticDescriptor TypeNameRule =
-            DiagnosticDescriptorBuilder.GetDescriptor(TypeNameDiagnosticId, MessageFormat, RspecStrings.ResourceManager);
+        private static readonly DiagnosticDescriptor MethodNameRule = DescriptorFactory.Create(MethodNameDiagnosticId, MessageFormat);
+        private static readonly DiagnosticDescriptor TypeNameRule = DescriptorFactory.Create(TypeNameDiagnosticId, MessageFormat);
 
         private static readonly Dictionary<SyntaxKind, string> TypeKindNameMapping = new()
         {

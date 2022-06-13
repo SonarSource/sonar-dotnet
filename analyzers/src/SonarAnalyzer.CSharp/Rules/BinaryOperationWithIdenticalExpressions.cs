@@ -32,10 +32,9 @@ namespace SonarAnalyzer.Rules.CSharp
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
     public sealed class BinaryOperationWithIdenticalExpressions : BinaryOperationWithIdenticalExpressionsBase
     {
-        internal static readonly DiagnosticDescriptor rule =
-            DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, "{0}", RspecStrings.ResourceManager);
+        internal static readonly DiagnosticDescriptor Rule = DescriptorFactory.Create(DiagnosticId, "{0}");
 
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(rule);
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
 
         private static readonly SyntaxKind[] SyntaxKindsToCheckBinary =
         {
@@ -89,7 +88,7 @@ namespace SonarAnalyzer.Rules.CSharp
             {
                 var message = string.Format(EqualsMessage, operands.Item2);
 
-                context.ReportIssue(Diagnostic.Create(rule, operands.Item1.GetLocation(),
+                context.ReportIssue(Diagnostic.Create(Rule, operands.Item1.GetLocation(),
                     additionalLocations: new[] { operands.Item2.GetLocation() },
                     messageArgs: message));
             }
@@ -131,7 +130,7 @@ namespace SonarAnalyzer.Rules.CSharp
             {
                 var message = string.Format(OperatorMessageFormat, operatorToken);
 
-                context.ReportIssue(Diagnostic.Create(rule, right.GetLocation(),
+                context.ReportIssue(Diagnostic.Create(Rule, right.GetLocation(),
                     additionalLocations: new[] { left.GetLocation() },
                     messageArgs: message));
             }

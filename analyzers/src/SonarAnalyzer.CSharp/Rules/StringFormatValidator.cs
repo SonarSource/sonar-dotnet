@@ -42,8 +42,8 @@ namespace SonarAnalyzer.Rules.CSharp
         // This is the value as defined in .Net Framework
         private const int MaxValueForArgumentIndexAndAlignment = 1_000_000;
 
-        private static readonly DiagnosticDescriptor BugRule = DiagnosticDescriptorBuilder.GetDescriptor(BugDiagnosticId, MessageFormat, RspecStrings.ResourceManager);
-        private static readonly DiagnosticDescriptor CodeSmellRule = DiagnosticDescriptorBuilder.GetDescriptor(CodeSmellDiagnosticId, MessageFormat, RspecStrings.ResourceManager);
+        private static readonly DiagnosticDescriptor BugRule = DescriptorFactory.Create(BugDiagnosticId, MessageFormat);
+        private static readonly DiagnosticDescriptor CodeSmellRule = DescriptorFactory.Create(CodeSmellDiagnosticId, MessageFormat);
 
         private static readonly HashSet<MemberDescriptor> HandledFormatMethods = new HashSet<MemberDescriptor>
         {

@@ -37,16 +37,16 @@ namespace SonarAnalyzer.Rules.CSharp
 {
     internal sealed class ConditionEvaluatesToConstant : ISymbolicExecutionAnalyzer
     {
-        internal const string S2583DiagnosticId = "S2583"; // Bug
+        private const string S2583DiagnosticId = "S2583"; // Bug
         private const string S2583MessageFormatBool = "Change this condition so that it does not always evaluate to '{0}'; some subsequent code is never executed.";
         private const string S2583MessageNotNull = "Change this expression which always evaluates to 'not null'; some subsequent code is never executed.";
 
-        internal const string S2589DiagnosticId = "S2589"; // Code smell
+        private const string S2589DiagnosticId = "S2589"; // Code smell
         private const string S2589MessageFormatBool = "Change this condition so that it does not always evaluate to '{0}'.";
         private const string S2589MessageNull = "Change this expression which always evaluates to 'null'.";
 
-        internal static readonly DiagnosticDescriptor S2583 = DiagnosticDescriptorBuilder.GetDescriptor(S2583DiagnosticId, "{0}", RspecStrings.ResourceManager);
-        internal static readonly DiagnosticDescriptor S2589 = DiagnosticDescriptorBuilder.GetDescriptor(S2589DiagnosticId, "{0}", RspecStrings.ResourceManager);
+        internal static readonly DiagnosticDescriptor S2583 = DescriptorFactory.Create(S2583DiagnosticId, "{0}");
+        internal static readonly DiagnosticDescriptor S2589 = DescriptorFactory.Create(S2589DiagnosticId, "{0}");
 
         private static readonly ISet<SyntaxKind> OmittedSyntaxKinds = new HashSet<SyntaxKind>
         {
