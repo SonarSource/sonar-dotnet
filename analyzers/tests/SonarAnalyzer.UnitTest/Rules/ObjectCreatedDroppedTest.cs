@@ -25,14 +25,22 @@ namespace SonarAnalyzer.UnitTest.Rules;
 [TestClass]
 public class ObjectCreatedDroppedTest
 {
+    private readonly VerifierBuilder builder = new VerifierBuilder<ObjectCreatedDropped>();
+
     [TestMethod]
     public void ObjectCreatedDropped() =>
-        new VerifierBuilder<ObjectCreatedDropped>().AddPaths("ObjectCreatedDropped.cs").Verify();
+        builder.AddPaths("ObjectCreatedDropped.cs").Verify();
 
     [TestMethod]
     public void ObjectCreatedDropped_CSharp9() =>
-        new VerifierBuilder<ObjectCreatedDropped>()
+        builder
         .WithOptions(ParseOptionsHelper.FromCSharp9)
         .AddPaths("ObjectCreatedDropped.CSharp9.cs")
         .Verify();
+
+    [TestMethod]
+    public void ObjectCreatedDropped_InTest() =>
+       builder.AddPaths("ObjectCreatedDropped.cs")
+       .AddTestReference()
+       .VerifyNoIssueReported();
 }
