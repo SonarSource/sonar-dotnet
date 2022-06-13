@@ -34,9 +34,9 @@ public class ObjectCreatedDroppedTest
     [TestMethod]
     public void ObjectCreatedDropped_CSharp9() =>
         builder
-        .WithOptions(ParseOptionsHelper.FromCSharp9)
-        .AddPaths("ObjectCreatedDropped.CSharp9.cs")
-        .Verify();
+            .WithOptions(ParseOptionsHelper.FromCSharp9)
+            .AddPaths("ObjectCreatedDropped.CSharp9.cs")
+            .Verify();
 
     [TestMethod]
     public void ObjectCreatedDropped_InTest() =>
