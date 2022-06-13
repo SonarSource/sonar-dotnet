@@ -43,7 +43,7 @@ namespace SonarAnalyzer.Rules.CSharp
         private const string UnexpectedBehaviorMessage = "This operation will probably result in an unexpected behavior.";
 
         private static readonly DiagnosticDescriptor rule =
-            DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
+            DescriptorFactory.Create(DiagnosticId, MessageFormat);
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(rule);
 
         private static readonly ISet<string> trackedMethodNames = new HashSet<string> {"AddRange", "Concat", "Except",

@@ -33,7 +33,7 @@ namespace SonarAnalyzer.Rules.CSharp
         private static readonly BlockSyntax ThrowBlock = SyntaxFactory.Block(SyntaxFactory.ThrowStatement());
 
         protected override DiagnosticDescriptor Rule { get; } =
-            DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
+            DescriptorFactory.Create(DiagnosticId, MessageFormat);
 
         protected override bool ContainsOnlyThrow(CatchClauseSyntax currentCatch) =>
             CSharpEquivalenceChecker.AreEquivalent(currentCatch.Block, ThrowBlock);

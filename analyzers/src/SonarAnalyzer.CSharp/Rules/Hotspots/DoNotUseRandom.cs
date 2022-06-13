@@ -35,7 +35,7 @@ namespace SonarAnalyzer.Rules.CSharp
         private const string MessageFormat = "Make sure that using this pseudorandom number generator is safe here.";
 
         private static readonly DiagnosticDescriptor rule =
-            DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager)
+            DescriptorFactory.Create(DiagnosticId, MessageFormat)
                 .WithNotConfigurable();
 
         public DoNotUseRandom()

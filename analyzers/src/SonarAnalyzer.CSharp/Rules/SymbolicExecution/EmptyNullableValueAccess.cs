@@ -44,7 +44,7 @@ namespace SonarAnalyzer.Rules.CSharp
         private const string ValueLiteral = "Value";
         private const string HasValueLiteral = "HasValue";
 
-        internal static readonly DiagnosticDescriptor S3655 = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
+        internal static readonly DiagnosticDescriptor S3655 = DescriptorFactory.Create(DiagnosticId, MessageFormat);
 
         public IEnumerable<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(S3655);
 

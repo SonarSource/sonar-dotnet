@@ -37,7 +37,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
         };
 
         protected override DiagnosticDescriptor Rule { get; } =
-            DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
+            DescriptorFactory.Create(DiagnosticId, MessageFormat);
 
         protected override GeneratedCodeRecognizer GeneratedCodeRecognizer { get; } =
             VisualBasicGeneratedCodeRecognizer.Instance;

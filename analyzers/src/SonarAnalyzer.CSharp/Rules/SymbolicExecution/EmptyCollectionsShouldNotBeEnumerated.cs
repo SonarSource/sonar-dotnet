@@ -40,7 +40,7 @@ namespace SonarAnalyzer.Rules.CSharp
         private const string DiagnosticId = "S4158";
         private const string MessageFormat = "Remove this call, the collection is known to be empty here.";
 
-        internal static readonly DiagnosticDescriptor S4158 = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
+        internal static readonly DiagnosticDescriptor S4158 = DescriptorFactory.Create(DiagnosticId, MessageFormat);
 
         private static readonly ImmutableArray<KnownType> TrackedCollectionTypes =
             ImmutableArray.Create(

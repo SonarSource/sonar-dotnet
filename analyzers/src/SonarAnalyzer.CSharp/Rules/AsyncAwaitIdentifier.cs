@@ -38,7 +38,7 @@ namespace SonarAnalyzer.Rules.CSharp
         private static readonly ISet<string> AsyncOrAwait = new HashSet<string> { "async", "await" };
 
         private static readonly DiagnosticDescriptor rule =
-            DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
+            DescriptorFactory.Create(DiagnosticId, MessageFormat);
 
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(rule);
 

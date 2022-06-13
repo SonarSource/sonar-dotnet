@@ -36,7 +36,7 @@ namespace SonarAnalyzer.Rules.CSharp
             "'Task.CompletedTask' or 'Task.Delay(0)'.";
 
         private static readonly DiagnosticDescriptor rule =
-            DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
+            DescriptorFactory.Create(DiagnosticId, MessageFormat);
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(rule);
 
         private static readonly ISet<SyntaxKind> TrackedNullLiteralLocations =

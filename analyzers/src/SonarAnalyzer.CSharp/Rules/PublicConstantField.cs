@@ -33,7 +33,7 @@ namespace SonarAnalyzer.Rules.CSharp
     public sealed class PublicConstantField : PublicConstantFieldBase<SyntaxKind, FieldDeclarationSyntax, VariableDeclaratorSyntax>
     {
         private static readonly DiagnosticDescriptor rule =
-            DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
+            DescriptorFactory.Create(DiagnosticId, MessageFormat);
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(rule);
 
         public override SyntaxKind FieldDeclarationKind => SyntaxKind.FieldDeclaration;
