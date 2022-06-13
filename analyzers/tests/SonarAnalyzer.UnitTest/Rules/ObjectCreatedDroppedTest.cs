@@ -20,17 +20,19 @@
 
 using SonarAnalyzer.Rules.CSharp;
 
-namespace SonarAnalyzer.UnitTest.Rules
-{
-    [TestClass]
-    public class ObjectCreatedDroppedTest
-    {
-        [TestMethod]
-        public void ObjectCreatedDropped() =>
-            OldVerifier.VerifyAnalyzer(@"TestCases\ObjectCreatedDropped.cs", new ObjectCreatedDropped());
+namespace SonarAnalyzer.UnitTest.Rules;
 
-        [TestMethod]
-        public void ObjectCreatedDropped_InTest() =>
-            OldVerifier.VerifyNoIssueReportedInTest(@"TestCases\ObjectCreatedDropped.cs", new ObjectCreatedDropped());
-    }
+[TestClass]
+public class ObjectCreatedDroppedTest
+{
+    [TestMethod]
+    public void ObjectCreatedDropped() =>
+        new VerifierBuilder<ObjectCreatedDropped>().AddPaths("ObjectCreatedDropped.cs").Verify();
+
+    [TestMethod]
+    public void ObjectCreatedDropped_CSharp9() =>
+        new VerifierBuilder<ObjectCreatedDropped>()
+        .WithOptions(ParseOptionsHelper.FromCSharp9)
+        .AddPaths("ObjectCreatedDropped.CSharp9.cs")
+        .Verify();
 }
