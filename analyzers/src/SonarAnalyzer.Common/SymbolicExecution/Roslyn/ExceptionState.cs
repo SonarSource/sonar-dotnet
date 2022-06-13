@@ -23,7 +23,7 @@ using Microsoft.CodeAnalysis;
 
 namespace SonarAnalyzer.SymbolicExecution.Roslyn
 {
-    public sealed record ExceptionState : IEquatable<ExceptionState>
+    public sealed record ExceptionState
     {
         public static readonly ExceptionState UnknownException = new();
 

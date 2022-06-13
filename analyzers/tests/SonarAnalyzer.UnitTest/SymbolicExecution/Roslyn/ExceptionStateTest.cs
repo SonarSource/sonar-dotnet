@@ -23,7 +23,7 @@ using SonarAnalyzer.SymbolicExecution.Roslyn;
 namespace SonarAnalyzer.UnitTest.SymbolicExecution.Roslyn
 {
     [TestClass]
-    public partial class ExceptionStateTest
+    public class ExceptionStateTest
     {
         [TestMethod]
         public void Constructor_Null_Throws() =>
