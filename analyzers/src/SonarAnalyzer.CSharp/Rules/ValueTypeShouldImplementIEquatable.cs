@@ -33,7 +33,7 @@ namespace SonarAnalyzer.Rules.CSharp
         private const string DiagnosticId = "S3898";
         private const string MessageFormat = "Implement 'IEquatable<T>' in value type '{0}'.";
 
-        private static readonly DiagnosticDescriptor Rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
+        private static readonly DiagnosticDescriptor Rule = DescriptorFactory.Create(DiagnosticId, MessageFormat);
 
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
 

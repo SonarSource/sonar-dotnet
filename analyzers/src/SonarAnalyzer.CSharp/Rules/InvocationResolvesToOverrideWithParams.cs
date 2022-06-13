@@ -35,7 +35,7 @@ namespace SonarAnalyzer.Rules.CSharp
         private const string DiagnosticId = "S3220";
         private const string MessageFormat = "Review this call, which partially matches an overload without 'params'. The partial match is '{0}'.";
 
-        private static readonly DiagnosticDescriptor Rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
+        private static readonly DiagnosticDescriptor Rule = DescriptorFactory.Create(DiagnosticId, MessageFormat);
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
 
         protected override void Initialize(SonarAnalysisContext context)

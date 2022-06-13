@@ -40,7 +40,7 @@ namespace SonarAnalyzer.Rules.CSharp
         private const int DefaultMaxNumberOfGenericParametersInClass = 2;
         private const int DefaultMaxNumberOfGenericParametersInMethod = 3;
 
-        private static readonly DiagnosticDescriptor Rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager, isEnabledByDefault: false);
+        private static readonly DiagnosticDescriptor Rule = DescriptorFactory.Create(DiagnosticId, MessageFormat, isEnabledByDefault: false);
 
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
 

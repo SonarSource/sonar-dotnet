@@ -38,7 +38,7 @@ namespace SonarAnalyzer.Rules.CSharp
         private const string WhereMessageFormat = @"Loops should be simplified with ""LINQ"" expressions";
         private const string SelectMessageFormat = "Loop should be simplified by calling Select({0} => {0}.{1}))";
 
-        private static readonly DiagnosticDescriptor Rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
+        private static readonly DiagnosticDescriptor Rule = DescriptorFactory.Create(DiagnosticId, MessageFormat);
 
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(Rule);
 

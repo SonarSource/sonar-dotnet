@@ -36,7 +36,7 @@ namespace SonarAnalyzer.Rules.CSharp
         private const string MessageFormat = "Make '{0}' sealed, change to a non-explicit declaration or provide a " +
             "new method exposing the functionality of '{1}'.";
 
-        private static readonly DiagnosticDescriptor Rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
+        private static readonly DiagnosticDescriptor Rule = DescriptorFactory.Create(DiagnosticId, MessageFormat);
 
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
 

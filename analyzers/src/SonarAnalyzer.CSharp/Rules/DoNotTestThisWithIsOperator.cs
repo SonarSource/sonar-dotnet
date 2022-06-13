@@ -38,7 +38,7 @@ namespace SonarAnalyzer.Rules.CSharp
         private const string DiagnosticId = "S3060";
         private const string MessageFormat = "Offload the code that's conditional on this type test to the appropriate subclass and remove the condition.";
 
-        private static readonly DiagnosticDescriptor Rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
+        private static readonly DiagnosticDescriptor Rule = DescriptorFactory.Create(DiagnosticId, MessageFormat);
 
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
 

@@ -35,7 +35,7 @@ namespace SonarAnalyzer.Rules.CSharp
         private const string DiagnosticId = "S4211";
         private const string MessageFormat = "Change or remove this attribute to be consistent with its container.";
 
-        private static readonly DiagnosticDescriptor Rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
+        private static readonly DiagnosticDescriptor Rule = DescriptorFactory.Create(DiagnosticId, MessageFormat);
 
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
         protected override bool EnableConcurrentExecution => false;

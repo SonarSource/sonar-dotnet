@@ -36,7 +36,7 @@ namespace SonarAnalyzer.Rules.CSharp
         internal const string DiagnosticId = "S3963";
         private const string MessageFormat = "Initialize all 'static fields' inline and remove the 'static constructor'.";
 
-        private static readonly DiagnosticDescriptor Rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
+        private static readonly DiagnosticDescriptor Rule = DescriptorFactory.Create(DiagnosticId, MessageFormat);
 
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
 

@@ -37,7 +37,7 @@ namespace SonarAnalyzer.Rules.CSharp
         private const string DiagnosticId = "S2326";
         private const string MessageFormat = "'{0}' is not used in the {1}.";
 
-        private static readonly DiagnosticDescriptor Rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
+        private static readonly DiagnosticDescriptor Rule = DescriptorFactory.Create(DiagnosticId, MessageFormat);
         private static readonly SyntaxKind[] MethodModifiersToSkip =
         {
             SyntaxKind.AbstractKeyword,

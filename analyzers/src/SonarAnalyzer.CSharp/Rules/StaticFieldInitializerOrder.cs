@@ -36,7 +36,7 @@ namespace SonarAnalyzer.Rules.CSharp
         private const string DiagnosticId = "S3263";
         private const string MessageFormat = "Move this field's initializer into a static constructor.";
 
-        private static readonly DiagnosticDescriptor Rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
+        private static readonly DiagnosticDescriptor Rule = DescriptorFactory.Create(DiagnosticId, MessageFormat);
         private static readonly SyntaxKind[] EnclosingTypes =
         {
             SyntaxKind.ClassDeclaration,

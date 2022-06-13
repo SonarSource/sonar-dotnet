@@ -35,7 +35,7 @@ namespace SonarAnalyzer.Rules.CSharp
         private const string DiagnosticId = "S1607";
         private const string MessageFormat = "Either remove this 'Ignore' attribute or add an explanation about why this test is ignored.";
 
-        private static readonly DiagnosticDescriptor Rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
+        private static readonly DiagnosticDescriptor Rule = DescriptorFactory.Create(DiagnosticId, MessageFormat);
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
 
         private static readonly ImmutableArray<KnownType> TrackedTestIdentifierAttributes =

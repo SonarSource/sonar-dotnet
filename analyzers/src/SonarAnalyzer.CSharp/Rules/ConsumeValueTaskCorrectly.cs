@@ -40,7 +40,7 @@ namespace SonarAnalyzer.Rules.CSharp
         // 'Result' and '.GetAwaiter().GetResult()' should be consumed inside an 'if (valueTask.IsCompletedSuccessfully)'
         private const string ConsumeOnlyIfCompletedMessage = "Refactor this 'ValueTask' usage to consume the result only if the operation has completed successfully.";
 
-        private static readonly DiagnosticDescriptor rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
+        private static readonly DiagnosticDescriptor rule = DescriptorFactory.Create(DiagnosticId, MessageFormat);
 
         private static readonly ImmutableArray<KnownType> ValueTaskTypes =
             new[] {

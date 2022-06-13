@@ -36,7 +36,7 @@ namespace SonarAnalyzer.Rules.CSharp
         private const string MessageFormat = "Supply an implementation for {0} partial method{1}.";
         private const string MessageAdditional = ", otherwise this call will be ignored";
 
-        private static readonly DiagnosticDescriptor Rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
+        private static readonly DiagnosticDescriptor Rule = DescriptorFactory.Create(DiagnosticId, MessageFormat);
 
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
 

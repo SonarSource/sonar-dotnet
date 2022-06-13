@@ -34,7 +34,7 @@ namespace SonarAnalyzer.Rules.CSharp
         private const string DiagnosticId = "S3218";
         private const string MessageFormat = "Rename this {0} to not shadow the outer class' member with the same name.";
 
-        private static readonly DiagnosticDescriptor Rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
+        private static readonly DiagnosticDescriptor Rule = DescriptorFactory.Create(DiagnosticId, MessageFormat);
 
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
 

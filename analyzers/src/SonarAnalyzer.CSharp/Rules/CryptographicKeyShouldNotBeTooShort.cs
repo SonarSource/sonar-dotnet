@@ -61,7 +61,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 KnownType.System_Security_Cryptography_ECDiffieHellman,
                 KnownType.System_Security_Cryptography_ECDsa);
 
-        private static readonly DiagnosticDescriptor Rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
+        private static readonly DiagnosticDescriptor Rule = DescriptorFactory.Create(DiagnosticId, MessageFormat);
 
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
 

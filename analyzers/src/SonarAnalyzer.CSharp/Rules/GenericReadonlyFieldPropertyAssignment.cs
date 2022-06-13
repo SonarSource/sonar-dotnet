@@ -35,7 +35,7 @@ namespace SonarAnalyzer.Rules.CSharp
         internal const string DiagnosticId = "S2934";
         private const string MessageFormat = "Restrict '{0}' to be a reference type or remove this assignment of '{1}'; it is useless if '{0}' is a value type.";
 
-        private static readonly DiagnosticDescriptor Rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
+        private static readonly DiagnosticDescriptor Rule = DescriptorFactory.Create(DiagnosticId, MessageFormat);
 
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
 

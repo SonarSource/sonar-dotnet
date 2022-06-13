@@ -39,7 +39,7 @@ namespace SonarAnalyzer.Rules.CSharp
         private const string DiagnosticId = "S3249";
         private const string MessageFormat = "Remove this 'base' call to 'object.{0}', which is directly based on the object reference.";
 
-        private static readonly DiagnosticDescriptor Rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
+        private static readonly DiagnosticDescriptor Rule = DescriptorFactory.Create(DiagnosticId, MessageFormat);
         private static readonly ISet<string> MethodNames = new HashSet<string> { "GetHashCode", EqualsName };
 
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);

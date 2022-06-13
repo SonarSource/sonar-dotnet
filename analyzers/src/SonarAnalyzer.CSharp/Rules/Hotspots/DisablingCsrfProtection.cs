@@ -36,7 +36,7 @@ namespace SonarAnalyzer.Rules.CSharp
         private const string MessageFormat = "Make sure disabling CSRF protection is safe here.";
         private const SyntaxKind ImplicitObjectCreationExpression = (SyntaxKind)8659;
 
-        private static readonly DiagnosticDescriptor Rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager).WithNotConfigurable();
+        private static readonly DiagnosticDescriptor Rule = DescriptorFactory.Create(DiagnosticId, MessageFormat).WithNotConfigurable();
 
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(Rule);
 

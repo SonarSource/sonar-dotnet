@@ -39,7 +39,7 @@ namespace SonarAnalyzer.Rules.CSharp
         private const string DiagnosticId = "S3877";
         private const string MessageFormat = "Remove this 'throw' {0}.";
 
-        private static readonly DiagnosticDescriptor Rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
+        private static readonly DiagnosticDescriptor Rule = DescriptorFactory.Create(DiagnosticId, MessageFormat);
 
         private static readonly ImmutableArray<KnownType> DefaultAllowedExceptions = ImmutableArray.Create(KnownType.System_NotImplementedException);
 

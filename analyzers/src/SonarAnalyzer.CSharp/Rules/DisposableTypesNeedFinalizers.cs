@@ -36,7 +36,7 @@ namespace SonarAnalyzer.Rules.CSharp
         private const string DiagnosticId = "S4002";
         private const string MessageFormat = "Implement a finalizer that calls your 'Dispose' method.";
 
-        private static readonly DiagnosticDescriptor Rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
+        private static readonly DiagnosticDescriptor Rule = DescriptorFactory.Create(DiagnosticId, MessageFormat);
         private static readonly ImmutableArray<KnownType> NativeHandles = ImmutableArray.Create(
             KnownType.System_IntPtr,
             KnownType.System_UIntPtr,

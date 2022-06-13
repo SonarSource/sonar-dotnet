@@ -39,7 +39,7 @@ namespace SonarAnalyzer.Rules.CSharp
         private const string DiagnosticId = "S2930";
         private const string MessageFormat = "Dispose '{0}' when it is no longer needed.";
 
-        private static readonly DiagnosticDescriptor Rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
+        private static readonly DiagnosticDescriptor Rule = DescriptorFactory.Create(DiagnosticId, MessageFormat);
 
         private static readonly ImmutableArray<KnownType> TrackedTypes =
             ImmutableArray.Create(

@@ -39,7 +39,7 @@ namespace SonarAnalyzer.Rules.CSharp
         private const string MessageFormat = "Split this {0} into smaller and more specialized ones to reduce its dependencies on other types from {1} to the maximum authorized {2} or less.";
         private const int ThresholdDefaultValue = 30;
 
-        private static readonly DiagnosticDescriptor Rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager, isEnabledByDefault: false);
+        private static readonly DiagnosticDescriptor Rule = DescriptorFactory.Create(DiagnosticId, MessageFormat, isEnabledByDefault: false);
         private static readonly ImmutableArray<KnownType> IgnoredTypes =
             ImmutableArray.Create(
                 KnownType.Void,

@@ -41,7 +41,7 @@ namespace SonarAnalyzer.Rules.CSharp
         private const string MessageIsInstanceOfType = "the 'IsInstanceOfType()' method";
         private const string MessageNullCheck = "a 'null' check";
 
-        private static readonly DiagnosticDescriptor Rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
+        private static readonly DiagnosticDescriptor Rule = DescriptorFactory.Create(DiagnosticId, MessageFormat);
 
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
 

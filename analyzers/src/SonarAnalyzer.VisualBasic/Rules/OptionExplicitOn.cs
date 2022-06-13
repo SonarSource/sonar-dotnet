@@ -35,7 +35,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
         private const string StatementMessage = "Change this to 'Option Explicit On'.";
         private const string AssemblyMessageFormat = "Configure 'Option Explicit On' for assembly '{0}'.";
 
-        private static readonly DiagnosticDescriptor Rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
+        private static readonly DiagnosticDescriptor Rule = DescriptorFactory.Create(DiagnosticId, MessageFormat);
 
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(Rule);
 

@@ -40,7 +40,7 @@ namespace SonarAnalyzer.Rules.CSharp
         private const string DiagnosticId = "S3925";
         private const string MessageFormat = "Update this implementation of 'ISerializable' to conform to the recommended serialization pattern.";
 
-        private static readonly DiagnosticDescriptor Rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
+        private static readonly DiagnosticDescriptor Rule = DescriptorFactory.Create(DiagnosticId, MessageFormat);
 
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
 

@@ -44,7 +44,7 @@ namespace SonarAnalyzer.Rules.CSharp
         private const string MessageDead = "parameter '{0}', whose value is ignored in the method";
         private const string MessageFormat = "Remove this {0}.";
 
-        private static readonly DiagnosticDescriptor Rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
+        private static readonly DiagnosticDescriptor Rule = DescriptorFactory.Create(DiagnosticId, MessageFormat);
         private readonly bool useSonarCfg;
 
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);

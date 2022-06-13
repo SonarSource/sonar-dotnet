@@ -37,7 +37,7 @@ namespace SonarAnalyzer.Rules.CSharp
         internal const string DiagnosticId = "S1185";
         private const string MessageFormat = "Remove this {1} '{0}' to simply inherit its behavior.";
 
-        private static readonly DiagnosticDescriptor Rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
+        private static readonly DiagnosticDescriptor Rule = DescriptorFactory.Create(DiagnosticId, MessageFormat);
 
         private static readonly string[] IgnoredMethodNames = { "Equals", "GetHashCode" };
         private static readonly string[] IgnoredRecordMethodNames = { "ToString", "PrintMembers" };

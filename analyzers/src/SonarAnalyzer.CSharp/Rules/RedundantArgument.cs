@@ -36,7 +36,7 @@ namespace SonarAnalyzer.Rules.CSharp
         internal const string DiagnosticId = "S3254";
         private const string MessageFormat = "Remove this default value assigned to parameter '{0}'.";
 
-        private static readonly DiagnosticDescriptor Rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
+        private static readonly DiagnosticDescriptor Rule = DescriptorFactory.Create(DiagnosticId, MessageFormat);
 
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
 

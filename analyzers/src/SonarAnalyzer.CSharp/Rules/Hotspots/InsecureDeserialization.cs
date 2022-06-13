@@ -39,7 +39,7 @@ namespace SonarAnalyzer.Rules.CSharp
         private const string DiagnosticId = "S5766";
         private const string MessageFormat = "Make sure not performing data validation after deserialization is safe here.";
 
-        private static readonly DiagnosticDescriptor Rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager).WithNotConfigurable();
+        private static readonly DiagnosticDescriptor Rule = DescriptorFactory.Create(DiagnosticId, MessageFormat).WithNotConfigurable();
 
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(Rule);
 
