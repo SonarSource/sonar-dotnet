@@ -1,0 +1,45 @@
+// http://viz-js.com/
+// https://edotor.net/?engine=dot#digraph%20%22TryCatch_ThrowInCatch_SingleCatchBlock%22%20%7B%0D%0Asubgraph%20%22cluster_TryAndCatch%20region%22%20%7B%0Alabel%20%3D%20%22TryAndCatch%20region%22%0D%0Asubgraph%20%22cluster_Try%20region%22%20%7B%0Alabel%20%3D%20%22Try%20region%22%0D%0Acfg0_block2%20%5Bshape%3Drecord%20label%3D%22%7BBLOCK%20%232%7C0%23%20ExpressionStatementOperation%20%2F%20ExpressionStatementSyntax%3A%20Tag(%5C%22%5C%22InTry%5C%22%5C%22)%3B%7C1%23%20INVALID%20%2F%20InvocationExpressionSyntax%3A%20Tag(%5C%22%5C%22InTry%5C%22%5C%22)%7C2%23%20LiteralOperation%20%2F%20LiteralExpressionSyntax%3A%20%5C%22%5C%22%7C2%23%20INVALID%20%2F%20IdentifierNameSyntax%3A%20InTry%7C2%23%20LiteralOperation%20%2F%20LiteralExpressionSyntax%3A%20%5C%22%5C%22%7C%23%23%23%23%23%23%23%23%23%23%7D%22%5D%0D%0A%7D%0D%0Asubgraph%20%22cluster_Catch%20region%20object%22%20%7B%0Alabel%20%3D%20%22Catch%20region%20object%22%0D%0Acfg0_block3%20%5Bshape%3Drecord%20label%3D%22%7BBLOCK%20%233%7C0%23%20ExpressionStatementOperation%20%2F%20ExpressionStatementSyntax%3A%20Tag(%5C%22%5C%22InCatch%5C%22%5C%22)%3B%7C1%23%20INVALID%20%2F%20InvocationExpressionSyntax%3A%20Tag(%5C%22%5C%22InCatch%5C%22%5C%22)%7C2%23%20LiteralOperation%20%2F%20LiteralExpressionSyntax%3A%20%5C%22%5C%22%7C2%23%20INVALID%20%2F%20IdentifierNameSyntax%3A%20InCatch%7C2%23%20LiteralOperation%20%2F%20LiteralExpressionSyntax%3A%20%5C%22%5C%22%7C%23%23%23%23%23%23%23%23%23%23%7C%23%23%20BranchValue%20%23%23%7C0%23%20ObjectCreationOperation%20%2F%20ObjectCreationExpressionSyntax%3A%20new%20System.Exception()%7C%23%23%23%23%23%23%23%23%23%23%7D%22%5D%0D%0Acfg0_block4%20%5Bshape%3Drecord%20label%3D%22%7BBLOCK%20%234%7C0%23%20ExpressionStatementOperation%20%2F%20ExpressionStatementSyntax%3A%20Tag(%5C%22%5C%22UnreachableInCatch%5C%22%5C%22)%3B%7C1%23%20INVALID%20%2F%20InvocationExpressionSyntax%3A%20Tag(%5C%22%5C%22UnreachableInCatch%5C%22%5C%22)%7C2%23%20LiteralOperation%20%2F%20LiteralExpressionSyntax%3A%20%5C%22%5C%22%7C2%23%20INVALID%20%2F%20IdentifierNameSyntax%3A%20UnreachableInCatch%7C2%23%20LiteralOperation%20%2F%20LiteralExpressionSyntax%3A%20%5C%22%5C%22%7C%23%23%23%23%23%23%23%23%23%23%7D%22%5D%0D%0A%7D%0D%0A%7D%0D%0Acfg0_block0%20%5Bshape%3Drecord%20label%3D%22%7BENTRY%20%230%7D%22%5D%0D%0Acfg0_block1%20%5Bshape%3Drecord%20label%3D%22%7BBLOCK%20%231%7C0%23%20ExpressionStatementOperation%20%2F%20ExpressionStatementSyntax%3A%20Tag(%5C%22%5C%22BeforeTry%5C%22%5C%22)%3B%7C1%23%20INVALID%20%2F%20InvocationExpressionSyntax%3A%20Tag(%5C%22%5C%22BeforeTry%5C%22%5C%22)%7C2%23%20LiteralOperation%20%2F%20LiteralExpressionSyntax%3A%20%5C%22%5C%22%7C2%23%20INVALID%20%2F%20IdentifierNameSyntax%3A%20BeforeTry%7C2%23%20LiteralOperation%20%2F%20LiteralExpressionSyntax%3A%20%5C%22%5C%22%7C%23%23%23%23%23%23%23%23%23%23%7D%22%5D%0D%0Acfg0_block5%20%5Bshape%3Drecord%20label%3D%22%7BBLOCK%20%235%7C0%23%20ExpressionStatementOperation%20%2F%20ExpressionStatementSyntax%3A%20Tag(%5C%22%5C%22UnreachableAfterCatch%5C%22%5C%22)%3B%7C1%23%20INVALID%20%2F%20InvocationExpressionSyntax%3A%20Tag(%5C%22%5C%22UnreachableAfterCatch%5C%22%5C%22)%7C2%23%20LiteralOperation%20%2F%20LiteralExpressionSyntax%3A%20%5C%22%5C%22%7C2%23%20INVALID%20%2F%20IdentifierNameSyntax%3A%20UnreachableAfterCatch%7C2%23%20LiteralOperation%20%2F%20LiteralExpressionSyntax%3A%20%5C%22%5C%22%7C%23%23%23%23%23%23%23%23%23%23%7D%22%5D%0D%0Acfg0_block6%20%5Bshape%3Drecord%20label%3D%22%7BEXIT%20%236%7D%22%5D%0D%0Acfg0_block1%20-%3E%20cfg0_block2%0D%0Acfg0_block3%20-%3E%20NoDestination_cfg0_block3%20%5Blabel%3D%22Throw%22%5D%0D%0Acfg0_block0%20-%3E%20cfg0_block1%0D%0Acfg0_block2%20-%3E%20cfg0_block5%0D%0Acfg0_block4%20-%3E%20cfg0_block5%0D%0Acfg0_block5%20-%3E%20cfg0_block6%0D%0A%7D%0D%0A
+
+/*
+public void TryCatch_ThrowInCatch_SingleCatchBlock()
+    {
+        Tag(""BeforeTry"");
+        try
+        {
+            Tag(""InTry"");
+        }
+        catch
+        {
+            Tag(""InCatch"");
+            throw new System.Exception();
+            Tag(""UnreachableInCatch"");
+        }
+        Tag(""UnreachableAfterCatch"");
+    }
+*/
+
+digraph "TryCatch_ThrowInCatch_SingleCatchBlock" {
+subgraph "cluster_TryAndCatch region" {
+label = "TryAndCatch region"
+subgraph "cluster_Try region" {
+label = "Try region"
+cfg0_block2 [shape=record label="{BLOCK #2|0# ExpressionStatementOperation / ExpressionStatementSyntax: Tag(\"\"InTry\"\");|1# INVALID / InvocationExpressionSyntax: Tag(\"\"InTry\"\")|2# LiteralOperation / LiteralExpressionSyntax: \"\"|2# INVALID / IdentifierNameSyntax: InTry|2# LiteralOperation / LiteralExpressionSyntax: \"\"|##########}"]
+}
+subgraph "cluster_Catch region object" {
+label = "Catch region object"
+cfg0_block3 [shape=record label="{BLOCK #3|0# ExpressionStatementOperation / ExpressionStatementSyntax: Tag(\"\"InCatch\"\");|1# INVALID / InvocationExpressionSyntax: Tag(\"\"InCatch\"\")|2# LiteralOperation / LiteralExpressionSyntax: \"\"|2# INVALID / IdentifierNameSyntax: InCatch|2# LiteralOperation / LiteralExpressionSyntax: \"\"|##########|## BranchValue ##|0# ObjectCreationOperation / ObjectCreationExpressionSyntax: new System.Exception()|##########}"]
+cfg0_block4 [shape=record label="{BLOCK #4|0# ExpressionStatementOperation / ExpressionStatementSyntax: Tag(\"\"UnreachableInCatch\"\");|1# INVALID / InvocationExpressionSyntax: Tag(\"\"UnreachableInCatch\"\")|2# LiteralOperation / LiteralExpressionSyntax: \"\"|2# INVALID / IdentifierNameSyntax: UnreachableInCatch|2# LiteralOperation / LiteralExpressionSyntax: \"\"|##########}"]
+}
+}
+cfg0_block0 [shape=record label="{ENTRY #0}"]
+cfg0_block1 [shape=record label="{BLOCK #1|0# ExpressionStatementOperation / ExpressionStatementSyntax: Tag(\"\"BeforeTry\"\");|1# INVALID / InvocationExpressionSyntax: Tag(\"\"BeforeTry\"\")|2# LiteralOperation / LiteralExpressionSyntax: \"\"|2# INVALID / IdentifierNameSyntax: BeforeTry|2# LiteralOperation / LiteralExpressionSyntax: \"\"|##########}"]
+cfg0_block5 [shape=record label="{BLOCK #5|0# ExpressionStatementOperation / ExpressionStatementSyntax: Tag(\"\"UnreachableAfterCatch\"\");|1# INVALID / InvocationExpressionSyntax: Tag(\"\"UnreachableAfterCatch\"\")|2# LiteralOperation / LiteralExpressionSyntax: \"\"|2# INVALID / IdentifierNameSyntax: UnreachableAfterCatch|2# LiteralOperation / LiteralExpressionSyntax: \"\"|##########}"]
+cfg0_block6 [shape=record label="{EXIT #6}"]
+cfg0_block1 -> cfg0_block2
+cfg0_block3 -> NoDestination_cfg0_block3 [label="Throw"]
+cfg0_block0 -> cfg0_block1
+cfg0_block2 -> cfg0_block5
+cfg0_block4 -> cfg0_block5
+cfg0_block5 -> cfg0_block6
+}

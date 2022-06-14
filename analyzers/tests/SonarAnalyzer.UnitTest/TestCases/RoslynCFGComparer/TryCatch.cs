@@ -300,5 +300,21 @@ public class Sample
         Tag("UnreachableAfterFinally");
     }
 
+    public void TryCatch_ThrowInCatch_SingleCatchBlock()
+    {
+        Tag(""BeforeTry"");
+        try
+        {
+            Tag(""InTry"");
+        }
+        catch
+        {
+            Tag(""InCatch"");
+            throw new System.Exception();
+            Tag(""UnreachableInCatch"");
+        }
+        Tag(""UnreachableAfterCatch"");
+    }
+
     private void Tag(string name, object arg = null) { }
 }
