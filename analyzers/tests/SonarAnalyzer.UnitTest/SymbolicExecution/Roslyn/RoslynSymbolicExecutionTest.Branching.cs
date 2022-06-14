@@ -60,7 +60,9 @@ Tag(""End"");";
                 "Else",             // Dequeue for "else" branch
                 "InTry",            // Dequeue after "if" branch
                 "End",              // Dequeue after "else" branch, reaching exit block
+                "InCatch",          // Dequeue after the "try body" that could throw
                 "InFinally",        // Dequeue after the "try body"
+                "InFinally",        // Dequeue after the "catch", with Exception
                 "AfterFinally");    // Dequeue after "if" branch
         }
 
@@ -89,7 +91,9 @@ Tag(""End"")";
                 "Else",
                 "InTry",
                 "End",
+                "InCatch",
                 "InFinally",
+                "InFinally",    // With Exception
                 "AfterFinally");
         }
 
