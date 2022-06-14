@@ -94,7 +94,7 @@ public class MutexTest
             // Enter the mutex, and hold it until the program exits.
             try
             {
-                m.WaitOne();
+                m.WaitOne();    // Noncompliant FP, because the current implementation of the SE thinks that the locking operation itself can also lock and throw at the same time
             }
             catch (UnauthorizedAccessException ex)
             {

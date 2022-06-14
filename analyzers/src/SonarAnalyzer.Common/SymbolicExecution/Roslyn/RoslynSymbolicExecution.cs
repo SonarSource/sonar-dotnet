@@ -24,6 +24,7 @@ using System.Linq;
 using Microsoft.CodeAnalysis;
 using SonarAnalyzer.CFG.LiveVariableAnalysis;
 using SonarAnalyzer.CFG.Roslyn;
+using SonarAnalyzer.Extensions;
 using SonarAnalyzer.Helpers;
 using SonarAnalyzer.SymbolicExecution.Constraints;
 using SonarAnalyzer.SymbolicExecution.Roslyn.Checks;
@@ -115,9 +116,9 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
                     ? FromFinally(new FinallyPoint(node.FinallyPoint, branch))
                     : CreateNode(branch.Destination, node.FinallyPoint);
             }
-            else if (branch.Source.EnclosingRegion.Kind == ControlFlowRegionKind.Finally)    // Redirect from finally back to the original place (or outer finally on the same branch)
+            else if (node.FinallyPoint is not null && branch.Source.EnclosingRegion.Kind == ControlFlowRegionKind.Finally)
             {
-                return FromFinally(node.FinallyPoint.CreateNext());
+                return FromFinally(node.FinallyPoint.CreateNext());     // Redirect from finally back to the original place (or outer finally on the same branch)
             }
             else
             {
@@ -177,6 +178,15 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
                     yield return node.CreateNext(node.Operation.Parent is null && node.Block.BranchValue != node.Operation.Instance ? postProcessed.State.ResetOperations() : postProcessed.State);
                 }
             }
+            if (ExceptionCandidate(node.Operation) is { } exception && node.Block.EnclosingRegion(ControlFlowRegionKind.Try) is { } tryRegion)
+            {
+                // We're jumping out of the outer statement => We need to reset operation states.
+                var state = node.State.ResetOperations().SetException(exception);
+                foreach (var catchOrFinally in tryRegion.EnclosingRegion.NestedRegions.Where(x => x.Kind != ControlFlowRegionKind.Try))
+                {
+                    yield return new(cfg.Blocks[catchOrFinally.FirstBlockOrdinal], state, null);
+                }
+            }
         }
 
         private static ProgramState ProcessOperation(SymbolicContext context) =>
@@ -192,6 +202,15 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
                 OperationKindEx.ParameterReference => References.Process(context, IParameterReferenceOperationWrapper.FromOperation(context.Operation.Instance)),
                 OperationKindEx.SimpleAssignment => SimpleAssignment.Process(context, ISimpleAssignmentOperationWrapper.FromOperation(context.Operation.Instance)),
                 _ => context.State
+            };
+
+        private static ExceptionState ExceptionCandidate(IOperationWrapperSonar operation) =>
+            operation.Instance.Kind switch
+            {
+                OperationKindEx.Invocation => ExceptionState.UnknownException,
+                // ToDo: Support other operations like field/property access on non-static non-this, conversions and so on. See docs for list of operations.
+                // ToDo: Support Throw operation with specific exception type
+                _ => null
             };
 
         private static bool IsReachable(ExplodedNode node, ControlFlowBranch branch) =>

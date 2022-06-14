@@ -41,6 +41,7 @@ Tag(""AfterFinally"");";
             SETestContext.CreateCS(code).Validator.ValidateTagOrder(
                 "BeforeTry",
                 "InTry",
+                "InFinally",    // With Exception thrown by Tag("InTry")
                 "InFinally",
                 "AfterFinally");
         }
@@ -74,6 +75,8 @@ Tag(""AfterOuterFinally"");";
                 "BeforeOuterTry",
                 "InOuterTry",
                 "InInnerTry",
+                "InOuterFinally",   // With Exception thrown by Tag("InOuterTry")
+                "InInnerFinally",   // With Exception thrown by Tag("InInnerTry")
                 "InInnerFinally",
                 "InOuterFinally",
                 "AfterOuterFinally");
@@ -108,6 +111,8 @@ Tag(""AfterOuterFinally"");";
                 "BeforeOuterTry",
                 "InOuterTry",
                 "InInnerTry",
+                "InOuterFinally",       // With Exception thrown by Tag("InOuterTry")
+                "InInnerFinally",       // With Exception thrown by Tag("InInnerTry")
                 "InInnerFinally",
                 "AfterInnerFinally",
                 "InOuterFinally",
@@ -147,7 +152,9 @@ Tag(""AfterOuterFinally"");";
             SETestContext.CreateCS(code).Validator.ValidateTagOrder(
                 "BeforeOuterTry",
                 "InOuterTry",
+                "InOuterFinally",   // With Exception thrown by Tag("InOuterTry")
                 "InInnerTry",
+                "InInnerFinally",   // With Exception thrown by Tag("InInnerTry")
                 "1",
                 "2",
                 "InInnerFinally",
@@ -180,6 +187,7 @@ else
             SETestContext.CreateCS(code).Validator.ValidateTagOrder(
                 "BeforeTry",
                 "InTry",
+                "InFinally",    // With Exception thrown by Tag("InTry")
                 "InFinally",
                 "1",
                 "2");
@@ -211,9 +219,13 @@ Tag(""AfterFinally"");";
             SETestContext.CreateCS(code).Validator.ValidateTagOrder(
                 "BeforeTry",
                 "InTry",
+                "InFinallyBeforeCondition",     // With Exception thrown by Tag("InTry")
                 "InFinallyBeforeCondition",
+                "1",    // With Exception thrown by Tag("InTry")
+                "2",    // With Exception thrown by Tag("InTry")
                 "1",
                 "2",
+                "InFinallyAfterCondition",      // With Exception thrown by Tag("InTry")
                 "InFinallyAfterCondition",
                 "AfterFinally");
         }
@@ -237,6 +249,7 @@ Tag(""AfterFinally"");";
             SETestContext.CreateCS(code).Validator.ValidateTagOrder(
                 "BeforeTry",
                 "InTry",
+                "InFinally",    // With Exception thrown by Tag("InTry")
                 "InFinally",
                 "AfterFinally");
         }
@@ -259,7 +272,8 @@ finally
 Tag(""UnreachableAfterFinally"");";
             SETestContext.CreateCS(code).Validator.ValidateTagOrder(
                 "BeforeTry",
-                "InTry");   // ToDo: MMF-2393 There should be also InFinally
+                "InTry",
+                "InFinally");
         }
 
         [TestMethod]
@@ -281,6 +295,7 @@ Tag(""UnreachableAfterFinally"");";
             SETestContext.CreateCS(code).Validator.ValidateTagOrder(
                 "BeforeTry",
                 "InTry",
+                "InFinally",    // With Exception thrown by Tag("InTry")
                 "InFinally");
         }
 
@@ -310,8 +325,11 @@ Tag(""AfterOuterFinally"");";
             SETestContext.CreateCS(code).Validator.ValidateTagOrder(
                 "BeforeOuterTry",
                 "InOuterTry",
+                "InOuterFinally",       // With Exception thrown by Tag("InOuterTry")
                 "InOuterFinally",
+                "InInnerTry",           // With Exception thrown by Tag("InOuterTry")
                 "InInnerTry",
+                "InInnerFinally",       // With Exception thrown by Tag("InOuterTry")
                 "InInnerFinally",
                 "AfterInnerFinally",
                 "AfterOuterFinally");

@@ -8,7 +8,7 @@ Namespace Monitor_TryCatch
         Private Obj As New Object()
 
         Public Sub Method1(Arg As String)
-            Monitor.Enter(Obj) ' FN
+            Monitor.Enter(Obj) ' Noncompliant
             Try
                 Console.WriteLine(Arg.Length)
             Catch ex As Exception
@@ -46,7 +46,7 @@ Namespace Monitor_TryCatch
         End Sub
 
         Public Sub Method6(Arg As String)
-            Monitor.Enter(Obj) ' FN
+            Monitor.Enter(Obj) ' Noncompliant
             Try
                 Console.WriteLine(Arg.Length)
             Catch nre As NullReferenceException When nre.Message.Contains("Dummy string")
@@ -56,7 +56,7 @@ Namespace Monitor_TryCatch
         End Sub
 
         Public Sub Method7(Arg As String)
-            Monitor.Enter(Obj) ' FN
+            Monitor.Enter(Obj) ' Noncompliant
             Try
                 Console.WriteLine(Arg.Length)
             Catch ex As Exception When TypeOf ex Is NullReferenceException
@@ -108,7 +108,7 @@ Namespace Monitor_TryCatch
         End Sub
 
         Public Sub Method12(Arg As String)
-            Monitor.Enter(Obj) ' FN
+            Monitor.Enter(Obj) ' Noncompliant
             Try
                 Console.WriteLine(Arg.Length)
                 Monitor.Exit(Obj)

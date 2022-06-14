@@ -31,7 +31,16 @@ namespace SonarAnalyzer.Extensions
 
         public static ControlFlowRegion EnclosingNonLocalLifetimeRegion(this ControlFlowRegion region)
         {
-            while (region.EnclosingRegion != null && region.Kind == ControlFlowRegionKind.LocalLifetime)
+            while (region.EnclosingRegion is not null && region.Kind == ControlFlowRegionKind.LocalLifetime)
+            {
+                region = region.EnclosingRegion;
+            }
+            return region;
+        }
+
+        public static ControlFlowRegion EnclosingRegionOrSelf(this ControlFlowRegion region, ControlFlowRegionKind kind)
+        {
+            while (region is not null && region.Kind != kind)
             {
                 region = region.EnclosingRegion;
             }

@@ -9,7 +9,7 @@ namespace Monitor_TryCatch
 
         public void Method1(string arg)
         {
-            Monitor.Enter(obj); // FN
+            Monitor.Enter(obj); // Noncompliant
             try
             {
                 Console.WriteLine(arg.Length);
@@ -67,7 +67,7 @@ namespace Monitor_TryCatch
 
         public void Method6(string arg)
         {
-            Monitor.Enter(obj); // FN
+            Monitor.Enter(obj); // Noncompliant
             try
             {
                 Console.WriteLine(arg.Length);
@@ -81,7 +81,7 @@ namespace Monitor_TryCatch
 
         public void Method7(string arg)
         {
-            Monitor.Enter(obj); // FN
+            Monitor.Enter(obj); // Noncompliant
             try
             {
                 Console.WriteLine(arg.Length);
@@ -155,7 +155,7 @@ namespace Monitor_TryCatch
 
         public void Method12(string arg)
         {
-            Monitor.Enter(obj); // FN
+            Monitor.Enter(obj); // Noncompliant
             try
             {
                 Console.WriteLine(arg.Length);
