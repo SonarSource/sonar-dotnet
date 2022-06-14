@@ -38,4 +38,16 @@ namespace ImplementsTestBuilder
         [FakeAttribute]
         public void Baz() { }
     }
+
+    [TestFixture]
+    public class A // Noncompliant, FP - In NUnit this scenario is valid. See: https://github.com/SonarSource/sonar-dotnet/issues/5732
+    {
+        public class Nested : A
+        {
+            [Test]
+            public void Test()
+            {
+            }
+        }
+    }
 }
