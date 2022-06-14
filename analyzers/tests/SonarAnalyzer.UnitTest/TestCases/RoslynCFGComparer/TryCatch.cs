@@ -283,4 +283,22 @@ public class Sample
             F();
         }
     }
+
+    public void Finally_ThrowInTry()
+    {
+        Tag("BeforeTry");
+        try
+        {
+            Tag("InTry");
+            throw new System.Exception();
+            Tag("UnreachableInTry");
+        }
+        finally
+        {
+            Tag("InFinally");
+        }
+        Tag("UnreachableAfterFinally");
+    }
+
+    private void Tag(string name, object arg = null) { }
 }
