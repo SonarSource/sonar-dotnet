@@ -106,7 +106,7 @@ namespace SpinLock_Type
             bool lockTaken = false;
             try
             {
-                spinLock.TryEnter(ref lockTaken);
+                spinLock.TryEnter(ref lockTaken);   // Compliant
                 foreach (var arg in args)
                 {
                 }
@@ -126,7 +126,7 @@ namespace SpinLock_Type
             bool lockTaken = false;
             try
             {
-                spinLock.TryEnter(ref lockTaken);
+                spinLock.TryEnter(ref lockTaken);   // Compliant
                 try
                 {
                     Console.Write("X");

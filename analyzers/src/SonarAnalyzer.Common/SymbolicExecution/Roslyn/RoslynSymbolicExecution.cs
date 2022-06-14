@@ -116,7 +116,14 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
                     ? FromFinally(new FinallyPoint(node.FinallyPoint, branch))
                     : CreateNode(branch.Destination, node.FinallyPoint);
             }
-            else if (node.FinallyPoint is not null && branch.Source.EnclosingRegion.Kind == ControlFlowRegionKind.Finally)
+            else if (branch.Source.EnclosingRegion.Kind == ControlFlowRegionKind.Finally && node.State.Exception is not null)
+            {
+                var currentTryAndFinally = branch.Source.EnclosingRegion.EnclosingRegion;
+                return currentTryAndFinally.EnclosingRegion(ControlFlowRegionKind.TryAndFinally) is { } outerTryAndFinally
+                    ? CreateNode(cfg.Blocks[outerTryAndFinally.NestedRegion(ControlFlowRegionKind.Finally).FirstBlockOrdinal], null)
+                    : new(cfg.ExitBlock, node.State, null);
+            }
+            else if (branch.Source.EnclosingRegion.Kind == ControlFlowRegionKind.Finally && node.FinallyPoint is not null)
             {
                 return FromFinally(node.FinallyPoint.CreateNext());     // Redirect from finally back to the original place (or outer finally on the same branch)
             }
