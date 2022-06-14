@@ -86,10 +86,11 @@ namespace SonarAnalyzer.Helpers.Facade
         public override SyntaxNode NodeExpression(SyntaxNode node) =>
             node switch
             {
-                AttributeArgumentSyntax attributeArgument => attributeArgument.Expression,
-                InvocationExpressionSyntax invocation => invocation.Expression,
-                LockStatementSyntax @lock => @lock.Expression,
-                InterpolationSyntax interpolation => interpolation.Expression,
+                AttributeArgumentSyntax x => x.Expression,
+                InvocationExpressionSyntax x => x.Expression,
+                LockStatementSyntax x => x.Expression,
+                InterpolationSyntax x => x.Expression,
+                ReturnStatementSyntax x => x.Expression,
                 null => null,
                 _ => throw InvalidOperation(node, nameof(NodeExpression))
             };

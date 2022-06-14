@@ -18,21 +18,33 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using SonarAnalyzer.Rules.CSharp;
+using CS = SonarAnalyzer.Rules.CSharp;
+using VB = SonarAnalyzer.Rules.VisualBasic;
 
-namespace SonarAnalyzer.UnitTest.Rules
+namespace SonarAnalyzer.UnitTest.Rules;
+
+[TestClass]
+public class ToStringNoNullTest
 {
-    [TestClass]
-    public class ToStringNoNullTest
-    {
-        [TestMethod]
-        public void ToStringNoNull() =>
-            OldVerifier.VerifyAnalyzer(@"TestCases\ToStringNoNull.cs", new ToStringNoNull());
+    private readonly VerifierBuilder csBuilder = new VerifierBuilder<CS.ToStringNoNull>();
+    private readonly VerifierBuilder vsBuilder = new VerifierBuilder<VB.ToStringShouldNotReturnNull>();
+
+    [TestMethod]
+    public void ToStringNoNull_CS() =>
+        csBuilder.AddPaths("ToStringNoNull.cs").Verify();
 
 #if NET
-        [TestMethod]
-        public void ToStringNoNull_CSharp9() =>
-            OldVerifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\ToStringNoNull.CSharp9.cs", new ToStringNoNull());
+    [TestMethod]
+    public void ToStringNoNull_CSharp9() =>
+        csBuilder
+        .WithOptions(ParseOptionsHelper.FromCSharp9)
+        .WithTopLevelStatements()
+        .AddPaths("ToStringNoNull.CSharp9.cs")
+        .Verify();
 #endif
-    }
+
+    [TestMethod]
+    public void ToStringShouldNotReturnNull_VB() =>
+        vsBuilder.AddPaths("ToStringShouldNotReturnNull.vb").Verify();
+
 }

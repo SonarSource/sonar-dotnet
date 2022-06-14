@@ -19,14 +19,14 @@
  */
 
 using Microsoft.CodeAnalysis;
-using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.Diagnostics;
+using Microsoft.CodeAnalysis.VisualBasic;
 using SonarAnalyzer.Helpers;
 
-namespace SonarAnalyzer.Rules.CSharp;
+namespace SonarAnalyzer.Rules.VisualBasic;
 
-[DiagnosticAnalyzer(LanguageNames.CSharp)]
-public sealed class ToStringNoNull : ToStringShouldNotReturnNullBase<SyntaxKind>
+[DiagnosticAnalyzer(LanguageNames.VisualBasic)]
+public sealed class ToStringShouldNotReturnNull : ToStringShouldNotReturnNullBase<SyntaxKind>
 {
-    protected override ILanguageFacade<SyntaxKind> Language => CSharpFacade.Instance;
+    protected override ILanguageFacade<SyntaxKind> Language => VisualBasicFacade.Instance;
 }
