@@ -92,47 +92,43 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
             {
                 checks.ExitReached(new(null, node.State));
             }
-            else if (node.Block.ContainsThrow())
-            {
-                foreach (var explodedNode in ExceptionSuccessors(node, ExceptionCandidate(node.Block.BranchValue)))
-                {
-                    yield return explodedNode;
-                }
-            }
             else
             {
                 foreach (var successor in node.Block.Successors.Where(x => IsReachable(node, x)))
                 {
-                    if (ProcessBranch(node, successor) is { } newNode)
+                    foreach (var successorNode in ProcessBranch(node, successor).WhereNotNull())
                     {
-                        yield return newNode;
+                        yield return successorNode;
                     }
                 }
             }
         }
 
-        private ExplodedNode ProcessBranch(ExplodedNode node, ControlFlowBranch branch)
+        private IEnumerable<ExplodedNode> ProcessBranch(ExplodedNode node, ControlFlowBranch branch)
         {
             if (branch.Destination is not null)
             {
-                return branch.FinallyRegions.Any() // When exiting finally region(s), redirect to 1st finally instead of the normal destination
+                yield return branch.FinallyRegions.Any() // When exiting finally region(s), redirect to 1st finally instead of the normal destination
                     ? FromFinally(new FinallyPoint(node.FinallyPoint, branch))
                     : CreateNode(branch.Destination, node.FinallyPoint);
             }
+            else if (node.Block.ContainsThrow())
+            {
+                foreach (var successor in ExceptionSuccessors(node, ExceptionCandidate(node.Block.BranchValue)))
+                {
+                    yield return successor;
+                }
+            }
             else if (branch.Source.EnclosingRegion.Kind == ControlFlowRegionKind.Finally && node.FinallyPoint is not null)
             {
-                return FromFinally(node.FinallyPoint.CreateNext());     // Redirect from finally back to the original place (or outer finally on the same branch)
+                yield return FromFinally(node.FinallyPoint.CreateNext());     // Redirect from finally back to the original place (or outer finally on the same branch)
             }
             else if (branch.Source.EnclosingRegion.Kind == ControlFlowRegionKind.Finally && node.State.Exception is not null)
             {
                 var currentTryAndFinally = branch.Source.EnclosingRegion.EnclosingRegion;
-                return currentTryAndFinally.EnclosingRegion(ControlFlowRegionKind.TryAndFinally) is { } outerTryAndFinally
+                yield return currentTryAndFinally.EnclosingRegion(ControlFlowRegionKind.TryAndFinally) is { } outerTryAndFinally
                     ? CreateNode(cfg.Blocks[outerTryAndFinally.NestedRegion(ControlFlowRegionKind.Finally).FirstBlockOrdinal], null)
                     : new(cfg.ExitBlock, node.State, null);
-            }
-            else
-            {
-                return null;    // We don't know where to continue
             }
 
             ExplodedNode FromFinally(FinallyPoint finallyPoint) =>

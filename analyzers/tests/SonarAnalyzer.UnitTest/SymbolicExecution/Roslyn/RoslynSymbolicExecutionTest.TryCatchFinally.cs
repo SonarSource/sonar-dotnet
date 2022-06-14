@@ -535,7 +535,95 @@ Tag(""AfterCatch"");";
                 "BeforeTry",
                 "InTry",
                 "InCatch",
-                "AfterCatch"); // If there is no exception in catch
+                "AfterCatch"); // If there is no exception in try
+        }
+
+        [TestMethod]
+        public void TryCatchFinally_ThrowInTry()
+        {
+            const string code = @"
+Tag(""BeforeTry"");
+try
+{
+    Tag(""InTry"");
+    throw new System.Exception();
+    Tag(""UnreachableInFinally"");
+}
+catch
+{
+    Tag(""InCatch"");
+}
+finally
+{
+    Tag(""InFinally"");
+}
+Tag(""AfterFinally"");";
+            SETestContext.CreateCS(code).Validator.ValidateTagOrder(
+                "BeforeTry",
+                "InTry",
+                "InCatch",          // With Exception thrown by Tag("InTry")
+                "InCatch",          // With Exception thrown by `throw`
+                "InFinally",
+                "InFinally",
+                "AfterFinally");    // ToDo: One missing - waiting for Pavel's PR
+        }
+
+        [TestMethod]
+        public void TryCatchFinally_ThrowInCatch()
+        {
+            const string code = @"
+Tag(""BeforeTry"");
+try
+{
+    Tag(""InTry"");
+}
+catch
+{
+    Tag(""InCatch"");
+    throw new System.Exception();
+    Tag(""UnreachableInCatch"");
+}
+finally
+{
+    Tag(""InFinally"");
+}
+Tag(""AfterFinally"");";
+            SETestContext.CreateCS(code).Validator.ValidateTagOrder(
+                "BeforeTry",
+                "InTry",
+                "InCatch",
+                "InFinally",
+                "InFinally",
+                "InFinally",
+                "AfterFinally");
+        }
+
+        [TestMethod]
+        public void TryCatchFinally_ThrowInFinally()
+        {
+            const string code = @"
+Tag(""BeforeTry"");
+try
+{
+    Tag(""InTry"");
+}
+catch
+{
+    Tag(""InCatch"");
+}
+finally
+{
+    Tag(""InFinally"");
+    throw new System.Exception();
+    Tag(""UnreachableInCatch"");
+}
+Tag(""AfterFinally"");";
+            SETestContext.CreateCS(code).Validator.ValidateTagOrder(
+                "BeforeTry",
+                "InTry",
+                "InCatch",
+                "InFinally",
+                "InFinally");
         }
     }
 }
