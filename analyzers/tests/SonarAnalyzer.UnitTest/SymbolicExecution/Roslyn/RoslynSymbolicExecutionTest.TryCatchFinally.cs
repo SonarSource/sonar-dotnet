@@ -452,5 +452,90 @@ Tag(""AfterOuterFinally"");";
                 "AfterInnerFinally",
                 "AfterOuterFinally");
         }
+
+        [TestMethod]
+        public void TryCatch_ThrowInTry_SingleCatchBlock()
+        {
+            const string code = @"
+Tag(""BeforeTry"");
+try
+{
+    Tag(""InTry"");
+    throw new System.Exception();
+    Tag(""UnreachableInFinally"");
+}
+catch
+{
+    Tag(""InCatch"");
+}
+Tag(""AfterCatch"");";
+            SETestContext.CreateCS(code).Validator.ValidateTagOrder(
+                "BeforeTry",
+                "InTry",
+                "InCatch",          // With Exception thrown by Tag("InTry")
+                "InCatch",          // With Exception thrown by `throw`
+                "AfterCatch",
+                "AfterCatch");
+        }
+
+        [TestMethod]
+        public void TryCatch_ThrowInTry_MultipleCatchBlocks()
+        {
+            const string code = @"
+Tag(""BeforeTry"");
+try
+{
+    Tag(""InTry"");
+    throw new System.Exception();
+    Tag(""UnreachableInFinally"");
+}
+catch (System.NullReferenceException)
+{
+    Tag(""InFirstCatch"");
+}
+catch (System.Exception)
+{
+    Tag(""InSecondCatch"");
+}
+catch
+{
+    Tag(""InThirdCatch"");
+}
+Tag(""AfterCatch"");";
+            SETestContext.CreateCS(code).Validator.ValidateTagOrder(
+                "BeforeTry",
+                "InTry",
+                "InFirstCatch",     // Filtering is not implemented yet so all the catch blocks will be iterated.
+                "InSecondCatch",
+                "InThirdCatch",
+                "InFirstCatch",
+                "InSecondCatch",
+                "InThirdCatch",
+                "AfterCatch",
+                "AfterCatch");
+        }
+
+        [TestMethod]
+        public void TryCatch_ThrowInCatch_SingleCatchBlock()
+        {
+            const string code = @"
+Tag(""BeforeTry"");
+try
+{
+    Tag(""InTry"");
+}
+catch
+{
+    Tag(""InCatch"");
+    throw new System.Exception();
+    Tag(""UnreachableInCatch"");
+}
+Tag(""AfterCatch"");";
+            SETestContext.CreateCS(code).Validator.ValidateTagOrder(
+                "BeforeTry",
+                "InTry",
+                "InCatch",
+                "AfterCatch"); // If there is no exception in catch
+        }
     }
 }
