@@ -18,30 +18,41 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using SonarAnalyzer.Rules.CSharp;
+using CS = SonarAnalyzer.Rules.CSharp;
+using VB = SonarAnalyzer.Rules.VisualBasic;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
     [TestClass]
     public class ObsoleteAttributesNeedExplanationTest
     {
-        private readonly VerifierBuilder builder = new VerifierBuilder<ObsoleteAttributesNeedExplanation>();
+        private readonly VerifierBuilder csBuilder = new VerifierBuilder<CS.ObsoleteAttributesNeedExplanation>();
+        private readonly VerifierBuilder vbBuilder = new VerifierBuilder<VB.ObsoleteAttributesNeedExplanation>();
 
         [TestMethod]
-        public void ObsoleteAttributesNeedExplanation() =>
-            builder.AddPaths("ObsoleteAttributesNeedExplanation.cs").Verify();
+        public void ObsoleteAttributesNeedExplanation_CS() =>
+           csBuilder.AddPaths("ObsoleteAttributesNeedExplanation.cs").Verify();
 
 #if NET
-
         [TestMethod]
         public void ObsoleteAttributesNeedExplanation_CSharp9() =>
-            builder.AddPaths("ObsoleteAttributesNeedExplanation.CSharp9.cs").WithTopLevelStatements().Verify();
+            csBuilder
+            .WithOptions(ParseOptionsHelper.FromCSharp9)
+            .WithTopLevelStatements()
+            .AddPaths("ObsoleteAttributesNeedExplanation.CSharp9.cs")
+            .Verify();
 
         [TestMethod]
         public void ObsoleteAttributesNeedExplanation_CSharp10() =>
-            builder.AddPaths("ObsoleteAttributesNeedExplanation.CSharp10.cs").WithConcurrentAnalysis(false).WithOptions(ParseOptionsHelper.FromCSharp10).Verify();
-
+            csBuilder
+            .WithOptions(ParseOptionsHelper.FromCSharp10)
+            .WithConcurrentAnalysis(false)
+            .AddPaths("ObsoleteAttributesNeedExplanation.CSharp10.cs")
+            .Verify();
 #endif
 
+        [TestMethod]
+        public void ObsoleteAttributesNeedExplanation_VB() =>
+            vbBuilder.AddPaths("ObsoleteAttributesNeedExplanation.vb").Verify();
     }
 }
