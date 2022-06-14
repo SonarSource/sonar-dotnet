@@ -28,35 +28,12 @@ using SonarAnalyzer.Helpers;
 namespace SonarAnalyzer.Rules.CSharp
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
-    public sealed class ParameterAssignedTo : ParameterAssignedToBase<SyntaxKind, AssignmentExpressionSyntax, IdentifierNameSyntax>
+    public sealed class ParameterAssignedTo : ParameterAssignedToBase<SyntaxKind, IdentifierNameSyntax>
     {
         protected override ILanguageFacade<SyntaxKind> Language => CSharpFacade.Instance;
 
-        protected override SyntaxNode AssignmentLeft(AssignmentExpressionSyntax assignment) =>
-            assignment.Left;
-
-        protected override SyntaxNode AssignmentRight(AssignmentExpressionSyntax assignment) =>
-            assignment.Right;
-
-        protected override bool IsAssignmentToCatchVariable(ISymbol symbol, SyntaxNode node)
-        {
-            if (symbol is not ILocalSymbol localSymbol)
-            {
-                return false;
-            }
-
-            return localSymbol.DeclaringSyntaxReferences
-                .Select(declaringSyntaxReference => declaringSyntaxReference.GetSyntax())
-                .Any(syntaxNode =>
-                    syntaxNode.Parent is CatchClauseSyntax &&
-                    ((CatchClauseSyntax)syntaxNode.Parent).Declaration == syntaxNode);
-        }
-
-        protected override bool IsAssignmentToParameter(ISymbol symbol)
-        {
-            var parameterSymbol = symbol as IParameterSymbol;
-            var result = parameterSymbol?.RefKind == RefKind.None;
-            return result;
-        }
+        protected override bool IsAssignmentToCatchVariable(ISymbol symbol, SyntaxNode node) =>
+            symbol is ILocalSymbol localSymbol
+            && localSymbol.DeclaringSyntaxReferences.Select(x => x.GetSyntax()).Any(x => x.Parent is CatchClauseSyntax catchClause && catchClause.Declaration == x);
     }
 }

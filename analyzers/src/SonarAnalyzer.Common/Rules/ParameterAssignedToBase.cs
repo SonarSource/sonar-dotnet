@@ -18,6 +18,7 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Linq;
@@ -26,10 +27,8 @@ using SonarAnalyzer.Helpers;
 
 namespace SonarAnalyzer.Rules
 {
-
-    public abstract class ParameterAssignedToBase<TSyntaxKind, TAssignmentStatementSyntax, TIdentifierNameSyntax> : SonarDiagnosticAnalyzer
+    public abstract class ParameterAssignedToBase<TSyntaxKind, TIdentifierNameSyntax> : SonarDiagnosticAnalyzer
         where TSyntaxKind : struct
-        where TAssignmentStatementSyntax : SyntaxNode
         where TIdentifierNameSyntax : SyntaxNode
     {
         private const string DiagnosticId = "S1226";
@@ -41,9 +40,6 @@ namespace SonarAnalyzer.Rules
 
         protected abstract ILanguageFacade<TSyntaxKind> Language { get; }
         protected abstract bool IsAssignmentToCatchVariable(ISymbol symbol, SyntaxNode node);
-        protected abstract bool IsAssignmentToParameter(ISymbol symbol);
-        protected abstract SyntaxNode AssignmentLeft(TAssignmentStatementSyntax assignment);
-        protected abstract SyntaxNode AssignmentRight(TAssignmentStatementSyntax assignment);
 
         protected ParameterAssignedToBase() =>
             rule = Language.CreateDescriptor(DiagnosticId, MessageFormat);
@@ -54,13 +50,10 @@ namespace SonarAnalyzer.Rules
                 Language.GeneratedCodeRecognizer,
                 c =>
                 {
-                    var assignment = (TAssignmentStatementSyntax)c.Node;
-                    var left = AssignmentLeft(assignment);
-                    var symbol = c.SemanticModel.GetSymbolInfo(left).Symbol;
-
-                    if (symbol != null
-                        && (IsAssignmentToParameter(symbol) || IsAssignmentToCatchVariable(symbol, left))
-                        && (!IsReadBefore(c.SemanticModel, symbol, assignment)))
+                    var left = Language.Syntax.AssignmentLeft(c.Node);
+                    if (c.SemanticModel.GetSymbolInfo(left).Symbol is { } symbol
+                        && (symbol is IParameterSymbol { RefKind: RefKind.None } || IsAssignmentToCatchVariable(symbol, left))
+                        && (!IsReadBefore(c.SemanticModel, symbol, c.Node)))
                     {
                         c.ReportIssue(Diagnostic.Create(SupportedDiagnostics[0], left.GetLocation(), left.ToString()));
                     }
@@ -68,7 +61,7 @@ namespace SonarAnalyzer.Rules
                 Language.SyntaxKind.SimpleAssignment);
         }
 
-        private bool IsReadBefore(SemanticModel semanticModel, ISymbol parameterSymbol, TAssignmentStatementSyntax assignment)
+        private bool IsReadBefore(SemanticModel semanticModel, ISymbol parameterSymbol, SyntaxNode assignment)
         {
             // Same problem as in VB.NET / IsAssignmentToCatchVariable:
             // parameterSymbol.DeclaringSyntaxReferences is empty for Catch syntax in VB.NET as well as for indexer syntax for C#
@@ -79,13 +72,9 @@ namespace SonarAnalyzer.Rules
                 return true; // If we can't find the location, it's going to be FN
             }
             return GetPreviousNodes(stopLocation, assignment)
-                .Union(AssignmentRight(assignment).DescendantNodes())
+                .Union(Language.Syntax.AssignmentRight(assignment).DescendantNodes())
                 .OfType<TIdentifierNameSyntax>()
-                .Any(node =>
-                {
-                    var nodeSymbol = semanticModel.GetSymbolInfo(node).Symbol;
-                    return parameterSymbol.Equals(nodeSymbol);
-                });
+                .Any(x => parameterSymbol.Equals(semanticModel.GetSymbolInfo(x).Symbol));
         }
 
         /// <summary>
@@ -97,7 +86,7 @@ namespace SonarAnalyzer.Rules
             // Method declaration or Catch variable declaration, stop here and do not include this statement
             if (statement == null || statement.GetLocation().SourceSpan.IntersectsWith(stopLocation.SourceSpan))
             {
-                return new SyntaxNode[] { };
+                return Array.Empty<SyntaxNode>();
             }
             var previousNodes = statement.Parent.ChildNodes()
                 .TakeWhile(x => x != statement)     // Take all from beginning, including "catch ex" on the way, down to current statement
@@ -107,6 +96,5 @@ namespace SonarAnalyzer.Rules
 
             return previousNodes.Union(GetPreviousNodes(stopLocation, statement.Parent));
         }
-
     }
 }

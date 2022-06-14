@@ -28,42 +28,16 @@ using SonarAnalyzer.Helpers;
 namespace SonarAnalyzer.Rules.VisualBasic
 {
     [DiagnosticAnalyzer(LanguageNames.VisualBasic)]
-    public sealed class ParameterAssignedTo : ParameterAssignedToBase<SyntaxKind, AssignmentStatementSyntax, IdentifierNameSyntax>
+    public sealed class ParameterAssignedTo : ParameterAssignedToBase<SyntaxKind, IdentifierNameSyntax>
     {
         protected override ILanguageFacade<SyntaxKind> Language => VisualBasicFacade.Instance;
 
-        protected override SyntaxNode AssignmentLeft(AssignmentStatementSyntax assignment) =>
-            assignment.Left;
-
-        protected override SyntaxNode AssignmentRight(AssignmentStatementSyntax assignment) =>
-            assignment.Right;
-
-        protected override bool IsAssignmentToCatchVariable(ISymbol symbol, SyntaxNode node)
-        {
-            var localSymbol = symbol as ILocalSymbol;
-
-            // this could mimic the C# variant too, but that doesn't work:
-            // https://github.com/dotnet/roslyn/issues/6209
-            // so:
-            var location = localSymbol?.Locations.FirstOrDefault();
-            if (location == null)
-            {
-                return false;
-            }
-
-            if (!(node.SyntaxTree.GetRoot().FindNode(location.SourceSpan, getInnermostNodeForTie: true) is IdentifierNameSyntax declarationName))
-            {
-                return false;
-            }
-
-            return declarationName.Parent is CatchStatementSyntax catchStatement
-                && catchStatement.IdentifierName == declarationName;
-        }
-
-        protected override bool IsAssignmentToParameter(ISymbol symbol)
-        {
-            var parameterSymbol = symbol as IParameterSymbol;
-            return parameterSymbol?.RefKind == RefKind.None;
-        }
+        protected override bool IsAssignmentToCatchVariable(ISymbol symbol, SyntaxNode node) =>
+            // This could mimic the C# variant too, but that doesn't work https://github.com/dotnet/roslyn/issues/6209
+            symbol is ILocalSymbol localSymbol
+            && localSymbol.Locations.FirstOrDefault() is { } location
+            && node.SyntaxTree.GetRoot().FindNode(location.SourceSpan, getInnermostNodeForTie: true) is IdentifierNameSyntax declarationName
+            && declarationName.Parent is CatchStatementSyntax catchStatement
+            && catchStatement.IdentifierName == declarationName;
     }
 }

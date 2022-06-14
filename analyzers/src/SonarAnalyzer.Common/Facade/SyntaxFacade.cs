@@ -37,6 +37,8 @@ namespace SonarAnalyzer.Helpers.Facade
         public abstract bool IsAnyKind(SyntaxNode node, params TSyntaxKind[] syntaxKinds);
 
         public abstract IEnumerable<SyntaxNode> ArgumentExpressions(SyntaxNode node);
+        public abstract SyntaxNode AssignmentLeft(SyntaxNode assignment);
+        public abstract SyntaxNode AssignmentRight(SyntaxNode assignment);
         public abstract SyntaxNode BinaryExpressionLeft(SyntaxNode binaryExpression);
         public abstract SyntaxNode BinaryExpressionRight(SyntaxNode binaryExpression);
         public abstract IEnumerable<SyntaxNode> EnumMembers(SyntaxNode @enum);
