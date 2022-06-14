@@ -390,7 +390,8 @@ Tag(""UnreachableAfterFinally"");";
             SETestContext.CreateCS(code).Validator.ValidateTagOrder(
                 "BeforeTry",
                 "InTry",
-                "InFinally"); // With Exception thrown by Tag("InTry")
+                "InFinally",                // With Exception thrown by Tag("InTry")
+                "InFinally");               // With Exception thrown by `throw`
         }
 
         [TestMethod]

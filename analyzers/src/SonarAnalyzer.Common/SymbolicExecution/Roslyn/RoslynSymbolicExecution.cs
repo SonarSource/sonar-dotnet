@@ -94,7 +94,10 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
             }
             else if (node.Block.ContainsThrow())
             {
-                yield return new(cfg.ExitBlock, node.State, null);
+                foreach (var explodedNode in ExceptionSuccessors(node, ExceptionCandidate(node.Block.BranchValue)))
+                {
+                    yield return explodedNode;
+                }
             }
             else
             {
@@ -185,7 +188,16 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
                     yield return node.CreateNext(node.Operation.Parent is null && node.Block.BranchValue != node.Operation.Instance ? postProcessed.State.ResetOperations() : postProcessed.State);
                 }
             }
-            if (ExceptionCandidate(node.Operation) is { } exception && node.Block.EnclosingRegion(ControlFlowRegionKind.Try) is { } tryRegion)
+
+            foreach (var explodedNode in ExceptionSuccessors(node, ExceptionCandidate(node.Operation.Instance)))
+            {
+                yield return explodedNode;
+            }
+        }
+
+        private IEnumerable<ExplodedNode> ExceptionSuccessors(ExplodedNode node, ExceptionState exception)
+        {
+            if (exception is { } && node.Block.EnclosingRegion(ControlFlowRegionKind.Try) is { } tryRegion)
             {
                 // We're jumping out of the outer statement => We need to reset operation states.
                 var state = node.State.ResetOperations().SetException(exception);
@@ -211,12 +223,12 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
                 _ => context.State
             };
 
-        private static ExceptionState ExceptionCandidate(IOperationWrapperSonar operation) =>
-            operation.Instance.Kind switch
+        private static ExceptionState ExceptionCandidate(IOperation operation) =>
+            operation.Kind switch
             {
                 OperationKindEx.Invocation => ExceptionState.UnknownException,
+                OperationKindEx.ObjectCreation => new ExceptionState(operation.Type),
                 // ToDo: Support other operations like field/property access on non-static non-this, conversions and so on. See docs for list of operations.
-                // ToDo: Support Throw operation with specific exception type
                 _ => null
             };
 
