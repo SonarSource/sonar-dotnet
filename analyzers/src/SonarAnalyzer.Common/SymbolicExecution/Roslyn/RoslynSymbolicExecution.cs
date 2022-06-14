@@ -233,11 +233,10 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
             };
 
         private static bool IsReachable(ExplodedNode node, ControlFlowBranch branch) =>
-            node.Block.ConditionKind != ControlFlowConditionKind.None
-            && node.State[node.Block.BranchValue] is { } sv
-            && sv.HasConstraint<BoolConstraint>()
-                ? IsReachable(branch, node.Block.ConditionKind == ControlFlowConditionKind.WhenTrue, sv.HasConstraint(BoolConstraint.True))
-                : true;    // Unconditional or we don't know the value and need to explore both paths
+            node.Block.ConditionKind == ControlFlowConditionKind.None
+            || node.State[node.Block.BranchValue] is not { } symbolicValue
+            || !symbolicValue.HasConstraint<BoolConstraint>()
+            || IsReachable(branch, node.Block.ConditionKind == ControlFlowConditionKind.WhenTrue, symbolicValue.HasConstraint(BoolConstraint.True));
 
         private static bool IsReachable(ControlFlowBranch branch, bool condition, bool constraint) =>
             branch.IsConditionalSuccessor ? condition == constraint : condition != constraint;
