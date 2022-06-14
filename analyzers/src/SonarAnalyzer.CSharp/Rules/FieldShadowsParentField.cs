@@ -28,9 +28,9 @@ using SonarAnalyzer.Helpers;
 namespace SonarAnalyzer.Rules.CSharp
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
-    public sealed class FieldShadowsParentField : FieldShadowsParentFieldBase<VariableDeclaratorSyntax>
+    public sealed class FieldShadowsParentField : FieldShadowsParentFieldBase<SyntaxKind, VariableDeclaratorSyntax>
     {
-        public FieldShadowsParentField() : base(RspecStrings.ResourceManager) { }
+        protected override ILanguageFacade<SyntaxKind> Language => CSharpFacade.Instance;
 
         protected override void Initialize(SonarAnalysisContext context) =>
             context.RegisterSyntaxNodeActionInNonGenerated(c =>
@@ -45,8 +45,5 @@ namespace SonarAnalyzer.Rules.CSharp
                     }
                 },
                 SyntaxKind.FieldDeclaration);
-
-        protected override SyntaxToken GetIdentifier(VariableDeclaratorSyntax declarator) =>
-            declarator.Identifier;
     }
 }

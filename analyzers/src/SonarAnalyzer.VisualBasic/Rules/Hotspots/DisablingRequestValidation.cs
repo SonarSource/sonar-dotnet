@@ -21,14 +21,17 @@
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.Common;
+using SonarAnalyzer.Helpers;
 
 namespace SonarAnalyzer.Rules.VisualBasic
 {
     [DiagnosticAnalyzer(LanguageNames.VisualBasic)]
     public sealed class DisablingRequestValidation : DisablingRequestValidationBase
     {
+        protected override ILanguageFacade Language => VisualBasicFacade.Instance;
+
         public DisablingRequestValidation() : this(AnalyzerConfiguration.Hotspot) { }
 
-        public DisablingRequestValidation(IAnalyzerConfiguration analyzerConfiguration) : base(RspecStrings.ResourceManager, analyzerConfiguration) { }
+        public DisablingRequestValidation(IAnalyzerConfiguration analyzerConfiguration) : base(analyzerConfiguration) { }
     }
 }

@@ -22,6 +22,7 @@ using System;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
+using SonarAnalyzer.Extensions;
 using SonarAnalyzer.Helpers.Facade;
 
 namespace SonarAnalyzer.Helpers
@@ -50,6 +51,9 @@ namespace SonarAnalyzer.Helpers
 
         public DiagnosticDescriptor CreateDescriptor(string id, string messageFormat, bool? isEnabledByDefault = null, bool fadeOutCode = false) =>
             DescriptorFactory.Create(id, messageFormat, isEnabledByDefault, fadeOutCode);
+
+        public object FindConstantValue(SemanticModel model, SyntaxNode node) =>
+            node.FindConstantValue(model);
 
         public IMethodParameterLookup MethodParameterLookup(SyntaxNode invocation, IMethodSymbol methodSymbol) =>
             new CSharpMethodParameterLookup((InvocationExpressionSyntax)invocation, methodSymbol);

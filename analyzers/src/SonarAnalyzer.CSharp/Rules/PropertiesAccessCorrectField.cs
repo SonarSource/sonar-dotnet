@@ -33,7 +33,7 @@ namespace SonarAnalyzer.Rules.CSharp
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
     public sealed class PropertiesAccessCorrectField : PropertiesAccessCorrectFieldBase
     {
-        public PropertiesAccessCorrectField() : base(RspecStrings.ResourceManager) { }
+        protected override ILanguageFacade Language => CSharpFacade.Instance;
 
         protected override IEnumerable<FieldData> FindFieldAssignments(IPropertySymbol property, Compilation compilation)
         {

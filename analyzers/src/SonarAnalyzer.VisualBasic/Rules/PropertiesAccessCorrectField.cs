@@ -32,7 +32,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
     [DiagnosticAnalyzer(LanguageNames.VisualBasic)]
     public sealed class PropertiesAccessCorrectField : PropertiesAccessCorrectFieldBase
     {
-        public PropertiesAccessCorrectField() : base(RspecStrings.ResourceManager) { }
+        protected override ILanguageFacade Language => VisualBasicFacade.Instance;
 
         protected override IEnumerable<FieldData> FindFieldAssignments(IPropertySymbol property, Compilation compilation)
         {

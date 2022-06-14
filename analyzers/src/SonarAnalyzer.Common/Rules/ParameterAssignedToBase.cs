@@ -27,38 +27,31 @@ using SonarAnalyzer.Helpers;
 namespace SonarAnalyzer.Rules
 {
 
-    public abstract class ParameterAssignedToBase<TLanguageKindEnum, TAssignmentStatementSyntax, TIdentifierNameSyntax> : SonarDiagnosticAnalyzer
-        where TLanguageKindEnum : struct
+    public abstract class ParameterAssignedToBase<TSyntaxKind, TAssignmentStatementSyntax, TIdentifierNameSyntax> : SonarDiagnosticAnalyzer
+        where TSyntaxKind : struct
         where TAssignmentStatementSyntax : SyntaxNode
         where TIdentifierNameSyntax : SyntaxNode
     {
-        protected const string DiagnosticId = "S1226";
-        protected const string MessageFormat = "Introduce a new variable instead of reusing the parameter '{0}'.";
+        private const string DiagnosticId = "S1226";
+        private const string MessageFormat = "Introduce a new variable instead of reusing the parameter '{0}'.";
 
         private readonly DiagnosticDescriptor rule;
+
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
 
-        protected abstract GeneratedCodeRecognizer GeneratedCodeRecognizer { get; }
-
+        protected abstract ILanguageFacade<TSyntaxKind> Language { get; }
         protected abstract bool IsAssignmentToCatchVariable(ISymbol symbol, SyntaxNode node);
-
         protected abstract bool IsAssignmentToParameter(ISymbol symbol);
-
         protected abstract SyntaxNode AssignmentLeft(TAssignmentStatementSyntax assignment);
-
         protected abstract SyntaxNode AssignmentRight(TAssignmentStatementSyntax assignment);
 
-        protected abstract TLanguageKindEnum SyntaxKindOfInterest { get; }
-
-        protected ParameterAssignedToBase(System.Resources.ResourceManager rspecResources)
-        {
-            rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, rspecResources);
-        }
+        protected ParameterAssignedToBase() =>
+            rule = Language.CreateDescriptor(DiagnosticId, MessageFormat);
 
         protected sealed override void Initialize(SonarAnalysisContext context)
         {
             context.RegisterSyntaxNodeActionInNonGenerated(
-                GeneratedCodeRecognizer,
+                Language.GeneratedCodeRecognizer,
                 c =>
                 {
                     var assignment = (TAssignmentStatementSyntax)c.Node;
@@ -72,7 +65,7 @@ namespace SonarAnalyzer.Rules
                         c.ReportIssue(Diagnostic.Create(SupportedDiagnostics[0], left.GetLocation(), left.ToString()));
                     }
                 },
-                SyntaxKindOfInterest);
+                Language.SyntaxKind.SimpleAssignment);
         }
 
         private bool IsReadBefore(SemanticModel semanticModel, ISymbol parameterSymbol, TAssignmentStatementSyntax assignment)
@@ -83,7 +76,7 @@ namespace SonarAnalyzer.Rules
             var stopLocation = parameterSymbol.Locations.FirstOrDefault();
             if (stopLocation == null)
             {
-                return true; //If we can't find the location, it's going to be FN
+                return true; // If we can't find the location, it's going to be FN
             }
             return GetPreviousNodes(stopLocation, assignment)
                 .Union(AssignmentRight(assignment).DescendantNodes())
@@ -99,16 +92,17 @@ namespace SonarAnalyzer.Rules
         /// Returns all nodes before the specified statement to the declaration of variable/parameter given by stopLocation.
         /// This method recursively traverses all parent blocks of the provided statement.
         /// </summary>
-        private static IEnumerable<SyntaxNode> GetPreviousNodes(Location stopLocation, SyntaxNode statement) 
+        private static IEnumerable<SyntaxNode> GetPreviousNodes(Location stopLocation, SyntaxNode statement)
         {
-            if (statement == null || statement.GetLocation().SourceSpan.IntersectsWith(stopLocation.SourceSpan))   //Method declaration or Catch variable declaration, stop here and do not include this statement
+            // Method declaration or Catch variable declaration, stop here and do not include this statement
+            if (statement == null || statement.GetLocation().SourceSpan.IntersectsWith(stopLocation.SourceSpan))
             {
                 return new SyntaxNode[] { };
             }
             var previousNodes = statement.Parent.ChildNodes()
-                .TakeWhile(x => x != statement)     //Take all from beginning, including "catch ex" on the way, down to current statement
-                .Reverse()                          //Reverse in order to keep the tail
-                .TakeWhile(x => !x.GetLocation().SourceSpan.IntersectsWith(stopLocation.SourceSpan))    //Keep the tail until "catch ex" or "int i" is found
+                .TakeWhile(x => x != statement)     // Take all from beginning, including "catch ex" on the way, down to current statement
+                .Reverse()                          // Reverse in order to keep the tail
+                .TakeWhile(x => !x.GetLocation().SourceSpan.IntersectsWith(stopLocation.SourceSpan))    // Keep the tail until "catch ex" or "int i" is found
                 .SelectMany(x => x.DescendantNodes());
 
             return previousNodes.Union(GetPreviousNodes(stopLocation, statement.Parent));

@@ -30,16 +30,13 @@ namespace SonarAnalyzer.Rules.VisualBasic
     [DiagnosticAnalyzer(LanguageNames.VisualBasic)]
     public sealed class ParameterAssignedTo : ParameterAssignedToBase<SyntaxKind, AssignmentStatementSyntax, IdentifierNameSyntax>
     {
+        protected override ILanguageFacade<SyntaxKind> Language => VisualBasicFacade.Instance;
 
-        public ParameterAssignedTo() : base(RspecStrings.ResourceManager) { }
+        protected override SyntaxNode AssignmentLeft(AssignmentStatementSyntax assignment) =>
+            assignment.Left;
 
-        protected override GeneratedCodeRecognizer GeneratedCodeRecognizer => VisualBasicGeneratedCodeRecognizer.Instance;
-
-        protected override SyntaxKind SyntaxKindOfInterest => SyntaxKind.SimpleAssignmentStatement;
-
-        protected override SyntaxNode AssignmentLeft(AssignmentStatementSyntax assignment) => assignment.Left;
-
-        protected override SyntaxNode AssignmentRight(AssignmentStatementSyntax assignment) => assignment.Right;
+        protected override SyntaxNode AssignmentRight(AssignmentStatementSyntax assignment) =>
+            assignment.Right;
 
         protected override bool IsAssignmentToCatchVariable(ISymbol symbol, SyntaxNode node)
         {
@@ -68,7 +65,5 @@ namespace SonarAnalyzer.Rules.VisualBasic
             var parameterSymbol = symbol as IParameterSymbol;
             return parameterSymbol?.RefKind == RefKind.None;
         }
-
-
     }
 }

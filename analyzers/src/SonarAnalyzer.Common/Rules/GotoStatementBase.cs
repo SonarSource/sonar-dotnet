@@ -24,33 +24,27 @@ using SonarAnalyzer.Helpers;
 
 namespace SonarAnalyzer.Rules
 {
-    public abstract class GotoStatementBase<TLanguageKindEnum> : SonarDiagnosticAnalyzer
-        where TLanguageKindEnum : struct
+    public abstract class GotoStatementBase<TSyntaxKind> : SonarDiagnosticAnalyzer
+        where TSyntaxKind : struct
     {
-        protected const string DiagnosticId = "S907";
+        private const string DiagnosticId = "S907";
         internal const string MessageFormat = "Remove this use of '{0}'.";
 
         private readonly DiagnosticDescriptor rule;
+
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
 
-        protected abstract GeneratedCodeRecognizer GeneratedCodeRecognizer { get; }
-        protected abstract TLanguageKindEnum[] GotoSyntaxKinds { get; }
+        protected abstract ILanguageFacade<TSyntaxKind> Language { get; }
+        protected abstract TSyntaxKind[] GotoSyntaxKinds { get; }
         protected abstract string GoToLabel { get; }
 
-        protected GotoStatementBase(System.Resources.ResourceManager rspecResources)
-        {
-            rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, string.Format(MessageFormat, GoToLabel), rspecResources);
-        }
+        protected GotoStatementBase() =>
+            rule = Language.CreateDescriptor(DiagnosticId, string.Format(MessageFormat, GoToLabel));
 
-        protected sealed override void Initialize(SonarAnalysisContext context)
-        {
+        protected sealed override void Initialize(SonarAnalysisContext context) =>
             context.RegisterSyntaxNodeActionInNonGenerated(
-               GeneratedCodeRecognizer,
-                c =>
-                {
-                    c.ReportIssue(Diagnostic.Create(rule, c.Node.GetFirstToken().GetLocation()));
-                },
+                Language.GeneratedCodeRecognizer,
+                c => c.ReportIssue(Diagnostic.Create(rule, c.Node.GetFirstToken().GetLocation())),
                 GotoSyntaxKinds);
-        }
     }
 }

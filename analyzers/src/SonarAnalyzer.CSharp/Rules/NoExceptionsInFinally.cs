@@ -29,7 +29,7 @@ namespace SonarAnalyzer.Rules.CSharp
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
     public sealed class NoExceptionsInFinally : NoExceptionsInFinallyBase
     {
-        public NoExceptionsInFinally() : base(RspecStrings.ResourceManager) { }
+        protected override ILanguageFacade Language => CSharpFacade.Instance;
 
         protected override void Initialize(SonarAnalysisContext context) =>
             context.RegisterSyntaxNodeActionInNonGenerated(

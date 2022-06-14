@@ -29,7 +29,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
     [DiagnosticAnalyzer(LanguageNames.VisualBasic)]
     public sealed class NoExceptionsInFinally : NoExceptionsInFinallyBase
     {
-        public NoExceptionsInFinally() : base(RspecStrings.ResourceManager) { }
+        protected override ILanguageFacade Language => VisualBasicFacade.Instance;
 
         protected override void Initialize(SonarAnalysisContext context) =>
             context.RegisterSyntaxNodeActionInNonGenerated(c =>

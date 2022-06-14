@@ -35,6 +35,7 @@ namespace SonarAnalyzer.Rules
         private const string MessageFormat = "Refactor this {0} so that it actually refers to the field '{1}'.";
 
         private readonly DiagnosticDescriptor rule;
+
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
 
         /**
@@ -42,15 +43,14 @@ namespace SonarAnalyzer.Rules
          * - directly via an assignment
          * - indirectly, when passed as 'out' or 'ref' parameter
          */
+        protected abstract ILanguageFacade Language { get; }
         protected abstract IEnumerable<FieldData> FindFieldAssignments(IPropertySymbol property, Compilation compilation);
         protected abstract IEnumerable<FieldData> FindFieldReads(IPropertySymbol property, Compilation compilation);
         protected abstract bool ImplementsExplicitGetterOrSetter(IPropertySymbol property);
         protected abstract bool ShouldIgnoreAccessor(IMethodSymbol accessorMethod, Compilation compilation);
 
-        protected PropertiesAccessCorrectFieldBase(System.Resources.ResourceManager rspecResources)
-        {
-            rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, rspecResources);
-        }
+        protected PropertiesAccessCorrectFieldBase() =>
+            rule = Language.CreateDescriptor(DiagnosticId, MessageFormat);
 
         protected override void Initialize(SonarAnalysisContext context) =>
             // We want to check the fields read and assigned in all properties in this class

@@ -20,12 +20,13 @@
 
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Diagnostics;
+using SonarAnalyzer.Helpers;
 
 namespace SonarAnalyzer.Rules.CSharp
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
     public sealed class MarkAssemblyWithAssemblyVersionAttribute : MarkAssemblyWithAssemblyVersionAttributeBase
     {
-        public MarkAssemblyWithAssemblyVersionAttribute() : base(RspecStrings.ResourceManager) { }
+        protected override ILanguageFacade Language => CSharpFacade.Instance;
     }
 }

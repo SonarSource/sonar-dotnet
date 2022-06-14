@@ -30,7 +30,7 @@ namespace SonarAnalyzer.Rules.CSharp
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
     public sealed class SillyBitwiseOperation : SillyBitwiseOperationBase
     {
-        public SillyBitwiseOperation() : base(RspecStrings.ResourceManager) { }
+        protected override ILanguageFacade Language => CSharpFacade.Instance;
 
         protected override void Initialize(SonarAnalysisContext context)
         {
@@ -53,11 +53,6 @@ namespace SonarAnalyzer.Rules.CSharp
                 SyntaxKind.ExclusiveOrAssignmentExpression);
         }
 
-        protected override object FindConstant(SemanticModel semanticModel, SyntaxNode node) =>
-            IsFieldOrProperty(semanticModel, node, out var symbol) && !IsInSystemNamespace(symbol)
-                ? null
-                : node.FindConstantValue(semanticModel);
-
         private void CheckAssignment(SyntaxNodeAnalysisContext context, int constValueToLookFor)
         {
             var assignment = (AssignmentExpressionSyntax)context.Node;
@@ -76,14 +71,5 @@ namespace SonarAnalyzer.Rules.CSharp
             var binary = (BinaryExpressionSyntax)context.Node;
             CheckBinary(context, binary.Left, binary.OperatorToken, binary.Right, constValueToLookFor);
         }
-
-        private static bool IsFieldOrProperty(SemanticModel semanticModel, SyntaxNode node, out ISymbol symbol)
-        {
-            symbol = semanticModel.GetSymbolInfo(node).Symbol;
-            return symbol is {Kind: SymbolKind.Field or SymbolKind.Property};
-        }
-
-        private static bool IsInSystemNamespace(ISymbol symbol) =>
-            symbol.ContainingNamespace.Name == "System";
     }
 }

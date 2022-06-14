@@ -29,7 +29,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
     [DiagnosticAnalyzer(LanguageNames.VisualBasic)]
     public sealed class SelfAssignment : SelfAssignmentBase
     {
-        public SelfAssignment() : base(RspecStrings.ResourceManager) { }
+        protected override ILanguageFacade Language => VisualBasicFacade.Instance;
 
         protected override void Initialize(SonarAnalysisContext context)
         {

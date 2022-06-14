@@ -51,7 +51,9 @@ namespace SonarAnalyzer.Helpers.Facade
         public SyntaxKind[] MethodDeclarations => new[] { SyntaxKind.MethodDeclaration };
         public SyntaxKind[] ObjectCreationExpressions => new[] { SyntaxKind.ObjectCreationExpression, SyntaxKindEx.ImplicitObjectCreationExpression };
         public SyntaxKind Parameter => SyntaxKind.Parameter;
+        public SyntaxKind ParameterList => SyntaxKind.ParameterList;
         public SyntaxKind ReturnStatement => SyntaxKind.ReturnStatement;
+        public SyntaxKind SimpleAssignment => SyntaxKind.SimpleAssignmentExpression;
         public SyntaxKind SimpleMemberAccessExpression => SyntaxKind.SimpleMemberAccessExpression;
         public SyntaxKind StringLiteralExpression => SyntaxKind.StringLiteralExpression;
         public SyntaxKind[] TypeDeclaration => new[]

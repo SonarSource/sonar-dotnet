@@ -29,7 +29,6 @@ namespace SonarAnalyzer.Rules
 
         private protected override KnownType AttributeToFind => KnownType.System_CLSCompliantAttribute;
 
-        protected MarkAssemblyWithClsCompliantAttributeBase(System.Resources.ResourceManager rspecResources)
-            : base(DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, rspecResources)) { }
+        protected MarkAssemblyWithClsCompliantAttributeBase() : base(DiagnosticId, MessageFormat) { }
     }
 }

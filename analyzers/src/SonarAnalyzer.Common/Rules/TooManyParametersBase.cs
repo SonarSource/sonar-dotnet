@@ -39,19 +39,18 @@ namespace SonarAnalyzer.Rules
         [RuleParameter("max", PropertyType.Integer, "Maximum authorized number of parameters", DefaultValueMaximum)]
         public int Maximum { get; set; } = DefaultValueMaximum;
 
-        protected abstract TSyntaxKind[] SyntaxKinds { get; }
-        protected abstract GeneratedCodeRecognizer GeneratedCodeRecognizer { get; }
+        protected abstract ILanguageFacade<TSyntaxKind> Language { get; }
         protected abstract string UserFriendlyNameForNode(SyntaxNode node);
         protected abstract int CountParameters(TParameterListSyntax parameterList);
         protected abstract int BaseParameterCount(SyntaxNode node);
         protected abstract bool CanBeChanged(SyntaxNode node, SemanticModel semanticModel);
 
-        protected TooManyParametersBase(System.Resources.ResourceManager rspecResources) =>
-            rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, rspecResources, isEnabledByDefault: false);
+        protected TooManyParametersBase() =>
+            rule = Language.CreateDescriptor(DiagnosticId, MessageFormat, isEnabledByDefault: false);
 
         protected override void Initialize(ParameterLoadingAnalysisContext context) =>
             context.RegisterSyntaxNodeActionInNonGenerated(
-                GeneratedCodeRecognizer,
+                Language.GeneratedCodeRecognizer,
                 c =>
                 {
                     var parametersCount = CountParameters((TParameterListSyntax)c.Node);
@@ -62,7 +61,7 @@ namespace SonarAnalyzer.Rules
                         c.ReportIssue(Diagnostic.Create(SupportedDiagnostics[0], c.Node.GetLocation(), UserFriendlyNameForNode(c.Node.Parent), valueText, Maximum));
                     }
                 },
-                SyntaxKinds);
+                Language.SyntaxKind.ParameterList);
 
         protected static bool VerifyCanBeChangedBySymbol(SyntaxNode node, SemanticModel semanticModel)
         {

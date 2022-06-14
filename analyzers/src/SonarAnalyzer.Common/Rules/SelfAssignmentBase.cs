@@ -26,16 +26,17 @@ namespace SonarAnalyzer.Rules
 {
     public abstract class SelfAssignmentBase : SonarDiagnosticAnalyzer
     {
-        internal const string DiagnosticId = "S1656";
-        internal const string MessageFormat = "Remove or correct this useless self-assignment.";
+        private const string DiagnosticId = "S1656";
+        private const string MessageFormat = "Remove or correct this useless self-assignment.";
 
-        internal readonly DiagnosticDescriptor rule;
+        protected abstract ILanguageFacade Language { get; }
+
+        protected readonly DiagnosticDescriptor rule;
+
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
 
-        protected SelfAssignmentBase(System.Resources.ResourceManager rspecResources)
-        {
-             this.rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, rspecResources);
-        }
+        protected SelfAssignmentBase() =>
+             rule = Language.CreateDescriptor(DiagnosticId, MessageFormat);
 
     }
 }

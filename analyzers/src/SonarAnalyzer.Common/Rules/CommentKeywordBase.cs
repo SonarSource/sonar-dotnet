@@ -34,25 +34,28 @@ namespace SonarAnalyzer.Rules
         protected const string TodoDiagnosticId = "S1135";
         protected const string TodoMessageFormat = "Complete the task associated to this '" + TodoKeyword + "' comment.";
 
-        private const string FixMeKeyword = "FIXME";
-        protected const string FixMeDiagnosticId = "S1134";
-        protected const string FixMeMessageFormat = "Take the required action to fix the issue indicated by this '" + FixMeKeyword + "' comment.";
+        private const string FixmeKeyword = "FIXME";
+        protected const string FixmeDiagnosticId = "S1134";
+        protected const string FixmeMessageFormat = "Take the required action to fix the issue indicated by this '" + FixmeKeyword + "' comment.";
 
-        protected abstract DiagnosticDescriptor TodoDiagnostic { get; }
-        protected abstract DiagnosticDescriptor FixMeDiagnostic { get; }
-        protected abstract GeneratedCodeRecognizer GeneratedCodeRecognizer { get; }
+        private readonly DiagnosticDescriptor todoRule;
+        private readonly DiagnosticDescriptor fixmeRule;
+
+        protected abstract ILanguageFacade Language { get; }
 
         public sealed override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; }
 
         protected CommentKeywordBase()
         {
-            SupportedDiagnostics = ImmutableArray.Create(TodoDiagnostic, FixMeDiagnostic);
+            todoRule = Language.CreateDescriptor(TodoDiagnosticId, TodoMessageFormat);
+            fixmeRule = Language.CreateDescriptor(FixmeDiagnosticId, FixmeMessageFormat);
+            SupportedDiagnostics = ImmutableArray.Create(todoRule, fixmeRule);
         }
 
         protected sealed override void Initialize(SonarAnalysisContext context)
         {
             context.RegisterSyntaxTreeActionInNonGenerated(
-                GeneratedCodeRecognizer,
+                Language.GeneratedCodeRecognizer,
                 c =>
                 {
                     var comments = c.Tree.GetRoot().DescendantTrivia()
@@ -62,12 +65,12 @@ namespace SonarAnalyzer.Rules
                     {
                         foreach (var location in GetKeywordLocations(c.Tree, comment, TodoKeyword))
                         {
-                            c.ReportIssue(Diagnostic.Create(TodoDiagnostic, location));
+                            c.ReportIssue(Diagnostic.Create(todoRule, location));
                         }
 
-                        foreach (var location in GetKeywordLocations(c.Tree, comment, FixMeKeyword))
+                        foreach (var location in GetKeywordLocations(c.Tree, comment, FixmeKeyword))
                         {
-                            c.ReportIssue(Diagnostic.Create(FixMeDiagnostic, location));
+                            c.ReportIssue(Diagnostic.Create(fixmeRule, location));
                         }
                     }
                 });

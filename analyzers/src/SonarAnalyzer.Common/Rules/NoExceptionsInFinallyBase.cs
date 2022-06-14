@@ -29,11 +29,13 @@ namespace SonarAnalyzer.Rules
         protected const string DiagnosticId = "S1163";
         private const string MessageFormat = "Refactor this code to not throw exceptions in finally blocks.";
 
+        protected abstract ILanguageFacade Language { get; }
+
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(Rule);
 
         protected DiagnosticDescriptor Rule { get; }
 
-        protected NoExceptionsInFinallyBase(System.Resources.ResourceManager rspecResources) =>
-            Rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, rspecResources);
+        protected NoExceptionsInFinallyBase() =>
+            Rule = Language.CreateDescriptor(DiagnosticId, MessageFormat);
     }
 }

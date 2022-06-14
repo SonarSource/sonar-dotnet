@@ -47,7 +47,7 @@ namespace SonarAnalyzer.Rules
 
         private readonly DiagnosticDescriptor rule;
 
-        protected abstract GeneratedCodeRecognizer GeneratedCodeRecognizer { get; }
+        protected abstract ILanguageFacade<TSyntaxKind> Language { get; }
         protected abstract TSyntaxKind SyntaxKind { get; }
 
         protected abstract string GetAssignedVariableName(TLiteralExpression stringLiteral);
@@ -56,13 +56,11 @@ namespace SonarAnalyzer.Rules
 
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
 
-        protected HardcodedIpAddressBase(IAnalyzerConfiguration analyzerConfiguration, System.Resources.ResourceManager rspecResources) : base(analyzerConfiguration)
-        {
-            rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, rspecResources).WithNotConfigurable();
-        }
+        protected HardcodedIpAddressBase(IAnalyzerConfiguration analyzerConfiguration) : base(analyzerConfiguration) =>
+            rule = Language.CreateDescriptor(DiagnosticId, MessageFormat).WithNotConfigurable();
 
         protected override void Initialize(SonarAnalysisContext context) =>
-            context.RegisterSyntaxNodeActionInNonGenerated(GeneratedCodeRecognizer, CheckForHardcodedIpAddresses, SyntaxKind);
+            context.RegisterSyntaxNodeActionInNonGenerated(Language.GeneratedCodeRecognizer, CheckForHardcodedIpAddresses, SyntaxKind);
 
         private void CheckForHardcodedIpAddresses(SyntaxNodeAnalysisContext context)
         {

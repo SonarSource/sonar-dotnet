@@ -30,7 +30,7 @@ namespace SonarAnalyzer.Rules.CSharp
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
     public sealed class SelfAssignment : SelfAssignmentBase
     {
-        public SelfAssignment() : base(RspecStrings.ResourceManager) {}
+        protected override ILanguageFacade Language => CSharpFacade.Instance;
 
         protected override void Initialize(SonarAnalysisContext context)
         {

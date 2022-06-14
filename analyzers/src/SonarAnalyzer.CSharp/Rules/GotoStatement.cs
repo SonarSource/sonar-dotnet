@@ -28,7 +28,7 @@ namespace SonarAnalyzer.Rules.CSharp
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
     public sealed class GotoStatement : GotoStatementBase<SyntaxKind>
     {
-        public GotoStatement() : base(RspecStrings.ResourceManager) { }
+        protected override ILanguageFacade<SyntaxKind> Language => CSharpFacade.Instance;
 
         protected override SyntaxKind[] GotoSyntaxKinds => new[]
         {
@@ -36,9 +36,6 @@ namespace SonarAnalyzer.Rules.CSharp
             SyntaxKind.GotoCaseStatement,
             SyntaxKind.GotoDefaultStatement
         };
-
-        protected override GeneratedCodeRecognizer GeneratedCodeRecognizer =>
-           CSharpGeneratedCodeRecognizer.Instance;
 
         protected override string GoToLabel => "goto";
     }

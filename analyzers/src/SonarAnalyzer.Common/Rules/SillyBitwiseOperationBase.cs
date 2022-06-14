@@ -31,13 +31,13 @@ namespace SonarAnalyzer.Rules
         internal const string IsReportingOnLeftKey = "IsReportingOnLeft";
         private const string MessageFormat = "Remove this silly bit operation.";
 
-        protected abstract object FindConstant(SemanticModel semanticModel, SyntaxNode node);
+        protected abstract ILanguageFacade Language { get; }
 
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(Rule);
         protected DiagnosticDescriptor Rule { get; }
 
-        protected SillyBitwiseOperationBase(System.Resources.ResourceManager rspecResources) =>
-            Rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, rspecResources, fadeOutCode: true);
+        protected SillyBitwiseOperationBase() =>
+            Rule = Language.CreateDescriptor(DiagnosticId, MessageFormat, fadeOutCode: true);
 
         protected void CheckBinary(SyntaxNodeAnalysisContext context, SyntaxNode left, SyntaxToken @operator, SyntaxNode right, int constValueToLookFor)
         {
@@ -58,18 +58,22 @@ namespace SonarAnalyzer.Rules
                 return;
             }
 
-            context.ReportIssue(Diagnostic.Create(Rule,
-                                                                 location,
-                                                                 ImmutableDictionary<string, string>.Empty.Add(IsReportingOnLeftKey, isReportingOnLeftKey.ToString())));
+            context.ReportIssue(Diagnostic.Create(Rule, location, ImmutableDictionary<string, string>.Empty.Add(IsReportingOnLeftKey, isReportingOnLeftKey.ToString())));
         }
 
         protected int? FindIntConstant(SemanticModel semanticModel, SyntaxNode node) =>
-            FindConstant(semanticModel, node) is { } value
-            && !IsEnum(semanticModel, node)
+            semanticModel.GetSymbolInfo(node).Symbol is var symbol
+            && !IsFieldOrPropertyOutsideSystemNamespace(symbol)
+            && !IsEnum(symbol)
+            && Language.FindConstantValue(semanticModel, node) is { } value
                 ? ConversionHelper.TryConvertToInt(value)
                 : null;
 
-        private static bool IsEnum(SemanticModel semanticModel, SyntaxNode node) =>
-            semanticModel.GetSymbolInfo(node).Symbol.GetSymbolType() is INamedTypeSymbol {EnumUnderlyingType: { }};
+        private static bool IsEnum(ISymbol symbol) =>
+            symbol.GetSymbolType() is INamedTypeSymbol { EnumUnderlyingType: { } };
+
+        private static bool IsFieldOrPropertyOutsideSystemNamespace(ISymbol symbol) =>
+            symbol is { Kind: SymbolKind.Field or SymbolKind.Property }
+            && symbol.ContainingNamespace.Name != nameof(System);
     }
 }

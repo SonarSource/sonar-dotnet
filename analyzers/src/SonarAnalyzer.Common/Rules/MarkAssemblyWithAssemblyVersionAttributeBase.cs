@@ -29,7 +29,6 @@ namespace SonarAnalyzer.Rules
 
         private protected override KnownType AttributeToFind => KnownType.System_Reflection_AssemblyVersionAttribute;
 
-        protected MarkAssemblyWithAssemblyVersionAttributeBase(System.Resources.ResourceManager rspecResources)
-            : base(DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, rspecResources)) { }
+        protected MarkAssemblyWithAssemblyVersionAttributeBase() : base(DiagnosticId, MessageFormat) { }
     }
 }
