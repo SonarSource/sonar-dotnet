@@ -38,26 +38,24 @@ namespace SonarAnalyzer.Helpers
             enumerable.Aggregate(0, (seed, x) => Combine(seed, x));
 
         public static int Combine<T1, T2>(T1 a, T2 b) =>
-            (int)Seed
-                .AddHash((uint)(a?.GetHashCode() ?? 0))
-                .AddHash((uint)(b?.GetHashCode() ?? 0));
+            (int)Seed.AddHash(a?.GetHashCode()).AddHash(b?.GetHashCode());
 
         public static int Combine<T1, T2, T3>(T1 a, T2 b, T3 c) =>
-            (int)Seed
-                .AddHash((uint)(a?.GetHashCode() ?? 0))
-                .AddHash((uint)(b?.GetHashCode() ?? 0))
-                .AddHash((uint)(c?.GetHashCode() ?? 0));
+            (int)Combine(a, b).AddHash(c?.GetHashCode());
 
         public static int Combine<T1, T2, T3, T4>(T1 a, T2 b, T3 c, T4 d) =>
-            (int)Seed
-                .AddHash((uint)(a?.GetHashCode() ?? 0))
-                .AddHash((uint)(b?.GetHashCode() ?? 0))
-                .AddHash((uint)(c?.GetHashCode() ?? 0))
-                .AddHash((uint)(d?.GetHashCode() ?? 0));
+            (int)Combine(a, b, c).AddHash(d?.GetHashCode());
+
+        public static int Combine<T1, T2, T3, T4, T5>(T1 a, T2 b, T3 c, T4 d, T5 e) =>
+            (int)Combine(a, b, c, d).AddHash(e?.GetHashCode());
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        private static uint AddHash(this uint hash, uint value) =>
-            RotateLeft(hash + value * PreMultiplier) * PostMultiplier;
+        private static uint AddHash(this int hash, int? value) =>
+            ((uint)hash).AddHash(value);
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        private static uint AddHash(this uint hash, int? value) =>
+            RotateLeft(hash + (uint)(value ?? 0) * PreMultiplier) * PostMultiplier;
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         private static uint RotateLeft(uint value) =>

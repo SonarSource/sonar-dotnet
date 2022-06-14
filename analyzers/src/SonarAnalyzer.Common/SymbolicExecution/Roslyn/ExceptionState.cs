@@ -18,25 +18,23 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-namespace SonarAnalyzer.UnitTest.Helpers
-{
-    [TestClass]
-    public class HashCodeTest
-    {
-        [DataTestMethod]
-        [DataRow(null)]
-        [DataRow("Lorem Ipsum")]
-        public void Combine_ProducesDifferentResults(string input)
-        {
-            var hash2 = SonarAnalyzer.Helpers.HashCode.Combine(input, input);
-            var hash3 = SonarAnalyzer.Helpers.HashCode.Combine(input, input, input);
-            var hash4 = SonarAnalyzer.Helpers.HashCode.Combine(input, input, input, input);
-            var hash5 = SonarAnalyzer.Helpers.HashCode.Combine(input, input, input, input, input);
+using System;
+using Microsoft.CodeAnalysis;
 
-            hash2.Should().NotBe(0);
-            hash3.Should().NotBe(0).And.NotBe(hash2);
-            hash4.Should().NotBe(0).And.NotBe(hash2).And.NotBe(hash3);
-            hash5.Should().NotBe(0).And.NotBe(hash2).And.NotBe(hash3).And.NotBe(hash4);
-        }
+namespace SonarAnalyzer.SymbolicExecution.Roslyn
+{
+    public sealed record ExceptionState
+    {
+        public static readonly ExceptionState UnknownException = new();
+
+        public ITypeSymbol Type { get; }
+
+        public ExceptionState(ITypeSymbol type) =>
+            Type = type ?? throw new ArgumentNullException(nameof(type));
+
+        private ExceptionState() { }
+
+        public override string ToString() =>
+            Type is null ? "Unknown" : Type.Name;
     }
 }

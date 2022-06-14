@@ -40,6 +40,7 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
         private ImmutableDictionary<CaptureId, IOperation> CaptureOperation { get; init; }
         private ImmutableHashSet<ISymbol> PreservedSymbols { get; init; }
 
+        public ExceptionState Exception { get; private init; }
         public SymbolicValue this[IOperationWrapperSonar operation] => this[operation.Instance];
         public SymbolicValue this[IOperation operation] => OperationValue.TryGetValue(ResolveCapture(operation), out var value) ? value : null;
         public SymbolicValue this[ISymbol symbol] => SymbolValue.TryGetValue(symbol, out var value) ? value : null;
@@ -79,6 +80,12 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
         public ProgramState SetCapture(CaptureId capture, IOperation operation) =>
             this with { CaptureOperation = CaptureOperation.SetItem(capture, operation) };
 
+        public ProgramState SetException(ExceptionState exception) =>
+            this with { Exception = exception };
+
+        public ProgramState SetException(ITypeSymbol exception) =>
+            this with { Exception = new(exception) };
+
         public IEnumerable<ISymbol> SymbolsWith(SymbolicConstraint constraint) =>
             SymbolValue.Where(x => x.Value != null && x.Value.HasConstraint(constraint)).Select(x => x.Key);
 
@@ -112,6 +119,7 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
         public override int GetHashCode() =>
             // VisitCount is not included, it's not part of Equals
             HashCode.Combine(
+                Exception?.GetHashCode() ?? 0,
                 HashCode.DictionaryContentHash(OperationValue),
                 HashCode.DictionaryContentHash(SymbolValue),
                 HashCode.EnumerableContentHash(PreservedSymbols),
@@ -120,13 +128,17 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
         public bool Equals(ProgramState other) =>
             // VisitCount is not compared, two ProgramState are equal if their current state is equal. No matter was historical path led to it.
             other is not null
+            && other.Exception == Exception
             && other.OperationValue.DictionaryEquals(OperationValue)
             && other.SymbolValue.DictionaryEquals(SymbolValue)
             && other.CaptureOperation.DictionaryEquals(CaptureOperation)
             && other.PreservedSymbols.SetEquals(PreservedSymbols);
 
         public override string ToString() =>
-            Equals(Empty) ? "Empty" : SerializeSymbols() + SerializeOperations() + SerializeCaptures();
+            Equals(Empty) ? "Empty" : SerializeException() + SerializeSymbols() + SerializeOperations() + SerializeCaptures();
+
+        private string SerializeException() =>
+            Exception is null ? null : $"Exception: {Exception}{Environment.NewLine}";
 
         private string SerializeSymbols() =>
             Serialize(SymbolValue, "Symbols", x => x.ToString(), x => x.ToString());
