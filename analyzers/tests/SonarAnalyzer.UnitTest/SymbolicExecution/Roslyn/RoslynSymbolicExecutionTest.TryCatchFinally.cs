@@ -148,6 +148,7 @@ Tag(""AfterOuterFinally"");";
         public void Finally_Nested_InstructionAfterFinally_NoThrowsInFinally()
         {
             const string code = @"
+var tag = ""BeforeOuterTry"";
 var value = false;
 try
 {
@@ -157,9 +158,10 @@ try
     }
     finally
     {
-        var something = true;   // Operation that cannot throw
+        tag = ""InInnerFinally"";
     }
     value = true;
+    tag = ""AfterInnerFinally"";
 }
 finally
 {
@@ -168,8 +170,12 @@ finally
 Tag(""AfterOuterFinally"", value);";
             var validator = SETestContext.CreateCS(code, new PreserveTestCheck("value")).Validator;
             validator.ValidateTagOrder(
+                "BeforeOuterTry",
                 "InInnerTry",
+                "InInnerFinally",       // WithException thrown by Tag("InInnerTry")
+                "InInnerFinally",
                 "InOuterFinally",       // With Exception thrown by Tag("InInnerTry")
+                "AfterInnerFinally",
                 "InOuterFinally",
                 "AfterOuterFinally");
 
@@ -185,6 +191,7 @@ Tag(""AfterOuterFinally"", value);";
         public void Finally_NestedInFinally_InstructionAfterFinally_NoThrowsInFinally()
         {
             const string code = @"
+var tag = ""BeforeOuterTry"";
 var value = false;
 try
 {
@@ -192,13 +199,15 @@ try
 }
 finally
 {
+    tag = ""BeforeInnerTry"";
     try
     {
         value = false;          // Operation that cannot throw - this doesn't do anything
+        tag = ""InInnerTry"";
     }
     finally
     {
-        var something = true;   // Operation that cannot throw
+        tag = ""InInnerFinally"";   // Operation that cannot throw
     }
     value = true;
 
@@ -207,9 +216,16 @@ finally
 Tag(""AfterOuterFinally"", value);";
             var validator = SETestContext.CreateCS(code, new PreserveTestCheck("value")).Validator;
             validator.ValidateTagOrder(
+                "BeforeOuterTry",
                 "InOuterTry",
-                "InOuterFinally",       // With Exception thrown by Tag("InOuterTry")
+                "BeforeInnerTry",       // With Exception thrown by Tag("InOuterTry")
+                "BeforeInnerTry",
+                "InInnerTry",
+                "InInnerTry",           // With Exception thrown by Tag("InOuterTry")
+                "InInnerFinally",
+                "InInnerFinally",       // With Exception thrown by Tag("InOuterTry")
                 "InOuterFinally",
+                "InOuterFinally",       // With Exception thrown by Tag("InOuterTry")
                 "AfterOuterFinally");
 
             validator.TagStates("InOuterFinally").Should().HaveCount(2)

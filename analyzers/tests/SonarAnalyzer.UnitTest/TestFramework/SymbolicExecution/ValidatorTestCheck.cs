@@ -25,6 +25,12 @@ using StyleCop.Analyzers.Lightup;
 
 namespace SonarAnalyzer.UnitTest.TestFramework.SymbolicExecution
 {
+    /// <summary>
+    /// This checks looks for specific tags in the source and collects them:
+    /// tag = "TagName" - registers TagName, doesn't change the flow
+    /// Tag("TagName") - can change flow, because invocations can throw exceptions in the engine
+    /// Tag("TagName", variable) - can change flow, enables asserting on variable state
+    /// </summary>
     internal class ValidatorTestCheck : SymbolicCheck
     {
         private readonly List<SymbolicContext> postProcessed = new();
@@ -74,13 +80,21 @@ namespace SonarAnalyzer.UnitTest.TestFramework.SymbolicExecution
         protected override ProgramState PostProcessSimple(SymbolicContext context)
         {
             postProcessed.Add(context);
-            if (context.Operation.Instance is IInvocationOperation invocation && invocation.TargetMethod.Name == "Tag")
+            if (context.Operation.Instance is IAssignmentOperation assignment && assignment.Target.TrackedSymbol() is { Name: "tag" or "Tag" })
             {
-                var tagName = invocation.Arguments.First().Value.ConstantValue;
-                tagName.HasValue.Should().BeTrue("tag should have literal name");
-                tags.Add(((string)tagName.Value, context));
+                AddTagName(assignment.Value.ConstantValue, context);
+            }
+            else if (context.Operation.Instance is IInvocationOperation invocation && invocation.TargetMethod.Name == "Tag")
+            {
+                AddTagName(invocation.Arguments.First().Value.ConstantValue, context);
             }
             return context.State;
+        }
+
+        private void AddTagName(Optional<object> tagName, SymbolicContext context)
+        {
+            tagName.HasValue.Should().BeTrue("tag should have literal name");
+            tags.Add(((string)tagName.Value, context));
         }
 
         private static ISymbol Symbol(IOperation operation) =>
