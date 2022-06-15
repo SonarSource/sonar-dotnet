@@ -135,7 +135,7 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
             && other.PreservedSymbols.SetEquals(PreservedSymbols);
 
         public override string ToString() =>
-            Equals(Empty) ? "Empty" : SerializeException() + SerializeSymbols() + SerializeOperations() + SerializeCaptures();
+            Equals(Empty) ? "Empty" + Environment.NewLine : SerializeException() + SerializeSymbols() + SerializeOperations() + SerializeCaptures();
 
         private string SerializeException() =>
             Exception is null ? null : $"Exception: {Exception}{Environment.NewLine}";

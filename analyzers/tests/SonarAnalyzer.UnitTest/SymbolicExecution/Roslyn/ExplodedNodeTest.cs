@@ -134,6 +134,11 @@ namespace SonarAnalyzer.UnitTest.SymbolicExecution.Roslyn
             var cfg = TestHelper.CompileCfgBodyCS("var a = true;");
             var state = ProgramState.Empty.SetSymbolValue(cfg.Blocks[1].Operations[0].Children.First().TrackedSymbol(), new());
 
+            new ExplodedNode(cfg.Blocks[0], ProgramState.Empty, null).ToString().Should().BeIgnoringLineEndings(
+@"Block #0, Branching
+Empty
+");
+
             new ExplodedNode(cfg.Blocks[1], state, null).ToString().Should().BeIgnoringLineEndings(
 @"Block #1, Operation #0, LocalReferenceOperation / VariableDeclaratorSyntax: a = true
 Symbols:
