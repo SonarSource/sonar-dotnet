@@ -850,8 +850,7 @@ tag = ""End"";";
                 "BeforeTry",
                 "InTry",
                 "InCatch",
-                "End",
-                "End");     // FIXME: Should be removed
+                "End");
         }
 
         [TestMethod]
@@ -872,8 +871,7 @@ tag = ""End"";";
                 "BeforeTry",
                 "InTry",
                 "InCatch",
-                "End",
-                "End");     // FIXME: Should be removed
+                "End");
         }
 
         [TestMethod]
@@ -904,8 +902,7 @@ tag = ""End"";";
                 "End",
                 "InCatchArgumentNull",
                 "InCatchNotSupported",
-                "InCatchEverything",
-                "End"); // FIXME: Should be removed
+                "InCatchEverything");
         }
 
         [TestMethod]
@@ -931,9 +928,7 @@ tag = ""End"";";
                 "InTry",
                 "InFinally",    // Happy path
                 "InCatch",      // Exception thrown by Tag("InTry")
-                "End",
-                "InFinally",    // FIXME: With Exception after InCatch, should be removed
-                "End");         // FIXME: With Exception after InCatch, should be removed
+                "End");
         }
 
         [TestMethod]
@@ -966,9 +961,7 @@ tag = ""End"";";
                 "InInnerTry",
                 "End",
                 "AfterInnerTry",
-                "InInnerCatch",
-                "End",              // FIXME: Should be removed
-                "AfterInnerTry");   // FIXME: Should be removed
+                "InInnerCatch");
         }
 
         [TestMethod]
@@ -1001,8 +994,7 @@ tag = ""End"";";
                 "BeforeInnerTry",
                 "InInnerTry",
                 "AfterInnerTry",
-                "InInnerCatch",
-                "End"); // FIXME: Should be removed
+                "InInnerCatch");
         }
 
         [TestMethod]
@@ -1037,13 +1029,10 @@ tag = ""End"";";
                 "InOuterTry",
                 "BeforeInnerTry",
                 "InOuterCatch",
-                "BeforeInnerTry",   // FIXME: Should be removed
                 "InInnerTry",
                 "AfterInnerTry",
                 "InInnerCatch",
-                "InInnerTry",       // FIXME: Should be removed
-                "End",
-                "AfterInnerTry");   // FIXME: Should be removed
+                "End");
         }
 
         [TestMethod]
@@ -1069,9 +1058,7 @@ tag = ""End"";";
                 "InTry",
                 "InFinally",
                 "InCatch",
-                "End",
-                "InFinally",    // FIXME: Should be removed
-                "End");         // FIXME: Should be removed
+                "End");
         }
 
         [TestMethod]
@@ -1112,9 +1099,7 @@ tag = ""End"";";
                 "InCatchAll",
                 "InCatchAllWhen",
                 "End",
-                "InCatchArgumentWhen",
-                "InFinally",        // FIXME: SHould be removed
-                "End");             // FIXME: SHould be removed
+                "InCatchArgumentWhen");
         }
 
         [TestMethod]
@@ -1140,9 +1125,7 @@ tag = ""End"";";
                 "InTry",
                 "InFinally",
                 "InCatch",
-                "End",
-                "InFinally",    // FIXME: Should be removed
-                "End");         // FIXME: Should be removed
+                "End");
         }
 
         private static void ValidateHasOnlyUnknownExceptionAndSystemException(ValidatorTestCheck validator, string stateName) =>
