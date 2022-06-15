@@ -832,6 +832,319 @@ tag = ""After"";";
                 "InNestedTry"); // ToDo: the rest of the tags are missing since we don't support Conversion operation
         }
 
+        [TestMethod]
+        public void Catch_Simple_NoFilter()
+        {
+            const string code = @"
+var tag = ""BeforeTry"";
+try
+{
+    Tag(""InTry"");
+}
+catch
+{
+    tag = ""InCatch"";
+}
+tag = ""End"";";
+            SETestContext.CreateCS(code).Validator.ValidateTagOrder(
+                "BeforeTry",
+                "InTry",
+                "InCatch",
+                "End",
+                "End");     // FIXME: Should be removed
+        }
+
+        [TestMethod]
+        public void Catch_Simple_TypeFilter()
+        {
+            const string code = @"
+var tag = ""BeforeTry"";
+try
+{
+    Tag(""InTry"");
+}
+catch (Exception)
+{
+    tag = ""InCatch"";
+}
+tag = ""End"";";
+            SETestContext.CreateCS(code).Validator.ValidateTagOrder(
+                "BeforeTry",
+                "InTry",
+                "InCatch",
+                "End",
+                "End");     // FIXME: Should be removed
+        }
+
+        [TestMethod]
+        public void Catch_Multiple()
+        {
+            const string code = @"
+var tag = ""BeforeTry"";
+try
+{
+    Tag(""InTry"");
+}
+catch (ArgumentNullException ex)
+{
+    tag = ""InCatchArgumentNull"";
+}
+catch (NotSupportedException ex)
+{
+    tag = ""InCatchNotSupported"";
+}
+catch (Exception ex)
+{
+    tag = ""InCatchEverything"";
+}
+tag = ""End"";";
+            SETestContext.CreateCS(code).Validator.ValidateTagOrder(
+                "BeforeTry",
+                "InTry",
+                "End",
+                "InCatchArgumentNull",
+                "InCatchNotSupported",
+                "InCatchEverything",
+                "End"); // FIXME: Should be removed
+        }
+
+        [TestMethod]
+        public void Catch_Finally()
+        {
+            const string code = @"
+var tag = ""BeforeTry"";
+try
+{
+    Tag(""InTry"");
+}
+catch (Exception ex)
+{
+    tag = ""InCatch"";
+}
+finally
+{
+    tag = ""InFinally"";
+}
+tag = ""End"";";
+            SETestContext.CreateCS(code).Validator.ValidateTagOrder(
+                "BeforeTry",
+                "InTry",
+                "InFinally",    // Happy path
+                "InCatch",      // Exception thrown by Tag("InTry")
+                "End",
+                "InFinally",    // FIXME: With Exception after InCatch, should be removed
+                "End");         // FIXME: With Exception after InCatch, should be removed
+        }
+
+        [TestMethod]
+        public void Catch_NestedInTry()
+        {
+            const string code = @"
+var tag = ""BeforeOuterTry"";
+try
+{
+    Tag(""BeforeInnerTry"");    // Can throw
+    try
+    {
+        Tag(""InInnerTry"");    // Can throw
+    }
+    catch (Exception exInner)
+    {
+        tag = ""InInnerCatch"";
+    }
+    tag = ""AfterInnerTry"";
+}
+catch (Exception ex)
+{
+    tag = ""InOuterCatch"";
+}
+tag = ""End"";";
+            SETestContext.CreateCS(code).Validator.ValidateTagOrder(
+                "BeforeOuterTry",
+                "BeforeInnerTry",
+                "InOuterCatch",
+                "InInnerTry",
+                "End",
+                "AfterInnerTry",
+                "InInnerCatch",
+                "End",              // FIXME: Should be removed
+                "AfterInnerTry");   // FIXME: Should be removed
+        }
+
+        [TestMethod]
+        public void Catch_NestedInCatch()
+        {
+            const string code = @"
+var tag = ""BeforeOuterTry"";
+try
+{
+    Tag(""InOuterTry"");
+}
+catch (Exception ex)
+{
+    tag = ""BeforeInnerTry"";
+    try
+    {
+        Tag(""InInnerTry"");
+    }
+    catch (Exception exInner)
+    {
+        tag = ""InInnerCatch"";
+    }
+    tag = ""AfterInnerTry"";
+}
+tag = ""End"";";
+            SETestContext.CreateCS(code).Validator.ValidateTagOrder(
+                "BeforeOuterTry",
+                "InOuterTry",
+                "End",
+                "BeforeInnerTry",
+                "InInnerTry",
+                "AfterInnerTry",
+                "InInnerCatch",
+                "End"); // FIXME: Should be removed
+        }
+
+        [TestMethod]
+        public void Catch_NestedInFinally()
+        {
+            const string code = @"
+var tag = ""BeforeOuterTry"";
+try
+{
+    Tag(""InOuterTry"");
+}
+catch (Exception ex)
+{
+    tag = ""InOuterCatch"";
+}
+finally
+{
+    tag = ""BeforeInnerTry"";
+    try
+    {
+        Tag(""InInnerTry"");
+    }
+    catch (Exception exInner)
+    {
+        tag = ""InInnerCatch"";
+    }
+    tag = ""AfterInnerTry"";
+}
+tag = ""End"";";
+            SETestContext.CreateCS(code).Validator.ValidateTagOrder(
+                "BeforeOuterTry",
+                "InOuterTry",
+                "BeforeInnerTry",
+                "InOuterCatch",
+                "BeforeInnerTry",   // FIXME: Should be removed
+                "InInnerTry",
+                "AfterInnerTry",
+                "InInnerCatch",
+                "InInnerTry",       // FIXME: Should be removed
+                "End",
+                "AfterInnerTry");   // FIXME: Should be removed
+        }
+
+        [TestMethod]
+        public void CatchWhen_Simple()
+        {
+            const string code = @"
+var tag = ""BeforeTry"";
+try
+{
+    Tag(""InTry"");
+}
+catch (Exception ex) when (ex is FormatException)
+{
+    tag = ""InCatch"";
+}
+finally
+{
+    tag = ""InFinally"";
+}
+tag = ""End"";";
+            SETestContext.CreateCS(code).Validator.ValidateTagOrder(
+                "BeforeTry",
+                "InTry",
+                "InFinally",
+                "InCatch",
+                "End",
+                "InFinally",    // FIXME: Should be removed
+                "End");         // FIXME: Should be removed
+        }
+
+        [TestMethod]
+        public void CatchWhen_Multiple()
+        {
+            const string code = @"
+var tag = ""BeforeTry"";
+try
+{
+    Tag(""InTry"");
+}
+catch (ArgumentNullException ex) when (ex.ParamName == ""value"")
+{
+    tag = ""InCatchArgumentWhen"";
+}
+catch (ArgumentNullException ex)
+{
+    tag = ""InCatchArgument"";
+}
+catch (Exception ex) when (ex is ArgumentNullException)
+{
+    tag = ""InCatchAllWhen"";
+}
+catch (Exception ex)
+{
+    tag = ""InCatchAll"";
+}
+finally
+{
+    tag = ""InFinally"";
+}
+tag = ""End"";";
+            SETestContext.CreateCS(code).Validator.ValidateTagOrder(
+                "BeforeTry",
+                "InTry",
+                "InFinally",
+                "InCatchArgument",
+                "InCatchAll",
+                "InCatchAllWhen",
+                "End",
+                "InCatchArgumentWhen",
+                "InFinally",        // FIXME: SHould be removed
+                "End");             // FIXME: SHould be removed
+        }
+
+        [TestMethod]
+        public void CatchWhen_Finally()
+        {
+            const string code = @"
+var tag = ""BeforeTry"";
+try
+{
+    Tag(""InTry"");
+}
+catch (Exception ex) when (ex is ArgumentNullException)
+{
+    tag = ""InCatch"";
+}
+finally
+{
+    tag = ""InFinally"";
+}
+tag = ""End"";";
+            SETestContext.CreateCS(code).Validator.ValidateTagOrder(
+                "BeforeTry",
+                "InTry",
+                "InFinally",
+                "InCatch",
+                "End",
+                "InFinally",    // FIXME: Should be removed
+                "End");         // FIXME: Should be removed
+        }
+
         private static void ValidateHasOnlyUnknownExceptionAndSystemException(ValidatorTestCheck validator, string stateName) =>
             validator.TagStates(stateName).Should().HaveCount(2)
                 .And.ContainSingle(x => HasUnknownException(x))
