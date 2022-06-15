@@ -61,7 +61,7 @@ public class MutexTest
         if (doesNotExist)
         {
             // The mutex does not exist, so create it.
-            m = new Mutex(true, mutexName, out mutexWasCreated, mutexSecurity); // Noncompliant FP, because the rule doesn't support out mutexWasCreated
+            m = new Mutex(true, mutexName, out mutexWasCreated, mutexSecurity); // Noncompliant FP, because the rule is not aware that the mutex didn't exist before and doesn't support out mutexWasCreated. Only awareness of both can fix it.
             if (!mutexWasCreated)
             {
                 // unable to create the mutex
