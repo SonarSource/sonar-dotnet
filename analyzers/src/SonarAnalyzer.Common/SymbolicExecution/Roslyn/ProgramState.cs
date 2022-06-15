@@ -83,6 +83,9 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
         public ProgramState SetException(ExceptionState exception) =>
             this with { Exception = exception };
 
+        public ProgramState ResetException() =>
+            this with { Exception = null };
+
         public ProgramState SetException(ITypeSymbol exception) =>
             this with { Exception = new(exception) };
 
