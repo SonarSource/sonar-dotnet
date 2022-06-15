@@ -46,5 +46,11 @@ namespace SonarAnalyzer.Extensions
             }
             return region;
         }
+
+        public static ControlFlowRegion EnclosingRegion(this ControlFlowRegion region, ControlFlowRegionKind kind) =>
+            region.EnclosingRegion.EnclosingRegionOrSelf(kind);
+
+        public static ControlFlowRegion NestedRegion(this ControlFlowRegion region, ControlFlowRegionKind kind) =>
+            region.NestedRegions.Single(x => x.Kind == kind);
     }
 }

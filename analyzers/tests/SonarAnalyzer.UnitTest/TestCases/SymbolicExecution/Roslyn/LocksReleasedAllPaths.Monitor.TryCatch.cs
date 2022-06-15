@@ -197,5 +197,78 @@ namespace Monitor_TryCatch
                 Monitor.Exit(obj);
             }
         }
+
+        public void Finally_Simple()
+        {
+            Monitor.Enter(obj);     // Compliant
+            try
+            {
+                Console.WriteLine("CanThrow");
+            }
+            finally
+            {
+                Monitor.Exit(obj);
+            }
+        }
+
+        public void Finally_Nested()
+        {
+            Monitor.Enter(obj);     // Compliant
+            try
+            {
+                Console.WriteLine("Can throw");
+                try
+                {
+                    Console.WriteLine("Can also throw");
+                }
+                finally
+                {
+                    Console.WriteLine("Can also throw from finally when disposing something");
+                }
+            }
+            finally
+            {
+                Monitor.Exit(obj);
+            }
+        }
+
+        public void Finally_Nested_ReleasedInWrongFinally()
+        {
+            Monitor.Enter(obj);     // Noncompliant
+            try
+            {
+                Console.WriteLine("Can throw");
+                try
+                {
+                    Console.WriteLine("Can also throw");
+                }
+                finally
+                {
+                    Monitor.Exit(obj);  // Wrong place
+                }
+            }
+            finally
+            {
+                Console.WriteLine("Lock should be released here");
+            }
+        }
+
+
+        public void Finally_Foreach(int[] values)
+        {
+            Monitor.Enter(obj);     // Compliant
+            try
+            {
+                Console.WriteLine("CanThrow");
+                foreach(var value in values)    // Produces implicit try/finally
+                {
+                    Console.WriteLine(value);   // Can throw
+                }
+            }
+            finally
+            {
+                Monitor.Exit(obj);
+            }
+        }
     }
 }

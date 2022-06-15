@@ -27,7 +27,6 @@ namespace SonarAnalyzer.UnitTest.SymbolicExecution.Roslyn
     {
         [DataTestMethod]
         [DataRow("for (var i = 0; i < items.Length; i++)")]
-        [DataRow("foreach (var i in items)")]
         [DataRow("while (value > 0)")]
         [DataRow("while (Condition)")]
         public void Loops_InstructionVisitedMaxTwice(string loop)
@@ -43,6 +42,24 @@ Tag(""End"", value);";
             var validator = SETestContext.CreateCS(code, ", int[] items", new AddConstraintOnInvocationCheck(), new PreserveTestCheck("value")).Validator;
             validator.ValidateExitReachCount(2);
             validator.TagValues("End").Should().HaveCount(2)
+                .And.ContainSingle(x => x == null)
+                .And.ContainSingle(x => x != null && x.HasConstraint(TestConstraint.First) && !x.HasConstraint(BoolConstraint.True));
+        }
+
+        [TestMethod]
+        public void Loops_InstructionVisitedMaxTwice_ForEach()
+        {
+            const string code = @"
+var value = 42;
+foreach (var i in items)
+{{
+    value.ToString(); // Add another constraint to 'value'
+    value--;
+}}
+Tag(""End"", value);";
+            var validator = SETestContext.CreateCS(code, ", int[] items", new AddConstraintOnInvocationCheck(), new PreserveTestCheck("value")).Validator;
+            validator.ValidateExitReachCount(4);                // foreach produces implicit TryFinally region where it can throw and changes the flow
+            validator.TagValues("End").Should().HaveCount(2)    // These Exception flows do not reach the Tag("End") line
                 .And.ContainSingle(x => x == null)
                 .And.ContainSingle(x => x != null && x.HasConstraint(TestConstraint.First) && !x.HasConstraint(BoolConstraint.True));
         }
