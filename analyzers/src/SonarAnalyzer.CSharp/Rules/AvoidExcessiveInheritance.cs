@@ -41,7 +41,7 @@ namespace SonarAnalyzer.Rules.CSharp
         private const string MessageFormat = "This {0} has {1} parents which is greater than {2} authorized.";
         private const string FilteredClassesDefaultValue = "";
         private const int MaximumDepthDefaultValue = 5;
-        private static readonly DiagnosticDescriptor Rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager, false);
+        private static readonly DiagnosticDescriptor Rule = DescriptorFactory.Create(DiagnosticId, MessageFormat, false);
         private string filteredClasses = FilteredClassesDefaultValue;
         private ICollection<Regex> filters = new List<Regex>();
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);

@@ -46,7 +46,7 @@ namespace SonarAnalyzer.Rules.CSharp
         private const string TelnetKey = "telnet";
         private const string EnableSslName = "EnableSsl";
 
-        private static readonly DiagnosticDescriptor DefaultRule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager).WithNotConfigurable();
+        private static readonly DiagnosticDescriptor DefaultRule = DescriptorFactory.Create(DiagnosticId, MessageFormat).WithNotConfigurable();
         private static readonly DiagnosticDescriptor EnableSslRule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, EnableSslMessage, RspecStrings.ResourceManager).WithNotConfigurable();
 
         private readonly Dictionary<string, string> recommendedProtocols = new Dictionary<string, string>

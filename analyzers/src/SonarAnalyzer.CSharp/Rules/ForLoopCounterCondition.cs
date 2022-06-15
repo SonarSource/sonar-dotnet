@@ -39,7 +39,7 @@ namespace SonarAnalyzer.Rules.CSharp
         private const string MessageFormatNotEmpty = "This loop's stop condition tests {0} but the incrementer updates {1}.";
         private const string MessageFormatEmpty = "This loop's stop incrementer updates {0} but the stop condition doesn't test any variables.";
 
-        private static readonly DiagnosticDescriptor Rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
+        private static readonly DiagnosticDescriptor Rule = DescriptorFactory.Create(DiagnosticId, MessageFormat);
 
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
 

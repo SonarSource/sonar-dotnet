@@ -35,7 +35,7 @@ namespace SonarAnalyzer.Rules.CSharp
         private const string DiagnosticId = "S2330";
         private const string MessageFormat = "Refactor the code to not rely on potentially unsafe array conversions.";
 
-        private static readonly DiagnosticDescriptor Rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
+        private static readonly DiagnosticDescriptor Rule = DescriptorFactory.Create(DiagnosticId, MessageFormat);
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
 
         protected override void Initialize(SonarAnalysisContext context)

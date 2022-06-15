@@ -36,7 +36,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
 
         private const string DefaultPattern = "^(([a-z][a-z0-9]*)?" + NamingHelper.PascalCasingInternalPattern + "_)?" + NamingHelper.PascalCasingInternalPattern + "$";
 
-        private static readonly DiagnosticDescriptor Rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager, isEnabledByDefault: false);
+        private static readonly DiagnosticDescriptor Rule = DescriptorFactory.Create(DiagnosticId, MessageFormat, isEnabledByDefault: false);
 
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
 

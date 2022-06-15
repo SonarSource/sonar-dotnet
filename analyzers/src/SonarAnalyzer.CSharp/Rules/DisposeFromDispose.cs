@@ -39,7 +39,7 @@ namespace SonarAnalyzer.Rules.CSharp
         private const string DisposeMethodName = nameof(IDisposable.Dispose);
         private const string DisposeMethodExplicitName = "System.IDisposable.Dispose";
 
-        private static readonly DiagnosticDescriptor Rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
+        private static readonly DiagnosticDescriptor Rule = DescriptorFactory.Create(DiagnosticId, MessageFormat);
 
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
 

@@ -39,7 +39,7 @@ namespace SonarAnalyzer.Rules.CSharp
         private const string DiagnosticId = "S4057";
         private const string MessageFormat = "Set the locale for this '{0}'.";
 
-        private static readonly DiagnosticDescriptor Rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
+        private static readonly DiagnosticDescriptor Rule = DescriptorFactory.Create(DiagnosticId, MessageFormat);
         private static readonly ImmutableArray<KnownType> CheckedTypes = ImmutableArray.Create(
             KnownType.System_Data_DataTable,
             KnownType.System_Data_DataSet);

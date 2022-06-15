@@ -36,7 +36,7 @@ namespace SonarAnalyzer.Rules.CSharp
         internal const string DiagnosticId = "S2760";
         private const string MessageFormat = "This condition was just checked on line {0}.";
 
-        private static readonly DiagnosticDescriptor Rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
+        private static readonly DiagnosticDescriptor Rule = DescriptorFactory.Create(DiagnosticId, MessageFormat);
 
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
 

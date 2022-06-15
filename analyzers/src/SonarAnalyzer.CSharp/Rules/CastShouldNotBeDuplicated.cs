@@ -41,7 +41,7 @@ namespace SonarAnalyzer.Rules.CSharp
         private const string RemoveRedundantCastAnotherVariableMessage = "Remove this cast and use the appropriate variable.";
         private const string RemoveRedundantCastMessage = "Remove this redundant cast.";
 
-        private static readonly DiagnosticDescriptor Rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
+        private static readonly DiagnosticDescriptor Rule = DescriptorFactory.Create(DiagnosticId, MessageFormat);
 
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
 

@@ -33,7 +33,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
         internal const string DiagnosticId = "S1645";
         private const string MessageFormat = "Switch this use of the '+' operator to the '&'.";
 
-        private static readonly DiagnosticDescriptor Rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
+        private static readonly DiagnosticDescriptor Rule = DescriptorFactory.Create(DiagnosticId, MessageFormat);
 
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
 

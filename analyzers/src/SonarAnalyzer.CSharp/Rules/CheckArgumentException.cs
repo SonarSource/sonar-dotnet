@@ -41,7 +41,7 @@ namespace SonarAnalyzer.Rules.CSharp
         private const string ConstructorParametersInverted = "ArgumentException constructor arguments have been inverted.";
         private const string InvalidParameterName = "The parameter name '{0}' is not declared in the argument list.";
 
-        private static readonly DiagnosticDescriptor Rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
+        private static readonly DiagnosticDescriptor Rule = DescriptorFactory.Create(DiagnosticId, MessageFormat);
 
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
 

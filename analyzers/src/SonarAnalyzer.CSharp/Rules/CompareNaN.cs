@@ -35,7 +35,7 @@ namespace SonarAnalyzer.Rules.CSharp
         private const string DiagnosticId = "S2688";
         private const string MessageFormat = "Use {0}.IsNaN() instead.";
 
-        private static readonly DiagnosticDescriptor Rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
+        private static readonly DiagnosticDescriptor Rule = DescriptorFactory.Create(DiagnosticId, MessageFormat);
         private static readonly Dictionary<KnownType, string> KnownTypeAliasMap = new()
         {
             { KnownType.System_Byte, "byte" },

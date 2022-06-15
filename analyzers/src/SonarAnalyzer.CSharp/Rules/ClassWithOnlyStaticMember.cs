@@ -37,7 +37,7 @@ namespace SonarAnalyzer.Rules.CSharp
         private const string MessageFormatConstructor = "Hide this public constructor by making it '{0}'.";
         private const string MessageFormatStaticClass = "Add a '{0}' constructor or the 'static' keyword to the class declaration.";
 
-        private static readonly DiagnosticDescriptor Rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
+        private static readonly DiagnosticDescriptor Rule = DescriptorFactory.Create(DiagnosticId, MessageFormat);
         private static readonly ISet<Accessibility> ProblematicConstructorAccessibility = new HashSet<Accessibility>
         {
             Accessibility.Public,

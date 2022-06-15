@@ -38,7 +38,7 @@ namespace SonarAnalyzer.Rules.CSharp
         private const string MessageFormat = "Remove the unused event '{0}' or invoke it.";
 
         private static readonly Accessibility MaxAccessibility = Accessibility.Public;
-        private static readonly DiagnosticDescriptor Rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
+        private static readonly DiagnosticDescriptor Rule = DescriptorFactory.Create(DiagnosticId, MessageFormat);
         private static readonly ISet<SyntaxKind> EventSyntax = new HashSet<SyntaxKind>
         {
             SyntaxKind.EventFieldDeclaration,

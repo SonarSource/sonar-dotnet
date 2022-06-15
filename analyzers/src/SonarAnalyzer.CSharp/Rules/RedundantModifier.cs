@@ -38,7 +38,7 @@ namespace SonarAnalyzer.Rules.CSharp
         internal const string DiagnosticId = "S2333";
         private const string MessageFormat = "'{0}' is {1} in this context.";
 
-        private static readonly DiagnosticDescriptor Rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
+        private static readonly DiagnosticDescriptor Rule = DescriptorFactory.Create(DiagnosticId, MessageFormat);
 
         private static readonly ISet<SyntaxKind> UnsafeConstructKinds = new HashSet<SyntaxKind>
         {

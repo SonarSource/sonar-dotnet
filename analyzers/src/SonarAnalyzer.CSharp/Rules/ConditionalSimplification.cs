@@ -43,7 +43,7 @@ namespace SonarAnalyzer.Rules.CSharp
         private const string CoalesceOp = "??";
         private const string TernaryOp = "?:";
 
-        private static readonly DiagnosticDescriptor Rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
+        private static readonly DiagnosticDescriptor Rule = DescriptorFactory.Create(DiagnosticId, MessageFormat);
         private static readonly DiagnosticDescriptor RuleMultipleNegation = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageMultipleNegation, RspecStrings.ResourceManager);
 
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule, RuleMultipleNegation);

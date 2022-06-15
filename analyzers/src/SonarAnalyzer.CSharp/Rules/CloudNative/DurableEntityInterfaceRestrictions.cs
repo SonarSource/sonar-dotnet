@@ -37,7 +37,7 @@ namespace SonarAnalyzer.Rules.CSharp
         private const string SignalEntityAsyncName = "SignalEntityAsync";
         private const string CreateEntityProxyName = "CreateEntityProxy";
 
-        private static readonly DiagnosticDescriptor Rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
+        private static readonly DiagnosticDescriptor Rule = DescriptorFactory.Create(DiagnosticId, MessageFormat);
 
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(Rule);
 

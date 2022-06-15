@@ -33,7 +33,7 @@ namespace SonarAnalyzer.Rules.CSharp
         internal const string DiagnosticId = "S1199";
         private const string MessageFormat = "Extract this nested code block into a separate method.";
 
-        private static readonly DiagnosticDescriptor Rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
+        private static readonly DiagnosticDescriptor Rule = DescriptorFactory.Create(DiagnosticId, MessageFormat);
 
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(Rule);
 

@@ -38,7 +38,7 @@ namespace SonarAnalyzer.Rules.CSharp
         private const string DiagnosticId = "S6420";
         private const string MessageFormat = "Reuse client instances rather than creating new ones with each function invocation.";
 
-        private static readonly DiagnosticDescriptor Rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
+        private static readonly DiagnosticDescriptor Rule = DescriptorFactory.Create(DiagnosticId, MessageFormat);
         private static readonly KnownType[] ReusableClients =
             {
                 KnownType.System_Net_Http_HttpClient,

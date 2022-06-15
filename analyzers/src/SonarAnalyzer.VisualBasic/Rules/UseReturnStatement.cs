@@ -36,7 +36,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
         private const string UseReturnStatementMessage = "Use a 'Return' statement; assigning returned values to function names is obsolete.";
         private const string DontUseImplicitMessage = "Do not make use of the implicit return value.";
 
-        private static readonly DiagnosticDescriptor Rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
+        private static readonly DiagnosticDescriptor Rule = DescriptorFactory.Create(DiagnosticId, MessageFormat);
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(Rule);
 
         protected override void Initialize(SonarAnalysisContext context) =>

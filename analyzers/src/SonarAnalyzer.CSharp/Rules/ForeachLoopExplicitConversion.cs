@@ -33,7 +33,7 @@ namespace SonarAnalyzer.Rules.CSharp
         internal const string DiagnosticId = "S3217";
         private const string MessageFormat = "Either change the type of '{0}' to '{1}' or iterate on a generic collection of type '{2}'.";
 
-        private static readonly DiagnosticDescriptor Rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
+        private static readonly DiagnosticDescriptor Rule = DescriptorFactory.Create(DiagnosticId, MessageFormat);
 
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
 

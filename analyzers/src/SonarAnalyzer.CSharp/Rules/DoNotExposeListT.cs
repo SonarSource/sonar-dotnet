@@ -34,7 +34,7 @@ namespace SonarAnalyzer.Rules.CSharp
         private const string DiagnosticId = "S3956";
         private const string MessageFormat = "Refactor this {0} to use a generic collection designed for inheritance.";
 
-        private static readonly DiagnosticDescriptor Rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
+        private static readonly DiagnosticDescriptor Rule = DescriptorFactory.Create(DiagnosticId, MessageFormat);
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
 
         protected override void Initialize(SonarAnalysisContext context)
