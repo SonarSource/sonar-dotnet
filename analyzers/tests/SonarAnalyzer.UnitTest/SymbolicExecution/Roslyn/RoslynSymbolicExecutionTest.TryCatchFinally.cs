@@ -182,6 +182,45 @@ Tag(""AfterOuterFinally"", value);";
         }
 
         [TestMethod]
+        public void Finally_NestedInFinally_InstructionAfterFinally_NoThrowsInFinally()
+        {
+            const string code = @"
+var value = false;
+try
+{
+    Tag(""InOuterTry"");    // This can throw
+}
+finally
+{
+    try
+    {
+        value = false;          // Operation that cannot throw - this doesn't do anything
+    }
+    finally
+    {
+        var something = true;   // Operation that cannot throw
+    }
+    value = true;
+
+    Tag(""InOuterFinally"", value);
+}
+Tag(""AfterOuterFinally"", value);";
+            var validator = SETestContext.CreateCS(code, new PreserveTestCheck("value")).Validator;
+            validator.ValidateTagOrder(
+                "InOuterTry",
+                "InOuterFinally",       // With Exception thrown by Tag("InOuterTry")
+                "InOuterFinally",
+                "AfterOuterFinally");
+
+            validator.TagStates("InOuterFinally").Should().HaveCount(2)
+                .And.ContainSingle(x => x.Exception == null && x.SymbolsWith(BoolConstraint.True).Any(symbol => symbol.Name == "value"))
+                .And.ContainSingle(x => x.Exception != null && x.SymbolsWith(BoolConstraint.True).Any(symbol => symbol.Name == "value"));
+            validator.TagStates("AfterOuterFinally").Should().HaveCount(1)  // Not visited by flow with Exception
+                .And.ContainSingle(x => x.Exception == null && x.SymbolsWith(BoolConstraint.True).Any(symbol => symbol.Name == "value"));
+            validator.ValidateExitReachCount(2);
+        }
+
+        [TestMethod]
         public void Finally_BranchInNested()
         {
             const string code = @"

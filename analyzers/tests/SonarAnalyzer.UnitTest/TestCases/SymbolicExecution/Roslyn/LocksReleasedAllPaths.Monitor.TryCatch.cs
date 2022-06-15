@@ -232,6 +232,28 @@ namespace Monitor_TryCatch
             }
         }
 
+        public void Finally_Nested_ReleasedInWrongFinally()
+        {
+            Monitor.Enter(obj);     // Noncompliant
+            try
+            {
+                Console.WriteLine("Can throw");
+                try
+                {
+                    Console.WriteLine("Can also throw");
+                }
+                finally
+                {
+                    Monitor.Exit(obj);  // Wrong place
+                }
+            }
+            finally
+            {
+                Console.WriteLine("Lock should be released here");
+            }
+        }
+
+
         public void Finally_Foreach(int[] values)
         {
             Monitor.Enter(obj);     // Compliant

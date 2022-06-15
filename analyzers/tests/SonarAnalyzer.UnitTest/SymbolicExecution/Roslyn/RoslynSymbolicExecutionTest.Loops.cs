@@ -49,7 +49,7 @@ Tag(""End"", value);";
         [TestMethod]
         public void Loops_InstructionVisitedMaxTwice_ForEach()
         {
-            var code = @"
+            const string code = @"
 var value = 42;
 foreach (var i in items)
 {{
