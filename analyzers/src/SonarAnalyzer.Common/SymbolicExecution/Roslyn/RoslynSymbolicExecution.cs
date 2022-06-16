@@ -92,43 +92,47 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
             {
                 checks.ExitReached(new(null, node.State));
             }
+            else if (node.Block.ContainsThrow())
+            {
+                foreach (var successor in ExceptionSuccessors(node, ThrowExceptionType(node.Block.BranchValue)))
+                {
+                    yield return successor;
+                }
+            }
             else
             {
                 foreach (var successor in node.Block.Successors.Where(x => IsReachable(node, x)))
                 {
-                    foreach (var successorNode in ProcessBranch(node, successor).WhereNotNull())
+                    if (ProcessBranch(node, successor) is { } newNode)
                     {
-                        yield return successorNode;
+                        yield return newNode;
                     }
                 }
             }
         }
 
-        private IEnumerable<ExplodedNode> ProcessBranch(ExplodedNode node, ControlFlowBranch branch)
+        private ExplodedNode ProcessBranch(ExplodedNode node, ControlFlowBranch branch)
         {
             if (branch.Destination is not null)
             {
-                yield return branch.FinallyRegions.Any() // When exiting finally region(s), redirect to 1st finally instead of the normal destination
+                return branch.FinallyRegions.Any() // When exiting finally region(s), redirect to 1st finally instead of the normal destination
                     ? FromFinally(new FinallyPoint(node.FinallyPoint, branch))
                     : CreateNode(branch.Destination, node.FinallyPoint);
             }
-            else if (node.Block.ContainsThrow())
-            {
-                foreach (var successor in ExceptionSuccessors(node, ExceptionCandidate(node.Block.BranchValue)))
-                {
-                    yield return successor;
-                }
-            }
             else if (branch.Source.EnclosingRegion.Kind == ControlFlowRegionKind.Finally && node.FinallyPoint is not null)
             {
-                yield return FromFinally(node.FinallyPoint.CreateNext());     // Redirect from finally back to the original place (or outer finally on the same branch)
+                return FromFinally(node.FinallyPoint.CreateNext());     // Redirect from finally back to the original place (or outer finally on the same branch)
             }
             else if (branch.Source.EnclosingRegion.Kind == ControlFlowRegionKind.Finally && node.State.Exception is not null)
             {
                 var currentTryAndFinally = branch.Source.EnclosingRegion.EnclosingRegion;
-                yield return currentTryAndFinally.EnclosingRegion(ControlFlowRegionKind.TryAndFinally) is { } outerTryAndFinally
+                return currentTryAndFinally.EnclosingRegion(ControlFlowRegionKind.TryAndFinally) is { } outerTryAndFinally
                     ? CreateNode(cfg.Blocks[outerTryAndFinally.NestedRegion(ControlFlowRegionKind.Finally).FirstBlockOrdinal], null)
                     : new(cfg.ExitBlock, node.State, null);
+            }
+            else
+            {
+                return null;    // We don't know where to continue
             }
 
             ExplodedNode FromFinally(FinallyPoint finallyPoint) =>
@@ -185,15 +189,15 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
                 }
             }
 
-            foreach (var explodedNode in ExceptionSuccessors(node, ExceptionCandidate(node.Operation.Instance)))
+            foreach (var successor in ExceptionSuccessors(node, ExceptionCandidate(node.Operation)))
             {
-                yield return explodedNode;
+                yield return successor;
             }
         }
 
         private IEnumerable<ExplodedNode> ExceptionSuccessors(ExplodedNode node, ExceptionState exception)
         {
-            if (exception is { } && node.Block.EnclosingRegion(ControlFlowRegionKind.Try) is { } tryRegion)
+            if (exception is not null && node.Block.EnclosingRegion(ControlFlowRegionKind.Try) is { } tryRegion)
             {
                 // We're jumping out of the outer statement => We need to reset operation states.
                 var state = node.State.ResetOperations().SetException(exception);
@@ -219,11 +223,17 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
                 _ => context.State
             };
 
-        private static ExceptionState ExceptionCandidate(IOperation operation) =>
+        private static ExceptionState ThrowExceptionType(IOperation operation) =>
             operation.Kind switch
             {
-                OperationKindEx.Invocation => ExceptionState.UnknownException,
                 OperationKindEx.ObjectCreation => new ExceptionState(operation.Type),
+                _ => null
+            };
+
+        private static ExceptionState ExceptionCandidate(IOperationWrapperSonar operation) =>
+            operation.Instance.Kind switch
+            {
+                OperationKindEx.Invocation => ExceptionState.UnknownException,
                 // ToDo: Support other operations like field/property access on non-static non-this, conversions and so on. See docs for list of operations.
                 _ => null
             };
