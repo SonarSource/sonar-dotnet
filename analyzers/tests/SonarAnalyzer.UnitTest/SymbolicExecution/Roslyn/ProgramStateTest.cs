@@ -170,7 +170,9 @@ namespace SonarAnalyzer.UnitTest.SymbolicExecution.Roslyn
 
         [TestMethod]
         public void ToString_Empty() =>
-            ProgramState.Empty.ToString().Should().Be("Empty");
+            ProgramState.Empty.ToString().Should().BeIgnoringLineEndings(
+@"Empty
+");
 
         [TestMethod]
         public void ToString_WithSymbols()
@@ -178,7 +180,9 @@ namespace SonarAnalyzer.UnitTest.SymbolicExecution.Roslyn
             var assignment = TestHelper.CompileCfgBodyCS("var a = true;").Blocks[1].Operations[0];
             var variableSymbol = assignment.Children.First().TrackedSymbol();
             var sut = ProgramState.Empty.SetSymbolValue(variableSymbol, null);
-            sut.ToString().Should().Be("Empty");
+            sut.ToString().Should().BeIgnoringLineEndings(
+@"Empty
+");
 
             sut = ProgramState.Empty.SetSymbolValue(variableSymbol, new());
             sut.ToString().Should().BeIgnoringLineEndings(
@@ -200,7 +204,9 @@ Sample.Main(): Second
         {
             var assignment = TestHelper.CompileCfgBodyCS("var a = true;").Blocks[1].Operations[0];
             var sut = ProgramState.Empty.SetOperationValue(assignment, null);
-            sut.ToString().Should().Be("Empty");
+            sut.ToString().Should().BeIgnoringLineEndings(
+@"Empty
+");
 
             sut = ProgramState.Empty.SetOperationValue(assignment, new());
             sut.ToString().Should().BeIgnoringLineEndings(
