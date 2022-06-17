@@ -518,6 +518,64 @@ tag = ""AfterCatch"";";
         }
 
         [TestMethod]
+        public void TryCatch_ThrowInTry_SingleCatchBlock_ReThrow()
+        {
+            const string code = @"
+var tag = ""BeforeTry"";
+try
+{
+    Tag(""InTry"");
+    throw new System.Exception();
+    tag = ""UnreachableInFinally"";
+}
+catch
+{
+    tag = ""InCatch"";
+    throw;
+}
+tag = ""UnreachableAfterCatch"";";
+            var validator = SETestContext.CreateCS(code).Validator;
+            validator.ValidateTagOrder(
+                "BeforeTry",
+                "InTry",
+                "InCatch",          // With Exception thrown by Tag("InTry")
+                "InCatch");         // With Exception thrown by `throw`
+
+            validator.TagStates("InCatch").Should().HaveCount(2)
+                     .And.ContainSingle(x => HasUnknownException(x))
+                     .And.ContainSingle(x => HasExceptionOfTypeException(x));
+        }
+
+        [TestMethod]
+        public void TryCatch_ThrowInTry_SingleCatchBlock_ReThrowException()
+        {
+            const string code = @"
+var tag = ""BeforeTry"";
+try
+{
+    Tag(""InTry"");
+    throw new System.Exception();
+    tag = ""UnreachableInFinally"";
+}
+catch (Exception ex)
+{
+    tag = ""InCatch"";
+    throw ex;
+}
+tag = ""UnreachableAfterCatch"";";
+            var validator = SETestContext.CreateCS(code).Validator;
+            validator.ValidateTagOrder(
+                "BeforeTry",
+                "InTry",
+                "InCatch",          // With Exception thrown by Tag("InTry")
+                "InCatch");         // With Exception thrown by `throw`
+
+            validator.TagStates("InCatch").Should().HaveCount(2)
+                     .And.ContainSingle(x => HasUnknownException(x))
+                     .And.ContainSingle(x => HasExceptionOfTypeException(x));
+        }
+
+        [TestMethod]
         public void TryCatch_ThrowInTry_MultipleCatchBlocks()
         {
             const string code = @"
@@ -722,7 +780,7 @@ tag = ""UnreachableAfterFinally"";";
         }
 
         [TestMethod]
-        public void TryCatchFinally_NestedThrowWithCatchFilter()
+        public void TryCatch_NestedThrowWithCatchFilter()
         {
             const string code = @"
 var tag = ""BeforeTry"";
@@ -753,7 +811,7 @@ tag = ""After"";";
         }
 
         [TestMethod]
-        public void TryCatchFinally_NestedThrowWithNestedCatchFilter()
+        public void TryCatch_NestedThrowWithNestedCatchFilter()
         {
             const string code = @"
 var tag = ""BeforeTry"";
@@ -784,7 +842,7 @@ tag = ""After"";";
         }
 
         [TestMethod]
-        public void TryCatchFinally_NestedThrowWithMultipleCatchFiltersOnDifferentLevels()
+        public void TryCatch_NestedThrowWithMultipleCatchFiltersOnDifferentLevels()
         {
             const string code = @"
 var tag = ""BeforeTry"";
