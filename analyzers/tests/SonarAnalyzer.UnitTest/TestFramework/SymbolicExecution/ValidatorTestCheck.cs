@@ -35,11 +35,12 @@ namespace SonarAnalyzer.UnitTest.TestFramework.SymbolicExecution
     {
         private readonly List<SymbolicContext> postProcessed = new();
         private readonly List<(string Name, SymbolicContext Context)> tags = new();
-        private int exitReachedCount;
         private int executionCompletedCount;
 
+        public List<ProgramState> ExitStates { get; } = new();
+
         public override void ExitReached(SymbolicContext context) =>
-            exitReachedCount++;
+            ExitStates.Add(context.State);
 
         public override void ExecutionCompleted() =>
             executionCompletedCount++;
@@ -63,7 +64,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework.SymbolicExecution
             tags.Where(x => x.Name == tag).Select(x => TagValue(x.Context)).ToArray();
 
         public void ValidateExitReachCount(int expected) =>
-            exitReachedCount.Should().Be(expected);
+            ExitStates.Should().HaveCount(expected);
 
         public void ValidateExecutionCompleted() =>
             executionCompletedCount.Should().Be(1);

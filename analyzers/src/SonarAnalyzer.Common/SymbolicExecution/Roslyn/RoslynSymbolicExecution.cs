@@ -90,13 +90,19 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
         {
             if (node.Block.Kind == BasicBlockKind.Exit)
             {
-                checks.ExitReached(new(null, node.State));
+                NotifyExitReached();
             }
-            else if (node.Block.ContainsThrow())
+            else if (node.Block.ContainsThrowOrRethrow())
             {
-                foreach (var successor in ExceptionSuccessors(node, ThrowExceptionType(node.Block.BranchValue)))
+                var successors = ExceptionSuccessors(node, ThrowExceptionType(node.Block.BranchValue)).ToList();
+                foreach (var successor in successors)
                 {
                     yield return successor;
+                }
+
+                if (successors.Count == 0)
+                {
+                    NotifyExitReached();
                 }
             }
             else
@@ -109,6 +115,9 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
                     }
                 }
             }
+
+            void NotifyExitReached() =>
+                checks.ExitReached(new(null, node.State));
         }
 
         private ExplodedNode ProcessBranch(ExplodedNode node, ControlFlowBranch branch)
@@ -224,7 +233,7 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
             };
 
         private static ExceptionState ThrowExceptionType(IOperation operation) =>
-            operation.Kind switch
+            operation?.Kind switch // throw operation can be null in case of rethrow
             {
                 OperationKindEx.ObjectCreation => new ExceptionState(operation.Type),
                 _ => null

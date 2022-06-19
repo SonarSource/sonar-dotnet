@@ -407,7 +407,7 @@ tag = ""UnreachableAfterFinally"";";
 var tag = ""BeforeTry"";
 try
 {
-    Tag(""InTry"");
+    tag = ""InTry"";
 }
 finally
 {
@@ -415,17 +415,15 @@ finally
     throw new System.Exception();
     tag  = ""UnreachableInFinally"";
 }
-tag = ""UnreachableAfterFinally"";";
+tag = ""AfterFinally"";";
             var validator = SETestContext.CreateCS(code).Validator;
             validator.ValidateTagOrder(
                 "BeforeTry",
                 "InTry",
-                "InFinally",
                 "InFinally");
 
-            validator.TagStates("InFinally").Should().HaveCount(2)
-                .And.ContainSingle(x => HasNoException(x))
-                .And.ContainSingle(x => HasUnknownException(x));
+            validator.TagStates("InFinally").Should().HaveCount(1)
+                .And.ContainSingle(x => HasNoException(x));
         }
 
         [TestMethod]
@@ -524,7 +522,7 @@ tag = ""AfterCatch"";";
 var tag = ""BeforeTry"";
 try
 {
-    Tag(""InTry"");
+    tag = ""InTry"";
     throw new System.Exception();
     tag = ""UnreachableInFinally"";
 }
@@ -538,11 +536,11 @@ tag = ""UnreachableAfterCatch"";";
             validator.ValidateTagOrder(
                 "BeforeTry",
                 "InTry",
-                "InCatch",          // With Exception thrown by Tag("InTry")
                 "InCatch");         // With Exception thrown by `throw`
 
-            validator.TagStates("InCatch").Should().HaveCount(2)
-                     .And.ContainSingle(x => HasUnknownException(x))
+            validator.ValidateExitReachCount(1);
+
+            validator.TagStates("InCatch").Should().HaveCount(1)
                      .And.ContainSingle(x => HasExceptionOfTypeException(x));
         }
 

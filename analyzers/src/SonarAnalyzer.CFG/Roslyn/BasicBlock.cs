@@ -109,8 +109,8 @@ namespace SonarAnalyzer.CFG.Roslyn
             operationsAndBranchValue = new Lazy<ImmutableArray<IOperation>>(() => BranchValue is null ? Operations : Operations.Add(BranchValue));
         }
 
-        public bool ContainsThrow() =>
-            Successors.Any(x => x.Semantics == ControlFlowBranchSemantics.Throw);
+        public bool ContainsThrowOrRethrow() =>
+            Successors.Any(x => x.Semantics is ControlFlowBranchSemantics.Throw or ControlFlowBranchSemantics.Rethrow);
 
         public static BasicBlock Wrap(object instance) =>
             instance == null ? null : InstanceCache.GetValue(instance, x => new BasicBlock(x));
