@@ -18,7 +18,6 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System.Collections.Immutable;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
@@ -26,33 +25,13 @@ using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.Extensions;
 using SonarAnalyzer.Helpers;
 
-namespace SonarAnalyzer.Rules.CSharp
+namespace SonarAnalyzer.Rules.CSharp;
+
+[DiagnosticAnalyzer(LanguageNames.CSharp)]
+public sealed class ExtensionMethodShouldNotExtendObject : ExtensionMethodShouldNotExtendObjectBase<SyntaxKind>
 {
-    [DiagnosticAnalyzer(LanguageNames.CSharp)]
-    public sealed class ExtensionMethodShouldNotExtendObject : SonarDiagnosticAnalyzer
-    {
-        private const string DiagnosticId = "S4225";
-        private const string MessageFormat = "Refactor this extension to extend a more concrete type.";
+    protected override ILanguageFacade<SyntaxKind> Language => CSharpFacade.Instance;
 
-        private static readonly DiagnosticDescriptor Rule =
-            DescriptorFactory.Create(DiagnosticId, MessageFormat);
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
-
-        protected override void Initialize(SonarAnalysisContext context) =>
-            context.RegisterSyntaxNodeActionInNonGenerated(
-                c =>
-                {
-                    var methodDeclaration = (MethodDeclarationSyntax)c.Node;
-
-                    if (methodDeclaration.IsExtensionMethod()
-                        && c.SemanticModel.GetDeclaredSymbol(methodDeclaration) is { } methodSymbol
-                        && methodSymbol.IsExtensionMethod
-                        && methodSymbol.Parameters.Length > 0
-                        && methodSymbol.Parameters[0].Type.Is(KnownType.System_Object))
-                    {
-                        c.ReportIssue(Diagnostic.Create(Rule, methodDeclaration.Identifier.GetLocation()));
-                    }
-                },
-                SyntaxKind.MethodDeclaration);
-    }
+    protected override bool IsExtensionMethod(SyntaxNode methodDeclaration) =>
+        ((MethodDeclarationSyntax)methodDeclaration).IsExtensionMethod();
 }

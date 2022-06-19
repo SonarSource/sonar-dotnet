@@ -18,24 +18,19 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using CS = SonarAnalyzer.Rules.CSharp;
-using VB = SonarAnalyzer.Rules.VisualBasic;
+using Microsoft.CodeAnalysis;
+using Microsoft.CodeAnalysis.Diagnostics;
+using Microsoft.CodeAnalysis.VisualBasic;
+using Microsoft.CodeAnalysis.VisualBasic.Syntax;
+using SonarAnalyzer.Helpers;
 
-namespace SonarAnalyzer.UnitTest.Rules
+namespace SonarAnalyzer.Rules.VisualBasic;
+
+[DiagnosticAnalyzer(LanguageNames.VisualBasic)]
+public sealed class ExtensionMethodShouldNotExtendObject : ExtensionMethodShouldNotExtendObjectBase<SyntaxKind>
 {
-    [TestClass]
-    public class ExtensionMethodShouldNotExtendObjectTest
-    {
-        [TestMethod]
-        public void ExtensionMethodShouldNotExtendObject_CS() =>
-            new VerifierBuilder<CS.ExtensionMethodShouldNotExtendObject>()
-            .AddPaths("ExtensionMethodShouldNotExtendObject.cs")
-            .Verify();
+    protected override ILanguageFacade<SyntaxKind> Language => VisualBasicFacade.Instance;
 
-        [TestMethod]
-        public void ExtensionMethodShouldNotExtendObject_VB() =>
-            new VerifierBuilder<VB.ExtensionMethodShouldNotExtendObject>()
-            .AddPaths("ExtensionMethodShouldNotExtendObject.vb")
-            .Verify();
-    }
+    protected override bool IsExtensionMethod(SyntaxNode methodDeclaration) =>
+        methodDeclaration.Parent?.Parent is ModuleBlockSyntax;
 }

@@ -1,17 +1,19 @@
 ﻿using System;
 
-namespace Tests.Diagnostics
+namespace S4225.ExtensionMethodShouldNotExtendObject
 {
-    static class Program
+    static class Compliant
     {
-        static void Foo(this object obj) // Noncompliant {{Refactor this extension to extend a more concrete type.}}
-//                  ^^^
+        static void Extends(this int i) { }
+        static System.Collections.Generic.IEnumerable<int> GetBaz() { return new[] { 0 }; }
+        static void NotAnExtension(object o) { }
+    }
+
+    static class NonCompliant
+    {
+        static void ExtendsObject(this object obj) // Noncompliant {{Refactor this extension to extend a more concrete type.}}
+        //          ^^^^^^^^^^^^^
         {
         }
-
-        static void Bar(this int i) { }
-        static System.Collections.Generic.IEnumerable<int> GetBaz() { return new[] { 0 }; }
-
-        static void NotAnExtensionMethod(object o) { }
     }
 }
