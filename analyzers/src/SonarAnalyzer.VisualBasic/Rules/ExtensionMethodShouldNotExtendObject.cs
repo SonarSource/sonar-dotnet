@@ -18,6 +18,7 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Diagnostics;
 using Microsoft.CodeAnalysis.VisualBasic;
@@ -32,5 +33,15 @@ public sealed class ExtensionMethodShouldNotExtendObject : ExtensionMethodShould
     protected override ILanguageFacade<SyntaxKind> Language => VisualBasicFacade.Instance;
 
     protected override bool IsExtensionMethod(SyntaxNode methodDeclaration) =>
-        methodDeclaration.Parent?.Parent is ModuleBlockSyntax;
+        methodDeclaration.Parent.Parent is ModuleBlockSyntax
+        && ((MethodStatementSyntax)methodDeclaration).AttributeLists
+            .SelectMany(x => x.Attributes)
+            .Any(IsExtension);
+
+    private bool IsExtension(AttributeSyntax attribute)
+    {
+        var name = attribute.GetName();
+        return name.Equals("Extension", Language.NameComparison)
+            || name.Equals("ExtensionAttribute", Language.NameComparison);
+    }
 }

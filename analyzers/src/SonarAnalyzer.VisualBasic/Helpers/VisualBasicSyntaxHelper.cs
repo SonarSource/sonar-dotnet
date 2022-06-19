@@ -187,7 +187,9 @@ namespace SonarAnalyzer.Helpers
             };
 
         public static string GetName(this SyntaxNode expression) =>
-            expression.GetIdentifier()?.ValueText ?? string.Empty;
+            expression is AttributeSyntax x
+            ? x.Name.GetText().ToString()
+            : expression.GetIdentifier()?.ValueText ?? string.Empty;
 
         public static bool NameIs(this ExpressionSyntax expression, string name) =>
             expression.GetName().Equals(name, StringComparison.InvariantCultureIgnoreCase);

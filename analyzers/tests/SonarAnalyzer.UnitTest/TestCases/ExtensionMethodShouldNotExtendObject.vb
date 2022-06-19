@@ -30,6 +30,11 @@ Namespace S4225.ExtensionMethodShouldNotExtendObject
         Function ExtendsObject(obj As Object, other as Object) as Object ' Noncompliant
             Return other
         End Function
+		
+		<ExtensionAttribute>
+        Sub ExtendsWithLongName(obj As Object) ' Noncompliant
+        End Sub
+		
     End Module
 
 End Namespace
