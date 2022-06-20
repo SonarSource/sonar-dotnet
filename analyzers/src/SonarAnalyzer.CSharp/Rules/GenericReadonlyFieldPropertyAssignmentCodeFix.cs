@@ -86,22 +86,19 @@ namespace SonarAnalyzer.Rules.CSharp
                     context.Diagnostics);
             }
 
-            var expression = memberAccess.Parent as ExpressionSyntax;
-            if (expression?.Parent is not StatementSyntax statement)
+            if (memberAccess is { Parent: ExpressionSyntax { Parent: StatementSyntax statement } })
             {
-                return;
+                context.RegisterCodeFix(
+                    CodeAction.Create(
+                        TitleRemove,
+                        c =>
+                        {
+                            var newRoot = root.RemoveNode(statement, SyntaxRemoveOptions.KeepNoTrivia);
+                            return Task.FromResult(context.Document.WithSyntaxRoot(newRoot));
+                        },
+                        TitleRemove),
+                    context.Diagnostics);
             }
-
-            context.RegisterCodeFix(
-                CodeAction.Create(
-                    TitleRemove,
-                    c =>
-                    {
-                        var newRoot = root.RemoveNode(statement, SyntaxRemoveOptions.KeepNoTrivia);
-                        return Task.FromResult(context.Document.WithSyntaxRoot(newRoot));
-                    },
-                    TitleRemove),
-                context.Diagnostics);
         }
 
         private static MultiValueDictionary<DocumentId, ClassDeclarationSyntax> GetDocumentIdClassDeclarationMapping(
