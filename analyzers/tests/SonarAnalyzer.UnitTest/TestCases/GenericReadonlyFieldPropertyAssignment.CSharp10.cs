@@ -15,6 +15,7 @@ class PointManager<T> where T : IPoint
 
     public void MovePointVertically((int, int) p)
     {
-        (point.X, int y) = p; // Compliant - FN: if point is a struct, then nothing happened
+        (point.X, int y) = p; // Noncompliant {{Restrict 'point' to be a reference type or remove this assignment of 'X'; it is useless if 'point' is a value type.}}
+//       ^^^^^^^
     }
 }
