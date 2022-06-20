@@ -28,6 +28,7 @@ namespace Tests.TestCases
             point.X = newX; //Noncompliant {{Restrict 'point' to be a reference type or remove this assignment of 'X'; it is useless if 'point' is a value type.}}
 //          ^^^^^^^
             point.X++; //Noncompliant; if point is a struct, then nothing happened
+            ++point.X; //Noncompliant
             Console.WriteLine(point.X);
             var i = point.X = newX; //Noncompliant
             i = point.X++;          //Noncompliant

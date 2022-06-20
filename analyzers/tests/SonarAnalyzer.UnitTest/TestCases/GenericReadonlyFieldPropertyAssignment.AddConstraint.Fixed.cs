@@ -27,6 +27,7 @@ namespace Tests.TestCases
         {
             point.X = newX; //Fixed
             point.X++; //Fixed
+            ++point.X; //Fixed
             Console.WriteLine(point.X);
             var i = point.X = newX; //Fixed
             i = point.X++;          //Fixed
