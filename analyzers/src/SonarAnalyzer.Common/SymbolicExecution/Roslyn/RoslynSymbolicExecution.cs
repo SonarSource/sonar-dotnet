@@ -90,19 +90,19 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
         {
             if (node.Block.Kind == BasicBlockKind.Exit)
             {
-                NotifyExitReached();
+                checks.ExitReached(new(null, node.State));
             }
-            else if (node.Block.ContainsThrowOrRethrow())
+            else if (node.Block.Successors.Length == 1 && ThrownException(node, node.Block.Successors.Single().Semantics) is {} exception)
             {
-                var successors = ExceptionSuccessors(node, ThrowExceptionType(node.Block.BranchValue)).ToList();
+                var successors = ExceptionSuccessors(node, exception).ToArray();
                 foreach (var successor in successors)
                 {
                     yield return successor;
                 }
 
-                if (successors.Count == 0)
+                if (successors.Length == 0) // catch without finally
                 {
-                    NotifyExitReached();
+                    yield return new(cfg.ExitBlock, node.State.SetException(exception), null);
                 }
             }
             else
@@ -115,9 +115,6 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
                     }
                 }
             }
-
-            void NotifyExitReached() =>
-                checks.ExitReached(new(null, node.State));
         }
 
         private ExplodedNode ProcessBranch(ExplodedNode node, ControlFlowBranch branch)
@@ -217,6 +214,14 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
             }
         }
 
+        private static ExceptionState ThrownException(ExplodedNode node, ControlFlowBranchSemantics semantics) =>
+            semantics switch
+            {
+                 ControlFlowBranchSemantics.Throw => ThrowExceptionType(node.Block.BranchValue),
+                 ControlFlowBranchSemantics.Rethrow => node.State.Exception,
+                 _ => null
+            };
+
         private static ProgramState ProcessOperation(SymbolicContext context) =>
             context.Operation.Instance.Kind switch
             {
@@ -233,7 +238,7 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
             };
 
         private static ExceptionState ThrowExceptionType(IOperation operation) =>
-            operation?.Kind switch // throw operation can be null in case of rethrow
+            operation.Kind switch
             {
                 OperationKindEx.ObjectCreation => new ExceptionState(operation.Type),
                 _ => null

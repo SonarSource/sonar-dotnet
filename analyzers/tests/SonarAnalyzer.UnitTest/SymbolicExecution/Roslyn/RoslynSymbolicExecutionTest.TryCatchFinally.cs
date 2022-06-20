@@ -395,7 +395,7 @@ tag = ""UnreachableAfterFinally"";";
                 "InFinally",                // With Exception thrown by Tag("InTry")
                 "InFinally");               // With Exception thrown by `throw`
 
-            ValidateHasOnlyUnknownExceptionAndException(validator, "InFinally");
+            ValidateHasOnlyUnknownExceptionAndSystemException(validator, "InFinally");
         }
 
         [TestMethod]
@@ -413,7 +413,7 @@ finally
     throw new System.Exception();
     tag  = ""UnreachableInFinally"";
 }
-tag = ""AfterFinally"";";
+tag = ""UnreachableAfterFinally"";";
             var validator = SETestContext.CreateCS(code).Validator;
             validator.ValidateTagOrder(
                 "BeforeTry",
@@ -496,8 +496,8 @@ tag = ""AfterCatch"";";
                 "AfterCatch",
                 "AfterCatch");      // Should go away after https://github.com/SonarSource/sonar-dotnet/pull/5745 is done.
 
-            ValidateHasOnlyUnknownExceptionAndException(validator, "InCatch");
-            ValidateHasOnlyUnknownExceptionAndException(validator, "AfterCatch");
+            ValidateHasOnlyUnknownExceptionAndSystemException(validator, "InCatch");
+            ValidateHasOnlyUnknownExceptionAndSystemException(validator, "AfterCatch");
         }
 
         [TestMethod]
@@ -553,7 +553,7 @@ tag = ""UnreachableAfterCatch"";";
                 "InCatch",          // With Exception thrown by Tag("InTry")
                 "InCatch");         // With Exception thrown by `throw`
 
-            ValidateHasOnlyUnknownExceptionAndException(validator, "InCatch");
+            ValidateHasOnlyUnknownExceptionAndSystemException(validator, "InCatch");
         }
 
         [TestMethod]
@@ -593,10 +593,10 @@ tag = ""AfterCatch"";";
                 "AfterCatch",
                 "AfterCatch");      // Should go away after https://github.com/SonarSource/sonar-dotnet/pull/5745 is done.
 
-            ValidateHasOnlyUnknownExceptionAndException(validator, "InFirstCatch");
-            ValidateHasOnlyUnknownExceptionAndException(validator, "InSecondCatch");
-            ValidateHasOnlyUnknownExceptionAndException(validator, "InThirdCatch");
-            ValidateHasOnlyUnknownExceptionAndException(validator, "AfterCatch");
+            ValidateHasOnlyUnknownExceptionAndSystemException(validator, "InFirstCatch");
+            ValidateHasOnlyUnknownExceptionAndSystemException(validator, "InSecondCatch");
+            ValidateHasOnlyUnknownExceptionAndSystemException(validator, "InThirdCatch");
+            ValidateHasOnlyUnknownExceptionAndSystemException(validator, "AfterCatch");
         }
 
         [TestMethod]
@@ -660,9 +660,9 @@ tag = ""AfterFinally"";";
                 "AfterFinally",
                 "AfterFinally");
 
-            ValidateHasOnlyUnknownExceptionAndException(validator, "InCatch");
-            ValidateHasOnlyUnknownExceptionAndException(validator, "InFinally");
-            ValidateHasOnlyUnknownExceptionAndException(validator, "AfterFinally");
+            ValidateHasOnlyUnknownExceptionAndSystemException(validator, "InCatch");
+            ValidateHasOnlyUnknownExceptionAndSystemException(validator, "InFinally");
+            ValidateHasOnlyUnknownExceptionAndSystemException(validator, "AfterFinally");
         }
 
         [TestMethod]
@@ -832,7 +832,7 @@ tag = ""After"";";
                 "InNestedTry"); // ToDo: the rest of the tags are missing since we don't support Conversion operation
         }
 
-        private static void ValidateHasOnlyUnknownExceptionAndException(ValidatorTestCheck validator, string stateName) =>
+        private static void ValidateHasOnlyUnknownExceptionAndSystemException(ValidatorTestCheck validator, string stateName) =>
             validator.TagStates(stateName).Should().HaveCount(2)
                 .And.ContainSingle(x => HasUnknownException(x))
                 .And.ContainSingle(x => HasExceptionOfTypeException(x));
