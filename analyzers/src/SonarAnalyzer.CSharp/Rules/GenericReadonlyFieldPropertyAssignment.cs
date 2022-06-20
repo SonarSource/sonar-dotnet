@@ -112,20 +112,12 @@ namespace SonarAnalyzer.Rules.CSharp
             semanticModel.GetEnclosingSymbol(expression.SpanStart) is IMethodSymbol { MethodKind: MethodKind.Constructor } constructorSymbol
             && constructorSymbol.ContainingType.Equals(currentType);
 
-        private static bool GenericParameterMightBeValueType(ITypeParameterSymbol typeParameterSymbol)
-        {
-            if (typeParameterSymbol == null
-                || typeParameterSymbol.HasReferenceTypeConstraint
-                || typeParameterSymbol.HasValueTypeConstraint
-                || typeParameterSymbol.ConstraintTypes.OfType<IErrorTypeSymbol>().Any())
-            {
-                return false;
-            }
-
-            return typeParameterSymbol.ConstraintTypes
-                                      .Select(MightBeValueType)
-                                      .All(basedOnPossiblyValueType => basedOnPossiblyValueType);
-        }
+        private static bool GenericParameterMightBeValueType(ITypeParameterSymbol typeParameterSymbol) =>
+            typeParameterSymbol != null
+            && !typeParameterSymbol.HasReferenceTypeConstraint
+            && !typeParameterSymbol.HasValueTypeConstraint
+            && !typeParameterSymbol.ConstraintTypes.OfType<IErrorTypeSymbol>().Any()
+            && typeParameterSymbol.ConstraintTypes.All(MightBeValueType);
 
         private static bool MightBeValueType(ITypeSymbol type) =>
             type.IsInterface()
