@@ -139,9 +139,8 @@ namespace SonarAnalyzer.Rules.CSharp
             foreach (var constraint in constraintClauses)
             {
                 var currentConstraint = constraint;
-                if (currentConstraint.Name.Identifier.ValueText == typeParameterName)
+                if (currentConstraint.Name.Identifier.ValueText == typeParameterName && !currentConstraint.Constraints.AnyOfKind(SyntaxKind.ClassConstraint))
                 {
-                    Debug.Assert(!currentConstraint.Constraints.AnyOfKind(SyntaxKind.ClassConstraint), "Rule should not be triggered if 'class' is present.");
                     currentConstraint = currentConstraint
                         .WithConstraints(currentConstraint.Constraints.Insert(0, SyntaxFactory.ClassOrStructConstraint(SyntaxKind.ClassConstraint)))
                         .WithAdditionalAnnotations(Formatter.Annotation);
