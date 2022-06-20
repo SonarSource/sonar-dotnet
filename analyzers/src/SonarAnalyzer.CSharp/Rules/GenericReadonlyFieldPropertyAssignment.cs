@@ -63,23 +63,19 @@ namespace SonarAnalyzer.Rules.CSharp
                 SyntaxKindEx.CoalesceAssignmentExpression);
 
             context.RegisterSyntaxNodeActionInNonGenerated(
-                    c =>
-                    {
-                        var unary = (PrefixUnaryExpressionSyntax)c.Node;
-                        var expression = unary.Operand;
-
-                        ProcessPropertyChange(c, c.SemanticModel, expression);
-                    },
-                    SyntaxKind.PreDecrementExpression,
-                    SyntaxKind.PreIncrementExpression);
+                c =>
+                {
+                    var unary = (PrefixUnaryExpressionSyntax)c.Node;
+                    ProcessPropertyChange(c, c.SemanticModel, unary.Operand);
+                },
+                SyntaxKind.PreDecrementExpression,
+                SyntaxKind.PreIncrementExpression);
 
             context.RegisterSyntaxNodeActionInNonGenerated(
                 c =>
                 {
                     var unary = (PostfixUnaryExpressionSyntax)c.Node;
-                    var expression = unary.Operand;
-
-                    ProcessPropertyChange(c, c.SemanticModel, expression);
+                    ProcessPropertyChange(c, c.SemanticModel, unary.Operand);
                 },
                 SyntaxKind.PostDecrementExpression,
                 SyntaxKind.PostIncrementExpression);
