@@ -109,7 +109,7 @@ namespace SonarAnalyzer.Rules.CSharp
             typeParameterSymbol is
             {
                 HasReferenceTypeConstraint: false,
-                HasValueTypeConstraint: false,
+                HasValueTypeConstraint: false, // CS1648 is raised, if constrained by 'struct'.
                 ConstraintTypes: { } constraintTypes
             }
             && constraintTypes.All(MightBeValueType);
