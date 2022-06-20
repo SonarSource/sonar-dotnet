@@ -20,6 +20,7 @@
 
 using System.Collections.Generic;
 using System.Collections.Immutable;
+using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.CodeAnalysis;
@@ -138,8 +139,9 @@ namespace SonarAnalyzer.Rules.CSharp
             foreach (var constraint in constraintClauses)
             {
                 var currentConstraint = constraint;
-                if (constraint.Name.Identifier.ValueText == typeParameterName && !currentConstraint.Constraints.AnyOfKind(SyntaxKind.ClassConstraint))
+                if (currentConstraint.Name.Identifier.ValueText == typeParameterName)
                 {
+                    Debug.Assert(!currentConstraint.Constraints.AnyOfKind(SyntaxKind.ClassConstraint), "Rule should not be triggered if 'class' is present.");
                     currentConstraint = currentConstraint
                         .WithConstraints(currentConstraint.Constraints.Insert(0, SyntaxFactory.ClassOrStructConstraint(SyntaxKind.ClassConstraint)))
                         .WithAdditionalAnnotations(Formatter.Annotation);
