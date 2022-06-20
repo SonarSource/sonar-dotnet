@@ -106,11 +106,13 @@ namespace SonarAnalyzer.Rules.CSharp
             && constructorSymbol.ContainingType.Equals(currentType);
 
         private static bool GenericParameterMightBeValueType(ITypeParameterSymbol typeParameterSymbol) =>
-            typeParameterSymbol != null
-            && !typeParameterSymbol.HasReferenceTypeConstraint
-            && !typeParameterSymbol.HasValueTypeConstraint
-            && !typeParameterSymbol.ConstraintTypes.OfType<IErrorTypeSymbol>().Any()
-            && typeParameterSymbol.ConstraintTypes.All(MightBeValueType);
+            typeParameterSymbol is
+            {
+                HasReferenceTypeConstraint: false,
+                HasValueTypeConstraint: false,
+                ConstraintTypes: { } constraintTypes
+            }
+            && constraintTypes.All(MightBeValueType);
 
         private static bool MightBeValueType(ITypeSymbol type) =>
             type.IsInterface()
