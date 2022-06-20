@@ -104,4 +104,18 @@ namespace Tests.TestCases
             pointA.X += i; // Compliant
         }
     }
+
+    class PublicField<T> where T : IPoint
+    {
+        public readonly T point;
+    }
+
+    class PublicFieldAccessor<T> where T : class, IPoint
+    {
+        public PublicFieldAccessor()
+        {
+            var a = new PublicField<T>();
+            a.point.X = 1; // Fixed
+        }
+    }
 }
