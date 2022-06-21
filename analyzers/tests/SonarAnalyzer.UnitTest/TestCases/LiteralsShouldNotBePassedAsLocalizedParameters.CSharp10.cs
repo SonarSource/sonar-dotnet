@@ -7,6 +7,12 @@ public struct S
 
     public void M()
     {
-        (Property, var b) = ("a", "B"); // FN
+        (Property, var b) = ("a", "B");  // Noncompliant
+        //                   ^^^
+
+        (this.Property, b) = ("a", "B"); // Noncompliant
+
+        var s = new S();
+        (s.Property, b) = ("a", "B");    // Noncompliant
     }
 }
