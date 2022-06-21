@@ -102,7 +102,7 @@ namespace SonarAnalyzer.Extensions
                     if (ParenthesizedVariableDesignationSyntaxWrapper.IsInstance(leftVar)
                         && rightArg is ArgumentSyntax { Expression: { } rightExpression } && TupleExpressionSyntaxWrapper.IsInstance(rightExpression))
                     {
-                    MapDesignationElements(builder, (ParenthesizedVariableDesignationSyntaxWrapper)leftVar, (TupleExpressionSyntaxWrapper)rightExpression);
+                        MapDesignationElements(builder, (ParenthesizedVariableDesignationSyntaxWrapper)leftVar, (TupleExpressionSyntaxWrapper)rightExpression);
                     }
                     else
                     {
