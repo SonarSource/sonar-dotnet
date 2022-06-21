@@ -27,6 +27,106 @@ namespace SonarAnalyzer.UnitTest.Extensions
     [TestClass]
     public class AssignmentExpressionSyntaxExtensionsTests
     {
+        [TestMethod]
+        public void AssignmentExpressionSyntaxExtensions_TupleElementsAreExtracted()
+        {
+            var code = "(var x, var y) = (1, 2);";
+            var syntaxTree = CSharpSyntaxTree.ParseText(WrapInMethod(code));
+            var assigment = syntaxTree.GetRoot().DescendantNodesAndSelf().OfType<AssignmentExpressionSyntax>().Single();
+            var mapping = assigment.MapAssignmentArguments();
+            mapping.Should().BeEquivalentTo(new[]
+                {
+                    new
+                    {
+                        Key = new { Designation = new { Identifier = new { Text = "x" } } },
+                        Value = new { Token = new { Text = "1" } },
+                    },
+                    new
+                    {
+                        Key = new { Designation = new { Identifier = new { Text = "y" } } },
+                        Value = new { Token = new { Text = "2" } },
+                    },
+                });
+        }
+
+        [TestMethod]
+        public void AssignmentExpressionSyntaxExtensions_SimpleAssignmentReturnsSingleElementArray()
+        {
+            var code = "int x; x = 1;";
+            var syntaxTree = CSharpSyntaxTree.ParseText(WrapInMethod(code));
+            var assigment = syntaxTree.GetRoot().DescendantNodesAndSelf().OfType<AssignmentExpressionSyntax>().Single();
+            var mapping = assigment.MapAssignmentArguments();
+            mapping.Should().BeEquivalentTo(new[]
+                {
+                    new
+                    {
+                        Key = new { Identifier = new { Text = "x" } },
+                        Value = new { Token = new { Text = "1" } },
+                    },
+                });
+        }
+
+        [TestMethod]
+        public void AssignmentExpressionSyntaxExtensions_NestedDeconstruction()
+        {
+            var code = "(var a, (var b, (var c, var d)), var e) = (1, (2, (3, 4)), 5);";
+            var syntaxTree = CSharpSyntaxTree.ParseText(WrapInMethod(code));
+            var assigment = syntaxTree.GetRoot().DescendantNodesAndSelf().OfType<AssignmentExpressionSyntax>().Single();
+            var mapping = assigment.MapAssignmentArguments();
+            mapping.Should().BeEquivalentTo(new[]
+                {
+                    new
+                    {
+                        Key = new { Designation = new { Identifier = new { Text = "a" } } },
+                        Value = new { Token = new { Text = "1" } },
+                    },
+                    new
+                    {
+                        Key = new { Designation = new { Identifier = new { Text = "b" } } },
+                        Value = new { Token = new { Text = "2" } },
+                    },
+                    new
+                    {
+                        Key = new { Designation = new { Identifier = new { Text = "c" } } },
+                        Value = new { Token = new { Text = "3" } },
+                    },
+                    new
+                    {
+                        Key = new { Designation = new { Identifier = new { Text = "d" } } },
+                        Value = new { Token = new { Text = "4" } },
+                    },
+                    new
+                    {
+                        Key = new { Designation = new { Identifier = new { Text = "e" } } },
+                        Value = new { Token = new { Text = "5" } },
+                    },
+                });
+        }
+
+        [TestMethod]
+        public void AssignmentExpressionSyntaxExtensions_RightSideNotATupleExpression()
+        {
+            var code = "(var x, var y) = M(); static (int, int) M() => (1, 2);";
+            var syntaxTree = CSharpSyntaxTree.ParseText(WrapInMethod(code));
+            var assigment = syntaxTree.GetRoot().DescendantNodesAndSelf().OfType<AssignmentExpressionSyntax>().Single();
+            var mapping = assigment.MapAssignmentArguments();
+            mapping.Should().BeEquivalentTo(new[]
+                {
+                    new
+                    {
+                        Key = new
+                        {
+                            Arguments = new[]
+                            {
+                                new { Expression = new { Designation = new { Identifier = new { Text = "x" } } } },
+                                new { Expression = new { Designation = new { Identifier = new { Text = "y" } } } },
+                            }
+                        },
+                        Value = new { Expression = new { Identifier = new { Text = "M" } } },
+                    },
+                });
+        }
+
         [DataTestMethod]
         // Normal assignment
         [DataRow("int a; a = 1;", "a")]
