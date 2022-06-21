@@ -38,13 +38,13 @@ namespace SonarAnalyzer.UnitTest.Extensions
                 {
                     new
                     {
-                        Key = new { Designation = new { Identifier = new { Text = "x" } } },
-                        Value = new { Token = new { Text = "1" } },
+                        Left = new { Designation = new { Identifier = new { Text = "x" } } },
+                        Right = new { Token = new { Text = "1" } },
                     },
                     new
                     {
-                        Key = new { Designation = new { Identifier = new { Text = "y" } } },
-                        Value = new { Token = new { Text = "2" } },
+                        Left = new { Designation = new { Identifier = new { Text = "y" } } },
+                        Right = new { Token = new { Text = "2" } },
                     },
                 });
         }
@@ -60,8 +60,8 @@ namespace SonarAnalyzer.UnitTest.Extensions
                 {
                     new
                     {
-                        Key = new { Identifier = new { Text = "x" } },
-                        Value = new { Token = new { Text = "1" } },
+                        Left = new { Identifier = new { Text = "x" } },
+                        Right = new { Token = new { Text = "1" } },
                     },
                 });
         }
@@ -77,28 +77,28 @@ namespace SonarAnalyzer.UnitTest.Extensions
                 {
                     new
                     {
-                        Key = new { Designation = new { Identifier = new { Text = "a" } } },
-                        Value = new { Token = new { Text = "1" } },
+                        Left = new { Designation = new { Identifier = new { Text = "a" } } },
+                        Right = new { Token = new { Text = "1" } },
                     },
                     new
                     {
-                        Key = new { Designation = new { Identifier = new { Text = "b" } } },
-                        Value = new { Token = new { Text = "2" } },
+                        Left = new { Designation = new { Identifier = new { Text = "b" } } },
+                        Right = new { Token = new { Text = "2" } },
                     },
                     new
                     {
-                        Key = new { Designation = new { Identifier = new { Text = "c" } } },
-                        Value = new { Token = new { Text = "3" } },
+                        Left = new { Designation = new { Identifier = new { Text = "c" } } },
+                        Right = new { Token = new { Text = "3" } },
                     },
                     new
                     {
-                        Key = new { Designation = new { Identifier = new { Text = "d" } } },
-                        Value = new { Token = new { Text = "4" } },
+                        Left = new { Designation = new { Identifier = new { Text = "d" } } },
+                        Right = new { Token = new { Text = "4" } },
                     },
                     new
                     {
-                        Key = new { Designation = new { Identifier = new { Text = "e" } } },
-                        Value = new { Token = new { Text = "5" } },
+                        Left = new { Designation = new { Identifier = new { Text = "e" } } },
+                        Right = new { Token = new { Text = "5" } },
                     },
                 });
         }
@@ -114,7 +114,7 @@ namespace SonarAnalyzer.UnitTest.Extensions
                 {
                     new
                     {
-                        Key = new
+                        Left = new
                         {
                             Arguments = new[]
                             {
@@ -122,7 +122,7 @@ namespace SonarAnalyzer.UnitTest.Extensions
                                 new { Expression = new { Designation = new { Identifier = new { Text = "y" } } } },
                             }
                         },
-                        Value = new { Expression = new { Identifier = new { Text = "M" } } },
+                        Right = new { Expression = new { Identifier = new { Text = "M" } } },
                     },
                 });
         }
@@ -138,13 +138,13 @@ namespace SonarAnalyzer.UnitTest.Extensions
                 {
                     new
                     {
-                        Key = new { Designation = new { Identifier = new { Text = "x" } } },
-                        Value = new { Token = new { Text = "1" } },
+                        Left = new { Designation = new { Identifier = new { Text = "x" } } },
+                        Right = new { Token = new { Text = "1" } },
                     },
                     new
                     {
-                        Key = new { Designation = new { Identifier = new { Text = "y" } } },
-                        Value = new { Token = new { Text = "2" } },
+                        Left = new { Designation = new { Identifier = new { Text = "y" } } },
+                        Right = new { Token = new { Text = "2" } },
                     },
                 });
         }
@@ -160,13 +160,13 @@ namespace SonarAnalyzer.UnitTest.Extensions
                 {
                     new
                     {
-                        Key = new { Designation = new { Identifier = new { Text = "x" } } },
-                        Value = new { Token = new { Text = "1" } },
+                        Left = new { Designation = new { Identifier = new { Text = "x" } } },
+                        Right = new { Token = new { Text = "1" } },
                     },
                     new
                     {
-                        Key = new { Designation = new { Identifier = new { Text = "y" } } },
-                        Value = new { Token = new { Text = "2" } },
+                        Left = new { Designation = new { Identifier = new { Text = "y" } } },
+                        Right = new { Token = new { Text = "2" } },
                     },
                 });
         }
@@ -182,18 +182,18 @@ namespace SonarAnalyzer.UnitTest.Extensions
                 {
                     new
                     {
-                        Key = new { Designation = new { Identifier = new { Text = "a" } } },
-                        Value = new { Token = new { Text = "1" } },
+                        Left = new { Designation = new { Identifier = new { Text = "a" } } },
+                        Right = new { Token = new { Text = "1" } },
                     },
                     new
                     {
-                        Key = new { Designation = new { Identifier = new { Text = "b" } } },
-                        Value = new { Token = new { Text = "2" } },
+                        Left = new { Designation = new { Identifier = new { Text = "b" } } },
+                        Right = new { Token = new { Text = "2" } },
                     },
                     new
                     {
-                        Key = new { Designation = new { Identifier = new { Text = "c" } } },
-                        Value = new { Token = new { Text = "3" } },
+                        Left = new { Designation = new { Identifier = new { Text = "c" } } },
+                        Right = new { Token = new { Text = "3" } },
                     },
                 });
         }

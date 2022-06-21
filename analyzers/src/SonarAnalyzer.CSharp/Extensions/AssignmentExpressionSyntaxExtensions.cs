@@ -29,6 +29,8 @@ namespace SonarAnalyzer.Extensions
 {
     internal static class AssignmentExpressionSyntaxExtensions
     {
+        public readonly record struct AssignmentMapping(ExpressionSyntax Left, ExpressionSyntax Right);
+
         /// <summary>
         /// Maps the left and the right side arguments of an <paramref name="assignment"/>. If both sides are tuples, the tuple elements are mapped.
         /// <code>
@@ -40,23 +42,23 @@ namespace SonarAnalyzer.Extensions
         /// </summary>
         /// <param name="assignment">The <paramref name="assignment"/> expression.</param>
         /// <returns>A mapping from expressions on the left side of the <paramref name="assignment"/> to the right side.</returns>
-        public static ImmutableArray<KeyValuePair<ExpressionSyntax, ExpressionSyntax>> MapAssignmentArguments(this AssignmentExpressionSyntax assignment)
+        public static ImmutableArray<AssignmentMapping> MapAssignmentArguments(this AssignmentExpressionSyntax assignment)
         {
             if (TupleExpressionSyntaxWrapper.IsInstance(assignment.Left)
                 && TupleExpressionSyntaxWrapper.IsInstance(assignment.Right))
             {
                 var left = (TupleExpressionSyntaxWrapper)assignment.Left;
                 var right = (TupleExpressionSyntaxWrapper)assignment.Right;
-                var builder = ImmutableArray.CreateBuilder<KeyValuePair<ExpressionSyntax, ExpressionSyntax>>(initialCapacity: left.Arguments.Count);
+                var builder = ImmutableArray.CreateBuilder<AssignmentMapping>(initialCapacity: left.Arguments.Count);
                 AssignTupleElements(builder, left, right);
                 return builder.ToImmutableArray();
             }
             else
             {
-                return ImmutableArray.Create(new KeyValuePair<ExpressionSyntax, ExpressionSyntax>(assignment.Left, assignment.Right));
+                return ImmutableArray.Create(new AssignmentMapping(assignment.Left, assignment.Right));
             }
 
-            static void AssignTupleElements(ImmutableArray<KeyValuePair<ExpressionSyntax, ExpressionSyntax>>.Builder builder,
+            static void AssignTupleElements(ImmutableArray<AssignmentMapping>.Builder builder,
                                             TupleExpressionSyntaxWrapper left,
                                             TupleExpressionSyntaxWrapper right)
             {
@@ -73,7 +75,7 @@ namespace SonarAnalyzer.Extensions
                     }
                     else
                     {
-                        builder.Add(new KeyValuePair<ExpressionSyntax, ExpressionSyntax>(leftArg.Expression, rightArg.Expression));
+                        builder.Add(new AssignmentMapping(leftArg.Expression, rightArg.Expression));
                     }
                 }
             }
