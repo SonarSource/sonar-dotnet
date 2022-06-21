@@ -88,10 +88,10 @@ namespace SonarAnalyzer.Rules.CSharp
                 }
             }
             else if (expression is MemberAccessExpressionSyntax memberAccess
-                && semanticModel.GetSymbolInfo(expression).Symbol is IPropertySymbol propertySymbol
                 && semanticModel.GetSymbolInfo(memberAccess.Expression).Symbol is IFieldSymbol fieldSymbol
                 && IsFieldReadonlyAndPossiblyValueType(fieldSymbol)
-                && !IsInsideConstructorDeclaration(expression, fieldSymbol.ContainingType, semanticModel))
+                && !IsInsideConstructorDeclaration(expression, fieldSymbol.ContainingType, semanticModel)
+                && semanticModel.GetSymbolInfo(expression).Symbol is IPropertySymbol propertySymbol)
             {
                 context.ReportIssue(Diagnostic.Create(Rule, expression.GetLocation(), fieldSymbol.Name, propertySymbol.Name));
             }
