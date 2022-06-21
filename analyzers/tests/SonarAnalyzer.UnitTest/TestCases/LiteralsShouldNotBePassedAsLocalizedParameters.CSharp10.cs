@@ -1,5 +1,8 @@
-﻿public struct S
+﻿using System.ComponentModel;
+
+public struct S
 {
+    [Localizable(true)]
     public string Property { get; set; }
 
     public void M()
