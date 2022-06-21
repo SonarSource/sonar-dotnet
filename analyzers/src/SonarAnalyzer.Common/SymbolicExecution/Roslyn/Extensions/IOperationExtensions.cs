@@ -53,11 +53,11 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
         internal static IArgumentOperationWrapper ToArgument(this IOperation operation) =>
             IArgumentOperationWrapper.FromOperation(operation);
 
-        private static T? As<T>(this IOperation operation, OperationKind kind, Func<IOperation, T> fromOperation) where T : struct =>
-            operation.Kind == kind ? fromOperation(operation) : null;
-
-        private static bool IsStaticOrThis(IOperation operation) =>
+        public static bool IsStaticOrThis(this IOperation operation) =>
             operation == null // static fields
             || operation.IsAnyKind(OperationKindEx.InstanceReference);
+
+        private static T? As<T>(this IOperation operation, OperationKind kind, Func<IOperation, T> fromOperation) where T : struct =>
+            operation.Kind == kind ? fromOperation(operation) : null;
     }
 }

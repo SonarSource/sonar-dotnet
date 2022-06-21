@@ -1,0 +1,516 @@
+﻿/*
+ * SonarAnalyzer for .NET
+ * Copyright (C) 2015-2022 SonarSource SA
+ * mailto: contact AT sonarsource DOT com
+ *
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU Lesser General Public
+ * License as published by the Free Software Foundation; either
+ * version 3 of the License, or (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * Lesser General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public License
+ * along with this program; if not, write to the Free Software Foundation,
+ * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ */
+
+using SonarAnalyzer.UnitTest.TestFramework.SymbolicExecution;
+
+namespace SonarAnalyzer.UnitTest.SymbolicExecution.Roslyn
+{
+    public partial class RoslynSymbolicExecutionTest
+    {
+        [TestMethod]
+        public void ExceptionCandidate_ArrayElementReference()
+        {
+            const string code = @"
+var tag = ""BeforeTry"";
+try
+{
+    tag = ""InTry"";
+    var x = c[42];
+}
+catch
+{
+    tag = ""InCatch"";
+}
+tag = ""AfterCatch"";";
+            var validator = SETestContext.CreateCS(code, ", char[] c").Validator;
+            validator.ValidateTagOrder("BeforeTry", "InTry", "InCatch", "AfterCatch");
+            validator.TagStates("InCatch").Should().HaveCount(1).And.ContainSingle(x => HasUnknownException(x));
+            validator.ExitStates.Should().ContainSingle(x => HasNoException(x));
+        }
+
+        [TestMethod]
+        public void ExceptionCandidate_ObjectCreation()
+        {
+            const string code = @"
+var tag = ""BeforeTry"";
+try
+{
+    tag = ""InTry"";
+    var x = new String(c, 0, 0); // Can throw ArgumentNullException
+}
+catch
+{
+    tag = ""InCatch"";
+}
+tag = ""AfterCatch"";";
+            var validator = SETestContext.CreateCS(code, ", char[] c").Validator;
+            validator.ValidateTagOrder("BeforeTry", "InTry", "InCatch", "AfterCatch");
+            validator.TagStates("InCatch").Should().ContainSingle(x => HasUnknownException(x));
+            validator.ExitStates.Should().ContainSingle(x => HasNoException(x));
+        }
+
+        [TestMethod]
+        public void ExceptionCandidate_ConversionOperation_Explicit()
+        {
+            const string code = @"
+var tag = ""BeforeTry"";
+try
+{
+    tag = ""InTry"";
+    int x = (int)p;
+}
+catch
+{
+    tag = ""InCatch"";
+}
+tag = ""AfterCatch"";";
+            var validator = SETestContext.CreateCS(code, ", long p").Validator;
+            validator.ValidateTagOrder("BeforeTry", "InTry", "InCatch", "AfterCatch");
+            validator.TagStates("InCatch").Should().ContainSingle(x => HasUnknownException(x));
+            validator.ExitStates.Should().ContainSingle(x => HasNoException(x));
+        }
+
+        [TestMethod]
+        public void ExceptionCandidate_ConversionOperation_Implicit()
+        {
+            const string code = @"
+var tag = ""BeforeTry"";
+try
+{
+    tag = ""InTry"";
+    long x = p;
+}
+catch
+{
+    tag = ""InCatch"";
+}
+tag = ""AfterCatch"";";
+            var validator = SETestContext.CreateCS(code, ", int p").Validator;
+            validator.ValidateTagOrder("BeforeTry", "InTry", "AfterCatch");
+            validator.TagStates("AfterCatch").Should().ContainSingle(x => HasNoException(x));
+        }
+
+        [TestMethod]
+        public void ExceptionCandidate_DynamicIndexerAccess()
+        {
+            const string code = @"
+var tag = ""BeforeTry"";
+dynamic x = new Object();
+try
+{
+    tag = ""InTry"";
+    int y = x[0];
+}
+catch
+{
+    tag = ""InCatch"";
+}
+tag = ""AfterCatch"";";
+            var validator = SETestContext.CreateCS(code, ", long p").Validator;
+            validator.ValidateTagOrder("BeforeTry", "InTry", "InCatch", "AfterCatch");
+            validator.TagStates("InCatch").Should().ContainSingle(x => HasUnknownException(x));
+            validator.ExitStates.Should().ContainSingle(x => HasNoException(x));
+        }
+
+        [TestMethod]
+        public void ExceptionCandidate_DynamicInvocation()
+        {
+            const string code = @"
+var tag = ""BeforeTry"";
+dynamic x = new Object();
+try
+{
+    tag = ""InTry"";
+    int y = x.Invocation();
+}
+catch
+{
+    tag = ""InCatch"";
+}
+tag = ""AfterCatch"";";
+            var validator = SETestContext.CreateCS(code).Validator;
+            validator.ValidateTagOrder("BeforeTry", "InTry", "InCatch", "AfterCatch");
+            validator.TagStates("InCatch").Should().ContainSingle(x => HasUnknownException(x));
+            validator.ExitStates.Should().ContainSingle(x => HasNoException(x));
+        }
+
+        [TestMethod]
+        public void ExceptionCandidate_DynamicMemberReference()
+        {
+            const string code = @"
+var tag = ""BeforeTry"";
+dynamic x = new Object();
+try
+{
+    tag = ""InTry"";
+    int y = x.Property;
+}
+catch
+{
+    tag = ""InCatch"";
+}
+tag = ""AfterCatch"";";
+            var validator = SETestContext.CreateCS(code).Validator;
+            validator.ValidateTagOrder("BeforeTry", "InTry", "InCatch", "AfterCatch");
+            validator.TagStates("InCatch").Should().ContainSingle(x => HasUnknownException(x));
+            validator.ExitStates.Should().ContainSingle(x => HasNoException(x));
+        }
+
+        [TestMethod]
+        public void ExceptionCandidate_DynamicObjectCreation()
+        {
+            const string code = @"
+var tag = ""BeforeTry"";
+try
+{
+    tag = ""InTry"";
+    var x = new Sample(d);
+}
+catch
+{
+    tag = ""InCatch"";
+}
+tag = ""AfterCatch"";";
+            var validator = SETestContext.CreateCS(code, ", dynamic d").Validator;
+            validator.ValidateTagOrder("BeforeTry", "InTry", "InCatch", "AfterCatch");
+            validator.TagStates("InCatch").Should().ContainSingle(x => HasUnknownException(x));
+            validator.ExitStates.Should().ContainSingle(x => HasNoException(x));
+        }
+
+        [TestMethod]
+        public void ExceptionCandidate_EventReference_Instance()
+        {
+            const string code = @"
+var tag = ""BeforeTry"";
+try
+{
+    tag = ""InTry"";
+    p.Event += (sender, args) => { };
+}
+catch
+{
+    tag = ""InCatch"";
+}
+tag = ""AfterCatch"";";
+            var validator = SETestContext.CreateCS(code, ", Person p").Validator;
+            validator.ValidateTagOrder("BeforeTry", "InTry", "InCatch", "AfterCatch");
+            validator.TagStates("InCatch").Should().ContainSingle(x => HasUnknownException(x));
+            validator.ExitStates.Should().ContainSingle(x => HasNoException(x));
+        }
+
+        [TestMethod]
+        public void ExceptionCandidate_EventReference_Static()
+        {
+            const string code = @"
+var tag = ""BeforeTry"";
+try
+{
+    tag = ""InTry"";
+    StaticEvent += (sender, args) => { };
+}
+catch
+{
+    tag = ""InCatch"";
+}
+tag = ""AfterCatch"";";
+            var validator = SETestContext.CreateCS(code).Validator;
+            validator.ValidateTagOrder("BeforeTry", "InTry", "AfterCatch");
+            validator.ExitStates.Should().ContainSingle(x => HasNoException(x));
+        }
+
+        [DataTestMethod]
+        [DataRow("this.Event")]
+        [DataRow("Event")]
+        public void ExceptionCandidate_EventReference_This(string eventReference)
+        {
+            var code = $@"
+var tag = ""BeforeTry"";
+try
+{{
+    tag = ""InTry"";
+    {eventReference} += (sender, args) => {{ }};
+}}
+catch
+{{
+    tag = ""InCatch"";
+}}
+tag = ""AfterCatch"";";
+            var validator = SETestContext.CreateCS(code, ", Person p").Validator;
+            validator.ValidateTagOrder("BeforeTry", "InTry", "AfterCatch");
+            validator.ExitStates.Should().ContainSingle(x => HasNoException(x));
+        }
+
+        [TestMethod]
+        public void ExceptionCandidate_FieldReference_Instance()
+        {
+            const string code = @"
+var tag = ""BeforeTry"";
+try
+{
+    tag = ""InTry"";
+    var x = p.firstName;
+}
+catch
+{
+    tag = ""InCatch"";
+}
+tag = ""AfterCatch"";";
+            var validator = SETestContext.CreateCS(code, ", Person p").Validator;
+            validator.ValidateTagOrder("BeforeTry", "InTry", "InCatch", "AfterCatch");
+            validator.TagStates("InCatch").Should().ContainSingle(x => HasUnknownException(x));
+            validator.ExitStates.Should().ContainSingle(x => HasNoException(x));
+        }
+
+        [DataTestMethod]
+        [DataRow("this.field")]
+        [DataRow("field")]
+        public void ExceptionCandidate_FieldReference_This(string field)
+        {
+            var code = $@"
+var tag = ""BeforeTry"";
+try
+{{
+    tag = ""InTry"";
+    var x = {field};
+}}
+catch
+{{
+    tag = ""InCatch"";
+}}
+tag = ""AfterCatch"";";
+            var validator = SETestContext.CreateCS(code).Validator;
+            validator.ValidateTagOrder("BeforeTry", "InTry", "AfterCatch");
+            validator.ExitStates.Should().ContainSingle(x => HasNoException(x));
+        }
+
+        [TestMethod]
+        public void ExceptionCandidate_FieldReference_Static()
+        {
+            const string code = @"
+var tag = ""BeforeTry"";
+try
+{
+    tag = ""InTry"";
+    var x = DateTime.MaxValue;
+}
+catch
+{
+    tag = ""InCatch"";
+}
+tag = ""AfterCatch"";";
+            var validator = SETestContext.CreateCS(code).Validator;
+            validator.ValidateTagOrder("BeforeTry", "InTry", "AfterCatch");
+            validator.ExitStates.Should().HaveCount(1).And.ContainSingle(x => HasNoException(x));
+        }
+
+        [TestMethod]
+        public void ExceptionCandidate_ForEachLoop()
+        {
+            const string code = @"
+var tag = ""BeforeTry"";
+try
+{
+    tag = ""InTry"";
+    foreach (string element in collection) // can throw if the collection is null or if it gets modified
+    {
+    }
+}
+catch
+{
+    tag = ""InCatch"";
+}
+tag = ""AfterCatch"";";
+            var validator = SETestContext.CreateCS(code, ", IEnumerable<string> collection").Validator;
+            validator.ValidateTagOrder("BeforeTry", "InTry", "InCatch", "AfterCatch", "InCatch", "AfterCatch");
+
+            // IForEachLoopOperation is not generated. It doesn't seem to be used.
+
+            // In the case of foreach, there are implicit method calls that in the current implementation can throw:
+            // - IEnumerable<>.GetEnumerator()
+            // - System.Collections.IEnumerator.MoveNext()
+            // - System.IDisposable.Dispose()
+            validator.TagStates("InCatch").Should().HaveCount(2).And.OnlyContain(x => HasUnknownException(x));
+            HasUnknownException(validator.ExitStates[0]).Should().BeTrue();
+            HasNoException(validator.ExitStates[1]).Should().BeTrue();
+            HasNoException(validator.ExitStates[2]).Should().BeTrue();
+        }
+
+        [TestMethod]
+        public void ExceptionCandidate_FunctionPointerInvocation()
+        {
+            const string code = @"
+var tag = ""BeforeTry"";
+try
+{
+    tag = ""InTry"";
+    ptr(tag);
+}
+catch
+{
+    tag = ""InCatch"";
+}
+tag = ""AfterCatch"";";
+
+            // IFunctionPointerInvocationOperation is not generated. It doesn't seem used.
+            var validator = SETestContext.CreateCS(code, ", delegate*<string, void> ptr").Validator;
+
+            validator.ValidateTagOrder("BeforeTry", "InTry", "AfterCatch");
+            validator.ExitStates.Should().HaveCount(1).And.ContainSingle(x => HasNoException(x));
+        }
+
+        [TestMethod]
+        public void ExceptionCandidate_PropertyReference()
+        {
+            const string code = @"
+var tag = ""BeforeTry"";
+try
+{
+    tag = ""InTry"";
+    var x = tag.Length;
+}
+catch
+{
+    tag = ""InCatch"";
+}
+tag = ""AfterCatch"";";
+
+            var validator = SETestContext.CreateCS(code).Validator;
+
+            validator.ValidateTagOrder("BeforeTry", "InTry", "InCatch", "AfterCatch");
+            validator.TagStates("InCatch").Should().ContainSingle(x => HasUnknownException(x));
+            validator.ExitStates.Should().HaveCount(1).And.ContainSingle(x => HasNoException(x));
+        }
+
+        [TestMethod]
+        public void ExceptionCandidate_PropertyReference_Static()
+        {
+            const string code = @"
+var tag = ""BeforeTry"";
+try
+{
+    tag = ""InTry"";
+    var x = Person.StaticProperty;
+}
+catch
+{
+    tag = ""InCatch"";
+}
+tag = ""AfterCatch"";";
+
+            var validator = SETestContext.CreateCS(code).Validator;
+
+            validator.ValidateTagOrder("BeforeTry", "InTry", "AfterCatch");
+            validator.ExitStates.Should().HaveCount(1).And.ContainSingle(x => HasNoException(x));
+        }
+
+        [DataTestMethod]
+        [DataRow("this.Property")]
+        [DataRow("Property")]
+        public void ExceptionCandidate_PropertyReference_This(string property)
+        {
+            var code = $@"
+var tag = ""BeforeTry"";
+try
+{{
+    tag = ""InTry"";
+    var x = {property};
+}}
+catch
+{{
+    tag = ""InCatch"";
+}}
+tag = ""AfterCatch"";";
+
+            var validator = SETestContext.CreateCS(code).Validator;
+
+            validator.ValidateTagOrder("BeforeTry", "InTry", "AfterCatch");
+            validator.ExitStates.Should().HaveCount(1).And.ContainSingle(x => HasNoException(x));
+        }
+
+        [TestMethod]
+        public void ExceptionCandidate_MethodReference()
+        {
+            const string code = @"
+var tag = ""BeforeTry"";
+try
+{
+    tag = ""InTry"";
+    var x = p.GetName;
+}
+catch
+{
+    tag = ""InCatch"";
+}
+tag = ""AfterCatch"";";
+
+            var validator = SETestContext.CreateCS(code, ", Person p").Validator;
+
+            validator.ValidateTagOrder("BeforeTry", "InTry", "InCatch", "AfterCatch");
+            validator.TagStates("InCatch").Should().ContainSingle(x => HasUnknownException(x));
+            validator.ExitStates.Should().HaveCount(1).And.ContainSingle(x => HasNoException(x));
+        }
+
+        [DataTestMethod]
+        [DataRow("this.Tag")]
+        [DataRow("Tag")]
+        public void ExceptionCandidate_MethodReference_This(string method)
+        {
+            var code = $@"
+var tag = ""BeforeTry"";
+try
+{{
+    tag = ""InTry"";
+    var x = {method};
+}}
+catch
+{{
+    tag = ""InCatch"";
+}}
+tag = ""AfterCatch"";";
+
+            var validator = SETestContext.CreateCS(code).Validator;
+
+            validator.ValidateTagOrder("BeforeTry", "InTry", "AfterCatch");
+            validator.ExitStates.Should().HaveCount(1).And.ContainSingle(x => HasNoException(x));
+        }
+
+        [TestMethod]
+        public void ExceptionCandidate_MethodReference_Static()
+        {
+            const string code = @"
+var tag = ""BeforeTry"";
+try
+{
+    tag = ""InTry"";
+    var x = Person.StaticMethod;
+}
+catch
+{
+    tag = ""InCatch"";
+}
+tag = ""AfterCatch"";";
+
+            var validator = SETestContext.CreateCS(code).Validator;
+
+            validator.ValidateTagOrder("BeforeTry", "InTry", "AfterCatch");
+            validator.ExitStates.Should().HaveCount(1).And.ContainSingle(x => HasNoException(x));
+        }
+    }
+}

@@ -549,10 +549,14 @@ tag = ""UnreachableAfterCatch"";";
             validator.ValidateTagOrder(
                 "BeforeTry",
                 "InTry",
-                "InCatch",          // With Exception thrown by Tag("InTry")
-                "InCatch");         // With Exception thrown by `throw`
+                "InCatch", // With Exception thrown by Tag("InTry")
+                "InCatch"); // With Exception thrown by `throw`
 
-            ValidateHasOnlyUnknownExceptionAndSystemException(validator, "InCatch");
+            validator.TagStates("InCatch").Should().HaveCount(2)
+                .And.ContainSingle(x => HasSystemException(x))
+                .And.ContainSingle(x => HasUnknownException(x));
+
+            validator.ValidateExitReachCount(1);
         }
 
         [TestMethod]
@@ -1172,6 +1176,7 @@ tag = ""End"";";
                 "InFinally",
                 "InCatchArgument",
                 "InCatchAll",
+                "InFinally", // ToDo: remove this, ex.ParamName cannot throw in this case
                 "InCatchAllWhen",
                 "End",
                 "InCatchArgumentWhen");
@@ -1180,7 +1185,9 @@ tag = ""End"";";
             validator.TagStates("InCatchArgument").Should().HaveCount(1).And.ContainSingle(x => HasUnknownException(x));
             validator.TagStates("InCatchAllWhen").Should().HaveCount(1).And.ContainSingle(x => HasUnknownException(x));
             validator.TagStates("InCatchAll").Should().HaveCount(1).And.ContainSingle(x => HasUnknownException(x));
-            validator.TagStates("InFinally").Should().HaveCount(1).And.ContainSingle(x => HasNoException(x));
+            validator.TagStates("InFinally").Should().HaveCount(2)
+                .And.ContainSingle(x => HasNoException(x))
+                .And.ContainSingle(x => HasUnknownException(x));
             validator.TagStates("End").Should().HaveCount(1).And.ContainSingle(x => HasNoException(x));
         }
 
@@ -1351,9 +1358,12 @@ tag = ""AfterCatch"";";
                 "BeforeTry",
                 "InTry",
                 "InCatch",
+                "InCatch",
                 "AfterCatch");
 
-            validator.TagStates("InCatch").Should().HaveCount(1).And.ContainSingle(x => HasExceptionOfType(x, "NotImplementedException"));
+            validator.TagStates("InCatch").Should().HaveCount(2)
+                     .And.ContainSingle(x => HasExceptionOfType(x, "NotImplementedException"))
+                     .And.ContainSingle(x => HasUnknownException(x)); // ArrayReference can throw IndexOutOfBounds
             validator.TagStates("AfterCatch").Should().HaveCount(1).And.ContainSingle(x => HasNoException(x));
         }
 
@@ -1433,9 +1443,12 @@ tag = ""AfterCatch"";";
                 "BeforeTry",
                 "InTry",
                 "InCatch",
+                "InCatch",
                 "AfterCatch");
 
-            validator.TagStates("InCatch").Should().HaveCount(1).And.ContainSingle(x => HasExceptionOfType(x, "FileNotFoundException"));
+            validator.TagStates("InCatch").Should().HaveCount(2)
+                     .And.ContainSingle(x => HasExceptionOfType(x, "FileNotFoundException"))
+                     .And.ContainSingle(x => HasUnknownException(x)); // ObjectCreation can throw unknown exception
             validator.TagStates("AfterCatch").Should().HaveCount(1).And.ContainSingle(x => HasNoException(x));
         }
 
