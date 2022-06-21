@@ -45,8 +45,10 @@ namespace SonarAnalyzer.Extensions
             if (TupleExpressionSyntaxWrapper.IsInstance(assignment.Left)
                 && TupleExpressionSyntaxWrapper.IsInstance(assignment.Right))
             {
-                var builder = ImmutableArray.CreateBuilder<KeyValuePair<ExpressionSyntax, ExpressionSyntax>>();
-                AssignTupleElements(builder, (TupleExpressionSyntaxWrapper)assignment.Left, (TupleExpressionSyntaxWrapper)assignment.Right);
+                var left = (TupleExpressionSyntaxWrapper)assignment.Left;
+                var right = (TupleExpressionSyntaxWrapper)assignment.Right;
+                var builder = ImmutableArray.CreateBuilder<KeyValuePair<ExpressionSyntax, ExpressionSyntax>>(initialCapacity: left.Arguments.Count);
+                AssignTupleElements(builder, left, right);
                 return builder.ToImmutableArray();
             }
             else

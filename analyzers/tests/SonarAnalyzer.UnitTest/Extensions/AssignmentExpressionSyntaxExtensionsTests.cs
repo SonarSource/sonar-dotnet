@@ -127,6 +127,77 @@ namespace SonarAnalyzer.UnitTest.Extensions
                 });
         }
 
+        [TestMethod]
+        public void AssignmentExpressionSyntaxExtensions_MisalignedLeft()
+        {
+            var code = "(var x, var y) = (1, 2, 3);";
+            var syntaxTree = CSharpSyntaxTree.ParseText(WrapInMethod(code));
+            var assigment = syntaxTree.GetRoot().DescendantNodesAndSelf().OfType<AssignmentExpressionSyntax>().Single();
+            var mapping = assigment.MapAssignmentArguments();
+            mapping.Should().BeEquivalentTo(new[]
+                {
+                    new
+                    {
+                        Key = new { Designation = new { Identifier = new { Text = "x" } } },
+                        Value = new { Token = new { Text = "1" } },
+                    },
+                    new
+                    {
+                        Key = new { Designation = new { Identifier = new { Text = "y" } } },
+                        Value = new { Token = new { Text = "2" } },
+                    },
+                });
+        }
+
+        [TestMethod]
+        public void AssignmentExpressionSyntaxExtensions_MisalignedRight()
+        {
+            var code = "(var x, var y, var z) = (1, 2);";
+            var syntaxTree = CSharpSyntaxTree.ParseText(WrapInMethod(code));
+            var assigment = syntaxTree.GetRoot().DescendantNodesAndSelf().OfType<AssignmentExpressionSyntax>().Single();
+            var mapping = assigment.MapAssignmentArguments();
+            mapping.Should().BeEquivalentTo(new[]
+                {
+                    new
+                    {
+                        Key = new { Designation = new { Identifier = new { Text = "x" } } },
+                        Value = new { Token = new { Text = "1" } },
+                    },
+                    new
+                    {
+                        Key = new { Designation = new { Identifier = new { Text = "y" } } },
+                        Value = new { Token = new { Text = "2" } },
+                    },
+                });
+        }
+
+        [TestMethod]
+        public void AssignmentExpressionSyntaxExtensions_MisalignedNested()
+        {
+            var code = "(var a, (var b, var c, var d), var e) = (1, (2, 3));";
+            var syntaxTree = CSharpSyntaxTree.ParseText(WrapInMethod(code));
+            var assigment = syntaxTree.GetRoot().DescendantNodesAndSelf().OfType<AssignmentExpressionSyntax>().Single();
+            var mapping = assigment.MapAssignmentArguments();
+            mapping.Should().BeEquivalentTo(new[]
+                {
+                    new
+                    {
+                        Key = new { Designation = new { Identifier = new { Text = "a" } } },
+                        Value = new { Token = new { Text = "1" } },
+                    },
+                    new
+                    {
+                        Key = new { Designation = new { Identifier = new { Text = "b" } } },
+                        Value = new { Token = new { Text = "2" } },
+                    },
+                    new
+                    {
+                        Key = new { Designation = new { Identifier = new { Text = "c" } } },
+                        Value = new { Token = new { Text = "3" } },
+                    },
+                });
+        }
+
         [DataTestMethod]
         // Normal assignment
         [DataRow("int a; a = 1;", "a")]
