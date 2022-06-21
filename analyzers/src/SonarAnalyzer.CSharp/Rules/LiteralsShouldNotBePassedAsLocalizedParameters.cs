@@ -104,7 +104,6 @@ namespace SonarAnalyzer.Rules.CSharp
                 {
                     context.ReportIssue(Diagnostic.Create(Rule, assignmentMapping.Right.GetLocation()));
                 }
-
             }
         }
 
