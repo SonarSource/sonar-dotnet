@@ -244,7 +244,14 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
         private static ExceptionState ThrowExceptionType(IOperation operation) =>
             operation.Kind switch
             {
+                OperationKindEx.ArrayElementReference => new ExceptionState(operation.Type),
+                OperationKindEx.FieldReference => new ExceptionState(operation.Type),
+                OperationKindEx.Invocation => new ExceptionState(operation.Type),
+                OperationKindEx.LocalReference => new ExceptionState(operation.Type),
                 OperationKindEx.ObjectCreation => new ExceptionState(operation.Type),
+                OperationKindEx.ParameterReference => new ExceptionState(operation.Type),
+                OperationKindEx.PropertyReference => new ExceptionState(operation.Type),
+                OperationKindEx.Conversion => new ExceptionState(IConversionOperationWrapper.FromOperation(operation).Operand.Type),
                 _ => null
             };
 

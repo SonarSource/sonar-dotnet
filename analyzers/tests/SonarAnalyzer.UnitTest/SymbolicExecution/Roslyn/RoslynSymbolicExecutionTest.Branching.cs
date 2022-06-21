@@ -166,7 +166,7 @@ public int Method(bool a)
         return 2;
 }";
             var validator = SETestContext.CreateCSMethod(method).Validator;
-            validator.ValidateExitReachCount(1);
+            validator.ValidateExitReachCount(2);
             validator.ValidateExecutionCompleted();
         }
 

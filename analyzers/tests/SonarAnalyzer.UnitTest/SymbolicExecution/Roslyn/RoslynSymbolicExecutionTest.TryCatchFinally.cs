@@ -525,7 +525,7 @@ tag = ""UnreachableAfterCatch"";";
             validator.ValidateExitReachCount(1);
 
             validator.TagStates("InCatch").Should().HaveCount(1)
-                     .And.ContainSingle(x => HasExceptionOfTypeException(x));
+                     .And.ContainSingle(x => HasSystemException(x));
         }
 
         [TestMethod]
@@ -695,7 +695,7 @@ tag = ""AfterFinally"";";
 
             validator.TagStates("InFinally").Should().HaveCount(2)
                 .And.ContainSingle(x => HasNoException(x))
-                .And.ContainSingle(x => HasExceptionOfTypeException(x));
+                .And.ContainSingle(x => HasSystemException(x));
 
             validator.TagStates("AfterFinally").Should().HaveCount(1)
                 .And.ContainSingle(x => HasNoException(x));
@@ -762,7 +762,9 @@ tag = ""After"";";
             validator.ValidateTagOrder(
                 "BeforeTry",
                 "InTry",
-                "InNestedTry"); // ToDo: the rest of the tags are missing since we don't support Conversion operation
+                "InNestedTry",
+                "InNestedCatch",
+                "After");
         }
 
         [TestMethod]
@@ -793,7 +795,9 @@ tag = ""After"";";
             validator.ValidateTagOrder(
                 "BeforeTry",
                 "InTry",
-                "InNestedTry"); // ToDo: the rest of the tags are missing since we don't support Conversion operation
+                "InNestedTry",
+                "InNestedCatch",
+                "After");
         }
 
         [TestMethod]
@@ -824,7 +828,9 @@ tag = ""After"";";
             validator.ValidateTagOrder(
                 "BeforeTry",
                 "InTry",
-                "InNestedTry"); // ToDo: the rest of the tags are missing since we don't support Conversion operation
+                "InNestedTry",
+                "InNestedCatch",
+                "After");
         }
 
         [TestMethod]
@@ -1183,12 +1189,198 @@ tag = ""End"";";
         private static void ValidateHasOnlyUnknownExceptionAndSystemException(ValidatorTestCheck validator, string stateName) =>
             validator.TagStates(stateName).Should().HaveCount(2)
                 .And.ContainSingle(x => HasUnknownException(x))
-                .And.ContainSingle(x => HasExceptionOfTypeException(x));
+                .And.ContainSingle(x => HasSystemException(x));
 
         private static void ValidateHasOnlyNoExceptionAndUnknownException(ValidatorTestCheck validator, string stateName) =>
             validator.TagStates(stateName).Should().HaveCount(2)
                 .And.ContainSingle(x => HasNoException(x))
                 .And.ContainSingle(x => HasUnknownException(x));
+
+        [TestMethod]
+        public void Exception_FieldReference()
+        {
+            const string code = @"
+var tag = ""BeforeTry"";
+try
+{
+    tag = ""InTry"";
+    throw fieldException;
+}
+catch
+{
+    tag = ""InCatch"";
+}
+tag = ""AfterCatch"";";
+            var validator = SETestContext.CreateCS(code).Validator;
+            validator.ValidateTagOrder(
+                "BeforeTry",
+                "InTry",
+                "InCatch",
+                "AfterCatch");
+
+            validator.TagStates("InCatch").Should().HaveCount(1).And.ContainSingle(x => HasSystemException(x));
+            validator.TagStates("AfterCatch").Should().HaveCount(1).And.ContainSingle(x => HasNoException(x));
+        }
+
+        [TestMethod]
+        public void Exception_LocalReference()
+        {
+            const string code = @"
+Exception exception = null;
+var tag = ""BeforeTry"";
+try
+{
+    tag = ""InTry"";
+    throw exception;
+}
+catch
+{
+    tag = ""InCatch"";
+}
+tag = ""AfterCatch"";";
+            var validator = SETestContext.CreateCS(code).Validator;
+            validator.ValidateTagOrder(
+                "BeforeTry",
+                "InTry",
+                "InCatch",
+                "AfterCatch");
+
+            validator.TagStates("InCatch").Should().HaveCount(1).And.ContainSingle(x => HasSystemException(x));
+            validator.TagStates("AfterCatch").Should().HaveCount(1).And.ContainSingle(x => HasNoException(x));
+        }
+
+        [TestMethod]
+        public void Exception_PropertyReference()
+        {
+            const string code = @"
+var tag = ""BeforeTry"";
+try
+{
+    tag = ""InTry"";
+    throw PropertyException;
+}
+catch
+{
+    tag = ""InCatch"";
+}
+tag = ""AfterCatch"";";
+            var validator = SETestContext.CreateCS(code).Validator;
+            validator.ValidateTagOrder(
+                "BeforeTry",
+                "InTry",
+                "InCatch",
+                "AfterCatch");
+
+            validator.TagStates("InCatch").Should().HaveCount(1).And.ContainSingle(x => HasSystemException(x));
+            validator.TagStates("AfterCatch").Should().HaveCount(1).And.ContainSingle(x => HasNoException(x));
+        }
+
+        [TestMethod]
+        public void Exception_ParameterReference()
+        {
+            const string code = @"
+var tag = ""BeforeTry"";
+try
+{
+    tag = ""InTry"";
+    throw ex;
+}
+catch
+{
+    tag = ""InCatch"";
+}
+tag = ""AfterCatch"";";
+            var validator = SETestContext.CreateCS(code, ", Exception ex").Validator;
+            validator.ValidateTagOrder(
+                "BeforeTry",
+                "InTry",
+                "InCatch",
+                "AfterCatch");
+
+            validator.TagStates("InCatch").Should().HaveCount(1).And.ContainSingle(x => HasSystemException(x));
+            validator.TagStates("AfterCatch").Should().HaveCount(1).And.ContainSingle(x => HasNoException(x));
+        }
+
+        [TestMethod]
+        public void Exception_ArrayElementReference()
+        {
+            const string code = @"
+Exception[] exceptions = null;
+var tag = ""BeforeTry"";
+try
+{
+    tag = ""InTry"";
+    throw exceptions[0];
+}
+catch
+{
+    tag = ""InCatch"";
+}
+tag = ""AfterCatch"";";
+            var validator = SETestContext.CreateCS(code).Validator;
+            validator.ValidateTagOrder(
+                "BeforeTry",
+                "InTry",
+                "InCatch",
+                "AfterCatch");
+
+            validator.TagStates("InCatch").Should().HaveCount(1).And.ContainSingle(x => HasSystemException(x));
+            validator.TagStates("AfterCatch").Should().HaveCount(1).And.ContainSingle(x => HasNoException(x));
+        }
+
+        [TestMethod]
+        public void Exception_MethodInvocation()
+        {
+            const string code = @"
+var tag = ""BeforeTry"";
+try
+{
+    tag = ""InTry"";
+    throw CreateException();
+}
+catch
+{
+    tag = ""InCatch"";
+}
+tag = ""AfterCatch"";";
+            var validator = SETestContext.CreateCS(code).Validator;
+            validator.ValidateTagOrder(
+                "BeforeTry",
+                "InTry",
+                "InCatch", // In case CreateException throws
+                "InCatch", // throw
+                "AfterCatch");
+
+            ValidateHasOnlyUnknownExceptionAndSystemException(validator, "InCatch");
+            validator.TagStates("AfterCatch").Should().HaveCount(1).And.ContainSingle(x => HasNoException(x));
+        }
+
+        [TestMethod]
+        public void Exception_Conversion()
+        {
+            const string code = @"
+var tag = ""BeforeTry"";
+var obj = new ArgumentNullException();
+try
+{
+    tag = ""InTry"";
+    throw obj;
+}
+catch
+{
+    tag = ""InCatch"";
+}
+tag = ""AfterCatch"";";
+            var validator = SETestContext.CreateCS(code).Validator;
+            validator.ValidateTagOrder(
+                "BeforeTry",
+                "InTry",
+                "InCatch",
+                "AfterCatch");
+
+            validator.TagStates("InCatch").Should().HaveCount(1).And.ContainSingle(x => HasExceptionOfType(x, "ArgumentNullException"));
+            validator.TagStates("AfterCatch").Should().HaveCount(1).And.ContainSingle(x => HasNoException(x));
+        }
 
         private static bool HasNoException(ProgramState state) =>
             state.Exception == null;
@@ -1196,7 +1388,7 @@ tag = ""End"";";
         private static bool HasUnknownException(ProgramState state) =>
              state.Exception == ExceptionState.UnknownException;
 
-        private static bool HasExceptionOfTypeException(ProgramState state) =>
+        private static bool HasSystemException(ProgramState state) =>
             HasExceptionOfType(state, "Exception");
 
         private static bool HasExceptionOfType(ProgramState state, string typeName) =>
