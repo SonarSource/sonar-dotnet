@@ -102,7 +102,6 @@ namespace SonarAnalyzer.Rules.CSharp
         }
 
         private static MultiValueDictionary<DocumentId, ClassDeclarationSyntax> GetDocumentIdClassDeclarationMapping(IEnumerable<ClassDeclarationSyntax> classDeclarations, Solution currentSolution)
-            IEnumerable<ClassDeclarationSyntax> classDeclarations, Solution currentSolution)
         {
             var mapping = new MultiValueDictionary<DocumentId, ClassDeclarationSyntax>();
             foreach (var classDeclaration in classDeclarations)
