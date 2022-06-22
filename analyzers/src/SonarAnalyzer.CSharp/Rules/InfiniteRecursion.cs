@@ -38,7 +38,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private readonly IChecker checker;
 
-        private static DiagnosticDescriptor Rule => DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
+        private static DiagnosticDescriptor Rule => DescriptorFactory.Create(DiagnosticId, MessageFormat);
 
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
 

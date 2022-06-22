@@ -34,7 +34,7 @@ namespace SonarAnalyzer.Rules.CSharp
         private const string MessageFormat = "Make this exception 'public'.";
 
         private static readonly DiagnosticDescriptor rule =
-            DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
+            DescriptorFactory.Create(DiagnosticId, MessageFormat);
 
         private static readonly ImmutableArray<KnownType> baseExceptions =
             ImmutableArray.Create(

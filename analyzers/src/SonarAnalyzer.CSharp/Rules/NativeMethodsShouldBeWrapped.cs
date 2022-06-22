@@ -38,7 +38,7 @@ namespace SonarAnalyzer.Rules.CSharp
         private const string MakeThisWrapperLessTrivialMessage = "Make this wrapper for native method '{0}' less trivial.";
 
         private static readonly DiagnosticDescriptor rule =
-            DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
+            DescriptorFactory.Create(DiagnosticId, MessageFormat);
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(rule);
 
         protected override void Initialize(SonarAnalysisContext context)

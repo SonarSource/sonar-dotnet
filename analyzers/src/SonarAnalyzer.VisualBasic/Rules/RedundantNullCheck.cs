@@ -33,7 +33,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
         private const string MessageFormat = "Remove this unnecessary null check; 'TypeOf ... Is' returns false for nulls.";
 
         private static readonly DiagnosticDescriptor rule =
-           DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
+           DescriptorFactory.Create(DiagnosticId, MessageFormat);
 
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(rule);
 

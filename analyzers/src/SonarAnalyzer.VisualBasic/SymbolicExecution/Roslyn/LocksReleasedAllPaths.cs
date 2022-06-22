@@ -27,7 +27,7 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn.RuleChecks.VisualBasic
 {
     public class LocksReleasedAllPaths : LocksReleasedAllPathsBase
     {
-        public static readonly DiagnosticDescriptor S2222 = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
+        public static readonly DiagnosticDescriptor S2222 = DescriptorFactory.Create(DiagnosticId, MessageFormat);
 
         protected override DiagnosticDescriptor Rule => S2222;
 

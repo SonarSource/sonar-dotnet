@@ -38,7 +38,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
         private const string MessageFormat = "Wrap this and the following {0} statement{2} that use '{1}' in a 'With' statement.";
 
         private static readonly DiagnosticDescriptor rule =
-            DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager,
+            DescriptorFactory.Create(DiagnosticId, MessageFormat,
                 isEnabledByDefault: false);
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(rule);
 

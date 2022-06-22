@@ -41,7 +41,7 @@ namespace SonarAnalyzer.Rules.CSharp
         private const string RestrictTypesMessage = "Restrict types of objects allowed to be deserialized.";
         private const string VerifyMacMessage = "Serialized data signature (MAC) should be verified.";
 
-        internal static readonly DiagnosticDescriptor S5773 = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
+        internal static readonly DiagnosticDescriptor S5773 = DescriptorFactory.Create(DiagnosticId, MessageFormat);
 
         public IEnumerable<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(S5773);
 

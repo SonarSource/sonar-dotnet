@@ -32,7 +32,7 @@ namespace SonarAnalyzer.Rules.CSharp
         UnaryPrefixOperatorRepeatedBase<SyntaxKind, PrefixUnaryExpressionSyntax>
     {
         protected override DiagnosticDescriptor Rule { get; } =
-            DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
+            DescriptorFactory.Create(DiagnosticId, MessageFormat);
 
         protected override ISet<SyntaxKind> SyntaxKinds { get; } = new HashSet<SyntaxKind>
         {

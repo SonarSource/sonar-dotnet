@@ -36,7 +36,7 @@ namespace SonarAnalyzer.Rules.CSharp
         private const string MessageFormatForPatterns = "Remove this unnecessary null check; it is already done by the pattern match.";
 
         private static readonly DiagnosticDescriptor RuleForIs =
-            DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
+            DescriptorFactory.Create(DiagnosticId, MessageFormat);
         private static readonly DiagnosticDescriptor RuleForPatternSyntax =
             DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormatForPatterns, RspecStrings.ResourceManager);
 
