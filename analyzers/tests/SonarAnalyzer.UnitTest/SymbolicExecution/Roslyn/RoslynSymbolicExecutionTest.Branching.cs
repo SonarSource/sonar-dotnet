@@ -168,6 +168,9 @@ public int Method(bool a)
             var validator = SETestContext.CreateCSMethod(method).Validator;
             validator.ValidateExitReachCount(2);
             validator.ValidateExecutionCompleted();
+            validator.ExitStates.Should().HaveCount(2)
+                .And.ContainSingle(x => HasNoException(x))
+                .And.ContainSingle(x => HasExceptionOfType(x, "NullReferenceException"));
         }
 
         [TestMethod]

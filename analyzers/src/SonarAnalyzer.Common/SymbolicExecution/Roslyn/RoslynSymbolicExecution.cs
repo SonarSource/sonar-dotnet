@@ -251,7 +251,7 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
                 OperationKindEx.ObjectCreation => new ExceptionState(operation.Type),
                 OperationKindEx.ParameterReference => new ExceptionState(operation.Type),
                 OperationKindEx.PropertyReference => new ExceptionState(operation.Type),
-                OperationKindEx.Conversion => new ExceptionState(IConversionOperationWrapper.FromOperation(operation).Operand.Type),
+                OperationKindEx.Conversion => ThrowExceptionType(IConversionOperationWrapper.FromOperation(operation).Operand),
                 _ => null
             };
 
