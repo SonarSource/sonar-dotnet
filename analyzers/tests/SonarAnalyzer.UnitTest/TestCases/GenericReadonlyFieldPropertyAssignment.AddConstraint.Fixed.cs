@@ -27,6 +27,7 @@ namespace Tests.TestCases
         {
             point.X = newX; //Fixed
             point.X++; //Fixed
+            ++point.X; //Fixed
             Console.WriteLine(point.X);
             var i = point.X = newX; //Fixed
             i = point.X++;          //Fixed
@@ -101,6 +102,20 @@ namespace Tests.TestCases
         public void Add(int i)
         {
             pointA.X += i; // Compliant
+        }
+    }
+
+    class PublicField<T> where T : IPoint
+    {
+        public readonly T point;
+    }
+
+    class PublicFieldAccessor<T> where T : class, IPoint
+    {
+        public PublicFieldAccessor()
+        {
+            var a = new PublicField<T>();
+            a.point.X = 1; // Fixed
         }
     }
 }

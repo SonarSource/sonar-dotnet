@@ -41,13 +41,12 @@ namespace SonarAnalyzer.Rules.CSharp
 
         protected override void Initialize(SonarAnalysisContext context)
         {
-            context.RegisterSyntaxNodeActionInNonGenerated(
-                c =>
+            context.RegisterSyntaxNodeActionInNonGenerated(c =>
                 {
                     var assignment = (AssignmentExpressionSyntax)c.Node;
                     var expression = assignment.Left;
 
-                    ProcessPropertyChange(expression, c.SemanticModel, c);
+                    ProcessPropertyChange(c, c.SemanticModel, expression);
                 },
                 SyntaxKind.SimpleAssignmentExpression,
                 SyntaxKind.AddAssignmentExpression,
@@ -62,45 +61,40 @@ namespace SonarAnalyzer.Rules.CSharp
                 SyntaxKind.RightShiftAssignmentExpression,
                 SyntaxKindEx.CoalesceAssignmentExpression);
 
-            context.RegisterSyntaxNodeActionInNonGenerated(
-                    c =>
-                    {
-                        var unary = (PrefixUnaryExpressionSyntax)c.Node;
-                        var expression = unary.Operand;
+            context.RegisterSyntaxNodeActionInNonGenerated(c =>
+                {
+                    var unary = (PrefixUnaryExpressionSyntax)c.Node;
+                    ProcessPropertyChange(c, c.SemanticModel, unary.Operand);
+                },
+                SyntaxKind.PreDecrementExpression,
+                SyntaxKind.PreIncrementExpression);
 
-                        ProcessPropertyChange(expression, c.SemanticModel, c);
-                    },
-                    SyntaxKind.PreDecrementExpression,
-                    SyntaxKind.PreIncrementExpression);
-
-            context.RegisterSyntaxNodeActionInNonGenerated(
-                c =>
+            context.RegisterSyntaxNodeActionInNonGenerated(c =>
                 {
                     var unary = (PostfixUnaryExpressionSyntax)c.Node;
-                    var expression = unary.Operand;
-
-                    ProcessPropertyChange(expression, c.SemanticModel, c);
+                    ProcessPropertyChange(c, c.SemanticModel, unary.Operand);
                 },
                 SyntaxKind.PostDecrementExpression,
                 SyntaxKind.PostIncrementExpression);
         }
 
-        private static void ProcessPropertyChange(ExpressionSyntax expression, SemanticModel semanticModel, SyntaxNodeAnalysisContext context)
+        private static void ProcessPropertyChange(SyntaxNodeAnalysisContext context, SemanticModel semanticModel, ExpressionSyntax expression)
         {
-            if (!(expression is MemberAccessExpressionSyntax memberAccess)
-                || !(semanticModel.GetSymbolInfo(expression).Symbol is IPropertySymbol propertySymbol))
+            if (TupleExpressionSyntaxWrapper.IsInstance(expression))
             {
-                return;
+                foreach (var tupleArgument in ((TupleExpressionSyntaxWrapper)expression).Arguments)
+                {
+                    ProcessPropertyChange(context, semanticModel, tupleArgument.Expression);
+                }
             }
-
-            var fieldSymbol = semanticModel.GetSymbolInfo(memberAccess.Expression).Symbol as IFieldSymbol;
-            if (!IsFieldReadonlyAndPossiblyValueType(fieldSymbol)
-                || IsInsideConstructorDeclaration(expression, fieldSymbol.ContainingType, semanticModel))
+            else if (expression is MemberAccessExpressionSyntax memberAccess
+                && semanticModel.GetSymbolInfo(memberAccess.Expression).Symbol is IFieldSymbol fieldSymbol
+                && IsFieldReadonlyAndPossiblyValueType(fieldSymbol)
+                && !IsInsideConstructorDeclaration(expression, fieldSymbol.ContainingType, semanticModel)
+                && semanticModel.GetSymbolInfo(expression).Symbol is IPropertySymbol propertySymbol)
             {
-                return;
+                context.ReportIssue(Diagnostic.Create(Rule, expression.GetLocation(), fieldSymbol.Name, propertySymbol.Name));
             }
-
-            context.ReportIssue(Diagnostic.Create(Rule, expression.GetLocation(), fieldSymbol.Name, propertySymbol.Name));
         }
 
         private static bool IsFieldReadonlyAndPossiblyValueType(IFieldSymbol fieldSymbol) =>
@@ -111,20 +105,14 @@ namespace SonarAnalyzer.Rules.CSharp
             semanticModel.GetEnclosingSymbol(expression.SpanStart) is IMethodSymbol { MethodKind: MethodKind.Constructor } constructorSymbol
             && constructorSymbol.ContainingType.Equals(currentType);
 
-        private static bool GenericParameterMightBeValueType(ITypeParameterSymbol typeParameterSymbol)
-        {
-            if (typeParameterSymbol == null
-                || typeParameterSymbol.HasReferenceTypeConstraint
-                || typeParameterSymbol.HasValueTypeConstraint
-                || typeParameterSymbol.ConstraintTypes.OfType<IErrorTypeSymbol>().Any())
+        private static bool GenericParameterMightBeValueType(ITypeParameterSymbol typeParameterSymbol) =>
+            typeParameterSymbol is
             {
-                return false;
+                HasReferenceTypeConstraint: false,
+                HasValueTypeConstraint: false, // CS1648 is raised, if constrained by 'struct'.
+                ConstraintTypes: { } constraintTypes
             }
-
-            return typeParameterSymbol.ConstraintTypes
-                                      .Select(MightBeValueType)
-                                      .All(basedOnPossiblyValueType => basedOnPossiblyValueType);
-        }
+            && constraintTypes.All(MightBeValueType);
 
         private static bool MightBeValueType(ITypeSymbol type) =>
             type.IsInterface()

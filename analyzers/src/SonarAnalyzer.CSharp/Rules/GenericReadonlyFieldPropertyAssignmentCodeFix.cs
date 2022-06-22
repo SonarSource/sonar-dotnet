@@ -38,21 +38,16 @@ namespace SonarAnalyzer.Rules.CSharp
     {
         internal const string TitleRemove = "Remove assignment";
         internal const string TitleAddClassConstraint = "Add reference type constraint";
-        public override ImmutableArray<string> FixableDiagnosticIds
-        {
-            get
-            {
-                return ImmutableArray.Create(GenericReadonlyFieldPropertyAssignment.DiagnosticId);
-            }
-        }
+        public override ImmutableArray<string> FixableDiagnosticIds =>
+            ImmutableArray.Create(GenericReadonlyFieldPropertyAssignment.DiagnosticId);
 
-        private static readonly SyntaxAnnotation annotation = new SyntaxAnnotation(nameof(GenericReadonlyFieldPropertyAssignmentCodeFix));
+        private static readonly SyntaxAnnotation Annotation = new(nameof(GenericReadonlyFieldPropertyAssignmentCodeFix));
 
         protected override async Task RegisterCodeFixesAsync(SyntaxNode root, CodeFixContext context)
         {
             var diagnostic = context.Diagnostics.First();
             var diagnosticSpan = diagnostic.Location.SourceSpan;
-            var memberAccess = (MemberAccessExpressionSyntax)root.FindNode(diagnosticSpan);
+            var memberAccess = (MemberAccessExpressionSyntax)root.FindNode(diagnosticSpan, getInnermostNodeForTie: true);
 
             var semanticModel = await context.Document.GetSemanticModelAsync(context.CancellationToken).ConfigureAwait(false);
             var fieldSymbol = (IFieldSymbol)semanticModel.GetSymbolInfo(memberAccess.Expression).Symbol;
@@ -63,12 +58,9 @@ namespace SonarAnalyzer.Rules.CSharp
                 .Select(reference => reference.GetSyntaxAsync(context.CancellationToken))
                 .ToList();
 
-            await Task.WhenAll(classDeclarationTasks).ConfigureAwait(false);
+            var taskResults = await Task.WhenAll(classDeclarationTasks).ConfigureAwait(false);
 
-            var classDeclarations = classDeclarationTasks
-                .Select(task => task.Result as ClassDeclarationSyntax)
-                .WhereNotNull()
-                .ToList();
+            var classDeclarations = taskResults.OfType<ClassDeclarationSyntax>().ToList();
 
             if (classDeclarations.Any())
             {
@@ -94,26 +86,22 @@ namespace SonarAnalyzer.Rules.CSharp
                     context.Diagnostics);
             }
 
-            var expression = memberAccess.Parent as ExpressionSyntax;
-            if (!(expression?.Parent is StatementSyntax statement))
+            if (memberAccess is { Parent: ExpressionSyntax { Parent: StatementSyntax statement } })
             {
-                return;
+                context.RegisterCodeFix(
+                    CodeAction.Create(
+                        TitleRemove,
+                        c =>
+                        {
+                            var newRoot = root.RemoveNode(statement, SyntaxRemoveOptions.KeepNoTrivia);
+                            return Task.FromResult(context.Document.WithSyntaxRoot(newRoot));
+                        },
+                        TitleRemove),
+                    context.Diagnostics);
             }
-
-            context.RegisterCodeFix(
-                CodeAction.Create(
-                    TitleRemove,
-                    c =>
-                    {
-                        var newRoot = root.RemoveNode(statement, SyntaxRemoveOptions.KeepNoTrivia);
-                        return Task.FromResult(context.Document.WithSyntaxRoot(newRoot));
-                    },
-                    TitleRemove),
-                context.Diagnostics);
         }
 
-        private static MultiValueDictionary<DocumentId, ClassDeclarationSyntax> GetDocumentIdClassDeclarationMapping(
-            IEnumerable<ClassDeclarationSyntax> classDeclarations, Solution currentSolution)
+        private static MultiValueDictionary<DocumentId, ClassDeclarationSyntax> GetDocumentIdClassDeclarationMapping(IEnumerable<ClassDeclarationSyntax> classDeclarations, Solution currentSolution)
         {
             var mapping = new MultiValueDictionary<DocumentId, ClassDeclarationSyntax>();
             foreach (var classDeclaration in classDeclarations)
@@ -127,14 +115,14 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private static SyntaxNode GetNewDocumentRoot(SyntaxNode docRoot, ITypeParameterSymbol typeParameterSymbol, KeyValuePair<DocumentId, ICollection<ClassDeclarationSyntax>> classes)
         {
-            var newDocRoot = docRoot.ReplaceNodes(classes.Value, (_, rewritten) => rewritten.WithAdditionalAnnotations(annotation));
-            var annotatedNodes = newDocRoot.GetAnnotatedNodes(annotation).ToList();
+            var newDocRoot = docRoot.ReplaceNodes(classes.Value, (_, rewritten) => rewritten.WithAdditionalAnnotations(Annotation));
+            var annotatedNodes = newDocRoot.GetAnnotatedNodes(Annotation).ToList();
             while (annotatedNodes.Any())
             {
                 var classDeclaration = (ClassDeclarationSyntax)annotatedNodes.First();
                 var constraintClauses = GetNewConstraintClause(classDeclaration.ConstraintClauses, typeParameterSymbol.Name);
-                newDocRoot = newDocRoot.ReplaceNode(classDeclaration, classDeclaration.WithConstraintClauses(constraintClauses).WithoutAnnotations(annotation));
-                annotatedNodes = newDocRoot.GetAnnotatedNodes(annotation).ToList();
+                newDocRoot = newDocRoot.ReplaceNode(classDeclaration, classDeclaration.WithConstraintClauses(constraintClauses).WithoutAnnotations(Annotation));
+                annotatedNodes = newDocRoot.GetAnnotatedNodes(Annotation).ToList();
             }
 
             return newDocRoot;
@@ -146,7 +134,7 @@ namespace SonarAnalyzer.Rules.CSharp
             foreach (var constraint in constraintClauses)
             {
                 var currentConstraint = constraint;
-                if (constraint.Name.Identifier.ValueText == typeParameterName && !currentConstraint.Constraints.AnyOfKind(SyntaxKind.ClassConstraint))
+                if (currentConstraint.Name.Identifier.ValueText == typeParameterName && !currentConstraint.Constraints.AnyOfKind(SyntaxKind.ClassConstraint))
                 {
                     currentConstraint = currentConstraint
                         .WithConstraints(currentConstraint.Constraints.Insert(0, SyntaxFactory.ClassOrStructConstraint(SyntaxKind.ClassConstraint)))

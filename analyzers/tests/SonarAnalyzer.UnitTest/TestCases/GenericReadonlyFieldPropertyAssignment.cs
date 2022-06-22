@@ -28,6 +28,7 @@ namespace Tests.TestCases
             point.X = newX; //Noncompliant {{Restrict 'point' to be a reference type or remove this assignment of 'X'; it is useless if 'point' is a value type.}}
 //          ^^^^^^^
             point.X++; //Noncompliant; if point is a struct, then nothing happened
+            ++point.X; //Noncompliant
             Console.WriteLine(point.X);
             var i = point.X = newX; //Noncompliant
             i = point.X++;          //Noncompliant
@@ -102,6 +103,20 @@ namespace Tests.TestCases
         public void Add(int i)
         {
             pointA.X += i; // Compliant
+        }
+    }
+
+    class PublicField<T> where T : IPoint
+    {
+        public readonly T point;
+    }
+
+    class PublicFieldAccessor<T> where T : IPoint
+    {
+        public PublicFieldAccessor()
+        {
+            var a = new PublicField<T>();
+            a.point.X = 1; // Noncompliant
         }
     }
 }
