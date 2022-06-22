@@ -50,9 +50,9 @@ namespace SonarAnalyzer.Extensions
             {
                 var left = (TupleExpressionSyntaxWrapper)assignment.Left;
                 var right = (TupleExpressionSyntaxWrapper)assignment.Right;
-                var builder = ImmutableArray.CreateBuilder<AssignmentMapping>(initialCapacity: left.Arguments.Count);
-                MapTupleElements(builder, left, right);
-                return builder.ToImmutableArray();
+                var arrayBuilder = ImmutableArray.CreateBuilder<AssignmentMapping>(initialCapacity: left.Arguments.Count);
+                MapTupleElements(arrayBuilder, left, right);
+                return arrayBuilder.ToImmutableArray();
             }
             // var (x, y) = (1, 2)
             else if (DeclarationExpressionSyntaxWrapper.IsInstance(assignment.Left)
@@ -62,16 +62,16 @@ namespace SonarAnalyzer.Extensions
             {
                 var left = (ParenthesizedVariableDesignationSyntaxWrapper)leftDesignation;
                 var right = (TupleExpressionSyntaxWrapper)assignment.Right;
-                var builder = ImmutableArray.CreateBuilder<AssignmentMapping>(initialCapacity: right.Arguments.Count);
-                MapDesignationElements(builder, left, right);
-                return builder.ToImmutableArray();
+                var arrayBuilder = ImmutableArray.CreateBuilder<AssignmentMapping>(initialCapacity: right.Arguments.Count);
+                MapDesignationElements(arrayBuilder, left, right);
+                return arrayBuilder.ToImmutableArray();
             }
             else
             {
                 return ImmutableArray.Create(new AssignmentMapping(assignment.Left, assignment.Right));
             }
 
-            static void MapTupleElements(ImmutableArray<AssignmentMapping>.Builder builder, TupleExpressionSyntaxWrapper left, TupleExpressionSyntaxWrapper right)
+            static void MapTupleElements(ImmutableArray<AssignmentMapping>.Builder arrayBuilder, TupleExpressionSyntaxWrapper left, TupleExpressionSyntaxWrapper right)
             {
                 var leftEnum = left.Arguments.GetEnumerator();
                 var rightEnum = right.Arguments.GetEnumerator();
@@ -82,16 +82,16 @@ namespace SonarAnalyzer.Extensions
                     if (leftArg is ArgumentSyntax { Expression: { } leftExpression } && TupleExpressionSyntaxWrapper.IsInstance(leftExpression)
                         && rightArg is ArgumentSyntax { Expression: { } rightExpression } && TupleExpressionSyntaxWrapper.IsInstance(rightExpression))
                     {
-                        MapTupleElements(builder, (TupleExpressionSyntaxWrapper)leftExpression, (TupleExpressionSyntaxWrapper)rightExpression);
+                        MapTupleElements(arrayBuilder, (TupleExpressionSyntaxWrapper)leftExpression, (TupleExpressionSyntaxWrapper)rightExpression);
                     }
                     else
                     {
-                        builder.Add(new AssignmentMapping(leftArg.Expression, rightArg.Expression));
+                        arrayBuilder.Add(new AssignmentMapping(leftArg.Expression, rightArg.Expression));
                     }
                 }
             }
 
-            static void MapDesignationElements(ImmutableArray<AssignmentMapping>.Builder builder, ParenthesizedVariableDesignationSyntaxWrapper left, TupleExpressionSyntaxWrapper right)
+            static void MapDesignationElements(ImmutableArray<AssignmentMapping>.Builder arrayBuilder, ParenthesizedVariableDesignationSyntaxWrapper left, TupleExpressionSyntaxWrapper right)
             {
                 var leftEnum = left.Variables.GetEnumerator();
                 var rightEnum = right.Arguments.GetEnumerator();
@@ -102,11 +102,11 @@ namespace SonarAnalyzer.Extensions
                     if (ParenthesizedVariableDesignationSyntaxWrapper.IsInstance(leftVar)
                         && rightArg is ArgumentSyntax { Expression: { } rightExpression } && TupleExpressionSyntaxWrapper.IsInstance(rightExpression))
                     {
-                        MapDesignationElements(builder, (ParenthesizedVariableDesignationSyntaxWrapper)leftVar, (TupleExpressionSyntaxWrapper)rightExpression);
+                        MapDesignationElements(arrayBuilder, (ParenthesizedVariableDesignationSyntaxWrapper)leftVar, (TupleExpressionSyntaxWrapper)rightExpression);
                     }
                     else
                     {
-                        builder.Add(new AssignmentMapping(leftVar.SyntaxNode, rightArg.Expression));
+                        arrayBuilder.Add(new AssignmentMapping(leftVar.SyntaxNode, rightArg.Expression));
                     }
                 }
             }
