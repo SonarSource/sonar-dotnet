@@ -54,9 +54,11 @@ using System.Collections.Generic;
 public class Sample
 {{
     public static int StaticField;
-    public static int StaticProperty {{get; set;}}
-    public int Property {{get; set;}}
+    public static int StaticProperty {{ get; set; }}
+    public int Property {{ get; set; }}
+    public NotImplementedException PropertyException {{ get; set; }}
     private int field;
+    private NotImplementedException  fieldException;
 
     private bool Condition => Environment.ProcessorCount == 42;  // Something that cannot have constraint
 
@@ -64,6 +66,8 @@ public class Sample
     {{
         {methodBody}
     }}
+
+    public NotImplementedException CreateException() => new NotImplementedException();
 
     private void Tag(string name, object arg = null) {{ }}
 }}";
