@@ -993,7 +993,7 @@ try
 {
     Tag(""InOuterTry"");
 }
-catch (Exception ex)
+catch (Exception exOuter)
 {
     tag = ""BeforeInnerTry"";
     try
@@ -1015,12 +1015,15 @@ tag = ""End"";";
                 "BeforeInnerTry",
                 "InInnerTry",
                 "AfterInnerTry",
-                "InInnerCatch");
+                "InInnerCatch",
+                "AfterInnerTry");   // ToDo: This should not be here, it is now visited on happy-path (with exOuter) and with empty state from catch exInner
 
             validator.TagStates("BeforeInnerTry").Should().HaveCount(1).And.ContainSingle(x => x.Exception != null);    // ToDo: Use custom assertions
-            validator.TagStates("InInnerTry").Should().HaveCount(1).And.ContainSingle(x => x.Exception == null);        // ToDo: This should have the original exception
+            validator.TagStates("InInnerTry").Should().HaveCount(1).And.ContainSingle(x => x.Exception != null);
             validator.TagStates("InInnerCatch").Should().HaveCount(1).And.ContainSingle(x => x.Exception != null);
-            validator.TagStates("AfterInnerTry").Should().HaveCount(1).And.ContainSingle(x => x.Exception == null);     // ToDo: This should have the original exception
+            validator.TagStates("AfterInnerTry").Should().HaveCount(2)
+                .And.ContainSingle(x => x.Exception != null)
+                .And.ContainSingle(x => x.Exception == null);     // ToDo: This should not be here, same reason as above in AfterInnerTry
             validator.TagStates("End").Should().HaveCount(1).And.ContainSingle(x => x.Exception == null);
         }
 

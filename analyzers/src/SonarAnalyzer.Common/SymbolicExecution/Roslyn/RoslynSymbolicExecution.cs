@@ -175,7 +175,8 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
             {
                 state = state.RemoveCapture(capture);
             }
-            if (branch.Source.EnclosingRegion is { Kind: ControlFlowRegionKind.Catch or ControlFlowRegionKind.FilterAndHandler })
+            if (branch.Source.EnclosingRegion is { Kind: ControlFlowRegionKind.Catch or ControlFlowRegionKind.FilterAndHandler } enclosingRegion
+                && branch.LeavingRegions.Contains(enclosingRegion))
             {
                 state = state.ResetException();
             }
