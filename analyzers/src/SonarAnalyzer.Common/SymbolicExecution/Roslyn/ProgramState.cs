@@ -39,8 +39,9 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
         private ImmutableDictionary<int, int> VisitCount { get; init; }
         private ImmutableDictionary<CaptureId, IOperation> CaptureOperation { get; init; }
         private ImmutableHashSet<ISymbol> PreservedSymbols { get; init; }
+        private ImmutableStack<ExceptionState> Exceptions { get; init; }
 
-        public ExceptionState Exception { get; private init; }
+        public ExceptionState Exception => Exceptions.IsEmpty ? null : Exceptions.Peek();
         public SymbolicValue this[IOperationWrapperSonar operation] => this[operation.Instance];
         public SymbolicValue this[IOperation operation] => OperationValue.TryGetValue(ResolveCapture(operation), out var value) ? value : null;
         public SymbolicValue this[ISymbol symbol] => SymbolValue.TryGetValue(symbol, out var value) ? value : null;
@@ -53,6 +54,7 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
             VisitCount = ImmutableDictionary<int, int>.Empty;
             CaptureOperation = ImmutableDictionary<CaptureId, IOperation>.Empty;
             PreservedSymbols = ImmutableHashSet<ISymbol>.Empty;
+            Exceptions = ImmutableStack<ExceptionState>.Empty;
         }
 
         public ProgramState SetOperationValue(IOperationWrapperSonar operation, SymbolicValue value) =>
@@ -81,13 +83,13 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
             this with { CaptureOperation = CaptureOperation.SetItem(capture, operation) };
 
         public ProgramState SetException(ExceptionState exception) =>
-            this with { Exception = exception };
+            this with { Exceptions =  ImmutableStack<ExceptionState>.Empty.Push(exception) };
 
-        public ProgramState SetException(ITypeSymbol exception) =>
-            this with { Exception = new(exception) };
+        public ProgramState PushException(ExceptionState exception) =>
+            this with { Exceptions = Exceptions.Push(exception) };
 
-        public ProgramState ResetException() =>
-            this with { Exception = null };
+        public ProgramState PopException() =>
+            this with { Exceptions = Exceptions.Pop() };
 
         public IEnumerable<ISymbol> SymbolsWith(SymbolicConstraint constraint) =>
             SymbolValue.Where(x => x.Value != null && x.Value.HasConstraint(constraint)).Select(x => x.Key);
@@ -122,26 +124,26 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
         public override int GetHashCode() =>
             // VisitCount is not included, it's not part of Equals
             HashCode.Combine(
-                Exception?.GetHashCode() ?? 0,
                 HashCode.DictionaryContentHash(OperationValue),
                 HashCode.DictionaryContentHash(SymbolValue),
+                HashCode.DictionaryContentHash(CaptureOperation),
                 HashCode.EnumerableContentHash(PreservedSymbols),
-                HashCode.DictionaryContentHash(CaptureOperation));
+                HashCode.EnumerableContentHash(Exceptions));
 
         public bool Equals(ProgramState other) =>
             // VisitCount is not compared, two ProgramState are equal if their current state is equal. No matter was historical path led to it.
             other is not null
-            && other.Exception == Exception
+            && other.Exceptions.SequenceEqual(Exceptions)
             && other.OperationValue.DictionaryEquals(OperationValue)
             && other.SymbolValue.DictionaryEquals(SymbolValue)
             && other.CaptureOperation.DictionaryEquals(CaptureOperation)
             && other.PreservedSymbols.SetEquals(PreservedSymbols);
 
         public override string ToString() =>
-            Equals(Empty) ? "Empty" + Environment.NewLine : SerializeException() + SerializeSymbols() + SerializeOperations() + SerializeCaptures();
+            Equals(Empty) ? "Empty" + Environment.NewLine : SerializeExceptions() + SerializeSymbols() + SerializeOperations() + SerializeCaptures();
 
-        private string SerializeException() =>
-            Exception is null ? null : $"Exception: {Exception}{Environment.NewLine}";
+        private string SerializeExceptions() =>
+            Exceptions.IsEmpty ? null : Exceptions.JoinStr(string.Empty, x => $"Exception: {x}{Environment.NewLine}");
 
         private string SerializeSymbols() =>
             Serialize(SymbolValue, "Symbols", x => x.ToString(), x => x.ToString());
