@@ -27,6 +27,7 @@ using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.Helpers;
+using StyleCop.Analyzers.Lightup;
 
 namespace SonarAnalyzer.Rules.CSharp
 {
@@ -83,10 +84,13 @@ namespace SonarAnalyzer.Rules.CSharp
 
                     foreach (var affectedExpression in AffectedExpressions(forNode.Statement))
                     {
-                        var symbol = c.SemanticModel.GetSymbolInfo(affectedExpression).Symbol;
+                        var symbol = TupleExpressionSyntaxWrapper.IsInstance(affectedExpression)
+                            ? TupleArgumentSymbolMatchingLoopCounter((TupleExpressionSyntaxWrapper)affectedExpression, loopCounters, c.SemanticModel)
+                            : c.SemanticModel.GetSymbolInfo(affectedExpression).Symbol;
+
                         if (symbol != null && loopCounters.Contains(symbol))
                         {
-                            c.ReportIssue(Diagnostic.Create(Rule, affectedExpression.GetLocation(), affectedExpression.ToString()));
+                            c.ReportIssue(Diagnostic.Create(Rule, affectedExpression.GetLocation(), symbol.Name.ToString()));
                         }
                     }
                 },
@@ -111,5 +115,15 @@ namespace SonarAnalyzer.Rules.CSharp
             node.DescendantNodesAndSelf()
                 .Where(n => SideEffectExpressions.Any(s => s.Kinds.Any(n.IsKind)))
                 .Select(n => SideEffectExpressions.Single(s => s.Kinds.Any(n.IsKind)).AffectedExpression(n));
+
+        private static ISymbol TupleArgumentSymbolMatchingLoopCounter(TupleExpressionSyntaxWrapper expression,
+            IEnumerable<ISymbol> loopCounters,
+            SemanticModel model)
+        {
+            var tupleSymbols = expression.Arguments.Select(x => x.Expression)
+                .OfType<ExpressionSyntax>()
+                .Select(x => model.GetSymbolInfo(x).Symbol).ToArray();
+            return loopCounters.Intersect(tupleSymbols).FirstOrDefault();
+        }
     }
 }
