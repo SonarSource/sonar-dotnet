@@ -36,7 +36,6 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.time.Instant;
 import java.time.ZoneId;
-import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -61,6 +60,7 @@ import org.sonarqube.ws.client.ce.TaskRequest;
 import org.sonarqube.ws.client.components.ShowRequest;
 import org.sonarqube.ws.client.measures.ComponentRequest;
 
+import static java.time.format.DateTimeFormatter.ISO_LOCAL_DATE_TIME;
 import static java.util.Collections.singletonList;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.sonarqube.ws.Hotspots.SearchWsResponse.Hotspot;
@@ -234,13 +234,10 @@ public class TestUtils {
       deleteLocalCache();
     }
 
-    // We add one day to ensure that today's entries are deleted.
-    Instant instant = Instant.now().plus(1, ChronoUnit.DAYS);
-
-    // The expected format is yyyy-MM-dd.
-    String currentDateTime = DateTimeFormatter.ISO_LOCAL_DATE
+    // The expected format is yyyy-MM-ddTHH:mm:ss+HHmm. e.g. 2017-10-19T13:00:00+0200
+    String currentDateTime = ISO_LOCAL_DATE_TIME
       .withZone(ZoneId.of("UTC"))
-      .format(instant);
+      .format(Instant.now().truncatedTo(ChronoUnit.SECONDS)) + "+0000";
 
     LOG.info("TEST SETUP: deleting projects analyzed before: " + currentDateTime);
     orchestrator.getServer()
