@@ -324,7 +324,7 @@ namespace SonarAnalyzer.UnitTest.Extensions
         }
 
         [TestMethod]
-        public void AssignmentExpressionSyntaxExtensions_DifferentConvetions()
+        public void AssignmentExpressionSyntaxExtensions_DifferentConventions()
         {
             var code = @"int a;
                          M() => 1;
