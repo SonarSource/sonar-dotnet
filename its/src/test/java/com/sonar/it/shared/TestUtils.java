@@ -34,12 +34,11 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.time.Instant;
-import java.time.ZoneId;
-import java.time.temporal.ChronoUnit;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 import javax.annotation.CheckForNull;
@@ -235,9 +234,8 @@ public class TestUtils {
     }
 
     // The expected format is yyyy-MM-ddTHH:mm:ss+HHmm. e.g. 2017-10-19T13:00:00+0200
-    String currentDateTime = ISO_LOCAL_DATE_TIME
-      .withZone(ZoneId.of("UTC"))
-      .format(Instant.now().truncatedTo(ChronoUnit.SECONDS)) + "+0000";
+    SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssZ");
+    String currentDateTime = formatter.format(new Date());
 
     LOG.info("TEST SETUP: deleting projects analyzed before: " + currentDateTime);
     orchestrator.getServer()
