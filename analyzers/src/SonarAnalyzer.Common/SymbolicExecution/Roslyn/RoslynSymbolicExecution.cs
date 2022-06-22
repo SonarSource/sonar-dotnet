@@ -175,6 +175,10 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
             {
                 state = state.RemoveCapture(capture);
             }
+            if (branch.Source.EnclosingRegion is { Kind: ControlFlowRegionKind.Catch or ControlFlowRegionKind.FilterAndHandler })
+            {
+                state = state.ResetException();
+            }
             var liveVariables = lva.LiveOut(branch.Source).ToHashSet();
             return state.RemoveSymbols(x => lva.IsLocal(x) && (x is ILocalSymbol or IParameterSymbol { RefKind: RefKind.None }) && !liveVariables.Contains(x))
                 .ResetOperations();

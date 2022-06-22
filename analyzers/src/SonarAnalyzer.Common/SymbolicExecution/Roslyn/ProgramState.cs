@@ -86,6 +86,9 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
         public ProgramState SetException(ITypeSymbol exception) =>
             this with { Exception = new(exception) };
 
+        public ProgramState ResetException() =>
+            this with { Exception = null };
+
         public IEnumerable<ISymbol> SymbolsWith(SymbolicConstraint constraint) =>
             SymbolValue.Where(x => x.Value != null && x.Value.HasConstraint(constraint)).Select(x => x.Key);
 
