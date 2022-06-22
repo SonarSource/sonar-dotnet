@@ -59,7 +59,6 @@ import org.sonarqube.ws.client.ce.TaskRequest;
 import org.sonarqube.ws.client.components.ShowRequest;
 import org.sonarqube.ws.client.measures.ComponentRequest;
 
-import static java.time.format.DateTimeFormatter.ISO_LOCAL_DATE_TIME;
 import static java.util.Collections.singletonList;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.sonarqube.ws.Hotspots.SearchWsResponse.Hotspot;
