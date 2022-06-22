@@ -20,29 +20,23 @@
 
 using System;
 using System.Collections.Generic;
-using System.Collections.Immutable;
 using System.Linq;
 using Microsoft.CodeAnalysis;
 using SonarAnalyzer.Helpers;
 
 namespace SonarAnalyzer.Rules
 {
-    public abstract class ParameterAssignedToBase<TSyntaxKind, TIdentifierNameSyntax> : SonarDiagnosticAnalyzer
+    public abstract class ParameterAssignedToBase<TSyntaxKind, TIdentifierNameSyntax> : SonarDiagnosticAnalyzer<TSyntaxKind>
         where TSyntaxKind : struct
         where TIdentifierNameSyntax : SyntaxNode
     {
         private const string DiagnosticId = "S1226";
-        private const string MessageFormat = "Introduce a new variable instead of reusing the parameter '{0}'.";
 
-        private readonly DiagnosticDescriptor rule;
-
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
-
-        protected abstract ILanguageFacade<TSyntaxKind> Language { get; }
         protected abstract bool IsAssignmentToCatchVariable(ISymbol symbol, SyntaxNode node);
 
-        protected ParameterAssignedToBase() =>
-            rule = Language.CreateDescriptor(DiagnosticId, MessageFormat);
+        protected override string MessageFormat => "Introduce a new variable instead of reusing the parameter '{0}'.";
+
+        protected ParameterAssignedToBase() : base(DiagnosticId) { }
 
         protected sealed override void Initialize(SonarAnalysisContext context)
         {

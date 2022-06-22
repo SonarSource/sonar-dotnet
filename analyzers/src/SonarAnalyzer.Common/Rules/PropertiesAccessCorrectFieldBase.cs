@@ -29,28 +29,24 @@ using SonarAnalyzer.Helpers;
 
 namespace SonarAnalyzer.Rules
 {
-    public abstract class PropertiesAccessCorrectFieldBase : SonarDiagnosticAnalyzer
+    public abstract class PropertiesAccessCorrectFieldBase<TSyntaxKind> : SonarDiagnosticAnalyzer<TSyntaxKind>
+        where TSyntaxKind : struct
     {
         private const string DiagnosticId = "S4275";
-        private const string MessageFormat = "Refactor this {0} so that it actually refers to the field '{1}'.";
 
-        private readonly DiagnosticDescriptor rule;
-
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
+        protected override string MessageFormat => "Refactor this {0} so that it actually refers to the field '{1}'.";
 
         /**
          * Assignments can be done either
          * - directly via an assignment
          * - indirectly, when passed as 'out' or 'ref' parameter
          */
-        protected abstract ILanguageFacade Language { get; }
         protected abstract IEnumerable<FieldData> FindFieldAssignments(IPropertySymbol property, Compilation compilation);
         protected abstract IEnumerable<FieldData> FindFieldReads(IPropertySymbol property, Compilation compilation);
         protected abstract bool ImplementsExplicitGetterOrSetter(IPropertySymbol property);
         protected abstract bool ShouldIgnoreAccessor(IMethodSymbol accessorMethod, Compilation compilation);
 
-        protected PropertiesAccessCorrectFieldBase() =>
-            rule = Language.CreateDescriptor(DiagnosticId, MessageFormat);
+        protected PropertiesAccessCorrectFieldBase() : base(DiagnosticId) { }
 
         protected override void Initialize(SonarAnalysisContext context) =>
             // We want to check the fields read and assigned in all properties in this class
@@ -135,7 +131,7 @@ namespace SonarAnalyzer.Rules
                 if (locationAndAccessorType.Item1 != null)
                 {
                     context.ReportIssue(Diagnostic.Create(
-                        rule,
+                        Rule,
                         locationAndAccessorType.Item1,
                         locationAndAccessorType.Item2,
                         expectedField.Name));

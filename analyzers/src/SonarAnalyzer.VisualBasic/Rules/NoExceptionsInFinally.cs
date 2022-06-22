@@ -27,9 +27,9 @@ using SonarAnalyzer.Helpers;
 namespace SonarAnalyzer.Rules.VisualBasic
 {
     [DiagnosticAnalyzer(LanguageNames.VisualBasic)]
-    public sealed class NoExceptionsInFinally : NoExceptionsInFinallyBase
+    public sealed class NoExceptionsInFinally : NoExceptionsInFinallyBase<SyntaxKind>
     {
-        protected override ILanguageFacade Language => VisualBasicFacade.Instance;
+        protected override ILanguageFacade<SyntaxKind> Language => VisualBasicFacade.Instance;
 
         protected override void Initialize(SonarAnalysisContext context) =>
             context.RegisterSyntaxNodeActionInNonGenerated(c =>

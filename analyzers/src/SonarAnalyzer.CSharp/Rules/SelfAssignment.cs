@@ -28,9 +28,9 @@ using StyleCop.Analyzers.Lightup;
 namespace SonarAnalyzer.Rules.CSharp
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
-    public sealed class SelfAssignment : SelfAssignmentBase
+    public sealed class SelfAssignment : SelfAssignmentBase<SyntaxKind>
     {
-        protected override ILanguageFacade Language => CSharpFacade.Instance;
+        protected override ILanguageFacade<SyntaxKind> Language => CSharpFacade.Instance;
 
         protected override void Initialize(SonarAnalysisContext context)
         {
@@ -46,7 +46,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
                     if (CSharpEquivalenceChecker.AreEquivalent(expression.Left, expression.Right))
                     {
-                        c.ReportIssue(Diagnostic.Create(rule, c.Node.GetLocation()));
+                        c.ReportIssue(Diagnostic.Create(Rule, c.Node.GetLocation()));
                     }
                 },
                 SyntaxKind.SimpleAssignmentExpression,

@@ -18,25 +18,17 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System.Collections.Immutable;
-using Microsoft.CodeAnalysis;
 using SonarAnalyzer.Helpers;
 
 namespace SonarAnalyzer.Rules
 {
-    public abstract class SelfAssignmentBase : SonarDiagnosticAnalyzer
+    public abstract class SelfAssignmentBase<TSyntaxKind> : SonarDiagnosticAnalyzer<TSyntaxKind>
+        where TSyntaxKind : struct
     {
         private const string DiagnosticId = "S1656";
-        private const string MessageFormat = "Remove or correct this useless self-assignment.";
 
-        protected abstract ILanguageFacade Language { get; }
+        protected override string MessageFormat => "Remove or correct this useless self-assignment.";
 
-        protected readonly DiagnosticDescriptor rule;
-
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
-
-        protected SelfAssignmentBase() =>
-             rule = Language.CreateDescriptor(DiagnosticId, MessageFormat);
-
+        protected SelfAssignmentBase() : base(DiagnosticId) { }
     }
 }

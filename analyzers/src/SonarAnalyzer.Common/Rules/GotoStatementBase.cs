@@ -18,33 +18,27 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System.Collections.Immutable;
 using Microsoft.CodeAnalysis;
 using SonarAnalyzer.Helpers;
 
 namespace SonarAnalyzer.Rules
 {
-    public abstract class GotoStatementBase<TSyntaxKind> : SonarDiagnosticAnalyzer
+    public abstract class GotoStatementBase<TSyntaxKind> : SonarDiagnosticAnalyzer<TSyntaxKind>
         where TSyntaxKind : struct
     {
         private const string DiagnosticId = "S907";
-        internal const string MessageFormat = "Remove this use of '{0}'.";
 
-        private readonly DiagnosticDescriptor rule;
+        protected override string MessageFormat => $"Remove this use of '{GoToLabel}'.";
 
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
-
-        protected abstract ILanguageFacade<TSyntaxKind> Language { get; }
         protected abstract TSyntaxKind[] GotoSyntaxKinds { get; }
         protected abstract string GoToLabel { get; }
 
-        protected GotoStatementBase() =>
-            rule = Language.CreateDescriptor(DiagnosticId, string.Format(MessageFormat, GoToLabel));
+        protected GotoStatementBase() : base(DiagnosticId) { }
 
         protected sealed override void Initialize(SonarAnalysisContext context) =>
             context.RegisterSyntaxNodeActionInNonGenerated(
                 Language.GeneratedCodeRecognizer,
-                c => c.ReportIssue(Diagnostic.Create(rule, c.Node.GetFirstToken().GetLocation())),
+                c => c.ReportIssue(Diagnostic.Create(Rule, c.Node.GetFirstToken().GetLocation())),
                 GotoSyntaxKinds);
     }
 }
