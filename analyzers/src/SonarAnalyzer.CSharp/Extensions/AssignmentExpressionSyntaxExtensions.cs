@@ -79,8 +79,10 @@ namespace SonarAnalyzer.Extensions
                 {
                     var leftArg = leftEnum.Current;
                     var rightArg = rightEnum.Current;
-                    if (leftArg is ArgumentSyntax { Expression: { } leftExpression } && TupleExpressionSyntaxWrapper.IsInstance(leftExpression)
-                        && rightArg is ArgumentSyntax { Expression: { } rightExpression } && TupleExpressionSyntaxWrapper.IsInstance(rightExpression))
+                    if (leftArg is { Expression: { } leftExpression }
+                        && TupleExpressionSyntaxWrapper.IsInstance(leftExpression)
+                        && rightArg is { Expression: { } rightExpression }
+                        && TupleExpressionSyntaxWrapper.IsInstance(rightExpression))
                     {
                         MapTupleElements(arrayBuilder, (TupleExpressionSyntaxWrapper)leftExpression, (TupleExpressionSyntaxWrapper)rightExpression);
                     }
@@ -100,7 +102,8 @@ namespace SonarAnalyzer.Extensions
                     var leftVar = leftEnum.Current;
                     var rightArg = rightEnum.Current;
                     if (ParenthesizedVariableDesignationSyntaxWrapper.IsInstance(leftVar)
-                        && rightArg is ArgumentSyntax { Expression: { } rightExpression } && TupleExpressionSyntaxWrapper.IsInstance(rightExpression))
+                        && rightArg is { Expression: { } rightExpression }
+                        && TupleExpressionSyntaxWrapper.IsInstance(rightExpression))
                     {
                         MapDesignationElements(arrayBuilder, (ParenthesizedVariableDesignationSyntaxWrapper)leftVar, (TupleExpressionSyntaxWrapper)rightExpression);
                     }
