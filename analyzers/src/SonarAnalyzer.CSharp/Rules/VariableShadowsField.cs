@@ -56,30 +56,30 @@ namespace SonarAnalyzer.Rules.CSharp
 
                     var members = GetMembers(variableSymbol.ContainingType);
 
-                    ReportOnVariableMatchingField(members, declaration.Identifier, c);
+                    ReportOnVariableMatchingField(c, members, declaration.Identifier);
                 },
                 SyntaxKind.ForEachStatement);
 
             context.RegisterSyntaxNodeActionInNonGenerated(
-                c => ProcessStatementWithVariableDeclaration((LocalDeclarationStatementSyntax)c.Node, s => s.Declaration, c), SyntaxKind.LocalDeclarationStatement);
+                c => ProcessStatementWithVariableDeclaration(c, (LocalDeclarationStatementSyntax)c.Node, s => s.Declaration), SyntaxKind.LocalDeclarationStatement);
 
             context.RegisterSyntaxNodeActionInNonGenerated(
-                c => ProcessStatementWithVariableDeclaration((ForStatementSyntax)c.Node, s => s.Declaration, c), SyntaxKind.ForStatement);
+                c => ProcessStatementWithVariableDeclaration(c, (ForStatementSyntax)c.Node, s => s.Declaration), SyntaxKind.ForStatement);
 
             context.RegisterSyntaxNodeActionInNonGenerated(
-                c => ProcessStatementWithVariableDeclaration((UsingStatementSyntax)c.Node, s => s.Declaration, c), SyntaxKind.UsingStatement);
+                c => ProcessStatementWithVariableDeclaration(c, (UsingStatementSyntax)c.Node, s => s.Declaration), SyntaxKind.UsingStatement);
 
             context.RegisterSyntaxNodeActionInNonGenerated(
-                c => ProcessStatementWithVariableDeclaration((FixedStatementSyntax)c.Node, s => s.Declaration, c), SyntaxKind.FixedStatement);
+                c => ProcessStatementWithVariableDeclaration(c, (FixedStatementSyntax)c.Node, s => s.Declaration), SyntaxKind.FixedStatement);
 
             context.RegisterSyntaxNodeActionInNonGenerated(
-                c => ProcessStatementWithVariableDesignation((DeclarationPatternSyntaxWrapper)c.Node, s => s.Designation, c), SyntaxKindEx.DeclarationPattern);
+                c => ProcessStatementWithVariableDesignation(c, (DeclarationPatternSyntaxWrapper)c.Node, s => s.Designation), SyntaxKindEx.DeclarationPattern);
 
             context.RegisterSyntaxNodeActionInNonGenerated(
-                c => ProcessStatementWithVariableDesignation((DeclarationExpressionSyntaxWrapper)c.Node, s => s.Designation, c), SyntaxKindEx.DeclarationExpression);
+                c => ProcessStatementWithVariableDesignation(c, (DeclarationExpressionSyntaxWrapper)c.Node, s => s.Designation), SyntaxKindEx.DeclarationExpression);
         }
 
-        private static void ProcessStatementWithVariableDesignation<T>(T declaration, Func<T, VariableDesignationSyntaxWrapper> variableSelector, SyntaxNodeAnalysisContext context)
+        private static void ProcessStatementWithVariableDesignation<T>(SyntaxNodeAnalysisContext context, T declaration, Func<T, VariableDesignationSyntaxWrapper> variableSelector)
         {
             var variableDesignation = variableSelector(declaration);
 
@@ -107,12 +107,12 @@ namespace SonarAnalyzer.Rules.CSharp
                 }
 
                 members ??= GetMembers(variableSymbol.ContainingType);
-                ReportOnVariableMatchingField(members, singleVariableDesignation.Identifier, context);
+                ReportOnVariableMatchingField(context, members, singleVariableDesignation.Identifier);
             }
             return members;
         }
 
-        private static void ProcessStatementWithVariableDeclaration<T>(T declaration, Func<T, VariableDeclarationSyntax> variableSelector, SyntaxNodeAnalysisContext context)
+        private static void ProcessStatementWithVariableDeclaration<T>(SyntaxNodeAnalysisContext context, T declaration, Func<T, VariableDeclarationSyntax> variableSelector)
         {
             var variableDeclaration = variableSelector(declaration);
             if (variableDeclaration == null)
@@ -130,11 +130,11 @@ namespace SonarAnalyzer.Rules.CSharp
                 }
 
                 members ??= GetMembers(variableSymbol.ContainingType);
-                ReportOnVariableMatchingField(members, variable.Identifier, context);
+                ReportOnVariableMatchingField(context, members, variable.Identifier);
             }
         }
 
-        private static void ReportOnVariableMatchingField(IEnumerable<ISymbol> members, SyntaxToken identifier, SyntaxNodeAnalysisContext context)
+        private static void ReportOnVariableMatchingField(SyntaxNodeAnalysisContext context, IEnumerable<ISymbol> members, SyntaxToken identifier)
         {
             if (members.FirstOrDefault(m => m.Name == identifier.ValueText) is { } matchingMember)
             {
