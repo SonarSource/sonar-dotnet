@@ -84,18 +84,34 @@ namespace SonarAnalyzer.Rules.CSharp
             c =>
             {
                 var assignmentExpression = (AssignmentExpressionSyntax)c.Node;
+                ProcessExpression(assignmentExpression.Left, c.SemanticModel, symbolsWhereLocaleIsSet);
+            };
 
-                if (GetPropertySymbol(assignmentExpression, c.SemanticModel) is { } propertySymbol
-                    && propertySymbol.Name == "Locale"
-                    && propertySymbol.ContainingType.IsAny(CheckedTypes))
+        private static void ProcessExpression(ExpressionSyntax expression, SemanticModel semanticModel, ISet<ISymbol> symbolsWhereLocaleIsSet)
+        {
+            expression = expression.RemoveParentheses();
+            if (TupleExpressionSyntaxWrapper.IsInstance(expression)
+                && ((TupleExpressionSyntaxWrapper)expression) is var tupleExpression)
+            {
+                foreach (var argument in tupleExpression.Arguments)
                 {
-                    var variableSymbol = GetAccessedVariable(assignmentExpression, c.SemanticModel);
+                    ProcessExpression(argument.Expression, semanticModel, symbolsWhereLocaleIsSet);
+                }
+            }
+            else
+            {
+                if (GetPropertySymbol(expression, semanticModel) is { } propertySymbol
+                            && propertySymbol.Name == "Locale"
+                            && propertySymbol.ContainingType.IsAny(CheckedTypes))
+                {
+                    var variableSymbol = GetAccessedVariable(expression, semanticModel);
                     if (variableSymbol != null)
                     {
                         symbolsWhereLocaleIsSet.Add(variableSymbol);
                     }
                 }
-            };
+            }
+        }
 
         private static Action<CompilationAnalysisContext> ProcessCollectedSymbols(ICollection<NodeAndSymbol> symbolsWhereTypeIsCreated, ICollection<ISymbol> symbolsWhereLocaleIsSet) =>
             c =>
@@ -212,12 +228,12 @@ namespace SonarAnalyzer.Rules.CSharp
             }
         }
 
-        private static IPropertySymbol GetPropertySymbol(AssignmentExpressionSyntax assignment, SemanticModel model) =>
-        model.GetSymbolInfo(assignment.Left).Symbol as IPropertySymbol;
+        private static IPropertySymbol GetPropertySymbol(ExpressionSyntax expression, SemanticModel model) =>
+            model.GetSymbolInfo(expression).Symbol as IPropertySymbol;
 
-        private static ISymbol GetAccessedVariable(AssignmentExpressionSyntax assignment, SemanticModel model)
+        private static ISymbol GetAccessedVariable(ExpressionSyntax expression, SemanticModel model)
         {
-            var variable = assignment.Left.RemoveParentheses();
+            var variable = expression.RemoveParentheses();
 
             if (variable is IdentifierNameSyntax identifier)
             {
