@@ -25,18 +25,28 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class VariableShadowsFieldTest
     {
+        private readonly VerifierBuilder builder = new VerifierBuilder<VariableShadowsField>();
+
         [TestMethod]
         public void VariableShadowsField() =>
-            OldVerifier.VerifyAnalyzer(@"TestCases\VariableShadowsField.cs", new VariableShadowsField(), ParseOptionsHelper.FromCSharp8);
+            builder.AddPaths("VariableShadowsField.cs")
+                .WithOptions(ParseOptionsHelper.FromCSharp8)
+                .Verify();
 
 #if NET
+
         [TestMethod]
         public void VariableShadowsField_CSharp9() =>
-            OldVerifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\VariableShadowsField.CSharp9.cs", new VariableShadowsField());
+            builder.AddPaths("VariableShadowsField.CSharp9.cs")
+                .WithOptions(ParseOptionsHelper.FromCSharp9)
+                .WithTopLevelStatements()
+                .Verify();
 
         [TestMethod]
         public void VariableShadowsField_CSharp10() =>
-            OldVerifier.VerifyAnalyzerFromCSharp10Library(@"TestCases\VariableShadowsField.CSharp10.cs", new VariableShadowsField());
+            builder.AddPaths("VariableShadowsField.CSharp10.cs")
+                .WithOptions(ParseOptionsHelper.FromCSharp10)
+                .Verify();
 
 #endif
     }

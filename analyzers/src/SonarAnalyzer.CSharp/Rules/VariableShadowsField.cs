@@ -27,6 +27,7 @@ using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.Helpers;
+using StyleCop.Analyzers.Lightup;
 
 namespace SonarAnalyzer.Rules.CSharp
 {
@@ -70,6 +71,45 @@ namespace SonarAnalyzer.Rules.CSharp
 
             context.RegisterSyntaxNodeActionInNonGenerated(
                 c => ProcessStatementWithVariableDeclaration((FixedStatementSyntax)c.Node, s => s.Declaration, c), SyntaxKind.FixedStatement);
+
+            context.RegisterSyntaxNodeActionInNonGenerated(
+                c => ProcessStatementWithVariableDesignation((DeclarationPatternSyntaxWrapper)c.Node, s => s.Designation, c), SyntaxKindEx.DeclarationPattern);
+
+            context.RegisterSyntaxNodeActionInNonGenerated(
+                c => ProcessStatementWithVariableDesignation((DeclarationExpressionSyntaxWrapper)c.Node, s => s.Designation, c), SyntaxKindEx.DeclarationExpression);
+        }
+
+        private static void ProcessStatementWithVariableDesignation<T>(T declaration, Func<T, VariableDesignationSyntaxWrapper> variableSelector, SyntaxNodeAnalysisContext context)
+        {
+            var variableDesignation = variableSelector(declaration);
+
+            ProcessSingleVariableDesignation(variableDesignation, context, null);
+            if (ParenthesizedVariableDesignationSyntaxWrapper.IsInstance(variableDesignation)
+                && ((ParenthesizedVariableDesignationSyntaxWrapper)variableDesignation) is var parenthesizedVariables)
+            {
+                List<ISymbol> members = null;
+                foreach (var variable in parenthesizedVariables.Variables)
+                {
+                    members = ProcessSingleVariableDesignation(variable, context, members);
+                }
+            }
+        }
+
+        private static List<ISymbol> ProcessSingleVariableDesignation(VariableDesignationSyntaxWrapper variableDesignation, SyntaxNodeAnalysisContext context, List<ISymbol> members)
+        {
+            if (SingleVariableDesignationSyntaxWrapper.IsInstance(variableDesignation)
+                && ((SingleVariableDesignationSyntaxWrapper)variableDesignation) is var singleVariableDesignation)
+            {
+                var variableSymbol = context.SemanticModel.GetDeclaredSymbol(singleVariableDesignation);
+                if (variableSymbol == null)
+                {
+                    return members;
+                }
+
+                members ??= GetMembers(variableSymbol.ContainingType);
+                ReportOnVariableMatchingField(members, singleVariableDesignation.Identifier, context);
+            }
+            return members;
         }
 
         private static void ProcessStatementWithVariableDeclaration<T>(T declaration, Func<T, VariableDeclarationSyntax> variableSelector, SyntaxNodeAnalysisContext context)
@@ -80,10 +120,8 @@ namespace SonarAnalyzer.Rules.CSharp
                 return;
             }
 
-            var variables = variableDeclaration.Variables;
-
             List<ISymbol> members = null;
-            foreach (var variable in variables)
+            foreach (var variable in variableDeclaration.Variables)
             {
                 var variableSymbol = context.SemanticModel.GetDeclaredSymbol(variable);
                 if (variableSymbol == null)
@@ -91,29 +129,17 @@ namespace SonarAnalyzer.Rules.CSharp
                     return;
                 }
 
-                if (members == null)
-                {
-                    members = GetMembers(variableSymbol.ContainingType);
-                }
-
+                members ??= GetMembers(variableSymbol.ContainingType);
                 ReportOnVariableMatchingField(members, variable.Identifier, context);
             }
         }
 
         private static void ReportOnVariableMatchingField(IEnumerable<ISymbol> members, SyntaxToken identifier, SyntaxNodeAnalysisContext context)
         {
-            var matchingMember = members.FirstOrDefault(m => m.Name == identifier.ValueText);
-            if (matchingMember == null)
+            if (members.FirstOrDefault(m => m.Name == identifier.ValueText) is { } matchingMember)
             {
-                return;
+                context.ReportIssue(Diagnostic.Create(Rule, identifier.GetLocation(), identifier.Text, (matchingMember is IFieldSymbol) ? "field" : "property"));
             }
-
-            context.ReportIssue(
-                Diagnostic.Create(
-                    Rule,
-                    identifier.GetLocation(),
-                    identifier.Text,
-                    (matchingMember is IFieldSymbol) ? "field" : "property"));
         }
 
         private static List<ISymbol> GetMembers(INamespaceOrTypeSymbol classSymbol) =>
