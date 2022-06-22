@@ -30,30 +30,30 @@ namespace SonarAnalyzer.Rules
 {
     public abstract class CommentKeywordBase : SonarDiagnosticAnalyzer
     {
-        private const string TodoKeyword = "TODO";
-        protected const string TodoDiagnosticId = "S1135";
-        protected const string TodoMessageFormat = "Complete the task associated to this '" + TodoKeyword + "' comment.";
+        private const string ToDoKeyword = "TODO";
+        protected const string ToDoDiagnosticId = "S1135";
+        protected const string ToDoMessageFormat = "Complete the task associated to this '" + ToDoKeyword + "' comment.";
 
-        private const string FixmeKeyword = "FIXME";
-        protected const string FixmeDiagnosticId = "S1134";
-        protected const string FixmeMessageFormat = "Take the required action to fix the issue indicated by this '" + FixmeKeyword + "' comment.";
+        private const string FixMeKeyword = "FIXME";
+        protected const string FixMeDiagnosticId = "S1134";
+        protected const string FixMeMessageFormat = "Take the required action to fix the issue indicated by this '" + FixMeKeyword + "' comment.";
 
-        private readonly DiagnosticDescriptor todoRule;
-        private readonly DiagnosticDescriptor fixmeRule;
+        private readonly DiagnosticDescriptor toDoRule;
+        private readonly DiagnosticDescriptor fixMeRule;
 
         protected abstract ILanguageFacade Language { get; }
+        protected abstract bool IsComment(SyntaxTrivia trivia);
 
         public sealed override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; }
 
         protected CommentKeywordBase()
         {
-            todoRule = Language.CreateDescriptor(TodoDiagnosticId, TodoMessageFormat);
-            fixmeRule = Language.CreateDescriptor(FixmeDiagnosticId, FixmeMessageFormat);
-            SupportedDiagnostics = ImmutableArray.Create(todoRule, fixmeRule);
+            toDoRule = Language.CreateDescriptor(ToDoDiagnosticId, ToDoMessageFormat);
+            fixMeRule = Language.CreateDescriptor(FixMeDiagnosticId, FixMeMessageFormat);
+            SupportedDiagnostics = ImmutableArray.Create(toDoRule, fixMeRule);
         }
 
-        protected sealed override void Initialize(SonarAnalysisContext context)
-        {
+        protected sealed override void Initialize(SonarAnalysisContext context) =>
             context.RegisterSyntaxTreeActionInNonGenerated(
                 Language.GeneratedCodeRecognizer,
                 c =>
@@ -63,20 +63,18 @@ namespace SonarAnalyzer.Rules
 
                     foreach (var comment in comments)
                     {
-                        foreach (var location in GetKeywordLocations(c.Tree, comment, TodoKeyword))
+                        foreach (var location in GetKeywordLocations(c.Tree, comment, ToDoKeyword))
                         {
-                            c.ReportIssue(Diagnostic.Create(todoRule, location));
+                            c.ReportIssue(Diagnostic.Create(toDoRule, location));
                         }
 
-                        foreach (var location in GetKeywordLocations(c.Tree, comment, FixmeKeyword))
+                        foreach (var location in GetKeywordLocations(c.Tree, comment, FixMeKeyword))
                         {
-                            c.ReportIssue(Diagnostic.Create(fixmeRule, location));
+                            c.ReportIssue(Diagnostic.Create(fixMeRule, location));
                         }
                     }
                 });
-        }
 
-        protected abstract bool IsComment(SyntaxTrivia trivia);
 
         private static IEnumerable<Location> GetKeywordLocations(SyntaxTree tree, SyntaxTrivia comment, string word)
         {
