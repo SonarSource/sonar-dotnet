@@ -92,9 +92,18 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
             {
                 checks.ExitReached(new(null, node.State));
             }
-            else if (node.Block.ContainsThrow())
+            else if (node.Block.Successors.Length == 1 && ThrownException(node, node.Block.Successors.Single().Semantics) is {} exception)
             {
-                yield return new(cfg.ExitBlock, node.State, null);
+                var successors = ExceptionSuccessors(node, exception).ToArray();
+                foreach (var successor in successors)
+                {
+                    yield return successor;
+                }
+
+                if (successors.Length == 0) // catch without finally
+                {
+                    yield return new(cfg.ExitBlock, node.State.SetException(exception), null);
+                }
             }
             else
             {
@@ -185,7 +194,16 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
                     yield return node.CreateNext(node.Operation.Parent is null && node.Block.BranchValue != node.Operation.Instance ? postProcessed.State.ResetOperations() : postProcessed.State);
                 }
             }
-            if (ExceptionCandidate(node.Operation) is { } exception && node.Block.EnclosingRegion(ControlFlowRegionKind.Try) is { } tryRegion)
+
+            foreach (var successor in ExceptionSuccessors(node, ExceptionCandidate(node.Operation)))
+            {
+                yield return successor;
+            }
+        }
+
+        private IEnumerable<ExplodedNode> ExceptionSuccessors(ExplodedNode node, ExceptionState exception)
+        {
+            if (exception is not null && node.Block.EnclosingRegion(ControlFlowRegionKind.Try) is { } tryRegion)
             {
                 // We're jumping out of the outer statement => We need to reset operation states.
                 var state = node.State.ResetOperations().SetException(exception);
@@ -195,6 +213,14 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
                 }
             }
         }
+
+        private static ExceptionState ThrownException(ExplodedNode node, ControlFlowBranchSemantics semantics) =>
+            semantics switch
+            {
+                 ControlFlowBranchSemantics.Throw => ThrowExceptionType(node.Block.BranchValue),
+                 ControlFlowBranchSemantics.Rethrow => node.State.Exception,
+                 _ => null
+            };
 
         private static ProgramState ProcessOperation(SymbolicContext context) =>
             context.Operation.Instance.Kind switch
@@ -211,21 +237,26 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
                 _ => context.State
             };
 
+        private static ExceptionState ThrowExceptionType(IOperation operation) =>
+            operation.Kind switch
+            {
+                OperationKindEx.ObjectCreation => new ExceptionState(operation.Type),
+                _ => null
+            };
+
         private static ExceptionState ExceptionCandidate(IOperationWrapperSonar operation) =>
             operation.Instance.Kind switch
             {
                 OperationKindEx.Invocation => ExceptionState.UnknownException,
                 // ToDo: Support other operations like field/property access on non-static non-this, conversions and so on. See docs for list of operations.
-                // ToDo: Support Throw operation with specific exception type
                 _ => null
             };
 
         private static bool IsReachable(ExplodedNode node, ControlFlowBranch branch) =>
-            node.Block.ConditionKind != ControlFlowConditionKind.None
-            && node.State[node.Block.BranchValue] is { } sv
-            && sv.HasConstraint<BoolConstraint>()
-                ? IsReachable(branch, node.Block.ConditionKind == ControlFlowConditionKind.WhenTrue, sv.HasConstraint(BoolConstraint.True))
-                : true;    // Unconditional or we don't know the value and need to explore both paths
+            node.Block.ConditionKind == ControlFlowConditionKind.None
+            || node.State[node.Block.BranchValue] is not { } symbolicValue
+            || !symbolicValue.HasConstraint<BoolConstraint>()
+            || IsReachable(branch, node.Block.ConditionKind == ControlFlowConditionKind.WhenTrue, symbolicValue.HasConstraint(BoolConstraint.True));
 
         private static bool IsReachable(ControlFlowBranch branch, bool condition, bool constraint) =>
             branch.IsConditionalSuccessor ? condition == constraint : condition != constraint;

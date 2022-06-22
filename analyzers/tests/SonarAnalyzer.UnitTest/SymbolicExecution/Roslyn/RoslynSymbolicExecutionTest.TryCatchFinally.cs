@@ -19,6 +19,7 @@
  */
 
 using SonarAnalyzer.SymbolicExecution.Constraints;
+using SonarAnalyzer.SymbolicExecution.Roslyn;
 using SonarAnalyzer.UnitTest.TestFramework.SymbolicExecution;
 
 namespace SonarAnalyzer.UnitTest.SymbolicExecution.Roslyn
@@ -375,52 +376,59 @@ Tag(""AfterFinally"");";
         public void Finally_ThrowInTry()
         {
             const string code = @"
-Tag(""BeforeTry"");
+var tag = ""BeforeTry"";
 try
 {
     Tag(""InTry"");
     throw new System.Exception();
-    Tag(""UnreachableInTry"");
+    tag = ""UnreachableInTry"";
 }
 finally
 {
-    Tag(""InFinally"");
+    tag = ""InFinally"";
 }
-Tag(""UnreachableAfterFinally"");";
-            SETestContext.CreateCS(code).Validator.ValidateTagOrder(
+tag = ""UnreachableAfterFinally"";";
+            var validator = SETestContext.CreateCS(code).Validator;
+            validator.ValidateTagOrder(
                 "BeforeTry",
                 "InTry",
-                "InFinally");
+                "InFinally",                // With Exception thrown by Tag("InTry")
+                "InFinally");               // With Exception thrown by `throw`
+
+            ValidateHasOnlyUnknownExceptionAndSystemException(validator, "InFinally");
         }
 
         [TestMethod]
         public void Finally_ThrowInFinally()
         {
             const string code = @"
-Tag(""BeforeTry"");
+var tag = ""BeforeTry"";
 try
 {
-    Tag(""InTry"");
+    tag = ""InTry"";
 }
 finally
 {
-    Tag(""InFinally"");
+    tag = ""InFinally"";
     throw new System.Exception();
-    Tag(""UnreachableInFinally"");
+    tag  = ""UnreachableInFinally"";
 }
-Tag(""UnreachableAfterFinally"");";
-            SETestContext.CreateCS(code).Validator.ValidateTagOrder(
+tag = ""UnreachableAfterFinally"";";
+            var validator = SETestContext.CreateCS(code).Validator;
+            validator.ValidateTagOrder(
                 "BeforeTry",
                 "InTry",
-                "InFinally",    // With Exception thrown by Tag("InTry")
                 "InFinally");
+
+            validator.TagStates("InFinally").Should().HaveCount(1)
+                .And.ContainSingle(x => HasNoException(x));
         }
 
         [TestMethod]
         public void Finally_NestedFinally()
         {
             const string code = @"
-Tag(""BeforeOuterTry"");
+var tag = ""BeforeOuterTry"";
 try
 {
     Tag(""InOuterTry"");
@@ -439,7 +447,8 @@ finally
     Tag(""AfterInnerFinally"");
 }
 Tag(""AfterOuterFinally"");";
-            SETestContext.CreateCS(code).Validator.ValidateTagOrder(
+            var validator = SETestContext.CreateCS(code).Validator;
+            validator.ValidateTagOrder(
                 "BeforeOuterTry",
                 "InOuterTry",
                 "InOuterFinally",       // With Exception thrown by Tag("InOuterTry")
@@ -450,6 +459,399 @@ Tag(""AfterOuterFinally"");";
                 "InInnerFinally",
                 "AfterInnerFinally",
                 "AfterOuterFinally");
+
+            ValidateHasOnlyNoExceptionAndUnknownException(validator, "InOuterFinally");
+            ValidateHasOnlyNoExceptionAndUnknownException(validator, "InInnerFinally");
+            ValidateHasOnlyNoExceptionAndUnknownException(validator, "InInnerTry");
+
+            validator.TagStates("AfterInnerFinally").Should().HaveCount(1)
+                     .And.ContainSingle(x => HasNoException(x));
+
+            validator.TagStates("AfterOuterFinally").Should().HaveCount(1)
+                     .And.ContainSingle(x => HasNoException(x));
         }
+
+        [TestMethod]
+        public void TryCatch_ThrowInTry_SingleCatchBlock()
+        {
+            const string code = @"
+var tag = ""BeforeTry"";
+try
+{
+    Tag(""InTry"");
+    throw new System.Exception();
+    tag = ""UnreachableInFinally"";
+}
+catch
+{
+    tag = ""InCatch"";
+}
+tag = ""AfterCatch"";";
+            var validator = SETestContext.CreateCS(code).Validator;
+            validator.ValidateTagOrder(
+                "BeforeTry",
+                "InTry",
+                "InCatch",          // With Exception thrown by Tag("InTry")
+                "InCatch",          // With Exception thrown by `throw`
+                "AfterCatch",
+                "AfterCatch");      // Should go away after https://github.com/SonarSource/sonar-dotnet/pull/5745 is done.
+
+            ValidateHasOnlyUnknownExceptionAndSystemException(validator, "InCatch");
+            ValidateHasOnlyUnknownExceptionAndSystemException(validator, "AfterCatch");
+        }
+
+        [TestMethod]
+        public void TryCatch_ThrowInTry_SingleCatchBlock_ReThrow()
+        {
+            const string code = @"
+var tag = ""BeforeTry"";
+try
+{
+    tag = ""InTry"";
+    throw new System.Exception();
+    tag = ""UnreachableInFinally"";
+}
+catch
+{
+    tag = ""InCatch"";
+    throw;
+}
+tag = ""UnreachableAfterCatch"";";
+            var validator = SETestContext.CreateCS(code).Validator;
+            validator.ValidateTagOrder(
+                "BeforeTry",
+                "InTry",
+                "InCatch");         // With Exception thrown by `throw`
+
+            validator.ValidateExitReachCount(1);
+
+            validator.TagStates("InCatch").Should().HaveCount(1)
+                     .And.ContainSingle(x => HasExceptionOfTypeException(x));
+        }
+
+        [TestMethod]
+        public void TryCatch_ThrowInTry_SingleCatchBlock_ReThrowException()
+        {
+            const string code = @"
+var tag = ""BeforeTry"";
+try
+{
+    Tag(""InTry"");
+    throw new System.Exception();
+    tag = ""UnreachableInFinally"";
+}
+catch (Exception ex)
+{
+    tag = ""InCatch"";
+    throw ex;
+}
+tag = ""UnreachableAfterCatch"";";
+            var validator = SETestContext.CreateCS(code).Validator;
+            validator.ValidateTagOrder(
+                "BeforeTry",
+                "InTry",
+                "InCatch",          // With Exception thrown by Tag("InTry")
+                "InCatch");         // With Exception thrown by `throw`
+
+            ValidateHasOnlyUnknownExceptionAndSystemException(validator, "InCatch");
+        }
+
+        [TestMethod]
+        public void TryCatch_ThrowInTry_MultipleCatchBlocks()
+        {
+            const string code = @"
+var tag = ""BeforeTry"";
+try
+{
+    Tag(""InTry"");
+    throw new System.Exception();
+    tag = ""UnreachableInFinally"";
+}
+catch (System.NullReferenceException)
+{
+    tag = ""InFirstCatch"";
+}
+catch (System.Exception)
+{
+    tag = ""InSecondCatch"";
+}
+catch
+{
+    tag = ""InThirdCatch"";
+}
+tag = ""AfterCatch"";";
+            var validator = SETestContext.CreateCS(code).Validator;
+            validator.ValidateTagOrder(
+                "BeforeTry",
+                "InTry",
+                "InFirstCatch",     // Filtering is not implemented yet so all the catch blocks will be iterated.
+                "InSecondCatch",
+                "InThirdCatch",
+                "InFirstCatch",
+                "InSecondCatch",
+                "InThirdCatch",
+                "AfterCatch",
+                "AfterCatch");      // Should go away after https://github.com/SonarSource/sonar-dotnet/pull/5745 is done.
+
+            ValidateHasOnlyUnknownExceptionAndSystemException(validator, "InFirstCatch");
+            ValidateHasOnlyUnknownExceptionAndSystemException(validator, "InSecondCatch");
+            ValidateHasOnlyUnknownExceptionAndSystemException(validator, "InThirdCatch");
+            ValidateHasOnlyUnknownExceptionAndSystemException(validator, "AfterCatch");
+        }
+
+        [TestMethod]
+        public void TryCatch_ThrowInCatch_SingleCatchBlock()
+        {
+            const string code = @"
+var tag = ""BeforeTry"";
+try
+{
+    Tag(""InTry"");
+}
+catch
+{
+    tag = ""InCatch"";
+    throw new System.Exception();
+    tag = ""UnreachableInCatch"";
+}
+tag = ""AfterCatch"";";
+            var validator = SETestContext.CreateCS(code).Validator;
+            validator.ValidateTagOrder(
+                "BeforeTry",
+                "InTry",
+                "InCatch",
+                "AfterCatch"); // If there is no exception in try
+
+            validator.TagStates("InCatch").Should().HaveCount(1)
+                     .And.ContainSingle(x => HasUnknownException(x));
+
+            validator.TagStates("AfterCatch").Should().HaveCount(1)
+                     .And.ContainSingle(x => HasNoException(x));
+        }
+
+        [TestMethod]
+        public void TryCatchFinally_ThrowInTry()
+        {
+            const string code = @"
+var tag = ""BeforeTry"";
+try
+{
+    Tag(""InTry"");
+    throw new System.Exception();
+    tag = ""UnreachableInFinally"";
+}
+catch
+{
+    tag = ""InCatch"";
+}
+finally
+{
+    tag = ""InFinally"";
+}
+tag = ""AfterFinally"";";
+            var validator = SETestContext.CreateCS(code).Validator;
+            validator.ValidateTagOrder(
+                "BeforeTry",
+                "InTry",
+                "InCatch",          // With Exception thrown by Tag("InTry")
+                "InCatch",          // With Exception thrown by `throw`
+                "InFinally",
+                "InFinally",        // Should go away after https://github.com/SonarSource/sonar-dotnet/pull/5745 is done.
+                "AfterFinally",
+                "AfterFinally");
+
+            ValidateHasOnlyUnknownExceptionAndSystemException(validator, "InCatch");
+            ValidateHasOnlyUnknownExceptionAndSystemException(validator, "InFinally");
+            ValidateHasOnlyUnknownExceptionAndSystemException(validator, "AfterFinally");
+        }
+
+        [TestMethod]
+        public void TryCatchFinally_ThrowInCatch()
+        {
+            const string code = @"
+var tag = ""BeforeTry"";
+try
+{
+    Tag(""InTry"");
+}
+catch
+{
+    tag = ""InCatch"";
+    throw new System.Exception();
+    tag = ""UnreachableInCatch"";
+}
+finally
+{
+    tag = ""InFinally"";
+}
+tag = ""AfterFinally"";";
+            var validator = SETestContext.CreateCS(code).Validator;
+            validator.ValidateTagOrder(
+                "BeforeTry",
+                "InTry",
+                "InCatch",
+                "InFinally",
+                "InFinally",
+                "AfterFinally");
+
+            validator.TagStates("InCatch").Should().HaveCount(1)
+                .And.ContainSingle(x => HasUnknownException(x));
+
+            validator.TagStates("InFinally").Should().HaveCount(2)
+                .And.ContainSingle(x => HasNoException(x))
+                .And.ContainSingle(x => HasExceptionOfTypeException(x));
+
+            validator.TagStates("AfterFinally").Should().HaveCount(1)
+                .And.ContainSingle(x => HasNoException(x));
+        }
+
+        [TestMethod]
+        public void TryCatchFinally_ThrowInFinally()
+        {
+            const string code = @"
+var tag = ""BeforeTry"";
+try
+{
+    Tag(""InTry"");
+}
+catch
+{
+    tag = ""InCatch"";
+}
+finally
+{
+    tag = ""InFinally"";
+    throw new System.Exception();
+    tag = ""UnreachableInCatch"";
+}
+tag = ""UnreachableAfterFinally"";";
+            var validator = SETestContext.CreateCS(code).Validator;
+            validator.ValidateTagOrder(
+                "BeforeTry",
+                "InTry",
+                "InCatch",
+                "InFinally",
+                "InFinally");
+
+            validator.TagStates("InCatch").Should().HaveCount(1)
+                     .And.ContainSingle(x => HasUnknownException(x));
+
+            ValidateHasOnlyNoExceptionAndUnknownException(validator, "InFinally");
+        }
+
+        [TestMethod]
+        public void TryCatch_NestedThrowWithCatchFilter()
+        {
+            const string code = @"
+var tag = ""BeforeTry"";
+try
+{
+    tag = ""InTry"";
+    try
+    {
+        tag = ""InNestedTry"";
+        throw new ArgumentNullException();
+        tag = ""UnreachableInNestedTry"";
+    }
+    catch
+    {
+        tag = ""InNestedCatch"";
+    }
+}
+catch (ArgumentNullException)
+{
+    tag = ""InCatch"";
+}
+tag = ""After"";";
+            var validator = SETestContext.CreateCS(code).Validator;
+            validator.ValidateTagOrder(
+                "BeforeTry",
+                "InTry",
+                "InNestedTry"); // ToDo: the rest of the tags are missing since we don't support Conversion operation
+        }
+
+        [TestMethod]
+        public void TryCatch_NestedThrowWithNestedCatchFilter()
+        {
+            const string code = @"
+var tag = ""BeforeTry"";
+try
+{
+    tag = ""InTry"";
+    try
+    {
+        tag = ""InNestedTry"";
+        throw new ArgumentNullException();
+        tag = ""UnreachableInNestedTry"";
+    }
+    catch (NotSupportedException)
+    {
+        tag = ""InNestedCatch"";
+    }
+}
+catch
+{
+    tag = ""InCatch"";
+}
+tag = ""After"";";
+            var validator = SETestContext.CreateCS(code).Validator;
+            validator.ValidateTagOrder(
+                "BeforeTry",
+                "InTry",
+                "InNestedTry"); // ToDo: the rest of the tags are missing since we don't support Conversion operation
+        }
+
+        [TestMethod]
+        public void TryCatch_NestedThrowWithMultipleCatchFiltersOnDifferentLevels()
+        {
+            const string code = @"
+var tag = ""BeforeTry"";
+try
+{
+    tag = ""InTry"";
+    try
+    {
+        tag = ""InNestedTry"";
+        throw new ArgumentNullException();
+        tag = ""UnreachableInNestedTry"";
+    }
+    catch (NotSupportedException)
+    {
+        tag = ""InNestedCatch"";
+    }
+}
+catch (FormatException)
+{
+    tag = ""InCatch"";
+}
+tag = ""After"";";
+            var validator = SETestContext.CreateCS(code).Validator;
+            validator.ValidateTagOrder(
+                "BeforeTry",
+                "InTry",
+                "InNestedTry"); // ToDo: the rest of the tags are missing since we don't support Conversion operation
+        }
+
+        private static void ValidateHasOnlyUnknownExceptionAndSystemException(ValidatorTestCheck validator, string stateName) =>
+            validator.TagStates(stateName).Should().HaveCount(2)
+                .And.ContainSingle(x => HasUnknownException(x))
+                .And.ContainSingle(x => HasExceptionOfTypeException(x));
+
+        private static void ValidateHasOnlyNoExceptionAndUnknownException(ValidatorTestCheck validator, string stateName) =>
+            validator.TagStates(stateName).Should().HaveCount(2)
+                .And.ContainSingle(x => HasNoException(x))
+                .And.ContainSingle(x => HasUnknownException(x));
+
+        private static bool HasNoException(ProgramState state) =>
+            state.Exception == null;
+
+        private static bool HasUnknownException(ProgramState state) =>
+             state.Exception == ExceptionState.UnknownException;
+
+        private static bool HasExceptionOfTypeException(ProgramState state) =>
+            HasExceptionOfType(state, "Exception");
+
+        private static bool HasExceptionOfType(ProgramState state, string typeName) =>
+            state.Exception?.Type?.Name == typeName;
     }
 }
