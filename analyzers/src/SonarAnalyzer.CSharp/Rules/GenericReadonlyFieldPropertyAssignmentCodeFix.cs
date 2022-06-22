@@ -47,7 +47,7 @@ namespace SonarAnalyzer.Rules.CSharp
         {
             var diagnostic = context.Diagnostics.First();
             var diagnosticSpan = diagnostic.Location.SourceSpan;
-            var memberAccess = (MemberAccessExpressionSyntax)root.FindNode(diagnosticSpan);
+            var memberAccess = (MemberAccessExpressionSyntax)root.FindNode(diagnosticSpan, getInnermostNodeForTie: true);
 
             var semanticModel = await context.Document.GetSemanticModelAsync(context.CancellationToken).ConfigureAwait(false);
             var fieldSymbol = (IFieldSymbol)semanticModel.GetSymbolInfo(memberAccess.Expression).Symbol;

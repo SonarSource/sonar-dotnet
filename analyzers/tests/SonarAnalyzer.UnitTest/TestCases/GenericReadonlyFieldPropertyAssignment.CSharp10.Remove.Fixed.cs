@@ -15,20 +15,18 @@ class PointManager<T> where T : IPoint
 
     public void FixByRemove()
     {
-        point.X = 1; // Noncompliant. Needed for the fixer to remove at least one non-compliant diagnostic.
     }
 
     public void MovePointVertically((int, int) p)
     {
-        (point.X, int y) = p; // Noncompliant {{Restrict 'point' to be a reference type or remove this assignment of 'X'; it is useless if 'point' is a value type.}}
-//       ^^^^^^^
+        (point.X, int y) = p; // Fixed
     }
 
     public void NestedTuples((int, int) p)
     {
         var tuple1 = ((p, 1), 2);
-        (((point.X, _), _), _) = tuple1; // Noncompliant
+        (((point.X, _), _), _) = tuple1; // Fixed
         var tuple2 = ((1, p), 2);
-        ((_, (_, point.Y)), _) = tuple2; // Noncompliant
+        ((_, (_, point.Y)), _) = tuple2; // Fixed
     }
 }
