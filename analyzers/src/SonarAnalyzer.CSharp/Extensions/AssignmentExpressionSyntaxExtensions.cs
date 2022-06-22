@@ -56,9 +56,9 @@ namespace SonarAnalyzer.Extensions
             }
             // var (x, y) = (1, 2)
             else if (DeclarationExpressionSyntaxWrapper.IsInstance(assignment.Left)
-                && (DeclarationExpressionSyntaxWrapper)assignment.Left is { Designation: { } leftDesignation }
-                && ParenthesizedVariableDesignationSyntaxWrapper.IsInstance(leftDesignation)
-                && TupleExpressionSyntaxWrapper.IsInstance(assignment.Right))
+                    && (DeclarationExpressionSyntaxWrapper)assignment.Left is { Designation: { } leftDesignation }
+                    && ParenthesizedVariableDesignationSyntaxWrapper.IsInstance(leftDesignation)
+                    && TupleExpressionSyntaxWrapper.IsInstance(assignment.Right))
             {
                 var left = (ParenthesizedVariableDesignationSyntaxWrapper)leftDesignation;
                 var right = (TupleExpressionSyntaxWrapper)assignment.Right;
