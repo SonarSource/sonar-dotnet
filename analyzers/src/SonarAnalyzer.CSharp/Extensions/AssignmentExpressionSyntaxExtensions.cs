@@ -50,7 +50,7 @@ namespace SonarAnalyzer.Extensions
             {
                 var left = (TupleExpressionSyntaxWrapper)assignment.Left;
                 var right = (TupleExpressionSyntaxWrapper)assignment.Right;
-                var arrayBuilder = ImmutableArray.CreateBuilder<AssignmentMapping>(initialCapacity: left.Arguments.Count);
+                var arrayBuilder = ImmutableArray.CreateBuilder<AssignmentMapping>(left.Arguments.Count);
                 MapTupleElements(arrayBuilder, left, right);
                 return arrayBuilder.ToImmutableArray();
             }
@@ -62,7 +62,7 @@ namespace SonarAnalyzer.Extensions
             {
                 var left = (ParenthesizedVariableDesignationSyntaxWrapper)leftDesignation;
                 var right = (TupleExpressionSyntaxWrapper)assignment.Right;
-                var arrayBuilder = ImmutableArray.CreateBuilder<AssignmentMapping>(initialCapacity: right.Arguments.Count);
+                var arrayBuilder = ImmutableArray.CreateBuilder<AssignmentMapping>(right.Arguments.Count);
                 MapDesignationElements(arrayBuilder, left, right);
                 return arrayBuilder.ToImmutableArray();
             }
