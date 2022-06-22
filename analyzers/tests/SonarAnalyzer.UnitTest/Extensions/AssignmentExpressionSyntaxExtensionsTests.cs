@@ -323,6 +323,52 @@ namespace SonarAnalyzer.UnitTest.Extensions
                 });
         }
 
+        [TestMethod]
+        public void AssignmentExpressionSyntaxExtensions_DifferentConvetions()
+        {
+            var code = @"int a;
+                         M() => 1;
+                         ((a), (var b, _), object c, double d, _) = (1, (two: 2, (3)), string.Empty, M(), new object());";
+            var syntaxTree = CSharpSyntaxTree.ParseText(WrapInMethod(code));
+            var assigment = syntaxTree.GetRoot().DescendantNodesAndSelf().OfType<AssignmentExpressionSyntax>().Single();
+            var mapping = assigment.MapAssignmentArguments();
+            mapping.Should().HaveCount(6);
+            mapping[0].Should().BeEquivalentTo(new
+            {
+                Left = new { Expression = new { Identifier = new { Text = "a" } } },
+                Right = new { Token = new { Text = "1" } },
+            }, "first element is an assignment");
+            mapping[1].Should().BeEquivalentTo(new
+            {
+                Left = new { Designation = new { Identifier = new { Text = "b" } } },
+                Right = new { Token = new { Text = "2" } },
+            }, "second element is a declaration");
+            mapping[2].Should().BeEquivalentTo(new
+            {
+                Left = new { Identifier = new { Text = "_" } },
+                Right = new { Expression = new { Token = new { Text = "3" } } },
+            }, "third element is a discard");
+            mapping[3].Should().BeEquivalentTo(new
+            {
+                Left = new { Designation = new { Identifier = new { Text = "c" } } },
+                Right = new
+                {
+                    Expression = new { Keyword = new { Text = "string" } },
+                    Name = new { Identifier = new { Text = "Empty" } },
+                },
+            }, "fourth element is a declaration with an assignment of a static property");
+            mapping[4].Should().BeEquivalentTo(new
+            {
+                Left = new { Designation = new { Identifier = new { Text = "d" } } },
+                Right = new { Expression = new { Identifier = new { Text = "M" } } },
+            }, "fifth element is declaration with conversion of a method result");
+            mapping[5].Should().BeEquivalentTo(new
+            {
+                Left = new { Identifier = new { Text = "_" } },
+                Right = new { Type = new { Keyword = new { Text = "object" } } },
+            }, "sixth element is a discard of an object creation");
+        }
+
         [DataTestMethod]
         // Normal assignment
         [DataRow("int a; a = 1;", "a")]
