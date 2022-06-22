@@ -10,6 +10,9 @@ public struct S
         (Property, var b) = ("a", "B");  // Noncompliant
         //                   ^^^
 
+        (Property, Property) = ("a",   // Noncompliant
+                                "B");  // Noncompliant
+
         (this.Property, b) = ("a", "B"); // Noncompliant
 
         var s = new S();
