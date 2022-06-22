@@ -853,6 +853,35 @@ tag = ""End"";";
         }
 
         [TestMethod]
+        public void Catch_WrappedInLocalLifetimeRegion()
+        {
+            const string code = @"
+var tag = ""BeforeTry"";
+try
+{
+    Tag(""InTry"");
+}
+catch
+{
+    tag = ""InCatch"";
+    if (true)
+    {
+        var local = true;   // Block #4 is wrapped in LocalLifeTime region
+    }
+}
+tag = ""End"";";
+            var validator = SETestContext.CreateCS(code).Validator;
+            validator.ValidateTagOrder(
+                "BeforeTry",
+                "InTry",
+                "InCatch",
+                "End");
+
+            validator.TagStates("InCatch").Should().HaveCount(1).And.ContainSingle(x => x.Exception != null);   // ToDo: Use custom assertions
+            validator.TagStates("End").Should().HaveCount(1).And.ContainSingle(x => x.Exception == null);
+        }
+
+        [TestMethod]
         public void Catch_Simple_TypeFilter()
         {
             const string code = @"
