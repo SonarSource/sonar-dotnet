@@ -45,11 +45,11 @@ namespace SonarAnalyzer.Rules.CSharp
         private const string MessageFormatRuleS3997 = "Refactor this method so it invokes the overload accepting a 'System.Uri' parameter.";
         private const string MessageFormatRuleS4005 = "Call the overload that takes a 'System.Uri' as an argument instead.";
 
-        private static readonly DiagnosticDescriptor RuleS3994 = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticIdRuleS3994, MessageFormatRuleS3994, RspecStrings.ResourceManager);
-        private static readonly DiagnosticDescriptor RuleS3995 = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticIdRuleS3995, MessageFormatRuleS3995, RspecStrings.ResourceManager);
-        private static readonly DiagnosticDescriptor RuleS3996 = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticIdRuleS3996, MessageFormatRuleS3996, RspecStrings.ResourceManager);
-        private static readonly DiagnosticDescriptor RuleS3997 = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticIdRuleS3997, MessageFormatRuleS3997, RspecStrings.ResourceManager);
-        private static readonly DiagnosticDescriptor RuleS4005 = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticIdRuleS4005, MessageFormatRuleS4005, RspecStrings.ResourceManager);
+        private static readonly DiagnosticDescriptor RuleS3994 = DescriptorFactory.Create(DiagnosticIdRuleS3994, MessageFormatRuleS3994);
+        private static readonly DiagnosticDescriptor RuleS3995 = DescriptorFactory.Create(DiagnosticIdRuleS3995, MessageFormatRuleS3995);
+        private static readonly DiagnosticDescriptor RuleS3996 = DescriptorFactory.Create(DiagnosticIdRuleS3996, MessageFormatRuleS3996);
+        private static readonly DiagnosticDescriptor RuleS3997 = DescriptorFactory.Create(DiagnosticIdRuleS3997, MessageFormatRuleS3997);
+        private static readonly DiagnosticDescriptor RuleS4005 = DescriptorFactory.Create(DiagnosticIdRuleS4005, MessageFormatRuleS4005);
         private static readonly ISet<string> UrlNameVariants = new HashSet<string> { "URI", "URL", "URN" };
 
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(RuleS3994, RuleS3995, RuleS3996, RuleS3997, RuleS4005);

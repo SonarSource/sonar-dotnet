@@ -34,17 +34,15 @@ namespace SonarAnalyzer.Rules.CSharp
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
     public sealed class DoNotShiftByZeroOrIntSize : SonarDiagnosticAnalyzer
     {
-        internal const string DiagnosticId = "S2183";
-
-        private const string MessageFormat_UseLargerTypeOrPromote
-            = "Either promote shift target to a larger integer type or shift by {0} instead.";
+        private const string DiagnosticId = "S2183";
+        private const string MessageFormat_UseLargerTypeOrPromote = "Either promote shift target to a larger integer type or shift by {0} instead.";
         private const string MessageFormat_ShiftTooLarge = "Correct this shift; shift by {0} instead.";
         private const string MessageFormat_RightShiftTooLarge = "Correct this shift; '{0}' is larger than the type size.";
         private const string MessageFormat_UselessShift = "Remove this useless shift by {0}.";
 
-        private static readonly DiagnosticDescriptor rule =
-            DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, "{0}", RspecStrings.ResourceManager);
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(rule);
+        private static readonly DiagnosticDescriptor Rule = DescriptorFactory.Create(DiagnosticId, "{0}");
+
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
 
         private static ImmutableDictionary<KnownType, int> mapKnownTypesToIntegerBitSize
             = new Dictionary<KnownType, int>
@@ -234,7 +232,7 @@ namespace SonarAnalyzer.Rules.CSharp
             public ShiftInstance(string description, bool isLieralZero, SyntaxNode node)
                 : this(node)
             {
-                Diagnostic = Diagnostic.Create(rule, node.GetLocation(), description);
+                Diagnostic = Diagnostic.Create(Rule, node.GetLocation(), description);
                 IsLiteralZero = isLieralZero;
             }
         }

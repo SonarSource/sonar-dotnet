@@ -34,10 +34,10 @@ namespace SonarAnalyzer.Rules.CSharp
 {
     internal sealed class InvalidCastToInterfaceSymbolicExecution : ISymbolicExecutionAnalyzer
     {
-        internal const string DiagnosticId = "S1944";
+        private const string DiagnosticId = "S1944";
         private const string MessageDefinite = "Nullable is known to be empty, this cast throws an exception.";
 
-        internal static readonly DiagnosticDescriptor S1944 = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, "{0}", RspecStrings.ResourceManager);
+        internal static readonly DiagnosticDescriptor S1944 = DescriptorFactory.Create(DiagnosticId, "{0}");
 
         public IEnumerable<DiagnosticDescriptor> SupportedDiagnostics  { get; } = ImmutableArray.Create(S1944);
 

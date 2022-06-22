@@ -24,7 +24,6 @@ using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
-using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.Extensions;
 using SonarAnalyzer.Helpers;
 using StyleCop.Analyzers.Lightup;
@@ -56,7 +55,7 @@ namespace SonarAnalyzer.Rules
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
 
         protected MutableFieldsShouldNotBe(string diagnosticId, string messageFormat) =>
-             rule = DiagnosticDescriptorBuilder.GetDescriptor(diagnosticId, messageFormat, RspecStrings.ResourceManager);
+             rule = DescriptorFactory.Create(diagnosticId, messageFormat);
 
         protected sealed override void Initialize(SonarAnalysisContext context) =>
             context.RegisterSyntaxNodeActionInNonGenerated(c =>

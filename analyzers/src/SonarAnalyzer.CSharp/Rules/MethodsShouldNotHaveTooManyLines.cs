@@ -37,7 +37,7 @@ namespace SonarAnalyzer.Rules.CSharp
         private const string LocalFunctionMessageFormat = "{0} local function has {1} lines, which is greater than the {2} lines authorized.";
 
         private static readonly DiagnosticDescriptor DefaultRule = DescriptorFactory.Create(DiagnosticId, MessageFormat, false);
-        private static readonly DiagnosticDescriptor LocalFunctionRule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, LocalFunctionMessageFormat, RspecStrings.ResourceManager, false);
+        private static readonly DiagnosticDescriptor LocalFunctionRule = DescriptorFactory.Create(DiagnosticId, LocalFunctionMessageFormat, false);
 
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(DefaultRule, LocalFunctionRule);
 

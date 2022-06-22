@@ -46,8 +46,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private const string SingleReturnValueSwitchExpressionMessage = "Remove this 'switch' expression to increase readability.";
 
-        private static readonly DiagnosticDescriptor rule =
-            DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, "{0}", RspecStrings.ResourceManager);
+        private static readonly DiagnosticDescriptor rule = DescriptorFactory.Create(DiagnosticId, "{0}");
 
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(rule);
 

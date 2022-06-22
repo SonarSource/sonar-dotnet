@@ -37,13 +37,8 @@ namespace SonarAnalyzer.Rules.CSharp
     public sealed class GetHashCodeMutableCodeFix : SonarCodeFix
     {
         internal const string Title = "Make field 'readonly'";
-        public override ImmutableArray<string> FixableDiagnosticIds
-        {
-            get
-            {
-                return ImmutableArray.Create(GetHashCodeMutable.DiagnosticId);
-            }
-        }
+
+        public override ImmutableArray<string> FixableDiagnosticIds => ImmutableArray.Create(GetHashCodeMutable.DiagnosticId);
 
         protected  override async Task RegisterCodeFixesAsync(SyntaxNode root, CodeFixContext context)
         {

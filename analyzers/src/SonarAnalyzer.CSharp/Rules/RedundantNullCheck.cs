@@ -35,10 +35,8 @@ namespace SonarAnalyzer.Rules.CSharp
         private const string MessageFormat = "Remove this unnecessary null check; 'is' returns false for nulls.";
         private const string MessageFormatForPatterns = "Remove this unnecessary null check; it is already done by the pattern match.";
 
-        private static readonly DiagnosticDescriptor RuleForIs =
-            DescriptorFactory.Create(DiagnosticId, MessageFormat);
-        private static readonly DiagnosticDescriptor RuleForPatternSyntax =
-            DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormatForPatterns, RspecStrings.ResourceManager);
+        private static readonly DiagnosticDescriptor RuleForIs = DescriptorFactory.Create(DiagnosticId, MessageFormat);
+        private static readonly DiagnosticDescriptor RuleForPatternSyntax = DescriptorFactory.Create(DiagnosticId, MessageFormatForPatterns);
 
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(RuleForIs, RuleForPatternSyntax);
 

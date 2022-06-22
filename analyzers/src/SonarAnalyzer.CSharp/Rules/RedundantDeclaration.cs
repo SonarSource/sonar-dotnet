@@ -57,7 +57,7 @@ namespace SonarAnalyzer.Rules.CSharp
         }
 
         private static readonly DiagnosticDescriptor Rule = DescriptorFactory.Create(DiagnosticId, MessageFormat);
-        private static readonly DiagnosticDescriptor DiscardRule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, UseDiscardMessageFormat, RspecStrings.ResourceManager);
+        private static readonly DiagnosticDescriptor DiscardRule = DescriptorFactory.Create(DiagnosticId, UseDiscardMessageFormat);
 
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule, DiscardRule);
 
