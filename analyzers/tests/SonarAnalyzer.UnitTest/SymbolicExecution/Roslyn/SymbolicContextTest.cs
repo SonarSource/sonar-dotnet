@@ -19,8 +19,9 @@
  */
 
 using SonarAnalyzer.SymbolicExecution.Roslyn;
-using SonarAnalyzer.UnitTest.TestFramework.SymbolicExecution;
 using StyleCop.Analyzers.Lightup;
+
+using DummyConstraint = SonarAnalyzer.UnitTest.TestFramework.SymbolicExecution.DummyConstraint;
 
 namespace SonarAnalyzer.UnitTest.SymbolicExecution.Roslyn
 {

@@ -20,7 +20,6 @@
 
 using SonarAnalyzer.SymbolicExecution.Constraints;
 using SonarAnalyzer.SymbolicExecution.Roslyn;
-using SonarAnalyzer.UnitTest.TestFramework.Assertions;
 using SonarAnalyzer.UnitTest.TestFramework.SymbolicExecution;
 
 namespace SonarAnalyzer.UnitTest.SymbolicExecution.Roslyn
@@ -421,7 +420,7 @@ tag = ""UnreachableAfterFinally"";";
                 "InTry",
                 "InFinally");
 
-            validator.TagStates("InFinally").Single().Should().HaveNoException();
+            validator.TagStates("InFinally").Should().HaveCount(1).And.ContainSingleNoException();
         }
 
         [TestMethod]
@@ -464,8 +463,8 @@ Tag(""AfterOuterFinally"");";
             ValidateHasOnlyNoExceptionAndUnknownException(validator, "InInnerFinally");
             ValidateHasOnlyNoExceptionAndUnknownException(validator, "InInnerTry");
 
-            validator.TagStates("AfterInnerFinally").Single().Should().HaveNoException();
-            validator.TagStates("AfterOuterFinally").Single().Should().HaveNoException();
+            validator.TagStates("AfterInnerFinally").Should().HaveCount(1).And.ContainSingleNoException();
+            validator.TagStates("AfterOuterFinally").Should().HaveCount(1).And.ContainSingleNoException();
         }
 
         [TestMethod]
@@ -520,7 +519,7 @@ tag = ""UnreachableAfterCatch"";";
                 "InCatch");         // With Exception thrown by `throw`
 
             validator.ValidateExitReachCount(1);
-            validator.TagStates("InCatch").Single().Should().HaveExceptionOfTypeException();
+            validator.TagStates("InCatch").Should().HaveCount(1).And.ContainSingleSystemException();
         }
 
         [TestMethod]
@@ -615,8 +614,8 @@ tag = ""AfterCatch"";";
                 "InCatch",
                 "AfterCatch"); // If there is no exception in try
 
-            validator.TagStates("InCatch").Single().Should().HaveUnknownException();
-            validator.TagStates("AfterCatch").Single().Should().HaveNoException();
+            validator.TagStates("InCatch").Should().HaveCount(1).And.ContainSingleUnknownException();
+            validator.TagStates("AfterCatch").Should().HaveCount(1).And.ContainSingleNoException();
         }
 
         [TestMethod]
@@ -682,13 +681,13 @@ tag = ""AfterFinally"";";
                 "InFinally",
                 "AfterFinally");
 
-            validator.TagStates("InCatch").Single().Should().HaveUnknownException();
+            validator.TagStates("InCatch").Should().HaveCount(1).And.ContainSingleUnknownException();
 
             validator.TagStates("InFinally").Should().HaveCount(2)
                 .And.ContainSingle(x => HasNoException(x))
                 .And.ContainSingle(x => HasSystemException(x));
 
-            validator.TagStates("AfterFinally").Single().Should().HaveNoException();
+            validator.TagStates("AfterFinally").Should().HaveCount(1).And.ContainSingleNoException();
         }
 
         [TestMethod]
@@ -718,9 +717,8 @@ tag = ""UnreachableAfterFinally"";";
                 "InCatch",
                 "InFinally");
 
-            validator.TagStates("InCatch").Single().Should().HaveUnknownException();
-
-            validator.TagStates("InFinally").Should().HaveCount(1).And.ContainSingle(x => HasNoException(x));
+            validator.TagStates("InCatch").Should().HaveCount(1).And.ContainSingleUnknownException();
+            validator.TagStates("InFinally").Should().HaveCount(1).And.ContainSingleNoException();
         }
 
         [TestMethod]
@@ -1427,8 +1425,8 @@ tag = ""AfterCatch"";";
                 "InCatch",
                 "AfterCatch");
 
-            validator.TagStates("InCatch").Should().HaveCount(1).And.ContainSingle(x => HasExceptionOfType(x, "FileNotFoundException"));
-            validator.TagStates("AfterCatch").Should().HaveCount(1).And.ContainSingle(x => HasNoException(x));
+            validator.TagStates("InCatch").Should().HaveCount(1).And.ContainSingleExceptionOfType("FileNotFoundException");
+            validator.TagStates("AfterCatch").Should().HaveCount(1).And.ContainSingleNoException();
         }
 
         private static bool HasNoException(ProgramState state) =>
