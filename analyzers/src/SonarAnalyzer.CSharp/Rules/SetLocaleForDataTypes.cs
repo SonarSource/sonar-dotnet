@@ -130,27 +130,35 @@ namespace SonarAnalyzer.Rules.CSharp
             {
                 var currentNode = rightTuple.SyntaxNode.Parent;
                 AssignmentExpressionSyntax assignment = null;
-                while (currentNode != null)
+                while (currentNode != null && assignment == null)
                 {
-                    if (currentNode is AssignmentExpressionSyntax)
+                    if (currentNode is AssignmentExpressionSyntax syntax)
                     {
-                        assignment = (AssignmentExpressionSyntax)currentNode;
-                        break;
+                        assignment = syntax;
+                    }
+                    else
+                    {
+                        currentNode = currentNode.Parent;
                     }
                 }
-                if (assignment == null)
-                {
-                    return null;
-                }
+                return FindAssignedSyntaxNodeInAssignment(argument, assignment);
+            }
+            return null;
+        }
 
-                var mappedAssignments = MapAssignmentArguments(assignment);
+        private static SyntaxNode FindAssignedSyntaxNodeInAssignment(ArgumentSyntax argument, AssignmentExpressionSyntax assignment)
+        {
+            if (assignment == null)
+            {
+                return null;
+            }
 
-                foreach (var mappedAssignment in mappedAssignments)
+            var mappedAssignments = MapAssignmentArguments(assignment);
+            foreach (var mappedAssignment in mappedAssignments)
+            {
+                if (mappedAssignment.Value == argument.Expression)
                 {
-                    if (mappedAssignment.Value == argument.Expression)
-                    {
-                        return mappedAssignment.Key;
-                    }
+                    return mappedAssignment.Key;
                 }
             }
             return null;

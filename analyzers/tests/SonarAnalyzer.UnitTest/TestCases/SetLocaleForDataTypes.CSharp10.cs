@@ -2,6 +2,8 @@
 using System.Data;
 using System.Globalization;
 
-DataTable y;
+DataTable y, d, f, j, l;
+int b, h;
 
-(var x, y) = (new DataTable(), new DataTable()); // FN
+(var k, l) = (new DataTable(), new DataTable()); // Noncompliant
+k.Locale = CultureInfo.InvariantCulture;
