@@ -25,27 +25,23 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class LiteralsShouldNotBePassedAsLocalizedParametersTest
     {
+        private readonly VerifierBuilder verifier = new VerifierBuilder<LiteralsShouldNotBePassedAsLocalizedParameters>().AddReferences(MetadataReferenceFacade.SystemComponentModelPrimitives);
+
         [TestMethod]
         public void LiteralsShouldNotBePassedAsLocalizedParameters() =>
-            OldVerifier.VerifyAnalyzer(
-                @"TestCases\LiteralsShouldNotBePassedAsLocalizedParameters.cs",
-                new LiteralsShouldNotBePassedAsLocalizedParameters(),
-                MetadataReferenceFacade.SystemComponentModelPrimitives);
+            verifier.AddPaths("LiteralsShouldNotBePassedAsLocalizedParameters.cs").Verify();
 
 #if NET
+
         [TestMethod]
         public void LiteralsShouldNotBePassedAsLocalizedParameters_CSharp9() =>
-            OldVerifier.VerifyAnalyzerFromCSharp9Console(
-                @"TestCases\LiteralsShouldNotBePassedAsLocalizedParameters.CSharp9.cs",
-                new LiteralsShouldNotBePassedAsLocalizedParameters(),
-                MetadataReferenceFacade.SystemComponentModelPrimitives);
+            verifier.AddPaths("LiteralsShouldNotBePassedAsLocalizedParameters.CSharp9.cs").WithTopLevelStatements().Verify();
 
         [TestMethod]
         public void LiteralsShouldNotBePassedAsLocalizedParameters_CSharp10() =>
-            OldVerifier.VerifyAnalyzerFromCSharp10Library(
-                @"TestCases\LiteralsShouldNotBePassedAsLocalizedParameters.CSharp10.cs",
-                new LiteralsShouldNotBePassedAsLocalizedParameters(),
-                MetadataReferenceFacade.SystemComponentModelPrimitives);
+            verifier.AddPaths("LiteralsShouldNotBePassedAsLocalizedParameters.CSharp10.cs").WithOptions(ParseOptionsHelper.FromCSharp10).Verify();
+
 #endif
+
     }
 }
