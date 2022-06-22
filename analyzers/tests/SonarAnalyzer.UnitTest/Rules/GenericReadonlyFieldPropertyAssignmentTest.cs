@@ -47,7 +47,8 @@ namespace SonarAnalyzer.UnitTest.Rules
             codeFix.AddPaths("GenericReadonlyFieldPropertyAssignment.CSharp10.cs")
                 .WithCodeFixedPaths("GenericReadonlyFieldPropertyAssignment.CSharp10.Remove.Fixed.cs")
                 .WithCodeFixTitle(GenericReadonlyFieldPropertyAssignmentCodeFix.TitleRemove)
-                .WithOptions(ParseOptionsHelper.FromCSharp10).VerifyCodeFix();
+                .WithOptions(ParseOptionsHelper.FromCSharp10)
+                .VerifyCodeFix();
 
 #endif
 
@@ -56,7 +57,8 @@ namespace SonarAnalyzer.UnitTest.Rules
             codeFix.AddPaths("GenericReadonlyFieldPropertyAssignment.cs")
                 .WithCodeFixedPaths("GenericReadonlyFieldPropertyAssignment.Remove.Fixed.cs")
                 .WithCodeFixTitle(GenericReadonlyFieldPropertyAssignmentCodeFix.TitleRemove)
-                .WithOptions(ParseOptionsHelper.FromCSharp8).VerifyCodeFix();
+                .WithOptions(ParseOptionsHelper.FromCSharp8)
+                .VerifyCodeFix();
 
         [TestMethod]
         public void GenericReadonlyFieldPropertyAssignment_CodeFix_Add_Generic_Type_Constraint() =>
