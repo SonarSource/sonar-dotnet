@@ -179,7 +179,7 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
                 && branch.Source.EnclosingNonLocalLifetimeRegion() is { Kind: ControlFlowRegionKind.Catch or ControlFlowRegionKind.FilterAndHandler } enclosingRegion
                 && branch.LeavingRegions.Contains(enclosingRegion))
             {
-                state = state.ResetException();
+                state = state.PopException();
             }
             var liveVariables = lva.LiveOut(branch.Source).ToHashSet();
             return state.RemoveSymbols(x => lva.IsLocal(x) && (x is ILocalSymbol or IParameterSymbol { RefKind: RefKind.None }) && !liveVariables.Contains(x))
@@ -212,7 +212,10 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
             if (exception is not null && node.Block.EnclosingRegion(ControlFlowRegionKind.Try) is { } tryRegion)
             {
                 // We're jumping out of the outer statement => We need to reset operation states.
-                var state = node.State.ResetOperations().SetException(exception);
+                var state = node.State.ResetOperations();
+                state = node.Block.EnclosingRegion(ControlFlowRegionKind.Catch) is not null
+                    ? state.PushException(exception)    // If we're nested inside catch, we need to preserve the exception chain
+                    : state.SetException(exception);    // Otherwise we track only the current exception to avoid explosion of states after each statement
                 foreach (var catchOrFinally in tryRegion.EnclosingRegion.NestedRegions.Where(x => x.Kind != ControlFlowRegionKind.Try))
                 {
                     yield return new(cfg.Blocks[catchOrFinally.FirstBlockOrdinal], state, null);
