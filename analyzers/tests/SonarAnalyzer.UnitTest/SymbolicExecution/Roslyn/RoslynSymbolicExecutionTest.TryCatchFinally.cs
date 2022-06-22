@@ -846,11 +846,15 @@ catch
     tag = ""InCatch"";
 }
 tag = ""End"";";
-            SETestContext.CreateCS(code).Validator.ValidateTagOrder(
+            var validator = SETestContext.CreateCS(code).Validator;
+            validator.ValidateTagOrder(
                 "BeforeTry",
                 "InTry",
                 "InCatch",
                 "End");
+
+            validator.TagStates("InCatch").Should().HaveCount(1).And.ContainSingle(x => x.Exception != null);   // ToDo: Use custom assertions
+            validator.TagStates("End").Should().HaveCount(1).And.ContainSingle(x => x.Exception == null);
         }
 
         [TestMethod]
@@ -867,11 +871,15 @@ catch (Exception)
     tag = ""InCatch"";
 }
 tag = ""End"";";
-            SETestContext.CreateCS(code).Validator.ValidateTagOrder(
+            var validator = SETestContext.CreateCS(code).Validator;
+            validator.ValidateTagOrder(
                 "BeforeTry",
                 "InTry",
                 "InCatch",
                 "End");
+
+            validator.TagStates("InCatch").Should().HaveCount(1).And.ContainSingle(x => x.Exception != null);   // ToDo: Use custom assertions
+            validator.TagStates("End").Should().HaveCount(1).And.ContainSingle(x => x.Exception == null);
         }
 
         [TestMethod]
@@ -896,13 +904,19 @@ catch (Exception ex)
     tag = ""InCatchEverything"";
 }
 tag = ""End"";";
-            SETestContext.CreateCS(code).Validator.ValidateTagOrder(
+            var validator = SETestContext.CreateCS(code).Validator;
+            validator.ValidateTagOrder(
                 "BeforeTry",
                 "InTry",
                 "End",
                 "InCatchArgumentNull",
                 "InCatchNotSupported",
                 "InCatchEverything");
+
+            validator.TagStates("InCatchArgumentNull").Should().HaveCount(1).And.ContainSingle(x => x.Exception != null);   // ToDo: Use custom assertions
+            validator.TagStates("InCatchNotSupported").Should().HaveCount(1).And.ContainSingle(x => x.Exception != null);
+            validator.TagStates("InCatchEverything").Should().HaveCount(1).And.ContainSingle(x => x.Exception != null);
+            validator.TagStates("End").Should().HaveCount(1).And.ContainSingle(x => x.Exception == null);
         }
 
         [TestMethod]
@@ -923,12 +937,17 @@ finally
     tag = ""InFinally"";
 }
 tag = ""End"";";
-            SETestContext.CreateCS(code).Validator.ValidateTagOrder(
+            var validator = SETestContext.CreateCS(code).Validator;
+            validator.ValidateTagOrder(
                 "BeforeTry",
                 "InTry",
                 "InFinally",    // Happy path
                 "InCatch",      // Exception thrown by Tag("InTry")
                 "End");
+
+            validator.TagStates("InCatch").Should().HaveCount(1).And.ContainSingle(x => x.Exception != null);   // ToDo: Use custom assertions
+            validator.TagStates("InFinally").Should().HaveCount(1).And.ContainSingle(x => x.Exception == null);
+            validator.TagStates("End").Should().HaveCount(1).And.ContainSingle(x => x.Exception == null);
         }
 
         [TestMethod]
@@ -954,7 +973,8 @@ catch (Exception ex)
     tag = ""InOuterCatch"";
 }
 tag = ""End"";";
-            SETestContext.CreateCS(code).Validator.ValidateTagOrder(
+            var validator = SETestContext.CreateCS(code).Validator;
+            validator.ValidateTagOrder(
                 "BeforeOuterTry",
                 "BeforeInnerTry",
                 "InOuterCatch",
@@ -962,6 +982,11 @@ tag = ""End"";";
                 "End",
                 "AfterInnerTry",
                 "InInnerCatch");
+
+            validator.TagStates("InInnerCatch").Should().HaveCount(1).And.ContainSingle(x => x.Exception != null);   // ToDo: Use custom assertions
+            validator.TagStates("AfterInnerTry").Should().HaveCount(1).And.ContainSingle(x => x.Exception == null);
+            validator.TagStates("InOuterCatch").Should().HaveCount(1).And.ContainSingle(x => x.Exception != null);
+            validator.TagStates("End").Should().HaveCount(1).And.ContainSingle(x => x.Exception == null);
         }
 
         [TestMethod]
@@ -987,7 +1012,8 @@ catch (Exception ex)
     tag = ""AfterInnerTry"";
 }
 tag = ""End"";";
-            SETestContext.CreateCS(code).Validator.ValidateTagOrder(
+            var validator = SETestContext.CreateCS(code).Validator;
+            validator.ValidateTagOrder(
                 "BeforeOuterTry",
                 "InOuterTry",
                 "End",
@@ -995,6 +1021,12 @@ tag = ""End"";";
                 "InInnerTry",
                 "AfterInnerTry",
                 "InInnerCatch");
+
+            validator.TagStates("BeforeInnerTry").Should().HaveCount(1).And.ContainSingle(x => x.Exception != null);    // ToDo: Use custom assertions
+            validator.TagStates("InInnerTry").Should().HaveCount(1).And.ContainSingle(x => x.Exception == null);        // ToDo: This should have the original exception
+            validator.TagStates("InInnerCatch").Should().HaveCount(1).And.ContainSingle(x => x.Exception != null);
+            validator.TagStates("AfterInnerTry").Should().HaveCount(1).And.ContainSingle(x => x.Exception == null);     // ToDo: This should have the original exception
+            validator.TagStates("End").Should().HaveCount(1).And.ContainSingle(x => x.Exception == null);
         }
 
         [TestMethod]
@@ -1024,7 +1056,8 @@ finally
     tag = ""AfterInnerTry"";
 }
 tag = ""End"";";
-            SETestContext.CreateCS(code).Validator.ValidateTagOrder(
+            var validator = SETestContext.CreateCS(code).Validator;
+            validator.ValidateTagOrder(
                 "BeforeOuterTry",
                 "InOuterTry",
                 "BeforeInnerTry",
@@ -1033,6 +1066,12 @@ tag = ""End"";";
                 "AfterInnerTry",
                 "InInnerCatch",
                 "End");
+
+            validator.TagStates("InOuterCatch").Should().HaveCount(1).And.ContainSingle(x => x.Exception != null);    // ToDo: Use custom assertions
+            validator.TagStates("BeforeInnerTry").Should().HaveCount(1).And.ContainSingle(x => x.Exception == null);
+            validator.TagStates("InInnerCatch").Should().HaveCount(1).And.ContainSingle(x => x.Exception != null);
+            validator.TagStates("AfterInnerTry").Should().HaveCount(1).And.ContainSingle(x => x.Exception == null);
+            validator.TagStates("End").Should().HaveCount(1).And.ContainSingle(x => x.Exception == null);
         }
 
         [TestMethod]
@@ -1053,12 +1092,17 @@ finally
     tag = ""InFinally"";
 }
 tag = ""End"";";
-            SETestContext.CreateCS(code).Validator.ValidateTagOrder(
+            var validator = SETestContext.CreateCS(code).Validator;
+            validator.ValidateTagOrder(
                 "BeforeTry",
                 "InTry",
                 "InFinally",
                 "InCatch",
                 "End");
+
+            validator.TagStates("InCatch").Should().HaveCount(1).And.ContainSingle(x => x.Exception != null);   // ToDo: Use custom assertions
+            validator.TagStates("InFinally").Should().HaveCount(1).And.ContainSingle(x => x.Exception == null);
+            validator.TagStates("End").Should().HaveCount(1).And.ContainSingle(x => x.Exception == null);
         }
 
         [TestMethod]
@@ -1091,7 +1135,8 @@ finally
     tag = ""InFinally"";
 }
 tag = ""End"";";
-            SETestContext.CreateCS(code).Validator.ValidateTagOrder(
+            var validator = SETestContext.CreateCS(code).Validator;
+            validator.ValidateTagOrder(
                 "BeforeTry",
                 "InTry",
                 "InFinally",
@@ -1100,6 +1145,13 @@ tag = ""End"";";
                 "InCatchAllWhen",
                 "End",
                 "InCatchArgumentWhen");
+
+            validator.TagStates("InCatchArgumentWhen").Should().HaveCount(1).And.ContainSingle(x => x.Exception != null);   // ToDo: Use custom assertions
+            validator.TagStates("InCatchArgument").Should().HaveCount(1).And.ContainSingle(x => x.Exception != null);
+            validator.TagStates("InCatchAllWhen").Should().HaveCount(1).And.ContainSingle(x => x.Exception != null);
+            validator.TagStates("InCatchAll").Should().HaveCount(1).And.ContainSingle(x => x.Exception != null);
+            validator.TagStates("InFinally").Should().HaveCount(1).And.ContainSingle(x => x.Exception == null);
+            validator.TagStates("End").Should().HaveCount(1).And.ContainSingle(x => x.Exception == null);
         }
 
         [TestMethod]
@@ -1120,12 +1172,17 @@ finally
     tag = ""InFinally"";
 }
 tag = ""End"";";
-            SETestContext.CreateCS(code).Validator.ValidateTagOrder(
+            var validator = SETestContext.CreateCS(code).Validator;
+            validator.ValidateTagOrder(
                 "BeforeTry",
                 "InTry",
                 "InFinally",
                 "InCatch",
                 "End");
+
+            validator.TagStates("InCatch").Should().HaveCount(1).And.ContainSingle(x => x.Exception != null);   // ToDo: Use custom assertions
+            validator.TagStates("InFinally").Should().HaveCount(1).And.ContainSingle(x => x.Exception == null);
+            validator.TagStates("End").Should().HaveCount(1).And.ContainSingle(x => x.Exception == null);
         }
 
         private static void ValidateHasOnlyUnknownExceptionAndSystemException(ValidatorTestCheck validator, string stateName) =>
