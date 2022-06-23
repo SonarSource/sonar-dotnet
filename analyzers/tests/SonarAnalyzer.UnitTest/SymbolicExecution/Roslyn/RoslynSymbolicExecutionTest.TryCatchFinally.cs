@@ -85,13 +85,13 @@ Tag(""AfterOuterFinally"");";
                 "AfterOuterFinally");
 
             validator.TagStates("InInnerFinally").Should().HaveCount(2)
-                .And.ContainSingle(x => x.Exception == null)
-                .And.ContainSingle(x => x.Exception != null);
+                .And.ContainSingle(x => HasNoException(x))
+                .And.ContainSingle(x => HasUnknownException(x));
             validator.TagStates("InOuterFinally").Should().HaveCount(2)
-                .And.ContainSingle(x => x.Exception == null)
-                .And.ContainSingle(x => x.Exception != null);
+                .And.ContainSingle(x => HasNoException(x))
+                .And.ContainSingle(x => HasUnknownException(x));
             validator.TagStates("AfterOuterFinally").Should().HaveCount(1)  // Not visited by flows with Exception
-                .And.ContainSingle(x => x.Exception == null);
+                .And.ContainSingle(x => HasNoException(x));
             validator.ValidateExitReachCount(2);
         }
 
@@ -133,15 +133,15 @@ Tag(""AfterOuterFinally"");";
                 "AfterOuterFinally");
 
             validator.TagStates("InInnerFinally").Should().HaveCount(2)
-                .And.ContainSingle(x => x.Exception == null)
-                .And.ContainSingle(x => x.Exception != null);
+                .And.ContainSingle(x => HasNoException(x))
+                .And.ContainSingle(x => HasUnknownException(x));
             validator.TagStates("AfterInnerFinally").Should().HaveCount(1)  // Not visited by flows with Exception
-                .And.ContainSingle(x => x.Exception == null);
+                .And.ContainSingle(x => HasNoException(x));
             validator.TagStates("InOuterFinally").Should().HaveCount(2)
-                .And.ContainSingle(x => x.Exception == null)
-                .And.ContainSingle(x => x.Exception != null);
+                .And.ContainSingle(x => HasNoException(x))
+                .And.ContainSingle(x => HasUnknownException(x));
             validator.TagStates("AfterOuterFinally").Should().HaveCount(1)  // Not visited by flows with Exception
-                .And.ContainSingle(x => x.Exception == null);
+                .And.ContainSingle(x => HasNoException(x));
             validator.ValidateExitReachCount(2);
         }
 
@@ -181,10 +181,10 @@ Tag(""AfterOuterFinally"", value);";
                 "AfterOuterFinally");
 
             validator.TagStates("InOuterFinally").Should().HaveCount(2)
-                .And.ContainSingle(x => x.Exception == null && x.SymbolsWith(BoolConstraint.True).Any(symbol => symbol.Name == "value"))
-                .And.ContainSingle(x => x.Exception != null && x.SymbolsWith(BoolConstraint.False).Any(symbol => symbol.Name == "value"));
+                .And.ContainSingle(x => HasNoException(x) && x.SymbolsWith(BoolConstraint.True).Any(symbol => symbol.Name == "value"))
+                .And.ContainSingle(x => HasUnknownException(x) && x.SymbolsWith(BoolConstraint.False).Any(symbol => symbol.Name == "value"));
             validator.TagStates("AfterOuterFinally").Should().HaveCount(1)  // Not visited by flow with Exception
-                .And.ContainSingle(x => x.Exception == null && x.SymbolsWith(BoolConstraint.True).Any(symbol => symbol.Name == "value"));
+                .And.ContainSingle(x => HasNoException(x) && x.SymbolsWith(BoolConstraint.True).Any(symbol => symbol.Name == "value"));
             validator.ValidateExitReachCount(2);
         }
 
@@ -230,10 +230,10 @@ Tag(""AfterOuterFinally"", value);";
                 "AfterOuterFinally");
 
             validator.TagStates("InOuterFinally").Should().HaveCount(2)
-                .And.ContainSingle(x => x.Exception == null && x.SymbolsWith(BoolConstraint.True).Any(symbol => symbol.Name == "value"))
-                .And.ContainSingle(x => x.Exception != null && x.SymbolsWith(BoolConstraint.True).Any(symbol => symbol.Name == "value"));
+                .And.ContainSingle(x => HasNoException(x) && x.SymbolsWith(BoolConstraint.True).Any(symbol => symbol.Name == "value"))
+                .And.ContainSingle(x => HasUnknownException(x) && x.SymbolsWith(BoolConstraint.True).Any(symbol => symbol.Name == "value"));
             validator.TagStates("AfterOuterFinally").Should().HaveCount(1)  // Not visited by flow with Exception
-                .And.ContainSingle(x => x.Exception == null && x.SymbolsWith(BoolConstraint.True).Any(symbol => symbol.Name == "value"));
+                .And.ContainSingle(x => HasNoException(x) && x.SymbolsWith(BoolConstraint.True).Any(symbol => symbol.Name == "value"));
             validator.ValidateExitReachCount(2);
         }
 
@@ -496,7 +496,7 @@ tag = ""AfterCatch"";";
                 "AfterCatch");
 
             ValidateHasOnlyUnknownExceptionAndSystemException(validator, "InCatch");
-            validator.TagStates("AfterCatch").Should().HaveCount(1).And.ContainSingle(x => HasNoException(x));  // ToDo: Use custom assertion
+            validator.TagStates("AfterCatch").Should().HaveCount(1).And.ContainSingle(x => HasNoException(x));
         }
 
         [TestMethod]
@@ -594,7 +594,7 @@ tag = ""AfterCatch"";";
             ValidateHasOnlyUnknownExceptionAndSystemException(validator, "InFirstCatch");
             ValidateHasOnlyUnknownExceptionAndSystemException(validator, "InSecondCatch");
             ValidateHasOnlyUnknownExceptionAndSystemException(validator, "InThirdCatch");
-            validator.TagStates("AfterCatch").Should().HaveCount(1).And.ContainSingle(x => HasNoException(x));  // ToDo: Use custom assertion
+            validator.TagStates("AfterCatch").Should().HaveCount(1).And.ContainSingle(x => HasNoException(x));
         }
 
         [TestMethod]
@@ -657,8 +657,8 @@ tag = ""AfterFinally"";";
                 "AfterFinally");
 
             ValidateHasOnlyUnknownExceptionAndSystemException(validator, "InCatch");
-            validator.TagStates("InFinally").Should().HaveCount(1).And.ContainSingle(x => HasNoException(x));       // ToDo: Use custom assertion
-            validator.TagStates("AfterFinally").Should().HaveCount(1).And.ContainSingle(x => HasNoException(x));    // ToDo: Use custom assertion
+            validator.TagStates("InFinally").Should().HaveCount(1).And.ContainSingle(x => HasNoException(x));
+            validator.TagStates("AfterFinally").Should().HaveCount(1).And.ContainSingle(x => HasNoException(x));
         }
 
         [TestMethod]
@@ -731,7 +731,7 @@ tag = ""UnreachableAfterFinally"";";
             validator.TagStates("InCatch").Should().HaveCount(1)
                      .And.ContainSingle(x => HasUnknownException(x));
 
-            validator.TagStates("InFinally").Should().HaveCount(1).And.ContainSingle(x => HasNoException(x));  // ToDo: Use custom assertion
+            validator.TagStates("InFinally").Should().HaveCount(1).And.ContainSingle(x => HasNoException(x));
         }
 
         [TestMethod]
@@ -848,8 +848,8 @@ tag = ""End"";";
                 "InCatch",
                 "End");
 
-            validator.TagStates("InCatch").Should().HaveCount(1).And.ContainSingle(x => x.Exception != null);   // ToDo: Use custom assertions
-            validator.TagStates("End").Should().HaveCount(1).And.ContainSingle(x => x.Exception == null);
+            validator.TagStates("InCatch").Should().HaveCount(1).And.ContainSingle(x => HasUnknownException(x));
+            validator.TagStates("End").Should().HaveCount(1).And.ContainSingle(x => HasNoException(x));
         }
 
         [TestMethod]
@@ -877,8 +877,8 @@ tag = ""End"";";
                 "InCatch",
                 "End");
 
-            validator.TagStates("InCatch").Should().HaveCount(1).And.ContainSingle(x => x.Exception != null);   // ToDo: Use custom assertions
-            validator.TagStates("End").Should().HaveCount(1).And.ContainSingle(x => x.Exception == null);
+            validator.TagStates("InCatch").Should().HaveCount(1).And.ContainSingle(x => HasUnknownException(x));
+            validator.TagStates("End").Should().HaveCount(1).And.ContainSingle(x => HasNoException(x));
         }
 
         [TestMethod]
@@ -902,8 +902,8 @@ tag = ""End"";";
                 "InCatch",
                 "End");
 
-            validator.TagStates("InCatch").Should().HaveCount(1).And.ContainSingle(x => x.Exception != null);   // ToDo: Use custom assertions
-            validator.TagStates("End").Should().HaveCount(1).And.ContainSingle(x => x.Exception == null);
+            validator.TagStates("InCatch").Should().HaveCount(1).And.ContainSingle(x => HasUnknownException(x));
+            validator.TagStates("End").Should().HaveCount(1).And.ContainSingle(x => HasNoException(x));
         }
 
         [TestMethod]
@@ -937,10 +937,10 @@ tag = ""End"";";
                 "InCatchNotSupported",
                 "InCatchEverything");
 
-            validator.TagStates("InCatchArgumentNull").Should().HaveCount(1).And.ContainSingle(x => x.Exception != null);   // ToDo: Use custom assertions
-            validator.TagStates("InCatchNotSupported").Should().HaveCount(1).And.ContainSingle(x => x.Exception != null);
-            validator.TagStates("InCatchEverything").Should().HaveCount(1).And.ContainSingle(x => x.Exception != null);
-            validator.TagStates("End").Should().HaveCount(1).And.ContainSingle(x => x.Exception == null);
+            validator.TagStates("InCatchArgumentNull").Should().HaveCount(1).And.ContainSingle(x => HasUnknownException(x));
+            validator.TagStates("InCatchNotSupported").Should().HaveCount(1).And.ContainSingle(x => HasUnknownException(x));
+            validator.TagStates("InCatchEverything").Should().HaveCount(1).And.ContainSingle(x => HasUnknownException(x));
+            validator.TagStates("End").Should().HaveCount(1).And.ContainSingle(x => HasNoException(x));
         }
 
         [TestMethod]
@@ -969,9 +969,9 @@ tag = ""End"";";
                 "InCatch",      // Exception thrown by Tag("InTry")
                 "End");
 
-            validator.TagStates("InCatch").Should().HaveCount(1).And.ContainSingle(x => x.Exception != null);   // ToDo: Use custom assertions
-            validator.TagStates("InFinally").Should().HaveCount(1).And.ContainSingle(x => x.Exception == null);
-            validator.TagStates("End").Should().HaveCount(1).And.ContainSingle(x => x.Exception == null);
+            validator.TagStates("InCatch").Should().HaveCount(1).And.ContainSingle(x => HasUnknownException(x));
+            validator.TagStates("InFinally").Should().HaveCount(1).And.ContainSingle(x => HasNoException(x));
+            validator.TagStates("End").Should().HaveCount(1).And.ContainSingle(x => HasNoException(x));
         }
 
         [TestMethod]
@@ -1007,10 +1007,10 @@ tag = ""End"";";
                 "AfterInnerTry",
                 "InInnerCatch");
 
-            validator.TagStates("InInnerCatch").Should().HaveCount(1).And.ContainSingle(x => x.Exception != null);   // ToDo: Use custom assertions
-            validator.TagStates("AfterInnerTry").Should().HaveCount(1).And.ContainSingle(x => x.Exception == null);
-            validator.TagStates("InOuterCatch").Should().HaveCount(1).And.ContainSingle(x => x.Exception != null);
-            validator.TagStates("End").Should().HaveCount(1).And.ContainSingle(x => x.Exception == null);
+            validator.TagStates("InInnerCatch").Should().HaveCount(1).And.ContainSingle(x => HasUnknownException(x));
+            validator.TagStates("AfterInnerTry").Should().HaveCount(1).And.ContainSingle(x => HasNoException(x));
+            validator.TagStates("InOuterCatch").Should().HaveCount(1).And.ContainSingle(x => HasUnknownException(x));
+            validator.TagStates("End").Should().HaveCount(1).And.ContainSingle(x => HasNoException(x));
         }
 
         [TestMethod]
@@ -1047,13 +1047,13 @@ tag = ""End"";";
                 "InInnerCatch",
                 "AfterInnerTry");   // ToDo: This should not be here, it is now visited on happy-path (with exOuter) and with empty state from catch exInner
 
-            validator.TagStates("BeforeInnerTry").Should().HaveCount(1).And.ContainSingle(x => x.Exception != null);    // ToDo: Use custom assertions
-            validator.TagStates("InInnerTry").Should().HaveCount(1).And.ContainSingle(x => x.Exception != null);
-            validator.TagStates("InInnerCatch").Should().HaveCount(1).And.ContainSingle(x => x.Exception != null);
+            validator.TagStates("BeforeInnerTry").Should().HaveCount(1).And.ContainSingle(x => HasUnknownException(x));
+            validator.TagStates("InInnerTry").Should().HaveCount(1).And.ContainSingle(x => HasUnknownException(x));
+            validator.TagStates("InInnerCatch").Should().HaveCount(1).And.ContainSingle(x => HasUnknownException(x));
             validator.TagStates("AfterInnerTry").Should().HaveCount(2)
-                .And.ContainSingle(x => x.Exception != null)
-                .And.ContainSingle(x => x.Exception == null);     // ToDo: This should not be here, same reason as above in AfterInnerTry
-            validator.TagStates("End").Should().HaveCount(1).And.ContainSingle(x => x.Exception == null);
+                .And.ContainSingle(x => HasUnknownException(x))
+                .And.ContainSingle(x => HasNoException(x));     // ToDo: This should not be here, same reason as above in AfterInnerTry
+            validator.TagStates("End").Should().HaveCount(1).And.ContainSingle(x => HasNoException(x));
         }
 
         [TestMethod]
@@ -1094,11 +1094,11 @@ tag = ""End"";";
                 "InInnerCatch",
                 "End");
 
-            validator.TagStates("InOuterCatch").Should().HaveCount(1).And.ContainSingle(x => x.Exception != null);    // ToDo: Use custom assertions
-            validator.TagStates("BeforeInnerTry").Should().HaveCount(1).And.ContainSingle(x => x.Exception == null);
-            validator.TagStates("InInnerCatch").Should().HaveCount(1).And.ContainSingle(x => x.Exception != null);
-            validator.TagStates("AfterInnerTry").Should().HaveCount(1).And.ContainSingle(x => x.Exception == null);
-            validator.TagStates("End").Should().HaveCount(1).And.ContainSingle(x => x.Exception == null);
+            validator.TagStates("InOuterCatch").Should().HaveCount(1).And.ContainSingle(x => HasUnknownException(x));
+            validator.TagStates("BeforeInnerTry").Should().HaveCount(1).And.ContainSingle(x => HasNoException(x));
+            validator.TagStates("InInnerCatch").Should().HaveCount(1).And.ContainSingle(x => HasUnknownException(x));
+            validator.TagStates("AfterInnerTry").Should().HaveCount(1).And.ContainSingle(x => HasNoException(x));
+            validator.TagStates("End").Should().HaveCount(1).And.ContainSingle(x => HasNoException(x));
         }
 
         [TestMethod]
@@ -1127,9 +1127,9 @@ tag = ""End"";";
                 "InCatch",
                 "End");
 
-            validator.TagStates("InCatch").Should().HaveCount(1).And.ContainSingle(x => x.Exception != null);   // ToDo: Use custom assertions
-            validator.TagStates("InFinally").Should().HaveCount(1).And.ContainSingle(x => x.Exception == null);
-            validator.TagStates("End").Should().HaveCount(1).And.ContainSingle(x => x.Exception == null);
+            validator.TagStates("InCatch").Should().HaveCount(1).And.ContainSingle(x => HasUnknownException(x));
+            validator.TagStates("InFinally").Should().HaveCount(1).And.ContainSingle(x => HasNoException(x));
+            validator.TagStates("End").Should().HaveCount(1).And.ContainSingle(x => HasNoException(x));
         }
 
         [TestMethod]
@@ -1173,12 +1173,12 @@ tag = ""End"";";
                 "End",
                 "InCatchArgumentWhen");
 
-            validator.TagStates("InCatchArgumentWhen").Should().HaveCount(1).And.ContainSingle(x => x.Exception != null);   // ToDo: Use custom assertions
-            validator.TagStates("InCatchArgument").Should().HaveCount(1).And.ContainSingle(x => x.Exception != null);
-            validator.TagStates("InCatchAllWhen").Should().HaveCount(1).And.ContainSingle(x => x.Exception != null);
-            validator.TagStates("InCatchAll").Should().HaveCount(1).And.ContainSingle(x => x.Exception != null);
-            validator.TagStates("InFinally").Should().HaveCount(1).And.ContainSingle(x => x.Exception == null);
-            validator.TagStates("End").Should().HaveCount(1).And.ContainSingle(x => x.Exception == null);
+            validator.TagStates("InCatchArgumentWhen").Should().HaveCount(1).And.ContainSingle(x => HasUnknownException(x));
+            validator.TagStates("InCatchArgument").Should().HaveCount(1).And.ContainSingle(x => HasUnknownException(x));
+            validator.TagStates("InCatchAllWhen").Should().HaveCount(1).And.ContainSingle(x => HasUnknownException(x));
+            validator.TagStates("InCatchAll").Should().HaveCount(1).And.ContainSingle(x => HasUnknownException(x));
+            validator.TagStates("InFinally").Should().HaveCount(1).And.ContainSingle(x => HasNoException(x));
+            validator.TagStates("End").Should().HaveCount(1).And.ContainSingle(x => HasNoException(x));
         }
 
         [TestMethod]
@@ -1207,9 +1207,9 @@ tag = ""End"";";
                 "InCatch",
                 "End");
 
-            validator.TagStates("InCatch").Should().HaveCount(1).And.ContainSingle(x => x.Exception != null);   // ToDo: Use custom assertions
-            validator.TagStates("InFinally").Should().HaveCount(1).And.ContainSingle(x => x.Exception == null);
-            validator.TagStates("End").Should().HaveCount(1).And.ContainSingle(x => x.Exception == null);
+            validator.TagStates("InCatch").Should().HaveCount(1).And.ContainSingle(x => HasUnknownException(x));
+            validator.TagStates("InFinally").Should().HaveCount(1).And.ContainSingle(x => HasNoException(x));
+            validator.TagStates("End").Should().HaveCount(1).And.ContainSingle(x => HasNoException(x));
         }
 
         private static void ValidateHasOnlyUnknownExceptionAndSystemException(ValidatorTestCheck validator, string stateName) =>
