@@ -51,8 +51,10 @@ namespace SonarAnalyzer.Extensions
                 var left = (TupleExpressionSyntaxWrapper)assignment.Left;
                 var right = (TupleExpressionSyntaxWrapper)assignment.Right;
                 var arrayBuilder = ImmutableArray.CreateBuilder<AssignmentMapping>(left.Arguments.Count);
-                MapTupleElements(arrayBuilder, left, right);
-                return arrayBuilder.ToImmutableArray();
+                if (MapTupleElements(arrayBuilder, left, right))
+                {
+                    return arrayBuilder.ToImmutableArray();
+                }
             }
             // var (x, y) = (1, 2)
             else if (DeclarationExpressionSyntaxWrapper.IsInstance(assignment.Left)
@@ -63,16 +65,21 @@ namespace SonarAnalyzer.Extensions
                 var left = (ParenthesizedVariableDesignationSyntaxWrapper)leftDesignation;
                 var right = (TupleExpressionSyntaxWrapper)assignment.Right;
                 var arrayBuilder = ImmutableArray.CreateBuilder<AssignmentMapping>(left.Variables.Count);
-                MapDesignationElements(arrayBuilder, left, right);
-                return arrayBuilder.ToImmutableArray();
-            }
-            else
-            {
-                return ImmutableArray.Create(new AssignmentMapping(assignment.Left, assignment.Right));
+                if (MapDesignationElements(arrayBuilder, left, right))
+                {
+                    return arrayBuilder.ToImmutableArray();
+                }
             }
 
-            static void MapTupleElements(ImmutableArray<AssignmentMapping>.Builder arrayBuilder, TupleExpressionSyntaxWrapper left, TupleExpressionSyntaxWrapper right)
+            return ImmutableArray.Create(new AssignmentMapping(assignment.Left, assignment.Right));
+
+            static bool MapTupleElements(ImmutableArray<AssignmentMapping>.Builder arrayBuilder, TupleExpressionSyntaxWrapper left, TupleExpressionSyntaxWrapper right)
             {
+                if (left.Arguments.Count != right.Arguments.Count)
+                {
+                    return false;
+                }
+
                 var leftEnumerator = left.Arguments.GetEnumerator();
                 var rightEnumerator = right.Arguments.GetEnumerator();
                 while (leftEnumerator.MoveNext() && rightEnumerator.MoveNext())
@@ -82,17 +89,27 @@ namespace SonarAnalyzer.Extensions
                     if (TupleExpressionSyntaxWrapper.IsInstance(leftExpression)
                         && TupleExpressionSyntaxWrapper.IsInstance(rightExpression))
                     {
-                        MapTupleElements(arrayBuilder, (TupleExpressionSyntaxWrapper)leftExpression, (TupleExpressionSyntaxWrapper)rightExpression);
+                        if (!MapTupleElements(arrayBuilder, (TupleExpressionSyntaxWrapper)leftExpression, (TupleExpressionSyntaxWrapper)rightExpression))
+                        {
+                            return false;
+                        }
                     }
                     else
                     {
                         arrayBuilder.Add(new AssignmentMapping(leftExpression, rightExpression));
                     }
                 }
+
+                return true;
             }
 
-            static void MapDesignationElements(ImmutableArray<AssignmentMapping>.Builder arrayBuilder, ParenthesizedVariableDesignationSyntaxWrapper left, TupleExpressionSyntaxWrapper right)
+            static bool MapDesignationElements(ImmutableArray<AssignmentMapping>.Builder arrayBuilder, ParenthesizedVariableDesignationSyntaxWrapper left, TupleExpressionSyntaxWrapper right)
             {
+                if (left.Variables.Count != right.Arguments.Count)
+                {
+                    return false;
+                }
+
                 var leftEnumerator = left.Variables.GetEnumerator();
                 var rightEnumerator = right.Arguments.GetEnumerator();
                 while (leftEnumerator.MoveNext() && rightEnumerator.MoveNext())
@@ -102,13 +119,18 @@ namespace SonarAnalyzer.Extensions
                     if (ParenthesizedVariableDesignationSyntaxWrapper.IsInstance(leftVar)
                         && TupleExpressionSyntaxWrapper.IsInstance(rightExpression))
                     {
-                        MapDesignationElements(arrayBuilder, (ParenthesizedVariableDesignationSyntaxWrapper)leftVar, (TupleExpressionSyntaxWrapper)rightExpression);
+                        if (!MapDesignationElements(arrayBuilder, (ParenthesizedVariableDesignationSyntaxWrapper)leftVar, (TupleExpressionSyntaxWrapper)rightExpression))
+                        {
+                            return false;
+                        }
                     }
                     else
                     {
                         arrayBuilder.Add(new AssignmentMapping(leftVar.SyntaxNode, rightExpression));
                     }
                 }
+
+                return true;
             }
         }
 

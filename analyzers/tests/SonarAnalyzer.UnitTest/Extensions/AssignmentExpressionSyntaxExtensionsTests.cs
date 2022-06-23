@@ -200,20 +200,27 @@ namespace SonarAnalyzer.UnitTest.Extensions
                 {
                     new
                     {
-                        Left = new { Identifier = new { Text = "a" } },
-                        Right = new { Token = new { Text = "1" } },
-                    },
-                    new
-                    {
-                        Left = new { Identifier = new { Text = "b" } },
-                        Right = new { Token = new { Text = "2" } },
-                    },
-                    new
-                    {
-                        Left = new { Identifier = new { Text = "c" } },
-                        Right = new { Token = new { Text = "3" } },
+                        Left = new { Designation = new { Variables = new { Count = 2 } } },
+                        Right = new { Arguments = new { Count = 3 } },
                     },
                 });
+        }
+
+        [TestMethod]
+        public void AssignmentExpressionSyntaxExtensions_MisalignedDeconstructionAssignmentInNestedTuple()
+        {
+            var code = "var (a, (b, c, d)) =  (1, (2, 3));";
+            var mapping = ParseAssignmentExpression(code).MapAssignmentArguments();
+            mapping.Should().BeEquivalentTo(new[]
+                {
+                    new
+                    {
+                        Left = new { Designation = new { Variables = new { Count = 2 } } },
+                        Right = new { Arguments = new { Count = 2 } },
+                    },
+                });
+            mapping[0].Left.ToString().Should().Be("var (a, (b, c, d))");
+            mapping[0].Right.ToString().Should().Be("(1, (2, 3))");
         }
 
         [TestMethod]
@@ -243,13 +250,23 @@ namespace SonarAnalyzer.UnitTest.Extensions
                 {
                     new
                     {
-                        Left = new { Designation = new { Identifier = new { Text = "x" } } },
-                        Right = new { Token = new { Text = "1" } },
-                    },
-                    new
-                    {
-                        Left = new { Designation = new { Identifier = new { Text = "y" } } },
-                        Right = new { Token = new { Text = "2" } },
+                        Left = new
+                        {
+                            Arguments = new[]
+                            {
+                                new { Expression = new { Designation = new { Identifier = new { Text = "x" } } } },
+                                new { Expression = new { Designation = new { Identifier = new { Text = "y" } } } },
+                            }
+                        },
+                        Right =new
+                        {
+                            Arguments = new[]
+                            {
+                                new { Expression = new { Token = new { Text = "1" } } },
+                                new { Expression = new { Token = new { Text = "2" } } },
+                                new { Expression = new { Token = new { Text = "3" } } },
+                            }
+                        },
                     },
                 });
         }
@@ -263,19 +280,46 @@ namespace SonarAnalyzer.UnitTest.Extensions
                 {
                     new
                     {
-                        Left = new { Designation = new { Identifier = new { Text = "x" } } },
-                        Right = new { Token = new { Text = "1" } },
-                    },
-                    new
-                    {
-                        Left = new { Designation = new { Identifier = new { Text = "y" } } },
-                        Right = new { Token = new { Text = "2" } },
+                        Left = new
+                        {
+                            Arguments = new[]
+                            {
+                                new { Expression = new { Designation = new { Identifier = new { Text = "x" } } } },
+                                new { Expression = new { Designation = new { Identifier = new { Text = "y" } } } },
+                                new { Expression = new { Designation = new { Identifier = new { Text = "z" } } } },
+                            }
+                        },
+                        Right =new
+                        {
+                            Arguments = new[]
+                            {
+                                new { Expression = new { Token = new { Text = "1" } } },
+                                new { Expression = new { Token = new { Text = "2" } } },
+                            }
+                        },
                     },
                 });
         }
 
         [TestMethod]
-        public void AssignmentExpressionSyntaxExtensions_MisalignedNested()
+        public void AssignmentExpressionSyntaxExtensions_MisalignedNested1()
+        {
+            var code = "(var a, (var b, var c)) = (1, (2, 3, 4));";
+            var mapping = ParseAssignmentExpression(code).MapAssignmentArguments();
+            mapping.Should().BeEquivalentTo(new[]
+                {
+                    new
+                    {
+                        Left = new { Arguments = new { Count = 2 } },
+                        Right = new { Arguments = new { Count = 2 } },
+                    },
+                });
+            mapping[0].Left.ToString().Should().Be("(var a, (var b, var c))");
+            mapping[0].Right.ToString().Should().Be("(1, (2, 3, 4))");
+        }
+
+        [TestMethod]
+        public void AssignmentExpressionSyntaxExtensions_MisalignedNested2()
         {
             var code = "(var a, (var b, var c), var d) = (1, (2, 3, 4));";
             var mapping = ParseAssignmentExpression(code).MapAssignmentArguments();
@@ -283,18 +327,8 @@ namespace SonarAnalyzer.UnitTest.Extensions
                 {
                     new
                     {
-                        Left = new { Designation = new { Identifier = new { Text = "a" } } },
-                        Right = new { Token = new { Text = "1" } },
-                    },
-                    new
-                    {
-                        Left = new { Designation = new { Identifier = new { Text = "b" } } },
-                        Right = new { Token = new { Text = "2" } },
-                    },
-                    new
-                    {
-                        Left = new { Designation = new { Identifier = new { Text = "c" } } },
-                        Right = new { Token = new { Text = "3" } },
+                        Left = new { Arguments = new { Count = 3 } },
+                        Right = new { Arguments = new { Count = 2 } },
                     },
                 });
         }
