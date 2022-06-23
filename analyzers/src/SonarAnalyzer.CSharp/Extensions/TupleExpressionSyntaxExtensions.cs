@@ -40,16 +40,16 @@ namespace SonarAnalyzer.Extensions
         public static ImmutableArray<ArgumentSyntax> AllArguments(this TupleExpressionSyntaxWrapper tupleExpression)
         {
             var builder = ImmutableArray.CreateBuilder<ArgumentSyntax>(initialCapacity: tupleExpression.Arguments.Count);
-            Recurse(builder, tupleExpression.Arguments);
+            CollectTupleElements(builder, tupleExpression.Arguments);
             return builder.ToImmutableArray();
 
-            static void Recurse(ImmutableArray<ArgumentSyntax>.Builder builder, SeparatedSyntaxList<ArgumentSyntax> arguments)
+            static void CollectTupleElements(ImmutableArray<ArgumentSyntax>.Builder builder, SeparatedSyntaxList<ArgumentSyntax> arguments)
             {
                 foreach (var argument in arguments)
                 {
                     if (TupleExpressionSyntaxWrapper.IsInstance(argument.Expression))
                     {
-                        Recurse(builder, ((TupleExpressionSyntaxWrapper)argument.Expression).Arguments);
+                        CollectTupleElements(builder, ((TupleExpressionSyntaxWrapper)argument.Expression).Arguments);
                     }
                     else
                     {
