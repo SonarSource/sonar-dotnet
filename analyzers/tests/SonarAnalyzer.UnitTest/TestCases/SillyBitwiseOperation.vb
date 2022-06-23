@@ -198,3 +198,26 @@ Public Class Repro_4399
     End Sub
 
 End Class
+
+Public Class LocalFields
+
+    Private Start As Integer = 0
+
+    Public Property [End] As Integer = 0
+
+    Public Sub UpdateStart(Val As Integer)
+        Start = Val
+    End Sub
+
+    Public Overrides Function GetHashCode() As Integer
+        Dim Value1 = Method() ^ [End]
+        Dim Value2 = Start ^ [End]
+        Dim Value3 = [End] ^ Start
+        Return Method() ^ Start
+    End Function
+
+    Private Function Method() As Integer
+        Return 42
+    End Function
+
+End Class

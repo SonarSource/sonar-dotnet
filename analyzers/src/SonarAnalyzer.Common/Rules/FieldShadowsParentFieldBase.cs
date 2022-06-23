@@ -26,7 +26,8 @@ using SonarAnalyzer.Helpers;
 
 namespace SonarAnalyzer.Rules
 {
-    public abstract class FieldShadowsParentFieldBase<TVariableDeclaratorSyntax> : SonarDiagnosticAnalyzer
+    public abstract class FieldShadowsParentFieldBase<TSyntaxKind, TVariableDeclaratorSyntax> : SonarDiagnosticAnalyzer
+        where TSyntaxKind : struct
         where TVariableDeclaratorSyntax : SyntaxNode
     {
         protected const string S2387DiagnosticId = "S2387";
@@ -38,14 +39,14 @@ namespace SonarAnalyzer.Rules
         private readonly DiagnosticDescriptor s2387;
         private readonly DiagnosticDescriptor s4025;
 
-        protected abstract SyntaxToken GetIdentifier(TVariableDeclaratorSyntax declarator);
+        protected abstract ILanguageFacade<TSyntaxKind> Language { get; }
 
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(s2387, s4025);
 
-        protected FieldShadowsParentFieldBase(System.Resources.ResourceManager rspecResources)
+        protected FieldShadowsParentFieldBase()
         {
-            s2387 = DiagnosticDescriptorBuilder.GetDescriptor(S2387DiagnosticId, S2387MessageFormat, rspecResources);
-            s4025 = DiagnosticDescriptorBuilder.GetDescriptor(S4025DiagnosticId, S4025MessageFormat, rspecResources);
+            s2387 = Language.CreateDescriptor(S2387DiagnosticId, S2387MessageFormat);
+            s4025 = Language.CreateDescriptor(S4025DiagnosticId, S4025MessageFormat);
         }
 
         protected IEnumerable<Diagnostic> CheckFields(SemanticModel semanticModel, TVariableDeclaratorSyntax variableDeclarator)
@@ -59,11 +60,11 @@ namespace SonarAnalyzer.Rules
                     var similarFields = baseType.GetMembers().OfType<IFieldSymbol>().Where(IsMatch).ToList();
                     if (similarFields.Any(field => field.Name == fieldName))
                     {
-                        yield return Diagnostic.Create(s2387, GetIdentifier(variableDeclarator).GetLocation(), fieldName, baseType.Name);
+                        yield return Diagnostic.Create(s2387, Language.Syntax.NodeIdentifier(variableDeclarator).Value.GetLocation(), fieldName, baseType.Name);
                     }
                     else if (similarFields.Any())
                     {
-                        yield return Diagnostic.Create(s4025, GetIdentifier(variableDeclarator).GetLocation(), similarFields.First().Name, baseType.Name);
+                        yield return Diagnostic.Create(s4025, Language.Syntax.NodeIdentifier(variableDeclarator).Value.GetLocation(), similarFields.First().Name, baseType.Name);
                     }
                 }
 

@@ -29,7 +29,6 @@ namespace SonarAnalyzer.Rules
     public abstract class ImplementSerializationMethodsCorrectlyBase : SonarDiagnosticAnalyzer
     {
         protected const string DiagnosticId = "S3927";
-
         private const string AttributeOnLocalMethodMessageFormat = "Serialization attributes on local functions are not considered.";
         private const string MessageFormat = "Make this method {0}.";
         private const string ProblemParameterText = "have a single parameter of type 'StreamingContext'";
@@ -37,10 +36,9 @@ namespace SonarAnalyzer.Rules
         private const string ProblemPublicText = "non-public";
 
         private readonly DiagnosticDescriptor rule;
+        protected readonly DiagnosticDescriptor attributeOnLocalFunctionRule;
 
-        protected readonly DiagnosticDescriptor AttributeOnLocalFunctionRule;
-
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule, AttributeOnLocalFunctionRule);
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule, attributeOnLocalFunctionRule);
 
         private static readonly ImmutableArray<KnownType> SerializationAttributes =
             ImmutableArray.Create(KnownType.System_Runtime_Serialization_OnSerializingAttribute,
@@ -48,15 +46,15 @@ namespace SonarAnalyzer.Rules
                                   KnownType.System_Runtime_Serialization_OnDeserializingAttribute,
                                   KnownType.System_Runtime_Serialization_OnDeserializedAttribute);
 
-        protected abstract GeneratedCodeRecognizer GeneratedCodeRecognizer { get; }
+        protected abstract ILanguageFacade Language { get; }
         protected abstract string MethodStaticMessage { get; }
         protected abstract string MethodReturnTypeShouldBeVoidMessage { get; }
         protected abstract Location GetIdentifierLocation(IMethodSymbol methodSymbol);
 
-        protected ImplementSerializationMethodsCorrectlyBase(System.Resources.ResourceManager rspecResources)
+        protected ImplementSerializationMethodsCorrectlyBase()
         {
-            rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, rspecResources);
-            AttributeOnLocalFunctionRule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, AttributeOnLocalMethodMessageFormat, rspecResources);
+            rule = Language.CreateDescriptor(DiagnosticId, MessageFormat);
+            attributeOnLocalFunctionRule = Language.CreateDescriptor(DiagnosticId, AttributeOnLocalMethodMessageFormat);
         }
 
         protected override void Initialize(SonarAnalysisContext context) =>
@@ -72,7 +70,7 @@ namespace SonarAnalyzer.Rules
                     var issues = FindIssues(methodSymbol);
                     if (issues.Any() && GetIdentifierLocation(methodSymbol) is { } location)
                     {
-                        c.ReportDiagnosticIfNonGenerated(GeneratedCodeRecognizer, Diagnostic.Create(SupportedDiagnostics[0], location, issues.ToSentence()));
+                        c.ReportDiagnosticIfNonGenerated(Language.GeneratedCodeRecognizer, Diagnostic.Create(rule, location, issues.ToSentence()));
                     }
                 },
                 SymbolKind.Method);

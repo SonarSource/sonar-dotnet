@@ -35,12 +35,8 @@ namespace SonarAnalyzer.Rules.CSharp
         private const string ProblemStatic = "non-static";
         private const string ProblemReturnVoidText = "return 'void'";
 
-        public ImplementSerializationMethodsCorrectly() : base(RspecStrings.ResourceManager) { }
-
-        protected override GeneratedCodeRecognizer GeneratedCodeRecognizer => CSharpGeneratedCodeRecognizer.Instance;
-
+        protected override ILanguageFacade Language => CSharpFacade.Instance;
         protected override string MethodStaticMessage => ProblemStatic;
-
         protected override string MethodReturnTypeShouldBeVoidMessage => ProblemReturnVoidText;
 
         protected override Location GetIdentifierLocation(IMethodSymbol methodSymbol) =>
@@ -59,7 +55,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
                 foreach (var attribute in attributes)
                 {
-                    c.ReportIssue(Diagnostic.Create(AttributeOnLocalFunctionRule, attribute.GetLocation()));
+                    c.ReportIssue(Diagnostic.Create(attributeOnLocalFunctionRule, attribute.GetLocation()));
                 }
             },
             SyntaxKindEx.LocalFunctionStatement);

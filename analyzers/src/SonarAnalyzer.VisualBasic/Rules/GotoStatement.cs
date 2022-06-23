@@ -28,9 +28,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
     [DiagnosticAnalyzer(LanguageNames.VisualBasic)]
     public sealed class GotoStatement : GotoStatementBase<SyntaxKind>
     {
-        public GotoStatement() : base(RspecStrings.ResourceManager) { }
-
-        protected override GeneratedCodeRecognizer GeneratedCodeRecognizer => VisualBasicGeneratedCodeRecognizer.Instance;
+        protected override ILanguageFacade<SyntaxKind> Language => VisualBasicFacade.Instance;
 
         protected override SyntaxKind[] GotoSyntaxKinds => new[] { SyntaxKind.GoToStatement };
 

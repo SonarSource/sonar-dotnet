@@ -30,19 +30,12 @@ namespace SonarAnalyzer.Rules.VisualBasic
     [DiagnosticAnalyzer(LanguageNames.VisualBasic)]
     public sealed class HardcodedIpAddress : HardcodedIpAddressBase<SyntaxKind, LiteralExpressionSyntax>
     {
-        protected override GeneratedCodeRecognizer GeneratedCodeRecognizer { get; } = VisualBasicGeneratedCodeRecognizer.Instance;
-
+        protected override ILanguageFacade<SyntaxKind> Language => VisualBasicFacade.Instance;
         protected override SyntaxKind SyntaxKind { get; } = SyntaxKind.StringLiteralExpression;
 
-        public HardcodedIpAddress()
-            : this(AnalyzerConfiguration.Hotspot)
-        {
-        }
+        public HardcodedIpAddress() : this(AnalyzerConfiguration.Hotspot) { }
 
-        public HardcodedIpAddress(IAnalyzerConfiguration analyzerConfiguration)
-            : base(analyzerConfiguration, RspecStrings.ResourceManager)
-        {
-        }
+        public HardcodedIpAddress(IAnalyzerConfiguration analyzerConfiguration) : base(analyzerConfiguration) { }
 
         protected override string GetValueText(LiteralExpressionSyntax literalExpression) =>
             literalExpression.Token.ValueText;

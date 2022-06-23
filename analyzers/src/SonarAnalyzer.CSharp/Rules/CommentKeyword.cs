@@ -27,16 +27,7 @@ namespace SonarAnalyzer.Rules.CSharp
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
     public sealed class CommentKeyword : CommentKeywordBase
     {
-        internal static readonly DiagnosticDescriptor TODO_Descriptor =
-            DiagnosticDescriptorBuilder.GetDescriptor(TodoDiagnosticId, TodoMessageFormat, RspecStrings.ResourceManager);
-        protected override DiagnosticDescriptor TodoDiagnostic { get; } = TODO_Descriptor;
-
-        internal static readonly DiagnosticDescriptor FIXME_Descriptor =
-            DiagnosticDescriptorBuilder.GetDescriptor(FixMeDiagnosticId, FixMeMessageFormat, RspecStrings.ResourceManager);
-        protected override DiagnosticDescriptor FixMeDiagnostic { get; } = FIXME_Descriptor;
-
-        protected override GeneratedCodeRecognizer GeneratedCodeRecognizer
-            => CSharpGeneratedCodeRecognizer.Instance;
+        protected override ILanguageFacade Language => CSharpFacade.Instance;
 
         protected override bool IsComment(SyntaxTrivia trivia) => trivia.IsComment();
     }

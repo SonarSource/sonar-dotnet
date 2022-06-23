@@ -32,8 +32,7 @@ namespace SonarAnalyzer.Rules.CSharp
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
     public class TooManyParameters : TooManyParametersBase<SyntaxKind, ParameterListSyntax>
     {
-        protected override GeneratedCodeRecognizer GeneratedCodeRecognizer { get; } = CSharpGeneratedCodeRecognizer.Instance;
-        protected override SyntaxKind[] SyntaxKinds { get; } = new[] { SyntaxKind.ParameterList };
+        protected override ILanguageFacade<SyntaxKind> Language => CSharpFacade.Instance;
 
         private static readonly ImmutableDictionary<SyntaxKind, string> NodeToDeclarationName = new Dictionary<SyntaxKind, string>
         {
@@ -46,11 +45,11 @@ namespace SonarAnalyzer.Rules.CSharp
             { SyntaxKindEx.LocalFunctionStatement, "Local function" }
         }.ToImmutableDictionary();
 
-        public TooManyParameters() : base(RspecStrings.ResourceManager) { }
+        protected override string UserFriendlyNameForNode(SyntaxNode node) =>
+            NodeToDeclarationName[node.Kind()];
 
-        protected override string UserFriendlyNameForNode(SyntaxNode node) => NodeToDeclarationName[node.Kind()];
-
-        protected override int CountParameters(ParameterListSyntax parameterList) => parameterList.Parameters.Count;
+        protected override int CountParameters(ParameterListSyntax parameterList) =>
+            parameterList.Parameters.Count;
 
         protected override bool CanBeChanged(SyntaxNode node, SemanticModel semanticModel) =>
             NodeToDeclarationName.ContainsKey(node.Kind()) && VerifyCanBeChangedBySymbol(node, semanticModel);

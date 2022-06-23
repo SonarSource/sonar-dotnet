@@ -37,7 +37,9 @@ namespace SonarAnalyzer.Helpers.Facade
         abstract TSyntaxKind[] MethodDeclarations { get; }
         abstract TSyntaxKind[] ObjectCreationExpressions { get; }
         abstract TSyntaxKind Parameter { get; }
+        abstract TSyntaxKind ParameterList { get; }
         abstract TSyntaxKind ReturnStatement { get; }
+        abstract TSyntaxKind SimpleAssignment { get; }
         abstract TSyntaxKind SimpleMemberAccessExpression { get; }
         abstract TSyntaxKind StringLiteralExpression { get; }
         abstract TSyntaxKind[] TypeDeclaration { get; }

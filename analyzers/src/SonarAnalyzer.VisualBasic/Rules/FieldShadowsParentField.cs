@@ -28,9 +28,9 @@ using SonarAnalyzer.Helpers;
 namespace SonarAnalyzer.Rules.VisualBasic
 {
     [DiagnosticAnalyzer(LanguageNames.VisualBasic)]
-    public sealed class FieldShadowsParentField : FieldShadowsParentFieldBase<ModifiedIdentifierSyntax>
+    public sealed class FieldShadowsParentField : FieldShadowsParentFieldBase<SyntaxKind, ModifiedIdentifierSyntax>
     {
-        public FieldShadowsParentField() : base(RspecStrings.ResourceManager) { }
+        protected override ILanguageFacade<SyntaxKind> Language => VisualBasicFacade.Instance;
 
         protected override void Initialize(SonarAnalysisContext context) =>
             context.RegisterSyntaxNodeActionInNonGenerated(c =>
@@ -45,8 +45,5 @@ namespace SonarAnalyzer.Rules.VisualBasic
                     }
                 },
                 SyntaxKind.FieldDeclaration);
-
-        protected override SyntaxToken GetIdentifier(ModifiedIdentifierSyntax declarator) =>
-            declarator.Identifier;
     }
 }

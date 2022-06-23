@@ -60,10 +60,9 @@ namespace SonarAnalyzer.Helpers
         protected abstract string MessageFormat { get; }
         protected abstract ILanguageFacade<TSyntaxKind> Language { get; }
         protected DiagnosticDescriptor Rule { get; }
+        public sealed override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(Rule);
 
         protected SonarDiagnosticAnalyzer(string diagnosticId) =>
            Rule = Language.CreateDescriptor(diagnosticId, MessageFormat);
-
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(Rule);
     }
 }

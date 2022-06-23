@@ -22,7 +22,6 @@ using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Diagnostics;
 using Microsoft.CodeAnalysis.VisualBasic;
 using Microsoft.CodeAnalysis.VisualBasic.Syntax;
-using SonarAnalyzer.Extensions;
 using SonarAnalyzer.Helpers;
 
 namespace SonarAnalyzer.Rules.VisualBasic
@@ -30,7 +29,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
     [DiagnosticAnalyzer(LanguageNames.VisualBasic)]
     public sealed class SillyBitwiseOperation : SillyBitwiseOperationBase
     {
-        public SillyBitwiseOperation() : base(RspecStrings.ResourceManager) { }
+        protected override ILanguageFacade Language => VisualBasicFacade.Instance;
 
         protected override void Initialize(SonarAnalysisContext context)
         {
@@ -43,9 +42,6 @@ namespace SonarAnalyzer.Rules.VisualBasic
                 SyntaxKind.OrExpression,
                 SyntaxKind.ExclusiveOrExpression);
         }
-
-        protected override object FindConstant(SemanticModel semanticModel, SyntaxNode node) =>
-            node.FindConstantValue(semanticModel);
 
         private void CheckBinary(SyntaxNodeAnalysisContext context, int constValueToLookFor)
         {

@@ -30,19 +30,12 @@ namespace SonarAnalyzer.Rules.CSharp
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
     public sealed class HardcodedIpAddress : HardcodedIpAddressBase<SyntaxKind, LiteralExpressionSyntax>
     {
-        protected override GeneratedCodeRecognizer GeneratedCodeRecognizer { get; } = CSharpGeneratedCodeRecognizer.Instance;
-
+        protected override ILanguageFacade<SyntaxKind> Language => CSharpFacade.Instance;
         protected override SyntaxKind SyntaxKind { get; } = SyntaxKind.StringLiteralExpression;
 
-        public HardcodedIpAddress()
-            : this(AnalyzerConfiguration.Hotspot)
-        {
-        }
+        public HardcodedIpAddress() : this(AnalyzerConfiguration.Hotspot) { }
 
-        public HardcodedIpAddress(IAnalyzerConfiguration analyzerConfiguration)
-            : base(analyzerConfiguration, RspecStrings.ResourceManager)
-        {
-        }
+        public HardcodedIpAddress(IAnalyzerConfiguration analyzerConfiguration) : base(analyzerConfiguration) { }
 
         protected override string GetValueText(LiteralExpressionSyntax literalExpression) =>
             literalExpression.Token.ValueText;

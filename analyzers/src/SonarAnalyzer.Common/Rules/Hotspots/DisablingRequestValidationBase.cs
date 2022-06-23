@@ -40,10 +40,12 @@ namespace SonarAnalyzer.Rules
 
         private readonly DiagnosticDescriptor rule;
 
+        protected abstract ILanguageFacade Language { get; }
+
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
 
-        protected DisablingRequestValidationBase(System.Resources.ResourceManager rspecResources, IAnalyzerConfiguration configuration) : base(configuration) =>
-            rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, rspecResources).WithNotConfigurable();
+        protected DisablingRequestValidationBase(IAnalyzerConfiguration configuration) : base(configuration) =>
+            rule = Language.CreateDescriptor(DiagnosticId, MessageFormat).WithNotConfigurable();
 
         protected override void Initialize(SonarAnalysisContext context)
         {

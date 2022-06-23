@@ -32,8 +32,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
     [DiagnosticAnalyzer(LanguageNames.VisualBasic)]
     public sealed class TooManyParameters : TooManyParametersBase<SyntaxKind, ParameterListSyntax>
     {
-        protected override GeneratedCodeRecognizer GeneratedCodeRecognizer { get; } = VisualBasicGeneratedCodeRecognizer.Instance;
-        protected override SyntaxKind[] SyntaxKinds { get; } = new SyntaxKind[] { SyntaxKind.ParameterList };
+        protected override ILanguageFacade<SyntaxKind> Language => VisualBasicFacade.Instance;
 
         private static readonly ImmutableDictionary<SyntaxKind, string> NodeToDeclarationName = new Dictionary<SyntaxKind, string>
         {
@@ -54,11 +53,11 @@ namespace SonarAnalyzer.Rules.VisualBasic
             SyntaxKind.SubLambdaHeader
         };
 
-        public TooManyParameters() : base(RspecStrings.ResourceManager) { }
+        protected override string UserFriendlyNameForNode(SyntaxNode node) =>
+            NodeToDeclarationName[node.Kind()];
 
-        protected override string UserFriendlyNameForNode(SyntaxNode node) => NodeToDeclarationName[node.Kind()];
-
-        protected override int CountParameters(ParameterListSyntax parameterList) => parameterList.Parameters.Count;
+        protected override int CountParameters(ParameterListSyntax parameterList) =>
+            parameterList.Parameters.Count;
 
         protected override bool CanBeChanged(SyntaxNode node, SemanticModel semanticModel) =>
             node.IsAnyKind(LambdaHeaders)

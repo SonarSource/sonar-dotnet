@@ -27,9 +27,9 @@ using SonarAnalyzer.Helpers;
 namespace SonarAnalyzer.Rules.CSharp
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
-    public sealed class NoExceptionsInFinally : NoExceptionsInFinallyBase
+    public sealed class NoExceptionsInFinally : NoExceptionsInFinallyBase<SyntaxKind>
     {
-        public NoExceptionsInFinally() : base(RspecStrings.ResourceManager) { }
+        protected override ILanguageFacade<SyntaxKind> Language => CSharpFacade.Instance;
 
         protected override void Initialize(SonarAnalysisContext context) =>
             context.RegisterSyntaxNodeActionInNonGenerated(

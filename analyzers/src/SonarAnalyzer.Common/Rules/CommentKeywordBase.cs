@@ -30,29 +30,32 @@ namespace SonarAnalyzer.Rules
 {
     public abstract class CommentKeywordBase : SonarDiagnosticAnalyzer
     {
-        private const string TodoKeyword = "TODO";
-        protected const string TodoDiagnosticId = "S1135";
-        protected const string TodoMessageFormat = "Complete the task associated to this '" + TodoKeyword + "' comment.";
+        private const string ToDoKeyword = "TODO";
+        protected const string ToDoDiagnosticId = "S1135";
+        protected const string ToDoMessageFormat = "Complete the task associated to this '" + ToDoKeyword + "' comment.";
 
         private const string FixMeKeyword = "FIXME";
         protected const string FixMeDiagnosticId = "S1134";
         protected const string FixMeMessageFormat = "Take the required action to fix the issue indicated by this '" + FixMeKeyword + "' comment.";
 
-        protected abstract DiagnosticDescriptor TodoDiagnostic { get; }
-        protected abstract DiagnosticDescriptor FixMeDiagnostic { get; }
-        protected abstract GeneratedCodeRecognizer GeneratedCodeRecognizer { get; }
+        private readonly DiagnosticDescriptor toDoRule;
+        private readonly DiagnosticDescriptor fixMeRule;
+
+        protected abstract ILanguageFacade Language { get; }
+        protected abstract bool IsComment(SyntaxTrivia trivia);
 
         public sealed override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; }
 
         protected CommentKeywordBase()
         {
-            SupportedDiagnostics = ImmutableArray.Create(TodoDiagnostic, FixMeDiagnostic);
+            toDoRule = Language.CreateDescriptor(ToDoDiagnosticId, ToDoMessageFormat);
+            fixMeRule = Language.CreateDescriptor(FixMeDiagnosticId, FixMeMessageFormat);
+            SupportedDiagnostics = ImmutableArray.Create(toDoRule, fixMeRule);
         }
 
-        protected sealed override void Initialize(SonarAnalysisContext context)
-        {
+        protected sealed override void Initialize(SonarAnalysisContext context) =>
             context.RegisterSyntaxTreeActionInNonGenerated(
-                GeneratedCodeRecognizer,
+                Language.GeneratedCodeRecognizer,
                 c =>
                 {
                     var comments = c.Tree.GetRoot().DescendantTrivia()
@@ -60,20 +63,17 @@ namespace SonarAnalyzer.Rules
 
                     foreach (var comment in comments)
                     {
-                        foreach (var location in GetKeywordLocations(c.Tree, comment, TodoKeyword))
+                        foreach (var location in GetKeywordLocations(c.Tree, comment, ToDoKeyword))
                         {
-                            c.ReportIssue(Diagnostic.Create(TodoDiagnostic, location));
+                            c.ReportIssue(Diagnostic.Create(toDoRule, location));
                         }
 
                         foreach (var location in GetKeywordLocations(c.Tree, comment, FixMeKeyword))
                         {
-                            c.ReportIssue(Diagnostic.Create(FixMeDiagnostic, location));
+                            c.ReportIssue(Diagnostic.Create(fixMeRule, location));
                         }
                     }
                 });
-        }
-
-        protected abstract bool IsComment(SyntaxTrivia trivia);
 
         private static IEnumerable<Location> GetKeywordLocations(SyntaxTree tree, SyntaxTrivia comment, string word)
         {

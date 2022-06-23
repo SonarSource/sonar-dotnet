@@ -61,6 +61,12 @@ namespace SonarAnalyzer.Helpers.Facade
                 _ => throw InvalidOperation(node, nameof(ArgumentExpressions))
             };
 
+        public override SyntaxNode AssignmentLeft(SyntaxNode assignment) =>
+            Cast<AssignmentStatementSyntax>(assignment).Left;
+
+        public override SyntaxNode AssignmentRight(SyntaxNode assignment) =>
+            Cast<AssignmentStatementSyntax>(assignment).Right;
+
         public override SyntaxNode BinaryExpressionLeft(SyntaxNode binaryExpression) =>
             Cast<BinaryExpressionSyntax>(binaryExpression).Left;
 

@@ -18,22 +18,17 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System.Collections.Immutable;
-using Microsoft.CodeAnalysis;
 using SonarAnalyzer.Helpers;
 
 namespace SonarAnalyzer.Rules
 {
-    public abstract class NoExceptionsInFinallyBase : SonarDiagnosticAnalyzer
+    public abstract class NoExceptionsInFinallyBase<TSyntaxKind> : SonarDiagnosticAnalyzer<TSyntaxKind>
+        where TSyntaxKind : struct
     {
         protected const string DiagnosticId = "S1163";
-        private const string MessageFormat = "Refactor this code to not throw exceptions in finally blocks.";
 
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(Rule);
+        protected override string MessageFormat => "Refactor this code to not throw exceptions in finally blocks.";
 
-        protected DiagnosticDescriptor Rule { get; }
-
-        protected NoExceptionsInFinallyBase(System.Resources.ResourceManager rspecResources) =>
-            Rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, rspecResources);
+        protected NoExceptionsInFinallyBase() : base(DiagnosticId) { }
     }
 }

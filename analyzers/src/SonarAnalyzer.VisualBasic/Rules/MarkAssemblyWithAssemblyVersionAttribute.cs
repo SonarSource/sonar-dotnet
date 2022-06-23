@@ -20,12 +20,13 @@
 
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Diagnostics;
+using SonarAnalyzer.Helpers;
 
 namespace SonarAnalyzer.Rules.VisualBasic
 {
     [DiagnosticAnalyzer(LanguageNames.VisualBasic)]
     public sealed class MarkAssemblyWithAssemblyVersionAttribute : MarkAssemblyWithAssemblyVersionAttributeBase
     {
-        public MarkAssemblyWithAssemblyVersionAttribute() : base(RspecStrings.ResourceManager) { }
+        protected override ILanguageFacade Language => VisualBasicFacade.Instance;
     }
 }

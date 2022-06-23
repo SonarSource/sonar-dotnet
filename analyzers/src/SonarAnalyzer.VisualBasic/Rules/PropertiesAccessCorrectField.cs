@@ -30,9 +30,9 @@ using SonarAnalyzer.Helpers;
 namespace SonarAnalyzer.Rules.VisualBasic
 {
     [DiagnosticAnalyzer(LanguageNames.VisualBasic)]
-    public sealed class PropertiesAccessCorrectField : PropertiesAccessCorrectFieldBase
+    public sealed class PropertiesAccessCorrectField : PropertiesAccessCorrectFieldBase<SyntaxKind>
     {
-        public PropertiesAccessCorrectField() : base(RspecStrings.ResourceManager) { }
+        protected override ILanguageFacade<SyntaxKind> Language => VisualBasicFacade.Instance;
 
         protected override IEnumerable<FieldData> FindFieldAssignments(IPropertySymbol property, Compilation compilation)
         {

@@ -28,14 +28,15 @@ namespace SonarAnalyzer.Rules
     {
         private readonly DiagnosticDescriptor rule;
 
+        protected abstract ILanguageFacade Language { get; }
         private protected abstract KnownType AttributeToFind { get; }
 
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
 
         protected override bool EnableConcurrentExecution => false;
 
-        protected MarkAssemblyWithAttributeBase(DiagnosticDescriptor rule) =>
-            this.rule = rule;
+        protected MarkAssemblyWithAttributeBase(string diagnosticId, string messageFormat) =>
+            rule = Language.CreateDescriptor(diagnosticId, messageFormat);
 
         protected sealed override void Initialize(SonarAnalysisContext context) =>
             context.RegisterCompilationStartAction(c =>

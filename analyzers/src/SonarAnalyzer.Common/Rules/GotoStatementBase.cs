@@ -18,39 +18,27 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System.Collections.Immutable;
 using Microsoft.CodeAnalysis;
 using SonarAnalyzer.Helpers;
 
 namespace SonarAnalyzer.Rules
 {
-    public abstract class GotoStatementBase<TLanguageKindEnum> : SonarDiagnosticAnalyzer
-        where TLanguageKindEnum : struct
+    public abstract class GotoStatementBase<TSyntaxKind> : SonarDiagnosticAnalyzer<TSyntaxKind>
+        where TSyntaxKind : struct
     {
-        protected const string DiagnosticId = "S907";
-        internal const string MessageFormat = "Remove this use of '{0}'.";
+        private const string DiagnosticId = "S907";
 
-        private readonly DiagnosticDescriptor rule;
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
+        protected override string MessageFormat => $"Remove this use of '{GoToLabel}'.";
 
-        protected abstract GeneratedCodeRecognizer GeneratedCodeRecognizer { get; }
-        protected abstract TLanguageKindEnum[] GotoSyntaxKinds { get; }
+        protected abstract TSyntaxKind[] GotoSyntaxKinds { get; }
         protected abstract string GoToLabel { get; }
 
-        protected GotoStatementBase(System.Resources.ResourceManager rspecResources)
-        {
-            rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, string.Format(MessageFormat, GoToLabel), rspecResources);
-        }
+        protected GotoStatementBase() : base(DiagnosticId) { }
 
-        protected sealed override void Initialize(SonarAnalysisContext context)
-        {
+        protected sealed override void Initialize(SonarAnalysisContext context) =>
             context.RegisterSyntaxNodeActionInNonGenerated(
-               GeneratedCodeRecognizer,
-                c =>
-                {
-                    c.ReportIssue(Diagnostic.Create(rule, c.Node.GetFirstToken().GetLocation()));
-                },
+                Language.GeneratedCodeRecognizer,
+                c => c.ReportIssue(Diagnostic.Create(Rule, c.Node.GetFirstToken().GetLocation())),
                 GotoSyntaxKinds);
-        }
     }
 }

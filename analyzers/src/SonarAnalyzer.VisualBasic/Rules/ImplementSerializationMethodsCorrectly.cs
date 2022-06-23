@@ -32,12 +32,8 @@ namespace SonarAnalyzer.Rules.VisualBasic
         private const string ProblemStatic = "non-shared";
         private const string ProblemReturnVoidText = "a 'Sub' not a 'Function'";
 
-        public ImplementSerializationMethodsCorrectly() : base(RspecStrings.ResourceManager) { }
-
-        protected override GeneratedCodeRecognizer GeneratedCodeRecognizer => VisualBasicGeneratedCodeRecognizer.Instance;
-
+        protected override ILanguageFacade Language => VisualBasicFacade.Instance;
         protected override string MethodStaticMessage => ProblemStatic;
-
         protected override string MethodReturnTypeShouldBeVoidMessage => ProblemReturnVoidText;
 
         protected override Location GetIdentifierLocation(IMethodSymbol methodSymbol) =>
