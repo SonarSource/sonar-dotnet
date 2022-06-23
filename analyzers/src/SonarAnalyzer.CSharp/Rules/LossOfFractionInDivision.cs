@@ -19,11 +19,14 @@
  */
 
 using System.Collections.Immutable;
+using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
+using SonarAnalyzer.Extensions;
 using SonarAnalyzer.Helpers;
+using StyleCop.Analyzers.Lightup;
 
 namespace SonarAnalyzer.Rules.CSharp
 {
@@ -75,13 +78,13 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private static bool TryGetTypeFromArgumentMappedToFloatType(SyntaxNode division, SemanticModel semanticModel, out ITypeSymbol type)
         {
-            if (!(division.Parent is ArgumentSyntax argument))
+            if (division.Parent is not ArgumentSyntax argument)
             {
                 type = null;
                 return false;
             }
 
-            if (!(argument.Parent.Parent is InvocationExpressionSyntax invocation))
+            if (argument.Parent.Parent is not InvocationExpressionSyntax invocation)
             {
                 type = null;
                 return false;
@@ -104,6 +107,28 @@ namespace SonarAnalyzer.Rules.CSharp
             {
                 type = semanticModel.GetTypeInfo(assignment.Left).Type;
                 return type.IsAny(KnownType.NonIntegralNumbers);
+            }
+
+            if (division.Ancestors().Where(x => TupleExpressionSyntaxWrapper.IsInstance(x)).LastOrDefault() != null)
+            {
+                if (division.Ancestors().OfType<AssignmentExpressionSyntax>().FirstOrDefault() is { } assignmentSyntax
+                    && assignmentSyntax.MapAssignmentArguments() is { } assignmentMappings)
+                {
+                    var assignementLeft = assignmentMappings.Where(x => x.Right.Equals(division)).FirstOrDefault().Left;
+                    if (assignementLeft != null)
+                    {
+                        type = semanticModel.GetTypeInfo(assignementLeft).Type;
+                        return type.IsAny(KnownType.NonIntegralNumbers);
+                    }
+                }
+                else if (division.Ancestors().OfType<VariableDeclarationSyntax>().FirstOrDefault() is { } variableDeclaration)
+                {
+                    var tupleArguments = ((TupleExpressionSyntaxWrapper)division.Parent.Parent).AllArguments();
+                    var declarationType = semanticModel.GetTypeInfo(variableDeclaration.Type).Type;
+                    var tupleTypes = (declarationType as INamedTypeSymbol)?.TupleElements().Select(x => x.Type).ToArray();
+                    type = tupleTypes[tupleArguments.IndexOf((ArgumentSyntax)division.Parent)];
+                    return type.IsAny(KnownType.NonIntegralNumbers);
+                }
             }
 
             if (division.Parent.Parent.Parent is VariableDeclarationSyntax variableDecl)
