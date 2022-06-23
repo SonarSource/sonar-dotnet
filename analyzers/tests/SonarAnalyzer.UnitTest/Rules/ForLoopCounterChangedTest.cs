@@ -25,14 +25,16 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class ForLoopCounterChangedTest
     {
+        private readonly VerifierBuilder verifier = new VerifierBuilder<ForLoopCounterChanged>();
+
         [TestMethod]
         public void ForLoopCounterChanged() =>
-            OldVerifier.VerifyAnalyzer(@"TestCases\ForLoopCounterChanged.cs", new ForLoopCounterChanged());
+            verifier.AddPaths("ForLoopCounterChanged.cs").Verify();
 
 #if NET
         [TestMethod]
         public void ForLoopCounterChanged_CSharp10() =>
-            OldVerifier.VerifyAnalyzerFromCSharp10Library(@"TestCases\ForLoopCounterChanged.CSharp10.cs", new ForLoopCounterChanged());
+            verifier.AddPaths("ForLoopCounterChanged.CSharp10.cs").WithOptions(ParseOptionsHelper.FromCSharp10).Verify();
 #endif
     }
 }
