@@ -90,7 +90,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
                         if (symbol != null && loopCounters.Contains(symbol))
                         {
-                            c.ReportIssue(Diagnostic.Create(Rule, affectedExpression.GetLocation(), symbol.Name.ToString()));
+                            c.ReportIssue(Diagnostic.Create(Rule, affectedExpression.GetLocation(), symbol.Name));
                         }
                     }
                 },
@@ -117,8 +117,8 @@ namespace SonarAnalyzer.Rules.CSharp
                 .Select(n => SideEffectExpressions.Single(s => s.Kinds.Any(n.IsKind)).AffectedExpression(n));
 
         private static ISymbol TupleArgumentSymbolMatchingLoopCounter(TupleExpressionSyntaxWrapper expression,
-            IEnumerable<ISymbol> loopCounters,
-            SemanticModel model)
+                                                                      IEnumerable<ISymbol> loopCounters,
+                                                                      SemanticModel model)
         {
             var tupleSymbols = expression.Arguments.Select(x => x.Expression)
                 .OfType<ExpressionSyntax>()
