@@ -31,9 +31,7 @@ namespace SonarAnalyzer.UnitTest.Extensions
         public void AssignmentExpressionSyntaxExtensions_TupleElementsAreExtracted()
         {
             var code = "(var x, var y) = (1, 2);";
-            var syntaxTree = CSharpSyntaxTree.ParseText(WrapInMethod(code));
-            var assigment = syntaxTree.GetRoot().DescendantNodesAndSelf().OfType<AssignmentExpressionSyntax>().Single();
-            var mapping = assigment.MapAssignmentArguments();
+            var mapping = ParseAssignmentExpression(code).MapAssignmentArguments();
             mapping.Should().BeEquivalentTo(new[]
                 {
                     new
@@ -53,9 +51,7 @@ namespace SonarAnalyzer.UnitTest.Extensions
         public void AssignmentExpressionSyntaxExtensions_SimpleAssignmentReturnsSingleElementArray()
         {
             var code = "int x; x = 1;";
-            var syntaxTree = CSharpSyntaxTree.ParseText(WrapInMethod(code));
-            var assigment = syntaxTree.GetRoot().DescendantNodesAndSelf().OfType<AssignmentExpressionSyntax>().Single();
-            var mapping = assigment.MapAssignmentArguments();
+            var mapping = ParseAssignmentExpression(code).MapAssignmentArguments();
             mapping.Should().BeEquivalentTo(new[]
                 {
                     new
@@ -70,9 +66,7 @@ namespace SonarAnalyzer.UnitTest.Extensions
         public void AssignmentExpressionSyntaxExtensions_NestedDeconstruction()
         {
             var code = "(var a, (var b, (var c, var d)), var e) = (1, (2, (3, 4)), 5);";
-            var syntaxTree = CSharpSyntaxTree.ParseText(WrapInMethod(code));
-            var assigment = syntaxTree.GetRoot().DescendantNodesAndSelf().OfType<AssignmentExpressionSyntax>().Single();
-            var mapping = assigment.MapAssignmentArguments();
+            var mapping = ParseAssignmentExpression(code).MapAssignmentArguments();
             mapping.Should().BeEquivalentTo(new[]
                 {
                     new
@@ -107,9 +101,7 @@ namespace SonarAnalyzer.UnitTest.Extensions
         public void AssignmentExpressionSyntaxExtensions_RightSideNotATupleExpression()
         {
             var code = "(var x, var y) = M(); static (int, int) M() => (1, 2);";
-            var syntaxTree = CSharpSyntaxTree.ParseText(WrapInMethod(code));
-            var assigment = syntaxTree.GetRoot().DescendantNodesAndSelf().OfType<AssignmentExpressionSyntax>().Single();
-            var mapping = assigment.MapAssignmentArguments();
+            var mapping = ParseAssignmentExpression(code).MapAssignmentArguments();
             mapping.Should().BeEquivalentTo(new[]
                 {
                     new
@@ -131,9 +123,7 @@ namespace SonarAnalyzer.UnitTest.Extensions
         public void AssignmentExpressionSyntaxExtensions_LeftSideNotATupleExpression()
         {
             var code = "(int, int) tuple; tuple =  (1, 2);";
-            var syntaxTree = CSharpSyntaxTree.ParseText(WrapInMethod(code));
-            var assigment = syntaxTree.GetRoot().DescendantNodesAndSelf().OfType<AssignmentExpressionSyntax>().Single();
-            var mapping = assigment.MapAssignmentArguments();
+            var mapping = ParseAssignmentExpression(code).MapAssignmentArguments();
             mapping.Should().BeEquivalentTo(new[]
                 {
                     new
@@ -155,9 +145,7 @@ namespace SonarAnalyzer.UnitTest.Extensions
         public void AssignmentExpressionSyntaxExtensions_SimpleDeconstructionAssignment()
         {
             var code = "var (x, y) =  (1, 2);";
-            var syntaxTree = CSharpSyntaxTree.ParseText(WrapInMethod(code));
-            var assigment = syntaxTree.GetRoot().DescendantNodesAndSelf().OfType<AssignmentExpressionSyntax>().Single();
-            var mapping = assigment.MapAssignmentArguments();
+            var mapping = ParseAssignmentExpression(code).MapAssignmentArguments();
             mapping.Should().BeEquivalentTo(new[]
                 {
                     new
@@ -177,9 +165,7 @@ namespace SonarAnalyzer.UnitTest.Extensions
         public void AssignmentExpressionSyntaxExtensions_NestedDeconstructionAssignment()
         {
             var code = "var (a, (b, c), d) =  (1, (2, 3), 4);";
-            var syntaxTree = CSharpSyntaxTree.ParseText(WrapInMethod(code));
-            var assigment = syntaxTree.GetRoot().DescendantNodesAndSelf().OfType<AssignmentExpressionSyntax>().Single();
-            var mapping = assigment.MapAssignmentArguments();
+            var mapping = ParseAssignmentExpression(code).MapAssignmentArguments();
             mapping.Should().BeEquivalentTo(new[]
                 {
                     new
@@ -209,9 +195,7 @@ namespace SonarAnalyzer.UnitTest.Extensions
         public void AssignmentExpressionSyntaxExtensions_MisalignedDeconstructionAssignment()
         {
             var code = "var (a, (b, c, d)) =  (1, (2, 3), 4);";
-            var syntaxTree = CSharpSyntaxTree.ParseText(WrapInMethod(code));
-            var assigment = syntaxTree.GetRoot().DescendantNodesAndSelf().OfType<AssignmentExpressionSyntax>().Single();
-            var mapping = assigment.MapAssignmentArguments();
+            var mapping = ParseAssignmentExpression(code).MapAssignmentArguments();
             mapping.Should().BeEquivalentTo(new[]
                 {
                     new
@@ -236,9 +220,7 @@ namespace SonarAnalyzer.UnitTest.Extensions
         public void AssignmentExpressionSyntaxExtensions_MixedAssignment()
         {
             var code = "int a; (a, var b) =  (1, 2);";
-            var syntaxTree = CSharpSyntaxTree.ParseText(WrapInMethod(code));
-            var assigment = syntaxTree.GetRoot().DescendantNodesAndSelf().OfType<AssignmentExpressionSyntax>().Single();
-            var mapping = assigment.MapAssignmentArguments();
+            var mapping = ParseAssignmentExpression(code).MapAssignmentArguments();
             mapping.Should().HaveCount(2);
             mapping[0].Should().BeEquivalentTo(new
             {
@@ -256,9 +238,7 @@ namespace SonarAnalyzer.UnitTest.Extensions
         public void AssignmentExpressionSyntaxExtensions_MisalignedLeft()
         {
             var code = "(var x, var y) = (1, 2, 3);";
-            var syntaxTree = CSharpSyntaxTree.ParseText(WrapInMethod(code));
-            var assigment = syntaxTree.GetRoot().DescendantNodesAndSelf().OfType<AssignmentExpressionSyntax>().Single();
-            var mapping = assigment.MapAssignmentArguments();
+            var mapping = ParseAssignmentExpression(code).MapAssignmentArguments();
             mapping.Should().BeEquivalentTo(new[]
                 {
                     new
@@ -278,9 +258,7 @@ namespace SonarAnalyzer.UnitTest.Extensions
         public void AssignmentExpressionSyntaxExtensions_MisalignedRight()
         {
             var code = "(var x, var y, var z) = (1, 2);";
-            var syntaxTree = CSharpSyntaxTree.ParseText(WrapInMethod(code));
-            var assigment = syntaxTree.GetRoot().DescendantNodesAndSelf().OfType<AssignmentExpressionSyntax>().Single();
-            var mapping = assigment.MapAssignmentArguments();
+            var mapping = ParseAssignmentExpression(code).MapAssignmentArguments();
             mapping.Should().BeEquivalentTo(new[]
                 {
                     new
@@ -300,9 +278,7 @@ namespace SonarAnalyzer.UnitTest.Extensions
         public void AssignmentExpressionSyntaxExtensions_MisalignedNested()
         {
             var code = "(var a, (var b, var c), var d) = (1, (2, 3, 4));";
-            var syntaxTree = CSharpSyntaxTree.ParseText(WrapInMethod(code));
-            var assigment = syntaxTree.GetRoot().DescendantNodesAndSelf().OfType<AssignmentExpressionSyntax>().Single();
-            var mapping = assigment.MapAssignmentArguments();
+            var mapping = ParseAssignmentExpression(code).MapAssignmentArguments();
             mapping.Should().BeEquivalentTo(new[]
                 {
                     new
@@ -329,9 +305,7 @@ namespace SonarAnalyzer.UnitTest.Extensions
             var code = @"int a;
                          M() => 1;
                          ((a), (var b, _), object c, double d, _) = (1, (two: 2, (3)), string.Empty, M(), new object());";
-            var syntaxTree = CSharpSyntaxTree.ParseText(WrapInMethod(code));
-            var assigment = syntaxTree.GetRoot().DescendantNodesAndSelf().OfType<AssignmentExpressionSyntax>().Single();
-            var mapping = assigment.MapAssignmentArguments();
+            var mapping = ParseAssignmentExpression(code).MapAssignmentArguments();
             mapping.Should().HaveCount(6);
             mapping[0].Should().BeEquivalentTo(new
             {
@@ -390,6 +364,13 @@ namespace SonarAnalyzer.UnitTest.Extensions
             var allTargets = assignmentExpression.AssignmentTargets();
             var allTargetsAsString = string.Join(",", allTargets.Select(x => x.ToString()));
             allTargetsAsString.Should().Be(expectedTargets);
+        }
+
+        private static AssignmentExpressionSyntax ParseAssignmentExpression(string code)
+        {
+            var syntaxTree = CSharpSyntaxTree.ParseText(WrapInMethod(code));
+            var assigment = syntaxTree.GetRoot().DescendantNodesAndSelf().OfType<AssignmentExpressionSyntax>().Single();
+            return assigment;
         }
 
         private static string WrapInMethod(string code) =>
