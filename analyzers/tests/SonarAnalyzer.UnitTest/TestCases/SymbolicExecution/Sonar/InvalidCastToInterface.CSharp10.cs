@@ -1,5 +1,7 @@
 ﻿public interface IMyInterface { }
 
+public class SomeImpl : IMyInterface { }
+
 public class MyClass { }
 
 public struct S
@@ -8,6 +10,6 @@ public struct S
     {
         var myclass = new MyClass();
         MyClass a;
-        (a, var b) = (myclass, (IMyInterface)myclass); // FN
+        (a, var b) = (myclass, (IMyInterface)myclass); // Noncompliant
     }
 }
