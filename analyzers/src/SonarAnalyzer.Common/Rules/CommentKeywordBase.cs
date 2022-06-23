@@ -75,7 +75,6 @@ namespace SonarAnalyzer.Rules
                     }
                 });
 
-
         private static IEnumerable<Location> GetKeywordLocations(SyntaxTree tree, SyntaxTrivia comment, string word)
         {
             var text = comment.ToString();
