@@ -62,7 +62,7 @@ namespace SonarAnalyzer.Extensions
             {
                 var left = (ParenthesizedVariableDesignationSyntaxWrapper)leftDesignation;
                 var right = (TupleExpressionSyntaxWrapper)assignment.Right;
-                var arrayBuilder = ImmutableArray.CreateBuilder<AssignmentMapping>(right.Arguments.Count);
+                var arrayBuilder = ImmutableArray.CreateBuilder<AssignmentMapping>(left.Variables.Count);
                 MapDesignationElements(arrayBuilder, left, right);
                 return arrayBuilder.ToImmutableArray();
             }
@@ -73,43 +73,40 @@ namespace SonarAnalyzer.Extensions
 
             static void MapTupleElements(ImmutableArray<AssignmentMapping>.Builder arrayBuilder, TupleExpressionSyntaxWrapper left, TupleExpressionSyntaxWrapper right)
             {
-                var leftEnum = left.Arguments.GetEnumerator();
-                var rightEnum = right.Arguments.GetEnumerator();
-                while (leftEnum.MoveNext() && rightEnum.MoveNext())
+                var leftEnumerator = left.Arguments.GetEnumerator();
+                var rightEnumerator = right.Arguments.GetEnumerator();
+                while (leftEnumerator.MoveNext() && rightEnumerator.MoveNext())
                 {
-                    var leftArg = leftEnum.Current;
-                    var rightArg = rightEnum.Current;
-                    if (leftArg is { Expression: { } leftExpression }
-                        && TupleExpressionSyntaxWrapper.IsInstance(leftExpression)
-                        && rightArg is { Expression: { } rightExpression }
+                    var leftExpression = leftEnumerator.Current.Expression;
+                    var rightExpression = rightEnumerator.Current.Expression;
+                    if (TupleExpressionSyntaxWrapper.IsInstance(leftExpression)
                         && TupleExpressionSyntaxWrapper.IsInstance(rightExpression))
                     {
                         MapTupleElements(arrayBuilder, (TupleExpressionSyntaxWrapper)leftExpression, (TupleExpressionSyntaxWrapper)rightExpression);
                     }
                     else
                     {
-                        arrayBuilder.Add(new AssignmentMapping(leftArg.Expression, rightArg.Expression));
+                        arrayBuilder.Add(new AssignmentMapping(leftExpression, rightExpression));
                     }
                 }
             }
 
             static void MapDesignationElements(ImmutableArray<AssignmentMapping>.Builder arrayBuilder, ParenthesizedVariableDesignationSyntaxWrapper left, TupleExpressionSyntaxWrapper right)
             {
-                var leftEnum = left.Variables.GetEnumerator();
-                var rightEnum = right.Arguments.GetEnumerator();
-                while (leftEnum.MoveNext() && rightEnum.MoveNext())
+                var leftEnumerator = left.Variables.GetEnumerator();
+                var rightEnumerator = right.Arguments.GetEnumerator();
+                while (leftEnumerator.MoveNext() && rightEnumerator.MoveNext())
                 {
-                    var leftVar = leftEnum.Current;
-                    var rightArg = rightEnum.Current;
+                    var leftVar = leftEnumerator.Current;
+                    var rightExpression = rightEnumerator.Current.Expression;
                     if (ParenthesizedVariableDesignationSyntaxWrapper.IsInstance(leftVar)
-                        && rightArg is { Expression: { } rightExpression }
                         && TupleExpressionSyntaxWrapper.IsInstance(rightExpression))
                     {
                         MapDesignationElements(arrayBuilder, (ParenthesizedVariableDesignationSyntaxWrapper)leftVar, (TupleExpressionSyntaxWrapper)rightExpression);
                     }
                     else
                     {
-                        arrayBuilder.Add(new AssignmentMapping(leftVar.SyntaxNode, rightArg.Expression));
+                        arrayBuilder.Add(new AssignmentMapping(leftVar.SyntaxNode, rightExpression));
                     }
                 }
             }
