@@ -35,6 +35,7 @@ namespace SonarAnalyzer.Extensions
         /// Maps the left and the right side arguments of an <paramref name="assignment"/>. If both sides are tuples, the tuple elements are mapped.
         /// <code>
         /// (var x, var y) = (1, 2);                 // [x→1, y→2]
+        /// var (x, y) = (1, 2);                     // [x→1, y→2]
         /// (var x, (var y, var z)) = (1, (2, 3));   // [x→1, y→2, z→3]
         /// var x = 1;                               // [x→1]
         /// (var x, var y) = M();                    // [(x,y)→M()]
