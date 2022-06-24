@@ -33,7 +33,7 @@ namespace SonarAnalyzer.UnitTest.Extensions
         [DataRow("(1, (2, 3), 4)", "1,2,3,4")]
         [DataRow("(1, (2, 3), 4, M())", "1,2,3,4,M()")]
         [DataRow("(1, (2, 3, (4, 5, 6), 7), 8, M())", "1,2,3,4,5,6,7,8,M()")]
-        public void T(string tuple, string expectedArguments)
+        public void TupleExpressionSyntaxExtensions_FlatteningTests(string tuple, string expectedArguments)
         {
             var syntaxTree = CSharpSyntaxTree.ParseText(WrapInMethod(tuple));
             var tupleExpression = (TupleExpressionSyntaxWrapper)syntaxTree.GetRoot().DescendantNodesAndSelf().First(x => TupleExpressionSyntaxWrapper.IsInstance(x));
