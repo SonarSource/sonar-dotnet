@@ -34,7 +34,7 @@ namespace SonarAnalyzer.Extensions
         /// <returns>An <see cref="ImmutableArray"/> of the flattened tuple arguments.</returns>
         public static ImmutableArray<ArgumentSyntax> AllArguments(this TupleExpressionSyntaxWrapper tupleExpression)
         {
-            var builder = ImmutableArray.CreateBuilder<ArgumentSyntax>(initialCapacity: tupleExpression.Arguments.Count);
+            var builder = ImmutableArray.CreateBuilder<ArgumentSyntax>(tupleExpression.Arguments.Count);
             CollectTupleElements(builder, tupleExpression.Arguments);
             return builder.ToImmutableArray();
 
