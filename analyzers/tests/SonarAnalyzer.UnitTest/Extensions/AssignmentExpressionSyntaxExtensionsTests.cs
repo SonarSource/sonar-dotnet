@@ -28,13 +28,14 @@ namespace SonarAnalyzer.UnitTest.Extensions
     public class AssignmentExpressionSyntaxExtensionsTests
     {
         [DataTestMethod]
+        // Normal assignment
         [DataRow("int a; a = 1;", "a")]
-
+        // Deconstruction into tuple
         [DataRow("(var a, var b) = (1, 2);", "var a,var b")]
         [DataRow("(var a, _) = (1, 2);", "var a,_")]
         [DataRow("(var a, (var b, var c), var d) = (1, (2, 3), 4);", "var a,var b,var c,var d")]
         [DataRow("int b; (var a, (b, var c), _) = (1, (2, 3), 4);", "var a,b,var c,_")]
-
+        // Deconstruction into declaration expression designation
         [DataRow("var (a, b) = (1, 2);", "a,b")]
         [DataRow("var (a, _) = (1, 2);", "a")]
         public void AssignmentExpressionSyntaxExtensions_AssignmentTargets_DeconstructTargets(string assignment, string expectedTargets)
