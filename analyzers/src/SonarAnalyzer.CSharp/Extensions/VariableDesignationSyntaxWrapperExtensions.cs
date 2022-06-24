@@ -51,7 +51,7 @@ namespace SonarAnalyzer.Extensions
                 {
                     builder.Add((SingleVariableDesignationSyntaxWrapper)variableDesignation);
                 }
-                // DiscardDesignationSyntaxWrapper.IsInstance(variableDesignation) are excluded
+                // DiscardDesignationSyntaxWrapper.IsInstance(variableDesignation) is ignored
             }
         }
     }

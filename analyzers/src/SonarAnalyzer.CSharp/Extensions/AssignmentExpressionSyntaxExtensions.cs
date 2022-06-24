@@ -39,17 +39,17 @@ namespace SonarAnalyzer.Extensions
             if (TupleExpressionSyntaxWrapper.IsInstance(assignment.Left))
             {
                 var left = (TupleExpressionSyntaxWrapper)assignment.Left;
-                var arguments = left.AllArguments();
-                return arguments.Select(x => (CSharpSyntaxNode)x.Expression).ToImmutableArray();
+                return left.AllArguments().Select(x => (CSharpSyntaxNode)x.Expression).ToImmutableArray();
             }
-            if (DeclarationExpressionSyntaxWrapper.IsInstance(assignment.Left))
+            else if (DeclarationExpressionSyntaxWrapper.IsInstance(assignment.Left))
             {
                 var left = (DeclarationExpressionSyntaxWrapper)assignment.Left;
-                var variables = left.Designation.AllVariables();
-                return variables.Select(x => x.SyntaxNode).ToImmutableArray();
+                return left.Designation.AllVariables().Select(x => x.SyntaxNode).ToImmutableArray();
             }
-
-            return ImmutableArray.Create<CSharpSyntaxNode>(assignment.Left);
+            else
+            {
+                return ImmutableArray.Create<CSharpSyntaxNode>(assignment.Left);
+            }
         }
     }
 }
