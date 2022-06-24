@@ -46,7 +46,7 @@ namespace SonarAnalyzer.UnitTest.Extensions
 $@"
 public class C
 {{
-    public int M()
+    public void M()
     {{
         {code}
     }}
