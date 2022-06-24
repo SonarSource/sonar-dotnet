@@ -94,13 +94,17 @@ namespace SonarAnalyzer.Rules.CSharp
         private static void AnalyzeAssignments(SyntaxNodeAnalysisContext context)
         {
             var assignmentSyntax = (AssignmentExpressionSyntax)context.Node;
+            if (CSharpDebugOnlyCodeHelper.IsCallerInConditionalDebug(assignmentSyntax, context.SemanticModel))
+            {
+                return;
+            }
+
             var assignmentMappings = assignmentSyntax.MapAssignmentArguments();
             foreach (var assignmentMapping in assignmentMappings)
             {
                 if (context.SemanticModel.GetSymbolInfo(assignmentMapping.Left).Symbol is IPropertySymbol propertySymbol
                     && IsLocalizable(propertySymbol)
-                    && IsStringLiteral(assignmentMapping.Right, context.SemanticModel)
-                    && !CSharpDebugOnlyCodeHelper.IsCallerInConditionalDebug(assignmentSyntax, context.SemanticModel))
+                    && IsStringLiteral(assignmentMapping.Right, context.SemanticModel))
                 {
                     context.ReportIssue(Diagnostic.Create(Rule, assignmentMapping.Right.GetLocation()));
                 }
