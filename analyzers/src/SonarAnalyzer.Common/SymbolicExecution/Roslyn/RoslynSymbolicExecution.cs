@@ -43,6 +43,7 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
         private readonly Queue<ExplodedNode> queue = new();
         private readonly HashSet<ExplodedNode> visited = new();
         private readonly RoslynLiveVariableAnalysis lva;
+        private readonly DebugLogger logger = new();
 
         public RoslynSymbolicExecution(ControlFlowGraph cfg, SymbolicCheck[] checks)
         {
@@ -53,6 +54,7 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
             }
             this.checks = new(new[] { new ConstantCheck() }.Concat(checks).ToArray());
             lva = new RoslynLiveVariableAnalysis(cfg);
+            logger.Log(cfg);
         }
 
         public void Execute()
@@ -76,13 +78,16 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
                 var current = queue.Dequeue();
                 if (visited.Add(current) && current.AddVisit() <= MaxOperationVisits)
                 {
+                    logger.Log(current, "Processing");
                     var successors = current.Operation == null ? ProcessBranching(current) : ProcessOperation(current);
                     foreach (var node in successors)
                     {
+                        logger.Log(node, "Enqueuing", true);
                         queue.Enqueue(node);
                     }
                 }
             }
+            logger.Log("Completed");
             checks.ExecutionCompleted();
         }
 
@@ -90,9 +95,10 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
         {
             if (node.Block.Kind == BasicBlockKind.Exit)
             {
+                logger.Log(node.State, "Exit Reached");
                 checks.ExitReached(new(null, node.State));
             }
-            else if (node.Block.Successors.Length == 1 && ThrownException(node, node.Block.Successors.Single().Semantics) is {} exception)
+            else if (node.Block.Successors.Length == 1 && ThrownException(node, node.Block.Successors.Single().Semantics) is { } exception)
             {
                 var successors = ExceptionSuccessors(node, exception).ToArray();
                 foreach (var successor in successors)
@@ -223,9 +229,9 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
         private static ExceptionState ThrownException(ExplodedNode node, ControlFlowBranchSemantics semantics) =>
             semantics switch
             {
-                 ControlFlowBranchSemantics.Throw => ThrowExceptionType(node.Block.BranchValue),
-                 ControlFlowBranchSemantics.Rethrow => node.State.Exception,
-                 _ => null
+                ControlFlowBranchSemantics.Throw => ThrowExceptionType(node.Block.BranchValue),
+                ControlFlowBranchSemantics.Rethrow => node.State.Exception,
+                _ => null
             };
 
         private static ProgramState ProcessOperation(SymbolicContext context) =>
@@ -261,7 +267,7 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
             operation.Instance.Kind switch
             {
                 OperationKindEx.Invocation => ExceptionState.UnknownException,
-                // ToDo: Support other operations like field/property access on non-static non-this, conversions and so on. See docs for list of operations.
+            // ToDo: Support other operations like field/property access on non-static non-this, conversions and so on. See docs for list of operations.
                 _ => null
             };
 
