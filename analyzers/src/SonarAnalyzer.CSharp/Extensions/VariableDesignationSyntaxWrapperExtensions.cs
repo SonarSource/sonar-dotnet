@@ -26,8 +26,9 @@ namespace SonarAnalyzer.Extensions
     public static class VariableDesignationSyntaxWrapperExtensions
     {
         /// <summary>
-        /// Returns all <see cref="SingleVariableDesignationSyntaxWrapper"/> of the designation. Nested designations are flattened. For a designation like <c>(a, (b, c))</c>
-        /// the method returns <c>[a, b, c]</c>. Only identifiers are included in the result and discards are ignored.
+        /// Returns all <see cref="SingleVariableDesignationSyntaxWrapper"/> of the designation. Nested designations are flattened and
+        /// only identifiers are included in the result (discards are skipped). For a designation like <c>(a, (_, b))</c>
+        /// the method returns <c>[a, b]</c>.
         /// </summary>
         /// <param name="variableDesignation">The designation to return the variables for.</param>
         /// <returns>A list of <see cref="SingleVariableDesignationSyntaxWrapper"/> that contain all flattened variables of the designation.</returns>
@@ -51,7 +52,7 @@ namespace SonarAnalyzer.Extensions
                 {
                     builder.Add((SingleVariableDesignationSyntaxWrapper)variableDesignation);
                 }
-                // DiscardDesignationSyntaxWrapper.IsInstance(variableDesignation) is ignored
+                // DiscardDesignationSyntaxWrapper is skipped
             }
         }
     }
