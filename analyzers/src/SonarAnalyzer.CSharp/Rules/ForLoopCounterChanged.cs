@@ -119,17 +119,5 @@ namespace SonarAnalyzer.Rules.CSharp
                 .Where(n => SideEffectExpressions.Any(s => s.Kinds.Any(n.IsKind)))
                 .SelectMany(n => SideEffectExpressions.Single(s => s.Kinds.Any(n.IsKind)).AffectedExpressions(n))
                 .ToArray();
-
-        private static ISymbol[] ComputeSymbols(SyntaxNode[] nodes, SemanticModel model) =>
-            nodes.Select(x => model.GetSymbolInfo(x).Symbol).ToArray();
-        private static ISymbol TupleArgumentSymbolMatchingLoopCounter(TupleExpressionSyntaxWrapper expression,
-                                                                      IEnumerable<ISymbol> loopCounters,
-                                                                      SemanticModel model)
-        {
-            var tupleSymbols = expression.Arguments.Select(x => x.Expression)
-                .OfType<ExpressionSyntax>()
-                .Select(x => model.GetSymbolInfo(x).Symbol).ToArray();
-            return loopCounters.Intersect(tupleSymbols).FirstOrDefault();
-        }
     }
 }
