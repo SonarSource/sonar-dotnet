@@ -13,7 +13,7 @@
 
         for (int i = 0, j = 0; i < 42; i++, j++)
         {
-            (i, j) = (1, 2); // Noncompliant [issue3, issue4]
+            (i, j) = (1, 2); // Noncompliant [issue1, issue2]
         }
 
         // loop variable shadowed in local function:
@@ -24,6 +24,13 @@
                 (i, _) = (1, 2); // Compliant, this "i" is not a loop variable
             }
 
+        }
+
+        // Loop variable shadowed by re-declaration.
+        for (int i = 0; i < 42; i++)
+        {
+            var (i, j) = (1, 2); // FN  - This is a compiler error -  we still check for SonarLint as it analyzes also code with compile errors.
+            _ = (1, 2) is var (i, b); // FN - This is a compiler error -  we still check for SonarLint as it analyzes also code with compile errors. 
         }
 
         for (int i = 0; i < 42; i++)

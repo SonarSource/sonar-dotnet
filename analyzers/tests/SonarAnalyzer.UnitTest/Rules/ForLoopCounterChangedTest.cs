@@ -34,7 +34,10 @@ namespace SonarAnalyzer.UnitTest.Rules
 #if NET
         [TestMethod]
         public void ForLoopCounterChanged_CSharp10() =>
-            verifier.AddPaths("ForLoopCounterChanged.CSharp10.cs").WithOptions(ParseOptionsHelper.FromCSharp10).Verify();
+            verifier.AddPaths("ForLoopCounterChanged.CSharp10.cs")
+            .WithOptions(ParseOptionsHelper.FromCSharp10)
+            .WithErrorBehavior(CompilationErrorBehavior.Ignore)
+            .Verify();
 #endif
     }
 }
