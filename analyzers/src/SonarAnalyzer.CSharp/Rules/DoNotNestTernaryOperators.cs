@@ -41,7 +41,9 @@ namespace SonarAnalyzer.Rules.CSharp
         {
             context.RegisterSyntaxNodeActionInNonGenerated(c =>
                 {
-                    if (c.Node.Ancestors().OfType<ConditionalExpressionSyntax>().Any())
+                    if (c.Node.Ancestors()
+                        .TakeWhile(x => !x.IsAnyKind(SyntaxKind.ParenthesizedLambdaExpression, SyntaxKind.SimpleLambdaExpression))
+                        .OfType<ConditionalExpressionSyntax>().Any())
                     {
                         c.ReportIssue(Diagnostic.Create(rule, c.Node.GetLocation()));
                     }

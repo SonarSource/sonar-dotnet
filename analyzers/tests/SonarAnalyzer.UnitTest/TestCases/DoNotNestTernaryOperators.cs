@@ -24,6 +24,14 @@ namespace Tests.Diagnostics
                 ? "Mrs. "
                 : "Miss ";
 
+            var lambda1 = true // Compliant. Nested in Lambda is valid
+                ? new Func<string>(() => true ? "a" : "b")
+                : new Func<string>(() => true ? "c" : "d");
+
+            var lambda2 = true
+                ? new Func<string, string>(s => true ? "a" : "b")
+                : new Func<string, string>(s => true ? "c" : "d");
+
             return false;
         }
     }
