@@ -36,19 +36,20 @@ namespace SonarAnalyzer.Extensions
         /// <returns>The left side of the assignment. If it is a tuple, the flattened tuple elements are returned.</returns>
         public static ImmutableArray<CSharpSyntaxNode> AssignmentTargets(this AssignmentExpressionSyntax assignment)
         {
-            if (TupleExpressionSyntaxWrapper.IsInstance(assignment.Left))
+            var left = assignment.Left;
+            if (TupleExpressionSyntaxWrapper.IsInstance(left))
             {
-                var left = (TupleExpressionSyntaxWrapper)assignment.Left;
-                return left.AllArguments().Select(x => (CSharpSyntaxNode)x.Expression).ToImmutableArray();
+                var tuple = (TupleExpressionSyntaxWrapper)left;
+                return tuple.AllArguments().Select(x => (CSharpSyntaxNode)x.Expression).ToImmutableArray();
             }
-            else if (DeclarationExpressionSyntaxWrapper.IsInstance(assignment.Left))
+            else if (DeclarationExpressionSyntaxWrapper.IsInstance(left))
             {
-                var left = (DeclarationExpressionSyntaxWrapper)assignment.Left;
-                return left.Designation.AllVariables().Select(x => x.SyntaxNode).ToImmutableArray();
+                var declaration = (DeclarationExpressionSyntaxWrapper)left;
+                return declaration.Designation.AllVariables().Select(x => x.SyntaxNode).ToImmutableArray();
             }
             else
             {
-                return ImmutableArray.Create<CSharpSyntaxNode>(assignment.Left);
+                return ImmutableArray.Create<CSharpSyntaxNode>(left);
             }
         }
     }
