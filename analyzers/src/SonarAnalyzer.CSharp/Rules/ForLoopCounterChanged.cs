@@ -26,6 +26,7 @@ using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
+using SonarAnalyzer.Extensions;
 using SonarAnalyzer.Helpers;
 using StyleCop.Analyzers.Lightup;
 
@@ -60,11 +61,6 @@ namespace SonarAnalyzer.Rules.CSharp
             },
             new SideEffectExpression
             {
-                Kinds = ImmutableArray.Create(SyntaxKindEx.TupleExpression),
-                AffectedExpressions = node => ImmutableArray.Create<SyntaxNode>(((TupleExpressionSyntaxWrapper)node).Arguments.Select(x => x.Expression).ToArray())
-            },
-            new SideEffectExpression
-            {
                 Kinds = ImmutableArray.Create(
                     SyntaxKind.SimpleAssignmentExpression,
                     SyntaxKind.AddAssignmentExpression,
@@ -77,7 +73,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     SyntaxKind.OrAssignmentExpression,
                     SyntaxKind.LeftShiftAssignmentExpression,
                     SyntaxKind.RightShiftAssignmentExpression),
-                AffectedExpressions = node => ImmutableArray.Create<SyntaxNode>(((AssignmentExpressionSyntax)node).Left)
+                AffectedExpressions = node => ((AssignmentExpressionSyntax)node).AssignmentTargets()
             });
 
         protected override void Initialize(SonarAnalysisContext context) =>

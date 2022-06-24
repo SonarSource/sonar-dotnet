@@ -8,7 +8,7 @@
 //           ^
             (_, i) = (1, 2); // Noncompliant {{Do not update the loop counter 'i' within the loop body.}}
             (_, (_, i, _)) = (1, (2, 3, 4)); // Noncompliant {{Do not update the loop counter 'i' within the loop body.}}
-            (i, j) = (i, 2); // Noncompliant [issue1, issue2] FP
+            (i, j) = (i, 2); // Noncompliant FP
         }
 
         for (int i = 0, j = 0; i < 42; i++, j++)
