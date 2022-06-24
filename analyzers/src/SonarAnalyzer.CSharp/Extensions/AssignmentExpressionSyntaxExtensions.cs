@@ -30,11 +30,11 @@ namespace SonarAnalyzer.Extensions
     {
         /// <summary>
         /// Returns a list of nodes, that represent the target (left side) of an assignment. In case of tuple deconstructions, this can be more than one target.
-        /// Nested tuple elements are expanded so for <c>(a, (b, c))</c> the list <c>[a, b, c]</c> is returned.
+        /// Nested tuple elements are flattened so for <c>(a, (b, c))</c> the list <c>[a, b, c]</c> is returned.
         /// </summary>
-        /// <param name="assignment">The assignment expression</param>
-        /// <returns>The left side of the assignment. If it is a tuple, the tuple flattened elements are returned.</returns>
-        public static ImmutableArray<CSharpSyntaxNode> AssignmentTargets(AssignmentExpressionSyntax assignment)
+        /// <param name="assignment">The assignment expression.</param>
+        /// <returns>The left side of the assignment. If it is a tuple, the flattened tuple elements are returned.</returns>
+        public static ImmutableArray<CSharpSyntaxNode> AssignmentTargets(this AssignmentExpressionSyntax assignment)
         {
             if (TupleExpressionSyntaxWrapper.IsInstance(assignment.Left))
             {
