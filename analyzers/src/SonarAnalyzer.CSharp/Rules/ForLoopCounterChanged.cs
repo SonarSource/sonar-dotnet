@@ -87,7 +87,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     var forNode = (ForStatementSyntax)c.Node;
                     var loopCounters = LoopCounters(forNode, c.SemanticModel).ToList();
 
-                    foreach (var affectedExpression in AffectedExpressions(forNode.Statement))
+                    foreach (var affectedExpression in ComputeAffectedExpressions(forNode.Statement))
                     {
                         var symbol = c.SemanticModel.GetSymbolInfo(affectedExpression).Symbol;
 
@@ -114,7 +114,7 @@ namespace SonarAnalyzer.Rules.CSharp
             return declaredVariables.Union(initializedVariables);
         }
 
-        private static SyntaxNode[] AffectedExpressions(SyntaxNode node) =>
+        private static SyntaxNode[] ComputeAffectedExpressions(SyntaxNode node) =>
             node.DescendantNodesAndSelf()
                 .Where(n => SideEffectExpressions.Any(s => s.Kinds.Any(n.IsKind)))
                 .SelectMany(n => SideEffectExpressions.Single(s => s.Kinds.Any(n.IsKind)).AffectedExpressions(n))
