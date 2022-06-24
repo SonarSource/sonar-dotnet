@@ -44,19 +44,24 @@ namespace SonarAnalyzer.Rules.CSharp
         private sealed class SideEffectExpression
         {
             public IImmutableList<SyntaxKind> Kinds { get; set; }
-            public Func<SyntaxNode, SyntaxNode> AffectedExpression { get; set; }
+            public Func<SyntaxNode, ImmutableArray<SyntaxNode>> AffectedExpressions { get; set; }
         }
 
         private static readonly IImmutableList<SideEffectExpression> SideEffectExpressions = ImmutableArray.Create(
             new SideEffectExpression
             {
                 Kinds = ImmutableArray.Create(SyntaxKind.PreIncrementExpression, SyntaxKind.PreDecrementExpression),
-                AffectedExpression = node => ((PrefixUnaryExpressionSyntax)node).Operand
+                AffectedExpressions = node => ImmutableArray.Create<SyntaxNode>(((PrefixUnaryExpressionSyntax)node).Operand)
             },
             new SideEffectExpression
             {
                 Kinds = ImmutableArray.Create(SyntaxKind.PostIncrementExpression, SyntaxKind.PostDecrementExpression),
-                AffectedExpression = node => ((PostfixUnaryExpressionSyntax)node).Operand
+                AffectedExpressions = node => ImmutableArray.Create<SyntaxNode>(((PostfixUnaryExpressionSyntax)node).Operand)
+            },
+            new SideEffectExpression
+            {
+                Kinds = ImmutableArray.Create(SyntaxKindEx.TupleExpression),
+                AffectedExpressions = node => ImmutableArray.Create<SyntaxNode>(((TupleExpressionSyntaxWrapper)node).Arguments.Select(x => x.Expression).ToArray())
             },
             new SideEffectExpression
             {
@@ -72,7 +77,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     SyntaxKind.OrAssignmentExpression,
                     SyntaxKind.LeftShiftAssignmentExpression,
                     SyntaxKind.RightShiftAssignmentExpression),
-                AffectedExpression = node => ((AssignmentExpressionSyntax)node).Left
+                AffectedExpressions = node => ImmutableArray.Create<SyntaxNode>(((AssignmentExpressionSyntax)node).Left)
             });
 
         protected override void Initialize(SonarAnalysisContext context) =>
@@ -84,9 +89,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
                     foreach (var affectedExpression in AffectedExpressions(forNode.Statement))
                     {
-                        var symbol = TupleExpressionSyntaxWrapper.IsInstance(affectedExpression)
-                            ? TupleArgumentSymbolMatchingLoopCounter((TupleExpressionSyntaxWrapper)affectedExpression, loopCounters, c.SemanticModel)
-                            : c.SemanticModel.GetSymbolInfo(affectedExpression).Symbol;
+                        var symbol = c.SemanticModel.GetSymbolInfo(affectedExpression).Symbol;
 
                         if (symbol != null && loopCounters.Contains(symbol))
                         {
@@ -111,11 +114,14 @@ namespace SonarAnalyzer.Rules.CSharp
             return declaredVariables.Union(initializedVariables);
         }
 
-        private static IEnumerable<SyntaxNode> AffectedExpressions(SyntaxNode node) =>
+        private static SyntaxNode[] AffectedExpressions(SyntaxNode node) =>
             node.DescendantNodesAndSelf()
                 .Where(n => SideEffectExpressions.Any(s => s.Kinds.Any(n.IsKind)))
-                .Select(n => SideEffectExpressions.Single(s => s.Kinds.Any(n.IsKind)).AffectedExpression(n));
+                .SelectMany(n => SideEffectExpressions.Single(s => s.Kinds.Any(n.IsKind)).AffectedExpressions(n))
+                .ToArray();
 
+        private static ISymbol[] ComputeSymbols(SyntaxNode[] nodes, SemanticModel model) =>
+            nodes.Select(x => model.GetSymbolInfo(x).Symbol).ToArray();
         private static ISymbol TupleArgumentSymbolMatchingLoopCounter(TupleExpressionSyntaxWrapper expression,
                                                                       IEnumerable<ISymbol> loopCounters,
                                                                       SemanticModel model)
