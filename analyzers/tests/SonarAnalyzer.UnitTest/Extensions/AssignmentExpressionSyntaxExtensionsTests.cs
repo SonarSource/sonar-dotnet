@@ -28,7 +28,7 @@ namespace SonarAnalyzer.UnitTest.Extensions
     public class AssignmentExpressionSyntaxExtensionsTests
     {
         [TestMethod]
-        public void AssignmentExpressionSyntaxExtensions_TupleElementsAreExtracted()
+        public void AssignmentExpressionSyntaxExtensions_MapAssignmentArguments_TupleElementsAreExtracted()
         {
             var code = "(var x, var y) = (1, 2);";
             var mapping = ParseAssignmentExpression(code).MapAssignmentArguments();
@@ -48,7 +48,7 @@ namespace SonarAnalyzer.UnitTest.Extensions
         }
 
         [TestMethod]
-        public void AssignmentExpressionSyntaxExtensions_SimpleAssignmentReturnsSingleElementArray()
+        public void AssignmentExpressionSyntaxExtensions_MapAssignmentArguments_SimpleAssignmentReturnsSingleElementArray()
         {
             var code = "int x; x = 1;";
             var mapping = ParseAssignmentExpression(code).MapAssignmentArguments();
@@ -63,7 +63,7 @@ namespace SonarAnalyzer.UnitTest.Extensions
         }
 
         [TestMethod]
-        public void AssignmentExpressionSyntaxExtensions_NestedDeconstruction()
+        public void AssignmentExpressionSyntaxExtensions_MapAssignmentArguments_NestedDeconstruction()
         {
             var code = "(var a, (var b, (var c, var d)), var e) = (1, (2, (3, 4)), 5);";
             var mapping = ParseAssignmentExpression(code).MapAssignmentArguments();
@@ -98,7 +98,7 @@ namespace SonarAnalyzer.UnitTest.Extensions
         }
 
         [TestMethod]
-        public void AssignmentExpressionSyntaxExtensions_RightSideNotATupleExpression()
+        public void AssignmentExpressionSyntaxExtensions_MapAssignmentArguments_RightSideNotATupleExpression()
         {
             var code = "(var x, var y) = M(); static (int, int) M() => (1, 2);";
             var mapping = ParseAssignmentExpression(code).MapAssignmentArguments();
@@ -120,7 +120,7 @@ namespace SonarAnalyzer.UnitTest.Extensions
         }
 
         [TestMethod]
-        public void AssignmentExpressionSyntaxExtensions_LeftSideNotATupleExpression()
+        public void AssignmentExpressionSyntaxExtensions_MapAssignmentArguments_LeftSideNotATupleExpression()
         {
             var code = "(int, int) tuple; tuple =  (1, 2);";
             var mapping = ParseAssignmentExpression(code).MapAssignmentArguments();
@@ -142,7 +142,7 @@ namespace SonarAnalyzer.UnitTest.Extensions
         }
 
         [TestMethod]
-        public void AssignmentExpressionSyntaxExtensions_SimpleDeconstructionAssignment()
+        public void AssignmentExpressionSyntaxExtensions_MapAssignmentArguments_SimpleDeconstructionAssignment()
         {
             var code = "var (x, y) =  (1, 2);";
             var mapping = ParseAssignmentExpression(code).MapAssignmentArguments();
@@ -162,7 +162,7 @@ namespace SonarAnalyzer.UnitTest.Extensions
         }
 
         [TestMethod]
-        public void AssignmentExpressionSyntaxExtensions_NestedDeconstructionAssignment()
+        public void AssignmentExpressionSyntaxExtensions_MapAssignmentArguments_NestedDeconstructionAssignment()
         {
             var code = "var (a, (b, c), d) =  (1, (2, 3), 4);";
             var mapping = ParseAssignmentExpression(code).MapAssignmentArguments();
@@ -192,7 +192,7 @@ namespace SonarAnalyzer.UnitTest.Extensions
         }
 
         [TestMethod]
-        public void AssignmentExpressionSyntaxExtensions_MisalignedDeconstructionAssignment()
+        public void AssignmentExpressionSyntaxExtensions_MapAssignmentArguments_MisalignedDeconstructionAssignment()
         {
             var code = "var (a, (b, c, d)) =  (1, (2, 3), 4);";
             var mapping = ParseAssignmentExpression(code).MapAssignmentArguments();
@@ -207,7 +207,7 @@ namespace SonarAnalyzer.UnitTest.Extensions
         }
 
         [TestMethod]
-        public void AssignmentExpressionSyntaxExtensions_MisalignedDeconstructionAssignmentInNestedTuple()
+        public void AssignmentExpressionSyntaxExtensions_MapAssignmentArguments_MisalignedDeconstructionAssignmentInNestedTuple()
         {
             var code = "var (a, (b, c, d)) =  (1, (2, 3));";
             var mapping = ParseAssignmentExpression(code).MapAssignmentArguments();
@@ -224,7 +224,7 @@ namespace SonarAnalyzer.UnitTest.Extensions
         }
 
         [TestMethod]
-        public void AssignmentExpressionSyntaxExtensions_MixedAssignment()
+        public void AssignmentExpressionSyntaxExtensions_MapAssignmentArguments_MixedAssignment()
         {
             var code = "int a; (a, var b) =  (1, 2);";
             var mapping = ParseAssignmentExpression(code).MapAssignmentArguments();
@@ -242,7 +242,7 @@ namespace SonarAnalyzer.UnitTest.Extensions
         }
 
         [TestMethod]
-        public void AssignmentExpressionSyntaxExtensions_MisalignedLeft()
+        public void AssignmentExpressionSyntaxExtensions_MapAssignmentArguments_MisalignedLeft()
         {
             var code = "(var x, var y) = (1, 2, 3);";
             var mapping = ParseAssignmentExpression(code).MapAssignmentArguments();
@@ -272,7 +272,7 @@ namespace SonarAnalyzer.UnitTest.Extensions
         }
 
         [TestMethod]
-        public void AssignmentExpressionSyntaxExtensions_MisalignedRight()
+        public void AssignmentExpressionSyntaxExtensions_MapAssignmentArguments_MisalignedRight()
         {
             var code = "(var x, var y, var z) = (1, 2);";
             var mapping = ParseAssignmentExpression(code).MapAssignmentArguments();
@@ -302,7 +302,7 @@ namespace SonarAnalyzer.UnitTest.Extensions
         }
 
         [TestMethod]
-        public void AssignmentExpressionSyntaxExtensions_MisalignedNested1()
+        public void AssignmentExpressionSyntaxExtensions_MapAssignmentArguments_MisalignedNested1()
         {
             var code = "(var a, (var b, var c)) = (1, (2, 3, 4));";
             var mapping = ParseAssignmentExpression(code).MapAssignmentArguments();
@@ -319,7 +319,7 @@ namespace SonarAnalyzer.UnitTest.Extensions
         }
 
         [TestMethod]
-        public void AssignmentExpressionSyntaxExtensions_MisalignedNested2()
+        public void AssignmentExpressionSyntaxExtensions_MapAssignmentArguments_MisalignedNested2()
         {
             var code = "(var a, (var b, var c), var d) = (1, (2, 3, 4));";
             var mapping = ParseAssignmentExpression(code).MapAssignmentArguments();
@@ -334,7 +334,7 @@ namespace SonarAnalyzer.UnitTest.Extensions
         }
 
         [TestMethod]
-        public void AssignmentExpressionSyntaxExtensions_DifferentConventions()
+        public void AssignmentExpressionSyntaxExtensions_MapAssignmentArguments_DifferentConventions()
         {
             var code = @"int a;
                          M() => 1;
@@ -393,9 +393,7 @@ namespace SonarAnalyzer.UnitTest.Extensions
         [DataRow("var (_, _) = (1, 2);", "")]
         public void AssignmentExpressionSyntaxExtensions_AssignmentTargets_DeconstructTargets(string assignment, string expectedTargets)
         {
-            var syntaxTree = CSharpSyntaxTree.ParseText(WrapInMethod(assignment));
-            var assignmentExpression = syntaxTree.GetRoot().DescendantNodesAndSelf().OfType<AssignmentExpressionSyntax>().First();
-            var allTargets = assignmentExpression.AssignmentTargets();
+            var allTargets = ParseAssignmentExpression(assignment).AssignmentTargets();
             var allTargetsAsString = string.Join(",", allTargets.Select(x => x.ToString()));
             allTargetsAsString.Should().Be(expectedTargets);
         }
