@@ -12,7 +12,7 @@ public struct S
 
         (Property, Property) = ("a", "B");  // Noncompliant [issue1, issue2]
 
-        (this.Property, b) = ("a", "B");    // Noncompliant6
+        (this.Property, b) = ("a", "B");    // Noncompliant
 
         var s = new S();
         (s.Property, b) = ("a", "B");       // Noncompliant
