@@ -42,6 +42,12 @@ namespace SonarAnalyzer.Extensions
                 var arguments = left.AllArguments();
                 return arguments.Select(x => (CSharpSyntaxNode)x.Expression).ToImmutableArray();
             }
+            if (DeclarationExpressionSyntaxWrapper.IsInstance(assignment.Left))
+            {
+                var left = (DeclarationExpressionSyntaxWrapper)assignment.Left;
+                var variables = left.Designation.AllVariables();
+                return variables.Select(x => x.SyntaxNode).ToImmutableArray();
+            }
 
             return ImmutableArray.Create<CSharpSyntaxNode>(assignment.Left);
         }
