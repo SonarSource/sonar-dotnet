@@ -122,7 +122,7 @@ namespace SonarAnalyzer.UnitTest.Extensions
         [TestMethod]
         public void MapAssignmentArguments_LeftSideNotATupleExpression()
         {
-            var code = "(int, int) tuple; tuple =  (1, 2);";
+            var code = "(int, int) tuple; tuple = (1, 2);";
             var mapping = ParseAssignmentExpression(code).MapAssignmentArguments();
             mapping.Should().BeEquivalentTo(new[]
                 {
