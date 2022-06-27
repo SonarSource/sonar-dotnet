@@ -32,21 +32,24 @@ namespace SonarAnalyzer.Rules.VisualBasic
     public sealed class DoNotNestTernaryOperators : DoNotNestTernaryOperatorsBase
     {
         private const string MessageFormat = "Extract this nested If operator into independent If...Then...Else statements.";
-        private static readonly DiagnosticDescriptor rule =
-            DescriptorFactory.Create(DiagnosticId, MessageFormat);
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
+        private static readonly DiagnosticDescriptor Rule = DescriptorFactory.Create(DiagnosticId, MessageFormat);
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(Rule);
 
-        protected override void Initialize(SonarAnalysisContext context)
-        {
-            context.RegisterSyntaxNodeActionInNonGenerated(
-                c =>
+        protected override void Initialize(SonarAnalysisContext context) =>
+            context.RegisterSyntaxNodeActionInNonGenerated(c =>
                 {
-                    if (c.Node.Ancestors().OfType<TernaryConditionalExpressionSyntax>().Any())
+                    if (c.Node.Ancestors()
+                        .TakeWhile(x => !x.IsAnyKind(
+                            SyntaxKind.MultiLineFunctionLambdaExpression,
+                            SyntaxKind.SingleLineFunctionLambdaExpression,
+                            SyntaxKind.MultiLineSubLambdaExpression,
+                            SyntaxKind.SingleLineSubLambdaExpression))
+                        .OfType<TernaryConditionalExpressionSyntax>()
+                        .Any())
                     {
-                        c.ReportIssue(Diagnostic.Create(rule, c.Node.GetLocation()));
+                        c.ReportIssue(Diagnostic.Create(Rule, c.Node.GetLocation()));
                     }
                 },
                 SyntaxKind.TernaryConditionalExpression);
-        }
     }
 }
