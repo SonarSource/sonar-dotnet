@@ -43,8 +43,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
         protected override void Initialize(SonarAnalysisContext context)
         {
-            context.RegisterSyntaxNodeActionInNonGenerated(
-                c =>
+            context.RegisterSyntaxNodeActionInNonGenerated(c =>
                 {
                     var declaration = (ForEachStatementSyntax)c.Node;
 
@@ -60,29 +59,21 @@ namespace SonarAnalyzer.Rules.CSharp
                 },
                 SyntaxKind.ForEachStatement);
 
-            context.RegisterSyntaxNodeActionInNonGenerated(
-                c => ProcessStatementWithVariableDeclaration(c, (LocalDeclarationStatementSyntax)c.Node, s => s.Declaration), SyntaxKind.LocalDeclarationStatement);
+            context.RegisterSyntaxNodeActionInNonGenerated(c => ProcessVariableDeclaration(c, ((LocalDeclarationStatementSyntax)c.Node).Declaration), SyntaxKind.LocalDeclarationStatement);
 
-            context.RegisterSyntaxNodeActionInNonGenerated(
-                c => ProcessStatementWithVariableDeclaration(c, (ForStatementSyntax)c.Node, s => s.Declaration), SyntaxKind.ForStatement);
+            context.RegisterSyntaxNodeActionInNonGenerated(c => ProcessVariableDeclaration(c, ((ForStatementSyntax)c.Node).Declaration), SyntaxKind.ForStatement);
 
-            context.RegisterSyntaxNodeActionInNonGenerated(
-                c => ProcessStatementWithVariableDeclaration(c, (UsingStatementSyntax)c.Node, s => s.Declaration), SyntaxKind.UsingStatement);
+            context.RegisterSyntaxNodeActionInNonGenerated(c => ProcessVariableDeclaration(c, ((UsingStatementSyntax)c.Node).Declaration), SyntaxKind.UsingStatement);
 
-            context.RegisterSyntaxNodeActionInNonGenerated(
-                c => ProcessStatementWithVariableDeclaration(c, (FixedStatementSyntax)c.Node, s => s.Declaration), SyntaxKind.FixedStatement);
+            context.RegisterSyntaxNodeActionInNonGenerated(c => ProcessVariableDeclaration(c, ((FixedStatementSyntax)c.Node).Declaration), SyntaxKind.FixedStatement);
 
-            context.RegisterSyntaxNodeActionInNonGenerated(
-                c => ProcessStatementWithVariableDesignation(c, (DeclarationPatternSyntaxWrapper)c.Node, s => s.Designation), SyntaxKindEx.DeclarationPattern);
+            context.RegisterSyntaxNodeActionInNonGenerated(c => ProcessVariableDesignation(c, ((DeclarationPatternSyntaxWrapper)c.Node).Designation), SyntaxKindEx.DeclarationPattern);
 
-            context.RegisterSyntaxNodeActionInNonGenerated(
-                c => ProcessStatementWithVariableDesignation(c, (DeclarationExpressionSyntaxWrapper)c.Node, s => s.Designation), SyntaxKindEx.DeclarationExpression);
+            context.RegisterSyntaxNodeActionInNonGenerated(c => ProcessVariableDesignation(c, ((DeclarationExpressionSyntaxWrapper)c.Node).Designation), SyntaxKindEx.DeclarationExpression);
         }
 
-        private static void ProcessStatementWithVariableDesignation<T>(SyntaxNodeAnalysisContext context, T declaration, Func<T, VariableDesignationSyntaxWrapper> variableSelector)
+        private static void ProcessVariableDesignation(SyntaxNodeAnalysisContext context, VariableDesignationSyntaxWrapper variableDesignation)
         {
-            var variableDesignation = variableSelector(declaration);
-
             ProcessSingleVariableDesignation(variableDesignation, context, null);
             if (ParenthesizedVariableDesignationSyntaxWrapper.IsInstance(variableDesignation)
                 && ((ParenthesizedVariableDesignationSyntaxWrapper)variableDesignation) is var parenthesizedVariables)
@@ -112,9 +103,8 @@ namespace SonarAnalyzer.Rules.CSharp
             return members;
         }
 
-        private static void ProcessStatementWithVariableDeclaration<T>(SyntaxNodeAnalysisContext context, T declaration, Func<T, VariableDeclarationSyntax> variableSelector)
+        private static void ProcessVariableDeclaration(SyntaxNodeAnalysisContext context, VariableDeclarationSyntax variableDeclaration)
         {
-            var variableDeclaration = variableSelector(declaration);
             if (variableDeclaration == null)
             {
                 return;
