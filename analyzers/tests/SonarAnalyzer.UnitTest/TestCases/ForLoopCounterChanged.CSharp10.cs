@@ -36,6 +36,7 @@
         for (var i = (a: 1, b: 2); i is (a: < 10, _); i = (++i.a, ++i.b))
         {
             i = (1, 1); // Noncompliant
+            i.a = 1;    // FN
         }
 
         for (int i = 0; i < 42; i++)
