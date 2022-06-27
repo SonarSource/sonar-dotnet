@@ -20,6 +20,7 @@
 
 using System.Collections.Immutable;
 using System.Linq;
+using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using StyleCop.Analyzers.Lightup;
@@ -28,7 +29,7 @@ namespace SonarAnalyzer.Extensions
 {
     internal static class AssignmentExpressionSyntaxExtensions
     {
-        public readonly record struct AssignmentMapping(CSharpSyntaxNode Left, ExpressionSyntax Right);
+        public readonly record struct AssignmentMapping(SyntaxNode Left, SyntaxNode Right);
 
         /// <summary>
         /// Maps the left and the right side arguments of an <paramref name="assignment"/>. If both sides are tuples, the tuple elements are mapped.
