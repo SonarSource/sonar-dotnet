@@ -43,24 +43,24 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private sealed class SideEffectExpression
         {
-            public IImmutableList<SyntaxKind> Kinds { get; set; }
+            public ImmutableHashSet<SyntaxKind> Kinds { get; set; }
             public Func<SyntaxNode, ImmutableArray<SyntaxNode>> AffectedExpressions { get; set; }
         }
 
         private static readonly IImmutableList<SideEffectExpression> SideEffectExpressions = ImmutableArray.Create(
             new SideEffectExpression
             {
-                Kinds = ImmutableArray.Create(SyntaxKind.PreIncrementExpression, SyntaxKind.PreDecrementExpression),
+                Kinds = ImmutableHashSet.Create(SyntaxKind.PreIncrementExpression, SyntaxKind.PreDecrementExpression),
                 AffectedExpressions = node => ImmutableArray.Create<SyntaxNode>(((PrefixUnaryExpressionSyntax)node).Operand)
             },
             new SideEffectExpression
             {
-                Kinds = ImmutableArray.Create(SyntaxKind.PostIncrementExpression, SyntaxKind.PostDecrementExpression),
+                Kinds = ImmutableHashSet.Create(SyntaxKind.PostIncrementExpression, SyntaxKind.PostDecrementExpression),
                 AffectedExpressions = node => ImmutableArray.Create<SyntaxNode>(((PostfixUnaryExpressionSyntax)node).Operand)
             },
             new SideEffectExpression
             {
-                Kinds = ImmutableArray.Create(
+                Kinds = ImmutableHashSet.Create(
                     SyntaxKind.SimpleAssignmentExpression,
                     SyntaxKind.AddAssignmentExpression,
                     SyntaxKind.SubtractAssignmentExpression,
@@ -112,7 +112,7 @@ namespace SonarAnalyzer.Rules.CSharp
         private static SyntaxNode[] ComputeAffectedExpressions(SyntaxNode node) =>
             (from descendantNode in node.DescendantNodesAndSelf()
              from sideEffect in SideEffectExpressions
-             where descendantNode.IsAnyKind(sideEffect.Kinds.ToImmutableHashSet())
+             where descendantNode.IsAnyKind(sideEffect.Kinds)
              from expression in sideEffect.AffectedExpressions(descendantNode)
              select expression).ToArray();
     }
