@@ -28,10 +28,10 @@ namespace SonarAnalyzer.UnitTest.TestFramework.SymbolicExecution
     {
         public readonly ValidatorTestCheck Validator;
 
-        public SETestContext(string code, AnalyzerLanguage language, SymbolicCheck[] additionalChecks, string localFunctionName = null)
+        public SETestContext(string code, AnalyzerLanguage language, SymbolicCheck[] additionalChecks, string localFunctionName = null, OutputKind outputKind = OutputKind.DynamicallyLinkedLibrary)
         {
             const string Separator = "----------";
-            var cfg = TestHelper.CompileCfg(code, language, false, localFunctionName);
+            var cfg = TestHelper.CompileCfg(code, language, false, localFunctionName, outputKind: outputKind);
             Validator = new ValidatorTestCheck(cfg);
             var se = new RoslynSymbolicExecution(cfg, additionalChecks.Concat(new[] { Validator }).ToArray());
             Console.WriteLine(Separator);

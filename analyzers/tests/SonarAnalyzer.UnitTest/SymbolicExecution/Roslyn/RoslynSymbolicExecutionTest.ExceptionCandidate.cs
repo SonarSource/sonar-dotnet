@@ -18,6 +18,8 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using SonarAnalyzer.Common;
+using SonarAnalyzer.SymbolicExecution.Roslyn;
 using SonarAnalyzer.UnitTest.TestFramework.SymbolicExecution;
 using StyleCop.Analyzers.Lightup;
 
@@ -544,6 +546,30 @@ tag = ""AfterCatch"";";
             validator.ValidateContainsOperation(OperationKindEx.MethodReference);
             validator.ValidateTagOrder("BeforeTry", "InTry", "AfterCatch");
             validator.ExitStates.Should().HaveCount(1).And.ContainSingle(x => HasNoException(x));
+        }
+
+        [TestMethod]
+        public void ExceptionCandidate_End()
+        {
+            const string code = @"
+Module Program
+    Sub Main(args As String())
+        Dim tag = ""BeforeTry""
+        Try
+            tag = ""InTry""
+            END
+        Catch
+            tag = ""InCatch""
+        End Try
+        tag = ""AfterCatch""
+    End Sub
+End Module";
+
+            var validator = new SETestContext(code, AnalyzerLanguage.VisualBasic, additionalChecks: Array.Empty<SymbolicCheck>(), outputKind: OutputKind.ConsoleApplication).Validator;
+
+            // End operation is not part of the CFG
+            validator.ValidateTagOrder("BeforeTry", "InTry");
+            validator.ExitStates.Should().HaveCount(0);
         }
     }
 }
