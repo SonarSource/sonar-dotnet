@@ -184,8 +184,44 @@ namespace SonarAnalyzer.UnitTest.Extensions
                 {
                     new
                     {
-                        Left = new { Designation = new { Variables = new { Count = 2 } } },
-                        Right = new { Arguments = new { Count = 3 } },
+                        Left = new
+                        {
+                            Designation = new
+                            {
+                                Variables = new object[]
+                                {
+                                    WithIdentifier("a"),
+                                    new
+                                    {
+                                        Variables = new[]
+                                        {
+                                            WithIdentifier("b"),
+                                            WithIdentifier("c"),
+                                            WithIdentifier("d"),
+                                        }
+                                    },
+                                },
+                            },
+                        },
+                        Right = new
+                        {
+                            Arguments = new object[]
+                            {
+                                new { Expression = WithToken("1") },
+                                new
+                                {
+                                    Expression = new
+                                    {
+                                        Arguments = new object[]
+                                        {
+                                            new { Expression = WithToken("2") },
+                                            new { Expression = WithToken("3") },
+                                        },
+                                    },
+                                },
+                                new { Expression = WithToken("4") },
+                            }
+                        },
                     },
                 });
         }
@@ -315,18 +351,49 @@ namespace SonarAnalyzer.UnitTest.Extensions
         [TestMethod]
         public void MapAssignmentArguments_MisalignedNested1()
         {
-            var code = "(var a, (var b, var c)) = (1, (2, 3, 4));";
-            var mapping = ParseAssignmentExpression(code).MapAssignmentArguments();
-            mapping.Should().BeEquivalentTo(new[]
+            AssertMapAssignmentArguments("(var a, (var b, var c)) = (1, (2, 3, 4));", new[]
                 {
                     new
                     {
-                        Left = new { Arguments = new { Count = 2 } },
-                        Right = new { Arguments = new { Count = 2 } },
+                        Left = new
+                        {
+                            Arguments = new object[]
+                            {
+                                new { Expression = WithDesignation("a") },
+                                new
+                                {
+                                    Expression = new
+                                    {
+                                        Arguments = new[]
+                                        {
+                                            new { Expression = WithDesignation("b") },
+                                            new { Expression = WithDesignation("c") },
+                                        }
+                                    }
+                                }
+                            }
+                        },
+                        Right = new
+                        {
+                            Arguments = new object[]
+                            {
+                                new { Expression = WithToken("1") },
+                                new
+                                {
+                                    Expression = new
+                                    {
+                                        Arguments = new[]
+                                        {
+                                            new { Expression = WithToken("2") },
+                                            new { Expression = WithToken("3") },
+                                            new { Expression = WithToken("4") },
+                                        }
+                                    }
+                                }
+                            }
+                        },
                     },
                 });
-            mapping[0].Left.ToString().Should().Be("(var a, (var b, var c))");
-            mapping[0].Right.ToString().Should().Be("(1, (2, 3, 4))");
         }
 
         [TestMethod]
@@ -336,8 +403,44 @@ namespace SonarAnalyzer.UnitTest.Extensions
                 {
                     new
                     {
-                        Left = new { Arguments = new { Count = 3 } },
-                        Right = new { Arguments = new { Count = 2 } },
+                        Left = new
+                        {
+                            Arguments = new object[]
+                            {
+                                new { Expression = WithDesignation("a") },
+                                new
+                                {
+                                    Expression = new
+                                    {
+                                        Arguments = new[]
+                                        {
+                                            new { Expression = WithDesignation("b") },
+                                            new { Expression = WithDesignation("c") },
+                                        }
+                                    }
+                                },
+                                new { Expression = WithDesignation("d") },
+                            }
+                        },
+                        Right = new
+                        {
+                            Arguments = new object[]
+                            {
+                                new { Expression = WithToken("1") },
+                                new
+                                {
+                                    Expression = new
+                                    {
+                                        Arguments = new[]
+                                        {
+                                            new { Expression = WithToken("2") },
+                                            new { Expression = WithToken("3") },
+                                            new { Expression = WithToken("4") },
+                                        }
+                                    }
+                                }
+                            }
+                        },
                     },
                 });
         }
@@ -408,6 +511,8 @@ namespace SonarAnalyzer.UnitTest.Extensions
             allTargetsAsString.Should().BeEquivalentTo(expectedTargets);
         }
 
+        #region Helpers
+
         private static void AssertMapAssignmentArguments<T>(string code, T[] expectation)
         {
             var mapping = ParseAssignmentExpression(code).MapAssignmentArguments();
@@ -440,5 +545,8 @@ public class C
     }}
 }}
 ";
+
+        #endregion
+
     }
 }
