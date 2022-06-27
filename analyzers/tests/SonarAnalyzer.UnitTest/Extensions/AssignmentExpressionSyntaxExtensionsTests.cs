@@ -28,8 +28,7 @@ namespace SonarAnalyzer.UnitTest.Extensions
     public class AssignmentExpressionSyntaxExtensionsTests
     {
         [TestMethod]
-        public void MapAssignmentArguments_TupleElementsAreExtracted()
-        {
+        public void MapAssignmentArguments_TupleElementsAreExtracted() =>
             AssertMapAssignmentArguments("(var x, var y) = (1, 2);", new[]
                 {
                     new
@@ -43,11 +42,9 @@ namespace SonarAnalyzer.UnitTest.Extensions
                         Right = WithToken("2"),
                     },
                 });
-        }
 
         [TestMethod]
-        public void MapAssignmentArguments_SimpleAssignmentReturnsSingleElementArray()
-        {
+        public void MapAssignmentArguments_SimpleAssignmentReturnsSingleElementArray() =>
             AssertMapAssignmentArguments("int x; x = 1;", new[]
                 {
                     new
@@ -56,11 +53,9 @@ namespace SonarAnalyzer.UnitTest.Extensions
                         Right = WithToken("1"),
                     },
                 });
-        }
 
         [TestMethod]
-        public void MapAssignmentArguments_NestedDeconstruction()
-        {
+        public void MapAssignmentArguments_NestedDeconstruction() =>
             AssertMapAssignmentArguments("(var a, (var b, (var c, var d)), var e) = (1, (2, (3, 4)), 5);", new[]
                 {
                     new
@@ -89,11 +84,9 @@ namespace SonarAnalyzer.UnitTest.Extensions
                         Right = WithToken("5"),
                     },
                 });
-        }
 
         [TestMethod]
-        public void MapAssignmentArguments_RightSideNotATupleExpression()
-        {
+        public void MapAssignmentArguments_RightSideNotATupleExpression() =>
             AssertMapAssignmentArguments("(var x, var y) = M(); static (int, int) M() => (1, 2);", new[]
                 {
                     new
@@ -109,11 +102,9 @@ namespace SonarAnalyzer.UnitTest.Extensions
                         Right = new { Expression = WithIdentifier("M") },
                     },
                 });
-        }
 
         [TestMethod]
-        public void MapAssignmentArguments_LeftSideNotATupleExpression()
-        {
+        public void MapAssignmentArguments_LeftSideNotATupleExpression() =>
             AssertMapAssignmentArguments("(int, int) tuple; tuple = (1, 2);", new[]
                 {
                     new
@@ -129,11 +120,9 @@ namespace SonarAnalyzer.UnitTest.Extensions
                         },
                     },
                 });
-        }
 
         [TestMethod]
-        public void MapAssignmentArguments_SimpleDeconstructionAssignment()
-        {
+        public void MapAssignmentArguments_SimpleDeconstructionAssignment() =>
             AssertMapAssignmentArguments("var (x, y) =  (1, 2);", new[]
                 {
                     new
@@ -147,11 +136,9 @@ namespace SonarAnalyzer.UnitTest.Extensions
                         Right = WithToken("2"),
                     },
                 });
-        }
 
         [TestMethod]
-        public void MapAssignmentArguments_NestedDeconstructionAssignment()
-        {
+        public void MapAssignmentArguments_NestedDeconstructionAssignment() =>
             AssertMapAssignmentArguments("var (a, (b, c), d) =  (1, (2, 3), 4);", new[]
                 {
                     new
@@ -175,11 +162,9 @@ namespace SonarAnalyzer.UnitTest.Extensions
                         Right = WithToken("4"),
                     },
                 });
-        }
 
         [TestMethod]
-        public void MapAssignmentArguments_MisalignedDeconstructionAssignment()
-        {
+        public void MapAssignmentArguments_MisalignedDeconstructionAssignment() =>
             AssertMapAssignmentArguments("var (a, (b, c, d)) =  (1, (2, 3), 4);", new[]
                 {
                     new
@@ -224,11 +209,9 @@ namespace SonarAnalyzer.UnitTest.Extensions
                         },
                     },
                 });
-        }
 
         [TestMethod]
-        public void MapAssignmentArguments_MisalignedDeconstructionAssignmentInNestedTuple()
-        {
+        public void MapAssignmentArguments_MisalignedDeconstructionAssignmentInNestedTuple() =>
             AssertMapAssignmentArguments("var (a, (b, c, d)) =  (1, (2, 3));", new object[]
                 {
                     new
@@ -272,11 +255,9 @@ namespace SonarAnalyzer.UnitTest.Extensions
                         },
                     },
                 });
-        }
 
         [TestMethod]
-        public void MapAssignmentArguments_MixedAssignment()
-        {
+        public void MapAssignmentArguments_MixedAssignment() =>
             AssertMapAssignmentArguments("int a; (a, var b) =  (1, 2);", new[]
             {
                 new
@@ -290,11 +271,9 @@ namespace SonarAnalyzer.UnitTest.Extensions
                     Right = WithToken("2"),
                 },
             });
-        }
 
         [TestMethod]
-        public void MapAssignmentArguments_MisalignedLeft()
-        {
+        public void MapAssignmentArguments_MisalignedLeft() =>
             AssertMapAssignmentArguments("(var x, var y) = (1, 2, 3);", new[]
                 {
                     new
@@ -318,11 +297,9 @@ namespace SonarAnalyzer.UnitTest.Extensions
                         },
                     },
                 });
-        }
 
         [TestMethod]
-        public void MapAssignmentArguments_MisalignedRight()
-        {
+        public void MapAssignmentArguments_MisalignedRight() =>
             AssertMapAssignmentArguments("(var x, var y, var z) = (1, 2);", new[]
                 {
                     new
@@ -346,11 +323,9 @@ namespace SonarAnalyzer.UnitTest.Extensions
                         },
                     },
                 });
-        }
 
         [TestMethod]
-        public void MapAssignmentArguments_MisalignedNested1()
-        {
+        public void MapAssignmentArguments_MisalignedNested1() =>
             AssertMapAssignmentArguments("(var a, (var b, var c)) = (1, (2, 3, 4));", new[]
                 {
                     new
@@ -394,11 +369,9 @@ namespace SonarAnalyzer.UnitTest.Extensions
                         },
                     },
                 });
-        }
 
         [TestMethod]
-        public void MapAssignmentArguments_MisalignedNested2()
-        {
+        public void MapAssignmentArguments_MisalignedNested2() =>
             AssertMapAssignmentArguments("(var a, (var b, var c), var d) = (1, (2, 3, 4));", new[]
                 {
                     new
@@ -443,11 +416,9 @@ namespace SonarAnalyzer.UnitTest.Extensions
                         },
                     },
                 });
-        }
 
         [TestMethod]
-        public void MapAssignmentArguments_DifferentConventions()
-        {
+        public void MapAssignmentArguments_DifferentConventions() =>
             AssertMapAssignmentArguments(
                 @"int a;
                 int M() => 1;
@@ -488,7 +459,6 @@ namespace SonarAnalyzer.UnitTest.Extensions
                         Right = new { Type = new { Keyword = new { Text = "object" } } },
                     },
                 });
-        }
 
         [DataTestMethod]
         // Normal assignment
