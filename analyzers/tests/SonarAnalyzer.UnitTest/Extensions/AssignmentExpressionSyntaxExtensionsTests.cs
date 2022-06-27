@@ -30,9 +30,7 @@ namespace SonarAnalyzer.UnitTest.Extensions
         [TestMethod]
         public void MapAssignmentArguments_TupleElementsAreExtracted()
         {
-            var code = "(var x, var y) = (1, 2);";
-            var mapping = ParseAssignmentExpression(code).MapAssignmentArguments();
-            mapping.Should().BeEquivalentTo(new[]
+            AssertMapAssignmentArguments("(var x, var y) = (1, 2);", new[]
                 {
                     new
                     {
@@ -50,9 +48,7 @@ namespace SonarAnalyzer.UnitTest.Extensions
         [TestMethod]
         public void MapAssignmentArguments_SimpleAssignmentReturnsSingleElementArray()
         {
-            var code = "int x; x = 1;";
-            var mapping = ParseAssignmentExpression(code).MapAssignmentArguments();
-            mapping.Should().BeEquivalentTo(new[]
+            AssertMapAssignmentArguments("int x; x = 1;", new[]
                 {
                     new
                     {
@@ -65,34 +61,32 @@ namespace SonarAnalyzer.UnitTest.Extensions
         [TestMethod]
         public void MapAssignmentArguments_NestedDeconstruction()
         {
-            var code = "(var a, (var b, (var c, var d)), var e) = (1, (2, (3, 4)), 5);";
-            var mapping = ParseAssignmentExpression(code).MapAssignmentArguments();
-            mapping.Should().BeEquivalentTo(new[]
+            AssertMapAssignmentArguments("(var a, (var b, (var c, var d)), var e) = (1, (2, (3, 4)), 5);", new[]
                 {
                     new
                     {
                         Left = WithDesignation("a"),
-                        Right = new { Token = new { Text = "1" } },
+                        Right = WithToken("1"),
                     },
                     new
                     {
                         Left = WithDesignation("b"),
-                        Right = new { Token = new { Text = "2" } },
+                        Right = WithToken("2"),
                     },
                     new
                     {
                         Left = WithDesignation("c"),
-                        Right = new { Token = new { Text = "3" } },
+                        Right = WithToken("3"),
                     },
                     new
                     {
                         Left = WithDesignation("d"),
-                        Right = new { Token = new { Text = "4" } },
+                        Right = WithToken("4"),
                     },
                     new
                     {
                         Left = WithDesignation("e"),
-                        Right = new { Token = new { Text = "5" } },
+                        Right = WithToken("5"),
                     },
                 });
         }
@@ -100,9 +94,7 @@ namespace SonarAnalyzer.UnitTest.Extensions
         [TestMethod]
         public void MapAssignmentArguments_RightSideNotATupleExpression()
         {
-            var code = "(var x, var y) = M(); static (int, int) M() => (1, 2);";
-            var mapping = ParseAssignmentExpression(code).MapAssignmentArguments();
-            mapping.Should().BeEquivalentTo(new[]
+            AssertMapAssignmentArguments("(var x, var y) = M(); static (int, int) M() => (1, 2);", new[]
                 {
                     new
                     {
@@ -122,9 +114,7 @@ namespace SonarAnalyzer.UnitTest.Extensions
         [TestMethod]
         public void MapAssignmentArguments_LeftSideNotATupleExpression()
         {
-            var code = "(int, int) tuple; tuple = (1, 2);";
-            var mapping = ParseAssignmentExpression(code).MapAssignmentArguments();
-            mapping.Should().BeEquivalentTo(new[]
+            AssertMapAssignmentArguments("(int, int) tuple; tuple = (1, 2);", new[]
                 {
                     new
                     {
@@ -133,8 +123,8 @@ namespace SonarAnalyzer.UnitTest.Extensions
                         {
                             Arguments = new[]
                             {
-                                new { Expression = new { Token = new { Text = "1" } } },
-                                new { Expression = new { Token = new { Text = "2" } } },
+                                new { Expression = WithToken("1") },
+                                new { Expression = WithToken("2") },
                             }
                         },
                     },
@@ -144,19 +134,17 @@ namespace SonarAnalyzer.UnitTest.Extensions
         [TestMethod]
         public void MapAssignmentArguments_SimpleDeconstructionAssignment()
         {
-            var code = "var (x, y) =  (1, 2);";
-            var mapping = ParseAssignmentExpression(code).MapAssignmentArguments();
-            mapping.Should().BeEquivalentTo(new[]
+            AssertMapAssignmentArguments("var (x, y) =  (1, 2);", new[]
                 {
                     new
                     {
                         Left = WithIdentifier("x"),
-                        Right = new { Token = new { Text = "1" } },
+                        Right = WithToken("1"),
                     },
                     new
                     {
                         Left = WithIdentifier("y"),
-                        Right = new { Token = new { Text = "2" } },
+                        Right = WithToken("2"),
                     },
                 });
         }
@@ -164,29 +152,27 @@ namespace SonarAnalyzer.UnitTest.Extensions
         [TestMethod]
         public void MapAssignmentArguments_NestedDeconstructionAssignment()
         {
-            var code = "var (a, (b, c), d) =  (1, (2, 3), 4);";
-            var mapping = ParseAssignmentExpression(code).MapAssignmentArguments();
-            mapping.Should().BeEquivalentTo(new[]
+            AssertMapAssignmentArguments("var (a, (b, c), d) =  (1, (2, 3), 4);", new[]
                 {
                     new
                     {
                         Left = WithIdentifier("a"),
-                        Right = new { Token = new { Text = "1" } },
+                        Right = WithToken("1"),
                     },
                     new
                     {
                         Left = WithIdentifier("b"),
-                        Right = new { Token = new { Text = "2" } },
+                        Right = WithToken("2"),
                     },
                     new
                     {
                         Left = WithIdentifier("c"),
-                        Right = new { Token = new { Text = "3" } },
+                        Right = WithToken("3"),
                     },
                     new
                     {
                         Left = WithIdentifier("d"),
-                        Right = new { Token = new { Text = "4" } },
+                        Right = WithToken("4"),
                     },
                 });
         }
@@ -194,9 +180,7 @@ namespace SonarAnalyzer.UnitTest.Extensions
         [TestMethod]
         public void MapAssignmentArguments_MisalignedDeconstructionAssignment()
         {
-            var code = "var (a, (b, c, d)) =  (1, (2, 3), 4);";
-            var mapping = ParseAssignmentExpression(code).MapAssignmentArguments();
-            mapping.Should().BeEquivalentTo(new[]
+            AssertMapAssignmentArguments("var (a, (b, c, d)) =  (1, (2, 3), 4);", new[]
                 {
                     new
                     {
@@ -209,44 +193,73 @@ namespace SonarAnalyzer.UnitTest.Extensions
         [TestMethod]
         public void MapAssignmentArguments_MisalignedDeconstructionAssignmentInNestedTuple()
         {
-            var code = "var (a, (b, c, d)) =  (1, (2, 3));";
-            var mapping = ParseAssignmentExpression(code).MapAssignmentArguments();
-            mapping.Should().BeEquivalentTo(new[]
+            AssertMapAssignmentArguments("var (a, (b, c, d)) =  (1, (2, 3));", new object[]
                 {
                     new
                     {
-                        Left = new { Designation = new { Variables = new { Count = 2 } } },
-                        Right = new { Arguments = new { Count = 2 } },
+                        Left = new
+                        {
+                            Designation = new
+                            {
+                                Variables = new object[]
+                                {
+                                    WithIdentifier("a"),
+                                    new
+                                    {
+                                        Variables = new[]
+                                        {
+                                            WithIdentifier("b"),
+                                            WithIdentifier("c"),
+                                            WithIdentifier("d"),
+                                        }
+                                    },
+                                },
+                            },
+                        },
+                        Right = new
+                        {
+                            Arguments = new object[]
+                            {
+                                new { Expression = WithToken("1") },
+                                new
+                                {
+                                    Expression = new
+                                    {
+                                        Arguments = new object[]
+                                        {
+                                            new { Expression = WithToken("2") },
+                                            new { Expression = WithToken("3") },
+                                        },
+                                    },
+                                },
+                            }
+                        },
                     },
                 });
-            mapping[0].Left.ToString().Should().Be("var (a, (b, c, d))");
-            mapping[0].Right.ToString().Should().Be("(1, (2, 3))");
         }
 
         [TestMethod]
         public void MapAssignmentArguments_MixedAssignment()
         {
-            var code = "int a; (a, var b) =  (1, 2);";
-            var mapping = ParseAssignmentExpression(code).MapAssignmentArguments();
-            mapping.Should().HaveCount(2);
-            mapping[0].Should().BeEquivalentTo(new
+            AssertMapAssignmentArguments("int a; (a, var b) =  (1, 2);", new[]
             {
-                Left = WithIdentifier("a"),
-                Right = new { Token = new { Text = "1" } },
-            });
-            mapping[1].Should().BeEquivalentTo(new
-            {
-                Left = WithDesignation("b"),
-                Right = new { Token = new { Text = "2" } },
+                new
+                {
+                    Left = WithIdentifier("a"),
+                    Right = WithToken("1"),
+                },
+                new
+                {
+                    Left = WithDesignation("b"),
+                    Right = WithToken("2"),
+                },
             });
         }
 
         [TestMethod]
         public void MapAssignmentArguments_MisalignedLeft()
         {
-            var code = "(var x, var y) = (1, 2, 3);";
-            var mapping = ParseAssignmentExpression(code).MapAssignmentArguments();
-            mapping.Should().BeEquivalentTo(new[]
+            AssertMapAssignmentArguments("(var x, var y) = (1, 2, 3);", new[]
                 {
                     new
                     {
@@ -274,9 +287,7 @@ namespace SonarAnalyzer.UnitTest.Extensions
         [TestMethod]
         public void MapAssignmentArguments_MisalignedRight()
         {
-            var code = "(var x, var y, var z) = (1, 2);";
-            var mapping = ParseAssignmentExpression(code).MapAssignmentArguments();
-            mapping.Should().BeEquivalentTo(new[]
+            AssertMapAssignmentArguments("(var x, var y, var z) = (1, 2);", new[]
                 {
                     new
                     {
@@ -321,9 +332,7 @@ namespace SonarAnalyzer.UnitTest.Extensions
         [TestMethod]
         public void MapAssignmentArguments_MisalignedNested2()
         {
-            var code = "(var a, (var b, var c), var d) = (1, (2, 3, 4));";
-            var mapping = ParseAssignmentExpression(code).MapAssignmentArguments();
-            mapping.Should().BeEquivalentTo(new[]
+            AssertMapAssignmentArguments("(var a, (var b, var c), var d) = (1, (2, 3, 4));", new[]
                 {
                     new
                     {
@@ -336,45 +345,46 @@ namespace SonarAnalyzer.UnitTest.Extensions
         [TestMethod]
         public void MapAssignmentArguments_DifferentConventions()
         {
-            var code = @"int a;
-                         M() => 1;
-                         ((a), (var b, _), object c, double d, _) = (1, (two: 2, (3)), string.Empty, M(), new object());";
-            var mapping = ParseAssignmentExpression(code).MapAssignmentArguments();
-            mapping.Should().HaveCount(6);
-            mapping[0].Should().BeEquivalentTo(new
-            {
-                Left = new { Expression = WithIdentifier("a") },
-                Right = new { Token = new { Text = "1" } },
-            }, "first element is an assignment");
-            mapping[1].Should().BeEquivalentTo(new
-            {
-                Left = WithDesignation("b"),
-                Right = new { Token = new { Text = "2" } },
-            }, "second element is a declaration");
-            mapping[2].Should().BeEquivalentTo(new
-            {
-                Left = WithIdentifier("_"),
-                Right = new { Expression = new { Token = new { Text = "3" } } },
-            }, "third element is a discard");
-            mapping[3].Should().BeEquivalentTo(new
-            {
-                Left = WithDesignation("c"),
-                Right = new
+            AssertMapAssignmentArguments(
+                @"int a;
+                int M() => 1;
+                ((a), (var b, _), object c, double d, _) = (1, (two: 2, (3)), string.Empty, M(), new object());", new object[]
                 {
-                    Expression = new { Keyword = new { Text = "string" } },
-                    Name = WithIdentifier("Empty"),
-                },
-            }, "fourth element is a declaration with an assignment of a static property");
-            mapping[4].Should().BeEquivalentTo(new
-            {
-                Left = WithDesignation("d"),
-                Right = new { Expression = WithIdentifier("M") },
-            }, "fifth element is declaration with conversion of a method result");
-            mapping[5].Should().BeEquivalentTo(new
-            {
-                Left = WithIdentifier("_"),
-                Right = new { Type = new { Keyword = new { Text = "object" } } },
-            }, "sixth element is a discard of an object creation");
+                    new
+                    {
+                        Left = new { Expression = WithIdentifier("a") },
+                        Right = WithToken("1"),
+                    },
+                    new
+                    {
+                        Left = WithDesignation("b"),
+                        Right = WithToken("2"),
+                    },
+                    new
+                    {
+                        Left = WithIdentifier("_"),
+                        Right = new { Expression = WithToken("3") },
+                    },
+                    new
+                    {
+                        Left = WithDesignation("c"),
+                        Right = new
+                        {
+                            Expression = new { Keyword = new { Text = "string" } },
+                            Name = WithIdentifier("Empty"),
+                        },
+                    },
+                    new
+                    {
+                        Left = WithDesignation("d"),
+                        Right = new { Expression = WithIdentifier("M") },
+                    },
+                    new
+                    {
+                        Left = WithIdentifier("_"),
+                        Right = new { Type = new { Keyword = new { Text = "object" } } },
+                    },
+                });
         }
 
         [DataTestMethod]
@@ -398,6 +408,12 @@ namespace SonarAnalyzer.UnitTest.Extensions
             allTargetsAsString.Should().Be(expectedTargets);
         }
 
+        private static void AssertMapAssignmentArguments<T>(string code, T[] expectation)
+        {
+            var mapping = ParseAssignmentExpression(code).MapAssignmentArguments();
+            mapping.Should().BeEquivalentTo(expectation);
+        }
+
         private static object WithDesignation(string identifier) =>
             new { Designation = WithIdentifier(identifier) };
 
@@ -415,7 +431,7 @@ namespace SonarAnalyzer.UnitTest.Extensions
         }
 
         private static string WrapInMethod(string code) =>
-    $@"
+$@"
 public class C
 {{
     public void M()
