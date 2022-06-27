@@ -26,15 +26,15 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class DoNotNestTernaryOperatorsTest
     {
-        private readonly VerifierBuilder verifierCs = new VerifierBuilder<CS.DoNotNestTernaryOperators>();
-        private readonly VerifierBuilder verifierVb = new VerifierBuilder<VB.DoNotNestTernaryOperators>();
+        private readonly VerifierBuilder verifierCS = new VerifierBuilder<CS.DoNotNestTernaryOperators>();
+        private readonly VerifierBuilder verifierVB = new VerifierBuilder<VB.DoNotNestTernaryOperators>();
 
         [TestMethod]
         public void DoNotNestTernaryOperators_CS() =>
-            verifierCs.AddPaths("DoNotNestTernaryOperators.cs").Verify();
+            verifierCS.AddPaths("DoNotNestTernaryOperators.cs").Verify();
 
         [TestMethod]
         public void DoNotNestTernaryOperators_VB() =>
-            verifierVb.AddPaths("DoNotNestTernaryOperators.vb").Verify();
+            verifierVB.AddPaths("DoNotNestTernaryOperators.vb").Verify();
     }
 }
