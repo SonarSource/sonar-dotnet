@@ -43,7 +43,7 @@ namespace SonarAnalyzer.Helpers
             if (TupleExpressionSyntaxWrapper.IsInstance(expressionWithoutParenthesis)
                 && (TupleExpressionSyntaxWrapper)expressionWithoutParenthesis is var tupleExpression
                 && RecursivePatternSyntaxWrapper.IsInstance(patternWithoutParenthesis)
-                && (RecursivePatternSyntaxWrapper)patternWithoutParenthesis is { } recursivePattern
+                && (RecursivePatternSyntaxWrapper)patternWithoutParenthesis is var recursivePattern
                 && recursivePattern.PositionalPatternClause.SyntaxNode is not null
                 && recursivePattern.PositionalPatternClause.Subpatterns.Count == tupleExpression.Arguments.Count)
             {
