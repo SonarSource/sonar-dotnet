@@ -18,7 +18,6 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Linq;
@@ -26,6 +25,7 @@ using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
+using SonarAnalyzer.Extensions;
 using SonarAnalyzer.Helpers;
 using StyleCop.Analyzers.Lightup;
 
@@ -60,47 +60,24 @@ namespace SonarAnalyzer.Rules.CSharp
                 SyntaxKind.ForEachStatement);
 
             context.RegisterSyntaxNodeActionInNonGenerated(c => ProcessVariableDeclaration(c, ((LocalDeclarationStatementSyntax)c.Node).Declaration), SyntaxKind.LocalDeclarationStatement);
-
             context.RegisterSyntaxNodeActionInNonGenerated(c => ProcessVariableDeclaration(c, ((ForStatementSyntax)c.Node).Declaration), SyntaxKind.ForStatement);
-
             context.RegisterSyntaxNodeActionInNonGenerated(c => ProcessVariableDeclaration(c, ((UsingStatementSyntax)c.Node).Declaration), SyntaxKind.UsingStatement);
-
             context.RegisterSyntaxNodeActionInNonGenerated(c => ProcessVariableDeclaration(c, ((FixedStatementSyntax)c.Node).Declaration), SyntaxKind.FixedStatement);
 
             context.RegisterSyntaxNodeActionInNonGenerated(c => ProcessVariableDesignation(c, ((DeclarationPatternSyntaxWrapper)c.Node).Designation), SyntaxKindEx.DeclarationPattern);
-
             context.RegisterSyntaxNodeActionInNonGenerated(c => ProcessVariableDesignation(c, ((DeclarationExpressionSyntaxWrapper)c.Node).Designation), SyntaxKindEx.DeclarationExpression);
         }
 
         private static void ProcessVariableDesignation(SyntaxNodeAnalysisContext context, VariableDesignationSyntaxWrapper variableDesignation)
         {
-            ProcessSingleVariableDesignation(variableDesignation, context, null);
-            if (ParenthesizedVariableDesignationSyntaxWrapper.IsInstance(variableDesignation)
-                && ((ParenthesizedVariableDesignationSyntaxWrapper)variableDesignation) is var parenthesizedVariables)
+            var members = default(List<ISymbol>);
+            var containingSymbol = default(INamespaceOrTypeSymbol);
+            foreach (var variable in variableDesignation.AllVariables())
             {
-                List<ISymbol> members = null;
-                foreach (var variable in parenthesizedVariables.Variables)
-                {
-                    members = ProcessSingleVariableDesignation(variable, context, members);
-                }
+                containingSymbol ??= context.SemanticModel.GetDeclaredSymbol(variable.SyntaxNode).ContainingType;
+                members ??= GetMembers(containingSymbol);
+                ReportOnVariableMatchingField(context, members, variable.Identifier);
             }
-        }
-
-        private static List<ISymbol> ProcessSingleVariableDesignation(VariableDesignationSyntaxWrapper variableDesignation, SyntaxNodeAnalysisContext context, List<ISymbol> members)
-        {
-            if (SingleVariableDesignationSyntaxWrapper.IsInstance(variableDesignation)
-                && ((SingleVariableDesignationSyntaxWrapper)variableDesignation) is var singleVariableDesignation)
-            {
-                var variableSymbol = context.SemanticModel.GetDeclaredSymbol(singleVariableDesignation);
-                if (variableSymbol == null)
-                {
-                    return members;
-                }
-
-                members ??= GetMembers(variableSymbol.ContainingType);
-                ReportOnVariableMatchingField(context, members, singleVariableDesignation.Identifier);
-            }
-            return members;
         }
 
         private static void ProcessVariableDeclaration(SyntaxNodeAnalysisContext context, VariableDeclarationSyntax variableDeclaration)
