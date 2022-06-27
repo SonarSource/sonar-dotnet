@@ -56,7 +56,7 @@ namespace SonarAnalyzer.UnitTest.Extensions
                 {
                     new
                     {
-                        Left = WithIdenifier("x"),
+                        Left = WithIdentifier("x"),
                         Right = WithToken("1"),
                     },
                 });
@@ -114,7 +114,7 @@ namespace SonarAnalyzer.UnitTest.Extensions
                                 new { Expression = WithDesignation("y") },
                             }
                         },
-                        Right = new { Expression = new { Identifier = new { Text = "M" } } },
+                        Right = new { Expression = WithIdentifier("M") },
                     },
                 });
         }
@@ -128,7 +128,7 @@ namespace SonarAnalyzer.UnitTest.Extensions
                 {
                     new
                     {
-                        Left = new { Identifier = new { Text = "tuple" } },
+                        Left = WithIdentifier("tuple"),
                         Right = new
                         {
                             Arguments = new[]
@@ -150,12 +150,12 @@ namespace SonarAnalyzer.UnitTest.Extensions
                 {
                     new
                     {
-                        Left = new { Identifier = new { Text = "x" } },
+                        Left = WithIdentifier("x"),
                         Right = new { Token = new { Text = "1" } },
                     },
                     new
                     {
-                        Left = new { Identifier = new { Text = "y" } },
+                        Left = WithIdentifier("y"),
                         Right = new { Token = new { Text = "2" } },
                     },
                 });
@@ -170,22 +170,22 @@ namespace SonarAnalyzer.UnitTest.Extensions
                 {
                     new
                     {
-                        Left = new { Identifier = new { Text = "a" } },
+                        Left = WithIdentifier("a"),
                         Right = new { Token = new { Text = "1" } },
                     },
                     new
                     {
-                        Left = new { Identifier = new { Text = "b" } },
+                        Left = WithIdentifier("b"),
                         Right = new { Token = new { Text = "2" } },
                     },
                     new
                     {
-                        Left = new { Identifier = new { Text = "c" } },
+                        Left = WithIdentifier("c"),
                         Right = new { Token = new { Text = "3" } },
                     },
                     new
                     {
-                        Left = new { Identifier = new { Text = "d" } },
+                        Left = WithIdentifier("d"),
                         Right = new { Token = new { Text = "4" } },
                     },
                 });
@@ -231,7 +231,7 @@ namespace SonarAnalyzer.UnitTest.Extensions
             mapping.Should().HaveCount(2);
             mapping[0].Should().BeEquivalentTo(new
             {
-                Left = new { Identifier = new { Text = "a" } },
+                Left = WithIdentifier("a"),
                 Right = new { Token = new { Text = "1" } },
             });
             mapping[1].Should().BeEquivalentTo(new
@@ -343,7 +343,7 @@ namespace SonarAnalyzer.UnitTest.Extensions
             mapping.Should().HaveCount(6);
             mapping[0].Should().BeEquivalentTo(new
             {
-                Left = new { Expression = WithIdenifier("a") },
+                Left = new { Expression = WithIdentifier("a") },
                 Right = new { Token = new { Text = "1" } },
             }, "first element is an assignment");
             mapping[1].Should().BeEquivalentTo(new
@@ -353,7 +353,7 @@ namespace SonarAnalyzer.UnitTest.Extensions
             }, "second element is a declaration");
             mapping[2].Should().BeEquivalentTo(new
             {
-                Left = new { Identifier = new { Text = "_" } },
+                Left = WithIdentifier("_"),
                 Right = new { Expression = new { Token = new { Text = "3" } } },
             }, "third element is a discard");
             mapping[3].Should().BeEquivalentTo(new
@@ -362,17 +362,17 @@ namespace SonarAnalyzer.UnitTest.Extensions
                 Right = new
                 {
                     Expression = new { Keyword = new { Text = "string" } },
-                    Name = new { Identifier = new { Text = "Empty" } },
+                    Name = WithIdentifier("Empty"),
                 },
             }, "fourth element is a declaration with an assignment of a static property");
             mapping[4].Should().BeEquivalentTo(new
             {
                 Left = WithDesignation("d"),
-                Right = new { Expression = new { Identifier = new { Text = "M" } } },
+                Right = new { Expression = WithIdentifier("M") },
             }, "fifth element is declaration with conversion of a method result");
             mapping[5].Should().BeEquivalentTo(new
             {
-                Left = new { Identifier = new { Text = "_" } },
+                Left = WithIdentifier("_"),
                 Right = new { Type = new { Keyword = new { Text = "object" } } },
             }, "sixth element is a discard of an object creation");
         }
@@ -399,9 +399,9 @@ namespace SonarAnalyzer.UnitTest.Extensions
         }
 
         private static object WithDesignation(string identifier) =>
-            new { Designation = WithIdenifier(identifier) };
+            new { Designation = WithIdentifier(identifier) };
 
-        private static object WithIdenifier(string identifier) =>
+        private static object WithIdentifier(string identifier) =>
             new { Identifier = new { Text = identifier } };
 
         private static object WithToken(string identifier) =>
