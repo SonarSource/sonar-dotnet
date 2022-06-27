@@ -70,34 +70,27 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private static void ProcessVariableDesignation(SyntaxNodeAnalysisContext context, VariableDesignationSyntaxWrapper variableDesignation)
         {
-            var members = default(List<ISymbol>);
-            var containingSymbol = default(INamespaceOrTypeSymbol);
-            foreach (var variable in variableDesignation.AllVariables())
+            if (variableDesignation.AllVariables() is { Length: > 0 } variables
+                && context.SemanticModel.GetDeclaredSymbol(variables[0]) is { ContainingType: { } containingType }
+                && GetMembers(containingType) is { } members)
             {
-                containingSymbol ??= context.SemanticModel.GetDeclaredSymbol(variable.SyntaxNode).ContainingType;
-                members ??= GetMembers(containingSymbol);
-                ReportOnVariableMatchingField(context, members, variable.Identifier);
+                foreach (var variable in variables)
+                {
+                    ReportOnVariableMatchingField(context, members, variable.Identifier);
+                }
             }
         }
 
         private static void ProcessVariableDeclaration(SyntaxNodeAnalysisContext context, VariableDeclarationSyntax variableDeclaration)
         {
-            if (variableDeclaration == null)
+            if (variableDeclaration is { Variables: { Count: > 0 } variables }
+                && context.SemanticModel.GetDeclaredSymbol(variableDeclaration.Variables[0]) is { ContainingType: { } containingType }
+                && GetMembers(containingType) is { } members)
             {
-                return;
-            }
-
-            List<ISymbol> members = null;
-            foreach (var variable in variableDeclaration.Variables)
-            {
-                var variableSymbol = context.SemanticModel.GetDeclaredSymbol(variable);
-                if (variableSymbol == null)
+                foreach (var variable in variables)
                 {
-                    return;
+                    ReportOnVariableMatchingField(context, members, variable.Identifier);
                 }
-
-                members ??= GetMembers(variableSymbol.ContainingType);
-                ReportOnVariableMatchingField(context, members, variable.Identifier);
             }
         }
 
@@ -105,13 +98,13 @@ namespace SonarAnalyzer.Rules.CSharp
         {
             if (members.FirstOrDefault(m => m.Name == identifier.ValueText) is { } matchingMember)
             {
-                context.ReportIssue(Diagnostic.Create(Rule, identifier.GetLocation(), identifier.Text, (matchingMember is IFieldSymbol) ? "field" : "property"));
+                context.ReportIssue(Diagnostic.Create(Rule, identifier.GetLocation(), identifier.Text, matchingMember is IFieldSymbol ? "field" : "property"));
             }
         }
 
         private static List<ISymbol> GetMembers(INamespaceOrTypeSymbol classSymbol) =>
             classSymbol.GetMembers()
-                       .Where(member => member is IFieldSymbol || member is IPropertySymbol)
+                       .Where(member => member is IFieldSymbol or IPropertySymbol)
                        .ToList();
     }
 }
