@@ -110,9 +110,10 @@ namespace SonarAnalyzer.Rules.CSharp
         }
 
         private static SyntaxNode[] ComputeAffectedExpressions(SyntaxNode node) =>
-            node.DescendantNodesAndSelf()
-                .Where(n => SideEffectExpressions.Any(s => s.Kinds.Any(n.IsKind)))
-                .SelectMany(n => SideEffectExpressions.Single(s => s.Kinds.Any(n.IsKind)).AffectedExpressions(n))
-                .ToArray();
+            (from descendantNode in node.DescendantNodesAndSelf()
+             from sideEffect in SideEffectExpressions
+             where descendantNode.IsAnyKind(sideEffect.Kinds.ToImmutableHashSet())
+             from expression in sideEffect.AffectedExpressions(descendantNode)
+             select expression).ToArray();
     }
 }

@@ -29,8 +29,13 @@
         // Loop variable shadowed by re-declaration.
         for (int i = 0; i < 42; i++)
         {
-            var (i, j) = (1, 2); // FN  - This is a compiler error -  we still check for SonarLint as it analyzes also code with compile errors.
-            _ = (1, 2) is var (i, b); // FN - This is a compiler error -  we still check for SonarLint as it analyzes also code with compile errors. 
+            var (i, j) = (1, 2); // Error [CS0128] - FN - we still check for SonarLint as it analyzes also code with compile errors.
+            _ = (1, 2) is var (i, b); // Error [CS0128] - FN - we still check for SonarLint as it analyzes also code with compile errors. 
+        }
+
+        for (var i = (a: 1, b: 2); i is (a: < 10, _); i = (++i.a, ++i.b))
+        {
+            i = (1, 1); // Noncompliant
         }
 
         for (int i = 0; i < 42; i++)
