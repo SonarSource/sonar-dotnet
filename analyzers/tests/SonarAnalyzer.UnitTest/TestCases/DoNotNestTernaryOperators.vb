@@ -19,6 +19,8 @@ Namespace Tests.TestCases
             Dim x3 = If(isMale, "Mr. ",
                 If(isMarried, "Mrs. ", "Miss "))
 '               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ Noncompliant
+
+            Dim x4 = If(isMale, Function() "Mr.", Function() If(isMarried, "Mrs.", "Miss")) ' Compliant
         End Function
     End Class
 End Namespace
