@@ -42,8 +42,7 @@ namespace SonarAnalyzer.Extensions
             {
                 if (ParenthesizedVariableDesignationSyntaxWrapper.IsInstance(variableDesignation))
                 {
-                    var parenthesized = (ParenthesizedVariableDesignationSyntaxWrapper)variableDesignation;
-                    foreach (var variable in parenthesized.Variables)
+                    foreach (var variable in ((ParenthesizedVariableDesignationSyntaxWrapper)variableDesignation).Variables)
                     {
                         CollectVariables(builder, variable);
                     }
