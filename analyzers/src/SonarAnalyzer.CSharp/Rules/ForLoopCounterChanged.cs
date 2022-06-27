@@ -26,6 +26,7 @@ using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
+using SonarAnalyzer.Extensions;
 using SonarAnalyzer.Helpers;
 
 namespace SonarAnalyzer.Rules.CSharp
@@ -42,24 +43,24 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private sealed class SideEffectExpression
         {
-            public IImmutableList<SyntaxKind> Kinds { get; set; }
-            public Func<SyntaxNode, SyntaxNode> AffectedExpression { get; set; }
+            public ImmutableHashSet<SyntaxKind> Kinds { get; set; }
+            public Func<SyntaxNode, ImmutableArray<SyntaxNode>> AffectedExpressions { get; set; }
         }
 
         private static readonly IImmutableList<SideEffectExpression> SideEffectExpressions = ImmutableArray.Create(
             new SideEffectExpression
             {
-                Kinds = ImmutableArray.Create(SyntaxKind.PreIncrementExpression, SyntaxKind.PreDecrementExpression),
-                AffectedExpression = node => ((PrefixUnaryExpressionSyntax)node).Operand
+                Kinds = ImmutableHashSet.Create(SyntaxKind.PreIncrementExpression, SyntaxKind.PreDecrementExpression),
+                AffectedExpressions = node => ImmutableArray.Create<SyntaxNode>(((PrefixUnaryExpressionSyntax)node).Operand)
             },
             new SideEffectExpression
             {
-                Kinds = ImmutableArray.Create(SyntaxKind.PostIncrementExpression, SyntaxKind.PostDecrementExpression),
-                AffectedExpression = node => ((PostfixUnaryExpressionSyntax)node).Operand
+                Kinds = ImmutableHashSet.Create(SyntaxKind.PostIncrementExpression, SyntaxKind.PostDecrementExpression),
+                AffectedExpressions = node => ImmutableArray.Create<SyntaxNode>(((PostfixUnaryExpressionSyntax)node).Operand)
             },
             new SideEffectExpression
             {
-                Kinds = ImmutableArray.Create(
+                Kinds = ImmutableHashSet.Create(
                     SyntaxKind.SimpleAssignmentExpression,
                     SyntaxKind.AddAssignmentExpression,
                     SyntaxKind.SubtractAssignmentExpression,
@@ -71,7 +72,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     SyntaxKind.OrAssignmentExpression,
                     SyntaxKind.LeftShiftAssignmentExpression,
                     SyntaxKind.RightShiftAssignmentExpression),
-                AffectedExpression = node => ((AssignmentExpressionSyntax)node).Left
+                AffectedExpressions = node => ((AssignmentExpressionSyntax)node).AssignmentTargets()
             });
 
         protected override void Initialize(SonarAnalysisContext context) =>
@@ -81,12 +82,13 @@ namespace SonarAnalyzer.Rules.CSharp
                     var forNode = (ForStatementSyntax)c.Node;
                     var loopCounters = LoopCounters(forNode, c.SemanticModel).ToList();
 
-                    foreach (var affectedExpression in AffectedExpressions(forNode.Statement))
+                    foreach (var affectedExpression in ComputeAffectedExpressions(forNode.Statement))
                     {
                         var symbol = c.SemanticModel.GetSymbolInfo(affectedExpression).Symbol;
+
                         if (symbol != null && loopCounters.Contains(symbol))
                         {
-                            c.ReportIssue(Diagnostic.Create(Rule, affectedExpression.GetLocation(), affectedExpression.ToString()));
+                            c.ReportIssue(Diagnostic.Create(Rule, affectedExpression.GetLocation(), symbol.Name));
                         }
                     }
                 },
@@ -107,9 +109,11 @@ namespace SonarAnalyzer.Rules.CSharp
             return declaredVariables.Union(initializedVariables);
         }
 
-        private static IEnumerable<SyntaxNode> AffectedExpressions(SyntaxNode node) =>
-            node.DescendantNodesAndSelf()
-                .Where(n => SideEffectExpressions.Any(s => s.Kinds.Any(n.IsKind)))
-                .Select(n => SideEffectExpressions.Single(s => s.Kinds.Any(n.IsKind)).AffectedExpression(n));
+        private static SyntaxNode[] ComputeAffectedExpressions(SyntaxNode node) =>
+            (from descendantNode in node.DescendantNodesAndSelf()
+             from sideEffect in SideEffectExpressions
+             where descendantNode.IsAnyKind(sideEffect.Kinds)
+             from expression in sideEffect.AffectedExpressions(descendantNode)
+             select expression).ToArray();
     }
 }
