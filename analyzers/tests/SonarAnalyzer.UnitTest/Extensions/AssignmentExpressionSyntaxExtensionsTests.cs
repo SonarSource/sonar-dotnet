@@ -530,13 +530,7 @@ namespace SonarAnalyzer.UnitTest.Extensions
 
         private static AssignmentExpressionSyntax ParseAssignmentExpression(string code)
         {
-            var syntaxTree = CSharpSyntaxTree.ParseText(WrapInMethod(code));
-            var assigment = syntaxTree.GetRoot().DescendantNodesAndSelf().OfType<AssignmentExpressionSyntax>().Single();
-            return assigment;
-        }
-
-        private static string WrapInMethod(string code) =>
-$@"
+            var syntaxTree = CSharpSyntaxTree.ParseText($@"
 public class C
 {{
     public void M()
@@ -544,7 +538,9 @@ public class C
         {code}
     }}
 }}
-";
+");
+            return syntaxTree.GetRoot().DescendantNodesAndSelf().OfType<AssignmentExpressionSyntax>().Single();
+        }
 
         #endregion
 
