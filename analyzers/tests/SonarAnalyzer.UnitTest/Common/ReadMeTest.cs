@@ -1,4 +1,24 @@
-﻿using System.IO;
+﻿/*
+ * SonarAnalyzer for .NET
+ * Copyright (C) 2015-2022 SonarSource SA
+ * mailto: contact AT sonarsource DOT com
+ *
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU Lesser General Public
+ * License as published by the Free Software Foundation; either
+ * version 3 of the License, or (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * Lesser General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public License
+ * along with this program; if not, write to the Free Software Foundation,
+ * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ */
+
+using System.IO;
 using System.Text.RegularExpressions;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Utilities;
@@ -8,26 +28,34 @@ namespace SonarAnalyzer.UnitTest.Common;
 [TestClass]
 public class ReadMeTest
 {
-    [TestMethod]
-    public void MentionsTheRightNumbers()
+    public TestContext TestContext { get; set; }
+
+    private string ReadMe { get; set; }
+
+    [TestInitialize]
+    public void Init()
     {
-        var cs = RuleFinder.GetAnalyzerTypes(AnalyzerLanguage.CSharp).Count();
-        var vb = RuleFinder.GetAnalyzerTypes(AnalyzerLanguage.VisualBasic).Count();
+        var readme = new FileInfo(Path.Combine(TestContext.DeploymentDirectory, "./../../../../../../README.md"));
+        using var reader = readme.OpenText();
+        ReadMe = reader.ReadToEnd();
+    }
 
-        var match = Regex.Match(Readme(), @"\[(?<cs>[0-9]{3,4})\+ C# rules\].+ and \[(?<vb>[0-9]{3,4})\+ VB\.");
+    [TestMethod]
+    public void HasCorrectRuleCount_CS() =>
+        HasCorrectRuleCount(AnalyzerLanguage.CSharp, "C#");
 
-        var cs_l = Int(match, nameof(cs));
-        var vb_l = Int(match, nameof(vb));
+    [TestMethod]
+    public void HasCorrectRuleCount_VB() =>
+        HasCorrectRuleCount(AnalyzerLanguage.VisualBasic, "VB.&#8203;NET");
 
-        cs.Should().BeInRange(cs_l, cs_l + 10);
-        vb.Should().BeInRange(vb_l, vb_l + 10);
+    private void HasCorrectRuleCount(AnalyzerLanguage language, string name)
+    {
+        var rules = RuleFinder.GetAnalyzerTypes(language).Count();
+        var match = Regex.Match(ReadMe, $@"\[(?<count>\d+)\+ {name} rules\]");
+        match.Success.Should().BeTrue();
 
-        static string Readme()
-        {
-            var readme = new FileInfo("./Common/Resources/README.md");
-            using var reader = readme.OpenText();
-            return reader.ReadToEnd();
-        }
-        static int Int(Match match, string group) => int.Parse(match.Groups[group].Value);
+        var count = int.Parse(match.Groups["count"].Value);
+        var min = (count / 10) * 10;
+        rules.Should().BeInRange(min, min + 10);
     }
 }
