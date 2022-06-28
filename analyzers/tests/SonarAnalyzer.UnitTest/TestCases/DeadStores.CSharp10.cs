@@ -19,7 +19,7 @@ static int ReturnAnInt()
 void DoStuffWithInts()
 {
     int x = ReturnAnInt();
-    (x, int y) = ReturnIntTuple(); // Noncompliant
+    (x, int y) = ReturnIntTuple(); // Noncompliant {{Remove this useless assignment to local variable 'x'.}}
 //  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 }
 
