@@ -70,66 +70,6 @@ namespace SonarAnalyzer.Extensions
             }
 
             return ImmutableArray.Create(new AssignmentMapping(assignment.Left, assignment.Right));
-
-            static bool MapTupleElements(ImmutableArray<AssignmentMapping>.Builder arrayBuilder, TupleExpressionSyntaxWrapper left, TupleExpressionSyntaxWrapper right)
-            {
-                if (left.Arguments.Count != right.Arguments.Count)
-                {
-                    return false;
-                }
-
-                var leftEnumerator = left.Arguments.GetEnumerator();
-                var rightEnumerator = right.Arguments.GetEnumerator();
-                while (leftEnumerator.MoveNext() && rightEnumerator.MoveNext())
-                {
-                    var leftExpression = leftEnumerator.Current.Expression;
-                    var rightExpression = rightEnumerator.Current.Expression;
-                    if (TupleExpressionSyntaxWrapper.IsInstance(leftExpression)
-                        && TupleExpressionSyntaxWrapper.IsInstance(rightExpression))
-                    {
-                        if (!MapTupleElements(arrayBuilder, (TupleExpressionSyntaxWrapper)leftExpression, (TupleExpressionSyntaxWrapper)rightExpression))
-                        {
-                            return false;
-                        }
-                    }
-                    else
-                    {
-                        arrayBuilder.Add(new AssignmentMapping(leftExpression, rightExpression));
-                    }
-                }
-
-                return true;
-            }
-
-            static bool MapDesignationElements(ImmutableArray<AssignmentMapping>.Builder arrayBuilder, ParenthesizedVariableDesignationSyntaxWrapper left, TupleExpressionSyntaxWrapper right)
-            {
-                if (left.Variables.Count != right.Arguments.Count)
-                {
-                    return false;
-                }
-
-                var leftEnumerator = left.Variables.GetEnumerator();
-                var rightEnumerator = right.Arguments.GetEnumerator();
-                while (leftEnumerator.MoveNext() && rightEnumerator.MoveNext())
-                {
-                    var leftVar = leftEnumerator.Current;
-                    var rightExpression = rightEnumerator.Current.Expression;
-                    if (ParenthesizedVariableDesignationSyntaxWrapper.IsInstance(leftVar)
-                        && TupleExpressionSyntaxWrapper.IsInstance(rightExpression))
-                    {
-                        if (!MapDesignationElements(arrayBuilder, (ParenthesizedVariableDesignationSyntaxWrapper)leftVar, (TupleExpressionSyntaxWrapper)rightExpression))
-                        {
-                            return false;
-                        }
-                    }
-                    else
-                    {
-                        arrayBuilder.Add(new AssignmentMapping(leftVar.SyntaxNode, rightExpression));
-                    }
-                }
-
-                return true;
-            }
         }
 
         /// <summary>
@@ -153,6 +93,66 @@ namespace SonarAnalyzer.Extensions
             {
                 return ImmutableArray.Create<SyntaxNode>(left);
             }
+        }
+
+        private static bool MapTupleElements(ImmutableArray<AssignmentMapping>.Builder arrayBuilder, TupleExpressionSyntaxWrapper left, TupleExpressionSyntaxWrapper right)
+        {
+            if (left.Arguments.Count != right.Arguments.Count)
+            {
+                return false;
+            }
+
+            var leftEnumerator = left.Arguments.GetEnumerator();
+            var rightEnumerator = right.Arguments.GetEnumerator();
+            while (leftEnumerator.MoveNext() && rightEnumerator.MoveNext())
+            {
+                var leftExpression = leftEnumerator.Current.Expression;
+                var rightExpression = rightEnumerator.Current.Expression;
+                if (TupleExpressionSyntaxWrapper.IsInstance(leftExpression)
+                    && TupleExpressionSyntaxWrapper.IsInstance(rightExpression))
+                {
+                    if (!MapTupleElements(arrayBuilder, (TupleExpressionSyntaxWrapper)leftExpression, (TupleExpressionSyntaxWrapper)rightExpression))
+                    {
+                        return false;
+                    }
+                }
+                else
+                {
+                    arrayBuilder.Add(new AssignmentMapping(leftExpression, rightExpression));
+                }
+            }
+
+            return true;
+        }
+
+        private static bool MapDesignationElements(ImmutableArray<AssignmentMapping>.Builder arrayBuilder, ParenthesizedVariableDesignationSyntaxWrapper left, TupleExpressionSyntaxWrapper right)
+        {
+            if (left.Variables.Count != right.Arguments.Count)
+            {
+                return false;
+            }
+
+            var leftEnumerator = left.Variables.GetEnumerator();
+            var rightEnumerator = right.Arguments.GetEnumerator();
+            while (leftEnumerator.MoveNext() && rightEnumerator.MoveNext())
+            {
+                var leftVar = leftEnumerator.Current;
+                var rightExpression = rightEnumerator.Current.Expression;
+                if (ParenthesizedVariableDesignationSyntaxWrapper.IsInstance(leftVar)
+                    && TupleExpressionSyntaxWrapper.IsInstance(rightExpression))
+                {
+                    if (!MapDesignationElements(arrayBuilder, (ParenthesizedVariableDesignationSyntaxWrapper)leftVar, (TupleExpressionSyntaxWrapper)rightExpression))
+                    {
+                        return false;
+                    }
+                }
+                else
+                {
+                    arrayBuilder.Add(new AssignmentMapping(leftVar.SyntaxNode, rightExpression));
+                }
+            }
+
+            return true;
         }
     }
 }
