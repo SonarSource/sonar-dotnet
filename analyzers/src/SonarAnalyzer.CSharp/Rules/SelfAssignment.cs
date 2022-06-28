@@ -32,12 +32,10 @@ namespace SonarAnalyzer.Rules.CSharp
     {
         protected override ILanguageFacade<SyntaxKind> Language => CSharpFacade.Instance;
 
-        protected override void Initialize(SonarAnalysisContext context)
-        {
-            context.RegisterSyntaxNodeActionInNonGenerated(
-                c =>
+        protected override void Initialize(SonarAnalysisContext context) =>
+            context.RegisterSyntaxNodeActionInNonGenerated(c =>
                 {
-                    var expression = (AssignmentExpressionSyntax) c.Node;
+                    var expression = (AssignmentExpressionSyntax)c.Node;
 
                     if (expression.Parent is InitializerExpressionSyntax)
                     {
@@ -51,6 +49,5 @@ namespace SonarAnalyzer.Rules.CSharp
                 },
                 SyntaxKind.SimpleAssignmentExpression,
                 SyntaxKindEx.CoalesceAssignmentExpression);
-        }
     }
 }
