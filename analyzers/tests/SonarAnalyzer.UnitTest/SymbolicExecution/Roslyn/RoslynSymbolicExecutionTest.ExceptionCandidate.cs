@@ -561,11 +561,11 @@ Module Program
         Catch
             tag = ""InCatch""
         End Try
-        tag = ""AfterCatch""
+        tag = ""UnreachableAfterCatch""
     End Sub
 End Module";
 
-            var validator = new SETestContext(code, AnalyzerLanguage.VisualBasic, additionalChecks: Array.Empty<SymbolicCheck>(), outputKind: OutputKind.ConsoleApplication).Validator;
+            var validator = new SETestContext(code, AnalyzerLanguage.VisualBasic, Array.Empty<SymbolicCheck>(), outputKind: OutputKind.ConsoleApplication).Validator;
 
             // End operation is not part of the CFG
             validator.ValidateTagOrder("BeforeTry", "InTry");
