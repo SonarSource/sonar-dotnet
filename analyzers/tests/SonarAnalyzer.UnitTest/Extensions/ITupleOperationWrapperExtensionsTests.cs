@@ -9,11 +9,14 @@ namespace SonarAnalyzer.UnitTest.Extensions
     {
         [DataTestMethod]
         [DataRow("_ = (1, 2);", "1", "2")]
+        [DataRow("_ = (x: 1, y: 2);", "1", "2")]
+        [DataRow("_ = (1, M());", "1", "M()")]
         [DataRow("_ = (1, (2, 3));", "1", "2", "3")]
         [DataRow("_ = (1, (2, 3), 4, (5, (6, 7)));", "1", "2", "3", "4", "5", "6", "7")]
 
         [DataRow("(var a, (var b, var c)) = (1, (2, 3));", "var a", "var b", "var c")]
         [DataRow("(var a, var b) = (1, 2);", "var a", "var b")]
+        [DataRow("(var a, _) = (1, 2);", "var a", "_")]
         [DataRow("int a; (a, var b) = (1, M());", "a", "var b")]
 
         [DataRow("var (a, b) = (1, 2);", "a", "b")]
