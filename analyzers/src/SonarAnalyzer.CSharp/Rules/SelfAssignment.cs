@@ -22,8 +22,10 @@ using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
+using SonarAnalyzer.Extensions;
 using SonarAnalyzer.Helpers;
 using StyleCop.Analyzers.Lightup;
+using System.Linq;
 
 namespace SonarAnalyzer.Rules.CSharp
 {
@@ -42,9 +44,10 @@ namespace SonarAnalyzer.Rules.CSharp
                         return;
                     }
 
-                    if (CSharpEquivalenceChecker.AreEquivalent(expression.Left, expression.Right))
+                    var assigments = expression.MapAssignmentArguments().Where(x => CSharpEquivalenceChecker.AreEquivalent(x.Left, x.Right));
+                    foreach (var assigment in assigments)
                     {
-                        c.ReportIssue(Diagnostic.Create(Rule, c.Node.GetLocation()));
+                        c.ReportIssue(Diagnostic.Create(Rule, assigment.Left.GetLocation(), additionalLocations: new[] { assigment.Right.GetLocation() }));
                     }
                 },
                 SyntaxKind.SimpleAssignmentExpression,

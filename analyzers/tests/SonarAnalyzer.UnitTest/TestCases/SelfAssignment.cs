@@ -17,7 +17,9 @@ namespace Tests.TestCases
         {
             int? value = null;
 
-            value ??= value; // Noncompliant
+            value ??= value;
+//          ^^^^^           Noncompliant
+//                    ^^^^^ Secondary@-1
         }
 
         public int Prop1 { get; set; }
@@ -25,13 +27,15 @@ namespace Tests.TestCases
         public void Test()
         {
             var Prop1 = 5;
-            Prop1 = Prop1; //Noncompliant
-//          ^^^^^^^^^^^^^
+            Prop1 = Prop1;
+//          ^^^^^         Noncompliant
+//                  ^^^^^ Secondary@-1
 
             Prop1 = 2*Prop1;
 
             var y = 5;
-            y = /*comment*/ y; //Noncompliant {{Remove or correct this useless self-assignment.}}
+            y = /*comment*/ y; // Noncompliant {{Remove or correct this useless self-assignment.}}
+                               // Secondary@-1
 
             var x = new SelfAssignment
             {
