@@ -31,17 +31,17 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn;
 [ExcludeFromCodeCoverage]
 internal class DebugLogger
 {
+    private const string DebugSymbol = "DEBUG";
     private const string Separator = "----------";
 
     private readonly bool isActive;
 
 #if DEBUG
-    public DebugLogger()
-    {
+    public DebugLogger() =>
         isActive = Debugger.IsAttached; // Hardcode this locally to true, if you want every UT to log the output. Do not merge such a change.
-    }
 #endif
 
+    [Conditional(DebugSymbol)]
     public void Log(ControlFlowGraph cfg)
     {
         if (isActive)
@@ -51,6 +51,7 @@ internal class DebugLogger
         }
     }
 
+    [Conditional(DebugSymbol)]
     public void Log(object value, string title = null, bool withIndent = false)
     {
         if (isActive)

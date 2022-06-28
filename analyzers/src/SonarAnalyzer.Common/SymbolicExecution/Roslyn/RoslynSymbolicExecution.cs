@@ -267,7 +267,7 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
             operation.Instance.Kind switch
             {
                 OperationKindEx.Invocation => ExceptionState.UnknownException,
-            // ToDo: Support other operations like field/property access on non-static non-this, conversions and so on. See docs for list of operations.
+                // ToDo: Support other operations like field/property access on non-static non-this, conversions and so on. See docs for list of operations.
                 _ => null
             };
 
