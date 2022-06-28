@@ -33,16 +33,16 @@ namespace SonarAnalyzer.Extensions
         public static ImmutableArray<SingleVariableDesignationSyntaxWrapper> AllVariables(this VariableDesignationSyntaxWrapper variableDesignation)
         {
             var builder = ImmutableArray.CreateBuilder<SingleVariableDesignationSyntaxWrapper>();
-            CollectVariables(builder, variableDesignation);
+            CollectVariables(variableDesignation);
             return builder.ToImmutableArray();
 
-            static void CollectVariables(ImmutableArray<SingleVariableDesignationSyntaxWrapper>.Builder builder, VariableDesignationSyntaxWrapper variableDesignation)
+            void CollectVariables(VariableDesignationSyntaxWrapper variableDesignation)
             {
                 if (ParenthesizedVariableDesignationSyntaxWrapper.IsInstance(variableDesignation))
                 {
                     foreach (var variable in ((ParenthesizedVariableDesignationSyntaxWrapper)variableDesignation).Variables)
                     {
-                        CollectVariables(builder, variable);
+                        CollectVariables(variable);
                     }
                 }
                 else if (SingleVariableDesignationSyntaxWrapper.IsInstance(variableDesignation))
