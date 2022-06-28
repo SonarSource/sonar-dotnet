@@ -133,11 +133,11 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
         public bool Equals(ProgramState other) =>
             // VisitCount is not compared, two ProgramState are equal if their current state is equal. No matter was historical path led to it.
             other is not null
-            && other.Exceptions.SequenceEqual(Exceptions)
             && other.OperationValue.DictionaryEquals(OperationValue)
             && other.SymbolValue.DictionaryEquals(SymbolValue)
             && other.CaptureOperation.DictionaryEquals(CaptureOperation)
-            && other.PreservedSymbols.SetEquals(PreservedSymbols);
+            && other.PreservedSymbols.SetEquals(PreservedSymbols)
+            && other.Exceptions.SequenceEqual(Exceptions);
 
         public override string ToString() =>
             Equals(Empty) ? "Empty" + Environment.NewLine : SerializeExceptions() + SerializeSymbols() + SerializeOperations() + SerializeCaptures();

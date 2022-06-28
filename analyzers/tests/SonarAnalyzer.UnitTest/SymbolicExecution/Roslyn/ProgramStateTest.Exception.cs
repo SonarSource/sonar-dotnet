@@ -38,6 +38,18 @@ namespace SonarAnalyzer.UnitTest.SymbolicExecution.Roslyn
         }
 
         [TestMethod]
+        public void SetException_IsImmutable()
+        {
+            var sut = ProgramState.Empty;
+            sut.Exception.Should().BeNull();
+
+            sut = sut.SetException(ExceptionState.UnknownException);
+            sut.Exception.Should().Be(ExceptionState.UnknownException);
+
+            ProgramState.Empty.Exception.Should().BeNull();
+        }
+
+        [TestMethod]
         public void SetException_RemovesAllPrevious()
         {
             var sut = ProgramState.Empty.PushException(ExceptionState.UnknownException).PushException(ExceptionState.UnknownException).PushException(ExceptionState.UnknownException);
