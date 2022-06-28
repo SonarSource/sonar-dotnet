@@ -49,7 +49,8 @@ namespace Tests.Diagnostics
             Console.WriteLine("the format", "a"); // Noncompliant
             Console.Write("the format", "a"); // Noncompliant
 
-            Property1 = "some text"; // Noncompliant
+            Property1 = "some text"; // Noncompliant {{Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.}}
+            //          ^^^^^^^^^^^
             Property2 = "moar text";
             SomeMessage = "some text"; // Compliant as Localizable is set to false
             Message = "message text"; // Noncompliant

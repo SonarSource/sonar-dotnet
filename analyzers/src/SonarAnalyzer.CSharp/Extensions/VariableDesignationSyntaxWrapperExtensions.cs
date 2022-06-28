@@ -30,22 +30,19 @@ namespace SonarAnalyzer.Extensions
         /// only identifiers are included in the result (discards are skipped). For a designation like <c>(a, (_, b))</c>
         /// the method returns <c>[a, b]</c>.
         /// </summary>
-        /// <param name="variableDesignation">The designation to return the variables for.</param>
-        /// <returns>A list of <see cref="SingleVariableDesignationSyntaxWrapper"/> that contain all flattened variables of the designation.</returns>
         public static ImmutableArray<SingleVariableDesignationSyntaxWrapper> AllVariables(this VariableDesignationSyntaxWrapper variableDesignation)
         {
             var builder = ImmutableArray.CreateBuilder<SingleVariableDesignationSyntaxWrapper>();
-            CollectVariables(builder, variableDesignation);
+            CollectVariables(variableDesignation);
             return builder.ToImmutableArray();
 
-            static void CollectVariables(ImmutableArray<SingleVariableDesignationSyntaxWrapper>.Builder builder, VariableDesignationSyntaxWrapper variableDesignation)
+            void CollectVariables(VariableDesignationSyntaxWrapper variableDesignation)
             {
                 if (ParenthesizedVariableDesignationSyntaxWrapper.IsInstance(variableDesignation))
                 {
-                    var parenthesized = (ParenthesizedVariableDesignationSyntaxWrapper)variableDesignation;
-                    foreach (var variable in parenthesized.Variables)
+                    foreach (var variable in ((ParenthesizedVariableDesignationSyntaxWrapper)variableDesignation).Variables)
                     {
-                        CollectVariables(builder, variable);
+                        CollectVariables(variable);
                     }
                 }
                 else if (SingleVariableDesignationSyntaxWrapper.IsInstance(variableDesignation))

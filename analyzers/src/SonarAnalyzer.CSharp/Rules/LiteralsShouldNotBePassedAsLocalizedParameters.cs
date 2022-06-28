@@ -26,6 +26,7 @@ using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
+using SonarAnalyzer.Extensions;
 using SonarAnalyzer.Helpers;
 
 namespace SonarAnalyzer.Rules.CSharp
@@ -93,12 +94,20 @@ namespace SonarAnalyzer.Rules.CSharp
         private static void AnalyzeAssignments(SyntaxNodeAnalysisContext context)
         {
             var assignmentSyntax = (AssignmentExpressionSyntax)context.Node;
-            if (context.SemanticModel.GetSymbolInfo(assignmentSyntax.Left).Symbol is IPropertySymbol propertySymbol
-                && IsLocalizable(propertySymbol)
-                && IsStringLiteral(assignmentSyntax.Right, context.SemanticModel)
-                && !CSharpDebugOnlyCodeHelper.IsCallerInConditionalDebug(assignmentSyntax, context.SemanticModel))
+            if (CSharpDebugOnlyCodeHelper.IsCallerInConditionalDebug(assignmentSyntax, context.SemanticModel))
             {
-                context.ReportIssue(Diagnostic.Create(Rule, assignmentSyntax.GetLocation()));
+                return;
+            }
+
+            var assignmentMappings = assignmentSyntax.MapAssignmentArguments();
+            foreach (var assignmentMapping in assignmentMappings)
+            {
+                if (context.SemanticModel.GetSymbolInfo(assignmentMapping.Left).Symbol is IPropertySymbol propertySymbol
+                    && IsLocalizable(propertySymbol)
+                    && IsStringLiteral(assignmentMapping.Right, context.SemanticModel))
+                {
+                    context.ReportIssue(Diagnostic.Create(Rule, assignmentMapping.Right.GetLocation()));
+                }
             }
         }
 
