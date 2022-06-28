@@ -29,6 +29,15 @@ void DoStuffWithIntsAgain()
     (x, int y) = ReturnIntTuple(); // Noncompliant
 }
 
+void TwoAssigments()
+{
+    int a, b, c = 0;
+    (a, (b, c)) = (1, (2, 3));
+//  ^^^^^^^^^^^^^^^^^^^^^^^^^  Noncompliant    [issue1] {{Remove this useless assignment to local variable 'a'.}}
+//  ^^^^^^^^^^^^^^^^^^^^^^^^^  Noncompliant@-1 [issue2] {{Remove this useless assignment to local variable 'b'.}}
+//  ^^^^^^^^^^^^^^^^^^^^^^^^^  Noncompliant@-2 [issue3] {{Remove this useless assignment to local variable 'c'.}}
+}
+
 void DoSimplerStuffWithIntsAgain()
 {
     int x;
