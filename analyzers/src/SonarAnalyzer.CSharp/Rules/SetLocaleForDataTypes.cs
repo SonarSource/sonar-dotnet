@@ -67,51 +67,39 @@ namespace SonarAnalyzer.Rules.CSharp
             {
                 if (GetSymbolFromConstructorInvocation(c.Node, c.SemanticModel) is ITypeSymbol objectType
                     && objectType.IsAny(CheckedTypes)
-                    && GetAssignmentTargetVariable(c.Node) is { } variableSyntax)
+                    && GetAssignmentTargetVariable(c.Node) is { } variableSyntaxArray)
                 {
-                    var variableSymbol = variableSyntax is IdentifierNameSyntax
-                                         || DeclarationExpressionSyntaxWrapper.IsInstance(variableSyntax)
-                        ? c.SemanticModel.GetSymbolInfo(variableSyntax).Symbol
-                        : c.SemanticModel.GetDeclaredSymbol(variableSyntax);
-                    if (variableSymbol != null)
-                    {
-                        symbolsWhereTypeIsCreated.Add(new NodeAndSymbol(c.Node, variableSymbol));
-                    }
+                    var variableSymbols = variableSyntaxArray.Select(x => FindSymbol(x))
+                        .OfType<ISymbol>()
+                        .Where(x => x.GetSymbolType().IsAny(CheckedTypes))
+                        .Select(x => new NodeAndSymbol(c.Node, x));
+                    symbolsWhereTypeIsCreated.UnionWith(variableSymbols);
                 }
+                ISymbol FindSymbol(SyntaxNode node) =>
+                node is IdentifierNameSyntax || DeclarationExpressionSyntaxWrapper.IsInstance(node)
+                ? c.SemanticModel.GetSymbolInfo(node).Symbol
+                : c.SemanticModel.GetDeclaredSymbol(node);
             };
 
         private static Action<SyntaxNodeAnalysisContext> ProcessSimpleAssignments(ISet<ISymbol> symbolsWhereLocaleIsSet) =>
             c =>
             {
                 var assignmentExpression = (AssignmentExpressionSyntax)c.Node;
-                ProcessExpression(assignmentExpression.Left, c.SemanticModel, symbolsWhereLocaleIsSet);
-            };
 
-        private static void ProcessExpression(ExpressionSyntax expression, SemanticModel semanticModel, ISet<ISymbol> symbolsWhereLocaleIsSet)
-        {
-            expression = expression.RemoveParentheses();
-            if (TupleExpressionSyntaxWrapper.IsInstance(expression)
-                && ((TupleExpressionSyntaxWrapper)expression) is var tupleExpression)
-            {
-                foreach (var argument in tupleExpression.Arguments)
+                foreach (var argument in assignmentExpression.AssignmentTargets())
                 {
-                    ProcessExpression(argument.Expression, semanticModel, symbolsWhereLocaleIsSet);
-                }
-            }
-            else
-            {
-                if (GetPropertySymbol(expression, semanticModel) is { } propertySymbol
-                            && propertySymbol.Name == "Locale"
-                            && propertySymbol.ContainingType.IsAny(CheckedTypes))
-                {
-                    var variableSymbol = GetAccessedVariable(expression, semanticModel);
-                    if (variableSymbol != null)
+                    if (GetPropertySymbol(argument, c.SemanticModel) is { } propertySymbol
+                        && propertySymbol.Name == "Locale"
+                        && propertySymbol.ContainingType.IsAny(CheckedTypes))
                     {
-                        symbolsWhereLocaleIsSet.Add(variableSymbol);
+                        var variableSymbol = GetAccessedVariable(argument, c.SemanticModel);
+                        if (variableSymbol != null)
+                        {
+                            symbolsWhereLocaleIsSet.Add(variableSymbol);
+                        }
                     }
                 }
-            }
-        }
+            };
 
         private static Action<CompilationAnalysisContext> ProcessCollectedSymbols(ICollection<NodeAndSymbol> symbolsWhereTypeIsCreated, ICollection<ISymbol> symbolsWhereLocaleIsSet) =>
             c =>
@@ -130,110 +118,21 @@ namespace SonarAnalyzer.Rules.CSharp
                 ? semanticModel.GetSymbolInfo(objectCreation.Type).Symbol
                 : semanticModel.GetSymbolInfo(constructorCall).Symbol?.ContainingType;
 
-        private static SyntaxNode GetAssignmentTargetVariable(SyntaxNode objectCreation) =>
+        private static ImmutableArray<SyntaxNode> GetAssignmentTargetVariable(SyntaxNode objectCreation) =>
             objectCreation.GetFirstNonParenthesizedParent() switch
             {
-                AssignmentExpressionSyntax assignment => assignment.Left,
-                EqualsValueClauseSyntax equalsClause when equalsClause.Parent.Parent is VariableDeclarationSyntax variableDeclaration => variableDeclaration.Variables.Last(),
-                ArgumentSyntax argument => HandleArgumentSyntax(argument),
-                _ => null
+                AssignmentExpressionSyntax assignment => assignment.AssignmentTargets(),
+                EqualsValueClauseSyntax equalsClause when equalsClause.Parent.Parent is VariableDeclarationSyntax variableDeclaration => ImmutableArray.Create((SyntaxNode)variableDeclaration.Variables.Last()),
+                ArgumentSyntax argument when argument.Parent.Parent is AssignmentExpressionSyntax expressionSyntax => expressionSyntax.AssignmentTargets(),
+                _ => ImmutableArray<SyntaxNode>.Empty
             };
 
-        private static SyntaxNode HandleArgumentSyntax(ArgumentSyntax argument)
+        private static IPropertySymbol GetPropertySymbol(SyntaxNode node, SemanticModel model) =>
+            model.GetSymbolInfo(node).Symbol as IPropertySymbol;
+
+        private static ISymbol GetAccessedVariable(SyntaxNode node, SemanticModel model)
         {
-            if (TupleExpressionSyntaxWrapper.IsInstance(argument.Parent)
-                && ((TupleExpressionSyntaxWrapper)argument.Parent) is var rightTuple)
-            {
-                var currentNode = rightTuple.SyntaxNode.Parent;
-                AssignmentExpressionSyntax assignment = null;
-                while (currentNode != null && assignment == null)
-                {
-                    if (currentNode is AssignmentExpressionSyntax syntax)
-                    {
-                        assignment = syntax;
-                    }
-                    else
-                    {
-                        currentNode = currentNode.Parent;
-                    }
-                }
-                return FindAssignedSyntaxNodeInAssignment(argument, assignment);
-            }
-            return null;
-        }
-
-        private static SyntaxNode FindAssignedSyntaxNodeInAssignment(ArgumentSyntax argument, AssignmentExpressionSyntax assignment)
-        {
-            if (assignment == null)
-            {
-                return null;
-            }
-
-            var mappedAssignments = MapAssignmentArguments(assignment);
-            foreach (var mappedAssignment in mappedAssignments)
-            {
-                if (mappedAssignment.Value == argument.Expression)
-                {
-                    return mappedAssignment.Key;
-                }
-            }
-            return null;
-        }
-
-        /// <summary>
-        /// Maps the left and the right side arguments of an <paramref name="assignment"/>. If both sides are tuples, the tuple elements are mapped.
-        /// <code>
-        /// (var x, var y) = (1, 2);                 // [x→1, y→2]
-        /// (var x, (var y, var z)) = (1, (2, 3));   // [x→1, y→2, z→3]
-        /// var x = 1;                               // [x→1]
-        /// (var x, var y) = M();                    // [(x,y)→M()]
-        /// </code>
-        /// </summary>
-        /// <param name="assignment">The <paramref name="assignment"/> expression.</param>
-        /// <returns>A mapping from expressions on the left side of the <paramref name="assignment"/> to the right side.</returns>
-        public static ImmutableArray<KeyValuePair<ExpressionSyntax, ExpressionSyntax>> MapAssignmentArguments(AssignmentExpressionSyntax assignment)
-        {
-            if (TupleExpressionSyntaxWrapper.IsInstance(assignment.Left)
-                && TupleExpressionSyntaxWrapper.IsInstance(assignment.Right))
-            {
-                var builder = ImmutableArray.CreateBuilder<KeyValuePair<ExpressionSyntax, ExpressionSyntax>>();
-                AssignTupleElements(builder, (TupleExpressionSyntaxWrapper)assignment.Left, (TupleExpressionSyntaxWrapper)assignment.Right);
-                return builder.ToImmutableArray();
-            }
-            else
-            {
-                return ImmutableArray.Create(new KeyValuePair<ExpressionSyntax, ExpressionSyntax>(assignment.Left, assignment.Right));
-            }
-
-            static void AssignTupleElements(ImmutableArray<KeyValuePair<ExpressionSyntax, ExpressionSyntax>>.Builder builder,
-                                            TupleExpressionSyntaxWrapper left,
-                                            TupleExpressionSyntaxWrapper right)
-            {
-                var leftEnum = left.Arguments.GetEnumerator();
-                var rightEnum = right.Arguments.GetEnumerator();
-                while (leftEnum.MoveNext() && rightEnum.MoveNext())
-                {
-                    var leftArg = leftEnum.Current;
-                    var rightArg = rightEnum.Current;
-                    if (leftArg is ArgumentSyntax { Expression: { } leftExpression } && TupleExpressionSyntaxWrapper.IsInstance(leftExpression)
-                        && rightArg is ArgumentSyntax { Expression: { } rightExpression } && TupleExpressionSyntaxWrapper.IsInstance(rightExpression))
-                    {
-                        AssignTupleElements(builder, (TupleExpressionSyntaxWrapper)leftExpression, (TupleExpressionSyntaxWrapper)rightExpression);
-                    }
-                    else
-                    {
-                        builder.Add(new KeyValuePair<ExpressionSyntax, ExpressionSyntax>(leftArg.Expression, rightArg.Expression));
-                    }
-                }
-            }
-        }
-
-        private static IPropertySymbol GetPropertySymbol(ExpressionSyntax expression, SemanticModel model) =>
-            model.GetSymbolInfo(expression).Symbol as IPropertySymbol;
-
-        private static ISymbol GetAccessedVariable(ExpressionSyntax expression, SemanticModel model)
-        {
-            var variable = expression.RemoveParentheses();
+            var variable = node.RemoveParentheses();
 
             if (variable is IdentifierNameSyntax identifier)
             {

@@ -9,8 +9,7 @@ var table2 = new DataTable(); // Noncompliant
 
 DataTable x, y;
 
-(x, y) = (new DataTable(), new DataTable()); // Noncompliant
-//Noncompliant@-1
+(x, y) = (new DataTable(), new DataTable()); // Noncompliant [issue1, issue2]
 
 DataTable table3 = new() { Locale = CultureInfo.InvariantCulture };
 DataTable table4 = new(); // Noncompliant

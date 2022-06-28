@@ -5,8 +5,7 @@ using System.Globalization;
 DataTable y, d, f, j, l;
 int b, h;
 
-(var x, y) = (new DataTable(), new DataTable()); // Noncompliant
-// Noncompliant@-1
+(var x, y) = (new DataTable(), new DataTable()); // Noncompliant [1, 2]
 
 (var a, b) = (new DataTable(), 42); // Noncompliant
 
@@ -24,6 +23,6 @@ int b, h;
 (var k, l) = (new DataTable(), new DataTable()); // Noncompliant
 k.Locale = CultureInfo.InvariantCulture;
 
-TupleParameter((new DataTable(), new DataTable()));
+TupleParameter((new DataTable(), new DataTable())); // FN
 
 void TupleParameter((DataTable, DataTable) dataTableTuple) { }

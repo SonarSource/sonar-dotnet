@@ -34,7 +34,12 @@ namespace SonarAnalyzer.Common
             Node = node;
             Symbol = symbol;
         }
-    }
+
+        public override bool Equals(object obj) =>
+            obj is NodeAndSymbol other && Symbol.Equals(other.Symbol);
+
+        public override int GetHashCode() => Symbol.GetHashCode();
+     }
 
     public class NodeAndSymbol : NodeAndSymbol<SyntaxNode, ISymbol>
     {
