@@ -49,7 +49,7 @@ namespace SonarAnalyzer.Rules
                     {
                         if (c.SemanticModel.GetSymbolInfo(target).Symbol is { } symbol
                             && (symbol is IParameterSymbol { RefKind: RefKind.None } || IsAssignmentToCatchVariable(symbol, target))
-                            && (!IsReadBefore(c.SemanticModel, symbol, c.Node)))
+                            && !IsReadBefore(c.SemanticModel, symbol, c.Node))
                         {
                             c.ReportIssue(Diagnostic.Create(SupportedDiagnostics[0], target.GetLocation(), target.ToString()));
                         }
