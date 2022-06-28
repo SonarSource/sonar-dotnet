@@ -19,6 +19,25 @@ Namespace Tests.TestCases
             Dim x3 = If(isMale, "Mr. ",
                 If(isMarried, "Mrs. ", "Miss "))
 '               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ Noncompliant
+
+            Dim x4 = If(isMale, Function() "Mr.", Function() If(isMarried, "Mrs.", "Miss")) ' Compliant. Ternary expressions in lambdas are not considered nested.
+            Dim x5 = If(isMale, Sub() PrintGreeting("Mr."),  Sub() PrintGreeting(If(isMarried, "Mrs.", "Miss")))
+            Dim x6 = If(isMale, Function()
+                                    Return "Mr."
+                                End Function,
+                                Function()
+                                    Return If(isMarried, "Mrs.", "Miss")
+                                End Function)
+            Dim x7 = If(isMale, Sub()
+                                    PrintGreeting("Mr.")
+                                End Sub,
+                                Sub()
+                                    PrintGreeting(If(isMarried, "Mrs.", "Miss"))
+                                End Sub)
+
         End Function
+
+        Private Sub PrintGreeting(greeting As String)
+        End Sub
     End Class
 End Namespace
