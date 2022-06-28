@@ -23,6 +23,8 @@ int b, h;
 (var k, l) = (new DataTable(), new DataTable()); // Noncompliant
 k.Locale = CultureInfo.InvariantCulture;
 
+var (xx, yy) = (new DataTable(), new DataTable()); // Noncompliant [3, 4]
+
 TupleParameter((new DataTable(), new DataTable())); // FN
 
 void TupleParameter((DataTable, DataTable) dataTableTuple) { }
