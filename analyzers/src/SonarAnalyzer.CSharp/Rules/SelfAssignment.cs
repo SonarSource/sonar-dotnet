@@ -44,8 +44,7 @@ namespace SonarAnalyzer.Rules.CSharp
                         return;
                     }
 
-                    var assigments = expression.MapAssignmentArguments().Where(x => CSharpEquivalenceChecker.AreEquivalent(x.Left, x.Right));
-                    foreach (var assigment in assigments)
+                    foreach (var assigment in expression.MapAssignmentArguments().Where(x => CSharpEquivalenceChecker.AreEquivalent(x.Left, x.Right)))
                     {
                         c.ReportIssue(Diagnostic.Create(Rule, assigment.Left.GetLocation(), additionalLocations: new[] { assigment.Right.GetLocation() }));
                     }
