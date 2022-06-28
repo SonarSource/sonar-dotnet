@@ -112,8 +112,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 {
                     if (ITupleOperationWrapper.IsInstance(deconstructionAssignment.Target))
                     {
-                        var tuple = ITupleOperationWrapper.FromOperation(deconstructionAssignment.Target);
-                        foreach (var tupleElement in tuple.Elements)
+                        foreach (var tupleElement in ITupleOperationWrapper.FromOperation(deconstructionAssignment.Target).AllElements())
                         {
                             ProcessAssignment(deconstructionAssignment, tupleElement);
                         }
