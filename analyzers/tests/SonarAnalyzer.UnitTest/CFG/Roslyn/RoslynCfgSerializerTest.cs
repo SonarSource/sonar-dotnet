@@ -675,7 +675,6 @@ cfg0_block1 -> cfg0_block2
 ");
         }
 
-
         [TestMethod]
         public void Serialize_TryCatchChain()
         {
