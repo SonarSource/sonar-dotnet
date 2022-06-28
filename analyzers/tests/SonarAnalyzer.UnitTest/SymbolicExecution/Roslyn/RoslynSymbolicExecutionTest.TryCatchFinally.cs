@@ -549,12 +549,10 @@ tag = ""UnreachableAfterCatch"";";
             validator.ValidateTagOrder(
                 "BeforeTry",
                 "InTry",
-                "InCatch", // With Exception thrown by Tag("InTry")
+                "InCatch",  // With Exception thrown by Tag("InTry")
                 "InCatch"); // With Exception thrown by `throw`
 
-            validator.TagStates("InCatch").Should().HaveCount(2)
-                .And.ContainSingle(x => HasSystemException(x))
-                .And.ContainSingle(x => HasUnknownException(x));
+            ValidateHasOnlyUnknownExceptionAndSystemException(validator, "InCatch");
 
             validator.ValidateExitReachCount(1);
         }
@@ -1176,7 +1174,7 @@ tag = ""End"";";
                 "InFinally",
                 "InCatchArgument",
                 "InCatchAll",
-                "InFinally", // ToDo: remove this, ex.ParamName cannot throw in this case
+                "InFinally", // ex.ParamName cannot throw in this case, will be solved by https://jira.sonarsource.com/browse/MMF-2401
                 "InCatchAllWhen",
                 "End",
                 "InCatchArgumentWhen");
@@ -1221,16 +1219,6 @@ tag = ""End"";";
             validator.TagStates("InFinally").Should().HaveCount(1).And.ContainSingle(x => HasNoException(x));
             validator.TagStates("End").Should().HaveCount(1).And.ContainSingle(x => HasNoException(x));
         }
-
-        private static void ValidateHasOnlyUnknownExceptionAndSystemException(ValidatorTestCheck validator, string stateName) =>
-            validator.TagStates(stateName).Should().HaveCount(2)
-                .And.ContainSingle(x => HasUnknownException(x))
-                .And.ContainSingle(x => HasSystemException(x));
-
-        private static void ValidateHasOnlyNoExceptionAndUnknownException(ValidatorTestCheck validator, string stateName) =>
-            validator.TagStates(stateName).Should().HaveCount(2)
-                .And.ContainSingle(x => HasNoException(x))
-                .And.ContainSingle(x => HasUnknownException(x));
 
         [TestMethod]
         public void Exception_FieldReference()
@@ -1443,12 +1431,9 @@ tag = ""AfterCatch"";";
                 "BeforeTry",
                 "InTry",
                 "InCatch",
-                "InCatch",
                 "AfterCatch");
 
-            validator.TagStates("InCatch").Should().HaveCount(2)
-                     .And.ContainSingle(x => HasExceptionOfType(x, "FileNotFoundException"))
-                     .And.ContainSingle(x => HasUnknownException(x)); // ObjectCreation can throw unknown exception
+            validator.TagStates("InCatch").Should().HaveCount(1).And.ContainSingle(x => HasExceptionOfType(x, "FileNotFoundException"));
             validator.TagStates("AfterCatch").Should().HaveCount(1).And.ContainSingle(x => HasNoException(x));
         }
 
@@ -1463,5 +1448,15 @@ tag = ""AfterCatch"";";
 
         private static bool HasExceptionOfType(ProgramState state, string typeName) =>
             state.Exception?.Type?.Name == typeName;
+
+        private static void ValidateHasOnlyUnknownExceptionAndSystemException(ValidatorTestCheck validator, string stateName) =>
+            validator.TagStates(stateName).Should().HaveCount(2)
+                     .And.ContainSingle(x => HasUnknownException(x))
+                     .And.ContainSingle(x => HasSystemException(x));
+
+        private static void ValidateHasOnlyNoExceptionAndUnknownException(ValidatorTestCheck validator, string stateName) =>
+            validator.TagStates(stateName).Should().HaveCount(2)
+                     .And.ContainSingle(x => HasNoException(x))
+                     .And.ContainSingle(x => HasUnknownException(x));
     }
 }

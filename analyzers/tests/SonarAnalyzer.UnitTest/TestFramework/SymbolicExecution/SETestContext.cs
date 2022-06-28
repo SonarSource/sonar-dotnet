@@ -26,12 +26,13 @@ namespace SonarAnalyzer.UnitTest.TestFramework.SymbolicExecution
 {
     internal class SETestContext
     {
-        public readonly ValidatorTestCheck Validator = new();
+        public readonly ValidatorTestCheck Validator;
 
         public SETestContext(string code, AnalyzerLanguage language, SymbolicCheck[] additionalChecks, string localFunctionName = null)
         {
             const string Separator = "----------";
             var cfg = TestHelper.CompileCfg(code, language, false, localFunctionName);
+            Validator = new ValidatorTestCheck(cfg);
             var se = new RoslynSymbolicExecution(cfg, additionalChecks.Concat(new[] { Validator }).ToArray());
             Console.WriteLine(Separator);
             Console.Write(CfgSerializer.Serialize(cfg));
@@ -77,19 +78,17 @@ public unsafe class Sample
     private void Tag(string name, object arg = null) {{ }}
 }}
 
-public class Person
+public class Person : PersonBase
 {{
     public static string StaticProperty {{ get; set; }}
-
-    public string firstName;
-
+    public string Field;
     public event EventHandler Event;
-
-    public string LastName {{ get; set; }}
-
-    public string GetName() => null;
-
+    public string Method() => null;
     public static void StaticMethod() {{ }}
+}}
+
+public class PersonBase
+{{
 }}";
             return new(code, AnalyzerLanguage.CSharp, additionalChecks, localFunctionName);
         }

@@ -44,7 +44,8 @@ namespace SonarAnalyzer.UnitTest.SymbolicExecution.Roslyn
         [TestMethod]
         public void Execute_SecondRun_Throws()
         {
-            var se = new RoslynSymbolicExecution(TestHelper.CompileCfgBodyCS(), new[] { new ValidatorTestCheck() });
+            var cfg = TestHelper.CompileCfgBodyCS();
+            var se = new RoslynSymbolicExecution(cfg, new[] { new ValidatorTestCheck(cfg) });
             se.Execute();
             se.Invoking(x => x.Execute()).Should().Throw<InvalidOperationException>().WithMessage("Engine can be executed only once.");
         }
@@ -173,7 +174,7 @@ namespace SonarAnalyzer.UnitTest.SymbolicExecution.Roslyn
         {
             const string code = @"
 var first = boolParameter ? true : false;
-Tag(""BeforeLastUse""); 
+Tag(""BeforeLastUse"");
 bool second = first;
 if(boolParameter)
     boolParameter.ToString();

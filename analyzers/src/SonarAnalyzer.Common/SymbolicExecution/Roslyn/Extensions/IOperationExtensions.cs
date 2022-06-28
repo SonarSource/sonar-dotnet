@@ -34,7 +34,7 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
                 _ when ILocalReferenceOperationWrapper.IsInstance(operation) => ILocalReferenceOperationWrapper.FromOperation(operation).Local,
                 _ when IFieldReferenceOperationWrapper.IsInstance(operation)
                     && IFieldReferenceOperationWrapper.FromOperation(operation) is var fieldReference
-                    && IsStaticOrThis(fieldReference.Instance) => fieldReference.Field,
+                    && IsStaticOrThis(fieldReference) => fieldReference.Field,
                 _ => null
             };
 
@@ -53,9 +53,9 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
         internal static IArgumentOperationWrapper ToArgument(this IOperation operation) =>
             IArgumentOperationWrapper.FromOperation(operation);
 
-        public static bool IsStaticOrThis(this IOperation operation) =>
-            operation == null // static fields
-            || operation.IsAnyKind(OperationKindEx.InstanceReference);
+        public static bool IsStaticOrThis(this IMemberReferenceOperationWrapper reference) =>
+            reference.Instance == null // static fields
+            || reference.Instance.IsAnyKind(OperationKindEx.InstanceReference);
 
         private static T? As<T>(this IOperation operation, OperationKind kind, Func<IOperation, T> fromOperation) where T : struct =>
             operation.Kind == kind ? fromOperation(operation) : null;
