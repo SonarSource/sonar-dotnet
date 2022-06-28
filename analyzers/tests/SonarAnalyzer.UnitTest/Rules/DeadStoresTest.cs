@@ -26,28 +26,33 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class DeadStoresTest
     {
+        private readonly VerifierBuilder builderSonarCfg = new VerifierBuilder()
+            .AddAnalyzer(() => new DeadStores(AnalyzerConfiguration.AlwaysEnabledWithSonarCfg))
+            .WithOptions(ParseOptionsHelper.FromCSharp8)
+            .AddReferences(MetadataReferenceFacade.NETStandard21);
+
+        private readonly VerifierBuilder builderRoslynCfg = new VerifierBuilder<DeadStores>()
+            .AddReferences(MetadataReferenceFacade.NETStandard21);
+
         [TestMethod]
         public void DeadStores_SonarCfg() =>
-            OldVerifier.VerifyAnalyzer(@"TestCases\DeadStores.SonarCfg.cs",
-                                    new DeadStores(AnalyzerConfiguration.AlwaysEnabledWithSonarCfg),
-                                    ParseOptionsHelper.FromCSharp8,
-                                    MetadataReferenceFacade.NETStandard21);
+            builderSonarCfg.AddPaths("DeadStores.SonarCfg.cs").Verify();
 
         [TestMethod]
         public void DeadStores_RoslynCfg() =>
-            OldVerifier.VerifyAnalyzer(@"TestCases\DeadStores.RoslynCfg.cs",
-                                    new DeadStores(),
-                                    ParseOptionsHelper.FromCSharp8,
-                                    MetadataReferenceFacade.NETStandard21);
+            builderRoslynCfg.AddPaths("DeadStores.RoslynCfg.cs").WithOptions(ParseOptionsHelper.FromCSharp8).Verify();
 
 #if NET
+
         [TestMethod]
         public void DeadStores_CSharp9() =>
-            OldVerifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\DeadStores.CSharp9.cs", new DeadStores());
+            builderRoslynCfg.AddPaths("DeadStores.CSharp9.cs").WithTopLevelStatements().Verify();
 
         [TestMethod]
         public void DeadStores_CSharp10() =>
-            OldVerifier.VerifyAnalyzerFromCSharp10Console(@"TestCases\DeadStores.CSharp10.cs", new DeadStores());
+            builderRoslynCfg.AddPaths("DeadStores.CSharp10.cs").WithTopLevelStatements().WithOptions(ParseOptionsHelper.FromCSharp10).Verify();
+
 #endif
+
     }
 }
