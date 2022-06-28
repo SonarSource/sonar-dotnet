@@ -392,8 +392,7 @@ public class C
     {{
         {code}
     }}
-}}
-");
+}}");
             return syntaxTree.GetRoot().DescendantNodesAndSelf().OfType<AssignmentExpressionSyntax>().Single();
         }
     }

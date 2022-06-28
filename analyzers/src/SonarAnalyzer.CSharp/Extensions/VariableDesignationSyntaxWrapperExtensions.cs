@@ -30,8 +30,6 @@ namespace SonarAnalyzer.Extensions
         /// only identifiers are included in the result (discards are skipped). For a designation like <c>(a, (_, b))</c>
         /// the method returns <c>[a, b]</c>.
         /// </summary>
-        /// <param name="variableDesignation">The designation to return the variables for.</param>
-        /// <returns>A list of <see cref="SingleVariableDesignationSyntaxWrapper"/> that contain all flattened variables of the designation.</returns>
         public static ImmutableArray<SingleVariableDesignationSyntaxWrapper> AllVariables(this VariableDesignationSyntaxWrapper variableDesignation)
         {
             var builder = ImmutableArray.CreateBuilder<SingleVariableDesignationSyntaxWrapper>();
