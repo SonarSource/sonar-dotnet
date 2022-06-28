@@ -37,14 +37,14 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
                 OperationKindEx.ArrayElementReference => new ExceptionState(typeCatalog.SystemIndexOutOfRangeException),
                 OperationKindEx.Conversion => ConversionExceptionCandidate(operation),
                 OperationKindEx.DynamicIndexerAccess => new ExceptionState(typeCatalog.SystemIndexOutOfRangeException),
-                OperationKindEx.DynamicInvocation => ExceptionState.UnknownException,      // The raised exception is Microsoft.CSharp.RuntimeBinder.RuntimeBinderException for which we don't have access.
-                OperationKindEx.DynamicMemberReference => ExceptionState.UnknownException, // The raised exception is Microsoft.CSharp.RuntimeBinder.RuntimeBinderException for which we don't have access.
-                OperationKindEx.DynamicObjectCreation => ExceptionState.UnknownException,  // The raised exception is Microsoft.CSharp.RuntimeBinder.RuntimeBinderException for which we don't have access.
+                OperationKindEx.DynamicInvocation => ExceptionState.UnknownException,      // This raises is Microsoft.CSharp.RuntimeBinder.RuntimeBinderException that we can't access.
+                OperationKindEx.DynamicMemberReference => ExceptionState.UnknownException, // This raises is Microsoft.CSharp.RuntimeBinder.RuntimeBinderException that we can't access.
+                OperationKindEx.DynamicObjectCreation => ExceptionState.UnknownException,  // This raises is Microsoft.CSharp.RuntimeBinder.RuntimeBinderException that we can't access.
                 OperationKindEx.EventReference => FromOperation(IMemberReferenceOperationWrapper.FromOperation(operation.Instance)),
                 OperationKindEx.FieldReference => FromOperation(IMemberReferenceOperationWrapper.FromOperation(operation.Instance)),
                 OperationKindEx.Invocation => ExceptionState.UnknownException,
                 OperationKindEx.MethodReference => FromOperation(IMemberReferenceOperationWrapper.FromOperation(operation.Instance)),
-                OperationKindEx.ObjectCreation => operation.Instance.Type.DerivesFrom(KnownType.System_Exception) ? null : ExceptionState.UnknownException, // ToDo: Filter out exception constructors assuming that usually they do not throw.
+                OperationKindEx.ObjectCreation => operation.Instance.Type.DerivesFrom(KnownType.System_Exception) ? null : ExceptionState.UnknownException,
                 OperationKindEx.PropertyReference => FromOperation(IMemberReferenceOperationWrapper.FromOperation(operation.Instance)),
                 _ => null
             };

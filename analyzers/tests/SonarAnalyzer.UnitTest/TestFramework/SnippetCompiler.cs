@@ -41,14 +41,19 @@ namespace SonarAnalyzer.UnitTest.TestFramework
 
         public SnippetCompiler(string code, IEnumerable<MetadataReference> additionalReferences) : this(code, false, AnalyzerLanguage.CSharp, additionalReferences) { }
 
-        public SnippetCompiler(string code, bool ignoreErrors, AnalyzerLanguage language, IEnumerable<MetadataReference> additionalReferences = null, OutputKind outputKind = OutputKind.DynamicallyLinkedLibrary)
+        public SnippetCompiler(string code,
+                               bool ignoreErrors,
+                               AnalyzerLanguage language,
+                               IEnumerable<MetadataReference> additionalReferences = null,
+                               OutputKind outputKind = OutputKind.DynamicallyLinkedLibrary,
+                               ParseOptions parseOptions = null)
         {
             compilation = SolutionBuilder
                 .Create()
                 .AddProject(language, createExtraEmptyFile: false, outputKind)
                 .AddSnippet(code)
                 .AddReferences(additionalReferences ?? Enumerable.Empty<MetadataReference>())
-                .GetCompilation();
+                .GetCompilation(parseOptions);
 
             if (!ignoreErrors && HasCompilationErrors(compilation))
             {

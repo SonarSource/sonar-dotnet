@@ -18,6 +18,7 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using Microsoft.CodeAnalysis.CSharp;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.SymbolicExecution.Roslyn;
 using SonarAnalyzer.UnitTest.TestFramework.SymbolicExecution;
@@ -572,5 +573,75 @@ End Module";
             validator.ValidateTagOrder("BeforeTry", "InTry");
             validator.ExitStates.Should().HaveCount(0);
         }
+
+#if NET
+        [TestMethod]
+        public void ExceptionCandidate_ImplicitIndexerReference()
+        {
+            const string code = @"
+using System;
+
+class Sample
+{
+    public int this[Index i] => 0;
+
+    public void Method()
+    {
+        var tag = ""BeforeTry"";
+        try
+        {
+            tag = ""InTry"";
+            _ = this[^0];
+        }
+        catch
+        {
+            tag = ""UnreachableInCatch"";
+        }
+        tag = ""AfterCatch"";
+    }
+}";
+
+            var validator = CreateCSharp10Validator(code);
+            // IImplicitIndexerReferenceOperation is not generated
+            validator.ValidateTagOrder("BeforeTry", "InTry", "AfterCatch");
+            validator.ExitStates.Should().HaveCount(1).And.ContainSingle(x => HasNoException(x));
+        }
+
+        [TestMethod]
+        public void ExceptionCandidate_Range()
+        {
+            const string code = @"
+using System;
+
+class Sample
+{
+    public int this[Range r] => 0;
+
+    public void Method()
+    {
+        var tag = ""BeforeTry"";
+        try
+        {
+            tag = ""InTry"";
+            _ = this[0..];
+        }
+        catch
+        {
+            tag = ""InCatch"";
+        }
+        tag = ""AfterCatch"";
+    }
+}";
+
+            var validator = CreateCSharp10Validator(code);
+            validator.ValidateContainsOperation(OperationKindEx.Range);
+            validator.ValidateTagOrder("BeforeTry", "InTry", "InCatch", "AfterCatch");
+            validator.TagStates("InCatch").Should().ContainSingle(x => HasExceptionOfType(x, "ArgumentOutOfRangeException"));
+            validator.ExitStates.Should().HaveCount(1).And.ContainSingle(x => HasNoException(x));
+        }
+
+        private static ValidatorTestCheck CreateCSharp10Validator(string code) =>
+            new SETestContext(code, AnalyzerLanguage.CSharp, Array.Empty<SymbolicCheck>(), parseOptions: new CSharpParseOptions(LanguageVersion.CSharp10)).Validator;
+#endif
     }
 }

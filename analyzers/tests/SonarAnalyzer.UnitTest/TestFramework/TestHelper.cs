@@ -56,9 +56,10 @@ namespace SonarAnalyzer.UnitTest
                                                                      bool ignoreErrors,
                                                                      AnalyzerLanguage language,
                                                                      MetadataReference[] additionalReferences = null,
-                                                                     OutputKind outputKind = OutputKind.DynamicallyLinkedLibrary)
+                                                                     OutputKind outputKind = OutputKind.DynamicallyLinkedLibrary,
+                                                                     ParseOptions parseOptions = null)
         {
-            var compiled = new SnippetCompiler(snippet, ignoreErrors, language, additionalReferences, outputKind);
+            var compiled = new SnippetCompiler(snippet, ignoreErrors, language, additionalReferences, outputKind, parseOptions);
             return (compiled.SyntaxTree, compiled.SemanticModel);
         }
 
@@ -80,9 +81,10 @@ End Class", AnalyzerLanguage.VisualBasic);
                                                   AnalyzerLanguage language,
                                                   bool ignoreErrors = false,
                                                   string localFunctionName = null,
-                                                  OutputKind outputKind = OutputKind.DynamicallyLinkedLibrary)
+                                                  OutputKind outputKind = OutputKind.DynamicallyLinkedLibrary,
+                                                  ParseOptions parseOptions = null)
         {
-            var (tree, semanticModel) = Compile(snippet, ignoreErrors, language, outputKind: outputKind);
+            var (tree, semanticModel) = Compile(snippet, ignoreErrors, language, outputKind: outputKind, parseOptions: parseOptions);
             var method = tree.GetRoot().DescendantNodes().First(IsMethod);
             var cfg = ControlFlowGraph.Create(method, semanticModel);
             if (localFunctionName != null)

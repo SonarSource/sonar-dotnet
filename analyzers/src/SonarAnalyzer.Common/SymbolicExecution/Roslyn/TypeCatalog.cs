@@ -27,11 +27,13 @@ internal class TypeCatalog
     public INamedTypeSymbol SystemIndexOutOfRangeException { get; }
     public INamedTypeSymbol SystemNullReferenceException { get; }
     public INamedTypeSymbol SystemInvalidCastException { get; }
+    public INamedTypeSymbol SystemArgumentOutOfRangeException { get; }
 
     public TypeCatalog(Compilation compilation)
     {
         SystemIndexOutOfRangeException = compilation.GetTypeByMetadataName("System.IndexOutOfRangeException");
         SystemNullReferenceException = compilation.GetTypeByMetadataName("System.NullReferenceException");
         SystemInvalidCastException = compilation.GetTypeByMetadataName("System.InvalidCastException");
+        SystemArgumentOutOfRangeException = compilation.GetTypeByMetadataName("System.ArgumentOutOfRangeException");
     }
 }
