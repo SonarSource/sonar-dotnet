@@ -26,20 +26,21 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class SelfAssignmentTest
     {
+        private readonly VerifierBuilder builderCS= new VerifierBuilder<CS.SelfAssignment>();
+        private readonly VerifierBuilder builderVB= new VerifierBuilder<VB.SelfAssignment>();
+
         [TestMethod]
         public void SelfAssignment_CSharp() =>
-            OldVerifier.VerifyAnalyzer(@"TestCases\SelfAssignment.cs",
-                new CS.SelfAssignment(),
-                ParseOptionsHelper.FromCSharp8);
+            builderCS.AddPaths("SelfAssignment.cs").WithOptions(ParseOptionsHelper.FromCSharp8).Verify();
 
 #if NET
         [TestMethod]
         public void SelfAssignment_CSharp10() =>
-            OldVerifier.VerifyAnalyzerFromCSharp10Console(@"TestCases\SelfAssignment.CSharp10.cs", new CS.SelfAssignment());
+            builderCS.AddPaths("SelfAssignment.CSharp10.cs").WithOptions(ParseOptionsHelper.FromCSharp10).WithTopLevelStatements().Verify();
 #endif
 
         [TestMethod]
         public void SelfAssignment_VisualBasic() =>
-            OldVerifier.VerifyAnalyzer(@"TestCases\SelfAssignment.vb", new VB.SelfAssignment());
+            builderVB.AddPaths("SelfAssignment.vb").Verify();
     }
 }
