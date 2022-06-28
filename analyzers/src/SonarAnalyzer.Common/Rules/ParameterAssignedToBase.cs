@@ -38,11 +38,9 @@ namespace SonarAnalyzer.Rules
 
         protected ParameterAssignedToBase() : base(DiagnosticId) { }
 
-        protected sealed override void Initialize(SonarAnalysisContext context)
-        {
+        protected sealed override void Initialize(SonarAnalysisContext context) =>
             context.RegisterSyntaxNodeActionInNonGenerated(
-                Language.GeneratedCodeRecognizer,
-                c =>
+                Language.GeneratedCodeRecognizer, c =>
                 {
                     foreach (var target in Language.Syntax.AssignmentTargets(c.Node))
                     {
@@ -55,23 +53,12 @@ namespace SonarAnalyzer.Rules
                     }
                 },
                 Language.SyntaxKind.SimpleAssignment);
-        }
 
-        private bool IsReadBefore(SemanticModel semanticModel, ISymbol parameterSymbol, SyntaxNode assignment)
-        {
-            // Same problem as in VB.NET / IsAssignmentToCatchVariable:
-            // parameterSymbol.DeclaringSyntaxReferences is empty for Catch syntax in VB.NET as well as for indexer syntax for C#
-            // https://github.com/dotnet/roslyn/issues/6209
-            var stopLocation = parameterSymbol.Locations.FirstOrDefault();
-            if (stopLocation == null)
-            {
-                return true; // If we can't find the location, it's going to be FN
-            }
-            return GetPreviousNodes(stopLocation, assignment)
+        private bool IsReadBefore(SemanticModel semanticModel, ISymbol parameterSymbol, SyntaxNode assignment) =>
+            GetPreviousNodes(parameterSymbol.Locations.First(), assignment)
                 .Union(Language.Syntax.AssignmentRight(assignment).DescendantNodes())
                 .OfType<TIdentifierNameSyntax>()
                 .Any(x => parameterSymbol.Equals(semanticModel.GetSymbolInfo(x).Symbol));
-        }
 
         /// <summary>
         /// Returns all nodes before the specified statement to the declaration of variable/parameter given by stopLocation.
