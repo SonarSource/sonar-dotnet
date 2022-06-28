@@ -28,8 +28,6 @@ namespace SonarAnalyzer.Extensions
 {
     internal static class AssignmentExpressionSyntaxExtensions
     {
-        #region MapAssignmentArguments
-
         public readonly record struct AssignmentMapping(SyntaxNode Left, SyntaxNode Right);
 
         /// <summary>
@@ -133,8 +131,6 @@ namespace SonarAnalyzer.Extensions
 
             return true;
         }
-
-        #endregion
 
         /// <summary>
         /// Returns a list of nodes, that represent the target (left side) of an assignment. In case of tuple deconstructions, this can be more than one target.
