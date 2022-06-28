@@ -480,7 +480,7 @@ try
 {
     Tag(""InTry"");
     throw new System.Exception();
-    tag = ""UnreachableInFinally"";
+    tag = ""UnreachableInTry"";
 }
 catch
 {
@@ -508,7 +508,7 @@ try
 {
     tag = ""InTry"";
     throw new System.Exception();
-    tag = ""UnreachableInFinally"";
+    tag = ""UnreachableInTry"";
 }
 catch
 {
@@ -537,7 +537,7 @@ try
 {
     Tag(""InTry"");
     throw new System.Exception();
-    tag = ""UnreachableInFinally"";
+    tag = ""UnreachableInTry"";
 }
 catch (Exception ex)
 {
@@ -566,7 +566,7 @@ try
 {
     Tag(""InTry"");
     throw new System.Exception();
-    tag = ""UnreachableInFinally"";
+    tag = ""UnreachableInTry"";
 }
 catch (System.NullReferenceException)
 {
@@ -585,15 +585,14 @@ tag = ""AfterCatch"";";
             validator.ValidateTagOrder(
                 "BeforeTry",
                 "InTry",
-                "InFirstCatch",     // Filtering is not implemented yet so all the catch blocks will be iterated.
-                "InSecondCatch",
-                "InThirdCatch",
-                "InFirstCatch",
-                "InSecondCatch",
-                "InThirdCatch",
+                "InFirstCatch",     // With Exception thrown by Tag("InTry")
+                "InSecondCatch",    // With Exception thrown by Tag("InTry")
+                "InThirdCatch",     // With Exception thrown by Tag("InTry")
+                "InSecondCatch",    // With Exception thrown by throw new System.Exception()
+                "InThirdCatch",     // With Exception thrown by throw new System.Exception()
                 "AfterCatch");
 
-            ValidateHasOnlyUnknownExceptionAndSystemException(validator, "InFirstCatch");
+            validator.TagStates("InFirstCatch").Should().HaveCount(1).And.ContainSingle(x => HasUnknownException(x));
             ValidateHasOnlyUnknownExceptionAndSystemException(validator, "InSecondCatch");
             ValidateHasOnlyUnknownExceptionAndSystemException(validator, "InThirdCatch");
             validator.TagStates("AfterCatch").Should().HaveCount(1).And.ContainSingle(x => HasNoException(x));
@@ -638,7 +637,7 @@ try
 {
     Tag(""InTry"");
     throw new System.Exception();
-    tag = ""UnreachableInFinally"";
+    tag = ""UnreachableInTry"";
 }
 catch
 {
@@ -720,7 +719,7 @@ finally
 {
     tag = ""InFinally"";
     throw new System.Exception();
-    tag = ""UnreachableInCatch"";
+    tag = ""UnreachableInFinally"";
 }
 tag = ""UnreachableAfterFinally"";";
             var validator = SETestContext.CreateCS(code).Validator;
@@ -798,7 +797,7 @@ tag = ""After"";";
                 "BeforeTry",
                 "InTry",
                 "InNestedTry",
-                "InNestedCatch",
+                "InCatch",
                 "After");
         }
 
@@ -830,9 +829,283 @@ tag = ""After"";";
             validator.ValidateTagOrder(
                 "BeforeTry",
                 "InTry",
-                "InNestedTry",
-                "InNestedCatch",
-                "After");
+                "InNestedTry");
+        }
+
+        [TestMethod]
+        public void TryCatch_Throw_CatchThrown_WithVariable()
+        {
+            const string code = @"
+var tag = ""BeforeTry"";
+try
+{
+    tag = ""InTry"";
+    throw new FormatException();
+    tag = ""UnreachableInTry"";
+}
+catch (FormatException ex)
+{
+    tag = ""InCatch"";
+}
+tag = ""End"";";
+            var validator = SETestContext.CreateCS(code).Validator;
+            validator.ValidateTagOrder(
+                "BeforeTry",
+                "InTry",
+                "InCatch",
+                "End");
+        }
+
+        [TestMethod]
+        public void TryCatch_Throw_CatchThrown_NoVariable()
+        {
+            const string code = @"
+var tag = ""BeforeTry"";
+try
+{
+    tag = ""InTry"";
+    throw new FormatException();
+    tag = ""UnreachableInTry"";
+}
+catch (FormatException)
+{
+    tag = ""InCatch"";
+}
+tag = ""End"";";
+            var validator = SETestContext.CreateCS(code).Validator;
+            validator.ValidateTagOrder(
+                "BeforeTry",
+                "InTry",
+                "InCatch",
+                "End");
+        }
+
+        [TestMethod]
+        public void TryCatch_Throw_CatchBaseType()
+        {
+            const string code = @"
+var tag = ""BeforeTry"";
+try
+{
+    tag = ""InTry"";
+    throw new System.IO.FileNotFoundException();
+    tag = ""UnreachableInTry"";
+}
+catch (System.IO.IOException)
+{
+    tag = ""InCatch"";
+}
+tag = ""End"";";
+            var validator = SETestContext.CreateCS(code).Validator;
+            validator.ValidateTagOrder(
+                "BeforeTry",
+                "InTry",
+                "InCatch",
+                "End");
+        }
+
+        [TestMethod]
+        public void TryCatch_Throw_CatchAllWhen_IsTrue()
+        {
+            const string code = @"
+var tag = ""BeforeTry"";
+var isTrue = true;
+try
+{
+    tag = ""InTry"";
+    throw new FormatException();
+    tag = ""UnreachableInTry"";
+}
+catch when (isTrue)
+{
+    tag = ""InCatch"";
+}
+tag = ""End"";";
+            var validator = SETestContext.CreateCS(code).Validator;
+            validator.ValidateTagOrder(
+                "BeforeTry",
+                "InTry",
+                "InCatch",
+                "End");
+        }
+
+        [TestMethod]
+        public void TryCatch_Throw_CatchAllWhen_IsFalse()
+        {
+            const string code = @"
+var tag = ""BeforeTry"";
+var isFalse = false;
+try
+{
+    tag = ""InTry"";
+    throw new FormatException();
+    tag = ""UnreachableInTry"";
+}
+catch when (isFalse)
+{
+    tag = ""UnreachableInCatch"";
+}
+tag = ""UnreachableEnd"";";
+            var validator = SETestContext.CreateCS(code).Validator;
+            validator.ValidateTagOrder(
+                "BeforeTry",
+                "InTry");
+        }
+
+        [TestMethod]
+        public void TryCatch_Throw_CatchAllWhen_IsUnknown()
+        {
+            const string code = @"
+var tag = ""BeforeTry"";
+try
+{
+    tag = ""InTry"";
+    throw new FormatException();
+    tag = ""UnreachableInTry"";
+}
+catch when (arg)
+{
+    tag = ""InCatch"";
+}
+tag = ""End"";";
+            var validator = SETestContext.CreateCS(code, ", bool arg").Validator;
+            validator.ValidateTagOrder(
+                "BeforeTry",
+                "InTry",
+                "InCatch",
+                "End");
+        }
+
+        [TestMethod]
+        public void TryCatch_Throw_CatchDoesNotDowncast()
+        {
+            const string code = @"
+var tag = ""BeforeTry"";
+try
+{
+    tag = ""InTry"";
+    throw couldBeAnything;
+    tag = ""UnreachableInTry"";
+}
+catch (FormatException)
+{
+    tag = ""UnreachableInCatch"";
+}
+tag = ""UnreachableEnd"";";
+            var validator = SETestContext.CreateCS(code, ", Exception couldBeAnything").Validator;
+            validator.ValidateTagOrder(
+                "BeforeTry",
+                "InTry");   // Signature returns Exception => we do not know that it is FormatException
+        }
+
+        [TestMethod]
+        public void TryCatch_ThrowUnexpectedException()
+        {
+            const string code = @"
+var tag = ""BeforeTry"";
+try
+{
+    tag = ""InTry"";
+    throw new FormatException();
+    tag = ""UnreachableInTry"";
+}
+catch (NotSupportedException)
+{
+    tag = ""UnreachableInCatch"";
+}
+tag = ""Unreachable"";";
+            var validator = SETestContext.CreateCS(code).Validator;
+            validator.ValidateTagOrder(
+                "BeforeTry",
+                "InTry");
+        }
+
+        [TestMethod]
+        public void TryCatch_NestedThrow_OuterCatch()
+        {
+            const string code = @"
+var tag = ""BeforeTry"";
+try
+{
+    tag = ""InTry1"";
+    try
+    {
+        tag = ""InTry2"";
+        try
+        {
+            tag = ""InTry3"";
+            throw new FormatException();
+            tag = ""UnreachableInTry3"";
+        }
+        catch (NotSupportedException)
+        {
+            tag = ""UnreachableInCatch3"";
+        }
+        tag = ""UnreachableInTry2"";
+    }
+    catch (NotImplementedException)
+    {
+        tag = ""UnreachableInCatch2"";
+    }
+    tag = ""UnreachableInTry1"";
+}
+catch (FormatException)
+{
+    tag = ""InCatch"";
+}
+tag = ""End"";";
+            var validator = SETestContext.CreateCS(code).Validator;
+            validator.ValidateTagOrder(
+                "BeforeTry",
+                "InTry1",
+                "InTry2",
+                "InTry3",
+                "InCatch",
+                "End");
+            validator.ExitStates.Should().HaveCount(1).And.ContainSingle(x => HasNoException(x));
+        }
+
+        [TestMethod]
+        public void TryCatch_NestedThrow_UnexpectedException()
+        {
+            const string code = @"
+var tag = ""BeforeTry"";
+try
+{
+    tag = ""InTry1"";
+    try
+    {
+        tag = ""InTry2"";
+        try
+        {
+            tag = ""InTry3"";
+            throw new System.IO.IOException();
+            tag = ""UnreachableInTry3"";
+        }
+        catch (NotSupportedException)
+        {
+            tag = ""UnreachableInCatch3"";
+        }
+        tag = ""UnreachableInTry2"";
+    }
+    catch (NotImplementedException)
+    {
+        tag = ""UnreachableInCatch2"";
+    }
+    tag = ""UnreachableInTry1"";
+}
+catch (FormatException)
+{
+    tag = ""InCatch"";
+}
+tag = ""End"";";
+            var validator = SETestContext.CreateCS(code).Validator;
+            validator.ValidateTagOrder(
+                "BeforeTry",
+                "InTry1",
+                "InTry2",
+                "InTry3");
+            validator.ExitStates.Should().HaveCount(1).And.ContainSingle(x => HasExceptionOfType(x, "IOException"));
         }
 
         [TestMethod]
