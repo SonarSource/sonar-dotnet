@@ -359,8 +359,6 @@ namespace SonarAnalyzer.UnitTest.Extensions
             allTargetsAsString.Should().BeEquivalentTo(expectedTargets);
         }
 
-        #region Helpers
-
         private static void AssertMapAssignmentArguments<T>(string code, T[] expectation)
         {
             var mapping = ParseAssignmentExpression(code).MapAssignmentArguments();
@@ -398,8 +396,5 @@ public class C
 ");
             return syntaxTree.GetRoot().DescendantNodesAndSelf().OfType<AssignmentExpressionSyntax>().Single();
         }
-
-        #endregion
-
     }
 }
