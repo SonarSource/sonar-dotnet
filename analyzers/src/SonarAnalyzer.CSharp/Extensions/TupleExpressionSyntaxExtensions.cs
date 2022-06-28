@@ -27,24 +27,19 @@ namespace SonarAnalyzer.Extensions
 {
     public static class TupleExpressionSyntaxExtensions
     {
-        /// <summary>
-        /// Gets all flattened arguments of a tuple. For a nested tuple like <c>(1, (2, 3))</c>, the arguments are flattened to <c>[1, 2, 3]</c>.
-        /// </summary>
-        /// <param name="tupleExpression">The tuple to flatten.</param>
-        /// <returns>An <see cref="ImmutableArray"/> of the flattened tuple arguments.</returns>
         public static ImmutableArray<ArgumentSyntax> AllArguments(this TupleExpressionSyntaxWrapper tupleExpression)
         {
             var builder = ImmutableArray.CreateBuilder<ArgumentSyntax>(tupleExpression.Arguments.Count);
-            CollectTupleElements(builder, tupleExpression.Arguments);
+            CollectTupleElements(tupleExpression.Arguments);
             return builder.ToImmutableArray();
 
-            static void CollectTupleElements(ImmutableArray<ArgumentSyntax>.Builder builder, SeparatedSyntaxList<ArgumentSyntax> arguments)
+            void CollectTupleElements(SeparatedSyntaxList<ArgumentSyntax> arguments)
             {
                 foreach (var argument in arguments)
                 {
                     if (TupleExpressionSyntaxWrapper.IsInstance(argument.Expression))
                     {
-                        CollectTupleElements(builder, ((TupleExpressionSyntaxWrapper)argument.Expression).Arguments);
+                        CollectTupleElements(((TupleExpressionSyntaxWrapper)argument.Expression).Arguments);
                     }
                     else
                     {
