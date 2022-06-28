@@ -69,5 +69,17 @@ namespace Tests.Diagnostics
             new DataTable { Locale = CultureInfo.CurrentUICulture };
             new DataTable();
         }
+
+        void M(DataTable datatable) { }
+
+        void Bar()
+        {
+            M(new DataTable()); // FN
+
+            var datatable = new DataTable(); // Noncompliant FP
+            Init(datatable);
+
+            void Init(DataTable dt) => dt.Locale = new CultureInfo("de-DE");
+        }
     }
 }
