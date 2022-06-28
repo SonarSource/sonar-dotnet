@@ -44,8 +44,7 @@ namespace SonarAnalyzer.Rules
                 Language.GeneratedCodeRecognizer,
                 c =>
                 {
-                    var targets = Language.Syntax.AssignmentTargets(c.Node);
-                    foreach (var target in targets)
+                    foreach (var target in Language.Syntax.AssignmentTargets(c.Node))
                     {
                         if (c.SemanticModel.GetSymbolInfo(target).Symbol is { } symbol
                             && (symbol is IParameterSymbol { RefKind: RefKind.None } || IsAssignmentToCatchVariable(symbol, target))
