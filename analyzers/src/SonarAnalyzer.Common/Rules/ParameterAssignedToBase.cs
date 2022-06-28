@@ -44,12 +44,15 @@ namespace SonarAnalyzer.Rules
                 Language.GeneratedCodeRecognizer,
                 c =>
                 {
-                    var left = Language.Syntax.AssignmentLeft(c.Node);
-                    if (c.SemanticModel.GetSymbolInfo(left).Symbol is { } symbol
-                        && (symbol is IParameterSymbol { RefKind: RefKind.None } || IsAssignmentToCatchVariable(symbol, left))
-                        && (!IsReadBefore(c.SemanticModel, symbol, c.Node)))
+                    var targets = Language.Syntax.AssignmentTargets(c.Node);
+                    foreach (var target in targets)
                     {
-                        c.ReportIssue(Diagnostic.Create(SupportedDiagnostics[0], left.GetLocation(), left.ToString()));
+                        if (c.SemanticModel.GetSymbolInfo(target).Symbol is { } symbol
+                            && (symbol is IParameterSymbol { RefKind: RefKind.None } || IsAssignmentToCatchVariable(symbol, target))
+                            && (!IsReadBefore(c.SemanticModel, symbol, c.Node)))
+                        {
+                            c.ReportIssue(Diagnostic.Create(SupportedDiagnostics[0], target.GetLocation(), target.ToString()));
+                        }
                     }
                 },
                 Language.SyntaxKind.SimpleAssignment);
