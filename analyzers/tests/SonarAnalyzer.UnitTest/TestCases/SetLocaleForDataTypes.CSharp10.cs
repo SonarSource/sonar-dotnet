@@ -28,3 +28,7 @@ var (xx, yy) = (new DataTable(), new DataTable()); // Noncompliant [3, 4]
 TupleParameter((new DataTable(), new DataTable())); // FN
 
 void TupleParameter((DataTable, DataTable) dataTableTuple) { }
+
+var (_, (_,( o, _))) = (1, (2,( new DataTable(), 4))); // Noncompliant
+
+
