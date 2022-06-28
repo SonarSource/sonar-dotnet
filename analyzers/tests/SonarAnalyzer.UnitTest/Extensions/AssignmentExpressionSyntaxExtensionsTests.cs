@@ -91,14 +91,7 @@ namespace SonarAnalyzer.UnitTest.Extensions
                 {
                     new
                     {
-                        Left = new
-                        {
-                            Arguments = new[]
-                            {
-                                new { Expression = WithDesignation("x") },
-                                new { Expression = WithDesignation("y") },
-                            }
-                        },
+                        Left = WithDesignationArguments("x", "y"),
                         Right = new { Expression = WithIdentifier("M") },
                     },
                 });
@@ -110,14 +103,7 @@ namespace SonarAnalyzer.UnitTest.Extensions
                     new
                     {
                         Left = WithIdentifier("tuple"),
-                        Right = new
-                        {
-                            Arguments = new[]
-                            {
-                                new { Expression = WithToken("1") },
-                                new { Expression = WithToken("2") },
-                            }
-                        },
+                        Right = WithTokenArguments("1", "2"),
                     },
                 });
 
@@ -176,15 +162,7 @@ namespace SonarAnalyzer.UnitTest.Extensions
                                 Variables = new object[]
                                 {
                                     WithIdentifier("a"),
-                                    new
-                                    {
-                                        Variables = new[]
-                                        {
-                                            WithIdentifier("b"),
-                                            WithIdentifier("c"),
-                                            WithIdentifier("d"),
-                                        }
-                                    },
+                                    WithIdentifierVariables("b", "c", "d"),
                                 },
                             },
                         },
@@ -193,17 +171,7 @@ namespace SonarAnalyzer.UnitTest.Extensions
                             Arguments = new object[]
                             {
                                 new { Expression = WithToken("1") },
-                                new
-                                {
-                                    Expression = new
-                                    {
-                                        Arguments = new object[]
-                                        {
-                                            new { Expression = WithToken("2") },
-                                            new { Expression = WithToken("3") },
-                                        },
-                                    },
-                                },
+                                new { Expression = WithTokenArguments("2", "3") },
                                 new { Expression = WithToken("4") },
                             }
                         },
@@ -223,15 +191,7 @@ namespace SonarAnalyzer.UnitTest.Extensions
                                 Variables = new object[]
                                 {
                                     WithIdentifier("a"),
-                                    new
-                                    {
-                                        Variables = new[]
-                                        {
-                                            WithIdentifier("b"),
-                                            WithIdentifier("c"),
-                                            WithIdentifier("d"),
-                                        }
-                                    },
+                                    WithIdentifierVariables("b", "c", "d"),
                                 },
                             },
                         },
@@ -240,17 +200,7 @@ namespace SonarAnalyzer.UnitTest.Extensions
                             Arguments = new object[]
                             {
                                 new { Expression = WithToken("1") },
-                                new
-                                {
-                                    Expression = new
-                                    {
-                                        Arguments = new object[]
-                                        {
-                                            new { Expression = WithToken("2") },
-                                            new { Expression = WithToken("3") },
-                                        },
-                                    },
-                                },
+                                new { Expression = WithTokenArguments("2", "3") },
                             }
                         },
                     },
@@ -278,23 +228,8 @@ namespace SonarAnalyzer.UnitTest.Extensions
                 {
                     new
                     {
-                        Left = new
-                        {
-                            Arguments = new[]
-                            {
-                                new { Expression = WithDesignation("x") },
-                                new { Expression = WithDesignation("y") },
-                            }
-                        },
-                        Right =new
-                        {
-                            Arguments = new[]
-                            {
-                                new { Expression = WithToken("1") },
-                                new { Expression = WithToken("2") },
-                                new { Expression = WithToken("3") },
-                            }
-                        },
+                        Left = WithDesignationArguments("x", "y"),
+                        Right = WithTokenArguments("1", "2", "3"),
                     },
                 });
 
@@ -304,23 +239,8 @@ namespace SonarAnalyzer.UnitTest.Extensions
                 {
                     new
                     {
-                        Left = new
-                        {
-                            Arguments = new[]
-                            {
-                                new { Expression = WithDesignation("x") },
-                                new { Expression = WithDesignation("y") },
-                                new { Expression = WithDesignation("z") },
-                            }
-                        },
-                        Right =new
-                        {
-                            Arguments = new[]
-                            {
-                                new { Expression = WithToken("1") },
-                                new { Expression = WithToken("2") },
-                            }
-                        },
+                        Left = WithDesignationArguments("x", "y", "z"),
+                        Right = WithTokenArguments("1", "2"),
                     },
                 });
 
@@ -335,17 +255,7 @@ namespace SonarAnalyzer.UnitTest.Extensions
                             Arguments = new object[]
                             {
                                 new { Expression = WithDesignation("a") },
-                                new
-                                {
-                                    Expression = new
-                                    {
-                                        Arguments = new[]
-                                        {
-                                            new { Expression = WithDesignation("b") },
-                                            new { Expression = WithDesignation("c") },
-                                        }
-                                    }
-                                }
+                                new { Expression = WithDesignationArguments("b", "c") },
                             }
                         },
                         Right = new
@@ -353,18 +263,7 @@ namespace SonarAnalyzer.UnitTest.Extensions
                             Arguments = new object[]
                             {
                                 new { Expression = WithToken("1") },
-                                new
-                                {
-                                    Expression = new
-                                    {
-                                        Arguments = new[]
-                                        {
-                                            new { Expression = WithToken("2") },
-                                            new { Expression = WithToken("3") },
-                                            new { Expression = WithToken("4") },
-                                        }
-                                    }
-                                }
+                                new { Expression = WithTokenArguments("2", "3", "4") },
                             }
                         },
                     },
@@ -381,17 +280,7 @@ namespace SonarAnalyzer.UnitTest.Extensions
                             Arguments = new object[]
                             {
                                 new { Expression = WithDesignation("a") },
-                                new
-                                {
-                                    Expression = new
-                                    {
-                                        Arguments = new[]
-                                        {
-                                            new { Expression = WithDesignation("b") },
-                                            new { Expression = WithDesignation("c") },
-                                        }
-                                    }
-                                },
+                                new { Expression = WithDesignationArguments("b", "c") },
                                 new { Expression = WithDesignation("d") },
                             }
                         },
@@ -400,18 +289,7 @@ namespace SonarAnalyzer.UnitTest.Extensions
                             Arguments = new object[]
                             {
                                 new { Expression = WithToken("1") },
-                                new
-                                {
-                                    Expression = new
-                                    {
-                                        Arguments = new[]
-                                        {
-                                            new { Expression = WithToken("2") },
-                                            new { Expression = WithToken("3") },
-                                            new { Expression = WithToken("4") },
-                                        }
-                                    }
-                                }
+                                new { Expression = WithTokenArguments("2", "3", "4") },
                             }
                         },
                     },
@@ -497,6 +375,15 @@ namespace SonarAnalyzer.UnitTest.Extensions
 
         private static object WithToken(string identifier) =>
             new { Token = new { Text = identifier } };
+
+        private static object WithTokenArguments(params string[] tokens) =>
+            new { Arguments = tokens.Select(x => new { Expression = WithToken(x) }) };
+
+        private static object WithDesignationArguments(params string[] designations) =>
+            new { Arguments = designations.Select(x => new { Expression = WithDesignation(x) }) };
+
+        private static object WithIdentifierVariables(params string[] identifier) =>
+            new { Variables = identifier.Select(x => WithIdentifier(x)) };
 
         private static AssignmentExpressionSyntax ParseAssignmentExpression(string code)
         {
