@@ -124,12 +124,10 @@ namespace SonarAnalyzer.Rules.CSharp
                 AssignmentExpressionSyntax assignment => assignment.AssignmentTargets(),
                 EqualsValueClauseSyntax equalsClause when equalsClause.Parent.Parent is VariableDeclarationSyntax variableDeclaration =>
                     ImmutableArray.Create((SyntaxNode)variableDeclaration.Variables.Last()),
-                ArgumentSyntax argument when GetAssignmentExpressionAncenstor(argument) is { } expressionSyntax => expressionSyntax.AssignmentTargets(),
+                ArgumentSyntax argument when argument.Ancestors().OfType<AssignmentExpressionSyntax>().FirstOrDefault() is { } expressionSyntax =>
+                    expressionSyntax.AssignmentTargets(),
                 _ => ImmutableArray<SyntaxNode>.Empty
             };
-
-        private static AssignmentExpressionSyntax GetAssignmentExpressionAncenstor(ArgumentSyntax argument) =>
-            argument.Ancestors().OfType<AssignmentExpressionSyntax>().FirstOrDefault();
 
         private static ISymbol GetAccessedVariable(SyntaxNode node, SemanticModel model)
         {
