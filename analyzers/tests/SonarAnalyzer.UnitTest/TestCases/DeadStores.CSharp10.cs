@@ -18,20 +18,21 @@ static int ReturnAnInt()
 
 void DoStuffWithInts()
 {
-    int x = ReturnAnInt(); // FN - Rule does not handle tuples yet.
-    (x, int y) = ReturnIntTuple(); // FN - Rule does not handle tuples yet.
+    int x = ReturnAnInt();
+    (x, int y) = ReturnIntTuple(); // Noncompliant
+//  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 }
 
 void DoStuffWithIntsAgain()
 {
-    int? x = null; // Compliant
-    (x, int y) = ReturnIntTuple();
+    int? x = null;
+    (x, int y) = ReturnIntTuple(); // Noncompliant
 }
 
 void DoSimplerStuffWithIntsAgain()
 {
-    int x; // Compliant
-    (x, var y) = (1, 2); // Compliant
+    int x;
+    (x, var y) = (1, 2); // Noncompliant
 }
 
 Action<int, int, int> StaticLambda() =>
