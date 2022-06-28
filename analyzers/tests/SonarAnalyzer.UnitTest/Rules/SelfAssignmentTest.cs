@@ -26,8 +26,8 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class SelfAssignmentTest
     {
-        private readonly VerifierBuilder builderCS= new VerifierBuilder<CS.SelfAssignment>();
-        private readonly VerifierBuilder builderVB= new VerifierBuilder<VB.SelfAssignment>();
+        private readonly VerifierBuilder builderCS = new VerifierBuilder<CS.SelfAssignment>();
+        private readonly VerifierBuilder builderVB = new VerifierBuilder<VB.SelfAssignment>();
 
         [TestMethod]
         public void SelfAssignment_CSharp() =>
