@@ -32,6 +32,8 @@ namespace Tests.Diagnostics
                 ? new Func<string, string>(s => true ? "a" : "b")
                 : new Func<string, string>(s => true ? "c" : "d");
 
+            var lambda3 = new Func<string, string>(s => isMale ? "Mr. " : isMarried ? "Mrs. " : "Miss "); // Noncompliant
+
             return false;
         }
     }
