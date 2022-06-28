@@ -70,66 +70,66 @@ namespace SonarAnalyzer.Extensions
             }
 
             return ImmutableArray.Create(new AssignmentMapping(assignment.Left, assignment.Right));
-        }
 
-        private static bool MapTupleElements(ImmutableArray<AssignmentMapping>.Builder arrayBuilder, TupleExpressionSyntaxWrapper left, TupleExpressionSyntaxWrapper right)
-        {
-            if (left.Arguments.Count != right.Arguments.Count)
+            static bool MapTupleElements(ImmutableArray<AssignmentMapping>.Builder arrayBuilder, TupleExpressionSyntaxWrapper left, TupleExpressionSyntaxWrapper right)
             {
-                return false;
-            }
-
-            var leftEnumerator = left.Arguments.GetEnumerator();
-            var rightEnumerator = right.Arguments.GetEnumerator();
-            while (leftEnumerator.MoveNext() && rightEnumerator.MoveNext())
-            {
-                var leftExpression = leftEnumerator.Current.Expression;
-                var rightExpression = rightEnumerator.Current.Expression;
-                if (TupleExpressionSyntaxWrapper.IsInstance(leftExpression)
-                    && TupleExpressionSyntaxWrapper.IsInstance(rightExpression))
+                if (left.Arguments.Count != right.Arguments.Count)
                 {
-                    if (!MapTupleElements(arrayBuilder, (TupleExpressionSyntaxWrapper)leftExpression, (TupleExpressionSyntaxWrapper)rightExpression))
+                    return false;
+                }
+
+                var leftEnumerator = left.Arguments.GetEnumerator();
+                var rightEnumerator = right.Arguments.GetEnumerator();
+                while (leftEnumerator.MoveNext() && rightEnumerator.MoveNext())
+                {
+                    var leftExpression = leftEnumerator.Current.Expression;
+                    var rightExpression = rightEnumerator.Current.Expression;
+                    if (TupleExpressionSyntaxWrapper.IsInstance(leftExpression)
+                        && TupleExpressionSyntaxWrapper.IsInstance(rightExpression))
                     {
-                        return false;
+                        if (!MapTupleElements(arrayBuilder, (TupleExpressionSyntaxWrapper)leftExpression, (TupleExpressionSyntaxWrapper)rightExpression))
+                        {
+                            return false;
+                        }
+                    }
+                    else
+                    {
+                        arrayBuilder.Add(new AssignmentMapping(leftExpression, rightExpression));
                     }
                 }
-                else
+
+                return true;
+            }
+
+            static bool MapDesignationElements(ImmutableArray<AssignmentMapping>.Builder arrayBuilder, ParenthesizedVariableDesignationSyntaxWrapper left, TupleExpressionSyntaxWrapper right)
+            {
+                if (left.Variables.Count != right.Arguments.Count)
                 {
-                    arrayBuilder.Add(new AssignmentMapping(leftExpression, rightExpression));
+                    return false;
                 }
-            }
 
-            return true;
-        }
-
-        private static bool MapDesignationElements(ImmutableArray<AssignmentMapping>.Builder arrayBuilder, ParenthesizedVariableDesignationSyntaxWrapper left, TupleExpressionSyntaxWrapper right)
-        {
-            if (left.Variables.Count != right.Arguments.Count)
-            {
-                return false;
-            }
-
-            var leftEnumerator = left.Variables.GetEnumerator();
-            var rightEnumerator = right.Arguments.GetEnumerator();
-            while (leftEnumerator.MoveNext() && rightEnumerator.MoveNext())
-            {
-                var leftVar = leftEnumerator.Current;
-                var rightExpression = rightEnumerator.Current.Expression;
-                if (ParenthesizedVariableDesignationSyntaxWrapper.IsInstance(leftVar)
-                    && TupleExpressionSyntaxWrapper.IsInstance(rightExpression))
+                var leftEnumerator = left.Variables.GetEnumerator();
+                var rightEnumerator = right.Arguments.GetEnumerator();
+                while (leftEnumerator.MoveNext() && rightEnumerator.MoveNext())
                 {
-                    if (!MapDesignationElements(arrayBuilder, (ParenthesizedVariableDesignationSyntaxWrapper)leftVar, (TupleExpressionSyntaxWrapper)rightExpression))
+                    var leftVar = leftEnumerator.Current;
+                    var rightExpression = rightEnumerator.Current.Expression;
+                    if (ParenthesizedVariableDesignationSyntaxWrapper.IsInstance(leftVar)
+                        && TupleExpressionSyntaxWrapper.IsInstance(rightExpression))
                     {
-                        return false;
+                        if (!MapDesignationElements(arrayBuilder, (ParenthesizedVariableDesignationSyntaxWrapper)leftVar, (TupleExpressionSyntaxWrapper)rightExpression))
+                        {
+                            return false;
+                        }
+                    }
+                    else
+                    {
+                        arrayBuilder.Add(new AssignmentMapping(leftVar.SyntaxNode, rightExpression));
                     }
                 }
-                else
-                {
-                    arrayBuilder.Add(new AssignmentMapping(leftVar.SyntaxNode, rightExpression));
-                }
-            }
 
-            return true;
+                return true;
+            }
         }
 
         /// <summary>
