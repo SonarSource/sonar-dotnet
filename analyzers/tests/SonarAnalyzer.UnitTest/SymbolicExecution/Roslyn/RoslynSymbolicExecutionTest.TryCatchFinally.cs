@@ -1050,15 +1050,12 @@ tag = ""End"";";
                 "BeforeInnerTry",
                 "InInnerTry",
                 "AfterInnerTry",
-                "InInnerCatch",
-                "AfterInnerTry");   // ToDo: This should not be here, it is now visited on happy-path (with exOuter) and with empty state from catch exInner
+                "InInnerCatch");
 
             validator.TagStates("BeforeInnerTry").Should().HaveCount(1).And.ContainSingle(x => HasUnknownException(x));
             validator.TagStates("InInnerTry").Should().HaveCount(1).And.ContainSingle(x => HasUnknownException(x));
             validator.TagStates("InInnerCatch").Should().HaveCount(1).And.ContainSingle(x => HasUnknownException(x));
-            validator.TagStates("AfterInnerTry").Should().HaveCount(2)
-                .And.ContainSingle(x => HasUnknownException(x))
-                .And.ContainSingle(x => HasNoException(x));     // ToDo: This should not be here, same reason as above in AfterInnerTry
+            validator.TagStates("AfterInnerTry").Should().HaveCount(1).And.ContainSingle(x => HasUnknownException(x));
             validator.TagStates("End").Should().HaveCount(1).And.ContainSingle(x => HasNoException(x));
         }
 

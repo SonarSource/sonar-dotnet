@@ -37,7 +37,7 @@ namespace SonarAnalyzer.UnitTest.SymbolicExecution.Roslyn
             var cfg = TestHelper.CompileCfgBodyCS("var x = 42; var y = 42;");
             var operations = cfg.Blocks[1].Operations.ToExecutionOrder().ToArray();
             var symbols = operations.Select(x => x.Instance.TrackedSymbol()).Where(x => x is not null).ToArray();
-            var exceptionType = cfg.OriginalOperation.SemanticModel.Compilation.GetTypeByMetadataName("System.Exception");
+            var exception = new ExceptionState(cfg.OriginalOperation.SemanticModel.Compilation.GetTypeByMetadataName("System.Exception"));
 
             var empty = ProgramState.Empty;
             var withOperationOrig = empty.SetOperationValue(operations[0], reusedValue);
@@ -52,9 +52,10 @@ namespace SonarAnalyzer.UnitTest.SymbolicExecution.Roslyn
             var withPreservedSymbolOrig = empty.Preserve(symbols[0]);
             var withPreservedSymbolSame = empty.Preserve(symbols[0]);
             var withPreservedSymbolDiff = empty.Preserve(symbols[1]);
-            var withExceptionOrig = empty.SetException(exceptionType);
-            var withExceptionSame = empty.SetException(exceptionType);
-            var withExceptionDiff = empty.SetException(ExceptionState.UnknownException);
+            var withExceptionOrig = empty.PushException(exception);
+            var withExceptionSame = empty.PushException(exception);
+            var withExceptionMore = empty.PushException(exception).PushException(exception);
+            var withExceptionDiff = empty.PushException(ExceptionState.UnknownException);
             var mixedOrig = withOperationOrig.SetSymbolValue(symbols[0], reusedValue);
             var mixedSame = withOperationSame.SetSymbolValue(symbols[0], reusedValue);
             var mixedDiff = withOperationDiff.SetSymbolValue(symbols[0], anotherValue);
@@ -72,6 +73,7 @@ namespace SonarAnalyzer.UnitTest.SymbolicExecution.Roslyn
             withOperationOrig.Equals(withSymbolDiff).Should().BeFalse();
             withOperationOrig.Equals(withCaptureDiff).Should().BeFalse();
             withOperationOrig.Equals(withPreservedSymbolDiff).Should().BeFalse();
+            withOperationOrig.Equals(withExceptionMore).Should().BeFalse();
             withOperationOrig.Equals(withExceptionDiff).Should().BeFalse();
 
             withSymbolOrig.Equals(withSymbolOrig).Should().BeTrue();
@@ -81,6 +83,7 @@ namespace SonarAnalyzer.UnitTest.SymbolicExecution.Roslyn
             withSymbolOrig.Equals(withOperationDiff).Should().BeFalse();
             withSymbolOrig.Equals(withCaptureDiff).Should().BeFalse();
             withSymbolOrig.Equals(withPreservedSymbolDiff).Should().BeFalse();
+            withSymbolOrig.Equals(withExceptionMore).Should().BeFalse();
             withSymbolOrig.Equals(withExceptionDiff).Should().BeFalse();
 
             withCaptureOrig.Equals(withCaptureOrig).Should().BeTrue();
@@ -96,15 +99,16 @@ namespace SonarAnalyzer.UnitTest.SymbolicExecution.Roslyn
             withPreservedSymbolOrig.Equals(empty).Should().BeFalse();
             withPreservedSymbolOrig.Equals(withOperationDiff).Should().BeFalse();
             withPreservedSymbolOrig.Equals(withSymbolDiff).Should().BeFalse();
+            withPreservedSymbolOrig.Equals(withExceptionMore).Should().BeFalse();
             withPreservedSymbolOrig.Equals(withExceptionDiff).Should().BeFalse();
 
             withExceptionOrig.Equals(withExceptionOrig).Should().BeTrue();
             withExceptionOrig.Equals(withExceptionSame).Should().BeTrue();
+            withExceptionOrig.Equals(withExceptionMore).Should().BeFalse();
             withExceptionOrig.Equals(withExceptionDiff).Should().BeFalse();
             withExceptionOrig.Equals(empty).Should().BeFalse();
             withExceptionOrig.Equals(withOperationDiff).Should().BeFalse();
             withExceptionOrig.Equals(withSymbolDiff).Should().BeFalse();
-            withExceptionOrig.Equals(withExceptionDiff).Should().BeFalse();
 
             mixedOrig.Equals(mixedOrig).Should().BeTrue();
             mixedOrig.Equals(mixedSame).Should().BeTrue();
@@ -120,7 +124,7 @@ namespace SonarAnalyzer.UnitTest.SymbolicExecution.Roslyn
             var cfg = TestHelper.CompileCfgBodyCS("var x = 42; var y = 42;");
             var operations = cfg.Blocks[1].Operations.ToExecutionOrder().ToArray();
             var symbols = operations.Select(x => x.Instance.TrackedSymbol()).Where(x => x is not null).ToArray();
-            var exceptionType = cfg.OriginalOperation.SemanticModel.Compilation.GetTypeByMetadataName("System.Exception");
+            var exception = new ExceptionState(cfg.OriginalOperation.SemanticModel.Compilation.GetTypeByMetadataName("System.Exception"));
 
             var empty = ProgramState.Empty;
             var withOperationOrig = empty.SetOperationValue(operations[0], reusedValue);
@@ -135,9 +139,10 @@ namespace SonarAnalyzer.UnitTest.SymbolicExecution.Roslyn
             var withPreservedSymbolOrig = empty.Preserve(symbols[0]);
             var withPreservedSymbolSame = empty.Preserve(symbols[0]);
             var withPreservedSymbolDiff = empty.Preserve(symbols[1]);
-            var withExceptionOrig = empty.SetException(exceptionType);
-            var withExceptionSame = empty.SetException(exceptionType);
-            var withExceptionDiff = empty.SetException(ExceptionState.UnknownException);
+            var withExceptionOrig = empty.PushException(exception);
+            var withExceptionSame = empty.PushException(exception);
+            var withExceptionMore = empty.PushException(exception).PushException(exception);
+            var withExceptionDiff = empty.PushException(ExceptionState.UnknownException);
             var mixedOrig = withOperationOrig.SetSymbolValue(symbols[0], reusedValue);
             var mixedSame = withOperationSame.SetSymbolValue(symbols[0], reusedValue);
             var mixedDiff = withOperationDiff.SetSymbolValue(symbols[0], anotherValue);
@@ -161,6 +166,7 @@ namespace SonarAnalyzer.UnitTest.SymbolicExecution.Roslyn
             withPreservedSymbolOrig.GetHashCode().Should().NotBe(mixedSame.GetHashCode());
 
             withExceptionOrig.GetHashCode().Should().Be(withExceptionSame.GetHashCode());
+            withExceptionOrig.GetHashCode().Should().NotBe(withExceptionMore.GetHashCode());
             withExceptionOrig.GetHashCode().Should().NotBe(withExceptionDiff.GetHashCode());
             withExceptionOrig.GetHashCode().Should().NotBe(mixedSame.GetHashCode());
 
@@ -241,9 +247,15 @@ SimpleAssignmentOperation / VariableDeclaratorSyntax: a = true: No constraints
         [TestMethod]
         public void ToString_Exception()
         {
-            var sut = ProgramState.Empty.SetException(ExceptionState.UnknownException);
+            var sut = ProgramState.Empty.PushException(ExceptionState.UnknownException);
             sut.ToString().Should().BeIgnoringLineEndings(
 @"Exception: Unknown
+");
+
+            sut = sut.PushException(ExceptionState.UnknownException);   // There are two exceptions in the stack now
+            sut.ToString().Should().BeIgnoringLineEndings(
+@"Exception: Unknown
+Exception: Unknown
 ");
         }
 
@@ -260,7 +272,7 @@ SimpleAssignmentOperation / VariableDeclaratorSyntax: a = true: No constraints
                 .SetOperationValue(assignment.Children.First(), valueWithConstraint).Preserve(variableSymbol)
                 .SetCapture(new CaptureId(0), assignment)
                 .SetCapture(new CaptureId(1), assignment.Children.First())
-                .SetException(ExceptionState.UnknownException);
+                .PushException(ExceptionState.UnknownException);
 
             sut.ToString().Should().BeIgnoringLineEndings(
 @"Exception: Unknown

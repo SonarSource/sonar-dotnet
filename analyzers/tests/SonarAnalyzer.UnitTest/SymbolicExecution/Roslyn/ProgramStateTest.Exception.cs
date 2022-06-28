@@ -19,11 +19,24 @@
  */
 
 using SonarAnalyzer.SymbolicExecution.Roslyn;
+using SonarAnalyzer.UnitTest.Helpers;
 
 namespace SonarAnalyzer.UnitTest.SymbolicExecution.Roslyn
 {
     public partial class ProgramStateTest
     {
+        [TestMethod]
+        public void PushException_IsImmutable()
+        {
+            var sut = ProgramState.Empty;
+            sut.Exception.Should().BeNull();
+
+            sut = sut.PushException(ExceptionState.UnknownException);
+            sut.Exception.Should().Be(ExceptionState.UnknownException);
+
+            ProgramState.Empty.Exception.Should().BeNull();
+        }
+
         [TestMethod]
         public void SetException_IsImmutable()
         {
@@ -37,12 +50,51 @@ namespace SonarAnalyzer.UnitTest.SymbolicExecution.Roslyn
         }
 
         [TestMethod]
-        public void ResetException_IsImmutable()
+        public void SetException_RemovesAllPrevious()
         {
-            var original = ProgramState.Empty.SetException(ExceptionState.UnknownException);
-            var other = original.ResetException();
+            var sut = ProgramState.Empty.PushException(ExceptionState.UnknownException).PushException(ExceptionState.UnknownException).PushException(ExceptionState.UnknownException);
+            sut.ToString().Should().BeIgnoringLineEndings(
+@"Exception: Unknown
+Exception: Unknown
+Exception: Unknown
+");
+            sut = sut.SetException(ExceptionState.UnknownException);
+            sut.ToString().Should().BeIgnoringLineEndings(
+@"Exception: Unknown
+");
+        }
+
+        [TestMethod]
+        public void PopException_IsImmutable()
+        {
+            var original = ProgramState.Empty.PushException(ExceptionState.UnknownException);
+            var other = original.PopException();
             other.Exception.Should().BeNull();
             original.Exception.Should().Be(ExceptionState.UnknownException);
+        }
+
+        [TestMethod]
+        public void PopException_RemovesInCorrectOrder()
+        {
+            var compilation = TestHelper.CompileCS(string.Empty).Model.Compilation;
+            var sut = ProgramState.Empty
+                .PushException(new(compilation.GetTypeByMetadataName("System.NotImplementedException")))
+                .PushException(new(compilation.GetTypeByMetadataName("System.ArgumentNullException")))
+                .PushException(new(compilation.GetTypeByMetadataName("System.FormatException")));
+
+            sut.Exception.Should().NotBeNull();
+            sut.Exception.Type.Name.Should().Be("FormatException");
+
+            sut = sut.PopException();
+            sut.Exception.Should().NotBeNull();
+            sut.Exception.Type.Name.Should().Be("ArgumentNullException");
+
+            sut = sut.PopException();
+            sut.Exception.Should().NotBeNull();
+            sut.Exception.Type.Name.Should().Be("NotImplementedException");
+
+            sut = sut.PopException();
+            sut.Exception.Should().BeNull();
         }
     }
 }
