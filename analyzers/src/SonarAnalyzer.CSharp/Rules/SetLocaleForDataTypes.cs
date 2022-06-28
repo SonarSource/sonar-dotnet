@@ -88,7 +88,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
                 foreach (var argument in assignmentExpression.AssignmentTargets())
                 {
-                    if (GetPropertySymbol(argument, c.SemanticModel) is { } propertySymbol
+                    if (c.SemanticModel.GetSymbolInfo(argument).Symbol as IPropertySymbol is { } propertySymbol
                         && propertySymbol.Name == "Locale"
                         && propertySymbol.ContainingType.IsAny(CheckedTypes))
                     {
@@ -122,7 +122,8 @@ namespace SonarAnalyzer.Rules.CSharp
             objectCreation.GetFirstNonParenthesizedParent() switch
             {
                 AssignmentExpressionSyntax assignment => assignment.AssignmentTargets(),
-                EqualsValueClauseSyntax equalsClause when equalsClause.Parent.Parent is VariableDeclarationSyntax variableDeclaration => ImmutableArray.Create((SyntaxNode)variableDeclaration.Variables.Last()),
+                EqualsValueClauseSyntax equalsClause when equalsClause.Parent.Parent is VariableDeclarationSyntax variableDeclaration =>
+                    ImmutableArray.Create((SyntaxNode)variableDeclaration.Variables.Last()),
                 ArgumentSyntax argument when argument.Parent.Parent is AssignmentExpressionSyntax expressionSyntax => expressionSyntax.AssignmentTargets(),
                 _ => ImmutableArray<SyntaxNode>.Empty
             };
