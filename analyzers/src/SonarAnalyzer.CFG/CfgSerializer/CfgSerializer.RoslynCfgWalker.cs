@@ -73,7 +73,7 @@ namespace SonarAnalyzer.CFG
                 }
                 foreach (var localFunction in cfg.LocalFunctions)
                 {
-                    var localFunctionCfg = cfg.GetLocalFunctionControlFlowGraph(localFunction);
+                    var localFunctionCfg = cfg.GetLocalFunctionControlFlowGraph(localFunction, cancellationToken);
                     new RoslynCfgWalker(writer, cfgIdProvider, cancellationToken).VisitSubGraph(localFunctionCfg, $"{titlePrefix}.{localFunction.Name}");
                 }
                 foreach (var anonymousFunction in AnonymousFunctions(cfg))

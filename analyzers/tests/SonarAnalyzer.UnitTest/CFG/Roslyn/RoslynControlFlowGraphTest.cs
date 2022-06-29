@@ -82,7 +82,7 @@ public class Sample
             cfg.Parent.Should().BeNull();
             cfg.LocalFunctions.Should().HaveCount(1);
 
-            var localFunctionCfg = cfg.GetLocalFunctionControlFlowGraph(cfg.LocalFunctions.Single());
+            var localFunctionCfg = cfg.GetLocalFunctionControlFlowGraph(cfg.LocalFunctions.Single(), default);
             localFunctionCfg.Should().NotBeNull();
             localFunctionCfg.Parent.Should().Be(cfg);
 

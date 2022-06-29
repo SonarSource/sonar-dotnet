@@ -92,8 +92,8 @@ namespace SonarAnalyzer.CFG.Roslyn
                 ? Wrap(anonymousFunctionCfg)
                 : null;
 
-        public ControlFlowGraph GetLocalFunctionControlFlowGraph(IMethodSymbol localFunction) =>
-            GetLocalFunctionControlFlowGraphMethod.Invoke(instance, new object[] { localFunction, CancellationToken.None }) is { } localFunctionCfg
+        public ControlFlowGraph GetLocalFunctionControlFlowGraph(IMethodSymbol localFunction, CancellationToken cancellationToken) =>
+            GetLocalFunctionControlFlowGraphMethod.Invoke(instance, new object[] { localFunction, cancellationToken }) is { } localFunctionCfg
                 ? Wrap(localFunctionCfg)
                 : null;
 

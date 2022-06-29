@@ -272,7 +272,7 @@ namespace SonarAnalyzer.CFG.LiveVariableAnalysis
                 if (HandleLocalFunction(capturedLocalFunctions, method) is { } localFunction)
                 {
                     capturedLocalFunctions.Add(localFunction);
-                    ProcessCaptured(cfg.FindLocalFunctionCfgInScope(localFunction));
+                    ProcessCaptured(cfg.FindLocalFunctionCfgInScope(localFunction, cancellationToken));
                 }
             }
 
@@ -281,7 +281,7 @@ namespace SonarAnalyzer.CFG.LiveVariableAnalysis
                 if (HandleLocalFunction(ProcessedLocalFunctions, method) is { } localFunction)
                 {
                     ProcessedLocalFunctions.Add(localFunction);
-                    var localFunctionCfg = cfg.FindLocalFunctionCfgInScope(localFunction);
+                    var localFunctionCfg = cfg.FindLocalFunctionCfgInScope(localFunction, cancellationToken);
                     foreach (var block in localFunctionCfg.Blocks.Reverse())    // Simplified approach, ignoring branching and try/catch/finally flows
                     {
                         ProcessBlock(localFunctionCfg, block);

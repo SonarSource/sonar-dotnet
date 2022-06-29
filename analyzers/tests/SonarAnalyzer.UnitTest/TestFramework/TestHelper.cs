@@ -87,7 +87,7 @@ End Class", AnalyzerLanguage.VisualBasic);
             var cfg = ControlFlowGraph.Create(method, semanticModel, default);
             if (localFunctionName != null)
             {
-                cfg = cfg.GetLocalFunctionControlFlowGraph(cfg.LocalFunctions.Single(x => x.Name == localFunctionName));
+                cfg = cfg.GetLocalFunctionControlFlowGraph(cfg.LocalFunctions.Single(x => x.Name == localFunctionName), default);
             }
             return cfg;
 

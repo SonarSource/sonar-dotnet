@@ -52,7 +52,7 @@ namespace SonarAnalyzer.CFG.Roslyn
                 {
                     if (IsLocalFunction(node))
                     {
-                        wrapper = new(wrapper.Cfg.GetLocalFunctionControlFlowGraph(node));
+                        wrapper = new(wrapper.Cfg.GetLocalFunctionControlFlowGraph(node, cancellationToken));
                     }
                     else if (wrapper.FlowOperation(node) is { WrappedOperation: not null } flowOperation)
                     {

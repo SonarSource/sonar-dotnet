@@ -21,6 +21,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using Microsoft.CodeAnalysis;
 using SonarAnalyzer.CFG.Roslyn;
 using StyleCop.Analyzers.Lightup;
@@ -37,21 +38,21 @@ namespace SonarAnalyzer.Extensions
                .Select(IFlowAnonymousFunctionOperationWrapper.FromOperation);
 
         // Similar to ControlFlowGraphExtensions.GetLocalFunctionControlFlowGraphInScope from Roslyn
-        public static ControlFlowGraph FindLocalFunctionCfgInScope(this ControlFlowGraph cfg, IMethodSymbol localFunction)
+        public static ControlFlowGraph FindLocalFunctionCfgInScope(this ControlFlowGraph cfg, IMethodSymbol localFunction, CancellationToken cancellationToken)
         {
             var current = cfg;
             while (current != null)
             {
                 if (current.LocalFunctions.Contains(localFunction))
                 {
-                    return current.GetLocalFunctionControlFlowGraph(localFunction);
+                    return current.GetLocalFunctionControlFlowGraph(localFunction, cancellationToken);
                 }
                 current = current.Parent;
             }
             throw new ArgumentOutOfRangeException(nameof(localFunction));
         }
 
-        public static ControlFlowGraph GetLocalFunctionControlFlowGraph(this ControlFlowGraph cfg, SyntaxNode localFunction) =>
-            cfg.GetLocalFunctionControlFlowGraph(cfg.LocalFunctions.Single(x => x.DeclaringSyntaxReferences.Single().GetSyntax() == localFunction));
+        public static ControlFlowGraph GetLocalFunctionControlFlowGraph(this ControlFlowGraph cfg, SyntaxNode localFunction, CancellationToken cancellationToken) =>
+            cfg.GetLocalFunctionControlFlowGraph(cfg.LocalFunctions.Single(x => x.DeclaringSyntaxReferences.Single().GetSyntax() == localFunction), cancellationToken);
     }
 }
