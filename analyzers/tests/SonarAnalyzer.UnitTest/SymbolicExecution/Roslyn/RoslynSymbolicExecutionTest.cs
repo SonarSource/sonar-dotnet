@@ -37,18 +37,18 @@ namespace SonarAnalyzer.UnitTest.SymbolicExecution.Roslyn
         {
             var cfg = TestHelper.CompileCfgCS("public class Sample { public void Main() { } }");
             var check = new Mock<SymbolicCheck>().Object;
-            ((Action)(() => new RoslynSymbolicExecution(null, new[] { check }))).Should().Throw<ArgumentNullException>().And.ParamName.Should().Be("cfg");
-            ((Action)(() => new RoslynSymbolicExecution(cfg, null))).Should().Throw<ArgumentException>().WithMessage("At least one check is expected*");
-            ((Action)(() => new RoslynSymbolicExecution(cfg, Array.Empty<SymbolicCheck>()))).Should().Throw<ArgumentException>().WithMessage("At least one check is expected*");
+            ((Action)(() => new RoslynSymbolicExecution(null, new[] { check }, default))).Should().Throw<ArgumentNullException>().And.ParamName.Should().Be("cfg");
+            ((Action)(() => new RoslynSymbolicExecution(cfg, null, default))).Should().Throw<ArgumentException>().WithMessage("At least one check is expected*");
+            ((Action)(() => new RoslynSymbolicExecution(cfg, Array.Empty<SymbolicCheck>(), default))).Should().Throw<ArgumentException>().WithMessage("At least one check is expected*");
         }
 
         [TestMethod]
         public void Execute_SecondRun_Throws()
         {
             var cfg = TestHelper.CompileCfgBodyCS();
-            var se = new RoslynSymbolicExecution(cfg, new[] { new ValidatorTestCheck(cfg) });
-            se.Execute(default);
-            se.Invoking(x => x.Execute(default)).Should().Throw<InvalidOperationException>().WithMessage("Engine can be executed only once.");
+            var se = new RoslynSymbolicExecution(cfg, new[] { new ValidatorTestCheck(cfg) }, default);
+            se.Execute();
+            se.Invoking(x => x.Execute()).Should().Throw<InvalidOperationException>().WithMessage("Engine can be executed only once.");
         }
 
         [TestMethod]
@@ -315,9 +315,9 @@ if (boolParameter)
         {
             var cfg = TestHelper.CompileCfgBodyCS("var a = 1;");
             var validator = new ValidatorTestCheck(cfg);
-            var se = new RoslynSymbolicExecution(cfg, new SymbolicCheck[] { validator });
+            var se = new RoslynSymbolicExecution(cfg, new SymbolicCheck[] { validator }, new CancellationToken(isCancelled));
 
-            se.Execute(new CancellationToken(isCancelled));
+            se.Execute();
 
             validator.ValidateExitReachCount(exitReachCount);
         }

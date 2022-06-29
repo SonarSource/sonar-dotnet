@@ -164,7 +164,7 @@ namespace SonarAnalyzer.Rules.CSharp
             else
             {
                 var cfg = ControlFlowGraph.Create(body.Parent, semanticModel, cancellationToken);
-                var checker = new RoslynChecker(cfg, classMember);
+                var checker = new RoslynChecker(cfg, classMember, cancellationToken);
                 return checker.CheckAllPaths();
             }
         }

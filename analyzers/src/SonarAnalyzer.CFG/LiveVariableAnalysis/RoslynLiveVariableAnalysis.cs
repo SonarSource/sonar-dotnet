@@ -21,6 +21,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using Microsoft.CodeAnalysis;
 using SonarAnalyzer.CFG.Roslyn;
 using SonarAnalyzer.Extensions;
@@ -30,13 +31,15 @@ namespace SonarAnalyzer.CFG.LiveVariableAnalysis
 {
     public sealed class RoslynLiveVariableAnalysis : LiveVariableAnalysisBase<ControlFlowGraph, BasicBlock>
     {
+        private readonly CancellationToken cancellationToken;
         private readonly Dictionary<int, List<BasicBlock>> blockPredecessors = new();
         private readonly Dictionary<int, List<BasicBlock>> blockSuccessors = new();
 
         protected override BasicBlock ExitBlock => Cfg.ExitBlock;
 
-        public RoslynLiveVariableAnalysis(ControlFlowGraph cfg) : base(cfg, OriginalDeclaration(cfg.OriginalOperation))
+        public RoslynLiveVariableAnalysis(ControlFlowGraph cfg, CancellationToken cancellationToken) : base(cfg, OriginalDeclaration(cfg.OriginalOperation))
         {
+            this.cancellationToken = cancellationToken;
             foreach (var ordinal in cfg.Blocks.Select(x => x.Ordinal))
             {
                 blockPredecessors.Add(ordinal, new());
@@ -74,7 +77,7 @@ namespace SonarAnalyzer.CFG.LiveVariableAnalysis
 
         protected override State ProcessBlock(BasicBlock block)
         {
-            var ret = new RoslynState(this);
+            var ret = new RoslynState(this, cancellationToken);
             ret.ProcessBlock(Cfg, block);
             return ret;
         }
@@ -167,10 +170,14 @@ namespace SonarAnalyzer.CFG.LiveVariableAnalysis
         private sealed class RoslynState : State
         {
             private readonly RoslynLiveVariableAnalysis owner;
+            private readonly CancellationToken cancellationToken;
             private readonly ISet<ISymbol> capturedLocalFunctions = new HashSet<ISymbol>();
 
-            public RoslynState(RoslynLiveVariableAnalysis owner) =>
+            public RoslynState(RoslynLiveVariableAnalysis owner, CancellationToken cancellationToken)
+            {
                 this.owner = owner;
+                this.cancellationToken = cancellationToken;
+            }
 
             public void ProcessBlock(ControlFlowGraph cfg, BasicBlock block)
             {
@@ -230,7 +237,7 @@ namespace SonarAnalyzer.CFG.LiveVariableAnalysis
             {
                 if (!anonymousFunction.Symbol.IsStatic) // Performance: No need to descent into static
                 {
-                    ProcessCaptured(cfg.GetAnonymousFunctionControlFlowGraph(anonymousFunction));
+                    ProcessCaptured(cfg.GetAnonymousFunctionControlFlowGraph(anonymousFunction, cancellationToken));
                 }
             }
 

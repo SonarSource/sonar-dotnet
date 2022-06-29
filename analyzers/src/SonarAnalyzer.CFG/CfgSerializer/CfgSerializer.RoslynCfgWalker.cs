@@ -21,6 +21,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using Microsoft.CodeAnalysis;
 using SonarAnalyzer.CFG.Roslyn;
 using SonarAnalyzer.Extensions;
@@ -33,14 +34,16 @@ namespace SonarAnalyzer.CFG
         private class RoslynCfgWalker
         {
             private readonly DotWriter writer;
-            private readonly HashSet<BasicBlock> visited = new HashSet<BasicBlock>();
+            private readonly HashSet<BasicBlock> visited = new();
             private readonly RoslynCfgIdProvider cfgIdProvider;
+            private readonly CancellationToken cancellationToken;
             private readonly int cfgId;
 
-            public RoslynCfgWalker(DotWriter writer, RoslynCfgIdProvider cfgIdProvider)
+            public RoslynCfgWalker(DotWriter writer, RoslynCfgIdProvider cfgIdProvider, CancellationToken cancellationToken)
             {
                 this.writer = writer;
                 this.cfgIdProvider = cfgIdProvider;
+                this.cancellationToken = cancellationToken;
                 cfgId = cfgIdProvider.Next();
             }
 
@@ -71,12 +74,12 @@ namespace SonarAnalyzer.CFG
                 foreach (var localFunction in cfg.LocalFunctions)
                 {
                     var localFunctionCfg = cfg.GetLocalFunctionControlFlowGraph(localFunction);
-                    new RoslynCfgWalker(writer, cfgIdProvider).VisitSubGraph(localFunctionCfg, $"{titlePrefix}.{localFunction.Name}");
+                    new RoslynCfgWalker(writer, cfgIdProvider, cancellationToken).VisitSubGraph(localFunctionCfg, $"{titlePrefix}.{localFunction.Name}");
                 }
                 foreach (var anonymousFunction in AnonymousFunctions(cfg))
                 {
-                    var anonymousFunctionCfg = cfg.GetAnonymousFunctionControlFlowGraph(anonymousFunction);
-                    new RoslynCfgWalker(writer, cfgIdProvider).VisitSubGraph(anonymousFunctionCfg, $"{titlePrefix}.anonymous");
+                    var anonymousFunctionCfg = cfg.GetAnonymousFunctionControlFlowGraph(anonymousFunction, cancellationToken);
+                    new RoslynCfgWalker(writer, cfgIdProvider, cancellationToken).VisitSubGraph(anonymousFunctionCfg, $"{titlePrefix}.anonymous");
                 }
             }
 

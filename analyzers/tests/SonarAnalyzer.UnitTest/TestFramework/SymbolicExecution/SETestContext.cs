@@ -33,11 +33,11 @@ namespace SonarAnalyzer.UnitTest.TestFramework.SymbolicExecution
             const string Separator = "----------";
             var cfg = TestHelper.CompileCfg(code, language, false, localFunctionName, outputKind: outputKind);
             Validator = new ValidatorTestCheck(cfg);
-            var se = new RoslynSymbolicExecution(cfg, additionalChecks.Concat(new[] { Validator }).ToArray());
+            var se = new RoslynSymbolicExecution(cfg, additionalChecks.Concat(new[] { Validator }).ToArray(), default);
             Console.WriteLine(Separator);
-            Console.Write(CfgSerializer.Serialize(cfg));
+            Console.Write(CfgSerializer.Serialize(cfg, default));
             Console.WriteLine(Separator);
-            se.Execute(default);
+            se.Execute();
         }
 
         public static SETestContext CreateCS(string methodBody, params SymbolicCheck[] additionalChecks) =>

@@ -69,7 +69,7 @@ namespace SonarAnalyzer.Rules.CSharp
                         return;
                     }
 
-                    ReportUnusedParametersOnMethod(declaration, c.CancellationToken);
+                    ReportUnusedParametersOnMethod(declaration);
                 },
                 SyntaxKind.MethodDeclaration,
                 SyntaxKind.ConstructorDeclaration,
@@ -118,7 +118,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 .Any(x => x != null && x.ContainingType.Is(KnownType.System_NotImplementedException));
         }
 
-        private void ReportUnusedParametersOnMethod(MethodContext declaration, CancellationToken cancellationToken)
+        private void ReportUnusedParametersOnMethod(MethodContext declaration)
         {
             if (!MethodCanBeSafelyChanged(declaration.Symbol))
             {
@@ -133,10 +133,10 @@ namespace SonarAnalyzer.Rules.CSharp
                 ReportOnUnusedParameters(declaration, unusedParameters, MessageUnused);
             }
 
-            ReportOnDeadParametersAtEntry(declaration, unusedParameters, cancellationToken);
+            ReportOnDeadParametersAtEntry(declaration, unusedParameters);
         }
 
-        private void ReportOnDeadParametersAtEntry(MethodContext declaration, IImmutableList<IParameterSymbol> noReportOnParameters, CancellationToken cancellationToken)
+        private void ReportOnDeadParametersAtEntry(MethodContext declaration, IImmutableList<IParameterSymbol> noReportOnParameters)
         {
             var bodyNode = (CSharpSyntaxNode)declaration.Body ?? declaration.ExpressionBody;
             if (bodyNode == null || declaration.Context.Node.IsKind(SyntaxKind.ConstructorDeclaration))
@@ -152,13 +152,13 @@ namespace SonarAnalyzer.Rules.CSharp
             excludedParameters = excludedParameters.AddRange(declaration.Symbol.Parameters.Where(p => p.RefKind != RefKind.None));
 
             var candidateParameters = declaration.Symbol.Parameters.Except(excludedParameters);
-            if (candidateParameters.Any() && ComputeLva(declaration, bodyNode, cancellationToken) is { } lva)
+            if (candidateParameters.Any() && ComputeLva(declaration, bodyNode) is { } lva)
             {
                 ReportOnUnusedParameters(declaration, candidateParameters.Except(lva.LiveInEntryBlock).Except(lva.CapturedVariables), MessageDead, isRemovable: false);
             }
         }
 
-        private LvaResult ComputeLva(MethodContext declaration, CSharpSyntaxNode body, CancellationToken cancellationToken)
+        private LvaResult ComputeLva(MethodContext declaration, CSharpSyntaxNode body)
         {
             if (useSonarCfg)
             {
@@ -168,8 +168,8 @@ namespace SonarAnalyzer.Rules.CSharp
             }
             else
             {
-                return body.CreateCfg(declaration.Context.SemanticModel, cancellationToken) is { } cfg
-                    ? new LvaResult(cfg)
+                return body.CreateCfg(declaration.Context.SemanticModel, declaration.Context.CancellationToken) is { } cfg
+                    ? new LvaResult(cfg, declaration.Context.CancellationToken)
                     : null;
             }
         }
@@ -300,9 +300,9 @@ namespace SonarAnalyzer.Rules.CSharp
                 CapturedVariables = lva.CapturedVariables;
             }
 
-            public LvaResult(ControlFlowGraph cfg)
+            public LvaResult(ControlFlowGraph cfg, CancellationToken cancellationToken)
             {
-                var lva = new RoslynLiveVariableAnalysis(cfg);
+                var lva = new RoslynLiveVariableAnalysis(cfg, cancellationToken);
                 LiveInEntryBlock = lva.LiveIn(cfg.EntryBlock).OfType<IParameterSymbol>().ToImmutableArray();
                 CapturedVariables = lva.CapturedVariables;
             }

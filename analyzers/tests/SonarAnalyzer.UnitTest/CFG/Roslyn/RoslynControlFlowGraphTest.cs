@@ -87,7 +87,7 @@ public class Sample
             localFunctionCfg.Parent.Should().Be(cfg);
 
             var anonymousFunction = cfg.Blocks.SelectMany(x => x.Operations).SelectMany(x => x.DescendantsAndSelf()).OfType<FlowAnalysis.IFlowAnonymousFunctionOperation>().Single();
-            cfg.GetAnonymousFunctionControlFlowGraph(IFlowAnonymousFunctionOperationWrapper.FromOperation(anonymousFunction)).Should().NotBeNull();
+            cfg.GetAnonymousFunctionControlFlowGraph(IFlowAnonymousFunctionOperationWrapper.FromOperation(anonymousFunction), default).Should().NotBeNull();
         }
 
         [TestMethod]
@@ -108,8 +108,8 @@ public class Sample {
             var cfg = TestHelper.CompileCfgCS(code);
             var anonymousFunctionOperations = SonarAnalyzer.Extensions.ControlFlowGraphExtensions.FlowAnonymousFunctionOperations(cfg).ToList();
             anonymousFunctionOperations.Should().HaveCount(2);
-            cfg.GetAnonymousFunctionControlFlowGraph(anonymousFunctionOperations[0]).Should().NotBeNull();
-            cfg.GetAnonymousFunctionControlFlowGraph(anonymousFunctionOperations[1]).Should().NotBeNull();
+            cfg.GetAnonymousFunctionControlFlowGraph(anonymousFunctionOperations[0], default).Should().NotBeNull();
+            cfg.GetAnonymousFunctionControlFlowGraph(anonymousFunctionOperations[1], default).Should().NotBeNull();
         }
 
         [TestMethod]

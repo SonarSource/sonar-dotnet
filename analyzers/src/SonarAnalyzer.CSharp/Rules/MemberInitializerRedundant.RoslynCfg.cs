@@ -19,6 +19,7 @@
  */
 
 using System.Linq;
+using System.Threading;
 using Microsoft.CodeAnalysis;
 using SonarAnalyzer.CFG.Roslyn;
 using SonarAnalyzer.Extensions;
@@ -31,12 +32,14 @@ namespace SonarAnalyzer.Rules.CSharp
         private class RoslynChecker : CfgAllPathValidator
         {
             private readonly ISymbol memberToCheck;
+            private readonly CancellationToken cancellationToken;
             private readonly ControlFlowGraph cfg;
 
-            public RoslynChecker(ControlFlowGraph cfg, ISymbol memberToCheck) : base(cfg)
+            public RoslynChecker(ControlFlowGraph cfg, ISymbol memberToCheck, CancellationToken cancellationToken) : base(cfg)
             {
                 this.cfg = cfg;
                 this.memberToCheck = memberToCheck;
+                this.cancellationToken = cancellationToken;
             }
 
             // Returns true if the block contains assignment before access
@@ -53,7 +56,8 @@ namespace SonarAnalyzer.Rules.CSharp
                 {
                     if (checkReadBeforeWrite && operation.Instance.Kind == OperationKindEx.FlowAnonymousFunction)
                     {
-                        var anonymousFunctionCfg = controlFlowGraph.GetAnonymousFunctionControlFlowGraph(IFlowAnonymousFunctionOperationWrapper.FromOperation(operation.Instance));
+                        var anonymousFunction = IFlowAnonymousFunctionOperationWrapper.FromOperation(operation.Instance);
+                        var anonymousFunctionCfg = controlFlowGraph.GetAnonymousFunctionControlFlowGraph(anonymousFunction, cancellationToken);
                         if (anonymousFunctionCfg.Blocks.Any(x => ProcessBlock(x, anonymousFunctionCfg, checkReadBeforeWrite)))
                         {
                             return true;

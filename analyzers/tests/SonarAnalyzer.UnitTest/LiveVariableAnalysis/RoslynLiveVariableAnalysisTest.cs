@@ -1040,9 +1040,9 @@ End Class";
                 const string Separator = "----------";
                 Cfg = TestHelper.CompileCfg(code, language, code.Contains("// Error CS"), localFunctionName);
                 Console.WriteLine(Separator);
-                Console.WriteLine(CfgSerializer.Serialize(Cfg));
+                Console.WriteLine(CfgSerializer.Serialize(Cfg, default));
                 Console.WriteLine(Separator);
-                Lva = new RoslynLiveVariableAnalysis(Cfg);
+                Lva = new RoslynLiveVariableAnalysis(Cfg, default);
             }
 
             public Context(string code, SyntaxKind syntaxKind)
@@ -1050,7 +1050,7 @@ End Class";
                 var (tree, model) = TestHelper.Compile(code, false, AnalyzerLanguage.CSharp);
                 var node = tree.GetRoot().DescendantNodes().First(x => x.RawKind == (int)syntaxKind);
                 Cfg = node.CreateCfg(model, default);
-                Lva = new RoslynLiveVariableAnalysis(Cfg);
+                Lva = new RoslynLiveVariableAnalysis(Cfg, default);
             }
 
             public void ValidateAllEmpty()

@@ -47,7 +47,7 @@ internal class DebugLogger
         if (isActive)
         {
             Console.WriteLine(Separator);
-            Console.WriteLine(CfgSerializer.Serialize(cfg));
+            Console.WriteLine(CfgSerializer.Serialize(cfg, default));
         }
     }
 

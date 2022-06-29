@@ -56,7 +56,7 @@ namespace SonarAnalyzer.CFG.Roslyn
                     }
                     else if (wrapper.FlowOperation(node) is { WrappedOperation: not null } flowOperation)
                     {
-                        wrapper = new(wrapper.Cfg.GetAnonymousFunctionControlFlowGraph(flowOperation));
+                        wrapper = new(wrapper.Cfg.GetAnonymousFunctionControlFlowGraph(flowOperation, cancellationToken));
                     }
                     else if (node == declaration)
                     {

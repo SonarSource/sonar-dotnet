@@ -87,8 +87,8 @@ namespace SonarAnalyzer.CFG.Roslyn
                 ? Wrap(CreateMethod.Invoke(null, new object[] { node, semanticModel, cancellationToken }))
                 : throw new InvalidOperationException("CFG is not available under this version of Roslyn compiler.");
 
-        public ControlFlowGraph GetAnonymousFunctionControlFlowGraph(IFlowAnonymousFunctionOperationWrapper anonymousFunction) =>
-            GetAnonymousFunctionControlFlowGraphMethod.Invoke(instance, new object[] { anonymousFunction.WrappedOperation, CancellationToken.None }) is { } anonymousFunctionCfg
+        public ControlFlowGraph GetAnonymousFunctionControlFlowGraph(IFlowAnonymousFunctionOperationWrapper anonymousFunction, CancellationToken cancellationToken) =>
+            GetAnonymousFunctionControlFlowGraphMethod.Invoke(instance, new object[] { anonymousFunction.WrappedOperation, cancellationToken }) is { } anonymousFunctionCfg
                 ? Wrap(anonymousFunctionCfg)
                 : null;
 
