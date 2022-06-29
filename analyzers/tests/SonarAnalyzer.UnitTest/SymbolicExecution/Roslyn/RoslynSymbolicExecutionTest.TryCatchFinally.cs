@@ -1185,7 +1185,7 @@ tag = ""End"";";
             validator.TagStates("InCatchAll").Should().HaveCount(1).And.ContainSingle(x => HasUnknownException(x));
             validator.TagStates("InFinally").Should().HaveCount(2)
                 .And.ContainSingle(x => HasNoException(x))
-                .And.ContainSingle(x => HasUnknownException(x));
+                .And.ContainSingle(x => HasExceptionOfType(x, "NullReferenceException"));
             validator.TagStates("End").Should().HaveCount(1).And.ContainSingle(x => HasNoException(x));
         }
 
@@ -1351,7 +1351,7 @@ tag = ""AfterCatch"";";
 
             validator.TagStates("InCatch").Should().HaveCount(2)
                      .And.ContainSingle(x => HasExceptionOfType(x, "NotImplementedException"))
-                     .And.ContainSingle(x => HasUnknownException(x)); // ArrayReference can throw IndexOutOfBounds
+                     .And.ContainSingle(x => HasExceptionOfType(x, "IndexOutOfRangeException"));
             validator.TagStates("AfterCatch").Should().HaveCount(1).And.ContainSingle(x => HasNoException(x));
         }
 
