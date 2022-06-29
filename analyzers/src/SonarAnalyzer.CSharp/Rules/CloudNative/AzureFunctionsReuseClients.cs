@@ -88,7 +88,7 @@ namespace SonarAnalyzer.Rules.CSharp
             node.Ancestors().Any(x => x.IsAnyKind(SyntaxKind.FieldDeclaration, SyntaxKind.PropertyDeclaration));
 
         private static bool IsAssignedToStaticFieldOrProperty(SyntaxNodeAnalysisContext context) =>
-            context.Node.Parent.WalkUpParentheses() is AssignmentExpressionSyntax assignment
+            context.Node.Parent.GetFirstNonParenthesizedParent() is AssignmentExpressionSyntax assignment
                 && assignment.Left.GetIdentifier() is { } identifier
                 && context.SemanticModel.GetSymbolInfo(identifier, context.CancellationToken).Symbol is { IsStatic: true, Kind: SymbolKind.Field or SymbolKind.Property };
 
