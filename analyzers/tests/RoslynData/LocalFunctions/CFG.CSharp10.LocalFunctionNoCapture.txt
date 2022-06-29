@@ -1,5 +1,5 @@
 // http://viz-js.com/
-// https://edotor.net/?engine=dot#digraph%20%22LocalFunctionNoCapture%22%20%7B%0D%0Asubgraph%20%22cluster_LocalLifetime%20region%22%20%7B%0Alabel%20%3D%20%22LocalLifetime%20region%22%0D%0Acfg0_block1%20%5Bshape%3Drecord%20label%3D%22%7BBLOCK%20%231%7C0%23%20SimpleAssignmentOperation%20%2F%20VariableDeclaratorSyntax%3A%20result%20%3D%20Compute(1%2C%203)%7C1%23%20LocalReferenceOperation%20%2F%20VariableDeclaratorSyntax%3A%20result%20%3D%20Compute(1%2C%203)%7C1%23%20InvocationOperation%3A%20Compute%20%2F%20InvocationExpressionSyntax%3A%20Compute(1%2C%203)%7C2%23%20ArgumentOperation%20%2F%20ArgumentSyntax%3A%201%7C3%23%20LiteralOperation%20%2F%20LiteralExpressionSyntax%3A%201%7C2%23%20ArgumentOperation%20%2F%20ArgumentSyntax%3A%203%7C3%23%20LiteralOperation%20%2F%20LiteralExpressionSyntax%3A%203%7C%23%23%23%23%23%23%23%23%23%23%7D%22%5D%0D%0A%7D%0D%0Acfg0_block0%20%5Bshape%3Drecord%20label%3D%22%7BENTRY%20%230%7D%22%5D%0D%0Acfg0_block2%20%5Bshape%3Drecord%20label%3D%22%7BEXIT%20%232%7D%22%5D%0D%0Asubgraph%20%22cluster_LocalFunctionNoCapture.Compute.2%22%20%7B%0Alabel%20%3D%20%22LocalFunctionNoCapture.Compute.2%22%0D%0Acfg1_block0%20%5Bshape%3Drecord%20label%3D%22%7BENTRY%20%230%7D%22%5D%0D%0Acfg1_block1%20%5Bshape%3Drecord%20label%3D%22%7BBLOCK%20%231%7C%23%23%20BranchValue%20%23%23%7C0%23%20BinaryOperation%20%2F%20BinaryExpressionSyntax%3A%20a%20%2B%20b%7C1%23%20ParameterReferenceOperation%20%2F%20IdentifierNameSyntax%3A%20a%7C1%23%20ParameterReferenceOperation%20%2F%20IdentifierNameSyntax%3A%20b%7C%23%23%23%23%23%23%23%23%23%23%7D%22%5D%0D%0Acfg1_block2%20%5Bshape%3Drecord%20label%3D%22%7BEXIT%20%232%7D%22%5D%0D%0A%7D%0D%0Acfg0_block0%20-%3E%20cfg0_block1%0D%0Acfg0_block1%20-%3E%20cfg0_block2%0D%0Acfg1_block0%20-%3E%20cfg1_block1%0D%0Acfg1_block1%20-%3E%20cfg1_block2%20%5Blabel%3D%22Return%22%5D%0D%0A%7D%0D%0A
+// https://edotor.net/?engine=dot#digraph%20%22LocalFunctionNoCapture%22%20%7B%0D%0Asubgraph%20%22cluster_1%22%20%7B%0Alabel%20%3D%20%22LocalLifetime%20region%2C%20Locals%3A%20result%22%0D%0Acfg0_block1%20%5Bshape%3Drecord%20label%3D%22%7BBLOCK%20%231%7C0%23%20SimpleAssignmentOperation%20%2F%20VariableDeclaratorSyntax%3A%20result%20%3D%20Compute(1%2C%203)%7C1%23%20LocalReferenceOperation%20%2F%20VariableDeclaratorSyntax%3A%20result%20%3D%20Compute(1%2C%203)%7C1%23%20InvocationOperation%3A%20Compute%20%2F%20InvocationExpressionSyntax%3A%20Compute(1%2C%203)%7C2%23%20ArgumentOperation%20%2F%20ArgumentSyntax%3A%201%7C3%23%20LiteralOperation%20%2F%20LiteralExpressionSyntax%3A%201%7C2%23%20ArgumentOperation%20%2F%20ArgumentSyntax%3A%203%7C3%23%20LiteralOperation%20%2F%20LiteralExpressionSyntax%3A%203%7C%23%23%23%23%23%23%23%23%23%23%7D%22%5D%0D%0A%7D%0D%0Acfg0_block0%20%5Bshape%3Drecord%20label%3D%22%7BENTRY%20%230%7D%22%5D%0D%0Acfg0_block2%20%5Bshape%3Drecord%20label%3D%22%7BEXIT%20%232%7D%22%5D%0D%0Asubgraph%20%22cluster_3%22%20%7B%0Alabel%20%3D%20%22LocalFunctionNoCapture.Compute%22%0D%0Acfg2_block0%20%5Bshape%3Drecord%20label%3D%22%7BENTRY%20%230%7D%22%5D%0D%0Acfg2_block1%20%5Bshape%3Drecord%20label%3D%22%7BBLOCK%20%231%7C%23%23%20BranchValue%20%23%23%7C0%23%20BinaryOperation%20%2F%20BinaryExpressionSyntax%3A%20a%20%2B%20b%7C1%23%20ParameterReferenceOperation%20%2F%20IdentifierNameSyntax%3A%20a%7C1%23%20ParameterReferenceOperation%20%2F%20IdentifierNameSyntax%3A%20b%7C%23%23%23%23%23%23%23%23%23%23%7D%22%5D%0D%0Acfg2_block2%20%5Bshape%3Drecord%20label%3D%22%7BEXIT%20%232%7D%22%5D%0D%0A%7D%0D%0Acfg0_block0%20-%3E%20cfg0_block1%0D%0Acfg0_block1%20-%3E%20cfg0_block2%0D%0Acfg2_block0%20-%3E%20cfg2_block1%0D%0Acfg2_block1%20-%3E%20cfg2_block2%20%5Blabel%3D%22Return%22%5D%0D%0A%7D%0D%0A
 
 /*
 public void LocalFunctionNoCapture()
@@ -11,20 +11,20 @@ public void LocalFunctionNoCapture()
 */
 
 digraph "LocalFunctionNoCapture" {
-subgraph "cluster_LocalLifetime region" {
-label = "LocalLifetime region"
+subgraph "cluster_1" {
+label = "LocalLifetime region, Locals: result"
 cfg0_block1 [shape=record label="{BLOCK #1|0# SimpleAssignmentOperation / VariableDeclaratorSyntax: result = Compute(1, 3)|1# LocalReferenceOperation / VariableDeclaratorSyntax: result = Compute(1, 3)|1# InvocationOperation: Compute / InvocationExpressionSyntax: Compute(1, 3)|2# ArgumentOperation / ArgumentSyntax: 1|3# LiteralOperation / LiteralExpressionSyntax: 1|2# ArgumentOperation / ArgumentSyntax: 3|3# LiteralOperation / LiteralExpressionSyntax: 3|##########}"]
 }
 cfg0_block0 [shape=record label="{ENTRY #0}"]
 cfg0_block2 [shape=record label="{EXIT #2}"]
-subgraph "cluster_LocalFunctionNoCapture.Compute.2" {
-label = "LocalFunctionNoCapture.Compute.2"
-cfg1_block0 [shape=record label="{ENTRY #0}"]
-cfg1_block1 [shape=record label="{BLOCK #1|## BranchValue ##|0# BinaryOperation / BinaryExpressionSyntax: a + b|1# ParameterReferenceOperation / IdentifierNameSyntax: a|1# ParameterReferenceOperation / IdentifierNameSyntax: b|##########}"]
-cfg1_block2 [shape=record label="{EXIT #2}"]
+subgraph "cluster_3" {
+label = "LocalFunctionNoCapture.Compute"
+cfg2_block0 [shape=record label="{ENTRY #0}"]
+cfg2_block1 [shape=record label="{BLOCK #1|## BranchValue ##|0# BinaryOperation / BinaryExpressionSyntax: a + b|1# ParameterReferenceOperation / IdentifierNameSyntax: a|1# ParameterReferenceOperation / IdentifierNameSyntax: b|##########}"]
+cfg2_block2 [shape=record label="{EXIT #2}"]
 }
 cfg0_block0 -> cfg0_block1
 cfg0_block1 -> cfg0_block2
-cfg1_block0 -> cfg1_block1
-cfg1_block1 -> cfg1_block2 [label="Return"]
+cfg2_block0 -> cfg2_block1
+cfg2_block1 -> cfg2_block2 [label="Return"]
 }
