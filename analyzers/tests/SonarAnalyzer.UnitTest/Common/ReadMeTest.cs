@@ -18,6 +18,8 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+#if NET // net48 build doesn't set TestContext.DeploymentDirectory correctly
+
 using System.IO;
 using System.Text.RegularExpressions;
 using SonarAnalyzer.Common;
@@ -55,3 +57,5 @@ public class ReadMeTest
         rules.Should().BeInRange(min, min + 10);
     }
 }
+
+#endif
