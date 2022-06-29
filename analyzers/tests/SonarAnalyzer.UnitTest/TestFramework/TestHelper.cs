@@ -52,9 +52,13 @@ namespace SonarAnalyzer.UnitTest
         public static (SyntaxTree Tree, SemanticModel Model) CompileVB(string snippet, params MetadataReference[] additionalReferences) =>
             Compile(snippet, false, AnalyzerLanguage.VisualBasic, additionalReferences);
 
-        public static (SyntaxTree Tree, SemanticModel Model) Compile(string snippet, bool ignoreErrors, AnalyzerLanguage language, params MetadataReference[] additionalReferences)
+        public static (SyntaxTree Tree, SemanticModel Model) Compile(string snippet,
+                                                                     bool ignoreErrors,
+                                                                     AnalyzerLanguage language,
+                                                                     MetadataReference[] additionalReferences = null,
+                                                                     OutputKind outputKind = OutputKind.DynamicallyLinkedLibrary)
         {
-            var compiled = new SnippetCompiler(snippet, ignoreErrors, language, additionalReferences);
+            var compiled = new SnippetCompiler(snippet, ignoreErrors, language, additionalReferences, outputKind);
             return (compiled.SyntaxTree, compiled.SemanticModel);
         }
 
@@ -72,9 +76,13 @@ End Class", AnalyzerLanguage.VisualBasic);
         public static ControlFlowGraph CompileCfgCS(string snippet, bool ignoreErrors = false) =>
             CompileCfg(snippet, AnalyzerLanguage.CSharp, ignoreErrors);
 
-        public static ControlFlowGraph CompileCfg(string snippet, AnalyzerLanguage language, bool ignoreErrors = false, string localFunctionName = null)
+        public static ControlFlowGraph CompileCfg(string snippet,
+                                                  AnalyzerLanguage language,
+                                                  bool ignoreErrors = false,
+                                                  string localFunctionName = null,
+                                                  OutputKind outputKind = OutputKind.DynamicallyLinkedLibrary)
         {
-            var (tree, semanticModel) = Compile(snippet, ignoreErrors, language);
+            var (tree, semanticModel) = Compile(snippet, ignoreErrors, language, outputKind: outputKind);
             var method = tree.GetRoot().DescendantNodes().First(IsMethod);
             var cfg = ControlFlowGraph.Create(method, semanticModel);
             if (localFunctionName != null)
