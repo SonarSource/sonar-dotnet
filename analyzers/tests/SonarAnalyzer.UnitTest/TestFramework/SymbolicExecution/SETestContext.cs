@@ -37,7 +37,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework.SymbolicExecution
             Console.WriteLine(Separator);
             Console.Write(CfgSerializer.Serialize(cfg));
             Console.WriteLine(Separator);
-            se.Execute();
+            se.Execute(default);
         }
 
         public static SETestContext CreateCS(string methodBody, params SymbolicCheck[] additionalChecks) =>

@@ -18,6 +18,7 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System.Threading;
 using Microsoft.CodeAnalysis.Operations;
 using Moq;
 using SonarAnalyzer.SymbolicExecution;
@@ -46,8 +47,8 @@ namespace SonarAnalyzer.UnitTest.SymbolicExecution.Roslyn
         {
             var cfg = TestHelper.CompileCfgBodyCS();
             var se = new RoslynSymbolicExecution(cfg, new[] { new ValidatorTestCheck(cfg) });
-            se.Execute();
-            se.Invoking(x => x.Execute()).Should().Throw<InvalidOperationException>().WithMessage("Engine can be executed only once.");
+            se.Execute(default);
+            se.Invoking(x => x.Execute(default)).Should().Throw<InvalidOperationException>().WithMessage("Engine can be executed only once.");
         }
 
         [TestMethod]
@@ -272,11 +273,6 @@ Tag(""End"");";
             }
         }
 
-        private static ProgramState[] DecorateIntLiteral(SymbolicContext context, SymbolicConstraint first, SymbolicConstraint second) =>
-            context.Operation.Instance.Kind == OperationKind.Literal && context.Operation.Instance.ConstantValue.Value is int
-                ? new[] { context.SetOperationConstraint(first), context.SetOperationConstraint(second) }
-                : new[] { context.State };
-
         [TestMethod]
         public void Execute_LocalScopeRegion_AssignDefaultBoolConstraint() =>
             SETestContext.CreateVB(@"Dim B As Boolean : Tag(""B"", B)").Validator.ValidateTag("B", x => x.HasConstraint(BoolConstraint.False).Should().BeTrue());
@@ -311,5 +307,24 @@ if (boolParameter)
             var validator = SETestContext.CreateCS(code, $", {refKind} int {paramName}", postProcess).Validator;
             validator.ValidateExitReachCount(2);    // Once with the constraint and once without it.
         }
+
+        [DataTestMethod]
+        [DataRow(true, 0)]
+        [DataRow(false, 1)]
+        public void Execute_StopsEarly_IfCancellationTokenIsCancelled(bool isCancelled, int exitReachCount)
+        {
+            var cfg = TestHelper.CompileCfgBodyCS("var a = 1;");
+            var validator = new ValidatorTestCheck(cfg);
+            var se = new RoslynSymbolicExecution(cfg, new SymbolicCheck[] { validator });
+
+            se.Execute(new CancellationToken(isCancelled));
+
+            validator.ValidateExitReachCount(exitReachCount);
+        }
+
+        private static ProgramState[] DecorateIntLiteral(SymbolicContext context, SymbolicConstraint first, SymbolicConstraint second) =>
+            context.Operation.Instance.Kind == OperationKind.Literal && context.Operation.Instance.ConstantValue.Value is int
+                ? new[] { context.SetOperationConstraint(first), context.SetOperationConstraint(second) }
+                : new[] { context.State };
     }
 }

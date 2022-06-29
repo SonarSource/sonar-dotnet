@@ -84,7 +84,7 @@ namespace SonarAnalyzer.Rules
                     if (CreateCfg(nodeContext.SemanticModel, body) is { } cfg)
                     {
                         var engine = new RoslynSymbolicExecution(cfg, checks);
-                        engine.Execute();
+                        engine.Execute(nodeContext.CancellationToken);
                     }
                 }
                 catch (Exception ex)

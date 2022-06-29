@@ -21,6 +21,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using Microsoft.CodeAnalysis;
 using SonarAnalyzer.CFG.LiveVariableAnalysis;
 using SonarAnalyzer.CFG.Roslyn;
@@ -59,7 +60,7 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
             logger.Log(cfg);
         }
 
-        public void Execute()
+        public void Execute(CancellationToken cancellationToken)
         {
             if (visited.Any())
             {
@@ -73,7 +74,7 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
             queue.Enqueue(new(cfg.EntryBlock, ProgramState.Empty, null));
             while (queue.Any())
             {
-                if (steps++ > MaxStepCount)
+                if (steps++ > MaxStepCount || cancellationToken.IsCancellationRequested)
                 {
                     return;
                 }
