@@ -46,7 +46,7 @@ tag = ""AfterCatch"";";
             validator.ValidateContainsOperation(OperationKindEx.ArrayElementReference);
             validator.ValidateTagOrder("BeforeTry", "InTry", "InCatch", "AfterCatch");
             validator.TagStates("InCatch").Should().HaveCount(1).And.ContainSingle(x => HasExceptionOfType(x, "IndexOutOfRangeException"));
-            validator.ExitStates.Should().ContainSingle(x => HasNoException(x));
+            validator.ValidateHasSingleExitStateAndNoException();
         }
 
         [TestMethod]
@@ -68,7 +68,7 @@ tag = ""AfterCatch"";";
             validator.ValidateContainsOperation(OperationKindEx.ObjectCreation);
             validator.ValidateTagOrder("BeforeTry", "InTry", "InCatch", "AfterCatch");
             validator.TagStates("InCatch").Should().ContainSingle(x => HasUnknownException(x));
-            validator.ExitStates.Should().ContainSingle(x => HasNoException(x));
+            validator.ValidateHasSingleExitStateAndNoException();
         }
 
         [TestMethod]
@@ -90,7 +90,7 @@ tag = ""AfterCatch"";";
             validator.ValidateContainsOperation(OperationKindEx.Conversion);
             validator.ValidateTagOrder("BeforeTry", "InTry", "InCatch", "AfterCatch");
             validator.TagStates("InCatch").Should().ContainSingle(x => HasExceptionOfType(x, "InvalidCastException"));
-            validator.ExitStates.Should().ContainSingle(x => HasNoException(x));
+            validator.ValidateHasSingleExitStateAndNoException();
         }
 
         [TestMethod]
@@ -111,7 +111,7 @@ tag = ""AfterCatch"";";
             var validator = SETestContext.CreateCS(code, ", Person p").Validator;
             validator.ValidateContainsOperation(OperationKindEx.Conversion);
             validator.ValidateTagOrder("BeforeTry", "InTry", "AfterCatch");
-            validator.ExitStates.Should().ContainSingle(x => HasNoException(x));
+            validator.ValidateHasSingleExitStateAndNoException();
         }
 
         [TestMethod]
@@ -154,7 +154,7 @@ tag = ""AfterCatch"";";
             validator.ValidateContainsOperation(OperationKindEx.DynamicIndexerAccess);
             validator.ValidateTagOrder("BeforeTry", "InTry", "InCatch", "AfterCatch");
             validator.TagStates("InCatch").Should().ContainSingle(x => HasExceptionOfType(x, "IndexOutOfRangeException"));
-            validator.ExitStates.Should().ContainSingle(x => HasNoException(x));
+            validator.ValidateHasSingleExitStateAndNoException();
         }
 
         [TestMethod]
@@ -176,7 +176,7 @@ tag = ""AfterCatch"";";
             validator.ValidateContainsOperation(OperationKindEx.DynamicInvocation);
             validator.ValidateTagOrder("BeforeTry", "InTry", "InCatch", "AfterCatch");
             validator.TagStates("InCatch").Should().ContainSingle(x => HasUnknownException(x));
-            validator.ExitStates.Should().ContainSingle(x => HasNoException(x));
+            validator.ValidateHasSingleExitStateAndNoException();
         }
 
         [TestMethod]
@@ -198,7 +198,7 @@ tag = ""AfterCatch"";";
             validator.ValidateContainsOperation(OperationKindEx.DynamicMemberReference);
             validator.ValidateTagOrder("BeforeTry", "InTry", "InCatch", "AfterCatch");
             validator.TagStates("InCatch").Should().ContainSingle(x => HasUnknownException(x));
-            validator.ExitStates.Should().ContainSingle(x => HasNoException(x));
+            validator.ValidateHasSingleExitStateAndNoException();
         }
 
         [TestMethod]
@@ -220,7 +220,7 @@ tag = ""AfterCatch"";";
             validator.ValidateContainsOperation(OperationKindEx.DynamicObjectCreation);
             validator.ValidateTagOrder("BeforeTry", "InTry", "InCatch", "AfterCatch");
             validator.TagStates("InCatch").Should().ContainSingle(x => HasUnknownException(x));
-            validator.ExitStates.Should().ContainSingle(x => HasNoException(x));
+            validator.ValidateHasSingleExitStateAndNoException();
         }
 
         [TestMethod]
@@ -242,7 +242,7 @@ tag = ""AfterCatch"";";
             validator.ValidateContainsOperation(OperationKindEx.EventReference);
             validator.ValidateTagOrder("BeforeTry", "InTry", "InCatch", "AfterCatch");
             validator.TagStates("InCatch").Should().ContainSingle(x => HasExceptionOfType(x, "NullReferenceException"));
-            validator.ExitStates.Should().ContainSingle(x => HasNoException(x));
+            validator.ValidateHasSingleExitStateAndNoException();
         }
 
         [TestMethod]
@@ -263,7 +263,7 @@ tag = ""AfterCatch"";";
             var validator = SETestContext.CreateCS(code).Validator;
             validator.ValidateContainsOperation(OperationKindEx.EventReference);
             validator.ValidateTagOrder("BeforeTry", "InTry", "AfterCatch");
-            validator.ExitStates.Should().ContainSingle(x => HasNoException(x));
+            validator.ValidateHasSingleExitStateAndNoException();
         }
 
         [DataTestMethod]
@@ -286,7 +286,7 @@ tag = ""AfterCatch"";";
             var validator = SETestContext.CreateCS(code, ", Person p").Validator;
             validator.ValidateContainsOperation(OperationKindEx.EventReference);
             validator.ValidateTagOrder("BeforeTry", "InTry", "AfterCatch");
-            validator.ExitStates.Should().ContainSingle(x => HasNoException(x));
+            validator.ValidateHasSingleExitStateAndNoException();
         }
 
         [TestMethod]
@@ -308,7 +308,7 @@ tag = ""AfterCatch"";";
             validator.ValidateContainsOperation(OperationKindEx.FieldReference);
             validator.ValidateTagOrder("BeforeTry", "InTry", "InCatch", "AfterCatch");
             validator.TagStates("InCatch").Should().ContainSingle(x => HasExceptionOfType(x, "NullReferenceException"));
-            validator.ExitStates.Should().ContainSingle(x => HasNoException(x));
+            validator.ValidateHasSingleExitStateAndNoException();
         }
 
         [DataTestMethod]
@@ -331,7 +331,7 @@ tag = ""AfterCatch"";";
             var validator = SETestContext.CreateCS(code).Validator;
             validator.ValidateContainsOperation(OperationKindEx.FieldReference);
             validator.ValidateTagOrder("BeforeTry", "InTry", "AfterCatch");
-            validator.ExitStates.Should().ContainSingle(x => HasNoException(x));
+            validator.ValidateHasSingleExitStateAndNoException();
         }
 
         [TestMethod]
@@ -352,7 +352,7 @@ tag = ""AfterCatch"";";
             var validator = SETestContext.CreateCS(code).Validator;
             validator.ValidateContainsOperation(OperationKindEx.FieldReference);
             validator.ValidateTagOrder("BeforeTry", "InTry", "AfterCatch");
-            validator.ExitStates.Should().HaveCount(1).And.ContainSingle(x => HasNoException(x));
+            validator.ValidateHasSingleExitStateAndNoException();
         }
 
         [TestMethod]
@@ -408,7 +408,7 @@ tag = ""AfterCatch"";";
             var validator = SETestContext.CreateCS(code, ", delegate*<string, void> ptr").Validator;
 
             validator.ValidateTagOrder("BeforeTry", "InTry", "AfterCatch");
-            validator.ExitStates.Should().HaveCount(1).And.ContainSingle(x => HasNoException(x));
+            validator.ValidateHasSingleExitStateAndNoException();
         }
 
         [TestMethod]
@@ -431,7 +431,7 @@ tag = ""AfterCatch"";";
             validator.ValidateContainsOperation(OperationKindEx.PropertyReference);
             validator.ValidateTagOrder("BeforeTry", "InTry", "InCatch", "AfterCatch");
             validator.TagStates("InCatch").Should().ContainSingle(x => HasExceptionOfType(x, "NullReferenceException"));
-            validator.ExitStates.Should().HaveCount(1).And.ContainSingle(x => HasNoException(x));
+            validator.ValidateHasSingleExitStateAndNoException();
         }
 
         [TestMethod]
@@ -453,7 +453,7 @@ tag = ""AfterCatch"";";
             var validator = SETestContext.CreateCS(code).Validator;
             validator.ValidateContainsOperation(OperationKindEx.PropertyReference);
             validator.ValidateTagOrder("BeforeTry", "InTry", "AfterCatch");
-            validator.ExitStates.Should().HaveCount(1).And.ContainSingle(x => HasNoException(x));
+            validator.ValidateHasSingleExitStateAndNoException();
         }
 
         [DataTestMethod]
@@ -477,7 +477,7 @@ tag = ""AfterCatch"";";
             var validator = SETestContext.CreateCS(code).Validator;
             validator.ValidateContainsOperation(OperationKindEx.PropertyReference);
             validator.ValidateTagOrder("BeforeTry", "InTry", "AfterCatch");
-            validator.ExitStates.Should().HaveCount(1).And.ContainSingle(x => HasNoException(x));
+            validator.ValidateHasSingleExitStateAndNoException();
         }
 
         [TestMethod]
@@ -500,7 +500,7 @@ tag = ""AfterCatch"";";
             validator.ValidateContainsOperation(OperationKindEx.MethodReference);
             validator.ValidateTagOrder("BeforeTry", "InTry", "InCatch", "AfterCatch");
             validator.TagStates("InCatch").Should().ContainSingle(x => HasExceptionOfType(x, "NullReferenceException"));
-            validator.ExitStates.Should().HaveCount(1).And.ContainSingle(x => HasNoException(x));
+            validator.ValidateHasSingleExitStateAndNoException();
         }
 
         [DataTestMethod]
@@ -524,7 +524,7 @@ tag = ""AfterCatch"";";
             var validator = SETestContext.CreateCS(code).Validator;
             validator.ValidateContainsOperation(OperationKindEx.MethodReference);
             validator.ValidateTagOrder("BeforeTry", "InTry", "AfterCatch");
-            validator.ExitStates.Should().HaveCount(1).And.ContainSingle(x => HasNoException(x));
+            validator.ValidateHasSingleExitStateAndNoException();
         }
 
         [TestMethod]
@@ -546,7 +546,7 @@ tag = ""AfterCatch"";";
             var validator = SETestContext.CreateCS(code).Validator;
             validator.ValidateContainsOperation(OperationKindEx.MethodReference);
             validator.ValidateTagOrder("BeforeTry", "InTry", "AfterCatch");
-            validator.ExitStates.Should().HaveCount(1).And.ContainSingle(x => HasNoException(x));
+            validator.ValidateHasSingleExitStateAndNoException();
         }
 
         [TestMethod]
@@ -627,7 +627,7 @@ class Sample
             var validator = CreateCSharpValidator(code);
             // IImplicitIndexerReferenceOperation is not generated in the current version of Roslyn. It will be generated in 4.4.0.
             validator.ValidateTagOrder("BeforeTry", "InTry", "AfterCatch");
-            validator.ExitStates.Should().HaveCount(1).And.ContainSingle(x => HasNoException(x));
+            validator.ValidateHasSingleExitStateAndNoException();
         }
 
         [TestMethod]
@@ -683,7 +683,7 @@ class Sample
             validator.ValidateContainsOperation(OperationKindEx.Range);
             // IImplicitIndexerReferenceOperation is not generated in the current version of Roslyn. It will be generated in 4.4.0.
             validator.ValidateTagOrder("BeforeTry", "InTry", "AfterCatch");
-            validator.ExitStates.Should().HaveCount(1).And.ContainSingle(x => HasNoException(x));
+            validator.ValidateHasSingleExitStateAndNoException();
         }
 
         private static ValidatorTestCheck CreateCSharpValidator(string code) =>
