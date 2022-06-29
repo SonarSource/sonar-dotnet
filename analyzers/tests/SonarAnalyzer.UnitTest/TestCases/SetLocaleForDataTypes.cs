@@ -9,6 +9,12 @@ namespace Tests.Diagnostics
         private DataTable myTable = new DataTable { Locale = CultureInfo.InvariantCulture };
         private DataTable myWrongTable = new DataTable(); // Noncompliant {{Set the locale for this 'DataTable'.}}
 //                                       ^^^^^^^^^^^^^^^
+        private DataTable myWrongTable1 = new DataTable(), myWrongTable2 = new DataTable();
+//                                        ^^^^^^^^^^^^^^^ {{Set the locale for this 'DataTable'.}}
+//                                        ^^^^^^^^^^^^^^^ @-1 {{Set the locale for this 'DataTable'.}}
+// Second issue is TP but it is raised in wrong location
+
+
 
         void Foo()
         {
@@ -70,16 +76,15 @@ namespace Tests.Diagnostics
             new DataTable();
         }
 
-        void M(DataTable datatable) { }
 
         void Bar()
         {
+            void M(DataTable table) { }
             M(new DataTable()); // FN
 
+            void Init(DataTable dt) => dt.Locale = new CultureInfo("de-DE");
             var datatable = new DataTable(); // Noncompliant FP
             Init(datatable);
-
-            void Init(DataTable dt) => dt.Locale = new CultureInfo("de-DE");
         }
     }
 }

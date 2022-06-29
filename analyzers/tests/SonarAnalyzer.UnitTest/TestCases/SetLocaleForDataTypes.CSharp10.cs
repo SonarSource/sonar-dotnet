@@ -31,4 +31,3 @@ void TupleParameter((DataTable, DataTable) dataTableTuple) { }
 
 var (_, (_,( o, _))) = (1, (2,( new DataTable(), 4))); // Noncompliant
 
-

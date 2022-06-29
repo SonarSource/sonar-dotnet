@@ -26,7 +26,6 @@ using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
-using SonarAnalyzer.Common;
 using SonarAnalyzer.Extensions;
 using SonarAnalyzer.Helpers;
 using StyleCop.Analyzers.Lightup;
@@ -51,7 +50,7 @@ namespace SonarAnalyzer.Rules.CSharp
             context.RegisterCompilationStartAction(
                 compilationStartContext =>
                 {
-                    var symbolsWhereTypeIsCreated = new HashSet<NodeAndSymbol>();
+                    var symbolsWhereTypeIsCreated = new Dictionary<ISymbol, SyntaxNode>();
                     var symbolsWhereLocaleIsSet = new HashSet<ISymbol>();
 
                     compilationStartContext.RegisterSyntaxNodeActionInNonGenerated(
@@ -62,53 +61,48 @@ namespace SonarAnalyzer.Rules.CSharp
                     compilationStartContext.RegisterCompilationEndAction(ProcessCollectedSymbols(symbolsWhereTypeIsCreated, symbolsWhereLocaleIsSet));
                 });
 
-        private static Action<SyntaxNodeAnalysisContext> ProcessObjectCreations(ISet<NodeAndSymbol> symbolsWhereTypeIsCreated) =>
+        private static Action<SyntaxNodeAnalysisContext> ProcessObjectCreations(IDictionary<ISymbol, SyntaxNode> symbolsWhereTypeIsCreated) =>
             c =>
             {
                 if (GetSymbolFromConstructorInvocation(c.Node, c.SemanticModel) is ITypeSymbol objectType
                     && objectType.IsAny(CheckedTypes)
-                    && GetAssignmentTargetVariable(c.Node) is { } variableSyntaxArray)
+                    && GetAssignmentTargetVariables(c.Node) is { } variables)
                 {
-                    var variableSymbols = variableSyntaxArray.Select(x => FindSymbol(x))
-                        .OfType<ISymbol>()
+                    var variableSymbolsToSyntaxNode = variables.Select(x => c.SemanticModel.GetSymbolInfo(x).Symbol ?? c.SemanticModel.GetDeclaredSymbol(x))
                         .Where(x => x.GetSymbolType().IsAny(CheckedTypes))
-                        .Select(x => new NodeAndSymbol(c.Node, x));
-                    symbolsWhereTypeIsCreated.UnionWith(variableSymbols);
+                        .ToDictionary(x => x, x => c.Node);
+
+                    foreach (var symbolNodePair in variableSymbolsToSyntaxNode)
+                    {
+                        if (!symbolsWhereTypeIsCreated.ContainsKey(symbolNodePair.Key))
+                        {
+                            symbolsWhereTypeIsCreated.Add(symbolNodePair);
+                        }
+                    }
                 }
-                ISymbol FindSymbol(SyntaxNode node) =>
-                    node is IdentifierNameSyntax || DeclarationExpressionSyntaxWrapper.IsInstance(node)
-                    ? c.SemanticModel.GetSymbolInfo(node).Symbol
-                    : c.SemanticModel.GetDeclaredSymbol(node);
             };
 
         private static Action<SyntaxNodeAnalysisContext> ProcessSimpleAssignments(ISet<ISymbol> symbolsWhereLocaleIsSet) =>
             c =>
             {
                 var assignmentExpression = (AssignmentExpressionSyntax)c.Node;
-
-                foreach (var argument in assignmentExpression.AssignmentTargets())
-                {
-                    if (c.SemanticModel.GetSymbolInfo(argument).Symbol as IPropertySymbol is { } propertySymbol
-                        && propertySymbol.Name == "Locale"
-                        && propertySymbol.ContainingType.IsAny(CheckedTypes))
-                    {
-                        var variableSymbol = GetAccessedVariable(argument, c.SemanticModel);
-                        if (variableSymbol != null)
-                        {
-                            symbolsWhereLocaleIsSet.Add(variableSymbol);
-                        }
-                    }
-                }
+                var variableSymbols = assignmentExpression.AssignmentTargets()
+                    .Where(x => c.SemanticModel.GetSymbolInfo(x).Symbol is IPropertySymbol propertySymbol
+                                && propertySymbol.Name == "Locale"
+                                && propertySymbol.ContainingType.IsAny(CheckedTypes))
+                    .Select(x => GetAccessedVariable(x, c.SemanticModel))
+                    .WhereNotNull();
+                symbolsWhereLocaleIsSet.UnionWith(variableSymbols);
             };
 
-        private static Action<CompilationAnalysisContext> ProcessCollectedSymbols(ICollection<NodeAndSymbol> symbolsWhereTypeIsCreated, ICollection<ISymbol> symbolsWhereLocaleIsSet) =>
+        private static Action<CompilationAnalysisContext> ProcessCollectedSymbols(IDictionary<ISymbol, SyntaxNode> symbolsWhereTypeIsCreated, ICollection<ISymbol> symbolsWhereLocaleIsSet) =>
             c =>
             {
-                foreach (var invalidCreation in symbolsWhereTypeIsCreated.Where(x => !symbolsWhereLocaleIsSet.Contains(x.Symbol)))
+                foreach (var invalidCreation in symbolsWhereTypeIsCreated.Where(x => !symbolsWhereLocaleIsSet.Contains(x.Key)))
                 {
-                    if (invalidCreation.Symbol.GetSymbolType()?.Name is { } typeName)
+                    if (invalidCreation.Key.GetSymbolType()?.Name is { } typeName)
                     {
-                        c.ReportIssue(Diagnostic.Create(Rule, invalidCreation.Node.GetLocation(), typeName));
+                        c.ReportIssue(Diagnostic.Create(Rule, invalidCreation.Value.GetLocation(), typeName));
                     }
                 }
             };
@@ -118,7 +112,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 ? semanticModel.GetSymbolInfo(objectCreation.Type).Symbol
                 : semanticModel.GetSymbolInfo(constructorCall).Symbol?.ContainingType;
 
-        private static ImmutableArray<SyntaxNode> GetAssignmentTargetVariable(SyntaxNode objectCreation) =>
+        private static ImmutableArray<SyntaxNode> GetAssignmentTargetVariables(SyntaxNode objectCreation) =>
             objectCreation.GetFirstNonParenthesizedParent() switch
             {
                 AssignmentExpressionSyntax assignment => assignment.AssignmentTargets(),
