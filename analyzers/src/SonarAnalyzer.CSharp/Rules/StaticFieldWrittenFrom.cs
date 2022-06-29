@@ -24,6 +24,7 @@ using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
+using SonarAnalyzer.Extensions;
 using SonarAnalyzer.Helpers;
 using StyleCop.Analyzers.Lightup;
 
@@ -33,10 +34,8 @@ namespace SonarAnalyzer.Rules
     {
         protected override bool EnableConcurrentExecution => false;
 
-        protected sealed override void Initialize(SonarAnalysisContext context)
-        {
-            context.RegisterCodeBlockStartActionInNonGenerated<SyntaxKind>(
-               cbc =>
+        protected sealed override void Initialize(SonarAnalysisContext context) =>
+            context.RegisterCodeBlockStartActionInNonGenerated<SyntaxKind>(cbc =>
                {
                    if (!IsValidCodeBlockContext(cbc.CodeBlock, cbc.OwningSymbol))
                    {
@@ -45,16 +44,18 @@ namespace SonarAnalyzer.Rules
 
                    var locationsForFields = new Dictionary<IFieldSymbol, List<Location>>();
 
-                   cbc.RegisterSyntaxNodeAction(
-                       c =>
+                   cbc.RegisterSyntaxNodeAction(c =>
                        {
                            var assignment = (AssignmentExpressionSyntax)c.Node;
-                           var expression = assignment.Left;
+                           var targets = assignment.AssignmentTargets();
 
-                           var fieldSymbol = c.SemanticModel.GetSymbolInfo(expression).Symbol as IFieldSymbol;
-                           if (fieldSymbol?.IsStatic == true)
+                           foreach (var target in targets)
                            {
-                               AddFieldLocation(fieldSymbol, expression.CreateLocation(assignment.OperatorToken), locationsForFields);
+                               var fieldSymbol = c.SemanticModel.GetSymbolInfo(target).Symbol as IFieldSymbol;
+                               if (fieldSymbol?.IsStatic == true)
+                               {
+                                   AddFieldLocation(fieldSymbol, target.CreateLocation(assignment.OperatorToken), locationsForFields);
+                               }
                            }
                        },
                        SyntaxKind.SimpleAssignmentExpression,
@@ -103,7 +104,6 @@ namespace SonarAnalyzer.Rules
                        }
                    });
                });
-        }
 
         protected abstract bool IsValidCodeBlockContext(SyntaxNode node, ISymbol owningSymbol);
         protected abstract string GetDiagnosticMessageArgument(SyntaxNode node, ISymbol owningSymbol, IFieldSymbol field);
