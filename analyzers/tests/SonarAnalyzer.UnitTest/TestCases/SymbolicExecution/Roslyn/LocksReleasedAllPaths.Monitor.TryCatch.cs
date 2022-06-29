@@ -260,7 +260,7 @@ namespace Monitor_TryCatch
             try
             {
                 Console.WriteLine("CanThrow");
-                foreach(var value in values)    // Produces implicit try/finally
+                foreach (var value in values)    // Produces implicit try/finally
                 {
                     Console.WriteLine(value);   // Can throw
                 }
@@ -268,6 +268,53 @@ namespace Monitor_TryCatch
             finally
             {
                 Monitor.Exit(obj);
+            }
+        }
+
+        public void Finally_NestedInOuterCatch()
+        {
+            try
+            {
+                Monitor.Enter(obj);     // Noncompliant FP
+                try
+                {
+                    Console.WriteLine("CanThrow");
+                }
+                finally
+                {
+                    Monitor.Exit(obj);
+                }
+            }
+            catch (Exception ex)
+            {
+                // Handle it
+            }
+        }
+
+        public void Finally_DoubleNestedInOuterCatch()
+        {
+            try
+            {
+                Monitor.Enter(obj);     // Noncompliant FP
+                try
+                {
+                    try
+                    {
+                        Console.WriteLine("CanThrow");
+                    }
+                    finally
+                    {
+                        // Do nothing
+                    }
+                }
+                finally
+                {
+                    Monitor.Exit(obj);
+                }
+            }
+            catch (Exception ex)
+            {
+                // Handle it
             }
         }
     }
