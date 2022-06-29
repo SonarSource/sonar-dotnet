@@ -20,6 +20,7 @@
 
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using Microsoft.CodeAnalysis;
 using SonarAnalyzer.CFG.Roslyn;
 using SonarAnalyzer.Extensions;
@@ -52,7 +53,7 @@ namespace SonarAnalyzer.CFG
 
             private void VisitSubGraph(ControlFlowGraph cfg, string title)
             {
-                writer.WriteSubGraphStart(title);
+                writer.WriteSubGraphStart(cfgIdProvider.Next(), title);
                 VisitContent(cfg, title);
                 writer.WriteSubGraphEnd();
             }
@@ -70,18 +71,18 @@ namespace SonarAnalyzer.CFG
                 foreach (var localFunction in cfg.LocalFunctions)
                 {
                     var localFunctionCfg = cfg.GetLocalFunctionControlFlowGraph(localFunction);
-                    new RoslynCfgWalker(writer, cfgIdProvider).VisitSubGraph(localFunctionCfg, $"{titlePrefix}.{localFunction.Name}.{cfgIdProvider.Next()}");
+                    new RoslynCfgWalker(writer, cfgIdProvider).VisitSubGraph(localFunctionCfg, $"{titlePrefix}.{localFunction.Name}");
                 }
                 foreach (var anonymousFunction in AnonymousFunctions(cfg))
                 {
                     var anonymousFunctionCfg = cfg.GetAnonymousFunctionControlFlowGraph(anonymousFunction);
-                    new RoslynCfgWalker(writer, cfgIdProvider).VisitSubGraph(anonymousFunctionCfg, $"{titlePrefix}.anonymous.{cfgIdProvider.Next()}");
+                    new RoslynCfgWalker(writer, cfgIdProvider).VisitSubGraph(anonymousFunctionCfg, $"{titlePrefix}.anonymous");
                 }
             }
 
             private void Visit(ControlFlowGraph cfg, ControlFlowRegion region)
             {
-                writer.WriteSubGraphStart(region.Kind + " region" + (region.ExceptionType == null ? null : " " + region.ExceptionType));
+                writer.WriteSubGraphStart(cfgIdProvider.Next(), SerializeRegion(region));
                 foreach (var nested in region.NestedRegions)
                 {
                     Visit(cfg, nested);
@@ -113,20 +114,27 @@ namespace SonarAnalyzer.CFG
                 SerializeOperation(0, operation).Concat(new[] { "##########" });
 
             private static IEnumerable<string> SerializeOperation(int level, IOperation operation) =>
-                new[] { $"{level}# {OperationPrefix(operation)}{OperationSuffix(operation)} / {operation.Syntax.GetType().Name}: {operation.Syntax}" }
+                new[] { $"{level}# {operation.Serialize()}" }
                 .Concat(new IOperationWrapperSonar(operation).Children.SelectMany(x => SerializeOperation(level + 1, x)));
 
-            private static string OperationPrefix(IOperation op) =>
-                op.Kind == OperationKindEx.Invalid ? "INVALID" : op.GetType().Name;
-
-            private static string OperationSuffix(IOperation op) =>
-                op switch
+            private static string SerializeRegion(ControlFlowRegion region)
+            {
+                var sb = new StringBuilder();
+                sb.Append(region.Kind.ToString()).Append(" region");
+                if (region.ExceptionType is not null)
                 {
-                    var _ when IInvocationOperationWrapper.IsInstance(op) => ": " + IInvocationOperationWrapper.FromOperation(op).TargetMethod.Name,
-                    var _ when IFlowCaptureOperationWrapper.IsInstance(op) => ": #" + IFlowCaptureOperationWrapper.FromOperation(op).Id.GetHashCode(),
-                    var _ when IFlowCaptureReferenceOperationWrapper.IsInstance(op) => ": #" + IFlowCaptureReferenceOperationWrapper.FromOperation(op).Id.GetHashCode(),
-                    _ => null
-                };
+                    sb.Append(": ").Append(region.ExceptionType);
+                }
+                if (region.Locals.Any())
+                {
+                    sb.Append(", Locals: ").Append(string.Join(", ", region.Locals.Select(x => x.Name ?? "N/A")));
+                }
+                if (region.CaptureIds.Any())
+                {
+                    sb.Append(", Captures: ").Append(string.Join(", ", region.CaptureIds.Select(x => "#" + x.GetHashCode())));  // Same as IOperationExtension.SerializeSuffix
+                }
+                return sb.ToString();
+            }
 
             private void WriteEdges(BasicBlock block)
             {
@@ -140,7 +148,7 @@ namespace SonarAnalyzer.CFG
                     var semantics = predecessor.Semantics == ControlFlowBranchSemantics.Regular ? null : predecessor.Semantics.ToString();
                     writer.WriteEdge(BlockId(predecessor.Source), BlockId(block), $"{semantics} {condition}".Trim());
                 }
-                if (block.FallThroughSuccessor is {Destination: null })
+                if (block.FallThroughSuccessor is { Destination: null })
                 {
                     writer.WriteEdge(BlockId(block), "NoDestination_" + BlockId(block), block.FallThroughSuccessor.Semantics.ToString());
                 }
