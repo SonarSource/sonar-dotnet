@@ -263,10 +263,37 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
         private static ExceptionState ExceptionCandidate(IOperationWrapperSonar operation) =>
             operation.Instance.Kind switch
             {
+                OperationKindEx.ArrayElementReference => ExceptionState.UnknownException, // ToDo: be explicit regarding exception type
+                OperationKindEx.Conversion => ConversionExceptionCandidate(operation),
+                OperationKindEx.DynamicIndexerAccess => ExceptionState.UnknownException, // ToDo: be explicit regarding exception type
+                OperationKindEx.DynamicInvocation => ExceptionState.UnknownException, // ToDo: be explicit regarding exception type
+                OperationKindEx.DynamicMemberReference => ExceptionState.UnknownException, // ToDo: be explicit regarding exception type
+                OperationKindEx.DynamicObjectCreation => ExceptionState.UnknownException,
+                OperationKindEx.EventReference => ExceptionCandidate(IMemberReferenceOperationWrapper.FromOperation(operation.Instance)),
+                OperationKindEx.FieldReference => ExceptionCandidate(IMemberReferenceOperationWrapper.FromOperation(operation.Instance)),
                 OperationKindEx.Invocation => ExceptionState.UnknownException,
-                // ToDo: Support other operations like field/property access on non-static non-this, conversions and so on. See docs for list of operations.
+                OperationKindEx.MethodReference => ExceptionCandidate(IMemberReferenceOperationWrapper.FromOperation(operation.Instance)),
+                OperationKindEx.ObjectCreation => operation.Instance.Type.DerivesFrom(KnownType.System_Exception) ? null : ExceptionState.UnknownException, // Exception constructors shouldn't throw
+                OperationKindEx.PropertyReference => ExceptionCandidate(IMemberReferenceOperationWrapper.FromOperation(operation.Instance)),
                 _ => null
             };
+
+        private static ExceptionState ConversionExceptionCandidate(IOperationWrapperSonar operation)
+        {
+            if (operation.IsImplicit)
+            {
+                return null;
+            }
+
+            var conversion = IConversionOperationWrapper.FromOperation(operation.Instance);
+            return conversion.Operand.Type.DerivesOrImplements(conversion.Type)
+                       ? null
+                       : ExceptionState.UnknownException;
+        }
+
+
+        private static ExceptionState ExceptionCandidate(IMemberReferenceOperationWrapper reference) =>
+            reference.IsStaticOrThis() ? null : ExceptionState.UnknownException; // ToDo: be explicit regarding exception type
 
         private static bool IsReachable(ExplodedNode node, ControlFlowBranch branch) =>
             node.Block.ConditionKind == ControlFlowConditionKind.None

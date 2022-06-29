@@ -26,12 +26,13 @@ namespace SonarAnalyzer.UnitTest.TestFramework.SymbolicExecution
 {
     internal class SETestContext
     {
-        public readonly ValidatorTestCheck Validator = new();
+        public readonly ValidatorTestCheck Validator;
 
         public SETestContext(string code, AnalyzerLanguage language, SymbolicCheck[] additionalChecks, string localFunctionName = null)
         {
             const string Separator = "----------";
             var cfg = TestHelper.CompileCfg(code, language, false, localFunctionName);
+            Validator = new ValidatorTestCheck(cfg);
             var se = new RoslynSymbolicExecution(cfg, additionalChecks.Concat(new[] { Validator }).ToArray());
             Console.WriteLine(Separator);
             Console.Write(CfgSerializer.Serialize(cfg));
@@ -51,16 +52,21 @@ namespace SonarAnalyzer.UnitTest.TestFramework.SymbolicExecution
 using System;
 using System.Collections.Generic;
 
-public class Sample
+public unsafe class Sample
 {{
     public static int StaticField;
     public static int StaticProperty {{ get; set; }}
+    public static event EventHandler StaticEvent;
+    public event EventHandler Event;
     public int Property {{ get; set; }}
     public NotImplementedException PropertyException {{ get; set; }}
     private int field;
-    private NotImplementedException  fieldException;
+    private NotImplementedException fieldException;
 
     private bool Condition => Environment.ProcessorCount == 42;  // Something that cannot have constraint
+
+    public Sample(){{ }}
+    public Sample(int i){{ }}
 
     public void Main(bool boolParameter{additionalParameters})
     {{
@@ -70,6 +76,19 @@ public class Sample
     public NotImplementedException CreateException() => new NotImplementedException();
 
     private void Tag(string name, object arg = null) {{ }}
+}}
+
+public class Person : PersonBase
+{{
+    public static string StaticProperty {{ get; set; }}
+    public string Field;
+    public event EventHandler Event;
+    public string Method() => null;
+    public static void StaticMethod() {{ }}
+}}
+
+public class PersonBase
+{{
 }}";
             return new(code, AnalyzerLanguage.CSharp, additionalChecks, localFunctionName);
         }

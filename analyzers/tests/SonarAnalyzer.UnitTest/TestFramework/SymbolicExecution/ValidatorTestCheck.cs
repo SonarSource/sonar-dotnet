@@ -19,6 +19,8 @@
  */
 
 using Microsoft.CodeAnalysis.Operations;
+using SonarAnalyzer.CFG.Roslyn;
+using SonarAnalyzer.Extensions;
 using SonarAnalyzer.SymbolicExecution.Roslyn;
 using SonarAnalyzer.UnitTest.Helpers;
 using StyleCop.Analyzers.Lightup;
@@ -33,11 +35,15 @@ namespace SonarAnalyzer.UnitTest.TestFramework.SymbolicExecution
     /// </summary>
     internal class ValidatorTestCheck : SymbolicCheck
     {
+        private readonly ControlFlowGraph cfg;
         private readonly List<SymbolicContext> postProcessed = new();
         private readonly List<(string Name, SymbolicContext Context)> tags = new();
         private int executionCompletedCount;
 
         public List<ProgramState> ExitStates { get; } = new();
+
+        public ValidatorTestCheck(ControlFlowGraph cfg) =>
+            this.cfg = cfg;
 
         public override void ExitReached(SymbolicContext context) =>
             ExitStates.Add(context.State);
@@ -77,6 +83,9 @@ namespace SonarAnalyzer.UnitTest.TestFramework.SymbolicExecution
 
         public void ValidateOperationValuesAreNull() =>
             postProcessed.Should().OnlyContain(x => x.State[x.Operation] == null);
+
+        public void ValidateContainsOperation(OperationKind operationKind) =>
+            cfg.Blocks.Any(x => x.OperationsAndBranchValue.ToExecutionOrder().Any(op => op.Instance.Kind == operationKind));
 
         protected override ProgramState PostProcessSimple(SymbolicContext context)
         {
