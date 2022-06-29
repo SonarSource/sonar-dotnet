@@ -220,12 +220,12 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
                 : state.SetException(exception);        // Otherwise we track only the current exception to avoid explosion of states after each statement
             while (tryRegion is not null)
             {
-                var reachableCatchOrFinally = tryRegion.EnclosingRegion.NestedRegions.Where(x => x.Kind != ControlFlowRegionKind.Try && IsReachable(x, state.Exception)).ToArray();
-                foreach (var catchOrFinally in reachableCatchOrFinally)
+                var reachableHandlers = tryRegion.EnclosingRegion.NestedRegions.Where(x => x.Kind != ControlFlowRegionKind.Try && IsReachable(x, state.Exception)).ToArray();
+                foreach (var handler in reachableHandlers)  // CatchRegion, FinallyRegion or FilterAndHandlerRegion
                 {
-                    yield return new(cfg.Blocks[catchOrFinally.FirstBlockOrdinal], state, null);
+                    yield return new(cfg.Blocks[handler.FirstBlockOrdinal], state, null);
                 }
-                if (reachableCatchOrFinally.Any())
+                if (reachableHandlers.Length != 0)
                 {
                     yield break;
                 }
