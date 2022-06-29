@@ -76,9 +76,9 @@ namespace SonarAnalyzer.Rules.CSharp
                     symbolsWhereTypeIsCreated.UnionWith(variableSymbols);
                 }
                 ISymbol FindSymbol(SyntaxNode node) =>
-                node is IdentifierNameSyntax || DeclarationExpressionSyntaxWrapper.IsInstance(node)
-                ? c.SemanticModel.GetSymbolInfo(node).Symbol
-                : c.SemanticModel.GetDeclaredSymbol(node);
+                    node is IdentifierNameSyntax || DeclarationExpressionSyntaxWrapper.IsInstance(node)
+                    ? c.SemanticModel.GetSymbolInfo(node).Symbol
+                    : c.SemanticModel.GetDeclaredSymbol(node);
             };
 
         private static Action<SyntaxNodeAnalysisContext> ProcessSimpleAssignments(ISet<ISymbol> symbolsWhereLocaleIsSet) =>
@@ -123,7 +123,7 @@ namespace SonarAnalyzer.Rules.CSharp
             {
                 AssignmentExpressionSyntax assignment => assignment.AssignmentTargets(),
                 EqualsValueClauseSyntax equalsClause when equalsClause.Parent.Parent is VariableDeclarationSyntax variableDeclaration =>
-                    ImmutableArray.Create((SyntaxNode)variableDeclaration.Variables.Last()),
+                    variableDeclaration.Variables.Select(x => (SyntaxNode)x).ToImmutableArray(),
                 ArgumentSyntax argument when argument.Ancestors().OfType<AssignmentExpressionSyntax>().FirstOrDefault() is { } expressionSyntax =>
                     expressionSyntax.AssignmentTargets(),
                 _ => ImmutableArray<SyntaxNode>.Empty
