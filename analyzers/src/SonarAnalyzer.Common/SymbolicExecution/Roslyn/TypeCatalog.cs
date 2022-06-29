@@ -18,26 +18,20 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System.Collections.Generic;
 using Microsoft.CodeAnalysis;
-using SonarAnalyzer.Helpers;
 
 namespace SonarAnalyzer.SymbolicExecution.Roslyn;
 
 internal class TypeCatalog
 {
-    private readonly Compilation compilation;
-    private readonly Dictionary<string, INamedTypeSymbol> cache = new();
-
-    public INamedTypeSymbol SystemIndexOutOfRangeException => Get("System.IndexOutOfRangeException");
-    public INamedTypeSymbol SystemNullReferenceException => Get("System.NullReferenceException");
-    public INamedTypeSymbol SystemInvalidCastException => Get("System.InvalidCastException");
+    public INamedTypeSymbol SystemIndexOutOfRangeException { get; }
+    public INamedTypeSymbol SystemNullReferenceException { get; }
+    public INamedTypeSymbol SystemInvalidCastException { get; }
 
     public TypeCatalog(Compilation compilation)
     {
-        this.compilation = compilation;
+        SystemIndexOutOfRangeException = compilation.GetTypeByMetadataName("System.IndexOutOfRangeException");
+        SystemNullReferenceException = compilation.GetTypeByMetadataName("System.NullReferenceException");
+        SystemInvalidCastException = compilation.GetTypeByMetadataName("System.InvalidCastException");
     }
-
-    private INamedTypeSymbol Get(string typeName) =>
-        cache.GetOrAdd(typeName, name => compilation.GetTypeByMetadataName(name));
 }
