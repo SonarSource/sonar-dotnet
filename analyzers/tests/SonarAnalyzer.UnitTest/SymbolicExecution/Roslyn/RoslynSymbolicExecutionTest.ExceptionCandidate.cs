@@ -72,7 +72,7 @@ tag = ""AfterCatch"";";
         }
 
         [TestMethod]
-        public void ExceptionCandidate_ConversionOperation_Explicit()
+        public void ExceptionCandidate_ConversionOperation_Explicit_Narrowing()
         {
             const string code = @"
 var tag = ""BeforeTry"";

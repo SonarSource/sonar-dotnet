@@ -44,7 +44,7 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
         private readonly HashSet<ExplodedNode> visited = new();
         private readonly RoslynLiveVariableAnalysis lva;
         private readonly DebugLogger logger = new();
-        private readonly Compilation compilation;
+        private readonly TypeCatalog typeCatalog;
 
         public RoslynSymbolicExecution(ControlFlowGraph cfg, SymbolicCheck[] checks)
         {
@@ -55,7 +55,7 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
             }
             this.checks = new(new[] { new ConstantCheck() }.Concat(checks).ToArray());
             lva = new RoslynLiveVariableAnalysis(cfg);
-            compilation = new IOperationWrapperSonar(cfg.OriginalOperation).SemanticModel.Compilation;
+            typeCatalog = new TypeCatalog(new IOperationWrapperSonar(cfg.OriginalOperation).SemanticModel.Compilation);
             logger.Log(cfg);
         }
 
@@ -234,9 +234,9 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
         private ExceptionState ExceptionCandidate(IOperationWrapperSonar operation) =>
             operation.Instance.Kind switch
             {
-                OperationKindEx.ArrayElementReference => CreateException("System.IndexOutOfRangeException"),
+                OperationKindEx.ArrayElementReference => new ExceptionState(typeCatalog.SystemIndexOutOfRangeException),
                 OperationKindEx.Conversion => ConversionExceptionCandidate(operation),
-                OperationKindEx.DynamicIndexerAccess => CreateException("System.IndexOutOfRangeException"),
+                OperationKindEx.DynamicIndexerAccess => new ExceptionState(typeCatalog.SystemIndexOutOfRangeException),
                 OperationKindEx.DynamicInvocation => ExceptionState.UnknownException,      // The raised exception is Microsoft.CSharp.RuntimeBinder.RuntimeBinderException for which we don't have access.
                 OperationKindEx.DynamicMemberReference => ExceptionState.UnknownException, // The raised exception is Microsoft.CSharp.RuntimeBinder.RuntimeBinderException for which we don't have access.
                 OperationKindEx.DynamicObjectCreation => ExceptionState.UnknownException,  // The raised exception is Microsoft.CSharp.RuntimeBinder.RuntimeBinderException for which we don't have access.
@@ -250,7 +250,7 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
             };
 
         private ExceptionState ExceptionCandidate(IMemberReferenceOperationWrapper reference) =>
-            reference.IsStaticOrThis() ? null : CreateException("System.NullReferenceException");
+            reference.IsStaticOrThis() ? null : new ExceptionState(typeCatalog.SystemNullReferenceException);
 
         private ExceptionState ConversionExceptionCandidate(IOperationWrapperSonar operation)
         {
@@ -262,11 +262,8 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
             var conversion = IConversionOperationWrapper.FromOperation(operation.Instance);
             return conversion.Operand.Type.DerivesOrImplements(conversion.Type)
                        ? null
-                       : CreateException("System.InvalidCastException");
+                       : new ExceptionState(typeCatalog.SystemInvalidCastException);
         }
-
-        private ExceptionState CreateException(string typeName) =>
-            new(compilation.GetTypeByMetadataName(typeName));
 
         private static ExceptionState ThrownException(ExplodedNode node, ControlFlowBranchSemantics semantics) =>
             semantics switch
