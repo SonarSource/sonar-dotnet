@@ -30,7 +30,7 @@ public class ReadMeTest
 {
     public TestContext TestContext { get; set; }
 
-    private string ReadMe { get; set; }
+    private string readMe;
 
     [TestInitialize]
     public void Init()
