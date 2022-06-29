@@ -33,12 +33,8 @@ public class ReadMeTest
     private string readMe;
 
     [TestInitialize]
-    public void Init()
-    {
-        var readme = new FileInfo(Path.Combine(TestContext.DeploymentDirectory, "./../../../../../../README.md"));
-        using var reader = readme.OpenText();
-        ReadMe = reader.ReadToEnd();
-    }
+    public void Init() =>
+       readMe = File.ReadAllText(Path.Combine(TestContext.DeploymentDirectory, @".\..\..\..\..\..\..\README.md"));
 
     [TestMethod]
     public void HasCorrectRuleCount_CS() =>
@@ -51,7 +47,7 @@ public class ReadMeTest
     private void HasCorrectRuleCount(AnalyzerLanguage language, string name)
     {
         var rules = RuleFinder.GetAnalyzerTypes(language).Count();
-        var match = Regex.Match(ReadMe, $@"\[(?<count>\d+)\+ {name} rules\]");
+        var match = Regex.Match(readMe, $@"\[(?<count>\d+)\+ {name} rules\]");
         match.Success.Should().BeTrue();
 
         var count = int.Parse(match.Groups["count"].Value);
