@@ -18,7 +18,6 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using Microsoft.CodeAnalysis.CSharp;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.SymbolicExecution.Roslyn;
 using SonarAnalyzer.UnitTest.TestFramework.SymbolicExecution;
@@ -575,8 +574,32 @@ End Module";
         }
 
 #if NET
+
         [TestMethod]
-        public void ExceptionCandidate_ImplicitIndexerReference()
+        public void ExceptionCandidate_Index_Array()
+        {
+            const string code = @"
+var tag = ""BeforeTry"";
+try
+{
+    tag = ""InTry"";
+    _ = array[^0];
+}
+catch
+{
+    tag = ""InCatch"";
+}
+tag = ""AfterCatch"";";
+
+            var validator = SETestContext.CreateCS(code, ", int[] array").Validator;
+            validator.ValidateContainsOperation(OperationKindEx.MethodReference);
+            validator.ValidateTagOrder("BeforeTry", "InTry", "InCatch", "AfterCatch");
+            validator.TagStates("InCatch").Should().ContainSingle(x => HasExceptionOfType(x, "IndexOutOfRangeException"));
+            validator.ExitStates.Should().HaveCount(1).And.ContainSingle(x => HasNoException(x));
+        }
+
+        [TestMethod]
+        public void ExceptionCandidate_Index_This()
         {
             const string code = @"
 using System;
@@ -601,14 +624,37 @@ class Sample
     }
 }";
 
-            var validator = CreateCSharp10Validator(code);
+            var validator = CreateCSharpValidator(code);
             // IImplicitIndexerReferenceOperation is not generated
             validator.ValidateTagOrder("BeforeTry", "InTry", "AfterCatch");
             validator.ExitStates.Should().HaveCount(1).And.ContainSingle(x => HasNoException(x));
         }
 
         [TestMethod]
-        public void ExceptionCandidate_Range()
+        public void ExceptionCandidate_Range_Array()
+        {
+            const string code = @"
+var tag = ""BeforeTry"";
+try
+{
+    tag = ""InTry"";
+    _ = array[0..];
+}
+catch
+{
+    tag = ""InCatch"";
+}
+tag = ""AfterCatch"";";
+
+            var validator = SETestContext.CreateCS(code, ", int[] array").Validator;
+            validator.ValidateContainsOperation(OperationKindEx.MethodReference);
+            validator.ValidateTagOrder("BeforeTry", "InTry", "InCatch", "AfterCatch");
+            validator.TagStates("InCatch").Should().ContainSingle(x => HasExceptionOfType(x, "ArgumentOutOfRangeException"));
+            validator.ExitStates.Should().HaveCount(1).And.ContainSingle(x => HasNoException(x));
+        }
+
+        [TestMethod]
+        public void ExceptionCandidate_Range_This()
         {
             const string code = @"
 using System;
@@ -633,15 +679,16 @@ class Sample
     }
 }";
 
-            var validator = CreateCSharp10Validator(code);
+            var validator = CreateCSharpValidator(code);
             validator.ValidateContainsOperation(OperationKindEx.Range);
-            validator.ValidateTagOrder("BeforeTry", "InTry", "InCatch", "AfterCatch");
-            validator.TagStates("InCatch").Should().ContainSingle(x => HasExceptionOfType(x, "ArgumentOutOfRangeException"));
+            // IImplicitIndexerReferenceOperation is not generated
+            validator.ValidateTagOrder("BeforeTry", "InTry", "AfterCatch");
             validator.ExitStates.Should().HaveCount(1).And.ContainSingle(x => HasNoException(x));
         }
 
-        private static ValidatorTestCheck CreateCSharp10Validator(string code) =>
-            new SETestContext(code, AnalyzerLanguage.CSharp, Array.Empty<SymbolicCheck>(), parseOptions: new CSharpParseOptions(LanguageVersion.CSharp10)).Validator;
+        private static ValidatorTestCheck CreateCSharpValidator(string code) =>
+            new SETestContext(code, AnalyzerLanguage.CSharp, Array.Empty<SymbolicCheck>()).Validator;
+
 #endif
     }
 }

@@ -18,6 +18,7 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System.Linq;
 using Microsoft.CodeAnalysis;
 using SonarAnalyzer.Helpers;
 using StyleCop.Analyzers.Lightup;
@@ -34,7 +35,9 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
         public ExceptionState FromOperation(IOperationWrapperSonar operation) =>
             operation.Instance.Kind switch
             {
-                OperationKindEx.ArrayElementReference => new ExceptionState(typeCatalog.SystemIndexOutOfRangeException),
+                OperationKindEx.ArrayElementReference => operation.Children.Any(x => x.Kind == OperationKindEx.Range) // In case of Range, ArgumentOutOfRangeException is raised
+                                                             ? new ExceptionState(typeCatalog.SystemArgumentOutOfRangeException)
+                                                             : new ExceptionState(typeCatalog.SystemIndexOutOfRangeException),
                 OperationKindEx.Conversion => ConversionExceptionCandidate(operation),
                 OperationKindEx.DynamicIndexerAccess => new ExceptionState(typeCatalog.SystemIndexOutOfRangeException),
                 OperationKindEx.DynamicInvocation => ExceptionState.UnknownException,      // This raises is Microsoft.CSharp.RuntimeBinder.RuntimeBinderException that we can't access.

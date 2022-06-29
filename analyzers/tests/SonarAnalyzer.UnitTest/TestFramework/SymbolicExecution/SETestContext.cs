@@ -28,15 +28,10 @@ namespace SonarAnalyzer.UnitTest.TestFramework.SymbolicExecution
     {
         public readonly ValidatorTestCheck Validator;
 
-        public SETestContext(string code,
-                             AnalyzerLanguage language,
-                             SymbolicCheck[] additionalChecks,
-                             string localFunctionName = null,
-                             OutputKind outputKind = OutputKind.DynamicallyLinkedLibrary,
-                             ParseOptions parseOptions = null)
+        public SETestContext(string code, AnalyzerLanguage language, SymbolicCheck[] additionalChecks, string localFunctionName = null, OutputKind outputKind = OutputKind.DynamicallyLinkedLibrary)
         {
             const string Separator = "----------";
-            var cfg = TestHelper.CompileCfg(code, language, false, localFunctionName, outputKind, parseOptions);
+            var cfg = TestHelper.CompileCfg(code, language, false, localFunctionName, outputKind: outputKind);
             Validator = new ValidatorTestCheck(cfg);
             var se = new RoslynSymbolicExecution(cfg, additionalChecks.Concat(new[] { Validator }).ToArray());
             Console.WriteLine(Separator);
@@ -46,22 +41,12 @@ namespace SonarAnalyzer.UnitTest.TestFramework.SymbolicExecution
         }
 
         public static SETestContext CreateCS(string methodBody, params SymbolicCheck[] additionalChecks) =>
-            CreateCS(methodBody, null, null, additionalChecks: additionalChecks);
-
-        public static SETestContext CreateCS(string methodBody, ParseOptions parseOptions = null, params SymbolicCheck[] additionalChecks) =>
-            CreateCS(methodBody, null, null, parseOptions, additionalChecks);
+            CreateCS(methodBody, null, null, additionalChecks);
 
         public static SETestContext CreateCS(string methodBody, string additionalParameters, params SymbolicCheck[] additionalChecks) =>
-            CreateCS(methodBody, additionalParameters, null, null, additionalChecks);
+            CreateCS(methodBody, additionalParameters, null, additionalChecks);
 
-        public static SETestContext CreateCS(string methodBody, string additionalParameters, ParseOptions parseOptions = null, params SymbolicCheck[] additionalChecks) =>
-            CreateCS(methodBody, additionalParameters, null, parseOptions, additionalChecks);
-
-        public static SETestContext CreateCS(string methodBody,
-                                             string additionalParameters,
-                                             string localFunctionName,
-                                             ParseOptions parseOptions = null,
-                                             params SymbolicCheck[] additionalChecks)
+        public static SETestContext CreateCS(string methodBody, string additionalParameters, string localFunctionName, params SymbolicCheck[] additionalChecks)
         {
             var code = $@"
 using System;
@@ -105,7 +90,7 @@ public class Person : PersonBase
 public class PersonBase
 {{
 }}";
-            return new(code, AnalyzerLanguage.CSharp, additionalChecks, localFunctionName, parseOptions: parseOptions);
+            return new(code, AnalyzerLanguage.CSharp, additionalChecks, localFunctionName);
         }
 
         public static SETestContext CreateCSMethod(string method, params SymbolicCheck[] additionalChecks) =>
