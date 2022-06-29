@@ -1,7 +1,7 @@
 ﻿using System;
 
-Structure.count++;                                     // Compliant - static field set from static method
-RecordStructure.count++;                               // Compliant - static field set from static method
+Structure.count++;                                        // Compliant - static field set from static method
+RecordStructure.count++;                                  // Compliant - static field set from static method
 
 struct Structure
 {
