@@ -53,7 +53,7 @@ namespace SonarAnalyzer.CFG
 
             private void VisitSubGraph(ControlFlowGraph cfg, string title)
             {
-                writer.WriteSubGraphStart(title);
+                writer.WriteSubGraphStart(cfgIdProvider.Next(), title);
                 VisitContent(cfg, title);
                 writer.WriteSubGraphEnd();
             }
@@ -71,18 +71,18 @@ namespace SonarAnalyzer.CFG
                 foreach (var localFunction in cfg.LocalFunctions)
                 {
                     var localFunctionCfg = cfg.GetLocalFunctionControlFlowGraph(localFunction);
-                    new RoslynCfgWalker(writer, cfgIdProvider).VisitSubGraph(localFunctionCfg, $"{titlePrefix}.{localFunction.Name}.{cfgIdProvider.Next()}");
+                    new RoslynCfgWalker(writer, cfgIdProvider).VisitSubGraph(localFunctionCfg, $"{titlePrefix}.{localFunction.Name}");
                 }
                 foreach (var anonymousFunction in AnonymousFunctions(cfg))
                 {
                     var anonymousFunctionCfg = cfg.GetAnonymousFunctionControlFlowGraph(anonymousFunction);
-                    new RoslynCfgWalker(writer, cfgIdProvider).VisitSubGraph(anonymousFunctionCfg, $"{titlePrefix}.anonymous.{cfgIdProvider.Next()}");
+                    new RoslynCfgWalker(writer, cfgIdProvider).VisitSubGraph(anonymousFunctionCfg, $"{titlePrefix}.anonymous");
                 }
             }
 
             private void Visit(ControlFlowGraph cfg, ControlFlowRegion region)
             {
-                writer.WriteSubGraphStart(SerializeRegion(region));
+                writer.WriteSubGraphStart(cfgIdProvider.Next(), SerializeRegion(region));
                 foreach (var nested in region.NestedRegions)
                 {
                     Visit(cfg, nested);

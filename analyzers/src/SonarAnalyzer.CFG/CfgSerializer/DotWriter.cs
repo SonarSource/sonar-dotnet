@@ -50,8 +50,8 @@ namespace SonarAnalyzer.CFG
             edges.Clear();
         }
 
-        public void WriteSubGraphStart(string graphName) =>
-            builder.AppendLine($"subgraph \"cluster_{Encode(graphName)}\" {{\nlabel = \"{Encode(graphName)}\"");
+        public void WriteSubGraphStart(int id, string title) =>
+            builder.AppendLine($"subgraph \"cluster_{id}\" {{\nlabel = \"{Encode(title)}\"");
 
         public void WriteSubGraphEnd() =>
             builder.AppendLine("}");

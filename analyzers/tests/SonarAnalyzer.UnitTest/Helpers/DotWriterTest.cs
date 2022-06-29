@@ -48,8 +48,8 @@ namespace SonarAnalyzer.UnitTest.Helpers
         public void WriteSubGraphStart()
         {
             var writer = new DotWriter();
-            writer.WriteSubGraphStart("test");
-            writer.ToString().Should().BeIgnoringLineEndings("subgraph \"cluster_test\" {\r\nlabel = \"test\"\r\n");
+            writer.WriteSubGraphStart(42, "test");
+            writer.ToString().Should().BeIgnoringLineEndings("subgraph \"cluster_42\" {\r\nlabel = \"test\"\r\n");
         }
 
         [TestMethod]
