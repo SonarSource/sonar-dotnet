@@ -20,7 +20,9 @@
 
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
+using Microsoft.CodeAnalysis.Text;
 using SonarAnalyzer.Extensions;
+using StyleCop.Analyzers.Lightup;
 
 namespace SonarAnalyzer.UnitTest.Extensions
 {
@@ -394,6 +396,76 @@ public class C
     }}
 }}");
             return syntaxTree.GetRoot().DescendantNodesAndSelf().OfType<AssignmentExpressionSyntax>().Single();
+        }
+
+        [DataTestMethod]
+        // Tuple. From right to left.
+        [DataRow("(var a, (x, var b)) = (0, ($$x++, 1));", "x")]
+        [DataRow("(var a, (x, var b)) = (0, $$(1, 2));", "(x, var b)")]
+        [DataRow("(var a, (var b, var c, var d), var e) = (0, (1, 2, $$3), 4);", "var d")]
+        // Tuple. From left to right
+        [DataRow("(var a, (x, $$var b)) = (0, (x++, 1));", "1")]
+        [DataRow("(var a, (var b, var c, $$var d), var e) = (0, (1, 2, 3), 4);", "3")]
+        [DataRow("(var a, $$(var b, var c)) = (0, (1, 2));", "(1, 2)")]
+        // Designation. From right to left.
+        [DataRow("var (a, (b, c)) = (0, (1, $$2));", "c")]
+        [DataRow("var (a, (b, c)) = (0, $$(1, 2));", "(b, c)")]
+        [DataRow("var (a, (b, _)) = (0, (1, $$2));", "_")]
+        [DataRow("var (a, _) = (0, ($$1, 2));", null)]
+        [DataRow("var (a, _) = (0, $$(1, 2));", "_")]
+        [DataRow("var _ = ($$0, (1, 2));", null)]
+        [DataRow("_ = ($$0, (1, 2));", null)]
+        // Designation. From left to right
+        [DataRow("var (a, (b, $$c)) = (0, (1, 2));", "2")]
+        [DataRow("var (a, $$(b, c)) = (0, (1, 2));", "(1, 2)")]
+        [DataRow("var (a, (b, $$_)) = (0, (1, 2));", "2")]
+        [DataRow("var (a, $$_) = (0, (1, 2));", "(1, 2)")]
+        // Unaligned tuples. From left to right.
+        [DataRow("(var a, var b) = ($$0, 1, 2);", null)]
+        [DataRow("(var a, var b) = (0, 1, $$2);", null)]
+        [DataRow("(var a, var b) = (0, (1, $$2));", null)]
+        [DataRow("(var a, (var b, var c)) = (0, $$1);", "(var b, var c)")] // Syntacticly correct
+        // Unaligned tuples. From right to left.
+        [DataRow("(var a, var b, $$var c) = (0, (1, 2));", null)]
+        [DataRow("(var a, (var b, $$var c)) = (0, 1, 2);", null)]
+        // Unaligned designation. From right to left.
+        [DataRow("var (a, (b, c)) = (0, (1, $$2, 3));", null)]
+        [DataRow("var (a, (b, c)) = (0, (1, ($$2, 3)));", null)]
+        [DataRow("var (a, (b, c, d)) = (0, (1, $$2));", null)]
+        // Unaligned designation. From left to right .
+        [DataRow("var (a, (b, $$c)) = (0, (1, 2, 3));", null)]
+        [DataRow("var (a, (b, ($$c, d))) = (0, (1, 2));", null)]
+        [DataRow("var (a, (b, $$c, d)) = (0, (1, 2));", null)]
+        public void FindTupleArgumentComplement_Tests(string code, string expectedNode)
+        {
+            code = $@"
+public class C
+{{
+    public void M()
+    {{
+        var x = 0;
+        {code}
+    }}
+}}";
+            var nodePosition = code.IndexOf("$$");
+            code = code.Replace("$$", string.Empty);
+            var syntaxTree = CSharpSyntaxTree.ParseText(code);
+            var argument = syntaxTree.GetRoot().FindNode(new TextSpan(nodePosition, 0)).AncestorsAndSelf().First(x => x.IsAnyKind(
+                                                                                                                    SyntaxKindEx.DiscardDesignation,
+                                                                                                                    SyntaxKindEx.SingleVariableDesignation,
+                                                                                                                    SyntaxKindEx.ParenthesizedVariableDesignation,
+                                                                                                                    SyntaxKind.Argument));
+            syntaxTree.GetDiagnostics().Should().BeEmpty();
+            var target = argument.FindTupleArgumentComplement();
+            if (expectedNode is null)
+            {
+                target.Should().BeNull();
+            }
+            else
+            {
+                target.Should().NotBeNull();
+                target.ToString().Should().Be(expectedNode);
+            }
         }
     }
 }

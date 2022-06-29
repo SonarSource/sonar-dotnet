@@ -18,11 +18,16 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System;
+using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Linq;
 using Microsoft.CodeAnalysis;
+using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
+using SonarAnalyzer.Helpers;
 using StyleCop.Analyzers.Lightup;
+using IndexCountPair = System.Tuple<int, int>;
 
 namespace SonarAnalyzer.Extensions
 {
@@ -92,6 +97,140 @@ namespace SonarAnalyzer.Extensions
             else
             {
                 return ImmutableArray.Create<SyntaxNode>(left);
+            }
+        }
+
+        public static SyntaxNode FindTupleArgumentComplement(this SyntaxNode argument)
+        {
+            var outterTuple = argument.Ancestors()
+                .TakeWhile(x => x.IsAnyKind(
+                    SyntaxKindEx.TupleExpression,
+                    SyntaxKind.Argument,
+                    SyntaxKindEx.SingleVariableDesignation,
+                    SyntaxKindEx.ParenthesizedVariableDesignation,
+                    SyntaxKindEx.DiscardDesignation,
+                    SyntaxKindEx.DeclarationExpression))
+                .LastOrDefault();
+            if ((TupleExpressionSyntaxWrapper.IsInstance(outterTuple) || DeclarationExpressionSyntaxWrapper.IsInstance(outterTuple))
+                && outterTuple.Parent is AssignmentExpressionSyntax assignment)
+            {
+                var otherSide = assignment switch
+                {
+                    { Left: { } left, Right: { } right } when left.Equals(outterTuple) => right,
+                    { Left: { } left, Right: { } right } when right.Equals(outterTuple) => left,
+                    _ => null,
+                };
+                if (TupleExpressionSyntaxWrapper.IsInstance(otherSide) || DeclarationExpressionSyntaxWrapper.IsInstance(otherSide))
+                {
+                    var indexAndCount = outterTuple switch
+                    {
+                        _ when TupleExpressionSyntaxWrapper.IsInstance(outterTuple) => IndexAndCountOfTupleNesting(argument),
+                        _ when DeclarationExpressionSyntaxWrapper.IsInstance(outterTuple) => IndexAndCountOfDeclarationNesting(argument),
+                        _ => throw new InvalidOperationException("Unreachable"),
+                    };
+                    if (TupleExpressionSyntaxWrapper.IsInstance(otherSide) && (TupleExpressionSyntaxWrapper)otherSide is { } otherTuple)
+                    {
+                        return FindMatchingTupleElement(indexAndCount, otherTuple);
+                    }
+                    else if (DeclarationExpressionSyntaxWrapper.IsInstance(otherSide) && (DeclarationExpressionSyntaxWrapper)otherSide is { } otherDesignation)
+                    {
+                        return FindMatchingDesignationElement(indexAndCount, otherDesignation);
+                    }
+                }
+            }
+
+            return null;
+
+            static Stack<IndexCountPair> IndexAndCountOfTupleNesting(SyntaxNode argument)
+            {
+                Stack<IndexCountPair> indexAndCount = new();
+                while (TupleExpressionSyntaxWrapper.IsInstance(argument?.Parent))
+                {
+                    var parentTuple = (TupleExpressionSyntaxWrapper)argument.Parent;
+                    indexAndCount.Push(new(parentTuple.Arguments.IndexOf((ArgumentSyntax)argument), parentTuple.Arguments.Count));
+                    argument = parentTuple.SyntaxNode.Parent as ArgumentSyntax;
+                }
+
+                return indexAndCount;
+            }
+
+            static Stack<IndexCountPair> IndexAndCountOfDeclarationNesting(SyntaxNode variable)
+            {
+                Stack<IndexCountPair> indexAndCount = new();
+                while (ParenthesizedVariableDesignationSyntaxWrapper.IsInstance(variable?.Parent))
+                {
+                    var parentdesignation = (ParenthesizedVariableDesignationSyntaxWrapper)variable.Parent;
+                    indexAndCount.Push(new(parentdesignation.Variables.IndexOf((VariableDesignationSyntaxWrapper)variable), parentdesignation.Variables.Count));
+                    variable = parentdesignation.SyntaxNode;
+                }
+
+                return indexAndCount;
+            }
+
+            static SyntaxNode FindMatchingTupleElement(Stack<IndexCountPair> indexAndCount, TupleExpressionSyntaxWrapper tuple)
+            {
+                SyntaxNode expression = null;
+                while (indexAndCount.Count > 0)
+                {
+                    var currentIndex = indexAndCount.Pop();
+                    var expectedIndex = currentIndex.Item1;
+                    var expectedCount = currentIndex.Item2;
+                    if (tuple.Arguments.Count == expectedCount)
+                    {
+                        expression = tuple.Arguments[expectedIndex].Expression;
+                    }
+                    else
+                    {
+                        return null;
+                    }
+                    if (indexAndCount.Count > 0)
+                    {
+                        if (TupleExpressionSyntaxWrapper.IsInstance(expression))
+                        {
+                            tuple = (TupleExpressionSyntaxWrapper)expression;
+                        }
+                        else
+                        {
+                            return null;
+                        }
+                    }
+                }
+
+                return expression;
+            }
+
+            static SyntaxNode FindMatchingDesignationElement(Stack<IndexCountPair> indexAndCount, DeclarationExpressionSyntaxWrapper declaration)
+            {
+                SyntaxNode expression = null;
+                if (ParenthesizedVariableDesignationSyntaxWrapper.IsInstance(declaration.Designation) && (ParenthesizedVariableDesignationSyntaxWrapper)declaration.Designation is { } designations)
+                {
+                    while (indexAndCount.Count > 0)
+                    {
+                        var currentIndex = indexAndCount.Pop();
+                        var expectedIndex = currentIndex.Item1;
+                        var expectedCount = currentIndex.Item2;
+                        if (designations.Variables.Count == expectedCount)
+                        {
+                            expression = designations.Variables[expectedIndex];
+                        }
+                        else
+                        {
+                            return null;
+                        }
+                        if (indexAndCount.Count > 0)
+                        {
+                            if (ParenthesizedVariableDesignationSyntaxWrapper.IsInstance(expression))
+                            {
+                                designations = (ParenthesizedVariableDesignationSyntaxWrapper)expression;
+                            }
+                            else
+                            {
+                                return null;
+                            }
+                        }
+                    }
+                }
+                return expression;
             }
         }
 
