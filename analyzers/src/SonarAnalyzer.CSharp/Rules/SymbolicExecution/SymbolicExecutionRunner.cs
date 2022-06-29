@@ -22,6 +22,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Linq;
+using System.Threading;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
@@ -100,8 +101,8 @@ namespace SonarAnalyzer.Rules.CSharp
                 SyntaxKind.ParenthesizedLambdaExpression);
         }
 
-        protected override ControlFlowGraph CreateCfg(SemanticModel model, SyntaxNode node) =>
-            node.CreateCfg(model);
+        protected override ControlFlowGraph CreateCfg(SemanticModel model, SyntaxNode node, CancellationToken cancellationToken) =>
+            node.CreateCfg(model, cancellationToken);
 
         protected override void AnalyzeSonar(SyntaxNodeAnalysisContext context, bool isTestProject, bool isScannerRun, SyntaxNode body, ISymbol symbol)
         {

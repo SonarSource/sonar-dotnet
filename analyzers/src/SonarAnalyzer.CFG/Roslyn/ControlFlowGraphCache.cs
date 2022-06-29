@@ -21,6 +21,7 @@
 using System.Collections.Concurrent;
 using System.Linq;
 using System.Runtime.CompilerServices;
+using System.Threading;
 using Microsoft.CodeAnalysis;
 using SonarAnalyzer.Extensions;
 using StyleCop.Analyzers.Lightup;
@@ -35,13 +36,13 @@ namespace SonarAnalyzer.CFG.Roslyn
         protected abstract bool HasNestedCfg(SyntaxNode node);
         protected abstract bool IsLocalFunction(SyntaxNode node);
 
-        public ControlFlowGraph FindOrCreate(SyntaxNode declaration, SemanticModel model)
+        public ControlFlowGraph FindOrCreate(SyntaxNode declaration, SemanticModel model, CancellationToken cancellationToken)
         {
             var rootSyntax = model.GetOperation(declaration).RootOperation().Syntax;
             var nodeCache = compilationCache.GetValue(model.Compilation, x => new());
             if (!nodeCache.TryGetValue(rootSyntax, out var wrapper))
             {
-                wrapper = new(ControlFlowGraph.Create(rootSyntax, model));
+                wrapper = new(ControlFlowGraph.Create(rootSyntax, model, cancellationToken));
                 nodeCache[rootSyntax] = wrapper;
             }
             if (HasNestedCfg(declaration))

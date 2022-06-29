@@ -1049,7 +1049,7 @@ End Class";
             {
                 var (tree, model) = TestHelper.Compile(code, false, AnalyzerLanguage.CSharp);
                 var node = tree.GetRoot().DescendantNodes().First(x => x.RawKind == (int)syntaxKind);
-                Cfg = node.CreateCfg(model);
+                Cfg = node.CreateCfg(model, default);
                 Lva = new RoslynLiveVariableAnalysis(Cfg);
             }
 

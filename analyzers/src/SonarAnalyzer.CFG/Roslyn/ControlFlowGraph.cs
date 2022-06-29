@@ -82,9 +82,9 @@ namespace SonarAnalyzer.CFG.Roslyn
             Debug.Assert(ExitBlock.Kind == BasicBlockKind.Exit, "Roslyn CFG Exit block is not the last one");
         }
 
-        public static ControlFlowGraph Create(SyntaxNode node, SemanticModel semanticModel) =>
+        public static ControlFlowGraph Create(SyntaxNode node, SemanticModel semanticModel, CancellationToken cancellationToken) =>
             IsAvailable
-                ? Wrap(CreateMethod.Invoke(null, new object[] { node, semanticModel, CancellationToken.None }))
+                ? Wrap(CreateMethod.Invoke(null, new object[] { node, semanticModel, cancellationToken }))
                 : throw new InvalidOperationException("CFG is not available under this version of Roslyn compiler.");
 
         public ControlFlowGraph GetAnonymousFunctionControlFlowGraph(IFlowAnonymousFunctionOperationWrapper anonymousFunction) =>

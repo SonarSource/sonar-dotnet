@@ -21,6 +21,7 @@
 using System;
 using System.Collections.Immutable;
 using System.Linq;
+using System.Threading;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.CFG.Roslyn;
@@ -33,7 +34,7 @@ namespace SonarAnalyzer.Rules
     public abstract class SymbolicExecutionRunnerBase : SonarDiagnosticAnalyzer
     {
         protected abstract ImmutableDictionary<DiagnosticDescriptor, RuleFactory> AllRules { get; }
-        protected abstract ControlFlowGraph CreateCfg(SemanticModel model, SyntaxNode node);
+        protected abstract ControlFlowGraph CreateCfg(SemanticModel model, SyntaxNode node, CancellationToken cancellationToken);
         protected abstract void AnalyzeSonar(SyntaxNodeAnalysisContext context, bool isTestProject, bool isScannerRun, SyntaxNode body, ISymbol symbol);
 
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => AllRules.Keys.ToImmutableArray();
@@ -81,7 +82,7 @@ namespace SonarAnalyzer.Rules
             {
                 try
                 {
-                    if (CreateCfg(nodeContext.SemanticModel, body) is { } cfg)
+                    if (CreateCfg(nodeContext.SemanticModel, body, nodeContext.CancellationToken) is { } cfg)
                     {
                         var engine = new RoslynSymbolicExecution(cfg, checks);
                         engine.Execute(nodeContext.CancellationToken);

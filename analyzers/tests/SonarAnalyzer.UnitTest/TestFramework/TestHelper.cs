@@ -84,7 +84,7 @@ End Class", AnalyzerLanguage.VisualBasic);
         {
             var (tree, semanticModel) = Compile(snippet, ignoreErrors, language, outputKind: outputKind);
             var method = tree.GetRoot().DescendantNodes().First(IsMethod);
-            var cfg = ControlFlowGraph.Create(method, semanticModel);
+            var cfg = ControlFlowGraph.Create(method, semanticModel, default);
             if (localFunctionName != null)
             {
                 cfg = cfg.GetLocalFunctionControlFlowGraph(cfg.LocalFunctions.Single(x => x.Name == localFunctionName));

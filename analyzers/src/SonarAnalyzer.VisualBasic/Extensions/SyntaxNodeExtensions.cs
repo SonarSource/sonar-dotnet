@@ -18,6 +18,7 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System.Threading;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.VisualBasic;
 using Microsoft.CodeAnalysis.VisualBasic.Syntax;
@@ -30,8 +31,8 @@ namespace SonarAnalyzer.Extensions
     {
         private static readonly ControlFlowGraphCache CfgCache = new();
 
-        public static ControlFlowGraph CreateCfg(this SyntaxNode block, SemanticModel model) =>
-            CfgCache.FindOrCreate(block, model);
+        public static ControlFlowGraph CreateCfg(this SyntaxNode block, SemanticModel model, CancellationToken cancellationToken) =>
+            CfgCache.FindOrCreate(block, model, cancellationToken);
 
         public static bool IsPartOfBinaryNegationOrCondition(this SyntaxNode node)
         {

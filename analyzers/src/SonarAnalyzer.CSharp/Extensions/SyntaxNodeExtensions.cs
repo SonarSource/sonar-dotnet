@@ -19,6 +19,7 @@
  */
 
 using System.Linq;
+using System.Threading;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
@@ -32,8 +33,8 @@ namespace SonarAnalyzer.Extensions
     {
         private static readonly ControlFlowGraphCache CfgCache = new();
 
-        public static ControlFlowGraph CreateCfg(this SyntaxNode body, SemanticModel model) =>
-            CfgCache.FindOrCreate(body.Parent, model);
+        public static ControlFlowGraph CreateCfg(this SyntaxNode body, SemanticModel model, CancellationToken cancellationToken) =>
+            CfgCache.FindOrCreate(body.Parent, model, cancellationToken);
 
         public static bool ContainsConditionalConstructs(this SyntaxNode node) =>
             node != null &&

@@ -37,7 +37,7 @@ public class Sample
             var (tree, semanticModel) = TestHelper.CompileCS(code);
             var method = tree.GetMethod("Method");
             var symbol = semanticModel.GetDeclaredSymbol(method) as IMethodSymbol;
-            var cfg = ControlFlowGraph.Create(method, semanticModel);
+            var cfg = ControlFlowGraph.Create(method, semanticModel, default);
 
             Action a = () => cfg.FindLocalFunctionCfgInScope(symbol);
             a.Should().Throw<ArgumentOutOfRangeException>().WithMessage("Specified argument was out of the range of valid values.*Parameter*localFunction*");

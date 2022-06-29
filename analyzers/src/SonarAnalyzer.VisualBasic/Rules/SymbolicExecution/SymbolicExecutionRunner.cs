@@ -19,6 +19,7 @@
  */
 
 using System.Collections.Immutable;
+using System.Threading;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Diagnostics;
 using Microsoft.CodeAnalysis.VisualBasic;
@@ -65,8 +66,8 @@ namespace SonarAnalyzer.Rules.VisualBasic
                 SyntaxKind.MultiLineSubLambdaExpression);
         }
 
-        protected override ControlFlowGraph CreateCfg(SemanticModel model, SyntaxNode node) =>
-            node.CreateCfg(model);
+        protected override ControlFlowGraph CreateCfg(SemanticModel model, SyntaxNode node, CancellationToken cancellationToken) =>
+            node.CreateCfg(model, cancellationToken);
 
         protected override void AnalyzeSonar(SyntaxNodeAnalysisContext context, bool isTestProject, bool isScannerRun, SyntaxNode body, ISymbol symbol)
         {
