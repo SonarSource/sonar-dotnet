@@ -109,10 +109,10 @@ namespace Monitor_TryCatch
 
         public void Method9(string arg)
         {
-            Monitor.Enter(obj); // FN
+            Monitor.Enter(obj); // Noncompliant
             try
             {
-                Console.WriteLine(arg.Length);
+                Console.WriteLine(arg.Length);  // Can throw NullReferenceException when arg is null
                 Monitor.Exit(obj);
             }
             catch (InvalidOperationException ex)

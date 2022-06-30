@@ -102,15 +102,9 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
             }
             else if (node.Block.Successors.Length == 1 && ThrownException(node, node.Block.Successors.Single().Semantics) is { } exception)
             {
-                var successors = ExceptionSuccessors(node, exception).ToArray();
-                foreach (var successor in successors)
+                foreach (var successor in ExceptionSuccessors(node, exception, node.Block.EnclosingRegion(ControlFlowRegionKind.Try)))
                 {
                     yield return successor;
-                }
-
-                if (successors.Length == 0) // catch without finally
-                {
-                    yield return new(cfg.ExitBlock, node.State.SetException(exception), null);
                 }
             }
             else
@@ -209,26 +203,36 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
                 }
             }
 
-            foreach (var successor in ExceptionSuccessors(node, exceptionCandidate.FromOperation(node.Operation)))
+            if (exceptionCandidate.FromOperation(node.Operation) is { } exception && node.Block.EnclosingRegion(ControlFlowRegionKind.Try) is { } tryRegion)
             {
-                yield return successor;
+                foreach (var successor in ExceptionSuccessors(node, exception, tryRegion))
+                {
+                    yield return successor;
+                }
             }
         }
 
-        private IEnumerable<ExplodedNode> ExceptionSuccessors(ExplodedNode node, ExceptionState exception)
+        private IEnumerable<ExplodedNode> ExceptionSuccessors(ExplodedNode node, ExceptionState exception, ControlFlowRegion tryRegion)
         {
-            if (exception is not null && node.Block.EnclosingRegion(ControlFlowRegionKind.Try) is { } tryRegion)
+            var state = node.State.ResetOperations();   // We're jumping out of the outer statement => We need to reset operation states.
+            state = node.Block.EnclosingRegion(ControlFlowRegionKind.Catch) is not null
+                ? state.PushException(exception)        // If we're nested inside catch, we need to preserve the exception chain
+                : state.SetException(exception);        // Otherwise we track only the current exception to avoid explosion of states after each statement
+            while (tryRegion is not null)
             {
-                // We're jumping out of the outer statement => We need to reset operation states.
-                var state = node.State.ResetOperations();
-                state = node.Block.EnclosingRegion(ControlFlowRegionKind.Catch) is not null
-                    ? state.PushException(exception)    // If we're nested inside catch, we need to preserve the exception chain
-                    : state.SetException(exception);    // Otherwise we track only the current exception to avoid explosion of states after each statement
-                foreach (var catchOrFinally in tryRegion.EnclosingRegion.NestedRegions.Where(x => x.Kind != ControlFlowRegionKind.Try))
+                var reachableHandlers = tryRegion.EnclosingRegion.NestedRegions.Where(x => x.Kind != ControlFlowRegionKind.Try && IsReachable(x, state.Exception)).ToArray();
+                foreach (var handler in reachableHandlers)  // CatchRegion, FinallyRegion or FilterAndHandlerRegion
                 {
-                    yield return new(cfg.Blocks[catchOrFinally.FirstBlockOrdinal], state, null);
+                    yield return new(cfg.Blocks[handler.FirstBlockOrdinal], state, null);
                 }
+                if (reachableHandlers.Length != 0)
+                {
+                    yield break;
+                }
+                tryRegion = tryRegion.EnclosingRegion.EnclosingRegionOrSelf(ControlFlowRegionKind.Try); // Inner catch for specific exception doesn't match. Go to outer one.
             }
+
+            yield return new(cfg.ExitBlock, node.State.SetException(exception), null);  // catch without finally or uncaught exception type
         }
 
         private static ExceptionState ThrownException(ExplodedNode node, ControlFlowBranchSemantics semantics) =>
@@ -276,5 +280,12 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
 
         private static bool IsReachable(ControlFlowBranch branch, bool condition, bool constraint) =>
             branch.IsConditionalSuccessor ? condition == constraint : condition != constraint;
+
+        private static bool IsReachable(ControlFlowRegion region, ExceptionState thrown) =>
+            region.Kind == ControlFlowRegionKind.Finally
+            || thrown == ExceptionState.UnknownException
+            || region.ExceptionType.Is(KnownType.System_Object)       // catch when (condition)
+            || region.ExceptionType.Is(KnownType.System_Exception)
+            || thrown.Type.DerivesFrom(region.ExceptionType);
     }
 }

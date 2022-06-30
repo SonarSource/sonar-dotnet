@@ -76,9 +76,9 @@ Namespace Monitor_TryCatch
         End Sub
 
         Public Sub Method9(Arg As String)
-            Monitor.Enter(Obj) ' FN
+            Monitor.Enter(Obj) ' Noncompliant
             Try
-                Console.WriteLine(Arg.Length)
+                Console.WriteLine(Arg.Length)   ' Can throw NullReferenceException when Arg is Nothing
                 Monitor.Exit(Obj)
             Catch ex As InvalidOperationException
                 Monitor.Exit(Obj)
