@@ -78,7 +78,15 @@ namespace SonarAnalyzer.Extensions
 
         /// <summary>
         /// Returns a list of nodes, that represent the target (left side) of an assignment. In case of tuple deconstructions, this can be more than one target.
-        /// Nested tuple elements are flattened so for <c>(a, (b, c))</c> the list <c>[a, b, c]</c> is returned.
+        /// Nested tuple elements and any declaration expressions are flattened.
+        /// <code>
+        /// (var a, var b)        = x; // [a, b]
+        /// var (a, b)            = x; // [a, b]
+        /// var (a, _)            = x; // [a]       ← The _ here is always a discard
+        /// (var a, _)            = x; // [a, _]    ← The _ here could reference a local
+        /// (var a, var (b, c))   = x; // [a, b, c]
+        /// (var a, (int, int) b) = x; // [a, b]
+        /// </code>
         /// </summary>
         public static ImmutableArray<SyntaxNode> AssignmentTargets(this AssignmentExpressionSyntax assignment)
         {
