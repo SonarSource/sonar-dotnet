@@ -109,7 +109,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 return type.IsAny(KnownType.NonIntegralNumbers);
             }
 
-            if (division.Ancestors().Where(x => TupleExpressionSyntaxWrapper.IsInstance(x)).LastOrDefault() != null)
+            if (division.Ancestors().LastOrDefault(x => TupleExpressionSyntaxWrapper.IsInstance(x)) != null)
             {
                 if (division.Ancestors().OfType<AssignmentExpressionSyntax>().FirstOrDefault() is { } assignmentSyntax
                     && assignmentSyntax.MapAssignmentArguments() is { } assignmentMappings)
@@ -126,8 +126,11 @@ namespace SonarAnalyzer.Rules.CSharp
                     var tupleArguments = ((TupleExpressionSyntaxWrapper)division.Parent.Parent).AllArguments();
                     var declarationType = semanticModel.GetTypeInfo(variableDeclaration.Type).Type;
                     var tupleTypes = (declarationType as INamedTypeSymbol)?.TupleElements().Select(x => x.Type).ToArray();
-                    type = tupleTypes[tupleArguments.IndexOf((ArgumentSyntax)division.Parent)];
-                    return type.IsAny(KnownType.NonIntegralNumbers);
+                    if (tupleTypes != null)
+                    {
+                        type = tupleTypes[tupleArguments.IndexOf((ArgumentSyntax)division.Parent)];
+                        return type.IsAny(KnownType.NonIntegralNumbers);
+                    }
                 }
             }
 
