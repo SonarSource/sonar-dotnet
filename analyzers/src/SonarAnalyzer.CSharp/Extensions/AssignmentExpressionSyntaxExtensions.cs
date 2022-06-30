@@ -88,8 +88,8 @@ namespace SonarAnalyzer.Extensions
                 var tuple = (TupleExpressionSyntaxWrapper)left;
                 var argumentExpressions = tuple.AllArguments().Select(x => (SyntaxNode)x.Expression);
                 var designationsExpanded = argumentExpressions.SelectMany(x => x.IsKind(SyntaxKindEx.DeclarationExpression)
-                    ? ((DeclarationExpressionSyntaxWrapper)x).Designation.AllVariables().Select(v => (SyntaxNode)v)
-                    : Enumerable.Repeat(x, 1));
+                        ? ((DeclarationExpressionSyntaxWrapper)x).Designation.AllVariables().Select(v => (SyntaxNode)v)
+                        : new[] { x });
                 return designationsExpanded.ToImmutableArray();
             }
             else if (DeclarationExpressionSyntaxWrapper.IsInstance(left))

@@ -374,18 +374,20 @@ namespace SonarAnalyzer.UnitTest.Extensions
         // Normal assignment
         [DataRow("int a; a = 1;", "a")]
         // Deconstruction into tuple
-        [DataRow("(var a, var b) = (1, 2);", "var a", "var b")]
-        [DataRow("(var a, _) = (1, 2);", "var a", "_")]
-        [DataRow("(var _, _) = (1, 2);", "var _", "_")]
+        [DataRow("(var a, var b) = (1, 2);", "a", "b")]
+        [DataRow("(var a, _) = (1, 2);", "a", "_")]  // "_" can refer to a local variable or be a discard.
+        [DataRow("(var _, var _) = (1, 2);")]        // "var _" is always a discard.
+        [DataRow("(var _, _) = (1, 2);", "_")]
         [DataRow("(_, _) = (1, 2);", "_", "_")]
-        [DataRow("(var a, (var b, var c), var d) = (1, (2, 3), 4);", "var a", "var b", "var c", "var d")]
-        [DataRow("int b; (var a, (b, var c), _) = (1, (2, 3), 4);", "var a", "b", "var c", "_")]
+        [DataRow("_ = (1, 2);", "_")]
+        [DataRow("(var a, (var b, var c), var d) = (1, (2, 3), 4);", "a", "b", "c", "d")]
+        [DataRow("int b; (var a, (b, var c), _) = (1, (2, 3), 4);", "a", "b", "c", "_")]
         // Deconstruction into declaration expression designation
         [DataRow("var (a, b) = (1, 2);", "a", "b")]
         [DataRow("var (a, _) = (1, 2);", "a")]
         [DataRow("var (_, _) = (1, 2);")]
         // Mixed
-        [DataRow("var (a, (var b, var c)) = (1, (2, 3));", "a", "var b", "var c")]
+        [DataRow("(var a, var (b, c)) = (1, (2, 3));", "a", "b", "c")]
         public void AssignmentTargets_DeconstructTargets(string assignment, params string[] expectedTargets)
         {
             var allTargets = ParseAssignmentExpression(assignment).AssignmentTargets();
