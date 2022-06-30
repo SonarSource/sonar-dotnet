@@ -18,7 +18,6 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Linq;
@@ -100,9 +99,20 @@ namespace SonarAnalyzer.Extensions
             }
         }
 
-        public static SyntaxNode FindTupleArgumentComplement(this SyntaxNode argument)
+        /// <summary>
+        /// Finds the complementing <see cref="SyntaxNode"/> of an assignment with tuples. If <paramref name="node"/> is <c>x</c>, the method returns <c>r</c>. In the following examples:
+        /// <code>
+        /// var (a, x) = (1, r);
+        /// var (a, r) = (1, x);
+        /// (var a, var x) = (1, r);
+        /// (var a, var r) = (1, x);
+        /// </code>
+        /// </summary>
+        /// <param name="node"></param>
+        /// <returns></returns>
+        public static SyntaxNode FindAssignmentTupleComplement(this SyntaxNode node)
         {
-            var outterTuple = argument.Ancestors()
+            var thisSide = node.Ancestors()
                 .TakeWhile(x => x.IsAnyKind(
                     SyntaxKindEx.TupleExpression,
                     SyntaxKind.Argument,
@@ -111,126 +121,93 @@ namespace SonarAnalyzer.Extensions
                     SyntaxKindEx.DiscardDesignation,
                     SyntaxKindEx.DeclarationExpression))
                 .LastOrDefault();
-            if ((TupleExpressionSyntaxWrapper.IsInstance(outterTuple) || DeclarationExpressionSyntaxWrapper.IsInstance(outterTuple))
-                && outterTuple.Parent is AssignmentExpressionSyntax assignment)
+            if ((TupleExpressionSyntaxWrapper.IsInstance(thisSide) || DeclarationExpressionSyntaxWrapper.IsInstance(thisSide))
+                && thisSide.Parent is AssignmentExpressionSyntax assignment)
             {
                 var otherSide = assignment switch
                 {
-                    { Left: { } left, Right: { } right } when left.Equals(outterTuple) => right,
-                    { Left: { } left, Right: { } right } when right.Equals(outterTuple) => left,
+                    { Left: { } left, Right: { } right } when left.Equals(thisSide) => right,
+                    { Left: { } left, Right: { } right } when right.Equals(thisSide) => left,
                     _ => null,
                 };
                 if (TupleExpressionSyntaxWrapper.IsInstance(otherSide) || DeclarationExpressionSyntaxWrapper.IsInstance(otherSide))
                 {
-                    var indexAndCount = outterTuple switch
-                    {
-                        _ when TupleExpressionSyntaxWrapper.IsInstance(outterTuple) => IndexAndCountOfTupleNesting(argument),
-                        _ when DeclarationExpressionSyntaxWrapper.IsInstance(outterTuple) => IndexAndCountOfDeclarationNesting(argument),
-                        _ => throw new InvalidOperationException("Unreachable"),
-                    };
-                    if (TupleExpressionSyntaxWrapper.IsInstance(otherSide) && (TupleExpressionSyntaxWrapper)otherSide is { } otherTuple)
-                    {
-                        return FindMatchingTupleArgument(indexAndCount, otherTuple);
-                    }
-                    else if (DeclarationExpressionSyntaxWrapper.IsInstance(otherSide) && (DeclarationExpressionSyntaxWrapper)otherSide is { } otherDesignation)
-                    {
-                        return FindMatchingDesignationElement(indexAndCount, otherDesignation);
-                    }
+                    var indexAndCount = IndexAndCountOfNesting(node);
+                    return FindMatchingNestedNode(indexAndCount, otherSide);
                 }
             }
 
             return null;
 
-            static Stack<IndexCountPair> IndexAndCountOfTupleNesting(SyntaxNode argument)
+            static Stack<IndexCountPair> IndexAndCountOfNesting(SyntaxNode node)
             {
                 Stack<IndexCountPair> indexAndCount = new();
-                while (TupleExpressionSyntaxWrapper.IsInstance(argument?.Parent))
+                while (TupleExpressionSyntaxWrapper.IsInstance(node?.Parent) || ParenthesizedVariableDesignationSyntaxWrapper.IsInstance(node?.Parent))
                 {
-                    var parentTuple = (TupleExpressionSyntaxWrapper)argument.Parent;
-                    indexAndCount.Push(new(parentTuple.Arguments.IndexOf((ArgumentSyntax)argument), parentTuple.Arguments.Count));
-                    argument = parentTuple.SyntaxNode.Parent as ArgumentSyntax;
+                    if (TupleExpressionSyntaxWrapper.IsInstance(node.Parent))
+                    {
+                        var parentTuple = (TupleExpressionSyntaxWrapper)node.Parent;
+                        indexAndCount.Push(new(parentTuple.Arguments.IndexOf((ArgumentSyntax)node), parentTuple.Arguments.Count));
+                        node = parentTuple.SyntaxNode.Parent;
+                    }
+                    else if (ParenthesizedVariableDesignationSyntaxWrapper.IsInstance(node.Parent))
+                    {
+                        var parentdesignation = (ParenthesizedVariableDesignationSyntaxWrapper)node.Parent;
+                        indexAndCount.Push(new(parentdesignation.Variables.IndexOf((VariableDesignationSyntaxWrapper)node), parentdesignation.Variables.Count));
+                        node = parentdesignation.SyntaxNode;
+                    }
+                    if (DeclarationExpressionSyntaxWrapper.IsInstance(node.Parent)
+                        && node.Parent.Parent is ArgumentSyntax)
+                    {
+                        node = node.Parent?.Parent;
+                    }
                 }
-
                 return indexAndCount;
             }
 
-            static Stack<IndexCountPair> IndexAndCountOfDeclarationNesting(SyntaxNode variable)
-            {
-                Stack<IndexCountPair> indexAndCount = new();
-                while (ParenthesizedVariableDesignationSyntaxWrapper.IsInstance(variable?.Parent))
-                {
-                    var parentdesignation = (ParenthesizedVariableDesignationSyntaxWrapper)variable.Parent;
-                    indexAndCount.Push(new(parentdesignation.Variables.IndexOf((VariableDesignationSyntaxWrapper)variable), parentdesignation.Variables.Count));
-                    variable = parentdesignation.SyntaxNode;
-                }
-
-                return indexAndCount;
-            }
-
-            static SyntaxNode FindMatchingTupleArgument(Stack<IndexCountPair> indexAndCount, TupleExpressionSyntaxWrapper tuple)
+            static SyntaxNode FindMatchingNestedNode(Stack<IndexCountPair> indexAndCount, SyntaxNode node)
             {
                 SyntaxNode argumentExpression = null;
                 while (indexAndCount.Count > 0)
                 {
+                    if (DeclarationExpressionSyntaxWrapper.IsInstance(node))
+                    {
+                        node = ((DeclarationExpressionSyntaxWrapper)node).Designation;
+                    }
                     var currentIndex = indexAndCount.Pop();
                     var expectedIndex = currentIndex.Item1;
                     var expectedCount = currentIndex.Item2;
-                    if (tuple.Arguments.Count == expectedCount)
+                    if (TupleExpressionSyntaxWrapper.IsInstance(node))
                     {
-                        argumentExpression = tuple.Arguments[expectedIndex].Expression;
+                        var tuple = (TupleExpressionSyntaxWrapper)node;
+                        if (tuple.Arguments.Count == expectedCount)
+                        {
+                            argumentExpression = tuple.Arguments[expectedIndex].Expression;
+                        }
+                        else
+                        {
+                            return null;
+                        }
+                    }
+                    else if (ParenthesizedVariableDesignationSyntaxWrapper.IsInstance(node))
+                    {
+                        var parenthesizedDesignation = (ParenthesizedVariableDesignationSyntaxWrapper)node;
+                        if (parenthesizedDesignation.Variables.Count == expectedCount)
+                        {
+                            argumentExpression = parenthesizedDesignation.Variables[expectedIndex];
+                        }
+                        else
+                        {
+                            return null;
+                        }
                     }
                     else
                     {
                         return null;
                     }
-                    if (indexAndCount.Count > 0)
-                    {
-                        if (TupleExpressionSyntaxWrapper.IsInstance(argumentExpression))
-                        {
-                            tuple = (TupleExpressionSyntaxWrapper)argumentExpression;
-                        }
-                        else
-                        {
-                            return null;
-                        }
-                    }
+                    node = argumentExpression;
                 }
-
                 return argumentExpression;
-            }
-
-            static SyntaxNode FindMatchingDesignationElement(Stack<IndexCountPair> indexAndCount, DeclarationExpressionSyntaxWrapper declaration)
-            {
-                SyntaxNode designation = null;
-                if (ParenthesizedVariableDesignationSyntaxWrapper.IsInstance(declaration.Designation) && (ParenthesizedVariableDesignationSyntaxWrapper)declaration.Designation is { } designations)
-                {
-                    while (indexAndCount.Count > 0)
-                    {
-                        var currentIndex = indexAndCount.Pop();
-                        var expectedIndex = currentIndex.Item1;
-                        var expectedCount = currentIndex.Item2;
-                        if (designations.Variables.Count == expectedCount)
-                        {
-                            designation = designations.Variables[expectedIndex];
-                        }
-                        else
-                        {
-                            return null;
-                        }
-                        if (indexAndCount.Count > 0)
-                        {
-                            if (ParenthesizedVariableDesignationSyntaxWrapper.IsInstance(designation))
-                            {
-                                designations = (ParenthesizedVariableDesignationSyntaxWrapper)designation;
-                            }
-                            else
-                            {
-                                return null;
-                            }
-                        }
-                    }
-                }
-                return designation;
             }
         }
 
@@ -251,6 +228,16 @@ namespace SonarAnalyzer.Extensions
                     && TupleExpressionSyntaxWrapper.IsInstance(rightExpression))
                 {
                     if (!MapTupleElements(arrayBuilder, (TupleExpressionSyntaxWrapper)leftExpression, (TupleExpressionSyntaxWrapper)rightExpression))
+                    {
+                        return false;
+                    }
+                }
+                else if (DeclarationExpressionSyntaxWrapper.IsInstance(leftExpression)
+                     && (DeclarationExpressionSyntaxWrapper)leftExpression is { Designation: { } leftDesignation }
+                     && ParenthesizedVariableDesignationSyntaxWrapper.IsInstance(leftDesignation)
+                     && TupleExpressionSyntaxWrapper.IsInstance(rightExpression))
+                {
+                    if (!MapDesignationElements(arrayBuilder, (ParenthesizedVariableDesignationSyntaxWrapper)leftDesignation, (TupleExpressionSyntaxWrapper)rightExpression))
                     {
                         return false;
                     }

@@ -341,6 +341,36 @@ namespace SonarAnalyzer.UnitTest.Extensions
                 });
 
         [DataTestMethod]
+        [DataRow("(var a, (x, var b)) = (0, (x++, 1));", "var a | 0", "x | x++", "var b | 1")]
+        [DataRow("(var a, (var b, var c, var d), var e) = (0, (1, 2, 3), 4);", "var a | 0", "var b | 1", "var c | 2", "var d | 3", "var e | 4")]
+
+        // Designation. From right to left.
+        [DataRow("var (a, (b, c)) = (0, (1, 2));", "a | 0", "b | 1", "c | 2")]
+        [DataRow("var (a, (b, _)) = (0, (1, 2));", "a | 0", "b | 1", "_ | 2")]
+        [DataRow("var (a, _) = (0, (1, 2));", "a | 0", "_ | (1, 2)")]
+        // Unaligned tuples.
+        [DataRow("(var a, var b) = (0, 1, 2);", "(var a, var b) | (0, 1, 2)")]
+        [DataRow("(var a, var b) = (0, 1, 2);", "(var a, var b) | (0, 1, 2)")]
+        [DataRow("(var a, var b) = (0, (1, 2));", "var a | 0", "var b | (1, 2)")]
+        [DataRow("(var a, (var b, var c)) = (0, 1);", "var a | 0", "(var b, var c) | 1")] // Syntacticly correct
+        [DataRow("(var a, var b, var c) = (0, (1, 2));", "(var a, var b, var c) | (0, (1, 2))")]
+        [DataRow("(var a, (var b, var c)) = (0, 1, 2);", "(var a, (var b, var c)) | (0, 1, 2)")]
+        // Unaligned designation.
+        [DataRow("var (a, (b, c)) = (0, (1, 2, 3));", "var (a, (b, c)) | (0, (1, 2, 3))")]
+        [DataRow("var (a, (b, c)) = (0, (1, (2, 3)));", "a | 0", "b | 1", "c | (2, 3)")]
+        [DataRow("var (a, (b, (c, d))) = (0, (1, 2));", "a | 0", "b | 1", "(c, d) | 2")]
+        [DataRow("var (a, (b, c, d)) = (0, (1, 2));", "var (a, (b, c, d)) | (0, (1, 2))")]
+        // Mixed.
+        [DataRow("(var a, var (b, c)) = (0, (1, 2));", "var a | 0", "b | 1", "c | 2")]
+        [DataRow("(var a, var (b, (c, (d, e)))) = (0, (1, (2, (3, 4))));", "var a | 0", "b | 1", "c | 2", "d | 3", "e | 4")]
+        public void MapAssignmentArguments_DataTest(string code, params string[] pairs)
+        {
+            var actualMapping = ParseAssignmentExpression(code).MapAssignmentArguments();
+            var actualMappingPairs = actualMapping.Select(x => $"{x.Left} | {x.Right}");
+            actualMappingPairs.Should().BeEquivalentTo(pairs);
+        }
+
+        [DataTestMethod]
         // Normal assignment
         [DataRow("int a; a = 1;", "a")]
         // Deconstruction into tuple
@@ -436,7 +466,13 @@ public class C
         [DataRow("var (a, (b, $$c)) = (0, (1, 2, 3));", null)]
         [DataRow("var (a, (b, ($$c, d))) = (0, (1, 2));", null)]
         [DataRow("var (a, (b, $$c, d)) = (0, (1, 2));", null)]
-        public void FindTupleArgumentComplement_Tests(string code, string expectedNode)
+        // Mixed. From right to left.
+        [DataRow("(var a, var (b, c)) = (1, ($$2, 3));", "b")]
+        [DataRow("(var a, var (b, (c, (d, e)))) = (1, (2, (3, (4, $$5))));", "e")]
+        // Mixed. From left to right.
+        [DataRow("(var a, var ($$b, c) )= (1, (2, 3));", "2")]
+        [DataRow("(var a, var (b, (c, (d, $$e)))) = (1, (2, (3, (4, 5))));", "5")]
+        public void FindAssignmentComplement_Tests(string code, string expectedNode)
         {
             code = $@"
 public class C
@@ -450,13 +486,13 @@ public class C
             var nodePosition = code.IndexOf("$$");
             code = code.Replace("$$", string.Empty);
             var syntaxTree = CSharpSyntaxTree.ParseText(code);
-            var argument = syntaxTree.GetRoot().FindNode(new TextSpan(nodePosition, 0)).AncestorsAndSelf().First(x => x.IsAnyKind(
-                                                                                                                    SyntaxKindEx.DiscardDesignation,
-                                                                                                                    SyntaxKindEx.SingleVariableDesignation,
-                                                                                                                    SyntaxKindEx.ParenthesizedVariableDesignation,
-                                                                                                                    SyntaxKind.Argument));
+            var argument = syntaxTree.GetRoot().FindNode(new TextSpan(nodePosition, 0)).AncestorsAndSelf()
+                .First(x => x.IsAnyKind(SyntaxKindEx.DiscardDesignation,
+                                        SyntaxKindEx.SingleVariableDesignation,
+                                        SyntaxKindEx.ParenthesizedVariableDesignation,
+                                        SyntaxKind.Argument));
             syntaxTree.GetDiagnostics().Should().BeEmpty();
-            var target = argument.FindTupleArgumentComplement();
+            var target = argument.FindAssignmentTupleComplement();
             if (expectedNode is null)
             {
                 target.Should().BeNull();
