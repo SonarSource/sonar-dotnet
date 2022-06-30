@@ -707,7 +707,7 @@ catch
 tag = ""AfterCatch"";
 ";
             var validator = SETestContext.CreateCS(code).Validator;
-            validator.ValidateTagOrder("BeforeTry", "InTry", /*FIXME: Should not be here*/"UnreachableInCatch", "AfterCatch");
+            validator.ValidateTagOrder("BeforeTry", "InTry", "AfterCatch");
             validator.ExitStates.Should().HaveCount(1).And.ContainSingle(x => HasNoException(x));
         }
     }

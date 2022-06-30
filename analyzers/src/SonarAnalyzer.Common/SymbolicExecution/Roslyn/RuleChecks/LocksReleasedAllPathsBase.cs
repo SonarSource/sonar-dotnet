@@ -159,7 +159,7 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn.RuleChecks
                 {
                     return ProcessMonitorEnter(context, invocation);
                 }
-                else if (invocation.TargetMethod.Is(KnownType.System_Threading_Monitor, "Exit"))
+                else if (ExceptionCandidate.IsMonitorExit(invocation))
                 {
                     return ProcessMonitorExit(context, invocation);
                 }
@@ -170,10 +170,7 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn.RuleChecks
                 {
                     return ProcessInvocationInstanceAcquireLock(context, invocation);
                 }
-                else if (invocation.TargetMethod.IsAny(KnownType.System_Threading_ReaderWriterLock, "ReleaseLock", "ReleaseReaderLock", "ReleaseWriterLock")
-                         || invocation.TargetMethod.IsAny(KnownType.System_Threading_ReaderWriterLockSlim, "ExitReadLock", "ExitWriteLock", "ExitUpgradeableReadLock")
-                         || invocation.TargetMethod.Is(KnownType.System_Threading_Mutex, "ReleaseMutex")
-                         || invocation.TargetMethod.Is(KnownType.System_Threading_SpinLock, "Exit"))
+                else if (ExceptionCandidate.IsLockRelease(invocation))
                 {
                     return ProcessInvocationInstanceReleaseLock(context, invocation);
                 }

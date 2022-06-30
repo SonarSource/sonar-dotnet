@@ -275,7 +275,7 @@ namespace Monitor_TryCatch
         {
             try
             {
-                Monitor.Enter(obj);     // Noncompliant FP
+                Monitor.Enter(obj);     // Compliant
                 try
                 {
                     Console.WriteLine("CanThrow");
@@ -295,7 +295,7 @@ namespace Monitor_TryCatch
         {
             try
             {
-                Monitor.Enter(obj);     // Noncompliant FP
+                Monitor.Enter(obj);     // Compliant
                 try
                 {
                     try
