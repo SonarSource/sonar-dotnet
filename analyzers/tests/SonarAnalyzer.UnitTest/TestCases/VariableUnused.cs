@@ -32,6 +32,12 @@ namespace Tests.Diagnostics
 
             b(5);
 
+            Action notUsed = () => // Noncompliant
+            {
+                Console.WriteLine("Hello world.");
+            };
+
+
             string c;
             c = "Hello, world!";
             Console.WriteLine(c);
