@@ -84,8 +84,8 @@ if (r is R {SomeProperty: { Length: >= 0} }) // Noncompliant
 {
 }
 
-if (r is R { SomeProperty: { Length: not >= 0 } }) // Noncompliant
-//                                       ^^^^
+if (r is R { SomeProperty: { Length: not >= 0 } }) // Error [CS8502] `An expression of type 'R' can never match the provided pattern
+// Noncompliant@-1
 {
 }
 
