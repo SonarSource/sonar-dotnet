@@ -25,6 +25,7 @@ using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
+using SonarAnalyzer.Extensions;
 using SonarAnalyzer.Helpers;
 using StyleCop.Analyzers.Lightup;
 
@@ -42,17 +43,29 @@ namespace SonarAnalyzer.Rules.CSharp
             {
                 var collector = new UnusedLocalsCollector();
 
-                cbc.RegisterSyntaxNodeAction(collector.CollectDeclarations, SyntaxKind.LocalDeclarationStatement);
+                cbc.RegisterSyntaxNodeAction(collector.CollectDeclarations, SyntaxKind.LocalDeclarationStatement, SyntaxKind.SimpleAssignmentExpression);
                 cbc.RegisterSyntaxNodeAction(collector.CollectUsages, SyntaxKind.IdentifierName);
                 cbc.RegisterCodeBlockEndAction(collector.GetReportUnusedVariablesAction(Rule));
             });
 
-        private class UnusedLocalsCollector : UnusedLocalsCollectorBase<LocalDeclarationStatementSyntax>
+        private sealed class UnusedLocalsCollector : UnusedLocalsCollectorBase<SyntaxNode>
         {
-            protected override IEnumerable<SyntaxNode> GetDeclaredVariables(LocalDeclarationStatementSyntax localDeclaration) =>
-                localDeclaration.UsingKeyword().IsKind(SyntaxKind.UsingKeyword)
-                ? Enumerable.Empty<SyntaxNode>()
-                : localDeclaration.Declaration.Variables;
+            protected override IEnumerable<SyntaxNode> GetDeclaredVariables(SyntaxNode variableDeclaration)
+            {
+                if (variableDeclaration as LocalDeclarationStatementSyntax is { } localDeclaration)
+                {
+                    return localDeclaration.UsingKeyword().IsKind(SyntaxKind.UsingKeyword)
+                    ? Enumerable.Empty<SyntaxNode>()
+                    : localDeclaration.Declaration.Variables;
+                }
+                else
+                {
+                    var assignmentExpression = (AssignmentExpressionSyntax)variableDeclaration;
+                    return TupleExpressionSyntaxWrapper.IsInstance(assignmentExpression.Left)
+                           ? assignmentExpression.AssignmentTargets()
+                           : Enumerable.Empty<SyntaxNode>();
+                }
+            }
         }
     }
 }
