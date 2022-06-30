@@ -499,13 +499,13 @@ Tag(""End"");";
                 "InInnerTry",
                 "InInnerFinally",   // With exception thrown by Tag("InInnerTry")
                 "InInnerFinally",
+                "InOuterCatch",
                 "AfterInnerTry",
-                // FIXME: "InOuterCatch", should be here
                 "End");
 
             ValidateHasOnlyNoExceptionAndUnknownException(validator, "InInnerFinally");
             validator.TagStates("AfterInnerTry").Should().HaveCount(1).And.ContainSingle(x => HasNoException(x));
-            validator.TagStates("InOuterCatch").Should().HaveCount(0); //FIXME: .HaveCount(1).And.ContainSingle(x => HasUnknownException(x));
+            validator.TagStates("InOuterCatch").Should().HaveCount(1).And.ContainSingle(x => HasUnknownException(x));
             validator.TagStates("End").Should().HaveCount(1).And.ContainSingle(x => HasNoException(x));
         }
 
@@ -551,16 +551,16 @@ Tag(""End"");";
                 "InInnerFinally",
                 "InMiddleFinally",  // With exception thrown by Tag("InInnerTry")
                 "AfterInnerTry",
+                "InOuterCatch",
                 "InMiddleFinally",
                 "AfterMiddleTry",
-                // FIXME: "InOuterCatch", should be here
                 "End");
 
             ValidateHasOnlyNoExceptionAndUnknownException(validator, "InInnerFinally");
             validator.TagStates("AfterInnerTry").Should().HaveCount(1).And.ContainSingle(x => HasNoException(x));
             ValidateHasOnlyNoExceptionAndUnknownException(validator, "InMiddleFinally");
             validator.TagStates("AfterMiddleTry").Should().HaveCount(1).And.ContainSingle(x => HasNoException(x));
-            validator.TagStates("InOuterCatch").Should().HaveCount(0); //FIXME: .HaveCount(1).And.ContainSingle(x => HasUnknownException(x));
+            validator.TagStates("InOuterCatch").Should().HaveCount(1).And.ContainSingle(x => HasUnknownException(x));
             validator.TagStates("End").Should().HaveCount(1).And.ContainSingle(x => HasNoException(x));
         }
 

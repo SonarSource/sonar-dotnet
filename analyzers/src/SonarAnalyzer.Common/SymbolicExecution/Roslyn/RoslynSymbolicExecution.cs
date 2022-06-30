@@ -131,13 +131,6 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
             {
                 return FromFinally(node.FinallyPoint.CreateNext());     // Redirect from finally back to the original place (or outer finally on the same branch)
             }
-            else if (branch.Source.EnclosingRegion.Kind == ControlFlowRegionKind.Finally && node.State.Exception is not null)
-            {
-                var currentTryAndFinally = branch.Source.EnclosingRegion.EnclosingRegion;
-                return currentTryAndFinally.EnclosingRegion(ControlFlowRegionKind.TryAndFinally) is { } outerTryAndFinally
-                    ? CreateNode(cfg.Blocks[outerTryAndFinally.NestedRegion(ControlFlowRegionKind.Finally).FirstBlockOrdinal], null)
-                    : new(cfg.ExitBlock, node.State, null);
-            }
             else
             {
                 return null;    // We don't know where to continue
@@ -240,6 +233,7 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
             {
                 ControlFlowBranchSemantics.Throw => ThrowExceptionType(node.Block.BranchValue),
                 ControlFlowBranchSemantics.Rethrow => node.State.Exception,
+                ControlFlowBranchSemantics.StructuredExceptionHandling when node.FinallyPoint is null => node.State.Exception,  // Exiting 'finally' with exception
                 _ => null
             };
 
