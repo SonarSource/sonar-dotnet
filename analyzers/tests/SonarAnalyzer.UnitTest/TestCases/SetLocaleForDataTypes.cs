@@ -2,6 +2,7 @@
 using System.Data;
 using System.Globalization;
 
+
 namespace Tests.Diagnostics
 {
     class Program
@@ -26,6 +27,8 @@ namespace Tests.Diagnostics
 
             DataTable dataTable2;
             dataTable2 = new DataTable { Locale = CultureInfo.InvariantCulture };
+
+            var fooBar = new FooBar(new DataTable()); // FN
         }
 
         void Bar(DataColumn column)
@@ -87,4 +90,10 @@ namespace Tests.Diagnostics
             Init(datatable);
         }
     }
+
+    public class FooBar
+    {
+        public FooBar(DataTable datatable) { }
+    }
+
 }
