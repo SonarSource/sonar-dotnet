@@ -45,7 +45,7 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
             operation.Instance.Kind switch
             {
                 OperationKindEx.ArrayElementReference => FromOperation(IArrayElementReferenceOperationWrapper.FromOperation(operation.Instance)),
-                OperationKindEx.Conversion => ConversionExceptionCandidate(operation),
+                OperationKindEx.Conversion => FromConversion(operation),
                 OperationKindEx.DynamicIndexerAccess => new ExceptionState(typeCatalog.SystemIndexOutOfRangeException),
                 OperationKindEx.DynamicInvocation => ExceptionState.UnknownException,      // This raises is Microsoft.CSharp.RuntimeBinder.RuntimeBinderException that we can't access.
                 OperationKindEx.DynamicMemberReference => ExceptionState.UnknownException, // This raises is Microsoft.CSharp.RuntimeBinder.RuntimeBinderException that we can't access.
@@ -64,10 +64,7 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
                 ? new ExceptionState(typeCatalog.SystemArgumentOutOfRangeException)
                 : new ExceptionState(typeCatalog.SystemIndexOutOfRangeException);
 
-        private ExceptionState FromOperation(IMemberReferenceOperationWrapper reference) =>
-            reference.IsStaticOrThis() ? null : new ExceptionState(typeCatalog.SystemNullReferenceException);
-
-        private ExceptionState ConversionExceptionCandidate(IOperationWrapperSonar operation)
+        private ExceptionState FromConversion(IOperationWrapperSonar operation)
         {
             if (operation.IsImplicit)
             {
@@ -80,7 +77,10 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
                        : new ExceptionState(typeCatalog.SystemInvalidCastException);
         }
 
-        private ExceptionState FromOperation(IInvocationOperationWrapper invocation) =>
+        private ExceptionState FromOperation(IMemberReferenceOperationWrapper reference) =>
+            reference.IsStaticOrThis() ? null : new ExceptionState(typeCatalog.SystemNullReferenceException);
+
+        private static ExceptionState FromOperation(IInvocationOperationWrapper invocation) =>
             IsMonitorExit(invocation)
             || IsLockRelease(invocation)
             ? null
