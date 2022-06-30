@@ -124,8 +124,8 @@ namespace SonarAnalyzer.Extensions
         {
             var thisSide = node.Ancestors()
                 .TakeWhile(x => x.IsAnyKind(
-                    SyntaxKindEx.TupleExpression,
                     SyntaxKind.Argument,
+                    SyntaxKindEx.TupleExpression,
                     SyntaxKindEx.SingleVariableDesignation,
                     SyntaxKindEx.ParenthesizedVariableDesignation,
                     SyntaxKindEx.DiscardDesignation,
