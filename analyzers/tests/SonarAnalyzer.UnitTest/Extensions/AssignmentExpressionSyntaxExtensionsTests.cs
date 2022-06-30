@@ -384,6 +384,8 @@ namespace SonarAnalyzer.UnitTest.Extensions
         [DataRow("var (a, b) = (1, 2);", "a", "b")]
         [DataRow("var (a, _) = (1, 2);", "a")]
         [DataRow("var (_, _) = (1, 2);")]
+        // Mixed
+        [DataRow("var (a, (var b, var c)) = (1, (2, 3));", "a", "var b", "var c")]
         public void AssignmentTargets_DeconstructTargets(string assignment, params string[] expectedTargets)
         {
             var allTargets = ParseAssignmentExpression(assignment).AssignmentTargets();
@@ -425,6 +427,7 @@ public class C
         {code}
     }}
 }}");
+            syntaxTree.GetDiagnostics().Should().BeEmpty();
             return syntaxTree.GetRoot().DescendantNodesAndSelf().OfType<AssignmentExpressionSyntax>().Single();
         }
 
