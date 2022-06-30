@@ -130,7 +130,7 @@ namespace SonarAnalyzer.Extensions
                     };
                     if (TupleExpressionSyntaxWrapper.IsInstance(otherSide) && (TupleExpressionSyntaxWrapper)otherSide is { } otherTuple)
                     {
-                        return FindMatchingTupleElement(indexAndCount, otherTuple);
+                        return FindMatchingTupleArgument(indexAndCount, otherTuple);
                     }
                     else if (DeclarationExpressionSyntaxWrapper.IsInstance(otherSide) && (DeclarationExpressionSyntaxWrapper)otherSide is { } otherDesignation)
                     {
@@ -167,9 +167,9 @@ namespace SonarAnalyzer.Extensions
                 return indexAndCount;
             }
 
-            static SyntaxNode FindMatchingTupleElement(Stack<IndexCountPair> indexAndCount, TupleExpressionSyntaxWrapper tuple)
+            static SyntaxNode FindMatchingTupleArgument(Stack<IndexCountPair> indexAndCount, TupleExpressionSyntaxWrapper tuple)
             {
-                SyntaxNode expression = null;
+                SyntaxNode argumentExpression = null;
                 while (indexAndCount.Count > 0)
                 {
                     var currentIndex = indexAndCount.Pop();
@@ -177,7 +177,7 @@ namespace SonarAnalyzer.Extensions
                     var expectedCount = currentIndex.Item2;
                     if (tuple.Arguments.Count == expectedCount)
                     {
-                        expression = tuple.Arguments[expectedIndex].Expression;
+                        argumentExpression = tuple.Arguments[expectedIndex].Expression;
                     }
                     else
                     {
@@ -185,9 +185,9 @@ namespace SonarAnalyzer.Extensions
                     }
                     if (indexAndCount.Count > 0)
                     {
-                        if (TupleExpressionSyntaxWrapper.IsInstance(expression))
+                        if (TupleExpressionSyntaxWrapper.IsInstance(argumentExpression))
                         {
-                            tuple = (TupleExpressionSyntaxWrapper)expression;
+                            tuple = (TupleExpressionSyntaxWrapper)argumentExpression;
                         }
                         else
                         {
@@ -196,12 +196,12 @@ namespace SonarAnalyzer.Extensions
                     }
                 }
 
-                return expression;
+                return argumentExpression;
             }
 
             static SyntaxNode FindMatchingDesignationElement(Stack<IndexCountPair> indexAndCount, DeclarationExpressionSyntaxWrapper declaration)
             {
-                SyntaxNode expression = null;
+                SyntaxNode designation = null;
                 if (ParenthesizedVariableDesignationSyntaxWrapper.IsInstance(declaration.Designation) && (ParenthesizedVariableDesignationSyntaxWrapper)declaration.Designation is { } designations)
                 {
                     while (indexAndCount.Count > 0)
@@ -211,7 +211,7 @@ namespace SonarAnalyzer.Extensions
                         var expectedCount = currentIndex.Item2;
                         if (designations.Variables.Count == expectedCount)
                         {
-                            expression = designations.Variables[expectedIndex];
+                            designation = designations.Variables[expectedIndex];
                         }
                         else
                         {
@@ -219,9 +219,9 @@ namespace SonarAnalyzer.Extensions
                         }
                         if (indexAndCount.Count > 0)
                         {
-                            if (ParenthesizedVariableDesignationSyntaxWrapper.IsInstance(expression))
+                            if (ParenthesizedVariableDesignationSyntaxWrapper.IsInstance(designation))
                             {
-                                designations = (ParenthesizedVariableDesignationSyntaxWrapper)expression;
+                                designations = (ParenthesizedVariableDesignationSyntaxWrapper)designation;
                             }
                             else
                             {
@@ -230,7 +230,7 @@ namespace SonarAnalyzer.Extensions
                         }
                     }
                 }
-                return expression;
+                return designation;
             }
         }
 
