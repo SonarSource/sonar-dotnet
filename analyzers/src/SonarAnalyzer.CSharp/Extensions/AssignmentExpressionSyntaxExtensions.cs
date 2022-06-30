@@ -120,9 +120,7 @@ namespace SonarAnalyzer.Extensions
         /// (var a, var r) = (1, x);
         /// </code>
         /// </summary>
-        /// <param name="node"></param>
-        /// <returns></returns>
-        public static SyntaxNode FindAssignmentTupleComplement(this SyntaxNode node)
+        public static SyntaxNode FindAssignmentComplement(this SyntaxNode node)
         {
             var thisSide = node.Ancestors()
                 .TakeWhile(x => x.IsAnyKind(

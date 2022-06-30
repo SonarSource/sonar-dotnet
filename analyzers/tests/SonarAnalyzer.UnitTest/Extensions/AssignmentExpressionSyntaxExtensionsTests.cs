@@ -499,7 +499,7 @@ public class C
                                         SyntaxKindEx.ParenthesizedVariableDesignation,
                                         SyntaxKind.Argument));
             syntaxTree.GetDiagnostics().Should().BeEmpty();
-            var target = argument.FindAssignmentTupleComplement();
+            var target = argument.FindAssignmentComplement();
             if (expectedNode is null)
             {
                 target.Should().BeNull();
