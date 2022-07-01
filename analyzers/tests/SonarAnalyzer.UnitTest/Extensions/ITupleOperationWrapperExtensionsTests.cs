@@ -39,21 +39,17 @@ namespace SonarAnalyzer.UnitTest.Extensions
                  .WithOptions(new CSharpCompilationOptions(OutputKind.DynamicallyLinkedLibrary));
             compilation.GetDiagnostics().Should().BeEmpty();
             var semanticModel = compilation.GetSemanticModel(syntaxTree);
-            var tupleExpression = syntaxTree.GetRoot().DescendantNodesAndSelf().First(x => x.IsAnyKind(SyntaxKind.TupleExpression, SyntaxKindEx.ParenthesizedVariableDesignation));
-            var tupleOperation = ITupleOperationWrapper.FromOperation(semanticModel.GetOperation(tupleExpression));
-            return tupleOperation;
+            var tupleExpression = syntaxTree.GetRoot().DescendantNodes().First(x => x.IsAnyKind(SyntaxKind.TupleExpression, SyntaxKindEx.ParenthesizedVariableDesignation));
+            return ITupleOperationWrapper.FromOperation(semanticModel.GetOperation(tupleExpression));
         }
 
         private static string WrapInMethod(string code) =>
-$@"
-public class C
+$@"public class C
 {{
-    public int M()
+    public void M()
     {{
         {code};
-        return 0;
     }}
-}}
-";
+}}";
     }
 }
