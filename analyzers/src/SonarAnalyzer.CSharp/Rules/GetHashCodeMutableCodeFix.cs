@@ -70,10 +70,8 @@ namespace SonarAnalyzer.Rules.CSharp
                 context.Diagnostics);
         }
 
-        private async Task<FieldDeclarationSyntax> GetFieldDeclarationSyntaxAsync(SemanticModel semanticModel,
-            IdentifierNameSyntax identifierName, CancellationToken cancellationToken)
+        private async Task<FieldDeclarationSyntax> GetFieldDeclarationSyntaxAsync(SemanticModel semanticModel, IdentifierNameSyntax identifierName, CancellationToken cancel)
         {
-
             if (!(semanticModel.GetSymbolInfo(identifierName).Symbol is IFieldSymbol fieldSymbol) ||
                 !fieldSymbol.DeclaringSyntaxReferences.Any())
             {
@@ -81,7 +79,7 @@ namespace SonarAnalyzer.Rules.CSharp
             }
 
             var reference = await fieldSymbol.DeclaringSyntaxReferences.First()
-                .GetSyntaxAsync(cancellationToken)
+                .GetSyntaxAsync(cancel)
                 .ConfigureAwait(false);
             var fieldDeclaration = (FieldDeclarationSyntax)reference.Parent.Parent;
 
@@ -93,10 +91,9 @@ namespace SonarAnalyzer.Rules.CSharp
             return fieldDeclaration;
         }
 
-        private async Task<Document> AddReadonlyToFieldDeclarationsAsync(Document document, CancellationToken cancellationToken,
-            IEnumerable<FieldDeclarationSyntax> fieldDeclarations)
+        private async Task<Document> AddReadonlyToFieldDeclarationsAsync(Document document, CancellationToken cancel, IEnumerable<FieldDeclarationSyntax> fieldDeclarations)
         {
-            var editor = await DocumentEditor.CreateAsync(document, cancellationToken);
+            var editor = await DocumentEditor.CreateAsync(document, cancel);
 
             foreach (var fieldDeclaration in fieldDeclarations)
             {

@@ -31,8 +31,8 @@ namespace SonarAnalyzer.Extensions
     {
         private static readonly ControlFlowGraphCache CfgCache = new();
 
-        public static ControlFlowGraph CreateCfg(this SyntaxNode block, SemanticModel model, CancellationToken cancellationToken) =>
-            CfgCache.FindOrCreate(block, model, cancellationToken);
+        public static ControlFlowGraph CreateCfg(this SyntaxNode block, SemanticModel model, CancellationToken cancel) =>
+            CfgCache.FindOrCreate(block, model, cancel);
 
         public static bool IsPartOfBinaryNegationOrCondition(this SyntaxNode node)
         {

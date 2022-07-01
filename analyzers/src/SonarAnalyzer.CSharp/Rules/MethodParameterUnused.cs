@@ -300,9 +300,9 @@ namespace SonarAnalyzer.Rules.CSharp
                 CapturedVariables = lva.CapturedVariables;
             }
 
-            public LvaResult(ControlFlowGraph cfg, CancellationToken cancellationToken)
+            public LvaResult(ControlFlowGraph cfg, CancellationToken cancel)
             {
-                var lva = new RoslynLiveVariableAnalysis(cfg, cancellationToken);
+                var lva = new RoslynLiveVariableAnalysis(cfg, cancel);
                 LiveInEntryBlock = lva.LiveIn(cfg.EntryBlock).OfType<IParameterSymbol>().ToImmutableArray();
                 CapturedVariables = lva.CapturedVariables;
             }

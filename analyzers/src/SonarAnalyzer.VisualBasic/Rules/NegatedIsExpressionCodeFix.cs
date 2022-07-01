@@ -65,10 +65,9 @@ namespace SonarAnalyzer.Rules.VisualBasic
             return Task.CompletedTask;
         }
 
-        private static async Task<Document> ChangeToIsNotAsync(Document document, UnaryExpressionSyntax unary, BinaryExpressionSyntax isExpression,
-            CancellationToken cancellationToken)
+        private static async Task<Document> ChangeToIsNotAsync(Document document, UnaryExpressionSyntax unary, BinaryExpressionSyntax isExpression, CancellationToken cancel)
         {
-            var root = await document.GetSyntaxRootAsync(cancellationToken).ConfigureAwait(false);
+            var root = await document.GetSyntaxRootAsync(cancel).ConfigureAwait(false);
             var newRoot = root.ReplaceNode(
                 unary,
                 SyntaxFactory.BinaryExpression(

@@ -24,7 +24,7 @@ namespace Tests.Diagnostics
 
     public class CustomAsyncEnumerable<T> : IAsyncEnumerable<T>
     {
-        public IAsyncEnumerator<T> GetAsyncEnumerator(CancellationToken cancellationToken = new CancellationToken())
+        public IAsyncEnumerator<T> GetAsyncEnumerator(CancellationToken cancel = new CancellationToken())
             => throw new System.NotImplementedException();
     }
 

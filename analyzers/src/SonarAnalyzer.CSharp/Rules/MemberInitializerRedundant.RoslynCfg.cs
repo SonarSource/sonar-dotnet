@@ -32,14 +32,14 @@ namespace SonarAnalyzer.Rules.CSharp
         private class RoslynChecker : CfgAllPathValidator
         {
             private readonly ISymbol memberToCheck;
-            private readonly CancellationToken cancellationToken;
+            private readonly CancellationToken cancel;
             private readonly ControlFlowGraph cfg;
 
-            public RoslynChecker(ControlFlowGraph cfg, ISymbol memberToCheck, CancellationToken cancellationToken) : base(cfg)
+            public RoslynChecker(ControlFlowGraph cfg, ISymbol memberToCheck, CancellationToken cancel) : base(cfg)
             {
                 this.cfg = cfg;
                 this.memberToCheck = memberToCheck;
-                this.cancellationToken = cancellationToken;
+                this.cancel = cancel;
             }
 
             // Returns true if the block contains assignment before access
@@ -57,7 +57,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     if (checkReadBeforeWrite && operation.Instance.Kind == OperationKindEx.FlowAnonymousFunction)
                     {
                         var anonymousFunction = IFlowAnonymousFunctionOperationWrapper.FromOperation(operation.Instance);
-                        var anonymousFunctionCfg = controlFlowGraph.GetAnonymousFunctionControlFlowGraph(anonymousFunction, cancellationToken);
+                        var anonymousFunctionCfg = controlFlowGraph.GetAnonymousFunctionControlFlowGraph(anonymousFunction, cancel);
                         if (anonymousFunctionCfg.Blocks.Any(x => ProcessBlock(x, anonymousFunctionCfg, checkReadBeforeWrite)))
                         {
                             return true;

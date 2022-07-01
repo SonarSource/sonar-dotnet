@@ -34,7 +34,7 @@ namespace SonarAnalyzer.Rules
     public abstract class SymbolicExecutionRunnerBase : SonarDiagnosticAnalyzer
     {
         protected abstract ImmutableDictionary<DiagnosticDescriptor, RuleFactory> AllRules { get; }
-        protected abstract ControlFlowGraph CreateCfg(SemanticModel model, SyntaxNode node, CancellationToken cancellationToken);
+        protected abstract ControlFlowGraph CreateCfg(SemanticModel model, SyntaxNode node, CancellationToken cancel);
         protected abstract void AnalyzeSonar(SyntaxNodeAnalysisContext context, bool isTestProject, bool isScannerRun, SyntaxNode body, ISymbol symbol);
 
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => AllRules.Keys.ToImmutableArray();

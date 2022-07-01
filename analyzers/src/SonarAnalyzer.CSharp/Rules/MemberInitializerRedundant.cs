@@ -148,7 +148,7 @@ namespace SonarAnalyzer.Rules.CSharp
         /// Returns true if the member is overwritten without being read in the instance constructor.
         /// Returns false if the member is not set in the constructor, or if it is read before being set.
         /// </summary>
-        private bool IsSymbolFirstSetInCfg(ISymbol classMember, BaseMethodDeclarationSyntax constructorOrInitializer, SemanticModel semanticModel, CancellationToken cancellationToken)
+        private bool IsSymbolFirstSetInCfg(ISymbol classMember, BaseMethodDeclarationSyntax constructorOrInitializer, SemanticModel semanticModel, CancellationToken cancel)
         {
             var body = (CSharpSyntaxNode)constructorOrInitializer.Body ?? constructorOrInitializer.ExpressionBody();
             if (useSonarCfg)
@@ -163,8 +163,8 @@ namespace SonarAnalyzer.Rules.CSharp
             }
             else
             {
-                var cfg = ControlFlowGraph.Create(body.Parent, semanticModel, cancellationToken);
-                var checker = new RoslynChecker(cfg, classMember, cancellationToken);
+                var cfg = ControlFlowGraph.Create(body.Parent, semanticModel, cancel);
+                var checker = new RoslynChecker(cfg, classMember, cancel);
                 return checker.CheckAllPaths();
             }
         }

@@ -34,9 +34,7 @@ namespace SonarAnalyzer.Common
 
         public override string Path { get; }
 
-        public override SourceText GetText(CancellationToken cancellationToken = default(CancellationToken))
-        {
-            return SourceText.From(File.ReadAllText(Path));
-        }
+        public override SourceText GetText(CancellationToken cancel = default) =>
+            SourceText.From(File.ReadAllText(Path));
     }
 }

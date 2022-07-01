@@ -82,18 +82,18 @@ namespace SonarAnalyzer.CFG.Roslyn
             Debug.Assert(ExitBlock.Kind == BasicBlockKind.Exit, "Roslyn CFG Exit block is not the last one");
         }
 
-        public static ControlFlowGraph Create(SyntaxNode node, SemanticModel semanticModel, CancellationToken cancellationToken) =>
+        public static ControlFlowGraph Create(SyntaxNode node, SemanticModel semanticModel, CancellationToken cancel) =>
             IsAvailable
-                ? Wrap(CreateMethod.Invoke(null, new object[] { node, semanticModel, cancellationToken }))
+                ? Wrap(CreateMethod.Invoke(null, new object[] { node, semanticModel, cancel }))
                 : throw new InvalidOperationException("CFG is not available under this version of Roslyn compiler.");
 
-        public ControlFlowGraph GetAnonymousFunctionControlFlowGraph(IFlowAnonymousFunctionOperationWrapper anonymousFunction, CancellationToken cancellationToken) =>
-            GetAnonymousFunctionControlFlowGraphMethod.Invoke(instance, new object[] { anonymousFunction.WrappedOperation, cancellationToken }) is { } anonymousFunctionCfg
+        public ControlFlowGraph GetAnonymousFunctionControlFlowGraph(IFlowAnonymousFunctionOperationWrapper anonymousFunction, CancellationToken cancel) =>
+            GetAnonymousFunctionControlFlowGraphMethod.Invoke(instance, new object[] { anonymousFunction.WrappedOperation, cancel }) is { } anonymousFunctionCfg
                 ? Wrap(anonymousFunctionCfg)
                 : null;
 
-        public ControlFlowGraph GetLocalFunctionControlFlowGraph(IMethodSymbol localFunction, CancellationToken cancellationToken) =>
-            GetLocalFunctionControlFlowGraphMethod.Invoke(instance, new object[] { localFunction, cancellationToken }) is { } localFunctionCfg
+        public ControlFlowGraph GetLocalFunctionControlFlowGraph(IMethodSymbol localFunction, CancellationToken cancel) =>
+            GetLocalFunctionControlFlowGraphMethod.Invoke(instance, new object[] { localFunction, cancel }) is { } localFunctionCfg
                 ? Wrap(localFunctionCfg)
                 : null;
 

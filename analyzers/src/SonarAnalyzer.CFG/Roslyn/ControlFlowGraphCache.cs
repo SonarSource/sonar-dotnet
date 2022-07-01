@@ -36,13 +36,13 @@ namespace SonarAnalyzer.CFG.Roslyn
         protected abstract bool HasNestedCfg(SyntaxNode node);
         protected abstract bool IsLocalFunction(SyntaxNode node);
 
-        public ControlFlowGraph FindOrCreate(SyntaxNode declaration, SemanticModel model, CancellationToken cancellationToken)
+        public ControlFlowGraph FindOrCreate(SyntaxNode declaration, SemanticModel model, CancellationToken cancel)
         {
             var rootSyntax = model.GetOperation(declaration).RootOperation().Syntax;
             var nodeCache = compilationCache.GetValue(model.Compilation, x => new());
             if (!nodeCache.TryGetValue(rootSyntax, out var wrapper))
             {
-                wrapper = new(ControlFlowGraph.Create(rootSyntax, model, cancellationToken));
+                wrapper = new(ControlFlowGraph.Create(rootSyntax, model, cancel));
                 nodeCache[rootSyntax] = wrapper;
             }
             if (HasNestedCfg(declaration))
@@ -52,11 +52,11 @@ namespace SonarAnalyzer.CFG.Roslyn
                 {
                     if (IsLocalFunction(node))
                     {
-                        wrapper = new(wrapper.Cfg.GetLocalFunctionControlFlowGraph(node, cancellationToken));
+                        wrapper = new(wrapper.Cfg.GetLocalFunctionControlFlowGraph(node, cancel));
                     }
                     else if (wrapper.FlowOperation(node) is { WrappedOperation: not null } flowOperation)
                     {
-                        wrapper = new(wrapper.Cfg.GetAnonymousFunctionControlFlowGraph(flowOperation, cancellationToken));
+                        wrapper = new(wrapper.Cfg.GetAnonymousFunctionControlFlowGraph(flowOperation, cancel));
                     }
                     else if (node == declaration)
                     {
