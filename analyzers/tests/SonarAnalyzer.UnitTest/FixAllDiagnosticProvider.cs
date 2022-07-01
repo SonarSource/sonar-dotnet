@@ -31,13 +31,13 @@ namespace SonarAnalyzer.UnitTest
         public FixAllDiagnosticProvider(IEnumerable<Diagnostic> diagnostics) =>
             this.diagnostics = diagnostics;
 
-        public override Task<IEnumerable<Diagnostic>> GetDocumentDiagnosticsAsync(Document document, CancellationToken cancellationToken) =>
+        public override Task<IEnumerable<Diagnostic>> GetDocumentDiagnosticsAsync(Document document, CancellationToken cancel) =>
             Task.FromResult(diagnostics);
 
-        public override Task<IEnumerable<Diagnostic>> GetAllDiagnosticsAsync(Project project, CancellationToken cancellationToken) =>
+        public override Task<IEnumerable<Diagnostic>> GetAllDiagnosticsAsync(Project project, CancellationToken cancel) =>
             throw new NotImplementedException();
 
-        public override Task<IEnumerable<Diagnostic>> GetProjectDiagnosticsAsync(Project project, CancellationToken cancellationToken) =>
+        public override Task<IEnumerable<Diagnostic>> GetProjectDiagnosticsAsync(Project project, CancellationToken cancel) =>
             throw new NotImplementedException();
     }
 }

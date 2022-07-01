@@ -40,7 +40,7 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
         private const int MaxOperationVisits = 2;
 
         private readonly ControlFlowGraph cfg;
-        private readonly CancellationToken cancellationToken;
+        private readonly CancellationToken cancel;
         private readonly SymbolicCheckList checks;
         private readonly Queue<ExplodedNode> queue = new();
         private readonly HashSet<ExplodedNode> visited = new();
@@ -48,7 +48,7 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
         private readonly DebugLogger logger = new();
         private readonly ExceptionCandidate exceptionCandidate;
 
-        public RoslynSymbolicExecution(ControlFlowGraph cfg, SymbolicCheck[] checks, CancellationToken cancellationToken)
+        public RoslynSymbolicExecution(ControlFlowGraph cfg, SymbolicCheck[] checks, CancellationToken cancel)
         {
             this.cfg = cfg ?? throw new ArgumentNullException(nameof(cfg));
             if (checks == null || checks.Length == 0)
@@ -56,9 +56,9 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
                 throw new ArgumentException("At least one check is expected", nameof(checks));
             }
             this.checks = new(new[] { new ConstantCheck() }.Concat(checks).ToArray());
-            this.cancellationToken = cancellationToken;
+            this.cancel = cancel;
             exceptionCandidate = new(new IOperationWrapperSonar(cfg.OriginalOperation).SemanticModel.Compilation);
-            lva = new(cfg, cancellationToken);
+            lva = new(cfg, cancel);
             logger.Log(cfg);
         }
 
@@ -76,7 +76,7 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
             queue.Enqueue(new(cfg.EntryBlock, ProgramState.Empty, null));
             while (queue.Any())
             {
-                if (steps++ > MaxStepCount || cancellationToken.IsCancellationRequested)
+                if (steps++ > MaxStepCount || cancel.IsCancellationRequested)
                 {
                     return;
                 }

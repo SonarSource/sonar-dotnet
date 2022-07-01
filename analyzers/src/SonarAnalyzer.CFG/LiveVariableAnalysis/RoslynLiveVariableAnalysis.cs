@@ -36,8 +36,8 @@ namespace SonarAnalyzer.CFG.LiveVariableAnalysis
 
         protected override BasicBlock ExitBlock => Cfg.ExitBlock;
 
-        public RoslynLiveVariableAnalysis(ControlFlowGraph cfg, CancellationToken cancellationToken)
-            : base(cfg, OriginalDeclaration(cfg.OriginalOperation), cancellationToken)
+        public RoslynLiveVariableAnalysis(ControlFlowGraph cfg, CancellationToken cancel)
+            : base(cfg, OriginalDeclaration(cfg.OriginalOperation), cancel)
         {
             foreach (var ordinal in cfg.Blocks.Select(x => x.Ordinal))
             {
@@ -232,7 +232,7 @@ namespace SonarAnalyzer.CFG.LiveVariableAnalysis
             {
                 if (!anonymousFunction.Symbol.IsStatic) // Performance: No need to descent into static
                 {
-                    ProcessCaptured(cfg.GetAnonymousFunctionControlFlowGraph(anonymousFunction, owner.CancellationToken));
+                    ProcessCaptured(cfg.GetAnonymousFunctionControlFlowGraph(anonymousFunction, owner.Cancel));
                 }
             }
 
@@ -267,7 +267,7 @@ namespace SonarAnalyzer.CFG.LiveVariableAnalysis
                 if (HandleLocalFunction(capturedLocalFunctions, method) is { } localFunction)
                 {
                     capturedLocalFunctions.Add(localFunction);
-                    ProcessCaptured(cfg.FindLocalFunctionCfgInScope(localFunction, owner.CancellationToken));
+                    ProcessCaptured(cfg.FindLocalFunctionCfgInScope(localFunction, owner.Cancel));
                 }
             }
 
@@ -276,7 +276,7 @@ namespace SonarAnalyzer.CFG.LiveVariableAnalysis
                 if (HandleLocalFunction(ProcessedLocalFunctions, method) is { } localFunction)
                 {
                     ProcessedLocalFunctions.Add(localFunction);
-                    var localFunctionCfg = cfg.FindLocalFunctionCfgInScope(localFunction, owner.CancellationToken);
+                    var localFunctionCfg = cfg.FindLocalFunctionCfgInScope(localFunction, owner.Cancel);
                     foreach (var block in localFunctionCfg.Blocks.Reverse())    // Simplified approach, ignoring branching and try/catch/finally flows
                     {
                         ProcessBlock(localFunctionCfg, block);

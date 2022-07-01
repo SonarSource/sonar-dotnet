@@ -117,11 +117,14 @@ namespace SonarAnalyzer.Rules.CSharp
             }
         }
 
-        private static async Task<Document> RemoveArgumentsAndAddNecessaryNamesAsync(Document document, ArgumentListSyntax argumentList,
-            IEnumerable<NodeAndSymbol> argumentMappings, List<ArgumentSyntax> argumentsToRemove,
-            SemanticModel semanticModel, CancellationToken cancellationToken)
+        private static async Task<Document> RemoveArgumentsAndAddNecessaryNamesAsync(Document document,
+                                                                                     ArgumentListSyntax argumentList,
+                                                                                     IEnumerable<NodeAndSymbol> argumentMappings,
+                                                                                     List<ArgumentSyntax> argumentsToRemove,
+                                                                                     SemanticModel semanticModel,
+                                                                                     CancellationToken cancel)
         {
-            var root = await document.GetSyntaxRootAsync(cancellationToken).ConfigureAwait(false);
+            var root = await document.GetSyntaxRootAsync(cancel).ConfigureAwait(false);
             var newArgumentList = SyntaxFactory.ArgumentList();
             var alreadyRemovedOne = false;
 
@@ -197,10 +200,9 @@ namespace SonarAnalyzer.Rules.CSharp
                             SyntaxFactory.SeparatedList(paramsArguments.Select(arg => arg.Node.Expression))))));
         }
 
-        private static async Task<Document> RemoveArgumentsAsync(Document document, IEnumerable<ArgumentSyntax> arguments,
-            CancellationToken cancellationToken)
+        private static async Task<Document> RemoveArgumentsAsync(Document document, IEnumerable<ArgumentSyntax> arguments, CancellationToken cancel)
         {
-            var root = await document.GetSyntaxRootAsync(cancellationToken).ConfigureAwait(false);
+            var root = await document.GetSyntaxRootAsync(cancel).ConfigureAwait(false);
             var newRoot = root.RemoveNodes(arguments, SyntaxRemoveOptions.KeepNoTrivia | SyntaxRemoveOptions.AddElasticMarker);
             return document.WithSyntaxRoot(newRoot);
         }

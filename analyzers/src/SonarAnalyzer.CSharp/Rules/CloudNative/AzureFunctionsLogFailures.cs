@@ -94,30 +94,30 @@ namespace SonarAnalyzer.Rules.CSharp
         private sealed class LoggerCallWalker : SafeCSharpSyntaxWalker
         {
             private readonly SemanticModel model;
-            private readonly CancellationToken cancellationToken;
+            private readonly CancellationToken cancel;
             private List<Location> invalidInvocations;
 
             public bool HasValidLoggerCall { get; private set; }
             public IEnumerable<Location> InvalidLoggerInvocationLocations => invalidInvocations;
 
-            public LoggerCallWalker(SemanticModel model, CancellationToken cancellationToken)
+            public LoggerCallWalker(SemanticModel model, CancellationToken cancel)
             {
                 this.model = model;
-                this.cancellationToken = cancellationToken;
+                this.cancel = cancel;
             }
 
             public override void Visit(SyntaxNode node)
             {
                 if (!HasValidLoggerCall)
                 {
-                    cancellationToken.ThrowIfCancellationRequested();
+                    cancel.ThrowIfCancellationRequested();
                     base.Visit(node);
                 }
             }
 
             public override void VisitInvocationExpression(InvocationExpressionSyntax node)
             {
-                if (model.GetSymbolInfo(node, cancellationToken).Symbol is IMethodSymbol { ReceiverType: { } receiver } methodSymbol
+                if (model.GetSymbolInfo(node, cancel).Symbol is IMethodSymbol { ReceiverType: { } receiver } methodSymbol
                     && receiver.DerivesOrImplements(KnownType.Microsoft_Extensions_Logging_ILogger))
                 {
                     if (IsValidLogCall(node, methodSymbol))
@@ -135,7 +135,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
             public override void VisitArgument(ArgumentSyntax node)
             {
-                HasValidLoggerCall = HasValidLoggerCall || model.GetTypeInfo(node.Expression, cancellationToken).Type?.DerivesOrImplements(KnownType.Microsoft_Extensions_Logging_ILogger) is true;
+                HasValidLoggerCall = HasValidLoggerCall || model.GetTypeInfo(node.Expression, cancel).Type?.DerivesOrImplements(KnownType.Microsoft_Extensions_Logging_ILogger) is true;
                 base.VisitArgument(node);
             }
 

@@ -101,8 +101,8 @@ namespace SonarAnalyzer.Rules.CSharp
                 SyntaxKind.ParenthesizedLambdaExpression);
         }
 
-        protected override ControlFlowGraph CreateCfg(SemanticModel model, SyntaxNode node, CancellationToken cancellationToken) =>
-            node.CreateCfg(model, cancellationToken);
+        protected override ControlFlowGraph CreateCfg(SemanticModel model, SyntaxNode node, CancellationToken cancel) =>
+            node.CreateCfg(model, cancel);
 
         protected override void AnalyzeSonar(SyntaxNodeAnalysisContext context, bool isTestProject, bool isScannerRun, SyntaxNode body, ISymbol symbol)
         {
