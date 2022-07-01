@@ -341,10 +341,10 @@ namespace SonarAnalyzer.UnitTest.Extensions
                 });
 
         [DataTestMethod]
+        // Tuples.
         [DataRow("(var a, (x, var b)) = (0, (x++, 1));", "var a | 0", "x | x++", "var b | 1")]
         [DataRow("(var a, (var b, var c, var d), var e) = (0, (1, 2, 3), 4);", "var a | 0", "var b | 1", "var c | 2", "var d | 3", "var e | 4")]
-
-        // Designation. From right to left.
+        // Designation.
         [DataRow("var (a, (b, c)) = (0, (1, 2));", "a | 0", "b | 1", "c | 2")]
         [DataRow("var (a, (b, _)) = (0, (1, 2));", "a | 0", "b | 1", "_ | 2")]
         [DataRow("var (a, _) = (0, (1, 2));", "a | 0", "_ | (1, 2)")]
@@ -363,6 +363,7 @@ namespace SonarAnalyzer.UnitTest.Extensions
         // Mixed.
         [DataRow("(var a, var (b, c)) = (0, (1, 2));", "var a | 0", "b | 1", "c | 2")]
         [DataRow("(var a, var (b, (c, (d, e)))) = (0, (1, (2, (3, 4))));", "var a | 0", "b | 1", "c | 2", "d | 3", "e | 4")]
+        [DataRow("(var a, (var b, var (c, d))) = (0, (1, (2, 3)));", "var a | 0", "var b | 1", "c | 2", "d | 3")]
         public void MapAssignmentArguments_DataTest(string code, params string[] pairs)
         {
             var actualMapping = ParseAssignmentExpression(code).MapAssignmentArguments();
