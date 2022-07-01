@@ -472,6 +472,99 @@ Tag(""AfterOuterFinally"");";
         }
 
         [TestMethod]
+        public void Finally_NestedInCatch()
+        {
+            const string code = @"
+var tag = ""BeforeOuterTry"";
+try
+{
+    try
+    {
+        Tag(""InInnerTry"");
+    }
+    finally
+    {
+        tag = ""InInnerFinally"";
+    }
+    tag = ""AfterInnerTry"";
+}
+catch
+{
+    tag = ""InOuterCatch"";
+}
+Tag(""End"");";
+            var validator = SETestContext.CreateCS(code).Validator;
+            validator.ValidateTagOrder(
+                "BeforeOuterTry",
+                "InInnerTry",
+                "InInnerFinally",   // With exception thrown by Tag("InInnerTry")
+                "InInnerFinally",
+                "InOuterCatch",
+                "AfterInnerTry",
+                "End");
+
+            ValidateHasOnlyNoExceptionAndUnknownException(validator, "InInnerFinally");
+            validator.TagStates("AfterInnerTry").Should().HaveCount(1).And.ContainSingle(x => HasNoException(x));
+            validator.TagStates("InOuterCatch").Should().HaveCount(1).And.ContainSingle(x => HasUnknownException(x));
+            validator.TagStates("End").Should().HaveCount(1).And.ContainSingle(x => HasNoException(x));
+        }
+
+        [TestMethod]
+        public void Finally_NestedInCatch_NestedInFinally()
+        {
+            const string code = @"
+var tag = ""BeforeOuterTry"";
+try
+{
+    tag = ""BeforeMiddleTry"";
+    try
+    {
+        tag = ""BeforeInnerTry"";
+        try
+        {
+            Tag(""InInnerTry"");
+        }
+        finally
+        {
+            tag = ""InInnerFinally"";
+        }
+        tag = ""AfterInnerTry"";
+    }
+    finally
+    {
+        tag = ""InMiddleFinally"";
+    }
+    tag = ""AfterMiddleTry"";
+}
+catch
+{
+    tag = ""InOuterCatch"";
+}
+Tag(""End"");";
+            var validator = SETestContext.CreateCS(code).Validator;
+            validator.ValidateTagOrder(
+                "BeforeOuterTry",
+                "BeforeMiddleTry",
+                "BeforeInnerTry",
+                "InInnerTry",
+                "InInnerFinally",   // With exception thrown by Tag("InInnerTry")
+                "InInnerFinally",
+                "InMiddleFinally",  // With exception thrown by Tag("InInnerTry")
+                "AfterInnerTry",
+                "InOuterCatch",
+                "InMiddleFinally",
+                "AfterMiddleTry",
+                "End");
+
+            ValidateHasOnlyNoExceptionAndUnknownException(validator, "InInnerFinally");
+            validator.TagStates("AfterInnerTry").Should().HaveCount(1).And.ContainSingle(x => HasNoException(x));
+            ValidateHasOnlyNoExceptionAndUnknownException(validator, "InMiddleFinally");
+            validator.TagStates("AfterMiddleTry").Should().HaveCount(1).And.ContainSingle(x => HasNoException(x));
+            validator.TagStates("InOuterCatch").Should().HaveCount(1).And.ContainSingle(x => HasUnknownException(x));
+            validator.TagStates("End").Should().HaveCount(1).And.ContainSingle(x => HasNoException(x));
+        }
+
+        [TestMethod]
         public void TryCatch_ThrowInTry_SingleCatchBlock()
         {
             const string code = @"
