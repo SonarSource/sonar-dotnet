@@ -36,29 +36,21 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
             operation.Instance.Kind switch
             {
                 OperationKindEx.ArrayElementReference => FromOperation(IArrayElementReferenceOperationWrapper.FromOperation(operation.Instance)),
-                OperationKindEx.Conversion => ConversionExceptionCandidate(operation),
+                OperationKindEx.Conversion => FromConversion(operation),
                 OperationKindEx.DynamicIndexerAccess => new ExceptionState(typeCatalog.SystemIndexOutOfRangeException),
                 OperationKindEx.DynamicInvocation => ExceptionState.UnknownException,      // This raises is Microsoft.CSharp.RuntimeBinder.RuntimeBinderException that we can't access.
                 OperationKindEx.DynamicMemberReference => ExceptionState.UnknownException, // This raises is Microsoft.CSharp.RuntimeBinder.RuntimeBinderException that we can't access.
                 OperationKindEx.DynamicObjectCreation => ExceptionState.UnknownException,  // This raises is Microsoft.CSharp.RuntimeBinder.RuntimeBinderException that we can't access.
                 OperationKindEx.EventReference => FromOperation(IMemberReferenceOperationWrapper.FromOperation(operation.Instance)),
                 OperationKindEx.FieldReference => FromOperation(IMemberReferenceOperationWrapper.FromOperation(operation.Instance)),
-                OperationKindEx.Invocation => ExceptionState.UnknownException,
+                OperationKindEx.Invocation => FromOperation(IInvocationOperationWrapper.FromOperation(operation.Instance)),
                 OperationKindEx.MethodReference => FromOperation(IMemberReferenceOperationWrapper.FromOperation(operation.Instance)),
                 OperationKindEx.ObjectCreation => operation.Instance.Type.DerivesFrom(KnownType.System_Exception) ? null : ExceptionState.UnknownException,
                 OperationKindEx.PropertyReference => FromOperation(IMemberReferenceOperationWrapper.FromOperation(operation.Instance)),
                 _ => null
             };
 
-        private ExceptionState FromOperation(IArrayElementReferenceOperationWrapper reference) =>
-            reference.Indices.Any(x => x.Kind == OperationKindEx.Range) // In case of Range, ArgumentOutOfRangeException is raised
-                ? new ExceptionState(typeCatalog.SystemArgumentOutOfRangeException)
-                : new ExceptionState(typeCatalog.SystemIndexOutOfRangeException);
-
-        private ExceptionState FromOperation(IMemberReferenceOperationWrapper reference) =>
-            reference.IsStaticOrThis() ? null : new ExceptionState(typeCatalog.SystemNullReferenceException);
-
-        private ExceptionState ConversionExceptionCandidate(IOperationWrapperSonar operation)
+        private ExceptionState FromConversion(IOperationWrapperSonar operation)
         {
             if (operation.IsImplicit)
             {
@@ -70,5 +62,21 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
                        ? null
                        : new ExceptionState(typeCatalog.SystemInvalidCastException);
         }
+
+        private ExceptionState FromOperation(IArrayElementReferenceOperationWrapper reference) =>
+            reference.Indices.Any(x => x.Kind == OperationKindEx.Range) // In case of Range, ArgumentOutOfRangeException is raised
+                ? new ExceptionState(typeCatalog.SystemArgumentOutOfRangeException)
+                : new ExceptionState(typeCatalog.SystemIndexOutOfRangeException);
+
+        private ExceptionState FromOperation(IMemberReferenceOperationWrapper reference) =>
+            reference.IsStaticOrThis() ? null : new ExceptionState(typeCatalog.SystemNullReferenceException);
+
+        private static ExceptionState FromOperation(IInvocationOperationWrapper invocation) =>
+            // These methods are declared as well-known methods that (usually) do not throw.
+            // Otherwise, we would have FPs because engine would split the flow to happy path with constraints and possible exception path.
+            invocation.IsMonitorExit()      // Needed by S2222
+            || invocation.IsLockRelease()   // Needed by S2222
+            ? null
+            : ExceptionState.UnknownException;
     }
 }
