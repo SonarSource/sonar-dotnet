@@ -80,7 +80,7 @@ namespace SonarAnalyzer.CFG.LiveVariableAnalysis
             }
             while (queue.Any())
             {
-                CancellationToken.ThrowIfCancellationRequested();
+                Cancel.ThrowIfCancellationRequested();
 
                 var block = queue.Dequeue();
                 var liveOut = blockLiveOut[block];
