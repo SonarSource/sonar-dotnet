@@ -26,31 +26,31 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class DeadStoresTest
     {
-        private readonly VerifierBuilder builderSonarCfg = new VerifierBuilder()
+        private readonly VerifierBuilder sonarCfg = new VerifierBuilder()
             .AddAnalyzer(() => new DeadStores(AnalyzerConfiguration.AlwaysEnabledWithSonarCfg))
             .WithOptions(ParseOptionsHelper.FromCSharp8)
             .AddReferences(MetadataReferenceFacade.NETStandard21);
 
-        private readonly VerifierBuilder builderRoslynCfg = new VerifierBuilder<DeadStores>()
+        private readonly VerifierBuilder roslynCfg = new VerifierBuilder<DeadStores>()
             .AddReferences(MetadataReferenceFacade.NETStandard21);
 
         [TestMethod]
         public void DeadStores_SonarCfg() =>
-            builderSonarCfg.AddPaths("DeadStores.SonarCfg.cs").Verify();
+            sonarCfg.AddPaths("DeadStores.SonarCfg.cs").Verify();
 
         [TestMethod]
         public void DeadStores_RoslynCfg() =>
-            builderRoslynCfg.AddPaths("DeadStores.RoslynCfg.cs").WithOptions(ParseOptionsHelper.FromCSharp8).Verify();
+            roslynCfg.AddPaths("DeadStores.RoslynCfg.cs").WithOptions(ParseOptionsHelper.FromCSharp8).Verify();
 
 #if NET
 
         [TestMethod]
         public void DeadStores_CSharp9() =>
-            builderRoslynCfg.AddPaths("DeadStores.CSharp9.cs").WithTopLevelStatements().Verify();
+            roslynCfg.AddPaths("DeadStores.CSharp9.cs").WithTopLevelStatements().Verify();
 
         [TestMethod]
         public void DeadStores_CSharp10() =>
-            builderRoslynCfg.AddPaths("DeadStores.CSharp10.cs").WithTopLevelStatements().WithOptions(ParseOptionsHelper.FromCSharp10).Verify();
+            roslynCfg.AddPaths("DeadStores.CSharp10.cs").WithTopLevelStatements().WithOptions(ParseOptionsHelper.FromCSharp10).Verify();
 
 #endif
 

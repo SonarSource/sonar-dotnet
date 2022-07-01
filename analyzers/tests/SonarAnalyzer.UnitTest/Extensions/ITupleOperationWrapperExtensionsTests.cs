@@ -8,17 +8,18 @@ namespace SonarAnalyzer.UnitTest.Extensions
     public class ITupleOperationWrapperExtensionsTests
     {
         [DataTestMethod]
+        // Tuple expression on the right side of assignment
         [DataRow("_ = (1, 2);", "1", "2")]
         [DataRow("_ = (x: 1, y: 2);", "1", "2")]
         [DataRow("_ = (1, M());", "1", "M()")]
         [DataRow("_ = (1, (2, 3));", "1", "2", "3")]
         [DataRow("_ = (1, (2, 3), 4, (5, (6, 7)));", "1", "2", "3", "4", "5", "6", "7")]
-
+        // Tuple deconstruction on the left side of assignment
         [DataRow("(var a, (var b, var c)) = (1, (2, 3));", "var a", "var b", "var c")]
         [DataRow("(var a, var b) = (1, 2);", "var a", "var b")]
         [DataRow("(var a, _) = (1, 2);", "var a", "_")]
         [DataRow("int a; (a, var b) = (1, M());", "a", "var b")]
-
+        // Tuple declaration expression
         [DataRow("var (a, b) = (1, 2);", "a", "b")]
         [DataRow("var (a, (b, c)) = (1, (2, 3));", "a", "b", "c")]
         [DataRow("var (a, (_, c)) = (1, (2, 3));", "a", "_", "c")]
