@@ -18,11 +18,11 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System.Collections.Immutable;
 using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
-using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Extensions;
 using SonarAnalyzer.Helpers;
@@ -32,9 +32,12 @@ namespace SonarAnalyzer.Rules
 {
     public abstract class StaticFieldWrittenFrom : SonarDiagnosticAnalyzer
     {
+        protected abstract DiagnosticDescriptor Rule { get; }
         protected override bool EnableConcurrentExecution => false;
         protected abstract bool IsValidCodeBlockContext(SyntaxNode node, ISymbol owningSymbol);
         protected abstract string GetDiagnosticMessageArgument(SyntaxNode node, ISymbol owningSymbol, IFieldSymbol field);
+
+        public sealed override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(Rule);
 
         protected sealed override void Initialize(SonarAnalysisContext context) =>
             context.RegisterCodeBlockStartActionInNonGenerated<SyntaxKind>(cbc =>
@@ -52,10 +55,9 @@ namespace SonarAnalyzer.Rules
 
                             foreach (var target in assignment.AssignmentTargets())
                             {
-                                var fieldSymbol = c.SemanticModel.GetSymbolInfo(target).Symbol as IFieldSymbol;
-                                if (fieldSymbol?.IsStatic == true)
+                                if (StaticFieldSymbol(c.SemanticModel, target) is { } fieldSymbol)
                                 {
-                                    locationsForFields.Add(fieldSymbol, target.CreateLocation(assignment.OperatorToken));
+                                    locationsForFields.Add(fieldSymbol, target.CreateLocation(to: assignment.OperatorToken));
                                 }
                             }
                         },
@@ -75,7 +77,7 @@ namespace SonarAnalyzer.Rules
                     cbc.RegisterSyntaxNodeAction(c =>
                         {
                             var unary = (PrefixUnaryExpressionSyntax)c.Node;
-                            CollectLocationOfStaticField(unary.Operand, locationsForFields, c);
+                            CollectLocationOfStaticField(c.SemanticModel, locationsForFields, unary.Operand);
                         },
                         SyntaxKind.PreDecrementExpression,
                         SyntaxKind.PreIncrementExpression);
@@ -83,7 +85,7 @@ namespace SonarAnalyzer.Rules
                     cbc.RegisterSyntaxNodeAction(c =>
                         {
                             var unary = (PostfixUnaryExpressionSyntax)c.Node;
-                            CollectLocationOfStaticField(unary.Operand, locationsForFields, c);
+                            CollectLocationOfStaticField(c.SemanticModel, locationsForFields, unary.Operand);
                         },
                         SyntaxKind.PostDecrementExpression,
                         SyntaxKind.PostIncrementExpression);
@@ -97,19 +99,24 @@ namespace SonarAnalyzer.Rules
                             var message = GetDiagnosticMessageArgument(cbc.CodeBlock, cbc.OwningSymbol, fieldWithLocations.Key);
                             var secondaryLocations = fieldWithLocations.Key.DeclaringSyntaxReferences
                                                                        .Select(x => x.GetSyntax().GetLocation());
-                            c.ReportIssue(Diagnostic.Create(SupportedDiagnostics[0], location,
+                            c.ReportIssue(Diagnostic.Create(Rule, location,
                                 additionalLocations: secondaryLocations,
                                 messageArgs: message));
                         }
                     });
                 });
 
-        private static void CollectLocationOfStaticField(ExpressionSyntax expression, MultiValueDictionary<IFieldSymbol, Location> locationsForFields, SyntaxNodeAnalysisContext context)
+        private static void CollectLocationOfStaticField(SemanticModel semanticModel, MultiValueDictionary<IFieldSymbol, Location> locationsForFields, ExpressionSyntax expression)
         {
-            if (context.SemanticModel.GetSymbolInfo(expression) is { Symbol: IFieldSymbol { IsStatic: true } fieldSymbol })
+            if (StaticFieldSymbol(semanticModel, expression) is { } fieldSymbol)
             {
                 locationsForFields.Add(fieldSymbol, expression.GetLocation());
             }
         }
+
+        private static IFieldSymbol StaticFieldSymbol(SemanticModel semanticModel, SyntaxNode node) =>
+            semanticModel.GetSymbolInfo(node) is { Symbol: IFieldSymbol { IsStatic: true } fieldSymbol }
+                ? fieldSymbol
+                : null;
     }
 }
