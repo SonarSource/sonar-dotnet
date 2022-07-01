@@ -94,14 +94,11 @@ namespace SonarAnalyzer.Rules
                     {
                         foreach (var fieldWithLocations in locationsForFields)
                         {
-                            var firstPosition = fieldWithLocations.Value.Select(loc => loc.SourceSpan.Start).Min();
-                            var location = fieldWithLocations.Value.First(loc => loc.SourceSpan.Start == firstPosition);
+                            var firstPosition = fieldWithLocations.Value.Select(x => x.SourceSpan.Start).Min();
+                            var location = fieldWithLocations.Value.First(x => x.SourceSpan.Start == firstPosition);
                             var message = GetDiagnosticMessageArgument(cbc.CodeBlock, cbc.OwningSymbol, fieldWithLocations.Key);
-                            var secondaryLocations = fieldWithLocations.Key.DeclaringSyntaxReferences
-                                                                       .Select(x => x.GetSyntax().GetLocation());
-                            c.ReportIssue(Diagnostic.Create(Rule, location,
-                                additionalLocations: secondaryLocations,
-                                messageArgs: message));
+                            var secondaryLocations = fieldWithLocations.Key.DeclaringSyntaxReferences.Select(x => x.GetSyntax().GetLocation());
+                            c.ReportIssue(Diagnostic.Create(Rule, location, secondaryLocations, message));
                         }
                     });
                 });
