@@ -159,7 +159,7 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn.RuleChecks
                 {
                     return ProcessMonitorEnter(context, invocation);
                 }
-                else if (ExceptionCandidate.IsMonitorExit(invocation))
+                else if (invocation.IsMonitorExit())    // Same condition also needs to be in ExceptionCandidate
                 {
                     return ProcessMonitorExit(context, invocation);
                 }
@@ -170,7 +170,7 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn.RuleChecks
                 {
                     return ProcessInvocationInstanceAcquireLock(context, invocation);
                 }
-                else if (ExceptionCandidate.IsLockRelease(invocation))
+                else if (invocation.IsLockRelease())    // Same condition also needs to be in ExceptionCandidate
                 {
                     return ProcessInvocationInstanceReleaseLock(context, invocation);
                 }

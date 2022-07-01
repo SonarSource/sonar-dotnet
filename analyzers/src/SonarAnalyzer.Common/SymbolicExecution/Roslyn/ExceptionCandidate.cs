@@ -32,15 +32,6 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
         public ExceptionCandidate(Compilation compilation) =>
             typeCatalog = new TypeCatalog(compilation);
 
-        public static bool IsMonitorExit(IInvocationOperationWrapper invocation) =>
-            invocation.TargetMethod.Is(KnownType.System_Threading_Monitor, "Exit");
-
-        public static bool IsLockRelease(IInvocationOperationWrapper invocation) =>
-            invocation.TargetMethod.IsAny(KnownType.System_Threading_ReaderWriterLock, "ReleaseLock", "ReleaseReaderLock", "ReleaseWriterLock")
-            || invocation.TargetMethod.IsAny(KnownType.System_Threading_ReaderWriterLockSlim, "ExitReadLock", "ExitWriteLock", "ExitUpgradeableReadLock")
-            || invocation.TargetMethod.Is(KnownType.System_Threading_Mutex, "ReleaseMutex")
-            || invocation.TargetMethod.Is(KnownType.System_Threading_SpinLock, "Exit");
-
         public ExceptionState FromOperation(IOperationWrapperSonar operation) =>
             operation.Instance.Kind switch
             {
@@ -83,8 +74,8 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
         private static ExceptionState FromOperation(IInvocationOperationWrapper invocation) =>
             // These methods are declared as well-known methods that (usually) do not throw.
             // Otherwise, we would have FPs because engine would split the flow to happy path with constraints and possible exception path.
-            IsMonitorExit(invocation)
-            || IsLockRelease(invocation)
+            invocation.IsMonitorExit()      // Needed by S2222
+            || invocation.IsLockRelease()   // Needed by S2222
             ? null
             : ExceptionState.UnknownException;
     }
