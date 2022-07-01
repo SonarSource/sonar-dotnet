@@ -28,7 +28,7 @@ namespace SonarAnalyzer.Extensions
     {
         public static ImmutableArray<IOperation> AllElements(this ITupleOperationWrapper tuple)
         {
-            var arrayBuilder = ImmutableArray.CreateBuilder<IOperation>(tuple.Elements.Length);
+            var arrayBuilder = ImmutableArray.CreateBuilder<IOperation>();
             CollectTupleElements(tuple);
             return arrayBuilder.ToImmutableArray();
 
