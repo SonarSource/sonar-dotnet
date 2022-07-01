@@ -22,6 +22,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Linq;
+using System.Threading;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
@@ -108,7 +109,7 @@ namespace SonarAnalyzer.Rules.CSharp
                             return true;
                         }
 
-                        return IsSymbolFirstSetInCfg(memberSymbol, constructor.Node, constructor.Model);
+                        return IsSymbolFirstSetInCfg(memberSymbol, constructor.Node, constructor.Model, c.CancellationToken);
                     }))
                 {
                     c.ReportIssue(Diagnostic.Create(Rule, initializedMembers[memberSymbol].GetLocation(), InstanceMemberMessage));
@@ -136,7 +137,7 @@ namespace SonarAnalyzer.Rules.CSharp
             {
                 // there can be only one static constructor
                 // all module initializers are executed when the type is created, so it is enough if ANY initializes the member
-                if (initializerDeclarations.Any(x => IsSymbolFirstSetInCfg(memberSymbol, x.Node, x.Model)))
+                if (initializerDeclarations.Any(x => IsSymbolFirstSetInCfg(memberSymbol, x.Node, x.Model, c.CancellationToken)))
                 {
                     c.ReportIssue(Diagnostic.Create(Rule, initializedMembers[memberSymbol].GetLocation(), StaticMemberMessage));
                 }
@@ -147,7 +148,7 @@ namespace SonarAnalyzer.Rules.CSharp
         /// Returns true if the member is overwritten without being read in the instance constructor.
         /// Returns false if the member is not set in the constructor, or if it is read before being set.
         /// </summary>
-        private bool IsSymbolFirstSetInCfg(ISymbol classMember, BaseMethodDeclarationSyntax constructorOrInitializer, SemanticModel semanticModel)
+        private bool IsSymbolFirstSetInCfg(ISymbol classMember, BaseMethodDeclarationSyntax constructorOrInitializer, SemanticModel semanticModel, CancellationToken cancellationToken)
         {
             var body = (CSharpSyntaxNode)constructorOrInitializer.Body ?? constructorOrInitializer.ExpressionBody();
             if (useSonarCfg)
@@ -162,8 +163,8 @@ namespace SonarAnalyzer.Rules.CSharp
             }
             else
             {
-                var cfg = ControlFlowGraph.Create(body.Parent, semanticModel);
-                var checker = new RoslynChecker(cfg, classMember);
+                var cfg = ControlFlowGraph.Create(body.Parent, semanticModel, cancellationToken);
+                var checker = new RoslynChecker(cfg, classMember, cancellationToken);
                 return checker.CheckAllPaths();
             }
         }

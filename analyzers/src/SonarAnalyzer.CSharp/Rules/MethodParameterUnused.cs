@@ -21,6 +21,7 @@
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Linq;
+using System.Threading;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
@@ -167,8 +168,8 @@ namespace SonarAnalyzer.Rules.CSharp
             }
             else
             {
-                return body.CreateCfg(declaration.Context.SemanticModel) is { } cfg
-                    ? new LvaResult(cfg)
+                return body.CreateCfg(declaration.Context.SemanticModel, declaration.Context.CancellationToken) is { } cfg
+                    ? new LvaResult(cfg, declaration.Context.CancellationToken)
                     : null;
             }
         }
@@ -294,14 +295,14 @@ namespace SonarAnalyzer.Rules.CSharp
 
             public LvaResult(MethodContext declaration, IControlFlowGraph cfg)
             {
-                var lva = new SonarCSharpLiveVariableAnalysis(cfg, declaration.Symbol, declaration.Context.SemanticModel);
+                var lva = new SonarCSharpLiveVariableAnalysis(cfg, declaration.Symbol, declaration.Context.SemanticModel, declaration.Context.CancellationToken);
                 LiveInEntryBlock = lva.LiveIn(cfg.EntryBlock).OfType<IParameterSymbol>().ToImmutableArray();
                 CapturedVariables = lva.CapturedVariables;
             }
 
-            public LvaResult(ControlFlowGraph cfg)
+            public LvaResult(ControlFlowGraph cfg, CancellationToken cancellationToken)
             {
-                var lva = new RoslynLiveVariableAnalysis(cfg);
+                var lva = new RoslynLiveVariableAnalysis(cfg, cancellationToken);
                 LiveInEntryBlock = lva.LiveIn(cfg.EntryBlock).OfType<IParameterSymbol>().ToImmutableArray();
                 CapturedVariables = lva.CapturedVariables;
             }

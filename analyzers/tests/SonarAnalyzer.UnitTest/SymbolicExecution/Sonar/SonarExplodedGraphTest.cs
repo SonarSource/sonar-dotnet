@@ -1539,7 +1539,7 @@ namespace Namespace
                 MainMethodSymbol = tuple.Model.GetDeclaredSymbol(MainMethod);
                 var methodBody = (CSharpSyntaxNode)MainMethod.Body ?? MainMethod.ExpressionBody;
                 ControlFlowGraph = CSharpControlFlowGraph.Create(methodBody, tuple.Model);
-                LiveVariableAnalysis = new SonarCSharpLiveVariableAnalysis(ControlFlowGraph, MainMethodSymbol, tuple.Model);
+                LiveVariableAnalysis = new SonarCSharpLiveVariableAnalysis(ControlFlowGraph, MainMethodSymbol, tuple.Model, default);
                 ExplodedGraph = new SonarExplodedGraph(ControlFlowGraph, MainMethodSymbol, tuple.Model, LiveVariableAnalysis);
                 ExplodedGraph.InstructionProcessed += (sender, args) => { NumberOfProcessedInstructions++; };
                 ExplodedGraph.ExplorationEnded += (sender, args) => { ExplorationEnded = true; };

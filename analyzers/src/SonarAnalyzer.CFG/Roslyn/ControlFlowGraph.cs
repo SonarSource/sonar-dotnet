@@ -82,18 +82,18 @@ namespace SonarAnalyzer.CFG.Roslyn
             Debug.Assert(ExitBlock.Kind == BasicBlockKind.Exit, "Roslyn CFG Exit block is not the last one");
         }
 
-        public static ControlFlowGraph Create(SyntaxNode node, SemanticModel semanticModel) =>
+        public static ControlFlowGraph Create(SyntaxNode node, SemanticModel semanticModel, CancellationToken cancellationToken) =>
             IsAvailable
-                ? Wrap(CreateMethod.Invoke(null, new object[] { node, semanticModel, CancellationToken.None }))
+                ? Wrap(CreateMethod.Invoke(null, new object[] { node, semanticModel, cancellationToken }))
                 : throw new InvalidOperationException("CFG is not available under this version of Roslyn compiler.");
 
-        public ControlFlowGraph GetAnonymousFunctionControlFlowGraph(IFlowAnonymousFunctionOperationWrapper anonymousFunction) =>
-            GetAnonymousFunctionControlFlowGraphMethod.Invoke(instance, new object[] { anonymousFunction.WrappedOperation, CancellationToken.None }) is { } anonymousFunctionCfg
+        public ControlFlowGraph GetAnonymousFunctionControlFlowGraph(IFlowAnonymousFunctionOperationWrapper anonymousFunction, CancellationToken cancellationToken) =>
+            GetAnonymousFunctionControlFlowGraphMethod.Invoke(instance, new object[] { anonymousFunction.WrappedOperation, cancellationToken }) is { } anonymousFunctionCfg
                 ? Wrap(anonymousFunctionCfg)
                 : null;
 
-        public ControlFlowGraph GetLocalFunctionControlFlowGraph(IMethodSymbol localFunction) =>
-            GetLocalFunctionControlFlowGraphMethod.Invoke(instance, new object[] { localFunction, CancellationToken.None }) is { } localFunctionCfg
+        public ControlFlowGraph GetLocalFunctionControlFlowGraph(IMethodSymbol localFunction, CancellationToken cancellationToken) =>
+            GetLocalFunctionControlFlowGraphMethod.Invoke(instance, new object[] { localFunction, cancellationToken }) is { } localFunctionCfg
                 ? Wrap(localFunctionCfg)
                 : null;
 

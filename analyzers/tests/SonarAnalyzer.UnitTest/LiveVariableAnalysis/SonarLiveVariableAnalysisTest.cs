@@ -646,7 +646,7 @@ public class Sample
                 }
                 Cfg = CSharpControlFlowGraph.Create(body, model);
                 Console.WriteLine(CfgSerializer.Serialize(Cfg));
-                Lva = new SonarCSharpLiveVariableAnalysis(Cfg, symbol, model);
+                Lva = new SonarCSharpLiveVariableAnalysis(Cfg, symbol, model, default);
             }
 
             public Block Block<TBlock>(string withInstruction = null) where TBlock : Block =>

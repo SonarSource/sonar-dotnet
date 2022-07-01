@@ -1042,15 +1042,15 @@ End Class";
                 Console.WriteLine(Separator);
                 Console.WriteLine(CfgSerializer.Serialize(Cfg));
                 Console.WriteLine(Separator);
-                Lva = new RoslynLiveVariableAnalysis(Cfg);
+                Lva = new RoslynLiveVariableAnalysis(Cfg, default);
             }
 
             public Context(string code, SyntaxKind syntaxKind)
             {
                 var (tree, model) = TestHelper.Compile(code, false, AnalyzerLanguage.CSharp);
                 var node = tree.GetRoot().DescendantNodes().First(x => x.RawKind == (int)syntaxKind);
-                Cfg = node.CreateCfg(model);
-                Lva = new RoslynLiveVariableAnalysis(Cfg);
+                Cfg = node.CreateCfg(model, default);
+                Lva = new RoslynLiveVariableAnalysis(Cfg, default);
             }
 
             public void ValidateAllEmpty()

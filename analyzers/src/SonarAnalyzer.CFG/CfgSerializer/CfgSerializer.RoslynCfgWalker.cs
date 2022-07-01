@@ -33,7 +33,7 @@ namespace SonarAnalyzer.CFG
         private class RoslynCfgWalker
         {
             private readonly DotWriter writer;
-            private readonly HashSet<BasicBlock> visited = new HashSet<BasicBlock>();
+            private readonly HashSet<BasicBlock> visited = new();
             private readonly RoslynCfgIdProvider cfgIdProvider;
             private readonly int cfgId;
 
@@ -70,12 +70,12 @@ namespace SonarAnalyzer.CFG
                 }
                 foreach (var localFunction in cfg.LocalFunctions)
                 {
-                    var localFunctionCfg = cfg.GetLocalFunctionControlFlowGraph(localFunction);
+                    var localFunctionCfg = cfg.GetLocalFunctionControlFlowGraph(localFunction, default);
                     new RoslynCfgWalker(writer, cfgIdProvider).VisitSubGraph(localFunctionCfg, $"{titlePrefix}.{localFunction.Name}");
                 }
                 foreach (var anonymousFunction in AnonymousFunctions(cfg))
                 {
-                    var anonymousFunctionCfg = cfg.GetAnonymousFunctionControlFlowGraph(anonymousFunction);
+                    var anonymousFunctionCfg = cfg.GetAnonymousFunctionControlFlowGraph(anonymousFunction, default);
                     new RoslynCfgWalker(writer, cfgIdProvider).VisitSubGraph(anonymousFunctionCfg, $"{titlePrefix}.anonymous");
                 }
             }

@@ -43,8 +43,8 @@ namespace SonarAnalyzer.Rules.CSharp
         private const string MessageFormat = "Remove this useless assignment to local variable '{0}'.";
 
         private static readonly DiagnosticDescriptor Rule = DescriptorFactory.Create(DiagnosticId, MessageFormat);
-        private static readonly string[] AllowedNumericValues = new[] { "-1", "0", "1" };
-        private static readonly string[] AllowedStringValues = new[] { string.Empty };
+        private static readonly string[] AllowedNumericValues = { "-1", "0", "1" };
+        private static readonly string[] AllowedStringValues = { string.Empty };
         private readonly bool useSonarCfg;
 
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
@@ -96,14 +96,14 @@ namespace SonarAnalyzer.Rules.CSharp
                     // Tuple expressions are not supported. See https://github.com/SonarSource/sonar-dotnet/issues/3094
                     if (!node.DescendantNodes().AnyOfKind(SyntaxKindEx.TupleExpression) && CSharpControlFlowGraph.TryGet(node, context.SemanticModel, out var cfg))
                     {
-                        var lva = new SonarCSharpLiveVariableAnalysis(cfg, symbol, context.SemanticModel);
+                        var lva = new SonarCSharpLiveVariableAnalysis(cfg, symbol, context.SemanticModel, context.CancellationToken);
                         var checker = new SonarChecker(context, lva, node);
                         checker.Analyze(cfg.Blocks);
                     }
                 }
-                else if (node.CreateCfg(context.SemanticModel) is { } cfg)
+                else if (node.CreateCfg(context.SemanticModel, context.CancellationToken) is { } cfg)
                 {
-                    var lva = new RoslynLiveVariableAnalysis(cfg);
+                    var lva = new RoslynLiveVariableAnalysis(cfg, context.CancellationToken);
                     var checker = new RoslynChecker(context, lva);
                     checker.Analyze(cfg.Blocks);
                 }
