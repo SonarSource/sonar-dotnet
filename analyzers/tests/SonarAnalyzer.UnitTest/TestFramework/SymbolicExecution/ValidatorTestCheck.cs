@@ -87,6 +87,9 @@ namespace SonarAnalyzer.UnitTest.TestFramework.SymbolicExecution
         public void ValidateContainsOperation(OperationKind operationKind) =>
             cfg.Blocks.Any(x => x.OperationsAndBranchValue.ToExecutionOrder().Any(op => op.Instance.Kind == operationKind));
 
+        public void ValidateHasSingleExitStateAndNoException() =>
+            ExitStates.Should().ContainSingle().And.ContainSingle(x => x.Exception == null);
+
         protected override ProgramState PostProcessSimple(SymbolicContext context)
         {
             postProcessed.Add(context);
