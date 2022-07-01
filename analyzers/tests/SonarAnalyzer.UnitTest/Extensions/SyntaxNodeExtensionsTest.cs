@@ -412,9 +412,6 @@ public class Sample
             ReferenceEquals(cfg1, cfg2).Should().BeFalse("Different compilations should not reuse cache. They do not share semantic model and symbols.");
         }
 
-        private static SyntaxToken GetFirstTokenOfKind(SyntaxTree syntaxTree, SyntaxKind kind) =>
-            syntaxTree.GetRoot().DescendantTokens().First(token => token.IsKind(kind));
-
         [DataTestMethod]
         // Tuple. From right to left.
         [DataRow("(var a, (x, var b)) = (0, ($$x++, 1));", "x")]
@@ -442,7 +439,7 @@ public class Sample
         [DataRow("(var a, var b) = (0, 1, $$2);", null)]
         [DataRow("(var a, var b) = (0, (1, $$2));", null)]
         [DataRow("(var a, (var b, var c)) = (0, $$1);", "(var b, var c)")] // Syntacticly correct
-                                                                           // Unaligned tuples. From right to left.
+        // Unaligned tuples. From right to left.
         [DataRow("(var a, var b, $$var c) = (0, (1, 2));", null)]
         [DataRow("(var a, (var b, $$var c)) = (0, 1, 2);", null)]
         // Unaligned designation. From right to left.
@@ -490,5 +487,7 @@ public class C
                 target.ToString().Should().Be(expectedNode);
             }
         }
+        private static SyntaxToken GetFirstTokenOfKind(SyntaxTree syntaxTree, SyntaxKind kind) =>
+            syntaxTree.GetRoot().DescendantTokens().First(token => token.IsKind(kind));
     }
 }
