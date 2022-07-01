@@ -18,7 +18,6 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System.Threading;
 using SonarAnalyzer.CFG.Roslyn;
 using SonarAnalyzer.CFG.Sonar;
 
@@ -33,10 +32,10 @@ namespace SonarAnalyzer.CFG
             return writer.ToString();
         }
 
-        public static string Serialize(ControlFlowGraph cfg, CancellationToken cancellationToken, string title = "RoslynCfg")
+        public static string Serialize(ControlFlowGraph cfg, string title = "RoslynCfg")
         {
             var writer = new DotWriter();
-            new RoslynCfgWalker(writer, new RoslynCfgIdProvider(), cancellationToken).Visit(cfg, title);
+            new RoslynCfgWalker(writer, new RoslynCfgIdProvider()).Visit(cfg, title);
             return writer.ToString();
         }
     }

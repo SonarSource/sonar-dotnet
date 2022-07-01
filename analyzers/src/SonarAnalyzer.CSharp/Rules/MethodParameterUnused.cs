@@ -295,7 +295,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
             public LvaResult(MethodContext declaration, IControlFlowGraph cfg)
             {
-                var lva = new SonarCSharpLiveVariableAnalysis(cfg, declaration.Symbol, declaration.Context.SemanticModel);
+                var lva = new SonarCSharpLiveVariableAnalysis(cfg, declaration.Symbol, declaration.Context.SemanticModel, declaration.Context.CancellationToken);
                 LiveInEntryBlock = lva.LiveIn(cfg.EntryBlock).OfType<IParameterSymbol>().ToImmutableArray();
                 CapturedVariables = lva.CapturedVariables;
             }

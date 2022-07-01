@@ -22,6 +22,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Linq;
+using System.Threading;
 using Microsoft.CodeAnalysis;
 using SonarAnalyzer.CFG.Helpers;
 
@@ -30,6 +31,7 @@ namespace SonarAnalyzer.CFG.LiveVariableAnalysis
     public abstract class LiveVariableAnalysisBase<TCfg, TBlock>
     {
         protected readonly ISymbol originalDeclaration;
+        protected readonly CancellationToken CancellationToken;
         private readonly IDictionary<TBlock, HashSet<ISymbol>> blockLiveOut = new Dictionary<TBlock, HashSet<ISymbol>>();
         private readonly IDictionary<TBlock, HashSet<ISymbol>> blockLiveIn = new Dictionary<TBlock, HashSet<ISymbol>>();
         private readonly ISet<ISymbol> captured = new HashSet<ISymbol>();
@@ -44,10 +46,11 @@ namespace SonarAnalyzer.CFG.LiveVariableAnalysis
         public TCfg Cfg { get; }
         public IReadOnlyCollection<ISymbol> CapturedVariables => captured.ToImmutableArray();
 
-        protected LiveVariableAnalysisBase(TCfg cfg, ISymbol originalDeclaration)
+        protected LiveVariableAnalysisBase(TCfg cfg, ISymbol originalDeclaration, CancellationToken cancellationToken)
         {
             Cfg = cfg;
             this.originalDeclaration = originalDeclaration;
+            this.CancellationToken = cancellationToken;
         }
 
         /// <summary>
@@ -77,6 +80,10 @@ namespace SonarAnalyzer.CFG.LiveVariableAnalysis
             }
             while (queue.Any())
             {
+                if (CancellationToken.IsCancellationRequested)
+                {
+                    return;
+                }
                 var block = queue.Dequeue();
                 var liveOut = blockLiveOut[block];
                 // note that on the PHP LVA impl, the `liveOut` gets cleared before being updated

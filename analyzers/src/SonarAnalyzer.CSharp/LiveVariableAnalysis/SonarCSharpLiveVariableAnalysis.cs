@@ -20,6 +20,7 @@
 
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
@@ -37,7 +38,8 @@ namespace SonarAnalyzer.LiveVariableAnalysis.CSharp
 
         protected override Block ExitBlock => Cfg.ExitBlock;
 
-        public SonarCSharpLiveVariableAnalysis(IControlFlowGraph controlFlowGraph, ISymbol originalDeclaration, SemanticModel semanticModel) : base(controlFlowGraph, originalDeclaration)
+        public SonarCSharpLiveVariableAnalysis(IControlFlowGraph controlFlowGraph, ISymbol originalDeclaration, SemanticModel semanticModel, CancellationToken cancellationToken)
+            : base(controlFlowGraph, originalDeclaration, cancellationToken)
         {
             this.semanticModel = semanticModel;
             Analyze();

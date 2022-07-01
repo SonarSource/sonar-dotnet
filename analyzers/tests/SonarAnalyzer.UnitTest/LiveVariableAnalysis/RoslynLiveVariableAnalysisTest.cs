@@ -1040,7 +1040,7 @@ End Class";
                 const string Separator = "----------";
                 Cfg = TestHelper.CompileCfg(code, language, code.Contains("// Error CS"), localFunctionName);
                 Console.WriteLine(Separator);
-                Console.WriteLine(CfgSerializer.Serialize(Cfg, default));
+                Console.WriteLine(CfgSerializer.Serialize(Cfg));
                 Console.WriteLine(Separator);
                 Lva = new RoslynLiveVariableAnalysis(Cfg, default);
             }

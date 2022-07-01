@@ -109,7 +109,7 @@ namespace SonarAnalyzer.Rules.CSharp
             var enabledAnalyzers = SonarRules.Where(x => x.SupportedDiagnostics.Any(descriptor => IsEnabled(context, isTestProject, isScannerRun, descriptor))).ToArray();
             if (enabledAnalyzers.Any() && CSharpControlFlowGraph.TryGet((CSharpSyntaxNode)body, context.SemanticModel, out var cfg))
             {
-                var lva = new SonarCSharpLiveVariableAnalysis(cfg, symbol, context.SemanticModel);
+                var lva = new SonarCSharpLiveVariableAnalysis(cfg, symbol, context.SemanticModel, context.CancellationToken);
                 try
                 {
                     var explodedGraph = new SonarExplodedGraph(cfg, symbol, context.SemanticModel, lva);

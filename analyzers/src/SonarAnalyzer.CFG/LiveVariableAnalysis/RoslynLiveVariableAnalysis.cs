@@ -31,15 +31,14 @@ namespace SonarAnalyzer.CFG.LiveVariableAnalysis
 {
     public sealed class RoslynLiveVariableAnalysis : LiveVariableAnalysisBase<ControlFlowGraph, BasicBlock>
     {
-        private readonly CancellationToken cancellationToken;
         private readonly Dictionary<int, List<BasicBlock>> blockPredecessors = new();
         private readonly Dictionary<int, List<BasicBlock>> blockSuccessors = new();
 
         protected override BasicBlock ExitBlock => Cfg.ExitBlock;
 
-        public RoslynLiveVariableAnalysis(ControlFlowGraph cfg, CancellationToken cancellationToken) : base(cfg, OriginalDeclaration(cfg.OriginalOperation))
+        public RoslynLiveVariableAnalysis(ControlFlowGraph cfg, CancellationToken cancellationToken)
+            : base(cfg, OriginalDeclaration(cfg.OriginalOperation), cancellationToken)
         {
-            this.cancellationToken = cancellationToken;
             foreach (var ordinal in cfg.Blocks.Select(x => x.Ordinal))
             {
                 blockPredecessors.Add(ordinal, new());
@@ -56,8 +55,8 @@ namespace SonarAnalyzer.CFG.LiveVariableAnalysis
         {
             ISymbol candidate = operation switch
             {
-                var _ when IParameterReferenceOperationWrapper.IsInstance(operation) => IParameterReferenceOperationWrapper.FromOperation(operation).Parameter,
-                var _ when ILocalReferenceOperationWrapper.IsInstance(operation) => ILocalReferenceOperationWrapper.FromOperation(operation).Local,
+                _ when IParameterReferenceOperationWrapper.IsInstance(operation) => IParameterReferenceOperationWrapper.FromOperation(operation).Parameter,
+                _ when ILocalReferenceOperationWrapper.IsInstance(operation) => ILocalReferenceOperationWrapper.FromOperation(operation).Local,
                 _ => null
             };
             return IsLocal(candidate) ? candidate : null;
@@ -77,7 +76,7 @@ namespace SonarAnalyzer.CFG.LiveVariableAnalysis
 
         protected override State ProcessBlock(BasicBlock block)
         {
-            var ret = new RoslynState(this, cancellationToken);
+            var ret = new RoslynState(this);
             ret.ProcessBlock(Cfg, block);
             return ret;
         }
@@ -170,14 +169,10 @@ namespace SonarAnalyzer.CFG.LiveVariableAnalysis
         private sealed class RoslynState : State
         {
             private readonly RoslynLiveVariableAnalysis owner;
-            private readonly CancellationToken cancellationToken;
             private readonly ISet<ISymbol> capturedLocalFunctions = new HashSet<ISymbol>();
 
-            public RoslynState(RoslynLiveVariableAnalysis owner, CancellationToken cancellationToken)
-            {
+            public RoslynState(RoslynLiveVariableAnalysis owner) =>
                 this.owner = owner;
-                this.cancellationToken = cancellationToken;
-            }
 
             public void ProcessBlock(ControlFlowGraph cfg, BasicBlock block)
             {
@@ -237,7 +232,7 @@ namespace SonarAnalyzer.CFG.LiveVariableAnalysis
             {
                 if (!anonymousFunction.Symbol.IsStatic) // Performance: No need to descent into static
                 {
-                    ProcessCaptured(cfg.GetAnonymousFunctionControlFlowGraph(anonymousFunction, cancellationToken));
+                    ProcessCaptured(cfg.GetAnonymousFunctionControlFlowGraph(anonymousFunction, owner.CancellationToken));
                 }
             }
 
@@ -272,7 +267,7 @@ namespace SonarAnalyzer.CFG.LiveVariableAnalysis
                 if (HandleLocalFunction(capturedLocalFunctions, method) is { } localFunction)
                 {
                     capturedLocalFunctions.Add(localFunction);
-                    ProcessCaptured(cfg.FindLocalFunctionCfgInScope(localFunction, cancellationToken));
+                    ProcessCaptured(cfg.FindLocalFunctionCfgInScope(localFunction, owner.CancellationToken));
                 }
             }
 
@@ -281,7 +276,7 @@ namespace SonarAnalyzer.CFG.LiveVariableAnalysis
                 if (HandleLocalFunction(ProcessedLocalFunctions, method) is { } localFunction)
                 {
                     ProcessedLocalFunctions.Add(localFunction);
-                    var localFunctionCfg = cfg.FindLocalFunctionCfgInScope(localFunction, cancellationToken);
+                    var localFunctionCfg = cfg.FindLocalFunctionCfgInScope(localFunction, owner.CancellationToken);
                     foreach (var block in localFunctionCfg.Blocks.Reverse())    // Simplified approach, ignoring branching and try/catch/finally flows
                     {
                         ProcessBlock(localFunctionCfg, block);
