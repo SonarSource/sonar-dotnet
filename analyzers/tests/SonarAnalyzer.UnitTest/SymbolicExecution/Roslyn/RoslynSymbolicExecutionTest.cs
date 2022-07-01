@@ -311,15 +311,21 @@ if (boolParameter)
         [DataTestMethod]
         [DataRow(true, 0)]
         [DataRow(false, 1)]
-        public void Execute_StopsEarly_IfCancellationTokenIsCancelled(bool isCancelled, int exitReachCount)
+        public void Execute_StopsEarly_IfCancellationTokenIsCancelled(bool shouldCancel, int expectedExitPoints)
         {
+            var cancellationSource = new CancellationTokenSource();
+            var cancel = cancellationSource.Token;
             var cfg = TestHelper.CompileCfgBodyCS("var a = 1;");
             var validator = new ValidatorTestCheck(cfg);
-            var se = new RoslynSymbolicExecution(cfg, new SymbolicCheck[] { validator }, new CancellationToken(isCancelled));
+            var se = new RoslynSymbolicExecution(cfg, new SymbolicCheck[] { validator }, cancel);
+
+            if (shouldCancel)
+            {
+                cancellationSource.Cancel();
+            }
 
             se.Execute();
-
-            validator.ValidateExitReachCount(exitReachCount);
+            validator.ValidateExitReachCount(expectedExitPoints);
         }
 
         private static ProgramState[] DecorateIntLiteral(SymbolicContext context, SymbolicConstraint first, SymbolicConstraint second) =>
