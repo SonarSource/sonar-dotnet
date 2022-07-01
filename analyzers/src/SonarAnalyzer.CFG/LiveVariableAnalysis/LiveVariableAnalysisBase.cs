@@ -80,10 +80,8 @@ namespace SonarAnalyzer.CFG.LiveVariableAnalysis
             }
             while (queue.Any())
             {
-                if (CancellationToken.IsCancellationRequested)
-                {
-                    CancellationToken.ThrowIfCancellationRequested();
-                }
+                CancellationToken.ThrowIfCancellationRequested();
+
                 var block = queue.Dequeue();
                 var liveOut = blockLiveOut[block];
                 // note that on the PHP LVA impl, the `liveOut` gets cleared before being updated
