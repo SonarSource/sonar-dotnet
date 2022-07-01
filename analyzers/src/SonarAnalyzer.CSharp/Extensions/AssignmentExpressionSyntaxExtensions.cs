@@ -112,13 +112,12 @@ namespace SonarAnalyzer.Extensions
         }
 
         /// <summary>
-        /// Finds the complementing <see cref="SyntaxNode"/> of an assignment with tuples. If <paramref name="node"/> is <c>x</c>, the method returns <c>r</c>. In the following examples:
+        /// Finds the syntactic complementing <see cref="SyntaxNode"/> of an assignment with tuples.
         /// <code>
-        /// var (a, x) = (1, r);
-        /// var (a, r) = (1, x);
-        /// (var a, var x) = (1, r);
-        /// (var a, var r) = (1, x);
+        /// var (a, b) = (1, 2);      // if node is a, 1 is returned and visa versa.
+        /// (var a, var b) = (1, 2);  // if node is 2, b is returned and visa versa.
         /// </code>
+        /// <paramref name="node"/> must be an <see cref="ArgumentSyntax"/> of a tuple or some variable designation of a <see cref="SyntaxKindEx.DeclarationExpression"/>.
         /// </summary>
         public static SyntaxNode FindAssignmentComplement(this SyntaxNode node)
         {
