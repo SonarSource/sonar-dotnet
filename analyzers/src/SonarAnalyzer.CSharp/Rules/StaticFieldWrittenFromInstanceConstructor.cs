@@ -32,7 +32,8 @@ namespace SonarAnalyzer.Rules.CSharp
         private const string DiagnosticId = "S3010";
         private const string MessageFormat = "Remove this assignment of '{0}' or initialize it statically.";
 
-        protected override DiagnosticDescriptor Rule => DescriptorFactory.Create(DiagnosticId, MessageFormat);
+        protected override DiagnosticDescriptor Rule =>
+            DescriptorFactory.Create(DiagnosticId, MessageFormat);
 
         protected override bool IsValidCodeBlockContext(SyntaxNode node, ISymbol owningSymbol) =>
             node is ConstructorDeclarationSyntax declaration

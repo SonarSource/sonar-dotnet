@@ -35,7 +35,8 @@ namespace SonarAnalyzer.Rules.CSharp
         private const string MessageFormatMultipleOptions = "Make the enclosing instance {0} 'static' or remove this set on the 'static' field.";
         private const string MessageFormatRemoveSet = "Remove this set, which updates a 'static' field from an instance {0}.";
 
-        protected override DiagnosticDescriptor Rule => DescriptorFactory.Create(DiagnosticId, MessageFormat);
+        protected override DiagnosticDescriptor Rule =>
+            DescriptorFactory.Create(DiagnosticId, MessageFormat);
 
         protected override bool IsValidCodeBlockContext(SyntaxNode node, ISymbol owningSymbol) =>
             owningSymbol is { IsStatic: false }
