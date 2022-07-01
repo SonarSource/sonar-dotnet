@@ -91,7 +91,7 @@ namespace SonarAnalyzer.Rules.CSharp
             return fieldDeclaration;
         }
 
-        private async Task<Document> AddReadonlyToFieldDeclarationsAsync(Document document, CancellationToken cancel, IEnumerable<FieldDeclarationSyntax> fieldDeclarations)
+        private static async Task<Document> AddReadonlyToFieldDeclarationsAsync(Document document, CancellationToken cancel, IEnumerable<FieldDeclarationSyntax> fieldDeclarations)
         {
             var editor = await DocumentEditor.CreateAsync(document, cancel);
 
