@@ -270,6 +270,21 @@ namespace ReaderWriterLock_Type
             }
         }
 
+        public void IsWriterLockHeld_InsideTryCatch()
+        {
+            try
+            {
+                readerWriterLock.AcquireWriterLock(42);
+                if (readerWriterLock.IsWriterLockHeld)   // Noncompliant FP, should be Compliant, https://github.com/SonarSource/sonar-dotnet/issues/5416
+                {
+                    readerWriterLock.ReleaseWriterLock();
+                }
+            }
+            catch
+            {
+            }
+        }
+
         public void IsWriterLockHeld_Noncompliant()
         {
             if (readerWriterLock.IsWriterLockHeld)  // Noncompliant
