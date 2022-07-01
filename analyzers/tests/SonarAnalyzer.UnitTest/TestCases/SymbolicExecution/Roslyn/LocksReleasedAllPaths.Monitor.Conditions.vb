@@ -105,10 +105,21 @@ Namespace Monitor_Conditions
         End Sub
 
         Public Sub Method15(Arg As String)
-            Monitor.Enter(Obj) ' Compliant
+            Monitor.Enter(Obj) ' FN, because arg.Length can throw NullReferenceException
             If Arg.Length = 16 Then
                 Monitor.Exit(Obj)
             ElseIf Arg.Length = 23 Then
+                Monitor.Exit(Obj)
+            Else
+                Monitor.Exit(Obj)
+            End If
+        End Sub
+
+        Public Sub Method15_SafeCondition(A As Boolean, B As Boolean)
+            Monitor.Enter(Obj) ' Compliant
+            If A Then
+                Monitor.Exit(Obj)
+            ElseIf B Then
                 Monitor.Exit(Obj)
             Else
                 Monitor.Exit(Obj)

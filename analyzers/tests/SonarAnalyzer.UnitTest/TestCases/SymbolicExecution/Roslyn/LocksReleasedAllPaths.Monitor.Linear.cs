@@ -15,8 +15,15 @@ namespace Monitor_Linear
 
         public void Method1(string arg)
         {
-            Monitor.Enter(obj); // Compliant
+            Monitor.Enter(obj); // FN, because arg.Length can throw NullReferenceException
             Console.WriteLine(arg.Length);
+            Monitor.Exit(obj);
+        }
+
+        public void Method1_SafeOperation(string arg)
+        {
+            Monitor.Enter(obj); // Compliant
+            arg = null;
             Monitor.Exit(obj);
         }
 
@@ -40,7 +47,7 @@ namespace Monitor_Linear
         {
             var localObj = obj;
             Monitor.Enter(localObj); // Compliant
-            Console.WriteLine(arg.Length);
+            arg = null;
             Monitor.Exit(localObj);
         }
 
@@ -56,7 +63,7 @@ namespace Monitor_Linear
         {
             paramObj = obj;
             Monitor.Enter(paramObj); // Compliant
-            Console.WriteLine(arg.Length);
+            arg = null;
             Monitor.Exit(paramObj);
         }
 
@@ -71,7 +78,7 @@ namespace Monitor_Linear
         public void Method7(string arg, object paramObj)
         {
             Monitor.Enter(paramObj); // Compliant
-            Console.WriteLine(arg.Length);
+            arg = null;
             Monitor.Exit(paramObj);
         }
 
@@ -185,9 +192,9 @@ namespace Monitor_Linear
         public void Method14(string arg)
         {
             Monitor.Exit(obj);
-            Console.WriteLine(arg.Length);
+            arg = null;
             Monitor.Enter(obj); // Compliant
-            Console.WriteLine(arg.Length);
+            arg = null;
             Monitor.Exit(obj);
         }
 
