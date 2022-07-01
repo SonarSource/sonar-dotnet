@@ -35,9 +35,7 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
         public ExceptionState FromOperation(IOperationWrapperSonar operation) =>
             operation.Instance.Kind switch
             {
-                OperationKindEx.ArrayElementReference => operation.Children.Any(x => x.Kind == OperationKindEx.Range) // In case of Range, ArgumentOutOfRangeException is raised
-                                                             ? new ExceptionState(typeCatalog.SystemArgumentOutOfRangeException)
-                                                             : new ExceptionState(typeCatalog.SystemIndexOutOfRangeException),
+                OperationKindEx.ArrayElementReference => FromOperation(IArrayElementReferenceOperationWrapper.FromOperation(operation.Instance)),
                 OperationKindEx.Conversion => ConversionExceptionCandidate(operation),
                 OperationKindEx.DynamicIndexerAccess => new ExceptionState(typeCatalog.SystemIndexOutOfRangeException),
                 OperationKindEx.DynamicInvocation => ExceptionState.UnknownException,      // This raises is Microsoft.CSharp.RuntimeBinder.RuntimeBinderException that we can't access.
@@ -51,6 +49,11 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
                 OperationKindEx.PropertyReference => FromOperation(IMemberReferenceOperationWrapper.FromOperation(operation.Instance)),
                 _ => null
             };
+
+        private ExceptionState FromOperation(IArrayElementReferenceOperationWrapper reference) =>
+            reference.Indices.Any(x => x.Kind == OperationKindEx.Range) // In case of Range, ArgumentOutOfRangeException is raised
+                ? new ExceptionState(typeCatalog.SystemArgumentOutOfRangeException)
+                : new ExceptionState(typeCatalog.SystemIndexOutOfRangeException);
 
         private ExceptionState FromOperation(IMemberReferenceOperationWrapper reference) =>
             reference.IsStaticOrThis() ? null : new ExceptionState(typeCatalog.SystemNullReferenceException);

@@ -625,7 +625,7 @@ class Sample
 }";
 
             var validator = CreateCSharpValidator(code);
-            // IImplicitIndexerReferenceOperation is not generated
+            // IImplicitIndexerReferenceOperation is not generated in the current version of Roslyn. It will be generated in 4.4.0.
             validator.ValidateTagOrder("BeforeTry", "InTry", "AfterCatch");
             validator.ExitStates.Should().HaveCount(1).And.ContainSingle(x => HasNoException(x));
         }
@@ -681,7 +681,7 @@ class Sample
 
             var validator = CreateCSharpValidator(code);
             validator.ValidateContainsOperation(OperationKindEx.Range);
-            // IImplicitIndexerReferenceOperation is not generated
+            // IImplicitIndexerReferenceOperation is not generated in the current version of Roslyn. It will be generated in 4.4.0.
             validator.ValidateTagOrder("BeforeTry", "InTry", "AfterCatch");
             validator.ExitStates.Should().HaveCount(1).And.ContainSingle(x => HasNoException(x));
         }
