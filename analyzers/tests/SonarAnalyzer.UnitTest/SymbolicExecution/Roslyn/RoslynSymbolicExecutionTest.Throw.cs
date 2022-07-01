@@ -25,7 +25,7 @@ namespace SonarAnalyzer.UnitTest.SymbolicExecution.Roslyn
     public partial class RoslynSymbolicExecutionTest
     {
         [TestMethod]
-        public void Finally_ThrowInTry()
+        public void Throw_Finally_ThrowInTry()
         {
             const string code = @"
 var tag = ""BeforeTry"";
@@ -51,7 +51,7 @@ tag = ""UnreachableAfterFinally"";";
         }
 
         [TestMethod]
-        public void Finally_ThrowInFinally()
+        public void Throw_Finally_ThrowInFinally()
         {
             const string code = @"
 var tag = ""BeforeTry"";
@@ -77,7 +77,7 @@ tag = ""UnreachableAfterFinally"";";
         }
 
         [TestMethod]
-        public void TryCatch_ThrowInTry_SingleCatchBlock()
+        public void Throw_TryCatch_ThrowInTry_SingleCatchBlock()
         {
             const string code = @"
 var tag = ""BeforeTry"";
@@ -105,7 +105,7 @@ tag = ""AfterCatch"";";
         }
 
         [TestMethod]
-        public void TryCatch_ThrowInTry_SingleCatchBlock_ReThrow()
+        public void Throw_TryCatch_ThrowInTry_SingleCatchBlock_ReThrow()
         {
             const string code = @"
 var tag = ""BeforeTry"";
@@ -133,7 +133,7 @@ tag = ""UnreachableAfterCatch"";";
                      .And.ContainSingle(x => HasSystemException(x));
         }
         [TestMethod]
-        public void TryCatch_ThrowInTry_SingleCatchBlock_ReThrowException()
+        public void Throw_TryCatch_ThrowInTry_SingleCatchBlock_ReThrowException()
         {
             const string code = @"
 var tag = ""BeforeTry"";
@@ -162,7 +162,7 @@ tag = ""UnreachableAfterCatch"";";
         }
 
         [TestMethod]
-        public void TryCatch_ThrowInTry_MultipleCatchBlocks()
+        public void Throw_TryCatch_ThrowInTry_MultipleCatchBlocks()
         {
             const string code = @"
 var tag = ""BeforeTry"";
@@ -203,7 +203,7 @@ tag = ""AfterCatch"";";
         }
 
         [TestMethod]
-        public void TryCatch_ThrowInCatch_SingleCatchBlock()
+        public void Throw_TryCatch_ThrowInCatch_SingleCatchBlock()
         {
             const string code = @"
 var tag = ""BeforeTry"";
@@ -233,7 +233,7 @@ tag = ""AfterCatch"";";
         }
 
         [TestMethod]
-        public void TryCatchFinally_ThrowInTry()
+        public void Throw_TryCatchFinally_ThrowInTry()
         {
             const string code = @"
 var tag = ""BeforeTry"";
@@ -267,7 +267,7 @@ tag = ""AfterFinally"";";
         }
 
         [TestMethod]
-        public void TryCatchFinally_ThrowInCatch()
+        public void Throw_TryCatchFinally_ThrowInCatch()
         {
             const string code = @"
 var tag = ""BeforeTry"";
@@ -307,7 +307,7 @@ tag = ""AfterFinally"";";
         }
 
         [TestMethod]
-        public void TryCatchFinally_ThrowInFinally()
+        public void Throw_TryCatchFinally_ThrowInFinally()
         {
             const string code = @"
 var tag = ""BeforeTry"";
@@ -340,7 +340,7 @@ tag = ""UnreachableAfterFinally"";";
         }
 
         [TestMethod]
-        public void TryCatch_NestedThrowWithCatchFilter()
+        public void Throw_TryCatch_NestedThrowWithCatchFilter()
         {
             const string code = @"
 var tag = ""BeforeTry"";
@@ -373,7 +373,7 @@ tag = ""After"";";
         }
 
         [TestMethod]
-        public void TryCatch_NestedThrowWithNestedCatchFilter()
+        public void Throw_TryCatch_NestedThrowWithNestedCatchFilter()
         {
             const string code = @"
 var tag = ""BeforeTry"";
@@ -406,7 +406,7 @@ tag = ""After"";";
         }
 
         [TestMethod]
-        public void TryCatch_NestedThrowWithMultipleCatchFiltersOnDifferentLevels()
+        public void Throw_TryCatch_NestedThrowWithMultipleCatchFiltersOnDifferentLevels()
         {
             const string code = @"
 var tag = ""BeforeTry"";
@@ -437,7 +437,7 @@ tag = ""UnreachableEnd"";";
         }
 
         [TestMethod]
-        public void TryCatch_Throw_CatchThrown_WithVariable()
+        public void Throw_TryCatch_Throw_CatchThrown_WithVariable()
         {
             const string code = @"
 var tag = ""BeforeTry"";
@@ -462,7 +462,7 @@ tag = ""End"";";
         }
 
         [TestMethod]
-        public void TryCatch_Throw_CatchThrown_NoVariable()
+        public void Throw_TryCatch_Throw_CatchThrown_NoVariable()
         {
             const string code = @"
 var tag = ""BeforeTry"";
@@ -486,7 +486,7 @@ tag = ""End"";";
         }
 
         [TestMethod]
-        public void TryCatch_Throw_CatchBaseType()
+        public void Throw_TryCatch_Throw_CatchBaseType()
         {
             const string code = @"
 var tag = ""BeforeTry"";
@@ -511,7 +511,7 @@ tag = ""End"";";
         }
 
         [TestMethod]
-        public void TryCatch_Throw_CatchSpecificTypeAndBaseTypeAnd()
+        public void Throw_TryCatch_Throw_CatchSpecificTypeAndBaseTypeAnd()
         {
             const string code = @"
 var tag = ""BeforeTry"";
@@ -542,7 +542,7 @@ tag = ""End"";";
         }
 
         [TestMethod]
-        public void TryCatch_Throw_CatchBaseTypeAndSpecificType_WithWhenCondition()
+        public void Throw_TryCatch_Throw_CatchBaseTypeAndSpecificType_WithWhenCondition()
         {
             const string code = @"
 var tag = ""BeforeTry"";
@@ -579,7 +579,7 @@ tag = ""End"";";
         }
 
         [TestMethod]
-        public void TryCatch_Throw_CatchAllWhen_IsTrue()
+        public void Throw_TryCatch_Throw_CatchAllWhen_IsTrue()
         {
             const string code = @"
 var tag = ""BeforeTry"";
@@ -604,7 +604,7 @@ tag = ""End"";";
         }
 
         [TestMethod]
-        public void TryCatch_Throw_CatchAllWhen_IsFalse()
+        public void Throw_TryCatch_Throw_CatchAllWhen_IsFalse()
         {
             const string code = @"
 var tag = ""BeforeTry"";
@@ -627,7 +627,7 @@ tag = ""UnreachableEnd"";";
         }
 
         [TestMethod]
-        public void TryCatch_Throw_CatchAllWhen_IsUnknown()
+        public void Throw_TryCatch_Throw_CatchAllWhen_IsUnknown()
         {
             const string code = @"
 var tag = ""BeforeTry"";
@@ -651,7 +651,7 @@ tag = ""End"";";
         }
 
         [TestMethod]
-        public void TryCatch_Throw_CatchDoesNotDowncast()
+        public void Throw_TryCatch_Throw_CatchDoesNotDowncast()
         {
             const string code = @"
 var tag = ""BeforeTry"";
@@ -673,7 +673,7 @@ tag = ""UnreachableEnd"";";
         }
 
         [TestMethod]
-        public void TryCatch_ThrowUnexpectedException()
+        public void Throw_TryCatch_ThrowUnexpectedException()
         {
             const string code = @"
 var tag = ""BeforeTry"";
@@ -695,7 +695,7 @@ tag = ""Unreachable"";";
         }
 
         [TestMethod]
-        public void TryCatch_NestedThrow_OuterCatch()
+        public void Throw_TryCatch_NestedThrow_OuterCatch()
         {
             const string code = @"
 var tag = ""BeforeTry"";
@@ -740,7 +740,7 @@ tag = ""End"";";
         }
 
         [TestMethod]
-        public void TryCatch_NestedThrow_UnexpectedException()
+        public void Throw_TryCatch_NestedThrow_UnexpectedException()
         {
             const string code = @"
 var tag = ""BeforeTry"";
