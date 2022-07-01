@@ -81,6 +81,8 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
             reference.IsStaticOrThis() ? null : new ExceptionState(typeCatalog.SystemNullReferenceException);
 
         private static ExceptionState FromOperation(IInvocationOperationWrapper invocation) =>
+            // These methods are declared as well-known methods that (usually) do not throw.
+            // Otherwise, we would have FPs because engine would split the flow to happy path with constraints and possible exception path.
             IsMonitorExit(invocation)
             || IsLockRelease(invocation)
             ? null
