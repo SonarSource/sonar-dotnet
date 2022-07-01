@@ -18,12 +18,12 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System.Collections.Generic;
 using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
+using SonarAnalyzer.Common;
 using SonarAnalyzer.Extensions;
 using SonarAnalyzer.Helpers;
 using StyleCop.Analyzers.Lightup;
@@ -33,6 +33,8 @@ namespace SonarAnalyzer.Rules
     public abstract class StaticFieldWrittenFrom : SonarDiagnosticAnalyzer
     {
         protected override bool EnableConcurrentExecution => false;
+        protected abstract bool IsValidCodeBlockContext(SyntaxNode node, ISymbol owningSymbol);
+        protected abstract string GetDiagnosticMessageArgument(SyntaxNode node, ISymbol owningSymbol, IFieldSymbol field);
 
         protected sealed override void Initialize(SonarAnalysisContext context) =>
             context.RegisterCodeBlockStartActionInNonGenerated<SyntaxKind>(cbc =>
@@ -42,19 +44,18 @@ namespace SonarAnalyzer.Rules
                         return;
                     }
 
-                    var locationsForFields = new Dictionary<IFieldSymbol, List<Location>>();
+                    var locationsForFields = new MultiValueDictionary<IFieldSymbol, Location>();
 
                     cbc.RegisterSyntaxNodeAction(c =>
                         {
                             var assignment = (AssignmentExpressionSyntax)c.Node;
-                            var targets = assignment.AssignmentTargets();
 
-                            foreach (var target in targets)
+                            foreach (var target in assignment.AssignmentTargets())
                             {
                                 var fieldSymbol = c.SemanticModel.GetSymbolInfo(target).Symbol as IFieldSymbol;
                                 if (fieldSymbol?.IsStatic == true)
                                 {
-                                    AddFieldLocation(fieldSymbol, target.CreateLocation(assignment.OperatorToken), locationsForFields);
+                                    locationsForFields.Add(fieldSymbol, target.CreateLocation(assignment.OperatorToken));
                                 }
                             }
                         },
@@ -103,26 +104,11 @@ namespace SonarAnalyzer.Rules
                     });
                 });
 
-        protected abstract bool IsValidCodeBlockContext(SyntaxNode node, ISymbol owningSymbol);
-        protected abstract string GetDiagnosticMessageArgument(SyntaxNode node, ISymbol owningSymbol, IFieldSymbol field);
-
-        private static void AddFieldLocation(IFieldSymbol fieldSymbol, Location location, Dictionary<IFieldSymbol, List<Location>> locationsForFields)
+        private static void CollectLocationOfStaticField(ExpressionSyntax expression, MultiValueDictionary<IFieldSymbol, Location> locationsForFields, SyntaxNodeAnalysisContext context)
         {
-            if (!locationsForFields.ContainsKey(fieldSymbol))
+            if (context.SemanticModel.GetSymbolInfo(expression) is { Symbol: IFieldSymbol { IsStatic: true } fieldSymbol })
             {
-                locationsForFields.Add(fieldSymbol, new List<Location>());
-            }
-
-            locationsForFields[fieldSymbol].Add(location);
-        }
-
-        private static void CollectLocationOfStaticField(ExpressionSyntax expression, Dictionary<IFieldSymbol, List<Location>> locationsForFields, SyntaxNodeAnalysisContext context)
-        {
-            var fieldSymbol = context.SemanticModel.GetSymbolInfo(expression).Symbol as IFieldSymbol;
-
-            if (fieldSymbol?.IsStatic == true)
-            {
-                AddFieldLocation(fieldSymbol, expression.GetLocation(), locationsForFields);
+                locationsForFields.Add(fieldSymbol, expression.GetLocation());
             }
         }
     }
