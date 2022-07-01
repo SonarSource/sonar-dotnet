@@ -275,7 +275,7 @@ namespace ReaderWriterLock_Type
             try
             {
                 readerWriterLock.AcquireWriterLock(42);
-                if (readerWriterLock.IsWriterLockHeld)   // Noncompliant FP, should be Compliant, https://github.com/SonarSource/sonar-dotnet/issues/5416
+                if (readerWriterLock.IsWriterLockHeld)   // Compliant, https://github.com/SonarSource/sonar-dotnet/issues/5416
                 {
                     readerWriterLock.ReleaseWriterLock();
                 }

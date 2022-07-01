@@ -350,7 +350,7 @@ namespace ReaderWriterLockSlim_Type
             try
             {
                 readerWriterLockSlim.EnterWriteLock();
-                if (readerWriterLockSlim.IsWriteLockHeld)   // Noncompliant FP, should be Compliant, https://github.com/SonarSource/sonar-dotnet/issues/5416
+                if (readerWriterLockSlim.IsWriteLockHeld)   // Compliant, https://github.com/SonarSource/sonar-dotnet/issues/5416
                 {
                     readerWriterLockSlim.ExitWriteLock();
                 }

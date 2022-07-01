@@ -323,7 +323,7 @@ namespace Monitor_TryCatch
             try
             {
                 Monitor.Enter(obj);
-                if (Monitor.IsEntered(obj)) // Noncompliant FP
+                if (Monitor.IsEntered(obj)) // Compliant
                 {
                     Monitor.Exit(obj);
                 }

@@ -107,12 +107,11 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn.RuleChecks
         {
             if (context.Operation.Instance.AsPropertyReference() is { } property
                 && IsLockHeldProperties.Contains(property.Property.Name)
-                && property.Property.ContainingType.IsAny(KnownType.System_Threading_ReaderWriterLock, KnownType.System_Threading_ReaderWriterLockSlim))
+                && ((IMemberReferenceOperationWrapper)property).IsOnReaderWriterLockOrSlim())
             {
                 return ProcessCondition(property.Instance.TrackedSymbol());
             }
-            else if (context.Operation.Instance.AsInvocation() is { } invocation
-                     && invocation.TargetMethod.Is(KnownType.System_Threading_Monitor, "IsEntered"))
+            else if (context.Operation.Instance.AsInvocation() is { } invocation && invocation.IsMonitorIsEntered())    // Same condition also needs to be in ExceptionCandidate
             {
                 return ProcessCondition(ArgumentSymbol(invocation, 0));
             }
