@@ -46,9 +46,10 @@ namespace SonarAnalyzer.UnitTest.Extensions
         private static string WrapInMethod(string code) =>
 $@"public class C
 {{
-    public void M()
+    public int M()
     {{
         {code};
+        return 0;
     }}
 }}";
     }
