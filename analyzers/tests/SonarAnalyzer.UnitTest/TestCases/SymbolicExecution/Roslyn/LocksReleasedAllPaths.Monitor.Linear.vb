@@ -11,14 +11,20 @@ Namespace Monitor_Linear
         Private Other As New Object()
 
         Public Sub Method1(Arg As String)
-            Monitor.Enter(Obj) ' Compliant
+            Monitor.Enter(Obj) ' FN, because arg.Length can throw NullReferenceException
             Console.WriteLine(Arg.Length)
+            Monitor.Exit(Obj)
+        End Sub
+
+        Public Sub Method1_SafeOperation(Arg As String)
+            Monitor.Enter(Obj) ' Compliant
+            Arg = Nothing
             Monitor.Exit(Obj)
         End Sub
 
         Public Sub Method2(Arg As String)
             Monitor.Enter(Obj) ' Compliant
-            Console.WriteLine(Arg.Length)
+            Arg = Nothing
             Monitor.Exit(Other)
         End Sub
 
@@ -30,7 +36,7 @@ Namespace Monitor_Linear
         Public Sub Method4(Arg As String)
             Dim LocalObj = Obj
             Monitor.Enter(LocalObj) ' Compliant
-            Console.WriteLine(Arg.Length)
+            Arg = Nothing
             Monitor.Exit(LocalObj)
         End Sub
 
@@ -44,7 +50,7 @@ Namespace Monitor_Linear
         Public Sub Method6(Arg As String, ParamObj As Object)
             ParamObj = Obj
             Monitor.Enter(ParamObj) ' Compliant
-            Console.WriteLine(Arg.Length)
+            Arg = Nothing
             Monitor.Exit(ParamObj)
         End Sub
 
@@ -57,7 +63,7 @@ Namespace Monitor_Linear
 
         Public Sub Method7(Arg As String, ParamObj As Object)
             Monitor.Enter(ParamObj) ' Compliant
-            Console.WriteLine(Arg.Length)
+            Arg = Nothing
             Monitor.Exit(ParamObj)
         End Sub
 
@@ -139,9 +145,9 @@ Namespace Monitor_Linear
 
         Public Sub Method14(Arg As String)
             Monitor.Exit(Obj)
-            Console.WriteLine(Arg.Length)
+            Arg = Nothing
             Monitor.Enter(Obj) ' Compliant
-            Console.WriteLine(Arg.Length)
+            Arg = Nothing
             Monitor.Exit(Obj)
         End Sub
 

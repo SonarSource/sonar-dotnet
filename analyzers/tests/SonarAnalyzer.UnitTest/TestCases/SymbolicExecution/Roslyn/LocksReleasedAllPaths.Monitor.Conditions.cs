@@ -175,12 +175,29 @@ namespace Monitor_Conditions
 
         public void Method15(string arg)
         {
-            Monitor.Enter(obj); // Compliant
+            Monitor.Enter(obj); // FN, because arg.Length can throw NullReferenceException
             if (arg.Length == 16)
             {
                 Monitor.Exit(obj);
             }
             else if (arg.Length == 23)
+            {
+                Monitor.Exit(obj);
+            }
+            else
+            {
+                Monitor.Exit(obj);
+            }
+        }
+
+        public void Method15_SafeConditions(bool a, bool b)
+        {
+            Monitor.Enter(obj); // Compliant
+            if (a)
+            {
+                Monitor.Exit(obj);
+            }
+            else if (b)
             {
                 Monitor.Exit(obj);
             }

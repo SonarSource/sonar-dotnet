@@ -317,5 +317,37 @@ namespace Monitor_TryCatch
                 // Handle it
             }
         }
+
+        public void TryCatch_IsEntered_Compliant()
+        {
+            try
+            {
+                Monitor.Enter(obj);
+                if (Monitor.IsEntered(obj)) // Compliant
+                {
+                    Monitor.Exit(obj);
+                }
+            }
+            catch
+            {
+            }
+        }
+
+        public void TryCatch_IsEntered_Acquired(bool condition)
+        {
+            try
+            {
+                if (Monitor.IsEntered(obj)) // Noncompliant
+                {
+                    if (condition)
+                    {
+                        Monitor.Exit(obj);
+                    }
+                }
+            }
+            catch
+            {
+            }
+        }
     }
 }

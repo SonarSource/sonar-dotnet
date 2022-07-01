@@ -23,18 +23,9 @@ using StyleCop.Analyzers.Lightup;
 
 namespace SonarAnalyzer.SymbolicExecution.Roslyn
 {
-    internal static class IInvocationOperationExtensions
+    internal static class IMemberReferenceOperationExtensions
     {
-        public static bool IsMonitorExit(this IInvocationOperationWrapper invocation) =>
-            invocation.TargetMethod.Is(KnownType.System_Threading_Monitor, "Exit");
-
-        public static bool IsMonitorIsEntered(this IInvocationOperationWrapper invocation) =>
-            invocation.TargetMethod.Is(KnownType.System_Threading_Monitor, "IsEntered");
-
-        public static bool IsLockRelease(this IInvocationOperationWrapper invocation) =>
-            invocation.TargetMethod.IsAny(KnownType.System_Threading_ReaderWriterLock, "ReleaseLock", "ReleaseReaderLock", "ReleaseWriterLock")
-            || invocation.TargetMethod.IsAny(KnownType.System_Threading_ReaderWriterLockSlim, "ExitReadLock", "ExitWriteLock", "ExitUpgradeableReadLock")
-            || invocation.TargetMethod.Is(KnownType.System_Threading_Mutex, "ReleaseMutex")
-            || invocation.TargetMethod.Is(KnownType.System_Threading_SpinLock, "Exit");
+        public static bool IsOnReaderWriterLockOrSlim(this IMemberReferenceOperationWrapper reference) =>
+            reference.Instance.Type.IsAny(KnownType.System_Threading_ReaderWriterLock, KnownType.System_Threading_ReaderWriterLockSlim);
     }
 }

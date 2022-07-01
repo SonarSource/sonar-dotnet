@@ -345,6 +345,21 @@ namespace ReaderWriterLockSlim_Type
             }
         }
 
+        public void IsWriteLockHeld_InsideTryCatch()
+        {
+            try
+            {
+                readerWriterLockSlim.EnterWriteLock();
+                if (readerWriterLockSlim.IsWriteLockHeld)   // Compliant, https://github.com/SonarSource/sonar-dotnet/issues/5416
+                {
+                    readerWriterLockSlim.ExitWriteLock();
+                }
+            }
+            catch
+            {
+            }
+        }
+
         public void IsWriterLockHeld_Noncompliant()
         {
             if (readerWriterLockSlim.IsWriteLockHeld)  // Noncompliant

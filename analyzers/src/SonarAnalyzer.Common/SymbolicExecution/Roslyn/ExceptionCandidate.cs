@@ -69,13 +69,17 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
                 : new ExceptionState(typeCatalog.SystemIndexOutOfRangeException);
 
         private ExceptionState FromOperation(IMemberReferenceOperationWrapper reference) =>
-            reference.IsStaticOrThis() ? null : new ExceptionState(typeCatalog.SystemNullReferenceException);
+            reference.IsStaticOrThis()
+            || reference.IsOnReaderWriterLockOrSlim()   // Needed by S2222
+                ? null
+                : new ExceptionState(typeCatalog.SystemNullReferenceException);
 
         private static ExceptionState FromOperation(IInvocationOperationWrapper invocation) =>
             // These methods are declared as well-known methods that (usually) do not throw.
             // Otherwise, we would have FPs because engine would split the flow to happy path with constraints and possible exception path.
-            invocation.IsMonitorExit()      // Needed by S2222
-            || invocation.IsLockRelease()   // Needed by S2222
+            invocation.IsMonitorExit()          // Needed by S2222
+            || invocation.IsMonitorIsEntered()  // Needed by S2222
+            || invocation.IsLockRelease()       // Needed by S2222
             ? null
             : ExceptionState.UnknownException;
     }
