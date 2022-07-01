@@ -59,11 +59,6 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
                 _ => null
             };
 
-        private ExceptionState FromOperation(IArrayElementReferenceOperationWrapper reference) =>
-            reference.Indices.Any(x => x.Kind == OperationKindEx.Range) // In case of Range, ArgumentOutOfRangeException is raised
-                ? new ExceptionState(typeCatalog.SystemArgumentOutOfRangeException)
-                : new ExceptionState(typeCatalog.SystemIndexOutOfRangeException);
-
         private ExceptionState FromConversion(IOperationWrapperSonar operation)
         {
             if (operation.IsImplicit)
@@ -76,6 +71,11 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
                        ? null
                        : new ExceptionState(typeCatalog.SystemInvalidCastException);
         }
+
+        private ExceptionState FromOperation(IArrayElementReferenceOperationWrapper reference) =>
+            reference.Indices.Any(x => x.Kind == OperationKindEx.Range) // In case of Range, ArgumentOutOfRangeException is raised
+                ? new ExceptionState(typeCatalog.SystemArgumentOutOfRangeException)
+                : new ExceptionState(typeCatalog.SystemIndexOutOfRangeException);
 
         private ExceptionState FromOperation(IMemberReferenceOperationWrapper reference) =>
             reference.IsStaticOrThis() ? null : new ExceptionState(typeCatalog.SystemNullReferenceException);
