@@ -35,11 +35,11 @@ namespace SonarAnalyzer.UnitTest.Rules
 
 #if NET
         [TestMethod]
-        public void ParameterAssignedTo_CS9() =>
+        public void ParameterAssignedTo_CSharp9() =>
             verifierCS.AddPaths("ParameterAssignedTo.CSharp9.cs").WithTopLevelStatements().Verify();
 
         [TestMethod]
-        public void ParameterAssignedTo_CS10() =>
+        public void ParameterAssignedTo_CSharp10() =>
             verifierCS.AddPaths("ParameterAssignedTo.CSharp10.cs").WithOptions(ParseOptionsHelper.FromCSharp10).Verify();
 #endif
 
