@@ -38,22 +38,21 @@ namespace SonarAnalyzer.Rules
 
         protected ParameterAssignedToBase() : base(DiagnosticId) { }
 
-        protected sealed override void Initialize(SonarAnalysisContext context)
-        {
+        protected sealed override void Initialize(SonarAnalysisContext context) =>
             context.RegisterSyntaxNodeActionInNonGenerated(
-                Language.GeneratedCodeRecognizer,
-                c =>
+                Language.GeneratedCodeRecognizer, c =>
                 {
-                    var left = Language.Syntax.AssignmentLeft(c.Node);
-                    if (c.SemanticModel.GetSymbolInfo(left).Symbol is { } symbol
-                        && (symbol is IParameterSymbol { RefKind: RefKind.None } || IsAssignmentToCatchVariable(symbol, left))
-                        && (!IsReadBefore(c.SemanticModel, symbol, c.Node)))
+                    foreach (var target in Language.Syntax.AssignmentTargets(c.Node))
                     {
-                        c.ReportIssue(Diagnostic.Create(SupportedDiagnostics[0], left.GetLocation(), left.ToString()));
+                        if (c.SemanticModel.GetSymbolInfo(target).Symbol is { } symbol
+                            && (symbol is IParameterSymbol { RefKind: RefKind.None } || IsAssignmentToCatchVariable(symbol, target))
+                            && !IsReadBefore(c.SemanticModel, symbol, c.Node))
+                        {
+                            c.ReportIssue(Diagnostic.Create(Rule, target.GetLocation(), target.ToString()));
+                        }
                     }
                 },
                 Language.SyntaxKind.SimpleAssignment);
-        }
 
         private bool IsReadBefore(SemanticModel semanticModel, ISymbol parameterSymbol, SyntaxNode assignment)
         {
@@ -65,7 +64,8 @@ namespace SonarAnalyzer.Rules
             {
                 return true; // If we can't find the location, it's going to be FN
             }
-            return GetPreviousNodes(stopLocation, assignment)
+
+            return GetPreviousNodes(parameterSymbol.Locations.First(), assignment)
                 .Union(Language.Syntax.AssignmentRight(assignment).DescendantNodes())
                 .OfType<TIdentifierNameSyntax>()
                 .Any(x => parameterSymbol.Equals(semanticModel.GetSymbolInfo(x).Symbol));

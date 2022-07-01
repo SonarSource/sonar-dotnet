@@ -19,6 +19,7 @@
  */
 
 using System.Collections.Generic;
+using System.Collections.Immutable;
 using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
@@ -64,8 +65,8 @@ namespace SonarAnalyzer.Helpers.Facade
                 _ => throw InvalidOperation(node, nameof(ArgumentExpressions))
             };
 
-        public override SyntaxNode AssignmentLeft(SyntaxNode assignment) =>
-            Cast<AssignmentExpressionSyntax>(assignment).Left;
+        public override ImmutableArray<SyntaxNode> AssignmentTargets(SyntaxNode assignment) =>
+            Cast<AssignmentExpressionSyntax>(assignment).AssignmentTargets();
 
         public override SyntaxNode AssignmentRight(SyntaxNode assignment) =>
             Cast<AssignmentExpressionSyntax>(assignment).Right;
