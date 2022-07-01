@@ -572,5 +572,123 @@ End Module";
             validator.ValidateTagOrder("BeforeTry", "InTry");
             validator.ExitStates.Should().HaveCount(0);
         }
+
+#if NET
+
+        [TestMethod]
+        public void ExceptionCandidate_Index_Array()
+        {
+            const string code = @"
+var tag = ""BeforeTry"";
+try
+{
+    tag = ""InTry"";
+    _ = array[^0];
+}
+catch
+{
+    tag = ""InCatch"";
+}
+tag = ""AfterCatch"";";
+
+            var validator = SETestContext.CreateCS(code, ", int[] array").Validator;
+            validator.ValidateContainsOperation(OperationKindEx.MethodReference);
+            validator.ValidateTagOrder("BeforeTry", "InTry", "InCatch", "AfterCatch");
+            validator.TagStates("InCatch").Should().ContainSingle(x => HasExceptionOfType(x, "IndexOutOfRangeException"));
+            validator.ExitStates.Should().HaveCount(1).And.ContainSingle(x => HasNoException(x));
+        }
+
+        [TestMethod]
+        public void ExceptionCandidate_Index_This()
+        {
+            const string code = @"
+using System;
+
+class Sample
+{
+    public int this[Index i] => 0;
+
+    public void Method()
+    {
+        var tag = ""BeforeTry"";
+        try
+        {
+            tag = ""InTry"";
+            _ = this[^0];
+        }
+        catch
+        {
+            tag = ""UnreachableInCatch"";
+        }
+        tag = ""AfterCatch"";
+    }
+}";
+
+            var validator = CreateCSharpValidator(code);
+            // IImplicitIndexerReferenceOperation is not generated in the current version of Roslyn. It will be generated in 4.4.0.
+            validator.ValidateTagOrder("BeforeTry", "InTry", "AfterCatch");
+            validator.ExitStates.Should().HaveCount(1).And.ContainSingle(x => HasNoException(x));
+        }
+
+        [TestMethod]
+        public void ExceptionCandidate_Range_Array()
+        {
+            const string code = @"
+var tag = ""BeforeTry"";
+try
+{
+    tag = ""InTry"";
+    _ = array[0..];
+}
+catch
+{
+    tag = ""InCatch"";
+}
+tag = ""AfterCatch"";";
+
+            var validator = SETestContext.CreateCS(code, ", int[] array").Validator;
+            validator.ValidateContainsOperation(OperationKindEx.MethodReference);
+            validator.ValidateTagOrder("BeforeTry", "InTry", "InCatch", "AfterCatch");
+            validator.TagStates("InCatch").Should().ContainSingle(x => HasExceptionOfType(x, "ArgumentOutOfRangeException"));
+            validator.ExitStates.Should().HaveCount(1).And.ContainSingle(x => HasNoException(x));
+        }
+
+        [TestMethod]
+        public void ExceptionCandidate_Range_This()
+        {
+            const string code = @"
+using System;
+
+class Sample
+{
+    public int this[Range r] => 0;
+
+    public void Method()
+    {
+        var tag = ""BeforeTry"";
+        try
+        {
+            tag = ""InTry"";
+            _ = this[0..];
+        }
+        catch
+        {
+            tag = ""InCatch"";
+        }
+        tag = ""AfterCatch"";
+    }
+}";
+
+            var validator = CreateCSharpValidator(code);
+            validator.ValidateContainsOperation(OperationKindEx.Range);
+            // IImplicitIndexerReferenceOperation is not generated in the current version of Roslyn. It will be generated in 4.4.0.
+            validator.ValidateTagOrder("BeforeTry", "InTry", "AfterCatch");
+            validator.ExitStates.Should().HaveCount(1).And.ContainSingle(x => HasNoException(x));
+        }
+
+        private static ValidatorTestCheck CreateCSharpValidator(string code) =>
+            new SETestContext(code, AnalyzerLanguage.CSharp, Array.Empty<SymbolicCheck>()).Validator;
+
+#endif
     }
 }
