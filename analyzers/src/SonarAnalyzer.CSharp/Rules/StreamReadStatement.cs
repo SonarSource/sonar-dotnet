@@ -46,12 +46,9 @@ namespace SonarAnalyzer.Rules.CSharp
             context.RegisterSyntaxNodeActionInNonGenerated(c =>
                 {
                     var statement = (ExpressionStatementSyntax)c.Node;
-                    var expression = statement.Expression;
-
-                    if (expression is AwaitExpressionSyntax awaitExpression)
-                    {
-                        expression = awaitExpression.Expression;
-                    }
+                    var expression = statement is { Expression: AwaitExpressionSyntax awaitExpression }
+                        ? awaitExpression.Expression
+                        : statement.Expression;
 
                     if (expression is InvocationExpressionSyntax invocation
                         && invocation.GetMethodCallIdentifier() is { } methodIdentifier
