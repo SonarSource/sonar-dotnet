@@ -18,6 +18,7 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Linq;
 using Microsoft.CodeAnalysis;
@@ -123,13 +124,14 @@ namespace SonarAnalyzer.Rules.CSharp
                 }
                 else if (division.Ancestors().OfType<VariableDeclarationSyntax>().FirstOrDefault() is { } variableDeclaration)
                 {
-                    var tuple = division.Ancestors().FirstOrDefault(x => TupleExpressionSyntaxWrapper.IsInstance(x));
+                    var tuple = division.Ancestors().LastOrDefault(x => TupleExpressionSyntaxWrapper.IsInstance(x));
                     var tupleArguments = ((TupleExpressionSyntaxWrapper)tuple).AllArguments();
                     var declarationType = semanticModel.GetTypeInfo(variableDeclaration.Type).Type;
-                    var tupleTypes = (declarationType as INamedTypeSymbol)?.TupleElements().Select(x => x.Type).ToArray();
-                    if (tupleTypes != null && DivisionArgumentIndex(tupleArguments, division) is { } argumentIndex)
+                    List<ITypeSymbol> flattenTupleTypes = new();
+                    FlattenTupleType(declarationType, flattenTupleTypes);
+                    if (flattenTupleTypes.Any() && DivisionArgumentIndex(tupleArguments, division) is { } argumentIndex)
                     {
-                        type = tupleTypes[argumentIndex];
+                        type = flattenTupleTypes[argumentIndex];
                         return type.IsAny(KnownType.NonIntegralNumbers);
                     }
                 }
@@ -156,6 +158,27 @@ namespace SonarAnalyzer.Rules.CSharp
                 }
             }
             return null;
+        }
+
+        private static void FlattenTupleType(ITypeSymbol typeSymbol, List<ITypeSymbol> symbolList)
+        {
+            if (typeSymbol == null)
+            {
+                return;
+            }
+            if (!typeSymbol.IsTupleType())
+            {
+                symbolList.Add(typeSymbol.GetSymbolType());
+                return;
+            }
+            else
+            {
+                var types = ((INamedTypeSymbol)typeSymbol).TupleElements();
+                foreach (var type in types)
+                {
+                    FlattenTupleType(type.Type, symbolList);
+                }
+            }
         }
     }
 }
