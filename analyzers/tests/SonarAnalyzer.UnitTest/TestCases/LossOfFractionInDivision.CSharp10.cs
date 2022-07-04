@@ -19,5 +19,17 @@
         (decimal, decimal) d4 = (1 / 3, 1 / 3); // Noncompliant [issue1, issue2]
         (decimal d5, decimal d6) = (1 / 3, 1 / 3); // Noncompliant [issue3, issue4]
 
+        var bar = (1, Foo(1 / 3)); // Noncompliant
+
+        (int, decimal) fooBar;
+        fooBar = (1, Foo(1 / 3)); // Noncompliant
+
+        decimal Foo(decimal d)
+        {
+            return d;
+        }
+
+
+
     }
 }

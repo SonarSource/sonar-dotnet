@@ -123,12 +123,13 @@ namespace SonarAnalyzer.Rules.CSharp
                 }
                 else if (division.Ancestors().OfType<VariableDeclarationSyntax>().FirstOrDefault() is { } variableDeclaration)
                 {
-                    var tupleArguments = ((TupleExpressionSyntaxWrapper)division.Parent.Parent).AllArguments();
+                    var tuple = division.Ancestors().FirstOrDefault(x => TupleExpressionSyntaxWrapper.IsInstance(x));
+                    var tupleArguments = ((TupleExpressionSyntaxWrapper)tuple).AllArguments();
                     var declarationType = semanticModel.GetTypeInfo(variableDeclaration.Type).Type;
                     var tupleTypes = (declarationType as INamedTypeSymbol)?.TupleElements().Select(x => x.Type).ToArray();
-                    if (tupleTypes != null)
+                    if (tupleTypes != null && DivisionArgumentIndex(tupleArguments, division) is { } argumentIndex)
                     {
-                        type = tupleTypes[tupleArguments.IndexOf((ArgumentSyntax)division.Parent)];
+                        type = tupleTypes[argumentIndex];
                         return type.IsAny(KnownType.NonIntegralNumbers);
                     }
                 }
@@ -142,6 +143,19 @@ namespace SonarAnalyzer.Rules.CSharp
 
             type = null;
             return false;
+        }
+
+        private static int? DivisionArgumentIndex(ImmutableArray<ArgumentSyntax> arguments, SyntaxNode division)
+        {
+            foreach (var argument in arguments)
+            {
+                var argumentWithDivision = argument.DescendantNodesAndSelf().FirstOrDefault(x => x.Equals(division));
+                if (argumentWithDivision != null)
+                {
+                    return arguments.IndexOf(argument);
+                }
+            }
+            return null;
         }
     }
 }
