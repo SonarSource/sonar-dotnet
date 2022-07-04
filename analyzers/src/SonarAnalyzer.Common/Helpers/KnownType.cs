@@ -442,6 +442,7 @@ namespace SonarAnalyzer.Helpers
         internal static readonly KnownType System_String_Array = new("System.String") { IsArray = true};
         internal static readonly KnownType System_StringComparison = new("System.StringComparison");
         internal static readonly KnownType System_SystemException = new("System.SystemException");
+        internal static readonly KnownType System_TimeSpan = new("System.TimeSpan");
         internal static readonly KnownType System_Text_RegularExpressions_Regex = new("System.Text.RegularExpressions.Regex");
         internal static readonly KnownType System_Text_StringBuilder = new("System.Text.StringBuilder");
         internal static readonly KnownType System_Threading_Monitor = new("System.Threading.Monitor");

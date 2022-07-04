@@ -1,0 +1,70 @@
+﻿using System;
+using System.Text.RegularExpressions;
+
+class Compliant
+{
+    void Ctor()
+    {
+        var defaultOrder = new Regex("some pattern", RegexOptions.None, TimeSpan.FromSeconds(1)); // Compliant
+
+        var namedArgs = new Regex(
+            pattern: "some pattern",
+            matchTimeout: TimeSpan.FromSeconds(1), // Compliant
+            options: RegexOptions.None);
+    }
+
+    void Instance()
+    {
+        var regex = new Regex("some pattern", RegexOptions.None, TimeSpan.FromSeconds(1));
+
+        var isMatch = regex.IsMatch("some input"); // Compliant
+        var match = regex.Match("some input"); // Compliant
+        var matches = regex.Matches("some input"); // Compliant
+        var replace = regex.Replace("some input", "some replacement"); // Complaint
+        var split = regex.Split("some input"); // Compliant
+    }
+
+    void Static()
+    {
+        var isMatch = Regex.IsMatch("some input", "some pattern", RegexOptions.None, TimeSpan.FromSeconds(1)); // Compliant
+        var match = Regex.Match("some input", "some pattern", RegexOptions.None, TimeSpan.FromSeconds(1)); // Compliant
+        var matches = Regex.Matches("some input", "some pattern", RegexOptions.None, TimeSpan.FromSeconds(1)); // Compliant
+        var replace = Regex.Replace("some input", "some pattern", "some replacement", RegexOptions.None, TimeSpan.FromSeconds(1)); // Complaint
+        var split = Regex.Split("some input", "some pattern", RegexOptions.None, TimeSpan.FromSeconds(1)); // Compliant
+    }
+
+    void NoRegex()
+    {
+        var match = NoSystem.Regex.IsMatch("some input", "some pattern"); // Compliant
+    }
+}
+
+class Noncompliant
+{
+    void Ctor()
+    {
+        var patternOnly = new Regex("some pattern"); // Noncompliant {{Pass a timeout to limit the execution time.}}
+        //                ^^^^^^^^^^^^^^^^^^^^^^^^^
+        var withOptions = new Regex("some pattern", RegexOptions.None); // Noncompliant
+    }
+
+    void Static()
+    {
+        var isMatch = Regex.IsMatch("some input", "some pattern"); // Noncompliant
+        var match = Regex.Match("some input", "some pattern"); // Noncompliant
+        var matches = Regex.Matches("some input", "some pattern", RegexOptions.None); // Noncompliant
+        var replace = Regex.Replace("some input", "some pattern", "some replacement", RegexOptions.None); // Noncompliant
+        var split = Regex.Split("some input", "some pattern", RegexOptions.None); // Noncompliant
+    }
+}
+
+namespace NoSystem
+{
+    public class Regex
+    {
+        public static bool IsMatch(string input, string pattern)
+        {
+            return input == pattern;
+        }
+    }
+}
