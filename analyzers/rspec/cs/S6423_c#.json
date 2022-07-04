@@ -1,5 +1,5 @@
 {
-  "title": "Azure Functions should log all failures.",
+  "title": "Azure Functions should log all failures",
   "type": "CODE_SMELL",
   "status": "ready",
   "remediation": {

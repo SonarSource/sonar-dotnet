@@ -1,5 +1,5 @@
 {
-  "title": "Reuse client instances rather than creating new ones with each Azure Function invocation.",
+  "title": "Reuse client instances rather than creating new ones with each Azure Function invocation",
   "type": "CODE_SMELL",
   "status": "ready",
   "remediation": {

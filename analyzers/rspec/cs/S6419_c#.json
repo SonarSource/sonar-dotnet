@@ -1,5 +1,5 @@
 {
-  "title": "Azure Functions should be stateless.",
+  "title": "Azure Functions should be stateless",
   "type": "CODE_SMELL",
   "status": "ready",
   "remediation": {
