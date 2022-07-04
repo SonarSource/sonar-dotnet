@@ -134,7 +134,7 @@ namespace SonarAnalyzer.Extensions
         /// Finds the syntactic complementing <see cref="SyntaxNode"/> of an assignment with tuples.
         /// <code>
         /// var (a, b) = (1, 2);      // if node is a, 1 is returned and visa versa.
-        /// (var a, var b) = (1, 2);  // if node is 2, b is returned and visa versa.
+        /// (var a, var b) = (1, 2);  // if node is 2, var b is returned and visa versa.
         /// </code>
         /// <paramref name="node"/> must be an <see cref="ArgumentSyntax"/> of a tuple or some variable designation of a <see cref="SyntaxKindEx.DeclarationExpression"/>.
         /// </summary>
