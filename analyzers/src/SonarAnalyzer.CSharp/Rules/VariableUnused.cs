@@ -25,7 +25,6 @@ using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
-using SonarAnalyzer.Extensions;
 using SonarAnalyzer.Helpers;
 using StyleCop.Analyzers.Lightup;
 
@@ -43,31 +42,17 @@ namespace SonarAnalyzer.Rules.CSharp
             {
                 var collector = new UnusedLocalsCollector();
 
-                cbc.RegisterSyntaxNodeAction(collector.CollectDeclarations, SyntaxKind.LocalDeclarationStatement, SyntaxKind.SimpleAssignmentExpression);
+                cbc.RegisterSyntaxNodeAction(collector.CollectDeclarations, SyntaxKind.LocalDeclarationStatement);
                 cbc.RegisterSyntaxNodeAction(collector.CollectUsages, SyntaxKind.IdentifierName);
                 cbc.RegisterCodeBlockEndAction(collector.GetReportUnusedVariablesAction(Rule));
             });
 
-        private sealed class UnusedLocalsCollector : UnusedLocalsCollectorBase<SyntaxNode>
+        private class UnusedLocalsCollector : UnusedLocalsCollectorBase<LocalDeclarationStatementSyntax>
         {
-            protected override IEnumerable<SyntaxNode> GetDeclaredVariables(SyntaxNode variableDeclaration)
-            {
-                if (variableDeclaration as LocalDeclarationStatementSyntax is { } localDeclaration)
-                {
-                    return localDeclaration.UsingKeyword().IsKind(SyntaxKind.UsingKeyword)
-                    ? Enumerable.Empty<SyntaxNode>()
-                    : localDeclaration.Declaration.Variables;
-                }
-                else if (variableDeclaration as AssignmentExpressionSyntax is { } assignmentExpression
-                        && TupleExpressionSyntaxWrapper.IsInstance(assignmentExpression.Left))
-                {
-                    return assignmentExpression.AssignmentTargets();
-                }
-                else
-                {
-                    return Enumerable.Empty<SyntaxNode>();
-                }
-            }
+            protected override IEnumerable<SyntaxNode> GetDeclaredVariables(LocalDeclarationStatementSyntax localDeclaration) =>
+                localDeclaration.UsingKeyword().IsKind(SyntaxKind.UsingKeyword)
+                ? Enumerable.Empty<SyntaxNode>()
+                : localDeclaration.Declaration.Variables;
         }
     }
 }
