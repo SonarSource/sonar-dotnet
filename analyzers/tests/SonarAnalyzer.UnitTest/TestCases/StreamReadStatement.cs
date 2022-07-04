@@ -14,19 +14,18 @@ namespace Tests.Diagnostics
             using (var stream = File.Open(fileName, FileMode.Open))
             {
                 var result = new byte[stream.Length];
-                stream.Read(result, 0, (int)stream.Length); // Noncompliant
+                stream.Read(result, 0, (int)stream.Length);            // Noncompliant
 //              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
                 var l = stream.Read(result, 0, (int)stream.Length);
-                stream.ReadAsync(result, 0, (int)stream.Length); // Noncompliant {{Check the return value of the 'ReadAsync' call to see how many bytes were read.}}
+                stream.ReadAsync(result, 0, (int)stream.Length);       // Noncompliant {{Check the return value of the 'ReadAsync' call to see how many bytes were read.}}
                 await stream.ReadAsync(result, 0, (int)stream.Length); // Error [CS4033] - ctor can't be async // Noncompliant
                 stream.Write(result, 0, (int)stream.Length);
             }
-            streamField.Read(new byte[0], 0, 0); // Noncompliant
-            streamField?.Read(new byte[0], 0, 0); // Noncompliant
-            Read();
+            streamField.Read(new byte[0], 0, 0);                       // Noncompliant
+            this.streamField.Read(new byte[0], 0, 0);                  // Noncompliant
+            streamField?.Read(new byte[0], 0, 0);                      // Noncompliant
+            this.streamField?.Read(new byte[0], 0, 0);                 // Noncompliant
         }
-
-        private void Read() { }
     }
 
     public class DerivedStream : Stream
