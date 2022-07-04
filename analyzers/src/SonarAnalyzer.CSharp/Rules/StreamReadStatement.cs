@@ -53,8 +53,10 @@ namespace SonarAnalyzer.Rules.CSharp
                         expression = awaitExpression.Expression;
                     }
 
-                    if (c.SemanticModel.GetSymbolInfo(expression).Symbol is IMethodSymbol method
-                        && ReadMethodNames.Contains(method.Name, StringComparer.Ordinal)
+                    if (expression is InvocationExpressionSyntax invocation
+                        && invocation.GetMethodCallIdentifier() is { } methodIdentifier
+                        && ReadMethodNames.Contains(methodIdentifier.Text, StringComparer.Ordinal)
+                        && c.SemanticModel.GetSymbolInfo(expression).Symbol is IMethodSymbol method
                         && (method.ContainingType.Is(KnownType.System_IO_Stream)
                             || (method.IsOverride && method.ContainingType.DerivesOrImplements(KnownType.System_IO_Stream))))
                     {
