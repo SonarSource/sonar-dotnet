@@ -62,7 +62,7 @@ namespace SonarAnalyzer.Rules
 
         protected void CheckExpression(SyntaxNodeAnalysisContext context, SyntaxNode issue, SyntaxNode expression, int constant, ComparisonKind comparison)
         {
-            expression = Language.Syntax.RemoveConditionalAcesss(expression);
+            expression = Language.Syntax.RemoveConditionalAccess(expression);
             var result = comparison.Compare(constant);
             if (result.IsInvalid()
                 && HasCandidateName(Language.Syntax.NodeIdentifier(expression)?.ValueText)

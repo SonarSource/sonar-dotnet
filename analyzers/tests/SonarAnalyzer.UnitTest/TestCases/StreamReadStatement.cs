@@ -7,6 +7,8 @@ namespace Tests.Diagnostics
 {
     public class StreamReadStatement
     {
+        Stream streamField = new MemoryStream();
+
         public StreamReadStatement(string fileName)
         {
             using (var stream = File.Open(fileName, FileMode.Open))
@@ -19,7 +21,12 @@ namespace Tests.Diagnostics
                 await stream.ReadAsync(result, 0, (int)stream.Length); // Error [CS4033] - ctor can't be async // Noncompliant
                 stream.Write(result, 0, (int)stream.Length);
             }
+            streamField.Read(new byte[0], 0, 0); // Noncompliant
+            streamField?.Read(new byte[0], 0, 0); // Noncompliant
+            Read();
         }
+
+        private void Read() { }
     }
 
     public class DerivedStream : Stream

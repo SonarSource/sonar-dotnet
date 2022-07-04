@@ -27,6 +27,7 @@ using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
+using SonarAnalyzer.Extensions;
 using SonarAnalyzer.Helpers;
 
 namespace SonarAnalyzer.Rules.CSharp
@@ -49,7 +50,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     var expression = statement is { Expression: AwaitExpressionSyntax awaitExpression }
                         ? awaitExpression.Expression
                         : statement.Expression;
-
+                    expression = expression.RemoveConditionalAccess();
                     if (expression is InvocationExpressionSyntax invocation
                         && invocation.GetMethodCallIdentifier() is { } methodIdentifier
                         && ReadMethodNames.Contains(methodIdentifier.Text, StringComparer.Ordinal)

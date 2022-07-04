@@ -42,6 +42,16 @@ namespace SonarAnalyzer.Extensions
             semanticModel.GetTypeInfo(expression).Type is { } expressionType
             && (expressionType.IsReferenceType || expressionType.Is(KnownType.System_Nullable_T));
 
+        public static ExpressionSyntax RemoveConditionalAccess(this ExpressionSyntax node)
+        {
+            var whenNotNull = node.RemoveParentheses();
+            while (whenNotNull is ConditionalAccessExpressionSyntax conditionalAccess)
+            {
+                whenNotNull = conditionalAccess.WhenNotNull.RemoveParentheses();
+            }
+            return whenNotNull;
+        }
+
         /// <summary>
         /// Given an expression:
         /// - verify if it contains a comparison against the 'null' literal.

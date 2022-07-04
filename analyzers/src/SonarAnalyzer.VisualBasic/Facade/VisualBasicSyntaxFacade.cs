@@ -99,7 +99,7 @@ namespace SonarAnalyzer.Helpers.Facade
                 LiteralExpressionSyntax literalExpression => literalExpression.Token.ValueText,
                 _ => string.Empty
             };
-        public override SyntaxNode RemoveConditionalAcesss(SyntaxNode node)
+        public override SyntaxNode RemoveConditionalAccess(SyntaxNode node)
         {
             var whenNotNull = node.RemoveParentheses();
             while (whenNotNull is ConditionalAccessExpressionSyntax conditionalAccess)
