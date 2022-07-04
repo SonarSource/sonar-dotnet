@@ -162,14 +162,9 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private static void FlattenTupleType(ITypeSymbol typeSymbol, List<ITypeSymbol> symbolList)
         {
-            if (typeSymbol == null)
-            {
-                return;
-            }
             if (!typeSymbol.IsTupleType())
             {
                 symbolList.Add(typeSymbol.GetSymbolType());
-                return;
             }
             else
             {
