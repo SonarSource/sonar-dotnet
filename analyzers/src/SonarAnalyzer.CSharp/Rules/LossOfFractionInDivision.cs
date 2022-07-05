@@ -110,34 +110,30 @@ namespace SonarAnalyzer.Rules.CSharp
                 return type.IsAny(KnownType.NonIntegralNumbers);
             }
 
-            if (division.Ancestors().LastOrDefault(x => TupleExpressionSyntaxWrapper.IsInstance(x)) != null)
+            var outerTuple = GetMostOuterTuple(division);
+            if (outerTuple != null && GetFirstAncenstorOfType<AssignmentExpressionSyntax>(outerTuple) is { } assignmentSyntax
+                && assignmentSyntax.MapAssignmentArguments() is { } assignmentMappings)
             {
-                if (division.Ancestors().OfType<AssignmentExpressionSyntax>().FirstOrDefault() is { } assignmentSyntax
-                    && assignmentSyntax.MapAssignmentArguments() is { } assignmentMappings)
+                var assignementLeft = assignmentMappings.Where(x => x.Right.Equals(division)).FirstOrDefault().Left;
+                if (assignementLeft != null)
                 {
-                    var assignementLeft = assignmentMappings.Where(x => x.Right.Equals(division)).FirstOrDefault().Left;
-                    if (assignementLeft != null)
-                    {
-                        type = semanticModel.GetTypeInfo(assignementLeft).Type;
-                        return type.IsAny(KnownType.NonIntegralNumbers);
-                    }
+                    type = semanticModel.GetTypeInfo(assignementLeft).Type;
+                    return type.IsAny(KnownType.NonIntegralNumbers);
                 }
-                else if (division.Ancestors().OfType<VariableDeclarationSyntax>().FirstOrDefault() is { } variableDeclaration)
+            }
+            else if (outerTuple != null && GetFirstAncenstorOfType<VariableDeclarationSyntax>(outerTuple) is { } variableDeclaration)
+            {
+                var tupleArguments = ((TupleExpressionSyntaxWrapper)outerTuple).AllArguments();
+                var declarationType = semanticModel.GetTypeInfo(variableDeclaration.Type).Type;
+                var flattenTupleTypes = AllTupleElements(declarationType);
+                if (flattenTupleTypes.Any() && DivisionArgumentIndex(tupleArguments, division) is { } argumentIndex)
                 {
-                    var tuple = division.Ancestors().LastOrDefault(x => TupleExpressionSyntaxWrapper.IsInstance(x));
-                    var tupleArguments = ((TupleExpressionSyntaxWrapper)tuple).AllArguments();
-                    var declarationType = semanticModel.GetTypeInfo(variableDeclaration.Type).Type;
-                    List<ITypeSymbol> flattenTupleTypes = new();
-                    FlattenTupleType(declarationType, flattenTupleTypes);
-                    if (flattenTupleTypes.Any() && DivisionArgumentIndex(tupleArguments, division) is { } argumentIndex)
-                    {
-                        type = flattenTupleTypes[argumentIndex];
-                        return type.IsAny(KnownType.NonIntegralNumbers);
-                    }
+                    type = flattenTupleTypes[argumentIndex];
+                    return type.IsAny(KnownType.NonIntegralNumbers);
                 }
             }
 
-            if (division.Parent.Parent.Parent is VariableDeclarationSyntax variableDecl)
+            if (division is { Parent: EqualsValueClauseSyntax { Parent: VariableDeclaratorSyntax { Parent: VariableDeclarationSyntax variableDecl } } })
             {
                 type = semanticModel.GetTypeInfo(variableDecl.Type).Type;
                 return type.IsAny(KnownType.NonIntegralNumbers);
@@ -147,31 +143,43 @@ namespace SonarAnalyzer.Rules.CSharp
             return false;
         }
 
+        private static SyntaxNode GetMostOuterTuple(SyntaxNode node) =>
+            node.Ancestors().LastOrDefault(x => TupleExpressionSyntaxWrapper.IsInstance(x));
+
+        private static T GetFirstAncenstorOfType<T>(SyntaxNode node) where T : CSharpSyntaxNode =>
+            node.AncestorsAndSelf().OfType<T>().FirstOrDefault();
+
         private static int? DivisionArgumentIndex(ImmutableArray<ArgumentSyntax> arguments, SyntaxNode division)
         {
-            foreach (var argument in arguments)
+            for (var i = 0; i < arguments.Length; i++)
             {
-                var argumentWithDivision = argument.DescendantNodesAndSelf().FirstOrDefault(x => x.Equals(division));
-                if (argumentWithDivision != null)
+                var argument = arguments[i];
+                if (argument.Expression.Equals(division))
                 {
-                    return arguments.IndexOf(argument);
+                    return i;
                 }
             }
             return null;
         }
 
-        private static void FlattenTupleType(ITypeSymbol typeSymbol, List<ITypeSymbol> symbolList)
+        private static List<ITypeSymbol> AllTupleElements(ITypeSymbol typeSymbol)
         {
-            if (!typeSymbol.IsTupleType())
+            List<ITypeSymbol> flattenTupleTypes = new();
+            CollectTupleTypes(flattenTupleTypes, typeSymbol);
+            return flattenTupleTypes;
+            static void CollectTupleTypes(List<ITypeSymbol> symbolList, ITypeSymbol typeSymbol)
             {
-                symbolList.Add(typeSymbol.GetSymbolType());
-            }
-            else
-            {
-                var types = ((INamedTypeSymbol)typeSymbol).TupleElements();
-                foreach (var type in types)
+                if (typeSymbol.IsTupleType())
                 {
-                    FlattenTupleType(type.Type, symbolList);
+                    var types = ((INamedTypeSymbol)typeSymbol).TupleElements();
+                    foreach (var type in types)
+                    {
+                        CollectTupleTypes(symbolList, type.Type);
+                    }
+                }
+                else
+                {
+                    symbolList.Add(typeSymbol.GetSymbolType());
                 }
             }
         }
