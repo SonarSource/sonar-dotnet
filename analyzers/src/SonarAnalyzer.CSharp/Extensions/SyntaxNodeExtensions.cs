@@ -181,17 +181,14 @@ namespace SonarAnalyzer.Extensions
                     else if (ParenthesizedVariableDesignationSyntaxWrapper.IsInstance(node.Parent))
                     {
                         var parentDesignation = (ParenthesizedVariableDesignationSyntaxWrapper)node.Parent;
-                        indexAndCount.Push(new(parentdesignation.Variables.IndexOf((VariableDesignationSyntaxWrapper)node), parentdesignation.Variables.Count));
-                        node = parentdesignation.SyntaxNode;
+                        indexAndCount.Push(new(parentDesignation.Variables.IndexOf((VariableDesignationSyntaxWrapper)node), parentDesignation.Variables.Count));
+                        node = parentDesignation.SyntaxNode;
                     }
+
                     if (DeclarationExpressionSyntaxWrapper.IsInstance(node.Parent)
-                        && node.Parent.Parent is ArgumentSyntax { } argument)
+                        && node is { Parent.Parent: ArgumentSyntax { } argument })
                     {
                         node = argument;
-                    }
-                        && node.Parent.Parent is ArgumentSyntax)
-                    {
-                        node = node.Parent?.Parent;
                     }
                 }
                 return indexAndCount;
@@ -246,17 +243,14 @@ namespace SonarAnalyzer.Extensions
         private static string GetUnknownType(SyntaxKind kind) =>
 
 #if DEBUG
+
             throw new System.ArgumentException($"Unexpected type {kind}", nameof(kind));
+
 #else
+
             "type";
+
 #endif
-        {
-#if DEBUG
-            throw new System.ArgumentException($"Unexpected type {kind}", nameof(kind));
-#else
-            return "type";
-#endif
-        }
 
         private sealed class ControlFlowGraphCache : ControlFlowGraphCacheBase
         {
