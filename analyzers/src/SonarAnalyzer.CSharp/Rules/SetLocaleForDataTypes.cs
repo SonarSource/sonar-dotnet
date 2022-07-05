@@ -115,9 +115,9 @@ namespace SonarAnalyzer.Rules.CSharp
         private static ImmutableArray<SyntaxNode> GetAssignmentTargetVariables(SyntaxNode objectCreation) =>
             objectCreation.GetFirstNonParenthesizedParent() switch
             {
-                AssignmentExpressionSyntax assignment => assignment.AssignmentTargets(),
+                AssignmentExpressionSyntax assignment => ImmutableArray.Create((SyntaxNode)assignment.Left),
                 EqualsValueClauseSyntax equalsClause when equalsClause.Parent.Parent is VariableDeclarationSyntax variableDeclaration =>
-                    variableDeclaration.Variables.Select(x => (SyntaxNode)x).ToImmutableArray(),
+                    ImmutableArray.Create((SyntaxNode)variableDeclaration.Variables.Last()),
                 ArgumentSyntax argument when argument.Ancestors().OfType<AssignmentExpressionSyntax>().FirstOrDefault() is { } expressionSyntax =>
                     expressionSyntax.AssignmentTargets(),
                 _ => ImmutableArray<SyntaxNode>.Empty
