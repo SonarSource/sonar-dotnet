@@ -23,7 +23,7 @@ namespace SonarAnalyzer.UnitTest.Extensions
         [DataRow("var (a, b) = (1, 2);", "a", "b")]
         [DataRow("var (a, (b, c)) = (1, (2, 3));", "a", "b", "c")]
         [DataRow("var (a, (_, c)) = (1, (2, 3));", "a", "_", "c")]
-        public void TupleElementsAreExtracted(string tuple, params string[] expectedElements)
+        public void AllElements_ElementsOfFirstFoundTupleAreExtracted(string tuple, params string[] expectedElements)
         {
             var tupleOperation = CompileTupleOperation(tuple);
             var allElements = tupleOperation.AllElements();
