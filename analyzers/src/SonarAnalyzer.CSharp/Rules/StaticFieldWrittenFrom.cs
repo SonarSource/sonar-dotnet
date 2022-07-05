@@ -55,7 +55,7 @@ namespace SonarAnalyzer.Rules
 
                             foreach (var target in assignment.AssignmentTargets())
                             {
-                                if (StaticFieldSymbol(c.SemanticModel, target) is { } fieldSymbol)
+                                if (GetStaticFieldSymbol(c.SemanticModel, target) is { } fieldSymbol)
                                 {
                                     locationsForFields.Add(fieldSymbol, target.CreateLocation(to: assignment.OperatorToken));
                                 }
@@ -105,13 +105,13 @@ namespace SonarAnalyzer.Rules
 
         private static void CollectLocationOfStaticField(SemanticModel semanticModel, MultiValueDictionary<IFieldSymbol, Location> locationsForFields, ExpressionSyntax expression)
         {
-            if (StaticFieldSymbol(semanticModel, expression) is { } fieldSymbol)
+            if (GetStaticFieldSymbol(semanticModel, expression) is { } fieldSymbol)
             {
                 locationsForFields.Add(fieldSymbol, expression.GetLocation());
             }
         }
 
-        private static IFieldSymbol StaticFieldSymbol(SemanticModel semanticModel, SyntaxNode node) =>
+        private static IFieldSymbol GetStaticFieldSymbol(SemanticModel semanticModel, SyntaxNode node) =>
             semanticModel.GetSymbolInfo(node) is { Symbol: IFieldSymbol { IsStatic: true } fieldSymbol }
                 ? fieldSymbol
                 : null;
