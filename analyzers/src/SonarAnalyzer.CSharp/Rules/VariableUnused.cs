@@ -50,22 +50,15 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private sealed class UnusedLocalsCollector : UnusedLocalsCollectorBase<SyntaxNode>
         {
-            protected override IEnumerable<SyntaxNode> GetDeclaredVariables(SyntaxNode variableDeclaration)
-            {
-                if (variableDeclaration as LocalDeclarationStatementSyntax is { } localDeclaration)
+            protected override IEnumerable<SyntaxNode> GetDeclaredVariables(SyntaxNode variableDeclaration) =>
+                variableDeclaration switch
                 {
-                    return localDeclaration.UsingKeyword().IsKind(SyntaxKind.UsingKeyword)
-                    ? Enumerable.Empty<SyntaxNode>()
-                    : localDeclaration.Declaration.Variables;
-                }
-                else
-                {
-                    var assignmentExpression = (AssignmentExpressionSyntax)variableDeclaration;
-                    return TupleExpressionSyntaxWrapper.IsInstance(assignmentExpression.Left)
-                           ? assignmentExpression.AssignmentTargets()
-                           : Enumerable.Empty<SyntaxNode>();
-                }
-            }
+                    LocalDeclarationStatementSyntax localDeclaration when !localDeclaration.UsingKeyword().IsKind(SyntaxKind.UsingKeyword) =>
+                        localDeclaration.Declaration.Variables,
+                    AssignmentExpressionSyntax assignmentExpression =>
+                        assignmentExpression.AssignmentTargets().Where(x => DeclarationExpressionSyntaxWrapper.IsInstance(x) || SingleVariableDesignationSyntaxWrapper.IsInstance(x)),
+                    _ => Enumerable.Empty<SyntaxNode>(),
+                };
         }
     }
 }
