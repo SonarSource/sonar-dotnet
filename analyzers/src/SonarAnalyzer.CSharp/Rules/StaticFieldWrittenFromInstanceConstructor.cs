@@ -23,7 +23,6 @@ using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
-using SonarAnalyzer.Helpers;
 
 namespace SonarAnalyzer.Rules.CSharp
 {
@@ -33,9 +32,8 @@ namespace SonarAnalyzer.Rules.CSharp
         private const string DiagnosticId = "S3010";
         private const string MessageFormat = "Remove this assignment of '{0}' or initialize it statically.";
 
-        private static readonly DiagnosticDescriptor Rule =
+        protected override DiagnosticDescriptor Rule =>
             DescriptorFactory.Create(DiagnosticId, MessageFormat);
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
 
         protected override bool IsValidCodeBlockContext(SyntaxNode node, ISymbol owningSymbol) =>
             node is ConstructorDeclarationSyntax declaration

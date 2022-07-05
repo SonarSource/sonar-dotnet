@@ -25,20 +25,23 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class StaticFieldWrittenFromInstanceConstructorTest
     {
+        private readonly VerifierBuilder builder = new VerifierBuilder<StaticFieldWrittenFromInstanceConstructor>();
+
         [TestMethod]
         public void StaticFieldWrittenFromInstanceConstructor() =>
-            OldVerifier.VerifyAnalyzer(@"TestCases\StaticFieldWrittenFromInstanceConstructor.cs",
-                                    new StaticFieldWrittenFromInstanceConstructor(),
-                                    ParseOptionsHelper.FromCSharp8);
+            builder.AddPaths("StaticFieldWrittenFromInstanceConstructor.cs").WithOptions(ParseOptionsHelper.FromCSharp8).Verify();
 
 #if NET
+
         [TestMethod]
         public void StaticFieldWrittenFromInstanceConstructor_CSharp9() =>
-            OldVerifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\StaticFieldWrittenFromInstanceConstructor.CSharp9.cs", new StaticFieldWrittenFromInstanceConstructor());
+            builder.AddPaths("StaticFieldWrittenFromInstanceConstructor.CSharp9.cs").WithOptions(ParseOptionsHelper.FromCSharp9).Verify();
 
         [TestMethod]
         public void StaticFieldWrittenFromInstanceConstructor_CSharp10() =>
-            OldVerifier.VerifyAnalyzerFromCSharp10Library(@"TestCases\StaticFieldWrittenFromInstanceConstructor.CSharp10.cs", new StaticFieldWrittenFromInstanceConstructor());
+            builder.AddPaths("StaticFieldWrittenFromInstanceConstructor.CSharp10.cs").WithOptions(ParseOptionsHelper.FromCSharp10).Verify();
+
 #endif
+
     }
 }
