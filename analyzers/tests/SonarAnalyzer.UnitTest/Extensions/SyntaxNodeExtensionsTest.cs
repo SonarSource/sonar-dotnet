@@ -471,10 +471,10 @@ public class C
             code = code.Replace("$$", string.Empty);
             var syntaxTree = CSharpSyntaxTree.ParseText(code);
             var argument = syntaxTree.GetRoot().FindNode(new TextSpan(nodePosition, 0)).AncestorsAndSelf()
-                .First(x => x.IsAnyKind(SyntaxKindEx.DiscardDesignation,
+                .First(x => x.IsAnyKind(SyntaxKind.Argument,
+                                        SyntaxKindEx.DiscardDesignation,
                                         SyntaxKindEx.SingleVariableDesignation,
-                                        SyntaxKindEx.ParenthesizedVariableDesignation,
-                                        SyntaxKind.Argument));
+                                        SyntaxKindEx.ParenthesizedVariableDesignation));
             syntaxTree.GetDiagnostics().Should().BeEmpty();
             var target = SyntaxNodeExtensionsCS.FindAssignmentComplement(argument);
             if (expectedNode is null)
