@@ -51,3 +51,10 @@ Action<int, int, int> StaticLambda() =>
         (a, int b) = ReturnIntTuple(); // FN
     };
 
+void ReassignAfter()
+{
+    int x;
+    (x, var y) = (1, 2); // Noncompliant
+    x = 2;
+    Console.WriteLine(x);
+}
