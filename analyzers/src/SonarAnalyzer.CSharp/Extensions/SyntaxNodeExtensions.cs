@@ -228,8 +228,8 @@ namespace SonarAnalyzer.Extensions
 
             static SyntaxNode StepDownInTuple(TupleExpressionSyntaxWrapper tupleExpression, IndexCountPair indexCountPair) =>
                 tupleExpression.Arguments.Count == indexCountPair.Count
-                    ? tupleExpression.Arguments[indexCountPair.Index].Expression
-                    : (SyntaxNode)null;
+                    ? (SyntaxNode)tupleExpression.Arguments[indexCountPair.Index].Expression
+                    : null;
         }
 
         private static string GetUnknownType(SyntaxKind kind) =>
