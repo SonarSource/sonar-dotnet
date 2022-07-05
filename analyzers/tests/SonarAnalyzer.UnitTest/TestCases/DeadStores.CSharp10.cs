@@ -11,6 +11,11 @@ static (int a, int b) ReturnIntTuple()
     return (1, 2);
 }
 
+static (int, (int , (int, int))) ReturnNestedTuple()
+{
+    return (1, (2, (3, 4)));
+}
+
 static int ReturnAnInt()
 {
     return 10;
@@ -23,19 +28,41 @@ void DoStuffWithInts()
 //  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 }
 
+void MultipleAssignmentInSingleDeconstruction()
+{
+    int x = 1;
+    (x, x, (x, x)) = (1, 2, (3, 4));
+//  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^      {{Remove this useless assignment to local variable 'x'.}}
+//  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^  @-1 {{Remove this useless assignment to local variable 'x'.}}
+//  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^  @-2 {{Remove this useless assignment to local variable 'x'.}}
+//  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^  @-3 {{Remove this useless assignment to local variable 'x'.}}
+}
+
+void ReAssignmentDeconstruction()
+{
+    int x = 1;
+    (x, x, (x, x)) = (x, x, (x, x)); // Noncompliant [issue1, issue2, issue3, issue4]
+}
+
+void ReAssignmentDeconstructionFromMethodCall()
+{
+    (_, (var _, (int x, var _))) = ReturnNestedTuple();
+    (x, _) = ReturnNestedTuple();    // Noncompliant
+}
+
 void DoStuffWithIntsAgain()
 {
     int? x = null;
-    (x, int y) = ReturnIntTuple(); // Noncompliant
+    (x, int y) = ReturnIntTuple();   // Noncompliant
 }
 
 void TwoAssigments()
 {
     int a, b, c = 0;
     (a, (b, c)) = (1, (2, 3));
-//  ^^^^^^^^^^^^^^^^^^^^^^^^^  Noncompliant    [issue1] {{Remove this useless assignment to local variable 'a'.}}
-//  ^^^^^^^^^^^^^^^^^^^^^^^^^  Noncompliant@-1 [issue2] {{Remove this useless assignment to local variable 'b'.}}
-//  ^^^^^^^^^^^^^^^^^^^^^^^^^  Noncompliant@-2 [issue3] {{Remove this useless assignment to local variable 'c'.}}
+//  ^^^^^^^^^^^^^^^^^^^^^^^^^  Noncompliant    {{Remove this useless assignment to local variable 'a'.}}
+//  ^^^^^^^^^^^^^^^^^^^^^^^^^  Noncompliant@-1 {{Remove this useless assignment to local variable 'b'.}}
+//  ^^^^^^^^^^^^^^^^^^^^^^^^^  Noncompliant@-2 {{Remove this useless assignment to local variable 'c'.}}
 }
 
 void DoSimplerStuffWithIntsAgain()
