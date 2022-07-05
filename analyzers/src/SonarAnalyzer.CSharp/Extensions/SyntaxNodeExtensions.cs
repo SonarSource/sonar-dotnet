@@ -180,11 +180,15 @@ namespace SonarAnalyzer.Extensions
                     }
                     else if (ParenthesizedVariableDesignationSyntaxWrapper.IsInstance(node.Parent))
                     {
-                        var parentdesignation = (ParenthesizedVariableDesignationSyntaxWrapper)node.Parent;
+                        var parentDesignation = (ParenthesizedVariableDesignationSyntaxWrapper)node.Parent;
                         indexAndCount.Push(new(parentdesignation.Variables.IndexOf((VariableDesignationSyntaxWrapper)node), parentdesignation.Variables.Count));
                         node = parentdesignation.SyntaxNode;
                     }
                     if (DeclarationExpressionSyntaxWrapper.IsInstance(node.Parent)
+                        && node.Parent.Parent is ArgumentSyntax { } argument)
+                    {
+                        node = argument;
+                    }
                         && node.Parent.Parent is ArgumentSyntax)
                     {
                         node = node.Parent?.Parent;
@@ -239,7 +243,13 @@ namespace SonarAnalyzer.Extensions
             }
         }
 
-        private static string GetUnknownType(SyntaxKind kind)
+        private static string GetUnknownType(SyntaxKind kind) =>
+
+#if DEBUG
+            throw new System.ArgumentException($"Unexpected type {kind}", nameof(kind));
+#else
+            "type";
+#endif
         {
 #if DEBUG
             throw new System.ArgumentException($"Unexpected type {kind}", nameof(kind));
