@@ -487,6 +487,7 @@ public class C
                 target.ToString().Should().Be(expectedNode);
             }
         }
+
         private static SyntaxToken GetFirstTokenOfKind(SyntaxTree syntaxTree, SyntaxKind kind) =>
             syntaxTree.GetRoot().DescendantTokens().First(token => token.IsKind(kind));
     }
