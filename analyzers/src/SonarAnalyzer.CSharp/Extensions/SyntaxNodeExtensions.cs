@@ -173,8 +173,10 @@ namespace SonarAnalyzer.Extensions
                 {
                     node = node switch
                     {
-                        _ when TupleExpressionSyntaxWrapper.IsInstance(node.Parent) => PushTupleElementIndexAndCount(indexAndCount, node),
-                        _ when ParenthesizedVariableDesignationSyntaxWrapper.IsInstance(node.Parent) => PushParenthesizedVariableDesignationIndexAndCount(indexAndCount, node),
+                        ArgumentSyntax tupleArgument when TupleExpressionSyntaxWrapper.IsInstance(node.Parent) =>
+                            PushIndexAndCountTuple(indexAndCount, (TupleExpressionSyntaxWrapper)node.Parent, tupleArgument),
+                        _ when VariableDesignationSyntaxWrapper.IsInstance(node) && ParenthesizedVariableDesignationSyntaxWrapper.IsInstance(node.Parent) =>
+                            PushIndexAndCountParenthesizedDesignation(indexAndCount, (ParenthesizedVariableDesignationSyntaxWrapper)node.Parent, (VariableDesignationSyntaxWrapper)node),
                         _ => null,
                     };
                     if (DeclarationExpressionSyntaxWrapper.IsInstance(node?.Parent) && node is { Parent.Parent: ArgumentSyntax { } argument })
@@ -205,6 +207,20 @@ namespace SonarAnalyzer.Extensions
                 return node;
             }
 
+            static SyntaxNode PushIndexAndCountTuple(Stack<IndexCountPair> indexAndCount, TupleExpressionSyntaxWrapper tuple, ArgumentSyntax argument)
+            {
+                indexAndCount.Push(new(tuple.Arguments.IndexOf(argument), tuple.Arguments.Count));
+                return tuple.SyntaxNode.Parent;
+            }
+
+            static SyntaxNode PushIndexAndCountParenthesizedDesignation(Stack<IndexCountPair> indexAndCount,
+                                                                        ParenthesizedVariableDesignationSyntaxWrapper parenthesizedDesignation,
+                                                                        VariableDesignationSyntaxWrapper variable)
+            {
+                indexAndCount.Push(new(parenthesizedDesignation.Variables.IndexOf(variable), parenthesizedDesignation.Variables.Count));
+                return parenthesizedDesignation.SyntaxNode;
+            }
+
             static SyntaxNode StepDownInParenthesizedVariableDesignation(ParenthesizedVariableDesignationSyntaxWrapper parenthesizedVariableDesignation, IndexCountPair indexCountPair) =>
                 parenthesizedVariableDesignation.Variables.Count == indexCountPair.Count
                     ? (SyntaxNode)parenthesizedVariableDesignation.Variables[indexCountPair.Index]
@@ -214,20 +230,6 @@ namespace SonarAnalyzer.Extensions
                 tupleExpression.Arguments.Count == indexCountPair.Count
                     ? tupleExpression.Arguments[indexCountPair.Index].Expression
                     : (SyntaxNode)null;
-
-            static SyntaxNode PushTupleElementIndexAndCount(Stack<IndexCountPair> indexAndCount, SyntaxNode node)
-            {
-                var parentTuple = (TupleExpressionSyntaxWrapper)node.Parent;
-                indexAndCount.Push(new(parentTuple.Arguments.IndexOf((ArgumentSyntax)node), parentTuple.Arguments.Count));
-                return parentTuple.SyntaxNode.Parent;
-            }
-
-            static SyntaxNode PushParenthesizedVariableDesignationIndexAndCount(Stack<IndexCountPair> indexAndCount, SyntaxNode node)
-            {
-                var parentDesignation = (ParenthesizedVariableDesignationSyntaxWrapper)node.Parent;
-                indexAndCount.Push(new(parentDesignation.Variables.IndexOf((VariableDesignationSyntaxWrapper)node), parentDesignation.Variables.Count));
-                return parentDesignation.SyntaxNode;
-            }
         }
 
         private static string GetUnknownType(SyntaxKind kind) =>
