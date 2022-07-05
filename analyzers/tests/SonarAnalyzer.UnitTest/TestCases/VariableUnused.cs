@@ -44,6 +44,8 @@ namespace Tests.Diagnostics
             string f; // FN
             f = "Hello, world!";
 
+            string f1 = "Hello"; // Noncompliant
+
             var d = "";
             var e = new List<String> { d };
             Console.WriteLine(e);
