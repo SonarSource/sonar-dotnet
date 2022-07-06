@@ -32,17 +32,15 @@ namespace SonarAnalyzer.UnitTest.Extensions
             allElements.Select(x => x.Syntax.ToString()).Should().BeEquivalentTo(expectedElements);
         }
 
+#if NET
+
         [TestMethod]
         public void AllElements_Performance_DeepNesting()
         {
-            var deeplyNestedTuple = DeeplyNestedTuple(500);
-            var tupleOperation = CompileFirstTupleOperation($"_ = {deeplyNestedTuple};");
-            // Warm-up
-            tupleOperation.AllElements();
-
-            Action allElements = () => tupleOperation.AllElements();
+            // NET48 does not support deeply nested tuples and fails with CS8078: An expression is too long or complex to compile
+            var deeplyNestedTuple = DeeplyNestedTuple(500); // (1, (2,... , 500))..)
             // Actual execution time is about 0.5ms.
-            allElements.ExecutionTime().Should().BeLessThan(5.Milliseconds());
+            AssertAllElementsExecutionTimeBeLessThan(deeplyNestedTuple, 5.Milliseconds());
 
             static string DeeplyNestedTuple(int depth)
             {
@@ -56,17 +54,14 @@ namespace SonarAnalyzer.UnitTest.Extensions
             }
         }
 
+#endif
+
         [TestMethod]
         public void AllElements_Performance_LargeTuple()
         {
-            var deeplyNestedTuple = LargeTuple(500);
-            var tupleOperation = CompileFirstTupleOperation($"_ = {deeplyNestedTuple};");
-            // Warm-up
-            tupleOperation.AllElements();
-
-            Action allElements = () => tupleOperation.AllElements();
+            var largeTuple = LargeTuple(500); // (1, 2,... , 500)
             // Actual execution time is about 0.5ms.
-            allElements.ExecutionTime().Should().BeLessThan(5.Milliseconds());
+            AssertAllElementsExecutionTimeBeLessThan(largeTuple, 5.Milliseconds());
 
             static string LargeTuple(int length)
             {
@@ -79,6 +74,16 @@ namespace SonarAnalyzer.UnitTest.Extensions
                 sb.Append($"{length})");
                 return sb.ToString();
             }
+        }
+
+        private static void AssertAllElementsExecutionTimeBeLessThan(string tuple, TimeSpan maxDuration)
+        {
+            var tupleOperation = CompileFirstTupleOperation($"_ = {tuple};");
+            Action allElements = () => tupleOperation.AllElements();
+            // Warm-up (make sure method is jitted)
+            allElements();
+
+            allElements.ExecutionTime().Should().BeLessThan(maxDuration);
         }
 
         private static ITupleOperationWrapper CompileFirstTupleOperation(string tuple)
