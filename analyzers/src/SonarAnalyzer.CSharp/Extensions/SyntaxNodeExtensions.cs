@@ -160,8 +160,8 @@ namespace SonarAnalyzer.Extensions
                 };
                 if (TupleExpressionSyntaxWrapper.IsInstance(otherSide) || DeclarationExpressionSyntaxWrapper.IsInstance(otherSide))
                 {
-                    var pathFromOutermostToNode = GetNestingPathFromNodeToOutermost(node);
-                    return FindMatchingNestedNode(pathFromOutermostToNode, otherSide);
+                    var stackFromNodeToOutermost = GetNestingPathFromNodeToOutermost(node);
+                    return FindMatchingNestedNode(stackFromNodeToOutermost, otherSide);
                 }
             }
 
