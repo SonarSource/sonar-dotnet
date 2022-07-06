@@ -66,7 +66,7 @@ namespace SonarAnalyzer.UnitTest.Extensions
             static string LargeTuple(int length)
             {
                 var sb = new StringBuilder();
-                sb.Append("(");
+                sb.Append('(');
                 for (int i = 1; i < length; i++)
                 {
                     sb.Append($"{i}, ");
