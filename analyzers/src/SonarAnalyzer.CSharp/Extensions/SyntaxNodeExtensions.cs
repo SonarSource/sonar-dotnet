@@ -143,10 +143,11 @@ namespace SonarAnalyzer.Extensions
             Debug.Assert(node.IsAnyKind(SyntaxKind.Argument,
                                         SyntaxKindEx.DiscardDesignation,
                                         SyntaxKindEx.SingleVariableDesignation,
-                                        SyntaxKindEx.ParenthesizedVariableDesignation), "Only direct children of tuple like elements are allowed.");
+                                        SyntaxKindEx.ParenthesizedVariableDesignation,
+                                        SyntaxKindEx.TupleExpression), "Only direct children of tuple like elements are allowed.");
             Debug.Assert(node is not ArgumentSyntax || node.Parent.IsKind(SyntaxKindEx.TupleExpression), "Only arguments of a tuple are supported.");
             // can be either outermost tuple, or DeclarationExpression if 'node' is SingleVariableDesignationExpression
-            var outermostParenthesesExpression = node.Ancestors()
+            var outermostParenthesesExpression = node.AncestorsAndSelf()
                 .TakeWhile(x => x.IsAnyKind(
                     SyntaxKind.Argument,
                     SyntaxKindEx.TupleExpression,
@@ -168,6 +169,12 @@ namespace SonarAnalyzer.Extensions
                 {
                     var stackFromNodeToOutermost = GetNestingPathFromNodeToOutermost(node);
                     return FindMatchingNestedNode(stackFromNodeToOutermost, otherSide);
+                }
+                else
+                {
+                    return outermostParenthesesExpression.Equals(node)
+                        ? otherSide
+                        : null;
                 }
             }
 
@@ -191,7 +198,7 @@ namespace SonarAnalyzer.Extensions
                         _ when VariableDesignationSyntaxWrapper.IsInstance(node) && ParenthesizedVariableDesignationSyntaxWrapper.IsInstance(node.Parent) =>
                             PushPathPositionForParenthesizedDesignation(pathFromNodeToTheTop, (ParenthesizedVariableDesignationSyntaxWrapper)node.Parent, (VariableDesignationSyntaxWrapper)node),
                         _ => null,
-                };
+                    };
                 }
                 return pathFromNodeToTheTop;
             }

@@ -462,6 +462,7 @@ public class Sample
         [DataRow("(var a, var (b, $$c))= (a: 1, (b: (byte)2, 3));", "3")]
         // Assignment to tuple variable.
         [DataRow("(int, int) t; t = (1, $$2);", null)]
+        [DataRow("(int, int) t; t = $$(1, 2);", "t")]
         [DataRow("(int, int) t; (var a, t) = (1, ($$2, 3));", null)]
         [DataRow("(int, int) t; (var a, t) = (1, $$(2, 3));", "t")]
         public void FindAssignmentComplement_Tests(string code, string expectedNode)
@@ -482,7 +483,8 @@ public class C
                 .First(x => x.IsAnyKind(SyntaxKind.Argument,
                                         SyntaxKindEx.DiscardDesignation,
                                         SyntaxKindEx.SingleVariableDesignation,
-                                        SyntaxKindEx.ParenthesizedVariableDesignation));
+                                        SyntaxKindEx.ParenthesizedVariableDesignation,
+                                        SyntaxKindEx.TupleExpression));
             syntaxTree.GetDiagnostics().Should().BeEmpty();
             var target = SyntaxNodeExtensionsCS.FindAssignmentComplement(argument);
             if (expectedNode is null)
