@@ -457,6 +457,13 @@ public class Sample
         [DataRow("(var a, var ($$b, c) )= (1, (2, 3));", "2")]
         [DataRow("(var a, var (b, (c, (d, $$e)))) = (1, (2, (3, (4, 5))));", "5")]
         [DataRow("(var $$a, var (b, c))= (a: 1, (b: (byte)2, 3));", "1")]
+        [DataRow("(var a, $$var (b, c))= (a: 1, (b: (byte)2, 3));", "(b: (byte)2, 3)")]
+        [DataRow("(var a, var ($$b, c))= (a: 1, (b: (byte)2, 3));", "(byte)2")]
+        [DataRow("(var a, var (b, $$c))= (a: 1, (b: (byte)2, 3));", "3")]
+        // Assignment to tuple type without deconstruction.
+        [DataRow("(int, int) t; t = (1, $$2);", null)]
+        [DataRow("(int, int) t; (var a, t) = (1, ($$2, 3));", null)]
+        [DataRow("(int, int) t; (var a, t) = (1, $$2(2, 3));", "t")]
         public void FindAssignmentComplement_Tests(string code, string expectedNode)
         {
             code = $@"
