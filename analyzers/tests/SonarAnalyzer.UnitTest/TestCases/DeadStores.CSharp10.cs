@@ -11,6 +11,11 @@ static (int a, int b) ReturnIntTuple()
     return (1, 2);
 }
 
+static (int, (int , (int, int))) ReturnNestedTuple()
+{
+    return (1, (2, (3, 4)));
+}
+
 static int ReturnAnInt()
 {
     return 10;
@@ -18,20 +23,52 @@ static int ReturnAnInt()
 
 void DoStuffWithInts()
 {
-    int x = ReturnAnInt(); // FN - Rule does not handle tuples yet.
-    (x, int y) = ReturnIntTuple(); // FN - Rule does not handle tuples yet.
+    int x = ReturnAnInt();
+    (x, int y) = ReturnIntTuple(); // Noncompliant {{Remove this useless assignment to local variable 'x'.}}
+//  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+}
+
+void MultipleAssignmentInSingleDeconstruction()
+{
+    int x = 1;
+    (x, x, (x, x)) = (1, 2, (3, 4));
+//  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^      {{Remove this useless assignment to local variable 'x'.}}
+//  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^  @-1 {{Remove this useless assignment to local variable 'x'.}}
+//  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^  @-2 {{Remove this useless assignment to local variable 'x'.}}
+//  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^  @-3 {{Remove this useless assignment to local variable 'x'.}}
+}
+
+void ReAssignmentDeconstruction()
+{
+    int x = 1;
+    (x, x, (x, x)) = (x, x, (x, x)); // Noncompliant [issue1, issue2, issue3, issue4]
+}
+
+void ReAssignmentDeconstructionFromMethodCall()
+{
+    (_, (var _, (int x, var _))) = ReturnNestedTuple();
+    (x, _) = ReturnNestedTuple();    // Noncompliant
 }
 
 void DoStuffWithIntsAgain()
 {
-    int? x = null; // Compliant
-    (x, int y) = ReturnIntTuple();
+    int? x = null;
+    (x, int y) = ReturnIntTuple();   // Noncompliant
+}
+
+void TwoAssigments()
+{
+    int a, b, c = 0;
+    (a, (b, c)) = (1, (2, 3));
+//  ^^^^^^^^^^^^^^^^^^^^^^^^^  Noncompliant    {{Remove this useless assignment to local variable 'a'.}}
+//  ^^^^^^^^^^^^^^^^^^^^^^^^^  Noncompliant@-1 {{Remove this useless assignment to local variable 'b'.}}
+//  ^^^^^^^^^^^^^^^^^^^^^^^^^  Noncompliant@-2 {{Remove this useless assignment to local variable 'c'.}}
 }
 
 void DoSimplerStuffWithIntsAgain()
 {
-    int x; // Compliant
-    (x, var y) = (1, 2); // Compliant
+    int x;
+    (x, var y) = (1, 2); // Noncompliant
 }
 
 Action<int, int, int> StaticLambda() =>
@@ -41,3 +78,10 @@ Action<int, int, int> StaticLambda() =>
         (a, int b) = ReturnIntTuple(); // FN
     };
 
+void ReassignAfter()
+{
+    int x;
+    (x, var y) = (1, 2); // Noncompliant
+    x = 2;
+    Console.WriteLine(x);
+}

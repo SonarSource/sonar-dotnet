@@ -52,25 +52,28 @@ namespace SonarAnalyzer.Rules.CSharp
 
                 public override void AnalyzeBlock()
                 {
-                    foreach (var operation in block.OperationsAndBranchValue.ToReversedExecutionOrder())
+                    foreach (var operation in block.OperationsAndBranchValue.ToReversedExecutionOrder().Select(x => x.Instance))
                     {
-                        switch (operation.Instance.Kind)
+                        switch (operation.Kind)
                         {
                             case OperationKindEx.LocalReference:
-                                ProcessParameterOrLocalReference(ILocalReferenceOperationWrapper.FromOperation(operation.Instance));
+                                ProcessParameterOrLocalReference(ILocalReferenceOperationWrapper.FromOperation(operation));
                                 break;
                             case OperationKindEx.ParameterReference:
-                                ProcessParameterOrLocalReference(IParameterReferenceOperationWrapper.FromOperation(operation.Instance));
+                                ProcessParameterOrLocalReference(IParameterReferenceOperationWrapper.FromOperation(operation));
                                 break;
                             case OperationKindEx.SimpleAssignment:
-                                ProcessSimpleAssignment(ISimpleAssignmentOperationWrapper.FromOperation(operation.Instance));
+                                ProcessSimpleAssignment(ISimpleAssignmentOperationWrapper.FromOperation(operation));
                                 break;
                             case OperationKindEx.CompoundAssignment:
-                                ProcessCompoundAssignment(ICompoundAssignmentOperationWrapper.FromOperation(operation.Instance));
+                                ProcessCompoundAssignment(ICompoundAssignmentOperationWrapper.FromOperation(operation));
+                                break;
+                            case OperationKindEx.DeconstructionAssignment:
+                                ProcessDeconstructionAssignment(IDeconstructionAssignmentOperationWrapper.FromOperation(operation));
                                 break;
                             case OperationKindEx.Increment:
                             case OperationKindEx.Decrement:
-                                ProcessIncrementOrDecrement(IIncrementOrDecrementOperationWrapper.FromOperation(operation.Instance));
+                                ProcessIncrementOrDecrement(IIncrementOrDecrementOperationWrapper.FromOperation(operation));
                                 break;
                         }
                     }
@@ -104,6 +107,20 @@ namespace SonarAnalyzer.Rules.CSharp
 
                 private void ProcessIncrementOrDecrement(IIncrementOrDecrementOperationWrapper incrementOrDecrement) =>
                     ProcessAssignment(incrementOrDecrement, incrementOrDecrement.Target);
+
+                private void ProcessDeconstructionAssignment(IDeconstructionAssignmentOperationWrapper deconstructionAssignment)
+                {
+                    if (ITupleOperationWrapper.IsInstance(deconstructionAssignment.Target))
+                    {
+                        foreach (var tupleElement in ITupleOperationWrapper.FromOperation(deconstructionAssignment.Target).AllElements())
+                        {
+                            if (ProcessAssignment(deconstructionAssignment, tupleElement) is { } target)
+                            {
+                                liveOut.Remove(target);
+                            }
+                        }
+                    }
+                }
 
                 private ISymbol ProcessAssignment(IOperationWrapper operation, IOperation target, IOperation value = null)
                 {
