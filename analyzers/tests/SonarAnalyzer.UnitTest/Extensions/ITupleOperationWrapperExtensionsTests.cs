@@ -27,7 +27,7 @@ namespace SonarAnalyzer.UnitTest.Extensions
         [DataRow("var (a, (_, c)) = (1, (2, 3));", "a", "_", "c")]
         public void AllElements_ElementsOfFirstFoundTupleAreExtracted(string tuple, params string[] expectedElements)
         {
-            var tupleOperation = CompileTupleOperation(tuple);
+            var tupleOperation = CompileFirstTupleOperation(tuple);
             var allElements = tupleOperation.AllElements();
             allElements.Select(x => x.Syntax.ToString()).Should().BeEquivalentTo(expectedElements);
         }
@@ -36,7 +36,7 @@ namespace SonarAnalyzer.UnitTest.Extensions
         public void AllElements_Performance_DeepNesting()
         {
             var deeplyNestedTuple = DeeplyNestedTuple(500);
-            var tupleOperation = CompileTupleOperation($"_ = {deeplyNestedTuple};");
+            var tupleOperation = CompileFirstTupleOperation($"_ = {deeplyNestedTuple};");
             // Warm-up
             tupleOperation.AllElements();
 
@@ -60,7 +60,7 @@ namespace SonarAnalyzer.UnitTest.Extensions
         public void AllElements_Performance_LargeTuple()
         {
             var deeplyNestedTuple = LargeTuple(500);
-            var tupleOperation = CompileTupleOperation($"_ = {deeplyNestedTuple};");
+            var tupleOperation = CompileFirstTupleOperation($"_ = {deeplyNestedTuple};");
             // Warm-up
             tupleOperation.AllElements();
 
@@ -81,7 +81,7 @@ namespace SonarAnalyzer.UnitTest.Extensions
             }
         }
 
-        private static ITupleOperationWrapper CompileTupleOperation(string tuple)
+        private static ITupleOperationWrapper CompileFirstTupleOperation(string tuple)
         {
             var syntaxTree = CSharpSyntaxTree.ParseText(WrapInMethod(tuple));
             var compilation = CSharpCompilation.Create("TempAssembly.dll")
