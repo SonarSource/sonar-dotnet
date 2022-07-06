@@ -120,27 +120,15 @@ namespace SonarAnalyzer.Extensions
             {
                 var leftExpression = leftEnumerator.Current.Expression;
                 var rightExpression = rightEnumerator.Current.Expression;
-                if (TupleExpressionSyntaxWrapper.IsInstance(leftExpression)
-                    && TupleExpressionSyntaxWrapper.IsInstance(rightExpression))
+                switch (HandleTupleNesting(arrayBuilder, leftExpression, rightExpression))
                 {
-                    if (!MapTupleElements(arrayBuilder, (TupleExpressionSyntaxWrapper)leftExpression, (TupleExpressionSyntaxWrapper)rightExpression))
-                    {
+                    case true:
+                        break;
+                    case null:
+                        arrayBuilder.Add(new AssignmentMapping(leftExpression, rightExpression));
+                        break;
+                    case false:
                         return false;
-                    }
-                }
-                else if (DeclarationExpressionSyntaxWrapper.IsInstance(leftExpression)
-                     && (DeclarationExpressionSyntaxWrapper)leftExpression is { Designation: { } leftDesignation }
-                     && ParenthesizedVariableDesignationSyntaxWrapper.IsInstance(leftDesignation)
-                     && TupleExpressionSyntaxWrapper.IsInstance(rightExpression))
-                {
-                    if (!MapDesignationElements(arrayBuilder, (ParenthesizedVariableDesignationSyntaxWrapper)leftDesignation, (TupleExpressionSyntaxWrapper)rightExpression))
-                    {
-                        return false;
-                    }
-                }
-                else
-                {
-                    arrayBuilder.Add(new AssignmentMapping(leftExpression, rightExpression));
                 }
             }
 
@@ -160,21 +148,46 @@ namespace SonarAnalyzer.Extensions
             {
                 var leftVar = leftEnumerator.Current;
                 var rightExpression = rightEnumerator.Current.Expression;
-                if (ParenthesizedVariableDesignationSyntaxWrapper.IsInstance(leftVar)
-                    && TupleExpressionSyntaxWrapper.IsInstance(rightExpression))
+                switch (HandleDesignationNesting(arrayBuilder, leftVar, rightExpression))
                 {
-                    if (!MapDesignationElements(arrayBuilder, (ParenthesizedVariableDesignationSyntaxWrapper)leftVar, (TupleExpressionSyntaxWrapper)rightExpression))
-                    {
+                    case true:
+                        break;
+                    case null:
+                        arrayBuilder.Add(new AssignmentMapping(leftVar.SyntaxNode, rightExpression));
+                        break;
+                    case false:
                         return false;
-                    }
-                }
-                else
-                {
-                    arrayBuilder.Add(new AssignmentMapping(leftVar.SyntaxNode, rightExpression));
                 }
             }
 
             return true;
+        }
+
+        private static bool? HandleTupleNesting(ImmutableArray<AssignmentMapping>.Builder arrayBuilder, ExpressionSyntax leftExpression, ExpressionSyntax rightExpression)
+        {
+            if (TupleExpressionSyntaxWrapper.IsInstance(leftExpression)
+                && TupleExpressionSyntaxWrapper.IsInstance(rightExpression))
+            {
+                return MapTupleElements(arrayBuilder, (TupleExpressionSyntaxWrapper)leftExpression, (TupleExpressionSyntaxWrapper)rightExpression);
+            }
+            else if (DeclarationExpressionSyntaxWrapper.IsInstance(leftExpression)
+                 && (DeclarationExpressionSyntaxWrapper)leftExpression is { Designation: { } leftDesignation }
+                 && ParenthesizedVariableDesignationSyntaxWrapper.IsInstance(leftDesignation)
+                 && TupleExpressionSyntaxWrapper.IsInstance(rightExpression))
+            {
+                return MapDesignationElements(arrayBuilder, (ParenthesizedVariableDesignationSyntaxWrapper)leftDesignation, (TupleExpressionSyntaxWrapper)rightExpression);
+            }
+            return null;
+        }
+
+        private static bool? HandleDesignationNesting(ImmutableArray<AssignmentMapping>.Builder arrayBuilder, VariableDesignationSyntaxWrapper leftVar, ExpressionSyntax rightExpression)
+        {
+            if (ParenthesizedVariableDesignationSyntaxWrapper.IsInstance(leftVar)
+                && TupleExpressionSyntaxWrapper.IsInstance(rightExpression))
+            {
+                return MapDesignationElements(arrayBuilder, (ParenthesizedVariableDesignationSyntaxWrapper)leftVar, (TupleExpressionSyntaxWrapper)rightExpression);
+            }
+            return null;
         }
     }
 }
