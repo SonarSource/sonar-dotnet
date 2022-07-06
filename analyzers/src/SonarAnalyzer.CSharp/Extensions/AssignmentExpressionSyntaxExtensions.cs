@@ -135,7 +135,9 @@ namespace SonarAnalyzer.Extensions
             return NestingMatch.Handled;
         }
 
-        private static NestingMatch MapDesignationElements(ImmutableArray<AssignmentMapping>.Builder arrayBuilder, ParenthesizedVariableDesignationSyntaxWrapper left, TupleExpressionSyntaxWrapper right)
+        private static NestingMatch MapDesignationElements(ImmutableArray<AssignmentMapping>.Builder arrayBuilder,
+                                                           ParenthesizedVariableDesignationSyntaxWrapper left,
+                                                           TupleExpressionSyntaxWrapper right)
         {
             if (left.Variables.Count != right.Arguments.Count)
             {
