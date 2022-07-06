@@ -1,4 +1,6 @@
-﻿using Microsoft.CodeAnalysis.CSharp;
+﻿using System.Text;
+using FluentAssertions.Extensions;
+using Microsoft.CodeAnalysis.CSharp;
 using SonarAnalyzer.Extensions;
 using StyleCop.Analyzers.Lightup;
 
@@ -28,6 +30,55 @@ namespace SonarAnalyzer.UnitTest.Extensions
             var tupleOperation = CompileTupleOperation(tuple);
             var allElements = tupleOperation.AllElements();
             allElements.Select(x => x.Syntax.ToString()).Should().BeEquivalentTo(expectedElements);
+        }
+
+        [TestMethod]
+        public void AllElements_Performance_DeepNesting()
+        {
+            var deeplyNestedTuple = DeeplyNestedTuple(500);
+            var tupleOperation = CompileTupleOperation($"_ = {deeplyNestedTuple};");
+            // Warm-up
+            tupleOperation.AllElements();
+
+            Action allElements = () => tupleOperation.AllElements();
+            // Actual execution time is about 0.5ms.
+            allElements.ExecutionTime().Should().BeLessThan(5.Milliseconds());
+
+            static string DeeplyNestedTuple(int depth)
+            {
+                var sb = new StringBuilder();
+                for (int i = 0; i < depth; i++)
+                {
+                    sb.Append($"({i}, ");
+                }
+                sb.Append($"{depth}{new string(')', depth)}");
+                return sb.ToString();
+            }
+        }
+
+        [TestMethod]
+        public void AllElements_Performance_LargeTuple()
+        {
+            var deeplyNestedTuple = LargeTuple(500);
+            var tupleOperation = CompileTupleOperation($"_ = {deeplyNestedTuple};");
+            // Warm-up
+            tupleOperation.AllElements();
+
+            Action allElements = () => tupleOperation.AllElements();
+            // Actual execution time is about 0.5ms.
+            allElements.ExecutionTime().Should().BeLessThan(5.Milliseconds());
+
+            static string LargeTuple(int length)
+            {
+                var sb = new StringBuilder();
+                sb.Append("(");
+                for (int i = 0; i < length; i++)
+                {
+                    sb.Append($"{i}, ");
+                }
+                sb.Append($"{length})");
+                return sb.ToString();
+            }
         }
 
         private static ITupleOperationWrapper CompileTupleOperation(string tuple)
