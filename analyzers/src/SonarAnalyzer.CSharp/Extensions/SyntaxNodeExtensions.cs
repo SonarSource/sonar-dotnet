@@ -140,12 +140,17 @@ namespace SonarAnalyzer.Extensions
         /// </summary>
         public static SyntaxNode FindAssignmentComplement(this SyntaxNode node)
         {
+            if (node is { Parent: AssignmentExpressionSyntax assigment})
+            {
+                return OtherSideOfAssignment(node, assigment);
+            }
             Debug.Assert(node.IsAnyKind(SyntaxKind.Argument,
                                         SyntaxKindEx.DiscardDesignation,
                                         SyntaxKindEx.SingleVariableDesignation,
                                         SyntaxKindEx.ParenthesizedVariableDesignation,
                                         SyntaxKindEx.TupleExpression), "Only direct children of tuple like elements are allowed.");
             Debug.Assert(node is not ArgumentSyntax || node.Parent.IsKind(SyntaxKindEx.TupleExpression), "Only arguments of a tuple are supported.");
+
             // can be either outermost tuple, or DeclarationExpression if 'node' is SingleVariableDesignationExpression
             var outermostParenthesesExpression = node.AncestorsAndSelf()
                 .TakeWhile(x => x.IsAnyKind(
@@ -159,12 +164,7 @@ namespace SonarAnalyzer.Extensions
             if ((TupleExpressionSyntaxWrapper.IsInstance(outermostParenthesesExpression) || DeclarationExpressionSyntaxWrapper.IsInstance(outermostParenthesesExpression))
                 && outermostParenthesesExpression.Parent is AssignmentExpressionSyntax assignment)
             {
-                var otherSide = assignment switch
-                {
-                    { Left: { } left, Right: { } right } when left.Equals(outermostParenthesesExpression) => right,
-                    { Left: { } left, Right: { } right } when right.Equals(outermostParenthesesExpression) => left,
-                    _ => null,
-                };
+                var otherSide = OtherSideOfAssignment(outermostParenthesesExpression, assignment);
                 if (TupleExpressionSyntaxWrapper.IsInstance(otherSide) || DeclarationExpressionSyntaxWrapper.IsInstance(otherSide))
                 {
                     var stackFromNodeToOutermost = GetNestingPathFromNodeToOutermost(node);
@@ -172,13 +172,19 @@ namespace SonarAnalyzer.Extensions
                 }
                 else
                 {
-                    return outermostParenthesesExpression.Equals(node)
-                        ? otherSide
-                        : null;
+                    return null;
                 }
             }
 
             return null;
+
+            static ExpressionSyntax OtherSideOfAssignment(SyntaxNode oneSide, AssignmentExpressionSyntax assignment) =>
+                assignment switch
+                {
+                    { Left: { } left, Right: { } right } when left.Equals(oneSide) => right,
+                    { Left: { } left, Right: { } right } when right.Equals(oneSide) => left,
+                    _ => null,
+                };
 
             static Stack<PathPosition> GetNestingPathFromNodeToOutermost(SyntaxNode node)
             {

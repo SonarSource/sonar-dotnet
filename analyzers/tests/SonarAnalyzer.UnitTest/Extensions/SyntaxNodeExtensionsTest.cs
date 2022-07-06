@@ -462,9 +462,19 @@ public class Sample
         [DataRow("(var a, var (b, $$c))= (a: 1, (b: (byte)2, 3));", "3")]
         // Assignment to tuple variable.
         [DataRow("(int, int) t; t = (1, $$2);", null)]
-        [DataRow("(int, int) t; t = $$(1, 2);", "t")]
         [DataRow("(int, int) t; (var a, t) = (1, ($$2, 3));", null)]
         [DataRow("(int, int) t; (var a, t) = (1, $$(2, 3));", "t")]
+        // Start node is right side of assignment
+        [DataRow("var (a, b) = $$(1, 2);", "var (a, b)")]
+        [DataRow("var t = $$(1, 2);", null)] // Not an assignment
+        [DataRow("(int, int) t; t = $$(1, 2);", "t")]
+        [DataRow("int a; a = $$1;", "a")]
+        // Start node is left side of assignment
+        [DataRow("var (a, b)$$ = (1, 2);", "(1, 2)")]
+        [DataRow("$$var t = (1, 2);", null)] // Not an assignment
+        [DataRow("(int, int) t; t = $$(1, 2);", "t")]
+        [DataRow("(int, int) t; $$t = (1, 2);", "(1, 2)")]
+        [DataRow("int a; a = $$1;", "a")]
         public void FindAssignmentComplement_Tests(string code, string expectedNode)
         {
             code = $@"
@@ -479,12 +489,13 @@ public class C
             var nodePosition = code.IndexOf("$$");
             code = code.Replace("$$", string.Empty);
             var syntaxTree = CSharpSyntaxTree.ParseText(code);
-            var argument = syntaxTree.GetRoot().FindNode(new TextSpan(nodePosition, 0)).AncestorsAndSelf()
-                .First(x => x.IsAnyKind(SyntaxKind.Argument,
-                                        SyntaxKindEx.DiscardDesignation,
-                                        SyntaxKindEx.SingleVariableDesignation,
-                                        SyntaxKindEx.ParenthesizedVariableDesignation,
-                                        SyntaxKindEx.TupleExpression));
+            var argument = syntaxTree.GetRoot().FindNode(new TextSpan(nodePosition, 0));
+            argument = argument.AncestorsAndSelf()
+                .FirstOrDefault(x => x.IsAnyKind(SyntaxKind.Argument,
+                                                 SyntaxKindEx.DiscardDesignation,
+                                                 SyntaxKindEx.SingleVariableDesignation,
+                                                 SyntaxKindEx.ParenthesizedVariableDesignation,
+                                                 SyntaxKindEx.TupleExpression)) ?? argument;
             syntaxTree.GetDiagnostics().Should().BeEmpty();
             var target = SyntaxNodeExtensionsCS.FindAssignmentComplement(argument);
             if (expectedNode is null)
