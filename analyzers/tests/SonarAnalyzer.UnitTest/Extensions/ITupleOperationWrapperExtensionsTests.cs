@@ -51,7 +51,7 @@ namespace SonarAnalyzer.UnitTest.Extensions
                 {
                     sb.Append($"({i}, ");
                 }
-                sb.Append($"{depth}{new string(')', depth)}");
+                sb.Append($"{depth}{new string(')', depth - 1)}");
                 return sb.ToString();
             }
         }
