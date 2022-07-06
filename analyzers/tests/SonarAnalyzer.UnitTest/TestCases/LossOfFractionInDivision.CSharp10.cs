@@ -1,4 +1,6 @@
-﻿public struct S
+﻿using System.Threading.Tasks;
+
+public struct S
 {
     public decimal Property { get; set; }
 
@@ -41,5 +43,17 @@
         {
             return d;
         }
+    }
+
+    public int M(int x) => x;
+    public int M((int, int) x) => x.Item1;
+    public async Task TestAsync()
+    {
+        var a = M(1 / 3);
+        var a2 = 1 / 3 == 1 ? 1 / 3 : 1 / 3;
+        var a4 = await Task.FromResult(1 / 3);
+        var a5 = (1, M(1 / 3));
+        var a6 = (1, 1 / 3 + 1 / 3);
+        var a9 = M((1, 1 / 3));
     }
 }

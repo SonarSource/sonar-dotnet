@@ -47,8 +47,8 @@ namespace SonarAnalyzer.Rules.CSharp
                 {
                     var division = (BinaryExpressionSyntax)c.Node;
 
-                    if (!(c.SemanticModel.GetSymbolInfo(division).Symbol is IMethodSymbol symbol)
-                        || symbol.ContainingType == null
+                    if (c.SemanticModel.GetSymbolInfo(division).Symbol is not IMethodSymbol symbol
+                        || symbol.ContainingType is null
                         || !symbol.ContainingType.IsAny(KnownType.IntegralNumbersIncludingNative))
                     {
                         return;
@@ -126,7 +126,8 @@ namespace SonarAnalyzer.Rules.CSharp
                 var tupleArguments = ((TupleExpressionSyntaxWrapper)outerTuple).AllArguments();
                 var declarationType = semanticModel.GetTypeInfo(variableDeclaration.Type).Type;
                 var flattenTupleTypes = AllTupleElements(declarationType);
-                if (DivisionArgumentIndex(tupleArguments, division) is { } argumentIndex)
+                var argumentIndex = DivisionArgumentIndex(tupleArguments, division);
+                if (argumentIndex != -1)
                 {
                     type = flattenTupleTypes[argumentIndex];
                     return type.IsAny(KnownType.NonIntegralNumbers);
@@ -145,20 +146,13 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private static SyntaxNode GetMostOuterTuple(SyntaxNode node) =>
             node.Ancestors()
-            .TakeWhile(x => TupleExpressionSyntaxWrapper.IsInstance(x) || x.IsKind(SyntaxKind.Argument))
-            .LastOrDefault(x => TupleExpressionSyntaxWrapper.IsInstance(x));
+                .TakeWhile(x => TupleExpressionSyntaxWrapper.IsInstance(x) || x.IsKind(SyntaxKind.Argument))
+                .LastOrDefault(x => TupleExpressionSyntaxWrapper.IsInstance(x));
 
-        private static int? DivisionArgumentIndex(ImmutableArray<ArgumentSyntax> arguments, SyntaxNode division)
+        private static int DivisionArgumentIndex(ImmutableArray<ArgumentSyntax> arguments, SyntaxNode division)
         {
-            for (var i = 0; i < arguments.Length; i++)
-            {
-                var argument = arguments[i];
-                if (argument.Expression.Equals(division))
-                {
-                    return i;
-                }
-            }
-            return null;
+            var divisionArgument = arguments.FirstOrDefault(x => x.Expression.Equals(division));
+            return arguments.IndexOf(divisionArgument);
         }
 
         private static List<ITypeSymbol> AllTupleElements(ITypeSymbol typeSymbol)
