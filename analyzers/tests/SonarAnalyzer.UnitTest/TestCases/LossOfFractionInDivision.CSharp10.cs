@@ -23,12 +23,21 @@
         (decimal, decimal) d5 = (1 / 3, 1 / 3); // Noncompliant [issue3, issue4]
         (decimal d6, decimal d7) = (1 / 3, 1 / 3); // Noncompliant [issue5, issue6]
 
-        var bar = (1, Foo(1 / 3)); // Noncompliant
+        var bar = (1, FooDecimal(1 / 3)); // Noncompliant
 
         (int, decimal) fooBar;
-        fooBar = (1, Foo(1 / 3)); // Noncompliant
+        fooBar = (1, FooDecimal(1 / 3)); // Noncompliant
 
-        decimal Foo(decimal d)
+        decimal FooDecimal(decimal d)
+        {
+            return d;
+        }
+
+        bar = (1, FooInt(1 / 3));
+
+        fooBar = (1, FooInt(1 / 3));
+
+        int FooInt(int d)
         {
             return d;
         }

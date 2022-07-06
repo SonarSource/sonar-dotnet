@@ -111,7 +111,7 @@ namespace SonarAnalyzer.Rules.CSharp
             }
 
             var outerTuple = GetMostOuterTuple(division);
-            if (outerTuple != null && GetFirstAncenstorOfType<AssignmentExpressionSyntax>(outerTuple) is { } assignmentSyntax
+            if (outerTuple is { Parent: AssignmentExpressionSyntax assignmentSyntax }
                 && assignmentSyntax.MapAssignmentArguments() is { } assignmentMappings)
             {
                 var assignementLeft = assignmentMappings.Where(x => x.Right.Equals(division)).FirstOrDefault().Left;
@@ -121,12 +121,12 @@ namespace SonarAnalyzer.Rules.CSharp
                     return type.IsAny(KnownType.NonIntegralNumbers);
                 }
             }
-            else if (outerTuple != null && GetFirstAncenstorOfType<VariableDeclarationSyntax>(outerTuple) is { } variableDeclaration)
+            else if (outerTuple is { Parent: EqualsValueClauseSyntax { Parent: VariableDeclaratorSyntax { Parent: VariableDeclarationSyntax variableDeclaration} } })
             {
                 var tupleArguments = ((TupleExpressionSyntaxWrapper)outerTuple).AllArguments();
                 var declarationType = semanticModel.GetTypeInfo(variableDeclaration.Type).Type;
                 var flattenTupleTypes = AllTupleElements(declarationType);
-                if (flattenTupleTypes.Any() && DivisionArgumentIndex(tupleArguments, division) is { } argumentIndex)
+                if (DivisionArgumentIndex(tupleArguments, division) is { } argumentIndex)
                 {
                     type = flattenTupleTypes[argumentIndex];
                     return type.IsAny(KnownType.NonIntegralNumbers);
@@ -144,10 +144,9 @@ namespace SonarAnalyzer.Rules.CSharp
         }
 
         private static SyntaxNode GetMostOuterTuple(SyntaxNode node) =>
-            node.Ancestors().LastOrDefault(x => TupleExpressionSyntaxWrapper.IsInstance(x));
-
-        private static T GetFirstAncenstorOfType<T>(SyntaxNode node) where T : CSharpSyntaxNode =>
-            node.AncestorsAndSelf().OfType<T>().FirstOrDefault();
+            node.Ancestors()
+            .TakeWhile(x => TupleExpressionSyntaxWrapper.IsInstance(x) || x.IsKind(SyntaxKind.Argument))
+            .LastOrDefault(x => TupleExpressionSyntaxWrapper.IsInstance(x));
 
         private static int? DivisionArgumentIndex(ImmutableArray<ArgumentSyntax> arguments, SyntaxNode division)
         {
