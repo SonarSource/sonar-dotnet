@@ -128,7 +128,7 @@ namespace SonarAnalyzer.Extensions
                         return false;
                     case null:  // No nesting.
                         arrayBuilder.Add(new AssignmentMapping(leftExpression, rightExpression));
-                        break;
+                        break; // the switch
                 }
             }
 

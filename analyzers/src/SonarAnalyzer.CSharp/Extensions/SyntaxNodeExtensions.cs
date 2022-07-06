@@ -139,7 +139,8 @@ namespace SonarAnalyzer.Extensions
         /// </summary>
         public static SyntaxNode FindAssignmentComplement(this SyntaxNode node)
         {
-            var thisSide = node.Ancestors()
+            // can be either outermost tuple, or DeclarationExpression if 'node' is SingleVariableDesignationExpression
+            var outermostParenthesesExpression = node.Ancestors()
                 .TakeWhile(x => x.IsAnyKind(
                     SyntaxKind.Argument,
                     SyntaxKindEx.TupleExpression,
@@ -159,16 +160,16 @@ namespace SonarAnalyzer.Extensions
                 };
                 if (TupleExpressionSyntaxWrapper.IsInstance(otherSide) || DeclarationExpressionSyntaxWrapper.IsInstance(otherSide))
                 {
-                    var indexAndCount = IndexAndCountOfNesting(node);
+                    var pathFromOutermostToNode = IndexAndCountOfNesting(node);
                     return FindMatchingNestedNode(indexAndCount, otherSide);
                 }
             }
 
             return null;
 
-            static Stack<IndexCountPair> IndexAndCountOfNesting(SyntaxNode node)
+            static Stack<IndexCountPair> GetNestingPathFromNodeToOutermost(SyntaxNode node)
             {
-                Stack<IndexCountPair> indexAndCount = new();
+                Stack<IndexCountPair> pathFromNodeToTheTop = new();
                 while (TupleExpressionSyntaxWrapper.IsInstance(node?.Parent) || ParenthesizedVariableDesignationSyntaxWrapper.IsInstance(node?.Parent))
                 {
                     node = node switch
@@ -187,15 +188,16 @@ namespace SonarAnalyzer.Extensions
                 return indexAndCount;
             }
 
-            static SyntaxNode FindMatchingNestedNode(Stack<IndexCountPair> indexAndCount, SyntaxNode node)
+            static SyntaxNode FindMatchingNestedNode(Stack<IndexCountPair> pathFromOutermostToGivenNode, SyntaxNode outermostParenthesesToMatch)
             {
-                while (node is not null && indexAndCount.Count > 0)
+                var matchedNestedNode = outermostParenthesesToMatch;
+                while (matchedNestedNode is not null && pathFromOutermostToNode.Count > 0)
                 {
                     if (DeclarationExpressionSyntaxWrapper.IsInstance(node))
                     {
                         node = ((DeclarationExpressionSyntaxWrapper)node).Designation;
                     }
-                    var indexCountPair = indexAndCount.Pop();
+                    var expectedPathPosition = indexAndCount.Pop();
                     node = node switch
                     {
                         _ when TupleExpressionSyntaxWrapper.IsInstance(node) => StepDownInTuple((TupleExpressionSyntaxWrapper)node, indexCountPair),
@@ -221,7 +223,7 @@ namespace SonarAnalyzer.Extensions
                 return parenthesizedDesignation.SyntaxNode;
             }
 
-            static SyntaxNode StepDownInParenthesizedVariableDesignation(ParenthesizedVariableDesignationSyntaxWrapper parenthesizedVariableDesignation, IndexCountPair indexCountPair) =>
+            static SyntaxNode StepDownInParenthesizedVariableDesignation(ParenthesizedVariableDesignationSyntaxWrapper parenthesizedVariableDesignation, IndexCountPair expectedPathPosition) =>
                 parenthesizedVariableDesignation.Variables.Count == indexCountPair.Count
                     ? (SyntaxNode)parenthesizedVariableDesignation.Variables[indexCountPair.Index]
                     : null;
@@ -244,7 +246,7 @@ namespace SonarAnalyzer.Extensions
 
 #endif
 
-        private readonly record struct IndexCountPair(int Index, int Count);
+        private readonly record struct IndexCountPair(int Index, int TupleLength);
 
         private sealed class ControlFlowGraphCache : ControlFlowGraphCacheBase
         {
