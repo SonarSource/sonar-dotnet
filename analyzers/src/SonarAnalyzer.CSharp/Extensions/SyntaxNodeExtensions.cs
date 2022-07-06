@@ -19,6 +19,7 @@
  */
 
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
@@ -139,6 +140,11 @@ namespace SonarAnalyzer.Extensions
         /// </summary>
         public static SyntaxNode FindAssignmentComplement(this SyntaxNode node)
         {
+            Debug.Assert(node.IsAnyKind(SyntaxKind.Argument,
+                                        SyntaxKindEx.DiscardDesignation,
+                                        SyntaxKindEx.SingleVariableDesignation,
+                                        SyntaxKindEx.ParenthesizedVariableDesignation), "Only direct children of tuple like elements are allowed.");
+            Debug.Assert(node is not ArgumentSyntax || node.Parent.IsKind(SyntaxKindEx.TupleExpression), "Only arguments of a tuple are supported.");
             // can be either outermost tuple, or DeclarationExpression if 'node' is SingleVariableDesignationExpression
             var outermostParenthesesExpression = node.Ancestors()
                 .TakeWhile(x => x.IsAnyKind(
