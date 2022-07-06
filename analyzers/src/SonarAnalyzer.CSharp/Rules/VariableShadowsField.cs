@@ -84,8 +84,8 @@ namespace SonarAnalyzer.Rules.CSharp
         private static void ProcessVariableDeclaration(SyntaxNodeAnalysisContext context, VariableDeclarationSyntax variableDeclaration)
         {
             if (variableDeclaration is { Variables: { Count: > 0 } variables }
-                && context.SemanticModel.GetDeclaredSymbol(variableDeclaration.Variables[0]) is { ContainingType: { } containingType }
-                && GetMembers(containingType) is { } members)
+                && context.SemanticModel.GetDeclaredSymbol(variableDeclaration.Variables[0]) is { ContainingType: var containingType }
+                && GetMembers(containingType) is var members)
             {
                 foreach (var variable in variables)
                 {
