@@ -122,13 +122,13 @@ namespace SonarAnalyzer.Extensions
                 var rightExpression = rightEnumerator.Current.Expression;
                 switch (HandleTupleNesting(arrayBuilder, leftExpression, rightExpression))
                 {
-                    case true:
+                    case true:  // Nesting was handled.
                         break;
-                    case null:
+                    case false: // Nesting failed.
+                        return false;
+                    case null:  // No nesting.
                         arrayBuilder.Add(new AssignmentMapping(leftExpression, rightExpression));
                         break;
-                    case false:
-                        return false;
                 }
             }
 
@@ -150,13 +150,13 @@ namespace SonarAnalyzer.Extensions
                 var rightExpression = rightEnumerator.Current.Expression;
                 switch (HandleDesignationNesting(arrayBuilder, leftVar, rightExpression))
                 {
-                    case true:
+                    case true:  // Nesting was handled.
                         break;
-                    case null:
+                    case false: // Nesting failed.
+                        return false;
+                    case null:  // No nesting.
                         arrayBuilder.Add(new AssignmentMapping(leftVar.SyntaxNode, rightExpression));
                         break;
-                    case false:
-                        return false;
                 }
             }
 
