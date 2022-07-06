@@ -181,9 +181,9 @@ namespace SonarAnalyzer.Extensions
                     node = node switch
                     {
                         ArgumentSyntax tupleArgument when TupleExpressionSyntaxWrapper.IsInstance(node.Parent) =>
-                            PushIndexAndCountTuple(pathFromNodeToTheTop, (TupleExpressionSyntaxWrapper)node.Parent, tupleArgument),
+                            PushPathPositionForTuple(pathFromNodeToTheTop, (TupleExpressionSyntaxWrapper)node.Parent, tupleArgument),
                         _ when VariableDesignationSyntaxWrapper.IsInstance(node) && ParenthesizedVariableDesignationSyntaxWrapper.IsInstance(node.Parent) =>
-                            PushIndexAndCountParenthesizedDesignation(pathFromNodeToTheTop, (ParenthesizedVariableDesignationSyntaxWrapper)node.Parent, (VariableDesignationSyntaxWrapper)node),
+                            PushPathPositionForParenthesizedDesignation(pathFromNodeToTheTop, (ParenthesizedVariableDesignationSyntaxWrapper)node.Parent, (VariableDesignationSyntaxWrapper)node),
                         _ => null,
                     };
                     if (DeclarationExpressionSyntaxWrapper.IsInstance(node?.Parent) && node is { Parent.Parent: ArgumentSyntax { } argument })
@@ -215,15 +215,15 @@ namespace SonarAnalyzer.Extensions
                 return matchedNestedNode;
             }
 
-            static SyntaxNode PushIndexAndCountTuple(Stack<IndexCountPair> indexAndCount, TupleExpressionSyntaxWrapper tuple, ArgumentSyntax argument)
+            static SyntaxNode PushPathPositionForTuple(Stack<IndexCountPair> indexAndCount, TupleExpressionSyntaxWrapper tuple, ArgumentSyntax argument)
             {
                 indexAndCount.Push(new(tuple.Arguments.IndexOf(argument), tuple.Arguments.Count));
                 return tuple.SyntaxNode.Parent;
             }
 
-            static SyntaxNode PushIndexAndCountParenthesizedDesignation(Stack<IndexCountPair> indexAndCount,
-                                                                        ParenthesizedVariableDesignationSyntaxWrapper parenthesizedDesignation,
-                                                                        VariableDesignationSyntaxWrapper variable)
+            static SyntaxNode PushPathPositionForParenthesizedDesignation(Stack<IndexCountPair> indexAndCount,
+                                                                         ParenthesizedVariableDesignationSyntaxWrapper parenthesizedDesignation,
+                                                                         VariableDesignationSyntaxWrapper variable)
             {
                 indexAndCount.Push(new(parenthesizedDesignation.Variables.IndexOf(variable), parenthesizedDesignation.Variables.Count));
                 return parenthesizedDesignation.SyntaxNode;
