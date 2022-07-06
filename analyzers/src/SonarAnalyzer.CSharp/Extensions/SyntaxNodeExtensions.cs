@@ -176,8 +176,14 @@ namespace SonarAnalyzer.Extensions
             static Stack<PathPosition> GetNestingPathFromNodeToOutermost(SyntaxNode node)
             {
                 Stack<PathPosition> pathFromNodeToTheTop = new();
-                while (TupleExpressionSyntaxWrapper.IsInstance(node?.Parent) || ParenthesizedVariableDesignationSyntaxWrapper.IsInstance(node?.Parent))
+                while (TupleExpressionSyntaxWrapper.IsInstance(node?.Parent)
+                    || ParenthesizedVariableDesignationSyntaxWrapper.IsInstance(node?.Parent)
+                    || DeclarationExpressionSyntaxWrapper.IsInstance(node?.Parent))
                 {
+                    if (DeclarationExpressionSyntaxWrapper.IsInstance(node?.Parent) && node is { Parent.Parent: ArgumentSyntax { } argument })
+                    {
+                        node = argument;
+                    }
                     node = node switch
                     {
                         ArgumentSyntax tupleArgument when TupleExpressionSyntaxWrapper.IsInstance(node.Parent) =>
@@ -185,11 +191,7 @@ namespace SonarAnalyzer.Extensions
                         _ when VariableDesignationSyntaxWrapper.IsInstance(node) && ParenthesizedVariableDesignationSyntaxWrapper.IsInstance(node.Parent) =>
                             PushPathPositionForParenthesizedDesignation(pathFromNodeToTheTop, (ParenthesizedVariableDesignationSyntaxWrapper)node.Parent, (VariableDesignationSyntaxWrapper)node),
                         _ => null,
-                    };
-                    if (DeclarationExpressionSyntaxWrapper.IsInstance(node?.Parent) && node is { Parent.Parent: ArgumentSyntax { } argument })
-                    {
-                        node = argument;
-                    }
+                };
                 }
                 return pathFromNodeToTheTop;
             }

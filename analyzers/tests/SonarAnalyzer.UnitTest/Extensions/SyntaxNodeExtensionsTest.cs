@@ -456,6 +456,7 @@ public class Sample
         // Mixed. From left to right.
         [DataRow("(var a, var ($$b, c) )= (1, (2, 3));", "2")]
         [DataRow("(var a, var (b, (c, (d, $$e)))) = (1, (2, (3, (4, 5))));", "5")]
+        [DataRow("(var $$a, var (b, c))= (a: 1, (b: (byte)2, 3));", "1")]
         public void FindAssignmentComplement_Tests(string code, string expectedNode)
         {
             code = $@"
