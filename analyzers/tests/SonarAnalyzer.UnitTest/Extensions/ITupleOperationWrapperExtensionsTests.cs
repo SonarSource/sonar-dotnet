@@ -47,7 +47,7 @@ namespace SonarAnalyzer.UnitTest.Extensions
             static string DeeplyNestedTuple(int depth)
             {
                 var sb = new StringBuilder();
-                for (int i = 0; i < depth; i++)
+                for (int i = 1; i < depth; i++)
                 {
                     sb.Append($"({i}, ");
                 }
@@ -72,7 +72,7 @@ namespace SonarAnalyzer.UnitTest.Extensions
             {
                 var sb = new StringBuilder();
                 sb.Append("(");
-                for (int i = 0; i < length; i++)
+                for (int i = 1; i < length; i++)
                 {
                     sb.Append($"{i}, ");
                 }
