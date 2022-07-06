@@ -23,6 +23,7 @@
         var (o, p) = (0, 0);     // Noncompliant
         (var a, var b) = (0, 0); // Compliant
         var (c, d) = (0, 0);     // Compliant
+        var (_, _) = (0, 0);     // Compliant
 
         var (q, (_, r, _), s) = (1, (2, 3, 4), 5);
         //   ^
