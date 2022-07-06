@@ -173,9 +173,9 @@ namespace SonarAnalyzer.Extensions
 
             return null;
 
-            static Stack<IndexCountPair> GetNestingPathFromNodeToOutermost(SyntaxNode node)
+            static Stack<PathPosition> GetNestingPathFromNodeToOutermost(SyntaxNode node)
             {
-                Stack<IndexCountPair> pathFromNodeToTheTop = new();
+                Stack<PathPosition> pathFromNodeToTheTop = new();
                 while (TupleExpressionSyntaxWrapper.IsInstance(node?.Parent) || ParenthesizedVariableDesignationSyntaxWrapper.IsInstance(node?.Parent))
                 {
                     node = node switch
@@ -194,7 +194,7 @@ namespace SonarAnalyzer.Extensions
                 return pathFromNodeToTheTop;
             }
 
-            static SyntaxNode FindMatchingNestedNode(Stack<IndexCountPair> pathFromOutermostToGivenNode, SyntaxNode outermostParenthesesToMatch)
+            static SyntaxNode FindMatchingNestedNode(Stack<PathPosition> pathFromOutermostToGivenNode, SyntaxNode outermostParenthesesToMatch)
             {
                 var matchedNestedNode = outermostParenthesesToMatch;
                 while (matchedNestedNode is not null && pathFromOutermostToGivenNode.Count > 0)
@@ -215,26 +215,26 @@ namespace SonarAnalyzer.Extensions
                 return matchedNestedNode;
             }
 
-            static SyntaxNode PushPathPositionForTuple(Stack<IndexCountPair> indexAndCount, TupleExpressionSyntaxWrapper tuple, ArgumentSyntax argument)
+            static SyntaxNode PushPathPositionForTuple(Stack<PathPosition> pathPositions, TupleExpressionSyntaxWrapper tuple, ArgumentSyntax argument)
             {
-                indexAndCount.Push(new(tuple.Arguments.IndexOf(argument), tuple.Arguments.Count));
+                pathPositions.Push(new(tuple.Arguments.IndexOf(argument), tuple.Arguments.Count));
                 return tuple.SyntaxNode.Parent;
             }
 
-            static SyntaxNode PushPathPositionForParenthesizedDesignation(Stack<IndexCountPair> indexAndCount,
+            static SyntaxNode PushPathPositionForParenthesizedDesignation(Stack<PathPosition> pathPositions,
                                                                          ParenthesizedVariableDesignationSyntaxWrapper parenthesizedDesignation,
                                                                          VariableDesignationSyntaxWrapper variable)
             {
-                indexAndCount.Push(new(parenthesizedDesignation.Variables.IndexOf(variable), parenthesizedDesignation.Variables.Count));
+                pathPositions.Push(new(parenthesizedDesignation.Variables.IndexOf(variable), parenthesizedDesignation.Variables.Count));
                 return parenthesizedDesignation.SyntaxNode;
             }
 
-            static SyntaxNode StepDownInParenthesizedVariableDesignation(ParenthesizedVariableDesignationSyntaxWrapper parenthesizedVariableDesignation, IndexCountPair expectedPathPosition) =>
+            static SyntaxNode StepDownInParenthesizedVariableDesignation(ParenthesizedVariableDesignationSyntaxWrapper parenthesizedVariableDesignation, PathPosition expectedPathPosition) =>
                 parenthesizedVariableDesignation.Variables.Count == expectedPathPosition.TupleLength
                     ? (SyntaxNode)parenthesizedVariableDesignation.Variables[expectedPathPosition.Index]
                     : null;
 
-            static SyntaxNode StepDownInTuple(TupleExpressionSyntaxWrapper tupleExpression, IndexCountPair expectedPathPosition) =>
+            static SyntaxNode StepDownInTuple(TupleExpressionSyntaxWrapper tupleExpression, PathPosition expectedPathPosition) =>
                 tupleExpression.Arguments.Count == expectedPathPosition.TupleLength
                     ? (SyntaxNode)tupleExpression.Arguments[expectedPathPosition.Index].Expression
                     : null;
@@ -252,7 +252,7 @@ namespace SonarAnalyzer.Extensions
 
 #endif
 
-        private readonly record struct IndexCountPair(int Index, int TupleLength);
+        private readonly record struct PathPosition(int Index, int TupleLength);
 
         private sealed class ControlFlowGraphCache : ControlFlowGraphCacheBase
         {
