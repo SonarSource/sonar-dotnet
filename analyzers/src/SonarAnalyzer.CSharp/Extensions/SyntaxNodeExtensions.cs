@@ -149,19 +149,19 @@ namespace SonarAnalyzer.Extensions
                     SyntaxKindEx.DiscardDesignation,
                     SyntaxKindEx.DeclarationExpression))
                 .LastOrDefault();
-            if ((TupleExpressionSyntaxWrapper.IsInstance(thisSide) || DeclarationExpressionSyntaxWrapper.IsInstance(thisSide))
-                && thisSide.Parent is AssignmentExpressionSyntax assignment)
+            if ((TupleExpressionSyntaxWrapper.IsInstance(outermostParenthesesExpression) || DeclarationExpressionSyntaxWrapper.IsInstance(outermostParenthesesExpression))
+                && outermostParenthesesExpression.Parent is AssignmentExpressionSyntax assignment)
             {
                 var otherSide = assignment switch
                 {
-                    { Left: { } left, Right: { } right } when left.Equals(thisSide) => right,
-                    { Left: { } left, Right: { } right } when right.Equals(thisSide) => left,
+                    { Left: { } left, Right: { } right } when left.Equals(outermostParenthesesExpression) => right,
+                    { Left: { } left, Right: { } right } when right.Equals(outermostParenthesesExpression) => left,
                     _ => null,
                 };
                 if (TupleExpressionSyntaxWrapper.IsInstance(otherSide) || DeclarationExpressionSyntaxWrapper.IsInstance(otherSide))
                 {
-                    var pathFromOutermostToNode = IndexAndCountOfNesting(node);
-                    return FindMatchingNestedNode(indexAndCount, otherSide);
+                    var pathFromOutermostToNode = GetNestingPathFromNodeToOutermost(node);
+                    return FindMatchingNestedNode(pathFromOutermostToNode, otherSide);
                 }
             }
 
@@ -175,9 +175,9 @@ namespace SonarAnalyzer.Extensions
                     node = node switch
                     {
                         ArgumentSyntax tupleArgument when TupleExpressionSyntaxWrapper.IsInstance(node.Parent) =>
-                            PushIndexAndCountTuple(indexAndCount, (TupleExpressionSyntaxWrapper)node.Parent, tupleArgument),
+                            PushIndexAndCountTuple(pathFromNodeToTheTop, (TupleExpressionSyntaxWrapper)node.Parent, tupleArgument),
                         _ when VariableDesignationSyntaxWrapper.IsInstance(node) && ParenthesizedVariableDesignationSyntaxWrapper.IsInstance(node.Parent) =>
-                            PushIndexAndCountParenthesizedDesignation(indexAndCount, (ParenthesizedVariableDesignationSyntaxWrapper)node.Parent, (VariableDesignationSyntaxWrapper)node),
+                            PushIndexAndCountParenthesizedDesignation(pathFromNodeToTheTop, (ParenthesizedVariableDesignationSyntaxWrapper)node.Parent, (VariableDesignationSyntaxWrapper)node),
                         _ => null,
                     };
                     if (DeclarationExpressionSyntaxWrapper.IsInstance(node?.Parent) && node is { Parent.Parent: ArgumentSyntax { } argument })
@@ -185,28 +185,28 @@ namespace SonarAnalyzer.Extensions
                         node = argument;
                     }
                 }
-                return indexAndCount;
+                return pathFromNodeToTheTop;
             }
 
             static SyntaxNode FindMatchingNestedNode(Stack<IndexCountPair> pathFromOutermostToGivenNode, SyntaxNode outermostParenthesesToMatch)
             {
                 var matchedNestedNode = outermostParenthesesToMatch;
-                while (matchedNestedNode is not null && pathFromOutermostToNode.Count > 0)
+                while (matchedNestedNode is not null && pathFromOutermostToGivenNode.Count > 0)
                 {
-                    if (DeclarationExpressionSyntaxWrapper.IsInstance(node))
+                    if (DeclarationExpressionSyntaxWrapper.IsInstance(matchedNestedNode))
                     {
-                        node = ((DeclarationExpressionSyntaxWrapper)node).Designation;
+                        matchedNestedNode = ((DeclarationExpressionSyntaxWrapper)matchedNestedNode).Designation;
                     }
-                    var expectedPathPosition = indexAndCount.Pop();
-                    node = node switch
+                    var expectedPathPosition = pathFromOutermostToGivenNode.Pop();
+                    matchedNestedNode = matchedNestedNode switch
                     {
-                        _ when TupleExpressionSyntaxWrapper.IsInstance(node) => StepDownInTuple((TupleExpressionSyntaxWrapper)node, indexCountPair),
-                        _ when ParenthesizedVariableDesignationSyntaxWrapper.IsInstance(node) =>
-                            StepDownInParenthesizedVariableDesignation((ParenthesizedVariableDesignationSyntaxWrapper)node, indexCountPair),
+                        _ when TupleExpressionSyntaxWrapper.IsInstance(matchedNestedNode) => StepDownInTuple((TupleExpressionSyntaxWrapper)matchedNestedNode, expectedPathPosition),
+                        _ when ParenthesizedVariableDesignationSyntaxWrapper.IsInstance(matchedNestedNode) =>
+                            StepDownInParenthesizedVariableDesignation((ParenthesizedVariableDesignationSyntaxWrapper)matchedNestedNode, expectedPathPosition),
                         _ => null,
                     };
                 }
-                return node;
+                return matchedNestedNode;
             }
 
             static SyntaxNode PushIndexAndCountTuple(Stack<IndexCountPair> indexAndCount, TupleExpressionSyntaxWrapper tuple, ArgumentSyntax argument)
@@ -224,13 +224,13 @@ namespace SonarAnalyzer.Extensions
             }
 
             static SyntaxNode StepDownInParenthesizedVariableDesignation(ParenthesizedVariableDesignationSyntaxWrapper parenthesizedVariableDesignation, IndexCountPair expectedPathPosition) =>
-                parenthesizedVariableDesignation.Variables.Count == indexCountPair.Count
-                    ? (SyntaxNode)parenthesizedVariableDesignation.Variables[indexCountPair.Index]
+                parenthesizedVariableDesignation.Variables.Count == expectedPathPosition.TupleLength
+                    ? (SyntaxNode)parenthesizedVariableDesignation.Variables[expectedPathPosition.Index]
                     : null;
 
-            static SyntaxNode StepDownInTuple(TupleExpressionSyntaxWrapper tupleExpression, IndexCountPair indexCountPair) =>
-                tupleExpression.Arguments.Count == indexCountPair.Count
-                    ? (SyntaxNode)tupleExpression.Arguments[indexCountPair.Index].Expression
+            static SyntaxNode StepDownInTuple(TupleExpressionSyntaxWrapper tupleExpression, IndexCountPair expectedPathPosition) =>
+                tupleExpression.Arguments.Count == expectedPathPosition.TupleLength
+                    ? (SyntaxNode)tupleExpression.Arguments[expectedPathPosition.Index].Expression
                     : null;
         }
 
