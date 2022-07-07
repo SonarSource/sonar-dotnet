@@ -47,8 +47,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 {
                     var division = (BinaryExpressionSyntax)c.Node;
 
-                    if (c.SemanticModel.GetSymbolInfo(division).Symbol is not IMethodSymbol symbol
-                        || symbol.ContainingType is null
+                    if (c.SemanticModel.GetSymbolInfo(division).Symbol as IMethodSymbol is not { } symbol
                         || !symbol.ContainingType.IsAny(KnownType.IntegralNumbersIncludingNative))
                     {
                         return;
