@@ -117,8 +117,8 @@ namespace SonarAnalyzer.Rules.CSharp
         private static SyntaxNode GetAssignmentTargetVariables(SyntaxNode objectCreation) =>
             objectCreation.GetFirstNonParenthesizedParent() switch
             {
-                AssignmentExpressionSyntax assignment => (SyntaxNode)assignment.Left,
-                EqualsValueClauseSyntax equalsClause when equalsClause.Parent.Parent is VariableDeclarationSyntax variableDeclaration => variableDeclaration.Variables.Last(),
+                AssignmentExpressionSyntax assignment => assignment.Left,
+                EqualsValueClauseSyntax equalsClause => ((VariableDeclarationSyntax)equalsClause.Parent.Parent).Variables.Last(),
                 ArgumentSyntax argument => argument.FindAssignmentComplement(),
                 _ => null
             };
