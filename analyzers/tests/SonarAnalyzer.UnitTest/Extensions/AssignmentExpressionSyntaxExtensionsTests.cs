@@ -20,7 +20,9 @@
 
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
+using Microsoft.CodeAnalysis.Text;
 using SonarAnalyzer.Extensions;
+using StyleCop.Analyzers.Lightup;
 
 namespace SonarAnalyzer.UnitTest.Extensions
 {
@@ -339,19 +341,56 @@ namespace SonarAnalyzer.UnitTest.Extensions
                 });
 
         [DataTestMethod]
+        // Tuples.
+        [DataRow("(var a, (x, var b)) = (0, (x++, 1));", "var a | 0", "x | x++", "var b | 1")]
+        [DataRow("(var a, (var b, var c, var d), var e) = (0, (1, 2, 3), 4);", "var a | 0", "var b | 1", "var c | 2", "var d | 3", "var e | 4")]
+        // Designation.
+        [DataRow("var (a, (b, c)) = (0, (1, 2));", "a | 0", "b | 1", "c | 2")]
+        [DataRow("var (a, (b, _)) = (0, (1, 2));", "a | 0", "b | 1", "_ | 2")]
+        [DataRow("var (a, _) = (0, (1, 2));", "a | 0", "_ | (1, 2)")]
+        // Unaligned tuples.
+        [DataRow("(var a, var b) = (0, 1, 2);", "(var a, var b) | (0, 1, 2)")]
+        [DataRow("(var a, var b) = (0, 1, 2);", "(var a, var b) | (0, 1, 2)")]
+        [DataRow("(var a, var b) = (0, (1, 2));", "var a | 0", "var b | (1, 2)")]
+        [DataRow("(var a, (var b, var c)) = (0, 1);", "var a | 0", "(var b, var c) | 1")] // Syntacticly correct
+        [DataRow("(var a, var b, var c) = (0, (1, 2));", "(var a, var b, var c) | (0, (1, 2))")]
+        [DataRow("(var a, (var b, var c)) = (0, 1, 2);", "(var a, (var b, var c)) | (0, 1, 2)")]
+        // Unaligned designation.
+        [DataRow("var (a, (b, c)) = (0, (1, 2, 3));", "var (a, (b, c)) | (0, (1, 2, 3))")]
+        [DataRow("var (a, (b, c)) = (0, (1, (2, 3)));", "a | 0", "b | 1", "c | (2, 3)")]
+        [DataRow("var (a, (b, (c, d))) = (0, (1, 2));", "a | 0", "b | 1", "(c, d) | 2")]
+        [DataRow("var (a, (b, c, d)) = (0, (1, 2));", "var (a, (b, c, d)) | (0, (1, 2))")]
+        // Mixed.
+        [DataRow("(var a, var (b, c)) = (0, (1, 2));", "var a | 0", "b | 1", "c | 2")]
+        [DataRow("(var a, var (b, (c, (d, e)))) = (0, (1, (2, (3, 4))));", "var a | 0", "b | 1", "c | 2", "d | 3", "e | 4")]
+        [DataRow("(var a, (var b, var (c, d))) = (0, (1, (2, 3)));", "var a | 0", "var b | 1", "c | 2", "d | 3")]
+        public void MapAssignmentArguments_DataTest(string code, params string[] pairs)
+        {
+            var actualMapping = ParseAssignmentExpression(code).MapAssignmentArguments();
+            var actualMappingPairs = actualMapping.Select(x => $"{x.Left} | {x.Right}");
+            actualMappingPairs.Should().BeEquivalentTo(pairs);
+        }
+
+        [DataTestMethod]
         // Normal assignment
         [DataRow("int a; a = 1;", "a")]
         // Deconstruction into tuple
-        [DataRow("(var a, var b) = (1, 2);", "var a", "var b")]
-        [DataRow("(var a, _) = (1, 2);", "var a", "_")]
-        [DataRow("(var _, _) = (1, 2);", "var _", "_")]
+        [DataRow("(var a, var b) = (1, 2);", "a", "b")]
+        [DataRow("(var a, var b) = (1, (2, 3));", "a", "b")]
+        [DataRow("(var a, _) = (1, 2);", "a", "_")]  // "_" can refer to a local variable or be a discard.
+        [DataRow("(var _, var _) = (1, 2);")]        // "var _" is always a discard.
+        [DataRow("(var _, _) = (1, 2);", "_")]
         [DataRow("(_, _) = (1, 2);", "_", "_")]
-        [DataRow("(var a, (var b, var c), var d) = (1, (2, 3), 4);", "var a", "var b", "var c", "var d")]
-        [DataRow("int b; (var a, (b, var c), _) = (1, (2, 3), 4);", "var a", "b", "var c", "_")]
+        [DataRow("_ = (1, 2);", "_")]
+        [DataRow("(var a, (var b, var c), var d) = (1, (2, 3), 4);", "a", "b", "c", "d")]
+        [DataRow("int b; (var a, (b, var c), _) = (1, (2, 3), 4);", "a", "b", "c", "_")]
+        [DataRow("(var a, (int, int) b) = (1, (2, 3));", "a", "b")]
         // Deconstruction into declaration expression designation
         [DataRow("var (a, b) = (1, 2);", "a", "b")]
         [DataRow("var (a, _) = (1, 2);", "a")]
         [DataRow("var (_, _) = (1, 2);")]
+        // Mixed
+        [DataRow("(var a, var (b, c), var d, (int, int) e) = (1, (2, 3), (4, 5), (6, 7));", "a", "b", "c", "d", "e")]
         public void AssignmentTargets_DeconstructTargets(string assignment, params string[] expectedTargets)
         {
             var allTargets = ParseAssignmentExpression(assignment).AssignmentTargets();
@@ -393,6 +432,7 @@ public class C
         {code}
     }}
 }}");
+            syntaxTree.GetDiagnostics().Should().BeEmpty();
             return syntaxTree.GetRoot().DescendantNodesAndSelf().OfType<AssignmentExpressionSyntax>().Single();
         }
     }

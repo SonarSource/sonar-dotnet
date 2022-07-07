@@ -49,7 +49,7 @@ namespace SonarAnalyzer.Extensions
                 var left = (TupleExpressionSyntaxWrapper)assignment.Left;
                 var right = (TupleExpressionSyntaxWrapper)assignment.Right;
                 var arrayBuilder = ImmutableArray.CreateBuilder<AssignmentMapping>(left.Arguments.Count);
-                if (MapTupleElements(arrayBuilder, left, right))
+                if (MapTupleElements(arrayBuilder, left, right) is NestingMatch.Handled)
                 {
                     return arrayBuilder.ToImmutableArray();
                 }
@@ -63,7 +63,7 @@ namespace SonarAnalyzer.Extensions
                 var left = (ParenthesizedVariableDesignationSyntaxWrapper)leftDesignation;
                 var right = (TupleExpressionSyntaxWrapper)assignment.Right;
                 var arrayBuilder = ImmutableArray.CreateBuilder<AssignmentMapping>(left.Variables.Count);
-                if (MapDesignationElements(arrayBuilder, left, right))
+                if (MapDesignationElements(arrayBuilder, left, right) is NestingMatch.Handled)
                 {
                     return arrayBuilder.ToImmutableArray();
                 }
@@ -74,7 +74,15 @@ namespace SonarAnalyzer.Extensions
 
         /// <summary>
         /// Returns a list of nodes, that represent the target (left side) of an assignment. In case of tuple deconstructions, this can be more than one target.
-        /// Nested tuple elements are flattened so for <c>(a, (b, c))</c> the list <c>[a, b, c]</c> is returned.
+        /// Nested tuple elements and any declaration expressions are flattened.
+        /// <code>
+        /// (var a, var b)        = x; // [a, b]
+        /// var (a, b)            = x; // [a, b]
+        /// var (a, _)            = x; // [a]       ← The _ here is always a discard
+        /// (var a, _)            = x; // [a, _]    ← The _ here could reference a local
+        /// (var a, var (b, c))   = x; // [a, b, c]
+        /// (var a, (int, int) b) = x; // [a, b]
+        /// </code>
         /// </summary>
         public static ImmutableArray<SyntaxNode> AssignmentTargets(this AssignmentExpressionSyntax assignment)
         {
@@ -82,7 +90,11 @@ namespace SonarAnalyzer.Extensions
             if (TupleExpressionSyntaxWrapper.IsInstance(left))
             {
                 var tuple = (TupleExpressionSyntaxWrapper)left;
-                return tuple.AllArguments().Select(x => (SyntaxNode)x.Expression).ToImmutableArray();
+                var argumentExpressions = tuple.AllArguments().Select(x => (SyntaxNode)x.Expression);
+                var designationsExpanded = argumentExpressions.SelectMany(x => x.IsKind(SyntaxKindEx.DeclarationExpression)
+                        ? ((DeclarationExpressionSyntaxWrapper)x).Designation.AllVariables().Select(x => (SyntaxNode)x)
+                        : new[] { x });
+                return designationsExpanded.ToImmutableArray();
             }
             else if (DeclarationExpressionSyntaxWrapper.IsInstance(left))
             {
@@ -95,41 +107,41 @@ namespace SonarAnalyzer.Extensions
             }
         }
 
-        private static bool MapTupleElements(ImmutableArray<AssignmentMapping>.Builder arrayBuilder, TupleExpressionSyntaxWrapper left, TupleExpressionSyntaxWrapper right)
+        private static NestingMatch MapTupleElements(ImmutableArray<AssignmentMapping>.Builder arrayBuilder, TupleExpressionSyntaxWrapper left, TupleExpressionSyntaxWrapper right)
         {
             if (left.Arguments.Count != right.Arguments.Count)
             {
-                return false;
+                return NestingMatch.Failed;
             }
 
             var leftEnumerator = left.Arguments.GetEnumerator();
             var rightEnumerator = right.Arguments.GetEnumerator();
             while (leftEnumerator.MoveNext() && rightEnumerator.MoveNext())
             {
-                var leftExpression = leftEnumerator.Current.Expression;
-                var rightExpression = rightEnumerator.Current.Expression;
-                if (TupleExpressionSyntaxWrapper.IsInstance(leftExpression)
-                    && TupleExpressionSyntaxWrapper.IsInstance(rightExpression))
+                var leftArgumentExpression = leftEnumerator.Current.Expression;
+                var rightArgumentExpression = rightEnumerator.Current.Expression;
+                switch (HandleTupleNesting(arrayBuilder, leftArgumentExpression, rightArgumentExpression))
                 {
-                    if (!MapTupleElements(arrayBuilder, (TupleExpressionSyntaxWrapper)leftExpression, (TupleExpressionSyntaxWrapper)rightExpression))
-                    {
-                        return false;
-                    }
-                }
-                else
-                {
-                    arrayBuilder.Add(new AssignmentMapping(leftExpression, rightExpression));
+                    case NestingMatch.Handled:
+                        break; // the switch
+                    case NestingMatch.Failed:
+                        return NestingMatch.Failed;
+                    case NestingMatch.Leaf:
+                        arrayBuilder.Add(new AssignmentMapping(leftArgumentExpression, rightArgumentExpression));
+                        break; // the switch
                 }
             }
 
-            return true;
+            return NestingMatch.Handled;
         }
 
-        private static bool MapDesignationElements(ImmutableArray<AssignmentMapping>.Builder arrayBuilder, ParenthesizedVariableDesignationSyntaxWrapper left, TupleExpressionSyntaxWrapper right)
+        private static NestingMatch MapDesignationElements(ImmutableArray<AssignmentMapping>.Builder arrayBuilder,
+                                                           ParenthesizedVariableDesignationSyntaxWrapper left,
+                                                           TupleExpressionSyntaxWrapper right)
         {
             if (left.Variables.Count != right.Arguments.Count)
             {
-                return false;
+                return NestingMatch.Failed;
             }
 
             var leftEnumerator = left.Variables.GetEnumerator();
@@ -138,21 +150,45 @@ namespace SonarAnalyzer.Extensions
             {
                 var leftVar = leftEnumerator.Current;
                 var rightExpression = rightEnumerator.Current.Expression;
-                if (ParenthesizedVariableDesignationSyntaxWrapper.IsInstance(leftVar)
-                    && TupleExpressionSyntaxWrapper.IsInstance(rightExpression))
+                switch (HandleDesignationNesting(arrayBuilder, leftVar, rightExpression))
                 {
-                    if (!MapDesignationElements(arrayBuilder, (ParenthesizedVariableDesignationSyntaxWrapper)leftVar, (TupleExpressionSyntaxWrapper)rightExpression))
-                    {
-                        return false;
-                    }
-                }
-                else
-                {
-                    arrayBuilder.Add(new AssignmentMapping(leftVar.SyntaxNode, rightExpression));
+                    case NestingMatch.Handled:
+                        break; // the switch
+                    case NestingMatch.Failed:
+                        return NestingMatch.Failed;
+                    case NestingMatch.Leaf:
+                        arrayBuilder.Add(new AssignmentMapping(leftVar.SyntaxNode, rightExpression));
+                        break; // the switch
                 }
             }
 
-            return true;
+            return NestingMatch.Handled;
+        }
+
+        private static NestingMatch HandleTupleNesting(ImmutableArray<AssignmentMapping>.Builder arrayBuilder, ExpressionSyntax leftExpression, ExpressionSyntax rightExpression) =>
+            true switch
+            {
+                _ when TupleExpressionSyntaxWrapper.IsInstance(leftExpression) && TupleExpressionSyntaxWrapper.IsInstance(rightExpression) =>
+                    MapTupleElements(arrayBuilder, (TupleExpressionSyntaxWrapper)leftExpression, (TupleExpressionSyntaxWrapper)rightExpression),
+                _ when DeclarationExpressionSyntaxWrapper.IsInstance(leftExpression)
+                    && (DeclarationExpressionSyntaxWrapper)leftExpression is { Designation: { } leftDesignation } =>
+                    HandleDesignationNesting(arrayBuilder, leftDesignation, rightExpression),
+                _ => NestingMatch.Leaf,
+            };
+
+        private static NestingMatch HandleDesignationNesting(ImmutableArray<AssignmentMapping>.Builder arrayBuilder, VariableDesignationSyntaxWrapper leftVar, ExpressionSyntax rightExpression) =>
+            true switch
+            {
+                _ when ParenthesizedVariableDesignationSyntaxWrapper.IsInstance(leftVar) && TupleExpressionSyntaxWrapper.IsInstance(rightExpression) =>
+                    MapDesignationElements(arrayBuilder, (ParenthesizedVariableDesignationSyntaxWrapper)leftVar, (TupleExpressionSyntaxWrapper)rightExpression),
+                _ => NestingMatch.Leaf,
+            };
+
+        private enum NestingMatch
+        {
+            Handled,
+            Failed,
+            Leaf
         }
     }
 }

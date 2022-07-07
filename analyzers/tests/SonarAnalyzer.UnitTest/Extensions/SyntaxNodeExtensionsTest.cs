@@ -24,6 +24,8 @@ extern alias vbnet;
 using FluentAssertions.Extensions;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.Operations;
+using Microsoft.CodeAnalysis.Text;
+using StyleCop.Analyzers.Lightup;
 using static csharp::SonarAnalyzer.Extensions.SyntaxTokenExtensions;
 using CS = Microsoft.CodeAnalysis.CSharp.Syntax;
 using SyntaxNodeExtensionsCS = csharp::SonarAnalyzer.Extensions.SyntaxNodeExtensions;
@@ -408,6 +410,103 @@ public class Sample
             var cfg2 = SyntaxNodeExtensionsCS.CreateCfg(method2.Body, compilation2.GetSemanticModel(method2.SyntaxTree), default);
 
             ReferenceEquals(cfg1, cfg2).Should().BeFalse("Different compilations should not reuse cache. They do not share semantic model and symbols.");
+        }
+
+        [DataTestMethod]
+        // Tuple. From right to left.
+        [DataRow("(var a, (x, var b)) = (0, ($$x++, 1));", "x")]
+        [DataRow("(var a, (x, var b)) = (0, $$(1, 2));", "(x, var b)")]
+        [DataRow("(var a, (var b, var c, var d), var e) = (0, (1, 2, $$3), 4);", "var d")]
+        // Tuple. From left to right
+        [DataRow("(var a, (x, $$var b)) = (0, (x++, 1));", "1")]
+        [DataRow("(var a, (var b, var c, $$var d), var e) = (0, (1, 2, 3), 4);", "3")]
+        [DataRow("(var a, $$(var b, var c)) = (0, (1, 2));", "(1, 2)")]
+        // Designation. From right to left.
+        [DataRow("var (a, (b, c)) = (0, (1, $$2));", "c")]
+        [DataRow("var (a, (b, c)) = (0, $$(1, 2));", "(b, c)")]
+        [DataRow("var (a, (b, _)) = (0, (1, $$2));", "_")]
+        [DataRow("var (a, _) = (0, ($$1, 2));", null)]
+        [DataRow("var (a, _) = (0, $$(1, 2));", "_")]
+        [DataRow("var _ = ($$0, (1, 2));", null)]
+        [DataRow("_ = ($$0, (1, 2));", null)]
+        // Designation. From left to right
+        [DataRow("var (a, (b, $$c)) = (0, (1, 2));", "2")]
+        [DataRow("var (a, $$(b, c)) = (0, (1, 2));", "(1, 2)")]
+        [DataRow("var (a, (b, $$_)) = (0, (1, 2));", "2")]
+        [DataRow("var (a, $$_) = (0, (1, 2));", "(1, 2)")]
+        // Unaligned tuples. From left to right.
+        [DataRow("(var a, var b) = ($$0, 1, 2);", null)]
+        [DataRow("(var a, var b) = (0, 1, $$2);", null)]
+        [DataRow("(var a, var b) = (0, (1, $$2));", null)]
+        [DataRow("(var a, (var b, var c)) = (0, $$1);", "(var b, var c)")] // Syntacticly correct
+        // Unaligned tuples. From right to left.
+        [DataRow("(var a, var b, $$var c) = (0, (1, 2));", null)]
+        [DataRow("(var a, (var b, $$var c)) = (0, 1, 2);", null)]
+        // Unaligned designation. From right to left.
+        [DataRow("var (a, (b, c)) = (0, (1, $$2, 3));", null)]
+        [DataRow("var (a, (b, c)) = (0, (1, ($$2, 3)));", null)]
+        [DataRow("var (a, (b, c, d)) = (0, (1, $$2));", null)]
+        // Unaligned designation. From left to right .
+        [DataRow("var (a, (b, $$c)) = (0, (1, 2, 3));", null)]
+        [DataRow("var (a, (b, ($$c, d))) = (0, (1, 2));", null)]
+        [DataRow("var (a, (b, $$c, d)) = (0, (1, 2));", null)]
+        // Mixed. From right to left.
+        [DataRow("(var a, var (b, c)) = (1, ($$2, 3));", "b")]
+        [DataRow("(var a, var (b, (c, (d, e)))) = (1, (2, (3, (4, $$5))));", "e")]
+        // Mixed. From left to right.
+        [DataRow("(var a, var ($$b, c) )= (1, (2, 3));", "2")]
+        [DataRow("(var a, var (b, (c, (d, $$e)))) = (1, (2, (3, (4, 5))));", "5")]
+        [DataRow("(var $$a, var (b, c))= (a: 1, (b: (byte)2, 3));", "1")]
+        [DataRow("(var a, $$var (b, c))= (a: 1, (b: (byte)2, 3));", "(b: (byte)2, 3)")]
+        [DataRow("(var a, var ($$b, c))= (a: 1, (b: (byte)2, 3));", "(byte)2")]
+        [DataRow("(var a, var (b, $$c))= (a: 1, (b: (byte)2, 3));", "3")]
+        // Assignment to tuple variable.
+        [DataRow("(int, int) t; t = (1, $$2);", null)]
+        [DataRow("(int, int) t; (var a, t) = (1, ($$2, 3));", null)]
+        [DataRow("(int, int) t; (var a, t) = (1, $$(2, 3));", "t")]
+        // Start node is right side of assignment
+        [DataRow("var (a, b) = $$(1, 2);", "var (a, b)")]
+        [DataRow("var t = $$(1, 2);", null)] // Not an assignment
+        [DataRow("(int, int) t; t = $$(1, 2);", "t")]
+        [DataRow("int a; a = $$1;", "a")]
+        // Start node is left side of assignment
+        [DataRow("var (a, b)$$ = (1, 2);", "(1, 2)")]
+        [DataRow("$$var t = (1, 2);", null)] // Not an assignment
+        [DataRow("(int, int) t; t = $$(1, 2);", "t")]
+        [DataRow("(int, int) t; $$t = (1, 2);", "(1, 2)")]
+        [DataRow("int a; a = $$1;", "a")]
+        public void FindAssignmentComplement_Tests(string code, string expectedNode)
+        {
+            code = $@"
+public class C
+{{
+    public void M()
+    {{
+        var x = 0;
+        {code}
+    }}
+}}";
+            var nodePosition = code.IndexOf("$$");
+            code = code.Replace("$$", string.Empty);
+            var syntaxTree = CSharpSyntaxTree.ParseText(code);
+            var argument = syntaxTree.GetRoot().FindNode(new TextSpan(nodePosition, 0));
+            argument = argument.AncestorsAndSelf()
+                .FirstOrDefault(x => x.IsAnyKind(SyntaxKind.Argument,
+                                                 SyntaxKindEx.DiscardDesignation,
+                                                 SyntaxKindEx.SingleVariableDesignation,
+                                                 SyntaxKindEx.ParenthesizedVariableDesignation,
+                                                 SyntaxKindEx.TupleExpression)) ?? argument;
+            syntaxTree.GetDiagnostics().Should().BeEmpty();
+            var target = SyntaxNodeExtensionsCS.FindAssignmentComplement(argument);
+            if (expectedNode is null)
+            {
+                target.Should().BeNull();
+            }
+            else
+            {
+                target.Should().NotBeNull();
+                target.ToString().Should().Be(expectedNode);
+            }
         }
 
         private static SyntaxToken GetFirstTokenOfKind(SyntaxTree syntaxTree, SyntaxKind kind) =>

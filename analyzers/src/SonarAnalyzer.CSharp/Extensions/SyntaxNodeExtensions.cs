@@ -18,6 +18,8 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Threading;
 using Microsoft.CodeAnalysis;
@@ -129,14 +131,144 @@ namespace SonarAnalyzer.Extensions
             return node;
         }
 
-        private static string GetUnknownType(SyntaxKind kind)
+        /// <summary>
+        /// Finds the syntactic complementing <see cref="SyntaxNode"/> of an assignment with tuples.
+        /// <code>
+        /// var (a, b) = (1, 2);      // if node is a, 1 is returned and vice versa.
+        /// (var a, var b) = (1, 2);  // if node is 2, var b is returned and vice versa.
+        /// </code>
+        /// <paramref name="node"/> must be an <see cref="ArgumentSyntax"/> of a tuple or some variable designation of a <see cref="SyntaxKindEx.DeclarationExpression"/>.
+        /// </summary>
+        public static SyntaxNode FindAssignmentComplement(this SyntaxNode node)
         {
-#if DEBUG
-            throw new System.ArgumentException($"Unexpected type {kind}", nameof(kind));
-#else
-            return "type";
-#endif
+            if (node is { Parent: AssignmentExpressionSyntax assigment})
+            {
+                return OtherSideOfAssignment(node, assigment);
+            }
+            Debug.Assert(node.IsAnyKind(SyntaxKind.Argument,
+                                        SyntaxKindEx.DiscardDesignation,
+                                        SyntaxKindEx.SingleVariableDesignation,
+                                        SyntaxKindEx.ParenthesizedVariableDesignation,
+                                        SyntaxKindEx.TupleExpression), "Only direct children of tuple like elements are allowed.");
+            Debug.Assert(node is not ArgumentSyntax || node.Parent.IsKind(SyntaxKindEx.TupleExpression), "Only arguments of a tuple are supported.");
+
+            // can be either outermost tuple, or DeclarationExpression if 'node' is SingleVariableDesignationExpression
+            var outermostParenthesesExpression = node.AncestorsAndSelf()
+                .TakeWhile(x => x.IsAnyKind(
+                    SyntaxKind.Argument,
+                    SyntaxKindEx.TupleExpression,
+                    SyntaxKindEx.SingleVariableDesignation,
+                    SyntaxKindEx.ParenthesizedVariableDesignation,
+                    SyntaxKindEx.DiscardDesignation,
+                    SyntaxKindEx.DeclarationExpression))
+                .LastOrDefault();
+            if ((TupleExpressionSyntaxWrapper.IsInstance(outermostParenthesesExpression) || DeclarationExpressionSyntaxWrapper.IsInstance(outermostParenthesesExpression))
+                && outermostParenthesesExpression.Parent is AssignmentExpressionSyntax assignment)
+            {
+                var otherSide = OtherSideOfAssignment(outermostParenthesesExpression, assignment);
+                if (TupleExpressionSyntaxWrapper.IsInstance(otherSide) || DeclarationExpressionSyntaxWrapper.IsInstance(otherSide))
+                {
+                    var stackFromNodeToOutermost = GetNestingPathFromNodeToOutermost(node);
+                    return FindMatchingNestedNode(stackFromNodeToOutermost, otherSide);
+                }
+                else
+                {
+                    return null;
+                }
+            }
+
+            return null;
+
+            static ExpressionSyntax OtherSideOfAssignment(SyntaxNode oneSide, AssignmentExpressionSyntax assignment) =>
+                assignment switch
+                {
+                    { Left: { } left, Right: { } right } when left.Equals(oneSide) => right,
+                    { Left: { } left, Right: { } right } when right.Equals(oneSide) => left,
+                    _ => null,
+                };
+
+            static Stack<PathPosition> GetNestingPathFromNodeToOutermost(SyntaxNode node)
+            {
+                Stack<PathPosition> pathFromNodeToTheTop = new();
+                while (TupleExpressionSyntaxWrapper.IsInstance(node?.Parent)
+                    || ParenthesizedVariableDesignationSyntaxWrapper.IsInstance(node?.Parent)
+                    || DeclarationExpressionSyntaxWrapper.IsInstance(node?.Parent))
+                {
+                    if (DeclarationExpressionSyntaxWrapper.IsInstance(node?.Parent) && node is { Parent.Parent: ArgumentSyntax { } argument })
+                    {
+                        node = argument;
+                    }
+                    node = node switch
+                    {
+                        ArgumentSyntax tupleArgument when TupleExpressionSyntaxWrapper.IsInstance(node.Parent) =>
+                            PushPathPositionForTuple(pathFromNodeToTheTop, (TupleExpressionSyntaxWrapper)node.Parent, tupleArgument),
+                        _ when VariableDesignationSyntaxWrapper.IsInstance(node) && ParenthesizedVariableDesignationSyntaxWrapper.IsInstance(node.Parent) =>
+                            PushPathPositionForParenthesizedDesignation(pathFromNodeToTheTop, (ParenthesizedVariableDesignationSyntaxWrapper)node.Parent, (VariableDesignationSyntaxWrapper)node),
+                        _ => null,
+                    };
+                }
+                return pathFromNodeToTheTop;
+            }
+
+            static SyntaxNode FindMatchingNestedNode(Stack<PathPosition> pathFromOutermostToGivenNode, SyntaxNode outermostParenthesesToMatch)
+            {
+                var matchedNestedNode = outermostParenthesesToMatch;
+                while (matchedNestedNode is not null && pathFromOutermostToGivenNode.Count > 0)
+                {
+                    if (DeclarationExpressionSyntaxWrapper.IsInstance(matchedNestedNode))
+                    {
+                        matchedNestedNode = ((DeclarationExpressionSyntaxWrapper)matchedNestedNode).Designation;
+                    }
+                    var expectedPathPosition = pathFromOutermostToGivenNode.Pop();
+                    matchedNestedNode = matchedNestedNode switch
+                    {
+                        _ when TupleExpressionSyntaxWrapper.IsInstance(matchedNestedNode) => StepDownInTuple((TupleExpressionSyntaxWrapper)matchedNestedNode, expectedPathPosition),
+                        _ when ParenthesizedVariableDesignationSyntaxWrapper.IsInstance(matchedNestedNode) =>
+                            StepDownInParenthesizedVariableDesignation((ParenthesizedVariableDesignationSyntaxWrapper)matchedNestedNode, expectedPathPosition),
+                        _ => null,
+                    };
+                }
+                return matchedNestedNode;
+            }
+
+            static SyntaxNode PushPathPositionForTuple(Stack<PathPosition> pathPositions, TupleExpressionSyntaxWrapper tuple, ArgumentSyntax argument)
+            {
+                pathPositions.Push(new(tuple.Arguments.IndexOf(argument), tuple.Arguments.Count));
+                return tuple.SyntaxNode.Parent;
+            }
+
+            static SyntaxNode PushPathPositionForParenthesizedDesignation(Stack<PathPosition> pathPositions,
+                                                                         ParenthesizedVariableDesignationSyntaxWrapper parenthesizedDesignation,
+                                                                         VariableDesignationSyntaxWrapper variable)
+            {
+                pathPositions.Push(new(parenthesizedDesignation.Variables.IndexOf(variable), parenthesizedDesignation.Variables.Count));
+                return parenthesizedDesignation.SyntaxNode;
+            }
+
+            static SyntaxNode StepDownInParenthesizedVariableDesignation(ParenthesizedVariableDesignationSyntaxWrapper parenthesizedVariableDesignation, PathPosition expectedPathPosition) =>
+                parenthesizedVariableDesignation.Variables.Count == expectedPathPosition.TupleLength
+                    ? (SyntaxNode)parenthesizedVariableDesignation.Variables[expectedPathPosition.Index]
+                    : null;
+
+            static SyntaxNode StepDownInTuple(TupleExpressionSyntaxWrapper tupleExpression, PathPosition expectedPathPosition) =>
+                tupleExpression.Arguments.Count == expectedPathPosition.TupleLength
+                    ? (SyntaxNode)tupleExpression.Arguments[expectedPathPosition.Index].Expression
+                    : null;
         }
+
+        private static string GetUnknownType(SyntaxKind kind) =>
+
+#if DEBUG
+
+            throw new System.ArgumentException($"Unexpected type {kind}", nameof(kind));
+
+#else
+
+            "type";
+
+#endif
+
+        private readonly record struct PathPosition(int Index, int TupleLength);
 
         private sealed class ControlFlowGraphCache : ControlFlowGraphCacheBase
         {
