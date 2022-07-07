@@ -7,7 +7,8 @@ public struct S
 
     public void M()
     {
-        (Property, var _) = (3 / 2, 3 / 2);    // Noncompliant
+        (Property, var _) = (3 / 2, 3 / 2);    // Noncompliant {{Cast one of the operands of this division to 'decimal'.}}
+//                           ^^^^^
 
         (decimal x, var y) = (1 / 3, 2);      // Noncompliant
         (decimal xx, var (yy, zz)) = (1 / 3, (2, 1 / 3)); // Noncompliant
@@ -20,7 +21,9 @@ public struct S
         var d = (1 / 3, 2);
         (int, int) d2 = (1 / 3, 2); 
         (decimal, decimal) d3 = (1 / 3, 2); // Noncompliant
-        (int, (decimal, (int, decimal))) nested = (3, (1 / 3, (0, 1 / 3))); // Noncompliant [issue1, issue2]
+        (int, (decimal, (int, decimal))) nested = (3, (1 / 3, (0, 1 / 3)));
+        //                                             ^^^^^ {{Cast one of the operands of this division to 'decimal'.}}
+        //                                                        ^^^^^ @-1 {{Cast one of the operands of this division to 'decimal'.}}
 
         (decimal, decimal) d4 = (1 / 3, 2); // Noncompliant
         (decimal, decimal) d5 = (1 / 3, 1 / 3); // Noncompliant [issue3, issue4]
@@ -49,15 +52,20 @@ public struct S
         }
     }
 
-    public int M(int x) => x;
-    public int M((int, int) x) => x.Item1;
-    public async Task TestAsync()
+    public decimal M(int x) => x;
+    public decimal M((int, int) x) => x.Item1;
+
+    public void FNs()
     {
         var a = M(1 / 3);
-        var a2 = 1 / 3 == 1 ? 1 / 3 : 1 / 3;
-        var a4 = await Task.FromResult(1 / 3);
-        var a5 = (1, M(1 / 3));
-        var a6 = (1, 1 / 3 + 1 / 3);
-        var a9 = M((1, 1 / 3));
+        decimal a2 = 1 / 3 == 1 ? 1 / 3 : 1 / 3; // FN
+        (decimal, decimal) a5 = (1, M(1 / 3)); // FN
+        (decimal, decimal) a6 = (1, 1 / 3 + 1 / 3); // FN
+        var a9 = M((1, 1 / 3)); // FN
+    }
+
+    public async Task FNAsync()
+    {
+        decimal a4 = await Task.FromResult(1 / 3); // FN
     }
 }
