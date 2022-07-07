@@ -127,14 +127,9 @@ namespace SonarAnalyzer.Rules.CSharp
             node.RemoveParentheses() switch
             {
                 IdentifierNameSyntax identifier => IdentifierNameSymbol(identifier, model),
-                MemberAccessExpressionSyntax memberAccessExpression => MemberAccessSymbol(memberAccessExpression, model),
+                MemberAccessExpressionSyntax memberAccessExpression => model.GetSymbolInfo(memberAccessExpression.Expression).Symbol,
                 _ => null
             };
-
-        private static ISymbol MemberAccessSymbol(MemberAccessExpressionSyntax node, SemanticModel model) =>
-            node?.Expression != null
-                ? model.GetSymbolInfo(node.Expression).Symbol
-                : null;
 
         private static ISymbol IdentifierNameSymbol(IdentifierNameSyntax node, SemanticModel model)
         {
