@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
 
 public struct S
 {
@@ -29,6 +30,9 @@ public struct S
 
         (int, decimal) fooBar;
         fooBar = (1, FooDecimal(1 / 3)); // Noncompliant
+
+        (int, ValueTuple<int, int>) vt = (1, (1 / 3, 3)); // FN
+        (int, (int, int)) vt1 = (1, 1 / 3, 3); // Error
 
         decimal FooDecimal(decimal d)
         {

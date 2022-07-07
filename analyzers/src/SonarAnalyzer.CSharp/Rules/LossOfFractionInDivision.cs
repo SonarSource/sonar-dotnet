@@ -114,10 +114,10 @@ namespace SonarAnalyzer.Rules.CSharp
             if (outerTuple is { Parent: AssignmentExpressionSyntax assignmentSyntax }
                 && assignmentSyntax.MapAssignmentArguments() is { } assignmentMappings)
             {
-                var assignementLeft = assignmentMappings.Where(x => x.Right.Equals(division)).FirstOrDefault().Left;
-                if (assignementLeft != null)
+                var assignmentLeft = assignmentMappings.FirstOrDefault(x => x.Right.Equals(division)).Left;
+                if (assignmentLeft != null)
                 {
-                    type = semanticModel.GetTypeInfo(assignementLeft).Type;
+                    type = semanticModel.GetTypeInfo(assignmentLeft).Type;
                     return type.IsAny(KnownType.NonIntegralNumbers);
                 }
             }
@@ -149,25 +149,23 @@ namespace SonarAnalyzer.Rules.CSharp
                 .TakeWhile(x => TupleExpressionSyntaxWrapper.IsInstance(x) || x.IsKind(SyntaxKind.Argument))
                 .LastOrDefault(x => TupleExpressionSyntaxWrapper.IsInstance(x));
 
-        private static int DivisionArgumentIndex(ImmutableArray<ArgumentSyntax> arguments, SyntaxNode division)
-        {
-            var divisionArgument = arguments.FirstOrDefault(x => x.Expression.Equals(division));
-            return arguments.IndexOf(divisionArgument);
-        }
+        private static int DivisionArgumentIndex(ImmutableArray<ArgumentSyntax> arguments, SyntaxNode division) =>
+            arguments.IndexOf(x => x.Expression.Equals(division));
 
         private static List<ITypeSymbol> AllTupleElements(ITypeSymbol typeSymbol)
         {
             List<ITypeSymbol> flattenTupleTypes = new();
             CollectTupleTypes(flattenTupleTypes, typeSymbol);
             return flattenTupleTypes;
+
             static void CollectTupleTypes(List<ITypeSymbol> symbolList, ITypeSymbol typeSymbol)
             {
                 if (typeSymbol.IsTupleType())
                 {
-                    var types = ((INamedTypeSymbol)typeSymbol).TupleElements();
-                    foreach (var type in types)
+                    var elements = ((INamedTypeSymbol)typeSymbol).TupleElements();
+                    foreach (var element in elements)
                     {
-                        CollectTupleTypes(symbolList, type.Type);
+                        CollectTupleTypes(symbolList, element.Type);
                     }
                 }
                 else
