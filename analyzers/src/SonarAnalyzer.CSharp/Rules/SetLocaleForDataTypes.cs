@@ -66,18 +66,20 @@ namespace SonarAnalyzer.Rules.CSharp
             {
                 if (GetSymbolFromConstructorInvocation(c.Node, c.SemanticModel) is ITypeSymbol objectType
                     && objectType.IsAny(CheckedTypes)
-                    && GetAssignmentTargetVariables(c.Node) is { } variables)
+                    && GetAssignmentTargetVariables(c.Node) is { } variableSyntax)
                 {
-                    var variableSymbolsToSyntaxNode = variables.Select(x => c.SemanticModel.GetSymbolInfo(x).Symbol ?? c.SemanticModel.GetDeclaredSymbol(x))
-                        .Where(x => x.GetSymbolType().IsAny(CheckedTypes))
-                        .ToDictionary(x => x, x => c.Node);
-
-                    foreach (var symbolNodePair in variableSymbolsToSyntaxNode)
+                    if (DeclarationExpressionSyntaxWrapper.IsInstance(variableSyntax))
                     {
-                        if (!symbolsWhereTypeIsCreated.ContainsKey(symbolNodePair.Key))
-                        {
-                            symbolsWhereTypeIsCreated.Add(symbolNodePair);
-                        }
+                        variableSyntax = ((DeclarationExpressionSyntaxWrapper)variableSyntax).Designation;
+                    }
+
+                    var variableSymbol = variableSyntax is IdentifierNameSyntax
+                        ? c.SemanticModel.GetSymbolInfo(variableSyntax).Symbol
+                        : c.SemanticModel.GetDeclaredSymbol(variableSyntax);
+
+                    if (variableSymbol != null && !symbolsWhereTypeIsCreated.ContainsKey(variableSymbol))
+                    {
+                        symbolsWhereTypeIsCreated.Add(variableSymbol, c.Node);
                     }
                 }
             };
@@ -112,42 +114,42 @@ namespace SonarAnalyzer.Rules.CSharp
                 ? semanticModel.GetSymbolInfo(objectCreation.Type).Symbol
                 : semanticModel.GetSymbolInfo(constructorCall).Symbol?.ContainingType;
 
-        private static ImmutableArray<SyntaxNode> GetAssignmentTargetVariables(SyntaxNode objectCreation) =>
+        private static SyntaxNode GetAssignmentTargetVariables(SyntaxNode objectCreation) =>
             objectCreation.GetFirstNonParenthesizedParent() switch
             {
-                AssignmentExpressionSyntax assignment => ImmutableArray.Create((SyntaxNode)assignment.Left),
-                EqualsValueClauseSyntax equalsClause when equalsClause.Parent.Parent is VariableDeclarationSyntax variableDeclaration =>
-                    ImmutableArray.Create((SyntaxNode)variableDeclaration.Variables.Last()),
-                ArgumentSyntax argument when argument.Ancestors().OfType<AssignmentExpressionSyntax>().FirstOrDefault() is { } expressionSyntax =>
-                    expressionSyntax.AssignmentTargets(),
-                _ => ImmutableArray<SyntaxNode>.Empty
+                AssignmentExpressionSyntax assignment => (SyntaxNode)assignment.Left,
+                EqualsValueClauseSyntax equalsClause when equalsClause.Parent.Parent is VariableDeclarationSyntax variableDeclaration => variableDeclaration.Variables.Last(),
+                ArgumentSyntax argument => argument.FindAssignmentComplement(),
+                _ => null
             };
 
-        private static ISymbol GetAccessedVariable(SyntaxNode node, SemanticModel model)
-        {
-            var variable = node.RemoveParentheses();
-
-            if (variable is IdentifierNameSyntax identifier)
+        private static ISymbol GetAccessedVariable(SyntaxNode node, SemanticModel model) =>
+            node.RemoveParentheses() switch
             {
-                var leftSideOfParentAssignment = identifier
-                    .FirstAncestorOrSelf((SyntaxNode x) => x.IsAnyKind(SyntaxKind.ObjectCreationExpression, SyntaxKindEx.ImplicitObjectCreationExpression))
-                    ?.FirstAncestorOrSelf<AssignmentExpressionSyntax>()
-                    ?.Left;
-                if (leftSideOfParentAssignment != null)
-                {
-                    return model.GetSymbolInfo(leftSideOfParentAssignment).Symbol;
-                }
+                IdentifierNameSyntax identifier => IdentifierNameSymbol(identifier, model),
+                MemberAccessExpressionSyntax memberAccessExpression => MemberAccessSymbol(memberAccessExpression, model),
+                _ => null
+            };
 
-                var lastVariable = identifier.FirstAncestorOrSelf<VariableDeclarationSyntax>()?.Variables.LastOrDefault();
-                return lastVariable != null
-                    ? model.GetDeclaredSymbol(lastVariable)
-                    : null;
+        private static ISymbol MemberAccessSymbol(MemberAccessExpressionSyntax node, SemanticModel model) =>
+            node?.Expression != null
+                ? model.GetSymbolInfo(node.Expression).Symbol
+                : null;
+
+        private static ISymbol IdentifierNameSymbol(IdentifierNameSyntax node, SemanticModel model)
+        {
+            var leftSideOfParentAssignment = node
+                .FirstAncestorOrSelf((SyntaxNode x) => x.IsAnyKind(SyntaxKind.ObjectCreationExpression, SyntaxKindEx.ImplicitObjectCreationExpression))
+                .FirstAncestorOrSelf<AssignmentExpressionSyntax>()
+                ?.Left;
+            if (leftSideOfParentAssignment != null)
+            {
+                return model.GetSymbolInfo(leftSideOfParentAssignment).Symbol;
             }
 
-            var memberAccess = variable as MemberAccessExpressionSyntax;
-
-            return memberAccess?.Expression != null
-                ? model.GetSymbolInfo(memberAccess.Expression).Symbol
+            var lastVariable = node.FirstAncestorOrSelf<VariableDeclarationSyntax>()?.Variables.LastOrDefault();
+            return lastVariable != null
+                ? model.GetDeclaredSymbol(lastVariable)
                 : null;
         }
     }

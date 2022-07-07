@@ -10,10 +10,10 @@ namespace Tests.Diagnostics
         private DataTable myTable = new DataTable { Locale = CultureInfo.InvariantCulture };
         private DataTable myWrongTable = new DataTable(); // Noncompliant {{Set the locale for this 'DataTable'.}}
 //                                       ^^^^^^^^^^^^^^^
-        private DataTable myWrongTable1 = new DataTable(), myWrongTable2 = new DataTable();
+        private DataTable myWrongTable1 = new DataTable(),
 //                                        ^^^^^^^^^^^^^^^ {{Set the locale for this 'DataTable'.}}
-//                                        ^^^^^^^^^^^^^^^ @-1 {{Set the locale for this 'DataTable'.}}
-// Second issue is TP but it is raised in wrong location
+                                          myWrongTable2 = new DataTable(); // FN
+
 
 
 
