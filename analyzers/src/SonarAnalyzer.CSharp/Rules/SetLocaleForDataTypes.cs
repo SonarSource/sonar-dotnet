@@ -102,9 +102,9 @@ namespace SonarAnalyzer.Rules.CSharp
             {
                 foreach (var invalidCreation in symbolsWhereTypeIsCreated.Where(x => !symbolsWhereLocaleIsSet.Contains(x.Key)))
                 {
-                    if (invalidCreation.Key.GetSymbolType()?.Name is { } typeName)
+                    if (invalidCreation.Key.GetSymbolType() is { } type)
                     {
-                        c.ReportIssue(Diagnostic.Create(Rule, invalidCreation.Value.GetLocation(), typeName));
+                        c.ReportIssue(Diagnostic.Create(Rule, invalidCreation.Value.GetLocation(), type.Name));
                     }
                 }
             };
