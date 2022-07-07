@@ -18,6 +18,7 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
 using Microsoft.CodeAnalysis;
@@ -29,6 +30,8 @@ public abstract class SpecifyTimeoutOnRegexBase<TSyntaxKind> : SonarDiagnosticAn
         where TSyntaxKind : struct
 {
     internal const string DiagnosticId = "S4581"; // TODO
+
+    private const int NonBacktracking = 1024;
 
     protected override string MessageFormat => "Pass a timeout to limit the execution time.";
 
@@ -60,14 +63,30 @@ public abstract class SpecifyTimeoutOnRegexBase<TSyntaxKind> : SonarDiagnosticAn
             Language.SyntaxKind.IdentifierName);
     }
 
-    private static bool RegexMethodLacksTimeout(SyntaxNode node, SemanticModel semanticModel) =>
-        semanticModel.GetSymbolInfo(node).Symbol is IMethodSymbol method
+    private bool RegexMethodLacksTimeout(SyntaxNode node, SemanticModel model) =>
+        model.GetSymbolInfo(node).Symbol is IMethodSymbol method
         && method.ContainingType.Is(KnownType.System_Text_RegularExpressions_Regex)
         && (method.IsStatic || method.IsConstructor())
-        && !ContainsMatchTimeout(method);
+        && !ContainsMatchTimeout(method)
+        && !NoBacktracking(method, node, model);
 
     private static bool ContainsMatchTimeout(IMethodSymbol method) =>
         method.Parameters.Any(x => x.Type.Is(KnownType.System_TimeSpan));
+
+    private bool NoBacktracking(IMethodSymbol method, SyntaxNode node, SemanticModel model) =>
+        RegexOptionsSpecified(method)
+        && ArgumentExpressions(method, node)
+            .Select(arg => Language.FindConstantValue(model, arg))
+            .OfType<int>()
+            .Any(x => (x & NonBacktracking) == NonBacktracking);
+
+    private IEnumerable<SyntaxNode> ArgumentExpressions(IMethodSymbol method, SyntaxNode node) =>
+           Language.Syntax.ArgumentExpressions(method.IsConstructor()
+           ? node
+           : node.Parent.Parent.ChildNodes().Skip(1).FirstOrDefault());
+
+    private static bool RegexOptionsSpecified(IMethodSymbol method) =>
+        method.Parameters.Any(x => x.Type.Is(KnownType.System_Text_RegularExpressions_RegexOptions));
 
     private bool IsCandidateCtor(SyntaxNode ctorNode) =>
         Language.Syntax.ArgumentExpressions(ctorNode).Count() < 3;

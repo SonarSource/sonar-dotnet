@@ -33,6 +33,13 @@ class Compliant
         var split = Regex.Split("some input", "some pattern", RegexOptions.None, TimeSpan.FromSeconds(1)); // Compliant
     }
 
+    void NonBacktrackingSpecified()
+    {
+        var newonBacktrackingOnly = new Regex("some pattern", (RegexOptions)1024); // Compliant
+        var newonAlsoBacktracking = new Regex("some pattern", (RegexOptions)1025); // Compliant
+        var split = Regex.Split("some input", "some pattern", (RegexOptions)1024); // Compliant
+    }
+
     void NoRegex()
     {
         var match = NoSystem.Regex.IsMatch("some input", "some pattern"); // Compliant
@@ -48,13 +55,13 @@ class Noncompliant
         var withOptions = new Regex("some pattern", RegexOptions.None); // Noncompliant
     }
 
-    void Static()
+    void Static(RegexOptions options)
     {
         var isMatch = Regex.IsMatch("some input", "some pattern"); // Noncompliant
         var match = Regex.Match("some input", "some pattern"); // Noncompliant
         var matches = Regex.Matches("some input", "some pattern", RegexOptions.None); // Noncompliant
         var replace = Regex.Replace("some input", "some pattern", "some replacement", RegexOptions.None); // Noncompliant
-        var split = Regex.Split("some input", "some pattern", RegexOptions.None); // Noncompliant
+        var split = Regex.Split("some input", "some pattern", options); // Noncompliant
     }
 }
 

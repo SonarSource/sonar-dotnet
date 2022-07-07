@@ -49,6 +49,7 @@ internal sealed class VisualBasicSyntaxFacade : SyntaxFacade<SyntaxKind>
     public override IEnumerable<SyntaxNode> ArgumentExpressions(SyntaxNode node) =>
         node switch
         {
+            ArgumentListSyntax list => list.Arguments.Select(x => x.GetExpression()),
             ObjectCreationExpressionSyntax creation => creation.ArgumentList?.Arguments.Select(x => x.GetExpression()) ?? Enumerable.Empty<SyntaxNode>(),
             null => Enumerable.Empty<SyntaxNode>(),
             _ => throw InvalidOperation(node, nameof(ArgumentExpressions))
