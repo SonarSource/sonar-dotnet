@@ -53,123 +53,132 @@ namespace SonarAnalyzer.Rules.CSharp
                         return;
                     }
 
-                    if (TryGetTypeFromAssignmentToFloatType(division, c.SemanticModel, out var assignedToType)
-                        || TryGetTypeFromArgumentMappedToFloatType(division, c.SemanticModel, out assignedToType)
-                        || TryGetTypeFromReturnMappedToFloatType(division, c.SemanticModel, out assignedToType))
+                    if (DivisionIsInAssignmentAndTypeIsNonIntegral(division, c.SemanticModel, out var divisionResultType)
+                        || DivisionIsArgumentAndTypeIsNonIntegral(division, c.SemanticModel, out divisionResultType)
+                        || DivisionIsInReturnAndTypeIsNonIntegral(division, c.SemanticModel, out divisionResultType))
                     {
-                        var diagnostic = Diagnostic.Create(Rule, division.GetLocation(), assignedToType.ToMinimalDisplayString(c.SemanticModel, division.SpanStart));
+                        var diagnostic = Diagnostic.Create(Rule, division.GetLocation(), divisionResultType.ToMinimalDisplayString(c.SemanticModel, division.SpanStart));
                         c.ReportIssue(diagnostic);
                     }
                 },
                 SyntaxKind.DivideExpression);
 
-        private static bool TryGetTypeFromReturnMappedToFloatType(SyntaxNode division, SemanticModel semanticModel, out ITypeSymbol type)
+        private static bool DivisionIsInReturnAndTypeIsNonIntegral(SyntaxNode division, SemanticModel semanticModel, out ITypeSymbol divisionResultType)
         {
             if (division.Parent is ReturnStatementSyntax
                 || division.Parent is LambdaExpressionSyntax)
             {
-                type = (semanticModel.GetEnclosingSymbol(division.SpanStart) as IMethodSymbol)?.ReturnType;
-                return type.IsAny(KnownType.NonIntegralNumbers);
+                divisionResultType = (semanticModel.GetEnclosingSymbol(division.SpanStart) as IMethodSymbol)?.ReturnType;
+                return divisionResultType.IsAny(KnownType.NonIntegralNumbers);
             }
 
-            type = null;
+            divisionResultType = null;
             return false;
         }
 
-        private static bool TryGetTypeFromArgumentMappedToFloatType(SyntaxNode division, SemanticModel semanticModel, out ITypeSymbol type)
+        private static bool DivisionIsArgumentAndTypeIsNonIntegral(SyntaxNode division, SemanticModel semanticModel, out ITypeSymbol divisionResultType)
         {
             if (division.Parent is not ArgumentSyntax argument)
             {
-                type = null;
+                divisionResultType = null;
                 return false;
             }
 
             if (argument.Parent.Parent is not InvocationExpressionSyntax invocation)
             {
-                type = null;
+                divisionResultType = null;
                 return false;
             }
 
             var lookup = new CSharpMethodParameterLookup(invocation, semanticModel);
             if (!lookup.TryGetSymbol(argument, out var parameter))
             {
-                type = null;
+                divisionResultType = null;
                 return false;
             }
 
-            type = parameter.Type;
-            return type.IsAny(KnownType.NonIntegralNumbers);
+            divisionResultType = parameter.Type;
+            return divisionResultType.IsAny(KnownType.NonIntegralNumbers);
         }
 
-        private static bool TryGetTypeFromAssignmentToFloatType(SyntaxNode division, SemanticModel semanticModel, out ITypeSymbol type)
+        private static bool DivisionIsInAssignmentAndTypeIsNonIntegral(SyntaxNode division, SemanticModel semanticModel, out ITypeSymbol divisionResultType)
         {
             if (division.Parent is AssignmentExpressionSyntax assignment)
             {
-                type = semanticModel.GetTypeInfo(assignment.Left).Type;
-                return type.IsAny(KnownType.NonIntegralNumbers);
+                divisionResultType = semanticModel.GetTypeInfo(assignment.Left).Type;
+                return divisionResultType.IsAny(KnownType.NonIntegralNumbers);
+            }
+            if (division is { Parent: EqualsValueClauseSyntax { Parent: VariableDeclaratorSyntax { Parent: VariableDeclarationSyntax variableDecl } } })
+            {
+                divisionResultType = semanticModel.GetTypeInfo(variableDecl.Type).Type;
+                return divisionResultType.IsAny(KnownType.NonIntegralNumbers);
+            }
+            if (DivisionIsInTupleTypeIsNonIntegral(division, semanticModel, out divisionResultType))
+            {
+                return divisionResultType.IsAny(KnownType.NonIntegralNumbers);
             }
 
+            divisionResultType = null;
+            return false;
+        }
+
+        private static bool DivisionIsInTupleTypeIsNonIntegral(SyntaxNode division, SemanticModel semanticModel, out ITypeSymbol divisionResultType)
+        {
             var outerTuple = GetMostOuterTuple(division);
             if (outerTuple is { Parent: AssignmentExpressionSyntax assignmentSyntax }
                 && assignmentSyntax.MapAssignmentArguments() is { } assignmentMappings)
             {
-                var assignmentLeft = assignmentMappings.FirstOrDefault(x => x.Right.Equals(division)).Left;
-                if (assignmentLeft != null)
+                var divisionResult = assignmentMappings.FirstOrDefault(x => x.Right.Equals(division)).Left;
+                if (divisionResult is { })
                 {
-                    type = semanticModel.GetTypeInfo(assignmentLeft).Type;
-                    return type.IsAny(KnownType.NonIntegralNumbers);
+                    divisionResultType = semanticModel.GetTypeInfo(divisionResult).Type;
+                    return divisionResultType.IsAny(KnownType.NonIntegralNumbers);
                 }
             }
-            else if (outerTuple is { Parent: EqualsValueClauseSyntax { Parent: VariableDeclaratorSyntax { Parent: VariableDeclarationSyntax variableDeclaration} } })
+            // var (a, b) = (1, 1 / 3)
+            else if (outerTuple is { Parent: EqualsValueClauseSyntax { Parent: VariableDeclaratorSyntax { Parent: VariableDeclarationSyntax variableDeclaration } } })
             {
                 var tupleArguments = ((TupleExpressionSyntaxWrapper)outerTuple).AllArguments();
                 var declarationType = semanticModel.GetTypeInfo(variableDeclaration.Type).Type;
                 var flattenTupleTypes = AllTupleElements(declarationType);
-                var argumentIndex = DivisionArgumentIndex(tupleArguments, division);
-                if (argumentIndex != -1)
+                var divisionArgumentIndex = DivisionArgumentIndex(tupleArguments, division);
+                if (divisionArgumentIndex != -1)
                 {
-                    type = flattenTupleTypes[argumentIndex];
-                    return type.IsAny(KnownType.NonIntegralNumbers);
+                    divisionResultType = flattenTupleTypes[divisionArgumentIndex];
+                    return divisionResultType.IsAny(KnownType.NonIntegralNumbers);
                 }
             }
-
-            if (division is { Parent: EqualsValueClauseSyntax { Parent: VariableDeclaratorSyntax { Parent: VariableDeclarationSyntax variableDecl } } })
-            {
-                type = semanticModel.GetTypeInfo(variableDecl.Type).Type;
-                return type.IsAny(KnownType.NonIntegralNumbers);
-            }
-
-            type = null;
+            divisionResultType = null;
             return false;
-        }
 
-        private static SyntaxNode GetMostOuterTuple(SyntaxNode node) =>
-            node.Ancestors()
-                .TakeWhile(x => TupleExpressionSyntaxWrapper.IsInstance(x) || x.IsKind(SyntaxKind.Argument))
-                .LastOrDefault(x => TupleExpressionSyntaxWrapper.IsInstance(x));
+            static SyntaxNode GetMostOuterTuple(SyntaxNode node) =>
+                node.Ancestors()
+                    .TakeWhile(x => TupleExpressionSyntaxWrapper.IsInstance(x) || x.IsKind(SyntaxKind.Argument))
+                    .LastOrDefault(x => TupleExpressionSyntaxWrapper.IsInstance(x));
 
-        private static int DivisionArgumentIndex(ImmutableArray<ArgumentSyntax> arguments, SyntaxNode division) =>
-            arguments.IndexOf(x => x.Expression.Equals(division));
+            static int DivisionArgumentIndex(ImmutableArray<ArgumentSyntax> arguments, SyntaxNode division) =>
+                arguments.IndexOf(x => x.Expression.Equals(division));
 
-        private static List<ITypeSymbol> AllTupleElements(ITypeSymbol typeSymbol)
-        {
-            List<ITypeSymbol> flattenTupleTypes = new();
-            CollectTupleTypes(flattenTupleTypes, typeSymbol);
-            return flattenTupleTypes;
-
-            static void CollectTupleTypes(List<ITypeSymbol> symbolList, ITypeSymbol typeSymbol)
+            static List<ITypeSymbol> AllTupleElements(ITypeSymbol typeSymbol)
             {
-                if (typeSymbol.IsTupleType())
+                List<ITypeSymbol> flattenTupleTypes = new();
+                CollectTupleTypes(flattenTupleTypes, typeSymbol);
+                return flattenTupleTypes;
+
+                static void CollectTupleTypes(List<ITypeSymbol> symbolList, ITypeSymbol tupleTypeSymbol)
                 {
-                    var elements = ((INamedTypeSymbol)typeSymbol).TupleElements();
-                    foreach (var element in elements)
+                    if (tupleTypeSymbol.IsTupleType())
                     {
-                        CollectTupleTypes(symbolList, element.Type);
+                        var elements = ((INamedTypeSymbol)tupleTypeSymbol).TupleElements();
+                        foreach (var element in elements)
+                        {
+                            CollectTupleTypes(symbolList, element.Type);
+                        }
                     }
-                }
-                else
-                {
-                    symbolList.Add(typeSymbol.GetSymbolType());
+                    else
+                    {
+                        symbolList.Add(tupleTypeSymbol.GetSymbolType());
+                    }
                 }
             }
         }

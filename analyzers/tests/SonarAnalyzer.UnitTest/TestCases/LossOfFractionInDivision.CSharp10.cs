@@ -34,6 +34,10 @@ public struct S
         (int, decimal) fooBar;
         fooBar = (1, FooDecimal(1 / 3)); // Noncompliant
 
+        var p1 = 1;
+        var p2 = 2;
+        (int, decimal) result = (1, p1 / p2); // Noncompliant
+
         (int, ValueTuple<int, int>) vt = (1, (1 / 3, 3)); // FN
         (int, (int, int)) vt1 = (1, 1 / 3, 3); // Error
 
