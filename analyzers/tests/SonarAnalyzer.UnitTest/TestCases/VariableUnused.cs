@@ -37,12 +37,11 @@ namespace Tests.Diagnostics
                 Console.WriteLine("Hello world.");
             };
 
+            _ = 3;
+
             string c;
             c = "Hello, world!";
             Console.WriteLine(c);
-            
-            string f; // FN
-            f = "Hello, world!";
 
             string f1 = "Hello"; // Noncompliant
 
