@@ -43,8 +43,18 @@ namespace SonarAnalyzer.Rules
             public void CollectDeclarations(SyntaxNodeAnalysisContext c) =>
                 declaredLocals.UnionWith(
                     GetDeclaredVariables((TLocalDeclaration)c.Node)
-                        .Select(variable => c.SemanticModel.GetDeclaredSymbol(variable) ?? c.SemanticModel.GetSymbolInfo(variable).Symbol)
+                        .Select(variable => ForTestingPurpose(variable, c.SemanticModel))
                         .WhereNotNull());
+
+            private static ISymbol ForTestingPurpose(SyntaxNode variable, SemanticModel model)
+            {
+                var symbol = model.GetDeclaredSymbol(variable);
+                if (symbol is not { })
+                {
+                    return model.GetSymbolInfo(variable).Symbol;
+                }
+                return symbol;
+            }
 
             public void CollectUsages(SyntaxNodeAnalysisContext c) =>
                 usedLocals.UnionWith(GetUsedSymbols(c.Node, c.SemanticModel));
