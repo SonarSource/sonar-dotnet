@@ -23,7 +23,8 @@ int b, h;
 var dt = new DataTable();
 (i, (dt.Locale, h)) = (42, (CultureInfo.InvariantCulture, 0));
 
-(var k, l) = (new DataTable(), new DataTable()); // Noncompliant
+(var k, l) = (new DataTable(), new DataTable()); // Noncompliant {{Set the locale for this 'DataTable'.}}
+//                             ^^^^^^^^^^^^^^^
 k.Locale = CultureInfo.InvariantCulture;
 
 var (xx, yy) = (new DataTable(), new DataTable()); // Noncompliant [3, 4]

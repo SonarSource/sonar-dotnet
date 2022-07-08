@@ -66,7 +66,7 @@ namespace SonarAnalyzer.Rules.CSharp
             {
                 if (GetSymbolFromConstructorInvocation(c.Node, c.SemanticModel) is ITypeSymbol objectType
                     && objectType.IsAny(CheckedTypes)
-                    && GetAssignmentTargetVariables(c.Node) is { } variableSyntax)
+                    && GetAssignmentTargetVariable(c.Node) is { } variableSyntax)
                 {
                     if (DeclarationExpressionSyntaxWrapper.IsInstance(variableSyntax))
                     {
@@ -114,7 +114,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 ? semanticModel.GetSymbolInfo(objectCreation.Type).Symbol
                 : semanticModel.GetSymbolInfo(constructorCall).Symbol?.ContainingType;
 
-        private static SyntaxNode GetAssignmentTargetVariables(SyntaxNode objectCreation) =>
+        private static SyntaxNode GetAssignmentTargetVariable(SyntaxNode objectCreation) =>
             objectCreation.GetFirstNonParenthesizedParent() switch
             {
                 AssignmentExpressionSyntax assignment => assignment.Left,
