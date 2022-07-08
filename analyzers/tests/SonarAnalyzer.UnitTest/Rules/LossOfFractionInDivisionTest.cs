@@ -25,18 +25,20 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class LossOfFractionInDivisionTest
     {
+        private readonly VerifierBuilder verifier = new VerifierBuilder<LossOfFractionInDivision>();
+
         [TestMethod]
         public void LossOfFractionInDivision() =>
-            OldVerifier.VerifyAnalyzer(@"TestCases\LossOfFractionInDivision.cs", new LossOfFractionInDivision());
+            verifier.AddPaths("LossOfFractionInDivision.cs").Verify();
 
 #if NET
         [TestMethod]
         public void LossOfFractionInDivision_FromCSharp9() =>
-            OldVerifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\LossOfFractionInDivision.CSharp9.cs", new LossOfFractionInDivision());
+            verifier.AddPaths("LossOfFractionInDivision.CSharp9.cs").WithTopLevelStatements().Verify();
 
         [TestMethod]
         public void LossOfFractionInDivision_FromCSharp10() =>
-            OldVerifier.VerifyAnalyzerFromCSharp10Library(@"TestCases\LossOfFractionInDivision.CSharp10.cs", new LossOfFractionInDivision());
+            verifier.AddPaths("LossOfFractionInDivision.CSharp10.cs").WithOptions(ParseOptionsHelper.FromCSharp10).Verify();
 #endif
     }
 }
