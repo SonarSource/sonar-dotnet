@@ -24,4 +24,7 @@
         //            ^^^       @-1 {{Remove this increment or correct the code not to waste it.}}
         //                 ^^^  @-2 {{Remove this increment or correct the code not to waste it.}}
     }
+
+    public (int, (int, int)) M3(int i, int j, int k) =>
+        (i++, (j++, k++));      // Noncompliant [lambdaTuple1, lambdaTuple2, lambdaTuple3]
 }
