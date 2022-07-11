@@ -25,7 +25,10 @@ namespace Tests.Diagnostics
             this.streamField.Read(new byte[0], 0, 0);                  // Noncompliant
             streamField?.Read(new byte[0], 0, 0);                      // Noncompliant
             this.streamField?.Read(new byte[0], 0, 0);                 // Noncompliant
+            Read();                                                    // Compliant. Not a read method of a stream
         }
+
+        public void Read() { }
     }
 
     public class DerivedStream : Stream
