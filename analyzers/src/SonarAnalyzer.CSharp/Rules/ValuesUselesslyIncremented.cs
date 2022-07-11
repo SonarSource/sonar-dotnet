@@ -57,8 +57,8 @@ namespace SonarAnalyzer.Rules.CSharp
         {
             switch (increment.Parent)
             {
-                case ReturnStatementSyntax _:
-                case ArrowExpressionClauseSyntax _:
+                case ReturnStatementSyntax:
+                case ArrowExpressionClauseSyntax:
                 case CastExpressionSyntax castExpressionSyntax
                     when castExpressionSyntax.Parent.IsAnyKind(SyntaxKind.ReturnStatement, SyntaxKind.ArrowExpressionClause):
                 case ArgumentSyntax argumentInAssignment
