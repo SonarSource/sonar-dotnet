@@ -18,7 +18,7 @@
 
     public (int, (int, int)) M2()
     {
-        int i = 0; int j = 0; int k = 0;
+        var (i, j, k) = (0, 0, 0);
         return (i++, (j++, k++));
         //      ^^^                 {{Remove this increment or correct the code not to waste it.}}
         //            ^^^       @-1 {{Remove this increment or correct the code not to waste it.}}
