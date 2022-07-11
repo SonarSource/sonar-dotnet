@@ -104,7 +104,9 @@ namespace SonarAnalyzer.Helpers.Facade
             };
 
         public override SyntaxNode RemoveConditionalAccess(SyntaxNode node) =>
-            (node as ExpressionSyntax).RemoveConditionalAccess();
+            node is ExpressionSyntax expression
+            ? expression.RemoveConditionalAccess()
+            : node;
 
         public override SyntaxNode RemoveParentheses(SyntaxNode node) =>
             node.RemoveParentheses();
