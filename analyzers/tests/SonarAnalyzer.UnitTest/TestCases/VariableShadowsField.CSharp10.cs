@@ -11,6 +11,8 @@
     private int s = 0;
     private int t = 0;
     private int u = 0;
+    private int v = 0;
+    private int w = 0;
 
     public S()
     {
