@@ -160,6 +160,7 @@ public class Sample
         [DataRow("(M(($$1, 2)), 3)", "(1, 2)")]
         public void OutermostTuple_DifferentPositions(string tuple, string expectedOuterTuple)
         {
+            // Arrange
             var code =
 @$"
 public class C
@@ -179,7 +180,9 @@ public class C
             syntaxTree.GetDiagnostics().Should().BeEmpty();
             var nodeAtPosition = syntaxTree.GetRoot().FindNode(new TextSpan(nodePosition, 0), getInnermostNodeForTie: true);
             var argument = nodeAtPosition?.AncestorsAndSelf().OfType<CS.ArgumentSyntax>().First();
+            // Act
             var outerMostTuple = argument.OutermostTuple();
+            // Assert
             if (expectedOuterTuple is null)
             {
                 outerMostTuple.Should().BeNull();
