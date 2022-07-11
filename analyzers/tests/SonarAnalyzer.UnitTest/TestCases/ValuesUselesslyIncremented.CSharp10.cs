@@ -27,4 +27,8 @@
 
     public (int, (int, int)) M3(int i, int j, int k) =>
         (i++, (j++, k++));      // Noncompliant [lambdaTuple1, lambdaTuple2, lambdaTuple3]
+
+    public (int, (int, int)) M4(int i, int j, int k) =>
+        (i++, M1(j++, k++));    // Noncompliant
+    //   ^^^
 }
