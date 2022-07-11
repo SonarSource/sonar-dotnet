@@ -58,6 +58,16 @@ namespace SonarAnalyzer.Rules.CSharp
                     ReportOnVariableMatchingField(c, members, declaration.Identifier);
                 },
                 SyntaxKind.ForEachStatement);
+            context.RegisterSyntaxNodeActionInNonGenerated(c =>
+                {
+                    var declaration = (ForEachVariableStatementSyntaxWrapper)c.Node;
+                    var variable = declaration.Variable;
+                    if (TupleElementSyntaxWrapper.IsInstance(variable))
+                    {
+                        ((TupleElementSyntaxWrapper)variable).AllElements();
+                    }
+                },
+                SyntaxKindEx.ForEachVariableStatement);
 
             context.RegisterSyntaxNodeActionInNonGenerated(c => ProcessVariableDeclaration(c, ((LocalDeclarationStatementSyntax)c.Node).Declaration), SyntaxKind.LocalDeclarationStatement);
             context.RegisterSyntaxNodeActionInNonGenerated(c => ProcessVariableDeclaration(c, ((ForStatementSyntax)c.Node).Declaration), SyntaxKind.ForStatement);
