@@ -52,7 +52,7 @@ namespace SonarAnalyzer.Extensions
         internal static TupleExpressionSyntaxWrapper? OutermostTuple(this ArgumentSyntax argument) =>
             argument.Ancestors()
                 .TakeWhile(x => x.IsAnyKind(SyntaxKind.Argument, SyntaxKindEx.TupleExpression))
-                .LastOrDefault() is { } outerTuple
+                .LastOrDefault(x => x.IsKind(SyntaxKindEx.TupleExpression)) is { } outerTuple
                 && TupleExpressionSyntaxWrapper.IsInstance(outerTuple)
                     ? (TupleExpressionSyntaxWrapper)outerTuple
                     : null;
