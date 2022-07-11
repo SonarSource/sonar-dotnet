@@ -134,24 +134,24 @@ namespace SonarAnalyzer.Extensions
         /// <summary>
         /// Finds the syntactic complementing <see cref="SyntaxNode"/> of an assignment with tuples.
         /// <code>
-        /// var (a, b) = (1, 2);      // if node is a, 1 is returned and vice versa.
-        /// (var a, var b) = (1, 2);  // if node is 2, var b is returned and vice versa.
+        /// var (a, b) = (1, 2);      // if node is "a", "1" is returned and vice versa.
+        /// (var a, var b) = (1, 2);  // if node is "2", "var b" is returned and vice versa.
+        /// a = 1;                    // if node is "a", "1" is returned and vice versa.
+        /// t = (1, 2);               // if node is "t", "(1, 2)" is returned, if node is "1", "null" is returned.
         /// </code>
         /// <paramref name="node"/> must be an <see cref="ArgumentSyntax"/> of a tuple or some variable designation of a <see cref="SyntaxKindEx.DeclarationExpression"/>.
         /// </summary>
+        /// <returns>
+        /// The <see cref="SyntaxNode"/> on the other side of the assignment or <see langword="null"/> if <paramref name="node"/> is not
+        /// a direct child of the assignment, not part of a tuple, not part of a designation, or no corresponding <see cref="SyntaxNode"/>
+        /// can be found on the other side.
+        /// </returns>
         public static SyntaxNode FindAssignmentComplement(this SyntaxNode node)
         {
             if (node is { Parent: AssignmentExpressionSyntax assigment})
             {
                 return OtherSideOfAssignment(node, assigment);
             }
-            Debug.Assert(node.IsAnyKind(SyntaxKind.Argument,
-                                        SyntaxKindEx.DiscardDesignation,
-                                        SyntaxKindEx.SingleVariableDesignation,
-                                        SyntaxKindEx.ParenthesizedVariableDesignation,
-                                        SyntaxKindEx.TupleExpression), "Only direct children of tuple like elements are allowed.");
-            Debug.Assert(node is not ArgumentSyntax || node.Parent.IsKind(SyntaxKindEx.TupleExpression), "Only arguments of a tuple are supported.");
-
             // can be either outermost tuple, or DeclarationExpression if 'node' is SingleVariableDesignationExpression
             var outermostParenthesesExpression = node.AncestorsAndSelf()
                 .TakeWhile(x => x.IsAnyKind(
@@ -161,7 +161,7 @@ namespace SonarAnalyzer.Extensions
                     SyntaxKindEx.ParenthesizedVariableDesignation,
                     SyntaxKindEx.DiscardDesignation,
                     SyntaxKindEx.DeclarationExpression))
-                .LastOrDefault();
+                .LastOrDefault(x => x.IsAnyKind(SyntaxKindEx.DeclarationExpression, SyntaxKindEx.TupleExpression));
             if ((TupleExpressionSyntaxWrapper.IsInstance(outermostParenthesesExpression) || DeclarationExpressionSyntaxWrapper.IsInstance(outermostParenthesesExpression))
                 && outermostParenthesesExpression.Parent is AssignmentExpressionSyntax assignment)
             {
