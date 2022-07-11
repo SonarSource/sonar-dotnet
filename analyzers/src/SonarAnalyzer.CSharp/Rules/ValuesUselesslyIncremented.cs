@@ -23,6 +23,7 @@ using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
+using SonarAnalyzer.Extensions;
 using SonarAnalyzer.Helpers;
 
 namespace SonarAnalyzer.Rules.CSharp
@@ -44,7 +45,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     var increment = (PostfixUnaryExpressionSyntax)c.Node;
                     var symbol = c.SemanticModel.GetSymbolInfo(increment.Operand).Symbol;
 
-                    if (symbol is ILocalSymbol || symbol is IParameterSymbol {RefKind: RefKind.None })
+                    if (symbol is ILocalSymbol || symbol is IParameterSymbol { RefKind: RefKind.None })
                     {
                         VisitParent(increment, c);
                     }
@@ -60,6 +61,11 @@ namespace SonarAnalyzer.Rules.CSharp
                 case ArrowExpressionClauseSyntax _:
                 case CastExpressionSyntax castExpressionSyntax
                     when castExpressionSyntax.Parent.IsAnyKind(SyntaxKind.ReturnStatement, SyntaxKind.ArrowExpressionClause):
+                case ArgumentSyntax argumentInAssignment
+                    when argumentInAssignment.FindAssignmentComplement() is { } assignmentTarget
+                         && CSharpEquivalenceChecker.AreEquivalent(assignmentTarget, increment.Operand):
+                case ArgumentSyntax argumentInReturn
+                    when argumentInReturn.OutermostTuple() is { SyntaxNode.Parent: ReturnStatementSyntax or ArrowExpressionClauseSyntax }:
                 case AssignmentExpressionSyntax assignment
                     when assignment.IsKind(SyntaxKind.SimpleAssignmentExpression)
                          && assignment.Right == increment
