@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
   <modelVersion>4.0.0</modelVersion>
 
   <parent>
@@ -152,6 +153,7 @@
         <includes>
           <include>org/sonar/plugins/csharp/*.xml</include>
           <include>org/sonar/plugins/csharp/*.json</include>
+          <include>org/sonar/plugins/csharp/*.html</include>
           <include>static/version.txt</include>
           <include>static/documentation.md</include>
           <include>static/SonarAnalyzer-${project.version}.zip</include>
@@ -213,8 +215,8 @@
             <configuration>
               <rules>
                 <requireFilesSize>
-                  <maxsize>5500000</maxsize>
-                  <minsize>5300000</minsize>
+                  <maxsize>5800000</maxsize>
+                  <minsize>5600000</minsize>
                   <files>
                     <file>${project.build.directory}/${project.build.finalName}.jar</file>
                   </files>
@@ -235,6 +237,7 @@
       </activation>
       <properties>
         <analyzer.configuration>Release</analyzer.configuration>
+        <analyzers.directory>${project.build.directory}/../../analyzers</analyzers.directory>
       </properties>
       <build>
         <plugins>
@@ -251,7 +254,7 @@
                   <target>
                     <!-- ITs requires the SonarAnalyzer-VERSION.zip to be present so don't remove these lines -->
                     <copy todir="${sonarAnalyzer.workDirectory}/SonarAnalyzer.CSharp">
-                      <fileset dir="${project.build.directory}/../../analyzers/packaging/binaries/">
+                      <fileset dir="${analyzers.directory}/packaging/binaries/">
                         <include name="Google.Protobuf.dll"/>
                         <include name="SonarAnalyzer.dll"/>
                         <include name="SonarAnalyzer.CFG.dll"/>
@@ -264,21 +267,27 @@
                     <zip destfile="${sonarAnalyzer.workDirectory}/static/SonarAnalyzer-${project.version}.zip"
                          basedir="${sonarAnalyzer.workDirectory}/SonarAnalyzer.CSharp"/>
                     <copy todir="${sonarAnalyzer.workDirectory}/org/sonar/plugins/csharp">
-                      <fileset dir="${project.build.directory}/../../analyzers/src/SonarAnalyzer.RuleDescriptorGenerator/bin/${analyzer.configuration}/net46/cs">
+                      <fileset
+                        dir="${analyzers.directory}/src/SonarAnalyzer.RuleDescriptorGenerator/bin/${analyzer.configuration}/net46/cs">
                         <include name="rules.xml"/>
                       </fileset>
-                      <fileset dir="${project.build.directory}/../../analyzers/rspec/cs">
-                        <include name="*.json" /> <!-- Allows to copy each rule definition json file and the Sonar-way profile. -->
+                      <fileset dir="${analyzers.directory}/rspec/cs">
+                        <include name="*.json"/>
+                        <include name="*.html"/>
                       </fileset>
                     </copy>
-
+                    <exec executable="dotnet"
+                          dir="${analyzers.directory}/src/SonarAnalyzer.RuleDescriptorGenerator/bin/${analyzer.configuration}/netcoreapp3.1">
+                      <arg value="SonarAnalyzer.RuleDescriptorGenerator.dll"/>
+                      <arg value="${analyzers.directory}/packaging/binaries/SonarAnalyzer.CSharp.dll"/>
+                      <arg value="${sonarAnalyzer.workDirectory}/org/sonar/plugins/csharp/Rules.json"/>
+                    </exec>
                     <copy todir="${sonarAnalyzer.workDirectory}/static">
                       <fileset dir="${documentationDirectory}">
                         <include name="documentation.md"/>
                       </fileset>
                     </copy>
-
-                    <echo file="${sonarAnalyzer.workDirectory}/static/version.txt" message="${project.version}" encoding="utf-8" />
+                    <echo file="${sonarAnalyzer.workDirectory}/static/version.txt" message="${project.version}" encoding="utf-8"/>
                   </target>
                 </configuration>
                 <goals>
