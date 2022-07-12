@@ -28,12 +28,21 @@ namespace SonarAnalyzer.Rules;
 public abstract class SpecifyTimeoutOnRegexBase<TSyntaxKind> : SonarDiagnosticAnalyzer<TSyntaxKind>
         where TSyntaxKind : struct
 {
-    internal const string DiagnosticId = "S4581"; // TODO
+    private const string DiagnosticId = "S4581"; // TODO
 
     /// <remarks>
     /// See: https://docs.microsoft.com/en-us/dotnet/api/system.text.regularexpressions.regexoptions?view=net-7.0
     /// </remarks>
     private const int NonBacktracking = 1024;
+
+    private static readonly string[] MatchMethods =
+    {
+        nameof(Regex.IsMatch),
+        nameof(Regex.Match),
+        nameof(Regex.Matches),
+        nameof(Regex.Replace),
+        nameof(Regex.Split),
+    };
 
     protected override string MessageFormat => "Pass a timeout to limit the execution time.";
 
@@ -78,22 +87,13 @@ public abstract class SpecifyTimeoutOnRegexBase<TSyntaxKind> : SonarDiagnosticAn
 
     private bool NoBacktracking(IMethodSymbol method, SyntaxNode node, SemanticModel model) =>
         method.Parameters.SingleOrDefault(x => x.Type.Is(KnownType.System_Text_RegularExpressions_RegexOptions)) is { } par
-            && Language.MethodParameterLookup(node, method).TryGetNonParamsSyntax(par, out var expression)
-            && Language.FindConstantValue(model, expression) is int options
-            && (options & NonBacktracking) == NonBacktracking;
+        && Language.MethodParameterLookup(node, method).TryGetNonParamsSyntax(par, out var expression)
+        && Language.FindConstantValue(model, expression) is int options
+        && (options & NonBacktracking) == NonBacktracking;
 
     private bool IsCandidateCtor(SyntaxNode ctorNode) =>
         Language.Syntax.ArgumentExpressions(ctorNode).Count() < 3;
 
     private bool IsRegexMatchMethod(string name) =>
-        MatchMehods.Any(method => method.Equals(name, Language.NameComparison));
-
-    private static readonly string[] MatchMethods =
-    {
-        nameof(Regex.IsMatch),
-        nameof(Regex.Match),
-        nameof(Regex.Matches),
-        nameof(Regex.Replace),
-        nameof(Regex.Split),
-    };
+        MatchMethods.Any(method => method.Equals(name, Language.NameComparison));
 }
