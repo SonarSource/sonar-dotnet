@@ -28,10 +28,10 @@ using SonarAnalyzer.Helpers;
 namespace SonarAnalyzer.Rules.CSharp;
 
 [DiagnosticAnalyzer(LanguageNames.CSharp)]
-public sealed class ExtensionMethodShouldNotExtendObject : ExtensionMethodShouldNotExtendObjectBase<SyntaxKind>
+public sealed class ExtensionMethodShouldNotExtendObject : ExtensionMethodShouldNotExtendObjectBase<SyntaxKind, MethodDeclarationSyntax>
 {
     protected override ILanguageFacade<SyntaxKind> Language => CSharpFacade.Instance;
 
-    protected override bool IsExtensionMethod(SyntaxNode methodDeclaration) =>
-        ((MethodDeclarationSyntax)methodDeclaration).IsExtensionMethod();
+    protected override bool IsExtensionMethod(MethodDeclarationSyntax declaration) =>
+        declaration.IsExtensionMethod();
 }

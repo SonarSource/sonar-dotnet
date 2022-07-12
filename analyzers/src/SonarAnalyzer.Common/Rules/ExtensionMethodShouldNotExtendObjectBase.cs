@@ -23,12 +23,15 @@ using SonarAnalyzer.Helpers;
 
 namespace SonarAnalyzer.Rules;
 
-public abstract class ExtensionMethodShouldNotExtendObjectBase<TSyntaxKind> : SonarDiagnosticAnalyzer<TSyntaxKind>
+public abstract class ExtensionMethodShouldNotExtendObjectBase<TSyntaxKind, TMethodDeclaration> : SonarDiagnosticAnalyzer<TSyntaxKind>
     where TSyntaxKind : struct
+    where TMethodDeclaration : SyntaxNode
 {
     private const string DiagnosticId = "S4225";
 
     protected override string MessageFormat => "Refactor this extension to extend a more concrete type.";
+
+    protected abstract bool IsExtensionMethod(TMethodDeclaration declaration);
 
     protected ExtensionMethodShouldNotExtendObjectBase() : base(DiagnosticId) { }
 
@@ -37,7 +40,7 @@ public abstract class ExtensionMethodShouldNotExtendObjectBase<TSyntaxKind> : So
             Language.GeneratedCodeRecognizer,
             c =>
             {
-                if (IsExtensionMethod(c.Node)
+                if (IsExtensionMethod((TMethodDeclaration)c.Node)
                     && c.SemanticModel.GetDeclaredSymbol(c.Node) is IMethodSymbol method
                     && method.IsExtensionMethod
                     && method.Parameters.Length > 0
@@ -47,6 +50,4 @@ public abstract class ExtensionMethodShouldNotExtendObjectBase<TSyntaxKind> : So
                 }
             },
             Language.SyntaxKind.MethodDeclarations);
-
-    protected abstract bool IsExtensionMethod(SyntaxNode methodDeclaration);
 }
