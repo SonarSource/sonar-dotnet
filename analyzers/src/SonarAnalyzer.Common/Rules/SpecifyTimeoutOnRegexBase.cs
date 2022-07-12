@@ -36,6 +36,7 @@ public abstract class SpecifyTimeoutOnRegexBase<TSyntaxKind> : SonarDiagnosticAn
     protected override string MessageFormat => "Pass a timeout to limit the execution time.";
 
     protected SpecifyTimeoutOnRegexBase() : base(DiagnosticId) { }
+
     protected override void Initialize(SonarAnalysisContext context)
     {
         context.RegisterSyntaxNodeActionInNonGenerated(

@@ -35,9 +35,9 @@ class Compliant
 
     void NonBacktrackingSpecified()
     {
-        var newonBacktrackingOnly = new Regex("some pattern", (RegexOptions)1024); // Compliant
-        var newonAlsoBacktracking = new Regex("some pattern", (RegexOptions)1025); // Compliant
-        var split = Regex.Split("some input", "some pattern", (RegexOptions)1024); // Compliant
+        var newOnBacktrackingOnly = new Regex("some pattern", (RegexOptions)1024); // Compliant
+        var newOnAlsoBacktracking = new Regex("some pattern", (RegexOptions)1025); // Compliant. RegexOptions is a flag enum
+        var staticOnSplit = Regex.Split("some input", "some pattern", (RegexOptions)1024); // Compliant
     }
 
     void NoRegex()
