@@ -31,6 +31,9 @@ public abstract class SpecifyTimeoutOnRegexBase<TSyntaxKind> : SonarDiagnosticAn
 {
     internal const string DiagnosticId = "S4581"; // TODO
 
+    /// <remarks>
+    /// See: https://docs.microsoft.com/en-us/dotnet/api/system.text.regularexpressions.regexoptions?view=net-7.0
+    /// </remarks>
     private const int NonBacktracking = 1024;
 
     protected override string MessageFormat => "Pass a timeout to limit the execution time.";
