@@ -46,7 +46,8 @@ public class AbstractRulesDefinitionTest {
 
     RulesDefinition.Rule rule = repository.rule("S1111");
     assertThat(rule).isNotNull();
-    assertThat(rule.securityStandards()).containsExactlyInAnyOrder("cwe:117", "cwe:532", "owaspTop10:a10", "owaspTop10:a3", "owaspTop10-2021:a9");
+    assertThat(rule.securityStandards()).containsExactlyInAnyOrder("cwe:117", "cwe:532", "owaspTop10:a10", "owaspTop10:a3",
+      "owaspTop10-2021:a9");
   }
 
   @Test
@@ -67,13 +68,7 @@ public class AbstractRulesDefinitionTest {
 
   private static class TestRulesDefinition extends AbstractRulesDefinition {
     TestRulesDefinition(SonarRuntime runtime) {
-      super("test", "test", "test", "/AbstractRulesDefinitionTest/rules.xml", runtime);
-    }
-
-    @Override
-    protected String getRuleJson(String ruleKey) {
-      return "/AbstractRulesDefinitionTest/S1111.json";
+      super("test", "test", runtime, "/AbstractRulesDefinitionTest/", "");
     }
   }
 }
-

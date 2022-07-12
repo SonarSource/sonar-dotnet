@@ -45,7 +45,6 @@ public class CSharpPlugin implements Plugin {
   static final String LANGUAGE_NAME = "C#";
 
   static final String REPOSITORY_KEY = "csharpsquid";
-  static final String REPOSITORY_NAME = "SonarAnalyzer";
   static final String PLUGIN_KEY = "csharp";
   static final String SONARANALYZER_NAME = "SonarAnalyzer.CSharp";
 
@@ -84,8 +83,7 @@ public class CSharpPlugin implements Plugin {
       ProtobufDataImporter.class,
       RoslynDataImporter.class,
       RoslynProfileExporter.class,
-      SonarLintProfileExporter.class
-    );
+      SonarLintProfileExporter.class);
 
     context.addExtensions(new CSharpPropertyDefinitions(context.getRuntime()).create());
     context.addExtension(new CSharpSonarWayProfile());

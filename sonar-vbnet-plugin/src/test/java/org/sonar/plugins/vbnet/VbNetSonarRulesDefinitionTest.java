@@ -48,10 +48,10 @@ public class VbNetSonarRulesDefinitionTest {
     assertThat(context.repositories()).hasSize(1);
     assertThat(context.repository("vbnet").rules()).isNotEmpty();
 
-    Rule s100 = context.repository("vbnet").rule("S1197");
-    assertThat(s100.debtRemediationFunction().type()).isEqualTo(DebtRemediationFunction.Type.CONSTANT_ISSUE);
-    assertThat(s100.debtRemediationFunction().baseEffort()).isEqualTo("5min");
-    assertThat(s100.type()).isEqualTo(RuleType.CODE_SMELL);
+    Rule s1197 = context.repository("vbnet").rule("S1197");
+    assertThat(s1197.debtRemediationFunction().type()).isEqualTo(DebtRemediationFunction.Type.CONSTANT_ISSUE);
+    assertThat(s1197.debtRemediationFunction().baseEffort()).isEqualTo("5min");
+    assertThat(s1197.type()).isEqualTo(RuleType.CODE_SMELL);
   }
 
   @Test
@@ -79,13 +79,13 @@ public class VbNetSonarRulesDefinitionTest {
   }
 
   @Test
-  public void test_all_rules_have_status_set(){
+  public void test_all_rules_have_status_set() {
     VbNetSonarRulesDefinition definition = new VbNetSonarRulesDefinition(SONAR_RUNTIME);
     RulesDefinition.Context context = new RulesDefinition.Context();
     definition.define(context);
     RulesDefinition.Repository repository = context.repository("vbnet");
 
-    for (RulesDefinition.Rule rule:repository.rules()) {
+    for (RulesDefinition.Rule rule : repository.rules()) {
       assertThat(rule.status()).isNotNull();
     }
   }

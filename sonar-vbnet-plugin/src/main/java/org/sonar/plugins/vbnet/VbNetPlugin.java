@@ -44,7 +44,6 @@ public class VbNetPlugin implements Plugin {
   static final String LANGUAGE_NAME = "VB.NET";
 
   static final String REPOSITORY_KEY = "vbnet";
-  static final String REPOSITORY_NAME = "SonarAnalyzer";
   static final String PLUGIN_KEY = "vbnet";
   static final String SONARANALYZER_NAME = "SonarAnalyzer.VisualBasic";
 
@@ -81,8 +80,7 @@ public class VbNetPlugin implements Plugin {
       ProtobufDataImporter.class,
       RoslynDataImporter.class,
       RoslynProfileExporter.class,
-      SonarLintProfileExporter.class
-    );
+      SonarLintProfileExporter.class);
 
     context.addExtensions(new VbNetPropertyDefinitions(context.getRuntime()).create());
     context.addExtension(new VbNetSonarWayProfile());
