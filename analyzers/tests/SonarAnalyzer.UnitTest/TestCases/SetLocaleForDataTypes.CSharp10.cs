@@ -40,3 +40,8 @@ var (_, (_,( o, _))) = (1, (2,( new DataTable(), 4))); // Noncompliant
 DataTable foo, bar;
 foo = (bar = new DataTable()); // Noncompliant
 var foobar = (bar ??= new DataTable()); // FN
+
+DataTable myTable5, myTable6;
+var (myTable1, myTable2) = ((new DataTable { Locale = CultureInfo.InvariantCulture }), new DataTable()); // Noncompliant
+(var  myTable3, var  myTable4) = (new DataTable { Locale = CultureInfo.InvariantCulture }, new DataTable()); // Noncompliant
+(myTable5, myTable6) = (new DataTable { Locale = CultureInfo.InvariantCulture }, new DataTable()); // Noncompliant

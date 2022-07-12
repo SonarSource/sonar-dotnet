@@ -14,9 +14,6 @@ namespace Tests.Diagnostics
 //                                        ^^^^^^^^^^^^^^^ {{Set the locale for this 'DataTable'.}}
                                           myWrongTable2 = new DataTable(); // FN
 
-
-
-
         void Foo()
         {
             var dataTable = new System.Data.DataTable();
@@ -29,6 +26,12 @@ namespace Tests.Diagnostics
             dataTable2 = new DataTable { Locale = CultureInfo.InvariantCulture };
 
             var fooBar = new FooBar(new DataTable()); // FN
+
+            var a = new
+            {
+                MyTable1 = new DataTable { Locale = CultureInfo.InvariantCulture },
+                MyTable2 = new DataTable(), // FN
+            };
         }
 
         void Bar(DataColumn column)
@@ -79,7 +82,6 @@ namespace Tests.Diagnostics
             new DataTable();
         }
 
-
         void Bar()
         {
             void M(DataTable table) { }
@@ -95,5 +97,4 @@ namespace Tests.Diagnostics
     {
         public FooBar(DataTable datatable) { }
     }
-
 }

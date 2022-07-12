@@ -133,13 +133,24 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private static ISymbol IdentifierNameSymbol(IdentifierNameSyntax node, SemanticModel model)
         {
-            var leftSideOfParentAssignment = node
-                .FirstAncestorOrSelf((SyntaxNode x) => x.IsAnyKind(SyntaxKind.ObjectCreationExpression, SyntaxKindEx.ImplicitObjectCreationExpression))
-                .FirstAncestorOrSelf<AssignmentExpressionSyntax>()
-                ?.Left;
+            var objectCreation = node
+                .FirstAncestorOrSelf((SyntaxNode x) => x.IsAnyKind(SyntaxKind.ObjectCreationExpression, SyntaxKindEx.ImplicitObjectCreationExpression));
+
+            SyntaxNode leftSideOfParentAssignment = null;
+            if (objectCreation.GetFirstNonParenthesizedParent() is ArgumentSyntax argumentSyntax)
+            {
+                leftSideOfParentAssignment = argumentSyntax.FindAssignmentComplement();
+            }
+            else
+            {
+                leftSideOfParentAssignment = objectCreation.FirstAncestorOrSelf<AssignmentExpressionSyntax>()?.Left;
+            }
+
             if (leftSideOfParentAssignment != null)
             {
-                return model.GetSymbolInfo(leftSideOfParentAssignment).Symbol;
+                return leftSideOfParentAssignment is IdentifierNameSyntax
+                    ? model.GetSymbolInfo(leftSideOfParentAssignment).Symbol
+                    : model.GetDeclaredSymbol(leftSideOfParentAssignment);
             }
 
             var lastVariable = node.FirstAncestorOrSelf<VariableDeclarationSyntax>()?.Variables.LastOrDefault();
