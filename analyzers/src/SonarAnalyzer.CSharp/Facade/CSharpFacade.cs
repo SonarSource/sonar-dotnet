@@ -57,8 +57,8 @@ internal sealed class CSharpFacade : ILanguageFacade<SyntaxKind>
             null => null,
             ObjectCreationExpressionSyntax x => new CSharpMethodParameterLookup(x.ArgumentList, methodSymbol),
             InvocationExpressionSyntax x => new CSharpMethodParameterLookup(x, methodSymbol),
-            var _ when ImplicitObjectCreationExpressionSyntaxWrapper.IsInstance(node)
-                => new CSharpMethodParameterLookup(((ImplicitObjectCreationExpressionSyntaxWrapper)node).ArgumentList, methodSymbol),
+            _ when ImplicitObjectCreationExpressionSyntaxWrapper.IsInstance(node) =>
+                new CSharpMethodParameterLookup(((ImplicitObjectCreationExpressionSyntaxWrapper)node).ArgumentList, methodSymbol),
             _ => throw new InvalidCastException($"{node.GetType()} does not contain an ArgumentList."),
         };
 }

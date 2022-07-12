@@ -88,7 +88,7 @@ public abstract class SpecifyTimeoutOnRegexBase<TSyntaxKind> : SonarDiagnosticAn
     private bool IsRegexMatchMethod(string name) =>
         MatchMehods.Any(method => method.Equals(name, Language.NameComparison));
 
-    private static readonly string[] MatchMehods = new[]
+    private static readonly string[] MatchMethods =
     {
         nameof(Regex.IsMatch),
         nameof(Regex.Match),

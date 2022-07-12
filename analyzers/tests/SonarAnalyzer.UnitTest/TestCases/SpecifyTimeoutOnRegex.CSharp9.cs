@@ -13,8 +13,8 @@ class Noncompliant
 {
     void ImplicitObject()
     {
-        Regex patternOnly = new ("some pattern"); // Noncompliant {{Pass a timeout to limit the execution time.}}
-        //                  ^^^^^^^^^^^^^^^^^^^^
+        Regex patternOnly = new("some pattern"); // Noncompliant {{Pass a timeout to limit the execution time.}}
+        //                  ^^^^^^^^^^^^^^^^^^^
         Regex withOptions = new("some pattern", RegexOptions.None); // Noncompliant
     }
 }
