@@ -19,6 +19,7 @@
  */
 
 using System;
+using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.VisualBasic.Syntax;
 using SonarAnalyzer.Helpers;
 
@@ -26,10 +27,14 @@ namespace SonarAnalyzer.Extensions;
 
 internal static class AttributeSyntaxExtensions
 {
-    public static bool IsExtension(this AttributeSyntax attribute)
-    {
-        var name = attribute.GetName();
-        return name.Equals("Extension", StringComparison.InvariantCultureIgnoreCase)
-            || name.Equals("ExtensionAttribute", StringComparison.InvariantCultureIgnoreCase);
-    }
+    private const int AttributeLength = 9;
+
+    public static bool IsKnownType(this AttributeSyntax attribute, KnownType knownType, SemanticModel semanticModel) =>
+        attribute.Name.GetName().Contains(GetShortNameWithoutAttributeSuffix(knownType))
+        && SymbolHelper.IsKnownType(attribute, knownType, semanticModel);
+
+    private static string GetShortNameWithoutAttributeSuffix(KnownType knownType) =>
+        knownType.TypeName == nameof(Attribute) || !knownType.TypeName.EndsWith(nameof(Attribute))
+            ? knownType.TypeName
+            : knownType.TypeName.Remove(knownType.TypeName.Length - AttributeLength);
 }

@@ -31,7 +31,7 @@ public abstract class ExtensionMethodShouldNotExtendObjectBase<TSyntaxKind, TMet
 
     protected override string MessageFormat => "Refactor this extension to extend a more concrete type.";
 
-    protected abstract bool IsExtensionMethod(TMethodDeclaration declaration);
+    protected abstract bool IsExtensionMethod(TMethodDeclaration declaration, SemanticModel semanticModel);
 
     protected ExtensionMethodShouldNotExtendObjectBase() : base(DiagnosticId) { }
 
@@ -40,7 +40,7 @@ public abstract class ExtensionMethodShouldNotExtendObjectBase<TSyntaxKind, TMet
             Language.GeneratedCodeRecognizer,
             c =>
             {
-                if (IsExtensionMethod((TMethodDeclaration)c.Node)
+                if (IsExtensionMethod((TMethodDeclaration)c.Node, c.SemanticModel)
                     && c.SemanticModel.GetDeclaredSymbol(c.Node) is IMethodSymbol method
                     && method.IsExtensionMethod
                     && method.Parameters.Length > 0

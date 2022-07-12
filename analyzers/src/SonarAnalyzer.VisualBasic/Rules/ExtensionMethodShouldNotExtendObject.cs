@@ -23,7 +23,6 @@ using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Diagnostics;
 using Microsoft.CodeAnalysis.VisualBasic;
 using Microsoft.CodeAnalysis.VisualBasic.Syntax;
-using SonarAnalyzer.Extensions;
 using SonarAnalyzer.Helpers;
 
 namespace SonarAnalyzer.Rules.VisualBasic;
@@ -33,9 +32,16 @@ public sealed class ExtensionMethodShouldNotExtendObject : ExtensionMethodShould
 {
     protected override ILanguageFacade<SyntaxKind> Language => VisualBasicFacade.Instance;
 
-    protected override bool IsExtensionMethod(MethodStatementSyntax declaration) =>
+    protected override bool IsExtensionMethod(MethodStatementSyntax declaration, SemanticModel semanticModel) =>
         declaration.Parent.Parent is ModuleBlockSyntax
         && declaration.AttributeLists
             .SelectMany(x => x.Attributes)
-            .Any(x => x.IsExtension());
+            .Any(x => x.IsKnownType(KnownType.System_Runtime_CompilerServices_ExtensionAttribute, semanticModel));
+
+    private bool IsExtension(AttributeSyntax attribute)
+    {
+        var name = attribute.GetName();
+        return name.Equals("Extension", Language.NameComparison)
+            || name.Equals("ExtensionAttribute", Language.NameComparison);
+    }
 }

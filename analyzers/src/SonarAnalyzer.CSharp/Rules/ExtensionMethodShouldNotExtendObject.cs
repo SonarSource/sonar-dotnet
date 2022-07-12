@@ -32,6 +32,6 @@ public sealed class ExtensionMethodShouldNotExtendObject : ExtensionMethodShould
 {
     protected override ILanguageFacade<SyntaxKind> Language => CSharpFacade.Instance;
 
-    protected override bool IsExtensionMethod(MethodDeclarationSyntax declaration) =>
+    protected override bool IsExtensionMethod(MethodDeclarationSyntax declaration, SemanticModel semanticModel) =>
         declaration.IsExtensionMethod();
 }
