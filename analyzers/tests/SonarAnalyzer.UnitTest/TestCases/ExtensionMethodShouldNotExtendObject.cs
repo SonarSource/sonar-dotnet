@@ -1,19 +1,23 @@
 ﻿using System;
 
-namespace S4225.ExtensionMethodShouldNotExtendObject
+static class Compliant
 {
-    static class Compliant
+    static void ExtendsValueType(this int i) { }
+    static int ExtendsWithArguments(this int i, int n)
     {
-        static void Extends(this int i) { }
-        static System.Collections.Generic.IEnumerable<int> GetBaz() { return new[] { 0 }; }
-        static void NotAnExtension(object o) { }
+        return i + n;
+    }
+    static void ExtendsReferenceType(this Exception i) { }
+
+    static void NotAnExtension(object o) { }
+}
+
+static class NonCompliant
+{
+    static void ExtendsObject(this object obj) // Noncompliant {{Refactor this extension to extend a more concrete type.}}
+    //          ^^^^^^^^^^^^^
+    {
     }
 
-    static class NonCompliant
-    {
-        static void ExtendsObject(this object obj) // Noncompliant {{Refactor this extension to extend a more concrete type.}}
-        //          ^^^^^^^^^^^^^
-        {
-        }
-    }
+    static void ExtendsWithArguments(this object obj, int other) { } // Noncompliant
 }
