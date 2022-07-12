@@ -124,7 +124,7 @@ namespace SonarAnalyzer.Rules.CSharp
             };
 
         private static ISymbol GetAccessedVariable(SyntaxNode node, SemanticModel model) =>
-            node.RemoveParentheses() switch
+            node switch
             {
                 IdentifierNameSyntax identifier => IdentifierNameSymbol(identifier, model),
                 MemberAccessExpressionSyntax memberAccessExpression => model.GetSymbolInfo(memberAccessExpression.Expression).Symbol,
@@ -133,13 +133,16 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private static ISymbol IdentifierNameSymbol(IdentifierNameSyntax node, SemanticModel model)
         {
-            var objectCreation = node
-                .FirstAncestorOrSelf((SyntaxNode x) => x.IsAnyKind(SyntaxKind.ObjectCreationExpression, SyntaxKindEx.ImplicitObjectCreationExpression));
+            var objectCreation = node.FirstAncestorOrSelf((SyntaxNode x) => x.IsAnyKind(SyntaxKind.ObjectCreationExpression, SyntaxKindEx.ImplicitObjectCreationExpression));
 
             SyntaxNode leftSideOfParentAssignment = null;
-            if (objectCreation.GetFirstNonParenthesizedParent() is ArgumentSyntax argumentSyntax)
+            if (objectCreation?.GetFirstNonParenthesizedParent() is ArgumentSyntax argumentSyntax)
             {
                 leftSideOfParentAssignment = argumentSyntax.FindAssignmentComplement();
+                if (DeclarationExpressionSyntaxWrapper.IsInstance(leftSideOfParentAssignment))
+                {
+                    leftSideOfParentAssignment = ((DeclarationExpressionSyntaxWrapper)leftSideOfParentAssignment).Designation;
+                }
             }
             else
             {
@@ -152,11 +155,13 @@ namespace SonarAnalyzer.Rules.CSharp
                     ? model.GetSymbolInfo(leftSideOfParentAssignment).Symbol
                     : model.GetDeclaredSymbol(leftSideOfParentAssignment);
             }
-
-            var lastVariable = node.FirstAncestorOrSelf<VariableDeclarationSyntax>()?.Variables.LastOrDefault();
-            return lastVariable != null
-                ? model.GetDeclaredSymbol(lastVariable)
-                : null;
+            else
+            {
+                var lastVariable = node.FirstAncestorOrSelf<VariableDeclarationSyntax>()?.Variables.LastOrDefault();
+                return lastVariable != null
+                    ? model.GetDeclaredSymbol(lastVariable)
+                    : null;
+            }
         }
     }
 }

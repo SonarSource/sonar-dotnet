@@ -27,6 +27,11 @@ var dt = new DataTable();
 //                             ^^^^^^^^^^^^^^^
 k.Locale = CultureInfo.InvariantCulture;
 
+(var x1, var x2) = ((new DataTable(), 42)); // FN
+(var x3, var x4) = ((new DataTable()), 42); // Noncompliant
+DataTable x5;
+((x5), var x6) = ((new DataTable(), 42)); // FN
+
 var (xx, yy) = (new DataTable(), new DataTable()); // Noncompliant [3, 4]
 var (xxx, yyy) = (0, (new DataTable(), 2)); // FN
 (int xxxx, (DataTable, int) yyyy) = (0, (new DataTable(), 2)); // FN
@@ -35,7 +40,7 @@ TupleParameter((new DataTable(), new DataTable())); // FN
 
 void TupleParameter((DataTable, DataTable) dataTableTuple) { }
 
-var (_, (_,( o, _))) = (1, (2,( new DataTable(), 4))); // Noncompliant
+var (_, (_, (o, _))) = (1, (2, (new DataTable(), 4))); // Noncompliant
 
 DataTable foo, bar;
 foo = (bar = new DataTable()); // Noncompliant
@@ -43,5 +48,8 @@ var foobar = (bar ??= new DataTable()); // FN
 
 DataTable myTable5, myTable6;
 var (myTable1, myTable2) = ((new DataTable { Locale = CultureInfo.InvariantCulture }), new DataTable()); // Noncompliant
-(var  myTable3, var  myTable4) = (new DataTable { Locale = CultureInfo.InvariantCulture }, new DataTable()); // Noncompliant
+//                                                                                     ^^^^^^^^^^^^^^^
+(var myTable3, var myTable4) = (new DataTable { Locale = CultureInfo.InvariantCulture }, new DataTable()); // Noncompliant
+//                                                                                       ^^^^^^^^^^^^^^^
 (myTable5, myTable6) = (new DataTable { Locale = CultureInfo.InvariantCulture }, new DataTable()); // Noncompliant
+//                                                                               ^^^^^^^^^^^^^^^
