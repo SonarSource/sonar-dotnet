@@ -18,6 +18,7 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using Microsoft.CodeAnalysis.Text;
 using SonarAnalyzer.Extensions;
 using CS = Microsoft.CodeAnalysis.CSharp.Syntax;
 using VB = Microsoft.CodeAnalysis.VisualBasic.Syntax;
@@ -137,6 +138,59 @@ public class Sample
             foreach (var argument in arguments)
             {
                 argument.IsInTupleAssignmentTarget().Should().BeFalse();
+            }
+        }
+
+        [DataTestMethod]
+        // Simple tuple
+        [DataRow("($$1, (2, 3))", "(1, (2, 3))")]
+        [DataRow("(1, ($$2, 3))", "(1, (2, 3))")]
+        [DataRow("(1, (2, $$3))", "(1, (2, 3))")]
+        // With method call with single argument
+        [DataRow("($$1, (M(2), 3))", "(1, (M(2), 3))")]
+        [DataRow("(1, ($$M(2), 3))", "(1, (M(2), 3))")]
+        [DataRow("(1, (M($$2), 3))", null)]
+        // With method call with two arguments
+        [DataRow("(1, $$M(2, 3))", "(1, M(2, 3))")]
+        [DataRow("(1, M($$2, 3))", null)]
+        [DataRow("(1, M(2, $$3))", null)]
+        // With method call with tuple argument
+        [DataRow("($$M((1, 2)), 3)", "(M((1, 2)), 3)")]
+        [DataRow("(M($$(1, 2)), 3)", null)]
+        [DataRow("(M(($$1, 2)), 3)", "(1, 2)")]
+        public void OutermostTuple_DifferentPositions(string tuple, string expectedOuterTuple)
+        {
+            // Arrange
+            var code =
+@$"
+public class C
+{{
+    public void Test()
+    {{
+        _ = {tuple};
+    }}
+
+    static int M(int a) => 0;
+    static int M(int a, int b) => 0;
+    static int M((int a, int b) t) => 0;
+}}";
+            var nodePosition = code.IndexOf("$$");
+            code = code.Replace("$$", string.Empty);
+            var syntaxTree = Microsoft.CodeAnalysis.CSharp.CSharpSyntaxTree.ParseText(code);
+            syntaxTree.GetDiagnostics().Should().BeEmpty();
+            var nodeAtPosition = syntaxTree.GetRoot().FindNode(new TextSpan(nodePosition, 0), getInnermostNodeForTie: true);
+            var argument = nodeAtPosition?.AncestorsAndSelf().OfType<CS.ArgumentSyntax>().First();
+            // Act
+            var outerMostTuple = argument.OutermostTuple();
+            // Assert
+            if (expectedOuterTuple is null)
+            {
+                outerMostTuple.Should().BeNull();
+            }
+            else
+            {
+                outerMostTuple.Should().NotBeNull();
+                outerMostTuple.Value.SyntaxNode.ToString().Should().Be(expectedOuterTuple);
             }
         }
 

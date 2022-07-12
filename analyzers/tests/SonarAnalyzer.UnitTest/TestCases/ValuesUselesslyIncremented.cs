@@ -11,7 +11,8 @@ namespace Tests.Diagnostics
             int i = 0;
             int j = 0;
 
-            i = i++; // Noncompliant; i is still zero
+            i = i++;    // Noncompliant; i is still zero
+            i += i++;   // Compliant
 
             return j++; // Noncompliant {{Remove this increment or correct the code not to waste it.}}
 //                 ^^^

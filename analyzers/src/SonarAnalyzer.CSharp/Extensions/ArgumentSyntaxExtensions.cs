@@ -21,6 +21,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using Microsoft.CodeAnalysis;
+using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using SonarAnalyzer.Helpers;
 using StyleCop.Analyzers.Lightup;
@@ -47,5 +48,13 @@ namespace SonarAnalyzer.Extensions
             && TupleExpressionSyntaxWrapper.IsInstance(tupleExpression)
             && tupleExpression.Parent is AssignmentExpressionSyntax assignment
             && assignment.Left == tupleExpression;
+
+        internal static TupleExpressionSyntaxWrapper? OutermostTuple(this ArgumentSyntax argument) =>
+            argument.Ancestors()
+                .TakeWhile(x => x.IsAnyKind(SyntaxKind.Argument, SyntaxKindEx.TupleExpression))
+                .LastOrDefault(x => x.IsKind(SyntaxKindEx.TupleExpression)) is { } outerTuple
+                && TupleExpressionSyntaxWrapper.IsInstance(outerTuple)
+                    ? (TupleExpressionSyntaxWrapper)outerTuple
+                    : null;
     }
 }

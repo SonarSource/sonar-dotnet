@@ -468,13 +468,13 @@ public class Sample
         [DataRow("var (a, b) = $$(1, 2);", "var (a, b)")]
         [DataRow("var t = $$(1, 2);", null)] // Not an assignment
         [DataRow("(int, int) t; t = $$(1, 2);", "t")]
+        [DataRow("(int, int) t; t = ($$1, 2);", null)]
         [DataRow("int a; a = $$1;", "a")]
         // Start node is left side of assignment
         [DataRow("var (a, b)$$ = (1, 2);", "(1, 2)")]
         [DataRow("$$var t = (1, 2);", null)] // Not an assignment
-        [DataRow("(int, int) t; t = $$(1, 2);", "t")]
         [DataRow("(int, int) t; $$t = (1, 2);", "(1, 2)")]
-        [DataRow("int a; a = $$1;", "a")]
+        [DataRow("int a; $$a = 1;", "1")]
         public void FindAssignmentComplement_Tests(string code, string expectedNode)
         {
             code = $@"

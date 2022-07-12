@@ -25,18 +25,20 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class ValuesUselesslyIncrementedTest
     {
+        private readonly VerifierBuilder builder = new VerifierBuilder<ValuesUselesslyIncremented>();
+
         [TestMethod]
         public void ValuesUselesslyIncremented() =>
-            OldVerifier.VerifyAnalyzer(@"TestCases\ValuesUselesslyIncremented.cs", new ValuesUselesslyIncremented());
+            builder.AddPaths("ValuesUselesslyIncremented.cs").Verify();
 
 #if NET
         [TestMethod]
         public void ValuesUselesslyIncremented_CSharp9() =>
-            OldVerifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\ValuesUselesslyIncremented.CSharp9.cs", new ValuesUselesslyIncremented());
+            builder.AddPaths("ValuesUselesslyIncremented.CSharp9.cs").WithTopLevelStatements().Verify();
 
         [TestMethod]
         public void ValuesUselesslyIncremented_CSharp10() =>
-            OldVerifier.VerifyAnalyzerFromCSharp10Library(@"TestCases\ValuesUselesslyIncremented.CSharp10.cs", new ValuesUselesslyIncremented());
+            builder.AddPaths("ValuesUselesslyIncremented.CSharp10.cs").WithOptions(ParseOptionsHelper.FromCSharp10).Verify();
 #endif
     }
 }
