@@ -7,6 +7,7 @@
     using FluentAssertions;
     using NFluent;
     using NSubstitute;
+    using NSubstitute.ReceivedExtensions;
     using NUnit.Framework;
     using Shouldly;
 
@@ -512,6 +513,24 @@
         public void ReceivedWithAnyArgs()
         {
             calculator.ReceivedWithAnyArgs().Add(0, 0);
+        }
+
+        [TestCase]
+        public void ReceivedWithQuantity()
+        {
+            calculator.Received(Quantity.AtLeastOne()).Add(1, 2);
+        }
+
+        [TestCase]
+        public void ReceivedExpressionWithQuantity() => calculator.Received(Quantity.AtLeastOne()).Add(1, 2);
+
+        [TestCase]
+        public void ReceivedNameSpaceWithQuantity() => NSubstitute.ReceivedExtensions.ReceivedExtensions.Received(calculator, Quantity.AtLeastOne()).Add(1, 2);
+
+        [TestCase]
+        public void ReceivedWithAnyArgsWithQuantity()
+        {
+            calculator.ReceivedWithAnyArgs(Quantity.AtLeastOne()).Add(0, 0);
         }
 
         [TestCase]
