@@ -20,26 +20,25 @@
 
 using SonarAnalyzer.Helpers.Facade;
 
-namespace SonarAnalyzer.Helpers
+namespace SonarAnalyzer.Helpers;
+
+public interface ILanguageFacade
 {
-    public interface ILanguageFacade
-    {
-        AssignmentFinder AssignmentFinder { get; }
-        StringComparison NameComparison { get; }
-        StringComparer NameComparer { get; }
-        GeneratedCodeRecognizer GeneratedCodeRecognizer { get; }
-        IExpressionNumericConverter ExpressionNumericConverter { get; }
+    AssignmentFinder AssignmentFinder { get; }
+    StringComparison NameComparison { get; }
+    StringComparer NameComparer { get; }
+    GeneratedCodeRecognizer GeneratedCodeRecognizer { get; }
+    IExpressionNumericConverter ExpressionNumericConverter { get; }
 
-        DiagnosticDescriptor CreateDescriptor(string id, string messageFormat, bool? isEnabledByDefault = null, bool fadeOutCode = false);
-        object FindConstantValue(SemanticModel model, SyntaxNode node);
-        IMethodParameterLookup MethodParameterLookup(SyntaxNode invocation, IMethodSymbol methodSymbol);
-    }
+    DiagnosticDescriptor CreateDescriptor(string id, string messageFormat, bool? isEnabledByDefault = null, bool fadeOutCode = false);
+    object FindConstantValue(SemanticModel model, SyntaxNode node);
+    IMethodParameterLookup MethodParameterLookup(SyntaxNode node, IMethodSymbol methodSymbol);
+}
 
-    public interface ILanguageFacade<TSyntaxKind> : ILanguageFacade
-        where TSyntaxKind : struct
-    {
-        SyntaxFacade<TSyntaxKind> Syntax { get; }
-        ISyntaxKindFacade<TSyntaxKind> SyntaxKind { get; }
-        ITrackerFacade<TSyntaxKind> Tracker { get; }
-    }
+public interface ILanguageFacade<TSyntaxKind> : ILanguageFacade
+    where TSyntaxKind : struct
+{
+    SyntaxFacade<TSyntaxKind> Syntax { get; }
+    ISyntaxKindFacade<TSyntaxKind> SyntaxKind { get; }
+    ITrackerFacade<TSyntaxKind> Tracker { get; }
 }

@@ -64,7 +64,7 @@ public abstract class SpecifyTimeoutOnRegexBase<TSyntaxKind> : SonarDiagnosticAn
                     c.ReportIssue(Diagnostic.Create(Rule, c.Node.GetLocation()));
                 }
             },
-            Language.SyntaxKind.IdentifierName);
+            Language.SyntaxKind.InvocationExpression);
     }
 
     private bool RegexMethodLacksTimeout(SyntaxNode node, SemanticModel model) =>
@@ -78,19 +78,10 @@ public abstract class SpecifyTimeoutOnRegexBase<TSyntaxKind> : SonarDiagnosticAn
         method.Parameters.Any(x => x.Type.Is(KnownType.System_TimeSpan));
 
     private bool NoBacktracking(IMethodSymbol method, SyntaxNode node, SemanticModel model) =>
-        RegexOptionsSpecified(method)
-        && ArgumentExpressions(method, node)
-            .Select(arg => Language.FindConstantValue(model, arg))
-            .OfType<int>()
-            .Any(x => (x & NonBacktracking) == NonBacktracking);
-
-    private IEnumerable<SyntaxNode> ArgumentExpressions(IMethodSymbol method, SyntaxNode node) =>
-           Language.Syntax.ArgumentExpressions(method.IsConstructor()
-           ? node
-           : node.Parent.Parent.ChildNodes().Skip(1).FirstOrDefault());
-
-    private static bool RegexOptionsSpecified(IMethodSymbol method) =>
-        method.Parameters.Any(x => x.Type.Is(KnownType.System_Text_RegularExpressions_RegexOptions));
+        method.Parameters.SingleOrDefault(x => x.Type.Is(KnownType.System_Text_RegularExpressions_RegexOptions)) is { } par
+            && Language.MethodParameterLookup(node, method).TryGetNonParamsSyntax(par, out var expression)
+            && Language.FindConstantValue(model, expression) is int options
+            && (options & NonBacktracking) == NonBacktracking;
 
     private bool IsCandidateCtor(SyntaxNode ctorNode) =>
         Language.Syntax.ArgumentExpressions(ctorNode).Count() < 3;

@@ -58,7 +58,7 @@ class Noncompliant
     void Static(RegexOptions options)
     {
         var isMatch = Regex.IsMatch("some input", "some pattern"); // Noncompliant
-        //                  ^^^^^^^
+        //            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
         var match = Regex.Match("some input", "some pattern"); // Noncompliant
         var matches = Regex.Matches("some input", "some pattern", RegexOptions.None); // Noncompliant
         var replace = Regex.Replace("some input", "some pattern", "some replacement", RegexOptions.None); // Noncompliant
