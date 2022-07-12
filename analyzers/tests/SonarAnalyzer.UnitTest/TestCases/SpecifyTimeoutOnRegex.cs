@@ -8,8 +8,8 @@ class Compliant
         var defaultOrder = new Regex("some pattern", RegexOptions.None, TimeSpan.FromSeconds(1)); // Compliant
 
         var namedArgs = new Regex(
-            pattern: "some pattern",
             matchTimeout: TimeSpan.FromSeconds(1), // Compliant
+            pattern: "some pattern",
             options: RegexOptions.None);
     }
 

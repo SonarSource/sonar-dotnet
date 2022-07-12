@@ -26,11 +26,16 @@ namespace SonarAnalyzer.UnitTest.Rules;
 [TestClass]
 public class SpecifyTimeoutOnRegexTest
 {
+    private readonly VerifierBuilder builderCS = new VerifierBuilder<CS.SpecifyTimeoutOnRegex>().AddReferences(MetadataReferenceFacade.RegularExpressions);
+
     [TestMethod]
     public void SpecifyTimeoutOnRegex_CS() =>
-        new VerifierBuilder<CS.SpecifyTimeoutOnRegex>()
-        .AddPaths("SpecifyTimeoutOnRegex.cs")
-        .AddReferences(MetadataReferenceFacade.RegularExpressions)
+        builderCS.AddPaths("SpecifyTimeoutOnRegex.cs").Verify();
+
+    [TestMethod]
+    public void SpecifyTimeoutOnRegex_CSharp8() =>
+        builderCS.AddPaths("SpecifyTimeoutOnRegex.CSharp9.cs")
+        .WithOptions(ParseOptionsHelper.FromCSharp9)
         .Verify();
 
     [TestMethod]
