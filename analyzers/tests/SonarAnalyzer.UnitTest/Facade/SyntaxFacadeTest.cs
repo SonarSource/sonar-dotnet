@@ -93,5 +93,19 @@ namespace SonarAnalyzer.UnitTest.Helpers
         [TestMethod]
         public void NodeStringTextValue_UnexpectedType_VB() =>
             vb.NodeStringTextValue(VB.SyntaxFactory.ThrowStatement()).Should().BeEmpty();
+
+        [TestMethod]
+        public void RemoveConditionalAccess_Null_CS() =>
+            cs.RemoveConditionalAccess(null).Should().BeNull();
+
+        [DataTestMethod]
+        [DataRow("M()", "M()")]
+        [DataRow("this.M()", "this.M()")]
+        [DataRow("A.B.C.M()", "A.B.C.M()")]
+        [DataRow("A.B?.C.M()", ".C.M()")]
+        [DataRow("A.B?.C?.M()", ".M()")]
+        [DataRow("A.B?.C?.D", ".D")]
+        public void RemoveConditionalAccess_SimpleInvocation_CS(string invocation, string expected) =>
+            cs.RemoveConditionalAccess(CS.SyntaxFactory.ParseExpression(invocation)).ToString().Should().Be(expected);
     }
 }

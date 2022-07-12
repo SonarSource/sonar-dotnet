@@ -25,14 +25,16 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class StreamReadStatementTest
     {
+        private readonly VerifierBuilder builder = new VerifierBuilder<StreamReadStatement>();
+
         [TestMethod]
         public void StreamReadStatement() =>
-            OldVerifier.VerifyAnalyzer(@"TestCases\StreamReadStatement.cs", new StreamReadStatement());
+            builder.AddPaths("StreamReadStatement.cs").Verify();
 
 #if NET
         [TestMethod]
         public void StreamReadStatement_CSharp10() =>
-            OldVerifier.VerifyAnalyzerFromCSharp10Library(@"TestCases\StreamReadStatement.CSharp10.cs", new StreamReadStatement());
+            builder.AddPaths("StreamReadStatement.CSharp10.cs").WithOptions(ParseOptionsHelper.FromCSharp10).Verify();
 #endif
     }
 }

@@ -7,19 +7,28 @@ namespace Tests.Diagnostics
 {
     public class StreamReadStatement
     {
+        Stream streamField = new MemoryStream();
+
         public StreamReadStatement(string fileName)
         {
             using (var stream = File.Open(fileName, FileMode.Open))
             {
                 var result = new byte[stream.Length];
-                stream.Read(result, 0, (int)stream.Length); // Noncompliant
+                stream.Read(result, 0, (int)stream.Length);            // Noncompliant
 //              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
                 var l = stream.Read(result, 0, (int)stream.Length);
-                stream.ReadAsync(result, 0, (int)stream.Length); // Noncompliant {{Check the return value of the 'ReadAsync' call to see how many bytes were read.}}
+                stream.ReadAsync(result, 0, (int)stream.Length);       // Noncompliant {{Check the return value of the 'ReadAsync' call to see how many bytes were read.}}
                 await stream.ReadAsync(result, 0, (int)stream.Length); // Error [CS4033] - ctor can't be async // Noncompliant
                 stream.Write(result, 0, (int)stream.Length);
             }
+            streamField.Read(new byte[0], 0, 0);                       // Noncompliant
+            this.streamField.Read(new byte[0], 0, 0);                  // Noncompliant
+            streamField?.Read(new byte[0], 0, 0);                      // Noncompliant
+            this.streamField?.Read(new byte[0], 0, 0);                 // Noncompliant
+            Read();                                                    // Compliant. Not a read method of a stream
         }
+
+        public void Read() { }
     }
 
     public class DerivedStream : Stream
@@ -103,13 +112,12 @@ namespace Tests.Diagnostics
         {
             var stream = new DerivedStream();
             var array = new byte[10];
-            stream.Read(array, 0, ""); // Compliant
-            stream.Read(array, 0, 10); // Noncompliant
-            stream.ReadAsync(array, 0, (int)stream.Length); // Noncompliant {{Check the return value of the 'ReadAsync' call to see how many bytes were read.}}
-            await stream.ReadAsync(array, 0, (int)stream.Length); // Noncompliant
+            stream.Read(array, 0, "");                                      // Compliant
+            stream.Read(array, 0, 10);                                      // Noncompliant
+            stream.ReadAsync(array, 0, (int)stream.Length);                 // Noncompliant {{Check the return value of the 'ReadAsync' call to see how many bytes were read.}}
+            await stream.ReadAsync(array, 0, (int)stream.Length);           // Noncompliant
             var res = await stream.ReadAsync(array, 0, (int)stream.Length); // Compliant
-
-            var x = stream.ReadAsync(array, 0, (int)stream.Length).Result; // Compliant - (false negative) should not be compliant
+            var x = stream.ReadAsync(array, 0, (int)stream.Length).Result;  // Compliant - (false negative) should not be compliant
         }
     }
 }

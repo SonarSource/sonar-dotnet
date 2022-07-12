@@ -21,11 +21,13 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
+using System.IO;
 using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
+using SonarAnalyzer.Extensions;
 using SonarAnalyzer.Helpers;
 
 namespace SonarAnalyzer.Rules.CSharp
@@ -33,43 +35,32 @@ namespace SonarAnalyzer.Rules.CSharp
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
     public sealed class StreamReadStatement : SonarDiagnosticAnalyzer
     {
-        internal const string DiagnosticId = "S2674";
-        private const string MessageFormat =
-            "Check the return value of the '{0}' call to see how many bytes were read.";
+        private const string DiagnosticId = "S2674";
+        private const string MessageFormat = "Check the return value of the '{0}' call to see how many bytes were read.";
 
-        private static readonly DiagnosticDescriptor rule =
-            DescriptorFactory.Create(DiagnosticId, MessageFormat);
+        private static readonly DiagnosticDescriptor Rule = DescriptorFactory.Create(DiagnosticId, MessageFormat);
+        private static readonly ISet<string> ReadMethodNames = new HashSet<string> { nameof(Stream.Read), nameof(Stream.ReadAsync) };
 
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(rule);
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
 
-        protected override void Initialize(SonarAnalysisContext context)
-        {
-            context.RegisterSyntaxNodeActionInNonGenerated(
-                c =>
+        protected override void Initialize(SonarAnalysisContext context) =>
+            context.RegisterSyntaxNodeActionInNonGenerated(c =>
                 {
                     var statement = (ExpressionStatementSyntax)c.Node;
-                    var expression = statement.Expression;
-
-                    if (expression is AwaitExpressionSyntax awaitExpression)
+                    var expression = statement is { Expression: AwaitExpressionSyntax awaitExpression }
+                        ? awaitExpression.Expression
+                        : statement.Expression;
+                    expression = expression.RemoveConditionalAccess();
+                    if (expression is InvocationExpressionSyntax invocation
+                        && invocation.GetMethodCallIdentifier() is { } methodIdentifier
+                        && ReadMethodNames.Contains(methodIdentifier.Text, StringComparer.Ordinal)
+                        && c.SemanticModel.GetSymbolInfo(expression).Symbol is IMethodSymbol method
+                        && (method.ContainingType.Is(KnownType.System_IO_Stream)
+                            || (method.IsOverride && method.ContainingType.DerivesOrImplements(KnownType.System_IO_Stream))))
                     {
-                        expression = awaitExpression.Expression;
-                    }
-
-                    if (!(c.SemanticModel.GetSymbolInfo(expression).Symbol is IMethodSymbol method) ||
-                        !ReadMethodNames.Contains(method.Name, StringComparer.Ordinal))
-                    {
-                        return;
-                    }
-
-                    if (method.ContainingType.Is(KnownType.System_IO_Stream) ||
-                        method.IsOverride && method.ContainingType.DerivesOrImplements(KnownType.System_IO_Stream))
-                    {
-                        c.ReportIssue(Diagnostic.Create(rule, expression.GetLocation(), method.Name));
+                        c.ReportIssue(Diagnostic.Create(Rule, expression.GetLocation(), method.Name));
                     }
                 },
                 SyntaxKind.ExpressionStatement);
-        }
-
-        private static readonly ISet<string> ReadMethodNames = new HashSet<string> { "Read", "ReadAsync" };
     }
 }
