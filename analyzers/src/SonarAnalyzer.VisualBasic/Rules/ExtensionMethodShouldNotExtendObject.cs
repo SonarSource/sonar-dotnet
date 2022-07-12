@@ -37,11 +37,4 @@ public sealed class ExtensionMethodShouldNotExtendObject : ExtensionMethodShould
         && declaration.AttributeLists
             .SelectMany(x => x.Attributes)
             .Any(x => x.IsKnownType(KnownType.System_Runtime_CompilerServices_ExtensionAttribute, semanticModel));
-
-    private bool IsExtension(AttributeSyntax attribute)
-    {
-        var name = attribute.GetName();
-        return name.Equals("Extension", Language.NameComparison)
-            || name.Equals("ExtensionAttribute", Language.NameComparison);
-    }
 }
