@@ -19,31 +19,49 @@
  */
 
 using System.Diagnostics.CodeAnalysis;
+#if NETCOREAPP  // ToDo: Remove conditional compilation after change of target framework
+using System.Text.Json.Serialization;
+#endif
 using System.Xml;
 using System.Xml.Serialization;
+using SonarAnalyzer.Common;
 
-namespace SonarAnalyzer.RuleDescriptorGenerator
+namespace SonarAnalyzer.RuleDescriptorGenerator;
+
+[ExcludeFromCodeCoverage]
+public class RuleParameter
 {
-    [ExcludeFromCodeCoverage]
-    public class RuleParameter
+    // ToDo: Remove XML annotations
+    [XmlElement("key")]
+    public string Key { get; set; }
+
+    [XmlIgnore]
+    public string Description { get; set; }
+
+    // ToDo: Remove XML-only property
+#if NETCOREAPP
+    [JsonIgnore]
+#endif
+    [XmlElement("description")]
+    public XmlCDataSection DescriptionCDataSection
     {
-        [XmlElement("key")]
-        public string Key { get; set; }
+        get => new XmlDocument().CreateCDataSection(Description);
+        set => Description = value == null ? "" : value.Value;
+    }
 
-        [XmlIgnore]
-        public string Description { get; set; }
+    [XmlElement("type")]
+    public string Type { get; set; }
 
-        [XmlElement("description")]
-        public XmlCDataSection DescriptionCDataSection
-        {
-            get => new XmlDocument().CreateCDataSection(Description);
-            set => Description = value == null ? "" : value.Value;
-        }
+    [XmlElement("defaultValue")]
+    public string DefaultValue { get; set; }
 
-        [XmlElement("type")]
-        public string Type { get; set; }
+    public RuleParameter() { }
 
-        [XmlElement("defaultValue")]
-        public string DefaultValue { get; set; }
+    public RuleParameter(RuleParameterAttribute attribute)
+    {
+        Key = attribute.Key;
+        Description = attribute.Description;
+        Type = attribute.Type.ToString();
+        DefaultValue = attribute.DefaultValue;
     }
 }
