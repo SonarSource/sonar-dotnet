@@ -102,12 +102,10 @@ namespace SonarAnalyzer.Rules.CSharp
                     .Select(v => semanticModel.GetDeclaredSymbol(v))
                     .WhereNotNull();
 
-            var initializedVariables =
-                from i in node.Initializers.OfType<AssignmentExpressionSyntax>()
-                from t in i.AssignmentTargets()
-                select semanticModel.GetSymbolInfo(t).Symbol ?? semanticModel.GetDeclaredSymbol(t) into s
-                where s != null
-                select s;
+            var initializedVariables = node.Initializers.OfType<AssignmentExpressionSyntax>()
+                .SelectMany(x => x.AssignmentTargets())
+                .Select(x => semanticModel.GetSymbolInfo(x).Symbol ?? semanticModel.GetDeclaredSymbol(x))
+                .WhereNotNull();
 
             return declaredVariables.Union(initializedVariables);
         }
