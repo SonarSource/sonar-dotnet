@@ -30,21 +30,25 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class CookieShouldBeHttpOnlyTest
     {
-        private readonly VerifierBuilder builder = new VerifierBuilder().AddAnalyzer(() => new CookieShouldBeHttpOnly(AnalyzerConfiguration.AlwaysEnabled));
+#if NETFRAMEWORK
+
+        private const string WebConfig = "Web.config";
+
+#endif
+
+        private readonly VerifierBuilder builder = new VerifierBuilder().WithBasePath("Hotspots").AddAnalyzer(() => new CookieShouldBeHttpOnly(AnalyzerConfiguration.AlwaysEnabled));
 
         [TestMethod]
         public void CookiesShouldBeHttpOnly_Nancy() =>
-            builder.AddPaths(@"Hotspots\CookieShouldBeHttpOnly_Nancy.cs")
+            builder.AddPaths("CookieShouldBeHttpOnly_Nancy.cs")
                 .AddReferences(AdditionalReferences)
                 .Verify();
 
 #if NETFRAMEWORK // The analyzed code is valid only for .Net Framework
 
-        private const string WebConfig = "Web.config";
-
         [TestMethod]
         public void CookiesShouldBeHttpOnly() =>
-            builder.AddPaths(@"Hotspots\CookieShouldBeHttpOnly.cs")
+            builder.AddPaths("CookieShouldBeHttpOnly.cs")
                 .AddReferences(MetadataReferenceFacade.SystemWeb)
                 .Verify();
 
@@ -54,7 +58,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void CookiesShouldBeHttpOnly_WithWebConfigValueSetToTrue(string root)
         {
             var webConfigPath = Path.Combine(root, WebConfig);
-            builder.AddPaths(@"Hotspots\CookieShouldBeHttpOnly_WithWebConfig.cs")
+            builder.AddPaths("CookieShouldBeHttpOnly_WithWebConfig.cs")
                 .AddReferences(MetadataReferenceFacade.SystemWeb)
                 .WithSonarProjectConfigPath(TestHelper.CreateSonarProjectConfig(root, TestHelper.CreateFilesToAnalyze(root, webConfigPath)))
                 .Verify();
@@ -67,7 +71,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void CookiesShouldBeHttpOnly_WithWebConfigValueSetToFalse(string root)
         {
             var webConfigPath = Path.Combine(root, WebConfig);
-            builder.AddPaths(@"Hotspots\CookieShouldBeHttpOnly.cs")
+            builder.AddPaths("CookieShouldBeHttpOnly.cs")
                 .AddReferences(MetadataReferenceFacade.SystemWeb)
                 .WithSonarProjectConfigPath(TestHelper.CreateSonarProjectConfig(root, TestHelper.CreateFilesToAnalyze(root, webConfigPath)))
                 .Verify();
@@ -76,20 +80,20 @@ namespace SonarAnalyzer.UnitTest.Rules
 #else
         [TestMethod]
         public void CookiesShouldBeHttpOnly_NetCore() =>
-            builder.AddPaths(@"Hotspots\CookieShouldBeHttpOnly_NetCore.cs")
+            builder.AddPaths("CookieShouldBeHttpOnly_NetCore.cs")
                 .AddReferences(GetAdditionalReferences_NetCore())
                 .Verify();
 
         [TestMethod]
         public void CookiesShouldBeHttpOnly_CSharp9() =>
-            builder.AddPaths(@"Hotspots\CookieShouldBeHttpOnly.CSharp9.cs")
+            builder.AddPaths("CookieShouldBeHttpOnly.CSharp9.cs")
                 .WithTopLevelStatements()
                 .AddReferences(GetAdditionalReferences_NetCore().Concat(NuGetMetadataReference.Nancy()))
                 .Verify();
 
         [TestMethod]
         public void CookiesShouldBeHttpOnly_CSharp10() =>
-            builder.AddPaths(@"Hotspots\CookieShouldBeHttpOnly.CSharp10.cs")
+            builder.AddPaths("CookieShouldBeHttpOnly.CSharp10.cs")
                 .WithTopLevelStatements()
                 .WithOptions(ParseOptionsHelper.FromCSharp10)
                 .AddReferences(GetAdditionalReferences_NetCore().Concat(NuGetMetadataReference.Nancy()))
