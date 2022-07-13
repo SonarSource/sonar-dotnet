@@ -482,6 +482,7 @@ namespace SonarAnalyzer.Helpers
         internal static readonly KnownType Void = new("System.Void");
         internal static readonly KnownType NSubstitute_SubstituteExtensions = new("NSubstitute.SubstituteExtensions");
         internal static readonly KnownType NSubstitute_Received = new("NSubstitute.Received");
+        internal static readonly KnownType NSubstitute_ReceivedExtensions_ReceivedExtensions = new("NSubstitute.ReceivedExtensions.ReceivedExtensions");
         internal static readonly ImmutableArray<KnownType> SystemActionVariants =
             ImmutableArray.Create<KnownType>(
                 new("System.Action"),

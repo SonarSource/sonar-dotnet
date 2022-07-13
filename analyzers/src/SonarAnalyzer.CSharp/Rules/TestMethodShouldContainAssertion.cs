@@ -39,21 +39,21 @@ namespace SonarAnalyzer.Rules.CSharp
         private const string CustomAssertionAttributeName = "AssertionMethodAttribute";
         private const int MaxInvocationDepth = 2; // Consider BFS instead of DFS if this gets increased
 
-        private static readonly Dictionary<string, KnownType> KnownAssertions = new Dictionary<string, KnownType>
+        private static readonly Dictionary<string, KnownType[]> KnownAssertions = new Dictionary<string, KnownType[]>
         {
-            {"DidNotReceive", KnownType.NSubstitute_SubstituteExtensions},
-            {"DidNotReceiveWithAnyArgs", KnownType.NSubstitute_SubstituteExtensions},
-            {"Received", KnownType.NSubstitute_SubstituteExtensions},
-            {"ReceivedWithAnyArgs", KnownType.NSubstitute_SubstituteExtensions},
-            {"InOrder", KnownType.NSubstitute_Received }
+            {"DidNotReceive", new[] {KnownType.NSubstitute_SubstituteExtensions}},
+            {"DidNotReceiveWithAnyArgs", new[] {KnownType.NSubstitute_SubstituteExtensions}},
+            {"Received", new[] {KnownType.NSubstitute_SubstituteExtensions, KnownType.NSubstitute_ReceivedExtensions_ReceivedExtensions}},
+            {"ReceivedWithAnyArgs", new[] {KnownType.NSubstitute_SubstituteExtensions, KnownType.NSubstitute_ReceivedExtensions_ReceivedExtensions}},
+            {"InOrder", new[] {KnownType.NSubstitute_Received}}
         };
 
         /// The assertions in the Shouldly library are supported by <see cref="UnitTestHelper.KnownAssertionMethodParts"/> (they all contain "Should")
         private static readonly ImmutableArray<KnownType> KnownAssertionTypes = ImmutableArray.Create(
-                KnownType.Microsoft_VisualStudio_TestTools_UnitTesting_Assert,
-                KnownType.NFluent_Check,
-                KnownType.NUnit_Framework_Assert,
-                KnownType.Xunit_Assert);
+            KnownType.Microsoft_VisualStudio_TestTools_UnitTesting_Assert,
+            KnownType.NFluent_Check,
+            KnownType.NUnit_Framework_Assert,
+            KnownType.Xunit_Assert);
 
         private static readonly ImmutableArray<KnownType> KnownAsertionExceptionTypes = ImmutableArray.Create(
             KnownType.Microsoft_VisualStudio_TestTools_UnitTesting_AssertFailedException,
@@ -89,10 +89,10 @@ namespace SonarAnalyzer.Rules.CSharp
 
         // only xUnit allows local functions to be test methods.
         private static bool IsTestMethod(IMethodSymbol symbol, bool isLocalFunction) =>
-                isLocalFunction ? IsXunitTestMethod(symbol) : symbol.IsTestMethod();
+            isLocalFunction ? IsXunitTestMethod(symbol) : symbol.IsTestMethod();
 
         private static bool IsXunitTestMethod(IMethodSymbol methodSymbol) =>
-                methodSymbol.AnyAttributeDerivesFromAny(UnitTestHelper.KnownTestMethodAttributesOfxUnit);
+            methodSymbol.AnyAttributeDerivesFromAny(UnitTestHelper.KnownTestMethodAttributesOfxUnit);
 
         private static bool ContainsAssertion(SyntaxNode methodDeclaration, SemanticModel previousSemanticModel, ISet<IMethodSymbol> visitedSymbols, int level)
         {
@@ -101,6 +101,7 @@ namespace SonarAnalyzer.Rules.CSharp
             {
                 return false;
             }
+
             var descendantNodes = methodDeclaration.DescendantNodes();
             var invocations = descendantNodes.OfType<InvocationExpressionSyntax>().ToArray();
             if (invocations.Any(x => IsAssertion(x))
@@ -114,10 +115,12 @@ namespace SonarAnalyzer.Rules.CSharp
             {
                 return true;
             }
+
             if (level == MaxInvocationDepth)
             {
                 return false;
             }
+
             foreach (var symbol in invokedSymbols.Where(x => !visitedSymbols.Contains(x)))
             {
                 visitedSymbols.Add(symbol);
@@ -129,6 +132,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     }
                 }
             }
+
             return false;
         }
 
@@ -144,7 +148,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 ?.ApplicationSyntaxReference.GetSyntax() as AttributeSyntax;
 
             return factAttributeSyntax?.ArgumentList != null
-                && factAttributeSyntax.ArgumentList.Arguments.Any(x => x.NameEquals.Name.Identifier.ValueText == "Skip");
+                 && factAttributeSyntax.ArgumentList.Arguments.Any(x => x.NameEquals.Name.Identifier.ValueText == "Skip");
         }
 
         private static bool IsAssertion(InvocationExpressionSyntax invocation) =>
@@ -155,7 +159,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 .Any();
 
         private static bool IsKnownAssertion(ISymbol methodSymbol) =>
-            (KnownAssertions.GetValueOrDefault(methodSymbol.Name) is { } type && methodSymbol.ContainingType.ConstructedFrom.Is(type))
+            (KnownAssertions.GetValueOrDefault(methodSymbol.Name) is { } types && types.Any(x => methodSymbol.ContainingType.ConstructedFrom.Is(x)))
             || methodSymbol.ContainingType.DerivesFromAny(KnownAssertionTypes);
 
         private static bool IsCustomAssertion(ISymbol methodSymbol) =>
