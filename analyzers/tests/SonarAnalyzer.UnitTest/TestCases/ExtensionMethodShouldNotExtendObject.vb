@@ -37,4 +37,13 @@ Module Noncompliant
     Sub ExtendsWithLongName(obj As Object) ' Noncompliant
     End Sub
 
+    <Extension>
+    <DebuggerStepThrough>
+    Public Sub MultipleAttributes(obj As Object) ' Noncompliant
+    End Sub
+
+    <Extension, DebuggerStepThrough>
+    Public Sub MultipleConbinedAttributes(obj As Object) ' Noncompliant
+    End Sub
+
 End Module

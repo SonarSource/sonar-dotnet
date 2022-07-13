@@ -35,7 +35,5 @@ public sealed class ExtensionMethodShouldNotExtendObject : ExtensionMethodShould
 
     protected override bool IsExtensionMethod(MethodStatementSyntax declaration, SemanticModel semanticModel) =>
         declaration.Parent.Parent is ModuleBlockSyntax
-        && declaration.AttributeLists
-            .SelectMany(x => x.Attributes)
-            .Any(x => x.IsKnownType(KnownType.System_Runtime_CompilerServices_ExtensionAttribute, semanticModel));
+        && declaration.AttributeLists.SelectMany(x => x.Attributes).Any(x => x.IsKnownType(KnownType.System_Runtime_CompilerServices_ExtensionAttribute, semanticModel));
 }
