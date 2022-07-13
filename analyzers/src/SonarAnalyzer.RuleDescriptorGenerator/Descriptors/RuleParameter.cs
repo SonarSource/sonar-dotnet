@@ -61,7 +61,24 @@ public class RuleParameter
     {
         Key = attribute.Key;
         Description = attribute.Description;
-        Type = attribute.Type.ToString();
+        Type = ToServerApi(attribute.Type);
         DefaultValue = attribute.DefaultValue;
     }
+
+    /// <summary>
+    /// sonar-plugin-api / RuleParamTypeTest.java contains other possibilities how to serialize enum values with single-select and multi-select:
+    /// SINGLE_SELECT_LIST,multiple=false,values="First,Second,Third"
+    /// SINGLE_SELECT_LIST,multiple=true,values="First,Second,Third"
+    /// </summary>
+    private static string ToServerApi(PropertyType type) =>
+        type switch
+        {
+            PropertyType.String => "STRING",
+            PropertyType.Text => "TEXT",
+            PropertyType.Boolean => "BOOLEAN",
+            PropertyType.Integer => "INTEGER",
+            PropertyType.Float => "FLOAT",
+            PropertyType.RegularExpression => "REGULAR_EXPRESSION",  // This will be translated to STRING by RuleParamType.parse() on the sonar-plugin-api side
+            _ => throw new UnexpectedValueException(nameof(type), type.ToString())
+        };
 }

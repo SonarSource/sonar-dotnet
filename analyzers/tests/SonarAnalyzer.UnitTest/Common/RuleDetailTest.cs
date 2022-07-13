@@ -30,12 +30,12 @@ namespace SonarAnalyzer.UnitTest.Common
         [TestMethod]
         public void RuleParameter_Constructor_CopiesValues()
         {
-            var att = new RuleParameterAttribute("key", PropertyType.Password, "Description", "Secret");
+            var att = new RuleParameterAttribute("key", PropertyType.Boolean, "Description", "False");
             var sut = new RuleParameter(att);
             sut.Key.Should().Be("key");
             sut.Description.Should().Be("Description");
-            sut.Type.Should().Be("PASSWORD");
-            sut.DefaultValue.Should().Be("Secret");
+            sut.Type.Should().Be("BOOLEAN");
+            sut.DefaultValue.Should().Be("False");
         }
 
         [DataTestMethod]
