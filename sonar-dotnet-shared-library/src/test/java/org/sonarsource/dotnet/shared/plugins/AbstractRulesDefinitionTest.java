@@ -19,8 +19,8 @@
  */
 package org.sonarsource.dotnet.shared.plugins;
 
+import java.io.InputStream;
 import org.junit.Test;
-import org.mockito.Mockito;
 import org.sonar.api.SonarEdition;
 import org.sonar.api.SonarQubeSide;
 import org.sonar.api.SonarRuntime;
@@ -29,17 +29,15 @@ import org.sonar.api.server.rule.RulesDefinition;
 import org.sonar.api.utils.Version;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.ArgumentMatchers.any;
 
 public class AbstractRulesDefinitionTest {
 
   @Test
   public void test() {
     SonarRuntime sonarRuntime = SonarRuntimeImpl.forSonarQube(Version.create(9, 3), SonarQubeSide.SCANNER, SonarEdition.COMMUNITY);
-    AbstractRulesDefinition test = org.mockito.Mockito.spy(new TestRulesDefinition(sonarRuntime));
-    Mockito.doReturn(TestRulesDefinition.class.getResourceAsStream("/AbstractRulesDefinitionTest/S1111.json")).when(test).getResourceAsStream(any());
+    AbstractRulesDefinition sut = new TestRulesDefinition(sonarRuntime);
     RulesDefinition.Context context = new RulesDefinition.Context();
-    test.define(context);
+    sut.define(context);
 
     RulesDefinition.Repository repository = context.repository("test");
     assertThat(repository).isNotNull();
@@ -53,10 +51,9 @@ public class AbstractRulesDefinitionTest {
   @Test
   public void test_before_9_3() {
     SonarRuntime sonarRuntime = SonarRuntimeImpl.forSonarQube(Version.create(9, 2), SonarQubeSide.SCANNER, SonarEdition.COMMUNITY);
-    AbstractRulesDefinition test = org.mockito.Mockito.spy(new TestRulesDefinition(sonarRuntime));
-    Mockito.doReturn(TestRulesDefinition.class.getResourceAsStream("/AbstractRulesDefinitionTest/S1111.json")).when(test).getResourceAsStream(any());
+    AbstractRulesDefinition sut = new TestRulesDefinition(sonarRuntime);
     RulesDefinition.Context context = new RulesDefinition.Context();
-    test.define(context);
+    sut.define(context);
 
     RulesDefinition.Repository repository = context.repository("test");
     assertThat(repository).isNotNull();
@@ -69,6 +66,11 @@ public class AbstractRulesDefinitionTest {
   private static class TestRulesDefinition extends AbstractRulesDefinition {
     TestRulesDefinition(SonarRuntime runtime) {
       super("test", "test", runtime, "/AbstractRulesDefinitionTest/", "");
+    }
+
+    @Override
+    InputStream getResourceAsStream(String name) {
+      return AbstractRulesDefinitionTest.class.getResourceAsStream(name);
     }
   }
 }

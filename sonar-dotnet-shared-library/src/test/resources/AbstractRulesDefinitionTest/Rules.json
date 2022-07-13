@@ -1,0 +1,13 @@
+[
+  {
+    "id": "S1111",
+    "parameters": [
+      {
+        "key": "answer",
+        "description": "Answer to life the universe and everything.",
+        "type": "INTEGER",
+        "defaultValue": "42"
+      }
+    ]
+  }
+]
