@@ -82,7 +82,7 @@ public abstract class SpecifyTimeoutOnRegexBase<TSyntaxKind> : SonarDiagnosticAn
         && !NoBacktracking(method, node, model);
 
     private static bool ContainsMatchTimeout(IMethodSymbol method) =>
-        method.Parameters.Any(x => x.Type.Is(KnownType.System_TimeSpan));
+        method.Parameters.Any(x => x.Name == "matchTimeout");
 
     private bool NoBacktracking(IMethodSymbol method, SyntaxNode node, SemanticModel model) =>
         method.Parameters.SingleOrDefault(x => x.Name == "options") is { } parameter
