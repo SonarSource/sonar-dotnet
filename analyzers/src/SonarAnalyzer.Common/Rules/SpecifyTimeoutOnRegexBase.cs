@@ -85,7 +85,7 @@ public abstract class SpecifyTimeoutOnRegexBase<TSyntaxKind> : SonarDiagnosticAn
         method.Parameters.Any(x => x.Type.Is(KnownType.System_TimeSpan));
 
     private bool NoBacktracking(IMethodSymbol method, SyntaxNode node, SemanticModel model) =>
-        method.Parameters.SingleOrDefault(x => x.Type.Is(KnownType.System_Text_RegularExpressions_RegexOptions)) is { } parameter
+        method.Parameters.SingleOrDefault(x => x.Name == "options") is { } parameter
         && Language.MethodParameterLookup(node, method).TryGetNonParamsSyntax(parameter, out var expression)
         && Language.FindConstantValue(model, expression) is int options
         && (options & NonBacktracking) == NonBacktracking;
