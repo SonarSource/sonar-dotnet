@@ -30,13 +30,29 @@
         for (int i = 0; i < 42; i++)
         {
             var (i, j) = (1, 2); // Error [CS0128] - FN - we still check for SonarLint as it analyzes also code with compile errors.
-            _ = (1, 2) is var (i, b); // Error [CS0128] - FN - we still check for SonarLint as it analyzes also code with compile errors. 
+            _ = (1, 2) is var (i, b); // Error [CS0128] - FN - we still check for SonarLint as it analyzes also code with compile errors.
         }
 
         for (var i = (a: 1, b: 2); i is (a: < 10, _); i = (++i.a, ++i.b))
         {
             i = (1, 1); // Noncompliant
             i.a = 1;    // FN
+        }
+
+        for (var (i, j) = (0, 0); i < 10; ++i, ++j)
+        {
+            i = 0;  // Noncompliant
+        }
+
+        for ((int i, int j) = (0, 0); i < 10; ++i, ++j)
+        {
+            i = 0; // Noncompliant
+        }
+
+        int k = 0, l = 0;
+        for ((k, l) = (0, 0); k < 10; ++k, ++l)
+        {
+            k = 0; // Noncompliant
         }
 
         for (int i = 0; i < 42; i++)
