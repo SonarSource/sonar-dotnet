@@ -49,10 +49,11 @@
             i = 0; // Noncompliant
         }
 
-        int k = 0, l = 0;
-        for ((k, l) = (0, 0); k < 10; ++k, ++l)
+        int k, l, m;
+        for ((k, l) = (0, 0), m = 0; k < 10; ++k, ++l)
         {
             k = 0; // Noncompliant
+            m = 0; // Noncompliant
         }
 
         for (int i = 0; i < 42; i++)
