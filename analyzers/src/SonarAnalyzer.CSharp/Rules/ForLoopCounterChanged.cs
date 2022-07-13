@@ -28,6 +28,7 @@ using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.Extensions;
 using SonarAnalyzer.Helpers;
+using StyleCop.Analyzers.Lightup;
 
 namespace SonarAnalyzer.Rules.CSharp
 {
@@ -104,7 +105,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 .SelectMany(x => x.AssignmentTargets())
                 .Select(x => semanticModel.GetSymbolInfo(x).Symbol ?? semanticModel.GetDeclaredSymbol(x));
 
-            return declaredVariables.Union(initializedVariables).WhereNotNull();
+            return declaredVariables.Union(initializedVariables).Where(x => x is { Kind: not SymbolKindEx.Discard });
         }
 
         private static SyntaxNode[] ComputeAffectedExpressions(SyntaxNode node) =>

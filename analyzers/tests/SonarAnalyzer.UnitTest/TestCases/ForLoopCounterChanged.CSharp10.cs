@@ -39,14 +39,16 @@
             i.a = 1;    // FN
         }
 
-        for (var (i, j) = (0, 0); i < 10; ++i, ++j)
+        for (var (i, j, _) = (0, 0, 0); i < 10; ++i, ++j)
         {
             i = 0;  // Noncompliant
+            _ = 0;  // Compliant. This discard does not refer to the other one.
         }
 
-        for ((int i, int j) = (0, 0); i < 10; ++i, ++j)
+        for ((int i, int j, var _, _) = (0, 0, 0, 0); i < 10; ++i, ++j)
         {
-            i = 0; // Noncompliant
+            i = 0;  // Noncompliant
+            _ = 0;  // Compliant. This discard does not refer to the other one.
         }
 
         int k, l, m;
@@ -60,6 +62,15 @@
         {
             int a = 10;
             (a, var j) = t;
+        }
+    }
+
+    public void LocalNamedAsDiscard()
+    {
+        int k, _;
+        for ((k, _) = (0, 0); k < 10; ++k)
+        {
+            _ = 0; // Noncompliant
         }
     }
 }
