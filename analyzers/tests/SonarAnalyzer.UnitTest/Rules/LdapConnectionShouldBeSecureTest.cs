@@ -39,6 +39,12 @@ namespace SonarAnalyzer.UnitTest.Rules
             OldVerifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\LdapConnectionShouldBeSecure.CSharp9.cs",
                                                       new LdapConnectionShouldBeSecure(),
                                                       MetadataReferenceFacade.SystemDirectoryServices);
+
+        [TestMethod]
+        public void LdapConnectionsShouldBeSecure_FromCSharp10() =>
+            OldVerifier.VerifyAnalyzerFromCSharp10Console(@"TestCases\LdapConnectionShouldBeSecure.CSharp10.cs",
+                                              new LdapConnectionShouldBeSecure(),
+                                              MetadataReferenceFacade.SystemDirectoryServices);
 #endif
     }
 }

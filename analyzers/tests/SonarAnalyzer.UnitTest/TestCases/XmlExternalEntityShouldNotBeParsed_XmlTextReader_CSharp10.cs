@@ -5,6 +5,6 @@ public record struct S
     void XmlTextReader_NewResolver(XmlNameTable table)
     {
         XmlTextReader reader = new("resources/", table);
-        (reader.XmlResolver, var x) = (new XmlUrlResolver(), 0); // FN
+        (reader.XmlResolver, var x) = (new XmlUrlResolver(), 0); // Noncompliant
     }
 }

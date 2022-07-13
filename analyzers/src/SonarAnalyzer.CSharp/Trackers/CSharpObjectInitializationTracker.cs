@@ -43,7 +43,7 @@ namespace SonarAnalyzer.Helpers.Trackers
         /// </summary>
         private const int DefaultTrackedConstructorArgumentIndex = -1;
 
-        private static readonly Func<ISymbol, ExpressionSyntax, SemanticModel, bool> DefaultIsAllowedObject = (s, node, model) => false;
+        private static readonly Func<ISymbol, SyntaxNode, SemanticModel, bool> DefaultIsAllowedObject = (s, node, model) => false;
 
         /// <summary>
         /// Given the value of a literal (e.g. enum or boolean), returns true if it is an allowed value.
@@ -53,7 +53,7 @@ namespace SonarAnalyzer.Helpers.Trackers
         /// <summary>
         /// Given the symbol of an object, the expression used to populate the value and the semantic model, returns true if it is allowed.
         /// </summary>
-        private readonly Func<ISymbol, ExpressionSyntax, SemanticModel, bool> isAllowedObject;
+        private readonly Func<ISymbol, SyntaxNode, SemanticModel, bool> isAllowedObject;
 
         /// <summary>
         /// Given the name of a property, returns true if it is of interest for the rule verdict.
@@ -73,7 +73,7 @@ namespace SonarAnalyzer.Helpers.Trackers
         internal CSharpObjectInitializationTracker(Predicate<object> isAllowedConstantValue,
             ImmutableArray<KnownType> trackedTypes,
             Predicate<string> isTrackedPropertyName,
-            Func<ISymbol, ExpressionSyntax, SemanticModel, bool> isAllowedObject = null,
+            Func<ISymbol, SyntaxNode, SemanticModel, bool> isAllowedObject = null,
             int trackedConstructorArgumentIndex = DefaultTrackedConstructorArgumentIndex)
         {
             this.isAllowedConstantValue = isAllowedConstantValue;
@@ -88,12 +88,16 @@ namespace SonarAnalyzer.Helpers.Trackers
             && !ObjectCreatedWithAllowedValue(objectCreation, semanticModel, isDefaultConstructorSafe)
             && !IsLaterAssignedWithAllowedValue(objectCreation, semanticModel);
 
-        internal bool ShouldBeReported(AssignmentExpressionSyntax assignment, SemanticModel semanticModel) =>
+        internal bool ShouldBeReported(AssignmentExpressionSyntax assignment, SemanticModel semanticModel)
+        {
+            var assignmentMap = assignment.MapAssignmentArguments();
+
             // Ignore assignments within object initializers, they are reported in the ObjectCreationExpression handler
-            assignment.FirstAncestorOrSelf<InitializerExpressionSyntax>() == null
-            && IsTrackedPropertyName(assignment.Left)
-            && IsPropertyOnTrackedType(assignment.Left, semanticModel)
-            && !IsAllowedValue(assignment.Right, semanticModel);
+            return assignment.FirstAncestorOrSelf<InitializerExpressionSyntax>() == null
+                   && assignmentMap.Any(x => IsTrackedPropertyName(x.Left)
+                                             && IsPropertyOnTrackedType(x.Left, semanticModel)
+                                             && !IsAllowedValue(x.Right, semanticModel));
+        }
 
         /// <summary>
         /// Tests if the provided <paramref name="constantValue"/> is equal to an allowed constant (literal) value.
@@ -108,7 +112,7 @@ namespace SonarAnalyzer.Helpers.Trackers
         /// Tests if the expression is an allowed value. The implementation of checks is provided by the derived class.
         /// </summary>
         /// <returns>True if the expression is an allowed value, otherwise false.</returns>
-        private bool IsAllowedValue(ExpressionSyntax expression, SemanticModel semanticModel)
+        private bool IsAllowedValue(SyntaxNode expression, SemanticModel semanticModel)
         {
             if (expression == null)
             {
@@ -175,7 +179,7 @@ namespace SonarAnalyzer.Helpers.Trackers
         /// <summary>
         /// Returns true if the <paramref name="expression"/> has the name of a tracked property.
         /// </summary>
-        private bool IsTrackedPropertyName(ExpressionSyntax expression)
+        private bool IsTrackedPropertyName(SyntaxNode expression)
         {
             var identifier = (expression as MemberAccessExpressionSyntax)?.Name?.Identifier ?? (expression as IdentifierNameSyntax)?.Identifier;
             return identifier.HasValue && IsTrackedPropertyName(identifier.Value.ValueText);
@@ -184,7 +188,7 @@ namespace SonarAnalyzer.Helpers.Trackers
         /// <summary>
         /// Returns true if the provided expression is a member of a tracked type.
         /// </summary>
-        private bool IsPropertyOnTrackedType(ExpressionSyntax expression, SemanticModel semanticModel) =>
+        private bool IsPropertyOnTrackedType(SyntaxNode expression, SemanticModel semanticModel) =>
             expression is MemberAccessExpressionSyntax memberAccess
             && memberAccess.Expression != null
             && IsTrackedType(memberAccess.Expression, semanticModel);

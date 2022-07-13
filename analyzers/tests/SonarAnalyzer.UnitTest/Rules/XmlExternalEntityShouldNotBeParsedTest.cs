@@ -46,6 +46,14 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void XmlExternalEntityShouldNotBeParsed_XmlDocument_CSharp9() =>
             WithAnalyzer(NetFrameworkVersion.After452).AddPaths("XmlExternalEntityShouldNotBeParsed_XmlDocument_CSharp9.cs").WithTopLevelStatements().Verify();
 
+        [TestMethod]
+        public void XmlExternalEntityShouldNotBeParsed_XmlDocument_CSharp10() =>
+            WithAnalyzer(NetFrameworkVersion.After452)
+                .AddPaths("XmlExternalEntityShouldNotBeParsed_XmlDocument_CSharp10.cs")
+                .WithOptions(ParseOptionsHelper.FromCSharp10)
+                .WithTopLevelStatements()
+                .Verify();
+
 #endif
 
         [DataRow(NetFrameworkVersion.After452, "XmlExternalEntityShouldNotBeParsed_XmlTextReader.cs")]
