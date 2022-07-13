@@ -110,7 +110,7 @@ public abstract class AbstractRulesDefinition implements RulesDefinition {
   }
 
   private RuleMetadata loadMetadata(String id) {
-    return null; // FIXME: Doresit
+    return GSON.fromJson(readResource(id + metadataSuffix + ".json"), RuleMetadata.class);
   }
   //
   // private void setupHotspotRules(Collection<NewRule> rules) {
