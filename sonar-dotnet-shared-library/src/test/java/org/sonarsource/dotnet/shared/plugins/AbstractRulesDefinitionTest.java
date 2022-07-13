@@ -19,8 +19,6 @@
  */
 package org.sonarsource.dotnet.shared.plugins;
 
-import java.util.Arrays;
-import java.util.HashSet;
 import org.junit.Test;
 import org.mockito.Mockito;
 import org.sonar.api.SonarEdition;
@@ -70,7 +68,7 @@ public class AbstractRulesDefinitionTest {
 
   private static class TestRulesDefinition extends AbstractRulesDefinition {
     TestRulesDefinition(SonarRuntime runtime) {
-      super("test", "test", runtime, "/AbstractRulesDefinitionTest/", "", new HashSet<String>(Arrays.asList("S1111")));
+      super("test", "test", runtime, "/AbstractRulesDefinitionTest/", "");
     }
   }
 }

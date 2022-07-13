@@ -29,7 +29,6 @@ import java.lang.reflect.Type;
 import java.nio.charset.StandardCharsets;
 import java.util.List;
 import java.util.Locale;
-import java.util.Set;
 import java.util.stream.Collectors;
 import org.sonar.api.SonarRuntime;
 import org.sonar.api.rule.RuleStatus;
@@ -50,16 +49,13 @@ public abstract class AbstractRulesDefinition implements RulesDefinition {
   private final String resourcesDirectory;
   private final String metadataSuffix;
   private final boolean isOwaspByVersionSupported;
-  private final Set<String> sonarWayRules;
 
-  protected AbstractRulesDefinition(String repositoryKey, String languageKey, SonarRuntime sonarRuntime, String resourcesDirectory, String metadataSuffix,
-    Set<String> sonarWayRules) {
+  protected AbstractRulesDefinition(String repositoryKey, String languageKey, SonarRuntime sonarRuntime, String resourcesDirectory, String metadataSuffix) {
     this.repositoryKey = repositoryKey;
     this.languageKey = languageKey;
     this.resourcesDirectory = resourcesDirectory;
     this.metadataSuffix = metadataSuffix;
     this.isOwaspByVersionSupported = sonarRuntime.getApiVersion().isGreaterThanOrEqual(Version.create(9, 3));
-    this.sonarWayRules = sonarWayRules;
   }
 
   @Override
@@ -72,7 +68,7 @@ public abstract class AbstractRulesDefinition implements RulesDefinition {
     List<Rule> rules = GSON.fromJson(readResource("Rules.json"), ruleListType);
     for (Rule rule : rules) {
       NewRule newRule = repository.createRule(rule.id);
-      configureRule(newRule, loadMetadata(rule.id), rule.parameters, sonarWayRules.contains(rule.id));
+      configureRule(newRule, loadMetadata(rule.id), rule.parameters);
       newRule.setHtmlDescription(readResource(rule.id + metadataSuffix + ".html"));
     }
     repository.done();
@@ -80,7 +76,7 @@ public abstract class AbstractRulesDefinition implements RulesDefinition {
     // setupHotspotRules(repository.rules());
   }
 
-  private void configureRule(NewRule rule, RuleMetadata metadata, RuleParameter[] parameters, boolean isSonarWay) {// },
+  private void configureRule(NewRule rule, RuleMetadata metadata, RuleParameter[] parameters) {// },
     rule
       .setName(metadata.title)
       .setType(RuleType.valueOf(metadata.type))
@@ -99,20 +95,6 @@ public abstract class AbstractRulesDefinition implements RulesDefinition {
     }
 
     // addSecurityStandards(rule, metadata.securityStandards);
-
-    // DeprecatedRuleKey deprecatedRuleKeyAnnotation = AnnotationUtils.getAnnotation(ruleClass, DeprecatedRuleKey.class);
-    // if (deprecatedRuleKeyAnnotation != null) {
-    // rule.addDeprecatedRuleKey(deprecatedRuleKeyAnnotation.repositoryKey(), deprecatedRuleKeyAnnotation.ruleKey());
-    // } else {
-    // // Keep link with legacy "squid" repository key
-    // rule.addDeprecatedRuleKey("squid", ruleKey);
-    // }
-    // addMetadata(rule, ruleMetadata);
-    // // 'setActivatedByDefault' is used by SonarLint standalone, to define which rules will be active
-    // boolean activatedInProfile = profile.ruleKeys.contains(ruleKey) || profile.ruleKeys.contains(rspecKey);
-    // boolean isSecurityHotspot = ruleMetadata != null && ruleMetadata.isSecurityHotspot();
-    // rule.setActivatedByDefault(activatedInProfile && !isSecurityHotspot);
-    // rule.setTemplate(TEMPLATE_RULE_KEY.contains(ruleKey));
   }
 
   // private void setupHotspotRules(Collection<NewRule> rules) {

@@ -19,8 +19,6 @@
  */
 package org.sonar.plugins.csharp;
 
-import java.util.Arrays;
-import java.util.HashSet;
 import org.junit.Test;
 import org.sonar.api.SonarEdition;
 import org.sonar.api.SonarQubeSide;
@@ -34,8 +32,6 @@ import org.sonar.api.server.rule.RulesDefinition.Rule;
 import org.sonar.api.utils.Version;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
 
 public class CSharpSonarRulesDefinitionTest {
   private static final String SECURITY_HOTSPOT_RULE_KEY = "S5766";
@@ -48,7 +44,7 @@ public class CSharpSonarRulesDefinitionTest {
     Context context = new Context();
     assertThat(context.repositories()).isEmpty();
 
-    CSharpSonarRulesDefinition csharpRulesDefinition = new CSharpSonarRulesDefinition(SONAR_RUNTIME, mockSonarWay());
+    CSharpSonarRulesDefinition csharpRulesDefinition = new CSharpSonarRulesDefinition(SONAR_RUNTIME);
     csharpRulesDefinition.define(context);
 
     assertThat(context.repositories()).hasSize(1);
@@ -62,7 +58,7 @@ public class CSharpSonarRulesDefinitionTest {
 
   @Test
   public void test_security_hotspot() {
-    CSharpSonarRulesDefinition definition = new CSharpSonarRulesDefinition(SONAR_RUNTIME, mockSonarWay());
+    CSharpSonarRulesDefinition definition = new CSharpSonarRulesDefinition(SONAR_RUNTIME);
     RulesDefinition.Context context = new RulesDefinition.Context();
     definition.define(context);
     RulesDefinition.Repository repository = context.repository("csharpsquid");
@@ -74,7 +70,7 @@ public class CSharpSonarRulesDefinitionTest {
 
   @Test
   public void test_security_hotspot_has_correct_type_and_security_standards() {
-    CSharpSonarRulesDefinition definition = new CSharpSonarRulesDefinition(SONAR_RUNTIME, mockSonarWay());
+    CSharpSonarRulesDefinition definition = new CSharpSonarRulesDefinition(SONAR_RUNTIME);
     RulesDefinition.Context context = new RulesDefinition.Context();
     definition.define(context);
     RulesDefinition.Repository repository = context.repository("csharpsquid");
@@ -86,7 +82,7 @@ public class CSharpSonarRulesDefinitionTest {
 
   @Test
   public void test_security_standards_with_vulnerability() {
-    CSharpSonarRulesDefinition definition = new CSharpSonarRulesDefinition(SONAR_RUNTIME, mockSonarWay());
+    CSharpSonarRulesDefinition definition = new CSharpSonarRulesDefinition(SONAR_RUNTIME);
     RulesDefinition.Context context = new RulesDefinition.Context();
     definition.define(context);
     RulesDefinition.Repository repository = context.repository("csharpsquid");
@@ -100,7 +96,7 @@ public class CSharpSonarRulesDefinitionTest {
   public void test_security_standards_before_9_3() {
     SonarRuntime sonarRuntime = SonarRuntimeImpl.forSonarQube(Version.create(9, 2), SonarQubeSide.SCANNER, SonarEdition.COMMUNITY);
     RulesDefinition.Context context = new RulesDefinition.Context();
-    new CSharpSonarRulesDefinition(sonarRuntime, mockSonarWay()).define(context);
+    new CSharpSonarRulesDefinition(sonarRuntime).define(context);
     RulesDefinition.Repository repository = context.repository("csharpsquid");
 
     RulesDefinition.Rule rule = repository.rule(VULNERABILITY_RULE_KEY);
@@ -109,7 +105,7 @@ public class CSharpSonarRulesDefinitionTest {
 
   @Test
   public void test_all_rules_have_status_set() {
-    CSharpSonarRulesDefinition definition = new CSharpSonarRulesDefinition(SONAR_RUNTIME, mockSonarWay());
+    CSharpSonarRulesDefinition definition = new CSharpSonarRulesDefinition(SONAR_RUNTIME);
     RulesDefinition.Context context = new RulesDefinition.Context();
     definition.define(context);
     RulesDefinition.Repository repository = context.repository("csharpsquid");
@@ -117,11 +113,5 @@ public class CSharpSonarRulesDefinitionTest {
     for (RulesDefinition.Rule rule : repository.rules()) {
       assertThat(rule.status()).isNotNull();
     }
-  }
-
-  private static CSharpSonarWayProfile mockSonarWay() {
-    CSharpSonarWayProfile sonarWay = mock(CSharpSonarWayProfile.class);
-    when(sonarWay.activeRules()).thenReturn(new HashSet<String>(Arrays.asList("S100")));
-    return sonarWay;
   }
 }
