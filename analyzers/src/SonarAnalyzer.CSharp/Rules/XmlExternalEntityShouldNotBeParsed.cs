@@ -127,7 +127,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 return;
             }
 
-            if (!IsXPathDocumentSecureByDefault(this.versionProvider.GetDotNetFrameworkVersion(context.Compilation)))
+            if (!IsXPathDocumentSecureByDefault(versionProvider.GetDotNetFrameworkVersion(context.Compilation)))
             {
                 context.ReportDiagnostic(Diagnostic.Create(Rule, objectCreation.Expression.GetLocation()));
             }
@@ -174,7 +174,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     // we do not expect any constant values for XmlResolver
                     isAllowedConstantValue: constantValue => false,
                     trackedTypes: XmlDocumentTrackedTypes,
-                    isTrackedPropertyName: propertyName => "XmlResolver" == propertyName,
+                    isTrackedPropertyName: propertyName => propertyName == "XmlResolver",
                     isAllowedObject: (symbol, _, __) => IsAllowedObject(symbol)
                 );
 
@@ -203,17 +203,17 @@ namespace SonarAnalyzer.Rules.CSharp
             }
 
             private static bool IsUnsafeXmlResolverConstructor(ISymbol symbol) =>
-                    symbol.Kind == SymbolKind.Method &&
-                    symbol.ContainingType.GetSymbolType().IsAny(UnsafeXmlResolvers);
+                symbol.Kind == SymbolKind.Method
+                && symbol.ContainingType.GetSymbolType().IsAny(UnsafeXmlResolvers);
 
             private static bool IsAllowedObject(ISymbol symbol) =>
-                !IsUnsafeXmlResolverConstructor(symbol) &&
-                !symbol.GetSymbolType().IsAny(UnsafeXmlResolvers) &&
-                !IsUnsafeXmlResolverReturnType(symbol);
+                !IsUnsafeXmlResolverConstructor(symbol)
+                && !symbol.GetSymbolType().IsAny(UnsafeXmlResolvers)
+                && !IsUnsafeXmlResolverReturnType(symbol);
 
             private static bool IsUnsafeXmlResolverReturnType(ISymbol symbol) =>
-                symbol is IMethodSymbol methodSymbol &&
-                methodSymbol.ReturnType.IsAny(UnsafeXmlResolvers);
+                symbol is IMethodSymbol methodSymbol
+                && methodSymbol.ReturnType.IsAny(UnsafeXmlResolvers);
         }
 
         private readonly struct TrackersHolder

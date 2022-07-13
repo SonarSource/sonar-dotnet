@@ -20,7 +20,6 @@
 
 using System.Collections.Immutable;
 using Microsoft.CodeAnalysis;
-using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Extensions;
@@ -48,7 +47,7 @@ namespace SonarAnalyzer.Rules.CSharp
             trackedConstructorArgumentIndex: 3
         );
 
-        private static bool IsAllowedObject(ISymbol authTypeSymbol, ExpressionSyntax authTypeExpression, SemanticModel semanticModel) =>
+        private static bool IsAllowedObject(ISymbol authTypeSymbol, SyntaxNode authTypeExpression, SemanticModel semanticModel) =>
             authTypeSymbol.GetSymbolType().Is(KnownType.System_DirectoryServices_AuthenticationTypes)
             && !(authTypeExpression.FindConstantValue(semanticModel) is int authType && IsUnsafe(authType));
 
