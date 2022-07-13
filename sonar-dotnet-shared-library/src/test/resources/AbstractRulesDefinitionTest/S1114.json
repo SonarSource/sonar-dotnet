@@ -1,6 +1,6 @@
 {
-  "title": "Missing remediation",
-  "type": "CODE_SMELL",
+  "title": "No remediation",
+  "type": "SECURITY_HOTSPOT",
   "status": "ready",
   "tags": [],
   "defaultSeverity": "Critical",

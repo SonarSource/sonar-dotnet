@@ -76,6 +76,7 @@ public class AbstractRulesDefinitionTest {
     assertThat(repository.rule("S1111").debtRemediationFunction()).hasToString("DebtRemediationFunction{type=CONSTANT_ISSUE, gap multiplier=null, base effort=5min}");
     assertThat(repository.rule("S1112").debtRemediationFunction()).hasToString("DebtRemediationFunction{type=LINEAR, gap multiplier=10min, base effort=null}");
     assertThat(repository.rule("S1113").debtRemediationFunction()).hasToString("DebtRemediationFunction{type=LINEAR_OFFSET, gap multiplier=30min, base effort=4h}");
+    assertThat(repository.rule("S1114").debtRemediationFunction()).isNull();
 
   }
 
@@ -91,24 +92,9 @@ public class AbstractRulesDefinitionTest {
       .withMessage("Resource does not exist: Rules.json");
   }
 
-  @Test
-  public void test_missing_remediation_throws() {
-    SonarRuntime sonarRuntime = SonarRuntimeImpl.forSonarQube(Version.create(9, 3), SonarQubeSide.SCANNER, SonarEdition.COMMUNITY);
-    AbstractRulesDefinition sut = new TestRulesDefinition(sonarRuntime, "MissingRemediation/");
-    RulesDefinition.Context context = new RulesDefinition.Context();
-
-    assertThatExceptionOfType(IllegalStateException.class)
-      .isThrownBy(() -> sut.define(context))
-      .withMessage("Rspec is missing remediation: S0001");
-  }
-
   private static class TestRulesDefinition extends AbstractRulesDefinition {
     TestRulesDefinition(SonarRuntime runtime) {
-      this(runtime, "");
-    }
-
-    TestRulesDefinition(SonarRuntime runtime, String suffix) {
-      super("test", "test", runtime, "/AbstractRulesDefinitionTest/" + suffix, "");
+      super("test", "test", runtime, "/AbstractRulesDefinitionTest/", "");
     }
 
     @Override
