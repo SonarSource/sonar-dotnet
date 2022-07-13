@@ -27,6 +27,7 @@ import org.sonar.api.internal.SonarRuntimeImpl;
 import org.sonar.api.rule.RuleStatus;
 import org.sonar.api.rules.RuleType;
 import org.sonar.api.server.debt.DebtRemediationFunction;
+import org.sonar.api.server.rule.RuleParamType;
 import org.sonar.api.server.rule.RulesDefinition;
 import org.sonar.api.server.rule.RulesDefinition.Context;
 import org.sonar.api.server.rule.RulesDefinition.Rule;
@@ -189,7 +190,7 @@ public class CSharpSonarRulesDefinitionTest {
     RulesDefinition.Rule rule = context.repository("csharpsquid").rule(SINGLE_PARAM_RULE_KEY);
 
     assertThat(rule.params()).hasSize(1);
-    assertParam(rule.params().get(0), "max", "INTEGER", "30", "Maximum number of types a single type is allowed to depend upon");
+    assertParam(rule.params().get(0), "max", RuleParamType.INTEGER, "30", "Maximum number of types a single type is allowed to depend upon");
   }
 
   @Test
@@ -200,13 +201,13 @@ public class CSharpSonarRulesDefinitionTest {
     RulesDefinition.Rule rule = context.repository("csharpsquid").rule(MULTI_PARAM_RULE_KEY);
 
     assertThat(rule.params()).hasSize(2);
-    assertParam(rule.params().get(0), "max", "INTEGER", "5", "Maximum depth of the inheritance tree. (Number)");
-    assertParam(rule.params().get(1), "filteredClasses", "STRING", "",
+    assertParam(rule.params().get(0), "max", RuleParamType.INTEGER, "5", "Maximum depth of the inheritance tree. (Number)");
+    assertParam(rule.params().get(1), "filteredClasses", RuleParamType.STRING, null,
       "Comma-separated list of classes or records to be filtered out of the count of inheritance. Depth counting will stop when a filtered class or record is reached. For example: System.Windows.Controls.UserControl, System.Windows.*. (String)");
 
   }
 
-  private static void assertParam(RulesDefinition.Param param, String expectedKey, String expectedType, String expectedDefaultValue, String expectedDescription) {
+  private static void assertParam(RulesDefinition.Param param, String expectedKey, RuleParamType expectedType, String expectedDefaultValue, String expectedDescription) {
     assertThat(param.key()).isEqualTo(expectedKey);
     assertThat(param.type()).isEqualTo(expectedType);
     assertThat(param.defaultValue()).isEqualTo(expectedDefaultValue);

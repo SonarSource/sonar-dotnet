@@ -89,7 +89,7 @@ public abstract class AbstractRulesDefinition implements RulesDefinition {
     for (RuleParameter param : parameters) {
       rule.createParam(param.key)
         .setType(RuleParamType.parse(param.type))
-        .setDefaultValue(param.description)
+        .setDescription(param.description)
         .setDefaultValue(param.defaultValue);
     }
     addSecurityStandards(rule, metadata.securityStandards);
