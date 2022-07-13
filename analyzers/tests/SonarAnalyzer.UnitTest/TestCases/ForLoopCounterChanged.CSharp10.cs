@@ -70,7 +70,7 @@
         int k, _;
         for ((k, _) = (0, 0); k < 10; ++k)
         {
-            _ = 0; // Noncompliant
+            _ = 0; // Noncompliant. Here _ is not a discard but a local reference.
         }
     }
 }
