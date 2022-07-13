@@ -31,7 +31,8 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void LdapConnectionsShouldBeSecure() =>
             builder.AddPaths("LdapConnectionShouldBeSecure.cs")
                 .WithOptions(ParseOptionsHelper.FromCSharp8)
-                .AddReferences(MetadataReferenceFacade.SystemDirectoryServices.Concat(MetadataReferenceFacade.NETStandard21))
+                .AddReferences(MetadataReferenceFacade.SystemDirectoryServices)
+                .AddReferences(MetadataReferenceFacade.NETStandard21)
                 .Verify();
 
 #if NET

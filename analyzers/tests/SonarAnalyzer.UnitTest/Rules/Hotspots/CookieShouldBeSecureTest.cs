@@ -90,7 +90,8 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void CookiesShouldBeSecure_CSharp9() =>
             builder.AddPaths("CookieShouldBeSecure.CSharp9.cs")
                 .WithTopLevelStatements()
-                .AddReferences(GetAdditionalReferences_NetCore().Concat(NuGetMetadataReference.Nancy()))
+                .AddReferences(GetAdditionalReferences_NetCore())
+                .AddReferences(NuGetMetadataReference.Nancy())
                 .Verify();
 
         [TestMethod]
@@ -98,7 +99,8 @@ namespace SonarAnalyzer.UnitTest.Rules
             builder.AddPaths("CookieShouldBeSecure.CSharp10.cs")
                 .WithOptions(ParseOptionsHelper.FromCSharp10)
                 .WithTopLevelStatements()
-                .AddReferences(GetAdditionalReferences_NetCore().Concat(NuGetMetadataReference.Nancy()))
+                .AddReferences(GetAdditionalReferences_NetCore())
+                .AddReferences(NuGetMetadataReference.Nancy())
                 .Verify();
 
         private static IEnumerable<MetadataReference> GetAdditionalReferences_NetCore() =>
