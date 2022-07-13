@@ -20,6 +20,7 @@
 package org.sonarsource.dotnet.shared.plugins;
 
 import com.google.gson.Gson;
+import com.google.gson.annotations.SerializedName;
 import com.google.gson.reflect.TypeToken;
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -72,8 +73,6 @@ public abstract class AbstractRulesDefinition implements RulesDefinition {
       newRule.setHtmlDescription(readResource(rule.id + metadataSuffix + ".html"));
     }
     repository.done();
-
-    // setupHotspotRules(repository.rules());
   }
 
   private void configureRule(NewRule rule, RuleMetadata metadata, RuleParameter[] parameters) {// },
@@ -93,54 +92,20 @@ public abstract class AbstractRulesDefinition implements RulesDefinition {
         .setDefaultValue(param.description)
         .setDefaultValue(param.defaultValue);
     }
-
-    // addSecurityStandards(rule, metadata.securityStandards);
+    addSecurityStandards(rule, metadata.securityStandards);
   }
 
-  // private void setupHotspotRules(Collection<NewRule> rules) {
-  // Map<NewRule, RuleMetadata> allRuleMetadata = rules.stream()
-  // .collect(Collectors.toMap(rule -> rule, rule -> readRuleMetadata(rule.key())));
-  //
-  // Set<NewRule> hotspotRules = getHotspotRules(allRuleMetadata);
-  //
-  // allRuleMetadata.forEach(this::updateSecurityStandards);
-  // hotspotRules.forEach(rule -> rule.setType(RuleType.SECURITY_HOTSPOT));
-  // }
-  //
-  // private static Set<NewRule> getHotspotRules(Map<NewRule, RuleMetadata> allRuleMetadata) {
-  // return allRuleMetadata.entrySet()
-  // .stream()
-  // .filter(entry -> entry.getValue().isSecurityHotspot())
-  // .map(Map.Entry::getKey)
-  // .collect(Collectors.toSet());
-  // }
-  //
-  // private void updateSecurityStandards(NewRule rule, RuleMetadata ruleMetadata) {
-  // for (String s : ruleMetadata.securityStandards.owasp2017) {
-  // rule.addOwaspTop10(RulesDefinition.OwaspTop10.valueOf(s));
-  // }
-  // if (isOwaspByVersionSupported) {
-  // for (String s : ruleMetadata.securityStandards.owasp2021) {
-  // rule.addOwaspTop10(RulesDefinition.OwaspTop10Version.Y2021, RulesDefinition.OwaspTop10.valueOf(s));
-  // }
-  // }
-  // rule.addCwe(ruleMetadata.securityStandards.cwe);
-  // }
-  //
-  //
-  //
-  // private void addSecurityStandards(NewRule rule, SecurityStandards securityStandards) {
-  // for (String s : securityStandards.OWASP_2017) {
-  // rule.addOwaspTop10(RulesDefinition.OwaspTop10.valueOf(s));
-  // }
-  // if (isOwaspByVersionSupported) {
-  // for (String s : securityStandards.OWASP_2021) {
-  // rule.addOwaspTop10(RulesDefinition.OwaspTop10Version.Y2021, RulesDefinition.OwaspTop10.valueOf(s));
-  // }
-  // }
-  // rule.addCwe(securityStandards.CWE);
-  // }
-  //
+  private void addSecurityStandards(NewRule rule, SecurityStandards securityStandards) {
+    for (String s : securityStandards.owasp2017) {
+      rule.addOwaspTop10(RulesDefinition.OwaspTop10.valueOf(s));
+    }
+    if (isOwaspByVersionSupported) {
+      for (String s : securityStandards.owasp2021) {
+        rule.addOwaspTop10(RulesDefinition.OwaspTop10Version.Y2021, RulesDefinition.OwaspTop10.valueOf(s));
+      }
+    }
+    rule.addCwe(securityStandards.cwe);
+  }
 
   private RuleMetadata loadMetadata(String id) {
     return GSON.fromJson(readResource(id + metadataSuffix + ".json"), RuleMetadata.class);
@@ -176,32 +141,15 @@ public abstract class AbstractRulesDefinition implements RulesDefinition {
   }
 
   static class RuleMetadata {
-    // private static final String SECURITY_HOTSPOT = "SECURITY_HOTSPOT";
-
     String title;
     String status;
     String type;
     String[] tags;
     String defaultSeverity;
     Remediation remediation;
-    // SecurityStandards securityStandards = new SecurityStandards();
-    //
-    // boolean isSecurityHotspot() {
-    // return SECURITY_HOTSPOT.equals(type);
-    // }
+    SecurityStandards securityStandards = new SecurityStandards();
   }
 
-  //
-  // static class SecurityStandards {
-  // int[] CWE = {};
-  //
-  // @SerializedName("OWASP Top 10 2021")
-  // String[] OWASP_2021 = {};
-  //
-  // @SerializedName("OWASP")
-  // String[] OWASP_2017 = {};
-  // }
-  //
   private static class Remediation {
     String func;
     String constantCost;
@@ -220,26 +168,14 @@ public abstract class AbstractRulesDefinition implements RulesDefinition {
     }
   }
 
-  // private static class RuleMetadata {
-  // private static final String SECURITY_HOTSPOT = "SECURITY_HOTSPOT";
-  //
-  // String sqKey;
-  // String type;
-  // SecurityStandards securityStandards = new SecurityStandards();
-  //
-  // boolean isSecurityHotspot() {
-  // return SECURITY_HOTSPOT.equals(type);
-  // }
-  // }
-  //
-  // private static class SecurityStandards {
-  // @SerializedName("CWE")
-  // int[] cwe = {};
-  //
-  // @SerializedName("OWASP Top 10 2021")
-  // String[] owasp2021 = {};
-  //
-  // @SerializedName("OWASP")
-  // String[] owasp2017 = {};
-  // }
+  private static class SecurityStandards {
+    @SerializedName("CWE")
+    int[] cwe = {};
+
+    @SerializedName("OWASP Top 10 2021")
+    String[] owasp2021 = {};
+
+    @SerializedName("OWASP")
+    String[] owasp2017 = {};
+  }
 }
