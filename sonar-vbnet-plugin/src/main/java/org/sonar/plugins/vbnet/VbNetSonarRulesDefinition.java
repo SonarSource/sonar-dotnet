@@ -31,7 +31,7 @@ public class VbNetSonarRulesDefinition extends AbstractRulesDefinition {
   private static final String RESOURCES_DIRECTORY = "/org/sonar/plugins/vbnet/";
   private static final String METADATA_SUFFIX = "_vb.net";
 
-  public VbNetSonarRulesDefinition(SonarRuntime sonarRuntime) {
-    super(REPOSITORY_KEY, LANGUAGE_KEY, sonarRuntime, RESOURCES_DIRECTORY, METADATA_SUFFIX);
+  public VbNetSonarRulesDefinition(SonarRuntime sonarRuntime, VbNetSonarWayProfile sonarWay) {
+    super(REPOSITORY_KEY, LANGUAGE_KEY, sonarRuntime, RESOURCES_DIRECTORY, METADATA_SUFFIX, sonarWay.activeRules());
   }
 }

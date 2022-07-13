@@ -19,6 +19,8 @@
  */
 package org.sonar.plugins.vbnet;
 
+import java.util.Arrays;
+import java.util.HashSet;
 import org.junit.Test;
 import org.sonar.api.SonarEdition;
 import org.sonar.api.SonarQubeSide;
@@ -32,6 +34,8 @@ import org.sonar.api.server.rule.RulesDefinition.Rule;
 import org.sonar.api.utils.Version;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 public class VbNetSonarRulesDefinitionTest {
   private static final String SECURITY_HOTSPOT_RULE_KEY = "S4792";
@@ -42,7 +46,7 @@ public class VbNetSonarRulesDefinitionTest {
     Context context = new Context();
     assertThat(context.repositories()).isEmpty();
 
-    VbNetSonarRulesDefinition vbnetRulesDefinition = new VbNetSonarRulesDefinition(SONAR_RUNTIME);
+    VbNetSonarRulesDefinition vbnetRulesDefinition = new VbNetSonarRulesDefinition(SONAR_RUNTIME, mockSonarWay());
     vbnetRulesDefinition.define(context);
 
     assertThat(context.repositories()).hasSize(1);
@@ -56,7 +60,7 @@ public class VbNetSonarRulesDefinitionTest {
 
   @Test
   public void test_security_hotspot() {
-    VbNetSonarRulesDefinition definition = new VbNetSonarRulesDefinition(SONAR_RUNTIME);
+    VbNetSonarRulesDefinition definition = new VbNetSonarRulesDefinition(SONAR_RUNTIME, mockSonarWay());
     RulesDefinition.Context context = new RulesDefinition.Context();
     definition.define(context);
     RulesDefinition.Repository repository = context.repository("vbnet");
@@ -68,7 +72,7 @@ public class VbNetSonarRulesDefinitionTest {
 
   @Test
   public void test_security_hotspot_has_correct_type_and_security_standards() {
-    VbNetSonarRulesDefinition definition = new VbNetSonarRulesDefinition(SONAR_RUNTIME);
+    VbNetSonarRulesDefinition definition = new VbNetSonarRulesDefinition(SONAR_RUNTIME, mockSonarWay());
     RulesDefinition.Context context = new RulesDefinition.Context();
     definition.define(context);
     RulesDefinition.Repository repository = context.repository("vbnet");
@@ -80,7 +84,7 @@ public class VbNetSonarRulesDefinitionTest {
 
   @Test
   public void test_all_rules_have_status_set() {
-    VbNetSonarRulesDefinition definition = new VbNetSonarRulesDefinition(SONAR_RUNTIME);
+    VbNetSonarRulesDefinition definition = new VbNetSonarRulesDefinition(SONAR_RUNTIME, mockSonarWay());
     RulesDefinition.Context context = new RulesDefinition.Context();
     definition.define(context);
     RulesDefinition.Repository repository = context.repository("vbnet");
@@ -88,5 +92,11 @@ public class VbNetSonarRulesDefinitionTest {
     for (RulesDefinition.Rule rule : repository.rules()) {
       assertThat(rule.status()).isNotNull();
     }
+  }
+
+  private static VbNetSonarWayProfile mockSonarWay() {
+    VbNetSonarWayProfile sonarWay = mock(VbNetSonarWayProfile.class);
+    when(sonarWay.activeRules()).thenReturn(new HashSet<String>(Arrays.asList("S1197")));
+    return sonarWay;
   }
 }

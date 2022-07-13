@@ -32,7 +32,7 @@ public class CSharpSonarRulesDefinition extends AbstractRulesDefinition {
   private static final String RESOURCES_DIRECTORY = "/org/sonar/plugins/csharp/";
   private static final String METADATA_SUFFIX = "_c#";
 
-  public CSharpSonarRulesDefinition(SonarRuntime sonarRuntime) {
-    super(REPOSITORY_KEY, LANGUAGE_KEY, sonarRuntime, RESOURCES_DIRECTORY, METADATA_SUFFIX);
+  public CSharpSonarRulesDefinition(SonarRuntime sonarRuntime, CSharpSonarWayProfile sonarWay) {
+    super(REPOSITORY_KEY, LANGUAGE_KEY, sonarRuntime, RESOURCES_DIRECTORY, METADATA_SUFFIX, sonarWay.activeRules());
   }
 }

@@ -28,6 +28,7 @@ import java.io.InputStreamReader;
 import java.lang.reflect.Type;
 import java.nio.charset.StandardCharsets;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 import org.sonar.api.SonarRuntime;
 import org.sonar.api.scanner.ScannerSide;
@@ -44,13 +45,16 @@ public abstract class AbstractRulesDefinition implements RulesDefinition {
   private final String resourcesDirectory;
   private final String metadataSuffix;
   private final boolean isOwaspByVersionSupported;
+  private final Set<String> sonarWayRules;
 
-  protected AbstractRulesDefinition(String repositoryKey, String languageKey, SonarRuntime sonarRuntime, String resourcesDirectory, String metadataSuffix) {
+  protected AbstractRulesDefinition(String repositoryKey, String languageKey, SonarRuntime sonarRuntime, String resourcesDirectory, String metadataSuffix,
+    Set<String> sonarWayRules) {
     this.repositoryKey = repositoryKey;
     this.languageKey = languageKey;
     this.resourcesDirectory = resourcesDirectory;
     this.metadataSuffix = metadataSuffix;
     this.isOwaspByVersionSupported = sonarRuntime.getApiVersion().isGreaterThanOrEqual(Version.create(9, 3));
+    this.sonarWayRules = sonarWayRules;
   }
 
   @Override
@@ -61,12 +65,10 @@ public abstract class AbstractRulesDefinition implements RulesDefinition {
     Type ruleListType = new TypeToken<List<Rule>>() {
     }.getType();
     List<Rule> rules = GSON.fromJson(readResource("Rules.json"), ruleListType);
-    // FIXME: Load SonarWay
     for (Rule rule : rules) {
       String description = readResource(rule.id + metadataSuffix + ".html");
-      addRule(repository, rule, loadMetadata(rule.id), description, false); // FIXME: SonarWay flag
+      addRule(repository, rule, loadMetadata(rule.id), description, sonarWayRules.contains(rule.id));
     }
-    // JavaSonarWayProfile.Profile profile = JavaSonarWayProfile.readProfile();
     repository.done();
 
     // RulesDefinitionXmlLoader loader = new RulesDefinitionXmlLoader();
