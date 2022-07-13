@@ -30,12 +30,13 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class CookieShouldBeSecureTest
     {
+        private readonly VerifierBuilder builder = new VerifierBuilder().AddAnalyzer(() => new CookieShouldBeSecure(AnalyzerConfiguration.AlwaysEnabled));
+
         [TestMethod]
         public void CookiesShouldBeSecure_Nancy() =>
-            OldVerifier.VerifyAnalyzer(
-                @"TestCases\Hotspots\CookieShouldBeSecure_Nancy.cs",
-                new CookieShouldBeSecure(AnalyzerConfiguration.AlwaysEnabled),
-                AdditionalReferences);
+            builder.AddPaths(@"Hotspots\CookieShouldBeSecure_Nancy.cs")
+                .AddReferences(AdditionalReferences)
+                .Verify();
 
 #if NETFRAMEWORK // HttpCookie is not available on .Net Core
 
@@ -43,10 +44,9 @@ namespace SonarAnalyzer.UnitTest.Rules
 
         [TestMethod]
         public void CookiesShouldBeSecure() =>
-            OldVerifier.VerifyAnalyzer(
-                @"TestCases\Hotspots\CookieShouldBeSecure.cs",
-                new CookieShouldBeSecure(AnalyzerConfiguration.AlwaysEnabled),
-                MetadataReferenceFacade.SystemWeb);
+             builder.AddPaths(@"Hotspots\CookieShouldBeSecure.cs")
+                .AddReferences(MetadataReferenceFacade.SystemWeb)
+                .Verify();
 
         [DataTestMethod]
         [DataRow(@"TestCases\WebConfig\CookieShouldBeSecure\SecureCookieConfig")]
@@ -54,11 +54,11 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void CookiesShouldBeSecure_WithWebConfigValueSetToTrue(string root)
         {
             var webConfigPath = Path.Combine(root, WebConfig);
-            OldVerifier.VerifyAnalyzer(
-                @"TestCases\Hotspots\CookieShouldBeSecure_WithWebConfig.cs",
-                new CookieShouldBeSecure(AnalyzerConfiguration.AlwaysEnabled),
-                MetadataReferenceFacade.SystemWeb,
-                TestHelper.CreateSonarProjectConfig(root, TestHelper.CreateFilesToAnalyze(root, webConfigPath)));
+
+            builder.AddPaths(@"Hotspots\CookieShouldBeSecure_WithWebConfig.cs")
+                .AddReferences(MetadataReferenceFacade.SystemWeb)
+                .WithSonarProjectConfigPath(TestHelper.CreateSonarProjectConfig(root, TestHelper.CreateFilesToAnalyze(root, webConfigPath)))
+                .Verify();
         }
 
         [DataTestMethod]
@@ -68,35 +68,34 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void CookiesShouldBeSecure_WithWebConfigValueSetToFalse(string root)
         {
             var webConfigPath = Path.Combine(root, WebConfig);
-            OldVerifier.VerifyAnalyzer(
-                @"TestCases\Hotspots\CookieShouldBeSecure.cs",
-                new CookieShouldBeSecure(AnalyzerConfiguration.AlwaysEnabled),
-                MetadataReferenceFacade.SystemWeb,
-                TestHelper.CreateSonarProjectConfig(root, TestHelper.CreateFilesToAnalyze(root, webConfigPath)));
+            builder.AddPaths(@"Hotspots\CookieShouldBeSecure.cs")
+                .AddReferences(MetadataReferenceFacade.SystemWeb)
+                .WithSonarProjectConfigPath(TestHelper.CreateSonarProjectConfig(root, TestHelper.CreateFilesToAnalyze(root, webConfigPath)))
+                .Verify();
         }
 
 #else
 
         [TestMethod]
         public void CookiesShouldBeSecure_NetCore() =>
-            OldVerifier.VerifyAnalyzer(
-                @"TestCases\Hotspots\CookieShouldBeSecure_NetCore.cs",
-                new CookieShouldBeSecure(AnalyzerConfiguration.AlwaysEnabled),
-                GetAdditionalReferences_NetCore());
+             builder.AddPaths(@"Hotspots\CookieShouldBeSecure_NetCore.cs")
+                .AddReferences(GetAdditionalReferences_NetCore())
+                .Verify();
 
         [TestMethod]
         public void CookiesShouldBeSecure_CSharp9() =>
-            OldVerifier.VerifyAnalyzerFromCSharp9Console(
-                @"TestCases\Hotspots\CookieShouldBeSecure.CSharp9.cs",
-                new CookieShouldBeSecure(AnalyzerConfiguration.AlwaysEnabled),
-                GetAdditionalReferences_NetCore().Concat(NuGetMetadataReference.Nancy()));
+            builder.AddPaths(@"Hotspots\CookieShouldBeSecure.CSharp9.cs")
+                .WithTopLevelStatements()
+                .AddReferences(GetAdditionalReferences_NetCore().Concat(NuGetMetadataReference.Nancy()))
+                .Verify();
 
         [TestMethod]
         public void CookiesShouldBeSecure_CSharp10() =>
-            OldVerifier.VerifyAnalyzerFromCSharp10Console(
-                @"TestCases\Hotspots\CookieShouldBeSecure.CSharp10.cs",
-                new CookieShouldBeSecure(AnalyzerConfiguration.AlwaysEnabled),
-                GetAdditionalReferences_NetCore().Concat(NuGetMetadataReference.Nancy()));
+            builder.AddPaths(@"Hotspots\CookieShouldBeSecure.CSharp10.cs")
+                .WithOptions(ParseOptionsHelper.FromCSharp10)
+                .WithTopLevelStatements()
+                .AddReferences(GetAdditionalReferences_NetCore().Concat(NuGetMetadataReference.Nancy()))
+                .Verify();
 
         private static IEnumerable<MetadataReference> GetAdditionalReferences_NetCore() =>
             NuGetMetadataReference.MicrosoftAspNetCoreHttpFeatures(Constants.NuGetLatestVersion);

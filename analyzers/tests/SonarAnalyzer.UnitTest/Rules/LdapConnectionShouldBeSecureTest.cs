@@ -25,26 +25,31 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class LdapConnectionShouldBeSecureTest
     {
+        private readonly VerifierBuilder builder = new VerifierBuilder<LdapConnectionShouldBeSecure>();
+
         [TestMethod]
         public void LdapConnectionsShouldBeSecure() =>
-            OldVerifier.VerifyAnalyzer(@"TestCases\LdapConnectionShouldBeSecure.cs",
-                                    new LdapConnectionShouldBeSecure(),
-                                    ParseOptionsHelper.FromCSharp8,
-                                    MetadataReferenceFacade.SystemDirectoryServices.Concat(MetadataReferenceFacade.NETStandard21));
+            builder.AddPaths("LdapConnectionShouldBeSecure.cs")
+                .WithOptions(ParseOptionsHelper.FromCSharp8)
+                .AddReferences(MetadataReferenceFacade.SystemDirectoryServices.Concat(MetadataReferenceFacade.NETStandard21))
+                .Verify();
 
 #if NET
 
         [TestMethod]
         public void LdapConnectionsShouldBeSecure_FromCSharp9() =>
-            OldVerifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\LdapConnectionShouldBeSecure.CSharp9.cs",
-                                                      new LdapConnectionShouldBeSecure(),
-                                                      MetadataReferenceFacade.SystemDirectoryServices);
+            builder.AddPaths("LdapConnectionShouldBeSecure.CSharp9.cs")
+                .WithTopLevelStatements()
+                .AddReferences(MetadataReferenceFacade.SystemDirectoryServices)
+                .Verify();
 
         [TestMethod]
         public void LdapConnectionsShouldBeSecure_FromCSharp10() =>
-            OldVerifier.VerifyAnalyzerFromCSharp10Console(@"TestCases\LdapConnectionShouldBeSecure.CSharp10.cs",
-                                              new LdapConnectionShouldBeSecure(),
-                                              MetadataReferenceFacade.SystemDirectoryServices);
+            builder.AddPaths("LdapConnectionShouldBeSecure.CSharp9.cs")
+                .WithTopLevelStatements()
+                .WithOptions(ParseOptionsHelper.FromCSharp10)
+                .AddReferences(MetadataReferenceFacade.SystemDirectoryServices)
+                .Verify();
 #endif
     }
 }
