@@ -28,10 +28,15 @@ import java.io.InputStreamReader;
 import java.lang.reflect.Type;
 import java.nio.charset.StandardCharsets;
 import java.util.List;
+import java.util.Locale;
 import java.util.Set;
 import java.util.stream.Collectors;
 import org.sonar.api.SonarRuntime;
+import org.sonar.api.rule.RuleStatus;
+import org.sonar.api.rules.RuleType;
 import org.sonar.api.scanner.ScannerSide;
+import org.sonar.api.server.debt.DebtRemediationFunction;
+import org.sonar.api.server.rule.RuleParamType;
 import org.sonar.api.server.rule.RulesDefinition;
 import org.sonar.api.utils.Version;
 
@@ -66,30 +71,35 @@ public abstract class AbstractRulesDefinition implements RulesDefinition {
     }.getType();
     List<Rule> rules = GSON.fromJson(readResource("Rules.json"), ruleListType);
     for (Rule rule : rules) {
-      String description = readResource(rule.id + metadataSuffix + ".html");
-      addRule(repository, rule, loadMetadata(rule.id), description, sonarWayRules.contains(rule.id));
+      NewRule newRule = repository.createRule(rule.id);
+      configureRule(newRule, loadMetadata(rule.id), rule.parameters, sonarWayRules.contains(rule.id));
+      newRule.setHtmlDescription(readResource(rule.id + metadataSuffix + ".html"));
     }
     repository.done();
 
-    // RulesDefinitionXmlLoader loader = new RulesDefinitionXmlLoader();
-    // loader.load(repository, new InputStreamReader(getClass().getResourceAsStream(rulesXmlFilePath), StandardCharsets.UTF_8));
-    //
     // setupHotspotRules(repository.rules());
   }
 
-  private void addRule(NewRepository repository, Rule rule, RuleMetadata metadata, String description, boolean isSonarWay) {// }, JavaSonarWayProfile.Profile profile) {
-    // org.sonar.check.Rule ruleAnnotation = AnnotationUtils.getAnnotation(ruleClass, org.sonar.check.Rule.class);
-    // if (ruleAnnotation == null) {
-    // throw new IllegalArgumentException("No Rule annotation was found on " + ruleClass);
-    // }
-    // String ruleKey = ruleAnnotation.key();
-    // if (StringUtils.isEmpty(ruleKey)) {
-    // throw new IllegalArgumentException("No key is defined in Rule annotation of " + ruleClass);
-    // }
-    // NewRule rule = repository.rule(ruleKey);
-    // if (rule == null) {
-    // throw new IllegalStateException("No rule was created for " + ruleClass + " in " + repository.key());
-    // }
+  private void configureRule(NewRule rule, RuleMetadata metadata, RuleParameter[] parameters, boolean isSonarWay) {// },
+    rule
+      .setName(metadata.title)
+      .setType(RuleType.valueOf(metadata.type))
+      .setStatus(RuleStatus.valueOf(metadata.status.toUpperCase(Locale.ROOT)))
+      .setSeverity(metadata.defaultSeverity.toUpperCase(Locale.ROOT))
+      .setTags(metadata.tags);
+    if (metadata.remediation != null) {
+      rule.setDebtRemediationFunction(metadata.remediation.remediationFunction(rule));
+      rule.setGapDescription(metadata.remediation.linearDesc);
+    }
+    for (RuleParameter param : parameters) {
+      rule.createParam(param.key)
+        .setType(RuleParamType.parse(param.type))
+        .setDefaultValue(param.description)
+        .setDefaultValue(param.defaultValue);
+    }
+
+    // addSecurityStandards(rule, metadata.securityStandards);
+
     // DeprecatedRuleKey deprecatedRuleKeyAnnotation = AnnotationUtils.getAnnotation(ruleClass, DeprecatedRuleKey.class);
     // if (deprecatedRuleKeyAnnotation != null) {
     // rule.addDeprecatedRuleKey(deprecatedRuleKeyAnnotation.repositoryKey(), deprecatedRuleKeyAnnotation.ruleKey());
@@ -97,13 +107,7 @@ public abstract class AbstractRulesDefinition implements RulesDefinition {
     // // Keep link with legacy "squid" repository key
     // rule.addDeprecatedRuleKey("squid", ruleKey);
     // }
-    // String rspecKey = rspecKey(ruleClass, rule);
-    // RuleMetadata ruleMetadata = readRuleMetadata(rspecKey);
     // addMetadata(rule, ruleMetadata);
-    // String ruleHtmlDescription = readRuleHtmlDescription(rspecKey);
-    // if (ruleHtmlDescription != null) {
-    // rule.setHtmlDescription(ruleHtmlDescription);
-    // }
     // // 'setActivatedByDefault' is used by SonarLint standalone, to define which rules will be active
     // boolean activatedInProfile = profile.ruleKeys.contains(ruleKey) || profile.ruleKeys.contains(rspecKey);
     // boolean isSecurityHotspot = ruleMetadata != null && ruleMetadata.isSecurityHotspot();
@@ -111,10 +115,6 @@ public abstract class AbstractRulesDefinition implements RulesDefinition {
     // rule.setTemplate(TEMPLATE_RULE_KEY.contains(ruleKey));
   }
 
-  private RuleMetadata loadMetadata(String id) {
-    return GSON.fromJson(readResource(id + metadataSuffix + ".json"), RuleMetadata.class);
-  }
-  //
   // private void setupHotspotRules(Collection<NewRule> rules) {
   // Map<NewRule, RuleMetadata> allRuleMetadata = rules.stream()
   // .collect(Collectors.toMap(rule -> rule, rule -> readRuleMetadata(rule.key())));
@@ -145,62 +145,7 @@ public abstract class AbstractRulesDefinition implements RulesDefinition {
   // rule.addCwe(ruleMetadata.securityStandards.cwe);
   // }
   //
-  // private RuleMetadata readRuleMetadata(String id) {
-  // String resourcePath = metadataPath(id);
-  // try (InputStream stream = getResourceAsStream(resourcePath)) {
-  // return stream != null
-  // ? GSON.fromJson(new InputStreamReader(stream, StandardCharsets.UTF_8), RuleMetadata.class)
-  // : new RuleMetadata();
-  // } catch (IOException e) {
-  // throw new IllegalStateException("Failed to read: " + resourcePath, e);
-  // }
-  // }
-
-  // private String metadataPath(String id) {
-  // return resourcesDirectory + id + metadataSuffix;
-  // }
-
   //
-  // private static String rspecKey(Class<?> ruleClass, NewRule rule) {
-  // org.sonar.java.RspecKey rspecKeyAnnotation = AnnotationUtils.getAnnotation(ruleClass, org.sonar.java.RspecKey.class);
-  // if (rspecKeyAnnotation != null) {
-  // String rspecKey = rspecKeyAnnotation.value();
-  // rule.setInternalKey(rspecKey);
-  // return rspecKey;
-  // }
-  // return rule.key();
-  // }
-  //
-  // @Nullable
-  // static RuleMetadata readRuleMetadata(String metadataKey) {
-  // URL resource = JavaRulesDefinition.class.getResource(RESOURCE_BASE_PATH + "/" + metadataKey + "_java.json");
-  // return resource != null ? GSON.fromJson(readResource(resource), RuleMetadata.class) : null;
-  // }
-  //
-  // private static String readRuleHtmlDescription(String metadataKey) {
-  // URL resource = JavaRulesDefinition.class.getResource(RESOURCE_BASE_PATH + "/" + metadataKey + "_java.html");
-  // if (resource != null) {
-  // return readResource(resource);
-  // }
-  // return null;
-  // }
-  //
-  // private void addMetadata(NewRule rule, @Nullable RuleMetadata metadata) {
-  // if (metadata == null) {
-  // return;
-  // }
-  // rule.setSeverity(metadata.defaultSeverity.toUpperCase(Locale.US));
-  // rule.setName(metadata.title);
-  // rule.addTags(metadata.tags);
-  // rule.setType(RuleType.valueOf(metadata.type));
-  //
-  // rule.setStatus(RuleStatus.valueOf(metadata.status.toUpperCase(Locale.US)));
-  // if (metadata.remediation != null) {
-  // rule.setDebtRemediationFunction(metadata.remediation.remediationFunction(rule.debtRemediationFunctions()));
-  // rule.setGapDescription(metadata.remediation.linearDesc);
-  // }
-  // addSecurityStandards(rule, metadata.securityStandards);
-  // }
   //
   // private void addSecurityStandards(NewRule rule, SecurityStandards securityStandards) {
   // for (String s : securityStandards.OWASP_2017) {
@@ -214,6 +159,11 @@ public abstract class AbstractRulesDefinition implements RulesDefinition {
   // rule.addCwe(securityStandards.CWE);
   // }
   //
+
+  private RuleMetadata loadMetadata(String id) {
+    return GSON.fromJson(readResource(id + metadataSuffix + ".json"), RuleMetadata.class);
+  }
+
   private String readResource(String name) {
     InputStream stream = getResourceAsStream(resourcesDirectory + name);
     if (stream == null) {
@@ -247,12 +197,11 @@ public abstract class AbstractRulesDefinition implements RulesDefinition {
     // private static final String SECURITY_HOTSPOT = "SECURITY_HOTSPOT";
 
     String title;
-    // String status;
-    // Remediation remediation;
-    //
-    // String type;
-    // String[] tags;
-    // String defaultSeverity;
+    String status;
+    String type;
+    String[] tags;
+    String defaultSeverity;
+    Remediation remediation;
     // SecurityStandards securityStandards = new SecurityStandards();
     //
     // boolean isSecurityHotspot() {
@@ -271,23 +220,23 @@ public abstract class AbstractRulesDefinition implements RulesDefinition {
   // String[] OWASP_2017 = {};
   // }
   //
-  // private static class Remediation {
-  // String func;
-  // String constantCost;
-  // String linearDesc;
-  // String linearOffset;
-  // String linearFactor;
-  //
-  // public DebtRemediationFunction remediationFunction(DebtRemediationFunctions drf) {
-  // if (func.startsWith("Constant")) {
-  // return drf.constantPerIssue(constantCost.replace("mn", "min"));
-  // }
-  // if ("Linear".equals(func)) {
-  // return drf.linear(linearFactor.replace("mn", "min"));
-  // }
-  // return drf.linearWithOffset(linearFactor.replace("mn", "min"), linearOffset.replace("mn", "min"));
-  // }
-  // }
+  private static class Remediation {
+    String func;
+    String constantCost;
+    String linearDesc;
+    String linearOffset;
+    String linearFactor;
+
+    public DebtRemediationFunction remediationFunction(NewRule rule) {
+      if (func.startsWith("Constant")) {
+        return rule.debtRemediationFunctions().constantPerIssue(constantCost);
+      } else if ("Linear".equals(func)) {
+        return rule.debtRemediationFunctions().linear(linearFactor);
+      } else {
+        return rule.debtRemediationFunctions().linearWithOffset(linearFactor, linearOffset);
+      }
+    }
+  }
 
   // private static class RuleMetadata {
   // private static final String SECURITY_HOTSPOT = "SECURITY_HOTSPOT";
