@@ -24,6 +24,7 @@ import org.sonar.api.SonarEdition;
 import org.sonar.api.SonarQubeSide;
 import org.sonar.api.SonarRuntime;
 import org.sonar.api.internal.SonarRuntimeImpl;
+import org.sonar.api.rule.RuleStatus;
 import org.sonar.api.rules.RuleType;
 import org.sonar.api.server.debt.DebtRemediationFunction;
 import org.sonar.api.server.rule.RulesDefinition;
@@ -49,9 +50,15 @@ public class VbNetSonarRulesDefinitionTest {
     assertThat(context.repository("vbnet").rules()).isNotEmpty();
 
     Rule s1197 = context.repository("vbnet").rule("S1197");
+
+    assertThat(s1197.name()).isEqualTo("Array designators \"()\" should be on the type, not the variable");
+    assertThat(s1197.type()).isEqualTo(RuleType.CODE_SMELL);
+    assertThat(s1197.status()).isEqualTo(RuleStatus.READY);
+    assertThat(s1197.severity()).isEqualTo("MINOR");
     assertThat(s1197.debtRemediationFunction().type()).isEqualTo(DebtRemediationFunction.Type.CONSTANT_ISSUE);
     assertThat(s1197.debtRemediationFunction().baseEffort()).isEqualTo("5min");
-    assertThat(s1197.type()).isEqualTo(RuleType.CODE_SMELL);
+    assertThat(s1197.params()).isEmpty();
+    assertThat(s1197.tags()).hasSize(1).containsExactly("convention");
   }
 
   @Test

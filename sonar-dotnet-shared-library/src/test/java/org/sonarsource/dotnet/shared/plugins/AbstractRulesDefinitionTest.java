@@ -63,6 +63,18 @@ public class AbstractRulesDefinitionTest {
     assertThat(rule.securityStandards()).containsExactlyInAnyOrder("cwe:117", "cwe:532", "owaspTop10:a10", "owaspTop10:a3");
   }
 
+  @Test
+  public void test_remediation_is_set_linear() {
+    SonarRuntime sonarRuntime = SonarRuntimeImpl.forSonarQube(Version.create(9, 3), SonarQubeSide.SCANNER, SonarEdition.COMMUNITY);
+    AbstractRulesDefinition sut = new TestRulesDefinition(sonarRuntime);
+    RulesDefinition.Context context = new RulesDefinition.Context();
+    sut.define(context);
+
+    RulesDefinition.Repository repository = context.repository("test");
+    // Other remediation functions are asserted in CSharpSonarRulesDefinitionTest.test_remediation_is_set
+    assertThat(repository.rule("S1111").debtRemediationFunction().toString()).isEqualTo("DebtRemediationFunction{type=LINEAR, gap multiplier=10min, base effort=null}");
+  }
+
   private static class TestRulesDefinition extends AbstractRulesDefinition {
     TestRulesDefinition(SonarRuntime runtime) {
       super("test", "test", runtime, "/AbstractRulesDefinitionTest/", "");
