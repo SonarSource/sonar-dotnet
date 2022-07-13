@@ -97,7 +97,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 symbolsWhereLocaleIsSet.UnionWith(variableSymbols);
             };
 
-        private static Action<CompilationAnalysisContext> ProcessCollectedSymbols(IDictionary<ISymbol, SyntaxNode> symbolsWhereTypeIsCreated, ICollection<ISymbol> symbolsWhereLocaleIsSet) =>
+        private static Action<CompilationAnalysisContext> ProcessCollectedSymbols(IDictionary<ISymbol, SyntaxNode> symbolsWhereTypeIsCreated, ISet<ISymbol> symbolsWhereLocaleIsSet) =>
             c =>
             {
                 foreach (var invalidCreation in symbolsWhereTypeIsCreated.Where(x => !symbolsWhereLocaleIsSet.Contains(x.Key)))
@@ -118,50 +118,48 @@ namespace SonarAnalyzer.Rules.CSharp
             objectCreation.GetFirstNonParenthesizedParent() switch
             {
                 AssignmentExpressionSyntax assignment => assignment.Left,
-                EqualsValueClauseSyntax equalsClause => ((VariableDeclarationSyntax)equalsClause.Parent.Parent).Variables.Last(),
+                EqualsValueClauseSyntax { Parent: VariableDeclaratorSyntax { Parent: VariableDeclarationSyntax { Variables: { Count: > 0 } variables } } } => variables.Last(),
                 ArgumentSyntax argument => argument.FindAssignmentComplement(),
-                _ => null
+                _ => null,
             };
 
         private static ISymbol GetAccessedVariable(SyntaxNode node, SemanticModel model) =>
-            node switch
+            node.RemoveParentheses() switch
             {
-                IdentifierNameSyntax identifier => IdentifierNameSymbol(identifier, model),
+                IdentifierNameSyntax
+                {
+                    Parent: AssignmentExpressionSyntax
+                    {
+                        Parent: InitializerExpressionSyntax
+                        {
+                            Parent: { RawKind: (int)SyntaxKind.ObjectCreationExpression or (int)SyntaxKindEx.ImplicitObjectCreationExpression } objectCreation
+                        }
+                    }
+                } => GetAssignmentTargetSymbol(objectCreation, model), // Locale is assigned in an object initializer. Find the target of the object creation.
                 MemberAccessExpressionSyntax memberAccessExpression => model.GetSymbolInfo(memberAccessExpression.Expression).Symbol,
-                _ => null
+                _ => null,
             };
 
-        private static ISymbol IdentifierNameSymbol(IdentifierNameSyntax node, SemanticModel model)
+        private static ISymbol GetAssignmentTargetSymbol(SyntaxNode objectCreation, SemanticModel model)
         {
-            var objectCreation = node.FirstAncestorOrSelf((SyntaxNode x) => x.IsAnyKind(SyntaxKind.ObjectCreationExpression, SyntaxKindEx.ImplicitObjectCreationExpression));
+            var leftSideOfParentAssignment = objectCreation.GetFirstNonParenthesizedParent() switch
+            {
+                // var dt = new DataTable { Locale = l }
+                EqualsValueClauseSyntax { Parent: VariableDeclaratorSyntax { Parent: VariableDeclarationSyntax { Variables: { Count: > 0 } variables } } } => variables.Last(),
+                // dt = new DataTable { Locale = l }
+                AssignmentExpressionSyntax assignment => assignment.Left,
+                // var (dt, _) = (new DataTable { Locale = l }, 42)
+                ArgumentSyntax argumentSyntax => argumentSyntax.FindAssignmentComplement(),
+                _ => null,
+            };
 
-            SyntaxNode leftSideOfParentAssignment = null;
-            if (objectCreation?.GetFirstNonParenthesizedParent() is ArgumentSyntax argumentSyntax)
+            return leftSideOfParentAssignment switch
             {
-                leftSideOfParentAssignment = argumentSyntax.FindAssignmentComplement();
-                if (DeclarationExpressionSyntaxWrapper.IsInstance(leftSideOfParentAssignment))
-                {
-                    leftSideOfParentAssignment = ((DeclarationExpressionSyntaxWrapper)leftSideOfParentAssignment).Designation;
-                }
-            }
-            else
-            {
-                leftSideOfParentAssignment = objectCreation.FirstAncestorOrSelf<AssignmentExpressionSyntax>()?.Left;
-            }
-
-            if (leftSideOfParentAssignment != null)
-            {
-                return leftSideOfParentAssignment is IdentifierNameSyntax
-                    ? model.GetSymbolInfo(leftSideOfParentAssignment).Symbol
-                    : model.GetDeclaredSymbol(leftSideOfParentAssignment);
-            }
-            else
-            {
-                var lastVariable = node.FirstAncestorOrSelf<VariableDeclarationSyntax>()?.Variables.LastOrDefault();
-                return lastVariable != null
-                    ? model.GetDeclaredSymbol(lastVariable)
-                    : null;
-            }
+                null => null,
+                IdentifierNameSyntax => model.GetSymbolInfo(leftSideOfParentAssignment).Symbol,
+                _ when DeclarationExpressionSyntaxWrapper.IsInstance(leftSideOfParentAssignment) => model.GetSymbolInfo(leftSideOfParentAssignment).Symbol,
+                _ => model.GetDeclaredSymbol(leftSideOfParentAssignment),
+            };
         }
     }
 }

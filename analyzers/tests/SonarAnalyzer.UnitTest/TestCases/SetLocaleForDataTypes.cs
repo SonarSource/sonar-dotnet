@@ -2,7 +2,6 @@
 using System.Data;
 using System.Globalization;
 
-
 namespace Tests.Diagnostics
 {
     class Program
