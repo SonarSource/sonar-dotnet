@@ -9,10 +9,11 @@ namespace Tests.Diagnostics
         public int myField;
         public IDisposable myDisposableField;
         public int myField2;
+        public object myField3;
         public int @int;
         public int MyField { get; set; }
 
-        public void doSomething()
+        public void doSomething(object someParameter)
         {
             int myField = 0, // Noncompliant
 //              ^^^^^^^
@@ -41,6 +42,16 @@ namespace Tests.Diagnostics
             }
             foreach (var local in new[] { 1, 2 }) // Compliant
             {
+            }
+
+            if (someParameter is object myField3) // Noncompliant
+            {
+
+            }
+
+            if (someParameter is object myFieldNonExistent) // Compliant
+            {
+
             }
         }
 

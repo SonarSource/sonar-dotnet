@@ -18,7 +18,6 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Linq;
@@ -26,7 +25,9 @@ using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
+using SonarAnalyzer.Extensions;
 using SonarAnalyzer.Helpers;
+using StyleCop.Analyzers.Lightup;
 
 namespace SonarAnalyzer.Rules.CSharp
 {
@@ -42,8 +43,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
         protected override void Initialize(SonarAnalysisContext context)
         {
-            context.RegisterSyntaxNodeActionInNonGenerated(
-                c =>
+            context.RegisterSyntaxNodeActionInNonGenerated(c =>
                 {
                     var declaration = (ForEachStatementSyntax)c.Node;
 
@@ -55,70 +55,56 @@ namespace SonarAnalyzer.Rules.CSharp
 
                     var members = GetMembers(variableSymbol.ContainingType);
 
-                    ReportOnVariableMatchingField(members, declaration.Identifier, c);
+                    ReportOnVariableMatchingField(c, members, declaration.Identifier);
                 },
                 SyntaxKind.ForEachStatement);
 
-            context.RegisterSyntaxNodeActionInNonGenerated(
-                c => ProcessStatementWithVariableDeclaration((LocalDeclarationStatementSyntax)c.Node, s => s.Declaration, c), SyntaxKind.LocalDeclarationStatement);
+            context.RegisterSyntaxNodeActionInNonGenerated(c => ProcessVariableDeclaration(c, ((LocalDeclarationStatementSyntax)c.Node).Declaration), SyntaxKind.LocalDeclarationStatement);
+            context.RegisterSyntaxNodeActionInNonGenerated(c => ProcessVariableDeclaration(c, ((ForStatementSyntax)c.Node).Declaration), SyntaxKind.ForStatement);
+            context.RegisterSyntaxNodeActionInNonGenerated(c => ProcessVariableDeclaration(c, ((UsingStatementSyntax)c.Node).Declaration), SyntaxKind.UsingStatement);
+            context.RegisterSyntaxNodeActionInNonGenerated(c => ProcessVariableDeclaration(c, ((FixedStatementSyntax)c.Node).Declaration), SyntaxKind.FixedStatement);
 
-            context.RegisterSyntaxNodeActionInNonGenerated(
-                c => ProcessStatementWithVariableDeclaration((ForStatementSyntax)c.Node, s => s.Declaration, c), SyntaxKind.ForStatement);
-
-            context.RegisterSyntaxNodeActionInNonGenerated(
-                c => ProcessStatementWithVariableDeclaration((UsingStatementSyntax)c.Node, s => s.Declaration, c), SyntaxKind.UsingStatement);
-
-            context.RegisterSyntaxNodeActionInNonGenerated(
-                c => ProcessStatementWithVariableDeclaration((FixedStatementSyntax)c.Node, s => s.Declaration, c), SyntaxKind.FixedStatement);
+            context.RegisterSyntaxNodeActionInNonGenerated(c => ProcessVariableDesignation(c, ((DeclarationPatternSyntaxWrapper)c.Node).Designation), SyntaxKindEx.DeclarationPattern);
+            context.RegisterSyntaxNodeActionInNonGenerated(c => ProcessVariableDesignation(c, ((DeclarationExpressionSyntaxWrapper)c.Node).Designation), SyntaxKindEx.DeclarationExpression);
         }
 
-        private static void ProcessStatementWithVariableDeclaration<T>(T declaration, Func<T, VariableDeclarationSyntax> variableSelector, SyntaxNodeAnalysisContext context)
+        private static void ProcessVariableDesignation(SyntaxNodeAnalysisContext context, VariableDesignationSyntaxWrapper variableDesignation)
         {
-            var variableDeclaration = variableSelector(declaration);
-            if (variableDeclaration == null)
+            if (variableDesignation.AllVariables() is { Length: > 0 } variables
+                && context.ContainingSymbol.ContainingType is { } containingType
+                && GetMembers(containingType) is var members)
             {
-                return;
-            }
-
-            var variables = variableDeclaration.Variables;
-
-            List<ISymbol> members = null;
-            foreach (var variable in variables)
-            {
-                var variableSymbol = context.SemanticModel.GetDeclaredSymbol(variable);
-                if (variableSymbol == null)
+                foreach (var variable in variables)
                 {
-                    return;
+                    ReportOnVariableMatchingField(context, members, variable.Identifier);
                 }
-
-                if (members == null)
-                {
-                    members = GetMembers(variableSymbol.ContainingType);
-                }
-
-                ReportOnVariableMatchingField(members, variable.Identifier, context);
             }
         }
 
-        private static void ReportOnVariableMatchingField(IEnumerable<ISymbol> members, SyntaxToken identifier, SyntaxNodeAnalysisContext context)
+        private static void ProcessVariableDeclaration(SyntaxNodeAnalysisContext context, VariableDeclarationSyntax variableDeclaration)
         {
-            var matchingMember = members.FirstOrDefault(m => m.Name == identifier.ValueText);
-            if (matchingMember == null)
+            if (variableDeclaration is { Variables: { Count: > 0 } variables }
+                && context.ContainingSymbol.ContainingType is { } containingType
+                && GetMembers(containingType) is var members)
             {
-                return;
+                foreach (var variable in variables)
+                {
+                    ReportOnVariableMatchingField(context, members, variable.Identifier);
+                }
             }
+        }
 
-            context.ReportIssue(
-                Diagnostic.Create(
-                    Rule,
-                    identifier.GetLocation(),
-                    identifier.Text,
-                    (matchingMember is IFieldSymbol) ? "field" : "property"));
+        private static void ReportOnVariableMatchingField(SyntaxNodeAnalysisContext context, IEnumerable<ISymbol> members, SyntaxToken identifier)
+        {
+            if (members.FirstOrDefault(m => m.Name == identifier.ValueText) is { } matchingMember)
+            {
+                context.ReportIssue(Diagnostic.Create(Rule, identifier.GetLocation(), identifier.Text, matchingMember is IFieldSymbol ? "field" : "property"));
+            }
         }
 
         private static List<ISymbol> GetMembers(INamespaceOrTypeSymbol classSymbol) =>
             classSymbol.GetMembers()
-                       .Where(member => member is IFieldSymbol || member is IPropertySymbol)
+                       .Where(member => member is IFieldSymbol or IPropertySymbol)
                        .ToList();
     }
 }
