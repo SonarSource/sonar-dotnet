@@ -98,16 +98,13 @@ namespace SonarAnalyzer.Rules.CSharp
         {
             var declaredVariables = node.Declaration == null
                 ? Enumerable.Empty<ISymbol>()
-                : node.Declaration.Variables
-                    .Select(v => semanticModel.GetDeclaredSymbol(v))
-                    .WhereNotNull();
+                : node.Declaration.Variables.Select(v => semanticModel.GetDeclaredSymbol(v));
 
             var initializedVariables = node.Initializers.OfType<AssignmentExpressionSyntax>()
                 .SelectMany(x => x.AssignmentTargets())
-                .Select(x => semanticModel.GetSymbolInfo(x).Symbol ?? semanticModel.GetDeclaredSymbol(x))
-                .WhereNotNull();
+                .Select(x => semanticModel.GetSymbolInfo(x).Symbol ?? semanticModel.GetDeclaredSymbol(x));
 
-            return declaredVariables.Union(initializedVariables);
+            return declaredVariables.Union(initializedVariables).WhereNotNull();
         }
 
         private static SyntaxNode[] ComputeAffectedExpressions(SyntaxNode node) =>
