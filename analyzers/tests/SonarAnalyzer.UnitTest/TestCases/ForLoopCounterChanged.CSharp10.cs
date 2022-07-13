@@ -48,7 +48,7 @@
         for ((int i, int j, var _, _) = (0, 0, 0, 0); i < 10; ++i, ++j)
         {
             i = 0;  // Noncompliant
-            _ = 0;  // Compliant. This discard does not refer to the other one.
+            _ = 0;  // Compliant. This discard does not refer to the other ones.
         }
 
         int k, l, m;
