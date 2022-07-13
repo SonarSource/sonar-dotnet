@@ -100,6 +100,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [DataRow(@"TestCases\AppSettings\DatabasePasswordsShouldBeSecure\UnexpectedContent\EmptyArray")]
         [DataRow(@"TestCases\AppSettings\DatabasePasswordsShouldBeSecure\UnexpectedContent\EmptyFile")]
         [DataRow(@"TestCases\AppSettings\DatabasePasswordsShouldBeSecure\UnexpectedContent\WrongStructure")]
+        [DataRow(@"TestCases\AppSettings\DatabasePasswordsShouldBeSecure\UnexpectedContent\ConnectionStringComment")]
         public void DatabasePasswordsShouldBeSecure_CS_AppSettings(string root)
         {
             var appSettingsPath = GetAppSettingsPath(root);
