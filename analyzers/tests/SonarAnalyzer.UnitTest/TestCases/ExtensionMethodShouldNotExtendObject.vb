@@ -46,4 +46,20 @@ Module Noncompliant
     Public Sub MultipleConbinedAttributes(obj As Object) ' Noncompliant
     End Sub
 
+    <System.Runtime.CompilerServices.ExtensionAttribute>
+    Public Sub FullName(Arg As Object)          ' Noncompliant
+    End Sub
+
+    <Runtime.CompilerServices.ExtensionAttribute>
+    Public Sub ImplicitSystem(Arg As Object)    ' Noncompliant
+    End Sub
+
+    <System.Runtime.CompilerServices.Extension>
+    Public Sub ImplicitAttribute(Arg As Object) ' Noncompliant
+    End Sub
+
+    <Runtime.CompilerServices.Extension>
+    Public Sub ImplicitSystemAndAttribute(Arg As Object)    ' Noncompliant
+    End Sub
+
 End Module
