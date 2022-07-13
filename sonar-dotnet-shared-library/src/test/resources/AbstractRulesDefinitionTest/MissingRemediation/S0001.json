@@ -1,0 +1,9 @@
+{
+  "title": "Missing remediation",
+  "type": "CODE_SMELL",
+  "status": "ready",
+  "tags": [],
+  "defaultSeverity": "Critical",
+  "ruleSpecification": "RSPEC-1111",
+  "scope": "Main"
+}

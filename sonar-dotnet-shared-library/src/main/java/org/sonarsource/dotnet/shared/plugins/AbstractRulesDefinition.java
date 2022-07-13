@@ -75,23 +75,25 @@ public abstract class AbstractRulesDefinition implements RulesDefinition {
     repository.done();
   }
 
-  private void configureRule(NewRule rule, RuleMetadata metadata, RuleParameter[] parameters) {// },
+  private void configureRule(NewRule rule, RuleMetadata metadata, RuleParameter[] parameters) {
+    if (metadata.remediation == null) {
+      throw new IllegalStateException("Rspec is missing remediation: " + rule.key());
+    }
     rule
       .setName(metadata.title)
       .setType(RuleType.valueOf(metadata.type))
       .setStatus(RuleStatus.valueOf(metadata.status.toUpperCase(Locale.ROOT)))
       .setSeverity(metadata.defaultSeverity.toUpperCase(Locale.ROOT))
-      .setTags(metadata.tags);
-    if (metadata.remediation != null) {
-      rule.setDebtRemediationFunction(metadata.remediation.remediationFunction(rule));
-      rule.setGapDescription(metadata.remediation.linearDesc);
-    }
+      .setTags(metadata.tags)
+      .setDebtRemediationFunction(metadata.remediation.remediationFunction(rule))
+      .setGapDescription(metadata.remediation.linearDesc);
     for (RuleParameter param : parameters) {
       rule.createParam(param.key)
         .setType(RuleParamType.parse(param.type))
         .setDescription(param.description)
         .setDefaultValue(param.defaultValue);
     }
+
     addSecurityStandards(rule, metadata.securityStandards);
   }
 

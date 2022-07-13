@@ -9,5 +9,13 @@
         "defaultValue": "42"
       }
     ]
+  },
+  {
+    "id": "S1112",
+    "parameters": [ ]
+  },
+  {
+    "id": "S1113",
+    "parameters": [ ]
   }
 ]

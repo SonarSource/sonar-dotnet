@@ -168,8 +168,8 @@ public class CSharpSonarRulesDefinitionTest {
     RulesDefinition.Repository repository = context.repository("csharpsquid");
 
     // We don't have rule with Linear to assert. That path is tested in AbstractRulesDefinition.test_remediation_is_set_linear()
-    assertThat(repository.rule("S100").debtRemediationFunction().toString()).isEqualTo("DebtRemediationFunction{type=CONSTANT_ISSUE, gap multiplier=null, base effort=5min}");
-    assertThat(repository.rule("S110").debtRemediationFunction().toString()).isEqualTo("DebtRemediationFunction{type=LINEAR_OFFSET, gap multiplier=30min, base effort=4h}");
+    assertThat(repository.rule("S100").debtRemediationFunction()).hasToString("DebtRemediationFunction{type=CONSTANT_ISSUE, gap multiplier=null, base effort=5min}");
+    assertThat(repository.rule("S110").debtRemediationFunction()).hasToString("DebtRemediationFunction{type=LINEAR_OFFSET, gap multiplier=30min, base effort=4h}");
   }
 
   @Test

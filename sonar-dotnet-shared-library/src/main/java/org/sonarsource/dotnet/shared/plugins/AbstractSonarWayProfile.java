@@ -19,8 +19,6 @@
  */
 package org.sonarsource.dotnet.shared.plugins;
 
-import java.util.Set;
-import java.util.stream.Collectors;
 import org.sonar.api.server.profile.BuiltInQualityProfilesDefinition;
 import org.sonarsource.analyzer.commons.BuiltInQualityProfileJsonLoader;
 
@@ -28,7 +26,6 @@ public abstract class AbstractSonarWayProfile implements BuiltInQualityProfilesD
   private final String languageKey;
   private final String pluginKey;
   private final String repositoryKey;
-  private Set<String> activeRules;
 
   protected AbstractSonarWayProfile(String languageKey, String pluginKey, String repositoryKey) {
     this.languageKey = languageKey;
@@ -42,12 +39,7 @@ public abstract class AbstractSonarWayProfile implements BuiltInQualityProfilesD
     String sonarWayJsonPath = getSonarWayJsonPath();
     BuiltInQualityProfileJsonLoader.load(sonarWay, repositoryKey, sonarWayJsonPath);
     activateSecurityRules(sonarWay);
-    activeRules = sonarWay.activeRules().stream().map(x -> x.ruleKey()).collect(Collectors.toSet());
     sonarWay.done();
-  }
-
-  public Set<String> activeRules() {
-    return activeRules;
   }
 
   private String getSonarWayJsonPath() {

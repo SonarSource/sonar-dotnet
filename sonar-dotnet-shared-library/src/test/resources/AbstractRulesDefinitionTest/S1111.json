@@ -1,11 +1,10 @@
 {
-  "title": "bla bla",
+  "title": "Constant remediation",
   "type": "SECURITY_HOTSPOT",
   "status": "ready",
   "remediation": {
-    "func": "Linear",
-    "linearDesc": "Something",
-    "linearFactor": "10min"
+    "func": "Constant\/Issue",
+    "constantCost": "5min"
   },
   "tags": [
     "cwe",

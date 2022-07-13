@@ -1,0 +1,15 @@
+{
+  "title": "Linear with offset remediation",
+  "type": "CODE_SMELL",
+  "status": "ready",
+  "remediation": {
+    "func": "Linear with offset",
+    "linearDesc": "Number of parents above the defined threshold",
+    "linearOffset": "4h",
+    "linearFactor": "30min"
+  },
+  "tags": [],
+  "defaultSeverity": "Critical",
+  "ruleSpecification": "RSPEC-1111",
+  "scope": "Main"
+}
