@@ -30,9 +30,8 @@ public abstract class SpecifyTimeoutOnRegexBase<TSyntaxKind> : SonarDiagnosticAn
 {
     private const string DiagnosticId = "S4581"; // TODO
 
-    /// <remarks>
-    /// See: https://docs.microsoft.com/en-us/dotnet/api/system.text.regularexpressions.regexoptions?view=net-7.0
-    /// </remarks>
+    // NonBacktracking was added in .NET 7
+    // See: https://docs.microsoft.com/en-us/dotnet/api/system.text.regularexpressions.regexoptions?view=net-7.0
     private const int NonBacktracking = 1024;
 
     private static readonly string[] MatchMethods =
@@ -86,8 +85,8 @@ public abstract class SpecifyTimeoutOnRegexBase<TSyntaxKind> : SonarDiagnosticAn
         method.Parameters.Any(x => x.Type.Is(KnownType.System_TimeSpan));
 
     private bool NoBacktracking(IMethodSymbol method, SyntaxNode node, SemanticModel model) =>
-        method.Parameters.SingleOrDefault(x => x.Type.Is(KnownType.System_Text_RegularExpressions_RegexOptions)) is { } par
-        && Language.MethodParameterLookup(node, method).TryGetNonParamsSyntax(par, out var expression)
+        method.Parameters.SingleOrDefault(x => x.Type.Is(KnownType.System_Text_RegularExpressions_RegexOptions)) is { } parameter
+        && Language.MethodParameterLookup(node, method).TryGetNonParamsSyntax(parameter, out var expression)
         && Language.FindConstantValue(model, expression) is int options
         && (options & NonBacktracking) == NonBacktracking;
 
@@ -95,5 +94,5 @@ public abstract class SpecifyTimeoutOnRegexBase<TSyntaxKind> : SonarDiagnosticAn
         Language.Syntax.ArgumentExpressions(ctorNode).Count() < 3;
 
     private bool IsRegexMatchMethod(string name) =>
-        MatchMethods.Any(method => method.Equals(name, Language.NameComparison));
+        MatchMethods.Any(x => x.Equals(name, Language.NameComparison));
 }
