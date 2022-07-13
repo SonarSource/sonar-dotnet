@@ -9,6 +9,9 @@ namespace Tests.Diagnostics
         private DataTable myTable = new DataTable { Locale = CultureInfo.InvariantCulture };
         private DataTable myWrongTable = new DataTable(); // Noncompliant {{Set the locale for this 'DataTable'.}}
 //                                       ^^^^^^^^^^^^^^^
+        private DataTable myWrongTable1 = new DataTable(),
+//                                        ^^^^^^^^^^^^^^^ {{Set the locale for this 'DataTable'.}}
+                                          myWrongTable2 = new DataTable(); // FN
 
         void Foo()
         {
@@ -20,6 +23,14 @@ namespace Tests.Diagnostics
 
             DataTable dataTable2;
             dataTable2 = new DataTable { Locale = CultureInfo.InvariantCulture };
+
+            var fooBar = new FooBar(new DataTable()); // FN
+
+            var a = new
+            {
+                MyTable1 = new DataTable { Locale = CultureInfo.InvariantCulture },
+                MyTable2 = new DataTable(), // FN
+            };
         }
 
         void Bar(DataColumn column)
@@ -69,5 +80,20 @@ namespace Tests.Diagnostics
             new DataTable { Locale = CultureInfo.CurrentUICulture };
             new DataTable();
         }
+
+        void Bar()
+        {
+            void M(DataTable table) { }
+            M(new DataTable()); // FN
+
+            void Init(DataTable dt) => dt.Locale = new CultureInfo("de-DE");
+            var datatable = new DataTable(); // Noncompliant FP
+            Init(datatable);
+        }
+    }
+
+    public class FooBar
+    {
+        public FooBar(DataTable datatable) { }
     }
 }

@@ -26,7 +26,6 @@ using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
-using SonarAnalyzer.Common;
 using SonarAnalyzer.Extensions;
 using SonarAnalyzer.Helpers;
 using StyleCop.Analyzers.Lightup;
@@ -51,7 +50,7 @@ namespace SonarAnalyzer.Rules.CSharp
             context.RegisterCompilationStartAction(
                 compilationStartContext =>
                 {
-                    var symbolsWhereTypeIsCreated = new HashSet<NodeAndSymbol>();
+                    var symbolsWhereTypeIsCreated = new Dictionary<ISymbol, SyntaxNode>();
                     var symbolsWhereLocaleIsSet = new HashSet<ISymbol>();
 
                     compilationStartContext.RegisterSyntaxNodeActionInNonGenerated(
@@ -62,19 +61,25 @@ namespace SonarAnalyzer.Rules.CSharp
                     compilationStartContext.RegisterCompilationEndAction(ProcessCollectedSymbols(symbolsWhereTypeIsCreated, symbolsWhereLocaleIsSet));
                 });
 
-        private static Action<SyntaxNodeAnalysisContext> ProcessObjectCreations(ISet<NodeAndSymbol> symbolsWhereTypeIsCreated) =>
+        private static Action<SyntaxNodeAnalysisContext> ProcessObjectCreations(IDictionary<ISymbol, SyntaxNode> symbolsWhereTypeIsCreated) =>
             c =>
             {
                 if (GetSymbolFromConstructorInvocation(c.Node, c.SemanticModel) is ITypeSymbol objectType
                     && objectType.IsAny(CheckedTypes)
                     && GetAssignmentTargetVariable(c.Node) is { } variableSyntax)
                 {
+                    if (DeclarationExpressionSyntaxWrapper.IsInstance(variableSyntax))
+                    {
+                        variableSyntax = ((DeclarationExpressionSyntaxWrapper)variableSyntax).Designation;
+                    }
+
                     var variableSymbol = variableSyntax is IdentifierNameSyntax
                         ? c.SemanticModel.GetSymbolInfo(variableSyntax).Symbol
                         : c.SemanticModel.GetDeclaredSymbol(variableSyntax);
-                    if (variableSymbol != null)
+
+                    if (variableSymbol != null && !symbolsWhereTypeIsCreated.ContainsKey(variableSymbol))
                     {
-                        symbolsWhereTypeIsCreated.Add(new NodeAndSymbol(c.Node, variableSymbol));
+                        symbolsWhereTypeIsCreated.Add(variableSymbol, c.Node);
                     }
                 }
             };
@@ -83,27 +88,23 @@ namespace SonarAnalyzer.Rules.CSharp
             c =>
             {
                 var assignmentExpression = (AssignmentExpressionSyntax)c.Node;
-
-                if (GetPropertySymbol(assignmentExpression, c.SemanticModel) is { } propertySymbol
-                    && propertySymbol.Name == "Locale"
-                    && propertySymbol.ContainingType.IsAny(CheckedTypes))
-                {
-                    var variableSymbol = GetAccessedVariable(assignmentExpression, c.SemanticModel);
-                    if (variableSymbol != null)
-                    {
-                        symbolsWhereLocaleIsSet.Add(variableSymbol);
-                    }
-                }
+                var variableSymbols = assignmentExpression.AssignmentTargets()
+                    .Where(x => c.SemanticModel.GetSymbolInfo(x).Symbol is IPropertySymbol propertySymbol
+                                && propertySymbol.Name == "Locale"
+                                && propertySymbol.ContainingType.IsAny(CheckedTypes))
+                    .Select(x => GetAccessedVariable(x, c.SemanticModel))
+                    .WhereNotNull();
+                symbolsWhereLocaleIsSet.UnionWith(variableSymbols);
             };
 
-        private static Action<CompilationAnalysisContext> ProcessCollectedSymbols(ICollection<NodeAndSymbol> symbolsWhereTypeIsCreated, ICollection<ISymbol> symbolsWhereLocaleIsSet) =>
+        private static Action<CompilationAnalysisContext> ProcessCollectedSymbols(IDictionary<ISymbol, SyntaxNode> symbolsWhereTypeIsCreated, ISet<ISymbol> symbolsWhereLocaleIsSet) =>
             c =>
             {
-                foreach (var invalidCreation in symbolsWhereTypeIsCreated.Where(x => !symbolsWhereLocaleIsSet.Contains(x.Symbol)))
+                foreach (var invalidCreation in symbolsWhereTypeIsCreated.Where(x => !symbolsWhereLocaleIsSet.Contains(x.Key)))
                 {
-                    if (invalidCreation.Symbol.GetSymbolType()?.Name is { }  typeName)
+                    if (invalidCreation.Key.GetSymbolType() is { } type)
                     {
-                        c.ReportIssue(Diagnostic.Create(Rule, invalidCreation.Node.GetLocation(), typeName));
+                        c.ReportIssue(Diagnostic.Create(Rule, invalidCreation.Value.GetLocation(), type.Name));
                     }
                 }
             };
@@ -117,39 +118,48 @@ namespace SonarAnalyzer.Rules.CSharp
             objectCreation.GetFirstNonParenthesizedParent() switch
             {
                 AssignmentExpressionSyntax assignment => assignment.Left,
-                EqualsValueClauseSyntax equalsClause when equalsClause.Parent.Parent is VariableDeclarationSyntax variableDeclaration => variableDeclaration.Variables.Last(),
-                _ => null
+                EqualsValueClauseSyntax { Parent: VariableDeclaratorSyntax { Parent: VariableDeclarationSyntax { Variables: { Count: > 0 } variables } } } => variables.Last(),
+                ArgumentSyntax argument => argument.FindAssignmentComplement(),
+                _ => null,
             };
 
-        private static IPropertySymbol GetPropertySymbol(AssignmentExpressionSyntax assignment, SemanticModel model) =>
-            model.GetSymbolInfo(assignment.Left).Symbol as IPropertySymbol;
-
-        private static ISymbol GetAccessedVariable(AssignmentExpressionSyntax assignment, SemanticModel model)
-        {
-            var variable = assignment.Left.RemoveParentheses();
-
-            if (variable is IdentifierNameSyntax identifier)
+        private static ISymbol GetAccessedVariable(SyntaxNode node, SemanticModel model) =>
+            node.RemoveParentheses() switch
             {
-                var leftSideOfParentAssignment = identifier
-                    .FirstAncestorOrSelf((SyntaxNode x) => x.IsAnyKind(SyntaxKind.ObjectCreationExpression, SyntaxKindEx.ImplicitObjectCreationExpression))
-                    ?.FirstAncestorOrSelf<AssignmentExpressionSyntax>()
-                    ?.Left;
-                if (leftSideOfParentAssignment != null)
+                IdentifierNameSyntax
                 {
-                    return model.GetSymbolInfo(leftSideOfParentAssignment).Symbol;
-                }
+                    Parent: AssignmentExpressionSyntax
+                    {
+                        Parent: InitializerExpressionSyntax
+                        {
+                            Parent: { RawKind: (int)SyntaxKind.ObjectCreationExpression or (int)SyntaxKindEx.ImplicitObjectCreationExpression } objectCreation
+                        }
+                    }
+                } => GetAssignmentTargetSymbol(objectCreation, model), // Locale is assigned in an object initializer. Find the target of the object creation.
+                MemberAccessExpressionSyntax memberAccessExpression => model.GetSymbolInfo(memberAccessExpression.Expression).Symbol,
+                _ => null,
+            };
 
-                var lastVariable = identifier.FirstAncestorOrSelf<VariableDeclarationSyntax>()?.Variables.LastOrDefault();
-                return lastVariable != null
-                    ? model.GetDeclaredSymbol(lastVariable)
-                    : null;
-            }
+        private static ISymbol GetAssignmentTargetSymbol(SyntaxNode objectCreation, SemanticModel model)
+        {
+            var leftSideOfParentAssignment = objectCreation.GetFirstNonParenthesizedParent() switch
+            {
+                // var dt = new DataTable { Locale = l }
+                EqualsValueClauseSyntax { Parent: VariableDeclaratorSyntax { Parent: VariableDeclarationSyntax { Variables: { Count: > 0 } variables } } } => variables.Last(),
+                // dt = new DataTable { Locale = l }
+                AssignmentExpressionSyntax assignment => assignment.Left,
+                // var (dt, _) = (new DataTable { Locale = l }, 42)
+                ArgumentSyntax argumentSyntax => argumentSyntax.FindAssignmentComplement(),
+                _ => null,
+            };
 
-            var memberAccess = variable as MemberAccessExpressionSyntax;
-
-            return memberAccess?.Expression != null
-                ? model.GetSymbolInfo(memberAccess.Expression).Symbol
-                : null;
+            return leftSideOfParentAssignment switch
+            {
+                null => null,
+                IdentifierNameSyntax => model.GetSymbolInfo(leftSideOfParentAssignment).Symbol,
+                _ when DeclarationExpressionSyntaxWrapper.IsInstance(leftSideOfParentAssignment) => model.GetSymbolInfo(leftSideOfParentAssignment).Symbol,
+                _ => model.GetDeclaredSymbol(leftSideOfParentAssignment),
+            };
         }
     }
 }
